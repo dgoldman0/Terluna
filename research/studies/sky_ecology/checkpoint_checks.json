@@ -1,0 +1,32 @@
+{
+  "checked": "2026-10-10",
+  "status": "partial checkpoint; two known provenance failures retained intentionally",
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS='-p no:cacheprovider' nice -n 10 make -k check",
+  "exit_code": 2,
+  "python": {
+    "passed": 1645,
+    "failed": 2,
+    "skipped": 14,
+    "seconds": 99.48,
+    "failures": [
+      "research/studies/sky_ecology/test_run.py::test_stored_product_regenerates_exactly",
+      "research/studies/sky_ecology/test_run.py::test_producer_inputs_and_constants_are_current"
+    ],
+    "cause": "sources.json changed after the saved product; existing code and product preserved at the requested checkpoint"
+  },
+  "javascript": {
+    "immersion_passed": 129,
+    "column_light_transport_viewer_passed": 48,
+    "calendar_passed": 14,
+    "failed": 0
+  },
+  "layers": {
+    "files": 908,
+    "violations": 0
+  },
+  "historical_provenance": "PASS",
+  "ensemble": "PASS; workspace integrity only, not scientific or manuscript clearance",
+  "product_sha256": "ec61d2ecc301cb1f1e2b97789ca9395de05b79938a97dc94c7ae422cf1791bbf",
+  "scope": "Preserves interrupted work. Numerical checks do not resolve the scientific issues in status.md. Earlier checks.json is the interrupted session record.",
+  "log_at_execution": "/tmp/terluna-sky-ecology-checkpoint-check.log"
+}

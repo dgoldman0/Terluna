@@ -1,0 +1,282 @@
+{
+  "schema": "terluna.research.sources/1",
+  "checked": "2026-10-10",
+  "scope": "Sources for the sky-ecology study's trophic efficiencies, allometries, tenant precedents, phosphorus returns and falls. Committed project products are bound by hash in the product, not listed here. Access says what was actually read; no paper or dataset is redistributed. Earth observations serve as reference points for designed organisms.",
+  "sources": [
+    {
+      "id": "bar_on_2018",
+      "citation": "Bar-On, Y. M., Phillips, R. and Milo, R. (2018). The biomass distribution on Earth. Proceedings of the National Academy of Sciences USA 115(25), 6506-6511.",
+      "doi": "10.1073/pnas.1711842115",
+      "access": "Full text read (author PDF): Table 1 and the animal biomass paragraph.",
+      "use": "Wild birds about 0.002 Gt C, wild mammals 0.007, terrestrial arthropods 0.2, marine arthropods 1, fish 0.7; animals about 2 Gt C in all.",
+      "limit": "Global estimates with stated uncertainties (terrestrial arthropods among the least sampled); used only as scales for the sky's consumers.",
+      "component": "food_web"
+    },
+    {
+      "id": "cyr_pace_1993",
+      "citation": "Cyr, H. and Pace, M. L. (1993). Magnitude and patterns of herbivory in aquatic and terrestrial ecosystems. Nature 361, 148-150.",
+      "doi": "10.1038/361148a0",
+      "access": "The paper itself was not accessible (publisher login). Its medians are taken as quoted by Burghardt & Schmitz (2015), whose chapter was read.",
+      "use": "Median annual primary production removed by herbivores: 79% for aquatic algae (phytoplankton and reef periphyton), 30% for vascular aquatic macrophytes, 18% for terrestrial plants.",
+      "limit": "Earth communities; the eaten base takes the macrophyte-to-algae range, and the terrestrial median stands beside the 12-19% that long-lived bodies take from Metcalfe et al. (2014).",
+      "component": "food_web"
+    },
+    {
+      "id": "burghardt_schmitz_2015",
+      "citation": "Burghardt, K. T. and Schmitz, O. J. (2015). Influence of plant defenses and nutrients on trophic control of ecosystems. Chapter 8 in Trophic Ecology: Bottom-Up and Top-Down Interactions across Aquatic and Terrestrial Systems. Cambridge University Press.",
+      "url": "http://schmitz.environment.yale.edu/uploads/1/5/5/4/15542522/chapter_8_trophic_ecology_burghardt_and_schmitz.pdf",
+      "access": "Author PDF text read where it cites Cyr & Pace (1993).",
+      "use": "The sentence giving Cyr & Pace's medians of 79%, 30% and 18%.",
+      "limit": "Secondary for the medians.",
+      "component": "food_web"
+    },
+    {
+      "id": "cebrian_2004",
+      "citation": "Cebrian, J. (2004). Role of first-order consumers in ecosystem carbon flow. Ecology Letters 7, 232-240.",
+      "doi": "10.1111/j.1461-0248.2004.00574.x",
+      "access": "Abstract through a search excerpt; the herbivory shares by habitat as reproduced in Metcalfe et al. (2014), Table 1, which was read.",
+      "use": "Herbivory as % of above-ground NPP: temperate and tropical shrublands and forests 7.9 +- 1.5 (n = 52), grasslands 34.1 +- 5.3, marshes 16.8 +- 5.0, mangroves 3.5 +- 0.5, tundra 1.8 +- 0.6.",
+      "limit": "Secondary for the table values. A share of whole above-ground production, so it is context; the grazed share of green tissue comes from Metcalfe et al. (2014).",
+      "component": "food_web"
+    },
+    {
+      "id": "metcalfe_2014",
+      "citation": "Metcalfe, D. B., Asner, G. P., Martin, R. E. et al. (2014, online 2013). Herbivory makes major contributions to ecosystem carbon and nutrient cycling in tropical forests. Ecology Letters 17(3), 324-332.",
+      "doi": "10.1111/ele.12233",
+      "access": "Full text read (author PDF): abstract, results, Table 1, Fig. 4 text.",
+      "use": "Leaf herbivory 0.3-0.9 Mg C/ha a year, 12-19% of foliar productivity and about 7% of above-ground production along an Andean gradient; 79 +- 3% of foliar tissue eaten by invertebrates goes to the soil as excreta, moults and bodies, 21 +- 3% is respired; herbivores add 1.2 +- 1.1 kg P/ha a year to the soil ahead of resorption, about 260% of P inputs.",
+      "limit": "Tropical montane and lowland forests in Peru; insect herbivores. Its 12-19% of foliar production is the grazed share of long-lived bodies' renewed green tissue.",
+      "component": "food_web, tenants, phosphorus"
+    },
+    {
+      "id": "pauly_christensen_1995",
+      "citation": "Pauly, D. and Christensen, V. (1995). Primary production required to sustain global fisheries. Nature 374, 255-257.",
+      "doi": "10.1038/374255a0",
+      "url": "http://api.seaaroundus.org/wp-content/uploads/2015/04/PrimaryProductionRequiredToSustainGlobalFisheries.pdf",
+      "access": "Full text read (Sea Around Us PDF): abstract and Fig. 2.",
+      "use": "Transfer efficiency between trophic levels from 140 estimates in 48 aquatic trophic models: mean 10.13%, s.d. 5.81%.",
+      "limit": "Aquatic food webs; used for the carnivore steps of the sky's web.",
+      "component": "food_web"
+    },
+    {
+      "id": "van_der_meer_2021",
+      "citation": "van der Meer, J. (2021, online 2020). Production efficiency differences between poikilotherms and homeotherms have little to do with metabolic rate. Ecology Letters 24(2), 219-226.",
+      "doi": "10.1111/ele.13633",
+      "access": "Open-access text read in part (PMC7821020): abstract and the passages quoting population efficiencies.",
+      "use": "About 20% of assimilated energy appears as production in poikilotherm populations and about 2% in bird and mammal populations (citing Golley 1968); 95% of 1,329 bird species have an adult efficiency below 0.015.",
+      "limit": "The population values are Golley's (1968) as reported; Golley's paper was not read.",
+      "component": "food_web"
+    },
+    {
+      "id": "nagy_2005",
+      "citation": "Nagy, K. A. (2005). Field metabolic rate and body size. Journal of Experimental Biology 208, 1621-1625.",
+      "doi": "10.1242/jeb.01553",
+      "access": "Full text read (PDF copy).",
+      "use": "Birds: FMR = 10.5 M^0.681 kJ/day with M in g (N = 95, r² = 0.938); mammals 4.82 M^0.734. A species' FMR can lie at 30-170% of the prediction; marine birds and Procellariiformes run high.",
+      "limit": "Measured birds reach tens of kilograms; the lunar flyers of 1.7-55 t lie far beyond the data, so the study checks the extrapolation against the rule of similarity.",
+      "component": "food_web"
+    },
+    {
+      "id": "otero_2018",
+      "citation": "Otero, X. L. et al. (2018). Seabird colonies as important global drivers in the nitrogen and phosphorus cycles. Nature Communications 9, 246.",
+      "doi": "10.1038/s41467-017-02446-8",
+      "access": "Open-access text read in part (PMC5780392): abstract and the excretion model in the methods. Also registered in research/studies/lunar_cycle_ecology/sources.json, whose literature agent read the full text.",
+      "use": "Seabird colonies receive 591 Gg N and 99 Gg P a year in droppings, from 804 million breeding seabirds of 320 species; the model's diet energy 6.5 kJ/g wet, assimilation 0.8, diet N 0.036 and P 0.0060 g/g wet, and FMR 9.2 M^0.774.",
+      "limit": "Breeding colonies only; the diet values are averages across seabird diets.",
+      "component": "food_web, phosphorus"
+    },
+    {
+      "id": "brooke_2004",
+      "citation": "Brooke, M. de L. (2004). The food consumption of the world's seabirds. Proceedings of the Royal Society B 271 (Suppl. 4), S246-S248.",
+      "doi": "10.1098/rsbl.2003.0153",
+      "access": "Abstract through a search excerpt.",
+      "use": "The world's seabirds eat 70 Mt a year (95% CI 55.9-83.7 Mt).",
+      "limit": "Used as a scale for lunar flyers' food.",
+      "component": "phosphorus"
+    },
+    {
+      "id": "smith_baco_2003",
+      "citation": "Smith, C. R. and Baco, A. R. (2003). Ecology of whale falls at the deep-sea floor. Oceanography and Marine Biology: An Annual Review 41, 311-354.",
+      "url": "https://www.soest.hawaii.edu/oceanography/faculty/csmith/Files/Smith%20and%20Baco%202003.pdf",
+      "access": "Author PDF read: the summary and the history section.",
+      "use": "A 40-t whale holds about 2 x 10^6 g C, what sinks to a hectare of abyssal floor in 100-200 years; the 50 m² beneath the carcass receive a pulse of about 2,000 years of background organic carbon flux; stages of mobile scavengers (months to years), enrichment opportunists (months to years), a sulphophilic stage (decades) and a reef stage.",
+      "limit": "Deep-sea carcasses; the comparison is with the land's phosphorus loss.",
+      "component": "phosphorus"
+    },
+    {
+      "id": "lessios_1988",
+      "citation": "Lessios, H. A. (1988). Mass mortality of Diadema antillarum in the Caribbean: what have we learned? Annual Review of Ecology and Systematics 19, 371-393.",
+      "access": "Abstract-level account through search excerpts.",
+      "use": "The die-off began near Panama in January 1983, reached 3.5 million km² within 13 months, and its agent was carried mainly by surface currents.",
+      "limit": "A marine pathogen in currents; the precedent for contact along shared tracks.",
+      "component": "tenants"
+    },
+    {
+      "id": "heil_1997",
+      "citation": "Heil, M., Fiala, B., Linsenmair, K. E., Zotz, G., Menke, P. and Maschwitz, U. (1997). Food body production in Macaranga triloba (Euphorbiaceae): a plant investment in anti-herbivore defence via symbiotic ant partners. Journal of Ecology 85, 847-861.",
+      "access": "Abstract through a search excerpt.",
+      "use": "Food bodies take about 5% of the daily above-ground biomass production of unbranched saplings, about 9% of the above-ground tissue construction costs.",
+      "limit": "One ant-plant species.",
+      "component": "tenants"
+    },
+    {
+      "id": "treseder_1995",
+      "citation": "Treseder, K. K., Davidson, D. W. and Ehleringer, J. R. (1995). Absorption of ant-provided carbon dioxide and nitrogen by a tropical epiphyte. Nature 375, 137-139.",
+      "doi": "10.1038/375137a0",
+      "access": "Abstract through a search excerpt (ADS and eScholarship listings).",
+      "use": "Isotopes show 39% of the carbon in occupied leaves of Dischidia major from ant respiration and 29% of its nitrogen from debris the Philidris ants leave in the leaf cavities.",
+      "limit": "One epiphyte on nutrient-poor kerangas forest in Sarawak.",
+      "component": "tenants"
+    },
+    {
+      "id": "romero_2006",
+      "citation": "Romero, G. Q., Mazzafera, P., Vasconcellos-Neto, J. and Trivelin, P. C. O. (2006). Bromeliad-living spiders improve host plant nutrition and growth. Ecology 87(4), 803-808.",
+      "doi": "10.1890/0012-9658(2006)87[803:BSIHPN]2.0.CO;2",
+      "access": "Abstract through a search excerpt.",
+      "use": "The jumping spider Psecas chapoda supplies 18% of the nitrogen of its host Bromelia balansae (greenhouse isotopes), and hosts with spiders grew leaves 15% longer in a year in the field.",
+      "limit": "One spider-plant pair.",
+      "component": "tenants"
+    },
+    {
+      "id": "sugden_robins_1979",
+      "citation": "Sugden, A. M. and Robins, R. J. (1979). Aspects of the ecology of vascular epiphytes in Colombian cloud forests. Biotropica 11, 173-188.",
+      "access": "Not read directly; the figure is as cited by later bromeliad studies found in a search.",
+      "use": "Tank bromeliads may hold as much as 50,000 litres of water per hectare in the canopy.",
+      "limit": "Secondary; used only as the scale of a forest's tank water.",
+      "component": "tenants"
+    },
+    {
+      "id": "ellwood_foster_2004",
+      "citation": "Ellwood, M. D. F. and Foster, W. A. (2004). Doubling the estimate of invertebrate biomass in a rainforest canopy. Nature 429, 549-551.",
+      "doi": "10.1038/nature02560",
+      "access": "Abstract through a search excerpt.",
+      "use": "The fauna of the epiphytic fern Asplenium nidus can more than double the estimate of a rainforest canopy's invertebrate biomass.",
+      "limit": "Bornean lowland forest.",
+      "component": "tenants"
+    },
+    {
+      "id": "nadkarni_1981",
+      "citation": "Nadkarni, N. M. (1981). Canopy roots: convergent evolution in rainforest nutrient cycles. Science 214, 1023-1024.",
+      "doi": "10.1126/science.214.4524.1023",
+      "access": "Abstract-level description through search excerpts.",
+      "use": "Rain-forest trees grow roots from their branches into the canopy soils of epiphyte mats and take up nutrients there.",
+      "limit": "Qualitative here.",
+      "component": "tenants"
+    },
+    {
+      "id": "freiberg_2000",
+      "citation": "Freiberg, M. and Freiberg, E. (2000). Epiphyte diversity and biomass in the canopy of lowland and montane forests in Ecuador. Journal of Tropical Ecology 16, 673-688.",
+      "access": "Abstract read (Cambridge Core).",
+      "use": "Epiphyte dry mass on central branches 1.3-1.8 kg/m² in lowland and 1.8-6.0 kg/m² in montane forest, of which vascular epiphytes' green biomass is 0.4-0.6 kg/m²; bryophytes and dead organic matter make the montane excess.",
+      "limit": "Per m² of branch surface sampled.",
+      "component": "tenants"
+    },
+    {
+      "id": "coston_clements_1991",
+      "citation": "Coston-Clements, L., Settle, L. R., Hoss, D. E. and Cross, F. A. (1991). Utilization of the Sargassum habitat by marine invertebrates and vertebrates - a review. NOAA Technical Memorandum NMFS-SEFSC-296.",
+      "url": "https://repository.library.noaa.gov/view/noaa/9151",
+      "access": "Full text read (NOAA repository PDF), the introduction.",
+      "use": "The Sargassum community includes micro- and macro-epiphytes, fungi, more than 100 species of invertebrates, over 100 species of fishes and four species of sea turtles.",
+      "limit": "A literature review of the western North Atlantic.",
+      "component": "tenants"
+    },
+    {
+      "id": "johnson_2023",
+      "citation": "Johnson, C., Dubbs, L. L. and Piehler, M. (2023). Reframing the contribution of pelagic Sargassum epiphytic N2 fixation. PLoS ONE 18(8), e0289485.",
+      "doi": "10.1371/journal.pone.0289485",
+      "access": "Open-access text read in part.",
+      "use": "Diazotrophic epiphytes within the phyllosphere may be the most important contributor of reactive nitrogen to Sargassum and the community it supports; cites Phlips, Willis & Verchick (1986) on fixation in Sargassum communities.",
+      "limit": "No share of the weed's nitrogen demand is quantified there.",
+      "component": "tenants"
+    },
+    {
+      "id": "phlips_1986",
+      "citation": "Phlips, E. J., Willis, M. and Verchick, A. (1986). Aspects of nitrogen fixation in Sargassum communities off the coast of Florida. Journal of Experimental Marine Biology and Ecology 102(2-3), 99-119.",
+      "access": "Not read; reference entry as given by Johnson et al. (2023).",
+      "use": "The primary study of epiphytic nitrogen fixation on Sargassum that Johnson et al. build on.",
+      "limit": "Cited for its existence and subject only.",
+      "component": "tenants"
+    },
+    {
+      "id": "thiel_gutow_2005",
+      "citation": "Thiel, M. and Gutow, L. (2005). The ecology of rafting in the marine environment. II. The rafting organisms and community. Oceanography and Marine Biology: An Annual Review 43, 279-418.",
+      "access": "Abstract through a search excerpt.",
+      "use": "Rafting is confirmed or inferred for 1,205 species, from cyanobacteria, algae and protists to invertebrates of most phyla and a few terrestrial vertebrates.",
+      "limit": "Floating objects at sea; the precedent for the communities juveniles carry out of their nurseries.",
+      "component": "tenants"
+    },
+    {
+      "id": "graham_2018",
+      "citation": "Graham, N. A. J., Wilson, S. K., Carr, P., Hoey, A. S., Jennings, S. and MacNeil, M. A. (2018). Seabirds enhance coral reef productivity and functioning in the absence of invasive rats. Nature 559, 250-253.",
+      "doi": "10.1038/s41586-018-0202-3",
+      "access": "Abstract through a search excerpt.",
+      "use": "Islands without rats carry 760 times the seabirds and 251 times the nitrogen deposition; their reefs hold 48% more fish biomass, with grazing 3.2 and bioerosion 3.8 times higher.",
+      "limit": "Chagos Archipelago atolls.",
+      "component": "tenants"
+    },
+    {
+      "id": "cleveland_2013",
+      "citation": "Cleveland, C. C., Houlton, B. Z., Smith, W. K. et al. (2013). Patterns of new versus recycled primary production in the terrestrial biosphere. Proceedings of the National Academy of Sciences USA 110(31), 12733-12737.",
+      "doi": "10.1073/pnas.1302768110",
+      "access": "Search excerpt of the abstract and results only; the paper was not opened.",
+      "use": "Recycled phosphorus (resorption and re-uptake from decaying litter) meets about 98% of plant P demand globally, resorption about 40% of it.",
+      "limit": "Taken as the land's benchmark for the retention case called earth_forest.",
+      "component": "phosphorus"
+    },
+    {
+      "id": "del_giorgio_cole_1998",
+      "citation": "del Giorgio, P. A. and Cole, J. J. (1998). Bacterial growth efficiency in natural aquatic systems. Annual Review of Ecology and Systematics 29, 503-541.",
+      "doi": "10.1146/annurev.ecolsys.29.1.503",
+      "access": "Search excerpts of the abstract.",
+      "use": "Bacterial growth efficiency runs from about 0.01 in the most dilute systems to a plateau near 0.5 in eutrophic ones.",
+      "limit": "Context for the pools' decomposers; no number enters a calculation.",
+      "component": "food_web"
+    },
+    {
+      "id": "banse_mosher_1980",
+      "citation": "Banse, K. and Mosher, S. (1980). Adult body mass and annual production/biomass relationships of field populations. Ecological Monographs 50(3), 355-379.",
+      "doi": "10.2307/2937256",
+      "access": "Abstract through search excerpts.",
+      "use": "For invertebrates at 5-20 degrees C, P/B = 0.65 M_s^-0.37 a year with M_s the adult body mass in kcal; most measured values fall within 50-200% of the prediction.",
+      "limit": "The 10-km air at 14 degrees C lies inside the fitted range; body masses here are a design guess.",
+      "component": "food_web"
+    },
+    {
+      "id": "zwolicki_2013",
+      "citation": "Zwolicki, A. et al. (2013). Guano deposition and nutrient enrichment in the vicinity of planktivorous and piscivorous seabird colonies in Spitsbergen. Polar Biology 36, 363-372.",
+      "doi": "10.1007/s00300-012-1265-5",
+      "access": "Not re-read here; registered in research/studies/lunar_cycle_ecology/sources.json, whose literature agent read the full text.",
+      "use": "Guano at a median of 0.32-0.37 g/m² a day near the colonies, falling off within about 50-320 m.",
+      "limit": "Carried from the project's register.",
+      "component": "tenants"
+    },
+    {
+      "id": "woods_2004",
+      "citation": "Woods, H. A. et al. (2004). Allometric and phylogenetic variation in insect phosphorus content. Functional Ecology 18, 103-109.",
+      "doi": "10.1111/j.1365-2435.2004.00823.x",
+      "access": "Not re-read here; registered in research/studies/lunar_cycle_ecology/sources.json (abstract read by its literature agent).",
+      "use": "Insect P 0.62% (large) to 0.97% (small) of dry mass, the tenants' P content.",
+      "limit": "Carried from the project's register.",
+      "component": "phosphorus"
+    },
+    {
+      "id": "vergutz_2012",
+      "citation": "Vergutz, L., Manzoni, S., Porporato, A., Novais, R. F. and Jackson, R. B. (2012). Global resorption efficiencies and concentrations of carbon and nutrients in leaves of terrestrial plants. Ecological Monographs 82(2), 205-220.",
+      "doi": "10.1890/11-0416.1",
+      "access": "Not re-read here; registered in research/studies/aerophytes/growth_sources.json (abstract read).",
+      "use": "Mean P resorption 64.9%, the centre of the 50-80% range.",
+      "limit": "Carried from the project's register.",
+      "component": "phosphorus"
+    },
+    {
+      "id": "eggs_sanders_2013",
+      "citation": "Eggs, B. and Sanders, D. (2013). Herbivory in spiders: the importance of pollen for orb-weavers. PLOS ONE 8, e82637.",
+      "doi": "10.1371/journal.pone.0082637",
+      "access": "Not re-read here; registered in research/studies/aerial_ecology/sources.json (publisher HTML read).",
+      "use": "Web-caught pollen feeds juvenile orb-weavers: the collectors' precedent.",
+      "limit": "Carried from the project's register.",
+      "component": "tenants"
+    }
+  ],
+  "design_guesses": "Each component lists its design guesses with their ranges (food_web.RANGES and SUGAR_ASSIMILATION, stoichiometry, tenants and phosphorus module constants) and the product repeats them under each component's design_guesses or ranges. Project products (the sky fleet's gliders, the sky ships' air, the aerophyte ledgers) are bound by hash in the product."
+}

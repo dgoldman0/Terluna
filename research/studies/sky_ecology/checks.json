@@ -1,0 +1,108 @@
+{
+ "checked": "2026-10-10",
+ "evidence": "A coupled screen of the sky's food web, aerophytes' tenants and phosphorus on committed products: the coupled aerophyte model called live for representative bodies, the aerial, people, first-screen, taxonomy, surface-light, sky-ship and sky-fleet products, and from other branches the resources branch's phosphorus model and product, the provisioning branch's zonal-wind product and its ways-of-living product, bound by commit, blob and SHA-256. Tests check carbon and phosphorus closure in both states of the sky, bounds over every corner of the phosphorus limit, limits of the light and trim arithmetic, the exact reproduction of the resources branch's published case, conservation of the deposited flux, the wind code's time convention, every binding and exact regeneration. One read-only agent recomputed the headline numbers independently and found fourteen problems; their corrections are in this product. No food web, population, tenant community, phosphorus cycle or trajectory is simulated, and no organism exists.",
+ "focused": {
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python3 -m pytest -q -p no:cacheprovider research/studies/sky_ecology",
+  "passed": 68,
+  "failed": 0,
+  "skipped": 0,
+  "before_the_review": "56 passed on the product of 08:43, which the review then corrected"
+ },
+ "regeneration": {
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python3 -m research.studies.sky_ecology.run",
+  "seconds": "about 2",
+  "test": "test_run.py::test_stored_product_regenerates_exactly compares the stored product with a fresh run"
+ },
+ "layer_check": {
+  "command": "python3 shared/check_layers.py",
+  "result": "899 files checked, 0 violations",
+  "untracked_study_files": "check_layers lists tracked files only, so its lane rule (lane, python_targets, ALLOWED) was applied to the nine untracked study modules directly: 0 violations"
+ },
+ "repository": "make check was not run, by instruction; the parent session runs it.",
+ "independent_reviews": [
+  "First numerical review (read-only agent a5267aad360fec368): every binding checked on SHA-256 and blob (5 study files, 15 imported aerophyte files, 13 inputs, the atlas hash, 7 cross-branch files at their pinned commits); every headline recomputed from the inputs and the stored ledgers with the reviewer's own formulas, semi-analytic sphere light and raft ray trace (a 150-neighbour lattice confirming the 18 neighbours), its own phosphorus loop and the resources formula. Most numbers agreed to the digits quoted; it found the fourteen problems listed under review_fixes, two of which changed headlines (growth phosphorus kept aloft; the envelope counted as food)."
+ ],
+ "review_fixes": [
+  {
+   "finding": "1. The phosphorus in new tissue counted as kept aloft: falls of stock x hazard carried 1.8-7.2% of a reef's growth phosphorus, so the loops and the resources check treated growth as recycled.",
+   "fix": "Two states of the sky throughout. Growing: every body spends its surplus on new bodies; their phosphorus (growth_p at the body's tissue mix; fermented gas at the low edge, photolytic at the high) is new stock, and the need is what leaves plus the change of stock. Mature: bodies hold their size, falls at the hazard are replaced, throughput is renewal plus replacement and the surplus beyond replacement pays for tenants. food_web gives growing, renewal and mature biomass; phosphorus.sky_loop takes the state; the falls table adds the falls a fixed cover would need at the growth rate.",
+   "effect": "A reef with forest-floor pools recycles 92-97.5% mature and 76-92% growing (93-98% before); with the classes at their design shares the sky's need at 1% cover is 3.8-60 kt a year mature and 13-164 kt growing with forest-floor pools (4.3-54 kt before, reef only); a fixed cover with the whole surplus spent on growth needs 1,600-5,100 reef falls a year against 60-300 at the hazard."
+  },
+  {
+   "finding": "2. The eaten base counted the regenerated-cellulose envelope as food, while long-lived bodies' structure went to litter.",
+   "fix": "Edible carbon is the living tissue alone; the eaten bodies' envelopes go to the decomposers with the litter (eaten_offer shed_c); construction shares recorded (gas, tissue, envelope, construction respiration, starch store).",
+   "effect": "Edible share of construction 5.0-8.1% (27-33% before); edible production at 8-15 m 0.077-0.094 kg C/m2 a year (0.39-0.50), 0.34-0.42 of a long-lived body's renewed green tissue (\"twice\" before)."
+  },
+  {
+   "finding": "3. The grazers' phosphorus-limited share (23-40%) came from pairing every range at the same end, which pulls two ways; the host's sugar was assimilated at the leaf-eaters' 30-50%.",
+   "fix": "stoichiometry.edge_parameters pairs poor food, poor assimilation and phosphorus-rich consumers at the low edge (and the reverse), so the edges bound production; p_limit_corners gives the share and the subsidy over all 64 corners; sugar is assimilated at 0.9, a design guess.",
+   "effect": "Carbon limit 20-45 g C per m2 of reef a year (7.1-28); phosphorus limit 7.9-41% of it at the edges and 3.7-89% over the corners, median 18%; the subsidy to reach the carbon limit 0.41-0.70 g P (0.03-1.6 over the corners; 0.14-0.41 before)."
+  },
+  {
+   "finding": "4. The 7.9% grazing share is of whole above-ground production but was applied to green tissue.",
+   "fix": "Long-lived bodies' grazed share is 12-19% of foliar production (Metcalfe et al. 2014); Cebrian (2004) and Cyr & Pace (1993) stay as context.",
+   "effect": "Grazing costs a reef module 3.8-6.0% of its surplus (2.5-5.7%) and a 1-km giant 7.6-12% (5.0-11%); the sky at 1% feeds 1.8-4.8 million albatross-scale grazers (1.2-4.5 million)."
+  },
+  {
+   "finding": "5. Sudden loads drew on reserves the aerophyte study already assigns: the spare superpressure is the day's water swing's allowance and the dumpable water is the damage reserve.",
+   "fix": "Sudden loads stated as upper bounds, free in full only at the low point of the day's swing, with dropping water spending the damage reserve (capacity_rows docstring, reading rule, notes; headline key hundred_metre_sudden_upper_bounds_t).",
+   "effect": "Numbers unchanged (a 100-m body takes at most 1.9 t at once by trim and 33 t dropping water)."
+  },
+  {
+   "finding": "6. \"Biomass\" included the 0.1 kg C/m2 a year of sugar the host gives its tenants.",
+   "fix": "Biomass production excludes the sugar everywhere; the sugar is reported beside it.",
+   "effect": "At 1% cover and the reference light, 162-413 Mt C a year growing and 134-397 Mt mature, with 38 Mt of sugar besides (200-451 Mt before)."
+  },
+  {
+   "finding": "7. The resources check divided tissue phosphorus by production that included phosphorus-free sugar, while the resources and aerial models' 1,000 g C/m2 is all dry biomass.",
+   "fix": "The check runs on the biomass basis, per state, case and edge: the loop's throughput over the loop's biomass carbon. The formula's r is the loop's recycling taken onto the unharvested 95% of the throughput (equivalent_recycling), so (1 - h)(1 - r)F equals the loop's own non-harvest need exactly.",
+   "effect": "Throughput 4.7-14.5% of Redfield's mature and 4.3-12% growing (3.2-10.4%); the published 10,726 t becomes 0.5-85 kt (designed pools), 8.3-104 kt (forest-floor pools) and 137-737 kt (nothing catches the litter) in a mature sky, and 22-251, 29-264 and 140-689 kt growing (0-45, 4.3-62 and 64-448 kt before)."
+  },
+  {
+   "finding": "8. The loop without pools counted the harvest twice and lost no grazer phosphorus; frass mixed carbon and phosphorus assimilation.",
+   "fix": "Harvest leaves before shedding; frass is what the grazers eat less what they build; what remains aloft (renewal less harvest and departing tenants) is recycled or falls, so without pools the frass, the grazers' remains and the structure all fall.",
+   "effect": "A mature reef recycles 45-68% alone (51-77% before)."
+  },
+  {
+   "finding": "9. Polar occupancy concentrations used the wind product's area shares rounded to four decimals.",
+   "fix": "Exact band areas from the latitude edges (band_areas), in the occupancy and the deposition.",
+   "effect": "80-90 N at 10 km 3.4 times (3.6); at 20 km 12.0 (12.7) over the north pole and 8.6 (9.1) over the south."
+  },
+  {
+   "finding": "10. The Sun's track was half a step off: the wind code centres output n at (n + 1/2) intervals. The snapshots of the routes also swing with the Sun's place.",
+   "fix": "subsolar_longitude adds half a track step; the value used is the band-weighted land fraction (each band's time spread over its longitudes), with the snapshots kept as a check.",
+   "effect": "Land share 75% at 10 km and 71% at 20 km (77% and 72% before); snapshots 77% and 72%, single snapshots 59-92% and 49-85%."
+  },
+  {
+   "finding": "11. The light at 10 km took the ground's downward light, 7-11% low, and the day's mean gave its zero-light end points full weight.",
+   "fix": "tenants.height_factor carries the ground spectra up by two-stream adding, (1 - A R)/(1 - R) for the layer below, direct and diffuse alike; the Sun is sampled at the midpoints of 91 steps.",
+   "effect": "Level-top daylight 980-1,018 umol/m2/s over ground of albedo 0.05-0.2 and 1,112 over cloud (879-925 and 1,041 before); zone shares move by about 0.004."
+  },
+  {
+   "finding": "12. The FMR extrapolation's cross-check was weak: the allometric 39 times must lie between the similarity terms, and Nagy's 30-170% spread was not carried.",
+   "fix": "The flyer rows record the similarity bounds and the notes call the agreement a consistency check; flyers_fed carries the spread.",
+   "effect": "1.1-16 million albatross-scale grazers at 1% over the spread, beside 1.8-4.8 million at the allometry."
+  },
+  {
+   "finding": "13. Misquotes and editorial points.",
+   "fix": "Each corrected: the aerial study's 1,000 g C/m2 sits at the top of the giants' and reefs' ranges; the two-stream law matches the product to a median 0.0035 at 400-560 nm, within 0.01 in 79% of bins and up to 0.068 off in absorption; the forest-floor ranges by class; the floor of falls and departing flyers given for the reef; the small body's cost partitioned with its construction respiration; the albatross-scale grazers as 23-62% of Earth's wild birds; the routes' release spacing in latitude and hour; the gathering medians as a series; the rounding (91-94%, 0.43-0.53, 0.21-0.45%, 0.14-0.84); the north pole's gathering at 10 km; a spore's 210 days from 10 km; the falls docstring; deposition and falls with the same class shares; the fall speed through the sky-ship density profile; the wind product's cell read from it; the sky fleet's gliders read and tested against the glide ratios; the checks.json link.",
+   "effect": "Litter drifts 6-12 km from 10 km and 41-81 km from 20 km along the wind and at most 20 km across it (6-12 and 42-84 km before); forest-floor litter phosphorus 3.9-10 kt a year class-weighted (4.8-16 kt reef only)."
+  },
+  {
+   "finding": "14. Tests that checked less than the notes said.",
+   "fix": "Route positions against the half-step frame; the two-stream law at every bin; hemispheric and longitude-split atlases; sky totals against the aerial product's area; similarity with the people product's own spans; occupancy against exact areas; edges bounding every corner; loop closure in both states; the glide ratios within the sky fleet's gliders.",
+   "effect": "68 tests (56 before)."
+  }
+ ],
+ "not_performed": [
+  "A population model: the counts of flyers and grazers are energy and phosphorus budgets, and how the sky divides between growing and mature bodies is open",
+  "Trajectories with sailing, storms and steering; the routes are the passive long-run routes in 3-day mean winds",
+  "Measured tissues: phosphorus contents, resorption and turnover of designed aerophyte tissue are design guesses",
+  "Primary reading of Cyr & Pace 1993 (medians through Burghardt & Schmitz 2015), Cleveland et al. 2013 (abstract and results excerpts), Sugden & Robins 1979 (as cited by later bromeliad studies), Golley 1968 (through van der Meer 2021) and Phlips et al. 1986 (cited for its subject); several precedents rest on abstracts, as sources.json records",
+  "The atlas grid is an ignored input on the research drive; without it the land share falls back to the water scenario's",
+  "Atlas and climate-model longitudes are taken to share their zero meridian",
+  "The study is untracked on domain/ecology; its bindings point at working files until it is committed",
+  "make check (repository-wide), by instruction"
+ ],
+ "product_sha256": "ec61d2ecc301cb1f1e2b97789ca9395de05b79938a97dc94c7ae422cf1791bbf"
+}
