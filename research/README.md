@@ -131,6 +131,9 @@ with the provisioning and resources branches; no allocation or additional UV tra
 The [aerophyte viability study](studies/aerophytes/README.md) deepens the aerial work with coupled mass,
 pressure, permeability, carbon, water/trim, reproduction and navigation accounts. Persistent twilight and following
 the slow Sun are explicit regimes. Positive budgets remain conditional requirements, with no selected organism size.
+Its [living sail analysis](studies/aerophytes/sail_biology.md) develops distributed sensing and movement, staged growth,
+renewable suspension, alternative life histories and multiple uses. Separate requirements arithmetic covers signal
+travel, fluid head, local torque and material renewal; a stable controllable organ remains to be demonstrated.
 
 The [sky ecology study](studies/sky_ecology/README.md) connects aerophyte food webs, tenant habitat and phosphorus
 exchange. Its [guards and symbioses analysis](studies/sky_ecology/symbioses.md) compares complementary partners and

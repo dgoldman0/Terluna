@@ -146,8 +146,12 @@ def test_schema_binds_every_component_and_its_inputs():
         assert name in files
     inputs=set(data['producer']['inputs'])
     study='research/studies/aerophytes/'
-    for path in sorted((model.ROOT/study).glob('*_sources.json')):
-        assert study+path.name in inputs
+    # This product owns its producer components' sources. The later sail-biology
+    # requirement study has an independent product and regeneration/hash test.
+    for component in files:
+        source=component.removesuffix('.py')+'_sources.json'
+        if (model.ROOT/study/source).exists():
+            assert study+source in inputs
     for path in ('climate/results/gcm/global_winds_A28_dim5_moon.json','climate/gcm/products/climatology_A28_dim5_moon.npz',
                  'climate/results/crm/ring_ring_equator.json','climate/results/crm/ring_ring_80s_lsw.json',
                  'research/studies/megaforest_wind/results/reference_cases.csv','biosphere/canopy/results/plant.json'):

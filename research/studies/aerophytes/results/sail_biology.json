@@ -1,0 +1,508 @@
+{
+  "schema": "terluna.research.aerophyte-sail-biology/1",
+  "producer": {
+    "path": "research/studies/aerophytes/sail_biology.py",
+    "sha256": "7059f255cd78e05385ab89b21bd073db6dc99968d01fcf1f3e77836c1d32caa4",
+    "inputs": {
+      "research/studies/aerophytes/results/aerophytes.json": "066cb18739272578220b264f1382652d8e57e86f215e625f69f102f0306b6fd3",
+      "research/studies/aerophytes/sail_biology_scenarios.json": "0c29d9ae9f8472e0b41993f3974ccdf1e1865c5a0f6e6e4fe8b17fe7ab565445",
+      "research/studies/aerophytes/sail_biology_sources.json": "ecef12b6ae1ec67f008fdabba2edc953462ddabb74b1e188c350927bb74ee876"
+    }
+  },
+  "evidence": "Requirements arithmetic and saved conditional sailing loads. No biological material, actuator, navigation, growth or survival validation.",
+  "reading_rule": "The parent coefficients and force balance are not re-solved. Signal rates and anatomy are scenarios. Payload retrieval work is a lower bound at fixed reef altitude; panel work is a specified constant-torque example. New-tissue carbon is not a complete carbon cost. Recovery only changes export if lost material leaves the reef.",
+  "constants_used": {
+    "MOON_GM": 4902800118000.0,
+    "MOON_RADIUS": 1737400.0,
+    "SYNODIC_MONTH_DAYS": 29.53059,
+    "JULIAN_YEAR_DAYS": 365.25
+  },
+  "scenario_limits": [
+    "A uniform panel hinge lever does not represent a validated wing centre of pressure or a safe hinge design.",
+    "Ballast and tissue are interchangeable only if their weight acts through an equivalent geometry; membrane weight distributed along a tall sail need not do so.",
+    "A split tether's projected-width ratio is not an updated drag or speed result.",
+    "Fluid density and tissue stoichiometry are scenario choices. Tissue chemistry, live fraction, upkeep, construction cost and collection transport are unresolved.",
+    "Neither material recovery nor having enough carbon establishes the time or developmental viability of growth."
+  ],
+  "projected_area_m2": 3141592.653589793,
+  "wing_area_m2": 314159.2653589793,
+  "inherited_cases": [
+    {
+      "body_drag_coefficient": 0.47,
+      "allowable_mpa": 28.0,
+      "wing_force_n": 181706.87140652316,
+      "mean_resultant_n_m2": 0.5783909355622309,
+      "bottom_ballast_kg": 162272.1336827541,
+      "tether_kg": 165924.8425166167,
+      "tether_diameter_m": 0.1592213820864939,
+      "paid_line_m": 5555.555555555556,
+      "depth_m": 5000.0
+    },
+    {
+      "body_drag_coefficient": 0.05,
+      "allowable_mpa": 28.0,
+      "wing_force_n": 69565.97700166832,
+      "mean_resultant_n_m2": 0.22143538221665243,
+      "bottom_ballast_kg": 62049.783074992774,
+      "tether_kg": 63446.5095839346,
+      "tether_diameter_m": 0.09845766906301451,
+      "paid_line_m": 5555.555555555556,
+      "depth_m": 5000.0
+    },
+    {
+      "body_drag_coefficient": 0.47,
+      "allowable_mpa": 92.0,
+      "wing_force_n": 181775.96169823033,
+      "mean_resultant_n_m2": 0.5786108567911279,
+      "bottom_ballast_kg": 214152.89983023258,
+      "tether_kg": 40542.23146225446,
+      "tether_diameter_m": 0.07870448957680759,
+      "paid_line_m": 5555.555555555556,
+      "depth_m": 5000.0
+    },
+    {
+      "body_drag_coefficient": 0.05,
+      "allowable_mpa": 92.0,
+      "wing_force_n": 69557.204237663,
+      "mean_resultant_n_m2": 0.22140745764153194,
+      "bottom_ballast_kg": 81896.98406349472,
+      "tether_kg": 15504.279823410692,
+      "tether_diameter_m": 0.04867113582049139,
+      "paid_line_m": 5555.555555555556,
+      "depth_m": 5000.000000000002
+    }
+  ],
+  "signals": [
+    {
+      "path_m": 1.0,
+      "speed_m_s": 0.005,
+      "one_way_s": 200.0,
+      "round_trip_s": 400.0
+    },
+    {
+      "path_m": 1.0,
+      "speed_m_s": 0.3,
+      "one_way_s": 3.3333333333333335,
+      "round_trip_s": 6.666666666666667
+    },
+    {
+      "path_m": 1.0,
+      "speed_m_s": 1.0,
+      "one_way_s": 1.0,
+      "round_trip_s": 2.0
+    },
+    {
+      "path_m": 1.0,
+      "speed_m_s": 10.0,
+      "one_way_s": 0.1,
+      "round_trip_s": 0.2
+    },
+    {
+      "path_m": 1.0,
+      "speed_m_s": 100.0,
+      "one_way_s": 0.01,
+      "round_trip_s": 0.02
+    },
+    {
+      "path_m": 10.0,
+      "speed_m_s": 0.005,
+      "one_way_s": 2000.0,
+      "round_trip_s": 4000.0
+    },
+    {
+      "path_m": 10.0,
+      "speed_m_s": 0.3,
+      "one_way_s": 33.333333333333336,
+      "round_trip_s": 66.66666666666667
+    },
+    {
+      "path_m": 10.0,
+      "speed_m_s": 1.0,
+      "one_way_s": 10.0,
+      "round_trip_s": 20.0
+    },
+    {
+      "path_m": 10.0,
+      "speed_m_s": 10.0,
+      "one_way_s": 1.0,
+      "round_trip_s": 2.0
+    },
+    {
+      "path_m": 10.0,
+      "speed_m_s": 100.0,
+      "one_way_s": 0.1,
+      "round_trip_s": 0.2
+    },
+    {
+      "path_m": 100.0,
+      "speed_m_s": 0.005,
+      "one_way_s": 20000.0,
+      "round_trip_s": 40000.0
+    },
+    {
+      "path_m": 100.0,
+      "speed_m_s": 0.3,
+      "one_way_s": 333.33333333333337,
+      "round_trip_s": 666.6666666666667
+    },
+    {
+      "path_m": 100.0,
+      "speed_m_s": 1.0,
+      "one_way_s": 100.0,
+      "round_trip_s": 200.0
+    },
+    {
+      "path_m": 100.0,
+      "speed_m_s": 10.0,
+      "one_way_s": 10.0,
+      "round_trip_s": 20.0
+    },
+    {
+      "path_m": 100.0,
+      "speed_m_s": 100.0,
+      "one_way_s": 1.0,
+      "round_trip_s": 2.0
+    },
+    {
+      "path_m": 5000.0,
+      "speed_m_s": 0.005,
+      "one_way_s": 1000000.0,
+      "round_trip_s": 2000000.0
+    },
+    {
+      "path_m": 5000.0,
+      "speed_m_s": 0.3,
+      "one_way_s": 16666.666666666668,
+      "round_trip_s": 33333.333333333336
+    },
+    {
+      "path_m": 5000.0,
+      "speed_m_s": 1.0,
+      "one_way_s": 5000.0,
+      "round_trip_s": 10000.0
+    },
+    {
+      "path_m": 5000.0,
+      "speed_m_s": 10.0,
+      "one_way_s": 500.0,
+      "round_trip_s": 1000.0
+    },
+    {
+      "path_m": 5000.0,
+      "speed_m_s": 100.0,
+      "one_way_s": 50.0,
+      "round_trip_s": 100.0
+    }
+  ],
+  "liquid_columns": [
+    {
+      "depth_m": 100.0,
+      "density_kg_m3": 1000.0,
+      "static_head_pa": 160577.38442032976,
+      "upward_work_j_per_kg": 160.57738442032976
+    },
+    {
+      "depth_m": 5000.0,
+      "density_kg_m3": 1000.0,
+      "static_head_pa": 8051448.111732158,
+      "upward_work_j_per_kg": 8051.4481117321575
+    }
+  ],
+  "retrieval": [
+    {
+      "depth_m": 5000.0,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 162272.1336827541,
+      "reel_speed_m_s": 0.01,
+      "travel_s": 555555.5555555555,
+      "payload_gravitational_energy_j": 1306525664.3267586,
+      "payload_mean_lifting_power_w": 2351.7461957881656
+    },
+    {
+      "depth_m": 5000.0,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 162272.1336827541,
+      "reel_speed_m_s": 0.1,
+      "travel_s": 55555.555555555555,
+      "payload_gravitational_energy_j": 1306525664.3267586,
+      "payload_mean_lifting_power_w": 23517.461957881656
+    },
+    {
+      "depth_m": 5000.0,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 162272.1336827541,
+      "reel_speed_m_s": 1.0,
+      "travel_s": 5555.555555555556,
+      "payload_gravitational_energy_j": 1306525664.3267586,
+      "payload_mean_lifting_power_w": 235174.61957881655
+    },
+    {
+      "depth_m": 5000.0,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 62049.783074992774,
+      "reel_speed_m_s": 0.01,
+      "travel_s": 555555.5555555555,
+      "payload_gravitational_energy_j": 499590608.77254057,
+      "payload_mean_lifting_power_w": 899.2630957905731
+    },
+    {
+      "depth_m": 5000.0,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 62049.783074992774,
+      "reel_speed_m_s": 0.1,
+      "travel_s": 55555.555555555555,
+      "payload_gravitational_energy_j": 499590608.77254057,
+      "payload_mean_lifting_power_w": 8992.63095790573
+    },
+    {
+      "depth_m": 5000.0,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 62049.783074992774,
+      "reel_speed_m_s": 1.0,
+      "travel_s": 5555.555555555556,
+      "payload_gravitational_energy_j": 499590608.77254057,
+      "payload_mean_lifting_power_w": 89926.3095790573
+    },
+    {
+      "depth_m": 5000.0,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 214152.89983023258,
+      "reel_speed_m_s": 0.01,
+      "travel_s": 555555.5555555555,
+      "payload_gravitational_energy_j": 1724240960.960092,
+      "payload_mean_lifting_power_w": 3103.633729728166
+    },
+    {
+      "depth_m": 5000.0,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 214152.89983023258,
+      "reel_speed_m_s": 0.1,
+      "travel_s": 55555.555555555555,
+      "payload_gravitational_energy_j": 1724240960.960092,
+      "payload_mean_lifting_power_w": 31036.337297281658
+    },
+    {
+      "depth_m": 5000.0,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 214152.89983023258,
+      "reel_speed_m_s": 1.0,
+      "travel_s": 5555.555555555556,
+      "payload_gravitational_energy_j": 1724240960.960092,
+      "payload_mean_lifting_power_w": 310363.3729728166
+    },
+    {
+      "depth_m": 5000.000000000002,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 81896.98406349472,
+      "reel_speed_m_s": 0.01,
+      "travel_s": 555555.5555555555,
+      "payload_gravitational_energy_j": 659389317.6945833,
+      "payload_mean_lifting_power_w": 1186.90077185025
+    },
+    {
+      "depth_m": 5000.000000000002,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 81896.98406349472,
+      "reel_speed_m_s": 0.1,
+      "travel_s": 55555.555555555555,
+      "payload_gravitational_energy_j": 659389317.6945833,
+      "payload_mean_lifting_power_w": 11869.0077185025
+    },
+    {
+      "depth_m": 5000.000000000002,
+      "paid_line_m": 5555.555555555556,
+      "payload_kg": 81896.98406349472,
+      "reel_speed_m_s": 1.0,
+      "travel_s": 5555.555555555556,
+      "payload_gravitational_energy_j": 659389317.6945833,
+      "payload_mean_lifting_power_w": 118690.07718502499
+    }
+  ],
+  "panel_actuation": [
+    {
+      "load_n_m2": 0.22140745764153194,
+      "area_m2": 100.0,
+      "force_arm_m": 0.5,
+      "tendon_arm_m": 0.25,
+      "angle_deg": 30.0,
+      "seconds": 10.0,
+      "resultant_n": 22.140745764153195,
+      "hinge_torque_nm": 11.070372882076597,
+      "tendon_force_n": 44.28149152830639,
+      "mechanical_work_j": 5.796433686471917,
+      "mechanical_power_w": 0.5796433686471917
+    },
+    {
+      "load_n_m2": 0.5786108567911279,
+      "area_m2": 100.0,
+      "force_arm_m": 0.5,
+      "tendon_arm_m": 0.25,
+      "angle_deg": 30.0,
+      "seconds": 10.0,
+      "resultant_n": 57.86108567911279,
+      "hinge_torque_nm": 28.930542839556395,
+      "tendon_force_n": 115.72217135822558,
+      "mechanical_work_j": 15.147996808185859,
+      "mechanical_power_w": 1.514799680818586
+    },
+    {
+      "load_n_m2": 143.0,
+      "area_m2": 100.0,
+      "force_arm_m": 0.5,
+      "tendon_arm_m": 0.25,
+      "angle_deg": 30.0,
+      "seconds": 10.0,
+      "resultant_n": 14300.0,
+      "hinge_torque_nm": 7150.0,
+      "tendon_force_n": 28600.0,
+      "mechanical_work_j": 3743.7312455278366,
+      "mechanical_power_w": 374.3731245527837
+    }
+  ],
+  "tether_split": [
+    {
+      "count": 1,
+      "diameter_ratio_each": 1.0,
+      "total_section_ratio": 1.0,
+      "total_projected_width_ratio": 1.0
+    },
+    {
+      "count": 4,
+      "diameter_ratio_each": 0.5,
+      "total_section_ratio": 1.0,
+      "total_projected_width_ratio": 2.0
+    },
+    {
+      "count": 16,
+      "diameter_ratio_each": 0.25,
+      "total_section_ratio": 1.0,
+      "total_projected_width_ratio": 4.0
+    },
+    {
+      "count": 100,
+      "diameter_ratio_each": 0.1,
+      "total_section_ratio": 1.0,
+      "total_projected_width_ratio": 10.0
+    }
+  ],
+  "wet_loads": [
+    {
+      "water_kg_m2": 0.1,
+      "added_water_kg": 31415.926535897932
+    },
+    {
+      "water_kg_m2": 1.0,
+      "added_water_kg": 314159.2653589793
+    }
+  ],
+  "renewal": [
+    {
+      "area_m2": 314159.2653589793,
+      "dry_kg_m2": 0.02,
+      "replacements_per_year": 0.1,
+      "carbon_fraction": 0.5,
+      "phosphorus_fraction": 0.001,
+      "phosphorus_recovery": 0.8,
+      "dry_inventory_kg": 6283.185307179586,
+      "new_dry_tissue_kg_year": 628.3185307179587,
+      "incorporated_carbon_kg_year": 314.1592653589793,
+      "lost_phosphorus_kg_year": 0.1256637061435917
+    },
+    {
+      "area_m2": 314159.2653589793,
+      "dry_kg_m2": 0.02,
+      "replacements_per_year": 1.0,
+      "carbon_fraction": 0.5,
+      "phosphorus_fraction": 0.001,
+      "phosphorus_recovery": 0.8,
+      "dry_inventory_kg": 6283.185307179586,
+      "new_dry_tissue_kg_year": 6283.185307179586,
+      "incorporated_carbon_kg_year": 3141.592653589793,
+      "lost_phosphorus_kg_year": 1.256637061435917
+    },
+    {
+      "area_m2": 314159.2653589793,
+      "dry_kg_m2": 0.02,
+      "replacements_per_year": 12.368530395092005,
+      "carbon_fraction": 0.5,
+      "phosphorus_fraction": 0.001,
+      "phosphorus_recovery": 0.8,
+      "dry_inventory_kg": 6283.185307179586,
+      "new_dry_tissue_kg_year": 77713.7684498462,
+      "incorporated_carbon_kg_year": 38856.8842249231,
+      "lost_phosphorus_kg_year": 15.542753689969237
+    },
+    {
+      "area_m2": 314159.2653589793,
+      "dry_kg_m2": 0.1,
+      "replacements_per_year": 0.1,
+      "carbon_fraction": 0.5,
+      "phosphorus_fraction": 0.001,
+      "phosphorus_recovery": 0.8,
+      "dry_inventory_kg": 31415.926535897932,
+      "new_dry_tissue_kg_year": 3141.5926535897934,
+      "incorporated_carbon_kg_year": 1570.7963267948967,
+      "lost_phosphorus_kg_year": 0.6283185307179586
+    },
+    {
+      "area_m2": 314159.2653589793,
+      "dry_kg_m2": 0.1,
+      "replacements_per_year": 1.0,
+      "carbon_fraction": 0.5,
+      "phosphorus_fraction": 0.001,
+      "phosphorus_recovery": 0.8,
+      "dry_inventory_kg": 31415.926535897932,
+      "new_dry_tissue_kg_year": 31415.926535897932,
+      "incorporated_carbon_kg_year": 15707.963267948966,
+      "lost_phosphorus_kg_year": 6.2831853071795845
+    },
+    {
+      "area_m2": 314159.2653589793,
+      "dry_kg_m2": 0.1,
+      "replacements_per_year": 12.368530395092005,
+      "carbon_fraction": 0.5,
+      "phosphorus_fraction": 0.001,
+      "phosphorus_recovery": 0.8,
+      "dry_inventory_kg": 31415.926535897932,
+      "new_dry_tissue_kg_year": 388568.84224923106,
+      "incorporated_carbon_kg_year": 194284.42112461553,
+      "lost_phosphorus_kg_year": 77.7137684498462
+    },
+    {
+      "area_m2": 314159.2653589793,
+      "dry_kg_m2": 0.5,
+      "replacements_per_year": 0.1,
+      "carbon_fraction": 0.5,
+      "phosphorus_fraction": 0.001,
+      "phosphorus_recovery": 0.8,
+      "dry_inventory_kg": 157079.63267948964,
+      "new_dry_tissue_kg_year": 15707.963267948966,
+      "incorporated_carbon_kg_year": 7853.981633974483,
+      "lost_phosphorus_kg_year": 3.1415926535897922
+    },
+    {
+      "area_m2": 314159.2653589793,
+      "dry_kg_m2": 0.5,
+      "replacements_per_year": 1.0,
+      "carbon_fraction": 0.5,
+      "phosphorus_fraction": 0.001,
+      "phosphorus_recovery": 0.8,
+      "dry_inventory_kg": 157079.63267948964,
+      "new_dry_tissue_kg_year": 157079.63267948964,
+      "incorporated_carbon_kg_year": 78539.81633974482,
+      "lost_phosphorus_kg_year": 31.41592653589792
+    },
+    {
+      "area_m2": 314159.2653589793,
+      "dry_kg_m2": 0.5,
+      "replacements_per_year": 12.368530395092005,
+      "carbon_fraction": 0.5,
+      "phosphorus_fraction": 0.001,
+      "phosphorus_recovery": 0.8,
+      "dry_inventory_kg": 157079.63267948964,
+      "new_dry_tissue_kg_year": 1942844.2112461552,
+      "incorporated_carbon_kg_year": 971422.1056230776,
+      "lost_phosphorus_kg_year": 388.56884224923095
+    }
+  ]
+}

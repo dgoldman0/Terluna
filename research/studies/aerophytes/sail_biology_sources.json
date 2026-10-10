@@ -1,0 +1,142 @@
+{
+  "schema": "terluna.research.sources/1",
+  "checked": "2026-10-10",
+  "evidence": "Primary biological and engineered analogues; speculative transfer to living aerial sail organs. Access depth varies by entry; no claim of complete scholarly review or biological validation.",
+  "sources": [
+    {
+      "id": "toyota2018",
+      "citation": "Toyota, M., et al. (2018). Glutamate triggers long-distance, calcium-based plant defense signaling. Science 361, 1112–1115.",
+      "doi": "10.1126/science.aat7744",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30213912/",
+      "access": "Primary-paper abstract through PubMed read; full article not read in this pass.",
+      "finding": "Wound-released glutamate and GLUTAMATE RECEPTOR-LIKE channels initiate calcium signaling to distant plant organs and defense induction.",
+      "transfer_limit": "Supports excitable inter-organ signaling without neurons. Does not establish a nervous system, steering computation, or communication over kilometers. No numerical propagation speed taken from this abstract."
+    },
+    {
+      "id": "gomez2008",
+      "citation": "Gómez, S., Onoda, Y., Ossipov, V., and Stuefer, J. F. (2008). Systemic induced resistance: a risk-spreading strategy in clonal plant networks? New Phytologist 179, 1142–1153.",
+      "doi": "10.1111/j.1469-8137.2008.02542.x",
+      "url": "https://nph.onlinelibrary.wiley.com/doi/10.1111/j.1469-8137.2008.02542.x",
+      "access": "Publisher full text: methods, results, discussion read.",
+      "finding": "Experiments on four Trifolium repens genotypes found systemic induction changed caterpillar preference among connected young and mature ramets; altered leaf biomechanics helped explain the change.",
+      "transfer_limit": "Supports functional integration and differential responses among clonal modules, not fast motor coordination. Source–sink connectivity can bias which ramets receive protection; the network is not an unrestricted bidirectional communications bus."
+    },
+    {
+      "id": "hagihara2022",
+      "citation": "Hagihara, T., Mano, H., Miura, T., Hasebe, M., and Toyota, M. (2022). Calcium-mediated rapid movements defend against herbivorous insects in Mimosa pudica. Nature Communications 13, 6412.",
+      "doi": "10.1038/s41467-022-34106-x",
+      "url": "https://www.nature.com/articles/s41467-022-34106-x",
+      "access": "Publisher full text: methods, results, discussion read; PMC endpoint presented a browser challenge.",
+      "finding": "Simultaneous calcium/electrical recordings linked signals to movement. Touch-induced rachilla calcium and action-potential speeds were 5.87±0.75 and 5.52±0.43 mm/s; wound-induced values 4.13±0.45 and 4.27±0.41 mm/s. Pharmacological and genetic movement suppression increased herbivore vulnerability.",
+      "transfer_limit": "These are tissue- and stimulus-specific rates over small organs, not universal plant rates. Fast local movement does not establish fast colony-wide coordination. Extending such rates over kilometers is only a scale-warning arithmetic exercise."
+    },
+    {
+      "id": "norekian2020",
+      "citation": "Norekian, T. P., and Meech, R. W. (2020). Structure and function of the nervous system in nectophores of the siphonophore Nanomia bijuga. Journal of Experimental Biology 223, jeb233494.",
+      "doi": "10.1242/jeb.233494",
+      "url": "https://journals.biologists.com/jeb/article/223/24/jeb233494/226050/Structure-and-function-of-the-nervous-system-in",
+      "access": "Publisher full text: neuroanatomy, electrophysiology results and discussion read.",
+      "finding": "Nectophores combine nerve rings, colony-connected nerve tracts, excitable epithelia and muscle systems that redirect jets. Locally stimulated contraction persisted after both main nerve tracts were destroyed. Measured epithelial conduction was 30±1.9 cm/s at 11.5–15°C, with an estimated fixed delay of 1.3±0.09 ms.",
+      "transfer_limit": "The speed is nectophore epithelial conduction, not stem-nerve conduction. An underwater centimeter-scale motor module does not establish aerial sail strength, joint speed, or kilometer-scale innervation. Useful organizational analogy, not direct performance calibration."
+    },
+    {
+      "id": "dupre2017",
+      "citation": "Dupre, C., and Yuste, R. (2017). Non-overlapping neural networks in Hydra vulgaris. Current Biology 27, 1085–1097.",
+      "doi": "10.1016/j.cub.2017.02.049",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5423359/",
+      "access": "Author manuscript full text in PMC: summary, results and discussion read.",
+      "finding": "Whole-animal calcium imaging resolved anatomically distinct functional neuronal networks associated with different behaviors, including longitudinal contraction, elongation and radial contraction.",
+      "transfer_limit": "Associations reveal organization beyond an undifferentiated nerve net; this study does not supply an engineered feedback controller or establish every circuit's causal wiring. Small Hydra behavior is not evidence of global navigation or shared consciousness in a giant colony."
+    },
+    {
+      "id": "forterre2005",
+      "citation": "Forterre, Y., Skotheim, J. M., Dumais, J., and Mahadevan, L. (2005). How the Venus flytrap snaps. Nature 433, 421–425.",
+      "doi": "10.1038/nature03185",
+      "url": "https://softmath.seas.harvard.edu/wp-content/uploads/2019/10/2005-07.pdf",
+      "access": "Author-hosted article PDF and supplement accessible and article abstract/mechanical argument read; no source bytes redistributed.",
+      "finding": "Imaging and a shell model attribute rapid trap closure to an actively triggered elastic snap-buckling instability.",
+      "transfer_limit": "Supports separating slow energy loading from rapid release. Does not imply a hundreds-of-metres membrane can snap safely, that a latch costs no upkeep, or that opening/resetting is as fast as closure."
+    },
+    {
+      "id": "suda2025",
+      "citation": "Suda, H., Asakawa, H., Hagihara, T., Ohi, S., Segami, S., Hasebe, M., and Toyota, M. (2025). MSL10 is a high-sensitivity mechanosensor in the tactile sense of the Venus flytrap. Nature Communications 16, 8280.",
+      "doi": "10.1038/s41467-025-63419-w",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12485109/",
+      "access": "Primary full text in PMC: methods-linked results and discussion read.",
+      "finding": "Local mechanical reception preceded threshold-dependent electrical/calcium propagation. DmMSL10 knockout impaired responses especially to weak stimuli; strong stimulation could still trigger signaling.",
+      "transfer_limit": "Supports sensory thresholds and selective propagation, not an all-or-nothing absence of mechanosensation. Reported reduction in ant-triggered closure was not statistically significant at 5%, so do not claim this experiment established reduced capture probability. Sail airflow/strain sensing remains proposed."
+    },
+    {
+      "id": "siebert2015_growth_zones",
+      "citation": "Siebert S et al. (2015). Stem cells in Nanomia bijuga (Siphonophora), a colonial animal with localized growth zones. EvoDevo 6:22.",
+      "doi": "10.1186/s13227-015-0018-2",
+      "url": "https://www.mbari.org/wp-content/uploads/2016/02/Siebert_etall2015.pdf",
+      "access": "Full research PDF accessed; abstract, developmental description, cell-proliferation results and discussion of restricted plasticity inspected. Not a complete scholarly review.",
+      "finding": "Cell proliferation and candidate i-cell populations were spatially localized, with no evidence of i-cells in the mature stem between zooids. Patterned budding and specialization need not imply universal regeneration.",
+      "transfer_limit": "Small marine colonies; no aerial support, kilometre-scale transport, mature cable repair or applicable growth rates demonstrated."
+    },
+    {
+      "id": "you2016_clonal_integration",
+      "citation": "You WH, Han CM, Liu CH, Yu D (2016). Effects of clonal integration on the invasive clonal plant Alternanthera philoxeroides under heterogeneous and homogeneous water availability. Scientific Reports 6:29767.",
+      "doi": "10.1038/srep29767",
+      "url": "https://www.nature.com/articles/srep29767",
+      "access": "Publisher full HTML accessed; abstract, experimental context, results and discussion inspected. Initial PMC opening was blocked by a browser challenge; publisher text succeeded.",
+      "finding": "Stolon connections altered growth, photosynthesis and allocation in an eight-week ramet experiment, with directionally unequal benefits under heterogeneous water availability.",
+      "transfer_limit": "Resource-sharing analogy only; no nervous system or long-distance signal/sap speed measured for the proposed organism."
+    },
+    {
+      "id": "shtein2019_autotomy",
+      "citation": "Shtein I et al. (2019). Autotomy in plants: organ sacrifice in Oxalis leaves. Journal of the Royal Society Interface 16:20180737.",
+      "doi": "10.1098/rsif.2018.0737",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6408339/",
+      "access": "Full PMC HTML accessed; structural and mechanical results and discussion inspected.",
+      "finding": "Oxalis pes-caprae petioles preferentially fractured at a notched basal region under tensile loading. Replacement leaves arise from surviving meristems, not the broken region.",
+      "transfer_limit": "A passive geometry-driven release analogue; does not demonstrate actively controlled release, instant nutrient recovery or aerial sail loading."
+    },
+    {
+      "id": "urbina2021_resorption",
+      "citation": "Urbina I et al. (2021). High foliar K and P resorption efficiencies in old-growth tropical forests growing on nutrient-poor soils. Ecology and Evolution 11:8969-8982.",
+      "doi": "10.1002/ece3.7734",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/ece3.7734",
+      "access": "Publisher full HTML accessed; abstract, results and nutrient-resorption limitation discussion inspected. Initial PMC opening encountered a browser challenge.",
+      "finding": "Across 39 tree species at two sites, mean dry-season P resorption was 35.9%; resorption was incomplete and nutrient-specific.",
+      "transfer_limit": "Observational Earth forest estimate, not a proposed sail recovery fraction; no storm-loss or aerial tissue resorption experiment."
+    },
+    {
+      "id": "xu2020_drought_resorption",
+      "citation": "Xu XN, Xia JY, Zhou XH, Yan LM (2020). Experimental evidence for weakened tree nutrient use and resorption efficiencies under severe drought in a subtropical monsoon forest. Journal of Plant Ecology 13:649-656.",
+      "doi": "10.1093/jpe/rtaa053",
+      "url": "https://academic.oup.com/jpe/article/13/5/649/5891216",
+      "access": "Publisher full text returned via article-minimal redirect; abstract, throughfall-exclusion design, results and discussion inspected.",
+      "finding": "Throughfall exclusion reduced nutrient resorption in Lithocarpus glaber but not Schima superba; effects varied with month and intensified during a natural drought.",
+      "transfer_limit": "Species-specific evidence that stress can impair recovery; no universal correction factor and no aerial organ measurements."
+    },
+    {
+      "id": "rinkevich2007_regeneration",
+      "citation": "Rinkevich Y, Paz G, Rinkevich B, Reshef R (2007). Systemic Bud Induction and Retinoic Acid Signaling Underlie Whole Body Regeneration in the Urochordate Botrylloides leachi. PLoS Biology 5:e71.",
+      "doi": "10.1371/journal.pbio.0050071",
+      "url": "https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0050071",
+      "access": "Publisher full HTML accessed; abstract, morphological experiments and regeneration results inspected.",
+      "finding": "Isolated vascular fragments regenerated functional zooids; multiple nascent sites usually culminated in one surviving zooid. Developmental signaling affected the process.",
+      "transfer_limit": "Submerged, attached millimetre-scale fragments; transferable concept of renewal niches, not aerial growth speed, structural repair, hydration or resource budgets."
+    },
+    {
+      "id": "aaron2002_sail_control",
+      "citation": "Aaron, K. M., Heun, M. K. and Nock, K. T. (2002). A method for balloon trajectory control. Advances in Space Research 30(5), 1227-1232. Author draft prepared for COSPAR 2000.",
+      "doi": "10.1016/S0273-1177(02)00526-4",
+      "url": "https://gaerospace.com/projects/ULBDStratoSail/pdfs_docs/COSPAR2000StratoSail.pdf",
+      "access": "Full six-page author draft extracted and read on 2026-10-10; Gatech mirror returned 403. Figures not independently inspected.",
+      "finding": "Ribbed flexible wing on a boom with local rudder actuator and counterweight; radio links its local control module to the balloon. Passive reel-down is included, while powered reel-up was omitted from this design to reduce mass. Evidence includes a quarter-scale ground tether test and trajectory simulations.",
+      "transfer_limit": "Historical engineered concept, not validation of a living sail, lunar coefficients, kilometre biological control network or fast retraction. The draft's future proposals are not established performance."
+    },
+    {
+      "id": "ju2012_fog",
+      "citation": "Ju J et al. (2012). A multi-structural and multi-functional integrated fog collection system in cactus. Nature Communications 3:1247.",
+      "doi": "10.1038/ncomms2253",
+      "url": "https://www.nature.com/articles/ncomms2253",
+      "access": "Publisher full HTML accessed; fog collection, spine structure and directional transport results inspected. Not a complete scholarly review.",
+      "finding": "Opuntia microdasys spines and trichomes collected fog droplets and moved water toward the absorptive base in laboratory saturated-fog flow.",
+      "transfer_limit": "Short-scale droplet collection, not liquid extraction from unsaturated air, a sky-reef collection flux or kilometre-scale pumping."
+    }
+  ]
+}

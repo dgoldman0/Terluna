@@ -64,6 +64,11 @@ defender communities, surface maintenance, nutrient-retaining partners and their
 for live biomass, local response and shared food are conditional calculations; species design and community
 persistence remain open.
 
+The [living sky-reef sail study](../research/studies/aerophytes/sail_biology.md) combines proposed excitable and
+contractile tissues with photosynthetic colonial growth. It compares permanent supports, replaceable blades,
+seasonal loss and partners, and calculates signal, transport and renewal requirements. These are explicit anatomy
+hypotheses and primary-source analogues, not a validated organism or a new taxonomic assignment.
+
 ## Remaining biological work
 
 The wider portfolio retains soils, aquatic communities, detrital/subsurface habitats, varied plant architectures, aerial exchange and human developmental requirements. Nutrient compartments, ecological interactions, plant hydraulics, structural support and complete life cycles still need separate models and empirical tests. Megaforests remain one candidate within this scope.

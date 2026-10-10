@@ -34,6 +34,11 @@ from [run.py](run.py) unless marked *derived*:
   wind shortens the solar cycle to 21 days at 10 km and 15 days at 20 km at the equator. In the CM1 rings the low
   evening flow lingers near sunset for three to six weeks; a westward branch 5–10% weaker would cut that to 10–18
   days. [Sailing](sailing.md).
+- **Living sail anatomy.** A [biological design study](sail_biology.md) proposes durable suspension, renewable blades
+  and local sensing and motor organs, with slower colony coordination. It compares growth, supply, seasonal loss,
+  partners and multiple uses. Its separate [requirements product](results/sail_biology.json) calculates signal delay,
+  fluid head, retrieval, local torque and renewal under explicit scenarios; it does not validate steering or change
+  the saved sailing speeds. The old force balance assigns the sign of lift and assumes an airfoil can provide it.
 - **The canopy nursery.** Megaforest crowns can raise juveniles to 50–60 m, the smallest round bodies that float with
   their reserve, in one to seven years from fermented host sugar and their own light, with water and phosphorus drawn
   from the host's sap as mistletoes draw theirs. Beyond that the gas outgrows any host (a 200-m body's trimmed gas is
@@ -85,8 +90,15 @@ SHA-256 and records the shared constants its code reads. [Checks](checks.json) r
 | [water](water.md) | Rain, vapour, dew, droplets, the trim rule and the water map |
 | [storms](storms.md) | Updrafts, rain surges, flammability, lightning and fire |
 | [sailing](sailing.md) | Shear, tethered wings, sea drogues, day length, sunset lingering |
+| [living sail biology](sail_biology.md) | Distributed control, actuator and transport requirements, growth, renewal and multiple uses |
 | [gas biology](gas_biology.md) | Swim bladders, guanine barriers, the man-of-war's gas gland, siphonophores |
 | [resources](resources.md) | Membrane, food, fibre, shade, hazards |
+
+Run `python -m research.studies.aerophytes.sail_biology` for the later anatomy requirements calculation. Its default
+output is ignored `research/runs/aerophytes/sail_biology.json`; the curated [product](results/sail_biology.json)
+uses schema `terluna.research.aerophyte-sail-biology/1`. It reads a pinned copy of the existing aerophyte result,
+records the constants it uses, and has its own [sources](sail_biology_sources.json) and
+[checks](sail_biology_checks.json). It is separate from the original integrated producer.
 
 ## Air and units
 
@@ -174,13 +186,16 @@ north and south between the rain and the twilight. [Navigation](navigation.md), 
 
 ## What would decide it next
 
-1. **A joint wet membrane test.** Hydrogen, oxygen and nitrogen permeation, sustained-load strength and creep at the
+1. **A locally controlled living sail.** Specify one wet panel's support, actuator and sensory delay; test moments,
+   stability, passive unloading and failure before assigning steering capability. Then close service, growth and
+   renewal costs and connect multiple sails to the reef. [Biological requirements](sail_biology.md).
+2. **A joint wet membrane test.** Hydrogen, oxygen and nitrogen permeation, sustained-load strength and creep at the
    renewal interval, seams and joints, tear arrest and healing time, on one assembled living-compatible film, with and
    without guanine-like plates.
-2. **The latitude and solar-hour wind product.** It places the westward branches, the shear and the rain sector along
+3. **The latitude and solar-hour wind product.** It places the westward branches, the shear and the rain sector along
    real paths, and replaces the global-mean profile and the five rings used here.
-3. **A trajectory model.** Water, carbon, gas and trim along a sailing path through storms, twilight and humid
+4. **A trajectory model.** Water, carbon, gas and trim along a sailing path through storms, twilight and humid
    layers, with the trim rule enforced hour by hour.
-4. **A population model.** Recruitment, juvenile survival, fragmentation, lightning and storm losses, and the
+5. **A population model.** Recruitment, juvenile survival, fragmentation, lightning and storm losses, and the
    phosphorus cycle through roosts, litter and aerophyte falls.
-5. **Storm records over centuries.** Return levels of gusts and updrafts beyond one lunar day of one ring.
+6. **Storm records over centuries.** Return levels of gusts and updrafts beyond one lunar day of one ring.

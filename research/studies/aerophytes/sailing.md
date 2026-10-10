@@ -14,6 +14,13 @@ The GCM's sigma levels are placed by the wind product's pressure profile from 2.
 ρgΔz to 1%; its 0 km pressure is not hydrostatic with the levels above, so the lowest level is placed by extending
 the 2.5–5 km log-pressure profile downward, to 0.74 km.
 
+The later [living sail analysis](sail_biology.md) makes a missing assumption explicit: the force balance assigns
+positive or negative sideways lift and fixed coefficients; it does not supply the anatomy that selects and holds
+that orientation. Its speeds remain conditional on a controllable surface. Local actuators, distributed sensing,
+growth, service and renewal are now compared in a separate requirements product; the saved speed calculation is
+unchanged. The latitude- and solar-hour-resolved winds are available at the pinned cross-branch revision used by
+[sky ecology](../sky_ecology/run.py), but active sail trajectories have not yet been coupled to them.
+
 ## Riding the eastward wind shortens the night
 
 **An aerophyte riding the mean wind at 10 km sees a 21-day solar cycle at the equator and a 16-day one at 60°; at 20 km,
