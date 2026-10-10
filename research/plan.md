@@ -74,8 +74,8 @@ The author approved the order of the population and lifestyle work on 9 October:
 the winds by latitude and height from the saved climate run, which set the sky towns' days; the ways of living, built
 from the project's designs; what each holds and costs; how people live; then distributions as outcomes for the author
 to choose among. Alongside, on ecology: the sky giants' real limits (fittings, seams, gusts, damage, water gathered
-from the air, storms), growth over centuries, and a taxonomic system for the biosphere, from which the floaters take
-their new name.
+from the air, storms), growth over centuries, and a taxonomic system for the biosphere, from which the organisms
+then called floaters take their new name.
 
 Steps one to five and the ecology work landed on 9 October:
 
@@ -94,8 +94,9 @@ Steps one to five and the ecology work landed on 9 October:
   - People keep a 24-hour day indoors for 11–45 kWh a person a night, and the dusk lasts 82–137 hours as shared time.
   - Height buys sun, and no human has lived in partial gravity beyond 75 hours.
   - The array answers inside conversation's gap and Earth does not.
-- **The floater giants** (ecology, `studies/floater_viability`, schema 2, which supersedes the version summarized in
-  [integration/floater_viability.md](integration/floater_viability.md)).
+- **The aerophyte giants** (ecology, `studies/aerophytes`, which supersedes the version summarized in
+  [integration/floater_viability.md](integration/floater_viability.md)). On 10 October the author named the large
+  photosynthetic aerial organisms aerophytes, retiring "floaters", and the larger colony types sky reefs.
   - A round body lives from about 50 m to 0.7–3 km across, by fibre and light, and a colony of 60–150 m modules has no
     structural size limit.
   - A 2-km colony grows in 36–544 years and a 1-km round giant in 73–1,186.
@@ -106,7 +107,7 @@ Steps one to five and the ecology work landed on 9 October:
   36 designed groups.
 
 Waiting on the author:
-- the floaters' name, from six candidates, and six choices about the taxonomic system;
+- the aerophytes' scientific name, from six cloud-root candidates, and six choices about the taxonomic system;
 - how much of the Moon is kept wild and dark (the studies carry 30% and half);
 - the distribution of people, step six, from the costs above.
 
@@ -168,13 +169,13 @@ The [cross-domain evaluation](integration/aerial_biosphere_population.md) supers
 branches' independent illustrative population placements as capacities. Use [one scenario file](../shared/scenarios/population.json)
 for new inventories. Much floating habitation may roam, with collision/storm avoidance and maneuver reserves.
 
-Next discriminating tasks are parcel-resolved aerial reproduction and removal; wet floater mass, lift gas and night
+Next discriminating tasks are parcel-resolved aerial reproduction and removal; wet aerophyte mass, lift gas and night
 survival; complete phosphorus return including harvest and sediment; and roaming district control, services and
 shared ecological occupancy. Restricted UV-B is an open candidate under retained short-wave rejection; adoption
 needs living-air chemistry, vertical biological doses and the current non-LTE exobase/film thermal calculation.
 The bounded screens do not reopen the paused climate programme or select a population distribution.
 
-## Floater requirements follow-up, 9 October 2026
+## Aerophyte requirements follow-up, 9 October 2026
 
 The [main summary](integration/floater_viability.md) records the ecology-owned coupled evaluation. Persistent
 twilight and wind-assisted Sun-following are included. Next: one assembled wet gas-barrier test and a coupled
