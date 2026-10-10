@@ -61,18 +61,23 @@ metre of raft, 0.91 in each, with pockets between its modules.**
 
 ## What a body carries
 
-**A 100-m body carries 196 t of tenants within its 30% reserve, as the 150–200 t estimate had it, and at most 1.9 t can
-land at once.** The aerophyte product gives each passing body's supported mass and gas fraction; the lift left within
-the gate is (0.7 − gas fraction) × the gross lift (2/3)DΔρ. Tenants weigh like anything else, so a resident load needs
-gas: one kilogram of hydrogen lifts 13.4 kg at 10 km, made for 3.8 kg C by photolysis at the reference light (9.5 in
-canopy-like light) or 17 kg C fermented at 2.1 mol/mol. A sudden load is what the hull's spare superpressure absorbs by
-the trim rule, Δp = ΔM p/(ρ V/A), 300 Pa in round bodies and 100 Pa in reef modules; past that the body drops free
-water, 4 kg/m² above its floor, and must later drink it back. Both are upper bounds. The spare pressure is the allowance
-the aerophyte water note gives the day's water swing, so all of it is free only at the low point of the swing; the
-dumpable water is the reserve whose size sets how many gas cells a body needs against damage (the aerophyte README), and
-dropping it for a flock spends that reserve. Departures run the trim the other way.
+**Timescale boundary.** All pressure-trim and water-release figures below are static mass equivalents. The legacy
+product fields named `sudden_*` and `at_once_*` do not solve landing duration, airflow, water-release rate, impact,
+altitude response or recovery. The pressure allowance is shared with water management, and the starting trim state
+matters. Additional tenant masses also need renewed checks of damage tolerance, attachment, respiration and water.
 
-| Body at 10 km | Tenants within the reserve | Of which 10–30% of a century's surplus buys the gas | At once by trim, at most | At once dropping water, at most |
+**The 100-m round body's spare-lift calculation allows 196 t of additional tenants, with a pressure-trim
+mass equivalent of 1.9 t.** These are separate conditional limits. The aerophyte product supplies supported mass
+and gas fraction; lift left within the gate is (0.7 − gas fraction) × gross lift (2/3)DΔρ. Extra residents require gas:
+one kilogram of hydrogen lifts 13.4 kg at 10 km, made for 3.8 kg C by photolysis at reference light (9.5 in
+canopy-like light) or 17 kg C fermented at 2.1 mol/mol.
+
+The pressure allowance enters the trim rule Δp = ΔM p/(ρ V/A): 300 Pa in round bodies and 100 Pa in reef modules.
+It is shared with the day's water swing; the usable direction and magnitude depend on the starting state. The
+additional 4 kg/m² of dumpable water is also the damage reserve. Its release rate and the subsequent recovery
+are unsolved, and using it for added loads spends that reserve.
+
+| Body at 10 km | Tenants within the reserve | Of which 10–30% of a century's surplus buys the gas | Pressure-trim mass equivalent | Trim plus water mass equivalent |
 |---|---:|---:|---:|---:|
 | Round, 50 m | 2.3 kg/m², 4.5 t | all | 0.24 t | 8.1 t |
 | Round, 100 m | 25 kg/m², 196 t | 60–196 t | 1.9 t | 33 t |
@@ -89,10 +94,10 @@ and one that spends 30% on photolytic gas. Lift binds small bodies and gas carbo
 reserve with tenants would take 274–1,228 years of its surplus at the reference light. A mature body, holding its size,
 has the whole of its surplus beyond replacing its dead for such uses.
 
-**Heavy flocks belong on the big ones.** By trim alone a 100-m body takes at most one albatross-scale flyer (1.7 t) at a
-time; dropping water it takes 19, two of the Argentavis scale (15 t) and no Quetzalcoatlus-scale flyer (44 t). A 200-m
-body takes 9 albatross-scale flyers by trim and 82 dropping water; a 500-m body 137 and 594; a 1-km giant 1,100 and
-2,900, or 43 and 114 of the Quetzalcoatlus scale. A reef's 60-m module takes no great flyer by trim at all.
+**Larger bodies have greater static load allowances.** Dividing those allowances by individual mass gives
+mass-equivalent counts, not safe simultaneous arrivals. For the 1.7-t albatross-scale case, the 100-m round body has
+roughly one flyer equivalent by trim and 19 including water. The corresponding counts are 9 and 82 at 200 m,
+137 and 594 at 500 m, and 1,100 and 2,900 at 1 km. The 60-m reef module's trim equivalent is below one such flyer.
 
 ## Domatia
 
@@ -102,15 +107,15 @@ top (it keeps a living layer of 0.1 kg/m² that maintains its skin, fixes 0.2 kg
 photolysis, a design guess), carries the round bodies' 300 Pa of spare pressure and a full water store, and takes its
 upkeep through the ties from the green modules around it, paid from 10–30% of their surplus (a design guess).
 
-| Module | Tenants within the reserve | At once by trim, dropping water (at most) | Upkeep the colony pays | Green modules a domatium needs |
+| Module | Tenants within the reserve | Trim alone, plus water mass equivalents | Upkeep the colony pays | Green modules a domatium needs |
 |---|---:|---:|---:|---:|
 | 60 m domatium | 11.0 kg/m², 34 t (green: 3.4, 10.5 t) | 0.41 t, 12.9 t | 0.43–0.53 kg C/m²/yr | 1.6–6.0 |
 | 100 m domatium | 21.9 kg/m², 189 t (green: 16.1, 140 t) | 1.9 t, 36.5 t | 0.79–0.89 | 4.2–14 |
 | 150 m domatium | 33.0 kg/m², 644 t (green: 29.9, 583 t) | 6.4 t, 84 t | 1.32–1.42 | 20–66 |
 
 The upkeep's low end gives the guards no food and the high end 0.1 kg C/m² a year of food bodies. Small domatia are
-cheap and carry most; landing domatia of 100–150 m take at most one to four albatross-scale flyers by trim and 21–49
-dropping water, and belong at the reef's edge.
+cheap and carry most; 100–150 m landing domatia have mass equivalents of one to four albatross-scale flyers by trim and 21–49
+including water. Peripheral placement is a proposed arrangement, not a demonstrated landing system.
 
 ## Guilds and mutualisms
 
@@ -125,8 +130,11 @@ dropping water, and belong at the reef's edge.
 | Collectors | fringes, tethers | orb-weavers eat the pollen their webs catch (Eggs & Sanders 2013) | none | 1–10 g/m² | none | turn airborne pollen, spores and insects into frass on the host |
 | Bud dispersers | visitors | the nursery partnership of the aerophyte growth note | none | | none | carry buds to the crowns and are paid in food |
 
-Weights other than the flyers', the water and the epiphytes' are design guesses. The guards' food is the reference
-organism's 0.1 kg C per m² a year of food to tenants, 12–18% of a 60-m reef module's net production (its biomass and
+Weights other than the flyers', the water and the epiphytes' are design guesses. The guard entry is collective
+mass per footprint area, with live versus dry mass unspecified; it gives neither an individual size nor a defense
+requirement or upper limit. The [guards and symbioses analysis](symbioses.md) explores explicitly live-mass scenarios,
+complementary guilds, local response and shared food budgets. The reference organism allocates
+0.1 kg C per m² a year to all tenants, counted once across guilds. This is 12–18% of a 60-m reef module's net production (its biomass and
 the sugar together), two and a half to three and a half times Macaranga's share.
 
 ## The canopy nursery inoculates the young

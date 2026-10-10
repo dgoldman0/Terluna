@@ -222,6 +222,8 @@ def trophic_chain(food_on_offer, edges='low'):
     phosphorus can build (stoichiometry.consumer_p_balance at stoichiometry.edge_parameters, so that the low
     edge bounds production from below). Level 3 takes the carnivore transfer of that production; great flyers
     take a share of level 3. Litter is the ungrazed tissue and the shed structure with level 2's egestion.
+    Unallocated assimilate after the P limit closes the accounting explicitly; its
+    eventual respiration, excretion or storage is not solved or credited elsewhere.
     """
     i = 0 if edges == 'low' else 1
     r = {k: v[i] for k, v in RANGES.items()}
@@ -230,14 +232,19 @@ def trophic_chain(food_on_offer, edges='low'):
                         r['poikilotherm_production_efficiency'])
     balance = st.consumer_p_balance(grazed, l2['production_c'], *st.edge_parameters(edges, food_on_offer['food_p_g_kg']))
     p2 = balance['p_limited_production_c']
+    carbon_potential = l2['production_c']
+    # P-limited tissue production must agree with the returned consumer ledger.
+    # The fate of assimilate not built into tissue is unresolved: do not silently
+    # assign it to respiration, litter, food for predators or retained biomass.
+    l2 = dict(l2, production_c=p2, unallocated_assimilate_c=carbon_potential-p2)
     p3 = p2*r['carnivore_transfer']
     pb = invertebrate_pb(RANGES['invertebrate_dry_mg'][i])   # the low end takes the faster small bodies
     return dict(edges=edges, grazed_c=grazed, level2=l2, p_balance=balance, level2_production_c=p2,
                 level3_production_c=p3, great_flyer_food_c=p3*r['top_harvest_share'], invertebrate_pb_per_year=pb,
                 level2_biomass_c=p2/pb, level3_biomass_c=p3/pb,
-                carbon_limited=dict(level2_production_c=l2['production_c'],
-                                    level3_production_c=l2['production_c']*r['carnivore_transfer'],
-                                    level2_biomass_c=l2['production_c']/pb),
+                carbon_limited=dict(level2_production_c=carbon_potential,
+                                    level3_production_c=carbon_potential*r['carnivore_transfer'],
+                                    level2_biomass_c=carbon_potential/pb),
                 litter_c=food_on_offer['grazable_c']-grazed+food_on_offer['shed_c']+l2['egestion_c'])
 
 

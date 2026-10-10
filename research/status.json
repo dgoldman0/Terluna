@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-10-10",
   "base_commit": "92e0961eabd6bd070299a018dcce54d4ccfe7264",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -249,7 +249,7 @@
     },
     {
       "topic": "biosphere",
-      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb; whole_plant_carbon_through_the_lunar_night_with_twilight_and_gcm_temperatures_scenarios; fruit_designed_for_the_lunar_day_on_the_whole_plant_degree_day_program_as_design_variable; ecology_first_screen_ultraviolet_settling_and_trace_gases_without_oh; aerial_food_web_and_aerophyte_requirements_screen; fixed_column_restricted_uv_window_screen; coupled_aerophyte_requirements_with_twilight_sun_following_and_water_trim; taxonomic_system_proposed_with_first_register_of_designed_groups_and_six_aerophyte_names_2026_10_09; giant_aerophyte_size_limits_ages_water_storms_sailing_and_gas_biology_screen_2026_10_09",
+      "condition": "periodic_carbon_and_oxygen_requirement_models; hypothetical_traits; clear_sky_spectral_canopy_photosynthesis_moon_and_earth_prospect_d_fvcb; whole_plant_carbon_through_the_lunar_night_with_twilight_and_gcm_temperatures_scenarios; fruit_designed_for_the_lunar_day_on_the_whole_plant_degree_day_program_as_design_variable; ecology_first_screen_ultraviolet_settling_and_trace_gases_without_oh; aerial_food_web_and_aerophyte_requirements_screen; fixed_column_restricted_uv_window_screen; coupled_aerophyte_requirements_with_twilight_sun_following_and_water_trim; taxonomic_system_proposed_with_first_register_of_designed_groups_and_six_aerophyte_names_2026_10_09; giant_aerophyte_size_limits_ages_water_storms_sailing_and_gas_biology_screen_2026_10_09; sky_ecology_food_tenant_and_phosphorus_screen_with_guards_and_symbiosis_requirements_2026_10_10",
       "material": [
         "../biosphere/README.md",
         "../ensemble/papers/74a946e2-8f98/seed-02.md",
@@ -287,7 +287,11 @@
         "studies/aerophytes/storms.md",
         "studies/aerophytes/sailing.md",
         "studies/aerophytes/gas_biology.md",
-        "studies/aerophytes/resources.md"
+        "studies/aerophytes/resources.md",
+        "studies/sky_ecology/README.md",
+        "studies/sky_ecology/status.md",
+        "studies/sky_ecology/symbioses.md",
+        "studies/sky_ecology/results/symbioses.json"
       ],
       "unresolved": [
         "the sky, land and people (biosphere/ecology/people_and_land.md, 2026-10-09), with the aerial biomes first at the author's direction: the sky's 9.2e8 km3 of air above freezing as the largest habitat, fed from below; the vegetated Moon's ethylene at 94-233 ppb with soils its only sink, above the 50 ppb that costs wheat a third of its yield; about 0.4 billion affluent people with Earth's practice and 3-15 billion with the lunar design; the sky binding before the land through light at night",
@@ -310,7 +314,8 @@
         "Aerial productivity and biodiversity: close reproduction/removal, water and gas retention, complete phosphorus return including human harvest, and biological aerosol/surface-light feedback; scenario biomass and 5% harvest are not demonstrated capacities.",
         "UV: current spectrum retained, adaptation and local UV preferred; narrow UV-B remains a candidate requiring vertical biological action spectra, living-air chemistry, ring-film thermal response and non-LTE exobase solar-cycle validation.",
         "Aerophytes (research/studies/aerophytes, schema terluna.research.aerophytes/1): one assembled wet barrier, seam and tendon under sustained load; paths through the latitude and solar-hour wind product with water, gas and trim closed hour by hour, and whether the low evening westward branch survives in three dimensions; a population model with nursery survival, colony fragmentation, lightning and storm losses and phosphorus return; storm return levels over centuries. The size limits (round 50-700 m with cellulose-class fibre and 1 km with 300 MPa fibre at 10 km; colonies of 60-150 m modules without a size limit) are screen values.",
-        "Taxonomy (biosphere/ecology/taxonomy.md): the author's choices O1-O7 (rules for designed taxa, ranks, the founding identifier, name roots, where founding ends, giants as a form or a sister lineage, the aerophytes' scientific name); a chassis for each designed group as its design firms up; the founding register is empty until a lineage is designed"
+        "Taxonomy (biosphere/ecology/taxonomy.md): the author's choices O1-O7 (rules for designed taxa, ranks, the founding identifier, name roots, where founding ends, giants as a form or a sister lineage, the aerophytes' scientific name); a chassis for each designed group as its design firms up; the founding register is empty until a lineage is designed",
+        "Sky reef symbioses: guard density is a scenario, not a defense limit; empirical detection, travel and deterrence, compatible guilds, nutrient-bearing diets, night oxygen and water, reproductive inheritance and net host benefit remain open. Extra-load damage tolerance and landing dynamics are unsolved; phosphorus-limited unbuilt carbon is explicitly unallocated."
       ],
       "next_session_task": "The author's choices on the taxonomy (O1-O7, the aerophytes' scientific name among them). Then couple the aerophyte study to the latitude and solar-hour wind product (climate/gcm/zonal_winds.md, on domain/provisioning until integration): trajectories that keep water, carbon, gas and trim closed through storms and twilight; then a population model for sky reefs and round giants with phosphorus return. Preserve nutrient return and biological/UV requirements from the preceding aerial evaluation."
     },

@@ -1,6 +1,9 @@
 # Aerophytes in the living sky: food, tenants and phosphorus
 
-**Partial research checkpoint, 10 October 2026.** The existing calculations and saved product are preserved before further work on guards and symbioses. Known accounting, provenance and interpretation limits are recorded in [status.md](status.md); the numerical tables are conditional screens, not demonstrated communities.
+**Partial ecology screen, extended 10 October 2026.** The interrupted work was preserved in checkpoint `980d203`.
+The [guards and symbioses analysis](symbioses.md) now separates body size from collective biomass, examines local
+response and shared food costs, and compares reciprocal partnerships using primary literature. [Status](status.md)
+records the subsequent accounting repairs and remaining limits; none of the tables demonstrates a viable community.
 
 The author asked on 10 October 2026: "How do these things integrate with the broader aerial ecosystem and global
 ecosystem? Smaller ones can probably be eaten as part of the food chain. Larger ones could probably become homes for
@@ -74,17 +77,18 @@ bodies, and a mature one, whose bodies hold their size while recruits replace th
     of ground (Sugden & Robins 1979).
   - **A reef's pockets.** Between its modules a reef has pockets of 12–30 m³ per m² of raft, where tank membranes make
     its pools.
-- **A 100-m body carries 196 t of tenants within its 30% reserve, as estimated, and at most 1.9 t may arrive at once.**
-  - **Sudden loads.** By the trim rule its 300 Pa of spare pressure absorbs 0.24 kg/m². That pressure is the day's water
-    swing's allowance, so all of it is free only at the swing's low point. Dropping its free water it takes up to 33 t,
+- **A 100-m round body has a 196-t spare-lift allowance and a separate 1.9-t pressure-trim mass equivalent.**
+  - **Static trim.** Its 300 Pa pressure allowance corresponds to 0.24 kg/m² in the trim rule; no response time is solved. That pressure is the day's water
+    swing's allowance, so all of it is free only at the swing's low point. Including its dumpable water gives a 33-t mass equivalent,
     spends its damage reserve, and must drink the water back.
-  - **Heavy flocks belong on the big ones.** A 200-m body takes up to 15 t at once, a 500-m body 236 t and a 1-km giant
-    1,890 t: 1,100 albatross-scale flyers by trim.
+  - **Larger bodies have greater static allowances.** Pressure-trim mass equivalents are 15 t at 200 m, 236 t at 500 m
+    and 1,890 t at 1 km. Dividing by flyer mass gives equivalents, not demonstrated arrivals.
   - **Gas carbon binds giants.** Tenants need gas, and 10–30% of a century's surplus buys it for 2,700–36,700 t on a
     1-km giant. A mature body has its whole surplus beyond replacing its dead for such uses.
 - **Sky reefs can grow domatia, modules for their tenants, as siphonophores specialise their zooids.** A 60-m domatium
-  without a green top carries 11 kg/m², three times a green module's 3.4, and two to six green modules feed it. Landing
-  domatia of 100–150 m take at most one to four albatross-scale flyers by trim and 21–49 dropping water.
+  without a green top carries 11 kg/m², three times a green module's 3.4, and two to six green modules feed it. Proposed
+  100–150 m landing domatia have one to four albatross-scale flyer mass equivalents by trim and 21–49 including water;
+  landing dynamics remain unsolved.
 - **Every guild has its Earth precedent:**
   - guards in domatia, as ants guard ant-plants (Heil et al. 1997; Treseder et al. 1995);
   - nesting flyers, as on seabird islands (Otero et al. 2018; Graham et al. 2018);
@@ -154,7 +158,9 @@ in part by the sea.
 
 ## How the study is built
 
-Run `python -m research.studies.sky_ecology.run`; check with `python -m pytest research/studies/sky_ecology`. The
+Run `python -m research.studies.sky_ecology.run` and `python -m research.studies.sky_ecology.symbioses`;
+both write to ignored `research/runs/sky_ecology/` by default. After review, their products can be promoted into
+`results/`; `--output` selects an explicit destination. Check with `python -m pytest research/studies/sky_ecology`. The
 [product](results/sky_ecology.json) (schema `terluna.research.sky-ecology/1`) records the bindings, the evidence
 statement and the reading rule.
 
@@ -172,7 +178,9 @@ statement and the reading rule.
   They are read in-tree once their hashes match there, and from Git until then.
 - **The 28% atlas grid**, an ignored input, places the routes over land and sea when present.
 
-**Records.** The shared constants the code reads are recorded by name and value. Literature sources and what was read
+**Records.** [Current checks](symbioses_checks.json) cover the follow-up; [checkpoint checks](checkpoint_checks.json)
+preserve its initially failing provenance tests. The original checks.json is the interrupted session record.
+The shared constants the code reads are recorded by name and value. Literature sources and what was read
 are in [sources.json](sources.json); the independent review's findings and their fixes are in [checks.json](checks.json).
 
 | Component | Holds |
@@ -180,6 +188,7 @@ are in [sources.json](sources.json); the independent review's findings and their
 | [food web](food_web.md) | Production by class, state and cover, trophic levels, great flyers, the eaten base, sky snow |
 | [tenants](tenants.md) | Light on each surface, real estate, carrying capacity and sudden loads, domatia, guilds, the nursery, contact |
 | [phosphorus](phosphorus.md) | P by tissue, the sky's loop in both states, the resources check, the sea's return, deposition, falls |
+| [guards and symbioses](symbioses.md) | Threats, mixed guilds, response distances, live-mass and shared diet requirements, reciprocal exchanges and partner conflicts |
 | [stoichiometry](stoichiometry.py) | The P contents both other components use, the bounding edges and the consumers' P limit |
 
 The taxonomy's identifiers used here (G01–G03, G08, G11, G14, C01, C10, M18–M21, M27, M28) are checked against

@@ -1,5 +1,24 @@
 # Sky ecology status
 
+## Follow-up on guards and symbioses
+
+The interrupted study is preserved in commit `980d203`. The current [analysis](symbioses.md) and separate
+[requirements product](results/symbioses.json) add live-mass scenarios, individual sizes and active fractions,
+local response geometry, shared carbon allocations, paired dietary carbon and phosphorus, and nutrient imports.
+Seventeen selected primary studies support the mechanisms and their limits; access details are in
+[symbioses_sources.json](symbioses_sources.json). No organism or population is validated.
+
+The saved sky ecology product has been regenerated with the current source binding. Its phosphorus-limited
+consumer ledger now reports actual limited production and an explicit unallocated-assimilate pool, preserving
+carbon accounting without inventing the fate of that carbon. Static trim estimates are labelled as mass
+equivalents with no landing or recovery time. Default study runs now write to ignored research/runs/sky_ecology/.
+The research and biosphere indexes link the study.
+
+The response and food scenarios are conditional requirements. Defensive efficacy, coexistence, partner
+inheritance, net host benefit, complete diets, gas-control biology, wet habitat persistence and added-load damage
+tolerance remain open. Current validation is recorded in [symbioses_checks.json](symbioses_checks.json);
+[checkpoint_checks.json](checkpoint_checks.json) preserves the earlier failing checkpoint unchanged.
+
 ## Partial checkpoint on 10 October 2026
 
 The author requested a commit of the interrupted sky ecology work before deeper analysis of guards and general sky reef symbioses. This checkpoint preserves the existing model code, source register and saved product, with a status notice added to the README. It does not declare the study complete.
@@ -16,9 +35,9 @@ The study contains coupled accounting for host production, trophic transfers, te
 - **Community persistence.** No population model, complete coupled nutrient cycle, night survival, pool oxygen history or weather trajectory establishes a self-sustaining community. Strong litter retention is assumed rather than derived from catchment geometry and flow.
 - **Integration.** The research and biosphere indexes have not yet incorporated this study. The original checks.json records earlier focused tests and their limits; current checkpoint checks will be recorded separately there.
 
-## Next work
+## Planned work at the checkpoint
 
-Develop a multi-species analysis of guards and the broader symbioses: complementary threats and services, host and partner costs, residence versus reciprocal benefit, body size versus total biomass, local response times, shared carbon and nutrient budgets, nutrient import and recycling, recruitment, night survival and conflicts between partners. Earth precedents must remain separate from proposed sky reef organisms.
+The checkpoint called for a multi-species analysis of guards and the broader symbioses: complementary threats and services, host and partner costs, residence versus reciprocal benefit, body size versus total biomass, local response times, shared carbon and nutrient budgets, nutrient import and recycling, recruitment, night survival and conflicts between partners. Earth precedents must remain separate from proposed sky reef organisms.
 
 ## Checkpoint validation
 

@@ -255,8 +255,10 @@ def real_estate(light):
 # ---- what a body carries -------------------------------------------------------------------------
 
 def capacity_rows(size_rows, area_factor, b_kg_per_h2, carbon_per_h2, gate=.7):
-    """Steady tenant load within the 30% reserve, its gas carbon, and the most that may arrive at once.
+    """Steady tenant load within the 30% reserve, its gas carbon, and static trim mass equivalents.
 
+    Legacy sudden_* fields are static mass equivalents with no response timescale.
+    No landing impulse, control rate, vertical trajectory or recovery time is solved.
     The sudden loads are upper bounds. The hull's spare superpressure is the day's water swing's allowance
     (aerophytes/water.md), so the whole of it is free only at the low point of the swing; the 4 kg/m² of
     water a body can drop is the reserve its count of gas cells answers damage with (aerophytes README).
@@ -287,7 +289,7 @@ def capacity_rows(size_rows, area_factor, b_kg_per_h2, carbon_per_h2, gate=.7):
 
 
 def landing(capacity, flyers):
-    """How many of each lunar flyer may land at once by trim alone, and roost steadily."""
+    """Mass-equivalent flyer counts only; no landing duration, control or population is solved."""
     rows = []
     for c in capacity:
         for f in flyers:
@@ -352,9 +354,11 @@ def guilds(flyers, food_web_chain, light):
              'daily above-ground production (9% of construction costs) into food bodies for its ants (Heil et al. 1997); '
              'ant debris and respiration give Dischidia major 29% of its nitrogen and 39% of its leaf carbon (Treseder et al. 1995)',
              light='none: they live in domatia', weight_kg_m2=[.001, .01], damage='the guards keep grazers and egg-layers '
-             'off the green top', nutrients='debris and respiration in the domatia return nitrogen, carbon and some '
+             'off the green top (proposed; efficacy unmeasured)',
+             mass_basis='unspecified in the initial screen; collective mass per footprint area, not individual size or a capacity limit',
+             nutrients='debris and respiration in the domatia return nitrogen, carbon and some '
              'phosphorus', cost_c_kg_m2_year=[0., .1], cost_note='the food bodies are the reference organism\'s 0.1 kg C '
-             'per m² a year of food to tenants'),
+             'per m² a year shared among all tenants, not a separate allocation per guild'),
         dict(guild='roosting and nesting flyers', where='the flanks of round giants and landing domatia',
              precedent='seabird islands: colonies receive 99 Gg of phosphorus a year in droppings (Otero et al. 2018); '
              'islands without rats carry 760 times the seabirds and 251 times the nitrogen input, and their reefs 48% more '
@@ -482,9 +486,10 @@ def evaluate(surface_light, air10, structural, aero_product, flyers, food_web_ch
         reading_rule='Per m² of projected aerophyte area (a raft\'s hexagonal cell) unless labelled. Light is '
                      'photosynthetic photons at 10 km above the equator, a daytime mean over the lunar day (multiply by '
                      'half the 86,400 s of a day for the 24-hour mean); share_of_level_top is over a level surface on top. '
-                     'Steady tenants fill the gas to 70% of the body. Sudden loads are upper bounds: what the hull\'s '
-                     'spare pressure absorbs at the low point of the day\'s water swing (trim), and that plus the 4 kg/m² '
-                     'of water it can drop, which is also its damage reserve.',
+                     'Steady tenants fill the gas to 70% of the body. Legacy sudden/at_once labels are static mass equivalents, '
+                     'not demonstrated arrivals: no duration, flow rate, landing impulse or recovery is solved. Trim uses the '
+                     'full pressure allowance at the assumed water-swing state; trim plus water also uses the 4 kg/m² '
+                     'dumpable store, spending the damage reserve. Starting trim and control direction matter.',
         light=dict(layer_share_below_10_km=layer_share, albedos=list(ALBEDOS), cases=light, check=check),
         real_estate=real_estate(light), net_lift_kg_per_kg_h2=b,
         gas_carbon_per_kg_h2=dict(reference_light=costs(2.), canopy_light=costs(5.)),

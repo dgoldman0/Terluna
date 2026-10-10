@@ -58,6 +58,12 @@ Earth's rate. With no OH in the air, methane lives for centuries and settles nea
 has no sink. Pollen stays aloft for weeks at lunar gravity. Molybdenum may limit nitrogen fixation before nitrogen
 does. The variety of biomes comes from water and light, since no natural ground freezes.
 
+The [sky ecology study](../research/studies/sky_ecology/README.md) connects aerophyte food webs, habitats and
+phosphorus exchange. Its [guards and symbioses analysis](../research/studies/sky_ecology/symbioses.md) examines mixed
+defender communities, surface maintenance, nutrient-retaining partners and their conflicts. Explicit requirements
+for live biomass, local response and shared food are conditional calculations; species design and community
+persistence remain open.
+
 ## Remaining biological work
 
 The wider portfolio retains soils, aquatic communities, detrital/subsurface habitats, varied plant architectures, aerial exchange and human developmental requirements. Nutrient compartments, ecological interactions, plant hydraulics, structural support and complete life cycles still need separate models and empirical tests. Megaforests remain one candidate within this scope.

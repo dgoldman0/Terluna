@@ -208,3 +208,24 @@ def test_grazing_tolerance_scales_with_share(product):
     assert tol[0]['regrowth_c'] < tol[1]['regrowth_c']
     assert all(0 < t['share_of_surplus'] < .2 for t in tol)
     assert [t['grazed_share'] for t in tol] == list(fw.RANGES['tree_grazed_share'])
+
+
+@pytest.mark.parametrize('food_p', [(0., 0.), (1., 3.), (100., 100.)])
+def test_phosphorus_limited_ledger_keeps_unbuilt_carbon_explicit(food_p):
+    offer = dict(grazable_c=.225, grazed_share=.12, food_to_tenants_c=.1,
+                 food_p_g_kg=food_p, shed_c=.4)
+    for edge in ('low', 'high'):
+        row = fw.trophic_chain(offer, edge)
+        level = row['level2']
+        assert level['production_c'] == row['level2_production_c']
+        assert level['unallocated_assimilate_c'] >= 0
+        assert math.isclose(level['consumption_c'], level['egestion_c']+
+                            level['respiration_c']+level['production_c']+
+                            level['unallocated_assimilate_c'])
+        assert math.isclose(row['carbon_limited']['level2_production_c'],
+                            level['production_c']+level['unallocated_assimilate_c'])
+        if food_p == (0., 0.):
+            assert row['level2_production_c'] == row['level3_production_c'] == 0
+            assert level['unallocated_assimilate_c'] > 0
+        if food_p == (100., 100.):
+            assert level['unallocated_assimilate_c'] == 0

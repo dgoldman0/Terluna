@@ -3,9 +3,9 @@
  "producer": {
   "study": "sky_ecology",
   "files": {
-   "research/studies/sky_ecology/run.py": "47d16d1db17216796e9f130a7d475d03ea2f9556b6ca1a3d1cc92c2f67f8dab7",
-   "research/studies/sky_ecology/food_web.py": "de66c10edc468701f5308fa731025bde21c69bb8f7f42b783f5d260861a70ecc",
-   "research/studies/sky_ecology/tenants.py": "26fbffd40340428ff8e0f737ad2f6ce0e9db56a8211a6dd4d1fbe9b0f07450ea",
+   "research/studies/sky_ecology/run.py": "4e16a03e0b68b22b75edf994c89bd7563337f8fa7f981482c16776ec64b500b8",
+   "research/studies/sky_ecology/food_web.py": "6db02e29fb87af9e0b1e61efcbf2f07ab21aebec069cc4bd0313f75b5c1c6f48",
+   "research/studies/sky_ecology/tenants.py": "26d51970fe684d93a103c0cdff178d396b1275c200c6b554aa6fe7f3f224b075",
    "research/studies/sky_ecology/phosphorus.py": "cfe8d16cd811b7690028a74b3da607fd21011f4de8aa2b84b8484a8fee36a4c9",
    "research/studies/sky_ecology/stoichiometry.py": "5734cb9a152316c6a17d19f7f21276caca8cb280bc0721dbc965369adacbeffd"
   },
@@ -36,7 +36,7 @@
    "research/studies/sky_ships/results/sky_ships.json": "1e214bf6e64b0bb891c64b8ff273a7a12482e83defce0732b315c1751a28b26e",
    "research/studies/sky_fleet/results/sky_fleet.json": "c96dfc663f12756c6227c0509d054313b0a3fb7e1d06dfc0f7d16bc262bc06d4",
    "shared/scenarios/water.json": "a9d4d60ef3bf20b52454fdc07f2e05de107ebdd896b03288e9117af0c87e46a0",
-   "research/studies/sky_ecology/sources.json": "5e2e2423359f511014137d3a287f96fb99636869b7f789cef82cdcd9bab313c0",
+   "research/studies/sky_ecology/sources.json": "39f59e82b8c88def4842215832a19c32ea756d6c736c13c15cec53a86489e868",
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b18972bdaa506f48d8c25050c04b168090e3b4cd1ba07afea4",
    "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32712fd94a00ea03f1b212a39bed21b7a54b3a4a61707a72c8",
    "research/studies/aerophytes/structure_sources.json": "bf73cad8a66e6bbb8746c7d07ef640f1fef9b76808df54212f21078621b1cf60"
@@ -2095,9 +2095,10 @@
      "level2": {
       "consumption_c": 0.127,
       "assimilation_c": 0.0981,
-      "production_c": 0.019620000000000002,
+      "production_c": 0.0015463917525773197,
       "respiration_c": 0.07848000000000001,
-      "egestion_c": 0.028899999999999995
+      "egestion_c": 0.028899999999999995,
+      "unallocated_assimilate_c": 0.01807360824742268
      },
      "p_balance": {
       "food_p_g_kg": 1.0,
@@ -2130,9 +2131,10 @@
      "level2": {
       "consumption_c": 0.14275000000000002,
       "assimilation_c": 0.11137500000000002,
-      "production_c": 0.044550000000000006,
+      "production_c": 0.01838709677419355,
       "respiration_c": 0.06682500000000001,
-      "egestion_c": 0.031375
+      "egestion_c": 0.031375,
+      "unallocated_assimilate_c": 0.026162903225806455
      },
      "p_balance": {
       "food_p_g_kg": 3.0,
@@ -2231,9 +2233,10 @@
      "level2": {
       "consumption_c": 0.127,
       "assimilation_c": 0.0981,
-      "production_c": 0.019620000000000002,
+      "production_c": 0.0015463917525773197,
       "respiration_c": 0.07848000000000001,
-      "egestion_c": 0.028899999999999995
+      "egestion_c": 0.028899999999999995,
+      "unallocated_assimilate_c": 0.01807360824742268
      },
      "p_balance": {
       "food_p_g_kg": 1.0,
@@ -2266,9 +2269,10 @@
      "level2": {
       "consumption_c": 0.14275000000000002,
       "assimilation_c": 0.11137500000000002,
-      "production_c": 0.044550000000000006,
+      "production_c": 0.01838709677419355,
       "respiration_c": 0.06682500000000001,
-      "egestion_c": 0.031375
+      "egestion_c": 0.031375,
+      "unallocated_assimilate_c": 0.026162903225806455
      },
      "p_balance": {
       "food_p_g_kg": 3.0,
@@ -2367,9 +2371,10 @@
      "level2": {
       "consumption_c": 0.127,
       "assimilation_c": 0.0981,
-      "production_c": 0.019620000000000002,
+      "production_c": 0.0015463917525773197,
       "respiration_c": 0.07848000000000001,
-      "egestion_c": 0.028899999999999995
+      "egestion_c": 0.028899999999999995,
+      "unallocated_assimilate_c": 0.01807360824742268
      },
      "p_balance": {
       "food_p_g_kg": 1.0,
@@ -2402,9 +2407,10 @@
      "level2": {
       "consumption_c": 0.14275000000000002,
       "assimilation_c": 0.11137500000000002,
-      "production_c": 0.044550000000000006,
+      "production_c": 0.01838709677419355,
       "respiration_c": 0.06682500000000001,
-      "egestion_c": 0.031375
+      "egestion_c": 0.031375,
+      "unallocated_assimilate_c": 0.026162903225806455
      },
      "p_balance": {
       "food_p_g_kg": 3.0,
@@ -2490,9 +2496,10 @@
      "level2": {
       "consumption_c": 0.12576334689366564,
       "assimilation_c": 0.0977290040680997,
-      "production_c": 0.01954580081361994,
+      "production_c": 0.0014755639687093714,
       "respiration_c": 0.07818320325447976,
-      "egestion_c": 0.02803434282556594
+      "egestion_c": 0.02803434282556594,
+      "unallocated_assimilate_c": 0.01807023684491057
      },
      "p_balance": {
       "food_p_g_kg": 1.0,
@@ -2525,9 +2532,10 @@
      "level2": {
       "consumption_c": 0.16784348015331949,
       "assimilation_c": 0.12392174007665975,
-      "production_c": 0.049568696030663904,
+      "production_c": 0.029179991463793326,
       "respiration_c": 0.07435304404599585,
-      "egestion_c": 0.043921740076659735
+      "egestion_c": 0.043921740076659735,
+      "unallocated_assimilate_c": 0.02038870456687058
      },
      "p_balance": {
       "food_p_g_kg": 3.0,
@@ -5166,7 +5174,7 @@
  },
  "tenants": {
   "evidence": "Light estimated from the clear-sky surface-light product (ground spectra carried to the body's height by two-stream adding through the air below, whose reflectance is scaled from the column's; isotropic diffuse light; ray tests among raft neighbours); masses, trim and gas from the aerophyte product and model; guild costs and benefits from Earth precedents and stated design guesses. No tenant community is simulated.",
-  "reading_rule": "Per m\u00b2 of projected aerophyte area (a raft's hexagonal cell) unless labelled. Light is photosynthetic photons at 10 km above the equator, a daytime mean over the lunar day (multiply by half the 86,400 s of a day for the 24-hour mean); share_of_level_top is over a level surface on top. Steady tenants fill the gas to 70% of the body. Sudden loads are upper bounds: what the hull's spare pressure absorbs at the low point of the day's water swing (trim), and that plus the 4 kg/m\u00b2 of water it can drop, which is also its damage reserve.",
+  "reading_rule": "Per m\u00b2 of projected aerophyte area (a raft's hexagonal cell) unless labelled. Light is photosynthetic photons at 10 km above the equator, a daytime mean over the lunar day (multiply by half the 86,400 s of a day for the 24-hour mean); share_of_level_top is over a level surface on top. Steady tenants fill the gas to 70% of the body. Legacy sudden/at_once labels are static mass equivalents, not demonstrated arrivals: no duration, flow rate, landing impulse or recovery is solved. Trim uses the full pressure allowance at the assumed water-swing state; trim plus water also uses the 4 kg/m\u00b2 dumpable store, spending the damage reserve. Starting trim and control direction matter.",
   "light": {
    "layer_share_below_10_km": 0.19002961260882226,
    "albedos": [
@@ -8029,13 +8037,14 @@
      0.001,
      0.01
     ],
-    "damage": "the guards keep grazers and egg-layers off the green top",
+    "damage": "the guards keep grazers and egg-layers off the green top (proposed; efficacy unmeasured)",
+    "mass_basis": "unspecified in the initial screen; collective mass per footprint area, not individual size or a capacity limit",
     "nutrients": "debris and respiration in the domatia return nitrogen, carbon and some phosphorus",
     "cost_c_kg_m2_year": [
      0.0,
      0.1
     ],
-    "cost_note": "the food bodies are the reference organism's 0.1 kg C per m\u00b2 a year of food to tenants"
+    "cost_note": "the food bodies are the reference organism's 0.1 kg C per m\u00b2 a year shared among all tenants, not a separate allocation per guild"
    },
    {
     "guild": "roosting and nesting flyers",

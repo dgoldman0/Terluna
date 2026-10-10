@@ -131,3 +131,8 @@ with the provisioning and resources branches; no allocation or additional UV tra
 The [aerophyte viability study](studies/aerophytes/README.md) deepens the aerial work with coupled mass,
 pressure, permeability, carbon, water/trim, reproduction and navigation accounts. Persistent twilight and following
 the slow Sun are explicit regimes. Positive budgets remain conditional requirements, with no selected organism size.
+
+The [sky ecology study](studies/sky_ecology/README.md) connects aerophyte food webs, tenant habitat and phosphorus
+exchange. Its [guards and symbioses analysis](studies/sky_ecology/symbioses.md) compares complementary partners and
+calculates explicit live-mass, local-response and shared-diet requirements. These remain partial conditional screens
+and Earth analogues, with no calibrated defense, community persistence or landing response time.

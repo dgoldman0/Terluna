@@ -1,0 +1,584 @@
+{
+  "schema": "terluna.research.sky-reef-symbioses/1",
+  "producer": {
+    "model": "research/studies/sky_ecology/symbioses.py",
+    "model_sha256": "8fb0418ee82646f0c79fa25a9df7aa5a353b6bca46d19a96e2268b9fcfd3ade2",
+    "dependencies": {
+      "stoichiometry.py": "5734cb9a152316c6a17d19f7f21276caca8cb280bc0721dbc965369adacbeffd"
+    },
+    "inputs": {
+      "symbioses_scenarios.json": "7a9490b6ad0a400bb456f218f243bb68dbaf1bf7bb1339d549310bfcf28754f9",
+      "symbioses_sources.json": "57076ad8b55ba3c751307ae78b09a7cfee34a0b482e2ac50858e3133aea1b877",
+      "results/sky_ecology.json": "40ce0658e5c05c5e17fb003ce6059611a3482172fbd0bbf4ec147eff1f519aea"
+    }
+  },
+  "evidence": "Algebraic requirements for illustrative scenarios; no defended population, coexistence, persistence or empirically calibrated rates.",
+  "reading_rule": "All m2 denominators are reef footprint except explicitly named exterior densities. Live and dry mass differ. Response is only delay plus travel. Food allocations share ONE host budget. Paired external food is used first, then host sugar; P is credited only in the consumed external food. Fixed production efficiency with varying turnover changes implied maintenance, not independently calibrated metabolism; no individual feeding inference or near-zero-turnover maintenance claim. P incorporation is not fresh P import. Nutrient boundary account is separate; do not add it to food supplies. No efficacy or adequacy flag.",
+  "scenarios": {
+    "schema": "terluna.research.sky-reef-symbioses-scenarios/1",
+    "evidence": "Illustrative requirements inputs, not measurements, population predictions, design optima or upper bounds. The previous 1-10 g/m2 guard guess did not specify wet/dry mass; these NEW scenarios explicitly use live mass per footprint area.",
+    "footprint_m2": 10000.0,
+    "density_live_kg_per_footprint_m2": [
+      0.001,
+      0.01,
+      0.1
+    ],
+    "individual_live_kg": [
+      1e-05,
+      0.001,
+      1.0,
+      100.0
+    ],
+    "dry_fraction": 0.3,
+    "active_fraction": 0.2,
+    "turnover_per_year": [
+      1.0,
+      4.0,
+      12.0
+    ],
+    "carbon_assimilation": 0.8,
+    "population_production_efficiency": 0.3,
+    "host_food_c_kg_per_footprint_m2_year": 0.1,
+    "parameter_sources": {
+      "host_food_c_kg_per_footprint_m2_year": "Reference allocation to ALL tenants in aerophytes/run.py Traits.consumer_food_c_kg_m2_year; not a new allocation per guard guild.",
+      "animal_carbon_and_phosphorus": "stoichiometry.py CONSUMER_C_PER_DRY; midpoint of TENANT_P_G_KG and CONSUMER_P_ASSIMILATION. P tissue range is the earlier study's insect analogue, not a measurement or appropriate default for every size or taxon.",
+      "exterior_area": "Sum raft_module zone areas in results/sky_ecology.json; curved envelope only, excluding added fringe.",
+      "all_other_values": "Illustrative design guesses chosen to expose scaling. No associated defensive efficacy, allometry, lunar behaviour or life-cycle validation. Speeds are independent illustrative inputs, not inferred from individual mass."
+    },
+    "response": {
+      "nest_spacing_m": [
+        5.0,
+        20.0,
+        100.0
+      ],
+      "speed_m_s": [
+        0.02,
+        0.1,
+        2.0
+      ],
+      "activation_delay_s": 30.0,
+      "path_factor": 1.5,
+      "deadline_s": [
+        10.0,
+        60.0,
+        300.0,
+        900.0
+      ],
+      "boundary": "A local square grid on an idealised connected surface, nearest occupied nest, worst grid-cell point. Does not solve obstacle geometry, detection probability, guard availability, recruitment, occupancy, weather or fighting. A 2 m/s case is only a mobile comparison."
+    },
+    "mixed_guild_example": [
+      {
+        "name": "small_patrol",
+        "live_kg_per_footprint_m2": 0.007,
+        "turnover_per_year": 4.0,
+        "host_budget_share": 0.2,
+        "external_food_c_supply_kg_m2_year": 0.005,
+        "external_diet_p_supply_kg_m2_year": 7.95e-05
+      },
+      {
+        "name": "mobile_defender",
+        "live_kg_per_footprint_m2": 0.001,
+        "turnover_per_year": 4.0,
+        "host_budget_share": 0.03,
+        "external_food_c_supply_kg_m2_year": 0.00125,
+        "external_diet_p_supply_kg_m2_year": 1.9875e-05
+      },
+      {
+        "name": "large_nester",
+        "live_kg_per_footprint_m2": 0.002,
+        "turnover_per_year": 1.0,
+        "host_budget_share": 0.01,
+        "external_food_c_supply_kg_m2_year": 0.00075,
+        "external_diet_p_supply_kg_m2_year": 1.1925e-05
+      }
+    ],
+    "mixed_guild_boundary": "All external supplies are stipulated exclusive allocations of food crossing the reef boundary, not demonstrated available food. No resident prey is counted as external food. External C and P are paired at 0.0159 kg P/kg C, the illustrative insect tissue midpoint divided by animal C content; supply is consumed first up to carbon demand and remaining demand draws on host allocation. P credit scales with consumed food C, before P assimilation. Eating additional food purely for P and disposing surplus C is not modelled. The same generic tissue and efficiency assumptions are used for illustration only; a large nester needs its own metabolism/diet model. Fixed production efficiency with varying turnover changes implied maintenance; near-zero turnover requires independent metabolic calibration and this screen cannot diagnose individual feeding requirements. Host food is screened as P-free sugar; no protein, nitrogen or essential-nutrient adequacy is implied. These guilds share 24% of the one host food budget; the rest remains unallocated.",
+    "nutrient_import_example": {
+      "gross_external_food_p_kg_m2_year": 0.0004,
+      "deposition_share_on_reef": 0.5,
+      "retention_share": 0.5,
+      "initially_bioavailable_share": 0.4,
+      "exports_from_reef_p_kg_m2_year": 3e-05,
+      "boundary": "Separate illustrative whole-reef boundary account, not an additional supply silently credited to mixed guilds. Deposition share includes excretion, location and time spent on the reef. Exports are other outgoing reef P after deposition losses have already been counted; do not include those losses again. Internal recycling is excluded from new import."
+    }
+  },
+  "traits": {
+    "dry_fraction": 0.3,
+    "carbon_per_dry": 0.5,
+    "phosphorus_per_dry": 0.007949999999999999,
+    "phosphorus_assimilation": 0.65,
+    "carbon_assimilation": 0.8,
+    "population_production_efficiency": 0.3
+  },
+  "exterior_per_footprint": 3.6275987284684357,
+  "abundance": [
+    {
+      "live_kg_per_footprint_m2": 0.001,
+      "individual_live_kg": 1e-05,
+      "live_kg": 10.0,
+      "dry_kg": 3.0,
+      "individuals": 1000000.0,
+      "active_individuals": 200000.0,
+      "individuals_per_footprint_m2": 100.0,
+      "active_per_footprint_m2": 20.0,
+      "individuals_per_exterior_m2": 27.566444771089603,
+      "active_per_exterior_m2": 5.513288954217921
+    },
+    {
+      "live_kg_per_footprint_m2": 0.001,
+      "individual_live_kg": 0.001,
+      "live_kg": 10.0,
+      "dry_kg": 3.0,
+      "individuals": 10000.0,
+      "active_individuals": 2000.0,
+      "individuals_per_footprint_m2": 1.0,
+      "active_per_footprint_m2": 0.2,
+      "individuals_per_exterior_m2": 0.27566444771089604,
+      "active_per_exterior_m2": 0.05513288954217921
+    },
+    {
+      "live_kg_per_footprint_m2": 0.001,
+      "individual_live_kg": 1.0,
+      "live_kg": 10.0,
+      "dry_kg": 3.0,
+      "individuals": 10.0,
+      "active_individuals": 2.0,
+      "individuals_per_footprint_m2": 0.001,
+      "active_per_footprint_m2": 0.0002,
+      "individuals_per_exterior_m2": 0.00027566444771089603,
+      "active_per_exterior_m2": 5.513288954217921e-05
+    },
+    {
+      "live_kg_per_footprint_m2": 0.001,
+      "individual_live_kg": 100.0,
+      "live_kg": 10.0,
+      "dry_kg": 3.0,
+      "individuals": 0.1,
+      "active_individuals": 0.020000000000000004,
+      "individuals_per_footprint_m2": 1e-05,
+      "active_per_footprint_m2": 2.0000000000000003e-06,
+      "individuals_per_exterior_m2": 2.7566444771089605e-06,
+      "active_per_exterior_m2": 5.513288954217921e-07
+    },
+    {
+      "live_kg_per_footprint_m2": 0.01,
+      "individual_live_kg": 1e-05,
+      "live_kg": 100.0,
+      "dry_kg": 30.0,
+      "individuals": 9999999.999999998,
+      "active_individuals": 1999999.9999999998,
+      "individuals_per_footprint_m2": 999.9999999999999,
+      "active_per_footprint_m2": 200.0,
+      "individuals_per_exterior_m2": 275.664447710896,
+      "active_per_exterior_m2": 55.13288954217921
+    },
+    {
+      "live_kg_per_footprint_m2": 0.01,
+      "individual_live_kg": 0.001,
+      "live_kg": 100.0,
+      "dry_kg": 30.0,
+      "individuals": 100000.0,
+      "active_individuals": 20000.0,
+      "individuals_per_footprint_m2": 10.0,
+      "active_per_footprint_m2": 2.0,
+      "individuals_per_exterior_m2": 2.7566444771089604,
+      "active_per_exterior_m2": 0.5513288954217921
+    },
+    {
+      "live_kg_per_footprint_m2": 0.01,
+      "individual_live_kg": 1.0,
+      "live_kg": 100.0,
+      "dry_kg": 30.0,
+      "individuals": 100.0,
+      "active_individuals": 20.0,
+      "individuals_per_footprint_m2": 0.01,
+      "active_per_footprint_m2": 0.002,
+      "individuals_per_exterior_m2": 0.0027566444771089603,
+      "active_per_exterior_m2": 0.0005513288954217921
+    },
+    {
+      "live_kg_per_footprint_m2": 0.01,
+      "individual_live_kg": 100.0,
+      "live_kg": 100.0,
+      "dry_kg": 30.0,
+      "individuals": 1.0,
+      "active_individuals": 0.2,
+      "individuals_per_footprint_m2": 0.0001,
+      "active_per_footprint_m2": 2e-05,
+      "individuals_per_exterior_m2": 2.7566444771089604e-05,
+      "active_per_exterior_m2": 5.513288954217921e-06
+    },
+    {
+      "live_kg_per_footprint_m2": 0.1,
+      "individual_live_kg": 1e-05,
+      "live_kg": 1000.0,
+      "dry_kg": 300.0,
+      "individuals": 100000000.0,
+      "active_individuals": 20000000.0,
+      "individuals_per_footprint_m2": 10000.0,
+      "active_per_footprint_m2": 2000.0,
+      "individuals_per_exterior_m2": 2756.6444771089605,
+      "active_per_exterior_m2": 551.328895421792
+    },
+    {
+      "live_kg_per_footprint_m2": 0.1,
+      "individual_live_kg": 0.001,
+      "live_kg": 1000.0,
+      "dry_kg": 300.0,
+      "individuals": 1000000.0,
+      "active_individuals": 200000.0,
+      "individuals_per_footprint_m2": 100.0,
+      "active_per_footprint_m2": 20.0,
+      "individuals_per_exterior_m2": 27.566444771089603,
+      "active_per_exterior_m2": 5.513288954217921
+    },
+    {
+      "live_kg_per_footprint_m2": 0.1,
+      "individual_live_kg": 1.0,
+      "live_kg": 1000.0,
+      "dry_kg": 300.0,
+      "individuals": 1000.0,
+      "active_individuals": 200.0,
+      "individuals_per_footprint_m2": 0.1,
+      "active_per_footprint_m2": 0.020000000000000004,
+      "individuals_per_exterior_m2": 0.027566444771089604,
+      "active_per_exterior_m2": 0.0055132889542179216
+    },
+    {
+      "live_kg_per_footprint_m2": 0.1,
+      "individual_live_kg": 100.0,
+      "live_kg": 1000.0,
+      "dry_kg": 300.0,
+      "individuals": 10.0,
+      "active_individuals": 2.0,
+      "individuals_per_footprint_m2": 0.001,
+      "active_per_footprint_m2": 0.0002,
+      "individuals_per_exterior_m2": 0.00027566444771089603,
+      "active_per_exterior_m2": 5.513288954217921e-05
+    }
+  ],
+  "annual_requirements": [
+    {
+      "live_kg_per_footprint_m2": 0.001,
+      "turnover_per_year": 1.0,
+      "replacement_dry_kg_m2_year": 0.0003,
+      "replacement_c_kg_m2_year": 0.00015,
+      "replacement_p_kg_m2_year": 2.3849999999999996e-06,
+      "food_c_required_kg_m2_year": 0.0006249999999999999,
+      "unassimilated_c_kg_m2_year": 0.00012499999999999995,
+      "respiratory_c_kg_m2_year": 0.00034999999999999994,
+      "dietary_p_required_kg_m2_year": 3.6692307692307687e-06,
+      "fraction_of_whole_host_food_c_budget": 0.006249999999999999,
+      "sugar_only_p_incorporation_shortfall_kg_m2_year": 2.3849999999999996e-06
+    },
+    {
+      "live_kg_per_footprint_m2": 0.001,
+      "turnover_per_year": 4.0,
+      "replacement_dry_kg_m2_year": 0.0012,
+      "replacement_c_kg_m2_year": 0.0006,
+      "replacement_p_kg_m2_year": 9.539999999999998e-06,
+      "food_c_required_kg_m2_year": 0.0024999999999999996,
+      "unassimilated_c_kg_m2_year": 0.0004999999999999998,
+      "respiratory_c_kg_m2_year": 0.0013999999999999998,
+      "dietary_p_required_kg_m2_year": 1.4676923076923075e-05,
+      "fraction_of_whole_host_food_c_budget": 0.024999999999999994,
+      "sugar_only_p_incorporation_shortfall_kg_m2_year": 9.539999999999998e-06
+    },
+    {
+      "live_kg_per_footprint_m2": 0.001,
+      "turnover_per_year": 12.0,
+      "replacement_dry_kg_m2_year": 0.0036,
+      "replacement_c_kg_m2_year": 0.0018,
+      "replacement_p_kg_m2_year": 2.8619999999999994e-05,
+      "food_c_required_kg_m2_year": 0.0075,
+      "unassimilated_c_kg_m2_year": 0.0014999999999999996,
+      "respiratory_c_kg_m2_year": 0.004200000000000001,
+      "dietary_p_required_kg_m2_year": 4.403076923076922e-05,
+      "fraction_of_whole_host_food_c_budget": 0.075,
+      "sugar_only_p_incorporation_shortfall_kg_m2_year": 2.8619999999999994e-05
+    },
+    {
+      "live_kg_per_footprint_m2": 0.01,
+      "turnover_per_year": 1.0,
+      "replacement_dry_kg_m2_year": 0.003,
+      "replacement_c_kg_m2_year": 0.0015,
+      "replacement_p_kg_m2_year": 2.3849999999999997e-05,
+      "food_c_required_kg_m2_year": 0.00625,
+      "unassimilated_c_kg_m2_year": 0.0012499999999999998,
+      "respiratory_c_kg_m2_year": 0.003500000000000001,
+      "dietary_p_required_kg_m2_year": 3.669230769230769e-05,
+      "fraction_of_whole_host_food_c_budget": 0.0625,
+      "sugar_only_p_incorporation_shortfall_kg_m2_year": 2.3849999999999997e-05
+    },
+    {
+      "live_kg_per_footprint_m2": 0.01,
+      "turnover_per_year": 4.0,
+      "replacement_dry_kg_m2_year": 0.012,
+      "replacement_c_kg_m2_year": 0.006,
+      "replacement_p_kg_m2_year": 9.539999999999999e-05,
+      "food_c_required_kg_m2_year": 0.025,
+      "unassimilated_c_kg_m2_year": 0.004999999999999999,
+      "respiratory_c_kg_m2_year": 0.014000000000000004,
+      "dietary_p_required_kg_m2_year": 0.00014676923076923075,
+      "fraction_of_whole_host_food_c_budget": 0.25,
+      "sugar_only_p_incorporation_shortfall_kg_m2_year": 9.539999999999999e-05
+    },
+    {
+      "live_kg_per_footprint_m2": 0.01,
+      "turnover_per_year": 12.0,
+      "replacement_dry_kg_m2_year": 0.036000000000000004,
+      "replacement_c_kg_m2_year": 0.018000000000000002,
+      "replacement_p_kg_m2_year": 0.00028619999999999996,
+      "food_c_required_kg_m2_year": 0.07500000000000001,
+      "unassimilated_c_kg_m2_year": 0.015,
+      "respiratory_c_kg_m2_year": 0.04200000000000001,
+      "dietary_p_required_kg_m2_year": 0.0004403076923076922,
+      "fraction_of_whole_host_food_c_budget": 0.7500000000000001,
+      "sugar_only_p_incorporation_shortfall_kg_m2_year": 0.00028619999999999996
+    },
+    {
+      "live_kg_per_footprint_m2": 0.1,
+      "turnover_per_year": 1.0,
+      "replacement_dry_kg_m2_year": 0.03,
+      "replacement_c_kg_m2_year": 0.015,
+      "replacement_p_kg_m2_year": 0.00023849999999999994,
+      "food_c_required_kg_m2_year": 0.0625,
+      "unassimilated_c_kg_m2_year": 0.012499999999999997,
+      "respiratory_c_kg_m2_year": 0.035,
+      "dietary_p_required_kg_m2_year": 0.0003669230769230768,
+      "fraction_of_whole_host_food_c_budget": 0.625,
+      "sugar_only_p_incorporation_shortfall_kg_m2_year": 0.00023849999999999994
+    },
+    {
+      "live_kg_per_footprint_m2": 0.1,
+      "turnover_per_year": 4.0,
+      "replacement_dry_kg_m2_year": 0.12,
+      "replacement_c_kg_m2_year": 0.06,
+      "replacement_p_kg_m2_year": 0.0009539999999999998,
+      "food_c_required_kg_m2_year": 0.25,
+      "unassimilated_c_kg_m2_year": 0.04999999999999999,
+      "respiratory_c_kg_m2_year": 0.14,
+      "dietary_p_required_kg_m2_year": 0.0014676923076923072,
+      "fraction_of_whole_host_food_c_budget": 2.5,
+      "sugar_only_p_incorporation_shortfall_kg_m2_year": 0.0009539999999999998
+    },
+    {
+      "live_kg_per_footprint_m2": 0.1,
+      "turnover_per_year": 12.0,
+      "replacement_dry_kg_m2_year": 0.36,
+      "replacement_c_kg_m2_year": 0.18,
+      "replacement_p_kg_m2_year": 0.0028619999999999995,
+      "food_c_required_kg_m2_year": 0.75,
+      "unassimilated_c_kg_m2_year": 0.14999999999999997,
+      "respiratory_c_kg_m2_year": 0.4200000000000001,
+      "dietary_p_required_kg_m2_year": 0.004403076923076922,
+      "fraction_of_whole_host_food_c_budget": 7.5,
+      "sugar_only_p_incorporation_shortfall_kg_m2_year": 0.0028619999999999995
+    }
+  ],
+  "response": [
+    {
+      "spacing_m": 5.0,
+      "speed_m_s": 0.02,
+      "response_s": 295.1650429449553
+    },
+    {
+      "spacing_m": 5.0,
+      "speed_m_s": 0.1,
+      "response_s": 83.03300858899105
+    },
+    {
+      "spacing_m": 5.0,
+      "speed_m_s": 2.0,
+      "response_s": 32.65165042944955
+    },
+    {
+      "spacing_m": 20.0,
+      "speed_m_s": 0.02,
+      "response_s": 1090.6601717798212
+    },
+    {
+      "spacing_m": 20.0,
+      "speed_m_s": 0.1,
+      "response_s": 242.1320343559642
+    },
+    {
+      "spacing_m": 20.0,
+      "speed_m_s": 2.0,
+      "response_s": 40.60660171779821
+    },
+    {
+      "spacing_m": 100.0,
+      "speed_m_s": 0.02,
+      "response_s": 5333.300858899106
+    },
+    {
+      "spacing_m": 100.0,
+      "speed_m_s": 0.1,
+      "response_s": 1090.6601717798212
+    },
+    {
+      "spacing_m": 100.0,
+      "speed_m_s": 2.0,
+      "response_s": 83.03300858899107
+    }
+  ],
+  "deadline_spacing": [
+    {
+      "deadline_s": 10.0,
+      "speed_m_s": 0.02,
+      "maximum_spacing_m": null
+    },
+    {
+      "deadline_s": 10.0,
+      "speed_m_s": 0.1,
+      "maximum_spacing_m": null
+    },
+    {
+      "deadline_s": 10.0,
+      "speed_m_s": 2.0,
+      "maximum_spacing_m": null
+    },
+    {
+      "deadline_s": 60.0,
+      "speed_m_s": 0.02,
+      "maximum_spacing_m": 0.565685424949238
+    },
+    {
+      "deadline_s": 60.0,
+      "speed_m_s": 0.1,
+      "maximum_spacing_m": 2.8284271247461903
+    },
+    {
+      "deadline_s": 60.0,
+      "speed_m_s": 2.0,
+      "maximum_spacing_m": 56.568542494923804
+    },
+    {
+      "deadline_s": 300.0,
+      "speed_m_s": 0.02,
+      "maximum_spacing_m": 5.091168824543143
+    },
+    {
+      "deadline_s": 300.0,
+      "speed_m_s": 0.1,
+      "maximum_spacing_m": 25.455844122715714
+    },
+    {
+      "deadline_s": 300.0,
+      "speed_m_s": 2.0,
+      "maximum_spacing_m": 509.11688245431424
+    },
+    {
+      "deadline_s": 900.0,
+      "speed_m_s": 0.02,
+      "maximum_spacing_m": 16.404877323527906
+    },
+    {
+      "deadline_s": 900.0,
+      "speed_m_s": 0.1,
+      "maximum_spacing_m": 82.02438661763952
+    },
+    {
+      "deadline_s": 900.0,
+      "speed_m_s": 2.0,
+      "maximum_spacing_m": 1640.4877323527905
+    }
+  ],
+  "mixed_guild_budget": {
+    "guilds": [
+      {
+        "live_kg_per_footprint_m2": 0.007,
+        "turnover_per_year": 4.0,
+        "replacement_dry_kg_m2_year": 0.0084,
+        "replacement_c_kg_m2_year": 0.0042,
+        "replacement_p_kg_m2_year": 6.677999999999998e-05,
+        "food_c_required_kg_m2_year": 0.017499999999999998,
+        "unassimilated_c_kg_m2_year": 0.0034999999999999988,
+        "respiratory_c_kg_m2_year": 0.0098,
+        "dietary_p_required_kg_m2_year": 0.0001027384615384615,
+        "name": "small_patrol",
+        "host_c_allocation_kg_m2_year": 0.020000000000000004,
+        "host_c_used_kg_m2_year": 0.012499999999999997,
+        "host_c_unused_allocation_kg_m2_year": 0.007500000000000007,
+        "external_c_supply_kg_m2_year": 0.005,
+        "external_c_used_kg_m2_year": 0.005,
+        "external_c_unused_supply_kg_m2_year": 0.0,
+        "external_c_required_for_p_kg_m2_year": 0.0064615384615384595,
+        "food_c_shortfall_kg_m2_year": 8.673617379884035e-19,
+        "external_diet_p_supply_kg_m2_year": 7.95e-05,
+        "external_diet_p_consumed_kg_m2_year": 7.95e-05,
+        "external_diet_p_unconsumed_kg_m2_year": 0.0,
+        "assimilable_p_supply_kg_m2_year": 5.1674999999999996e-05,
+        "unassimilated_consumed_p_kg_m2_year": 2.7825e-05,
+        "incorporation_p_shortfall_kg_m2_year": 1.5104999999999985e-05
+      },
+      {
+        "live_kg_per_footprint_m2": 0.001,
+        "turnover_per_year": 4.0,
+        "replacement_dry_kg_m2_year": 0.0012,
+        "replacement_c_kg_m2_year": 0.0006,
+        "replacement_p_kg_m2_year": 9.539999999999998e-06,
+        "food_c_required_kg_m2_year": 0.0024999999999999996,
+        "unassimilated_c_kg_m2_year": 0.0004999999999999998,
+        "respiratory_c_kg_m2_year": 0.0013999999999999998,
+        "dietary_p_required_kg_m2_year": 1.4676923076923075e-05,
+        "name": "mobile_defender",
+        "host_c_allocation_kg_m2_year": 0.003,
+        "host_c_used_kg_m2_year": 0.0012499999999999996,
+        "host_c_unused_allocation_kg_m2_year": 0.0017500000000000005,
+        "external_c_supply_kg_m2_year": 0.00125,
+        "external_c_used_kg_m2_year": 0.00125,
+        "external_c_unused_supply_kg_m2_year": 0.0,
+        "external_c_required_for_p_kg_m2_year": 0.000923076923076923,
+        "food_c_shortfall_kg_m2_year": 0.0,
+        "external_diet_p_supply_kg_m2_year": 1.9875e-05,
+        "external_diet_p_consumed_kg_m2_year": 1.9875e-05,
+        "external_diet_p_unconsumed_kg_m2_year": 0.0,
+        "assimilable_p_supply_kg_m2_year": 1.2918749999999999e-05,
+        "unassimilated_consumed_p_kg_m2_year": 6.95625e-06,
+        "incorporation_p_shortfall_kg_m2_year": 0.0
+      },
+      {
+        "live_kg_per_footprint_m2": 0.002,
+        "turnover_per_year": 1.0,
+        "replacement_dry_kg_m2_year": 0.0006,
+        "replacement_c_kg_m2_year": 0.0003,
+        "replacement_p_kg_m2_year": 4.769999999999999e-06,
+        "food_c_required_kg_m2_year": 0.0012499999999999998,
+        "unassimilated_c_kg_m2_year": 0.0002499999999999999,
+        "respiratory_c_kg_m2_year": 0.0006999999999999999,
+        "dietary_p_required_kg_m2_year": 7.338461538461537e-06,
+        "name": "large_nester",
+        "host_c_allocation_kg_m2_year": 0.001,
+        "host_c_used_kg_m2_year": 0.0004999999999999998,
+        "host_c_unused_allocation_kg_m2_year": 0.0005000000000000002,
+        "external_c_supply_kg_m2_year": 0.00075,
+        "external_c_used_kg_m2_year": 0.00075,
+        "external_c_unused_supply_kg_m2_year": 0.0,
+        "external_c_required_for_p_kg_m2_year": 0.00046153846153846153,
+        "food_c_shortfall_kg_m2_year": 0.0,
+        "external_diet_p_supply_kg_m2_year": 1.1925e-05,
+        "external_diet_p_consumed_kg_m2_year": 1.1925e-05,
+        "external_diet_p_unconsumed_kg_m2_year": 0.0,
+        "assimilable_p_supply_kg_m2_year": 7.75125e-06,
+        "unassimilated_consumed_p_kg_m2_year": 4.1737500000000005e-06,
+        "incorporation_p_shortfall_kg_m2_year": 0.0
+      }
+    ],
+    "host_food_c_kg_m2_year": 0.1,
+    "host_c_allocated_kg_m2_year": 0.024000000000000004,
+    "host_c_unallocated_kg_m2_year": 0.07600000000000001,
+    "host_c_used_kg_m2_year": 0.014249999999999997,
+    "external_c_used_kg_m2_year": 0.007
+  },
+  "nutrient_import": {
+    "gross_external_food_p_kg_m2_year": 0.0004,
+    "deposited_p_kg_m2_year": 0.0002,
+    "deposition_loss_p_kg_m2_year": 0.0001,
+    "retained_import_p_kg_m2_year": 0.0001,
+    "initially_bioavailable_import_p_kg_m2_year": 4e-05,
+    "exports_p_kg_m2_year": 3e-05,
+    "net_total_p_import_kg_m2_year": 7.000000000000001e-05
+  }
+}

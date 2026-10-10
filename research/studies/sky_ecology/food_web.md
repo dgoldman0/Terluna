@@ -80,6 +80,12 @@ C. Earth's terrestrial arthropods hold about 200 Mt C and its wild birds about 2
 aerophytes' own green tissue at 1 kg dry/m² over 1% of the Moon is 0.17 Gt C (*derived*), so the web on top of it is
 lean, as a forest's is.
 
+The phosphorus-limited consumer ledger reports the same tissue production as the food-web totals. Assimilated
+carbon that the carbon-only efficiency would have put into tissue remains an explicit **unallocated assimilate**
+pool after the phosphorus limit. Its fate could involve changed respiration, excretion, storage or intake; this
+screen does not decide that physiology or credit the pool to predators or litter. Accounting closure therefore
+includes that unresolved pool and is not a complete physiological model.
+
 ## How many great flyers the sky feeds
 
 **A lunar albatross of 1.7 t burns 185 MJ a day, and a kilometre of its flight costs 0.45–0.93 MJ, a sixth of the same

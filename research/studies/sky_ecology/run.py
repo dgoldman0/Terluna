@@ -1,6 +1,6 @@
 """How aerophytes join the aerial and global ecosystem: the food web, their tenants and phosphorus.
 
-    OPENBLAS_NUM_THREADS=1 python -m research.studies.sky_ecology.run    # results/sky_ecology.json, a few seconds
+    OPENBLAS_NUM_THREADS=1 python -m research.studies.sky_ecology.run    # ignored research/runs/sky_ecology/
 
 One coupled screen in three components (food_web, tenants, phosphorus) on committed products:
 - the coupled aerophyte model and its product (research/studies/aerophytes), whose code is called live
@@ -14,6 +14,7 @@ One coupled screen in three components (food_web, tenants, phosphorus) on commit
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import io
 import json
@@ -322,10 +323,13 @@ def results():
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=ROOT/'research/runs/sky_ecology/sky_ecology.json')
+    args = parser.parse_args()
     product = results()
-    OUT.parent.mkdir(exist_ok=True)
-    OUT.write_text(json.dumps(product, indent=1, allow_nan=False)+'\n')
-    print(OUT.relative_to(ROOT))
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(product, indent=1, allow_nan=False)+'\n')
+    print(args.output)
 
 
 if __name__ == '__main__':
