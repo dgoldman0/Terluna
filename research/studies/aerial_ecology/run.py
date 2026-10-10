@@ -86,7 +86,7 @@ def settling(diameter_um):
                 note='Stokes-Cunningham screen; hydrated droplets and rain have other sizes and loss rates.')
 
 
-def floater_mass(lift_kg_m3, dry_kg_m2, water_fraction=0.9, skin_kg_m2=1, usable_fraction=0.5):
+def aerophyte_mass(lift_kg_m3, dry_kg_m2, water_fraction=0.9, skin_kg_m2=1, usable_fraction=0.5):
     """Sphere projected area pi R²; skin covers 4 pi R².
 
     Only usable_fraction of gross lift is allocated to skin and wet biomass;
@@ -164,10 +164,10 @@ def run():
         settling=[settling(d) for d in (1., 10., 25.)],
         haze=[dict(concentration_mg_m3=c, depth_m=h, diameter_um=d, tau=optical_depth(c, h, d))
               for c in (0.01, 0.1, 1.) for h in (100., 1000.) for d in (1., 10., 100.)],
-        floater_mass=[dict(height_km=a['height_km'], dry_kg_m2=b, water_fraction=w,
-                           **floater_mass(a['lift_hydrogen_kg_m3'], b, w))
-                      for a in air if a['height_km'] in (10, 20, 40)
-                      for b in (1., 10.) for w in (0.8, 0.9, 0.95)],
+        aerophyte_mass=[dict(height_km=a['height_km'], dry_kg_m2=b, water_fraction=w,
+                             **aerophyte_mass(a['lift_hydrogen_kg_m3'], b, w))
+                        for a in air if a['height_km'] in (10, 20, 40)
+                        for b in (1., 10.) for w in (0.8, 0.9, 0.95)],
         production=[dict(coverage=c, npp_g_c_m2_year=p, dry_kg_m2=b, **production(c, p, b))
                     for c in (0.0001, 0.001, 0.01) for p in (500., 1000., 2000.) for b in (1., 10.)],
         central=central,
@@ -179,7 +179,7 @@ def run():
             for t in (0.03, 0.06, 0.15)],
         biodiversity=dict(species_count=None, reason='Energy and habitat budgets do not determine species richness.',
                           candidate_guilds=['cloud phototrophs', 'C1 heterotrophs', 'droplet grazers',
-                          'photosynthetic floaters', 'collectors', 'grazers', 'predators', 'decomposers']),
+                          'photosynthetic aerophytes', 'collectors', 'grazers', 'predators', 'decomposers']),
     )
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, indent=2, allow_nan=False) + '\n')

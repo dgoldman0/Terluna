@@ -3,10 +3,11 @@
     python -m biosphere.ecology.taxa
     # -> biosphere/ecology/results/taxa.json
 
-The author asked on 9 October 2026 to rename the floaters and to begin a taxonomic system for the biosphere
+The author asked on 9 October 2026 to rename the aerophytes and to begin a taxonomic system for the biosphere
 (research/decisions.md). This module holds the system's vocabularies, an Earth backbone the designed groups hang
-from, the register of designed groups, design modules and communities drawn from the project's studies, and the
-candidate names for the floaters. taxonomy.md explains it; taxonomy_sources.json records what was read.
+from, the register of designed groups, design modules and communities drawn from the project's studies, the common
+names the author chose for the aerophytes on 10 October 2026 and the candidates for their scientific names.
+taxonomy.md explains it; taxonomy_sources.json records what was read.
 
 Everything registered here is a design. Each entry carries the project's own verdict on it, the Earth lineages it
 draws on as reference points, its proposed placement by descent (an anchor in the backbone and a degree of design)
@@ -48,11 +49,11 @@ STATE = 'biosphere/ecology/state.md'
 PEOPLE = 'biosphere/ecology/people_and_land.md'
 AERIAL = 'research/studies/aerial_ecology/README.md'
 AERIAL_SRC = 'research/studies/aerial_ecology/sources.json'
-FLOAT = 'research/studies/floater_viability/README.md'
-FLOAT_BIO = 'research/studies/floater_viability/biology.md'
-FLOAT_SAIL = 'research/studies/floater_viability/sailing.md'
-FLOAT_GAS = 'research/studies/floater_viability/gas_biology.md'
-FLOAT_GROW = 'research/studies/floater_viability/growth.md'
+AEROPHYTES = 'research/studies/aerophytes/README.md'
+AEROPHYTES_BIO = 'research/studies/aerophytes/biology.md'
+AEROPHYTES_SAIL = 'research/studies/aerophytes/sailing.md'
+AEROPHYTES_GAS = 'research/studies/aerophytes/gas_biology.md'
+AEROPHYTES_GROW = 'research/studies/aerophytes/growth.md'
 MEGA = 'research/studies/megaforest_wind/README.md'
 PATCH = 'research/studies/forest_patch/README.md'
 SEA = 'research/studies/sea_appearance/README.md'
@@ -148,7 +149,7 @@ FORMS = {
                    'flight'),
     'film': dict(cls='aerial', definition='Sparse microbial or algal films on particles, droplets or platforms in '
                  'the high air'),
-    'tenant': dict(cls='aerial', definition='Organisms living on or within floaters and other aerial hosts, in their '
+    'tenant': dict(cls='aerial', definition='Organisms living on or within aerophytes and other aerial hosts, in their '
                    'retained-water pockets'),
     'tree': dict(cls='plant', definition='Woody plants whose living crowns stand in the air through the night '
                  '(Raunkiaer\'s phanerophytes)'),
@@ -278,12 +279,14 @@ CHOICES = (
                        'change after release is descent',
                   'b': 'Founding ends with the 500-year build; later releases are descendants'},
          recommendation='a'),
-    dict(id='O6', question='Giants and lesser floaters',
+    dict(id='O6', question='Giants and lesser aerophytes',
          options={'a': 'One lineage, the giants a form its oldest members reach',
                   'b': 'Two sister lineages, the giants designed for indeterminate growth'},
          recommendation=None),
-    dict(id='O7', question='The floaters\' new name', options={c: c for c in ('N1', 'N2', 'N3', 'N4', 'N5', 'N6')},
-         recommendation=None),
+    dict(id='O7', question='The aerophytes\' scientific name',
+         options={c: c for c in ('N1', 'N2', 'N3', 'N4', 'N5', 'N6')}, recommendation=None,
+         note='The author chose the common names on 10 October 2026: aerophytes, and sky reefs for the colony giants. '
+              'N1-N6 remain candidates for the scientific names, a layer the author said cloud roots could serve.'),
 )
 NAMING_RULES = (
     dict(rule='Names are treated as Latin, whatever their origin', sources=['icn_madrid_2025:Principle V',
@@ -501,8 +504,8 @@ MODULES = (
                            ['liggan_martone_2020'])],
            tests=['one assembled wet barrier: hydrogen, oxygen and nitrogen permeation, sustained load and creep, seams, '
                   'tear arrest and healing, with and without guanine-like plates'],
-           sources=[src(FLOAT, 'The reference organism; What would decide it next'),
-                    src(FLOAT_GAS, 'Guanine plates in the bladder wall; Goldbeater\'s skin')]),
+           sources=[src(AEROPHYTES, 'The reference organism; What would decide it next'),
+                    src(AEROPHYTES_GAS, 'Guanine plates in the bladder wall; Goldbeater\'s skin')]),
     module('M19', 'hydrogen organ or symbiont', 'Hydrogen made by a dedicated organ or symbiont, from light or by dark '
            'fermentation, with its light, substrates and oxygen management counted', status='hypothesis',
            basis='idea',
@@ -510,22 +513,22 @@ MODULES = (
                        ref('Clostridium', 'dark fermentation yields about 2.1 mol H2 per mol glucose'),
                        ref('Physalia physalis', 'secretes its float gas from a dedicated gas gland'),
                        ref('teleost swim bladders', 'a gas gland and rete mirabile secrete gas against high pressure')],
-           sources=[src(FLOAT_BIO, 'Hydrogen from light and from sugar'),
-                    src(FLOAT_GAS, 'The swim bladder\'s gas gland; The Portuguese man-of-war\'s gas gland')]),
+           sources=[src(AEROPHYTES_BIO, 'Hydrogen from light and from sugar'),
+                    src(AEROPHYTES_GAS, 'The swim bladder\'s gas gland; The Portuguese man-of-war\'s gas gland')]),
     module('M20', 'water from the air', 'Water drawn from rain, cloud and the humid air through sorbent skins and '
            'fringes, in preference to descending to drink', status='hypothesis', basis='direction',
-           sources=[src(DEC, 'Sky giants and the biosphere\'s names'), src(FLOAT, 'The limits, in brief')]),
+           sources=[src(DEC, 'Sky giants and the biosphere\'s names'), src(AEROPHYTES, 'The limits, in brief')]),
     module('M21', 'attached buds', 'Daughters grown as attached buds, fed carbon, nutrients and gas by the parent '
            'until they can carry themselves', status='hypothesis', basis='idea',
-           sources=[src(FLOAT_BIO, 'Buds, offspring and replacement')]),
+           sources=[src(AEROPHYTES_BIO, 'Buds, offspring and replacement')]),
     module('M27', 'tethered sails', 'A wing hung on a tether in another layer of air, or a drogue in the sea, that '
            'sails a buoyant body across the wind', status='hypothesis', basis='idea',
            references=[ref('Physalia physalis', 'sails up to 50-55 degrees from downwind with its tentacles as the sea '
                            'anchor', ['iosilevskii_weihs_2009'])],
-           sources=[src(FLOAT_SAIL, 'Sailing between two layers; Sailors between air and water')]),
+           sources=[src(AEROPHYTES_SAIL, 'Sailing between two layers; Sailors between air and water')]),
     module('M28', 'compartmented gas', 'Gas held in many small wet compartments or modules, so that a tear or a '
            'lightning strike empties or burns one at a time', status='hypothesis', basis='idea',
-           sources=[src(FLOAT, 'The limits, in brief')]),
+           sources=[src(AEROPHYTES, 'The limits, in brief')]),
     module('M22', 'spectral tuning', 'Paler upper leaves, photosynthesis into the far red and clumped foliage; they add '
            '3%, 6% and 3% on the Moon, where the diffuse sky already does most of what they do', status='set_aside',
            basis='selected', sources=[src(LCE, 'A2; Set aside')]),
@@ -549,9 +552,9 @@ MODULES = tuple(sorted(MODULES, key=lambda m: m['id']))
 # ---- Designed groups -------------------------------------------------------------------------------------------
 G = []
 # The sky
-G.append(group('G01', 'floaters', 'Large photosynthetic aerial organisms with gas-filled, lobed bodies: a light, mostly '
-    'inert and replaceable envelope, distributed photosynthetic tissue and small protected pockets of retained water '
-    'that hold their own small communities', anchor='Eukaryota', degree='lineage',
+G.append(group('G01', 'aerophytes', 'Large photosynthetic aerial organisms with gas-filled, lobed bodies: a light, '
+    'mostly inert and replaceable envelope, distributed photosynthetic tissue and small protected pockets of retained '
+    'water that hold their own small communities', anchor='Eukaryota', degree='lineage',
     chassis=['brown algae (Phaeophyceae), whose kelps inflate their own floats',
              'green algae (Chlorophyta), for photosynthetic hydrogen'],
     references=[ref('Physalia physalis', 'a colony of polyps with a gas-filled, sail-like float and trailing '
@@ -571,26 +574,30 @@ G.append(group('G01', 'floaters', 'Large photosynthetic aerial organisms with ga
     basis='direction',
     tests=['one assembled wet gas barrier', 'a trajectory of water, carbon, gas and trim along a sailing path through '
            'storms, twilight and humid layers'],
-    notes='The working name stays "floaters" until the author chooses among N1-N6; Sagan and Salpeter (1976) used the '
-          'word for buoyant organisms of Jupiter\'s air. Aloft the mean wind blows east, so floaters ride it to shorten '
-          'their nights, linger in the evening flow near the ground or sail north and south across the shear. Migrating '
-          'flyers roost on them and bring phosphorus up.',
+    notes='The author chose the common name aerophytes on 10 October 2026; the scientific name waits for the author '
+          'among N1-N6. Until then the working name was Sagan & Salpeter\'s "floaters" (1976), their word for buoyant '
+          'organisms of Jupiter\'s air. Aloft the mean wind blows east, so aerophytes ride it to shorten their nights, '
+          'linger in the evening flow near the ground or sail north and south across the shear. Migrating flyers roost '
+          'on them and bring phosphorus up.',
     name_candidates=['N1', 'N2', 'N3', 'N4', 'N5', 'N6'],
-    sources=[src(FLOAT, 'What a giant looks like; The limits, in brief; Twilight and the Sun'),
-             src(FLOAT_BIO, 'all sections'), src(FLOAT_SAIL, 'Riding the eastward wind; Sailing between two layers'),
-             src(FLOAT_GAS, 'Siphonophores; The swim bladder\'s gas gland'),
+    sources=[src(AEROPHYTES, 'What a giant looks like; The limits, in brief; Twilight and the Sun'),
+             src(AEROPHYTES_BIO, 'all sections'),
+             src(AEROPHYTES_SAIL, 'Riding the eastward wind; Sailing between two layers'),
+             src(AEROPHYTES_GAS, 'Siphonophores; The swim bladder\'s gas gland'),
              src(AERIAL, 'Large photosynthetic organisms and their wet mass'),
-             src(DEC, 'Cross-domain ecology follow-up; Floater light-history correction; Sky giants')]))
-G.append(group('G02', 'lesser floaters', 'Floaters of the coupled study\'s reference organism: spheres of 40-150 m at '
-    'about 10 km, the size the giants grow from; the young can grow to 40-60 m in megaforest crowns, fed by host sap',
-    parent='G01', anchor='Eukaryota', degree='lineage', chassis=['as the floaters'], references=[], form='drifter',
+             src(DEC, 'Cross-domain ecology follow-up; Aerophyte light-history correction; Sky giants')]))
+G.append(group('G02', 'lesser aerophytes', 'Aerophytes of the coupled study\'s reference organism: spheres of '
+    '40-150 m at about 10 km, the size the giants grow from; the young can grow to 40-60 m in megaforest crowns, '
+    'fed by host sap',
+    parent='G01', anchor='Eukaryota', degree='lineage', chassis=['as the aerophytes'], references=[], form='drifter',
     form_candidates=['sailor'], settings=['low_sky', 'canopy'], realm='sky', guilds=['producer'],
     night=['twilight', 'terminator_following', 'store', 'idle'], clock=['undetermined'], status='hypothesis',
-    basis='idea', sources=[src(FLOAT, 'The reference organism'), src(FLOAT_GROW, 'The canopy nursery')]))
-G.append(group('G03', 'giant floaters', 'Floaters that keep growing for centuries, like the oldest trees: colonies of '
-    'wet modules 50-150 m across on a raft one or two kilometres wide, which regrow what storms take, or round bodies '
-    'of hundreds of metres in eight to fifty compartments', parent='G01', anchor='Eukaryota', degree='lineage',
-    chassis=['as the floaters'],
+    basis='idea', sources=[src(AEROPHYTES, 'The reference organism'), src(AEROPHYTES_GROW, 'The canopy nursery')]))
+G.append(group('G03', 'giant aerophytes', 'Aerophytes that keep growing for centuries, like the oldest trees: sky '
+    'reefs, colonies of wet modules 60-150 m across on a raft one or two kilometres wide, which regrow what storms '
+    'take, or round bodies of hundreds of metres to a few kilometres in eight to over a hundred compartments', parent='G01', anchor='Eukaryota',
+    degree='lineage',
+    chassis=['as the aerophytes'],
     references=[ref('Pinus longaeva', 'the oldest known living eukaryote, 4,770 years old in 2005', ['flanary_2005']),
                 ref('trees of 403 species', 'mass growth rate rises continuously with size as leaf area outpaces '
                     'the fall in productivity per leaf area', ['stephenson_2014']),
@@ -599,9 +606,12 @@ G.append(group('G03', 'giant floaters', 'Floaters that keep growing for centurie
     night=['twilight', 'terminator_following', 'store', 'idle'], clock=['undetermined'], status='hypothesis',
     basis='direction', tests=['fittings, seams, gusts and damage, then water and storms'],
     notes='A giant\'s age is the time its own light takes to make its gas: decades to more than a millennium from a '
-          '40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time.',
-    sources=[src(DEC, 'Sky giants and the biosphere\'s names'), src(FLOAT, 'What a giant looks like; The limits, in '
-             'brief'), src(FLOAT_GAS, 'Siphonophores: colonies of specialised parts')]))
+          '40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time. The '
+          'colony form carries the common name sky reefs, the author\'s choice of 10 October 2026; the round form has '
+          'no common name yet.',
+    sources=[src(DEC, 'Sky giants and the biosphere\'s names'),
+             src(AEROPHYTES, 'What a giant looks like; The limits, in brief'),
+             src(AEROPHYTES_GAS, 'Siphonophores: colonies of specialised parts')]))
 G.append(group('G04', 'resident aeroplankton phototrophs', 'Cyanobacteria and algae that complete their lives aloft, '
     'in cloud water and in retained water', anchor='Life', degree='species',
     chassis=['cyanobacteria (Cyanobacteriota)', 'eukaryotic microalgae'],
@@ -629,7 +639,7 @@ G.append(group('G07', 'resident aeroplankton heterotrophs', 'Bacteria that grow 
     night=['undetermined'], clock=['undetermined'], status='hypothesis', basis='direction',
     sources=[src(AERIAL, 'What the evidence supports'), src(AERIAL_SRC), src(PEOPLE, 'item 3')]))
 G.append(group('G08', 'aerial collectors', 'Small animals that gather airborne pollen, spores and small organisms on '
-    'webs or filters, on substrates that take the loads: floaters and canopies', anchor='Araneae', degree='species',
+    'webs or filters, on substrates that take the loads: aerophytes and canopies', anchor='Araneae', degree='species',
     chassis=['spiders (Araneae)'],
     references=[ref('orb-weaving spiders', 'eat the pollen their webs catch'),
                 ref('ballooning spiders', 'rise on the charge of their silk in an electric field',
@@ -943,14 +953,14 @@ GROUPS = tuple(G)
 
 # ---- Communities -------------------------------------------------------------------------------------------------
 COMMUNITIES = (
-    community('C01', 'the sky archipelago', 'Floaters and the small communities in their retained-water pockets, '
+    community('C01', 'the sky archipelago', 'Aerophytes and the small communities in their retained-water pockets, '
               'drifting through the low sky, with the migrating flyers that roost on them',
               members=['G01', 'G02', 'G03', 'G04', 'G07', 'G08'],
               described=['microbes, algae, small grazers and decomposers in retained-water pockets',
                          'hydrogen-oxidising microbes lining the gas cells',
-                         'migrating flyers that roost on floaters and bring phosphorus up'],
+                         'migrating flyers that roost on aerophytes and bring phosphorus up'],
               settings=['low_sky', 'storm_layer'], realm='sky', status='hypothesis', basis='direction',
-              sources=[src(FLOAT, 'What a giant looks like; The limits, in brief'),
+              sources=[src(AEROPHYTES, 'What a giant looks like; The limits, in brief'),
                        src(AERIAL, 'The cycle and the community')]),
     community('C02', 'cloud-water aeroplankton', 'Resident phototrophs and heterotrophs of cloud and fog water, with '
               'the transient pollen, spores and small animals the air carries', members=['G04', 'G05', 'G06', 'G07'],
@@ -984,10 +994,10 @@ COMMUNITIES = (
     community('C09', 'farms of the day fruit', 'Farms of day-fruit crops and Earth crops on today\'s programs',
               members=['G18', 'G21', 'G22'], settings=['ground'], realm='land', status='carried_forward',
               scope='in_places', basis='selected', sources=[src(LCE, 'C1, D3, D5'), src(PEOPLE, 'item 11')]),
-    community('C10', 'megaforests', 'Forests of 100-500 m trees, whose crowns can nurse young floaters',
-              members=['G29', 'G02'], described=['young floaters of 40-60 m fed by host sap in the crowns'],
+    community('C10', 'megaforests', 'Forests of 100-500 m trees, whose crowns can nurse young aerophytes',
+              members=['G29', 'G02'], described=['young aerophytes of 40-60 m fed by host sap in the crowns'],
               settings=['canopy', 'ground'], realm='land', status='hypothesis', basis='idea',
-              sources=[src(MEGA), src(PATCH), src(BIO), src(FLOAT_GROW, 'The canopy nursery')]),
+              sources=[src(MEGA), src(PATCH), src(BIO), src(AEROPHYTES_GROW, 'The canopy nursery')]),
     community('C11', 'pioneer crusts', 'Crusts and mats that colonise fresh basalt and start its soils',
               members=['G30', 'G31'], settings=['ground'], realm='land', status='hypothesis', basis='idea',
               sources=[src(ECO, 'finding 13')]),
@@ -999,7 +1009,7 @@ COMMUNITIES = (
 )
 
 
-# ---- Candidate names for the floaters -----------------------------------------------------------------------------
+# ---- Candidate names for the aerophytes ---------------------------------------------------------------------------
 def name(id, group_name, giants, roots, meaning, sound, image, logic, place, checks, sources, young=None,
          formation=None):
     return dict(id=id, group=group_name, giants=giants, young=young, formation=formation, roots=roots,
@@ -1021,7 +1031,7 @@ NAME_CANDIDATES = (
          'Two soft syllables, WEL-kin, an old word that ends on "kin"',
          'The dome of the sky in old poetry; living pieces of that sky drifting over the seas',
          'The word meant cloud before it meant sky, and these organisms are the sky\'s living clouds',
-         'English working name for the floaters (G01); Welkinia the clade name of the new lineage; elder welkins the '
+         'English working name for the aerophytes (G01); Welkinia the clade name of the new lineage; elder welkins the '
          'giant form (G03); the wolcenfaru, the cloud-host, available for their drifting formation',
          dict(homonyms='Welkinia: no genus in IRMNG or the GBIF backbone (9 October 2026)',
               notes='Rare in modern English, so it arrives without a biological meaning'),
@@ -1037,8 +1047,8 @@ NAME_CANDIDATES = (
          'One round syllable, "holm"; Aeronesia flows, air-oh-NEE-zha',
          'A drifting archipelago of green islets over the sea, each holding its own small pools and residents',
          'The coupled study\'s concept is a light host carrying small retained-water communities: an island',
-         'English working name for the floaters (G01); Aeronesia the clade name; great holms the giants (G03); the sky '
-         'archipelago (C01) their formation',
+         'English working name for the aerophytes (G01); Aeronesia the clade name; great holms the giants (G03); the '
+         'sky archipelago (C01) their formation',
          dict(homonyms='Aeronesia: no genus in IRMNG or GBIF; Holmia, the obvious Latin form, is preoccupied by a '
                        'trilobite genus and others, so the clade takes the Greek form',
               notes='"Holm" also names the holm oak in English; context separates them'),
@@ -1055,7 +1065,7 @@ NAME_CANDIDATES = (
          'across the Moon',
          'A cloud that bears water and messages; the root means one who sprinkles, which suits organisms that gather '
          'and hold water',
-         'Meghas the working name for the floaters (G01) with Meghaphyta as the clade; meghadutas the giants (G03), '
+         'Meghas the working name for the aerophytes (G01) with Meghaphyta as the clade; meghadutas the giants (G03), '
          'with Meghaduta available as a genus if the giants become a sister lineage',
          dict(homonyms='Megha, Meghaphyta and Meghaduta: no genus in IRMNG or GBIF',
               notes='The macron of meghadūta drops under the codes\' alphabet rule; the poem is secular'),
@@ -1091,7 +1101,7 @@ NAME_CANDIDATES = (
          'se-REEN, smooth and long; se-re-NIS-si-ma for the giants, five open syllables',
          'Calm daylight sky over the Sea of Serenity, and a fine rain falling from clear air after sunset',
          'The Moon\'s own sea name; organisms that keep to clear daylight and drink from the air at dusk',
-         'Serenes the working name for the floaters (G01) with Sereniphyta as the clade; serenissimas the giants '
+         'Serenes the working name for the aerophytes (G01) with Sereniphyta as the clade; serenissimas the giants '
          '(G03), with Serenissima available as a genus',
          dict(homonyms='Sereniphyta and Serenissima: no genus in IRMNG or GBIF; Serenitas (Wells, 2009) is '
                        'preoccupied; Serenia sounds too close to Sirenia, the sea cows',
@@ -1104,7 +1114,7 @@ NAME_CANDIDATES = (
          'ma-WEEN-goo, three open syllables stressed on the second; the singular wingu',
          'Tall clouds over East Africa\'s plains and lakes',
          'A word from one of Africa\'s most widely spoken languages for organisms that cross every nation\'s sky',
-         'Mawingu the working name for the floaters (G01), a wingu one of them, with Mawingua as the clade; great '
+         'Mawingu the working name for the aerophytes (G01), a wingu one of them, with Mawingua as the clade; great '
          'mawingu the giants (G03)',
          dict(homonyms='Mawingua: no genus in IRMNG or GBIF',
               notes='A living language: adopted with its speakers, as principle P6 asks'),
@@ -1128,7 +1138,7 @@ def cycle():
         dusk_ground_speed_m_s={str(lat): round(speed(lat), 3) for lat in lats},
         sun_following_speed_m_s_at_10_km={str(lat): round(speed(lat, 10e3), 3) for lat in lats},
         note='Westward speed that keeps local solar time: 2 pi (R + h) cos(latitude) / synodic month. Dusk followers '
-             'fly it at the ground; a floater holding the Sun would have to make it good aloft, where the mean wind '
+             'fly it at the ground; an aerophyte holding the Sun would have to make it good aloft, where the mean wind '
              'blows east.')
 
 
@@ -1199,7 +1209,13 @@ def build():
             cycle=cycle()),
         backbone=[dict(b) for b in BACKBONE],
         modules=list(MODULES), groups=list(GROUPS), communities=list(COMMUNITIES),
-        floater_names=dict(group='G01', working_name='floaters', chosen=None, candidates=list(NAME_CANDIDATES)))
+        aerophyte_names=dict(
+            group='G01', common_name='aerophytes', common_names_chosen='2026-10-10',
+            giant_common_names=dict(group='G03', colony_form='sky reefs', round_form=None),
+            scientific_name=None, candidates=list(NAME_CANDIDATES),
+            note='The author chose the common names on 10 October 2026: aerophytes for the class and sky reefs for the '
+                 'colony giants; the round giants have no common name yet. The scientific name waits for the author, '
+                 'and N1-N6 remain candidates for it.'))
 
 
 # ---- Validation ----------------------------------------------------------------------------------------------------
@@ -1241,7 +1257,7 @@ def check(product) -> list[str]:
     system = product['system']
     fn = system['functional']
     for top in ('schema', 'producer', 'evidence', 'reading_rule', 'system', 'backbone', 'modules', 'groups',
-                'communities', 'floater_names'):
+                'communities', 'aerophyte_names'):
         if top not in product:
             err(f'missing top-level key {top}')
     if product.get('schema') != SCHEMA:
@@ -1348,7 +1364,7 @@ def check(product) -> list[str]:
 
     modules = {m['id']: m for m in product['modules']}
     groups = {g['id']: g for g in product['groups']}
-    candidates = {c['id'] for c in product['floater_names']['candidates']}
+    candidates = {c['id'] for c in product['aerophyte_names']['candidates']}
 
     # Groups: placement by descent and by function, and parentage.
     for g in groups.values():
@@ -1434,16 +1450,16 @@ def check(product) -> list[str]:
         if c['realm'] not in fn['realms']:
             err(f'{c["id"]}: unknown realm {c["realm"]}')
 
-    # The floaters' names: the working name stays until the author chooses.
-    fl = product['floater_names']
-    if fl['chosen'] is not None:
-        err('a floater name is marked chosen; the author chooses')
-    if groups.get(fl['group'], {}).get('working_name') != fl['working_name']:
-        err(f'the floaters group {fl["group"]} does not carry the working name {fl["working_name"]!r}')
-    if set(groups.get(fl['group'], {}).get('name_candidates', [])) != candidates:
-        err('the floaters group does not list every candidate')
+    # The aerophytes' names: the author chose the common names; the scientific name waits for the author.
+    an = product['aerophyte_names']
+    if an['scientific_name'] is not None:
+        err('a scientific name is marked chosen for the aerophytes; the author chooses')
+    if groups.get(an['group'], {}).get('working_name') != an['common_name']:
+        err(f'the aerophytes group {an["group"]} does not carry the common name {an["common_name"]!r}')
+    if set(groups.get(an['group'], {}).get('name_candidates', [])) != candidates:
+        err('the aerophytes group does not list every candidate')
     taken = {}
-    for c in fl['candidates']:
+    for c in an['candidates']:
         if not re.fullmatch(r'N\d', c['id']):
             err(f'{c["id"]}: identifier does not match N followed by a digit')
         for k in ('group', 'giants', 'roots', 'meaning', 'sound', 'image', 'logic', 'place', 'checks', 'sources'):

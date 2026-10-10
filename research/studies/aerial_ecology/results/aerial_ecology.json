@@ -2,14 +2,14 @@
   "schema": "terluna.research.aerial-ecology/1",
   "producer": {
     "files": {
-      "research/studies/aerial_ecology/run.py": "cff9ba34f0de3c078661444fb81f8c22f8996a0002ad0433d31dca02e2f86501",
+      "research/studies/aerial_ecology/run.py": "f27fb833fc00250fbdb5690eb8d58852b4477b611418115423b69165b781c6cc",
       "biosphere/ecology/screen.py": "4ca788045f524525b17443f2feeb1070d7bbf721beec6402a715d526a99886aa"
     },
     "inputs": {
       "biosphere/ecology/results/people.json": "f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6",
       "research/studies/sky_ships/results/sky_ships.json": "1e214bf6e64b0bb891c64b8ff273a7a12482e83defce0732b315c1751a28b26e",
       "shared/scenarios/population.json": "74ec20d6f8057977e9e08ee35b7014892e476fd8795a58a1af7f880a6bc373f0",
-      "research/studies/aerial_ecology/sources.json": "d0e41991a99d3031ba69243d4cbbbb1c1c85d7de00b07ddf06dbdf9048f08c99"
+      "research/studies/aerial_ecology/sources.json": "2317791ff3273c0b6626b8bdfd880cd7dc11e0d9f5c34174932e4a5eacd0195f"
     },
     "constants": {
       "AVOGADRO": 6.02214076e+23,
@@ -867,7 +867,7 @@
       "tau": 0.030000000000000006
     }
   ],
-  "floater_mass": [
+  "aerophyte_mass": [
     {
       "height_km": 10.0,
       "dry_kg_m2": 1.0,
@@ -1383,7 +1383,7 @@
       "cloud phototrophs",
       "C1 heterotrophs",
       "droplet grazers",
-      "photosynthetic floaters",
+      "photosynthetic aerophytes",
       "collectors",
       "grazers",
       "predators",

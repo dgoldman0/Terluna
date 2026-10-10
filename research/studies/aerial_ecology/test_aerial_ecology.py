@@ -57,8 +57,8 @@ def test_optical_depth_uses_particle_cross_section_and_compact_mass():
     assert expected == pytest.approx(0.03)
 
 
-def test_floater_wet_mass_and_spherical_skin_exhaust_allowed_lift():
-    case = model.floater_mass(1.1, 10, water_fraction=0.9, skin_kg_m2=1, usable_fraction=0.5)
+def test_aerophyte_wet_mass_and_spherical_skin_exhaust_allowed_lift():
+    case = model.aerophyte_mass(1.1, 10, water_fraction=0.9, skin_kg_m2=1, usable_fraction=0.5)
     radius = case['minimum_radius_m']
     area = math.pi * radius**2
     allocated_lift = 0.5 * 1.1 * 4 * math.pi * radius**3 / 3

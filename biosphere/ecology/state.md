@@ -24,7 +24,7 @@ From [research/decisions.md](../../research/decisions.md) unless named:
 - Regional agriculture and foraging feed the metropolis; the land per person had not been computed.
 - Conservation keeps two programmes (D1–D11 in [research/studies/conservation](../../research/studies/conservation/README.md)).
 - The biosphere paper owns biology and ecology together ([AGENTS.md](../../AGENTS.md)).
-- On 9 October 2026 the author asked for giant floaters that grow over centuries as far as the physics allows, for
+- On 9 October 2026 the author asked for giant aerophytes that grow over centuries as far as the physics allows, for
   their water to be gathered from the air, and for a new name and a taxonomic system for the biosphere
   ([taxonomy.md](taxonomy.md)).
 
@@ -49,8 +49,8 @@ author's words.
 | CO2 | Plants need about 28–30 Pa for diverse ecosystems; the design's 49 Pa is comfortable; weathering draws it down in centuries to millennia | Literature synthesis | [research/studies/atmospheric_co2](../../research/studies/atmospheric_co2/README.md) |
 | Light | 89,600 lux with the Sun overhead; UV index 0.11 against 14.8; twilight light per Sun depression; Earthlight by coast; the fleet's glow | Clear-sky solver | [illumination/surface_light](../../illumination/surface_light/README.md), `sea_appearance` |
 | Zones | Seas, lakes, wet land, fog desert and polar dry land with their weather (the aerosol study's regions) | Structured estimate | [research/studies/open_moon_aerosol](../../research/studies/open_moon_aerosol/README.md) |
-| Taxonomic register | 36 designed groups with 11 subgroups, 28 design modules and 12 communities on a 25-node Earth backbone; six candidate names for the floaters | Design register with source bindings; cycle and size classes computed | [taxonomy.md](taxonomy.md), `results/taxa.json` |
-| Giant floaters | Round bodies 50–700 m (cellulose-class tendons) and 1 km (300 MPa fibre) at 10 km, 1.5–3 km in canopy-like light; colonies of 60–150 m modules without a size limit; 2-km colonies in 36–544 years, 1-km round giants in 73–1,186; rain closes equatorward of 35–38° (51° with a CO₂-concentrating trait) | Screen values; design guesses stated as ranges; three independent numerical reviews | [floater_viability](../../research/studies/floater_viability/README.md), `results/floater_viability.json` |
+| Taxonomic register | 36 designed groups with 11 subgroups, 28 design modules and 12 communities on a 25-node Earth backbone; six candidate scientific names for the aerophytes | Design register with source bindings; cycle and size classes computed | [taxonomy.md](taxonomy.md), `results/taxa.json` |
+| Giant aerophytes | Round bodies 50–700 m (cellulose-class tendons) and 1 km (300 MPa fibre) at 10 km, 1.5–3 km in canopy-like light; colonies of 60–150 m modules without a size limit; 2-km sky reefs in 36–544 years, 1-km round giants in 73–1,186; rain closes equatorward of 35–38° (51° with a CO₂-concentrating trait) | Screen values; design guesses stated as ranges; three independent numerical reviews | [aerophytes](../../research/studies/aerophytes/README.md), `results/aerophytes.json` |
 
 No biome map, soil model, water model of plants, trace-gas budget of the biosphere, animal physiology or aquatic
 food web exists yet.

@@ -19,10 +19,10 @@ on this laptop. The findings behind them are in the [README](README.md).
    chemistry is added; the joint synthesis's air-chemistry runner restarts and runs cases in parallel.
 2. **What lives aloft.** The author asked for the aerial biomes to come almost first. The sky holds 9.2×10⁸ km³ of
    air above freezing, wet and lightly ionized, where lift allows flyers six times Earth's in every length, while its
-   production can come from resident aeroplankton, photosynthetic floaters and exchanges with the surface.
+   production can come from resident aeroplankton, photosynthetic aerophytes and exchanges with the surface.
    The [new requirements screen](../../research/studies/aerial_ecology/README.md) makes each budget explicit.
    - **What decides it:** water from cloud and humid air; phosphorus kept within floating and flying organisms;
-     floaters' gas; life cycles timed to the lunar day; how many aerial animals the land's insects, pollen and fruit
+     aerophytes' gas; life cycles timed to the lunar day; how many aerial animals the land's insects, pollen and fruit
      can feed; the night's light aloft; and how people's traffic and light share the volume.
    - **How:** a food-web budget of the sky by height band from the climate runs, the land's export of pollen, spores,
      insects and migrants, and the illumination solver's twilit sky aloft.
@@ -92,15 +92,15 @@ on this laptop. The findings behind them are in the [README](README.md).
 
     These are changes to main's studies, for the author to order.
 
-## Floater follow-up: giants, water and storms
+## Aerophyte follow-up: giants, water and storms
 
-The [coupled study](../../research/studies/floater_viability/README.md) now gives giant floaters' size limits, ages,
+The [coupled study](../../research/studies/aerophytes/README.md) now gives giant aerophytes' size limits, ages,
 water sources, storm design and sailing. What decides it next:
 - one assembled wet membrane: hydrogen, oxygen and nitrogen permeation, sustained-load strength and creep at the
   renewal interval, seams, tear arrest and healing, with and without guanine-like plates;
 - paths through the latitude and solar-hour winds (built on domain/provisioning,
   `climate/gcm/zonal_winds.md`), with water, carbon, gas and trim closed hour by hour, and whether the low evening
-  westward branch that lets floaters linger at sunset survives in three dimensions;
+  westward branch that lets aerophytes linger at sunset survives in three dimensions;
 - a population model: colony budding and fragmentation, juvenile survival in canopy nurseries, lightning and storm
   losses, and the phosphorus that roosting flyers and litter carry;
 - storm return levels over centuries, beyond one lunar day of one ring.
@@ -113,8 +113,8 @@ The [taxonomic system](taxonomy.md) leaves seven choices to the author:
 - O3: the founding identifier;
 - O4: the roots of scientific names;
 - O5: where founding ends;
-- O6: whether the giants are a form or a sister lineage of the floaters;
-- O7: the floaters' name, from six candidates.
+- O6: whether the giants are a form or a sister lineage of the aerophytes;
+- O7: the aerophytes' scientific name, from six candidates.
 
 After those, each carried-forward group needs a chassis as its design firms up, which narrows its placement from the
 backbone clade to an Earth genus or species. The founding register stays empty until a lineage is designed, and

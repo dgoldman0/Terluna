@@ -77,7 +77,7 @@ and control scheme. An organism drifting with a uniform wind has no wind-relativ
 can feed by settling, active motion or local currents, whose energy costs and velocities must be supplied.
 
 **Working direction:** favour small collectors, retained liquid microhabitats, concentrated colonies and food
-around floaters; retain large mobile filter feeders as a demanding hypothesis. No whale-sized animal is inferred
+around aerophytes; retain large mobile filter feeders as a demanding hypothesis. No whale-sized animal is inferred
 from a gross intake table.
 
 ## A dense airborne food field also changes the light
@@ -94,7 +94,7 @@ coverage fraction is adopted.
 
 ## Large photosynthetic organisms and their wet mass
 
-The [coupled floater evaluation](../floater_viability/README.md) supersedes these lift-only values as a design
+The [coupled aerophyte evaluation](../aerophytes/README.md) supersedes these lift-only values as a design
 assessment. It pays pressure-bearing structure, joints, storm gusts, gas cells, wet fire-barrier skins, tendon renewal,
 gas barriers, shared photons, water and trim, reproduction, persistent twilight and sailing, and finds round bodies of
 50 m to 0.7–3 km and colonies of 60–150 m modules without a structural size limit. The table below remains a historical
@@ -149,7 +149,7 @@ nor a safe harvest fraction. The gross figure is less than 2% of a ten-billion l
 edible/recovery case is 0.74%. No dependable wild-aerial yield is credited toward residential carrying capacity.
 
 The NPP assumption corresponds to 1.27 W of net biomass chemical energy per square metre of projected organism
-area at 18 MJ/kg dry matter. It is a requirement for the light/physiology model. Photosynthetic floaters intercept
+area at 18 MJ/kg dry matter. It is a requirement for the light/physiology model. Photosynthetic aerophytes intercept
 sunlight that would otherwise illuminate air, clouds, land or water; the net change in whole-Moon production must
 subtract any displaced production beneath them. A grazer eating surface-grown food relocates that production.
 Its carbon is counted once. Human harvest is removed before the illustrative 3–15% trophic-transfer sensitivities
@@ -164,7 +164,7 @@ concentration, motion or repeated encounters; capture is a separate unproven req
 would require roughly 98.85–99.97% retention of the central annual
 P throughput. Harvesting 5% exports about **0.461 Mt P/year** at the same stoichiometry: a separate recovery route
 is essential. Species can depart from Redfield proportions, so the resources evaluation varies C:P rather than
-treating a marine average as an engineered-floater law.
+treating a marine average as an engineered-aerophyte law.
 
 The [resources branch](https://github.com/dgoldman0/Terluna/tree/domain/resources) owns the conservative P cycle,
 including sky, land, water, sediment and human recovery. Recycling fractions must describe complete routes,
@@ -172,11 +172,11 @@ including capture and delivery, rather than a laboratory extraction step alone. 
 other trace elements require corresponding accounts. Nitrogen fixation has its own carbon and cofactor demand.
 
 There is room to investigate cloud phototrophs and heterotrophs, droplet grazers, long-lived photosynthetic
-floaters, collectors, tissue grazers, predators and decomposers. Persistent floater microhabitats can create niche
+aerophytes, collectors, tissue grazers, predators and decomposers. Persistent aerophyte microhabitats can create niche
 structure even in a well-mixed atmosphere. Energy supply, isolation, life cycles, disturbance and coexistence
 determine realized diversity. **No species count follows from the available atmospheric volume.**
 
-The next discriminating calculation follows floaters along paths through the latitude and solar-hour winds, closing
+The next discriminating calculation follows aerophytes along paths through the latitude and solar-hour winds, closing
 water, gas, trim and light hour by hour, and couples a population model to reproduction, storm and lightning losses
 and nutrient uptake.
 Measured size-dependent filter capture/drag and biological aerosol optics are needed before expanding the food

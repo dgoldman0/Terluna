@@ -3,7 +3,7 @@
  "producer": {
   "domain": "biosphere",
   "files": {
-   "biosphere/ecology/taxa.py": "c2b76ee87710b652"
+   "biosphere/ecology/taxa.py": "a0c9d5264d7f4735"
   },
   "inputs": {
    "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250",
@@ -20,11 +20,11 @@
    "research/decisions.md",
    "research/studies/aerial_ecology/README.md",
    "research/studies/aerial_ecology/sources.json",
-   "research/studies/floater_viability/README.md",
-   "research/studies/floater_viability/biology.md",
-   "research/studies/floater_viability/gas_biology.md",
-   "research/studies/floater_viability/growth.md",
-   "research/studies/floater_viability/sailing.md",
+   "research/studies/aerophytes/README.md",
+   "research/studies/aerophytes/biology.md",
+   "research/studies/aerophytes/gas_biology.md",
+   "research/studies/aerophytes/growth.md",
+   "research/studies/aerophytes/sailing.md",
    "research/studies/forest_patch/README.md",
    "research/studies/lunar_cycle_ecology/README.md",
    "research/studies/megaforest_wind/README.md",
@@ -222,7 +222,7 @@
    },
    {
     "id": "O6",
-    "question": "Giants and lesser floaters",
+    "question": "Giants and lesser aerophytes",
     "options": {
      "a": "One lineage, the giants a form its oldest members reach",
      "b": "Two sister lineages, the giants designed for indeterminate growth"
@@ -231,7 +231,7 @@
    },
    {
     "id": "O7",
-    "question": "The floaters' new name",
+    "question": "The aerophytes' scientific name",
     "options": {
      "N1": "N1",
      "N2": "N2",
@@ -240,7 +240,8 @@
      "N5": "N5",
      "N6": "N6"
     },
-    "recommendation": null
+    "recommendation": null,
+    "note": "The author chose the common names on 10 October 2026: aerophytes, and sky reefs for the colony giants. N1-N6 remain candidates for the scientific names, a layer the author said cloud roots could serve."
    }
   ],
   "statuses": {
@@ -588,7 +589,7 @@
     },
     "tenant": {
      "cls": "aerial",
-     "definition": "Organisms living on or within floaters and other aerial hosts, in their retained-water pockets"
+     "definition": "Organisms living on or within aerophytes and other aerial hosts, in their retained-water pockets"
     },
     "tree": {
      "cls": "plant",
@@ -803,7 +804,7 @@
     "60": 2.152,
     "80": 0.747
    },
-   "note": "Westward speed that keeps local solar time: 2 pi (R + h) cos(latitude) / synodic month. Dusk followers fly it at the ground; a floater holding the Sun would have to make it good aloft, where the mean wind blows east."
+   "note": "Westward speed that keeps local solar time: 2 pi (R + h) cos(latitude) / synodic month. Dusk followers fly it at the ground; an aerophyte holding the Sun would have to make it good aloft, where the mean wind blows east."
   }
  },
  "backbone": [
@@ -1574,11 +1575,11 @@
    "notes": "",
    "sources": [
     {
-     "path": "research/studies/floater_viability/README.md",
+     "path": "research/studies/aerophytes/README.md",
      "at": "The reference organism; What would decide it next"
     },
     {
-     "path": "research/studies/floater_viability/gas_biology.md",
+     "path": "research/studies/aerophytes/gas_biology.md",
      "at": "Guanine plates in the bladder wall; Goldbeater's skin"
     }
    ],
@@ -1616,11 +1617,11 @@
    "notes": "",
    "sources": [
     {
-     "path": "research/studies/floater_viability/biology.md",
+     "path": "research/studies/aerophytes/biology.md",
      "at": "Hydrogen from light and from sugar"
     },
     {
-     "path": "research/studies/floater_viability/gas_biology.md",
+     "path": "research/studies/aerophytes/gas_biology.md",
      "at": "The swim bladder's gas gland; The Portuguese man-of-war's gas gland"
     }
    ],
@@ -1665,7 +1666,7 @@
      "at": "Sky giants and the biosphere's names"
     },
     {
-     "path": "research/studies/floater_viability/README.md",
+     "path": "research/studies/aerophytes/README.md",
      "at": "The limits, in brief"
     }
    ],
@@ -1685,7 +1686,7 @@
    "notes": "",
    "sources": [
     {
-     "path": "research/studies/floater_viability/biology.md",
+     "path": "research/studies/aerophytes/biology.md",
      "at": "Buds, offspring and replacement"
     }
    ],
@@ -1807,7 +1808,7 @@
    "notes": "",
    "sources": [
     {
-     "path": "research/studies/floater_viability/sailing.md",
+     "path": "research/studies/aerophytes/sailing.md",
      "at": "Sailing between two layers; Sailors between air and water"
     }
    ],
@@ -1835,7 +1836,7 @@
    "notes": "",
    "sources": [
     {
-     "path": "research/studies/floater_viability/README.md",
+     "path": "research/studies/aerophytes/README.md",
      "at": "The limits, in brief"
     }
    ],
@@ -1848,7 +1849,7 @@
   {
    "id": "G01",
    "kind": "group",
-   "working_name": "floaters",
+   "working_name": "aerophytes",
    "summary": "Large photosynthetic aerial organisms with gas-filled, lobed bodies: a light, mostly inert and replaceable envelope, distributed photosynthetic tissue and small protected pockets of retained water that hold their own small communities",
    "status": "hypothesis",
    "scope": "throughout",
@@ -1857,22 +1858,22 @@
     "one assembled wet gas barrier",
     "a trajectory of water, carbon, gas and trim along a sailing path through storms, twilight and humid layers"
    ],
-   "notes": "The working name stays \"floaters\" until the author chooses among N1-N6; Sagan and Salpeter (1976) used the word for buoyant organisms of Jupiter's air. Aloft the mean wind blows east, so floaters ride it to shorten their nights, linger in the evening flow near the ground or sail north and south across the shear. Migrating flyers roost on them and bring phosphorus up.",
+   "notes": "The author chose the common name aerophytes on 10 October 2026; the scientific name waits for the author among N1-N6. Until then the working name was Sagan & Salpeter's \"floaters\" (1976), their word for buoyant organisms of Jupiter's air. Aloft the mean wind blows east, so aerophytes ride it to shorten their nights, linger in the evening flow near the ground or sail north and south across the shear. Migrating flyers roost on them and bring phosphorus up.",
    "sources": [
     {
-     "path": "research/studies/floater_viability/README.md",
+     "path": "research/studies/aerophytes/README.md",
      "at": "What a giant looks like; The limits, in brief; Twilight and the Sun"
     },
     {
-     "path": "research/studies/floater_viability/biology.md",
+     "path": "research/studies/aerophytes/biology.md",
      "at": "all sections"
     },
     {
-     "path": "research/studies/floater_viability/sailing.md",
+     "path": "research/studies/aerophytes/sailing.md",
      "at": "Riding the eastward wind; Sailing between two layers"
     },
     {
-     "path": "research/studies/floater_viability/gas_biology.md",
+     "path": "research/studies/aerophytes/gas_biology.md",
      "at": "Siphonophores; The swim bladder's gas gland"
     },
     {
@@ -1881,7 +1882,7 @@
     },
     {
      "path": "research/decisions.md",
-     "at": "Cross-domain ecology follow-up; Floater light-history correction; Sky giants"
+     "at": "Cross-domain ecology follow-up; Aerophyte light-history correction; Sky giants"
     }
    ],
    "parent": null,
@@ -1985,8 +1986,8 @@
   {
    "id": "G02",
    "kind": "subgroup",
-   "working_name": "lesser floaters",
-   "summary": "Floaters of the coupled study's reference organism: spheres of 40-150 m at about 10 km, the size the giants grow from; the young can grow to 40-60 m in megaforest crowns, fed by host sap",
+   "working_name": "lesser aerophytes",
+   "summary": "Aerophytes of the coupled study's reference organism: spheres of 40-150 m at about 10 km, the size the giants grow from; the young can grow to 40-60 m in megaforest crowns, fed by host sap",
    "status": "hypothesis",
    "scope": "throughout",
    "basis": "idea",
@@ -1994,11 +1995,11 @@
    "notes": "",
    "sources": [
     {
-     "path": "research/studies/floater_viability/README.md",
+     "path": "research/studies/aerophytes/README.md",
      "at": "The reference organism"
     },
     {
-     "path": "research/studies/floater_viability/growth.md",
+     "path": "research/studies/aerophytes/growth.md",
      "at": "The canopy nursery"
     }
    ],
@@ -2006,7 +2007,7 @@
    "anchor": "Eukaryota",
    "degree": "lineage",
    "chassis": [
-    "as the floaters"
+    "as the aerophytes"
    ],
    "references": [],
    "form": "drifter",
@@ -2038,26 +2039,26 @@
   {
    "id": "G03",
    "kind": "subgroup",
-   "working_name": "giant floaters",
-   "summary": "Floaters that keep growing for centuries, like the oldest trees: colonies of wet modules 50-150 m across on a raft one or two kilometres wide, which regrow what storms take, or round bodies of hundreds of metres in eight to fifty compartments",
+   "working_name": "giant aerophytes",
+   "summary": "Aerophytes that keep growing for centuries, like the oldest trees: sky reefs, colonies of wet modules 60-150 m across on a raft one or two kilometres wide, which regrow what storms take, or round bodies of hundreds of metres to a few kilometres in eight to over a hundred compartments",
    "status": "hypothesis",
    "scope": "throughout",
    "basis": "direction",
    "tests": [
     "fittings, seams, gusts and damage, then water and storms"
    ],
-   "notes": "A giant's age is the time its own light takes to make its gas: decades to more than a millennium from a 40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time.",
+   "notes": "A giant's age is the time its own light takes to make its gas: decades to more than a millennium from a 40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time. The colony form carries the common name sky reefs, the author's choice of 10 October 2026; the round form has no common name yet.",
    "sources": [
     {
      "path": "research/decisions.md",
      "at": "Sky giants and the biosphere's names"
     },
     {
-     "path": "research/studies/floater_viability/README.md",
+     "path": "research/studies/aerophytes/README.md",
      "at": "What a giant looks like; The limits, in brief"
     },
     {
-     "path": "research/studies/floater_viability/gas_biology.md",
+     "path": "research/studies/aerophytes/gas_biology.md",
      "at": "Siphonophores: colonies of specialised parts"
     }
    ],
@@ -2065,7 +2066,7 @@
    "anchor": "Eukaryota",
    "degree": "lineage",
    "chassis": [
-    "as the floaters"
+    "as the aerophytes"
    ],
    "references": [
     {
@@ -2339,7 +2340,7 @@
    "id": "G08",
    "kind": "group",
    "working_name": "aerial collectors",
-   "summary": "Small animals that gather airborne pollen, spores and small organisms on webs or filters, on substrates that take the loads: floaters and canopies",
+   "summary": "Small animals that gather airborne pollen, spores and small organisms on webs or filters, on substrates that take the loads: aerophytes and canopies",
    "status": "hypothesis",
    "scope": "throughout",
    "basis": "idea",
@@ -4642,7 +4643,7 @@
    "id": "C01",
    "kind": "community",
    "working_name": "the sky archipelago",
-   "summary": "Floaters and the small communities in their retained-water pockets, drifting through the low sky, with the migrating flyers that roost on them",
+   "summary": "Aerophytes and the small communities in their retained-water pockets, drifting through the low sky, with the migrating flyers that roost on them",
    "status": "hypothesis",
    "scope": "throughout",
    "basis": "direction",
@@ -4650,7 +4651,7 @@
    "notes": "",
    "sources": [
     {
-     "path": "research/studies/floater_viability/README.md",
+     "path": "research/studies/aerophytes/README.md",
      "at": "What a giant looks like; The limits, in brief"
     },
     {
@@ -4669,7 +4670,7 @@
    "described_members": [
     "microbes, algae, small grazers and decomposers in retained-water pockets",
     "hydrogen-oxidising microbes lining the gas cells",
-    "migrating flyers that roost on floaters and bring phosphorus up"
+    "migrating flyers that roost on aerophytes and bring phosphorus up"
    ],
    "settings": [
     "low_sky",
@@ -4928,7 +4929,7 @@
    "id": "C10",
    "kind": "community",
    "working_name": "megaforests",
-   "summary": "Forests of 100-500 m trees, whose crowns can nurse young floaters",
+   "summary": "Forests of 100-500 m trees, whose crowns can nurse young aerophytes",
    "status": "hypothesis",
    "scope": "throughout",
    "basis": "idea",
@@ -4948,7 +4949,7 @@
      "at": ""
     },
     {
-     "path": "research/studies/floater_viability/growth.md",
+     "path": "research/studies/aerophytes/growth.md",
      "at": "The canopy nursery"
     }
    ],
@@ -4957,7 +4958,7 @@
     "G02"
    ],
    "described_members": [
-    "young floaters of 40-60 m fed by host sap in the crowns"
+    "young aerophytes of 40-60 m fed by host sap in the crowns"
    ],
    "settings": [
     "canopy",
@@ -5030,10 +5031,16 @@
    "realm": "water"
   }
  ],
- "floater_names": {
+ "aerophyte_names": {
   "group": "G01",
-  "working_name": "floaters",
-  "chosen": null,
+  "common_name": "aerophytes",
+  "common_names_chosen": "2026-10-10",
+  "giant_common_names": {
+   "group": "G03",
+   "colony_form": "sky reefs",
+   "round_form": null
+  },
+  "scientific_name": null,
   "candidates": [
    {
     "id": "N1",
@@ -5082,7 +5089,7 @@
     "sound": "Two soft syllables, WEL-kin, an old word that ends on \"kin\"",
     "image": "The dome of the sky in old poetry; living pieces of that sky drifting over the seas",
     "logic": "The word meant cloud before it meant sky, and these organisms are the sky's living clouds",
-    "place": "English working name for the floaters (G01); Welkinia the clade name of the new lineage; elder welkins the giant form (G03); the wolcenfaru, the cloud-host, available for their drifting formation",
+    "place": "English working name for the aerophytes (G01); Welkinia the clade name of the new lineage; elder welkins the giant form (G03); the wolcenfaru, the cloud-host, available for their drifting formation",
     "checks": {
      "homonyms": "Welkinia: no genus in IRMNG or the GBIF backbone (9 October 2026)",
      "notes": "Rare in modern English, so it arrives without a biological meaning"
@@ -5132,7 +5139,7 @@
     "sound": "One round syllable, \"holm\"; Aeronesia flows, air-oh-NEE-zha",
     "image": "A drifting archipelago of green islets over the sea, each holding its own small pools and residents",
     "logic": "The coupled study's concept is a light host carrying small retained-water communities: an island",
-    "place": "English working name for the floaters (G01); Aeronesia the clade name; great holms the giants (G03); the sky archipelago (C01) their formation",
+    "place": "English working name for the aerophytes (G01); Aeronesia the clade name; great holms the giants (G03); the sky archipelago (C01) their formation",
     "checks": {
      "homonyms": "Aeronesia: no genus in IRMNG or GBIF; Holmia, the obvious Latin form, is preoccupied by a trilobite genus and others, so the clade takes the Greek form",
      "notes": "\"Holm\" also names the holm oak in English; context separates them"
@@ -5177,7 +5184,7 @@
     "sound": "MAY-gha, with a breathed g; me-gha-DOO-ta flows in four syllables; to English ears \"megha\" also carries \"mega\"",
     "image": "Kālidāsa's monsoon cloud carrying a lover's message across the land; giants carrying their communities across the Moon",
     "logic": "A cloud that bears water and messages; the root means one who sprinkles, which suits organisms that gather and hold water",
-    "place": "Meghas the working name for the floaters (G01) with Meghaphyta as the clade; meghadutas the giants (G03), with Meghaduta available as a genus if the giants become a sister lineage",
+    "place": "Meghas the working name for the aerophytes (G01) with Meghaphyta as the clade; meghadutas the giants (G03), with Meghaduta available as a genus if the giants become a sister lineage",
     "checks": {
      "homonyms": "Megha, Meghaphyta and Meghaduta: no genus in IRMNG or GBIF",
      "notes": "The macron of meghadūta drops under the codes' alphabet rule; the poem is secular"
@@ -5274,7 +5281,7 @@
     "sound": "se-REEN, smooth and long; se-re-NIS-si-ma for the giants, five open syllables",
     "image": "Calm daylight sky over the Sea of Serenity, and a fine rain falling from clear air after sunset",
     "logic": "The Moon's own sea name; organisms that keep to clear daylight and drink from the air at dusk",
-    "place": "Serenes the working name for the floaters (G01) with Sereniphyta as the clade; serenissimas the giants (G03), with Serenissima available as a genus",
+    "place": "Serenes the working name for the aerophytes (G01) with Sereniphyta as the clade; serenissimas the giants (G03), with Serenissima available as a genus",
     "checks": {
      "homonyms": "Sereniphyta and Serenissima: no genus in IRMNG or GBIF; Serenitas (Wells, 2009) is preoccupied; Serenia sounds too close to Sirenia, the sea cows",
      "notes": "Serenissima was the old title of Venice"
@@ -5313,7 +5320,7 @@
     "sound": "ma-WEEN-goo, three open syllables stressed on the second; the singular wingu",
     "image": "Tall clouds over East Africa's plains and lakes",
     "logic": "A word from one of Africa's most widely spoken languages for organisms that cross every nation's sky",
-    "place": "Mawingu the working name for the floaters (G01), a wingu one of them, with Mawingua as the clade; great mawingu the giants (G03)",
+    "place": "Mawingu the working name for the aerophytes (G01), a wingu one of them, with Mawingua as the clade; great mawingu the giants (G03)",
     "checks": {
      "homonyms": "Mawingua: no genus in IRMNG or GBIF",
      "notes": "A living language: adopted with its speakers, as principle P6 asks"
@@ -5324,6 +5331,7 @@
      "gbif_backbone"
     ]
    }
-  ]
+  ],
+  "note": "The author chose the common names on 10 October 2026: aerophytes for the class and sky reefs for the colony giants; the round giants have no common name yet. The scientific name waits for the author, and N1-N6 remain candidates for it."
  }
 }

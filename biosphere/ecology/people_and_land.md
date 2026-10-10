@@ -53,8 +53,8 @@ largest one.
    216 times the muscle give the 36 times the power it needs (*derived*). Earth's largest flyers carried over reach
    60–66 m across and 44–55 t (table 2). The same animal at the ground hovers on 6.3% of Earth's power and flies a
    kilometre on 17% of the energy (*screen*). Hydrogen lifts 1.31 kg per m³ at the ground and 0.63–0.74 kg in the
-   flight band, and a gas cell floats when its skin weighs under 0.44 kg/m² per metre of radius, as floaters do in any
-   dense air (Sagan & Salpeter 1976). *Mechanics solid; physiology at these sizes is a design question.*
+   flight band, and a gas cell floats when its skin weighs under 0.44 kg/m² per metre of radius, as Sagan & Salpeter's
+   "floaters" do in any dense air (1976). *Mechanics solid; physiology at these sizes is a design question.*
 6. **Food.** The inherited phosphorus-fallout analogue supports 0.03–1.2 g C per m² a year in a single assimilation
    pass at Redfield C:P, at most four ten-thousandths of the land stand's 2,800–3,200 g C (*screen*). This is neither
    a measured upward lunar supply nor a ceiling on nutrient-retaining aerial producers. The
@@ -233,8 +233,9 @@ the wild biosphere's N2O (0.96–1.3 Tg N a year) and central methane source (59
    whether the gases bind before land, and how strict the design targets must be.
 4. **The night's requirement and a city's skyglow** in this tall, scattering air (the illumination solver), with
    thresholds by function for the sky's and the land's animals: whether light binds before land.
-5. **What lives aloft.** Water from cloud and humid air, phosphorus kept within floating and flying organisms, floaters'
-   gas, life cycles timed to the lunar day, and how many aerial animals the land's insects, pollen and fruit can feed.
+5. **What lives aloft.** Water from cloud and humid air, phosphorus kept within floating and flying organisms,
+   aerophytes' gas, life cycles timed to the lunar day, and how many aerial animals the land's insects, pollen and fruit
+   can feed.
 6. **The affluent diet.** Its animal share, grazing on the fog desert at its own productivity, and fermented and
    microbial foods (Leger et al. 2021).
 7. **Sharing the sky.** Corridors, quiet hours and lighting rules for traffic over migration routes, and the tower's

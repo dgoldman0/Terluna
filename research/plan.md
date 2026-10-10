@@ -71,20 +71,20 @@ Current sessions support ordinary numerical models, parameter sweeps, moderate r
 
 Use the existing editorial charter and full-source reading requirements when these results enter the manuscripts. Research notes and numerical checks are not scholarly clearance.
 
-## Floater giants and the biosphere's names, 9 October 2026
+## Aerophyte giants and the biosphere's names, 9 October 2026
 
-The [coupled floater study](studies/floater_viability/README.md) gives giant floaters' size limits, ages, water,
+The [coupled aerophyte study](studies/aerophytes/README.md) gives giant aerophytes' size limits, ages, water,
 storms, sailing and gas biology as screen values:
 - round bodies reach 0.7–3 km with fibre and light;
 - colonies of 60–150 m modules have no structural limit;
-- a 2-km colony grows in 36–544 years, a 1-km round giant in 73–1,186.
+- a 2-km sky reef grows in 36–544 years, a 1-km round giant in 73–1,186.
 
 Next: one assembled wet membrane, then trajectories on the latitude and solar-hour wind product, built on
 domain/provisioning, then a population model with phosphorus return.
 
 The [taxonomic system](../biosphere/ecology/taxonomy.md) gives the biosphere a register keyed by permanent
 identifiers, which the papers and the immersive world read from `biosphere/ecology/results/taxa.json`. Next: the
-author's choices (O1–O7), including the floaters' name, then a chassis for each carried-forward group as its design
-firms up.
+author's choices (O1–O7), including the aerophytes' scientific name, then a chassis for each carried-forward group as
+its design firms up.
 
 The climate programme remains paused; these studies use committed products and analytic sensitivities.

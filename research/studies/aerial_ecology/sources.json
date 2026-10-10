@@ -46,7 +46,7 @@
       "citation": "Sagan, C. and Salpeter, E. E. (1976). Particles, environments, and possible ecologies in the Jovian atmosphere. Astrophysical Journal Supplement Series 32, 737.",
       "doi_or_url": "https://ntrs.nasa.gov/citations/19770038871",
       "access": "NASA research-record abstract inspected; full paper not admitted by this evaluation.",
-      "supports": "Historical theoretical treatment of photosynthetic sinkers, pressure-maintaining floaters and consumers in an atmosphere.",
+      "supports": "Historical theoretical treatment of photosynthetic sinkers, pressure-maintaining \"floaters\" and consumers in an atmosphere.",
       "boundary": "Conceptual precedent in Jupiter's very different atmosphere; no empirical aerial macro-organism and no validation of hydrogen containment, oxygen tolerance, hydration or reproduction on Terluna."
     },
     {
@@ -61,8 +61,8 @@
   "assumption_register": {
     "growth": "Favourable duty, mortality and removal lifetimes are separate sensitivities. The cited bacterial generation times must not be described as measured lunar algal rates. Hydration and organic-carbon availability can permit heterotrophic growth in darkness; net new photoautotrophic carbon additionally requires useful light.",
     "feeding": "Capture efficiency, effective drag, metabolic maintenance, assimilation and propulsion efficiency are imposed traits. Their independent variation does not prove a physically realizable filter; low drag and high capture can conflict. A freely drifting organism lacks a sustained through-air speed merely because the wind is strong.",
-    "floater": "Dry stock, water fraction, membrane mass and useful-lift reserve are hypothetical traits. The mass balance tests required size and water loading, not membrane permeability, biological hydrogen production, gas safety, storm survival or reproduction.",
-    "production": "Coverage, net production, trophic transfer, edibility and harvest share are scenarios. No cited source establishes 500–2000 g C/m2/year for aerial floaters or a sustainable 5% harvest. Light intercepted above already productive surface biomes is a shared resource and can displace production below.",
+    "aerophyte": "Dry stock, water fraction, membrane mass and useful-lift reserve are hypothetical traits. The mass balance tests required size and water loading, not membrane permeability, biological hydrogen production, gas safety, storm survival or reproduction.",
+    "production": "Coverage, net production, trophic transfer, edibility and harvest share are scenarios. No cited source establishes 500–2000 g C/m2/year for aerophytes or a sustainable 5% harvest. Light intercepted above already productive surface biomes is a shared resource and can displace production below.",
     "optics": "The fixed geometric-extinction efficiency is a size-sensitivity approximation; particle morphology, hydration, refractive index and spectral scattering are unresolved. Larger particles reduce extinction per unit compact mass while generally worsening settling unless structure or lift compensates.",
     "biodiversity": "Source observations establish candidate guilds. Atmospheric volume, carbon throughput and hypothetical structural habitat cannot determine a species count."
   }

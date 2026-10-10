@@ -1,10 +1,10 @@
 # A taxonomic system for the Open Moon's biosphere
 
-On 9 October 2026 the author asked to rename the floaters and to begin a taxonomic system: "let's also change the
+On 9 October 2026 the author asked to rename the aerophytes and to begin a taxonomic system: "let's also change the
 name. Indeed, let's start working out a taxonomic system for this world's biosphere"
 ([decisions](../../research/decisions.md)). This document proposes the system, sets out the choices it leaves to the
 author, registers the biosphere's designed groups as the project has worked them out, and offers names for the
-floaters. [taxa.py](taxa.py) holds the register as code and writes [results/taxa.json](results/taxa.json) (schema
+aerophytes. [taxa.py](taxa.py) holds the register as code and writes [results/taxa.json](results/taxa.json) (schema
 `terluna.biosphere.ecology-taxa/1`); [taxonomy_sources.json](taxonomy_sources.json) records what was read and how
 far.
 
@@ -28,15 +28,15 @@ released. Each entry carries the project's own verdict on it, taken from the fil
   they diverge. Descendant species receive binomials when they become distinct.
 - **Function.** Life form, setting, guild, night strategy and clock are classed apart from descent, after Raunkiær,
   by how an organism lives through the 354-hour night and where. The aerial forms come first: aeroplankton,
-  drifters, sailors, giants, flyers, gliders, films and the tenants of floaters.
+  drifters, sailors, giants, flyers, gliders, films and the tenants of aerophytes.
 - **Names.** Scientific names are treated as Latin and drawn from any language, the Moon's own names included, with
   the etymology stated, no homonym of any Earth genus and nothing derogatory to any people. Common names belong to the
   lunar peoples and are recorded as they arise.
-- **Identifiers.** Every entry has a permanent identifier, and names can change around it. The floaters are G01
-  before and after they are renamed.
+- **Identifiers.** Every entry has a permanent identifier, and names can change around it. The aerophytes kept G01
+  when they were renamed.
 
 The first register holds 36 designed groups with 11 subgroups, 28 design modules and 12 communities, hung from a
-backbone of 25 Earth clades. Six candidate names for the floaters wait for the author's choice.
+backbone of 25 Earth clades. Six candidate scientific names for the aerophytes wait for the author's choice.
 
 ## What Earth's systems name, and what each suits here
 
@@ -128,8 +128,8 @@ Imbrium, the "Sea of Showers" ([ecology register](../../research/studies/lunar_c
 
 **P1. A designed organism keeps the Earth lineage of its chassis.** The chassis is the lineage whose genome organizes
 the cell and is inherited, as JCVI-syn1.0 is *M. mycoides* by its genome. Genes, pathways and symbionts from other
-lineages are contributions, recorded with their donors' Earth names: a floater built on a brown alga, carrying a green
-alga's hydrogenase and bacterial symbionts, is a brown alga with two contributions. Where the chassis is open, the
+lineages are contributions, recorded with their donors' Earth names: an aerophyte built on a brown alga, carrying a
+green alga's hydrogenase and bacterial symbionts, is a brown alga with two contributions. Where the chassis is open, the
 register places a group at the smallest backbone clade holding every candidate, and the placement narrows as the
 design firms up.
 
@@ -143,7 +143,7 @@ design firms up.
 | new lineage | A body plan or metabolism no Earth genus holds | A clade name defined from its founders, with genera and species inside it | A PhyloCode clade | a family or above |
 
 The July 2026 bundle prefers to "modify stress tolerance and timing before inventing new metabolisms" (§18), and most
-of the register's groups would found designed species or lines. The floaters are a new lineage.
+of the register's groups would found designed species or lines. The aerophytes are a new lineage.
 
 **P3. Every founding lineage is registered with a type genome and a preserved sample.** The designed genome is
 deposited as a sequence, as the SeqCode types prokaryotes, and a cryopreserved sample is kept in two collections in
@@ -158,7 +158,7 @@ and specimen, and the founder's registered genome stays the reference for every 
 between lineages makes partly overlapping clades, which the PhyloCode's definitions accommodate.
 
 **P5. Function is classed apart from descent.** Two lineages can share a form, and one lineage can take several
-forms in its life: a floater begins as a drifting propagule and may end as a giant. As Raunkiær did, the register
+forms in its life: an aerophyte begins as a drifting propagule and may end as a giant. As Raunkiær did, the register
 classes each group by its adult.
 
 **P6. Scientific names are Latin in grammar and open in origin.** They follow the strictest Earth rule wherever the
@@ -176,8 +176,9 @@ codes differ, so a name stays publishable under any of them:
 **P7. Common names belong to the peoples who live with the organisms.** The Moon's nations descend from all of
 Earth's nations and form as their own lunar nations, and the names they give are recorded as they arise: the name,
 its language and community, its date and its meaning. Earth already keeps such names beside Latin ones, as the
-ICNCP's cultivar epithets in living languages show (Art. 21.11). Until then the project's English working names are
-marked as working names.
+ICNCP's cultivar epithets in living languages show (Art. 21.11). The author chose the everyday names aerophytes and
+sky reefs on 10 October 2026; the project's other English names stay marked as working names until the peoples name
+them.
 
 **P8. Identifiers never change.** Every group, module, community and founding lineage keeps its identifier through
 renaming, regrouping and new placements, as a transformation event keeps its unique identifier. The data products and
@@ -207,12 +208,13 @@ any language for descendants named by the lunar peoples.
 one derived from the old, and change after release is descent; (b) founding ends with the 500-year build. **Option (a)
 is recommended**, since releases can continue after the build and each needs its type.
 
-**O6. Giants and lesser floaters.** (a) One lineage whose oldest members reach the giant form; (b) two sister lineages,
-the giants designed for growth that never stops. The coupled study gives the giants two forms, colonies of wet modules
-on a raft and round bodies in many compartments, and either can sit under (a) or (b). The register holds the giants
-as a subgroup of the floaters (G03) under either answer.
+**O6. Giants and lesser aerophytes.** (a) One lineage whose oldest members reach the giant form; (b) two sister
+lineages, the giants designed for growth that never stops. The coupled study gives the giants two forms, sky reefs
+(colonies of wet modules on a raft) and round bodies in many compartments, and either can sit under (a) or (b). The
+register holds the giants as a subgroup of the aerophytes (G03) under either answer.
 
-**O7. The floaters' new name**, from the candidates below.
+**O7. The aerophytes' scientific name**, from the candidates below. The author chose the everyday names on 10 October
+2026: aerophytes, and sky reefs for the colony giants.
 
 ## The functional classification
 
@@ -240,12 +242,12 @@ and names one realm as its home.
 |---|---|---|
 | aerial | aeroplankton | Organisms the air carries, too small to hold a course; resident aeroplankton complete their lives aloft, transient aeroplankton are dispersing stages |
 | aerial | drifter | Buoyant or ballooning organisms that move with the wind and control mainly their height |
-| aerial | sailor | Buoyant organisms that steer across the wind with a wing or drogue hung in another layer of air or in the sea, as *Physalia* sails the sea surface (Iosilevskii & Weihs 2009; [floater study](../../research/studies/floater_viability/sailing.md)) |
+| aerial | sailor | Buoyant organisms that steer across the wind with a wing or drogue hung in another layer of air or in the sea, as *Physalia* sails the sea surface (Iosilevskii & Weihs 2009; [aerophyte study](../../research/studies/aerophytes/sailing.md)) |
 | aerial | giant | Buoyant organisms that keep growing for centuries, like the oldest trees |
 | aerial | flyer | Animals that fly under their own power |
 | aerial | glider | Animals that launch from canopies and cliffs and glide |
 | aerial | film | Sparse microbial or algal films on particles, droplets or platforms in the high air |
-| aerial | tenant | Organisms living on or within floaters and other aerial hosts, in their retained-water pockets |
+| aerial | tenant | Organisms living on or within aerophytes and other aerial hosts, in their retained-water pockets |
 | plant | tree | Woody plants whose living crowns stand in the air through the night (phanerophytes) |
 | plant | vine | Climbing or trailing plants |
 | plant | herb | Non-woody plants whose shoots stand through the night |
@@ -260,7 +262,7 @@ and names one realm as its home.
 | aquatic | benthos | Organisms of the beds of seas and lakes |
 | aquatic | macroalga | Seaweeds |
 
-The tenant form extends the requested list of aerial forms, for the small communities the floater study places in its
+The tenant form extends the requested list of aerial forms, for the small communities the aerophyte study places in its
 organisms' retained-water pockets.
 
 ### Size
@@ -298,9 +300,9 @@ studies' trees of 100–500 m are megaphanerophytes.
 ### The speed of dusk
 
 Dusk and the Sun cross the Moon westward at 2π(R + h) cos(latitude) per synodic month of 708.73 hours. Dusk followers
-fly it at the ground. Aloft the mean wind blows east, so the floater study's floaters ride it to shorten their nights,
-linger in the evening flow near the ground, or sail north and south across the shear
-([floater study](../../research/studies/floater_viability/README.md)).
+fly it at the ground. Aloft the mean wind blows east, so the aerophyte study's aerophytes ride it to shorten their
+nights, linger in the evening flow near the ground, or sail north and south across the shear
+([aerophyte study](../../research/studies/aerophytes/README.md)).
 
 | Latitude | Dusk at the ground | Sun at 10 km |
 |---|---|---|
@@ -328,7 +330,7 @@ No lineage has been designed or released, so the register's list of lineages is 
 The register draws on the [ecology register](../../research/studies/lunar_cycle_ecology/README.md) (its codes A1–H10
 are cited), this branch's [ecology findings](README.md), [literature](literature.md) and
 [people and land](people_and_land.md), the [aerial](../../research/studies/aerial_ecology/README.md),
-[floater](../../research/studies/floater_viability/README.md),
+[aerophyte](../../research/studies/aerophytes/README.md),
 [megaforest](../../research/studies/megaforest_wind/README.md),
 [forest-patch](../../research/studies/forest_patch/README.md) and
 [sea-appearance](../../research/studies/sea_appearance/README.md) studies, the
@@ -341,9 +343,9 @@ life form; subgroups are marked ↳.
 
 | ID | Group | Placement: anchor · degree · form | Earth reference points | Guilds · settings | Night · clock | Status | Source |
 |---|---|---|---|---|---|---|---|
-| G01 | floaters | Eukaryota · lineage · drifter (or sailor) | *Physalia physalis*; *Nereocystis luetkeana*; holopelagic *Sargassum*; siphonophores; teleost swim bladders; mistletoes; *Chlamydomonas reinhardtii*; *Clostridium* | producer, receiver · low sky, storm layer, canopy | twilight, terminator following, store, idle · undetermined | hypothesis | [floater study](../../research/studies/floater_viability/README.md) What a giant looks like; [floater biology](../../research/studies/floater_viability/biology.md); [floater sailing](../../research/studies/floater_viability/sailing.md) Riding the eastward wind; [floater gas biology](../../research/studies/floater_viability/gas_biology.md) Siphonophores; [aerial study](../../research/studies/aerial_ecology/README.md); [decisions](../../research/decisions.md) Cross-domain ecology follow-up |
-| G02 | ↳ lesser floaters | Eukaryota · lineage · drifter (or sailor) | as its parent | producer · low sky, canopy | twilight, terminator following, store, idle · undetermined | hypothesis | [floater study](../../research/studies/floater_viability/README.md) The reference organism; [floater growth](../../research/studies/floater_viability/growth.md) The canopy nursery |
-| G03 | ↳ giant floaters | Eukaryota · lineage · giant | *Pinus longaeva*; trees of 403 species; siphonophores | producer, receiver · low sky, storm layer | twilight, terminator following, store, idle · undetermined | hypothesis | [decisions](../../research/decisions.md); [floater study](../../research/studies/floater_viability/README.md) What a giant looks like; [floater gas biology](../../research/studies/floater_viability/gas_biology.md) |
+| G01 | aerophytes | Eukaryota · lineage · drifter (or sailor) | *Physalia physalis*; *Nereocystis luetkeana*; holopelagic *Sargassum*; siphonophores; teleost swim bladders; mistletoes; *Chlamydomonas reinhardtii*; *Clostridium* | producer, receiver · low sky, storm layer, canopy | twilight, terminator following, store, idle · undetermined | hypothesis | [aerophyte study](../../research/studies/aerophytes/README.md) What a giant looks like; [aerophyte biology](../../research/studies/aerophytes/biology.md); [aerophyte sailing](../../research/studies/aerophytes/sailing.md) Riding the eastward wind; [aerophyte gas biology](../../research/studies/aerophytes/gas_biology.md) Siphonophores; [aerial study](../../research/studies/aerial_ecology/README.md); [decisions](../../research/decisions.md) Cross-domain ecology follow-up |
+| G02 | ↳ lesser aerophytes | Eukaryota · lineage · drifter (or sailor) | as its parent | producer · low sky, canopy | twilight, terminator following, store, idle · undetermined | hypothesis | [aerophyte study](../../research/studies/aerophytes/README.md) The reference organism; [aerophyte growth](../../research/studies/aerophytes/growth.md) The canopy nursery |
+| G03 | ↳ giant aerophytes | Eukaryota · lineage · giant | *Pinus longaeva*; trees of 403 species; siphonophores | producer, receiver · low sky, storm layer | twilight, terminator following, store, idle · undetermined | hypothesis | [decisions](../../research/decisions.md); [aerophyte study](../../research/studies/aerophytes/README.md) What a giant looks like; [aerophyte gas biology](../../research/studies/aerophytes/gas_biology.md) |
 | G04 | resident aeroplankton phototrophs | Life · species · aeroplankton, pico/nano | cloud cyanobacteria and algae | producer · low sky, storm layer | undetermined · undetermined | hypothesis | [aerial study](../../research/studies/aerial_ecology/README.md) What the evidence supports; [aerial sources](../../research/studies/aerial_ecology/sources.json); [decisions](../../research/decisions.md) Cross-domain ecology follow-up |
 | G05 | ↳ aerial cyanobacteria | Cyanobacteriota · species · aeroplankton, pico/nano | as its parent | producer · low sky, storm layer | undetermined · undetermined | hypothesis | [aerial study](../../research/studies/aerial_ecology/README.md) |
 | G06 | ↳ aerial microalgae | Eukaryota · species · aeroplankton, nano | as its parent | producer · low sky, storm layer | undetermined · undetermined | hypothesis | [aerial study](../../research/studies/aerial_ecology/README.md) |
@@ -425,23 +427,23 @@ life form; subgroups are marked ↳.
 | M15 | wet-leaf disease resistance | Resistance to leaf pathogens through a hundred hours and more of leaf wetness, with sunlight disinfecting at 1-6% of Earth's rate | G16 | hypothesis | [ecology](README.md) finding 3 |
 | M16 | root regulation at lunar gravity | Root growth regulated by design, since plants sense gravity poorly below 0.1-0.3 g | G16, G18 | hypothesis | [ecology](README.md) finding 19 |
 | M17 | ethylene balance | Low ethylene emission by plants and fast ethylene uptake by soils: the vegetated Moon's own ethylene settles at 94-233 ppb with Earth's soil uptake, above the 50 ppb that costs wheat 36% of its yield | G16, G46 | hypothesis | [ecology](README.md) finding 24; [people and land](people_and_land.md) item 16 |
-| M18 | gas-barrier envelope | A mostly inert, replaceable hydrogen barrier grown and repaired by living tissue, behind a tougher outer surface | G01 | hypothesis | [floater study](../../research/studies/floater_viability/README.md) The reference organism; [floater gas biology](../../research/studies/floater_viability/gas_biology.md) |
-| M19 | hydrogen organ or symbiont | Hydrogen made by a dedicated organ or symbiont, from light or by dark fermentation, with its light, substrates and oxygen management counted | G01 | hypothesis | [floater biology](../../research/studies/floater_viability/biology.md); [floater gas biology](../../research/studies/floater_viability/gas_biology.md) The swim bladder's gas gland |
-| M20 | water from the air | Water drawn from rain, cloud and the humid air through sorbent skins and fringes, in preference to descending to drink | G01 | hypothesis | [decisions](../../research/decisions.md); [floater study](../../research/studies/floater_viability/README.md) The limits, in brief |
-| M21 | attached buds | Daughters grown as attached buds, fed carbon, nutrients and gas by the parent until they can carry themselves | G01 | hypothesis | [floater biology](../../research/studies/floater_viability/biology.md) |
+| M18 | gas-barrier envelope | A mostly inert, replaceable hydrogen barrier grown and repaired by living tissue, behind a tougher outer surface | G01 | hypothesis | [aerophyte study](../../research/studies/aerophytes/README.md) The reference organism; [aerophyte gas biology](../../research/studies/aerophytes/gas_biology.md) |
+| M19 | hydrogen organ or symbiont | Hydrogen made by a dedicated organ or symbiont, from light or by dark fermentation, with its light, substrates and oxygen management counted | G01 | hypothesis | [aerophyte biology](../../research/studies/aerophytes/biology.md); [aerophyte gas biology](../../research/studies/aerophytes/gas_biology.md) The swim bladder's gas gland |
+| M20 | water from the air | Water drawn from rain, cloud and the humid air through sorbent skins and fringes, in preference to descending to drink | G01 | hypothesis | [decisions](../../research/decisions.md); [aerophyte study](../../research/studies/aerophytes/README.md) The limits, in brief |
+| M21 | attached buds | Daughters grown as attached buds, fed carbon, nutrients and gas by the parent until they can carry themselves | G01 | hypothesis | [aerophyte biology](../../research/studies/aerophytes/biology.md) |
 | M22 | spectral tuning | Paler upper leaves, photosynthesis into the far red and clumped foliage; they add 3%, 6% and 3% on the Moon, where the diffuse sky already does most of what they do | — | set aside | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) A2 |
 | M23 | extra photoprotection and daily rests | Reflective hairs, folding leaves and a daily rest in the long day: peak light is 30% below Earth's and the UV index 0.11, and a rest halving photosynthesis for eight hours in 24 costs about a quarter of the growth | — | set aside | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) A4, A5 |
 | M24 | canopy regrowth each cycle | Shedding the canopy before dusk and regrowing it at dawn costs 264 g C per m2 a cycle and leaves little or no growth | — | set aside | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) B3 |
 | M25 | frost protection | Antifreeze, insulation and heat sharing in plant mats: land nights stay near 19-20 degrees C at low and middle latitudes | — | set aside | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) B4 |
 | M26 | hyper-C4 as the general strategy | C4 everywhere: the canopy works mostly in dim diffuse light, where C4's extra two ATP per CO2 cost most | — | set aside | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) A3 |
-| M27 | tethered sails | A wing hung on a tether in another layer of air, or a drogue in the sea, that sails a buoyant body across the wind | G01 | hypothesis | [floater sailing](../../research/studies/floater_viability/sailing.md) Sailing between two layers |
-| M28 | compartmented gas | Gas held in many small wet compartments or modules, so that a tear or a lightning strike empties or burns one at a time | G01 | hypothesis | [floater study](../../research/studies/floater_viability/README.md) The limits, in brief |
+| M27 | tethered sails | A wing hung on a tether in another layer of air, or a drogue in the sea, that sails a buoyant body across the wind | G01 | hypothesis | [aerophyte sailing](../../research/studies/aerophytes/sailing.md) Sailing between two layers |
+| M28 | compartmented gas | Gas held in many small wet compartments or modules, so that a tear or a lightning strike empties or burns one at a time | G01 | hypothesis | [aerophyte study](../../research/studies/aerophytes/README.md) The limits, in brief |
 
 ### Communities
 
 | ID | Community | Members | Status | Source |
 |---|---|---|---|---|
-| C01 | the sky archipelago | floaters (G01), lesser floaters (G02), giant floaters (G03), resident aeroplankton phototrophs (G04), resident aeroplankton heterotrophs (G07), aerial collectors (G08) | hypothesis | [floater study](../../research/studies/floater_viability/README.md) What a giant looks like; [aerial study](../../research/studies/aerial_ecology/README.md) The cycle and the community |
+| C01 | the sky archipelago | aerophytes (G01), lesser aerophytes (G02), giant aerophytes (G03), resident aeroplankton phototrophs (G04), resident aeroplankton heterotrophs (G07), aerial collectors (G08) | hypothesis | [aerophyte study](../../research/studies/aerophytes/README.md) What a giant looks like; [aerial study](../../research/studies/aerial_ecology/README.md) The cycle and the community |
 | C02 | cloud-water aeroplankton | resident aeroplankton phototrophs (G04), aerial cyanobacteria (G05), aerial microalgae (G06), resident aeroplankton heterotrophs (G07) | hypothesis | [aerial study](../../research/studies/aerial_ecology/README.md) What the evidence supports; [people and land](people_and_land.md) item 3 |
 | C03 | the films of the high air | high-altitude films (G10) | carried forward | [decisions](../../research/decisions.md) Life and people |
 | C04 | forests of wood and fruit | evergreen idlers (G16), day-fruit trees (G19), trap plants (G26), droppings-collecting plants (G27), glowing lures (G28), night decomposers of the fruit fall (G32), night insects of the fruit fall (G33), fruit-eaters (G34) | carried forward | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) F2 |
@@ -450,7 +452,7 @@ life form; subgroups are marked ↳.
 | C07 | the dusk fruit fall and the night food web | day-fruit trees (G19), night decomposers of the fruit fall (G32), night insects of the fruit fall (G33), fruit-eaters (G34), glowing lures (G28), sea-forest migrant insects (G13), dusk followers (G15) | carried forward | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) E1, E2 |
 | C08 | the sea-forest return path | sea-forest migrant insects (G13), seabird-like colonial fliers (G14), run fish (G42), trap plants (G26), droppings-collecting plants (G27), glowing lures (G28), sulfur- and iodine-releasing seaweeds (G40) | carried forward | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) G1-G4, H1-H10 |
 | C09 | farms of the day fruit | day-fruit crops (G18), fruit picked young (G21), continuous-light tomatoes (G22) | carried forward, in places | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) C1, D3, D5; [people and land](people_and_land.md) item 11 |
-| C10 | megaforests | megaforest emergents (G29), lesser floaters (G02) | hypothesis | [megaforest](../../research/studies/megaforest_wind/README.md); [forest patch](../../research/studies/forest_patch/README.md); [biosphere](../README.md); [floater growth](../../research/studies/floater_viability/growth.md) The canopy nursery |
+| C10 | megaforests | megaforest emergents (G29), lesser aerophytes (G02) | hypothesis | [megaforest](../../research/studies/megaforest_wind/README.md); [forest patch](../../research/studies/forest_patch/README.md); [biosphere](../README.md); [aerophyte growth](../../research/studies/aerophytes/growth.md) The canopy nursery |
 | C11 | pioneer crusts | basalt pioneers (G30), crust mosses (G31) | hypothesis | [ecology](README.md) finding 13 |
 | C12 | the living seas | sea phytoplankton (G38), dark-night luminous plankton (G39), sulfur- and iodine-releasing seaweeds (G40), sea grazers (G41), run fish (G42), sea-forest migrant insects (G13) | carried forward | [decisions](../../research/decisions.md) Life and people; [living water](../living_water/waters.json); [sea appearance](../../research/studies/sea_appearance/README.md) Decisions |
 
@@ -460,16 +462,21 @@ Angiospermae and, within it, Caryophyllales, Nepenthaceae, *Nepenthes*, Cucurbit
 Animalia with Arthropoda (Insecta, Diptera, Arachnida, Araneae) and Chordata (Aves, Salmonidae). Ranked nodes follow
 the GBIF backbone; the rankless ones are cited.
 
-## Names for the floaters
+## Names for the aerophytes
 
-"Floaters" is the word Sagan and Salpeter used in 1976 for buoyant organisms of Jupiter's air. The system distinguishes
-three stages of the Open Moon's floaters: the young, drifting propagules; the lesser floaters of the coupled study's
-reference organism, 40–150 m across (G02); and the giants that keep growing for centuries, as rafts of modules or
-round bodies (G03). Each candidate
-names the floaters and their giants, and some name the young or the formation they drift in. Every scientific form was
-checked against IRMNG and the GBIF backbone on 9 October 2026, and neither lists any of them as a genus.
+The author chose the everyday names on 10 October 2026: aerophytes for the class (G01), and sky reefs for the colony
+giants, the rafts of gas modules (G03); the round giants have no common name yet. Until then the working name was
+Sagan & Salpeter's "floaters", their word in 1976 for buoyant organisms of Jupiter's air. "Aerophyte" coincides with
+an older botanical term for epiphytes; the project uses it for its own class. The scientific names stay open: N1–N6
+remain candidates for that layer, which the author said cloud roots could serve.
 
-| ID | The floaters | The giants | Scientific form | Roots |
+The system distinguishes three stages of the Open Moon's aerophytes: the young, drifting propagules; the lesser
+aerophytes of the coupled study's reference organism, 40–150 m across (G02); and the giants that keep growing for
+centuries, as sky reefs or round bodies (G03). Each candidate names the aerophytes and their giants, and some name the
+young or the formation they drift in. Every scientific form was checked against IRMNG and the GBIF backbone on
+9 October 2026, and neither lists any of them as a genus.
+
+| ID | The aerophytes | The giants | Scientific form | Roots |
 |---|---|---|---|---|
 | N1 | welkins | elder welkins | *Welkinia* | Old English wolcen, cloud, sky |
 | N2 | holms | great holms | *Aeronesia* | Old English holm, Old Norse holmr, islet; Greek aēr, nēsos |
@@ -487,8 +494,8 @@ checked against IRMNG and the GBIF backbone on 9 October 2026, and neither lists
 - **Sound.** Two soft syllables, WEL-kin, an old word that ends on "kin".
 - **Image.** The dome of the sky in old poetry, and living pieces of it drifting over the seas.
 - **Logic.** The word meant cloud before it meant sky; these organisms are the sky's living clouds.
-- **Place.** The English working name of the floaters (G01); *Welkinia* the clade name of the new lineage; elder welkins
-  the giants (G03); the wolcenfaru their formation.
+- **Place.** The English working name of the aerophytes (G01); *Welkinia* the clade name of the new lineage; elder
+  welkins the giants (G03); the wolcenfaru their formation.
 - **Checks.** The word is rare in modern English and carries no biological meaning.
 
 ### N2. Holms and great holms
@@ -500,7 +507,7 @@ checked against IRMNG and the GBIF backbone on 9 October 2026, and neither lists
 - **Image.** A drifting archipelago of green islets over the sea, each holding its own small pools and residents.
 - **Logic.** The coupled study's concept is a light host carrying small communities in retained water: an island. Its
   colonial giants are rafts of modules, an archipelago of holms.
-- **Place.** The English working name of the floaters (G01); *Aeronesia* the clade; great holms the giants (G03), a
+- **Place.** The English working name of the aerophytes (G01); *Aeronesia* the clade; great holms the giants (G03), a
   colony's modules its holms; the sky archipelago (C01) their formation.
 - **Checks.** *Holmia*, the obvious Latin form, is preoccupied by a trilobite genus and others, so the clade takes the
   Greek form. "Holm" also names the holm oak; context separates them.
@@ -517,8 +524,8 @@ checked against IRMNG and the GBIF backbone on 9 October 2026, and neither lists
   Moon.
 - **Logic.** A cloud that bears water and messages; a root that means one who sprinkles, for organisms that gather and
   hold water.
-- **Place.** Meghas the working name of the floaters (G01), with *Meghaphyta* the clade; meghadutas the giants (G03), with
-  *Meghaduta* free for a genus if the giants become a sister lineage.
+- **Place.** Meghas the working name of the aerophytes (G01), with *Meghaphyta* the clade; meghadutas the giants (G03),
+  with *Meghaduta* free for a genus if the giants become a sister lineage.
 - **Checks.** The macron of meghadūta drops under the codes' alphabet rule. The poem is secular.
 
 ### N4. Kun and peng
@@ -551,8 +558,8 @@ checked against IRMNG and the GBIF backbone on 9 October 2026, and neither lists
 - **Sound.** se-REEN, smooth and long; se-re-NIS-si-ma for the giants, five open syllables.
 - **Image.** Calm daylight over the Sea of Serenity, and a fine rain falling from clear air after sunset.
 - **Logic.** The Moon's own sea name; organisms that keep to clear daylight and drink from the air at dusk.
-- **Place.** Serenes the working name of the floaters (G01), with *Sereniphyta* the clade; serenissimas the giants (G03),
-  with *Serenissima* free for a genus.
+- **Place.** Serenes the working name of the aerophytes (G01), with *Sereniphyta* the clade; serenissimas the giants
+  (G03), with *Serenissima* free for a genus.
 - **Checks.** *Serenitas* (Wells, 2009) is preoccupied, and *Serenia* sounds too close to Sirenia, the sea cows.
 
 ### N6. Mawingu and great mawingu
@@ -561,12 +568,12 @@ checked against IRMNG and the GBIF backbone on 9 October 2026, and neither lists
 - **Sound.** ma-WEEN-goo, three open syllables stressed on the second; the singular *wingu*.
 - **Image.** Tall clouds over East Africa's plains and lakes.
 - **Logic.** A word from one of Africa's most widely spoken languages, for organisms that cross every nation's sky.
-- **Place.** Mawingu the working name of the floaters (G01), a wingu one of them, with *Mawingua* the clade; great
+- **Place.** Mawingu the working name of the aerophytes (G01), a wingu one of them, with *Mawingua* the clade; great
   mawingu the giants (G03).
 - **Checks.** Swahili is a living language, so the name is adopted with its speakers (P6).
 
-The register carries the working name "floaters" for G01 until the author chooses, and the identifier stays the same
-afterwards.
+The register carries the author's common name, aerophytes, for G01, and the identifier stays the same when the
+scientific name is chosen.
 
 ## Files and checks
 

@@ -7,7 +7,7 @@
     },
     "inputs": {
       "illumination/surface_light/results/surface_light.json": "e2406dbceb34193eaef5bd8a1dd6ea20940be72934301ef618221fdc79ad5572",
-      "research/studies/aerial_ecology/sources.json": "d0e41991a99d3031ba69243d4cbbbb1c1c85d7de00b07ddf06dbdf9048f08c99"
+      "research/studies/aerial_ecology/sources.json": "2317791ff3273c0b6626b8bdfd880cd7dc11e0d9f5c34174932e4a5eacd0195f"
     },
     "constants": {
       "AVOGADRO": 6.02214076e+23,

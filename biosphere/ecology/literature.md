@@ -156,18 +156,18 @@ Sources and how far each was read are in [taxonomy_sources.json](taxonomy_source
   years and 58% for a century (Wood 1951, the Madison curve), so a cellulose skin or tendon is sized for the load it
   holds between renewals.
 - **Tendon collagen creeps.** Wallaby tail tendons rupture under sustained stress of 10 MPa and above (Wang & Ker
-  1995), which holds collagen-tendoned round floaters to 100–200 m.
+  1995), which holds collagen-tendoned round aerophytes to 100–200 m.
 - **Fish secrete gas against great pressure.** Deep-sea fish fill their swim bladders with oxygen at over 100
   atmospheres through a counter-current rete 7–13 mm long (Scholander & van Dam 1954; Scholander 1954), driven by the
   gas gland's acid output and the Root effect (Pelster 2015).
 - **Guanine plates seal the bladder.** Removing the silvery guanine layer raises the wall's gas permeability about a
   hundredfold (Denton, Liddicoat & Taylor 1972); the plates are under 20 nm thick and up to 50 µm wide (Pinsk et al.
   2022).
-- **A colonial floater makes its own float gas.** The Portuguese man-of-war's gas gland makes carbon monoxide from
+- **A floating colony makes its own float gas.** The Portuguese man-of-war's gas gland makes carbon monoxide from
   serine, 0.5–13% of its float gas (Wittenberg 1960), and siphonophore colonies divide their work among zooids budded
   in growth zones (Dunn & Wagner 2006).
-- **Floaters already sail.** The man-of-war sails up to 50–55° off downwind with its tentacles and polyps as a sea
-  anchor (Iosilevskii & Weihs 2009), and a wing on a long tether can steer a stratospheric balloon across the wind
+- **Floating bodies already sail.** The man-of-war sails up to 50–55° off downwind with its tentacles and polyps as a
+  sea anchor (Iosilevskii & Weihs 2009), and a wing on a long tether can steer a stratospheric balloon across the wind
   (Aaron, Heun & Nock 2002).
 - **Animals drink vapour.** A desert cockroach takes water from air above 82.5% relative humidity (O'Donnell 1977),
   and tick larvae hold their weight down to about 80–85% (Knülle 1966).
@@ -176,5 +176,5 @@ Sources and how far each was read are in [taxonomy_sources.json](taxonomy_source
 - **Hydrogen's flammable range.** Hydrogen burns in air from 4.0% to 75%, and no hydrogen–nitrogen–air mixture burns
   below about 5% oxygen (Coward & Jones 1952; Zabetakis 1965), so in the lunar air the upper limit is about 71%.
 
-Sources and how far each was read are in the floater study's registers
-([research/studies/floater_viability](../../research/studies/floater_viability/README.md), `*_sources.json`).
+Sources and how far each was read are in the aerophyte study's registers
+([research/studies/aerophytes](../../research/studies/aerophytes/README.md), `*_sources.json`).

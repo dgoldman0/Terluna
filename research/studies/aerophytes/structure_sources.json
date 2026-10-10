@@ -1,0 +1,81 @@
+{
+  "schema": "terluna.research.sources/1",
+  "checked": "2026-10-09",
+  "scope": "Primary sources for joints and sustained load, read as stated; the gusts, air and storms are committed project products named in structure.py INPUT_FILES.",
+  "sources": [
+    {
+      "id": "wood1951",
+      "citation": "Wood, L. W. (1951). Relation of strength of wood to duration of load. USDA Forest Products Laboratory Report No. 1916 (reaffirmed reprint).",
+      "url": "https://ir.library.oregonstate.edu/downloads/nv935696n",
+      "access": "Full text of the reaffirmed reprint read by a verification agent on 2026-10-09.",
+      "use": "Madison curve y = 108.4/x^0.04635 + 18.3, x seconds under load, y percent of the standard ~5-minute static bending strength; fitted through (0.015 s, 150%), (7.5 min, 100%) and (3,750 h, 69%); 126 long-time tests on clear Douglas fir begun in 1943. 10 years gives 62%.",
+      "limit": "Wood in bending at 6% and 12% moisture content. Used as the measured biological analogue for a cellulose fibre composite; an aerophyte fibre needs its own curve. The often-quoted SL = 108.4 - 9.31 log10(T) form is not in the report and is not used."
+    },
+    {
+      "id": "wang_ker1995",
+      "citation": "Wang, X. T. and Ker, R. F. (1995). Creep rupture of wallaby tail tendons. Journal of Experimental Biology 198(3), 831-845.",
+      "doi": "10.1242/jeb.198.3.831",
+      "access": "PubMed abstract read.",
+      "use": "Creep rupture occurs at 10 MPa and above; time to rupture falls exponentially with stress between 20 and 80 MPa, with the 10 MPa lifetime well above that line; dynamic yield about 144 MPa; isometric contraction stress about 13.5 MPa.",
+      "limit": "Macropus rufogriseus tail tendon in vitro; fitted constants and temperature dependence not read. The 10 MPa level anchors the collagen tendon case only."
+    },
+    {
+      "id": "wang_ker_alexander1995",
+      "citation": "Wang, X. T., Ker, R. F. and Alexander, R. McN. (1995). Fatigue rupture of wallaby tail tendons. Journal of Experimental Biology 198(3), 847-852.",
+      "doi": "10.1242/jeb.198.3.847",
+      "access": "PubMed abstract read.",
+      "use": "Cyclic fatigue failure is distinct from creep rupture (tests at 1-50 Hz).",
+      "limit": "No numbers taken."
+    },
+    {
+      "id": "ker_wang_pike2000",
+      "citation": "Ker, R. F., Wang, X. T. and Pike, A. V. L. (2000). Fatigue quality of mammalian tendons. Journal of Experimental Biology 203(8), 1317-1327.",
+      "doi": "10.1242/jeb.203.8.1317",
+      "access": "PubMed abstract read.",
+      "use": "Wallaby hind-limb tendons loaded to their muscles' maximum isometric force ruptured after about 4.2 hours on average.",
+      "limit": "Static loading at physiological maximum; per-tendon ultimate strengths not read."
+    }
+  ],
+  "design_guesses": {
+    "coupon_film_mpa": [
+      14,
+      33
+    ],
+    "joint_efficiency": [
+      0.5,
+      0.9
+    ],
+    "tendon_termination_efficiency": [
+      0.6,
+      0.9
+    ],
+    "film_renewal_years": [
+      1,
+      30
+    ],
+    "tendon_renewal_years": [
+      30,
+      300
+    ],
+    "design_factor": 1.5,
+    "opening_ratio": [
+      0.05,
+      0.2
+    ],
+    "ripstop_spacing_m": [
+      2,
+      6
+    ],
+    "fitting_radius_over_body": [
+      0.02,
+      0.1
+    ],
+    "seam_overlap_m": [
+      0.02,
+      0.05
+    ],
+    "gust_factor": 1.4,
+    "century_factor": 1.2,
+    "note": "Gust factor and decades factor follow the summit tower and sky-ship studies."
+  }
+}

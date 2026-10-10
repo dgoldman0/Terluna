@@ -207,16 +207,24 @@ the sky boats' share of trips, ownership and traffic system stay open.
 | Investigate true aeroplankton and large photosynthetic aerial organisms together, their consumers, and food harvest with a functioning phosphorus cycle. | Author, 2026-10-09 | [First requirements evaluation](studies/aerial_ecology/README.md) completed; ecology and resources must close nutrient return including harvest, with no assumed safe yield or species count. |
 | Allow much floating habitation to roam while managing collision and storm risks. | Author, 2026-10-09 | Adopted working direction; operational budgets include navigation, avoidance, rendezvous and occasional repositioning. Fixed-location holding is a separate comparison. |
 
-## Floater light-history correction, 9 October 2026
+## Aerophyte light-history correction, 9 October 2026
 
 | Direction | Authority | State |
 |---|---|---|
-| Evaluate persistent twilight and colonies moving with the slow Sun; do not impose a stationary half-cycle dark interval everywhere. | Author, 2026-10-09 | Incorporated in [floater requirements](studies/floater_viability/README.md). Light spectra, carbon compensation and wind-vector routes remain separate requirements; no route or species adopted. |
+| Evaluate persistent twilight and colonies moving with the slow Sun; do not impose a stationary half-cycle dark interval everywhere. | Author, 2026-10-09 | Incorporated in [aerophyte requirements](studies/aerophytes/README.md). Light spectra, carbon compensation and wind-vector routes remain separate requirements; no route or species adopted. |
 
 ## Sky giants and the biosphere's names, 9 October 2026
 
 | Direction | Source | Status |
 |---|---|---|
-| Pursue giant photosynthetic aerial organisms that grow over centuries, like the oldest trees, as far as the physics allows. Work out what the first arithmetic leaves out: fittings, seams, gusts and damage, then water and storms. | Author, 2026-10-09 ("Love that honestly if we can do that"; "Then let's figure that out") | Research direction; the [coupled floater study](studies/floater_viability/README.md) (schema 2, 9 October 2026) gives size limits, ages, water, storms and sailing as screen values for the author's review |
-| The large aerial organisms gather their water from the air around them, in preference to descending to drink. | Author, 2026-10-09 ("Pulling from the air would be preferable") | Working direction; the floater study maps where rain, vapour and humid layers meet each trait set's need ([water](studies/floater_viability/water.md)): rain-drinking giants bank storm rain within their trim, and polar floaters drink vapour |
-| Rename the floaters, and begin a taxonomic system for the Open Moon's biosphere. | Author, 2026-10-09 ("let's also change the name. Indeed, let's start working out a taxonomic system for this world's biosphere") | Research direction, begun on 2026-10-09: [biosphere/ecology/taxonomy.md](../biosphere/ecology/taxonomy.md) proposes the system with seven choices for the author (O1–O7) and six names for the floaters (N1–N6); the register carries the working name "floaters" until the author chooses |
+| Pursue giant photosynthetic aerial organisms that grow over centuries, like the oldest trees, as far as the physics allows. Work out what the first arithmetic leaves out: fittings, seams, gusts and damage, then water and storms. | Author, 2026-10-09 ("Love that honestly if we can do that"; "Then let's figure that out") | Research direction; the [coupled aerophyte study](studies/aerophytes/README.md) (schema 2, 9 October 2026) gives size limits, ages, water, storms and sailing as screen values for the author's review |
+| The large aerial organisms gather their water from the air around them, in preference to descending to drink. | Author, 2026-10-09 ("Pulling from the air would be preferable") | Working direction; the aerophyte study maps where rain, vapour and humid layers meet each trait set's need ([water](studies/aerophytes/water.md)): rain-drinking giants bank storm rain within their trim, and polar aerophytes drink vapour |
+| Rename the aerophytes, and begin a taxonomic system for the Open Moon's biosphere. | Author, 2026-10-09 ("let's also change the name. Indeed, let's start working out a taxonomic system for this world's biosphere") | Research direction, begun on 2026-10-09: [biosphere/ecology/taxonomy.md](../biosphere/ecology/taxonomy.md) proposes the system with seven choices for the author (O1–O7) and six names for the aerophytes (N1–N6); the register carries a working name until the author chooses |
+
+## The aerophytes' names, 10 October 2026
+
+| Decision | Source | Status |
+|---|---|---|
+| The large photosynthetic aerial organisms, held aloft by their own lifting gas, are called aerophytes, replacing the working name "floaters". | Author, 2026-10-10 ("we need to stop calling them 'floaters.' It just sounds dumb for a few reasons"; "Aerophytes.") | Adopted. The study is [research/studies/aerophytes](studies/aerophytes/README.md), and the taxonomy's G01 carries the name |
+| The larger colony types take the common name "sky reefs". | Author, 2026-10-10 ("I like 'sky reef' does work for a common name for the larger colony types") | Adopted. The taxonomy's G03 gives the colony form the name; the round giants have no common name yet |
+| Names that mean "cloud" can serve the scientific layer, and the everyday names describe what people see. | Author, 2026-10-10 ("most just translate as 'cloud' but that could work in the taxonomic sense, not the regular everyday name") | Direction. The six candidates (N1–N6 in [the taxonomy](../biosphere/ecology/taxonomy.md)) remain for the scientific names |

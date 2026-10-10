@@ -1,0 +1,68 @@
+{
+  "source_admission": "Primary experimental studies checked on 2026-10-09. No paper or external data bytes are redistributed. Access states which portions were actually read. Derived coefficients and their transfer to a hypothetical aerophyte remain conditional; none is a measured aerophyte trait.",
+  "sources": [
+    {
+      "id": "van_iersel_seymour_2000",
+      "citation": "van Iersel, M. W. and Seymour, L. (2000). Growth Respiration, Maintenance Respiration, and Carbon Fixation of Vinca: A Time Series Analysis. Journal of the American Society for Horticultural Science 125, 702–706.",
+      "url": "https://journals.ashs.org/downloadpdf/view/journals/jashs/125/6/article-p702.pdf",
+      "access": "Publisher PDF abstract, methods, coefficient definitions and results inspected.",
+      "evidence": "Whole-plant gas exchange supports model-derived construction cost 1.39 g glucose/g dry material and maintenance 0.031 g glucose/g dry material/day.",
+      "boundary": "Seedlings at 22/18 C and 14/10-hour light/dark conditions; root-zone fluxes included. Coefficients depend on physiology and composition. They cannot be applied to an inert envelope or used to validate lunar-night survival."
+    },
+    {
+      "id": "van_iersel_2003",
+      "citation": "van Iersel, M. W. (2003). Carbon use efficiency depends on growth respiration, maintenance respiration, and relative growth rate. A case study with lettuce. Plant, Cell & Environment 26, 1441–1449.",
+      "url": "https://doi.org/10.1046/j.0016-8025.2003.01067.x",
+      "access": "Publisher full HTML: carbon equations, measurements and fitted-coefficient comparisons inspected.",
+      "evidence": "Different fits to lettuce data gave maintenance 31–39 mg glucose/g dry matter/day and construction respiration 0.40–0.62 g glucose/g new dry matter.",
+      "boundary": "Construction respiration is not the total construction substrate. Maintenance and carbon-use efficiency vary with size and growth; these are active terrestrial plant references, not universal lower bounds."
+    },
+    {
+      "id": "melis_2000",
+      "citation": "Melis, A., Zhang, L., Forestier, M., Ghirardi, M. L. and Seibert, M. (2000). Sustained photobiological hydrogen gas production upon reversible inactivation of oxygen evolution in the green alga Chlamydomonas reinhardtii. Plant Physiology 122, 127–136.",
+      "url": "https://doi.org/10.1104/pp.122.1.127",
+      "access": "Original abstract through PubMed, https://pubmed.ncbi.nlm.nih.gov/10631256/; PMC full text blocked.",
+      "evidence": "Sulfur deprivation separates oxygenic growth and sustained hydrogen production in culture.",
+      "boundary": "A physiological switch with recovery and substrate requirements, not continuous simultaneous normal growth and unlimited hydrogen synthesis."
+    },
+    {
+      "id": "kosourov_2018",
+      "citation": "Kosourov, S., Jokel, M., Aro, E.-M. and Allahverdiyeva, Y. (2018). A new approach for sustained and efficient H2 photoproduction by Chlamydomonas reinhardtii. Energy & Environmental Science 11, 1431–1436.",
+      "url": "https://doi.org/10.1039/C8EE00054A",
+      "access": "Publisher-indexed search excerpts and original abstract read; direct full-HTML retrieval failed.",
+      "evidence": "Pulse illumination supports hydrogen production with a reported early light-energy conversion peak around 1.6–1.7%; cells did not grow under that pulse regime.",
+      "boundary": "The efficiency denominator, pulse duty and short measurement period prevent direct substitution into annual all-solar production. The evaluation's efficiency sweep is hypothetical, not a calibration from that peak."
+    },
+    {
+      "id": "kosourov_2020",
+      "citation": "Kosourov, S. et al. (2020). Water oxidation by photosystem II is the primary source of electrons for sustained H2 photoproduction in nutrient-replete green algae. PNAS 117, 29629–29636.",
+      "url": "https://doi.org/10.1073/pnas.2009210117",
+      "access": "Publisher HTML significance, abstract, isotope results and carbon-fixation competition sections inspected.",
+      "evidence": "Direct water biophotolysis established under microoxic pulsed illumination; in the examined efficient regime, carbon fixation was inactive.",
+      "boundary": "Oxygen consumption, hydrogen uptake and measurement conditions matter. Productive H2 organs cannot receive an additional full carbon-fixation credit for those same absorbed photons."
+    },
+    {
+      "id": "liran_2016",
+      "citation": "Liran, O. et al. (2016). Microoxic Niches within the Thylakoid Stroma of Air-Grown Chlamydomonas reinhardtii Protect [FeFe]-Hydrogenase and Support Hydrogen Production under Fully Aerobic Environment. Plant Physiology 172, 264–271.",
+      "url": "https://doi.org/10.1104/pp.16.01063",
+      "access": "Publisher HTML abstract, oxygen-uptake results and discussion inspected.",
+      "evidence": "Oxygen-consuming microenvironments preserve hydrogenase function in air-grown cells; hydrogen release increases transiently under brighter light.",
+      "boundary": "The reported hydrogen branch used less than 1% of the initial electron flow. This refutes an absolute oxygen prohibition but does not establish balloon-scale output or its long-term resource cost."
+    },
+    {
+      "id": "masset_2012",
+      "citation": "Masset, J. et al. (2012). Fermentative hydrogen production from glucose and starch using pure strains and artificial co-cultures of Clostridium spp. Biotechnology for Biofuels 5, 35.",
+      "url": "https://doi.org/10.1186/1754-6834-5-35",
+      "access": "Publisher full HTML: fixed-pH glucose experiments, repeated-batch yields, product composition and partial-pressure discussion inspected.",
+      "evidence": "Measured glucose yields included 2.1 mol H2/mol glucose; repeated culture varied from 1.63 to 2.32. Biogas contained 62–65% H2; fatty acids accumulated.",
+      "boundary": "Regulated anaerobic reactors; high H2 partial pressure and metabolite accumulation affect performance. Four mol/mol is the ideal acetate-pathway comparison, not a demonstrated organism efficiency or a limit for all light-assisted pathways."
+    }
+  ],
+  "declared_sensitivities": {
+    "maintenance": "0.001, 0.003, 0.01 and 0.031 kg glucose/kg living dry tissue/day. Only the last is directly anchored to the selected whole-vinca estimate; the lower values explore less costly tissue or suppression and are not established lunar physiology.",
+    "light_and_gpp": "GPP 1, 3 and 5 kg C/m2/year, mean incident power 100 W/m2, and matched-basis light-to-H2 efficiencies 0.5%, 1% and 2% are imposed comparisons. No aerophyte optical/photosynthesis model supplies them yet.",
+    "night": "Night metabolic fractions 0.1, 0.25 and 1 are selected sensitivities. Reserves are separate carbohydrate mass; maintaining living tissue creates a nonzero demand floor.",
+    "chemistry": "Glucose carbon mass fraction 0.4 and starch fraction 4/9 are stoichiometric approximations. Hydrogen/glucose molar masses 0.002016/0.180156 kg/mol are exposed conversion inputs, not adjustable physiological yields.",
+    "reproduction": "Recruitment probability, reproductive lifetime, bud construction, nutrients, reserves and gas acquisition must all be supplied explicitly. A positive carbon balance alone does not supply a life cycle."
+  }
+}

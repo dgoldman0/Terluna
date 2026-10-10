@@ -22,23 +22,24 @@ The author's standing directions frame it.
 
 ## The 9 October follow-ups
 
-**The [coupled floater study](../../research/studies/floater_viability/README.md) sets how large floaters grow, how
-old they get, where they find water and how they live through storms** (*screen* values, product schema 2).
+**The [coupled aerophyte study](../../research/studies/aerophytes/README.md) sets how large aerophytes grow, how
+old they get, where they find water and how they live through storms** (*screen* values, product schema
+`terluna.research.aerophytes/1`).
 - **Size.** At 10 km, with joints, seams, storm gusts, spare pressure for trim, wet fire-barrier skins, gas cells and
   tendon renewal paid, a single round body lives from about 50 m to 700 m across with cellulose-class tendons and to
   1 km with 300 MPa fibre, and to 1.5 and 3 km with those fibres in canopy-like light. A colony of 60–150 m modules
   has no structural size limit.
-- **Age.** A colony grows to 2 km across in 36–544 years and a round giant to 1 km in 73–1,186 years.
+- **Age.** A sky reef grows to 2 km across in 36–544 years and a round giant to 1 km in 73–1,186 years.
 - **Water.** Mean rain meets the reference water need equatorward of 35–38°, and to 51° with cool leaves and a
   CO₂-concentrating trait. Sorbent skins take 0.2–2.4 kg/m² a day of vapour from the 64% air.
 - **Storms and sailing.** Storms are escaped by route and hour, lightning burns small wet gas cells one at a time, and
-  weighted tethered wings sail floaters 30–70° of latitude in a lunar day.
+  weighted tethered wings sail aerophytes 30–70° of latitude in a lunar day.
 - **Nursery.** Megaforest crowns can raise juveniles to 50–60 m in one to seven years.
 - **Open:** assembled wet materials, paths through the latitude and solar-hour winds, and recruitment.
 
 **The [aerial food-web evaluation](../../research/studies/aerial_ecology/README.md) treats aeroplankton and large
-photosynthetic floaters as producers in their own right**, with reproduction against removal, filter drag, wet mass,
-optical depth, nutrients and harvest accounted separately. Its central case, floaters over 1% of the Moon at
+photosynthetic aerophytes as producers in their own right**, with reproduction against removal, filter drag, wet mass,
+optical depth, nutrients and harvest accounted separately. Its central case, aerophytes over 1% of the Moon at
 1,000 g C/m² a year, gives 184.6 million food-energy equivalents before edibility and processing losses, so the sky's
 wild harvest is a small food source and is credited with none.
 
@@ -54,7 +55,7 @@ resources the phosphorus-return model, on their own branches.
 
 ## A taxonomic system, 9 October 2026
 
-The author asked on 9 October to rename the floaters and to begin a taxonomic system for the biosphere.
+The author asked on 9 October to rename the aerophytes and to begin a taxonomic system for the biosphere.
 [taxonomy.md](taxonomy.md) proposes one:
 - **Descent.** A designed organism keeps the Earth lineage of its chassis, the lineage whose genome organizes the cell.
 - **Degree of design.** A line within an Earth species, a designed species, a designed genus or a new lineage sets the
@@ -66,8 +67,9 @@ The author asked on 9 October to rename the floaters and to begin a taxonomic sy
 
 The first register, written by [taxa.py](taxa.py) to [results/taxa.json](results/taxa.json), holds 36 designed groups
 with 11 subgroups, 28 design modules and 12 communities drawn from the project's studies. Each comes with its Earth
-reference organisms, placement, status and sources. Six names for the floaters and their giants wait for the author's
-choice, with six choices about the system itself; until then the register carries the working name.
+reference organisms, placement, status and sources. The author chose the everyday names on 10 October: aerophytes,
+with sky reefs for the colony giants. Six candidate scientific names wait for the author's choice, with six choices
+about the system itself.
 
 ## What the project already says
 
@@ -290,7 +292,7 @@ statements in other folders. These belong to main and are not changed on this br
 | [sources.json](sources.json) | Every source cited, its use and how far it was read |
 | [people_and_land.md](people_and_land.md) | Sky, land and people on the Open Moon: the sky's biomes first, the land, nutrients, gases and heat, and what binds first |
 | [people.py](people.py) | Its screen, writing [results/people.json](results/people.json); sources in [people_sources.json](people_sources.json) |
-| [taxonomy.md](taxonomy.md) | The taxonomic system: principles, the author's choices, the functional classification, the first register and names for the floaters |
+| [taxonomy.md](taxonomy.md) | The taxonomic system: principles, the author's choices, the functional classification, the first register and names for the aerophytes |
 | [taxa.py](taxa.py) | The register as code, writing [results/taxa.json](results/taxa.json) (schema `terluna.biosphere.ecology-taxa/1`); sources in [taxonomy_sources.json](taxonomy_sources.json) |
 
 `python -m biosphere.ecology.screen`, `python -m biosphere.ecology.people` and `python -m biosphere.ecology.taxa`

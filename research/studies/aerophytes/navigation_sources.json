@@ -1,0 +1,62 @@
+{
+  "schema": "terluna.research.aerophyte-navigation-sources/1",
+  "checked": "2026-10-09",
+  "admission": "Primary research and official NASA material inspected at the stated depth. Algebraic requirements are derived here; no claim of complete source admission or empirical lunar navigation validation.",
+  "sources": [
+    {
+      "id": "nasa_drag",
+      "title": "Drag Equation",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/drag-equation/",
+      "access": "Official equation and reference-area discussion inspected",
+      "supports": "Drag equals one half density times speed squared times Cd times its reference area. The coefficient and its area convention must be used together.",
+      "limit": "Does not supply an assembled aerophyte coefficient, biological actuator or efficiency."
+    },
+    {
+      "id": "nasa_sphere",
+      "title": "Drag of a Sphere",
+      "publisher": "NASA Glenn Research Center",
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/drag-of-a-sphere/",
+      "access": "Official Reynolds similarity and roughness discussion inspected",
+      "supports": "Sphere drag coefficient depends on Reynolds number, boundary layer and roughness.",
+      "limit": "Cd0.47 is an imposed sensitivity, not a universal sphere value or a guaranteed conservative bound. Cd0.05 is an unvalidated streamlined alternative with unchanged area ratio only for comparison."
+    },
+    {
+      "id": "colozza_dolce2005",
+      "title": "High-Altitude, Long-Endurance Airships for Coastal Surveillance",
+      "authors": "Anthony Colozza, James L. Dolce",
+      "year": 2005,
+      "report": "NASA/TM-2005-213427",
+      "url": "https://ntrs.nasa.gov/api/citations/20050080709/downloads/20050080709.pdf",
+      "access": "Introduction and coupled solar-power/aerodynamic-design discussion, report pp1-2 inspected",
+      "supports": "Solar collecting area, propulsion, aerodynamics, wind environment, latitude and season require a joint power-system design.",
+      "conditions": "Engineering assessment of terrestrial high-altitude coastal surveillance airships, not biological flight experiments.",
+      "limit": "No equipment mass, efficiency, wind climate or biological performance transferred numerically."
+    },
+    {
+      "id": "bellemare2020",
+      "title": "Autonomous navigation of stratospheric balloons using reinforcement learning",
+      "authors": "Marc G. Bellemare, Salvatore Candido, Pablo Samuel Castro, Jun Gong, Marlos C. Machado, Subhodeep Moitra, Sameera S. Ponda, Ziyu Wang",
+      "year": 2020,
+      "doi": "10.1038/s41586-020-2939-8",
+      "url": "https://www.nature.com/articles/s41586-020-2939-8",
+      "author_abstract": "https://psc-g.github.io/posts/research/rl/loon/",
+      "access": "Publisher-indexed abstract and figure/video descriptions, author-hosted abstract inspected. Publisher full text redirected to inaccessible identity endpoint; author-linked view-only PDF required JavaScript. Full methods not admitted.",
+      "conditions": "Loon engineered superpressure balloons in Earth's stratosphere; includes a39-day controlled Pacific experiment.",
+      "supports": "Actual automated balloon navigation used wind information despite uncertainty; publisher description shows use of opposing wind sheets.",
+      "limit": "Establishes an engineering precedent for wind-aware control, not a lunar wind map, biological controller, zero-energy altitude transfer or universal station keeping."
+    }
+  ],
+  "assumptions_not_source_measurements": {
+    "sphere_drag_coefficient": 0.47,
+    "streamlined_drag_coefficient": 0.05,
+    "drag_reference_area_per_collecting_projected_area": 1,
+    "biological_input_to_drag_work_efficiency": 0.25,
+    "engineering_input_to_drag_work_efficiency": 0.7,
+    "chemical_margin_W_m2": [0.1,0.5,1,2],
+    "biomass_energy_MJ_kg_dry": 18,
+    "biomass_carbon_fraction": 0.45,
+    "constant_layer_westward_speeds_m_s": [2,6],
+    "occasional_motion_duty": [0.01,0.05,0.1]
+  }
+}

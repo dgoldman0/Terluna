@@ -128,6 +128,6 @@ The ecology branch's [aerial-food-web](studies/aerial_ecology/README.md) and
 They retain explicit evidence limits and use [shared population comparison cases](../shared/scenarios/population.json)
 with the provisioning and resources branches; no allocation or additional UV transmission is selected.
 
-The [floater viability study](studies/floater_viability/README.md) deepens the aerial work with coupled mass,
+The [aerophyte viability study](studies/aerophytes/README.md) deepens the aerial work with coupled mass,
 pressure, permeability, carbon, water/trim, reproduction and navigation accounts. Persistent twilight and following
 the slow Sun are explicit regimes. Positive budgets remain conditional requirements, with no selected organism size.
