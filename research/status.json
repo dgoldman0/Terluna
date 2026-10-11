@@ -202,7 +202,7 @@
     },
     {
       "topic": "resources",
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11",
       "material": [
         "../resources/README.md",
         "../resources/state.md",
@@ -215,7 +215,13 @@
         "../resources/phosphorus.py",
         "../resources/phosphorus_sources.json",
         "../resources/results/phosphorus.json",
-        "../shared/scenarios/population.json"
+        "../shared/scenarios/population.json",
+        "../resources/sea_phosphorus.md",
+        "../resources/sea_phosphorus.py",
+        "../resources/sea_phosphorus_waters.py",
+        "../resources/sea_phosphorus_sources.json",
+        "../resources/results/sea_phosphorus.json",
+        "../resources/results/sea_phosphorus_waters.json"
       ],
       "unresolved": [
         "The aerial phosphorus cycle: nutrient-specific stocks and annual throughput, natural retention, collection-to-delivery harvest return, land/sea donor depletion, sediment recovery and genuine irreversible losses. Six conservative box sensitivities are arithmetic, not a demonstrated lunar ecology; 1% footprint reference requires9.228MtP/year throughput and4.153\u201341.527Mt stock; at99.9% natural retention and99% food return the low assumed upward supply leaves10,726tP/year to return.",
@@ -226,9 +232,10 @@
         "where deliveries put the energy of their fall into the Moon's well, 1.2-2.7 MJ/kg or 35-349 W/m2 over a 500-year build, and an arrival rule in the spirit of S7",
         "the shield's material life cycle: the film plant's recovery fraction, which sets 73-1,470 kg/s of fresh feed; the film's life; where failed tiles go; lunar feed before the air, then recycling or small bodies",
         "carbon and oxygen budgets through time: a box model with soils' carbonates, the seas' dissolved carbon, burial, kilns and lime, and rock oxidation taking the air's oxygen on a 4-120 million year cycle",
-        "the seas' composition through time and the delivered water's salts; a geochemical map separating dry from flooded ore; the crust's water uptake; micronutrients and critical elements element by element; lift gas; what weathering releases; Earth's share of the costs"
+        "the seas' composition through time and the delivered water's salts; a geochemical map separating dry from flooded ore; the crust's water uptake; micronutrients and critical elements element by element; lift gas; what weathering releases; Earth's share of the costs",
+        "Phosphorus from the waters (resources/sea_phosphorus.md, 2026-10-11): the rain-fed lakes keep 96% of the land's 1.47-4.16 Tg a year and the common-level waters receive 55-180 kt, the great seas least; dredging the lake deltas can supply people's 0.18-1.44 Tg a year and the waters' life can spare 21-56 kt. Open: the great seas' inflow once common-level pits spill, lunar lake retention, delta grades and dredgeable share, the food systems' efficiencies from provisioning, the carriers' lake food webs, and whether the living seas need phosphorus delivered."
       ],
-      "next_session_task": "Couple the phosphorus return model to mapped P inventories, aerial producer traits/capture and food-return/separation technologies; quantify sediment return, carrier transport and irreversible losses. Use common population scenarios and reconcile district versus economy-wide material stocks. Continue the earlier resource priorities in resources/questions.md without assuming a selected allocation."
+      "next_session_task": "Rerun the drainage with common-level pits that fill and spill, then give each sea and large lake its own phosphorus box; bind provisioning's food systems; size delta dredging against delta habitats; settle with ecology whether the seas need phosphorus delivered for their living waters and sea-feeding flyers."
     },
     {
       "topic": "illumination",

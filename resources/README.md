@@ -241,6 +241,30 @@ proxies span 258–5,025 Gt; the orbital comparator assumes 990 t shield and 15 
 accounting sensitivities. Aerial structures, gas, ecological occupancy, food and practical capacity need their own
 requirements; no historical Earth-heavy allocation or orbital-heavy allocation is adopted.
 
+## Phosphorus from the waters
+
+The author asked on 11 October 2026 for phosphorus to be drawn from the seas for human use, as a distribution system,
+beside a decent natural cycle ([register](../research/decisions.md#phosphorus-from-the-seas-11-october-2026)). The study
+is [sea_phosphorus.md](sea_phosphorus.md), with its screen [sea_phosphorus.py](sea_phosphorus.py) and the routing rerun
+[sea_phosphorus_waters.py](sea_phosphorus_waters.py); numbers here are from them.
+
+21. **The rain-fed lakes catch 96% of the phosphorus the land loses, and the common-level waters receive 4%.** 96.5% of
+    the land's runoff crosses a lake on its way to the common water level, so the lakes keep 1.41–4.00 Tg a year and pass
+    on 55–180 kt, 4.6–12 kt of it in solution. The great seas receive least: the Near-side Sea 0.27–0.71 kt a year in
+    solution, the South Pole–Aitken Sea almost none. Mixed together, the common-level waters hold 0.27–1.11 mg/m³ after
+    1,000 years on what the rivers bring, 0.4–1.6% of Earth's ocean mean; dust at the inherited envelope's top would
+    bring them to 18–28 mg/m³.
+22. **People's phosphorus comes from the lake deltas, and the dissolved phosphorus stays with the waters' life.**
+    Dredging the deltas returns the design target's 0.18–1.44 Tg a year for 4–8 billion people from 4–51% of what the
+    lakes receive, at 450–2,080 kg of sediment and 5–206 MJ of fuel a kilogram. Seaweed, fish and sorption can take
+    21–56 kt a year at 30% of the waters' dissolved input; pulling phosphorus from the lunar seas' water costs 1.4–106 GJ
+    a kilogram. Sewage recovery returns 264–540 kt for each billion people.
+23. **People's new phosphorus depends on farm efficiency:** 124–1,283 kt a year per billion with field crops, 90–612 kt
+    with hydroponics and 93–468 kt with aquaponics, against the ecology design target's 44–180 kt.
+24. **A decent natural cycle returns the wild land's dissolved loss.** Carriers can return at most the dissolved loss,
+    70–187 kt a year, 4.5–4.8% of the land's loss. For 30–50% of the land kept wild that is 21–94 kt: 0.6–5.3 million
+    albatross-scale flyers, or lake insects at 11–104% of Lake Mývatn's highest emergence, feeding in the lakes.
+
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting statements
@@ -269,6 +293,13 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 | [results/phosphorus.json](results/phosphorus.json) | Its product (schema `terluna.resources.phosphorus/1`) |
 | [phosphorus_sources.json](phosphorus_sources.json) | Primary scholarly sources and actual access level |
 | [industry_sources.json](industry_sources.json) | The industry study's sources and how far each was read |
+| [sea_phosphorus.md](sea_phosphorus.md) | Phosphorus from the waters: the lakes and seas, people's needs, the routes, distribution and the natural cycle |
+| [sea_phosphorus.py](sea_phosphorus.py) | Its screen: the land loss through the lakes, sea boxes, food systems, routes, carriers and ledgers |
+| [sea_phosphorus_waters.py](sea_phosphorus_waters.py) | The drainage routing rerun with lake-retention tracers, receiving waters and the seas' depths |
+| [results/sea_phosphorus.json](results/sea_phosphorus.json) | Its product (schema `terluna.resources.sea-phosphorus/1`) |
+| [results/sea_phosphorus_waters.json](results/sea_phosphorus_waters.json) | The routing product (schema `terluna.resources.sea-phosphorus-waters/1`) |
+| [sea_phosphorus_sources.json](sea_phosphorus_sources.json) | The study's sources and how far each was read |
 
-`python -m resources.screen`, `python -m resources.industry` and `python -m resources.phosphorus` rewrite the products; `python -m pytest resources/tests`
-checks them.
+`python -m resources.screen`, `python -m resources.industry`, `python -m resources.phosphorus`,
+`python -m resources.sea_phosphorus_waters` (with the ignored grids) and `python -m resources.sea_phosphorus` rewrite
+the products; `python -m pytest resources/tests` checks them.

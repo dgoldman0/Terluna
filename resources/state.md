@@ -48,9 +48,10 @@ row in the register. This branch adds it to the register's section "The world", 
 | Erosion | 10–100 m per million years of land lowering, 0.71–7.1 Gt of rock a year; lifting it 3 km takes 0.11–1.1 GW | Screening on an assumed rate | `research/studies/conservation/results/gates.json` |
 | Tonnages | The tower's chosen form 98 Mt of steel plus 58 Mt of floors; regional magnets 1–4 Gt; momentum stores 0.13–1.7 Gt; lift gas 48,000–71,000 t of hydrogen | Proposed designs | `summit_tower`, `solar_shield_array`, `sky_fleet` studies |
 | Flooding | Mare shares under the 28% sea | Runnable | `geography/results/atlas.json` |
+| Phosphorus through lakes and seas | Lakes keep 1.41–4.00 Tg/yr (96%); common-level waters 55–180 kt; 0.27–1.11 mg/m³ after 1,000 years | Screening on the rerun routing and Earth lake relations | `resources/results/sea_phosphorus.json` |
 
-No product gives the Moon's rocks by element and region, the seas' composition, or a carbon, oxygen or element budget
-through time.
+No product gives the Moon's rocks by element and region, the seas' composition beyond their phosphorus, or a carbon,
+oxygen or element budget through time.
 
 ## What other lines assume of resources
 
@@ -111,3 +112,10 @@ These belong to main and stay unchanged on this branch.
 10. **The fleet in the research README** is given as 27–33 million tiles and 45–53 Gt, against 28.1–28.2 million and
     46 Gt now.
 11. **Water density.** The atlas and groundwater use 1,000 kg/m³, the waves and tides 1,025.
+
+12. **The ecology land loss's water.** The 1.47–4.16 Tg puts Earth's river concentrations on 7,546 km³ a year; the
+    land's own runoff is 4,020 km³ a year, which gives 0.78–2.22 Tg (sea_phosphorus.md).
+13. **The drainage outlets.** Every cell below the common level is an outlet, so 71% of the routed sea-bound water ends
+    in crater waters and grid-scale pits at that level; its second river ends in 229 km² of crater water.
+14. **Sea-feeding flyers.** The sky-ecology study sets flyers' food against the land's whole loss as the seas' input; the
+    common-level waters receive 4% of it.
