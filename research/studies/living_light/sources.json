@@ -1,0 +1,645 @@
+{
+ "schema": "terluna.research.sources/1",
+ "checked": "2026-10-11",
+ "scope": "Sources for the living-light study: bioluminescence chemistry and photon outputs, engineered glowing plants, night vision and lighting needs, skyglow, and light at night in night life. Committed project products are bound by hash in the product, not listed here. Access says what was actually read, by the study's literature agents on 2026-10-11 unless stated; no paper or dataset is redistributed. Earth observations serve as reference points for designed organisms.",
+ "sources": [
+  {
+   "id": "falchi_2016",
+   "citation": "Falchi, F., Cinzano, P., Duriscoe, D., Kyba, C. C. M., Elvidge, C. D., Baugh, K., Portnov, B. A., Rybnikova, N. A. and Furgoni, R. (2016). The new world atlas of artificial night sky brightness. Science Advances 2(6), e1600377.",
+   "doi_or_url": "10.1126/sciadv.1600377",
+   "access": "Full text (Europe PMC XML, PMC4928945), Tables 1 and 2.",
+   "use": "Natural zenith sky 22.0 mag/arcsec2 = 174 ucd/m2; light-polluted where the artificial zenith brightness exceeds 14 ucd/m2 (about 8% of natural); land above 14 ucd/m2: world 22.5%, EU 88.4%, US 46.9% (Table 2); the atlas model uses aerosol clarity K = 1, a vertical extinction of 0.33 mag at sea level, sources to 195 km.",
+   "component": "skyglow",
+   "limit": "Computed for about 1 a.m.; an astronomical measure, not an ecological one."
+  },
+  {
+   "id": "kyba_mohar_posch_2017",
+   "citation": "Kyba, C. C. M., Mohar, A. and Posch, T. (2017). How bright is moonlight? Astronomy & Geophysics 58(1), 1.31-1.32.",
+   "doi_or_url": "10.1093/astrogeo/atx025",
+   "access": "Full text (GFZ repository PDF).",
+   "use": "Full moon measured at 0.26 lux horizontal; typically 0.05-0.1 lux in temperate summers, 0.05-0.2 lux at most full moons, about 0.3 lux at most.",
+   "component": "needs"
+  },
+  {
+   "id": "duriscoe_hung_2016",
+   "citation": "Duriscoe, D. M. and Hung, L.-W. (2016). Measuring and evaluating the impacts of anthropogenic light (workshop slides, U.S. Department of Energy).",
+   "doi_or_url": "https://www.energy.gov/sites/prod/files/2016/11/f34/duriscoe_sky-glow_denver2016.pdf",
+   "access": "Slides read.",
+   "use": "The natural night sky model: horizontal 0.80 mlux, zenith 0.174 mcd/m2; airglow 48%, zodiacal light 28%, galactic light 19%, stars 5%.",
+   "component": "skyglow",
+   "limit": "Slides, not the peer-reviewed paper."
+  },
+  {
+   "id": "walker_1977",
+   "citation": "Walker, M. F. (1977). The effects of urban lighting on the brightness of the night sky. Publications of the Astronomical Society of the Pacific 89, 405-409.",
+   "doi_or_url": "10.1086/130142",
+   "access": "Full text (ADS scan).",
+   "use": "Sky brightness at 45 degrees toward a city falls as distance to the -2.5 (8-36 km for Salinas; 12-34 km and 71-154 km for San Jose, slower at 34-71 km).",
+   "component": "skyglow"
+  },
+  {
+   "id": "garstang_1986",
+   "citation": "Garstang, R. H. (1986). Model for artificial night-sky illumination. Publications of the Astronomical Society of the Pacific 98, 364-375.",
+   "doi_or_url": "10.1086/131768",
+   "access": "Full text (ADS scan).",
+   "use": "Single-scattering model; upward light from lamps (fraction F) and from ground of reflectance G; standard model 1000 lumens a head, K = 0.5, F = 10%, G = 15%; mean slope -2.3 between 10 and 35 km.",
+   "component": "skyglow"
+  },
+  {
+   "id": "kinzey_2017",
+   "citation": "Kinzey, B., Perrin, T. E., Miller, N. J., Kocifaj, M., Aube, M. and Lamphar, H. S. (2017). An investigation of LED street lighting's impact on sky glow. PNNL-26411, U.S. Department of Energy.",
+   "doi_or_url": "PNNL-26411",
+   "access": "Full text.",
+   "use": "Full cut-off fixtures emit no uplight; cobra heads 2-5%; ground reflectance 12-15%.",
+   "component": "skyglow"
+  },
+  {
+   "id": "kyba_2021",
+   "citation": "Kyba, C. C. M. et al. (2021). Direct measurement of the contribution of street lighting to satellite observations of nighttime light emissions from urban areas. Lighting Research & Technology 53(3), 189-211.",
+   "doi_or_url": "10.1177/1477153520958463",
+   "access": "Abstract.",
+   "use": "Street lights give 13% (10-16%) of a city's light seen from space after midnight.",
+   "component": "skyglow"
+  },
+  {
+   "id": "falchi_2011",
+   "citation": "Falchi, F., Cinzano, P., Elvidge, C. D., Keith, D. M. and Haim, A. (2011). Limiting the impact of light pollution on human health, environment and stellar visibility. Journal of Environmental Management 92, 2714-2722.",
+   "doi_or_url": "10.1016/j.jenvman.2011.06.029",
+   "access": "Full text (arXiv:2007.02063).",
+   "use": "Scotopic-to-photopic ratios: low-pressure sodium 0.20, high-pressure sodium 0.55-0.66, metal halide 1.60; replacing sodium with white light raises skyglow seen by the dark-adapted eye 2.5-5 times.",
+   "component": "skyglow"
+  },
+  {
+   "id": "bipm_si_candela",
+   "citation": "BIPM (2019). SI Brochure, Appendix 2: mise en pratique for the definition of the candela.",
+   "doi_or_url": "https://www.bipm.org/documents/20126/41489685/SI-App2-candela.pdf",
+   "access": "Read.",
+   "use": "Kcd = 683 lm/W at 540 THz; V(lambda) peaks at exactly 555 nm.",
+   "component": "photometry"
+  },
+  {
+   "id": "cie_018_2019",
+   "citation": "CIE (2019). CIE 018:2019 photopic and scotopic luminous efficiency datasets.",
+   "doi_or_url": "doi:10.25039/CIE.DS.dktna2s3 and doi:10.25039/CIE.DS.gr6w4b5g",
+   "access": "CSV files read by the literature agent; the study's 5-nm tables come from CVRL's copies distributed with HDR-VDP 3.0.7 (data/ciexyz31.csv, SHA-256 1c5909432bacc27d557cd8d325c11b1dc0d9ec85b4ff003ea51842eba13cc423; data/cie_scotopic_lum.txt, SHA-256 79eda462a28deff6f855cfd0b903d571224e6de06e77acf782c313e87dda30a0), checked against the CIE values at 470-620 nm.",
+   "use": "V(lambda) and V'(lambda); the scotopic maximum efficacy 1700 lm/W (as Bara et al. 2020 and Crumey 2014 use it).",
+   "component": "photometry"
+  },
+  {
+   "id": "crumey_2014",
+   "citation": "Crumey, A. (2014). Human contrast threshold and astronomical visibility. Monthly Notices of the Royal Astronomical Society 442, 2600-2619.",
+   "doi_or_url": "10.1093/mnras/stu992",
+   "access": "Full text (arXiv:1405.4209).",
+   "use": "Mesopic vision 0.005-5 cd/m2 (CIE 191:2010); the lowest large-field threshold about 4e-6 cd/m2 (Blackwell 1946, second-hand); the natural sky's scotopic-to-photopic ratio 0.79-2.26.",
+   "component": "needs"
+  },
+  {
+   "id": "kalloniatis_luu_2007",
+   "citation": "Kalloniatis, M. and Luu, C. (2007). Light and dark adaptation. Webvision, University of Utah.",
+   "doi_or_url": "https://webvision.med.utah.edu",
+   "access": "Read.",
+   "use": "The rods take over after 5-8 minutes in the dark; the absolute threshold, about 1e-5 cd/m2, after about 40 minutes.",
+   "component": "needs",
+   "limit": "A textbook source quoting Hecht and Mandelbaum through Pirenne 1962."
+  },
+  {
+   "id": "pokorny_2006",
+   "citation": "Pokorny, J., Lutze, M., Cao, D. and Zele, A. J. (2006). The color of night: surface color perception under dim illuminations. Visual Neuroscience 23, 525-530.",
+   "doi_or_url": "10.1017/S0952523806233492",
+   "access": "Abstract.",
+   "use": "Paper samples sorted into their colour groups above 0.32 lux; at 0.1-0.01 lux only reds and oranges named reliably; at 0.0032 lux and below colour names follow scotopic lightness.",
+   "component": "needs"
+  },
+  {
+   "id": "penaloza_2025",
+   "citation": "Penaloza, B., Goddin, T. L., Friedman, D. S., Owsley, C. and Kwon, M. (2025). Investigative Ophthalmology & Visual Science 66(3), 40.",
+   "doi_or_url": "10.1167/iovs.66.3.40",
+   "access": "Full text.",
+   "use": "At a mesopic 2 cd/m2 people read at 161 words a minute against 163 at 220 cd/m2, with a critical print size of 0.38 against 0.15 logMAR.",
+   "component": "needs"
+  },
+  {
+   "id": "fotios_gibbons_2018",
+   "citation": "Fotios, S. and Gibbons, R. (2018). Road lighting research for drivers and pedestrians: the basis of luminance and illuminance recommendations. Lighting Research & Technology 50, 154-186.",
+   "doi_or_url": "10.1177/1477153517739055",
+   "access": "Open-access copy (White Rose).",
+   "use": "The CIE 115:2010 pedestrian classes (EN 13201-2:2015 similar): P1 15/3.0 lux average/minimum horizontal, P6 2.0/0.4, with semi-cylindrical minima 3.0 to 0.4 lux where faces matter; \"no published explanation of the basis for these values\".",
+   "component": "needs",
+   "limit": "A 2020 corrigendum was not read."
+  },
+  {
+   "id": "fotios_yang_cheal_2015",
+   "citation": "Fotios, S., Yang, B. and Cheal, C. (2015). Effects of outdoor lighting on judgements of emotion and gaze direction. Lighting Research & Technology 47, 301-315.",
+   "doi_or_url": "10.1177/1477153513510311",
+   "access": "Accepted manuscript.",
+   "use": "Reports Caminada & van Bommel (1980): semi-cylindrical illuminance of 0.8 lux to recognise a face at 4 m and 2.7 lux at 10 m; finds a face luminance of 0.1-1.0 cd/m2 needed at 4 m.",
+   "component": "needs",
+   "limit": "Caminada & van Bommel (1980) is second-hand."
+  },
+  {
+   "id": "uttley_2017",
+   "citation": "Uttley, J., Fotios, S. and Cheal, C. (2017). Effect of illuminance and spectrum on peripheral obstacle detection by pedestrians. Lighting Research & Technology 49, 211-227.",
+   "doi_or_url": "10.1177/1477153515602954",
+   "access": "Full text.",
+   "use": "Obstacle detection reaches its plateau at 2.0 lux (tested 0.2-20 lux).",
+   "component": "needs"
+  },
+  {
+   "id": "fotios_uttley_2018",
+   "citation": "Fotios, S. and Uttley, J. (2018). Illuminance required to detect a pavement obstacle of critical size. Lighting Research & Technology 50, 390-404.",
+   "doi_or_url": "10.1177/1477153516659783",
+   "access": "Full text.",
+   "use": "A 10-mm obstacle 3.4 m ahead needs 0.22-0.93 lux by lamp and age; \"a minimum photopic illuminance of 1.0 lux is sufficient light for pedestrians of all ages to safely detect and avoid trip hazards under any type of lamp\".",
+   "component": "needs"
+  },
+  {
+   "id": "boyce_2000",
+   "citation": "Boyce, P. R., Eklund, N. H., Hamilton, B. J. and Bruno, L. D. (2000). Perceptions of safety at night in different lighting conditions. Lighting Research & Technology 32, 79-91.",
+   "doi_or_url": "10.1177/096032710003200205",
+   "access": "Abstract.",
+   "use": "About 30 lux on average brings perceived safety close to daylight.",
+   "component": "needs"
+  },
+  {
+   "id": "en_12464",
+   "citation": "EN 12464-1:2011 and EN 12464-2:2007, Light and lighting - lighting of work places, as reprinted in the Zumtobel Lighting Handbook, 6th edition (2018).",
+   "doi_or_url": "Zumtobel Lighting Handbook",
+   "access": "Extracts read.",
+   "use": "Reading and writing 500 lux indoors; outdoors walkways 5 lux, reading addresses 100 lux.",
+   "component": "needs"
+  },
+  {
+   "id": "fabian_2024",
+   "citation": "Fabian, S. T., Sondhi, Y., Allen, P. E., Theobald, J. C. and Lin, H.-T. (2024). Why flying insects gather at artificial light. Nature Communications 15, 689.",
+   "doi_or_url": "10.1038/s41467-024-44785-3",
+   "access": "Full text (PMC10827719).",
+   "use": "Insects turn their backs toward a light and orbit it, mostly within 0.5 m; lights may trap passing insects more than draw them from afar.",
+   "component": "night_life"
+  },
+  {
+   "id": "brehm_2021",
+   "citation": "Brehm, G., Niermann, J., Jaimes Nino, L. M., Enseling, D., Justel, T., Axmacher, J. C., Warrant, E. and Fiedler, K. (2021). Moths are strongly attracted to ultraviolet and blue radiation. Insect Conservation and Diversity 14, 188-198.",
+   "doi_or_url": "10.1111/icad.12476",
+   "access": "Full text.",
+   "use": "Lamps of equal radiant flux: UV took 84% of moth counts against blue, green (530 nm) and white; with UV replaced by red, blue took 63%; green, white and red did not differ.",
+   "component": "night_life"
+  },
+  {
+   "id": "boyes_2021_review",
+   "citation": "Boyes, D. H., Evans, D. M., Fox, R., Parsons, M. S. and Pocock, M. J. O. (2021). Is light pollution driving moth population declines? A review of causal mechanisms across the life cycle. Insect Conservation and Diversity 14, 167-187.",
+   "doi_or_url": "10.1111/icad.12447",
+   "access": "Full text (NERC NORA).",
+   "use": "Metal-halide and mercury lamps draw three and five times the moths of high-pressure sodium; low-pressure sodium none; moths become active below about 1 lux.",
+   "component": "night_life"
+  },
+  {
+   "id": "boyes_2021",
+   "citation": "Boyes, D. H., Evans, D. M., Fox, R., Parsons, M. S. and Pocock, M. J. O. (2021). Street lighting has detrimental impacts on local insect populations. Science Advances 7, eabi8322.",
+   "doi_or_url": "10.1126/sciadv.abi8322",
+   "access": "Full text.",
+   "use": "Caterpillars 47% fewer in hedgerows lit at 1.4-15.8 lux (mean 5.7), 33% fewer in grass margins.",
+   "component": "night_life"
+  },
+  {
+   "id": "degen_2016",
+   "citation": "Degen, T., Mitesser, O., Perkin, E. K., Weiss, N. S., Oehlert, M., Mattig, E. and Holker, F. (2016). Street lighting: sex-independent impacts on moth movement. Journal of Animal Ecology 85, 1352-1360.",
+   "doi_or_url": "10.1111/1365-2656.12540",
+   "access": "Abstract.",
+   "use": "An equivalent attraction radius of about 23 m around each street light.",
+   "component": "night_life"
+  },
+  {
+   "id": "truxa_fiedler_2012",
+   "citation": "Truxa, C. and Fiedler, K. (2012). Attraction to light - from how far do moths return to weak artificial sources of light? European Journal of Entomology 109, 77-84.",
+   "doi_or_url": "10.14411/eje.2012.010",
+   "access": "Full text.",
+   "use": "The effective attraction radius of a weak light is mostly under 30 m and often under 10 m.",
+   "component": "night_life"
+  },
+  {
+   "id": "dietenberger_2024",
+   "citation": "Dietenberger, M., Jechow, A., Kalinkat, G., Schroer, S., Saathoff, B. and Holker, F. (2024). Communications Biology 7, 671.",
+   "doi_or_url": "10.1038/s42003-024-06304-4",
+   "access": "Full text.",
+   "use": "Insect catch against a dark control: conventional LED at 30.6 lux 7.7 times, dimmed to 5.6 lux 5.4 times, a shielded tailored LED at 5.2 lux 1.3 times.",
+   "component": "night_life"
+  },
+  {
+   "id": "van_grunsven_2020",
+   "citation": "van Grunsven, R. H. A. et al. (2020). Experimental light at night has a negative long-term impact on macro-moth populations. Current Biology 30, R694-R695.",
+   "doi_or_url": "10.1016/j.cub.2020.04.083",
+   "access": "Full text.",
+   "use": "Moths 14% fewer after three years under white, green and red light alike.",
+   "component": "night_life"
+  },
+  {
+   "id": "oliveira_2015",
+   "citation": "Oliveira, A. G., Stevani, C. V., Waldenmaier, H. E., Viviani, V., Emerson, J. M., Loros, J. J. and Dunlap, J. C. (2015). Circadian control sheds light on fungal bioluminescence. Current Biology 25, 964-968.",
+   "doi_or_url": "10.1016/j.cub.2015.02.021",
+   "access": "Author manuscript (PMC4382382).",
+   "use": "Mushroom-shaped traps lit by 530-nm LEDs at about a real mushroom's glow caught 42 insects against 12 in dark traps over five nights; the glow follows a temperature-compensated clock of about 22 hours.",
+   "component": "night_life",
+   "limit": "The LED's brightness was not measured."
+  },
+  {
+   "id": "weinstein_2016",
+   "citation": "Weinstein, P., Delean, S., Wood, T. and Austin, A. D. (2016). IMA Fungus 7, 229-234.",
+   "doi_or_url": "10.5598/imafungus.2016.07.02.01",
+   "access": "Full text.",
+   "use": "The ghost fungus Omphalotus nidiformis glows continuously and drew no more insects than dark controls (0.33 against 0.54 a trap-night).",
+   "component": "night_life"
+  },
+  {
+   "id": "broadley_stringer_2001",
+   "citation": "Broadley, R. A. and Stringer, I. A. N. (2001). Prey attraction by larvae of the New Zealand glowworm, Arachnocampa luminosa. Invertebrate Biology 120, 170-177.",
+   "doi_or_url": "10.1111/j.1744-7410.2001.tb00121.x",
+   "access": "Abstract.",
+   "use": "Traps over glow-worms caught more; flies were 86-89% of the catch.",
+   "component": "night_life"
+  },
+  {
+   "id": "willis_2011",
+   "citation": "Willis, R. E., White, C. R. and Merritt, D. J. (2011). Journal of Comparative Physiology B 181, 477-486.",
+   "doi_or_url": "10.1007/s00360-010-0533-3",
+   "access": "Abstract.",
+   "use": "A glow-worm larva releases 4.38 ul of CO2 an hour glowing against 3.49 not glowing.",
+   "component": "emitters"
+  },
+  {
+   "id": "van_den_broeck_2021",
+   "citation": "Van den Broeck, M., De Cock, R., Van Dongen, S. and Matthysen, E. (2021). Insects 12, 734.",
+   "doi_or_url": "10.3390/insects12080734",
+   "access": "Full text.",
+   "use": "Glow-worm females keep glowing for nights under street lights; mate attraction may fall at 0.02-0.1 lux.",
+   "component": "night_life"
+  },
+  {
+   "id": "owens_lewis_2018",
+   "citation": "Owens, A. C. S. and Lewis, S. M. (2018). The impact of artificial light at night on nocturnal insects: a review and synthesis. Ecology and Evolution 8, 11337-11358.",
+   "doi_or_url": "10.1002/ece3.4557",
+   "access": "Full text.",
+   "use": "Glow-worm females begin courtship below 1.3 lux and are never active above 15 lux (Dreisig 1975, second-hand); 30% of vertebrates and over 60% of invertebrates are nocturnal (Holker et al. 2010, second-hand).",
+   "component": "night_life"
+  },
+  {
+   "id": "owens_2022",
+   "citation": "Owens, A. C. S., Van den Broeck, M., De Cock, R. and Lewis, S. M. (2022). Frontiers in Ecology and Evolution 10, 946640.",
+   "doi_or_url": "10.3389/fevo.2022.946640",
+   "access": "Full text.",
+   "use": "Red light is preferable for fireflies; green, yellow and amber should be avoided, since light overlapping their signals disrupts courtship most.",
+   "component": "night_life"
+  },
+  {
+   "id": "grubisic_2019",
+   "citation": "Grubisic, M. et al. (2019). Light pollution, circadian photoreception, and melatonin in vertebrates. Sustainability 11, 6400.",
+   "doi_or_url": "10.3390/su11226400",
+   "access": "Abstract.",
+   "use": "Melatonin is suppressed at 0.01-0.03 lux in fishes and rodents and at 6 lux in sensitive humans.",
+   "component": "night_life"
+  },
+  {
+   "id": "dominoni_2013",
+   "citation": "Dominoni, D., Quetting, M. and Partecke, J. (2013). Artificial light at night advances avian reproductive physiology. Proceedings of the Royal Society B 280, 20123017.",
+   "doi_or_url": "10.1098/rspb.2012.3017",
+   "access": "Abstract.",
+   "use": "Blackbirds at 0.3 lux at night developed their reproductive system up to a month earlier.",
+   "component": "night_life"
+  },
+  {
+   "id": "sanders_2021",
+   "citation": "Sanders, D., Frago, E., Kehoe, R., Patterson, C. and Gaston, K. J. (2021). A meta-analysis of biological impacts of artificial light at night. Nature Ecology & Evolution 5, 74-81.",
+   "doi_or_url": "10.1038/s41559-020-01322-x",
+   "access": "Accepted manuscript.",
+   "use": "Effects appear below 1 lux, with no relation between intensity and effect size across categories.",
+   "component": "night_life"
+  },
+  {
+   "id": "stone_2012",
+   "citation": "Stone, E. L., Jones, G. and Harris, S. (2012). Global Change Biology 18, 2458-2465.",
+   "doi_or_url": "10.1111/j.1365-2486.2012.02705.x",
+   "access": "Abstract.",
+   "use": "LED light cut the activity of slow-flying bats even at 3.6 lux.",
+   "component": "night_life"
+  },
+  {
+   "id": "bennie_2016",
+   "citation": "Bennie, J., Davies, T. W., Cruse, D. and Gaston, K. J. (2016). Ecological effects of artificial light at night on wild plants. Journal of Ecology 104, 611-620.",
+   "doi_or_url": "10.1111/1365-2745.12551",
+   "access": "Full text.",
+   "use": "Flowering responses saturate at under 0.05-0.4 umol/m2/s, about 3.5-28 lux (Whitman et al. 1998, second-hand); city skyglow 0.1-0.5 lux.",
+   "component": "night_life"
+  },
+  {
+   "id": "knop_2017",
+   "citation": "Knop, E., Zoller, L., Ryser, R., Gerpe, C., Horler, M. and Fontaine, C. (2017). Artificial light at night as a new threat to pollination. Nature 548, 206-209.",
+   "doi_or_url": "10.1038/nature23288",
+   "access": "Abstract.",
+   "use": "Night visits to plants fell by 62% under street lights, and a focal plant's fruit set by 13%.",
+   "component": "night_life"
+  },
+  {
+   "id": "zarubin_2012",
+   "citation": "Zarubin, M., Belkin, S., Ionescu, M. and Genin, A. (2012). Bacterial bioluminescence as a lure for marine zooplankton and fish. PNAS 109, 853-857.",
+   "doi_or_url": "10.1073/pnas.1116683109",
+   "access": "Abstract; the eightfold figure second-hand through Tanet et al. 2020 (Biogeosciences 17, 3757-3778).",
+   "use": "Zooplankton that eat luminous bacteria glow and are eaten by fish eight times as fast.",
+   "component": "night_life"
+  },
+  {
+   "id": "mensinger_case_1992",
+   "citation": "Mensinger, A. F. and Case, J. F. (1992). Dinoflagellate luminescence increases susceptibility of zooplankton to teleost predation. Marine Biology 112, 207-210.",
+   "doi_or_url": "10.1007/BF00702463",
+   "access": "Abstract.",
+   "use": "Over 75% of a fish's strikes succeeded when the prey had first been lit by a flash.",
+   "component": "night_life"
+  },
+  {
+   "id": "prevett_2019",
+   "citation": "Prevett, A., Lindstrom, J., Xu, J., Karlson, B. and Selander, E. (2019). Current Biology 29, R564-R565.",
+   "doi_or_url": "10.1016/j.cub.2019.05.019",
+   "access": "Abstract.",
+   "use": "Dinoflagellates induced to glow brighter went from preferred prey to near complete rejection by copepods.",
+   "component": "night_life"
+  },
+  {
+   "id": "marek_2011",
+   "citation": "Marek, P., Papaj, D., Yeager, J., Molina, S. and Moore, W. (2011). Bioluminescent aposematism in millipedes. Current Biology 21, R680-R681.",
+   "doi_or_url": "10.1016/j.cub.2011.08.012",
+   "access": "Full text.",
+   "use": "Glowing millipede models were attacked 22.4% of the time against 48.6% for dark ones.",
+   "component": "night_life"
+  },
+  {
+   "id": "martini_haddock_2017",
+   "citation": "Martini, S. and Haddock, S. H. D. (2017). Quantification of bioluminescence from the surface to the deep sea demonstrates its predominance as an ecological trait. Scientific Reports 7, 45750.",
+   "doi_or_url": "10.1038/srep45750",
+   "access": "Full text.",
+   "use": "76% of the individuals observed in the water column off California can luminesce.",
+   "component": "night_life"
+  },
+  {
+   "id": "perry_2025",
+   "citation": "Perry, B. A., Desjardin, D. E. and Stevani, C. V. (2025). Journal of Fungi 11, 19.",
+   "doi_or_url": "10.3390/jof11010019",
+   "access": "Abstract.",
+   "use": "132 luminous fungal species, all Agaricales, emitting at 520-530 nm, most diverse in subtropical closed-canopy forests.",
+   "component": "night_life"
+  },
+  {
+   "id": "ando_2008",
+   "citation": "Ando, Y., Niwa, K., Yamada, N., Enomoto, T., Irie, T., Kubota, H., Ohmiya, Y. and Akiyama, H. (2008). Firefly bioluminescence quantum yield and colour change by pH-sensitive green emission. Nature Photonics 2, 44-47.",
+   "doi_or_url": "10.1038/nphoton.2007.251",
+   "access": "Abstract.",
+   "use": "Photinus pyralis luciferase: quantum yield 41.0 +/- 7.4% (the older 88 +/- 25% of Seliger & McElroy 1960 superseded).",
+   "component": "emitters"
+  },
+  {
+   "id": "niwa_2023",
+   "citation": "Niwa, K., Kubota, H., Enomoto, T., Ichino, Y. and Ohmiya, Y. (2023). Biosensors 13, 223.",
+   "doi_or_url": "10.3390/bios13020223",
+   "access": "Full text, Table 1.",
+   "use": "Reports Niwa et al. (2010, Chemistry Letters 39, 291-293): 0.48 for the P. pyralis reaction; and Niwa et al. (2010, Photochemistry and Photobiology 86, 1046-1049): beetle luciferases at 24 C and pH 8.0, Pyrearinus termitilluminans 0.61 (539 nm), P. pyralis native 0.48 (566 nm), recombinant 0.45 (560 nm), Phrixothrix hirtus 0.15 (625 nm); aequorin 0.23 corrected to 0.17; Cypridina 0.28 (Johnson et al. 1962).",
+   "component": "emitters",
+   "limit": "The 2010 primaries are second-hand through this table."
+  },
+  {
+   "id": "teranishi_2018",
+   "citation": "Teranishi, K. (2018). Luminescence 33, 1235-1242.",
+   "doi_or_url": "10.1002/bio.3540",
+   "access": "Abstract.",
+   "use": "Chemiluminescence quantum yields of trans-3-hydroxyhispidin with Mycena chlorophos luciferases: 0.017 (gill) and 0.00096 (stipe), 20 mM phosphate, 25 C.",
+   "component": "emitters",
+   "limit": "The same author later questioned whether trans-3-hydroxyhispidin is the gills' real substrate."
+  },
+  {
+   "id": "kusuma_2025",
+   "citation": "Kusuma, S. H., Hattori, M. and Nagai, T. (2025). JACS Au 5, 5237-5252.",
+   "doi_or_url": "10.1021/jacsau.5c01072",
+   "access": "Full text, Table 2.",
+   "use": "The fungal quantum yield is \"not yet established\"; bacterial 0.1-0.2.",
+   "component": "emitters"
+  },
+  {
+   "id": "shimomura_1972",
+   "citation": "Shimomura, O., Johnson, F. H. and Kohama, Y. (1972). PNAS 69, 2086-2089.",
+   "doi_or_url": "10.1073/pnas.69.8.2086",
+   "access": "Abstract.",
+   "use": "Bacterial luciferase: 0.17 photons per aldehyde, the same for C9-C14 aldehydes.",
+   "component": "emitters"
+  },
+  {
+   "id": "kaku_2021",
+   "citation": "Kaku, T., Sugiura, K., Entani, T., Osabe, K. and Nagai, T. (2021). Enhanced brightness of bacterial luciferase by bioluminescence resonance energy transfer. Scientific Reports 11, 14994.",
+   "doi_or_url": "10.1038/s41598-021-94551-4",
+   "access": "Full text (PMC8298465).",
+   "use": "Bacterial luciferase quantum yield about 0.1-0.16 (citing Hastings & Nealson 1977); blue-green light peaking near 490 nm.",
+   "component": "emitters"
+  },
+  {
+   "id": "brodl_2018",
+   "citation": "Brodl, E., Winkler, A. and Macheroux, P. (2018). Molecular mechanisms of bacterial bioluminescence. Computational and Structural Biotechnology Journal 16, 551-564.",
+   "doi_or_url": "10.1016/j.csbj.2018.11.003",
+   "access": "Full text (PMC6279958).",
+   "use": "FMNH2, aldehyde and O2 give acid, FMN, water and light peaking at 490 nm; LuxE activates the acid with ATP to acyl-AMP and LuxC reduces it with NADPH; sea-dwelling luminescence peaks near 475 nm.",
+   "component": "emitters"
+  },
+  {
+   "id": "kotlobay_2018",
+   "citation": "Kotlobay, A. A. et al. (2018). Genetically encodable bioluminescent system from fungi. PNAS 115, 12728-12732.",
+   "doi_or_url": "10.1073/pnas.1803615115",
+   "access": "Full text.",
+   "use": "The caffeic acid cycle: hispidin from caffeic acid by two malonyl additions and lactonization (HispS, needing a phosphopantetheinyl transferase), H3H, the luciferase Luz and CPH; emission near 520 nm.",
+   "component": "emitters"
+  },
+  {
+   "id": "tong_2020",
+   "citation": "Tong, Y., Trajkovic, M., Savino, S., van Berkel, W. J. H. and Fraaije, M. W. (2020). Journal of Biological Chemistry 295, 16013-16022.",
+   "doi_or_url": "10.1074/jbc.RA120.014996",
+   "access": "Full text.",
+   "use": "Hispidin 3-hydroxylase is a flavin enzyme using NAD(P)H and O2, preferring NADPH, with 30% uncoupling on NADPH.",
+   "component": "emitters"
+  },
+  {
+   "id": "yu_2026",
+   "citation": "Yu, X., Wei, P., Qu, C., Kong, C. and Du, H. (2026). Plant Communications 7, 101711.",
+   "doi_or_url": "10.1016/j.xplc.2026.101711",
+   "access": "Full text.",
+   "use": "Each turn of the fungal pathway takes one ATP, one NAD(P)H and two malonyl-CoA; at most about 7% efficient with a quantum yield of one; Ge et al. (2024)'s brightest plants convert about 3.95e-5 of their energy to light.",
+   "component": "emitters",
+   "limit": "Ge et al. 2024 second-hand through this review."
+  },
+  {
+   "id": "gomi_kajiyama_2001",
+   "citation": "Gomi, K. and Kajiyama, N. (2001). Oxyluciferin, a luminescence product of firefly luciferase, is enzymatically regenerated into luciferin. Journal of Biological Chemistry 276, 36508-36513.",
+   "doi_or_url": "10.1074/jbc.M105528200",
+   "access": "Abstract.",
+   "use": "LRE turns oxyluciferin into 2-cyano-6-hydroxybenzothiazole, which with D-cysteine becomes luciferin.",
+   "component": "emitters"
+  },
+  {
+   "id": "oba_2013",
+   "citation": "Oba, Y., Yoshida, N., Kanie, S., Ojika, M. and Inouye, S. (2013). PLoS ONE 8, e84023.",
+   "doi_or_url": "10.1371/journal.pone.0084023",
+   "access": "Full text.",
+   "use": "Firefly luciferin is made from two L-cysteines and p-benzoquinone; whether fireflies recycle oxyluciferin is unproven; an adult Luciola lateralis holds about 0.5 nmol of luciferin.",
+   "component": "emitters"
+  },
+  {
+   "id": "marques_2009",
+   "citation": "Marques, S. M. and Esteves da Silva, J. C. G. (2009). IUBMB Life 61, 6-17.",
+   "doi_or_url": "10.1002/iub.134",
+   "access": "Abstract.",
+   "use": "Luciferin and ATP give luciferyl-adenylate and pyrophosphate; its oxidation gives oxyluciferin, CO2, AMP and light.",
+   "component": "emitters"
+  },
+  {
+   "id": "klein_2023",
+   "citation": "Klein, M. A., Lazarev, S., Gervasi, C., Cowan, C., Machleidt, T. and Friedman Ohana, R. (2023). ACS Measurement Science Au 3, 496-503.",
+   "doi_or_url": "10.1021/acsmeasuresciau.3c00036",
+   "access": "Full text.",
+   "use": "Photons a second per enzyme molecule at saturating substrate: NanoLuc 8.6, firefly luciferase 0.2.",
+   "component": "emitters"
+  },
+  {
+   "id": "hinkle_2005",
+   "citation": "Hinkle, P. C. (2005). P/O ratios of mitochondrial oxidative phosphorylation. Biochimica et Biophysica Acta 1706, 1-11.",
+   "doi_or_url": "10.1016/j.bbabio.2004.09.004",
+   "access": "Abstract (Europe PMC), read by the study.",
+   "use": "P/O about 2.5 for NADH-linked substrates and 1.5 for succinate, or 2.3 and 1.4 if ATP synthase moves 10/3 protons.",
+   "component": "emitters"
+  },
+  {
+   "id": "fao_2003",
+   "citation": "FAO (2003). Food energy - methods of analysis and conversion factors. FAO Food and Nutrition Paper 77.",
+   "doi_or_url": "https://www.fao.org/3/y5022e/y5022e00.htm",
+   "access": "Not read here; the value as research/studies/lunar_cycle_ecology/sources.json records it.",
+   "use": "15.7 kJ per g of monosaccharide.",
+   "component": "emitters"
+  },
+  {
+   "id": "mitiouchkina_2020",
+   "citation": "Mitiouchkina, T. et al. (2020). Plants with genetically encoded autoluminescence. Nature Biotechnology 38, 944-946.",
+   "doi_or_url": "10.1038/s41587-020-0500-9",
+   "access": "Supplementary information PDF (Table 1, Note 6, Fig. 13) read from page images.",
+   "use": "Mean photon flux, photons a minute per cm2: N. benthamiana flowers 6.47e10 (n = 5), leaves 5.58e9; N. tabacum flowers 3.17e10, leaves 4.31e9 (IVIS, calibrated at 525 nm); the glow kept through four dark days, its circadian rhythm switched off on the third and fourth.",
+   "component": "emitters"
+  },
+  {
+   "id": "zheng_2023",
+   "citation": "Zheng, P. et al. (2023). Plant Biotechnology Journal 21, 1671-1681.",
+   "doi_or_url": "10.1111/pbi.14068",
+   "access": "Full text.",
+   "use": "Enhanced pathway: brightest flowers 3e11 photons a minute per cm2, about three times the earlier plants on average; sucrose raised the light 2.9 times; the glow fell gradually in the dark; inhibitors of energy production cut it.",
+   "component": "emitters"
+  },
+  {
+   "id": "shakhova_2024",
+   "citation": "Shakhova, E. S. et al. (2024). An improved pathway for autonomous bioluminescence imaging in eukaryotes. Nature Methods 21, 406-410.",
+   "doi_or_url": "10.1038/s41592-023-02152-y",
+   "access": "Full text.",
+   "use": "One to two orders of magnitude brighter in plants, fungi and mammalian cells; petunias visible to the naked eye without dark adaptation; no absolute photon numbers.",
+   "component": "emitters"
+  },
+  {
+   "id": "miller_2005",
+   "citation": "Miller, S. D., Haddock, S. H. D., Elvidge, C. D. and Lee, T. F. (2005). Detection of a bioluminescent milky sea from space. PNAS 102, 14181-14184.",
+   "doi_or_url": "10.1073/pnas.0507253102",
+   "access": "Full text.",
+   "use": "Adjusted detection threshold radiance 1.8e-4 W/m2/sr (1.4e11 photons per cm2 a second); at least 2.8e8 cells per cm2 at about 1e3 photons a second a cell; 15,400 km2.",
+   "component": "emitters"
+  },
+  {
+   "id": "miller_2021",
+   "citation": "Miller, S. D. et al. (2021). Honing in on bioluminescent milky seas from space. Scientific Reports 11, 15443.",
+   "doi_or_url": "10.1038/s41598-021-94823-z",
+   "access": "Full text.",
+   "use": "The brightest milky seas approached crescent- to quarter-moon light; the 2019 Java event covered about 100,000 km2.",
+   "component": "emitters"
+  },
+  {
+   "id": "letendre_2024",
+   "citation": "Letendre, F., Twardowski, M., Blackburn, A., Poulin, C. and Latz, M. I. (2024). Frontiers in Marine Science 10, 1299602.",
+   "doi_or_url": "10.3389/fmars.2023.1299602",
+   "access": "PDF, Table 3 (values from the primaries it names).",
+   "use": "Photons per flash: Noctiluca scintillans 2.5e11 (peak 9.0e10 a second, 568 ms), Lingulodinium polyedra 1.17e8, Pyrodinium bahamense 3.35e8.",
+   "component": "emitters",
+   "limit": "Compilation; primaries second-hand."
+  },
+  {
+   "id": "letendre_2025",
+   "citation": "Letendre, F., Blackburn, A. and Twardowski, M. (2025). Biology Open 14, bio062190.",
+   "doi_or_url": "10.1242/bio.062190",
+   "access": "Full text, Table 1.",
+   "use": "Peak photons a second per cell: Pyrocystis fusiformis 1.59e10, Pyrodinium bahamense 2.93e8, Lingulodinium polyedra 1.11e8.",
+   "component": "emitters"
+  },
+  {
+   "id": "dunlap_1985",
+   "citation": "Dunlap, P. V. (1985). Archives of Microbiology 141, 44-50.",
+   "doi_or_url": "10.1007/bf00446738",
+   "access": "Abstract.",
+   "use": "Photobacterium leiognathi at about 400 mOsm: 2.0e4 photons a second a cell, as bright as light-organ bacteria.",
+   "component": "emitters"
+  },
+  {
+   "id": "perez_2010",
+   "citation": "Perez, P. D. et al. (2010). PLoS ONE 5, e15473.",
+   "doi_or_url": "10.1371/journal.pone.0015473",
+   "access": "Full text.",
+   "use": "A Vibrio fischeri cell emits 1e-2 to 1e4 photons a second, about 1e3 in the squid's light organ (citing Dunlap & Greenberg 1991).",
+   "component": "emitters",
+   "limit": "Second-hand values."
+  },
+  {
+   "id": "silver_2026",
+   "citation": "Silver, D. H. (2026). How bright is a firefly? Resolving a century of overestimation. American Journal of Physics 94(7), 520.",
+   "doi_or_url": "10.1119/5.0325834",
+   "access": "Not read: as phys.org and AIP Scilight report it.",
+   "use": "About 1e8-1e11 photons per flash of Photinus pyralis (AIP Scilight: 1e10-1e11).",
+   "component": "emitters",
+   "limit": "Press coverage only."
+  },
+  {
+   "id": "lopez_palafox_2020",
+   "citation": "Lopez-Palafox, T., Macias-Ordonez, R. and Cordero, C. R. (2020). PeerJ 8, e10127.",
+   "doi_or_url": "10.7717/peerj.10127",
+   "access": "Full text, Table 3.",
+   "use": "Lantern area of Photinus palaciosi: females 0.74 mm2 (median), males 3.52 mm2; reports Woods et al. (2007): flashing raises the metabolic rate 37% over basal.",
+   "component": "emitters",
+   "limit": "Woods et al. 2007 second-hand."
+  },
+  {
+   "id": "loening_2010",
+   "citation": "Loening, A. M., Dragulescu-Andrasi, A. and Gambhir, S. S. (2010). A red-shifted Renilla luciferase for transient reporter-gene expression. Nature Methods 7, 5-6.",
+   "doi_or_url": "10.1038/nmeth0110-05",
+   "access": "Author manuscript.",
+   "use": "Renilla luciferase with coelenterazine: quantum yield 5.3 +/- 0.1%.",
+   "component": "emitters"
+  },
+  {
+   "id": "russo_2024",
+   "citation": "Russo, F., Civili, B. and Winssinger, N. (2024). ACS Chemical Biology 19, 1035-1039.",
+   "doi_or_url": "10.1021/acschembio.4c00033",
+   "access": "Full text.",
+   "use": "NanoLuc oxidising furimazine: quantum yield estimated at 0.45 (citing Machleidt et al. 2015).",
+   "component": "emitters",
+   "limit": "Machleidt et al. 2015 second-hand."
+  },
+  {
+   "id": "goodman_2013",
+   "citation": "Goodman, T. (2013). Developments in CIE mesopic photometry. BIPM CCPR WG-SP/13-WS-08 (NPL slides).",
+   "doi_or_url": "BIPM CCPR WG-SP/13-WS-08",
+   "access": "Slides read by the literature agent; CIE 191:2010 itself not read.",
+   "use": "CIE 191:2010's MES2: m from 0.5, L_mes = [m L_p + (1 - m) L_s 683/1700] / [m + (1 - m) 683/1700], m = 0.767 + 0.3334 log10 L_mes, held to 0-1 between 0.005 and 5 cd/m2.",
+   "component": "needs"
+  },
+  {
+   "id": "owens_2020",
+   "citation": "Owens, A. C. S., Cochard, P., Durrant, J., Farnworth, B., Perkin, E. K. and Seymoure, B. (2020). Light pollution is a driver of insect declines. Biological Conservation 241, 108259.",
+   "doi_or_url": "10.1016/j.biocon.2019.108259",
+   "access": "Full text.",
+   "use": "Amber and red light draw relatively few insects to fly to light.",
+   "component": "night_life"
+  }
+ ]
+}
