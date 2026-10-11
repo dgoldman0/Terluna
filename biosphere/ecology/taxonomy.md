@@ -130,8 +130,10 @@ Imbrium, the "Sea of Showers" ([ecology register](../../research/studies/lunar_c
 the cell and is inherited, as JCVI-syn1.0 is *M. mycoides* by its genome. Genes, pathways and symbionts from other
 lineages are contributions, recorded with their donors' Earth names: an aerophyte built on a brown alga, carrying a
 green alga's hydrogenase and bacterial symbionts, is a brown alga with two contributions. Where the chassis is open, the
-register places a group at the smallest backbone clade holding every candidate, and the placement narrows as the
-design firms up.
+register places a group at the smallest backbone clade holding every candidate, and the placement narrows as the design
+firms up. A design may be strange by Earth's standards and join traits no Earth kingdom puts together, as a sky reef
+photosynthesises, moves its sails with contractile tissue and grows as a colony; its chassis places it and its life form
+is classed apart, so no design has to fit plant, animal or fungus (the author's direction of 11 October 2026).
 
 **P2. How far a design departs sets its degree, and each degree has a name form Earth already uses.**
 
@@ -213,8 +215,10 @@ lineages, the giants designed for growth that never stops. The coupled study giv
 (colonies of wet modules on a raft) and round bodies in many compartments, and either can sit under (a) or (b). The
 register holds the giants as a subgroup of the aerophytes (G03) under either answer.
 
-**O7. The aerophytes' scientific name**, from the candidates below. The author chose the everyday names on 10 October
-2026: aerophytes, and sky reefs for the colony giants.
+**O7. The aerophytes' scientific names**, from the candidates below. The author chose the everyday names on 10 October
+2026: aerophytes, and sky reefs for the colony giants. On 11 October 2026 the author gave *Welkinia* (from N1) to the
+giant aerophytes (G03); the class's scientific name stays open, and the smaller kinds take names suited to their size
+and how they live. Naming the giants as their own taxon fits O6 (b).
 
 ## The functional classification
 
@@ -477,10 +481,12 @@ the GBIF backbone; the rankless ones are cited.
 ## Names for the aerophytes
 
 The author chose the everyday names on 10 October 2026: aerophytes for the class (G01), and sky reefs for the colony
-giants, the rafts of gas modules (G03); the round giants have no common name yet. Until then the working name was
-Sagan & Salpeter's "floaters", their word in 1976 for buoyant organisms of Jupiter's air. "Aerophyte" coincides with
-an older botanical term for epiphytes; the project uses it for its own class. The scientific names stay open: N1–N6
-remain candidates for that layer, which the author said cloud roots could serve.
+giants, the rafts of gas modules (G03); the round giants have no common name yet. Until then the working name was Sagan
+& Salpeter's "floaters", their word in 1976 for buoyant organisms of Jupiter's air. "Aerophyte" coincides with an older
+botanical term for epiphytes; the project uses it for its own class. On 11 October 2026 the author gave *Welkinia* to
+the giant aerophytes (G03), "the kind that get really really large"; the smaller kinds take names suited to their size
+and how they live, and N1–N6 remain candidates for the class's scientific name, a layer the author said cloud roots
+could serve.
 
 The system distinguishes three stages of the Open Moon's aerophytes: the young, drifting propagules; the lesser
 aerophytes of the coupled study's reference organism, 40–150 m across (G02); and the giants that keep growing for
@@ -506,8 +512,9 @@ young or the formation they drift in. Every scientific form was checked against 
 - **Sound.** Two soft syllables, WEL-kin, an old word that ends on "kin".
 - **Image.** The dome of the sky in old poetry, and living pieces of it drifting over the seas.
 - **Logic.** The word meant cloud before it meant sky; these organisms are the sky's living clouds.
-- **Place.** The English working name of the aerophytes (G01); *Welkinia* the clade name of the new lineage; elder
-  welkins the giants (G03); the wolcenfaru their formation.
+- **Place.** Proposed as the English working name of the aerophytes (G01), with *Welkinia* the clade name of the new
+  lineage, elder welkins the giants (G03) and the wolcenfaru their formation. The author chose *Welkinia* for the giant
+  aerophytes (G03) on 11 October 2026.
 - **Checks.** The word is rare in modern English and carries no biological meaning.
 
 ### N2. Holms and great holms

@@ -240,9 +240,11 @@ def test_size_classes_hold_their_examples():
     assert all(a[1] == b[0] for a, b in zip(heights, heights[1:])) and heights[-1][1] is None
 
 
-def test_aerophyte_scientific_name_waits_for_the_author():
+def test_aerophyte_names_follow_the_author():
     names = PRODUCT['aerophyte_names']
-    assert names['scientific_name'] is None                        # the author chose the common names only
+    assert names['scientific_name'] is None                        # the class's scientific name is open
+    assert names['giant_scientific_name'] == dict(group='G03', name='Welkinia', candidate='N1', chosen='2026-10-11')
+    assert 'Welkinia' in GROUPS['G03']['notes']
     assert names['common_name'] == GROUPS[names['group']]['working_name'] == 'aerophytes'
     assert names['giant_common_names'] == dict(group='G03', colony_form='sky reefs', round_form=None)
     assert GROUPS['G03']['parent'] == names['group'] and GROUPS['G03']['form'] == 'giant'

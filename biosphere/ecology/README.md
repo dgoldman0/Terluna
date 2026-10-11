@@ -67,10 +67,10 @@ The author asked on 9 October to rename the aerophytes and to begin a taxonomic 
 
 The first register, written by [taxa.py](taxa.py) to [results/taxa.json](results/taxa.json), holds 42 designed groups
 with 11 subgroups, 31 design modules and 14 communities drawn from the project's studies, the sky reefs' tenants,
-domatia, pools and distributed control among them. Each comes with its Earth reference organisms, placement, status
-and sources. The author chose the everyday names on 10 October: aerophytes,
-with sky reefs for the colony giants. Six candidate scientific names wait for the author's choice, with six choices
-about the system itself.
+domatia, pools and distributed control among them. Each comes with its Earth reference organisms, placement, status and
+sources. The author chose the everyday names on 10 October: aerophytes, with sky reefs for the colony giants. On 11
+October the author named the giants *Welkinia*; the smaller kinds take names suited to their size and how they live, and
+the class's scientific name and six choices about the system wait for the author.
 
 ## The living sky, 10 October 2026
 

@@ -3,7 +3,7 @@
  "producer": {
   "domain": "biosphere",
   "files": {
-   "biosphere/ecology/taxa.py": "f203907aaa5d7673"
+   "biosphere/ecology/taxa.py": "603dd56222df262e"
   },
   "inputs": {
    "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250",
@@ -107,7 +107,7 @@
   "principles": [
    {
     "id": "P1",
-    "text": "A designed organism keeps the Earth lineage of its chassis, the lineage whose genome organizes the cell and is inherited; genes, pathways and symbionts from other lineages are recorded as contributions",
+    "text": "A designed organism keeps the Earth lineage of its chassis, the lineage whose genome organizes the cell and is inherited; genes, pathways and symbionts from other lineages are recorded as contributions, and a design may join traits no Earth kingdom puts together, since its chassis places it and its life form is classed apart",
     "sources": [
      "gibson_2010",
      "hutchison_2016",
@@ -247,7 +247,7 @@
      "N6": "N6"
     },
     "recommendation": null,
-    "note": "The author chose the common names on 10 October 2026: aerophytes, and sky reefs for the colony giants. N1-N6 remain candidates for the scientific names, a layer the author said cloud roots could serve."
+    "note": "The author chose the common names on 10 October 2026: aerophytes, and sky reefs for the colony giants. On 11 October 2026 the author gave Welkinia (from N1) to the giant aerophytes (G03); the class's scientific name stays open among N1-N6, and the smaller kinds take names suited to their size and how they live."
    }
   ],
   "statuses": {
@@ -2163,7 +2163,7 @@
    "tests": [
     "fittings, seams, gusts and damage, then water and storms"
    ],
-   "notes": "A giant's age is the time its own light takes to make its gas: decades to more than a millennium from a 40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time. The colony form carries the common name sky reefs, the author's choice of 10 October 2026; the round form has no common name yet. On the same day the author let a sky reef be partly animal-like, with a distributed control like a nervous system and no brain (M31), and asked for its sails' biology. At a 200-year mean adult life 0.3-32% of 1-km round giants and 7-66% of 2-km sky reefs reach full size.",
+   "notes": "A giant's age is the time its own light takes to make its gas: decades to more than a millennium from a 40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time. The colony form carries the common name sky reefs, the author's choice of 10 October 2026; the round form has no common name yet. On the same day the author let a sky reef be partly animal-like, with a distributed control like a nervous system and no brain (M31), and asked for its sails' biology. At a 200-year mean adult life 0.3-32% of 1-km round giants and 7-66% of 2-km sky reefs reach full size. Their scientific name is Welkinia (from N1), the author's choice of 11 October 2026.",
    "sources": [
     {
      "path": "research/decisions.md",
@@ -5586,6 +5586,12 @@
    "colony_form": "sky reefs",
    "round_form": null
   },
+  "giant_scientific_name": {
+   "group": "G03",
+   "name": "Welkinia",
+   "candidate": "N1",
+   "chosen": "2026-10-11"
+  },
   "scientific_name": null,
   "candidates": [
    {
@@ -5878,6 +5884,6 @@
     ]
    }
   ],
-  "note": "The author chose the common names on 10 October 2026: aerophytes for the class and sky reefs for the colony giants; the round giants have no common name yet. The scientific name waits for the author, and N1-N6 remain candidates for it."
+  "note": "The author chose the common names on 10 October 2026: aerophytes for the class and sky reefs for the colony giants; the round giants have no common name yet. On 11 October 2026 the author gave Welkinia (from N1) to the giants. The class's scientific name waits for the author among N1-N6, and the smaller kinds take names suited to their size and how they live."
  }
 }

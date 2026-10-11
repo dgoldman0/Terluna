@@ -238,7 +238,9 @@ LAYERS = (
 )
 PRINCIPLES = (
     dict(id='P1', text='A designed organism keeps the Earth lineage of its chassis, the lineage whose genome organizes '
-         'the cell and is inherited; genes, pathways and symbionts from other lineages are recorded as contributions',
+         'the cell and is inherited; genes, pathways and symbionts from other lineages are recorded as contributions, '
+         'and a design may join traits no Earth kingdom puts together, since its chassis places it and its life form '
+         'is classed apart',
          sources=['gibson_2010', 'hutchison_2016', 'richardson_2017', 'fredens_2019']),
     dict(id='P2', text='How far a design departs sets its degree, and each degree takes a naming form Earth already '
          'uses: a line within an Earth species, a designed species, a designed genus, or a new lineage',
@@ -292,7 +294,9 @@ CHOICES = (
     dict(id='O7', question='The aerophytes\' scientific name',
          options={c: c for c in ('N1', 'N2', 'N3', 'N4', 'N5', 'N6')}, recommendation=None,
          note='The author chose the common names on 10 October 2026: aerophytes, and sky reefs for the colony giants. '
-              'N1-N6 remain candidates for the scientific names, a layer the author said cloud roots could serve.'),
+              'On 11 October 2026 the author gave Welkinia (from N1) to the giant aerophytes (G03); the class\'s '
+              'scientific name stays open among N1-N6, and the smaller kinds take names suited to their size and how '
+              'they live.'),
 )
 NAMING_RULES = (
     dict(rule='Names are treated as Latin, whatever their origin', sources=['icn_madrid_2025:Principle V',
@@ -643,7 +647,8 @@ G.append(group('G03', 'giant aerophytes', 'Aerophytes that keep growing for cent
           'colony form carries the common name sky reefs, the author\'s choice of 10 October 2026; the round form has '
           'no common name yet. On the same day the author let a sky reef be partly animal-like, with a distributed '
           'control like a nervous system and no brain (M31), and asked for its sails\' biology. At a 200-year mean '
-          'adult life 0.3-32% of 1-km round giants and 7-66% of 2-km sky reefs reach full size.',
+          'adult life 0.3-32% of 1-km round giants and 7-66% of 2-km sky reefs reach full size. Their scientific name '
+          'is Welkinia (from N1), the author\'s choice of 11 October 2026.',
     sources=[src(DEC, 'Sky giants and the biosphere\'s names; Sky reefs\' partners and control'),
              src(AEROPHYTES, 'What a giant looks like; The limits, in brief'),
              src(AEROPHYTES_GAS, 'Siphonophores: colonies of specialised parts'),
@@ -1328,10 +1333,12 @@ def build():
         aerophyte_names=dict(
             group='G01', common_name='aerophytes', common_names_chosen='2026-10-10',
             giant_common_names=dict(group='G03', colony_form='sky reefs', round_form=None),
+            giant_scientific_name=dict(group='G03', name='Welkinia', candidate='N1', chosen='2026-10-11'),
             scientific_name=None, candidates=list(NAME_CANDIDATES),
             note='The author chose the common names on 10 October 2026: aerophytes for the class and sky reefs for the '
-                 'colony giants; the round giants have no common name yet. The scientific name waits for the author, '
-                 'and N1-N6 remain candidates for it.'))
+                 'colony giants; the round giants have no common name yet. On 11 October 2026 the author gave '
+                 'Welkinia (from N1) to the giants. The class\'s scientific name waits for the author among N1-N6, and '
+                 'the smaller kinds take names suited to their size and how they live.'))
 
 
 # ---- Validation ----------------------------------------------------------------------------------------------------
@@ -1569,7 +1576,15 @@ def check(product) -> list[str]:
     # The aerophytes' names: the author chose the common names; the scientific name waits for the author.
     an = product['aerophyte_names']
     if an['scientific_name'] is not None:
-        err('a scientific name is marked chosen for the aerophytes; the author chooses')
+        err('a scientific name is marked chosen for the aerophytes as a class; the author chooses')
+    giant = an.get('giant_scientific_name')
+    if giant is not None:
+        cand = {c['id']: c for c in an['candidates']}.get(giant['candidate'])
+        forms = {cand[k].get('scientific') for k in ('group', 'giants')} if cand else set()
+        if giant['name'] not in forms:
+            err(f'the giants\' name {giant["name"]} is not a scientific form of candidate {giant["candidate"]}')
+        if groups.get(giant['group'], {}).get('form') != 'giant':
+            err(f'the giants\' name is given to {giant["group"]}, which is not a giant form')
     if groups.get(an['group'], {}).get('working_name') != an['common_name']:
         err(f'the aerophytes group {an["group"]} does not carry the common name {an["common_name"]!r}')
     if set(groups.get(an['group'], {}).get('name_candidates', [])) != candidates:
