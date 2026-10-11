@@ -196,3 +196,9 @@ the sky boats' share of trips, ownership and traffic system stay open.
 |---|---|---|
 | Finished topic branches wait for a proper integration and joint merger with the other open branches before they reach main. | Author, 2026-10-08 | Done on 2026-10-08: sea appearance, the solar shield, atmospheric electricity and infrastructure merged in that order ([integration record](integration/README.md)) |
 | The joint integration includes a synthesis: taking the branches' pieces, seeing where they fit together, what they say about the whole and what comes next, with joint computation where it is warranted. | Author, 2026-10-08 | Done: [studies/joint_synthesis](studies/joint_synthesis/README.md); its calculations took about an hour of machine time, and the decisions it lists await the author |
+
+## Phosphorus from the seas, 11 October 2026
+
+| Decision | Source | Status |
+|---|---|---|
+| Extract phosphorus from the seas for human use, as a distribution system for it, while keeping a decent natural cycle beside it. | Author, 2026-10-11 ("Regular extraction from the seas for human use totally makes sense and shouldn't be hard. And that would act as a major useful distribution system for phosphorus, though I still want to make sure we have a decent "natural" cycle as well.") | Direction: the phosphorus model takes it up |
