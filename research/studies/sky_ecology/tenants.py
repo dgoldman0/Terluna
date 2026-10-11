@@ -13,7 +13,7 @@ from dataclasses import replace
 
 import numpy as np
 
-from shared.constants import AVOGADRO, JULIAN_DAY, PLANCK, SPEED_OF_LIGHT
+from shared.constants import AVOGADRO, JULIAN_DAY, MOON_SURFACE_GRAVITY, PLANCK, SPEED_OF_LIGHT
 from research.studies.aerophytes import growth as aero_growth
 from research.studies.aerophytes import run as aero
 from research.studies.aerophytes import water as aero_water
@@ -37,6 +37,19 @@ DOMATIUM_FOOD = (0., .1)                    # design guess: food bodies for guar
 DOMATIUM_SUPPORT_SHARE = (.1, .3)           # design guess: share of a photosynthetic module's surplus it sends
 TENANT_GAS_SHARE = (.1, .3)                 # design guess: share of a century's surplus a body spends on gas for tenants
 BUDGET_YEARS = 100.
+ADDED_MASS_SPHERE = .5                      # potential flow round a sphere
+RAFT_DIAMETER_M = 2000.                     # a 2-km sky reef
+DRAG_SPHERE = (.2, .5)                      # design range: a sphere at Reynolds numbers of 1e6-1e7
+DRAG_PLATE = 1.2                            # a flat plate broadside: a raft moving up or down
+VALVE_AREA_SHARE = (1e-5, 1e-4)             # design guess: open valve area per projected m² venting ballonet air
+DRAIN_AREA_SHARE = (1e-5, 1e-4)             # design guess: open drain area per projected m² dropping water
+DRAIN_HEAD_M = (.1, 1.)                     # design guess: the head of water over the drains
+DISCHARGE = .6                              # a sharp-edged orifice's discharge coefficient
+WATER_KG_M3 = 1000.
+GAMMA = 1.4                                 # heat-capacity ratio of hydrogen and of air near 290 K
+CV_PER_R = 2.5                              # diatomic hydrogen and air near 290 K: c_v = (5/2) R, so rho c_v = (5/2) p / T
+HEAT_TRANSFER_W_M2_K = (2., 10.)            # design guess: the envelope's exchange with the air, convection and radiation
+SURFACE_PER_PROJECTED = dict(round=4., module=2*math.pi/math.sqrt(3))   # a sphere; a module per hexagonal cell
 
 
 def _check(**values):
@@ -257,8 +270,8 @@ def real_estate(light):
 def capacity_rows(size_rows, area_factor, b_kg_per_h2, carbon_per_h2, gate=.7):
     """Steady tenant load within the 30% reserve, its gas carbon, and static trim mass equivalents.
 
-    Legacy sudden_* fields are static mass equivalents with no response timescale.
-    No landing impulse, control rate, vertical trajectory or recovery time is solved.
+    The sudden_* fields are static trim mass equivalents; response_table gives how fast a body answers them: how
+    far it sinks, its period, overshoot and settling, and how long venting or dropping water takes.
     The sudden loads are upper bounds. The hull's spare superpressure is the day's water swing's allowance
     (aerophytes/water.md), so the whole of it is free only at the low point of the swing; the 4 kg/m² of
     water a body can drop is the reserve its count of gas cells answers damage with (aerophytes README).
@@ -289,7 +302,7 @@ def capacity_rows(size_rows, area_factor, b_kg_per_h2, carbon_per_h2, gate=.7):
 
 
 def landing(capacity, flyers):
-    """Mass-equivalent flyer counts only; no landing duration, control or population is solved."""
+    """Mass-equivalent flyer counts: the flyers each static allowance holds (response_table gives the timing)."""
     rows = []
     for c in capacity:
         for f in flyers:
@@ -300,6 +313,163 @@ def landing(capacity, flyers):
                              at_once_dropping_water=c['sudden_with_water_t']*1e3/f['mass_kg'],
                              roosting_steadily=c['steady_tenants_t']*1e3/f['mass_kg']))
     return rows
+
+
+def scale_height_of_density(air_profile, height_km=10.):
+    """The air's density scale height at a height, from the sky-ship product's levels on either side (m)."""
+    levels = sorted(air_profile, key=lambda a: a['height_km'])
+    below = max((a for a in levels if a['height_km'] < height_km), key=lambda a: a['height_km'])
+    above = min((a for a in levels if a['height_km'] > height_km), key=lambda a: a['height_km'])
+    return (above['height_km']-below['height_km'])*1e3/math.log(below['density_kg_m3']/above['density_kg_m3'])
+
+
+def _damping(rho, drag, amplitude_m, effective_mass_kg_m2):
+    """Equivalent damping ratio of quadratic drag at an amplitude, per projected m²: (2/3 pi) rho C_d a / m_eff."""
+    return 2/(3*math.pi)*rho*drag*amplitude_m/effective_mass_kg_m2
+
+
+def lapse_rate(air_profile, height_km=10.):
+    """The air's temperature lapse at a height, from the sky-ship product's levels on either side (K per m)."""
+    levels = sorted(air_profile, key=lambda a: a['height_km'])
+    below = max((a for a in levels if a['height_km'] < height_km), key=lambda a: a['height_km'])
+    above = min((a for a in levels if a['height_km'] > height_km), key=lambda a: a['height_km'])
+    return (below['temperature_c']-above['temperature_c'])/((above['height_km']-below['height_km'])*1e3)
+
+
+def step_peak_sink(mass, added_ratio, rho, drag, h_rho_m, share, period_s, steps=600):
+    """Deepest point below the start after a load arrives at once (m): fourth-order Runge-Kutta on the nonlinear
+    float, buoyancy from the air's exponential density and quadratic drag, to the first turning point."""
+    g = MOON_SURFACE_GRAVITY
+    m_eff = mass*(1+share+added_ratio)
+
+    def acc(z, v):
+        e = math.exp(-z/h_rho_m)
+        return (g*mass*(e-1-share)-.5*rho*e*drag*v*abs(v))/m_eff
+    dt = period_s/steps
+    z = v = 0.
+    for _ in range(4*steps):
+        k1z, k1v = v, acc(z, v)
+        k2z, k2v = v+.5*dt*k1v, acc(z+.5*dt*k1z, v+.5*dt*k1v)
+        k3z, k3v = v+.5*dt*k2v, acc(z+.5*dt*k2z, v+.5*dt*k2v)
+        k4z, k4v = v+dt*k3v, acc(z+dt*k3z, v+dt*k3v)
+        z_new, v_new = z+dt/6*(k1z+2*k2z+2*k3z+k4z), v+dt/6*(k1v+2*k2v+2*k3v+k4v)
+        if v < 0 <= v_new:
+            return -min(z, z_new)
+        z, v = z_new, v_new
+    return -z
+
+
+def vertical_response(column_m, trim_kg_m2, spare_pa, air, h_rho_m, added_mass_ratio=ADDED_MASS_SPHERE,
+                      drag=DRAG_SPHERE, lapse_k_m=None, surface_per_projected=4.):
+    """How a fixed-volume body answers a load equal to its trim mass equivalent, per projected m².
+
+    column_m is the hull volume per projected m² (the trim rule's V/A), so the body's mass at neutral buoyancy is
+    the air it displaces, rho x column. Left alone it sinks to where the air is denser by dM/M,
+    dz = H_rho ln(1 + dM/M), and the ambient pressure rises by rho g dz, which its spare superpressure must
+    absorb while the gas keeps its temperature; as the gas warms to the lower air over its thermal time the cost
+    falls back toward the trim rule's (both lapses: the sky-ship temperatures', and the one the density profile
+    implies, which restores it exactly). The restoring force, M g / H_rho per metre, against the inertia
+    M (1 + C_a) gives a period 2 pi sqrt((1 + C_a) H_rho / g). A load that arrives at once overshoots: the deepest
+    point comes from integrating the nonlinear float with quadratic drag, and the largest step the spare
+    superpressure survives from bisecting on it. The swing decays as a / (1 + zeta omega t) with zeta the
+    equivalent damping at the static sink, so nine-tenths of it are gone after 9 / (zeta omega). Trimming takes the
+    load at the same height: ballonet air dM / rho vented through valves at the spare superpressure, which within
+    minutes expands the gas adiabatically and so takes at most 1/gamma of the trim equivalent until the gas warms
+    again; or water dropped through drains under its own head, which costs no superpressure. The gas warms at fixed
+    volume, so its thermal time is rho c_v x column over the envelope's exchange per projected m².
+    """
+    if column_m <= 0 or h_rho_m <= 0:
+        raise ValueError('positive column and scale height required')
+    _check(trim=trim_kg_m2, spare=spare_pa, added=added_mass_ratio)
+    rho, g = air['density_kg_m3'], MOON_SURFACE_GRAVITY
+    p, t_k = air['pressure_atm']*101325., air['temperature_c']+273.15
+    mass = rho*column_m
+    share = trim_kg_m2/mass
+    sink = h_rho_m*math.log1p(share)
+    used = rho*g*sink
+    warmed = [used-p*lapse_k_m*sink/t_k if lapse_k_m is not None else None, p*math.log1p(share)]
+    omega = math.sqrt(g/(h_rho_m*(1+added_mass_ratio)))
+    period = 2*math.pi/omega
+    zetas = [_damping(rho, c, sink, mass*(1+added_mass_ratio)) for c in drag]
+    peaks = [step_peak_sink(mass, added_mass_ratio, rho, c, h_rho_m, share, period) for c in drag]
+
+    def step_share(c):                                          # largest step load the spare survives, of the trim
+        if rho*g*step_peak_sink(mass, added_mass_ratio, rho, c, h_rho_m, share, period) <= spare_pa:
+            return 1.
+        lo, hi = 0., 1.
+        for _ in range(24):
+            mid = (lo+hi)/2
+            ok = rho*g*step_peak_sink(mass, added_mass_ratio, rho, c, h_rho_m, mid*share, period) <= spare_pa
+            lo, hi = (mid, hi) if ok else (lo, mid)
+        return lo
+    vent_speed = math.sqrt(2*spare_pa/rho)
+    vent = [trim_kg_m2/rho/(DISCHARGE*a*vent_speed) for a in VALVE_AREA_SHARE[::-1]]
+    drain = [DISCHARGE*a*WATER_KG_M3*math.sqrt(2*g*h) for a, h in ((DRAIN_AREA_SHARE[1], DRAIN_HEAD_M[1]),
+                                                                  (DRAIN_AREA_SHARE[0], DRAIN_HEAD_M[0]))]
+    heat = CV_PER_R*p/t_k                                       # J/m³/K: the hull heats its contents at fixed volume
+    thermal = [heat*column_m/(h*surface_per_projected) for h in HEAT_TRANSFER_W_M2_K[::-1]]
+    return dict(mass_kg_m2=mass, trim_kg_m2=trim_kg_m2, load_share_of_mass=share, static_sink_m=sink,
+                superpressure_used_pa=used, used_over_spare=used/spare_pa if spare_pa else None,
+                superpressure_used_warmed_pa=warmed,
+                passive_gradual_share_of_trim=min(1., spare_pa/used) if used else 1.,
+                passive_gradual_share_warmed=[min(1., spare_pa/w) if w else 1. for w in warmed[::-1]],
+                gas_thermal_time_s=thermal,
+                period_s=period, added_mass_ratio=added_mass_ratio, damping_ratio=zetas,
+                step_peak_sink_m=peaks, step_overshoot=[pk/sink-1 for pk in peaks],
+                step_superpressure_used_pa=[rho*g*pk for pk in peaks],
+                passive_step_share_of_trim=[step_share(c) for c in drag],
+                settle_to_tenth_s=[9/(z*omega) for z in zetas[::-1]],
+                vent_s=vent, vent_at_once_share_of_trim=min(1., 1/GAMMA),
+                vent_at_once_s=[t*min(1., 1/GAMMA) for t in vent],
+                drop_trim_water_s=[trim_kg_m2/d for d in drain],
+                drop_all_water_s=[DUMPABLE_WATER_KG_M2/d for d in drain])
+
+
+def response_table(capacity, air, air_profile):
+    """Vertical response to the trim mass equivalent: lone round bodies, lone reef modules, and reef modules in a
+    2-km raft that shares the load through its ties. The raft's added mass is a solid disc's, (8/3) rho R^3, an
+    upper bound: its 9.3% gaps and finite thickness lower it, and with it the raft's period."""
+    h_rho = scale_height_of_density(air_profile)
+    lapse = lapse_rate(air_profile)
+    module_factor = 2*math.sqrt(3)/math.pi
+    rows = []
+    for kind, keep in (('round', (50., 100., 200., 500.)), ('round_strong', (1000.,)),
+                       ('colony_module', (60., 100., 150.))):
+        for c in capacity[kind]:
+            if c['diameter_m'] not in keep:
+                continue
+            d = c['diameter_m']
+            column = 2/3*d if kind != 'colony_module' else 4/3*(d/2)/module_factor
+            r = vertical_response(column, c['sudden_trim_kg_m2'], c['spare_superpressure_pa'], air, h_rho,
+                                  lapse_k_m=lapse, surface_per_projected=SURFACE_PER_PROJECTED[
+                                      'module' if kind == 'colony_module' else 'round'])
+            r.update(body=kind, diameter_m=d, load_t=c['sudden_trim_t'], area_m2=c['area_m2'], alone=True)
+            rows.append(r)
+            if kind == 'colony_module':
+                raft_area = math.pi*(RAFT_DIAMETER_M/2)**2
+                shared = c['sudden_trim_t']*1e3/raft_area             # the module's load spread over the raft
+                added = 8/3*air['density_kg_m3']*(RAFT_DIAMETER_M/2)**3/(air['density_kg_m3']*column*raft_area)
+                rr = vertical_response(column, shared, c['spare_superpressure_pa'], air, h_rho, added_mass_ratio=added,
+                                       drag=(DRAG_PLATE, DRAG_PLATE))
+                # At swings of centimetres drag hardly damps; the air's own motions set the swing, so only the
+                # undamped bound of a step, twice the static sink, is kept, and the module's own valves and drains
+                # are the lone module's.
+                for k in ('damping_ratio', 'step_overshoot', 'settle_to_tenth_s', 'vent_s', 'drop_trim_water_s',
+                          'drop_all_water_s', 'vent_at_once_s', 'superpressure_used_warmed_pa',
+                          'passive_gradual_share_warmed', 'gas_thermal_time_s'):
+                    rr[k] = None
+                rr.update(body='colony_module_in_2km_raft', diameter_m=d, load_t=c['sudden_trim_t'],
+                          area_m2=raft_area, alone=False, step_peak_sink_m=[2*rr['static_sink_m']]*2,
+                          step_superpressure_used_pa=[2*rr['superpressure_used_pa']]*2,
+                          passive_step_share_of_trim=[min(1., c['spare_superpressure_pa']/(2*rr['superpressure_used_pa']))]*2)
+                rows.append(rr)
+    return dict(density_scale_height_m=h_rho, lapse_k_per_m=lapse, rows=rows,
+                design_guesses=dict(added_mass_sphere=ADDED_MASS_SPHERE, drag_sphere=list(DRAG_SPHERE),
+                                    drag_plate=DRAG_PLATE, valve_area_share=list(VALVE_AREA_SHARE),
+                                    drain_area_share=list(DRAIN_AREA_SHARE), drain_head_m=list(DRAIN_HEAD_M),
+                                    discharge=DISCHARGE, raft_diameter_m=RAFT_DIAMETER_M, gamma=GAMMA,
+                                    cv_per_r=CV_PER_R,
+                                    heat_transfer_w_m2_k=list(HEAT_TRANSFER_W_M2_K)))
 
 
 def domatium(diameter_m, air, structural, food_c=0., spare_pa=aero.SPARE_TRIM_PA):
@@ -445,7 +615,7 @@ def contact_table(gathering, settling, start_km=10.):
 
 
 def evaluate(surface_light, air10, structural, aero_product, flyers, food_web_chain, layer_share, gathering,
-             settling):
+             settling, air_profile):
     """The tenants' numbers for the product."""
     light = light_table(surface_light, layer_share)
     check = dict(product=[float(x) for x in np.asarray(surface_light['columns']['moon_1.2atm']['reflectance_from_below'])],
@@ -486,14 +656,15 @@ def evaluate(surface_light, air10, structural, aero_product, flyers, food_web_ch
         reading_rule='Per m² of projected aerophyte area (a raft\'s hexagonal cell) unless labelled. Light is '
                      'photosynthetic photons at 10 km above the equator, a daytime mean over the lunar day (multiply by '
                      'half the 86,400 s of a day for the 24-hour mean); share_of_level_top is over a level surface on top. '
-                     'Steady tenants fill the gas to 70% of the body. Legacy sudden/at_once labels are static mass equivalents, '
-                     'not demonstrated arrivals: no duration, flow rate, landing impulse or recovery is solved. Trim uses the '
-                     'full pressure allowance at the assumed water-swing state; trim plus water also uses the 4 kg/m² '
-                     'dumpable store, spending the damage reserve. Starting trim and control direction matter.',
+                     'Steady tenants fill the gas to 70% of the body. The sudden/at_once fields are static trim mass '
+                     'equivalents; vertical_response gives their timing: the sink, period, overshoot and settling of a '
+                     'fixed-volume body, and the time to vent ballonet air or drop water. Trim uses the full pressure '
+                     'allowance at the assumed water-swing state; trim plus water also uses the 4 kg/m² dumpable store, '
+                     'spending the damage reserve. Starting trim and control direction matter.',
         light=dict(layer_share_below_10_km=layer_share, albedos=list(ALBEDOS), cases=light, check=check),
         real_estate=real_estate(light), net_lift_kg_per_kg_h2=b,
         gas_carbon_per_kg_h2=dict(reference_light=costs(2.), canopy_light=costs(5.)),
-        capacity=capacity, landing=lands,
+        capacity=capacity, landing=lands, vertical_response=response_table(capacity, air10, air_profile),
         domatia=domatia_table(air10, structural, rows['colony_module']),
         guilds=guilds(flyers, food_web_chain, light),
         inoculation=inoculation(rows['round']),

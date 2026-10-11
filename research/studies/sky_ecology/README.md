@@ -11,8 +11,8 @@ lots of organisms, right? I'm sure too much on them and they'll start to sink, b
 decent size ones before that happens." This study answers in one coupled screen on the
 [aerophyte](../aerophytes/README.md) and [aerial-ecology](../aerial_ecology/README.md) studies, with the phosphorus
 checked against the resources branch's return model. The findings are *screen* values from [run.py](run.py) unless
-marked *derived*. Two states of the sky are kept apart throughout: a growing sky, whose bodies spend their surplus on new
-bodies, and a mature one, whose bodies hold their size while recruits replace the dead.
+marked *derived*. Two states of the sky are kept apart throughout: a growing sky, whose bodies spend their surplus on
+new bodies, and a mature one, whose bodies hold their size while recruits replace the dead.
 
 ## The food web
 
@@ -22,16 +22,26 @@ bodies, and a mature one, whose bodies hold their size while recruits replace th
   aerophytes at 1% cover spends 0.2–9% of a day's energy on each flight. [Food web](food_web.md).
 - **Over 1% of the Moon they build 162–413 Mt C of biomass a year while they grow and 134–397 Mt once they hold their
   size, at the reference light, and give their tenants 38 Mt C of sugar besides.** Per square metre that is 0.43–1.09 kg
-  C a year growing and 0.35–1.05 kg C mature; in canopy-like light growing bodies build 0.66–2.45 kg C, up to 928 Mt over
-  1%. By class at the reference light, growing and mature:
+  C a year growing and 0.35–1.05 kg C mature; in canopy-like light growing bodies build 0.66–2.45 kg C, up to 928 Mt
+  over 1%. By class at the reference light, growing and mature:
   - lesser aerophytes (G02), 0.43–0.72 and 0.35–0.42 kg C;
   - round giants (G03), 0.79–1.00 and 0.70–0.93;
   - sky reefs (G03), 0.54–1.09 and 0.46–1.05.
 
-  The aerial study's central 1,000 g C/m² of biomass sits at the top of the giants' and the reefs' ranges. Growing bodies
-  add 0.3–10% to their standing biomass a year at the reference light. The cover runs from 0.1% to 2%. One per cent is
-  the aerial study's central case, and the provisioning branch's sky towns for five billion people shade 1.8%
+  The aerial study's central 1,000 g C/m² of biomass sits at the top of the giants' and the reefs' ranges. Growing
+  bodies add 0.3–10% to their standing biomass a year at the reference light. The cover runs from 0.1% to 2%. One per
+  cent is the aerial study's central case, and the provisioning branch's sky towns for five billion people shade 1.8%
   (*derived*), so the sky is shared.
+- **Replacing the dead costs a round giant up to two-thirds of its surplus, and more than all of it where its gas is
+  fermented and adults die fast.** A dead body is rebuilt whole, gas included, so replacement costs the adult hazard,
+  0.1–0.5% a year, times its construction carbon. At the reference light that is 1–24% of a lesser body's surplus,
+  9–66% of a round giant's with photolytic gas (22–162% fermented) and 1–51% of a reef module's (4–142% fermented). At
+  the high hazard, 500-m and 1-km round giants and 150-m modules on fermented gas cannot replace their dead from their
+  own surplus, and the mature figures leave them out; in canopy-like light every body can. A 1-km round giant takes
+  226–1,186 years to grow at the reference light, so at the high hazard's 200-year mean life only 0.3–32% reach full
+  size, and at the low hazard's 1,000 years 31–80%; 2-km sky reefs, grown in 83–544 years, reach it at 7–66% and 58–92%.
+  Lightning strikes a 2-km body 0.003–0.007 times a year under the Moon's mean storms, the hazard's own scale, so a
+  body whose fire ran from cell to cell would die of it; wet compartmented bodies lose a cell a strike instead.
 - **Giants take grazing as trees do, and the tenants that eat them are short of phosphorus.** Grazers taking a tropical
   canopy's 12–19% of the green tissue (Metcalfe et al. 2014) cost a reef module 3.8–6.0% of its growth surplus and a
   1-km giant 7.6–12%. The host's sugar carries no phosphorus and its green tissue 1–3 g P per kg, so its grazers and
@@ -51,7 +61,7 @@ bodies, and a mature one, whose bodies hold their size while recruits replace th
 - **Small aerophytes are a fast-growing pasture of costly food.**
   - **A 10-m body** storing no water carries 0.36 of the reference organism's living tissue, close to the two-fifths
     estimate.
-  - **Only 5–8% of what a small body costs is living tissue a grazer can eat:** 59–66% went into its gas, 19–28% into
+  - **Only 5–8% of what a small body costs is living tissue a grazer can eat:** 59–66% went into its gas, 19–27% into
     its cellulose envelope, which goes to the decomposers, and 6–8% into construction respiration.
   - **They turn over fast.** Bodies of 8–15 m can lose 40–121% of their numbers a year to grazers and hold steady.
     Their edible production, 0.077–0.094 kg C/m² a year at the reference light, is a third to two-fifths of a giant's
@@ -69,7 +79,8 @@ bodies, and a mature one, whose bodies hold their size while recruits replace th
   - **A sky reef** lights its undersides at 11–22%, its contact rings at 5–8%.
 
   The estimate takes the illumination domain's surface-light product carried up through the air below by two-stream
-  adding: 980–1,018 µmol/m²/s of daytime light reaches a level top at 10 km, 6–10% more than the ground gets.
+  adding: 980–1,018 µmol/m²/s of daytime light reaches a level top at 10 km, 9–10% more than the ground gets (6% more
+  over cloud).
   [Tenants](tenants.md).
 - **An aerophyte carries a bromeliad forest's water.**
   - **Surface.** A round body has four square metres of surface per projected square metre.
@@ -78,17 +89,27 @@ bodies, and a mature one, whose bodies hold their size while recruits replace th
   - **A reef's pockets.** Between its modules a reef has pockets of 12–30 m³ per m² of raft, where tank membranes make
     its pools.
 - **A 100-m round body has a 196-t spare-lift allowance and a separate 1.9-t pressure-trim mass equivalent.**
-  - **Static trim.** Its 300 Pa pressure allowance corresponds to 0.24 kg/m² in the trim rule; no response time is solved. That pressure is the day's water
-    swing's allowance, so all of it is free only at the swing's low point. Including its dumpable water gives a 33-t mass equivalent,
-    spends its damage reserve, and must drink the water back.
+  - **Static trim.** Its 300 Pa pressure allowance corresponds to 0.24 kg/m² in the trim rule. That pressure is the
+    day's water swing's allowance, so all of it is free only at the swing's low point. Including its dumpable water
+    gives a 33-t mass equivalent, spends its damage reserve, and must drink the water back.
+  - **Sudden means faster than a few minutes.** A body at fixed volume bobs on the air's density gradient with a period
+    of 25 minutes, whatever its size, and a 2-km raft with the air it moves up to 67–102 minutes. Left alone it takes
+    its trim equivalent by sinking 190 m (63 m for a reef module), which costs 1.24 times its spare superpressure while
+    the gas keeps its temperature and falls back toward the trim rule's own amount as the gas warms, over hours. A
+    load that lands at once overshoots to 1.4–2.0 times that sink: doing nothing, a body survives a step of 41–50% of
+    its trim equivalent, against 81% for a load spread over half an hour and 94–100% for one spread over hours.
+    Venting ballonet air within minutes expands the gas adiabatically and takes 71% of the equivalent at once;
+    dropping water takes all of it within seconds to minutes at no cost in superpressure, from the damage reserve.
+    Spread through a 2-km raft, a module's 0.63–2.1 t sinks it 17–39 cm.
   - **Larger bodies have greater static allowances.** Pressure-trim mass equivalents are 15 t at 200 m, 236 t at 500 m
     and 1,890 t at 1 km. Dividing by flyer mass gives equivalents, not demonstrated arrivals.
   - **Gas carbon binds giants.** Tenants need gas, and 10–30% of a century's surplus buys it for 2,700–36,700 t on a
-    1-km giant. A mature body has its whole surplus beyond replacing its dead for such uses.
+    1-km giant. A mature body pays for them from what its surplus leaves after replacing its dead: a third to
+    nine-tenths of a 1-km giant's with photolytic gas, and nothing for fermented giants at the high hazard.
 - **Sky reefs can grow domatia, modules for their tenants, as siphonophores specialise their zooids.** A 60-m domatium
   without a green top carries 11 kg/m², three times a green module's 3.4, and two to six green modules feed it. Proposed
   100–150 m landing domatia have one to four albatross-scale flyer mass equivalents by trim and 21–49 including water;
-  landing dynamics remain unsolved.
+  a flock landing at once is a step load, answered as above.
 - **Every guild has its Earth precedent:**
   - guards in domatia, as ants guard ant-plants (Heil et al. 1997; Treseder et al. 1995);
   - nesting flyers, as on seabird islands (Otero et al. 2018; Graham et al. 2018);
@@ -108,18 +129,18 @@ bodies, and a mature one, whose bodies hold their size while recruits replace th
   m², and a year's biomass carries 2.7–17% of Redfield's for the same carbon. The inert envelope and the giants' tendons
   are almost all carbon. [Phosphorus](phosphorus.md).
 - **The tenants are the aerophyte's soil.**
-  - **Alone,** a mature body recycles only 38–69% of the phosphorus it cycles each year, because its litter falls 10 km.
+  - **Alone,** a mature body recycles only 32–72% of the phosphorus it cycles each year, because its litter falls 10 km.
   - **With pools and canopy soils** catching litter as a forest floor does, a mature sky recycles 89–98%. Over 1% of the
-    Moon it needs 3.8–60 kt of new phosphorus a year, against 67–382 kt with nothing to catch the litter.
+    Moon it needs 3.5–61 kt of new phosphorus a year, against 62–424 kt with nothing to catch the litter.
   - **A growing sky needs more.** Its new bodies take up to 0.4 g P per m² a year of new stock, so with forest-floor
-    pools it recycles 74–96% and needs 13–164 kt.
+    pools it recycles 74–96% and needs 13–165 kt.
   - **No body that dies keeps 99.9%.** In a mature sky the falls of whole bodies and the tenants that leave take
     0.6–6.4% of a reef's throughput.
 - **The resources branch's low case reproduces exactly, and aerophyte stoichiometry moves it.** The case returns
   10,726 t of P a year to the sky. With a reef's tissues and recycling it becomes:
-  - 0.5–85 kt with designed pools and 8–104 kt with forest-floor pools in a mature sky;
-  - 22–264 kt with either kind of pool in a growing sky;
-  - 137–737 kt with nothing to catch the litter.
+  - 0.44–85 kt with designed pools and 7–108 kt with forest-floor pools in a mature sky;
+  - 22–267 kt with either kind of pool in a growing sky;
+  - 125–827 kt with nothing to catch the litter.
 
   Its Redfield ratio overstates the sky's throughput 7–23-fold, and its 99.9% recycling is out of reach. A handful of
   roosting flyers closes a giant's phosphorus: 0.2–15 albatross-scale flyers for a mature 1-km giant with forest-floor
@@ -133,11 +154,11 @@ bodies, and a mature one, whose bodies hold their size while recruits replace th
   Aerophytes carry the seabird island into the sky: a drifting roost scatters the sea's phosphorus over the land
   beneath its track.
 - **Litter lands beneath shared tracks.** Passive bodies at 10 km linger near the equator (1.3–1.8 times their share)
-  and over the north pole (3.4). At 20 km they gather over both poles (8.6–12). Their routes spend 75% of their time over
-  land at 10 km and 71% at 20 km. Reefs that sail, 30–70° of latitude in a lunar day, spread it.
-- **A giant's fall is the land's whale fall.** A 2-km sky reef falls with 6–18 t of P and 21,000 t of dry matter. It lays
-  0.5–5.6 g P/m² over the ground it drapes, 3–90 years of the land's natural loss there. At 1% cover 60–300 reefs fall a
-  year; a cover held fixed while its bodies grew would need 1,600–5,100.
+  and over the north pole (3.4). At 20 km they gather over both poles (8.6–12). Their routes spend 75% of their time
+  over land at 10 km and 71% at 20 km. Reefs that sail, 30–70° of latitude in a lunar day, spread it.
+- **A giant's fall is the land's whale fall.** A 2-km sky reef falls with 6–18 t of P and 21,000 t of dry matter. It
+  lays 0.5–5.6 g P/m² over the ground it drapes, 3–90 years of the land's natural loss there. At 1% cover 60–300 reefs
+  fall a year; a cover held fixed while its bodies grew would need 1,600–5,100.
 
 ## What a reef's community looks like
 
@@ -179,9 +200,9 @@ statement and the reading rule.
 - **The 28% atlas grid**, an ignored input, places the routes over land and sea when present.
 
 **Records.** [Current checks](symbioses_checks.json) cover the follow-up; [checkpoint checks](checkpoint_checks.json)
-preserve its initially failing provenance tests. The original checks.json is the interrupted session record.
-The shared constants the code reads are recorded by name and value. Literature sources and what was read
-are in [sources.json](sources.json); the independent review's findings and their fixes are in [checks.json](checks.json).
+preserve its initially failing provenance tests. The shared constants the code reads are recorded by name and value.
+Literature sources and what was read are in [sources.json](sources.json); the three independent review passes, their
+findings and their fixes are in [checks.json](checks.json).
 
 | Component | Holds |
 |---|---|

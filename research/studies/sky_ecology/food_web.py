@@ -161,15 +161,38 @@ def mature_biomass(prod, hazard):
     return prod['renewal_biomass_c']+prod['standing_host_c_kg_m2']*hazard
 
 
+def replacement(prod, hazard):
+    """What replacing the dead at the hazard costs a body's own surplus, per projected m² a year.
+
+    A dead body is rebuilt whole, gas, envelope, tissue and store, at the body's construction carbon, so the
+    replacement costs hazard x that carbon. What the surplus leaves after it pays a mature body's tenants, gas and
+    sailing; in a growing sky it is the net growth, (surplus - replacement) / construction of the cover a year.
+    A negative remainder means the body cannot replace its dead from its own surplus at that hazard.
+    """
+    _fraction('hazard', hazard)
+    cost = hazard*prod['construction_c_kg_m2']
+    left = prod['surplus_c']-cost
+    return dict(hazard_per_year=hazard, replacement_c=cost, surplus_left_c=left,
+                share_of_surplus=cost/prod['surplus_c'] if prod['surplus_c'] > 0 else None, feasible=left >= 0,
+                net_cover_growth_per_year=left/prod['construction_c_kg_m2'], mean_adult_life_years=1/hazard)
+
+
 def production_table(bodies, photolytic=True):
-    """Production by class at both lights; growth gas costed by photolysis or 2.1 mol/mol fermentation."""
+    """Production by class at both lights; growth gas costed by photolysis or 2.1 mol/mol fermentation.
+
+    mature_biomass_c is given at each end of the hazard only where the body can replace its dead from its own
+    surplus there (None otherwise).
+    """
     rows = []
     for b in bodies:
         gpp = b['gpp_c_kg_m2_year']
         cost = _photo_cost(gpp) if photolytic else aero_growth.fermentation_carbon_per_hydrogen(2.1)
         gates = b['case']['gates']
         prod = production(b['case'], b['traits'], cost)
-        prod['mature_biomass_c'] = [mature_biomass(prod, h) for h in HAZARD_PER_YEAR]
+        prod['replacement'] = [replacement(prod, h) for h in HAZARD_PER_YEAR]
+        prod['mature_feasible'] = [r['feasible'] for r in prod['replacement']]
+        prod['mature_biomass_c'] = [mature_biomass(prod, h) if ok else None
+                                    for h, ok in zip(HAZARD_PER_YEAR, prod['mature_feasible'])]
         rows.append(dict(cls=b['cls'], fibre=b['fibre'], diameter_m=b['diameter_m'], gpp_c_kg_m2_year=gpp,
                          gas_route='photolysis' if photolytic else 'fermentation_2_1', carbon_per_kg_h2=cost,
                          all_gates=bool(gates['mass_and_reserve'] and gates['solar_h2_allocation']
@@ -532,7 +555,89 @@ def drift_by_latitude(winds, air_profile, start_km, **particle):
     return out
 
 
-def evaluate(air10, structural, aerial, people, wind_profile, winds, air_profile, sky_fleet):
+def feasible_range(rows):
+    """[min, max] of the mature biomass production over the bodies and hazards where replacement is feasible."""
+    vals = [m for r in rows for m in r['mature_biomass_c'] if m is not None]
+    return [min(vals), max(vals)] if vals else None
+
+
+def feasibility_table(rows):
+    """Replacement against surplus for every coupled body, light, gas route and end of the hazard."""
+    out = []
+    for r in rows:
+        for rep in r['replacement']:
+            out.append(dict(cls=r['cls'], fibre=r['fibre'], diameter_m=r['diameter_m'], gpp_c_kg_m2_year=r['gpp_c_kg_m2_year'],
+                            gas_route=r['gas_route'], all_gates=r['all_gates'], construction_c_kg_m2=r['construction_c_kg_m2'],
+                            surplus_c=r['surplus_c'], **rep))
+    infeasible = [dict(cls=f['cls'], fibre=f['fibre'], diameter_m=f['diameter_m'], gpp_c_kg_m2_year=f['gpp_c_kg_m2_year'],
+                       gas_route=f['gas_route'], hazard_per_year=f['hazard_per_year'], share_of_surplus=f['share_of_surplus'])
+                  for f in out if f['all_gates'] and not f['feasible']]
+    worst = {}
+    for f in out:
+        if not f['all_gates'] or f['share_of_surplus'] is None:
+            continue
+        key = f"{f['cls']}/{f['gas_route']}/gpp{f['gpp_c_kg_m2_year']:g}"
+        lo, hi = worst.get(key, (math.inf, -math.inf))
+        worst[key] = (min(lo, f['share_of_surplus']), max(hi, f['share_of_surplus']))
+    return dict(rows=out, infeasible=infeasible,
+                replacement_share_of_surplus={k: list(v) for k, v in sorted(worst.items())})
+
+
+def survival(years, hazard):
+    """Share of bodies alive after a growth time at a constant adult hazard."""
+    if years is None:
+        return None
+    _check(years=years)
+    _fraction('hazard', hazard)
+    return math.exp(-hazard*years)
+
+
+def demography(aero_product):
+    """How the adult hazard meets the giants' growth times and the lightning that strikes them.
+
+    The years to size are the aerophyte product's (ages: round bodies from a 40-m juvenile at their growth share,
+    colonies from one 60-m module), on the two gas routes the food web uses, photolysis and fermentation at
+    2.1 mol/mol; survival to size takes the adult hazard over the whole growth time. Lightning:
+    the aerophyte product's strikes a year for bodies of 200 m and 2 km within a striking distance of 50-200 m, at
+    the Moon's mean flash rate, the summit's convective cells and the polar plain; a 1-km body's rate is scaled from
+    the 2-km one by (R + d)^2. A strike burns the cells it reaches; it ends a body only where fire spreads from
+    cell to cell, so the whole-body hazard from lightning is the strike rate for a dry shared skin and a small
+    fraction of it for wet compartmented bodies.
+    """
+    ages = aero_product['ages']
+    targets = {'1_km_round': '500.0', '2_km_round': '1000.0'}
+    routes = ('photolysis', 'fermentation_2_1')
+    growth = []
+    for r in (r for r in ages['round'] if r['hydrogen_route'] in routes):
+        for label, radius in targets.items():
+            years = r['years_to_radius'].get(radius)
+            growth.append(dict(body=label, fibre=r['fibre'], gpp_c_kg_m2_year=r['gpp_c_kg_m2_year'],
+                               gas_route=r['hydrogen_route'], growth_share=r['growth_share'], years_to_size=years,
+                               survival_to_size=[survival(years, h) for h in HAZARD_PER_YEAR]))
+    reef_area = max(float(a) for a in ages['colony'][0]['years_to_area'])
+    for r in (r for r in ages['colony'] if r['hydrogen_route'] in routes):
+        years = r['years_to_area'][next(k for k in r['years_to_area'] if math.isclose(float(k), reef_area))]
+        growth.append(dict(body='2_km_sky_reef', fibre='module', gpp_c_kg_m2_year=r['gpp_c_kg_m2_year'],
+                           gas_route=r['hydrogen_route'], growth_share=r['growth_share'], years_to_size=years,
+                           survival_to_size=[survival(years, h) for h in HAZARD_PER_YEAR]))
+    strikes = {}
+    for l in aero_product['lifespans']:
+        key = (l['place'], l['body_radius_m'])
+        lo, hi = strikes.get(key, (math.inf, -math.inf))
+        strikes[key] = (min(lo, l['strikes_per_year']), max(hi, l['strikes_per_year']))
+    lightning = []
+    for (place, radius), (lo, hi) in sorted(strikes.items()):
+        lightning.append(dict(place=place, body_radius_m=radius, strikes_per_year=[lo, hi]))
+        if radius == 1000.:
+            d = (50., 200.)
+            scale = [((500.+x)/(1000.+x))**2 for x in d]
+            lightning.append(dict(place=place, body_radius_m=500., strikes_per_year=[lo*scale[0], hi*scale[1]],
+                                  basis='scaled from the 2-km body by (R + d)^2'))
+    return dict(hazard_per_year=list(HAZARD_PER_YEAR), mean_adult_life_years=[1/h for h in HAZARD_PER_YEAR],
+                growth=growth, lightning=lightning)
+
+
+def evaluate(air10, structural, aerial, people, wind_profile, winds, air_profile, sky_fleet, aero_product):
     """The food web's numbers for the product."""
     bodies = class_bodies(air10, structural)
     photo = production_table(bodies, photolytic=True)
@@ -544,13 +649,12 @@ def evaluate(air10, structural, aerial, people, wind_profile, winds, air_profile
         rows = [r for r in photo+ferm if r['cls'] == cls and r['all_gates']]
         entry = {f'{k}_kg_m2_year' if k != 'growth_rate_per_year' else k: [min(r[k] for r in rows), max(r[k] for r in rows)]
                  for k in keys}
-        entry['mature_biomass_c_kg_m2_year'] = [min(r['mature_biomass_c'][0] for r in rows),
-                                                max(r['mature_biomass_c'][1] for r in rows)]
+        entry['mature_biomass_c_kg_m2_year'] = feasible_range(rows)
         for light, gpp in (('reference', 2.), ('canopy', 5.)):
             sel = [r for r in rows if r['gpp_c_kg_m2_year'] == gpp]
             entry[f'{light}_light_biomass_c_kg_m2_year'] = [min(r['biomass_c'] for r in sel), max(r['biomass_c'] for r in sel)]
-            entry[f'{light}_light_mature_biomass_c_kg_m2_year'] = [min(r['mature_biomass_c'][0] for r in sel),
-                                                                   max(r['mature_biomass_c'][1] for r in sel)]
+            entry[f'{light}_light_mature_biomass_c_kg_m2_year'] = feasible_range(sel)
+        entry['replacement_infeasible'] = sum(not ok for r in rows for ok in r['mature_feasible'])
         entry['bodies'] = sorted({(r['fibre'], r['diameter_m']) for r in rows})
         by_class[cls] = entry
     totals = [dict(cover=cover, cls=cls,
@@ -562,7 +666,7 @@ def evaluate(air10, structural, aerial, people, wind_profile, winds, air_profile
               for cover in COVERS for cls, v in by_class.items()]
     reference = [r for r in photo+ferm if r['all_gates'] and r['gpp_c_kg_m2_year'] == 2.]
     per_m2 = dict(growing=[min(r['biomass_c'] for r in reference), max(r['biomass_c'] for r in reference)],
-                  mature=[min(r['mature_biomass_c'][0] for r in reference), max(r['mature_biomass_c'][1] for r in reference)],
+                  mature=feasible_range(reference),
                   food_to_tenants=[min(r['food_to_tenants_c'] for r in reference),
                                    max(r['food_to_tenants_c'] for r in reference)])
     sky = dict(basis='every class\'s bodies at the reference light (GPP 2), both gas routes, all gates passed',
@@ -655,14 +759,16 @@ def evaluate(air10, structural, aerial, people, wind_profile, winds, air_profile
         reading_rule='kg C per m² of projected aerophyte area a year unless labelled; Mt C a year over a cover, the '
                      'share of the Moon\'s 4 pi R² surface under aerophytes. Biomass production in a growing sky counts '
                      'the renewed tissue and structure and the new bodies the surplus builds; in a mature sky the renewal '
-                     'and the replacement of the bodies that die at the adult hazard; the sugar given to tenants is '
-                     'counted apart. [low, high] pairs take every range at the end that bounds the quantity; p_corners '
+                     'and the replacement of the bodies that die at the adult hazard, given only where the body\'s own '
+                     'surplus pays for that replacement (feasibility); the sugar given to tenants is counted apart. '
+                     '[low, high] pairs take every range at the end that bounds the quantity; p_corners '
                      'give the level-2 phosphorus limit over every corner of its ranges. FMR in J per day; counts of '
                      'flyers are the numbers a food supply feeds at their FMR, and over_fmr_residual widens them by a '
                      'species\' 30-170% spread about the allometry.',
         ranges={k: list(v) for k, v in RANGES.items()}, covers=list(COVERS), sugar_assimilation=SUGAR_ASSIMILATION,
         hazard_per_year=list(HAZARD_PER_YEAR), sky_fleet_best_glide=gliders,
         production=photo+ferm, by_class=by_class, sky=sky, totals=totals, chains=chains, levels=levels,
+        feasibility=feasibility_table(photo+ferm), demography=demography(aero_product),
         eaten_base=base, reference_small_check=reference_small_check(air10),
         flyers=flyers, flyers_fed=fed, commute=commute, filters=filters, sky_snow=snow,
         earth=dict(wild_birds_mt_c=2., terrestrial_arthropods_mt_c=200., marine_arthropods_mt_c=1000.),

@@ -1,26 +1,37 @@
 {
  "checked": "2026-10-10",
- "evidence": "A coupled screen of the sky's food web, aerophytes' tenants and phosphorus on committed products: the coupled aerophyte model called live for representative bodies, the aerial, people, first-screen, taxonomy, surface-light, sky-ship and sky-fleet products, and from other branches the resources branch's phosphorus model and product, the provisioning branch's zonal-wind product and its ways-of-living product, bound by commit, blob and SHA-256. Tests check carbon and phosphorus closure in both states of the sky, bounds over every corner of the phosphorus limit, limits of the light and trim arithmetic, the exact reproduction of the resources branch's published case, conservation of the deposited flux, the wind code's time convention, every binding and exact regeneration. One read-only agent recomputed the headline numbers independently and found fourteen problems; their corrections are in this product. No food web, population, tenant community, phosphorus cycle or trajectory is simulated, and no organism exists.",
+ "status": "Committed on domain/ecology: the interrupted work as checkpoint 980d203, Codex's follow-up and repairs in 5f648e7 and the living sails in 320c28b. This record adds the fixes for the second and third review passes, which sit in the working tree for the parent session to commit.",
+ "evidence": "A coupled screen of the sky's food web, aerophytes' tenants and phosphorus on committed products: the coupled aerophyte model called live for representative bodies, the aerial, people, first-screen, taxonomy, surface-light, sky-ship and sky-fleet products, and from other branches the resources branch's phosphorus model and product, the provisioning branch's zonal-wind product and its ways-of-living product, bound by commit, blob and SHA-256. Tests check carbon and phosphorus closure in both states of the sky, that every edge bounds its quantity over every corner of its ranges, replacement of the dead against each body's surplus, the vertical response's physics against analytic limits, limits of the light and trim arithmetic, the exact reproduction of the resources branch's published case, conservation of the deposited flux, the wind code's time convention, every binding and exact regeneration. One read-only agent reviewed the study in three passes and recomputed its numbers independently; the fixes for its findings are in this product. No food web, population, tenant community, phosphorus cycle or trajectory is simulated, and no organism exists.",
  "focused": {
-  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python3 -m pytest -q -p no:cacheprovider research/studies/sky_ecology",
-  "passed": 68,
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python3 -m pytest -q -p no:cacheprovider research/studies/sky_ecology research/studies/aerophytes",
+  "passed": 304,
   "failed": 0,
   "skipped": 0,
-  "before_the_review": "56 passed on the product of 08:43, which the review then corrected"
+  "sky_ecology_alone": "99 passed (sky ecology with the symbioses tests)",
+  "history": "56 passed before the first review; 68 after its fixes; 98 after the second pass's fixes; 99 after the third's and the fourth pass's correction"
  },
  "regeneration": {
-  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python3 -m research.studies.sky_ecology.run",
-  "seconds": "about 2",
-  "test": "test_run.py::test_stored_product_regenerates_exactly compares the stored product with a fresh run"
+  "commands": [
+   "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python3 -m research.studies.sky_ecology.run --output research/studies/sky_ecology/results/sky_ecology.json",
+   "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python3 -m research.studies.sky_ecology.symbioses --output research/studies/sky_ecology/results/symbioses.json"
+  ],
+  "seconds": "about 2 and under 1",
+  "tests": [
+   "test_run.py::test_stored_product_regenerates_exactly",
+   "test_symbioses.py::test_stored_symbiosis_product_regenerates_exactly"
+  ],
+  "note": "The symbioses product binds results/sky_ecology.json by hash, so it is regenerated after it; its numbers did not change."
  },
  "layer_check": {
   "command": "python3 shared/check_layers.py",
-  "result": "899 files checked, 0 violations",
-  "untracked_study_files": "check_layers lists tracked files only, so its lane rule (lane, python_targets, ALLOWED) was applied to the nine untracked study modules directly: 0 violations"
+  "result": "912 files checked, 0 violations"
  },
- "repository": "make check was not run, by instruction; the parent session runs it.",
+ "repository": "make check was not run in this session, by instruction. The parent session ran it at cb8f66e, before the second- and third-pass fixes: 1,696 passed, 14 skipped.",
  "independent_reviews": [
-  "First numerical review (read-only agent a5267aad360fec368): every binding checked on SHA-256 and blob (5 study files, 15 imported aerophyte files, 13 inputs, the atlas hash, 7 cross-branch files at their pinned commits); every headline recomputed from the inputs and the stored ledgers with the reviewer's own formulas, semi-analytic sphere light and raft ray trace (a 150-neighbour lattice confirming the 18 neighbours), its own phosphorus loop and the resources formula. Most numbers agreed to the digits quoted; it found the fourteen problems listed under review_fixes, two of which changed headlines (growth phosphorus kept aloft; the envelope counted as food)."
+  "First numerical review (read-only agent a5267aad360fec368): every binding checked on SHA-256 and blob (5 study files, 15 imported aerophyte files, 13 inputs, the atlas hash, 7 cross-branch files at their pinned commits); every headline recomputed from the inputs and the stored ledgers with the reviewer's own formulas, semi-analytic sphere light and raft ray trace (a 150-neighbour lattice confirming the 18 neighbours), its own phosphorus loop and the resources formula. Most numbers agreed to the digits quoted; it found the fourteen problems listed under review_fixes, two of which changed headlines (growth phosphorus kept aloft; the envelope counted as food).",
+  "Second pass (the same agent, on the 10:18 product ec61d2ec): confirmed all fourteen first-pass findings resolved and reproduced nearly every number in the four notes; found that the harvest share was paired at the end that does not bound the need, that the mature sky was never checked for whether bodies can replace their dead, and four small items (second_pass_fixes).",
+  "Third pass (the same agent, on the product 22c326c0 and symbioses c0bf1350): confirmed the second-pass fixes exactly (its own loop to 1e-16, 2^14 corners per body, state and case, the infeasible set, survival to size and the lightning scaling), reproduced Codex's consumer ledger, the symbioses product and the living-sail product, and found three physics corrections to the new timescale answer and five smaller points (third_pass_fixes).",
+  "Fourth pass (the same agent, a short confirmation on the product 18842b94 and symbioses 0e76bc25): confirmed the third-pass fixes, its own integration reproducing the overshoot (42.5-97.4%) and the bisected step share (0.406-0.504) to three decimals, and found one correction: the gas warms at fixed volume, so its heat capacity is rho c_v = (5/2) p/T, about 870 J/m^3/K, which shortens the thermal times by 1.4 to 0.2-20 hours; fixed."
  ],
  "review_fixes": [
   {
@@ -94,15 +105,97 @@
    "effect": "68 tests (56 before)."
   }
  ],
+ "review_fixes_note": "First-pass findings and fixes, with their effects on the product of 10:18 (ec61d2ec). The second pass's harvest fix moved some of those effects; second_pass_fixes gives the present values.",
+ "second_pass_fixes": [
+  {
+   "finding": "1. The harvest share was paired at the end that does not bound the need: people return 99% of harvested phosphorus, so more harvest lowers the need wherever the sky keeps less than that of what it sheds, yet the high-need edge took the high harvest.",
+   "fix": "phosphorus.loop_terms takes explicit values and edge_values the edges; sky_loop evaluates both harvest shares and takes the one that bounds the need at each edge, recording it (designed pools, which keep 99.9%, take the high harvest at the high edge). test_edges_bound_the_need_over_every_corner enumerates 16,384 corners per body, state and case, with the grazers' P built consistently at each corner.",
+   "effect": "Class-weighted need at 1% cover with nothing to catch the litter 62-424 kt mature and 71-528 kt growing (67-382 and 76-486 before); with forest-floor pools 3.5-61 kt and 13-165 kt (3.8-60 and 13-164); designed pools unchanged at 0.26-50 and 9.4-154 kt. A mature reef alone recycles 38-70% (45-68%). The resources check with nothing to catch the litter 125-827 kt mature and 130-749 growing (137-737 and 140-689), with forest-floor pools 7.0-108 and 28-267 kt (8.3-104 and 29-264)."
+  },
+  {
+   "finding": "2. The mature sky was never checked for feasibility: replacing the dead costs the hazard times each body's whole construction carbon, gas included, and at the high hazard with fermented gas that exceeds the surplus of 500-m and 1-km round giants and 150-m modules.",
+   "fix": "food_web.replacement gives replacement, surplus left, its share and the net growth of the cover for every body, light, gas route and hazard; mature figures appear only where the surplus pays for replacement; food_web.feasibility lists every row and the infeasible ones; food_web.demography sets the hazard against the aerophyte product's growth times (survival to size) and its lightning; falls rows and mature loops carry the flags.",
+   "effect": "Replacement takes 1-24% of a lesser body's surplus at the reference light, 9-66% of a round giant's with photolytic gas and 22-162% fermented, and 1-51% of a reef module's (4-142% fermented). Infeasible: fermented 500-m (110%) and 1-km (162%) round giants and 150-m modules (142%) at hazard 0.005 and GPP 2. Mature biomass ranges unchanged, as the photolytic rows set them. 1-km round giants reach full size at 31-80% at the low hazard and 0.3-32% at the high; 2-km reefs at 58-92% and 7-66%. A 2-km body is struck 0.003-0.007 times a year under the Moon's mean storms."
+  },
+  {
+   "finding": "3. Small items: the light gain at 10 km quoted as 6-10% (6% is the cloud case); the envelope as 19-28% (18.8-27.5%); the growing sky's resources rows labelled new stock as downward export; the lesser class used the 100-m body for the need and the 150-m body for falls.",
+   "fix": "9-10% over ground of albedo 0.05-0.2 and 6% over cloud; 19-27%; the resources rows split the formula's total into new_stock_aloft_kg and downward_export_kg; the falls take the 100-m body.",
+   "effect": "With forest-floor pools a growing sky's formula total is 22-195 kt of new stock and 8-74 kt to the ground and away; 100-m falls: 9,700-48,300 a year at 1% cover, 0.016-0.048 t of P each, 0.5-6.2 g/m^2."
+  },
+  {
+   "finding": "4. The author asked \"How sudden is sudden? 0.63 - 2.1 tonnes across what timescale?\", and the tables carried no timescale.",
+   "fix": "tenants.vertical_response and response_table: the static sink of a fixed-volume body, the superpressure it takes, the buoyancy period with added mass, drag damping, settling, venting and dropping times, and a reef module's load shared through a 2-km raft; tenants.md \"How sudden is sudden\" answers in prose.",
+   "effect": "Period 25 minutes for any lone body and 67-102 minutes for a 2-km raft; sink 190 m (63 m for 100-Pa modules). The third pass corrected the step and venting figures (third_pass_fixes)."
+  }
+ ],
+ "third_pass_fixes": [
+  {
+   "finding": "1. Venting within minutes is adiabatic and costs 1.4 times the trim rule's superpressure, so fast venting does not turn a step into a gradual load.",
+   "fix": "vent_at_once_share_of_trim = 1/gamma with vent_at_once_s; the notes say venting takes 71% of the equivalent at once and the rest as the gas warms, while dropping water costs no superpressure.",
+   "effect": "\"A body that vents within a tenth of its period meets a step as if it were gradual\" became \"venting within minutes takes 71% of the equivalent at once; dropping water takes all of it\"."
+  },
+  {
+   "finding": "2. The 1.24 factor and the 81% gradual share hold the gas at its own temperature; as it warms to the lower air the cost falls back toward the trim rule's.",
+   "fix": "superpressure_used_warmed_pa with the sky-ship lapse and with the lapse the density profile implies; passive_gradual_share_warmed; gas_thermal_time_s from the contents' heat capacity at fixed volume, rho c_v = (5/2) p/T, and an exchange of 2-10 W/m^2/K (a design range).",
+   "effect": "A gradual load over hours is taken passively up to 94-100% of the trim equivalent (81% over half an hour); the gas warms over 0.2-20 hours."
+  },
+  {
+   "finding": "3. The equivalent-linear overshoot understated strongly damped small bodies.",
+   "fix": "tenants.step_peak_sink integrates the nonlinear float with quadratic drag (fourth-order Runge-Kutta to the first turning point); passive_step_share_of_trim bisects on the integrated peak.",
+   "effect": "Overshoot 42-97% of the sink (25-98% before); peak 1.4-2.0 times the sink; a passive step survives 41-50% of the trim equivalent (41-65% before); a step needs 1.6-2.0 times the margin of a gradual load."
+  },
+  {
+   "finding": "4. The demography quotes left out the product's 4-mol/mol fermentation rows.",
+   "fix": "food_web.demography uses the food web's two gas routes, photolysis and 2.1 mol/mol fermentation.",
+   "effect": "The quoted 76-545, 38-126 and 234-702 years and their survivals are exact on those routes."
+  },
+  {
+   "finding": "5. The raft's added mass treats a porous raft as a solid disc.",
+   "fix": "Stated as an upper bound in the code and the notes; the raft's period is \"up to\" 67-102 minutes.",
+   "effect": "Wording."
+  },
+  {
+   "finding": "6. Rounding slips in phosphorus.md.",
+   "fix": "The mature forest-floor need 0.008-0.13 g; the Quetzalcoatlus-scale count 33,000-1.5 million.",
+   "effect": "Wording."
+  },
+  {
+   "finding": "7. The resources check inherited the loop's harvest choice, which bounds the loop's need but not the formula's own term.",
+   "fix": "resources_check takes, at each edge, the harvest share that bounds the formula's need.",
+   "effect": "Designed pools, mature, low edge 0.44 kt (0.50); growing designed pools low edge 21.9 kt (22.0)."
+  },
+  {
+   "finding": "8. Codex's unallocated assimilate is credited nowhere and its size was not given.",
+   "fix": "food_web.md gives it: 18-26 g C per m^2 a year on a reef module, 59-92% of level 2's carbon potential, 7-10 Mt C a year at 1% cover, outside the sky snow's carbon; its fate stays open.",
+   "effect": "Wording."
+  }
+ ],
+ "codex_follow_up": {
+  "commits": [
+   "5f648e7 guards and symbioses, with repairs to this study",
+   "320c28b living sky-reef sails (aerophytes study)"
+  ],
+  "kept": [
+   "trophic_chain reports the phosphorus-limited production in level2 with an explicit unallocated-assimilate pool (carbon closes exactly; the review reproduced it)",
+   "the sudden-load tables relabelled as static mass equivalents, now with their timing beside them",
+   "run.py and symbioses.py write to ignored research/runs/sky_ecology/ unless --output names a destination",
+   "research/README.md, biosphere/README.md and research/status.json link the study"
+  ],
+  "replaced": [
+   "the statements that no response time is solved, by the timescale answer (README, tenants.md, tenants.py)"
+  ],
+  "reviewed": "The third pass reproduced the symbioses product (response times, deadline spacing, the food and phosphorus table, the mixed example: 24% allocated, 14.25% used, 7 g C external, a 15.1 mg P shortfall) and the living-sail product (signal delay, the 8.05 MPa fluid head over 5 km, retrieval, panel torque, renewal), with their bindings."
+ },
  "not_performed": [
   "A population model: the counts of flyers and grazers are energy and phosphorus budgets, and how the sky divides between growing and mature bodies is open",
   "Trajectories with sailing, storms and steering; the routes are the passive long-run routes in 3-day mean winds",
   "Measured tissues: phosphorus contents, resorption and turnover of designed aerophyte tissue are design guesses",
+  "The vertical response takes a rigid fixed-volume body, a solid-disc raft and design ranges for drag, valves, drains and the envelope's heat exchange; no landing impact, tie compliance or control law is modelled",
   "Primary reading of Cyr & Pace 1993 (medians through Burghardt & Schmitz 2015), Cleveland et al. 2013 (abstract and results excerpts), Sugden & Robins 1979 (as cited by later bromeliad studies), Golley 1968 (through van der Meer 2021) and Phlips et al. 1986 (cited for its subject); several precedents rest on abstracts, as sources.json records",
   "The atlas grid is an ignored input on the research drive; without it the land share falls back to the water scenario's",
   "Atlas and climate-model longitudes are taken to share their zero meridian",
-  "The study is untracked on domain/ecology; its bindings point at working files until it is committed",
-  "make check (repository-wide), by instruction"
+  "make check (repository-wide) after these fixes, by instruction"
  ],
- "product_sha256": "ec61d2ecc301cb1f1e2b97789ca9395de05b79938a97dc94c7ae422cf1791bbf"
+ "product_sha256": "f231fc5efa8d3ff74e320b9b30a070bf9c5d7838f03f6d5c02ac78f283ee7214",
+ "symbioses_product_sha256": "4725e02b1abcc08ae6aa7ceb93a9d596c3f80da99d6e2164fea4c465fed7bb35"
 }

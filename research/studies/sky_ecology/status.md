@@ -11,13 +11,24 @@ Seventeen selected primary studies support the mechanisms and their limits; acce
 The saved sky ecology product has been regenerated with the current source binding. Its phosphorus-limited
 consumer ledger now reports actual limited production and an explicit unallocated-assimilate pool, preserving
 carbon accounting without inventing the fate of that carbon. Static trim estimates are labelled as mass
-equivalents with no landing or recovery time. Default study runs now write to ignored research/runs/sky_ecology/.
+equivalents, and the tenants note now gives their timing. Default study runs now write to ignored
+research/runs/sky_ecology/.
 The research and biosphere indexes link the study.
 
 The response and food scenarios are conditional requirements. Defensive efficacy, coexistence, partner
 inheritance, net host benefit, complete diets, gas-control biology, wet habitat persistence and added-load damage
 tolerance remain open. Current validation is recorded in [symbioses_checks.json](symbioses_checks.json);
 [checkpoint_checks.json](checkpoint_checks.json) preserves the earlier failing checkpoint unchanged.
+
+The independent review's second and third passes found problems in the committed code, and both sets are fixed. Each
+edge of the phosphorus loop takes the harvest share that bounds the need, which puts the sky's need at 1% cover at
+62–424 kt a year mature and 71–528 kt growing with nothing to catch the litter, and at 3.5–61 kt and 13–165 kt with
+forest-floor pools. Replacing the dead costs every body the hazard times its construction carbon: at the high hazard
+500-m and 1-km round giants and 150-m reef modules on fermented gas cannot pay it from their surplus, the mature figures
+leave them out, and the hazard is set against the growth note's ages and the storm note's lightning. The sudden-load
+tables carry their timing: a 25-minute buoyancy period, a step that overshoots its 190-m sink by 42–97%, venting that
+takes 71% of the trim equivalent at once, and dropping water that takes all of it in seconds to minutes.
+[checks.json](checks.json) lists every finding and fix.
 
 ## Partial checkpoint on 10 October 2026
 

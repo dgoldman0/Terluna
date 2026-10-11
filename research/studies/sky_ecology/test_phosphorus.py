@@ -1,13 +1,16 @@
 """Phosphorus budgets close, the resources check reproduces the published case, and the routes conserve flux."""
 import io
+import itertools
 import json
 import math
 
 import numpy as np
 import pytest
 
+from research.studies.sky_ecology import food_web as fw
 from research.studies.sky_ecology import phosphorus as ph
 from research.studies.sky_ecology import run as m
+from research.studies.sky_ecology import stoichiometry as st
 
 
 @pytest.fixture(scope='module')
@@ -80,6 +83,51 @@ def test_organism_alone_keeps_least_and_growth_needs_more(product):
                                     g['new_bodies_g_m2_year']-mt['falls_g_m2_year'])
 
 
+def test_edges_bound_the_need_over_every_corner(product, food_web):
+    """Each edge of every loop bounds the need over all corners of the ranges it depends on, the grazers' P
+    built consistently from the corner's food, assimilation and own P content."""
+    rows = {(r['cls'], r['diameter_m'], r['gas_route']): r for r in food_web['production']
+            if r['gpp_c_kg_m2_year'] == 2.}
+    bodies = dict(sky_reef_60m=('sky_reef', 60.), round_giant_1km=('round_giant', 1000.), lesser_100m=('lesser', 100.))
+    for key, (cls, d) in bodies.items():
+        prod, ferm = rows[(cls, d, 'photolysis')], rows[(cls, d, 'fermentation_2_1')]
+        stock = product['stocks'][key]['total_g_m2']
+        grazer = {}
+        for gs, fp, pa, cp, a, pe in itertools.product(fw.RANGES['tree_grazed_share'], st.GREEN_P_G_KG,
+                                                       st.CONSUMER_P_ASSIMILATION, st.TENANT_P_G_KG,
+                                                       fw.RANGES['herbivore_assimilation'],
+                                                       fw.RANGES['poikilotherm_production_efficiency']):
+            grazed_c = gs*prod['green_tissue_c']
+            lv = fw.consumer_level(grazed_c, prod['food_to_tenants_c'], a, fw.SUGAR_ASSIMILATION, pe)
+            grazer.setdefault((gs, fp), []).append(
+                st.consumer_p_balance(grazed_c, lv['production_c'], fp, pa, cp)['production_p_g_m2_year'])
+        for state in ph.STATES:
+            for case, r in ph.RETENTION_CASES.items():
+                edges = {l['edge']: l['need_g_m2_year'] for l in product['loops']
+                         if l['body'] == key and l['state'] == state and l['retention_case'] == case}
+                needs = []
+                for (gs, gp), sp, res, h, take, roost, hz, sk, gc in itertools.product(
+                        [(g, f) for g in fw.RANGES['tree_grazed_share'] for f in st.GREEN_P_G_KG], st.STRUCTURE_P_G_KG,
+                        ph.RESORPTION, ph.HARVEST_SHARE, ph.FLYER_TAKE_SHARE, ph.ROOST_SHARE, ph.HAZARD_PER_YEAR,
+                        stock, (ferm['growth_biomass_c'], prod['growth_biomass_c'])):
+                    for gp_built in grazer[(gs, gp)]:
+                        needs.append(ph.loop_terms(prod, stock_p=sk, green_p_g_kg=gp, structure_p_g_kg=sp,
+                                                   resorption=res, harvest_share=h, take_share=take, roost_share=roost,
+                                                   hazard=hz, grazed_share=gs, grazer_p=gp_built, retention=r,
+                                                   state=state, growth_c=gc)['need_g_m2_year'])
+                assert edges['low'] <= min(needs)+1e-12, (key, state, case)
+                assert edges['high'] >= max(needs)-1e-12, (key, state, case)
+
+
+def test_harvest_takes_the_bounding_end(product):
+    for l in product['loops']:
+        assert l['harvest_share'] in ph.HARVEST_SHARE
+        if l['retention'] is not None and l['retention'] > ph.FOOD_RETURN:
+            assert l['harvest_share'] == ph.HARVEST_SHARE[0 if l['edge'] == 'low' else 1]
+        else:
+            assert l['harvest_share'] == ph.HARVEST_SHARE[1 if l['edge'] == 'low' else 0]
+
+
 def test_sky_need_weights_the_classes(product):
     for row in product['sky_need']:
         need = sum(ph.CLASS_SHARES[cls]*next(l['net_need_g_m2_year'] for l in product['loops'] if l['body'] == b
@@ -132,6 +180,10 @@ def test_resources_check_reproduces_the_published_case(product):
         assert math.isclose(case['p_per_kg_c_g'], loop['throughput_g_m2_year']/loop['biomass_c_kg_m2_year'])
         natural = (1-ph.RESOURCES_HARVEST)*(1-case['natural_recycling'])*case['throughput_kg']
         assert math.isclose(natural, (1-case['recycled_share'])*case['throughput_kg'])
+        assert math.isclose(case['formula_unharvested_term_kg'], natural)
+        assert math.isclose(case['downward_export_kg']+case['new_stock_aloft_kg'], case['formula_total_kg'])
+        if case['state'] == 'mature':
+            assert case['new_stock_aloft_kg'] == 0.
         assert case['throughput_share_of_redfield'] < .2
 
 
@@ -227,7 +279,7 @@ def test_land_share_used_is_the_band_weighted_one(product):
 
 
 def test_falls(product):
-    stock = dict(sky_reef_2km='sky_reef_60m', round_giant_1km='round_giant_1km', lesser_150m='lesser_150m')
+    stock = dict(sky_reef_2km='sky_reef_60m', round_giant_1km='round_giant_1km', lesser_100m='lesser_100m')
     for f in product['falls']:
         s = product['stocks'][stock[f['body']]]['total_g_m2']
         assert math.isclose(f['p_t'][0], s[0]*f['area_m2']/1e6) and math.isclose(f['p_t'][1], s[1]*f['area_m2']/1e6)
@@ -236,6 +288,9 @@ def test_falls(product):
         assert f['years_of_land_loss'][0] < f['years_of_land_loss'][1]
         assert all(math.isclose(n, f['bodies_at_cover']*h) for n, h in zip(f['falls_per_year'], ph.HAZARD_PER_YEAR))
         assert f['falls_per_year_at_growth_rate'][0] > f['falls_per_year'][0]
+        assert set(f['replacement_feasible_at_hazard']) == {'photolysis', 'fermentation_2_1'}
+    assert {f['body'] for f in product['falls']} == {'sky_reef_2km', 'round_giant_1km', 'lesser_100m'}
+    assert ph.CLASS_BODIES['lesser'] == 'lesser_100m'                  # the class's need and its falls take one body
     assert all(x > 0 for x in product['land_loss_g_m2_year'])
     assert .05 < product['land_loss_g_m2_year'][0] < .07 and .17 < product['land_loss_g_m2_year'][1] < .19
 

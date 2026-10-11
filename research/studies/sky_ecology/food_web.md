@@ -16,16 +16,17 @@ its size 0.35–1.05 kg C, and each gives its tenants 0.1 kg C of sugar besides.
 here for each class at 10 km, gives the carbon ledger; this component splits its spending into what becomes biomass and
 what does not. Of the reference's 2 kg C/m² of gross fixation, maintenance takes 0.27, night gas 0.14–0.17 and the
 photolytic replacement of permeated gas 0.03–0.04; the rest renews half the green tissue a year (0.225 kg C/m²), renews
-structure (0.13–0.78 kg C/m², most of it in the giants' tendons and the reefs' larger modules), gives tenants 0.1 kg C/m²
-of sugar and leaves a growth surplus of 0.2–1.0 kg C/m². Building new bodies costs gas as well as tissue: at the
-reference light gas is 42–68% of that cost by photolysis and 76–90% by fermentation, so only part of the surplus
-becomes biomass. The sugar is counted apart from the biomass throughout.
+structure (0.13–0.78 kg C/m², most of it in the giants' tendons and the reefs' larger modules), gives tenants 0.1 kg
+C/m² of sugar and leaves a growth surplus of 0.2–1.0 kg C/m². Building new bodies costs gas as well as tissue: at the
+reference light gas is 42–68% of that cost by photolysis and 76–90% by fermentation, so only part of the surplus becomes
+biomass. The sugar is counted apart from the biomass throughout.
 
 **Two states of the sky bound its production.** In a growing sky every body spends its surplus on new bodies: at the
 reference light lesser bodies add 2.1–10% to their standing biomass a year, reefs 0.4–8.4% and giants 0.3–1.1%, and in
 canopy-like light up to 20%, 18% and 4%. In a mature sky the bodies hold their size and number: deaths at the adult
-hazard of 0.1–0.5% a year (the aerophyte growth note) are replaced, and the surplus beyond that pays for tenants' gas and
-food, domatia and sailing ([tenants](tenants.md)). A real sky lies between, its young growing and its old holding.
+hazard of 0.1–0.5% a year (the aerophyte growth note) are replaced, and what the surplus leaves after paying for that
+replacement goes to tenants' gas and food, domatia and sailing ([tenants](tenants.md)); the next section gives where it
+leaves nothing. A real sky lies between, its young growing and its old holding.
 
 | Class (bodies) | Growing, reference light | Mature, reference light | Growing, canopy-like light | At 1% cover, reference light (growing; mature) |
 |---|---:|---:|---:|---:|
@@ -33,15 +34,50 @@ food, domatia and sailing ([tenants](tenants.md)). A real sky lies between, its 
 | Round giants, G03 (500 m, 1 km; 2 km in canopy light) | 0.79–1.00 | 0.70–0.93 | 1.34–2.45 | 299–380; 267–353 Mt C/yr |
 | Sky reefs, G03 (rafts of 60–150 m modules) | 0.54–1.09 | 0.46–1.05 | 0.79–1.71 | 204–413; 176–397 Mt C/yr |
 
-Growing low ends take fermented gas and high ends photolytic gas; mature ends take the hazard's ends. Over 1% of the
-Moon the sky builds 162–413 Mt C of biomass a year growing and 134–397 Mt mature at the reference light, up to 928 Mt for
-growing giants in canopy-like light, and gives its tenants 38 Mt C of sugar. The aerial study's central 1,000 g C/m² a
-year of biomass sits at the top of the giants' and the reefs' ranges.
+Growing low ends take fermented gas and high ends photolytic gas; mature ends take the hazard's ends, leaving out the
+bodies that cannot replace their dead at a hazard. Over 1% of the
+Moon the sky builds 162–413 Mt C of biomass a year growing and 134–397 Mt mature at the reference light, up to 928 Mt
+for growing giants in canopy-like light, and gives its tenants 38 Mt C of sugar. The aerial study's central 1,000 g C/m²
+a year of biomass sits at the top of the giants' and the reefs' ranges.
 
 **The cover runs from 0.1% to 2% of the Moon.** One per cent is the aerial study's central case. The sky is shared: the
 provisioning branch's five billion people aloft live in towns that shade 1.8% of the Moon (*derived*, 0.36% a billion
 in its ways-of-living product), so a sky as busy as that holds aerophytes on a similar share, and a sparse wild sky a
 tenth of a per cent. Every sky-wide number scales with the cover in proportion.
+
+## Replacing the dead and reaching full size
+
+**Replacing the dead costs a body the hazard times its whole construction carbon a year, gas included, and at the high
+hazard some giants on fermented gas cannot pay it.** A dead aerophyte is rebuilt whole: envelope, tendons, tissue, store
+and the gas that lifts them. At 0.1–0.5% a year that takes, at the reference light:
+
+| Class | Photolytic gas | Fermented gas, 2.1 mol/mol |
+|---|---:|---:|
+| Lesser aerophytes, 50–150 m | 1–8% of the surplus | 3–24% |
+| Round giants, 500 m and 1 km | 9–66% | 22–162% |
+| Sky reef modules, 60–150 m | 1–51% | 4–142% |
+
+At the high hazard 500-m and 1-km round giants and 150-m modules on fermented gas need 110%, 162% and 142% of their
+surplus: they cannot replace their dead from their own surplus, and the mature figures above leave them out. In
+canopy-like light every body pays, the fermented 2-km giant with 97% of its surplus. What the surplus leaves is a mature
+body's budget for its tenants, domatia and sailing; in a growing sky it is the net growth of the cover, (surplus −
+replacement) / construction a year, which those three bodies turn negative.
+
+**At the high hazard few round giants at the reference light reach full size; sky reefs reach it at either hazard.**
+The aerophyte product grows a 1-km round giant from a 40-m juvenile in 226–1,186 years at the reference light
+(photolytic gas and the whole surplus to fermented gas and half of it) and in 76–545 years in canopy-like light; a 2-km
+sky reef grows from one 60-m module in 83–544 years, and in 38–126 years in canopy-like light. At the low hazard, a
+mean adult life of 1,000 years, 31–80% of 1-km round giants reach full size at the reference light and 58–92% of 2-km
+reefs; at the high hazard, 200 years, 0.3–32% and 7–66%, and in canopy-like light 7–69% and 53–83% (survival over the
+growth time, *derived*). A sky of 1-km round giants at the reference light therefore asks for the low hazard; 2-km round
+giants, which grow only in canopy-like light in 234–702 years, reach full size at 50–79% and 3–31%.
+
+**Lightning is at the hazard's own scale, so the giants' wet compartments set it.** The aerophyte product counts
+0.003–0.007 strikes a year on a 2-km body under the Moon's mean storms and 0.0008–0.0024 on a 1-km body (*derived* from
+the 2-km rate by (R + d)²); over the summit's convective cells 0.008–0.075 and 0.002–0.026; over the polar plain under
+0.0001. A body whose fire ran from cell to cell would die of lightning at those rates. Wet skins and small cells lose a
+cell a strike and regrow it ([aerophyte storms](../aerophytes/storms.md)), which leaves the 0.1–0.5% a year to other
+causes, and the storm design's routes keep giants out of the afternoon storm sector.
 
 ## Grazing, transfer and the levels of the web
 
@@ -80,10 +116,11 @@ C. Earth's terrestrial arthropods hold about 200 Mt C and its wild birds about 2
 aerophytes' own green tissue at 1 kg dry/m² over 1% of the Moon is 0.17 Gt C (*derived*), so the web on top of it is
 lean, as a forest's is.
 
-The phosphorus-limited consumer ledger reports the same tissue production as the food-web totals. Assimilated
-carbon that the carbon-only efficiency would have put into tissue remains an explicit **unallocated assimilate**
-pool after the phosphorus limit. Its fate could involve changed respiration, excretion, storage or intake; this
-screen does not decide that physiology or credit the pool to predators or litter. Accounting closure therefore
+The phosphorus-limited consumer ledger reports the same tissue production as the food-web totals. Assimilated carbon
+that the carbon-only efficiency would have put into tissue remains an explicit **unallocated assimilate** pool after the
+phosphorus limit: on a reef module 18–26 g C per m² a year, 59–92% of level 2's carbon potential, and 7–10 Mt C a year
+at 1% cover, outside the sky snow's carbon. Its fate could involve changed respiration, excretion, storage or intake;
+this screen does not decide that physiology or credit the pool to predators or litter. Accounting closure therefore
 includes that unresolved pool and is not a complete physiological model.
 
 ## How many great flyers the sky feeds
@@ -131,7 +168,7 @@ pressure and half a kilogram of water it carries 0.28. Small bodies need no fire
 whole, which a short-lived body accepts.
 
 **Small aerophytes are costly food: 5–8% of the carbon a small body costs is living tissue a grazer can eat.** Building
-an 8–40 m body costs 2.0–8.8 kg C per m² at the reference light with photolytic gas: 59–66% goes into its gas, 19–28%
+an 8–40 m body costs 2.0–8.8 kg C per m² at the reference light with photolytic gas: 59–66% goes into its gas, 19–27%
 into its regenerated-cellulose envelope, 6–8% into construction respiration, under 1% into its starch store and 5.0–8.1%
 into living tissue; with fermented gas the tissue is 1.6–2.5%. The envelope goes to the decomposers with the litter, and
 cellulose-digesting grazers, as termites are with their gut symbionts, could take a part of it; the gas is lost when a
@@ -143,7 +180,8 @@ canopy-like light with photolytic gas (12–75% with fermented gas), and hold st
 0.077–0.094 kg C per m² a year at the reference light, 0.34–0.42 of the 0.225 kg C/m² of green tissue a long-lived body
 renews (*derived*), and 0.12–0.15 kg C in canopy-like light. Grazers take 30% (macrophytes) to 79% (algae) of it, the
 medians of Cyr & Pace (1993) for aquatic producers, and on it level 2 reaches 7.5–59% of its carbon limit at the
-bounding edges (median 22% over the corners), short of phosphorus as on a reef. The base works best small: at 30–40 m turnover falls to 8–30% a year.
+bounding edges (median 22% over the corners), short of phosphorus as on a reef. The base works best small: at 30–40 m
+turnover falls to 8–30% a year.
 
 ## Sky snow
 
@@ -156,10 +194,10 @@ blows west below about 3 km and east above, flakes drift 5.9–12 km east from 1
 north from 10 km, and 117 km east and 18 km north from 20 km. Across the wind every drift is far smaller than the wind
 product's 171-km cell, so litter lands beneath the band of the route it was shed on.
 
-**Without pools to catch it, a reef's litter is 0.45–0.46 kg C per m² a year, 171–176 Mt C over 1% of the Moon: 4.5–4.6 g
-C per m² of ground a year on average.** The ground grows 2.8–3.2 kg C/m² a year in the canopy model's clear sky (the people
-product), so sky snow is a small carbon subsidy; its phosphorus matters more ([phosphorus](phosphorus.md)), and the
-routes put three quarters of it on land.
+**Without pools to catch it, a reef's litter is 0.45–0.46 kg C per m² a year, 171–176 Mt C over 1% of the Moon: 4.5–4.6
+g C per m² of ground a year on average.** The ground grows 2.8–3.2 kg C/m² a year in the canopy model's clear sky (the
+people product), so sky snow is a small carbon subsidy; its phosphorus matters more ([phosphorus](phosphorus.md)), and
+the routes put three quarters of it on land.
 
 ## Checks
 
@@ -177,4 +215,6 @@ routes put three quarters of it on land.
 - the small body exactly at the gas gate, and the 10-m check against (2/3)DΔρ;
 - the filter return;
 - fall speeds through the density profile, drift through the winds and the cell read from the wind product;
-- the 1% cover's area against the aerial study's.
+- the 1% cover's area against the aerial study's;
+- the replacement cost against every body's surplus, with mature figures only where the surplus meets it;
+- survival to full size at the hazard, and the lightning rate scaled from the 2-km body to the 1-km one.

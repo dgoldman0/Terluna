@@ -232,7 +232,21 @@ def headlines(fw, tn, ph, towns_shade):
         land_share_of_routes=ph['land_share_used'],
         falls={f['body']: dict(p_t=f['p_t'], g_m2=f['g_m2_on_ground'], falls_per_year=f['falls_per_year'],
                                falls_per_year_at_growth_rate=f['falls_per_year_at_growth_rate'],
-                               years_of_land_loss=f['years_of_land_loss']) for f in ph['falls']})
+                               replacement_feasible_at_hazard=f['replacement_feasible_at_hazard'],
+                               years_of_land_loss=f['years_of_land_loss']) for f in ph['falls']},
+        replacement_share_of_surplus=fw['feasibility']['replacement_share_of_surplus'],
+        replacement_infeasible=fw['feasibility']['infeasible'],
+        vertical_response={f"{r['body']}_{r['diameter_m']:g}m": dict(
+            load_t=r['load_t'], static_sink_m=r['static_sink_m'], used_over_spare=r['used_over_spare'],
+            period_min=r['period_s']/60, step_overshoot=r['step_overshoot'], step_peak_sink_m=r['step_peak_sink_m'],
+            settle_to_tenth_h=[t/3600 for t in r['settle_to_tenth_s']] if r['settle_to_tenth_s'] else None,
+            vent_min=[t/60 for t in r['vent_s']] if r['vent_s'] else None, drop_trim_water_s=r['drop_trim_water_s'],
+            passive_step_share_of_trim=r['passive_step_share_of_trim'],
+            passive_gradual_share_of_trim=r['passive_gradual_share_of_trim'],
+            passive_gradual_share_warmed=r['passive_gradual_share_warmed'],
+            gas_thermal_time_h=[t/3600 for t in r['gas_thermal_time_s']] if r['gas_thermal_time_s'] else None,
+            vent_at_once_share_of_trim=r['vent_at_once_share_of_trim'])
+            for r in tn['vertical_response']['rows']})
 
 
 def results():
@@ -259,7 +273,8 @@ def results():
     water_share = data['shared/scenarios/water.json']['surface_water_share']
     profile = wind_profile(winds)
     fw = food_web.evaluate(air[10], structural, data['research/studies/aerial_ecology/results/aerial_ecology.json'],
-                           people, profile, winds, air_profile, data['research/studies/sky_fleet/results/sky_fleet.json'])
+                           people, profile, winds, air_profile, data['research/studies/sky_fleet/results/sky_fleet.json'],
+                           aero_product)
     p_surface = surface['columns']['moon_1.2atm']['surface_pressure_pa']
     layer_share = (p_surface-air[10]['pressure_atm']*101325.)/p_surface
     first = data['biosphere/ecology/results/first_screen.json']
@@ -271,7 +286,7 @@ def results():
         gathering[str(h)] = dict(days=g['days'], nearest_km_p50=[row[k] for row in g['nearest_km_p50']],
                                  within_cell_share=[row[k] for row in g['within_cell_share']])
     tn = tenants.evaluate(surface, air[10], structural, aero_product, fw['flyers'], fw['chains']['sky_reef_60m'],
-                          layer_share, gathering, first['settling'])
+                          layer_share, gathering, first['settling'], air_profile)
     ph = phosphorus.evaluate(fw, resources, winds, npz, atlas, people, fw['flyers'], water_share)
     towns = ways['settings']['roaming_sky_towns']['per_billion']['projected_share_of_moon']*TOWNS_ALOFT_BILLION
     taxa = data['biosphere/ecology/results/taxa.json']

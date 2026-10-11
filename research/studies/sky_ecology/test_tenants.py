@@ -137,6 +137,62 @@ def test_spores_from_the_bodies_height(product):
         assert math.isclose(out['days'][name], out['start_km']*1e3/p['fall_m_s']['moon']/86400.)
 
 
+def test_vertical_response_follows_buoyancy_physics(product):
+    ships = json.loads((m.ROOT/'research/studies/sky_ships/results/sky_ships.json').read_text())
+    air = next(a for a in ships['air'] if a['height_km'] == 10)
+    rho, p = air['density_kg_m3'], air['pressure_atm']*101325.
+    vr = product['vertical_response']
+    h = vr['density_scale_height_m']
+    assert math.isclose(h, tn.scale_height_of_density(ships['air']))
+    assert 5e4 < h < 8e4
+    g = tn.MOON_SURFACE_GRAVITY
+    for r in vr['rows']:
+        assert math.isclose(r['static_sink_m'], h*math.log1p(r['load_share_of_mass']))
+        assert math.isclose(r['superpressure_used_pa'], rho*g*r['static_sink_m'])
+        assert math.isclose(r['period_s'], 2*math.pi*math.sqrt((1+r['added_mass_ratio'])*h/g))
+        if not r['alone']:
+            assert r['added_mass_ratio'] > 5 and r['static_sink_m'] < 1.
+            continue
+        spare = 300. if r['body'] != 'colony_module' else 100.
+        assert math.isclose(r['load_share_of_mass'], spare/p, rel_tol=1e-3)     # the trim rule: dM / M = dp / p
+        assert math.isclose(r['used_over_spare'], rho*g*h/p, rel_tol=5e-3)       # H_rho / H_p, the same for every body
+        lo, hi = r['step_overshoot']
+        assert 0 < hi < lo < 1 and r['passive_step_share_of_trim'][0] < r['passive_gradual_share_of_trim']
+        radius = r['diameter_m']/2
+        if r['body'] != 'colony_module':                                         # a sphere: C_d a / (2 pi (1+C_a) R)
+            for zeta, cd in zip(r['damping_ratio'], tn.DRAG_SPHERE):
+                assert math.isclose(zeta, cd*r['static_sink_m']/(2*math.pi*1.5*radius), rel_tol=1e-9)
+        assert r['vent_s'][0] < r['vent_s'][1] and r['drop_trim_water_s'][0] < r['drop_trim_water_s'][1]
+        assert max(r['drop_trim_water_s']) < r['period_s']                     # dropping water beats a period
+
+
+def test_step_response_integration_limits():
+    """Undamped, a small step peaks at twice the static sink; drag lowers the peak toward the sink; the largest
+    step the spare survives brings the deepest point's superpressure to the spare."""
+    rho, h, mass = 1.204, 63e3, 80.
+    share = 1e-3
+    sink = h*math.log1p(share)
+    period = 2*math.pi*math.sqrt(1.5*h/tn.MOON_SURFACE_GRAVITY)
+    undamped = tn.step_peak_sink(mass, .5, rho, 0., h, share, period, steps=2000)
+    assert math.isclose(undamped, 2*sink, rel_tol=2e-3)
+    peaks = [tn.step_peak_sink(mass, .5, rho, c, h, share, period) for c in (.5, 5.)]
+    assert sink < peaks[1] < peaks[0] < undamped                    # more drag, less overshoot, never below the sink
+    ships = json.loads((m.ROOT/'research/studies/sky_ships/results/sky_ships.json').read_text())
+    air = next(a for a in ships['air'] if a['height_km'] == 10)
+    r = tn.vertical_response(2/3*100., .24, 300., air, h, lapse_k_m=tn.lapse_rate(ships['air']))
+    for c, step in zip(tn.DRAG_SPHERE, r['passive_step_share_of_trim']):
+        peak = tn.step_peak_sink(r['mass_kg_m2'], .5, air['density_kg_m3'], c, h, step*r['load_share_of_mass'],
+                                 r['period_s'])
+        assert math.isclose(air['density_kg_m3']*tn.MOON_SURFACE_GRAVITY*peak, 300., rel_tol=1e-4)
+    p = air['pressure_atm']*101325.
+    assert math.isclose(r['superpressure_used_warmed_pa'][1], p*math.log1p(r['load_share_of_mass']))
+    assert r['superpressure_used_warmed_pa'][1] < r['superpressure_used_warmed_pa'][0] < r['superpressure_used_pa']
+    assert math.isclose(r['vent_at_once_share_of_trim'], 1/tn.GAMMA)
+    heat = tn.CV_PER_R*p/(air['temperature_c']+273.15)
+    assert 800 < heat < 950                                          # rho c_v of a diatomic gas at 10 km
+    assert math.isclose(r['gas_thermal_time_s'][0], heat*2/3*100./(tn.HEAT_TRANSFER_W_M2_K[1]*4.))
+
+
 def test_encounter_rate():
     rate = tn.encounter_rate_per_day(100., .01, .5, 50.)
     density = .01/(math.pi*50**2)

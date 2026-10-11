@@ -15,9 +15,10 @@ are *screen* values from [tenants.py](tenants.py) (`tenants` in the [product](re
 product](../../../illumination/surface_light/README.md):
 - **The downward light at 10 km** is the product's ground spectra, direct and diffuse, over the same ground, carried up
   through the air below by two-stream adding: a layer of reflectance R over ground of albedo A passes (1 − R)/(1 − AR)
-  of the light arriving on it to the ground. That puts 6–10% more daylight on a level surface at 10 km than on the
-  ground, most over dark ground. The direct beam and the diffuse light are scaled alike, which holds the direct share
-  at 10 km at the ground's; the beam's own gain through the layer would raise it somewhat.
+  of the light arriving on it to the ground. That puts 9–10% more daylight on a level surface at 10 km than on ground
+  of albedo 0.05–0.2, and 6% more over cloud. The direct beam and the diffuse light are scaled alike, which holds the
+  direct share at 10 km at the ground's; giving the beam its own gain through the layer moves the zone shares by at most
+  0.003 (the independent review).
 - **The air below 10 km** holds 19% of the column's mass. Its reflectance comes from the column's computed reflectance
   for light from below: inverted through the conservative two-stream law R = (3/4)τ/(1 + (3/4)τ) to an effective depth
   that folds the column's absorption in, and scaled by that share. The same law on the column's Rayleigh depth matches
@@ -28,8 +29,8 @@ product](../../../illumination/surface_light/README.md):
   albedo 0.05–0.2, or 0.5 for cloud below (the product's albedo grid; green canopies are dark in this band and pale
   developed soils bright).
 - **Diffuse light** from the sky and from below is taken as isotropic. The Sun crosses the zenith over the equatorial
-  lunar day, sampled at the midpoints of 91 equal steps. Inside a raft, ray tests against the six nearest and twelve next
-  modules block the direct beam and part of each surface's view.
+  lunar day, sampled at the midpoints of 91 equal steps. Inside a raft, ray tests against the six nearest and twelve
+  next modules block the direct beam and part of each surface's view.
 
 | Zone of a body (share of the sphere) | Lone body, ground 0.05–0.2 | Over cloud | Raft module, ground 0.05–0.2 | Over cloud |
 |---|---:|---:|---:|---:|
@@ -51,9 +52,9 @@ metre of raft, 0.91 in each, with pockets between its modules.**
 - **The undersides** hold shade phototrophs, collectors and nests.
 - **Fringes** of sorbent and fibre hang below, 0.5–2 m² per projected m² (a design guess; the water note's square metre
   of sorbent sits inside it).
-- **Pools.** The reference organism's free water store, 5 kg/m² with a 1 kg floor, can lie as 1–5 litres of pool
-  per m². A cloud forest's tank bromeliads hold up to 50,000 litres a hectare, 5 litres per m² of ground (Sugden & Robins
-  1979, as cited by later bromeliad studies): an aerophyte carries the same water as a bromeliad forest, per m².
+- **Pools.** The reference organism's free water store, 5 kg/m² with a 1 kg floor, can lie as 1–5 litres of pool per m².
+  A cloud forest's tank bromeliads hold up to 50,000 litres a hectare, 5 litres per m² of ground (Sugden & Robins 1979,
+  as cited by later bromeliad studies): an aerophyte carries the same water as a bromeliad forest, per m².
 - **A raft's pockets.** Above the ring where three modules touch, the pocket between them holds 0.40 r m³ per m² of raft
   (two triangles a cell of (√3 − π/3) r³ each): 12 m³/m² for 60-m modules and 30 m³/m² for 150-m ones. Each opens below
   through the raft's gaps, 9.3% of its area, so a tank membrane across it turns the pocket into a pool; the reef's water
@@ -61,10 +62,9 @@ metre of raft, 0.91 in each, with pockets between its modules.**
 
 ## What a body carries
 
-**Timescale boundary.** All pressure-trim and water-release figures below are static mass equivalents. The legacy
-product fields named `sudden_*` and `at_once_*` do not solve landing duration, airflow, water-release rate, impact,
-altitude response or recovery. The pressure allowance is shared with water management, and the starting trim state
-matters. Additional tenant masses also need renewed checks of damage tolerance, attachment, respiration and water.
+**The pressure-trim and water figures below are static mass equivalents, and the next section gives their timing.**
+The pressure allowance is shared with water management, and the starting trim state matters. Additional tenant masses
+also need renewed checks of damage tolerance, attachment, respiration and water.
 
 **The 100-m round body's spare-lift calculation allows 196 t of additional tenants, with a pressure-trim
 mass equivalent of 1.9 t.** These are separate conditional limits. The aerophyte product supplies supported mass
@@ -74,8 +74,8 @@ canopy-like light) or 17 kg C fermented at 2.1 mol/mol.
 
 The pressure allowance enters the trim rule Δp = ΔM p/(ρ V/A): 300 Pa in round bodies and 100 Pa in reef modules.
 It is shared with the day's water swing; the usable direction and magnitude depend on the starting state. The
-additional 4 kg/m² of dumpable water is also the damage reserve. Its release rate and the subsequent recovery
-are unsolved, and using it for added loads spends that reserve.
+additional 4 kg/m² of dumpable water is also the damage reserve. Releasing it takes seconds to minutes (below), and
+using it for added loads spends that reserve.
 
 | Body at 10 km | Tenants within the reserve | Of which 10–30% of a century's surplus buys the gas | Pressure-trim mass equivalent | Trim plus water mass equivalent |
 |---|---:|---:|---:|---:|
@@ -92,18 +92,70 @@ are unsolved, and using it for added loads spends that reserve.
 The century budget is a design guess: a body that spends 10% of a century's surplus on fermented gas for its tenants
 and one that spends 30% on photolytic gas. Lift binds small bodies and gas carbon binds giants: filling a 1-km giant's
 reserve with tenants would take 274–1,228 years of its surplus at the reference light. A mature body, holding its size,
-has the whole of its surplus beyond replacing its dead for such uses.
+pays for tenants from what its surplus leaves after replacing its dead at the adult hazard: a third to nine-tenths of a
+1-km giant's surplus with photolytic gas, and nothing for 500-m and 1-km giants and 150-m modules on fermented gas at
+the high hazard ([food web](food_web.md)).
 
 **Larger bodies have greater static load allowances.** Dividing those allowances by individual mass gives
 mass-equivalent counts, not safe simultaneous arrivals. For the 1.7-t albatross-scale case, the 100-m round body has
 roughly one flyer equivalent by trim and 19 including water. The corresponding counts are 9 and 82 at 200 m,
 137 and 594 at 500 m, and 1,100 and 2,900 at 1 km. The 60-m reef module's trim equivalent is below one such flyer.
 
+## How sudden is sudden
+
+**A load is sudden when it arrives within a few minutes: an aerophyte at fixed volume bobs on the air's density
+gradient with a period of 25 minutes, whatever its size.** The author asked how sudden the 0.63–2.1 t that a reef
+module's trim absorbs may be. A superpressured body keeps its volume, so a load makes it sink until the air it displaces
+weighs as much as the body and the load: Δz = H_ρ ln(1 + ΔM/M), with M the mass of the air it displaces and H_ρ the
+air's density scale height at 10 km, 63 km (the sky-ship product's levels). Displaced by δz it feels a restoring force
+M g δz / H_ρ, against its own mass and the air it carries along, half its displaced mass for a sphere (C_a = 0.5), so it
+swings with a period 2π √((1 + C_a) H_ρ / g) = 25 minutes (*screen*). A 2-km raft carries a broad disc of air with it,
+an added mass of at most (8/3)ρR³ (a solid disc's; the raft's 9.3% gaps and its thickness lower it), and swings in up
+to 67–102 minutes. Quadratic drag damps the swing, with C_d 0.2–0.5 for a sphere (a design range) and 1.2 for a raft
+moving broadside; the deepest point of a step comes from integrating the float with that drag.
+
+| At 10 km, a load equal to the trim mass equivalent | Load | Sinks, left alone | A step overshoots by | Nine-tenths of the swing gone in | The gas warms in | Venting ballonet air | Dropping the water |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Round, 50 m, 300 Pa spare | 0.24 t | 190 m | 42–66% | 1.5–3.8 h | 0.2–1.0 h | 1.2–12 min | 1–35 s |
+| Round, 100 m | 1.9 t | 190 m | 61–80% | 3.0–7.5 h | 0.4–2.0 h | 2.5–25 min | 2–70 s |
+| Round, 200 m | 15 t | 190 m | 76–89% | 6–15 h | 0.8–4.0 h | 5–50 min | 4–141 s |
+| Round, 500 m | 236 t | 190 m | 89–95% | 15–38 h | 2.0–10 h | 12–124 min | 11–352 s |
+| Round, 1 km, 300 MPa fibre | 1,890 t | 190 m | 94–97% | 30–75 h | 4.0–20 h | 25–249 min | 22–703 s |
+| Reef module alone, 60 m, 100 Pa spare | 0.14 t | 63 m | 72–87% | 5–12 h | 0.2–1.2 h | 0.8–8 min | 0.4–13 s |
+| Reef module alone, 100 m | 0.63 t | 63 m | 81–92% | 8–20 h | 0.4–2.0 h | 1.3–13 min | 0.7–21 s |
+| Reef module alone, 150 m | 2.1 t | 63 m | 87–94% | 12–31 h | 0.6–3.0 h | 2–20 min | 1–32 s |
+
+**Left alone, a body takes a load by sinking, and the sink costs more superpressure than the trim allows until its gas
+warms.** The trim equivalent is the load whose share of the body's mass equals the spare superpressure's share of the
+air's pressure, so every body sinks the same 190 m, or 63 m for a 100-Pa module, to take it. On the way down the ambient
+pressure rises by ρ g Δz, 1.24 times the spare, because in air that cools upward density falls more slowly with height
+than pressure (H_ρ of 63 km against a pressure scale height of 51 km). As the gas warms to the lower air the cost falls
+back: to the trim rule's own amount with the lapse the density profile implies, and to 1.06 times it with the sky-ship
+temperatures. The gas, heated at fixed volume, warms over 0.2–20 hours, larger bodies more slowly (an exchange through
+the envelope of 2–10 W/m²/K, a design range). A body that does nothing thus keeps its spare superpressure through a load
+spread over half an hour up to 81% of its trim equivalent, and through one spread over hours up to 94–100%.
+
+**A step needs 1.6–2.0 times the margin of a gradual load.** A load that lands within a few minutes is a step: the body
+falls through its new float height and overshoots by 42–97% of the sink, most in giants, whose drag is small against
+their mass, and the swing dies away over 1.5 hours to 3 days. The deepest point comes about 13 minutes in, before the
+gas warms, so a body that does nothing keeps its superpressure through a step only up to 41–50% of its trim equivalent.
+
+**Dropping water answers a step; venting answers most of it.** Taking the load at the same height means shedding its
+mass: venting that much ballonet air through valves at the spare superpressure, or dropping water. Venting within
+minutes expands the gas adiabatically, so it costs 1.4 times the trim rule's superpressure and takes at most 71% of the
+trim equivalent at once, the rest as the gas warms again. With valves of 0.001–0.01% of the projected area (a design
+guess), venting the whole equivalent takes minutes for reef modules and small round bodies and up to four hours for a
+1-km giant, whose valves would have to grow with its column. Drains of the same share under 0.1–1 m of head (a design
+guess) drop the trim equivalent's water in seconds to minutes and cost no superpressure, spending the damage reserve.
+
+**In a raft the ties share the load.** A module's 0.63–2.1 t spread through a 2-km raft sinks it 17–39 cm and takes
+under 1% of its superpressure; a module carries its own trim equivalent alone only where its ties are slack.
+
 ## Domatia
 
 **A reef can grow modules for its tenants, as a siphonophore specialises its zooids: a 60-m domatium carries 11 kg/m²,
-three times a green module's 3.4, and the colony feeds it from two to six green modules.** A domatium leaves out the green
-top (it keeps a living layer of 0.1 kg/m² that maintains its skin, fixes 0.2 kg C/m² a year and makes its gas by
+three times a green module's 3.4, and the colony feeds it from two to six green modules.** A domatium leaves out the
+green top (it keeps a living layer of 0.1 kg/m² that maintains its skin, fixes 0.2 kg C/m² a year and makes its gas by
 photolysis, a design guess), carries the round bodies' 300 Pa of spare pressure and a full water store, and takes its
 upkeep through the ties from the green modules around it, paid from 10–30% of their surplus (a design guess).
 
@@ -114,8 +166,8 @@ upkeep through the ties from the green modules around it, paid from 10–30% of 
 | 150 m domatium | 33.0 kg/m², 644 t (green: 29.9, 583 t) | 6.4 t, 84 t | 1.32–1.42 | 20–66 |
 
 The upkeep's low end gives the guards no food and the high end 0.1 kg C/m² a year of food bodies. Small domatia are
-cheap and carry most; 100–150 m landing domatia have mass equivalents of one to four albatross-scale flyers by trim and 21–49
-including water. Peripheral placement is a proposed arrangement, not a demonstrated landing system.
+cheap and carry most; 100–150 m landing domatia have mass equivalents of one to four albatross-scale flyers by trim and
+21–49 including water. Peripheral placement is a proposed arrangement, not a demonstrated landing system.
 
 ## Guilds and mutualisms
 
@@ -130,17 +182,17 @@ including water. Peripheral placement is a proposed arrangement, not a demonstra
 | Collectors | fringes, tethers | orb-weavers eat the pollen their webs catch (Eggs & Sanders 2013) | none | 1–10 g/m² | none | turn airborne pollen, spores and insects into frass on the host |
 | Bud dispersers | visitors | the nursery partnership of the aerophyte growth note | none | | none | carry buds to the crowns and are paid in food |
 
-Weights other than the flyers', the water and the epiphytes' are design guesses. The guard entry is collective
-mass per footprint area, with live versus dry mass unspecified; it gives neither an individual size nor a defense
-requirement or upper limit. The [guards and symbioses analysis](symbioses.md) explores explicitly live-mass scenarios,
-complementary guilds, local response and shared food budgets. The reference organism allocates
-0.1 kg C per m² a year to all tenants, counted once across guilds. This is 12–18% of a 60-m reef module's net production (its biomass and
-the sugar together), two and a half to three and a half times Macaranga's share.
+Weights other than the flyers', the water and the epiphytes' are design guesses. The guard entry is collective mass per
+footprint area, with live versus dry mass unspecified; it gives neither an individual size nor a defense requirement or
+upper limit. The [guards and symbioses analysis](symbioses.md) explores explicitly live-mass scenarios, complementary
+guilds, local response and shared food budgets. The reference organism allocates 0.1 kg C per m² a year to all tenants,
+counted once across guilds. This is 12–18% of a 60-m reef module's net production (its biomass and the sugar together),
+two and a half to three and a half times Macaranga's share.
 
 ## The canopy nursery inoculates the young
 
-**A juvenile leaves its megaforest crown with lift to spare for the canopy's life.** The 50-m, 60-m and 80-m round bodies
-have 2.3, 6.9 and 16 kg/m² of lift within their reserve, against a founder community of 0.01–0.1 kg dry per m²,
+**A juvenile leaves its megaforest crown with lift to spare for the canopy's life.** The 50-m, 60-m and 80-m round
+bodies have 2.3, 6.9 and 16 kg/m² of lift within their reserve, against a founder community of 0.01–0.1 kg dry per m²,
 0.04–0.4 kg wet (a design guess), gathered over its one to seven years in the crown. Epiphyte faunas can double a
 rainforest canopy's invertebrate biomass (Ellwood & Foster 2004), and 1,205 species are known to cross the sea on
 floating objects (Thiel & Gutow 2005): the crown's guards, decomposers, pool-dwellers and epiphytes ride out with the
@@ -156,14 +208,14 @@ zonal-wind product releases its routes 10° of latitude apart (300 km) and 30° 
 between 0.2 and 92 km from one sample to the next as tracks merge and part, and 66–87% of routes share a 171-km model
 cell with another. At 20 km the median settles at 20–35 km after the first year, with 91–94% sharing a cell. A 10-µm
 spore falls at 0.55 mm/s in the lunar air (the ecology first screen): it stays aloft about 105 days in a 5-km mixed
-layer of surface air, and one shed at 10 km takes about 210 days to reach the ground (*derived*), so it travels the whole
-track with the bodies. The 1983 die-off of the sea urchin Diadema antillarum reached 3.5 million km² of the Caribbean in
-13 months, its agent carried by surface currents (Lessios 1988).
+layer of surface air, and one shed at 10 km takes about 210 days to reach the ground (*derived*), so it travels the
+whole track with the bodies. The 1983 die-off of the sea urchin Diadema antillarum reached 3.5 million km² of the
+Caribbean in 13 months, its agent carried by surface currents (Lessios 1988).
 
 **Heights are separate contact groups.** At 10 km the winds gather bodies most strongly over the north pole (3.4 times a
 uniform spread) and toward the equator (1.3–1.8 times); at 20 km over both poles (8.6–12 times). Populations at the two
-heights rarely share air, and sailing, 30–70° of latitude in a lunar day (the aerophytes' sailing note), takes a body off
-a shared track. Resistance that varies between heights and lineages keeps a pathogen in one band.
+heights rarely share air, and sailing, 30–70° of latitude in a lunar day (the aerophytes' sailing note), takes a body
+off a shared track. Resistance that varies between heights and lineages keeps a pathogen in one band.
 
 ## Checks
 
@@ -176,4 +228,6 @@ a shared track. Resistance that varies between heights and lineages keeps a path
 - that neighbours only take light away;
 - the pocket volume against a Monte Carlo integral;
 - the capacities against the aerophyte product's rows, and the domatia against green modules;
+- the vertical response: the static sink against the density scale height, the superpressure it takes, the period
+  with added mass, the drag damping of a sphere, and the order of venting and dropping times;
 - the spores' fall from 10 km, the encounter rate and the landing counts.

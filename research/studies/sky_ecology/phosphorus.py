@@ -113,14 +113,22 @@ def throughput(prod, stock, growth_c):
 
 # ---- the sky's own loop ------------------------------------------------------------------------
 
-def sky_loop(prod, stock, grazed_share, retention=None, edge='low', grazer_p=0., state='mature', growth_c=0.):
-    """One m² of a class a year: where its P goes and what must come in, for one retention case and state.
+def growth_p_at(prod, growth_c, green_p_g_kg, structure_p_g_kg):
+    """P in a year's new bodies at explicit tissue P contents, g per m²."""
+    _check(growth=growth_c)
+    living, structural = prod['living_dry_kg_m2'], prod['structural_dry_kg_m2']
+    return growth_c/C_PER_DRY*(living*green_p_g_kg+structural*structure_p_g_kg)/(living+structural)
+
+
+def loop_terms(prod, *, stock_p, green_p_g_kg, structure_p_g_kg, resorption, harvest_share, take_share, roost_share,
+               hazard, grazed_share, grazer_p, retention, state, growth_c):
+    """One m² of a class a year at explicit parameter values: where its P goes and what must come in.
 
     The renewed green tissue and structure carry the year's renewal P. People harvest a share of the green
     tissue and return FOOD_RETURN of its P (the resources model's food return). Grazers eat a share before
-    resorption and build grazer_p into themselves; great flyers take FLYER_TAKE_SHARE of the grazers and drop
-    the share they do not leave at their roost elsewhere. What remains aloft (the rest) is recycled or falls
-    as litter: with retention None nothing catches what is shed, so only the resorbed share of the shed green
+    resorption and build grazer_p into themselves; great flyers take take_share of the grazers and drop the
+    share they do not leave at their roost elsewhere. What remains aloft (the rest) is recycled or falls as
+    litter: with retention None nothing catches what is shed, so only the resorbed share of the shed green
     tissue is kept and the frass, the grazers' remains and the structure fall (the organism alone); with a
     number, that share of the rest is kept (resorption, pools, canopy soils) and the remainder falls. Whole
     bodies fall at the hazard with their stock. A mature sky replaces them, so its stock holds; a growing sky
@@ -129,40 +137,41 @@ def sky_loop(prod, stock, grazed_share, retention=None, edge='low', grazer_p=0.,
     """
     if state not in STATES:
         raise ValueError(f'state must be one of {STATES}')
-    i = 0 if edge == 'low' else 1
-    _fraction('grazed share', grazed_share)
-    resorb = RESORPTION[1-i]                               # the low edge keeps more
-    green_p = prod['green_tissue_dry_kg']*GREEN_P_G_KG[i]
-    struct_p = prod['structure_dry_kg']*STRUCTURE_P_G_KG[i]
+    for name, f in (('grazed share', grazed_share), ('harvest share', harvest_share), ('take share', take_share),
+                    ('roost share', roost_share), ('resorption', resorption), ('hazard', hazard)):
+        _fraction(name, f)
+    _check(stock=stock_p, growth=growth_c, grazer_p=grazer_p)
+    green_p = prod['green_tissue_dry_kg']*green_p_g_kg
+    struct_p = prod['structure_dry_kg']*structure_p_g_kg
     renewal = green_p+struct_p
     grazed = grazed_share*green_p
-    if not 0 <= grazer_p <= grazed+1e-15:
+    if grazer_p > grazed+1e-15:
         raise ValueError('grazers cannot build more P than they eat')
-    harvest = HARVEST_SHARE[i]*green_p
+    harvest = harvest_share*green_p
     if grazed+harvest > green_p:
         raise ValueError('grazing and harvest exceed the green tissue')
     harvest_not_returned = harvest*(1-FOOD_RETURN)
-    leaving = grazer_p*FLYER_TAKE_SHARE[i]*(1-ROOST_SHARE[1-i])
+    leaving = grazer_p*take_share*(1-roost_share)
     rest = renewal-harvest-leaving
     if retention is None:
-        recycled = resorb*(green_p-grazed-harvest)
+        recycled = resorption*(green_p-grazed-harvest)
     else:
         _fraction('retention', retention)
         recycled = retention*rest
     litter = rest-recycled
-    falls = stock['total_g_m2'][i]*HAZARD_PER_YEAR[i]
+    falls = stock_p*hazard
     if state == 'mature':
         new_p, stock_change = falls, 0.
-        biomass_c = prod['renewal_biomass_c']+prod['standing_host_c_kg_m2']*HAZARD_PER_YEAR[i]
+        biomass_c = prod['renewal_biomass_c']+prod['standing_host_c_kg_m2']*hazard
     else:
-        new_p = growth_p(prod, growth_c, edge)
+        new_p = growth_p_at(prod, growth_c, green_p_g_kg, structure_p_g_kg)
         stock_change = new_p-falls
         biomass_c = prod['renewal_biomass_c']+growth_c
     through = renewal+new_p
     losses = litter+falls+harvest_not_returned+leaving
     need = losses+stock_change
     low_supply = RAIN_P_G_M2_YEAR[0]+DUST_P_G_M2_YEAR[0]
-    return dict(edge=edge, state=state, retention=retention, renewal_g_m2_year=renewal,
+    return dict(state=state, retention=retention, harvest_share=harvest_share, renewal_g_m2_year=renewal,
                 new_bodies_g_m2_year=new_p, throughput_g_m2_year=through, biomass_c_kg_m2_year=biomass_c,
                 grazed_g_m2_year=grazed, grazers_built_g_m2_year=grazer_p, frass_g_m2_year=grazed-grazer_p,
                 harvest_g_m2_year=harvest, harvest_not_returned_g_m2_year=harvest_not_returned,
@@ -173,6 +182,30 @@ def sky_loop(prod, stock, grazed_share, retention=None, edge='low', grazer_p=0.,
                 rain_and_dust_at_their_high_cover_it=RAIN_P_G_M2_YEAR[1]+DUST_P_G_M2_YEAR[1] >= need,
                 retained_share_of_rest=recycled/rest if rest else None,
                 recycled_share=1-(need-harvest_not_returned)/through if through else None)
+
+
+def edge_values(edge):
+    """The loop's ranges at the end that raises the need ('high') or lowers it ('low'), the harvest aside: P
+    contents, resorption (more keeps more), the flyers' take, their roost share (more droppings stay) and the
+    hazard."""
+    i = 0 if edge == 'low' else 1
+    return dict(green_p_g_kg=GREEN_P_G_KG[i], structure_p_g_kg=STRUCTURE_P_G_KG[i], resorption=RESORPTION[1-i],
+                take_share=FLYER_TAKE_SHARE[i], roost_share=ROOST_SHARE[1-i], hazard=HAZARD_PER_YEAR[i])
+
+
+def sky_loop(prod, stock, grazed_share, retention=None, edge='low', grazer_p=0., state='mature', growth_c=0.):
+    """loop_terms at one edge, for one retention case and state.
+
+    The harvest's effect on the need changes sign between cases. People return FOOD_RETURN of the harvest's P, so
+    more harvest lowers the need where the sky keeps a smaller share of what it sheds, and raises it where designed
+    pools keep a larger one. Each edge takes whichever harvest share bounds the need, and records it.
+    """
+    i = 0 if edge == 'low' else 1
+    common = dict(edge_values(edge), stock_p=stock['total_g_m2'][i], grazed_share=grazed_share, grazer_p=grazer_p,
+                  retention=retention, state=state, growth_c=growth_c)
+    options = [loop_terms(prod, harvest_share=h, **common) for h in HARVEST_SHARE]
+    out = (min if edge == 'low' else max)(options, key=lambda o: o['need_g_m2_year'])
+    return dict(out, edge=edge)
 
 
 def nursery_supply(adult_area_m2):
@@ -209,7 +242,8 @@ def resources_check(resources, loops):
     Their sky: 1% of the Moon at 1,000 g C/m² a year of biomass at Redfield C:P, 5% harvested, 99% of the
     harvest's P returned, 99.9% of the rest recycled, against the low upward supply. Here the same equation
     runs with the P an aerophyte's biomass holds per unit of carbon and the recycling each loop reaches
-    (loops: (state, case, edge) -> a sky_loop result for the sky reef).
+    (loops: (state, case, edge) -> the sky reef's loop at each harvest share; each edge takes the one that bounds the
+    formula's own need, which can differ from the share that bounds the loop's).
     """
     central = resources['central']
     upward = resources['upward_p_kg_yr']
@@ -224,13 +258,23 @@ def resources_check(resources, loops):
                redfield_throughput_g_m2_year=central['throughput_p_kg_yr']*1e3/area,
                basis='g P per kg C of biomass production (no sugars), as their 1,000 g C/m² is all dry biomass',
                cases=[])
-    for (state, name, edge), loop in loops.items():
+    def redo(loop):
         per_c = loop['throughput_g_m2_year']/loop['biomass_c_kg_m2_year']   # g P per kg C of biomass
         f = per_c*carbon_basis*area/1e3                                     # kg P a year at their 1,000 g C/m²
         r = equivalent_recycling(loop['recycled_share'])
-        b = resources_budget(f, RESOURCES_HARVEST, r, RESOURCES_FOOD_RETURN, min(upward))
+        return loop, per_c, f, r, resources_budget(f, RESOURCES_HARVEST, r, RESOURCES_FOOD_RETURN, min(upward))
+    for (state, name, edge), options in loops.items():
+        options = options if isinstance(options, list) else [options]
+        loop, per_c, f, r, b = (min if edge == 'low' else max)(
+            (redo(o) for o in options), key=lambda x: x[4]['additional_return_needed_kg'])
+        # The formula's unharvested term holds the loop's litter, falls and departing tenants and, in a growing
+        # sky, the new stock aloft as well: the two are split by the loop's own shares of its throughput.
+        stock_kg = loop['stock_change_g_m2_year']/loop['throughput_g_m2_year']*f
+        formula = dict(formula_unharvested_term_kg=b.pop('natural_downward_kg'), formula_total_kg=b.pop('export_kg'))
         out['cases'].append(dict(state=state, edge=edge, retention_case=name, recycled_share=loop['recycled_share'],
-                                 natural_recycling=r, **b, p_per_kg_c_g=per_c,
+                                 harvest_share=loop.get('harvest_share'), natural_recycling=r, **b, **formula,
+                                 downward_export_kg=formula['formula_unharvested_term_kg']-stock_kg
+                                 + b['food_unreturned_kg'], new_stock_aloft_kg=stock_kg, p_per_kg_c_g=per_c,
                                  throughput_share_of_redfield=f/central['throughput_p_kg_yr'],
                                  against_published=b['additional_return_needed_kg']/row['additional_return_needed_p_kg_yr']))
     return out
@@ -387,19 +431,20 @@ def body_fall(stock_g_m2, diameter_m, area_factor=1.):
 
 
 def falls_table(stocks, land_loss_g_m2_year, cover=.01):
-    """Falls of a 2-km sky reef, a 1-km round giant and a 150-m body: P, fertilisation, frequency.
+    """Falls of a 2-km sky reef, a 1-km round giant and a 100-m body: P, fertilisation, frequency.
 
     stocks: name -> (stock dict from tissue_stock, diameter m, class share of the cover (a design guess), the
-    class's growth rate a year [low, high]). Falls come at the adult hazard; a cover held fixed while its
-    bodies spend their whole surplus on new bodies would need falls at the growth rate instead.
+    class's growth rate a year [low, high], whether the class's body can replace its dead from its own surplus at
+    each end of the hazard, by gas route). Falls come at the adult hazard; a cover held fixed while its bodies
+    spend their whole surplus on new bodies would need falls at the growth rate instead.
     """
     rows = []
-    for name, (stock, d, share, growth_rate) in stocks.items():
+    for name, (stock, d, share, growth_rate, feasible) in stocks.items():
         f = body_fall(stock['total_g_m2'], d)
         bodies = cover*MOON_AREA_M2*share/f['area_m2']
         per_year = [bodies*h for h in HAZARD_PER_YEAR]
         f.update(body=name, dry_t=stock['dry_kg_m2']*f['area_m2']/1e3, class_share_of_cover=share,
-                 bodies_at_cover=bodies, falls_per_year=per_year,
+                 bodies_at_cover=bodies, falls_per_year=per_year, replacement_feasible_at_hazard=feasible,
                  falls_per_year_at_growth_rate=[bodies*g for g in growth_rate],
                  p_t_year=[per_year[0]*f['p_t'][0], per_year[1]*f['p_t'][1]],
                  ground_km2_year=[per_year[0]*f['area_m2']*DRAPE_FACTOR[0]/1e6,
@@ -413,8 +458,7 @@ def falls_table(stocks, land_loss_g_m2_year, cover=.01):
 def evaluate(food_web, resources, winds, winds_npz, atlas, people, flyers, water_share):
     """The phosphorus numbers for the product."""
     prods = {(r['cls'], r['diameter_m'], r['gpp_c_kg_m2_year'], r['gas_route']): r for r in food_web['production']}
-    keys = dict(sky_reef_60m=('sky_reef', 60.), round_giant_1km=('round_giant', 1000.), lesser_100m=('lesser', 100.),
-                lesser_150m=('lesser', 150.))
+    keys = dict(sky_reef_60m=('sky_reef', 60.), round_giant_1km=('round_giant', 1000.), lesser_100m=('lesser', 100.))
     bodies = {k: prods[(c, d, 2., 'photolysis')] for k, (c, d) in keys.items()}
     fermented = {k: prods[(c, d, 2., 'fermentation_2_1')] for k, (c, d) in keys.items()}
     growth_c = {k: [fermented[k]['growth_biomass_c'], bodies[k]['growth_biomass_c']] for k in keys}
@@ -434,7 +478,8 @@ def evaluate(food_web, resources, winds, winds_npz, atlas, people, flyers, water
                     loop = sky_loop(bodies[key], stocks[key], grazed[i], retention=r, edge=edge, grazer_p=grazer_p,
                                     state=state, growth_c=growth_c[key][i])
                     loop.update(body=key, retention_case=case,
-                                sky_need_t_year_if_all_cover=loop['net_need_g_m2_year']*.01*MOON_AREA_M2/1e6)
+                                sky_need_t_year_if_all_cover=loop['net_need_g_m2_year']*.01*MOON_AREA_M2/1e6,
+                                replacement_feasible=bodies[key]['mature_feasible'][i])
                     loops.append(loop)
 
     def loop_of(body, state, case, edge):
@@ -448,8 +493,16 @@ def evaluate(food_web, resources, winds, winds_npz, atlas, people, flyers, water
                     for c in RETENTION_CASES} for s in STATES}
     nursery = {k: nursery_supply(a) for k, a in (('lesser_100m', math.pi*50**2), ('round_giant_1km', math.pi*500**2),
                                                  ('sky_reef_2km', math.pi*1000**2))}
-    check = resources_check(resources, {(s, c, e): loop_of('sky_reef_60m', s, c, e) for s in STATES
-                                        for c in RETENTION_CASES for e in ('low', 'high')})
+    reef_options = {}
+    for s in STATES:
+        for c, r in RETENTION_CASES.items():
+            for i, e in enumerate(('low', 'high')):
+                common = dict(edge_values(e), stock_p=stocks['sky_reef_60m']['total_g_m2'][i], grazed_share=grazed[i],
+                              grazer_p=loop_of('sky_reef_60m', s, c, e)['grazers_built_g_m2_year'], retention=r,
+                              state=s, growth_c=growth_c['sky_reef_60m'][i])
+                reef_options[(s, c, e)] = [loop_terms(bodies['sky_reef_60m'], harvest_share=h, **common)
+                                           for h in HARVEST_SHARE]
+    check = resources_check(resources, reef_options)
     # Where the sky's litter lands, from the routes passive bodies follow at 10 and 20 km.
     occ = {h: band_occupancy(winds, h) for h in (10., 20.)}
     sea_band = band_sea_share(atlas, occ[10.]['lat_edges_deg']) if atlas is not None else None
@@ -507,10 +560,14 @@ def evaluate(food_web, resources, winds, winds_npz, atlas, people, flyers, water
                              roosting_flyers=[need/(per*ROOST_SHARE[1]*CAUGHT_SHARE[1]),
                                               need/(per*ROOST_SHARE[0]*CAUGHT_SHARE[0])]))
     land_loss_g = [x*1e12/(cap['dry_land_km2']*1e6) for x in cap['land_p_loss_tg']]
-    falls = falls_table({'sky_reef_2km': (stocks['sky_reef_60m'], 2000., CLASS_SHARES['sky_reef'], growth_rate['sky_reef_60m']),
+    feasible = {k: dict(photolysis=bodies[k]['mature_feasible'], fermentation_2_1=fermented[k]['mature_feasible'])
+                for k in keys}
+    falls = falls_table({'sky_reef_2km': (stocks['sky_reef_60m'], 2000., CLASS_SHARES['sky_reef'],
+                                          growth_rate['sky_reef_60m'], feasible['sky_reef_60m']),
                          'round_giant_1km': (stocks['round_giant_1km'], 1000., CLASS_SHARES['round_giant'],
-                                             growth_rate['round_giant_1km']),
-                         'lesser_150m': (stocks['lesser_150m'], 150., CLASS_SHARES['lesser'], growth_rate['lesser_150m'])},
+                                             growth_rate['round_giant_1km'], feasible['round_giant_1km']),
+                         'lesser_100m': (stocks['lesser_100m'], 100., CLASS_SHARES['lesser'], growth_rate['lesser_100m'],
+                                         feasible['lesser_100m'])},
                         land_loss_g)
     return dict(
         evidence='Accounting on the aerophyte ledgers with design-guess P contents, resorption, retention, roosting and '
@@ -518,10 +575,13 @@ def evaluate(food_web, resources, winds, winds_npz, atlas, people, flyers, water
                  'run\'s passive routes and the 28% atlas. No P cycle is simulated.',
         reading_rule='Stocks in g P per m² of projected aerophyte area; flows in g P per m² a year; sky-wide flows in t '
                      'or kg a year at 1% cover unless labelled; [low, high] take every range at the end that bounds the '
-                     'need. States: mature (stock held, falls replaced) and growing (the surplus builds new bodies). '
-                     'recycled_share is the share of the year\'s P throughput met by recycling aloft, the resources '
-                     'model\'s r once taken onto its unharvested share. Deposition is g P per m² of ground a year, the '
-                     'flux spread by the routes\' time in each 10-degree band and smeared over its longitudes.',
+                     'need, the harvest share at whichever end does so in each case (harvest_share). States: mature '
+                     '(stock held, falls replaced; replacement_feasible says whether the body\'s own surplus pays for '
+                     'it) and growing (the surplus builds new bodies). recycled_share is the share of the year\'s P '
+                     'throughput met by recycling aloft, the resources model\'s r once taken onto its unharvested share; '
+                     'in the resources rows downward_export_kg and new_stock_aloft_kg split the formula\'s total. '
+                     'Deposition is g P per m² of ground a year, the flux spread by the routes\' time in each 10-degree '
+                     'band and smeared over its longitudes.',
         design_guesses=dict(green_p_g_kg=list(GREEN_P_G_KG), structure_p_g_kg=list(STRUCTURE_P_G_KG),
                             reserve_p_g_kg=list(RESERVE_P_G_KG), resorption=list(RESORPTION),
                             pool_p_mg_l=list(POOL_P_MG_L), hazard_per_year=list(HAZARD_PER_YEAR),

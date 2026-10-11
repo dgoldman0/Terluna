@@ -32,10 +32,47 @@ def test_production_partition_closes_the_carbon_ledger(product):
         assert math.isclose(r['renewal_biomass_c'], r['green_tissue_c']+r['structure_c'])
         assert math.isclose(r['biomass_c'], r['renewal_biomass_c']+r['growth_biomass_c'])
         assert math.isclose(r['surplus_c'], r['growth_biomass_c']+r['growth_respiration_c']+r['growth_gas_and_reserve_c'])
-        for h, mature in zip(fw.HAZARD_PER_YEAR, r['mature_biomass_c']):
-            assert math.isclose(mature, r['renewal_biomass_c']+r['standing_host_c_kg_m2']*h)
+        for h, mature, rep in zip(fw.HAZARD_PER_YEAR, r['mature_biomass_c'], r['replacement']):
+            assert math.isclose(rep['replacement_c'], h*r['construction_c_kg_m2'])
+            assert math.isclose(rep['surplus_left_c'], r['surplus_c']-rep['replacement_c'])
+            assert rep['feasible'] == (rep['surplus_left_c'] >= 0)
+            assert math.isclose(rep['net_cover_growth_per_year'], r['surplus_c']/r['construction_c_kg_m2']-h)
+            if rep['feasible']:
+                assert math.isclose(mature, r['renewal_biomass_c']+r['standing_host_c_kg_m2']*h)
+            else:
+                assert mature is None
         assert 0 < r['biomass_share_of_growth'] < 1
         assert math.isclose(r['growth_rate_per_year'], r['growth_biomass_c']/r['standing_host_c_kg_m2'])
+
+
+def test_mature_figures_only_where_the_dead_can_be_replaced(product):
+    feas = product['feasibility']
+    bad = {(f['cls'], f['fibre'], f['diameter_m'], f['gpp_c_kg_m2_year'], f['gas_route'], f['hazard_per_year'])
+           for f in feas['rows'] if f['all_gates'] and not f['feasible']}
+    assert bad == {(f['cls'], f['fibre'], f['diameter_m'], f['gpp_c_kg_m2_year'], f['gas_route'], f['hazard_per_year'])
+                   for f in feas['infeasible']}
+    assert bad                                           # fermented giants at the high hazard cannot replace their dead
+    assert all(h == fw.HAZARD_PER_YEAR[1] and route == 'fermentation_2_1' for *_, route, h in bad)
+    for cls, entry in product['by_class'].items():
+        vals = [m for r in product['production'] if r['cls'] == cls and r['all_gates'] for m in r['mature_biomass_c']
+                if m is not None]
+        assert entry['mature_biomass_c_kg_m2_year'] == [min(vals), max(vals)]
+
+
+def test_survival_to_size_and_lightning_scaling(product):
+    d = product['demography']
+    assert d['mean_adult_life_years'] == [1/h for h in fw.HAZARD_PER_YEAR]
+    for g in d['growth']:
+        if g['years_to_size'] is None:
+            assert g['survival_to_size'] == [None, None]
+        else:
+            for h, s in zip(fw.HAZARD_PER_YEAR, g['survival_to_size']):
+                assert math.isclose(s, math.exp(-h*g['years_to_size']))
+    by = {(l['place'], l['body_radius_m']): l for l in d['lightning']}
+    for place in ('moon_mean', 'summit_cells', 'polar_plain'):
+        big, mid = by[(place, 1000.)], by[(place, 500.)]
+        assert math.isclose(mid['strikes_per_year'][0], big['strikes_per_year'][0]*(550/1050)**2)
+        assert math.isclose(mid['strikes_per_year'][1], big['strikes_per_year'][1]*(700/1200)**2)
 
 
 def test_biomass_leaves_the_tenants_sugar_out(product):
