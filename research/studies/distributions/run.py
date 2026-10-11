@@ -15,6 +15,7 @@ or traffic model runs here.
 """
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import math
@@ -161,7 +162,12 @@ GUESSES = {
     'relative_drift_m_s': dict(value=[0.1, 1.0], unit='m/s between neighbours drifting at one height',
                                note="the sky-ecology study's design guess for aerophytes on the same tracks, taken "
                                     'here for sky towns'),
+    'homestead_people_per_km2': dict(value=[2.0, 20.0],
+                                     unit="homestead residents a km2 of field among the middle latitudes' farms (C')",
+                                     note="a household of four on each 20-200 ha of field, the span of Earth's "
+                                          'family farms from mixed-farming country to the mechanised grain belts'),
 }
+HOMESTEAD_HOUSEHOLD = 4.0             # people in a homestead household, with the guess above
 
 MOON_BILLION = (4, 6, 8)
 ALOFT_BILLION = (2, 3, 4)
@@ -196,6 +202,8 @@ DISTRIBUTIONS = {
     'C': dict(name='The Moon at 8 billion', earth=9.0, moon=8.0, aloft=4.0, array=5.0, colonies=3.0),
     'D': dict(name='30 billion, the Moon at 8 billion mostly on the land',
               earth=9.0, moon=8.0, aloft=2.0, array=8.0, colonies=5.0),
+    "C'": dict(name="C', the author's distribution: C with the middle latitudes' lowland people moved",
+               earth=9.0, moon=8.0, aloft=4.0, array=5.0, colonies=3.0, case='cprime'),
 }
 
 EVIDENCE = ('A screen on committed and bound products: the food study\'s mixes and their feasible ranges, the '
@@ -348,6 +356,72 @@ def wind_spread(winds, height_km):
                 uncorrelated_relative_m_s=math.sqrt(2.0 * (sigma_u ** 2 + sigma_v ** 2)))
 
 
+# The homes the middle latitudes' people can move to under C', and the study's measures of what sustains people
+# there. Dry bands take the land-cities rows for their latitudes; lowland homes take their own rows.
+DESTINATIONS = dict(
+    high_latitude_lowland=dict(name='high-latitude lowland homes poleward of 48.6 degrees', kind='lowland',
+                               band='fog_desert_and_polar', homes=('high_latitude_towns',), lat=(60, 90),
+                               rain_bands=('high',), places=('polar plain',)),
+    lowland_0_30=dict(name='lowland homes equatorward of 30 degrees', kind='lowland', band='all_land_0_30',
+                      homes=('coastal_and_lake_towns', 'wetland_edge_towns', 'canopy_towns', 'farming_country'),
+                      lat=(0, 30), rain_bands=('equatorial', 'tropical'),
+                      places=('southern Mare Nubium', 'eastern Smythii headland')),
+    dry_30_45=dict(name='dry highland cities at 30-45 degrees', kind='dry', band='30-45', lat=(30, 60),
+                   light_home='far_side_places', rain_bands=('middle',), places=('highland box',)),
+    dry_45_60=dict(name='dry highland cities at 45-60 degrees', kind='dry', band='45-60', lat=(30, 60),
+                   light_home='high_latitude_towns', rain_bands=('middle', 'high'),
+                   places=('highland box', 'polar plain')),
+    dry_60_90=dict(name='dry highland cities at 60-90 degrees', kind='dry', band='60-90', lat=(60, 90),
+                   light_home='high_latitude_towns', rain_bands=('high',), places=('polar plain',)),
+)
+# Where C' moves people from, measured the same way for comparison.
+ORIGIN = dict(name='lowland homes at 30-48.6 degrees', kind='lowland', band='middle', lat=(30, 60),
+              homes=('nearside_towns', 'limb_towns', 'far_side_places', 'coastal_and_lake_towns', 'wetland_edge_towns'),
+              rain_bands=('middle',), places=('Oceanus Procellarum by Russell', 'South Pole-Aitken coast by Mare Ingenii'))
+
+
+def destination_measures(hl, wol, ll, places, water_rows, high_homes_km2):
+    """Each destination's water energy with nothing recovered, comfortable hours under CM1 and the GCM, rain,
+    lightning, walking-lamp hours and lit sky a person, read from the products for its latitudes and height."""
+    rings = hl['comfort']['rings_corrected_for_height']
+
+    def ring(lat, height_km):
+        return next(r for r in rings if r['abs_lat_deg'][0] == lat[0] and r['abs_lat_deg'][1] == lat[1]
+                    and r['height_m'][0] <= height_km * 1e3 < r['height_m'][1])
+
+    lowland_gw = wol['settings']['high_latitude_towns']['per_billion']['domestic_gross_lift_from_seas_gw']
+    bands = wol['moon']['bands']
+    pp = ll['headlines']['per_person_m2']['shielded']['homes']
+    hours = {h: v['needs']['walking']['hours_below_mean'] for h, v in ll['needs']['homes'].items()}
+    out = {}
+    for key, spec in list(DESTINATIONS.items()) + [('origin_middle_lowland', ORIGIN)]:
+        if spec['kind'] == 'dry':
+            band_lat = WATER_BANDS[spec['band']]
+            water = water_rows[band_lat]['gw_per_billion_from_nearest_p50']
+            rows = [ring(spec['lat'], hl['land']['poleward_of_30']['mean_height_above_sea_km'])]
+            light_homes = (spec['light_home'],)
+        else:
+            water = lowland_gw
+            rows = [ring(spec['lat'], wol['settings'][h]['physical']['height_above_sea_km_mean'])
+                    for h in spec['homes']]
+            light_homes = spec['homes']
+        rain = [bands[b]['rain_mm_day_all_surfaces'] for b in spec['rain_bands']]
+        flashes = [places['places'][x]['lightning']['central'] for x in spec['places']]
+        out[key] = dict(
+            name=spec['name'], kind=spec['kind'], band=spec['band'],
+            water_gw_per_billion_nothing_recovered=list(water),
+            comfort_cm1_strict_hours=[min(r['cm1_strict_hours'] for r in rows),
+                                      max(r['cm1_strict_hours'] for r in rows)],
+            comfort_gcm_strict_hours=[min(r['gcm_strict_hours'] for r in rows),
+                                      max(r['gcm_strict_hours'] for r in rows)],
+            rain_mm_day=[min(rain), max(rain)], flashes_per_km2_year=[min(flashes), max(flashes)],
+            walking_lamp_hours=[min(hours[h] for h in light_homes), max(hours[h] for h in light_homes)],
+            lit_m2_per_person=[min(pp[h][0] for h in light_homes), max(pp[h][1] for h in light_homes)],
+            homes=list(light_homes) if spec['kind'] == 'lowland' else None,
+            land_km2=high_homes_km2 if key == 'high_latitude_lowland' else None)
+    return out
+
+
 def build_basis(d, b):
     food, land, wol, pop, comp, winds, daily, iv, cases = (d['food'], d['land'], d['wol'], d['pop'], d['comp'],
                                                            d['winds'], d['daily'], d['iv'], d['cases'])
@@ -388,7 +462,15 @@ def build_basis(d, b):
     # homes; with no overlay of homes on zones, the homes' middle-band land is taken to cover the zone evenly
     home_middle = {h: regions[HOME_REGION[h]]['bands_dry_land_km2']['middle'] / regions[HOME_REGION[h]]['dry_land_km2']
                    for h in SCATTERED_HOMES}
+    home_high = {h: regions[HOME_REGION[h]]['bands_dry_land_km2']['high'] / regions[HOME_REGION[h]]['dry_land_km2']
+                 for h in SCATTERED_HOMES}
     middle_homes_km2 = sum(hl['scattered']['homes_km2'][h] * home_middle[h] for h in SCATTERED_HOMES)
+    high_homes_km2 = sum(hl['scattered']['homes_km2'][h] * home_high[h] for h in SCATTERED_HOMES)
+    measured = destination_measures(hl, wol, ll, places, water_rows, high_homes_km2)
+    origin = measured.pop('origin_middle_lowland')
+    destinations = measured
+    access = hl['access']
+    zone_lat = zones['middle_wet']['abs_lat_deg_mean']
     roaming = iv['roaming_control_sensitivity']
     sky_town = next(x for x in daily['volume']['heights'] if x['label'] == 'a roaming sky town')
     case_earth = [c['earth'] for c in cases['cases'].values()]
@@ -416,7 +498,8 @@ def build_basis(d, b):
         scattered=dict(m2_per_person=[wol['assumptions']['settlement_m2_per_person']['town'][0],
                                       wol['assumptions']['settlement_m2_per_person']['spread'][1]],
                        homes_km2={h: hl['scattered']['homes_km2'][h] for h in SCATTERED_HOMES},
-                       home_share_0_30=home_0_30, home_share_middle=home_middle,
+                       home_share_0_30=home_0_30, home_share_middle=home_middle, home_share_high=home_high,
+                       high_homes_km2=high_homes_km2,
                        mix_weight=wol['assumptions']['mix_weight']),
         highlands=dict(all_km2=hl['land']['all_highland']['dry_land_km2'],
                        dry_km2=sum(dry_bands.values()),
@@ -524,6 +607,17 @@ def build_basis(d, b):
                                            mg_m3_1000_years=near_side_mg),
                         land_reach=sp['distribution']['land_reach']),
         diet_kcal_day=food['basis']['diet']['intake_kcal_day'],
+        destinations=destinations, origin_middle_lowland=origin,
+        crews=dict(sky_boat_seats=access['sky_boat']['seats'],
+                   sky_boat_range_with_climb_km=access['sky_boat']['range_with_climb_km'],
+                   sky_boat_range_km=access['sky_boat']['range_km'],
+                   sky_boat_kwh_50_km_with_climb=next(x['sky_boat']['kwh_with_climb'] for x in access['trips']
+                                                      if x['km'] == 50.0),
+                   sky_ferry_route_km=access['sky_ferry']['route_km'],
+                   regional_ship_route_km=access['regional_ship']['route_km'],
+                   regional_ship_wh_per_passenger_km=access['regional_ship']['wh_per_passenger_km'],
+                   middle_wet_mean_lat_deg=zone_lat,
+                   km_to_45_degrees=(45.0 - zone_lat) * math.pi / 180.0 * MOON_RADIUS / 1e3),
         tubes=dict(totals=land['tubes']['capacity']['totals'], sealing=land['tubes']['sealing'],
                    reference_people_million=land['tubes']['sealing']['residents_energy']['people_million'],
                    by_candidate=land['tubes']['capacity']['by_candidate'],
@@ -625,9 +719,12 @@ def placement(B, ground, combo, rule='spread', dry_rule='land', kept=0.3):
                  scattered=scattered * 1e9 * sm2 / 1e6, undersea_and_tubes=0.0)
     people = dict(metropolis=met, tower_districts=tower, highland_towns=towns, scattered=scattered,
                   undersea_domes=domes)
+    land = dict(low_0_30=areas['scattered'] * share_0_30, middle=areas['scattered'] * share_middle)
+    land['high'] = areas['scattered'] - land['low_0_30'] - land['middle']
     return dict(highland_share=hs, tower_share=ts, scattered_m2=sm2, people=people, dry_highland=dry,
                 dry_people_by_band=dry_people, dry_area_by_band=dry_area, scattered_by_home=by_home,
                 scattered_share_0_30=share_0_30, scattered_share_middle=share_middle, areas_km2=areas,
+                scattered_land_km2=land, homestead_land_km2=0.0, homestead_rule='zone',
                 settled_km2=sum(areas.values()))
 
 
@@ -657,19 +754,28 @@ def land_bands(B, blk, reach, place, e, kept, wet_rule='area'):
     fill_0_30 = sum(max(dry_b[k] * out_share - reserved[k], 0.0) for k in ('0-15', '15-30'))
     fields_0_30 = min(rain_belt + highland_fields - fields_30_45, fill_0_30)
     a = place['areas_km2']
-    s030 = place['scattered_share_0_30']
-    middle_land = a['scattered'] * place['scattered_share_middle']
+    sl = place['scattered_land_km2']
+    middle_land = sl['middle']
     mw_cap = zones['middle_wet'] * out_share
     on_mw = middle_land * lb['middle_wet_share_of_middle_homes']
     if wet_rule == 'dry_side':
         on_mw = min(on_mw, max(mw_cap - middle_wet, 0.0))
     elif wet_rule != 'area':
         raise ValueError(f'unknown wet rule {wet_rule}')
-    use = dict(all_land_0_30=fields_0_30 + a['metropolis'] + a['scattered'] * s030,
+    homes = place['homestead_land_km2']          # C': homesteads live among the middle-wet fields
+    rule = place['homestead_rule']
+    if rule == 'zone':                           # beside the fields, on the zone
+        homes_on_mw, homes_elsewhere = homes, 0.0
+    elif rule == 'within_fields':                # within the fields they work, taking a share of the fields' land
+        homes_on_mw, homes_elsewhere = 0.0, 0.0
+    else:
+        raise ValueError(f'unknown homestead rule {rule}')
+    use = dict(all_land_0_30=fields_0_30 + a['metropolis'] + sl['low_0_30'],
                highlands_30_45=fields_30_45 + place['dry_area_by_band']['30-45'],
                highlands_45_90=place['dry_area_by_band']['45-60'] + place['dry_area_by_band']['60-90'],
-               middle_wet_zone=middle_wet + on_mw,
-               fog_desert_and_polar=fog_watered + blk['grazing_km2'][e] + a['scattered'] * (1.0 - s030) - on_mw)
+               middle_wet_zone=middle_wet + on_mw + homes_on_mw,
+               fog_desert_and_polar=(fog_watered + blk['grazing_km2'][e] + middle_land - on_mw + sl['high']
+                                     + homes_elsewhere))
     cap = dict(all_land_0_30=(dry_b['0-15'] + dry_b['15-30']) * out_share,
                highlands_30_45=hb['30-45'] * out_share,
                highlands_45_90=(hb['45-60'] + hb['60-75'] + hb['75-90']) * out_share,
@@ -681,7 +787,8 @@ def land_bands(B, blk, reach, place, e, kept, wet_rule='area'):
     return dict(use_km2=use, capacity_km2=cap, use_share={k: use[k] / cap[k] for k in LAND_BANDS},
                 overfill_km2=overfill, fields_on_dry_high_ground_km2=fields_30_45,
                 fields_on_middle_wet_km2=middle_wet, scattered_middle_band_km2=middle_land,
-                scattered_on_middle_wet_km2=on_mw,
+                scattered_on_middle_wet_km2=on_mw, homestead_land_on_middle_wet_km2=homes_on_mw,
+                homestead_share_of_middle_wet_fields=homes / middle_wet if middle_wet > 0.0 else 0.0,
                 middle_homes_dry_side_used_share=(middle_land - on_mw) / dry_side_cap,
                 dry_high_ground_used_share=dry_used / (B['highlands']['dry_km2'] * out_share),
                 dry_high_ground_settled_share=(dry_used - fields_30_45) / (B['highlands']['dry_km2'] * out_share))
@@ -710,13 +817,16 @@ def lit_sky(B, place, aloft, end, design):
 
 
 def moon_corner(B, food, moon, aloft, kept, supply, combo, end, rule='spread', dry_rule='land', wet_rule='area',
-                mix=CHOSEN_MIX):
-    """Every account of one Moon case at one corner: one combination of the guesses, every input at `end`."""
+                mix=CHOSEN_MIX, middle=None):
+    """Every account of one Moon case at one corner: one combination of the guesses, every input at `end`. With
+    `middle` (C'), the middle latitudes' lowland people keep homesteads among the farms there and the rest move."""
     ground = moon - aloft
     place = placement(B, ground, combo, rule, dry_rule, kept)
     fb = food_block(food, mix, moon, kept)
     blk, reach = fb['block'], fb['reach']
     e = end
+    if middle is not None:
+        place = move_middle(B, place, blk, reach, e, kept, wet_rule, middle)
     dry_land = B['moon']['dry_land_km2']
     towns_fs = food_town_km2(B, blk['people_billion']['surface'][e], e, reach)
     food_land = blk['land_km2']['total'][e] - towns_fs
@@ -819,7 +929,145 @@ def moon_corner(B, food, moon, aloft, kept, supply, combo, end, rule='spread', d
                 scattered_share_0_30=place['scattered_share_0_30'],
                 highland_share=place['highland_share'], tower_share=place['tower_share'],
                 scattered_m2_per_person=place['scattered_m2'], bands=bands, land=land, energy=energy, water=water,
-                phosphorus=phosphorus, light=light, sky=sky_out)
+                phosphorus=phosphorus, light=light, sky=sky_out, moved=place.get('moved'))
+
+
+def destination_spare_km2(B, blk, reach, place, e, kept, wet_rule='area'):
+    """Spare land outside the kept share, after the fields and the settlement, in each destination's own land."""
+    bands = land_bands(B, blk, reach, place, e, kept, wet_rule)
+    hb, out = B['land_bands']['highland_km2'], 1.0 - kept
+    use, cap = bands['use_km2'], bands['capacity_km2']
+    return dict(high_latitude_lowland=B['scattered']['high_homes_km2'] * out - place['scattered_land_km2']['high'],
+                lowland_0_30=cap['all_land_0_30'] - use['all_land_0_30'],
+                dry_30_45=cap['highlands_30_45'] - use['highlands_30_45'],
+                dry_45_60=hb['45-60'] * out - place['dry_area_by_band']['45-60'],
+                dry_60_90=(hb['60-75'] + hb['75-90']) * out - place['dry_area_by_band']['60-90'])
+
+
+def move_middle(B, place, blk, reach, e, kept, wet_rule, spec):
+    """C': the scattered communities of the 30-48.6 degree lowland homes leave, except homesteads among the farms
+    there, at the guessed density on the middle-wet zone's fields; the rest go to the destinations in `spec['order']`,
+    each taking what its spare land outside the kept share holds at its own density."""
+    f = blk.get('fields')
+    fields_mw = max(f['field_km2_by_zone']['middle_wet'][e], 0.0) if f else 0.0
+    density = GUESSES['homestead_people_per_km2']['value'][spec['h_end']]
+    middle_people = place['people']['scattered'] * place['scattered_share_middle']
+    homesteads = min(density * fields_mw / 1e9, middle_people)
+    moved = middle_people - homesteads
+    m2 = place['scattered_m2']
+    new = copy.deepcopy(place)
+    new['scattered_land_km2']['middle'] = 0.0
+    new['homestead_land_km2'] = homesteads * 1e9 * m2 / 1e6
+    new['homestead_rule'] = spec.get('homes_on', 'zone')
+    share_mid = B['scattered']['home_share_middle']
+    by_home = new['scattered_by_home']
+    for h in by_home:
+        by_home[h] *= 1.0 - share_mid[h]
+    by_home['far_side_places'] += homesteads   # lit like the far side's twilit-night places, as at 30-45 degrees
+    ts = new['tower_share']
+    dry_km2_per_b = 1e9 * (ts / B['towers']['people_per_km2'] + (1.0 - ts) / B['towns']['people_per_km2'])
+    lowland_km2_per_b = 1e9 * m2 / 1e6
+    homes_0_30 = DESTINATIONS['lowland_0_30']['homes']
+    land_0_30 = {h: B['scattered']['homes_km2'][h] * B['scattered']['home_share_0_30'][h] for h in homes_0_30}
+    placed = {k: 0.0 for k in DESTINATIONS}
+    left = moved
+    for dest in spec['order']:
+        if left <= 0.0:
+            break
+        kind = DESTINATIONS[dest]['kind']
+        per_b = dry_km2_per_b if kind == 'dry' else lowland_km2_per_b
+        spare = destination_spare_km2(B, blk, reach, new, e, kept, wet_rule)[dest]
+        take = min(left, max(spare, 0.0) / per_b)
+        if take <= 0.0:
+            continue
+        if dest == 'high_latitude_lowland':
+            new['scattered_land_km2']['high'] += take * per_b
+            by_home['high_latitude_towns'] += take
+        elif dest == 'lowland_0_30':
+            new['scattered_land_km2']['low_0_30'] += take * per_b
+            for h in homes_0_30:
+                by_home[h] += take * land_0_30[h] / sum(land_0_30.values())
+        else:
+            b = DESTINATIONS[dest]['band']
+            new['dry_people_by_band'][b] += take
+            new['dry_area_by_band'][b] += take * per_b
+            new['dry_highland'] += take
+            new['people']['tower_districts'] += ts * take
+            new['people']['highland_towns'] += (1.0 - ts) * take
+            new['people']['scattered'] -= take
+            a = new['areas_km2']
+            a['tower_districts'] += ts * take * 1e9 / B['towers']['people_per_km2']
+            a['highland_towns'] += (1.0 - ts) * take * 1e9 / B['towns']['people_per_km2']
+            a['scattered'] -= take * lowland_km2_per_b
+        placed[dest] = take
+        left -= take
+    new['settled_km2'] = sum(new['areas_km2'].values())
+    scattered_land = new['areas_km2']['scattered']
+    if scattered_land > 0.0:
+        new['scattered_share_0_30'] = new['scattered_land_km2']['low_0_30'] / scattered_land
+        new['scattered_share_middle'] = new['homestead_land_km2'] / scattered_land
+    new['moved'] = dict(middle_billion=middle_people, homesteads_billion=homesteads, moved_billion=moved,
+                        placed_billion=placed, unplaced_billion=left, homestead_land_km2=new['homestead_land_km2'],
+                        middle_wet_fields_km2=fields_mw)
+    return new
+
+
+def rank_destinations(B, spare_km2):
+    """The destinations ranked on the five measures, 1 the best and ties sharing their mean rank: spare land (most
+    first), water energy with nothing recovered (least), comfort (the mean of the CM1 and GCM ranks), rain and
+    lightning (the mean of their ranks, least first) and night lighting (the mean of the walking-lamp and lit-sky
+    ranks, least first). Their order is by the mean of the five, ties to the dry highlands, the author's land."""
+    D = B['destinations']
+    keys = list(D)
+
+    def mid(v):
+        return (v[0] + v[1]) / 2.0
+
+    def ranks(values, most_first):
+        order = sorted(keys, key=lambda k: -values[k] if most_first else values[k])
+        out, i = {}, 0
+        while i < len(order):
+            j = i
+            while j + 1 < len(order) and math.isclose(values[order[j + 1]], values[order[i]], rel_tol=1e-9,
+                                                      abs_tol=1e-12):
+                j += 1
+            for k in order[i:j + 1]:
+                out[k] = (i + j) / 2.0 + 1.0
+            i = j + 1
+        return out
+
+    r = dict(spare=ranks(spare_km2, True),
+             water=ranks({k: mid(D[k]['water_gw_per_billion_nothing_recovered']) for k in keys}, False),
+             cm1=ranks({k: mid(D[k]['comfort_cm1_strict_hours']) for k in keys}, True),
+             gcm=ranks({k: mid(D[k]['comfort_gcm_strict_hours']) for k in keys}, True),
+             rain=ranks({k: mid(D[k]['rain_mm_day']) for k in keys}, False),
+             flashes=ranks({k: mid(D[k]['flashes_per_km2_year']) for k in keys}, False),
+             lamps=ranks({k: mid(D[k]['walking_lamp_hours']) for k in keys}, False),
+             lit=ranks({k: mid(D[k]['lit_m2_per_person']) for k in keys}, False))
+    measures = {}
+    for k in keys:
+        five = dict(spare_land=r['spare'][k], water=r['water'][k], comfort=(r['cm1'][k] + r['gcm'][k]) / 2.0,
+                    rain_and_lightning=(r['rain'][k] + r['flashes'][k]) / 2.0,
+                    night_lighting=(r['lamps'][k] + r['lit'][k]) / 2.0)
+        five['mean'] = sum(five.values()) / 5.0
+        measures[k] = five
+    order = sorted(keys, key=lambda k: (measures[k]['mean'], 0 if D[k]['kind'] == 'dry' else 1, -spare_km2[k]))
+    return dict(ranks=measures, order=order, spare_land_km2=spare_km2)
+
+
+def destination_spare_for_ranking(B, food, moon, aloft, kept):
+    """The least spare land each destination keeps over C's corners as spread, with the middle latitudes' lowland
+    land counted as moved out (the spare land the move can use)."""
+    least = {k: math.inf for k in DESTINATIONS}
+    for combo in COMBOS:
+        place = placement(B, moon - aloft, combo, kept=kept)
+        place['scattered_land_km2']['middle'] = 0.0
+        fb = food_block(food, CHOSEN_MIX, moon, kept)
+        for e in (0, 1):
+            spare = destination_spare_km2(B, fb['block'], fb['reach'], place, e, kept)
+            for k in least:
+                least[k] = min(least[k], max(spare[k], 0.0))
+    return least
 
 
 def traffic(B, aloft, kept, district='50.0'):
@@ -871,7 +1119,7 @@ def assemble(rows_by_supply, selection):
                 highland_share=base['highland_share'], tower_share=base['tower_share'],
                 scattered_m2_per_person=base['scattered_m2_per_person'], bands=base['bands'], land=base['land'],
                 water=base['water'], phosphorus=base['phosphorus'], light=base['light'], sky=base['sky'],
-                energy=dict(fusion=base['energy'], array=arr['energy']))
+                energy=dict(fusion=base['energy'], array=arr['energy']), moved=base.get('moved'))
 
 
 def moon_case(B, food, moon, aloft, mix=CHOSEN_MIX):
@@ -912,6 +1160,51 @@ def moon_case(B, food, moon, aloft, mix=CHOSEN_MIX):
                                    light=dict(shielded=full['light']['shielded'], living=full['light']['living']),
                                    energy=dict(fusion=full['energy']['fusion']))
         out[KEPT_KEY[kept]] = entry
+    return out
+
+
+CPRIME_VARIANTS = {
+    'as_placed': dict(),
+    'poleward_and_twilit': dict(rule='twilit', dry_rule='poleward'),
+    'homes_within_the_fields': dict(rule='twilit', dry_rule='poleward', homes_on='within_fields'),
+    'to_the_dry_highlands': dict(dest='dry'),
+}
+
+
+def cprime_case(B, food, moon, aloft, rankings, c_case):
+    """The author's C': C with the middle latitudes' lowland people moved by the ranking, homesteads staying among
+    the farms there. Corners: the 8 placement combinations, the homestead density at both ends and every input at
+    both ends (32). Besides the case as placed, three variants: the remedy's poleward and twilit placements, the same
+    with the homesteads' homes counted within the fields they work, and the moved people sent to the dry highland
+    cities instead."""
+    out = {}
+    for kept in KEPT:
+        order = rankings[KEPT_KEY[kept]]['order']
+        dry_order = [k for k in order if DESTINATIONS[k]['kind'] == 'dry']
+        corners = [(combo, h, e) for combo in COMBOS for h in (0, 1) for e in (0, 1)]
+        variants = {}
+        for name, spec in CPRIME_VARIANTS.items():
+            kw = {k: v for k, v in spec.items() if k in ('rule', 'dry_rule')}
+            middle = dict(order=dry_order if spec.get('dest') == 'dry' else order,
+                          homes_on=spec.get('homes_on', 'zone'))
+            rows = {s: [moon_corner(B, food, moon, aloft, kept, s, c, e, mix=CHOSEN_MIX,
+                                    middle=dict(middle, h_end=h), **kw) for c, h, e in corners] for s in SUPPLIES}
+            ok = [i for i, row in enumerate(rows['fusion']) if row['buildable']]
+            overfilling = [dict(highland_share=rows['fusion'][i]['highland_share'],
+                                tower_share=rows['fusion'][i]['tower_share'],
+                                scattered_m2_per_person=rows['fusion'][i]['scattered_m2_per_person'],
+                                homestead_people_per_km2=GUESSES['homestead_people_per_km2']['value'][corners[i][1]],
+                                end=corners[i][2], overfill_km2=rows['fusion'][i]['bands']['overfill_km2'])
+                           for i in range(len(corners)) if i not in ok]
+            variants[name] = dict(corners=len(corners), buildable_corners=len(ok), overfilling_corners=overfilling,
+                                  full=assemble(rows, list(range(len(corners)))),
+                                  feasible=assemble(rows, ok) if 0 < len(ok) < len(corners) else None)
+        main = variants['as_placed']
+        out[KEPT_KEY[kept]] = dict(
+            corners=main['corners'], buildable_corners=main['buildable_corners'],
+            overfilling_corners=main['overfilling_corners'], full=main['full'], feasible=main['feasible'],
+            remedy=None, traffic=c_case[KEPT_KEY[kept]]['traffic'], destination_order=order,
+            variants={k: v for k, v in variants.items() if k != 'as_placed'})
     return out
 
 
@@ -1237,6 +1530,10 @@ ASSUMPTIONS = {
           'The array holds 5 billion and the colonies 3 billion.'],
     'D': ['The Moon holds 6 billion on the ground and 2 billion aloft, keeping the sky at its least occupied.',
           'The array holds 8 billion and the colonies 5 billion.'],
+    "C'": ['The Moon holds 4 billion on the ground and 4 billion aloft, as in C, the metropolis at its 100 million.',
+           "The scattered communities of the 30-48.6 degree lowland homes move to the best-ranked home with room, "
+           'except homesteads among the farms there at 2-20 people a km2 of field (a design guess).',
+           'The array holds 5 billion and the colonies 3 billion.'],
 }
 UNCERTAINTIES_COMMON = [
     "Whether people grow up healthy at a sixth of Earth's gravity, and how much time at Earth's gravity a lifetime "
@@ -1250,7 +1547,7 @@ UNCERTAINTIES_COMMON = [
 
 
 def distribution(B, key, spec, moon_cases):
-    case = moon_cases[f"{int(spec['moon'])}_{int(spec['aloft'])}"]
+    case = moon_cases[spec.get('case', f"{int(spec['moon'])}_{int(spec['aloft'])}")]
     k30, k50 = case['kept_30'], case['kept_50']
     f30, f50 = k30['full'], k50['full']
     feas50 = k50['feasible'] or f50
@@ -1280,13 +1577,15 @@ def distribution(B, key, spec, moon_cases):
              f'answers it are the largest of the four, and {overfill_text}.',
         'D': 'It asks the most of the dry high ground, the land and the array: six billion on the ground put the '
              f"most people on the dry high ground and in the scattered communities, the array's 8 billion need "
-             f"{fmt(array['shield_gt'][0])}-{fmt(array['shield_gt'][1])} Gt of shield, and {overfill_text}."}
+             f"{fmt(array['shield_gt'][0])}-{fmt(array['shield_gt'][1])} Gt of shield, and {overfill_text}.",
+        "C'": "C's heat, sky and array, with the middle latitudes' lowland towns moved to the best-ranked home with "
+              f"room and homesteads among the farms there; {overfill_text}."}
     return dict(
         name=spec['name'],
         people_billion=dict(earth=spec['earth'], moon=spec['moon'], moon_ground=spec['moon'] - spec['aloft'],
                             moon_aloft=spec['aloft'], array=spec['array'], colonies=spec['colonies'],
                             total=people_total),
-        moon=dict(case=f"{int(spec['moon'])}_{int(spec['aloft'])}",
+        moon=dict(case=spec.get('case', f"{int(spec['moon'])}_{int(spec['aloft'])}"),
                   heat_tw=dict(fusion=f30['energy']['fusion']['heat_tw'], array=f30['energy']['array']['heat_tw']),
                   added_dimming_percent=dict(fusion=f30['energy']['fusion']['added_dimming_percent'],
                                              array=f30['energy']['array']['added_dimming_percent']),
@@ -1299,6 +1598,9 @@ def distribution(B, key, spec, moon_cases):
                   buildable_corners=dict(kept_30=k30['buildable_corners'], kept_50=k50['buildable_corners'],
                                          of=k30['corners']),
                   remedy_buildable_corners_kept_50=k50['remedy']['buildable_corners'] if k50['remedy'] else None,
+                  variants_buildable_corners_kept_50=({k: v['buildable_corners'] for k, v in k50['variants'].items()}
+                                                      if 'variants' in k50 else None),
+                  moved=f30['moved'],
                   settled_km2=f30['land']['settled_km2'],
                   people_by_setting=f30['people'],
                   highlands_used_share=dict(kept_30=f30['land']['highlands_used_share_outside_kept'],
@@ -1432,7 +1734,10 @@ def build(rounded=True):
                     'share_of_dry_land_metropolis_as_a_town'],
                 twilit_share=twilit[k]['shielded']['share_of_dry_land_metropolis_as_a_town'])
         for k in twilit}
-    dists = {k: distribution(B, k, spec, moon_cases) for k, spec in DISTRIBUTIONS.items()}
+    rank_spare = {KEPT_KEY[k]: destination_spare_for_ranking(B, food, 8, 4, k) for k in KEPT}
+    rankings = {kk: rank_destinations(B, v) for kk, v in rank_spare.items()}
+    cprime = cprime_case(B, food, 8, 4, rankings, moon_cases['8_4'])
+    dists = {k: distribution(B, k, spec, dict(moon_cases, cprime=cprime)) for k, spec in DISTRIBUTIONS.items()}
     chk = checks(B, d['wol'], moon_cases)
     chk['transcribed_phrases'] = transcribed_check(industry_text)
     files = [HERE / f for f in CODE]
@@ -1454,7 +1759,8 @@ def build(rounded=True):
         literature={k: dict(value=v['value'], unit=v['unit'], source=v['source']) for k, v in LIT.items()},
         transcribed={k: dict(value=v['value'], phrase=v['phrase'], unit=v['unit']) for k, v in TRANSCRIBED.items()},
         basis=rnd(B),
-        moon=dict(cases=rnd(moon_cases), twilit_scattering=rnd(twilit)),
+        moon=dict(cases=rnd(moon_cases), twilit_scattering=rnd(twilit), cprime=rnd(cprime),
+                  destination_ranking=rnd(rankings)),
         food_menu=rnd(menu),
         tubes_and_undersea=rnd(tubes),
         synergies=rnd(syn),

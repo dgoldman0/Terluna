@@ -6,14 +6,14 @@
  "scope": "Numerical, provenance and software checks of a screen that combines committed and bound products; no new climate, crop, ecosystem or habitat model, and no empirical validation of any distribution.",
  "tests": {
   "command": "python3 -m pytest -q research/studies/distributions",
-  "result": "30 passed",
-  "passed": 30,
+  "result": "34 passed",
+  "passed": 34,
   "failed": 0,
   "skipped": 0
  },
  "layer_check": {
   "command": "python3 shared/check_layers.py",
-  "result": "885 files checked, 0 violations"
+  "result": "887 files checked, 0 violations"
  },
  "make_check": "not run, as the brief instructs",
  "review": {
@@ -200,15 +200,61 @@
   "the inputs' own science taken as given",
   "an overlay of the scattered homes on the food study's zones (the middle-wet split is by area)",
   "editorial review beyond the project's writing standards",
-  "a reviewer's read of the four round-2 residual fixes"
+  "a reviewer's confirmation of the four round-2 residual fixes (seen in passing in the C' round, outside its scope)",
+  "a census of Earth's farm regions behind the homestead guess (a labelled design range)",
+  "farm labour on the Moon's fields beyond the homesteads",
+  "a reviewer's read of the five C' residual fixes"
  ],
  "hashes": {
-  "product_sha256": "e60cd43487745223c8cb53c603489b1f126a714daf080bc1a03c1c73794ec830",
+  "product_sha256": "5d46b715f4048394a4dfb9629fd31f53e68c6ee7c0baca43b70b929083f7c3d3",
   "files_sha256": {
-   "run.py": "789101c0f26ba76f83b276f24b8f13ce8b7a30f5061a8a3c90cbc7f0eb8adcde",
-   "test_run.py": "4fe6691f553f2356c7fc9365f0aa3531719a5d979638a7c7d5082da9c3ab93f8",
+   "run.py": "6ee09af830e8f39236f3cd829c340970f8ddc0290bc3c64c6fd20c1d2a97b068",
+   "test_run.py": "528f434cfd5495fc0dc5a04b72156d80a6ea923237a3bf4e43e1d4cff8eaa76c",
    "sources.json": "0ded725e77e94ad11e3dd70f2766f91e812d1fec6e72b2a783300008ff8ed51e",
-   "README.md": "ff2bce69799ace7d4cca8e400a1f08b07b21a3113ea95381172f4c41cc46d36c"
+   "README.md": "7257d3d9e5262cd32abd5d5516875b6db9698d409ac2839fc9e6cc2243240c50"
+  }
+ },
+ "cprime": {
+  "date": "2026-10-11",
+  "asked": "The author's choice (research/decisions.md, last row, aaa2845): C, with the middle latitudes' population dropped and distributed where it is better sustained, homestead communities living among the farms there. Build C' beside A-D: C's totals; homesteads at a labelled design density from Earth's farm regions; the rest ranked by spare land, water energy, comfort under both models, rain and lightning, and night lighting, and placed by a stated rule; every band and corner re-checked.",
+  "built": "A design guess of 2-20 homestead residents a km2 of field, a household of four on 20-200 ha; the destination measures in basis.destinations (and the belt left, basis.origin_middle_lowland) and the ranking in moon.destination_ranking; move_middle places the 30-48.6 degree lowland people in the ranked order within spare land; moon.cprime over 32 corners, the case as placed and three variants (the remedy's poleward and twilit placements, the same with the homesteads' homes counted within the fields they work, and the moved people sent to the dry highland cities); the distribution C' with C's totals; the crews' craft from land cities' highland access (basis.crews).",
+  "found": "The high-latitude lowland homes rank first (mean rank 1.9 of 5 at both kept shares) and take everyone who moves: 0.25-0.40 billion outside a kept 30% and 0.22-0.40 billion outside a kept half, where 0-28 million stay as homesteaders. Homesteads, 2.8-28 million, exist only at 8 billion outside a kept half at the high-cost end, among 1.39 million km2 of middle-wet fields. C' keeps C's heat, energy, water lift and wild land; its lit sky is 0.493-14.7% against 0.503-15.4%. Outside a kept 30% all 32 corners fit; outside a kept half 16 fit as placed, the high-cost end overfilling the middle-wet zone by the homesteads' homes beside the fields (278-9,920 km2) and, as spread, the 30-45 degree highlands and the 0-30 degree land as in C; with the poleward and twilit placements only those homes overfill, and with them counted within the fields they work (0.02-0.71% of the fields' land) all 32 fit.",
+  "confirmation": {
+   "scope": "A focused confirmation of review/snapshot_cprime (product ce513f19..., README 5acb50d1...) by the same reviewer: C''s claim groups only, with its own recomputation on its round-2 module (never run.py), 173 comparisons with the product within 0.6%, A-D equal to snapshot 2 in 5,212 leaves outside the three 8-billion kept-half cases, the ranking reproduced and its first place robust to dropping any one measure, and the tests run once (34 passed). Every claim group confirmed, with two M and three W residuals.",
+   "report": "provisioning-runs/distributions/review/round_cprime/confirmation_report.md",
+   "residuals": [
+    {
+     "id": "C'-1",
+     "severity": "W",
+     "residual": "The lead paragraph's 'all 0.25-0.40 billion who leave' holds only outside a kept 30%; checks.json said the same.",
+     "resolution": "Both kept shares named: 0.25-0.40 billion outside a kept 30%, 0.22-0.40 billion outside a kept half with 0-28 million homesteaders."
+    },
+    {
+     "id": "C'-3",
+     "severity": "M",
+     "residual": "Crews 'by sky boat from the dry highland cities above the zone': where homesteads exist the corners fit only with the dry highland towns poleward of 45 degrees, 206 km from the zone's mean latitude of 38.2 degrees, beyond the four-seat sky boat's 66.7 km with its climb and the sky ferry's 180 km route.",
+     "resolution": "The crews come by regional ship, within its 1,500 km route, 4.80 kWh a crew member each way at 23.3 Wh a passenger-km; crew towns on the 84,200 km2 of highland that stays free at 30-45 degrees at that end would bring them within a sky boat's reach (4.16 kWh a boat, 1.04 kWh a seat, for 50 km with the climb). The craft are read from land cities' highland access (basis.crews), and the sky-fleet input is dropped; a test checks the distance against both ranges."
+    },
+    {
+     "id": "C'-6",
+     "severity": "M",
+     "residual": "The high-cost fit rested on the homesteads' homes on the zone's dry margin, off the fields the households work, against 'live among the fields' and the author's homesteads.",
+     "resolution": "The variant counts the homes within the fields they work (homestead_rule 'within_fields'): they take 0.02-0.71% of the middle-wet fields' land, which the crop model's factor-of-two uncertainty in the rain-fed land covers; with the remedy's poleward and twilit placements all 32 corners fit. Beside the fields the homes overfill the full zone by 278-9,920 km2, as the case as placed shows. The dry-margin variant is gone; the README's corners, lead and departures say so."
+    },
+    {
+     "id": "C'-7",
+     "severity": "W",
+     "residual": "'The first two vary independently' left out the homestead density.",
+     "resolution": "The Assumptions name the homestead density's variation over C''s 32 corners."
+    },
+    {
+     "id": "C'-8",
+     "severity": "W",
+     "residual": "checks.json's 'four variants' and the 0.25-0.40 wording.",
+     "resolution": "The case as placed and three variants; both kept shares named."
+    }
+   ],
+   "not_rechecked": "The residual fixes were applied after the confirmation and checked by the study's tests, which now cover the homes within the fields and the crews' ranges; the reviewer has not read them."
   }
  }
 }

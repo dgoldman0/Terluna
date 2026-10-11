@@ -398,7 +398,7 @@ def test_colonies_credit_no_capacity_and_count_the_mirrors(product):
 
 def test_distributions_respect_the_working_ranges(product):
     dists = product['distributions']
-    assert 3 <= len(dists) <= 4
+    assert 3 <= len(dists) <= 5
     for key, dist in dists.items():
         p = dist['people_billion']
         assert 20.0 <= p['total'] <= 30.0, key
@@ -414,6 +414,82 @@ def test_distributions_respect_the_working_ranges(product):
     space = max(d['people_billion']['array'] + d['people_billion']['colonies'] for d in dists.values()
                 if d['people_billion']['total'] == four[0]['people_billion']['total'])
     assert four[0]['people_billion']['array'] + four[0]['people_billion']['colonies'] == space
+
+
+def test_the_authors_distribution_keeps_cs_totals(product):
+    c, cp = product['distributions']['C'], product['distributions']["C'"]
+    assert cp['people_billion'] == c['people_billion']
+    assert cp['moon']['case'] == 'cprime'
+    for kept in ('kept_30', 'kept_50'):
+        assert product['moon']['cprime'][kept]['corners'] == 32
+
+
+def test_cprime_moves_the_middle_latitudes_and_keeps_homesteads(basis):
+    """Homesteads at the guessed density among the middle-wet fields; the rest of the 30-48.6 degree lowland people
+    placed in the ranked order, each destination within its spare land; everyone conserved (C')."""
+    B, d = basis
+    order = ['high_latitude_lowland', 'dry_60_90', 'dry_45_60', 'dry_30_45', 'lowland_0_30']
+    for kept, e, h in ((0.3, 1, 1), (0.5, 0, 0), (0.5, 1, 0), (0.5, 1, 1)):
+        for combo in ((0, 0, 0), (1, 1, 1), (0, 1, 1)):
+            base = m.moon_corner(B, d['food'], 8, 4, kept, 'fusion', combo, e)
+            c = m.moon_corner(B, d['food'], 8, 4, kept, 'fusion', combo, e, middle=dict(order=order, h_end=h))
+            mv = c['moved']
+            density = m.GUESSES['homestead_people_per_km2']['value'][h]
+            place = m.placement(B, 4.0, combo, kept=kept)
+            middle = place['people']['scattered'] * place['scattered_share_middle']
+            assert close(mv['middle_billion'], middle)
+            assert close(mv['homesteads_billion'], min(density * mv['middle_wet_fields_km2'] / 1e9, middle))
+            assert close(mv['moved_billion'], mv['middle_billion'] - mv['homesteads_billion'])
+            assert close(sum(mv['placed_billion'].values()) + mv['unplaced_billion'], mv['moved_billion'])
+            assert mv['unplaced_billion'] == 0.0
+            assert abs(c['people_unplaced_billion']) < 1e-12
+            assert c['bands']['scattered_middle_band_km2'] == 0.0
+            assert close(c['land']['settled_km2'], base['land']['settled_km2'])
+            if mv['middle_wet_fields_km2'] == 0.0:
+                assert mv['homesteads_billion'] == 0.0
+
+
+def test_the_destination_ranking_follows_its_measures(product, basis):
+    B, _ = basis
+    spare = {k: 1.0 for k in m.DESTINATIONS}
+    r = m.rank_destinations(B, spare)
+    assert all(v['spare_land'] == 3.0 for v in r['ranks'].values())          # ties share the mean rank
+    for kept, rk in product['moon']['destination_ranking'].items():
+        order = rk['order']
+        means = [rk['ranks'][k]['mean'] for k in order]
+        assert means == sorted(means)
+        assert set(order) == set(m.DESTINATIONS)
+        assert product['moon']['cprime'][kept]['destination_order'] == order
+    D = product['basis']['destinations']
+    assert D['dry_30_45']['water_gw_per_billion_nothing_recovered'][0] < D['dry_60_90'][
+        'water_gw_per_billion_nothing_recovered'][0]
+    assert D['high_latitude_lowland']['lit_m2_per_person'] == [0.0, 0.0]
+
+
+def test_cprime_band_check_at_the_costly_corners(product, basis):
+    """Outside a kept half the homesteads' homes overfill the full middle-wet zone at the high-cost end when they sit
+    beside the fields; with the remedy's poleward and twilit placements and their homes counted within the fields
+    they work, every corner fits (C')."""
+    B, d = basis
+    order = product['moon']['cprime']['kept_50']['destination_order']
+    c = m.moon_corner(B, d['food'], 8, 4, 0.5, 'fusion', (0, 1, 0), 1, middle=dict(order=order, h_end=1))
+    bands = c['bands']
+    assert close(bands['use_km2']['middle_wet_zone'],
+                 bands['fields_on_middle_wet_km2'] + bands['homestead_land_on_middle_wet_km2'])
+    assert close(bands['overfill_km2']['middle_wet_zone'], c['moved']['homestead_land_km2'], rel=1e-6)
+    k30 = product['moon']['cprime']['kept_30']
+    assert k30['buildable_corners'] == k30['corners']
+    v = product['moon']['cprime']['kept_50']['variants']
+    assert v['homes_within_the_fields']['buildable_corners'] == 32
+    assert v['poleward_and_twilit']['buildable_corners'] < 32
+    within = m.moon_corner(B, d['food'], 8, 4, 0.5, 'fusion', (0, 1, 0), 1, rule='twilit', dry_rule='poleward',
+                           middle=dict(order=order, h_end=1, homes_on='within_fields'))
+    share = within['bands']['homestead_share_of_middle_wet_fields']
+    assert close(share, within['moved']['homestead_land_km2'] / within['bands']['fields_on_middle_wet_km2'])
+    assert within['buildable'] and 0.0 < share < 0.01
+    crews = B['crews']
+    assert crews['km_to_45_degrees'] > crews['sky_boat_range_with_climb_km']
+    assert crews['km_to_45_degrees'] < crews['regional_ship_route_km']
 
 
 def test_dumps_keeps_value_lists_on_one_line():

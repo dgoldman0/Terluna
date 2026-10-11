@@ -7,17 +7,29 @@ billion on the Moon with plenty kept wild, the aerial life above all; 2–4 bill
 under power with tracking and air traffic control; the ground's people mostly in the drier highlands, the summit
 metropolis round its tower above all, with many communities scattered elsewhere and taller cities; the array and the
 colonies carrying a decent share, with Earth at 10–16 billion a bit much. No universal share of wild land and no cap on
-artificial light has been set, so every account here is given outside a kept 30% and outside a kept half.
+artificial light has been set, so every account here is given outside a kept 30% and outside a kept half. The author
+then chose C′: C with the middle latitudes' lowland people moved where they are better sustained and homestead
+communities among the farms there. It stands beside A–D below.
 
 [run.py](run.py) writes [results/distributions.json](results/distributions.json) (schema
 `terluna.research.distributions/1`) in under a second from committed products on this branch and seven files on other
 branches, bound by commit and SHA-256. Numbers marked *screen* are computed by this code; *derived* marks arithmetic on
 cited values; other numbers come from the product named beside them. Every range runs over the 16 corners of its case:
 the highland share, the tower share and the scattered communities' density each at both ends, with every other input at
-its favourable and at its unfavourable end. Two primary sources were read for the colonies
-([sources.json](sources.json)); the checks are in [checks.json](checks.json).
+its favourable and at its unfavourable end; C′ adds the homestead density at both ends, 32 corners. Two primary sources
+were read for the colonies ([sources.json](sources.json)); the checks are in [checks.json](checks.json).
 
 ## Findings
+
+**The author's distribution, C′, is C with the middle latitudes' lowland people moved, at C's costs** (*screen*).
+Ranked on spare land, water energy, comfort under both climate models, rain and lightning, and night lighting, the
+high-latitude lowland homes poleward of 48.6° sustain people best, with a mean rank of 1.9 of 5. They take everyone
+who leaves the lowland homes at 30–48.6°: 0.25–0.40 billion outside a kept 30%, and 0.22–0.40 billion outside a kept
+half, where 0–28 million stay as homesteaders. Homesteads stay only where the middle latitudes hold farms, at 8 billion
+outside a kept half at the high-cost end: 2.8–28 million people among 1.39 million km² of fields. C′ keeps C's heat,
+energy, water lift and wild land, and puts 0.49–14.7% of the dry land under a light-polluted sky against C's
+0.50–15.4%. Every corner fits outside a kept 30%. Outside a kept half the high-cost end fits with the remedy's poleward
+and twilit placements once the homesteads' homes count within the fields they work, 0.02–0.71% of their land.
 
 1. **The Moon carries 4–8 billion people with 61–94% of its dry land wild outside a kept 30%, and 31–92% outside a
    kept half** (*screen*). With half its people aloft, on the food study's power-heavy mix (vegetables and fruit in
@@ -123,38 +135,38 @@ its favourable and at its unfavourable end. Two primary sources were read for th
     with power-made food where sunlight is weak, 60 TW of power on Kalpana One's lamp-lit farms, and 2.0–5.5 kWe a
     person in a Mars city with 150 m² of greenhouse each; its free-space habitats take 1,005–2,330 Gt of local material.
 
-## The four distributions
+## The four distributions and the author's C′
 
 Earth holds 9 billion in each, within the 10.2 billion that eat inside four planetary boundaries. Each Moon row reads
 its case outside a kept 30% unless it names the half (*screen*).
 
-| | A: the Moon at 4 billion | B: the Moon at 6 billion | C: the Moon at 8 billion | D: 30 billion, the Moon on the land |
-|---|---|---|---|---|
-| Earth, billion | 9 | 9 | 9 | 9 |
-| The Moon: ground + aloft | 2 + 2 | 3 + 3 | 4 + 4 | 6 + 2 |
-| The array | 7 | 6 | 5 | 8 |
-| The colonies | 5 | 4 | 3 | 5 |
-| Total | 25 | 25 | 25 | 30 |
-| Primary energy used by everyone, TW | 60.1–233 | 60.3–246 | 60.4–258 | 71.2–274 |
-| The Moon's primary energy, TW | 11.1–65.4 | 16.7–98.1 | 22.3–131 | 20.2–99.7 |
-| Heat and dimming, fusion | 9.18–59.6 TW, 0.0797–0.828% | 13.8–89.3 TW, 0.120–1.24% | 18.4–119 TW, 0.159–1.66% | 16.3–88.0 TW, 0.141–1.22% |
-| Heat and dimming, power from the array | 7.65–35.3 TW, 0.0664–0.491% | 11.5–53.0 TW, 0.0996–0.736% | 15.3–70.6 TW, 0.133–0.982% | 13.9–56.5 TW, 0.120–0.785% |
-| Dry land wild outside a kept 30% / half | 84–94% / 77–92% | 76–91% / 61–88% | 64–88% / 34–84% | 61–87% / 31–82% |
-| Corners that fit outside half, of 16; their wild land | 16; 77–92% | 16; 61–88% | 8; 80–84% | 8; 76–82% |
-| Land settled | 0.13–0.37 million km² | 0.20–0.55 | 0.26–0.74 | 0.40–1.1 |
-| Dry high ground settled, kept 30% / half | 6.5–10% / 9.1–15% | 10–16% / 14–22% | 14–22% / 19–30% | 21–33% / 29–46% |
-| Dry land under a light-polluted sky, the metropolis as a town / at Earth's area | 0.35–7.9% / 0.83–10.4% | 0.43–11.6% / 0.91–14.2% | 0.50–15.4% / 0.98–17.9% | 0.43–13.6% / 0.91–16.1% |
-| Sky towns; their shade on the Moon | 348,000; 0.72% | 522,000; 1.08% | 696,000; 1.44% | 348,000; 0.72% |
-| Conflicts a town a day in the equatorial band, drifting / powered | 1.0–10 / 0.50–5.0 | 1.5–15 / 0.76–7.6 | 2.0–20 / 1.0–10 | 1.0–10 / 0.50–5.0 |
-| Conflicts a day across the fleet | 0.066–1.3 million | 0.15–3.0 million | 0.27–5.3 million | 0.066–1.3 million |
-| Hydrogen held in the air | 1.4–14 ppm | 2.1–21 ppm | 2.8–28 ppm | 1.4–14 ppm |
-| Phosphorus need; share of the deltas' catch | 176–720 kt; 4.6–54% | 264–1,080 kt; 6.9–81% | 352–1,440 kt; 9.2–107% | 352–1,440 kt; 9.2–107% |
-| The array's shield | 1,740–6,930 Gt | 1,490–5,940 Gt | 1,240–4,950 Gt | 1,980–7,920 Gt |
-| Its habitats against the fleet's mass | 152 times | 130 times | 109 times | 174 times |
-| Days of the build's matter stream, shield | 74–297 | 64–255 | 53–212 | 85–339 |
-| The colonies' primary energy, power-made food | 17.0–72.2 TW | 13.6–57.8 TW | 10.2–43.3 TW | 17.0–72.2 TW |
-| The colonies' free-space habitats | 5,030–11,700 Gt | 4,020–9,330 Gt | 3,020–7,000 Gt | 5,030–11,700 Gt |
-| Earth's farmland, within its boundaries | 11.7–12.6 million km² | the same | the same | the same |
+| | A: the Moon at 4 billion | B: the Moon at 6 billion | C: the Moon at 8 billion | D: 30 billion, the Moon on the land | C′: the author's distribution |
+|---|---|---|---|---|---|
+| Earth, billion | 9 | 9 | 9 | 9 | 9 |
+| The Moon: ground + aloft | 2 + 2 | 3 + 3 | 4 + 4 | 6 + 2 | 4 + 4 |
+| The array | 7 | 6 | 5 | 8 | 5 |
+| The colonies | 5 | 4 | 3 | 5 | 3 |
+| Total | 25 | 25 | 25 | 30 | 25 |
+| Primary energy used by everyone, TW | 60.1–233 | 60.3–246 | 60.4–258 | 71.2–274 | 60.4–258 |
+| The Moon's primary energy, TW | 11.1–65.4 | 16.7–98.1 | 22.3–131 | 20.2–99.7 | 22.3–131 |
+| Heat and dimming, fusion | 9.18–59.6 TW, 0.0797–0.828% | 13.8–89.3 TW, 0.120–1.24% | 18.4–119 TW, 0.159–1.66% | 16.3–88.0 TW, 0.141–1.22% | 18.4–119 TW, 0.159–1.66% |
+| Heat and dimming, power from the array | 7.65–35.3 TW, 0.0664–0.491% | 11.5–53.0 TW, 0.0996–0.736% | 15.3–70.6 TW, 0.133–0.982% | 13.9–56.5 TW, 0.120–0.785% | 15.3–70.6 TW, 0.133–0.982% |
+| Dry land wild outside a kept 30% / half | 84–94% / 77–92% | 76–91% / 61–88% | 64–88% / 34–84% | 61–87% / 31–82% | 64–88% / 34–84% |
+| Corners that fit outside half; their wild land | 16 of 16; 77–92% | 16 of 16; 61–88% | 8 of 16; 80–84% | 8 of 16; 76–82% | 16 of 32; 80–84% |
+| Land settled | 0.13–0.37 million km² | 0.20–0.55 | 0.26–0.74 | 0.40–1.1 | 0.26–0.74 |
+| Dry high ground settled, kept 30% / half | 6.5–10% / 9.1–15% | 10–16% / 14–22% | 14–22% / 19–30% | 21–33% / 29–46% | 14–22% / 19–30% |
+| Dry land under a light-polluted sky, the metropolis as a town / at Earth's area | 0.35–7.9% / 0.83–10.4% | 0.43–11.6% / 0.91–14.2% | 0.50–15.4% / 0.98–17.9% | 0.43–13.6% / 0.91–16.1% | 0.49–14.7% / 0.97–17.2% |
+| Sky towns; their shade on the Moon | 348,000; 0.72% | 522,000; 1.08% | 696,000; 1.44% | 348,000; 0.72% | 696,000; 1.44% |
+| Conflicts a town a day in the equatorial band, drifting / powered | 1.0–10 / 0.50–5.0 | 1.5–15 / 0.76–7.6 | 2.0–20 / 1.0–10 | 1.0–10 / 0.50–5.0 | 2.0–20 / 1.0–10 |
+| Conflicts a day across the fleet | 0.066–1.3 million | 0.15–3.0 million | 0.27–5.3 million | 0.066–1.3 million | 0.27–5.3 million |
+| Hydrogen held in the air | 1.4–14 ppm | 2.1–21 ppm | 2.8–28 ppm | 1.4–14 ppm | 2.8–28 ppm |
+| Phosphorus need; share of the deltas' catch | 176–720 kt; 4.6–54% | 264–1,080 kt; 6.9–81% | 352–1,440 kt; 9.2–107% | 352–1,440 kt; 9.2–107% | 352–1,440 kt; 9.2–107% |
+| The array's shield | 1,740–6,930 Gt | 1,490–5,940 Gt | 1,240–4,950 Gt | 1,980–7,920 Gt | 1,240–4,950 Gt |
+| Its habitats against the fleet's mass | 152 times | 130 times | 109 times | 174 times | 109 times |
+| Days of the build's matter stream, shield | 74–297 | 64–255 | 53–212 | 85–339 | 53–212 |
+| The colonies' primary energy, power-made food | 17.0–72.2 TW | 13.6–57.8 TW | 10.2–43.3 TW | 17.0–72.2 TW | 10.2–43.3 TW |
+| The colonies' free-space habitats | 5,030–11,700 Gt | 4,020–9,330 Gt | 3,020–7,000 Gt | 5,030–11,700 Gt | 3,020–7,000 Gt |
+| Earth's farmland, within its boundaries | 11.7–12.6 million km² | the same | the same | the same | the same |
 
 Everyone's energy is primary energy: the residents' 2–6 kW a person on Earth, the Moon and in the array, with the
 Moon's and the colonies' electricity and Earth's food off the land at fusion's input of 2.0–3.0 W a watt. At its top
@@ -192,6 +204,109 @@ Every distribution shares these open questions: whether people grow up healthy a
 model's water use, which sets the rain-fed land within a factor of two; comfort over the land, where CM1 and the GCM
 disagree and both put the most comfort on high ground poleward of 30°; the sky towns' hulls, gas barriers and traffic
 rules; and the colonies' capacity. The product holds each distribution's assumptions and uncertainties as lists.
+
+**C′, the author's distribution.** C's 25 billion, with the Moon at 8 (4 on the ground and 4 aloft), the array at 5 and
+the colonies at 3. The lowland towns of the middle latitudes move to the high-latitude lowland homes, which rank best on
+the study's measures, and homesteads stay among the farms wherever the middle latitudes hold any. Its heat, energy,
+water lift and wild land are C's, and it lights a little less of the sky. Every corner fits outside a kept 30%; outside
+a kept half the favourable end fits, 16 of the 32 corners with the homestead density at both ends, and the high-cost
+end fits with the remedy's poleward and twilit placements once the homesteads' homes count within the fields they
+work. The next section gives it in full.
+
+## The author's distribution, C′
+
+On 11 October the author chose C with one change
+([register](../../decisions.md#people-on-the-moon-and-beyond-11-october-2026)): "let's drop the population there and
+distribute it where it's better sustained. Other than that closest to I guess option C", then "I didn't say all towns
+necessarily, though homestead communities make the most sense there." C′ keeps C's totals: Earth 9 billion, the Moon 8
+with 4 on the ground and 4 aloft and the metropolis at its 100 million, the array 5 and the colonies 3. In the middle
+latitudes, the lowland homes of the 30–48.6° band over the middle-wet zone and the fog desert, homestead communities
+live among the farms and the rest of the belt's people move (*screen*).
+
+### Homesteads among the farms
+
+Homesteads live at the density of Earth's family farms, a household of four on each 20–200 ha of field, 2–20 people a
+km². The power-heavy mix puts fields in the middle latitudes only at 8 billion outside a kept half at the high-cost end,
+where they fill the whole middle-wet zone outside the kept half, 1.39 million km². There 2.8–28 million homesteaders
+live among the fields, their homes and gardens on 278–9,920 km² at the scattered communities' 100–357 m² a person. Each
+household works its own 20–200 ha, 5–50 ha a resident. Planting, harvest and repair crews come from neighbouring towns.
+Those corners fit only with the dry highland towns poleward of 45°, 206 km from the zone's mean latitude of 38.2°:
+beyond a four-seat sky boat's 66.7 km with its 6 km climb and the sky ferry's 180 km route, and within the regional
+ships' 1,500 km, on which a crew member's trip takes 4.80 kWh each way at 23.3 Wh a passenger-km. Crew towns on the
+84,200 km² of highland that stays free at 30–45° at that end would bring the crews within a sky boat's reach: a 50 km
+trip with the climb takes 4.16 kWh a boat, 1.04 kWh a seat (land cities). Everywhere else the fields lie
+equatorward of 30°, the middle latitudes hold no farms, and all of the belt's lowland people move.
+
+### Where they go
+
+The other homes, ranked on the study's own measures (*screen*; 1 is best, and ties share their mean rank):
+
+| Home | Spare land outside a kept 30% / half, the least over C's corners | Water with nothing recovered, W a person | Comfortable hours a lunar day, CM1 / GCM | Rain, mm a day; lightning, flashes a km² a year | Walking-lamp hours a cycle; lit sky, m² a person | Mean rank, kept 30% / half |
+|---|---:|---:|---:|---:|---:|---:|
+| High-latitude lowland homes, poleward of 48.6° | 3.93 / 2.76 million km² | 3.15–9.46 | 50 / 613 | 0.125; 0.0001 | 0; 0 | 1.9 / 1.9 |
+| Dry highland cities, 60–90° | 118,000 / 75,100 km² | 6.25–18.8 | 249 / 611 | 0.125; 0.0001 | 0; 0 | 3.0 / 2.6 |
+| Dry highland cities, 45–60° | 175,000 / 111,000 km² | 6.06–18.2 | 141 / 550 | 0.125–1.06; 0.0001–0.0019 | 0; 0 | 3.2 / 2.8 |
+| Dry highland cities, 30–45° | 450,000 / 0 km² | 1.01–3.03 | 141 / 550 | 1.06; 0.0019 | 58; 0–36 | 3.0 / 3.3 |
+| Lowland homes equatorward of 30° | 2.21 million / 0 km² | 3.15–9.46 | 0–2.6 / 160–233 | 2.7–5.0; 0.0034–0.0067 | 92–104; 23–1,730 | 3.9 / 4.4 |
+| The lowland homes at 30–48.6° they leave, for comparison | | 3.15–9.46 | 38–100 / 501–516 | 1.06; 0.0023–0.0056 | 16–102; 0–1,730 | |
+
+Spare land comes from the band check, with the belt's lowland land moved out. Water comes from land cities' lifts for
+the dry high ground's bands and from ways of living's lift from the seas for lowland homes, which bounds the homes near
+lakes from above. Comfort comes from land cities' height-corrected rings at each home's latitudes and mean height, rain
+from ways of living's latitude bands, and lightning from main's representative places: the highland box at 44.7° S,
+the polar plain at 75° N, southern Mare Nubium and the eastern Smythii headland for the low latitudes, and Russell and
+the South Pole-Aitken coast for the belt itself. Walking lamps and lit sky come from living light, with the dry high
+ground's rule. Rain and lightning count against a home, as in the author's choice of the drier highlands, and the water
+measure carries supply. A home's rank on comfort is the mean of its CM1 and GCM ranks, on weather the mean of its rain
+and lightning ranks, and on night lighting the mean of its lamp and lit-sky ranks; ties in the mean go to the dry
+highlands.
+
+Each person who moves goes to the best-ranked home that still has spare land outside the kept share at that corner, at
+that home's own density. The high-latitude lowland homes rank first at both kept shares and hold everyone who moves:
+0.25–0.40 billion outside a kept 30%, and 0.22–0.40 billion outside a kept half, where 0–28 million stay as
+homesteads. They join the high-latitude towns, where long low light wraps the whole night and the polar highs are bases
+for the polar sampling programme (ways of living). The ground's people stay 60–75% in the highlands, as in C.
+
+### C′ against C as spread
+
+| Outside a kept 30% / half | C as spread | C′ |
+|---|---:|---:|
+| People in the lowland homes at 30–48.6° | 0.25–0.40 billion | none / 0–28 million homesteaders |
+| Moved to the high-latitude lowland homes | – | 0.25–0.40 / 0.22–0.40 billion |
+| The high-latitude lowland homes' own land used | 0.668–3.81% / 0.935–5.34% | 1.29–7.34% / 1.70–10.3% |
+| Dry land wild | 64–88% / 34–84% | the same |
+| Land settled | 264,000–736,000 km² | the same |
+| Heat with fusion; added dimming | 18.4–119 TW; 0.159–1.66% | the same |
+| Water lifted | 0.753–27.5 GW | the same |
+| Dry land under a light-polluted sky, the metropolis as a town / at Earth's area | 0.503–15.4% / 0.982–17.9% | 0.493–14.7% / 0.972–17.2% |
+| The same with living light | 0.166–13.5% / 0.490–16.0% | 0.164–12.9% / 0.488–15.4% |
+| Corners where every band fits | 16 of 16 / 8 of 16 | 32 of 32 / 16 of 32 |
+
+The moved people keep their land a person, their energy and their water, so the Moon's totals stay C's. They gain
+comfort, 50 and 613 hours a lunar day under CM1 and the GCM against 38–100 and 501–516, nights that need no walking
+lamps, rain of 0.125 mm a day against 1.06, and 0.0001 flashes a km² a year against 0.0023–0.0056. Their own homes'
+rain is 0.0972 mm a day, so their water comes from lakes and seas a median 32.8 km away (ways of living). Were they to
+join the dry highland cities instead, the best-ranked dry band with room (30–45° outside a kept 30%, 60–90° outside a
+kept half), the lift would rise to 0.782–28.1 GW and 0.993–32.0 GW and the dry high ground would be 16–23% and 22–33%
+settled.
+
+### The corners
+
+Outside a kept 30% all 32 corners fit. Outside a kept half (*screen*):
+
+| C′ outside a kept half | Corners that fit, of 32 | Overfill at the high-cost end | Dry land wild | Heat with fusion | Water lifted | Light-polluted sky, the metropolis as a town / at Earth's area |
+|---|---:|---|---:|---:|---:|---:|
+| As placed | 16 | the middle-wet zone by 278–9,920 km² at 16 corners, the 30–45° highlands by 13,900–39,700 km² at 12, the 0–30° land by 12,900 km² at 4 | 34–84%; 80–84% where every band fits | 18.4–119 TW | 0.753–27.5 GW | 0.493–14.7% / 0.972–17.2% |
+| With the dry highland towns poleward of 45° first and the scattered communities gathered on the twilit homes | 16 | the middle-wet zone by 278–9,920 km² at 16 corners | 34–84% | 18.4–119 TW | 1.47–54.6 GW | 0.454–11.8% / 0.932–14.3% |
+| With the homesteads' homes counted within the fields they work as well | 32 | none | 34–84% | 18.4–119 TW | 1.47–54.6 GW | 0.454–11.8% / 0.932–14.3% |
+
+At 8 billion outside a kept half the high-cost corners fit without a fog-desert placement once the homesteads' homes
+count within the fields they work. Beside the fields those homes overfill the full middle-wet zone by 278–9,920 km²,
+0.02–0.71% of it, against C's 13,000–74,200 km² of towns; within the fields they take that share of the fields' land,
+which the crop model's factor-of-two uncertainty in the rain-fed land covers. With the remedy's poleward and twilit
+placements every corner then fits, leaving 34–84% of the dry land wild, for 18.4–119 TW of heat with fusion, 1.47–54.6
+GW of water lift and 0.454–11.8% of the dry land under a light-polluted sky with the metropolis lit as a town
+(0.932–14.3% at Earth's area).
 
 ## The Moon at 4, 6 and 8 billion
 
@@ -624,14 +739,19 @@ Stated once; the product's `assumptions` block holds them all.
 
 - **Design guesses**, each a range: 60–75% of the ground's people in the highlands, the metropolis included (the
   author's "mostly"); a third to half of the dry highlands' people in tower districts of 30 storeys; relative drift of
-  0.1–1 m/s between neighbouring sky towns (the sky-ecology study's figure for aerophytes on the same tracks). The
-  first two vary independently over the corners.
+  0.1–1 m/s between neighbouring sky towns (the sky-ecology study's figure for aerophytes on the same tracks); and in
+  C′, 2–20 homestead residents a km² of the middle latitudes' fields, a household of four on each 20–200 ha, the span of
+  Earth's family farms from mixed-farming country to the mechanised grain belts. The first two vary independently over
+  the corners, and the homestead density over C′'s 32.
 - **Placement.** The metropolis keeps its decided 100 million on its 2,464 km²; the other highland people live on the
   dry high ground poleward of 30°, spread over its bands by land, or poleward of 45° first where the bands overfill;
   the undersea domes hold 48,600; the scattered communities spread over the other homes in proportion to their land at
   100 m² a person (the lunar design's compact town) to 357 m² (the affluent spread), or four times as densely on the
   twilit and Earthlit homes. Their middle-band land covers the middle-wet zone by area, or keeps to the fog-desert side
-  of the homes where the fields fill the zone. Tube cities count among the scattered communities and cover no land.
+  of the homes where the fields fill the zone. Tube cities count among the scattered communities and cover no land. In
+  C′ the scattered communities of the 30–48.6° lowland homes go to the best-ranked home with spare land, except
+  homesteads among the farms there, whose homes take the scattered communities' land a person beside the fields, or
+  within the fields they work in the variant that fits the high-cost corners.
 - **Food.** The power-heavy mix at its full range, its town allowance replaced by this study's settlement and checked
   band by band.
 - **Energy.** The provisioning band, 2–6 kW a person of primary energy with industry in orbit, and every electrical
@@ -665,6 +785,11 @@ Stated once; the product's `assumptions` block holds them all.
 - **The sky's conflicts** use the sky-ecology study's encounter rule and its relative drift, with the inhabited-volume
   grid's three diameters as the conflict distance.
 - **Lunokhod 1's tube.** Rilles D and E1 share one position in the land-cities inventory, and both join it.
+- **C′'s measures** take representative values: lightning at main's places, rain by latitude band, comfort from the
+  land-cities rings by latitude and height, and the lowland homes' water from the seas, which bounds homes near lakes
+  from above.
+- **C′'s homesteads' homes**, counted within the fields they work where those fill the middle-wet zone, take 0.02–0.71%
+  of the land the food study's fill gives to crops.
 - **Earth** holds 9 billion in each distribution; the shared cases held 8–14.
 
 ## Inputs and bindings
@@ -707,14 +832,20 @@ follows the need; that the lit-sky arithmetic keys the metropolis by design, rep
 and caps each home; that the spacing reproduces ways of living's 5.51 km and the encounter rule the sky-ecology study's
 passes; that the fleet totals take the density towns meet; the great-circle distance and the tube pairs and ties;
 Earth's boundary rule and its sensitivity line; the colonies' mirrors beyond the farm; that every distribution keeps the
-author's ranges and its energy sums; and the README's words and lines. They skip cleanly when an input is absent.
-[checks.json](checks.json) records the test run and both rounds of the independent review.
+author's ranges and its energy sums; that C′ keeps C's totals, keeps homesteads at the guessed density among the
+middle-wet fields, places everyone who moves within spare land in the ranked order and conserves people, that the
+ranking follows its measures, that the high-cost corners outside a kept half overfill by the homesteads' homes alone
+once the remedy's placements apply and fit with those homes within the fields, and that the crews' distance to the 45°
+line lies beyond a sky boat's range and within a regional ship's; and the README's words and lines. They skip cleanly
+when an input is absent. [checks.json](checks.json) records the test run and the three rounds of the independent review.
 
 ## What remains
 
 - The dry high ground's own weather over real terrain beyond the one CM1 box at 44.7° S, and the wet massif's storms
   round the metropolis.
 - The water and the land of the dry highland cities poleward of 45°, where 8 billion outside a kept half would put them.
+- In C′, the high-latitude towns' water from lakes and seas a median 32.8 km away, the work of the middle latitudes'
+  farms beyond the homesteads, and the homesteads' own design.
 - An overlay of the scattered homes on the food study's zones, and the middle band's towns beside the middle-wet fields.
 - The heights of the sky towns, the aerophytes and the sky reefs, and the traffic rules on the shared tracks; the
   relative drift of neighbours at kilometre scale, below the 170 km winds' resolution.
