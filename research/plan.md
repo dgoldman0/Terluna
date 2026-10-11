@@ -149,9 +149,13 @@ author's choice, Earth at 9 billion in each. A puts the Moon at 4 billion (2 alo
 5; B the Moon at 6, 6 and 4; C the Moon at 8, 5 and 3; D 30 billion with the Moon at 8 (2 aloft), the array at 8 and the
 colonies at 5. The Moon at 4–8 billion leaves 61–94% of its dry land wild outside a kept 30% and 31–92% outside a kept
 half; at 8 billion with half kept, three placements together fit every case, the dry highland towns poleward of 45°
-first. Its sky towns meet up to 5.3 million conflicts a day for traffic control, and tube seepage, the deltas' and
-sea floor's sediment, joined undersea and tube cities and the dark belt turn regional weaknesses into strengths. Next:
-the author's choice among the four.
+first. Its sky towns meet up to 5.3 million conflicts a day for traffic control, and tube seepage, the deltas' and sea
+floor's sediment, joined undersea and tube cities and the dark belt turn regional weaknesses into strengths. The author
+chose C′: C (Earth 9 billion, the Moon 8 with 4 aloft, the array 5, the colonies 3) with homestead communities kept
+among the middle latitudes' farms and the rest of that belt's people moved to the high-latitude lowlands poleward of
+48.6°, which rank best on spare land, water energy, comfort, storms and night light. C′ keeps C's heat, energy, water
+lift and wild land. Next: C′ as the planned distribution, starting with the high-latitude towns' water, the middle
+latitudes' farms and homesteads, and the sky towns' heights and traffic rules.
 
 Waiting on the author:
 - the aerophytes' scientific name, from six cloud-root candidates, and six choices about the taxonomic system;
