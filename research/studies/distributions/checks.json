@@ -1,0 +1,214 @@
+{
+ "date": "2026-10-11",
+ "study": "research/studies/distributions",
+ "branch": "domain/provisioning",
+ "base_commit": "fa595c8",
+ "scope": "Numerical, provenance and software checks of a screen that combines committed and bound products; no new climate, crop, ecosystem or habitat model, and no empirical validation of any distribution.",
+ "tests": {
+  "command": "python3 -m pytest -q research/studies/distributions",
+  "result": "30 passed",
+  "passed": 30,
+  "failed": 0,
+  "skipped": 0
+ },
+ "layer_check": {
+  "command": "python3 shared/check_layers.py",
+  "result": "885 files checked, 0 violations"
+ },
+ "make_check": "not run, as the brief instructs",
+ "review": {
+  "reviewer": "an independent read-only reviewer that recomputed every headline from the product and the inputs with its own scripts, none importing run.py",
+  "snapshot": "review/snapshot_1 on the research drive (provisioning-runs/distributions)",
+  "report": "provisioning-runs/distributions/review/round1/review_report.md",
+  "arithmetic": "all twelve headlines and all eight Moon cases recomputed; 303 comparisons with the product's leaves agree within 0.6% apart from R1 and R2",
+  "findings": [
+   {
+    "id": "R1",
+    "severity": "E",
+    "finding": "At 8 billion outside a kept half the high-cost end's fields reach the 30-45 degree highlands, part of the dry high ground; the README said they never do.",
+    "resolution": "The fields' band split follows the food study's fill: 325,753 km2 on the 30-45 degree highlands at that end. The dry high ground is then 19-78% used with 4 aloft and 29-94% with 2 outside half (the settlement alone 19-30% and 29-46%); finding 2 and D's narrative say so."
+   },
+   {
+    "id": "R2",
+    "severity": "E",
+    "finding": "The living-light row kept the shielded design's metropolis lit like a town (479-986 m2 a person).",
+    "resolution": "The metropolis town figure is keyed by design (living light 273-919 m2 a person). The row with living light: 0.23-7.0, 0.24-10.3, 0.25-13.6% -> 0.14-6.9, 0.15-10.2, 0.17-13.5%."
+   },
+   {
+    "id": "R3",
+    "severity": "M",
+    "finding": "The zone fit was the food study's, made with its own towns; no band was checked with this settlement.",
+    "resolution": "Each band outside the kept share (0-30 degree land, 30-45 degree highlands, highlands poleward of 45 degrees, lowlands poleward of 30 degrees) is checked at every corner with the fields and the settlement together; corners that overfill are unbuildable. Only 8 billion outside a kept half at the high-cost end overfills: the 30-45 degree highlands by 13,900-104,000 km2 and the 0-30 degree land by 12,900-149,000 km2, at 7 of 16 corners with 4 aloft and 8 with 2 or 3. The feasible range stands beside the full one (wild 38-84% with 4 aloft, 78-83% with 3, 76-82% with 2). Placing the dry highland towns poleward of 45 degrees first, with the scattered communities four times as dense on the twilit and Earthlit homes, fits all 16 corners for twice the water lift (1.47-54.6, 1.85-68.7 and 2.23-82.7 GW against 0.753-27.5, 0.948-34.6 and 1.14-41.7). Round 2's residual (a) adds the middle-wet zone as a band of its own: 8 of 16 corners then fit at 8 billion outside half in every case, 80-84% wild with 4 aloft, and the remedy gains a third placement."
+   },
+   {
+    "id": "R4",
+    "severity": "M",
+    "finding": "The highland and tower shares were tied, hiding the range of the dry high ground's settlement.",
+    "resolution": "Sixteen corners: highland share, tower share and scattered density each at both ends, every input at both ends. Dry high ground settled outside a kept 30%: 8.2, 12.7, 17.1, 26.0% -> 6.5-10, 10-16, 14-22, 21-33%; outside half 11.5, 17.7, 24.0, 36.4% -> 9.1-15, 14-22, 19-30, 29-46%. Highland towns at 6 billion 1.07-1.13 -> 0.85-1.43 billion on 85,000-143,000 km2."
+   },
+   {
+    "id": "R5",
+    "severity": "M",
+    "finding": "Lunokhod 1's nearest tube is a tie between rilles D and E1, broken by key order.",
+    "resolution": "Stated rule: every tube within 0.5 km of the nearest distance joins. Lunokhod 1 takes rilles D and E1 (0.124-3.04 million). Joined tubes 0.92-1.4 / 17.4-25.5 -> 1.04-1.60 / 19.2-28.5 million; with the domes 1.07-28.6 million."
+   },
+   {
+    "id": "R6",
+    "severity": "M",
+    "finding": "Fleet totals multiplied the busiest band's per-town rate by every town.",
+    "resolution": "Fleet totals take the occupancy-weighted density each town meets (1.12 times the even density): 0.09-7 -> 0.066-5.3 million conflicts a day outside a kept 30%. Finding 7 names the per-town rates as the equatorial band's."
+   },
+   {
+    "id": "R7",
+    "severity": "M",
+    "finding": "'Energy used' added primary energy to electricity.",
+    "resolution": "One basis: primary energy, with every electrical load at fusion's input of 2.0-3.03 W a watt, for the Moon, the colonies and Earth's off-land food. The Moon 9.6-38, 14-57, 19-75, 18-65 -> 11.1-65.4, 16.7-98.1, 22.3-131, 20.2-99.7 TW; everyone 55-177, 55-181, 55-185, 66-211 -> 60.1-233, 60.3-246, 60.4-258, 71.2-274 TW; the colonies 2.7-8.8 -> 3.39-14.4 TW a billion. The colonies' mixed 'living_and_food_electricity' key was dropped."
+   },
+   {
+    "id": "R8",
+    "severity": "M",
+    "finding": "'The residents ... is most of it' fails at the high-cost end, where the hydrogen remade leads.",
+    "resolution": "With S1: heat by component and share in the product. Finding 3: the residents give 66-74% of the heat at the favourable end; at the high-cost end with half aloft the hydrogen remade gives 45% (27-54 TW) and the residents 30%; with 2 of 8 billion aloft the residents lead at both ends (41-74%)."
+   },
+   {
+    "id": "R9",
+    "severity": "W",
+    "finding": "Double rounding in the README (78%, 0.37 GW, 57 and 12 TW, 2.3 Gt, 4.9 Mt, 20 million and others).",
+    "resolution": "The README is rounded once, half up, from the runner's unrounded values (build(rounded=False)); values quoted from three-figure products keep the product's figures. Among them: 77%, 0.36 GW, 2.25 Gt, 4.85 Mt, 0.505 and 0.775 MW, 0.0969 MW, 19.5 million, 5,030 Gt, 96-99%."
+   },
+   {
+    "id": "R10",
+    "severity": "W",
+    "finding": "'Many times over' holds at one pairing only.",
+    "resolution": "The ratio is given: 0.52-130 times, 0.21-62 with the gravity candidates."
+   },
+   {
+    "id": "R11",
+    "severity": "W",
+    "finding": "The distribution table's lit-sky row joined two metropolis treatments.",
+    "resolution": "With S2: the row names both, the metropolis as a town / at Earth's area, in every column."
+   },
+   {
+    "id": "R12",
+    "severity": "W",
+    "finding": "D 'asks the most of every place'; finding 6's title holds only at the high end.",
+    "resolution": "D asks the most of the dry high ground, the land and the array, and C puts more heat on the Moon (18.4-119 TW against 16.3-88.0). Finding 6's title: with half aloft the sky towns light the most at the high end; at the favourable end the metropolis lit as a town lights 47,900 km2 against 25,500-51,000 from the residents aloft."
+   },
+   {
+    "id": "R13",
+    "severity": "W",
+    "finding": "The mirror areas included the farm's own aperture.",
+    "resolution": "Mirrors beyond the farm 126 / 521 / 32,000 m2 a person; the collecting area 146 / 541 / 32,000 beside."
+   },
+   {
+    "id": "R14",
+    "severity": "W",
+    "finding": "checks.json was linked but missing.",
+    "resolution": "This file."
+   },
+   {
+    "id": "R15",
+    "severity": "W",
+    "finding": "Idle inputs, the 5 m/s literal, and an incomplete phrase check.",
+    "resolution": "The powered speed and duty come from inhabited volume, Earth's 8-14 billion from the shared population cases, the 1,610 m from daily life; a test checks every input feeds the basis; the Trojan and Kuiper-belt rows are phrase-checked in the bound note."
+   },
+   {
+    "id": "R16",
+    "severity": "W",
+    "finding": "Repeated capacity disclaimers, 'no allocation is made', the cities first as densities, guesses labelled twice, dense sentences.",
+    "resolution": "The colonies' uncomputed capacity is stated once, in the assumptions; the allocation line is gone; finding 2 opens with the cities as places; the guesses are labelled once, in the assumptions; findings 2 and 3 are split into shorter sentences."
+   }
+  ],
+  "self_found": [
+   {
+    "id": "S1",
+    "finding": "Finding 3's 'most of it' is wrong at the high end.",
+    "resolution": "Folded into R8."
+   },
+   {
+    "id": "S2",
+    "finding": "The lit-sky row spans the two metropolis treatments.",
+    "resolution": "Folded into R11."
+   },
+   {
+    "id": "S3",
+    "finding": "With the dry highland people split by band, those poleward of 45 degrees take no lit sky, the band edge nearest living light's 48.6 degrees.",
+    "resolution": "Lit shares with the metropolis as a town 7.95, 11.7, 15.5% -> 7.88, 11.6, 15.4% at the high end; the whole 45-60 degree band lit at 36 m2 a person would add at most 37,000 km2, 0.16% of the dry land (README departures)."
+   }
+  ]
+ },
+ "coordinator_notes": [
+  {
+   "note": "Earth sensitivity",
+   "asked": "One line for Earth at 8 and 11 billion beside the fixed 9: food off the land beyond 10.2 billion, its power and heat.",
+   "resolution": "Totals 24 and 29 billion at 8 (everyone's energy 2.0-6.0 TW less); 27 and 32 at 11, where 0.8 billion beyond 10.2 eat 0.556-2.23 TW of power-made food from the array on 11,400-45,600 km2 of rectenna, heating Earth by 0.77-3.1 TW (0.0011-0.0046 K; 1.4-5.6 TW and 0.0021-0.0083 K from thermal plants), everyone's energy 5.1-18.7 TW more. In the product as earth_sensitivity."
+  }
+ ],
+ "confirmation": {
+  "scope": "A focused confirmation of review/snapshot_2 (product eb4a7b3c..., README 11959ce4...) by the same reviewer: every round-1 item, S1-S3 and the Earth sensitivity line, with 723 comparisons against the product's leaves within 0.6% and the tests run once (29 passed). All items confirmed, with four residuals.",
+  "report": "provisioning-runs/distributions/review/round2/confirmation_report.md",
+  "verdicts": {
+   "R1/R3": "confirmed as built, with residuals (a) and (b)",
+   "R2": "confirmed",
+   "R4": "confirmed",
+   "R5": "confirmed",
+   "R6": "confirmed",
+   "R7": "confirmed, with a residual",
+   "R8/S1": "confirmed",
+   "R9": "confirmed",
+   "R10": "confirmed",
+   "R11/S2": "confirmed",
+   "R12": "confirmed",
+   "R13": "confirmed",
+   "R14": "confirmed (draft)",
+   "R15": "confirmed",
+   "R16": "confirmed",
+   "S3": "confirmed, with a residual",
+   "Earth sensitivity": "confirmed"
+  },
+  "residuals": [
+   {
+    "id": "R1/R3 (a)",
+    "severity": "M",
+    "residual": "The pooled 30-90 degree lowland band hid the middle-wet zone: at 8 billion with a kept half the high-cost end's rain-fed fields fill it (1.39 million km2), and the scattered communities' middle-band land, spread over its homes by area, puts 51.5% on it. The one 8_4 high-cost corner that fitted overfills it by 20,786 km2, and the remedy's high-cost corners by 18,675-160,008 km2.",
+    "resolution": "The middle-wet zone is a band of its own and the rest of the lowland poleward of 30 degrees (fog desert and polar) another; the middle-band land (ways of living's 30-48.6 degrees, 25.2% of the scattered land) covers the zone by area, 51.5% of it on the zone. The reviewer's 20,786 km2 and 18,675-106,671 / 23,343-133,340 / 28,012-160,008 km2 reproduce. At 8 billion outside half every high-cost corner now overfills (middle-wet zone 13,000-74,200, 16,200-92,800 and 19,500-111,000 km2 with 4, 3 and 2 aloft); 8 of 16 corners fit in each case, and the feasible wild land is 80-84% with 4 aloft (was 38-84%), 78-83% with 3 and 76-82% with 2. A third placement joins the remedy: where the fields fill the middle-wet zone the middle band's scattered communities settle the fog-desert side of their homes (at most 16, 20 and 24% of it outside the kept half). All three together fit 16 of 16; the poleward move alone, or with the twilit gathering, fits 8 (product remedy.buildable_corners_by_parts). README Finding 1, the land bands, Food, the distribution-table row, the C and D narratives, the assumptions, the departures and what remains say so; a test checks the zone band and both rules."
+   },
+   {
+    "id": "R1/R3 (b)",
+    "severity": "W",
+    "residual": "The C and D narratives credited all 16 fits to the poleward placement alone.",
+    "resolution": "Both narratives and Finding 1 name the three placements; the land-bands text says what each answers."
+   },
+   {
+    "id": "R7",
+    "severity": "W",
+    "residual": "earth_block's docstring named a thermal plant's input while the code uses fusion's 2.0-3.03 W a watt for Earth's food off the land, and the README did not name the factor for Earth.",
+    "resolution": "The docstring states fusion's input; the sentence under the distribution table and the Earth table's energy row name it."
+   },
+   {
+    "id": "S3",
+    "severity": "W",
+    "residual": "Under the poleward placement the 45-60 degree band holds up to 1.73 / 2.18 / 2.62 billion dry highland people, so the 37,000 km2 bound does not cover it.",
+    "resolution": "The remedy's bound stands beside the spread one: 62,000-94,000 km2, 0.27-0.40% of the dry land, in the land-bands text and the departures."
+   }
+  ],
+  "not_rechecked": "The four residual fixes were applied after the confirmation and checked by the study's tests and by reproducing the reviewer's own middle-wet figures; the reviewer has not read the revised files."
+ },
+ "not_done": [
+  "make check (by instruction)",
+  "no literature search beyond the two colony sources",
+  "the inputs' own science taken as given",
+  "an overlay of the scattered homes on the food study's zones (the middle-wet split is by area)",
+  "editorial review beyond the project's writing standards",
+  "a reviewer's read of the four round-2 residual fixes"
+ ],
+ "hashes": {
+  "product_sha256": "e60cd43487745223c8cb53c603489b1f126a714daf080bc1a03c1c73794ec830",
+  "files_sha256": {
+   "run.py": "789101c0f26ba76f83b276f24b8f13ce8b7a30f5061a8a3c90cbc7f0eb8adcde",
+   "test_run.py": "4fe6691f553f2356c7fc9365f0aa3531719a5d979638a7c7d5082da9c3ab93f8",
+   "sources.json": "0ded725e77e94ad11e3dd70f2766f91e812d1fec6e72b2a783300008ff8ed51e",
+   "README.md": "ff2bce69799ace7d4cca8e400a1f08b07b21a3113ea95381172f4c41cc46d36c"
+  }
+ }
+}
