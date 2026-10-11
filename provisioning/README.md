@@ -339,6 +339,75 @@ Step five of the approved order: each setting through the lunar cycle, in the
     people leave between turns, while Earth's 2.4–2.7 s does not. Holding a sky town at one hour against the mean wind
     at 10 km takes 2.7–10 kW a resident for an unstreamlined sphere.
 
+### Food systems
+
+The author's direction of 11 October: count current and emerging agriculture, hydroponics and aquaponics, and the fog
+deserts with water extraction, in the food system. The study is
+[food systems](../research/studies/food_systems/README.md); numbers here are from it.
+
+38. **Rain-fed fields feed the plant-rich diet at the least cost, and the rain alone feeds 9.4–27.5 billion people
+    outside a kept 30%.** A billion residents crop 139,000–393,000 km² at the crop model's yields, 2.5–7.4% of what the
+    rain grows in the wet bands, for 6.3–14 W a resident of nitrogen fixation, once the crops' water need is held to
+    what the design sunlight can evaporate; farms at Earth's best 70–80% of potential need 25–43% more land. Water lifted
+    and piped from the fresh seas costs 0.92–1.44 kWh/m³, so topping up a billion residents' rain-belt fields takes
+    115–522 km³ a year and 13–86 W a resident.
+39. **Glass takes more ground than fields, and the fog desert drinks from the seas.** Sunlit glass needs 1.2–2.5 times
+    the equatorial field area, 4–22 Gt of glass and steel and 0.15–1.2 kW a resident per billion, and closed houses
+    2.3–12.8 kW. The design run's fogs sit in nearly still air, so nets catch 0–98 L/m² a year above collection's 1 m/s
+    threshold against Earth's 1,100–3,650; water from the air costs 238–500 kWh/m³, from the seas 0.89–1.15.
+40. **Lamp-lit food costs tens of kilowatts a resident, and its heat binds.** Lamp-lit staples take 5.6–61 kW a
+    resident, and lit by ground solar a lamp farm needs more panel area than the fields it replaces. The fully lamp-lit
+    diet for 8 billion takes 41.5–425 TW, 0.50–8.1% more dimming with the array's power and 0.72–17.9% with fusion.
+    Microbial protein replaces the diet's animal part for 40–133 W a resident, and a whole diet made on power takes
+    0.70–2.8 kW.
+41. **Fish and soilless culture multiply N2O, which accumulates in every mix.** Aquaponic fish take 44,500–309,000 km² of
+    feed crops a billion, four to six times the animal part they replace, and emit 52–446 kt N of N2O, three to seven
+    times the field diet's. Soilless culture emits 0.72–1.19% of its nitrogen against the fields' 0.2–0.5%, and N2O has
+    no sink in the design air: the fog-desert glass mix adds 0.50–3.4 ppb a year at 8 billion against the wild
+    biosphere's 0.31–0.42.
+42. **The waters' phosphorus holds sea farms to the animal part of 0.04–0.26 billion people.** The waters' life can
+    spare 21–56 kt a year to seaweed, fish and sorption (resources' sea-phosphorus study); the sea-supported mix draws
+    0.86–4.1 Mt a year at 4–8 billion, 15–195 times that, so it cannot be built.
+43. **At 4–8 billion pasture cannot carry the diet's animal part, and the feasible mixes with fields leave 35–89% of the
+    dry land wild outside a kept 30% at 8 billion.** At ecology's upper grazing allowance the fog desert outside a kept
+    30% holds pasture for 3.4 billion people, so the animal part comes from microbial protein, aquaponics, sea farms or
+    animals fed on crops. Rain-fed first with grazing held to the fog desert uses 2.05–3.72 million km², 0.05–0.077 TW
+    and no sea water at 8 billion; fog-desert glass fits the fog desert only to 16% of the way to its high-cost end.
+    Lamps and power-made food leave 97% or more wild for 5.6–425 TW.
+
+### Cities on the land
+
+The author's directions of 11 October for the land: most of the ground's people in the drier highlands round the
+summit metropolis, taller cities, and the large lava tubes as the first phase's habitats and lasting cities
+([register](../research/decisions.md#people-on-the-moon-and-beyond-11-october-2026)). The study is
+[land cities](../research/studies/land_cities/README.md); numbers here are from it.
+
+44. **The known lava-tube candidates lie in the low basins' mare basalt, and the 28% sea covers most of them.** Of the
+    17 pit sites in and beside the maria, 13 lie under the sea, 54 m to 2.25 km down, and one under a rain-fed lake;
+    three stand on land, the Mare Tranquillitatis pit highest at 784 m. Of the 19 places of Coombs & Hawke's roofed
+    rille segments, 12 lie under the sea, and all three measured collapse chains do.
+45. **On land the rain lifts the water table over every pit floor within years to four centuries, unless the basalt
+    drains as freely as Hawaii's young flows.** Solved in two dimensions on the atlas, the central case brings it to
+    the ground at 4 of the 12 land places and to 6–330 m below it at the rest. Water presses with a sixth of Earth's
+    weight, so Earth's sealing holds far deeper: Earth's 15 m threshold for waterproofing sheets stands at 91 m.
+    Keeping a 1 km by 50 km tube dry takes 0.03–2.9 MW with the water table at the ground and 2.5–245 MW under 500 m of
+    sea, beside its residents' 5.2–28 GW.
+46. **The rough estimate of 7 million in a 1 km by 50 km tube with ten floors holds in arithmetic; as a 50 m vault with
+    streets and courts it holds 2.6–4.7 million.** The mapped tubes, each counted once, hold 2–52 million, those on dry
+    land 0.6–14 million; with the GRAIL candidates at the size gravity sees, 5–129 million.
+47. **Before the air, a tube roof is the Moon's best shelter, and the air ends that role once the surface pressure
+    reaches 16.8 kPa,** when its column weighs as much as Earth's atmosphere. A roof holds 1 atm by its weight from
+    19–21 m of basalt. The tubes matter most in the build's first steps.
+48. **3.90 million km² of dry ground stands 4 km or more above the sea, 91% of it on the far side, and 1.35 million km²
+    of it poleward of 30°, where both climate models put the most comfort and the ground is driest.** The far side's
+    equatorial massif round the summit is the wettest and stormiest ground on the Moon.
+49. **For the same steel per floor, towers rise three to four times as high at a sixth of the gravity, and heat and
+    daylight cap density first.** All 6 billion of the ground's people at 10,000 per km² would settle 15% of the high
+    ground, at the metropolis's density 3.8% and at the tower district's 1.8%.
+50. **Water reaches the highlands for 0.9–2.7 GW per billion people from the nearest lakes and 7–21 GW from the sea,
+    a tenth of that with 90% recovered.** With half to three quarters of the ground's people in the highlands, the
+    scattered communities hold 0.5–3 billion.
+
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting statements
@@ -362,5 +431,7 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 | [literature.md](literature.md) | The literature by topic, with what it means for the Open Moon |
 | [questions.md](questions.md) | The open questions, in order |
 | [sources.json](sources.json) | Every source cited, its use and how far it was read |
+| [../research/studies/food_systems/README.md](../research/studies/food_systems/README.md) | Food systems per billion residents, their fit to the lunar cycle and seven mixes for 4, 6 and 8 billion, with each mix's feasible range |
+| [../research/studies/land_cities/README.md](../research/studies/land_cities/README.md) | Lava tubes against the 28% atlas, their water and capacity, and highland and tall cities |
 
 `python -m provisioning.screen` rewrites the product; `python -m pytest provisioning/tests` checks it.

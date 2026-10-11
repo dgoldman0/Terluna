@@ -69,6 +69,27 @@ the top of the high gardens.
 **Bodies.** No human has lived in partial gravity beyond 75 hours. The study sets out what the evidence covers for
 children, older residents, artificial gravity and return to Earth.
 
+## Cities on the land
+
+The [land-cities study](../research/studies/land_cities/README.md), 11 October 2026, answers the author's directions
+for the land: lava tubes as the first phase's shelter and as lasting cities, and highland and tall cities.
+
+**Lava tubes.** A tube city on dry ground is a vaulted avenue under tens to hundreds of metres of stone, lit through the
+day by heliostats feeding light guides (mirrors over 1.4–7.1% of the lit floor), moved by fans, since the stack effect
+is a fifth of Earth's, and kept dry by membranes and pumps. The 28% sea covers most of the known candidates; on land the
+rain lifts the water table over the pit floors within years to four centuries unless the basalt drains freely. The
+mapped tubes hold 2–52 million people at 70 m² a person. Before the air, 6 m of rock stops all observable cosmic-ray
+dose, and a roof holds 1 atm of air by its weight from 19–21 m. The author's direction of the same day connects the
+undersea cities with the tubes, and step six takes it up.
+
+**Highland cities.** 3.90 million km² of dry ground stands 4 km or more above the sea, 91% of it on the far side, and
+1.35 million km² of it poleward of 30°, where both climate models find the most comfort. Towers rise three to four
+times as high for the same frame steel per floor; wind leads their structure, and heat and daylight cap a district's
+density near the tower district's 85,700 people per km². All 6 billion of the ground's people at 10,000 per km² would
+settle 15% of the high ground, at the metropolis's density 3.8%. Water reaches the highlands for 0.9–2.7 GW per billion
+people from the nearest lakes and 7–21 GW from the sea, a tenth of that with 90% recovered; a sky boat climbs 6 km for
+2.3 kWh, and ferries and regional ships carry the longer trips up.
+
 ## Community settings from the atlas
 
 The [conservation study](../research/studies/conservation/README.md) lists candidate settings for communities on the 28% [atlas](../geography/README.md#atlas-at-the-selected-water-share):

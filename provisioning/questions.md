@@ -29,7 +29,8 @@ on this laptop. The findings behind them are in the [README](README.md).
    situation, their costs per billion and the cases' totals by mix: every mix carries every case at its own split,
    with food, the dark night and the sky towns' hydrogen the largest costs.
    - **What decides it:** the author's choice among the costs, after how people live
-     ([daily life](../research/studies/daily_life/README.md)), steps five and six of the approved order.
+     ([daily life](../research/studies/daily_life/README.md)) and where the land's cities stand
+     ([land cities](../research/studies/land_cities/README.md)), steps five and six of the approved order.
    - **What remains to size:**
      - town and hull designs, with their structure, gas cells and wet mass;
      - drifting districts' routes, their steering against the gathering the design winds show (onto one track within
@@ -40,6 +41,11 @@ on this laptop. The findings behind them are in the [README](README.md).
      - nutrient return;
      - the dark-night requirement's value;
      - health over a lifetime at a sixth of Earth's gravity.
+     - the lava tubes' groundwater beyond the two-dimensional screen: layered basalt, the crust beneath and the seas
+       filling it from below, and the GRAIL candidates' own sizes ([land cities](../research/studies/land_cities/README.md));
+     - the highland cities' water lift and recovery poleward of 45°, where the high ground's runoff is almost none;
+     - the undersea cities joined to the lava-tube habitation, and the division of labour and synergies among places
+       that turn regional weaknesses into strengths, as the author asked for step six.
 3. **The power system through the night.** Fusion is a planning assumption and a conditional technology. The
    alternatives:
    - a grid from the day side, with 9–19% losses over 4,000–5,500 km;
@@ -50,19 +56,19 @@ on this laptop. The findings behind them are in the [README](README.md).
 
    **How:** a network model of sources, storage, lines and reserves through the lunar cycle, and the summit city's
    power plan that its studies ask for.
-4. **The food system.**
-   - Diets, and staple crops beyond the day fruit.
-   - Protein from microbial production on firm power.
-   - Water for farms outside the tropics.
-   - Irrigation beyond the rain: at the high end of the diet range ten billion lunar residents irrigate 2.2 million
-     km² with 8,700 km³ a year from the fresh seas, 1.5 TW of lifting ([ways of living](../research/studies/ways_of_living/README.md), finding 2).
-   - The monthly harvest and its stores.
-   - The land within reach of each city.
+4. **The food system.** The [food-systems study](../research/studies/food_systems/README.md) prices eight systems per
+   billion residents, fits them to the lunar cycle and mixes them for 4, 6 and 8 billion, with the range each mix can
+   be built over: rain-fed fields cost least and the rain feeds 9.4–27.5 billion outside a kept 30%; glass and lamps
+   cost land, structure, power and N2O; pasture cannot carry the animal part at 4–8 billion, and the waters'
+   phosphorus holds sea farms to the animal part of 0.04–0.26 billion people. What remains:
+   - the crop model's water and its water-use efficiency, which decide between 9.4 and 4.3 billion at the high-cost
+     end, and farm yields below potential;
+   - N2O and methane: their warming in the deep column, and how strict soilless culture and fish must be;
+   - fog and wind paired snapshot by snapshot, and dew from the night's surface energy, in the fog desert;
+   - the land within reach of each city, and the author's choice of mix.
 
-   With the ecology work it must also make no methane and keep ethylene low enough for cereals.
-
-   **How:** land and energy per diet on the canopy model's yields and the GCM's rain, beside the ecology work's
-   water model.
+   **How:** the plant model with water and the ecology work's nutrient budget; a gas-warming column; a CM1 ring rerun
+   that writes fog and wind together.
 5. **Freight between the surface and orbit.** Surface mass drivers fail in the air, so freight to orbit has to start
    from altitude, a tether or an elevator:
    - the high platforms near 70 km and the crown at 35.6 km are candidate starts;
