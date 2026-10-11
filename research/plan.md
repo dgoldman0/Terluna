@@ -144,7 +144,14 @@ studies answered, each reviewed independently:
   night store; the natural night serves walking on 48% of the dry land, and the land under a light-polluted sky falls
   to 0.9–40% at 4–8 billion.
 
-Next: step six's distributions across Earth, the Moon, the array and the colonies, built on these products.
+Step six followed on the same day (provisioning, `studies/distributions`): four distributions of 25–30 billion for the
+author's choice, Earth at 9 billion in each. A puts the Moon at 4 billion (2 aloft), the array at 7 and the colonies at
+5; B the Moon at 6, 6 and 4; C the Moon at 8, 5 and 3; D 30 billion with the Moon at 8 (2 aloft), the array at 8 and the
+colonies at 5. The Moon at 4–8 billion leaves 61–94% of its dry land wild outside a kept 30% and 31–92% outside a kept
+half; at 8 billion with half kept, three placements together fit every case, the dry highland towns poleward of 45°
+first. Its sky towns meet up to 5.3 million conflicts a day for traffic control, and tube seepage, the deltas' and
+sea floor's sediment, joined undersea and tube cities and the dark belt turn regional weaknesses into strengths. Next:
+the author's choice among the four.
 
 Waiting on the author:
 - the aerophytes' scientific name, from six cloud-root candidates, and six choices about the taxonomic system;
