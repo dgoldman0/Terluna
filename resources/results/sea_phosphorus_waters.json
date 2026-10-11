@@ -1,0 +1,444 @@
+{
+  "schema": "terluna.resources.sea-phosphorus-waters/1",
+  "producer": {
+    "files": {
+      "resources/sea_phosphorus_waters.py": "30ced5b69e6d25b202524bfcb43b1faf2fd9f730afe4562e0190364c04d441b0",
+      "geography/drainage.py": "a1b8d163c2ee340c1e58d218772278f3b229fddc96b8cc051757ab4051094c68",
+      "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29",
+      "geography/atlas.py": "e5ce62df01c940976901f0308620116fbce3657c4945098a70ce0f301f4ee14b"
+    },
+    "inputs": {
+      "geography/results/drainage.json": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d",
+      "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e"
+    },
+    "ignored_inputs": {
+      "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5bffdfbfb191cfed5cc3f4397a9a7d0eb52269f925ee6f05c",
+      "geography/inputs/ldem_16.img": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+      "geography/inputs/ldem_16.lbl": "9aef29463ccc6ed3a3fbe0df3ecd830a99c69e16b564f455507dee2697096579",
+      "geography/inputs/ldem_4.img": "c04632eba6449af49e3108ed7c25b3b1c450600abd3690df4fc815853a1af476",
+      "geography/inputs/ldem_4.lbl": "b5a197b4d417e3b5e0e84f8fe15f9a1d2203b8eb5d7213236c0ffbc86e940cc6",
+      "geography/inputs/jggrx_0420a_sha.tab": "962355f81ae40dab0ec39753e3820d731d4505633a262fc543afd6f6c7c0e50d",
+      "geography/inputs/jggrx_0420a_sha.lbl": "320b77ee552d221905bf0af55c1a554799e596e5d9e5dbf3f580c0ce60e07ea7",
+      "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693"
+    },
+    "constants": {
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_MOON_DISTANCE": 384400000.0,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "SIDEREAL_MONTH_DAYS": 27.321661,
+      "STANDARD_GRAVITY": 9.80665
+    }
+  },
+  "evidence": "The geography drainage routing rerun with its committed climatology (reproduced to the cubic metre per second), with tracers carried down the same receivers: water that has crossed a rain-fed lake, dissolved P kept by each lake as Vollenweider's (1976) relation keeps total P in Earth's lakes, and particulate P kept on Siyam's (2000) form of Brune's (1953) reservoir curves. P loads follow land runoff at one concentration. Steady annual flow; lakes do not fill with sediment, and every cell below the common level is an outlet, as in the drainage product. The atlas grid gives depths below the common level and the receiving water body.",
+  "reading_rule": "Retention bodies are the drainage product's lakes whose depressions spill, 8-connected and joined across the 0/360 degree seam, with the lakes of closed depressions cleared from them; retention applies once, where water leaves a body, and tau is a body's volume over its outflow in years. Closed depressions keep all they receive. Shares are fractions of the land-runoff P load (P tracers), of the routed discharge to standing water at the common level, rain on lakes included (lake_passage_share_of_discharge), or of the land's own runoff that reaches it, carried through spilling lakes (lake_passage_share_of_land_runoff). Particulate survival keys name the Brune curve (upper, median, lower) and the settling: earth, or moon with I/C scaled by g_earth/g_moon. Hypsometry areas are km2 of water at the common level by depth band in metres. by_receiving_water labels outlets by the 4 pixel per degree atlas: a named body, 'small waters' (other common-level depressions) or 'below the atlas grid' (16 px/deg cells below the common level inside 4 px/deg land).",
+  "reproduced_drainage": {
+    "discharge_to_sea_m3s": [
+      229410,
+      229410
+    ],
+    "lake_area_share": [
+      0.1034,
+      0.1034
+    ],
+    "lake_volume_km3": [
+      3108625,
+      3108625
+    ],
+    "lake_bodies": [
+      27865,
+      27865
+    ],
+    "largest_river_m3s": [
+      57435.0,
+      57435.0
+    ]
+  },
+  "water_m3s": {
+    "land_runoff": 127371.42605266348,
+    "lake_rain_less_evaporation": 102038.67766010802,
+    "to_common_level_water": 229410.1037127715
+  },
+  "lake_passage_share_of_discharge": {
+    "tau_ge_0_yr": 0.9806877757977339,
+    "tau_ge_0.1_yr": 0.9781206365889871,
+    "tau_ge_1_yr": 0.9544526009147951,
+    "tau_ge_10_yr": 0.89200639829474,
+    "tau_ge_100_yr": 0.6161275948460672
+  },
+  "land_runoff_reaching_common_level_m3s": 126683.56281156495,
+  "lake_passage_share_of_land_runoff": {
+    "tau_ge_0_yr": 0.9650276700556946,
+    "tau_ge_0.1_yr": 0.9605838726350227,
+    "tau_ge_1_yr": 0.9242657208853835,
+    "tau_ge_10_yr": 0.8386314885652669,
+    "tau_ge_100_yr": 0.50258570911509
+  },
+  "lakes": {
+    "drainage_product": 27865,
+    "lakes_seam_joined": 27851,
+    "seam_joins": 14,
+    "closed_lakes": 2660,
+    "lakes_with_spilling_and_closed_depressions": 232,
+    "closed_lake_km2_cleared_from_spilling_lakes": 23014.914002972877,
+    "retention_bodies": 25610,
+    "retention_bodies_spilling": 25610,
+    "retention_body_seam_joins": 13,
+    "spilling_lake_km2": 3868934.298655817,
+    "closed_lake_km2": 53535.91036769651,
+    "spilling_depressions": 57380
+  },
+  "outflow_weighted_tau_yr": {
+    "p10": 2.8473193046804352e-05,
+    "p25": 0.00030698634198092695,
+    "p50": 0.05359781445514612,
+    "p75": 3.0015539982629833,
+    "p90": 24.496415719472093
+  },
+  "dissolved_p_survival": 0.06524195577118094,
+  "particulate_p_survival": {
+    "upper_earth": 0.03619618696406773,
+    "upper_moon": 0.038899390514479645,
+    "median_earth": 0.03654698314621544,
+    "median_moon": 0.039832667515428126,
+    "lower_earth": 0.037389619120636264,
+    "lower_moon": 0.04217369247205573
+  },
+  "brune_beta": {
+    "upper": 0.0055,
+    "median": 0.0079,
+    "lower": 0.015
+  },
+  "gravity_ratio": 0.16562423218538572,
+  "by_receiving_water": {
+    "below the atlas grid": {
+      "discharge_m3s": 70461.3365233971,
+      "lake_passed_m3s": 69670.18821648335,
+      "dissolved_p_share": 0.016210749500306692,
+      "particulate_p_share_median_moon": 0.007998911718512037
+    },
+    "small waters": {
+      "discharge_m3s": 91426.46760630704,
+      "lake_passed_m3s": 88149.77008840257,
+      "dissolved_p_share": 0.03548439762317945,
+      "particulate_p_share_median_moon": 0.027669747695529406
+    },
+    "unnamed body 125": {
+      "discharge_m3s": 5.3549702390119874e-05,
+      "dissolved_p_share": 4.2042162869385654e-10,
+      "particulate_p_share_median_moon": 4.2042162869385654e-10
+    },
+    "Oceanus Procellarum": {
+      "discharge_m3s": 3434.976021438479,
+      "lake_passed_m3s": 3171.378228725035,
+      "dissolved_p_share": 0.003802917713880681,
+      "particulate_p_share_median_moon": 0.002507203603100353
+    },
+    "Mare Moscoviense": {
+      "discharge_m3s": 175.23616369739824,
+      "lake_passed_m3s": 175.21362583055014,
+      "dissolved_p_share": 2.5021681565000706e-05,
+      "particulate_p_share_median_moon": 6.780191396980381e-07
+    },
+    "Mare Smythii": {
+      "discharge_m3s": 6.399891821316618,
+      "lake_passed_m3s": 2.353187306515878,
+      "dissolved_p_share": 3.280242730330437e-05,
+      "particulate_p_share_median_moon": 3.181455111668566e-05
+    },
+    "Mare Orientale": {
+      "discharge_m3s": 63891.9846200375,
+      "lake_passed_m3s": 63797.090528494475,
+      "dissolved_p_share": 0.009682535429994059,
+      "particulate_p_share_median_moon": 0.0016242107139847542
+    },
+    "Mare Ingenii": {
+      "discharge_m3s": 13.696857724795782,
+      "lake_passed_m3s": 13.690480362848799,
+      "dissolved_p_share": 3.484066067446665e-06,
+      "particulate_p_share_median_moon": 5.388516089376171e-08
+    },
+    "unnamed body 1557": {
+      "discharge_m3s": 5.900373934429665e-05,
+      "dissolved_p_share": 4.6324156973716177e-10,
+      "particulate_p_share_median_moon": 4.6324156973716177e-10
+    },
+    "unnamed body 1934": {
+      "discharge_m3s": 0.00591579404864474,
+      "dissolved_p_share": 4.644522112988499e-08,
+      "particulate_p_share_median_moon": 4.644522112988499e-08
+    }
+  },
+  "largest_rivers_receiving_water": [
+    {
+      "mouth": [
+        -18.34,
+        -100.03
+      ],
+      "discharge_m3s": 57435.0,
+      "waters": [
+        {
+          "label": 1296,
+          "name": "Mare Orientale",
+          "area_km2": 88056.04824974391
+        }
+      ]
+    },
+    {
+      "mouth": [
+        3.59,
+        171.16
+      ],
+      "discharge_m3s": 31255.3,
+      "waters": [
+        {
+          "label": 1115,
+          "name": "small water",
+          "area_km2": 229.44690136212176
+        }
+      ]
+    },
+    {
+      "mouth": [
+        -19.66,
+        -157.59
+      ],
+      "discharge_m3s": 18416.0,
+      "waters": [
+        {
+          "label": 1382,
+          "name": "small water",
+          "area_km2": 647.6861261774576
+        }
+      ]
+    },
+    {
+      "mouth": [
+        17.22,
+        -86.47
+      ],
+      "discharge_m3s": 12659.0,
+      "waters": []
+    },
+    {
+      "mouth": [
+        21.97,
+        -178.34
+      ],
+      "discharge_m3s": 10595.7,
+      "waters": []
+    },
+    {
+      "mouth": [
+        -35.47,
+        -124.16
+      ],
+      "discharge_m3s": 6723.4,
+      "waters": []
+    },
+    {
+      "mouth": [
+        47.16,
+        -175.97
+      ],
+      "discharge_m3s": 6600.6,
+      "waters": []
+    },
+    {
+      "mouth": [
+        -14.03,
+        -89.97
+      ],
+      "discharge_m3s": 5880.6,
+      "waters": [
+        {
+          "label": 1296,
+          "name": "Mare Orientale",
+          "area_km2": 88056.04824974391
+        }
+      ]
+    },
+    {
+      "mouth": [
+        -3.03,
+        122.59
+      ],
+      "discharge_m3s": 3672.2,
+      "waters": [
+        {
+          "label": 1176,
+          "name": "small water",
+          "area_km2": 631.4196923469304
+        }
+      ]
+    },
+    {
+      "mouth": [
+        5.09,
+        151.66
+      ],
+      "discharge_m3s": 3106.0,
+      "waters": [
+        {
+          "label": 1092,
+          "name": "small water",
+          "area_km2": 572.6705958517832
+        }
+      ]
+    },
+    {
+      "mouth": [
+        1.16,
+        0.34
+      ],
+      "discharge_m3s": 3095.9,
+      "waters": []
+    },
+    {
+      "mouth": [
+        3.66,
+        -87.47
+      ],
+      "discharge_m3s": 2875.4,
+      "waters": []
+    }
+  ],
+  "hypsometry": {
+    "all_common_level_water": {
+      "area_km2": 10621024.793050455,
+      "volume_km3": 10706679.859749408,
+      "by_depth_m_km2": {
+        "0-50": 397123.4902630983,
+        "50-200": 1130995.3104229388,
+        "200-1000": 5149837.100273394,
+        "1000-3000": 3435196.917783127,
+        "3000-inf": 507871.9743078972
+      }
+    },
+    "water_cells_above_level_km2": 448.9071752981264,
+    "Oceanus Procellarum": {
+      "area_km2": 5288443.714768961,
+      "volume_km3": 3424291.1703554355,
+      "by_depth_m_km2": {
+        "0-50": 207135.21735475268,
+        "50-200": 641430.0516610505,
+        "200-1000": 3367583.7836844223,
+        "1000-3000": 1067715.1527082901,
+        "3000-inf": 4579.509360444963
+      }
+    },
+    "Mare Ingenii": {
+      "area_km2": 2322832.7479742565,
+      "volume_km3": 4836481.926588763,
+      "by_depth_m_km2": {
+        "0-50": 17289.33478540223,
+        "50-200": 58558.793274461284,
+        "200-1000": 392474.561259366,
+        "1000-3000": 1356360.9953080611,
+        "3000-inf": 498149.06334696576
+      }
+    },
+    "Mare Smythii": {
+      "area_km2": 285479.5914913061,
+      "volume_km3": 350800.54804454837,
+      "by_depth_m_km2": {
+        "0-50": 5782.064392988607,
+        "50-200": 26522.488078253387,
+        "200-1000": 105911.0496018628,
+        "1000-3000": 145052.2773826868,
+        "3000-inf": 2211.7120355145175
+      }
+    },
+    "Mare Humboldtianum": {
+      "area_km2": 284340.8168244273,
+      "volume_km3": 331349.5360724934,
+      "by_depth_m_km2": {
+        "0-50": 4675.261520607795,
+        "50-200": 17937.785360163365,
+        "200-1000": 112563.45583262395,
+        "1000-3000": 148438.89230295646,
+        "3000-inf": 725.4218080757461
+      }
+    },
+    "Mare Orientale": {
+      "area_km2": 88056.0482497431,
+      "volume_km3": 74772.7473388085,
+      "by_depth_m_km2": {
+        "0-50": 1247.8329211674047,
+        "50-200": 5552.593581742185,
+        "200-1000": 46568.99029685256,
+        "1000-3000": 34686.63144998094,
+        "3000-inf": 0.0
+      }
+    },
+    "Mare Moscoviense": {
+      "area_km2": 66449.17939172401,
+      "volume_km3": 71128.35491770458,
+      "by_depth_m_km2": {
+        "0-50": 1063.8895605537612,
+        "50-200": 5355.903156974798,
+        "200-1000": 20514.103034465006,
+        "1000-3000": 39313.2649708261,
+        "3000-inf": 202.01866890434655
+      }
+    },
+    "unnamed body 1557": {
+      "area_km2": 63732.44665185035,
+      "volume_km3": 30601.547961498945,
+      "by_depth_m_km2": {
+        "0-50": 3834.187567616,
+        "50-200": 15511.218896180744,
+        "200-1000": 32969.542367165224,
+        "1000-3000": 11417.497820888391,
+        "3000-inf": 0.0
+      }
+    },
+    "unnamed body 2132": {
+      "area_km2": 28769.679802233914,
+      "volume_km3": 31633.091889471652,
+      "by_depth_m_km2": {
+        "0-50": 274.3968604986589,
+        "50-200": 626.8472177406734,
+        "200-1000": 8115.24154313972,
+        "1000-3000": 19574.528532816494,
+        "3000-inf": 178.66564803836494
+      }
+    },
+    "unnamed body 1455": {
+      "area_km2": 28592.347973382522,
+      "volume_km3": 37953.419616110856,
+      "by_depth_m_km2": {
+        "0-50": 203.50165592593314,
+        "50-200": 821.6140435189598,
+        "200-1000": 6046.600567663357,
+        "1000-3000": 21469.0339483828,
+        "3000-inf": 51.59775789147417
+      }
+    },
+    "unnamed body 125": {
+      "area_km2": 28065.436325111266,
+      "volume_km3": 30871.138175964086,
+      "by_depth_m_km2": {
+        "0-50": 252.64572722867283,
+        "50-200": 921.4857366353559,
+        "200-1000": 7163.423202813214,
+        "1000-3000": 19727.881658434027,
+        "3000-inf": 0.0
+      }
+    },
+    "unnamed body 1934": {
+      "area_km2": 21114.96898463482,
+      "volume_km3": 16312.485555454336,
+      "by_depth_m_km2": {
+        "0-50": 389.9642425554989,
+        "50-200": 1826.3325576432758,
+        "200-1000": 14600.672602391322,
+        "1000-3000": 4264.525140283758,
+        "3000-inf": 33.47444176096193
+      }
+    }
+  }
+}

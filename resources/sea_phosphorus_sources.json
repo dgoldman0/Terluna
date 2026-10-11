@@ -1,0 +1,156 @@
+{
+  "access_date": "2026-10-11",
+  "source_admission": "Primary and institutional sources read by web retrieval on 11 October 2026, with the depth of reading recorded for each. No outside dataset or full paper is committed; working copies stay with the run records on the research drive. Earth measurements set reference values and ranges; none validates a lunar process. Values the project already cites are taken from the project register that cites them, named in 'via'.",
+  "sources": [
+    {
+      "citation": "Paytan & McLaughlin (2007), The oceanic phosphorus cycle, Chemical Reviews 107, 563-576",
+      "doi_or_url": "https://doi.org/10.1021/cr0503613",
+      "use": "The ocean holds about 3e15 mol of P; the residence time of dissolved P is 20-100 kyr; much of the rivers' particulate P is deposited quickly in estuaries and on shelves; about 10-30% of the total river P flux is potentially reactive and a quarter of that may be trapped in estuaries (Compton et al. 2000); P desorbing from clays as salinity rises is 2-5 times the rivers' dissolved load. The atmospheric P flux over the ocean runs from 0.08-0.4 umol m-2 day-1 over the Pacific to 0.9 over the Mediterranean, and inorganic P in mineral aerosols is bound to iron oxides or associated with Ca, Mg, Al and Fe, which are weakly soluble.",
+      "access": "Full text read (a teaching copy on the University of Hawaii C-MORE server), sections 3, 3.1 and 3.3."
+    },
+    {
+      "citation": "Compton, Mallinson, Glenn, Filippelli, Follmi, Shields & Zanin (2000), in Marine Authigenesis: From Global to Microbial (SEPM)",
+      "doi_or_url": "",
+      "use": "River fluxes of particulate and dissolved P and the 10-30% potentially reactive share.",
+      "access": "Not read; values as Paytan & McLaughlin (2007) report them."
+    },
+    {
+      "citation": "Charette & Smith (2010), The volume of Earth's ocean, Oceanography 23(2)",
+      "doi_or_url": "https://tos.org/oceanography/assets/docs/23-2_charette.pdf",
+      "use": "Ocean volume 1.3324e9 km3, for Earth's mean P concentration.",
+      "access": "Search summary of the paper and its press release; full text not read."
+    },
+    {
+      "citation": "Eizel-Din, Bui, Rutschmann, Failer, Grass, Kramer, Hussein & Saghayroon-Elzein (2010), Trap efficiency of reservoirs on the Nile River, River Flow 2010, Bundesanstalt fuer Wasserbau",
+      "doi_or_url": "https://izw.baw.de/e-medien/river-flow-2010/PDF/B3/B3_03.pdf",
+      "use": "Siyam's (2000) form of Brune's (1953) curves, E = 100 exp(-beta I/C), with beta 0.0055, 0.0079 and 0.015 for the upper, median and lower curves of normal ponded reservoirs; Nile reservoirs trapped less than Brune's curves give.",
+      "access": "Full text read."
+    },
+    {
+      "citation": "Brune (1953), Trap efficiency of reservoirs, Transactions of the American Geophysical Union 34(3)",
+      "doi_or_url": "",
+      "use": "The reservoir trap-efficiency curves against capacity over inflow.",
+      "access": "Not read; through Eizel-Din et al. (2010)."
+    },
+    {
+      "citation": "Siyam (2000), Reservoir sedimentation control, PhD thesis, University of Bristol",
+      "doi_or_url": "",
+      "use": "The exponential form of Brune's curves.",
+      "access": "Not read; through Eizel-Din et al. (2010)."
+    },
+    {
+      "citation": "Khorasani & Zhu, Phosphorus retention in lakes: a critical reassessment of hypotheses and static models, EarthArXiv preprint submitted to Journal of Hydrology",
+      "doi_or_url": "https://eartharxiv.org/repository/object/2481/download/5074/",
+      "use": "Reviews 39 lake P-retention models on 738 observations, among them the OECD model TP_lake = k1 (TP_in / (1 + sqrt(tau_w)))^k2, refitted there with k1 = 1.729 and k2 = 0.823, and Larsen & Mercier's (1976) loss rate proportional to tau_w^-0.5. This study uses Vollenweider's simple form, k1 = k2 = 1: a lake passes on 1 / (1 + sqrt(tau_w)) of its inflowing total P.",
+      "access": "Full text read (preprint)."
+    },
+    {
+      "citation": "Vollenweider (1976), Advances in defining critical loading levels for phosphorus in lake eutrophication, Memorie dell'Istituto Italiano di Idrobiologia",
+      "doi_or_url": "",
+      "use": "The simple mass-balance form: a lake passes on 1 / (1 + sqrt(tau_w)) of the total P it receives, tau_w its water residence in years.",
+      "access": "Not read; the form as Khorasani & Zhu give it."
+    },
+    {
+      "citation": "Larsen & Mercier (1976), Phosphorus retention capacity of lakes, Journal of the Fisheries Research Board of Canada 33, 1742-1750",
+      "doi_or_url": "",
+      "use": "Retention rising with water residence time.",
+      "access": "Not read; through Khorasani & Zhu and a search summary."
+    },
+    {
+      "citation": "Xiao et al. (2017), Nutrient removal from Chinese coastal waters by large-scale seaweed aquaculture, Scientific Reports 7, 46613",
+      "doi_or_url": "https://doi.org/10.1038/srep46613",
+      "use": "In 2014, 1,250 km2 of seaweed farms harvested 2,004,600 t dry weight and removed 9,496 t of P (7.6 t P per km2 a year); tissue P 0.34-0.52% of dry weight.",
+      "access": "Full text (PMC5399451) read through a fetch summary of its numbers; the figures agree with each other (9,496 t of P in 2,004,600 t of dry harvest is 0.47% P)."
+    },
+    {
+      "citation": "CEDA (2022), Energy efficiency considerations for dredging projects and equipment, Central Dredging Association information paper",
+      "doi_or_url": "https://dredging.org/media/ceda/org/documents/resources/cedaonline/ceda-energy-efficient-considerations-paper.pdf",
+      "use": "Trailing suction hopper dredging at Maasvlakte 2 used 0.78 kg of fuel per m3 at 10 km sailing and 1.15 kg at 27 km; a campaign table gives 0.5 L/m3 for a hopper dredger and 1 L/m3 for a backhoe. Water-injection dredging, 0.05 L/m3, moves sediment along the bed and lifts none, so it is left out of the recovery route.",
+      "access": "Full text read, case studies C1 and C3."
+    },
+    {
+      "citation": "IPCC (2006), 2006 IPCC Guidelines for National Greenhouse Gas Inventories, Volume 2, Chapter 1, Table 1.2",
+      "doi_or_url": "https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_1_Ch1_Introduction.pdf",
+      "use": "Net calorific value of gas/diesel oil, 43.0 TJ/Gg.",
+      "access": "Search excerpt of the table; the chapter not read."
+    },
+    {
+      "citation": "EN 590:2017, automotive diesel fuel specification (CEN)",
+      "doi_or_url": "https://en.wikipedia.org/wiki/EN_590",
+      "use": "Diesel density 820-845 kg/m3 at 15 C, to turn litres of fuel into energy.",
+      "access": "Search summary of the standard's density limits; the standard not read."
+    },
+    {
+      "citation": "Parker, Blanchard, Gardner, Green, Hartmann, Tyedmers & Watson (2018), Fuel use and greenhouse gas emissions of world fisheries, Nature Climate Change 8, 333-337",
+      "doi_or_url": "https://doi.org/10.1038/s41558-018-0117-x",
+      "use": "In 2011 fisheries landed 81 Mt at 489 L of fuel per tonne on average; small pelagic fish 42 L/t, large pelagic fish 430, demersal fish 539, crustaceans 1,739 (Table 1).",
+      "access": "Full text read."
+    },
+    {
+      "citation": "Syers, Johnston & Curtin (2008), Efficiency of soil and fertilizer phosphorus use, FAO Fertilizer and Plant Nutrition Bulletin 18, chapter 5",
+      "doi_or_url": "https://www.fao.org/4/a1595e/a1595e03.pdf",
+      "use": "Measured by the balance method, crop recovery of applied P often ranges from 50 to 90% and can be as high as 90%; P replaced after erosion is an inefficient use of P.",
+      "access": "Full text of chapter 5 read."
+    },
+    {
+      "citation": "Sanchez del Castillo, Cabanas Diaz, Pineda Pineda, Gonzalez Molina & Moreno Perez (2021), Evaluation of nutrient solution recirculation methods for tomato production in short cycles, Revista Mexicana de Ciencias Agricolas 12(3)",
+      "doi_or_url": "https://www.scielo.org.mx/pdf/remexca/v12n3/2007-0934-remexca-12-03-433-en.pdf",
+      "use": "Table 3: reusing the 20% of nutrient solution that drained applied 22.4, 26.4 and 24.8 g P per m2 against 27.2 g in the open system, 3-18% less (the text rounds the first treatment's saving to 16% for N, P and K).",
+      "access": "Full text read."
+    },
+    {
+      "citation": "Goddek, Joyce, Wuertz, Koerner, Blaeser, Reuter & Keesman (2019), Decoupled aquaponics systems, chapter 8 in Goddek et al. (eds), Aquaponics Food Production Systems, Springer, open access",
+      "doi_or_url": "https://doi.org/10.1007/978-3-030-15943-6_8",
+      "use": "In tilapia culture 55% of feed P ends in the sludge and 17% is excreted soluble (Neto & Ostrensky 2013); about 90% of sludge nutrients can be recovered at pH 4 (Jung & Lovitt 2011), and the worked examples mineralise 85-90% of sludge P. The 28% left for fish growth and other fates is this study's remainder.",
+      "access": "Full text of chapter 8 read."
+    },
+    {
+      "citation": "Egle, Rechberger, Krampe & Zessner (2016), Phosphorus recovery from municipal wastewater, Science of the Total Environment 571, 522-542",
+      "doi_or_url": "https://www.sciencedirect.com/science/article/pii/S0048969716314656",
+      "use": "Sludge-ash routes recover 60-90% of the P the treatment works receive.",
+      "access": "Abstract, as resources/phosphorus_sources.json records."
+    },
+    {
+      "citation": "Cordell, Drangert & White (2009), The story of phosphorus, Global Environmental Change 19, 292-305",
+      "doi_or_url": "https://doi.org/10.1016/j.gloenvcha.2008.10.009",
+      "use": "People excrete 0.44 kg of P a year on the average diet and 0.6 kg as meat eaters.",
+      "access": "Via the ecology people product (biosphere/ecology/people_sources.json: Cordell's 2010 thesis read in full)."
+    },
+    {
+      "citation": "FAO (2011), Gustavsson, Cederberg, Sonesson, van Otterdijk & Meybeck, Global food losses and food waste",
+      "doi_or_url": "https://www.fao.org/4/mb060e/mb060e.pdf",
+      "use": "Losses of a quarter to a third of food between field and mouth.",
+      "access": "Via the ecology people note (people_and_land.md finding 11; full text read there)."
+    },
+    {
+      "citation": "Otero et al. (2018), Seabird colonies as important global drivers in the nitrogen and phosphorus cycles, Nature Communications 9, 246",
+      "doi_or_url": "https://doi.org/10.1038/s41467-017-02446-8",
+      "use": "Seabird colonies receive 99 Gg of P a year; a seabird diet of 0.6% P by wet weight.",
+      "access": "Via the sky-ecology study (research/studies/sky_ecology/phosphorus.md at 5aafe2a)."
+    },
+    {
+      "citation": "Dreyer et al. (2015), Quantifying aquatic insect deposition from lake to land, Ecology 96, 499-509",
+      "doi_or_url": "https://doi.org/10.1890/14-0704.1",
+      "use": "Lake Myvatn's midges emerge at 0.15-3.7 g dry mass per m2 of lake a year; most land within 100-200 m of the shore.",
+      "access": "Via the lunar-cycle ecology register (H2, H5) and its product."
+    },
+    {
+      "citation": "Woods et al. (2004), Allometric and phylogenetic variation in insect phosphorus content, Functional Ecology 18, 103-109; Gratton, Donaldson & Vander Zanden (2008), Ecosystem linkages between lakes and the surrounding terrestrial landscape in northeast Iceland, Ecosystems 11, 764-774",
+      "doi_or_url": "https://doi.org/10.1111/j.1365-2435.2004.00823.x; https://doi.org/10.1007/s10021-008-9158-8",
+      "use": "Insects are 0.62-0.97% P by dry mass (Woods et al.), Myvatn's adult midges 1.3% (Gratton et al.).",
+      "access": "Via the lunar-cycle ecology register (H6)."
+    },
+    {
+      "citation": "McKay et al. (1991), The lunar regolith, Lunar Sourcebook chapter 7, Table 7.15",
+      "doi_or_url": "https://www.lpi.usra.edu/publications/books/lunar_sourcebook/pdf/Chapter07.pdf",
+      "use": "Average soils hold 0.11 wt% P2O5 (Apollo 16 highland), 0.13 (median of six mare soils) and 0.51 (Apollo 14 KREEP-rich).",
+      "access": "Via the lunar-cycle ecology register (run.py ROCK_WT_PCT) and the resources literature register."
+    },
+    {
+      "citation": "Meybeck (1982), Carbon, nitrogen, and phosphorus transport by world rivers, American Journal of Science 282, 401-450",
+      "doi_or_url": "https://doi.org/10.2475/ajs.282.4.401",
+      "use": "Particulate matter carries 95% of the P Earth's rivers carry naturally; the river concentrations behind the land loss.",
+      "access": "Via the lunar-cycle ecology register (H9) and its product."
+    }
+  ]
+}
