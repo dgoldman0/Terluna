@@ -106,6 +106,22 @@ Steps one to five and the ecology work landed on 9 October:
   chassis, founders are registered, and descendants are named as clades from the founders. A first register holds
   36 designed groups.
 
+On 10 October the author asked how aerophytes join the aerial and global ecosystem, and the ecology branch answered:
+- **The living sky** (`studies/sky_ecology`, checked by an independent reviewer in three passes and a confirmation).
+  - Over 1% of the Moon aerophytes build 134–413 Mt C of biomass a year and feed 1.8–4.8 million albatross-scale
+    grazing flyers; the tenants that eat them are short of phosphorus, since the host's sugar carries none.
+  - A load is sudden when it lands within a few minutes, against a 25-minute buoyancy period; left alone a body
+    survives a step of about half its trim margin.
+  - With pools that catch litter, a mature sky at 1% cover needs 3.5–61 kt of new phosphorus a year; roosting
+    sea-feeding flyers close a giant's phosphorus, and a fallen giant is the land's whale fall.
+  - At a 200-year mean adult life few 1-km round giants reach full size (0.3–32%), and fermented giants cannot replace
+    their dead.
+- **Guards and living sails.** At the author's direction a sky reef's defence is shared by several species, and a sky
+  reef can be partly animal-like, with a distributed control like a nervous system and no brain. A lasting support
+  system carries replaceable sails, each steering itself; one sail tested for stability decides how far a reef steers.
+- **The taxonomy** now holds 42 designed groups, the sky reefs' tenants, domatia, pools and distributed control among
+  them.
+
 Waiting on the author:
 - the aerophytes' scientific name, from six cloud-root candidates, and six choices about the taxonomic system;
 - how much of the Moon is kept wild and dark (the studies carry 30% and half);
