@@ -21,16 +21,18 @@ on this laptop. The findings behind them are in the [README](README.md).
      column; then the added dimming that holds the planned climate's energy budget. The climate programme stays
      paused.
    - **Whose:** the shield's work on its films.
-2. **The distribution of people.** The [distributions study](../research/studies/distributions/README.md) gives four
-   distributions of 25–30 billion for the author's choice, each with its costs, assumptions and uncertainties, after
-   the [ways-of-living](../research/studies/ways_of_living/README.md),
-   [daily-life](../research/studies/daily_life/README.md) and [land-cities](../research/studies/land_cities/README.md)
-   studies. The Moon at 4–8 billion with 2–4 aloft leaves 61–94% of its dry land wild outside a kept 30% and 31–92%
-   outside a kept half; at 8 billion outside half only the favourable end fits as spread, and three placements
-   together fit every corner.
-   - **What decides it:** the author's choice among the four, and the shares of wild land and of the dark sky the
-     author keeps.
+2. **The distribution of people.** The [distributions study](../research/studies/distributions/README.md) gave four
+   distributions of 25–30 billion, and the author chose C′: C with the middle latitudes' lowland people moved to the
+   high-latitude lowland homes, which rank best on the study's measures, and homesteads among the farms there. C′
+   keeps C's heat, energy, water lift and wild land; at 8 billion outside a kept half its high-cost end fits with the
+   dry highland towns poleward of 45° first and the scattered towns gathered on the twilit homes, once the homesteads'
+   homes count within the fields they work.
+   - **What decides it:** the author's choice is made; the high-latitude towns' water and the farms' work beyond the
+     homesteads decide how C′ is built.
    - **What remains to size:**
+     - the high-latitude towns' water from lakes and seas a median 32.8 km away, the driest homes on the Moon;
+     - the work of the middle latitudes' farms beyond the homesteads, the crews' regional ships or crew towns at
+       30–45°, and the homesteads' own design;
      - the dry highland cities' water and land poleward of 45°, where the high ground's runoff is almost none;
      - an overlay of the scattered homes on the food study's zones, and the middle band's towns beside the
        middle-wet fields;

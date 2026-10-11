@@ -348,9 +348,9 @@ deserts with water extraction, in the food system. The study is
 38. **Rain-fed fields feed the plant-rich diet at the least cost, and the rain alone feeds 9.4–27.5 billion people
     outside a kept 30%.** A billion residents crop 139,000–393,000 km² at the crop model's yields, 2.5–7.4% of what the
     rain grows in the wet bands, for 6.3–14 W a resident of nitrogen fixation, once the crops' water need is held to
-    what the design sunlight can evaporate; farms at Earth's best 70–80% of potential need 25–43% more land. Water lifted
-    and piped from the fresh seas costs 0.92–1.44 kWh/m³, so topping up a billion residents' rain-belt fields takes
-    115–522 km³ a year and 13–86 W a resident.
+    what the design sunlight can evaporate; farms at Earth's best 70–80% of potential need 25–43% more land. Water
+    lifted and piped from the fresh seas costs 0.92–1.44 kWh/m³, so topping up a billion residents' rain-belt fields
+    takes 115–522 km³ a year and 13–86 W a resident.
 39. **Glass takes more ground than fields, and the fog desert drinks from the seas.** Sunlit glass needs 1.2–2.5 times
     the equatorial field area, 4–22 Gt of glass and steel and 0.15–1.2 kW a resident per billion, and closed houses
     2.3–12.8 kW. The design run's fogs sit in nearly still air, so nets catch 0–98 L/m² a year above collection's 1 m/s
@@ -360,8 +360,8 @@ deserts with water extraction, in the food system. The study is
     diet for 8 billion takes 41.5–425 TW, 0.50–8.1% more dimming with the array's power and 0.72–17.9% with fusion.
     Microbial protein replaces the diet's animal part for 40–133 W a resident, and a whole diet made on power takes
     0.70–2.8 kW.
-41. **Fish and soilless culture multiply N2O, which accumulates in every mix.** Aquaponic fish take 44,500–309,000 km² of
-    feed crops a billion, four to six times the animal part they replace, and emit 52–446 kt N of N2O, three to seven
+41. **Fish and soilless culture multiply N2O, which accumulates in every mix.** Aquaponic fish take 44,500–309,000 km²
+    of feed crops a billion, four to six times the animal part they replace, and emit 52–446 kt N of N2O, three to seven
     times the field diet's. Soilless culture emits 0.72–1.19% of its nitrogen against the fields' 0.2–0.5%, and N2O has
     no sink in the design air: the fog-desert glass mix adds 0.50–3.4 ppb a year at 8 billion against the wild
     biosphere's 0.31–0.42.
@@ -442,12 +442,24 @@ is [distributions](../research/studies/distributions/README.md); numbers here ar
     1.07–28.6 million. The lake deltas' sediment and the towns' struvite return the farms' phosphorus. The fog desert's
     glass drinking piped sea water can feed a billion highland residents on 0.25–0.97 million km², and the far side's
     dark belt keeps the Moon's dark nights.
-56. **Four distributions of 25–30 billion stand for the author's choice.** Earth holds 9 billion in each, within the
-    10.2 billion that eat inside four planetary boundaries. A puts the Moon at 4 billion (2 on the ground, 2 aloft),
-    the array at 7 and the colonies at 5; B the Moon at 6 (3 and 3), 6 and 4; C the Moon at 8 (4 and 4), 5 and 3; D 30
-    billion with the Moon at 8 (6 and 2), the array at 8 and the colonies at 5. Everyone's primary energy is 60.1–274
-    TW; per billion the array needs 248–990 Gt of shield and 1,005 Gt of habitat, and the colonies 3.39–14.4 TW. Earth
-    at 8 or 11 billion moves each total by one billion down or two up.
+56. **Four distributions of 25–30 billion were set out for the author, who chose C′.** Earth holds 9 billion in each,
+    within the 10.2 billion that eat inside four planetary boundaries. A puts the Moon at 4 billion (2 on the ground, 2
+    aloft), the array at 7 and the colonies at 5; B the Moon at 6 (3 and 3), 6 and 4; C the Moon at 8 (4 and 4), 5 and
+    3; D 30 billion with the Moon at 8 (6 and 2), the array at 8 and the colonies at 5. Everyone's primary energy is
+    60.1–274 TW; per billion the array needs 248–990 Gt of shield and 1,005 Gt of habitat, and the colonies 3.39–14.4
+    TW. Earth at 8 or 11 billion moves each total by one billion down or two up.
+57. **The author's distribution, C′, is C with the middle latitudes' lowland people moved, at C's costs.** Ranked on
+    spare land, water energy, comfort under both climate models, rain and lightning, and night lighting, the
+    high-latitude lowland homes poleward of 48.6° sustain people best and take everyone who leaves the lowland homes
+    at 30–48.6°: 0.25–0.40 billion outside a kept 30%, and 0.22–0.40 billion outside a kept half, where 0–28 million
+    stay as homesteaders. Homesteads stay where the middle latitudes hold farms, at 8 billion outside a kept half at
+    the high-cost end: 2.8–28 million people among 1.39 million km² of fields, a household of four on each 20–200 ha.
+    C′ keeps C's heat, energy, water lift and wild land and puts 0.49–14.7% of the dry land under a light-polluted sky
+    against C's 0.50–15.4%. Every corner fits outside a kept 30%. Outside a kept half the high-cost end fits with the
+    dry highland towns poleward of 45° first and the scattered towns gathered on the twilit homes, once the homesteads'
+    homes count within the fields they work, 0.02–0.71% of their land. The farms' crews then come by regional ship
+    from the dry highland cities poleward of 45°, 206 km away, or by sky boat from crew towns kept on the dry high
+    ground at 30–45°.
 
 ## Statements elsewhere that need correcting
 
