@@ -142,3 +142,15 @@ and phosphorus as screen values. What decides it next:
   by its angle error, loads, oscillation and behaviour after a loss of power, then several sails on compliant cables
   ([living sails](../../research/studies/aerophytes/sail_biology.md));
 - the resources box model with aerophyte stoichiometry, both states and the falls.
+
+## Living light: what it asks next
+
+The [living-light study](../../research/studies/living_light/README.md) gives glowing organisms, outdoor needs and
+skyglow as screen values. What decides it next:
+- a plant that glows with a beetle-class luciferin cycle, and the luciferin supply and light lost in the leaf that set
+  how brightly it can glow;
+- the dark-night requirement's value, now that the dark belt covers 13% of the dry land and twilit or Earthlit skies
+  cover most of the rest;
+- lamps designed for the dark belt, where living light is not grown, and for faces, reading and work everywhere;
+- skyglow in the lunar air's own haze, between the clear and hazy brackets;
+- living light's effects on night-active animals, beyond the insect and glow-worm thresholds measured on Earth.

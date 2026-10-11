@@ -113,6 +113,25 @@ sail, tested for stability and for failure, decides how far a reef steers.
 Open: a population model on the routes, measured tissue phosphorus, the seas' food web, great flyers' energetics at
 the lunar scale, and that one living sail.
 
+## Living light, 11 October 2026
+
+The author asked to rely more on bioluminescence and to let lighting follow the Moon's twilit nights. The [living-light
+study](../../research/studies/living_light/README.md) gives what glowing organisms can do, what people need outdoors in
+each setting, and how far people's light reaches the sky:
+- **The glow.** Today's brightest glowing plants mark a path in the darkest hours and give a hundredth of the light
+  needed to walk by. A designed plant with a beetle-class luciferin cycle, its glow facing down, lights a path at
+  walking level for 2–10% of its night store; the fungal pathway as measured costs a third of the store to thirty
+  times it, so its quantum yield is the gap.
+- **The natural night.** Twilight and Earthlight keep the darkest moment above 1 lux, enough to walk by, on 48% of the
+  dry land and above 8 lux for reading on 21%. Poleward of 48.6° the night keeps walking light all night; the far
+  side's low latitudes are the dark belt, below 1 lux for 165 hours a cycle at the summit.
+- **People's light in the sky.** The tall, dense air carries a town's skyglow farther than Earth's air does, yet the
+  bright natural sky leaves ordinary towns' skies unpolluted on two-thirds of the dry land. The land under a
+  light-polluted sky falls from the earlier 14–49% of the dry land to 0.9–40% at 4–8 billion lunar residents, and
+  living light taking over 30–70% of outdoor lighting brings the low end to 0.5–0.6%.
+- **The dark belt** holds Earth-like darkness on 13% of the dry land and is where luminous organisms signal; near
+  towns, direct light matters more to night life than skyglow.
+
 ## What the project already says
 
 Each finding below follows from results the repository already holds, read together, with the literature that

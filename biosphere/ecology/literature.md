@@ -219,3 +219,23 @@ Sources and how far each was read are in the study registers:
 [sky ecology](../../research/studies/sky_ecology/sources.json),
 [guards and symbioses](../../research/studies/sky_ecology/symbioses_sources.json) and
 [living sails](../../research/studies/aerophytes/sail_biology_sources.json).
+
+## Living light
+
+- **The brightest glowing plants are dim.** Tobacco flowers with the enhanced fungal pathway emit 5.0×10¹³ photons a
+  second per m² (Zheng et al. 2023), and the improved pathway of 2024 is ten to a hundred times brighter (Shakhova et
+  al. 2024). The fungal pathway's quantum yield is 0.00096–0.017 (Teranishi 2018); firefly luciferase's is 0.41–0.48
+  and the best beetle luciferase's 0.61 (Ando et al. 2008; Niwa et al. 2010).
+- **Bacteria light whole seas.** A milky sea seen from orbit shines at 0.04 cd/m² or more over 15,400–100,000 km²
+  (Miller et al. 2005, 2021).
+- **People walk safely at 1 lux.** Walkers of every age see a 10-mm trip hazard at 1 lux (Fotios & Uttley 2018); a
+  summer full moon gives 0.05 lux (Kyba, Mohar & Posch 2017).
+- **A sky is light-polluted** where artificial light adds more than 8% to the natural zenith (Falchi et al. 2016).
+  Skyglow falls with distance to the power −2.5 in Walker's (1977) measurements and −2.3 in Garstang's (1986) model.
+- **Night life responds at very low light.** Light at 0.01 lux suppresses melatonin in fishes and rodents (Grubisic
+  et al. 2019); lit hedgerows held 47% fewer caterpillars (Boyes et al. 2021); at about 5 lux an unshielded LED caught
+  5.4 times a dark control's insects where a shielded one caught 1.3 times (Dietenberger et al. 2024); glow-worm mate
+  attraction may fall at 0.02–0.1 lux (Van den Broeck et al. 2021).
+
+Sources and how far each was read are in the
+[living-light study's register](../../research/studies/living_light/sources.json).

@@ -108,3 +108,11 @@ sensing and contractile control under the colony's slower coordination, as the a
 
 Next: one specified living sail tested for stability and failure; a population model on the latitude and solar-hour
 routes, with recruitment and the hazard; then measured tissue phosphorus and the seas' food web.
+
+## Living light, 11 October 2026
+
+The [living-light study](studies/living_light/README.md) answers the author's call to rely more on bioluminescence and
+to let lighting follow the twilit nights: today's glowing plants mark paths, a beetle-class luciferin cycle could light
+them for a small share of a plant's night store, the natural night serves walking on half the dry land, and the land
+under a light-polluted sky falls to 0.9–40% at 4–8 billion lunar residents. Next: the dark-night requirement's value,
+lamps for the dark belt, and a plant glowing with a beetle-class cycle.

@@ -32,6 +32,9 @@ From [research/decisions.md](../../research/decisions.md) unless named:
   symbioses, with several species sharing the work, and let a sky reef be partly animal-like, with a distributed
   control like a nervous system and no brain
   ([decisions](../../research/decisions.md#sky-reefs-partners-and-control-10-october-2026)).
+- On 11 October 2026 the author named the giant aerophytes Welkinia, let designed taxa be strange by Earth's standards,
+  and asked to rely more on bioluminescence and to let lighting follow the twilit nights
+  ([decisions](../../research/decisions.md#welkinia-strange-taxa-and-living-light-11-october-2026)).
 
 The author's standing directions on engineered organisms, developed soils, a mix of climates and imported elements
 had no row in the register. This branch adds the first two to the register's section "Life and people", in the
@@ -58,6 +61,7 @@ author's words.
 | The living sky | 162–413 Mt C of aerophyte biomass a year at 1% cover growing, 134–397 Mt mature, 38 Mt C of tenant sugar; tenants at 8–41% of their carbon limit on host food; 1.8–4.8 million albatross-scale grazers; a 25-minute buoyancy period for sudden loads; new phosphorus 3.5–61 kt a year mature and 13–165 kt growing with forest-floor pools | Screen values; design guesses stated as ranges; three independent review passes and a confirmation | [sky ecology](../../research/studies/sky_ecology/README.md), `results/sky_ecology.json` |
 | Guards and partners | Arrival within five minutes needs nests 5.1–25.5 m apart at 0.02–0.1 m/s; 10 g of live guards per m² take a quarter of the host's tenant food, 100 g more than all of it | Requirements screen with guessed traits; Earth precedents from primary studies | [guards and symbioses](../../research/studies/sky_ecology/symbioses.md), `results/symbioses.json` |
 | Living sails | One-way signals over a 5-km cable take 50 s to 4.6 h at 100–0.3 m/s; a 5-km water column holds 8 MPa; a lasting support system carrying replaceable sails, each with local control | Biological ideation with requirements arithmetic | [living sails](../../research/studies/aerophytes/sail_biology.md), `results/sail_biology.json` |
+| Living light | Brightest glowing plants give a hundredth of walking light; a beetle-class luciferin cycle lights a path for 2–10% of the night store; the natural night keeps walking light on 48% of the dry land; the land under a light-polluted sky 0.9–40% at 4–8 billion; the dark belt 13% of the dry land | Screen on Earth measurements, the solved sky and a single-scattering skyglow model; two review rounds | [living light](../../research/studies/living_light/README.md), `results/living_light.json` |
 | Giant aerophytes | Round bodies 50–700 m (cellulose-class tendons) and 1 km (300 MPa fibre) at 10 km, 1.5–3 km in canopy-like light; colonies of 60–150 m modules without a size limit; 2-km sky reefs in 36–544 years, 1-km round giants in 73–1,186; rain closes equatorward of 35–38° (51° with a CO₂-concentrating trait) | Screen values; design guesses stated as ranges; three independent numerical reviews | [aerophytes](../../research/studies/aerophytes/README.md), `results/aerophytes.json` |
 
 No biome map, soil model, water model of plants, trace-gas budget of the biosphere, animal physiology or aquatic
