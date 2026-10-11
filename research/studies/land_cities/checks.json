@@ -1,0 +1,123 @@
+{
+  "schema": "terluna.research.land-cities-checks/1",
+  "date": "2026-10-11",
+  "scope": "Arithmetic, bindings, solver and repository checks of the land-cities product; the groundwater solve is a screen in uniform rock over a flat base, with no structural or radiation-transport validation",
+  "focused": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest -q research/studies/land_cities",
+    "passed": 29,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 24,
+    "note": "Run with the ignored inputs present (atlas and drainage grids, the design climatology, LOLA 16 px/deg, GL0420A, the IAU gazetteer archive) and main's places readable through Git; without them the regeneration test skips"
+  },
+  "layer_check": {
+    "command": "python shared/check_layers.py",
+    "files": 873,
+    "violations": 0,
+    "note": "The stock check reads tracked files only, so it skips this untracked study; its lane rules applied to the six study files directly found 0 violations (research imports shared, geography, engineering and research)"
+  },
+  "solver_checks": {
+    "steady_strip": "the two-dimensional steady solve on a one-row strip matches (h + b)^2 = b^2 + (R/K) x (2L - x) within 1e-6 m (3e-11 m measured)",
+    "capped_strip": "the ground-capped strip pins from its analytic free boundary within one cell and matches the free mound within 2 m",
+    "rise_against_nonlinear_strip": "the rise in a strip keeps within 0.6% of a fully implicit nonlinear 1-D Boussinesq run at half its rise, 3.4% at 90% and 4.3% at 95%, and settles on the steady solve",
+    "tight_rock_first_rate": "with the high case's conductivity the rise follows the recharge over the specific yield within 2%; at the Tranquillitatis pit, rille K and the Schlueter pit the 2-D high-case rise reached the floor within 1% of the first rate (scratch check)",
+    "window": "the central capped water table at all 13 land positions is the same to 0.1 m for windows reaching 200, 300, 400 and 600 km (scratch check)",
+    "clipping_superseded": "a first version capped the water table by clipping after each step; at rille G it settled 28-65 m above the steady solve as the steps grew, so the cap is now settled inside each step as in the steady solve"
+  },
+  "independent_review": {
+    "round_1": {
+      "reviewer": "a read-only agent that recomputed the headline numbers without importing the study's modules (scripts in /media/projectspace/terluna-research/provisioning-runs/land_cities/review/)",
+      "recomputations": "14 of 14 PASS: ground above the sea at seven sites and all 52 classes; the vault; water pressure; seepage and pumping; the 1-D Tranquillitatis water table; the roof that holds air; the conduction lag; capacity and the totals; highland area; rain and lightning; towers; water lift; the sky boat's energies; the scattered communities",
+      "disagreements_and_errors": [
+        "README capacity rows for the rille segments and the Gruithuisen chain disagreed with the product",
+        "the undersea population was null through a wrong key",
+        "heat in Finding 14 and the tower table used 1.5 and 4.5 kW where the product uses 1.51 and 4.52",
+        "the residents' 5-28 GW was not in the product",
+        "Finding 2's first-rise times were lower bounds and left out rille H",
+        "the mound ratio of 2.46 holds only for a mound large against its base",
+        "the summit's rise was called the wettest and stormiest ground; the wettest and stormiest cell lies 327 km from the summit",
+        "the Kheyroddin comparison said about half where the model gives 18-41%",
+        "rounding: dry-land tubes, the dry-land share and Finding 16's mixed median and percentile",
+        "water_table() took values already rounded to three figures",
+        "rille H, 22.5 m below the common level on LOLA's 16 px/deg ground, was classed coastal",
+        "Atlas.cell() rounded half to even where locate() floors, so rille G took the wrong atlas cell",
+        "the coastal test compared distances exactly",
+        "the 1-D mound with a heuristic divide was not robust at single places (Tranquillitatis 97 m below the ground against 1,000-1,160 m of uncapped 2-D mound)",
+        "the cases did not bracket timing (the high case paired the slowest specific yield with the highest mound)",
+        "Gong et al.'s thickness is measured from the mare surface, used as the saturated depth below the shore",
+        "the sky boat's range test ignored the climb",
+        "a region took its picked candidate's class, so the Marius Hills counted as dry",
+        "the canyon sky view factor is a lower bound",
+        "the heliostat factor assumes a two-mirror train",
+        "zero-width top levels were counted and the GRAIL candidates took full-width levels",
+        "box_shares would divide by zero across 0 E",
+        "an unused variable; the ways-of-living home's far-side share is the towns' alone"
+      ]
+    },
+    "fixes": [
+      "the README capacity table now reads the product's sums by kind (tubes.capacity.by_type and by_candidate): rilles 1.7-3.0 and 24-42 million, the Gruithuisen chain 0.53-0.93 and 4.9-8.6 million",
+      "highlands.scattered reads residents_all_candidates: 48,600",
+      "heat at 1.51-4.52 kW: 129-387, 259-775, 431-1,290, 863-2,580 and 1,730-5,170 W/m2",
+      "the residents' energy, 5.18-28.0 GW, is in tubes.sealing.residents_energy",
+      "the 1-D water table is replaced by a 2-D Dupuit solve on the atlas with the ground cap (groundwater.py), in three cases, and a 2-D Boussinesq rise from the sea's level with times over the specific yield's range; the high case's times are the first rate, which its tight rock follows within 2%",
+      "the mound ratio is stated as its limits, 6.0 for a mound small against its base and 2.5 for one that dwarfs it, with 4.2-6.0 at the land places from the solve",
+      "Finding 11 names the far side's equatorial massif; the product carries the wettest and stormiest dry cell (19.8 mm a day, 0.072 flashes, 7.5 km up at 2.6 S, 208.6 E, 327 km from the summit) and the summit rings (13.3 mm and 0.048 within 100 km)",
+      "the Earth frame against designed towers is computed at 48 and 96 storeys: 17.8 and 38.7 kg/m2, 18-41% of 44-72 and 98-215",
+      "rounding and the median and percentile in Finding 16 corrected; the dry-land numbers follow the new region classes",
+      "raw ground and water depths feed the water table and the heads",
+      "a candidate below the common level on its own ground is under water by the atlas's rule: under the sea beside sea or atlas lake (rille H), else under a lake",
+      "Atlas.cell() floors, so a point on an edge falls in the cell to its south and east",
+      "coastal is 8-neighbour adjacency to standing water (the Schlueter pit is now coastal)",
+      "the base limitation is stated in the README and the product's assumptions",
+      "the sky boat's range with a 6 km climb is the fleet's 150 km less the 83 km of cruise the climb's 2.3 kWh buys, 67 km, keeping the fleet's hover allowance (the reviewer's 80 km left the allowance out)",
+      "a region straddles the coast when its candidates lie on both sides of it or its box lies 10-90% under the sea: the Marius Hills and rilles D, E1, H, L and N; rille K's place on the gravity box's edge and what it would remove are stated",
+      "the canyon factor is labelled a lower bound, with 55% of each street side open",
+      "the heliostat's two-mirror train is stated in its docstring",
+      "levels count only where the vault leaves width (9-12 levels); the GRAIL candidates take the lowest ten levels of a vault 0.15-0.22 of their width high",
+      "box_shares wraps across 0 E and returns no shares for an empty box",
+      "the unused variable is gone; the far-side share stands, since the towns and the districts share one home with the same share (0.857)"
+    ],
+    "round_2": {
+      "reviewer": "the same read-only agent (a2101718f38342246), recomputing without the study's code; its final report is saved as review/round2_report.md on the research drive",
+      "recomputations": "all five checks pass: the 2-D water table matches the product within 1.1 m at the five sites asked about (85 m below the ground at the Tranquillitatis pit); the classifications and the coast-straddling totals match exactly; the sky boat's range of 66.7 km with the 6 km climb",
+      "findings": [
+        "rise times run 3-5% long because the implicit steps grow to 25-29 years: 274 years to the Tranquillitatis floor against the product's 289",
+        "the high case stands at the ground at all 12 places; rilles G, K and L look 10-197 m dry only because their points sit on rises above their cells' mean ground",
+        "the rise keeps within 4.3% of the 1-D comparison at 95% of the rise, where the README said 4%",
+        "at the Schlüter pit the water table stands 6-24 m over the floor; with the neighbouring lake treated as land the shallowest floor sits 0.9 m above it",
+        "15 psf is 73 kg/m2, where the README said 72",
+        "the 0.46 kWh hover allowance includes the fleet's 500 m climb to its flight lane"
+      ],
+      "resolution": [
+        "the rise-time bias is carried explicitly in the README's method beside the review's figure; it moves no conclusion, since the times span 2.5 times across the specific yields",
+        "the five wording points are corrected in the README",
+        "the product was regenerated after groundwater.py gained step and horizon controls with its defaults kept: every number is identical, and only that file's hash changed"
+      ]
+    }
+  },
+  "literature": {
+    "agents": 2,
+    "notes": "/media/projectspace/terluna-research/provisioning-runs/land_cities/literature/ (tubes_notes.md, engineering_notes.md)",
+    "not_retrieved": [
+      "Robinson et al. 2012's pit table (the NAC values come from Ashley et al. 2011, Wagner & Robinson 2014 and the LROC atlas)",
+      "Chappaz et al. 2017's candidate list and sizes (the abstract gives the detection threshold only)",
+      "Kaku et al. 2017's depth, height and length (secondary values from Sauro et al. 2020 and Naito et al. 2020)",
+      "Carrer et al. 2024's main text (the conduit's width disagrees across secondary reports)",
+      "Blair et al. 2017 and Theinat et al. 2020 themselves (their maps read from Williams 2021's reproductions)",
+      "Hurwitz et al. 2013's rille table; Wagner & Robinson 2022's tables; Watters et al. 2019's full text",
+      "a primary lunar peak ground acceleration",
+      "EN 16798-1 and EN 12464-1 / EN 17037 texts (secondary summaries used); measured light-guide transmission against length"
+    ]
+  },
+  "not_run": [
+    "make check (not run on this branch, by instruction)",
+    "the repository-wide Python suite"
+  ],
+  "unperformed": [
+    "a groundwater model of the maria with layered basalt, the crust beneath and the seas filling it from below, at the drainage grid's resolution",
+    "a structural model of tube roofs under water pressure and moonquakes",
+    "terrain-resolving winds over the highland cities",
+    "measured tube interiors beyond tens of metres from a pit",
+    "the distribution of people, which is the author's to choose in step six"
+  ]
+}
