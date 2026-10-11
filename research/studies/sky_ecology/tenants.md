@@ -97,9 +97,10 @@ pays for tenants from what its surplus leaves after replacing its dead at the ad
 the high hazard ([food web](food_web.md)).
 
 **Larger bodies have greater static load allowances.** Dividing those allowances by individual mass gives
-mass-equivalent counts, not safe simultaneous arrivals. For the 1.7-t albatross-scale case, the 100-m round body has
-roughly one flyer equivalent by trim and 19 including water. The corresponding counts are 9 and 82 at 200 m,
-137 and 594 at 500 m, and 1,100 and 2,900 at 1 km. The 60-m reef module's trim equivalent is below one such flyer.
+mass-equivalent counts; flyers arriving together are a step load, timed in the next section. For the 1.7-t
+albatross-scale case, the 100-m round body has roughly one flyer equivalent by trim and 19 including water. The
+corresponding counts are 9 and 82 at 200 m, 137 and 594 at 500 m, and 1,100 and 2,900 at 1 km. The 60-m reef module's
+trim equivalent is below one such flyer.
 
 ## How sudden is sudden
 
@@ -167,7 +168,7 @@ upkeep through the ties from the green modules around it, paid from 10–30% of 
 
 The upkeep's low end gives the guards no food and the high end 0.1 kg C/m² a year of food bodies. Small domatia are
 cheap and carry most; 100–150 m landing domatia have mass equivalents of one to four albatross-scale flyers by trim and
-21–49 including water. Peripheral placement is a proposed arrangement, not a demonstrated landing system.
+21–49 including water. Their place at the reef's edge is proposed; how flyers land there remains to be worked out.
 
 ## Guilds and mutualisms
 
@@ -183,11 +184,11 @@ cheap and carry most; 100–150 m landing domatia have mass equivalents of one t
 | Bud dispersers | visitors | the nursery partnership of the aerophyte growth note | none | | none | carry buds to the crowns and are paid in food |
 
 Weights other than the flyers', the water and the epiphytes' are design guesses. The guard entry is collective mass per
-footprint area, with live versus dry mass unspecified; it gives neither an individual size nor a defense requirement or
-upper limit. The [guards and symbioses analysis](symbioses.md) explores explicitly live-mass scenarios, complementary
-guilds, local response and shared food budgets. The reference organism allocates 0.1 kg C per m² a year to all tenants,
-counted once across guilds. This is 12–18% of a 60-m reef module's net production (its biomass and the sugar together),
-two and a half to three and a half times Macaranga's share.
+footprint area, live or dry unspecified; individual size, the guard mass that defence requires and the most a reef can
+carry are open. The [guards and symbioses analysis](symbioses.md) works with explicit live-mass scenarios,
+complementary guilds, local response and shared food budgets. The reference organism allocates 0.1 kg C per m² a year
+to all tenants, counted once across guilds. This is 12–18% of a 60-m reef module's net production (its biomass and the
+sugar together), two and a half to three and a half times Macaranga's share.
 
 ## The canopy nursery inoculates the young
 

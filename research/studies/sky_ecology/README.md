@@ -1,9 +1,11 @@
 # Aerophytes in the living sky: food, tenants and phosphorus
 
-**Partial ecology screen, extended 10 October 2026.** The interrupted work was preserved in checkpoint `980d203`.
-The [guards and symbioses analysis](symbioses.md) now separates body size from collective biomass, examines local
-response and shared food costs, and compares reciprocal partnerships using primary literature. [Status](status.md)
-records the subsequent accounting repairs and remaining limits; none of the tables demonstrates a viable community.
+**Partial ecology screen, extended 10 October 2026.** The interrupted work is preserved in checkpoint `980d203`. The
+[guards and symbioses analysis](symbioses.md), which the author asked for
+([decisions](../../decisions.md#sky-reefs-partners-and-control-10-october-2026)), separates body size from collective
+biomass, examines local response and shared food costs, and compares reciprocal partnerships from the primary
+literature. [Status](status.md) records the accounting repairs since the checkpoint and what remains open, including
+whether the communities in these tables are viable.
 
 The author asked on 10 October 2026: "How do these things integrate with the broader aerial ecosystem and global
 ecosystem? Smaller ones can probably be eaten as part of the food chain. Larger ones could probably become homes for
@@ -101,8 +103,9 @@ new bodies, and a mature one, whose bodies hold their size while recruits replac
     Venting ballonet air within minutes expands the gas adiabatically and takes 71% of the equivalent at once;
     dropping water takes all of it within seconds to minutes at no cost in superpressure, from the damage reserve.
     Spread through a 2-km raft, a module's 0.63–2.1 t sinks it 17–39 cm.
-  - **Larger bodies have greater static allowances.** Pressure-trim mass equivalents are 15 t at 200 m, 236 t at 500 m
-    and 1,890 t at 1 km. Dividing by flyer mass gives equivalents, not demonstrated arrivals.
+  - **Larger bodies have greater static allowances.** Pressure-trim mass equivalents are 15 t at 200 m, 236 t at
+    500 m and 1,890 t at 1 km. Divided by a flyer's mass they give flyer equivalents, and a flock landing at once is
+    a step load, as above.
   - **Gas carbon binds giants.** Tenants need gas, and 10–30% of a century's surplus buys it for 2,700–36,700 t on a
     1-km giant. A mature body pays for them from what its surplus leaves after replacing its dead: a third to
     nine-tenths of a 1-km giant's with photolytic gas, and nothing for fermented giants at the high hazard.
@@ -179,9 +182,9 @@ in part by the sea.
 
 ## How the study is built
 
-Run `python -m research.studies.sky_ecology.run` and `python -m research.studies.sky_ecology.symbioses`;
-both write to ignored `research/runs/sky_ecology/` by default. After review, their products can be promoted into
-`results/`; `--output` selects an explicit destination. Check with `python -m pytest research/studies/sky_ecology`. The
+Run `python -m research.studies.sky_ecology.run` and `python -m research.studies.sky_ecology.symbioses`. Both write
+to ignored `research/runs/sky_ecology/` by default, `--output` selects an explicit destination, and reviewed products
+are promoted into `results/`. Check with `python -m pytest research/studies/sky_ecology`. The
 [product](results/sky_ecology.json) (schema `terluna.research.sky-ecology/1`) records the bindings, the evidence
 statement and the reading rule.
 
@@ -199,10 +202,11 @@ statement and the reading rule.
   They are read in-tree once their hashes match there, and from Git until then.
 - **The 28% atlas grid**, an ignored input, places the routes over land and sea when present.
 
-**Records.** [Current checks](symbioses_checks.json) cover the follow-up; [checkpoint checks](checkpoint_checks.json)
-preserve its initially failing provenance tests. The shared constants the code reads are recorded by name and value.
-Literature sources and what was read are in [sources.json](sources.json); the three independent review passes, their
-findings and their fixes are in [checks.json](checks.json).
+**Records.** [Current checks](symbioses_checks.json) cover the guards and symbioses follow-up, and
+[checkpoint checks](checkpoint_checks.json) keep the checkpoint's provenance tests as they first failed. The shared
+constants the code reads are recorded by name and value. Literature sources and what was read are in
+[sources.json](sources.json); the three independent review passes, their findings and their fixes are in
+[checks.json](checks.json).
 
 | Component | Holds |
 |---|---|

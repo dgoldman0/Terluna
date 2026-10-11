@@ -34,11 +34,13 @@ from [run.py](run.py) unless marked *derived*:
   wind shortens the solar cycle to 21 days at 10 km and 15 days at 20 km at the equator. In the CM1 rings the low
   evening flow lingers near sunset for three to six weeks; a westward branch 5–10% weaker would cut that to 10–18
   days. [Sailing](sailing.md).
-- **Living sail anatomy.** A [biological design study](sail_biology.md) proposes durable suspension, renewable blades
-  and local sensing and motor organs, with slower colony coordination. It compares growth, supply, seasonal loss,
-  partners and multiple uses. Its separate [requirements product](results/sail_biology.json) calculates signal delay,
-  fluid head, retrieval, local torque and renewal under explicit scenarios; it does not validate steering or change
-  the saved sailing speeds. The old force balance assigns the sign of lift and assumes an airfoil can provide it.
+- **Living sail anatomy.** A [biological design study](sail_biology.md) proposes durable suspension carrying renewable
+  blades, with local sensing and motor organs at each sail and slower coordination across the colony, as the author
+  directed ([decisions](../../decisions.md#sky-reefs-partners-and-control-10-october-2026)). It compares growth, supply,
+  seasonal loss, partners and multiple uses. Its separate [requirements product](results/sail_biology.json) calculates
+  signal delay, fluid head, retrieval, local torque and renewal under explicit scenarios and leaves the saved sailing
+  speeds unchanged. Those speeds come from a force balance that assigns the sign of lift and assumes an airfoil can
+  provide it; steering by a living sail remains to be tested.
 - **The canopy nursery.** Megaforest crowns can raise juveniles to 50–60 m, the smallest round bodies that float with
   their reserve, in one to seven years from fermented host sugar and their own light, with water and phosphorus drawn
   from the host's sap as mistletoes draw theirs. Beyond that the gas outgrows any host (a 200-m body's trimmed gas is
@@ -94,11 +96,11 @@ SHA-256 and records the shared constants its code reads. [Checks](checks.json) r
 | [gas biology](gas_biology.md) | Swim bladders, guanine barriers, the man-of-war's gas gland, siphonophores |
 | [resources](resources.md) | Membrane, food, fibre, shade, hazards |
 
-Run `python -m research.studies.aerophytes.sail_biology` for the later anatomy requirements calculation. Its default
-output is ignored `research/runs/aerophytes/sail_biology.json`; the curated [product](results/sail_biology.json)
-uses schema `terluna.research.aerophyte-sail-biology/1`. It reads a pinned copy of the existing aerophyte result,
-records the constants it uses, and has its own [sources](sail_biology_sources.json) and
-[checks](sail_biology_checks.json). It is separate from the original integrated producer.
+The living-sail requirements calculation runs separately from the original integrated producer:
+`python -m research.studies.aerophytes.sail_biology` writes by default to ignored
+`research/runs/aerophytes/sail_biology.json`, and the curated [product](results/sail_biology.json) uses schema
+`terluna.research.aerophyte-sail-biology/1`. It reads a pinned copy of the existing aerophyte result, records the
+constants it uses, and has its own [sources](sail_biology_sources.json) and [checks](sail_biology_checks.json).
 
 ## Air and units
 
@@ -186,8 +188,8 @@ north and south between the rain and the twilight. [Navigation](navigation.md), 
 
 ## What would decide it next
 
-1. **A locally controlled living sail.** Specify one wet panel's support, actuator and sensory delay; test moments,
-   stability, passive unloading and failure before assigning steering capability. Then close service, growth and
+1. **A locally controlled living sail.** Specify one wet panel's support, actuator and sensory delay, and test its
+   moments, stability, passive unloading and failure; those decide whether it can steer. Then close service, growth and
    renewal costs and connect multiple sails to the reef. [Biological requirements](sail_biology.md).
 2. **A joint wet membrane test.** Hydrogen, oxygen and nitrogen permeation, sustained-load strength and creep at the
    renewal interval, seams and joints, tear arrest and healing time, on one assembled living-compatible film, with and

@@ -1,25 +1,25 @@
 # Sailing and shape
 
-**The Open Moon's mean wind blows east at every height above about 2 km, so no layer carries an aerophyte west with
-the Sun; sailing instead moves aerophytes north and south, 30–70° of latitude in a lunar day, and the high eastward
-winds shorten their nights.** The design GCM's layer-mean eastward wind is −0.17 m/s at its lowest level, about
-0.7 km above the ground, 0.45 m/s at 4 km, 1.75 m/s at 10 km, 3.5 m/s at 18 km, 6.8 m/s at 29 km and 12 m/s at 42 km.
-Holding the Sun needs a westward ground speed of 4.3 cos(latitude) m/s ([navigation](navigation.md)). A wing on a long
-tether turns the shear between two layers into a cross-wind force, as a sail does between air and water, and a body
-that rides the eastward wind aloft sees the Sun return sooner. Numbers are *screen* values (`sailing` in the
-product). A wind product resolved by latitude and solar hour, being built on another branch, will replace the single
-global-mean profile and the five CM1 rings used here.
+**The Open Moon's mean wind blows east at every height above about 2 km, so no layer carries an aerophyte west with the
+Sun; sailing instead moves aerophytes north and south, 30–70° of latitude in a lunar day, and the high eastward winds
+shorten their nights.** The design GCM's layer-mean eastward wind is −0.17 m/s at its lowest level, about 0.7 km above
+the ground, 0.45 m/s at 4 km, 1.75 m/s at 10 km, 3.5 m/s at 18 km, 6.8 m/s at 29 km and 12 m/s at 42 km. Holding the Sun
+needs a westward ground speed of 4.3 cos(latitude) m/s ([navigation](navigation.md)). A wing on a long tether turns the
+shear between two layers into a cross-wind force, as a sail does between air and water, and a body that rides the
+eastward wind aloft sees the Sun return sooner. Numbers are *screen* values (`sailing` in the product). The design winds
+resolved by latitude, height and solar hour now exist on the provisioning branch (`climate/gcm/zonal_winds.md`), and
+this screen still uses the single global-mean profile and the five CM1 rings.
 
 The GCM's sigma levels are placed by the wind product's pressure profile from 2.5 km up, where it agrees with
 ρgΔz to 1%; its 0 km pressure is not hydrostatic with the levels above, so the lowest level is placed by extending
 the 2.5–5 km log-pressure profile downward, to 0.74 km.
 
-The later [living sail analysis](sail_biology.md) makes a missing assumption explicit: the force balance assigns
-positive or negative sideways lift and fixed coefficients; it does not supply the anatomy that selects and holds
-that orientation. Its speeds remain conditional on a controllable surface. Local actuators, distributed sensing,
-growth, service and renewal are now compared in a separate requirements product; the saved speed calculation is
-unchanged. The latitude- and solar-hour-resolved winds are available at the pinned cross-branch revision used by
-[sky ecology](../sky_ecology/run.py), but active sail trajectories have not yet been coupled to them.
+The force balance below assigns positive or negative sideways lift with fixed coefficients, so its speeds hold for a
+surface that can select and hold that orientation. The later [living sail analysis](sail_biology.md) proposes the
+anatomy for it, comparing local actuators, distributed sensing, growth, service and renewal in a separate requirements
+product, and leaves the saved speed calculation unchanged. The latitude- and solar-hour-resolved winds are available at
+the pinned cross-branch revision that [sky ecology](../sky_ecology/run.py) uses; active sail trajectories are still to
+be coupled to them.
 
 ## Riding the eastward wind shortens the night
 
@@ -52,11 +52,12 @@ flow exceeds the Sun's pace and holds bodies at 51° past noon, the Sun 6° up, 
 of 8.7 days.
 
 **The margins are small, so the lingering is a possibility to test.** The equatorial body drifts at 3% of the wind's
-speed relative to the Sun. With the westward branch 5% weaker the equatorial dwell falls from 28 to 15 days, at 10%
-to 10 days and at 20% to 6.5; at 45° N from 39 to 18, 12 and 7 days; at 45° S from 21 to 13, 10 and 6 days. The 80° S
-hold survives a 5% weaker branch and becomes a 34-day dwell at 10%. The rings are two-dimensional: air cannot
-converge on their storms from the sides, which likely strengthens the low westward branch. The coming wind product
-will settle it.
+speed relative to the Sun. With the westward branch 5% weaker the equatorial dwell falls from 28 to 15 days, at 10% to
+10 days and at 20% to 6.5; at 45° N from 39 to 18, 12 and 7 days; at 45° S from 21 to 13, 10 and 6 days. The 80° S hold
+survives a 5% weaker branch and becomes a 34-day dwell at 10%. The rings are two-dimensional: air cannot converge on
+their storms from the sides, which likely strengthens the low westward branch. The design climate's winds by latitude
+and solar hour hold the hour within 1 m/s in 5% of 3-day means within 20° of the equator (18% just after sunset) and in
+18–31% in the lowest 5 km at 40–75°, so in the GCM the lingering belongs to the middle and high latitudes.
 
 **The lingering hour is beautiful and stormy.** The equatorial sunset band at 1 km sits at the evening end of the
 afternoon storm sector, where land rain still falls at 0.4–0.55 mm/h: a low aerophyte there lives in long sunset
@@ -112,12 +113,19 @@ coastal and sea aerophytes; a high aerophyte's tether would have to reach 10–2
 against 0.42 m/s at 10 km with a tenth-area wing) while the cross-shear speed stays near 0.6–0.8 m/s. Flat colonies
 and quilts are broadside to vertical gusts and edge-on to horizontal ones; tilted, a quilt is itself a wing.
 
-## What the coming wind product will settle
+## What the design winds settle
 
-- North–south winds: the rings and the global-mean profile carry none, so the mean meridional drift is open.
-- The westward branch's strength and hour at every latitude and height, which decides where sunset lingering and
-  Sun-held hours exist.
-- Shear by latitude and hour, which sets the sailing speed along real paths.
+The design climate's winds by latitude, height and solar hour (`climate/gcm/zonal_winds.md`, domain/provisioning,
+from 3-day means at T21) answer the three questions this screen left:
+- **North–south winds.** Near the ground the equatorward inflow runs 0.5–0.9 m/s between 10° and 70°, and at 40–60 km
+  a poleward drift of 0.03–0.08 m/s; passive routes gather near the equator close to the ground and over the poles at
+  40–60 km.
+- **The westward branch.** It exists only in the lowest few kilometres, and holds the hour within 1 m/s in 18–31% of
+  3-day means in the lowest 5 km at 40–75°, from the late afternoon into the night.
+- **Shear.** About 4 m/s over 15 km in the lowest 20 km and 6 m/s in and below the flight band; aloft it is the eastward
+  wind's growth with height, steady within about 10% through the solar day.
+
+Coupling these winds to sailing paths, with a sail that can hold its angle, is the next step.
 
 ## Sources and checks
 

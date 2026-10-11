@@ -118,10 +118,10 @@ lean, as a forest's is.
 
 The phosphorus-limited consumer ledger reports the same tissue production as the food-web totals. Assimilated carbon
 that the carbon-only efficiency would have put into tissue remains an explicit **unallocated assimilate** pool after the
-phosphorus limit: on a reef module 18–26 g C per m² a year, 59–92% of level 2's carbon potential, and 7–10 Mt C a year
-at 1% cover, outside the sky snow's carbon. Its fate could involve changed respiration, excretion, storage or intake;
-this screen does not decide that physiology or credit the pool to predators or litter. Accounting closure therefore
-includes that unresolved pool and is not a complete physiological model.
+phosphorus limit: on a reef module 18–26 g C per m² a year, 59–92% of level 2's carbon potential, and 7–10 Mt C a
+year at 1% cover, outside the sky snow's carbon. Its fate could involve changed respiration, excretion, storage or
+intake. The screen leaves that physiology open and keeps the pool apart from predators and litter, so the carbon
+accounts close with the pool as its own entry.
 
 ## How many great flyers the sky feeds
 
