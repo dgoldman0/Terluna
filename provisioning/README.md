@@ -408,6 +408,47 @@ summit metropolis, taller cities, and the large lava tubes as the first phase's 
     a tenth of that with 90% recovered.** With half to three quarters of the ground's people in the highlands, the
     scattered communities hold 0.5–3 billion.
 
+### Distributions of people
+
+The author's decisions of 11 October set step six: 4–8 billion on the Moon with plenty kept wild, 2–4 billion of them
+aloft, the ground's people mostly in the drier highlands round the summit metropolis, and the array and the colonies
+carrying a decent share ([register](../research/decisions.md#people-on-the-moon-and-beyond-11-october-2026)). The study
+is [distributions](../research/studies/distributions/README.md); numbers here are from it.
+
+51. **The Moon carries 4–8 billion people with 61–94% of its dry land wild outside a kept 30%, and 31–92% outside a
+    kept half.** On the food study's power-heavy mix with half aloft, 4 billion leave 84–94% and 77–92%, 6 billion
+    76–91% and 61–88%, and 8 billion 64–88% and 34–84%. Checked band by band with the settlement in place, everything
+    fits outside a kept 30% and at 4 and 6 billion outside half. At 8 billion outside half every high-cost corner
+    overfills a band, the middle-wet zone's fields and towns at all of them, and the favourable end leaves 76–84%
+    wild. Three placements together fit every corner for twice the water lift: the dry highland towns poleward of 45°
+    first, the scattered communities gathered on the twilit and Earthlit homes, and the middle band's communities on
+    the fog-desert side of their homes.
+52. **The ground's 2–6 billion live in the summit metropolis, the dry highland cities and towns scattered across the
+    Moon, on 0.13–1.1 million km², 0.56–4.7% of the dry land.** The dry highland cities poleward of 30°, tower
+    districts of thirty storeys and highland towns on crater walls, hold 1.1–4.4 billion and settle 6.5–33% of the dry
+    high ground outside a kept 30%. They light almost none of the sky: 0–36 m² a person at 30–45° and none poleward of
+    45°.
+53. **The Moon uses 11–131 TW of primary energy; with fusion it takes 9.2–119 TW of heat, answered by 0.080–1.7% more
+    dimming, and with power from the array 7.7–71 TW and 0.066–0.98%.** The residents give 66–74% of the heat at the
+    favourable end. At the high-cost end with half aloft, remaking the sky towns' hydrogen after 10% of it is lost a
+    year gives 45%.
+54. **Two to four billion aloft live in 348,000–696,000 sky towns, 6.2–8.7 km apart outside a kept 30%, shading
+    0.72–1.44% of the Moon.** In the equatorial band, where the winds gather them, a town comes within three diameters
+    of another 0.50–20 times a day, and the fleet 0.066–5.3 million times, for tracking and traffic control to
+    resolve.
+55. **Regional weaknesses serve the whole.** A 50 km tube under 500 m of sea seeps 0.058–5.8 km³ of fresh water a
+    year, enough to water fields for 0.050–22 million people, and the Near-side Sea's sediment receives phosphorus for
+    19.5–226 million. Six undersea communities lie within 250 km of a mapped submerged tube, and joined they hold
+    1.07–28.6 million. The lake deltas' sediment and the towns' struvite return the farms' phosphorus. The fog desert's
+    glass drinking piped sea water can feed a billion highland residents on 0.25–0.97 million km², and the far side's
+    dark belt keeps the Moon's dark nights.
+56. **Four distributions of 25–30 billion stand for the author's choice.** Earth holds 9 billion in each, within the
+    10.2 billion that eat inside four planetary boundaries. A puts the Moon at 4 billion (2 on the ground, 2 aloft),
+    the array at 7 and the colonies at 5; B the Moon at 6 (3 and 3), 6 and 4; C the Moon at 8 (4 and 4), 5 and 3; D 30
+    billion with the Moon at 8 (6 and 2), the array at 8 and the colonies at 5. Everyone's primary energy is 60.1–274
+    TW; per billion the array needs 248–990 Gt of shield and 1,005 Gt of habitat, and the colonies 3.39–14.4 TW. Earth
+    at 8 or 11 billion moves each total by one billion down or two up.
+
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting statements
@@ -433,5 +474,6 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 | [sources.json](sources.json) | Every source cited, its use and how far it was read |
 | [../research/studies/food_systems/README.md](../research/studies/food_systems/README.md) | Food systems per billion residents, their fit to the lunar cycle and seven mixes for 4, 6 and 8 billion, with each mix's feasible range |
 | [../research/studies/land_cities/README.md](../research/studies/land_cities/README.md) | Lava tubes against the 28% atlas, their water and capacity, and highland and tall cities |
+| [../research/studies/distributions/README.md](../research/studies/distributions/README.md) | Four distributions of 25–30 billion across Earth, the Moon, the array and the colonies, with the Moon's land bands, energy, water, phosphorus, light and sky at 4–8 billion and the synergies among places |
 
 `python -m provisioning.screen` rewrites the product; `python -m pytest provisioning/tests` checks it.

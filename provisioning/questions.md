@@ -21,31 +21,30 @@ on this laptop. The findings behind them are in the [README](README.md).
      column; then the added dimming that holds the planned climate's energy budget. The climate programme stays
      paused.
    - **Whose:** the shield's work on its films.
-2. **The distribution of people among the ways of living.** The [shared comparison cases](../shared/scenarios/population.json)
-   set lunar surface and aerial settlements beside Earth and the orbital habitats. The
-   [inhabited-volume screen](../research/studies/inhabited_volume/README.md) makes lift, wet mass, floor area,
-   projected footprint, holding power and domestic recovery explicit. The
-   [ways-of-living study](../research/studies/ways_of_living/README.md) gives eighteen settings with their physical
-   situation, their costs per billion and the cases' totals by mix: every mix carries every case at its own split,
-   with food, the dark night and the sky towns' hydrogen the largest costs.
-   - **What decides it:** the author's choice among the costs, after how people live
-     ([daily life](../research/studies/daily_life/README.md)) and where the land's cities stand
-     ([land cities](../research/studies/land_cities/README.md)), steps five and six of the approved order.
+2. **The distribution of people.** The [distributions study](../research/studies/distributions/README.md) gives four
+   distributions of 25–30 billion for the author's choice, each with its costs, assumptions and uncertainties, after
+   the [ways-of-living](../research/studies/ways_of_living/README.md),
+   [daily-life](../research/studies/daily_life/README.md) and [land-cities](../research/studies/land_cities/README.md)
+   studies. The Moon at 4–8 billion with 2–4 aloft leaves 61–94% of its dry land wild outside a kept 30% and 31–92%
+   outside a kept half; at 8 billion outside half only the favourable end fits as spread, and three placements
+   together fit every corner.
+   - **What decides it:** the author's choice among the four, and the shares of wild land and of the dark sky the
+     author keeps.
    - **What remains to size:**
-     - town and hull designs, with their structure, gas cells and wet mass;
-     - drifting districts' routes, their steering against the gathering the design winds show (onto one track within
-       months near the ground, over the poles within years at 40–60 km), their storm routing and rendezvous
-       ([climate/gcm/zonal_winds.md](../climate/gcm/zonal_winds.md));
-     - rain at the sky towns' height;
-     - crop water in the plant model;
-     - nutrient return;
-     - the dark-night requirement's value;
-     - health over a lifetime at a sixth of Earth's gravity.
-     - the lava tubes' groundwater beyond the two-dimensional screen: layered basalt, the crust beneath and the seas
-       filling it from below, and the GRAIL candidates' own sizes ([land cities](../research/studies/land_cities/README.md));
-     - the highland cities' water lift and recovery poleward of 45°, where the high ground's runoff is almost none;
-     - the undersea cities joined to the lava-tube habitation, and the division of labour and synergies among places
-       that turn regional weaknesses into strengths, as the author asked for step six.
+     - the dry highland cities' water and land poleward of 45°, where the high ground's runoff is almost none;
+     - an overlay of the scattered homes on the food study's zones, and the middle band's towns beside the
+       middle-wet fields;
+     - town and hull designs, the sky towns' heights beside the aerophytes and sky reefs, the traffic rules on the
+       shared tracks, the relative drift of neighbours below the 170 km winds' resolution, and rain at the towns'
+       height;
+     - how fast the lake deltas can be dredged without harming their life, and the struvite routes;
+     - the joined undersea and tube cities' passages, pumps and harbours, and the tubes' groundwater beyond the
+       two-dimensional screen ([land cities](../research/studies/land_cities/README.md));
+     - the array's habitats as designs, and the colonies' capacity;
+     - crop water in the plant model, and health over a lifetime at a sixth of Earth's gravity.
+
+   **How:** the author's choice first; then the land-cities water screen poleward of 45°, a sky-traffic model on the
+   design winds at kilometre scale, and the resources work's dredging rates.
 3. **The power system through the night.** Fusion is a planning assumption and a conditional technology. The
    alternatives:
    - a grid from the day side, with 9–19% losses over 4,000–5,500 km;
