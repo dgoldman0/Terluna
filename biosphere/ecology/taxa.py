@@ -54,6 +54,12 @@ AEROPHYTES_BIO = 'research/studies/aerophytes/biology.md'
 AEROPHYTES_SAIL = 'research/studies/aerophytes/sailing.md'
 AEROPHYTES_GAS = 'research/studies/aerophytes/gas_biology.md'
 AEROPHYTES_GROW = 'research/studies/aerophytes/growth.md'
+AEROPHYTES_SAIL_BIO = 'research/studies/aerophytes/sail_biology.md'
+SKY = 'research/studies/sky_ecology/README.md'
+SKY_FOOD = 'research/studies/sky_ecology/food_web.md'
+SKY_TENANTS = 'research/studies/sky_ecology/tenants.md'
+SKY_P = 'research/studies/sky_ecology/phosphorus.md'
+SKY_SYM = 'research/studies/sky_ecology/symbioses.md'
 MEGA = 'research/studies/megaforest_wind/README.md'
 PATCH = 'research/studies/forest_patch/README.md'
 SEA = 'research/studies/sea_appearance/README.md'
@@ -529,6 +535,32 @@ MODULES = (
     module('M28', 'compartmented gas', 'Gas held in many small wet compartments or modules, so that a tear or a '
            'lightning strike empties or burns one at a time', status='hypothesis', basis='idea',
            sources=[src(AEROPHYTES, 'The limits, in brief')]),
+    module('M29', 'domatia', 'Colony modules grown for tenants: no green top, a light living layer that keeps the '
+           'skin and makes the module\'s gas, the round bodies\' spare pressure and a full water store, fed through '
+           'the ties by the green modules around it; a 60-m domatium carries 11 kg/m2 of tenants against a green '
+           'module\'s 3.4', status='hypothesis', basis='idea',
+           references=[ref('siphonophores', 'specialise their zooids as float, feeders, swimmers and reproductive '
+                           'members'),
+                       ref('Macaranga triloba', 'puts about 5% of its daily above-ground production into food bodies '
+                           'for its ant guards')],
+           sources=[src(SKY_TENANTS, 'Domatia'), src(SKY_SYM, 'Threats and complementary defenders')]),
+    module('M30', 'litter-catching pools', 'Tank membranes across the pockets between a reef\'s modules, and '
+           'catchments on round bodies, hold the water store as pools where decomposers mineralise litter, frass and '
+           'droppings and the host takes the phosphate back; with them a mature sky recycles 89-98% of the '
+           'phosphorus it cycles, and 32-72% without', status='hypothesis', basis='idea',
+           references=[ref('tank bromeliads', 'hold up to 50,000 litres of water a hectare in a cloud forest; a '
+                           'jumping spider\'s debris supplies 18% of one\'s nitrogen')],
+           sources=[src(SKY_P, 'The sky\'s own loop'), src(SKY_TENANTS, 'Real estate')]),
+    module('M31', 'distributed excitable control', 'Excitable tissue and local control knots that sense strain and '
+           'airflow at each sail and organ and move it through opposing contractile tissue, under slower '
+           'coordination across the colony and with no brain: a sky reef partly animal-like, on neither a plant\'s '
+           'nor an animal\'s plan', status='hypothesis', basis='direction',
+           references=[ref('plant electrical and calcium signalling', 'a wound sets off a glutamate-triggered calcium '
+                           'wave that travels through the whole plant'),
+                       ref('clonal clover', 'connected ramets pass induced defences along their stolons'),
+                       ref('siphonophores', 'colonies whose specialised swimming and feeding members act together')],
+           sources=[src(AEROPHYTES_SAIL_BIO, 'Control without a central brain; Signal distance and actuator effort'),
+                    src(DEC, 'Sky reefs\' partners and control')]),
     module('M22', 'spectral tuning', 'Paler upper leaves, photosynthesis into the far red and clumped foliage; they add '
            '3%, 6% and 3% on the Moon, where the diffuse sky already does most of what they do', status='set_aside',
            basis='selected', sources=[src(LCE, 'A2; Set aside')]),
@@ -570,7 +602,7 @@ G.append(group('G01', 'aerophytes', 'Large photosynthetic aerial organisms with 
                 ref('Clostridium', 'dark-fermentation hydrogen')],
     form='drifter', form_candidates=['sailor'], settings=['low_sky', 'storm_layer', 'canopy'], realm='sky',
     guilds=['producer', 'receiver'], night=['twilight', 'terminator_following', 'store', 'idle'],
-    clock=['undetermined'], modules=['M18', 'M19', 'M20', 'M21', 'M27', 'M28'], status='hypothesis',
+    clock=['undetermined'], modules=['M18', 'M19', 'M20', 'M21', 'M27', 'M28', 'M30'], status='hypothesis',
     basis='direction',
     tests=['one assembled wet gas barrier', 'a trajectory of water, carbon, gas and trim along a sailing path through '
            'storms, twilight and humid layers'],
@@ -585,6 +617,7 @@ G.append(group('G01', 'aerophytes', 'Large photosynthetic aerial organisms with 
              src(AEROPHYTES_SAIL, 'Riding the eastward wind; Sailing between two layers'),
              src(AEROPHYTES_GAS, 'Siphonophores; The swim bladder\'s gas gland'),
              src(AERIAL, 'Large photosynthetic organisms and their wet mass'),
+             src(SKY, 'The food web; Tenants; Phosphorus'),
              src(DEC, 'Cross-domain ecology follow-up; Aerophyte light-history correction; Sky giants')]))
 G.append(group('G02', 'lesser aerophytes', 'Aerophytes of the coupled study\'s reference organism: spheres of '
     '40-150 m at about 10 km, the size the giants grow from; the young can grow to 40-60 m in megaforest crowns, '
@@ -595,23 +628,28 @@ G.append(group('G02', 'lesser aerophytes', 'Aerophytes of the coupled study\'s r
     basis='idea', sources=[src(AEROPHYTES, 'The reference organism'), src(AEROPHYTES_GROW, 'The canopy nursery')]))
 G.append(group('G03', 'giant aerophytes', 'Aerophytes that keep growing for centuries, like the oldest trees: sky '
     'reefs, colonies of wet modules 60-150 m across on a raft one or two kilometres wide, which regrow what storms '
-    'take, or round bodies of hundreds of metres to a few kilometres in eight to over a hundred compartments', parent='G01', anchor='Eukaryota',
-    degree='lineage',
+    'take, or round bodies of hundreds of metres to a few kilometres in eight to over a hundred compartments',
+    parent='G01', anchor='Eukaryota', degree='lineage',
     chassis=['as the aerophytes'],
     references=[ref('Pinus longaeva', 'the oldest known living eukaryote, 4,770 years old in 2005', ['flanary_2005']),
                 ref('trees of 403 species', 'mass growth rate rises continuously with size as leaf area outpaces '
                     'the fall in productivity per leaf area', ['stephenson_2014']),
                 ref('siphonophores', 'the colonial plan: specialised modules added at growth zones')],
     form='giant', settings=['low_sky', 'storm_layer'], realm='sky', guilds=['producer', 'receiver'],
-    night=['twilight', 'terminator_following', 'store', 'idle'], clock=['undetermined'], status='hypothesis',
-    basis='direction', tests=['fittings, seams, gusts and damage, then water and storms'],
+    night=['twilight', 'terminator_following', 'store', 'idle'], clock=['undetermined'], modules=['M29', 'M31'],
+    status='hypothesis', basis='direction', tests=['fittings, seams, gusts and damage, then water and storms'],
     notes='A giant\'s age is the time its own light takes to make its gas: decades to more than a millennium from a '
           '40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time. The '
           'colony form carries the common name sky reefs, the author\'s choice of 10 October 2026; the round form has '
-          'no common name yet.',
-    sources=[src(DEC, 'Sky giants and the biosphere\'s names'),
+          'no common name yet. On the same day the author let a sky reef be partly animal-like, with a distributed '
+          'control like a nervous system and no brain (M31), and asked for its sails\' biology. At a 200-year mean '
+          'adult life 0.3-32% of 1-km round giants and 7-66% of 2-km sky reefs reach full size.',
+    sources=[src(DEC, 'Sky giants and the biosphere\'s names; Sky reefs\' partners and control'),
              src(AEROPHYTES, 'What a giant looks like; The limits, in brief'),
-             src(AEROPHYTES_GAS, 'Siphonophores: colonies of specialised parts')]))
+             src(AEROPHYTES_GAS, 'Siphonophores: colonies of specialised parts'),
+             src(AEROPHYTES_SAIL_BIO, 'Control without a central brain'),
+             src(SKY_FOOD, 'Replacing the dead and reaching full size'),
+             src(SKY, 'What a reef\'s community looks like')]))
 G.append(group('G04', 'resident aeroplankton phototrophs', 'Cyanobacteria and algae that complete their lives aloft, '
     'in cloud water and in retained water', anchor='Life', degree='species',
     chassis=['cyanobacteria (Cyanobacteriota)', 'eukaryotic microalgae'],
@@ -949,6 +987,71 @@ G.append(group('G47', 'nitrogen fixers', 'Free-living and symbiotic fixers that 
     form='microbe', settings=['ground', 'seas'], realm='land', guilds=['fixer'], night=['undetermined'],
     clock=['undetermined'], modules=['M14'], status='hypothesis', basis='requirement',
     sources=[src(ECO, 'finding 12'), src(LIT, 'Nitrogen')]))
+# The sky reefs' tenants and the falls (sky-ecology study, 10 October 2026)
+G.append(group('G48', 'aerophyte guards', 'Defenders living in an aerophyte\'s domatia, junctions and flanks: small '
+    'social patrols near green tissue and nests, resident hunters in sheltered margins and flying predators around '
+    'arrivals, several species sharing the work, fed partly on the host\'s sugar and food bodies', anchor='Animalia',
+    degree='species', chassis=['ants (Formicidae)', 'predatory insects and spiders'],
+    references=[ref('Macaranga triloba', 'puts about 5% of its daily above-ground production, 9% of its construction '
+                    'costs, into food bodies for its ants'),
+                ref('Dischidia major', 'ants in its hollow leaves give it 29% of its nitrogen and 39% of its leaf '
+                    'carbon'),
+                ref('ant-acacias', 'their ants keep elephants off occupied branches'),
+                ref('coral guard crabs', 'crabs of different sizes defend their coral against different predators')],
+    form='tenant', settings=['low_sky', 'storm_layer'], realm='sky', guilds=['predator', 'consumer'],
+    night=['undetermined'], clock=['undetermined'], status='hypothesis', basis='direction',
+    notes='The author asked on 10 October 2026 for a deeper analysis of the guards and let several species share the '
+          'work. The host\'s sugar carries no phosphorus, so on host food alone the tenants that eat the host reach '
+          '8-41% of the production their carbon allows.',
+    sources=[src(SKY_SYM, 'Threats and complementary defenders'), src(SKY_TENANTS, 'Guilds and mutualisms; Domatia'),
+             src(DEC, 'Sky reefs\' partners and control')]))
+G.append(group('G49', 'aerophyte pool webs', 'Decomposers, algae, larvae and small predators of the water an '
+    'aerophyte holds in its crevice tanks and catchments, which mineralise litter, frass and droppings so the host can '
+    'take the phosphate back', anchor='Life', degree='species',
+    chassis=['freshwater bacteria and fungi', 'phytotelm invertebrates'],
+    references=[ref('tank bromeliads', 'hold up to 50,000 litres of water a hectare in a cloud forest'),
+                ref('Psecas chapoda', 'a jumping spider on Bromelia balansae supplies 18% of its host\'s nitrogen')],
+    form='tenant', settings=['low_sky', 'storm_layer'], realm='sky', guilds=['decomposer', 'predator'],
+    night=['undetermined'], clock=['undetermined'], status='hypothesis', basis='idea',
+    notes='The recycling they give sets the sky\'s phosphorus need: 3.5-61 kt a year at 1% cover in a mature sky with '
+          'pools that catch litter as a forest floor does, 62-424 kt with none.',
+    sources=[src(SKY_P, 'The sky\'s own loop'), src(SKY_TENANTS, 'Guilds and mutualisms')]))
+G.append(group('G50', 'aerophyte canopy-soil epiphytes', 'Epiphytes rooted in soils of litter and water caught on the '
+    'flanks of round giants, into which the host roots in turn; 2.6-12 kg dry per projected m2, within the spare lift '
+    'of round bodies from 150 m up', anchor='Plantae', degree='species',
+    chassis=['epiphytic ferns, mosses and bromeliad-like plants'],
+    references=[ref('rain-forest canopy soils', 'trees grow roots from their branches into the soils of epiphyte mats'),
+                ref('Ecuadorian forest epiphytes', '1.3-6.0 kg dry per m2 of central branch'),
+                ref('Asplenium nidus', 'its fauna can double a rainforest canopy\'s invertebrate biomass')],
+    form='epiphyte', settings=['low_sky', 'storm_layer'], realm='sky', guilds=['producer'],
+    night=['undetermined'], clock=['undetermined'], status='hypothesis', basis='idea',
+    sources=[src(SKY_TENANTS, 'Guilds and mutualisms; What a body carries')]))
+G.append(group('G51', 'aerophyte underside films', 'Shade phototrophs and nitrogen-fixing films on the undersides and '
+    'fringes of aerophytes, lit at 11-30% of the top\'s light by the dense air below (43-54% over cloud); the fixers '
+    'feed the host', anchor='Life', degree='species',
+    chassis=['cyanobacteria (Cyanobacteriota)', 'shade-tolerant green algae'],
+    references=[ref('holopelagic Sargassum', 'carries more than 100 invertebrate and over 100 fish species, and its '
+                    'nitrogen-fixing epiphytes may be its largest source of reactive nitrogen')],
+    form='tenant', settings=['low_sky', 'storm_layer'], realm='sky', guilds=['producer', 'fixer'],
+    night=['undetermined'], clock=['undetermined'], status='hypothesis', basis='idea',
+    sources=[src(SKY_TENANTS, 'The light on each surface; Guilds and mutualisms')]))
+G.append(group('G52', 'aerophyte grazers', 'Insects that graze the green tops of long-lived aerophytes, a tropical '
+    'canopy\'s 12-19% of the renewed tissue, and eat small aerophytes whole; on host food alone they are short of '
+    'phosphorus', anchor='Insecta', degree='species', chassis=['leaf-feeding insects'],
+    references=[ref('tropical canopy insect herbivores', 'eat 12-19% of foliar production; 79% of what they eat returns '
+                    'to the soil as frass, moults and bodies')],
+    form='tenant', settings=['low_sky', 'storm_layer'], realm='sky', guilds=['grazer'], night=['undetermined'],
+    clock=['undetermined'], status='hypothesis', basis='idea',
+    notes='Grazing at that share costs a reef module 3.8-6.0% of its growth surplus and a 1-km round giant 7.6-12%. At '
+          '1% cover the grazers and guards produce 0.6-7.0 Mt C a year.',
+    sources=[src(SKY_FOOD, 'Grazing, transfer and the levels of the web; The eaten base')]))
+G.append(group('G53', 'fall decomposers', 'Fungi and bacteria that break down a fallen aerophyte\'s cellulose '
+    'envelope and tendons over years to decades, releasing its 0.5-22 g of phosphorus per m2 into the ground it drapes',
+    anchor='Life', degree='species', chassis=['cellulose- and wood-decaying fungi', 'cellulolytic bacteria'],
+    references=[ref('whale-fall communities', 'a 40-t carcass gives the 50 m2 beneath it about 2,000 years of the deep '
+                    'sea floor\'s background carbon flux, worked through by successive stages over decades')],
+    form='fungal', settings=['ground'], realm='land', guilds=['decomposer'], night=['undetermined'],
+    clock=['undetermined'], status='hypothesis', basis='idea', sources=[src(SKY_P, 'Falls')]))
 GROUPS = tuple(G)
 
 # ---- Communities -------------------------------------------------------------------------------------------------
@@ -1006,6 +1109,19 @@ COMMUNITIES = (
               members=['G38', 'G39', 'G40', 'G41', 'G42', 'G13'], settings=['seas'], realm='water',
               status='carried_forward', basis='decision',
               sources=[src(DEC, 'Life and people'), src(WATERS), src(SEA, 'Decisions')]),
+    community('C13', 'the sky reef community', 'A sky reef with its tenants: guards in its domatia, grazers on its tops, '
+              'pool webs in its crevice tanks, films on its undersides, collectors on its fringes, and the great flyers '
+              'and colonial fliers that roost at its edge',
+              members=['G03', 'G48', 'G49', 'G51', 'G52', 'G08', 'G11', 'G14'],
+              described=['small aerophytes of the eaten base drifting on the same wind'],
+              settings=['low_sky', 'storm_layer'], realm='sky', status='hypothesis', basis='idea',
+              sources=[src(SKY, 'What a reef\'s community looks like'), src(SKY_SYM, 'Partnerships that keep the reef '
+                                                                                  'supplied')]),
+    community('C14', 'aerophyte falls', 'The ground a fallen giant drapes: a tent of tens of thousands of tonnes over a '
+              'few square kilometres, laying 0.5-22 g P per m2, 3-350 years of the land\'s natural loss, as a whale '
+              'fall feeds the deep sea floor', members=['G03', 'G53'],
+              described=['the plants beneath the drape that take up its phosphorus'], settings=['ground'],
+              realm='land', status='hypothesis', basis='idea', sources=[src(SKY_P, 'Falls')]),
 )
 
 

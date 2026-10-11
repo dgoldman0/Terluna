@@ -178,3 +178,44 @@ Sources and how far each was read are in [taxonomy_sources.json](taxonomy_source
 
 Sources and how far each was read are in the aerophyte study's registers
 ([research/studies/aerophytes](../../research/studies/aerophytes/README.md), `*_sources.json`).
+
+## The living sky
+
+- **Herbivores take a tenth to a fifth of a forest's leaves.** Tropical canopies lose 12–19% of their foliar production
+  to insects, 79% of it returning to the soil as frass, moults and bodies (Metcalfe et al. 2014); forests and
+  shrublands lose 7.9% of their whole above-ground production (Cebrian 2004), aquatic algae a median 79% (Cyr & Pace
+  1993, through Burghardt & Schmitz 2015).
+- **About a tenth passes each trophic step.** Transfer efficiency averages 10.13 ± 5.81% over 140 aquatic estimates
+  (Pauly & Christensen 1995); poikilotherm populations put about 20% of what they assimilate into production (Golley
+  1968, through van der Meer 2021). Insects hold 0.62–0.97% phosphorus (Woods et al. 2004).
+- **Bird field metabolism scales as M^0.681.** FMR = 10.5 M^0.681 kJ a day over 95 species, a species at 30–170% of
+  the line (Nagy 2005); lunar flyers of tonnes lie far beyond the data.
+- **Seabirds carry 99 Gg of phosphorus a year to land.** Colonies receive 591 Gg of nitrogen and 99 Gg of phosphorus
+  in droppings (Otero et al. 2018); rat-free islands carry 760 times the seabirds and their reefs 48% more fish (Graham
+  et al. 2018); the world's seabirds eat about 70 Mt a year (Brooke 2004).
+- **Plants recycle almost all their phosphorus.** Recycling meets about 98% of terrestrial plants' P demand (Cleveland
+  et al. 2013), and leaves resorb 65% of theirs on average (Vergutz et al. 2012).
+- **Plants pay their partners.** Macaranga triloba puts about 5% of its daily above-ground production into food
+  bodies for its ants (Heil et al. 1997), and nutrients limit how many it makes (Heil et al. 2001); ants give Dischidia
+  major 29% of its nitrogen and 39% of its leaf carbon (Treseder et al. 1995); a jumping spider supplies 18% of its
+  bromeliad's nitrogen (Romero et al. 2006).
+- **Small guards deter large browsers, and partners differ in what they guard.** Elephants avoid ant-occupied acacia
+  branches when other forage is near (Goheen & Palmer 2010). Guard crabs of different sizes protect their coral from
+  different predators (McKeon & Moore 2014). Acacias that host a sequence of ant partners through their lives gain more
+  than with any one (Palmer et al. 2010), and removing some partners can raise a host's growth or reproduction
+  (Stanton & Palmer 2011, from its abstract).
+- **Pool predators keep nutrients home.** In bromeliad tanks, predators that stop prey insects emerging let the host
+  take up more of the nitrogen (Ngai & Srivastava 2006).
+- **Plants signal across their whole bodies, slowly.** A wound sets off a glutamate-triggered calcium wave that runs
+  through the plant (Toyota et al. 2018); Mimosa's electrical and calcium signals travel about 4–6 mm/s (Hagihara et
+  al. 2022); connected ramets share water and resources unequally where supply differs (You et al. 2016).
+- **Floating habitats gather communities.** Sargassum carries more than 100 invertebrate and over 100 fish species
+  (Coston-Clements et al. 1991); 1,205 species raft on floating objects (Thiel & Gutow 2005); epiphyte faunas can
+  double a canopy's invertebrate biomass (Ellwood & Foster 2004).
+- **A whale fall feeds the sea floor for decades.** A 40-t carcass gives the 50 m² beneath it about 2,000 years of
+  background carbon flux (Smith & Baco 2003), the precedent for a fallen giant.
+
+Sources and how far each was read are in the study registers:
+[sky ecology](../../research/studies/sky_ecology/sources.json),
+[guards and symbioses](../../research/studies/sky_ecology/symbioses_sources.json) and
+[living sails](../../research/studies/aerophytes/sail_biology_sources.json).

@@ -131,11 +131,12 @@ with the provisioning and resources branches; no allocation or additional UV tra
 The [aerophyte viability study](studies/aerophytes/README.md) deepens the aerial work with coupled mass,
 pressure, permeability, carbon, water/trim, reproduction and navigation accounts. Persistent twilight and following
 the slow Sun are explicit regimes. Positive budgets remain conditional requirements, with no selected organism size.
-Its [living sail analysis](studies/aerophytes/sail_biology.md) develops distributed sensing and movement, staged growth,
-renewable suspension, alternative life histories and multiple uses. Separate requirements arithmetic covers signal
-travel, fluid head, local torque and material renewal; a stable controllable organ remains to be demonstrated.
+Its [living-sail note](studies/aerophytes/sail_biology.md) gives a sky reef's sails distributed sensing and
+movement, staged growth, a renewable suspension, other life histories and other uses, and computes signal travel,
+fluid head, local torque and renewal; one sail tested for stability is next.
 
-The [sky ecology study](studies/sky_ecology/README.md) connects aerophyte food webs, tenant habitat and phosphorus
-exchange. Its [guards and symbioses analysis](studies/sky_ecology/symbioses.md) compares complementary partners and
-calculates explicit live-mass, local-response and shared-diet requirements. These remain partial conditional screens
-and Earth analogues, with no calibrated defense, community persistence or landing response time.
+The [sky-ecology study](studies/sky_ecology/README.md) gives a sky of aerophytes its food web, tenant habitat and
+phosphorus as screen values, with sudden loads timed against a 25-minute buoyancy period. Its [guards and symbioses
+analysis](studies/sky_ecology/symbioses.md) compares partners that share a reef's defence and computes the live mass,
+response distance and shared diet each needs; whether a mixture defends and persists is open.
+

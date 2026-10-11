@@ -65,11 +65,53 @@ The author asked on 9 October to rename the aerophytes and to begin a taxonomic 
   billion-year horizon.
 - **Function.** Life form, setting, guild, night strategy and clock are classed apart from descent.
 
-The first register, written by [taxa.py](taxa.py) to [results/taxa.json](results/taxa.json), holds 36 designed groups
-with 11 subgroups, 28 design modules and 12 communities drawn from the project's studies. Each comes with its Earth
-reference organisms, placement, status and sources. The author chose the everyday names on 10 October: aerophytes,
+The first register, written by [taxa.py](taxa.py) to [results/taxa.json](results/taxa.json), holds 42 designed groups
+with 11 subgroups, 31 design modules and 14 communities drawn from the project's studies, the sky reefs' tenants,
+domatia, pools and distributed control among them. Each comes with its Earth reference organisms, placement, status
+and sources. The author chose the everyday names on 10 October: aerophytes,
 with sky reefs for the colony giants. Six candidate scientific names wait for the author's choice, with six choices
 about the system itself.
+
+## The living sky, 10 October 2026
+
+The author asked how aerophytes join the aerial and global ecosystem: whether the small ones are eaten in the food
+chain, and how much life the larger ones carry before they sink. The [sky-ecology
+study](../../research/studies/sky_ecology/README.md) answers in one coupled screen (product schema
+`terluna.research.sky-ecology/1`), checked by an independent reviewer in three passes and a confirmation:
+- **Food web.** Over 1% of the Moon aerophytes build 162–413 Mt C of biomass a year while they grow and 134–397 Mt
+  once they hold their size, and give their tenants 38 Mt C of sugar. On host food alone the tenants that eat the host
+  reach 8–41% of the production their carbon allows, short of phosphorus, and the sky feeds 1.8–4.8 million
+  albatross-scale grazing flyers. Small aerophytes are costly food: 5–8% of what they cost is edible tissue.
+- **Tenants.** A lone body's underside gets 19–30% of the light on its top, and a 100-m round body can carry 196 t of
+  tenants within its spare lift. A load is sudden when it lands within a few minutes, against a buoyancy period of 25
+  minutes: left alone a body survives a step of 41–50% of its trim equivalent and a gradual load of 81–100%, venting
+  takes 71% of it at once and dropping water all of it. Sky reefs can grow domatia for their tenants.
+- **Phosphorus.** Aerophyte tissue holds 0.7–8% of Redfield's phosphorus. With pools that catch litter as a forest
+  floor does, a mature sky needs 3.5–61 kt of new phosphorus a year at 1% cover and a growing one 13–165 kt; with
+  nothing to catch it, 62–424 kt and 71–528 kt. Roosting sea-feeding flyers close a giant's phosphorus and can return
+  the land's dissolved loss, and a fallen 2-km reef lays 0.5–5.6 g P/m² on the ground it drapes, the land's whale fall.
+- **Demography.** Replacing the dead costs round giants up to two-thirds of their surplus, and fermented giants at the
+  high hazard more than all of it. At a 200-year mean adult life 0.3–32% of 1-km round giants reach full size at the
+  reference light, and 7–66% of 2-km sky reefs.
+
+**Guards and partners.** At the author's direction the [guards and symbioses
+analysis](../../research/studies/sky_ecology/symbioses.md) gives a reef's defence to several species sharing the work:
+small patrols near green tissue and nests, hunters in sheltered margins, flying defenders around arrivals, recycling
+communities in wet pockets, and visitors that feed elsewhere and roost on the reef. Response time sets the nests:
+arrival within five minutes needs nests no more than 5.1 m apart at 0.02 m/s, or 25.5 m at 0.1 m/s, after a guessed
+30-second alarm. Ten grams of live guards per square metre of reef take a quarter of the host's food for tenants, and a
+hundred grams more than all of it.
+
+**Living sails.** The author let a sky reef be partly animal-like, with a distributed control like a nervous system
+and no brain. The [living-sail note](../../research/studies/aerophytes/sail_biology.md) builds the sails on that: a
+lasting support system carries replaceable sails, each with its own sensing and contractile control under slower
+coordination from the colony. A signal at the 0.3 m/s measured in a siphonophore's swimming-bell epithelium takes 4.6
+hours to run 5 km of cable, so each sail steers itself, and a water column 5 km tall holds 8 MPa, so the cable carries
+pressure-isolated service nodes. The earlier sailing speeds assume a wing that holds its angle; one specified living
+sail, tested for stability and for failure, decides how far a reef steers.
+
+Open: a population model on the routes, measured tissue phosphorus, the seas' food web, great flyers' energetics at
+the lunar scale, and that one living sail.
 
 ## What the project already says
 
@@ -155,7 +197,7 @@ which.
     falls at 3.1 mm/s (Earth 19), so a 5 km daytime mixed layer holds it for 19 days and CM1's 12 km noon layer for 45,
     against under a day on Earth. In a light 3 m/s wind 19 days carries it about 4,800 km. A 10 µm spore stays
     100–250 days, unless rain removes it first, and rain falls mostly in the tropics. Plumed seeds fall at 0.37 of
-    Earth's speed and reach 2.7 times as far (*screen*). Founding biomes leak into one another; isolation distances
+    Earth's speed and reach 2.7 times as far (*screen*). Founding biomes spread into one another; isolation distances
     for engineered plants fail; pathogens and allergens travel Moon-wide. Transgenic pollen already reaches 21 km on
     Earth (Watrud et al. 2004). Synthetic auxotrophy resists both mutation and gene transfer (Mandell et al. 2015),
     but it needs a supplied amino acid, which suits crops and bioreactors. For wild engineered organisms no

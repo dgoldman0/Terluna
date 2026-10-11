@@ -58,16 +58,16 @@ Earth's rate. With no OH in the air, methane lives for centuries and settles nea
 has no sink. Pollen stays aloft for weeks at lunar gravity. Molybdenum may limit nitrogen fixation before nitrogen
 does. The variety of biomes comes from water and light, since no natural ground freezes.
 
-The [sky ecology study](../research/studies/sky_ecology/README.md) connects aerophyte food webs, habitats and
-phosphorus exchange. Its [guards and symbioses analysis](../research/studies/sky_ecology/symbioses.md) examines mixed
-defender communities, surface maintenance, nutrient-retaining partners and their conflicts. Explicit requirements
-for live biomass, local response and shared food are conditional calculations; species design and community
-persistence remain open.
+The [sky-ecology study](../research/studies/sky_ecology/README.md) gives a sky of aerophytes its food web, tenants
+and phosphorus: what the sky's production feeds, how much life a body carries and how fast a load may land, and how
+the sky's phosphorus cycles and reaches the land. Its [guards and symbioses
+analysis](../research/studies/sky_ecology/symbioses.md) gives a sky reef's defence to several species sharing the
+work, with the response distances and the shared food each needs; which mixtures persist is open.
 
-The [living sky-reef sail study](../research/studies/aerophytes/sail_biology.md) combines proposed excitable and
-contractile tissues with photosynthetic colonial growth. It compares permanent supports, replaceable blades,
-seasonal loss and partners, and calculates signal, transport and renewal requirements. These are explicit anatomy
-hypotheses and primary-source analogues, not a validated organism or a new taxonomic assignment.
+The [living-sail note](../research/studies/aerophytes/sail_biology.md) gives a sky reef excitable and contractile
+tissue with its photosynthetic colonial growth, as the author allowed: a lasting support system carries replaceable
+sails, each with its own sensing and control. It compares permanent and seasonal sails and partners, and computes
+signal times, fluid pressure and renewal; one sail tested for stability decides how far a reef steers.
 
 ## Remaining biological work
 

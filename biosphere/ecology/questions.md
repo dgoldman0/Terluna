@@ -35,9 +35,10 @@ on this laptop. The findings behind them are in the [README](README.md).
    candidate. The [fixed-column evaluation](../../research/studies/uv_biology/README.md) gives overhead UVI
    0.371–2.727 for 1–10% transmission at 295–315 nm; these are conditional optical results.
 
-   **How:** biological action spectra and vertical actinic exposure, live-atmosphere ozone/OH/trace-gas chemistry,
-   current ring leakage and film heating, and non-LTE exobase feedback through the solar cycle. The historical
-   310-nm case used different leakage and ozone. No relaxation of EUV/far-UV rejection or selected window follows.
+   **How:** biological action spectra and vertical actinic exposure, live-atmosphere ozone/OH/trace-gas chemistry, the
+   current ring's UV transmission and film heating, and non-LTE exobase feedback through the solar cycle. The historical
+   310-nm case used a different transmission and ozone. No relaxation of EUV/far-UV rejection or selected window
+   follows.
 5. **The night's requirement, zone by zone.** Nocturnal thresholds of 0.01–0.03 lux meet nearside nights of
    2.3–2.9 lux, far-side midnights of 0.001 lux, poles never darker than twilight, and the metropolis's own skyglow on
    the far side. The value is owed to the fleet decision.
@@ -119,3 +120,25 @@ The [taxonomic system](taxonomy.md) leaves seven choices to the author:
 After those, each carried-forward group needs a chassis as its design firms up, which narrows its placement from the
 backbone clade to an Earth genus or species. The founding register stays empty until a lineage is designed, and
 common names are recorded as the lunar peoples give them.
+
+## The living sky: what it asks next
+
+The [sky-ecology study](../../research/studies/sky_ecology/README.md) gives a sky of aerophytes its food web, tenants
+and phosphorus as screen values. What decides it next:
+- measured tissues: phosphorus, resorption and turnover of designed green tissue and envelope, which set every stock
+  and flow;
+- a population model on the routes: aerophytes, tenants and roosting flyers along the latitude and solar-hour winds,
+  with recruitment, the division between growing and mature bodies, and the adult hazard against the giants' growth
+  times (at the high hazard fermented 500-m and 1-km round giants and 150-m modules cannot replace their dead);
+- the seas' food web: how much fish the 28% seas grow on the land's phosphorus, which sets how many sea-feeding flyers
+  can bring it back;
+- great flyers' energetics from tens of kilograms to tonnes;
+- a landing and trim model: tie compliance in rafts, valve and drain areas and the envelope's heat exchange, which set
+  how fast a body takes a flock;
+- the guards: which threat each partner answers and at what cost, measured as host performance with and without each
+  guild, with their food and phosphorus through the longest dark interval ([guards and
+  symbioses](../../research/studies/sky_ecology/symbioses.md));
+- one living sail: a shaped sail with its suspension, tail, finite actuator and local delay in changing airflow, judged
+  by its angle error, loads, oscillation and behaviour after a loss of power, then several sails on compliant cables
+  ([living sails](../../research/studies/aerophytes/sail_biology.md));
+- the resources box model with aerophyte stoichiometry, both states and the falls.

@@ -35,7 +35,7 @@ released. Each entry carries the project's own verdict on it, taken from the fil
 - **Identifiers.** Every entry has a permanent identifier, and names can change around it. The aerophytes kept G01
   when they were renamed.
 
-The first register holds 36 designed groups with 11 subgroups, 28 design modules and 12 communities, hung from a
+The first register holds 42 designed groups with 11 subgroups, 31 design modules and 14 communities, hung from a
 backbone of 25 Earth clades. Six candidate scientific names for the aerophytes wait for the author's choice.
 
 ## What Earth's systems name, and what each suits here
@@ -331,6 +331,7 @@ The register draws on the [ecology register](../../research/studies/lunar_cycle_
 are cited), this branch's [ecology findings](README.md), [literature](literature.md) and
 [people and land](people_and_land.md), the [aerial](../../research/studies/aerial_ecology/README.md),
 [aerophyte](../../research/studies/aerophytes/README.md),
+[sky-ecology](../../research/studies/sky_ecology/README.md),
 [megaforest](../../research/studies/megaforest_wind/README.md),
 [forest-patch](../../research/studies/forest_patch/README.md) and
 [sea-appearance](../../research/studies/sea_appearance/README.md) studies, the
@@ -358,6 +359,11 @@ life form; subgroups are marked ↳.
 | G13 | sea-forest migrant insects | Insecta · species · flyer | *Agrotis infusa*; Chironomidae; *Clunio marinus*; high-flying insect migrants | carrier · seas, low sky, canopy | night active · dusk set, dawn set | carried forward | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) H1-H7 |
 | G14 | seabird-like colonial fliers | Aves · species · flyer | seabird colonies; Spitsbergen colonies | carrier · seas, low sky, ground, canopy | undetermined · undetermined | carried forward | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) H1, H2, H5 |
 | G15 | dusk followers | Animalia · species · flyer | small birds; moths | fruit eater · low sky, canopy | terminator following · dusk set | carried forward, in places | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) E6, H3 |
+| G48 | aerophyte guards | Animalia · species · tenant | *Macaranga triloba*; *Dischidia major*; ant-acacias; coral guard crabs | predator, consumer · low sky, storm layer | undetermined · undetermined | hypothesis | [guards and symbioses](../../research/studies/sky_ecology/symbioses.md) Threats and complementary defenders; [tenants](../../research/studies/sky_ecology/tenants.md) Guilds and mutualisms; [decisions](../../research/decisions.md) Sky reefs' partners and control |
+| G49 | aerophyte pool webs | Life · species · tenant | tank bromeliads; *Psecas chapoda* | decomposer, predator · low sky, storm layer | undetermined · undetermined | hypothesis | [sky phosphorus](../../research/studies/sky_ecology/phosphorus.md) The sky's own loop; [tenants](../../research/studies/sky_ecology/tenants.md) Guilds and mutualisms |
+| G50 | aerophyte canopy-soil epiphytes | Plantae · species · epiphyte | rain-forest canopy soils; Ecuadorian forest epiphytes; *Asplenium nidus* | producer · low sky, storm layer | undetermined · undetermined | hypothesis | [tenants](../../research/studies/sky_ecology/tenants.md) Guilds and mutualisms |
+| G51 | aerophyte underside films | Life · species · tenant | holopelagic *Sargassum* | producer, fixer · low sky, storm layer | undetermined · undetermined | hypothesis | [tenants](../../research/studies/sky_ecology/tenants.md) The light on each surface |
+| G52 | aerophyte grazers | Insecta · species · tenant | tropical canopy insect herbivores | grazer · low sky, storm layer | undetermined · undetermined | hypothesis | [sky food web](../../research/studies/sky_ecology/food_web.md) Grazing, transfer and the levels of the web |
 
 ### The land
 
@@ -385,6 +391,7 @@ life form; subgroups are marked ↳.
 | G35 | grazers and seed-eaters of the plains | Animalia · species · ground animal | none named | grazer, seed eater · ground | undetermined · undetermined | carried forward | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) F1 |
 | G36 | pollinators of the violet sky | Insecta · species · flyer | *Apis mellifera*; insects that orient by polarized moonlight | pollinator · canopy, ground, low sky | undetermined · undetermined | hypothesis | [ecology](README.md) finding 2; [literature](literature.md) Light; [July bundle](../../archive/july_2026_knowledge_bundle/terluna_moon_terraforming_bundle/06_BIOSPHERE_AND_EVOLUTIONARY_DESIGN.md) section 11 |
 | G37 | lake insects | Diptera · species · flyer | Chironomidae | carrier · lakes and wetlands, ground | undetermined · undetermined | carried forward, in places | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) F3, H2 |
+| G53 | fall decomposers | Life · species · fungal | whale-fall communities | decomposer · ground | undetermined · undetermined | hypothesis | [sky phosphorus](../../research/studies/sky_ecology/phosphorus.md) Falls |
 
 ### The waters
 
@@ -438,6 +445,9 @@ life form; subgroups are marked ↳.
 | M26 | hyper-C4 as the general strategy | C4 everywhere: the canopy works mostly in dim diffuse light, where C4's extra two ATP per CO2 cost most | — | set aside | [ecology register](../../research/studies/lunar_cycle_ecology/README.md) A3 |
 | M27 | tethered sails | A wing hung on a tether in another layer of air, or a drogue in the sea, that sails a buoyant body across the wind | G01 | hypothesis | [aerophyte sailing](../../research/studies/aerophytes/sailing.md) Sailing between two layers |
 | M28 | compartmented gas | Gas held in many small wet compartments or modules, so that a tear or a lightning strike empties or burns one at a time | G01 | hypothesis | [aerophyte study](../../research/studies/aerophytes/README.md) The limits, in brief |
+| M29 | domatia | Colony modules grown for tenants, with no green top, a light living layer, spare pressure and a full water store, fed through the ties; a 60-m domatium carries 11 kg/m² of tenants against a green module's 3.4 | G03 | hypothesis | [tenants](../../research/studies/sky_ecology/tenants.md) Domatia |
+| M30 | litter-catching pools | Tank pools in a reef's pockets and round bodies' catchments where decomposers mineralise litter, frass and droppings for the host; with them a mature sky recycles 89–98% of its phosphorus, 32–72% without | G01 | hypothesis | [sky phosphorus](../../research/studies/sky_ecology/phosphorus.md) The sky's own loop |
+| M31 | distributed excitable control | Excitable tissue and local control knots that sense strain and airflow at each sail and organ and move it through opposing contractile tissue, under slower coordination across the colony and with no brain | G03 | hypothesis | [living sails](../../research/studies/aerophytes/sail_biology.md) Control without a central brain; [decisions](../../research/decisions.md) Sky reefs' partners and control |
 
 ### Communities
 
@@ -455,6 +465,8 @@ life form; subgroups are marked ↳.
 | C10 | megaforests | megaforest emergents (G29), lesser aerophytes (G02) | hypothesis | [megaforest](../../research/studies/megaforest_wind/README.md); [forest patch](../../research/studies/forest_patch/README.md); [biosphere](../README.md); [aerophyte growth](../../research/studies/aerophytes/growth.md) The canopy nursery |
 | C11 | pioneer crusts | basalt pioneers (G30), crust mosses (G31) | hypothesis | [ecology](README.md) finding 13 |
 | C12 | the living seas | sea phytoplankton (G38), dark-night luminous plankton (G39), sulfur- and iodine-releasing seaweeds (G40), sea grazers (G41), run fish (G42), sea-forest migrant insects (G13) | carried forward | [decisions](../../research/decisions.md) Life and people; [living water](../living_water/waters.json); [sea appearance](../../research/studies/sea_appearance/README.md) Decisions |
+| C13 | the sky reef community | giant aerophytes (G03), aerophyte guards (G48), aerophyte pool webs (G49), aerophyte underside films (G51), aerophyte grazers (G52), aerial collectors (G08), great flyers (G11), seabird-like colonial fliers (G14) | hypothesis | [sky ecology](../../research/studies/sky_ecology/README.md) What a reef's community looks like |
+| C14 | aerophyte falls | giant aerophytes (G03), fall decomposers (G53) | hypothesis | [sky phosphorus](../../research/studies/sky_ecology/phosphorus.md) Falls |
 
 The backbone ([taxa.py](taxa.py), `BACKBONE`) has 25 nodes from Life down to *Solanum lycopersicum*: the domains
 Bacteria (with Cyanobacteriota) and Eukaryota; Plantae with Chlorophyta, Bryophyta and Tracheophyta, the rankless

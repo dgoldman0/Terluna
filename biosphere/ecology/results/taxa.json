@@ -3,7 +3,7 @@
  "producer": {
   "domain": "biosphere",
   "files": {
-   "biosphere/ecology/taxa.py": "a0c9d5264d7f4735"
+   "biosphere/ecology/taxa.py": "f203907aaa5d7673"
   },
   "inputs": {
    "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250",
@@ -24,11 +24,17 @@
    "research/studies/aerophytes/biology.md",
    "research/studies/aerophytes/gas_biology.md",
    "research/studies/aerophytes/growth.md",
+   "research/studies/aerophytes/sail_biology.md",
    "research/studies/aerophytes/sailing.md",
    "research/studies/forest_patch/README.md",
    "research/studies/lunar_cycle_ecology/README.md",
    "research/studies/megaforest_wind/README.md",
-   "research/studies/sea_appearance/README.md"
+   "research/studies/sea_appearance/README.md",
+   "research/studies/sky_ecology/README.md",
+   "research/studies/sky_ecology/food_web.md",
+   "research/studies/sky_ecology/phosphorus.md",
+   "research/studies/sky_ecology/symbioses.md",
+   "research/studies/sky_ecology/tenants.md"
   ],
   "constants": {
    "MOON_RADIUS": 1737400.0,
@@ -1843,6 +1849,111 @@
    "references": [],
    "clock": [],
    "night": []
+  },
+  {
+   "id": "M29",
+   "kind": "module",
+   "working_name": "domatia",
+   "summary": "Colony modules grown for tenants: no green top, a light living layer that keeps the skin and makes the module's gas, the round bodies' spare pressure and a full water store, fed through the ties by the green modules around it; a 60-m domatium carries 11 kg/m2 of tenants against a green module's 3.4",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/tenants.md",
+     "at": "Domatia"
+    },
+    {
+     "path": "research/studies/sky_ecology/symbioses.md",
+     "at": "Threats and complementary defenders"
+    }
+   ],
+   "references": [
+    {
+     "name": "siphonophores",
+     "role": "specialise their zooids as float, feeders, swimmers and reproductive members",
+     "lit": []
+    },
+    {
+     "name": "Macaranga triloba",
+     "role": "puts about 5% of its daily above-ground production into food bodies for its ant guards",
+     "lit": []
+    }
+   ],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M30",
+   "kind": "module",
+   "working_name": "litter-catching pools",
+   "summary": "Tank membranes across the pockets between a reef's modules, and catchments on round bodies, hold the water store as pools where decomposers mineralise litter, frass and droppings and the host takes the phosphate back; with them a mature sky recycles 89-98% of the phosphorus it cycles, and 32-72% without",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/phosphorus.md",
+     "at": "The sky's own loop"
+    },
+    {
+     "path": "research/studies/sky_ecology/tenants.md",
+     "at": "Real estate"
+    }
+   ],
+   "references": [
+    {
+     "name": "tank bromeliads",
+     "role": "hold up to 50,000 litres of water a hectare in a cloud forest; a jumping spider's debris supplies 18% of one's nitrogen",
+     "lit": []
+    }
+   ],
+   "clock": [],
+   "night": []
+  },
+  {
+   "id": "M31",
+   "kind": "module",
+   "working_name": "distributed excitable control",
+   "summary": "Excitable tissue and local control knots that sense strain and airflow at each sail and organ and move it through opposing contractile tissue, under slower coordination across the colony and with no brain: a sky reef partly animal-like, on neither a plant's nor an animal's plan",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/aerophytes/sail_biology.md",
+     "at": "Control without a central brain; Signal distance and actuator effort"
+    },
+    {
+     "path": "research/decisions.md",
+     "at": "Sky reefs' partners and control"
+    }
+   ],
+   "references": [
+    {
+     "name": "plant electrical and calcium signalling",
+     "role": "a wound sets off a glutamate-triggered calcium wave that travels through the whole plant",
+     "lit": []
+    },
+    {
+     "name": "clonal clover",
+     "role": "connected ramets pass induced defences along their stolons",
+     "lit": []
+    },
+    {
+     "name": "siphonophores",
+     "role": "colonies whose specialised swimming and feeding members act together",
+     "lit": []
+    }
+   ],
+   "clock": [],
+   "night": []
   }
  ],
  "groups": [
@@ -1879,6 +1990,10 @@
     {
      "path": "research/studies/aerial_ecology/README.md",
      "at": "Large photosynthetic organisms and their wet mass"
+    },
+    {
+     "path": "research/studies/sky_ecology/README.md",
+     "at": "The food web; Tenants; Phosphorus"
     },
     {
      "path": "research/decisions.md",
@@ -1971,7 +2086,8 @@
     "M20",
     "M21",
     "M27",
-    "M28"
+    "M28",
+    "M30"
    ],
    "carries": [],
    "name_candidates": [
@@ -2047,11 +2163,11 @@
    "tests": [
     "fittings, seams, gusts and damage, then water and storms"
    ],
-   "notes": "A giant's age is the time its own light takes to make its gas: decades to more than a millennium from a 40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time. The colony form carries the common name sky reefs, the author's choice of 10 October 2026; the round form has no common name yet.",
+   "notes": "A giant's age is the time its own light takes to make its gas: decades to more than a millennium from a 40-m juvenile in the coupled study. Lightning and tears take one module or compartment at a time. The colony form carries the common name sky reefs, the author's choice of 10 October 2026; the round form has no common name yet. On the same day the author let a sky reef be partly animal-like, with a distributed control like a nervous system and no brain (M31), and asked for its sails' biology. At a 200-year mean adult life 0.3-32% of 1-km round giants and 7-66% of 2-km sky reefs reach full size.",
    "sources": [
     {
      "path": "research/decisions.md",
-     "at": "Sky giants and the biosphere's names"
+     "at": "Sky giants and the biosphere's names; Sky reefs' partners and control"
     },
     {
      "path": "research/studies/aerophytes/README.md",
@@ -2060,6 +2176,18 @@
     {
      "path": "research/studies/aerophytes/gas_biology.md",
      "at": "Siphonophores: colonies of specialised parts"
+    },
+    {
+     "path": "research/studies/aerophytes/sail_biology.md",
+     "at": "Control without a central brain"
+    },
+    {
+     "path": "research/studies/sky_ecology/food_web.md",
+     "at": "Replacing the dead and reaching full size"
+    },
+    {
+     "path": "research/studies/sky_ecology/README.md",
+     "at": "What a reef's community looks like"
     }
    ],
    "parent": "G01",
@@ -2110,7 +2238,10 @@
    "clock": [
     "undetermined"
    ],
-   "modules": [],
+   "modules": [
+    "M29",
+    "M31"
+   ],
    "carries": [],
    "name_candidates": []
   },
@@ -4636,6 +4767,354 @@
    ],
    "carries": [],
    "name_candidates": []
+  },
+  {
+   "id": "G48",
+   "kind": "group",
+   "working_name": "aerophyte guards",
+   "summary": "Defenders living in an aerophyte's domatia, junctions and flanks: small social patrols near green tissue and nests, resident hunters in sheltered margins and flying predators around arrivals, several species sharing the work, fed partly on the host's sugar and food bodies",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "direction",
+   "tests": [],
+   "notes": "The author asked on 10 October 2026 for a deeper analysis of the guards and let several species share the work. The host's sugar carries no phosphorus, so on host food alone the tenants that eat the host reach 8-41% of the production their carbon allows.",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/symbioses.md",
+     "at": "Threats and complementary defenders"
+    },
+    {
+     "path": "research/studies/sky_ecology/tenants.md",
+     "at": "Guilds and mutualisms; Domatia"
+    },
+    {
+     "path": "research/decisions.md",
+     "at": "Sky reefs' partners and control"
+    }
+   ],
+   "parent": null,
+   "anchor": "Animalia",
+   "degree": "species",
+   "chassis": [
+    "ants (Formicidae)",
+    "predatory insects and spiders"
+   ],
+   "references": [
+    {
+     "name": "Macaranga triloba",
+     "role": "puts about 5% of its daily above-ground production, 9% of its construction costs, into food bodies for its ants",
+     "lit": []
+    },
+    {
+     "name": "Dischidia major",
+     "role": "ants in its hollow leaves give it 29% of its nitrogen and 39% of its leaf carbon",
+     "lit": []
+    },
+    {
+     "name": "ant-acacias",
+     "role": "their ants keep elephants off occupied branches",
+     "lit": []
+    },
+    {
+     "name": "coral guard crabs",
+     "role": "crabs of different sizes defend their coral against different predators",
+     "lit": []
+    }
+   ],
+   "form": "tenant",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "predator",
+    "consumer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G49",
+   "kind": "group",
+   "working_name": "aerophyte pool webs",
+   "summary": "Decomposers, algae, larvae and small predators of the water an aerophyte holds in its crevice tanks and catchments, which mineralise litter, frass and droppings so the host can take the phosphate back",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "The recycling they give sets the sky's phosphorus need: 3.5-61 kt a year at 1% cover in a mature sky with pools that catch litter as a forest floor does, 62-424 kt with none.",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/phosphorus.md",
+     "at": "The sky's own loop"
+    },
+    {
+     "path": "research/studies/sky_ecology/tenants.md",
+     "at": "Guilds and mutualisms"
+    }
+   ],
+   "parent": null,
+   "anchor": "Life",
+   "degree": "species",
+   "chassis": [
+    "freshwater bacteria and fungi",
+    "phytotelm invertebrates"
+   ],
+   "references": [
+    {
+     "name": "tank bromeliads",
+     "role": "hold up to 50,000 litres of water a hectare in a cloud forest",
+     "lit": []
+    },
+    {
+     "name": "Psecas chapoda",
+     "role": "a jumping spider on Bromelia balansae supplies 18% of its host's nitrogen",
+     "lit": []
+    }
+   ],
+   "form": "tenant",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "decomposer",
+    "predator"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G50",
+   "kind": "group",
+   "working_name": "aerophyte canopy-soil epiphytes",
+   "summary": "Epiphytes rooted in soils of litter and water caught on the flanks of round giants, into which the host roots in turn; 2.6-12 kg dry per projected m2, within the spare lift of round bodies from 150 m up",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/tenants.md",
+     "at": "Guilds and mutualisms; What a body carries"
+    }
+   ],
+   "parent": null,
+   "anchor": "Plantae",
+   "degree": "species",
+   "chassis": [
+    "epiphytic ferns, mosses and bromeliad-like plants"
+   ],
+   "references": [
+    {
+     "name": "rain-forest canopy soils",
+     "role": "trees grow roots from their branches into the soils of epiphyte mats",
+     "lit": []
+    },
+    {
+     "name": "Ecuadorian forest epiphytes",
+     "role": "1.3-6.0 kg dry per m2 of central branch",
+     "lit": []
+    },
+    {
+     "name": "Asplenium nidus",
+     "role": "its fauna can double a rainforest canopy's invertebrate biomass",
+     "lit": []
+    }
+   ],
+   "form": "epiphyte",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "producer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G51",
+   "kind": "group",
+   "working_name": "aerophyte underside films",
+   "summary": "Shade phototrophs and nitrogen-fixing films on the undersides and fringes of aerophytes, lit at 11-30% of the top's light by the dense air below (43-54% over cloud); the fixers feed the host",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/tenants.md",
+     "at": "The light on each surface; Guilds and mutualisms"
+    }
+   ],
+   "parent": null,
+   "anchor": "Life",
+   "degree": "species",
+   "chassis": [
+    "cyanobacteria (Cyanobacteriota)",
+    "shade-tolerant green algae"
+   ],
+   "references": [
+    {
+     "name": "holopelagic Sargassum",
+     "role": "carries more than 100 invertebrate and over 100 fish species, and its nitrogen-fixing epiphytes may be its largest source of reactive nitrogen",
+     "lit": []
+    }
+   ],
+   "form": "tenant",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "producer",
+    "fixer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G52",
+   "kind": "group",
+   "working_name": "aerophyte grazers",
+   "summary": "Insects that graze the green tops of long-lived aerophytes, a tropical canopy's 12-19% of the renewed tissue, and eat small aerophytes whole; on host food alone they are short of phosphorus",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "Grazing at that share costs a reef module 3.8-6.0% of its growth surplus and a 1-km round giant 7.6-12%. At 1% cover the grazers and guards produce 0.6-7.0 Mt C a year.",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/food_web.md",
+     "at": "Grazing, transfer and the levels of the web; The eaten base"
+    }
+   ],
+   "parent": null,
+   "anchor": "Insecta",
+   "degree": "species",
+   "chassis": [
+    "leaf-feeding insects"
+   ],
+   "references": [
+    {
+     "name": "tropical canopy insect herbivores",
+     "role": "eat 12-19% of foliar production; 79% of what they eat returns to the soil as frass, moults and bodies",
+     "lit": []
+    }
+   ],
+   "form": "tenant",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky",
+   "guilds": [
+    "grazer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
+  },
+  {
+   "id": "G53",
+   "kind": "group",
+   "working_name": "fall decomposers",
+   "summary": "Fungi and bacteria that break down a fallen aerophyte's cellulose envelope and tendons over years to decades, releasing its 0.5-22 g of phosphorus per m2 into the ground it drapes",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/phosphorus.md",
+     "at": "Falls"
+    }
+   ],
+   "parent": null,
+   "anchor": "Life",
+   "degree": "species",
+   "chassis": [
+    "cellulose- and wood-decaying fungi",
+    "cellulolytic bacteria"
+   ],
+   "references": [
+    {
+     "name": "whale-fall communities",
+     "role": "a 40-t carcass gives the 50 m2 beneath it about 2,000 years of the deep sea floor's background carbon flux, worked through by successive stages over decades",
+     "lit": []
+    }
+   ],
+   "form": "fungal",
+   "form_candidates": [],
+   "size": [],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land",
+   "guilds": [
+    "decomposer"
+   ],
+   "night": [
+    "undetermined"
+   ],
+   "clock": [
+    "undetermined"
+   ],
+   "modules": [],
+   "carries": [],
+   "name_candidates": []
   }
  ],
  "communities": [
@@ -5029,6 +5508,73 @@
     "seas"
    ],
    "realm": "water"
+  },
+  {
+   "id": "C13",
+   "kind": "community",
+   "working_name": "the sky reef community",
+   "summary": "A sky reef with its tenants: guards in its domatia, grazers on its tops, pool webs in its crevice tanks, films on its undersides, collectors on its fringes, and the great flyers and colonial fliers that roost at its edge",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/README.md",
+     "at": "What a reef's community looks like"
+    },
+    {
+     "path": "research/studies/sky_ecology/symbioses.md",
+     "at": "Partnerships that keep the reef supplied"
+    }
+   ],
+   "members": [
+    "G03",
+    "G48",
+    "G49",
+    "G51",
+    "G52",
+    "G08",
+    "G11",
+    "G14"
+   ],
+   "described_members": [
+    "small aerophytes of the eaten base drifting on the same wind"
+   ],
+   "settings": [
+    "low_sky",
+    "storm_layer"
+   ],
+   "realm": "sky"
+  },
+  {
+   "id": "C14",
+   "kind": "community",
+   "working_name": "aerophyte falls",
+   "summary": "The ground a fallen giant drapes: a tent of tens of thousands of tonnes over a few square kilometres, laying 0.5-22 g P per m2, 3-350 years of the land's natural loss, as a whale fall feeds the deep sea floor",
+   "status": "hypothesis",
+   "scope": "throughout",
+   "basis": "idea",
+   "tests": [],
+   "notes": "",
+   "sources": [
+    {
+     "path": "research/studies/sky_ecology/phosphorus.md",
+     "at": "Falls"
+    }
+   ],
+   "members": [
+    "G03",
+    "G53"
+   ],
+   "described_members": [
+    "the plants beneath the drape that take up its phosphorus"
+   ],
+   "settings": [
+    "ground"
+   ],
+   "realm": "land"
   }
  ],
  "aerophyte_names": {

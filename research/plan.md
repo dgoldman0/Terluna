@@ -88,3 +88,23 @@ author's choices (O1–O7), including the aerophytes' scientific name, then a ch
 its design firms up.
 
 The climate programme remains paused; these studies use committed products and analytic sensitivities.
+
+## The living sky, 10 October 2026
+
+The [sky-ecology study](studies/sky_ecology/README.md) answers how aerophytes join the aerial and global ecosystem,
+as screen values checked by an independent reviewer in three passes and a confirmation:
+- the sky's food web: biomass production by class in a growing and a mature sky, tenants short of phosphorus on host
+  food, the great flyers a cover feeds, and small aerophytes as a costly eaten base;
+- tenants: light on every surface, what a body carries and how fast a load may come (a 25-minute buoyancy period),
+  domatia and guilds with their Earth precedents;
+- phosphorus: the sky's own loop in both states, the resources branch's case redone, the sea's return through roosting
+  flyers, and the falls;
+- demography: replacing the dead against each body's surplus, and the adult hazard against the giants' growth times
+  and lightning.
+
+Beside it, the [guards and symbioses analysis](studies/sky_ecology/symbioses.md) gives a reef's defence to several
+species sharing the work, and the [living-sail note](studies/aerophytes/sail_biology.md) gives each sail its own
+sensing and contractile control under the colony's slower coordination, as the author directed.
+
+Next: one specified living sail tested for stability and failure; a population model on the latitude and solar-hour
+routes, with recruitment and the hazard; then measured tissue phosphorus and the seas' food web.
