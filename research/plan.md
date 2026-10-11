@@ -122,6 +122,30 @@ On 10 October the author asked how aerophytes join the aerial and global ecosyst
 - **The taxonomy** now holds 42 designed groups, the sky reefs' tenants, domatia, pools and distributed control among
   them.
 
+On 11 October the author set step six's working range: 4–8 billion people on the Moon, 2–4 billion of them aloft, the
+ground's people mostly in the drier highlands in taller cities, the array and the colonies carrying a decent share,
+and Earth below 10–16 billion. The author also asked to count hydroponics, aquaponics and the fog deserts, to weigh
+the lava tubes, to light by twilight and living light, to draw phosphorus from the waters beside a natural cycle, and
+to look for synergies that turn regional weaknesses into strengths. The giant aerophytes are named *Welkinia*. Four
+studies answered, each reviewed independently:
+- **Food systems** (provisioning, `studies/food_systems`). Rain-fed fields cost least, and the rain alone feeds 9.4–27.5
+  billion outside a kept 30%. Sunlit glass takes 1.2–2.5 times the field area, the fog desert's glass drinks piped sea
+  water because its fogs sit in still air, and a fully lamp-lit diet for 8 billion costs 0.5–8.1% more dimming.
+  Pasture cannot carry the animal part at 4–8 billion; microbial protein can, for 40–133 W a person. N2O accumulates
+  in every mix.
+- **Cities on the land** (provisioning, `studies/land_cities`). The 28% sea covers 13 of the 17 mare pit sites, and on
+  land the water table rises over every pit floor within centuries, so tube cities are sealed cities; the mapped tubes
+  hold 2–52 million people and matter most in the build's first steps. 3.90 million km² of dry ground stands 4 km up,
+  91% on the far side, and towers rise three to four times as high for the same steel per floor.
+- **Phosphorus from the waters** (resources, `resources/sea_phosphorus.md`). The rain-fed lakes catch 96% of what the
+  land loses, so the great seas get almost none; dredging the lake deltas supplies people, and the waters' life can
+  spare only 21–56 kt a year to farms in them.
+- **Living light** (ecology, `studies/living_light`). A beetle-class glow could light a path for 2–10% of a plant's
+  night store; the natural night serves walking on 48% of the dry land, and the land under a light-polluted sky falls
+  to 0.9–40% at 4–8 billion.
+
+Next: step six's distributions across Earth, the Moon, the array and the colonies, built on these products.
+
 Waiting on the author:
 - the aerophytes' scientific name, from six cloud-root candidates, and six choices about the taxonomic system;
 - how much of the Moon is kept wild and dark (the studies carry 30% and half);
