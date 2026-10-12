@@ -1426,7 +1426,7 @@
    "MOON_RADIUS": 1737400.0
   },
   "inputs": {
-   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
+   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4",
    "climate/results/gcm/site_winds_A28_dim5_moon_summit.json": "45aeeebcf685564b"
   }
  }

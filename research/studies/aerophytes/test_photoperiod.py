@@ -66,14 +66,15 @@ def test_ground_spectra_preserve_grid_values_and_exclude_bolometric_claim():
 def test_twilight_threshold_is_not_compensation_threshold():
     h=p.twilight_threshold(1)
     assert -30<h<-25
-    assert p.threshold_duty(60,h)['hours_below_per_stationary_synodic_cycle']<40
+    # 120 hours with the solved-column sky's twilight (34 with the exponential-column atlas before 2026-10-12)
+    assert p.threshold_duty(60,h)['hours_below_per_stationary_synodic_cycle']<130
     assert p.threshold_duty(70,h)['fraction_above']==1
     with pytest.raises(ValueError):p.twilight_threshold(.01)
 
 
 def test_twilight_energy_is_a_declared_spectral_shape_not_zero_night():
     row=p.twilight_energy(-10)
-    assert row['par_umol_m2_s']==25.2881
+    assert row['par_umol_m2_s']==19.2864
     # Any400–700nm spectrum lies inside these independent photon-energy bounds.
     assert .170<row['par_w_m2']/row['par_umol_m2_s']<.300
     assert row['optical_202_1000_w_m2']>row['par_w_m2']>0
@@ -87,8 +88,8 @@ def test_evaluation_preserves_plant_night_labels_and_no_infinite_json():
     assert json.loads(json.dumps(out,allow_nan=False))==out
     near=next(r for r in out['plant_reference'] if r['side']=='near' and r['latitude_deg']==60 and r['strategy']=='earth_like')
     far=next(r for r in out['plant_reference'] if r['side']=='far' and r['latitude_deg']==60 and r['strategy']=='earth_like')
-    assert near['par_below_1_hours']==far['par_below_1_hours']==33.7141
-    assert near['maintenance_deficit_hours']==308.718
-    assert far['maintenance_deficit_hours']==307.487
-    assert near['sun_below_horizon_respiration_g_c_m2_cycle']==49.2869
-    assert near['maintenance_deficit_hours']>9*near['par_below_1_hours']
+    assert near['par_below_1_hours']==far['par_below_1_hours']==120.091
+    assert near['maintenance_deficit_hours']==320.038
+    assert far['maintenance_deficit_hours']==318.684
+    assert near['sun_below_horizon_respiration_g_c_m2_cycle']==49.3262
+    assert near['maintenance_deficit_hours']>2.5*near['par_below_1_hours']

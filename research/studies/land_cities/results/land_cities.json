@@ -3,7 +3,7 @@
  "producer": {
   "study": "land_cities",
   "files": {
-   "research/studies/land_cities/run.py": "51a626834f2af3d0",
+   "research/studies/land_cities/run.py": "7db2e63716ab48cf",
    "research/studies/land_cities/tubes.py": "b39f3e3a50962d61",
    "research/studies/land_cities/groundwater.py": "bc6a5da4289f7557",
    "research/studies/land_cities/highlands.py": "3c952fdd734de880",
@@ -22,12 +22,12 @@
    "atmosphere/electricity/results/occurrence_A28_dim5_moon.json": "64867b5026983e32",
    "illumination/aerosol/results/haze.json": "42d3739417a67c18",
    "research/studies/sea_appearance/results/lighting_calendar.json": "b76f394595eb0c89",
-   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
-   "research/studies/summit_tower/results/summit_tower_form.json": "20d1201ad13a8348",
-   "research/studies/sky_fleet/results/sky_fleet.json": "c96dfc663f12756c",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "c5912c078d428efa",
-   "research/studies/ways_of_living/results/ways_of_living.json": "64209f11e4572dd9",
-   "research/studies/daily_life/results/daily_life.json": "c15475595c0efb1a"
+   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4",
+   "research/studies/summit_tower/results/summit_tower_form.json": "9c9a3cf7fed39b1a",
+   "research/studies/sky_fleet/results/sky_fleet.json": "fcf26a8bd6d98950",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "b488e76c98e19aa9",
+   "research/studies/ways_of_living/results/ways_of_living.json": "ffe48e6467008176",
+   "research/studies/daily_life/results/daily_life.json": "9c21c92c54f19dc3"
   },
   "ignored_inputs": {
    "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
@@ -41,7 +41,7 @@
    "places": {
     "path_at_integration": "research/studies/joint_synthesis/results/places.json",
     "branch": "main",
-    "commit": "128d5fee23957cfa1ee8d037728ae62c94e31936",
+    "commit": null,
     "sha256": "9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d",
     "schema": "terluna.research.joint-synthesis-places/1",
     "note": "Main's corrected per-place product (each place's own sky, lightning and haze)."

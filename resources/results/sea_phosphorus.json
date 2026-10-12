@@ -6,12 +6,12 @@
       "resources/phosphorus.py": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43"
     },
     "inputs": {
-      "resources/results/phosphorus.json": "3cbace8d2348f9b61577ecb510a582b598f478683fd05718776b23fadd2b940c",
-      "resources/results/first_screen.json": "837426d6d2e1f183be067d8dfb3d4241e41ac8a56ac7bede801573d607d08aa1",
+      "resources/results/phosphorus.json": "098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60",
+      "resources/results/first_screen.json": "0ae0d4efb97bba4641a6cadb8adca370202743bddb289e7f09c523583e063b14",
       "resources/results/sea_phosphorus_waters.json": "a38df83c99e8e615c2883031b495fa645ed75441ca7f01f983633a8562f9d86c",
       "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
       "geography/results/drainage.json": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d",
-      "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "1f35337c24ecf86762cf1ec700ef92a0de9b698187cef184378752336b4e7a8b",
+      "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "132011caa1688ff40893811c60207843fd1530030c7f8159017ea43ef67239fe",
       "research/studies/conservation/results/gates.json": "65b855711fbf1b066f112f617e776bcb2f345fc48ccc5ff019aa9df3bbc4449e",
       "resources/sea_phosphorus_sources.json": "773bde3cb65208cca85dfd1c11ea987a23a4d4fc4374711e02ee17e44224dbef"
     },
@@ -182,12 +182,12 @@
       13542.332653061225
     ],
     "water_basis_m3_yr": {
-      "ecology_loss_basis": 7545614000000.0,
+      "ecology_loss_basis": 6200689000000.0,
       "land_runoff": 4019536514799.5327,
-      "land_runoff_over_basis": 0.5326984013228788,
+      "land_runoff_over_basis": 0.6482403027791803,
       "loss_on_land_runoff_kg_yr": [
-        783066649.9446318,
-        2216025349.5031757
+        952913245.085395,
+        2696679659.56139
       ]
     },
     "marking": "derived"

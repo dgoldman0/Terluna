@@ -26,7 +26,7 @@ def _heights(z, top):
 @dataclass(frozen=True)
 class AirConfig:
     pressure_pa: float = 121590.0
-    temperature_k: float = 288.0
+    temperature_k: float = 294.9          # the corrected design case's surface (climate/gcm, A28_dim5_moon)
     oxygen_mole_fraction: float = .175
     vapor_kg_per_kg_dry: float = 0.0
     lapse_k_per_m: float = 0.0

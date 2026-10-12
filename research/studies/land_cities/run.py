@@ -61,7 +61,7 @@ IGNORED = {
 BOUND = {
     'places': dict(path='research/studies/joint_synthesis/results/places.json',
                    schema='terluna.research.joint-synthesis-places/1', branch='main',
-                   commit='128d5fee23957cfa1ee8d037728ae62c94e31936',
+                   commit=None,
                    sha256='9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d',
                    note="Main's corrected per-place product (each place's own sky, lightning and haze)."),
 }

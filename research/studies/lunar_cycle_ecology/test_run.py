@@ -46,7 +46,7 @@ class EcologyTests(unittest.TestCase):
         within = list(d['sea']['land_share_within'].values())
         self.assertEqual(within, sorted(within))
         n = r['return_limb']
-        self.assertAlmostEqual(n['runoff_m_per_yr_over_land'] * n['land_area_m2'] / (365.25 * 86400), 279167, delta=300)
+        self.assertAlmostEqual(n['runoff_m_per_yr_over_land'] * n['land_area_m2'] / (365.25 * 86400), 229418, delta=300)
         mare = n['soils']['mare_soil']
         self.assertAlmostEqual(mare['rock_weathered_g_m2_yr'][1] / mare['rock_weathered_g_m2_yr'][0], 10.0, places=3)
         k_share = mare['export_g_m2_yr']['K'][0] / mare['rock_weathered_g_m2_yr'][0]      # results keep 4 digits

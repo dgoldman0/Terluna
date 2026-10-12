@@ -8,8 +8,8 @@
   "inputs": {
    "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
    "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa",
-   "biosphere/canopy/results/fruit.json": "b2034a74a4c45291",
-   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
+   "biosphere/canopy/results/fruit.json": "2f4f5e1b6ed912e2",
+   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4",
    "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
    "geography/results/atlas.json": "78cfbf2f469eb339",
    "geography/results/drainage.json": "18494e3d3656ead7",
@@ -213,102 +213,102 @@
  "food": {
   "sites": {
    "near/0/earth_like/0.5": {
-    "harvest_kg_per_cycle": 3.08,
-    "kcal_m2_day": 31.3,
-    "m2_per_person": 80.0
-   },
-   "near/0/earth_like/0.6": {
-    "harvest_kg_per_cycle": 3.68,
-    "kcal_m2_day": 37.4,
-    "m2_per_person": 67.0
-   },
-   "near/0/idle_quarter/0.5": {
-    "harvest_kg_per_cycle": 3.5,
-    "kcal_m2_day": 35.6,
-    "m2_per_person": 70.0
-   },
-   "near/0/idle_quarter/0.6": {
-    "harvest_kg_per_cycle": 4.18,
-    "kcal_m2_day": 42.5,
-    "m2_per_person": 59.0
-   },
-   "near/30/earth_like/0.5": {
-    "harvest_kg_per_cycle": 2.8,
-    "kcal_m2_day": 28.5,
-    "m2_per_person": 88.0
-   },
-   "near/30/earth_like/0.6": {
-    "harvest_kg_per_cycle": 3.35,
-    "kcal_m2_day": 34.0,
-    "m2_per_person": 73.0
-   },
-   "near/30/idle_quarter/0.5": {
-    "harvest_kg_per_cycle": 3.2,
-    "kcal_m2_day": 32.5,
-    "m2_per_person": 77.0
-   },
-   "near/30/idle_quarter/0.6": {
-    "harvest_kg_per_cycle": 3.82,
-    "kcal_m2_day": 38.8,
-    "m2_per_person": 64.0
-   },
-   "near/60/earth_like/0.5": {
-    "harvest_kg_per_cycle": 1.85,
-    "kcal_m2_day": 18.8,
-    "m2_per_person": 133.0
-   },
-   "near/60/earth_like/0.6": {
-    "harvest_kg_per_cycle": 2.21,
-    "kcal_m2_day": 22.5,
-    "m2_per_person": 111.0
-   },
-   "near/60/idle_quarter/0.5": {
-    "harvest_kg_per_cycle": 2.2,
-    "kcal_m2_day": 22.3,
-    "m2_per_person": 112.0
-   },
-   "near/60/idle_quarter/0.6": {
-    "harvest_kg_per_cycle": 2.63,
-    "kcal_m2_day": 26.7,
-    "m2_per_person": 94.0
-   },
-   "far/0/earth_like/0.5": {
-    "harvest_kg_per_cycle": 3.04,
-    "kcal_m2_day": 30.8,
+    "harvest_kg_per_cycle": 3.02,
+    "kcal_m2_day": 30.7,
     "m2_per_person": 81.0
    },
-   "far/0/earth_like/0.6": {
-    "harvest_kg_per_cycle": 3.63,
-    "kcal_m2_day": 36.8,
+   "near/0/earth_like/0.6": {
+    "harvest_kg_per_cycle": 3.61,
+    "kcal_m2_day": 36.7,
     "m2_per_person": 68.0
    },
+   "near/0/idle_quarter/0.5": {
+    "harvest_kg_per_cycle": 3.45,
+    "kcal_m2_day": 35.1,
+    "m2_per_person": 71.0
+   },
+   "near/0/idle_quarter/0.6": {
+    "harvest_kg_per_cycle": 4.12,
+    "kcal_m2_day": 41.9,
+    "m2_per_person": 60.0
+   },
+   "near/30/earth_like/0.5": {
+    "harvest_kg_per_cycle": 2.73,
+    "kcal_m2_day": 27.8,
+    "m2_per_person": 90.0
+   },
+   "near/30/earth_like/0.6": {
+    "harvest_kg_per_cycle": 3.27,
+    "kcal_m2_day": 33.2,
+    "m2_per_person": 75.0
+   },
+   "near/30/idle_quarter/0.5": {
+    "harvest_kg_per_cycle": 3.14,
+    "kcal_m2_day": 31.9,
+    "m2_per_person": 78.0
+   },
+   "near/30/idle_quarter/0.6": {
+    "harvest_kg_per_cycle": 3.75,
+    "kcal_m2_day": 38.1,
+    "m2_per_person": 66.0
+   },
+   "near/60/earth_like/0.5": {
+    "harvest_kg_per_cycle": 1.71,
+    "kcal_m2_day": 17.4,
+    "m2_per_person": 144.0
+   },
+   "near/60/earth_like/0.6": {
+    "harvest_kg_per_cycle": 2.04,
+    "kcal_m2_day": 20.7,
+    "m2_per_person": 121.0
+   },
+   "near/60/idle_quarter/0.5": {
+    "harvest_kg_per_cycle": 2.07,
+    "kcal_m2_day": 21.0,
+    "m2_per_person": 119.0
+   },
+   "near/60/idle_quarter/0.6": {
+    "harvest_kg_per_cycle": 2.47,
+    "kcal_m2_day": 25.1,
+    "m2_per_person": 100.0
+   },
+   "far/0/earth_like/0.5": {
+    "harvest_kg_per_cycle": 2.98,
+    "kcal_m2_day": 30.2,
+    "m2_per_person": 83.0
+   },
+   "far/0/earth_like/0.6": {
+    "harvest_kg_per_cycle": 3.56,
+    "kcal_m2_day": 36.1,
+    "m2_per_person": 69.0
+   },
    "far/0/idle_quarter/0.5": {
-    "harvest_kg_per_cycle": 3.42,
-    "kcal_m2_day": 34.7,
-    "m2_per_person": 72.0
+    "harvest_kg_per_cycle": 3.36,
+    "kcal_m2_day": 34.2,
+    "m2_per_person": 73.0
    },
    "far/0/idle_quarter/0.6": {
-    "harvest_kg_per_cycle": 4.08,
-    "kcal_m2_day": 41.5,
-    "m2_per_person": 60.0
+    "harvest_kg_per_cycle": 4.02,
+    "kcal_m2_day": 40.8,
+    "m2_per_person": 61.0
    }
   },
   "far_side_equator_m2_per_person": [
-   60.0,
-   81.0
+   61.0,
+   83.0
   ],
   "planning_m2_per_person": [
-   131,
-   341
+   134,
+   350
   ],
   "metropolis_cropland_km2": {
    "potential": [
-    6000.0,
-    8100.0
+    6100.0,
+    8300.0
    ],
    "planning": [
-    13100.0,
-    34100.0
+    13400.0,
+    35000.0
    ]
   },
   "metropolis_area_km2": 3217,
@@ -328,8 +328,8 @@
   },
   "planning_share_of_dry_land": {
    "100": [
-    0.7,
-    1.83
+    0.71,
+    1.87
    ],
    "300": [
     0.11,

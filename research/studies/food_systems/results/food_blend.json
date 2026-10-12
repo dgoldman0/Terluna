@@ -5,7 +5,7 @@
   "module": "blend",
   "files": {
    "research/studies/food_systems/blend.py": "7c866446656ebf4e",
-   "research/studies/food_systems/run.py": "7c1914c666541495",
+   "research/studies/food_systems/run.py": "92727cbe5d9d8066",
    "research/studies/food_systems/zones.py": "59f9cc439fcb8997",
    "research/studies/food_systems/parameters.py": "380459175e577004",
    "research/studies/food_systems/systems.py": "c049b3435c3e2763",
@@ -19,13 +19,13 @@
    "SYNODIC_MONTH_DAYS": 29.5
   },
   "inputs": {
-   "research/studies/ways_of_living/results/ways_of_living.json": "64209f11e4572dd9",
-   "provisioning/results/population.json": "9671b996c3f68105",
-   "research/studies/daily_life/results/daily_life.json": "c15475595c0efb1a",
+   "research/studies/ways_of_living/results/ways_of_living.json": "ffe48e6467008176",
+   "provisioning/results/population.json": "0b37e24d62461e53",
+   "research/studies/daily_life/results/daily_life.json": "9c21c92c54f19dc3",
    "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
-   "biosphere/canopy/results/plant.json": "4238c12360c633f1",
-   "biosphere/canopy/results/fruit.json": "b2034a74a4c45291",
-   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "1f35337c24ecf867",
+   "biosphere/canopy/results/plant.json": "4f09599901824e65",
+   "biosphere/canopy/results/fruit.json": "2f4f5e1b6ed912e2",
+   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "132011caa1688ff4",
    "research/studies/open_moon_aerosol/results/open_moon_aerosol.json": "7e404540ec06f5dd",
    "climate/results/crm/ring_ring_45n_lsw.json": "608921535125ea8c",
    "climate/results/crm/ring_ring_45s_lsw.json": "fe6782e258b2da56",
@@ -33,13 +33,13 @@
    "climate/results/crm/ring_ring_70_135e.json": "87e478815badcc05",
    "geography/results/drainage.json": "18494e3d3656ead7",
    "climate/results/gcm/radiation_check_A28_dim5_moon.json": "82f2d3baff7cb2c3",
-   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
-   "research/studies/summit_tower/results/summit_tower_form.json": "20d1201ad13a8348",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "c5912c078d428efa"
+   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4",
+   "research/studies/summit_tower/results/summit_tower_form.json": "9c9a3cf7fed39b1a",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "b488e76c98e19aa9"
   },
   "food_product": {
    "path": "research/studies/food_systems/results/food_systems.json",
-   "sha256": "8679c5b65867108d5b869caeccd0130e6050019d59534a08a29d3a6efd06e3bf"
+   "sha256": "8ef6e1121057d5a7f208d5b019ab973babff6e31e90a0bfd0ca53dab3e1ad550"
   },
   "ignored_inputs": {
    "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
@@ -49,45 +49,45 @@
   "bound_inputs": {
    "ecology_people": {
     "path_at_integration": "biosphere/ecology/results/people.json",
-    "branch": "domain/ecology",
-    "commit": "5aafe2a3bf20c407b36ec759460f93e6fb1fc1e1",
-    "sha256": "f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6"
+    "branch": "main",
+    "commit": null,
+    "sha256": "7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015"
    },
    "ecology_first_screen": {
     "path_at_integration": "biosphere/ecology/results/first_screen.json",
-    "branch": "domain/ecology",
-    "commit": "5aafe2a3bf20c407b36ec759460f93e6fb1fc1e1",
+    "branch": "main",
+    "commit": null,
     "sha256": "d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d"
    },
    "ecology_people_and_land": {
     "path_at_integration": "biosphere/ecology/people_and_land.md",
-    "branch": "domain/ecology",
-    "commit": "5aafe2a3bf20c407b36ec759460f93e6fb1fc1e1",
+    "branch": "main",
+    "commit": null,
     "sha256": "7a8fbafb9a9ecdf635fb0cda1535bbf01d1069522f037d0630fabcce739097a1"
    },
    "resources_phosphorus": {
     "path_at_integration": "resources/results/phosphorus.json",
-    "branch": "domain/resources",
-    "commit": "ac5d38d78d85bb56e7927a51a469eb44d13305c3",
-    "sha256": "159462a220b6661e457d5adcde1590cf144090e90bb770f3a775d04d709fec8e"
+    "branch": "main",
+    "commit": null,
+    "sha256": "098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60"
    },
    "resources_phosphorus_py": {
     "path_at_integration": "resources/phosphorus.py",
-    "branch": "domain/resources",
-    "commit": "ac5d38d78d85bb56e7927a51a469eb44d13305c3",
+    "branch": "main",
+    "commit": null,
     "sha256": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43"
    },
    "resources_phosphorus_md": {
     "path_at_integration": "resources/phosphorus.md",
-    "branch": "domain/resources",
-    "commit": "ac5d38d78d85bb56e7927a51a469eb44d13305c3",
+    "branch": "main",
+    "commit": null,
     "sha256": "afa8db4d5e8b698c6e4d8bb4b6d5e20f424f5edabd9144ccab7baf4c0a7af138"
    },
    "resources_sea_phosphorus": {
     "path_at_integration": "resources/results/sea_phosphorus.json",
-    "branch": "domain/resources",
-    "commit": "edf7fb5eea4527fa0d0818659ffef070e93b6094",
-    "sha256": "9cf6927649942ed6831e34524b512fa9d011e07a5d57a4ac105587f3508fbcbf"
+    "branch": "main",
+    "commit": null,
+    "sha256": "8e7050601fc79f123c385368efafefd72b60e6da3e339d1705144c13411525b9"
    }
   }
  },
@@ -115,9 +115,9 @@
     "power_made": 0.5,
     "fully_lamp_lit": 0.1
    },
-   "light_taken_km2": [714000.0, 2710000.0],
+   "light_taken_km2": [725000.0, 2760000.0],
    "heat_tw": [14.8, 171.0],
-   "fields_km2": [665000.0, 1810000.0]
+   "fields_km2": [676000.0, 1860000.0]
   },
   {
    "weights": {
@@ -125,9 +125,9 @@
     "power_made": 0.5,
     "fully_lamp_lit": 0.15
    },
-   "light_taken_km2": [644000.0, 2820000.0],
+   "light_taken_km2": [654000.0, 2860000.0],
    "heat_tw": [18.8, 234.0],
-   "fields_km2": [582000.0, 1590000.0]
+   "fields_km2": [592000.0, 1630000.0]
   },
   {
    "weights": {
@@ -135,9 +135,9 @@
     "power_made": 0.5,
     "fully_lamp_lit": 0.2
    },
-   "light_taken_km2": [574000.0, 2930000.0],
+   "light_taken_km2": [583000.0, 2960000.0],
    "heat_tw": [22.9, 297.0],
-   "fields_km2": [499000.0, 1360000.0]
+   "fields_km2": [507000.0, 1400000.0]
   },
   {
    "weights": {
@@ -145,9 +145,9 @@
     "power_made": 0.45,
     "fully_lamp_lit": 0.1
    },
-   "light_taken_km2": [795000.0, 2930000.0],
+   "light_taken_km2": [808000.0, 2980000.0],
    "heat_tw": [14.3, 168.0],
-   "fields_km2": [748000.0, 2040000.0]
+   "fields_km2": [761000.0, 2100000.0]
   },
   {
    "weights": {
@@ -155,9 +155,9 @@
     "power_made": 0.5,
     "fully_lamp_lit": 0.25
    },
-   "light_taken_km2": [504000.0, 3030000.0],
+   "light_taken_km2": [511000.0, 3070000.0],
    "heat_tw": [26.9, 361.0],
-   "fields_km2": [416000.0, 1130000.0]
+   "fields_km2": [423000.0, 1170000.0]
   },
   {
    "weights": {
@@ -165,9 +165,9 @@
     "power_made": 0.45,
     "fully_lamp_lit": 0.15
    },
-   "light_taken_km2": [726000.0, 3030000.0],
+   "light_taken_km2": [737000.0, 3080000.0],
    "heat_tw": [18.4, 232.0],
-   "fields_km2": [665000.0, 1810000.0]
+   "fields_km2": [676000.0, 1860000.0]
   },
   {
    "weights": {
@@ -175,9 +175,9 @@
     "power_made": 0.5,
     "fully_lamp_lit": 0.3
    },
-   "light_taken_km2": [434000.0, 3140000.0],
+   "light_taken_km2": [440000.0, 3170000.0],
    "heat_tw": [30.9, 424.0],
-   "fields_km2": [333000.0, 906000.0]
+   "fields_km2": [338000.0, 932000.0]
   },
   {
    "weights": {
@@ -185,9 +185,9 @@
     "power_made": 0.45,
     "fully_lamp_lit": 0.2
    },
-   "light_taken_km2": [656000.0, 3140000.0],
+   "light_taken_km2": [666000.0, 3190000.0],
    "heat_tw": [22.4, 295.0],
-   "fields_km2": [582000.0, 1590000.0]
+   "fields_km2": [592000.0, 1630000.0]
   }
  ],
  "blend": {
@@ -200,17 +200,17 @@
     },
     "people_billion": [4.0, 4.0],
     "land_km2": {
-     "rain_belt": [241000.0, 668000.0],
+     "rain_belt": [245000.0, 687000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [141000.0, 438000.0],
+     "highlands": [143000.0, 445000.0],
      "polar": [0.0, 0.0],
-     "total": [383000.0, 1110000.0],
+     "total": [388000.0, 1130000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [50000.0, 200000.0],
-    "fields_km2": [333000.0, 906000.0],
-    "dry_land_wild_share_outside_kept": [0.977, 0.932],
+    "fields_km2": [338000.0, 932000.0],
+    "dry_land_wild_share_outside_kept": [0.976, 0.931],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -234,10 +234,10 @@
       "added_dimming_percent": [0.0641, 1.19]
      }
     },
-    "light_taken_km2": [357000.0, 1360000.0],
-    "light_taken_share_of_moon": [0.00941, 0.0358],
+    "light_taken_km2": [363000.0, 1380000.0],
+    "light_taken_share_of_moon": [0.00956, 0.0364],
     "water_km3_year": {
-     "rain_used": [336.0, 922.0],
+     "rain_used": [337.0, 938.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -279,17 +279,17 @@
     },
     "people_billion": [4.0, 4.0],
     "land_km2": {
-     "rain_belt": [242000.0, 673000.0],
+     "rain_belt": [246000.0, 693000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [141000.0, 433000.0],
+     "highlands": [142000.0, 440000.0],
      "polar": [0.0, 0.0],
-     "total": [383000.0, 1110000.0],
+     "total": [388000.0, 1130000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [50000.0, 200000.0],
-    "fields_km2": [333000.0, 906000.0],
-    "dry_land_wild_share_outside_kept": [0.967, 0.905],
+    "fields_km2": [338000.0, 932000.0],
+    "dry_land_wild_share_outside_kept": [0.967, 0.903],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -313,10 +313,10 @@
       "added_dimming_percent": [0.0641, 1.19]
      }
     },
-    "light_taken_km2": [357000.0, 1360000.0],
-    "light_taken_share_of_moon": [0.00941, 0.0358],
+    "light_taken_km2": [363000.0, 1380000.0],
+    "light_taken_share_of_moon": [0.00956, 0.0364],
     "water_km3_year": {
-     "rain_used": [336.0, 922.0],
+     "rain_used": [337.0, 938.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -358,17 +358,17 @@
     },
     "people_billion": [4.0, 4.0],
     "land_km2": {
-     "rain_belt": [242000.0, 673000.0],
+     "rain_belt": [246000.0, 693000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [141000.0, 433000.0],
+     "highlands": [142000.0, 440000.0],
      "polar": [0.0, 0.0],
-     "total": [383000.0, 1110000.0],
+     "total": [388000.0, 1130000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [50000.0, 200000.0],
-    "fields_km2": [333000.0, 906000.0],
-    "dry_land_wild_share_outside_kept": [0.967, 0.905],
+    "fields_km2": [338000.0, 932000.0],
+    "dry_land_wild_share_outside_kept": [0.967, 0.903],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -392,10 +392,10 @@
       "added_dimming_percent": [0.0641, 1.19]
      }
     },
-    "light_taken_km2": [357000.0, 1360000.0],
-    "light_taken_share_of_moon": [0.00941, 0.0358],
+    "light_taken_km2": [363000.0, 1380000.0],
+    "light_taken_share_of_moon": [0.00956, 0.0364],
     "water_km3_year": {
-     "rain_used": [336.0, 922.0],
+     "rain_used": [337.0, 938.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -437,17 +437,17 @@
     },
     "people_billion": [4.0, 4.0],
     "land_km2": {
-     "rain_belt": [243000.0, 687000.0],
+     "rain_belt": [247000.0, 706000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [140000.0, 419000.0],
+     "highlands": [141000.0, 426000.0],
      "polar": [0.0, 0.0],
-     "total": [383000.0, 1110000.0],
+     "total": [388000.0, 1130000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [50000.0, 200000.0],
-    "fields_km2": [333000.0, 906000.0],
-    "dry_land_wild_share_outside_kept": [0.945, 0.842],
+    "fields_km2": [338000.0, 932000.0],
+    "dry_land_wild_share_outside_kept": [0.945, 0.839],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -471,10 +471,10 @@
       "added_dimming_percent": [0.0641, 1.19]
      }
     },
-    "light_taken_km2": [357000.0, 1360000.0],
-    "light_taken_share_of_moon": [0.00941, 0.0358],
+    "light_taken_km2": [363000.0, 1380000.0],
+    "light_taken_share_of_moon": [0.00956, 0.0364],
     "water_km3_year": {
-     "rain_used": [336.0, 922.0],
+     "rain_used": [337.0, 938.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -518,17 +518,17 @@
     },
     "people_billion": [6.0, 6.0],
     "land_km2": {
-     "rain_belt": [363000.0, 1010000.0],
+     "rain_belt": [369000.0, 1040000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [211000.0, 647000.0],
+     "highlands": [213000.0, 657000.0],
      "polar": [0.0, 0.0],
-     "total": [574000.0, 1660000.0],
+     "total": [582000.0, 1700000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [75000.0, 300000.0],
-    "fields_km2": [499000.0, 1360000.0],
-    "dry_land_wild_share_outside_kept": [0.965, 0.899],
+    "fields_km2": [507000.0, 1400000.0],
+    "dry_land_wild_share_outside_kept": [0.964, 0.896],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -552,10 +552,10 @@
       "added_dimming_percent": [0.0961, 1.78]
      }
     },
-    "light_taken_km2": [535000.0, 2030000.0],
-    "light_taken_share_of_moon": [0.0141, 0.0536],
+    "light_taken_km2": [544000.0, 2070000.0],
+    "light_taken_share_of_moon": [0.0143, 0.0546],
     "water_km3_year": {
-     "rain_used": [504.0, 1380.0],
+     "rain_used": [505.0, 1410.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -566,9 +566,9 @@
      "glass_discharge": [0.0, 0.0]
     },
     "n2o": {
-     "kt_n_year": [100.0, 286.0],
-     "ppb_per_year": [0.0327, 0.0931],
-     "ppb_after_1000_years": [32.7, 93.1]
+     "kt_n_year": [100.0, 285.0],
+     "ppb_per_year": [0.0327, 0.0929],
+     "ppb_after_1000_years": [32.7, 92.9]
     },
     "methane": {
      "mt_year": [1.8, 18.0],
@@ -597,17 +597,17 @@
     },
     "people_billion": [6.0, 6.0],
     "land_km2": {
-     "rain_belt": [364000.0, 1030000.0],
+     "rain_belt": [370000.0, 1050000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [210000.0, 634000.0],
+     "highlands": [212000.0, 644000.0],
      "polar": [0.0, 0.0],
-     "total": [574000.0, 1660000.0],
+     "total": [582000.0, 1700000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [75000.0, 300000.0],
-    "fields_km2": [499000.0, 1360000.0],
-    "dry_land_wild_share_outside_kept": [0.951, 0.858],
+    "fields_km2": [507000.0, 1400000.0],
+    "dry_land_wild_share_outside_kept": [0.95, 0.855],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -631,10 +631,10 @@
       "added_dimming_percent": [0.0961, 1.78]
      }
     },
-    "light_taken_km2": [535000.0, 2030000.0],
-    "light_taken_share_of_moon": [0.0141, 0.0536],
+    "light_taken_km2": [544000.0, 2070000.0],
+    "light_taken_share_of_moon": [0.0143, 0.0546],
     "water_km3_year": {
-     "rain_used": [504.0, 1380.0],
+     "rain_used": [505.0, 1410.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -645,9 +645,9 @@
      "glass_discharge": [0.0, 0.0]
     },
     "n2o": {
-     "kt_n_year": [100.0, 286.0],
-     "ppb_per_year": [0.0327, 0.0931],
-     "ppb_after_1000_years": [32.7, 93.1]
+     "kt_n_year": [100.0, 285.0],
+     "ppb_per_year": [0.0327, 0.0929],
+     "ppb_after_1000_years": [32.7, 92.9]
     },
     "methane": {
      "mt_year": [1.8, 18.0],
@@ -676,17 +676,17 @@
     },
     "people_billion": [6.0, 6.0],
     "land_km2": {
-     "rain_belt": [364000.0, 1030000.0],
+     "rain_belt": [370000.0, 1050000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [210000.0, 634000.0],
+     "highlands": [212000.0, 644000.0],
      "polar": [0.0, 0.0],
-     "total": [574000.0, 1660000.0],
+     "total": [582000.0, 1700000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [75000.0, 300000.0],
-    "fields_km2": [499000.0, 1360000.0],
-    "dry_land_wild_share_outside_kept": [0.951, 0.858],
+    "fields_km2": [507000.0, 1400000.0],
+    "dry_land_wild_share_outside_kept": [0.95, 0.855],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -710,10 +710,10 @@
       "added_dimming_percent": [0.0961, 1.78]
      }
     },
-    "light_taken_km2": [535000.0, 2030000.0],
-    "light_taken_share_of_moon": [0.0141, 0.0536],
+    "light_taken_km2": [544000.0, 2070000.0],
+    "light_taken_share_of_moon": [0.0143, 0.0546],
     "water_km3_year": {
-     "rain_used": [504.0, 1380.0],
+     "rain_used": [505.0, 1410.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -724,9 +724,9 @@
      "glass_discharge": [0.0, 0.0]
     },
     "n2o": {
-     "kt_n_year": [100.0, 286.0],
-     "ppb_per_year": [0.0327, 0.0931],
-     "ppb_after_1000_years": [32.7, 93.1]
+     "kt_n_year": [100.0, 285.0],
+     "ppb_per_year": [0.0327, 0.0929],
+     "ppb_after_1000_years": [32.7, 92.9]
     },
     "methane": {
      "mt_year": [1.8, 18.0],
@@ -755,17 +755,17 @@
     },
     "people_billion": [6.0, 6.0],
     "land_km2": {
-     "rain_belt": [367000.0, 1060000.0],
+     "rain_belt": [373000.0, 1090000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [207000.0, 603000.0],
+     "highlands": [209000.0, 611000.0],
      "polar": [0.0, 0.0],
-     "total": [574000.0, 1660000.0],
+     "total": [582000.0, 1700000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [75000.0, 300000.0],
-    "fields_km2": [499000.0, 1360000.0],
-    "dry_land_wild_share_outside_kept": [0.918, 0.763],
+    "fields_km2": [507000.0, 1400000.0],
+    "dry_land_wild_share_outside_kept": [0.917, 0.758],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -789,10 +789,10 @@
       "added_dimming_percent": [0.0961, 1.78]
      }
     },
-    "light_taken_km2": [535000.0, 2030000.0],
-    "light_taken_share_of_moon": [0.0141, 0.0536],
+    "light_taken_km2": [544000.0, 2070000.0],
+    "light_taken_share_of_moon": [0.0143, 0.0546],
     "water_km3_year": {
-     "rain_used": [504.0, 1380.0],
+     "rain_used": [505.0, 1410.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -803,9 +803,9 @@
      "glass_discharge": [0.0, 0.0]
     },
     "n2o": {
-     "kt_n_year": [100.0, 286.0],
-     "ppb_per_year": [0.0327, 0.0931],
-     "ppb_after_1000_years": [32.7, 93.1]
+     "kt_n_year": [100.0, 285.0],
+     "ppb_per_year": [0.0327, 0.0929],
+     "ppb_after_1000_years": [32.7, 92.9]
     },
     "methane": {
      "mt_year": [1.8, 18.0],
@@ -836,17 +836,17 @@
     },
     "people_billion": [8.0, 8.0],
     "land_km2": {
-     "rain_belt": [485000.0, 1360000.0],
+     "rain_belt": [493000.0, 1400000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [280000.0, 849000.0],
+     "highlands": [283000.0, 861000.0],
      "polar": [0.0, 0.0],
-     "total": [765000.0, 2210000.0],
+     "total": [776000.0, 2260000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [100000.0, 400000.0],
-    "fields_km2": [665000.0, 1810000.0],
-    "dry_land_wild_share_outside_kept": [0.953, 0.865],
+    "fields_km2": [676000.0, 1860000.0],
+    "dry_land_wild_share_outside_kept": [0.953, 0.862],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -870,10 +870,10 @@
       "added_dimming_percent": [0.128, 2.37]
      }
     },
-    "light_taken_km2": [714000.0, 2710000.0],
-    "light_taken_share_of_moon": [0.0188, 0.0715],
+    "light_taken_km2": [725000.0, 2760000.0],
+    "light_taken_share_of_moon": [0.0191, 0.0729],
     "water_km3_year": {
-     "rain_used": [672.0, 1840.0],
+     "rain_used": [674.0, 1880.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -884,7 +884,7 @@
      "glass_discharge": [0.0, 0.0]
     },
     "n2o": {
-     "kt_n_year": [134.0, 381.0],
+     "kt_n_year": [134.0, 380.0],
      "ppb_per_year": [0.0436, 0.124],
      "ppb_after_1000_years": [43.6, 124.0]
     },
@@ -915,17 +915,17 @@
     },
     "people_billion": [8.0, 8.0],
     "land_km2": {
-     "rain_belt": [487000.0, 1390000.0],
+     "rain_belt": [495000.0, 1430000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [278000.0, 825000.0],
+     "highlands": [281000.0, 837000.0],
      "polar": [0.0, 0.0],
-     "total": [765000.0, 2210000.0],
+     "total": [776000.0, 2260000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [100000.0, 400000.0],
-    "fields_km2": [665000.0, 1810000.0],
-    "dry_land_wild_share_outside_kept": [0.935, 0.811],
+    "fields_km2": [676000.0, 1860000.0],
+    "dry_land_wild_share_outside_kept": [0.934, 0.806],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -949,10 +949,10 @@
       "added_dimming_percent": [0.128, 2.37]
      }
     },
-    "light_taken_km2": [714000.0, 2710000.0],
-    "light_taken_share_of_moon": [0.0188, 0.0715],
+    "light_taken_km2": [725000.0, 2760000.0],
+    "light_taken_share_of_moon": [0.0191, 0.0729],
     "water_km3_year": {
-     "rain_used": [672.0, 1840.0],
+     "rain_used": [674.0, 1880.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -963,7 +963,7 @@
      "glass_discharge": [0.0, 0.0]
     },
     "n2o": {
-     "kt_n_year": [134.0, 381.0],
+     "kt_n_year": [134.0, 380.0],
      "ppb_per_year": [0.0436, 0.124],
      "ppb_after_1000_years": [43.6, 124.0]
     },
@@ -994,17 +994,17 @@
     },
     "people_billion": [8.0, 8.0],
     "land_km2": {
-     "rain_belt": [487000.0, 1390000.0],
+     "rain_belt": [495000.0, 1430000.0],
      "middle_wet": [0.0, 0.0],
      "fog_desert": [0.0, 0.0],
-     "highlands": [278000.0, 825000.0],
+     "highlands": [281000.0, 837000.0],
      "polar": [0.0, 0.0],
-     "total": [765000.0, 2210000.0],
+     "total": [776000.0, 2260000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [100000.0, 400000.0],
-    "fields_km2": [665000.0, 1810000.0],
-    "dry_land_wild_share_outside_kept": [0.935, 0.811],
+    "fields_km2": [676000.0, 1860000.0],
+    "dry_land_wild_share_outside_kept": [0.934, 0.806],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -1028,10 +1028,10 @@
       "added_dimming_percent": [0.128, 2.37]
      }
     },
-    "light_taken_km2": [714000.0, 2710000.0],
-    "light_taken_share_of_moon": [0.0188, 0.0715],
+    "light_taken_km2": [725000.0, 2760000.0],
+    "light_taken_share_of_moon": [0.0191, 0.0729],
     "water_km3_year": {
-     "rain_used": [672.0, 1840.0],
+     "rain_used": [674.0, 1880.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -1042,7 +1042,7 @@
      "glass_discharge": [0.0, 0.0]
     },
     "n2o": {
-     "kt_n_year": [134.0, 381.0],
+     "kt_n_year": [134.0, 380.0],
      "ppb_per_year": [0.0436, 0.124],
      "ppb_after_1000_years": [43.6, 124.0]
     },
@@ -1073,17 +1073,17 @@
     },
     "people_billion": [8.0, 8.0],
     "land_km2": {
-     "rain_belt": [492000.0, 1700000.0],
-     "middle_wet": [0.0, 0.0],
+     "rain_belt": [500000.0, 1790000.0],
+     "middle_wet": [0.0, 1.64e-10],
      "fog_desert": [0.0, 0.0],
-     "highlands": [273000.0, 777000.0],
+     "highlands": [276000.0, 789000.0],
      "polar": [0.0, 0.0],
-     "total": [765000.0, 2480000.0],
+     "total": [776000.0, 2570000.0],
      "glass": [0.0, 0.0]
     },
     "towns_km2": [100000.0, 400000.0],
-    "fields_km2": [665000.0, 2080000.0],
-    "dry_land_wild_share_outside_kept": [0.891, 0.646],
+    "fields_km2": [676000.0, 2170000.0],
+    "dry_land_wild_share_outside_kept": [0.889, 0.633],
     "power_tw": {
      "irrigation": [0.0, 0.0],
      "glasshouse_operations": [0.0, 0.0],
@@ -1107,10 +1107,10 @@
       "added_dimming_percent": [0.128, 2.37]
      }
     },
-    "light_taken_km2": [714000.0, 2980000.0],
-    "light_taken_share_of_moon": [0.0188, 0.0786],
+    "light_taken_km2": [725000.0, 3070000.0],
+    "light_taken_share_of_moon": [0.0191, 0.081],
     "water_km3_year": {
-     "rain_used": [672.0, 1840.0],
+     "rain_used": [674.0, 1880.0],
      "withdrawn_from_seas": [0.0, 0.0],
      "rain_on_glass": [0.0, 0.0]
     },
@@ -1121,7 +1121,7 @@
      "glass_discharge": [0.0, 0.0]
     },
     "n2o": {
-     "kt_n_year": [134.0, 381.0],
+     "kt_n_year": [134.0, 380.0],
      "ppb_per_year": [0.0436, 0.124],
      "ppb_after_1000_years": [43.6, 124.0]
     },
@@ -1137,7 +1137,7 @@
     },
     "night_energy_twh": [2600.0, 19900.0],
     "night_energy_over_european_night": [0.501, 3.84],
-    "middle_wet_fields_km2": [0.0, 0.0],
+    "middle_wet_fields_km2": [0.0, 1.64e-10],
     "feasible": [true, true],
     "overflowing": [
      [],
@@ -1155,19 +1155,19 @@
    },
    "people_billion": [8.0, 8.0],
    "land_km2": {
-    "rain_belt": [1220000.0, 4240000.0],
+    "rain_belt": [1240000.0, 4240000.0],
     "middle_wet": [0.0, 1390000.0],
     "fog_desert": [0.0, 0.0],
-    "highlands": [545000.0, 1740000.0],
+    "highlands": [553000.0, 1740000.0],
     "polar": [0.0, 0.0],
-    "total": [1760000.0, 7370000.0],
+    "total": [1790000.0, 7370000.0],
     "glass": [0.0, 0.0]
    },
    "towns_km2": [100000.0, 400000.0],
-   "fields_km2": [1660000.0, 6970000.0],
-   "dry_land_wild_share_outside_kept": [0.849, 0.37],
+   "fields_km2": [1690000.0, 6970000.0],
+   "dry_land_wild_share_outside_kept": [0.847, 0.37],
    "power_tw": {
-    "irrigation": [0.0, 0.00322],
+    "irrigation": [0.0, 0.0387],
     "glasshouse_operations": [0.0, 0.0],
     "glasshouse_water": [0.0, 0.0],
     "lamps": [0.723, 5.63],
@@ -1175,25 +1175,25 @@
     "aquaponics": [0.0, 0.0],
     "power_made_food": [0.0, 0.0],
     "nitrogen_fixation": [0.0371, 0.0854],
-    "total": [1.08, 6.79]
+    "total": [1.08, 6.82]
    },
    "heat": {
     "array": {
-     "heat_tw": [1.48, 9.34],
-     "w_m2": [0.0392, 0.247],
+     "heat_tw": [1.48, 9.39],
+     "w_m2": [0.0392, 0.248],
      "added_dimming_percent": [0.0129, 0.13]
     },
     "fusion": {
-     "heat_tw": [2.16, 20.6],
-     "w_m2": [0.0569, 0.543],
-     "added_dimming_percent": [0.0187, 0.286]
+     "heat_tw": [2.16, 20.7],
+     "w_m2": [0.0569, 0.546],
+     "added_dimming_percent": [0.0187, 0.287]
     }
    },
-   "light_taken_km2": [1670000.0, 7070000.0],
-   "light_taken_share_of_moon": [0.044, 0.187],
+   "light_taken_km2": [1700000.0, 7080000.0],
+   "light_taken_share_of_moon": [0.0448, 0.187],
    "water_km3_year": {
-    "rain_used": [1680.0, 4600.0],
-    "withdrawn_from_seas": [0.0, 19.6],
+    "rain_used": [1680.0, 4550.0],
+    "withdrawn_from_seas": [0.0, 235.0],
     "rain_on_glass": [0.0, 0.0]
    },
    "phosphorus_mt_year": {
@@ -1203,7 +1203,7 @@
     "glass_discharge": [0.0, 0.0]
    },
    "n2o": {
-    "kt_n_year": [159.0, 517.0],
+    "kt_n_year": [159.0, 515.0],
     "ppb_per_year": [0.0517, 0.168],
     "ppb_after_1000_years": [51.7, 168.0]
    },
@@ -1392,17 +1392,17 @@
    },
    "people_billion": [8.0, 8.0],
    "land_km2": {
-    "rain_belt": [406000.0, 1160000.0],
+    "rain_belt": [413000.0, 1190000.0],
     "middle_wet": [0.0, 0.0],
     "fog_desert": [0.0, 0.0],
-    "highlands": [248000.0, 754000.0],
+    "highlands": [251000.0, 764000.0],
     "polar": [0.0, 0.0],
-    "total": [654000.0, 1910000.0],
+    "total": [664000.0, 1950000.0],
     "glass": [0.0, 0.0]
    },
    "towns_km2": [100000.0, 400000.0],
-   "fields_km2": [554000.0, 1510000.0],
-   "dry_land_wild_share_outside_kept": [0.944, 0.837],
+   "fields_km2": [564000.0, 1550000.0],
+   "dry_land_wild_share_outside_kept": [0.943, 0.833],
    "power_tw": {
     "irrigation": [0.0, 0.0],
     "glasshouse_operations": [0.0, 0.0],
@@ -1426,10 +1426,10 @@
      "added_dimming_percent": [0.279, 6.37]
     }
    },
-   "light_taken_km2": [660000.0, 3930000.0],
-   "light_taken_share_of_moon": [0.0174, 0.103],
+   "light_taken_km2": [670000.0, 3970000.0],
+   "light_taken_share_of_moon": [0.0177, 0.105],
    "water_km3_year": {
-    "rain_used": [560.0, 1540.0],
+    "rain_used": [561.0, 1560.0],
     "withdrawn_from_seas": [0.0, 0.0],
     "rain_on_glass": [0.0, 0.0]
    },
@@ -1471,17 +1471,17 @@
    },
    "people_billion": [8.0, 8.0],
    "land_km2": {
-    "rain_belt": [609000.0, 1730000.0],
+    "rain_belt": [619000.0, 1780000.0],
     "middle_wet": [0.0, 0.0],
     "fog_desert": [0.0, 0.0],
-    "highlands": [323000.0, 931000.0],
+    "highlands": [326000.0, 946000.0],
     "polar": [0.0, 0.0],
-    "total": [932000.0, 2670000.0],
+    "total": [946000.0, 2730000.0],
     "glass": [0.0, 0.0]
    },
    "towns_km2": [100000.0, 400000.0],
-   "fields_km2": [832000.0, 2270000.0],
-   "dry_land_wild_share_outside_kept": [0.92, 0.772],
+   "fields_km2": [846000.0, 2330000.0],
+   "dry_land_wild_share_outside_kept": [0.919, 0.767],
    "power_tw": {
     "irrigation": [0.0, 0.0],
     "glasshouse_operations": [0.0, 0.0],
@@ -1505,10 +1505,10 @@
      "added_dimming_percent": [0.12, 2.31]
     }
    },
-   "light_taken_km2": [877000.0, 3140000.0],
-   "light_taken_share_of_moon": [0.0231, 0.0828],
+   "light_taken_km2": [891000.0, 3200000.0],
+   "light_taken_share_of_moon": [0.0235, 0.0845],
    "water_km3_year": {
-    "rain_used": [839.0, 2300.0],
+    "rain_used": [842.0, 2340.0],
     "withdrawn_from_seas": [0.0, 0.0],
     "rain_on_glass": [0.0, 0.0]
    },
@@ -1520,8 +1520,8 @@
    },
    "n2o": {
     "kt_n_year": [146.0, 422.0],
-    "ppb_per_year": [0.0474, 0.138],
-    "ppb_after_1000_years": [47.4, 138.0]
+    "ppb_per_year": [0.0474, 0.137],
+    "ppb_after_1000_years": [47.4, 137.0]
    },
    "methane": {
     "mt_year": [2.4, 24.0],
@@ -1552,17 +1552,17 @@
    },
    "people_billion": [8.0, 8.0],
    "land_km2": {
-    "rain_belt": [122000.0, 347000.0],
+    "rain_belt": [124000.0, 357000.0],
     "middle_wet": [0.0, 0.0],
     "fog_desert": [0.0, 0.0],
-    "highlands": [145000.0, 506000.0],
+    "highlands": [145000.0, 509000.0],
     "polar": [0.0, 0.0],
-    "total": [266000.0, 853000.0],
+    "total": [269000.0, 866000.0],
     "glass": [0.0, 0.0]
    },
    "towns_km2": [100000.0, 400000.0],
-   "fields_km2": [166000.0, 453000.0],
-   "dry_land_wild_share_outside_kept": [0.977, 0.927],
+   "fields_km2": [169000.0, 466000.0],
+   "dry_land_wild_share_outside_kept": [0.977, 0.926],
    "power_tw": {
     "irrigation": [0.0, 0.0],
     "glasshouse_operations": [0.0, 0.0],
@@ -1586,10 +1586,10 @@
      "added_dimming_percent": [0.00187, 0.0286]
     }
    },
-   "light_taken_km2": [167000.0, 464000.0],
-   "light_taken_share_of_moon": [0.0044, 0.0122],
+   "light_taken_km2": [170000.0, 477000.0],
+   "light_taken_share_of_moon": [0.00448, 0.0126],
    "water_km3_year": {
-    "rain_used": [168.0, 461.0],
+    "rain_used": [168.0, 469.0],
     "withdrawn_from_seas": [0.0, 0.0],
     "rain_on_glass": [0.0, 0.0]
    },
@@ -1600,7 +1600,7 @@
     "glass_discharge": [0.0, 0.0]
    },
    "n2o": {
-    "kt_n_year": [15.9, 51.7],
+    "kt_n_year": [15.9, 51.5],
     "ppb_per_year": [0.00517, 0.0168],
     "ppb_after_1000_years": [5.17, 16.8]
    },

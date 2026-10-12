@@ -6,11 +6,11 @@
    "provisioning/population.py": "645ed9bf34e49598"
   },
   "inputs": {
-   "provisioning/results/first_screen.json": "70ba4c24a3ba43b9",
+   "provisioning/results/first_screen.json": "2a2a7c5dfda5eba5",
    "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
    "research/studies/solar_shield_array/results/electromagnetic.json": "a8184c148766522b",
    "research/studies/joint_synthesis/results/ledgers.json": "563f50e4a71b4cae",
-   "research/studies/sky_fleet/results/sky_fleet.json": "c96dfc663f12756c",
+   "research/studies/sky_fleet/results/sky_fleet.json": "fcf26a8bd6d98950",
    "geography/results/atlas.json": "78cfbf2f469eb339",
    "geography/results/drainage.json": "18494e3d3656ead7",
    "provisioning/population_sources.json": "83462bddb1e616de"
@@ -566,20 +566,20 @@
   "earth_cropland_share_of_ice_free": 0.123,
   "moon_dry_land_km2": 23389000.0,
   "moon_m2_per_person_planning": [
-   131,
-   341
+   134,
+   350
   ],
   "moon_m2_per_person_potential": [
-   60.0,
-   81.0
+   61.0,
+   83.0
   ],
   "moon_billion_at_earths_cropland_share": [
-   8.4,
-   22.0
+   8.2,
+   21.5
   ],
   "moon_dry_land_share_per_billion": [
-   0.0056,
-   0.0146
+   0.0057,
+   0.015
   ]
  },
  "materials": {
@@ -1044,7 +1044,7 @@
    "earth_water_m3_per_person": 2844,
    "moon_food_share_of_dry_land": [
     0.011,
-    0.029
+    0.03
    ],
    "earth_food_ha_plant_rich": [
     2.08,
@@ -1263,8 +1263,8 @@
    "moon_water_m3_per_person": 1810,
    "earth_water_m3_per_person": 2528,
    "moon_food_share_of_dry_land": [
-    0.022,
-    0.058
+    0.023,
+    0.06
    ],
    "earth_food_ha_plant_rich": [
     2.34,
@@ -1483,8 +1483,8 @@
    "moon_water_m3_per_person": 1448,
    "earth_water_m3_per_person": 2275,
    "moon_food_share_of_dry_land": [
-    0.028,
-    0.073
+    0.029,
+    0.075
    ],
    "earth_food_ha_plant_rich": [
     2.6,
@@ -1538,8 +1538,8 @@
    {
     "limit": "cropland at Earth's share of land",
     "billion": [
-     8.4,
-     22.0
+     8.2,
+     21.5
     ]
    },
    {

@@ -21,11 +21,11 @@
   }
  },
  "inputs": {
-  "research/studies/sea_appearance/results/regimes.json": "1b6b778e5a4d9f330373e91fa7c21c4e4cff421b69f0db9a43b92d920a8a983d",
+  "research/studies/sea_appearance/results/regimes.json": "d3daf17a91a71d68863dc4b9cddb8c60d8ae2ffe95aa290ab7cd50e8e2ccdb22",
   "research/studies/sea_appearance/results/lighting_calendar.json": "b76f394595eb0c89487c4208eedc4e9a6d1eff3af72bf63bdb79883920b2f674",
   "research/studies/sea_appearance/results/sea_slopes.npz": "aef6bcd9c97c668488fb23af58004b70bd4ec0974e9a190922be1a7a654bda2a",
   "geography/products/tides_28pct_4ppd.npz": "56529233b8ce20685691174381ab5c32d35e9092819e61fc5cdb42293a536777",
-  "biosphere/living_water/waters.json": "bdf2a5dede623718921e367db11cd6eef95f8d67e944a6cbf277bddd2f962734",
+  "biosphere/living_water/waters.json": "cda0594b8b59acfb469a39b007f977d616db60307d325e80af759242d2baecd1",
   "research/runs/optical_comfort/spherical/moon_1.2atm_standard.npz": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273"
  },
  "scenes": [
@@ -337,10 +337,10 @@
      "y": 473,
      "elevation_deg": -0.4,
      "azimuth_deg": 173.6,
-     "luminance_cd_m2": 4406.88622,
+     "luminance_cd_m2": 4429.16385,
      "chromaticity_xy": [
-      0.299,
-      0.3364
+      0.2991,
+      0.3369
      ],
      "colour": "greyish aqua",
      "srgb": "#899c97"
@@ -351,10 +351,10 @@
      "y": 471,
      "elevation_deg": -0.4,
      "azimuth_deg": 205.0,
-     "luminance_cd_m2": 4177.22244,
+     "luminance_cd_m2": 4199.50008,
      "chromaticity_xy": [
-      0.2969,
-      0.3344
+      0.2971,
+      0.3349
      ],
      "colour": "greyish aqua",
      "srgb": "#859895"
@@ -365,13 +365,13 @@
      "y": 473,
      "elevation_deg": -0.4,
      "azimuth_deg": 236.4,
-     "luminance_cd_m2": 3897.10509,
+     "luminance_cd_m2": 3919.38272,
      "chromaticity_xy": [
-      0.293,
-      0.3306
+      0.2932,
+      0.3311
      ],
      "colour": "greyish cyan",
-     "srgb": "#7f9393"
+     "srgb": "#7f9493"
     },
     {
      "label": "1 degree down, left edge",
@@ -379,13 +379,13 @@
      "y": 491,
      "elevation_deg": -1.0,
      "azimuth_deg": 173.6,
-     "luminance_cd_m2": 4278.33815,
+     "luminance_cd_m2": 4332.12695,
      "chromaticity_xy": [
-      0.2993,
-      0.3368
+      0.2996,
+      0.3379
      ],
      "colour": "greyish aqua",
-     "srgb": "#879a95"
+     "srgb": "#889b95"
     },
     {
      "label": "1 degree down, centre",
@@ -393,13 +393,13 @@
      "y": 487,
      "elevation_deg": -1.0,
      "azimuth_deg": 205.0,
-     "luminance_cd_m2": 4013.03769,
+     "luminance_cd_m2": 4066.82649,
      "chromaticity_xy": [
-      0.297,
-      0.3345
+      0.2974,
+      0.3358
      ],
      "colour": "greyish aqua",
-     "srgb": "#829592"
+     "srgb": "#839692"
     },
     {
      "label": "1 degree down, right edge",
@@ -407,13 +407,13 @@
      "y": 491,
      "elevation_deg": -1.0,
      "azimuth_deg": 236.4,
-     "luminance_cd_m2": 3805.42502,
+     "luminance_cd_m2": 3859.21382,
      "chromaticity_xy": [
-      0.2934,
-      0.331
+      0.2939,
+      0.3323
      ],
      "colour": "greyish cyan",
-     "srgb": "#7e9291"
+     "srgb": "#7e9391"
     },
     {
      "label": "3 degrees down, left edge",
@@ -421,13 +421,13 @@
      "y": 553,
      "elevation_deg": -3.0,
      "azimuth_deg": 173.5,
-     "luminance_cd_m2": 3928.95886,
+     "luminance_cd_m2": 4073.20992,
      "chromaticity_xy": [
-      0.3005,
-      0.3379
+      0.3014,
+      0.3413
      ],
      "colour": "greyish aqua",
-     "srgb": "#83948e"
+     "srgb": "#84968f"
     },
     {
      "label": "3 degrees down, centre",
@@ -435,13 +435,13 @@
      "y": 539,
      "elevation_deg": -3.0,
      "azimuth_deg": 205.0,
-     "luminance_cd_m2": 3557.56677,
+     "luminance_cd_m2": 3701.81783,
      "chromaticity_xy": [
-      0.2973,
-      0.3351
+      0.2985,
+      0.3389
      ],
      "colour": "greyish aqua",
-     "srgb": "#7b8d8a"
+     "srgb": "#7d908a"
     },
     {
      "label": "3 degrees down, right edge",
@@ -449,13 +449,13 @@
      "y": 553,
      "elevation_deg": -3.0,
      "azimuth_deg": 236.5,
-     "luminance_cd_m2": 3486.38354,
+     "luminance_cd_m2": 3630.6346,
      "chromaticity_xy": [
-      0.2945,
-      0.3321
+      0.2957,
+      0.3361
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#798c8a"
+     "colour": "greyish aqua",
+     "srgb": "#7b8f8b"
     },
     {
      "label": "8 degrees down, left edge",
@@ -463,13 +463,13 @@
      "y": 708,
      "elevation_deg": -8.0,
      "azimuth_deg": 173.4,
-     "luminance_cd_m2": 3110.81029,
+     "luminance_cd_m2": 3408.47963,
      "chromaticity_xy": [
-      0.3028,
-      0.3403
+      0.3051,
+      0.3487
      ],
-     "colour": "dark greyish aqua",
-     "srgb": "#76857e"
+     "colour": "dark greyish green",
+     "srgb": "#7a8b80"
     },
     {
      "label": "8 degrees down, centre",
@@ -477,13 +477,13 @@
      "y": 671,
      "elevation_deg": -8.0,
      "azimuth_deg": 205.0,
-     "luminance_cd_m2": 2853.60757,
+     "luminance_cd_m2": 3151.27692,
      "chromaticity_xy": [
-      0.2997,
-      0.3376
+      0.3024,
+      0.3468
      ],
-     "colour": "dark greyish aqua",
-     "srgb": "#70807b"
+     "colour": "dark greyish green",
+     "srgb": "#74867d"
     },
     {
      "label": "8 degrees down, right edge",
@@ -491,13 +491,13 @@
      "y": 708,
      "elevation_deg": -8.0,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 2736.31266,
+     "luminance_cd_m2": 3033.98201,
      "chromaticity_xy": [
-      0.2957,
-      0.3339
+      0.2988,
+      0.3437
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#6c7d7b"
+     "colour": "dark greyish aqua",
+     "srgb": "#71847c"
     },
     {
      "label": "bottom of frame, left edge",
@@ -505,13 +505,13 @@
      "y": 1050,
      "elevation_deg": -18.67,
      "azimuth_deg": 173.1,
-     "luminance_cd_m2": 1951.87172,
+     "luminance_cd_m2": 2393.68041,
      "chromaticity_xy": [
-      0.3144,
-      0.3493
+      0.3178,
+      0.3667
      ],
-     "colour": "dark greyish green",
-     "srgb": "#636a61"
+     "colour": "dark greyish yellow-green",
+     "srgb": "#6a7664"
     },
     {
      "label": "bottom of frame, centre",
@@ -519,13 +519,13 @@
      "y": 1050,
      "elevation_deg": -21.7,
      "azimuth_deg": 205.0,
-     "luminance_cd_m2": 1525.32784,
+     "luminance_cd_m2": 1985.84547,
      "chromaticity_xy": [
-      0.3102,
-      0.3467
+      0.3153,
+      0.3692
      ],
      "colour": "dark greyish green",
-     "srgb": "#565f57"
+     "srgb": "#5f6d5b"
     },
     {
      "label": "bottom of frame, right edge",
@@ -533,24 +533,24 @@
      "y": 1050,
      "elevation_deg": -18.67,
      "azimuth_deg": 236.9,
-     "luminance_cd_m2": 1516.22583,
+     "luminance_cd_m2": 1958.03452,
      "chromaticity_xy": [
-      0.2952,
-      0.3353
+      0.3026,
+      0.3585
      ],
-     "colour": "dark greyish aqua",
-     "srgb": "#515f5d"
+     "colour": "dark greyish green",
+     "srgb": "#596d60"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 204.1844,
+    "luminance_cd_m2": 714.6097,
     "chromaticity_xy": [
-     0.3405,
-     0.414
+     0.339,
+     0.4526
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#1d2214"
+    "colour": "yellow-green",
+    "srgb": "#334523"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1152 (+4 h)",
@@ -1272,10 +1272,10 @@
      "y": 578,
      "elevation_deg": -0.4,
      "azimuth_deg": 230.6,
-     "luminance_cd_m2": 1165.92482,
+     "luminance_cd_m2": 1167.99227,
      "chromaticity_xy": [
       0.3886,
-      0.398
+      0.3982
      ],
      "colour": "orange",
      "srgb": "#a48b5f"
@@ -1286,10 +1286,10 @@
      "y": 576,
      "elevation_deg": -0.4,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 1382.96132,
+     "luminance_cd_m2": 1385.02876,
      "chromaticity_xy": [
-      0.3975,
-      0.403
+      0.3974,
+      0.4031
      ],
      "colour": "orange",
      "srgb": "#b49661"
@@ -1300,10 +1300,10 @@
      "y": 578,
      "elevation_deg": -0.4,
      "azimuth_deg": 293.4,
-     "luminance_cd_m2": 1393.21755,
+     "luminance_cd_m2": 1395.285,
      "chromaticity_xy": [
-      0.3965,
-      0.4013
+      0.3964,
+      0.4014
      ],
      "colour": "orange",
      "srgb": "#b49663"
@@ -1314,10 +1314,10 @@
      "y": 597,
      "elevation_deg": -1.0,
      "azimuth_deg": 230.6,
-     "luminance_cd_m2": 1124.20189,
+     "luminance_cd_m2": 1129.19368,
      "chromaticity_xy": [
-      0.3887,
-      0.398
+      0.3885,
+      0.3983
      ],
      "colour": "orange",
      "srgb": "#a1895d"
@@ -1328,10 +1328,10 @@
      "y": 592,
      "elevation_deg": -1.0,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 1347.29296,
+     "luminance_cd_m2": 1352.28475,
      "chromaticity_xy": [
-      0.3979,
-      0.4028
+      0.3977,
+      0.4031
      ],
      "colour": "orange",
      "srgb": "#b29460"
@@ -1342,10 +1342,10 @@
      "y": 597,
      "elevation_deg": -1.0,
      "azimuth_deg": 293.4,
-     "luminance_cd_m2": 1346.53644,
+     "luminance_cd_m2": 1351.52823,
      "chromaticity_xy": [
-      0.3965,
-      0.4012
+      0.3964,
+      0.4015
      ],
      "colour": "orange",
      "srgb": "#b29461"
@@ -1356,13 +1356,13 @@
      "y": 658,
      "elevation_deg": -3.0,
      "azimuth_deg": 230.6,
-     "luminance_cd_m2": 1008.85874,
+     "luminance_cd_m2": 1022.24575,
      "chromaticity_xy": [
-      0.3888,
-      0.3978
+      0.3882,
+      0.3986
      ],
      "colour": "orange",
-     "srgb": "#998258"
+     "srgb": "#9a8359"
     },
     {
      "label": "3 degrees down, centre",
@@ -1370,13 +1370,13 @@
      "y": 645,
      "elevation_deg": -3.0,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 1206.31046,
+     "luminance_cd_m2": 1219.69747,
      "chromaticity_xy": [
-      0.3981,
-      0.4025
+      0.3975,
+      0.4032
      ],
      "colour": "orange",
-     "srgb": "#a98c5b"
+     "srgb": "#aa8d5c"
     },
     {
      "label": "3 degrees down, right edge",
@@ -1384,10 +1384,10 @@
      "y": 658,
      "elevation_deg": -3.0,
      "azimuth_deg": 293.4,
-     "luminance_cd_m2": 1210.01561,
+     "luminance_cd_m2": 1223.40262,
      "chromaticity_xy": [
-      0.3967,
-      0.4009
+      0.3961,
+      0.4016
      ],
      "colour": "orange",
      "srgb": "#aa8d5d"
@@ -1398,13 +1398,13 @@
      "y": 815,
      "elevation_deg": -8.0,
      "azimuth_deg": 230.7,
-     "luminance_cd_m2": 768.65904,
+     "luminance_cd_m2": 796.28381,
      "chromaticity_xy": [
-      0.3882,
-      0.3971
+      0.3866,
+      0.3994
      ],
      "colour": "dark orange",
-     "srgb": "#87734e"
+     "srgb": "#88754f"
     },
     {
      "label": "8 degrees down, centre",
@@ -1412,13 +1412,13 @@
      "y": 778,
      "elevation_deg": -8.0,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 1037.63261,
+     "luminance_cd_m2": 1065.25738,
      "chromaticity_xy": [
-      0.4206,
-      0.4015
+      0.4187,
+      0.4031
      ],
      "colour": "orange",
-     "srgb": "#a97f4f"
+     "srgb": "#a98150"
     },
     {
      "label": "8 degrees down, right edge",
@@ -1426,13 +1426,13 @@
      "y": 815,
      "elevation_deg": -8.0,
      "azimuth_deg": 293.3,
-     "luminance_cd_m2": 907.1268,
+     "luminance_cd_m2": 934.75158,
      "chromaticity_xy": [
-      0.3951,
-      0.4002
+      0.3936,
+      0.4021
      ],
      "colour": "orange",
-     "srgb": "#947b51"
+     "srgb": "#957d52"
     },
     {
      "label": "bottom of frame, left edge",
@@ -1440,13 +1440,13 @@
      "y": 1050,
      "elevation_deg": -15.26,
      "azimuth_deg": 230.7,
-     "luminance_cd_m2": 497.58063,
+     "luminance_cd_m2": 535.83213,
      "chromaticity_xy": [
-      0.3835,
-      0.3959
+      0.3805,
+      0.4006
      ],
-     "colour": "dark orange",
-     "srgb": "#6d5e40"
+     "colour": "dark amber",
+     "srgb": "#6f6241"
     },
     {
      "label": "bottom of frame, centre",
@@ -1454,13 +1454,13 @@
      "y": 1050,
      "elevation_deg": -17.7,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 1028.49734,
+     "luminance_cd_m2": 1068.81645,
      "chromaticity_xy": [
-      0.4952,
-      0.3995
+      0.49,
+      0.4019
      ],
      "colour": "red-orange",
-     "srgb": "#c67134"
+     "srgb": "#c67436"
     },
     {
      "label": "bottom of frame, right edge",
@@ -1468,13 +1468,13 @@
      "y": 1050,
      "elevation_deg": -15.26,
      "azimuth_deg": 293.3,
-     "luminance_cd_m2": 567.14206,
+     "luminance_cd_m2": 605.39357,
      "chromaticity_xy": [
-      0.3885,
-      0.3989
+      0.3856,
+      0.4029
      ],
      "colour": "dark orange",
-     "srgb": "#756342"
+     "srgb": "#776744"
     }
    ],
    "glitter": {
@@ -1490,19 +1490,19 @@
       575,
       1075
      ],
-     "share_of_frame_sea": 0.1047,
+     "share_of_frame_sea": 0.1042,
      "colour": "vivid orange",
      "times_white": 22.1
     }
    },
    "water_leaving": {
-    "luminance_cd_m2": 18.9235,
+    "luminance_cd_m2": 66.2928,
     "chromaticity_xy": [
-     0.3371,
-     0.4183
+     0.3352,
+     0.457
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#0b0f07"
+    "colour": "yellow-green",
+    "srgb": "#19250f"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1296 (-21 h)",
@@ -2215,10 +2215,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 491.9977,
+     "luminance_cd_m2": 492.84618,
      "chromaticity_xy": [
-      0.4038,
-      0.4006
+      0.4037,
+      0.4007
      ],
      "colour": "orange",
      "srgb": "#a08153"
@@ -2229,10 +2229,10 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 581.09254,
+     "luminance_cd_m2": 581.94103,
      "chromaticity_xy": [
-      0.4115,
-      0.4053
+      0.4114,
+      0.4054
      ],
      "colour": "orange",
      "srgb": "#af8a56"
@@ -2243,9 +2243,9 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 299.4,
-     "luminance_cd_m2": 573.30286,
+     "luminance_cd_m2": 574.15135,
      "chromaticity_xy": [
-      0.4096,
+      0.4095,
       0.4032
      ],
      "colour": "orange",
@@ -2257,13 +2257,13 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 472.68378,
+     "luminance_cd_m2": 474.73243,
      "chromaticity_xy": [
-      0.4037,
-      0.4007
+      0.4035,
+      0.4009
      ],
      "colour": "orange",
-     "srgb": "#9d7e52"
+     "srgb": "#9d7f52"
     },
     {
      "label": "1 degree down, centre",
@@ -2271,10 +2271,10 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 560.86387,
+     "luminance_cd_m2": 562.91253,
      "chromaticity_xy": [
-      0.4115,
-      0.4052
+      0.4113,
+      0.4054
      ],
      "colour": "orange",
      "srgb": "#ac8854"
@@ -2285,10 +2285,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 549.81852,
+     "luminance_cd_m2": 551.86718,
      "chromaticity_xy": [
-      0.4095,
-      0.4031
+      0.4093,
+      0.4034
      ],
      "colour": "orange",
      "srgb": "#aa8755"
@@ -2299,13 +2299,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 414.20027,
+     "luminance_cd_m2": 419.69436,
      "chromaticity_xy": [
-      0.4031,
-      0.4008
+      0.4024,
+      0.4016
      ],
      "colour": "orange",
-     "srgb": "#94774d"
+     "srgb": "#94784d"
     },
     {
      "label": "3 degrees down, centre",
@@ -2313,13 +2313,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 505.73492,
+     "luminance_cd_m2": 511.22901,
      "chromaticity_xy": [
-      0.4119,
-      0.4047
+      0.4113,
+      0.4054
      ],
      "colour": "orange",
-     "srgb": "#a58150"
+     "srgb": "#a58251"
     },
     {
      "label": "3 degrees down, right edge",
@@ -2327,13 +2327,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 495.83042,
+     "luminance_cd_m2": 501.3245,
      "chromaticity_xy": [
-      0.4097,
-      0.4026
+      0.409,
+      0.4033
      ],
      "colour": "orange",
-     "srgb": "#a38051"
+     "srgb": "#a38151"
     },
     {
      "label": "8 degrees down, left edge",
@@ -2341,13 +2341,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 236.8,
-     "luminance_cd_m2": 319.42764,
+     "luminance_cd_m2": 330.76497,
      "chromaticity_xy": [
-      0.4025,
-      0.3994
+      0.4008,
+      0.4016
      ],
      "colour": "dark orange",
-     "srgb": "#836944"
+     "srgb": "#846b45"
     },
     {
      "label": "8 degrees down, centre",
@@ -2355,13 +2355,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 385.02052,
+     "luminance_cd_m2": 396.35785,
      "chromaticity_xy": [
-      0.4114,
-      0.4039
+      0.4097,
+      0.4057
      ],
      "colour": "orange",
-     "srgb": "#917247"
+     "srgb": "#927447"
     },
     {
      "label": "8 degrees down, right edge",
@@ -2369,13 +2369,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 299.2,
-     "luminance_cd_m2": 376.23343,
+     "luminance_cd_m2": 387.57076,
      "chromaticity_xy": [
-      0.4088,
-      0.402
+      0.4072,
+      0.4038
      ],
      "colour": "orange",
-     "srgb": "#8f7147"
+     "srgb": "#907348"
     },
     {
      "label": "bottom of frame, left edge",
@@ -2383,13 +2383,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 237.0,
-     "luminance_cd_m2": 236.723,
+     "luminance_cd_m2": 251.67883,
      "chromaticity_xy": [
-      0.4011,
-      0.3994
+      0.398,
+      0.4033
      ],
      "colour": "dark orange",
-     "srgb": "#725b3b"
+     "srgb": "#735f3c"
     },
     {
      "label": "bottom of frame, centre",
@@ -2397,13 +2397,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 244.00462,
+     "luminance_cd_m2": 259.87309,
      "chromaticity_xy": [
-      0.4068,
-      0.4029
+      0.4034,
+      0.4068
      ],
      "colour": "dark orange",
-     "srgb": "#745c39"
+     "srgb": "#76603b"
     },
     {
      "label": "bottom of frame, right edge",
@@ -2411,24 +2411,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 299.0,
-     "luminance_cd_m2": 269.87333,
+     "luminance_cd_m2": 284.82915,
      "chromaticity_xy": [
-      0.4055,
-      0.4014
+      0.4026,
+      0.4048
      ],
      "colour": "dark orange",
-     "srgb": "#7a613d"
+     "srgb": "#7b643e"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 7.7817,
+    "luminance_cd_m2": 27.2223,
     "chromaticity_xy": [
-     0.345,
-     0.4214
+     0.3422,
+     0.4594
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#0a0d05"
+    "colour": "yellow-green",
+    "srgb": "#17210d"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1344 (+9 h)",
@@ -3143,13 +3143,13 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 60.6,
-     "luminance_cd_m2": 29.63928,
+     "luminance_cd_m2": 29.78527,
      "chromaticity_xy": [
       0.338,
-      0.3622
+      0.3626
      ],
      "colour": "greyish amber",
-     "srgb": "#9a9580"
+     "srgb": "#9a9680"
     },
     {
      "label": "just below the horizon, centre",
@@ -3157,13 +3157,13 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 92.0,
-     "luminance_cd_m2": 36.44059,
+     "luminance_cd_m2": 36.58659,
      "chromaticity_xy": [
       0.3653,
-      0.3742
+      0.3745
      ],
      "colour": "pale orange",
-     "srgb": "#b7a080"
+     "srgb": "#b7a180"
     },
     {
      "label": "just below the horizon, right edge",
@@ -3171,10 +3171,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 123.4,
-     "luminance_cd_m2": 32.51508,
+     "luminance_cd_m2": 32.66107,
      "chromaticity_xy": [
       0.3381,
-      0.3626
+      0.363
      ],
      "colour": "greyish amber",
      "srgb": "#a09c86"
@@ -3185,13 +3185,13 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 60.7,
-     "luminance_cd_m2": 28.73688,
+     "luminance_cd_m2": 29.08937,
      "chromaticity_xy": [
-      0.3381,
-      0.3623
+      0.3382,
+      0.3634
      ],
      "colour": "greyish amber",
-     "srgb": "#98937e"
+     "srgb": "#98947f"
     },
     {
      "label": "1 degree down, centre",
@@ -3199,13 +3199,13 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 92.0,
-     "luminance_cd_m2": 35.36443,
+     "luminance_cd_m2": 35.71692,
      "chromaticity_xy": [
-      0.364,
-      0.3737
+      0.3638,
+      0.3745
      ],
      "colour": "pale orange",
-     "srgb": "#b39e7f"
+     "srgb": "#b49f7f"
     },
     {
      "label": "1 degree down, right edge",
@@ -3213,13 +3213,13 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 123.3,
-     "luminance_cd_m2": 31.67021,
+     "luminance_cd_m2": 32.0227,
      "chromaticity_xy": [
-      0.3382,
-      0.3628
+      0.3383,
+      0.3638
      ],
      "colour": "greyish amber",
-     "srgb": "#9e9a84"
+     "srgb": "#9f9b84"
     },
     {
      "label": "3 degrees down, left edge",
@@ -3227,13 +3227,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 60.7,
-     "luminance_cd_m2": 26.17532,
+     "luminance_cd_m2": 27.12064,
      "chromaticity_xy": [
-      0.3385,
-      0.363
+      0.3386,
+      0.366
      ],
-     "colour": "greyish amber",
-     "srgb": "#918d79"
+     "colour": "greyish golden yellow",
+     "srgb": "#939079"
     },
     {
      "label": "3 degrees down, centre",
@@ -3241,13 +3241,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 92.0,
-     "luminance_cd_m2": 31.09092,
+     "luminance_cd_m2": 32.03623,
      "chromaticity_xy": [
-      0.3605,
-      0.3725
+      0.3601,
+      0.3749
      ],
      "colour": "pale orange",
-     "srgb": "#a89679"
+     "srgb": "#a9987a"
     },
     {
      "label": "3 degrees down, right edge",
@@ -3255,13 +3255,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 123.3,
-     "luminance_cd_m2": 28.77518,
+     "luminance_cd_m2": 29.7205,
      "chromaticity_xy": [
-      0.3385,
-      0.3634
+      0.3387,
+      0.3661
      ],
-     "colour": "greyish amber",
-     "srgb": "#98937e"
+     "colour": "greyish golden yellow",
+     "srgb": "#99967e"
     },
     {
      "label": "8 degrees down, left edge",
@@ -3269,13 +3269,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 60.8,
-     "luminance_cd_m2": 20.64132,
+     "luminance_cd_m2": 22.59203,
      "chromaticity_xy": [
-      0.339,
-      0.3642
+      0.3394,
+      0.3718
      ],
-     "colour": "dark greyish amber",
-     "srgb": "#827e6b"
+     "colour": "dark greyish golden yellow",
+     "srgb": "#85856d"
     },
     {
      "label": "8 degrees down, centre",
@@ -3283,13 +3283,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 92.0,
-     "luminance_cd_m2": 23.24387,
+     "luminance_cd_m2": 25.19458,
      "chromaticity_xy": [
-      0.3541,
-      0.3706
+      0.3536,
+      0.3771
      ],
-     "colour": "muted orange",
-     "srgb": "#90846c"
+     "colour": "muted amber",
+     "srgb": "#938a6d"
     },
     {
      "label": "8 degrees down, right edge",
@@ -3297,13 +3297,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 123.2,
-     "luminance_cd_m2": 22.30763,
+     "luminance_cd_m2": 24.25834,
      "chromaticity_xy": [
-      0.3387,
-      0.3643
+      0.3391,
+      0.3713
      ],
-     "colour": "dark greyish amber",
-     "srgb": "#87836f"
+     "colour": "dark greyish golden yellow",
+     "srgb": "#8a8971"
     },
     {
      "label": "bottom of frame, left edge",
@@ -3311,13 +3311,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 61.0,
-     "luminance_cd_m2": 15.45831,
+     "luminance_cd_m2": 18.03162,
      "chromaticity_xy": [
-      0.339,
-      0.3651
+      0.3396,
+      0.3777
      ],
-     "colour": "dark greyish amber",
-     "srgb": "#726f5d"
+     "colour": "dark muted golden yellow",
+     "srgb": "#777860"
     },
     {
      "label": "bottom of frame, centre",
@@ -3325,13 +3325,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 92.0,
-     "luminance_cd_m2": 14.58773,
+     "luminance_cd_m2": 17.31807,
      "chromaticity_xy": [
-      0.3481,
-      0.3692
+      0.3476,
+      0.3828
      ],
-     "colour": "dark muted amber",
-     "srgb": "#726b58"
+     "colour": "dark muted golden yellow",
+     "srgb": "#77755b"
     },
     {
      "label": "bottom of frame, right edge",
@@ -3339,24 +3339,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 123.0,
-     "luminance_cd_m2": 16.2663,
+     "luminance_cd_m2": 18.83961,
      "chromaticity_xy": [
-      0.3382,
-      0.3649
+      0.3389,
+      0.377
      ],
-     "colour": "dark greyish amber",
-     "srgb": "#747160"
+     "colour": "dark muted yellow",
+     "srgb": "#797b62"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 1.3418,
+    "luminance_cd_m2": 4.6867,
     "chromaticity_xy": [
-     0.3496,
-     0.4218
+     0.3462,
+     0.4596
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#1c2111"
+    "colour": "yellow-green",
+    "srgb": "#33421f"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1344 (-15 h)",
@@ -4061,7 +4061,7 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 253.6,
-     "luminance_cd_m2": 3.16344,
+     "luminance_cd_m2": 3.16635,
      "chromaticity_xy": [
       0.4484,
       0.4125
@@ -4075,9 +4075,9 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 285.0,
-     "luminance_cd_m2": 5.28669,
+     "luminance_cd_m2": 5.2896,
      "chromaticity_xy": [
-      0.4755,
+      0.4754,
       0.4184
      ],
      "colour": "orange",
@@ -4089,10 +4089,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 316.4,
-     "luminance_cd_m2": 4.12873,
+     "luminance_cd_m2": 4.13165,
      "chromaticity_xy": [
-      0.4632,
-      0.4159
+      0.4631,
+      0.416
      ],
      "colour": "orange",
      "srgb": "#b97c39"
@@ -4103,10 +4103,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 253.7,
-     "luminance_cd_m2": 3.11961,
+     "luminance_cd_m2": 3.12665,
      "chromaticity_xy": [
-      0.4501,
-      0.4119
+      0.4499,
+      0.412
      ],
      "colour": "orange",
      "srgb": "#9f6f38"
@@ -4117,10 +4117,10 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 285.0,
-     "luminance_cd_m2": 5.06864,
+     "luminance_cd_m2": 5.07568,
      "chromaticity_xy": [
-      0.4754,
-      0.4184
+      0.4752,
+      0.4185
      ],
      "colour": "orange",
      "srgb": "#cf8738"
@@ -4131,10 +4131,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 316.3,
-     "luminance_cd_m2": 3.99194,
+     "luminance_cd_m2": 3.99898,
      "chromaticity_xy": [
-      0.4637,
-      0.4157
+      0.4635,
+      0.4158
      ],
      "colour": "orange",
      "srgb": "#b67a38"
@@ -4145,13 +4145,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 253.7,
-     "luminance_cd_m2": 2.77127,
+     "luminance_cd_m2": 2.79015,
      "chromaticity_xy": [
-      0.451,
-      0.4115
+      0.4504,
+      0.4119
      ],
      "colour": "orange",
-     "srgb": "#976835"
+     "srgb": "#986935"
     },
     {
      "label": "3 degrees down, centre",
@@ -4159,13 +4159,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 285.0,
-     "luminance_cd_m2": 4.53038,
+     "luminance_cd_m2": 4.54926,
      "chromaticity_xy": [
-      0.4768,
-      0.4175
+      0.4764,
+      0.4177
      ],
      "colour": "orange",
-     "srgb": "#c58035"
+     "srgb": "#c68035"
     },
     {
      "label": "3 degrees down, right edge",
@@ -4173,10 +4173,10 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 316.3,
-     "luminance_cd_m2": 3.5912,
+     "luminance_cd_m2": 3.61008,
      "chromaticity_xy": [
-      0.4656,
-      0.4147
+      0.4651,
+      0.415
      ],
      "colour": "orange",
      "srgb": "#af7435"
@@ -4187,13 +4187,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 253.8,
-     "luminance_cd_m2": 2.1055,
+     "luminance_cd_m2": 2.14445,
      "chromaticity_xy": [
-      0.4516,
-      0.4102
+      0.4499,
+      0.4112
      ],
      "colour": "dark orange",
-     "srgb": "#865b2e"
+     "srgb": "#865c2e"
     },
     {
      "label": "8 degrees down, centre",
@@ -4201,13 +4201,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 285.0,
-     "luminance_cd_m2": 3.35087,
+     "luminance_cd_m2": 3.38983,
      "chromaticity_xy": [
-      0.4767,
-      0.4162
+      0.4754,
+      0.4168
      ],
      "colour": "orange",
-     "srgb": "#ad6f2e"
+     "srgb": "#ad702e"
     },
     {
      "label": "8 degrees down, right edge",
@@ -4215,13 +4215,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 316.2,
-     "luminance_cd_m2": 2.68999,
+     "luminance_cd_m2": 2.72894,
      "chromaticity_xy": [
-      0.4658,
-      0.4135
+      0.4643,
+      0.4143
      ],
      "colour": "orange",
-     "srgb": "#9a652e"
+     "srgb": "#9a662f"
     },
     {
      "label": "bottom of frame, left edge",
@@ -4229,13 +4229,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 254.0,
-     "luminance_cd_m2": 1.45153,
+     "luminance_cd_m2": 1.50292,
      "chromaticity_xy": [
-      0.446,
-      0.4092
+      0.4429,
+      0.4112
      ],
      "colour": "dark orange",
-     "srgb": "#6f4d27"
+     "srgb": "#704f28"
     },
     {
      "label": "bottom of frame, centre",
@@ -4243,13 +4243,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 285.0,
-     "luminance_cd_m2": 1.88788,
+     "luminance_cd_m2": 1.94241,
      "chromaticity_xy": [
-      0.4656,
-      0.4154
+      0.4626,
+      0.4169
      ],
      "colour": "dark orange",
-     "srgb": "#825625"
+     "srgb": "#835726"
     },
     {
      "label": "bottom of frame, right edge",
@@ -4257,24 +4257,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 316.0,
-     "luminance_cd_m2": 1.82811,
+     "luminance_cd_m2": 1.8795,
      "chromaticity_xy": [
-      0.4595,
-      0.4128
+      0.4567,
+      0.4143
      ],
      "colour": "dark orange",
-     "srgb": "#7f5527"
+     "srgb": "#805628"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 0.0268,
+    "luminance_cd_m2": 0.0936,
     "chromaticity_xy": [
-     0.3479,
-     0.422
+     0.3443,
+     0.46
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#050602"
+    "colour": "yellow-green",
+    "srgb": "#0c1305"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1419 (+13 h)",
@@ -4989,10 +4989,10 @@
      "y": 657,
      "elevation_deg": -0.4,
      "azimuth_deg": 62.7,
-     "luminance_cd_m2": 0.12634,
+     "luminance_cd_m2": 0.12649,
      "chromaticity_xy": [
-      0.3874,
-      0.3817
+      0.3873,
+      0.3818
      ],
      "colour": "pale orange",
      "srgb": "#e4ba8c"
@@ -5003,7 +5003,7 @@
      "y": 655,
      "elevation_deg": -0.4,
      "azimuth_deg": 94.0,
-     "luminance_cd_m2": 0.22455,
+     "luminance_cd_m2": 0.2247,
      "chromaticity_xy": [
       0.4222,
       0.4078
@@ -5017,13 +5017,13 @@
      "y": 657,
      "elevation_deg": -0.4,
      "azimuth_deg": 125.3,
-     "luminance_cd_m2": 0.09202,
+     "luminance_cd_m2": 0.09216,
      "chromaticity_xy": [
       0.3465,
-      0.37
+      0.3701
      ],
      "colour": "pale amber",
-     "srgb": "#b0a78a"
+     "srgb": "#b0a88a"
     },
     {
      "label": "1 degree down, left edge",
@@ -5031,10 +5031,10 @@
      "y": 676,
      "elevation_deg": -1.0,
      "azimuth_deg": 62.7,
-     "luminance_cd_m2": 0.12207,
+     "luminance_cd_m2": 0.12242,
      "chromaticity_xy": [
-      0.3873,
-      0.3816
+      0.3872,
+      0.3818
      ],
      "colour": "pale orange",
      "srgb": "#e0b78a"
@@ -5045,10 +5045,10 @@
      "y": 671,
      "elevation_deg": -1.0,
      "azimuth_deg": 94.0,
-     "luminance_cd_m2": 0.23749,
+     "luminance_cd_m2": 0.23785,
      "chromaticity_xy": [
-      0.4269,
-      0.4102
+      0.4268,
+      0.4103
      ],
      "colour": "amber",
      "srgb": "#ffea8a"
@@ -5059,13 +5059,13 @@
      "y": 676,
      "elevation_deg": -1.0,
      "azimuth_deg": 125.3,
-     "luminance_cd_m2": 0.08637,
+     "luminance_cd_m2": 0.08672,
      "chromaticity_xy": [
-      0.3462,
-      0.37
+      0.3461,
+      0.3703
      ],
      "colour": "pale amber",
-     "srgb": "#aba386"
+     "srgb": "#aba387"
     },
     {
      "label": "3 degrees down, left edge",
@@ -5073,13 +5073,13 @@
      "y": 738,
      "elevation_deg": -3.0,
      "azimuth_deg": 62.8,
-     "luminance_cd_m2": 0.10819,
+     "luminance_cd_m2": 0.10915,
      "chromaticity_xy": [
-      0.3861,
-      0.3814
+      0.3856,
+      0.3819
      ],
      "colour": "pale orange",
-     "srgb": "#d4ad83"
+     "srgb": "#d4ae83"
     },
     {
      "label": "3 degrees down, centre",
@@ -5087,13 +5087,13 @@
      "y": 725,
      "elevation_deg": -3.0,
      "azimuth_deg": 94.0,
-     "luminance_cd_m2": 0.3078,
+     "luminance_cd_m2": 0.30875,
      "chromaticity_xy": [
-      0.4443,
-      0.4192
+      0.4439,
+      0.4193
      ],
      "colour": "amber",
-     "srgb": "#ffed7a"
+     "srgb": "#ffed7b"
     },
     {
      "label": "3 degrees down, right edge",
@@ -5101,13 +5101,13 @@
      "y": 738,
      "elevation_deg": -3.0,
      "azimuth_deg": 125.2,
-     "luminance_cd_m2": 0.07812,
+     "luminance_cd_m2": 0.07908,
      "chromaticity_xy": [
-      0.3459,
-      0.3698
+      0.3457,
+      0.3706
      ],
      "colour": "pale amber",
-     "srgb": "#a39c81"
+     "srgb": "#a39d81"
     },
     {
      "label": "8 degrees down, left edge",
@@ -5115,13 +5115,13 @@
      "y": 896,
      "elevation_deg": -8.0,
      "azimuth_deg": 62.9,
-     "luminance_cd_m2": 0.07536,
+     "luminance_cd_m2": 0.07733,
      "chromaticity_xy": [
-      0.3772,
-      0.3804
+      0.3761,
+      0.3821
      ],
      "colour": "pale orange",
-     "srgb": "#b09572"
+     "srgb": "#b09772"
     },
     {
      "label": "8 degrees down, centre",
@@ -5129,9 +5129,9 @@
      "y": 860,
      "elevation_deg": -8.0,
      "azimuth_deg": 94.0,
-     "luminance_cd_m2": 0.83448,
+     "luminance_cd_m2": 0.83645,
      "chromaticity_xy": [
-      0.4739,
+      0.4736,
       0.4346
      ],
      "colour": "golden yellow",
@@ -5143,13 +5143,13 @@
      "y": 896,
      "elevation_deg": -8.0,
      "azimuth_deg": 125.1,
-     "luminance_cd_m2": 0.05608,
+     "luminance_cd_m2": 0.05805,
      "chromaticity_xy": [
-      0.3417,
-      0.3683
+      0.3412,
+      0.3708
      ],
-     "colour": "dark greyish amber",
-     "srgb": "#8a8670"
+     "colour": "dark greyish golden yellow",
+     "srgb": "#8b8971"
     },
     {
      "label": "bottom of frame, left edge",
@@ -5157,13 +5157,13 @@
      "y": 1050,
      "elevation_deg": -12.69,
      "azimuth_deg": 63.1,
-     "luminance_cd_m2": 0.05067,
+     "luminance_cd_m2": 0.0532,
      "chromaticity_xy": [
-      0.3645,
-      0.3775
+      0.3629,
+      0.3807
      ],
      "colour": "muted orange",
-     "srgb": "#8d7e62"
+     "srgb": "#8f8163"
     },
     {
      "label": "bottom of frame, centre",
@@ -5171,10 +5171,10 @@
      "y": 1050,
      "elevation_deg": -14.7,
      "azimuth_deg": 94.0,
-     "luminance_cd_m2": 2.211,
+     "luminance_cd_m2": 2.21369,
      "chromaticity_xy": [
-      0.4828,
-      0.439
+      0.4826,
+      0.4391
      ],
      "colour": "golden yellow",
      "srgb": "#ffe93c"
@@ -5185,13 +5185,13 @@
      "y": 1050,
      "elevation_deg": -12.69,
      "azimuth_deg": 124.9,
-     "luminance_cd_m2": 0.039,
+     "luminance_cd_m2": 0.04152,
      "chromaticity_xy": [
-      0.3351,
-      0.3654
+      0.3345,
+      0.37
      ],
-     "colour": "dark greyish golden yellow",
-     "srgb": "#727260"
+     "colour": "dark greyish yellow",
+     "srgb": "#747662"
     }
    ],
    "glitter": {
@@ -5207,19 +5207,19 @@
       655,
       1075
      ],
-     "share_of_frame_sea": 0.0881,
+     "share_of_frame_sea": 0.0873,
      "colour": "vivid amber",
      "times_white": 10.3
     }
    },
    "water_leaving": {
-    "luminance_cd_m2": 0.0014,
+    "luminance_cd_m2": 0.0047,
     "chromaticity_xy": [
-     0.3246,
-     0.3988
+     0.3241,
+     0.4402
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#0e130b"
+    "colour": "pale green",
+    "srgb": "#1c2b16"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 816 (+0 h)",
@@ -5896,10 +5896,10 @@
      "y": 473,
      "elevation_deg": -0.4,
      "azimuth_deg": 238.6,
-     "luminance_cd_m2": 4622.67725,
+     "luminance_cd_m2": 4649.57257,
      "chromaticity_xy": [
-      0.2872,
-      0.3232
+      0.2874,
+      0.3238
      ],
      "colour": "greyish cyan",
      "srgb": "#8ca5a9"
@@ -5910,13 +5910,13 @@
      "y": 471,
      "elevation_deg": -0.4,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 4473.02358,
+     "luminance_cd_m2": 4499.91889,
      "chromaticity_xy": [
-      0.2864,
-      0.3222
+      0.2866,
+      0.3228
      ],
      "colour": "greyish cyan",
-     "srgb": "#89a3a7"
+     "srgb": "#8aa3a7"
     },
     {
      "label": "just below the horizon, right edge",
@@ -5924,10 +5924,10 @@
      "y": 473,
      "elevation_deg": -0.4,
      "azimuth_deg": 301.4,
-     "luminance_cd_m2": 4496.93868,
+     "luminance_cd_m2": 4523.834,
      "chromaticity_xy": [
-      0.2864,
-      0.3223
+      0.2866,
+      0.3229
      ],
      "colour": "greyish cyan",
      "srgb": "#8aa3a7"
@@ -5938,13 +5938,13 @@
      "y": 491,
      "elevation_deg": -1.0,
      "azimuth_deg": 238.6,
-     "luminance_cd_m2": 4445.03559,
+     "luminance_cd_m2": 4509.97367,
      "chromaticity_xy": [
-      0.2874,
-      0.3234
+      0.2879,
+      0.3249
      ],
      "colour": "greyish cyan",
-     "srgb": "#89a2a6"
+     "srgb": "#8aa3a6"
     },
     {
      "label": "1 degree down, centre",
@@ -5952,13 +5952,13 @@
      "y": 487,
      "elevation_deg": -1.0,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 4281.56022,
+     "luminance_cd_m2": 4346.49829,
      "chromaticity_xy": [
-      0.2864,
-      0.3223
+      0.2869,
+      0.3238
      ],
      "colour": "greyish cyan",
-     "srgb": "#879fa4"
+     "srgb": "#87a1a4"
     },
     {
      "label": "1 degree down, right edge",
@@ -5966,13 +5966,13 @@
      "y": 491,
      "elevation_deg": -1.0,
      "azimuth_deg": 301.4,
-     "luminance_cd_m2": 4379.37394,
+     "luminance_cd_m2": 4444.31201,
      "chromaticity_xy": [
-      0.2868,
-      0.3228
+      0.2873,
+      0.3242
      ],
      "colour": "greyish cyan",
-     "srgb": "#88a1a5"
+     "srgb": "#89a2a5"
     },
     {
      "label": "3 degrees down, left edge",
@@ -5980,13 +5980,13 @@
      "y": 553,
      "elevation_deg": -3.0,
      "azimuth_deg": 238.5,
-     "luminance_cd_m2": 4081.09127,
+     "luminance_cd_m2": 4255.24249,
      "chromaticity_xy": [
-      0.2885,
-      0.3247
+      0.2899,
+      0.3288
      ],
      "colour": "greyish cyan",
-     "srgb": "#859c9f"
+     "srgb": "#879f9f"
     },
     {
      "label": "3 degrees down, centre",
@@ -5994,13 +5994,13 @@
      "y": 539,
      "elevation_deg": -3.0,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 3835.96318,
+     "luminance_cd_m2": 4010.1144,
      "chromaticity_xy": [
-      0.287,
-      0.3232
+      0.2885,
+      0.3276
      ],
      "colour": "greyish cyan",
-     "srgb": "#80989b"
+     "srgb": "#829b9c"
     },
     {
      "label": "3 degrees down, right edge",
@@ -6008,13 +6008,13 @@
      "y": 553,
      "elevation_deg": -3.0,
      "azimuth_deg": 301.5,
-     "luminance_cd_m2": 4003.14391,
+     "luminance_cd_m2": 4177.29513,
      "chromaticity_xy": [
-      0.2878,
-      0.324
+      0.2892,
+      0.3282
      ],
      "colour": "greyish cyan",
-     "srgb": "#839b9e"
+     "srgb": "#859e9e"
     },
     {
      "label": "8 degrees down, left edge",
@@ -6022,13 +6022,13 @@
      "y": 708,
      "elevation_deg": -8.0,
      "azimuth_deg": 238.4,
-     "luminance_cd_m2": 3171.78189,
+     "luminance_cd_m2": 3531.15174,
      "chromaticity_xy": [
-      0.2894,
-      0.3263
+      0.2929,
+      0.3367
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#768b8c"
+     "colour": "greyish aqua",
+     "srgb": "#7b938e"
     },
     {
      "label": "8 degrees down, centre",
@@ -6036,13 +6036,13 @@
      "y": 671,
      "elevation_deg": -8.0,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 2996.52356,
+     "luminance_cd_m2": 3355.89341,
      "chromaticity_xy": [
-      0.2884,
-      0.3252
+      0.2921,
+      0.3362
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#738789"
+     "colour": "greyish aqua",
+     "srgb": "#78908b"
     },
     {
      "label": "8 degrees down, right edge",
@@ -6050,13 +6050,13 @@
      "y": 708,
      "elevation_deg": -8.0,
      "azimuth_deg": 301.6,
-     "luminance_cd_m2": 3110.37617,
+     "luminance_cd_m2": 3469.74602,
      "chromaticity_xy": [
-      0.2889,
-      0.3257
+      0.2925,
+      0.3363
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#758a8c"
+     "colour": "greyish aqua",
+     "srgb": "#7a928d"
     },
     {
      "label": "bottom of frame, left edge",
@@ -6064,13 +6064,13 @@
      "y": 1050,
      "elevation_deg": -18.67,
      "azimuth_deg": 238.1,
-     "luminance_cd_m2": 1668.44357,
+     "luminance_cd_m2": 2201.82977,
      "chromaticity_xy": [
-      0.2882,
-      0.3271
+      0.2971,
+      0.3529
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#566768"
+     "colour": "dark greyish aqua",
+     "srgb": "#60776c"
     },
     {
      "label": "bottom of frame, centre",
@@ -6078,13 +6078,13 @@
      "y": 1050,
      "elevation_deg": -21.7,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 1367.04837,
+     "luminance_cd_m2": 1923.02148,
      "chromaticity_xy": [
-      0.2878,
-      0.3273
+      0.2987,
+      0.3586
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#4e5e5f"
+     "colour": "dark muted green",
+     "srgb": "#597063"
     },
     {
      "label": "bottom of frame, right edge",
@@ -6092,24 +6092,24 @@
      "y": 1050,
      "elevation_deg": -18.67,
      "azimuth_deg": 301.9,
-     "luminance_cd_m2": 1644.47671,
+     "luminance_cd_m2": 2177.86292,
      "chromaticity_xy": [
-      0.2878,
-      0.3266
+      0.2969,
+      0.3528
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#556768"
+     "colour": "dark muted aqua",
+     "srgb": "#5f776b"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 246.467,
+    "luminance_cd_m2": 862.6926,
     "chromaticity_xy": [
-     0.3391,
-     0.4125
+     0.3378,
+     0.4512
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#212818"
+    "colour": "yellow-green",
+    "srgb": "#3b4e29"
    },
    "waves": {
     "source": "Smythii shore history, west-face station, hour 819",
@@ -6749,10 +6749,10 @@
      "y": 578,
      "elevation_deg": -0.4,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 1897.77888,
+     "luminance_cd_m2": 1899.91488,
      "chromaticity_xy": [
-      0.4092,
-      0.4009
+      0.4091,
+      0.401
      ],
      "colour": "orange",
      "srgb": "#d4a86d"
@@ -6763,10 +6763,10 @@
      "y": 576,
      "elevation_deg": -0.4,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 2135.37283,
+     "luminance_cd_m2": 2137.50883,
      "chromaticity_xy": [
-      0.4189,
-      0.4041
+      0.4188,
+      0.4042
      ],
      "colour": "orange",
      "srgb": "#e4b06d"
@@ -6777,10 +6777,10 @@
      "y": 578,
      "elevation_deg": -0.4,
      "azimuth_deg": 299.4,
-     "luminance_cd_m2": 1979.11507,
+     "luminance_cd_m2": 1981.25107,
      "chromaticity_xy": [
       0.4121,
-      0.4002
+      0.4003
      ],
      "colour": "orange",
      "srgb": "#daaa6e"
@@ -6791,13 +6791,13 @@
      "y": 597,
      "elevation_deg": -1.0,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 1821.81365,
+     "luminance_cd_m2": 1826.97097,
      "chromaticity_xy": [
-      0.409,
-      0.4009
+      0.4089,
+      0.4011
      ],
      "colour": "orange",
-     "srgb": "#d0a56b"
+     "srgb": "#d1a56b"
     },
     {
      "label": "1 degree down, centre",
@@ -6805,10 +6805,10 @@
      "y": 592,
      "elevation_deg": -1.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 2215.90444,
+     "luminance_cd_m2": 2221.06176,
      "chromaticity_xy": [
-      0.4309,
-      0.4038
+      0.4308,
+      0.404
      ],
      "colour": "orange",
      "srgb": "#efb06a"
@@ -6819,13 +6819,13 @@
      "y": 597,
      "elevation_deg": -1.0,
      "azimuth_deg": 299.4,
-     "luminance_cd_m2": 1908.64604,
+     "luminance_cd_m2": 1913.80336,
      "chromaticity_xy": [
-      0.412,
-      0.4002
+      0.4118,
+      0.4004
      ],
      "colour": "orange",
-     "srgb": "#d7a86c"
+     "srgb": "#d7a86d"
     },
     {
      "label": "3 degrees down, left edge",
@@ -6833,13 +6833,13 @@
      "y": 658,
      "elevation_deg": -3.0,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 1629.90469,
+     "luminance_cd_m2": 1643.73562,
      "chromaticity_xy": [
-      0.4081,
-      0.4009
+      0.4076,
+      0.4015
      ],
      "colour": "orange",
-     "srgb": "#c69d66"
+     "srgb": "#c69e66"
     },
     {
      "label": "3 degrees down, centre",
@@ -6847,13 +6847,13 @@
      "y": 645,
      "elevation_deg": -3.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 5466.72804,
+     "luminance_cd_m2": 5480.55897,
      "chromaticity_xy": [
-      0.5328,
-      0.4023
+      0.5324,
+      0.4024
      ],
      "colour": "amber",
-     "srgb": "#ffc938"
+     "srgb": "#ffca38"
     },
     {
      "label": "3 degrees down, right edge",
@@ -6861,13 +6861,13 @@
      "y": 658,
      "elevation_deg": -3.0,
      "azimuth_deg": 299.4,
-     "luminance_cd_m2": 1698.83474,
+     "luminance_cd_m2": 1712.66567,
      "chromaticity_xy": [
-      0.4109,
-      0.4006
+      0.4104,
+      0.4011
      ],
      "colour": "orange",
-     "srgb": "#cb9f67"
+     "srgb": "#cba067"
     },
     {
      "label": "8 degrees down, left edge",
@@ -6875,13 +6875,13 @@
      "y": 815,
      "elevation_deg": -8.0,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 1171.39328,
+     "luminance_cd_m2": 1199.93409,
      "chromaticity_xy": [
-      0.4023,
-      0.4021
+      0.4009,
+      0.4036
      ],
      "colour": "orange",
-     "srgb": "#a78858"
+     "srgb": "#a88a59"
     },
     {
      "label": "8 degrees down, centre",
@@ -6889,13 +6889,13 @@
      "y": 778,
      "elevation_deg": -8.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 12494.98886,
+     "luminance_cd_m2": 12523.52968,
      "chromaticity_xy": [
-      0.5718,
-      0.4018
+      0.5714,
+      0.4019
      ],
      "colour": "vivid amber",
-     "srgb": "#ffbb00"
+     "srgb": "#ffbc00"
     },
     {
      "label": "8 degrees down, right edge",
@@ -6903,13 +6903,13 @@
      "y": 815,
      "elevation_deg": -8.0,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 1213.76109,
+     "luminance_cd_m2": 1242.30191,
      "chromaticity_xy": [
-      0.4042,
-      0.4028
+      0.4028,
+      0.4042
      ],
      "colour": "orange",
-     "srgb": "#ab8a58"
+     "srgb": "#ac8c59"
     },
     {
      "label": "bottom of frame, left edge",
@@ -6917,13 +6917,13 @@
      "y": 1050,
      "elevation_deg": -15.26,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 664.28128,
+     "luminance_cd_m2": 703.8012,
      "chromaticity_xy": [
-      0.3877,
-      0.4012
+      0.3852,
+      0.4048
      ],
-     "colour": "dark orange",
-     "srgb": "#7c6a46"
+     "colour": "dark amber",
+     "srgb": "#7d6e47"
     },
     {
      "label": "bottom of frame, centre",
@@ -6931,13 +6931,13 @@
      "y": 1050,
      "elevation_deg": -17.7,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 726.1148,
+     "luminance_cd_m2": 767.77089,
      "chromaticity_xy": [
-      0.4236,
-      0.4028
+      0.4195,
+      0.4062
      ],
      "colour": "orange",
-     "srgb": "#8f6a40"
+     "srgb": "#906e41"
     },
     {
      "label": "bottom of frame, right edge",
@@ -6945,13 +6945,13 @@
      "y": 1050,
      "elevation_deg": -15.26,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 679.13802,
+     "luminance_cd_m2": 718.65794,
      "chromaticity_xy": [
-      0.3882,
-      0.4021
+      0.3857,
+      0.4055
      ],
-     "colour": "dark orange",
-     "srgb": "#7d6b46"
+     "colour": "dark amber",
+     "srgb": "#7e6f48"
     }
    ],
    "glitter": {
@@ -6967,19 +6967,19 @@
       575,
       1075
      ],
-     "share_of_frame_sea": 0.03,
+     "share_of_frame_sea": 0.0296,
      "colour": "vivid orange",
      "times_white": 281.8
     }
    },
    "water_leaving": {
-    "luminance_cd_m2": 19.552,
+    "luminance_cd_m2": 68.4921,
     "chromaticity_xy": [
-     0.3371,
-     0.4181
+     0.3352,
+     0.4569
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#0b0f07"
+    "colour": "yellow-green",
+    "srgb": "#19250f"
    },
    "waves": {
     "source": "Smythii shore history, west-face station, hour 989",
@@ -7610,13 +7610,13 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 865.26567,
+     "luminance_cd_m2": 866.14567,
      "chromaticity_xy": [
       0.4269,
       0.4008
      ],
      "colour": "orange",
-     "srgb": "#d89f63"
+     "srgb": "#d8a063"
     },
     {
      "label": "just below the horizon, centre",
@@ -7624,10 +7624,10 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 981.27677,
+     "luminance_cd_m2": 982.15676,
      "chromaticity_xy": [
       0.4354,
-      0.4042
+      0.4043
      ],
      "colour": "orange",
      "srgb": "#e8a864"
@@ -7638,13 +7638,13 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 299.4,
-     "luminance_cd_m2": 886.95495,
+     "luminance_cd_m2": 887.83494,
      "chromaticity_xy": [
-      0.4286,
-      0.4007
+      0.4285,
+      0.4008
      ],
      "colour": "orange",
-     "srgb": "#dba164"
+     "srgb": "#dca164"
     },
     {
      "label": "1 degree down, left edge",
@@ -7652,10 +7652,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 834.9963,
+     "luminance_cd_m2": 837.12103,
      "chromaticity_xy": [
-      0.4267,
-      0.4007
+      0.4266,
+      0.4009
      ],
      "colour": "orange",
      "srgb": "#d59d62"
@@ -7666,10 +7666,10 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 946.41446,
+     "luminance_cd_m2": 948.53919,
      "chromaticity_xy": [
-      0.4352,
-      0.4041
+      0.4351,
+      0.4043
      ],
      "colour": "orange",
      "srgb": "#e4a562"
@@ -7680,13 +7680,13 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 851.59359,
+     "luminance_cd_m2": 853.71832,
      "chromaticity_xy": [
-      0.4283,
-      0.4007
+      0.4282,
+      0.4009
      ],
      "colour": "orange",
-     "srgb": "#d79e62"
+     "srgb": "#d89e62"
     },
     {
      "label": "3 degrees down, left edge",
@@ -7694,13 +7694,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 744.58036,
+     "luminance_cd_m2": 750.27847,
      "chromaticity_xy": [
-      0.4258,
-      0.4011
+      0.4253,
+      0.4016
      ],
      "colour": "orange",
-     "srgb": "#ca955d"
+     "srgb": "#ca965d"
     },
     {
      "label": "3 degrees down, centre",
@@ -7708,13 +7708,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 844.02543,
+     "luminance_cd_m2": 849.72355,
      "chromaticity_xy": [
-      0.4341,
-      0.4045
+      0.4336,
+      0.4049
      ],
      "colour": "orange",
-     "srgb": "#d89d5d"
+     "srgb": "#d89e5d"
     },
     {
      "label": "3 degrees down, right edge",
@@ -7722,13 +7722,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 761.4707,
+     "luminance_cd_m2": 767.16881,
      "chromaticity_xy": [
-      0.4274,
-      0.4012
+      0.4269,
+      0.4017
      ],
      "colour": "orange",
-     "srgb": "#cc965d"
+     "srgb": "#cd975d"
     },
     {
      "label": "8 degrees down, left edge",
@@ -7736,13 +7736,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 236.8,
-     "luminance_cd_m2": 544.24434,
+     "luminance_cd_m2": 556.00269,
      "chromaticity_xy": [
-      0.4207,
-      0.4039
+      0.4193,
+      0.4052
      ],
      "colour": "orange",
-     "srgb": "#ac8350"
+     "srgb": "#ad8450"
     },
     {
      "label": "8 degrees down, centre",
@@ -7750,13 +7750,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 616.61036,
+     "luminance_cd_m2": 628.3687,
      "chromaticity_xy": [
-      0.4281,
-      0.4074
+      0.4267,
+      0.4085
      ],
      "colour": "orange",
-     "srgb": "#b88a50"
+     "srgb": "#b98b51"
     },
     {
      "label": "8 degrees down, right edge",
@@ -7764,13 +7764,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 299.2,
-     "luminance_cd_m2": 557.28387,
+     "luminance_cd_m2": 569.04221,
      "chromaticity_xy": [
-      0.4221,
-      0.4044
+      0.4207,
+      0.4057
      ],
      "colour": "orange",
-     "srgb": "#ae8450"
+     "srgb": "#af8651"
     },
     {
      "label": "bottom of frame, left edge",
@@ -7778,13 +7778,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 237.0,
-     "luminance_cd_m2": 360.58407,
+     "luminance_cd_m2": 376.09527,
      "chromaticity_xy": [
-      0.4102,
-      0.4055
+      0.4078,
+      0.408
      ],
      "colour": "dark orange",
-     "srgb": "#8a6d43"
+     "srgb": "#8b7044"
     },
     {
      "label": "bottom of frame, centre",
@@ -7792,13 +7792,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 341.50687,
+     "luminance_cd_m2": 357.96461,
      "chromaticity_xy": [
-      0.4111,
-      0.4087
+      0.4083,
+      0.4114
      ],
      "colour": "dark orange",
-     "srgb": "#866b40"
+     "srgb": "#886e41"
     },
     {
      "label": "bottom of frame, right edge",
@@ -7806,24 +7806,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 299.0,
-     "luminance_cd_m2": 368.24277,
+     "luminance_cd_m2": 383.75398,
      "chromaticity_xy": [
-      0.4112,
-      0.4061
+      0.4087,
+      0.4086
      ],
-     "colour": "dark orange",
-     "srgb": "#8c6e43"
+     "colour": "orange",
+     "srgb": "#8d7144"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 8.0699,
+    "luminance_cd_m2": 28.2324,
     "chromaticity_xy": [
-     0.3447,
-     0.4214
+     0.342,
+     0.4594
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#0a0d05"
+    "colour": "yellow-green",
+    "srgb": "#17210d"
    },
    "waves": {
     "source": "Smythii shore history, west-face station, hour 1005",
@@ -8454,13 +8454,13 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 147.77852,
+     "luminance_cd_m2": 147.91999,
      "chromaticity_xy": [
-      0.4387,
+      0.4386,
       0.4109
      ],
      "colour": "orange",
-     "srgb": "#ba864a"
+     "srgb": "#ba874a"
     },
     {
      "label": "just below the horizon, centre",
@@ -8468,13 +8468,13 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 194.93964,
+     "luminance_cd_m2": 195.08111,
      "chromaticity_xy": [
       0.4511,
       0.4149
      ],
      "colour": "orange",
-     "srgb": "#d6974c"
+     "srgb": "#d6974d"
     },
     {
      "label": "just below the horizon, right edge",
@@ -8482,13 +8482,13 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 299.4,
-     "luminance_cd_m2": 156.83057,
+     "luminance_cd_m2": 156.97204,
      "chromaticity_xy": [
       0.4414,
-      0.4116
+      0.4117
      ],
      "colour": "orange",
-     "srgb": "#bf8a4a"
+     "srgb": "#c08a4b"
     },
     {
      "label": "1 degree down, left edge",
@@ -8496,10 +8496,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 144.47348,
+     "luminance_cd_m2": 144.81506,
      "chromaticity_xy": [
-      0.4391,
-      0.4105
+      0.4389,
+      0.4106
      ],
      "colour": "orange",
      "srgb": "#b88549"
@@ -8510,10 +8510,10 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 185.89106,
+     "luminance_cd_m2": 186.23263,
      "chromaticity_xy": [
-      0.4509,
-      0.415
+      0.4508,
+      0.4151
      ],
      "colour": "orange",
      "srgb": "#d2944b"
@@ -8524,10 +8524,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 151.97394,
+     "luminance_cd_m2": 152.31551,
      "chromaticity_xy": [
-      0.4416,
-      0.4114
+      0.4414,
+      0.4115
      ],
      "colour": "orange",
      "srgb": "#bd8849"
@@ -8538,13 +8538,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 127.53958,
+     "luminance_cd_m2": 128.45562,
      "chromaticity_xy": [
-      0.439,
-      0.4102
+      0.4384,
+      0.4106
      ],
      "colour": "orange",
-     "srgb": "#ae7d45"
+     "srgb": "#ae7e45"
     },
     {
      "label": "3 degrees down, centre",
@@ -8552,13 +8552,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 166.42875,
+     "luminance_cd_m2": 167.34479,
      "chromaticity_xy": [
-      0.4509,
-      0.4142
+      0.4504,
+      0.4145
      ],
      "colour": "orange",
-     "srgb": "#c88c47"
+     "srgb": "#c88d47"
     },
     {
      "label": "3 degrees down, right edge",
@@ -8566,10 +8566,10 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 135.47291,
+     "luminance_cd_m2": 136.38895,
      "chromaticity_xy": [
-      0.4416,
-      0.4109
+      0.441,
+      0.4112
      ],
      "colour": "orange",
      "srgb": "#b48146"
@@ -8580,13 +8580,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 236.8,
-     "luminance_cd_m2": 95.36073,
+     "luminance_cd_m2": 97.25103,
      "chromaticity_xy": [
-      0.4371,
-      0.4094
+      0.4356,
+      0.4105
      ],
      "colour": "orange",
-     "srgb": "#986e3c"
+     "srgb": "#996f3d"
     },
     {
      "label": "8 degrees down, centre",
@@ -8594,13 +8594,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 122.1202,
+     "luminance_cd_m2": 124.0105,
      "chromaticity_xy": [
-      0.4485,
-      0.4138
+      0.4471,
+      0.4146
      ],
      "colour": "orange",
-     "srgb": "#ad7a3e"
+     "srgb": "#ae7b3f"
     },
     {
      "label": "8 degrees down, right edge",
@@ -8608,13 +8608,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 299.2,
-     "luminance_cd_m2": 100.43333,
+     "luminance_cd_m2": 102.32363,
      "chromaticity_xy": [
-      0.4395,
-      0.4102
+      0.4379,
+      0.4112
      ],
      "colour": "orange",
-     "srgb": "#9c703d"
+     "srgb": "#9d723d"
     },
     {
      "label": "bottom of frame, left edge",
@@ -8622,13 +8622,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 237.0,
-     "luminance_cd_m2": 66.28532,
+     "luminance_cd_m2": 68.77895,
      "chromaticity_xy": [
-      0.4317,
-      0.4089
+      0.4289,
+      0.411
      ],
      "colour": "dark orange",
-     "srgb": "#7f5d33"
+     "srgb": "#805f34"
     },
     {
      "label": "bottom of frame, centre",
@@ -8636,13 +8636,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 71.43716,
+     "luminance_cd_m2": 74.08295,
      "chromaticity_xy": [
-      0.4384,
-      0.4132
+      0.4354,
+      0.4152
      ],
      "colour": "dark orange",
-     "srgb": "#856032"
+     "srgb": "#866233"
     },
     {
      "label": "bottom of frame, right edge",
@@ -8650,24 +8650,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 299.0,
-     "luminance_cd_m2": 69.54128,
+     "luminance_cd_m2": 72.0349,
      "chromaticity_xy": [
-      0.4337,
-      0.4098
+      0.431,
+      0.4118
      ],
      "colour": "dark orange",
-     "srgb": "#825f34"
+     "srgb": "#836135"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 1.3002,
+    "luminance_cd_m2": 4.5416,
     "chromaticity_xy": [
-     0.3497,
-     0.4219
+     0.3462,
+     0.4596
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#070903"
+    "colour": "yellow-green",
+    "srgb": "#121a08"
    },
    "waves": {
     "source": "Smythii shore history, west-face station, hour 1027",
@@ -9296,10 +9296,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 234.6,
-     "luminance_cd_m2": 3.25738,
+     "luminance_cd_m2": 3.26025,
      "chromaticity_xy": [
-      0.4537,
-      0.4137
+      0.4536,
+      0.4138
      ],
      "colour": "orange",
      "srgb": "#9e6d36"
@@ -9310,10 +9310,10 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 4.73706,
+     "luminance_cd_m2": 4.73994,
      "chromaticity_xy": [
-      0.4711,
-      0.4195
+      0.471,
+      0.4196
      ],
      "colour": "orange",
      "srgb": "#c18035"
@@ -9324,10 +9324,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 297.4,
-     "luminance_cd_m2": 3.84503,
+     "luminance_cd_m2": 3.84791,
      "chromaticity_xy": [
-      0.4614,
-      0.4167
+      0.4613,
+      0.4168
      ],
      "colour": "orange",
      "srgb": "#ad7536"
@@ -9338,10 +9338,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 234.7,
-     "luminance_cd_m2": 3.12032,
+     "luminance_cd_m2": 3.12726,
      "chromaticity_xy": [
-      0.4533,
-      0.414
+      0.4531,
+      0.4141
      ],
      "colour": "orange",
      "srgb": "#9b6b34"
@@ -9352,13 +9352,13 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 4.54803,
+     "luminance_cd_m2": 4.55498,
      "chromaticity_xy": [
-      0.4711,
-      0.4195
+      0.471,
+      0.4196
      ],
      "colour": "orange",
-     "srgb": "#bd7d34"
+     "srgb": "#bd7e34"
     },
     {
      "label": "1 degree down, right edge",
@@ -9366,10 +9366,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 297.3,
-     "luminance_cd_m2": 3.72298,
+     "luminance_cd_m2": 3.72993,
      "chromaticity_xy": [
-      0.462,
-      0.4165
+      0.4618,
+      0.4166
      ],
      "colour": "orange",
      "srgb": "#ab7335"
@@ -9380,13 +9380,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 234.7,
-     "luminance_cd_m2": 2.72122,
+     "luminance_cd_m2": 2.73984,
      "chromaticity_xy": [
-      0.4522,
-      0.4142
+      0.4515,
+      0.4146
      ],
      "colour": "orange",
-     "srgb": "#916431"
+     "srgb": "#926531"
     },
     {
      "label": "3 degrees down, centre",
@@ -9394,13 +9394,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 4.13493,
+     "luminance_cd_m2": 4.15355,
      "chromaticity_xy": [
-      0.4742,
-      0.4181
+      0.4737,
+      0.4184
      ],
      "colour": "orange",
-     "srgb": "#b77731"
+     "srgb": "#b77831"
     },
     {
      "label": "3 degrees down, right edge",
@@ -9408,10 +9408,10 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 297.3,
-     "luminance_cd_m2": 3.3718,
+     "luminance_cd_m2": 3.39042,
      "chromaticity_xy": [
-      0.4643,
-      0.4156
+      0.4638,
+      0.4159
      ],
      "colour": "orange",
      "srgb": "#a46e32"
@@ -9422,13 +9422,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 234.8,
-     "luminance_cd_m2": 2.06292,
+     "luminance_cd_m2": 2.10135,
      "chromaticity_xy": [
-      0.4549,
-      0.4116
+      0.4532,
+      0.4127
      ],
      "colour": "dark orange",
-     "srgb": "#81572a"
+     "srgb": "#82582b"
     },
     {
      "label": "8 degrees down, centre",
@@ -9436,13 +9436,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 3.12407,
+     "luminance_cd_m2": 3.16249,
      "chromaticity_xy": [
-      0.476,
-      0.4167
+      0.4746,
+      0.4174
      ],
      "colour": "orange",
-     "srgb": "#a2682a"
+     "srgb": "#a2692b"
     },
     {
      "label": "8 degrees down, right edge",
@@ -9450,13 +9450,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 297.2,
-     "luminance_cd_m2": 2.55204,
+     "luminance_cd_m2": 2.59046,
      "chromaticity_xy": [
-      0.4656,
-      0.4144
+      0.4641,
+      0.4152
      ],
      "colour": "orange",
-     "srgb": "#91602b"
+     "srgb": "#92612b"
     },
     {
      "label": "bottom of frame, left edge",
@@ -9464,13 +9464,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 235.0,
-     "luminance_cd_m2": 1.4949,
+     "luminance_cd_m2": 1.54559,
      "chromaticity_xy": [
-      0.4519,
-      0.4115
+      0.4489,
+      0.4134
      ],
      "colour": "dark orange",
-     "srgb": "#6f4b24"
+     "srgb": "#6f4d25"
     },
     {
      "label": "bottom of frame, centre",
@@ -9478,13 +9478,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 1.85595,
+     "luminance_cd_m2": 1.90973,
      "chromaticity_xy": [
-      0.4691,
-      0.4158
+      0.4661,
+      0.4173
      ],
      "colour": "dark orange",
-     "srgb": "#7e5222"
+     "srgb": "#7f5323"
     },
     {
      "label": "bottom of frame, right edge",
@@ -9492,24 +9492,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 297.0,
-     "luminance_cd_m2": 1.77412,
+     "luminance_cd_m2": 1.82481,
      "chromaticity_xy": [
-      0.4611,
-      0.4137
+      0.4583,
+      0.4153
      ],
      "colour": "dark orange",
-     "srgb": "#7a5124"
+     "srgb": "#7a5225"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 0.0264,
+    "luminance_cd_m2": 0.0923,
     "chromaticity_xy": [
-     0.3512,
-     0.4251
+     0.3472,
+     0.4626
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#040502"
+    "colour": "yellow-green",
+    "srgb": "#0c1205"
    },
    "waves": {
     "source": "Smythii shore history, west-face station, hour 1066",
@@ -10148,7 +10148,7 @@
      "y": 604,
      "elevation_deg": -0.4,
      "azimuth_deg": 233.1,
-     "luminance_cd_m2": 0.02698,
+     "luminance_cd_m2": 0.027,
      "chromaticity_xy": [
       0.4053,
       0.3844
@@ -10162,7 +10162,7 @@
      "y": 603,
      "elevation_deg": -0.4,
      "azimuth_deg": 264.5,
-     "luminance_cd_m2": 6.19109,
+     "luminance_cd_m2": 6.19112,
      "chromaticity_xy": [
       0.6047,
       0.3889
@@ -10176,10 +10176,10 @@
      "y": 604,
      "elevation_deg": -0.4,
      "azimuth_deg": 295.9,
-     "luminance_cd_m2": 0.02846,
+     "luminance_cd_m2": 0.02848,
      "chromaticity_xy": [
       0.4122,
-      0.3824
+      0.3825
      ],
      "colour": "red-orange",
      "srgb": "#e8ab7c"
@@ -10190,13 +10190,13 @@
      "y": 623,
      "elevation_deg": -1.0,
      "azimuth_deg": 233.1,
-     "luminance_cd_m2": 0.02603,
+     "luminance_cd_m2": 0.0261,
      "chromaticity_xy": [
-      0.4052,
-      0.3843
+      0.405,
+      0.3845
      ],
      "colour": "orange",
-     "srgb": "#daa678"
+     "srgb": "#daa779"
     },
     {
      "label": "1 degree down, centre",
@@ -10204,7 +10204,7 @@
      "y": 618,
      "elevation_deg": -1.0,
      "azimuth_deg": 264.5,
-     "luminance_cd_m2": 6.03615,
+     "luminance_cd_m2": 6.03621,
      "chromaticity_xy": [
       0.6047,
       0.3889
@@ -10218,10 +10218,10 @@
      "y": 623,
      "elevation_deg": -1.0,
      "azimuth_deg": 295.9,
-     "luminance_cd_m2": 0.02753,
+     "luminance_cd_m2": 0.02759,
      "chromaticity_xy": [
-      0.412,
-      0.3826
+      0.4118,
+      0.3827
      ],
      "colour": "red-orange",
      "srgb": "#e4a97a"
@@ -10232,13 +10232,13 @@
      "y": 685,
      "elevation_deg": -3.0,
      "azimuth_deg": 233.2,
-     "luminance_cd_m2": 0.02319,
+     "luminance_cd_m2": 0.02336,
      "chromaticity_xy": [
-      0.4038,
-      0.3851
+      0.4032,
+      0.3856
      ],
      "colour": "orange",
-     "srgb": "#ce9e72"
+     "srgb": "#ce9f72"
     },
     {
      "label": "3 degrees down, centre",
@@ -10246,7 +10246,7 @@
      "y": 671,
      "elevation_deg": -3.0,
      "azimuth_deg": 264.5,
-     "luminance_cd_m2": 3.72059,
+     "luminance_cd_m2": 3.72076,
      "chromaticity_xy": [
       0.6042,
       0.3889
@@ -10260,13 +10260,13 @@
      "y": 685,
      "elevation_deg": -3.0,
      "azimuth_deg": 295.8,
-     "luminance_cd_m2": 0.02452,
+     "luminance_cd_m2": 0.02469,
      "chromaticity_xy": [
-      0.4102,
-      0.3846
+      0.4097,
+      0.385
      ],
      "colour": "red-orange",
-     "srgb": "#d7a173"
+     "srgb": "#d7a274"
     },
     {
      "label": "8 degrees down, left edge",
@@ -10274,13 +10274,13 @@
      "y": 842,
      "elevation_deg": -8.0,
      "azimuth_deg": 233.3,
-     "luminance_cd_m2": 0.01651,
+     "luminance_cd_m2": 0.01687,
      "chromaticity_xy": [
-      0.3952,
-      0.3884
+      0.3939,
+      0.3897
      ],
      "colour": "orange",
-     "srgb": "#ac8a62"
+     "srgb": "#ac8b63"
     },
     {
      "label": "8 degrees down, centre",
@@ -10288,13 +10288,13 @@
      "y": 805,
      "elevation_deg": -8.0,
      "azimuth_deg": 264.5,
-     "luminance_cd_m2": 0.08349,
+     "luminance_cd_m2": 0.08384,
      "chromaticity_xy": [
-      0.5606,
-      0.39
+      0.5598,
+      0.3902
      ],
      "colour": "vivid orange",
-     "srgb": "#ffb919"
+     "srgb": "#ffb91c"
     },
     {
      "label": "8 degrees down, right edge",
@@ -10302,13 +10302,13 @@
      "y": 842,
      "elevation_deg": -8.0,
      "azimuth_deg": 295.7,
-     "luminance_cd_m2": 0.01731,
+     "luminance_cd_m2": 0.01767,
      "chromaticity_xy": [
-      0.3995,
-      0.3899
+      0.3981,
+      0.3911
      ],
      "colour": "orange",
-     "srgb": "#b18c62"
+     "srgb": "#b18e63"
     },
     {
      "label": "bottom of frame, left edge",
@@ -10316,13 +10316,13 @@
      "y": 1050,
      "elevation_deg": -14.4,
      "azimuth_deg": 233.4,
-     "luminance_cd_m2": 0.00978,
+     "luminance_cd_m2": 0.01026,
      "chromaticity_xy": [
-      0.378,
-      0.3875
+      0.3756,
+      0.3904
      ],
      "colour": "dark muted orange",
-     "srgb": "#806e50"
+     "srgb": "#817151"
     },
     {
      "label": "bottom of frame, centre",
@@ -10330,13 +10330,13 @@
      "y": 1050,
      "elevation_deg": -16.7,
      "azimuth_deg": 264.5,
-     "luminance_cd_m2": 0.00896,
+     "luminance_cd_m2": 0.00946,
      "chromaticity_xy": [
-      0.3775,
-      0.3902
+      0.3748,
+      0.3934
      ],
-     "colour": "dark muted orange",
-     "srgb": "#7a6a4c"
+     "colour": "dark muted amber",
+     "srgb": "#7b6e4d"
     },
     {
      "label": "bottom of frame, right edge",
@@ -10344,13 +10344,13 @@
      "y": 1050,
      "elevation_deg": -14.4,
      "azimuth_deg": 295.6,
-     "luminance_cd_m2": 0.01008,
+     "luminance_cd_m2": 0.01056,
      "chromaticity_xy": [
-      0.3799,
-      0.3888
+      0.3775,
+      0.3916
      ],
      "colour": "dark muted orange",
-     "srgb": "#837050"
+     "srgb": "#847352"
     }
    ],
    "glitter": {
@@ -10372,13 +10372,13 @@
     }
    },
    "water_leaving": {
-    "luminance_cd_m2": 0.0002,
+    "luminance_cd_m2": 0.0008,
     "chromaticity_xy": [
-     0.318,
-     0.3986
+     0.3182,
+     0.4404
     ],
     "colour": "pale green",
-    "srgb": "#090f08"
+    "srgb": "#152312"
    },
    "waves": {
     "source": "Smythii shore history, west-face station, hour 1144",
@@ -11091,13 +11091,13 @@
      "y": 473,
      "elevation_deg": -0.4,
      "azimuth_deg": 148.6,
-     "luminance_cd_m2": 3147.92768,
+     "luminance_cd_m2": 3171.07025,
      "chromaticity_xy": [
-      0.2859,
-      0.3224
+      0.2862,
+      0.3232
      ],
      "colour": "greyish cyan",
-     "srgb": "#778e92"
+     "srgb": "#788e92"
     },
     {
      "label": "just below the horizon, centre",
@@ -11105,10 +11105,10 @@
      "y": 471,
      "elevation_deg": -0.4,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 3330.14729,
+     "luminance_cd_m2": 3353.28986,
      "chromaticity_xy": [
-      0.2873,
-      0.324
+      0.2876,
+      0.3247
      ],
      "colour": "greyish cyan",
      "srgb": "#7b9295"
@@ -11119,10 +11119,10 @@
      "y": 473,
      "elevation_deg": -0.4,
      "azimuth_deg": 211.4,
-     "luminance_cd_m2": 3648.7038,
+     "luminance_cd_m2": 3671.84637,
      "chromaticity_xy": [
-      0.2886,
-      0.3255
+      0.2888,
+      0.3262
      ],
      "colour": "greyish cyan",
      "srgb": "#81989a"
@@ -11133,13 +11133,13 @@
      "y": 491,
      "elevation_deg": -1.0,
      "azimuth_deg": 148.6,
-     "luminance_cd_m2": 3041.8708,
+     "luminance_cd_m2": 3097.74796,
      "chromaticity_xy": [
-      0.2861,
-      0.3227
+      0.2867,
+      0.3245
      ],
      "colour": "greyish cyan",
-     "srgb": "#758c8f"
+     "srgb": "#768d90"
     },
     {
      "label": "1 degree down, centre",
@@ -11147,13 +11147,13 @@
      "y": 487,
      "elevation_deg": -1.0,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 3246.9125,
+     "luminance_cd_m2": 3302.78966,
      "chromaticity_xy": [
-      0.2878,
-      0.3245
+      0.2883,
+      0.3262
      ],
      "colour": "greyish cyan",
-     "srgb": "#7a9093"
+     "srgb": "#7a9193"
     },
     {
      "label": "1 degree down, right edge",
@@ -11161,13 +11161,13 @@
      "y": 491,
      "elevation_deg": -1.0,
      "azimuth_deg": 211.4,
-     "luminance_cd_m2": 3563.63909,
+     "luminance_cd_m2": 3619.51625,
      "chromaticity_xy": [
-      0.2891,
-      0.326
+      0.2896,
+      0.3276
      ],
      "colour": "greyish cyan",
-     "srgb": "#809698"
+     "srgb": "#809798"
     },
     {
      "label": "3 degrees down, left edge",
@@ -11175,13 +11175,13 @@
      "y": 553,
      "elevation_deg": -3.0,
      "azimuth_deg": 148.5,
-     "luminance_cd_m2": 2738.10746,
+     "luminance_cd_m2": 2887.95908,
      "chromaticity_xy": [
-      0.2868,
-      0.3238
+      0.2887,
+      0.3291
      ],
      "colour": "dark greyish cyan",
-     "srgb": "#708588"
+     "srgb": "#728989"
     },
     {
      "label": "3 degrees down, centre",
@@ -11189,13 +11189,13 @@
      "y": 539,
      "elevation_deg": -3.0,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 3003.53319,
+     "luminance_cd_m2": 3153.38481,
      "chromaticity_xy": [
-      0.2893,
-      0.3262
+      0.2909,
+      0.331
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#768b8c"
+     "colour": "greyish cyan",
+     "srgb": "#788e8d"
     },
     {
      "label": "3 degrees down, right edge",
@@ -11203,13 +11203,13 @@
      "y": 553,
      "elevation_deg": -3.0,
      "azimuth_deg": 211.5,
-     "luminance_cd_m2": 3284.60911,
+     "luminance_cd_m2": 3434.46072,
      "chromaticity_xy": [
-      0.2905,
-      0.3276
+      0.292,
+      0.332
      ],
      "colour": "greyish cyan",
-     "srgb": "#7b9191"
+     "srgb": "#7e9492"
     },
     {
      "label": "8 degrees down, left edge",
@@ -11217,13 +11217,13 @@
      "y": 708,
      "elevation_deg": -8.0,
      "azimuth_deg": 148.4,
-     "luminance_cd_m2": 2270.182,
+     "luminance_cd_m2": 2579.40839,
      "chromaticity_xy": [
-      0.2904,
-      0.3278
+      0.2945,
+      0.3401
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#687a7b"
+     "colour": "dark greyish aqua",
+     "srgb": "#6d827d"
     },
     {
      "label": "8 degrees down, centre",
@@ -11231,13 +11231,13 @@
      "y": 671,
      "elevation_deg": -8.0,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 2415.32251,
+     "luminance_cd_m2": 2724.5489,
      "chromaticity_xy": [
-      0.2917,
-      0.3292
+      0.2955,
+      0.3407
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#6b7e7d"
+     "colour": "dark greyish aqua",
+     "srgb": "#70867f"
     },
     {
      "label": "8 degrees down, right edge",
@@ -11245,13 +11245,13 @@
      "y": 708,
      "elevation_deg": -8.0,
      "azimuth_deg": 211.6,
-     "luminance_cd_m2": 2593.60232,
+     "luminance_cd_m2": 2902.82871,
      "chromaticity_xy": [
-      0.2922,
-      0.3299
+      0.2958,
+      0.3407
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#6f8281"
+     "colour": "dark greyish aqua",
+     "srgb": "#748983"
     },
     {
      "label": "bottom of frame, left edge",
@@ -11259,13 +11259,13 @@
      "y": 1050,
      "elevation_deg": -18.67,
      "azimuth_deg": 148.1,
-     "luminance_cd_m2": 1341.97806,
+     "luminance_cd_m2": 1800.94002,
      "chromaticity_xy": [
-      0.2918,
-      0.3312
+      0.3008,
+      0.3582
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#505f5f"
+     "colour": "dark greyish green",
+     "srgb": "#5a6f62"
     },
     {
      "label": "bottom of frame, centre",
@@ -11273,13 +11273,13 @@
      "y": 1050,
      "elevation_deg": -21.7,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 1177.59313,
+     "luminance_cd_m2": 1655.9904,
      "chromaticity_xy": [
-      0.292,
-      0.3323
+      0.3023,
+      0.363
      ],
-     "colour": "dark greyish aqua",
-     "srgb": "#4b5a58"
+     "colour": "dark greyish green",
+     "srgb": "#566b5d"
     },
     {
      "label": "bottom of frame, right edge",
@@ -11287,24 +11287,24 @@
      "y": 1050,
      "elevation_deg": -18.67,
      "azimuth_deg": 211.9,
-     "luminance_cd_m2": 1438.07083,
+     "luminance_cd_m2": 1897.03279,
      "chromaticity_xy": [
-      0.2919,
-      0.3315
+      0.3004,
+      0.357
      ],
-     "colour": "dark greyish cyan",
-     "srgb": "#536362"
+     "colour": "dark greyish green",
+     "srgb": "#5d7265"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 212.1046,
+    "luminance_cd_m2": 742.3473,
     "chromaticity_xy": [
-     0.3403,
-     0.4138
+     0.3388,
+     0.4524
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#202516"
+    "colour": "yellow-green",
+    "srgb": "#384b26"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1008 (-18 h)",
@@ -12026,9 +12026,9 @@
      "y": 578,
      "elevation_deg": -0.4,
      "azimuth_deg": 238.6,
-     "luminance_cd_m2": 1982.13038,
+     "luminance_cd_m2": 1984.2696,
      "chromaticity_xy": [
-      0.4125,
+      0.4124,
       0.3994
      ],
      "colour": "orange",
@@ -12040,13 +12040,13 @@
      "y": 576,
      "elevation_deg": -0.4,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 2373.65149,
+     "luminance_cd_m2": 2375.79071,
      "chromaticity_xy": [
-      0.4326,
+      0.4325,
       0.403
      ],
      "colour": "orange",
-     "srgb": "#f8b46e"
+     "srgb": "#f8b56e"
     },
     {
      "label": "just below the horizon, right edge",
@@ -12054,10 +12054,10 @@
      "y": 578,
      "elevation_deg": -0.4,
      "azimuth_deg": 301.4,
-     "luminance_cd_m2": 1955.02779,
+     "luminance_cd_m2": 1957.16701,
      "chromaticity_xy": [
-      0.4112,
-      0.4007
+      0.4111,
+      0.4008
      ],
      "colour": "orange",
      "srgb": "#d8aa6e"
@@ -12068,10 +12068,10 @@
      "y": 597,
      "elevation_deg": -1.0,
      "azimuth_deg": 238.6,
-     "luminance_cd_m2": 1929.2018,
+     "luminance_cd_m2": 1934.3669,
      "chromaticity_xy": [
-      0.4124,
-      0.3993
+      0.4122,
+      0.3995
      ],
      "colour": "orange",
      "srgb": "#d8a86d"
@@ -12082,10 +12082,10 @@
      "y": 592,
      "elevation_deg": -1.0,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 3049.10236,
+     "luminance_cd_m2": 3054.26746,
      "chromaticity_xy": [
-      0.4727,
-      0.4026
+      0.4725,
+      0.4027
      ],
      "colour": "orange",
      "srgb": "#ffbf65"
@@ -12096,10 +12096,10 @@
      "y": 597,
      "elevation_deg": -1.0,
      "azimuth_deg": 301.4,
-     "luminance_cd_m2": 1889.80803,
+     "luminance_cd_m2": 1894.97313,
      "chromaticity_xy": [
-      0.4111,
-      0.4007
+      0.4109,
+      0.4008
      ],
      "colour": "orange",
      "srgb": "#d5a76c"
@@ -12110,13 +12110,13 @@
      "y": 658,
      "elevation_deg": -3.0,
      "azimuth_deg": 238.6,
-     "luminance_cd_m2": 1710.67696,
+     "luminance_cd_m2": 1724.52874,
      "chromaticity_xy": [
-      0.4112,
-      0.4
+      0.4107,
+      0.4005
      ],
      "colour": "orange",
-     "srgb": "#cc9f67"
+     "srgb": "#cca068"
     },
     {
      "label": "3 degrees down, centre",
@@ -12124,10 +12124,10 @@
      "y": 645,
      "elevation_deg": -3.0,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 18897.86374,
+     "luminance_cd_m2": 18911.71552,
      "chromaticity_xy": [
-      0.5734,
-      0.4016
+      0.5733,
+      0.4017
      ],
      "colour": "vivid amber",
      "srgb": "#ffbb00"
@@ -12138,13 +12138,13 @@
      "y": 658,
      "elevation_deg": -3.0,
      "azimuth_deg": 301.4,
-     "luminance_cd_m2": 1680.71621,
+     "luminance_cd_m2": 1694.56799,
      "chromaticity_xy": [
-      0.41,
-      0.4009
+      0.4095,
+      0.4014
      ],
      "colour": "orange",
-     "srgb": "#ca9f66"
+     "srgb": "#ca9f67"
     },
     {
      "label": "8 degrees down, left edge",
@@ -12152,13 +12152,13 @@
      "y": 815,
      "elevation_deg": -8.0,
      "azimuth_deg": 238.7,
-     "luminance_cd_m2": 1218.86731,
+     "luminance_cd_m2": 1247.45116,
      "chromaticity_xy": [
-      0.4041,
-      0.4028
+      0.4028,
+      0.4042
      ],
      "colour": "orange",
-     "srgb": "#ab8a59"
+     "srgb": "#ac8c59"
     },
     {
      "label": "8 degrees down, centre",
@@ -12166,9 +12166,9 @@
      "y": 778,
      "elevation_deg": -8.0,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 71020.13418,
+     "luminance_cd_m2": 71048.71803,
      "chromaticity_xy": [
-      0.5871,
+      0.587,
       0.4015
      ],
      "colour": "vivid amber",
@@ -12180,13 +12180,13 @@
      "y": 815,
      "elevation_deg": -8.0,
      "azimuth_deg": 301.3,
-     "luminance_cd_m2": 1203.28996,
+     "luminance_cd_m2": 1231.87381,
      "chromaticity_xy": [
-      0.4036,
-      0.4027
+      0.4023,
+      0.4041
      ],
      "colour": "orange",
-     "srgb": "#aa8a58"
+     "srgb": "#ab8b59"
     },
     {
      "label": "bottom of frame, left edge",
@@ -12194,13 +12194,13 @@
      "y": 1050,
      "elevation_deg": -15.26,
      "azimuth_deg": 238.7,
-     "luminance_cd_m2": 677.74254,
+     "luminance_cd_m2": 717.32205,
      "chromaticity_xy": [
-      0.3876,
-      0.402
+      0.3851,
+      0.4054
      ],
-     "colour": "dark orange",
-     "srgb": "#7d6b46"
+     "colour": "dark amber",
+     "srgb": "#7e6f48"
     },
     {
      "label": "bottom of frame, centre",
@@ -12208,13 +12208,13 @@
      "y": 1050,
      "elevation_deg": -17.7,
      "azimuth_deg": 270.0,
-     "luminance_cd_m2": 766.24976,
+     "luminance_cd_m2": 807.96866,
      "chromaticity_xy": [
-      0.4306,
-      0.403
+      0.4263,
+      0.4062
      ],
      "colour": "orange",
-     "srgb": "#956c40"
+     "srgb": "#967041"
     },
     {
      "label": "bottom of frame, right edge",
@@ -12222,13 +12222,13 @@
      "y": 1050,
      "elevation_deg": -15.26,
      "azimuth_deg": 301.3,
-     "luminance_cd_m2": 676.56431,
+     "luminance_cd_m2": 716.14382,
      "chromaticity_xy": [
-      0.3881,
-      0.4019
+      0.3856,
+      0.4053
      ],
-     "colour": "dark orange",
-     "srgb": "#7d6b46"
+     "colour": "dark amber",
+     "srgb": "#7e6f48"
     }
    ],
    "glitter": {
@@ -12244,19 +12244,19 @@
       575,
       1005
      ],
-     "share_of_frame_sea": 0.0274,
+     "share_of_frame_sea": 0.0273,
      "colour": "vivid orange",
      "times_white": 386.4
     }
    },
    "water_leaving": {
-    "luminance_cd_m2": 19.5815,
+    "luminance_cd_m2": 68.5954,
     "chromaticity_xy": [
-     0.3371,
-     0.4181
+     0.3352,
+     0.4569
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#0b0f07"
+    "colour": "yellow-green",
+    "srgb": "#19250f"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1200 (+3 h)",
@@ -12936,10 +12936,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 234.6,
-     "luminance_cd_m2": 885.27331,
+     "luminance_cd_m2": 886.15914,
      "chromaticity_xy": [
-      0.4289,
-      0.3989
+      0.4288,
+      0.399
      ],
      "colour": "orange",
      "srgb": "#dca064"
@@ -12950,13 +12950,13 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 1006.96554,
+     "luminance_cd_m2": 1007.85136,
      "chromaticity_xy": [
-      0.437,
+      0.4369,
       0.4027
      ],
      "colour": "orange",
-     "srgb": "#eba865"
+     "srgb": "#eba965"
     },
     {
      "label": "just below the horizon, right edge",
@@ -12964,9 +12964,9 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 297.4,
-     "luminance_cd_m2": 884.16494,
+     "luminance_cd_m2": 885.05076,
      "chromaticity_xy": [
-      0.4281,
+      0.428,
       0.4007
      ],
      "colour": "orange",
@@ -12978,10 +12978,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 234.7,
-     "luminance_cd_m2": 869.04981,
+     "luminance_cd_m2": 871.18861,
      "chromaticity_xy": [
-      0.4286,
-      0.3988
+      0.4285,
+      0.399
      ],
      "colour": "orange",
      "srgb": "#da9f64"
@@ -12992,13 +12992,13 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 966.28323,
+     "luminance_cd_m2": 968.42204,
      "chromaticity_xy": [
-      0.4367,
-      0.4027
+      0.4366,
+      0.4028
      ],
      "colour": "orange",
-     "srgb": "#e7a563"
+     "srgb": "#e7a663"
     },
     {
      "label": "1 degree down, right edge",
@@ -13006,10 +13006,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 297.3,
-     "luminance_cd_m2": 855.41616,
+     "luminance_cd_m2": 857.55496,
      "chromaticity_xy": [
-      0.4279,
-      0.4006
+      0.4277,
+      0.4008
      ],
      "colour": "orange",
      "srgb": "#d79e62"
@@ -13020,10 +13020,10 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 234.7,
-     "luminance_cd_m2": 772.59457,
+     "luminance_cd_m2": 778.33042,
      "chromaticity_xy": [
-      0.4279,
-      0.3998
+      0.4273,
+      0.4003
      ],
      "colour": "orange",
      "srgb": "#ce975e"
@@ -13034,10 +13034,10 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 865.03132,
+     "luminance_cd_m2": 870.76716,
      "chromaticity_xy": [
-      0.4357,
-      0.4035
+      0.4351,
+      0.4039
      ],
      "colour": "orange",
      "srgb": "#db9e5e"
@@ -13048,13 +13048,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 297.3,
-     "luminance_cd_m2": 762.75866,
+     "luminance_cd_m2": 768.49451,
      "chromaticity_xy": [
-      0.427,
-      0.4011
+      0.4264,
+      0.4016
      ],
      "colour": "orange",
-     "srgb": "#cc965d"
+     "srgb": "#cc975d"
     },
     {
      "label": "8 degrees down, left edge",
@@ -13062,13 +13062,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 234.8,
-     "luminance_cd_m2": 565.9225,
+     "luminance_cd_m2": 577.7587,
      "chromaticity_xy": [
-      0.4226,
-      0.4043
+      0.4211,
+      0.4056
      ],
      "colour": "orange",
-     "srgb": "#af8450"
+     "srgb": "#b08651"
     },
     {
      "label": "8 degrees down, centre",
@@ -13076,13 +13076,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 633.55253,
+     "luminance_cd_m2": 645.38874,
      "chromaticity_xy": [
-      0.4293,
-      0.4076
+      0.4279,
+      0.4087
      ],
      "colour": "orange",
-     "srgb": "#bb8b51"
+     "srgb": "#bb8c51"
     },
     {
      "label": "8 degrees down, right edge",
@@ -13090,13 +13090,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 297.2,
-     "luminance_cd_m2": 557.90458,
+     "luminance_cd_m2": 569.74079,
      "chromaticity_xy": [
-      0.4217,
-      0.4043
+      0.4203,
+      0.4055
      ],
      "colour": "orange",
-     "srgb": "#ae8450"
+     "srgb": "#af8551"
     },
     {
      "label": "bottom of frame, left edge",
@@ -13104,13 +13104,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 235.0,
-     "luminance_cd_m2": 371.36301,
+     "luminance_cd_m2": 386.97693,
      "chromaticity_xy": [
-      0.4108,
-      0.4063
+      0.4083,
+      0.4087
      ],
-     "colour": "dark orange",
-     "srgb": "#8c6f43"
+     "colour": "orange",
+     "srgb": "#8d7244"
     },
     {
      "label": "bottom of frame, centre",
@@ -13118,13 +13118,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 266.0,
-     "luminance_cd_m2": 347.2717,
+     "luminance_cd_m2": 363.83842,
      "chromaticity_xy": [
-      0.4109,
-      0.4091
+      0.4081,
+      0.4118
      ],
      "colour": "dark orange",
-     "srgb": "#876c40"
+     "srgb": "#886f41"
     },
     {
      "label": "bottom of frame, right edge",
@@ -13132,24 +13132,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 297.0,
-     "luminance_cd_m2": 368.57938,
+     "luminance_cd_m2": 384.19331,
      "chromaticity_xy": [
-      0.4108,
-      0.406
+      0.4083,
+      0.4084
      ],
-     "colour": "dark orange",
-     "srgb": "#8b6e43"
+     "colour": "orange",
+     "srgb": "#8d7144"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 8.1232,
+    "luminance_cd_m2": 28.4192,
     "chromaticity_xy": [
-     0.3447,
-     0.4213
+     0.3419,
+     0.4593
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#0a0d05"
+    "colour": "yellow-green",
+    "srgb": "#17210d"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1200 (-15 h)",
@@ -13832,7 +13832,7 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 228.6,
-     "luminance_cd_m2": 128.52306,
+     "luminance_cd_m2": 128.66651,
      "chromaticity_xy": [
       0.4328,
       0.4097
@@ -13846,10 +13846,10 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 260.0,
-     "luminance_cd_m2": 140.83503,
+     "luminance_cd_m2": 140.97848,
      "chromaticity_xy": [
-      0.4373,
-      0.4131
+      0.4372,
+      0.4132
      ],
      "colour": "orange",
      "srgb": "#b48447"
@@ -13860,10 +13860,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 291.4,
-     "luminance_cd_m2": 114.62045,
+     "luminance_cd_m2": 114.76391,
      "chromaticity_xy": [
-      0.4294,
-      0.4084
+      0.4293,
+      0.4085
      ],
      "colour": "orange",
      "srgb": "#a27845"
@@ -13874,10 +13874,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 228.7,
-     "luminance_cd_m2": 123.54601,
+     "luminance_cd_m2": 123.89238,
      "chromaticity_xy": [
-      0.4328,
-      0.4096
+      0.4326,
+      0.4098
      ],
      "colour": "orange",
      "srgb": "#a97c46"
@@ -13888,13 +13888,13 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 260.0,
-     "luminance_cd_m2": 135.73268,
+     "luminance_cd_m2": 136.07905,
      "chromaticity_xy": [
-      0.4374,
-      0.4131
+      0.4372,
+      0.4132
      ],
      "colour": "orange",
-     "srgb": "#b18146"
+     "srgb": "#b18246"
     },
     {
      "label": "1 degree down, right edge",
@@ -13902,13 +13902,13 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 291.3,
-     "luminance_cd_m2": 110.18514,
+     "luminance_cd_m2": 110.53151,
      "chromaticity_xy": [
-      0.4293,
-      0.4085
+      0.429,
+      0.4087
      ],
      "colour": "orange",
-     "srgb": "#9f7643"
+     "srgb": "#9f7644"
     },
     {
      "label": "3 degrees down, left edge",
@@ -13916,13 +13916,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 228.7,
-     "luminance_cd_m2": 111.2944,
+     "luminance_cd_m2": 112.22329,
      "chromaticity_xy": [
-      0.4334,
-      0.409
+      0.4327,
+      0.4095
      ],
      "colour": "orange",
-     "srgb": "#a17642"
+     "srgb": "#a17743"
     },
     {
      "label": "3 degrees down, centre",
@@ -13930,13 +13930,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 260.0,
-     "luminance_cd_m2": 122.47996,
+     "luminance_cd_m2": 123.40885,
      "chromaticity_xy": [
-      0.4382,
-      0.4124
+      0.4376,
+      0.4128
      ],
      "colour": "orange",
-     "srgb": "#a97b42"
+     "srgb": "#a97c42"
     },
     {
      "label": "3 degrees down, right edge",
@@ -13944,13 +13944,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 291.3,
-     "luminance_cd_m2": 95.55861,
+     "luminance_cd_m2": 96.48749,
      "chromaticity_xy": [
-      0.4282,
-      0.4089
+      0.4275,
+      0.4094
      ],
      "colour": "orange",
-     "srgb": "#946f3f"
+     "srgb": "#956f3f"
     },
     {
      "label": "8 degrees down, left edge",
@@ -13958,13 +13958,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 228.8,
-     "luminance_cd_m2": 84.18744,
+     "luminance_cd_m2": 86.10425,
      "chromaticity_xy": [
-      0.4329,
-      0.4082
+      0.4312,
+      0.4095
      ],
      "colour": "orange",
-     "srgb": "#8e673a"
+     "srgb": "#8f693b"
     },
     {
      "label": "8 degrees down, centre",
@@ -13972,13 +13972,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 260.0,
-     "luminance_cd_m2": 93.09141,
+     "luminance_cd_m2": 95.00821,
      "chromaticity_xy": [
-      0.4384,
-      0.4114
+      0.4368,
+      0.4126
      ],
      "colour": "orange",
-     "srgb": "#966c3a"
+     "srgb": "#966e3b"
     },
     {
      "label": "8 degrees down, right edge",
@@ -13986,13 +13986,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 291.2,
-     "luminance_cd_m2": 73.8731,
+     "luminance_cd_m2": 75.78991,
      "chromaticity_xy": [
-      0.4284,
-      0.4067
+      0.4266,
+      0.4082
      ],
      "colour": "dark orange",
-     "srgb": "#856238"
+     "srgb": "#856338"
     },
     {
      "label": "bottom of frame, left edge",
@@ -14000,13 +14000,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 229.0,
-     "luminance_cd_m2": 60.27701,
+     "luminance_cd_m2": 62.8056,
      "chromaticity_xy": [
-      0.4297,
-      0.4077
+      0.4268,
+      0.4101
      ],
      "colour": "dark orange",
-     "srgb": "#795932"
+     "srgb": "#7a5b32"
     },
     {
      "label": "bottom of frame, centre",
@@ -14014,13 +14014,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 260.0,
-     "luminance_cd_m2": 58.51613,
+     "luminance_cd_m2": 61.19902,
      "chromaticity_xy": [
-      0.434,
-      0.4105
+      0.4306,
+      0.413
      ],
      "colour": "dark orange",
-     "srgb": "#78572f"
+     "srgb": "#795a30"
     },
     {
      "label": "bottom of frame, right edge",
@@ -14028,24 +14028,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 291.0,
-     "luminance_cd_m2": 54.77928,
+     "luminance_cd_m2": 57.30786,
      "chromaticity_xy": [
-      0.4274,
-      0.4071
+      0.4243,
+      0.4098
      ],
      "colour": "dark orange",
-     "srgb": "#735530"
+     "srgb": "#745731"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 1.3184,
+    "luminance_cd_m2": 4.6053,
     "chromaticity_xy": [
-     0.3495,
-     0.4217
+     0.3461,
+     0.4595
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#070903"
+    "colour": "yellow-green",
+    "srgb": "#121a08"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1248 (+8 h)",
@@ -14729,10 +14729,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 214.6,
-     "luminance_cd_m2": 3.98606,
+     "luminance_cd_m2": 3.98967,
      "chromaticity_xy": [
-      0.4514,
-      0.4086
+      0.4513,
+      0.4087
      ],
      "colour": "orange",
      "srgb": "#b17a40"
@@ -14743,9 +14743,9 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 246.0,
-     "luminance_cd_m2": 5.03,
+     "luminance_cd_m2": 5.0336,
      "chromaticity_xy": [
-      0.465,
+      0.4649,
       0.4142
      ],
      "colour": "orange",
@@ -14757,10 +14757,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 277.4,
-     "luminance_cd_m2": 3.34686,
+     "luminance_cd_m2": 3.35046,
      "chromaticity_xy": [
-      0.4432,
-      0.4075
+      0.4431,
+      0.4076
      ],
      "colour": "orange",
      "srgb": "#a1713e"
@@ -14771,10 +14771,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 214.7,
-     "luminance_cd_m2": 3.81065,
+     "luminance_cd_m2": 3.81936,
      "chromaticity_xy": [
-      0.4511,
-      0.4088
+      0.4509,
+      0.4089
      ],
      "colour": "orange",
      "srgb": "#ae773f"
@@ -14785,10 +14785,10 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 246.0,
-     "luminance_cd_m2": 4.88618,
+     "luminance_cd_m2": 4.89488,
      "chromaticity_xy": [
-      0.4659,
-      0.4139
+      0.4657,
+      0.414
      ],
      "colour": "orange",
      "srgb": "#c7843e"
@@ -14799,10 +14799,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 277.3,
-     "luminance_cd_m2": 3.21295,
+     "luminance_cd_m2": 3.22166,
      "chromaticity_xy": [
-      0.4431,
-      0.4075
+      0.4429,
+      0.4077
      ],
      "colour": "orange",
      "srgb": "#9e6f3d"
@@ -14813,13 +14813,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 214.7,
-     "luminance_cd_m2": 3.40315,
+     "luminance_cd_m2": 3.4265,
      "chromaticity_xy": [
-      0.4519,
-      0.4082
+      0.4512,
+      0.4085
      ],
      "colour": "orange",
-     "srgb": "#a5713b"
+     "srgb": "#a6713c"
     },
     {
      "label": "3 degrees down, centre",
@@ -14827,13 +14827,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 246.0,
-     "luminance_cd_m2": 4.39879,
+     "luminance_cd_m2": 4.42214,
      "chromaticity_xy": [
-      0.4679,
-      0.4129
+      0.4673,
+      0.4132
      ],
      "colour": "orange",
-     "srgb": "#bf7d3a"
+     "srgb": "#bf7e3b"
     },
     {
      "label": "3 degrees down, right edge",
@@ -14841,10 +14841,10 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 277.3,
-     "luminance_cd_m2": 2.93188,
+     "luminance_cd_m2": 2.95522,
      "chromaticity_xy": [
-      0.4457,
-      0.4065
+      0.445,
+      0.4069
      ],
      "colour": "orange",
      "srgb": "#996a3a"
@@ -14855,13 +14855,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 214.8,
-     "luminance_cd_m2": 2.54001,
+     "luminance_cd_m2": 2.58819,
      "chromaticity_xy": [
-      0.4518,
-      0.4069
+      0.4499,
+      0.408
      ],
      "colour": "orange",
-     "srgb": "#916234"
+     "srgb": "#926334"
     },
     {
      "label": "8 degrees down, centre",
@@ -14869,13 +14869,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 246.0,
-     "luminance_cd_m2": 3.29353,
+     "luminance_cd_m2": 3.34171,
      "chromaticity_xy": [
-      0.4686,
-      0.4115
+      0.4669,
+      0.4122
      ],
      "colour": "orange",
-     "srgb": "#a86d33"
+     "srgb": "#a86e33"
     },
     {
      "label": "8 degrees down, right edge",
@@ -14883,13 +14883,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 277.2,
-     "luminance_cd_m2": 2.22848,
+     "luminance_cd_m2": 2.27666,
      "chromaticity_xy": [
-      0.4469,
-      0.4054
+      0.4449,
+      0.4066
      ],
      "colour": "dark orange",
-     "srgb": "#885d32"
+     "srgb": "#885e33"
     },
     {
      "label": "bottom of frame, left edge",
@@ -14897,13 +14897,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 215.0,
-     "luminance_cd_m2": 1.73981,
+     "luminance_cd_m2": 1.80336,
      "chromaticity_xy": [
-      0.4457,
-      0.4054
+      0.4424,
+      0.4074
      ],
      "colour": "dark orange",
-     "srgb": "#79522c"
+     "srgb": "#79542d"
     },
     {
      "label": "bottom of frame, centre",
@@ -14911,13 +14911,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 246.0,
-     "luminance_cd_m2": 1.90306,
+     "luminance_cd_m2": 1.97049,
      "chromaticity_xy": [
-      0.4588,
-      0.4103
+      0.4552,
+      0.4122
      ],
      "colour": "dark orange",
-     "srgb": "#805529"
+     "srgb": "#81572a"
     },
     {
      "label": "bottom of frame, right edge",
@@ -14925,24 +14925,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 277.0,
-     "luminance_cd_m2": 1.56786,
+     "luminance_cd_m2": 1.63141,
      "chromaticity_xy": [
-      0.4424,
-      0.4046
+      0.4389,
+      0.4069
      ],
      "colour": "dark orange",
-     "srgb": "#724f2b"
+     "srgb": "#73512c"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 0.0331,
+    "luminance_cd_m2": 0.1157,
     "chromaticity_xy": [
-     0.3416,
-     0.4156
+     0.339,
+     0.4545
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#050703"
+    "colour": "yellow-green",
+    "srgb": "#0e1607"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 1296 (+9 h)",
@@ -15635,10 +15635,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 105.6,
-     "luminance_cd_m2": 0.24931,
+     "luminance_cd_m2": 0.25022,
      "chromaticity_xy": [
       0.3303,
-      0.338
+      0.3383
      ],
      "colour": "greyish red-orange",
      "srgb": "#948984"
@@ -15649,13 +15649,13 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 137.0,
-     "luminance_cd_m2": 0.2735,
+     "luminance_cd_m2": 0.27441,
      "chromaticity_xy": [
       0.3455,
-      0.3456
+      0.3459
      ],
      "colour": "greyish red-orange",
-     "srgb": "#a18d83"
+     "srgb": "#a18e83"
     },
     {
      "label": "just below the horizon, right edge",
@@ -15663,13 +15663,13 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 168.4,
-     "luminance_cd_m2": 0.26769,
+     "luminance_cd_m2": 0.26859,
      "chromaticity_xy": [
       0.3338,
-      0.3407
+      0.341
      ],
      "colour": "greyish red-orange",
-     "srgb": "#9a8d86"
+     "srgb": "#9a8e86"
     },
     {
      "label": "1 degree down, left edge",
@@ -15677,13 +15677,13 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 105.7,
-     "luminance_cd_m2": 0.24113,
+     "luminance_cd_m2": 0.24331,
      "chromaticity_xy": [
-      0.3305,
-      0.3381
+      0.3304,
+      0.3389
      ],
      "colour": "greyish red-orange",
-     "srgb": "#928782"
+     "srgb": "#928882"
     },
     {
      "label": "1 degree down, centre",
@@ -15691,13 +15691,13 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 137.0,
-     "luminance_cd_m2": 0.26633,
+     "luminance_cd_m2": 0.26851,
      "chromaticity_xy": [
-      0.3462,
-      0.3458
+      0.346,
+      0.3464
      ],
      "colour": "greyish red-orange",
-     "srgb": "#9f8c81"
+     "srgb": "#a08c81"
     },
     {
      "label": "1 degree down, right edge",
@@ -15705,10 +15705,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 168.3,
-     "luminance_cd_m2": 0.26477,
+     "luminance_cd_m2": 0.26695,
      "chromaticity_xy": [
-      0.335,
-      0.341
+      0.3349,
+      0.3417
      ],
      "colour": "greyish red-orange",
      "srgb": "#9a8d85"
@@ -15719,13 +15719,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 105.7,
-     "luminance_cd_m2": 0.2182,
+     "luminance_cd_m2": 0.22403,
      "chromaticity_xy": [
-      0.3314,
-      0.3386
+      0.3312,
+      0.3409
      ],
      "colour": "dark greyish red-orange",
-     "srgb": "#8b817b"
+     "srgb": "#8c837c"
     },
     {
      "label": "3 degrees down, centre",
@@ -15733,13 +15733,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 137.0,
-     "luminance_cd_m2": 0.24221,
+     "luminance_cd_m2": 0.24805,
      "chromaticity_xy": [
-      0.3477,
-      0.3461
+      0.3472,
+      0.3481
      ],
-     "colour": "pale red-orange",
-     "srgb": "#9a857b"
+     "colour": "greyish red-orange",
+     "srgb": "#9a877c"
     },
     {
      "label": "3 degrees down, right edge",
@@ -15747,13 +15747,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 168.3,
-     "luminance_cd_m2": 0.23719,
+     "luminance_cd_m2": 0.24303,
      "chromaticity_xy": [
-      0.3356,
-      0.3413
+      0.3353,
+      0.3434
      ],
      "colour": "greyish red-orange",
-     "srgb": "#93867e"
+     "srgb": "#93887f"
     },
     {
      "label": "8 degrees down, left edge",
@@ -15761,13 +15761,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 105.8,
-     "luminance_cd_m2": 0.1703,
+     "luminance_cd_m2": 0.18235,
      "chromaticity_xy": [
-      0.3326,
-      0.3391
+      0.332,
+      0.3449
      ],
-     "colour": "dark greyish red-orange",
-     "srgb": "#7d736e"
+     "colour": "dark greyish orange",
+     "srgb": "#7f776f"
     },
     {
      "label": "8 degrees down, centre",
@@ -15775,13 +15775,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 137.0,
-     "luminance_cd_m2": 0.18819,
+     "luminance_cd_m2": 0.20024,
      "chromaticity_xy": [
-      0.3488,
-      0.3464
+      0.3475,
+      0.3514
      ],
      "colour": "dark muted red-orange",
-     "srgb": "#89776d"
+     "srgb": "#8b7b6e"
     },
     {
      "label": "8 degrees down, right edge",
@@ -15789,13 +15789,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 168.2,
-     "luminance_cd_m2": 0.18425,
+     "luminance_cd_m2": 0.19629,
      "chromaticity_xy": [
-      0.3362,
-      0.3416
+      0.3354,
+      0.3469
      ],
-     "colour": "dark greyish red-orange",
-     "srgb": "#837770"
+     "colour": "dark greyish orange",
+     "srgb": "#847b71"
     },
     {
      "label": "bottom of frame, left edge",
@@ -15803,13 +15803,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 106.0,
-     "luminance_cd_m2": 0.12416,
+     "luminance_cd_m2": 0.14005,
      "chromaticity_xy": [
-      0.3299,
-      0.3385
+      0.3291,
+      0.3487
      ],
-     "colour": "dark greyish red-orange",
-     "srgb": "#6b635f"
+     "colour": "dark greyish amber",
+     "srgb": "#6d6a61"
     },
     {
      "label": "bottom of frame, centre",
@@ -15817,13 +15817,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 137.0,
-     "luminance_cd_m2": 0.11816,
+     "luminance_cd_m2": 0.13502,
      "chromaticity_xy": [
-      0.3425,
-      0.3444
+      0.3404,
+      0.3552
      ],
-     "colour": "dark greyish red-orange",
-     "srgb": "#6c6059"
+     "colour": "dark greyish orange",
+     "srgb": "#6f685c"
     },
     {
      "label": "bottom of frame, right edge",
@@ -15831,24 +15831,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 168.0,
-     "luminance_cd_m2": 0.13116,
+     "luminance_cd_m2": 0.14704,
      "chromaticity_xy": [
-      0.3325,
-      0.3403
+      0.3316,
+      0.3499
      ],
-     "colour": "dark greyish red-orange",
-     "srgb": "#6e6660"
+     "colour": "dark greyish amber",
+     "srgb": "#716d63"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 0.0083,
+    "luminance_cd_m2": 0.0289,
     "chromaticity_xy": [
-     0.3201,
-     0.3944
+     0.3206,
+     0.436
     ],
     "colour": "pale green",
-    "srgb": "#131910"
+    "srgb": "#23351e"
    },
    "waves": {
     "source": "nearside wave run, restart file at hour 720 (+0 h)",
@@ -16560,13 +16560,13 @@
      "y": 499,
      "elevation_deg": -0.4,
      "azimuth_deg": 148.6,
-     "luminance_cd_m2": 3877.4721,
+     "luminance_cd_m2": 3897.91156,
      "chromaticity_xy": [
-      0.2958,
-      0.3335
+      0.296,
+      0.3341
      ],
      "colour": "greyish aqua",
-     "srgb": "#899d9a"
+     "srgb": "#899e9a"
     },
     {
      "label": "just below the horizon, centre",
@@ -16574,10 +16574,10 @@
      "y": 497,
      "elevation_deg": -0.4,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 4133.71118,
+     "luminance_cd_m2": 4154.15064,
      "chromaticity_xy": [
-      0.2984,
-      0.3362
+      0.2986,
+      0.3366
      ],
      "colour": "greyish aqua",
      "srgb": "#8ea29d"
@@ -16588,10 +16588,10 @@
      "y": 499,
      "elevation_deg": -0.4,
      "azimuth_deg": 211.4,
-     "luminance_cd_m2": 4479.47616,
+     "luminance_cd_m2": 4499.91562,
      "chromaticity_xy": [
-      0.2995,
-      0.3373
+      0.2996,
+      0.3377
      ],
      "colour": "greyish aqua",
      "srgb": "#94a8a2"
@@ -16602,13 +16602,13 @@
      "y": 518,
      "elevation_deg": -1.0,
      "azimuth_deg": 148.6,
-     "luminance_cd_m2": 3722.52179,
+     "luminance_cd_m2": 3771.87236,
      "chromaticity_xy": [
-      0.2958,
-      0.3337
+      0.2962,
+      0.3349
      ],
      "colour": "greyish aqua",
-     "srgb": "#869a97"
+     "srgb": "#879b98"
     },
     {
      "label": "1 degree down, centre",
@@ -16616,13 +16616,13 @@
      "y": 513,
      "elevation_deg": -1.0,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 4029.23478,
+     "luminance_cd_m2": 4078.58535,
      "chromaticity_xy": [
-      0.2988,
-      0.3366
+      0.2992,
+      0.3377
      ],
      "colour": "greyish aqua",
-     "srgb": "#8da09b"
+     "srgb": "#8da19b"
     },
     {
      "label": "1 degree down, right edge",
@@ -16630,13 +16630,13 @@
      "y": 518,
      "elevation_deg": -1.0,
      "azimuth_deg": 211.4,
-     "luminance_cd_m2": 4334.45541,
+     "luminance_cd_m2": 4383.80598,
      "chromaticity_xy": [
-      0.2997,
-      0.3375
+      0.3,
+      0.3386
      ],
      "colour": "greyish aqua",
-     "srgb": "#92a5a0"
+     "srgb": "#92a6a0"
     },
     {
      "label": "3 degrees down, left edge",
@@ -16644,13 +16644,13 @@
      "y": 579,
      "elevation_deg": -3.0,
      "azimuth_deg": 148.6,
-     "luminance_cd_m2": 3356.82929,
+     "luminance_cd_m2": 3489.17789,
      "chromaticity_xy": [
-      0.2966,
-      0.3346
+      0.2977,
+      0.3383
      ],
      "colour": "greyish aqua",
-     "srgb": "#809390"
+     "srgb": "#829691"
     },
     {
      "label": "3 degrees down, centre",
@@ -16658,13 +16658,13 @@
      "y": 566,
      "elevation_deg": -3.0,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 3671.07554,
+     "luminance_cd_m2": 3803.42414,
      "chromaticity_xy": [
-      0.2998,
-      0.3376
+      0.3008,
+      0.3409
      ],
      "colour": "greyish aqua",
-     "srgb": "#879994"
+     "srgb": "#899c95"
     },
     {
      "label": "3 degrees down, right edge",
@@ -16672,13 +16672,13 @@
      "y": 579,
      "elevation_deg": -3.0,
      "azimuth_deg": 211.4,
-     "luminance_cd_m2": 3959.548,
+     "luminance_cd_m2": 4091.8966,
      "chromaticity_xy": [
-      0.3006,
-      0.3385
+      0.3015,
+      0.3416
      ],
      "colour": "greyish aqua",
-     "srgb": "#8c9f99"
+     "srgb": "#8ea199"
     },
     {
      "label": "8 degrees down, left edge",
@@ -16686,13 +16686,13 @@
      "y": 734,
      "elevation_deg": -8.0,
      "azimuth_deg": 148.5,
-     "luminance_cd_m2": 2619.28095,
+     "luminance_cd_m2": 2892.38896,
      "chromaticity_xy": [
-      0.2979,
-      0.3362
+      0.3007,
+      0.3455
      ],
      "colour": "dark greyish aqua",
-     "srgb": "#738380"
+     "srgb": "#778a81"
     },
     {
      "label": "8 degrees down, centre",
@@ -16700,13 +16700,13 @@
      "y": 698,
      "elevation_deg": -8.0,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 2836.28683,
+     "luminance_cd_m2": 3109.39484,
      "chromaticity_xy": [
-      0.3006,
-      0.3387
+      0.303,
+      0.3473
      ],
-     "colour": "dark greyish aqua",
-     "srgb": "#788883"
+     "colour": "greyish green",
+     "srgb": "#7c8f84"
     },
     {
      "label": "8 degrees down, right edge",
@@ -16714,13 +16714,13 @@
      "y": 734,
      "elevation_deg": -8.0,
      "azimuth_deg": 211.5,
-     "luminance_cd_m2": 3013.05177,
+     "luminance_cd_m2": 3286.15979,
      "chromaticity_xy": [
-      0.3008,
-      0.3391
+      0.3031,
+      0.3471
      ],
-     "colour": "dark greyish aqua",
-     "srgb": "#7c8c86"
+     "colour": "greyish green",
+     "srgb": "#7f9288"
     },
     {
      "label": "bottom of frame, left edge",
@@ -16728,13 +16728,13 @@
      "y": 1050,
      "elevation_deg": -17.82,
      "azimuth_deg": 148.3,
-     "luminance_cd_m2": 1466.80544,
+     "luminance_cd_m2": 1866.27494,
      "chromaticity_xy": [
-      0.2957,
-      0.3359
+      0.3027,
+      0.3578
      ],
-     "colour": "dark greyish aqua",
-     "srgb": "#566462"
+     "colour": "dark greyish green",
+     "srgb": "#5e7265"
     },
     {
      "label": "bottom of frame, centre",
@@ -16742,13 +16742,13 @@
      "y": 1050,
      "elevation_deg": -20.7,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 1275.93754,
+     "luminance_cd_m2": 1693.39046,
      "chromaticity_xy": [
-      0.2959,
-      0.3366
+      0.304,
+      0.3621
      ],
-     "colour": "dark greyish aqua",
-     "srgb": "#505e5b"
+     "colour": "dark greyish green",
+     "srgb": "#596d5f"
     },
     {
      "label": "bottom of frame, right edge",
@@ -16756,24 +16756,24 @@
      "y": 1050,
      "elevation_deg": -17.82,
      "azimuth_deg": 211.7,
-     "luminance_cd_m2": 1574.01009,
+     "luminance_cd_m2": 1973.4796,
      "chromaticity_xy": [
-      0.2962,
-      0.3365
+      0.3027,
+      0.3571
      ],
-     "colour": "dark greyish aqua",
-     "srgb": "#596865"
+     "colour": "dark greyish green",
+     "srgb": "#617568"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 187.3524,
+    "luminance_cd_m2": 655.6615,
     "chromaticity_xy": [
-     0.3411,
-     0.4147
+     0.3394,
+     0.4532
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#1e2314"
+    "colour": "yellow-green",
+    "srgb": "#354724"
    },
    "waves": {
     "source": "borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +230 degrees to the local wind, as deep water",
@@ -17487,13 +17487,13 @@
      "y": 578,
      "elevation_deg": -0.4,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 1254.39932,
+     "luminance_cd_m2": 1256.51795,
      "chromaticity_xy": [
-      0.3899,
-      0.3988
+      0.3898,
+      0.3989
      ],
      "colour": "orange",
-     "srgb": "#a88e60"
+     "srgb": "#a88f60"
     },
     {
      "label": "just below the horizon, centre",
@@ -17501,13 +17501,13 @@
      "y": 576,
      "elevation_deg": -0.4,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 1503.292,
+     "luminance_cd_m2": 1505.41064,
      "chromaticity_xy": [
-      0.3994,
-      0.4036
+      0.3993,
+      0.4037
      ],
      "colour": "orange",
-     "srgb": "#ba9a63"
+     "srgb": "#ba9a64"
     },
     {
      "label": "just below the horizon, right edge",
@@ -17515,10 +17515,10 @@
      "y": 578,
      "elevation_deg": -0.4,
      "azimuth_deg": 299.4,
-     "luminance_cd_m2": 1510.25324,
+     "luminance_cd_m2": 1512.37187,
      "chromaticity_xy": [
       0.3981,
-      0.4017
+      0.4018
      ],
      "colour": "orange",
      "srgb": "#ba9a65"
@@ -17529,13 +17529,13 @@
      "y": 597,
      "elevation_deg": -1.0,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 1216.91362,
+     "luminance_cd_m2": 1222.02901,
      "chromaticity_xy": [
-      0.3901,
-      0.3987
+      0.3899,
+      0.3989
      ],
      "colour": "orange",
-     "srgb": "#a68c5f"
+     "srgb": "#a68d5f"
     },
     {
      "label": "1 degree down, centre",
@@ -17543,13 +17543,13 @@
      "y": 592,
      "elevation_deg": -1.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 1474.006,
+     "luminance_cd_m2": 1479.12139,
      "chromaticity_xy": [
-      0.3998,
-      0.4034
+      0.3996,
+      0.4036
      ],
      "colour": "orange",
-     "srgb": "#b89863"
+     "srgb": "#b99963"
     },
     {
      "label": "1 degree down, right edge",
@@ -17557,13 +17557,13 @@
      "y": 597,
      "elevation_deg": -1.0,
      "azimuth_deg": 299.4,
-     "luminance_cd_m2": 1456.12443,
+     "luminance_cd_m2": 1461.23981,
      "chromaticity_xy": [
-      0.3982,
-      0.4017
+      0.398,
+      0.4019
      ],
      "colour": "orange",
-     "srgb": "#b79763"
+     "srgb": "#b79863"
     },
     {
      "label": "3 degrees down, left edge",
@@ -17571,13 +17571,13 @@
      "y": 658,
      "elevation_deg": -3.0,
      "azimuth_deg": 236.6,
-     "luminance_cd_m2": 1093.02236,
+     "luminance_cd_m2": 1106.74084,
      "chromaticity_xy": [
-      0.3903,
-      0.3984
+      0.3897,
+      0.3992
      ],
      "colour": "orange",
-     "srgb": "#9e865a"
+     "srgb": "#9f875b"
     },
     {
      "label": "3 degrees down, centre",
@@ -17585,13 +17585,13 @@
      "y": 645,
      "elevation_deg": -3.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 1305.27298,
+     "luminance_cd_m2": 1318.99146,
      "chromaticity_xy": [
-      0.3998,
-      0.4032
+      0.3993,
+      0.4038
      ],
      "colour": "orange",
-     "srgb": "#af905d"
+     "srgb": "#af915d"
     },
     {
      "label": "3 degrees down, right edge",
@@ -17599,13 +17599,13 @@
      "y": 658,
      "elevation_deg": -3.0,
      "azimuth_deg": 299.4,
-     "luminance_cd_m2": 1306.46928,
+     "luminance_cd_m2": 1320.18775,
      "chromaticity_xy": [
-      0.3982,
-      0.4013
+      0.3976,
+      0.4019
      ],
      "colour": "orange",
-     "srgb": "#af905f"
+     "srgb": "#af915f"
     },
     {
      "label": "8 degrees down, left edge",
@@ -17613,13 +17613,13 @@
      "y": 815,
      "elevation_deg": -8.0,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 827.66051,
+     "luminance_cd_m2": 855.96927,
      "chromaticity_xy": [
-      0.3892,
-      0.3977
+      0.3877,
+      0.3999
      ],
      "colour": "dark orange",
-     "srgb": "#8b764f"
+     "srgb": "#8c7850"
     },
     {
      "label": "8 degrees down, centre",
@@ -17627,13 +17627,13 @@
      "y": 778,
      "elevation_deg": -8.0,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 1414.36805,
+     "luminance_cd_m2": 1442.67681,
      "chromaticity_xy": [
-      0.4572,
-      0.402
+      0.4551,
+      0.4032
      ],
-     "colour": "red-orange",
-     "srgb": "#d18a4d"
+     "colour": "orange",
+     "srgb": "#d28c4e"
     },
     {
      "label": "8 degrees down, right edge",
@@ -17641,13 +17641,13 @@
      "y": 815,
      "elevation_deg": -8.0,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 971.37746,
+     "luminance_cd_m2": 999.68622,
      "chromaticity_xy": [
-      0.396,
-      0.4007
+      0.3945,
+      0.4024
      ],
      "colour": "orange",
-     "srgb": "#987e53"
+     "srgb": "#998054"
     },
     {
      "label": "bottom of frame, left edge",
@@ -17655,13 +17655,13 @@
      "y": 1050,
      "elevation_deg": -15.26,
      "azimuth_deg": 236.7,
-     "luminance_cd_m2": 526.72492,
+     "luminance_cd_m2": 565.92353,
      "chromaticity_xy": [
-      0.3837,
-      0.3964
+      0.3808,
+      0.401
      ],
-     "colour": "dark orange",
-     "srgb": "#6f5f41"
+     "colour": "dark amber",
+     "srgb": "#716442"
     },
     {
      "label": "bottom of frame, centre",
@@ -17669,13 +17669,13 @@
      "y": 1050,
      "elevation_deg": -17.7,
      "azimuth_deg": 268.0,
-     "luminance_cd_m2": 1323.10111,
+     "luminance_cd_m2": 1364.41852,
      "chromaticity_xy": [
-      0.5113,
-      0.4005
+      0.5068,
+      0.4024
      ],
      "colour": "red-orange",
-     "srgb": "#e17a30"
+     "srgb": "#e27e33"
     },
     {
      "label": "bottom of frame, right edge",
@@ -17683,13 +17683,13 @@
      "y": 1050,
      "elevation_deg": -15.26,
      "azimuth_deg": 299.3,
-     "luminance_cd_m2": 597.88822,
+     "luminance_cd_m2": 637.08682,
      "chromaticity_xy": [
-      0.3884,
-      0.3992
+      0.3856,
+      0.4032
      ],
-     "colour": "dark orange",
-     "srgb": "#776543"
+     "colour": "dark amber",
+     "srgb": "#786945"
     }
    ],
    "glitter": {
@@ -17698,26 +17698,26 @@
      "peak_x": 1065,
      "peak_y": 575,
      "x_range": [
-      945,
-      1225
+      955,
+      1215
      ],
      "y_range": [
       575,
       1075
      ],
-     "share_of_frame_sea": 0.1036,
+     "share_of_frame_sea": 0.1025,
      "colour": "vivid orange",
      "times_white": 28.4
     }
    },
    "water_leaving": {
-    "luminance_cd_m2": 19.3928,
+    "luminance_cd_m2": 67.9349,
     "chromaticity_xy": [
-     0.3371,
-     0.4182
+     0.3352,
+     0.457
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#0b0f07"
+    "colour": "yellow-green",
+    "srgb": "#19250f"
    },
    "waves": {
     "source": "borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +153 degrees to the local wind, as deep water",
@@ -18398,10 +18398,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 230.6,
-     "luminance_cd_m2": 658.31711,
+     "luminance_cd_m2": 659.18981,
      "chromaticity_xy": [
-      0.4126,
-      0.4029
+      0.4125,
+      0.403
      ],
      "colour": "orange",
      "srgb": "#b8905b"
@@ -18412,7 +18412,7 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 819.95732,
+     "luminance_cd_m2": 820.83002,
      "chromaticity_xy": [
       0.4242,
       0.4072
@@ -18426,7 +18426,7 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 293.4,
-     "luminance_cd_m2": 762.18445,
+     "luminance_cd_m2": 763.05715,
      "chromaticity_xy": [
       0.42,
       0.4046
@@ -18440,13 +18440,13 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 230.7,
-     "luminance_cd_m2": 634.66288,
+     "luminance_cd_m2": 636.76998,
      "chromaticity_xy": [
-      0.4125,
-      0.4028
+      0.4123,
+      0.403
      ],
      "colour": "orange",
-     "srgb": "#b58e59"
+     "srgb": "#b58e5a"
     },
     {
      "label": "1 degree down, centre",
@@ -18454,13 +18454,13 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 792.18835,
+     "luminance_cd_m2": 794.29545,
      "chromaticity_xy": [
-      0.4242,
-      0.407
+      0.424,
+      0.4071
      ],
      "colour": "orange",
-     "srgb": "#cd9b5d"
+     "srgb": "#cd9c5d"
     },
     {
      "label": "1 degree down, right edge",
@@ -18468,10 +18468,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 293.3,
-     "luminance_cd_m2": 735.56706,
+     "luminance_cd_m2": 737.67416,
      "chromaticity_xy": [
-      0.42,
-      0.4044
+      0.4198,
+      0.4046
      ],
      "colour": "orange",
      "srgb": "#c5975d"
@@ -18482,13 +18482,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 230.7,
-     "luminance_cd_m2": 569.31284,
+     "luminance_cd_m2": 574.96367,
      "chromaticity_xy": [
-      0.4123,
-      0.4023
+      0.4117,
+      0.4029
      ],
      "colour": "orange",
-     "srgb": "#ad8755"
+     "srgb": "#ad8855"
     },
     {
      "label": "3 degrees down, centre",
@@ -18496,13 +18496,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 706.61488,
+     "luminance_cd_m2": 712.26571,
      "chromaticity_xy": [
-      0.4238,
-      0.4065
+      0.4233,
+      0.407
      ],
      "colour": "orange",
-     "srgb": "#c39358"
+     "srgb": "#c39459"
     },
     {
      "label": "3 degrees down, right edge",
@@ -18510,13 +18510,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 293.3,
-     "luminance_cd_m2": 657.37812,
+     "luminance_cd_m2": 663.02895,
      "chromaticity_xy": [
-      0.4195,
-      0.404
+      0.419,
+      0.4045
      ],
      "colour": "orange",
-     "srgb": "#bb8f58"
+     "srgb": "#bc9058"
     },
     {
      "label": "8 degrees down, left edge",
@@ -18524,13 +18524,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 230.8,
-     "luminance_cd_m2": 424.67079,
+     "luminance_cd_m2": 436.33157,
      "chromaticity_xy": [
-      0.41,
-      0.4017
+      0.4085,
+      0.4034
      ],
      "colour": "orange",
-     "srgb": "#96764b"
+     "srgb": "#97784b"
     },
     {
      "label": "8 degrees down, centre",
@@ -18538,13 +18538,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 520.59145,
+     "luminance_cd_m2": 532.25223,
      "chromaticity_xy": [
-      0.4207,
-      0.4062
+      0.4192,
+      0.4076
      ],
      "colour": "orange",
-     "srgb": "#a8814d"
+     "srgb": "#a9824e"
     },
     {
      "label": "8 degrees down, right edge",
@@ -18552,13 +18552,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 293.2,
-     "luminance_cd_m2": 484.72248,
+     "luminance_cd_m2": 496.38326,
      "chromaticity_xy": [
-      0.4164,
-      0.4038
+      0.4149,
+      0.4053
      ],
      "colour": "orange",
-     "srgb": "#a27d4d"
+     "srgb": "#a37f4e"
     },
     {
      "label": "bottom of frame, left edge",
@@ -18566,13 +18566,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 231.0,
-     "luminance_cd_m2": 295.98951,
+     "luminance_cd_m2": 311.37201,
      "chromaticity_xy": [
-      0.4049,
-      0.4013
+      0.4022,
+      0.4045
      ],
      "colour": "dark orange",
-     "srgb": "#7e6440"
+     "srgb": "#7f6741"
     },
     {
      "label": "bottom of frame, centre",
@@ -18580,13 +18580,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 262.0,
-     "luminance_cd_m2": 306.00081,
+     "luminance_cd_m2": 322.322,
      "chromaticity_xy": [
-      0.4105,
-      0.4058
+      0.4075,
+      0.4088
      ],
      "colour": "dark orange",
-     "srgb": "#81663e"
+     "srgb": "#82693f"
     },
     {
      "label": "bottom of frame, right edge",
@@ -18594,24 +18594,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 293.0,
-     "luminance_cd_m2": 332.50015,
+     "luminance_cd_m2": 347.88265,
      "chromaticity_xy": [
-      0.4097,
-      0.4038
+      0.4071,
+      0.4066
      ],
      "colour": "dark orange",
-     "srgb": "#866a41"
+     "srgb": "#876c42"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 8.0031,
+    "luminance_cd_m2": 27.9983,
     "chromaticity_xy": [
-     0.3448,
-     0.4214
+     0.342,
+     0.4594
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#0a0d05"
+    "colour": "yellow-green",
+    "srgb": "#17210d"
    },
    "waves": {
     "source": "borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +176 degrees to the local wind, as deep water",
@@ -19298,9 +19298,9 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 223.6,
-     "luminance_cd_m2": 142.83412,
+     "luminance_cd_m2": 142.97314,
      "chromaticity_xy": [
-      0.4381,
+      0.438,
       0.4108
      ],
      "colour": "orange",
@@ -19312,9 +19312,9 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 255.0,
-     "luminance_cd_m2": 189.39457,
+     "luminance_cd_m2": 189.53359,
      "chromaticity_xy": [
-      0.4508,
+      0.4507,
       0.4151
      ],
      "colour": "orange",
@@ -19326,10 +19326,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 286.4,
-     "luminance_cd_m2": 155.53367,
+     "luminance_cd_m2": 155.67269,
      "chromaticity_xy": [
       0.4419,
-      0.4117
+      0.4118
      ],
      "colour": "orange",
      "srgb": "#c08a4a"
@@ -19340,10 +19340,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 223.7,
-     "luminance_cd_m2": 139.74242,
+     "luminance_cd_m2": 140.07808,
      "chromaticity_xy": [
-      0.4384,
-      0.4104
+      0.4383,
+      0.4105
      ],
      "colour": "orange",
      "srgb": "#b68449"
@@ -19354,13 +19354,13 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 255.0,
-     "luminance_cd_m2": 181.77338,
+     "luminance_cd_m2": 182.10904,
      "chromaticity_xy": [
-      0.4508,
-      0.415
+      0.4506,
+      0.4151
      ],
      "colour": "orange",
-     "srgb": "#d1934a"
+     "srgb": "#d1934b"
     },
     {
      "label": "1 degree down, right edge",
@@ -19368,10 +19368,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 286.3,
-     "luminance_cd_m2": 150.20055,
+     "luminance_cd_m2": 150.53621,
      "chromaticity_xy": [
-      0.442,
-      0.4116
+      0.4419,
+      0.4117
      ],
      "colour": "orange",
      "srgb": "#bd8849"
@@ -19382,13 +19382,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 223.7,
-     "luminance_cd_m2": 122.82381,
+     "luminance_cd_m2": 123.72399,
      "chromaticity_xy": [
-      0.4383,
-      0.4101
+      0.4377,
+      0.4105
      ],
      "colour": "orange",
-     "srgb": "#ac7c44"
+     "srgb": "#ac7d44"
     },
     {
      "label": "3 degrees down, centre",
@@ -19396,10 +19396,10 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 255.0,
-     "luminance_cd_m2": 162.26471,
+     "luminance_cd_m2": 163.1649,
      "chromaticity_xy": [
-      0.4508,
-      0.4143
+      0.4503,
+      0.4146
      ],
      "colour": "orange",
      "srgb": "#c78c47"
@@ -19410,13 +19410,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 286.3,
-     "luminance_cd_m2": 134.05546,
+     "luminance_cd_m2": 134.95565,
      "chromaticity_xy": [
-      0.4421,
-      0.411
+      0.4415,
+      0.4114
      ],
      "colour": "orange",
-     "srgb": "#b48145"
+     "srgb": "#b48146"
     },
     {
      "label": "8 degrees down, left edge",
@@ -19424,13 +19424,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 223.8,
-     "luminance_cd_m2": 92.44033,
+     "luminance_cd_m2": 94.2979,
      "chromaticity_xy": [
-      0.4367,
-      0.4093
+      0.4352,
+      0.4104
      ],
      "colour": "orange",
-     "srgb": "#976d3c"
+     "srgb": "#976e3c"
     },
     {
      "label": "8 degrees down, centre",
@@ -19438,13 +19438,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 255.0,
-     "luminance_cd_m2": 119.48954,
+     "luminance_cd_m2": 121.34711,
      "chromaticity_xy": [
-      0.4484,
-      0.4137
+      0.447,
+      0.4146
      ],
      "colour": "orange",
-     "srgb": "#ad7a3e"
+     "srgb": "#ad7b3e"
     },
     {
      "label": "8 degrees down, right edge",
@@ -19452,13 +19452,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 286.2,
-     "luminance_cd_m2": 99.42201,
+     "luminance_cd_m2": 101.27959,
      "chromaticity_xy": [
-      0.4399,
-      0.4103
+      0.4384,
+      0.4113
      ],
      "colour": "orange",
-     "srgb": "#9d703d"
+     "srgb": "#9d723d"
     },
     {
      "label": "bottom of frame, left edge",
@@ -19466,13 +19466,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 224.0,
-     "luminance_cd_m2": 64.36068,
+     "luminance_cd_m2": 66.81113,
      "chromaticity_xy": [
-      0.4314,
-      0.4087
+      0.4286,
+      0.4109
      ],
      "colour": "dark orange",
-     "srgb": "#7e5c33"
+     "srgb": "#7f5f34"
     },
     {
      "label": "bottom of frame, centre",
@@ -19480,13 +19480,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 255.0,
-     "luminance_cd_m2": 70.0535,
+     "luminance_cd_m2": 72.65348,
      "chromaticity_xy": [
-      0.4385,
-      0.4132
+      0.4356,
+      0.4151
      ],
      "colour": "dark orange",
-     "srgb": "#846032"
+     "srgb": "#856233"
     },
     {
      "label": "bottom of frame, right edge",
@@ -19494,24 +19494,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 286.0,
-     "luminance_cd_m2": 68.78923,
+     "luminance_cd_m2": 71.23968,
      "chromaticity_xy": [
-      0.4341,
-      0.4099
+      0.4315,
+      0.4119
      ],
      "colour": "dark orange",
-     "srgb": "#835f34"
+     "srgb": "#836135"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 1.2777,
+    "luminance_cd_m2": 4.463,
     "chromaticity_xy": [
-     0.3497,
-     0.4219
+     0.3462,
+     0.4596
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#070903"
+    "colour": "yellow-green",
+    "srgb": "#121908"
    },
    "waves": {
     "source": "borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +199 degrees to the local wind, as deep water",
@@ -20199,13 +20199,13 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 204.6,
-     "luminance_cd_m2": 4.33594,
+     "luminance_cd_m2": 4.33865,
      "chromaticity_xy": [
       0.4693,
       0.4163
      ],
      "colour": "orange",
-     "srgb": "#be7d37"
+     "srgb": "#be7e37"
     },
     {
      "label": "just below the horizon, centre",
@@ -20213,9 +20213,9 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 236.0,
-     "luminance_cd_m2": 6.23368,
+     "luminance_cd_m2": 6.2364,
      "chromaticity_xy": [
-      0.4858,
+      0.4857,
       0.4204
      ],
      "colour": "orange",
@@ -20227,13 +20227,13 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 267.4,
-     "luminance_cd_m2": 5.00685,
+     "luminance_cd_m2": 5.00956,
      "chromaticity_xy": [
-      0.4779,
-      0.4164
+      0.4778,
+      0.4165
      ],
      "colour": "orange",
-     "srgb": "#ce8437"
+     "srgb": "#ce8537"
     },
     {
      "label": "1 degree down, left edge",
@@ -20241,10 +20241,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 204.7,
-     "luminance_cd_m2": 4.12653,
+     "luminance_cd_m2": 4.13309,
      "chromaticity_xy": [
-      0.4688,
-      0.4165
+      0.4686,
+      0.4166
      ],
      "colour": "orange",
      "srgb": "#ba7b36"
@@ -20255,10 +20255,10 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 236.0,
-     "luminance_cd_m2": 6.01655,
+     "luminance_cd_m2": 6.02311,
      "chromaticity_xy": [
-      0.4863,
-      0.42
+      0.4862,
+      0.4201
      ],
      "colour": "orange",
      "srgb": "#e28f34"
@@ -20269,13 +20269,13 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 267.3,
-     "luminance_cd_m2": 4.85826,
+     "luminance_cd_m2": 4.86482,
      "chromaticity_xy": [
-      0.4785,
-      0.416
+      0.4784,
+      0.4161
      ],
      "colour": "orange",
-     "srgb": "#cc8236"
+     "srgb": "#cc8336"
     },
     {
      "label": "3 degrees down, left edge",
@@ -20283,10 +20283,10 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 204.7,
-     "luminance_cd_m2": 3.71774,
+     "luminance_cd_m2": 3.73533,
      "chromaticity_xy": [
-      0.4702,
-      0.4155
+      0.4697,
+      0.4158
      ],
      "colour": "orange",
      "srgb": "#b27533"
@@ -20297,13 +20297,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 236.0,
-     "luminance_cd_m2": 5.38062,
+     "luminance_cd_m2": 5.3982,
      "chromaticity_xy": [
-      0.4878,
-      0.4189
+      0.4874,
+      0.4191
      ],
      "colour": "orange",
-     "srgb": "#d88731"
+     "srgb": "#d88831"
     },
     {
      "label": "3 degrees down, right edge",
@@ -20311,13 +20311,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 267.3,
-     "luminance_cd_m2": 4.31901,
+     "luminance_cd_m2": 4.3366,
      "chromaticity_xy": [
-      0.479,
-      0.4153
+      0.4785,
+      0.4155
      ],
      "colour": "orange",
-     "srgb": "#c27b33"
+     "srgb": "#c27c34"
     },
     {
      "label": "8 degrees down, left edge",
@@ -20325,13 +20325,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 204.8,
-     "luminance_cd_m2": 2.70181,
+     "luminance_cd_m2": 2.73809,
      "chromaticity_xy": [
-      0.4678,
-      0.415
+      0.4664,
+      0.4158
      ],
      "colour": "orange",
-     "srgb": "#99652c"
+     "srgb": "#9a652d"
     },
     {
      "label": "8 degrees down, centre",
@@ -20339,13 +20339,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 236.0,
-     "luminance_cd_m2": 3.87363,
+     "luminance_cd_m2": 3.90991,
      "chromaticity_xy": [
-      0.485,
-      0.4182
+      0.4839,
+      0.4187
      ],
      "colour": "orange",
-     "srgb": "#ba752b"
+     "srgb": "#ba762c"
     },
     {
      "label": "8 degrees down, right edge",
@@ -20353,13 +20353,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 267.2,
-     "luminance_cd_m2": 3.07458,
+     "luminance_cd_m2": 3.11086,
      "chromaticity_xy": [
-      0.4738,
-      0.4152
+      0.4725,
+      0.4159
      ],
      "colour": "orange",
-     "srgb": "#a46a2d"
+     "srgb": "#a56b2d"
     },
     {
      "label": "bottom of frame, left edge",
@@ -20367,13 +20367,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 205.0,
-     "luminance_cd_m2": 1.7686,
+     "luminance_cd_m2": 1.81647,
      "chromaticity_xy": [
-      0.4586,
-      0.4144
+      0.456,
+      0.4159
      ],
      "colour": "dark orange",
-     "srgb": "#7c5326"
+     "srgb": "#7c5527"
     },
     {
      "label": "bottom of frame, centre",
@@ -20381,13 +20381,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 236.0,
-     "luminance_cd_m2": 2.05735,
+     "luminance_cd_m2": 2.10814,
      "chromaticity_xy": [
-      0.4688,
-      0.4184
+      0.4662,
+      0.4197
      ],
      "colour": "dark orange",
-     "srgb": "#875924"
+     "srgb": "#875a25"
     },
     {
      "label": "bottom of frame, right edge",
@@ -20395,24 +20395,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 267.0,
-     "luminance_cd_m2": 1.95311,
+     "luminance_cd_m2": 2.00098,
      "chromaticity_xy": [
-      0.4605,
-      0.4159
+      0.4581,
+      0.4172
      ],
      "colour": "dark orange",
-     "srgb": "#825727"
+     "srgb": "#825928"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 0.025,
+    "luminance_cd_m2": 0.0872,
     "chromaticity_xy": [
-     0.3515,
-     0.4252
+     0.3474,
+     0.4627
     ],
-    "colour": "pale yellow-green",
-    "srgb": "#040502"
+    "colour": "yellow-green",
+    "srgb": "#0c1205"
    },
    "waves": {
     "source": "borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +163 degrees to the local wind, as deep water",
@@ -21115,9 +21115,9 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 148.6,
-     "luminance_cd_m2": 0.1986,
+     "luminance_cd_m2": 0.19874,
      "chromaticity_xy": [
-      0.4637,
+      0.4636,
       0.4112
      ],
      "colour": "orange",
@@ -21129,9 +21129,9 @@
      "y": 629,
      "elevation_deg": -0.4,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 0.23342,
+     "luminance_cd_m2": 0.23356,
      "chromaticity_xy": [
-      0.4721,
+      0.472,
       0.4151
      ],
      "colour": "orange",
@@ -21143,10 +21143,10 @@
      "y": 631,
      "elevation_deg": -0.4,
      "azimuth_deg": 211.4,
-     "luminance_cd_m2": 0.16491,
+     "luminance_cd_m2": 0.16505,
      "chromaticity_xy": [
-      0.4536,
-      0.4106
+      0.4535,
+      0.4107
      ],
      "colour": "orange",
      "srgb": "#bb8042"
@@ -21157,13 +21157,13 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 148.7,
-     "luminance_cd_m2": 0.19136,
+     "luminance_cd_m2": 0.19169,
      "chromaticity_xy": [
-      0.464,
-      0.4109
+      0.4638,
+      0.411
      ],
      "colour": "orange",
-     "srgb": "#cc8743"
+     "srgb": "#cc8843"
     },
     {
      "label": "1 degree down, centre",
@@ -21171,10 +21171,10 @@
      "y": 645,
      "elevation_deg": -1.0,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 0.2271,
+     "luminance_cd_m2": 0.22744,
      "chromaticity_xy": [
-      0.4732,
-      0.4146
+      0.473,
+      0.4147
      ],
      "colour": "orange",
      "srgb": "#df9141"
@@ -21185,10 +21185,10 @@
      "y": 649,
      "elevation_deg": -1.0,
      "azimuth_deg": 211.3,
-     "luminance_cd_m2": 0.15915,
+     "luminance_cd_m2": 0.15948,
      "chromaticity_xy": [
-      0.4539,
-      0.4105
+      0.4537,
+      0.4106
      ],
      "colour": "orange",
      "srgb": "#b87e41"
@@ -21199,13 +21199,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 148.7,
-     "luminance_cd_m2": 0.17135,
+     "luminance_cd_m2": 0.17224,
      "chromaticity_xy": [
-      0.4649,
-      0.4102
+      0.4644,
+      0.4104
      ],
      "colour": "orange",
-     "srgb": "#c3803f"
+     "srgb": "#c3813f"
     },
     {
      "label": "3 degrees down, centre",
@@ -21213,13 +21213,13 @@
      "y": 698,
      "elevation_deg": -3.0,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 0.20357,
+     "luminance_cd_m2": 0.20446,
      "chromaticity_xy": [
-      0.4747,
-      0.4137
+      0.4742,
+      0.4139
      ],
      "colour": "orange",
-     "srgb": "#d58a3d"
+     "srgb": "#d68a3e"
     },
     {
      "label": "3 degrees down, right edge",
@@ -21227,13 +21227,13 @@
      "y": 711,
      "elevation_deg": -3.0,
      "azimuth_deg": 211.3,
-     "luminance_cd_m2": 0.14323,
+     "luminance_cd_m2": 0.14412,
      "chromaticity_xy": [
-      0.4555,
-      0.4097
+      0.4549,
+      0.41
      ],
      "colour": "orange",
-     "srgb": "#b1783d"
+     "srgb": "#b1783e"
     },
     {
      "label": "8 degrees down, left edge",
@@ -21241,13 +21241,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 148.8,
-     "luminance_cd_m2": 0.12311,
+     "luminance_cd_m2": 0.12495,
      "chromaticity_xy": [
-      0.4605,
-      0.4097
+      0.4591,
+      0.4106
      ],
      "colour": "orange",
-     "srgb": "#a76f37"
+     "srgb": "#a77038"
     },
     {
      "label": "8 degrees down, centre",
@@ -21255,13 +21255,13 @@
      "y": 832,
      "elevation_deg": -8.0,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 0.14765,
+     "luminance_cd_m2": 0.14949,
      "chromaticity_xy": [
-      0.4724,
-      0.4127
+      0.471,
+      0.4134
      ],
      "colour": "orange",
-     "srgb": "#b87736"
+     "srgb": "#b97836"
     },
     {
      "label": "8 degrees down, right edge",
@@ -21269,13 +21269,13 @@
      "y": 869,
      "elevation_deg": -8.0,
      "azimuth_deg": 211.2,
-     "luminance_cd_m2": 0.10608,
+     "luminance_cd_m2": 0.10792,
      "chromaticity_xy": [
-      0.4544,
-      0.4088
+      0.4527,
+      0.4097
      ],
      "colour": "orange",
-     "srgb": "#9a6835"
+     "srgb": "#9a6936"
     },
     {
      "label": "bottom of frame, left edge",
@@ -21283,13 +21283,13 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 149.0,
-     "luminance_cd_m2": 0.079,
+     "luminance_cd_m2": 0.08143,
      "chromaticity_xy": [
-      0.4486,
-      0.4095
+      0.4459,
+      0.4112
      ],
      "colour": "dark orange",
-     "srgb": "#855b2f"
+     "srgb": "#855d30"
     },
     {
      "label": "bottom of frame, centre",
@@ -21297,13 +21297,13 @@
      "y": 1050,
      "elevation_deg": -15.7,
      "azimuth_deg": 180.0,
-     "luminance_cd_m2": 0.07904,
+     "luminance_cd_m2": 0.08162,
      "chromaticity_xy": [
-      0.4563,
-      0.4121
+      0.4533,
+      0.4138
      ],
      "colour": "dark orange",
-     "srgb": "#865b2c"
+     "srgb": "#875d2d"
     },
     {
      "label": "bottom of frame, right edge",
@@ -21311,24 +21311,24 @@
      "y": 1050,
      "elevation_deg": -13.55,
      "azimuth_deg": 211.0,
-     "luminance_cd_m2": 0.0711,
+     "luminance_cd_m2": 0.07353,
      "chromaticity_xy": [
-      0.4467,
-      0.4079
+      0.4438,
+      0.4098
      ],
      "colour": "dark orange",
-     "srgb": "#7e572d"
+     "srgb": "#7f592e"
     }
    ],
    "glitter": {},
    "water_leaving": {
-    "luminance_cd_m2": 0.0013,
+    "luminance_cd_m2": 0.0044,
     "chromaticity_xy": [
-     0.3501,
-     0.4203
+     0.3462,
+     0.4584
     ],
-    "colour": "pale yellow",
-    "srgb": "#060703"
+    "colour": "yellow-green",
+    "srgb": "#0f1607"
    },
    "waves": {
     "source": "borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +323 degrees to the local wind, as deep water",

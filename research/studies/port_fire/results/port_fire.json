@@ -22,7 +22,7 @@
    "SYNODIC_MONTH_DAYS": 29.53059
   },
   "inputs": {
-   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa"
+   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4"
   }
  },
  "evidence": "First-order fire-engineering arithmetic. Earth correlations (plumes, ceiling jets, detector and sprinkler response, smoke filling, flashover, ventilation limits) are carried to lunar gravity and the port's air by Froude scaling; none has been tested at partial gravity beyond small samples. Design fires are EN 1991-1-2's, with a slower lunar bracket built from Earth oxygen data and short low-gravity tests. Crowd flows at lunar gravity, pre-movement times and the aerial evacuation figures are assumptions. Nothing here is a fire strategy or a certified design.",

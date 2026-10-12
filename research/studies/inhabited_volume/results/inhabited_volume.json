@@ -13,8 +13,8 @@
     },
     "inputs": {
       "shared/scenarios/population.json": "74ec20d6f8057977",
-      "research/studies/sky_ships/results/sky_ships.json": "1e214bf6e64b0bb8",
-      "provisioning/results/population.json": "9671b996c3f68105"
+      "research/studies/sky_ships/results/sky_ships.json": "375284e4a16ffcab",
+      "provisioning/results/population.json": "0b37e24d62461e53"
     }
   },
   "evidence": "Closed-form geometry, Archimedean lift, drag and service-account screens on committed model products. No habitat structure, population capacity, weather simulation, ecosystem or sustainable allocation is established.",
@@ -1263,12 +1263,12 @@
       "ground_residential_footprint_km2_at_40000_per_km2": 75000.0,
       "all_lunar_ground_counterfactual_km2_at_40000_per_km2": 150000.0,
       "food_cropland_km2": [
-        786000.0,
-        2046000.0
+        804000.0,
+        2100000.0
       ],
       "cropland_fraction_dry": [
-        0.03360554106631322,
-        0.08747701911154816
+        0.03437513360981658,
+        0.08978579674205824
       ],
       "wild_aerial_food_credited_people": 0.0,
       "runoff_m3_person_year": 1206.6666666666667,
@@ -1578,12 +1578,12 @@
       "ground_residential_footprint_km2_at_40000_per_km2": 125000.0,
       "all_lunar_ground_counterfactual_km2_at_40000_per_km2": 250000.0,
       "food_cropland_km2": [
-        1310000.0,
-        3410000.0
+        1340000.0,
+        3500000.0
       ],
       "cropland_fraction_dry": [
-        0.05600923511052204,
-        0.14579503185258028
+        0.0572918893496943,
+        0.14964299457009705
       ],
       "wild_aerial_food_credited_people": 0.0,
       "runoff_m3_person_year": 724.0,
@@ -1893,12 +1893,12 @@
       "ground_residential_footprint_km2_at_40000_per_km2": 187500.0,
       "all_lunar_ground_counterfactual_km2_at_40000_per_km2": 375000.0,
       "food_cropland_km2": [
-        1965000.0,
-        5115000.0
+        2010000.0,
+        5250000.0
       ],
       "cropland_fraction_dry": [
-        0.08401385266578305,
-        0.2186925477788704
+        0.08593783402454146,
+        0.22446449185514558
       ],
       "wild_aerial_food_credited_people": 0.0,
       "runoff_m3_person_year": 482.6666666666667,
@@ -2208,12 +2208,12 @@
       "ground_residential_footprint_km2_at_40000_per_km2": 75000.0,
       "all_lunar_ground_counterfactual_km2_at_40000_per_km2": 150000.0,
       "food_cropland_km2": [
-        786000.0,
-        2046000.0
+        804000.0,
+        2100000.0
       ],
       "cropland_fraction_dry": [
-        0.03360554106631322,
-        0.08747701911154816
+        0.03437513360981658,
+        0.08978579674205824
       ],
       "wild_aerial_food_credited_people": 0.0,
       "runoff_m3_person_year": 1206.6666666666667,
@@ -2523,12 +2523,12 @@
       "ground_residential_footprint_km2_at_40000_per_km2": 150000.0,
       "all_lunar_ground_counterfactual_km2_at_40000_per_km2": 300000.0,
       "food_cropland_km2": [
-        1572000.0,
-        4092000.0
+        1608000.0,
+        4200000.0
       ],
       "cropland_fraction_dry": [
-        0.06721108213262644,
-        0.17495403822309633
+        0.06875026721963316,
+        0.17957159348411647
       ],
       "wild_aerial_food_credited_people": 0.0,
       "runoff_m3_person_year": 603.3333333333334,

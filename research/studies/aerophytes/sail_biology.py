@@ -17,7 +17,8 @@ from shared.constants import MOON_GM, MOON_RADIUS, SYNODIC_MONTH_DAYS, JULIAN_YE
 ROOT = Path(__file__).resolve().parents[3]
 STUDY = Path('research/studies/aerophytes')
 PARENT = STUDY / 'results/aerophytes.json'
-EXPECTED_PARENT_SHA256 = '066cb18739272578220b264f1382652d8e57e86f215e625f69f102f0306b6fd3'
+# Rebound on 2026-10-12, after the plant refresh: the parent's sailing section, the part read here, is unchanged.
+EXPECTED_PARENT_SHA256 = '2edc258d33bb638d108c750388914a38ac750b5de213de6fcc0dbedb52f9c137'
 
 
 def _positive(**values):

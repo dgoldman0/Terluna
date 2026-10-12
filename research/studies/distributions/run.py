@@ -63,51 +63,51 @@ KEYS = dict(food='research/studies/food_systems/results/food_systems.json',
             winds='climate/results/gcm/zonal_winds_A28_dim5_moon.json',
             cases='shared/scenarios/population.json')
 
-# Files on other branches, read through Git at their pinned commits (the worktrees share one object store).
+# Files from the former domain branches, read in-tree since the joint integration, their hashes checked.
 BOUND = {
     'sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
-        branch='domain/resources', worktree='terluna-resources', commit='98d5ae92f4a1c2a8bda9a879592a26742bdbf1d5',
-        blob='caf24c2d1f9fcf2a89945bb4b073848fbbad4c43',
-        sha256='9cf6927649942ed6831e34524b512fa9d011e07a5d57a4ac105587f3508fbcbf',
+        branch='main', worktree='terluna', commit=None,
+        blob='617d2891b931ef59a069dfe8f96eb555703ba6a9',
+        sha256='8e7050601fc79f123c385368efafefd72b60e6da3e339d1705144c13411525b9',
         note="The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage "
              'recovery and the natural cycle kept beside them.'),
     'industry_md': dict(
         path='resources/industry.md', schema=None,
-        branch='domain/resources', worktree='terluna-resources', commit='98d5ae92f4a1c2a8bda9a879592a26742bdbf1d5',
+        branch='main', worktree='terluna', commit=None,
         blob='98d91dbf3c8c182bb32403d14b3b7a29515c9a06',
         sha256='3da7e7b7d7dfa144109445d1ae99301aa98d8317a1fcaf03210296676917e71e',
         note="The array's habitats as the largest continuing material stream, the places' sunlight and the Moon's "
              "people's stocks; the values used are transcribed in TRANSCRIBED and checked against these bytes."),
     'phosphorus': dict(
         path='resources/results/phosphorus.json', schema='terluna.resources.phosphorus/1',
-        branch='domain/resources', worktree='terluna-resources', commit='98d5ae92f4a1c2a8bda9a879592a26742bdbf1d5',
-        blob='5f64d348f6c3a66911e724e3d813bd24b95dfc12',
-        sha256='159462a220b6661e457d5adcde1590cf144090e90bb770f3a775d04d709fec8e',
+        branch='main', worktree='terluna', commit=None,
+        blob='d8c8bc91e045377aae366f5779e98a9eca1539f6',
+        sha256='098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60',
         note='The energy to lift material to the sky towns at 10 km.'),
     'ecology_people': dict(
         path='biosphere/ecology/results/people.json', schema='terluna.biosphere.ecology-people/1',
-        branch='domain/ecology', worktree='terluna-ecology', commit='4932a68c570f7b164673cefdbc6c653c76de1acf',
-        blob='3c5b973bf2f1925a47faee9e845aea534b691387',
-        sha256='f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6',
+        branch='main', worktree='terluna', commit=None,
+        blob='16da044ef8ca4519c7d2547684db79fe5fa72c6b',
+        sha256='7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015',
         note="The kept shares and the lunar design's land, the basis of the food and lighting studies."),
     'living_light': dict(
         path='research/studies/living_light/results/living_light.json', schema='terluna.research.living-light/1',
-        branch='domain/ecology', worktree='terluna-ecology', commit='4932a68c570f7b164673cefdbc6c653c76de1acf',
-        blob='11d2a2013ee23fc45ef356457fd70e493412e932',
-        sha256='5c0e0ae098f13fea85915af834c42edb1dd3709b87cd23d68d9d868ff2442c3e',
+        branch='main', worktree='terluna', commit=None,
+        blob='6bd9943cdbf16f1c2799967193b7ff9230a4a0ec',
+        sha256='d82bd5e9d77d2665743b5c86cde6a221a252d51ed3982d02a862739828868498',
         note='Land under a light-polluted sky a person by home and lighting design, the metropolis and residents '
              'aloft; lamp hours by home; the dark belt.'),
     'sky_ecology': dict(
         path='research/studies/sky_ecology/results/sky_ecology.json', schema='terluna.research.sky-ecology/1',
-        branch='domain/ecology', worktree='terluna-ecology', commit='4932a68c570f7b164673cefdbc6c653c76de1acf',
-        blob='942f29a9a6a97890e1f7a5ebd232ce6656888ebd',
-        sha256='d21e6c16c3ba7dedcd4e2973f2558541fe29a89eb13f27a03b8c87c8a27061b5',
+        branch='main', worktree='terluna', commit=None,
+        blob='1f566175a347aa1c62b6cffa1cabd96dc0acb92e',
+        sha256='3a1401c61271dedd15a38c55b453c9c8085c2bfd22fa4289d7613f3977ce89de',
         note="Aerophyte cover and the encounter rule for bodies on the same wind tracks."),
     'places': dict(
         path='research/studies/joint_synthesis/results/places.json',
         schema='terluna.research.joint-synthesis-places/1',
-        branch='main', worktree='terluna', commit='80497dde28688e28bdf5d01db11b9e5a35df1cad',
+        branch='main', worktree='terluna', commit=None,
         blob='3aa6d0939faf502433c03105b831a9994ab3315d',
         sha256='9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d',
         note="Main's corrected per-place night light and lightning at the summit, the highland box and the polar "
@@ -307,15 +307,15 @@ def load_json(rel, schema):
 
 
 def bound_bytes(key) -> bytes:
-    """A bound input's bytes at its pinned commit, read through Git; the hash is checked."""
+    """A bound input's bytes: the in-tree file, which since the joint integration of 12 October 2026 holds every
+    former branch's inputs; its hash is checked against the pin."""
     b = BOUND[key]
-    try:
-        raw = subprocess.run(['git', '-C', str(ROOT), 'show', f"{b['commit']}:{b['path']}"], capture_output=True,
-                             check=True).stdout
-    except (OSError, subprocess.CalledProcessError) as error:
-        raise MissingInput(f"{b['path']} at {b['branch']} {b['commit'][:7]} is not readable here") from error
+    local = ROOT / b['path']
+    if not local.exists():
+        raise MissingInput(f"{b['path']} is not in this tree")
+    raw = local.read_bytes()
     if hashlib.sha256(raw).hexdigest() != b['sha256']:
-        raise ValueError(f"{b['path']} at {b['commit'][:7]} does not match its pinned hash")
+        raise ValueError(f"{b['path']} does not match its pinned hash")
     return raw
 
 
@@ -1854,7 +1854,7 @@ def build(rounded=True):
                       sources=digest(HERE / 'sources.json'),
                       bound_inputs={k: dict(path_at_integration=v['path'], branch=v['branch'], commit=v['commit'],
                                             blob=v['blob'], sha256=v['sha256'], worktree=v['worktree'],
-                                            read_from=f"git -C <worktree> show {v['commit'][:7]}:{v['path']}",
+                                            read_from='in-tree',
                                             note=v['note']) for k, v in BOUND.items()}),
         evidence=EVIDENCE, reading_rule=READING_RULE, marks=MARKS,
         assumptions=dict(design_guesses=GUESSES, chosen_mix=CHOSEN_MIX, moon_billion=list(MOON_BILLION),

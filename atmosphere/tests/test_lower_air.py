@@ -10,9 +10,9 @@ class AirTests(unittest.TestCase):
         a = LowerAir()
         z = np.array([0., 100., 500., 5000.])
         p = a.sample(z)
-        expected = a.config.pressure_pa*np.exp(-GM_MOON*(1/R_MOON-1/(R_MOON+z))/a.gas_constant/288)
+        expected = a.config.pressure_pa*np.exp(-GM_MOON*(1/R_MOON-1/(R_MOON+z))/a.gas_constant/a.config.temperature_k)
         np.testing.assert_allclose(p['pressure_pa'], expected, rtol=2e-14)
-        np.testing.assert_allclose(p['density_kg_m3'], p['pressure_pa']/a.gas_constant/288)
+        np.testing.assert_allclose(p['density_kg_m3'], p['pressure_pa']/a.gas_constant/a.config.temperature_k)
         self.assertAlmostEqual(p['pressure_pa'][0], 121590)
 
     def test_hydrostatic_derivative(self):

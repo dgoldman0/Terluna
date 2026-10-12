@@ -66,7 +66,7 @@ WIND_BANDS = {'equator': (0.0, 10.0), '30': (25.0, 35.0), '60': (55.0, 65.0)}
 TOWN_HEIGHTS_KM = (2.5, 5.0, 10.0, 20.0, 30.0, 40.0)
 # Main's corrected per-place Earthlight, bound by commit until the branch merges main (then read in-tree).
 MAIN_PLACES = dict(path='research/studies/joint_synthesis/results/places.json',
-                   commit='78020e0f3273cd98b6b7ac68554b162cf3a96239',
+                   commit=None,
                    blob='3aa6d0939faf502433c03105b831a9994ab3315d',
                    sha256='9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d',
                    schema='terluna.research.joint-synthesis-places/1')

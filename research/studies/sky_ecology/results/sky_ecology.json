@@ -3,7 +3,7 @@
  "producer": {
   "study": "sky_ecology",
   "files": {
-   "research/studies/sky_ecology/run.py": "b23b044b97f3475477a3a991eb086b1c53eec9fbef4f1836af170718ce23c04a",
+   "research/studies/sky_ecology/run.py": "7b95e3c2b8d6f99a7d1f2f66df9dcfe69817fc942dd5bd877236de6116fd3afd",
    "research/studies/sky_ecology/food_web.py": "bbba895cdab7384c309269bf832d1a8d1890db75aa0fa7fcbd441cad4dccd87c",
    "research/studies/sky_ecology/tenants.py": "94d1281e51b3bad08dc002bd1dd2f27c5140f942b3c061786dc778fadbe59a9e",
    "research/studies/sky_ecology/phosphorus.py": "03362cdb663f2640fc38ff2f74466c2f86153b8ae247ce01d08b6ab535fb424e",
@@ -27,14 +27,14 @@
    "research/studies/aerophytes/resources.py": "02decbdde56ae6a4b1f4341e6c92531c0e4e401c2dca629e03af3be549cd5d23"
   },
   "inputs": {
-   "research/studies/aerophytes/results/aerophytes.json": "066cb18739272578220b264f1382652d8e57e86f215e625f69f102f0306b6fd3",
-   "research/studies/aerial_ecology/results/aerial_ecology.json": "00d056585da24ff0f21f24e4422f8392a3ba2803546f181f8409adceeba7f919",
-   "biosphere/ecology/results/people.json": "f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6",
+   "research/studies/aerophytes/results/aerophytes.json": "2edc258d33bb638d108c750388914a38ac750b5de213de6fcc0dbedb52f9c137",
+   "research/studies/aerial_ecology/results/aerial_ecology.json": "62fbdf6a2311dfc02d25eef159f52c43dc6da227e02fb9fc916d695a374e8fea",
+   "biosphere/ecology/results/people.json": "7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015",
    "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d",
    "biosphere/ecology/results/taxa.json": "2f24aee609d3f94e6b0275db1370002a08efe69ccedefcee4757c9ab55a78fa7",
    "illumination/surface_light/results/surface_light.json": "e2406dbceb34193eaef5bd8a1dd6ea20940be72934301ef618221fdc79ad5572",
-   "research/studies/sky_ships/results/sky_ships.json": "1e214bf6e64b0bb891c64b8ff273a7a12482e83defce0732b315c1751a28b26e",
-   "research/studies/sky_fleet/results/sky_fleet.json": "c96dfc663f12756c6227c0509d054313b0a3fb7e1d06dfc0f7d16bc262bc06d4",
+   "research/studies/sky_ships/results/sky_ships.json": "375284e4a16ffcab49f7ec46396db54062babbb995b580cfccfcf190b3687a72",
+   "research/studies/sky_fleet/results/sky_fleet.json": "fcf26a8bd6d989507c58e1f971dd26469734a9dc028c9c1eccf3437849451401",
    "shared/scenarios/water.json": "a9d4d60ef3bf20b52454fdc07f2e05de107ebdd896b03288e9117af0c87e46a0",
    "research/studies/sky_ecology/sources.json": "39f59e82b8c88def4842215832a19c32ea756d6c736c13c15cec53a86489e868",
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b18972bdaa506f48d8c25050c04b168090e3b4cd1ba07afea4",
@@ -43,59 +43,59 @@
   },
   "cross_branch_inputs": {
    "resources/results/phosphorus.json": {
-    "branch": "domain/resources",
-    "commit": "b47c452201a796a86aaf7dbedd9ae348f9ed2d8a",
-    "blob": "5f64d348f6c3a66911e724e3d813bd24b95dfc12",
-    "sha256": "159462a220b6661e457d5adcde1590cf144090e90bb770f3a775d04d709fec8e",
-    "read_from": "git object at the pinned commit",
+    "branch": "main",
+    "commit": null,
+    "blob": "d8c8bc91e045377aae366f5779e98a9eca1539f6",
+    "sha256": "098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60",
+    "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "resources/phosphorus.py": {
-    "branch": "domain/resources",
-    "commit": "b47c452201a796a86aaf7dbedd9ae348f9ed2d8a",
+    "branch": "main",
+    "commit": null,
     "blob": "0b8568bc8af9c5ffc09e6baf9287bc86404cdf09",
     "sha256": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "resources/phosphorus.md": {
-    "branch": "domain/resources",
-    "commit": "b47c452201a796a86aaf7dbedd9ae348f9ed2d8a",
+    "branch": "main",
+    "commit": null,
     "blob": "030a5a80e4b6edab39c6a908d5bb519e7b31f721",
     "sha256": "afa8db4d5e8b698c6e4d8bb4b6d5e20f424f5edabd9144ccab7baf4c0a7af138",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "climate/results/gcm/zonal_winds_A28_dim5_moon.json": {
-    "branch": "domain/provisioning",
-    "commit": "d9bc800bc2c9bbb1fa186b376710ed9e81c0919c",
+    "branch": "main",
+    "commit": null,
     "blob": "c854c05285193ee493859fa087cb74d05903b5a9",
     "sha256": "a6a5d0cf96b42a1a18921f61566a638487cec3e602bd2ca752542a1c4a31affe",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "climate/results/gcm/zonal_winds_A28_dim5_moon.npz": {
-    "branch": "domain/provisioning",
-    "commit": "d9bc800bc2c9bbb1fa186b376710ed9e81c0919c",
+    "branch": "main",
+    "commit": null,
     "blob": "20ebd86705a416c8bd18bf1b013dacef7644bc1c",
     "sha256": "c9b1a0ae8e8733b5d9fb1b60600aa2c43329c9b82bb86ccf4f1bb4a4a58a97e6",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "climate/gcm/zonal_winds.md": {
-    "branch": "domain/provisioning",
-    "commit": "d9bc800bc2c9bbb1fa186b376710ed9e81c0919c",
-    "blob": "fe893e2e172e7c22bd711d53444346e2b8db02ae",
-    "sha256": "02bb50a2f2c31eae2172cd118e383f9f329a719576534d5f5412a399368a5e3f",
-    "read_from": "git object at the pinned commit",
+    "branch": "main",
+    "commit": null,
+    "blob": "c8ead8b6f8217ba3032806902c79f91b7ef45592",
+    "sha256": "de35ebdcfab234b9fc8f110672018a4d279da7bc84ceb0e0cab5ac9b22b3822f",
+    "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "research/studies/ways_of_living/results/ways_of_living.json": {
-    "branch": "domain/provisioning",
-    "commit": "e364c08e7aa1b9cbe840f30ebc2a5af8132ac2a5",
-    "blob": "8efea099bf293804c38fcab272a8c038218385ce",
-    "sha256": "cbba4058819147f2d2bb2d02f1dae91320224b3e723e2820bd0f6ba95d64cd0a",
-    "read_from": "git object at the pinned commit",
+    "branch": "main",
+    "commit": null,
+    "blob": "f2b29ecec1566d67e0b6cad21a2038d3f68c8ea4",
+    "sha256": "ffe48e6467008176b9e89f7fb9b3afc5d63f0874fe3a86156a0aa81bac35d09d",
+    "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    }
   },

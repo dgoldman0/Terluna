@@ -65,16 +65,16 @@ IGNORED = {
     'geography/products/drainage_28pct_16ppd.npz': 'terluna.geography.drainage/1',
     'climate/gcm/products/climatology_A28_dim5_moon.npz': 'terluna.climate.gcm-climatology/1',
 }
-# Inputs on other branches, read at their pinned commits; bound into this tree at the joint integration.
+# Inputs from the former domain branches, read in-tree since the joint integration, their hashes checked.
 BOUND = {
     'ecology_people': dict(
         path='biosphere/ecology/results/people.json', schema='terluna.biosphere.ecology-people/1',
-        branch='domain/ecology', commit='11392b4',
-        sha256='f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6',
+        branch='main', commit=None,
+        sha256='7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015',
         note='Per-billion costs of the lunar design and Earth practice, rain-fed land and diets (people_and_land.md).'),
     'places': dict(
         path='research/studies/joint_synthesis/results/places.json', schema='terluna.research.joint-synthesis-places/1',
-        branch='main', commit='78020e0',
+        branch='main', commit=None,
         sha256='9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d',
         note="Main's corrected Earthlight per place (each place's own sky); this branch's copy predates it."),
 }
@@ -149,15 +149,15 @@ def load_npz(rel, schema):
 
 
 def bound_bytes(key) -> bytes:
-    """The bound input's bytes at its pinned commit, read through Git; the hash is checked."""
+    """A bound input's bytes: the in-tree file, which since the joint integration of 12 October 2026 holds every
+    former branch's inputs; its hash is checked against the pin."""
     b = BOUND[key]
-    try:
-        raw = subprocess.run(['git', 'show', f"{b['commit']}:{b['path']}"], cwd=ROOT, capture_output=True,
-                             check=True).stdout
-    except (OSError, subprocess.CalledProcessError) as error:
-        raise MissingInput(f"{b['path']} at {b['branch']} {b['commit']} is not readable here") from error
+    local = ROOT / b['path']
+    if not local.exists():
+        raise MissingInput(f"{b['path']} is not in this tree")
+    raw = local.read_bytes()
     if hashlib.sha256(raw).hexdigest() != b['sha256']:
-        raise ValueError(f"{b['path']} at {b['commit']} does not match its pinned hash")
+        raise ValueError(f"{b['path']} does not match its pinned hash")
     return raw
 
 
@@ -1120,7 +1120,7 @@ def results():
                               ([ZONAL_WINDS] if zonal is not None else [])},
                       ignored_inputs={p: digest(ROOT / p) for p in IGNORED},
                       bound_inputs={k: dict(path_at_integration=v['path'], branch=v['branch'], commit=v['commit'],
-                                            sha256=v['sha256'], read_from=f"git show {v['commit']}:{v['path']}",
+                                            sha256=v['sha256'], read_from='in-tree',
                                             note=v['note']) for k, v in BOUND.items()},
                       winds=winds_used['source']),
         evidence=('Grid sums on the 28% atlas, the drainage lakes and rivers and the design climatology (A28_dim5_moon), '

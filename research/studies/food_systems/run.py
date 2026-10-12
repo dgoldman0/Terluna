@@ -8,7 +8,7 @@ the heat ledger) and from primary literature values listed in parameters.py with
 systems are set together in mixes for 4, 6 and 8 billion lunar residents. Grid sums, closed-form physics and
 arithmetic on cited values only: no crop, climate, hydrology or ecosystem model runs here.
 
-Seven inputs live on other branches and are read through Git at their pinned commits, their hashes checked (BOUND).
+Seven inputs came from other branches; since the joint integration they are read in-tree, their hashes checked (BOUND).
 """
 from __future__ import annotations
 
@@ -61,52 +61,52 @@ FOG_DESERT_DEG = (zones_mod.RAIN_BELT_DEG, zones_mod.POLAR_DEG)   # the fog dese
                                                                   # rings' land spans every latitude
 WIND_ROUNDING_M_S = 0.1           # the ring products give bin-mean winds to one decimal (climate/crm/ring_analysis.py)
 RAYLEIGH_SHAPE = 2.0              # the Weibull shape of the Rayleigh distribution (definition)
-# Inputs on other branches, read through Git at their pinned commits (the worktrees share one object store).
+# Inputs from the former domain branches, read in-tree since the joint integration, their hashes checked.
 BOUND = {
     'ecology_people': dict(
         path='biosphere/ecology/results/people.json', schema='terluna.biosphere.ecology-people/1',
-        branch='domain/ecology', worktree='terluna-ecology', commit='5aafe2a3bf20c407b36ec759460f93e6fb1fc1e1',
-        blob='3c5b973bf2f1925a47faee9e845aea534b691387',
-        sha256='f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6',
+        branch='main', worktree='terluna', commit=None,
+        blob='16da044ef8ca4519c7d2547684db79fe5fa72c6b',
+        sha256='7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015',
         note="The lunar design's diets, crop land, crop water, rain-fed bands, nitrogen, phosphorus, N2O and methane "
              'per person (people_and_land.md).'),
     'ecology_first_screen': dict(
         path='biosphere/ecology/results/first_screen.json', schema='terluna.biosphere.ecology-first-screen/1',
-        branch='domain/ecology', worktree='terluna-ecology', commit='5aafe2a3bf20c407b36ec759460f93e6fb1fc1e1',
+        branch='main', worktree='terluna', commit=None,
         blob='08a4e7b179f8176f656b580657a9db7f2423270a',
         sha256='d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d',
         note="Methane's soil sink and lifetime and N2O's accumulation per Tg N in the design air."),
     'ecology_people_and_land': dict(
         path='biosphere/ecology/people_and_land.md', schema=None,
-        branch='domain/ecology', worktree='terluna-ecology', commit='5aafe2a3bf20c407b36ec759460f93e6fb1fc1e1',
+        branch='main', worktree='terluna', commit=None,
         blob='4660b559686e3f47039ee74fdb5373dcd73a8b50',
         sha256='7a8fbafb9a9ecdf635fb0cda1535bbf01d1069522f037d0630fabcce739097a1',
         note="The write-up of the ecology people product; bound for its definitions of the lunar design."),
     'resources_phosphorus': dict(
         path='resources/results/phosphorus.json', schema='terluna.resources.phosphorus/1',
-        branch='domain/resources', worktree='terluna-resources', commit='ac5d38d78d85bb56e7927a51a469eb44d13305c3',
-        blob='5f64d348f6c3a66911e724e3d813bd24b95dfc12',
-        sha256='159462a220b6661e457d5adcde1590cf144090e90bb770f3a775d04d709fec8e',
+        branch='main', worktree='terluna', commit=None,
+        blob='d8c8bc91e045377aae366f5779e98a9eca1539f6',
+        sha256='098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60',
         note='The aerial phosphorus return account, whose complete-diet P demand provisioning supplies; its lift '
              'energy per kg to 10 km.'),
     'resources_phosphorus_py': dict(
         path='resources/phosphorus.py', schema=None,
-        branch='domain/resources', worktree='terluna-resources', commit='ac5d38d78d85bb56e7927a51a469eb44d13305c3',
+        branch='main', worktree='terluna', commit=None,
         blob='0b8568bc8af9c5ffc09e6baf9287bc86404cdf09',
         sha256='48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43',
         note='The producer of the phosphorus account.'),
     'resources_phosphorus_md': dict(
         path='resources/phosphorus.md', schema=None,
-        branch='domain/resources', worktree='terluna-resources', commit='ac5d38d78d85bb56e7927a51a469eb44d13305c3',
+        branch='main', worktree='terluna', commit=None,
         blob='030a5a80e4b6edab39c6a908d5bb519e7b31f721',
         sha256='afa8db4d5e8b698c6e4d8bb4b6d5e20f424f5edabd9144ccab7baf4c0a7af138',
         note='The write-up of the phosphorus account; the author\'s direction of 2026-10-11 to draw phosphorus from '
              'the seas is recorded in that branch\'s decisions register at the same commit.'),
     'resources_sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
-        branch='domain/resources', worktree='terluna-resources', commit='edf7fb5eea4527fa0d0818659ffef070e93b6094',
-        blob='caf24c2d1f9fcf2a89945bb4b073848fbbad4c43',
-        sha256='9cf6927649942ed6831e34524b512fa9d011e07a5d57a4ac105587f3508fbcbf',
+        branch='main', worktree='terluna', commit=None,
+        blob='617d2891b931ef59a069dfe8f96eb555703ba6a9',
+        sha256='8e7050601fc79f123c385368efafefd72b60e6da3e339d1705144c13411525b9',
         note='The land\'s phosphorus through the rain-fed lakes to the seas: the dissolved input the common-level '
              'waters receive, and what the waters\' life can spare to seaweed, fish and sorption.'),
 }
@@ -131,15 +131,15 @@ def load_json(rel, schema):
 
 
 def bound_bytes(key) -> bytes:
-    """A bound input's bytes at its pinned commit, read through Git; the hash is checked."""
+    """A bound input's bytes: the in-tree file, which since the joint integration of 12 October 2026 holds every
+    former branch's inputs; its hash is checked against the pin."""
     b = BOUND[key]
-    try:
-        raw = subprocess.run(['git', '-C', str(ROOT), 'show', f"{b['commit']}:{b['path']}"], capture_output=True,
-                             check=True).stdout
-    except (OSError, subprocess.CalledProcessError) as error:
-        raise MissingInput(f"{b['path']} at {b['branch']} {b['commit'][:7]} is not readable here") from error
+    local = ROOT / b['path']
+    if not local.exists():
+        raise MissingInput(f"{b['path']} is not in this tree")
+    raw = local.read_bytes()
     if hashlib.sha256(raw).hexdigest() != b['sha256']:
-        raise ValueError(f"{b['path']} at {b['commit'][:7]} does not match its pinned hash")
+        raise ValueError(f"{b['path']} does not match its pinned hash")
     return raw
 
 
@@ -722,7 +722,7 @@ def results():
                       ignored_inputs={p: digest(ROOT / p) for p in zones_mod.GRID_SCHEMAS},
                       bound_inputs={k: dict(path_at_integration=v['path'], branch=v['branch'], commit=v['commit'],
                                             blob=v['blob'], sha256=v['sha256'], worktree=v['worktree'],
-                                            read_from=f"git -C <worktree> show {v['commit'][:7]}:{v['path']}",
+                                            read_from='in-tree',
                                             note=v['note']) for k, v in BOUND.items()}),
         evidence=EVIDENCE, reading_rule=READING_RULE, marks=MARKS,
         assumptions=dict(design_guesses={k: dict(value=v['value'], unit=v['unit'], note=v.get('note'))

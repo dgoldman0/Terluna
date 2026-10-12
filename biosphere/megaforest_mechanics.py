@@ -31,7 +31,7 @@ class TreeConfig:
     compression_strength_pa: float = 20e6
     wood_density_kg_m3: float = 650.0
     crown_wood_to_stem_mass: float = .25
-    leaf_area_index: float = 22.0
+    leaf_area_index: float = 6.0           # the canopy model's optimum, near 6 (biosphere/canopy)
     leaf_mass_kg_m2_leaf: float = .30
     epiphyte_mass_kg_m2_footprint: float = 35.0
     retained_water_mm: float = 30.0

@@ -18,7 +18,8 @@ def test_the_committed_colours_are_current():
 def test_clearer_water_lets_light_deeper_and_dusk_is_greener():
     product = json.loads(W.RESULT.read_text())
     mean = {(c["water"], c["soil"]): c for c in product["cases"] if c["phase"] == "mean"}
-    depth = [mean[(w, "12001")]["moon"]["depth_one_percent_photons_m"] for w in ("open_sea", "productive_coast", "river_mouth")]
+    depth = [mean[(w, "developed")]["moon"]["depth_one_percent_photons_m"]
+             for w in ("open_sea", "productive_coast", "river_mouth")]
     assert depth[0] > depth[1] > depth[2]
     open_sea = {c["phase"]: c for c in product["cases"] if c["water"] == "open_sea"}
     assert open_sea["dusk"]["chlorophyll_mg_m3"] > open_sea["mean"]["chlorophyll_mg_m3"] > open_sea["dawn"]["chlorophyll_mg_m3"]

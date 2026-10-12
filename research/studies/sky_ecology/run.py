@@ -51,33 +51,33 @@ COMPONENTS = ('food_web', 'tenants', 'phosphorus', 'stoichiometry')
 AEROPHYTE_CODE = ('run', 'mechanics', 'envelope', 'biology', 'environment', 'photoperiod', 'navigation', 'trim_cycle',
                   'structure', 'growth', 'water', 'storms', 'sailing', 'gas_biology', 'resources')
 # Other branches' files, bound by commit, blob and SHA-256 until the branches are integrated (then read in-tree).
-RESOURCES_COMMIT = 'b47c452201a796a86aaf7dbedd9ae348f9ed2d8a'
-WINDS_COMMIT = 'd9bc800bc2c9bbb1fa186b376710ed9e81c0919c'
-WAYS_COMMIT = 'e364c08e7aa1b9cbe840f30ebc2a5af8132ac2a5'
+RESOURCES_COMMIT = None
+WINDS_COMMIT = None
+WAYS_COMMIT = None
 CROSS_BRANCH = {
-    'resources/results/phosphorus.json': dict(branch='domain/resources', commit=RESOURCES_COMMIT,
-        blob='5f64d348f6c3a66911e724e3d813bd24b95dfc12',
-        sha256='159462a220b6661e457d5adcde1590cf144090e90bb770f3a775d04d709fec8e',
+    'resources/results/phosphorus.json': dict(branch='main', commit=RESOURCES_COMMIT,
+        blob='d8c8bc91e045377aae366f5779e98a9eca1539f6',
+        sha256='098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60',
         schema='terluna.resources.phosphorus/1'),
-    'resources/phosphorus.py': dict(branch='domain/resources', commit=RESOURCES_COMMIT,
+    'resources/phosphorus.py': dict(branch='main', commit=RESOURCES_COMMIT,
         blob='0b8568bc8af9c5ffc09e6baf9287bc86404cdf09',
         sha256='48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43'),
-    'resources/phosphorus.md': dict(branch='domain/resources', commit=RESOURCES_COMMIT,
+    'resources/phosphorus.md': dict(branch='main', commit=RESOURCES_COMMIT,
         blob='030a5a80e4b6edab39c6a908d5bb519e7b31f721',
         sha256='afa8db4d5e8b698c6e4d8bb4b6d5e20f424f5edabd9144ccab7baf4c0a7af138'),
-    'climate/results/gcm/zonal_winds_A28_dim5_moon.json': dict(branch='domain/provisioning', commit=WINDS_COMMIT,
+    'climate/results/gcm/zonal_winds_A28_dim5_moon.json': dict(branch='main', commit=WINDS_COMMIT,
         blob='c854c05285193ee493859fa087cb74d05903b5a9',
         sha256='a6a5d0cf96b42a1a18921f61566a638487cec3e602bd2ca752542a1c4a31affe',
         schema='terluna.climate.gcm-zonal-winds/1'),
-    'climate/results/gcm/zonal_winds_A28_dim5_moon.npz': dict(branch='domain/provisioning', commit=WINDS_COMMIT,
+    'climate/results/gcm/zonal_winds_A28_dim5_moon.npz': dict(branch='main', commit=WINDS_COMMIT,
         blob='20ebd86705a416c8bd18bf1b013dacef7644bc1c',
         sha256='c9b1a0ae8e8733b5d9fb1b60600aa2c43329c9b82bb86ccf4f1bb4a4a58a97e6'),
-    'climate/gcm/zonal_winds.md': dict(branch='domain/provisioning', commit=WINDS_COMMIT,
-        blob='fe893e2e172e7c22bd711d53444346e2b8db02ae',
-        sha256='02bb50a2f2c31eae2172cd118e383f9f329a719576534d5f5412a399368a5e3f'),
-    'research/studies/ways_of_living/results/ways_of_living.json': dict(branch='domain/provisioning', commit=WAYS_COMMIT,
-        blob='8efea099bf293804c38fcab272a8c038218385ce',
-        sha256='cbba4058819147f2d2bb2d02f1dae91320224b3e723e2820bd0f6ba95d64cd0a',
+    'climate/gcm/zonal_winds.md': dict(branch='main', commit=WINDS_COMMIT,
+        blob='c8ead8b6f8217ba3032806902c79f91b7ef45592',
+        sha256='de35ebdcfab234b9fc8f110672018a4d279da7bc84ceb0e0cab5ac9b22b3822f'),
+    'research/studies/ways_of_living/results/ways_of_living.json': dict(branch='main', commit=WAYS_COMMIT,
+        blob='f2b29ecec1566d67e0b6cad21a2038d3f68c8ea4',
+        sha256='ffe48e6467008176b9e89f7fb9b3afc5d63f0874fe3a86156a0aa81bac35d09d',
         schema='terluna.research.ways-of-living/1'),
 }
 # The atlas grid is an ignored input on the research drive; land and sea under the routes need it.

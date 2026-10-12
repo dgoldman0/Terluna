@@ -130,7 +130,7 @@ pixels tall, highest at three-quarters of the way across. The hills are a hazy, 
 through the air.
 
 The sea is a grey-teal slate (#859895 just below the horizon), much darker than the sky. It
-darkens smoothly to #565f57 at the bottom of the frame, with a faint olive tint in the nearest
+darkens smoothly to #5f6d5b at the bottom of the frame, with a faint olive tint in the nearest
 water. A long ocean swell of 2.2 m significant height (crest to trough), 71 m between
 crests, runs away from the camera toward the hills. Its crests lie parallel to the horizon as broad,
 low, rounded ridges, so the near water rises and falls in long gentle slopes. Wind ripples from a few
@@ -153,13 +153,13 @@ no buildings. Vegetation is omitted for this optical study.
 - **Earth:** 6.5° up at 100°, out of frame, 40% lit; 170 cd/m² (0 times white), #ffad00.
 - **Coast:** skyline above the horizon line, x 0: 27 px (41.5 km, 1,073 m); x 120: 25 px (34.4 km, 802 m); x 240: 33 px (37.5 km, 1,104 m); x 360: 36 px (37.6 km, 1,182 m); x 480: 32 px (30.8 km, 844 m); x 600: 30 px (37.8 km, 1,090 m); x 720: 41 px (29.5 km, 997 m); x 840: 45 px (31.4 km, 1,168 m); x 960: 52 px (31.5 km, 1,321 m); x 1079: 55 px (30.8 km, 1,335 m); x 1199: 54 px (30.1 km, 1,270 m); x 1319: 54 px (30.6 km, 1,282 m); x 1439: 60 px (29.9 km, 1,357 m); x 1559: 55 px (29.9 km, 1,231 m); x 1679: 47 px (29.6 km, 1,050 m); x 1799: 44 px (22.5 km, 687 m); x 1919: 45 px (16.2 km, 469 m). The shore is 3.2 to 20.1 km away. Sunlit faces; haze transmittance 0.672 (green) and 0.413 (blue) at the highest point; colour #8a96a1 (4,190 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #859895 (4,180 cd/m²); edges #899c97 and #7f9393;
-  - 1° down #829592 (4,010 cd/m²); edges #879a95 and #7e9291;
-  - 3° down #7b8d8a (3,560 cd/m²); edges #83948e and #798c8a;
-  - 8° down #70807b (2,850 cd/m²); edges #76857e and #6c7d7b;
-  - bottom #565f57 (1,530 cd/m²); edges #636a61 and #515f5d.
+  - below the horizon #859895 (4,200 cd/m²); edges #899c97 and #7f9493;
+  - 1° down #839692 (4,070 cd/m²); edges #889b95 and #7e9391;
+  - 3° down #7d908a (3,700 cd/m²); edges #84968f and #7b8f8b;
+  - 8° down #74867d (3,150 cd/m²); edges #7a8b80 and #71847c;
+  - bottom #5f6d5b (1,990 cd/m²); edges #6a7664 and #596d60.
 - **Waves:** swell 2.2 m, period 16.6 s, 71 m long, travelling toward 207° (2° right of the view's direction); wind 4.9 m/s; mean square slope 0.0373 (rms tilt 10.9°), 0.0246 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1152 (+4 h).
-- **Water:** its own light looking straight down, pale yellow-green (204 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (715 cd/m²).
 - **Tide:** −0.90 m from its mean level.
 
 ### WP-2 · The Sun 4° up
@@ -188,7 +188,7 @@ low backlit silhouette 17 to 61 pixels tall, highest left of centre. It is dull 
 (#7d5d51), softened by haze.
 
 Away from the glitter the sea is a warm tan-bronze (#a48b5f below the horizon), darkening to
-dark olive-brown (#6d5e40) in the lower corners. A long, low swell 2.9 m high and
+dark olive-brown (#6f6241) in the lower corners. A long, low swell 2.9 m high and
 153 m from crest to crest travels away to the left. Its crests run diagonally, and the glitter path
 wobbles and breaks across them. Wind ripples, coarser than on Earth, cover everything under a
 4.3 m/s breeze. Unbroken water, no foam, no boats, no people.
@@ -208,13 +208,13 @@ wobbles and breaks across them. Wind ripples, coarser than on Earth, cover every
 - **Glitter of the Sun:** across x = 965 to 1235, y = 575 to 1075; peak 95,000 cd/m² (22 times white) at (1075, 575); 10% of the sea in the frame.
 - **Coast:** skyline above the horizon line, x 0: 52 px (29.8 km, 1,081 m); x 120: 46 px (20.7 km, 652 m); x 240: 39 px (16.3 km, 441 m); x 360: 52 px (15.6 km, 545 m); x 480: 61 px (15.4 km, 647 m); x 600: 59 px (15.6 km, 641 m); x 720: 57 px (16.0 km, 647 m); x 840: 51 px (17.3 km, 642 m); x 960: 39 px (18.1 km, 535 m); x 1079: 36 px (14.6 km, 383 m); x 1199: 40 px (14.0 km, 407 m); x 1319: 31 px (14.0 km, 321 m); x 1439: 36 px (19.6 km, 535 m); x 1559: 41 px (19.9 km, 596 m); x 1679: 34 px (18.2 km, 450 m); x 1799: 17 px (8.2 km, 93 m); x 1919: 19 px (31.9 km, 590 m). The shore is 4.3 to 10.7 km away. Earthlit faces; haze transmittance 0.817 (green) and 0.637 (blue) at the highest point; colour #7d5d51 (548 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #b49661 (1,380 cd/m²); edges #a48b5f and #b49663;
+  - below the horizon #b49661 (1,390 cd/m²); edges #a48b5f and #b49663;
   - 1° down #b29460 (1,350 cd/m²); edges #a1895d and #b29461;
-  - 3° down #a98c5b (1,210 cd/m²); edges #998258 and #aa8d5d;
-  - 8° down #a97f4f (1,040 cd/m²); edges #87734e and #947b51;
-  - bottom #c67134 (1,030 cd/m²); edges #6d5e40 and #756342.
+  - 3° down #aa8d5c (1,220 cd/m²); edges #9a8359 and #aa8d5d;
+  - 8° down #a98150 (1,070 cd/m²); edges #88754f and #957d52;
+  - bottom #c67436 (1,070 cd/m²); edges #6f6241 and #776744.
 - **Waves:** swell 2.9 m, period 24.4 s, 153 m long, travelling toward 222° (40° left of the view's direction); wind 4.3 m/s; mean square slope 0.0306 (rms tilt 9.9°), 0.0182 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1296 (-21 h).
-- **Water:** its own light looking straight down, pale yellow-green (18.9 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (66.3 cd/m²).
 - **Tide:** +0.25 m from its mean level.
 
 ### WP-3 · The Sun 4° below the horizon
@@ -238,7 +238,7 @@ on the right.
 
 The sea is a choppy, wind-roughened surface that reflects the amber sky diffusely, at
 59% of its brightness. It is warm tan-orange (#af8a56 just below the horizon),
-darkening to deep bronze (#745c39) at the bottom. A long swell 3.3 m high and 153 m
+darkening to deep bronze (#76603b) at the bottom. A long swell 3.3 m high and 153 m
 from crest to crest travels away to the left under a 5.0 m/s wind. Ripples cover every slope and
 break the reflection into a fine texture of orange highlights and darker brown facets, with no distinct
 glitter path. Unbroken water, no foam, no boats, no people.
@@ -257,13 +257,13 @@ glitter path. Unbroken water, no foam, no boats, no people.
 - **Earth:** 13.4° up at 92°, out of frame, 99% lit; 790 cd/m² (0.40 times white), #ffc400.
 - **Coast:** skyline above the horizon line, x 0: 45 px (23.4 km, 711 m); x 120: 48 px (15.8 km, 489 m); x 240: 62 px (15.4 km, 625 m); x 360: 62 px (15.4 km, 636 m); x 480: 61 px (15.7 km, 656 m); x 600: 55 px (16.1 km, 624 m); x 720: 50 px (17.9 km, 659 m); x 840: 32 px (17.2 km, 426 m); x 960: 39 px (14.5 km, 416 m); x 1079: 39 px (14.0 km, 402 m); x 1199: 29 px (19.6 km, 451 m); x 1319: 38 px (19.9 km, 570 m); x 1439: 39 px (18.9 km, 547 m); x 1559: 20 px (18.1 km, 294 m); x 1679: 17 px (42.4 km, 901 m); x 1799: 18 px (30.8 km, 562 m); x 1919: 14 px (31.6 km, 494 m). The shore is 4.3 to 10.6 km away. Earthlit faces; haze transmittance 0.817 (green) and 0.637 (blue) at the highest point; colour #79554a (230 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #af8a56 (581 cd/m²); edges #a08153 and #ae8957;
-  - 1° down #ac8854 (561 cd/m²); edges #9d7e52 and #aa8755;
-  - 3° down #a58150 (506 cd/m²); edges #94774d and #a38051;
-  - 8° down #917247 (385 cd/m²); edges #836944 and #8f7147;
-  - bottom #745c39 (244 cd/m²); edges #725b3b and #7a613d.
+  - below the horizon #af8a56 (582 cd/m²); edges #a08153 and #ae8957;
+  - 1° down #ac8854 (563 cd/m²); edges #9d7f52 and #aa8755;
+  - 3° down #a58251 (511 cd/m²); edges #94784d and #a38151;
+  - 8° down #927447 (396 cd/m²); edges #846b45 and #907348;
+  - bottom #76603b (260 cd/m²); edges #735f3c and #7b643e.
 - **Waves:** swell 3.3 m, period 24.4 s, 153 m long, travelling toward 223° (45° left of the view's direction); wind 5.0 m/s; mean square slope 0.0422 (rms tilt 11.6°), 0.0264 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1344 (+9 h).
-- **Water:** its own light looking straight down, pale yellow-green (7.78 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (27.2 cd/m²).
 - **Tide:** +0.39 m from its mean level.
 - At this wind a few whitecaps would form on Earth; the study does not model them.
 
@@ -288,9 +288,9 @@ across. They are 12 to 60 m high and 8 to 43 pixels tall, highest on the left, a
 the water just under the horizon. They are dark muted brown silhouettes (#695847), lit from
 behind by the Earth.
 
-The sea is a muted grey-gold, #9a9580 to #b7a080 just below the horizon, slightly
+The sea is a muted grey-gold, #9a9680 to #b7a180 just below the horizon, slightly
 warmer and brighter in a broad soft column below the Earth. It darkens to olive-grey
-(#726b58) at the bottom. There is no sharp glitter path: the earthlight is faint against the
+(#77755b) at the bottom. There is no sharp glitter path: the earthlight is faint against the
 reflected sky. A long swell 3.3 m high, 153 m from crest to crest, comes toward the camera
 from the front left, its crests running diagonally. Wind ripples under a 4.7 m/s breeze give
 the water a fine, matte texture. Unbroken water, no foam, no boats, no people.
@@ -309,13 +309,13 @@ the water a fine, matte texture. Unbroken water, no foam, no boats, no people.
 - **Earth:** at (952, 226), 14.76° up at 91.7°, 49 by 50 px, 100% lit, lit side toward the left; 900 cd/m² (9.1 times white), #ffc600.
 - **Coast:** skyline above the horizon line, x 0: 15 px (2.5 km, 22 m); x 120: 21 px (2.4 km, 29 m); x 240: 30 px (2.3 km, 42 m); x 360: 39 px (2.2 km, 54 m); x 480: 43 px (2.2 km, 60 m); x 600: 41 px (2.1 km, 58 m); x 720: 36 px (2.1 km, 50 m); x 840: 32 px (2.1 km, 45 m); x 960: 30 px (2.2 km, 44 m); x 1079: 31 px (2.2 km, 46 m); x 1199: 32 px (2.4 km, 49 m); x 1319: 31 px (2.4 km, 48 m); x 1439: 28 px (2.5 km, 43 m); x 1559: 21 px (2.4 km, 32 m); x 1679: 8 px (2.4 km, 12 m). The shore is 1.8 to 2.2 km away. Backlit; haze transmittance 0.972 (green) and 0.939 (blue) at the highest point; colour #695847 (10.4 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #b7a080 (36.4 cd/m²); edges #9a9580 and #a09c86;
-  - 1° down #b39e7f (35.4 cd/m²); edges #98937e and #9e9a84;
-  - 3° down #a89679 (31.1 cd/m²); edges #918d79 and #98937e;
-  - 8° down #90846c (23.2 cd/m²); edges #827e6b and #87836f;
-  - bottom #726b58 (14.6 cd/m²); edges #726f5d and #747160.
+  - below the horizon #b7a180 (36.6 cd/m²); edges #9a9680 and #a09c86;
+  - 1° down #b49f7f (35.7 cd/m²); edges #98947f and #9f9b84;
+  - 3° down #a9987a (32.0 cd/m²); edges #939079 and #99967e;
+  - 8° down #938a6d (25.2 cd/m²); edges #85856d and #8a8971;
+  - bottom #77755b (17.3 cd/m²); edges #777860 and #797b62.
 - **Waves:** swell 3.3 m, period 24.4 s, 153 m long, travelling toward 223° (131° right of the view's direction); wind 4.7 m/s; mean square slope 0.039 (rms tilt 11.2°), 0.0232 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1344 (-15 h).
-- **Water:** its own light looking straight down, pale yellow-green (1.34 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (4.69 cd/m²).
 - **Tide:** +0.58 m from its mean level.
 
 ### WP-5 · The Sun 35° below the horizon
@@ -342,7 +342,7 @@ A hazy silhouette of coastal hills, dark red-brown (#7c422f), runs along the hor
 The sea is roughened by a swell 1.8 m high and 105 m between crests, running away to the
 left, and by wind ripples under a 2.6 m/s breeze. It reflects the arch at about half its
 brightness (54% just below the horizon): warm orange (#d38a39) at the centre,
-duller toward the edges (#a07039 on the left), and deep brown-orange (#825625) at
+duller toward the edges (#a07039 on the left), and deep brown-orange (#835726) at
 the bottom. The tilted facets break the reflection into a grainy orange texture. To the eye at this
 light level colours are muted; the photograph records them. No stars, no foam, no boats, no people.
 
@@ -361,12 +361,12 @@ light level colours are muted; the photograph records them. No stars, no foam, n
 - **Coast:** skyline above the horizon line, x 0: 66 px (15.8 km, 643 m); x 120: 60 px (16.7 km, 642 m); x 240: 55 px (18.2 km, 670 m); x 360: 35 px (17.2 km, 431 m); x 480: 39 px (14.6 km, 404 m); x 600: 41 px (14.0 km, 408 m); x 720: 29 px (14.0 km, 307 m); x 840: 35 px (19.6 km, 535 m); x 960: 38 px (18.9 km, 559 m); x 1079: 19 px (18.1 km, 301 m); x 1199: 15 px (32.0 km, 562 m); x 1319: 13 px (31.2 km, 496 m); x 1439: 6 px (32.4 km, 386 m); x 1559: 9 px (9.1 km, 66 m); x 1679: 13 px (9.4 km, 90 m); x 1799: 10 px (9.7 km, 74 m); x 1919: 8 px (4.8 km, 23 m). The shore is 4.4 to 7.3 km away. Earthlit faces; haze transmittance 0.813 (green) and 0.631 (blue) at the highest point; colour #7c422f (1.38 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
   - below the horizon #d38a39 (5.29 cd/m²); edges #a07039 and #b97c39;
-  - 1° down #cf8738 (5.07 cd/m²); edges #9f6f38 and #b67a38;
-  - 3° down #c58035 (4.53 cd/m²); edges #976835 and #af7435;
-  - 8° down #ad6f2e (3.35 cd/m²); edges #865b2e and #9a652e;
-  - bottom #825625 (1.89 cd/m²); edges #6f4d27 and #7f5527.
+  - 1° down #cf8738 (5.08 cd/m²); edges #9f6f38 and #b67a38;
+  - 3° down #c68035 (4.55 cd/m²); edges #986935 and #af7435;
+  - 8° down #ad702e (3.39 cd/m²); edges #865c2e and #9a662f;
+  - bottom #835726 (1.94 cd/m²); edges #704f28 and #805628.
 - **Waves:** swell 1.8 m, period 20.1 s, 105 m long, travelling toward 221° (64° left of the view's direction); wind 2.6 m/s; mean square slope 0.0336 (rms tilt 10.4°), 0.0067 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1419 (+13 h).
-- **Water:** its own light looking straight down, pale yellow-green (0.0268 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (0.0936 cd/m²).
 - **Stars:** none recorded; the eye's limit here is magnitude -3.9.
 - **Tide:** +0.97 m from its mean level.
 
@@ -397,7 +397,7 @@ A row of low flat islets 2 km away, 20 to 60 m high and 15 to 43 pixels tall, st
 silhouettes (#443c3a) from the left edge to four-fifths of the way across.
 
 The calm sea mirrors the sky, peach-tan (#e4ba8c) on the left and grey-beige
-(#b0a78a) on the right, darkening downward. It moves in a long, low, glassy swell
+(#b0a88a) on the right, darkening downward. It moves in a long, low, glassy swell
 1.1 m high and 71 m from crest to crest, coming from the front left, with no wind ripples.
 
 To the eye this is a dim, almost colourless night with the bright Earth and its path. No stars show
@@ -418,13 +418,13 @@ against this bright sky. No foam, no boats, no people.
 - **Glitter of the Earth:** across x = 845 to 1105, y = 655 to 1075; peak 2.4 cd/m² (10 times white) at (975, 1075); 9% of the sea in the frame.
 - **Coast:** skyline above the horizon line, x 0: 18 px (2.4 km, 25 m); x 120: 25 px (2.4 km, 35 m); x 240: 36 px (2.2 km, 48 m); x 360: 42 px (2.2 km, 57 m); x 480: 43 px (2.1 km, 58 m); x 600: 39 px (2.1 km, 54 m); x 720: 34 px (2.1 km, 46 m); x 840: 31 px (2.1 km, 43 m); x 960: 30 px (2.2 km, 44 m); x 1079: 31 px (2.3 km, 47 m); x 1199: 31 px (2.5 km, 50 m); x 1319: 29 px (2.4 km, 45 m); x 1439: 25 px (2.5 km, 38 m); x 1559: 15 px (2.4 km, 21 m). The shore is 1.8 to 2.1 km away. Backlit; haze transmittance 0.972 (green) and 0.939 (blue) at the highest point; colour #443c3a (0.0112 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #ffe88d (0.225 cd/m²); edges #e4ba8c and #b0a78a;
-  - 1° down #ffea8a (0.237 cd/m²); edges #e0b78a and #aba386;
-  - 3° down #ffed7a (0.308 cd/m²); edges #d4ad83 and #a39c81;
-  - 8° down #ffeb50 (0.834 cd/m²); edges #b09572 and #8a8670;
-  - bottom #ffe93c (2.21 cd/m²); edges #8d7e62 and #727260.
+  - below the horizon #ffe88d (0.225 cd/m²); edges #e4ba8c and #b0a88a;
+  - 1° down #ffea8a (0.238 cd/m²); edges #e0b78a and #aba387;
+  - 3° down #ffed7b (0.309 cd/m²); edges #d4ae83 and #a39d81;
+  - 8° down #ffeb50 (0.836 cd/m²); edges #b09772 and #8b8971;
+  - bottom #ffe93c (2.21 cd/m²); edges #8f8163 and #747662.
 - **Waves:** swell 1.1 m, period 16.6 s, 71 m long, travelling toward 219° (125° right of the view's direction); wind 1.6 m/s; mean square slope 0.0046 (rms tilt 3.9°), 0.0000 of it from waves shorter than 1 m; nearside wave run, restart file at hour 816 (+0 h).
-- **Water:** its own light looking straight down, pale yellow-green (0.00140 cd/m²).
+- **Water:** its own light looking straight down, pale green (0.00470 cd/m²).
 - **Stars:** none recorded; the eye's limit here is magnitude 0.7.
 - **Tide:** +1.35 m from its mean level.
 
@@ -450,8 +450,8 @@ The sky is a very pale, luminous cyan-blue (#c6eef6 at the top), almost white, f
 grey-green-cream at the horizon (#cfe0d7). It is evenly bright across the frame: a clean,
 washed-out noon sky.
 
-The sea is a cool grey-teal (#89a3a7 just below the horizon), 48% as bright as
-the sky. It darkens steadily to deep slate-teal (#4e5e5f) at the bottom of the frame, with a
+The sea is a cool grey-teal (#8aa3a7 just below the horizon), 48% as bright as
+the sky. It darkens steadily to deep slate-teal (#597063) at the bottom of the frame, with a
 faint olive cast in the nearest water. A moderate swell 0.6 m high and 23 m from crest to
 crest rolls straight toward the camera from the horizon. Its crests run parallel to the horizon, and
 the camera looks into their faces. Lively wind ripples under a 3.1 m/s breeze blowing toward the
@@ -471,13 +471,13 @@ no foam, no land, no boats, no people.
 - **Sun:** 86.8° up at 178°, out of frame; 8.3e+02 million cd/m² (63,000 times white), #ffda84.
 - **Earth:** 7.3° below the horizon at 276°, 57% lit, lit side toward the top.
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #89a3a7 (4,470 cd/m²); edges #8ca5a9 and #8aa3a7;
-  - 1° down #879fa4 (4,280 cd/m²); edges #89a2a6 and #88a1a5;
-  - 3° down #80989b (3,840 cd/m²); edges #859c9f and #839b9e;
-  - 8° down #738789 (3,000 cd/m²); edges #768b8c and #758a8c;
-  - bottom #4e5e5f (1,370 cd/m²); edges #566768 and #556768.
+  - below the horizon #8aa3a7 (4,500 cd/m²); edges #8ca5a9 and #8aa3a7;
+  - 1° down #87a1a4 (4,350 cd/m²); edges #8aa3a6 and #89a2a5;
+  - 3° down #829b9c (4,010 cd/m²); edges #879f9f and #859e9e;
+  - 8° down #78908b (3,360 cd/m²); edges #7b938e and #7a928d;
+  - bottom #597063 (1,920 cd/m²); edges #60776c and #5f776b.
 - **Waves:** swell 0.6 m, period 9.3 s, 23 m long, travelling toward 94° (176° left of the view's direction); wind 3.1 m/s; mean square slope 0.0253 (rms tilt 9.0°), 0.0098 of it from waves shorter than 1 m; Smythii shore history, west-face station, hour 819.
-- **Water:** its own light looking straight down, pale yellow-green (246 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (863 cd/m²).
 - **Tide:** +0.21 m from its mean level.
 
 ### SH-2 · The Sun 4° up
@@ -499,7 +499,7 @@ The sky is a warm amber-cream at the top (#ffe59d), deepening to #ffd585 at 8 de
 soft orange at the horizon (#f4b475). It is brightest above the Sun, with no halo.
 
 Beside the glitter column the calm water mirrors the sky at 89% of its brightness: warm
-apricot (#d4a86d) just below the horizon, darkening to bronze-olive (#7c6a46) at
+apricot (#d4a86d) just below the horizon, darkening to bronze-olive (#7d6e47) at
 the bottom. A gentle, glassy swell 0.9 m high and 48 m from crest to crest rolls toward the
 camera from straight ahead. Its smooth undulations bend the reflections into long wavy bands. There are
 no wind ripples. Empty sea, no land, no foam, no boats, no people.
@@ -519,12 +519,12 @@ no wind ripples. Empty sea, no land, no foam, no boats, no people.
 - **Glitter of the Sun:** across x = 955 to 1025, y = 575 to 1075; peak 1.2 million cd/m² (280 times white) at (975, 575); 3% of the sea in the frame.
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
   - below the horizon #e4b06d (2,140 cd/m²); edges #d4a86d and #daaa6e;
-  - 1° down #efb06a (2,220 cd/m²); edges #d0a56b and #d7a86c;
-  - 3° down #ffc938 (5,470 cd/m²); edges #c69d66 and #cb9f67;
-  - 8° down #ffbb00 (12,500 cd/m²); edges #a78858 and #ab8a58;
-  - bottom #8f6a40 (726 cd/m²); edges #7c6a46 and #7d6b46.
+  - 1° down #efb06a (2,220 cd/m²); edges #d1a56b and #d7a86d;
+  - 3° down #ffca38 (5,480 cd/m²); edges #c69e66 and #cba067;
+  - 8° down #ffbc00 (12,500 cd/m²); edges #a88a59 and #ac8c59;
+  - bottom #906e41 (768 cd/m²); edges #7d6e47 and #7e6f48.
 - **Waves:** swell 0.9 m, period 13.7 s, 48 m long, travelling toward 75° (167° right of the view's direction); wind 1.2 m/s; mean square slope 0.0027 (rms tilt 3.0°), 0.0000 of it from waves shorter than 1 m; Smythii shore history, west-face station, hour 989.
-- **Water:** its own light looking straight down, pale yellow-green (19.6 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (68.5 cd/m²).
 - **Tide:** +0.31 m from its mean level.
 
 ### SH-3 · The Sun 4° below the horizon
@@ -541,7 +541,7 @@ The sky glows amber and orange:
 - coral-orange just above the horizon (#f1a86b).
 
 The sea is nearly calm and mirrors this sky almost exactly: apricot-orange (#e8a864) just below
-the horizon, 96% as bright as the sky above, fading to warm bronze (#866b40) at
+the horizon, 96% as bright as the sky above, fading to warm bronze (#886e41) at
 the bottom. The horizon line is barely visible, a faint darkening between two glowing halves of the
 frame. A low glassy swell 0.8 m high and 58 m between crests rolls toward the camera.
 Faint patches of capillary ripples, the first a 1.9 m/s breeze raises, dull the mirror slightly.
@@ -561,13 +561,13 @@ no land, no foam, no boats, no people.
 - **Sun:** 4.1° below the horizon at 269°.
 - **Earth:** 7.6° below the horizon at 266°, 0% lit, lit side toward the upper right.
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #e8a864 (981 cd/m²); edges #d89f63 and #dba164;
-  - 1° down #e4a562 (946 cd/m²); edges #d59d62 and #d79e62;
-  - 3° down #d89d5d (844 cd/m²); edges #ca955d and #cc965d;
-  - 8° down #b88a50 (617 cd/m²); edges #ac8350 and #ae8450;
-  - bottom #866b40 (342 cd/m²); edges #8a6d43 and #8c6e43.
+  - below the horizon #e8a864 (982 cd/m²); edges #d8a063 and #dca164;
+  - 1° down #e4a562 (949 cd/m²); edges #d59d62 and #d89e62;
+  - 3° down #d89e5d (850 cd/m²); edges #ca965d and #cd975d;
+  - 8° down #b98b51 (628 cd/m²); edges #ad8450 and #af8651;
+  - bottom #886e41 (358 cd/m²); edges #8b7044 and #8d7144.
 - **Waves:** swell 0.8 m, period 15.1 s, 58 m long, travelling toward 71° (163° right of the view's direction); wind 1.9 m/s; mean square slope 0.0028 (rms tilt 3.0°), 0.0015 of it from waves shorter than 1 m; Smythii shore history, west-face station, hour 1005.
-- **Water:** its own light looking straight down, pale yellow-green (8.07 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (28.2 cd/m²).
 - **Tide:** +0.25 m from its mean level.
 
 ### SH-4 · The Sun 15° below the horizon
@@ -584,8 +584,8 @@ A deep amber-orange twilight fills the western sky:
   both edges.
 
 The sea, gently rippled by a 2.8 m/s breeze, reflects the sky at 80% of its
-brightness. It is amber-orange (#d6974c) below the horizon, softening into a smooth, slightly
-grainy sheen, then darkening to brown-gold (#856032) at the bottom. A swell 1.1 m high
+brightness. It is amber-orange (#d6974d) below the horizon, softening into a smooth, slightly
+grainy sheen, then darkening to brown-gold (#866233) at the bottom. A swell 1.1 m high
 and 69 m from crest to crest comes from the front left, its crests running diagonally. Empty sea,
 no land, no foam, no boats, no people.
 
@@ -602,13 +602,13 @@ no land, no foam, no boats, no people.
 - **Sun:** 15.2° below the horizon at 270°.
 - **Earth:** 6.1° below the horizon at 265°, 1% lit, lit side toward the lower right.
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #d6974c (195 cd/m²); edges #ba864a and #bf8a4a;
+  - below the horizon #d6974d (195 cd/m²); edges #ba874a and #c08a4b;
   - 1° down #d2944b (186 cd/m²); edges #b88549 and #bd8849;
-  - 3° down #c88c47 (166 cd/m²); edges #ae7d45 and #b48146;
-  - 8° down #ad7a3e (122 cd/m²); edges #986e3c and #9c703d;
-  - bottom #856032 (71.4 cd/m²); edges #7f5d33 and #825f34.
+  - 3° down #c88d47 (167 cd/m²); edges #ae7e45 and #b48146;
+  - 8° down #ae7b3f (124 cd/m²); edges #996f3d and #9d723d;
+  - bottom #866233 (74.1 cd/m²); edges #805f34 and #836135.
 - **Waves:** swell 1.1 m, period 16.6 s, 69 m long, travelling toward 44° (136° right of the view's direction); wind 2.8 m/s; mean square slope 0.0268 (rms tilt 9.3°), 0.0080 of it from waves shorter than 1 m; Smythii shore history, west-face station, hour 1027.
-- **Water:** its own light looking straight down, pale yellow-green (1.30 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (4.54 cd/m²).
 - **Tide:** +0.16 m from its mean level.
 
 ### SH-5 · The Sun 35° below the horizon
@@ -629,7 +629,7 @@ It is the light of the very high air, which still sees the Sun 35 degrees below 
 
 A confused low swell and a 3.2 m/s breeze roughen the sea. It reflects the arch at
 45% of its brightness: orange (#c18035) just below the horizon, deepening to dark
-brown-orange (#7e5222) at the bottom. Its surface is a soft-grained texture of orange and
+brown-orange (#7f5323) at the bottom. Its surface is a soft-grained texture of orange and
 brown facets. The Earth, a thin crescent, is 3 degrees below the horizon and not visible. Muted to the
 eye; the photograph records the colour. Empty sea, no land, no stars, no foam, no boats, no people.
 
@@ -647,12 +647,12 @@ eye; the photograph records the colour. Empty sea, no land, no stars, no foam, n
 - **Earth:** 3.2° below the horizon at 264°, 8% lit, lit side toward the bottom.
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
   - below the horizon #c18035 (4.74 cd/m²); edges #9e6d36 and #ad7536;
-  - 1° down #bd7d34 (4.55 cd/m²); edges #9b6b34 and #ab7335;
-  - 3° down #b77731 (4.13 cd/m²); edges #916431 and #a46e32;
-  - 8° down #a2682a (3.12 cd/m²); edges #81572a and #91602b;
-  - bottom #7e5222 (1.86 cd/m²); edges #6f4b24 and #7a5124.
+  - 1° down #bd7e34 (4.55 cd/m²); edges #9b6b34 and #ab7335;
+  - 3° down #b77831 (4.15 cd/m²); edges #926531 and #a46e32;
+  - 8° down #a2692b (3.16 cd/m²); edges #82582b and #92612b;
+  - bottom #7f5323 (1.91 cd/m²); edges #6f4d25 and #7a5225.
 - **Waves:** swell 0.5 m, period 15.1 s, 58 m long, travelling toward 41° (135° right of the view's direction); wind 3.2 m/s; mean square slope 0.0378 (rms tilt 11.0°), 0.0106 of it from waves shorter than 1 m; Smythii shore history, west-face station, hour 1066.
-- **Water:** its own light looking straight down, pale yellow-green (0.0264 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (0.0923 cd/m²).
 - **Stars:** none recorded; the eye's limit here is magnitude -4.0.
 - **Tide:** −0.03 m from its mean level.
 
@@ -684,7 +684,7 @@ and fainter ones at (1713, 428); (1375, 250); (1612, 167); (1891, 180); (623, 37
 
 The water away from the Earth's reflection is glassy and mirrors the sky at 94% of its
 brightness: salmon-tan (#dea97a) at the horizon, darkening to dark olive-brown
-(#806e50) at the bottom. A very low swell 0.3 m high and 48 m between crests
+(#817151) at the bottom. A very low swell 0.3 m high and 48 m between crests
 barely moves it, without ripples.
 
 To the eye this scene is a dark, almost colourless night with the orange Earth and its path. Empty sea,
@@ -705,12 +705,12 @@ no land, no foam, no boats, no people.
 - **Glitter of the Earth:** across x = 935 to 995, y = 595 to 825; peak 10 cd/m² (170 times white) at (955, 595); 2% of the sea in the frame.
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
   - below the horizon #ffa400 (6.19 cd/m²); edges #dea97a and #e8ab7c;
-  - 1° down #ffa400 (6.04 cd/m²); edges #daa678 and #e4a97a;
-  - 3° down #ffa400 (3.72 cd/m²); edges #ce9e72 and #d7a173;
-  - 8° down #ffb919 (0.0835 cd/m²); edges #ac8a62 and #b18c62;
-  - bottom #7a6a4c (0.00896 cd/m²); edges #806e50 and #837050.
+  - 1° down #ffa400 (6.04 cd/m²); edges #daa779 and #e4a97a;
+  - 3° down #ffa400 (3.72 cd/m²); edges #ce9f72 and #d7a274;
+  - 8° down #ffb91c (0.0838 cd/m²); edges #ac8b63 and #b18e63;
+  - bottom #7b6e4d (0.00946 cd/m²); edges #817151 and #847352.
 - **Waves:** swell 0.3 m, period 13.7 s, 48 m long, travelling toward 61° (156° right of the view's direction); wind 0.6 m/s; mean square slope 0.0014 (rms tilt 2.1°), 0.0000 of it from waves shorter than 1 m; Smythii shore history, west-face station, hour 1144.
-- **Water:** its own light looking straight down, pale green (0.000200 cd/m²).
+- **Water:** its own light looking straight down, pale green (0.000800 cd/m²).
 - **Stars:** 8 recorded (Aldebaran at (906, 84); others at (1713, 428); (1375, 250); (1612, 167); (1891, 180); (623, 37); (582, 35); (485, 29)); the eye sees none, its limit here magnitude 2.1.
 - **Tide:** −0.30 m from its mean level.
 
@@ -747,7 +747,7 @@ The sea is the roughest of the 24 scenes:
   wind waves and ripples over a 1.2 m swell 33 m from crest to crest that runs away to the
   left;
 - the surface is a busy, high-contrast mosaic of pale sky-reflecting facets and dark slate troughs;
-- grey-teal (#7b9295) below the horizon, darkening to deep slate (#4b5a58) at the
+- grey-teal (#7b9295) below the horizon, darkening to deep slate (#566b5d) at the
   bottom, with a faint olive cast in the nearest water.
 
 Unbroken water, no foam. No boats, no people. Vegetation is omitted for this optical study.
@@ -766,13 +766,13 @@ Unbroken water, no foam. No boats, no people. Vegetation is omitted for this opt
 - **Earth:** 65.4° up at 23°, out of frame, 1% lit; 1,600 cd/m² (0.10 times white), #ffdc94.
 - **Coast:** skyline above the horizon line, x 0: 120 px (4.2 km, 284 m); x 120: 104 px (4.5 km, 271 m); x 240: 82 px (4.8 km, 233 m); x 360: 54 px (4.9 km, 166 m); x 480: 48 px (23.4 km, 832 m); x 600: 53 px (23.4 km, 923 m); x 720: 44 px (29.9 km, 1,077 m); x 840: 40 px (26.9 km, 870 m); x 960: 46 px (24.2 km, 863 m); x 1079: 46 px (22.9 km, 819 m); x 1199: 38 px (19.1 km, 555 m); x 1319: 44 px (20.1 km, 663 m); x 1439: 46 px (19.5 km, 643 m); x 1559: 48 px (17.3 km, 575 m); x 1679: 54 px (17.4 km, 622 m); x 1799: 62 px (17.9 km, 717 m); x 1919: 65 px (17.7 km, 707 m). The shore is 1.8 to 21.9 km away. Sunlit faces; haze transmittance 0.948 (green) and 0.888 (blue) at the highest point; colour #847465 (2,270 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #7b9295 (3,330 cd/m²); edges #778e92 and #81989a;
-  - 1° down #7a9093 (3,250 cd/m²); edges #758c8f and #809698;
-  - 3° down #768b8c (3,000 cd/m²); edges #708588 and #7b9191;
-  - 8° down #6b7e7d (2,420 cd/m²); edges #687a7b and #6f8281;
-  - bottom #4b5a58 (1,180 cd/m²); edges #505f5f and #536362.
+  - below the horizon #7b9295 (3,350 cd/m²); edges #788e92 and #81989a;
+  - 1° down #7a9193 (3,300 cd/m²); edges #768d90 and #809798;
+  - 3° down #788e8d (3,150 cd/m²); edges #728989 and #7e9492;
+  - 8° down #70867f (2,720 cd/m²); edges #6d827d and #748983;
+  - bottom #566b5d (1,660 cd/m²); edges #5a6f62 and #5d7265.
 - **Waves:** swell 1.2 m, period 11.3 s, 33 m long, travelling toward 138° (42° left of the view's direction); wind 6.0 m/s; mean square slope 0.0525 (rms tilt 12.9°), 0.0359 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1008 (-18 h).
-- **Water:** its own light looking straight down, pale yellow-green (212 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (742 cd/m²).
 - **Tide:** +4.08 m from its mean level.
 - At 6.0 m/s the first whitecaps would form; the study does not model them.
 
@@ -795,7 +795,7 @@ On the far left, a thin, faint line of distant coast 12 to 23 km away rises only
 the horizon, a hazy dull red-brown (#8b695b); the rest of the horizon is open sea.
 
 The calm water beside the glitter mirrors the warm sky at 93% of its brightness:
-apricot (#dbaa6f) at the horizon, darkening to bronze-olive (#7d6b46) at the
+apricot (#dbaa6f) at the horizon, darkening to bronze-olive (#7e6f48) at the
 bottom. A smooth swell 1.1 m high and 71 m from crest to crest comes from the front right;
 its long glassy undulations bend the reflections. There are no ripples: the wind is under 1 m/s. No
 foam, no boats, no people.
@@ -815,13 +815,13 @@ foam, no boats, no people.
 - **Glitter of the Sun:** across x = 935 to 1005, y = 575 to 1005; peak 1.7 million cd/m² (390 times white) at (985, 575); 3% of the sea in the frame.
 - **Coast:** skyline above the horizon line, x 0: 6 px (12.4 km, 75 m); x 120: 2 px (12.9 km, 47 m); x 240: 20 px (22.8 km, 387 m); x 360: 17 px (21.5 km, 330 m); x 480: 11 px (19.6 km, 224 m); x 600: 3 px (20.4 km, 125 m). The shore is 11.7 to 21.1 km away. Earthlit faces; haze transmittance 0.75 (green) and 0.527 (blue) at the highest point; colour #8b695b (716 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #f8b46e (2,370 cd/m²); edges #dbaa6f and #d8aa6e;
+  - below the horizon #f8b56e (2,380 cd/m²); edges #dbaa6f and #d8aa6e;
   - 1° down #ffbf65 (3,050 cd/m²); edges #d8a86d and #d5a76c;
-  - 3° down #ffbb00 (18,900 cd/m²); edges #cc9f67 and #ca9f66;
-  - 8° down #ffb500 (71,000 cd/m²); edges #ab8a59 and #aa8a58;
-  - bottom #956c40 (766 cd/m²); edges #7d6b46 and #7d6b46.
+  - 3° down #ffbb00 (18,900 cd/m²); edges #cca068 and #ca9f67;
+  - 8° down #ffb500 (71,000 cd/m²); edges #ac8c59 and #ab8b59;
+  - bottom #967041 (808 cd/m²); edges #7e6f48 and #7e6f48.
 - **Waves:** swell 1.1 m, period 16.6 s, 71 m long, travelling toward 134° (136° left of the view's direction); wind 0.6 m/s; mean square slope 0.0024 (rms tilt 2.8°), 0.0000 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1200 (+3 h).
-- **Water:** its own light looking straight down, pale yellow-green (19.6 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (68.6 cd/m²).
 - **Tide:** +0.79 m from its mean level.
 
 ### SN-3 · The Sun 4° below the horizon
@@ -838,8 +838,8 @@ The sky is a luminous gradient:
 - coral (#f1a86b) at the horizon, brightest above the centre where the Sun has gone down.
 
 The sea is almost perfectly calm and mirrors the sky at nearly its full brightness. Just below the
-horizon it is apricot-orange (#eba865), 98% as bright as the sky just above, so
-the horizon line all but disappears. It darkens to warm bronze (#876c40) at the bottom of the
+horizon it is apricot-orange (#eba965), 98% as bright as the sky just above, so
+the horizon line all but disappears. It darkens to warm bronze (#886f41) at the bottom of the
 frame. A long, low glassy swell 1.1 m high and 71 m between crests rolls in from the front
 right, drawing slow, broad bends into the mirrored glow.
 
@@ -860,13 +860,13 @@ On the far left a hair-thin, hazy line of distant coast rises 1 to 18 pixels, du
 - **Earth:** 58.2° up at 37°, out of frame, 70% lit; 2,100 cd/m² (1.0 times white), #ffdb8d.
 - **Coast:** skyline above the horizon line, x 0: 10 px (12.7 km, 102 m); x 120: 8 px (12.4 km, 84 m); x 240: 3 px (12.9 km, 58 m); x 360: 18 px (22.8 km, 376 m); x 480: 16 px (21.5 km, 328 m); x 600: 12 px (19.5 km, 227 m); x 720: 1 px (20.5 km, 110 m). The shore is 11.6 to 21.1 km away. Earthlit faces; haze transmittance 0.75 (green) and 0.527 (blue) at the highest point; colour #8a6153 (315 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #eba865 (1,010 cd/m²); edges #dca064 and #daa064;
-  - 1° down #e7a563 (966 cd/m²); edges #da9f64 and #d79e62;
-  - 3° down #db9e5e (865 cd/m²); edges #ce975e and #cc965d;
-  - 8° down #bb8b51 (634 cd/m²); edges #af8450 and #ae8450;
-  - bottom #876c40 (347 cd/m²); edges #8c6f43 and #8b6e43.
+  - below the horizon #eba965 (1,010 cd/m²); edges #dca064 and #daa064;
+  - 1° down #e7a663 (968 cd/m²); edges #da9f64 and #d79e62;
+  - 3° down #db9e5e (871 cd/m²); edges #ce975e and #cc975d;
+  - 8° down #bb8c51 (645 cd/m²); edges #b08651 and #af8551;
+  - bottom #886f41 (364 cd/m²); edges #8d7244 and #8d7144.
 - **Waves:** swell 1.1 m, period 16.6 s, 71 m long, travelling toward 134° (132° left of the view's direction); wind 1.4 m/s; mean square slope 0.0024 (rms tilt 2.8°), 0.0000 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1200 (-15 h).
-- **Water:** its own light looking straight down, pale yellow-green (8.12 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (28.4 cd/m²).
 - **Tide:** +0.18 m from its mean level.
 
 ### SN-4 · The Sun 15° below the horizon
@@ -884,7 +884,7 @@ pixels tall, dull red-brown (#945a44).
 
 The sea is choppy under a 5.1 m/s wind. It reflects the sky at 57% of its
 brightness as a busy texture of orange highlights and brown troughs: bronze-orange (#b48447)
-below the horizon, dark brown-gold (#78572f) at the bottom. A swell 1.6 m high and
+below the horizon, dark brown-gold (#795a30) at the bottom. A swell 1.6 m high and
 49 m from crest to crest runs away from the camera, slightly to the right; short steep wind
 waves ride on it. Unbroken water, no foam, no boats, no people.
 
@@ -903,12 +903,12 @@ waves ride on it. Unbroken water, no foam, no boats, no people.
 - **Coast:** skyline above the horizon line, x 0: 16 px (13.3 km, 154 m); x 120: 11 px (13.2 km, 118 m); x 240: 10 px (12.7 km, 105 m); x 360: 5 px (12.6 km, 67 m); x 480: 7 px (23.2 km, 220 m); x 600: 21 px (21.9 km, 401 m); x 720: 10 px (20.2 km, 223 m); x 840: 5 px (19.9 km, 158 m). The shore is 11.6 to 20.0 km away. Earthlit faces; haze transmittance 0.75 (green) and 0.527 (blue) at the highest point; colour #945a44 (74.1 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
   - below the horizon #b48447 (141 cd/m²); edges #ac7e47 and #a27845;
-  - 1° down #b18146 (136 cd/m²); edges #a97c46 and #9f7643;
-  - 3° down #a97b42 (122 cd/m²); edges #a17642 and #946f3f;
-  - 8° down #966c3a (93.1 cd/m²); edges #8e673a and #856238;
-  - bottom #78572f (58.5 cd/m²); edges #795932 and #735530.
+  - 1° down #b18246 (136 cd/m²); edges #a97c46 and #9f7644;
+  - 3° down #a97c42 (123 cd/m²); edges #a17743 and #956f3f;
+  - 8° down #966e3b (95.0 cd/m²); edges #8f693b and #856338;
+  - bottom #795a30 (61.2 cd/m²); edges #7a5b32 and #745731.
 - **Waves:** swell 1.6 m, period 13.7 s, 49 m long, travelling toward 286° (26° right of the view's direction); wind 5.1 m/s; mean square slope 0.0463 (rms tilt 12.2°), 0.0272 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1248 (+8 h).
-- **Water:** its own light looking straight down, pale yellow-green (1.32 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (4.61 cd/m²).
 - **Tide:** −0.59 m from its mean level.
 - At this wind the first whitecaps would form; the study does not model them.
 
@@ -931,7 +931,7 @@ two-thirds of the way across.
 
 The sea, rippled by a 4.2 m/s breeze over a 1.1 m swell running away to the right,
 reflects the arch at 49% of its brightness: orange (#c9863f) below the horizon,
-dark brown-orange (#805529) at the bottom. Muted to the eye; the photograph records the
+dark brown-orange (#81572a) at the bottom. Muted to the eye; the photograph records the
 colour. No stars, no foam, no boats, no people.
 
 **Frame data.**
@@ -950,11 +950,11 @@ colour. No stars, no foam, no boats, no people.
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
   - below the horizon #c9863f (5.03 cd/m²); edges #b17a40 and #a1713e;
   - 1° down #c7843e (4.89 cd/m²); edges #ae773f and #9e6f3d;
-  - 3° down #bf7d3a (4.40 cd/m²); edges #a5713b and #996a3a;
-  - 8° down #a86d33 (3.29 cd/m²); edges #916234 and #885d32;
-  - bottom #805529 (1.90 cd/m²); edges #79522c and #724f2b.
+  - 3° down #bf7e3b (4.42 cd/m²); edges #a6713c and #996a3a;
+  - 8° down #a86e33 (3.34 cd/m²); edges #926334 and #885e33;
+  - bottom #81572a (1.97 cd/m²); edges #79542d and #73512c.
 - **Waves:** swell 1.1 m, period 11.3 s, 33 m long, travelling toward 302° (56° right of the view's direction); wind 4.2 m/s; mean square slope 0.0366 (rms tilt 10.8°), 0.0170 of it from waves shorter than 1 m; nearside wave run, restart file at hour 1296 (+9 h).
-- **Water:** its own light looking straight down, pale yellow-green (0.0331 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (0.116 cd/m²).
 - **Stars:** none recorded; the eye's limit here is magnitude -3.9.
 - **Tide:** −1.79 m from its mean level.
 
@@ -982,7 +982,7 @@ pinkish peach glow above the hidden Sun: #ffdebd at 8 degrees and #ffc6ab at the
 
 The sea is lightly rippled by a 4.1 m/s breeze over a short swell 0.9 m high and
 23 m from crest to crest, coming toward the camera. It reflects the glow as a dim greyish
-rose-taupe (#a18d83) below the horizon, darkening to dark grey-brown (#6c6059) at the
+rose-taupe (#a18e83) below the horizon, darkening to dark grey-brown (#6f685c) at the
 bottom. No stars show in this bright earthlit sky. No foam, no boats, no people.
 
 **Frame data.**
@@ -999,13 +999,13 @@ bottom. No stars show in this bright earthlit sky. No foam, no boats, no people.
 - **Earth:** 53.3° up at 22°, out of frame, 90% lit; 2,700 cd/m² (2,800 times white), #ffdb89.
 - **Coast:** skyline above the horizon line, x 0: 66 px (2.8 km, 105 m); x 120: 73 px (2.8 km, 117 m); x 240: 78 px (2.8 km, 131 m); x 360: 81 px (2.9 km, 143 m); x 480: 88 px (3.8 km, 213 m); x 600: 94 px (3.8 km, 231 m); x 720: 105 px (3.3 km, 227 m); x 840: 110 px (3.4 km, 248 m); x 960: 110 px (3.6 km, 267 m); x 1079: 110 px (3.9 km, 282 m); x 1199: 107 px (4.1 km, 288 m); x 1319: 97 px (4.5 km, 281 m); x 1439: 79 px (4.8 km, 238 m); x 1559: 54 px (4.9 km, 166 m); x 1679: 51 px (23.6 km, 847 m); x 1799: 58 px (23.5 km, 921 m); x 1919: 55 px (25.2 km, 925 m). The shore is 1.4 to 20.6 km away. Earthlit faces; haze transmittance 0.955 (green) and 0.902 (blue) at the highest point; colour #6c544f (0.0982 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #a18d83 (0.274 cd/m²); edges #948984 and #9a8d86;
-  - 1° down #9f8c81 (0.266 cd/m²); edges #928782 and #9a8d85;
-  - 3° down #9a857b (0.242 cd/m²); edges #8b817b and #93867e;
-  - 8° down #89776d (0.188 cd/m²); edges #7d736e and #837770;
-  - bottom #6c6059 (0.118 cd/m²); edges #6b635f and #6e6660.
+  - below the horizon #a18e83 (0.274 cd/m²); edges #948984 and #9a8e86;
+  - 1° down #a08c81 (0.269 cd/m²); edges #928882 and #9a8d85;
+  - 3° down #9a877c (0.248 cd/m²); edges #8c837c and #93887f;
+  - 8° down #8b7b6e (0.200 cd/m²); edges #7f776f and #847b71;
+  - bottom #6f685c (0.135 cd/m²); edges #6d6a61 and #716d63.
 - **Waves:** swell 0.9 m, period 9.3 s, 23 m long, travelling toward 303° (166° right of the view's direction); wind 4.1 m/s; mean square slope 0.0346 (rms tilt 10.5°), 0.0157 of it from waves shorter than 1 m; nearside wave run, restart file at hour 720 (+0 h).
-- **Water:** its own light looking straight down, pale green (0.00830 cd/m²).
+- **Water:** its own light looking straight down, pale green (0.0289 cd/m²).
 - **Stars:** none recorded; the eye's limit here is magnitude -0.8.
 - **Tide:** −3.06 m from its mean level.
 - **Earth's sky:** the sky overhead and behind the camera is the blue earthlit sky of the results by
@@ -1041,7 +1041,7 @@ The sky is a very pale cyan-blue, almost white (#c8eae9 at the top), fading to p
 the horizon behind the peaks (#dce2ca).
 
 The sea is a grey-teal slate (#8ea29d below the horizon), darkening to deep slate-teal
-(#505e5b) at the bottom. The band of water nearest the horizon mirrors the pale mountains in
+(#596d5f) at the bottom. The band of water nearest the horizon mirrors the pale mountains in
 blurred streaks. A swell 1.2 m high and 33 m from crest to crest comes from the front
 left; wind ripples under a 3.7 m/s breeze give it a lively, fine texture. No foam, no boats,
 no people, no buildings.
@@ -1060,13 +1060,13 @@ no people, no buildings.
 - **Earth:** 55.5° below the horizon at 212°, 98% lit.
 - **Coast:** skyline above the horizon line, x 0: 77 px (21.1 km, 1,004 m); x 120: 97 px (17.2 km, 1,028 m); x 240: 112 px (12.6 km, 867 m); x 360: 123 px (12.9 km, 1,009 m); x 480: 132 px (13.2 km, 1,132 m); x 600: 132 px (13.6 km, 1,190 m); x 720: 140 px (13.4 km, 1,254 m); x 840: 146 px (10.5 km, 1,026 m); x 960: 145 px (10.9 km, 1,066 m); x 1079: 153 px (11.7 km, 1,201 m); x 1199: 167 px (11.9 km, 1,325 m); x 1319: 174 px (11.2 km, 1,273 m); x 1439: 168 px (11.1 km, 1,190 m); x 1559: 165 px (12.1 km, 1,247 m); x 1679: 162 px (11.8 km, 1,174 m); x 1799: 139 px (11.1 km, 913 m); x 1919: 115 px (10.8 km, 716 m). The shore is 5.5 to 7.1 km away. Sunlit faces; haze transmittance 0.863 (green) and 0.72 (blue) at the highest point; colour #b9a48d (4,700 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #8ea29d (4,130 cd/m²); edges #899d9a and #94a8a2;
-  - 1° down #8da09b (4,030 cd/m²); edges #869a97 and #92a5a0;
-  - 3° down #879994 (3,670 cd/m²); edges #809390 and #8c9f99;
-  - 8° down #788883 (2,840 cd/m²); edges #738380 and #7c8c86;
-  - bottom #505e5b (1,280 cd/m²); edges #566462 and #596865.
+  - below the horizon #8ea29d (4,150 cd/m²); edges #899e9a and #94a8a2;
+  - 1° down #8da19b (4,080 cd/m²); edges #879b98 and #92a6a0;
+  - 3° down #899c95 (3,800 cd/m²); edges #829691 and #8ea199;
+  - 8° down #7c8f84 (3,110 cd/m²); edges #778a81 and #7f9288;
+  - bottom #596d5f (1,690 cd/m²); edges #5e7265 and #617568.
 - **Waves:** swell 1.2 m, period 11.3 s, 33 m long, travelling toward 325° (145° right of the view's direction); wind 3.7 m/s; mean square slope 0.0282 (rms tilt 9.5°), 0.0127 of it from waves shorter than 1 m; borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +230 degrees to the local wind, as deep water.
-- **Water:** its own light looking straight down, pale yellow-green (187 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (656 cd/m²).
 - **Tide:** −0.53 m from its mean level.
 
 ### IC-2 · The Sun 4° up
@@ -1079,7 +1079,7 @@ the top.
 
 The Sun is a small, blinding orange disk 14 pixels wide, 3.9 degrees up just right
 of centre (x = 1061, y = 463). Below it a broad, sparkling orange glitter path, up to
-280 pixels wide, runs from the horizon to the bottom of the frame over a rippled sea.
+260 pixels wide, runs from the horizon to the bottom of the frame over a rippled sea.
 
 On the left the coast runs out toward the horizon:
 - a near coastal ridge 20 km away stands as a dark, hazy red-brown silhouette (#8b6d5d),
@@ -1092,8 +1092,8 @@ On the left the coast runs out toward the horizon:
 The right half of the horizon is open sea.
 
 The sky is warm amber-cream at the top (#ffe59d), deepening to soft orange at the horizon
-(#f4b475). The sea beside the glitter is warm tan-gold (#a88e60), darkening to dark
-olive-bronze (#6f5f41) in the lower corners. A swell 1.2 m high and 33 m
+(#f4b475). The sea beside the glitter is warm tan-gold (#a88f60), darkening to dark
+olive-bronze (#716442) in the lower corners. A swell 1.2 m high and 33 m
 between crests comes from the front left, and a 3.3 m/s breeze ripples it. No foam, no boats,
 no people.
 
@@ -1109,16 +1109,16 @@ no people.
   - at the horizon #f4b475 (2,330 cd/m²); edges #e4ad75 and #eab075 (2,080 and 2,170).
 - **Sun:** at (1061, 463), 3.93° up at 271.8°, 14 by 14 px; 39 million cd/m² (8,900 times white), #ff9d00.
 - **Earth:** 56.3° below the horizon at 201°, 44% lit.
-- **Glitter of the Sun:** across x = 945 to 1225, y = 575 to 1075; peak 120,000 cd/m² (28 times white) at (1065, 575); 10% of the sea in the frame.
+- **Glitter of the Sun:** across x = 955 to 1215, y = 575 to 1075; peak 120,000 cd/m² (28 times white) at (1065, 575); 10% of the sea in the frame.
 - **Coast:** skyline above the horizon line, x 0: 99 px (20.4 km, 1,226 m); x 120: 71 px (20.3 km, 928 m); x 240: 55 px (50.2 km, 2,308 m); x 360: 59 px (52.6 km, 2,628 m); x 480: 63 px (60.3 km, 3,371 m); x 600: 55 px (65.0 km, 3,438 m); x 720: 35 px (65.2 km, 2,632 m); x 840: 25 px (71.5 km, 2,533 m); x 960: 22 px (70.5 km, 2,368 m). The shore is 11.8 to 35.2 km away. Backlit; haze transmittance 0.76 (green) and 0.543 (blue) at the highest point; colour #8b6d5d (756 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #ba9a63 (1,500 cd/m²); edges #a88e60 and #ba9a65;
-  - 1° down #b89863 (1,470 cd/m²); edges #a68c5f and #b79763;
-  - 3° down #af905d (1,310 cd/m²); edges #9e865a and #af905f;
-  - 8° down #d18a4d (1,410 cd/m²); edges #8b764f and #987e53;
-  - bottom #e17a30 (1,320 cd/m²); edges #6f5f41 and #776543.
+  - below the horizon #ba9a64 (1,510 cd/m²); edges #a88f60 and #ba9a65;
+  - 1° down #b99963 (1,480 cd/m²); edges #a68d5f and #b79863;
+  - 3° down #af915d (1,320 cd/m²); edges #9f875b and #af915f;
+  - 8° down #d28c4e (1,440 cd/m²); edges #8c7850 and #998054;
+  - bottom #e27e33 (1,360 cd/m²); edges #716442 and #786945.
 - **Waves:** swell 1.2 m, period 11.3 s, 33 m long, travelling toward 43° (135° right of the view's direction); wind 3.3 m/s; mean square slope 0.026 (rms tilt 9.2°), 0.0106 of it from waves shorter than 1 m; borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +153 degrees to the local wind, as deep water.
-- **Water:** its own light looking straight down, pale yellow-green (19.4 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (67.9 cd/m²).
 - **Tide:** +0.56 m from its mean level.
 
 ### IC-3 · The Sun 4° below the horizon
@@ -1140,7 +1140,7 @@ sky. The right third of the horizon is open sea.
 
 The sea, gently rippled by a 2.1 m/s breeze over a 1.2 m swell, reflects the glow at
 81% of its brightness: apricot-orange (#d09e5e) below the horizon, warm bronze
-(#81663e) at the bottom. The water just below the horizon on the left mirrors the dark ridge
+(#82693f) at the bottom. The water just below the horizon on the left mirrors the dark ridge
 in soft, broken streaks. No foam, no boats, no people.
 
 **Frame data.**
@@ -1157,13 +1157,13 @@ in soft, broken streaks. No foam, no boats, no people.
 - **Earth:** 55.6° below the horizon at 199°, 36% lit.
 - **Coast:** skyline above the horizon line, x 0: 105 px (17.9 km, 1,116 m); x 120: 97 px (20.6 km, 1,252 m); x 240: 87 px (20.1 km, 1,137 m); x 360: 60 px (14.6 km, 580 m); x 480: 59 px (48.8 km, 2,431 m); x 600: 57 px (61.0 km, 3,216 m); x 720: 58 px (64.2 km, 3,523 m); x 840: 41 px (65.0 km, 2,889 m); x 960: 29 px (68.0 km, 2,523 m); x 1079: 25 px (69.2 km, 2,430 m); x 1199: 7 px (72.0 km, 1,711 m). The shore is 11.8 to 36.2 km away. Backlit; haze transmittance 0.821 (green) and 0.645 (blue) at the highest point; colour #7d5d4e (271 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #d09e5e (820 cd/m²); edges #b8905b and #c8995e;
-  - 1° down #cd9b5d (792 cd/m²); edges #b58e59 and #c5975d;
-  - 3° down #c39358 (707 cd/m²); edges #ad8755 and #bb8f58;
-  - 8° down #a8814d (521 cd/m²); edges #96764b and #a27d4d;
-  - bottom #81663e (306 cd/m²); edges #7e6440 and #866a41.
+  - below the horizon #d09e5e (821 cd/m²); edges #b8905b and #c8995e;
+  - 1° down #cd9c5d (794 cd/m²); edges #b58e5a and #c5975d;
+  - 3° down #c39459 (712 cd/m²); edges #ad8855 and #bc9058;
+  - 8° down #a9824e (532 cd/m²); edges #97784b and #a37f4e;
+  - bottom #82693f (322 cd/m²); edges #7f6741 and #876c42.
 - **Waves:** swell 1.2 m, period 11.3 s, 33 m long, travelling toward 19° (117° right of the view's direction); wind 2.1 m/s; mean square slope 0.0191 (rms tilt 7.9°), 0.0037 of it from waves shorter than 1 m; borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +176 degrees to the local wind, as deep water.
-- **Water:** its own light looking straight down, pale yellow-green (8.00 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (28.0 cd/m²).
 - **Tide:** +0.79 m from its mean level.
 
 ### IC-4 · The Sun 15° below the horizon
@@ -1183,7 +1183,7 @@ open sea.
 
 The sea, rippled by a 3.6 m/s breeze over a 1.2 m swell crossing from left to right,
 reflects the sky at 78% of its brightness: amber-orange (#d5964c) below the
-horizon, brown-gold (#846032) at the bottom. The mountains' dark reflection blurs into the
+horizon, brown-gold (#856233) at the bottom. The mountains' dark reflection blurs into the
 water below them on the left. No foam, no boats, no people.
 
 **Frame data.**
@@ -1200,13 +1200,13 @@ water below them on the left. No foam, no boats, no people.
 - **Earth:** 54.3° below the horizon at 198°, 25% lit.
 - **Coast:** skyline above the horizon line, x 0: 114 px (14.6 km, 975 m); x 120: 106 px (15.4 km, 997 m); x 240: 98 px (17.7 km, 1,104 m); x 360: 92 px (20.6 km, 1,267 m); x 480: 77 px (20.2 km, 1,075 m); x 600: 51 px (60.8 km, 2,957 m); x 720: 55 px (52.2 km, 2,590 m); x 840: 61 px (60.3 km, 3,371 m); x 960: 52 px (65.4 km, 3,391 m); x 1079: 33 px (66.6 km, 2,635 m); x 1199: 27 px (71.5 km, 2,625 m); x 1319: 24 px (72.0 km, 2,483 m). The shore is 7.8 to 35.5 km away. Backlit; haze transmittance 0.827 (green) and 0.654 (blue) at the highest point; colour #7b513f (54.2 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #d5964c (189 cd/m²); edges #b88549 and #c08a4a;
-  - 1° down #d1934a (182 cd/m²); edges #b68449 and #bd8849;
-  - 3° down #c78c47 (162 cd/m²); edges #ac7c44 and #b48145;
-  - 8° down #ad7a3e (119 cd/m²); edges #976d3c and #9d703d;
-  - bottom #846032 (70.1 cd/m²); edges #7e5c33 and #835f34.
+  - below the horizon #d5964c (190 cd/m²); edges #b88549 and #c08a4a;
+  - 1° down #d1934b (182 cd/m²); edges #b68449 and #bd8849;
+  - 3° down #c78c47 (163 cd/m²); edges #ac7d44 and #b48146;
+  - 8° down #ad7b3e (121 cd/m²); edges #976e3c and #9d723d;
+  - bottom #856233 (72.7 cd/m²); edges #7f5f34 and #836135.
 - **Waves:** swell 1.2 m, period 11.3 s, 33 m long, travelling toward 356° (102° right of the view's direction); wind 3.6 m/s; mean square slope 0.0275 (rms tilt 9.4°), 0.0120 of it from waves shorter than 1 m; borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +199 degrees to the local wind, as deep water.
-- **Water:** its own light looking straight down, pale yellow-green (1.28 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (4.46 cd/m²).
 - **Tide:** +1.10 m from its mean level.
 
 ### IC-5 · The Sun 35° below the horizon
@@ -1233,7 +1233,7 @@ The coastal mountains fill the whole width of the horizon as a dark red-brown si
 The sea is nearly calm, with no wind ripples under a 1.7 m/s breeze, only a smooth 1.2 m
 swell coming toward the camera. It mirrors the glow at 62% of its brightness: orange
 (#e59235) below the horizon, with the mountains' dark shapes reflected in the nearest band of
-water, darkening to brown-orange (#875924) at the bottom. Muted to the eye; the photograph
+water, darkening to brown-orange (#875a25) at the bottom. Muted to the eye; the photograph
 records the colour. No stars, no foam, no boats, no people.
 
 **Frame data.**
@@ -1250,13 +1250,13 @@ records the colour. No stars, no foam, no boats, no people.
 - **Earth:** 50.8° below the horizon at 197°, 8% lit.
 - **Coast:** skyline above the horizon line, x 0: 178 px (12.1 km, 1,238 m); x 120: 156 px (11.5 km, 1,067 m); x 240: 121 px (11.0 km, 819 m); x 360: 97 px (10.7 km, 654 m); x 480: 89 px (14.0 km, 824 m); x 600: 99 px (14.6 km, 974 m); x 720: 93 px (14.9 km, 956 m); x 840: 89 px (18.1 km, 1,133 m); x 960: 81 px (20.2 km, 1,181 m); x 1079: 55 px (14.6 km, 570 m); x 1199: 56 px (51.1 km, 2,544 m); x 1319: 61 px (61.5 km, 3,420 m); x 1439: 58 px (64.5 km, 3,482 m); x 1559: 43 px (64.8 km, 2,846 m); x 1679: 33 px (68.0 km, 2,583 m); x 1799: 33 px (71.8 km, 2,750 m); x 1919: 27 px (72.0 km, 2,483 m). The shore is 6.0 to 35.5 km away. Backlit; haze transmittance 0.853 (green) and 0.702 (blue) at the highest point; colour #7e432c (1.44 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #e59235 (6.23 cd/m²); edges #be7d37 and #ce8437;
-  - 1° down #e28f34 (6.02 cd/m²); edges #ba7b36 and #cc8236;
-  - 3° down #d88731 (5.38 cd/m²); edges #b27533 and #c27b33;
-  - 8° down #ba752b (3.87 cd/m²); edges #99652c and #a46a2d;
-  - bottom #875924 (2.06 cd/m²); edges #7c5326 and #825727.
+  - below the horizon #e59235 (6.24 cd/m²); edges #be7e37 and #ce8537;
+  - 1° down #e28f34 (6.02 cd/m²); edges #ba7b36 and #cc8336;
+  - 3° down #d88831 (5.40 cd/m²); edges #b27533 and #c27c34;
+  - 8° down #ba762c (3.91 cd/m²); edges #9a652d and #a56b2d;
+  - bottom #875a25 (2.11 cd/m²); edges #7c5527 and #825928.
 - **Waves:** swell 1.2 m, period 11.3 s, 33 m long, travelling toward 32° (156° right of the view's direction); wind 1.7 m/s; mean square slope 0.0154 (rms tilt 7.1°), 0.0000 of it from waves shorter than 1 m; borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +163 degrees to the local wind, as deep water.
-- **Water:** its own light looking straight down, pale yellow-green (0.0250 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (0.0872 cd/m²).
 - **Stars:** none recorded; the eye's limit here is magnitude -3.8.
 - **Tide:** +1.49 m from its mean level.
 
@@ -1282,7 +1282,7 @@ lowest, reddest part.
 The sea is lightly rippled by a 2.1 m/s breeze over a 1.2 m swell running away to the
 right. It reflects the arch as a warm orange sheen (#e19442 below the horizon at the centre),
 with the mountains' dark outline mirrored, blurred, in the band of water just below the horizon. It
-darkens to brown-orange (#865b2c) at the bottom.
+darkens to brown-orange (#875d2d) at the bottom.
 
 The Earth never rises here. No stars show against this glowing sky; the brightest in view, Achernar, is
 too dim through the air. To the eye: a dim, nearly colourless twilight with a pale glow over black
@@ -1302,13 +1302,13 @@ mountains. No foam, no boats, no people.
 - **Earth:** 45.0° below the horizon at 202°, 2% lit.
 - **Coast:** skyline above the horizon line, x 0: 76 px (21.1 km, 1,001 m); x 120: 96 px (17.2 km, 1,028 m); x 240: 111 px (12.6 km, 867 m); x 360: 123 px (12.9 km, 1,008 m); x 480: 131 px (13.2 km, 1,131 m); x 600: 131 px (13.6 km, 1,188 m); x 720: 139 px (13.4 km, 1,253 m); x 840: 145 px (10.5 km, 1,024 m); x 960: 144 px (10.9 km, 1,064 m); x 1079: 151 px (11.7 km, 1,199 m); x 1199: 165 px (11.9 km, 1,323 m); x 1319: 172 px (11.2 km, 1,272 m); x 1439: 167 px (11.1 km, 1,189 m); x 1559: 164 px (12.1 km, 1,246 m); x 1679: 161 px (11.8 km, 1,173 m); x 1799: 138 px (11.1 km, 913 m); x 1919: 114 px (10.8 km, 715 m). The shore is 5.5 to 7.1 km away. Backlit; haze transmittance 0.863 (green) and 0.72 (blue) at the highest point; colour #9b4f34 (0.0792 cd/m²).
 - **Sea** (reflecting the sky through this scene's slopes; open water assumed behind):
-  - below the horizon #e19442 (0.233 cd/m²); edges #cf8a44 and #bb8042;
-  - 1° down #df9141 (0.227 cd/m²); edges #cc8743 and #b87e41;
-  - 3° down #d58a3d (0.204 cd/m²); edges #c3803f and #b1783d;
-  - 8° down #b87736 (0.148 cd/m²); edges #a76f37 and #9a6835;
-  - bottom #865b2c (0.0790 cd/m²); edges #855b2f and #7e572d.
+  - below the horizon #e19442 (0.234 cd/m²); edges #cf8a44 and #bb8042;
+  - 1° down #df9141 (0.227 cd/m²); edges #cc8843 and #b87e41;
+  - 3° down #d68a3e (0.204 cd/m²); edges #c3813f and #b1783e;
+  - 8° down #b97836 (0.149 cd/m²); edges #a77038 and #9a6936;
+  - bottom #875d2d (0.0816 cd/m²); edges #855d30 and #7f592e.
 - **Waves:** swell 1.2 m, period 11.3 s, 33 m long, travelling toward 232° (52° right of the view's direction); wind 2.1 m/s; mean square slope 0.0189 (rms tilt 7.8°), 0.0035 of it from waves shorter than 1 m; borrowed: the Nectaris restart spectrum at hour 816, the month's median resolved slope, turned +323 degrees to the local wind, as deep water.
-- **Water:** its own light looking straight down, pale yellow (0.00130 cd/m²).
+- **Water:** its own light looking straight down, yellow-green (0.00440 cd/m²).
 - **Stars:** none recorded; the eye's limit here is magnitude -0.4.
 - **Tide:** +0.93 m from its mean level.
 

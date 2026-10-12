@@ -14,14 +14,14 @@
     "research/studies/sea_appearance/results/sea_slopes.npz": "aef6bcd9c97c668488fb23af58004b70bd4ec0974e9a190922be1a7a654bda2a",
     "research/runs/optical_comfort/spherical/moon_1.2atm_standard.npz": "d6d7fef07d99fedf32d1a54f63e345ff245bf3ee8ec29a33d498fd621bf41273",
     "geography/products/tides_28pct_4ppd.npz": "56529233b8ce20685691174381ab5c32d35e9092819e61fc5cdb42293a536777",
-    "biosphere/living_water/waters.json": "bdf2a5dede623718921e367db11cd6eef95f8d67e944a6cbf277bddd2f962734",
+    "biosphere/living_water/waters.json": "cda0594b8b59acfb469a39b007f977d616db60307d325e80af759242d2baecd1",
     "research/runs/waves/nearside/dt300/s1344_1392/end.hot": "0fef0720d72eb90213523a449776a7ded8afad3ee58133bed727c41c80cb6aac",
     "research/runs/sea_appearance/terrain/s_nubium.npz": "a7f856e24b142978e3b2464838b7f7fefafca9f3d21df2e56f51d305c88a5dfb",
-    "shared/constants.json": "1a73c712dcd6e550275cc3abe85e2a8ac3c0c5f39570e19841c0091e617c8cae",
+    "shared/constants.json": "e59b5febb6cf6c1a50bd036691abb8550583c287eeeb6f71d799fcfcf18e1bd6",
     "research/studies/sea_appearance/regimes.py": "ae7a83f72a54d517ba4d8dd500b79d6c42efad08a41365c767455fd72030917b",
     "illumination/earthlight/model.py": "c18de649cd0eee3c1b9ce74eae32e68d753d27a4080083567617228e531737af",
     "illumination/water_surface/reflection.py": "df023219b0ca76f009e2b15f90f10599100f2a7855fb3afd18e4e92125b6c0b6",
-    "illumination/water_column/model.py": "fade27dafbd24bb47070a26b7f0762760281ef6a742a3e506f52c078f9879f56",
+    "illumination/water_column/model.py": "c829a086bbbbe3f5f659395a1d43718e89099774916aed8c11a65e27a2b005e1",
     "geography/lunar_ephemeris.py": "a3821628690cf9b920d8afc19d255de5e5112997249eb3cf9d30917fc971f258"
   },
   "jd_tt": 2465489.6162088793,
@@ -362,13 +362,13 @@
         "y": 1178,
         "elevation_deg": -0.4,
         "azimuth_deg": 352.3,
-        "luminance_cd_m2": 0.26333,
+        "luminance_cd_m2": 0.26443,
         "chromaticity_xy": [
-          0.2783,
-          0.311
+          0.2784,
+          0.3114
         ],
         "colour": "pale sky blue",
-        "srgb": "#86a1ad"
+        "srgb": "#86a2ad"
       },
       {
         "label": "just below the horizon, centre",
@@ -376,10 +376,10 @@
         "y": 1177,
         "elevation_deg": -0.4,
         "azimuth_deg": 22.0,
-        "luminance_cd_m2": 0.29148,
+        "luminance_cd_m2": 0.29258,
         "chromaticity_xy": [
-          0.2816,
-          0.3147
+          0.2817,
+          0.3151
         ],
         "colour": "pale sky blue",
         "srgb": "#8ea9b2"
@@ -390,13 +390,13 @@
         "y": 1178,
         "elevation_deg": -0.4,
         "azimuth_deg": 51.7,
-        "luminance_cd_m2": 0.29592,
+        "luminance_cd_m2": 0.29702,
         "chromaticity_xy": [
-          0.2809,
-          0.3137
+          0.281,
+          0.3141
         ],
         "colour": "pale sky blue",
-        "srgb": "#8eaab4"
+        "srgb": "#8faab4"
       },
       {
         "label": "1 degree down, left edge",
@@ -404,13 +404,13 @@
         "y": 1190,
         "elevation_deg": -1.0,
         "azimuth_deg": 352.4,
-        "luminance_cd_m2": 0.25461,
+        "luminance_cd_m2": 0.25728,
         "chromaticity_xy": [
-          0.2784,
-          0.3112
+          0.2787,
+          0.3122
         ],
         "colour": "pale sky blue",
-        "srgb": "#849faa"
+        "srgb": "#84a0aa"
       },
       {
         "label": "1 degree down, centre",
@@ -418,10 +418,10 @@
         "y": 1187,
         "elevation_deg": -1.0,
         "azimuth_deg": 22.0,
-        "luminance_cd_m2": 0.28322,
+        "luminance_cd_m2": 0.28589,
         "chromaticity_xy": [
-          0.2818,
-          0.315
+          0.282,
+          0.3159
         ],
         "colour": "pale sky blue",
         "srgb": "#8ca7b0"
@@ -432,13 +432,13 @@
         "y": 1190,
         "elevation_deg": -1.0,
         "azimuth_deg": 51.6,
-        "luminance_cd_m2": 0.28232,
+        "luminance_cd_m2": 0.28498,
         "chromaticity_xy": [
-          0.2809,
-          0.3137
+          0.2811,
+          0.3146
         ],
         "colour": "pale sky blue",
-        "srgb": "#8ba6b0"
+        "srgb": "#8ca7b1"
       },
       {
         "label": "3 degrees down, left edge",
@@ -446,13 +446,13 @@
         "y": 1232,
         "elevation_deg": -3.0,
         "azimuth_deg": 352.7,
-        "luminance_cd_m2": 0.23197,
+        "luminance_cd_m2": 0.23912,
         "chromaticity_xy": [
-          0.2792,
-          0.3121
+          0.28,
+          0.315
         ],
-        "colour": "pale sky blue",
-        "srgb": "#7e98a3"
+        "colour": "pale cyan",
+        "srgb": "#809ba3"
       },
       {
         "label": "3 degrees down, centre",
@@ -460,13 +460,13 @@
         "y": 1224,
         "elevation_deg": -3.0,
         "azimuth_deg": 22.0,
-        "luminance_cd_m2": 0.25694,
+        "luminance_cd_m2": 0.2641,
         "chromaticity_xy": [
-          0.2824,
-          0.3157
+          0.2831,
+          0.3183
         ],
-        "colour": "pale sky blue",
-        "srgb": "#869fa8"
+        "colour": "pale cyan",
+        "srgb": "#87a2a9"
       },
       {
         "label": "3 degrees down, right edge",
@@ -474,13 +474,13 @@
         "y": 1232,
         "elevation_deg": -3.0,
         "azimuth_deg": 51.3,
-        "luminance_cd_m2": 0.25831,
+        "luminance_cd_m2": 0.26547,
         "chromaticity_xy": [
-          0.2816,
-          0.3145
+          0.2823,
+          0.3171
         ],
-        "colour": "pale sky blue",
-        "srgb": "#86a0a9"
+        "colour": "pale cyan",
+        "srgb": "#87a2aa"
       },
       {
         "label": "8 degrees down, left edge",
@@ -488,13 +488,13 @@
         "y": 1341,
         "elevation_deg": -8.0,
         "azimuth_deg": 353.4,
-        "luminance_cd_m2": 0.1791,
+        "luminance_cd_m2": 0.19387,
         "chromaticity_xy": [
-          0.2796,
-          0.313
+          0.2817,
+          0.3206
         ],
-        "colour": "muted sky blue",
-        "srgb": "#708790"
+        "colour": "muted cyan",
+        "srgb": "#738d92"
       },
       {
         "label": "8 degrees down, centre",
@@ -502,13 +502,13 @@
         "y": 1319,
         "elevation_deg": -8.0,
         "azimuth_deg": 22.0,
-        "luminance_cd_m2": 0.19652,
+        "luminance_cd_m2": 0.21129,
         "chromaticity_xy": [
-          0.283,
-          0.3165
+          0.2847,
+          0.3233
         ],
         "colour": "greyish cyan",
-        "srgb": "#778d94"
+        "srgb": "#799296"
       },
       {
         "label": "8 degrees down, right edge",
@@ -516,13 +516,13 @@
         "y": 1341,
         "elevation_deg": -8.0,
         "azimuth_deg": 50.6,
-        "luminance_cd_m2": 0.19358,
+        "luminance_cd_m2": 0.20836,
         "chromaticity_xy": [
-          0.2812,
-          0.3147
+          0.283,
+          0.3216
         ],
-        "colour": "muted sky blue",
-        "srgb": "#758c94"
+        "colour": "muted cyan",
+        "srgb": "#789296"
       },
       {
         "label": "bottom of frame, left edge",
@@ -530,13 +530,13 @@
         "y": 1770,
         "elevation_deg": -24.34,
         "azimuth_deg": 355.9,
-        "luminance_cd_m2": 0.07596,
+        "luminance_cd_m2": 0.09941,
         "chromaticity_xy": [
-          0.2882,
-          0.3212
+          0.2935,
+          0.3448
         ],
-        "colour": "dark greyish cyan",
-        "srgb": "#4d5a5d"
+        "colour": "dark greyish aqua",
+        "srgb": "#546862"
       },
       {
         "label": "bottom of frame, centre",
@@ -544,13 +544,13 @@
         "y": 1770,
         "elevation_deg": -26.73,
         "azimuth_deg": 22.0,
-        "luminance_cd_m2": 0.11478,
+        "luminance_cd_m2": 0.13865,
         "chromaticity_xy": [
-          0.3276,
-          0.3526
+          0.3262,
+          0.3666
         ],
-        "colour": "dark greyish golden yellow",
-        "srgb": "#6c6c60"
+        "colour": "dark greyish yellow-green",
+        "srgb": "#717765"
       },
       {
         "label": "bottom of frame, right edge",
@@ -558,41 +558,24 @@
         "y": 1770,
         "elevation_deg": -24.34,
         "azimuth_deg": 48.1,
-        "luminance_cd_m2": 0.06902,
+        "luminance_cd_m2": 0.09248,
         "chromaticity_xy": [
-          0.2777,
-          0.3129
+          0.2852,
+          0.3394
         ],
-        "colour": "dark muted sky blue",
-        "srgb": "#46575d"
+        "colour": "dark muted aqua",
+        "srgb": "#4d6561"
       }
     ],
-    "glitter": {
-      "earth": {
-        "peak_luminance_cd_m2": 0.069,
-        "peak_x": 490,
-        "peak_y": 1795,
-        "x_range": [
-          347,
-          640
-        ],
-        "y_range": [
-          1761,
-          1795
-        ],
-        "share_of_frame_sea": 0.0126,
-        "colour": "orange",
-        "times_white": 0.1
-      }
-    },
+    "glitter": {},
     "water_leaving": {
-      "luminance_cd_m2": 0.0101,
+      "luminance_cd_m2": 0.0355,
       "chromaticity_xy": [
-        0.3157,
-        0.3907
+        0.3168,
+        0.4328
       ],
       "colour": "pale green",
-      "srgb": "#182016"
+      "srgb": "#2c4227"
     },
     "waves": {
       "source": "nearside wave run, restart file at hour 1392 (+11 h)",

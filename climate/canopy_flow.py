@@ -13,7 +13,7 @@ from scipy.integrate import solve_bvp, simpson
 @dataclass(frozen=True)
 class CanopyConfig:
     height_m: float = 300.0
-    leaf_area_index: float = 22.0
+    leaf_area_index: float = 6.0           # the canopy model's optimum, near 6 (biosphere/canopy)
     crown_base_fraction: float = .4
     projection_factor: float = .3
     element_drag_coefficient: float = 1.0

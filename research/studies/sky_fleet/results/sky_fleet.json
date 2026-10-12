@@ -1895,9 +1895,9 @@
    "SYNODIC_MONTH_DAYS": 29.53059
   },
   "inputs": {
-   "research/studies/sky_ships/results/sky_ships.json": "1e214bf6e64b0bb8",
-   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
-   "research/studies/summit_tower/results/summit_tower_form.json": "20d1201ad13a8348",
+   "research/studies/sky_ships/results/sky_ships.json": "375284e4a16ffcab",
+   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4",
+   "research/studies/summit_tower/results/summit_tower_form.json": "9c9a3cf7fed39b1a",
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
    "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32"
   }

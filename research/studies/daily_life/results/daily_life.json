@@ -3,7 +3,7 @@
  "producer": {
   "study": "daily_life",
   "files": {
-   "research/studies/daily_life/run.py": "3f8f9aeb25e71134",
+   "research/studies/daily_life/run.py": "f934e69d2841a5ac",
    "illumination/calendar/geometry.py": "462b9f7174efa4ae",
    "illumination/calendar/validate.py": "3dadeb5912cc31b1",
    "illumination/calendar/disk.py": "6dfbdc1b581a2255"
@@ -32,14 +32,14 @@
    "illumination/calendar/results/transfer.json": "68ea6e820a8d7603",
    "illumination/sky/results/solved_sky.json": "a94333cd71a83169",
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
-   "research/studies/sky_ships/results/sky_ships.json": "1e214bf6e64b0bb8",
-   "research/studies/sky_fleet/results/sky_fleet.json": "c96dfc663f12756c",
-   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "c5912c078d428efa",
+   "research/studies/sky_ships/results/sky_ships.json": "375284e4a16ffcab",
+   "research/studies/sky_fleet/results/sky_fleet.json": "fcf26a8bd6d98950",
+   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "b488e76c98e19aa9",
    "research/studies/cloud_twilight/results/regional_evenings.json": "70ed3ce009c29150",
    "research/studies/conservation/results/heritage_register.json": "b0756b08ac3fe0bc",
-   "provisioning/results/population.json": "9671b996c3f68105",
-   "provisioning/results/computing.json": "8e4ef60ae16c801b",
+   "provisioning/results/population.json": "0b37e24d62461e53",
+   "provisioning/results/computing.json": "2851e0229c981ed4",
    "shared/scenarios/population.json": "74ec20d6f8057977",
    "geography/results/atlas.json": "78cfbf2f469eb339",
    "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
@@ -50,7 +50,7 @@
   },
   "main_inputs": {
    "research/studies/joint_synthesis/results/places.json": {
-    "commit": "78020e0f3273cd98b6b7ac68554b162cf3a96239",
+    "commit": null,
     "sha256": "9707e4d1c7332ba3",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branch merges main; until then from Git at the commit."
@@ -1847,7 +1847,7 @@
   ],
   "cross_check_main_places": {
    "path": "research/studies/joint_synthesis/results/places.json",
-   "commit": "78020e0f3273cd98b6b7ac68554b162cf3a96239",
+   "commit": null,
    "blob": "3aa6d0939faf502433c03105b831a9994ab3315d",
    "sha256": "9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d",
    "read_from": "in-tree",

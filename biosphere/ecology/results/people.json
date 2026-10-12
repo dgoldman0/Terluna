@@ -17,11 +17,11 @@
    "atmosphere/electricity/results/muon_ionization_moon.json": "ea2f0f687ec80c87",
    "atmosphere/electricity/results/muon_ionization_earth.json": "3c224ef3bf7a3bd5",
    "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
-   "biosphere/canopy/results/plant.json": "4238c12360c633f1",
-   "biosphere/canopy/results/fruit.json": "b2034a74a4c45291",
+   "biosphere/canopy/results/plant.json": "4f09599901824e65",
+   "biosphere/canopy/results/fruit.json": "2f4f5e1b6ed912e2",
    "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250",
    "research/studies/open_moon_aerosol/results/open_moon_aerosol.json": "7e404540ec06f5dd",
-   "research/studies/sky_fleet/results/sky_fleet.json": "c96dfc663f12756c",
+   "research/studies/sky_fleet/results/sky_fleet.json": "fcf26a8bd6d98950",
    "research/baselines/feasibility/reference.json": "5878ad8ff00e42bf"
   },
   "constants": {
@@ -339,15 +339,15 @@
   "ground_twilight_hours_after_sunset_above_umol_m2_s": {
    "moon": {
     "100.0": 0.0,
-    "50.0": 9.6,
-    "10.0": 31.5,
-    "1.0": 58.0
+    "50.0": 6.98,
+    "10.0": 26.9,
+    "1.0": 49.9
    },
    "earth": {
     "100.0": 0.0,
     "50.0": 0.0,
-    "10.0": 0.0882,
-    "1.0": 0.274
+    "10.0": 0.0715,
+    "1.0": 0.239
    }
   }
  },
@@ -429,12 +429,12 @@
    1.15
   ],
   "land_growth_g_c_m2_yr": [
-   2830.0,
-   3210.0
+   2770.0,
+   3160.0
   ],
   "production_share_of_land_growth": [
-   8.96e-06,
-   0.000407
+   9.1e-06,
+   0.000415
   ]
  },
  "traffic": {
@@ -500,7 +500,7 @@
     "near_side_share_of_band": 0.562,
     "rain_mm_day": 4.78,
     "wet_share": 1.0,
-    "gross_production_g_c_m2_day": 13.5,
+    "gross_production_g_c_m2_day": 13.3,
     "rain_supports_share_of_model": [
      0.26,
      0.58
@@ -515,7 +515,7 @@
     "near_side_share_of_band": 0.486,
     "rain_mm_day": 2.7,
     "wet_share": 0.986,
-    "gross_production_g_c_m2_day": 13.0,
+    "gross_production_g_c_m2_day": 12.8,
     "rain_supports_share_of_model": [
      0.15,
      0.34
@@ -530,9 +530,9 @@
     "near_side_share_of_band": 0.551,
     "rain_mm_day": 1.3,
     "wet_share": 0.571,
-    "gross_production_g_c_m2_day": 12.0,
+    "gross_production_g_c_m2_day": 11.7,
     "rain_supports_share_of_model": [
-     0.079,
+     0.08,
      0.18
     ]
    },
@@ -545,10 +545,10 @@
     "near_side_share_of_band": 0.489,
     "rain_mm_day": 0.192,
     "wet_share": 0.107,
-    "gross_production_g_c_m2_day": 10.3,
+    "gross_production_g_c_m2_day": 9.95,
     "rain_supports_share_of_model": [
-     0.013,
-     0.03
+     0.014,
+     0.031
     ]
    },
    {
@@ -560,10 +560,10 @@
     "near_side_share_of_band": 0.609,
     "rain_mm_day": 0.0531,
     "wet_share": 0.0,
-    "gross_production_g_c_m2_day": 9.51,
+    "gross_production_g_c_m2_day": 9.07,
     "rain_supports_share_of_model": [
-     0.004,
-     0.0091
+     0.0042,
+     0.0095
     ]
    },
    {
@@ -575,10 +575,10 @@
     "near_side_share_of_band": 0.651,
     "rain_mm_day": 0.0407,
     "wet_share": 0.0,
-    "gross_production_g_c_m2_day": 9.51,
+    "gross_production_g_c_m2_day": 9.07,
     "rain_supports_share_of_model": [
-     0.0031,
-     0.0069
+     0.0032,
+     0.0073
     ]
    }
   ],
@@ -592,58 +592,58 @@
    2.83
   ],
   "crop_water_need_mm_day_equator": [
-   4.85,
-   10.9
+   4.79,
+   10.8
   ],
   "potential_equivalent_share": [
-   0.0663,
-   0.149
+   0.0672,
+   0.151
   ],
   "potential_within_30_deg_share": [
    0.831,
    0.831
   ],
   "rivers_irrigate_potential_km2": [
-   1820000.0,
-   4090000.0
+   1840000.0,
+   4140000.0
   ],
   "potential_equivalent_share_km2": [
-   2510000.0,
-   5650000.0
+   2550000.0,
+   5730000.0
   ]
  },
  "food": {
   "kcal_m2_day": {
-   "near/0/earth_like/0.5": 31.3,
-   "near/0/earth_like/0.6": 37.4,
-   "near/0/idle_quarter/0.5": 35.6,
-   "near/0/idle_quarter/0.6": 42.5,
-   "near/30/earth_like/0.5": 28.5,
-   "near/30/earth_like/0.6": 34.0,
-   "near/30/idle_quarter/0.5": 32.5,
-   "near/30/idle_quarter/0.6": 38.8,
-   "near/60/earth_like/0.5": 18.8,
-   "near/60/earth_like/0.6": 22.5,
-   "near/60/idle_quarter/0.5": 22.3,
-   "near/60/idle_quarter/0.6": 26.7,
-   "far/0/earth_like/0.5": 30.8,
-   "far/0/earth_like/0.6": 36.8,
-   "far/0/idle_quarter/0.5": 34.7,
-   "far/0/idle_quarter/0.6": 41.5
+   "near/0/earth_like/0.5": 30.7,
+   "near/0/earth_like/0.6": 36.7,
+   "near/0/idle_quarter/0.5": 35.1,
+   "near/0/idle_quarter/0.6": 41.9,
+   "near/30/earth_like/0.5": 27.8,
+   "near/30/earth_like/0.6": 33.2,
+   "near/30/idle_quarter/0.5": 31.9,
+   "near/30/idle_quarter/0.6": 38.1,
+   "near/60/earth_like/0.5": 17.4,
+   "near/60/earth_like/0.6": 20.7,
+   "near/60/idle_quarter/0.5": 21.0,
+   "near/60/idle_quarter/0.6": 25.1,
+   "far/0/earth_like/0.5": 30.2,
+   "far/0/earth_like/0.6": 36.1,
+   "far/0/idle_quarter/0.5": 34.2,
+   "far/0/idle_quarter/0.6": 40.8
   },
   "potential_m2_person": [
-   58.8,
-   81.1
+   59.7,
+   82.7
   ],
   "plant_based_m2_person": [
-   129.0,
-   342.0
+   131.0,
+   348.0
   ],
   "diets": {
    "plant_based": {
     "crop_m2": [
-     129.0,
-     342.0
+     131.0,
+     348.0
     ],
     "grazing_m2": [
      0.0,
@@ -656,8 +656,8 @@
    },
    "plant_rich": {
     "crop_m2": [
-     139.0,
-     393.0
+     141.0,
+     401.0
     ],
     "grazing_m2": [
      0.0,
@@ -670,8 +670,8 @@
    },
    "earth_average": {
     "crop_m2": [
-     160.0,
-     424.0
+     162.0,
+     432.0
     ],
     "grazing_m2": [
      4130.0,
@@ -684,8 +684,8 @@
    },
    "earth_affluent": {
     "crop_m2": [
-     337.0,
-     893.0
+     342.0,
+     911.0
     ],
     "grazing_m2": [
      7400.0,
@@ -698,8 +698,8 @@
    },
    "earth_affluent_fed_on_crops": {
     "crop_m2": [
-     574.0,
-     1700.0
+     582.0,
+     1740.0
     ],
     "grazing_m2": [
      0.0,
@@ -717,8 +717,8 @@
    "earth_practice": {
     "diet": "earth_affluent",
     "food_m2": [
-     337.0,
-     893.0
+     342.0,
+     911.0
     ],
     "grazing_m2": [
      7400.0,
@@ -769,8 +769,8 @@
    "lunar_design": {
     "diet": "plant_rich",
     "food_m2": [
-     139.0,
-     393.0
+     141.0,
+     401.0
     ],
     "grazing_m2": [
      0.0,
@@ -874,14 +874,14 @@
    1.08
   ],
   "potential_cropland_t": [
-   3760.0,
-   67800.0
+   3820.0,
+   68800.0
   ]
  },
  "capacity": {
   "potential_land_km2": [
-   2510000.0,
-   5650000.0
+   2550000.0,
+   5730000.0
   ],
   "dry_land_km2": 23400000.0,
   "fog_desert_km2": 6220000.0,
@@ -908,8 +908,8 @@
      {
       "people": 100000000.0,
       "food_land_share_of_potential_land": [
-       0.00596,
-       0.0355
+       0.00597,
+       0.0357
       ],
       "grazing_share_of_fog_desert": [
        0.119,
@@ -1064,8 +1064,8 @@
      {
       "people": 1000000000.0,
       "food_land_share_of_potential_land": [
-       0.0596,
-       0.355
+       0.0597,
+       0.357
       ],
       "grazing_share_of_fog_desert": [
        1.19,
@@ -1220,8 +1220,8 @@
      {
       "people": 10000000000.0,
       "food_land_share_of_potential_land": [
-       0.596,
-       3.55
+       0.597,
+       3.57
       ],
       "grazing_share_of_fog_desert": [
        11.9,
@@ -1302,7 +1302,7 @@
       588000000.0
      ],
      "crops_30x30": [
-      1970000000.0,
+      1960000000.0,
       11700000000.0
      ],
      "area_30x30": [
@@ -1322,11 +1322,11 @@
       420000000.0
      ],
      "crops_half": [
-      1410000000.0,
-      8390000000.0
+      1400000000.0,
+      8370000000.0
      ],
      "area_half": [
-      931000000.0,
+      929000000.0,
       1400000000.0
      ],
      "grazing_half": [
@@ -1371,7 +1371,7 @@
       "people": 100000000.0,
       "food_land_share_of_potential_land": [
        0.00246,
-       0.0156
+       0.0157
       ],
       "grazing_share_of_fog_desert": [
        0.0,
@@ -1448,8 +1448,8 @@
      {
       "people": 300000000.0,
       "food_land_share_of_potential_land": [
-       0.00738,
-       0.0469
+       0.00739,
+       0.0472
       ],
       "grazing_share_of_fog_desert": [
        0.0,
@@ -1527,7 +1527,7 @@
       "people": 1000000000.0,
       "food_land_share_of_potential_land": [
        0.0246,
-       0.156
+       0.157
       ],
       "grazing_share_of_fog_desert": [
        0.0,
@@ -1604,8 +1604,8 @@
      {
       "people": 3000000000.0,
       "food_land_share_of_potential_land": [
-       0.0738,
-       0.469
+       0.0739,
+       0.472
       ],
       "grazing_share_of_fog_desert": [
        0.0,
@@ -1683,7 +1683,7 @@
       "people": 10000000000.0,
       "food_land_share_of_potential_land": [
        0.246,
-       1.56
+       1.57
       ],
       "grazing_share_of_fog_desert": [
        0.0,
@@ -1761,14 +1761,14 @@
     "limits_people": {
      "land_30x30": [
       4350000000.0,
-      28500000000.0
+      28400000000.0
      ],
      "crops_30x30": [
-      4480000000.0,
-      28500000000.0
+      4450000000.0,
+      28400000000.0
      ],
      "area_30x30": [
-      5100000000.0,
+      5070000000.0,
       45800000000.0
      ],
      "grazing_30x30": [
@@ -1784,11 +1784,11 @@
       20300000000.0
      ],
      "crops_half": [
-      3200000000.0,
+      3180000000.0,
       20300000000.0
      ],
      "area_half": [
-      3640000000.0,
+      3620000000.0,
       32700000000.0
      ],
      "grazing_half": [
@@ -1832,25 +1832,25 @@
  "diet_limits_people": {
   "plant_based": {
    "crops_30x30": [
-    5150000000.0,
-    30700000000.0
+    5130000000.0,
+    30600000000.0
    ],
    "crops_half": [
-    3680000000.0,
+    3660000000.0,
     21900000000.0
    ]
   },
   "plant_rich": {
    "crops_30x30": [
-    4480000000.0,
-    28500000000.0
+    4450000000.0,
+    28400000000.0
    ],
    "grazing_30x30": [
     4350000000.0,
     1000000000000000.0
    ],
    "crops_half": [
-    3200000000.0,
+    3180000000.0,
     20300000000.0
    ],
    "grazing_half": [
@@ -1860,7 +1860,7 @@
   },
   "earth_average": {
    "crops_30x30": [
-    4150000000.0,
+    4130000000.0,
     24700000000.0
    ],
    "grazing_30x30": [
@@ -1868,7 +1868,7 @@
     1050000000.0
    ],
    "crops_half": [
-    2970000000.0,
+    2950000000.0,
     17700000000.0
    ],
    "grazing_half": [
@@ -1878,7 +1878,7 @@
   },
   "earth_affluent": {
    "crops_30x30": [
-    1970000000.0,
+    1960000000.0,
     11700000000.0
    ],
    "grazing_30x30": [
@@ -1886,8 +1886,8 @@
     588000000.0
    ],
    "crops_half": [
-    1410000000.0,
-    8390000000.0
+    1400000000.0,
+    8370000000.0
    ],
    "grazing_half": [
     420000000.0,
@@ -1896,11 +1896,11 @@
   },
   "earth_affluent_fed_on_crops": {
    "crops_30x30": [
-    1040000000.0,
+    1030000000.0,
     6890000000.0
    ],
    "crops_half": [
-    740000000.0,
+    732000000.0,
     4920000000.0
    ]
   }

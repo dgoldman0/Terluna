@@ -14,7 +14,12 @@ Absorption a, scattering b and backscattering b_b (per metre) add over the water
   water through Hapke's equivalent slab (the grains' internal transmission stays, their surface reflection
   follows the index relative to water), for equant grains of a stated size and density. Diffraction adds
   forward scattering equal to the geometric cross-section; a share of the geometrically scattered light,
-  0.06, goes backward, which gives the backscattering ratios of 0.015-0.03 measured for mineral particles.
+  0.06, goes backward, which gives the backscattering ratios of 0.015-0.03 measured for mineral particles;
+- developed fines, the weathered and biologically worked particles of developed soils: Earth's coastal
+  non-algal particles, absorbing 0.041 m2 per g at 443 nm (56% variation) with an exponential slope of
+  0.0123 per nm (Babin et al. 2003a) and scattering 0.5 m2 per g at 555 nm, coastal waters' mean (Babin et
+  al. 2003b), held flat across the visible, with the backscattering ratio of Petzold's average particle,
+  0.0183.
 
 The remote-sensing reflectance is that of Lee et al. (2002): u = b_b/(a + b_b), r_rs = u (0.089 + 0.125 u) below
 the surface and R_rs = 0.52 r_rs / (1 - 1.7 r_rs) above it, per steradian. The downwelling light's diffuse
@@ -32,6 +37,9 @@ from illumination.water_column.fetch_inputs import path
 RELAB_INCIDENCE_DEG, RELAB_EMISSION_DEG = 30.0, 0.0
 CDOM_SLOPE = 0.0176
 BACKWARD_SHARE = 0.06
+# Developed fines (Babin et al. 2003a, J. Geophys. Res. 108, 3211; 2003b, Limnol. Oceanogr. 48, 843; Petzold 1972).
+DEVELOPED = dict(absorption_443_m2_g=0.041, absorption_slope_per_nm=0.0123, scattering_555_m2_g=0.5,
+                 backscattering_ratio=0.0183)
 # Real index and grain density: mare soils of pyroxene, glass and ilmenite near 1.7 and 3.1 g/cm3; highland
 # soils of plagioclase near 1.6 and 2.9 g/cm3 (Carrier, Olhoeft and Mendell 1991, Lunar Sourcebook, ch. 9).
 SOILS = {"12001": dict(name="Apollo 12 mare soil, Oceanus Procellarum", index=1.70, density_g_m3=3.1e6),
@@ -126,8 +134,21 @@ def albedo_in_water(albedo_in_air, grain_index, water_index):
     return se_w + (1 - se_w) * (1 - si_w) * theta_w / (1 - si_w * theta_w)
 
 
+def developed_fines(wavelength_nm, concentration_g_m3):
+    """Absorption, scattering and backscattering of developed fines (per metre), Earth's coastal non-algal
+    particles by dry mass."""
+    w = np.asarray(wavelength_nm, float)
+    d = DEVELOPED
+    a = concentration_g_m3 * d["absorption_443_m2_g"] * np.exp(-d["absorption_slope_per_nm"] * (w - 443.0))
+    b = np.full_like(w, concentration_g_m3 * d["scattering_555_m2_g"])
+    return a, b, b * d["backscattering_ratio"]
+
+
 def fines(wavelength_nm, concentration_g_m3, sample="12001", diameter_um=4.0, water_index=1.34):
-    """Absorption, scattering and backscattering of suspended regolith fines (per metre)."""
+    """Absorption, scattering and backscattering of suspended fines (per metre): developed fines, or raw
+    regolith from one of the Apollo soils."""
+    if sample == "developed":
+        return developed_fines(wavelength_nm, concentration_g_m3)
     soil = SOILS[sample]
     w = np.asarray(wavelength_nm, float)
     lam, refl = soil_reflectance(sample)

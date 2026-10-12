@@ -49,20 +49,20 @@ INPUTS = {
 IMPORTED_CODE = ('illumination/calendar/geometry.py', 'illumination/calendar/validate.py', 'illumination/calendar/disk.py')
 
 # Other branches' files, bound by commit, blob and SHA-256 until the branches are integrated (then read in-tree).
-MAIN_COMMIT = '128d5fee23957cfa1ee8d037728ae62c94e31936'
-PROVISIONING_COMMIT = 'b82e0dc18df96e02aa9071f21448b93ad2ab87a0'
+MAIN_COMMIT = None
+PROVISIONING_COMMIT = None
 CROSS_BRANCH = {
     'research/studies/joint_synthesis/results/places.json': dict(
         branch='main', commit=MAIN_COMMIT, blob='3aa6d0939faf502433c03105b831a9994ab3315d',
         sha256='9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d',
         schema='terluna.research.joint-synthesis-places/1'),
     'research/studies/daily_life/results/daily_life.json': dict(
-        branch='domain/provisioning', commit=PROVISIONING_COMMIT, blob='66d9b13b9c65984c6004d46f6e4f1c4a2fbca916',
-        sha256='db9b1996a1468fc652b39fae1d7f60eb2f762f2d4ee106a7c2f846cd52184323',
+        branch='main', commit=PROVISIONING_COMMIT, blob='d51ed6855bdadb333bff9a74753016f74f0dee79',
+        sha256='9c21c92c54f19dc351bec855e1289da04c68021c7f5e14ac478514cacf22ee36',
         schema='terluna.research.daily-life/1'),
     'research/studies/ways_of_living/results/ways_of_living.json': dict(
-        branch='domain/provisioning', commit=PROVISIONING_COMMIT, blob='8efea099bf293804c38fcab272a8c038218385ce',
-        sha256='cbba4058819147f2d2bb2d02f1dae91320224b3e723e2820bd0f6ba95d64cd0a',
+        branch='main', commit=PROVISIONING_COMMIT, blob='f2b29ecec1566d67e0b6cad21a2038d3f68c8ea4',
+        sha256='ffe48e6467008176b9e89f7fb9b3afc5d63f0874fe3a86156a0aa81bac35d09d',
         schema='terluna.research.ways-of-living/1'),
 }
 

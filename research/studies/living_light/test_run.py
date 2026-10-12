@@ -50,11 +50,14 @@ def test_cross_branch_inputs_bound_by_commit_blob_and_hash(path, product):
     spec = m.CROSS_BRANCH[path]
     assert hashlib.sha256(raw).hexdigest() == spec['sha256']
     assert source in ('in-tree', 'git object at the pinned commit')
-    try:
-        blob = subprocess.run(['git', '-C', str(m.ROOT), 'rev-parse', f"{spec['commit']}:{path}"], check=True,
-                              capture_output=True, text=True).stdout.strip()
-    except (OSError, subprocess.CalledProcessError):
-        pytest.skip('git rev-parse unavailable')
+    if spec['commit'] is None:            # read in-tree since the joint integration: the blob of these bytes
+        blob = hashlib.sha1(b'blob %d\0' % len(raw) + raw).hexdigest()
+    else:
+        try:
+            blob = subprocess.run(['git', '-C', str(m.ROOT), 'rev-parse', f"{spec['commit']}:{path}"], check=True,
+                                  capture_output=True, text=True).stdout.strip()
+        except (OSError, subprocess.CalledProcessError):
+            pytest.skip('git rev-parse unavailable')
     assert blob == spec['blob']
     recorded = product['producer']['cross_branch_inputs'][path]
     assert recorded['commit'] == spec['commit'] and recorded['sha256'] == spec['sha256']

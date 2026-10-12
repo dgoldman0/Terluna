@@ -13,7 +13,7 @@
    "research/studies/atmospheric_co2/results/atmospheric_co2.json": "80db612918d3fc44",
    "atmosphere/loss_response/results/euv_sweep.csv": "95527c374586e4f8",
    "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
-   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "1f35337c24ecf867",
+   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "132011caa1688ff4",
    "research/studies/conservation/results/gates.json": "65b855711fbf1b06",
    "research/studies/joint_synthesis/results/ledgers.json": "563f50e4a71b4cae"
   },
@@ -94,18 +94,18 @@
   ]
  },
  "oxygen_sink": {
-  "runoff_rescale": 0.822,
+  "runoff_rescale": 1.0,
   "rock_weathered_gt_yr": [
-   0.93,
-   9.33
+   0.96,
+   9.61
   ],
   "o2_sink_mt_yr": [
-   5.2,
-   166.3
+   5.4,
+   171.3
   ],
   "o2_cycle_myr": [
-   3.7,
-   117.9
+   3.6,
+   114.5
   ],
   "erosion_limited_o2_mt_yr": [
    4.0,
@@ -116,8 +116,8 @@
    206.5
   ],
   "times_all_escape": [
-   118,
-   3763
+   121,
+   3876
   ]
  },
  "film": {
@@ -325,40 +325,40 @@
  },
  "fresh_seas": {
   "cations_g_m2_yr": [
-   5.66,
-   56.63
+   5.83,
+   58.31
   ],
   "bicarbonate_g_m2_yr": [
-   21.6,
-   215.7
+   22.2,
+   222.1
   ],
   "silica_g_m2_yr": [
-   17.2,
-   171.8
+   17.7,
+   176.9
   ],
   "rise_mg_kg_per_year": {
    "cations": [
-    0.011,
-    0.112
+    0.012,
+    0.115
    ],
    "all_dissolved": [
-    0.088,
-    0.878
+    0.09,
+    0.904
    ]
   },
   "years_to_1_g_kg": {
    "cations": [
-    8900.0,
-    89300.0
+    8700.0,
+    86800.0
    ],
    "all_dissolved": [
     1100.0,
-    11400.0
+    11100.0
    ]
   },
   "years_to_earth_salinity_cations": [
-   313000.0,
-   3127000.0
+   304000.0,
+   3037000.0
   ],
   "note": "Calcite and silica precipitate and biology takes up silica, so the dissolved total is an upper bound on the rise; the imported water's own salts come on top."
  }

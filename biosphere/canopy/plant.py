@@ -8,11 +8,12 @@ with its leaves at the land air temperature of the chosen climate through the lu
 far sides (climate/gcm/climatology.py, run A28_dim5_moon, years 20-29, composited by hour angle).
 
 Light. Above 30 degrees of Sun height the canopy gets the surface-light product's spectra. Lower down the
-two-stream product falls short of the spherical sky atlas (illumination/sky), so its diffuse light is
-scaled until the total matches the atlas; and after sunset, when the Moon's tall sky stays sunlit far above
-the ground, the canopy gets the atlas's twilight illuminance with the spectrum of the diffuse light at
-1 degree, down to 35 degrees below the horizon. The atlas uses unfiltered sunlight, so its twilight is
-reduced by the shield's share at 1 degree.
+two-stream product falls short of the spherical sky, so its diffuse light is scaled until the total matches
+the solved-column sky (illumination/sky/results/solved_sky.json: the design Moon's 1.2 atm column under the
+chosen shield, and the Earth control's 1 atm column in unfiltered sunlight); and after sunset, when the
+Moon's tall sky stays sunlit far above the ground, the canopy gets the solved sky's twilight illuminance with
+the spectrum of the diffuse light at 1 degree, down to 35 degrees below the horizon. The solved samples reach
+30 degrees below the horizon; below that the illuminance falls on, log-linearly from the last two samples.
 
 Carbon. Maintenance respiration is the leaves' own (the leaf model's) plus that of stems and roots, which
 follows Q10 = 2 and is set so that the same stand under Earth's sky, with the same temperatures over a
@@ -49,9 +50,9 @@ SCHEMA = 'terluna.biosphere.plant-carbon-cycle/1'
 CLIMATE_RUN, CLIMATE_YEARS = 'A28_dim5_moon', (20, 29)
 CLIMATOLOGY = ROOT / 'climate' / 'gcm' / 'products' / f'climatology_{CLIMATE_RUN}.npz'
 CLIMATOLOGY_SCHEMA = 'terluna.climate.gcm-climatology/1'
-ATLASES = dict(moon=ROOT / 'illumination' / 'sky' / 'data' / 'moon_no_ozone_atlas.npz',
-               earth=ROOT / 'illumination' / 'sky' / 'data' / 'earth_atlas.npz')
-ATLAS_CASES = dict(moon='moon_1.2atm/unfiltered', earth='earth_control/unfiltered')
+SOLVED_SKY = ROOT / 'illumination' / 'sky' / 'results' / 'solved_sky.json'
+SOLVED_SKY_SCHEMA = 'terluna.illumination.solved-spherical-sky/1'
+SOLVED_WORLDS = dict(moon='moon_1.2atm', earth='earth_control')
 BANDS = {'0': (0.0, 15.0), '30': (20.0, 40.0), '60': (50.0, 70.0)}      # |latitude| of the land rows
 SIDES = ('near', 'far')
 Q10 = 2.0
@@ -70,7 +71,6 @@ DARK_UMOL = 1.0
 STEPS = 5760
 MOON_DAY_S = SYNODIC_MONTH_DAYS * 86400.0
 GRAMS = canopy.GRAMS_C_PER_UMOL
-LUX_Y = np.array([0.2126, 0.7152, 0.0722])
 STRATEGIES = dict(earth_like=(1.0, False), idle_half=(0.5, False), idle_quarter=(0.25, False),
                   idle_tenth=(0.1, False), regrow_leaves=(1.0, True), regrow_leaves_idle_quarter=(0.25, True))
 
@@ -103,6 +103,28 @@ def along_cycle(hour_centres, values, steps=STEPS):
     return np.interp(hour, xp, np.tile(values, 3))
 
 
+def solved_sky():
+    """Total horizontal illuminance of the solved-column sky by Sun height for each world, and its hash."""
+    raw = SOLVED_SKY.read_bytes()
+    data = json.loads(raw)
+    if data['schema'] != SOLVED_SKY_SCHEMA:
+        raise ValueError('Unexpected solved-sky product schema')
+    out = {}
+    for w, key in SOLVED_WORLDS.items():
+        rows = sorted(data['worlds'][key]['samples'], key=lambda r: r['sun_deg'])
+        out[w] = (np.array([r['sun_deg'] for r in rows]), np.array([r['total_horizontal_lux'] for r in rows]))
+    return out, hashlib.sha256(raw).hexdigest()[:16]
+
+
+def sky_lux(suns, lux, e):
+    """Illuminance at Sun height e, interpolated in its logarithm; below the lowest sample it falls on at the
+    rate of the last two samples."""
+    log = np.log(lux)
+    if e < suns[0]:
+        return float(np.exp(log[0] + (log[1] - log[0]) / (suns[1] - suns[0]) * (e - suns[0])))
+    return float(np.exp(np.interp(e, suns, log)))
+
+
 def light():
     """Photon spectra at the ground over a black ground, per world, at Sun heights from -35 to 90 degrees.
 
@@ -111,29 +133,24 @@ def light():
     """
     lam, worlds, light_sha = canopy.surface_light()
     product = json.loads(canopy.LIGHT.read_bytes())
-    atlas_rows = {w: {r['sun_deg']: r['total_ratio'] for r in product['checks']['atlas_comparison'][ATLAS_CASES[w]]['rows']}
-                  for w in worlds}
+    sky, sky_sha = solved_sky()
     par = (lam > canopy.PAR_NM[0]) & (lam < canopy.PAR_NM[1])
-    shas = dict(surface_light=light_sha)
+    shas = dict(surface_light=light_sha, solved_sky=sky_sha)
     out = {}
     for w, src in worlds.items():
         case = product['cases'][canopy.WORLDS[w]['case']]['summaries']
-        bare = product['cases'][ATLAS_CASES[w]]['summaries']
+        suns, lux = sky[w]
         heights = src['heights']
         direct, diffuse = src['direct'].copy(), src['diffuse'].copy()
         for i, h in enumerate(heights):
             if h < SCALED_BELOW_DEG:
                 s = case[str(h)]['0.1']
                 total, beam = s['illuminance_lux'], s['direct_illuminance_lux']
-                diffuse[i] *= (atlas_rows[w][h] * total - beam) / (total - beam)
-        atlas = np.load(ATLASES[w])
-        shas[f'atlas_{w}'] = hashlib.sha256(ATLASES[w].read_bytes()).hexdigest()[:16]
-        lux = (atlas['direct_horizontal'] + atlas['diffuse']) @ LUX_Y
+                diffuse[i] *= (sky_lux(suns, lux, h) - beam) / (total - beam)
         low = int(np.argmin(np.abs(heights - 1.0)))
         s1 = case['1.0']['0.1']
-        shield = s1['illuminance_lux'] / bare['1.0']['0.1']['illuminance_lux']
         per_lux = src['diffuse'][low] / (s1['illuminance_lux'] - s1['direct_illuminance_lux'])
-        twilight = np.array([per_lux * shield * float(np.interp(e, atlas['suns'], lux)) for e in TWILIGHT_DEG])
+        twilight = np.array([per_lux * sky_lux(suns, lux, e) for e in TWILIGHT_DEG])
         order = np.argsort(heights)
         elevations = np.concatenate([TWILIGHT_DEG, heights[order]])
         out[w] = dict(elevations=elevations,
@@ -284,8 +301,8 @@ def twilight_table(tables):
 
 
 EVIDENCE = ('A carbon budget for one stand over one solar cycle: the canopy model\'s photosynthesis, with the light '
-            'below 30 degrees and after sunset taken from the spherical sky atlas (unfiltered sunlight on an '
-            'exponential column, scaled by the shield), at the chosen climate\'s land air temperatures through the '
+            'below 30 degrees and after sunset taken from the solved-column sky under the chosen shield '
+            '(illumination/sky/results/solved_sky.json), at the chosen climate\'s land air temperatures through the '
             'lunar day (3-day GCM means composited by hour angle); leaf respiration from the leaf model; stem and root '
             'maintenance set from an Earth carbon-use efficiency of 0.5 (0.4-0.6 tested) with Q10 = 2. The '
             'strategies are scenarios: whether leaves can idle without dark-induced senescence, how fast metabolism '

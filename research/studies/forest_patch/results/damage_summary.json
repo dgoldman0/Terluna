@@ -6,30 +6,35 @@
     "shelter": [
       12,
       12,
-      14,
-      7,
-      4
+      11,
+      8,
+      4,
+      2
     ],
     "contacts": [
-      12,
-      12,
-      16,
-      5,
-      4
+      8,
+      9,
+      11,
+      11,
+      4,
+      4,
+      2
     ],
     "contacts_grafts": [
-      12,
+      9,
       11,
-      18,
-      8
+      13,
+      8,
+      6,
+      2
     ],
     "fine_shelter": [
       7,
       7,
       7,
-      10,
-      12,
-      6
+      7,
+      7,
+      14
     ]
   },
   "final_failed": {
@@ -39,5 +44,5 @@
     "fine_shelter": 49
   },
   "real_duration_assigned": false,
-  "max_domain_utilization": 0.8675291326721648
+  "max_domain_utilization": 0.8735245050911868
 }

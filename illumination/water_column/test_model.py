@@ -59,3 +59,12 @@ def test_constituents_add():
     total = M.water(w, 1.0, 0.1, 2.0, "62231")
     assert total["a"] == pytest.approx(sum(p[0] for p in total["parts"].values()))
     assert total["bb"] == pytest.approx(sum(p[2] for p in total["parts"].values()))
+
+
+def test_developed_fines_follow_their_coastal_basis():
+    w = np.array([443.0, 555.0, 650.0])
+    a, b, bb = M.fines(w, 2.0, "developed")
+    assert a[0] == pytest.approx(2.0 * 0.041)
+    assert a[2] / a[0] == pytest.approx(np.exp(-0.0123 * (650.0 - 443.0)))
+    assert b == pytest.approx(np.full(3, 1.0))
+    assert bb / b == pytest.approx(np.full(3, 0.0183))
