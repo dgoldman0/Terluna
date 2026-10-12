@@ -175,9 +175,27 @@ blooms and living light (provisioning, habitation). The author also set that the
 by regional variation across a connected world, the parks standing apart by their manicuring, and tied the
 taxonomy's open choices to the design path the aerophytes take, putting the taxonomy on hold for later (ecology).
 
+On 12 October the author set heavy automation everywhere: the cities and sky towns kept functional and clean, the parks
+and their amenities almost purely automated, and the wild monitored, evaluated and maintained by machines that join the
+technobiosphere in every way offered, from automatons that behave as members of animal groups to signals and reporting
+built into the organisms and machines in ecological roles. The machines may handle animals and, under conservation's
+ethical standards and people's constant oversight, kill them; their signals sit mostly outside human senses, and field
+machines compost when lost (ecology). The whole system is engineered for extreme uptime, and every consensus decision
+draws on the near-continual input of a well-educated, involved population. A mesh of aerostats drifting near 30 km,
+fixed posts, fibre and towers carry the network to the array, and towns give way to sky reefs on the shared tracks
+(provisioning). What may live wild follows general constraints for an open world, with no containment and regions kept
+distinct loosely, and N2O and methane are held by biology with technologies making up the difference, without an
+ultraviolet window in the shield (ecology). Food comes from a blend of the three mixes that fit, at weights the food
+study sets to the optimum, with heritage meat from the homesteads as a luxury, and the comparison keeps the parks
+(provisioning).
+
 Waiting on the author: the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
+
+The four refreshes the author ordered on 12 October come first: the lunar-cycle ecology register rerun on the corrected
+products, developed fines for the living waters, the forests' leaf area brought to the canopy model's range, and plant
+twilight from the solved sky (ecology, question 14).
 
 1. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
    its light redirected away from the Moon and used where it can be, for computing for instance. The biosphere and
@@ -190,7 +208,8 @@ Waiting on the author: the taxonomy, on hold for later, with its open choices an
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
    storm needs CM1's field solver over terrain, which touches the paused climate programme and waits for the author.
 3. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
-   atmosphere, then the biomes' and cities' emissions in an air with no OH; about an hour of runs once added.
+   atmosphere, then the biomes' and cities' emissions in an air with no OH; about an hour of runs once added. The
+   author holds N2O and methane by biology, with technologies making up the difference.
 4. **The biomes' nitrogen and the dark night** as biological requirements: biological fixation, and the light that
    dark-night organisms tolerate (biosphere, lunar-cycle ecology).
 5. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
