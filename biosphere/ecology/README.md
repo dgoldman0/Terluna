@@ -132,6 +132,24 @@ each setting, and how far people's light reaches the sky:
 - **The dark belt** holds Earth-like darkness on 13% of the dry land and is where luminous organisms signal; near
   towns, direct light matters more to night life than skyglow.
 
+## Machines in the living world, 12 October 2026
+
+The author set the wild under heavy automation, with the machines part of the whole world's technobiosphere, and chose
+every way of joining the two that was offered
+([register](../../research/decisions.md#machines-in-the-living-world-12-october-2026); [machines.md](machines.md)):
+- **The machines' work.** Sensing everywhere, constant evaluation and hands-on work where the evaluation calls for it;
+  automatons that behave as members of animal groups or as their predators; a shared signal vocabulary that sits mostly
+  outside human senses; reporting traits and DNA watermarks; machines in ecological roles; field machines that compost
+  when lost; and handling, killing included, under conservation's ethical standards and people's constant oversight.
+- **What may live wild.** General constraints for an open world, with no containment, no hard limits and regions kept
+  distinct loosely: climate fit, harmless Moon-wide, within the air's sinks, closed cycles, ready for the machines and
+  robust to evolution.
+- **N2O and methane.** Biology first, with technologies making up the difference, and no ultraviolet window in the
+  shield. N2O comes mostly from the wild's soils and waters, 0.3–0.4 ppb a year, and reaches Earth's present level in
+  about a thousand years. Nitrogen fixation feeds the nitrogen it comes from, and breaking it down with lamps in open
+  air would take hundreds of terawatts. The deep column's warming of both gases comes first ([questions](questions.md),
+  item 3).
+
 ## What the project already says
 
 Each finding below follows from results the repository already holds, read together, with the literature that

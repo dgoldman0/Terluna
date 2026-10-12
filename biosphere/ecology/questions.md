@@ -28,6 +28,8 @@ on this laptop. The findings behind them are in the [README](README.md).
      insects and migrants, and the illumination solver's twilit sky aloft.
 3. **How much the reduced gases warm the Moon.** The screen puts methane near 20 ppm at central values, and N2O builds
    0.3–0.4 ppb a year. Their effect in a column 7.6 times Earth's has not been computed.
+   The author chose on 12 October to hold both gases in check by biological means, coupled with advanced technologies
+   that make up the difference, with no ultraviolet window in the shield ([machines.md](machines.md)).
 
    **How:** the line-by-line radiative–convective column with CH4 and N2O added, a sweep of a few hours.
 4. **The ecology's case in the ultraviolet decision (O3).** Keep the present short-wave shield, with adaptation to
@@ -75,9 +77,11 @@ on this laptop. The findings behind them are in the [README](README.md).
    - Monthly plankton cycles, intertidal monthly wetlands, and methane from lakes by depth.
 
    **How:** a one-dimensional lake model through the lunar month, with the seas' composition as scenarios.
-11. **What may live wild.** Pollen and spores spread Moon-wide, and no containment is demonstrated for wild
-    engineered organisms. This is an ethical and governance decision for the author and the human paper. The
-    ecology supplies dispersal kernels at lunar gravity and the risks.
+11. **What may live wild.** Pollen and spores spread Moon-wide, and no containment is demonstrated for wild engineered
+    organisms. On 12 October the author answered in general terms: no containment, the biomes shaped by climate and the
+    parks by manicuring, no hard limits on wild designs, regions kept distinct loosely, and six starting constraints
+    ([machines.md](machines.md#what-may-live-wild)). The ecology supplies dispersal kernels at lunar gravity, the risks
+    and a test for each constraint.
 12. **Fire.** No one has measured natural fuels at 17.5% oxygen, 1.2 atm and 0.16 g. Whether the grassy biomes need
     managed fire or grazing follows from it. **How:** a literature and modelling screen of partial-gravity
     flammability, and the open question of measurement.
@@ -91,7 +95,7 @@ on this laptop. The findings behind them are in the [README](README.md).
     - Bring the forest studies' leaf area to the canopy model's range.
     - Take plant twilight from the solved sky.
 
-    These are changes to main's studies, for the author to order.
+    These are changes to main's studies; the author ordered all four on 12 October.
 
 ## Aerophyte follow-up: giants, water and storms
 
