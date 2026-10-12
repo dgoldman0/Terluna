@@ -32,8 +32,10 @@ on this laptop. The findings behind them are in the [README](README.md).
      homesteads decide how C′ is built.
    - **What remains to size:**
      - the parks under the compromise: their water on dry land, in the dry highlands and in the fog desert and polar
-       lowland, which hold 1.65 million km² of them; the energy of the automation that keeps them; their amenities;
-       and their night light within the hybrid fifth of the dark sky;
+       lowland, which hold 1.65 million km² of them, under the dry-garden design the author adopted
+       ([habitation](../habitation/README.md#parks-and-gardens)): water placed sparingly, dry-adapted planting and the
+       lunar cycle as the show; the energy of the automation that keeps them; their amenities; and their night light
+       within the hybrid fifth of the dark sky;
      - the high-latitude towns' water from lakes and seas a median 32.8 km away, the driest homes on the Moon;
      - the work of the middle latitudes' farms beyond the homesteads, the crews' regional ships or crew towns at
        30–45°, and the homesteads' own design;

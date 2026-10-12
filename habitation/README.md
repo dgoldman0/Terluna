@@ -90,6 +90,38 @@ settle 15% of the high ground, at the metropolis's density 3.8%. Water reaches t
 people from the nearest lakes and 7–21 GW from the sea, a tenth of that with 90% recovered; a sky boat climbs 6 km for
 2.3 kWh, and ferries and regional ships carry the longer trips up.
 
+## Parks and gardens
+
+The author set the hybrid land as heavily manicured megaparks and great gardens, food gardens among them, for leisure
+and entertainment, with the shops, restrooms and places to rest so much land needs, used by residents and visitors and
+kept by automation ([register](../research/decisions.md#people-on-the-moon-and-beyond-11-october-2026)). Under the
+author's compromise of 30% wild with another 20% hybrid they cover 4.68 million km², 1.65 million km² of it in the fog
+desert and the polar lowland ([distributions](../research/studies/distributions/README.md)). On 12 October the author
+asked that they be built around the lower water, and adopted a design for richness within the dry land:
+- **Water placed sparingly, where it shows.** In the fog desert, where the humid air (68% by day, 93% at night) and calm
+  nights slow evaporation, reservoirs feed still pools and rills; the windless nights make the pools mirrors for the
+  twilight sky and the sky reefs, as reservoirs and narrow channels fed the Persian paradise gardens. In the
+  highlands' clear, drier air, stone and gravel rivers give the shape of water, as in Japanese dry gardens, with a few
+  small shaded features. Stone and ash mulches gather the fog desert's dew and slow evaporation, as on Lanzarote's La
+  Geria vineyards, living soil crusts green with each dew, and the parks' own treated water irrigates the plantings
+  around them.
+- **Dry-adapted planting.** Bulbs, succulents, aromatic shrubs and grasses, after the richest dry floras such as the
+  Succulent Karoo and the fynbos; silver foliage, which saves water and catches the faint twilight of the 354-hour
+  night; each region's own palette, since regional variation tells the Moon's organisms apart; and dryland food
+  gardens.
+- **The lunar cycle as the show.** Clocks keyed to sunrise and sunset bring a wave of bloom at each dawn and dusk, with
+  the plants resting through the long noon, and living light and night-scented flowers carry the gardens through the
+  night.
+- **Shade and microclimate.** In the tall, dense air the whole sky lights a space, so pergolas, vine arbours and shade
+  sails cut evaporation while the plantings stay lit. Thirstier plantings take the hollows, where cold air pools at
+  night, and the upslope sides, where the little rain falls three times more; the toughest take the ridges.
+
+Each garden is a monthly performance: dawn and dusk blooms, silver foliage and living light for the long night, and
+water kept for a few features, mirror pools in the fog desert and stone rivers in the highlands. Fog nets play little
+part, since the fog desert's fogs sit in nearly still air, low in the night's cold layer
+([food systems](../research/studies/food_systems/README.md)). The parks' water, automation energy and night light
+remain to be sized under this design.
+
 ## Community settings from the atlas
 
 The [conservation study](../research/studies/conservation/README.md) lists candidate settings for communities on the 28% [atlas](../geography/README.md#atlas-at-the-selected-water-share):
