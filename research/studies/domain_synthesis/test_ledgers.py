@@ -105,3 +105,12 @@ def test_towns_meet_reefs_by_the_distributions_rule(product):
         assert L.reef_passes(float(cover), 1.0, towns['relative_drift_m_s'], 1.0, widths=(0.1,))[1] == \
             pytest.approx(small[1], rel=1e-2)
         assert reefs[1] < small[0]
+
+
+def test_array_power_divides_the_array_heat(product):
+    a, h = product['array_power'], product['heat']['array']
+    for e in (0, 1):
+        total = h['with_close_computing']['heat_tw'][e]
+        assert close(a['sky_towns']['intake_tw'][e] + a['ground']['intake_tw'][e], total)
+        assert close(a['sky_towns']['w_m2'][e], a['sky_towns']['intake_tw'][e] * 1e12 / (a['sky_towns']['tops_km2'] * 1e6))
+    assert a['beams']['5.8_ghz']['receiver_m_from_a_tile'][1] < a['beams']['2.45_ghz']['receiver_m_from_a_tile'][0]

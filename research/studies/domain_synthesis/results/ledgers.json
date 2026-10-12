@@ -2,20 +2,22 @@
   "schema": "terluna.research.domain-synthesis-ledgers/1",
   "producer": {
     "files": {
-      "research/studies/domain_synthesis/ledgers.py": "63d70ecbc23d3a30aeb66907180459c2d4bfbb5dcc0a039354447674f05def54"
+      "research/studies/domain_synthesis/ledgers.py": "04bfaa09658204ad139237c5c42c28f59173a544f5346341418acd2ecc5a0270"
     },
     "inputs": {
-      "research/studies/distributions/results/distributions.json": "38ffcc0665d70bded43600007c04708c08ddacbe747dfea7440d3ff905b7ae56",
-      "research/studies/food_systems/results/food_blend.json": "c24d1ae08963eed1d95deb5e047710e7541634d0e7afbbf0c318468607a94c34",
+      "research/studies/distributions/results/distributions.json": "ddcfad0a683d5270684692e554d7c4a53074291c6f88e276dc884446c328630e",
+      "research/studies/food_systems/results/food_blend.json": "db7b4d5894ef9a1349c36f1a2ebf262ac8a2063d254e9e20af93916b94fa7a5d",
       "provisioning/results/population.json": "d562cdabe6eee18fe40cfc16f6a65177ec16f7dd1fd8584a4dad80d271b85895",
       "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d",
       "biosphere/ecology/results/people.json": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
-      "resources/results/sea_phosphorus.json": "47b600895919319d03e16c4193051bfe2827b304d85b5ac427d688c7f3ba4ddb",
+      "resources/results/sea_phosphorus.json": "9fb7acc3ea48903501af57223d496cb0be542a901bb351ec8e56ae14e13eff31",
       "research/studies/sky_ecology/results/sky_ecology.json": "2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3",
       "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f3a09b17dc088037560bb5b7f31f4342ae16239d4bf22013a",
       "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327a13d9a01db7bb711fb5177a5d2b0227c7085826ad8a85a65",
       "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d42be3598a6f4896cc72c4c5aa0432ad9b468dbc08191f684",
-      "research/studies/sky_fleet/results/sky_fleet.json": "4826a86d183fb13d004b89c9bd70002aac06426b075411bdcba8d221175edfc8"
+      "research/studies/sky_fleet/results/sky_fleet.json": "4826a86d183fb13d004b89c9bd70002aac06426b075411bdcba8d221175edfc8",
+      "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa384b70a0cffda0ed8f62ec5737eea53e264e7f4e9acab4d6",
+      "research/studies/solar_shield_array/results/integrated_ledger.json": "68ad477ab2cc80c4dbe850a4fda9f6d9595094f323bbf07b3b7be8c8b117cc7a"
     }
   },
   "evidence": "Arithmetic on committed screen products of the three domains and main's studies: C' and the food blend recombined in totals, the trace gases' sources and sinks summed, resources' phosphorus ledger read at the blend's losses, and the sky's layers read from their products. Nothing is simulated here; each figure keeps its source's evidence state, and the blend's fields are not placed band by band.",
@@ -819,5 +821,69 @@
     },
     "regional_docks_km": 24.1,
     "summit_crown_km": 35.6
+  },
+  "array_power": {
+    "sky_towns": {
+      "intake_tw": [
+        8.34,
+        44.9
+      ],
+      "tops_km2": 547000.0,
+      "w_m2": [
+        15.3,
+        82.1
+      ]
+    },
+    "ground": {
+      "intake_tw": [
+        22.1,
+        100.0
+      ],
+      "receiver_km2_at_1978_mean": [
+        450000.0,
+        2050000.0
+      ],
+      "receiver_km2_at_1978_peak": [
+        96000.0,
+        436000.0
+      ],
+      "w_m2_over_the_blends_fields": [
+        32.7,
+        54.0
+      ]
+    },
+    "intensities_w_m2": {
+      "rectenna_1978_mean": 49.0,
+      "rectenna_1978_peak": 230.0,
+      "public_reference_level": 10.0
+    },
+    "beams": {
+      "2.45_ghz": {
+        "receiver_m_from_a_tile": [
+          514.0,
+          561.0
+        ],
+        "transmitter_side_m_for_a_town_top": [
+          5140.0,
+          5610.0
+        ]
+      },
+      "5.8_ghz": {
+        "receiver_m_from_a_tile": [
+          217.0,
+          237.0
+        ],
+        "transmitter_side_m_for_a_town_top": [
+          2170.0,
+          2370.0
+        ]
+      }
+    },
+    "ring_middle_radius_km": 20000.0,
+    "distance_km": [
+      18300.0,
+      19900.0
+    ],
+    "tau": 2.04
   }
 }

@@ -201,8 +201,14 @@ biomes' own budgets decide the air first; phosphorus closes by dredging 8–51% 
 sky between 10 and 30 km is shared by the summit metropolis, the sky towns, the reefs, gliders, regional ships and
 the storms, with the network above most of it.
 
-Waiting on the author: the synthesis's decisions, and the taxonomy, on hold for later, with its open choices and the
-aerophytes' scientific name.
+The author then decided the synthesis's list: the gases' levels wait for their warming in the deep column, which
+comes next; food and the sky towns run on the array's power given a good distribution recommendation; added dimming
+can be had by extracting more sunlight, and the fleet's glow is the problem to work out; heritage meat is 1–2 kg a
+person a year; sky towns fly in the reefs' layer, with the preference going to the reefs if they become part of the
+useful balancing system; and the network's stability decides how its nodes meet the tallest storms.
+
+Waiting on the author: the array's power distribution recommendation (domain synthesis), and the taxonomy, on hold
+for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 

@@ -21,7 +21,9 @@ placing the blend's fields band by band, as the distributions study does, is lef
   full capture, and the least power that complete separation takes;
 - phosphorus: resources' ledger at 8 billion, with the blend's losses at both ends, and the sky's need beside it;
 - heights: the sky's layers and what uses them, from the products, with the storms' tops, the cloud at the
-  network's height and the sky towns' passes of sky reefs, by the distributions study's encounter rule.
+  network's height and the sky towns' passes of sky reefs, by the distributions study's encounter rule;
+- array power: with power from the array, what the sky towns' tops and the ground's receivers take, at the 1978
+  reference rectenna's intensities, and how wide a beam from the ring lands.
 """
 from __future__ import annotations
 import hashlib
@@ -30,7 +32,7 @@ import math
 import sys
 from pathlib import Path
 
-from shared.constants import GAS_CONSTANT, JULIAN_DAY, JULIAN_YEAR_DAYS
+from shared.constants import GAS_CONSTANT, JULIAN_DAY, JULIAN_YEAR_DAYS, MOON_RADIUS, SPEED_OF_LIGHT
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -48,6 +50,8 @@ INPUTS = {
     'research/studies/sky_ships/results/sky_ships.json': None,
     'research/studies/summit_tower/results/summit_tower_form.json': None,
     'research/studies/sky_fleet/results/sky_fleet.json': None,
+    'research/studies/solar_shield_array/results/ring_layout.json': None,
+    'research/studies/solar_shield_array/results/integrated_ledger.json': None,
 }
 RULE = 'wild_30_hybrid_20'              # the author's compromise: 30% of the land wild and another 20% hybrid
 KEPT, HYBRID = 0.3, 0.2
@@ -67,6 +71,12 @@ SECONDS_PER_YEAR = JULIAN_YEAR_DAYS * JULIAN_DAY
 REEF_WIDTH_KM = (1.0, 2.0)
 PASS_MARGIN_KM = 0.05                    # the distributions study's margin on each side of a pass
 TOWN_DISTRICT_T = '50.0'                 # the distributions study's town at 50 t of district a resident
+# Beamed power: the two microwave bands of the 1978 reference system and the shield study's links; that system's
+# rectenna peak, 23 mW/cm2 at its centre (US DOE & NASA 1978), beside the mean provisioning reads; and ICNIRP's (2020)
+# reference level for the general public at 2-300 GHz, whole body.
+BEAM_GHZ = (2.45, 5.8)
+RECTENNA_PEAK_W_M2 = 230.0
+PUBLIC_LIMIT_W_M2 = 10.0
 EVIDENCE = ("Arithmetic on committed screen products of the three domains and main's studies: C' and the food blend "
             "recombined in totals, the trace gases' sources and sinks summed, resources' phosphorus ledger read at the "
             "blend's losses, and the sky's layers read from their products. Nothing is simulated here; each figure "
@@ -334,6 +344,43 @@ def heights_ledger(people, volume, ships, tower, dist, sky, fleet):
                 summit_crown_km=crown_km)
 
 
+def array_power(heat, heights, dist, population, ring, ledger, blend):
+    """Power from the array, divided between the sky towns' tops and the ground's receivers. Everything received
+    ends as heat on the Moon, so the intake is the heat ledger's array parts; the aloft share of the residents goes
+    to the towns. Beams follow the 1978 system's capture parameter tau (At Ar = (tau lambda d)^2)."""
+    parts = heat['array']['heat_by_component_tw']
+    aloft = ALOFT_BILLION / MOON_BILLION
+    sky_keys = ('sky_control', 'sky_hydrogen_remade', 'sky_trips_and_food_lift')
+    sky = pair(lambda e: sum(parts[k][e] for k in sky_keys) + aloft * parts['residents'][e])
+    ground = pair(lambda e: parts['food'][e] + parts['water'][e] + (1.0 - aloft) * parts['residents'][e]
+                  + heat['array']['close_computing_heat_tw'][e])
+    towns = heights['sky_towns']['towns']
+    radius_m = dist['basis']['sky']['envelope_radius_km'] * 1e3
+    tops_m2 = towns * math.pi * radius_m ** 2
+    service = population['earth_service']
+    tau, mean = service['tau_1978'], service['rectenna_mean_w_m2']
+    r = ring['design']['middle_radius_km'] * 1e3
+    distances = [r - MOON_RADIUS, math.sqrt(r ** 2 - MOON_RADIUS ** 2)]          # overhead and at the horizon
+    tile_m2 = ledger['requirements']['tile_side_m'] ** 2
+    beams = {}
+    for ghz in BEAM_GHZ:
+        lam = SPEED_OF_LIGHT / (ghz * 1e9)
+        receiver = [(tau * lam * d) ** 2 / tile_m2 for d in distances]
+        transmitter = [(tau * lam * d) ** 2 / (math.pi * radius_m ** 2) for d in distances]
+        beams[f'{ghz:g}_ghz'] = dict(receiver_m_from_a_tile=[2.0 * math.sqrt(a / math.pi) for a in receiver],
+                                     transmitter_side_m_for_a_town_top=[math.sqrt(a) for a in transmitter])
+    fields = blend['fields_km2']
+    return dict(
+        sky_towns=dict(intake_tw=sky, tops_km2=tops_m2 / 1e6, w_m2=pair(lambda e: sky[e] * 1e12 / tops_m2)),
+        ground=dict(intake_tw=ground,
+                    receiver_km2_at_1978_mean=pair(lambda e: ground[e] * 1e12 / mean / 1e6),
+                    receiver_km2_at_1978_peak=pair(lambda e: ground[e] * 1e12 / RECTENNA_PEAK_W_M2 / 1e6),
+                    w_m2_over_the_blends_fields=pair(lambda e: ground[e] * 1e12 / (fields[e] * 1e6))),
+        intensities_w_m2=dict(rectenna_1978_mean=mean, rectenna_1978_peak=RECTENNA_PEAK_W_M2,
+                              public_reference_level=PUBLIC_LIMIT_W_M2),
+        beams=beams, ring_middle_radius_km=r / 1e3, distance_km=[d / 1e3 for d in distances], tau=tau)
+
+
 def results():
     data = {p: load(p, s) for p, s in INPUTS.items()}
     dist = data['research/studies/distributions/results/distributions.json']
@@ -347,6 +394,11 @@ def results():
     people = data['biosphere/ecology/results/people.json']
     volume = data['research/studies/inhabited_volume/results/inhabited_volume.json']
     ground = next(r for r in volume['air'] if r['height_km'] == 0.0)
+    heat = heat_ledger(cprime, blend, power_heavy, data['provisioning/results/population.json'])
+    heights = heights_ledger(people, volume, data['research/studies/sky_ships/results/sky_ships.json'],
+                             data['research/studies/summit_tower/results/summit_tower_form.json'], dist,
+                             data['research/studies/sky_ecology/results/sky_ecology.json'],
+                             data['research/studies/sky_fleet/results/sky_fleet.json'])
     return dict(
         schema=SCHEMA,
         producer=dict(files={'research/studies/domain_synthesis/ledgers.py': sha256(__file__)},
@@ -354,16 +406,17 @@ def results():
         evidence=EVIDENCE, reading_rule=READING_RULE,
         choices=dict(distribution="C'", moon_billion=MOON_BILLION, aloft_billion=ALOFT_BILLION, land_rule=RULE,
                      blend_weights=food['weights'], heritage_kg_per_person_year=[float(k) for k in HERITAGE_KG]),
-        heat=rnd(heat_ledger(cprime, blend, power_heavy, data['provisioning/results/population.json'])),
+        heat=rnd(heat),
         land=rnd(land_ledger(cprime, blend, heritage, people)),
         gases=rnd(gas_ledger(data['biosphere/ecology/results/first_screen.json'], people, blend, heritage,
                              ground['temperature_c'] + 273.15)),
         phosphorus=rnd(phosphorus_ledger(data['resources/results/sea_phosphorus.json'], blend, cprime,
                                          data['research/studies/sky_ecology/results/sky_ecology.json'])),
-        heights=rnd(heights_ledger(people, volume, data['research/studies/sky_ships/results/sky_ships.json'],
-                                   data['research/studies/summit_tower/results/summit_tower_form.json'], dist,
-                                   data['research/studies/sky_ecology/results/sky_ecology.json'],
-                                   data['research/studies/sky_fleet/results/sky_fleet.json'])))
+        heights=rnd(heights),
+        array_power=rnd(array_power(heat, heights, dist, data['provisioning/results/population.json'],
+                                    data['research/studies/solar_shield_array/results/ring_layout.json'],
+                                    data['research/studies/solar_shield_array/results/integrated_ledger.json'],
+                                    blend)))
 
 
 def dumps(product) -> str:

@@ -1,15 +1,15 @@
 # The three domains together
 
 The resources, ecology and provisioning branches merged on 12 October 2026, and four refreshes of main's studies
-followed on the merged tree ([integration record](../../integration/domains.md)). This study fits the branches
-together at the author's choices: distribution C′ (8 billion on the Moon, 4 billion on the ground and 4 billion
-aloft, under the compromise rule of 30% of the land kept wild and another 20% hybrid), fed by the food blend
-(power-heavy 40%, power-made 50%, fully lamp-lit 10% of the diet), with heritage meat from the homesteads. Its
-[ledgers](ledgers.py) ([results/ledgers.json](results/ledgers.json)) recombine the committed products in five places
-where the domains meet: heat, land, methane and N2O, phosphorus, and the sky's layers. They are arithmetic on screen
-products and take under a second; every figure keeps its source's evidence state. The distributions study placed C′
-with the power-heavy mix, so here the blend's food takes its place in the totals; placing the blend's fields band by
-band is that study's next run (next work, item 2).
+followed on the merged tree ([integration record](../../integration/domains.md)). This study fits the branches together
+at the author's choices: distribution C′ (8 billion on the Moon, 4 billion on the ground and 4 billion aloft, under the
+compromise rule of 30% of the land kept wild and another 20% hybrid), fed by the food blend (power-heavy 40%, power-made
+50%, fully lamp-lit 10% of the diet), with heritage meat from the homesteads. Its [ledgers](ledgers.py)
+([results/ledgers.json](results/ledgers.json)) recombine the committed products in five places where the domains meet:
+heat, land, methane and N2O, phosphorus, and the sky's layers, with power from the array divided between the towns and
+the ground. They are arithmetic on screen products and take under a second; every figure keeps its source's evidence
+state. The distributions study placed C′ with the power-heavy mix, so here the blend's food takes its place in the
+totals; placing the blend's fields band by band is that study's next run (next work, item 2).
 
 ## What each branch brought
 
@@ -63,6 +63,32 @@ terawatt, provisioning's factor, and the fleet's glow as provisioning gives it, 
 if dimming answered both, 2.2–5.4% with the array's power. The fleet's answer is still open: films that absorb less, a
 heat mirror on its Moon-facing faces, redirecting the glow, or added dimming ([plan](../../plan.md), next work
 item 3). The parks' automation and amenities, which the register leaves to be sized, are not in the ledger.
+
+## Power from the array: a distribution recommendation
+
+The author chose power from the array for food and the sky towns, given a good recommendation for distributing it
+(register, 12 October). Everything received ends as heat on the Moon, so the intake is the heat ledger's array parts
+(*screen*, [ledgers](results/ledgers.json), `array_power`):
+- **The sky towns take theirs on their own tops.** Their control, hydrogen remade, trips and the aloft half of the
+  residents come to 8.3–45 TW. The 696,000 towns' tops, a kilometre across, make 547,000 km², so the towns take it at
+  15–82 W/m², without lines or night storage. From the ring, 18,300–19,900 km away, a transmitter 2.2–2.4 km on a side
+  puts 95% of a 5.8 GHz beam on one top (5.1–5.6 km at 2.45 GHz), a fraction of one 10 km tile.
+- **The ground takes the rest at its loads.** Food, the ground's half of the residents and close computing come to
+  22–100 TW. At the 1978 reference rectenna's 49 W/m² mean that needs 0.45–2.05 million km² of receivers, at its
+  230 W/m² peak 96,000–436,000 km², 0.4–1.9% of the dry land; strung over the blend's fields the same power arrives at
+  33–54 W/m², near that mean, beneath a mesh that shades the crops. A beam from one tile lands in 220–240 m at 5.8 GHz,
+  so receivers can sit where the load is: at the power-made food plants, the lamp-lit farms and the cities' industry,
+  joined by a grid, with several tiles behind each receiver for the uptime the author requires.
+- **What it costs.** All of these intensities exceed the 10 W/m² that ICNIRP (2020) sets for the public, so the
+  receivers and the towns' tops are closed spaces, with people beneath the rectenna's shield and flyers kept out of
+  the beam columns; what aerophytes drifting through a column take is to be checked. The ring stands above the
+  horizon everywhere except within about 5° of its plane's poles, where the grid serves. The night stays dark, and
+  the Moon takes only the receivers' losses and the air's absorption as heat, which the array's factor already counts.
+
+The recommendation, for the author: beams straight to the towns' tops; ground receivers at the loads at up to the 1978
+peak, joined by a grid; and a choice between closed receiving land, 0.10–0.44 million km² at that peak, and meshes
+over the fields at the cost of their shade. A screen of receivers, beams, the grid and reserves through the lunar
+cycle firms it up (provisioning, question 3).
 
 ## Land
 
@@ -220,20 +246,21 @@ Machine time is for this laptop, one core, alongside the author's other work.
 11. **The editorial pass** on the Codex-written prose against the author's standards.
 12. **The taxonomy**, on hold at the author's request.
 
-## Decisions for the author
+## Decisions
 
-1. The levels at which methane and N2O are held, once their warming in the deep column is known; Earth's present
-   air is the reference until then.
-2. Where the power for food and the sky towns comes from: fusion on the Moon, or the array, whose conversion losses
-   stay in space and which halves the high-cost end's heat, or a share of each.
-3. How the added dimming is supplied, up to 3.9% for people with fusion (2.0% with the array's power), beside the
-   fleet glow's answer.
-4. The heritage meat a person: 0.5–2 kg a year, 11–43% of the homestead belt and 0.8–3.4 Tg of methane a year.
-5. The sky towns' height: in the reefs' layer near 10 km, passing 0.04–1.2 reefs a day at 1% cover, or kept below
-   or above it.
-6. The network's nodes and the tallest storms: built to ride through the storm tops that reach 30 km, or climbing
-   round them.
-7. The taxonomy's open choices, on hold.
+The author decided the list on 12 October
+([register](../../decisions.md#the-domain-synthesiss-decisions-12-october-2026)):
+1. The levels at which methane and N2O are held wait for their warming in the deep column, which is the next work.
+2. Food and the sky towns run on power from the array, given a good distribution recommendation; the one above waits
+   for the author.
+3. Added dimming can be had by extracting more of the sunlight; the fleet's glow is the harder problem to work out.
+4. Heritage meat is 1–2 kg a person a year, 21–43% of the homestead belt before high-efficiency feed production cuts
+   it; wild culls and fishing can supply part of it if parasite risk is kept low.
+5. Sky towns fly in the reefs' layer. If sky reefs become part of the useful balancing system they get more
+   preference; otherwise sky towns get a bit more precedence. A somewhat higher reef density is acceptable.
+6. The network's stability decides whether its nodes ride through the storm tops that reach 30 km or climb round
+   them.
+7. The taxonomy stays on hold.
 
 ## Running it
 
@@ -242,7 +269,7 @@ python -m research.studies.domain_synthesis.ledgers      # writes results/ledger
 python -m pytest research/studies/domain_synthesis
 ```
 
-The product binds its producer and its eleven inputs by sha256: the distributions, the food blend, provisioning's
-population, ecology's first screen and people products, resources' sea phosphorus, sky ecology, the inhabited
-volume, the sky ships, the sky fleet and the summit tower's form. The tests regenerate it exactly and check the sums
-it rests on.
+The product binds its producer and its thirteen inputs by sha256: the distributions, the food blend, provisioning's
+population, ecology's first screen and people products, resources' sea phosphorus, sky ecology, the inhabited volume,
+the sky ships, the sky fleet, the summit tower's form, and the shield's ring layout and integrated ledger. The tests
+regenerate it exactly and check the sums it rests on.

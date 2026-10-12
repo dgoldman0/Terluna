@@ -18,7 +18,8 @@ exact head, so every source head is an ancestor of the result. The synthesis is 
 | `7c230dd` | The four refreshes of main's studies, every former cross-branch input read in-tree, the cascade rebuilt |
 | `b0537b8` | The prose brought to the refreshed products, the refreshes followed into the readers they missed, the register's status cells |
 | `6964105` | The three domains together (heat, land, gases, phosphorus and the sky's layers at the author's choices), with this record, the research index, the plan and the status |
-| this commit | The synthesis corrected after an independent review: town size, reef passes, the glow's dimming, heights, the sky's phosphorus need and the stated assumptions |
+| `8b401d3` | The synthesis corrected after an independent review: town size, reef passes, the glow's dimming, heights, the sky's phosphorus need and the stated assumptions |
+| this commit | The author's decisions on the synthesis's list, with the recommendation for distributing the array's power |
 
 ## How the shared documents were joined
 
@@ -100,9 +101,9 @@ Bringing the prose to the products found five more places that the refreshes rea
 `make check` ran before every commit: the layer check, the Python and JavaScript tests, the provenance check and the
 ensemble validator. Python tests passed at each: 1,387 with 15 skipped after resources, 1,778 with 15 skipped after
 ecology, 1,974 with 16 skipped after provisioning, 1,975 with 16 skipped after the refreshes, 1,982 with 16 skipped at
-the prose and synthesis commits, whose working tree held the synthesis's seven tests each time, and 1,984 with 16
-skipped after the review's corrections added two. The ensemble's planning snapshot, papers and seed records, and
-research/provenance.json, are the same as at every source head.
+the prose and synthesis commits, whose working tree held the synthesis's seven tests each time, 1,984 with 16 skipped
+after the review's corrections added two, and 1,985 with the array-power test. The ensemble's planning snapshot, papers
+and seed records, and research/provenance.json, are the same as at every source head.
 
 ## Still to do from the integration
 
