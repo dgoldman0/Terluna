@@ -1,0 +1,1898 @@
+{
+ "schema": "terluna.research.food-blend/1",
+ "producer": {
+  "study": "food_systems",
+  "module": "blend",
+  "files": {
+   "research/studies/food_systems/blend.py": "7c866446656ebf4e",
+   "research/studies/food_systems/run.py": "7c1914c666541495",
+   "research/studies/food_systems/zones.py": "59f9cc439fcb8997",
+   "research/studies/food_systems/parameters.py": "380459175e577004",
+   "research/studies/food_systems/systems.py": "c049b3435c3e2763",
+   "research/studies/food_systems/mixes.py": "4aaf17ee09d40296"
+  },
+  "constants": {
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.0,
+   "MOON_RADIUS": 1740000.0,
+   "MOON_SURFACE_GRAVITY": 1.62,
+   "SYNODIC_MONTH_DAYS": 29.5
+  },
+  "inputs": {
+   "research/studies/ways_of_living/results/ways_of_living.json": "cbba4058819147f2",
+   "provisioning/results/population.json": "bb2b7e396f9eae0b",
+   "research/studies/daily_life/results/daily_life.json": "db9b1996a1468fc6",
+   "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
+   "biosphere/canopy/results/plant.json": "4238c12360c633f1",
+   "biosphere/canopy/results/fruit.json": "b2034a74a4c45291",
+   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "1f35337c24ecf867",
+   "research/studies/open_moon_aerosol/results/open_moon_aerosol.json": "7e404540ec06f5dd",
+   "climate/results/crm/ring_ring_45n_lsw.json": "608921535125ea8c",
+   "climate/results/crm/ring_ring_45s_lsw.json": "fe6782e258b2da56",
+   "climate/results/crm/ring_ring_70_45e.json": "024fb3f570c4fbf5",
+   "climate/results/crm/ring_ring_70_135e.json": "87e478815badcc05",
+   "geography/results/drainage.json": "18494e3d3656ead7",
+   "climate/results/gcm/radiation_check_A28_dim5_moon.json": "82f2d3baff7cb2c3",
+   "research/studies/summit_tower/results/summit_tower.json": "53954bbe96931efa",
+   "research/studies/summit_tower/results/summit_tower_form.json": "20d1201ad13a8348",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "591595d27a4da27d"
+  },
+  "food_product": {
+   "path": "research/studies/food_systems/results/food_systems.json",
+   "sha256": "5696c5b38290d1935589c9ff52a2be994b484e59ff9dc7175fceb2e346389433"
+  },
+  "ignored_inputs": {
+   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
+   "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f889",
+   "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5"
+  },
+  "bound_inputs": {
+   "ecology_people": {
+    "path_at_integration": "biosphere/ecology/results/people.json",
+    "branch": "domain/ecology",
+    "commit": "5aafe2a3bf20c407b36ec759460f93e6fb1fc1e1",
+    "sha256": "f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6"
+   },
+   "ecology_first_screen": {
+    "path_at_integration": "biosphere/ecology/results/first_screen.json",
+    "branch": "domain/ecology",
+    "commit": "5aafe2a3bf20c407b36ec759460f93e6fb1fc1e1",
+    "sha256": "d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d"
+   },
+   "ecology_people_and_land": {
+    "path_at_integration": "biosphere/ecology/people_and_land.md",
+    "branch": "domain/ecology",
+    "commit": "5aafe2a3bf20c407b36ec759460f93e6fb1fc1e1",
+    "sha256": "7a8fbafb9a9ecdf635fb0cda1535bbf01d1069522f037d0630fabcce739097a1"
+   },
+   "resources_phosphorus": {
+    "path_at_integration": "resources/results/phosphorus.json",
+    "branch": "domain/resources",
+    "commit": "ac5d38d78d85bb56e7927a51a469eb44d13305c3",
+    "sha256": "159462a220b6661e457d5adcde1590cf144090e90bb770f3a775d04d709fec8e"
+   },
+   "resources_phosphorus_py": {
+    "path_at_integration": "resources/phosphorus.py",
+    "branch": "domain/resources",
+    "commit": "ac5d38d78d85bb56e7927a51a469eb44d13305c3",
+    "sha256": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43"
+   },
+   "resources_phosphorus_md": {
+    "path_at_integration": "resources/phosphorus.md",
+    "branch": "domain/resources",
+    "commit": "ac5d38d78d85bb56e7927a51a469eb44d13305c3",
+    "sha256": "afa8db4d5e8b698c6e4d8bb4b6d5e20f424f5edabd9144ccab7baf4c0a7af138"
+   },
+   "resources_sea_phosphorus": {
+    "path_at_integration": "resources/results/sea_phosphorus.json",
+    "branch": "domain/resources",
+    "commit": "edf7fb5eea4527fa0d0818659ffef070e93b6094",
+    "sha256": "9cf6927649942ed6831e34524b512fa9d011e07a5d57a4ac105587f3508fbcbf"
+   }
+  }
+ },
+ "evidence": "A screen on the food study's basis and mix rules, recombined: each blend is one case built from the three mixes' rules, with heat, dimming, N2O and methane from the totals. The weights come from a stated rule over a 5% grid. The heritage meat uses Earth's global per-kilogram land use and FAO GLEAM's methane intensities for a basket of the author's examples. No crop, livestock, grassland, climate or ecosystem model runs here.",
+ "reading_rule": "As the food study: areas km2, power and heat TW, phosphorus Mt a year, N2O kt N and ppb, methane Mt a year and ppm at steady state, pairs [low-cost end, high-cost end]. weights are shares of the diet. blend[population][land rule] is the chosen blend; reference_planned_case and per_tenth_planned_case are at 8 billion under the compromise. light_taken_km2 is the fields' area plus the area-equivalent of the added dimming under fusion. heritage_meat cases are named population_level and give Mt of meat a year, its land, its share of the homestead region and of the diet's animal protein [20%, 25% protein], and the cattle's methane per kg of fat- and bone-free meat [retail, boneless carcass yield], with steady ppm at the soil sink's fast and slow ends.",
+ "criterion": {
+  "step": 0.05,
+  "floor": 0.1,
+  "cap": 0.5,
+  "planned_population_billion": 8.0,
+  "planned_land_rule": "wild_30_hybrid_20",
+  "supply": "fusion",
+  "moon_km2": 37900000.0,
+  "rule": "least light_taken_km2 at the high-cost end of the planned case, then summed over both ends, then least heat; light_taken_km2 is the fields' area plus the added dimming under the supply as a share of the Moon's surface"
+ },
+ "weights": {
+  "power_heavy": 0.4,
+  "power_made": 0.5,
+  "fully_lamp_lit": 0.1
+ },
+ "candidates": [
+  {
+   "weights": {
+    "power_heavy": 0.4,
+    "power_made": 0.5,
+    "fully_lamp_lit": 0.1
+   },
+   "light_taken_km2": [714000.0, 2710000.0],
+   "heat_tw": [14.8, 171.0],
+   "fields_km2": [665000.0, 1810000.0]
+  },
+  {
+   "weights": {
+    "power_heavy": 0.35,
+    "power_made": 0.5,
+    "fully_lamp_lit": 0.15
+   },
+   "light_taken_km2": [644000.0, 2820000.0],
+   "heat_tw": [18.8, 234.0],
+   "fields_km2": [582000.0, 1590000.0]
+  },
+  {
+   "weights": {
+    "power_heavy": 0.3,
+    "power_made": 0.5,
+    "fully_lamp_lit": 0.2
+   },
+   "light_taken_km2": [574000.0, 2930000.0],
+   "heat_tw": [22.9, 297.0],
+   "fields_km2": [499000.0, 1360000.0]
+  },
+  {
+   "weights": {
+    "power_heavy": 0.45,
+    "power_made": 0.45,
+    "fully_lamp_lit": 0.1
+   },
+   "light_taken_km2": [795000.0, 2930000.0],
+   "heat_tw": [14.3, 168.0],
+   "fields_km2": [748000.0, 2040000.0]
+  },
+  {
+   "weights": {
+    "power_heavy": 0.25,
+    "power_made": 0.5,
+    "fully_lamp_lit": 0.25
+   },
+   "light_taken_km2": [504000.0, 3030000.0],
+   "heat_tw": [26.9, 361.0],
+   "fields_km2": [416000.0, 1130000.0]
+  },
+  {
+   "weights": {
+    "power_heavy": 0.4,
+    "power_made": 0.45,
+    "fully_lamp_lit": 0.15
+   },
+   "light_taken_km2": [726000.0, 3030000.0],
+   "heat_tw": [18.4, 232.0],
+   "fields_km2": [665000.0, 1810000.0]
+  },
+  {
+   "weights": {
+    "power_heavy": 0.2,
+    "power_made": 0.5,
+    "fully_lamp_lit": 0.3
+   },
+   "light_taken_km2": [434000.0, 3140000.0],
+   "heat_tw": [30.9, 424.0],
+   "fields_km2": [333000.0, 906000.0]
+  },
+  {
+   "weights": {
+    "power_heavy": 0.35,
+    "power_made": 0.45,
+    "fully_lamp_lit": 0.2
+   },
+   "light_taken_km2": [656000.0, 3140000.0],
+   "heat_tw": [22.4, 295.0],
+   "fields_km2": [582000.0, 1590000.0]
+  }
+ ],
+ "blend": {
+  "4": {
+   "kept_30": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [4.0, 4.0],
+    "land_km2": {
+     "rain_belt": [241000.0, 668000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [141000.0, 438000.0],
+     "polar": [0.0, 0.0],
+     "total": [383000.0, 1110000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [50000.0, 200000.0],
+    "fields_km2": [333000.0, 906000.0],
+    "dry_land_wild_share_outside_kept": [0.977, 0.932],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [2.2, 22.3],
+     "microbial": [0.0794, 0.266],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [1.39, 5.58],
+     "nitrogen_fixation": [0.0155, 0.0358],
+     "total": [3.69, 28.2]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [5.08, 38.8],
+      "w_m2": [0.134, 1.02],
+      "added_dimming_percent": [0.0441, 0.538]
+     },
+     "fusion": {
+      "heat_tw": [7.38, 85.4],
+      "w_m2": [0.195, 2.25],
+      "added_dimming_percent": [0.0641, 1.19]
+     }
+    },
+    "light_taken_km2": [357000.0, 1360000.0],
+    "light_taken_share_of_moon": [0.00941, 0.0358],
+    "water_km3_year": {
+     "rain_used": [336.0, 922.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [1.76, 2.4],
+     "lost": [0.176, 0.72],
+     "in_microbial_biomass": [0.536, 1.73],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [66.9, 190.0],
+     "ppb_per_year": [0.0218, 0.062],
+     "ppb_after_1000_years": [21.8, 62.0]
+    },
+    "methane": {
+     "mt_year": [1.2, 12.0],
+     "steady_ppm": [0.252, 11.2]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [0.927, 11.2]
+    },
+    "night_energy_twh": [1300.0, 9970.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   },
+   "kept_50": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [4.0, 4.0],
+    "land_km2": {
+     "rain_belt": [242000.0, 673000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [141000.0, 433000.0],
+     "polar": [0.0, 0.0],
+     "total": [383000.0, 1110000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [50000.0, 200000.0],
+    "fields_km2": [333000.0, 906000.0],
+    "dry_land_wild_share_outside_kept": [0.967, 0.905],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [2.2, 22.3],
+     "microbial": [0.0794, 0.266],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [1.39, 5.58],
+     "nitrogen_fixation": [0.0155, 0.0358],
+     "total": [3.69, 28.2]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [5.08, 38.8],
+      "w_m2": [0.134, 1.02],
+      "added_dimming_percent": [0.0441, 0.538]
+     },
+     "fusion": {
+      "heat_tw": [7.38, 85.4],
+      "w_m2": [0.195, 2.25],
+      "added_dimming_percent": [0.0641, 1.19]
+     }
+    },
+    "light_taken_km2": [357000.0, 1360000.0],
+    "light_taken_share_of_moon": [0.00941, 0.0358],
+    "water_km3_year": {
+     "rain_used": [336.0, 922.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [1.76, 2.4],
+     "lost": [0.176, 0.72],
+     "in_microbial_biomass": [0.536, 1.73],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [66.9, 190.0],
+     "ppb_per_year": [0.0218, 0.062],
+     "ppb_after_1000_years": [21.8, 62.0]
+    },
+    "methane": {
+     "mt_year": [1.2, 12.0],
+     "steady_ppm": [0.252, 11.2]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [0.927, 11.2]
+    },
+    "night_energy_twh": [1300.0, 9970.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   },
+   "wild_30_hybrid_20": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [4.0, 4.0],
+    "land_km2": {
+     "rain_belt": [242000.0, 673000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [141000.0, 433000.0],
+     "polar": [0.0, 0.0],
+     "total": [383000.0, 1110000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [50000.0, 200000.0],
+    "fields_km2": [333000.0, 906000.0],
+    "dry_land_wild_share_outside_kept": [0.967, 0.905],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [2.2, 22.3],
+     "microbial": [0.0794, 0.266],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [1.39, 5.58],
+     "nitrogen_fixation": [0.0155, 0.0358],
+     "total": [3.69, 28.2]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [5.08, 38.8],
+      "w_m2": [0.134, 1.02],
+      "added_dimming_percent": [0.0441, 0.538]
+     },
+     "fusion": {
+      "heat_tw": [7.38, 85.4],
+      "w_m2": [0.195, 2.25],
+      "added_dimming_percent": [0.0641, 1.19]
+     }
+    },
+    "light_taken_km2": [357000.0, 1360000.0],
+    "light_taken_share_of_moon": [0.00941, 0.0358],
+    "water_km3_year": {
+     "rain_used": [336.0, 922.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [1.76, 2.4],
+     "lost": [0.176, 0.72],
+     "in_microbial_biomass": [0.536, 1.73],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [66.9, 190.0],
+     "ppb_per_year": [0.0218, 0.062],
+     "ppb_after_1000_years": [21.8, 62.0]
+    },
+    "methane": {
+     "mt_year": [1.2, 12.0],
+     "steady_ppm": [0.252, 11.2]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [0.927, 11.2]
+    },
+    "night_energy_twh": [1300.0, 9970.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   },
+   "wild_50_hybrid_20": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [4.0, 4.0],
+    "land_km2": {
+     "rain_belt": [243000.0, 687000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [140000.0, 419000.0],
+     "polar": [0.0, 0.0],
+     "total": [383000.0, 1110000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [50000.0, 200000.0],
+    "fields_km2": [333000.0, 906000.0],
+    "dry_land_wild_share_outside_kept": [0.945, 0.842],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [2.2, 22.3],
+     "microbial": [0.0794, 0.266],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [1.39, 5.58],
+     "nitrogen_fixation": [0.0155, 0.0358],
+     "total": [3.69, 28.2]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [5.08, 38.8],
+      "w_m2": [0.134, 1.02],
+      "added_dimming_percent": [0.0441, 0.538]
+     },
+     "fusion": {
+      "heat_tw": [7.38, 85.4],
+      "w_m2": [0.195, 2.25],
+      "added_dimming_percent": [0.0641, 1.19]
+     }
+    },
+    "light_taken_km2": [357000.0, 1360000.0],
+    "light_taken_share_of_moon": [0.00941, 0.0358],
+    "water_km3_year": {
+     "rain_used": [336.0, 922.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [1.76, 2.4],
+     "lost": [0.176, 0.72],
+     "in_microbial_biomass": [0.536, 1.73],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [66.9, 190.0],
+     "ppb_per_year": [0.0218, 0.062],
+     "ppb_after_1000_years": [21.8, 62.0]
+    },
+    "methane": {
+     "mt_year": [1.2, 12.0],
+     "steady_ppm": [0.252, 11.2]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [0.927, 11.2]
+    },
+    "night_energy_twh": [1300.0, 9970.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   }
+  },
+  "6": {
+   "kept_30": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [6.0, 6.0],
+    "land_km2": {
+     "rain_belt": [363000.0, 1010000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [211000.0, 647000.0],
+     "polar": [0.0, 0.0],
+     "total": [574000.0, 1660000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [75000.0, 300000.0],
+    "fields_km2": [499000.0, 1360000.0],
+    "dry_land_wild_share_outside_kept": [0.965, 0.899],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [3.31, 33.4],
+     "microbial": [0.119, 0.399],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [2.09, 8.36],
+     "nitrogen_fixation": [0.0233, 0.0536],
+     "total": [5.53, 42.3]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [7.62, 58.2],
+      "w_m2": [0.201, 1.54],
+      "added_dimming_percent": [0.0661, 0.808]
+     },
+     "fusion": {
+      "heat_tw": [11.1, 128.0],
+      "w_m2": [0.292, 3.38],
+      "added_dimming_percent": [0.0961, 1.78]
+     }
+    },
+    "light_taken_km2": [535000.0, 2030000.0],
+    "light_taken_share_of_moon": [0.0141, 0.0536],
+    "water_km3_year": {
+     "rain_used": [504.0, 1380.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [2.64, 3.6],
+     "lost": [0.264, 1.08],
+     "in_microbial_biomass": [0.804, 2.6],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [100.0, 286.0],
+     "ppb_per_year": [0.0327, 0.0931],
+     "ppb_after_1000_years": [32.7, 93.1]
+    },
+    "methane": {
+     "mt_year": [1.8, 18.0],
+     "steady_ppm": [0.377, 16.8]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [1.39, 16.9]
+    },
+    "night_energy_twh": [1950.0, 15000.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   },
+   "kept_50": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [6.0, 6.0],
+    "land_km2": {
+     "rain_belt": [364000.0, 1030000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [210000.0, 634000.0],
+     "polar": [0.0, 0.0],
+     "total": [574000.0, 1660000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [75000.0, 300000.0],
+    "fields_km2": [499000.0, 1360000.0],
+    "dry_land_wild_share_outside_kept": [0.951, 0.858],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [3.31, 33.4],
+     "microbial": [0.119, 0.399],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [2.09, 8.36],
+     "nitrogen_fixation": [0.0233, 0.0536],
+     "total": [5.53, 42.3]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [7.62, 58.2],
+      "w_m2": [0.201, 1.54],
+      "added_dimming_percent": [0.0661, 0.808]
+     },
+     "fusion": {
+      "heat_tw": [11.1, 128.0],
+      "w_m2": [0.292, 3.38],
+      "added_dimming_percent": [0.0961, 1.78]
+     }
+    },
+    "light_taken_km2": [535000.0, 2030000.0],
+    "light_taken_share_of_moon": [0.0141, 0.0536],
+    "water_km3_year": {
+     "rain_used": [504.0, 1380.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [2.64, 3.6],
+     "lost": [0.264, 1.08],
+     "in_microbial_biomass": [0.804, 2.6],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [100.0, 286.0],
+     "ppb_per_year": [0.0327, 0.0931],
+     "ppb_after_1000_years": [32.7, 93.1]
+    },
+    "methane": {
+     "mt_year": [1.8, 18.0],
+     "steady_ppm": [0.377, 16.8]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [1.39, 16.9]
+    },
+    "night_energy_twh": [1950.0, 15000.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   },
+   "wild_30_hybrid_20": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [6.0, 6.0],
+    "land_km2": {
+     "rain_belt": [364000.0, 1030000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [210000.0, 634000.0],
+     "polar": [0.0, 0.0],
+     "total": [574000.0, 1660000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [75000.0, 300000.0],
+    "fields_km2": [499000.0, 1360000.0],
+    "dry_land_wild_share_outside_kept": [0.951, 0.858],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [3.31, 33.4],
+     "microbial": [0.119, 0.399],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [2.09, 8.36],
+     "nitrogen_fixation": [0.0233, 0.0536],
+     "total": [5.53, 42.3]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [7.62, 58.2],
+      "w_m2": [0.201, 1.54],
+      "added_dimming_percent": [0.0661, 0.808]
+     },
+     "fusion": {
+      "heat_tw": [11.1, 128.0],
+      "w_m2": [0.292, 3.38],
+      "added_dimming_percent": [0.0961, 1.78]
+     }
+    },
+    "light_taken_km2": [535000.0, 2030000.0],
+    "light_taken_share_of_moon": [0.0141, 0.0536],
+    "water_km3_year": {
+     "rain_used": [504.0, 1380.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [2.64, 3.6],
+     "lost": [0.264, 1.08],
+     "in_microbial_biomass": [0.804, 2.6],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [100.0, 286.0],
+     "ppb_per_year": [0.0327, 0.0931],
+     "ppb_after_1000_years": [32.7, 93.1]
+    },
+    "methane": {
+     "mt_year": [1.8, 18.0],
+     "steady_ppm": [0.377, 16.8]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [1.39, 16.9]
+    },
+    "night_energy_twh": [1950.0, 15000.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   },
+   "wild_50_hybrid_20": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [6.0, 6.0],
+    "land_km2": {
+     "rain_belt": [367000.0, 1060000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [207000.0, 603000.0],
+     "polar": [0.0, 0.0],
+     "total": [574000.0, 1660000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [75000.0, 300000.0],
+    "fields_km2": [499000.0, 1360000.0],
+    "dry_land_wild_share_outside_kept": [0.918, 0.763],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [3.31, 33.4],
+     "microbial": [0.119, 0.399],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [2.09, 8.36],
+     "nitrogen_fixation": [0.0233, 0.0536],
+     "total": [5.53, 42.3]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [7.62, 58.2],
+      "w_m2": [0.201, 1.54],
+      "added_dimming_percent": [0.0661, 0.808]
+     },
+     "fusion": {
+      "heat_tw": [11.1, 128.0],
+      "w_m2": [0.292, 3.38],
+      "added_dimming_percent": [0.0961, 1.78]
+     }
+    },
+    "light_taken_km2": [535000.0, 2030000.0],
+    "light_taken_share_of_moon": [0.0141, 0.0536],
+    "water_km3_year": {
+     "rain_used": [504.0, 1380.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [2.64, 3.6],
+     "lost": [0.264, 1.08],
+     "in_microbial_biomass": [0.804, 2.6],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [100.0, 286.0],
+     "ppb_per_year": [0.0327, 0.0931],
+     "ppb_after_1000_years": [32.7, 93.1]
+    },
+    "methane": {
+     "mt_year": [1.8, 18.0],
+     "steady_ppm": [0.377, 16.8]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [1.39, 16.9]
+    },
+    "night_energy_twh": [1950.0, 15000.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   }
+  },
+  "8": {
+   "kept_30": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [8.0, 8.0],
+    "land_km2": {
+     "rain_belt": [485000.0, 1360000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [280000.0, 849000.0],
+     "polar": [0.0, 0.0],
+     "total": [765000.0, 2210000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [100000.0, 400000.0],
+    "fields_km2": [665000.0, 1810000.0],
+    "dry_land_wild_share_outside_kept": [0.953, 0.865],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [4.41, 44.6],
+     "microbial": [0.159, 0.532],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [2.78, 11.2],
+     "nitrogen_fixation": [0.031, 0.0715],
+     "total": [7.38, 56.3]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [10.2, 77.5],
+      "w_m2": [0.268, 2.05],
+      "added_dimming_percent": [0.0881, 1.08]
+     },
+     "fusion": {
+      "heat_tw": [14.8, 171.0],
+      "w_m2": [0.39, 4.51],
+      "added_dimming_percent": [0.128, 2.37]
+     }
+    },
+    "light_taken_km2": [714000.0, 2710000.0],
+    "light_taken_share_of_moon": [0.0188, 0.0715],
+    "water_km3_year": {
+     "rain_used": [672.0, 1840.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [3.52, 4.8],
+     "lost": [0.352, 1.44],
+     "in_microbial_biomass": [1.07, 3.47],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [134.0, 381.0],
+     "ppb_per_year": [0.0436, 0.124],
+     "ppb_after_1000_years": [43.6, 124.0]
+    },
+    "methane": {
+     "mt_year": [2.4, 24.0],
+     "steady_ppm": [0.503, 22.4]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [1.85, 22.5]
+    },
+    "night_energy_twh": [2600.0, 19900.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   },
+   "kept_50": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [8.0, 8.0],
+    "land_km2": {
+     "rain_belt": [487000.0, 1390000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [278000.0, 825000.0],
+     "polar": [0.0, 0.0],
+     "total": [765000.0, 2210000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [100000.0, 400000.0],
+    "fields_km2": [665000.0, 1810000.0],
+    "dry_land_wild_share_outside_kept": [0.935, 0.811],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [4.41, 44.6],
+     "microbial": [0.159, 0.532],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [2.78, 11.2],
+     "nitrogen_fixation": [0.031, 0.0715],
+     "total": [7.38, 56.3]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [10.2, 77.5],
+      "w_m2": [0.268, 2.05],
+      "added_dimming_percent": [0.0881, 1.08]
+     },
+     "fusion": {
+      "heat_tw": [14.8, 171.0],
+      "w_m2": [0.39, 4.51],
+      "added_dimming_percent": [0.128, 2.37]
+     }
+    },
+    "light_taken_km2": [714000.0, 2710000.0],
+    "light_taken_share_of_moon": [0.0188, 0.0715],
+    "water_km3_year": {
+     "rain_used": [672.0, 1840.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [3.52, 4.8],
+     "lost": [0.352, 1.44],
+     "in_microbial_biomass": [1.07, 3.47],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [134.0, 381.0],
+     "ppb_per_year": [0.0436, 0.124],
+     "ppb_after_1000_years": [43.6, 124.0]
+    },
+    "methane": {
+     "mt_year": [2.4, 24.0],
+     "steady_ppm": [0.503, 22.4]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [1.85, 22.5]
+    },
+    "night_energy_twh": [2600.0, 19900.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   },
+   "wild_30_hybrid_20": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [8.0, 8.0],
+    "land_km2": {
+     "rain_belt": [487000.0, 1390000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [278000.0, 825000.0],
+     "polar": [0.0, 0.0],
+     "total": [765000.0, 2210000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [100000.0, 400000.0],
+    "fields_km2": [665000.0, 1810000.0],
+    "dry_land_wild_share_outside_kept": [0.935, 0.811],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [4.41, 44.6],
+     "microbial": [0.159, 0.532],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [2.78, 11.2],
+     "nitrogen_fixation": [0.031, 0.0715],
+     "total": [7.38, 56.3]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [10.2, 77.5],
+      "w_m2": [0.268, 2.05],
+      "added_dimming_percent": [0.0881, 1.08]
+     },
+     "fusion": {
+      "heat_tw": [14.8, 171.0],
+      "w_m2": [0.39, 4.51],
+      "added_dimming_percent": [0.128, 2.37]
+     }
+    },
+    "light_taken_km2": [714000.0, 2710000.0],
+    "light_taken_share_of_moon": [0.0188, 0.0715],
+    "water_km3_year": {
+     "rain_used": [672.0, 1840.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [3.52, 4.8],
+     "lost": [0.352, 1.44],
+     "in_microbial_biomass": [1.07, 3.47],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [134.0, 381.0],
+     "ppb_per_year": [0.0436, 0.124],
+     "ppb_after_1000_years": [43.6, 124.0]
+    },
+    "methane": {
+     "mt_year": [2.4, 24.0],
+     "steady_ppm": [0.503, 22.4]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [1.85, 22.5]
+    },
+    "night_energy_twh": [2600.0, 19900.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   },
+   "wild_50_hybrid_20": {
+    "weights": {
+     "power_heavy": [0.4, 0.4],
+     "power_made": [0.5, 0.5],
+     "fully_lamp_lit": [0.1, 0.1]
+    },
+    "people_billion": [8.0, 8.0],
+    "land_km2": {
+     "rain_belt": [492000.0, 1700000.0],
+     "middle_wet": [0.0, 0.0],
+     "fog_desert": [0.0, 0.0],
+     "highlands": [273000.0, 777000.0],
+     "polar": [0.0, 0.0],
+     "total": [765000.0, 2480000.0],
+     "glass": [0.0, 0.0]
+    },
+    "towns_km2": [100000.0, 400000.0],
+    "fields_km2": [665000.0, 2080000.0],
+    "dry_land_wild_share_outside_kept": [0.891, 0.646],
+    "power_tw": {
+     "irrigation": [0.0, 0.0],
+     "glasshouse_operations": [0.0, 0.0],
+     "glasshouse_water": [0.0, 0.0],
+     "lamps": [4.41, 44.6],
+     "microbial": [0.159, 0.532],
+     "aquaponics": [0.0, 0.0],
+     "power_made_food": [2.78, 11.2],
+     "nitrogen_fixation": [0.031, 0.0715],
+     "total": [7.38, 56.3]
+    },
+    "heat": {
+     "array": {
+      "heat_tw": [10.2, 77.5],
+      "w_m2": [0.268, 2.05],
+      "added_dimming_percent": [0.0881, 1.08]
+     },
+     "fusion": {
+      "heat_tw": [14.8, 171.0],
+      "w_m2": [0.39, 4.51],
+      "added_dimming_percent": [0.128, 2.37]
+     }
+    },
+    "light_taken_km2": [714000.0, 2980000.0],
+    "light_taken_share_of_moon": [0.0188, 0.0786],
+    "water_km3_year": {
+     "rain_used": [672.0, 1840.0],
+     "withdrawn_from_seas": [0.0, 0.0],
+     "rain_on_glass": [0.0, 0.0]
+    },
+    "phosphorus_mt_year": {
+     "eaten": [3.52, 4.8],
+     "lost": [0.352, 1.44],
+     "in_microbial_biomass": [1.07, 3.47],
+     "glass_discharge": [0.0, 0.0]
+    },
+    "n2o": {
+     "kt_n_year": [134.0, 381.0],
+     "ppb_per_year": [0.0436, 0.124],
+     "ppb_after_1000_years": [43.6, 124.0]
+    },
+    "methane": {
+     "mt_year": [2.4, 24.0],
+     "steady_ppm": [0.503, 22.4]
+    },
+    "structure_gt": {
+     "glass_gt": [0.0, 0.0],
+     "steel_gt": [0.0, 0.0],
+     "aluminium_gt": [0.0, 0.0],
+     "building_gt": [1.85, 22.5]
+    },
+    "night_energy_twh": [2600.0, 19900.0],
+    "night_energy_over_european_night": [0.501, 3.84],
+    "middle_wet_fields_km2": [0.0, 0.0],
+    "feasible": [true, true],
+    "overflowing": [
+     [],
+     []
+    ]
+   }
+  }
+ },
+ "reference_planned_case": {
+  "power_heavy_alone": {
+   "weights": {
+    "power_heavy": [1.0, 1.0],
+    "power_made": [0.0, 0.0],
+    "fully_lamp_lit": [0.0, 0.0]
+   },
+   "people_billion": [8.0, 8.0],
+   "land_km2": {
+    "rain_belt": [1220000.0, 4240000.0],
+    "middle_wet": [0.0, 1390000.0],
+    "fog_desert": [0.0, 0.0],
+    "highlands": [545000.0, 1740000.0],
+    "polar": [0.0, 0.0],
+    "total": [1760000.0, 7370000.0],
+    "glass": [0.0, 0.0]
+   },
+   "towns_km2": [100000.0, 400000.0],
+   "fields_km2": [1660000.0, 6970000.0],
+   "dry_land_wild_share_outside_kept": [0.849, 0.37],
+   "power_tw": {
+    "irrigation": [0.0, 0.00322],
+    "glasshouse_operations": [0.0, 0.0],
+    "glasshouse_water": [0.0, 0.0],
+    "lamps": [0.723, 5.63],
+    "microbial": [0.318, 1.06],
+    "aquaponics": [0.0, 0.0],
+    "power_made_food": [0.0, 0.0],
+    "nitrogen_fixation": [0.0371, 0.0854],
+    "total": [1.08, 6.79]
+   },
+   "heat": {
+    "array": {
+     "heat_tw": [1.48, 9.34],
+     "w_m2": [0.0392, 0.247],
+     "added_dimming_percent": [0.0129, 0.13]
+    },
+    "fusion": {
+     "heat_tw": [2.16, 20.6],
+     "w_m2": [0.0569, 0.543],
+     "added_dimming_percent": [0.0187, 0.286]
+    }
+   },
+   "light_taken_km2": [1670000.0, 7070000.0],
+   "light_taken_share_of_moon": [0.044, 0.187],
+   "water_km3_year": {
+    "rain_used": [1680.0, 4600.0],
+    "withdrawn_from_seas": [0.0, 19.6],
+    "rain_on_glass": [0.0, 0.0]
+   },
+   "phosphorus_mt_year": {
+    "eaten": [3.52, 4.8],
+    "lost": [0.352, 1.44],
+    "in_microbial_biomass": [0.731, 2.36],
+    "glass_discharge": [0.0, 0.0]
+   },
+   "n2o": {
+    "kt_n_year": [159.0, 517.0],
+    "ppb_per_year": [0.0517, 0.168],
+    "ppb_after_1000_years": [51.7, 168.0]
+   },
+   "methane": {
+    "mt_year": [2.4, 24.0],
+    "steady_ppm": [0.503, 22.4]
+   },
+   "structure_gt": {
+    "glass_gt": [0.0, 0.0],
+    "steel_gt": [0.0, 0.0],
+    "aluminium_gt": [0.0, 0.0],
+    "building_gt": [0.0, 0.0]
+   },
+   "night_energy_twh": [369.0, 2370.0],
+   "night_energy_over_european_night": [0.0709, 0.457],
+   "middle_wet_fields_km2": [0.0, 1390000.0],
+   "feasible": [true, true],
+   "overflowing": [
+    [],
+    []
+   ]
+  },
+  "power_made_alone": {
+   "weights": {
+    "power_heavy": [0.0, 0.0],
+    "power_made": [1.0, 1.0],
+    "fully_lamp_lit": [0.0, 0.0]
+   },
+   "people_billion": [8.0, 8.0],
+   "land_km2": {
+    "rain_belt": [0.0, 0.0],
+    "middle_wet": [0.0, 0.0],
+    "fog_desert": [0.0, 0.0],
+    "highlands": [100000.0, 400000.0],
+    "polar": [0.0, 0.0],
+    "total": [100000.0, 400000.0],
+    "glass": [0.0, 0.0]
+   },
+   "towns_km2": [100000.0, 400000.0],
+   "fields_km2": [0.0, 0.0],
+   "dry_land_wild_share_outside_kept": [0.991, 0.966],
+   "power_tw": {
+    "irrigation": [0.0, 0.0],
+    "glasshouse_operations": [0.0, 0.0],
+    "glasshouse_water": [0.0, 0.0],
+    "lamps": [0.0, 0.0],
+    "microbial": [0.0, 0.0],
+    "aquaponics": [0.0, 0.0],
+    "power_made_food": [5.56, 22.3],
+    "nitrogen_fixation": [0.025, 0.0576],
+    "total": [5.59, 22.4]
+   },
+   "heat": {
+    "array": {
+     "heat_tw": [7.69, 30.8],
+     "w_m2": [0.203, 0.812],
+     "added_dimming_percent": [0.0667, 0.427]
+    },
+    "fusion": {
+     "heat_tw": [11.2, 67.8],
+     "w_m2": [0.295, 1.79],
+     "added_dimming_percent": [0.097, 0.941]
+    }
+   },
+   "light_taken_km2": [36800.0, 357000.0],
+   "light_taken_share_of_moon": [0.00097, 0.00941],
+   "water_km3_year": {
+    "rain_used": [0.0, 0.0],
+    "withdrawn_from_seas": [0.0, 0.0],
+    "rain_on_glass": [0.0, 0.0]
+   },
+   "phosphorus_mt_year": {
+    "eaten": [3.52, 4.8],
+    "lost": [0.352, 1.44],
+    "in_microbial_biomass": [1.41, 4.58],
+    "glass_discharge": [0.0, 0.0]
+   },
+   "n2o": {
+    "kt_n_year": [40.7, 101.0],
+    "ppb_per_year": [0.0133, 0.0329],
+    "ppb_after_1000_years": [13.3, 32.9]
+   },
+   "methane": {
+    "mt_year": [2.4, 24.0],
+    "steady_ppm": [0.503, 22.4]
+   },
+   "structure_gt": {
+    "glass_gt": [0.0, 0.0],
+    "steel_gt": [0.0, 0.0],
+    "aluminium_gt": [0.0, 0.0],
+    "building_gt": [0.0, 0.0]
+   },
+   "night_energy_twh": [1970.0, 7900.0],
+   "night_energy_over_european_night": [0.379, 1.52],
+   "middle_wet_fields_km2": [0.0, 0.0],
+   "feasible": [true, true],
+   "overflowing": [
+    [],
+    []
+   ]
+  },
+  "fully_lamp_lit_alone": {
+   "weights": {
+    "power_heavy": [0.0, 0.0],
+    "power_made": [0.0, 0.0],
+    "fully_lamp_lit": [1.0, 1.0]
+   },
+   "people_billion": [8.0, 8.0],
+   "land_km2": {
+    "rain_belt": [0.0, 0.0],
+    "middle_wet": [0.0, 0.0],
+    "fog_desert": [0.0, 0.0],
+    "highlands": [100000.0, 400000.0],
+    "polar": [0.0, 0.0],
+    "total": [100000.0, 400000.0],
+    "glass": [0.0, 0.0]
+   },
+   "towns_km2": [100000.0, 400000.0],
+   "fields_km2": [0.0, 0.0],
+   "dry_land_wild_share_outside_kept": [0.991, 0.966],
+   "power_tw": {
+    "irrigation": [0.0, 0.0],
+    "glasshouse_operations": [0.0, 0.0],
+    "glasshouse_water": [0.0, 0.0],
+    "lamps": [41.2, 423.0],
+    "microbial": [0.318, 1.06],
+    "aquaponics": [0.0, 0.0],
+    "power_made_food": [0.0, 0.0],
+    "nitrogen_fixation": [0.0371, 0.0854],
+    "total": [41.5, 425.0]
+   },
+   "heat": {
+    "array": {
+     "heat_tw": [57.2, 584.0],
+     "w_m2": [1.51, 15.4],
+     "added_dimming_percent": [0.496, 8.11]
+    },
+    "fusion": {
+     "heat_tw": [83.1, 1290.0],
+     "w_m2": [2.19, 34.0],
+     "added_dimming_percent": [0.721, 17.9]
+    }
+   },
+   "light_taken_km2": [274000.0, 6780000.0],
+   "light_taken_share_of_moon": [0.00721, 0.179],
+   "water_km3_year": {
+    "rain_used": [0.0, 0.0],
+    "withdrawn_from_seas": [0.0, 0.0],
+    "rain_on_glass": [0.0, 0.0]
+   },
+   "phosphorus_mt_year": {
+    "eaten": [3.52, 4.8],
+    "lost": [0.352, 1.44],
+    "in_microbial_biomass": [0.731, 2.36],
+    "glass_discharge": [0.0, 0.0]
+   },
+   "n2o": {
+    "kt_n_year": [499.0, 1240.0],
+    "ppb_per_year": [0.163, 0.403],
+    "ppb_after_1000_years": [163.0, 403.0]
+   },
+   "methane": {
+    "mt_year": [2.4, 24.0],
+    "steady_ppm": [0.503, 22.4]
+   },
+   "structure_gt": {
+    "glass_gt": [0.0, 0.0],
+    "steel_gt": [0.0, 0.0],
+    "aluminium_gt": [0.0, 0.0],
+    "building_gt": [18.5, 225.0]
+   },
+   "night_energy_twh": [14700.0, 150000.0],
+   "night_energy_over_european_night": [2.83, 28.9],
+   "middle_wet_fields_km2": [0.0, 0.0],
+   "feasible": [true, true],
+   "overflowing": [
+    [],
+    []
+   ]
+  },
+  "even": {
+   "weights": {
+    "power_heavy": [0.333, 0.333],
+    "power_made": [0.333, 0.333],
+    "fully_lamp_lit": [0.333, 0.333]
+   },
+   "people_billion": [8.0, 8.0],
+   "land_km2": {
+    "rain_belt": [406000.0, 1160000.0],
+    "middle_wet": [0.0, 0.0],
+    "fog_desert": [0.0, 0.0],
+    "highlands": [248000.0, 754000.0],
+    "polar": [0.0, 0.0],
+    "total": [654000.0, 1910000.0],
+    "glass": [0.0, 0.0]
+   },
+   "towns_km2": [100000.0, 400000.0],
+   "fields_km2": [554000.0, 1510000.0],
+   "dry_land_wild_share_outside_kept": [0.944, 0.837],
+   "power_tw": {
+    "irrigation": [0.0, 0.0],
+    "glasshouse_operations": [0.0, 0.0],
+    "glasshouse_water": [0.0, 0.0],
+    "lamps": [14.0, 143.0],
+    "microbial": [0.212, 0.709],
+    "aquaponics": [0.0, 0.0],
+    "power_made_food": [1.85, 7.43],
+    "nitrogen_fixation": [0.0331, 0.0762],
+    "total": [16.1, 151.0]
+   },
+   "heat": {
+    "array": {
+     "heat_tw": [22.1, 208.0],
+     "w_m2": [0.584, 5.49],
+     "added_dimming_percent": [0.192, 2.89]
+    },
+    "fusion": {
+     "heat_tw": [32.1, 458.0],
+     "w_m2": [0.848, 12.1],
+     "added_dimming_percent": [0.279, 6.37]
+    }
+   },
+   "light_taken_km2": [660000.0, 3930000.0],
+   "light_taken_share_of_moon": [0.0174, 0.103],
+   "water_km3_year": {
+    "rain_used": [560.0, 1540.0],
+    "withdrawn_from_seas": [0.0, 0.0],
+    "rain_on_glass": [0.0, 0.0]
+   },
+   "phosphorus_mt_year": {
+    "eaten": [3.52, 4.8],
+    "lost": [0.352, 1.44],
+    "in_microbial_biomass": [0.958, 3.1],
+    "glass_discharge": [0.0, 0.0]
+   },
+   "n2o": {
+    "kt_n_year": [233.0, 618.0],
+    "ppb_per_year": [0.0759, 0.201],
+    "ppb_after_1000_years": [75.9, 201.0]
+   },
+   "methane": {
+    "mt_year": [2.4, 24.0],
+    "steady_ppm": [0.503, 22.4]
+   },
+   "structure_gt": {
+    "glass_gt": [0.0, 0.0],
+    "steel_gt": [0.0, 0.0],
+    "aluminium_gt": [0.0, 0.0],
+    "building_gt": [6.18, 75.0]
+   },
+   "night_energy_twh": [5680.0, 53600.0],
+   "night_energy_over_european_night": [1.09, 10.3],
+   "middle_wet_fields_km2": [0.0, 0.0],
+   "feasible": [true, true],
+   "overflowing": [
+    [],
+    []
+   ]
+  },
+  "least_heat": {
+   "weights": {
+    "power_heavy": [0.5, 0.5],
+    "power_made": [0.4, 0.4],
+    "fully_lamp_lit": [0.1, 0.1]
+   },
+   "people_billion": [8.0, 8.0],
+   "land_km2": {
+    "rain_belt": [609000.0, 1730000.0],
+    "middle_wet": [0.0, 0.0],
+    "fog_desert": [0.0, 0.0],
+    "highlands": [323000.0, 931000.0],
+    "polar": [0.0, 0.0],
+    "total": [932000.0, 2670000.0],
+    "glass": [0.0, 0.0]
+   },
+   "towns_km2": [100000.0, 400000.0],
+   "fields_km2": [832000.0, 2270000.0],
+   "dry_land_wild_share_outside_kept": [0.92, 0.772],
+   "power_tw": {
+    "irrigation": [0.0, 0.0],
+    "glasshouse_operations": [0.0, 0.0],
+    "glasshouse_water": [0.0, 0.0],
+    "lamps": [4.48, 45.2],
+    "microbial": [0.191, 0.639],
+    "aquaponics": [0.0, 0.0],
+    "power_made_food": [2.23, 8.92],
+    "nitrogen_fixation": [0.0323, 0.0743],
+    "total": [6.93, 54.8]
+   },
+   "heat": {
+    "array": {
+     "heat_tw": [9.53, 75.4],
+     "w_m2": [0.252, 1.99],
+     "added_dimming_percent": [0.0828, 1.05]
+    },
+    "fusion": {
+     "heat_tw": [13.9, 166.0],
+     "w_m2": [0.366, 4.38],
+     "added_dimming_percent": [0.12, 2.31]
+    }
+   },
+   "light_taken_km2": [877000.0, 3140000.0],
+   "light_taken_share_of_moon": [0.0231, 0.0828],
+   "water_km3_year": {
+    "rain_used": [839.0, 2300.0],
+    "withdrawn_from_seas": [0.0, 0.0],
+    "rain_on_glass": [0.0, 0.0]
+   },
+   "phosphorus_mt_year": {
+    "eaten": [3.52, 4.8],
+    "lost": [0.352, 1.44],
+    "in_microbial_biomass": [1.0, 3.25],
+    "glass_discharge": [0.0, 0.0]
+   },
+   "n2o": {
+    "kt_n_year": [146.0, 422.0],
+    "ppb_per_year": [0.0474, 0.138],
+    "ppb_after_1000_years": [47.4, 138.0]
+   },
+   "methane": {
+    "mt_year": [2.4, 24.0],
+    "steady_ppm": [0.503, 22.4]
+   },
+   "structure_gt": {
+    "glass_gt": [0.0, 0.0],
+    "steel_gt": [0.0, 0.0],
+    "aluminium_gt": [0.0, 0.0],
+    "building_gt": [1.85, 22.5]
+   },
+   "night_energy_twh": [2440.0, 19400.0],
+   "night_energy_over_european_night": [0.47, 3.73],
+   "middle_wet_fields_km2": [0.0, 0.0],
+   "feasible": [true, true],
+   "overflowing": [
+    [],
+    []
+   ]
+  }
+ },
+ "per_tenth_planned_case": {
+  "power_heavy": {
+   "weights": {
+    "power_heavy": [0.1, 0.1],
+    "power_made": [0.0, 0.0],
+    "fully_lamp_lit": [0.0, 0.0]
+   },
+   "people_billion": [8.0, 8.0],
+   "land_km2": {
+    "rain_belt": [122000.0, 347000.0],
+    "middle_wet": [0.0, 0.0],
+    "fog_desert": [0.0, 0.0],
+    "highlands": [145000.0, 506000.0],
+    "polar": [0.0, 0.0],
+    "total": [266000.0, 853000.0],
+    "glass": [0.0, 0.0]
+   },
+   "towns_km2": [100000.0, 400000.0],
+   "fields_km2": [166000.0, 453000.0],
+   "dry_land_wild_share_outside_kept": [0.977, 0.927],
+   "power_tw": {
+    "irrigation": [0.0, 0.0],
+    "glasshouse_operations": [0.0, 0.0],
+    "glasshouse_water": [0.0, 0.0],
+    "lamps": [0.0723, 0.563],
+    "microbial": [0.0318, 0.106],
+    "aquaponics": [0.0, 0.0],
+    "power_made_food": [0.0, 0.0],
+    "nitrogen_fixation": [0.00371, 0.00854],
+    "total": [0.108, 0.678]
+   },
+   "heat": {
+    "array": {
+     "heat_tw": [0.148, 0.934],
+     "w_m2": [0.00392, 0.0246],
+     "added_dimming_percent": [0.00129, 0.013]
+    },
+    "fusion": {
+     "heat_tw": [0.216, 2.06],
+     "w_m2": [0.00569, 0.0543],
+     "added_dimming_percent": [0.00187, 0.0286]
+    }
+   },
+   "light_taken_km2": [167000.0, 464000.0],
+   "light_taken_share_of_moon": [0.0044, 0.0122],
+   "water_km3_year": {
+    "rain_used": [168.0, 461.0],
+    "withdrawn_from_seas": [0.0, 0.0],
+    "rain_on_glass": [0.0, 0.0]
+   },
+   "phosphorus_mt_year": {
+    "eaten": [0.352, 0.48],
+    "lost": [0.0352, 0.144],
+    "in_microbial_biomass": [0.0731, 0.236],
+    "glass_discharge": [0.0, 0.0]
+   },
+   "n2o": {
+    "kt_n_year": [15.9, 51.7],
+    "ppb_per_year": [0.00517, 0.0168],
+    "ppb_after_1000_years": [5.17, 16.8]
+   },
+   "methane": {
+    "mt_year": [0.24, 2.4],
+    "steady_ppm": [0.0503, 2.24]
+   },
+   "structure_gt": {
+    "glass_gt": [0.0, 0.0],
+    "steel_gt": [0.0, 0.0],
+    "aluminium_gt": [0.0, 0.0],
+    "building_gt": [0.0, 0.0]
+   },
+   "night_energy_twh": [36.9, 237.0],
+   "night_energy_over_european_night": [0.00709, 0.0457],
+   "middle_wet_fields_km2": [0.0, 0.0],
+   "feasible": [true, true],
+   "overflowing": [
+    [],
+    []
+   ]
+  },
+  "power_made": {
+   "weights": {
+    "power_heavy": [0.0, 0.0],
+    "power_made": [0.1, 0.1],
+    "fully_lamp_lit": [0.0, 0.0]
+   },
+   "people_billion": [8.0, 8.0],
+   "land_km2": {
+    "rain_belt": [0.0, 0.0],
+    "middle_wet": [0.0, 0.0],
+    "fog_desert": [0.0, 0.0],
+    "highlands": [100000.0, 400000.0],
+    "polar": [0.0, 0.0],
+    "total": [100000.0, 400000.0],
+    "glass": [0.0, 0.0]
+   },
+   "towns_km2": [100000.0, 400000.0],
+   "fields_km2": [0.0, 0.0],
+   "dry_land_wild_share_outside_kept": [0.991, 0.966],
+   "power_tw": {
+    "irrigation": [0.0, 0.0],
+    "glasshouse_operations": [0.0, 0.0],
+    "glasshouse_water": [0.0, 0.0],
+    "lamps": [0.0, 0.0],
+    "microbial": [0.0, 0.0],
+    "aquaponics": [0.0, 0.0],
+    "power_made_food": [0.556, 2.23],
+    "nitrogen_fixation": [0.0025, 0.00576],
+    "total": [0.559, 2.24]
+   },
+   "heat": {
+    "array": {
+     "heat_tw": [0.769, 3.08],
+     "w_m2": [0.0203, 0.0812],
+     "added_dimming_percent": [0.00667, 0.0427]
+    },
+    "fusion": {
+     "heat_tw": [1.12, 6.78],
+     "w_m2": [0.0295, 0.179],
+     "added_dimming_percent": [0.0097, 0.0941]
+    }
+   },
+   "light_taken_km2": [3680.0, 35700.0],
+   "light_taken_share_of_moon": [9.7e-05, 0.000941],
+   "water_km3_year": {
+    "rain_used": [0.0, 0.0],
+    "withdrawn_from_seas": [0.0, 0.0],
+    "rain_on_glass": [0.0, 0.0]
+   },
+   "phosphorus_mt_year": {
+    "eaten": [0.352, 0.48],
+    "lost": [0.0352, 0.144],
+    "in_microbial_biomass": [0.141, 0.458],
+    "glass_discharge": [0.0, 0.0]
+   },
+   "n2o": {
+    "kt_n_year": [4.07, 10.1],
+    "ppb_per_year": [0.00133, 0.00329],
+    "ppb_after_1000_years": [1.33, 3.29]
+   },
+   "methane": {
+    "mt_year": [0.24, 2.4],
+    "steady_ppm": [0.0503, 2.24]
+   },
+   "structure_gt": {
+    "glass_gt": [0.0, 0.0],
+    "steel_gt": [0.0, 0.0],
+    "aluminium_gt": [0.0, 0.0],
+    "building_gt": [0.0, 0.0]
+   },
+   "night_energy_twh": [197.0, 790.0],
+   "night_energy_over_european_night": [0.0379, 0.152],
+   "middle_wet_fields_km2": [0.0, 0.0],
+   "feasible": [true, true],
+   "overflowing": [
+    [],
+    []
+   ]
+  },
+  "fully_lamp_lit": {
+   "weights": {
+    "power_heavy": [0.0, 0.0],
+    "power_made": [0.0, 0.0],
+    "fully_lamp_lit": [0.1, 0.1]
+   },
+   "people_billion": [8.0, 8.0],
+   "land_km2": {
+    "rain_belt": [0.0, 0.0],
+    "middle_wet": [0.0, 0.0],
+    "fog_desert": [0.0, 0.0],
+    "highlands": [100000.0, 400000.0],
+    "polar": [0.0, 0.0],
+    "total": [100000.0, 400000.0],
+    "glass": [0.0, 0.0]
+   },
+   "towns_km2": [100000.0, 400000.0],
+   "fields_km2": [0.0, 0.0],
+   "dry_land_wild_share_outside_kept": [0.991, 0.966],
+   "power_tw": {
+    "irrigation": [0.0, 0.0],
+    "glasshouse_operations": [0.0, 0.0],
+    "glasshouse_water": [0.0, 0.0],
+    "lamps": [4.12, 42.3],
+    "microbial": [0.0318, 0.106],
+    "aquaponics": [0.0, 0.0],
+    "power_made_food": [0.0, 0.0],
+    "nitrogen_fixation": [0.00371, 0.00854],
+    "total": [4.15, 42.5]
+   },
+   "heat": {
+    "array": {
+     "heat_tw": [5.72, 58.4],
+     "w_m2": [0.151, 1.54],
+     "added_dimming_percent": [0.0496, 0.811]
+    },
+    "fusion": {
+     "heat_tw": [8.31, 129.0],
+     "w_m2": [0.219, 3.4],
+     "added_dimming_percent": [0.0721, 1.79]
+    }
+   },
+   "light_taken_km2": [27400.0, 678000.0],
+   "light_taken_share_of_moon": [0.000721, 0.0179],
+   "water_km3_year": {
+    "rain_used": [0.0, 0.0],
+    "withdrawn_from_seas": [0.0, 0.0],
+    "rain_on_glass": [0.0, 0.0]
+   },
+   "phosphorus_mt_year": {
+    "eaten": [0.352, 0.48],
+    "lost": [0.0352, 0.144],
+    "in_microbial_biomass": [0.0731, 0.236],
+    "glass_discharge": [0.0, 0.0]
+   },
+   "n2o": {
+    "kt_n_year": [49.9, 124.0],
+    "ppb_per_year": [0.0163, 0.0403],
+    "ppb_after_1000_years": [16.3, 40.3]
+   },
+   "methane": {
+    "mt_year": [0.24, 2.4],
+    "steady_ppm": [0.0503, 2.24]
+   },
+   "structure_gt": {
+    "glass_gt": [0.0, 0.0],
+    "steel_gt": [0.0, 0.0],
+    "aluminium_gt": [0.0, 0.0],
+    "building_gt": [1.85, 22.5]
+   },
+   "night_energy_twh": [1470.0, 15000.0],
+   "night_energy_over_european_night": [0.283, 2.89],
+   "middle_wet_fields_km2": [0.0, 0.0],
+   "feasible": [true, true],
+   "overflowing": [
+    [],
+    []
+   ]
+  }
+ },
+ "heritage_meat": {
+  "land_m2_per_kg": 37.2,
+  "cattle_ch4_kg_per_kg": [0.203, 0.214],
+  "beef_ch4_kg_per_kg_by_herd": {
+   "beef_beef_herd": [1.65, 1.75],
+   "beef_dairy_herd": [0.48, 0.508]
+  },
+  "homestead_region_km2": 1390000.0,
+  "animal_part_protein_g_day": 24.3,
+  "cases": {
+   "4_billion_0.5_kg": {
+    "meat_mt_year": 2.0,
+    "land_km2": 74400.0,
+    "share_of_homestead_region": 0.0535,
+    "share_of_animal_part": [0.0112, 0.0141],
+    "cattle_ch4_mt_year": [0.406, 0.429],
+    "steady_ppm": [0.085, 0.401]
+   },
+   "4_billion_1_kg": {
+    "meat_mt_year": 4.0,
+    "land_km2": 149000.0,
+    "share_of_homestead_region": 0.107,
+    "share_of_animal_part": [0.0225, 0.0281],
+    "cattle_ch4_mt_year": [0.811, 0.857],
+    "steady_ppm": [0.17, 0.801]
+   },
+   "4_billion_2_kg": {
+    "meat_mt_year": 8.0,
+    "land_km2": 298000.0,
+    "share_of_homestead_region": 0.214,
+    "share_of_animal_part": [0.045, 0.0562],
+    "cattle_ch4_mt_year": [1.62, 1.71],
+    "steady_ppm": [0.34, 1.6]
+   },
+   "6_billion_0.5_kg": {
+    "meat_mt_year": 3.0,
+    "land_km2": 112000.0,
+    "share_of_homestead_region": 0.0802,
+    "share_of_animal_part": [0.0112, 0.0141],
+    "cattle_ch4_mt_year": [0.608, 0.643],
+    "steady_ppm": [0.128, 0.601]
+   },
+   "6_billion_1_kg": {
+    "meat_mt_year": 6.0,
+    "land_km2": 223000.0,
+    "share_of_homestead_region": 0.16,
+    "share_of_animal_part": [0.0225, 0.0281],
+    "cattle_ch4_mt_year": [1.22, 1.29],
+    "steady_ppm": [0.255, 1.2]
+   },
+   "6_billion_2_kg": {
+    "meat_mt_year": 12.0,
+    "land_km2": 447000.0,
+    "share_of_homestead_region": 0.321,
+    "share_of_animal_part": [0.045, 0.0562],
+    "cattle_ch4_mt_year": [2.43, 2.57],
+    "steady_ppm": [0.51, 2.4]
+   },
+   "8_billion_0.5_kg": {
+    "meat_mt_year": 4.0,
+    "land_km2": 149000.0,
+    "share_of_homestead_region": 0.107,
+    "share_of_animal_part": [0.0112, 0.0141],
+    "cattle_ch4_mt_year": [0.811, 0.857],
+    "steady_ppm": [0.17, 0.801]
+   },
+   "8_billion_1_kg": {
+    "meat_mt_year": 8.0,
+    "land_km2": 298000.0,
+    "share_of_homestead_region": 0.214,
+    "share_of_animal_part": [0.0225, 0.0281],
+    "cattle_ch4_mt_year": [1.62, 1.71],
+    "steady_ppm": [0.34, 1.6]
+   },
+   "8_billion_2_kg": {
+    "meat_mt_year": 16.0,
+    "land_km2": 595000.0,
+    "share_of_homestead_region": 0.428,
+    "share_of_animal_part": [0.045, 0.0562],
+    "cattle_ch4_mt_year": [3.24, 3.43],
+    "steady_ppm": [0.68, 3.2]
+   }
+  }
+ },
+ "assumptions": {
+  "basket": {
+   "poultry": 0.4,
+   "pork": 0.3,
+   "beef_dairy_herd": 0.25,
+   "beef_beef_herd": 0.05
+  },
+  "basket_note": "The author's examples: homestead dairy and vaca vieja (beef from dairy herds), some wagyu (beef from beef herds), heritage pork and chicken. The shares are a design guess.",
+  "land_m2_per_kg": {
+   "poultry": 12.2,
+   "pork": 17.4,
+   "beef_dairy_herd": 43.2,
+   "beef_beef_herd": 326.0
+  },
+  "gleam_co2eq_per_kg_carcass": {
+   "beef_beef_herd": 67.8,
+   "beef_dairy_herd": 18.4
+  },
+  "enteric_share": {
+   "beef_beef_herd": 0.43,
+   "beef_dairy_herd": 0.46
+  },
+  "gwp_ch4": 25.0,
+  "carcass_yield": [0.705, 0.667],
+  "protein_fraction": [0.2, 0.25],
+  "heritage_kg_per_person_year": [0.5, 1.0, 2.0],
+  "heritage_in_the_diet": "The heritage meat stands within the diet's animal part, which the blend makes as microbial protein; share_of_animal_part gives its protein against that part, so the blend's power is left as computed."
+ },
+ "sources": ["Poore, J. & Nemecek, T. 2018. Reducing food's environmental impacts through producers and consumers. Science 360, 987-992; per-kg land use as given by Our World in Data (ourworldindata.org/grapher/land-use-per-kg-poore).", "Gerber, P.J. et al. 2013. Tackling climate change through livestock. FAO, Rome.", "Opio, C. et al. 2013. Greenhouse gas emissions from ruminant supply chains: a global life cycle assessment. FAO, Rome.", "IPCC 2006. Guidelines for National Greenhouse Gas Inventories, volume 4, chapter 10 (enteric fermentation, Tier 1).", "USDA ERS 1992. Weights, Measures, and Conversion Factors for Agricultural Commodities and Their Products. Agricultural Handbook 697, Table 7."]
+}

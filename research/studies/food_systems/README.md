@@ -118,6 +118,14 @@ arithmetic on cited values is marked *derived*. The product is `results/food_sys
     the power-heavy mix's high-cost end grows 1.06 million km² of its crops' equivalent on watered fields, with 3,250
     km³ a year from the seas and 0.53 TW of lift.
 
+13. **The author's blend, power-heavy 40%, power-made 50% and fully lamp-lit 10%, takes the least sunlight from wild
+    life at the high-cost end within the limits set for it** (*screen*; [blend.py](blend.py),
+    [results/food_blend.json](results/food_blend.json)). With each mix between a tenth and a half of the diet,
+    power-made takes the cap and fully lamp-lit the floor, so the limits set the weights. At 8 billion under the
+    compromise its fields take 0.67–1.81 million km², none of them in the middle latitudes, and its heat is 15–171 TW
+    with fusion, 0.13–2.4% more dimming. Heritage meat at a kilogram a person a year takes 0.30 million km², a fifth of
+    the homestead region, and its cattle add 1.6–1.7 Mt of methane a year.
+
 ## The systems, per billion residents
 
 Each row grows one part of the diet for a billion residents: the whole plant-rich diet for fields, glass and lamp farms,
@@ -452,6 +460,60 @@ with 0–19.6 km³ a year from the seas. With half wild and 20% hybrid they take
 end grows 1.06 million km² of its crops' equivalent by watering those fields: 3,250 km³ a year from the seas, 0.53 TW of
 lift and 7.3 TW of food power against 6.8.
 
+## The author's blend
+
+On 12 October 2026 the author chose a blend of the three mixes that fit under the wild share at 4–8 billion,
+power-heavy, power-made and fully lamp-lit, left its weights to an optimum, and added small amounts of heritage meat
+from the homesteads and hobby farms as a luxury
+([decisions](../../decisions.md#automation-the-network-and-food-12-october-2026)). [blend.py](blend.py) builds each
+blend as one case from the three mixes' rules (*screen*): power-heavy's share grows its fields around every resident's
+towns, wettest land first, and the other two add their power, gases, phosphorus and buildings. A blend of one mix alone
+repeats that mix's case.
+
+**The rule.** Weights in steps of 5%, each mix at least a tenth of the diet, so all three stay in use and can grow when
+another falters, and none above half, so that losing any one leaves at least half the food. Among those, the blend that
+takes the least sunlight from wild life at 8 billion under the compromise, at the high-cost end and then over both ends:
+the fields' area plus the added dimming under fusion, the planning assumption for local power, as a share of the whole
+surface. Power-made uses no fields and little power and takes the cap; fully lamp-lit keeps the floor, since each tenth
+of the diet under lamps takes 4.2–42 TW of power, 8.3–129 TW of heat with fusion; power-heavy carries the rest. The
+limits set the weights: without them power-made alone takes least, and each ten points more of it would spare about
+430,000 km² at the high-cost end. At the low-cost end lamps cost less than fields, and 10/50/40 would take 0.78% of the
+Moon's sunlight against the blend's 1.9%.
+
+| At 8 billion, the compromise | The blend, 40/50/10 | Least heat, 50/40/10 | Even thirds | Power-heavy alone |
+|---|---|---|---|---|
+| Fields, million km² | 0.67–1.81 | 0.83–2.27 | 0.55–1.51 | 1.66–6.97 |
+| Heat with fusion, TW | 14.8–171 | 13.9–166 | 32.1–458 | 2.16–20.6 |
+| Added dimming with fusion | 0.13–2.4% | 0.12–2.3% | 0.28–6.4% | 0.019–0.29% |
+| Sunlight taken from wild life, share of the Moon's | 1.9–7.2% | 2.3–8.3% | 1.7–10% | 4.4–19% |
+
+The blend's power is 7.4–56 TW, 10.2–77.5 TW of heat with power from the array. Its fields and towns leave 81–93% of the
+dry land outside the kept half wild and the middle latitudes free of fields, so the homestead region, the middle-wet
+zone's 1.39 million km² outside the kept half, is the homesteads' own. It needs no water from the seas, adds 0.044–0.124
+ppb of N2O a year, against 0.052–0.17 for power-heavy alone, and its vertical farms take 1.9–22 Gt of building. At 4 and
+6 billion its heat is 7.4–85 and 11–128 TW with fusion; under the comparison's half wild with 20% hybrid its fields take
+0.67–2.08 million km² and it still fits.
+
+**Heritage meat.** A basket of the author's examples, by weight 40% chicken, 30% heritage pork, 25% beef from dairy
+herds (homestead dairy and vaca vieja) and 5% beef from beef herds (some wagyu), a design guess, counted as fat- and
+bone-free meat. At Earth's global per-kilogram land use (Poore & Nemecek 2018) it takes 37.2 m² a kilogram. FAO GLEAM
+gives beef 67.8 kg CO2-eq per kg of carcass from beef herds and 18.4 from dairy herds, 43% and 46% of it enteric
+fermentation (Gerber et al. 2013; Opio et al. 2013); at a carcass's yield of 0.667–0.705 kg of boneless or retail beef
+(USDA ERS 1992), the cattle emit 1.65–1.75 kg of methane a kilogram of beef from beef herds and 0.48–0.51 from dairy
+herds, and the basket 0.20–0.21 kg. Pigs and poultry emit little.
+
+| At 8 billion, a person a year | 0.5 kg | 1 kg | 2 kg |
+|---|---|---|---|
+| Land, thousand km² | 149 | 298 | 595 |
+| Share of the homestead region | 11% | 21% | 43% |
+| Share of the diet's animal protein, at 20–25% protein | 1.1–1.4% | 2.2–2.8% | 4.5–5.6% |
+| Cattle methane, Mt a year | 0.81–0.86 | 1.6–1.7 | 3.2–3.4 |
+| Steady methane, ppm | 0.17–0.80 | 0.34–1.6 | 0.68–3.2 |
+
+At 8 billion each kilogram of beef a person a year emits 3.8–4.1 Mt of methane from dairy herds and 13–14 Mt from beef
+herds. The heritage meat stands within the diet's animal part, so the blend's power is left as computed; its feed and
+grazing are inside the land figure.
+
 ## What the physics allows a lamp-lit diet
 
 The fully lamp-lit diet for 8 billion people uses 41.5–425 TW (*screen*), against 12–36 TW for the residents' other
@@ -535,6 +597,7 @@ efficiency, and the phosphorus rides in that food (*derived*).
 
 ```
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 nice -n 10 python3 -m research.studies.food_systems.run
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 nice -n 10 python3 -m research.studies.food_systems.blend
 python3 -m pytest -q research/studies/food_systems
 ```
 
@@ -549,13 +612,15 @@ kept half apart from the compromise, and the compromise's parkland gives the kep
 regeneration test skips when the ignored grids or the bound branches are absent. `checks.json` records the review's
 findings, their fixes and the test results.
 
+The blend reads the same basis and writes [results/food_blend.json](results/food_blend.json); its tests check the rule,
+that each mix alone repeats the food study's case, that the blend lies between its parts, the heritage meat's arithmetic
+and that the product regenerates.
+
 ## What remains
 
-- The author's blend of the three mixes that fit, power-heavy, power-made and fully lamp-lit, at the weights the study
-  sets to the optimum, with heritage meat from the homesteads and hobby farms as a luxury
-  ([decisions](../../decisions.md#automation-the-network-and-food-12-october-2026)). At 8 billion each tenth of the diet
-  takes 0.1–0.7 TW as power-heavy, 0.6–2.2 TW as power-made and 4–43 TW fully lamp-lit. The heritage meat's land, feed
-  and methane are to compute, with cattle returning to a design that left ruminants out.
+- C′ under the author's blend: the distributions study counts power-heavy's fields and heat; the blend's heat, 15–171 TW
+  with fusion at 8 billion, and its fields replace them in the joint account. The heritage meat's homesteads, their
+  grazing, feed and herds in detail.
 - The crop model has no water yet (ecology's first open question). Its water-use efficiency decides between the rain-fed
   land here and ecology's lower end, and farm yields below potential add a quarter to a doubling of field land.
 - Fog and wind paired snapshot by snapshot, from a CM1 ring rerun that writes them, would replace the fog-net bracket.

@@ -73,9 +73,10 @@ on this laptop. The findings behind them are in the [README](README.md).
    - N2O and methane: their warming in the deep column, and how strict soilless culture and fish must be;
    - fog and wind paired snapshot by snapshot, and dew from the night's surface energy, in the fog desert;
    - the land within reach of each city;
-   - the author's blend of the three mixes that fit, power-heavy, power-made and fully lamp-lit, at the weights the
-     study sets to the optimum, with heritage meat from the homesteads and hobby farms as a luxury, whose land, feed and
-     methane are to compute (README, finding 61).
+   - the author's blend, set to the optimum: power-heavy 40%, power-made 50% and fully lamp-lit 10%, with heritage meat
+     from the homesteads and hobby farms as a luxury ([food
+     blend](../research/studies/food_systems/README.md#the-authors-blend)); C′'s joint account under the blend, and the
+     homesteads' herds in detail.
 
    **How:** the plant model with water and the ecology work's nutrient budget; a gas-warming column; a CM1 ring rerun
    that writes fog and wind together.

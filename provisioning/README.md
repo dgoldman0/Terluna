@@ -494,14 +494,14 @@ is [distributions](../research/studies/distributions/README.md); numbers here ar
     each against the wind. The array, 0.13 s away by round trip, stands above the horizon almost everywhere, and the
     band where Earth flies its low satellites lies inside the Moon's air.
 
-61. **The author's food blend takes its heat from its fully lamp-lit share** (*derived* from the [food
-    study](../research/studies/food_systems/README.md)). At 8 billion each tenth of the diet takes 0.1–0.7 TW as
-    power-heavy, 0.6–2.2 TW as power-made and 4–43 TW fully lamp-lit, so an even blend takes 16–151 TW against 12–36 TW
-    for the residents' other energy. A kilogram of heritage meat a person a year takes 0.1 million km² as pork or
-    chicken, 0.35 million as dairy-herd beef and 2.6 million as beef from beef herds (Poore & Nemecek 2018), against the
-    homestead region's 1.39 million. Each kilogram of beef a person a year needs a herd near 100 million cattle, whose
-    5–9 Mt of methane a year only soils remove; red seaweed in their feed cut steers' methane yield by 45–68% over 147
-    days (Roque et al. 2021).
+61. **The author's food blend, set to the optimum, is power-heavy 40%, power-made 50% and fully lamp-lit 10%**
+    (*screen*; [food blend](../research/studies/food_systems/README.md#the-authors-blend)). With each mix between a
+    tenth and a half of the diet, it takes the least sunlight from wild life at the high-cost end, power-made at the cap
+    and lamps at the floor: at 8 billion its fields take 0.67–1.81 million km², none in the middle latitudes, and its
+    heat is 15–171 TW with fusion, 0.13–2.4% more dimming; each tenth of the diet under lamps takes 8.3–129 TW of heat.
+    Heritage meat at a kilogram a person a year takes 0.30 million km², a fifth of the homestead region, and its cattle
+    add 1.6–1.7 Mt of methane a year, 0.34–1.6 ppm at steady state; red seaweed in cattle feed cut steers' methane yield
+    by 45–68% over 147 days (Roque et al. 2021).
 
 ## Statements elsewhere that need correcting
 
