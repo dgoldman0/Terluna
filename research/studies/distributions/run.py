@@ -171,8 +171,42 @@ HOMESTEAD_HOUSEHOLD = 4.0             # people in a homestead household, with th
 
 MOON_BILLION = (4, 6, 8)
 ALOFT_BILLION = (2, 3, 4)
-KEPT = (0.3, 0.5)
-KEPT_KEY = {0.3: 'kept_30', 0.5: 'kept_50'}
+
+
+class LandRule(float):
+    """A land rule, as the food study defines it. Its value is the share of each zone, and of the sky, closed to
+    farms, cities, towns and sky towns; `hybrid` is the part of it that grazing and the homesteads' homes may use,
+    and `key` names the rule in the products. Two rules are equal only when both parts are, so a kept half and the
+    compromise stay apart, and a rule with a hybrid part needs its own key."""
+
+    def __new__(cls, closed, hybrid=0.0, key=None):
+        if hybrid and not key:
+            raise ValueError('a land rule with a hybrid part needs a key')
+        rule = super().__new__(cls, closed)
+        rule.hybrid = hybrid
+        rule.key = key or f'kept_{round(closed * 100)}'
+        return rule
+
+    def __eq__(self, other):
+        if isinstance(other, LandRule):
+            return float(self) == float(other) and self.hybrid == other.hybrid
+        return float(self) == other and not self.hybrid
+
+    def __ne__(self, other):
+        return not self == other
+
+    __hash__ = float.__hash__
+
+
+# The author's rule of 11 October 2026 (research/decisions.md, People on the Moon and beyond): at least half of the
+# land and of the dark sky wild is preferred, applied here to every zone and to the sky (kept_50); it can come down to
+# 30% wild with another 20% hybrid, a compromise between keeping 30% and keeping half. Hybrid land is fairly wild, more heavily managed and carries
+# people's daily life at low density; this study reads it as open to grazing and to the homesteads' homes beside the
+# fields they work. At the author's request the earlier reading, half wild with another 20% hybrid, which leaves farms
+# and towns 30%, runs for comparison. The food study's basis.land_rules carry the same rules, and checks.land_rules
+# compares them.
+KEPT = (LandRule(0.3), LandRule(0.5), LandRule(0.5, 0.2, 'wild_30_hybrid_20'),
+        LandRule(0.7, 0.2, 'wild_50_hybrid_20'))
 CHOSEN_MIX = 'power_heavy'
 SUPPLIES = ('fusion', 'array')
 DESIGNS = ('shielded', 'twilight', 'living')
@@ -217,7 +251,16 @@ EVIDENCE = ('A screen on committed and bound products: the food study\'s mixes a
 READING_RULE = ('People in billions unless named; areas km2; water km3 a year; power, energy and heat TW (TW a '
                 'billion is kW a person); phosphorus kt a year unless a key names Mt; mass Gt; shares are '
                 'fractions and _percent values percentage points. moon.cases is keyed by lunar residents and those '
-                'aloft ("6_3"); kept_30 and kept_50 apply the kept share to every zone and to the sky. Each case runs '
+                'aloft ("6_3") and then by land rule. kept_30 and kept_50 keep 30% and half of every zone and of the '
+                'sky wild; wild_30_hybrid_20 is the author\'s compromise, 30% wild and another 20% hybrid, and '
+                'wild_50_hybrid_20 half wild and another 20% hybrid, kept for comparison at the author\'s request '
+                '(assumptions.land_rules: closed is the share closed to farms, cities, towns and sky towns, hybrid '
+                'the part of it open to grazing and to the homesteads\' homes beside their fields; checks.land_rules '
+                'compares them with the food study\'s). Capacities and traffic use the land and sky outside the '
+                'closed share, and sky.towns_grid_share_of_their_sky gives the sky towns\' grid against that sky; '
+                'the wild shares count the land and sky that farms, towns, sky towns, grazing and the homesteads\' '
+                'homes leave against everything outside the wild share, so under a hybrid rule they include unused '
+                'hybrid land, and used_share_of_dry_land compares the rules directly. Each case runs '
                 'over 16 corners, every combination of the placement guesses with every input at its favourable and '
                 'unfavourable end; full gives [low, high] over them all, feasible over the corners whose land bands '
                 'all fit (null when all do), and remedy the same case with the dry highland towns poleward of 45 '
@@ -225,7 +268,12 @@ READING_RULE = ('People in billions unless named; areas km2; water km3 a year; p
                 'scattered communities on the fog-desert side of their homes, where some corner overfills '
                 '(buildable_corners_by_parts counts the corners each part fits). bands gives each corner range\'s '
                 'use, capacity and overfill by land band; the middle-wet zone is a band of its own, which the '
-                'scattered communities\' middle-band land (30-48.6 degrees) covers by area. Energy: '
+                'scattered communities\' middle-band land (30-48.6 degrees) covers by area, and its fields are held '
+                'to the food fill\'s room against the food product\'s rounding. Under a hybrid rule the fog band\'s '
+                'use_share and overfill take the larger of its farms and towns against the land outside the closed '
+                'share and of those with grazing against the land open to grazing; '
+                'bands.homestead_land_on_hybrid_km2 gives the homesteads\' homes placed on the hybrid part. '
+                'moon.cprime gives C\'s results by rule, and each distribution\'s moon.land_rules its own. Energy: '
                 'primary_tw counts the residents\' primary energy and the electricity at fusion\'s input, 2.0-3.0 W '
                 'a watt (one basis); electricity_tw is the electricity alone; heat_by_component_tw splits the heat. '
                 'fusion and array name the supply whose heat the Moon takes. The chosen food mix is the food study\'s '
@@ -656,10 +704,25 @@ def build_basis(d, b):
 # ---------------------------------------------------------------------------------------------------------------
 # The Moon: placement, land bands, food, energy, water, phosphorus, light, wild land and sky, traffic.
 
+def kept_key(kept):
+    """A land rule's key in the products; a plain kept share is kept_30 or kept_50."""
+    return getattr(kept, 'key', None) or f'kept_{round(kept * 100)}'
+
+
+def hybrid_share(kept):
+    return getattr(kept, 'hybrid', 0.0)
+
+
+def open_share(kept):
+    """The share of each zone open to grazing and the homesteads' homes, and the share the wild shares count against:
+    the land outside the kept share with the rule's hybrid part. Farms, cities and towns stay within 1 - kept."""
+    return 1.0 - kept + hybrid_share(kept)
+
+
 def food_block(food, mix, moon, kept):
     """A mix's case for `moon` billion residents at a kept share, at its full range when both ends fit and at its
     feasible range otherwise; None when even its low-cost end overflows."""
-    case = food['mixes'][mix]['cases'][str(int(moon))][KEPT_KEY[kept]]
+    case = food['mixes'][mix]['cases'][str(int(moon))][kept_key(kept)]
     feasible = case['feasible']
     if not feasible[0]:
         return None
@@ -740,7 +803,7 @@ def land_bands(B, blk, reach, place, e, kept, wet_rule='area'):
     out_share = 1.0 - kept
     f = blk.get('fields')
     rain_belt = f['field_km2_by_zone']['rain_belt'][e] if f else 0.0
-    middle_wet = max(f['field_km2_by_zone']['middle_wet'][e], 0.0) if f else 0.0
+    middle_wet = middle_wet_fields(B, blk, e, kept)
     highland_fields = f['field_km2_by_zone']['highlands'][e] if f else 0.0
     fog_watered = f['fog_desert_watered_km2'][e] if f else 0.0
     if blk['land_km2']['glass'][e] > 0.0:
@@ -764,30 +827,40 @@ def land_bands(B, blk, reach, place, e, kept, wet_rule='area'):
         raise ValueError(f'unknown wet rule {wet_rule}')
     homes = place['homestead_land_km2']          # C': homesteads live among the middle-wet fields
     rule = place['homestead_rule']
-    if rule == 'zone':                           # beside the fields, on the zone
-        homes_on_mw, homes_elsewhere = homes, 0.0
+    homes_on_hybrid = 0.0
+    if rule == 'zone':                           # beside the fields, on the zone's hybrid part first
+        homes_on_hybrid = min(homes, zones['middle_wet'] * hybrid_share(kept))
+        homes_on_mw, homes_elsewhere = homes - homes_on_hybrid, 0.0
     elif rule == 'within_fields':                # within the fields they work, taking a share of the fields' land
         homes_on_mw, homes_elsewhere = 0.0, 0.0
     else:
         raise ValueError(f'unknown homestead rule {rule}')
+    grazing = blk['grazing_km2'][e]
     use = dict(all_land_0_30=fields_0_30 + a['metropolis'] + sl['low_0_30'],
                highlands_30_45=fields_30_45 + place['dry_area_by_band']['30-45'],
                highlands_45_90=place['dry_area_by_band']['45-60'] + place['dry_area_by_band']['60-90'],
                middle_wet_zone=middle_wet + on_mw + homes_on_mw,
-               fog_desert_and_polar=(fog_watered + blk['grazing_km2'][e] + middle_land - on_mw + sl['high']
-                                     + homes_elsewhere))
+               fog_desert_and_polar=(fog_watered + grazing + middle_land - on_mw + sl['high'] + homes_elsewhere))
     cap = dict(all_land_0_30=(dry_b['0-15'] + dry_b['15-30']) * out_share,
                highlands_30_45=hb['30-45'] * out_share,
                highlands_45_90=(hb['45-60'] + hb['60-75'] + hb['75-90']) * out_share,
                middle_wet_zone=mw_cap,
                fog_desert_and_polar=(zones['fog_desert'] + zones['polar']) * out_share)
     overfill = {k: max(use[k] - cap[k], 0.0) for k in LAND_BANDS}
+    share = {k: use[k] / cap[k] for k in LAND_BANDS}
+    # grazing may also use a hybrid rule's hybrid part: the fog band's farms and towns against the land outside the
+    # kept share, and grazing with them against the land open to it; with no hybrid part this is the check above
+    fog_open = (zones['fog_desert'] + zones['polar']) * open_share(kept)
+    fog_int = use['fog_desert_and_polar'] - grazing
+    overfill['fog_desert_and_polar'] = max(fog_int - cap['fog_desert_and_polar'], fog_int + grazing - fog_open, 0.0)
+    share['fog_desert_and_polar'] = max(fog_int / cap['fog_desert_and_polar'], (fog_int + grazing) / fog_open)
     dry_used = (place['dry_area_by_band']['30-45'] + use['highlands_45_90'] + fields_30_45)
     dry_side_cap = (lb['middle_band_homes_km2'] - zones['middle_wet']) * out_share
-    return dict(use_km2=use, capacity_km2=cap, use_share={k: use[k] / cap[k] for k in LAND_BANDS},
+    return dict(use_km2=use, capacity_km2=cap, use_share=share,
                 overfill_km2=overfill, fields_on_dry_high_ground_km2=fields_30_45,
                 fields_on_middle_wet_km2=middle_wet, scattered_middle_band_km2=middle_land,
                 scattered_on_middle_wet_km2=on_mw, homestead_land_on_middle_wet_km2=homes_on_mw,
+                homestead_land_on_hybrid_km2=homes_on_hybrid,
                 homestead_share_of_middle_wet_fields=homes / middle_wet if middle_wet > 0.0 else 0.0,
                 middle_homes_dry_side_used_share=(middle_land - on_mw) / dry_side_cap,
                 dry_high_ground_used_share=dry_used / (B['highlands']['dry_km2'] * out_share),
@@ -839,7 +912,7 @@ def moon_corner(B, food, moon, aloft, kept, supply, combo, end, rule='spread', d
     land = dict(
         settled_km2=settled, settled_by_setting_km2=a, food_km2=food_land, grazing_km2=grazing,
         used_km2=used, used_share_of_dry_land=used / dry_land,
-        wild_share_outside_kept=1.0 - used / (dry_land * (1.0 - kept)),
+        wild_share_outside_kept=1.0 - used / (dry_land * open_share(kept)),
         highlands_used_share_outside_kept=(food_high + a['metropolis'] + a['tower_districts'] + a['highland_towns'])
         / (B['highlands']['all_km2'] * (1.0 - kept)),
         dry_high_ground_settled_share=bands['dry_high_ground_settled_share'],
@@ -917,8 +990,9 @@ def moon_corner(B, food, moon, aloft, kept, supply, combo, end, rule='spread', d
     cell = (sky['spacing_diameters'] * 2.0 * sky['envelope_radius_km']) ** 2
     grid = n_env * cell / moon_km2
     sky_out = dict(towns_50t=n_env, shade_share_of_moon=shade, grid_share_of_moon=grid,
-                   wild_sky_outside_kept_by_shade=1.0 - shade / (1.0 - kept),
-                   wild_sky_outside_kept_by_grid=1.0 - grid / (1.0 - kept),
+                   wild_sky_outside_kept_by_shade=1.0 - shade / open_share(kept),
+                   wild_sky_outside_kept_by_grid=1.0 - grid / open_share(kept),
+                   towns_grid_share_of_their_sky=grid / (1.0 - kept),
                    hydrogen_gt=aloft * sky['hydrogen_gt_per_billion'],
                    lifting_gas_gt=aloft * sky['gas_gt_per_billion'])
     buildable = all(v <= 1.0 for v in bands['overfill_km2'].values())
@@ -944,12 +1018,24 @@ def destination_spare_km2(B, blk, reach, place, e, kept, wet_rule='area'):
                 dry_60_90=(hb['60-75'] + hb['75-90']) * out - place['dry_area_by_band']['60-90'])
 
 
+def middle_wet_fields(B, blk, e, kept):
+    """The fields on the middle-wet zone, held to the room the food study's fill gives them in the 30-45 degree band:
+    the zone's land outside the kept share. The fill reaches that room exactly when it fills the zone, and the food
+    product's three significant figures can put its field area up to 0.5% above the room computed here."""
+    f = blk.get('fields')
+    if not f:
+        return 0.0
+    lb = B['land_bands']
+    hb, dry_b, zones = lb['highland_km2'], lb['dry_land_km2'], lb['zones_km2']
+    room = (min(dry_b['30-45'], zones['middle_wet'] + hb['30-45']) - hb['30-45']) * (1.0 - kept)
+    return min(max(f['field_km2_by_zone']['middle_wet'][e], 0.0), room)
+
+
 def move_middle(B, place, blk, reach, e, kept, wet_rule, spec):
     """C': the scattered communities of the 30-48.6 degree lowland homes leave, except homesteads among the farms
     there, at the guessed density on the middle-wet zone's fields; the rest go to the destinations in `spec['order']`,
     each taking what its spare land outside the kept share holds at its own density."""
-    f = blk.get('fields')
-    fields_mw = max(f['field_km2_by_zone']['middle_wet'][e], 0.0) if f else 0.0
+    fields_mw = middle_wet_fields(B, blk, e, kept)
     density = GUESSES['homestead_people_per_km2']['value'][spec['h_end']]
     middle_people = place['people']['scattered'] * place['scattered_share_middle']
     homesteads = min(density * fields_mw / 1e9, middle_people)
@@ -1159,7 +1245,7 @@ def moon_case(B, food, moon, aloft, mix=CHOSEN_MIX):
                                    land=full['land'], water=full['water'],
                                    light=dict(shielded=full['light']['shielded'], living=full['light']['living']),
                                    energy=dict(fusion=full['energy']['fusion']))
-        out[KEPT_KEY[kept]] = entry
+        out[kept_key(kept)] = entry
     return out
 
 
@@ -1179,7 +1265,7 @@ def cprime_case(B, food, moon, aloft, rankings, c_case):
     cities instead."""
     out = {}
     for kept in KEPT:
-        order = rankings[KEPT_KEY[kept]]['order']
+        order = rankings[kept_key(kept)]['order']
         dry_order = [k for k in order if DESTINATIONS[k]['kind'] == 'dry']
         corners = [(combo, h, e) for combo in COMBOS for h in (0, 1) for e in (0, 1)]
         variants = {}
@@ -1200,10 +1286,10 @@ def cprime_case(B, food, moon, aloft, rankings, c_case):
                                   full=assemble(rows, list(range(len(corners)))),
                                   feasible=assemble(rows, ok) if 0 < len(ok) < len(corners) else None)
         main = variants['as_placed']
-        out[KEPT_KEY[kept]] = dict(
+        out[kept_key(kept)] = dict(
             corners=main['corners'], buildable_corners=main['buildable_corners'],
             overfilling_corners=main['overfilling_corners'], full=main['full'], feasible=main['feasible'],
-            remedy=None, traffic=c_case[KEPT_KEY[kept]]['traffic'], destination_order=order,
+            remedy=None, traffic=c_case[kept_key(kept)]['traffic'], destination_order=order,
             variants={k: v for k, v in variants.items() if k != 'as_placed'})
     return out
 
@@ -1217,9 +1303,9 @@ def food_menu(B, food, moon, aloft):
         row = {}
         for kept in KEPT:
             fb = food_block(food, mix, moon, kept)
-            case = food['mixes'][mix]['cases'][str(int(moon))][KEPT_KEY[kept]]
+            case = food['mixes'][mix]['cases'][str(int(moon))][kept_key(kept)]
             if fb is None:
-                row[KEPT_KEY[kept]] = dict(buildable=False, overflowing=case.get('overflowing'))
+                row[kept_key(kept)] = dict(buildable=False, overflowing=case.get('overflowing'))
                 continue
             blk, reach = fb['block'], fb['reach']
             wild = []
@@ -1228,8 +1314,8 @@ def food_menu(B, food, moon, aloft):
                 for combo in COMBOS:
                     place = placement(B, moon - aloft, combo)
                     used = blk['land_km2']['total'][e] - towns_fs + blk['grazing_km2'][e] + place['settled_km2']
-                    wild.append(1.0 - used / (B['moon']['dry_land_km2'] * (1.0 - kept)))
-            row[KEPT_KEY[kept]] = dict(
+                    wild.append(1.0 - used / (B['moon']['dry_land_km2'] * open_share(kept)))
+            row[kept_key(kept)] = dict(
                 buildable=True, both_ends=fb['both_ends'], reach=reach,
                 food_land_km2=[blk['land_km2']['total'][e] - food_town_km2(B, blk['people_billion']['surface'][e],
                                                                            e, reach) for e in (0, 1)],
@@ -1546,9 +1632,33 @@ UNCERTAINTIES_COMMON = [
     "The colonies' capacity."]
 
 
+VARIANT_TEXT = dict(poleward_and_twilit="with the remedy's poleward and twilit placements",
+                    homes_within_the_fields="with those placements and the homesteads' homes within their fields",
+                    to_the_dry_highlands='with the moved people sent to the dry highland cities')
+
+
+def rule_summary(k):
+    """One land rule's numbers for a distribution: which corners fit, as placed, by the remedy and by C's variants, and
+    the land, water, food power, heat, sky and traffic over all corners."""
+    f = k['full']
+    t50 = k['traffic']['50.0']
+    return dict(buildable_corners=k['buildable_corners'], of=k['corners'],
+                remedy_buildable_corners=k['remedy']['buildable_corners'] if k.get('remedy') else None,
+                variants_buildable_corners=({n: v['buildable_corners'] for n, v in k['variants'].items()}
+                                            if 'variants' in k else None),
+                used_share_of_dry_land=f['land']['used_share_of_dry_land'],
+                wild_share_outside_kept=f['land']['wild_share_outside_kept'],
+                food_from_seas_km3=f['water']['food_from_seas_km3'], food_tw=f['energy']['fusion']['food_tw'],
+                heat_tw=f['energy']['fusion']['heat_tw'],
+                added_dimming_percent=f['energy']['fusion']['added_dimming_percent'],
+                towns_grid_share_of_their_sky=f['sky']['towns_grid_share_of_their_sky'],
+                spacing_busiest_band_km=t50['spacing_busiest_band_km'],
+                encounters_fleet_day=t50['encounters_fleet_day'])
+
+
 def distribution(B, key, spec, moon_cases):
     case = moon_cases[spec.get('case', f"{int(spec['moon'])}_{int(spec['aloft'])}")]
-    k30, k50 = case['kept_30'], case['kept_50']
+    k30, k50, kc = case['kept_30'], case['kept_50'], case['wild_30_hybrid_20']
     f30, f50 = k30['full'], k50['full']
     feas50 = k50['feasible'] or f50
     earth = earth_block(B, spec['earth'])
@@ -1561,11 +1671,16 @@ def distribution(B, key, spec, moon_cases):
     names = {'all_land_0_30': 'the 0-30 degree land', 'highlands_30_45': 'the 30-45 degree highlands',
              'highlands_45_90': 'the highlands poleward of 45 degrees', 'middle_wet_zone': 'the middle-wet zone',
              'fog_desert_and_polar': 'the fog desert and the polar lowland'}
-    over = [names[b] for b in LAND_BANDS if any(o['overfill_km2'][b] > 1.0 for o in k50['overfilling_corners'])]
-    listed = ', '.join(over[:-1]) + ' or ' + over[-1] if len(over) > 1 else ''.join(over)
-    overfill_text = (f"outside a kept half its high-cost end overfills {listed} at "
-                     f"{k50['corners'] - k50['buildable_corners']} of {k50['corners']} corners"
-                     if over else 'every corner fits outside a kept half')
+    def overfill_text(k, where):
+        over = [names[b] for b in LAND_BANDS if any(o['overfill_km2'][b] > 1.0 for o in k['overfilling_corners'])]
+        listed = ', '.join(over[:-1]) + ' or ' + over[-1] if len(over) > 1 else ''.join(over)
+        return (f"{where} its high-cost end overfills {listed} at {k['corners'] - k['buildable_corners']} of "
+                f"{k['corners']} corners" if over else f'every corner fits {where}')
+    half_text = overfill_text(k50, 'outside a kept half')
+    compromise_text = overfill_text(kc, "under the author's compromise")
+    fits = [k for k, v in kc.get('variants', {}).items() if v['buildable_corners'] == v['corners']]
+    if fits and kc['buildable_corners'] < kc['corners']:
+        compromise_text += ', and every corner fits ' + VARIANT_TEXT[fits[0]]
     uncertain = {
         'A': f"The array's 7 billion need {fmt(array['shield_gt'][0])}-{fmt(array['shield_gt'][1])} Gt of shield, "
              "the largest continuing material stream after the build, and the colonies' 5 billion rest on "
@@ -1574,12 +1689,12 @@ def distribution(B, key, spec, moon_cases):
              f"{fmt(array['shield_gt'][0])}-{fmt(array['shield_gt'][1])} Gt of shield.",
         'C': "Four billion aloft shade more of the Moon than the aerophytes' central 1% cover and put "
              f"{fmt(k30['traffic']['50.0']['towns'])} towns on the wind tracks; the Moon's heat and the dimming that "
-             f'answers it are the largest of the four, and {overfill_text}.',
+             f'answers it are the largest of the four, and {half_text}.',
         'D': 'It asks the most of the dry high ground, the land and the array: six billion on the ground put the '
              f"most people on the dry high ground and in the scattered communities, the array's 8 billion need "
-             f"{fmt(array['shield_gt'][0])}-{fmt(array['shield_gt'][1])} Gt of shield, and {overfill_text}.",
+             f"{fmt(array['shield_gt'][0])}-{fmt(array['shield_gt'][1])} Gt of shield, and {half_text}.",
         "C'": "C's heat, sky and array, with the middle latitudes' lowland towns moved to the best-ranked home with "
-              f"room and homesteads among the farms there; {overfill_text}."}
+              f"room and homesteads among the farms there; {half_text}; {compromise_text}."}
     return dict(
         name=spec['name'],
         people_billion=dict(earth=spec['earth'], moon=spec['moon'], moon_ground=spec['moon'] - spec['aloft'],
@@ -1600,6 +1715,7 @@ def distribution(B, key, spec, moon_cases):
                   remedy_buildable_corners_kept_50=k50['remedy']['buildable_corners'] if k50['remedy'] else None,
                   variants_buildable_corners_kept_50=({k: v['buildable_corners'] for k, v in k50['variants'].items()}
                                                       if 'variants' in k50 else None),
+                  land_rules={kept_key(r): rule_summary(case[kept_key(r)]) for r in KEPT},
                   moved=f30['moved'],
                   settled_km2=f30['land']['settled_km2'],
                   people_by_setting=f30['people'],
@@ -1734,12 +1850,15 @@ def build(rounded=True):
                     'share_of_dry_land_metropolis_as_a_town'],
                 twilit_share=twilit[k]['shielded']['share_of_dry_land_metropolis_as_a_town'])
         for k in twilit}
-    rank_spare = {KEPT_KEY[k]: destination_spare_for_ranking(B, food, 8, 4, k) for k in KEPT}
+    rank_spare = {kept_key(k): destination_spare_for_ranking(B, food, 8, 4, k) for k in KEPT}
     rankings = {kk: rank_destinations(B, v) for kk, v in rank_spare.items()}
     cprime = cprime_case(B, food, 8, 4, rankings, moon_cases['8_4'])
     dists = {k: distribution(B, k, spec, dict(moon_cases, cprime=cprime)) for k, spec in DISTRIBUTIONS.items()}
     chk = checks(B, d['wol'], moon_cases)
     chk['transcribed_phrases'] = transcribed_check(industry_text)
+    here = {kept_key(k): dict(closed=float(k), hybrid=hybrid_share(k)) for k in KEPT}
+    chk['land_rules'] = dict(note="the land rules here against the food study's", here=here,
+                             food_study=food['basis']['land_rules'], equal=here == food['basis']['land_rules'])
     files = [HERE / f for f in CODE]
     product = dict(
         schema=SCHEMA,
@@ -1753,7 +1872,8 @@ def build(rounded=True):
                                             note=v['note']) for k, v in BOUND.items()}),
         evidence=EVIDENCE, reading_rule=READING_RULE, marks=MARKS,
         assumptions=dict(design_guesses=GUESSES, chosen_mix=CHOSEN_MIX, moon_billion=list(MOON_BILLION),
-                         aloft_billion=list(ALOFT_BILLION), kept_shares=list(KEPT), supplies=list(SUPPLIES),
+                         aloft_billion=list(ALOFT_BILLION), supplies=list(SUPPLIES),
+                         land_rules={kept_key(k): dict(closed=float(k), hybrid=hybrid_share(k)) for k in KEPT},
                          combinations=[list(c) for c in COMBOS], twilit_homes=list(TWILIT_HOMES),
                          land_bands=list(LAND_BANDS), wet_rules=list(WET_RULES), tie_km=TIE_KM, join_km=JOIN_KM),
         literature={k: dict(value=v['value'], unit=v['unit'], source=v['source']) for k, v in LIT.items()},

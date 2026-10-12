@@ -8,13 +8,15 @@ Fields fill the rain-fed bands wettest first outside the kept share and the town
 grown by watering those fields to what the absorbed sunlight lets them grow, and beyond that by watered fields in the
 fog desert. Half the residents live aloft (2, 3 and 4 billion, within the author's 2-4 billion), the rest in towns on
 the highlands at the lunar design's 25-100 m2 a person. Each case is evaluated at the low-cost and high-cost ends of
-every input and for a kept 30% and a kept half, and checked against its zones: a case that overflows one cannot be
-built, and the feasible range runs to the case where the first zone fills.
+every input and under four land rules: a kept 30%, a kept half, the author's compromise of 30% wild with another 20%
+hybrid, and half wild with another 20% hybrid for comparison. Fields, glass and towns keep outside a rule's wild and
+hybrid shares, and grazing may also use the hybrid part. Each case is checked against its zones: a case that
+overflows one cannot be built, and the feasible range runs to the case where the first zone fills.
 """
 from __future__ import annotations
 
 from research.studies.food_systems import systems as S
-from research.studies.food_systems.systems import B, KM2, both, pick, yearly, zip_ends
+from research.studies.food_systems.systems import B, KM2, both, kept_key, open_share, pick, yearly, zip_ends
 
 POPULATIONS = (4.0, 6.0, 8.0)
 ALOFT_SHARE = 0.5
@@ -264,11 +266,12 @@ def mix_case(basis, mix, n, end, kept):
         people_billion=dict(lunar=n, aloft=aloft, surface=surface),
         land_km2=dict(land, total=used, glass=glass_km2),
         dry_land_share_used=used / dry,
-        dry_land_wild_share_outside_kept=1.0 - (used + grazing) / (dry * (1.0 - kept)),
+        dry_land_wild_share_outside_kept=1.0 - (used + grazing) / (dry * open_share(kept)),
         zone_wild_share_outside_kept={z: 1.0 - (land[z] + (grazing if z == 'fog_desert' else 0.0)) /
-                                      (zone_area[z] * (1.0 - kept)) for z in land},
+                                      (zone_area[z] * open_share(kept)) for z in land},
         sea_farms_km2=sea['sea_km2'],
-        grazing_km2=grazing, grazing_share_of_fog_desert_outside_kept=grazing / (zone_area['fog_desert'] * (1.0 - kept)),
+        grazing_km2=grazing,
+        grazing_share_of_fog_desert_outside_kept=grazing / (zone_area['fog_desert'] * open_share(kept)),
         glass_share_of_zone=(glass_km2 / zone_area[glass_zone]) if glass_zone else 0.0,
         residents_heat_tw=n * S.pick(basis['heat']['residents_heat_tw_per_billion'], end),
         power_tw=dict(power, total=total_power),
@@ -288,13 +291,14 @@ def mix_case(basis, mix, n, end, kept):
     if fill is not None:
         rf_cap = pick(basis['rain']['rain_fed_eq_km2_fillable'], end, low_is_good=False)
         out['fields'] = dict(fill, rain_fed_land_share_used=fill['rain_fed_eq_km2'] / rf_cap,
-                             rain_fed_wild_share_outside_kept=1.0 - fill['rain_fed_eq_km2'] / (rf_cap * (1.0 - kept)))
-    # Each zone's use, grazing on the fog desert included, against its land outside the kept share; sea farms
-    # against the seas shallower than 200 m, and their phosphorus against what the waters' life can spare in all
-    # waters, lakes included. A case that overflows any of them cannot be built.
-    use = dict(land)
-    use['fog_desert'] += grazing
-    shares = {z: use[z] / (zone_area[z] * (1.0 - kept)) for z in use}
+                             rain_fed_wild_share_outside_kept=1.0 - fill['rain_fed_eq_km2'] / (rf_cap * open_share(kept)))
+    # Each zone's fields, glass and towns against its land outside the kept share, and the fog desert's grazing with
+    # them against the land open to grazing, which a hybrid rule widens by its hybrid part; sea farms against the
+    # seas shallower than 200 m, and their phosphorus against what the waters' life can spare in all waters, lakes
+    # included. A case that overflows any of them cannot be built.
+    shares = {z: land[z] / (zone_area[z] * (1.0 - kept)) for z in land}
+    shares['fog_desert'] = max(shares['fog_desert'],
+                               (land['fog_desert'] + grazing) / (zone_area['fog_desert'] * open_share(kept)))
     shares['sea_farms_in_seas_shallower_than_200_m'] = sea['sea_km2'] / basis['zones']['sea_km2_by_depth_m']['200']
     shares['sea_farms_phosphorus_in_the_waters'] = out['phosphorus_mt_year']['drawn_over_all_waters_ceiling']
     out['zone_use_share'] = shares
@@ -329,12 +333,12 @@ def all_mixes(basis):
         cases = {}
         for n in POPULATIONS:
             cases[f'{n:g}'] = {}
-            for k in basis['kept_shares']:
+            for k in basis['land_rules']:
                 case = both(lambda end, n=n, k=k: mix_case(basis, mix, n, end, k))
                 t = feasible_limit(basis, mix, n, k)
                 case['feasible_to'] = t
                 case['feasible_range'] = (zip_ends(mix_case(basis, mix, n, 'low', k), mix_case(basis, mix, n, t, k))
                                           if t is not None and t < 1.0 else None)
-                cases[f'{n:g}'][f'kept_{int(k * 100)}'] = case
+                cases[f'{n:g}'][kept_key(k)] = case
         out[mix] = dict(rule=rule['rule'], cases=cases)
     return out

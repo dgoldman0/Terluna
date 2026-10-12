@@ -474,7 +474,8 @@ def build_basis(data, eco, screen, zones, derived, sea_p):
         dew=dict(earth_l_m2_night=par.value('dew_l_m2_night')),
         microbial=derived['microbial'], fermentation=derived['fermentation'], electro_sugar=derived['electro_sugar'],
         aquaponics=derived['fish'], sea=derived['sea'],
-        kept_shares=sorted(eco['capacity']['kept_shares'].values()), farm_yield=par.value('yield_gap'),
+        kept_shares=sorted(eco['capacity']['kept_shares'].values()),
+        land_rules=sys_mod.land_rules(eco['capacity']['kept_shares'].values()), farm_yield=par.value('yield_gap'),
         array_intercepted_pw=list(pop['array']['intercepted_pw']),
         seas_phosphorus=seas_phosphorus(sea_p))
     basis['fog_net_l_m2_year'] = \
@@ -610,6 +611,8 @@ def basis_record(basis):
             continue
         if isinstance(v, dict):
             out[k] = {kk: vv for kk, vv in v.items() if not callable(vv)}
+        elif k == 'land_rules':
+            out[k] = {sys_mod.kept_key(r): dict(closed=float(r), hybrid=r.hybrid) for r in v}
         else:
             out[k] = v
     out['zones'] = {k: v for k, v in basis['zones'].items() if k not in ('bands_by_key',)}
@@ -726,7 +729,9 @@ def results():
                                          for k, v in par.P.items() if 'design_guess' in v['source']},
                          mixes={k: v['rule'] for k, v in mixes_mod.MIXES.items()},
                          aloft_share=mixes_mod.ALOFT_SHARE, populations_billion=list(mixes_mod.POPULATIONS),
-                         wet_bands_filled=list(mixes_mod.WET_BANDS)),
+                         wet_bands_filled=list(mixes_mod.WET_BANDS),
+                         hybrid_rules=[dict(r, closed_to_fields_glass_and_towns=r['wild'] + r['hybrid'])
+                                       for r in sys_mod.HYBRID_RULES]),
         literature={k: dict(value=v['value'], unit=v['unit'], source=v['source']) for k, v in par.P.items()},
         derived=rd(derived),
         basis=rd(record),
@@ -773,10 +778,16 @@ READING_RULE = ('Per billion lunar residents unless named: areas km2, water km3 
                 'end is one consistent case. Inputs, derived values and capacities are ranges, smallest first: the '
                 'basis and derived blocks, billions_the_rain_feeds, billions_the_waters_supply, residents_per_km2, the '
                 'rain on glass and the fog nets\' yields (yields_low_to_high and each ring\'s). Heat is given for two '
-                'supplies: power from the array (its receivers\' losses included) and fusion on the Moon. Kept shares '
-                'are 30% and half of the land. Mixes: '
-                'cases[population][kept share]; zone_use_share is each zone\'s use against its land outside the kept '
-                'share (grazing on the fog desert included), sea farms against the seas shallower than 200 m, and '
+                'supplies: power from the array (its receivers\' losses included) and fusion on the Moon. Land rules: '
+                'kept_30 and kept_50 keep 30% and half of each zone wild; wild_30_hybrid_20 is the author\'s '
+                'compromise, 30% wild and another 20% hybrid, and wild_50_hybrid_20 half wild and another 20% hybrid '
+                'for comparison. Fields, glass and towns keep outside a rule\'s wild and hybrid shares (the kept '
+                'share), grazing may also use the hybrid part, and the wild shares and grazing\'s share count '
+                'against the land outside the wild share, so under a hybrid rule they include unused hybrid land; '
+                'dry_land_share_used compares the rules directly. Mixes: '
+                'cases[population][land rule]; zone_use_share is each zone\'s fields, glass and towns against its '
+                'land outside the kept share, the fog desert\'s with its grazing against the land open to grazing '
+                'where that binds, sea farms against the seas shallower than 200 m, and '
                 'their phosphorus against what the waters\' life can spare; feasible says which ends fit, '
                 'feasible_to the fraction of the way to the high-cost end, every input moved together, at which the '
                 'first zone fills, and feasible_range the case there beside the low-cost end.')

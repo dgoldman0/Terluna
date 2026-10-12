@@ -24,6 +24,60 @@ KWH_J = 3.6e6                             # J in a kWh (definition)
 KCAL_J = 4184.0                           # J in a thermochemical kilocalorie (definition)
 WATER_KG_M3 = 1000.0                      # fresh water, as ways of living takes it
 ENDS = ('low', 'high')
+# The author's rule of 11 October 2026 (research/decisions.md, People on the Moon and beyond): at least half of the
+# land and of the dark sky wild is preferred, applied here to each zone as the kept half; it can come down to 30% wild
+# with another 20% hybrid, a compromise between keeping 30% and keeping half. Hybrid land is fairly wild, more heavily
+# managed and carries people's daily life at low density; this study reads it as open to grazing while fields, glass
+# and towns keep to the rest. At the author's
+# request the earlier reading, half wild with another 20% hybrid, which leaves fields, glass and towns 30%, runs
+# beside them for comparison.
+HYBRID_RULES = (dict(key='wild_30_hybrid_20', wild=0.3, hybrid=0.2, role="the author's compromise",
+                     source="research/decisions.md, People on the Moon and beyond, 11 October 2026: the author's wild "
+                            'share'),
+                dict(key='wild_50_hybrid_20', wild=0.5, hybrid=0.2, role='comparison',
+                     source="the author's request of 11 October 2026 to keep the earlier reading of the wild share as "
+                            'a comparison (the register row\'s status)'))
+
+
+class LandRule(float):
+    """A land rule. Its value is the share of each zone closed to fields, glass and towns; `hybrid` is the part of it
+    that grazing may also use, and `key` names the rule in the product. Two rules are equal only when both parts are,
+    so a kept half and the compromise stay apart, and a rule with a hybrid part needs its own key."""
+
+    def __new__(cls, closed, hybrid=0.0, key=None):
+        if hybrid and not key:
+            raise ValueError('a land rule with a hybrid part needs a key')
+        rule = super().__new__(cls, closed)
+        rule.hybrid = hybrid
+        rule.key = key or f'kept_{round(closed * 100)}'
+        return rule
+
+    def __eq__(self, other):
+        if isinstance(other, LandRule):
+            return float(self) == float(other) and self.hybrid == other.hybrid
+        return float(self) == other and not self.hybrid
+
+    def __ne__(self, other):
+        return not self == other
+
+    __hash__ = float.__hash__
+
+
+def land_rules(kept_shares):
+    """Ecology's kept shares, then the hybrid rules, each closing its wild and hybrid shares to fields and towns."""
+    return [LandRule(k) for k in sorted(kept_shares)] + [
+        LandRule(r['wild'] + r['hybrid'], r['hybrid'], r['key']) for r in HYBRID_RULES]
+
+
+def kept_key(kept):
+    """A land rule's key in the product; a plain kept share is kept_30 or kept_50."""
+    return getattr(kept, 'key', None) or f'kept_{round(kept * 100)}'
+
+
+def open_share(kept):
+    """The share of a zone open to grazing, and the share the wild shares count against: the land outside the kept
+    share with the rule's hybrid part. Fields, glass and towns stay within 1 - kept."""
+    return 1.0 - kept + getattr(kept, 'hybrid', 0.0)
 
 
 def pick(pair, end, low_is_good=True):
@@ -155,7 +209,7 @@ def rain_fed_fields(basis, diet='plant_rich'):
         power = pick(basis['nitrogen']['fixation_w'], end) * B / 1e12
         out = dict(crop_model_equivalent_km2=eq, land_km2_on_the_wettest_band=eq / best,
                    share_of_rain_fed_land=eq / cap,
-                   billions_the_rain_feeds={f'kept_{int(k * 100)}': cap * (1 - k) / eq for k in basis['kept_shares']},
+                   billions_the_rain_feeds={kept_key(k): cap * (1 - k) / eq for k in basis['land_rules']},
                    rain_water_used_km3_year=yearly(crop_water_mm(basis, end), eq),
                    power_tw=dict(nitrogen_fixation=power), heat=heat(power, basis, end))
         if diet == 'plant_rich':
@@ -188,8 +242,7 @@ def farm_yield_sensitivity(basis, diet='plant_rich'):
             cap = pick(rain['rain_fed_eq_km2_fillable'], end, low_is_good=False)
             return dict(share_of_potential=s, land_factor=1.0 / s, crop_model_equivalent_km2=eq,
                         share_of_rain_fed_land=eq / cap,
-                        billions_the_rain_feeds={f'kept_{int(k * 100)}': cap * (1 - k) / eq
-                                                 for k in basis['kept_shares']})
+                        billions_the_rain_feeds={kept_key(k): cap * (1 - k) / eq for k in basis['land_rules']})
         res = both(one)
         res['billions_the_rain_feeds'] = {k: sorted(v) for k, v in res['billions_the_rain_feeds'].items()}
         out[name] = res

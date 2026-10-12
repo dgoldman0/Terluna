@@ -193,8 +193,10 @@ def test_land_bands_partition_the_dry_land_and_flag_overfill(product, basis):
     for kept in m.KEPT:
         c = m.moon_corner(B, d['food'], 8, 4, kept, 'fusion', (1, 0, 0), 1)
         assert close(sum(c['bands']['capacity_km2'].values()), total * (1 - kept), rel=5e-3)
-        assert c['buildable'] == all(c['bands']['use_km2'][b] <= c['bands']['capacity_km2'][b] + 1.0
-                                     for b in m.LAND_BANDS)
+        assert c['buildable'] == all(v <= 1.0 for v in c['bands']['overfill_km2'].values())
+        if not m.hybrid_share(kept):
+            assert c['buildable'] == all(c['bands']['use_km2'][b] <= c['bands']['capacity_km2'][b] + 1.0
+                                         for b in m.LAND_BANDS)
     for case in product['moon']['cases'].values():
         for entry in case.values():
             assert entry['buildable_corners'] + len(entry['overfilling_corners']) == entry['corners']
@@ -420,7 +422,7 @@ def test_the_authors_distribution_keeps_cs_totals(product):
     c, cp = product['distributions']['C'], product['distributions']["C'"]
     assert cp['people_billion'] == c['people_billion']
     assert cp['moon']['case'] == 'cprime'
-    for kept in ('kept_30', 'kept_50'):
+    for kept in ('kept_30', 'kept_50', 'wild_30_hybrid_20', 'wild_50_hybrid_20'):
         assert product['moon']['cprime'][kept]['corners'] == 32
 
 
@@ -490,6 +492,109 @@ def test_cprime_band_check_at_the_costly_corners(product, basis):
     crews = B['crews']
     assert crews['km_to_45_degrees'] > crews['sky_boat_range_with_climb_km']
     assert crews['km_to_45_degrees'] < crews['regional_ship_route_km']
+
+
+def test_land_rules_match_the_food_study(product):
+    rules = product['assumptions']['land_rules']
+    assert rules == product['checks']['land_rules']['food_study'] and product['checks']['land_rules']['equal']
+    half, comp = (next(k for k in m.KEPT if m.kept_key(k) == key) for key in ('kept_50', 'wild_30_hybrid_20'))
+    assert half != comp and half == 0.5 and comp != 0.5 and len({half, comp}) == 2
+    with pytest.raises(ValueError):
+        m.LandRule(0.5, 0.2)
+    assert set(rules) == {m.kept_key(k) for k in m.KEPT}
+    for k in m.KEPT:
+        assert close(m.open_share(k), 1.0 - rules[m.kept_key(k)]['closed'] + rules[m.kept_key(k)]['hybrid'])
+
+
+def test_cprime_under_the_authors_compromise(product, basis):
+    """30% wild with 20% hybrid closes the same half to farms and towns as a kept half, so C's costs and the farms'
+    and towns' land match it; the homesteads' homes sit on the middle-wet zone's hybrid fifth beside their fields,
+    and with the remedy's poleward and twilit placements every corner fits (C')."""
+    B, d = basis
+    cp = product['moon']['cprime']
+    fits = {k: (cp[k]['buildable_corners'], *(cp[k]['variants'][v]['buildable_corners']
+                                              for v in ('poleward_and_twilit', 'homes_within_the_fields',
+                                                        'to_the_dry_highlands')))
+            for k in ('kept_30', 'kept_50', 'wild_30_hybrid_20', 'wild_50_hybrid_20')}
+    assert fits == {'kept_30': (32, 32, 32, 32), 'kept_50': (16, 16, 32, 16),
+                    'wild_30_hybrid_20': (18, 32, 32, 18), 'wild_50_hybrid_20': (18, 32, 32, 18)}
+    half, comp = cp['kept_50'], cp['wild_30_hybrid_20']
+    for key in ('food_km2', 'settled_km2'):
+        assert comp['full']['land'][key] == half['full']['land'][key]
+    assert comp['full']['energy'] == half['full']['energy']
+    assert comp['full']['water'] == half['full']['water']
+    assert comp['variants']['poleward_and_twilit']['buildable_corners'] == 32
+    assert half['variants']['poleward_and_twilit']['buildable_corners'] < 32
+    rule = next(k for k in m.KEPT if m.kept_key(k) == 'wild_30_hybrid_20')
+    order = comp['destination_order']
+    c = m.moon_corner(B, d['food'], 8, 4, rule, 'fusion', (0, 1, 0), 1, rule='twilit', dry_rule='poleward',
+                      middle=dict(order=order, h_end=1))
+    bands = c['bands']
+    homes = c['moved']['homestead_land_km2']
+    assert homes > 0.0 and close(bands['homestead_land_on_hybrid_km2'], homes)
+    assert bands['homestead_land_on_middle_wet_km2'] == 0.0
+    assert homes <= B['land_bands']['zones_km2']['middle_wet'] * m.hybrid_share(rule)
+    assert c['buildable']
+
+
+def test_middle_wet_fields_are_held_to_the_fills_room_alone(basis):
+    """The cap on the middle-wet fields removes only the food product's rounding: at most 0.5% of its field area."""
+    B, d = basis
+    for kept in m.KEPT:
+        for moon in m.MOON_BILLION:
+            blk = m.food_block(d['food'], m.CHOSEN_MIX, moon, kept)['block']
+            lb = B['land_bands']
+            hb, zones = lb['highland_km2'], lb['zones_km2']
+            room = (min(lb['dry_land_km2']['30-45'], zones['middle_wet'] + hb['30-45']) - hb['30-45']) * (1.0 - kept)
+            for e in (0, 1):
+                listed = max(blk['fields']['field_km2_by_zone']['middle_wet'][e], 0.0)
+                held = m.middle_wet_fields(B, blk, e, kept)
+                assert held <= room * (1 + 1e-12) and held <= listed, (m.kept_key(kept), moon, e)
+                assert listed - held <= 5e-3 * listed + 1e-9, (m.kept_key(kept), moon, e)
+
+
+def test_grazing_uses_the_hybrid_part_in_the_fog_band(basis):
+    """Under a hybrid rule the fog band's farms and towns count against the land outside the closed share and, with
+    the grazing, against the land open to grazing; without a hybrid part both reduce to the plain check."""
+    B, d = basis
+    zones = B['land_bands']['zones_km2']
+    area = zones['fog_desert'] + zones['polar']
+    for kept in m.KEPT:
+        c = m.moon_corner(B, d['food'], 8, 4, kept, 'fusion', (0, 0, 0), 1, mix='rain_fed_first')
+        bands = c['bands']
+        graze = c['land']['grazing_km2']
+        assert graze > 0.0
+        fog_int = bands['use_km2']['fog_desert_and_polar'] - graze
+        cap, open_ = area * (1.0 - kept), area * m.open_share(kept)
+        assert close(bands['overfill_km2']['fog_desert_and_polar'], max(fog_int - cap, fog_int + graze - open_, 0.0))
+        assert close(bands['use_share']['fog_desert_and_polar'], max(fog_int / cap, (fog_int + graze) / open_))
+        if not m.hybrid_share(kept):
+            assert close(bands['use_share']['fog_desert_and_polar'], bands['use_km2']['fog_desert_and_polar'] / cap)
+
+
+def test_wild_shares_count_against_the_land_outside_the_wild_share(basis):
+    B, d = basis
+    dry = B['moon']['dry_land_km2']
+    for kept in m.KEPT:
+        c = m.moon_corner(B, d['food'], 8, 4, kept, 'fusion', (1, 0, 1), 1)
+        assert close(c['land']['wild_share_outside_kept'], 1.0 - c['land']['used_km2'] / (dry * m.open_share(kept)))
+        s = c['sky']
+        assert close(s['wild_sky_outside_kept_by_grid'], 1.0 - s['grid_share_of_moon'] / m.open_share(kept))
+        assert close(s['towns_grid_share_of_their_sky'], s['grid_share_of_moon'] / (1.0 - kept))
+
+
+def test_the_four_distributions_under_the_authors_compromise_and_the_comparison(product):
+    """Under the compromise A and B fit as placed and C and D with the remedy's three placements; with half wild and
+    20% hybrid B needs the remedy and D fits 10 of its 16 corners with it."""
+    cases = product['moon']['cases']
+    comp = {k: cases[k]['wild_30_hybrid_20'] for k in ('4_2', '6_3', '8_4', '8_2')}
+    assert comp['4_2']['buildable_corners'] == comp['6_3']['buildable_corners'] == 16
+    assert comp['8_4']['remedy']['buildable_corners'] == comp['8_2']['remedy']['buildable_corners'] == 16
+    for k in comp:
+        assert comp[k]['buildable_corners'] == cases[k]['kept_50']['buildable_corners']
+    wide = {k: cases[k]['wild_50_hybrid_20'] for k in ('6_3', '8_2')}
+    assert wide['6_3']['buildable_corners'] < 16 and wide['6_3']['remedy']['buildable_corners'] == 16
+    assert wide['8_2']['remedy']['buildable_corners'] == 10
 
 
 def test_dumps_keeps_value_lists_on_one_line():

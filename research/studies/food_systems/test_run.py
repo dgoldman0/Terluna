@@ -197,10 +197,60 @@ def test_rain_fed_fill_respects_kept_land(product):
     for mix, info in product['mixes'].items():
         for n, cases in info['cases'].items():
             for kept, c in cases.items():
-                k = int(kept.split('_')[1]) / 100.0
+                k = product['basis']['land_rules'][kept]['closed']
                 if 'fields' in c:
                     for i in (0, 1):
                         assert c['fields']['field_km2'][i] <= wet * (1.0 - k) * (1 + 1e-6)
+
+
+def test_land_rules_carry_the_authors_wild_share(product):
+    """Ecology's kept 30% and half, the author's compromise of 30% wild with 20% hybrid, and half wild with 20% hybrid
+    for comparison; every mix and population is evaluated under each."""
+    rules = product['basis']['land_rules']
+    assert rules == {'kept_30': dict(closed=0.3, hybrid=0.0), 'kept_50': dict(closed=0.5, hybrid=0.0),
+                     'wild_30_hybrid_20': dict(closed=0.5, hybrid=0.2),
+                     'wild_50_hybrid_20': dict(closed=0.7, hybrid=0.2)}
+    for r in product['assumptions']['hybrid_rules']:
+        assert rules[r['key']] == dict(closed=r['closed_to_fields_glass_and_towns'], hybrid=r['hybrid'])
+        assert close(r['wild'] + r['hybrid'], r['closed_to_fields_glass_and_towns'])
+    for info in product['mixes'].values():
+        for cases in info['cases'].values():
+            assert set(cases) == set(rules)
+
+
+def test_hybrid_land_opens_to_grazing_only(product):
+    """The compromise closes the same half to fields, glass and towns as a kept half, so its fields match; grazing on
+    the fog desert may also use the hybrid fifth, so its fog-desert use counts against 70% of the zone where that
+    binds and the mix fits at least as far."""
+    fog = next(z for k, z in product['basis']['zones']['zones'].items() if k == 'fog_desert')['dry_land_km2']
+    for mix, info in product['mixes'].items():
+        for n, cases in info['cases'].items():
+            half, comp = cases['kept_50'], cases['wild_30_hybrid_20']
+            if 'fields' in half:
+                assert half['fields']['field_km2'] == comp['fields']['field_km2'], (mix, n)
+            if half['feasible_to'] is not None:
+                assert comp['feasible_to'] is not None and comp['feasible_to'] >= half['feasible_to'] - 1e-9
+            for i in (0, 1):
+                land, graze = comp['land_km2']['fog_desert'][i], comp['grazing_km2'][i]
+                want = max(land / (fog * 0.5), (land + graze) / (fog * 0.7))
+                assert close(comp['zone_use_share']['fog_desert'][i], want, rel=2e-2, abs_=1e-3), (mix, n, i)
+    rules = product['basis']['land_rules']
+    for mix, info in product['mixes'].items():
+        for n, cases in info['cases'].items():
+            for key, c in cases.items():
+                if 'fields' not in c:
+                    continue
+                open_ = 1.0 - rules[key]['closed'] + rules[key]['hybrid']
+                for i in (0, 1):
+                    want = 1.0 - c['fields']['rain_fed_land_share_used'][i] / open_
+                    assert close(c['fields']['rain_fed_wild_share_outside_kept'][i], want, rel=1e-2, abs_=2e-3)
+    half, comp = sy.LandRule(0.5), sy.LandRule(0.5, 0.2, 'wild_30_hybrid_20')
+    assert half != comp and half == 0.5 and comp != 0.5
+    with pytest.raises(ValueError):
+        sy.LandRule(0.5, 0.2)
+    feeds = product['systems']['rain_fed_fields']['billions_the_rain_feeds']
+    assert feeds['wild_30_hybrid_20'] == feeds['kept_50']
+    assert close(feeds['wild_50_hybrid_20'][1], feeds['kept_30'][1] * 0.3 / 0.7, rel=1e-2)
 
 
 def _fog_basis(wind, fog_share=1.0, shape=1.2):

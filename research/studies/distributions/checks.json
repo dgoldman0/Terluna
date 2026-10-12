@@ -256,5 +256,30 @@
    ],
    "not_rechecked": "The residual fixes were applied after the confirmation and checked by the study's tests, which now cover the homes within the fields and the crews' ranges; the reviewer has not read them."
   }
+ },
+ "land_rules": {
+  "date": "2026-10-11",
+  "asked": "The author's wild share (research/decisions.md, People on the Moon and beyond): at least half of the land and of the dark sky wild preferred, applied to every zone, or 30% wild with another 20% hybrid as a compromise; and, at the author's request (\"You could have still kept (and you can restore if you can) the other run just as comparison.\"), the earlier reading, half wild with another 20% hybrid, beside them for comparison.",
+  "built": "Four land rules: kept_30 and kept_50 as before, wild_30_hybrid_20 and wild_50_hybrid_20. Fields, glass, cities and towns keep outside a rule's wild and hybrid shares; the study reads the hybrid part as open to grazing and to the homesteads' homes beside their fields, and holds the middle-wet fields to the food fill's room against the food product's rounding (up to 0.5%).",
+  "unchanged": "The kept_30 and kept_50 results match the committed product value for value.",
+  "tests": "python -m pytest research/studies/distributions: passed (61 across both studies, 80 with ways of living)",
+  "review": {
+   "reviewer": "independent read-only reviewer, snapshot 1 (provisioning-runs/land_rules/review/snapshot_1.sha256)",
+   "report": "provisioning-runs/land_rules/review/review_report.md on the research drive",
+   "findings": "1 error (the rain-fed wild share against 1 - kept), 8 inconsistencies (reading rule, wild-share denominators unexplained, the middle-wet cap untested and unstated, the homesteads' count on uncapped fields, the comparison's request unrecorded, two-share framing in the intro and assumptions, the fog band's share under grazing, LandRule equality) and 7 wording points",
+   "applied": "all sixteen on 2026-10-11, before the confirmation",
+   "confirmation": {
+    "snapshot": "provisioning-runs/land_rules/review/snapshot_2.sha256",
+    "report": "provisioning-runs/land_rules/review/confirmation_report.md on the research drive",
+    "verdicts": "9 confirmed (2, 5, 6, 7, 8, 9, 12, 15, 16), 7 partly confirmed (1, 3, 4, 10, 11, 13, 14), none unconfirmed; 5 new points (A-E): the reading rule's wording for C′ and for the wild shares' subtractions, the hold test passing without the hold, the READMEs' check paragraphs, and this record",
+    "residuals": "Applied by the coordinator on 2026-10-11 after the confirmation and not reviewed: both reading rules extended; the hold test now checks the fill's room, and a test pins C′'s fits under every rule; 'of the land and of the dark sky' for the author's words; the dark-sky test in finding 58; the used-share label names the homesteads' homes; the register link's anchor; the check paragraphs list the new tests."
+   }
+  },
+  "files_sha256": {
+   "run.py": "4234497b99cc4c9007754a9c4b0e543a7470d56530b3d1762915fcb77fcc1b09",
+   "test_run.py": "2186e83e590fed1fc14de7594479b8b8e9a6b82909b6f253e5ebd7d44f219492",
+   "README.md": "2b6b6dd2ca5f4765e031ea20f2bdd9c01b5650b9e32e1a559c1583a4fe30bdb6",
+   "results/distributions.json": "1cde4d5837a10788bb6d2a9b99ec03ac64b98e6b24d23a9c5e8ca3110983ea35"
+  }
  }
 }
