@@ -68,22 +68,22 @@ BOUND = {
     'sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='86261f20f16a2ffbc2a45a20362f43b664bc9a93',
-        sha256='9fb7acc3ea48903501af57223d496cb0be542a901bb351ec8e56ae14e13eff31',
+        blob='7e74a1d77beb3dd74d79770ebffcde818ad1560a',
+        sha256='1261c75d952981ccc8291f9a6403ec613c4962519717d8214760f9c187007b8a',
         note="The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage "
              'recovery and the natural cycle kept beside them.'),
     'industry_md': dict(
         path='resources/industry.md', schema=None,
         branch='main', worktree='terluna', commit=None,
-        blob='763c9ef5d48e78ac0679944887e6867c28311de7',
-        sha256='394f707ab1478370c12af288e742fd440057aa6e226cd30da44ca788b3e85200',
+        blob='5ff36d497682059c77f836fd0a1cc534319f17b3',
+        sha256='6ee555e1fc24c2348051f8dfe6daf91de29703adab8539c0139a7a917eb44eb3',
         note="The array's habitats as the largest continuing material stream, the places' sunlight and the Moon's "
              "people's stocks; the values used are transcribed in TRANSCRIBED and checked against these bytes."),
     'phosphorus': dict(
         path='resources/results/phosphorus.json', schema='terluna.resources.phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='bab3177a4c9119a3f57fb4a6fc01e62307a2f444',
-        sha256='4089899e2b70e8b7888bb83e705e1773f316a1b3c220a43313a48b2578b615a5',
+        blob='99876491f7456974b32a179bf4f99b86c6fe65f8',
+        sha256='5a22b880141da23f3f45aa3be4f5a46f9d98c5d1fdb68c2224fdd44e77cafc52',
         note='The energy to lift material to the sky towns at 10 km.'),
     'ecology_people': dict(
         path='biosphere/ecology/results/people.json', schema='terluna.biosphere.ecology-people/1',
@@ -101,8 +101,8 @@ BOUND = {
     'sky_ecology': dict(
         path='research/studies/sky_ecology/results/sky_ecology.json', schema='terluna.research.sky-ecology/1',
         branch='main', worktree='terluna', commit=None,
-        blob='0723a9375a78fba45bf86fbf7545ae691c5fd915',
-        sha256='2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3',
+        blob='6493e42a80df6e1bed18430411729935a02daa6b',
+        sha256='2d0f1f08d95cfb0f3c20f11b5097535c4d97b9cbb439fe76a5315378f819342a',
         note="Aerophyte cover and the encounter rule for bodies on the same wind tracks."),
     'places': dict(
         path='research/studies/joint_synthesis/results/places.json',

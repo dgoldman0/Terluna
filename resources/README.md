@@ -114,13 +114,15 @@ loss and the resupply that matches it take to replace the inventory.
      The seas and lakes at Earth's dissolved inorganic carbon hold 0.6–0.7 times it (*screen*). Both come on top of
      the biosphere's 1.5–1.6×10¹⁵ kg.
    - *Solid chemistry; the rates are Earth field rates.*
-6. **Burial in the seas can rival weathering.** Lakes and reservoirs bury 19–48 g C m⁻² a year (Mendonça et al. 2017).
-   At those rates the lunar seas would bury 0.7–1.9 Gt CO2 a year and leave the matching oxygen in the air
-   (literature register).
+6. **Burial in the lakes rivals weathering.** Lakes and reservoirs bury 19–48 g C m⁻² a year (Mendonça et al. 2017).
+   Over the rain-fed lakes, 10.3% of the Moon, that is 0.27–0.69 Gt CO2 a year, and the wet margins' peat adds
+   0.03–0.21 Gt; the seas at Earth's marine rates bury about 0.01 Gt. Each carbon buried leaves its oxygen in the air
+   ([carbon cycle](../research/studies/carbon_cycle/README.md); this finding first took lake rates over the seas).
    - **The return.** Burning carbonate back takes 4.08 GJ per tonne of CO2 from calcite and 2.57 GJ from magnesite,
      with the best kilns at 3.2–4.2 GJ per tonne of lime (JRC BREF 2013).
    - **Steering.** Weathering products steered toward magnesium carbonate return more cheaply.
-   - **Size.** The return is an Earth-scale lime industry, 27–610 GW depending on the sink. It sits on the Moon,
+   - **Size.** The kilns take 19–58 GW at year 10,000 and up to 140–183 GW in the youngest soils
+     ([carbon cycle](../research/studies/carbon_cycle/README.md)), an Earth-scale lime industry. It sits on the Moon,
      since it releases its CO2 into the lunar air.
    - *Earth rates.*
 7. **The sea floods most of the Moon's ore.** At 28% water the atlas puts these maria 99–100% under water:
@@ -215,9 +217,11 @@ is [industry.md](industry.md), with its screen [industry.py](industry.py); numbe
     a day; from one plant 6–12% of the fleet is in transit, and eight plants across the stack's tilts bring that to
     0.7–1.5%. Electric tugs would release 69–1,070 kg/s of exhaust inside the protected region, which S7 governs.
 18. **On the near horizons the air needs resupply of its CO2 alone.** Escape (cycle times of 70 billion years and
-    more), rock (0.008–0.25% of the oxygen by year 10,000) and burial (0.004–0.05% of the nitrogen) leave the air as
-    built, while weathering and burial turn its CO2 over in 419–1,910 years. Kilns of 35–350 GW return the weathered
-    carbon; the buried carbon needs a return path or 6,400–16,200 kg/s imported.
+    more), rock (0.008–0.25% of the oxygen by year 10,000) and burial (0.0016–0.020% of the nitrogen) leave the air as
+    built, while weathering and burial turn its CO2 over in 564–3,530 years. The carbon cycle box model sizes the
+    answer: kilns of 19–58 GW return the carbonate as it forms, and the lakes' burial with the dissolved sink leaves an
+    import of 2,800–8,600 kg C/s at year 10,000 unless more of the burial comes back
+    ([carbon cycle](../research/studies/carbon_cycle/README.md)).
 19. **The array's habitats set the largest stream after the build.** The Stanford torus shields each person with
     990 t (Johnson & Holbrow 1977), 990 Gt for each billion residents. As water, the shield for 0.1–14 billion
     residents is 0.003–0.1% of what the build delivers.

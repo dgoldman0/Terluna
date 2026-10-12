@@ -3,7 +3,7 @@
  "producer": {
   "study": "food_systems",
   "files": {
-   "research/studies/food_systems/run.py": "82c00425109e1c6e",
+   "research/studies/food_systems/run.py": "5d5f6bc78048add5",
    "research/studies/food_systems/zones.py": "59f9cc439fcb8997",
    "research/studies/food_systems/parameters.py": "380459175e577004",
    "research/studies/food_systems/systems.py": "c049b3435c3e2763",
@@ -76,8 +76,8 @@
     "path_at_integration": "resources/results/phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "bab3177a4c9119a3f57fb4a6fc01e62307a2f444",
-    "sha256": "4089899e2b70e8b7888bb83e705e1773f316a1b3c220a43313a48b2578b615a5",
+    "blob": "99876491f7456974b32a179bf4f99b86c6fe65f8",
+    "sha256": "5a22b880141da23f3f45aa3be4f5a46f9d98c5d1fdb68c2224fdd44e77cafc52",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The aerial phosphorus return account, whose complete-diet P demand provisioning supplies; its lift energy per kg to 10 km."
@@ -106,8 +106,8 @@
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "86261f20f16a2ffbc2a45a20362f43b664bc9a93",
-    "sha256": "9fb7acc3ea48903501af57223d496cb0be542a901bb351ec8e56ae14e13eff31",
+    "blob": "7e74a1d77beb3dd74d79770ebffcde818ad1560a",
+    "sha256": "1261c75d952981ccc8291f9a6403ec613c4962519717d8214760f9c187007b8a",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The land's phosphorus through the rain-fed lakes to the seas: the dissolved input the common-level waters receive, and what the waters' life can spare to seaweed, fish and sorption."

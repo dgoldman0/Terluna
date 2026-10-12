@@ -56,8 +56,8 @@ WINDS_COMMIT = None
 WAYS_COMMIT = None
 CROSS_BRANCH = {
     'resources/results/phosphorus.json': dict(branch='main', commit=RESOURCES_COMMIT,
-        blob='bab3177a4c9119a3f57fb4a6fc01e62307a2f444',
-        sha256='4089899e2b70e8b7888bb83e705e1773f316a1b3c220a43313a48b2578b615a5',
+        blob='99876491f7456974b32a179bf4f99b86c6fe65f8',
+        sha256='5a22b880141da23f3f45aa3be4f5a46f9d98c5d1fdb68c2224fdd44e77cafc52',
         schema='terluna.resources.phosphorus/1'),
     'resources/phosphorus.py': dict(branch='main', commit=RESOURCES_COMMIT,
         blob='0b8568bc8af9c5ffc09e6baf9287bc86404cdf09',

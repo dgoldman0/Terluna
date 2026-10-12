@@ -69,15 +69,18 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
 
    **How:** with the planned `research/array-industry` branch, a stock-and-flow model of the fleet's materials with
    damage rates (protons, meteoroids) and recovery steps.
-7. **The carbon cycle as a box model.** The parts are:
-   - air, plants, soils with their carbonates, and the seas' dissolved carbon;
-   - burial in lakes and seas;
-   - the kilns and where their lime goes.
+7. **The carbon cycle as a box model.** Answered on 12 October 2026, at the author's request, by the
+   [carbon cycle](../research/studies/carbon_cycle/README.md): the air, the plants and soils with their carbonate, the
+   sky's biomass, the lakes' and seas' dissolved carbon, the sediments, people's stocks and the mineral strand, from
+   the seeding to year 10,000 at the corrected runoff and climate, with weathering that slows as soils age, the
+   magnesite route and the kilns' lime. Left alone once the biosphere is grown, the air falls below the plants'
+   comfortable 43 Pa in 135–377 years. Holding 400 ppm takes 0.14–0.39 Gt C a year of return or import at year
+   10,000: kilns of 19–58 GW return the carbonate as it forms, and the lakes' organic burial, the largest sink, leaves
+   an import of 0.09–0.27 Gt C a year. The build brings 983–1,352 Gt C by the year the biosphere is grown, and burial
+   leaves 0.36–0.85% more oxygen in the air by year 10,000.
 
-   It needs the corrected runoff and climate, weathering that slows as soils form, and the magnesite route. The CO2
-   study names it as next work.
-
-   **How:** a box model through the first thousands of years, run in seconds.
+   **Next:** the imports' form and the redox account (items 4 and 8), burial by lake, calcite where the kilns can reach
+   it, and the organic returns, as the study's next work lists them.
 8. **The oxygen budget against the ground.** Ferrous and metallic iron and sulfides take oxygen as the surface
    weathers, and organic burial returns it. The industrial architecture's step "establish the final oxygen regime"
    needs its size and timing.

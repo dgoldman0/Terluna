@@ -59,12 +59,14 @@ No population distribution has been adopted.
    Moon at 2.7 MJ/kg takes 20–40 GW over a century beside the fleet's own 40 GW (*screen*).
 6. **On the near horizons the air needs no resupply except its CO2.** Escape takes 0.044–1.4 kg/s, cycle times of
    70 billion to 2 trillion years. Rock takes 171–5,430 kg/s of O2 (cycle 3.6–113 million years), 0.008–0.25% of the
-   air's oxygen in years 1,000–10,000. Organic burial at lake rates would take 373–4,710 kg/s of nitrogen (cycle
-   17–215 million years; Mendonça et al. 2017 with the C/N of Meyers 1994), 0.004–0.05% of it in those years. The CO2
-   turns over in centuries: weathering at the present runoff takes 0.27–2.7 Gt a year and lake-rate burial
-   0.74–1.87 Gt, so the air's 1.9×10¹⁵ kg lasts 419–1,910 years, 710–7,100 by weathering alone. Kilns returning the
-   weathered carbon take 35–350 GW on the Moon (0.0009–0.009 W/m²); the buried carbon needs a return path or
-   6,400–16,200 kg/s of imported carbon, and its burial adds 0.54–1.36 Gt of O2 a year to the air (*screen*).
+   air's oxygen in years 1,000–10,000. Organic burial in the rain-fed lakes at lake rates, with the seas at Earth's
+   deep-sea rate, takes 138–1,740 kg/s of nitrogen (cycle 46–580 million years; Mendonça et al. 2017 with the C/N of
+   Meyers 1994), 0.0016–0.020% of it in those years. The CO2 turns over in centuries: weathering at the present runoff
+   takes 0.27–2.7 Gt a year and the lakes' burial 0.27–0.69 Gt, so the air's 1.9×10¹⁵ kg lasts 564–3,530 years,
+   710–7,100 by weathering alone. Kilns returning the weathered carbon take 35–350 GW on the Moon (0.0009–0.009 W/m²);
+   the buried carbon needs a return path or 2,370–5,970 kg/s of imported carbon, and its burial adds 0.20–0.50 Gt of O2
+   a year to the air (*screen*). The carbon cycle box model (research/studies/carbon_cycle) follows the same sinks as
+   soils age and the waters calcify: kilns of 19–58 GW and an import of 2,800–8,600 kg C/s at year 10,000.
 7. **The crust decides whether the water import ends with the build.** Escaping hydrogen takes 0.022–0.024 kg/s of
    water, a cycle time of 2×10¹³ years. If the crust's pores fill after the seas, 5.0×10¹⁸–5.9×10¹⁹ kg over
    1,000–10,000 years is 1.6×10⁷–1.9×10⁹ kg/s, 2–210% of the build's water stream (*screen*).
@@ -90,7 +92,7 @@ No population distribution has been adopted.
     19–70 MJ/kg: 20–340 PW, 4–67% of the 19 September civilization-scale envelope of 501 PW. Afterwards the air's
     top-up, the film's feed, the array's habitats and the Moon's copper come to 1.3×10⁴–4.5×10⁵ kg/s, 11–390 such
     packets a day and 0.25–31 TW of braking; the crust's water and imported carbon would hold it larger (*screen*).
-    Over 10⁹ years the rock takes 6.5–206 times the air's oxygen, lake-rate burial 4.7–59 times its nitrogen and the
+    Over 10⁹ years the rock takes 6.5–206 times the air's oxygen, the lakes' burial 1.7–22 times its nitrogen and the
     film's fresh feed 0.7–15 air masses (*screen*; first screen).
 
 ## Places
@@ -126,8 +128,8 @@ Transfers are coplanar Hohmann orbits to 1 AU without gravity assists (*screen*)
 |---|---|---|---|---|---|
 | Air to space | 0.044–1.4 kg/s; designed 1–100 | 70 billion–2 trillion years | 0.7–22 Mt | 13–400 Mt | 0.04–1.4% of the air |
 | O2 to rock | 171–5,430 kg/s | 3.6–113 million years | 0.0004–0.014% of the O2 | 0.008–0.25% | 6.5–206 air-oxygens |
-| N burial, lake rates | 373–4,710 kg/s | 17–215 million years | under 0.003% of the N2 | 0.004–0.05% | 4.7–59 air-nitrogens |
-| CO2 to weathering and burial | 1.0–4.6 Gt a year | 419–1,910 years | 26% to all of the air's CO2 without a return | — | — |
+| N burial, the lakes at lake rates | 138–1,740 kg/s | 46–580 million years | under 0.0011% of the N2 | 0.0016–0.020% | 1.7–22 air-nitrogens |
+| CO2 to weathering and burial | 0.55–3.4 Gt a year | 564–3,530 years | 14–89% of the air's CO2 without a return | — | — |
 | Water as escaping hydrogen | 0.022–0.024 kg/s | 2×10¹³ years | 0.4 Mt | 7 Mt | 0.005% of the water |
 | Crust's water, if late | 1.6×10⁷–1.9×10⁹ kg/s | ends when full | — | — | — |
 | Film fresh feed, 99–99.9% | 73–1,470 kg/s | fleet replaced in 1,000–20,000 years | 1.2–23 Gt | 21–420 Gt | 0.7–15 air masses |
@@ -152,8 +154,8 @@ planning allocation.
 | Air and seas | Ends | 1.1–4.8×10⁹ kg/s; 20–340 PW braked | — | — | — |
 | Crust's water | Ends, timing open | in the build, if fast | 1.6×10⁷–1.9×10⁹ kg/s, if slow | — | — |
 | Fleet | Built, then renewed | 46 Gt lifted, years 150–350 | 2.3–4.6 Gt a year; 73–1,470 kg/s fresh | same | 0.7–15 air masses fresh |
-| Carbon | Continues | the biosphere's 1.5–1.6×10¹⁵ kg of CO2 | kilns of 35–350 GW, or 0.88–4.0×10⁴ kg/s imported | same | a return path |
-| Air's other losses | Continue | — | under 0.014% of any gas | under 0.26% | 6.5–206 oxygens, 4.7–59 nitrogens |
+| Carbon | Continues | the biosphere's 1.5–1.6×10¹⁵ kg of CO2 | kilns of 35–350 GW, or 0.47–3.0×10⁴ kg/s imported | same | a return path |
+| Air's other losses | Continue | — | under 0.014% of any gas | under 0.26% | 6.5–206 oxygens, 1.7–22 nitrogens |
 | Moon's stocks | Grow, then turn over | — | toward 43–2,010 Gt | 0.53–31 Gt a year | turnover |
 | Array's habitats | Grow with population | — | 1.3×10⁴–4.5×10⁵ kg/s | same | small renewal |
 | Computing | Grows with demand | — | 0.21–3.2 Gt a year | same | renewal |

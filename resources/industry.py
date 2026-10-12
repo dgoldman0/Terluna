@@ -82,7 +82,12 @@ SERVER_LIFE_YR = (4.0, 6.0)              # Microsoft's server life, raised from 
 LOSS_BUDGETS_KG_S = (1.0, 10.0, 100.0)   # decisions register: designed across 1-100 kg/s
 WATER_OVER_H2 = 18.015 / 2.016           # mass of water per mass of hydrogen it holds
 CRUST_FILL_YEARS = (1000.0, 10000.0)     # if the crust's pores fill after the seas (assumed span)
-LAKE_BURIAL_G_C_M2_YR = (19.0, 48.0)     # lakes and reservoirs (Mendonca et al. 2017), applied to the seas (finding 6)
+LAKE_BURIAL_G_C_M2_YR = (19.0, 48.0)     # lakes and reservoirs (Mendonca et al. 2017), over the rain-fed lakes
+# The seas bury at Earth's deep-sea rate: 6 Tg C a year (Berner 1982) over the ocean less its shelves, estuaries and
+# vegetated coast (Duarte, Middelburg & Caraco 2005). The carbon cycle box model adds the shelves' depositional tenth,
+# about 0.003 Gt C a year in all (research/studies/carbon_cycle); the lakes bury 25-60 times as much.
+DEEP_SEA_G_C_M2_YR = 6.0e12 / (3.6e14 - 2.66e13 - 2.7e12)
+BURIAL_BASIS = "the rain-fed lakes at lake rates and the seas at Earth's deep-sea rate"
 CN_ATOMIC = (4.0, 20.0)                  # algae 4-10, vascular land plants 20 and more (Meyers 1994)
 N_OVER_C = 14.007 / 12.011
 CO2_OVER_C = 44.009 / 12.011
@@ -322,6 +327,7 @@ def carbon(screen, co2, carbon_kg_s, used_on_moon, runoff_now_mm):
                 import_as_carbon_kg_s=sig([t / CO2_OVER_C for t in total]),
                 burial_import_as_carbon_kg_s=sig([b / CO2_OVER_C for b in burial]),
                 burial_o2_release_gt_yr=sig([b / CO2_OVER_C * 31.998 / 12.011 * YEAR_S / 1e12 for b in burial]),
+                burial_basis=BURIAL_BASIS,
                 note='Kilns return the weathered carbon on the Moon; buried organic carbon needs its own return path or an import.')
 
 
@@ -343,7 +349,8 @@ def after_build(screen, joint, atlas, drainage, heat, co2):
     crust_kg_s = [crust[0] / (CRUST_FILL_YEARS[1] * YEAR_S), crust[1] / (CRUST_FILL_YEARS[0] * YEAR_S)]
     build_water_kg_s = water / (BUILD_YEARS * YEAR_S)
     sea_m2 = atlas['water_share'] * MOON_AREA_M2
-    burial_c = [g * sea_m2 / 1e3 / YEAR_S for g in LAKE_BURIAL_G_C_M2_YR]                  # kg C/s
+    lake_m2 = drainage['lakes']['area_share'] * MOON_AREA_M2
+    burial_c = [(g * lake_m2 + DEEP_SEA_G_C_M2_YR * sea_m2) / 1e3 / YEAR_S for g in LAKE_BURIAL_G_C_M2_YR]   # kg C/s
     nitrogen = [burial_c[0] * N_OVER_C / CN_ATOMIC[1], burial_c[1] * N_OVER_C / CN_ATOMIC[0]]
     film = screen['film']
     fleet_kg = [m * 1e12 for m in film['optical_mass_gt']]
@@ -362,7 +369,8 @@ def after_build(screen, joint, atlas, drainage, heat, co2):
                    crust_kg=crust, crust_fill_years=list(CRUST_FILL_YEARS), crust_kg_s_if_after_the_seas=sig(crust_kg_s),
                    build_water_kg_s=sig(build_water_kg_s), crust_over_build_stream=sig([c / build_water_kg_s for c in crust_kg_s], 2)),
         nitrogen=dict(escape_kg_s=sig([computed[0] * n2 / air, computed[1] * n2 / air]),
-                      burial_at_lake_rates_kg_s=sig(nitrogen), sea_carbon_burial_gt_yr=sig([c * YEAR_S / 1e12 for c in burial_c]),
+                      burial_kg_s=sig(nitrogen), carbon_burial_gt_yr=sig([c * YEAR_S / 1e12 for c in burial_c]),
+                      burial_basis=BURIAL_BASIS,
                       burial_cycle_years=sig([n2 / (k * YEAR_S) for k in nitrogen[::-1]]),
                       windows=windows(nitrogen, n2, 'air_nitrogens')),
         carbon=carbon(screen, co2, burial_c, heat['placement']['moon_W_m2_per_TW_used_on_moon'], runoff_mm(atlas, drainage)),
