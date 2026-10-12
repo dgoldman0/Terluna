@@ -11,7 +11,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules; escaped_air_cloud_in_earth_moon_space; exosphere_losses_ions_fragments_charge_exchange_with_and_without_a_lunar_magnetosphere; slant_path_tracing_of_light_passing_the_shield_with_fism2_x_ray_cycle; infrared_cooling_in_the_thermal_column_2026_10_08; no_oxidant_under_the_titania_stack_joint_synthesis_2026_10_08",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules; escaped_air_cloud_in_earth_moon_space; exosphere_losses_ions_fragments_charge_exchange_with_and_without_a_lunar_magnetosphere; slant_path_tracing_of_light_passing_the_shield_with_fism2_x_ray_cycle; infrared_cooling_in_the_thermal_column_2026_10_08; no_oxidant_under_the_titania_stack_joint_synthesis_2026_10_08; ch4_n2o_line_by_line_forcing_in_the_deep_column",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -814,7 +814,7 @@
         "Ecology's land phosphorus loss still takes Earth's river concentrations at the register's former runoff; at the rerun register it would be about a fifth lower.",
         "Resources' sea phosphorus keeps its own food-system stand-ins; binding the food study's per-system phosphorus would close a loop with the food study, which reads it."
       ],
-      "next_session_task": "The gases' warming in the deep column (ecology, question 3), which the author made the next work on 2026-10-12; then C' placed with the blend. The array's power distribution recommendation (studies/domain_synthesis/README.md) waits for the author."
+      "next_session_task": "The author sets the levels at which methane and N2O are held, with their warming in the deep column (atmosphere/radiative_convective, reduced gases, 2026-10-12); then C' placed with the blend. The array's power distribution recommendation (studies/domain_synthesis/README.md) waits for the author."
     }
   ]
 }

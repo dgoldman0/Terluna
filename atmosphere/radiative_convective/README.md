@@ -26,9 +26,11 @@ From the repository root:
 
 ```sh
 python -m atmosphere.radiative_convective.fetch_inputs --download   # once; hash-checked, ignored by Git
+python -m atmosphere.radiative_convective.fetch_added_inputs --download   # CH4 and N2O lines, the same way
 python -m pytest atmosphere/tests/test_radiative_convective.py
 python -m atmosphere.radiative_convective.run --list
 python -m atmosphere.radiative_convective.run --only earthlike_humidity
+python -m atmosphere.radiative_convective.reduced_gases      # methane and N2O, 15-23 minutes on six workers
 ```
 
 A column takes about a minute for each of the thermal and solar parts on eight
@@ -194,6 +196,56 @@ The Moon's values are all-sky estimates.
   a shield that blocks the far ultraviolet that breaks them up high in the
   atmosphere they would last longer still: a lever that is effectively
   permanent once pulled.
+
+## Methane and N2O in the deep column (2026-10-12)
+
+[reduced_gases.py](reduced_gases.py) answers ecology's question 3, which the author made the next work on 12
+October: how far methane and N2O warm the Moon. It adds HITRAN's CH4 and N2O lines (0–3,500 cm⁻¹, pinned in
+[inputs_added.json](inputs_added.json) beside inputs.json, which other products bind by hash) to the clear-sky
+columns at 290–300 K and records the drop in outgoing longwave, the instantaneous forcing at the top, beside the net
+change at the tropopause. A gas's optical depth is computed once per column for 1 ppm and scaled. The Earth control
+sets the method against AR6's effective forcing for the rise from 1750 to 2019: this column gives 0.94 W/m² of
+clear-sky forcing for methane against AR6's 0.54, and 0.32 for N2O against 0.21. Those ratios, 0.58 and 0.65, carry
+Earth's clouds, adjustments and methane's absorption of sunlight into the Moon's all-sky estimates. Results are in
+`results/reduced_gases.json`, a run of about 23 minutes on six workers.
+
+The Moon's 1.2 atm column at 295 K, each gas from none, the way the planned climate has it:
+
+| Gas | Clear sky, W/m² | All-sky estimate, W/m² | Warming at 1.0–1.6 W/m²/K |
+|---|---|---|---|
+| Methane, 0.73 ppm (Earth, 1750) | 2.7 | 1.6 | 1.0–1.6 K |
+| Methane, 1.87 ppm (Earth, 2019) | 4.0 | 2.3 | 1.4–2.3 K |
+| Methane, 3.4 ppm (the screen's lowest steady state) | 5.1 | 2.9 | 1.8–2.9 K |
+| Methane, 21.6–29 ppm (its central steady states) | 9.5–10.3 | 5.5–5.9 | 3.4–5.9 K |
+| Methane, 230 ppm (its highest) | 16.8 | 9.7 | 6.0–9.6 K |
+| N2O, 0.27 ppm (Earth, 1750) | 4.6 | 3.0 | 1.9–3.0 K |
+| N2O, 0.33 ppm (Earth, 2019) | 5.1 | 3.4 | 2.1–3.3 K |
+| N2O, 0.55 ppm (about a thousand years of the wild's rise) | 6.5 | 4.2 | 2.6–4.2 K |
+| N2O, 1 ppm | 8.4 | 5.5 | 3.4–5.5 K |
+| N2O, 4.2 ppm (about ten thousand years) | 14.2 | 9.3 | 5.8–9.2 K |
+| Both at Earth's 2019 levels | 7.7 | 4.7 | 2.9–4.7 K |
+| Both at the central steady state (21.6–29 and 0.55 ppm) | 12.9–13.5 | 7.9–8.3 | 4.9–8.3 K |
+| Both at the highest (230 and 4.2 ppm) | 23.4 | 14.4 | 8.9–14.3 K |
+
+The warming takes provisioning's response of 1.0–1.6 W/m²/K on the all-sky estimates. The column's own clear-sky
+response near the design case, 1.38 W/m²/K with the water-vapour feedback and the dimmed titania sunlight (the
+inverse-climate rows at 290 and 300 K), gives 9.3–9.8 K for the central steady state from the clear-sky forcing.
+
+- **A part per million does more on the Moon.** Each is about a seven times thicker absorber over each square metre.
+  At Earth's 2019 levels methane forces 4.0 W/m² on the Moon's clear sky against 2.5 on the Earth control, and N2O
+  5.1 against 2.7. The bands saturate, so the forcing grows nearly with the logarithm of the amount: over a hundred
+  times Earth's present methane (230 ppm) forces about four times as much.
+- **The planned climate carries neither gas.** The design GCM run's radiation holds CO2 as its only trace gas
+  ([climate/gcm](../../climate/gcm/README.md)), so whatever methane and N2O the Moon keeps adds to it. Earth's present
+  levels would add 4.7 W/m² all-sky, and the screen's central steady state 7.9–8.3 W/m², within the range of the
+  ring fleet's infrared glow (5.7–9.9 W/m²).
+- **N2O is the larger lever.** It forces more per ppm than methane, and with no sink it keeps building: 9.3 W/m² at
+  the 4.2 ppm ten thousand years bring. Methane levels off where the soils take what is made.
+- **The two overlap.** Their bands share the region near 1,300 cm⁻¹, so together at the central steady state they
+  force 13.5 W/m² clear-sky against 16.8 for the two apart.
+- **What it leaves out.** Clouds enter only through AR6's Earth ratio; there is no stratospheric adjustment, no
+  absorption of sunlight by the gases in the Moon's own columns and no chemistry, such as the stratospheric water that
+  methane makes where OH exists.
 
 ## What it is and is not
 

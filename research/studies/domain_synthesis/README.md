@@ -141,15 +141,17 @@ light through the shield's gaps, so on any human timescale it has no sink (findi
 methane at central values and 12–23% of the N2O. The heritage cattle are counted by their enteric methane; their
 manure and pastures are not.
 
-Holding Earth's present levels would take 58–79 Tg of methane a year at central values and all of the N2O. The
-power that separation needs is small; the burden is the air: a removal from open air would have to pass 1.8–2.4% of
-the whole atmosphere through its contactors each year for methane at full capture, and 0.11–0.16% for N2O. The
-author chose biological means coupled with technologies that make up the difference; the research direction recorded
-with that choice puts biology on the land and seas first, treatment where the gases are concentrated next, and
-removal from open air last, and these figures show the burden open air would carry. The denitrification bracket is
-one N2O-respiring bacterium's cut on Earth's farm soils (Hiis et al. 2024, Nature 630, 421–428), applied here to every
-source, the wild waters included. How far each gas may rise is set by its warming in the deep column, still
-uncomputed (next work, item 1); the levels in these tables are Earth's, for reference.
+Holding Earth's present levels would take 58–79 Tg of methane a year at central values and all of the N2O. The power
+that separation needs is small; the burden is the air: a removal from open air would have to pass 1.8–2.4% of the whole
+atmosphere through its contactors each year for methane at full capture, and 0.11–0.16% for N2O. The author chose
+biological means coupled with technologies that make up the difference; the research direction recorded with that choice
+puts biology on the land and seas first, treatment where the gases are concentrated next, and removal from open air
+last, and these figures show the burden open air would carry. The denitrification bracket is one N2O-respiring
+bacterium's cut on Earth's farm soils (Hiis et al. 2024, Nature 630, 421–428), applied here to every source, the wild
+waters included. The levels in these tables are Earth's, for reference. The gases' warming in the deep column, computed
+on 12 October ([reduced gases](../../../atmosphere/radiative_convective/README.md)), sets how far each may rise: the
+planned climate carries neither, Earth's present levels force 4.7 W/m² all-sky (2.9–4.7 K) and the table's central
+steady state 7.9–8.3 W/m² (4.9–8.3 K), within the range of the fleet's glow.
 
 ## Phosphorus
 
@@ -209,8 +211,9 @@ at the high-cost end.
 
 The gases are first an ecological design problem. The wild's lakes, wetlands and soils make most of the methane and
 N2O, and a wet Moon under a shield with no ultraviolet window keeps both for centuries or longer, so the biomes' own
-budgets (oxidizers in the waters, denitrification that ends in N2) decide the air before any machine does. The
-warming of both gases in the deep column sets how much of that work is needed.
+budgets (oxidizers in the waters, denitrification that ends in N2) decide the air before any machine does. In the
+deep column they warm the Moon as much as the fleet's glow at the central steady state, so whatever is not removed
+joins the dimming budget.
 
 Phosphorus closes in steady state: people's losses go to the lakes and come back by dredging, 8–51% of what the lakes
 receive, while the natural cycle keeps its carriers and the lakes bury the rest. Between 10 and 30 km the sky is
@@ -220,10 +223,9 @@ network flies above most of it.
 ## Next work, in order
 
 Machine time is for this laptop, one core, alongside the author's other work.
-1. **The gases' warming in the deep column** (ecology, question 3): the line-by-line radiative–convective column
-   with methane and N2O lines added (HITRAN, fetched and hash-recorded like the column's other inputs) and swept over
-   the ranges above. A few hours. It sets the levels the gases may reach, and so how much biology and technology
-   must remove.
+1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October, about 23 minutes on six
+   workers ([reduced gases](../../../atmosphere/radiative_convective/README.md)). The levels to hold the gases at are
+   the author's to set with it.
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band,
    with the homestead belt holding the heritage farms. Minutes; the distributions README follows.
 3. **The fleet's night and its glow** (plan, item 3; the planned branch research/array-industry): the night-side
@@ -250,7 +252,8 @@ Machine time is for this laptop, one core, alongside the author's other work.
 
 The author decided the list on 12 October
 ([register](../../decisions.md#the-domain-synthesiss-decisions-12-october-2026)):
-1. The levels at which methane and N2O are held wait for their warming in the deep column, which is the next work.
+1. The levels at which methane and N2O are held wait for their warming in the deep column, which is the next work;
+   computed the same day, it leaves the levels for the author to set.
 2. Food and the sky towns run on power from the array, given a good distribution recommendation; the one above waits
    for the author.
 3. Added dimming can be had by extracting more of the sunlight; the fleet's glow is the harder problem to work out.

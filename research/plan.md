@@ -216,9 +216,10 @@ The four refreshes the author ordered on 12 October are done ([integration/domai
 synthesis ranks two items first from the three domains together; they lead this list, and its
 [full order](studies/domain_synthesis/README.md#next-work-in-order) carries the domains' own next steps.
 
-1. **The gases' warming in the deep column** (ecology, question 3): the line-by-line column with methane and N2O lines
-   added and swept over the synthesis's ranges, a few hours. It sets the levels the gases may reach, and so how much
-   biology and technology must remove.
+1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October on domain/ecology, about 23
+   minutes on six workers ([reduced gases](../atmosphere/radiative_convective/README.md)). Earth's present levels force
+   4.7 W/m² all-sky on the Moon and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K; the levels to hold the
+   gases at are the author's to set.
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band, in
    minutes.
 3. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,

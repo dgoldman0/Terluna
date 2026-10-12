@@ -26,12 +26,15 @@ on this laptop. The findings behind them are in the [README](README.md).
      can feed; the night's light aloft; and how people's traffic and light share the volume.
    - **How:** a food-web budget of the sky by height band from the climate runs, the land's export of pollen, spores,
      insects and migrants, and the illumination solver's twilit sky aloft.
-3. **How much the reduced gases warm the Moon.** The screen puts methane near 20 ppm at central values, and N2O builds
-   0.3–0.4 ppb a year. Their effect in a column 7.6 times Earth's has not been computed.
+3. **How much the reduced gases warm the Moon.** Answered on 12 October 2026, the next work the author set that day:
+   the line-by-line column with HITRAN's CH4 and N2O lines added, about 23 minutes on six workers
+   ([reduced gases](../../atmosphere/radiative_convective/README.md)). The planned climate carries neither gas, so
+   whatever the Moon keeps adds to it. Earth's present levels force 4.7 W/m² all-sky on the Moon, 2.9–4.7 K; the
+   screen's central steady state (methane 21.6–29 ppm, N2O 0.55 ppm) 7.9–8.3 W/m², 4.9–8.3 K; the highest (230 and
+   4.2 ppm) 14 W/m². N2O forces more per ppm and keeps building.
    The author chose on 12 October to hold both gases in check by biological means, coupled with advanced technologies
-   that make up the difference, with no ultraviolet window in the shield ([machines.md](machines.md)).
-
-   **How:** the line-by-line radiative–convective column with CH4 and N2O added, a sweep of a few hours.
+   that make up the difference, with no ultraviolet window in the shield ([machines.md](machines.md)); the levels to
+   hold them at are the author's to set with these figures.
 4. **The ecology's case in the ultraviolet decision (O3).** Keep the present short-wave shield, with adaptation to
    its spectrum and local UV provision as the working direction. A narrow attenuated UV-B window remains a
    candidate. The [fixed-column evaluation](../../research/studies/uv_biology/README.md) gives overhead UVI

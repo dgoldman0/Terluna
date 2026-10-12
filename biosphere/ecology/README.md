@@ -147,8 +147,9 @@ every way of joining the two that was offered
 - **N2O and methane.** Biology first, with technologies making up the difference, and no ultraviolet window in the
   shield. N2O comes mostly from the wild's soils and waters, 0.3–0.4 ppb a year, and reaches Earth's present level in
   about a thousand years. Nitrogen fixation feeds the nitrogen it comes from, and breaking it down with lamps in open
-  air would take hundreds of terawatts. The deep column's warming of both gases comes first ([questions](questions.md),
-  item 3).
+  air would take hundreds of terawatts. In the deep column both gases warm the Moon strongly: Earth's present levels
+  force 4.7 W/m² all-sky and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K before it is answered
+  ([questions](questions.md), item 3).
 
 ## What the project already says
 
@@ -207,7 +208,8 @@ which.
    (median 352 m) emit less per area than Earth's shallow ponds. Bubbles leave sediment more easily at a sixth of
    Earth's water pressure, though, and skip oxidation in the water column. Methane oxidizers in soils and waters are
    therefore a requirement from the start. Wetland extent, lake depth and anoxic volume become variables of the air's
-   composition (Bastviken et al. 2011). The greenhouse effect of tens of ppm in this deep column is uncomputed.
+   composition (Bastviken et al. 2011). In this deep column 21.6–29 ppm force 5.5–5.9 W/m² all-sky, 3.4–5.9 K
+   ([questions](questions.md), item 3).
    *Solid in direction; the rates are Earth analogues, good to a factor of three to ten.*
 7. **N2O has no sink at all.** N2O is destroyed by light below about 240 nm and by excited oxygen atoms made by
    ultraviolet, and the stack removes both. Soils take up at most 2% of Earth's N2O sources (Schlesinger 2013).
