@@ -9,7 +9,8 @@ compromise rule of 30% of the land kept wild and another 20% hybrid), fed by the
 heat, land, methane and N2O, phosphorus, and the sky's layers, with power from the array divided between the towns and
 the ground. They are arithmetic on screen products and take under a second; every figure keeps its source's evidence
 state. The distributions study placed C′ with the power-heavy mix, so here the blend's food takes its place in the
-totals; placing the blend's fields band by band is that study's next run (next work, item 2).
+totals; the study's placement of C′ with the blend band by band gives the same land and finds every corner fitting
+([distributions](../distributions/README.md#with-the-authors-food-the-blend)).
 
 ## What each branch brought
 
@@ -32,7 +33,7 @@ At 8 billion on the Moon, pairs from the low-cost to the high-cost end:
 |---|---|---|
 | Heat on the Moon, with fusion and close computing | 40–284 TW, 1.1–7.5 W/m² | 28–133 TW |
 | Added dimming that answers it | 0.35–3.9% | 0.24–1.9% |
-| The same with power from the array | 30–145 TW; 0.26–2.0% | 22–77 TW; 0.19–1.1% |
+| The same with power from the array, the author's choice | 30–145 TW; 0.26–2.0% | 22–77 TW; 0.19–1.1% |
 | Dry land used, with 1 kg of heritage meat a person | 1.24–2.89 million km², 5.3–12% | 1.95–7.71 million km², 8.4–33% |
 | Wild share of the land outside the kept 30% and the parks | 75–89% | 34–83% |
 | Methane at the soils' central sink, steady state | 22–29 ppm, people 7–30% of the sources | |
@@ -62,33 +63,50 @@ terawatt, provisioning's factor, and the fleet's glow as provisioning gives it, 
 293 W/m². The glow is the larger load. People and the fleet together would need 2.3–7.3% of the sunlight taken away
 if dimming answered both, 2.2–5.4% with the array's power. The fleet's answer is still open: films that absorb less, a
 heat mirror on its Moon-facing faces, redirecting the glow, or added dimming ([plan](../../plan.md), next work
-item 3). The parks' automation and amenities, which the register leaves to be sized, are not in the ledger.
+item 5). The parks' automation and amenities, which the register leaves to be sized, are not in the ledger.
 
-## Power from the array: a distribution recommendation
+## Power from the array: the chosen distribution
 
-The author chose power from the array for food and the sky towns, given a good recommendation for distributing it
-(register, 12 October). Everything received ends as heat on the Moon, so the intake is the heat ledger's array parts
-(*screen*, [ledgers](results/ledgers.json), `array_power`):
-- **The sky towns take theirs on their own tops.** Their control, hydrogen remade, trips and the aloft half of the
-  residents come to 8.3–45 TW. The 696,000 towns' tops, a kilometre across, make 547,000 km², so the towns take it at
-  15–82 W/m², without lines or night storage. From the ring, 18,300–19,900 km away, a transmitter 2.2–2.4 km on a side
-  puts 95% of a 5.8 GHz beam on one top (5.1–5.6 km at 2.45 GHz), a fraction of one 10 km tile.
+The author chose power from the array for food and the sky towns on the design below (register, 12 October), which
+sizes the whole Moon's intake. Everything received ends as heat on the Moon, so the intake is the heat ledger's array
+parts (*screen*, [ledgers](results/ledgers.json), `array_power`). A beam leaves 1.38 W of heat on the Moon for each watt
+it delivers, its receiver's losses and its spill, where a fusion plant leaves 2.0–3.0 W; the transmitters' losses stay
+in space. The supply is ample: the light the planned 5% dimmer already takes would give 117–176 TW of electricity at
+20–30% conversion ([the shield's ledger](../solar_shield_array/results/integrated_ledger.json)), against the Moon's
+30–145 TW with close computing, and each further 1% of dimming taken to answer heat gives another 23–35 TW.
+- **The sky towns take theirs on their own crowns.** Their control, hydrogen remade, trips and the aloft half of the
+  residents come to 8.3–45 TW, 12–65 MW a town. The 696,000 towns' crowns, a kilometre across, make 547,000 km², so
+  the towns take it at 15–82 W/m², without lines or night storage. From the ring, 18,300–19,900 km away, a transmitter
+  5.1–5.6 km on a side puts 95% of a 2.45 GHz beam on one crown (2.2–2.4 km at 5.8 GHz), part of one 10 km tile.
 - **The ground takes the rest at its loads.** Food, the ground's half of the residents and close computing come to
-  22–100 TW. At the 1978 reference rectenna's 49 W/m² mean that needs 0.45–2.05 million km² of receivers, at its
-  230 W/m² peak 96,000–436,000 km², 0.4–1.9% of the dry land; strung over the blend's fields the same power arrives at
-  33–54 W/m², near that mean, beneath a mesh that shades the crops. A beam from one tile lands in 220–240 m at 5.8 GHz,
-  so receivers can sit where the load is: at the power-made food plants, the lamp-lit farms and the cities' industry,
-  joined by a grid, with several tiles behind each receiver for the uptime the author requires.
-- **What it costs.** All of these intensities exceed the 10 W/m² that ICNIRP (2020) sets for the public, so the
-  receivers and the towns' tops are closed spaces, with people beneath the rectenna's shield and flyers kept out of
-  the beam columns; what aerophytes drifting through a column take is to be checked. The ring stands above the
-  horizon everywhere except within about 5° of its plane's poles, where the grid serves. The night stays dark, and
-  the Moon takes only the receivers' losses and the air's absorption as heat, which the array's factor already counts.
+  22–100 TW, received at the power-made food plants, the lamp-lit farms and the cities' industry. A tile's aperture
+  focuses to 510–560 m at 2.45 GHz, so beams shaped flat light a receiver a few kilometres across evenly at the 1978
+  reference rectenna's 230 W/m² peak: 96,000–436,000 km², 0.4–1.9% of the dry land, closed ground with planting
+  beneath the mesh. The 1978 design's tapered beam, averaging 49 W/m², would need 0.45–2.05 million km². Meshes strung
+  over the blend's fields, at 33–54 W/m² with the crops in their shade, were the alternative set aside.
+- **Several beams for every receiver**, from tiles in different parts of the sky, for the uptime the author requires.
+  A grid joins the ground's receivers, backs each one up and serves the polar caps, since the ring stands below the
+  horizon within about 5° of its plane's poles.
+- **Exposure.** All of these intensities exceed the 10 W/m² that ICNIRP (2020) sets for the public. The receivers are
+  closed ground and the towns' crowns closed decks, with people beneath the rectenna, which stops the beam, and the
+  columns above receivers are closed to flyers; the towns' columns cover 1.4% of the Moon. The beams are
+  retrodirective, the 1978 reference's safety design: they focus only on a pilot signal sent up from the receiver and
+  spread out when it is lost.
+- **Sky reefs.** The towns' beams cross the reefs' layer at 10–20 km. A reef drifting into a column would cut the
+  town's power and take the beam into its wet tissue, 15–82 W/m² there and 230 W/m² over a ground receiver. The beam
+  moves to another part of the ring before the reef arrives, 10–20° of offset for reefs a kilometre or two across
+  5–10 km above a town, so beams give way to reefs as towns do. What a reef takes when a switch comes late is still
+  to be checked.
+- **Weather and the deep air.** At 2.45 GHz rain costs 0.1–0.2 dB through 10 km at 50–100 mm/h; at 5.8 GHz 10 km at
+  50 mm/h takes about half the power (ITU-R P.838-3), and the towns fly in the storm layer, so towns and ground both
+  take 2.45 GHz. The dense, tall column absorbs an estimated 5–8% of a beam on its way down (*estimate*: Earth's
+  oxygen absorption scaled by the pressure squared and the scale height), which raises the array's heat by about 7%,
+  still about half of fusion's at the high-cost end.
+- **The night stays dark**: microwaves make no light.
 
-The recommendation, for the author: beams straight to the towns' tops; ground receivers at the loads at up to the 1978
-peak, joined by a grid; and a choice between closed receiving land, 0.10–0.44 million km² at that peak, and meshes
-over the fields at the cost of their shade. A screen of receivers, beams, the grid and reserves through the lunar
-cycle firms it up (provisioning, question 3).
+The power screen (provisioning, question 3) firms up the sizing: the receivers and beams per tile, the grid's lines
+and losses, the air's absorption computed, and the reserves through the lunar cycle, storms and reef crossings, with
+days of storage for critical loads against a fault across the whole ring, the design's one common point of failure.
 
 ## Land
 
@@ -110,8 +128,9 @@ The blend's fields take 27–40% of the power-heavy mix's land, so the wild shar
 pasture uses; the unused part stays open to later use. The blend grows no staple crops in the middle latitudes' wet
 lowlands. The homestead belt there, 1.39 million km², holds the homesteads among their own heritage and hobby farms:
 11%, 21% or 43% of it at 0.5, 1 or 2 kg of meat a person a year. With power-heavy, 16 of C′'s 32 corners overfilled
-a band at the high-cost end; the blend's smaller fields leave room in the totals, and whether every corner then fits
-band by band is the distributions study's next run.
+a band at the high-cost end. Placed band by band with the blend, every one of the 32 fits under every rule at 1 and
+2 kg; the homestead belt holds 0.6–12 million homesteaders among the heritage farms, and the rest of the middle
+latitudes' lowland people, 0.24–0.40 billion, move to the high-latitude lowland (distributions study).
 
 ## Methane and N2O
 
@@ -224,35 +243,42 @@ Machine time is for this laptop, one core, alongside the author's other work.
    with methane and N2O lines added (HITRAN, fetched and hash-recorded like the column's other inputs) and swept over
    the ranges above. A few hours. It sets the levels the gases may reach, and so how much biology and technology
    must remove.
-2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band,
-   with the homestead belt holding the heritage farms. Minutes; the distributions README follows.
-3. **The fleet's night and its glow** (plan, item 3; the planned branch research/array-industry): the night-side
+2. **C′ placed with the blend:** done on 12 October (provisioning). Every corner fits band by band under every rule
+   at 1–2 kg of heritage meat ([distributions](../distributions/README.md#with-the-authors-food-the-blend)).
+3. **The carbon cycle under the updated parameters** (resources, question 7): a box model of the air, plants, soils
+   with their carbonates, the sky's biomass, the lakes' and seas' dissolved carbon, the sediments and people's stocks,
+   with weathering's calcium and magnesium as the mineral strand, through the first thousands of years. Seconds a
+   run. It sizes the managed return that holds 400 ppm, the build's carbon import and the oxygen burial leaves.
+4. **The power screen** (provisioning, question 3): the chosen design's receivers and beams per tile, the grid, the
+   deep air's absorption at 2.45 GHz, and reserves through the lunar cycle, storms, reef crossings and a fault across
+   the ring. Minutes to an hour.
+5. **The fleet's night and its glow** (plan, item 5; the planned branch research/array-industry): the night-side
    attitude, films and a heat mirror sized against the glow, with this heat ledger as the people's part of the same
    budget. About an hour of CPU for each set of kept orbits.
-4. **The wet Moon's methane and nitrogen:** methane from the lakes by depth with oxidation in their waters and
+6. **The wet Moon's methane and nitrogen:** methane from the lakes by depth with oxidation in their waters and
    sediments, and the biomes' nitrogen cycle ending in N2. Screens of minutes, with the literature.
-5. **Traffic and the network:** the sky shared between 10 and 30 km, with the towns giving way to reefs (passes,
+7. **Traffic and the network:** the sky shared between 10 and 30 km, with the towns giving way to reefs (passes,
    moves and their energy at 0.1–2% cover), the metropolis's traffic and the regional ships; and a constellation model
    of the mesh with the ring's storms and the link budgets. Under an hour.
-6. **The aerophytes** (ecology's next): one assembled wet membrane, then trajectories through the design winds
+8. **The aerophytes** (ecology's next): one assembled wet membrane, then trajectories through the design winds
    (hours on the saved winds); one specified living sail; a population model with phosphorus return; measured
    tissue phosphorus and the seas' food web.
-7. **The night:** the dark-night requirement's value, lamps for the dark belt and a beetle-class glowing plant.
-8. **Water and energy for the parks and the high-latitude towns:** the parks' water, automation energy and night
-   light, and the high-latitude towns' water.
-9. **The signal vocabulary** of the machines in the wild, with its channels and regional dialects.
-10. **The sea-appearance illustrations** re-rendered from the developed-fines waters (the reference renders in
+9. **The night:** the dark-night requirement's value, lamps for the dark belt and a beetle-class glowing plant.
+10. **Water and energy for the parks and the high-latitude towns:** the parks' water, automation energy and night
+    light, and the high-latitude towns' water.
+11. **The signal vocabulary** of the machines in the wild, with its channels and regional dialects.
+12. **The sea-appearance illustrations** re-rendered from the developed-fines waters (the reference renders in
     minutes to hours; the generated images wait for the author's look).
-11. **The editorial pass** on the Codex-written prose against the author's standards.
-12. **The taxonomy**, on hold at the author's request.
+13. **The editorial pass** on the Codex-written prose against the author's standards.
+14. **The taxonomy**, on hold at the author's request.
 
 ## Decisions
 
 The author decided the list on 12 October
 ([register](../../decisions.md#the-domain-synthesiss-decisions-12-october-2026)):
 1. The levels at which methane and N2O are held wait for their warming in the deep column, which is the next work.
-2. Food and the sky towns run on power from the array, given a good distribution recommendation; the one above waits
-   for the author.
+2. Food and the sky towns run on power from the array, given a good distribution recommendation; the author then
+   took the recommendation as reported, the design above.
 3. Added dimming can be had by extracting more of the sunlight; the fleet's glow is the harder problem to work out.
 4. Heritage meat is 1–2 kg a person a year, 21–43% of the homestead belt before high-efficiency feed production cuts
    it; wild culls and fishing can supply part of it if parasite risk is kept low.

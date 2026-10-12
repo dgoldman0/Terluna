@@ -556,6 +556,53 @@ def test_homesteads_homes_stay_on_the_farm_half_under_a_hybrid_rule(product, bas
     assert within['buildable']
 
 
+def test_the_blend_reads_as_a_mix(basis):
+    """The blend's fields by zone are its land less the food study's towns, which this study's own town allowance
+    reproduces, to the food product's three significant figures, and its heritage pasture comes by case (C' with the
+    blend)."""
+    B, d = basis
+    food_b = m.with_blend(d['food'], d['blend'])
+    for rule in ('kept_30', 'wild_30_hybrid_20'):
+        src = d['blend']['blend']['8'][rule]
+        case = food_b['mixes'][m.BLEND]['cases']['8'][rule]
+        for e in (0, 1):
+            fields = sum(v[e] for v in case['fields']['field_km2_by_zone'].values())
+            assert close(fields, src['fields_km2'][e], rel=5e-3)
+            towns = m.food_town_km2(B, case['people_billion']['surface'][e], e, 1.0)
+            assert close(towns, src['towns_km2'][e], rel=5e-3)
+        for kg in m.HERITAGE_KG:
+            heritage = d['blend']['heritage_meat']['cases'][f'8_billion_{kg}_kg']
+            assert case['heritage_pasture_km2'][kg] == heritage['land_km2']
+
+
+def test_cprime_with_the_blend_keeps_homesteads_among_the_heritage_farms(product, basis):
+    """The blend grows no staple crops in the middle-wet zone, so C''s homesteads live among the heritage farms there,
+    at the guessed density on their pasture, which counts on the middle-wet band and in the land used; the moved
+    people are all placed (C' with the blend)."""
+    B, d = basis
+    food_b = m.with_blend(d['food'], d['blend'])
+    rule = next(k for k in m.KEPT if m.kept_key(k) == 'wild_30_hybrid_20')
+    for kg in m.HERITAGE_KG:
+        cp = product['moon']['cprime_with_blend'][f'{kg}_kg']['wild_30_hybrid_20']
+        assert cp['corners'] == 32
+        order = cp['destination_order']
+        pasture = d['blend']['heritage_meat']['cases'][f'8_billion_{kg}_kg']['land_km2']
+        for combo in ((0, 0, 0), (1, 1, 1), (0, 1, 1)):
+            for e, h in ((0, 0), (1, 0), (1, 1)):
+                c = m.moon_corner(B, food_b, 8, 4, rule, 'fusion', combo, e, mix=m.BLEND,
+                                  middle=dict(order=order, h_end=h, heritage_kg=kg))
+                mv = c['moved']
+                density = m.GUESSES['homestead_people_per_km2']['value'][h]
+                assert mv['middle_wet_fields_km2'] == 0.0 and mv['heritage_pasture_km2'] == pasture
+                assert close(mv['homesteads_billion'], min(density * pasture / 1e9, mv['middle_billion']))
+                assert close(sum(mv['placed_billion'].values()) + mv['unplaced_billion'], mv['moved_billion'])
+                assert abs(c['people_unplaced_billion']) < 1e-12
+                assert close(c['land']['heritage_pasture_km2'], pasture)
+                assert close(c['bands']['use_km2']['middle_wet_zone'], pasture + mv['homestead_land_km2'])
+                land = c['land']
+                assert close(land['used_km2'], land['food_km2'] + land['grazing_km2'] + land['settled_km2'] + pasture)
+
+
 def test_middle_wet_fields_are_held_to_the_fills_room_alone(basis):
     """The cap on the middle-wet fields removes only the food product's rounding: at most 0.5% of its field area."""
     B, d = basis

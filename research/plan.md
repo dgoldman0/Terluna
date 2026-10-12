@@ -207,21 +207,35 @@ can be had by extracting more sunlight, and the fleet's glow is the problem to w
 person a year; sky towns fly in the reefs' layer, with the preference going to the reefs if they become part of the
 useful balancing system; and the network's stability decides how its nodes meet the tallest storms.
 
-Waiting on the author: the array's power distribution recommendation (domain synthesis), and the taxonomy, on hold
-for later, with its open choices and the aerophytes' scientific name.
+On the recommendation's full report the author chose beamed power from the ring fleet for food and the sky towns:
+2.45 GHz beams to the towns' crowns, closed receivers at the ground's loads joined by a grid, and several beams for
+every receiver (provisioning). They also put the carbon cycle under the updated parameters on the work coming up
+(resources).
+
+Waiting on the author: the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 
 The four refreshes the author ordered on 12 October are done ([integration/domains.md](integration/domains.md)). The
-synthesis ranks two items first from the three domains together; they lead this list, and its
+synthesis ranks two items first from the three domains together, and on 12 October the author put the carbon cycle
+and the power screen behind them; they lead this list, and the synthesis's
 [full order](studies/domain_synthesis/README.md#next-work-in-order) carries the domains' own next steps.
 
 1. **The gases' warming in the deep column** (ecology, question 3): the line-by-line column with methane and N2O lines
    added and swept over the synthesis's ranges, a few hours. It sets the levels the gases may reach, and so how much
    biology and technology must remove.
-2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band, in
-   minutes.
-3. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
+2. **C′ placed with the blend:** done on 12 October on domain/provisioning. Every one of C′'s 32 corners fits band by
+   band under every rule at 1–2 kg of heritage meat, with 0.6–12 million homesteaders among the heritage farms
+   ([distributions](studies/distributions/README.md#with-the-authors-food-the-blend)).
+3. **The carbon cycle under the updated parameters** (resources, question 7, on domain/resources): a box model of the
+   air, plants, soils with their carbonates, the sky's biomass, the lakes' and seas' dissolved carbon, the sediments
+   and people's stocks, with weathering's calcium and magnesium as the mineral strand, through the first thousands of
+   years in seconds a run. It sizes the managed return that holds 400 ppm (kilns, the magnesite route, dredged
+   sediments), the build's carbon import and the oxygen that burial leaves in the air.
+4. **The power screen** (provisioning, question 3): for the chosen beamed design, the receivers and the beams each
+   tile carries, the grid's lines and losses, the deep air's absorption at 2.45 GHz, and the reserves through the
+   lunar cycle, storms, reef crossings and a fault across the ring. Minutes to an hour.
+5. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
    its light redirected away from the Moon and used where it can be, for computing for instance. The biosphere and
    human work set the requirement's value; the shield's night-side attitude (rolls within the bundle's clearance),
    its films' scatter and switched states are tested against it in the shield's dynamics. Flights of the kept orbits
@@ -233,18 +247,18 @@ synthesis ranks two items first from the three domains together; they lead this 
    the protection domain's optical tables with the ring stack's radiative transfer: films that absorb less, a heat
    mirror on Moon-facing faces (the stack's overlapping layers weaken it), and added dimming. The synthesis's heat
    ledger is people's part of the same budget.
-4. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
+6. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
    storm needs CM1's field solver over terrain, which touches the paused climate programme and waits for the author.
-5. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
+7. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
    atmosphere, then the biomes' and cities' emissions in an air with no OH; about an hour of runs once added. The
    author holds N2O and methane by biology, with technologies making up the difference.
-6. **The biomes' nitrogen and the dark night** as biological requirements: biological fixation, and the light that
+8. **The biomes' nitrogen and the dark night** as biological requirements: biological fixation, and the light that
    dark-night organisms tolerate (biosphere, lunar-cycle ecology).
-7. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
-8. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
-9. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
-10. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
+9. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
+10. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
+11. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
+12. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
 
 The climate programme stays paused, and no rented compute is commissioned.
 

@@ -53,16 +53,20 @@ on this laptop. The findings behind them are in the [README](README.md).
 
    **How:** the author's choice first; then the land-cities water screen poleward of 45°, a sky-traffic model on the
    design winds at kilometre scale, and the resources work's dredging rates.
-3. **The power system through the night.** Fusion is a planning assumption and a conditional technology. The
-   alternatives:
-   - a grid from the day side, with 9–19% losses over 4,000–5,500 km;
-   - storage at eight times Earth's pumped hydro for the metropolis alone;
-   - power from orbit, including microwaves from the fleet's night half.
+3. **The power system.** On 12 October the author chose beamed power from the ring fleet for food and the sky towns,
+   on the design in the [domain synthesis](../research/studies/domain_synthesis/README.md#power-from-the-array-the-chosen-distribution)
+   (register): 2.45 GHz beams to the towns' crowns, closed receivers at the ground's loads joined by a grid, and
+   several beams for every receiver. It serves the night from the ring's night-side tiles, in place of the earlier
+   alternatives: a grid from the day side, with 9–19% losses over 4,000–5,500 km, and storage at eight times Earth's
+   pumped hydro for the metropolis alone. Fusion stays a conditional technology.
 
-   Beaming keeps the night dark but closes 4,000–7,000 km² of receivers to people and sky ships for 200 GW.
-
-   **How:** a network model of sources, storage, lines and reserves through the lunar cycle, and the summit city's
-   power plan that its studies ask for.
+   **How:** the power screen, a network model through the lunar cycle:
+   - the receivers and the beams each tile carries;
+   - the grid's lines and losses;
+   - the deep air's absorption at 2.45 GHz, computed;
+   - reserves for storms, reef crossings and tile faults, with days of storage for critical loads against a fault
+     across the whole ring;
+   - the summit city's power plan that its studies ask for.
 4. **The food system.** The [food-systems study](../research/studies/food_systems/README.md) prices eight systems per
    billion residents, fits them to the lunar cycle and mixes them for 4, 6 and 8 billion, with the range each mix can
    be built over: rain-fed fields cost least and the rain feeds 9.1–27.0 billion outside a kept 30%; glass and lamps

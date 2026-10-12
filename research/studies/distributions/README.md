@@ -35,7 +35,10 @@ energy, water lift and wild land, and puts 0.49–14.7% of the dry land under a 
 0.50–15.4%. Every corner fits outside a kept 30%. Outside a kept half the high-cost end fits with the remedy's poleward
 and twilit placements once the homesteads' homes count within the fields they work, 0.02–0.71% of their land. Under
 the author's compromise of 30% wild with another 20% hybrid, the hybrid fifth holds 4.68 million km² of megaparks and
-great gardens, farms and towns keep to the same half, and C′ fits as it does outside a kept half.
+great gardens, farms and towns keep to the same half, and C′ fits as it does outside a kept half. Fed by the author's
+blend with 1–2 kg of heritage meat a person a year, C′ fits every corner as placed under every rule, with 73–89% of the
+land outside the kept 30% and the parks wild; the homestead belt holds 0.6–12 million homesteaders among the heritage
+farms, and 0.24–0.40 billion move to the high-latitude lowland ([with the blend](#with-the-authors-food-the-blend)).
 
 1. **The Moon carries 4–8 billion people with 60–94% of its dry land wild outside a kept 30%, and 31–92% outside a
    kept half** (*screen*). With half its people aloft, on the food study's power-heavy mix (vegetables and fruit in
@@ -355,6 +358,34 @@ then grows 1.12 million km² of its crops' equivalent by watering its fields, wi
 0.56 TW of lift (food study), and the sky towns, kept to 30% of the sky, have 1.7 times as many conflicts a day. C′
 fits every corner the same way as under the compromise. B then needs the remedy's three placements, and D fits at 10
 of its 16 corners with them.
+
+### With the author's food, the blend
+
+The author's food is the food study's blend, power-heavy 40%, power-made 50% and fully lamp-lit 10% of the diet,
+with heritage meat from the homesteads at 1–2 kg a person a year
+([register](../../decisions.md#the-domain-synthesiss-decisions-12-october-2026)). The study reads the blend as one
+more mix and places C′ with it band by band (*screen*; `moon.cprime_with_blend`). Its fields by zone are the blend's
+land less the food study's towns. The blend grows no staple crops in the middle-wet zone, so C′'s homesteads there
+live among the heritage farms, at the same 2–20 people a km² of farm, and the farms' pasture counts on that band:
+
+| C′ with the blend, 32 corners, the compromise | 1 kg of heritage meat | 2 kg |
+|---|---|---|
+| Corners that fit as placed | 32 | 32 |
+| Farms, pasture, settlement and the homesteads' homes, share of the dry land | 5.3–12% | 6.6–14% |
+| Wild outside the kept 30% and the parks | 75–89% | 73–87% |
+| The middle-wet zone used, the homestead belt's heritage farms and homes | 21% | 43% |
+| The 0–30° land used | 13–39% | 13–39% |
+| Homesteads among the heritage farms | 0.6–6.0 million people | 1.2–12 million |
+| The middle latitudes' lowland people who move, all to the high-latitude lowland | 0.25–0.40 billion | 0.24–0.40 billion |
+| Heat without close computing, with the array's power; with fusion | 24–139 TW; 31–270 TW | the same |
+
+Every corner fits as placed under every rule, where the power-heavy mix fit 16 of 32 under a kept half and the
+compromise until the homesteads' homes counted within their fields: the blend's fields take 27–40% of that mix's land
+and none of the middle-wet zone. Its heat is the price, 1.7–2.3 times the power-heavy mix's with fusion (the
+[domain synthesis](../domain_synthesis/README.md#heat)). With no staple fields in the middle latitudes, the homesteads
+there are a few million among the heritage farms, and everyone else who moves fits on the high-latitude lowland, the
+ranking's first destination; with the blend the ranking puts the dry 30–45° highlands second. Under the half-wild
+comparison the high-cost end uses 13.7–15% of the dry land, and the homestead belt 36–72% at 1–2 kg.
 
 ## The Moon at 4, 6 and 8 billion
 
@@ -801,7 +832,8 @@ Stated once; the product's `assumptions` block holds them all.
   homesteads among the farms there, whose homes take the scattered communities' land a person beside the fields, or
   within the fields they work in the variant that fits the high-cost corners.
 - **Food.** The power-heavy mix at its full range, its town allowance replaced by this study's settlement and checked
-  band by band.
+  band by band; for C′ also the author's blend, read as one more mix, with the heritage farms' pasture on the
+  middle-wet zone at 1 and 2 kg a person a year.
 - **Energy.** The provisioning band, 2–6 kW a person of primary energy with industry in orbit, and every electrical
   load at fusion's input; fusion supplies the Moon's power, with power from the array beside it; sky towns at 10 km,
   50 t a resident, powered 1–10% of the time at 5 m/s, losing 1–10% of their hydrogen a year; trips down for a fifth

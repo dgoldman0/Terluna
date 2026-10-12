@@ -35,6 +35,8 @@ The original placements stay as historical illustrations, and the distribution o
 The author's decisions frame it:
 - **The Moon's cycle:** it keeps its 29.53-day cycle, and life stores resources across the night.
 - **Power:** fusion supplies most local power, supplemented by regional solar and wind (a planning assumption).
+  Since 12 October food and the sky towns take beamed power from the ring fleet, on a design sized for the whole
+  Moon's intake ([domain synthesis](../research/studies/domain_synthesis/README.md#power-from-the-array-the-chosen-distribution)).
 - **The summit:** a commercial port of about 1.5 million people, in a beautiful, sustainable metropolis of about 100
   million within 32 km. Regional agriculture and foraging feed it.
 - **Sky ships:** the Moon is a sky-ship world where lift is cheap, and the flyers stack by height.
@@ -136,6 +138,10 @@ Each finding follows from results the repository already holds, read together wi
    - **Fusion.** The register's planning assumption sidesteps the night if fusion holds.
    - **Microwaves from the fleet's night half.** They would keep the night dark. The public exposure limit of
      10 W/m² (ICNIRP 2020), though, puts 200 GW on 4,000–7,000 km² of receivers closed to people and sky ships.
+   - **The choice.** On 12 October the author chose beamed power from the ring fleet for food and the sky towns
+     (register). The night is served from the ring's night-side tiles, which stay sunlit, and the receivers are
+     closed ground at up to the 1978 reference's 230 W/m², so the ground's 22–100 TW take 96,000–436,000 km²
+     ([domain synthesis](../research/studies/domain_synthesis/README.md#power-from-the-array-the-chosen-distribution)).
    - *Solid arithmetic.*
 4. **Rivers are the native source; tides are not.**
    - **Tides.** Tidal power per area is a 320th of Earth's for the same range: a sixth of the gravity, one cycle a
