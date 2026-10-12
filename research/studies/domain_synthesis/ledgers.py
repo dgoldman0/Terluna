@@ -12,16 +12,16 @@ placing the blend's fields band by band, as the distributions study does, is lef
 
 - heat: C''s heat by component, with fusion and with power from the array, the blend's food in place of the
   power-heavy mix's, close computing beside it, the W/m2 and the added dimming that answers it, and the ring
-  fleet's infrared glow for scale;
+  fleet's infrared glow, its dimming taken as provisioning takes it (the glow over the design sunlight);
 - land: the dry land under the rule: C''s settlements, the blend's fields, the heritage meat's pasture and the wild
   share left, beside C' with the power-heavy mix;
 - gases: methane and N2O from the wild waters and soils, the blend's farms and the heritage cattle, against the
-  soils' methane sink and N2O's lack of any: the steady states, the removal that holds each gas at a reference
-  level, the share of the atmosphere that removal from open air would treat each year at full capture, and the
-  least power that separation takes;
+  soils' methane sink and N2O's lack of one on any human timescale: the steady states, the removal that holds
+  each gas at a reference level, the share of the atmosphere that removal from open air would treat each year at
+  full capture, and the least power that complete separation takes;
 - phosphorus: resources' ledger at 8 billion, with the blend's losses at both ends, and the sky's need beside it;
-- heights: the sky's layers and what uses them, from the products, with the storms' tops and the cloud at the
-  network's height.
+- heights: the sky's layers and what uses them, from the products, with the storms' tops, the cloud at the
+  network's height and the sky towns' passes of sky reefs, by the distributions study's encounter rule.
 """
 from __future__ import annotations
 import hashlib
@@ -47,25 +47,34 @@ INPUTS = {
     'research/studies/inhabited_volume/results/inhabited_volume.json': None,
     'research/studies/sky_ships/results/sky_ships.json': None,
     'research/studies/summit_tower/results/summit_tower_form.json': None,
+    'research/studies/sky_fleet/results/sky_fleet.json': None,
 }
 RULE = 'wild_30_hybrid_20'              # the author's compromise: 30% of the land wild and another 20% hybrid
 KEPT, HYBRID = 0.3, 0.2
 MOON_BILLION = 8
+ALOFT_BILLION = 4
 HERITAGE_KG = ('0.5', '1', '2')         # heritage meat a person a year, the blend's three cases
 # Reference levels for holding the gases: Earth's present air, as the ecology screen and brief give it (the screen's
 # methane value; machines.md's 0.34 ppm of N2O).
 N2O_REFERENCE_PPM = 0.34
 # Complete denitrification's cut to N2O, from one N2O-respiring bacterium on Earth's farm soils (Hiis et al. 2024,
-# Nature 630, 421-428: 50-95% depending on the soil); applied here to every source as a design bracket.
+# Nature 630, 421-428: 50-95% depending on the soil); applied here to every source, the wild waters included, as a
+# design bracket.
 DENITRIFICATION_CUT = (0.5, 0.95)
 SECONDS_PER_YEAR = JULIAN_YEAR_DAYS * JULIAN_DAY
+# Sky reefs: a kilometre or two across (sky ecology README; aerophytes README), half the aerophyte cover (sky
+# ecology's design guess, in its product). Towns meet them by the distributions study's encounter rule.
+REEF_WIDTH_KM = (1.0, 2.0)
+PASS_MARGIN_KM = 0.05                    # the distributions study's margin on each side of a pass
+TOWN_DISTRICT_T = '50.0'                 # the distributions study's town at 50 t of district a resident
 EVIDENCE = ("Arithmetic on committed screen products of the three domains and main's studies: C' and the food blend "
             "recombined in totals, the trace gases' sources and sinks summed, resources' phosphorus ledger read at the "
             "blend's losses, and the sky's layers read from their products. Nothing is simulated here; each figure "
             "keeps its source's evidence state, and the blend's fields are not placed band by band.")
 READING_RULE = ("Pairs are [low-cost end, high-cost end] as in the food and distributions studies unless labelled; "
-                "areas km2, power and heat TW, W/m2 over the whole Moon, dimming in percent of sunlight, methane Tg "
-                "and ppm, N2O Tg N and ppb or ppm, phosphorus Tg P (Mt) a year, heights km above sea level. Gas cases "
+                "areas km2, power and heat TW, W/m2 over the whole Moon, dimming in per cent of sunlight, methane Tg "
+                "and ppm, N2O Tg N and ppb or ppm, phosphorus Tg P (Mt) a year; heights km above sea level except the "
+                "local air traffic, above the metropolis's ground, and the ring fleet, by radius. Gas cases "
                 "pair the sources' low end with the soils' fastest sink and the high end with the slowest; central "
                 "takes the screen's central sources and sink with the farms at both ends and the cattle at 1 kg a "
                 "person (the larger of the two carcass yields' figures). The share of the atmosphere "
@@ -125,15 +134,20 @@ def heat_ledger(cprime, blend, power_heavy, population):
             close_computing_heat_tw=computing,
             with_close_computing=dict(heat_tw=with_computing, heat_w_m2=pair(lambda e: with_computing[e] * w_m2),
                                       added_dimming_percent=pair(lambda e: with_computing[e] * dim[e])),
-            as_placed_with_power_heavy=dict(heat_tw=list(energy['heat_tw']),
-                                            added_dimming_percent=list(energy['added_dimming_percent'])))
-    glow_tw = h['fleet_glow_as_tw_used']
-    out['fleet_glow'] = dict(w_m2=list(h['fleet_glow_w_m2']), as_tw_used=list(glow_tw),
-                             added_dimming_percent=pair(lambda e: glow_tw[e] * dim[e]))
-    f = out['fusion']['with_close_computing']
-    out['fusion_with_glow'] = dict(w_m2=pair(lambda e: f['heat_w_m2'][e] + h['fleet_glow_w_m2'][e]),
-                                   added_dimming_percent=pair(lambda e: f['added_dimming_percent'][e]
-                                                              + out['fleet_glow']['added_dimming_percent'][e]))
+            as_placed_with_power_heavy=dict(
+                heat_tw=list(energy['heat_tw']), added_dimming_percent=list(energy['added_dimming_percent']),
+                with_close_computing=dict(heat_tw=pair(lambda e: energy['heat_tw'][e] + computing[e]),
+                                          added_dimming_percent=pair(lambda e: (energy['heat_tw'][e] + computing[e])
+                                                                     * dim[e]))))
+    glow = h['fleet_glow_w_m2']
+    out['fleet_glow'] = dict(w_m2=list(glow), as_tw_used=list(h['fleet_glow_as_tw_used']),
+                             added_dimming_percent=[g / h['design_sunlight_w_m2'] * 100.0 for g in glow],
+                             basis='the glow over the design sunlight, as provisioning gives it')
+    for supply in ('fusion', 'array'):
+        f = out[supply]['with_close_computing']
+        out[f'{supply}_with_glow'] = dict(w_m2=pair(lambda e: f['heat_w_m2'][e] + glow[e]),
+                                          added_dimming_percent=pair(lambda e: f['added_dimming_percent'][e]
+                                                                     + out['fleet_glow']['added_dimming_percent'][e]))
     out['factors'] = dict(dimming_percent_per_tw=list(dim), moon_w_m2_per_tw=w_m2)
     return out
 
@@ -169,17 +183,20 @@ def land_ledger(cprime, blend, heritage, people):
                 with_heritage=cases,
                 as_placed_with_power_heavy=dict(food_km2=list(cprime['land']['food_km2']),
                                                 used_km2=list(cprime['land']['used_km2']),
-                                                wild_share_outside_kept=list(cprime['land']['wild_share_outside_kept'])))
+                                                wild_share_outside_kept=sorted(cprime['land']['wild_share_outside_kept'],
+                                                                               reverse=True)))
 
 
 def removal(rate_tg, tg_per_unit, level_units, air_mol, temperature_k, per_unit):
     """For a removal rate in Tg (or Tg N) a year: the share of the atmosphere a full-capture removal from open air
-    passes each year at the level held, and the least power that separation takes (RT ln(1/x) a mole)."""
+    passes each year at the level held, and the least power that complete separation takes, RT(ln(1/x) +
+    (1-x)/x ln(1/(1-x))) a mole of the gas, near RT(ln(1/x) + 1) at these levels."""
     units_per_year = rate_tg / tg_per_unit                   # ppm or ppb a year
     share = units_per_year / level_units
     mol = units_per_year * per_unit * air_mol
     x = level_units * per_unit
-    watts = mol * GAS_CONSTANT * temperature_k * math.log(1.0 / x) / SECONDS_PER_YEAR
+    per_mol = math.log(1.0 / x) - (1.0 - x) / x * math.log1p(-x)
+    watts = mol * GAS_CONSTANT * temperature_k * per_mol / SECONDS_PER_YEAR
     return dict(atmosphere_share_per_year=share, least_power_mw=watts / 1e6)
 
 
@@ -257,35 +274,63 @@ def phosphorus_ledger(sea, blend, cprime, sky):
                                                sea_burial=c['sea_burial'] / 1e9,
                                                dredged_share_of_lake_input=c['dredged_share_of_lake_input']))
     p = blend['phosphorus_mt_year']
-    need = sky['headlines']['need_kg_year']
+    need = sky['headlines']['sky_need_t_year_at_1pct']
     return dict(by_land_loss=out, eaten=list(p['eaten']), lost=list(lost),
                 in_microbial_biomass=list(p['in_microbial_biomass']),
                 sewage_recoverable_power_heavy=[x / 1e3 for x in cprime['phosphorus']['sewage_recoverable_kt']],
-                sky_need_at_one_percent_cover={k: v / 1e9 for k, v in need.items()},
+                sky_need_at_one_percent_cover={k: v / 1e6 for k, v in need.items()},
                 reef_p_subsidy_g_m2_year=sky['headlines']['reef_p_subsidy_g_m2_year'])
 
 
-def heights_ledger(people, volume, ships, tower, traffic):
-    """The sky's layers and what uses them."""
+def reef_passes(cover, town_km, drift, share, widths=REEF_WIDTH_KM):
+    """Bodies a town passes a day at an aerophyte cover by the distributions study's rule, density x swept width x
+    relative speed, when bodies of the given widths make up the share of the cover: [fewest, most]."""
+    rates = []
+    for d in widths:
+        density = cover * share / (math.pi * (d / 2.0) ** 2)
+        swept = town_km + d + 2.0 * PASS_MARGIN_KM
+        rates += [density * swept * v * JULIAN_DAY / 1e3 for v in drift]
+    return [min(rates), max(rates)]
+
+
+def heights_ledger(people, volume, ships, tower, dist, sky, fleet):
+    """The sky's layers and what uses them, with the sky towns' passes of sky reefs."""
     bands = {k: dict(bottom_km=v['bottom_km'], top_km=v['top_km'], mass_share=v['mass_share'],
                      cloud_fraction_ring=v['cloud_fraction_ring']) for k, v in people['sky']['bands'].items()}
-    local = {k: dict(bottom_km=v['bottom_m'] / 1e3, top_km=v['top_m'] / 1e3, aloft_per_million_people=
-                     v['aloft_per_million_people']) for k, v in people['traffic']['busy_hour'].items()}
+    ground_km = tower['basis']['ground_above_sea_m'] / 1e3
+    local = {k: dict(above_ground_km=[v['bottom_m'] / 1e3, v['top_m'] / 1e3],
+                     above_sea_level_at_the_summit_km=[ground_km + v['bottom_m'] / 1e3, ground_km + v['top_m'] / 1e3],
+                     aloft_per_million_people=v['aloft_per_million_people'])
+             for k, v in people['traffic']['busy_hour'].items()}
     storms = ships['storms']
     crown_km = (tower['basis']['ground_above_sea_m'] + tower['width_profile']['height_m']) / 1e3
-    towns = traffic['50.0']
-    return dict(bands=bands, local_air_traffic=local,
+    traffic = dist['moon']['cprime'][RULE]['traffic'][TOWN_DISTRICT_T]
+    town_km = 2.0 * dist['basis']['sky']['envelope_radius_km']
+    drift = dist['assumptions']['design_guesses']['relative_drift_m_s']['value']
+    small = traffic['aerophyte_passes_per_town_day']
+    for cover, published in small.items():          # the rule reproduces the study's 100 m bodies
+        mine = reef_passes(float(cover), town_km, drift, 1.0, widths=(0.1,))
+        if not all(close(a, b, 1e-2) for a, b in zip(mine, published)):
+            raise ValueError('The encounter rule does not reproduce the distributions study')
+    share = sky['phosphorus']['design_guesses']['class_shares_of_cover']['sky_reef']
+    return dict(bands=bands, summit_ground_km=ground_km, local_air_traffic_above_the_metropolis=local,
                 sky_towns=dict(reference_height_km=volume['assumptions']['reference_height_km'],
-                               towns_of_50000=towns['towns'], spacing_even_km=towns['spacing_even_km'],
-                               spacing_busiest_band_km=towns['spacing_busiest_band_km'],
-                               aerophyte_passes_per_town_day=towns['aerophyte_passes_per_town_day'],
-                               encounters_per_town_day_mean=towns['encounters_per_town_day_mean']),
+                               district_t_per_resident=float(TOWN_DISTRICT_T), towns=traffic['towns'],
+                               people_per_town=ALOFT_BILLION * 1e9 / traffic['towns'],
+                               spacing_even_km=traffic['spacing_even_km'],
+                               spacing_busiest_band_km=traffic['spacing_busiest_band_km'],
+                               encounters_per_town_day_mean=traffic['encounters_per_town_day_mean'],
+                               passes_per_town_day_if_100_m_bodies_made_the_cover=small,
+                               reef_passes_per_town_day={c: reef_passes(float(c), town_km, drift, share) for c in small},
+                               reef_share_of_cover=share, reef_width_km=list(REEF_WIDTH_KM),
+                               relative_drift_m_s=list(drift)),
                 storms=dict(cloud_top_km=storms['cloud_top_km'], width_km=storms['width_km'],
                             per_snapshot_on_ring=storms['per_snapshot'], drift_m_s=storms['drift_m_s']),
                 flight_band_storm_cloud_share=ships['band']['storm_cloud_share'],
                 cloud_at_30_km=dict(day=bands['cool_air']['cloud_fraction_ring']['day'][0],
                                     night=bands['cool_air']['cloud_fraction_ring']['night'][0])
                 if bands['cool_air']['cloud_fraction_ring']['heights_km'] == [30.0] else None,
+                regional_docks_km=fleet['air']['regional_docks']['height_km'],
                 summit_crown_km=crown_km)
 
 
@@ -307,7 +352,7 @@ def results():
         producer=dict(files={'research/studies/domain_synthesis/ledgers.py': sha256(__file__)},
                       inputs={p: sha256(ROOT / p) for p in INPUTS}),
         evidence=EVIDENCE, reading_rule=READING_RULE,
-        choices=dict(distribution="C'", moon_billion=MOON_BILLION, aloft_billion=4, land_rule=RULE,
+        choices=dict(distribution="C'", moon_billion=MOON_BILLION, aloft_billion=ALOFT_BILLION, land_rule=RULE,
                      blend_weights=food['weights'], heritage_kg_per_person_year=[float(k) for k in HERITAGE_KG]),
         heat=rnd(heat_ledger(cprime, blend, power_heavy, data['provisioning/results/population.json'])),
         land=rnd(land_ledger(cprime, blend, heritage, people)),
@@ -316,8 +361,9 @@ def results():
         phosphorus=rnd(phosphorus_ledger(data['resources/results/sea_phosphorus.json'], blend, cprime,
                                          data['research/studies/sky_ecology/results/sky_ecology.json'])),
         heights=rnd(heights_ledger(people, volume, data['research/studies/sky_ships/results/sky_ships.json'],
-                                   data['research/studies/summit_tower/results/summit_tower_form.json'],
-                                   dist['moon']['cprime'][RULE]['traffic'])))
+                                   data['research/studies/summit_tower/results/summit_tower_form.json'], dist,
+                                   data['research/studies/sky_ecology/results/sky_ecology.json'],
+                                   data['research/studies/sky_fleet/results/sky_fleet.json'])))
 
 
 def dumps(product) -> str:

@@ -2,7 +2,7 @@
   "schema": "terluna.research.domain-synthesis-ledgers/1",
   "producer": {
     "files": {
-      "research/studies/domain_synthesis/ledgers.py": "9d0e08de2b54bf84ae5b585c95903f18e241d24cd5e04c8deeff3d5f1133eb6b"
+      "research/studies/domain_synthesis/ledgers.py": "63d70ecbc23d3a30aeb66907180459c2d4bfbb5dcc0a039354447674f05def54"
     },
     "inputs": {
       "research/studies/distributions/results/distributions.json": "38ffcc0665d70bded43600007c04708c08ddacbe747dfea7440d3ff905b7ae56",
@@ -14,11 +14,12 @@
       "research/studies/sky_ecology/results/sky_ecology.json": "2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3",
       "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f3a09b17dc088037560bb5b7f31f4342ae16239d4bf22013a",
       "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327a13d9a01db7bb711fb5177a5d2b0227c7085826ad8a85a65",
-      "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d42be3598a6f4896cc72c4c5aa0432ad9b468dbc08191f684"
+      "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d42be3598a6f4896cc72c4c5aa0432ad9b468dbc08191f684",
+      "research/studies/sky_fleet/results/sky_fleet.json": "4826a86d183fb13d004b89c9bd70002aac06426b075411bdcba8d221175edfc8"
     }
   },
   "evidence": "Arithmetic on committed screen products of the three domains and main's studies: C' and the food blend recombined in totals, the trace gases' sources and sinks summed, resources' phosphorus ledger read at the blend's losses, and the sky's layers read from their products. Nothing is simulated here; each figure keeps its source's evidence state, and the blend's fields are not placed band by band.",
-  "reading_rule": "Pairs are [low-cost end, high-cost end] as in the food and distributions studies unless labelled; areas km2, power and heat TW, W/m2 over the whole Moon, dimming in percent of sunlight, methane Tg and ppm, N2O Tg N and ppb or ppm, phosphorus Tg P (Mt) a year, heights km above sea level. Gas cases pair the sources' low end with the soils' fastest sink and the high end with the slowest; central takes the screen's central sources and sink with the farms at both ends and the cattle at 1 kg a person (the larger of the two carcass yields' figures). The share of the atmosphere treated is the air a full-capture removal from open air would pass each year, over the whole air.",
+  "reading_rule": "Pairs are [low-cost end, high-cost end] as in the food and distributions studies unless labelled; areas km2, power and heat TW, W/m2 over the whole Moon, dimming in per cent of sunlight, methane Tg and ppm, N2O Tg N and ppb or ppm, phosphorus Tg P (Mt) a year; heights km above sea level except the local air traffic, above the metropolis's ground, and the ring fleet, by radius. Gas cases pair the sources' low end with the soils' fastest sink and the high end with the slowest; central takes the screen's central sources and sink with the farms at both ends and the cattle at 1 kg a person (the larger of the two carcass yields' figures). The share of the atmosphere treated is the air a full-capture removal from open air would pass each year, over the whole air.",
   "choices": {
     "distribution": "C'",
     "moon_billion": 8,
@@ -105,7 +106,17 @@
         "added_dimming_percent": [
           0.159,
           1.66
-        ]
+        ],
+        "with_close_computing": {
+          "heat_tw": [
+            27.6,
+            133.0
+          ],
+          "added_dimming_percent": [
+            0.24,
+            1.85
+          ]
+        }
       }
     },
     "array": {
@@ -177,7 +188,17 @@
         "added_dimming_percent": [
           0.133,
           0.982
-        ]
+        ],
+        "with_close_computing": {
+          "heat_tw": [
+            21.7,
+            77.1
+          ],
+          "added_dimming_percent": [
+            0.188,
+            1.07
+          ]
+        }
       }
     },
     "fleet_glow": {
@@ -190,9 +211,10 @@
         376
       ],
       "added_dimming_percent": [
-        1.86,
-        5.22
-      ]
+        1.93,
+        3.38
+      ],
+      "basis": "the glow over the design sunlight, as provisioning gives it"
     },
     "fusion_with_glow": {
       "w_m2": [
@@ -200,8 +222,18 @@
         17.4
       ],
       "added_dimming_percent": [
-        2.21,
-        9.16
+        2.28,
+        7.32
+      ]
+    },
+    "array_with_glow": {
+      "w_m2": [
+        6.46,
+        13.8
+      ],
+      "added_dimming_percent": [
+        2.19,
+        5.4
       ]
     },
     "factors": {
@@ -331,8 +363,8 @@
         7710000.0
       ],
       "wild_share_outside_kept": [
-        0.341,
-        0.833
+        0.833,
+        0.341
       ]
     }
   },
@@ -369,7 +401,7 @@
         "people_part_tg_yr": 3.21,
         "open_air_hold": {
           "atmosphere_share_per_year": 0.00221,
-          "least_power_mw": 458.0
+          "least_power_mw": 493.0
         }
       },
       "central": [
@@ -387,7 +419,7 @@
           "people_part_tg_yr": 4.11,
           "open_air_hold": {
             "atmosphere_share_per_year": 0.0177,
-            "least_power_mw": 3670.0
+            "least_power_mw": 3950.0
           }
         },
         {
@@ -404,7 +436,7 @@
           "people_part_tg_yr": 25.7,
           "open_air_hold": {
             "atmosphere_share_per_year": 0.0244,
-            "least_power_mw": 5050.0
+            "least_power_mw": 5430.0
           }
         }
       ],
@@ -422,7 +454,7 @@
         "people_part_tg_yr": 27.4,
         "open_air_hold": {
           "atmosphere_share_per_year": 0.075,
-          "least_power_mw": 15500.0
+          "least_power_mw": 16700.0
         }
       }
     },
@@ -450,7 +482,7 @@
         ],
         "open_air_hold": {
           "atmosphere_share_per_year": 0.00105,
-          "least_power_mw": 45.0
+          "least_power_mw": 48.0
         }
       },
       "high": {
@@ -470,7 +502,7 @@
         ],
         "open_air_hold": {
           "atmosphere_share_per_year": 0.00161,
-          "least_power_mw": 69.0
+          "least_power_mw": 73.7
         }
       },
       "denitrification_cut": [
@@ -555,18 +587,18 @@
       4.32
     ],
     "sky_need_at_one_percent_cover": {
-      "mature_organism_only_low": 0.125,
-      "mature_organism_only_high": 0.827,
-      "mature_earth_forest_low": 0.00703,
-      "mature_earth_forest_high": 0.108,
-      "mature_designed_pools_low": 0.000437,
-      "mature_designed_pools_high": 0.0852,
-      "growing_organism_only_low": 0.13,
-      "growing_organism_only_high": 0.749,
-      "growing_earth_forest_low": 0.0276,
-      "growing_earth_forest_high": 0.267,
-      "growing_designed_pools_low": 0.0219,
-      "growing_designed_pools_high": 0.251
+      "mature_organism_only_low": 0.0618,
+      "mature_organism_only_high": 0.424,
+      "mature_earth_forest_low": 0.00353,
+      "mature_earth_forest_high": 0.0609,
+      "mature_designed_pools_low": 0.000261,
+      "mature_designed_pools_high": 0.0504,
+      "growing_organism_only_low": 0.071,
+      "growing_organism_only_high": 0.528,
+      "growing_earth_forest_low": 0.0128,
+      "growing_earth_forest_high": 0.165,
+      "growing_designed_pools_low": 0.00941,
+      "growing_designed_pools_high": 0.154
     },
     "reef_p_subsidy_g_m2_year": [
       0.0338,
@@ -668,29 +700,60 @@
         }
       }
     },
-    "local_air_traffic": {
+    "summit_ground_km": 11.6,
+    "local_air_traffic_above_the_metropolis": {
       "wings, gliders and canopies": {
-        "bottom_km": 0.03,
-        "top_km": 0.3,
+        "above_ground_km": [
+          0.03,
+          0.3
+        ],
+        "above_sea_level_at_the_summit_km": [
+          11.6,
+          11.9
+        ],
         "aloft_per_million_people": 2790.0
       },
       "sky boats and air taxis": {
-        "bottom_km": 0.3,
-        "top_km": 1.5,
+        "above_ground_km": [
+          0.3,
+          1.5
+        ],
+        "above_sea_level_at_the_summit_km": [
+          11.9,
+          13.1
+        ],
         "aloft_per_million_people": 3260.0
       },
       "sky ferries": {
-        "bottom_km": 1.5,
-        "top_km": 2.5,
+        "above_ground_km": [
+          1.5,
+          2.5
+        ],
+        "above_sea_level_at_the_summit_km": [
+          13.1,
+          14.1
+        ],
         "aloft_per_million_people": 9.0
       }
     },
     "sky_towns": {
       "reference_height_km": 10.0,
-      "towns_of_50000": 696000.0,
+      "district_t_per_resident": 50.0,
+      "towns": 696000.0,
+      "people_per_town": 5750.0,
       "spacing_even_km": 5.21,
       "spacing_busiest_band_km": 4.29,
-      "aerophyte_passes_per_town_day": {
+      "encounters_per_town_day_mean": {
+        "drifting": [
+          2.13,
+          21.3
+        ],
+        "powered": [
+          1.07,
+          10.7
+        ]
+      },
+      "passes_per_town_day_if_100_m_bodies_made_the_cover": {
         "0.001": [
           1.32,
           13.2
@@ -704,16 +767,29 @@
           264.0
         ]
       },
-      "encounters_per_town_day_mean": {
-        "drifting": [
-          2.13,
-          21.3
+      "reef_passes_per_town_day": {
+        "0.001": [
+          0.00426,
+          0.116
         ],
-        "powered": [
-          1.07,
-          10.7
+        "0.01": [
+          0.0426,
+          1.16
+        ],
+        "0.02": [
+          0.0853,
+          2.31
         ]
-      }
+      },
+      "reef_share_of_cover": 0.5,
+      "reef_width_km": [
+        1.0,
+        2.0
+      ],
+      "relative_drift_m_s": [
+        0.1,
+        1.0
+      ]
     },
     "storms": {
       "cloud_top_km": {
@@ -741,6 +817,7 @@
       "day": 0.019,
       "night": 0.0087
     },
+    "regional_docks_km": 24.1,
     "summit_crown_km": 35.6
   }
 }

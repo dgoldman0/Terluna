@@ -198,7 +198,8 @@ wild beside the parks' fifth. Heat is the cost of that land: with fusion and clo
 1.1–7.5 W/m², answered by 0.35–3.9% added dimming, about half of it at the high-cost end with power from the array,
 beside the fleet's own glow of 5.7–9.9 W/m². The wild's waters and soils make most of the methane and N2O, so the
 biomes' own budgets decide the air first; phosphorus closes by dredging 8–51% of what the lakes receive; and the
-sky's layers meet in two places, the towns among the reefs and the network among the tallest storms.
+sky between 10 and 30 km is shared by the summit metropolis, the sky towns, the reefs, gliders, regional ships and
+the storms, with the network above most of it.
 
 Waiting on the author: the synthesis's decisions, and the taxonomy, on hold for later, with its open choices and the
 aerophytes' scientific name.

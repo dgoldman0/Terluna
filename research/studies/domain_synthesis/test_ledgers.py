@@ -84,3 +84,24 @@ def test_the_sky_layers_stack(product):
     assert all(a['top_km'] == b['bottom_km'] for a, b in zip(bands, bands[1:]))
     assert h['storms']['cloud_top_km']['median'] < 30.0 < h['storms']['cloud_top_km']['p90']
     assert 35.0 < h['summit_crown_km'] < 36.0
+
+
+def test_the_glow_is_dimmed_as_provisioning_gives_it(product):
+    population = json.loads((L.ROOT / 'provisioning/results/population.json').read_text())['heat']
+    glow = product['heat']['fleet_glow']
+    for e in (0, 1):
+        assert close(glow['added_dimming_percent'][e], glow['w_m2'][e] / population['design_sunlight_w_m2'] * 100)
+        for supply in ('fusion', 'array'):
+            total = product['heat'][f'{supply}_with_glow']['added_dimming_percent'][e]
+            people = product['heat'][supply]['with_close_computing']['added_dimming_percent'][e]
+            assert close(total, people + glow['added_dimming_percent'][e])
+
+
+def test_towns_meet_reefs_by_the_distributions_rule(product):
+    towns = product['heights']['sky_towns']
+    assert close(towns['towns'] * towns['people_per_town'], L.ALOFT_BILLION * 1e9)
+    for cover, reefs in towns['reef_passes_per_town_day'].items():
+        small = towns['passes_per_town_day_if_100_m_bodies_made_the_cover'][cover]
+        assert L.reef_passes(float(cover), 1.0, towns['relative_drift_m_s'], 1.0, widths=(0.1,))[1] == \
+            pytest.approx(small[1], rel=1e-2)
+        assert reefs[1] < small[0]

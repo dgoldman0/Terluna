@@ -17,7 +17,8 @@ exact head, so every source head is an ancestor of the result. The synthesis is 
 | `9b0f1a8` | Merges provisioning: people on the Moon, food and the blend, cities, distributions, parks and the network |
 | `7c230dd` | The four refreshes of main's studies, every former cross-branch input read in-tree, the cascade rebuilt |
 | `b0537b8` | The prose brought to the refreshed products, the refreshes followed into the readers they missed, the register's status cells |
-| this commit | The three domains together (heat, land, gases, phosphorus and the sky's layers at the author's choices), with this record, the research index, the plan and the status |
+| `6964105` | The three domains together (heat, land, gases, phosphorus and the sky's layers at the author's choices), with this record, the research index, the plan and the status |
+| this commit | The synthesis corrected after an independent review: town size, reef passes, the glow's dimming, heights, the sky's phosphorus need and the stated assumptions |
 
 ## How the shared documents were joined
 
@@ -34,12 +35,12 @@ side's entries.
 
 ## Reading the former branches' inputs in-tree
 
-The branches' studies read each other's products at pinned commits through Git. With all of them in one tree, the
-28 pins in seven readers (food systems, distributions, ways of living, land cities, daily life, sky ecology and
-living light) read their files in-tree, each checked against its sha256, and record `read_from: in-tree`. The tests
-that compared a pin's Git blob compute it in Python. Main corrected the joint ledger on 9 October after resources and
-provisioning had read it, so their products were rebuilt on the corrected ledger at the merges; only their recorded
-input hashes changed.
+The branches' studies read each other's products at pinned commits through Git. With all of them in one tree, the 28
+pins in seven readers (food systems, distributions, ways of living, land cities, daily life, sky ecology and living
+light) read their files in-tree, each checked against its sha256; their products record `read_from: in-tree` for each
+pin, except land cities, whose one pin records no commit. The tests that compared a pin's Git blob compute it in Python.
+Main corrected the joint ledger on 9 October after resources and provisioning had read it, so their products were
+rebuilt on the corrected ledger at the merges; only their recorded input hashes changed.
 
 ## The four refreshes
 
@@ -65,8 +66,8 @@ Downstream, the people screen, the aerophytes' photoperiod and nursery ages, the
 distributions, ways of living, living light, the resources screens and industry moved with them: the blend's fields take
 0.68–1.86 million km² at 8 billion (0.67–1.81 before), and resources' industry, with its runoff scaling corrected
 (below), puts the weathering cycle at 706–7,060 years and the kilns at 35–350 GW (652–6,520 years and 38–380 GW before).
-C′'s fits are unchanged. Value-by-value lists of every change are on the research drive
-(`terluna-research/integration2/diffs`), and the prose follows them.
+C′'s fits are unchanged. Value-by-value lists of the refreshes' changes, `9b0f1a8` to `7c230dd`, are on the research
+drive (`terluna-research/integration2/diffs`); industry's corrected figures came after, in `b0537b8`.
 
 ## Follow-through found while bringing the prose up
 
@@ -98,9 +99,10 @@ Bringing the prose to the products found five more places that the refreshes rea
 
 `make check` ran before every commit: the layer check, the Python and JavaScript tests, the provenance check and the
 ensemble validator. Python tests passed at each: 1,387 with 15 skipped after resources, 1,778 with 15 skipped after
-ecology, 1,974 with 16 skipped after provisioning, 1,975 with 16 skipped after the refreshes and with the prose, and
-1,982 with 16 skipped with the synthesis's seven tests on the final tree. The ensemble's planning snapshot, papers and
-seed records, and research/provenance.json, are the same as at every source head.
+ecology, 1,974 with 16 skipped after provisioning, 1,975 with 16 skipped after the refreshes, 1,982 with 16 skipped at
+the prose and synthesis commits, whose working tree held the synthesis's seven tests each time, and 1,984 with 16
+skipped after the review's corrections added two. The ensemble's planning snapshot, papers and seed records, and
+research/provenance.json, are the same as at every source head.
 
 ## Still to do from the integration
 
