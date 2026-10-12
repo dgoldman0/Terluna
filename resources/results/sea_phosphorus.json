@@ -1,0 +1,4530 @@
+{
+  "schema": "terluna.resources.sea-phosphorus/1",
+  "producer": {
+    "files": {
+      "resources/sea_phosphorus.py": "4bf4d6ba24242d952fffced83101bbff6376c73c1776dc4905ebfec5c67d7a76",
+      "resources/phosphorus.py": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43"
+    },
+    "inputs": {
+      "resources/results/phosphorus.json": "3cbace8d2348f9b61577ecb510a582b598f478683fd05718776b23fadd2b940c",
+      "resources/results/first_screen.json": "837426d6d2e1f183be067d8dfb3d4241e41ac8a56ac7bede801573d607d08aa1",
+      "resources/results/sea_phosphorus_waters.json": "a38df83c99e8e615c2883031b495fa645ed75441ca7f01f983633a8562f9d86c",
+      "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+      "geography/results/drainage.json": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d",
+      "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "1f35337c24ecf86762cf1ec700ef92a0de9b698187cef184378752336b4e7a8b",
+      "research/studies/conservation/results/gates.json": "65b855711fbf1b066f112f617e776bcb2f345fc48ccc5ff019aa9df3bbc4449e",
+      "resources/sea_phosphorus_sources.json": "773bde3cb65208cca85dfd1c11ea987a23a4d4fc4374711e02ee17e44224dbef"
+    },
+    "bound_inputs": {
+      "ecology_people": {
+        "path_at_integration": "biosphere/ecology/results/people.json",
+        "branch": "domain/ecology",
+        "commit": "5aafe2a",
+        "sha256": "f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6",
+        "read_from": "git show 5aafe2a:biosphere/ecology/results/people.json"
+      },
+      "sky_ecology": {
+        "path_at_integration": "research/studies/sky_ecology/results/sky_ecology.json",
+        "branch": "domain/ecology",
+        "commit": "5aafe2a",
+        "sha256": "d21e6c16c3ba7dedcd4e2973f2558541fe29a89eb13f27a03b8c87c8a27061b5",
+        "read_from": "git show 5aafe2a:research/studies/sky_ecology/results/sky_ecology.json"
+      },
+      "sky_phosphorus_note": {
+        "path_at_integration": "research/studies/sky_ecology/phosphorus.md",
+        "branch": "domain/ecology",
+        "commit": "5aafe2a",
+        "sha256": "3a26c9ee5551c43cebcff63b793090a413dc968603ca0870340ba02f9d743b43",
+        "read_from": "git show 5aafe2a:research/studies/sky_ecology/phosphorus.md"
+      },
+      "living_water": {
+        "path_at_integration": "biosphere/living_water/waters.json",
+        "branch": "domain/ecology",
+        "commit": "5aafe2a",
+        "sha256": "bdf2a5dede623718921e367db11cd6eef95f8d67e944a6cbf277bddd2f962734",
+        "read_from": "git show 5aafe2a:biosphere/living_water/waters.json"
+      },
+      "ways_of_living": {
+        "path_at_integration": "research/studies/ways_of_living/results/ways_of_living.json",
+        "branch": "domain/provisioning",
+        "commit": "b82e0dc",
+        "sha256": "cbba4058819147f2d2bb2d02f1dae91320224b3e723e2820bd0f6ba95d64cd0a",
+        "read_from": "git show b82e0dc:research/studies/ways_of_living/results/ways_of_living.json"
+      },
+      "provisioning_decisions": {
+        "path_at_integration": "research/decisions.md",
+        "branch": "domain/provisioning",
+        "commit": "b82e0dc",
+        "sha256": "c6afcfa544a4ad1874c700968c483500bcd3f5a2abbf4fd4c2be34ccab1317b2",
+        "read_from": "git show b82e0dc:research/decisions.md"
+      }
+    },
+    "pending_bindings": {
+      "provisioning_food_systems": {
+        "branch": "domain/provisioning",
+        "status": "being built",
+        "replaces": [
+          "people.systems.*.efficiency",
+          "people.food_loss_share",
+          "people.waste_return",
+          "people.excreta_return",
+          "the shares of each system in the diet"
+        ],
+        "rule": "Bind the study's per-system P applied, recovered and lost per person; the ledger and routes then follow."
+      }
+    },
+    "constants": {
+      "GAS_CONSTANT": 8.31446261815324,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128
+    }
+  },
+  "evidence": "A screen on committed and bound products: the ecology product's land loss split into its dissolved and particulate parts, passed through the rain-fed lakes by the waters product's rerun routing and Earth lake-retention relations, into linear sea boxes built on the resources box model; Earth figures from the literature for food systems, recovery, dredging, seaweed, fishing and the ocean. No sea chemistry, sediment diagenesis, lake ecology, food-web or carrier population is simulated, and no food system, route or population is chosen.",
+  "reading_rule": "Phosphorus in kg of elemental P and flows per Julian year unless a key names Tg (1e9 kg), kt (1e6 kg) or g/m2. Pairs are [low, high] with every range taken at the end that bounds the quantity named; ledger corners pair each land-loss end with each population end. Concentrations are mg P per m3 of water (= ug/L) with uM beside them. Per-billion values are per 1e9 people on the Moon. 'screen' marks numbers this code computes, 'derived' arithmetic on cited values. Shares of the land's loss use the ecology product's 1.47-4.16 Tg a year. The waters product's lakes are connected bodies of the drainage product's fill-and-spill lakes; its outlets include every cell below the common water level, so 'all common-level water' bounds the named seas' input from above and their direct inflow from below. Bioavailable inputs: 'base' is dissolved P; 'with_particle_release' adds Earth's 10-30% reactive share of all river P, which salinity or anoxic beds release from particles.",
+  "design_guesses": {
+    "hydroponic_p_efficiency": {
+      "range": [
+        0.8,
+        0.95
+      ],
+      "basis": "closed recirculation with bleed and residue P returned; reusing the fifth of the solution that drained applied 3-18% less P than an open system"
+    },
+    "food_waste_p_return": {
+      "range": [
+        0.5,
+        0.9
+      ],
+      "basis": "composted or digested food losses back on the fields"
+    },
+    "sediment_dry_bulk_t_m3": {
+      "range": [
+        0.5,
+        1.5
+      ],
+      "basis": "fine lake muds to sandy deltas, in place"
+    },
+    "sorption_capture": {
+      "range": [
+        0.5,
+        0.9
+      ],
+      "basis": "share of the dissolved P a contactor takes from the water it treats"
+    },
+    "sorption_pressure_drop_kpa": {
+      "range": [
+        1.0,
+        10.0
+      ],
+      "basis": "a low-resistance sorbent contactor"
+    },
+    "sorption_concentrate_mol_l": {
+      "range": [
+        1.0,
+        1.0
+      ],
+      "basis": "the phosphate concentrate the minimum work runs to"
+    },
+    "extraction_ceiling_share": {
+      "range": [
+        0.3,
+        0.3
+      ],
+      "basis": "largest share of a water body's bioavailable input taken by fish, seaweed or sorption; the rest stays with its food webs and carriers"
+    }
+  },
+  "land_loss": {
+    "total_kg_yr": [
+      1470000000.0,
+      4160000000.0
+    ],
+    "dissolved_kg_yr": [
+      70200000.0,
+      187200000.0
+    ],
+    "particulate_kg_yr": [
+      1399800000.0,
+      3972800000.0
+    ],
+    "dissolved_share": [
+      0.045,
+      0.04775510204081632
+    ],
+    "per_m2_dry_land_g": [
+      0.06284737067122702,
+      0.1778537836682343
+    ],
+    "soil_p_grade": {
+      "highland": 0.0004800715780277999,
+      "mare": 0.0005673573194873999,
+      "kreep_rich": 0.0022257864072197995
+    },
+    "land_soil_grade": [
+      0.0004800715780277999,
+      0.0005673573194873999
+    ],
+    "implied_erosion_kg_yr": [
+      2467228238572.3013,
+      8275432626777.885
+    ],
+    "conservation_erosion_kg_yr": [
+      710000000000.0,
+      7100000000000.0
+    ],
+    "top_metre_p_kg": [
+      16843139000000.0,
+      19907229000000.0
+    ],
+    "cycle_time_against_top_metre_yr": [
+      4048.8314903846153,
+      13542.332653061225
+    ],
+    "water_basis_m3_yr": {
+      "ecology_loss_basis": 7545614000000.0,
+      "land_runoff": 4019536514799.5327,
+      "land_runoff_over_basis": 0.5326984013228788,
+      "loss_on_land_runoff_kg_yr": [
+        783066649.9446318,
+        2216025349.5031757
+      ]
+    },
+    "marking": "derived"
+  },
+  "partition": {
+    "lakes": {
+      "drainage_product": 27865,
+      "lakes_seam_joined": 27851,
+      "seam_joins": 14,
+      "closed_lakes": 2660,
+      "lakes_with_spilling_and_closed_depressions": 232,
+      "closed_lake_km2_cleared_from_spilling_lakes": 23014.914002972877,
+      "retention_bodies": 25610,
+      "retention_bodies_spilling": 25610,
+      "retention_body_seam_joins": 13,
+      "spilling_lake_km2": 3868934.298655817,
+      "closed_lake_km2": 53535.91036769651,
+      "spilling_depressions": 57380
+    },
+    "outflow_weighted_tau_yr": {
+      "p10": 2.8473193046804352e-05,
+      "p25": 0.00030698634198092695,
+      "p50": 0.05359781445514612,
+      "p75": 3.0015539982629833,
+      "p90": 24.496415719472093
+    },
+    "lake_passage_share_of_discharge": {
+      "tau_ge_0_yr": 0.9806877757977339,
+      "tau_ge_0.1_yr": 0.9781206365889871,
+      "tau_ge_1_yr": 0.9544526009147951,
+      "tau_ge_10_yr": 0.89200639829474,
+      "tau_ge_100_yr": 0.6161275948460672
+    },
+    "lake_passage_share_of_land_runoff": {
+      "tau_ge_0_yr": 0.9650276700556946,
+      "tau_ge_0.1_yr": 0.9605838726350227,
+      "tau_ge_1_yr": 0.9242657208853835,
+      "tau_ge_10_yr": 0.8386314885652669,
+      "tau_ge_100_yr": 0.50258570911509
+    },
+    "dissolved_survival": 0.06524195577118094,
+    "particulate_survival": [
+      0.03619618696406773,
+      0.04217369247205573
+    ],
+    "to_seas_dissolved_kg_yr": [
+      4579985.2951369025,
+      12213294.120365072
+    ],
+    "to_seas_particulate_kg_yr": [
+      50667422.512302004,
+      167547645.452983
+    ],
+    "to_seas_kg_yr": [
+      55247407.80743891,
+      179760939.57334808
+    ],
+    "to_seas_share_of_loss": [
+      0.03758327061730538,
+      0.04321176432051636
+    ],
+    "kept_by_lakes_dissolved_kg_yr": [
+      65620014.7048631,
+      174986705.87963492
+    ],
+    "kept_by_lakes_particulate_kg_yr": [
+      1340765265.2776165,
+      3828999788.4291515
+    ],
+    "kept_by_lakes_kg_yr": [
+      1406385279.9824796,
+      4003986494.3087864
+    ],
+    "kept_by_lakes_share_of_loss": [
+      0.9567246802601902,
+      0.9624967534396122
+    ],
+    "kept_by_lakes_g_m2_lake": [
+      0.35857026737745223,
+      1.0208514894708616
+    ],
+    "lake_area_m2": 3922202725475.94,
+    "lake_volume_m3": 3108625000000000.0,
+    "by_receiving_water": {
+      "below the atlas grid": {
+        "discharge_share": 0.30714138297769505,
+        "dissolved_share_of_arrivals": 0.24847123769804877,
+        "dissolved_kg_yr": [
+          1137994.6149215298,
+          3034652.306457413
+        ],
+        "particulate_kg_yr": [
+          11196876.62357315,
+          31778076.475304622
+        ]
+      },
+      "small waters": {
+        "discharge_share": 0.39852851346414886,
+        "dissolved_share_of_arrivals": 0.5438892382017434,
+        "dissolved_kg_yr": [
+          2491004.713147198,
+          6642679.235059193
+        ],
+        "particulate_kg_yr": [
+          38732112.82420206,
+          109926373.64479923
+        ]
+      },
+      "Oceanus Procellarum": {
+        "discharge_share": 0.014973080809636767,
+        "dissolved_share_of_arrivals": 0.0582894499241932,
+        "dissolved_kg_yr": [
+          266964.8235144238,
+          711906.1960384635
+        ],
+        "particulate_kg_yr": [
+          3509583.603619874,
+          9960618.474397082
+        ]
+      },
+      "Mare Moscoviense": {
+        "discharge_share": 0.0007638554748085521,
+        "dissolved_share_of_arrivals": 0.0003835213287099744,
+        "dissolved_kg_yr": [
+          1756.5220458630495,
+          4684.058788968132
+        ],
+        "particulate_kg_yr": [
+          949.0911917493138,
+          2693.634438192366
+        ]
+      },
+      "Mare Orientale": {
+        "discharge_share": 0.2785055391458793,
+        "dissolved_share_of_arrivals": 0.14840964400198256,
+        "dissolved_kg_yr": [
+          679713.9871855829,
+          1812570.6324948878
+        ],
+        "particulate_kg_yr": [
+          2273570.157435859,
+          6452664.324518631
+        ]
+      }
+    },
+    "largest_rivers_receiving_water": [
+      {
+        "mouth": [
+          -18.34,
+          -100.03
+        ],
+        "discharge_m3s": 57435.0,
+        "waters": [
+          {
+            "label": 1296,
+            "name": "Mare Orientale",
+            "area_km2": 88056.04824974391
+          }
+        ]
+      },
+      {
+        "mouth": [
+          3.59,
+          171.16
+        ],
+        "discharge_m3s": 31255.3,
+        "waters": [
+          {
+            "label": 1115,
+            "name": "small water",
+            "area_km2": 229.44690136212176
+          }
+        ]
+      },
+      {
+        "mouth": [
+          -19.66,
+          -157.59
+        ],
+        "discharge_m3s": 18416.0,
+        "waters": [
+          {
+            "label": 1382,
+            "name": "small water",
+            "area_km2": 647.6861261774576
+          }
+        ]
+      },
+      {
+        "mouth": [
+          17.22,
+          -86.47
+        ],
+        "discharge_m3s": 12659.0,
+        "waters": []
+      },
+      {
+        "mouth": [
+          21.97,
+          -178.34
+        ],
+        "discharge_m3s": 10595.7,
+        "waters": []
+      },
+      {
+        "mouth": [
+          -35.47,
+          -124.16
+        ],
+        "discharge_m3s": 6723.4,
+        "waters": []
+      },
+      {
+        "mouth": [
+          47.16,
+          -175.97
+        ],
+        "discharge_m3s": 6600.6,
+        "waters": []
+      },
+      {
+        "mouth": [
+          -14.03,
+          -89.97
+        ],
+        "discharge_m3s": 5880.6,
+        "waters": [
+          {
+            "label": 1296,
+            "name": "Mare Orientale",
+            "area_km2": 88056.04824974391
+          }
+        ]
+      },
+      {
+        "mouth": [
+          -3.03,
+          122.59
+        ],
+        "discharge_m3s": 3672.2,
+        "waters": [
+          {
+            "label": 1176,
+            "name": "small water",
+            "area_km2": 631.4196923469304
+          }
+        ]
+      },
+      {
+        "mouth": [
+          5.09,
+          151.66
+        ],
+        "discharge_m3s": 3106.0,
+        "waters": [
+          {
+            "label": 1092,
+            "name": "small water",
+            "area_km2": 572.6705958517832
+          }
+        ]
+      },
+      {
+        "mouth": [
+          1.16,
+          0.34
+        ],
+        "discharge_m3s": 3095.9,
+        "waters": []
+      },
+      {
+        "mouth": [
+          3.66,
+          -87.47
+        ],
+        "discharge_m3s": 2875.4,
+        "waters": []
+      }
+    ],
+    "if_lakes_passed_all_dissolved_kg_yr": [
+      70200000.0,
+      187200000.0
+    ],
+    "marking": "screen"
+  },
+  "seas": {
+    "volume_m3": 1.0707076215540812e+16,
+    "area_m2": 10621051867826.53,
+    "residence_yr": {
+      "box_model": 1000.0,
+      "earth_ocean_low": 20000.0,
+      "earth_ocean_high": 100000.0
+    },
+    "input_cases_kg_yr": {
+      "dissolved_after_lakes": [
+        4579985.2951369025,
+        12213294.120365072
+      ],
+      "dissolved_after_lakes_and_dust": [
+        12014721.602615472,
+        19648030.42784364
+      ],
+      "dissolved_after_lakes_and_dust_top": [
+        301969437.59427977,
+        309602746.4195079
+      ],
+      "with_particle_release": [
+        5524740.780743891,
+        53928281.87200442
+      ],
+      "lakes_pass_dissolved": [
+        70200000.0,
+        187200000.0
+      ]
+    },
+    "named_bodies_volume_share": 0.8626550156235594,
+    "named_bodies_factor_on_mixed": 1.1592119467098474,
+    "dust_kg_yr_inherited_envelope": [
+      7434736.30747857,
+      297389452.29914284
+    ],
+    "earth_ocean_air_deposition": {
+      "g_m2_yr": [
+        0.00090506028,
+        0.01018192815
+      ],
+      "kg_yr_over_these_waters": [
+        9612692.177389601,
+        108142786.99563302
+      ]
+    },
+    "table_mg_m3": {
+      "dissolved_after_lakes": {
+        "100_yr": [
+          0.04070609167888051,
+          0.11378280554834885
+        ],
+        "1000_yr": [
+          0.27039154349031463,
+          1.1126275203452713
+        ],
+        "10000_yr": [
+          0.42773370357436313,
+          8.97641276392631
+        ],
+        "settled_box_model": [
+          0.42775312353612205,
+          1.1406749960963254
+        ],
+        "settled_earth_ocean_low": [
+          8.55506247072244,
+          22.813499921926503
+        ],
+        "settled_earth_ocean_high": [
+          42.77531235361219,
+          114.06749960963253
+        ]
+      },
+      "dissolved_after_lakes_and_dust": {
+        "100_yr": [
+          0.10678470072198618,
+          0.18304709634820038
+        ],
+        "1000_yr": [
+          0.7093208622715722,
+          1.789929822303065
+        ],
+        "10000_yr": [
+          1.1220781372285773,
+          14.440725768195637
+        ],
+        "settled_box_model": [
+          1.1221290818100909,
+          1.835050954370294
+        ],
+        "settled_earth_ocean_low": [
+          22.442581636201815,
+          36.701019087405875
+        ],
+        "settled_earth_ocean_high": [
+          112.21290818100907,
+          183.50509543702938
+        ]
+      },
+      "dissolved_after_lakes_and_dust_top": {
+        "100_yr": [
+          2.6838504534031076,
+          2.884354437542412
+        ],
+        "1000_yr": [
+          17.827564294740593,
+          28.204719598656997
+        ],
+        "10000_yr": [
+          28.201511049743864,
+          227.54893293469974
+        ],
+        "settled_box_model": [
+          28.20279145449488,
+          28.91571332705508
+        ],
+        "settled_earth_ocean_low": [
+          564.0558290898975,
+          578.3142665411016
+        ],
+        "settled_earth_ocean_high": [
+          2820.2791454494877,
+          2891.571332705508
+        ]
+      },
+      "with_particle_release": {
+        "100_yr": [
+          0.04910290977610845,
+          0.5024124654107167
+        ],
+        "1000_yr": [
+          0.32616768195203855,
+          4.912850697313395
+        ],
+        "10000_yr": [
+          0.515966249486667,
+          39.63570458237734
+        ],
+        "settled_box_model": [
+          0.5159896753816876,
+          5.036695432664436
+        ],
+        "settled_earth_ocean_low": [
+          10.31979350763375,
+          100.73390865328872
+        ],
+        "settled_earth_ocean_high": [
+          51.59896753816876,
+          503.66954326644367
+        ]
+      },
+      "lakes_pass_dissolved": {
+        "100_yr": [
+          0.6239250678144362,
+          1.7440127936601444
+        ],
+        "1000_yr": [
+          4.14444264115322,
+          17.053865218993757
+        ],
+        "10000_yr": [
+          6.556114060628722,
+          137.58650637955634
+        ],
+        "settled_box_model": [
+          6.556411721260379,
+          17.483764590027675
+        ],
+        "settled_earth_ocean_low": [
+          131.12823442520758,
+          349.6752918005535
+        ],
+        "settled_earth_ocean_high": [
+          655.6411721260379,
+          1748.3764590027677
+        ]
+      }
+    },
+    "at_1000_years_mg_m3": {
+      "dissolved_after_lakes": [
+        0.27039154349031463,
+        1.1126275203452713
+      ],
+      "dissolved_after_lakes_and_dust": [
+        0.7093208622715722,
+        1.789929822303065
+      ],
+      "dissolved_after_lakes_and_dust_top": [
+        17.827564294740593,
+        28.204719598656997
+      ],
+      "with_particle_release": [
+        0.32616768195203855,
+        4.912850697313395
+      ],
+      "lakes_pass_dissolved": [
+        4.14444264115322,
+        17.053865218993757
+      ]
+    },
+    "bodies": {
+      "near_side_sea": {
+        "atlas_name": "Oceanus Procellarum",
+        "volume_m3": 3424489000000000.0,
+        "input_cases_kg_yr": {
+          "dissolved_after_lakes": [
+            266964.8235144238,
+            711906.1960384635
+          ],
+          "with_particle_release": [
+            377654.8427134298,
+            3201757.4011306637
+          ]
+        },
+        "water_residence_yr": 31591.34371620233,
+        "table_mg_m3": {
+          "dissolved_after_lakes": {
+            "100_yr": [
+              0.007418643160835656,
+              0.020736798778446783
+            ],
+            "1000_yr": [
+              0.04927857949828568,
+              0.20277521628659562
+            ],
+            "10000_yr": [
+              0.07795402564592475,
+              1.635941953977617
+            ],
+            "settled_box_model": [
+              0.0779575649138963,
+              0.2078868397703901
+            ],
+            "settled_earth_ocean_low": [
+              1.5591512982779259,
+              4.157736795407802
+            ],
+            "settled_earth_ocean_high": [
+              7.795756491389629,
+              20.78868397703901
+            ]
+          },
+          "with_particle_release": {
+            "100_yr": [
+              0.01049459055754992,
+              0.09326256652085954
+            ],
+            "1000_yr": [
+              0.06971066054536144,
+              0.9119699380680782
+            ],
+            "10000_yr": [
+              0.11027563446987179,
+              7.357555374732266
+            ],
+            "settled_box_model": [
+              0.1102806412032364,
+              0.9349591723409432
+            ],
+            "settled_earth_ocean_low": [
+              2.2056128240647284,
+              18.69918344681886
+            ],
+            "settled_earth_ocean_high": [
+              11.02806412032364,
+              93.49591723409429
+            ]
+          }
+        }
+      },
+      "orientale": {
+        "atlas_name": "Mare Orientale",
+        "volume_m3": 74776000000000.0,
+        "input_cases_kg_yr": {
+          "dissolved_after_lakes": [
+            679713.9871855829,
+            1812570.6324948878
+          ],
+          "with_particle_release": [
+            679713.9871855829,
+            2479570.487104056
+          ]
+        },
+        "water_residence_yr": 37.08616140934077,
+        "table_mg_m3": {
+          "dissolved_after_lakes": {
+            "100_yr": [
+              0.8650280573667051,
+              2.417950610971765
+            ],
+            "1000_yr": [
+              5.745977123988147,
+              23.6439801219323
+            ],
+            "10000_yr": [
+              9.089589282902473,
+              190.75397747727047
+            ],
+            "settled_box_model": [
+              9.090001968353253,
+              24.240005248942012
+            ],
+            "settled_earth_ocean_low": [
+              181.80003936706507,
+              484.80010497884024
+            ],
+            "settled_earth_ocean_high": [
+              909.0001968353254,
+              2424.000524894201
+            ]
+          },
+          "with_particle_release": {
+            "100_yr": [
+              0.8650280573667051,
+              3.3077215677870795
+            ],
+            "1000_yr": [
+              5.745977123988147,
+              32.34462384912531
+            ],
+            "10000_yr": [
+              9.089589282902473,
+              260.94869042389445
+            ],
+            "settled_box_model": [
+              9.090001968353253,
+              33.15997762790275
+            ],
+            "settled_earth_ocean_low": [
+              181.80003936706507,
+              663.199552558055
+            ],
+            "settled_earth_ocean_high": [
+              909.0001968353254,
+              3315.997762790275
+            ]
+          }
+        }
+      },
+      "south_pole_aitken_sea": {
+        "atlas_name": "Mare Ingenii",
+        "volume_m3": 4836569000000000.0,
+        "input_cases_kg_yr": {
+          "dissolved_after_lakes": [
+            244.58143793475588,
+            652.2171678260157
+          ],
+          "with_particle_release": [
+            244.58143793475588,
+            652.2171678260157
+          ]
+        },
+        "water_residence_yr": 11189546.264553556,
+        "table_mg_m3": {
+          "dissolved_after_lakes": {
+            "100_yr": [
+              4.812295892883793e-06,
+              1.3451464025105668e-05
+            ],
+            "1000_yr": [
+              3.1965832644258775e-05,
+              0.00013153541953144545
+            ],
+            "10000_yr": [
+              5.056690682065166e-05,
+              0.0010611963098163056
+            ],
+            "settled_box_model": [
+              5.056920265890053e-05,
+              0.00013485120709040143
+            ],
+            "settled_earth_ocean_low": [
+              0.0010113840531780105,
+              0.002697024141808028
+            ],
+            "settled_earth_ocean_high": [
+              0.005056920265890053,
+              0.013485120709040142
+            ]
+          },
+          "with_particle_release": {
+            "100_yr": [
+              4.812295892883793e-06,
+              1.3451464025105668e-05
+            ],
+            "1000_yr": [
+              3.1965832644258775e-05,
+              0.00013153541953144545
+            ],
+            "10000_yr": [
+              5.056690682065166e-05,
+              0.0010611963098163056
+            ],
+            "settled_box_model": [
+              5.056920265890053e-05,
+              0.00013485120709040143
+            ],
+            "settled_earth_ocean_low": [
+              0.0010113840531780105,
+              0.002697024141808028
+            ],
+            "settled_earth_ocean_high": [
+              0.005056920265890053,
+              0.013485120709040142
+            ]
+          }
+        }
+      },
+      "crater_waters": {
+        "atlas_name": "small waters",
+        "volume_m3": 1470563215540812.0,
+        "input_cases_kg_yr": {
+          "dissolved_after_lakes": [
+            2491004.713147198,
+            6642679.235059193
+          ],
+          "with_particle_release": [
+            4122311.753734926,
+            34970715.863957524
+          ]
+        },
+        "water_residence_yr": 509.69196918774304,
+        "table_mg_m3": {
+          "dissolved_after_lakes": {
+            "100_yr": [
+              0.1611970418425732,
+              0.4505824782107153
+            ],
+            "1000_yr": [
+              1.07075661534217,
+              4.4060300941480035
+            ],
+            "10000_yr": [
+              1.6938351207106122,
+              35.546797155511904
+            ],
+            "settled_box_model": [
+              1.693912024197552,
+              4.517098731193472
+            ],
+            "settled_earth_ocean_low": [
+              33.87824048395104,
+              90.34197462386942
+            ],
+            "settled_earth_ocean_high": [
+              169.39120241975522,
+              451.7098731193471
+            ]
+          },
+          "with_particle_release": {
+            "100_yr": [
+              0.26676162303016615,
+              2.372113910847953
+            ],
+            "1000_yr": [
+              1.7719727937558616,
+              23.195765000554452
+            ],
+            "10000_yr": [
+              2.803092418951167,
+              187.13788506273758
+            ],
+            "settled_box_model": [
+              2.803219684927935,
+              23.78049137526995
+            ],
+            "settled_earth_ocean_low": [
+              56.06439369855871,
+              475.609827505399
+            ],
+            "settled_earth_ocean_high": [
+              280.3219684927935,
+              2378.0491375269953
+            ]
+          }
+        }
+      },
+      "near_side_sea_takes_all": {
+        "atlas_name": "Oceanus Procellarum",
+        "volume_m3": 3424489000000000.0,
+        "input_cases_kg_yr": {
+          "dissolved_after_lakes": [
+            4579985.2951369025,
+            12213294.120365072
+          ]
+        },
+        "table_mg_m3": {
+          "dissolved_after_lakes": {
+            "100_yr": [
+              0.12727248533797753,
+              0.35575560938412454
+            ],
+            "1000_yr": [
+              0.845411640740711,
+              3.4787635935887096
+            ],
+            "10000_yr": [
+              1.3373608045247765,
+              28.065832772572012
+            ],
+            "settled_box_model": [
+              1.3374215233679836,
+              3.566457395647956
+            ],
+            "settled_earth_ocean_low": [
+              26.74843046735967,
+              71.32914791295912
+            ],
+            "settled_earth_ocean_high": [
+              133.74215233679834,
+              356.6457395647956
+            ]
+          }
+        }
+      }
+    },
+    "runs": {
+      "dissolved_after_lakes": {
+        "box_model": [
+          {
+            "input_kg_yr": 4579985.2951369025,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 435843226.0425653,
+                "buried_kg": 22155303.471124876,
+                "unit_state": 1.0,
+                "closed_form_kg": 435843226.04256564,
+                "mg_m3": 0.04070609167888051,
+                "um": 0.0013142019654833249
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 1802083792.6033573,
+                "buried_kg": 487908854.9650943,
+                "unit_state": 1.0,
+                "closed_form_kg": 1802083792.603357,
+                "mg_m3": 0.16830773932361837,
+                "um": 0.005433839327294452
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 2895102864.1885166,
+                "buried_kg": 1684882430.9483871,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 2895102864.1885157,
+                "mg_m3": 0.27039154349031463,
+                "um": 0.008729629479250812
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 4549125596.961704,
+                "buried_kg": 18350800878.722885,
+                "unit_state": 1.000000000000007,
+                "closed_form_kg": 4549125596.961679,
+                "mg_m3": 0.42487094566104466,
+                "um": 0.013717018972720497
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 4579777364.126247,
+                "buried_kg": 41220075587.243095,
+                "unit_state": 1.0000000000000142,
+                "closed_form_kg": 4579777364.12619,
+                "mg_m3": 0.42773370357436313,
+                "um": 0.013809443519544235
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 4579985295.1364,
+                "buried_kg": 453418544218.5287,
+                "unit_state": 0.9999999999998894,
+                "closed_form_kg": 4579985295.136903,
+                "mg_m3": 0.4277531235360751,
+                "um": 0.01381007049577307
+              }
+            ],
+            "steady_kg": 4579985295.136903,
+            "steady_mg_m3": 0.42775312353612205,
+            "steady_um": 0.013810070495774587
+          },
+          {
+            "input_kg_yr": 12213294.120365072,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 1162248602.780174,
+                "buried_kg": 59080809.25633299,
+                "unit_state": 1.0,
+                "closed_form_kg": 1162248602.780175,
+                "mg_m3": 0.10854957781034802,
+                "um": 0.0035045385746222
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 4805556780.275619,
+                "buried_kg": 1301090279.906918,
+                "unit_state": 1.0,
+                "closed_form_kg": 4805556780.275618,
+                "mg_m3": 0.44882063819631557,
+                "um": 0.014490238206118536
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 7720274304.502708,
+                "buried_kg": 4493019815.862366,
+                "unit_state": 1.0,
+                "closed_form_kg": 7720274304.5027075,
+                "mg_m3": 0.7210441159741721,
+                "um": 0.02327901194466882
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 12131001591.897873,
+                "buried_kg": 48935469009.92765,
+                "unit_state": 1.0000000000000075,
+                "closed_form_kg": 12131001591.89781,
+                "mg_m3": 1.132989188429452,
+                "um": 0.03657871726058798
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 12212739637.67002,
+                "buried_kg": 109920201565.9816,
+                "unit_state": 1.0000000000000173,
+                "closed_form_kg": 12212739637.66984,
+                "mg_m3": 1.1406232095316373,
+                "um": 0.0368251827187847
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 12213294120.363693,
+                "buried_kg": 1209116117916.074,
+                "unit_state": 0.9999999999998863,
+                "closed_form_kg": 12213294120.365072,
+                "mg_m3": 1.1406749960961964,
+                "um": 0.03682685465539473
+              }
+            ],
+            "steady_kg": 12213294120.365072,
+            "steady_mg_m3": 1.1406749960963254,
+            "steady_um": 0.036826854655398894
+          }
+        ],
+        "earth_ocean_low": [
+          {
+            "input_kg_yr": 4579985.2951369025,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 456855439.1340867,
+                "buried_kg": 1143090.379603504,
+                "unit_state": 1.0,
+                "closed_form_kg": 456855439.1340862,
+                "mg_m3": 0.04266855208063083,
+                "um": 0.0013775602789639965
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 2261604796.9174576,
+                "buried_kg": 28387850.650993466,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 2261604796.917463,
+                "mg_m3": 0.21122524500524667,
+                "um": 0.006819437108712038
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 4467370372.441879,
+                "buried_kg": 112614922.6950238,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 4467370372.441878,
+                "mg_m3": 0.41723532012947695,
+                "um": 0.013470501715292727
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 20261783216.57527,
+                "buried_kg": 2638143259.1092424,
+                "unit_state": 1.0,
+                "closed_form_kg": 20261783216.575268,
+                "mg_m3": 1.8923731192990163,
+                "um": 0.06109553558788068
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 36041675852.06715,
+                "buried_kg": 9758177099.301888,
+                "unit_state": 1.0,
+                "closed_form_kg": 36041675852.06714,
+                "mg_m3": 3.3661547864723675,
+                "um": 0.10867678654588905
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 90982511939.23405,
+                "buried_kg": 367016017574.45734,
+                "unit_state": 1.0000000000000075,
+                "closed_form_kg": 90982511939.23358,
+                "mg_m3": 8.49741891322089,
+                "um": 0.27434037945440987
+              }
+            ],
+            "steady_kg": 91599705902.73805,
+            "steady_mg_m3": 8.55506247072244,
+            "steady_um": 0.2762014099154917
+          },
+          {
+            "input_kg_yr": 12213294.120365072,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 1218281171.0242312,
+                "buried_kg": 3048241.01227601,
+                "unit_state": 1.0,
+                "closed_form_kg": 1218281171.0242298,
+                "mg_m3": 0.11378280554834885,
+                "um": 0.003673494077237323
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 6030946125.113221,
+                "buried_kg": 75700935.06931591,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 6030946125.113234,
+                "mg_m3": 0.5632673200139913,
+                "um": 0.018185165623232108
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 11912987659.845007,
+                "buried_kg": 300306460.5200634,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 11912987659.845007,
+                "mg_m3": 1.1126275203452713,
+                "um": 0.035921337907447254
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 54031421910.86738,
+                "buried_kg": 7035048690.957978,
+                "unit_state": 1.0,
+                "closed_form_kg": 54031421910.86738,
+                "mg_m3": 5.046328318130709,
+                "um": 0.16292142823434846
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 96111135605.51236,
+                "buried_kg": 26021805598.138355,
+                "unit_state": 1.0,
+                "closed_form_kg": 96111135605.51236,
+                "mg_m3": 8.97641276392631,
+                "um": 0.2898047641223707
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 242620031837.95908,
+                "buried_kg": 978709380198.5571,
+                "unit_state": 1.0000000000000142,
+                "closed_form_kg": 242620031837.9562,
+                "mg_m3": 22.659783768589193,
+                "um": 0.7315743452117645
+              }
+            ],
+            "steady_kg": 244265882407.30145,
+            "steady_mg_m3": 22.813499921926503,
+            "steady_um": 0.7365370931079778
+          }
+        ],
+        "earth_ocean_high": [
+          {
+            "input_kg_yr": 4579985.2951369025,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 457769606.5629422,
+                "buried_kg": 228922.9507480489,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 457769606.5629283,
+                "mg_m3": 0.04275393182487217,
+                "um": 0.001380316776162981
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 2284277195.6704345,
+                "buried_kg": 5715451.898017522,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 2284277195.6704307,
+                "mg_m3": 0.2133427604031542,
+                "um": 0.006887801394819985
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 4557161511.29778,
+                "buried_kg": 22823783.839122623,
+                "unit_state": 1.0,
+                "closed_form_kg": 4557161511.297755,
+                "mg_m3": 0.42562146934970696,
+                "um": 0.013741249736866629
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 22336851862.209393,
+                "buried_kg": 563074613.4751189,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 22336851862.20939,
+                "mg_m3": 2.0861766006473847,
+                "um": 0.06735250857646363
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 43584322604.25653,
+                "buried_kg": 2215530347.112488,
+                "unit_state": 1.0,
+                "closed_form_kg": 43584322604.25656,
+                "mg_m3": 4.070609167888052,
+                "um": 0.13142019654833254
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 289510286418.8514,
+                "buried_kg": 168488243094.8386,
+                "unit_state": 0.9999999999999989,
+                "closed_form_kg": 289510286418.85156,
+                "mg_m3": 27.039154349031435,
+                "um": 0.8729629479250802
+              }
+            ],
+            "steady_kg": 457998529513.69025,
+            "steady_mg_m3": 42.77531235361219,
+            "steady_um": 1.3810070495774582
+          },
+          {
+            "input_kg_yr": 12213294.120365072,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 1220718950.8345125,
+                "buried_kg": 610461.201994797,
+                "unit_state": 1.0,
+                "closed_form_kg": 1220718950.8344755,
+                "mg_m3": 0.11401048486632578,
+                "um": 0.0036808447364346155
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 6091405855.121156,
+                "buried_kg": 15241205.061380051,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 6091405855.121149,
+                "mg_m3": 0.5689140277417443,
+                "um": 0.018367470386186618
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 12152430696.794079,
+                "buried_kg": 60863423.57099366,
+                "unit_state": 1.0,
+                "closed_form_kg": 12152430696.794014,
+                "mg_m3": 1.134990584932552,
+                "um": 0.03664333263164434
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 59564938299.22505,
+                "buried_kg": 1501532302.6003172,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 59564938299.225044,
+                "mg_m3": 5.56313760172636,
+                "um": 0.17960668953723638
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 116224860278.01741,
+                "buried_kg": 5908080925.633301,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 116224860278.0175,
+                "mg_m3": 10.854957781034802,
+                "um": 0.35045385746221996
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 772027430450.2723,
+                "buried_kg": 449301981586.2372,
+                "unit_state": 1.0000000000000024,
+                "closed_form_kg": 772027430450.2708,
+                "mg_m3": 72.10441159741735,
+                "um": 2.327901194466887
+              }
+            ],
+            "steady_kg": 1221329412036.5073,
+            "steady_mg_m3": 114.06749960963253,
+            "steady_um": 3.6826854655398895
+          }
+        ]
+      },
+      "dissolved_after_lakes_and_dust": {
+        "box_model": [
+          {
+            "input_kg_yr": 12014721.602615472,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 1143351929.2840219,
+                "buried_kg": 58120230.97752518,
+                "unit_state": 1.0,
+                "closed_form_kg": 1143351929.2840228,
+                "mg_m3": 0.10678470072198618,
+                "um": 0.003447559266545689
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 4727424582.717485,
+                "buried_kg": 1279936218.5902553,
+                "unit_state": 1.0000000000000016,
+                "closed_form_kg": 4727424582.717482,
+                "mg_m3": 0.44152338953708514,
+                "um": 0.014254645494191424
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 7594752533.614851,
+                "buried_kg": 4419969069.000641,
+                "unit_state": 1.0000000000000027,
+                "closed_form_kg": 7594752533.614837,
+                "mg_m3": 0.7093208622715722,
+                "um": 0.02290052502975309
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 11933767045.248228,
+                "buried_kg": 48139840967.828995,
+                "unit_state": 0.9999999999999933,
+                "closed_form_kg": 11933767045.248281,
+                "mg_m3": 1.114568235530717,
+                "um": 0.0359839941735235
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 12014176135.09844,
+                "buried_kg": 108133039891.05551,
+                "unit_state": 0.9999999999999846,
+                "closed_form_kg": 12014176135.098598,
+                "mg_m3": 1.1220781372285773,
+                "um": 0.036226452419079784
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 12014721602.614128,
+                "buried_kg": 1189457438658.8647,
+                "unit_state": 0.9999999999998863,
+                "closed_form_kg": 12014721602.615473,
+                "mg_m3": 1.1221290818099652,
+                "um": 0.03622809717214325
+              }
+            ],
+            "steady_kg": 12014721602.615473,
+            "steady_mg_m3": 1.1221290818100909,
+            "steady_um": 0.03622809717214731
+          },
+          {
+            "input_kg_yr": 19648030.42784364,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 1869757306.0216308,
+                "buried_kg": 95045736.76273331,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 1869757306.0216322,
+                "mg_m3": 0.17462818685345372,
+                "um": 0.005637895875684565
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 7730897570.389744,
+                "buried_kg": 2093117643.5320783,
+                "unit_state": 1.0,
+                "closed_form_kg": 7730897570.389743,
+                "mg_m3": 0.7220362884097821,
+                "um": 0.0233110443730155
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 12419923973.929031,
+                "buried_kg": 7228106453.914614,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 12419923973.92903,
+                "mg_m3": 1.1599734347554285,
+                "um": 0.03744990749517106
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 19515643040.184536,
+                "buried_kg": 78724509099.03409,
+                "unit_state": 1.0000000000000073,
+                "closed_form_kg": 19515643040.184414,
+                "mg_m3": 1.8226864782991372,
+                "um": 0.0588456924613914
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 19647138408.642483,
+                "buried_kg": 176833165869.79535,
+                "unit_state": 1.0000000000000129,
+                "closed_form_kg": 19647138408.642246,
+                "mg_m3": 1.834967643185877,
+                "um": 0.059242191618321074
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 19648030427.84142,
+                "buried_kg": 1945155012356.4116,
+                "unit_state": 0.999999999999886,
+                "closed_form_kg": 19648030427.843643,
+                "mg_m3": 1.8350509543700861,
+                "um": 0.059244881331764906
+              }
+            ],
+            "steady_kg": 19648030427.843643,
+            "steady_mg_m3": 1.835050954370294,
+            "steady_um": 0.059244881331771616
+          }
+        ],
+        "earth_ocean_low": [
+          {
+            "input_kg_yr": 12014721.602615472,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 1198473479.7434795,
+                "buried_kg": 2998680.5180678233,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 1198473479.7434778,
+                "mg_m3": 0.11193284288048237,
+                "um": 0.003613767769112235
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 5932890666.473358,
+                "buried_kg": 74470134.83437784,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 5932890666.4733715,
+                "mg_m3": 0.5541093149091485,
+                "um": 0.01788949812452859
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 11719297740.465208,
+                "buried_kg": 295423862.150267,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 11719297740.465204,
+                "mg_m3": 1.0945376220872702,
+                "um": 0.035337302966593605
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 53152940202.27237,
+                "buried_kg": 6920667810.805,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 53152940202.27236,
+                "mg_m3": 4.964281483783911,
+                "um": 0.16027253450584075
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 94548491654.34967,
+                "buried_kg": 25598724371.805096,
+                "unit_state": 1.0000000000000007,
+                "closed_form_kg": 94548491654.34962,
+                "mg_m3": 8.8304677907417,
+                "um": 0.28509290988382835
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 238675340904.96844,
+                "buried_kg": 962796819356.5875,
+                "unit_state": 1.0000000000000142,
+                "closed_form_kg": 238675340904.96564,
+                "mg_m3": 22.291364710614697,
+                "um": 0.7196798834704816
+              }
+            ],
+            "steady_kg": 240294432052.30945,
+            "steady_mg_m3": 22.442581636201815,
+            "steady_um": 0.7245619434429462
+          },
+          {
+            "input_kg_yr": 19648030.42784364,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 1959899211.6336238,
+                "buried_kg": 4903831.150740329,
+                "unit_state": 1.0,
+                "closed_form_kg": 1959899211.6336212,
+                "mg_m3": 0.18304709634820038,
+                "um": 0.005909701567385561
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 9702231994.669119,
+                "buried_kg": 121783219.25270025,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 9702231994.669142,
+                "mg_m3": 0.9061513899178928,
+                "um": 0.029255226639048646
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 19164915027.86834,
+                "buried_kg": 483115399.97530663,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 19164915027.868332,
+                "mg_m3": 1.789929822303065,
+                "um": 0.05778813915874815
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 86922578896.56445,
+                "buried_kg": 11317573242.653736,
+                "unit_state": 1.0,
+                "closed_form_kg": 86922578896.56445,
+                "mg_m3": 8.118236682615603,
+                "um": 0.26209842715230847
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 154617951407.79483,
+                "buried_kg": 41862352870.641556,
+                "unit_state": 1.0,
+                "closed_form_kg": 154617951407.79483,
+                "mg_m3": 14.440725768195637,
+                "um": 0.4662208874603099
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 390312860803.68835,
+                "buried_kg": 1574490181980.6763,
+                "unit_state": 1.0,
+                "closed_form_kg": 390312860803.68823,
+                "mg_m3": 36.45372956598252,
+                "um": 1.1769138492278208
+              }
+            ],
+            "steady_kg": 392960608556.8728,
+            "steady_mg_m3": 36.701019087405875,
+            "steady_um": 1.184897626635432
+          }
+        ],
+        "earth_ocean_high": [
+          {
+            "input_kg_yr": 12014721.602615472,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 1200871624.3767254,
+                "buried_kg": 600535.8848220594,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 1200871624.3766887,
+                "mg_m3": 0.11215682042439534,
+                "um": 0.003620998916006823
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 5992367398.717398,
+                "buried_kg": 14993402.590339119,
+                "unit_state": 1.0,
+                "closed_form_kg": 5992367398.717389,
+                "mg_m3": 0.5596642144024119,
+                "um": 0.018068838845561177
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 11954847740.348598,
+                "buried_kg": 59873862.26687342,
+                "unit_state": 1.0,
+                "closed_form_kg": 11954847740.348534,
+                "mg_m3": 1.1165370918903805,
+                "um": 0.036047558981416046
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 58596488702.32603,
+                "buried_kg": 1477119310.7513344,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 58596488702.32601,
+                "mg_m3": 5.47268811043635,
+                "um": 0.17668651483296796
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 114335192928.40219,
+                "buried_kg": 5812023097.752518,
+                "unit_state": 1.0,
+                "closed_form_kg": 114335192928.40227,
+                "mg_m3": 10.678470072198618,
+                "um": 0.3447559266545689
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 759475253361.4819,
+                "buried_kg": 441996906900.0629,
+                "unit_state": 0.9999999999999953,
+                "closed_form_kg": 759475253361.4835,
+                "mg_m3": 70.93208622715693,
+                "um": 2.2900525029752994
+              }
+            ],
+            "steady_kg": 1201472160261.547,
+            "steady_mg_m3": 112.21290818100907,
+            "steady_um": 3.622809717214731
+          },
+          {
+            "input_kg_yr": 19648030.42784364,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 1963820968.6482954,
+                "buried_kg": 982074.1360688074,
+                "unit_state": 1.0,
+                "closed_form_kg": 1963820968.648236,
+                "mg_m3": 0.18341337346584893,
+                "um": 0.005921526876278457
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 9799496058.168121,
+                "buried_kg": 24519155.753701653,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 9799496058.168106,
+                "mg_m3": 0.9152354817410022,
+                "um": 0.029548507836927817
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 19550116925.8449,
+                "buried_kg": 97913501.99874446,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 19550116925.844795,
+                "mg_m3": 1.8259062074732253,
+                "um": 0.058949641876193754
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 95824575139.34167,
+                "buried_kg": 2415576999.8765326,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 95824575139.34166,
+                "mg_m3": 8.949649111515324,
+                "um": 0.2889406957937407
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 186975730602.16306,
+                "buried_kg": 9504573676.27333,
+                "unit_state": 1.0,
+                "closed_form_kg": 186975730602.1632,
+                "mg_m3": 17.462818685345365,
+                "um": 0.5637895875684563
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 1241992397392.906,
+                "buried_kg": 722810645391.4625,
+                "unit_state": 1.0000000000000036,
+                "closed_form_kg": 1241992397392.9028,
+                "mg_m3": 115.99734347554313,
+                "um": 3.7449907495171155
+              }
+            ],
+            "steady_kg": 1964803042784.3643,
+            "steady_mg_m3": 183.50509543702938,
+            "steady_um": 5.924488133177161
+          }
+        ]
+      },
+      "dissolved_after_lakes_and_dust_top": {
+        "box_model": [
+          {
+            "input_kg_yr": 301969437.59427977,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 28736191355.700836,
+                "buried_kg": 1460752403.7271376,
+                "unit_state": 1.0,
+                "closed_form_kg": 28736191355.70086,
+                "mg_m3": 2.6838504534031076,
+                "um": 0.0866484940079779
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 118815715397.16844,
+                "buried_kg": 32169003399.971523,
+                "unit_state": 1.0000000000000009,
+                "closed_form_kg": 118815715397.16838,
+                "mg_m3": 11.096933747862286,
+                "um": 0.35826608600317317
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 190881089641.24164,
+                "buried_kg": 111088347953.03845,
+                "unit_state": 1.0000000000000016,
+                "closed_form_kg": 190881089641.2414,
+                "mg_m3": 17.827564294740593,
+                "um": 0.5755654514993411
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 299934783528.42694,
+                "buried_kg": 1209912404442.9763,
+                "unit_state": 1.000000000000004,
+                "closed_form_kg": 299934783528.4259,
+                "mg_m3": 28.012762540448332,
+                "um": 0.9043960270048534
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 301955728203.0239,
+                "buried_kg": 2717738647739.7847,
+                "unit_state": 1.0000000000000049,
+                "closed_form_kg": 301955728203.0226,
+                "mg_m3": 28.201511049743864,
+                "um": 0.9104897995009964
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 301969437594.34784,
+                "buried_kg": 29894974321837.074,
+                "unit_state": 1.0000000000002274,
+                "closed_form_kg": 301969437594.2798,
+                "mg_m3": 28.202791454501234,
+                "um": 0.910531137550889
+              }
+            ],
+            "steady_kg": 301969437594.2798,
+            "steady_mg_m3": 28.20279145449488,
+            "steady_um": 0.9105311375506837
+          },
+          {
+            "input_kg_yr": 309602746.4195079,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 29462596732.438446,
+                "buried_kg": 1497677909.5123456,
+                "unit_state": 1.0,
+                "closed_form_kg": 29462596732.438465,
+                "mg_m3": 2.751693939534575,
+                "um": 0.08883883061711677
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 121819188384.84064,
+                "buried_kg": 32982184824.91333,
+                "unit_state": 0.9999999999999999,
+                "closed_form_kg": 121819188384.84064,
+                "mg_m3": 11.377446646734976,
+                "um": 0.36732248488199704
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 195706261081.5556,
+                "buried_kg": 113896485337.95233,
+                "unit_state": 0.9999999999999994,
+                "closed_form_kg": 195706261081.55557,
+                "mg_m3": 18.278216867224433,
+                "um": 0.5901148339647586
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 307516659523.35895,
+                "buried_kg": 1240497072574.1724,
+                "unit_state": 0.9999999999999877,
+                "closed_form_kg": 307516659523.362,
+                "mg_m3": 28.72088078321635,
+                "um": 0.9272577252927084
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 309588690476.55835,
+                "buried_kg": 2786438773718.481,
+                "unit_state": 0.999999999999972,
+                "closed_form_kg": 309588690476.5662,
+                "mg_m3": 28.91440055570027,
+                "um": 0.9335055387002088
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 309602746419.5758,
+                "buried_kg": 30650671895534.613,
+                "unit_state": 1.0000000000002212,
+                "closed_form_kg": 309602746419.50793,
+                "mg_m3": 28.91571332706142,
+                "um": 0.9335479217105127
+              }
+            ],
+            "steady_kg": 309602746419.50793,
+            "steady_mg_m3": 28.91571332705508,
+            "steady_um": 0.933547921710308
+          }
+        ],
+        "earth_ocean_low": [
+          {
+            "input_kg_yr": 301969437.59427977,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 30121577063.509804,
+                "buried_kg": 75366695.91817632,
+                "unit_state": 1.0,
+                "closed_form_kg": 30121577063.50976,
+                "mg_m3": 2.8132401840746932,
+                "um": 0.09082585988489356
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 149113039579.15347,
+                "buried_kg": 1871679217.9863687,
+                "unit_state": 0.9999999999999996,
+                "closed_form_kg": 149113039579.15384,
+                "mg_m3": 13.926588041161319,
+                "um": 0.449621877741374
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 294544465093.375,
+                "buried_kg": 7424972500.904751,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 294544465093.375,
+                "mg_m3": 27.509327398441204,
+                "um": 0.8881425517673276
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 1335908062644.46,
+                "buried_kg": 173939125326.93967,
+                "unit_state": 1.0000000000000009,
+                "closed_form_kg": 1335908062644.4592,
+                "mg_m3": 124.7687076986949,
+                "um": 4.028175492306286
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 2376314307943.37,
+                "buried_kg": 643380067999.4307,
+                "unit_state": 1.0000000000000016,
+                "closed_form_kg": 2376314307943.3677,
+                "mg_m3": 221.93867495724584,
+                "um": 7.165321720063467
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 5998695670568.527,
+                "buried_kg": 24198248088859.504,
+                "unit_state": 1.0000000000000016,
+                "closed_form_kg": 5998695670568.518,
+                "mg_m3": 560.2552508089656,
+                "um": 18.087920540097034
+              }
+            ],
+            "steady_kg": 6039388751885.596,
+            "steady_mg_m3": 564.0558290898975,
+            "steady_um": 18.210622751013673
+          },
+          {
+            "input_kg_yr": 309602746.4195079,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 30883002795.399956,
+                "buried_kg": 77271846.55084883,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 30883002795.399902,
+                "mg_m3": 2.884354437542412,
+                "um": 0.09312179368316692
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 152882380907.34927,
+                "buried_kg": 1918992302.4046912,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 152882380907.3496,
+                "mg_m3": 14.278630116170069,
+                "um": 0.46098760625589424
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 301990082380.77814,
+                "buried_kg": 7612664038.729789,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 301990082380.7781,
+                "mg_m3": 28.204719598656997,
+                "um": 0.9105933879594821
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 1369677701338.752,
+                "buried_kg": 178336030758.78842,
+                "unit_state": 1.0000000000000009,
+                "closed_form_kg": 1369677701338.7512,
+                "mg_m3": 127.92266289752656,
+                "um": 4.130001384952752
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 2436383767696.815,
+                "buried_kg": 659643696498.2671,
+                "unit_state": 1.0000000000000018,
+                "closed_form_kg": 2436383767696.8125,
+                "mg_m3": 227.54893293469974,
+                "um": 7.346449697639947
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 6150333190467.242,
+                "buried_kg": 24809941451483.562,
+                "unit_state": 1.0,
+                "closed_form_kg": 6150333190467.239,
+                "mg_m3": 574.4176156643329,
+                "um": 18.545154505854356
+              }
+            ],
+            "steady_kg": 6192054928390.158,
+            "steady_mg_m3": 578.3142665411016,
+            "steady_um": 18.67095843420616
+          }
+        ],
+        "earth_ocean_high": [
+          {
+            "input_kg_yr": 301969437.59427977,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 30181850319.114273,
+                "buried_kg": 15093440.313708477,
+                "unit_state": 1.0,
+                "closed_form_kg": 30181850319.113354,
+                "mg_m3": 2.8188694758057995,
+                "um": 0.09100760236991669
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 150607885317.549,
+                "buried_kg": 376833479.5908816,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 150607885317.5488,
+                "mg_m3": 14.066200920373465,
+                "um": 0.4541292994244678
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 300464610673.3306,
+                "buried_kg": 1504826920.9491549,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 300464610673.329,
+                "mg_m3": 28.062246370976656,
+                "um": 0.9059936195188434
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 1472722325466.8755,
+                "buried_kg": 37124862504.52376,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 1472722325466.8748,
+                "mg_m3": 137.54663699220606,
+                "um": 4.440712758836639
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 2873619135570.0854,
+                "buried_kg": 146075240372.71384,
+                "unit_state": 1.0000000000000009,
+                "closed_form_kg": 2873619135570.0854,
+                "mg_m3": 268.3850453403109,
+                "um": 8.664849400797795
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 19088108964124.15,
+                "buried_kg": 11108834795303.838,
+                "unit_state": 1.0,
+                "closed_form_kg": 19088108964124.14,
+                "mg_m3": 1782.756429474058,
+                "um": 57.556545149934074
+              }
+            ],
+            "steady_kg": 30196943759427.977,
+            "steady_mg_m3": 2820.2791454494877,
+            "steady_um": 91.05311375506837
+          },
+          {
+            "input_kg_yr": 309602746.4195079,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 30944799663.38584,
+                "buried_kg": 15474978.564955223,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 30944799663.384903,
+                "mg_m3": 2.890126028847253,
+                "um": 0.09330813033018832
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 154415013976.99976,
+                "buried_kg": 386359232.75424415,
+                "unit_state": 1.0,
+                "closed_form_kg": 154415013976.9995,
+                "mg_m3": 14.421772187712056,
+                "um": 0.46560896841583443
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 308059879858.82684,
+                "buried_kg": 1542866560.6810255,
+                "unit_state": 0.9999999999999996,
+                "closed_form_kg": 308059879858.82526,
+                "mg_m3": 28.771615486559494,
+                "um": 0.9288957024136208
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 1509950411903.8906,
+                "buried_kg": 38063320193.64894,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 1509950411903.8904,
+                "mg_m3": 141.023597993285,
+                "um": 4.55296693979741
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 2946259673243.8447,
+                "buried_kg": 149767790951.23456,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 2946259673243.846,
+                "mg_m3": 275.1693939534575,
+                "um": 8.883883061711677
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 19570626108155.566,
+                "buried_kg": 11389648533795.236,
+                "unit_state": 1.0,
+                "closed_form_kg": 19570626108155.56,
+                "mg_m3": 1827.8216867224437,
+                "um": 59.011483396475874
+              }
+            ],
+            "steady_kg": 30960274641950.793,
+            "steady_mg_m3": 2891.571332705508,
+            "steady_um": 93.35479217103081
+          }
+        ]
+      },
+      "with_particle_release": {
+        "box_model": [
+          {
+            "input_kg_yr": 5524740.780743891,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 525748597.3776172,
+                "buried_kg": 26725480.696771868,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 525748597.3776176,
+                "mg_m3": 0.04910290977610845,
+                "um": 0.001585294433270112
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 2173816110.25801,
+                "buried_kg": 588554280.1139362,
+                "unit_state": 1.0,
+                "closed_form_kg": 2173816110.2580094,
+                "mg_m3": 0.20302611716752508,
+                "um": 0.006554727099100054
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 3492302229.706752,
+                "buried_kg": 2032438551.0371408,
+                "unit_state": 1.0,
+                "closed_form_kg": 3492302229.706751,
+                "mg_m3": 0.32616768195203855,
+                "um": 0.010530370050753489
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 5487515370.179552,
+                "buried_kg": 22136188533.5399,
+                "unit_state": 1.0,
+                "closed_form_kg": 5487515370.179553,
+                "mg_m3": 0.5125129642968903,
+                "um": 0.01654655402262834
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 5524489957.900489,
+                "buried_kg": 49722917849.53842,
+                "unit_state": 1.0,
+                "closed_form_kg": 5524489957.90049,
+                "mg_m3": 0.515966249486667,
+                "um": 0.016658043826650322
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 5524740780.744011,
+                "buried_kg": 546949337293.65076,
+                "unit_state": 1.0000000000000215,
+                "closed_form_kg": 5524740780.743892,
+                "mg_m3": 0.5159896753816987,
+                "um": 0.01665880013500674
+              }
+            ],
+            "steady_kg": 5524740780.743892,
+            "steady_mg_m3": 0.5159896753816876,
+            "steady_um": 0.01665880013500638
+          },
+          {
+            "input_kg_yr": 53928281.87200442,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 5131954543.824496,
+                "buried_kg": 260873643.37594587,
+                "unit_state": 1.0,
+                "closed_form_kg": 5131954543.824499,
+                "mg_m3": 0.4793049419388375,
+                "um": 0.015474428292724138
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 21219125491.008728,
+                "buried_kg": 5745015444.993481,
+                "unit_state": 1.0,
+                "closed_form_kg": 21219125491.008728,
+                "mg_m3": 1.9817852291188678,
+                "um": 0.06398221828368528
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 34089175673.595413,
+                "buried_kg": 19839106198.409008,
+                "unit_state": 1.0,
+                "closed_form_kg": 34089175673.59541,
+                "mg_m3": 3.1837987315450875,
+                "um": 0.10278939534916665
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 53564915966.9991,
+                "buried_kg": 216076493393.02292,
+                "unit_state": 1.0,
+                "closed_form_kg": 53564915966.99911,
+                "mg_m3": 5.002758445788606,
+                "um": 0.16151476870241513
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 53925833531.795204,
+                "buried_kg": 485356985188.24884,
+                "unit_state": 1.0,
+                "closed_form_kg": 53925833531.79522,
+                "mg_m3": 5.036466767045556,
+                "um": 0.1626030466535015
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 53928281872.00445,
+                "buried_kg": 5338899905328.4375,
+                "unit_state": 1.0,
+                "closed_form_kg": 53928281872.00442,
+                "mg_m3": 5.036695432664438,
+                "um": 0.16261042915556398
+              }
+            ],
+            "steady_kg": 53928281872.00442,
+            "steady_mg_m3": 5.036695432664436,
+            "steady_um": 0.1626104291555639
+          }
+        ],
+        "earth_ocean_low": [
+          {
+            "input_kg_yr": 5524740.780743891,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 551095191.9799343,
+                "buried_kg": 1378886.0944547467,
+                "unit_state": 0.9999999999999996,
+                "closed_form_kg": 551095191.9799336,
+                "mg_m3": 0.0514701848465453,
+                "um": 0.0016617222459658198
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 2728126717.9444942,
+                "buried_kg": 34243672.42745101,
+                "unit_state": 1.0,
+                "closed_form_kg": 2728126717.9445004,
+                "mg_m3": 0.25479660955291866,
+                "um": 0.00822614481671462
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 5388895747.225084,
+                "buried_kg": 135845033.51880768,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 5388895747.225082,
+                "mg_m3": 0.5033022684010933,
+                "um": 0.016249185394236886
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 24441366688.680477,
+                "buried_kg": 3182337215.038975,
+                "unit_state": 1.0,
+                "closed_form_kg": 24441366688.68048,
+                "mg_m3": 2.2827302427533853,
+                "um": 0.0736982708966677
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 43476322205.16019,
+                "buried_kg": 11771085602.27872,
+                "unit_state": 1.0,
+                "closed_form_kg": 43476322205.16019,
+                "mg_m3": 4.060522343350501,
+                "um": 0.13109454198200104
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 109750307403.59106,
+                "buried_kg": 442723770670.79816,
+                "unit_state": 1.0,
+                "closed_form_kg": 109750307403.59105,
+                "mg_m3": 10.25025928593781,
+                "um": 0.330931080452567
+              }
+            ],
+            "steady_kg": 110494815614.87782,
+            "steady_mg_m3": 10.31979350763375,
+            "steady_um": 0.33317600270012754
+          },
+          {
+            "input_kg_yr": 53928281.87200442,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 5379368558.790305,
+                "buried_kg": 13459628.41013699,
+                "unit_state": 1.0,
+                "closed_form_kg": 5379368558.7902975,
+                "mg_m3": 0.5024124654107167,
+                "um": 0.01622045797800467
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 26629880471.61323,
+                "buried_kg": 334260464.3889755,
+                "unit_state": 1.0,
+                "closed_form_kg": 26629880471.613293,
+                "mg_m3": 2.487129066379599,
+                "um": 0.080297316019229
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 52602266851.707344,
+                "buried_kg": 1326015020.2970674,
+                "unit_state": 1.0,
+                "closed_form_kg": 52602266851.707344,
+                "mg_m3": 4.912850697313395,
+                "um": 0.15861208424205447
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 238577874407.83856,
+                "buried_kg": 31063534952.1835,
+                "unit_state": 0.9999999999999991,
+                "closed_form_kg": 238577874407.8386,
+                "mg_m3": 22.282261712264095,
+                "um": 0.7193859918726705
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 424382509820.1744,
+                "buried_kg": 114900308899.86958,
+                "unit_state": 0.9999999999999982,
+                "closed_form_kg": 424382509820.17456,
+                "mg_m3": 39.63570458237734,
+                "um": 1.279644365673705
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 1071298319339.9703,
+                "buried_kg": 4321529867860.435,
+                "unit_state": 0.9999999999999858,
+                "closed_form_kg": 1071298319339.9822,
+                "mg_m3": 100.05516891577102,
+                "um": 3.230295374048267
+              }
+            ],
+            "steady_kg": 1078565637440.0884,
+            "steady_mg_m3": 100.73390865328872,
+            "steady_um": 3.252208583111278
+          }
+        ],
+        "earth_ocean_high": [
+          {
+            "input_kg_yr": 5524740.780743891,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 552197933.0913498,
+                "buried_kg": 276144.9830393323,
+                "unit_state": 1.0,
+                "closed_form_kg": 552197933.0913332,
+                "mg_m3": 0.05157317665207807,
+                "um": 0.0016650473510711587
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 2755475959.899672,
+                "buried_kg": 6894430.4722737335,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 2755475959.8996687,
+                "mg_m3": 0.25735092423272654,
+                "um": 0.0083086112298291
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 5497208926.11528,
+                "buried_kg": 27531854.628610756,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 5497208926.115252,
+                "mg_m3": 0.5134183053760599,
+                "um": 0.016575783088269513
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 26944478736.12542,
+                "buried_kg": 679225167.5940382,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 26944478736.125416,
+                "mg_m3": 2.5165113420054666,
+                "um": 0.08124592697118443
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 52574859737.76173,
+                "buried_kg": 2672548069.677187,
+                "unit_state": 1.0,
+                "closed_form_kg": 52574859737.76176,
+                "mg_m3": 4.910290977610845,
+                "um": 0.15852944332701122
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 349230222970.6755,
+                "buried_kg": 203243855103.71417,
+                "unit_state": 1.0000000000000016,
+                "closed_form_kg": 349230222970.67505,
+                "mg_m3": 32.61676819520388,
+                "um": 1.0530370050753497
+              }
+            ],
+            "steady_kg": 552474078074.3892,
+            "steady_mg_m3": 51.59896753816876,
+            "steady_um": 1.665880013500638
+          },
+          {
+            "input_kg_yr": 53928281.87200442,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 5390132671.686885,
+                "buried_kg": 2695515.513558597,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 5390132671.686721,
+                "mg_m3": 0.5034177924187523,
+                "um": 0.016252915103595025
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 26896842793.951527,
+                "buried_kg": 67298142.05068494,
+                "unit_state": 1.0,
+                "closed_form_kg": 26896842793.951492,
+                "mg_m3": 2.512062327053583,
+                "um": 0.08110228989002334
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 53659537024.81706,
+                "buried_kg": 268744847.18735594,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 53659537024.81678,
+                "mg_m3": 5.011595690981707,
+                "um": 0.16180008042169908
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 263011334258.5367,
+                "buried_kg": 6630075101.485336,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 263011334258.53674,
+                "mg_m3": 24.564253486566972,
+                "um": 0.7930604212102722
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 513195454382.44946,
+                "buried_kg": 26087364337.59458,
+                "unit_state": 0.9999999999999996,
+                "closed_form_kg": 513195454382.44995,
+                "mg_m3": 47.93049419388373,
+                "um": 1.5474428292724134
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 3408917567359.5425,
+                "buried_kg": 1983910619840.9019,
+                "unit_state": 1.0,
+                "closed_form_kg": 3408917567359.541,
+                "mg_m3": 318.37987315450886,
+                "um": 10.278939534916667
+              }
+            ],
+            "steady_kg": 5392828187200.442,
+            "steady_mg_m3": 503.66954326644367,
+            "steady_um": 16.26104291555639
+          }
+        ]
+      },
+      "lakes_pass_dissolved": {
+        "box_model": [
+          {
+            "input_kg_yr": 70200000.0,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 6680413253.875638,
+                "buried_kg": 339586746.124362,
+                "unit_state": 1.0,
+                "closed_form_kg": 6680413253.875642,
+                "mg_m3": 0.6239250678144362,
+                "um": 0.02014350964726662
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 27621547688.17314,
+                "buried_kg": 7478452311.826866,
+                "unit_state": 1.0000000000000009,
+                "closed_form_kg": 27621547688.173134,
+                "mg_m3": 2.5797469946166793,
+                "um": 0.08328749901907016
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 44374863229.76479,
+                "buried_kg": 25825136770.23526,
+                "unit_state": 1.0000000000000018,
+                "closed_form_kg": 44374863229.76475,
+                "mg_m3": 4.14444264115322,
+                "um": 0.1338039207449222
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 69726996120.66405,
+                "buried_kg": 281273003879.33527,
+                "unit_state": 0.999999999999998,
+                "closed_form_kg": 69726996120.6642,
+                "mg_m3": 6.51223496657833,
+                "um": 0.21024843309157132
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 70196812924.93048,
+                "buried_kg": 631803187075.0679,
+                "unit_state": 0.9999999999999976,
+                "closed_form_kg": 70196812924.93068,
+                "mg_m3": 6.556114060628722,
+                "um": 0.21166507589038294
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 70199999999.98465,
+                "buried_kg": 6949799999999.252,
+                "unit_state": 0.9999999999997786,
+                "closed_form_kg": 70200000000.0,
+                "mg_m3": 6.556411721258946,
+                "um": 0.21167468590620991
+              }
+            ],
+            "steady_kg": 70200000000.0,
+            "steady_mg_m3": 6.556411721260379,
+            "steady_um": 0.21167468590625618
+          },
+          {
+            "input_kg_yr": 187200000.0,
+            "tau_yr": 1000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 17814435343.668365,
+                "buried_kg": 905564656.3316319,
+                "unit_state": 1.0,
+                "closed_form_kg": 17814435343.668377,
+                "mg_m3": 1.6638001808384961,
+                "um": 0.0537160257260443
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 73657460501.79501,
+                "buried_kg": 19942539498.20497,
+                "unit_state": 0.9999999999999999,
+                "closed_form_kg": 73657460501.79503,
+                "mg_m3": 6.87932531897781,
+                "um": 0.22209999738418706
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 118332968612.70598,
+                "buried_kg": 68867031387.29399,
+                "unit_state": 0.9999999999999993,
+                "closed_form_kg": 118332968612.706,
+                "mg_m3": 11.051847043075242,
+                "um": 0.3568104553197921
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 185938656321.77335,
+                "buried_kg": 750061343678.2334,
+                "unit_state": 1.0000000000000142,
+                "closed_form_kg": 185938656321.7712,
+                "mg_m3": 17.365959910875784,
+                "um": 0.5606624882441978
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 187191501133.15326,
+                "buried_kg": 1684808498866.8735,
+                "unit_state": 1.0000000000000284,
+                "closed_form_kg": 187191501133.14847,
+                "mg_m3": 17.482970828343756,
+                "um": 0.5644402023743706
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 187200000000.03372,
+                "buried_kg": 18532800000001.703,
+                "unit_state": 1.000000000000181,
+                "closed_form_kg": 187200000000.0,
+                "mg_m3": 17.483764590030827,
+                "um": 0.5644658290834514
+              }
+            ],
+            "steady_kg": 187200000000.0,
+            "steady_mg_m3": 17.483764590027675,
+            "steady_um": 0.5644658290833497
+          }
+        ],
+        "earth_ocean_low": [
+          {
+            "input_kg_yr": 70200000.0,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 7002479213.474033,
+                "buried_kg": 17520786.525967952,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 7002479213.474023,
+                "mg_m3": 0.6540047976225544,
+                "um": 0.02111463800679778
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 34664883512.22093,
+                "buried_kg": 435116487.77906674,
+                "unit_state": 1.0,
+                "closed_form_kg": 34664883512.22101,
+                "mg_m3": 3.2375676435277914,
+                "um": 0.10452533232801031
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 68473888000.997536,
+                "buried_kg": 1726111999.0024688,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 68473888000.99752,
+                "mg_m3": 6.395199457122659,
+                "um": 0.20646992500557432
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 310563700567.7477,
+                "buried_kg": 40436299432.25244,
+                "unit_state": 1.0,
+                "closed_form_kg": 310563700567.74756,
+                "mg_m3": 29.00546277208518,
+                "um": 0.9364454953214044
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 552430953763.4629,
+                "buried_kg": 149569046236.53735,
+                "unit_state": 1.0,
+                "closed_form_kg": 552430953763.4626,
+                "mg_m3": 51.5949398923336,
+                "um": 1.6657499803814038
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 1394539922413.3,
+                "buried_kg": 5625460077586.75,
+                "unit_state": 1.0000000000000142,
+                "closed_form_kg": 1394539922413.284,
+                "mg_m3": 130.2446993315684,
+                "um": 4.204968661831485
+              }
+            ],
+            "steady_kg": 1404000000000.0,
+            "steady_mg_m3": 131.12823442520758,
+            "steady_um": 4.233493718125124
+          },
+          {
+            "input_kg_yr": 187200000.0,
+            "tau_yr": 20000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 18673277902.597416,
+                "buried_kg": 46722097.40258119,
+                "unit_state": 0.9999999999999996,
+                "closed_form_kg": 18673277902.597393,
+                "mg_m3": 1.7440127936601444,
+                "um": 0.05630570135146072
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 92439689365.92249,
+                "buried_kg": 1160310634.0775113,
+                "unit_state": 1.0,
+                "closed_form_kg": 92439689365.92268,
+                "mg_m3": 8.633513716074113,
+                "um": 0.2787342195413609
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 182597034669.32672,
+                "buried_kg": 4602965330.673249,
+                "unit_state": 1.0,
+                "closed_form_kg": 182597034669.32672,
+                "mg_m3": 17.053865218993757,
+                "um": 0.5505864666815314
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 828169868180.6606,
+                "buried_kg": 107830131819.33986,
+                "unit_state": 1.0000000000000009,
+                "closed_form_kg": 828169868180.6602,
+                "mg_m3": 77.34790072556049,
+                "um": 2.4971879875237453
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 1473149210035.902,
+                "buried_kg": 398850789964.0998,
+                "unit_state": 1.0000000000000018,
+                "closed_form_kg": 1473149210035.9004,
+                "mg_m3": 137.58650637955634,
+                "um": 4.441999947683746
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 3718773126435.4185,
+                "buried_kg": 15001226873564.584,
+                "unit_state": 0.9999999999999967,
+                "closed_form_kg": 3718773126435.424,
+                "mg_m3": 347.31919821751114,
+                "um": 11.21324976488381
+              }
+            ],
+            "steady_kg": 3744000000000.0,
+            "steady_mg_m3": 349.6752918005535,
+            "steady_um": 11.289316581666995
+          }
+        ],
+        "earth_ocean_high": [
+          {
+            "input_kg_yr": 70200000.0,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 7016491169.70756,
+                "buried_kg": 3508830.2924415106,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 7016491169.707346,
+                "mg_m3": 0.6553134607861908,
+                "um": 0.02115688838335994
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 35012396067.37016,
+                "buried_kg": 87603932.62983975,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 35012396067.37012,
+                "mg_m3": 3.2700239881127713,
+                "um": 0.10557319003398886
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 69850167080.84026,
+                "buried_kg": 349832919.15973616,
+                "unit_state": 0.9999999999999998,
+                "closed_form_kg": 69850167080.83989,
+                "mg_m3": 6.523738663544401,
+                "um": 0.21061983158598827
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 342369440004.9876,
+                "buried_kg": 8630559995.012342,
+                "unit_state": 1.0,
+                "closed_form_kg": 342369440004.9876,
+                "mg_m3": 31.97599728561329,
+                "um": 1.0323496250278714
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 668041325387.5637,
+                "buried_kg": 33958674612.436203,
+                "unit_state": 1.0,
+                "closed_form_kg": 668041325387.5642,
+                "mg_m3": 62.392506781443615,
+                "um": 2.0143509647266615
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 4437486322976.476,
+                "buried_kg": 2582513677023.525,
+                "unit_state": 1.0,
+                "closed_form_kg": 4437486322976.475,
+                "mg_m3": 414.4442641153217,
+                "um": 13.380392074492208
+              }
+            ],
+            "steady_kg": 7020000000000.0,
+            "steady_mg_m3": 655.6411721260379,
+            "steady_um": 21.167468590625617
+          },
+          {
+            "input_kg_yr": 187200000.0,
+            "tau_yr": 100000.0,
+            "states": [
+              {
+                "year": 0.0,
+                "inventory_kg": 0.0,
+                "buried_kg": 0.0,
+                "unit_state": 1.0,
+                "closed_form_kg": 0.0,
+                "mg_m3": 0.0,
+                "um": 0.0
+              },
+              {
+                "year": 100.0,
+                "inventory_kg": 18710643119.22016,
+                "buried_kg": 9356880.779844029,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 18710643119.21959,
+                "mg_m3": 1.747502562096509,
+                "um": 0.056418369022293184
+              },
+              {
+                "year": 500.0,
+                "inventory_kg": 93366389512.9871,
+                "buried_kg": 233610487.01290601,
+                "unit_state": 1.0000000000000002,
+                "closed_form_kg": 93366389512.98697,
+                "mg_m3": 8.720063968300723,
+                "um": 0.2815285067573036
+              },
+              {
+                "year": 1000.0,
+                "inventory_kg": 186267112215.574,
+                "buried_kg": 932887784.4259629,
+                "unit_state": 0.9999999999999996,
+                "closed_form_kg": 186267112215.57303,
+                "mg_m3": 17.3966364361184,
+                "um": 0.5616528842293019
+              },
+              {
+                "year": 5000.0,
+                "inventory_kg": 912985173346.6339,
+                "buried_kg": 23014826653.36625,
+                "unit_state": 1.0000000000000004,
+                "closed_form_kg": 912985173346.6337,
+                "mg_m3": 85.2693260949688,
+                "um": 2.7529323334076583
+              },
+              {
+                "year": 10000.0,
+                "inventory_kg": 1781443534366.8376,
+                "buried_kg": 90556465633.16322,
+                "unit_state": 1.0000000000000009,
+                "closed_form_kg": 1781443534366.838,
+                "mg_m3": 166.38001808384973,
+                "um": 5.371602572604433
+              },
+              {
+                "year": 100000.0,
+                "inventory_kg": 11833296861270.598,
+                "buried_kg": 6886703138729.399,
+                "unit_state": 0.999999999999999,
+                "closed_form_kg": 11833296861270.6,
+                "mg_m3": 1105.184704307524,
+                "um": 35.68104553197921
+              }
+            ],
+            "steady_kg": 18720000000000.0,
+            "steady_mg_m3": 1748.3764590027677,
+            "steady_um": 56.44658290833498
+          }
+        ]
+      }
+    },
+    "delivered_lever": {
+      "box_model": {
+        "input_kg_yr": 0.0,
+        "tau_yr": 1000.0,
+        "states": [
+          {
+            "year": 0.0,
+            "inventory_kg": 746714902507.1176,
+            "buried_kg": 0.0,
+            "unit_state": 1.0,
+            "closed_form_kg": 746714902507.1176,
+            "mg_m3": 69.74031822275593,
+            "um": 2.2515761032722907
+          },
+          {
+            "year": 100.0,
+            "inventory_kg": 675655584393.5134,
+            "buried_kg": 71059318113.60403,
+            "unit_state": 1.0,
+            "closed_form_kg": 675655584393.5134,
+            "mg_m3": 63.103649473684655,
+            "um": 2.0373103077963663
+          },
+          {
+            "year": 500.0,
+            "inventory_kg": 452905482434.8968,
+            "buried_kg": 293809420072.22076,
+            "unit_state": 1.0,
+            "closed_form_kg": 452905482434.8968,
+            "mg_m3": 42.299641220217154,
+            "um": 1.3656499393109431
+          },
+          {
+            "year": 1000.0,
+            "inventory_kg": 274701061048.70645,
+            "buried_kg": 472013841458.41113,
+            "unit_state": 1.0,
+            "closed_form_kg": 274701061048.70645,
+            "mg_m3": 25.65602929490601,
+            "um": 0.8283085586267841
+          },
+          {
+            "year": 5000.0,
+            "inventory_kg": 5031325436.520229,
+            "buried_kg": 741683577070.5973,
+            "unit_state": 1.0,
+            "closed_form_kg": 5031325436.520229,
+            "mg_m3": 0.4699065678842838,
+            "um": 0.01517100044825608
+          },
+          {
+            "year": 10000.0,
+            "inventory_kg": 33900804.126423866,
+            "buried_kg": 746681001702.9911,
+            "unit_state": 1.0,
+            "closed_form_kg": 33900804.126423866,
+            "mg_m3": 0.0031662055489264625,
+            "um": 0.00010222139694345136
+          },
+          {
+            "year": 100000.0,
+            "inventory_kg": 2.7778361697534686e-32,
+            "buried_kg": 746714902507.1176,
+            "unit_state": 1.0,
+            "closed_form_kg": 2.7778361697534686e-32,
+            "mg_m3": 2.594392823805225e-42,
+            "um": 8.376034169965858e-44
+          }
+        ],
+        "steady_kg": 0.0,
+        "steady_mg_m3": 0.0,
+        "steady_um": 0.0
+      },
+      "earth_ocean_low": {
+        "input_kg_yr": 0.0,
+        "tau_yr": 20000.0,
+        "states": [
+          {
+            "year": 0.0,
+            "inventory_kg": 746714902507.1176,
+            "buried_kg": 0.0,
+            "unit_state": 1.0,
+            "closed_form_kg": 746714902507.1176,
+            "mg_m3": 69.74031822275593,
+            "um": 2.2515761032722907
+          },
+          {
+            "year": 100.0,
+            "inventory_kg": 742990646393.7291,
+            "buried_kg": 3724256113.3884463,
+            "unit_state": 1.0,
+            "closed_form_kg": 742990646393.7291,
+            "mg_m3": 69.39248693451098,
+            "um": 2.240346320607961
+          },
+          {
+            "year": 500.0,
+            "inventory_kg": 728278445874.4618,
+            "buried_kg": 18436456632.65573,
+            "unit_state": 1.0,
+            "closed_form_kg": 728278445874.4618,
+            "mg_m3": 68.01842363066402,
+            "um": 2.195984491207594
+          },
+          {
+            "year": 1000.0,
+            "inventory_kg": 710297186977.9521,
+            "buried_kg": 36417715529.16536,
+            "unit_state": 1.0,
+            "closed_form_kg": 710297186977.9521,
+            "mg_m3": 66.33904276752878,
+            "um": 2.141765440935261
+          },
+          {
+            "year": 5000.0,
+            "inventory_kg": 581542150803.6309,
+            "buried_kg": 165172751703.48666,
+            "unit_state": 1.0,
+            "closed_form_kg": 581542150803.6309,
+            "mg_m3": 54.313814443531285,
+            "um": 1.7535292323733223
+          },
+          {
+            "year": 10000.0,
+            "inventory_kg": 452905482434.8968,
+            "buried_kg": 293809420072.22076,
+            "unit_state": 1.0,
+            "closed_form_kg": 452905482434.8968,
+            "mg_m3": 42.299641220217154,
+            "um": 1.3656499393109431
+          },
+          {
+            "year": 100000.0,
+            "inventory_kg": 5031325436.520229,
+            "buried_kg": 741683577070.5973,
+            "unit_state": 1.0,
+            "closed_form_kg": 5031325436.520229,
+            "mg_m3": 0.4699065678842838,
+            "um": 0.01517100044825608
+          }
+        ],
+        "steady_kg": 0.0,
+        "steady_mg_m3": 0.0,
+        "steady_um": 0.0
+      },
+      "earth_ocean_high": {
+        "input_kg_yr": 0.0,
+        "tau_yr": 100000.0,
+        "states": [
+          {
+            "year": 0.0,
+            "inventory_kg": 746714902507.1176,
+            "buried_kg": 0.0,
+            "unit_state": 1.0,
+            "closed_form_kg": 746714902507.1176,
+            "mg_m3": 69.74031822275593,
+            "um": 2.2515761032722907
+          },
+          {
+            "year": 100.0,
+            "inventory_kg": 745968560837.6404,
+            "buried_kg": 746341669.4772409,
+            "unit_state": 1.0,
+            "closed_form_kg": 745968560837.6404,
+            "mg_m3": 69.67061276307182,
+            "um": 2.2493256525819016
+          },
+          {
+            "year": 500.0,
+            "inventory_kg": 742990646393.7291,
+            "buried_kg": 3724256113.3884463,
+            "unit_state": 1.0,
+            "closed_form_kg": 742990646393.7291,
+            "mg_m3": 69.39248693451098,
+            "um": 2.240346320607961
+          },
+          {
+            "year": 1000.0,
+            "inventory_kg": 739284965085.198,
+            "buried_kg": 7429937421.919589,
+            "unit_state": 1.0,
+            "closed_form_kg": 739284965085.198,
+            "mg_m3": 69.0463904620536,
+            "um": 2.229172546718331
+          },
+          {
+            "year": 5000.0,
+            "inventory_kg": 710297186977.9521,
+            "buried_kg": 36417715529.16536,
+            "unit_state": 1.0,
+            "closed_form_kg": 710297186977.9521,
+            "mg_m3": 66.33904276752878,
+            "um": 2.141765440935261
+          },
+          {
+            "year": 10000.0,
+            "inventory_kg": 675655584393.5134,
+            "buried_kg": 71059318113.60403,
+            "unit_state": 1.0,
+            "closed_form_kg": 675655584393.5134,
+            "mg_m3": 63.103649473684655,
+            "um": 2.0373103077963663
+          },
+          {
+            "year": 100000.0,
+            "inventory_kg": 274701061048.70645,
+            "buried_kg": 472013841458.41113,
+            "unit_state": 1.0,
+            "closed_form_kg": 274701061048.70645,
+            "mg_m3": 25.65602929490601,
+            "um": 0.8283085586267841
+          }
+        ],
+        "steady_kg": 0.0,
+        "steady_mg_m3": 0.0,
+        "steady_um": 0.0
+      }
+    },
+    "earth_ocean": {
+      "mean_mol_m3": 0.002251576103272291,
+      "mean_mg_m3": 69.74031822275593,
+      "mean_um": 2.2515761032722907
+    },
+    "delivered_at_earth_ocean_mean_kg": 746714902507.1176,
+    "water_residence_yr": 1478.8779303233166,
+    "discharge_m3_yr": 7240000000000.0,
+    "marking": "screen"
+  },
+  "gathering": {
+    "lakes": {
+      "kept_kg_yr": [
+        1406385279.9824796,
+        4003986494.3087864
+      ],
+      "particles_kg_yr": [
+        1340765265.2776165,
+        3828999788.4291515
+      ],
+      "g_m2_lake": [
+        0.35857026737745223,
+        1.0208514894708616
+      ],
+      "sediment_m3_yr": [
+        1575450742.3869212,
+        15951787040.42097
+      ],
+      "fill_time_yr": [
+        194876.28515368912,
+        1973165.4671032175
+      ]
+    },
+    "sea_river_mouths": {
+      "particulate_kg_yr": [
+        50667422.512302004,
+        167547645.452983
+      ],
+      "largest_twelve_share": 0.7075328015343708
+    },
+    "shelves": {
+      "all_common_level_water": {
+        "area_km2": 10621024.793050455,
+        "under_50_m": 0.03739031760126801,
+        "under_200_m": 0.1438767755900462,
+        "deeper_than_1000_m": 0.371251265195337
+      },
+      "near_side_sea": {
+        "area_km2": 5288443.714768961,
+        "under_50_m": 0.03916751856057182,
+        "under_200_m": 0.16045651892749224,
+        "deeper_than_1000_m": 0.20276185583183068
+      },
+      "south_pole_aitken_sea": {
+        "area_km2": 2322832.7479742565,
+        "under_50_m": 0.007443211225810496,
+        "under_200_m": 0.0326532885873986,
+        "deeper_than_1000_m": 0.798382948695874
+      }
+    },
+    "design_waters_chlorophyll_mg_m3": {
+      "open_sea": [
+        0.03,
+        0.3
+      ],
+      "productive_coast": [
+        0.5,
+        8.0
+      ],
+      "river_mouth": [
+        1.0,
+        20.0
+      ]
+    },
+    "marking": "screen"
+  },
+  "people": {
+    "diet": "plant_rich",
+    "eaten_kg_per_person": [
+      0.44,
+      0.6
+    ],
+    "food_loss_share": [
+      0.25,
+      0.33
+    ],
+    "excreta_return": [
+      0.6,
+      0.9
+    ],
+    "waste_return": [
+      0.5,
+      0.9
+    ],
+    "systems": {
+      "field_crops": {
+        "efficiency": [
+          0.5,
+          0.9
+        ],
+        "per_person_kg": {
+          "best": {
+            "eaten": 0.44,
+            "harvested": 0.5866666666666667,
+            "applied": 0.6518518518518518,
+            "food_waste": 0.14666666666666667,
+            "returned": 0.528,
+            "unrecovered_on_farms": 0.06518518518518512,
+            "lost_from_towns": 0.05866666666666665,
+            "new": 0.12385185185185177
+          },
+          "worst": {
+            "eaten": 0.6,
+            "harvested": 0.8955223880597015,
+            "applied": 1.791044776119403,
+            "food_waste": 0.29552238805970155,
+            "returned": 0.5077611940298508,
+            "unrecovered_on_farms": 0.8955223880597015,
+            "lost_from_towns": 0.38776119402985076,
+            "new": 1.2832835820895523
+          }
+        },
+        "new_per_billion_kg": [
+          123851851.85185176,
+          1283283582.0895524
+        ],
+        "new_share_of_land_loss_per_billion": [
+          0.02977207977207975,
+          0.8729820286323485
+        ],
+        "new_for_working_range_kg": [
+          495407407.40740705,
+          10266268656.71642
+        ]
+      },
+      "hydroponics": {
+        "efficiency": [
+          0.8,
+          0.95
+        ],
+        "per_person_kg": {
+          "best": {
+            "eaten": 0.44,
+            "harvested": 0.5866666666666667,
+            "applied": 0.6175438596491228,
+            "food_waste": 0.14666666666666667,
+            "returned": 0.528,
+            "unrecovered_on_farms": 0.03087719298245617,
+            "lost_from_towns": 0.05866666666666665,
+            "new": 0.08954385964912281
+          },
+          "worst": {
+            "eaten": 0.6,
+            "harvested": 0.8955223880597015,
+            "applied": 1.1194029850746268,
+            "food_waste": 0.29552238805970155,
+            "returned": 0.5077611940298508,
+            "unrecovered_on_farms": 0.22388059701492524,
+            "lost_from_towns": 0.38776119402985076,
+            "new": 0.611641791044776
+          }
+        },
+        "new_per_billion_kg": [
+          89543859.64912282,
+          611641791.044776
+        ],
+        "new_share_of_land_loss_per_billion": [
+          0.02152496626180837,
+          0.416082851050868
+        ],
+        "new_for_working_range_kg": [
+          358175438.5964913,
+          4893134328.358208
+        ]
+      },
+      "aquaponics": {
+        "efficiency": [
+          0.9175,
+          0.9450000000000001
+        ],
+        "per_person_kg": {
+          "best": {
+            "eaten": 0.44,
+            "harvested": 0.5866666666666667,
+            "applied": 0.6208112874779541,
+            "food_waste": 0.14666666666666667,
+            "returned": 0.528,
+            "unrecovered_on_farms": 0.03414462081128744,
+            "lost_from_towns": 0.05866666666666665,
+            "new": 0.09281128747795409
+          },
+          "worst": {
+            "eaten": 0.6,
+            "harvested": 0.8955223880597015,
+            "applied": 0.9760461995201106,
+            "food_waste": 0.29552238805970155,
+            "returned": 0.5077611940298508,
+            "unrecovered_on_farms": 0.0805238114604091,
+            "lost_from_towns": 0.38776119402985076,
+            "new": 0.46828500549025986
+          }
+        },
+        "new_per_billion_kg": [
+          92811287.47795409,
+          468285005.4902599
+        ],
+        "new_share_of_land_loss_per_billion": [
+          0.022310405643738963,
+          0.3185612282246666
+        ],
+        "new_for_working_range_kg": [
+          371245149.91181636,
+          3746280043.922079
+        ]
+      }
+    },
+    "aquaponic_feed_p": {
+      "fish_and_other": 0.2799999999999999,
+      "soluble": 0.17,
+      "sludge": 0.55,
+      "mineralised": [
+        0.85,
+        0.9
+      ],
+      "efficiency_sludge_discarded": 0.44999999999999996
+    },
+    "ecology_design_target": {
+      "lost_kg_per_person": [
+        0.044,
+        0.18
+      ],
+      "per_billion_kg": [
+        44000000.0,
+        180000000.0
+      ],
+      "share_of_land_loss_per_billion": [
+        0.010576923076923078,
+        0.12244897959183673
+      ],
+      "for_working_range_kg": [
+        176000000.0,
+        1440000000.0
+      ],
+      "town_return_needed_at_low_end": 0.925
+    },
+    "earth_practice_lost_kg_per_person": [
+      1.76,
+      2.4
+    ],
+    "excreta_per_billion_kg": [
+      440000000.0,
+      600000000.0
+    ],
+    "working_range_people": [
+      4000000000.0,
+      8000000000.0
+    ],
+    "cropland_km2_per_billion": [
+      139000.0,
+      393000.0
+    ],
+    "recirculation_p_saving": [
+      0.029,
+      0.176
+    ],
+    "pending_binding": {
+      "branch": "domain/provisioning",
+      "status": "being built",
+      "replaces": [
+        "people.systems.*.efficiency",
+        "people.food_loss_share",
+        "people.waste_return",
+        "people.excreta_return",
+        "the shares of each system in the diet"
+      ],
+      "rule": "Bind the study's per-system P applied, recovered and lost per person; the ledger and routes then follow."
+    },
+    "marking": "screen"
+  },
+  "routes": {
+    "need_for_working_range_kg": [
+      176000000.0,
+      1440000000.0
+    ],
+    "ceiling_share": 0.3,
+    "bioavailable_input_kg_yr": {
+      "seas": {
+        "base": [
+          4579985.2951369025,
+          12213294.120365072
+        ],
+        "with_particle_release": [
+          5524740.780743891,
+          53928281.87200442
+        ]
+      },
+      "lakes": {
+        "base": [
+          65620014.7048631,
+          174986705.87963492
+        ],
+        "with_particle_release": [
+          140638527.99824795,
+          1201195948.292636
+        ]
+      }
+    },
+    "waters_life_ceiling_kg_yr": {
+      "base": [
+        21060000.0,
+        56160000.0
+      ],
+      "with_particle_release": [
+        43848980.63369755,
+        376537269.0493921
+      ]
+    },
+    "dredging": {
+      "supply_kg_yr": {
+        "lake_delta_particles": [
+          1340765265.2776165,
+          3828999788.4291515
+        ],
+        "lake_floors_from_solution": [
+          65620014.7048631,
+          174986705.87963492
+        ],
+        "sea_mouth_particles": [
+          50667422.512302004,
+          167547645.452983
+        ]
+      },
+      "sediment_kg_per_kg_p": [
+        449.2794082829748,
+        2083.022711130156
+      ],
+      "volume_m3_per_kg_p": [
+        0.2995196055219832,
+        4.1660454222603125
+      ],
+      "fuel_kg_per_m3": [
+        0.41,
+        1.15
+      ],
+      "fuel_mj_per_kg_p": [
+        5.280530645352564,
+        206.01094613077242
+      ],
+      "lift_mj_per_kg_p_per_km": [
+        0.7297280957832801,
+        3.3832848077224806
+      ],
+      "for_working_range": {
+        "p_kg_yr": [
+          176000000.0,
+          1440000000.0
+        ],
+        "sediment_kg_yr": [
+          79073175857.80357,
+          2999552704027.425
+        ],
+        "volume_m3_yr": [
+          52715450.571869045,
+          5999105408.05485
+        ],
+        "fuel_power_w": [
+          29450065.70785013,
+          9400453850.366072
+        ],
+        "need_over_lake_delta_particles": [
+          0.045965006457261794,
+          1.0740135035507772
+        ]
+      },
+      "marking": "derived"
+    },
+    "seaweed": {
+      "uptake_kg_p_m2_yr": 0.0075968,
+      "harvest_kg_dry_m2_yr": 1.60368,
+      "dry_kg_per_kg_p": [
+        192.30769230769232,
+        294.11764705882354
+      ],
+      "ceiling_kg_yr": {
+        "seas": {
+          "base": [
+            1373995.5885410707,
+            3663988.2361095217
+          ],
+          "with_particle_release": [
+            1657422.2342231674,
+            16178484.561601326
+          ]
+        },
+        "lakes": {
+          "base": [
+            19686004.41145893,
+            52496011.763890475
+          ],
+          "with_particle_release": [
+            42191558.39947438,
+            360358784.48779076
+          ]
+        }
+      },
+      "minimum_area_m2_at_ceiling": {
+        "seas": {
+          "base": [
+            180865046.93306008,
+            482306791.8214935
+          ],
+          "with_particle_release": [
+            218173735.54959553,
+            2129644661.1206462
+          ]
+        },
+        "lakes": {
+          "base": [
+            2591354835.1225424,
+            6910279560.326779
+          ],
+          "with_particle_release": [
+            5553859309.113625,
+            47435602423.097984
+          ]
+        }
+      },
+      "minimum_area_m2_for_working_range": [
+        23167649536.64701,
+        189553496208.93008
+      ],
+      "marking": "derived"
+    },
+    "fish": {
+      "fish_kg_per_kg_p": 166.66666666666666,
+      "fuel_l_per_kg_p": [
+        7.0,
+        89.83333333333333
+      ],
+      "fishing_fuel_l_per_t": {
+        "small_pelagic": 42.0,
+        "world_mean": 489.0,
+        "demersal_fish": 539.0,
+        "crustaceans": 1739.0
+      },
+      "fuel_mj_per_kg_p": [
+        246.81999999999996,
+        3264.0941666666668
+      ],
+      "ceiling_kg_yr": {
+        "seas": {
+          "base": [
+            1373995.5885410707,
+            3663988.2361095217
+          ],
+          "with_particle_release": [
+            1657422.2342231674,
+            16178484.561601326
+          ]
+        },
+        "lakes": {
+          "base": [
+            19686004.41145893,
+            52496011.763890475
+          ],
+          "with_particle_release": [
+            42191558.39947438,
+            360358784.48779076
+          ]
+        }
+      },
+      "catch_kg_yr_at_ceiling": {
+        "seas": {
+          "base": [
+            228999264.75684512,
+            610664706.0182536
+          ],
+          "with_particle_release": [
+            276237039.03719455,
+            2696414093.6002207
+          ]
+        },
+        "lakes": {
+          "base": [
+            3281000735.2431545,
+            8749335293.981745
+          ],
+          "with_particle_release": [
+            7031926399.912396,
+            60059797414.63179
+          ]
+        }
+      },
+      "catch_kg_yr_for_working_range": [
+        29333333333.333332,
+        240000000000.0
+      ],
+      "world_landings_kg_yr": 81000000000.0,
+      "marking": "derived"
+    },
+    "sorption": {
+      "by_case": {
+        "dissolved_after_lakes": {
+          "at_1000_years": [
+            {
+              "mg_m3": 0.27039154349031463,
+              "water_m3_per_kg_p": [
+                4109267.2380521805,
+                7396681.028493924
+              ],
+              "pumping_mj_per_kg_p": [
+                5870.381768645972,
+                105666.87183562749
+              ],
+              "minimum_work_mj_per_kg_p": 1.4637255588023237,
+              "km3_per_tg": 3698340.514246962
+            },
+            {
+              "mg_m3": 1.1126275203452713,
+              "water_m3_per_kg_p": [
+                998637.0917432549,
+                1797546.765137859
+              ],
+              "pumping_mj_per_kg_p": [
+                1426.6244167760785,
+                25679.239501969412
+              ],
+              "minimum_work_mj_per_kg_p": 1.3521423442333749,
+              "km3_per_tg": 898773.3825689295
+            }
+          ],
+          "ceiling_kg_yr": [
+            1373995.5885410707,
+            3663988.2361095217
+          ]
+        },
+        "lakes_pass_dissolved": {
+          "at_1000_years": [
+            {
+              "mg_m3": 4.14444264115322,
+              "water_m3_per_kg_p": [
+                268096.6313969631,
+                482573.9365145336
+              ],
+              "pumping_mj_per_kg_p": [
+                382.9951877099473,
+                6893.9133787790515
+              ],
+              "minimum_work_mj_per_kg_p": 1.2484127074409286,
+              "km3_per_tg": 241286.9682572668
+            },
+            {
+              "mg_m3": 17.053865218993757,
+              "water_m3_per_kg_p": [
+                65153.03697097419,
+                117275.46654775356
+              ],
+              "pumping_mj_per_kg_p": [
+                93.0757671013917,
+                1675.363807825051
+              ],
+              "minimum_work_mj_per_kg_p": 1.1368294928719793,
+              "km3_per_tg": 58637.73327387678
+            }
+          ],
+          "ceiling_kg_yr": [
+            21060000.0,
+            56160000.0
+          ]
+        }
+      },
+      "earth_ocean_mean": {
+        "mg_m3": 69.74031822275593,
+        "water_m3_per_kg_p": [
+          15932.119890278344,
+          28677.81580250102
+        ],
+        "pumping_mj_per_kg_p": [
+          22.76017127182621,
+          409.68308289287165
+        ],
+        "minimum_work_mj_per_kg_p": 1.025735868643132,
+        "km3_per_tg": 14338.90790125051
+      },
+      "kelvin": 293.84999999999997,
+      "pump_efficiency": 0.7,
+      "marking": "derived"
+    },
+    "wastewater": {
+      "recoverable_per_billion_kg": [
+        264000000.0,
+        540000000.0
+      ],
+      "struvite_kg_per_kg_p": 7.922903080002583,
+      "magnesium_kg_per_kg_p": 0.7846903854846,
+      "magnesium_per_billion_kg": [
+        207158261.7679344,
+        423732808.16168404
+      ],
+      "marking": "derived"
+    }
+  },
+  "distribution": {
+    "carrier_kg_per_kg_p": {
+      "sediment": [
+        449.2794082829748,
+        2083.022711130156
+      ],
+      "seaweed_dry": [
+        192.30769230769232,
+        294.11764705882354
+      ],
+      "fish": [
+        166.66666666666666,
+        166.66666666666666
+      ],
+      "struvite": [
+        7.922903080002583,
+        7.922903080002583
+      ],
+      "p2o5": [
+        2.291324982243172,
+        2.291324982243172
+      ]
+    },
+    "lift_mj_per_kg_p_per_km": {
+      "sediment": [
+        0.7297280957832801,
+        3.3832848077224806
+      ],
+      "seaweed_dry": [
+        0.3123497839540025,
+        0.477711434282592
+      ],
+      "fish": [
+        0.27070314609346874,
+        0.27070314609346874
+      ],
+      "struvite": [
+        0.012868528739701998,
+        0.012868528739701998
+      ],
+      "p2o5": [
+        0.0037216132884947293,
+        0.0037216132884947293
+      ]
+    },
+    "land_reach": {
+      "within_50_km": 0.5014,
+      "within_100_km": 0.723,
+      "within_500_km": 0.959,
+      "median_km_any_water": 49.76,
+      "median_km_sea": 475.8
+    },
+    "tonne_km_per_kg_p_at_median_reach": {
+      "sediment": [
+        22.35614335616083,
+        103.65121010583657
+      ],
+      "seaweed_dry": [
+        9.569230769230769,
+        14.63529411764706
+      ],
+      "fish": [
+        8.293333333333333,
+        8.293333333333333
+      ],
+      "struvite": [
+        0.3942436572609285,
+        0.3942436572609285
+      ],
+      "p2o5": [
+        0.11401633111642023,
+        0.11401633111642023
+      ]
+    },
+    "sediment_on_field_crops": {
+      "cropland_m2_per_person": [
+        139.0,
+        393.0
+      ],
+      "new_p_g_m2": [
+        0.31514466120064055,
+        9.232255986255772
+      ],
+      "sediment_kg_m2": [
+        0.14158800690776238,
+        19.230998894338114
+      ],
+      "sediment_mm": [
+        0.09439200460517493,
+        38.46199778867623
+      ]
+    },
+    "lake_shore_km": 791000.0,
+    "lakes": 27852,
+    "marking": "derived"
+  },
+  "natural_cycle": {
+    "flyers": {
+      "earth_seabirds_kg_yr": 99000000.0,
+      "earth_seabirds_share_of_loss": [
+        0.023798076923076922,
+        0.0673469387755102
+      ],
+      "albatross_scale_for_dissolved_loss": [
+        2000372.1402875688,
+        10668651.414867034
+      ],
+      "p_eaten_for_dissolved_loss_kg_yr": [
+        156110854.2241868,
+        832591222.5289965
+      ],
+      "p_eaten_over_lakes_dissolved_input": [
+        2.379012789410689,
+        4.75802557882138
+      ],
+      "p_eaten_for_earth_seabird_scale_kg_yr": [
+        220156332.88026342,
+        440312665.76052684
+      ]
+    },
+    "lake_insects": {
+      "lake_emergence_g_dry_m2": [
+        0.15,
+        3.7
+      ],
+      "p_kg_yr": [
+        3647648.534692624,
+        188657951.0953927
+      ],
+      "shore_strip_m2": [
+        79100000000.0,
+        158200000000.0
+      ],
+      "g_p_m2_on_strip": [
+        0.023057196805895224,
+        2.3850562717495913
+      ],
+      "myvatn_top_export_over_lakes_dissolved_input": [
+        0.5141838065361825,
+        2.875006230094783
+      ]
+    },
+    "run_fish": {
+      "fish_kg_per_kg_p": 166.66666666666666,
+      "fish_kg_yr_for_tenth_of_dissolved": [
+        1170000000.0,
+        3120000000.0
+      ]
+    },
+    "aerophyte_falls_kg_yr_at_1pct": [
+      1034942.5770022554,
+      20161130.160623968
+    ],
+    "litter_kg_yr_forest_floor_pools": [
+      3293880.4096615314,
+      11815701.074586958
+    ],
+    "land_share_of_routes": 0.749467425448709,
+    "return_ceiling_kg_yr": [
+      70200000.0,
+      187200000.0
+    ],
+    "return_ceiling_share_of_loss": [
+      0.045,
+      0.04775510204081632
+    ],
+    "return_ceiling_with_particle_release_kg_yr": [
+      146163268.77899185,
+      1255124230.1646404
+    ],
+    "decent": {
+      "kept_shares": {
+        "30x30": 0.3,
+        "half": 0.5
+      },
+      "wild_dissolved_loss_kg_yr": [
+        21060000.0,
+        93600000.0
+      ],
+      "albatross_scale_flyers": [
+        600111.6420862706,
+        5334325.707433517
+      ],
+      "lake_emergence_share_of_myvatn_top": [
+        0.11163059853942363,
+        1.0402851476792165
+      ],
+      "extraction_from_deposits_kg_yr": [
+        176000000.0,
+        1440000000.0
+      ],
+      "harvest_ceiling_share": 0.3
+    },
+    "sharing": {
+      "lakes": {
+        "low_base_30x30": {
+          "bioavailable_kg_yr": 65620014.7048631,
+          "carriers_kg_yr": 21060000.0,
+          "harvest_ceiling_kg_yr": 19686004.41145893,
+          "left_to_food_webs_and_burial_kg_yr": 24874010.293404173,
+          "left_share": 0.3790613337299475
+        },
+        "low_base_half": {
+          "bioavailable_kg_yr": 65620014.7048631,
+          "carriers_kg_yr": 35100000.0,
+          "harvest_ceiling_kg_yr": 19686004.41145893,
+          "left_to_food_webs_and_burial_kg_yr": 10834010.293404173,
+          "left_share": 0.16510222288324577
+        },
+        "low_with_particle_release_30x30": {
+          "bioavailable_kg_yr": 140638527.99824795,
+          "carriers_kg_yr": 21060000.0,
+          "harvest_ceiling_kg_yr": 42191558.39947438,
+          "left_to_food_webs_and_burial_kg_yr": 77386969.59877357,
+          "left_share": 0.5502544053912285
+        },
+        "low_with_particle_release_half": {
+          "bioavailable_kg_yr": 140638527.99824795,
+          "carriers_kg_yr": 35100000.0,
+          "harvest_ceiling_kg_yr": 42191558.39947438,
+          "left_to_food_webs_and_burial_kg_yr": 63346969.59877357,
+          "left_share": 0.4504240089853808
+        },
+        "high_base_30x30": {
+          "bioavailable_kg_yr": 174986705.87963492,
+          "carriers_kg_yr": 56160000.0,
+          "harvest_ceiling_kg_yr": 52496011.763890475,
+          "left_to_food_webs_and_burial_kg_yr": 66330694.11574444,
+          "left_share": 0.37906133372994744
+        },
+        "high_base_half": {
+          "bioavailable_kg_yr": 174986705.87963492,
+          "carriers_kg_yr": 93600000.0,
+          "harvest_ceiling_kg_yr": 52496011.763890475,
+          "left_to_food_webs_and_burial_kg_yr": 28890694.11574444,
+          "left_share": 0.1651022228832457
+        },
+        "high_with_particle_release_30x30": {
+          "bioavailable_kg_yr": 1201195948.292636,
+          "carriers_kg_yr": 56160000.0,
+          "harvest_ceiling_kg_yr": 360358784.48779076,
+          "left_to_food_webs_and_burial_kg_yr": 784677163.8048451,
+          "left_share": 0.6532465955451938
+        },
+        "high_with_particle_release_half": {
+          "bioavailable_kg_yr": 1201195948.292636,
+          "carriers_kg_yr": 93600000.0,
+          "harvest_ceiling_kg_yr": 360358784.48779076,
+          "left_to_food_webs_and_burial_kg_yr": 747237163.8048451,
+          "left_share": 0.6220776592419898
+        }
+      },
+      "seas": {
+        "base": {
+          "bioavailable_kg_yr": [
+            4579985.2951369025,
+            12213294.120365072
+          ],
+          "harvest_ceiling_kg_yr": [
+            1373995.5885410707,
+            3663988.2361095217
+          ]
+        },
+        "with_particle_release": {
+          "bioavailable_kg_yr": [
+            5524740.780743891,
+            53928281.87200442
+          ],
+          "harvest_ceiling_kg_yr": [
+            1657422.2342231674,
+            16178484.561601326
+          ]
+        }
+      }
+    },
+    "marking": "derived"
+  },
+  "statements": {
+    "easy_route": {
+      "kept_by_lakes_share": [
+        0.9567246802601902,
+        0.9624967534396122
+      ],
+      "to_seas_share": [
+        0.03758327061730538,
+        0.04321176432051636
+      ],
+      "sea_mouth_deposits_kg_yr": [
+        50667422.512302004,
+        167547645.452983
+      ],
+      "farm_ceiling_kg_yr": {
+        "seas": {
+          "base": [
+            1373995.5885410707,
+            3663988.2361095217
+          ],
+          "with_particle_release": [
+            1657422.2342231674,
+            16178484.561601326
+          ]
+        },
+        "lakes": {
+          "base": [
+            19686004.41145893,
+            52496011.763890475
+          ],
+          "with_particle_release": [
+            42191558.39947438,
+            360358784.48779076
+          ]
+        }
+      }
+    },
+    "open_water": {
+      "earth_ocean_mg_m3": 69.74031822275593,
+      "km3_per_tg_at_earth_ocean": 14338.90790125051,
+      "river_flow_km3_yr": 7240.0,
+      "river_flows_per_tg": 1.9805121410567004,
+      "km3_per_tg_lunar_seas_1000_yr": {
+        "dissolved_after_lakes": [
+          898773.3825689295,
+          3698340.514246962
+        ],
+        "dissolved_after_lakes_and_dust": [
+          558681.1212035795,
+          1409799.222311803
+        ],
+        "dissolved_after_lakes_and_dust_top": [
+          35455.05909045153,
+          56092.9122715331
+        ],
+        "with_particle_release": [
+          203547.80993993013,
+          3065907.676736181
+        ],
+        "lakes_pass_dissolved": [
+          58637.73327387678,
+          241286.9682572668
+        ]
+      },
+      "river_flows_per_tg_lunar_seas_1000_yr": {
+        "dissolved_after_lakes": [
+          124.13996996808417,
+          510.8205130175362
+        ],
+        "dissolved_after_lakes_and_dust": [
+          77.16590071872645,
+          194.7236494905805
+        ],
+        "dissolved_after_lakes_and_dust_top": [
+          4.897107609178388,
+          7.747639816510097
+        ],
+        "with_particle_release": [
+          28.114338389493113,
+          423.4679111514062
+        ],
+        "lakes_pass_dissolved": [
+          8.099134430093478,
+          33.326929317302046
+        ]
+      },
+      "share_of_seas_volume_per_tg_1000_yr": {
+        "dissolved_after_lakes": [
+          0.08394199914860069,
+          0.34541087032508433
+        ],
+        "dissolved_after_lakes_and_dust": [
+          0.05217868164538517,
+          0.13166985962662212
+        ],
+        "dissolved_after_lakes_and_dust_top": [
+          0.0033113670227723035,
+          0.0052388636395542705
+        ],
+        "with_particle_release": [
+          0.019010587563063217,
+          0.2863440602287076
+        ],
+        "lakes_pass_dissolved": [
+          0.005476540195797514,
+          0.022535280724634257
+        ]
+      },
+      "teragram_over_dissolved_input": [
+        81.87799214075659,
+        218.34131237535087
+      ],
+      "seas_volume_km3": 10707076.215540811
+    },
+    "marking": "derived"
+  },
+  "ledger": {
+    "design_target": {
+      "corners": {
+        "low_loss_4_billion": {
+          "land_loss": 1470000000.0,
+          "people_losses": 176000000.0,
+          "into_waters": 1646000000.0,
+          "to_lakes": 1584137936.5639153,
+          "to_seas": 61862063.43608466,
+          "dredged_to_farms": 176000000.0,
+          "carriers_to_wild_land": 21060000.0,
+          "lake_burial": 1387077936.5639153,
+          "sea_burial": 61862063.43608466,
+          "closure_kg_yr": 0.0,
+          "dredged_share_of_lake_input": 0.111101436268709
+        },
+        "low_loss_8_billion": {
+          "land_loss": 1470000000.0,
+          "people_losses": 1440000000.0,
+          "into_waters": 2910000000.0,
+          "to_lakes": 2800632682.503641,
+          "to_seas": 109367317.49635866,
+          "dredged_to_farms": 1440000000.0,
+          "carriers_to_wild_land": 21060000.0,
+          "lake_burial": 1339572682.5036411,
+          "sea_burial": 109367317.49635866,
+          "closure_kg_yr": 0.0,
+          "dredged_share_of_lake_input": 0.5141695335472212
+        },
+        "high_loss_4_billion": {
+          "land_loss": 4160000000.0,
+          "people_losses": 176000000.0,
+          "into_waters": 4336000000.0,
+          "to_lakes": 4148633789.906241,
+          "to_seas": 187366210.09375894,
+          "dredged_to_farms": 176000000.0,
+          "carriers_to_wild_land": 93600000.0,
+          "lake_burial": 3879033789.906241,
+          "sea_burial": 187366210.09375894,
+          "closure_kg_yr": 0.0,
+          "dredged_share_of_lake_input": 0.04242360471252335
+        },
+        "high_loss_8_billion": {
+          "land_loss": 4160000000.0,
+          "people_losses": 1440000000.0,
+          "into_waters": 5600000000.0,
+          "to_lakes": 5358014119.805108,
+          "to_seas": 241985880.19489163,
+          "dredged_to_farms": 1440000000.0,
+          "carriers_to_wild_land": 93600000.0,
+          "lake_burial": 3824414119.805108,
+          "sea_burial": 241985880.19489163,
+          "closure_kg_yr": 0.0,
+          "dredged_share_of_lake_input": 0.2687562906333622
+        }
+      },
+      "dredged_share_of_lake_input": [
+        0.04242360471252335,
+        0.5141695335472212
+      ]
+    },
+    "field_crops_all_unrecovered_to_waters": {
+      "corners": {
+        "low_loss_4_billion": {
+          "land_loss": 1470000000.0,
+          "people_losses": 495407407.40740705,
+          "into_waters": 1965407407.407407,
+          "to_lakes": 1891540968.941558,
+          "to_seas": 73866438.46584915,
+          "dredged_to_farms": 495407407.40740705,
+          "carriers_to_wild_land": 21060000.0,
+          "lake_burial": 1375073561.5341508,
+          "sea_burial": 73866438.46584915,
+          "closure_kg_yr": 0.0,
+          "dredged_share_of_lake_input": 0.26190678158275377
+        },
+        "low_loss_8_billion": {
+          "land_loss": 1470000000.0,
+          "people_losses": 10266268656.71642,
+          "into_waters": 11736268656.71642,
+          "to_lakes": 11295181295.753647,
+          "to_seas": 441087360.9627723,
+          "dredged_to_farms": 10266268656.71642,
+          "carriers_to_wild_land": 21060000.0,
+          "lake_burial": 1007852639.0372276,
+          "sea_burial": 441087360.9627723,
+          "closure_kg_yr": 0.0,
+          "dredged_share_of_lake_input": 0.9089069389772397
+        },
+        "high_loss_4_billion": {
+          "land_loss": 4160000000.0,
+          "people_losses": 495407407.40740705,
+          "into_waters": 4655407407.407407,
+          "to_lakes": 4454239039.702532,
+          "to_seas": 201168367.70487496,
+          "dredged_to_farms": 495407407.40740705,
+          "carriers_to_wild_land": 93600000.0,
+          "lake_burial": 3865231632.295125,
+          "sea_burial": 201168367.70487496,
+          "closure_kg_yr": 0.0,
+          "dredged_share_of_lake_input": 0.11122155838329052
+        },
+        "high_loss_8_billion": {
+          "land_loss": 4160000000.0,
+          "people_losses": 10266268656.71642,
+          "into_waters": 14426268656.71642,
+          "to_lakes": 13802884135.497936,
+          "to_seas": 623384521.2184821,
+          "dredged_to_farms": 10266268656.71642,
+          "carriers_to_wild_land": 93600000.0,
+          "lake_burial": 3443015478.781517,
+          "sea_burial": 623384521.2184821,
+          "closure_kg_yr": 0.0,
+          "dredged_share_of_lake_input": 0.7437770654260488
+        }
+      },
+      "dredged_share_of_lake_input": [
+        0.11122155838329052,
+        0.9089069389772397
+      ]
+    },
+    "basis": "Steady state: people's losses join the land's in the waters and are dredged back from the lake deposits; carriers return the wild land's dissolved loss, 30% of the land kept wild at the low land loss and half at the high; every other P is buried. The field-crop case sends all P the crops do not recover to the waters, an upper bound while soils build stores."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "access_date": "2026-10-09",
+  "source_admission": "Primary scholarly papers and their publisher/institutional records were checked by web retrieval. No outside dataset or full paper is committed. Terrestrial observations motivate pathways and stoichiometric sensitivities; none validates a lunar cycle. The 0.0007–0.028 g P/m2/year deposition envelope is retained as a conversation/ecology scenario, not represented as a measured global lunar flux or an exact interval established by any one paper.",
+  "sources": [
+    {
+      "citation": "Mahowald et al. (2008), Global distribution of atmospheric phosphorus sources, concentrations and deposition rates, and anthropogenic impacts, Global Biogeochemical Cycles 22, GB4026",
+      "doi_or_url": "https://doi.org/10.1029/2008GB003240",
+      "use": "Atmospheric phosphorus comes principally from mineral dust and biogenic particles; donor ecosystems lose what receiving ecosystems gain. Soluble and total P are distinct. This motivates separate source, capture and availability terms, not a lunar rate.",
+      "access": "Publisher full text retrieved; abstract, sections 2.2.6 and 3.2, Table 4 and discussion of net source/deposition flux read. Model global source1.39 TgP/year for particles<10um; no lunar scaling of that total is claimed."
+    },
+    {
+      "citation": "Tipping et al. (2014), Atmospheric deposition of phosphorus to land and freshwater, Environmental Science: Processes & Impacts 16, 1608–1617",
+      "doi_or_url": "https://doi.org/10.1039/C3EM00641G",
+      "use": "Measured deposition compilation; total-P geometric mean0.027 g/m2/year; larger biogenic particles often redeposit near their sources. Supports terrestrial redistribution context, not total bioavailability or guaranteed aerial capture.",
+      "access": "Publisher-indexed abstract and institutional repository abstract retrieved in search; publisher open requests failed. Full text not read in this evaluation."
+    },
+    {
+      "citation": "Martiny et al. (2013), Strong latitudinal patterns in the elemental ratios of marine plankton and organic matter, Nature Geoscience 6, 279–283",
+      "doi_or_url": "https://doi.org/10.1038/ngeo1757",
+      "use": "Observed C:N:P molar ratios78:13:1,137:18:1,195:28:1 motivate a sensitivity around canonical106:16:1. The500:1 scenario is an additional hypothetical P-poor structural biomass case, not a measured aerial organism.",
+      "access": "Publisher abstract read; subscription full text not accessed."
+    },
+    {
+      "citation": "Ruttenberg and Berner (1993), Authigenic apatite formation and burial in sediments from non-upwelling, continental margin environments, Geochimica et Cosmochimica Acta 57, 991–1007",
+      "doi_or_url": "https://doi.org/10.1016/0016-7037(93)90035-U",
+      "use": "Porewater and sequential-extraction evidence for reactive phosphorus becoming sedimentary apatite. Justifies a separately tracked sediment reservoir; lunar rates and recovery costs remain assumptions.",
+      "access": "Publisher-indexed abstract read via search; full text not read."
+    },
+    {
+      "citation": "Egle, Rechberger, Krampe and Zessner (2016), Phosphorus recovery from municipal wastewater: An integrated comparative technological, environmental and economic assessment of P recovery technologies, Science of the Total Environment 571, 522–542",
+      "doi_or_url": "https://www.sciencedirect.com/science/article/pii/S0048969716314656",
+      "use": "Comparative technology assessment reports60–90% recovery relative to wastewater P for sludge-ash routes. It does not establish99–99.9% collection-to-aerial-delivery recovery; those are imposed sensitivities.",
+      "access": "Publisher-indexed abstract/search excerpt read; direct publisher open failed; full text not read."
+    }
+  ]
+}
