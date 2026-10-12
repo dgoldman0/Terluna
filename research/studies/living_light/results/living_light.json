@@ -3,7 +3,7 @@
  "producer": {
   "study": "living_light",
   "files": {
-   "research/studies/living_light/run.py": "13f3cc72b89f5beb0146251e21f2c7780f28ac3d84646a5799dbbe956d2ab39f"
+   "research/studies/living_light/run.py": "c325428531c5238bff990ea8a26a9581bc8075a57695aa1cdaddc70fad96da4e"
   },
   "imported_code": {
    "illumination/calendar/geometry.py": "462b9f7174efa4aec4b96b37b7e2a5ba3f1bdaed5e2db53ce7c14b311e8a26dd",
@@ -15,9 +15,9 @@
    "illumination/sky/results/solved_sky.json": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
    "illumination/aerosol/results/haze.json": "42d3739417a67c18da3ab7327ccb4517e26640e5d7a318ab5b114f5fd0cbf6fe",
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b18972bdaa506f48d8c25050c04b168090e3b4cd1ba07afea4",
-   "biosphere/canopy/results/plant.json": "4f09599901824e65e32adf0236d93efb5f589d567d9cb0be22ec574109cca78b",
-   "biosphere/ecology/results/people.json": "7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015",
-   "biosphere/ecology/results/taxa.json": "2f24aee609d3f94e6b0275db1370002a08efe69ccedefcee4757c9ab55a78fa7",
+   "biosphere/canopy/results/plant.json": "87cf08572ea40213f86dfd1e6b92908db8041159f5bdfc3a091c455627929926",
+   "biosphere/ecology/results/people.json": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
+   "biosphere/ecology/results/taxa.json": "b9814bd44a60f15638cb2c39381cce7686d9aae0cfcb6e3d3106462a306f0985",
    "research/studies/living_light/sources.json": "9c83c82166d3d9e10d251c978fac74543b072d4cd41ab7d16ace5d045b1b2292"
   },
   "cross_branch_inputs": {
@@ -32,16 +32,16 @@
    "research/studies/daily_life/results/daily_life.json": {
     "branch": "main",
     "commit": null,
-    "blob": "d51ed6855bdadb333bff9a74753016f74f0dee79",
-    "sha256": "9c21c92c54f19dc351bec855e1289da04c68021c7f5e14ac478514cacf22ee36",
+    "blob": "2ace65e65dc40d05d60fea6dfc332c2b2f70531c",
+    "sha256": "de64289da4914fed87c5cc94d2f3bef563b6c8a47f74ccd8d5ea153788175856",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "research/studies/ways_of_living/results/ways_of_living.json": {
     "branch": "main",
     "commit": null,
-    "blob": "f2b29ecec1566d67e0b6cad21a2038d3f68c8ea4",
-    "sha256": "ffe48e6467008176b9e89f7fb9b3afc5d63f0874fe3a86156a0aa81bac35d09d",
+    "blob": "18626be739ed81c89f591781f497468443a47f55",
+    "sha256": "b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    }

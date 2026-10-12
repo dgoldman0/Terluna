@@ -76,12 +76,12 @@ terawatt, so the runoff and heat rows below read as costs. How people live in ea
    Falkenmark et al. 1989); Earth reaches them at 26.8 and 45.5 billion. For scale, the average consumer's water
    footprint is 1,385 m³ a year and an American's 2,842 (Hoekstra & Mekonnen 2012). Rain-fed lakes cover 24% of the
    ground within 15° of the equator and 0.1% at 45–60° ([geography](../geography/README.md)). The seas and lakes
-   start fresh and freshen slowly, by the resources domain's first screen (branch `domain/resources`), so while
+   start fresh and freshen slowly, by the resources domain's first screen, so while
    they stay fresh, water drawn from them and returned supplies beyond the runoff; lifting it to the mean land
    height of 2,345 m takes 1.06 kWh/m³ (*screen*), before any desalination.
 8. **Food land is ample on the Moon by area, and its rain sets the rain-fed share; on Earth, food within planetary
    boundaries binds first.** The Moon's
-   23.4 million km² of dry land feeds 8.4–22 billion at the first screen's 131–341 m² a person if crops take
+   23.4 million km² of dry land feeds 8.2–21.5 billion at the first screen's 134–350 m² a person if crops take
    Earth's 12% share of land (*screen*); ruminants and flooded paddies are designed out, since methane lives for
    centuries in its air ([README](README.md#food)). Earth's 4.8 billion ha of farmland (FAO 2023) feeds 34–37
    billion on plant-rich diets of 0.13–0.14 ha a person and 4.4 billion on the American diet of 1.08 ha (*screen*;
@@ -124,7 +124,7 @@ At Europe's 3.7 kW, with industry in orbit and thermal plants for the rest (*scr
 | Heat, unanswered, at 0.1 K | 1.4–2.2 | American diets on today's farmland | 4.4 |
 | Runoff at the stress line, 1,700 m³ a person | 4.3 | Food within four planetary boundaries | 10.2 |
 | Runoff at the scarcity line, 1,000 m³ a person | 7.2 | Thermal plants at Flanner's 2100 level | 26.3 |
-| Crops on Earth's 12% share of land | 8.4–22 | Runoff at the stress line, 1,700 m³ a person | 26.8 |
+| Crops on Earth's 12% share of land | 8.2–21.5 | Runoff at the stress line, 1,700 m³ a person | 26.8 |
 | Heat answered by 1% more dimming | 26–41 | Plant-rich diets on today's farmland | 34–37 |
 
 The Moon's population at a warming of the planned climate, in billions, with industry in orbit (*screen*):
@@ -154,7 +154,7 @@ What each takes at Europe's 3.7 kW (*screen*):
 | Heat on the Moon, industry in orbit | 5.6 TW, 0.15 W/m² | 11 TW, 0.29 W/m² | 14 TW, 0.37 W/m² |
 | Added dimming to answer it | 0.05–0.08% | 0.10–0.15% | 0.12–0.19% |
 | Moon's runoff per person | 3,620 m³ | 1,810 m³ | 1,450 m³ |
-| Moon's dry land in crops | 1.1–2.9% | 2.2–5.8% | 2.8–7.3% |
+| Moon's dry land in crops | 1.1–3.0% | 2.3–6.0% | 2.9–7.5% |
 | Heat on Earth, thermal plants | 0.12 W/m², 0.09 K | 0.13 W/m², 0.10 K | 0.14 W/m², 0.11 K |
 | Earth against food within boundaries | 1.6 times | 1.8 times | 2.0 times |
 | Earth's runoff per person | 2,840 m³ | 2,530 m³ | 2,280 m³ |

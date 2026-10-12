@@ -28,7 +28,8 @@ The default destination is the already ignored `research/runs/megaforest_wind/`.
 It contains all 480 envelope cases, 3,360 imposed steady-load samples, 10 canopy
 boundary-value solutions, 36 beam-refinement cases, full configurations and
 source hashes. Compact reference cases and a check record are retained in
-`research/studies/megaforest_wind/results/`. Each case records the wind reference height.
+`research/studies/megaforest_wind/results/`, rerun on 12 October 2026 with the air
+and leaf area below. Each case records the wind reference height.
 The run is deterministic for a fixed numerical environment. A missing input is an
 error, and output paths inside `immersion/` are rejected.
 
@@ -41,7 +42,7 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.megaforest_wind.run \
 ```
 
 This command reads the supplied export; it neither rebuilds it nor runs the
-immersion team's generators. The current check record covers synthetic adapter
+immersion team's generators. The delivered check record covered synthetic adapter
 fixtures. An end-to-end run against a real A1 export remains pending because the
 referenced generated JSON is absent from the inspected Git tree.
 
@@ -63,11 +64,12 @@ constrained.
 
 ## Lower atmosphere
 
-The standalone atmosphere has surface pressure 121,590 Pa, temperature 288 K,
-and a dry N2/O2 mixture with oxygen mole fraction 0.175. Radius, GM and molecular
-constants follow the existing `atmosphere/thermal_column.py` lineage. These are
-scenario inputs. The baseline is isothermal; a prescribed lapse or inversion and
-a fixed vapor mixing ratio are available through `AirConfig`.
+The standalone atmosphere has surface pressure 121,590 Pa, temperature 294.9 K
+(the corrected design case's surface air, GCM run A28_dim5_moon), and a dry N2/O2
+mixture with oxygen mole fraction 0.175. Radius, GM and molecular constants follow
+the existing `atmosphere/thermal_column.py` lineage. These are scenario inputs. The
+baseline is isothermal; a prescribed lapse or inversion and a fixed vapor mixing
+ratio are available through `AirConfig`.
 
 The model integrates
 
@@ -97,8 +99,9 @@ The positive dimensionless mixing coefficient alpha is imposed. No prognostic
 turbulence closure, pressure-gradient forcing, buoyant convection or gust
 penetration is solved. The zero-wind solution is the zero-velocity limit.
 The baseline alpha is 0.04. Area density has a smooth crown distribution above
-0.4 Hc, with LAI 22 and an explicit frontal projection factor 0.3. The drag
-coefficient uses the displayed one-half convention.
+0.4 Hc, with LAI 6 (the canopy model's optimum, in `biosphere/canopy`) and an
+explicit frontal projection factor 0.3. The drag coefficient uses the displayed
+one-half convention.
 
 The numerical solve uses normalized speed and stress, retains variable air
 density, and checks that the integrated drag balances the difference in boundary
@@ -186,9 +189,9 @@ also change mass, branch size and root-tissue area under the declared allometry.
 Reducing frontal area at fixed LAI leaves its biological attainability unresolved.
 
 For the 300-m reference in uniform steady wind and the selected reference soil,
-the root threshold is about 23.55 m/s. The reconfiguring case reaches about
-40.42 m/s, the more porous crown about 30.73 m/s, and a 25% thicker trunk about
-23.56 m/s. All four first thresholds occur inside the stated displacement range.
+the root threshold is about 23.85 m/s. The reconfiguring case reaches about
+40.93 m/s, the more porous crown about 31.12 m/s, and a 25% thicker trunk about
+23.85 m/s. All four first thresholds occur inside the stated displacement range.
 The nearly unchanged threshold after trunk thickening reflects the governing
 anchorage bottleneck under these assumptions. These values are conditional model
 outputs, not lunar storm predictions or validated wind tolerances.
@@ -200,31 +203,32 @@ would overstate this model. The 500-m fixed-8-m-diameter wet case already crosse
 the self-weight buckling boundary, whereas proportional thickening carries a
 large and explicitly recorded biomass cost.
 
-The standalone air density changes from approximately 1.45786 to 1.44373 kg/m3
-between 0 and 500 m, about 0.97%. Under this particular lower-air scenario,
+The standalone air density changes from approximately 1.42375 to 1.41028 kg/m3
+between 0 and 500 m, about 0.95%. Under this particular lower-air scenario,
 architecture and anchorage uncertainty are much larger effects than the density
 change through the forest. This comparison gives no information about the wind
 shear or gust distribution across the same height.
 
 ## Numerical checks and remaining work
 
-The new suite has 25 passing tests. It checks spherical hydrostatics and its
+The new suite has 25 tests. It checks spherical hydrostatics and its
 pressure derivative, composition and humidity, A1 schema/interpolation fixtures,
 analytic cantilever loads, Euler buckling, canopy momentum balance, zero-drag
 flow, drag-response limits, root load-path bookkeeping, wet-mass effects,
 threshold roots, right censoring, domain flags, grid sensitivity and the
-immersion output guard.
+immersion output guard. The suite passed when the checkpoint was delivered; the
+current check record runs it separately and infers no status.
 
 Among the 10 canopy cases, the largest relative momentum residual is about
-1.41e-10. Across the selected 36 refinement runs, the largest threshold difference
-between 60 and 240 elements is about 0.474%. Those comparisons cover selected
+8.34e-11. Across the selected 36 refinement runs, the largest threshold difference
+between 60 and 240 elements is about 0.471%. Those comparisons cover selected
 geometries; they do not bound all model or parameter uncertainty. The preparation
 worktree contains the scoped additions, so the historical whole-repository /
 protection check and the existing environmental regression suite were not run.
 The new work does not mark those checks PASS.
 
 Of the 480 envelope cases, 6 are rejected for self-weight buckling, 18 reach a
-damage threshold at zero wind, and 209 have a first nominal failure beyond the
+damage threshold at zero wind, and 208 have a first nominal failure beyond the
 displacement domain. Read the machine record for the complete classification;
 none of these counts represents a prevalence or probability in a lunar forest.
 

@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[3]
 STUDY = Path('research/studies/aerophytes')
 PARENT = STUDY / 'results/aerophytes.json'
 # Rebound on 2026-10-12, after the plant refresh: the parent's sailing section, the part read here, is unchanged.
-EXPECTED_PARENT_SHA256 = '2edc258d33bb638d108c750388914a38ac750b5de213de6fcc0dbedb52f9c137'
+EXPECTED_PARENT_SHA256 = '3721a734cfc100c2d2070db9f7b56de94b03e227631cb56ac6a7b08801f096ca'
 
 
 def _positive(**values):

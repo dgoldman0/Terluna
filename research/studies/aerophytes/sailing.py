@@ -437,7 +437,7 @@ def evaluate(root=ROOT):
         day_length=periods, rings=rings, tethered_sails=sails, sea_drogue=sea,
         streamlining=dict(sphere_cd=.47, streamlined_cd=.05, drag_ratio=.47/.05,
                           sail_speed_gain_small_wing=math.sqrt(.47/.05)),
-        unresolved=['Winds by latitude and local hour at every height (another branch builds the product).',
+        unresolved=['Winds by latitude and local hour at every height: the design climate\'s product (climate/gcm/zonal_winds.md) exists; this screen still uses the global-mean profile.',
                     'North-south winds: the rings carry none, so the mean meridional drift is open.',
                     'Wing and tether dynamics, tether fluttering and the drag of a real fibre bundle.',
                     'Biological control of a kilometres-long tether and its wing.'])

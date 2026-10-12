@@ -148,9 +148,10 @@ def _ground_rows(product):
 def ground_light(sun_deg, root=ROOT, *, rows=None):
     """Stored clear-ground daylight at neutral albedo .1; interpolate in sin(height).
 
-    Valid only for solar heights1..90 degrees. Optical power covers202..1000nm,
+    Valid only for solar heights 1..90 degrees. Optical power covers 202..1000 nm,
     not total solar energy. This older daylight solution underestimates low Sun
-    relative to the spherical atlas used by plant.py. No altitude gain is applied.
+    relative to the solved-column sky that plant.py scales its low-Sun light to.
+    No altitude gain is applied.
     """
     if rows is None:
         rows = _ground_rows(_product(root,0,'terluna.illumination.surface-light/1'))
@@ -252,7 +253,7 @@ def evaluate(root=ROOT):
         sun_locked_ground_reference=locks,ground_daylight_table=rows,
         ground_twilight=twilight,
         twilight_energy_assumption=dict(
-            reading_rule='The inherited plant model assumes the1deg diffuse-black spectrum at every twilight angle. These spectral energy proxies are not the newer calendar solution, altitude predictions or measured H2 action spectra. No flux is forced to zero below a trait threshold.',
+            reading_rule='The plant model gives every twilight angle the 1 deg diffuse-black spectrum, scaled to the solved-column sky\'s twilight illuminance. These spectral energy proxies are not altitude predictions or measured H2 action spectra. No flux is forced to zero below a trait threshold.',
             shape=shape,
             rows=[twilight_energy(h,table=twilight,shape=shape) for h in twilight['elevation_deg']]),
         calendar_ground_visual_reference=dict(

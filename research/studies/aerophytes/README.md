@@ -44,7 +44,7 @@ from [run.py](run.py) unless marked *derived*:
 - **The canopy nursery.** Megaforest crowns can raise juveniles to 50–60 m, the smallest round bodies that float with
   their reserve, in one to seven years from fermented host sugar and their own light, with water and phosphorus drawn
   from the host's sap as mistletoes draw theirs. Beyond that the gas outgrows any host (a 200-m body's trimmed gas is
-  26–243 hectare-years of forest growth), the juvenile's drag starts to threaten its tree, and the adult grows on its
+  26–247 hectare-years of forest growth), the juvenile's drag starts to threaten its tree, and the adult grows on its
   own light. [Growth](growth.md).
 - **Gas biology.** Fish secrete oxygen into swim bladders at over 100 atmospheres, guanine plates make the bladder
   wall a hundred times tighter, and the Portuguese man-of-war makes its float gas in a gas gland; plated barriers
@@ -174,10 +174,10 @@ gas in 70–350 years, and a lining of hydrogen-oxidising microbes keeps it out 
 
 ## Twilight and the Sun
 
-**Poleward of about 60° the clear ground never falls below 1 µmol/m²/s of PAR, and yet at 60° the reference ground
-plant runs a carbon deficit for about 308 hours a cycle.** The PAR threshold is reached at 60.4°, 61.9° allowing the
-declination range; at 60° the plant spends 34 hours below it. The diffuse twilight carries 5.44 W/m² of PAR with the
-Sun 10° down and 1.11 W/m² at 20°. [Photoperiod](photoperiod.md).
+**Poleward of about 64° the clear ground never falls below 1 µmol/m²/s of PAR, and at 60° the reference ground plant
+runs a carbon deficit for about 320 hours a cycle.** The PAR threshold is reached at 64.5°, 66.0° allowing the
+declination range; at 60° the plant spends 120 hours below it. The diffuse twilight carries 4.15 W/m² of PAR with the
+Sun 10° down and 0.63 W/m² at 20°. [Photoperiod](photoperiod.md).
 
 **Holding the Sun takes 4.30 cos(latitude) m/s westward at 10 km, free on a matching wind and 90 W/m² for a sphere in
 calm equatorial air.** A 0.5 m/s mismatch costs 0.141 W/m², 1 m/s 1.13 W/m² and 2 m/s 9.05 W/m² at 25% efficiency, and

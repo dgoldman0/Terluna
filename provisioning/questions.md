@@ -65,10 +65,10 @@ on this laptop. The findings behind them are in the [README](README.md).
    power plan that its studies ask for.
 4. **The food system.** The [food-systems study](../research/studies/food_systems/README.md) prices eight systems per
    billion residents, fits them to the lunar cycle and mixes them for 4, 6 and 8 billion, with the range each mix can
-   be built over: rain-fed fields cost least and the rain feeds 9.4–27.5 billion outside a kept 30%; glass and lamps
+   be built over: rain-fed fields cost least and the rain feeds 9.1–27.0 billion outside a kept 30%; glass and lamps
    cost land, structure, power and N2O; pasture cannot carry the animal part at 4–8 billion, and the waters'
    phosphorus holds sea farms to the animal part of 0.04–0.26 billion people. What remains:
-   - the crop model's water and its water-use efficiency, which decide between 9.4 and 4.3 billion at the high-cost
+   - the crop model's water and its water-use efficiency, which decide between 9.1 and 4.2 billion at the high-cost
      end, and farm yields below potential;
    - N2O and methane: their warming in the deep column, and how strict soilless culture and fish must be;
    - fog and wind paired snapshot by snapshot, and dew from the night's surface energy, in the fog desert;

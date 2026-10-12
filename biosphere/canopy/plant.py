@@ -369,7 +369,7 @@ def run():
         settings=dict(q10=Q10, earth_carbon_use_efficiency=CUE_EARTH, growth_respiration=GROWTH_RESPIRATION,
                       leaf_dry_g_m2=LEAF_DRY_G_M2, carbon_fraction=CARBON_FRACTION, regrowth_days=RAMP_DAYS,
                       stem_root_respiration_25c=stem_root_25, bands_abs_latitude=BANDS,
-                      atlas_scaling_below_deg=SCALED_BELOW_DEG, twilight_deg=TWILIGHT_DEG, dark_umol=DARK_UMOL,
+                      solved_sky_scaling_below_deg=SCALED_BELOW_DEG, twilight_deg=TWILIGHT_DEG, dark_umol=DARK_UMOL,
                       strategies={k: dict(dark_share=v[0], regrow_leaves=v[1]) for k, v in STRATEGIES.items()},
                       stand=canopy.Stand().__dict__),
         twilight=twilight_table(tables), climate=climate, earth=earth, results=results, sensitivity=sensitivity)

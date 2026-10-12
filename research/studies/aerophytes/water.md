@@ -109,7 +109,7 @@ its afternoon peak (25° past noon), so an aerophyte that spends 5–20% of its 
   ([sailing](sailing.md)), enough to drink in the tropics by day and spend the dark half of its cycle in the polar
   twilight.
 
-The other branch's wind product, resolved by latitude and solar hour, will place the rain sector and the humid
+The design climate's wind product, resolved by latitude and solar hour, will place the rain sector and the humid
 layers along real paths; the present map uses zonal means and one equatorial box and ring.
 
 ## Sources and checks

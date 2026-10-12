@@ -52,13 +52,13 @@ ceiling; beyond that the gas outgrows any host, and the adult grows on its own l
 a phloem connection and the juvenile ferments it, while the juvenile's own photolysis runs in full sunlight at the
 crown top.
 
-- **The host's production.** The canopy model's equatorial stand fixes 405.7 g C/m² gross and grows 228.4 g C/m²
+- **The host's production.** The canopy model's equatorial stand fixes 400.3 g C/m² gross and grows 224.0 g C/m²
   per lunar cycle, a carbon-use efficiency of 0.56: 5.0 kg C/m² gross and 2.8 kg C/m² net a year at 12.37 cycles a
-  year (*derived*). At 60° it is 3.5 and 1.7 kg C/m². The model has no water limit; rain supports 26–58% of the crop
+  year (*derived*). At 60° it is 3.3 and 1.6 kg C/m². The model has no water limit; rain supports 26–58% of the crop
   model's growth within 15° of the equator ([people_and_land](../../../biosphere/ecology/people_and_land.md),
-  finding 10), so a rain-limited host grows 0.73–1.6 kg C/m² net.
+  finding 10), so a rain-limited host grows 0.72–1.6 kg C/m² net.
 - **The crowns.** In the megaforest study's allometry a tree's crown radius is 0.18 of its height: 0.92 ha for a
-  300-m tree and 2.5 ha for a 500-m tree, growing 26 and 72 t C a year at the clear-sky equatorial rate.
+  300-m tree and 2.5 ha for a 500-m tree, growing 25 and 70 t C a year at the clear-sky equatorial rate.
 - **The share.** The project's day fruit already puts 30–80% of a stand's growth into fruit (the fruit model's
   shares), so a host passing 10–50% of its growth to juveniles is within the project's own designs (a design guess).
 - **Fill times.** A 50-m juvenile holds 3.4 t of hydrogen at its 10-km trim and loses 38 kg a year through its skin
@@ -66,16 +66,16 @@ crown top.
   with its own photolysis on half its area, it fills in 1.3–5.4 years; on rain-limited hosts, 2.0–6.6 years; on its
   own light alone, 7.2 years. A 40-m juvenile (2.1 t) fills in 0.9–4.7 years but floats with its reserve only after
   growing past about 45 m; a 60-m juvenile (5.0 t) takes 1.8–6.0 years. A colony's founding 60-m module (5.7 t) takes
-  2.0–6.8 years.
-- **The 200-m body.** Its trimmed gas, 81 t of hydrogen, is 1,380 t of sugar carbon at 2.1 mol/mol: 49
-  hectare-years of clear-sky forest growth, or 188 rain-limited (26–243 across yields and growth). Its full envelope,
-  343 t, would be 109–1,025 hectare-years. One 500-m host passing 10–50% of its growth would take 38–190 years to
-  make the trimmed gas, 150–740 years if rain-limited.
+  2.1–6.8 years.
+- **The 200-m body.** Its trimmed gas, 81 t of hydrogen, is 1,380 t of sugar carbon at 2.1 mol/mol: 50
+  hectare-years of clear-sky forest growth, or 192 rain-limited (26–247 across yields and growth). Its full envelope,
+  343 t, would be 111–1,045 hectare-years. One 500-m host passing 10–50% of its growth would take 39–200 years to
+  make the trimmed gas, 150–750 years if rain-limited.
 
 **Host wind loads cap nursery juveniles at about 60 m on 300–500-m trees.** A juvenile at the crown top adds its drag
 times the tree's height to the crown's overturning moment. A 40-m juvenile on a 300-m tree raises that moment by 24%
-and lowers the reference tree's first failure (root, 23.5 m/s in uniform wind) to 21.1 m/s; a 60-m juvenile raises it
-55%, to 18.9 m/s. On a 500-m tree the same juveniles add 9% and 20%. A 100-m tree carries juveniles of about 10–20 m
+and lowers the reference tree's first failure (root, 23.9 m/s in uniform wind) to 21.4 m/s; a 60-m juvenile raises it
+55%, to 19.2 m/s. On a 500-m tree the same juveniles add 9% and 20%. A 100-m tree carries juveniles of about 10–20 m
 across: a 20-m juvenile adds 55% to its moment and a 40-m one triples it. Juveniles nested inside the crown at
 0.6–0.9 of the height meet less wind.
 
@@ -104,8 +104,8 @@ giant's structure is heavier, 60 kg/m² at 1 km with 300 MPa fibre and 167 kg/m�
 tendon: at the same content it holds 3–50 g P/m² more, renewed once a century (*derived*).
 
 **Routes up.**
-- **Through the host, once.** A 50-m juvenile leaves the nursery with 2.4–8.8 kg of phosphorus, 0.7–5.5% of a 500-m
-  host's yearly uptake of 160–320 kg (*derived*: 72 t C of growth a year at 1–2 g P per kg of dry growth).
+- **Through the host, once.** A 50-m juvenile leaves the nursery with 2.4–8.8 kg of phosphorus, 0.8–5.6% of a 500-m
+  host's yearly uptake of 160–310 kg (*derived*: 70 t C of growth a year at 1–2 g P per kg of dry growth).
 - **Rain.** At 0.005–0.05 mg P per litre, the design climate's 2.24 mm/day brings 0.004–0.04 g/m² a year and the
   equatorial 5.5 mm/day 0.01–0.1 g: 1–50% of the need.
 - **Airborne particles.** Collectors sweeping 1–10 µg/m³ of pollen, spores and dust holding 0.1–0.5% P at 0.1–1 m/s

@@ -7,7 +7,7 @@
     "inputs": {
       "resources/phosphorus_sources.json": "2217f3a73e2c6750e06b4b6408f3922455bc5a15046f580a7ca3072015cff066",
       "shared/scenarios/population.json": "74ec20d6f8057977e9e08ee35b7014892e476fd8795a58a1af7f880a6bc373f0",
-      "resources/results/industry.json": "729404a0e6a804f93ed9540c8fbc20c5480ec5fb04ff2dceef743b57dc935fde"
+      "resources/results/industry.json": "ddad0b7237c2320a4a31d5fe1974aace9eabb0b5719c04049daf81ef97fcd2a5"
     },
     "constants": {
       "JULIAN_DAY": 86400.0,

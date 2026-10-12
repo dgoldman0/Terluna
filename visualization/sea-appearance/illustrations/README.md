@@ -4,7 +4,9 @@ These selected sea images are preserved in Git at the author's
 request. Routine rendered outputs and intermediate generation passes remain in
 the ignored `../results/illustrations/` or study `research/runs/` directories.
 The final images contain no labels; scene identity, prompts, source hashes and
-reviews live in these sidecars.
+reviews live in these sidecars. They show the seas with the earlier raw-soil
+fines, before the developed fines of 12 October 2026; the products now give
+brighter seas.
 
 
 The current Nubium references are the

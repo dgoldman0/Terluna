@@ -87,7 +87,8 @@ oxygen or element budget through time.
 
 ## Statements elsewhere that need correcting
 
-These belong to main and stay unchanged on this branch.
+These belong to other studies, for their owners to correct; item 3's note gives what the joint integration of
+12 October corrected.
 1. **Constant-gravity air masses** about 10% low sit beside the spherical 3.14×10¹⁸ kg:
    - geography's 2.8×10¹⁸ kg;
    - the middle-atmosphere README;
@@ -97,7 +98,8 @@ These belong to main and stay unchanged on this branch.
    - D4's water and hydrogen, which with 6.13×10¹⁷ kg of O2 become 6.9×10¹⁷ and 7.7×10¹⁶ kg.
 2. **The CO2 study's runoff and temperature.** It uses 349 mm a year from run A and 26 °C, against about 265 mm and
    21.75 °C now. Its weathering sink runs about a quarter high on runoff alone.
-3. **The ecology register's runoff** is 279,000 m³/s with lakes on 11.6%, against 229,410 m³/s and 10.3%.
+3. **The ecology register's runoff** is 279,000 m³/s with lakes on 11.6%, against 229,410 m³/s and 10.3% (rerun on
+   the corrected drainage at the joint integration on 12 October, 7c230dd).
 4. **A unit error.** The joint ledger's `film_plant_w` holds terawatts under a label in watts (fixed on main on
    9 October, 78020e0).
 5. **Two figures for film replacement,** 2.2–4.5 and 2.3–4.6 Gt a year.

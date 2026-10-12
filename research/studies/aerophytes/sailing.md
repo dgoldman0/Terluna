@@ -7,8 +7,8 @@ the ground, 0.45 m/s at 4 km, 1.75 m/s at 10 km, 3.5 m/s at 18 km, 6.8 m/s at 29
 needs a westward ground speed of 4.3 cos(latitude) m/s ([navigation](navigation.md)). A wing on a long tether turns the
 shear between two layers into a cross-wind force, as a sail does between air and water, and a body that rides the
 eastward wind aloft sees the Sun return sooner. Numbers are *screen* values (`sailing` in the product). The design winds
-resolved by latitude, height and solar hour now exist on the provisioning branch (`climate/gcm/zonal_winds.md`), and
-this screen still uses the single global-mean profile and the five CM1 rings.
+resolved by latitude, height and solar hour now exist (`climate/gcm/zonal_winds.md`), and this screen still uses the
+single global-mean profile and the five CM1 rings.
 
 The GCM's sigma levels are placed by the wind product's pressure profile from 2.5 km up, where it agrees with
 ρgΔz to 1%; its 0 km pressure is not hydrostatic with the levels above, so the lowest level is placed by extending
@@ -17,9 +17,8 @@ the 2.5–5 km log-pressure profile downward, to 0.74 km.
 The force balance below assigns positive or negative sideways lift with fixed coefficients, so its speeds hold for a
 surface that can select and hold that orientation. The later [living sail analysis](sail_biology.md) proposes the
 anatomy for it, comparing local actuators, distributed sensing, growth, service and renewal in a separate requirements
-product, and leaves the saved speed calculation unchanged. The latitude- and solar-hour-resolved winds are available at
-the pinned cross-branch revision that [sky ecology](../sky_ecology/run.py) uses; active sail trajectories are still to
-be coupled to them.
+product, and leaves the saved speed calculation unchanged. The latitude- and solar-hour-resolved winds are read in-tree
+by [sky ecology](../sky_ecology/run.py); active sail trajectories are still to be coupled to them.
 
 ## Riding the eastward wind shortens the night
 
@@ -115,8 +114,8 @@ and quilts are broadside to vertical gusts and edge-on to horizontal ones; tilte
 
 ## What the design winds settle
 
-The design climate's winds by latitude, height and solar hour (`climate/gcm/zonal_winds.md`, domain/provisioning,
-from 3-day means at T21) answer the three questions this screen left:
+The design climate's winds by latitude, height and solar hour (`climate/gcm/zonal_winds.md`, from 3-day means at T21)
+answer the three questions this screen left:
 - **North–south winds.** Near the ground the equatorward inflow runs 0.5–0.9 m/s between 10° and 70°, and at 40–60 km
   a poleward drift of 0.03–0.08 m/s; passive routes gather near the equator close to the ground and over the poles at
   40–60 km.

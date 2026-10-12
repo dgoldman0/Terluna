@@ -3,7 +3,7 @@
  "producer": {
   "study": "ways_of_living",
   "files": {
-   "research/studies/ways_of_living/run.py": "9614ab8672fc9d18"
+   "research/studies/ways_of_living/run.py": "8f4645a7902af44f"
   },
   "constants": {
    "JULIAN_DAY": 86400.0,
@@ -24,17 +24,17 @@
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
    "illumination/sky/results/solved_sky.json": "a94333cd71a83169",
    "research/studies/sea_appearance/results/lighting_calendar.json": "b76f394595eb0c89",
-   "research/studies/sky_ships/results/sky_ships.json": "375284e4a16ffcab",
-   "research/studies/sky_fleet/results/sky_fleet.json": "fcf26a8bd6d98950",
-   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4",
-   "research/studies/summit_tower/results/summit_tower_form.json": "9c9a3cf7fed39b1a",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "b488e76c98e19aa9",
+   "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327",
+   "research/studies/sky_fleet/results/sky_fleet.json": "4826a86d183fb13d",
+   "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539",
+   "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f",
    "research/studies/conservation/results/heritage_register.json": "b0756b08ac3fe0bc",
    "research/studies/solar_shield_array/results/magnetic_architecture.json": "38dcfdb36be94b9f",
    "research/studies/joint_synthesis/results/magnets_map.json": "fecc71b909175739",
-   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "132011caa1688ff4",
+   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "80b3ebef5077fb62",
    "research/studies/joint_synthesis/results/ledgers.json": "563f50e4a71b4cae",
-   "provisioning/results/population.json": "0b37e24d62461e53",
+   "provisioning/results/population.json": "d562cdabe6eee18f",
    "research/studies/megaforest_wind/results/reference_cases.csv": "2df393c88d7eb060",
    "climate/results/gcm/zonal_winds_A28_dim5_moon.json": "a6a5d0cf96b42a1a"
   },
@@ -48,7 +48,7 @@
     "path_at_integration": "biosphere/ecology/results/people.json",
     "branch": "main",
     "commit": null,
-    "sha256": "7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015",
+    "sha256": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
     "read_from": "in-tree",
     "note": "Per-billion costs of the lunar design and Earth practice, rain-fed land and diets (people_and_land.md)."
    },

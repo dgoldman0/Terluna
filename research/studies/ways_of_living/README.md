@@ -21,18 +21,18 @@ arithmetic on cited values. Other numbers come from the product named beside the
    wild to half), 14–20% of the highlands above 4 km and 25–35% of the narrow limb band (*screen*).
 
 2. **Food is what grows with the Moon's people, and its answered cost is water lifted from the fresh seas.** Ten
-   billion lunar residents on the lunar design's plant-rich diet need 1.4–3.9 million km² of crops at the crop
-   model's yields, 35–224% of the rain-fed land outside a kept 30% (ecology's per-billion figures; *derived*). On the
+   billion lunar residents on the lunar design's plant-rich diet need 1.4–4.0 million km² of crops at the crop
+   model's yields, 35–225% of the rain-fed land outside a kept 30% (ecology's per-billion figures; *derived*). On the
    rain alone, wettest land first, the low end takes a third of the rain belt's land outside the kept share; the high
-   end fills the wet land to 45° and leaves 2.2 million km² of crop-model yield to irrigate: 8,700 km³ a year, 1.2
+   end fills the wet land to 45° and leaves 2.2 million km² of crop-model yield to irrigate: 8,800 km³ a year, 1.2
    times the rivers' flow, lifted from the seas for 1.5 TW (*screen*). Irrigated to the crop model's yield from the
-   start, crops and towns take 20–59% of the rain belt's land outside the kept 30% for 0.18–2.0 TW of pumping
-   (*screen*). The seas take 1,100–89,000 years to reach a gram of salt per kilogram (ecology branch, from the
-   resources screen), so the water stays fresh through the near horizons.
+   start, crops and towns take 20–60% of the rain belt's land outside the kept 30% for 0.18–2.1 TW of pumping
+   (*screen*). The seas take 1,100–87,000 years to reach a gram of salt per kilogram (ecology, from the resources
+   screen), so the water stays fresh through the near horizons.
 
 3. **People's heat costs 0.08–1.8% more dimming across the cases.** At 2.0–6.0 kW of primary energy a person with
    industry in orbit, 6–15 billion lunar residents release 9–68 TW on the Moon (*screen*). With the sky towns'
-   operating power, the irrigation lift and the hydrogen remade after losses of 1–10% a year, the Moon takes 9–128 TW,
+   operating power, the irrigation lift and the hydrogen remade after losses of 1–10% a year, the Moon takes 9–129 TW,
    answered by 0.08–1.8% more dimming at 0.009–0.014% a terawatt (*screen*). In total25 at its own split, 17–72 TW
    and 0.15–1.0% (*screen*).
 
@@ -87,8 +87,8 @@ arithmetic on cited values. Other numbers come from the product named beside the
 11. **Mixes of every kind carry each case at its own split; the surface-only end of total30 fills the rain belt.** At
     the cases' own 50% aloft, every surface mix uses at most 5–44% of any home's land outside a kept half, and every
     aerial mix fits the sky (*screen*). With all 15 billion of total30 on the surface, the rain-belt mix puts farming
-    country on 88% of its home outside the kept half, and the high end of the diet range irrigated fills 99.5% of
-    the rain belt's land outside a kept 30% (*screen*).
+    country on 88% of its home outside the kept half, and the high end of the diet range irrigated fills all of the
+    rain belt's land outside a kept 30%, with 81,000 km² of crops left beyond it (*screen*).
 
 12. **Earth, the array and elsewhere carry their own costs.** Up to 10.2 billion people eat within four planetary
     boundaries on Earth (Gerten et al. 2020), so in the Earth-heavier case's 14 billion, 27% of Earth's food grows off
@@ -134,7 +134,7 @@ parks to 15 km above the summit and the Moon's only winter, on the disks at 13.5
   ferries to 2.5 km, gliders on the day's thermals to about 10 km.
 - **What limits it and what it costs.** Its planned scale on the summit's crown and upper slopes. Its heat over the
   city is 60–181 W/m² across the band, answered in the city. Its lamps light 79,000–142,000 km² of the Moon's darkest
-  sky, a circle 160–210 km in radius, and its food takes 13,900–39,300 km² of crops at the model's yields (*derived*).
+  sky, a circle 160–210 km in radius, and its food takes 14,100–40,100 km² of crops at the model's yields (*derived*).
 
 ### Coastal and lake towns
 
@@ -185,7 +185,7 @@ beside the trees, with gliders launched from the crowns and the dim lower forest
 - **Where, air, warmth, water and light.** The rain belt's interior: 4.79 million km² shared with farming country,
   5–27°, 1.5 km above the sea at the mean, 117 kPa, 20.1–25.3 °C, 2.6 mm of rain a day; practical dusk ends 87 hours
   after sunset at 19°. Over a third lies under a high Earth and a third on the far side (*screen*).
-- **Hazards.** Wind on the giants: a 300 m tree's roots give way near 23.5 m/s of steady wind, or 40 m/s with a crown
+- **Hazards.** Wind on the giants: a 300 m tree's roots give way near 23.9 m/s of steady wind, or 41 m/s with a crown
   that streamlines (megaforest checkpoint, conditional). How fire spreads at 17.5% oxygen and 0.16 g is open
   (ecology).
 - **The third dimension.** Walkways and stations through the canopy layers; a micro glider launched from a 300 m
@@ -377,12 +377,12 @@ Per billion people on the Moon or aloft (*screen* unless named):
 | Energy | 2.0–6.0 TW | the provisioning band, 2.0, 3.68 and 5.99 kW a person |
 | Heat on the Moon, industry in orbit | 1.5–4.5 TW, 0.040–0.12 W/m² | placement factor 0.755 |
 | Added dimming that answers it | 0.013–0.063% | 0.009–0.014% a terawatt |
-| Crops at the crop model's yields, plant-rich diet | 139,000–393,000 km² | ecology |
-| Share of the rain-fed land | 2.5–16% of it; 3.5–22% outside a kept 30%; 4.9–31% outside half | ecology's 2.51–5.65 million km² |
+| Crops at the crop model's yields, plant-rich diet | 141,000–401,000 km² | ecology |
+| Share of the rain-fed land | 2.5–16% of it; 3.5–22% outside a kept 30%; 4.9–31% outside half | ecology's 2.55–5.73 million km² |
 | Grazing on the fog desert | 0–16% of it | ecology |
 | Land under a light-polluted sky | 0.79–1.42 million km², 3.4–6.1% of the dry land | ecology |
 | Domestic water | 18–55 km³ a year; makeup 0.18–5.5 km³ after 90–99% recovery | 50–150 litres a day |
-| Crop water | 250–1,560 km³ a year; 0.04–0.27 TW if all of it is lifted from the seas | ecology's 4.85–10.9 mm a day |
+| Crop water | 250–1,580 km³ a year; 0.04–0.27 TW if all of it is lifted from the seas | ecology's 4.79–10.8 mm a day |
 | Energy through each 354-hour night | 350–1,060 TWh | provisioning population |
 | Rotating floor at Earth's gravity | 420–3,330 km², 0.2–1.7 Gt | 1–8 hours a day at 10 m² an occupant |
 
@@ -408,14 +408,14 @@ At each case's own split, across the four surface mixes and three aerial mixes (
 |---|---|---|---|---|---|---|---|---|---|
 | total20 | 3 + 3 | 40–120 TW | 18–33 TW | 0.16–0.45% | 1.3–2.0% | 20% to full | 20–36% | 522,000, 7.1 km | 255 Gt, 29 Gt |
 | total25 | 5 + 5 | 50–150 TW | 30–55 TW | 0.26–0.76% | 2.1–3.3% | 33% to full | 34–61% | 870,000, 5.5 km | 425 Gt, 48 Gt |
-| total30 | 7.5 + 7.5 | 60–180 TW | 45–83 TW | 0.39–1.2% | 3.2–5.0% | 49% to full | 51–91% | 1,305,000, 4.5 km | 638 Gt, 72 Gt |
+| total30 | 7.5 + 7.5 | 60–180 TW | 45–83 TW | 0.39–1.2% | 3.2–5.0% | 50% to full | 51–91% | 1,305,000, 4.5 km | 638 Gt, 72 Gt |
 | total25_earth_heavier | 3 + 3 | 50–150 TW | 18–33 TW | 0.16–0.45% | 1.3–2.0% | 20% to full | 20–36% | 522,000, 7.1 km | 255 Gt, 29 Gt |
-| total25_moon_heavier | 6 + 6 | 50–150 TW | 36–66 TW | 0.31–0.92% | 2.6–4.0% | 39% to full | 41–73% | 1,044,000, 5.0 km | 510 Gt, 58 Gt |
+| total25_moon_heavier | 6 + 6 | 50–150 TW | 36–66 TW | 0.31–0.92% | 2.6–4.0% | 40% to full | 41–73% | 1,044,000, 5.0 km | 510 Gt, 58 Gt |
 
 The heat counts the residents, the sky towns' control or holding, trips down and back, the irrigation lift of
 finding 2 and the hydrogen remade after losses of 1–10% a year. "To full" means the high end of the diet range leaves
 crops for irrigation once all the wet land is used; irrigated to the crop model's yield, crops and towns take
-12–35% (total20), 20–59% (total25), 29–88% (total30) and 23–70% (moon heavier) of the rain belt's land outside the
+12–36% (total20), 20–60% (total25), 30–89% (total30) and 24–72% (moon heavier) of the rain belt's land outside the
 kept 30%, for 0.11–3.2 TW of pumping (*screen*).
 
 The aerial share moves the costs this way in total25 (*screen*):
@@ -495,13 +495,11 @@ Stated once; the product's `assumptions` block holds them all.
 
 ## Inputs to bind at integration
 
-Two inputs live on other branches and are read at their pinned commits through Git, with their hashes checked:
+Two inputs from the former branches are read in place since the joint integration, with their hashes checked:
 
 - **Ecology's per-billion costs:** `biosphere/ecology/results/people.json` with
-  [people_and_land.md](https://github.com/dgoldman0/Terluna/blob/11392b48c50b9af909cf8570f92e0bb50987efbe/biosphere/ecology/people_and_land.md),
-  branch `domain/ecology` at `11392b4`.
-- **Main's corrected Earthlight per place:** `research/studies/joint_synthesis/results/places.json`, branch `main` at
-  `78020e0`; this branch's copy predates the correction.
+  [people_and_land.md](../../../biosphere/ecology/people_and_land.md).
+- **Main's corrected Earthlight per place:** `research/studies/joint_synthesis/results/places.json`.
 
 The [zonal-winds diagnostic](../../../climate/gcm/zonal_winds.py) was built beside this study on this branch and is
 read from `climate/results/gcm/zonal_winds_A28_dim5_moon.json`; the product records its hash, and a regenerated

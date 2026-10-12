@@ -9,7 +9,7 @@ highlands from the atlas and the climate products, sizes how tall buildings get 
 engineering lattice model, and gives the land, water and travel the highland people take. Grid sums, closed-form
 physics, one small groundwater solve per land candidate and arithmetic on cited values.
 
-Main's corrected per-place product is read at its pinned commit through Git (BOUND).
+Main's corrected per-place product is read in-tree, its hash checked (BOUND).
 """
 from __future__ import annotations
 
@@ -73,7 +73,7 @@ GEOID_DEGREE = 200          # the atlas's geoid
 
 
 class MissingInput(RuntimeError):
-    """An ignored grid product, an external input or a bound input on another branch is not available here."""
+    """An ignored grid product, an external input or a bound input is not available here."""
 
 
 def sha256(path) -> str:
@@ -104,7 +104,8 @@ def load_npz(rel, schema):
 
 
 def bound_bytes(key) -> bytes:
-    """The bound input's bytes: the in-tree file once it matches, else the Git object at the pinned commit."""
+    """The bound input's bytes: the in-tree file when its hash matches, as it does since the joint integration;
+    else the Git object at a pinned commit."""
     b = BOUND[key]
     local = ROOT / b['path']
     raw = local.read_bytes() if local.exists() else b''

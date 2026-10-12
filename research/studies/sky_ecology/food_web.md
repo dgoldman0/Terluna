@@ -40,8 +40,8 @@ Moon the sky builds 162–413 Mt C of biomass a year growing and 134–397 Mt ma
 for growing giants in canopy-like light, and gives its tenants 38 Mt C of sugar. The aerial study's central 1,000 g C/m²
 a year of biomass sits at the top of the giants' and the reefs' ranges.
 
-**The cover runs from 0.1% to 2% of the Moon.** One per cent is the aerial study's central case. The sky is shared: the
-provisioning branch's five billion people aloft live in towns that shade 1.8% of the Moon (*derived*, 0.36% a billion
+**The cover runs from 0.1% to 2% of the Moon.** One per cent is the aerial study's central case. The sky is shared:
+provisioning's five billion people aloft live in towns that shade 1.8% of the Moon (*derived*, 0.36% a billion
 in its ways-of-living product), so a sky as busy as that holds aerophytes on a similar share, and a sparse wild sky a
 tenth of a per cent. Every sky-wide number scales with the cover in proportion.
 

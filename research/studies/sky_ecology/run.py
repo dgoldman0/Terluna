@@ -7,9 +7,9 @@ One coupled screen in three components (food_web, tenants, phosphorus) on commit
   for the representative bodies and whose product supplies the mass budgets by size;
 - the aerial food-web screen, ecology's people screen (the lunar flyers, the land's P loss), its first
   screen (spore settling), the clear-sky surface-light product, the sky-ship air and the sky fleet;
-- from other branches, read from Git at pinned commits and bound by SHA-256 until integration: the
-  resources branch's phosphorus model and product, the provisioning branch's zonal-wind product and
-  note, and its ways-of-living product (the sky towns' shade);
+- from the former domain branches, read in-tree since the joint integration of 12 October 2026 and bound by
+  SHA-256: resources' phosphorus model and product, the design climate's zonal-wind product and note, and
+  provisioning's ways-of-living product (the sky towns' shade);
 - the 28% atlas grid (an ignored input) for land and sea under the routes, when present.
 """
 from __future__ import annotations
@@ -50,14 +50,14 @@ AEROPHYTE_READS = aero_structure.INPUT_FILES
 COMPONENTS = ('food_web', 'tenants', 'phosphorus', 'stoichiometry')
 AEROPHYTE_CODE = ('run', 'mechanics', 'envelope', 'biology', 'environment', 'photoperiod', 'navigation', 'trim_cycle',
                   'structure', 'growth', 'water', 'storms', 'sailing', 'gas_biology', 'resources')
-# Other branches' files, bound by commit, blob and SHA-256 until the branches are integrated (then read in-tree).
+# Files from the former domain branches, bound by blob and SHA-256 and read in-tree since the joint integration.
 RESOURCES_COMMIT = None
 WINDS_COMMIT = None
 WAYS_COMMIT = None
 CROSS_BRANCH = {
     'resources/results/phosphorus.json': dict(branch='main', commit=RESOURCES_COMMIT,
-        blob='d8c8bc91e045377aae366f5779e98a9eca1539f6',
-        sha256='098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60',
+        blob='bab3177a4c9119a3f57fb4a6fc01e62307a2f444',
+        sha256='4089899e2b70e8b7888bb83e705e1773f316a1b3c220a43313a48b2578b615a5',
         schema='terluna.resources.phosphorus/1'),
     'resources/phosphorus.py': dict(branch='main', commit=RESOURCES_COMMIT,
         blob='0b8568bc8af9c5ffc09e6baf9287bc86404cdf09',
@@ -76,8 +76,8 @@ CROSS_BRANCH = {
         blob='c8ead8b6f8217ba3032806902c79f91b7ef45592',
         sha256='de35ebdcfab234b9fc8f110672018a4d279da7bc84ceb0e0cab5ac9b22b3822f'),
     'research/studies/ways_of_living/results/ways_of_living.json': dict(branch='main', commit=WAYS_COMMIT,
-        blob='f2b29ecec1566d67e0b6cad21a2038d3f68c8ea4',
-        sha256='ffe48e6467008176b9e89f7fb9b3afc5d63f0874fe3a86156a0aa81bac35d09d',
+        blob='18626be739ed81c89f591781f497468443a47f55',
+        sha256='b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a',
         schema='terluna.research.ways-of-living/1'),
 }
 # The atlas grid is an ignored input on the research drive; land and sea under the routes need it.
@@ -99,7 +99,8 @@ def load_product(path, schema):
 
 
 def cross_branch_bytes(path):
-    """A bound file from another branch: in-tree when its hash matches (after integration), else the Git object."""
+    """A bound file: in-tree when its hash matches, as every pin does since the joint integration; else the Git
+    object at a pinned commit."""
     spec = CROSS_BRANCH[path]
     local = ROOT/path
     if local.exists():

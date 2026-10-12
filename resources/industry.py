@@ -294,18 +294,27 @@ def windows(kg_s, inventory_kg, label='inventories', operation_kg_s=None):
     return out
 
 
-def carbon(screen, co2, carbon_kg_s, used_on_moon):
-    """The air's CO2 against weathering and burial: the near horizons' one fast drain on the air."""
+def runoff_mm(atlas, drainage):
+    """The present runoff over the land, lakes included, in mm a year: the drainage product's discharge to the seas
+    over the atlas's land, as the lunar-cycle register reads it."""
+    land_m2 = (atlas['main_land_share'] + atlas['island_share']) * MOON_AREA_M2
+    return drainage['rivers']['discharge_to_sea_m3s'] * YEAR_S / land_m2 * 1e3
+
+
+def carbon(screen, co2, carbon_kg_s, used_on_moon, runoff_now_mm):
+    """The air's CO2 against weathering and burial: the near horizons' one fast drain on the air. The CO2 study's
+    weathering, at its 349 mm a year, is scaled to the present runoff over the land; its 26 degrees C stays."""
     cases = [c for c in co2['weathering']['cases']
              if c['runoff_mm_yr'] == CO2_CASE['runoff_mm_yr'] and c['temperature_c'] == CO2_CASE['temperature_c']]
     net = sorted(c['net_gt_yr'] for c in cases)                                   # Gt CO2 a year, the study's runoff
-    scale = screen['oxygen_sink']['runoff_rescale']                               # to the corrected runoff (first screen)
+    scale = runoff_now_mm / CO2_CASE['runoff_mm_yr']                             # to the present runoff over the land
     weathering = [n * scale * 1e12 / YEAR_S for n in net]                         # kg CO2/s
     burial = [c * CO2_OVER_C for c in carbon_kg_s]
     total = [w + b for w, b in zip(weathering, burial)]
     inventory = screen['inventories']['co2_kg']
     kilns = [w * YEAR_S / 1e12 * co2['return_step']['heat_gw_per_gt_co2_per_year'] for w in weathering]   # GW
-    return dict(inventory_kg=inventory, runoff_rescale=scale, weathering_gt_co2_yr=sig([w * YEAR_S / 1e12 for w in weathering]),
+    return dict(inventory_kg=inventory, runoff_mm_yr=dict(present=sig(runoff_now_mm), co2_study=CO2_CASE['runoff_mm_yr']),
+                runoff_rescale=sig(scale), weathering_gt_co2_yr=sig([w * YEAR_S / 1e12 for w in weathering]),
                 burial_gt_co2_yr=sig([b * YEAR_S / 1e12 for b in burial]),
                 cycle_years=dict(weathering=sig([inventory / (w * YEAR_S) for w in weathering[::-1]]),
                                  weathering_and_burial=sig([inventory / (t * YEAR_S) for t in total[::-1]])),
@@ -316,7 +325,7 @@ def carbon(screen, co2, carbon_kg_s, used_on_moon):
                 note='Kilns return the weathered carbon on the Moon; buried organic carbon needs its own return path or an import.')
 
 
-def after_build(screen, joint, atlas, heat, co2):
+def after_build(screen, joint, atlas, drainage, heat, co2):
     inv = screen['inventories']
     air, n2, o2 = inv['air_kg'], inv['n2_kg'], inv['o2_kg']
     rates = dict(warm_case_no_magnets=joint['air']['losses']['warm_case_no_magnets_kg_s']['kg_s'],
@@ -356,7 +365,7 @@ def after_build(screen, joint, atlas, heat, co2):
                       burial_at_lake_rates_kg_s=sig(nitrogen), sea_carbon_burial_gt_yr=sig([c * YEAR_S / 1e12 for c in burial_c]),
                       burial_cycle_years=sig([n2 / (k * YEAR_S) for k in nitrogen[::-1]]),
                       windows=windows(nitrogen, n2, 'air_nitrogens')),
-        carbon=carbon(screen, co2, burial_c, heat['placement']['moon_W_m2_per_TW_used_on_moon']),
+        carbon=carbon(screen, co2, burial_c, heat['placement']['moon_W_m2_per_TW_used_on_moon'], runoff_mm(atlas, drainage)),
         film=dict(upkeep_gt_yr=sig(film['upkeep_gt_yr'], 4), fresh_feed_kg_s=fresh,
                   fleet_replaced_by_fresh_feed_years={r: sig([fleet_kg[0] / (fresh[r][1] * YEAR_S), fleet_kg[1] / (fresh[r][0] * YEAR_S)])
                                                       for r in RECOVERY},
@@ -449,7 +458,7 @@ def main(argv=None) -> int:
         json.loads(p.read_text()) for p in (SCREEN, HEAT, LEDGER, LAYOUT, JOINT, ATLAS, DRAINAGE, SEPTEMBER, CO2))
     files = ['resources/industry.py']
     places_ = places(screen, heat, joint)
-    after = after_build(screen, joint, atlas, heat, co2)
+    after = after_build(screen, joint, atlas, drainage, heat, co2)
     stocks = people(screen, atlas, drainage, heat)
     comp = computing(heat)
     product = dict(

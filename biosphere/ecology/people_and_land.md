@@ -87,11 +87,11 @@ largest one.
     (*screen*), so the land holds the equivalent of 2.5–5.7 million km² at the model's yields. Used whole, the rivers'
     229,410 m³/s would irrigate 1.8–4.1 million km² more. The humid days (a vapour deficit of 0.84 kPa over wet land)
     raise the efficiency further. *The plant model has no water yet.*
-11. **Food land.** The day fruit at the model's potential feeds a person on 59–81 m² (*screen*, as the provisioning
-    screen found); clouds, losses of a quarter to a third (FAO 2011) and a varied plant diet make that 129–342 m². Each
+11. **Food land.** The day fruit at the model's potential feeds a person on 60–83 m² (*screen*, as the provisioning
+    screen found); clouds, losses of a quarter to a third (FAO 2011) and a varied plant diet make that 131–348 m². Each
     diet keeps Earth's ratios to a vegan diet (Peters et al. 2016; Poore & Nemecek 2018): a plant-rich diet takes
-    139–393 m² of crops and at most 1,000 m² of grazing; today's average diet 160–424 m² and 4,130 m² grazed; an
-    affluent US diet 337–893 m² and 7,400 m² grazed, or 574–1,700 m² of crops with every animal fed on them (Alexander
+    141–401 m² of crops and at most 1,000 m² of grazing; today's average diet 162–432 m² and 4,130 m² grazed; an
+    affluent US diet 342–911 m² and 7,400 m² grazed, or 582–1,740 m² of crops with every animal fed on them (Alexander
     et al. 2016; Shepon et al. 2016) (*derived*). Grazing goes on the fog desert at Earth's grazed area a person.
     Earth's crops feed about six people a hectare (Cassidy et al. 2013).
 12. **Settlement.** A person takes 25 m² at the metropolis's density, 100 m² in a compact town and 143–357 m² in the
@@ -130,7 +130,7 @@ largest one.
 ## What each billion people takes
 
 18. **Earth's practice.** Each billion people grazes 7.4 million km², 1.2 times the fog desert, and crops 6–36% of the
-    rain-fed land, or 10–71% with every animal fed on crops. It puts 34–61% of the dry land under a light-polluted sky,
+    rain-fed land, or 10–68% with every animal fed on crops. It puts 34–61% of the dry land under a light-polluted sky,
     loses phosphorus at 42–163% of the land's natural loss, and adds N2O at 55–106% and methane at 48–51% of the wild
     biosphere's sources (table 4; *screen*).
 19. **The lunar design.** Each billion people crops 2.5–16% of the rain-fed land, and a tenth of a hectare of grazing a
@@ -172,7 +172,7 @@ largest one.
     230–460 years and 10 billion in 460–920 (*derived*), so the costs per billion above arrive within this horizon.
 27. **Several thousand years.** The wild biosphere's N2O adds 1.6–2.1 ppm in 5,000 years and 10 billion people at
     Earth's practice 12–17 ppm more; the land's phosphorus runs down without returns, and the seas turn rich in
-    magnesium over 18,000–180,000 years (the ecology register, G2).
+    magnesium over 22,000–220,000 years (the ecology register, G2).
 
 ## Tables
 
@@ -199,7 +199,7 @@ largest one.
 | | Earth's practice | The lunar design |
 |---|---|---|
 | Diet | affluent US | plant-rich |
-| Cropland at the model's yields | 337–893 m² | 139–393 m² |
+| Cropland at the model's yields | 342–911 m² | 141–401 m² |
 | Grazing on the fog desert | 7,400 m² | 0–1,000 m² |
 | Settlement | 143–357 m² | 25–100 m² |
 | New nitrogen | 22–30 kg | 4.5–10 kg |
@@ -215,7 +215,7 @@ the wild biosphere's N2O (0.96–1.3 Tg N a year) and central methane source (59
 
 | Each billion people | Earth's practice | The lunar design |
 |---|---|---|
-| Cropland, share of the rain-fed land | 6–36% (10–71% with animals fed on crops) | 2.5–16% |
+| Cropland, share of the rain-fed land | 6–36% (10–68% with animals fed on crops) | 2.5–16% |
 | Grazing, share of the fog desert | 120% | 0–16% |
 | Land under a light-polluted sky, share of the dry land | 34–61% | 3.4–6.1% |
 | Added dimming that answers its heat | 0.08–0.13% | 0.035–0.084% |

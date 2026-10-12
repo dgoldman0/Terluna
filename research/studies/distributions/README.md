@@ -16,8 +16,8 @@ the compromise, with the earlier reading, half wild with another 20% hybrid, bes
 author's request.
 
 [run.py](run.py) writes [results/distributions.json](results/distributions.json) (schema
-`terluna.research.distributions/1`) in under a second from committed products on this branch and seven files on other
-branches, bound by commit and SHA-256. Numbers marked *screen* are computed by this code; *derived* marks arithmetic on
+`terluna.research.distributions/1`) in under a second from committed products and seven files from the former branches,
+read in place and bound by SHA-256. Numbers marked *screen* are computed by this code; *derived* marks arithmetic on
 cited values; other numbers come from the product named beside them. Every range runs over the 16 corners of its case:
 the highland share, the tower share and the scattered communities' density each at both ends, with every other input at
 its favourable and at its unfavourable end; C′ adds the homestead density at both ends, 32 corners. Two primary sources
@@ -37,15 +37,15 @@ and twilit placements once the homesteads' homes count within the fields they wo
 the author's compromise of 30% wild with another 20% hybrid, the hybrid fifth holds 4.68 million km² of megaparks and
 great gardens, farms and towns keep to the same half, and C′ fits as it does outside a kept half.
 
-1. **The Moon carries 4–8 billion people with 61–94% of its dry land wild outside a kept 30%, and 31–92% outside a
+1. **The Moon carries 4–8 billion people with 60–94% of its dry land wild outside a kept 30%, and 31–92% outside a
    kept half** (*screen*). With half its people aloft, on the food study's power-heavy mix (vegetables and fruit in
    lamp-lit vertical farms, the animal part as microbial protein, the rest on rain-fed fields), 4 billion leave 84–94%
-   of the dry land wild outside a kept 30% and 77–92% outside half. Six billion leave 76–91% and 61–88%, and 8 billion
-   64–88% and 34–84%. With 6 billion on the ground and 2 aloft, 8 billion leave 61–87% and 31–82%. The fields and the
+   of the dry land wild outside a kept 30% and 77–92% outside half. Six billion leave 75–91% and 59–88%, and 8 billion
+   62–88% and 34–83%. With 6 billion on the ground and 2 aloft, 8 billion leave 60–87% and 31–82%. The fields and the
    towns fit every band of the land at every corner outside a kept 30%, and at 4 and 6 billion outside half. At 8
    billion outside half every high-cost corner overfills: the rain-fed fields fill the middle-wet zone, which the
    scattered communities' land also covers, and at 7 or 8 of those corners the 30–45° highlands or the 0–30° land
-   overfill as well. The favourable end fits, leaving 80–84% wild with 4 aloft and 76–82% with 2. Every corner fits,
+   overfill as well. The favourable end fits, leaving 79–83% wild with 4 aloft and 76–82% with 2. Every corner fits,
    for twice the water lift, when the dry highland towns go poleward of 45° first, the scattered communities gather on
    the twilit and Earthlit homes and the middle band's communities keep to the fog-desert side of their homes. The mix
    draws no water from the seas outside a kept 30%.
@@ -76,7 +76,7 @@ great gardens, farms and towns keep to the same half, and C′ fits as it does o
    0.36–42 GW. The dry high ground's own runoff, 80.6 km³ a year and nearly all of it at 30–45°, equals 105–400% of its
    people's gross domestic use at 4 billion and 33–126% with 6 billion on the ground. Raised from the nearest water,
    their supply takes 1.0–3.0 GW a billion at 30–45° and 6.1–19 GW a billion poleward of 45°, a tenth of that at 90%
-   recovery. The chosen mix grows on 839–4,610 km³ of rain a year.
+   recovery. The chosen mix grows on 842–4,690 km³ of rain a year.
 
 5. **Phosphorus comes from the lake deltas and back from the towns, with the natural cycle kept beside them**
    (*screen*, on resources' routes). The food loses 176–1,440 kt a year at the lunar design's recycling, 44–180 kt a
@@ -114,16 +114,16 @@ great gardens, farms and towns keep to the same half, and C′ fits as it does o
    gravity candidates), pumped dry for 2.45–245 MW per 50 km of tube under 500 m of sea (land cities).
 
 9. **The undersea and tube cities' mineral wealth is the sea floor's sediment, and their seepage is fresh sea water**
-   (*screen*). A 50 km tube under 500 m of sea seeps 0.058–5.8 km³ a year, the water of watered fields for 0.050–22
+   (*screen*). A 50 km tube under 500 m of sea seeps 0.058–5.8 km³ a year, the water of watered fields for 0.049–22
    million people. At the Near-side Sea's concentration after 1,000 years it carries 0.0029–1.2 t of phosphorus a year,
    against the 114–841 t its 2.6–4.7 million residents' food loses. The Near-side Sea's own sediment receives 3.5–10 kt
    of particulate phosphorus a year from its rivers, enough for 19.5–226 million people at the lunar design's losses:
    0.52–130 times the people the submerged and coastal tubes hold, and 0.21–62 times with the gravity candidates.
 
 10. **The fog desert below the dry highland cities can feed them from glass that drinks piped sea water** (*screen*,
-    on the food study's systems). A billion highland residents fed so take 0.25–0.97 million km² of vented glass,
-    189–671 km³ of sea water a year piped a mean 69 km and 0.24–1.2 TW, with 62–155 kt N of N2O a year against 20–65 kt
-    N a billion on the power-heavy mix. At 6 billion the dry highlands' 1.7–2.15 billion would take 8.7–43% of the fog
+    on the food study's systems). A billion highland residents fed so take 0.25–0.99 million km² of vented glass,
+    189–685 km³ of sea water a year piped a mean 69 km and 0.24–1.2 TW, with 62–155 kt N of N2O a year against 20–64 kt
+    N a billion on the power-heavy mix. At 6 billion the dry highlands' 1.7–2.15 billion would take 8.7–44% of the fog
     desert, keeping their share of the rain belt wild. Their food climbs 3.5 km to the cities for 0.12 GW a billion.
 
 11. **The dark belt keeps the Moon's dark nights, and the twilit and Earthlit lands need few lamps** (*screen*). The
@@ -157,8 +157,8 @@ its case outside a kept 30% unless it names the half (*screen*).
 | The Moon's primary energy, TW | 11.1–65.4 | 16.7–98.1 | 22.3–131 | 20.2–99.7 | 22.3–131 |
 | Heat and dimming, fusion | 9.18–59.6 TW, 0.0797–0.828% | 13.8–89.3 TW, 0.120–1.24% | 18.4–119 TW, 0.159–1.66% | 16.3–88.0 TW, 0.141–1.22% | 18.4–119 TW, 0.159–1.66% |
 | Heat and dimming, power from the array | 7.65–35.3 TW, 0.0664–0.491% | 11.5–53.0 TW, 0.0996–0.736% | 15.3–70.6 TW, 0.133–0.982% | 13.9–56.5 TW, 0.120–0.785% | 15.3–70.6 TW, 0.133–0.982% |
-| Dry land wild outside a kept 30% / half | 84–94% / 77–92% | 76–91% / 61–88% | 64–88% / 34–84% | 61–87% / 31–82% | 64–88% / 34–84% |
-| Corners that fit outside half; their wild land | 16 of 16; 77–92% | 16 of 16; 61–88% | 8 of 16; 80–84% | 8 of 16; 76–82% | 16 of 32; 80–84% |
+| Dry land wild outside a kept 30% / half | 84–94% / 77–92% | 75–91% / 59–88% | 62–88% / 34–83% | 60–87% / 31–82% | 62–88% / 34–83% |
+| Corners that fit outside half; their wild land | 16 of 16; 77–92% | 16 of 16; 59–88% | 8 of 16; 79–83% | 8 of 16; 76–82% | 16 of 32; 79–83% |
 | Land settled | 0.13–0.37 million km² | 0.20–0.55 | 0.26–0.74 | 0.40–1.1 | 0.26–0.74 |
 | Dry high ground settled, kept 30% / half | 6.5–10% / 9.1–15% | 10–16% / 14–22% | 14–22% / 19–30% | 21–33% / 29–46% | 14–22% / 19–30% |
 | Dry land under a light-polluted sky, the metropolis as a town / at Earth's area | 0.35–7.9% / 0.83–10.4% | 0.43–11.6% / 0.91–14.2% | 0.50–15.4% / 0.98–17.9% | 0.43–13.6% / 0.91–16.1% | 0.49–14.7% / 0.97–17.2% |
@@ -195,7 +195,7 @@ corner under both kept shares.
 **C, the Moon at 8 billion.** The Moon holds 4 billion on the ground and 4 aloft, the most the author set for the sky;
 the array holds 5 billion and the colonies 3. Its 696,000 towns shade more of the Moon than the aerophytes' central
 cover, and its heat and dimming are the largest of the four. Outside a kept half its high-cost end overfills the
-middle-wet zone, the 30–45° highlands or the 0–30° land at 8 of the 16 corners, and the favourable end's 8 leave 80–84%
+middle-wet zone, the 30–45° highlands or the 0–30° land at 8 of the 16 corners, and the favourable end's 8 leave 79–83%
 of the dry land wild. All 16 fit when the dry highland towns go poleward of 45° first, the scattered communities
 gather on the twilit and Earthlit homes and the middle band's communities keep to the fog-desert side of their homes.
 
@@ -253,7 +253,7 @@ The other homes, ranked on the study's own measures (*screen*; 1 is best, and ti
 | Dry highland cities, 60–90° | 118,000 / 75,100 km² | 6.25–18.8 | 249 / 611 | 0.125; 0.0001 | 0; 0 | 3.0 / 2.6 |
 | Dry highland cities, 45–60° | 175,000 / 111,000 km² | 6.06–18.2 | 141 / 550 | 0.125–1.06; 0.0001–0.0019 | 0; 0 | 3.2 / 2.8 |
 | Dry highland cities, 30–45° | 450,000 / 0 km² | 1.01–3.03 | 141 / 550 | 1.06; 0.0019 | 58; 0–36 | 3.0 / 3.3 |
-| Lowland homes equatorward of 30° | 2.21 million / 0 km² | 3.15–9.46 | 0–2.6 / 160–233 | 2.7–5.0; 0.0034–0.0067 | 92–104; 23–1,730 | 3.9 / 4.4 |
+| Lowland homes equatorward of 30° | 1.97 million / 0 km² | 3.15–9.46 | 0–2.6 / 160–233 | 2.7–5.0; 0.0034–0.0067 | 92–104; 23–1,730 | 3.9 / 4.4 |
 | The lowland homes at 30–48.6° they leave, for comparison | | 3.15–9.46 | 38–100 / 501–516 | 1.06; 0.0023–0.0056 | 16–102; 0–1,730 | |
 
 Spare land comes from the band check, with the belt's lowland land moved out. Water comes from land cities' lifts for
@@ -280,7 +280,7 @@ for the polar sampling programme (ways of living). The ground's people stay 60�
 | People in the lowland homes at 30–48.6° | 0.25–0.40 billion | none / 0–28 million homesteaders |
 | Moved to the high-latitude lowland homes | – | 0.25–0.40 / 0.22–0.40 billion |
 | The high-latitude lowland homes' own land used | 0.668–3.81% / 0.935–5.34% | 1.29–7.34% / 1.70–10.3% |
-| Dry land wild | 64–88% / 34–84% | the same |
+| Dry land wild | 62–88% / 34–83% | the same |
 | Land settled | 264,000–736,000 km² | the same |
 | Heat with fusion; added dimming | 18.4–119 TW; 0.159–1.66% | the same |
 | Water lifted | 0.753–27.5 GW | the same |
@@ -302,15 +302,15 @@ Outside a kept 30% all 32 corners fit. Outside a kept half (*screen*):
 
 | C′ outside a kept half | Corners that fit, of 32 | Overfill at the high-cost end | Dry land wild | Heat with fusion | Water lifted | Light-polluted sky, the metropolis as a town / at Earth's area |
 |---|---:|---|---:|---:|---:|---:|
-| As placed | 16 | the middle-wet zone by 278–9,920 km² at 16 corners, the 30–45° highlands by 13,900–39,700 km² at 12, the 0–30° land by 12,900 km² at 4 | 34–84%; 80–84% where every band fits | 18.4–119 TW | 0.753–27.5 GW | 0.493–14.7% / 0.972–17.2% |
-| With the dry highland towns poleward of 45° first and the scattered communities gathered on the twilit homes | 16 | the middle-wet zone by 278–9,920 km² at 16 corners | 34–84% | 18.4–119 TW | 1.47–54.6 GW | 0.454–11.8% / 0.932–14.3% |
-| With the homesteads' homes counted within the fields they work as well | 32 | none | 34–84% | 18.4–119 TW | 1.47–54.6 GW | 0.454–11.8% / 0.932–14.3% |
+| As placed | 16 | the middle-wet zone by 278–9,920 km² at 16 corners, the 30–45° highlands by 13,900–39,700 km² at 12, the 0–30° land by 12,900 km² at 4 | 34–83%; 79–83% where every band fits | 18.4–119 TW | 0.753–27.5 GW | 0.493–14.7% / 0.972–17.2% |
+| With the dry highland towns poleward of 45° first and the scattered communities gathered on the twilit homes | 16 | the middle-wet zone by 278–9,920 km² at 16 corners | 34–83% | 18.4–119 TW | 1.47–54.6 GW | 0.454–11.8% / 0.932–14.3% |
+| With the homesteads' homes counted within the fields they work as well | 32 | none | 34–83% | 18.4–119 TW | 1.47–54.6 GW | 0.454–11.8% / 0.932–14.3% |
 
 At 8 billion outside a kept half the high-cost corners fit without a fog-desert placement once the homesteads' homes
 count within the fields they work. Beside the fields those homes overfill the full middle-wet zone by 278–9,920 km²,
 0.02–0.71% of it, against C's 13,000–74,200 km² of towns; within the fields they take that share of the fields' land,
 which the crop model's factor-of-two uncertainty in the rain-fed land covers. With the remedy's poleward and twilit
-placements every corner then fits, leaving 34–84% of the dry land wild, for 18.4–119 TW of heat with fusion, 1.47–54.6
+placements every corner then fits, leaving 34–83% of the dry land wild, for 18.4–119 TW of heat with fusion, 1.47–54.6
 GW of water lift and 0.454–11.8% of the dry land under a light-polluted sky with the metropolis lit as a town
 (0.932–14.3% at Earth's area).
 
@@ -331,9 +331,9 @@ runs beside them for comparison with the same parks (*screen*; product keys `kep
 | Corners that fit as placed | 16 | 16 | 16 |
 | With the remedy's poleward and twilit placements | 16 | 16 | 16 |
 | With the homesteads' homes within their fields as well | 32 | 32 | 32 |
-| Farms, settlement and the homesteads' homes, share of the dry land | 8.2–33% | 8.2–33% | 8.5–20% |
+| Farms, settlement and the homesteads' homes, share of the dry land | 8.4–33% | 8.4–33% | 8.7–20% |
 | Megaparks and great gardens | none | 4.68 million km² | 4.68 million km² |
-| Water from the seas for food, km³ a year | 0–19.6 | 0–19.6 | 0–3,250 |
+| Water from the seas for food, km³ a year | 0–235 | 0–235 | 0–3,430 |
 | Heat with fusion; added dimming | 18.4–119 TW; 0.159–1.66% | 18.4–119 TW; 0.159–1.66% | 18.4–121 TW; 0.159–1.68% |
 | Sky towns' share of the sky open to them; spacing in the busiest band | 33%; 4.29 km | 33%; 4.29 km | 55%; 3.32 km |
 | Conflicts a day across the fleet, drifting | 0.74–7.4 million | 0.74–7.4 million | 1.2–12 million |
@@ -351,8 +351,8 @@ A–D fare under the compromise as under a kept half: A and B fit as placed, and
 placements.
 
 With half wild and another 20% hybrid, farms and towns keep to 30% of each zone. The power-heavy mix's high-cost end
-then grows 1.06 million km² of its crops' equivalent by watering its fields, with 3,250 km³ a year from the seas and
-0.53 TW of lift (food study), and the sky towns, kept to 30% of the sky, have 1.7 times as many conflicts a day. C′
+then grows 1.12 million km² of its crops' equivalent by watering its fields, with 3,430 km³ a year from the seas and
+0.56 TW of lift (food study), and the sky towns, kept to 30% of the sky, have 1.7 times as many conflicts a day. C′
 fits every corner the same way as under the compromise. B then needs the remedy's three placements, and D fits at 10
 of its 16 corners with them.
 
@@ -385,11 +385,11 @@ communities' 100–357 m² a person.
 | Scattered communities, 100–357 m² a person | 0.500–0.800, 50,000–286,000 | 0.750–1.20, 75,000–428,000 | 1.00–1.60, 100,000–571,000 | 1.50–2.40, 150,000–857,000 |
 | Undersea domes | 48,600 people | 48,600 | 48,600 | 48,600 |
 | Land settled | 131,000–366,000 km² | 198,000–551,000 | 264,000–736,000 | 398,000–1,110,000 |
-| Food land, power-heavy | 0.832–2.27 million km² | 1.24–3.40 | 1.66–5.23 | 1.66–5.23 |
-| Share of the dry land used | 4.12–11.3% | 6.17–16.9% | 8.23–25.5% | 8.80–27.1% |
-| Dry land wild outside a kept 30% / half | 84–94% / 77–92% | 76–91% / 61–88% | 64–88% / 34–84% | 61–87% / 31–82% |
-| The same outside half, the corners that fit | 77–92% | 61–88% | 80–84% | 76–82% |
-| Highlands used, kept 30% / half | 11–26% / 15–35% | 16–38% / 22–53% | 21–50% / 30–79% | 24–54% / 33–85% |
+| Food land, power-heavy | 0.846–2.33 million km² | 1.26–3.50 | 1.69–5.47 | 1.69–5.47 |
+| Share of the dry land used | 4.18–11.5% | 6.25–17.3% | 8.36–26.5% | 8.93–28.1% |
+| Dry land wild outside a kept 30% / half | 84–94% / 77–92% | 75–91% / 59–88% | 62–88% / 34–83% | 60–87% / 31–82% |
+| The same outside half, the corners that fit | 77–92% | 59–88% | 79–83% | 76–82% |
+| Highlands used, kept 30% / half | 11–26% / 15–36% | 16–38% / 23–54% | 22–52% / 30–79% | 24–55% / 33–85% |
 | Dry high ground settled, kept 30% / half | 6.5–10% / 9.1–15% | 10–16% / 14–22% | 14–22% / 19–30% | 21–33% / 29–46% |
 | Dry high ground used with the fields, kept half | 9.1–15% | 14–22% | 19–78% | 29–94% |
 
@@ -412,7 +412,7 @@ the dry high ground's bands by land.
 
 | Share of each band used, kept 30% / half | 4 billion, 2 aloft | 6 billion, 3 aloft | 8 billion, 4 aloft | 8 billion, 2 aloft |
 |---|---:|---:|---:|---:|
-| All the dry land at 0–30°, 7.71 / 5.51 million km² | 11–31% / 16–44% | 17–47% / 23–77% | 22–71% / 31.1–100.2% | 22–73% / 31.6–103% |
+| All the dry land at 0–30°, 7.71 / 5.51 million km² | 11–32% / 16–45% | 17–48% / 24–80% | 23–75% / 31.6–100.2% | 23–76% / 32.1–103% |
 | Highlands at 30–45°, 574,000 / 410,000 km² | 6.5–10% / 9.1–15% | 10–16% / 14–22% | 14–22% / 19.0–110% | 21–33% / 28.9–125% |
 | Highlands poleward of 45°, 373,000 / 267,000 km² | 6.5–10% / 9.1–15% | 10–16% / 14–22% | 14–22% / 19–30% | 21–33% / 29–46% |
 | Middle-wet zone, 1.95 / 1.39 million km² | 0.33–1.9% / 0.47–2.7% | 0.50–2.9% / 0.70–4.0% | 0.67–3.8% / 0.93–105% | 1.0–5.7% / 1.4–108% |
@@ -427,7 +427,7 @@ overfills at all 8 high-cost corners, by 13,000–74,200 km² with 4 aloft, 16,2
 of those corners with 4 aloft, by 13,900–71,800 km² at 8 with 3 aloft and by 34,200–104,000 km² at 8 with 2 aloft.
 Where 60% of the ground's people are in the highlands and the scattered communities spread at 357 m² a person, the
 0–30° land overfills too, by 12,900, 80,700 and 149,000 km². Those corners cannot be built as placed. Only the
-favourable end fits, and it gives the feasible range beside the full one: 80–84% of the dry land wild with 4 aloft,
+favourable end fits, and it gives the feasible range beside the full one: 79–83% of the dry land wild with 4 aloft,
 78–83% with 3 and 76–82% with 2, for 18.4, 17.3 and 16.3 TW of heat with fusion.
 
 Three placements together make all 16 corners fit at 8 billion outside half. The dry highland towns go poleward of
@@ -462,10 +462,10 @@ half. The food menu below gives every other mix.
 
 | | 4 billion | 6 billion | 8 billion |
 |---|---:|---:|---:|
-| Food land, the towns taken out | 0.832–2.27 million km² | 1.24–3.40 (to 4.03 outside a kept half) | 1.66–5.23 (to 6.97 outside a kept half) |
+| Food land, the towns taken out | 0.846–2.33 million km² | 1.26–3.50 (to 4.21 outside a kept half) | 1.69–5.47 (to 6.97 outside a kept half) |
 | Power | 0.539–3.39 TW | 0.808–5.09 | 1.08–6.78 |
-| Rain used; water from the seas | 839–2,300 km³; none | 1,260–3,460; none | 1,680–4,610; up to 19.6 outside a kept half |
-| N2O | 0.0258–0.0841 ppb a year | 0.0388–0.126 | 0.0517–0.168 |
+| Rain used; water from the seas | 842–2,340 km³; none | 1,260–3,520; none | 1,680–4,690; up to 235 outside a kept half |
+| N2O | 0.0259–0.0839 ppb a year | 0.0388–0.126 | 0.0517–0.168 |
 | Phosphorus lost | 0.176–0.720 Mt a year | 0.264–1.08 | 0.352–1.44 |
 | Phosphorus in microbial biomass, cycled | 0.365–1.18 Mt a year | 0.548–1.77 | 0.731–2.36 |
 
@@ -603,7 +603,7 @@ The same Moon with 2, 3 or 4 billion aloft (*screen*, kept 30%):
 
 | | 6 billion: 2 / 3 / 4 aloft | 8 billion: 2 / 3 / 4 aloft |
 |---|---|---|
-| Dry land wild | 75–91% / 76–91% / 77–92% | 61–87% / 62–88% / 64–88% |
+| Dry land wild | 74–91% / 75–91% / 76–92% | 60–87% / 61–88% / 62–88% |
 | Dry high ground settled | 13.6–21.6% / 10.0–16.0% / 6.48–10.4% | 20.6–32.8% / 17.1–27.2% / 13.6–21.6% |
 | Heat, fusion; added dimming | 12.7–73.7 TW, 0.111–1.03% / 13.8–89.3, 0.120–1.24% / 14.8–105, 0.128–1.46% | 16.3–88.0, 0.141–1.22% / 17.3–104, 0.150–1.44% / 18.4–119, 0.159–1.66% |
 | Dry land under a light-polluted sky, the metropolis as a town | 0.394–10.7% / 0.429–11.6% / 0.463–12.5% | 0.434–13.6% / 0.469–14.5% / 0.503–15.4% |
@@ -620,20 +620,20 @@ first zone fills.
 
 | Mix | 4 billion | 6 billion | 8 billion | Power | N2O, ppb a year | Wild dry land |
 |---|---|---|---|---|---|---|
-| Rain-fed first | to 84.3% | to 56.2% | to 42.1% | 0.0250–0.0775 TW | 0.0225–0.0975 | 54–93% |
-| Greenhouse-heavy | both ends | both ends | to 96.5% | 0.505–3.71 TW | 0.147–2.07 | 33–93% |
-| Fog-desert glass | to 57.2% | to 32.2% | to 16.0% | 1.42–4.07 TW | 0.251–0.792 | 75–92% |
-| Power-heavy | both ends | both ends | both ends | 0.539–6.78 TW | 0.0258–0.168 | 64–94% |
+| Rain-fed first | to 84.3% | to 56.2% | to 42.1% | 0.0250–0.0775 TW | 0.0225–0.0975 | 53–93% |
+| Greenhouse-heavy | both ends | both ends | to 95.0% | 0.506–3.71 TW | 0.148–2.02 | 33–92% |
+| Fog-desert glass | to 56.5% | to 31.7% | to 15.7% | 1.42–4.06 TW | 0.251–0.781 | 75–92% |
+| Power-heavy | both ends | both ends | both ends | 0.539–6.78 TW | 0.0259–0.168 | 62–94% |
 | Fully lamp-lit | both ends | both ends | both ends | 20.8–425 TW | 0.0813–0.403 | 96–99% |
 | Power-made | both ends | both ends | both ends | 2.79–22.4 TW | 0.00663–0.0329 | 96–99% |
 | Sea-supported | neither end | neither end | neither end | – | – | – |
 
 Ranges span the three numbers over each mix's feasible range. Rain-fed first grazes up to 3.37 million km² of the fog
-desert at its feasible end; greenhouse-heavy sends 1.13–35.7 Mt of phosphorus a year through fish sludge and draws
-38.9–2,710 km³ of sea water; fog-desert glass draws 980–2,630 km³; the sea-supported mix asks more phosphorus of the
+desert at its feasible end; greenhouse-heavy sends 1.13–34.6 Mt of phosphorus a year through fish sludge and draws
+38.9–2,760 km³ of sea water; fog-desert glass draws 983–2,630 km³; the sea-supported mix asks more phosphorus of the
 waters than their life can spare. Outside a kept half, fog-desert glass cannot be built at 8 billion, and
-greenhouse-heavy fits to 91.5% of the way at 6 billion and to 63.9% at 8. N2O has no sink in the design air, so every
-rate accumulates: 25.8–168 ppb in a thousand years on the power-heavy mix (food study).
+greenhouse-heavy fits to 90.1% of the way at 6 billion and to 63.0% at 8. N2O has no sink in the design air, so every
+rate accumulates: 25.9–168 ppb in a thousand years on the power-heavy mix (food study).
 
 ## The tube and undersea cities joined
 
@@ -670,7 +670,7 @@ Quantified where the products allow (*screen*); each proposal is labelled once.
 
 **The tubes' seepage and the undersea cities' membranes** (the author's example). The 50 km reference tube under 500
 m of sea seeps 0.058–5.8 km³ a year through its grouted ring, and under 2 km of sea 0.22–22 km³, all of it pumped up for
-2.45–245 MW and 33–3,300 MW. That stream equals the water of watered fields feeding 0.050–22 million and 0.19–82
+2.45–245 MW and 33–3,300 MW. That stream equals the water of watered fields feeding 0.049–22 million and 0.18–82
 million people, which the coast's farms can take beside the tube city's 2.6–4.7 million people. The seas are fresh and
 poor in phosphorus for thousands of years: at the Near-side Sea's 0.049–0.20 mg/m³ after 1,000 years the stream
 carries 0.0029–1.2 t of phosphorus a year under 500 m of sea, against the 114–841 t its residents' food loses. The
@@ -687,22 +687,22 @@ sky towns take struvite, 7.9 kg a kilogram of phosphorus, lifted for under 1.6 M
 
 **The fog desert's glass drinking piped sea water.** The fog desert, 4.82 million km² at 30–60° below 4 km with 0.18 mm
 of rain a day, lies below the dry highland cities and a mean 69 km from the seas. Vented glass there grows a billion
-residents' plant foods and fish feed on 0.246–0.974 million km² with 189–671 km³ of sea water a year, 0.019–0.0882 TW
-of it for the pipes and 0.243–1.2 TW in all, with 62.4–155 kt N of N2O a year (food study). For the dry highlands'
+residents' plant foods and fish feed on 0.246–0.993 million km² with 189–685 km³ of sea water a year, 0.0191–0.0900 TW
+of it for the pipes and 0.244–1.22 TW in all, with 62.4–155 kt N of N2O a year (food study). For the dry highlands'
 people:
 
 | | 4 billion | 6 billion | 8 billion |
 |---|---:|---:|---:|
 | Dry highland people | 1.1–1.4 billion | 1.7–2.15 | 2.3–2.9 |
-| Glass; share of the fog desert | 0.271–1.36 million km²; 5.6–28% | 0.418–2.09; 8.7–43% | 0.566–2.82; 12–59% |
-| Sea water | 208–939 km³ a year | 321–1,440 | 435–1,950 |
-| Power | 0.267–1.68 TW | 0.413–2.58 | 0.559–3.48 |
+| Glass; share of the fog desert | 0.271–1.39 million km²; 5.6–29% | 0.418–2.13; 8.7–44% | 0.566–2.88; 12–60% |
+| Sea water | 208–959 km³ a year | 321–1,470 | 435–1,990 |
+| Power | 0.268–1.71 TW | 0.415–2.62 | 0.561–3.54 |
 | N2O | 68.6–217 kt N a year | 106–333 | 144–450 |
 | Food lifted 3.5 km to the cities | 0.136–0.173 GW | 0.210–0.265 | 0.284–0.358 |
 
 Proposal: the dry highland cities draw part of their food from the fog desert's glass below them, which leaves their
 share of the rain belt wild and puts the desert's sun to use, at 62.4–155 kt N of N2O a billion against the
-power-heavy mix's 19.8–64.6.
+power-heavy mix's 19.9–64.4.
 
 **The dark belt and the twilit high latitudes.** The dark belt is the far side's low latitudes, 3.10 million km² of dry
 land whose nights fall below 0.01 lux, 0.0014 lux at the summit at their darkest; the highland box at 44.7° S keeps
@@ -850,20 +850,20 @@ Stated once; the product's `assumptions` block holds them all.
 
 ## Inputs and bindings
 
-Committed on this branch, hashed in `producer.inputs` and each feeding the basis: the food-systems, land-cities,
+Committed in this tree, hashed in `producer.inputs` and each feeding the basis: the food-systems, land-cities,
 ways-of-living, daily-life, inhabited-volume and conservation heritage-register products, the provisioning population
-and computing products, the zonal-wind product and the shared population cases. Bound on other branches and read
-through Git:
+and computing products, the zonal-wind product and the shared population cases. Bound from the former branches and
+read in place since the joint integration:
 
-| Input | Branch and commit | sha256 |
+| Input | Former branch | sha256 |
 |---|---|---|
-| `resources/results/sea_phosphorus.json` | domain/resources, 98d5ae9 | `9cf6927649942ed6…` |
-| `resources/industry.md` | domain/resources, 98d5ae9 | `3da7e7b7d7dfa144…` |
-| `resources/results/phosphorus.json` | domain/resources, 98d5ae9 | `159462a220b6661e…` |
-| `biosphere/ecology/results/people.json` | domain/ecology, 4932a68 | `f8eb2892b733fdd9…` |
-| `research/studies/living_light/results/living_light.json` | domain/ecology, 4932a68 | `5c0e0ae098f13fea…` |
-| `research/studies/sky_ecology/results/sky_ecology.json` | domain/ecology, 4932a68 | `d21e6c16c3ba7ded…` |
-| `research/studies/joint_synthesis/results/places.json` | main, 80497dd | `9707e4d1c7332ba3…` |
+| `resources/results/sea_phosphorus.json` | domain/resources | `47b600895919319d…` |
+| `resources/industry.md` | domain/resources | `394f707ab1478370…` |
+| `resources/results/phosphorus.json` | domain/resources | `4089899e2b70e8b7…` |
+| `biosphere/ecology/results/people.json` | domain/ecology | `758a8dcf68c6eb58…` |
+| `research/studies/living_light/results/living_light.json` | domain/ecology | `24941b1f4e33eb84…` |
+| `research/studies/sky_ecology/results/sky_ecology.json` | domain/ecology | `2f8156f73806aab5…` |
+| `research/studies/joint_synthesis/results/places.json` | main | `9707e4d1c7332ba3…` |
 
 The runner refuses bytes whose sha256 differs; the full hashes and Git blobs are in `run.py` and in the product's
 `producer.bound_inputs`. The values taken from the industry note are transcribed in `TRANSCRIBED` with the phrase each

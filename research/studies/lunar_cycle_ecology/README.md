@@ -37,20 +37,20 @@ What the models say about the world these organisms would live in. Figures are f
 the equator unless stated.
 
 - **The cycle.** 708.7 hours from noon to noon, 354 of them with the Sun up. The tall
-  sky keeps photosynthetic light above 1 µmol m⁻² s⁻¹ for 58 hours after sunset, so
-  238 hours are dark at the equator, 217 at 30° and 34 at 60°
+  sky keeps photosynthetic light above 1 µmol m⁻² s⁻¹ for 50 hours after sunset, so
+  254 hours are dark at the equator, 237 at 30° and 120 at 60°
   ([plant.json](../../../biosphere/canopy/results/plant.json)).
 - **Light.** Overhead sunlight carries 1,560 µmol m⁻² s⁻¹ of photosynthetic photons,
   against Earth's 2,250, with 37% of it diffuse and a UV index of 0.11
   ([surface light](../../../illumination/surface_light/README.md)). A deep canopy fixes
   18% more carbon over the cycle than the same canopy under Earth's sky
   ([canopy](../../../biosphere/canopy/README.md)).
-- **Temperature.** Land air in the chosen climate runs 21–23.5 °C by day and 19–20 °C
-  by night at every latitude on both sides; the coldest hour anywhere is 18.7 °C. The
-  night is long, dark and warm.
-- **Carbon.** The evergreen stand grows 229 g C per m² per cycle, 7.8 per 24 hours
-  against Earth's 5.4 for the same stand, and needs a store of 46 g C per m² for the
-  night, or 10 if it idles at a quarter of its daytime upkeep.
+- **Temperature.** Land air in the chosen climate runs 21.5–24 °C by day and 19.5–21 °C
+  by night at every latitude on both sides; the coldest hour in the plant model's
+  latitude bands is 19.0 °C. The night is long, dark and warm.
+- **Carbon.** The evergreen stand grows 224 g C per m² per cycle, 7.6 per 24 hours
+  against Earth's 5.4 for the same stand, and needs a store of 49 g C per m² for the
+  night, or 11 if it idles at a quarter of its daytime upkeep.
 - **Darkness.** The nights are dark for photosynthesis, while eyes keep some light.
   The Earth lights the near side: where it stands high the darkest hour keeps
   2–3 lux, where it stands low half a lux and less. The far side's nights are
@@ -60,8 +60,8 @@ the equator unless stated.
   ([lighting calendar](../sea_appearance/README.md#the-lighting-calendar)).
 - **Air.** 1.2 atm at 1.43 kg/m³. Each m² of ground lies under 74,900 kg of air holding
   14,500 kg of O₂ and 46 kg of CO₂.
-- **Water.** Seas cover 28% of the Moon, and rain-fed lakes a further 11.6%. Rivers
-  deliver 279,000 m³/s to the seas, 0.32 m a year over the land
+- **Water.** Seas cover 28% of the Moon, and rain-fed lakes a further 10.3%. Rivers
+  deliver 229,000 m³/s to the seas, 0.27 m a year over the land
   ([geography](../../../geography/README.md)). The median point on land lies 476 km
   from a sea and 50 km from standing water.
 - **Dusk moves.** The line between day and night crosses the ground westward at
@@ -101,20 +101,20 @@ the equator unless stated.
 
 - **B1. Evergreen plants that store and idle, on a carbon trigger.** *Computed ·
   adopt.* Idling leaves, stems and roots at a quarter of their daytime upkeep cuts the
-  store from 46 to 10 g C per m². Idling as soon as photosynthesis stops covering
-  upkeep needs half the store of idling only in full darkness, 10 against 19
+  store from 49 to 11 g C per m². Idling as soon as photosynthesis stops covering
+  upkeep needs half the store of idling only in full darkness, 11 against 19
   ([plant.json](../../../biosphere/canopy/results/plant.json)).
-- **B2. Using the long twilight.** *Computed · adopt.* Twilight is worth 14% of the
-  Earth-like store and a quarter of the idling one, and it leaves only 34 dark hours at
+- **B2. Using the long twilight.** *Computed · adopt.* Twilight is worth 11% of the
+  Earth-like store and a fifth of the idling one, and it leaves 120 dark hours at
   60°.
 - **B3. Regrowing the canopy each cycle** (the July bundle's shedding before dusk).
   *Computed · set aside.* A new canopy every cycle costs 264 g C per m², built at dawn
-  from reserves. Growth falls to 28 at the equator, 3 at 30° and none at 60°.
+  from reserves. Growth falls to 26 at the equator, 4 at 30° and none at 60°.
 - **B4. Frost protection, antifreeze, insulation, heat sharing in plant mats** (July
   bundle §5). *Computed · set aside at low and middle latitudes.* The bundle assumed
-  cold nights. The chosen climate's land nights stay at 18.7–20.1 °C everywhere the
+  cold nights. The chosen climate's land nights stay at 19.0–20.9 °C everywhere the
   models reach, which makes the night warm enough for an active food web (E).
-- **B5. Leaves that survive about 240 dark hours, and metabolism that slows and
+- **B5. Leaves that survive about 250 dark hours, and metabolism that slows and
   restarts on cue.** *Test first.* The physiology every evergreen strategy rests on. In
   Arabidopsis a leaf darkened on its own senesces, while darkening the whole plant holds
   senescence back (Weaver and Amasino 2001), and the lunar night darkens whole plants.
@@ -135,7 +135,7 @@ the equator unless stated.
   adopt.* Arabidopsis divides its leaf starch by the hours to the dawn its clock
   expects, and in 28-hour days its starch still runs out 24 hours after the last dawn
   (Graf et al. 2010; Scialdone et al. 2013). A plant on an Earth clock would budget the
-  lunar night's store for one day. The design needs a timer sized for about 240 dark
+  lunar night's store for one day. The design needs a timer sized for about 250 dark
   hours, or rationing on the plant's own carbon balance.
 - **C3. The plant's own carbon balance as the idling cue.** *Computed · adopt.* Plants
   already switch between growth and starvation programs through the energy sensors
@@ -159,15 +159,15 @@ the equator unless stated.
 ### D. Where the long day's carbon goes
 
 - **D1. Storage organs and wood as sinks.** *Computed · adopt.* Each cycle the
-  equatorial stand grows 229 g C per m² and fills a store of up to 46 g C for the
+  equatorial stand grows 224 g C per m² and fills a store of up to 49 g C for the
   night, all while the Sun is up. A leaf that cannot export its sugar turns its own
   photosynthesis down, so the long day needs sinks sized for it: wood, roots, tubers
   and fruit.
 - **D2. The day fruit.** *Design requirement · adopt as the fruit target.* A fruit whose
-  program fits one sunlit half (165–199 degree-days above 10 °C, a third of today's
+  program fits one sunlit half (170–203 degree-days above 10 °C, a third of today's
   watermelon's 560) is set at sunrise and ripe at sunset. It grows entirely on the
   daylight surplus and leaves the plant's night store as it was. A 7.5 kg fruit fills at
-  up to 0.9 kg a day, 3.5 times today's watermelon. Giant pumpkins, bred for more
+  up to 0.9 kg a day, 3.4 times today's watermelon. Giant pumpkins, bred for more
   phloem into the fruit, take in about 15 kg a day at their peak (Savage et al. 2015),
   and cucumbers grow from 5 to 30 cm in 10–15 days (Wiechers et al. 2011)
   ([fruit model](../../../biosphere/canopy/README.md#fruit-designed-for-the-lunar-day)).
@@ -175,31 +175,31 @@ the equator unless stated.
   (as parthenocarpic cucumbers set), cells formed before sunrise, and sugar loading in
   the last days before dusk.
 - **D3. How much goes to fruit.** *Computed · adopt 50–60% for farms.* With 50–60% of
-  the plant's new tissue carbon in fruit, the equatorial stand yields 3.1–3.7 kg per m²
-  every lunar cycle (3.5–4.2 when the plant idles at night), 51% more than the same
+  the plant's new tissue carbon in fruit, the equatorial stand yields 3.0–3.6 kg per m²
+  every lunar cycle (3.5–4.1 when the plant idles at night), 47% more than the same
   stand on Earth with the same temperatures. Greenhouse cucumbers swing between 40% and
   90% of their new dry matter (Marcelis's thesis). Wild forests would put less into fruit.
 - **D4. Leaves replaced at their own pace.** *Computed · adopt.* Leaves on Earth live
   from under a month to 24 years, and biome means run from 2.5 to 66 months (Wright et
   al. 2004; Reich et al. 1997). Replacing a canopy whose leaves live 6, 12, 24 or 36
   months takes 34, 17, 9 or 6 g C per m² per cycle.
-  At a 50–60% fruit share the plant keeps 89–112 g C per cycle, and 66 at 70%. Leaves
+  At a 50–60% fruit share the plant keeps 87–109 g C per cycle, and 65 at 70%. Leaves
   need not come and go each cycle; what the plant keeps pays for leaves, roots and wood.
 - **D5. Fruit picked young.** *Earth evidence · in places.* Zucchini is picked a few
   days after flowering and cucumbers within about two weeks, so both fit inside one
   lunar day on today's programs.
 - **D6. Today's watermelon.** *Computed · baseline.* It takes 45 days at the equator's
   temperatures and lives through a night, growing about a third of its mass in the
-  dark. Full size then needs a store of 116 g C per m², two and a half times the
+  dark. Full size then needs a store of 122 g C per m², two and a half times the
   plant's own.
 
 ### E. The night food web
 
 - **E1. The dusk fruit fall feeds the night.** *Computed · adopt.* The day fruit ripens
   at sunset, so the fruit falls at dusk. A wild forest putting 30% of its new tissue
-  into fruit drops 116 g of sugar per m² each cycle. Spread over the dark hours that is
-  2.3 W per m², about what the plants themselves burn in the dark (2.4). Nights stay at
-  19–20 °C, warm enough for insects, yeasts and fungi to keep working. On Earth,
+  into fruit drops 114 g of sugar per m² each cycle. Spread over the dark hours that is
+  1.9 W per m², about what the plants themselves burn in the dark (2.3). Nights stay at
+  19.5–21 °C, warm enough for insects, yeasts and fungi to keep working. On Earth,
   fermenting fruit draws fruit flies through its yeasts' volatiles, and the flies need
   the yeast to develop (Becher et al. 2012).
 - **E2. No oxygen crisis at night.** *Computed · adopt, as a correction.* The July
@@ -303,19 +303,19 @@ the equator unless stated.
     al. 2004).
 - **G2. How fast.** *Computed · adopt.* The basalt weathering law of the
   [CO₂ study](../atmospheric_co2/README.md), applied at the Moon's runoff and land
-  temperature, dissolves about 50 g of soil per m² of land a year, and up to 500 from
-  fresh glassy regolith. The top metre weathers through in 3,000–31,000 years. For the
+  temperature, dissolves about 40 g of soil per m² of land a year, and up to 420 from
+  fresh glassy regolith. The top metre weathers through in 3,500–36,500 years. For the
   average mare soil, if every element left in step with the rock and each cation stayed
   dissolved in the seas:
 
   | Element | Leaves the land, g per m² a year | Into the seas, kg a year | Years for the seas to reach Earth sea water's level |
   |---|---|---|---|
-  | Calcium | 4–40 | 1.1–11 × 10¹¹ | 4,000–41,000, but it settles as carbonate first |
-  | Magnesium | 2.7–27 | 0.7–7 × 10¹¹ | 18,000–180,000 |
-  | Sodium | 0.13–1.3 | 0.4–4 × 10¹⁰ | 3–30 million |
-  | Potassium | 0.06–0.65 | 0.2–2 × 10¹⁰ | 0.24–2.4 million |
-  | Phosphorus, released | 0.03–0.3 | | most held in soil and sediment |
-  | Sulfur | 0.06–0.6 | 0.2–2 × 10¹⁰ | |
+  | Calcium | 3.3–33 | 0.9–9 × 10¹¹ | 4,800–48,000, but it settles as carbonate first |
+  | Magnesium | 2.3–23 | 0.6–6 × 10¹¹ | 22,000–220,000 |
+  | Sodium | 0.11–1.1 | 0.3–3 × 10¹⁰ | 4–40 million |
+  | Potassium | 0.055–0.55 | 0.15–1.5 × 10¹⁰ | 0.29–2.9 million |
+  | Phosphorus, released | 0.023–0.23 | | most held in soil and sediment |
+  | Sulfur | 0.05–0.5 | 0.13–1.3 × 10¹⁰ | |
 
   Basalt is rich in calcium and magnesium and poor in sodium and potassium. So within
   tens of thousands of years the Open Moon's seas would turn rich in magnesium and
@@ -331,7 +331,7 @@ the equator unless stated.
   | Carbon, nitrogen | The air | Photosynthesis and nitrogen fixation already close their loops |
   | Phosphorus | Held in soil, lost by leaching and erosion, buried in sea sediment | Biology (H1–H6); dredged sediment for what erosion takes (H10) |
   | Sulfur, iodine, selenium | Seas | The air (H8) and biology |
-  | Potassium | Seas | Biology returns 3–27% (H4); salt works and spray the rest (H8, H10) |
+  | Potassium | Seas | Biology returns 3–32% (H4); salt works and spray the rest (H8, H10) |
   | Magnesium, sodium | Seas | Salt works and spray; biology returns under 0.2% |
   | Calcium | Settles as carbonate | Dredged lime and shells; the soils hold much more |
   | Silica | Settles in the seas | Abundant in the soils |
@@ -383,18 +383,18 @@ The biological path (H1–H7):
     pace with it (E6); moths only near the poles or with the wind.
 - **H4. What biology can carry.** *Computed · test first.*
   - **The phosphorus target:** Earth's rivers, at the Moon's runoff, would carry
-    0.003–0.008 g of phosphorus per m² of land a year off in solution.
-  - **The migrants needed:** returning that takes 0.5–1.2 g of dry insect bodies left on
-    each m² of land a year, or 0.13–0.32 g of vertebrate bodies, whose bone makes them
+    0.0027–0.0066 g of phosphorus per m² of land a year off in solution.
+  - **The migrants needed:** returning that takes 0.4–0.9 g of dry insect bodies left on
+    each m² of land a year, or 0.11–0.27 g of vertebrate bodies, whose bone makes them
     rich in phosphorus.
   - **What the seas must produce:** with seas on 28% of the Moon, they must send up
-    1.2–3.0 g of dry insects per m² of sea a year, the top of Mývatn's range.
-  - **Against Earth:** that is 5–12 times what all of Earth's seabird colonies deliver per
-    m² of land, and 20–60 times southern Britain's insect migrants.
-  - **Fuel:** the flight sugar is 0.05–0.7% of a wild forest's dusk fruit fall.
+    1.0–2.4 g of dry insects per m² of sea a year, the top of Mývatn's range.
+  - **Against Earth:** that is 4–10 times what all of Earth's seabird colonies deliver per
+    m² of land, and 20–50 times southern Britain's insect migrants.
+  - **Fuel:** the flight sugar is 0.04–0.6% of a wild forest's dusk fruit fall.
 
   At Mývatn's highest rate, with every insect landing on land, the seas would return
-  1.2–3 times the dissolved phosphorus, 3–27% of the potassium, and under 0.2% of the
+  1.5–3.8 times the dissolved phosphorus, 3–32% of the potassium, and under 0.2% of the
   magnesium and calcium that weathering carries off. Biology closes the loop for the
   elements life concentrates. It cannot carry the bulk of the salts.
 - **H5. Where the nutrients land.** *Earth evidence · a design point.* Animals deliver
@@ -435,7 +435,7 @@ The air and the land (H8–H9):
 - **H8. Through the air.** *Earth evidence and computed · adopt.*
   - **Sulfur:** Earth's ocean releases 28 (18–34) Tg of sulfur a year as dimethyl sulfide
     (Lana et al. 2011). Seas as active per m² would bring 0.02–0.04 g of sulfur per m² of
-    lunar land a year, 3–64% of what weathering carries off.
+    lunar land a year, 4–75% of what weathering carries off.
   - **Iodine:** the sea also emits iodine, as methyl iodide and inorganic iodine
     (Carpenter et al. 2021), and most soil iodine arrives this way (Fuge and Johnson
     1986). Soils more than 50 km inland hold a geometric mean of 2.6 µg/g against 11.6
@@ -454,7 +454,7 @@ The air and the land (H8–H9):
   rock for a long time without uplift, though it drains the uplands into the basins.
   Physical erosion on the Open Moon has not been estimated. Particulate matter makes up
   95% of the phosphorus Earth's rivers carry naturally (Meybeck 1982), and at Earth's
-  rate erosion would take 0.06–0.17 g of phosphorus per m² of lunar land a year, 7–50
+  rate erosion would take 0.05–0.14 g of phosphorus per m² of lunar land a year, 7–50
   times the dissolved loss.
 
 The engineered path (H10):
@@ -462,7 +462,7 @@ The engineered path (H10):
 - **H10. Salt works, dredging and imports.** *Computed and idea · adopt.*
   - **Salt works:** evaporation ponds suit the two-week day. Holding the seas'
     composition would mean taking out the soluble magnesium, sodium and potassium,
-    8 × 10¹⁰–8 × 10¹¹ kg of these cations a year. That is 0.3–3 times the world's whole
+    7 × 10¹⁰–7 × 10¹¹ kg of these cations a year. That is 0.24–2.4 times the world's whole
     salt output of 2.8 × 10¹¹ kg a year (USGS 2025), weighed as cations alone; the salts
     weigh more. The salts return potassium, magnesium and sulfate to land as fertiliser.
     Earth's great potash deposits likewise formed as old seas evaporated.
@@ -511,23 +511,23 @@ return paths can bring back:
 
 | Element | Leaves the land, g per m² a year | Biology at Mývatn's highest rate | The air | Engineered |
 |---|---|---|---|---|
-| Phosphorus in solution | 0.003–0.008 (Earth's river load at the Moon's runoff) | 1.2–3 times the loss | | |
-| Phosphorus on eroded particles | 0.06–0.17 (at Earth's rate) | | | Dredged sediment |
-| Potassium | 0.06–0.65 | 3–27% | | Salt works |
-| Sulfur | 0.06–0.6 | | 3–64% (dimethyl sulfide) | Salt works |
-| Magnesium | 2.7–27 | under 0.2% | | Salt works |
-| Calcium | 4–40 | under 0.2% | | Settles as carbonate; dredged lime |
+| Phosphorus in solution | 0.0027–0.0066 (Earth's river load at the Moon's runoff) | 1.5–3.8 times the loss | | |
+| Phosphorus on eroded particles | 0.05–0.14 (at Earth's rate) | | | Dredged sediment |
+| Potassium | 0.055–0.55 | 3–32% | | Salt works |
+| Sulfur | 0.05–0.5 | | 4–75% (dimethyl sulfide) | Salt works |
+| Magnesium | 2.3–23 | under 0.2% | | Salt works |
+| Calcium | 3.3–33 | under 0.2% | | Settles as carbonate; dredged lime |
 
-Holding the seas' composition takes out 8 × 10¹⁰–8 × 10¹¹ kg of soluble cations a year,
-0.3–3 times the world's salt output. The seas would reach Earth sea water's magnesium in
-18,000–180,000 years without that.
+Holding the seas' composition takes out 7 × 10¹⁰–7 × 10¹¹ kg of soluble cations a year,
+0.24–2.4 times the world's salt output. The seas would reach Earth sea water's magnesium in
+22,000–220,000 years without that.
 
 Flows of phosphorus, per m² of land a year, for scale:
 
 | Flow | Phosphorus |
 |---|---|
-| Earth's rivers at the Moon's runoff, in solution | 0.003–0.008 g |
-| The same, on particles | 0.06–0.17 g |
+| Earth's rivers at the Moon's runoff, in solution | 0.0027–0.0066 g |
+| The same, on particles | 0.05–0.14 g |
 | Earth's seabird colonies, spread over Earth's land | 0.0007 g |
 | High-flying insects over southern Britain | 0.00014 g |
 | Lake Mývatn's midges, first 50 m of shore, high year | 0.1 g |
@@ -537,8 +537,8 @@ The night and the lures:
 
 | Quantity | Value |
 |---|---|
-| The plant's upkeep through the dark hours | 2.4 W/m² (0.70 idling) |
-| Dusk fruit fall at a 30% fruit share, spread over the dark hours | 2.3 W/m² |
+| The plant's upkeep through the dark hours | 2.3 W/m² (0.65 idling) |
+| Dusk fruit fall at a 30% fruit share, spread over the dark hours | 1.9 W/m² |
 | Night respiration plus a whole 60% fruit fall, share of the O₂ above | 3 × 10⁻⁵ |
 | The same, added to the CO₂ above if the air stays put | 1.5% |
 | A 1 m² glowing surface at the fungal system's lowest efficiency | 0.04 W, under 2% of a m² of plants' night upkeep |
@@ -585,7 +585,7 @@ A recommendation for the author, judged on five criteria:
 
 **Test first:**
 
-- leaves that survive about 240 dark hours, and metabolism that idles and restarts
+- leaves that survive about 250 dark hours, and metabolism that idles and restarts
   (B5);
 - a large fruit's program compressed to one lunar day (D2);
 - glowing lures that last through the first nights, with a catch the migrants can bear

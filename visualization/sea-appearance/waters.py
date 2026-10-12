@@ -25,10 +25,12 @@ from lighting import INK, INK2, OUT, SURF, write_sidecar  # noqa: E402
 
 COLOURS = ROOT / "research/studies/sea_appearance/results/water_colours.json"
 SERIES = {"open_sea": "#2a78d6", "productive_coast": "#1baf7a", "river_mouth": "#eb6834"}   # slots 1, 3, 2
-SOIL_DASH = {"12001": "-", "10084": (0, (5, 2.5)), "62231": (0, (1.5, 1.8))}
-LABELS = {("open_sea", "12001"): "Open sea", ("productive_coast", "12001"): "Productive coast, mare fines",
-          ("productive_coast", "10084"): "Productive coast, high-titanium mare fines",
-          ("productive_coast", "62231"): "Productive coast, highland fines", ("river_mouth", "12001"): "River mouth"}
+SOIL_DASH = {"developed": "-", "12001": (0, (3, 1.6)), "10084": (0, (5, 2.5)), "62231": (0, (1.5, 1.8))}
+LABELS = {("open_sea", "developed"): "Open sea", ("productive_coast", "developed"): "Productive coast",
+          ("river_mouth", "developed"): "River mouth",
+          ("productive_coast", "12001"): "Productive coast, raw mare fines for comparison",
+          ("productive_coast", "10084"): "Productive coast, raw high-titanium mare fines for comparison",
+          ("productive_coast", "62231"): "Productive coast, raw highland fines for comparison"}
 XYZ_TO_SRGB = np.array([[3.2406, -1.5372, -0.4986], [-0.9689, 1.8758, 0.0415], [0.0557, -0.2040, 1.0570]])
 
 
@@ -45,7 +47,8 @@ def figure(product):
     for c in cases:
         ax.plot(wavelength, np.array(c["rrs_display_per_sr"]) * 1000, color=SERIES[c["water"]],
                 ls=SOIL_DASH[c["soil"]], lw=1.6)
-    ax.set_xlim(400, 700); ax.set_ylim(0, None)
+    top = max(max(c["rrs_display_per_sr"]) for c in cases) * 1000
+    ax.set_xlim(400, 700); ax.set_ylim(0, 1.45 * top)       # headroom keeps the legend clear of the curves
     ax.set_xlabel("Wavelength (nm)", fontsize=9, color=INK2)
     ax.set_ylabel("Remote-sensing reflectance (10⁻³ per steradian)", fontsize=9, color=INK2)
     for side in ("top", "right"):
@@ -63,7 +66,7 @@ def figure(product):
                  fontsize=8.5, color=INK, va="bottom")
     checks = {}
     for k, c in enumerate(cases):
-        y = 0.68 - k * 0.14
+        y = 0.70 - k * 0.12
         fig.text(0.53, y + height / 2, textwrap.fill(LABELS[(c["water"], c["soil"])], 24), fontsize=8.2,
                  color=INK, va="center")
         for world, x in columns.items():
@@ -82,8 +85,9 @@ def figure(product):
     fig.text(0.06, 0.965, "The colour of the Open Moon's waters", fontsize=13, color=INK, ha="left", va="top")
     note = ("The light leaving the water itself, seen looking down past the reflected sky, for the biosphere's design "
             "guesses of what the seas carry: a nutrient-poor open sea (0.1 mg/m³ chlorophyll), a productive coast "
-            "(2 mg/m³, organic matter, 3 g/m³ of regolith fines) and a river mouth (5 mg/m³, much organic matter, "
-            "30 g/m³ of fines). Earth's seawater optics; fines from the finest fraction of Apollo soils. Swatches share "
+            "(2 mg/m³, organic matter, 3 g/m³ of developed soils' fines) and a river mouth (5 mg/m³, much organic "
+            "matter, 30 g/m³ of fines). Earth's seawater optics; the fines take coastal non-algal particles' optics "
+            "(Babin et al. 2003), with the finest fraction of raw Apollo soils for comparison. Swatches share "
             "one exposure on a display with Earth-daylight (D65) white, without adapting to the lunar daylight, which "
             "reaches the water warmer than Earth's: the Moon's tall air takes more blue out of the sunbeam. Depths are "
             "where photosynthetic light falls to 1%. Saturated blues beyond the display's range are clipped.")

@@ -2,39 +2,39 @@
 
 This study prices eight ways of growing the lunar design's plant-rich diet for each billion residents, fits each to the
 29.5-day light cycle, and combines them into seven mixes for 4, 6 and 8 billion people. It reads ecology's diets,
-crop-model yields and nutrient targets and resources' phosphorus accounts for the sky and the waters from their branches
-at pinned commits, the canopy, climate, drainage, aerosol, heat and power products committed on this branch, and
-published measurements for every food system (`sources.json`, 100 sources). Numbers computed here are marked *screen*;
-arithmetic on cited values is marked *derived*. The product is `results/food_systems.json` (schema
-`terluna.research.food-systems/1`).
+crop-model yields and nutrient targets and resources' phosphorus accounts for the sky and the waters (from their
+branches, read in the tree at pinned hashes since the joint integration), the canopy, climate, drainage, aerosol, heat
+and power products, and published measurements for every food system (`sources.json`, 100 sources).
+Numbers computed here are marked *screen*; arithmetic on cited values is marked *derived*. The product is
+`results/food_systems.json` (schema `terluna.research.food-systems/1`).
 
 ## Findings
 
-1. **Rain-fed fields feed the plant-rich diet at the least cost in every currency, and the rain alone feeds 9.4–27.5
-   billion people outside a kept 30%, or 6.7–19.6 billion outside a kept half** (*screen*). A billion residents need
-   139,000–393,000 km² of crops at the crop model's equatorial yields, 244,000–709,000 km² on the wettest band: 2.5–7.4%
-   of what the rain can grow in the bands where most land is wet, 5.28–5.46 million km² of equivalent once the crops'
+1. **Rain-fed fields feed the plant-rich diet at the least cost in every currency, and the rain alone feeds 9.1–27.0
+   billion people outside a kept 30%, or 6.5–19.3 billion outside a kept half** (*screen*). A billion residents need
+   141,000–401,000 km² of crops at the crop model's equatorial yields, 248,000–731,000 km² on the wettest band: 2.6–7.7%
+   of what the rain can grow in the bands where most land is wet, 5.22–5.45 million km² of equivalent once the crops'
    water need is held to what the design sunlight can evaporate (Departures). Their only power is nitrogen fixation,
    6.3–14 W a resident. They lose 0.044–0.18 Mt of phosphorus a year and emit 17–65 kt N of N2O and 0.3–3 Mt of methane
    at the lunar design's targets. Farms that reach the 70–80% of potential yield that Earth's best farms reach (Cassman
-   1999; Lobell et al. 2009) need 25–43% more land, and the rain then feeds 6.6–22 billion outside a kept 30%.
+   1999; Lobell et al. 2009) need 25–43% more land, and the rain then feeds 6.4–22 billion outside a kept 30%.
 
 2. **Water from the seas grows what the rain cannot for 0.92–1.44 kWh a cubic metre** (*screen*). Lifting it to the
    fields' mean height (1.4–1.5 km at a sixth of Earth's gravity), piping it 69–95 km and pressing it through the
    emitters costs about half of what California's State Water Project spends (2.4 kWh/m³; Cohen et al. 2004). Topping up
-   a billion residents' rain-belt fields takes 115–522 km³ a year, 1.6–7.2% of the rivers' flow, and 13–86 W a resident.
-   Watered fields in the fog desert take 247,000–736,000 km², 263–1,150 km³ and 28–173 W a resident; the sunlight at
-   45–60° lets them transpire enough for 71–75% of the crop model's production there.
+   a billion residents' rain-belt fields takes 115–540 km³ a year, 1.6–7.5% of the rivers' flow, and 13–89 W a resident.
+   Watered fields in the fog desert take 247,000–751,000 km², 263–1,180 km³ and 28–176 W a resident; the sunlight at
+   45–60° lets them transpire enough for 73–78% of the crop model's production there.
 
-3. **Sunlit glass needs 1.2–2.5 times the equatorial field area, 4–22 Gt of glass and steel a billion and 0.15–1.2 kW a
+3. **Sunlit glass needs 1.2–2.5 times the equatorial field area, 4–23 Gt of glass and steel a billion and 0.16–1.2 kW a
    resident** (*screen*). The glass passes 66–73% of the light (Li et al. 2014; Kempkes et al. 2022), so a house yields
    66–89% of an open field at the crop model's potential, CO2 enrichment giving back 0–10% (*derived*, Nederhoff 1994),
-   and the fog desert's sun at 47° gives 74% of the equator's yield. The sunlight absorbed under the glass lets the
-   crops transpire 2.0–2.3 mm a day there, so a fog-desert house grows 83–86% of what its light allows. Vented houses
-   lose the crops' transpiration, 204–721 km³ a year a billion: in the fog desert the rain on the glass covers 7% of it
-   and the seas supply 189–671 km³; on the highlands the rain on the glass covers it all. Closing a house saves that
-   water and costs 2.3–12.8 kW a resident to pump out the absorbed sunlight. Renewing the glass every 15 years takes
-   131–772 Mt a year a billion. Fields at Earth's 70–80% of potential yield about as much a square metre as glass at the
+   and the fog desert's sun at 47° gives 72% of the equator's yield. The sunlight absorbed under the glass lets the
+   crops transpire 2.0–2.3 mm a day there, so a fog-desert house grows 85–90% of what its light allows. Vented houses
+   lose the crops' transpiration, 204–736 km³ a year a billion: in the fog desert the rain on the glass covers 7% of it
+   and the seas supply 189–685 km³; on the highlands the rain on the glass covers it all. Closing a house saves that
+   water and costs 2.4–13 kW a resident to pump out the absorbed sunlight. Renewing the glass every 15 years takes
+   133–788 Mt a year a billion. Fields at Earth's 70–80% of potential yield about as much a square metre as glass at the
    crop model's potential.
 
 4. **Fog nets catch little in the Moon's fogs, which form in nearly still air, so the fog desert's water comes by pipe
@@ -50,13 +50,13 @@ arithmetic on cited values is marked *derived*. The product is `results/food_sys
    L/m² at Earth's working fog-collection sites (Klemm et al. 2012); the two rings tilted 70° across the equator give
    0.004–68 L/m². At the bracket's top, nets for a billion residents' fog-desert glass would cover 1.9 million km²,
    two-fifths of the fog desert. Rain on glass gives 51–61 L/m² a year. Water drawn from the air costs 238–500 kWh/m³
-   (Peeters et al. 2021; Lord et al. 2021), 5.1–38 TW a billion for fog-desert glass, against 0.019–0.088 TW to lift and
+   (Peeters et al. 2021; Lord et al. 2021), 5.1–39 TW a billion for fog-desert glass, against 0.019–0.09 TW to lift and
    pipe it from the seas at 0.89–1.15 kWh/m³.
 
 5. **Lamp-lit staples take 5.6–61 kW a resident, and the fully lamp-lit diet for 8 billion takes 41.5–425 TW, whose heat
    needs 0.50–8.1% more dimming** (*screen*). Under LEDs a kilowatt-hour grows 7.4–39 kcal of potato or 3.7–16 kcal of
    wheat, and the varied diet with its losses needs 2.1–4.3 times its 2,500 kcal grown. Lit by ground solar with night
-   storage, lamp farms need 191,000–2,090,000 km² of panels a billion, more than the 139,000–393,000 km² of fields they
+   storage, lamp farms need 191,000–2,090,000 km² of panels a billion, more than the 141,000–401,000 km² of fields they
    replace; lit by the array, 114,000–1,240,000 km² of receivers. The array intercepts 1,900–2,400 PW; the bound is
    heat. Each 1% of added dimming answers 72–115 TW of heat on the Moon (population study), and the dimming takes the
    same share of sunlight from every wild plant. Fusion's heat raises the dimming to 0.7–18% at 8 billion.
@@ -71,8 +71,8 @@ arithmetic on cited values is marked *derived*. The product is `results/food_sys
 
 7. **Aquaponic fish take four to six times the cropland of the animal part they replace and emit three to seven times
    the whole field diet's N2O** (*screen*). Replacing the diet's 24.3 g of animal protein a day, with its losses, takes
-   128–190 Mt of live fish a billion, fed on 141–425 Mt of feed grown on 44,500–309,000 km² of crops; ecology's animal
-   part takes 10,000–51,000 km² of crops and up to a million km² of grazing. The fish emit 52–446 kt N of N2O against
+   128–190 Mt of live fish a billion, fed on 141–425 Mt of feed grown on 45,100–315,000 km² of crops; ecology's animal
+   part takes 10,000–53,000 km² of crops and up to a million km² of grazing. The fish emit 52–446 kt N of N2O against
    the field diet's 17–65, and send 0.28–4.8 Mt of phosphorus to their sludge, which must go back to the fields.
 
 8. **The waters' phosphorus holds sea farms to the animal part of 0.04–0.26 billion people, so the sea-supported mix
@@ -103,26 +103,26 @@ arithmetic on cited values is marked *derived*. The product is `results/food_sys
 
 11. **At 8 billion, the feasible cases of every buildable mix with fields leave 35–89% of the dry land wild outside a
     kept 30%; lamps and power-made food leave 97% or more** (*screen*). Rain-fed first, with grazing held to the fog
-    desert, uses 2.05–3.72 million km², 0.05–0.077 TW and no sea water. Greenhouse-heavy fits to 97% of the way to its
+    desert, uses 2.08–3.8 million km², 0.05–0.077 TW and no sea water. Greenhouse-heavy fits to 95% of the way to its
     high-cost end, where its glass fills the highlands outside a kept 30%. Fog-desert glass spares the rain belt whole
-    and fits the fog desert only to 16% of the way (2.6–3.5 million km², 2.8–3.9 TW, 1,960–2,630 km³ of sea water a
+    and fits the fog desert only to 16% of the way (2.6–3.5 million km², 2.8–3.9 TW, 1,970–2,630 km³ of sea water a
     year); outside a kept half it fits at neither end. Power-made food takes 5.6–22.4 TW (0.067–0.43% more dimming), the
     fully lamp-lit diet 41.5–425 TW, against 12–36 TW for the residents' other energy.
 
 12. **Under the author's wild share, at least half wild or 30% wild with another 20% hybrid, the power-heavy mix fits
     at 4–8 billion at both ends** (*screen*). The hybrid fifth is the author's megaparks and great gardens, closed to
     fields, glass, towns and grazing, so the compromise closes the same half of each zone as a kept half and every mix
-    matches the half's results: the rain alone feeds 6.7–19.6 billion. Half wild with another 20% hybrid, run beside
+    matches the half's results: the rain alone feeds 6.5–19.3 billion. Half wild with another 20% hybrid, run beside
     them for comparison at the author's request, leaves fields, glass, towns and grazing 30% of each zone: the rain
-    alone feeds 4.0–11.8 billion, the rain-fed-first mix fits 18–36% of the way to its high-cost end, and at 8 billion
-    the power-heavy mix's high-cost end grows 1.06 million km² of its crops' equivalent on watered fields, with 3,250
-    km³ a year from the seas and 0.53 TW of lift.
+    alone feeds 3.9–11.6 billion, the rain-fed-first mix fits 18–36% of the way to its high-cost end, and at 8 billion
+    the power-heavy mix's high-cost end grows 1.12 million km² of its crops' equivalent on watered fields, with 3,430
+    km³ a year from the seas and 0.56 TW of lift.
 
 13. **The author's blend, power-heavy 40%, power-made 50% and fully lamp-lit 10%, takes the least sunlight from wild
     life at the high-cost end within the limits set for it** (*screen*; [blend.py](blend.py),
     [results/food_blend.json](results/food_blend.json)). With each mix between a tenth and a half of the diet,
     power-made takes the cap and fully lamp-lit the floor, so the limits set the weights. At 8 billion under the
-    compromise its fields take 0.67–1.81 million km², none of them in the middle latitudes, and its heat is 15–171 TW
+    compromise its fields take 0.68–1.86 million km², none of them in the middle latitudes, and its heat is 15–171 TW
     with fusion, 0.13–2.4% more dimming. Heritage meat at a kilogram a person a year takes 0.30 million km², a fifth of
     the homestead region, and its cattle add 1.6–1.7 Mt of methane a year.
 
@@ -134,21 +134,21 @@ resident.
 
 | System | Land or sea, thousand km² | Water, km³ a year | Power a resident | Phosphorus, Mt a year | N2O, kt N a year | Structure |
 |---|---|---|---|---|---|---|
-| Rain-fed fields | 139–393 eq; 244–709 on the wettest band | 246–721 rain | 6.25–14.4 W | 0.044–0.18 | 17.3–65 | – |
-| Irrigated top-up, rain belt | 141–401 | 115–522 from the seas | 13.1–85.8 W | as fields | as fields | – |
-| Irrigated fields, fog desert | 247–736 | 263–1,150 from the seas | 27.5–173 W | as fields | as fields | – |
-| Vented glass, fog desert | 246–974 | 189–671 from the seas | 243–1,200 W | 0–0.09 discharged | 62.4–155 | 2.92–11.6 Gt glass, 2.7–10.7 Gt steel |
-| Closed glass, fog desert | 200–824 | 0 from the seas | 2,330–12,800 W | 0–0.09 discharged | 62.4–155 | 2.38–9.8 Gt glass, 2.2–9.05 Gt steel |
-| Vented glass, highlands | 177–695 | 0 from the seas | 161–793 W | 0–0.09 discharged | 62.4–155 | 2.1–8.27 Gt glass, 1.94–7.64 Gt steel |
-| Vented glass, rain belt | 165–645 | 24.5–130 from the seas | 153–755 W | 0–0.09 discharged | 62.4–155 | 1.96–7.67 Gt glass, 1.81–7.08 Gt steel |
+| Rain-fed fields | 141–401 eq; 248–731 on the wettest band | 247–736 rain | 6.25–14.4 W | 0.044–0.18 | 17.3–65 | – |
+| Irrigated top-up, rain belt | 144–409 | 115–540 from the seas | 13.2–88.8 W | as fields | as fields | – |
+| Irrigated fields, fog desert | 247–751 | 263–1,180 from the seas | 27.6–176 W | as fields | as fields | – |
+| Vented glass, fog desert | 246–993 | 189–685 from the seas | 244–1,220 W | 0–0.09 discharged | 62.4–155 | 2.93–11.8 Gt glass, 2.7–10.9 Gt steel |
+| Closed glass, fog desert | 207–841 | 0 from the seas | 2,410–13,000 W | 0–0.09 discharged | 62.4–155 | 2.46–10 Gt glass, 2.28–9.24 Gt steel |
+| Vented glass, highlands | 177–709 | 0 from the seas | 162–809 W | 0–0.09 discharged | 62.4–155 | 2.11–8.44 Gt glass, 1.95–7.79 Gt steel |
+| Vented glass, rain belt | 167–658 | 21.8–133 from the seas | 155–770 W | 0–0.09 discharged | 62.4–155 | 1.99–7.82 Gt glass, 1.84–7.22 Gt steel |
 | Vertical farms, potato | 5.01–64.7 floor | recycled | 5.56–60.9 kW | – | – | 2.5–32.3 Gt building |
 | Vertical farms, wheat | 2.83–28.7 floor | recycled | 14–120 kW | – | – | 1.42–14.3 Gt building |
 | Lamp-lit vegetables and fruit | – | – | 90.4–704 W | – | – | – |
 | Microbial protein, animal part | – | – | 39.7–133 W | 0.0913–0.295 in biomass | – | – |
 | Microbial protein, half the protein | – | – | 76.9–257 W | 0.177–0.572 in biomass | – | – |
-| Precision fermentation, animal part | 7.05–11.2 eq of sugar crops | – | 14.7–17 W (+46.8–167 W with electro-sugar) | – | – | – |
+| Precision fermentation, animal part | 7.15–11.4 eq of sugar crops | – | 14.7–17 W (+46.8–167 W with electro-sugar) | – | – | – |
 | Power-made food | – | – | 0.695–2.79 kW | 0.177–0.572 taken up | – | – |
-| Aquaponics, animal part | 44.5–309 eq of feed crops | 9.72–14.4 | 45–66.8 W | 0.283–4.79 to sludge | 52.2–446 | – |
+| Aquaponics, animal part | 45.1–315 eq of feed crops | 9.72–14.4 | 45–66.8 W | 0.283–4.79 to sludge | 52.2–446 | – |
 | Seaweed, animal part | 20.5–83.1 sea | – | – | 0.289–0.627 drawn from the seas | – | – |
 | Shellfish, animal part | 39.9–407 sea | – | – | 0.144–0.399 drawn from the seas | – | – |
 
@@ -161,8 +161,8 @@ W/m² and dimming for every block.
 **Fields** use ecology's crop model: the day fruit at the model's potential, clouds (0.89), losses of a quarter to a
 third, a varied diet and the plant-rich diet's crop factor (people_and_land.md, item 11). Rain supports a share of the
 model's growth in each latitude band (ecology), raised here to the water need the sunlight allows (Departures): 56–58%
-within 15° of the equator, 33–34% at 15–30° and 17–18% at 30–45°. The atlas bands then hold 5.59–5.79 million km² of
-rain-fed equivalent, 5.28–5.46 million km² of it in the bands the fill reaches (0–45°, the 30–45° band held to its wet
+within 15° of the equator, 32–34% at 15–30° and 17–18% at 30–45°. The atlas bands then hold 5.54–5.78 million km² of
+rain-fed equivalent, 5.22–5.45 million km² of it in the bands the fill reaches (0–45°, the 30–45° band held to its wet
 lowland, taken as the wet middle latitudes, and its own highlands). Watering lifts water from the seas to each zone's
 mean height, pipes it the zone's mean distance through a 2 m main and presses it to 100–400 kPa at the emitters (main
 and pressure are design guesses), at the 60–90% application efficiency of surface to drip irrigation (Brouwer et al.
@@ -178,7 +178,7 @@ what the sunlight absorbed inside lets the crops transpire. A vented house holds
 a closed one at 700–1,000 ppm (design guesses); the CO2 cuts the crops' water per unit of growth through the gain and by
 closing their stomata 3–4% per 100 ppm (Nederhoff 1994), 1.0–1.21 times in vented houses and 1.18–1.49 times in closed
 ones. Closed houses pump the absorbed sunlight out at a coefficient of performance of 4–6 (Kozai 2013), with the same
-transmission at each end as the yield. As a check, the crop model's equatorial yield, 11,200–15,500 kcal/m² a year,
+transmission at each end as the yield. As a check, the crop model's equatorial yield, 11,000–15,300 kcal/m² a year,
 overlaps the top of the food energy of unlit Dutch glasshouse tomatoes, 9,900–12,400 kcal/m² a year, and stays below a
 lit hybrid crop's 16,700 (*derived*; Raaphorst et al. 2002; de Gelder & Grootscholten 2011; Helmus-Schuddebeurs et al.
 2019). Soilless culture discharges 0–10% of its nutrient solution's phosphorus a year (Beerling et al. 2014).
@@ -217,8 +217,8 @@ lets the waters' life spare, 30% of each water's dissolved input, a design guess
 
 | System | Food per area | Food grown per kWh |
 |---|---|---|
-| Rain-fed fields, at the equator | 2,540–7,190 residents a km² | – |
-| Vented glass, fog desert | 1,030–4,070 residents a km² | – |
+| Rain-fed fields, at the equator | 2,490–7,090 residents a km² | – |
+| Vented glass, fog desert | 1,010–4,070 residents a km² | – |
 | Lamp-lit potato-like staple | 15,500–200,000 residents a km² of floor | 7.4–39 kcal |
 | Lamp-lit wheat | 34,800–353,000 residents a km² of floor | 3.7–16 kcal |
 | Microbial protein | – | 11–33 g of protein |
@@ -229,14 +229,14 @@ lets the waters' life spare, 30% of each water's dissolved input, a design guess
 ## Fit to the lunar cycle
 
 Fields need no night energy. Evergreen crops store carbon by day and idle on it at a quarter of their daytime upkeep
-once their own balance turns negative: 10.4 g C/m² carries an idling crop through the night, 47.3 g an Earth-like one
+once their own balance turns negative: 10.9 g C/m² carries an idling crop through the night, 48.6 g an Earth-like one
 (canopy plant model). The day fruit is set at sunrise and ripe at sunset, so the harvest comes once a cycle at dusk and
-the towns hold a cycle's food (lunar-cycle ecology register). Light stays under 1 µmol m⁻² s⁻¹ for 238 h of the cycle at
-the equator, 217 h at 30° and 34 h at 60°, where twilight lights most of the night (canopy plant model).
+the towns hold a cycle's food (lunar-cycle ecology register). Light stays under 1 µmol m⁻² s⁻¹ for 254 h of the cycle at
+the equator, 237 h at 30° and 120 h at 60°, where twilight lights most of the night (canopy plant model).
 
-Sunlit glass runs as the fields beneath it. Lamps through the dark hours (112 h in the fog desert, 221–227 h on the
-highlands and in the rain belt) add 21–30% to a house's light over the cycle and save 35,000–177,000 km² of glass a
-billion for 1.9–14 TW (*screen*): each square metre of glass that lamps replace costs 46–95 W around the clock.
+Sunlit glass runs as the fields beneath it. Lamps through the dark hours (170 h in the fog desert, 240–245 h on the
+highlands and in the rain belt) add 29–34% to a house's light over the cycle and save 37,800–250,000 km² of glass a
+billion for 2.7–16 TW (*screen*): each square metre of glass that lamps replace costs 46–95 W around the clock.
 
 Vertical farms keep their own clock, and a resident's lamps draw 1,970–21,600 kWh through each 354-hour night, 3–33
 times a European's night use (650 kWh, population study), from the array, fusion or storage. Microbial reactors take
@@ -267,15 +267,16 @@ from the seas, then watered fields in the fog desert; ecology's grazing on the f
 |---|---|---|---|
 | Fits its zones, kept 30% | to 84% of the way (fog desert full) | to 56% of the way (fog desert full) | to 42% of the way (fog desert full) |
 | Fits its zones, kept half | to 60% of the way (fog desert full) | to 40% of the way (fog desert full) | to 30% of the way (fog desert full) |
-| Land used, million km² | 1.03–3.04; feasible 1.03–2.71 | 1.54–5; feasible 1.54–3.21 | 2.05–7.68; feasible 2.05–3.72 |
-| &nbsp;&nbsp;rain belt | 0.708–2.09; feasible 0.708–1.86 | 1.06–3.59; feasible 1.06–2.22 | 1.42–5.79; feasible 1.42–2.58 |
-| &nbsp;&nbsp;highlands, towns included | 0.318–0.946; feasible 0.318–0.848 | 0.474–1.41; feasible 0.474–0.994 | 0.628–1.89; feasible 0.628–1.14 |
+| Land used, million km² | 1.04–3.12; feasible 1.04–2.79 | 1.56–5.24; feasible 1.56–3.29 | 2.08–8.16; feasible 2.08–3.8 |
+| &nbsp;&nbsp;rain belt | 0.719–2.15; feasible 0.719–1.92 | 1.08–3.79; feasible 1.08–2.28 | 1.45–5.93; feasible 1.45–2.64 |
+| &nbsp;&nbsp;wet middle latitudes | 0 | 0 | 0–0.249; feasible 0 |
+| &nbsp;&nbsp;highlands, towns included | 0.322–0.969; feasible 0.322–0.868 | 0.48–1.45; feasible 0.48–1.01 | 0.637–1.98; feasible 0.637–1.16 |
 | Grazing on the fog desert, million km² | 0–4; feasible 0–3.37 | 0–6; feasible 0–3.37 | 0–8; feasible 0–3.37 |
-| Dry land left wild outside a kept 30% | 94% to 57%; feasible 94% to 63% | 91% to 33%; feasible 91% to 60% | 87% to 4%; feasible 87% to 57% |
-| Dry land left wild outside a kept half | 91% to 39%; feasible 91% to 60% | 87% to over by 4%; feasible 87% to 56% | 82% to over by 31%; feasible 82% to 49% |
-| Rain belt left wild outside a kept 30% | 88% to 65%; feasible 88% to 69% | 82% to 40%; feasible 82% to 63% | 76% to 2%; feasible 76% to 56% |
+| Dry land left wild outside a kept 30% | 94% to 57%; feasible 94% to 62% | 91% to 31%; feasible 91% to 59% | 87% to 1%; feasible 87% to 56% |
+| Dry land left wild outside a kept half | 91% to 37%; feasible 91% to 60% | 87% to over by 8%; feasible 87% to 56% | 82% to over by 31%; feasible 82% to 48% |
+| Rain belt left wild outside a kept 30% | 88% to 64%; feasible 88% to 68% | 82% to 36%; feasible 82% to 62% | 76% to none; feasible 76% to 56% |
 | Fog desert used outside a kept 30%, grazing included | 0%–119%; feasible 0%–100% | 0%–178%; feasible 0%–100% | 0%–237%; feasible 0%–100% |
-| Rain-fed land left wild outside a kept 30% | 85% to 57%; feasible 85% to 62% | 78% to 36%; feasible 78% to 55% | 71% to 15%; feasible 71% to 48% |
+| Rain-fed land left wild outside a kept 30% | 85% to 56%; feasible 85% to 61% | 78% to 34%; feasible 78% to 54% | 70% to 12%; feasible 70% to 47% |
 | Power, TW | 0.025–0.0576; feasible 0.025–0.0525 | 0.0375–0.0864; feasible 0.0375–0.065 | 0.05–0.115; feasible 0.05–0.0775 |
 | Added dimming, power from the array | 0.000299–0.0011%; feasible 0.000299–0.000944% | 0.000448–0.00165%; feasible 0.000448–0.00104% | 0.000597–0.0022%; feasible 0.000597–0.00116% |
 | Added dimming, fusion | 0.000434–0.00242%; feasible 0.000434–0.00197% | 0.000651–0.00364%; feasible 0.000651–0.00194% | 0.000868–0.00485%; feasible 0.000868–0.00205% |
@@ -289,28 +290,28 @@ rain-fed fields; the animal part as aquaponic fish fed from the fields.
 
 | | 4 billion | 6 billion | 8 billion |
 |---|---|---|---|
-| Fits its zones, kept 30% | both ends | both ends | to 97% of the way (highlands full) |
-| Fits its zones, kept half | both ends | to 91% of the way (highlands full) | to 64% of the way (highlands full) |
-| Land used, million km² | 1.14–5.03 | 1.71–9.73 | 2.29–10.6 |
-| &nbsp;&nbsp;rain belt | 0.574–3.07 | 0.879–5.93 | 1.2–5.87; feasible 1.2–5.93 |
-| &nbsp;&nbsp;wet middle latitudes | 0 | 0–1.2 | 0–1.93; feasible 0–1.95 |
-| &nbsp;&nbsp;highlands, towns included | 0.569–1.96 | 0.836–2.59 | 1.09–2.82; feasible 1.09–2.73 |
-| &nbsp;&nbsp;of it glass | 0.328–1.21 | 0.493–1.82 | 0.657–2.42; feasible 0.657–2.34 |
-| Dry land left wild outside a kept 30% | 93% to 69% | 90% to 41% | 86% to 35% |
-| Dry land left wild outside a kept half | 90% to 50% | 85% to 35% | 80% to 34%; feasible 80% to 35% |
-| Rain belt left wild outside a kept 30% | 90% to 48% | 85% to none | 80% to 1%; feasible 80% to none |
-| Highlands used outside a kept 30% | 21%–72% | 31%–95% | 40%–103%; feasible 40%–100% |
-| Highlands used outside a kept half | 29%–90% | 42%–109%; feasible 42%–100% | 54%–145%; feasible 54%–100% |
-| Rain-fed land left wild outside a kept 30% | 89% to 48% | 83% to 22% | 77% to 25%; feasible 77% to 24% |
-| Power, TW | 0.505–1.71 | 0.757–2.56 | 1.01–3.95; feasible 1.01–3.71 |
-| Added dimming, power from the array | 0.00603–0.0326% | 0.00904–0.0489% | 0.0121–0.0755%; feasible 0.0121–0.07% |
-| Added dimming, fusion | 0.00876–0.0718% | 0.0131–0.108% | 0.0175–0.166%; feasible 0.0175–0.152% |
-| Water from the seas, km³ a year | 38.9–57.7 | 58.3–86.5 | 77.8–3,390; feasible 77.8–2,710 |
-| Phosphorus lost, Mt a year | 0.176–0.72 | 0.264–1.08 | 0.352–1.44; feasible 0.352–1.4 |
-| Phosphorus discharged from glass, Mt a year | 0–0.18 | 0–0.27 | 0–0.36; feasible 0–0.343 |
-| Phosphorus to fish sludge, Mt a year | 1.13–19.2 | 1.7–28.8 | 2.26–38.4; feasible 2.26–35.7 |
-| N2O, ppb a year | 0.147–1.1 | 0.221–1.65 | 0.295–2.2; feasible 0.295–2.07 |
-| Methane, Mt a year (steady ppm) | 1.2–12 (0.252–11.2) | 1.8–18 (0.377–16.8) | 2.4–24 (0.503–22.4); feasible 2.4–23.2 (0.503–19.4) |
+| Fits its zones, kept 30% | both ends | both ends | to 95% of the way (highlands full) |
+| Fits its zones, kept half | both ends | to 90% of the way (highlands full) | to 63% of the way (highlands full) |
+| Land used, million km² | 1.16–5.25 | 1.74–10.4 | 2.31–10.6 |
+| &nbsp;&nbsp;rain belt | 0.584–3.26 | 0.893–5.93 | 1.22–5.85; feasible 1.22–5.93 |
+| &nbsp;&nbsp;wet middle latitudes | 0 | 0–1.8 | 0–1.92; feasible 0–1.95 |
+| &nbsp;&nbsp;highlands, towns included | 0.573–1.99 | 0.842–2.64 | 1.1–2.86; feasible 1.1–2.73 |
+| &nbsp;&nbsp;of it glass | 0.329–1.23 | 0.494–1.85 | 0.659–2.46; feasible 0.659–2.34 |
+| Dry land left wild outside a kept 30% | 93% to 68% | 89% to 37% | 86% to 35% |
+| Dry land left wild outside a kept half | 90% to 47% | 85% to 35% | 80% to 34%; feasible 80% to 35% |
+| Rain belt left wild outside a kept 30% | 90% to 45% | 85% to none | 80% to 1%; feasible 80% to none |
+| Highlands used outside a kept 30% | 21%–73% | 31%–97% | 40%–105%; feasible 40%–100% |
+| Highlands used outside a kept half | 29%–92% | 42%–110%; feasible 42%–100% | 54%–147%; feasible 54%–100% |
+| Rain-fed land left wild outside a kept 30% | 88% to 47% | 83% to 20% | 77% to 25%; feasible 77% to 24% |
+| Power, TW | 0.506–1.73 | 0.759–2.59 | 1.01–4.06; feasible 1.01–3.71 |
+| Added dimming, power from the array | 0.00604–0.0331% | 0.00906–0.0496% | 0.0121–0.0775%; feasible 0.0121–0.0696% |
+| Added dimming, fusion | 0.00878–0.0728% | 0.0132–0.109% | 0.0176–0.171%; feasible 0.0176–0.151% |
+| Water from the seas, km³ a year | 38.9–57.7 | 58.3–86.5 | 77.8–3,750; feasible 77.8–2,760 |
+| Phosphorus lost, Mt a year | 0.176–0.72 | 0.264–1.08 | 0.352–1.44; feasible 0.352–1.39 |
+| Phosphorus discharged from glass, Mt a year | 0–0.18 | 0–0.27 | 0–0.36; feasible 0–0.335 |
+| Phosphorus to fish sludge, Mt a year | 1.13–19.2 | 1.7–28.8 | 2.26–38.4; feasible 2.26–34.6 |
+| N2O, ppb a year | 0.148–1.1 | 0.221–1.65 | 0.295–2.2; feasible 0.295–2.02 |
+| Methane, Mt a year (steady ppm) | 1.2–12 (0.252–11.2) | 1.8–18 (0.377–16.8) | 2.4–24 (0.503–22.4); feasible 2.4–22.9 (0.503–18.3) |
 
 **Fog-desert glass.** All plant foods and the fish feed in vented glasshouses in the fog desert, watered by rain on the
 glass and pipes from the seas; the animal part as aquaponic fish; the rain belt left to the wild.
@@ -319,23 +320,23 @@ glass and pipes from the seas; the animal part as aquaponic fish; the rain belt 
 |---|---|---|---|
 | Fits its zones, kept 30% | to 57% of the way (fog desert full) | to 32% of the way (fog desert full) | to 16% of the way (fog desert full) |
 | Fits its zones, kept half | to 36% of the way (fog desert full) | to 13% of the way (fog desert full) | neither end (fog desert short) |
-| Land used, million km² | 1.28–6.65; feasible 1.28–3.51 | 1.91–9.97; feasible 1.91–3.52 | 2.55–13.3; feasible 2.55–3.52 |
-| &nbsp;&nbsp;fog desert | 1.23–6.45; feasible 1.23–3.37 | 1.84–9.67; feasible 1.84–3.37 | 2.45–12.9; feasible 2.45–3.37 |
-| &nbsp;&nbsp;highlands, towns included | 0.05–0.2; feasible 0.05–0.136 | 0.075–0.3; feasible 0.075–0.147 | 0.1–0.4; feasible 0.1–0.148 |
-| &nbsp;&nbsp;of it glass | 1.23–6.45; feasible 1.23–3.37 | 1.84–9.67; feasible 1.84–3.37 | 2.45–12.9; feasible 2.45–3.37 |
-| Dry land left wild outside a kept 30% | 92% to 59%; feasible 92% to 79% | 88% to 39%; feasible 88% to 79% | 84% to 19%; feasible 84% to 79% |
-| Dry land left wild outside a kept half | 89% to 43%; feasible 89% to 79% | 84% to 15%; feasible 84% to 79% | 78% to over by 14% |
+| Land used, million km² | 1.28–6.77; feasible 1.28–3.51 | 1.92–10.2; feasible 1.92–3.52 | 2.56–13.5; feasible 2.56–3.52 |
+| &nbsp;&nbsp;fog desert | 1.23–6.57; feasible 1.23–3.37 | 1.84–9.85; feasible 1.84–3.37 | 2.46–13.1; feasible 2.46–3.37 |
+| &nbsp;&nbsp;highlands, towns included | 0.05–0.2; feasible 0.05–0.135 | 0.075–0.3; feasible 0.075–0.146 | 0.1–0.4; feasible 0.1–0.147 |
+| &nbsp;&nbsp;of it glass | 1.23–6.57; feasible 1.23–3.37 | 1.84–9.85; feasible 1.84–3.37 | 2.46–13.1; feasible 2.46–3.37 |
+| Dry land left wild outside a kept 30% | 92% to 59%; feasible 92% to 79% | 88% to 38%; feasible 88% to 79% | 84% to 17%; feasible 84% to 79% |
+| Dry land left wild outside a kept half | 89% to 42%; feasible 89% to 79% | 84% to 13%; feasible 84% to 79% | 78% to over by 16% |
 | Rain belt left wild outside a kept 30% | 100% | 100% | 100% |
-| Fog desert used outside a kept 30%, grazing included | 36%–191%; feasible 36%–100% | 55%–287%; feasible 55%–100% | 73%–383%; feasible 73%–100% |
-| Power, TW | 1.42–8.27; feasible 1.42–4.07 | 2.13–12.4; feasible 2.13–3.96 | 2.84–16.5; feasible 2.84–3.91 |
-| Added dimming, power from the array | 0.0169–0.158%; feasible 0.0169–0.0653% | 0.0254–0.237%; feasible 0.0254–0.0564% | 0.0339–0.316%; feasible 0.0339–0.0512% |
-| Added dimming, fusion | 0.0246–0.348%; feasible 0.0246–0.123% | 0.0369–0.522%; feasible 0.0369–0.0955% | 0.0493–0.696%; feasible 0.0493–0.0805% |
-| Water from the seas, km³ a year | 980–4,500; feasible 980–2,490 | 1,470–6,750; feasible 1,470–2,570 | 1,960–9,000; feasible 1,960–2,630 |
-| Phosphorus lost, Mt a year | 0.176–0.72; feasible 0.176–0.487 | 0.264–1.08; feasible 0.264–0.526 | 0.352–1.44; feasible 0.352–0.526 |
-| Phosphorus discharged from glass, Mt a year | 0–2.76; feasible 0–0.881 | 0–4.14; feasible 0–0.512 | 0–5.51; feasible 0–0.262 |
-| Phosphorus to fish sludge, Mt a year | 1.13–19.2; feasible 1.13–7.18 | 1.7–28.8; feasible 1.7–5.34 | 2.26–38.4; feasible 2.26–4.19 |
-| N2O, ppb a year | 0.251–1.69; feasible 0.251–0.792 | 0.377–2.54; feasible 0.377–0.738 | 0.503–3.38; feasible 0.503–0.709 |
-| Methane, Mt a year (steady ppm) | 1.2–12 (0.252–11.2); feasible 1.2–7.38 (0.252–2.78) | 1.8–18 (0.377–16.8); feasible 1.8–7.01 (0.377–1.96) | 2.4–24 (0.503–22.4); feasible 2.4–5.85 (0.503–1.4) |
+| Fog desert used outside a kept 30%, grazing included | 36%–195%; feasible 36%–100% | 55%–292%; feasible 55%–100% | 73%–390%; feasible 73%–100% |
+| Power, TW | 1.42–8.41; feasible 1.42–4.06 | 2.13–12.6; feasible 2.13–3.95 | 2.84–16.8; feasible 2.84–3.91 |
+| Added dimming, power from the array | 0.017–0.161%; feasible 0.017–0.065% | 0.0255–0.241%; feasible 0.0255–0.0562% | 0.034–0.322%; feasible 0.034–0.0511% |
+| Added dimming, fusion | 0.0247–0.354%; feasible 0.0247–0.122% | 0.037–0.531%; feasible 0.037–0.095% | 0.0494–0.708%; feasible 0.0494–0.0802% |
+| Water from the seas, km³ a year | 983–4,580; feasible 983–2,490 | 1,470–6,880; feasible 1,470–2,570 | 1,970–9,170; feasible 1,970–2,630 |
+| Phosphorus lost, Mt a year | 0.176–0.72; feasible 0.176–0.483 | 0.264–1.08; feasible 0.264–0.523 | 0.352–1.44; feasible 0.352–0.523 |
+| Phosphorus discharged from glass, Mt a year | 0–2.76; feasible 0–0.861 | 0–4.14; feasible 0–0.501 | 0–5.51; feasible 0–0.256 |
+| Phosphorus to fish sludge, Mt a year | 1.13–19.2; feasible 1.13–7.04 | 1.7–28.8; feasible 1.7–5.27 | 2.26–38.4; feasible 2.26–4.14 |
+| N2O, ppb a year | 0.251–1.69; feasible 0.251–0.781 | 0.377–2.54; feasible 0.377–0.732 | 0.503–3.38; feasible 0.503–0.705 |
+| Methane, Mt a year (steady ppm) | 1.2–12 (0.252–11.2); feasible 1.2–7.3 (0.252–2.72) | 1.8–18 (0.377–16.8); feasible 1.8–6.94 (0.377–1.93) | 2.4–24 (0.503–22.4); feasible 2.4–5.79 (0.503–1.38) |
 
 **Power-heavy.** Vegetables and fruit in lamp-lit vertical farms, the animal part as microbial protein on power, the
 rest of the plant foods on rain-fed fields.
@@ -344,13 +345,13 @@ rest of the plant foods on rain-fed fields.
 |---|---|---|---|
 | Fits its zones, kept 30% | both ends | both ends | both ends |
 | Fits its zones, kept half | both ends | both ends | both ends |
-| Land used, million km² | 0.882–2.47 | 1.32–3.7 | 1.76–5.63 |
-| &nbsp;&nbsp;rain belt | 0.603–1.67 | 0.907–2.53 | 1.21–4.07 |
-| &nbsp;&nbsp;highlands, towns included | 0.278–0.796 | 0.415–1.17 | 0.55–1.56 |
-| Dry land left wild outside a kept 30% | 95% to 85% | 92% to 77% | 89% to 66% |
-| Dry land left wild outside a kept half | 92% to 79% | 89% to 63% | 85% to 37% |
-| Rain belt left wild outside a kept 30% | 90% to 72% | 85% to 57% | 80% to 31% |
-| Rain-fed land left wild outside a kept 30% | 88% to 66% | 81% to 49% | 75% to 32% |
+| Land used, million km² | 0.896–2.53 | 1.34–3.8 | 1.79–5.87 |
+| &nbsp;&nbsp;rain belt | 0.614–1.72 | 0.923–2.6 | 1.23–4.27 |
+| &nbsp;&nbsp;highlands, towns included | 0.282–0.813 | 0.421–1.19 | 0.558–1.6 |
+| Dry land left wild outside a kept 30% | 95% to 85% | 92% to 77% | 89% to 64% |
+| Dry land left wild outside a kept half | 92% to 78% | 89% to 61% | 85% to 37% |
+| Rain belt left wild outside a kept 30% | 90% to 71% | 84% to 56% | 79% to 28% |
+| Rain-fed land left wild outside a kept 30% | 87% to 65% | 81% to 48% | 75% to 30% |
 | Power, TW | 0.539–3.39 | 0.808–5.09 | 1.08–6.78 |
 | Added dimming, power from the array | 0.00644–0.0648% | 0.00966–0.0973% | 0.0129–0.13% |
 | Added dimming, fusion | 0.00936–0.143% | 0.014–0.214% | 0.0187–0.286% |
@@ -358,7 +359,7 @@ rest of the plant foods on rain-fed fields.
 | Water from the seas, km³ a year | 0 | 0 | 0 |
 | Phosphorus lost, Mt a year | 0.176–0.72 | 0.264–1.08 | 0.352–1.44 |
 | Phosphorus in microbial biomass, Mt a year | 0.365–1.18 | 0.548–1.77 | 0.731–2.36 |
-| N2O, ppb a year | 0.0258–0.0841 | 0.0388–0.126 | 0.0517–0.168 |
+| N2O, ppb a year | 0.0259–0.0839 | 0.0388–0.126 | 0.0517–0.168 |
 | Methane, Mt a year (steady ppm) | 1.2–12 (0.252–11.2) | 1.8–18 (0.377–16.8) | 2.4–24 (0.503–22.4) |
 
 **Fully lamp-lit.** Every plant food in lamp-lit vertical farms on a potato-like staple, the animal part as microbial
@@ -413,13 +414,13 @@ plant foods on rain-fed fields.
 |---|---|---|---|
 | Fits its zones, kept 30% | neither end (the waters' phosphorus short) | neither end (the waters' phosphorus short) | neither end (the waters' phosphorus short) |
 | Fits its zones, kept half | neither end (the waters' phosphorus short) | neither end (the waters' phosphorus short) | neither end (the waters' phosphorus short) |
-| Land used, million km² | 0.955–2.67 | 1.43–4.01 | 1.91–6.36 |
-| &nbsp;&nbsp;rain belt | 0.657–1.82 | 0.988–2.76 | 1.32–4.68 |
-| &nbsp;&nbsp;highlands, towns included | 0.299–0.849 | 0.445–1.25 | 0.59–1.68 |
-| Dry land left wild outside a kept 30% | 94% to 84% | 91% to 76% | 88% to 61% |
-| Dry land left wild outside a kept half | 92% to 77% | 88% to 58% | 84% to 37% |
-| Rain belt left wild outside a kept 30% | 89% to 69% | 83% to 53% | 78% to 21% |
-| Rain-fed land left wild outside a kept 30% | 87% to 63% | 80% to 44% | 73% to 26% |
+| Land used, million km² | 0.971–2.74 | 1.46–4.2 | 1.94–6.61 |
+| &nbsp;&nbsp;rain belt | 0.668–1.87 | 1–2.92 | 1.34–4.89 |
+| &nbsp;&nbsp;highlands, towns included | 0.303–0.868 | 0.452–1.28 | 0.599–1.72 |
+| Dry land left wild outside a kept 30% | 94% to 83% | 91% to 74% | 88% to 60% |
+| Dry land left wild outside a kept half | 92% to 77% | 88% to 57% | 83% to 37% |
+| Rain belt left wild outside a kept 30% | 89% to 69% | 83% to 51% | 77% to 18% |
+| Rain-fed land left wild outside a kept 30% | 86% to 62% | 79% to 43% | 73% to 24% |
 | Sea farms, thousand km² | 121–981 | 181–1,470 | 241–1,960 |
 | &nbsp;&nbsp;phosphorus drawn against what the waters' life can spare | 15.4–97.4 times | 23.1–146 times | 30.8–195 times |
 | &nbsp;&nbsp;share of the seas shallower than 50 m / 200 m | 36%–295% / 9%–72% | 54%–442% / 13%–107% | 73%–590% / 18%–143% |
@@ -429,7 +430,7 @@ plant foods on rain-fed fields.
 | Water from the seas, km³ a year | 0 | 0 | 0 |
 | Phosphorus lost, Mt a year | 0.176–0.72 | 0.264–1.08 | 0.352–1.44 |
 | Phosphorus drawn from the seas, Mt a year | 0.865–2.05 | 1.3–3.08 | 1.73–4.1 |
-| N2O, ppb a year | 0.0209–0.0737 | 0.0314–0.111 | 0.0418–0.147 |
+| N2O, ppb a year | 0.0209–0.0735 | 0.0314–0.11 | 0.0419–0.147 |
 | Methane, Mt a year (steady ppm) | 1.2–51.1 (0.252–47.8) | 1.8–76.7 (0.377–71.7) | 2.4–102 (0.503–95.6) |
 
 ## The author's wild share
@@ -449,15 +450,15 @@ with another 20% hybrid (`wild_50_hybrid_20`), runs beside them for comparison w
 | Mix, 4 / 6 / 8 billion | Kept half and the compromise | Half wild with 20% hybrid |
 |---|---|---|
 | Rain-fed first | to 60% / 40% / 30% of the way | to 36% / 24% / 18% of the way |
-| Greenhouse-heavy | both ends / to 91% / to 64% | to 81% / 45% / 24% |
+| Greenhouse-heavy | both ends / to 90% / to 63% | to 80% / 45% / 24% |
 | Fog-desert glass | to 36% / 13% / neither end | to 8% / neither end / neither end |
 | Power-heavy, fully lamp-lit, power-made | both ends | both ends |
 | Sea-supported | neither end | neither end |
 
-The rain alone feeds 6.7–19.6 billion under a kept half and the compromise, and 4.0–11.8 billion with half wild and
-20% hybrid. At 8 billion the power-heavy mix's fields take 1.66–6.97 million km² under a kept half and the compromise,
-with 0–19.6 km³ a year from the seas. With half wild and 20% hybrid they take 1.72–4.04 million km², and the high-cost
-end grows 1.06 million km² of its crops' equivalent by watering those fields: 3,250 km³ a year from the seas, 0.53 TW of
+The rain alone feeds 6.5–19.3 billion under a kept half and the compromise, and 3.9–11.6 billion with half wild and
+20% hybrid. At 8 billion the power-heavy mix's fields take 1.69–6.97 million km² under a kept half and the compromise,
+with 0–235 km³ a year from the seas. With half wild and 20% hybrid they take 1.77–4.04 million km², and the high-cost
+end grows 1.12 million km² of its crops' equivalent by watering those fields: 3,430 km³ a year from the seas, 0.56 TW of
 lift and 7.3 TW of food power against 6.8.
 
 ## The author's blend
@@ -477,22 +478,22 @@ the fields' area plus the added dimming under fusion, the planning assumption fo
 surface. Power-made uses no fields and little power and takes the cap; fully lamp-lit keeps the floor, since each tenth
 of the diet under lamps takes 4.2–42 TW of power, 8.3–129 TW of heat with fusion; power-heavy carries the rest. The
 limits set the weights: without them power-made alone takes least, and each ten points more of it would spare about
-430,000 km² at the high-cost end. At the low-cost end lamps cost less than fields, and 10/50/40 would take 0.78% of the
+440,000 km² at the high-cost end. At the low-cost end lamps cost less than fields, and 10/50/40 would take 0.78% of the
 Moon's sunlight against the blend's 1.9%.
 
 | At 8 billion, the compromise | The blend, 40/50/10 | Least heat, 50/40/10 | Even thirds | Power-heavy alone |
 |---|---|---|---|---|
-| Fields, million km² | 0.67–1.81 | 0.83–2.27 | 0.55–1.51 | 1.66–6.97 |
-| Heat with fusion, TW | 14.8–171 | 13.9–166 | 32.1–458 | 2.16–20.6 |
+| Fields, million km² | 0.68–1.86 | 0.85–2.33 | 0.56–1.55 | 1.69–6.97 |
+| Heat with fusion, TW | 14.8–171 | 13.9–166 | 32.1–458 | 2.16–20.7 |
 | Added dimming with fusion | 0.13–2.4% | 0.12–2.3% | 0.28–6.4% | 0.019–0.29% |
-| Sunlight taken from wild life, share of the Moon's | 1.9–7.2% | 2.3–8.3% | 1.7–10% | 4.4–19% |
+| Sunlight taken from wild life, share of the Moon's | 1.9–7.3% | 2.3–8.4% | 1.8–10% | 4.5–19% |
 
 The blend's power is 7.4–56 TW, 10.2–77.5 TW of heat with power from the array. Its fields and towns leave 81–93% of the
 dry land outside the kept half wild and the middle latitudes free of fields, so the homestead region, the middle-wet
 zone's 1.39 million km² outside the kept half, is the homesteads' own. It needs no water from the seas, adds 0.044–0.124
 ppb of N2O a year, against 0.052–0.17 for power-heavy alone, and its vertical farms take 1.9–22 Gt of building. At 4 and
 6 billion its heat is 7.4–85 and 11–128 TW with fusion; under the comparison's half wild with 20% hybrid its fields take
-0.67–2.08 million km² and it still fits.
+0.68–2.17 million km² and it still fits.
 
 **Heritage meat.** A basket of the author's examples, by weight 40% chicken, 30% heritage pork, 25% beef from dairy
 herds (homestead dairy and vaca vieja) and 5% beef from beef herds (some wagyu), a design guess, counted as fat- and
@@ -527,21 +528,21 @@ the whole diet costs 5.2 kW a resident; at the high-cost end 53 kW.
 
 ## Departures from the known designs
 
-- **Crop water.** Ecology's crop water need, 4.85–10.9 mm a day at the equator, comes from Earth crops' water-use
+- **Crop water.** Ecology's crop water need, 4.79–10.8 mm a day at the equator, comes from Earth crops' water-use
   efficiency, which ecology takes from Tang et al. (2014), raised by the design air's CO2 to 1.26–2.83 g C per kg. The
   sunlight the ground absorbs under the design clouds evaporates 4.94–5.02 mm a day there (*screen*), so the crop
-  model's yields need an efficiency of at least 2.74 g C per kg, near the top of that range. The study holds the need at
-  4.85–5.02 mm and raises ecology's rain shares in the same proportion, 2.17 times at the high-cost end, which brings
-  the rain-fed land from 2.58–5.79 to 5.59–5.79 million km² of equivalent on this screen's bands. At ecology's lowest
+  model's yields need an efficiency of at least 2.7 g C per kg, near the top of that range. The study holds the need at
+  4.79–5.02 mm and raises ecology's rain shares in the same proportion, 2.15 times at the high-cost end, which brings
+  the rain-fed land from 2.57–5.78 to 5.54–5.78 million km² of equivalent on this screen's bands. At ecology's lowest
   efficiency the crop model's yields cannot be reached, watered fields grow at most 46% of them at the equator, and the
-  rain feeds 4.3 billion people outside a kept 30% at that end.
+  rain feeds 4.2 billion people outside a kept 30% at that end.
 - **The same energy limit by latitude and under glass.** The crop model's growth falls more slowly with latitude than
-  the sunlight does, so watered fields grow 92–96% of the model's production at 15–30°, 86–90% at 30–45° and 71–75% at
+  the sunlight does, so watered fields grow 92–97% of the model's production at 15–30°, 87–92% at 30–45° and 73–78% at
   45–60° (*screen*). Under glass the sunlight absorbed inside caps transpiration at 2.0–3.4 mm a day by zone.
 - **Band areas.** This screen counts each latitude band's dry land on the atlas grid (5.44 million km² within 15°, 5.58
   at 15–30°); ecology scaled the climate model's coarse land to the atlas's total (6.10 and 3.90). Both divide each
-  band's production by the equator's. At ecology's water need the rain-fed equivalent comes to 2.58–5.79 million km²,
-  against ecology's 2.51–5.65: the band areas add 1.5% and ecology's shares, given to two figures, 1%.
+  band's production by the equator's. At ecology's water need the rain-fed equivalent comes to 2.57–5.78 million km²,
+  against ecology's 2.55–5.73: the band areas add 1.5% and ecology's shares, given to two figures, take off 0.4–0.7%.
 - **Zones.** The fog desert here is dry land at 30–60° below 4 km with under 0.5 mm of rain a day, 4.82 million km²
   (5.11 at all heights); ecology took the aerosol study's 6.2 million km². The upper grazing allowance therefore fits
   fewer people here than on ecology's area. The 30–45° band's fields hold to its wet lowland, taken as the wet middle
@@ -564,11 +565,11 @@ the whole diet costs 5.2 kW a resident; at the high-cost end 53 kW.
 
 The zones partition the 23.4 million km² of dry land on the 28% atlas, with the design climatology's rain (*screen*).
 The seas and great lakes cover 10.2 million km², of which 333,000 km² is shallower than 50 m and 1.37 million km²
-shallower than 200 m. The crop model's yield relative to the equator is 0.954 in the rain belt, 0.928 on the highlands
-and 0.741 in the fog desert (canopy fruit model, near side).
+shallower than 200 m. The crop model's yield relative to the equator is 0.951 in the rain belt, 0.924 on the highlands
+and 0.721 in the fog desert (canopy fruit model, near side).
 
-The diet is ecology's plant-rich lunar design: 2,500 kcal a day eaten, 129–342 m² of crops for its plant foods and
-139–393 m² with its animal part, and 0–1,000 m² of grazing. Its protein and water come from the EAT–Lancet reference
+The diet is ecology's plant-rich lunar design: 2,500 kcal a day eaten, 131–348 m² of crops for its plant foods and
+141–401 m² with its animal part, and 0–1,000 m² of grazing. Its protein and water come from the EAT–Lancet reference
 diet (Willett et al. 2019) with USDA FoodData Central composition: 94.2 g of protein a day, 24.3 g of it from animal
 foods, and 300 g of vegetables and 200 g of fruit (*derived*; the food standing for each group is a design guess).
 
@@ -578,20 +579,20 @@ the share of rain the gutters keep (80–95%), the emitter pressure and the wate
 
 ## Bound inputs
 
-| Input | Branch and commit | sha256 |
+| Input | Branch of origin | sha256 |
 |---|---|---|
-| `biosphere/ecology/results/people.json` | domain/ecology, 5aafe2a | `f8eb2892b733fdd9…` |
-| `biosphere/ecology/results/first_screen.json` | domain/ecology, 5aafe2a | `d2a42b6e51f60250…` |
-| `biosphere/ecology/people_and_land.md` | domain/ecology, 5aafe2a | `7a8fbafb9a9ecdf6…` |
-| `resources/results/phosphorus.json` | domain/resources, ac5d38d | `159462a220b6661e…` |
-| `resources/phosphorus.py` | domain/resources, ac5d38d | `48f3ef951dc6d781…` |
-| `resources/phosphorus.md` | domain/resources, ac5d38d | `afa8db4d5e8b698c…` |
-| `resources/results/sea_phosphorus.json` | domain/resources, edf7fb5 | `9cf6927649942ed6…` |
+| `biosphere/ecology/results/people.json` | domain/ecology | `758a8dcf68c6eb58…` |
+| `biosphere/ecology/results/first_screen.json` | domain/ecology | `d2a42b6e51f60250…` |
+| `biosphere/ecology/people_and_land.md` | domain/ecology | `fbd83a2137a12eb5…` |
+| `resources/results/phosphorus.json` | domain/resources | `4089899e2b70e8b7…` |
+| `resources/phosphorus.py` | domain/resources | `48f3ef951dc6d781…` |
+| `resources/phosphorus.md` | domain/resources | `afa8db4d5e8b698c…` |
+| `resources/results/sea_phosphorus.json` | domain/resources | `47b600895919319d…` |
 
-The runner reads them with `git -C <worktree> show <commit>:<path>` and refuses bytes whose sha256 differs; the full
-hashes and Git blobs are in `run.py` and in the product's `producer.bound_inputs`. Lifting the 1.32 kg of food a day
-that 4 billion residents aloft eat to 10 km takes 0.99 GW at resources' ideal 16.1 kJ per kg lifted, 1.4 GW at its 70%
-efficiency, and the phosphorus rides in that food (*derived*).
+The runner reads them in the tree, which has held every former branch's inputs since the joint integration of 12
+October 2026, and refuses bytes whose sha256 differs; the full hashes and Git blobs are in `run.py` and in the product's
+`producer.bound_inputs`. Lifting the 1.32 kg of food a day that 4 billion residents aloft eat to 10 km takes 0.99 GW at
+resources' ideal 16.1 kJ per kg lifted, 1.4 GW at its 70% efficiency, and the phosphorus rides in that food (*derived*).
 
 ## Reproduce and check
 
@@ -609,7 +610,7 @@ close in every mix, phosphorus balances, fields stay outside the kept land, fog 
 partial mean matches its integral, lamp power scales with light use, the fill spills to the fog desert when the wet
 bands are full, every case's feasibility follows its zones, the land rules carry the author's wild share and keep a
 kept half apart from the compromise, and the compromise's parkland gives the kept half's results in every case. The
-regeneration test skips when the ignored grids or the bound branches are absent. `checks.json` records the review's
+regeneration test skips when the ignored grids or the bound inputs are absent. `checks.json` records the review's
 findings, their fixes and the test results.
 
 The blend reads the same basis and writes [results/food_blend.json](results/food_blend.json); its tests check the rule,

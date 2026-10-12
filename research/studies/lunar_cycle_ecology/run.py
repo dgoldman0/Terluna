@@ -52,7 +52,8 @@ YEAR_DAYS = 365.25
 CYCLES_PER_YEAR = YEAR_DAYS / SYNODIC_MONTH_DAYS
 DESIGN_PRESSURE_PA = 121590.0              # decisions register: 1.2 atm
 DESIGN_CO2_PPM = 400.0                     # the atmosphere and climate runs
-MOON_AIR_K = 294.0                         # decisions register: the Moon settles near 294 K
+MOON_AIR_K = 294.9                         # decisions register: the Moon settles near 295 K, 294.9 K with the
+                                           # GCM's Sun, tilt and sunlight split corrected (A28_dim5_moon)
 EARTH_PRESSURE_PA, EARTH_AIR_K = 101325.0, 288.15
 GLUCOSE_KJ_PER_G_C = 2803.0 / 72.06        # energy of respiring carbohydrate, kJ per g of carbon
 SUGAR_KJ_PER_G = 2803.0 / 180.16          # glucose; FAO gives 15.7 kJ/g for monosaccharides (sources.json)

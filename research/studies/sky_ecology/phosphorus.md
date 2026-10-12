@@ -95,17 +95,17 @@ eating 4–183 Mt, 6–262% of the seabirds' (*derived* on the screen's needs).
 
 ## The check against the resources model
 
-**The resources branch's low case, 10,726 t of P a year to return to the sky, reproduces exactly from its own product.
+**The resources domain's low case, 10,726 t of P a year to return to the sky, reproduces exactly from its own product.
 With a reef's tissues and recycling it becomes 0.44–85 kt with designed pools and 7–108 kt with forest-floor pools in a
 mature sky, 22–267 kt with either in a growing sky, and 125–827 kt with nothing to catch the litter.** The resources
-model ([resources/phosphorus.md](https://github.com/dgoldman0/Terluna/blob/domain/resources/resources/phosphorus.md),
-bound at commit b47c452 by SHA-256) takes 1% of the Moon at 1,000 g C/m² a year of biomass at Redfield C:P: 9.23 Mt of P
-a year through production, 5% harvested with 99% returned, 99.9% of the rest recycled, against a low upward supply of
-2,655 t a year from dust. Its export, [(1 − h)(1 − r) + h(1 − q)]F, is 13,381 t and its shortfall 10,726 t; this study's
-own implementation of the formula gives the same to the kilogram. Redone with the P a reef's biomass carries per unit of
-carbon (the biomass basis, as the resources and aerial models' 1,000 g C/m² is all dry biomass), 4.7–14.5% of Redfield's
-in a mature sky and 4.3–12% in a growing one, the throughput is 431–1,340 kt or 395–1,100 kt a year. The formula's r
-takes each case's recycling, every loss counted, onto the unharvested 95% of the throughput it applies to:
+model ([resources/phosphorus.md](../../../resources/phosphorus.md), read in-tree with its SHA-256 checked) takes 1% of
+the Moon at 1,000 g C/m² a year of biomass at Redfield C:P: 9.23 Mt of P a year through production, 5% harvested with
+99% returned, 99.9% of the rest recycled, against a low upward supply of 2,655 t a year from dust. Its export,
+[(1 − h)(1 − r) + h(1 − q)]F, is 13,381 t and its shortfall 10,726 t; this study's own implementation of the formula
+gives the same to the kilogram. Redone with the P a reef's biomass carries per unit of carbon (the biomass basis, as the
+resources and aerial models' 1,000 g C/m² is all dry biomass), 4.7–14.5% of Redfield's in a mature sky and 4.3–12% in a
+growing one, the throughput is 431–1,340 kt or 395–1,100 kt a year. The formula's r takes each case's recycling, every
+loss counted, onto the unharvested 95% of the throughput it applies to:
 
 | Case | Mature: r | Mature: return needed | Growing: r | Growing: return needed | Against the published 10.7 kt |
 |---|---:|---:|---:|---:|---:|
@@ -145,7 +145,7 @@ drifting roost scatters the sea's phosphorus over the land beneath its track, wh
 ## Where litter and falls land
 
 **Passive aerophytes at 10 km spend their years near the equator and over the northern pole; at 20 km over both poles.**
-The provisioning branch's zonal-wind product (bound at commit d9bc800) follows routes released 10° of latitude and 30°
+Provisioning's zonal-wind product (read in-tree, its SHA-256 checked) follows routes released 10° of latitude and 30°
 of hour apart for ten years in the design run's 3-day mean winds, which superrotate above about 8 km and blow west only
 in the lowest few kilometres; passive routes gather onto shared tracks within months to years. In years 5–10 the time at
 each latitude, over the band's exact share of the Moon's area:

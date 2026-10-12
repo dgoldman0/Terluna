@@ -13,7 +13,7 @@
    "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32",
    "geography/results/drainage.json": "18494e3d3656ead7",
    "illumination/surface_light/results/surface_light.json": "e2406dbceb34193e",
-   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "132011caa1688ff4",
+   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "80b3ebef5077fb62",
    "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
    "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f889"
   },
@@ -1488,12 +1488,12 @@
    "moth_0.33g": {
     "length_m": 0.02,
     "span_m": 0.04,
-    "speed_m_s": 1.504
+    "speed_m_s": 1.507
    },
    "bird_100g": {
     "length_m": 0.2,
     "span_m": 0.35,
-    "speed_m_s": 4.702
+    "speed_m_s": 4.709
    },
    "person_with_wings": {
     "length_m": 2.0,

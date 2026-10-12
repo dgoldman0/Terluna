@@ -3,7 +3,7 @@
  "producer": {
   "domain": "biosphere",
   "files": {
-   "biosphere/ecology/taxa.py": "603dd56222df262e"
+   "biosphere/ecology/taxa.py": "b88018c5d5d60df1"
   },
   "inputs": {
    "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250",
@@ -1055,7 +1055,7 @@
    "id": "M01",
    "kind": "module",
    "working_name": "carbon-balance idling",
-   "summary": "Leaves, stems and roots idle at about a quarter of their daytime upkeep as soon as photosynthesis stops covering upkeep, cued by the energy sensors SnRK1 and TOR; this halves the night store against idling only in full darkness (10 against 19 g C per m2)",
+   "summary": "Leaves, stems and roots idle at about a quarter of their daytime upkeep as soon as photosynthesis stops covering upkeep, cued by the energy sensors SnRK1 and TOR; this halves the night store against idling only in full darkness (11 against 19 g C per m2)",
    "status": "carried_forward",
    "scope": "throughout",
    "basis": "selected",
@@ -1089,7 +1089,7 @@
    "id": "M02",
    "kind": "module",
    "working_name": "dusk-set night timer",
-   "summary": "A timer sized for about 240 dark hours, started at dusk, that rations the night's store; a plant on an Earth clock would budget the lunar night's store for one day",
+   "summary": "A timer sized for about 250 dark hours, started at dusk, that rations the night's store; a plant on an Earth clock would budget the lunar night's store for one day",
    "status": "carried_forward",
    "scope": "throughout",
    "basis": "selected",
@@ -1155,12 +1155,12 @@
    "id": "M04",
    "kind": "module",
    "working_name": "long-dark leaf survival",
-   "summary": "Leaves that survive about 240 dark hours without senescing, with metabolism that slows and restarts on cue",
+   "summary": "Leaves that survive about 250 dark hours without senescing, with metabolism that slows and restarts on cue",
    "status": "test_first",
    "scope": "throughout",
    "basis": "selected",
    "tests": [
-    "leaves that survive about 240 dark hours, and metabolism that idles and restarts (B5)"
+    "leaves that survive about 250 dark hours, and metabolism that idles and restarts (B5)"
    ],
    "notes": "",
    "sources": [
@@ -1189,7 +1189,7 @@
    "id": "M05",
    "kind": "module",
    "working_name": "twilight use",
-   "summary": "Photosynthesis through the long twilight, worth 14% of an Earth-like night store and a quarter of the idling one; it leaves 238 dark hours at the equator and 34 at 60 degrees",
+   "summary": "Photosynthesis through the long twilight, worth 11% of an Earth-like night store and a fifth of the idling one; it leaves 254 dark hours at the equator and 120 at 60 degrees",
    "status": "carried_forward",
    "scope": "throughout",
    "basis": "selected",
@@ -1766,7 +1766,7 @@
    "id": "M25",
    "kind": "module",
    "working_name": "frost protection",
-   "summary": "Antifreeze, insulation and heat sharing in plant mats: land nights stay near 19-20 degrees C at low and middle latitudes",
+   "summary": "Antifreeze, insulation and heat sharing in plant mats: land nights stay near 19-21 degrees C at low and middle latitudes",
    "status": "set_aside",
    "scope": "throughout",
    "basis": "selected",
@@ -2977,9 +2977,9 @@
    "scope": "throughout",
    "basis": "selected",
    "tests": [
-    "leaves that survive about 240 dark hours, and metabolism that idles and restarts (B5)"
+    "leaves that survive about 250 dark hours, and metabolism that idles and restarts (B5)"
    ],
-   "notes": "Idling at a quarter of daytime upkeep cuts the night store from 46 to 10 g C per m2.",
+   "notes": "Idling at a quarter of daytime upkeep cuts the night store from 49 to 11 g C per m2.",
    "sources": [
     {
      "path": "research/studies/lunar_cycle_ecology/README.md",

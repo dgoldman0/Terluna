@@ -93,9 +93,9 @@ loss and the resupply that matches it take to replace the inventory.
 
 4. **Rock takes the air's oxygen far faster than space does.**
    - **The sink.** Weathering oxidizes the ferrous iron of the rock it dissolves. At the corrected runoff the land
-     weathers 0.9–9.3 Gt of rock a year. At 5–16 wt% FeO (highland 5%, mare 15%; Lunar Sourcebook) that takes 5–166
+     weathers 1.0–9.6 Gt of rock a year. At 5–16 wt% FeO (highland 5%, mare 15%; Lunar Sourcebook) that takes 5–171
      Mt of O2 a year (*screen*).
-   - **Cycle time.** 4–120 million years for the air's oxygen. That is 120–3,800 times what escape removes (1.4 kg/s
+   - **Cycle time.** 4–110 million years for the air's oxygen. That is 120–3,900 times what escape removes (1.4 kg/s
      of all air in the warmest titania case, a cycle time of 70 billion years).
    - **Over the operation.** Erosion keeps supplying fresh rock: 6–200 times the air's oxygen over 10⁹ years
      (*screen*). The regolith alone holds Fe(II), metal and sulfide for 0.3–3.9% of the inventory (literature register).
@@ -137,7 +137,7 @@ loss and the resupply that matches it take to replace the inventory.
    - *Solid on the flooding.*
 8. **The seas start fresh.**
    - **How long.** Weathering alone brings the seas and lakes to 1 g/kg in 1,100–11,000 years counting everything it
-     dissolves (cations with their bicarbonate and silica), or 9,000–89,000 years by the cations alone. It takes
+     dissolves (cations with their bicarbonate and silica), or 8,700–87,000 years by the cations alone. It takes
      0.3–3 million years to reach Earth's salinity (*screen*).
    - **What follows.** Any salt the seas need for millennia comes with the delivered water, which makes the water's
      composition a design lever. Until then the plankton are freshwater, the spray is fresh and the density is near
@@ -215,8 +215,8 @@ is [industry.md](industry.md), with its screen [industry.py](industry.py); numbe
     a day; from one plant 6–12% of the fleet is in transit, and eight plants across the stack's tilts bring that to
     0.7–1.5%. Electric tugs would release 69–1,070 kg/s of exhaust inside the protected region, which S7 governs.
 18. **On the near horizons the air needs resupply of its CO2 alone.** Escape (cycle times of 70 billion years and
-    more), rock (0.008–0.24% of the oxygen by year 10,000) and burial (0.004–0.05% of the nitrogen) leave the air as
-    built, while weathering and burial turn its CO2 over in 400–1,860 years. Kilns of 38–380 GW return the weathered
+    more), rock (0.008–0.25% of the oxygen by year 10,000) and burial (0.004–0.05% of the nitrogen) leave the air as
+    built, while weathering and burial turn its CO2 over in 419–1,910 years. Kilns of 35–350 GW return the weathered
     carbon; the buried carbon needs a return path or 6,400–16,200 kg/s imported.
 19. **The array's habitats set the largest stream after the build.** The Stanford torus shields each person with
     990 t (Johnson & Holbrow 1977), 990 Gt for each billion residents. As water, the shield for 0.1–14 billion
@@ -268,7 +268,7 @@ is [sea_phosphorus.md](sea_phosphorus.md), with its screen [sea_phosphorus.py](s
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting statements
-in other folders. They belong to main and are unchanged on this branch. The largest:
+in other folders, for their owners to correct. The largest:
 - the CO2 study's runoff and temperature, which run its weathering sink about a quarter high;
 - constant-gravity air masses about 10% low in several documents;
 - the conservation principle's claim that Saturn's rings alone could meet the need, which falls short of the water

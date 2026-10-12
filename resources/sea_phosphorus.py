@@ -4,7 +4,8 @@
     python -m resources.sea_phosphorus_waters    # first, when the routing changes (ignored grid inputs)
 
 Closed-form arithmetic and linear sea boxes on committed products and on products bound from the ecology and
-provisioning branches (BOUND, read through Git at their pinned commits and checked by SHA-256). Each sea box is the
+provisioning domains (BOUND, read in-tree since the joint integration of 12 October 2026 and checked by SHA-256).
+Each sea box is the
 resources box model's sea and sediment boxes with its first-order burial, fed by the ecology product's land loss as
 the routed lakes pass it on. Literature values are named where they are defined and recorded in
 sea_phosphorus_sources.json; design guesses are collected in DESIGN_GUESSES.
@@ -14,7 +15,6 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -43,26 +43,26 @@ INPUTS = {
     "research/studies/conservation/results/gates.json": None,
     "resources/sea_phosphorus_sources.json": None,
 }
-# Inputs on other branches, read at their pinned commits through Git; bound into this tree at the joint integration.
+# Inputs from the former domain branches, read in-tree since the joint integration, their hashes checked.
 BOUND = {
     "ecology_people": dict(path="biosphere/ecology/results/people.json", schema="terluna.biosphere.ecology-people/1",
-                           branch="domain/ecology", commit="5aafe2a",
-                           sha256="f8eb2892b733fdd9000af187437a8b40ecc567afcd94da1d0db0a0ed063a77d6"),
+                           branch="main", commit=None,
+                           sha256="758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8"),
     "sky_ecology": dict(path="research/studies/sky_ecology/results/sky_ecology.json",
-                        schema="terluna.research.sky-ecology/1", branch="domain/ecology", commit="5aafe2a",
-                        sha256="d21e6c16c3ba7dedcd4e2973f2558541fe29a89eb13f27a03b8c87c8a27061b5"),
+                        schema="terluna.research.sky-ecology/1", branch="main", commit=None,
+                        sha256="2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3"),
     "sky_phosphorus_note": dict(path="research/studies/sky_ecology/phosphorus.md", schema=None,
-                                branch="domain/ecology", commit="5aafe2a",
-                                sha256="3a26c9ee5551c43cebcff63b793090a413dc968603ca0870340ba02f9d743b43"),
+                                branch="main", commit=None,
+                                sha256="65ec921e7a5dea769a120406c54a22e5bfc47d3077fb06439408b0b9d05f84a2"),
     "living_water": dict(path="biosphere/living_water/waters.json", schema="terluna.biosphere.living-water/1",
-                         branch="domain/ecology", commit="5aafe2a",
-                         sha256="bdf2a5dede623718921e367db11cd6eef95f8d67e944a6cbf277bddd2f962734"),
+                         branch="main", commit=None,
+                         sha256="cda0594b8b59acfb469a39b007f977d616db60307d325e80af759242d2baecd1"),
     "ways_of_living": dict(path="research/studies/ways_of_living/results/ways_of_living.json",
-                           schema="terluna.research.ways-of-living/1", branch="domain/provisioning", commit="b82e0dc",
-                           sha256="cbba4058819147f2d2bb2d02f1dae91320224b3e723e2820bd0f6ba95d64cd0a"),
-    "provisioning_decisions": dict(path="research/decisions.md", schema=None, branch="domain/provisioning",
-                                   commit="b82e0dc",
-                                   sha256="c6afcfa544a4ad1874c700968c483500bcd3f5a2abbf4fd4c2be34ccab1317b2"),
+                           schema="terluna.research.ways-of-living/1", branch="main", commit=None,
+                           sha256="b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a"),
+    "provisioning_decisions": dict(path="research/decisions.md", schema=None, branch="main",
+                                   commit=None,
+                                   sha256="ad4288feef956c9d4e67073bcb95682b0a3418f122364b59514970c4545a85c8"),
 }
 # Bound at integration when provisioning's food-systems study is committed; until then the systems below stand alone.
 PENDING = {
@@ -144,19 +144,19 @@ def digest(path):
 
 
 class MissingInput(RuntimeError):
-    """A bound input on another branch is not readable here."""
+    """A bound input is not in this tree."""
 
 
 def bound_bytes(key):
-    """The bound input's bytes at its pinned commit, read through Git; the hash is checked."""
+    """The bound input's bytes: the in-tree file, which since the joint integration of 12 October 2026 holds every
+    former branch's inputs; its hash is checked against the pin."""
     b = BOUND[key]
-    try:
-        raw = subprocess.run(["git", "show", f"{b['commit']}:{b['path']}"], cwd=ROOT, capture_output=True,
-                             check=True).stdout
-    except (OSError, subprocess.CalledProcessError) as error:
-        raise MissingInput(f"{b['path']} at {b['branch']} {b['commit']} is not readable here") from error
+    local = ROOT / b["path"]
+    if not local.exists():
+        raise MissingInput(f"{b['path']} is not in this tree")
+    raw = local.read_bytes()
     if hashlib.sha256(raw).hexdigest() != b["sha256"]:
-        raise ValueError(f"{b['path']} at {b['commit']} does not match its pinned hash")
+        raise ValueError(f"{b['path']} does not match its pinned hash")
     return raw
 
 
@@ -748,7 +748,7 @@ def run():
         producer=dict(files={p: digest(ROOT / p) for p in CODE},
                       inputs={rel: digest(ROOT / rel) for rel in INPUTS},
                       bound_inputs={k: dict(path_at_integration=b["path"], branch=b["branch"], commit=b["commit"],
-                                            sha256=b["sha256"], read_from=f"git show {b['commit']}:{b['path']}")
+                                            sha256=b["sha256"], read_from="in-tree")
                                     for k, b in BOUND.items()},
                       pending_bindings=PENDING,
                       constants=constants_used(producer)),

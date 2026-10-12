@@ -71,9 +71,10 @@ The author's, on 2026-10-04:
    whose gravity–capillary range holds gravity and surface tension explicitly,
    evaluated at lunar gravity.
 2. **The water's colour:** absorption and scattering of seawater from published
-   tables, the living constituents above and suspended regolith fines, mare basalt
-   and highland, from Apollo soil spectra. The same optics give the light under
-   water for the ecology work.
+   tables, the living constituents above and suspended fines: developed soils'
+   fines with the optics of Earth's coastal non-algal particles, and raw regolith
+   fines, mare basalt and highland, from Apollo soil spectra for comparison. The
+   same optics give the light under water for the ecology work.
 3. **The light sources:** the solved sky, whose cached scattering solution the
    calendar reads down to the Sun's lowest point; the earthlight, with a published Earth reflectance
    spectrum, and the earthlit sky from the sky solver; clouds from the cloud-light
@@ -285,10 +286,11 @@ seen looking down past the reflected sky.
 | Water | Chlorophyll | Light leaving the water, under the Moon's sky (Earth's) | Colour | Photosynthetic light falls to 1% at |
 |---|---:|---:|---|---:|
 | Open sea | 0.1 mg/m³ | 63 cd/m² (102) | deep blue | 68 m |
-| Productive coast, mare fines | 2 mg/m³ | 156 cd/m² (241) | olive green | 9.5 m |
-| Productive coast, high-titanium mare fines | 2 mg/m³ | 125 cd/m² (193) | darker olive | 8.9 m |
-| Productive coast, highland fines | 2 mg/m³ | 317 cd/m² (489) | pale green | 12 m |
-| River mouth | 5 mg/m³ | 186 cd/m² (283) | tan | 1.6 m |
+| Productive coast | 2 mg/m³ | 547 cd/m² (843) | yellow-green | 12 m |
+| River mouth | 5 mg/m³ | 1,334 cd/m² (2,022) | ochre | 2.3 m |
+| Productive coast, raw mare fines | 2 mg/m³ | 156 cd/m² (241) | olive green | 9.5 m |
+| Productive coast, raw high-titanium mare fines | 2 mg/m³ | 125 cd/m² (193) | darker olive | 8.9 m |
+| Productive coast, raw highland fines | 2 mg/m³ | 317 cd/m² (489) | pale green | 12 m |
 
 **The lunar daylight warms every water's colour.** With the Sun 45° up the
 Moon's clear sky puts 55,490 lux on the water against Earth's 85,200, and 951
@@ -301,16 +303,23 @@ against (0.177, 0.202).
 dawn's by the design guess, turns the open sea slightly greener (y 0.246 against
 0.225) and lifts the 1% depth from 65 to 72 m between dusk and dawn.
 
-**The fines set the coasts.** At the same 3 g/m³, highland fines make a coast
-twice as bright as mare fines and paler; high-titanium mare fines darken it.
-Suspended at lunar gravity, fines settle six times slower than on Earth.
+**The fines set the coasts.** The design waters carry developed fines, the
+weathered and biologically worked particles of developed soils. At the same
+3 g/m³ the productive coast is 3.5 times as bright with them as with raw mare
+fines, and its photosynthetic light reaches 1% at 12 m against 9.5 m. Among the
+raw Apollo soils, highland fines make a coast twice as bright as mare fines and
+paler; high-titanium mare fines darken it. Suspended at lunar gravity, fines
+settle six times slower than on Earth.
 
 **Boundaries.** Earth's seawater optics and its nadir reflectance model without
-bidirectional effects; the fines' optics through Hapke's isotropic and
-equivalent-slab approximations for grains 4 µm across, from space-weathered Apollo
-soils, which seawater would weather; the contents are design guesses. The
-reflected sky, the glitter and the views across the water come in the results by
-regime.
+bidirectional effects; the developed fines take the optics of Earth's coastal
+non-algal particles (Babin et al. 2003a, 2003b), absorbing 0.041 m²/g at 443 nm
+with a spectral slope of 0.0123 per nm and scattering 0.5 m²/g at 555 nm, held
+flat across the visible, with Petzold's (1972) backscattering ratio of 0.0183;
+the raw comparisons' optics go through Hapke's isotropic and equivalent-slab
+approximations for grains 4 µm across, from space-weathered Apollo soils, which
+seawater would weather; the contents are design guesses. The reflected sky, the
+glitter and the views across the water come in the results by regime.
 
 ```sh
 python -m illumination.water_column.fetch_inputs --download
@@ -338,7 +347,7 @@ every direction below the horizon; the coastline is left to the renderings.
 **By day the sea is darker than its sky and its waves show strongly.** With the
 Sun 54–87° up the sky is a pale blue, 8,000–11,000 cd/m² at 30°, whitening to
 about 9,500 at the horizon. The sea just below the horizon is a blue-grey
-3,300–5,000 cd/m², 0.35–0.53 times the sky above it. The spread of reflected
+3,300–5,100 cd/m², 0.36–0.53 times the sky above it. The spread of reflected
 light over the facets is 0.34–0.59 of its mean, so the waves stand out. The
 Sun's glitter lies more than 30° below the horizon, near the observer's feet.
 
@@ -349,7 +358,7 @@ stays for most of a day. On the glassy hours at the Smythii headland and souther
 Mare Nubium (mean square slope 0.002–0.003) it is narrow and reaches
 590,000–830,000 cd/m². On the rippled seas of western Procellarum and the Ingenii
 coast (0.025–0.031) it is broader and reaches 100,000–114,000. Away from the Sun
-the sea is 0.65–0.86 times the sky above it.
+the sea is 0.66–0.87 times the sky above it.
 
 **For days after sunset the sea reflects a warm arch and the Moon's shadow.**
 With the Sun 4° down the sky toward it glows orange at the horizon (about

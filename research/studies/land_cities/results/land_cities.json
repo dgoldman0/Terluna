@@ -3,7 +3,7 @@
  "producer": {
   "study": "land_cities",
   "files": {
-   "research/studies/land_cities/run.py": "7db2e63716ab48cf",
+   "research/studies/land_cities/run.py": "e4d927bb4eb802e0",
    "research/studies/land_cities/tubes.py": "b39f3e3a50962d61",
    "research/studies/land_cities/groundwater.py": "bc6a5da4289f7557",
    "research/studies/land_cities/highlands.py": "3c952fdd734de880",
@@ -22,12 +22,12 @@
    "atmosphere/electricity/results/occurrence_A28_dim5_moon.json": "64867b5026983e32",
    "illumination/aerosol/results/haze.json": "42d3739417a67c18",
    "research/studies/sea_appearance/results/lighting_calendar.json": "b76f394595eb0c89",
-   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4",
-   "research/studies/summit_tower/results/summit_tower_form.json": "9c9a3cf7fed39b1a",
-   "research/studies/sky_fleet/results/sky_fleet.json": "fcf26a8bd6d98950",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "b488e76c98e19aa9",
-   "research/studies/ways_of_living/results/ways_of_living.json": "ffe48e6467008176",
-   "research/studies/daily_life/results/daily_life.json": "9c21c92c54f19dc3"
+   "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539",
+   "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d",
+   "research/studies/sky_fleet/results/sky_fleet.json": "4826a86d183fb13d",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f",
+   "research/studies/ways_of_living/results/ways_of_living.json": "b55285cd89077ee8",
+   "research/studies/daily_life/results/daily_life.json": "de64289da4914fed"
   },
   "ignored_inputs": {
    "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",

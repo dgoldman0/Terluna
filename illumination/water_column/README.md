@@ -10,11 +10,17 @@ remote-sensing reflectance and the diffuse attenuation of daylight:
   al. (1998), scattering and backscattering from Loisel and Morel (1998) and
   Morel and Maritorena (2001);
 - coloured dissolved organic matter, with the mean spectral slope of Babin et al.
-  (2003);
-- suspended regolith fines: the single-scattering albedo of the finest fraction
-  (under 10 µm) of Apollo soils, from the Lunar Soil Characterization Consortium's
-  reflectance through Hapke's isotropic model and equivalent slab, carried into
-  water, for grains of a stated size and density;
+  (2003a);
+- suspended developed fines, the weathered and biologically worked particles of
+  developed soils, with the optics of Earth's coastal non-algal particles:
+  absorption 0.041 m²/g at 443 nm with a spectral slope of 0.0123 per nm (Babin
+  et al. 2003a), scattering 0.5 m²/g at 555 nm, coastal waters' mean (Babin et
+  al. 2003b), held flat across the visible, and the backscattering ratio of
+  Petzold's (1972) average particle, 0.0183;
+- raw regolith fines for comparison: the single-scattering albedo of the finest
+  fraction (under 10 µm) of Apollo soils, from the Lunar Soil Characterization
+  Consortium's reflectance through Hapke's isotropic model and equivalent slab,
+  carried into water, for grains of a stated size and density;
 - reflectance by Lee et al. (2002), attenuation by Lee et al. (2005).
 
 At Earth's chlorophyll levels of 0.1–3 mg/m³ its reflectance ratios give back

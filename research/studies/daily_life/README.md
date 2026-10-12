@@ -575,7 +575,7 @@ cases, the atlas and the canopy model. The calendar's own geometry, evaluator an
 code are hashed with it.
 
 - **Bound at integration.** Main's corrected per-place Earthlight, `research/studies/joint_synthesis/results/places.json`
-  at commit 78020e0 (sha256 9707e4d1…, blob 3aa6d09), is read from Git at that commit and checked against this study's
-  light. Once the branch merges main, run.py reads it in place.
+  (sha256 9707e4d1…, blob 3aa6d09), is read in place since the joint integration, its hash checked, and checked against
+  this study's light.
 - **Ignored input.** The design run's stored climatology, `climate/gcm/products/climatology_A28_dim5_moon.npz` on the
   research drive, gives the dusk's land air and cloud; the study runs without it and leaves those values out.

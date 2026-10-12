@@ -23,7 +23,7 @@
   "inputs": {
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
    "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32",
-   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4"
+   "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539"
   }
  },
  "evidence": "First-order sizing of buoyant and winged ships with the engineering flight models, fitted to the weight statements of four rigid airships and the wing groups of ten transports, in the design run's air and winds over the whole Moon (ExoPlaSim, 3-day means) and the cloud-resolving equatorial ring (3-hourly, with storms). No ship has been designed; loads follow Earth practice (Woodward's gust envelope, a deflated gas cell, Pratt's gust formula) carried to lunar gravity.",

@@ -177,16 +177,16 @@ source without their collection efficiency and effect on precipitation. The Moon
 a stress indicator, **not a hard population ceiling**. Reservoirs, fresh standing water, recycling, redistribution
 and later desalination require regional budgets, and rainfall cannot be simultaneously credited to competing users.
 
-The inherited crop requirement is 131–341 m²/person, conditional on the assumed engineered crops and diets and still
+The inherited crop requirement is 134–350 m²/person, conditional on the assumed engineered crops and diets and still
 without a complete water–nutrient–chemistry model. Both aerial and ground residents are included:
 
 | Shared case | Lunar residents | Crop area | Baseline local human heat | Added dimming screen | Runoff/person/year |
 |---|---:|---:|---:|---:|---:|
-| total20 | 6 billion | 0.786–2.046 million km² | 16.67 TW | 0.145–0.232% | 1,207 m³ |
-| total25 | 10 billion | 1.310–3.410 million km² | 27.78 TW | 0.241–0.386% | 724 m³ |
-| total30 | 15 billion | 1.965–5.115 million km² | 41.67 TW | 0.362–0.579% | 483 m³ |
-| total25_earth_heavier | 6 billion | 0.786–2.046 million km² | 16.67 TW | 0.145–0.232% | 1,207 m³ |
-| total25_moon_heavier | 12 billion | 1.572–4.092 million km² | 33.34 TW | 0.289–0.463% | 603 m³ |
+| total20 | 6 billion | 0.804–2.100 million km² | 16.67 TW | 0.145–0.232% | 1,207 m³ |
+| total25 | 10 billion | 1.340–3.500 million km² | 27.78 TW | 0.241–0.386% | 724 m³ |
+| total30 | 15 billion | 2.010–5.250 million km² | 41.67 TW | 0.362–0.579% | 483 m³ |
+| total25_earth_heavier | 6 billion | 0.804–2.100 million km² | 16.67 TW | 0.145–0.232% | 1,207 m³ |
+| total25_moon_heavier | 12 billion | 1.608–4.200 million km² | 33.34 TW | 0.289–0.463% | 603 m³ |
 
 Heat uses the inherited 2.778 kW/person local thermal-supply case with industry in orbit. Dimming uses its broad
 climate-response conversion, in percentage points of design sunlight. These values exclude the film's infrared,

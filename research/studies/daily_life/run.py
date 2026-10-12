@@ -7,8 +7,8 @@ The study computes what people would live in and leaves the ways of living to th
   in the joint synthesis's mean geometry: the Sun in the Moon's equatorial plane, the Earth over the sub-Earth
   point at its mean distance, no libration. The practical-dusk level is the solver's Earth control at the end of
   civil twilight (illumination/sky).
-- Main's corrected per-place Earthlight (joint synthesis, commit 78020e0) is read from Git at its pinned commit
-  and checked against this study's own light at the same places; it binds in-tree once main is merged.
+- Main's corrected per-place Earthlight (joint synthesis, commit 78020e0) is read in-tree, its hash checked, and
+  checked against this study's own light at the same places.
 - Air by height and its oxygen come from the design run's global means (climate/results/gcm), the flyers from the
   sky-fleet study, the aerial district from the inhabited-volume screen, the array's commute and every latency
   from the provisioning products, evening cloud from the cloud-twilight study.
@@ -166,7 +166,8 @@ def climatology():
 
 
 def main_places():
-    """Main's places product at its pinned commit: the in-tree file once merged, else the Git object."""
+    """Main's places product: the in-tree file when its hash matches, as it does since the joint integration;
+    else the Git object at a pinned commit."""
     local = ROOT / MAIN_PLACES['path']
     raw = local.read_bytes() if local.exists() else b''
     source = 'in-tree'

@@ -2,7 +2,8 @@
 
 An evaluation of the repository at `main` `996ea6c` (9 October 2026) for ecology. Paths are from the repository root.
 The full working digest, with line references, is kept with the domain's run records on the research drive
-(`research/runs/ecology/repo_digest.md`).
+(`research/runs/ecology/repo_digest.md`). The table of what is computed gives the products as the joint integration
+refreshed them on 12 October 2026 (7c230dd).
 
 ## Decisions that bind ecology
 
@@ -37,7 +38,7 @@ From [research/decisions.md](../../research/decisions.md) unless named:
   ([decisions](../../research/decisions.md#welkinia-strange-taxa-and-living-light-11-october-2026)).
 
 The author's standing directions on engineered organisms, developed soils, a mix of climates and imported elements
-had no row in the register. This branch adds the first two to the register's section "Life and people", in the
+had no row in the register. The ecology domain added the first two to the register's section "Life and people", in the
 author's words.
 
 ## What is computed
@@ -45,12 +46,12 @@ author's words.
 | Result | Numbers | Evidence | Where |
 |---|---|---|---|
 | Canopy photosynthesis | 12.5 g C m⁻² per 24 h at the equator, 18% above Earth's from 35% fewer photons; the diffuse sky adds 32% | Clear sky, hypothetical traits | [canopy/](../canopy/README.md), `canopy/results/canopy.json` |
-| Whole plant through the cycle | 228–266 g C m⁻² per cycle; night store 47 g C, or 10 when idling; 238 dark hours at the equator and 34 at 60° | Clear sky, GCM temperatures, carbon scenarios | `canopy/results/plant.json` |
-| Day fruit | 1.9–4.9 kg m⁻² per cycle at 30–80% fruit share; 50% above the same stand on Earth | Design requirement | `canopy/results/fruit.json` |
+| Whole plant through the cycle | 224–262 g C m⁻² per cycle; night store 49 g C, or 11 when idling; 254 dark hours at the equator and 120 at 60° | Clear sky, GCM temperatures, carbon scenarios | `canopy/results/plant.json` |
+| Day fruit | 1.8–4.8 kg m⁻² per cycle at 30–80% fruit share; 47% above the same stand on Earth | Design requirement | `canopy/results/fruit.json` |
 | Carbon reserve theorem | Minimum reserve 2.5–15.8 reference days | Proved under its model | [long_night.py](../long_night.py), [findings](../../research/findings.md) |
 | The ecology register | Selections across the clocks, storage, fruit, landscapes, flight and the rock cycle's return limb | Ideas register with screening arithmetic | [research/studies/lunar_cycle_ecology](../../research/studies/lunar_cycle_ecology/README.md) |
-| Forest mechanics | 300 m trees hold to 23.5 m/s at the roots; a 49-tree patch cascades at 22 m/s | Static screens, LAI 22 | `megaforest_wind`, `forest_patch` studies |
-| Waters | Euphotic depth 68 m in the open sea, 9–12 m at productive coasts; design guesses for chlorophyll, CDOM and fines | Computed optics on Earth seawater | [living_water/](../living_water/), `sea_appearance` study |
+| Forest mechanics | 300 m trees hold to 23.9 m/s at the roots; a 49-tree patch cascades at 22 m/s | Static screens, LAI 6, air at 294.9 K | `megaforest_wind`, `forest_patch` studies |
+| Waters | Euphotic depth 68 m in the open sea, 12 m at productive coasts; design guesses for chlorophyll, CDOM and developed soils' fines | Computed optics on Earth seawater | [living_water/](../living_water/), `sea_appearance` study |
 | Tides | 3.7 m typical monthly range on the nearside sea, 2.1 m in South Pole–Aitken, 0.55 m in Smythii | Computed | [geography](../../geography/README.md#the-monthly-tide) |
 | Nitrogen | Lightning gives 0.0043–0.0079 flashes per km² a year and at most 0.2% of the biomes' need | Computed with Earth yields | [research/studies/joint_synthesis](../../research/studies/joint_synthesis/README.md) |
 | The air's chemistry | No OH, ozone or HO2 near the ground; lightning's NO held at 1–10 ppb by assumed deposition | Global-mean bare column | `joint_synthesis/results/air_chemistry.json` |
@@ -85,7 +86,7 @@ food web exists yet.
 ## Open items already listed
 
 - The biosphere's status lists:
-  - leaves surviving about 240 dark hours, and the day fruit's untested programme;
+  - leaves surviving about 250 dark hours, and the day fruit's untested programme;
   - nutrient and energy budgets, and the rock cycle's return limb;
   - biological fixation;
   - the light dark-night organisms need.
@@ -98,19 +99,27 @@ food web exists yet.
 
 ## Statements elsewhere that need correcting
 
-These belong to main and stay unchanged on this branch.
+Item 5 was fixed on main on 9 October, and the joint integration of 12 October 2026 (7c230dd) corrected item 1's
+inputs, items 3 and 7 and item 4's fines; the rest wait.
 1. **The ecology register's numbers predate the corrected design case.** Its product's input hashes no longer match
    the plant, fruit and drainage products: lakes 11.6% against 10.3%, rivers 279,000 against 229,410 m³/s, the land
    at 294.0 K against 294.9 K, and several plant figures. Its "coldest hour anywhere is 18.7 °C" meets the GCM's
-   coldest 3-day mean of 14.3 °C.
+   coldest 3-day mean of 14.3 °C. Fixed for its inputs in the joint integration on 12 October 2026 (7c230dd): the
+   register reads the current plant, fruit and drainage products, with lakes on 10.3% of the Moon, rivers of
+   229,410 m³/s, equatorial land air averaging 22.3 °C and the coldest hour at 19.0 °C; its air density still takes
+   294.0 K, and its coldest hour still meets the GCM's coldest 3-day mean.
 2. **The aerosol study's oxidation chemistry.** Its sulfate and secondary organic particles assumed dimethyl sulfide
    and isoprene oxidizing, which the joint synthesis's bare column, three days later, found no oxidant for. Its fire
    ignition (0.003–0.006 ground strikes per km² a year) is two to four times the Moon-wide rate.
 3. **The forests' leaf area.** The megaforest and forest-patch studies use LAI 22 in air at 288 K. The canopy model
-   puts the leaves' optimum near 6, and the climate is 294.9 K.
+   puts the leaves' optimum near 6, and the climate is 294.9 K. Fixed in the joint integration on 12 October 2026
+   (7c230dd): both studies take LAI 6 in air at 294.9 K, and the megaforest's 300-m reference tree holds to 23.9 m/s at
+   the roots against 23.5, with 20 right-censored cases against 37.
 4. **The waters carry raw regolith.** The living-water fines are raw Apollo soils, against the developed-soils
    direction. The water optics take Earth seawater at 38.4 g/kg while the seas' composition is open, and the CDOM
-   ranges assume Earth's ultraviolet.
+   ranges assume Earth's ultraviolet. Fixed for the fines in the joint integration on 12 October 2026 (7c230dd): every
+   water carries developed soils' fines, and the productive coast's light falls to 1% at 12.4 m against 9.5; Earth
+   seawater and the CDOM ranges stay open.
 5. **The joint synthesis's nearside Earthlight.** Its night step adds a flat 2.3 lux to every nearside place, so
    Procellarum by Russell reads 2.4 lux where its own light calendar gives 0.48 at the darkest, and the Smythii
    headland 0.001 against 0.085. Fixed on main on 9 October (78020e0): each place now takes the Earth's height and
@@ -118,7 +127,9 @@ These belong to main and stay unchanged on this branch.
 6. **The CO2 study's inputs.** It uses 26 °C and 349 mm of runoff against 21.75 °C and about 265 mm now, and the
    build-up's 72% land includes the lakes.
 7. **Plant twilight** still comes from the exponential-column sky atlas, which the illumination status asks to
-   replace with the solved-column sky.
+   replace with the solved-column sky. Fixed in the joint integration on 12 October 2026 (7c230dd): the plants' low-Sun
+   and twilight light come from the solved-column sky, and their dark hours are 254 against 238 at the equator and 120
+   against 34 at 60°.
 8. **Fog gardens.** The locked plan's "highland fog gardens" and the root seed's clouded highlands meet a highland box
    that is dry and sunny.
 9. **"High-altitude life is sparse"** rests partly on strong ultraviolet aloft, which the shield removes; radiation

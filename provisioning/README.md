@@ -149,12 +149,12 @@ Each finding follows from results the repository already holds, read together wi
 
 ### Food
 
-5. **Food takes about 60–80 m² a person at the crop model's potential and 130–340 m² in practice.**
-   - **The potential.** The day fruit gives 31–42 kcal per m² a day at the far side's equator, 60–80 m² a person at
+5. **Food takes about 60–80 m² a person at the crop model's potential and 130–350 m² in practice.**
+   - **The potential.** The day fruit gives 30–41 kcal per m² a day at the far side's equator, 60–80 m² a person at
      2,500 kcal a day (*screen*).
    - **In practice.** Allowing for the GCM's clouds (89% of clear sky), losses of 30–50% and a varied diet at 1.5–2.5
-     times the land of the energy-only fruit gives 131–341 m² a person (*screen*).
-   - **For the metropolis.** It needs 13,000–34,000 km² of cropland: 11–28% of the dry land within 300 km of the
+     times the land of the energy-only fruit gives 134–350 m² a person (*screen*).
+   - **For the metropolis.** It needs 13,000–35,000 km² of cropland: 11–28% of the dry land within 300 km of the
      summit and 4–10% within 500 km. Within 100 km the dry land, 18,700 km², is less than the need. Lakes, Korolev
      and Hertzsprung among them, cover more of the ground within 300 km than dry land does (*screen*).
    - **Against Earth.** Earth's crops feed about 6 people per hectare after feed, biofuels and other uses, about
@@ -247,7 +247,7 @@ to tens of thousands of years, affluent by modern standards, mostly on Earth, th
     at 40,000 people per km² release 60–240 W/m², so a city's heat is answered in the city.
 16. **The Moon's rivers carry 7,240 km³ a year, and the fresh seas supply beyond them.** Water drawn from the seas
     and lakes and returned supplies people and farms beyond the runoff while the seas stay fresh. Food land is ample
-    by area, the dry land feeding 8.4–22 billion on Earth's 12% share in crops; the rain sets the rain-fed share, and
+    by area, the dry land feeding 8.2–21.5 billion on Earth's 12% share in crops; the rain sets the rain-fed share, and
     beyond it crops are irrigated from the fresh seas (finding 27).
 17. **Earth binds on food within planetary boundaries.** A transformed food system feeds 10.2 billion within four
     boundaries (Gerten et al. 2020), so beyond that Earth grows part of its food off the land, for instance microbial
@@ -301,12 +301,12 @@ and, for the winds, [zonal_winds.md](../climate/gcm/zonal_winds.md); numbers her
 
 27. **Every shared case fits the Moon's land, and food grows fastest with its people.** Towns take 0.6–10% of the
     23.4 million km² of dry land across the cases, aerial shares of 0–75% and four mixes of settings. Ten billion
-    lunar residents on the lunar design's plant-rich diet crop 1.4–3.9 million km², 35–224% of the rain-fed land
-    outside a kept 30%. At the high end 2.2 million km² are irrigated with 8,700 km³ a year lifted from the fresh seas
-    for 1.5 TW; irrigated from the start, crops and towns take 20–59% of the rain belt's land outside the kept 30%,
-    for 0.18–2.0 TW.
+    lunar residents on the lunar design's plant-rich diet crop 1.4–4.0 million km², 35–225% of the rain-fed land
+    outside a kept 30%. At the high end 2.2 million km² are irrigated with 8,800 km³ a year lifted from the fresh seas
+    for 1.5 TW; irrigated from the start, crops and towns take 20–60% of the rain belt's land outside the kept 30%,
+    for 0.18–2.1 TW.
 28. **People's heat costs 0.08–1.8% more dimming across the cases.** With the sky towns' power, the irrigation lift
-    and the hydrogen remade after losses, the Moon takes 9–128 TW; total25 at its own split takes 17–72 TW and
+    and the hydrogen remade after losses, the Moon takes 9–129 TW; total25 at its own split takes 17–72 TW and
     0.15–1.0%.
 29. **People's light fills the dark night before their towns fill the land.** At the lunar design's 791–1,420 m² of
     lit sky a person (ecology), 6–15 billion lunar residents light 20–91% of the dry land, and each billion in the far
@@ -350,22 +350,22 @@ The author's direction of 11 October: count current and emerging agriculture, hy
 deserts with water extraction, in the food system. The study is
 [food systems](../research/studies/food_systems/README.md); numbers here are from it.
 
-38. **Rain-fed fields feed the plant-rich diet at the least cost, and the rain alone feeds 9.4–27.5 billion people
-    outside a kept 30%.** A billion residents crop 139,000–393,000 km² at the crop model's yields, 2.5–7.4% of what the
+38. **Rain-fed fields feed the plant-rich diet at the least cost, and the rain alone feeds 9.1–27.0 billion people
+    outside a kept 30%.** A billion residents crop 141,000–401,000 km² at the crop model's yields, 2.6–7.7% of what the
     rain grows in the wet bands, for 6.3–14 W a resident of nitrogen fixation, once the crops' water need is held to
     what the design sunlight can evaporate; farms at Earth's best 70–80% of potential need 25–43% more land. Water
     lifted and piped from the fresh seas costs 0.92–1.44 kWh/m³, so topping up a billion residents' rain-belt fields
-    takes 115–522 km³ a year and 13–86 W a resident.
+    takes 115–540 km³ a year and 13–89 W a resident.
 39. **Glass takes more ground than fields, and the fog desert drinks from the seas.** Sunlit glass needs 1.2–2.5 times
-    the equatorial field area, 4–22 Gt of glass and steel and 0.15–1.2 kW a resident per billion, and closed houses
-    2.3–12.8 kW. The design run's fogs sit in nearly still air, so nets catch 0–98 L/m² a year above collection's 1 m/s
+    the equatorial field area, 4–23 Gt of glass and steel and 0.16–1.2 kW a resident per billion, and closed houses
+    2.4–13.0 kW. The design run's fogs sit in nearly still air, so nets catch 0–98 L/m² a year above collection's 1 m/s
     threshold against Earth's 1,100–3,650; water from the air costs 238–500 kWh/m³, from the seas 0.89–1.15.
 40. **Lamp-lit food costs tens of kilowatts a resident, and its heat binds.** Lamp-lit staples take 5.6–61 kW a
     resident, and lit by ground solar a lamp farm needs more panel area than the fields it replaces. The fully lamp-lit
     diet for 8 billion takes 41.5–425 TW, 0.50–8.1% more dimming with the array's power and 0.72–17.9% with fusion.
     Microbial protein replaces the diet's animal part for 40–133 W a resident, and a whole diet made on power takes
     0.70–2.8 kW.
-41. **Fish and soilless culture multiply N2O, which accumulates in every mix.** Aquaponic fish take 44,500–309,000 km²
+41. **Fish and soilless culture multiply N2O, which accumulates in every mix.** Aquaponic fish take 45,100–315,000 km²
     of feed crops a billion, four to six times the animal part they replace, and emit 52–446 kt N of N2O, three to seven
     times the field diet's. Soilless culture emits 0.72–1.19% of its nitrogen against the fields' 0.2–0.5%, and N2O has
     no sink in the design air: the fog-desert glass mix adds 0.50–3.4 ppb a year at 8 billion against the wild
@@ -376,7 +376,7 @@ deserts with water extraction, in the food system. The study is
 43. **At 4–8 billion pasture cannot carry the diet's animal part, and the feasible mixes with fields leave 35–89% of the
     dry land wild outside a kept 30% at 8 billion.** At ecology's upper grazing allowance the fog desert outside a kept
     30% holds pasture for 3.4 billion people, so the animal part comes from microbial protein, aquaponics, sea farms or
-    animals fed on crops. Rain-fed first with grazing held to the fog desert uses 2.05–3.72 million km², 0.05–0.077 TW
+    animals fed on crops. Rain-fed first with grazing held to the fog desert uses 2.08–3.80 million km², 0.05–0.077 TW
     and no sea water at 8 billion; fog-desert glass fits the fog desert only to 16% of the way to its high-cost end.
     Lamps and power-made food leave 97% or more wild for 5.6–425 TW.
 
@@ -420,11 +420,11 @@ aloft, the ground's people mostly in the drier highlands round the summit metrop
 carrying a decent share ([register](../research/decisions.md#people-on-the-moon-and-beyond-11-october-2026)). The study
 is [distributions](../research/studies/distributions/README.md); numbers here are from it.
 
-51. **The Moon carries 4–8 billion people with 61–94% of its dry land wild outside a kept 30%, and 31–92% outside a
+51. **The Moon carries 4–8 billion people with 60–94% of its dry land wild outside a kept 30%, and 31–92% outside a
     kept half.** On the food study's power-heavy mix with half aloft, 4 billion leave 84–94% and 77–92%, 6 billion
-    76–91% and 61–88%, and 8 billion 64–88% and 34–84%. Checked band by band with the settlement in place, everything
+    75–91% and 59–88%, and 8 billion 62–88% and 34–83%. Checked band by band with the settlement in place, everything
     fits outside a kept 30% and at 4 and 6 billion outside half. At 8 billion outside half every high-cost corner
-    overfills a band, the middle-wet zone's fields and towns at all of them, and the favourable end leaves 76–84%
+    overfills a band, the middle-wet zone's fields and towns at all of them, and the favourable end leaves 76–83%
     wild. Three placements together fit every corner for twice the water lift: the dry highland towns poleward of 45°
     first, the scattered communities gathered on the twilit and Earthlit homes, and the middle band's communities on
     the fog-desert side of their homes.
@@ -442,10 +442,10 @@ is [distributions](../research/studies/distributions/README.md); numbers here ar
     of another 0.50–20 times a day, and the fleet 0.066–5.3 million times, for tracking and traffic control to
     resolve.
 55. **Regional weaknesses serve the whole.** A 50 km tube under 500 m of sea seeps 0.058–5.8 km³ of fresh water a
-    year, enough to water fields for 0.050–22 million people, and the Near-side Sea's sediment receives phosphorus for
+    year, enough to water fields for 0.049–22 million people, and the Near-side Sea's sediment receives phosphorus for
     19.5–226 million. Six undersea communities lie within 250 km of a mapped submerged tube, and joined they hold
     1.07–28.6 million. The lake deltas' sediment and the towns' struvite return the farms' phosphorus. The fog desert's
-    glass drinking piped sea water can feed a billion highland residents on 0.25–0.97 million km², and the far side's
+    glass drinking piped sea water can feed a billion highland residents on 0.25–0.99 million km², and the far side's
     dark belt keeps the Moon's dark nights.
 56. **Four distributions of 25–30 billion were set out for the author, who chose C′.** Earth holds 9 billion in each,
     within the 10.2 billion that eat inside four planetary boundaries. A puts the Moon at 4 billion (2 on the ground, 2
@@ -471,11 +471,11 @@ is [distributions](../research/studies/distributions/README.md); numbers here ar
     shops, restrooms and places to rest they need. Farms, grazing, the homesteads' homes and towns keep to the same
     half as under a kept half, so C′ keeps the half's land, heat, water and traffic, and every corner fits with the
     remedy's poleward and twilit placements once the homesteads' homes count within their fields. Farms, settlement
-    and the homesteads' homes take 8.2–33% of the dry land. Towns, cities and sky towns put at most 14.7% of it under
+    and the homesteads' homes take 8.4–33% of the dry land. Towns, cities and sky towns put at most 14.7% of it under
     a light-polluted sky, 17.2% with the metropolis lit at Earth's area a person, so even with every park lit at least
     62.8% keeps a dark sky, above the preferred half and the compromise's 30%. Half wild with another 20% hybrid, run
     beside them for comparison at the author's request with the same parks, leaves farms and towns 30%: every corner
-    still fits the same way, while the high-cost end draws 3,250 km³ a year from the seas to water its fields and the
+    still fits the same way, while the high-cost end draws 3,430 km³ a year from the seas to water its fields and the
     sky towns have 1.7 times as many conflicts a day.
 
 ### Automation, the network and food
@@ -497,7 +497,7 @@ is [distributions](../research/studies/distributions/README.md); numbers here ar
 61. **The author's food blend, set to the optimum, is power-heavy 40%, power-made 50% and fully lamp-lit 10%**
     (*screen*; [food blend](../research/studies/food_systems/README.md#the-authors-blend)). With each mix between a
     tenth and a half of the diet, it takes the least sunlight from wild life at the high-cost end, power-made at the cap
-    and lamps at the floor: at 8 billion its fields take 0.67–1.81 million km², none in the middle latitudes, and its
+    and lamps at the floor: at 8 billion its fields take 0.68–1.86 million km², none in the middle latitudes, and its
     heat is 15–171 TW with fusion, 0.13–2.4% more dimming; each tenth of the diet under lamps takes 8.3–129 TW of heat.
     Heritage meat at a kilogram a person a year takes 0.30 million km², a fifth of the homestead region, and its cattle
     add 1.6–1.7 Mt of methane a year, 0.34–1.6 ppm at steady state; red seaweed in cattle feed cut steers' methane yield

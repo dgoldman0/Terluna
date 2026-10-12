@@ -17,11 +17,11 @@
    "atmosphere/electricity/results/muon_ionization_moon.json": "ea2f0f687ec80c87",
    "atmosphere/electricity/results/muon_ionization_earth.json": "3c224ef3bf7a3bd5",
    "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
-   "biosphere/canopy/results/plant.json": "4f09599901824e65",
-   "biosphere/canopy/results/fruit.json": "2f4f5e1b6ed912e2",
+   "biosphere/canopy/results/plant.json": "87cf08572ea40213",
+   "biosphere/canopy/results/fruit.json": "b26854d0ff421ab0",
    "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250",
    "research/studies/open_moon_aerosol/results/open_moon_aerosol.json": "7e404540ec06f5dd",
-   "research/studies/sky_fleet/results/sky_fleet.json": "fcf26a8bd6d98950",
+   "research/studies/sky_fleet/results/sky_fleet.json": "4826a86d183fb13d",
    "research/baselines/feasibility/reference.json": "5878ad8ff00e42bf"
   },
   "constants": {

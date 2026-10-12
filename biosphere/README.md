@@ -24,9 +24,9 @@ more carbon (11% more at equal CO₂): its diffuse sky spreads the light over le
 can use it. Through the 354-hour night the leaves alone need a store of 33 g C per m² of
 ground, thirty times an Earth night's. [plant.py](canopy/plant.py) follows the whole plant
 through the cycle, with the chosen climate's temperatures and the long twilight of the
-Moon's tall sky, which leaves only 238 of the 354 night hours dark at the equator and 34
+Moon's tall sky, which leaves only 254 of the 354 night hours dark at the equator and 120
 at 60°. Every evergreen way through the night closes its carbon budget; idling at a
-quarter of the daytime upkeep cuts the store from 46 to 10 g C per m² of ground, while
+quarter of the daytime upkeep cuts the store from 49 to 11 g C per m² of ground, while
 regrowing the canopy every cycle leaves a tenth of the growth or none. Stomata, water,
 acclimation to continuous light, full sugar stores and whether leaves survive weeks of
 darkness are not yet in it. [fruit.py](canopy/fruit.py) designs fruit for the lunar
@@ -34,10 +34,10 @@ day on that plant, with the fruit's developmental program as the design variable
 7.5 kg fruit whose program fits one sunlit half (about 200 degree-days at the equator,
 a third of today's watermelon's) is set at sunrise and ripe at sunset. It fills at up
 to 0.9 kg a day on the daylight surplus and never draws on the night store. With 60%
-of the plant's new tissue going to fruit, the stand yields 3.7 kg per m² every lunar
-cycle, 51% more than the same stand on Earth. The plant keeps enough growth to rebuild
-its canopy every 2.4 cycles, and its store stays at 46 g C per m². Today's watermelon
-takes 45 days, lives through a night, and needs a store of 116 g C per m² to reach
+of the plant's new tissue going to fruit, the stand yields 3.6 kg per m² every lunar
+cycle, 47% more than the same stand on Earth. The plant keeps enough growth to rebuild
+its canopy every 2.4 cycles, and its store stays at 49 g C per m². Today's watermelon
+takes 45 days, lives through a night, and needs a store of 122 g C per m² to reach
 full size.
 
 ## Ecology of the lunar cycle
@@ -80,10 +80,12 @@ Run `python -m pytest biosphere` and `python -m research.studies.environment_scr
 [living_water/waters.json](living_water/waters.json) holds design guesses of what
 the Open Moon's seas carry, for optical studies, labelled as guesses with a best
 value and a range each: chlorophyll, coloured dissolved organic matter and
-suspended regolith fines for a nutrient-poor open sea, a productive coast and a
-river mouth, the soil whose fines colour each, and how much greener a sea is at
-dusk than at dawn after the 15-day day. Earth's waters are the reference and
-engineered life a design variable. The
+suspended fines for a nutrient-poor open sea, a productive coast and a river
+mouth, and how much greener a sea is at dusk than at dawn after the 15-day day.
+The fines are developed soils' weathered and biologically worked particles, with
+the optics of Earth's coastal non-algal particles; the Apollo soils stay as
+raw-regolith comparisons. Earth's waters are the reference and engineered life a
+design variable. The
 [sea appearance study](../research/studies/sea_appearance/README.md#the-waters-colour)
 gives their colours.
 

@@ -61,7 +61,9 @@ OPENBLAS_NUM_THREADS=1 python visualization/sea-appearance/image_guides.py --wat
 
 The guides and intermediate component images live in ignored
 `results/illustrations/`. At the author's request, selected final images are also
-preserved in Git under [illustrations/](illustrations/README.md). JSON sidecars
+preserved in Git under [illustrations/](illustrations/README.md). They show the
+seas with the earlier raw-soil fines, before the developed fines of 12 October 2026;
+the products now give brighter seas. JSON sidecars
 keep source hashes, prompts, generation passes and review notes. Images themselves contain no text or labels. Generated
 terrain detail and wave texture are illustrative; review their framing, lighting,
 shadows, atmospheric depth and wave scales against the inputs. Vegetation is

@@ -9,8 +9,8 @@ constraint (heat, water, mass) given as its cost, and sets the shared population
 mixes of settings. Grid sums, closed-form physics and arithmetic on cited values only: no climate, flow,
 structural or ecological model runs here, and no placement of people is chosen.
 
-Two inputs live on other branches and are read at their pinned commits through Git (BOUND); they are bound into
-this tree at the joint integration.
+Two inputs came from the former domain branches; since the joint integration they are read in-tree, their hashes
+checked (BOUND).
 """
 from __future__ import annotations
 
@@ -70,7 +70,7 @@ BOUND = {
     'ecology_people': dict(
         path='biosphere/ecology/results/people.json', schema='terluna.biosphere.ecology-people/1',
         branch='main', commit=None,
-        sha256='7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015',
+        sha256='758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8',
         note='Per-billion costs of the lunar design and Earth practice, rain-fed land and diets (people_and_land.md).'),
     'places': dict(
         path='research/studies/joint_synthesis/results/places.json', schema='terluna.research.joint-synthesis-places/1',
@@ -118,7 +118,7 @@ ECO_BANDS = ((0.0, 15.0), (15.0, 30.0), (30.0, 45.0), (45.0, 60.0), (60.0, 75.0)
 
 
 class MissingInput(RuntimeError):
-    """An ignored grid product or a bound input on another branch is not available here."""
+    """An ignored grid product or a bound input is not available here."""
 
 
 def sha256(path) -> str:

@@ -11,7 +11,7 @@ published work is cited as published and was not re-read in full for this brief.
 - **Sensing.** On the ground: sound recorders, cameras, DNA samplers for air and water, soil and gas-flux stations,
   seismometers and sea buoys. Aloft, a mesh of aerostats drifting near 30 km carries radar for flyers, aerophytes and
   towns, cameras resolving about 16 cm, thermal infrared for the long night and samplers for pollen and spores
-  (provisioning's network brief, on the provisioning branch).
+  ([provisioning's network brief](../../provisioning/network.md)).
 - **Evaluation.** A world twin on the array's computing, coarse everywhere with fine nests where something is
   happening. Provisioning's computing study finds that a metre-scale weather twin of the whole Moon would fill the
   array, while control takes megawatts.

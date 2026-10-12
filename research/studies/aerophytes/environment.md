@@ -28,7 +28,7 @@ on the Moon against 40.5 Pa on Earth. The 1,000 and 2,000 ppm cases here are phy
 The equatorial CM1 ring's cloud fractions are 3.4% by day and 0.7% by night at 10 km, 2.4% and 0.97% at 20 km, and
 0.27% and 0.011% at 40 km; its column water stays in the air 97.6 days. PlaSim's cloud water serves its radiation and
 is rained out by its convection scheme, so this study takes cloud liquid from CM1. The ground's PAR is 1,555 µmol/m²/s
-with the Sun overhead, and the plant model's ground twilight stays above 1 µmol/m²/s for about 58 hours after
+with the Sun overhead, and the plant model's ground twilight stays above 1 µmol/m²/s for about 50 hours after
 equatorial sunset; aloft, the light is the illumination solver's to compute.
 
 ## Transpiration

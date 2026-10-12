@@ -51,7 +51,7 @@ open.
 **The population figures below give what each billion people takes.** How many people the Moon's settings hold, on
 the ground and aloft, comes from provisioning's comparison in the [shared population
 cases](../../shared/scenarios/population.json). Provisioning owns the inhabited-volume and ways-of-living studies and
-resources the phosphorus-return model, on their own branches.
+resources the phosphorus-return model.
 
 ## A taxonomic system, 9 October 2026
 
@@ -277,7 +277,7 @@ which.
     The variety the author asked for on 2026-09-25 ("definitely more of a mix of climates and biomes") lies in:
     - rain: wet tropics at 4.8 mm a day, a fog desert at 30–60°, rainless poles;
     - light: the Earthlit nearside, the dark far-side equator, and poles that never fall below about
-      1 µmol m⁻² s⁻¹ of light poleward of about 61°;
+      1 µmol m⁻² s⁻¹ of light poleward of about 65°;
     - lakes, tides and soils.
 
     Cold places are the built ones, the winter parks at 13.5–15 km. The only year-like signals are the Earth's orbit,
@@ -292,7 +292,7 @@ which.
 
 ### Waters
 
-17. **The first seas are fresh, mixed each month, and eutrophic at first.** Weathering alone takes 1,100–89,000 years
+17. **The first seas are fresh, mixed each month, and eutrophic at first.** Weathering alone takes 1,100–87,000 years
     to bring the seas to 1 g/kg (the resources screen), so unless the delivered water carries salts the living seas
     begin as fresh to hard waters. Ice delivered fresh would leave them near pH 5.6 and undersaturated in carbonate,
     so calcifiers cannot build until weathering supplies alkalinity. New reservoirs run eutrophic for a decade
@@ -352,10 +352,12 @@ with its screen [people.py](people.py); numbers here are from it.
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting
-statements in other folders. These belong to main and are not changed on this branch. The largest are:
-- the ecology register's numbers, which predate the corrected design case;
+statements in other folders. The joint integration of 12 October 2026 (7c230dd) corrected the register's inputs, the
+forests' leaf area and air, plant twilight and the waters' fines, and the rest wait. The largest are:
+- the ecology register's numbers, which predated the corrected design case (rerun on the corrected products in the
+  joint integration, 7c230dd);
 - the aerosol study's oxidation chemistry, which predates the no-oxidant finding;
-- the forests' leaf area of 22, against the canopy model's optimum near 6;
+- the forests' leaf area of 22, against the canopy model's optimum near 6 (set to 6 in the joint integration, 7c230dd);
 - the joint synthesis's flat 2.3 lux of Earthlight at every nearside place, against 0.48 lux at Procellarum by Russell
   (fixed on main on 9 October, 78020e0).
 

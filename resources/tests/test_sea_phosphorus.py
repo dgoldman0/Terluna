@@ -26,7 +26,7 @@ def bound_available():
     return True
 
 
-needs_bound = pytest.mark.skipif(not bound_available(), reason="bound inputs on other branches are not readable here")
+needs_bound = pytest.mark.skipif(not bound_available(), reason="bound inputs are not in this tree")
 
 
 # ---- Bindings -------------------------------------------------------------------------------------------------------

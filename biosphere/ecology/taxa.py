@@ -417,12 +417,12 @@ def community(id, working_name, summary, *, members, settings, realm, status, ba
 MODULES = (
     module('M01', 'carbon-balance idling', 'Leaves, stems and roots idle at about a quarter of their daytime upkeep '
            'as soon as photosynthesis stops covering upkeep, cued by the energy sensors SnRK1 and TOR; this halves '
-           'the night store against idling only in full darkness (10 against 19 g C per m2)',
+           'the night store against idling only in full darkness (11 against 19 g C per m2)',
            status='carried_forward', basis='selected', clock=['carbon_cued'], night=['idle'],
            references=[ref('Arabidopsis thaliana', 'SnRK1 mutants mobilize starch poorly at night; TOR and SnRK1 '
                            'switch growth and starvation programs')],
            sources=[src(LCE, 'B1, C3; Selection 1'), src(BIO, 'Canopy photosynthesis')]),
-    module('M02', 'dusk-set night timer', 'A timer sized for about 240 dark hours, started at dusk, that rations the '
+    module('M02', 'dusk-set night timer', 'A timer sized for about 250 dark hours, started at dusk, that rations the '
            'night\'s store; a plant on an Earth clock would budget the lunar night\'s store for one day',
            status='carried_forward', basis='selected', clock=['dusk_set'], night=['store'],
            references=[ref('Arabidopsis thaliana', 'divides its leaf starch by the hours to the dawn its clock expects')],
@@ -432,14 +432,14 @@ MODULES = (
            references=[ref('Solanum lycopersicum', 'continuous-light injury comes from the clock turning down the '
                            'light-harvesting gene CAB-13 on schedule')],
            sources=[src(LCE, 'C1, C4; Selection 2'), src(JULY, 'section 2')]),
-    module('M04', 'long-dark leaf survival', 'Leaves that survive about 240 dark hours without senescing, with '
+    module('M04', 'long-dark leaf survival', 'Leaves that survive about 250 dark hours without senescing, with '
            'metabolism that slows and restarts on cue', status='test_first', basis='selected', night=['idle'],
            references=[ref('Arabidopsis thaliana', 'a leaf darkened alone senesces; darkening the whole plant holds '
                            'senescence back')],
-           tests=['leaves that survive about 240 dark hours, and metabolism that idles and restarts (B5)'],
+           tests=['leaves that survive about 250 dark hours, and metabolism that idles and restarts (B5)'],
            sources=[src(LCE, 'B5; Test first'), src(BIO, 'Canopy photosynthesis')]),
-    module('M05', 'twilight use', 'Photosynthesis through the long twilight, worth 14% of an Earth-like night store '
-           'and a quarter of the idling one; it leaves 238 dark hours at the equator and 34 at 60 degrees',
+    module('M05', 'twilight use', 'Photosynthesis through the long twilight, worth 11% of an Earth-like night store '
+           'and a fifth of the idling one; it leaves 254 dark hours at the equator and 120 at 60 degrees',
            status='carried_forward', basis='selected', night=['twilight'], sources=[src(LCE, 'B2; Selection 1')]),
     module('M06', 'day-fruit program', 'A fruit program one sunlit half long: set at sunrise on a dawn cue without '
            'pollination, cells formed before sunrise, sugar loaded in the last days before dusk, ripe at sunset',
@@ -576,7 +576,7 @@ MODULES = (
            '264 g C per m2 a cycle and leaves little or no growth', status='set_aside', basis='selected',
            night=['shedding'], sources=[src(LCE, 'B3; Set aside')]),
     module('M25', 'frost protection', 'Antifreeze, insulation and heat sharing in plant mats: land nights stay near '
-           '19-20 degrees C at low and middle latitudes', status='set_aside', basis='selected',
+           '19-21 degrees C at low and middle latitudes', status='set_aside', basis='selected',
            sources=[src(LCE, 'B4; Set aside')]),
     module('M26', 'hyper-C4 as the general strategy', 'C4 everywhere: the canopy works mostly in dim diffuse light, '
            'where C4\'s extra two ATP per CO2 cost most', status='set_aside', basis='selected',
@@ -770,8 +770,8 @@ G.append(group('G16', 'evergreen idlers', 'Evergreen trees and shrubs that keep 
     form='tree', settings=['canopy', 'ground'], realm='land', guilds=['producer'], night=['store', 'idle', 'twilight'],
     clock=['carbon_cued', 'dusk_set', 'two_clocks'], modules=['M01', 'M02', 'M03', 'M04', 'M05', 'M15', 'M16', 'M17'],
     status='carried_forward', basis='selected',
-    tests=['leaves that survive about 240 dark hours, and metabolism that idles and restarts (B5)'],
-    notes='Idling at a quarter of daytime upkeep cuts the night store from 46 to 10 g C per m2.',
+    tests=['leaves that survive about 250 dark hours, and metabolism that idles and restarts (B5)'],
+    notes='Idling at a quarter of daytime upkeep cuts the night store from 49 to 11 g C per m2.',
     sources=[src(LCE, 'B1, B2, C3, D1, F2; Selection 1'), src(BIO, 'Canopy photosynthesis'), src(LIT, 'The long day and '
              'night')]))
 G.append(group('G17', 'day-fruit plants', 'Plants carrying the day-fruit program: fruit set at sunrise and ripe at '

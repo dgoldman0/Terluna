@@ -15,7 +15,7 @@ model has been run.
   650 km apart.
 - **Refraction.** Near the ground the refractivity falls about 9–13 N-units per kilometre. The dry air gives 5.3: its
   density scale height is 59.5 km, from the 52 km pressure scale height and the design climate's 0.7 K/km lapse (people
-  and land, table 1, in ecology on the ecology branch). Water vapour gives 4–7: the CM1 rings' 130–240 mm column over a
+  and land, table 1, in ecology). Water vapour gives 4–7: the CM1 rings' 130–240 mm column over a
   surface dewpoint near 15 °C puts its scale height at 10–19 km. The effective radius grows by 1.6–2.2%, so the radio
   horizon lies about 1% beyond the geometric one, where Earth's air adds about 15% (the 4/3-Earth rule). A trapping
   layer needs a gradient below −576 N-units per kilometre, against Earth's −157.
@@ -31,7 +31,7 @@ model has been run.
 ## Height and wind
 
 - **The sky's layers.** Storms top out at 22 km at the median in the CM1 equatorial ring; sky reefs drift at
-  10–20 km (sky ecology, on the ecology branch); aerial life is sparse above 26 km, where it is cold and dry; and the
+  10–20 km (sky ecology); aerial life is sparse above 26 km, where it is cold and dry; and the
   flight band runs from 35 to 45 km (people and land, table 1).
 - **The winds** ([zonal_winds.md](../climate/gcm/zonal_winds.md)). From 20 km up the wind blows east in at least
   98% of 3-day means, at a mean 3.5 m/s at 20 km and 10.7 m/s at 40 km. At 30 km the drift towards the equator or

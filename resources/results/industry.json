@@ -3,10 +3,10 @@
  "producer": {
   "domain": "resources",
   "files": {
-   "resources/industry.py": "120e667222f6e883"
+   "resources/industry.py": "7a324986948b6b24"
   },
   "inputs": {
-   "resources/results/first_screen.json": "0ae0d4efb97bba46",
+   "resources/results/first_screen.json": "8925d2b67c0d6bb6",
    "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
    "research/studies/solar_shield_array/results/integrated_ledger.json": "68ad477ab2cc80c4",
    "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa",
@@ -542,10 +542,14 @@
   },
   "carbon": {
    "inventory_kg": 1930000000000000.0,
-   "runoff_rescale": 1.0,
+   "runoff_mm_yr": {
+    "present": 265.0,
+    "co2_study": 349
+   },
+   "runoff_rescale": 0.76,
    "weathering_gt_co2_yr": [
-    0.36,
-    3.6
+    0.273,
+    2.73
    ],
    "burial_gt_co2_yr": [
     0.739,
@@ -553,25 +557,25 @@
    ],
    "cycle_years": {
     "weathering": [
-     536.0,
-     5360.0
+     706.0,
+     7060.0
     ],
     "weathering_and_burial": [
-     353.0,
-     1760.0
+     419.0,
+     1910.0
     ]
    },
    "kilns_gw": [
-    46.1,
-    461.0
+    35.0,
+    350.0
    ],
    "kilns_heat_w_m2": [
-    0.00121,
-    0.0121
+    0.000923,
+    0.00923
    ],
    "import_as_carbon_kg_s": [
-    9510.0,
-    47300.0
+    8760.0,
+    39800.0
    ],
    "burial_import_as_carbon_kg_s": [
     6390.0,
@@ -1210,8 +1214,8 @@
     1880000000.0
    ],
    "carbon_if_imported_for_weathering_and_burial": [
-    9510.0,
-    47300.0
+    8760.0,
+    39800.0
    ]
   },
   "packets_per_day": {

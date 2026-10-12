@@ -8,13 +8,13 @@
       "research/studies/aerophytes/biology.py": "6a6cabf8a45b75dc12ce868f014fa0aad5151339b7bcb190cf404e95a27b11bc",
       "research/studies/aerophytes/environment.py": "b70890a24517da3ecb59d30d5e9bb1d244f71b0e898731572b5bd522da227002",
       "research/studies/aerophytes/navigation.py": "8d8acab173455cca53d08acd855a319cefec4f9272c9f5812aef7e079e0a0b19",
-      "research/studies/aerophytes/photoperiod.py": "c23d3bdf7fa48ed2407938417f85e316d84b85deccb66525f6f0454c1d48dbbd",
+      "research/studies/aerophytes/photoperiod.py": "dd135ab98fb278058de025c3ba60d821ae795d23b3cda3b9b3421a17b7fd4f8f",
       "research/studies/aerophytes/trim_cycle.py": "f814699e341a5c788e547ff38543e257c61a7a419cc81ffe39f487dc78a64b34",
       "research/studies/aerophytes/structure.py": "06a19240ae3782d7068c8ede5e45bd90e89a7243d7a9cdb7cd23535081344e52",
       "research/studies/aerophytes/growth.py": "18c9a895ed0393be7ae1202438e7771b48fbf601b90a9048f0e65bc8fbacf0b1",
-      "research/studies/aerophytes/water.py": "7b31b53b4fe39ed2d66f4f8180ecc5275c4bafdb5f38f1c231abd47cc4680c3d",
+      "research/studies/aerophytes/water.py": "23ef3553be1f096179835a1cd6ffa194f4e7c334d00496e292ac3ad9d46a9742",
       "research/studies/aerophytes/storms.py": "43a1c8ad23546094798b201b0b0aa254643940d1da7e7fd3a02864a85d26c0df",
-      "research/studies/aerophytes/sailing.py": "d368cafa26c3f779c81dfc3f27747a73b0224c020fa20f3534036648935f3d3f",
+      "research/studies/aerophytes/sailing.py": "b58f73063b204893a846d2958d8353ee77e8ffb89088db51f316ce9d1f968678",
       "research/studies/aerophytes/gas_biology.py": "8554226b1a41256655f4581d0b1c4daea698abecdc846b8f2201b0ed9b7678f8",
       "research/studies/aerophytes/resources.py": "02decbdde56ae6a4b1f4341e6c92531c0e4e401c2dca629e03af3be549cd5d23"
     },
@@ -32,15 +32,15 @@
       "research/studies/aerophytes/sailing_sources.json": "2d5ad508b374986cef39516cd82e3f4b5cdae009b15ed0d6c88d492ee272be7d",
       "research/studies/aerophytes/gas_biology_sources.json": "24c7e83f111ccb50994a5447aed6dca0d86ba32c653e819a76969209706549bd",
       "research/studies/aerophytes/resources_sources.json": "f8bb6d3f0fae1652745e7798d1a98345a69296151c8850673fb2dcf6ebb432af",
-      "research/studies/sky_ships/results/sky_ships.json": "375284e4a16ffcab49f7ec46396db54062babbb995b580cfccfcf190b3687a72",
+      "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327a13d9a01db7bb711fb5177a5d2b0227c7085826ad8a85a65",
       "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32712fd94a00ea03f1b212a39bed21b7a54b3a4a61707a72c8",
-      "biosphere/ecology/results/people.json": "7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015",
+      "biosphere/ecology/results/people.json": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
       "illumination/surface_light/results/surface_light.json": "e2406dbceb34193eaef5bd8a1dd6ea20940be72934301ef618221fdc79ad5572",
-      "biosphere/canopy/results/plant.json": "4f09599901824e65e32adf0236d93efb5f589d567d9cb0be22ec574109cca78b",
+      "biosphere/canopy/results/plant.json": "87cf08572ea40213f86dfd1e6b92908db8041159f5bdfc3a091c455627929926",
       "biosphere/canopy/results/canopy.json": "bedb8ce2502316d41f264705e118ceafbecb3db42202597cf8bd4b23e0c5e842",
       "illumination/calendar/results/transfer.json": "68ea6e820a8d760314ebf7138695bc99e1f0d7f930692f2c7ca3d35b451946e3",
       "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b18972bdaa506f48d8c25050c04b168090e3b4cd1ba07afea4",
-      "biosphere/canopy/results/fruit.json": "2f4f5e1b6ed912e263c9f815a70c1fd57b9d5b8286fd447e4a427a4ea652bdf5",
+      "biosphere/canopy/results/fruit.json": "b26854d0ff421ab08fc82de4df7729327b407e603895b0ddb730bdd8e1494042",
       "research/studies/megaforest_wind/results/reference_cases.csv": "2df393c88d7eb0606e10ce81b8f790fffada8e436835f08cbead52c4297769c1",
       "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5bffdfbfb191cfed5cc3f4397a9a7d0eb52269f925ee6f05c",
       "climate/results/crm/mixed_phase_box_0e.json": "85670f1eab3618ddcd59fcca373d60289791056b42c85638278be8d0203e1974",
@@ -8057,7 +8057,7 @@
       }
     },
     "twilight_energy_assumption": {
-      "reading_rule": "The inherited plant model assumes the1deg diffuse-black spectrum at every twilight angle. These spectral energy proxies are not the newer calendar solution, altitude predictions or measured H2 action spectra. No flux is forced to zero below a trait threshold.",
+      "reading_rule": "The plant model gives every twilight angle the 1 deg diffuse-black spectrum, scaled to the solved-column sky's twilight illuminance. These spectral energy proxies are not altitude predictions or measured H2 action spectra. No flux is forced to zero below a trait threshold.",
       "shape": {
         "par_w_per_umol": 0.21523386739661293,
         "optical_202_1000_w_per_par_umol": 0.28941334639387717
@@ -8727,7 +8727,7 @@
     "evidence": "Conditional vector kinematics and quasisteady propulsion requirements. No accessible wind corridor, propulsor, biological navigation system or solar-locked trajectory is demonstrated.",
     "reading_rule": "W per horizontal projected collecting m\u00b2. Biological cases use chemical input; engineering comparator uses electrical input. Cd references frontal area. Duty cases alone do not establish Sun tracking.",
     "input_hashes": {
-      "research/studies/sky_ships/results/sky_ships.json": "375284e4a16ffcab",
+      "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327",
       "research/studies/aerophytes/navigation_sources.json": "9048d2ed319761fc"
     },
     "air_10km": {
@@ -64087,7 +64087,7 @@
       "Humidity aloft away from the equatorial box, and along an aerophyte path.",
       "The longwave sky seen from 10-20 km: the cooling used for dew is a stated range.",
       "Cloud liquid water outside storm cores, and how often a route meets it.",
-      "A latitude and solar-hour wind and rain product (being built on another branch) for along-path rain timing."
+      "Rain timed along paths through the design climate's latitude and solar-hour winds (climate/gcm/zonal_winds.md)."
     ]
   },
   "storms": {
@@ -68560,7 +68560,7 @@
       "sail_speed_gain_small_wing": 3.065941943351178
     },
     "unresolved": [
-      "Winds by latitude and local hour at every height (another branch builds the product).",
+      "Winds by latitude and local hour at every height: the design climate's product (climate/gcm/zonal_winds.md) exists; this screen still uses the global-mean profile.",
       "North-south winds: the rings carry none, so the mean meridional drift is open.",
       "Wing and tether dynamics, tether fluttering and the drag of a real fibre bundle.",
       "Biological control of a kilometres-long tether and its wing."

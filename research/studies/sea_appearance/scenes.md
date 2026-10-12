@@ -92,7 +92,7 @@ is separate from the photographic colour convention used by the 24 frames below.
     near that length.
   - Capillary ripples continue below it to a few millimetres. The wind raises them harder than on
     Earth.
-  - The water is the biosphere's productive coast: looking straight down into it, it is olive green.
+  - The water is the biosphere's productive coast: looking straight down into it, it is yellow-green.
     Seen at low angles the sea is mostly reflected sky.
   - The water is unbroken: no foam or whitecaps, which the study does not yet model.
 - **The land is a placeholder:** bare ground with the colour of Apollo soils, dark grey-brown mare soil,
@@ -451,7 +451,7 @@ grey-green-cream at the horizon (#cfe0d7). It is evenly bright across the frame:
 washed-out noon sky.
 
 The sea is a cool grey-teal (#8aa3a7 just below the horizon), 48% as bright as
-the sky. It darkens steadily to deep slate-teal (#597063) at the bottom of the frame, with a
+the sky. It darkens steadily to deep slate-green (#597063) at the bottom of the frame, with a
 faint olive cast in the nearest water. A moderate swell 0.6 m high and 23 m from crest to
 crest rolls straight toward the camera from the horizon. Its crests run parallel to the horizon, and
 the camera looks into their faces. Lively wind ripples under a 3.1 m/s breeze blowing toward the
@@ -747,7 +747,7 @@ The sea is the roughest of the 24 scenes:
   wind waves and ripples over a 1.2 m swell 33 m from crest to crest that runs away to the
   left;
 - the surface is a busy, high-contrast mosaic of pale sky-reflecting facets and dark slate troughs;
-- grey-teal (#7b9295) below the horizon, darkening to deep slate (#566b5d) at the
+- grey-teal (#7b9295) below the horizon, darkening to deep slate-green (#566b5d) at the
   bottom, with a faint olive cast in the nearest water.
 
 Unbroken water, no foam. No boats, no people. Vegetation is omitted for this optical study.
@@ -1040,7 +1040,7 @@ is a rendering placeholder.
 The sky is a very pale cyan-blue, almost white (#c8eae9 at the top), fading to pale cream-grey at
 the horizon behind the peaks (#dce2ca).
 
-The sea is a grey-teal slate (#8ea29d below the horizon), darkening to deep slate-teal
+The sea is a grey-teal slate (#8ea29d below the horizon), darkening to deep slate-green
 (#596d5f) at the bottom. The band of water nearest the horizon mirrors the pale mountains in
 blurred streaks. A swell 1.2 m high and 33 m from crest to crest comes from the front
 left; wind ripples under a 3.7 m/s breeze give it a lively, fine texture. No foam, no boats,

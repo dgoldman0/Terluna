@@ -3,7 +3,7 @@
  "producer": {
   "study": "food_systems",
   "files": {
-   "research/studies/food_systems/run.py": "92727cbe5d9d8066",
+   "research/studies/food_systems/run.py": "febdee0454c4f500",
    "research/studies/food_systems/zones.py": "59f9cc439fcb8997",
    "research/studies/food_systems/parameters.py": "380459175e577004",
    "research/studies/food_systems/systems.py": "c049b3435c3e2763",
@@ -17,13 +17,13 @@
    "SYNODIC_MONTH_DAYS": 29.53059
   },
   "inputs": {
-   "research/studies/ways_of_living/results/ways_of_living.json": "ffe48e6467008176",
-   "provisioning/results/population.json": "0b37e24d62461e53",
-   "research/studies/daily_life/results/daily_life.json": "9c21c92c54f19dc3",
+   "research/studies/ways_of_living/results/ways_of_living.json": "b55285cd89077ee8",
+   "provisioning/results/population.json": "d562cdabe6eee18f",
+   "research/studies/daily_life/results/daily_life.json": "de64289da4914fed",
    "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
-   "biosphere/canopy/results/plant.json": "4f09599901824e65",
-   "biosphere/canopy/results/fruit.json": "2f4f5e1b6ed912e2",
-   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "132011caa1688ff4",
+   "biosphere/canopy/results/plant.json": "87cf08572ea40213",
+   "biosphere/canopy/results/fruit.json": "b26854d0ff421ab0",
+   "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "80b3ebef5077fb62",
    "research/studies/open_moon_aerosol/results/open_moon_aerosol.json": "7e404540ec06f5dd",
    "climate/results/crm/ring_ring_45n_lsw.json": "608921535125ea8c",
    "climate/results/crm/ring_ring_45s_lsw.json": "fe6782e258b2da56",
@@ -31,9 +31,9 @@
    "climate/results/crm/ring_ring_70_135e.json": "87e478815badcc05",
    "geography/results/drainage.json": "18494e3d3656ead7",
    "climate/results/gcm/radiation_check_A28_dim5_moon.json": "82f2d3baff7cb2c3",
-   "research/studies/summit_tower/results/summit_tower.json": "8ef88395811b6da4",
-   "research/studies/summit_tower/results/summit_tower_form.json": "9c9a3cf7fed39b1a",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "b488e76c98e19aa9"
+   "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539",
+   "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f"
   },
   "sources": "40a3c98981c16d28",
   "ignored_inputs": {
@@ -46,8 +46,8 @@
     "path_at_integration": "biosphere/ecology/results/people.json",
     "branch": "main",
     "commit": null,
-    "blob": "16da044ef8ca4519c7d2547684db79fe5fa72c6b",
-    "sha256": "7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015",
+    "blob": "e76556670bf282fa37635f5a4f3976a1f9adf0f1",
+    "sha256": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The lunar design's diets, crop land, crop water, rain-fed bands, nitrogen, phosphorus, N2O and methane per person (people_and_land.md)."
@@ -66,8 +66,8 @@
     "path_at_integration": "biosphere/ecology/people_and_land.md",
     "branch": "main",
     "commit": null,
-    "blob": "4660b559686e3f47039ee74fdb5373dcd73a8b50",
-    "sha256": "7a8fbafb9a9ecdf635fb0cda1535bbf01d1069522f037d0630fabcce739097a1",
+    "blob": "39751c8d07e0b74deb42009d31d533d5517c6db3",
+    "sha256": "fbd83a2137a12eb59c2cc4a8ffaed6e37a5aecbedb48c32bd47d15a3c02e38da",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The write-up of the ecology people product; bound for its definitions of the lunar design."
@@ -76,8 +76,8 @@
     "path_at_integration": "resources/results/phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "d8c8bc91e045377aae366f5779e98a9eca1539f6",
-    "sha256": "098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60",
+    "blob": "bab3177a4c9119a3f57fb4a6fc01e62307a2f444",
+    "sha256": "4089899e2b70e8b7888bb83e705e1773f316a1b3c220a43313a48b2578b615a5",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The aerial phosphorus return account, whose complete-diet P demand provisioning supplies; its lift energy per kg to 10 km."
@@ -100,21 +100,21 @@
     "sha256": "afa8db4d5e8b698c6e4d8bb4b6d5e20f424f5edabd9144ccab7baf4c0a7af138",
     "worktree": "terluna",
     "read_from": "in-tree",
-    "note": "The write-up of the phosphorus account; the author's direction of 2026-10-11 to draw phosphorus from the seas is recorded in that branch's decisions register at the same commit."
+    "note": "The write-up of the phosphorus account; the author's direction of 2026-10-11 to draw phosphorus from the seas is recorded in the decisions register, Phosphorus from the seas."
    },
    "resources_sea_phosphorus": {
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "617d2891b931ef59a069dfe8f96eb555703ba6a9",
-    "sha256": "8e7050601fc79f123c385368efafefd72b60e6da3e339d1705144c13411525b9",
+    "blob": "c40631491e6b37ff85a1a2e823d8af1fc161f666",
+    "sha256": "47b600895919319d03e16c4193051bfe2827b304d85b5ac427d688c7f3ba4ddb",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The land's phosphorus through the rain-fed lakes to the seas: the dissolved input the common-level waters receive, and what the waters' life can spare to seaweed, fish and sorption."
    }
   }
  },
- "evidence": "A screen on committed products (the crop model's yields, stores and light, the design climate's rain, fog and wind, the clear-sky radiation check, the atlas and drainage grids, the heat and power ledgers) and two bound branches (ecology's diets and nutrients; resources' phosphorus accounts for the sky and the waters), with Earth literature values for each food system. Yields, efficiencies and emission factors are measured on Earth or modelled there and serve as reference points for the Moon's engineered organisms. The study runs no crop, hydrology, climate or ecosystem model and chooses no mix.",
+ "evidence": "A screen on committed products (the crop model's yields, stores and light, the design climate's rain, fog and wind, the clear-sky radiation check, the atlas and drainage grids, the heat and power ledgers) and the products of two other domains (ecology's diets and nutrients; resources' phosphorus accounts for the sky and the waters), with Earth literature values for each food system. Yields, efficiencies and emission factors are measured on Earth or modelled there and serve as reference points for the Moon's engineered organisms. The study runs no crop, hydrology, climate or ecosystem model and chooses no mix.",
  "reading_rule": "Per billion lunar residents unless named: areas km2, water km3 a year, power and heat TW (TW per billion equals kW a person), phosphorus and nitrogen Mt a year, N2O kt N a year and ppb, methane Mt a year and ppm at steady state, structure Gt. Results computed at the two ends are pairs [low-cost end, high-cost end]: every uncertain input at its favourable value, then at its unfavourable one, so each end is one consistent case. Inputs, derived values and capacities are ranges, smallest first: the basis and derived blocks, billions_the_rain_feeds, billions_the_waters_supply, residents_per_km2, the rain on glass and the fog nets' yields (yields_low_to_high and each ring's). Heat is given for two supplies: power from the array (its receivers' losses included) and fusion on the Moon. Land rules: kept_30 and kept_50 keep 30% and half of each zone wild; wild_30_hybrid_20 is the author's compromise, 30% wild and another 20% hybrid, and wild_50_hybrid_20 half wild and another 20% hybrid for comparison. The hybrid land is heavily manicured megaparks and great gardens, so fields, glass, towns and grazing keep outside a rule's wild and hybrid shares (the kept share), and the wild shares count against the land outside the kept share, which differs by rule, so dry_land_share_used compares the rules directly. Mixes: cases[population][land rule]; zone_use_share is each zone's use against its land outside the kept share (grazing on the fog desert included), sea farms against the seas shallower than 200 m, and their phosphorus against what the waters' life can spare; feasible says which ends fit, feasible_to the fraction of the way to the high-cost end, every input moved together, at which the first zone fills, and feasible_range the case there beside the low-cost end.",
  "marks": {
   "screen": "Numbers computed here: the zones, the fog-net and water screen, every system's costs per billion, the farm-yield sensitivity, every mix and its feasibility.",

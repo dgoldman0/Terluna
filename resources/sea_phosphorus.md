@@ -230,7 +230,7 @@ product reserves the binding (`producer.pending_bindings`).
   phosphate to one mole a litre, is 1.0–1.5 MJ a kilogram; moving the water is the cost.
 - **Sewage.** Excreta carry 440–600 kt a year for each billion people; the design returns most of it to the fields.
   Struvite's magnesium, 207–424 kt a year per billion, can come from the seas, which weathering makes rich in magnesium
-  over 18,000–290,000 years for mare to highland soils (the lunar-cycle register, G2).
+  over 22,000–340,000 years for mare to highland soils (the lunar-cycle register, G2).
 
 **Taken together, the deposits supply the people and the dissolved phosphorus feeds the waters' life.** The lake deltas
 receive 1.34–3.83 Tg of particles a year; the waters' life can spare 21–56 kt (44–377 kt with release from particles),
@@ -251,7 +251,7 @@ within 500 km; the seas lie a median 476 km from the land.
 | Struvite | 7.9 kg | 0.39 | 0.013 MJ |
 | As P₂O₅ | 2.3 kg | 0.11 | 0.004 MJ |
 
-*Derived.* On field crops at the screen's range, the new phosphorus is 0.32–9.2 g per m² of cropland a year (139–393 m²
+*Derived.* On field crops at the screen's range, the new phosphorus is 0.31–9.1 g per m² of cropland a year (141–401 m²
 a person, the ways-of-living product): 0.14–19 kg of sediment per m², a layer of 0.1–38 mm a year. Sediment suits the
 farms near the lakes. Struvite from the towns and concentrates leached from the dredged sediment carry phosphorus to the
 highlands, the far land and the sky towns at a few kilograms a kilogram.
@@ -301,11 +301,13 @@ kt a year in solution, so a teragram a year from open water would take 82–218 
 
 ## Statements elsewhere that need correcting
 
-These belong to other branches and stay unchanged here.
+These belong to other studies, for their owners to correct.
 1. **The ecology land loss's water.** The ecology product's 1.47–4.16 Tg puts Earth's river concentrations on 7,546 km³
-   a year, the lunar-cycle register's 0.3226 m a year over the dry land, from an earlier 279,000 m³/s. The land's own
-   runoff is 4,020 km³ a year (the waters product); the rest of the routed flow is rain on lakes. On the land's runoff
-   the loss is 0.78–2.22 Tg, 0.53 times (*derived*). This note keeps the bound 1.47–4.16 Tg.
+   a year, the lunar-cycle register's earlier 0.3226 m a year over the dry land, from 279,000 m³/s. The register now
+   runs on the drainage product's 229,410 m³/s, 0.2651 m a year, 6,201 km³ over the dry land. The land's own runoff is
+   4,020 km³ a year (the waters product); the rest of the routed flow is rain on lakes. On the land's runoff the loss
+   is 0.78–2.22 Tg, 0.53 times (*derived*); the screen scales it from the register's present runoff, 0.95–2.70 Tg,
+   0.65 times. This note keeps the bound 1.47–4.16 Tg.
 2. **The drainage outlets.** The drainage product treats every cell below the common level as an outlet, so 71% of its
    sea-bound water ends in crater waters and grid-scale pits at that level; its second river, 31,255 m³/s, ends in 229
    km² of crater water. Such pits fill and spill onward through more lakes, which raises the retention found here. The

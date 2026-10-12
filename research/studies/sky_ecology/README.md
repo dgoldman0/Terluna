@@ -12,7 +12,7 @@ ecosystem? Smaller ones can probably be eaten as part of the food chain. Larger 
 lots of organisms, right? I'm sure too much on them and they'll start to sink, but I bet you could get lots of things on
 decent size ones before that happens." This study answers in one coupled screen on the
 [aerophyte](../aerophytes/README.md) and [aerial-ecology](../aerial_ecology/README.md) studies, with the phosphorus
-checked against the resources branch's return model. The findings are *screen* values from [run.py](run.py) unless
+checked against the resources domain's return model. The findings are *screen* values from [run.py](run.py) unless
 marked *derived*. Two states of the sky are kept apart throughout: a growing sky, whose bodies spend their surplus on
 new bodies, and a mature one, whose bodies hold their size while recruits replace the dead.
 
@@ -32,7 +32,7 @@ new bodies, and a mature one, whose bodies hold their size while recruits replac
 
   The aerial study's central 1,000 g C/m² of biomass sits at the top of the giants' and the reefs' ranges. Growing
   bodies add 0.3–10% to their standing biomass a year at the reference light. The cover runs from 0.1% to 2%. One per
-  cent is the aerial study's central case, and the provisioning branch's sky towns for five billion people shade 1.8%
+  cent is the aerial study's central case, and provisioning's sky towns for five billion people shade 1.8%
   (*derived*), so the sky is shared.
 - **Replacing the dead costs a round giant up to two-thirds of its surplus, and more than all of it where its gas is
   fermented and adults die fast.** A dead body is rebuilt whole, gas included, so replacement costs the adult hazard,
@@ -139,7 +139,7 @@ new bodies, and a mature one, whose bodies hold their size while recruits replac
     pools it recycles 74–96% and needs 13–165 kt.
   - **No body that dies keeps 99.9%.** In a mature sky the falls of whole bodies and the tenants that leave take
     0.6–6.4% of a reef's throughput.
-- **The resources branch's low case reproduces exactly, and aerophyte stoichiometry moves it.** The case returns
+- **The resources domain's low case reproduces exactly, and aerophyte stoichiometry moves it.** The case returns
   10,726 t of P a year to the sky. With a reef's tissues and recycling it becomes:
   - 0.44–85 kt with designed pools and 7–108 kt with forest-floor pools in a mature sky;
   - 22–267 kt with either kind of pool in a growing sky;
@@ -193,13 +193,11 @@ statement and the reading rule.
 - **The committed inputs** are hashed: the aerophyte, aerial-ecology, people, first-screen, taxonomy, surface-light,
   sky-ship and sky-fleet products and the water scenario. The sky-ship product gives the air's density through the
   fall of litter and the sky fleet's gliders bound the flyers' glide ratios.
-- **Files from other branches** are bound by commit, blob and SHA-256 until integration, as
-  research/studies/daily_life binds main's places:
-  - the resources branch's phosphorus product, model and note at b47c452;
-  - the provisioning branch's zonal-wind product, its arrays and note at d9bc800;
-  - its ways-of-living product at e364c08.
-
-  They are read in-tree once their hashes match there, and from Git until then.
+- **Files from the former branches** are read in-tree with their Git blob and SHA-256 checked, now that the branches
+  are merged:
+  - resources' phosphorus product, model and note;
+  - provisioning's zonal-wind product, its arrays and note;
+  - its ways-of-living product.
 - **The 28% atlas grid**, an ignored input, places the routes over land and sea when present.
 
 **Records.** [Current checks](symbioses_checks.json) cover the guards and symbioses follow-up, and

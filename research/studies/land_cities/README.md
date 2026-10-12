@@ -545,7 +545,7 @@ occurrence map; the haze product and the sea-appearance lighting calendar; the s
 fleet, inhabited volume, ways-of-living and daily-life products. It reads the ignored grid products (the atlas and
 drainage grids and the design climatology) and the geography domain's fetched inputs (LOLA's 16 px/deg grid, GRAIL's
 GL0420A and the IAU gazetteer archive), and records their hashes when present. Main's corrected per-place product,
-`research/studies/joint_synthesis/results/places.json`, is read at `main` commit `128d5fe` through Git and checked
+`research/studies/joint_synthesis/results/places.json`, is read in place since the joint integration and checked
 against its sha256 (`9707e4d1…`).
 
 ## Reproduction and checks

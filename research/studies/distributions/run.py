@@ -6,10 +6,10 @@
 A coupled screen on committed products. It builds the Moon's capacity at 4, 6 and 8 billion residents with 2-4 billion
 aloft and the ground's people mostly in the drier highlands, checks every band of the land with the food fields and the
 settlement together, sets out the synergies among the Moon's regions, prices Earth, the array and the Solar System's
-colonies, and assembles four distributions of 25-30 billion people for the author to choose among. Its inputs are this
-branch's food-systems, land-cities, ways-of-living, daily-life, inhabited-volume, conservation, population, computing
-and zonal-wind products and the shared population cases, and seven files on other branches, read through Git at
-pinned commits with their hashes checked (BOUND). Two primary sources on free-space and Mars settlements add their
+colonies, and assembles four distributions of 25-30 billion people for the author to choose among. Its inputs are the
+food-systems, land-cities, ways-of-living, daily-life, inhabited-volume, conservation, population, computing
+and zonal-wind products and the shared population cases, and seven files from the former domain branches, read in-tree
+with their hashes checked (BOUND). Two primary sources on free-space and Mars settlements add their
 published figures (LIT). Arithmetic and closed-form screens only: no crop, climate, hydrology, ecosystem, structural
 or traffic model runs here.
 """
@@ -68,41 +68,41 @@ BOUND = {
     'sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='617d2891b931ef59a069dfe8f96eb555703ba6a9',
-        sha256='8e7050601fc79f123c385368efafefd72b60e6da3e339d1705144c13411525b9',
+        blob='c40631491e6b37ff85a1a2e823d8af1fc161f666',
+        sha256='47b600895919319d03e16c4193051bfe2827b304d85b5ac427d688c7f3ba4ddb',
         note="The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage "
              'recovery and the natural cycle kept beside them.'),
     'industry_md': dict(
         path='resources/industry.md', schema=None,
         branch='main', worktree='terluna', commit=None,
-        blob='98d91dbf3c8c182bb32403d14b3b7a29515c9a06',
-        sha256='3da7e7b7d7dfa144109445d1ae99301aa98d8317a1fcaf03210296676917e71e',
+        blob='763c9ef5d48e78ac0679944887e6867c28311de7',
+        sha256='394f707ab1478370c12af288e742fd440057aa6e226cd30da44ca788b3e85200',
         note="The array's habitats as the largest continuing material stream, the places' sunlight and the Moon's "
              "people's stocks; the values used are transcribed in TRANSCRIBED and checked against these bytes."),
     'phosphorus': dict(
         path='resources/results/phosphorus.json', schema='terluna.resources.phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='d8c8bc91e045377aae366f5779e98a9eca1539f6',
-        sha256='098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60',
+        blob='bab3177a4c9119a3f57fb4a6fc01e62307a2f444',
+        sha256='4089899e2b70e8b7888bb83e705e1773f316a1b3c220a43313a48b2578b615a5',
         note='The energy to lift material to the sky towns at 10 km.'),
     'ecology_people': dict(
         path='biosphere/ecology/results/people.json', schema='terluna.biosphere.ecology-people/1',
         branch='main', worktree='terluna', commit=None,
-        blob='16da044ef8ca4519c7d2547684db79fe5fa72c6b',
-        sha256='7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015',
+        blob='e76556670bf282fa37635f5a4f3976a1f9adf0f1',
+        sha256='758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8',
         note="The kept shares and the lunar design's land, the basis of the food and lighting studies."),
     'living_light': dict(
         path='research/studies/living_light/results/living_light.json', schema='terluna.research.living-light/1',
         branch='main', worktree='terluna', commit=None,
-        blob='6bd9943cdbf16f1c2799967193b7ff9230a4a0ec',
-        sha256='d82bd5e9d77d2665743b5c86cde6a221a252d51ed3982d02a862739828868498',
+        blob='7479768679bda3bb5ef2178f141f48271571485a',
+        sha256='24941b1f4e33eb849aeaaaffdd80df7428b37727daf661b4de5a97195b454521',
         note='Land under a light-polluted sky a person by home and lighting design, the metropolis and residents '
              'aloft; lamp hours by home; the dark belt.'),
     'sky_ecology': dict(
         path='research/studies/sky_ecology/results/sky_ecology.json', schema='terluna.research.sky-ecology/1',
         branch='main', worktree='terluna', commit=None,
-        blob='1f566175a347aa1c62b6cffa1cabd96dc0acb92e',
-        sha256='3a1401c61271dedd15a38c55b453c9c8085c2bfd22fa4289d7613f3977ce89de',
+        blob='0723a9375a78fba45bf86fbf7545ae691c5fd915',
+        sha256='2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3',
         note="Aerophyte cover and the encounter rule for bodies on the same wind tracks."),
     'places': dict(
         path='research/studies/joint_synthesis/results/places.json',

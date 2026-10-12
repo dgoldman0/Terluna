@@ -2,11 +2,11 @@
  "schema": "terluna.research.lunar-cycle-ecology/1",
  "producer": {
   "files": {
-   "research/studies/lunar_cycle_ecology/run.py": "46673e4a76e72f15"
+   "research/studies/lunar_cycle_ecology/run.py": "5f6f23b13db2e2c3"
   },
   "inputs": {
-   "biosphere/canopy/results/plant.json": "4f09599901824e65",
-   "biosphere/canopy/results/fruit.json": "2f4f5e1b6ed912e2",
+   "biosphere/canopy/results/plant.json": "87cf08572ea40213",
+   "biosphere/canopy/results/fruit.json": "b26854d0ff421ab0",
    "geography/results/atlas.json": "78cfbf2f469eb339",
    "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
    "geography/results/drainage.json": "18494e3d3656ead7"
@@ -17,7 +17,7 @@
  "settings": {
   "cycles_per_year": 12.37,
   "design_pressure_pa": 121600.0,
-  "moon_air_k": 294.0,
+  "moon_air_k": 294.9,
   "leaf_lifespan_months": [
    6.0,
    12.0,
@@ -236,7 +236,7 @@
    }
   },
   "air_column": {
-   "density_kg_m3": 1.434,
+   "density_kg_m3": 1.43,
    "column_kg_m2": 74860.0,
    "o2_kg_m2": 14500.0,
    "co2_kg_m2": 45.71,
@@ -276,13 +276,13 @@
  },
  "flight": {
   "air_density_kg_m3": {
-   "moon": 1.434,
+   "moon": 1.43,
    "earth": 1.225
   },
   "weight_ratio": 0.1656,
-  "hover_induced_power_ratio": 0.0623,
+  "hover_induced_power_ratio": 0.06239,
   "energy_per_km_ratio_at_fixed_lift_to_drag": 0.1656,
-  "minimum_power_speed_ratio": 0.3761,
+  "minimum_power_speed_ratio": 0.3767,
   "fliers": {
    "moth_0.33g": {
     "mass_kg": 0.00033,
@@ -298,8 +298,8 @@
       5.0
      ],
      "moon": [
-      1.128,
-      1.881
+      1.13,
+      1.884
      ]
     }
    },
@@ -317,8 +317,8 @@
       15.0
      ],
      "moon": [
-      3.761,
-      5.642
+      3.767,
+      5.651
      ]
     }
    }
@@ -825,12 +825,12 @@
    "round_trip_km": 951.7,
    "one_way_hours": {
     "moth_0.33g": [
-     117.1,
-     70.28
+     117.0,
+     70.18
     ],
     "bird_100g": [
-     35.14,
-     23.43
+     35.09,
+     23.39
     ]
    },
    "moth_deaths_per_m2_yr": [

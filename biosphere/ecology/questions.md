@@ -89,13 +89,15 @@ on this laptop. The findings behind them are in the [README](README.md).
     - Plant root regulation.
     - Tree height limits, which can be computed from hydraulics and buckling.
     - Animal calcium and vitamin D, vision from 0.001 to 3 lux, and development.
-14. **Refreshing what has gone stale.**
+14. **Refreshing what has gone stale.** Done on 12 October 2026 in the joint integration (7c230dd), as the author
+    ordered that day:
     - Rerun the ecology register on the corrected products.
     - Give the living waters developed fines.
     - Bring the forest studies' leaf area to the canopy model's range.
     - Take plant twilight from the solved sky.
 
-    These are changes to main's studies; the author ordered all four on 12 October.
+    The largest changes: developed fines brighten the river mouth's own light from 186 to 1,334 cd/m², and the solved
+    sky's dimmer twilight gives plants at 60° 120 dark hours a cycle against 34.
 
 ## Aerophyte follow-up: giants, water and storms
 
@@ -103,7 +105,7 @@ The [coupled study](../../research/studies/aerophytes/README.md) now gives giant
 water sources, storm design and sailing. What decides it next:
 - one assembled wet membrane: hydrogen, oxygen and nitrogen permeation, sustained-load strength and creep at the
   renewal interval, seams, tear arrest and healing, with and without guanine-like plates;
-- paths through the latitude and solar-hour winds (built on domain/provisioning,
+- paths through the latitude and solar-hour winds (the design climate's wind product,
   `climate/gcm/zonal_winds.md`), with water, carbon, gas and trim closed hour by hour, and whether the low evening
   westward branch that lets aerophytes linger at sunset survives in three dimensions;
 - a population model: colony budding and fragmentation, juvenile survival in canopy nurseries, lightning and storm

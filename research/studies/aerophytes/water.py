@@ -394,4 +394,4 @@ def evaluate(root=ROOT, net_leaf_c_kg_m2_year=1.83, relative_periods_days=None):
         unresolved=['Humidity aloft away from the equatorial box, and along an aerophyte path.',
                     'The longwave sky seen from 10-20 km: the cooling used for dew is a stated range.',
                     'Cloud liquid water outside storm cores, and how often a route meets it.',
-                    'A latitude and solar-hour wind and rain product (being built on another branch) for along-path rain timing.'])
+                    'Rain timed along paths through the design climate\'s latitude and solar-hour winds (climate/gcm/zonal_winds.md).'])

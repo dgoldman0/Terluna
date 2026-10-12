@@ -2,8 +2,8 @@
 
 **11 October 2026.** The author's direction of that day: "Lighting does not have to work the same way as on Earth for
 many areas because many areas get twilight at darkest. We can also rely more heavily on bioluminsecence" (the
-provisioning branch's register at `b82e0dc`, People on the Moon and beyond; the second sentence also in [this branch's
-register](../../decisions.md), Welkinia, strange taxa and living light). This study asks three things of it: what living
+[register](../../decisions.md), People on the Moon and beyond, 11 October 2026; the second sentence also under
+Welkinia, strange taxa and living light). This study asks three things of it: what living
 light can give and what it costs; what people need outdoors at night in each setting, against that setting's own night;
 and how much land people's light puts under a light-polluted sky once twilight, Earthlight and living light are counted.
 
@@ -30,17 +30,17 @@ section 3.
    summit's dark hours for 2–10% of a plant's night store, and the fungal pathway as measured for a third of the store
    to thirty times it.** A closed glowing canopy that lights its path at 1 lux through the 165 hours a cycle the
    summit's night stays below that level takes 0.78–0.93 g C/m² with firefly chemistry, quantum yield 0.41–0.48 (Ando et
-   al. 2008; Niwa et al. 2010), when 90% of its light reaches the path. That is 1.6–10% of the canopy model's night
-   store: 42–47 g C/m² for an Earth-like plant and 9.1–10 g C/m² for one that idles through a quarter of the cycle. Glow
-   made inside green leaves, a tenth of it reaching the path, costs nine times as much: 7.0–8.3 g C/m², 15–91% of the
+   al. 2008; Niwa et al. 2010), when 90% of its light reaches the path. That is 1.6–9.6% of the canopy model's night
+   store: 44–49 g C/m² for an Earth-like plant and 9.6–11 g C/m² for one that idles through a quarter of the cycle. Glow
+   made inside green leaves, a tenth of it reaching the path, costs nine times as much: 7.0–8.3 g C/m², 14–87% of the
    store. Bacterial chemistry facing down takes 1.1–2.0 g C/m². The fungal pathway takes 15–275 g C/m² facing down,
    because its quantum yield is 0.00096–0.017 (Teranishi 2018) (*screen*). Per photon made, the fungal cycle spends
    960–17,800 ATP equivalents, firefly chemistry 60–74 and bacterial chemistry 39–70 (*screen*).
 
 3. **At the physical limits light is cheap; quantum yield, luciferin supply and light lost in the leaf set how brightly
    a plant glows.** A tenth of the night store, spent through a whole 354-hour night, lights the ground under a glowing
-   canopy at 0.46–2.8 lux with firefly chemistry facing down, 0.66–3.5 lux with the best beetle luciferase (quantum
-   yield 0.61; Niwa et al. 2010) and 12–63 lux at the thermodynamic floor, one photon per luciferin with nothing lost
+   canopy at 0.48–2.9 lux with firefly chemistry facing down, 0.69–3.6 lux with the best beetle luciferase (quantum
+   yield 0.61; Niwa et al. 2010) and 13–64 lux at the thermodynamic floor, one photon per luciferin with nothing lost
    (*screen*). Glow that loses nine-tenths of its light in the leaf gives a ninth as much. One micromole of firefly
    luciferase per m², 60 mg of protein, running at its measured 0.2 photons a second a molecule (Klein et al. 2023),
    would give 24 lux under a closed canopy with all its light reaching the path, 2.4–22 lux at the 0.1–0.9 share
@@ -185,8 +185,8 @@ glow facing down (*screen*):
 | Walking through the whole night | 354 | 33–590 | 1.7–2.0 | 2.5–4.2 | 0.075 |
 
 The columns take 90% of the light to reach the path; at a tenth every chemistry costs nine times as much, the floor
-unchanged. The canopy model's night store is 42–47 g C/m² for an Earth-like plant and 9.1–10 g C/m² for one that idles
-through a quarter of the cycle, and its growth 208–260 g C/m² a cycle. At the brightest measured glow a night costs
+unchanged. The canopy model's night store is 44–49 g C/m² for an Earth-like plant and 9.6–11 g C/m² for one that idles
+through a quarter of the cycle, and its growth 203–256 g C/m² a cycle. At the brightest measured glow a night costs
 0.27–4.8 g C/m² facing down, 0.008–0.15 W through the night; the register's lasting glow (M09) puts a glowing square
 metre at about 0.04 W (*derived*).
 
@@ -215,8 +215,8 @@ as by day at about 30 lux (Boyce et al. 2000). The face levels assume a uniform 
 ground's light; under a high Earth most light comes from above, a face gets less, and the verdicts for faces lean
 generous there.
 
-The natural night is the calendar's evaluator on its solved clear sky in the mean geometry, the same calculation as the
-provisioning branch's daily-life study, which it reproduces at all 22 of that study's places and latitude rows, and
+The natural night is the calendar's evaluator on its solved clear sky in the mean geometry, the same calculation as
+provisioning's daily-life study, which it reproduces at all 22 of that study's places and latitude rows, and
 main's per-place Earthlight at all seven of main's places (*screen*; tests). The light is read on level ground,
 without libration, terrain, cloud or haze; ordinary hazes move practical dusk by under an hour (illumination/aerosol).
 Hours below each need's level a cycle (*screen*):
@@ -341,10 +341,10 @@ Share of the dry land under a light-polluted sky, by provisioning's mixes of whe
 | 6 billion | 1.2–24% | 1.4–33% | 1.3–31% | 1.0–15% | 1.2–26% | 1.1–20% | 0.5–21% |
 | 8 billion | 1.3–31% | 1.7–40% | 1.6–38% | 1.1–19% | 1.4–31% | 1.2–26% | 0.5–28% |
 
-The 4–8 billion lunar residents are the author's working range (the provisioning branch's register at `b82e0dc`). The
+The 4–8 billion lunar residents are the author's working range (the register, People on the Moon and beyond). The
 mixes are the ways-of-living study's: people in proportion to each home's land, or four times as dense on the
 waterfronts, in the rain belt or on the cool ground of the highlands and higher latitudes, with the metropolis at its
-100 million; half aloft puts 2–4 billion in sky towns over the whole Moon (the provisioning branch's register). The
+100 million; half aloft puts 2–4 billion in sky towns over the whole Moon (the register). The
 author's direction of 11 October puts land residents mostly in the drier highlands, the summit metropolis round its
 tower above all (the same register); four times as dense on the highland homes, a mix derived here, that gives 1.0–18%,
 1.2–26% and 1.4–31%, close to the spread case, since 86% of the highland homes' land lies where the Earth never rises
@@ -366,7 +366,7 @@ and rodents (Grubisic et al. 2019), and under an Earth 30° and more up above th
 where the metropolis stands.
 
 **The dark-night requirement.** The fleet decision keeps the ring fleet's light off the night zones and leaves the
-requirement's value to the biosphere and human work (this branch's register). Rolled near 80° with a Moon-facing scatter
+requirement's value to the biosphere and human work (the register). Rolled near 80° with a Moon-facing scatter
 near 10⁻⁵, the fleet's night half gives about 0.02 lux at a far-side midnight (the same register, from the joint
 synthesis): 2.5–18 times the dark belt's natural darkest, and above the melatonin levels. Held within Falchi's 8% of the
 dark belt's natural darkest, the fleet's light there stays under 0.00009–0.0006 lux; under the Earth 8% of the natural
@@ -424,9 +424,9 @@ Earth, and the seas off the far side's low latitudes (*screen*).
 | [sources.json](sources.json) | Every source, its use and what was read |
 | [checks.json](checks.json) | The checks run and the independent review's fixes |
 
-The calendar's evaluator (`illumination/calendar`) is called live. Bound by commit and SHA-256 from other branches:
-main's per-place Earthlight (`research/studies/joint_synthesis/results/places.json` at `128d5fe`) and the provisioning
-branch's daily-life and ways-of-living products (at `b82e0dc`).
+The calendar's evaluator (`illumination/calendar`) is called live. Read in-tree with their Git blob and SHA-256
+checked, now that the branches are merged: main's per-place Earthlight
+(`research/studies/joint_synthesis/results/places.json`) and provisioning's daily-life and ways-of-living products.
 
 ```sh
 OPENBLAS_NUM_THREADS=1 python -m research.studies.living_light.run \

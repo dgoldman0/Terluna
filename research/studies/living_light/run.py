@@ -48,7 +48,7 @@ INPUTS = {
 # The calendar's evaluator, called live as the provisioning branch's daily-life study calls it.
 IMPORTED_CODE = ('illumination/calendar/geometry.py', 'illumination/calendar/validate.py', 'illumination/calendar/disk.py')
 
-# Other branches' files, bound by commit, blob and SHA-256 until the branches are integrated (then read in-tree).
+# Files from the former domain branches, bound by blob and SHA-256 and read in-tree since the joint integration.
 MAIN_COMMIT = None
 PROVISIONING_COMMIT = None
 CROSS_BRANCH = {
@@ -57,12 +57,12 @@ CROSS_BRANCH = {
         sha256='9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d',
         schema='terluna.research.joint-synthesis-places/1'),
     'research/studies/daily_life/results/daily_life.json': dict(
-        branch='main', commit=PROVISIONING_COMMIT, blob='d51ed6855bdadb333bff9a74753016f74f0dee79',
-        sha256='9c21c92c54f19dc351bec855e1289da04c68021c7f5e14ac478514cacf22ee36',
+        branch='main', commit=PROVISIONING_COMMIT, blob='2ace65e65dc40d05d60fea6dfc332c2b2f70531c',
+        sha256='de64289da4914fed87c5cc94d2f3bef563b6c8a47f74ccd8d5ea153788175856',
         schema='terluna.research.daily-life/1'),
     'research/studies/ways_of_living/results/ways_of_living.json': dict(
-        branch='main', commit=PROVISIONING_COMMIT, blob='f2b29ecec1566d67e0b6cad21a2038d3f68c8ea4',
-        sha256='ffe48e6467008176b9e89f7fb9b3afc5d63f0874fe3a86156a0aa81bac35d09d',
+        branch='main', commit=PROVISIONING_COMMIT, blob='18626be739ed81c89f591781f497468443a47f55',
+        sha256='b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a',
         schema='terluna.research.ways-of-living/1'),
 }
 
@@ -88,7 +88,8 @@ def load_product(path, schema):
 
 
 def cross_branch_bytes(path):
-    """A bound file from another branch: in-tree when its hash matches (after integration), else the Git object."""
+    """A bound file: in-tree when its hash matches, as every pin does since the joint integration; else the Git
+    object at a pinned commit."""
     spec = CROSS_BRANCH[path]
     local = ROOT / path
     if local.exists():

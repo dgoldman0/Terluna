@@ -66,8 +66,8 @@ BOUND = {
     'ecology_people': dict(
         path='biosphere/ecology/results/people.json', schema='terluna.biosphere.ecology-people/1',
         branch='main', worktree='terluna', commit=None,
-        blob='16da044ef8ca4519c7d2547684db79fe5fa72c6b',
-        sha256='7fbf374db8561ff0c1a8ec6d84fa5862903440b3f92a64c7468aa0b51849c015',
+        blob='e76556670bf282fa37635f5a4f3976a1f9adf0f1',
+        sha256='758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8',
         note="The lunar design's diets, crop land, crop water, rain-fed bands, nitrogen, phosphorus, N2O and methane "
              'per person (people_and_land.md).'),
     'ecology_first_screen': dict(
@@ -79,14 +79,14 @@ BOUND = {
     'ecology_people_and_land': dict(
         path='biosphere/ecology/people_and_land.md', schema=None,
         branch='main', worktree='terluna', commit=None,
-        blob='4660b559686e3f47039ee74fdb5373dcd73a8b50',
-        sha256='7a8fbafb9a9ecdf635fb0cda1535bbf01d1069522f037d0630fabcce739097a1',
+        blob='39751c8d07e0b74deb42009d31d533d5517c6db3',
+        sha256='fbd83a2137a12eb59c2cc4a8ffaed6e37a5aecbedb48c32bd47d15a3c02e38da',
         note="The write-up of the ecology people product; bound for its definitions of the lunar design."),
     'resources_phosphorus': dict(
         path='resources/results/phosphorus.json', schema='terluna.resources.phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='d8c8bc91e045377aae366f5779e98a9eca1539f6',
-        sha256='098f2d00b158e9bed79e23fd2496a438929c6e0b92beb60d6d746d3182e5de60',
+        blob='bab3177a4c9119a3f57fb4a6fc01e62307a2f444',
+        sha256='4089899e2b70e8b7888bb83e705e1773f316a1b3c220a43313a48b2578b615a5',
         note='The aerial phosphorus return account, whose complete-diet P demand provisioning supplies; its lift '
              'energy per kg to 10 km.'),
     'resources_phosphorus_py': dict(
@@ -101,12 +101,12 @@ BOUND = {
         blob='030a5a80e4b6edab39c6a908d5bb519e7b31f721',
         sha256='afa8db4d5e8b698c6e4d8bb4b6d5e20f424f5edabd9144ccab7baf4c0a7af138',
         note='The write-up of the phosphorus account; the author\'s direction of 2026-10-11 to draw phosphorus from '
-             'the seas is recorded in that branch\'s decisions register at the same commit.'),
+             'the seas is recorded in the decisions register, Phosphorus from the seas.'),
     'resources_sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='617d2891b931ef59a069dfe8f96eb555703ba6a9',
-        sha256='8e7050601fc79f123c385368efafefd72b60e6da3e339d1705144c13411525b9',
+        blob='c40631491e6b37ff85a1a2e823d8af1fc161f666',
+        sha256='47b600895919319d03e16c4193051bfe2827b304d85b5ac427d688c7f3ba4ddb',
         note='The land\'s phosphorus through the rain-fed lakes to the seas: the dissolved input the common-level '
              'waters receive, and what the waters\' life can spare to seaweed, fish and sorption.'),
 }
@@ -767,8 +767,8 @@ def dutch_check(basis):
 
 EVIDENCE = ('A screen on committed products (the crop model\'s yields, stores and light, the design climate\'s rain, '
             'fog and wind, the clear-sky radiation check, the atlas and drainage grids, the heat and power ledgers) '
-            'and two bound branches (ecology\'s diets and nutrients; resources\' phosphorus accounts for the sky and '
-            'the waters), with Earth literature values for each food system. Yields, efficiencies and emission '
+            'and the products of two other domains (ecology\'s diets and nutrients; resources\' phosphorus accounts '
+            'for the sky and the waters), with Earth literature values for each food system. Yields, efficiencies and emission '
             'factors are measured on Earth or modelled there and serve as reference points for the Moon\'s engineered '
             'organisms. The study runs no crop, hydrology, climate or ecosystem model and chooses no mix.')
 READING_RULE = ('Per billion lunar residents unless named: areas km2, water km3 a year, power and heat TW (TW per '

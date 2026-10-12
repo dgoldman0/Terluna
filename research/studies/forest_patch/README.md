@@ -55,9 +55,10 @@ inside the repository.
 ## Shared geometry and budget controls
 
 The reference patch contains 49 trees on a 7 x 7 grid, 105 m apart. Reference
-tree height is 300 m, stem diameter H/35, crown radius 0.18 H, and leaf-area index
-22 under the inherited hypothetical trait model. The reference canopy extends
-about 738 m across including crowns, approximately 2.46 reference canopy heights.
+tree height is 300 m, stem diameter H/35 and crown radius 0.18 H under the
+inherited hypothetical trait model, with a leaf-area index of 6, the canopy
+model's optimum (`biosphere/canopy`). The reference canopy extends about 738 m
+across including crowns, approximately 2.46 reference canopy heights.
 This is a small patch with strong edge influence, not an established deep-forest
 interior. The soil case uses 2 kPa cohesion and pore-pressure ratio 0.8.
 
@@ -187,17 +188,18 @@ matter before turning a cascade into a quantitative storm-loss prediction.
 
 ## Results and numerical checks
 
-The completed final-source run includes **13 geometry/direction cases, 39
-interaction comparisons, 1,884 individual-tree map records and 14 flow-grid,
-domain or mixing sensitivities**. Intact comparisons use an imposed upstream
-15 m/s; the damage comparison uses 22 m/s. All capacities and material traits
-remain hypothetical.
+The completed final-source run, refreshed on 12 October 2026 with a leaf-area
+index of 6 and the standalone air at the corrected design case's 294.9 K,
+includes **13 geometry/direction cases, 39 interaction comparisons, 1,884
+individual-tree map records and 14 flow-grid, domain or mixing sensitivities**.
+Intact comparisons use an imposed upstream 15 m/s; the damage comparison uses
+22 m/s. All capacities and material traits remain hypothetical.
 
 ### Load distribution and canopy shape
 
-In the flat patch, mean root-capacity utilization falls from 0.526 in the
-windward row to 0.334 in the last row when only aerodynamic shelter is included.
-With crown contact, those row means become 0.498 and 0.345. Thus contact unloads
+In the flat patch, mean root-capacity utilization falls from 0.512 in the
+windward row to 0.325 in the last row when only aerodynamic shelter is included.
+With crown contact, those row means become 0.485 and 0.336. Thus contact unloads
 the leading trees while transferring demand to more sheltered neighbors.
 Utilization equals calculated demand divided by the prescribed capacity; 1 is
 the onset criterion. It is not a probability of failure.
@@ -206,13 +208,13 @@ Peak root utilization at 15 m/s is:
 
 | Shape/orientation | Shelter only | Crown contact | Contact + hypothetical grafts |
 |---|---:|---:|---:|
-| Flat | 0.540 | 0.513 | 0.506 |
-| Domed | 0.599 | 0.599 | 0.585 |
-| Ramp, short edge windward | 0.617 | 0.617 | 0.603 |
-| Ramp, wind across slope | 0.627 | 0.627 | 0.612 |
-| Ramp, tall edge windward | 0.503 | 0.495 | 0.489 |
-| Irregular, reference direction | 0.583 | 0.583 | 0.554 |
-| Central gap | 0.528 | 0.519 | 0.509 |
+| Flat | 0.525 | 0.499 | 0.492 |
+| Domed | 0.583 | 0.583 | 0.569 |
+| Ramp, short edge windward | 0.601 | 0.601 | 0.587 |
+| Ramp, wind across slope | 0.610 | 0.610 | 0.595 |
+| Ramp, tall edge windward | 0.490 | 0.482 | 0.475 |
+| Irregular, reference direction | 0.567 | 0.567 | 0.539 |
+| Central gap | 0.514 | 0.505 | 0.496 |
 
 The equal-mass dome has a maximum height near 392 m, while the flat reference is
 300 m. Its redistribution of height and mass changes both exposure and capacity.
@@ -226,17 +228,17 @@ architecture is established.
 ### Damage propagation
 
 For the flat 49-tree patch at the same imposed 22 m/s, a single evaluation removes
-12 trees. Re-solving after each damage wave removes 12, 12, 14, 7 and 4 trees,
+12 trees. Re-solving after each damage wave removes 12, 12, 11, 8, 4 and 2 trees,
 respectively, ending with all 49 removed. The finer-grid repetition changes the
-sequence to 7, 7, 7, 10, 12 and 6; it also reaches all 49. Exact onset and wave
+sequence to 7, 7, 7, 7, 7 and 14; it also reaches all 49. Exact onset and wave
 membership are resolution-sensitive, while a cascade persists in these two runs.
 
 Crown-contact and contact-plus-graft variants also lose all 49 in this selected
-stress test. Their wave counts are five and four. Connection-mediated load
+stress test. Their wave counts are seven and six. Connection-mediated load
 redistribution therefore does not guarantee survival under this particular
 forcing. The model resolves successive exposure/support changes, rather than
 holding each survivor's original sheltered loading fixed. The largest damage
-sequence displacement-domain utilization is below 0.87; these runs did not cross
+sequence displacement-domain utilization is below 0.88; these runs did not cross
 the stated small-displacement boundary before applying failure events.
 
 The all-tree-loss result is conditional on the imposed wind, weak soil, small
@@ -246,21 +248,23 @@ The waves have no assigned physical duration.
 
 ### Numerical checks
 
-All **62 available tests pass: 37 new patch tests and 25 earlier megaforest tests**.
-The complete study was rerun from the final source after review. Source hashes
-match the run record. The intact summary and per-tree CSV files, configurations,
-and arrays in all five saved flow fields reproduce the development run exactly.
-New hash metadata and schema guards make that a numerical-result comparison,
-not a claim of byte identity for every JSON artifact.
+At delivery all **62 available tests passed: 37 new patch tests and 25 earlier
+megaforest tests**. The complete study was rerun from the final source after
+review. Source hashes matched the run record. The intact summary and per-tree CSV
+files, configurations, and arrays in all five saved flow fields reproduced the
+development run exactly. New hash metadata and schema guards make that a
+numerical-result comparison, not a claim of byte identity for every JSON artifact.
+The refresh reran the quick study from the current source; its check record marks
+that run PASS.
 
-Across intact geometries, maximum discrete divergence is 9.30e-16, relative
-summed-tree/bulk-force discrepancy is 9.85e-16, and maximum structural equilibrium
-residual is 5.16e-11. These are numerical consistency checks. The flow solver also
+Across intact geometries, maximum discrete divergence is 9.02e-16, relative
+summed-tree/bulk-force discrepancy is 2.12e-15, and maximum structural equilibrium
+residual is 5.34e-11. These are numerical consistency checks. The flow solver also
 records its independently evaluated steady momentum ledger and acceleration
 residual, so a pressure projection alone cannot certify convergence.
 
 Refinement from 48 x 32 x 16 to 96 x 64 x 32 changes peak root utilization by
-about -3.03% for the flat patch and -4.82% for the dome. Doubling the channel width
+about -3.03% for the flat patch and -4.83% for the dome. Doubling the channel width
 or height changes these peaks by roughly 1.0-1.14%; doubling length changes them
 by about 0.03%. Halving or doubling the prescribed mixing coefficient changes
 these peaks by less than 0.8%. These selected sensitivities do not constitute a
