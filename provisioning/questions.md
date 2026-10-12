@@ -26,13 +26,14 @@ on this laptop. The findings behind them are in the [README](README.md).
    high-latitude lowland homes, which rank best on the study's measures, and homesteads among the farms there. C′
    keeps C's heat, energy, water lift and wild land; at 8 billion outside a kept half its high-cost end fits with the
    dry highland towns poleward of 45° first and the scattered towns gathered on the twilit homes, once the homesteads'
-   homes count within the fields they work. Under the author's compromise of 30% wild with another 20% hybrid it fits
-   with those placements alone, the homesteads' homes on the middle-wet zone's hybrid fifth.
+   homes count within the fields they work. Under the author's compromise of 30% wild with another 20% hybrid, the
+   hybrid fifth being megaparks and great gardens, it fits the same way.
    - **What decides it:** the author's choice is made; the high-latitude towns' water and the farms' work beyond the
      homesteads decide how C′ is built.
    - **What remains to size:**
-     - the hybrid land under the compromise: the daily life, management and uses it holds beyond the homesteads' homes
-       and grazing, and how it meets the wild land;
+     - the parks under the compromise: their water on dry land, in the dry highlands and in the fog desert and polar
+       lowland, which hold 1.65 million km² of them; the energy of the automation that keeps them; their amenities;
+       and their night light within the hybrid fifth of the dark sky;
      - the high-latitude towns' water from lakes and seas a median 32.8 km away, the driest homes on the Moon;
      - the work of the middle latitudes' farms beyond the homesteads, the crews' regional ships or crew towns at
        30–45°, and the homesteads' own design;

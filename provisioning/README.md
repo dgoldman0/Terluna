@@ -461,15 +461,17 @@ is [distributions](../research/studies/distributions/README.md); numbers here ar
     from the dry highland cities poleward of 45°, 206 km away, or by sky boat from crew towns kept on the dry high
     ground at 30–45°.
 58. **C′ fits the author's wild share: at least half wild by preference, or 30% wild with another 20% hybrid.** Half
-    wild is the kept half of finding 57. Under the compromise, farms, cities and towns keep to the same half of each
-    zone and of the sky, so C′ keeps the kept half's land, heat, water and traffic. The study reads the hybrid fifth as
-    open to grazing and to the homesteads' homes beside their fields, up to 9,920 km², and every corner then fits with
-    the remedy's poleward and twilit placements alone. Farms, settlement and the homesteads' homes take 8.2–33% of the
-    dry land, and a light-polluted sky covers at most 14.7% of it, 17.2% with the metropolis lit at Earth's area a
-    person, so at least 82.8% keeps a dark sky against the preferred half and the compromise's 30%. Half wild
-    with another 20% hybrid, run beside them for comparison at the author's request, leaves farms and towns 30%: every
-    corner still fits with those placements, while the high-cost end draws 3,250 km³ a year from the seas to water its
-    fields and the sky towns have 1.7 times as many conflicts a day.
+    wild is the kept half of finding 57. Under the compromise the hybrid fifth is the author's megaparks and great
+    gardens, 4.68 million km², about 585 m² for each of the Moon's 8 billion residents before visitors, with the small
+    shops, restrooms and places to rest they need. Farms, grazing, the homesteads' homes and towns keep to the same
+    half as under a kept half, so C′ keeps the half's land, heat, water and traffic, and every corner fits with the
+    remedy's poleward and twilit placements once the homesteads' homes count within their fields. Farms, settlement
+    and the homesteads' homes take 8.2–33% of the dry land. Towns, cities and sky towns put at most 14.7% of it under
+    a light-polluted sky, 17.2% with the metropolis lit at Earth's area a person, so even with every park lit at least
+    62.8% keeps a dark sky, above the preferred half and the compromise's 30%. Half wild with another 20% hybrid, run
+    beside them for comparison at the author's request with the same parks, leaves farms and towns 30%: every corner
+    still fits the same way, while the high-cost end draws 3,250 km³ a year from the seas to water its fields and the
+    sky towns have 1.7 times as many conflicts a day.
 
 ## Statements elsewhere that need correcting
 
