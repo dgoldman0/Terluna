@@ -117,6 +117,10 @@ The [taxonomic system](taxonomy.md) leaves seven choices to the author:
 - O6: whether the giants are a form or a sister lineage of the aerophytes;
 - O7: the aerophytes' scientific name, from six candidates.
 
+On 11 October 2026 the author tied these choices to what kind of organisms the aerophytes become and what synthetic
+biology builds them, and put the taxonomy on hold for later
+([decisions](../../research/decisions.md#welkinia-strange-taxa-and-living-light-11-october-2026)).
+
 After those, each carried-forward group needs a chassis as its design firms up, which narrows its placement from the
 backbone clade to an Earth genus or species. The founding register stays empty until a lineage is designed, and
 common names are recorded as the lunar peoples give them.
