@@ -2,22 +2,23 @@
   "schema": "terluna.research.domain-synthesis-ledgers/1",
   "producer": {
     "files": {
-      "research/studies/domain_synthesis/ledgers.py": "04bfaa09658204ad139237c5c42c28f59173a544f5346341418acd2ecc5a0270"
+      "research/studies/domain_synthesis/ledgers.py": "bbf2e4ad599c82c8af696b3805540c18697bad95dbd0a700848500ee5618e5af"
     },
     "inputs": {
-      "research/studies/distributions/results/distributions.json": "a45749a11b95797412b8182ed20b5dc1ed37ad770bc918d13187b1660308a518",
-      "research/studies/food_systems/results/food_blend.json": "9bef38146c393aac44b6d3328d3940592b625b699fbc54182e59648991f333a7",
+      "research/studies/distributions/results/distributions.json": "7bb5c9c1125da35d120ad30ca8281da5b230af2c2beea38caefe25430dafa65c",
+      "research/studies/food_systems/results/food_blend.json": "9d537677cfa5847b5d68bc3e32fdfff26e09c3ac3934bc6989d1817b652a8df6",
       "provisioning/results/population.json": "d562cdabe6eee18fe40cfc16f6a65177ec16f7dd1fd8584a4dad80d271b85895",
       "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d",
       "biosphere/ecology/results/people.json": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
-      "resources/results/sea_phosphorus.json": "16507b01be544f2f8c7edec518c6041721e12a7ce98f37c710a07c3914910c78",
+      "resources/results/sea_phosphorus.json": "f1b386342c393750b16c860e8cc583202b713d59686517dc001a8f9c8759ac1a",
       "research/studies/sky_ecology/results/sky_ecology.json": "2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3",
       "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f3a09b17dc088037560bb5b7f31f4342ae16239d4bf22013a",
       "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327a13d9a01db7bb711fb5177a5d2b0227c7085826ad8a85a65",
       "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d42be3598a6f4896cc72c4c5aa0432ad9b468dbc08191f684",
       "research/studies/sky_fleet/results/sky_fleet.json": "4826a86d183fb13d004b89c9bd70002aac06426b075411bdcba8d221175edfc8",
       "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa384b70a0cffda0ed8f62ec5737eea53e264e7f4e9acab4d6",
-      "research/studies/solar_shield_array/results/integrated_ledger.json": "68ad477ab2cc80c4dbe850a4fda9f6d9595094f323bbf07b3b7be8c8b117cc7a"
+      "research/studies/solar_shield_array/results/integrated_ledger.json": "68ad477ab2cc80c4dbe850a4fda9f6d9595094f323bbf07b3b7be8c8b117cc7a",
+      "atmosphere/radiative_convective/results/reduced_gases.json": "07c81fe264132ec774c52597dbc917cade073f0d2afa1f5ec4849c7f5c58874a"
     }
   },
   "evidence": "Arithmetic on committed screen products of the three domains and main's studies: C' and the food blend recombined in totals, the trace gases' sources and sinks summed, resources' phosphorus ledger read at the blend's losses, and the sky's layers read from their products. Nothing is simulated here; each figure keeps its source's evidence state, and the blend's fields are not placed band by band.",
@@ -513,7 +514,191 @@
       ],
       "heritage_manure": "not counted: the blend prices the cattle's enteric methane only"
     },
-    "ground_temperature_k": 294.0
+    "ground_temperature_k": 294.0,
+    "held": {
+      "rule": "the levels that keep the Moon closest to its planned climate, which carries neither gas",
+      "methane_ppm": 0.3,
+      "n2o_ppm": 0.03,
+      "forcing_w_m2": {
+        "allsky": 1.75,
+        "clear_sky_toa": 2.86,
+        "methane_alone_allsky": 1.05,
+        "n2o_alone_allsky": 0.834
+      },
+      "added_dimming_percent": 0.598,
+      "warming_k_if_unanswered": [
+        1.09,
+        1.75
+      ],
+      "beside": {
+        "earth_2019": {
+          "allsky_w_m2": 4.71,
+          "added_dimming_percent": 1.61
+        },
+        "central_steady_state": {
+          "allsky_w_m2": [
+            7.88,
+            8.29
+          ],
+          "added_dimming_percent": [
+            2.69,
+            2.83
+          ]
+        }
+      },
+      "methane_by_source_cut": {
+        "0": {
+          "sources_left_tg_yr": [
+            63.0,
+            84.6
+          ],
+          "steady_ppm_by_soils_alone": [
+            21.6,
+            29.0
+          ],
+          "removal_tg_yr": [
+            62.1,
+            83.7
+          ],
+          "atmosphere_share_per_year": [
+            0.118,
+            0.159
+          ],
+          "fan_tw": [
+            0.822,
+            1.11
+          ],
+          "fan_dimming_percent": [
+            0.00982,
+            0.0212
+          ]
+        },
+        "0.5": {
+          "sources_left_tg_yr": [
+            31.5,
+            42.3
+          ],
+          "steady_ppm_by_soils_alone": [
+            10.8,
+            14.5
+          ],
+          "removal_tg_yr": [
+            30.6,
+            41.4
+          ],
+          "atmosphere_share_per_year": [
+            0.0582,
+            0.0787
+          ],
+          "fan_tw": [
+            0.405,
+            0.548
+          ],
+          "fan_dimming_percent": [
+            0.00484,
+            0.0105
+          ]
+        },
+        "0.9": {
+          "sources_left_tg_yr": [
+            6.3,
+            8.46
+          ],
+          "steady_ppm_by_soils_alone": [
+            2.16,
+            2.9
+          ],
+          "removal_tg_yr": [
+            5.42,
+            7.58
+          ],
+          "atmosphere_share_per_year": [
+            0.0103,
+            0.0144
+          ],
+          "fan_tw": [
+            0.0718,
+            0.1
+          ],
+          "fan_dimming_percent": [
+            0.000857,
+            0.00192
+          ]
+        }
+      },
+      "n2o_by_source_cut": {
+        "0": {
+          "sources_left_tg_n_yr": [
+            1.09,
+            1.68
+          ],
+          "years_to_reach_from_none": [
+            84.2,
+            54.8
+          ],
+          "atmosphere_share_per_year": [
+            0.0119,
+            0.0182
+          ],
+          "decomposition_tw": [
+            19.2,
+            29.5
+          ],
+          "decomposition_dimming_percent": [
+            0.229,
+            0.563
+          ]
+        },
+        "0.5": {
+          "sources_left_tg_n_yr": [
+            0.547,
+            0.84
+          ],
+          "years_to_reach_from_none": [
+            168.0,
+            110.0
+          ],
+          "atmosphere_share_per_year": [
+            0.00594,
+            0.00912
+          ],
+          "decomposition_tw": [
+            9.59,
+            14.7
+          ],
+          "decomposition_dimming_percent": [
+            0.115,
+            0.281
+          ]
+        },
+        "0.95": {
+          "sources_left_tg_n_yr": [
+            0.0547,
+            0.084
+          ],
+          "years_to_reach_from_none": [
+            1680.0,
+            1100.0
+          ],
+          "atmosphere_share_per_year": [
+            0.000594,
+            0.000912
+          ],
+          "decomposition_tw": [
+            0.959,
+            1.47
+          ],
+          "decomposition_dimming_percent": [
+            0.0115,
+            0.0281
+          ]
+        }
+      },
+      "guesses": {
+        "contactor_pa": 100.0,
+        "n2o_decomposition_kj_per_kg_air": 16.1
+      }
+    }
   },
   "phosphorus": {
     "by_land_loss": {

@@ -65,10 +65,12 @@ SCENARIOS = dict(earth_1atm=cl.Scenario('earth_1.0atm', th.EARTH, 101325.0, 400.
                  moon_12atm=cl.Scenario('moon_1.2atm', th.MOON, 121590.0, 400.0))
 TS = (290.0, 295.0, 300.0)
 DESIGN_TS = 295.0                # the design case near 295 K (294.9 K, climate/gcm)
-# The synthesis's levels: Earth's preindustrial and present air, the screens' steady states and build-ups.
-CH4_PPM = (0.7292, 1.8663, 3.4, 10.0, 21.6, 29.0, 60.0, 100.0, 230.0)
-N2O_PPM = (0.2701, 0.3321, 0.55, 1.0, 2.0, 3.1, 4.2)
-BOTH_PPM = ((1.8663, 0.3321), (21.6, 0.55), (29.0, 0.55), (230.0, 4.2))
+# The synthesis's levels: Earth's preindustrial and present air, the screens' steady states and build-ups, and
+# levels below Earth's 1750 air for holding the gases low; the pairs span the low levels and the synthesis's cases.
+CH4_PPM = (0.01, 0.03, 0.1, 0.3, 0.7292, 1.8663, 3.4, 10.0, 21.6, 29.0, 60.0, 100.0, 230.0)
+N2O_PPM = (0.001, 0.003, 0.01, 0.03, 0.1, 0.2701, 0.3321, 0.55, 1.0, 2.0, 3.1, 4.2)
+BOTH_PPM = tuple((x, y) for x in (0.1, 0.3, 0.7292, 1.8663, 3.4) for y in (0.01, 0.03, 0.1, 0.2701, 0.3321)) + (
+    (21.6, 0.55), (29.0, 0.55), (230.0, 4.2))
 # AR6 effective radiative forcing for 1750-2019 (W/m2) and the concentrations it spans (ppm).
 AR6 = dict(CH4=dict(erf_w_m2=0.54, range_w_m2=(0.43, 0.65), from_ppm=0.7292, to_ppm=1.8663),
            N2O=dict(erf_w_m2=0.21, range_w_m2=(0.18, 0.24), from_ppm=0.2701, to_ppm=0.3321))

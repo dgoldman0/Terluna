@@ -149,7 +149,9 @@ every way of joining the two that was offered
   about a thousand years. Nitrogen fixation feeds the nitrogen it comes from, and breaking it down with lamps in open
   air would take hundreds of terawatts. In the deep column both gases warm the Moon strongly: Earth's present levels
   force 4.7 W/m² all-sky and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K before it is answered
-  ([questions](questions.md), item 3).
+  ([questions](questions.md), item 3). By the author's rule, whichever levels keep things closest to the already
+  planned world, they are held at 0.3 ppm of methane and 0.03 ppm of N2O, 1.75 W/m², with biology cutting most of
+  each source and removal from open air taking the rest.
 
 ## What the project already says
 

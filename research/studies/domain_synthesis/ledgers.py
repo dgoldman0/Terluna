@@ -18,7 +18,8 @@ placing the blend's fields band by band, as the distributions study does, is lef
 - gases: methane and N2O from the wild waters and soils, the blend's farms and the heritage cattle, against the
   soils' methane sink and N2O's lack of one on any human timescale: the steady states, the removal that holds
   each gas at a reference level, the share of the atmosphere that removal from open air would treat each year at
-  full capture, and the least power that complete separation takes;
+  full capture, and the least power that complete separation takes; and the levels the author's rule holds them
+  at, with their warming in the deep column, the dimming that answers it, and what holding them takes;
 - phosphorus: resources' ledger at 8 billion, with the blend's losses at both ends, and the sky's need beside it;
 - heights: the sky's layers and what uses them, from the products, with the storms' tops, the cloud at the
   network's height and the sky towns' passes of sky reefs, by the distributions study's encounter rule;
@@ -52,6 +53,7 @@ INPUTS = {
     'research/studies/sky_fleet/results/sky_fleet.json': None,
     'research/studies/solar_shield_array/results/ring_layout.json': None,
     'research/studies/solar_shield_array/results/integrated_ledger.json': None,
+    'atmosphere/radiative_convective/results/reduced_gases.json': 'terluna.atmosphere.reduced-gas-forcing/1',
 }
 RULE = 'wild_30_hybrid_20'              # the author's compromise: 30% of the land wild and another 20% hybrid
 KEPT, HYBRID = 0.3, 0.2
@@ -65,6 +67,22 @@ N2O_REFERENCE_PPM = 0.34
 # Nature 630, 421-428: 50-95% depending on the soil); applied here to every source, the wild waters included, as a
 # design bracket.
 DENITRIFICATION_CUT = (0.5, 0.95)
+# The levels the gases are held at, by the author's rule of 12 October ("Whichever keeps things closest to the already
+# planned world."): the planned climate carries neither gas, so they are held as low as the planned means reach, at a
+# pair the deep column's sweep computed (atmosphere/radiative_convective, reduced gases).
+HELD_CH4_PPM = 0.3
+HELD_N2O_PPM = 0.03
+# Biology at the sources, the first of the planned means, as a share of each source it removes: none, and two design
+# cases; N2O's are the denitrification bracket above.
+METHANE_SOURCE_CUTS = (0.0, 0.5, 0.9)
+N2O_SOURCE_CUTS = (0.0,) + DENITRIFICATION_CUT
+# Design guesses for removal from open air, the last of the means: the pressure drop through an ambient-temperature
+# contactor (methane's oxidizers, biological or catalytic, and the fans that drive air through them), and N2O's
+# catalytic decomposition, which needs the air near 400 K hotter with 96% of that heat recovered, as regenerative
+# oxidizers recover it.
+CONTACTOR_PA = 100.0
+N2O_DECOMPOSITION_KJ_PER_KG_AIR = 0.04 * 1.005 * 400.0
+AIR_KG_PER_MOL = 0.028964
 SECONDS_PER_YEAR = JULIAN_YEAR_DAYS * JULIAN_DAY
 # Sky reefs: a kilometre or two across (sky ecology README; aerophytes README), half the aerophyte cover (sky
 # ecology's design guess, in its product). Towns meet them by the distributions study's encounter rule.
@@ -208,6 +226,65 @@ def removal(rate_tg, tg_per_unit, level_units, air_mol, temperature_k, per_unit)
     per_mol = math.log(1.0 / x) - (1.0 - x) / x * math.log1p(-x)
     watts = mol * GAS_CONSTANT * temperature_k * per_mol / SECONDS_PER_YEAR
     return dict(atmosphere_share_per_year=share, least_power_mw=watts / 1e6)
+
+
+def held_levels(forcing, methane, nitrous, air_mol, temperature_k, heat, array_heat_per_w):
+    """The pair the gases are held at: its warming in the deep column, the dimming that answers it, and what holding
+    it takes, by biology at the sources and removal from open air, at each source cut; beside Earth's 2019 air and the
+    central steady state. Removal's power, as electricity from the array, ends as heat on the Moon."""
+    both = forcing['moon_at_design']['both']
+    key = f'{HELD_CH4_PPM:g}+{HELD_N2O_PPM:g}'
+    if key not in both:
+        raise ValueError(f'the deep column has no pair {key}')
+    pair_ = both[key]
+    sun, dim = heat['design_sunlight_w_m2'], heat['dimming_percent_per_tw']
+    lam = [tw * heat['moon_w_m2_per_tw'] for tw in heat['moon_tw_per_k']]
+    air_kg_s = air_mol * AIR_KG_PER_MOL / SECONDS_PER_YEAR          # the whole air, once a year
+    density = 121590.0 / (GAS_CONSTANT / AIR_KG_PER_MOL * temperature_k)
+
+    def fan_tw(share):
+        return share * air_kg_s / density * CONTACTOR_PA / 1e12
+
+    def as_dimming(tw):                                             # [low-cost end, high-cost end]
+        return [tw[e] * array_heat_per_w * dim[e] for e in (0, 1)]
+
+    k, tg_per_ppm = methane['central'][0]['soil_sink_tg_yr_per_ppm'], methane['tg_per_ppm']
+    sources = [c['sources_tg_yr']['total'] for c in methane['central']]
+    ch4 = {}
+    for cut in METHANE_SOURCE_CUTS:
+        left = [(1.0 - cut) * s for s in sources]
+        removal = [max(0.0, s - k * HELD_CH4_PPM) for s in left]
+        share = [r / (HELD_CH4_PPM * tg_per_ppm) for r in removal]
+        ch4[f'{cut:g}'] = dict(sources_left_tg_yr=left, steady_ppm_by_soils_alone=[s / k for s in left],
+                               removal_tg_yr=removal, atmosphere_share_per_year=share,
+                               fan_tw=[fan_tw(s) for s in share],
+                               fan_dimming_percent=as_dimming([fan_tw(s) for s in share]))
+    per_ppm_n = nitrous['tg_n_per_ppb'] * 1e3
+    n_sources = [nitrous['low']['sources_tg_n_yr']['total'], nitrous['high']['sources_tg_n_yr']['total']]
+    n2o = {}
+    for cut in N2O_SOURCE_CUTS:
+        left = [(1.0 - cut) * s for s in n_sources]
+        share = [r / (HELD_N2O_PPM * per_ppm_n) for r in left]
+        heat_tw = [s * air_kg_s * N2O_DECOMPOSITION_KJ_PER_KG_AIR * 1e3 / 1e12 for s in share]
+        n2o[f'{cut:g}'] = dict(sources_left_tg_n_yr=left, years_to_reach_from_none=[HELD_N2O_PPM * per_ppm_n / r
+                                                                                    for r in left],
+                               atmosphere_share_per_year=share, decomposition_tw=heat_tw,
+                               decomposition_dimming_percent=as_dimming(heat_tw))
+    allsky = pair_['allsky_w_m2']
+    earth = both['1.8663+0.3321']['allsky_w_m2']
+    central = [both['21.6+0.55']['allsky_w_m2'], both['29+0.55']['allsky_w_m2']]
+    return dict(
+        rule='the levels that keep the Moon closest to its planned climate, which carries neither gas',
+        methane_ppm=HELD_CH4_PPM, n2o_ppm=HELD_N2O_PPM,
+        forcing_w_m2=dict(allsky=allsky, clear_sky_toa=pair_['clear_sky_toa_w_m2'],
+                          methane_alone_allsky=forcing['moon_at_design']['CH4'][f'{HELD_CH4_PPM:g}']['allsky_w_m2'],
+                          n2o_alone_allsky=forcing['moon_at_design']['N2O'][f'{HELD_N2O_PPM:g}']['allsky_w_m2']),
+        added_dimming_percent=allsky / sun * 100.0, warming_k_if_unanswered=[allsky / lam[1], allsky / lam[0]],
+        beside=dict(earth_2019=dict(allsky_w_m2=earth, added_dimming_percent=earth / sun * 100.0),
+                    central_steady_state=dict(allsky_w_m2=central,
+                                              added_dimming_percent=[c / sun * 100.0 for c in central])),
+        methane_by_source_cut=ch4, n2o_by_source_cut=n2o,
+        guesses=dict(contactor_pa=CONTACTOR_PA, n2o_decomposition_kj_per_kg_air=N2O_DECOMPOSITION_KJ_PER_KG_AIR))
 
 
 def gas_ledger(screen, people, blend, heritage, temperature_k):
@@ -395,6 +472,13 @@ def results():
     volume = data['research/studies/inhabited_volume/results/inhabited_volume.json']
     ground = next(r for r in volume['air'] if r['height_km'] == 0.0)
     heat = heat_ledger(cprime, blend, power_heavy, data['provisioning/results/population.json'])
+    gases = gas_ledger(data['biosphere/ecology/results/first_screen.json'], people, blend, heritage,
+                       ground['temperature_c'] + 273.15)
+    pop = data['provisioning/results/population.json']
+    air_mol = data['biosphere/ecology/results/first_screen.json']['trace_gases']['air_mol']
+    gases['held'] = held_levels(data['atmosphere/radiative_convective/results/reduced_gases.json'], gases['methane'],
+                                gases['n2o'], air_mol, ground['temperature_c'] + 273.15, pop['heat'],
+                                pop['earth_service']['heat_on_earth_per_w_delivered'])
     heights = heights_ledger(people, volume, data['research/studies/sky_ships/results/sky_ships.json'],
                              data['research/studies/summit_tower/results/summit_tower_form.json'], dist,
                              data['research/studies/sky_ecology/results/sky_ecology.json'],
@@ -408,8 +492,7 @@ def results():
                      blend_weights=food['weights'], heritage_kg_per_person_year=[float(k) for k in HERITAGE_KG]),
         heat=rnd(heat),
         land=rnd(land_ledger(cprime, blend, heritage, people)),
-        gases=rnd(gas_ledger(data['biosphere/ecology/results/first_screen.json'], people, blend, heritage,
-                             ground['temperature_c'] + 273.15)),
+        gases=rnd(gases),
         phosphorus=rnd(phosphorus_ledger(data['resources/results/sea_phosphorus.json'], blend, cprime,
                                          data['research/studies/sky_ecology/results/sky_ecology.json'])),
         heights=rnd(heights),

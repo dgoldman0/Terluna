@@ -62,7 +62,7 @@ BOUND = {
                            sha256="b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a"),
     "provisioning_decisions": dict(path="research/decisions.md", schema=None, branch="main",
                                    commit=None,
-                                   sha256="25dc218efbda59e098d61c44c4a8f67a8ee46f2805d19b98f9199cdd0e794b62"),
+                                   sha256="a9c17dc3af4f9343de65ef96225abcbb3480d2f7f5119eb666d4b1393e4efc33"),
 }
 # Bound at integration when provisioning's food-systems study is committed; until then the systems below stand alone.
 PENDING = {

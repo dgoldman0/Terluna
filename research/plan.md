@@ -216,10 +216,12 @@ The four refreshes the author ordered on 12 October are done ([integration/domai
 synthesis ranks two items first from the three domains together; they lead this list, and its
 [full order](studies/domain_synthesis/README.md#next-work-in-order) carries the domains' own next steps.
 
-1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October on domain/ecology, about 23
+1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October on domain/ecology, about 38
    minutes on six workers ([reduced gases](../atmosphere/radiative_convective/README.md)). Earth's present levels force
-   4.7 W/m² all-sky on the Moon and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K; the levels to hold the
-   gases at are the author's to set.
+   4.7 W/m² all-sky on the Moon and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K. By the author's rule,
+   whichever levels keep things closest to the already planned world, the gases are held at 0.3 ppm of methane and
+   0.03 ppm of N2O: 1.75 W/m², answered by 0.60% added dimming
+   ([domain synthesis](studies/domain_synthesis/README.md#where-they-are-held)).
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band, in
    minutes.
 3. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,

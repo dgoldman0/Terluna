@@ -37,6 +37,7 @@ At 8 billion on the Moon, pairs from the low-cost to the high-cost end:
 | Wild share of the land outside the kept 30% and the parks | 75–89% | 34–83% |
 | Methane at the soils' central sink, steady state | 22–29 ppm, people 7–30% of the sources | |
 | N2O, rise a year | 0.36–0.55 ppb, people 12–23% of the sources | |
+| Methane and N2O held, by the author's rule | 0.3 and 0.03 ppm: 1.75 W/m², answered by 0.60% added dimming | |
 | Phosphorus dredged back, share of what the lakes receive | 20–51% and 8–27% at the two land losses | the same |
 
 ## Heat
@@ -153,6 +154,42 @@ on 12 October ([reduced gases](../../../atmosphere/radiative_convective/README.m
 planned climate carries neither, Earth's present levels force 4.7 W/m² all-sky (2.9–4.7 K) and the table's central
 steady state 7.9–8.3 W/m² (4.9–8.3 K), within the range of the fleet's glow.
 
+### Where they are held
+
+The author's rule of 12 October holds the gases at whichever levels keep things closest to the already planned world.
+The planned climate carries neither gas, and each part of their warming is answered by taking sunlight away, which
+keeps the mean temperature while the gases warm night as well as day; so they are held as low as the planned means
+reach. Below Earth's 1750 air the deep column's forcing falls about as the square root of the amount, and the pair
+held is 0.3 ppm of methane, a sixth of Earth's present, and 0.03 ppm of N2O, about a tenth (*screen*, `gases.held`):
+
+| Held at 0.3 ppm of methane and 0.03 ppm of N2O | Low-cost end | High-cost end |
+|---|---|---|
+| Warming in the deep column, all-sky; added dimming that answers it | 1.75 W/m²; 0.60% | the same |
+| Beside them: Earth's 2019 air; the central steady state | 4.71 W/m², 1.61%; 7.88 W/m², 2.69% | 4.71 W/m², 1.61%; 8.29 W/m², 2.83% |
+| Methane, biology at the sources cutting 90%: the soils alone would hold it at | 2.16 ppm | 2.90 ppm |
+| Removal from open air to 0.3 ppm, Tg a year; share of the air passed a year | 5.42; 1.03% | 7.58; 1.44% |
+| The same with biology cutting half | 30.6; 5.82% | 41.4; 7.87% |
+| N2O, biology cutting 95%: left a year, Tg N; years to reach 0.03 ppm from none | 0.055; 1,680 | 0.084; 1,100 |
+| Removal at 0.03 ppm: share of the air passed a year; catalytic decomposition | 0.059%; 0.96 TW | 0.091%; 1.47 TW |
+| The same with biology cutting half | 0.59%; 9.6 TW | 0.91%; 14.7 TW |
+
+Biology at the sources sets the size of the rest. N2O has no sink, so its removal takes all that biology leaves at any
+level, and the level sets only how much air it passes; heated catalytic decomposition is the costly part (*design
+guess*: the air heated by 400 K with 96% of that heat recovered). Methane's oxidizers work at the air's own temperature,
+so its removal costs fans, 0.07–0.10 TW at a 90% cut (*design guess*: 100 Pa through each contactor). Counted in the
+dimming that answers the warming and the removal's heat together, the held pair costs 0.61–0.63% of the sunlight when
+biology cuts 90% of the methane and 95% of the N2O, and 0.72–0.89% when it cuts half of each. The pair comes from the
+deep column's grid this way:
+- **N2O at 0.03 ppm** stays near the least across the bracket: at 0.01 ppm decomposition takes 29–44 TW when biology
+  cuts half, and at 0.1 ppm the warming is twice as large.
+- **Methane at 0.3 ppm** is the lowest level at which removal from open air passes no more of the air than Earth's
+  present methane would need without biology, 1.8–2.4% a year, with a 90% cut as the working case. Below it the power
+  stays small but the contactors grow: 0.1 ppm would save another 0.14% of the sunlight and pass 3.4–4.6% of the air a
+  year. At a 95% cut 0.1 ppm passes 1.6–2.2%, so the level moves down when the wet Moon's methane and nitrogen work
+  sizes what biology cuts (next work).
+
+The added dimming's light gives the array 14–21 TW more at 20–30% conversion.
+
 ## Phosphorus
 
 | Tg P a year | Wild land's loss 1.47 | Wild land's loss 4.16 |
@@ -223,9 +260,9 @@ network flies above most of it.
 ## Next work, in order
 
 Machine time is for this laptop, one core, alongside the author's other work.
-1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October, about 23 minutes on six
-   workers ([reduced gases](../../../atmosphere/radiative_convective/README.md)). The levels to hold the gases at are
-   the author's to set with it.
+1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October, about 38 minutes on six
+   workers with the levels below Earth's 1750 air ([reduced gases](../../../atmosphere/radiative_convective/README.md)).
+   By the author's rule the gases are held at 0.3 and 0.03 ppm (above).
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band,
    with the homestead belt holding the heritage farms. Minutes; the distributions README follows.
 3. **The fleet's night and its glow** (plan, item 3; the planned branch research/array-industry): the night-side
@@ -253,7 +290,8 @@ Machine time is for this laptop, one core, alongside the author's other work.
 The author decided the list on 12 October
 ([register](../../decisions.md#the-domain-synthesiss-decisions-12-october-2026)):
 1. The levels at which methane and N2O are held wait for their warming in the deep column, which is the next work;
-   computed the same day, it leaves the levels for the author to set.
+   computed the same day, they follow the author's rule: "Whichever keeps things closest to the already planned
+   world." The pair held is 0.3 ppm of methane and 0.03 ppm of N2O.
 2. Food and the sky towns run on power from the array, given a good distribution recommendation; the one above waits
    for the author.
 3. Added dimming can be had by extracting more of the sunlight; the fleet's glow is the harder problem to work out.
@@ -272,7 +310,8 @@ python -m research.studies.domain_synthesis.ledgers      # writes results/ledger
 python -m pytest research/studies/domain_synthesis
 ```
 
-The product binds its producer and its thirteen inputs by sha256: the distributions, the food blend, provisioning's
+The product binds its producer and its fourteen inputs by sha256: the distributions, the food blend, provisioning's
 population, ecology's first screen and people products, resources' sea phosphorus, sky ecology, the inhabited volume,
-the sky ships, the sky fleet, the summit tower's form, and the shield's ring layout and integrated ledger. The tests
+the sky ships, the sky fleet, the summit tower's form, the shield's ring layout and integrated ledger, and the deep
+column's reduced-gas forcing. The tests
 regenerate it exactly and check the sums it rests on.
