@@ -1,0 +1,62 @@
+{
+  "schema": "terluna.research.sky-reef-symbioses-scenarios/1",
+  "evidence": "Illustrative requirements inputs, not measurements, population predictions, design optima or upper bounds. The previous 1-10 g/m2 guard guess did not specify wet/dry mass; these NEW scenarios explicitly use live mass per footprint area.",
+  "footprint_m2": 10000.0,
+  "density_live_kg_per_footprint_m2": [0.001, 0.01, 0.1],
+  "individual_live_kg": [0.00001, 0.001, 1.0, 100.0],
+  "dry_fraction": 0.3,
+  "active_fraction": 0.2,
+  "turnover_per_year": [1.0, 4.0, 12.0],
+  "carbon_assimilation": 0.8,
+  "population_production_efficiency": 0.3,
+  "host_food_c_kg_per_footprint_m2_year": 0.1,
+  "parameter_sources": {
+    "host_food_c_kg_per_footprint_m2_year": "Reference allocation to ALL tenants in aerophytes/run.py Traits.consumer_food_c_kg_m2_year; not a new allocation per guard guild.",
+    "animal_carbon_and_phosphorus": "stoichiometry.py CONSUMER_C_PER_DRY; midpoint of TENANT_P_G_KG and CONSUMER_P_ASSIMILATION. P tissue range is the earlier study's insect analogue, not a measurement or appropriate default for every size or taxon.",
+    "exterior_area": "Sum raft_module zone areas in results/sky_ecology.json; curved envelope only, excluding added fringe.",
+    "all_other_values": "Illustrative design guesses chosen to expose scaling. No associated defensive efficacy, allometry, lunar behaviour or life-cycle validation. Speeds are independent illustrative inputs, not inferred from individual mass."
+  },
+  "response": {
+    "nest_spacing_m": [5.0, 20.0, 100.0],
+    "speed_m_s": [0.02, 0.1, 2.0],
+    "activation_delay_s": 30.0,
+    "path_factor": 1.5,
+    "deadline_s": [10.0, 60.0, 300.0, 900.0],
+    "boundary": "A local square grid on an idealised connected surface, nearest occupied nest, worst grid-cell point. Does not solve obstacle geometry, detection probability, guard availability, recruitment, occupancy, weather or fighting. A 2 m/s case is only a mobile comparison."
+  },
+  "mixed_guild_example": [
+    {
+      "name": "small_patrol",
+      "live_kg_per_footprint_m2": 0.007,
+      "turnover_per_year": 4.0,
+      "host_budget_share": 0.2,
+      "external_food_c_supply_kg_m2_year": 0.005,
+      "external_diet_p_supply_kg_m2_year": 0.0000795
+    },
+    {
+      "name": "mobile_defender",
+      "live_kg_per_footprint_m2": 0.001,
+      "turnover_per_year": 4.0,
+      "host_budget_share": 0.03,
+      "external_food_c_supply_kg_m2_year": 0.00125,
+      "external_diet_p_supply_kg_m2_year": 0.000019875
+    },
+    {
+      "name": "large_nester",
+      "live_kg_per_footprint_m2": 0.002,
+      "turnover_per_year": 1.0,
+      "host_budget_share": 0.01,
+      "external_food_c_supply_kg_m2_year": 0.00075,
+      "external_diet_p_supply_kg_m2_year": 0.000011925
+    }
+  ],
+  "mixed_guild_boundary": "All external supplies are stipulated exclusive allocations of food crossing the reef boundary, not demonstrated available food. No resident prey is counted as external food. External C and P are paired at 0.0159 kg P/kg C, the illustrative insect tissue midpoint divided by animal C content; supply is consumed first up to carbon demand and remaining demand draws on host allocation. P credit scales with consumed food C, before P assimilation. Eating additional food purely for P and disposing surplus C is not modelled. The same generic tissue and efficiency assumptions are used for illustration only; a large nester needs its own metabolism/diet model. Fixed production efficiency with varying turnover changes implied maintenance; near-zero turnover requires independent metabolic calibration and this screen cannot diagnose individual feeding requirements. Host food is screened as P-free sugar; no protein, nitrogen or essential-nutrient adequacy is implied. These guilds share 24% of the one host food budget; the rest remains unallocated.",
+  "nutrient_import_example": {
+    "gross_external_food_p_kg_m2_year": 0.0004,
+    "deposition_share_on_reef": 0.5,
+    "retention_share": 0.5,
+    "initially_bioavailable_share": 0.4,
+    "exports_from_reef_p_kg_m2_year": 0.00003,
+    "boundary": "Separate illustrative whole-reef boundary account, not an additional supply silently credited to mixed guilds. Deposition share includes excretion, location and time spent on the reef. Exports are other outgoing reef P after deposition losses have already been counted; do not include those losses again. Internal recycling is excluded from new import."
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "schema": "terluna.research.sky-reef-symbioses-sources/1",
+  "checked": "2026-10-10",
+  "scope": "Selected primary evidence for guard diversity, partner exchanges, costs and persistence; Earth observations are not assigned as measured sky-reef traits. Access statements distinguish full accessible passages, abstracts and indexed text. No outside full papers or datasets redistributed.",
+  "sources": [
+    {
+      "id": "goheen_palmer_2010_ant_elephant_defense",
+      "citation": "Goheen, J. R., and Palmer, T. M. (2010). Defensive plant-ants stabilize megaherbivore-driven landscape change in an African savanna. Current Biology 20:1768–1772.",
+      "doi": "10.1016/j.cub.2010.08.015",
+      "url": "https://www.goheenresearchgroup.com/reprints/goheen%20and%20palmer.pdf",
+      "access": "Author-hosted full article PDF accessible; results, discussion, ant-removal and feeding-trial methods read. Supplementary material not inspected.",
+      "claims": [
+        "Ant abundance negatively predicted elephant browsing after experimental ant reduction. Six elephants in feeding trials avoided ant-occupied branches when alternative forage was available.",
+        "Defense activity was assayed by counting recruited ants for 30 seconds after local thorn disturbance; this is an assay window, not a measured travel or guaranteed deterrence time."
+      ],
+      "limits": [
+        "Thin skin and trunk membranes are a proposed mechanism; efficacy against arbitrary large or armored sky-reef attackers does not follow.",
+        "The four ant associates compete for exclusive host possession, so regional partner diversity is not simultaneous cooperation within each tree."
+      ]
+    },
+    {
+      "id": "mckeon_moore_2014_guard_crab_diversity",
+      "citation": "McKeon, C. S., and Moore, J. M. (2014). Species and size diversity in protective services offered by coral guard-crabs. PeerJ 2:e574.",
+      "doi": "10.7717/peerj.574",
+      "url": "https://www.vliz.be/imisdocs/publications/ocrd/265342.pdf",
+      "access": "Open article PDF at marine-science repository; organism descriptions, experimental methods, results, and discussion passages inspected. Supplements not inspected; PMC browser access intermittently blocked.",
+      "claims": [
+        "Pairs of 4–6 mm carapace-width crabs reduced attacks by small predatory snails; medium crabs protected against Culcita sea stars, with species-dependent efficacy; the largest tested species reduced crown-of-thorns attacks.",
+        "Across two weeks, removing the largest guard species increased attacked coral colonies from 18% to 64%, and mean tissue-volume-proxy loss from 2% to 22%.",
+        "Large colonies can contain several crab species simultaneously; small and large individuals use different parts of the branching habitat."
+      ],
+      "limits": [
+        "Crab and coral size covary across experiments; no universal body-size law or biomass density can be fitted directly.",
+        "Largest-crab efficacy against smaller threats and negative interactions among all combinations were not tested. Six species appear in framing, but four were used in the stated defense experiments."
+      ]
+    },
+    {
+      "id": "youngsteadt_2024_ant_response_context",
+      "citation": "Youngsteadt, E., Prado, S. G., Duran Aquino, A. K., Peña Valdeiglesias, J., Gonzales Ojeda, T., and Garate Quispe, J. S. (2024). Urbanization drives partner switching and loss of mutualism in an ant–plant symbiosis. Ecology e4449.",
+      "doi": "10.1002/ecy.4449",
+      "url": "https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecy.4449",
+      "access": "Publisher full-text HTML accessible; defense-assay methods, response and herbivory results, and discussion inspected. Supplementary appendix and raw data not inspected.",
+      "claims": [
+        "Following local domatium flicks on Cordia nodosa, response probability was 0.88 ± 0.09 in forest plants versus 0.07 ± 0.05 in urban plants. Conditional response delays were 7.3 ± 1.6 versus 22.6 ± 5.7 seconds (model means ± SE).",
+        "Resident identity and local patrol activity changed substantially between settings; occupation of nest cavities alone did not establish protective service."
+      ],
+      "limits": [
+        "This is a local emergence-and-patrol assay, with disturbance repeated after 30 seconds if needed, not successful repulsion or travel across meters of reef.",
+        "Observed urban/forest changes do not isolate one environmental cause; do not transfer these seconds to Terluna as fitted biological constants."
+      ]
+    },
+    {
+      "id": "southon_2019_wasp_pest_predation",
+      "citation": "Southon, R. J., Fernandes, O. A., Nascimento, F. S., and Sumner, S. (2019). Social wasps are effective biocontrol agents of key lepidopteran crop pests. Proceedings of the Royal Society B 286:20191676.",
+      "doi": "10.1098/rspb.2019.1676",
+      "url": "https://discovery.ucl.ac.uk/10083029/3/Sumner_Southonetal2019_Maintext_accepted_clean_RPSupload.pdf",
+      "access": "UCL author-accepted manuscript PDF accessible; screenhouse setup, trial methods, successful-predation results and discussion inspected. Supplements not inspected.",
+      "claims": [
+        "Polistes satan captured exposed and concealed crop-pest larvae and reduced maize damage in a controlled screenhouse experiment.",
+        "Mean time to successful predation was 318 ± 56 seconds for fall armyworm and 611 ± 103 seconds for sugarcane borer; the behavioral trials lasted 45 minutes. These estimates condition on successful events."
+      ],
+      "limits": [
+        "Experimental arena was 6.5 × 9.1 m, with ten provisioned colonies; this is not a measured field service radius or kilometer-scale interception response.",
+        "Supports a mobile predator guild against caterpillar-like threats, not evidence that wasps defend plants against giant attackers or recognize host emergency signals."
+      ]
+    },
+    {
+      "id": "kautz_2012_ant_colony_boundaries",
+      "citation": "Kautz, S., Ballhorn, D. J., Kroiss, J., Pauls, S. U., Moreau, C. S., Eilmus, S., Strohm, E., and Heil, M. (2012). Host Plant Use by Competing Acacia-Ants: Mutualists Monopolize While Parasites Share Hosts. PLoS ONE 7:e37691.",
+      "doi": "10.1371/journal.pone.0037691",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0037691",
+      "access": "Publisher open full-text HTML; abstract, genetic/chemical design, worker-transfer methods, behavioral results, and discussion inspected. Supplementary geographic data not inspected.",
+      "claims": [
+        "Integrated worker-transfer, chemical and genetic observations distinguished colony boundaries. Mutualistic Pseudomyrmex ferrugineus monopolized one or more host trees; exploitative P. gracilis could have unrelated workers sharing a host.",
+        "Workers from different host trees were often aggressive, including potentially fatal fights."
+      ],
+      "limits": [
+        "Tolerance within a host does not imply service to that host; aggression between ant colonies can interrupt proposed reef-wide coordination.",
+        "Reported seconds-to-minutes concern encounters with experimentally transferred conspecific ants, not herbivore detection, so they should not parameterize guard response to grazers."
+      ]
+    },
+    {
+      "id": "palmer_2008_mutualism_breakdown",
+      "citation": "Palmer, T. M., Stanton, M. L., Young, T. P., Goheen, J. R., Pringle, R. M., and Karban, R. (2008). Breakdown of an ant-plant mutualism follows the loss of large herbivores from an African savanna. Science 319:192–195.",
+      "doi": "10.1126/science.1151579",
+      "url": "https://tpyoung.ucdavis.edu/sites/g/files/dgvnsk4821/files/inline-files/breakdown%20of%20antplant%20mutualism.pdf",
+      "access": "Author/university-hosted article PDF accessible; main methods, results, and interpretation passages read. Supporting online material not inspected.",
+      "claims": [
+        "Ten years of large-herbivore exclusion reduced plant housing and nectar rewards and changed ant community composition toward a poorer protector.",
+        "Ant partners had distinct conflicting incentives: some pruned growing points or destroyed nectaries; a stem-cavity associate facilitated damaging wood-borers. Longitudinal trees occupied by that associate showed about twice the mortality of trees occupied by other partners."
+      ],
+      "limits": [
+        "Exclusion experimentally changed context; the eight-year mortality association is longitudinal evidence, not randomized assignment of each tree's full partner history.",
+        "Four species competing for host trees are not four species peacefully sharing every tree. Partner turnover or a territorial mosaic must be distinguished from simultaneous symbiosis."
+      ]
+    },
+    {
+      "id": "kayal_2018_guard_overload_observation",
+      "citation": "Kayal, M., Ballard, J., and Adjeroud, M. (2018). Multi-species consumer jams and the fall of guarded corals to crown-of-thorns seastar outbreaks, version 2. F1000Research 6:1991.",
+      "doi": "10.12688/f1000research.13118.2",
+      "url": "https://umr-entropie.ird.nc/application/files/7416/5473/5570/2018_Kayal_etal_Multi-species_consumer_jams_vs_guarded_corals.pdf",
+      "access": "Open author/institution-hosted PDF; full short research note and included reviewer comments read. Supplemental image linked but not opened separately.",
+      "claims": [
+        "During coral decline, investigators observed nine butterflyfish plus one crown-of-thorns simultaneously feeding on an approximately 70 cm guarded coral.",
+        "They proposed that concentration of several predator types could overwhelm guards as alternative food disappeared."
+      ],
+      "limits": [
+        "Observational research note, not an experimental saturation curve; no defensible numerical guard-to-attacker threshold or independent butterflyfish contribution to mortality.",
+        "Supports testing clustered and mixed attacks, not claiming a calibrated overload mechanism for sky reefs."
+      ]
+    },
+    {
+      "id": "stanton_palmer_2011_guard_costs",
+      "citation": "Stanton, M. L., and Palmer, T. M. (2011). The high cost of mutualism: effects of four species of East African ant symbionts on their myrmecophyte host tree. Ecology 92:1073–1082.",
+      "doi": "10.1890/10-1239.1",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/21661568/",
+      "access": "PubMed abstract and indexed first-page abstract read; attempted publisher full text and university PDF were inaccessible (publisher error/PDF 403). Not a full-paper reading.",
+      "claims": [
+        "The abstract reports 4.5-year exclusion of four ant partners. Removing three Crematogaster species improved cumulative host growth and/or reproduction despite protective effects of two species.",
+        "The authors suggest rare severe elephant damage can make expensive protection valuable even when chronic-herbivory savings alone do not pay its cost."
+      ],
+      "limits": [
+        "Use as an explicitly abstract-level warning about cost and time horizon; detailed methods and effect estimates need full-text access.",
+        "Reduced damage is not itself a measured positive net lifetime benefit. No quantitative maintenance cost should be transferred from this abstract."
+      ]
+    },
+    {
+      "id": "treseder_1995",
+      "citation": "Treseder, K. K., Davidson, D. W. and Ehleringer, J. R. (1995). Absorption of ant-provided carbon dioxide and nitrogen by a tropical epiphyte. Nature 375, 137–139.",
+      "doi": "10.1038/375137a0",
+      "url": "https://doi.org/10.1038/375137a0",
+      "access": "Publisher abstract and indexed excerpts of primary-paper text inspected; author repository https://escholarship.org/uc/item/2rp5h54x located. Complete scholarly reading not performed.",
+      "claims": [
+        "Stable-isotope estimates attributed 39% of carbon in occupied Dischidia major leaves to ant-associated respiration and 29% of host nitrogen to ant-deposited debris.",
+        "Supports host nutrient absorption adjacent to ant nesting chambers."
+      ],
+      "limits": [
+        "Particular host and isotope estimates are not transferable sky-reef fluxes.",
+        "Refixing respired carbon recycles previously fixed carbon.",
+        "Water savings from sheltered uptake should remain a hypothesis in the reef analysis, not an experimentally established reef benefit."
+      ]
+    },
+    {
+      "id": "romero_2006",
+      "citation": "Romero, G. Q., Mazzafera, P., Vasconcellos-Neto, J. and Trivelin, P. C. O. (2006). Bromeliad-living spiders improve host plant nutrition and growth. Ecology 87, 803–808.",
+      "doi": "10.1890/0012-9658(2006)87[803:BSIHPN]2.0.CO;2",
+      "url": "https://repositorio.unesp.br/server/api/core/bitstreams/83448e68-22ed-417d-82f8-810cbf4864bf/content",
+      "access": "PubMed abstract inspected; six-page primary PDF retrieved through UNESP and relevant text inspected. No independent reanalysis.",
+      "claims": [
+        "Spiders supplied an estimated 18% of host nitrogen in a greenhouse experiment.",
+        "Plants with spiders produced leaves 15% longer in a one-year field exclusion experiment."
+      ],
+      "limits": [
+        "Focal bromeliad was terrestrial; this paper alone does not establish tank-pool food-web function.",
+        "Predator waste imports nutrients only insofar as prey originated outside the host system; eating resident grazers principally recycles existing nutrients.",
+        "Percentages are Earth experimental findings, not reef parameters."
+      ]
+    },
+    {
+      "id": "ngai_srivastava_2006",
+      "citation": "Ngai, J. T. and Srivastava, D. S. (2006). Predators accelerate nutrient cycling in a bromeliad ecosystem. Science 314, 963.",
+      "doi": "10.1126/science.1132598",
+      "url": "https://www.zoology.ubc.ca/~srivast/papers/ngai.srivastava06.pdf",
+      "access": "PubMed abstract and indexed text of primary one-page PDF inspected; direct PDF opening failed. No supplementary-material review.",
+      "claims": [
+        "Detritivores increased plant acquisition of detrital nitrogen when predatory damselfly larvae were present.",
+        "Predators reduced nitrogen export by intercepting detritivores that otherwise emerged as mobile adults."
+      ],
+      "limits": [
+        "Mechanism depends on differing residence and emergence times; more predators are not universally better recyclers.",
+        "This was a nitrogen-limited bromeliad system, not demonstrated sky-reef phosphorus retention."
+      ]
+    },
+    {
+      "id": "johnson_2023",
+      "citation": "Johnson, C., Dubbs, L. L. and Piehler, M. (2023). Reframing the contribution of pelagic Sargassum epiphytic N2 fixation. PLoS ONE 18, e0289485.",
+      "doi": "10.1371/journal.pone.0289485",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0289485",
+      "access": "Open primary full text available; relevant methods, results and discussion inspected. Raw data not reanalysed.",
+      "claims": [
+        "Twenty-four sampling occasions over six years showed strongly variable fixation, including near-zero values on several dates.",
+        "Acetylene-reduction measurements were extrapolated using an assumed mat density.",
+        "Authors observed little or no dark fixation and discuss reduced biofilm microzones protecting oxygen-sensitive nitrogenase."
+      ],
+      "limits": [
+        "Provides an analogue for diazotrophs on a floating host, not an aerial fixation rate.",
+        "Nitrogen fixation supplies reactive nitrogen from N2, not phosphorus.",
+        "Hydration, phosphorus and trace-element supply, shading and day/night physiology require separate reef budgets."
+      ]
+    },
+    {
+      "id": "otero_2018",
+      "citation": "Otero, X. L., De La Peña-Lastra, S., Pérez-Alberti, A., Ferreira, T. O. and Huerta-Diaz, M. A. (2018). Seabird colonies as important global drivers in the nitrogen and phosphorus cycles. Nature Communications 9, 246.",
+      "doi": "10.1038/s41467-017-02446-8",
+      "url": "https://www.nature.com/articles/s41467-017-02446-8",
+      "access": "Open primary full text available; relevant model description and results inspected. Population inventory and calculations not independently reproduced.",
+      "claims": [
+        "Population inventory plus bioenergetics model estimated annual excretion at breeding colonies of 591 Gg N and 99 Gg P.",
+        "Concentrated seabird subsidies alter recipient habitats; trampling, salts and eutrophication also matter."
+      ],
+      "limits": [
+        "The 99 Gg P value is estimated deposition at breeding colonies, not all seabird excretion everywhere.",
+        "Reef roost attendance, diet, excretion location and retention must be distinct coefficients.",
+        "Nutrient import depends on feeding outside the reef; excessive local enrichment can damage habitat."
+      ]
+    },
+    {
+      "id": "heil_2001",
+      "citation": "Heil, M., Hilpert, A., Fiala, B. and Linsenmair, K. E. (2001). Nutrient availability and indirect (biotic) defence in a Malaysian ant-plant. Oecologia 126, 404–408.",
+      "doi": "10.1007/s004420000534",
+      "url": "https://link.springer.com/article/10.1007/s004420000534",
+      "access": "Primary publisher abstract inspected; full text subscription-limited. No claim of complete paper review.",
+      "claims": [
+        "Nutrient supply limited Macaranga triloba food-body production.",
+        "Ant colony size correlated with host food production, and worker numbers negatively correlated with leaf damage."
+      ],
+      "limits": [
+        "Does not establish a universal biomass–protection function.",
+        "Does not establish phosphorus-specific limitation in sky-reef guards.",
+        "Supports linking defender abundance to reward quality and nutrient investment, not lifting capacity alone."
+      ]
+    },
+    {
+      "id": "thornham_2012",
+      "citation": "Thornham, D. G., Smith, J. M., Grafe, T. U. and Federle, W. (2012). Setting the trap: cleaning behaviour of Camponotus schmitzi ants increases long-term capture efficiency of their pitcher plant host, Nepenthes bicalcarata. Functional Ecology 26, 11–19.",
+      "doi": "10.1111/j.1365-2435.2011.01937.x",
+      "url": "https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.1365-2435.2011.01937.x",
+      "access": "Primary publisher full text available; relevant methods, results and discussion inspected. No independent statistical reanalysis.",
+      "claims": [
+        "Ants maintained slippery pitcher rims; capture performance recovered approximately one week after experimental contamination with ants, without equivalent recovery in ant-free pitchers.",
+        "Cleaning concentrated on particular structures and was largely nocturnal.",
+        "Some removed material was deposited outside the pitcher."
+      ],
+      "limits": [
+        "Demonstrates local surface maintenance, not general pathogen immunity or hull repair.",
+        "Cleaning that discards material overboard could increase reef nutrient loss.",
+        "A reef waste-transport route into recycling chambers is a proposed trait, not a result from this experiment."
+      ]
+    },
+    {
+      "id": "villamil_2019",
+      "citation": "Villamil, N., Boege, K. and Stone, G. N. (2019). Testing the Distraction Hypothesis: Do extrafloral nectaries reduce ant-pollinator conflict? Journal of Ecology. DOI 10.1111/1365-2745.13135.",
+      "doi": "10.1111/1365-2745.13135",
+      "url": "https://www.research.ed.ac.uk/en/publications/testing-the-distraction-hypothesis-do-extrafloral-nectaries-reduc/",
+      "access": "Author institutional repository abstract inspected; linked open PDF failed to retrieve and PMC opening encountered a browser challenge. Full-text review not performed.",
+      "claims": [
+        "Blocking extrafloral nectar increased the fraction of flowers occupied by ants and increased fruit-abortion probability.",
+        "No detectable change occurred in numbers of ants or pollinators inside flowers."
+      ],
+      "limits": [
+        "Do not describe the experiment as demonstrating reduced pollinator visitation.",
+        "Reward placement as a means to separate reef defence from reproduction is an analogue-based proposal."
+      ]
+    },
+    {
+      "id": "palmer_2010",
+      "citation": "Palmer, T. M., Doak, D. F., Stanton, M. L., Bronstein, J. L., Kiers, E. T., Young, T. P., Goheen, J. R. and Pringle, R. M. (2010). Synergy of multiple partners, including freeloaders, increases host fitness in a multispecies mutualism. PNAS 107, 17234–17239.",
+      "doi": "10.1073/pnas.1006872107",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2951420/",
+      "access": "Primary abstract and indexed primary full-text passages inspected; direct PMC opening encountered a browser challenge and author PDF link returned 404. Complete text and supplements not reviewed.",
+      "claims": [
+        "Eight-year records of 1,750 acacias informed demographic models in which sequential sets of ant partners produced greater predicted lifetime fitness than single-partner associations.",
+        "Beneficial partner sets could include species imposing harmful short-term effects."
+      ],
+      "limits": [
+        "Not evidence that all ant species coexist peacefully on one host simultaneously.",
+        "Lifetime fitness is a demographic prediction, not an experimental observation of complete century-long tree lifetimes.",
+        "Supports exploring partner succession across reef life stages rather than a universal resident mixture."
+      ]
+    }
+  ]
+}

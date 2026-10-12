@@ -1,0 +1,239 @@
+{
+ "schema": "terluna.biosphere.ecology-first-screen/1",
+ "producer": {
+  "domain": "biosphere",
+  "files": {
+   "biosphere/ecology/screen.py": "4ca788045f524525"
+  },
+  "inputs": {
+   "illumination/surface_light/results/surface_light.json": "e2406dbceb34193e",
+   "geography/results/atlas.json": "78cfbf2f469eb339",
+   "geography/results/drainage.json": "18494e3d3656ead7",
+   "research/baselines/feasibility/reference.json": "5878ad8ff00e42bf"
+  },
+  "constants": {
+   "AVOGADRO": 6.02214076e+23,
+   "GAS_CONSTANT": 8.31446261815324,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "PLANCK": 6.62607015e-34,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "STANDARD_GRAVITY": 9.80665
+  }
+ },
+ "evidence": "A screen on committed products: clear-sky surface spectra, the atlas and drainage areas and the reference air inventory, with Earth rates per area and published action spectra. No ecosystem, soil or chemistry model is run; the trace-gas rates are Earth analogues and the wetland area a scenario.",
+ "reading_rule": "ultraviolet.by_sun[sun_deg] gives Moon/Earth ratios of weighted photon or energy fluxes on a horizontal surface over ground of albedo 0.1; receptor catches use photon flux. settling gives fall speeds in m/s and residence = mixed layer / fall speed in days. trace_gases gives Tg a year, ppm (or ppb) by mole of the whole air, and years.",
+ "ultraviolet": {
+  "albedo": 0.1,
+  "receptors_nm": {
+   "bee_uv": 344.0,
+   "bee_blue": 436.0,
+   "bee_green": 544.0,
+   "bird_uvs": 370.0,
+   "bird_vs": 410.0
+  },
+  "by_sun": {
+   "90.0": {
+    "uv_index": {
+     "moon": 0.109,
+     "earth": 14.81
+    },
+    "uv_b_photons_umol_m2_s": {
+     "moon": 0.0,
+     "earth": 6.787
+    },
+    "previtamin_d_band_photons_ratio": 2.5e-07,
+    "uv_a_photons_ratio": 0.176,
+    "uv_a_to_par_photons": {
+     "moon": 0.0227,
+     "earth": 0.0889
+    },
+    "disinfection_ratio": {
+     "decade_per_30_nm": 0.0112,
+     "decade_per_50_nm": 0.0576
+    },
+    "receptor_catch_ratio": {
+     "bee_uv": 0.069,
+     "bee_blue": 0.494,
+     "bee_green": 0.664,
+     "bird_uvs": 0.218,
+     "bird_vs": 0.418
+    },
+    "bee_uv_to_green_ratio": 0.104
+   },
+   "30.0": {
+    "uv_index": {
+     "moon": 0.039,
+     "earth": 2.67
+    },
+    "uv_b_photons_umol_m2_s": {
+     "moon": 0.0,
+     "earth": 1.397
+    },
+    "previtamin_d_band_photons_ratio": 2.8e-07,
+    "uv_a_photons_ratio": 0.156,
+    "uv_a_to_par_photons": {
+     "moon": 0.0204,
+     "earth": 0.0783
+    },
+    "disinfection_ratio": {
+     "decade_per_30_nm": 0.0132,
+     "decade_per_50_nm": 0.0595
+    },
+    "receptor_catch_ratio": {
+     "bee_uv": 0.064,
+     "bee_blue": 0.416,
+     "bee_green": 0.572,
+     "bird_uvs": 0.192,
+     "bird_vs": 0.355
+    },
+    "bee_uv_to_green_ratio": 0.112
+   }
+  }
+ },
+ "settling": {
+  "air": {
+   "pressure_pa": 123596.0,
+   "temperature_k": 294.9,
+   "density_kg_m3": 1.447,
+   "viscosity_pa_s": 1.822e-05
+  },
+  "mixed_layer_m": {
+   "moon_wet_land_day": 5000.0,
+   "moon_cm1_noon": 12000.0,
+   "earth_day": 1500.0
+  },
+  "wind_m_s": 3.0,
+  "particles": {
+   "pollen_25um": {
+    "fall_m_s": {
+     "moon": 0.00311,
+     "earth": 0.0191
+    },
+    "residence_days": {
+     "moon_wet_land_day": 18.6,
+     "moon_cm1_noon": 44.7,
+     "earth_day": 0.9
+    },
+    "carried_km_in_moon_wet_land_day": 4821.0
+   },
+   "spore_10um": {
+    "fall_m_s": {
+     "moon": 0.000552,
+     "earth": 0.0034
+    },
+    "residence_days": {
+     "moon_wet_land_day": 104.9,
+     "moon_cm1_noon": 251.8,
+     "earth_day": 5.1
+    },
+    "carried_km_in_moon_wet_land_day": 27190.0
+   },
+   "spore_5um": {
+    "fall_m_s": {
+     "moon": 0.00014,
+     "earth": 0.000863
+    },
+    "residence_days": {
+     "moon_wet_land_day": 414.2,
+     "moon_cm1_noon": 994.0,
+     "earth_day": 20.1
+    },
+    "carried_km_in_moon_wet_land_day": 107361.0
+   },
+   "bacterium_1um": {
+    "fall_m_s": {
+     "moon": 6.18e-06,
+     "earth": 3.88e-05
+    },
+    "residence_days": {
+     "moon_wet_land_day": 9364.1,
+     "moon_cm1_noon": 22473.9,
+     "earth_day": 447.3
+    },
+    "carried_km_in_moon_wet_land_day": 2427175.0
+   }
+  },
+  "plumed_seed_fall_ratio": 0.374,
+  "plumed_seed_reach_ratio": 2.67
+ },
+ "trace_gases": {
+  "air_mol": 1.094e+20,
+  "methane": {
+   "lake_share": 0.1034,
+   "dry_land_share": 0.6166,
+   "wetland_share_scenario": [
+    0.013,
+    0.053
+   ],
+   "sources_tg_yr": {
+    "lakes": [
+     7.8,
+     117.7
+    ],
+    "wetlands": [
+     4.9,
+     100.5
+    ],
+    "total": [
+     12.8,
+     218.2
+    ]
+   },
+   "tg_per_ppm": 1755.0,
+   "soil_sink_tg_yr_per_ppm": [
+    1.07,
+    2.92,
+    4.77
+   ],
+   "lifetime_years": [
+    370.0,
+    600.0,
+    1640.0
+   ],
+   "steady_ppm": [
+    2.7,
+    204.0
+   ],
+   "rise_ppm_per_year_without_methanotrophs": [
+    0.0073,
+    0.1243
+   ],
+   "central": {
+    "inputs": {
+     "lake_g_m2_yr": 10.0,
+     "wetland_g_m2_yr": 20.0,
+     "wetland_share": 0.026
+    },
+    "sources_tg_yr": 58.9,
+    "steady_ppm": 20.2,
+    "lifetime_years": 600.0
+   },
+   "earth_ppm": 1.85
+  },
+  "nitrous_oxide": {
+   "sources_tg_n_yr": [
+    0.96,
+    1.3
+   ],
+   "tg_n_per_ppb": 3.07,
+   "rise_ppb_per_year": [
+    0.31,
+    0.42
+   ],
+   "ppm_after_500_years": [
+    0.16,
+    0.21
+   ],
+   "ppm_after_10000_years": [
+    3.1,
+    4.2
+   ],
+   "lifetime_years_from_gap_light": [
+    45000.0,
+    3900000.0
+   ],
+   "note": "No light below 320 nm reaches the air, so N2O is neither photolysed nor attacked by O(1D); the swarm's gaps pass 3e-5 to 2.6e-3 of sunlight, which scales Earth's 116-year lifetime."
+  }
+ }
+}

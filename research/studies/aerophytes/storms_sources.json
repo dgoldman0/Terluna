@@ -1,0 +1,81 @@
+{
+  "schema": "terluna.research.sources/1",
+  "checked": "2026-10-09",
+  "scope": "Primary sources for hydrogen flammability, ignition, jet dilution and flame radiation; storms, updrafts and lightning are committed project products (CM1 ring; atmospheric electricity via the joint synthesis).",
+  "sources": [
+    {
+      "id": "coward_jones1952",
+      "citation": "Coward, H. F. and Jones, G. W. (1952). Limits of flammability of gases and vapors. US Bureau of Mines Bulletin 503.",
+      "url": "https://digital.library.unt.edu/ark:/67531/metadc12662/",
+      "access": "Full text (OCR of the UNT scan) read by a verification agent.",
+      "use": "Dry gases, upward propagation in a 4-inch tube: hydrogen in air 4.0-75.0% (p. 16); upper-limit mixtures hold 5.2-5.3% O2; no H2-N2-air mixture propagates flame below 4.9% O2 (p. 20). Saturated gas: 4.1/74 upward, 9.0/74 downward.",
+      "limit": "Laboratory tubes and vessels at room conditions."
+    },
+    {
+      "id": "zabetakis1965",
+      "citation": "Zabetakis, M. G. (1965). Flammability characteristics of combustible gases and vapors. US Bureau of Mines Bulletin 627.",
+      "url": "https://digital.library.unt.edu/ark:/67531/metadc12779/",
+      "access": "Full text read by a verification agent (UNT catalogue lists wrong authors; the title page says Zabetakis).",
+      "use": "Table 21: hydrogen in air 4.0-75% at 25 C, 1 atm; Fig. 111: minimum O2 5.0% with N2 as the added inert.",
+      "limit": "Earth air composition."
+    },
+    {
+      "id": "ono_oda2008",
+      "citation": "Ono, R. and Oda, T. (2008). Spark ignition of hydrogen-air mixture. Journal of Physics: Conference Series 142, 012003.",
+      "doi": "10.1088/1742-6596/142/1/012003",
+      "access": "Full text read by a verification agent.",
+      "use": "Minimum ignition energy 0.017 mJ at 22-26% hydrogen in dry air; roughly constant from 10% to 50% at a 2 mm gap; humidity raises it by several tens of percent.",
+      "limit": "1 L chamber, 1 atm, room temperature, capacitive sparks."
+    },
+    {
+      "id": "soleimaninia2020",
+      "citation": "Soleimani nia, M., Maxwell, B., Oshkai, P. and Djilali, N. (2020). Measurements of flow velocity and scalar concentration in turbulent multi-component jets: asymmetry and buoyancy effects. Experiments in Fluids (arXiv:1811.05580).",
+      "doi": "10.1007/s00348-020-2902-3",
+      "url": "https://arxiv.org/abs/1811.05580",
+      "access": "arXiv full text read on 2026-10-09 (Table 2, Eqs. 4.2-4.4).",
+      "use": "Centreline mass-fraction decay Y_j/Y_c = C_Y (X - X0)/D_ef with D_ef = D (rho_j/rho_inf)^0.5; C_Y = 0.208 for an H2 pipe jet (Schefer et al. 2008b), 0.21-0.27 for helium round jets, 0.31-0.33 for jets from an orifice in the side of a tube.",
+      "limit": "Momentum-dominated jets; low-pressure releases become buoyant plumes. The arXiv version was read; volume and article number not recorded."
+    },
+    {
+      "id": "schefer2008",
+      "citation": "Schefer, R. W., Houf, W. G. and Williams, T. C. (2008). International Journal of Hydrogen Energy 33(21), 6373-6384 (title not recorded here).",
+      "doi": "10.1016/j.ijhydene.2008.05.041",
+      "access": "Abstract read by a verification agent; its decay constant used as tabulated by Soleimani nia et al. (2020).",
+      "use": "Hydrogen centreline decay follows the scaling of other variable-density jets.",
+      "limit": "Constant read from the tabulation, not from the paper."
+    },
+    {
+      "id": "bernardy2025",
+      "citation": "Bernardy et al. (2025). Journal of Loss Prevention in the Process Industries 94, 105491.",
+      "access": "Full text read by a verification agent.",
+      "use": "Summarises the literature range of hydrogen flame radiant fractions as 0.03-0.16.",
+      "limit": "Review; author list beyond the first author and the title not recorded here. Molina, Schefer and Houf (2007, Proc. Combust. Inst. 31, 2565-2572) was not read."
+    }
+  ],
+  "design_guesses": {
+    "striking_distance_m": [
+      50,
+      200
+    ],
+    "radiant_fraction": [
+      0.03,
+      0.16
+    ],
+    "burn_seconds": [
+      30,
+      120
+    ],
+    "oxygen_to_hydrogen_permeability": [
+      0.1,
+      0.5
+    ],
+    "skin_water_kg_m2": [
+      0.1,
+      2
+    ],
+    "ballonet_margin": [
+      0.05,
+      0.2
+    ]
+  }
+}

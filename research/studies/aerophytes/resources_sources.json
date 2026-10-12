@@ -1,0 +1,33 @@
+{
+  "schema": "terluna.research.sources/1",
+  "checked": "2026-10-09",
+  "scope": "Inputs are committed project products (sky-ship hulls and air) and sources already registered elsewhere in the study.",
+  "sources": [
+    {
+      "id": "sky_ships",
+      "path": "research/studies/sky_ships/results/sky_ships.json",
+      "use": "Hull lengths and diameters for gas-cell film areas; air density for falls."
+    },
+    {
+      "id": "chollet1922",
+      "path": "research/studies/aerophytes/envelope_sources.json",
+      "use": "Goldbeater's skin fabric 130-150 g/m2."
+    },
+    {
+      "id": "aerial_ecology",
+      "path": "research/studies/aerial_ecology/README.md",
+      "use": "Food energy 4,000 kcal/kg dry and 2,500 kcal a person a day."
+    }
+  ],
+  "design_guesses": {
+    "harvest_share": [
+      0.05,
+      0.5
+    ],
+    "skin_renewal_years": [
+      10,
+      30
+    ],
+    "fall_drag_coefficient": 1.3
+  }
+}

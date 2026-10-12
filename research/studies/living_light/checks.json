@@ -1,0 +1,42 @@
+{
+  "checked": "2026-10-11",
+  "scope": "Arithmetic, photometry, skyglow, costs and bindings of the living-light product; the organisms' glow and costs rest on Earth measurements and stated design ranges, and no organism or lighting scheme is validated",
+  "focused": {
+    "command": "OPENBLAS_NUM_THREADS=1 nice -n 10 python3 -m pytest -q research/studies/living_light",
+    "passed": 34,
+    "failed": 0,
+    "skipped": 0,
+    "note": "exact regeneration of the product included"
+  },
+  "product_sha256": "5c0e0ae098f13fea85915af834c42edb1dd3709b87cd23d68d9d868ff2442c3e",
+  "producer_sha256": {
+    "run.py": "48066baeba74ac3a7647d0935d5090a5a09bd9ea60e4e731db910db52334d864"
+  },
+  "independent_reviews": {
+    "round_1": {
+      "reviewer": "read-only agent aa47fdb781e443bf0, recomputing without importing run.py; report at /media/projectspace/terluna-research/ecology-runs/living_light/review/review_report.txt",
+      "findings": 25,
+      "headline_changes": "never-below shares tabulated at the need levels; melatonin radii and the night's hours in both airs and both calibrations; a delivered share of 0.1-0.9 for the photons reaching the path; the dark belt on five slices per band (13.3%, 3.1 million km2); the author's direction read from the register; six literature readings corrected"
+    },
+    "round_2": {
+      "reviewer": "a fresh read-only agent on the snapshot run.py 48066baeba74ac3a, README 819013a048ab1d59, product 5c0e0ae098f13fea; scripts at review/confirm/ on the drive",
+      "verdicts": "19 of 25 fixed, 5 partly fixed (4, 17, 23, 24, 25), 1 not fixed (16, this file); four rounding slips found; every changed headline recomputed and matched",
+      "resolution": [
+        "this checks.json written (finding 16)",
+        "roundings corrected: 84-104 and 16 hours, and the table's 92, 84 and 16",
+        "the grid's assumptions stated: latitude bands and the Earth's classes independent within a home, and the high class read at the Earth's highest elevation poleward of 60 degrees",
+        "the cosine-of-elevation weighting of the Earth's classes is kept and its effect stated: weighted by each class's share of its latitude row, the walking share rises from 48% to 49-51% and faces at 4 m from 40% to 42-44%",
+        "the population range's source named (the provisioning register at b82e0dc); Earth practice's ground-reflected pattern named; the enzyme figure given at the 0.1-0.9 delivered share; finding 9's lead narrowed to a town's night; spelling disc and towards",
+        "left as they are: the unused uniform emission branch in run.py and the two identity tests (finding 24), which change no number"
+      ]
+    }
+  },
+  "not_run": [
+    "make check (run by the coordinator before committing)"
+  ],
+  "unperformed": [
+    "a test tying the README's numbers to the product",
+    "a plant glowing with a beetle-class luciferin cycle, which no study has built",
+    "skyglow in the lunar air's own haze, beyond the clear and hazy brackets"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "checked": "2026-10-10",
+  "evidence": "Biological ideation, primary-source analogues and conditional requirements arithmetic; not aerodynamic or biological validation.",
+  "baseline_commit": "5f648e7",
+  "focused": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python -m pytest -q -p no:cacheprovider research/studies/aerophytes/test_sail_biology.py",
+    "passed": 24,
+    "failed": 0,
+    "seconds": 0.05
+  },
+  "repository": {
+    "status": "PASS",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS='-p no:cacheprovider' nice -n 10 make check",
+    "exit_code": 0,
+    "python": {
+      "passed": 1696,
+      "failed": 0,
+      "skipped": 14,
+      "seconds": 88.7
+    },
+    "javascript": {
+      "passed": 191,
+      "failed": 0,
+      "immersion": 129,
+      "column_light_transport_and_viewer": 48,
+      "calendar": 14
+    },
+    "layers": {
+      "files_checked": 912,
+      "violations": 0
+    },
+    "historical_provenance": "PASS",
+    "ensemble_workspace_integrity": "PASS",
+    "local_log": "/tmp/terluna-sail-biology-final-check.log",
+    "scope": "Numerical consistency, reproducibility, dependency boundaries and workspace integrity; not aerodynamic, biological or manuscript validation."
+  },
+  "review": [
+    "Control review distinguished plant calcium/electrical signaling from proposed neurons and local animal motor organization; clarified continuous hydrated service strands between spaced nodes and the gas-exchange/water-retention requirement.",
+    "Lifecycle review checked protected growth sites, renewal under load, regeneration limits, pressure breaks, nutrient resorption and distinct furling, retrieval and release operations; clarified externally sourced nutrient imports.",
+    "Mechanics review checked variable-gravity head and retrieval lower bounds, constant-torque requirements and the parent hash boundary; added rejection of negative and nonfinite retained water.",
+    "Root integration reconciled the prose with the actual scalar tissue-renewal calculation: tissue-specific composition and emergency-loss rates are requirements for a later model, not implemented outputs.",
+    "Shared constants are recorded by used name and value, with no whole-file hash that would invalidate the product when unrelated constants are added.",
+    "Final independent source/control audit found no material error in the signal arithmetic or interpretation of Mimosa, Nanomia, Hydra, flytrap and clonal-plant evidence."
+  ],
+  "products": {
+    "results/sail_biology.json": {
+      "sha256": "eec865fba8f4bb5682bb9e2f9b89b218b21e7cff39648fa5e0d79d74093f4abc",
+      "exact_regeneration_test": "PASS"
+    }
+  },
+  "remaining": [
+    "No dynamic airfoil, membrane, cable or local-controller simulation; the old prescribed lift sign and coefficients remain conditional.",
+    "No calibrated neural, hydraulic, contractile or structural tissue; no empirically demonstrated kilometre service pathway.",
+    "No complete development, component metabolism, night reserves, nutrient recovery, ecological benefit or population budget.",
+    "Source access varies; no claim of complete scholarly reading, empirical validation, manuscript review or exact-build PDF review."
+  ],
+  "integration_regression": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python -m pytest -q -p no:cacheprovider research/studies/aerophytes/test_run.py::test_schema_binds_every_component_and_its_inputs research/studies/aerophytes/test_sail_biology.py",
+    "passed": 25,
+    "failed": 0,
+    "seconds": 0.18
+  },
+  "initial_repository_run": {
+    "exit_code": 2,
+    "python_passed": 1695,
+    "python_failed": 1,
+    "python_skipped": 14,
+    "seconds": 92.6,
+    "failure": "Original schema test assumed every source register in the directory belonged to the original integrated producer.",
+    "correction": "Scope source coverage to the original product producer components; the independent sail-biology product has its own hash and exact-regeneration check.",
+    "local_log": "/tmp/terluna-sail-biology-check.log"
+  }
+}

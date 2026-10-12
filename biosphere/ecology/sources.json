@@ -1,0 +1,413 @@
+{
+ "source_admission": "Published values used as constants or quoted ranges; no external dataset files are admitted. 'access' records how far each source was checked. 'reported' means taken from the literature search of 2026-10-09 (its register is kept with the domain's run records on the research drive) and not re-read here; 'formula checked' means the equation was verified by this work's tests. Bibliographic details are as reported.",
+ "sources": [
+  {
+   "citation": "MacLaughlin, Anderson & Holick 1982, Science 216, 1001",
+   "doi_or_url": "10.1126/science.6281884",
+   "use": "Previtamin D3 forms only under UV-B (action spectrum below 315 nm)",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "CIE 174:2006, Action spectrum for the production of previtamin D3 in human skin",
+   "doi_or_url": "standard (no stable URL recorded)",
+   "use": "The action spectrum ends at 330 nm; the screen counts photons below it",
+   "access": "standard; band edge used only"
+  },
+  {
+   "citation": "Young et al. 2021, PNAS 118, e2015867118",
+   "doi_or_url": "10.1073/pnas.2015867118",
+   "use": "The in-vivo vitamin D action spectrum lies about 5 nm shorter than CIE 174",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Jäpelt & Jakobsen 2013, Frontiers in Plant Science 4, 136",
+   "doi_or_url": "10.3389/fpls.2013.00136",
+   "use": "Vitamin D in plants and algae",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "CIE S 007/E:1998 (ISO 17166:1999), Erythema reference action spectrum and standard erythema dose",
+   "doi_or_url": "standard (no stable URL recorded)",
+   "use": "The erythema weighting behind the UV index; the screen reproduces the surface-light product's index",
+   "access": "formula checked: the screen's UV index matches surface_light.json to under 1% (test)"
+  },
+  {
+   "citation": "Govardovskii, Fyhrquist, Reuter, Kuzmin & Donner 2000, Visual Neuroscience 17, 509",
+   "doi_or_url": "10.1017/S0952523800174036",
+   "use": "A1 visual pigment template for the bee and bird receptor catches",
+   "access": "formula as published; the test checks that each template peaks at its maximum"
+  },
+  {
+   "citation": "Peitsch et al. 1992, J. Comp. Physiol. A 170, 23",
+   "doi_or_url": "10.1007/BF00190398",
+   "use": "Honeybee receptor peaks near 344, 436 and 544 nm",
+   "access": "reported by the literature search of 2026-10-09 (landing page and abstract)"
+  },
+  {
+   "citation": "Koski & Ashman 2015, Nature Plants 1, 14007",
+   "doi_or_url": "10.1038/nplants.2014.7",
+   "use": "Floral UV patterning follows the UV a habitat receives",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Dacke, Nilsson, Scholtz, Byrne & Warrant 2003, Nature 424, 33",
+   "doi_or_url": "10.1038/424033a",
+   "use": "Insects orient to polarized moonlight",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Ubomba-Jaswa et al. 2009, Photochem. Photobiol. Sci. 8, 587",
+   "doi_or_url": "10.1039/b816593a",
+   "use": "Solar disinfection of water needs over 108 kJ/m2 at 295-385 nm",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Rai et al. 2020, Plant, Cell & Environment 43, 1513",
+   "doi_or_url": "10.1111/pce.13752",
+   "use": "UVR8 responds to UV-B and UV-A up to 350 nm",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Katsoulas, Bari & Papaioannou 2020, Agronomy 10, 1021",
+   "doi_or_url": "10.3390/agronomy10071021",
+   "use": "Crops under UV-blocking films: growth, flavonoids and pests",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Kyba, Mohar & Posch 2017, Astronomy & Geophysics 58, 1.31",
+   "doi_or_url": "10.1093/astrogeo/atx025",
+   "use": "Full moonlight on Earth is 0.05-0.3 lux",
+   "access": "reported by the literature search of 2026-10-09 (full-text quotes)"
+  },
+  {
+   "citation": "Grubisic et al. 2019, Sustainability 11, 6400",
+   "doi_or_url": "10.3390/su11226400",
+   "use": "Melatonin suppression thresholds of 0.01-0.03 lux in fishes and rodents",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Sanders, Frago, Kehoe, Patterson & Gaston 2021, Nature Ecology & Evolution 5, 74",
+   "doi_or_url": "10.1038/s41559-020-01322-x",
+   "use": "Biological effects of light at night",
+   "access": "reported by the literature search of 2026-10-09 (abstract and full-text search)"
+  },
+  {
+   "citation": "Lin, Takahashi, Mulla & Nozawa 2021, PNAS 118, e2101985118",
+   "doi_or_url": "10.1073/pnas.2101985118",
+   "use": "Coral spawning keyed to the dark interval between sunset and moonrise",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Saunois et al. 2020, Earth System Science Data 12, 1561",
+   "doi_or_url": "10.5194/essd-12-1561-2020",
+   "use": "Soil uptake of methane, 30 (11-49) Tg a year; chemical loss 553 Tg a year",
+   "access": "reported by the literature search of 2026-10-09 (full text, sections 3.2-3.3)"
+  },
+  {
+   "citation": "Bastviken, Tranvik, Downing, Crill & Enrich-Prast 2011, Science 331, 50",
+   "doi_or_url": "10.1126/science.1196808",
+   "use": "Freshwater methane emissions; lake emission rates per area",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Tian et al. 2020, Nature 586, 248",
+   "doi_or_url": "10.1038/s41586-020-2780-0",
+   "use": "Natural soil and ocean N2O sources",
+   "access": "reported by the literature search of 2026-10-09 (abstract and passages)"
+  },
+  {
+   "citation": "Prather et al. 2015, JGR Atmospheres 120, 5693",
+   "doi_or_url": "10.1002/2015JD023267",
+   "use": "N2O lifetime of 116 years on Earth",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Schlesinger 2013, Global Change Biology 19, 2929",
+   "doi_or_url": "10.1111/gcb.12239",
+   "use": "Soils take up at most 0.3 Tg N a year of N2O",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Ehhalt & Rohrer 2009, Tellus B 61, 500",
+   "doi_or_url": "10.1111/j.1600-0889.2009.00416.x",
+   "use": "Soils remove about three-quarters of atmospheric H2",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Wheeler, Peterson, Sager & Knott 1996, Advances in Space Research 18, 193",
+   "doi_or_url": "10.1016/0273-1177(95)00877-H",
+   "use": "Crop stands in closed chambers reach 40-120 ppb ethylene",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Klassen & Bugbee 2002, Crop Science 42, 746",
+   "doi_or_url": "10.2135/cropsci2002.7460",
+   "use": "50 ppb ethylene costs wheat 36% and rice 63% of yield",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Watrud et al. 2004, PNAS 101, 14533",
+   "doi_or_url": "10.1073/pnas.0405154101",
+   "use": "Transgenic pollen-mediated gene flow to 21 km",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Nathan et al. 2002, Nature 418, 409",
+   "doi_or_url": "10.1038/nature00844",
+   "use": "Uplift above the canopy drives long-distance seed dispersal",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Mandell et al. 2015, Nature 518, 55",
+   "doi_or_url": "10.1038/nature14121",
+   "use": "Biocontainment by synthetic auxotrophy",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Rovner et al. 2015, Nature 518, 89",
+   "doi_or_url": "10.1038/nature14095",
+   "use": "Recoded organisms dependent on synthetic amino acids",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Schumann & Huntrieser 2007, Atmos. Chem. Phys. 7, 3823",
+   "doi_or_url": "10.5194/acp-7-3823-2007",
+   "use": "Lightning fixes 5 +/- 3 Tg N a year on Earth",
+   "access": "reported by the literature search of 2026-10-09 (landing page and abstract)"
+  },
+  {
+   "citation": "Barron et al. 2009, Nature Geoscience 2, 42",
+   "doi_or_url": "10.1038/ngeo366",
+   "use": "Molybdenum limits free-living nitrogen fixation in tropical soils",
+   "access": "reported by the literature search of 2026-10-09 (abstract and key findings)"
+  },
+  {
+   "citation": "Sossi, Nakajima & Khan 2024, Treatise on Geochemistry vol. 3 (arXiv:2408.16840)",
+   "doi_or_url": "https://arxiv.org/abs/2408.16840",
+   "use": "Bulk silicate Moon molybdenum, about 0.019 ppm",
+   "access": "reported by the literature search of 2026-10-09 (full text, molybdenum section and table 2)"
+  },
+  {
+   "citation": "Montgomery 2007, PNAS 104, 13268",
+   "doi_or_url": "10.1073/pnas.0611508104",
+   "use": "Natural soil production 0.017-0.036 mm a year",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Schlesinger 1990, Nature 348, 232",
+   "doi_or_url": "10.1038/348232a0",
+   "use": "Lasting soil carbon builds at about 0.7% of plant production",
+   "access": "reported by the literature search of 2026-10-09 (landing page and first paragraph)"
+  },
+  {
+   "citation": "Chadwick, Derry, Vitousek, Huebert & Hedin 1999, Nature 397, 491",
+   "doi_or_url": "10.1038/17276",
+   "use": "Nutrient sources over four million years on Hawaiian basalt",
+   "access": "reported by the literature search of 2026-10-09 (landing page and abstract)"
+  },
+  {
+   "citation": "Kelly, Cockell, Thorsteinsson, Marteinsson & Stevenson 2014, Microbial Ecology 68, 504",
+   "doi_or_url": "10.1007/s00248-014-0432-3",
+   "use": "Pioneer microbes on fresh Icelandic basalt",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Elbert et al. 2012, Nature Geoscience 5, 459",
+   "doi_or_url": "10.1038/ngeo1486",
+   "use": "Biological crusts fix about 49 Tg N a year",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Vilmundardóttir et al. 2018, Progress in Physical Geography 42, 765",
+   "doi_or_url": "10.1177/0309133318798754",
+   "use": "A moss mat arrested Hekla's succession for 170-700 years",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Olsson-Francis, Simpson, Wolff-Boenisch & Cockell 2012, Geobiology 10, 434",
+   "doi_or_url": "10.1111/j.1472-4669.2012.00333.x",
+   "use": "Cyanobacteria weather basalt strongly",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Cockell et al. 2020, Nature Communications 11, 5523",
+   "doi_or_url": "10.1038/s41467-020-19276-w",
+   "use": "Microbial leaching of basalt unchanged by gravity on the ISS",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Austin & Vivanco 2006, Nature 442, 555",
+   "doi_or_url": "10.1038/nature05038",
+   "use": "Photodegradation controls litter decomposition in dry land",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Austin & Ballaré 2010, PNAS 107, 4618",
+   "doi_or_url": "10.1073/pnas.0909396107",
+   "use": "Photodegradation acts through lignin in the UV and visible",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Belcher, Yearsley, Hadden, McElwain & Rein 2010, PNAS 107, 22448",
+   "doi_or_url": "10.1073/pnas.1011974107",
+   "use": "Fire suppressed below 18.5% O2 and off below 16% at Earth gravity",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Ferkul & Olson 2011, as tabled in research/studies/port_fire",
+   "doi_or_url": "research/studies/port_fire/README.md",
+   "use": "Lunar gravity lowers materials' oxygen limit by 2-6 points",
+   "access": "reported in the port fire study"
+  },
+  {
+   "citation": "Bond & Zaloumis 2016, Phil. Trans. R. Soc. B 371, 20150170",
+   "doi_or_url": "10.1098/rstb.2015.0170",
+   "use": "Fire-kept grassy biomes and their share of burnt area",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Paterson et al. 2019, Can. J. Fish. Aquat. Sci. 76, 1459",
+   "doi_or_url": "10.1139/cjfas-2018-0197",
+   "use": "A new reservoir ran eutrophic for 6-14 years",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Kiss 2014, Plant Biology 16 (Suppl. 1), 12",
+   "doi_or_url": "10.1111/plb.12031",
+   "use": "Plant gravity-sensing threshold of 0.1-0.3 g",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Manzano et al. 2018, npj Microgravity 4, 9",
+   "doi_or_url": "10.1038/s41526-018-0041-4",
+   "use": "Simulated Moon gravity disturbs root meristems more than microgravity",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Hayashi et al. 2023, Communications Biology 6, 424",
+   "doi_or_url": "10.1038/s42003-023-04769-3",
+   "use": "Lunar gravity prevents muscle atrophy in mice but not fibre-type shift",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Velez-Ramirez et al. 2014, Nature Communications 5, 4549",
+   "doi_or_url": "10.1038/ncomms5549",
+   "use": "One locus gives tomato continuous-light tolerance and up to 20% more yield",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Velez-Ramirez, Dünner-Planella, Vreugdenhil, Millenaar & van Ieperen 2017, Functional Plant Biology 44, 597",
+   "doi_or_url": "10.1071/FP16285",
+   "use": "Continuous-light injury comes from circadian asynchrony",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Graf, Schlereth, Stitt & Smith 2010, PNAS 107, 9458",
+   "doi_or_url": "10.1073/pnas.0914299107",
+   "use": "Starch runs out about 24 hours after the last dawn",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Paul, Elardo & Ferl 2022, Communications Biology 5, 382",
+   "doi_or_url": "10.1038/s42003-022-03334-8",
+   "use": "Plants in Apollo soils show salt, metal and oxidative stress, worst in mature soil",
+   "access": "reported by the literature search of 2026-10-09 (full text)"
+  },
+  {
+   "citation": "Bellenger, Darnajoux, Zhang & Kraepiel 2020, Biogeochemistry 149, 53",
+   "doi_or_url": "10.1007/s10533-020-00666-7",
+   "use": "Alternative nitrogenases in terrestrial fixation; molybdenum limitation widespread",
+   "access": "reported by the literature search of 2026-10-09 (landing page and abstract)"
+  },
+  {
+   "citation": "Klingler, Mancinelli & White 1989, Advances in Space Research 9(6), 173",
+   "doi_or_url": "10.1016/0273-1177(89)90225-1",
+   "use": "Nitrogen fixation down to 5 mbar of N2",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Greening et al. 2016, ISME Journal 10, 761",
+   "doi_or_url": "10.1038/ismej.2015.153",
+   "use": "Hydrogenases across 51 phyla",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Grinter et al. 2023, Nature 615, 541",
+   "doi_or_url": "10.1038/s41586-023-05781-7",
+   "use": "High-affinity bacterial uptake of atmospheric hydrogen",
+   "access": "reported by the literature search of 2026-10-09 (abstract and passages)"
+  },
+  {
+   "citation": "King 1999, Applied and Environmental Microbiology 65, 5257",
+   "doi_or_url": "10.1128/AEM.65.12.5257-5264.1999",
+   "use": "Soil CO uptake and its reversal in warm soils",
+   "access": "reported by the literature search of 2026-10-09 (abstract and kinetics)"
+  },
+  {
+   "citation": "Hendrickx et al. 2006, Research in Microbiology 157, 77",
+   "doi_or_url": "10.1016/j.resmic.2005.06.014",
+   "use": "MELiSSA's microbial loop, with methanogenesis suppressed",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Last, Hobbs, Berge, Brierley & Cottier 2016, Current Biology 26, 244",
+   "doi_or_url": "10.1016/j.cub.2015.11.038",
+   "use": "Monthly mass sinking of Arctic zooplankton under moonlight",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Royer, Osborne & Beerling 2003, Nature 424, 60",
+   "doi_or_url": "10.1038/nature01737",
+   "use": "Evergreen beats deciduous through long polar winters",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Berge et al. 2015, Current Biology 25, 2555",
+   "doi_or_url": "10.1016/j.cub.2015.08.024",
+   "use": "Most trophic levels stay active through the polar night",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "McMinn & Martin 2013, Proc. R. Soc. B 280, 20122909",
+   "doi_or_url": "10.1098/rspb.2012.2909",
+   "use": "Algae survive months to years of darkness",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Koch, Sillett, Jennings & Davis 2004, Nature 428, 851",
+   "doi_or_url": "10.1038/nature02417",
+   "use": "The limits to tree height",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Chai & Dudley 1995, Nature 377, 722",
+   "doi_or_url": "10.1038/377722a0",
+   "use": "Hummingbirds' hovering power reserves in thin gas mixtures",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Harper, Juarez, Perez, Hirsch & Beeson 2016, ASTM STP1596, 413",
+   "doi_or_url": "10.1520/STP159620150081",
+   "use": "Flammability by oxygen fraction against partial pressure is unsettled",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  },
+  {
+   "citation": "Jane et al. 2023, Global Change Biology 29, 1009",
+   "doi_or_url": "10.1111/gcb.16525",
+   "use": "Lake anoxia grows with the duration of stratification",
+   "access": "reported by the literature search of 2026-10-09 (partial abstract)"
+  },
+  {
+   "citation": "Cohen & Tilman 1996, Science 274, 1150",
+   "doi_or_url": "10.1126/science.274.5290.1150",
+   "use": "Biosphere 2's biodiversity lessons",
+   "access": "reported by the literature search of 2026-10-09 (metadata and publisher page only; abstract unverified)"
+  },
+  {
+   "citation": "Bufford et al. 2016, New Phytologist 212, 657",
+   "doi_or_url": "10.1111/nph.14077",
+   "use": "Novel plant-pathogen pairings follow taxonomic similarity",
+   "access": "reported by the literature search of 2026-10-09 (abstract)"
+  }
+ ]
+}

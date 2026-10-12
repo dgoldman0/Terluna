@@ -1,0 +1,61 @@
+{
+  "checked": "2026-10-10",
+  "evidence": "Conditional requirements and literature synthesis, not empirical validation.",
+  "checkpoint_commit": "980d203",
+  "focused": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python3 -m pytest -q -p no:cacheprovider research/studies/sky_ecology",
+    "passed": 93,
+    "failed": 0,
+    "seconds": 2.01
+  },
+  "repository": {
+    "status": "PASS",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS='-p no:cacheprovider' nice -n 10 make -k check",
+    "exit_code": 0,
+    "python": {
+      "passed": 1672,
+      "failed": 0,
+      "skipped": 14,
+      "seconds": 96.52
+    },
+    "javascript": {
+      "passed": 191,
+      "failed": 0,
+      "immersion": 129,
+      "column_light_transport_and_viewer": 48,
+      "calendar": 14
+    },
+    "layers": {
+      "files_checked": 910,
+      "violations": 0
+    },
+    "historical_provenance": "PASS",
+    "ensemble_workspace_integrity": "PASS",
+    "local_log": "/tmp/terluna-symbioses-final-check.log",
+    "scope": "Numerical consistency, reproducibility, dependency boundaries and workspace integrity; not ecological or manuscript validation."
+  },
+  "independent_review": [
+    "Paired dietary C/P after review found that P was credited independently of consumed organic food.",
+    "Removed a fixed external-food share that could report a shortfall despite unused host food; consumed external food precedes host sugar within allocations.",
+    "Made turnover/production-efficiency dependence and uncalibrated maintenance explicit.",
+    "Reject nonpositive reference host-food budgets before forming fractions.",
+    "Reviewed defensive analogues, arithmetic, response geometry, biomass interpretation and claims of ecological adequacy; no remaining material issue identified.",
+    "Reviewed nutrient, water and gas-control mechanisms against source access and limits; distinguished experimental food-body limitation from correlations with colony size and herbivory in Heil et al. (2001)."
+  ],
+  "remaining": [
+    "No calibrated defensive behavior or persistence model.",
+    "Unallocated consumer assimilate has no resolved physiological fate.",
+    "Extra-load damage and landing dynamics remain unsolved.",
+    "Primary source access varies; no claim of complete scholarly reading of every source."
+  ],
+  "products": {
+    "results/sky_ecology.json": {
+      "sha256": "40ce0658e5c05c5e17fb003ce6059611a3482172fbd0bbf4ec147eff1f519aea",
+      "exact_regeneration_test": "PASS"
+    },
+    "results/symbioses.json": {
+      "sha256": "ad65b23f5acdc2037788db4e4259227633ba76a9543845218b9fb12d2380fa2d",
+      "exact_regeneration_test": "PASS"
+    }
+  }
+}
