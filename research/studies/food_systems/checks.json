@@ -327,6 +327,26 @@
    "test_run.py": "8b616d3ebc2f095a649f3490c3c520d825912f16683e74a4ad82d40beafa0ba4",
    "README.md": "ef2228a951e3788c8dfc5eb00e22e87f122421b892470ec9a2e88b8acabf4211",
    "results/food_systems.json": "f0a9e581026522041436146513e40ae4414ef385882d4d323b61971d5d8ca734"
+  },
+  "parks": {
+   "date": "2026-10-11",
+   "asked": "The author's direction for the hybrid land (research/decisions.md, People on the Moon and beyond): heavily manicured megaparks and great gardens, food gardens among them, for leisure and entertainment, with small shops, restrooms and places to rest, used by residents and visitors and kept by heavy automation.",
+   "built": "The hybrid part of each hybrid rule is parkland, closed to fields, glass, towns and grazing; the compromise gives the kept half's results in every case, and the comparison takes the same parks.",
+   "tests": "python -m pytest research/studies/food_systems: passed (63 across both studies, 82 with ways of living)",
+   "review": {
+    "reviewer": "independent read-only reviewer, snapshot 3 (provisioning-runs/land_rules/review/snapshot_3.sha256)",
+    "report": "provisioning-runs/land_rules/review/parks_review_report.md on the research drive",
+    "findings": "no errors; 6 inconsistencies (the middle-wet hold sentence named only C prime, the dark-sky bound left out the parks' light, the comparison also became parkland, the register's earlier description of hybrid land unmarked as replaced, the parks' water placed only in the dry highlands, a product key and comments leaving out grazing), wording points, and four untested claims",
+    "applied": "all on 2026-10-11 by the coordinator, not re-reviewed; the comparison taking the same parks is put to the author; tests added for the dark-sky bound with every park lit, the comparison's grazing against the land outside the closed share and the homesteads' homes on the farm half"
+   },
+   "files_sha256": {
+    "run.py": "7c1914c66654149564152444db9322f09ba53282fd22b7796d83231508ef26fb",
+    "systems.py": "c049b3435c3e2763451ef795b9db88d1db251bc5b36a5178b1140e760fdfb618",
+    "mixes.py": "4aaf17ee09d40296d3227136e46aa0d2414569bfe27476287352a065b3c75c65",
+    "test_run.py": "f341db2975756592d1e76519f894d27e733ce8ffcc14b19b6ba6cb75f4e6529b",
+    "README.md": "59607ab78387e84b197a678029791499f2867a2ec8667fdd96b12aa1ca9ed750",
+    "results/food_systems.json": "5696c5b38290d1935589c9ff52a2be994b484e59ff9dc7175fceb2e346389433"
+   }
   }
  }
 }

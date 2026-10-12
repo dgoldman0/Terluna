@@ -110,13 +110,13 @@ arithmetic on cited values is marked *derived*. The product is `results/food_sys
     fully lamp-lit diet 41.5–425 TW, against 12–36 TW for the residents' other energy.
 
 12. **Under the author's wild share, at least half wild or 30% wild with another 20% hybrid, the power-heavy mix fits
-    at 4–8 billion at both ends** (*screen*). The compromise closes the same half of each zone to fields, glass and
-    towns as a kept half, so its fields, glass, power and water match the half's and the rain alone feeds 6.7–19.6
-    billion; this study opens its hybrid fifth to grazing as well, so the rain-fed-first mix reaches as far as it does
-    outside a kept 30%, 42–84% of the way to its high-cost end. Half wild with another 20% hybrid, run beside them for
-    comparison at the author's request, leaves fields and towns 30% of each zone: the rain alone feeds 4.0–11.8 billion,
-    and at 8 billion the power-heavy mix's high-cost end grows 1.06 million km² of its crops' equivalent on watered
-    fields, with 3,250 km³ a year from the seas and 0.53 TW of lift.
+    at 4–8 billion at both ends** (*screen*). The hybrid fifth is the author's megaparks and great gardens, closed to
+    fields, glass, towns and grazing, so the compromise closes the same half of each zone as a kept half and every mix
+    matches the half's results: the rain alone feeds 6.7–19.6 billion. Half wild with another 20% hybrid, run beside
+    them for comparison at the author's request, leaves fields, glass, towns and grazing 30% of each zone: the rain
+    alone feeds 4.0–11.8 billion, the rain-fed-first mix fits 18–36% of the way to its high-cost end, and at 8 billion
+    the power-heavy mix's high-cost end grows 1.06 million km² of its crops' equivalent on watered fields, with 3,250
+    km³ a year from the seas and 0.53 TW of lift.
 
 ## The systems, per billion residents
 
@@ -429,22 +429,22 @@ plant foods on rain-fed fields.
 On 11 October 2026 the author set the wild share: at least half of the land and of the dark sky wild is preferred, and
 it can come down to 30% wild with another 20% hybrid, a compromise between keeping 30% and keeping half
 ([decisions](../../decisions.md#people-on-the-moon-and-beyond-11-october-2026)); this study applies each rule to every
-zone. Hybrid land is fairly wild, more heavily managed and carries people's daily life at low density. The mixes run
-under four land rules (`basis.land_rules`; *screen*). The kept 30% and kept half close that
-share of each zone to fields, glass and towns and keep it wild. Under the compromise (`wild_30_hybrid_20`) fields,
-glass and towns keep to the same half as under a kept half, and this study reads the hybrid fifth as open to grazing
-as well. At the author's request the earlier reading, half wild with another 20% hybrid (`wild_50_hybrid_20`), runs
-beside them for comparison; it leaves fields, glass and towns 30% of each zone. Under a hybrid rule the wild shares
-count against the land outside the wild share, and the fog desert's grazing, with its fields, against the land open
-to grazing.
+zone. The hybrid land is heavily manicured megaparks and great gardens, food gardens among them, for leisure and
+entertainment, with the small shops, restrooms and places to rest that so much land needs; residents on the ground and
+aloft use them, and visitors too, and heavy automation keeps them. The mixes run under four land rules
+(`basis.land_rules`; *screen*). The kept 30% and kept half close that share of each zone to fields, glass, towns and
+grazing and keep it wild. Under the compromise (`wild_30_hybrid_20`) the parks take the hybrid fifth, so fields, glass,
+towns and grazing keep to the same half as under a kept half. At the author's request the earlier reading, half wild
+with another 20% hybrid (`wild_50_hybrid_20`), runs beside them for comparison with the same parks; it leaves them
+30% of each zone. The food gardens' harvest stays outside these accounts.
 
-| Mix, 4 / 6 / 8 billion | Kept half | The compromise | Half wild with 20% hybrid |
-|---|---|---|---|
-| Rain-fed first | to 60% / 40% / 30% of the way | to 84% / 56% / 42% of the way | to 60% / 40% / 30% of the way |
-| Greenhouse-heavy | both ends / to 91% / to 64% | both ends / to 91% / to 64% | to 81% / 45% / 24% |
-| Fog-desert glass | to 36% / 13% / neither end | to 36% / 13% / neither end | to 8% / neither end / neither end |
-| Power-heavy, fully lamp-lit, power-made | both ends | both ends | both ends |
-| Sea-supported | neither end | neither end | neither end |
+| Mix, 4 / 6 / 8 billion | Kept half and the compromise | Half wild with 20% hybrid |
+|---|---|---|
+| Rain-fed first | to 60% / 40% / 30% of the way | to 36% / 24% / 18% of the way |
+| Greenhouse-heavy | both ends / to 91% / to 64% | to 81% / 45% / 24% |
+| Fog-desert glass | to 36% / 13% / neither end | to 8% / neither end / neither end |
+| Power-heavy, fully lamp-lit, power-made | both ends | both ends |
+| Sea-supported | neither end | neither end |
 
 The rain alone feeds 6.7–19.6 billion under a kept half and the compromise, and 4.0–11.8 billion with half wild and
 20% hybrid. At 8 billion the power-heavy mix's fields take 1.66–6.97 million km² under a kept half and the compromise,
@@ -545,16 +545,18 @@ product; and conservation and limits: heat and dimming follow power, water close
 close in every mix, phosphorus balances, fields stay outside the kept land, fog nets need wind and fog, the Weibull
 partial mean matches its integral, lamp power scales with light use, the fill spills to the fog desert when the wet
 bands are full, every case's feasibility follows its zones, the land rules carry the author's wild share and keep a
-kept half apart from the compromise, the compromise's hybrid fifth opens to grazing only, and the rain-fed land's wild
-share counts against the land outside the wild share. The regeneration test skips when the ignored grids or
-the bound branches are absent. `checks.json` records the review's findings, their fixes and the test results.
+kept half apart from the compromise, and the compromise's parkland gives the kept half's results in every case. The
+regeneration test skips when the ignored grids or the bound branches are absent. `checks.json` records the review's
+findings, their fixes and the test results.
 
 ## What remains
 
 - The crop model has no water yet (ecology's first open question). Its water-use efficiency decides between the rain-fed
   land here and ecology's lower end, and farm yields below potential add a quarter to a doubling of field land.
 - Fog and wind paired snapshot by snapshot, from a CM1 ring rerun that writes them, would replace the fog-net bracket.
-- The hybrid land under the author's compromise: what grazing, woodland and daily life it holds, and at what yields.
+- The parks under the author's compromise: their water on dry land, in the dry highlands and in the fog desert and
+  polar lowland, which hold 1.65 million km² of them; the energy of the automation that keeps them; and their night
+  light within the hybrid fifth of the dark sky.
 - The warming of N2O and methane in the deep column is uncomputed; N2O accumulates in every mix.
 - The waters' harvest ceiling, 30% of each water's dissolved input, is a design guess of resources' study; particles
   that release phosphorus as in Earth's estuaries would raise it to 44–377 kt a year.

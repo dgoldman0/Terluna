@@ -10,9 +10,10 @@ colonies carrying a decent share, with Earth at 10–16 billion a bit much. Ever
 30% and outside a kept half. The author then chose C′: C with the middle latitudes' lowland people moved where they are
 better sustained and homestead communities among the farms there. It stands beside A–D below. The author also set the
 wild share: at least half of the land and of the dark sky wild is preferred, and it can come down to 30% wild with
-another 20% hybrid, a compromise between keeping 30% and keeping half. The study applies each rule to every zone and
-to the sky. C′ and A–D are also given under the compromise, with the earlier reading, half wild with another 20%
-hybrid, beside them for comparison at the author's request.
+another 20% hybrid, a compromise between keeping 30% and keeping half, the hybrid land being heavily manicured
+megaparks and great gardens. The study applies each rule to every zone and to the sky. C′ and A–D are also given under
+the compromise, with the earlier reading, half wild with another 20% hybrid, beside them for comparison at the
+author's request.
 
 [run.py](run.py) writes [results/distributions.json](results/distributions.json) (schema
 `terluna.research.distributions/1`) in under a second from committed products on this branch and seven files on other
@@ -33,9 +34,8 @@ outside a kept half at the high-cost end: 2.8–28 million people among 1.39 mil
 energy, water lift and wild land, and puts 0.49–14.7% of the dry land under a light-polluted sky against C's
 0.50–15.4%. Every corner fits outside a kept 30%. Outside a kept half the high-cost end fits with the remedy's poleward
 and twilit placements once the homesteads' homes count within the fields they work, 0.02–0.71% of their land. Under
-the author's compromise of 30% wild with another 20% hybrid, farms and towns keep to the same half, the study puts the
-homesteads' homes on the middle-wet zone's hybrid fifth beside their fields, and every corner fits with the remedy's
-poleward and twilit placements alone, at the kept half's costs.
+the author's compromise of 30% wild with another 20% hybrid, the hybrid fifth holds 4.68 million km² of megaparks and
+great gardens, farms and towns keep to the same half, and C′ fits as it does outside a kept half.
 
 1. **The Moon carries 4–8 billion people with 61–94% of its dry land wild outside a kept 30%, and 31–92% outside a
    kept half** (*screen*). With half its people aloft, on the food study's power-heavy mix (vegetables and fruit in
@@ -318,38 +318,43 @@ GW of water lift and 0.454–11.8% of the dry land under a light-polluted sky wi
 
 The author prefers at least half of the land and of the dark sky wild, or 30% wild with another 20% hybrid as a
 compromise ([register](../../decisions.md#people-on-the-moon-and-beyond-11-october-2026)), and the study applies each
-rule to every zone and to the sky. Hybrid land is fairly wild, more heavily managed and carries people's daily life at
-low density. Farms, cities, towns and sky towns keep outside a rule's wild and hybrid shares, and the study reads the
-hybrid part as open to grazing and to the homesteads' homes beside the fields they work. At the author's request the
-earlier reading, half wild with another 20% hybrid, which leaves farms and towns 30% of each zone and of the sky, runs
-beside them for comparison (*screen*; product keys `kept_50`, `wild_30_hybrid_20` and `wild_50_hybrid_20`):
+rule to every zone and to the sky. The hybrid land is heavily manicured megaparks and great gardens, food gardens among
+them, for leisure and entertainment, with the small shops, restrooms and places to rest that so much land needs;
+residents on the ground and aloft use them, and visitors too, and heavy automation keeps them. Farms, grazing, the
+homesteads' homes, cities, towns and sky towns keep outside a rule's wild and hybrid shares. At the author's request
+the earlier reading, half wild with another 20% hybrid, which leaves farms and towns 30% of each zone and of the sky,
+runs beside them for comparison with the same parks (*screen*; product keys `kept_50`, `wild_30_hybrid_20` and
+`wild_50_hybrid_20`):
 
-| C′, 32 corners | Half wild, preferred | 30% wild and 20% hybrid, the compromise | Half wild and 20% hybrid, for comparison |
+| C′, 32 corners | Half wild, preferred | 30% wild and 20% parks, the compromise | Half wild and 20% parks, for comparison |
 |---|---|---|---|
-| Corners that fit as placed | 16 | 18 | 18 |
-| With the remedy's poleward and twilit placements | 16 | 32 | 32 |
+| Corners that fit as placed | 16 | 16 | 16 |
+| With the remedy's poleward and twilit placements | 16 | 16 | 16 |
 | With the homesteads' homes within their fields as well | 32 | 32 | 32 |
 | Farms, settlement and the homesteads' homes, share of the dry land | 8.2–33% | 8.2–33% | 8.5–20% |
-| Homesteads' homes on hybrid land | none | up to 9,920 km² | up to 5,950 km² |
+| Megaparks and great gardens | none | 4.68 million km² | 4.68 million km² |
 | Water from the seas for food, km³ a year | 0–19.6 | 0–19.6 | 0–3,250 |
 | Heat with fusion; added dimming | 18.4–119 TW; 0.159–1.66% | 18.4–119 TW; 0.159–1.66% | 18.4–121 TW; 0.159–1.68% |
 | Sky towns' share of the sky open to them; spacing in the busiest band | 33%; 4.29 km | 33%; 4.29 km | 55%; 3.32 km |
 | Conflicts a day across the fleet, drifting | 0.74–7.4 million | 0.74–7.4 million | 1.2–12 million |
 | Dry land under a light-polluted sky with the twilit placements, the metropolis as a town / at Earth's area | 0.454–11.8% / 0.932–14.3% | 0.454–11.8% / 0.932–14.3% | 0.454–11.8% / 0.932–14.3% |
 
-Under the compromise C′'s farms and towns keep to the same half as under a kept half, so its land, energy, heat, water
-and sky are the half's. The homesteads' homes, 278–9,920 km² where the middle latitudes hold farms, go on the middle-wet
-zone's hybrid fifth of 556,000 km², the zone's land outside the closed half holds only fields, and the costly corners
-fit with the remedy's poleward and twilit placements alone. As placed, the high-cost end still overfills the 30–45°
-highlands by 13,900–39,700 km² at 12 corners and the 0–30° land by 12,900 km² at 4. A light-polluted sky covers at most
-14.7% of the dry land as placed with the metropolis lit as a town, and 17.2% with it at Earth's area a person, so at
-least 82.8% keeps a dark sky, more than the preferred half and the compromise's 30%. A–D fare under the compromise as
-under a kept half: A and B fit as placed, and C and D fit with the remedy's three placements.
+Under the compromise the parks take the hybrid fifth, 4.68 million km², about 585 m² for each of the Moon's 8 billion
+residents before visitors. Farms and towns keep to the same half as under a kept half, so C′'s land, energy, heat,
+water and sky are the half's, and every corner fits with the remedy's poleward and twilit placements once the
+homesteads' homes count within their fields. As placed, the high-cost end overfills the middle-wet zone by
+278–9,920 km² at 16 corners, the 30–45° highlands by 13,900–39,700 km² at 12 and the 0–30° land by 12,900 km² at 4.
+Towns, cities and sky towns put at most 14.7% of the dry land under a light-polluted sky as placed with the metropolis
+lit as a town, and 17.2% with it at Earth's area a person. Even with every park lit at least 62.8% keeps a dark sky,
+more than the preferred half and the compromise's 30%; the parks' own night light is still to size.
+A–D fare under the compromise as under a kept half: A and B fit as placed, and C and D fit with the remedy's three
+placements.
 
 With half wild and another 20% hybrid, farms and towns keep to 30% of each zone. The power-heavy mix's high-cost end
 then grows 1.06 million km² of its crops' equivalent by watering its fields, with 3,250 km³ a year from the seas and
-0.53 TW of lift (food study), and the sky towns, kept to 30% of the sky, have 1.7 times as many conflicts a day. B then
-needs the remedy's three placements, and D fits at 10 of its 16 corners with them.
+0.53 TW of lift (food study), and the sky towns, kept to 30% of the sky, have 1.7 times as many conflicts a day. C′
+fits every corner the same way as under the compromise. B then needs the remedy's three placements, and D fits at 10
+of its 16 corners with them.
 
 ## The Moon at 4, 6 and 8 billion
 
@@ -804,8 +809,8 @@ Stated once; the product's `assumptions` block holds them all.
 - **Water.** 50–150 litres a person a day, raised from the nearest water; 0% and 90% recovery bound the lift.
 - **Land rules.** 30% and half of every zone and of the sky kept wild, the Kunming–Montreal and Half-Earth levels in
   ecology's account; the author's compromise of 30% wild with another 20% hybrid; and half wild with another 20%
-  hybrid, kept for comparison. Farms, cities, towns and sky towns keep outside a rule's wild and hybrid shares, and the
-  study reads the hybrid part as open to grazing and to the homesteads' homes beside their fields.
+  hybrid, kept for comparison. The hybrid part is the author's megaparks and great gardens, and farms, grazing, the
+  homesteads' homes, cities, towns and sky towns keep outside a rule's wild and hybrid shares.
 - **Elsewhere.** Earth's people within its boundaries eat a plant-rich diet on 1.3–1.4 million km² a billion; the
   array's residents need a quarter to all of the Stanford torus's shield; the colonies use the provisioning band with
   power-made food, and each distribution sets their people, with no capacity computed for them, as in the shared
@@ -816,7 +821,9 @@ Stated once; the product's `assumptions` block holds them all.
 - **The middle-wet fields.** The band check holds the middle-wet zone's fields to the room the food study's fill gives
   them, the zone's land outside the closed share. The fill reaches that room exactly when it fills the zone, and the
   food product's three significant figures can put the field area up to 0.5% above it: 835,000 km² against 834,000
-  with half wild and another 20% hybrid. Held to the room, those corners fit with the remedy's placements.
+  with half wild and another 20% hybrid. Held to the room, C′'s corners fit once the homesteads' homes count within
+  their fields (16 of 32 otherwise), and with the remedy B, C and D fit 16, 16 and 10 of their corners (8 each
+  otherwise).
 - **The highland people's latitudes.** The food study spread its towns over every highland band at 25–100 m² a person,
   and land cities set half to all of the ground's people in the highlands at one density. Here 60–75% live in the
   highlands, all but the metropolis's 100 million poleward of 30°, in towers and towns.
@@ -886,11 +893,11 @@ middle-wet fields, places everyone who moves within spare land in the ranked ord
 ranking follows its measures, that the high-cost corners outside a kept half overfill by the homesteads' homes alone
 once the remedy's placements apply and fit with those homes within the fields, and that the crews' distance to the 45°
 line lies beyond a sky boat's range and within a regional ship's; that the land rules match the food study's and keep
-a kept half apart from the compromise; that under the compromise C′ keeps a kept half's costs, its homesteads' homes
-sit on the hybrid fifth and C′'s corners fit as the README gives them under every rule; that the middle-wet fields are
-held to the fill's room and lose at most the food product's rounding; that the fog band's grazing uses the hybrid
-part; that the wild shares count against the land and sky outside the wild share; that A–D fit under the compromise
-and the comparison as stated; and the README's words and lines. They skip cleanly
+a kept half apart from the compromise; that under the compromise C′'s results match the kept half's beside the parks
+and its corners fit as the README gives them under every rule; that the middle-wet fields are held to the fill's room
+and lose at most the food product's rounding; that the hybrid part is parkland, kept from grazing and the homesteads'
+homes; that the wild shares count against the land and sky outside the closed share; that A–D fit under the
+compromise and the comparison as stated; and the README's words and lines. They skip cleanly
 when an input is absent. [checks.json](checks.json) records the test run and the three rounds of the independent review.
 
 ## What remains
@@ -900,8 +907,9 @@ when an input is absent. [checks.json](checks.json) records the test run and the
 - The water and the land of the dry highland cities poleward of 45°, where 8 billion outside a kept half would put them.
 - In C′, the high-latitude towns' water from lakes and seas a median 32.8 km away, the work of the middle latitudes'
   farms beyond the homesteads, and the homesteads' own design.
-- The hybrid land's design under the author's compromise: the daily life, management and uses it holds beyond the
-  homesteads' homes and grazing, and how it meets the wild land.
+- The parks under the author's compromise: their water on dry land, in the dry highlands and in the fog desert and
+  polar lowland, which hold 1.65 million km² of them; the energy of the automation that keeps them; their amenities;
+  and their night light within the hybrid fifth of the dark sky.
 - An overlay of the scattered homes on the food study's zones, and the middle band's towns beside the middle-wet fields.
 - The heights of the sky towns, the aerophytes and the sky reefs, and the traffic rules on the shared tracks; the
   relative drift of neighbours at kilometre scale, below the 170 km winds' resolution.

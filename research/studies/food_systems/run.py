@@ -730,7 +730,7 @@ def results():
                          mixes={k: v['rule'] for k, v in mixes_mod.MIXES.items()},
                          aloft_share=mixes_mod.ALOFT_SHARE, populations_billion=list(mixes_mod.POPULATIONS),
                          wet_bands_filled=list(mixes_mod.WET_BANDS),
-                         hybrid_rules=[dict(r, closed_to_fields_glass_and_towns=r['wild'] + r['hybrid'])
+                         hybrid_rules=[dict(r, closed=r['wild'] + r['hybrid'])
                                        for r in sys_mod.HYBRID_RULES]),
         literature={k: dict(value=v['value'], unit=v['unit'], source=v['source']) for k, v in par.P.items()},
         derived=rd(derived),
@@ -781,13 +781,12 @@ READING_RULE = ('Per billion lunar residents unless named: areas km2, water km3 
                 'supplies: power from the array (its receivers\' losses included) and fusion on the Moon. Land rules: '
                 'kept_30 and kept_50 keep 30% and half of each zone wild; wild_30_hybrid_20 is the author\'s '
                 'compromise, 30% wild and another 20% hybrid, and wild_50_hybrid_20 half wild and another 20% hybrid '
-                'for comparison. Fields, glass and towns keep outside a rule\'s wild and hybrid shares (the kept '
-                'share), grazing may also use the hybrid part, and the wild shares and grazing\'s share count '
-                'against the land outside the wild share, so under a hybrid rule they include unused hybrid land; '
-                'dry_land_share_used compares the rules directly. Mixes: '
-                'cases[population][land rule]; zone_use_share is each zone\'s fields, glass and towns against its '
-                'land outside the kept share, the fog desert\'s with its grazing against the land open to grazing '
-                'where that binds, sea farms against the seas shallower than 200 m, and '
+                'for comparison. The hybrid land is heavily manicured megaparks and great gardens, so fields, glass, '
+                'towns and grazing keep outside a rule\'s wild and hybrid shares (the kept share), and the wild shares '
+                'count against the land outside the kept share, which differs by rule, so dry_land_share_used '
+                'compares the rules directly. Mixes: '
+                'cases[population][land rule]; zone_use_share is each zone\'s use against its land outside the kept '
+                'share (grazing on the fog desert included), sea farms against the seas shallower than 200 m, and '
                 'their phosphorus against what the waters\' life can spare; feasible says which ends fit, '
                 'feasible_to the fraction of the way to the high-cost end, every input moved together, at which the '
                 'first zone fills, and feasible_range the case there beside the low-cost end.')

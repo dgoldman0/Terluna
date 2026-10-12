@@ -26,23 +26,24 @@ WATER_KG_M3 = 1000.0                      # fresh water, as ways of living takes
 ENDS = ('low', 'high')
 # The author's rule of 11 October 2026 (research/decisions.md, People on the Moon and beyond): at least half of the
 # land and of the dark sky wild is preferred, applied here to each zone as the kept half; it can come down to 30% wild
-# with another 20% hybrid, a compromise between keeping 30% and keeping half. Hybrid land is fairly wild, more heavily
-# managed and carries people's daily life at low density; this study reads it as open to grazing while fields, glass
-# and towns keep to the rest. At the author's
-# request the earlier reading, half wild with another 20% hybrid, which leaves fields, glass and towns 30%, runs
-# beside them for comparison.
+# with another 20% hybrid, a compromise between keeping 30% and keeping half. The hybrid land is heavily manicured
+# megaparks and great gardens for leisure, so fields, glass, towns and grazing keep to the rest. At the author's
+# request the earlier reading, half wild with another 20% hybrid, which leaves fields, glass, towns and grazing 30%,
+# runs beside them for comparison, with the same parks.
 HYBRID_RULES = (dict(key='wild_30_hybrid_20', wild=0.3, hybrid=0.2, role="the author's compromise",
+                     hybrid_land='megaparks and great gardens',
                      source="research/decisions.md, People on the Moon and beyond, 11 October 2026: the author's wild "
-                            'share'),
+                            'share and the hybrid land\'s purpose'),
                 dict(key='wild_50_hybrid_20', wild=0.5, hybrid=0.2, role='comparison',
+                     hybrid_land='megaparks and great gardens',
                      source="the author's request of 11 October 2026 to keep the earlier reading of the wild share as "
-                            'a comparison (the register row\'s status)'))
+                            "a comparison (the register row's status), with the hybrid land's purpose"))
 
 
 class LandRule(float):
-    """A land rule. Its value is the share of each zone closed to fields, glass and towns; `hybrid` is the part of it
-    that grazing may also use, and `key` names the rule in the product. Two rules are equal only when both parts are,
-    so a kept half and the compromise stay apart, and a rule with a hybrid part needs its own key."""
+    """A land rule. Its value is the share of each zone closed to fields, glass, towns and grazing; `hybrid` is the
+    part of it held as parks and gardens, and `key` names the rule in the product. Two rules are equal only when both
+    parts are, so a kept half and the compromise stay apart, and a rule with a hybrid part needs its own key."""
 
     def __new__(cls, closed, hybrid=0.0, key=None):
         if hybrid and not key:
@@ -64,7 +65,8 @@ class LandRule(float):
 
 
 def land_rules(kept_shares):
-    """Ecology's kept shares, then the hybrid rules, each closing its wild and hybrid shares to fields and towns."""
+    """Ecology's kept shares, then the hybrid rules, each closing its wild and hybrid shares to fields, glass, towns and
+    grazing."""
     return [LandRule(k) for k in sorted(kept_shares)] + [
         LandRule(r['wild'] + r['hybrid'], r['hybrid'], r['key']) for r in HYBRID_RULES]
 
@@ -72,12 +74,6 @@ def land_rules(kept_shares):
 def kept_key(kept):
     """A land rule's key in the product; a plain kept share is kept_30 or kept_50."""
     return getattr(kept, 'key', None) or f'kept_{round(kept * 100)}'
-
-
-def open_share(kept):
-    """The share of a zone open to grazing, and the share the wild shares count against: the land outside the kept
-    share with the rule's hybrid part. Fields, glass and towns stay within 1 - kept."""
-    return 1.0 - kept + getattr(kept, 'hybrid', 0.0)
 
 
 def pick(pair, end, low_is_good=True):

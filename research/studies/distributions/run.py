@@ -175,9 +175,10 @@ ALOFT_BILLION = (2, 3, 4)
 
 class LandRule(float):
     """A land rule, as the food study defines it. Its value is the share of each zone, and of the sky, closed to
-    farms, cities, towns and sky towns; `hybrid` is the part of it that grazing and the homesteads' homes may use,
-    and `key` names the rule in the products. Two rules are equal only when both parts are, so a kept half and the
-    compromise stay apart, and a rule with a hybrid part needs its own key."""
+    farms, grazing, the homesteads' homes, cities, towns and sky towns; `hybrid` is the part of each zone held as parks
+    and gardens, the sky's hybrid part holding no towns, and `key` names the rule in the products. Two rules are equal
+    only when both parts are, so a kept half and the compromise stay apart, and a rule with a hybrid part needs its own
+    key."""
 
     def __new__(cls, closed, hybrid=0.0, key=None):
         if hybrid and not key:
@@ -200,11 +201,11 @@ class LandRule(float):
 
 # The author's rule of 11 October 2026 (research/decisions.md, People on the Moon and beyond): at least half of the
 # land and of the dark sky wild is preferred, applied here to every zone and to the sky (kept_50); it can come down to
-# 30% wild with another 20% hybrid, a compromise between keeping 30% and keeping half. Hybrid land is fairly wild, more heavily managed and carries
-# people's daily life at low density; this study reads it as open to grazing and to the homesteads' homes beside the
-# fields they work. At the author's request the earlier reading, half wild with another 20% hybrid, which leaves farms
-# and towns 30%, runs for comparison. The food study's basis.land_rules carry the same rules, and checks.land_rules
-# compares them.
+# 30% wild with another 20% hybrid, a compromise between keeping 30% and keeping half. The hybrid land is heavily
+# manicured megaparks and great gardens for leisure, with the small shops, restrooms and places to rest they need, so
+# farms, grazing, the homesteads' homes and towns keep to the rest. At the author's request the earlier reading, half
+# wild with another 20% hybrid, which leaves farms and towns 30%, runs for comparison. The food study's
+# basis.land_rules carry the same rules, and checks.land_rules compares them.
 KEPT = (LandRule(0.3), LandRule(0.5), LandRule(0.5, 0.2, 'wild_30_hybrid_20'),
         LandRule(0.7, 0.2, 'wild_50_hybrid_20'))
 CHOSEN_MIX = 'power_heavy'
@@ -254,13 +255,13 @@ READING_RULE = ('People in billions unless named; areas km2; water km3 a year; p
                 'aloft ("6_3") and then by land rule. kept_30 and kept_50 keep 30% and half of every zone and of the '
                 'sky wild; wild_30_hybrid_20 is the author\'s compromise, 30% wild and another 20% hybrid, and '
                 'wild_50_hybrid_20 half wild and another 20% hybrid, kept for comparison at the author\'s request '
-                '(assumptions.land_rules: closed is the share closed to farms, cities, towns and sky towns, hybrid '
-                'the part of it open to grazing and to the homesteads\' homes beside their fields; checks.land_rules '
-                'compares them with the food study\'s). Capacities and traffic use the land and sky outside the '
-                'closed share, and sky.towns_grid_share_of_their_sky gives the sky towns\' grid against that sky; '
-                'the wild shares count the land and sky that farms, towns, sky towns, grazing and the homesteads\' '
-                'homes leave against everything outside the wild share, so under a hybrid rule they include unused '
-                'hybrid land, and used_share_of_dry_land compares the rules directly. Each case runs '
+                '(assumptions.land_rules: closed is the share closed to farms, grazing, the homesteads\' homes, '
+                'cities, towns and sky towns, hybrid the part of each zone held as the author\'s megaparks and great '
+                'gardens, the sky\'s hybrid part holding no towns; checks.land_rules compares them with the food '
+                'study\'s). Capacities, traffic and the wild shares use the land and sky outside the closed share, '
+                'which differs by rule, so used_share_of_dry_land compares the rules directly; '
+                'sky.towns_grid_share_of_their_sky gives the sky towns\' grid against that sky, and land.parks_km2 and '
+                'land.parks_share_of_dry_land give the parks. Each case runs '
                 'over 16 corners, every combination of the placement guesses with every input at its favourable and '
                 'unfavourable end; full gives [low, high] over them all, feasible over the corners whose land bands '
                 'all fit (null when all do), and remedy the same case with the dry highland towns poleward of 45 '
@@ -269,11 +270,8 @@ READING_RULE = ('People in billions unless named; areas km2; water km3 a year; p
                 '(buildable_corners_by_parts counts the corners each part fits). bands gives each corner range\'s '
                 'use, capacity and overfill by land band; the middle-wet zone is a band of its own, which the '
                 'scattered communities\' middle-band land (30-48.6 degrees) covers by area, and its fields are held '
-                'to the food fill\'s room against the food product\'s rounding. Under a hybrid rule the fog band\'s '
-                'use_share and overfill take the larger of its farms and towns against the land outside the closed '
-                'share and of those with grazing against the land open to grazing; '
-                'bands.homestead_land_on_hybrid_km2 gives the homesteads\' homes placed on the hybrid part. '
-                'moon.cprime gives C\'s results by rule, and each distribution\'s moon.land_rules its own. Energy: '
+                'to the food fill\'s room against the food product\'s rounding. moon.cprime gives the results of '
+                'C\' (C prime) by rule, and each distribution\'s moon.land_rules its own. Energy: '
                 'primary_tw counts the residents\' primary energy and the electricity at fusion\'s input, 2.0-3.0 W '
                 'a watt (one basis); electricity_tw is the electricity alone; heat_by_component_tw splits the heat. '
                 'fusion and array name the supply whose heat the Moon takes. The chosen food mix is the food study\'s '
@@ -710,13 +708,8 @@ def kept_key(kept):
 
 
 def hybrid_share(kept):
+    """The share of each zone a land rule holds as parks and gardens."""
     return getattr(kept, 'hybrid', 0.0)
-
-
-def open_share(kept):
-    """The share of each zone open to grazing and the homesteads' homes, and the share the wild shares count against:
-    the land outside the kept share with the rule's hybrid part. Farms, cities and towns stay within 1 - kept."""
-    return 1.0 - kept + hybrid_share(kept)
 
 
 def food_block(food, mix, moon, kept):
@@ -827,10 +820,8 @@ def land_bands(B, blk, reach, place, e, kept, wet_rule='area'):
         raise ValueError(f'unknown wet rule {wet_rule}')
     homes = place['homestead_land_km2']          # C': homesteads live among the middle-wet fields
     rule = place['homestead_rule']
-    homes_on_hybrid = 0.0
-    if rule == 'zone':                           # beside the fields, on the zone's hybrid part first
-        homes_on_hybrid = min(homes, zones['middle_wet'] * hybrid_share(kept))
-        homes_on_mw, homes_elsewhere = homes - homes_on_hybrid, 0.0
+    if rule == 'zone':                           # beside the fields, on the zone
+        homes_on_mw, homes_elsewhere = homes, 0.0
     elif rule == 'within_fields':                # within the fields they work, taking a share of the fields' land
         homes_on_mw, homes_elsewhere = 0.0, 0.0
     else:
@@ -847,20 +838,12 @@ def land_bands(B, blk, reach, place, e, kept, wet_rule='area'):
                middle_wet_zone=mw_cap,
                fog_desert_and_polar=(zones['fog_desert'] + zones['polar']) * out_share)
     overfill = {k: max(use[k] - cap[k], 0.0) for k in LAND_BANDS}
-    share = {k: use[k] / cap[k] for k in LAND_BANDS}
-    # grazing may also use a hybrid rule's hybrid part: the fog band's farms and towns against the land outside the
-    # kept share, and grazing with them against the land open to it; with no hybrid part this is the check above
-    fog_open = (zones['fog_desert'] + zones['polar']) * open_share(kept)
-    fog_int = use['fog_desert_and_polar'] - grazing
-    overfill['fog_desert_and_polar'] = max(fog_int - cap['fog_desert_and_polar'], fog_int + grazing - fog_open, 0.0)
-    share['fog_desert_and_polar'] = max(fog_int / cap['fog_desert_and_polar'], (fog_int + grazing) / fog_open)
     dry_used = (place['dry_area_by_band']['30-45'] + use['highlands_45_90'] + fields_30_45)
     dry_side_cap = (lb['middle_band_homes_km2'] - zones['middle_wet']) * out_share
-    return dict(use_km2=use, capacity_km2=cap, use_share=share,
+    return dict(use_km2=use, capacity_km2=cap, use_share={k: use[k] / cap[k] for k in LAND_BANDS},
                 overfill_km2=overfill, fields_on_dry_high_ground_km2=fields_30_45,
                 fields_on_middle_wet_km2=middle_wet, scattered_middle_band_km2=middle_land,
                 scattered_on_middle_wet_km2=on_mw, homestead_land_on_middle_wet_km2=homes_on_mw,
-                homestead_land_on_hybrid_km2=homes_on_hybrid,
                 homestead_share_of_middle_wet_fields=homes / middle_wet if middle_wet > 0.0 else 0.0,
                 middle_homes_dry_side_used_share=(middle_land - on_mw) / dry_side_cap,
                 dry_high_ground_used_share=dry_used / (B['highlands']['dry_km2'] * out_share),
@@ -912,7 +895,8 @@ def moon_corner(B, food, moon, aloft, kept, supply, combo, end, rule='spread', d
     land = dict(
         settled_km2=settled, settled_by_setting_km2=a, food_km2=food_land, grazing_km2=grazing,
         used_km2=used, used_share_of_dry_land=used / dry_land,
-        wild_share_outside_kept=1.0 - used / (dry_land * open_share(kept)),
+        wild_share_outside_kept=1.0 - used / (dry_land * (1.0 - kept)),
+        parks_km2=dry_land * hybrid_share(kept), parks_share_of_dry_land=hybrid_share(kept),
         highlands_used_share_outside_kept=(food_high + a['metropolis'] + a['tower_districts'] + a['highland_towns'])
         / (B['highlands']['all_km2'] * (1.0 - kept)),
         dry_high_ground_settled_share=bands['dry_high_ground_settled_share'],
@@ -990,8 +974,8 @@ def moon_corner(B, food, moon, aloft, kept, supply, combo, end, rule='spread', d
     cell = (sky['spacing_diameters'] * 2.0 * sky['envelope_radius_km']) ** 2
     grid = n_env * cell / moon_km2
     sky_out = dict(towns_50t=n_env, shade_share_of_moon=shade, grid_share_of_moon=grid,
-                   wild_sky_outside_kept_by_shade=1.0 - shade / open_share(kept),
-                   wild_sky_outside_kept_by_grid=1.0 - grid / open_share(kept),
+                   wild_sky_outside_kept_by_shade=1.0 - shade / (1.0 - kept),
+                   wild_sky_outside_kept_by_grid=1.0 - grid / (1.0 - kept),
                    towns_grid_share_of_their_sky=grid / (1.0 - kept),
                    hydrogen_gt=aloft * sky['hydrogen_gt_per_billion'],
                    lifting_gas_gt=aloft * sky['gas_gt_per_billion'])
@@ -1314,7 +1298,7 @@ def food_menu(B, food, moon, aloft):
                 for combo in COMBOS:
                     place = placement(B, moon - aloft, combo)
                     used = blk['land_km2']['total'][e] - towns_fs + blk['grazing_km2'][e] + place['settled_km2']
-                    wild.append(1.0 - used / (B['moon']['dry_land_km2'] * open_share(kept)))
+                    wild.append(1.0 - used / (B['moon']['dry_land_km2'] * (1.0 - kept)))
             row[kept_key(kept)] = dict(
                 buildable=True, both_ends=fb['both_ends'], reach=reach,
                 food_land_km2=[blk['land_km2']['total'][e] - food_town_km2(B, blk['people_billion']['surface'][e],
@@ -1633,7 +1617,8 @@ UNCERTAINTIES_COMMON = [
 
 
 VARIANT_TEXT = dict(poleward_and_twilit="with the remedy's poleward and twilit placements",
-                    homes_within_the_fields="with those placements and the homesteads' homes within their fields",
+                    homes_within_the_fields=("with the remedy's poleward and twilit placements and the homesteads' "
+                                             'homes within their fields'),
                     to_the_dry_highlands='with the moved people sent to the dry highland cities')
 
 
@@ -1647,6 +1632,7 @@ def rule_summary(k):
                 variants_buildable_corners=({n: v['buildable_corners'] for n, v in k['variants'].items()}
                                             if 'variants' in k else None),
                 used_share_of_dry_land=f['land']['used_share_of_dry_land'],
+                parks_share_of_dry_land=f['land']['parks_share_of_dry_land'],
                 wild_share_outside_kept=f['land']['wild_share_outside_kept'],
                 food_from_seas_km3=f['water']['food_from_seas_km3'], food_tw=f['energy']['fusion']['food_tw'],
                 heat_tw=f['energy']['fusion']['heat_tw'],
