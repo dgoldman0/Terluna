@@ -551,6 +551,11 @@ findings, their fixes and the test results.
 
 ## What remains
 
+- The author's blend of the three mixes that fit, power-heavy, power-made and fully lamp-lit, at the weights the study
+  sets to the optimum, with heritage meat from the homesteads and hobby farms as a luxury
+  ([decisions](../../decisions.md#automation-the-network-and-food-12-october-2026)). At 8 billion each tenth of the diet
+  takes 0.1–0.7 TW as power-heavy, 0.6–2.2 TW as power-made and 4–43 TW fully lamp-lit. The heritage meat's land, feed
+  and methane are to compute, with cattle returning to a design that left ruminants out.
 - The crop model has no water yet (ecology's first open question). Its water-use efficiency decides between the rain-fed
   land here and ecology's lower end, and farm yields below potential add a quarter to a doubling of field land.
 - Fog and wind paired snapshot by snapshot, from a CM1 ring rerun that writes them, would replace the fog-net bracket.

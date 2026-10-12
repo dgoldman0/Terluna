@@ -122,6 +122,16 @@ part, since the fog desert's fogs sit in nearly still air, low in the night's co
 ([food systems](../research/studies/food_systems/README.md)). The parks' water, automation energy and night light
 remain to be sized under this design.
 
+**Kept by machines.** On 12 October the author set the parks as almost purely automated, their amenities and
+food-service shops included ([register](../research/decisions.md#automation-the-network-and-food-12-october-2026)).
+Earth's staffing gives the scale. An 18-hole golf course of 0.5–0.8 km² keeps 8–25 groundskeepers
+([Tee-Off](https://tee-off.com/how-many-golf-course-groundskeepers-does-your-club-need/)), 10–50 a km²; the Central Park
+Conservancy keeps 350–400 staff on 3.4 km² ([Conservancy](https://www.centralparknyc.org/about)), about 110 a km²; and
+Butchart Gardens keeps 50 gardeners all year and 20 more in summer on 22 ha
+([APT](https://www.aptouring.com/en-gb/articles/exploring-butchart-gardens)), about 310 a km². At those rates the 4.68
+million km² of parks would need 50 million to 1.5 billion gardeners. Much of the machines' work can run through the long
+night by infrared and lidar, so the living light keeps the dark.
+
 ## Community settings from the atlas
 
 The [conservation study](../research/studies/conservation/README.md) lists candidate settings for communities on the 28% [atlas](../geography/README.md#atlas-at-the-selected-water-share):

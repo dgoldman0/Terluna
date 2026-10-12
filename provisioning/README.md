@@ -42,6 +42,11 @@ The author's decisions frame it:
   takes the array's heat, computing and industry.
 - **The night:** the ring fleet keeps its light off the night zones, redirecting it and using it where it can, for
   computing for instance.
+- **Automation:** heavy automation keeps the cities and the sky towns, the parks and their amenities run almost purely
+  by machine, and the whole system is engineered for extreme uptime; every consensus decision draws on the
+  near-continual input of a well-educated, involved population.
+- **The network:** a mesh of aerostats drifting near 30 km, fixed posts, fibre and towers, linked to the array
+  ([network.md](network.md)).
 
 ## What the project already says
 
@@ -472,6 +477,31 @@ is [distributions](../research/studies/distributions/README.md); numbers here ar
     beside them for comparison at the author's request with the same parks, leaves farms and towns 30%: every corner
     still fits the same way, while the high-cost end draws 3,250 km³ a year from the seas to water its fields and the
     sky towns have 1.7 times as many conflicts a day.
+
+### Automation, the network and food
+
+59. **At Earth's staffing the parks alone would need 50 million to 1.5 billion gardeners, so machines keep them**
+    (*derived*). An 18-hole golf course keeps 10–50 groundskeepers a km², Central Park about 110 staff and Butchart
+    Gardens about 310 gardeners. The author set the 4.68 million km² of parks, their amenities and food-service shops
+    included, as almost purely automated ([habitation](../habitation/README.md#parks-and-gardens)); the machines' energy
+    is still to size.
+
+60. **A mesh of about 1,500 aerostats drifting near 30 km covers the whole Moon, and the dense air barely shortens
+    radio's reach** (*derived*; [network.md](network.md)). Below 10 GHz the air absorbs a few thousandths to a hundredth
+    of a decibel per kilometre. The Moon's curvature sets the reach, 324 km to the horizon from 30 km against Earth's
+    619, and refraction adds about 1% where Earth's air adds 15%. At 30 km the mesh flies above the storms and the sky
+    reefs, where the winds keep drifting routes spread and the nights last 2–6 days; fixed posts there take about 0.5 kW
+    each against the wind. The array, 0.13 s away by round trip, stands above the horizon almost everywhere, and the
+    band where Earth flies its low satellites lies inside the Moon's air.
+
+61. **The author's food blend takes its heat from its fully lamp-lit share** (*derived* from the [food
+    study](../research/studies/food_systems/README.md)). At 8 billion each tenth of the diet takes 0.1–0.7 TW as
+    power-heavy, 0.6–2.2 TW as power-made and 4–43 TW fully lamp-lit, so an even blend takes 16–151 TW against 12–36 TW
+    for the residents' other energy. A kilogram of heritage meat a person a year takes 0.1 million km² as pork or
+    chicken, 0.35 million as dairy-herd beef and 2.6 million as beef from beef herds (Poore & Nemecek 2018), against the
+    homestead region's 1.39 million. Each kilogram of beef a person a year needs a herd near 100 million cattle, whose
+    5–9 Mt of methane a year only soils remove; red seaweed in their feed cut steers' methane yield by 45–68% over 147
+    days (Roque et al. 2021).
 
 ## Statements elsewhere that need correcting
 

@@ -43,8 +43,8 @@ on this laptop. The findings behind them are in the [README](README.md).
      - an overlay of the scattered homes on the food study's zones, and the middle band's towns beside the
        middle-wet fields;
      - town and hull designs, the sky towns' heights beside the aerophytes and sky reefs, the traffic rules on the
-       shared tracks, the relative drift of neighbours below the 170 km winds' resolution, and rain at the towns'
-       height;
+       shared tracks, where towns give way to sky reefs, the relative drift of neighbours below the 170 km winds'
+       resolution, and rain at the towns' height;
      - how fast the lake deltas can be dredged without harming their life, and the struvite routes;
      - the joined undersea and tube cities' passages, pumps and harbours, and the tubes' groundwater beyond the
        two-dimensional screen ([land cities](../research/studies/land_cities/README.md));
@@ -72,7 +72,10 @@ on this laptop. The findings behind them are in the [README](README.md).
      end, and farm yields below potential;
    - N2O and methane: their warming in the deep column, and how strict soilless culture and fish must be;
    - fog and wind paired snapshot by snapshot, and dew from the night's surface energy, in the fog desert;
-   - the land within reach of each city, and the author's choice of mix.
+   - the land within reach of each city;
+   - the author's blend of the three mixes that fit, power-heavy, power-made and fully lamp-lit, at the weights the
+     study sets to the optimum, with heritage meat from the homesteads and hobby farms as a luxury, whose land, feed and
+     methane are to compute (README, finding 61).
 
    **How:** the plant model with water and the ecology work's nutrient budget; a gas-warming column; a CM1 ring rerun
    that writes fog and wind together.
@@ -108,8 +111,10 @@ on this laptop. The findings behind them are in the [README](README.md).
    share of the planned climate's heat budget; the path in energy per operation; the management twin's resolution by
    place; services to Earth; and collectors that dim the Moon while feeding computing. Each is weighed by what it does
    to the Moon's heat and the glow (README, finding 1). With the planned `research/array-industry` branch.
-10. **Work, maintenance and the economy.** Maintenance runs 2–4% of replacement value a year; who does it, how much is
-    automated, and how work is shared belong to the human paper. Provisioning supplies the hours and energy.
+10. **Work, maintenance and the economy.** Maintenance runs 2–4% of replacement value a year. The author set heavy
+    automation everywhere on 12 October, the parks and their amenities almost purely automated and the whole system
+    engineered for extreme uptime, so the machines' energy, materials and repair are provisioning's to size; how work is
+    shared and how decisions are made belong to the human paper.
 11. **Lamps and the dark night.** The summit's night has about 190 hours that need lamps. At the lunar design's
     lighting each billion people light 0.79–1.42 million km² of sky, so 6–15 billion lunar residents light 20–91% of
     the dry land ([ways of living](../research/studies/ways_of_living/README.md), finding 4). Sleep needs at most 1 lux
@@ -126,3 +131,10 @@ on this laptop. The findings behind them are in the [README](README.md).
       beyond 75 hours; the evidence for children, older residents and return to Earth is gathered in
       [daily life](../research/studies/daily_life/README.md), section 5.
     - Life support for enclosed places, such as the undersea community.
+13. **The network.** The [network brief](network.md) sets a mesh of aerostats drifting near 30 km, fixed posts, fibre
+    and towers, linked to the array.
+    - **What remains:** a constellation model on the design winds, with spacing control, coverage and spares; the fixed
+      posts' night power; the ionosphere under the shield; the nodes' design and service ports; and the network's energy
+      and spectrum.
+    - **How:** routes released on the design winds' product with a spacing controller, minutes to an hour on this
+      laptop; the ionosphere with the electricity work's stage 3.
