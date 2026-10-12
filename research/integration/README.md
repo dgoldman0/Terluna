@@ -1,5 +1,8 @@
 # The joint integration of 8 October 2026
 
+The second joint integration, of the three domain branches on 12 October 2026, is recorded in
+[domains.md](domains.md).
+
 Five states of the work became one on 8 October 2026: main at `2f2e0a1`, sea appearance at `46681f4`, the solar
 shield and habitat array at `eeaecbc`, atmospheric electricity at `24d236b` and infrastructure at `625f60e`. The author
 asked for "a proper integration and joint merger" of the branches, with a synthesis of what they say together. The
@@ -103,5 +106,6 @@ same as at every source head.
 - The sky-fleet drawings are built outputs; their re-rendering with the nine-berth crown waits for the author's look.
 - The port's programme follows the square lattice until the chosen form has its own.
 
-The [photosynthetic floater evaluation](floater_viability.md) follows the aerial-biosphere work. Its code and
-products remain on `domain/ecology`; main holds the cross-domain conclusion and check record.
+The [aerophyte evaluation of 9 October](floater_viability.md), written under the organisms' working name, follows
+the aerial-biosphere work. Its study has been in this tree since 12 October as
+[research/studies/aerophytes](../studies/aerophytes/README.md).

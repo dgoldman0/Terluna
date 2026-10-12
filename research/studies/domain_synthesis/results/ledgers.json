@@ -1,0 +1,746 @@
+{
+  "schema": "terluna.research.domain-synthesis-ledgers/1",
+  "producer": {
+    "files": {
+      "research/studies/domain_synthesis/ledgers.py": "9d0e08de2b54bf84ae5b585c95903f18e241d24cd5e04c8deeff3d5f1133eb6b"
+    },
+    "inputs": {
+      "research/studies/distributions/results/distributions.json": "38ffcc0665d70bded43600007c04708c08ddacbe747dfea7440d3ff905b7ae56",
+      "research/studies/food_systems/results/food_blend.json": "c24d1ae08963eed1d95deb5e047710e7541634d0e7afbbf0c318468607a94c34",
+      "provisioning/results/population.json": "d562cdabe6eee18fe40cfc16f6a65177ec16f7dd1fd8584a4dad80d271b85895",
+      "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d",
+      "biosphere/ecology/results/people.json": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
+      "resources/results/sea_phosphorus.json": "47b600895919319d03e16c4193051bfe2827b304d85b5ac427d688c7f3ba4ddb",
+      "research/studies/sky_ecology/results/sky_ecology.json": "2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3",
+      "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f3a09b17dc088037560bb5b7f31f4342ae16239d4bf22013a",
+      "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327a13d9a01db7bb711fb5177a5d2b0227c7085826ad8a85a65",
+      "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d42be3598a6f4896cc72c4c5aa0432ad9b468dbc08191f684"
+    }
+  },
+  "evidence": "Arithmetic on committed screen products of the three domains and main's studies: C' and the food blend recombined in totals, the trace gases' sources and sinks summed, resources' phosphorus ledger read at the blend's losses, and the sky's layers read from their products. Nothing is simulated here; each figure keeps its source's evidence state, and the blend's fields are not placed band by band.",
+  "reading_rule": "Pairs are [low-cost end, high-cost end] as in the food and distributions studies unless labelled; areas km2, power and heat TW, W/m2 over the whole Moon, dimming in percent of sunlight, methane Tg and ppm, N2O Tg N and ppb or ppm, phosphorus Tg P (Mt) a year, heights km above sea level. Gas cases pair the sources' low end with the soils' fastest sink and the high end with the slowest; central takes the screen's central sources and sink with the farms at both ends and the cattle at 1 kg a person (the larger of the two carcass yields' figures). The share of the atmosphere treated is the air a full-capture removal from open air would pass each year, over the whole air.",
+  "choices": {
+    "distribution": "C'",
+    "moon_billion": 8,
+    "aloft_billion": 4,
+    "land_rule": "wild_30_hybrid_20",
+    "blend_weights": {
+      "power_heavy": 0.4,
+      "power_made": 0.5,
+      "fully_lamp_lit": 0.1
+    },
+    "heritage_kg_per_person_year": [
+      0.5,
+      1.0,
+      2.0
+    ]
+  },
+  "heat": {
+    "fusion": {
+      "heat_by_component_tw": {
+        "residents": [
+          12.1,
+          36.2
+        ],
+        "food": [
+          14.8,
+          171.0
+        ],
+        "sky_control": [
+          0.552,
+          8.36
+        ],
+        "sky_hydrogen_remade": [
+          3.41,
+          53.7
+        ],
+        "sky_trips_and_food_lift": [
+          0.157,
+          0.238
+        ],
+        "water": [
+          0.00151,
+          0.0834
+        ]
+      },
+      "heat_tw": [
+        31.0,
+        270.0
+      ],
+      "heat_w_m2": [
+        0.819,
+        7.12
+      ],
+      "added_dimming_percent": [
+        0.269,
+        3.74
+      ],
+      "food_share": [
+        0.477,
+        0.634
+      ],
+      "close_computing_heat_tw": [
+        9.23,
+        14.0
+      ],
+      "with_close_computing": {
+        "heat_tw": [
+          40.2,
+          284.0
+        ],
+        "heat_w_m2": [
+          1.06,
+          7.49
+        ],
+        "added_dimming_percent": [
+          0.349,
+          3.94
+        ]
+      },
+      "as_placed_with_power_heavy": {
+        "heat_tw": [
+          18.4,
+          119.0
+        ],
+        "added_dimming_percent": [
+          0.159,
+          1.66
+        ]
+      }
+    },
+    "array": {
+      "heat_by_component_tw": {
+        "residents": [
+          11.0,
+          32.9
+        ],
+        "food": [
+          10.2,
+          77.5
+        ],
+        "sky_control": [
+          0.381,
+          3.81
+        ],
+        "sky_hydrogen_remade": [
+          2.35,
+          24.5
+        ],
+        "sky_trips_and_food_lift": [
+          0.108,
+          0.108
+        ],
+        "water": [
+          0.00104,
+          0.038
+        ]
+      },
+      "heat_tw": [
+        24.0,
+        139.0
+      ],
+      "heat_w_m2": [
+        0.635,
+        3.67
+      ],
+      "added_dimming_percent": [
+        0.209,
+        1.93
+      ],
+      "food_share": [
+        0.424,
+        0.558
+      ],
+      "close_computing_heat_tw": [
+        6.37,
+        6.37
+      ],
+      "with_close_computing": {
+        "heat_tw": [
+          30.4,
+          145.0
+        ],
+        "heat_w_m2": [
+          0.803,
+          3.83
+        ],
+        "added_dimming_percent": [
+          0.264,
+          2.02
+        ]
+      },
+      "as_placed_with_power_heavy": {
+        "heat_tw": [
+          15.3,
+          70.7
+        ],
+        "added_dimming_percent": [
+          0.133,
+          0.982
+        ]
+      }
+    },
+    "fleet_glow": {
+      "w_m2": [
+        5.66,
+        9.92
+      ],
+      "as_tw_used": [
+        214,
+        376
+      ],
+      "added_dimming_percent": [
+        1.86,
+        5.22
+      ]
+    },
+    "fusion_with_glow": {
+      "w_m2": [
+        6.72,
+        17.4
+      ],
+      "added_dimming_percent": [
+        2.21,
+        9.16
+      ]
+    },
+    "factors": {
+      "dimming_percent_per_tw": [
+        0.00868,
+        0.0139
+      ],
+      "moon_w_m2_per_tw": 0.0264
+    }
+  },
+  "land": {
+    "dry_land_km2": 23400000.0,
+    "kept_wild_km2": 7020000.0,
+    "parks_km2": 4680000.0,
+    "outside_kept_and_parks_km2": 11700000.0,
+    "settled_km2": [
+      264000.0,
+      736000.0
+    ],
+    "settled_by_setting_km2": {
+      "metropolis": [
+        2460.0,
+        2460.0
+      ],
+      "tower_districts": [
+        8950.0,
+        16900.0
+      ],
+      "highland_towns": [
+        115000.0,
+        193000.0
+      ],
+      "scattered": [
+        100000.0,
+        571000.0
+      ],
+      "undersea_and_tubes": [
+        0.0,
+        0.0
+      ]
+    },
+    "blend_fields_km2": [
+      676000.0,
+      1860000.0
+    ],
+    "blend_fields_by_zone_km2": {
+      "rain_belt": [
+        495000.0,
+        1430000.0
+      ],
+      "highlands": [
+        181000.0,
+        437000.0
+      ]
+    },
+    "middle_wet_fields_km2": [
+      0.0,
+      0.0
+    ],
+    "homestead_region_km2": 1390000.0,
+    "with_heritage": {
+      "0.5_kg": {
+        "heritage_pasture_km2": 149000.0,
+        "used_km2": [
+          1090000.0,
+          2740000.0
+        ],
+        "used_share_of_dry_land": [
+          0.0465,
+          0.117
+        ],
+        "wild_share_outside_kept": [
+          0.907,
+          0.765
+        ],
+        "wild_share_of_dry_land": [
+          0.753,
+          0.683
+        ]
+      },
+      "1_kg": {
+        "heritage_pasture_km2": 298000.0,
+        "used_km2": [
+          1240000.0,
+          2890000.0
+        ],
+        "used_share_of_dry_land": [
+          0.0529,
+          0.124
+        ],
+        "wild_share_outside_kept": [
+          0.894,
+          0.753
+        ],
+        "wild_share_of_dry_land": [
+          0.747,
+          0.676
+        ]
+      },
+      "2_kg": {
+        "heritage_pasture_km2": 595000.0,
+        "used_km2": [
+          1540000.0,
+          3190000.0
+        ],
+        "used_share_of_dry_land": [
+          0.0656,
+          0.136
+        ],
+        "wild_share_outside_kept": [
+          0.869,
+          0.727
+        ],
+        "wild_share_of_dry_land": [
+          0.734,
+          0.664
+        ]
+      }
+    },
+    "as_placed_with_power_heavy": {
+      "food_km2": [
+        1690000.0,
+        6970000.0
+      ],
+      "used_km2": [
+        1950000.0,
+        7710000.0
+      ],
+      "wild_share_outside_kept": [
+        0.341,
+        0.833
+      ]
+    }
+  },
+  "gases": {
+    "methane": {
+      "reference_ppm": 1.85,
+      "tg_per_ppm": 1760.0,
+      "wild_sources_tg_yr": {
+        "lakes": [
+          7.8,
+          118.0
+        ],
+        "wetlands": [
+          4.9,
+          100.0
+        ],
+        "total": [
+          12.8,
+          218.0
+        ],
+        "central": 58.9
+      },
+      "low": {
+        "sources_tg_yr": {
+          "wild": 12.8,
+          "farms": 2.4,
+          "heritage_cattle": 0.811,
+          "total": 16.0
+        },
+        "people_share": 0.201,
+        "soil_sink_tg_yr_per_ppm": 4.77,
+        "steady_ppm": 3.36,
+        "hold_at_reference_tg_yr": 7.19,
+        "people_part_tg_yr": 3.21,
+        "open_air_hold": {
+          "atmosphere_share_per_year": 0.00221,
+          "least_power_mw": 458.0
+        }
+      },
+      "central": [
+        {
+          "sources_tg_yr": {
+            "wild": 58.9,
+            "farms": 2.4,
+            "heritage_cattle": 1.71,
+            "total": 63.0
+          },
+          "people_share": 0.0652,
+          "soil_sink_tg_yr_per_ppm": 2.92,
+          "steady_ppm": 21.6,
+          "hold_at_reference_tg_yr": 57.6,
+          "people_part_tg_yr": 4.11,
+          "open_air_hold": {
+            "atmosphere_share_per_year": 0.0177,
+            "least_power_mw": 3670.0
+          }
+        },
+        {
+          "sources_tg_yr": {
+            "wild": 58.9,
+            "farms": 24.0,
+            "heritage_cattle": 1.71,
+            "total": 84.6
+          },
+          "people_share": 0.304,
+          "soil_sink_tg_yr_per_ppm": 2.92,
+          "steady_ppm": 29.0,
+          "hold_at_reference_tg_yr": 79.2,
+          "people_part_tg_yr": 25.7,
+          "open_air_hold": {
+            "atmosphere_share_per_year": 0.0244,
+            "least_power_mw": 5050.0
+          }
+        }
+      ],
+      "high": {
+        "sources_tg_yr": {
+          "wild": 218.0,
+          "farms": 24.0,
+          "heritage_cattle": 3.43,
+          "total": 246.0
+        },
+        "people_share": 0.112,
+        "soil_sink_tg_yr_per_ppm": 1.07,
+        "steady_ppm": 230.0,
+        "hold_at_reference_tg_yr": 244.0,
+        "people_part_tg_yr": 27.4,
+        "open_air_hold": {
+          "atmosphere_share_per_year": 0.075,
+          "least_power_mw": 15500.0
+        }
+      }
+    },
+    "n2o": {
+      "reference_ppm": 0.34,
+      "tg_n_per_ppb": 3.07,
+      "lifetime_years_from_gap_light": [
+        45000.0,
+        3900000.0
+      ],
+      "low": {
+        "sources_tg_n_yr": {
+          "wild": 0.96,
+          "farms": 0.134,
+          "total": 1.09
+        },
+        "people_share": 0.122,
+        "rise_ppb_per_year": 0.356,
+        "ppm_after_1000_years": 0.356,
+        "years_to_reference": 954.0,
+        "hold_tg_n_yr": 1.09,
+        "left_after_complete_denitrification_tg_n_yr": [
+          0.0547,
+          0.547
+        ],
+        "open_air_hold": {
+          "atmosphere_share_per_year": 0.00105,
+          "least_power_mw": 45.0
+        }
+      },
+      "high": {
+        "sources_tg_n_yr": {
+          "wild": 1.3,
+          "farms": 0.38,
+          "total": 1.68
+        },
+        "people_share": 0.226,
+        "rise_ppb_per_year": 0.547,
+        "ppm_after_1000_years": 0.547,
+        "years_to_reference": 621.0,
+        "hold_tg_n_yr": 1.68,
+        "left_after_complete_denitrification_tg_n_yr": [
+          0.084,
+          0.84
+        ],
+        "open_air_hold": {
+          "atmosphere_share_per_year": 0.00161,
+          "least_power_mw": 69.0
+        }
+      },
+      "denitrification_cut": [
+        0.5,
+        0.95
+      ],
+      "heritage_manure": "not counted: the blend prices the cattle's enteric methane only"
+    },
+    "ground_temperature_k": 294.0
+  },
+  "phosphorus": {
+    "by_land_loss": {
+      "low_loss": {
+        "land_loss": 1.47,
+        "carriers_to_wild_land": 0.0211,
+        "kept_by_lakes_share": 0.962,
+        "by_food_end": [
+          {
+            "people_losses": 0.352,
+            "into_waters": 1.82,
+            "to_lakes": 1.75,
+            "dredged_to_farms": 0.352,
+            "dredged_share_of_lake_input": 0.201
+          },
+          {
+            "people_losses": 1.44,
+            "into_waters": 2.91,
+            "to_lakes": 2.8,
+            "dredged_to_farms": 1.44,
+            "dredged_share_of_lake_input": 0.514
+          }
+        ],
+        "resources_corner": {
+          "to_lakes": 2.8,
+          "lake_burial": 1.34,
+          "sea_burial": 0.109,
+          "dredged_share_of_lake_input": 0.514
+        }
+      },
+      "high_loss": {
+        "land_loss": 4.16,
+        "carriers_to_wild_land": 0.0936,
+        "kept_by_lakes_share": 0.957,
+        "by_food_end": [
+          {
+            "people_losses": 0.352,
+            "into_waters": 4.51,
+            "to_lakes": 4.32,
+            "dredged_to_farms": 0.352,
+            "dredged_share_of_lake_input": 0.0815
+          },
+          {
+            "people_losses": 1.44,
+            "into_waters": 5.6,
+            "to_lakes": 5.36,
+            "dredged_to_farms": 1.44,
+            "dredged_share_of_lake_input": 0.269
+          }
+        ],
+        "resources_corner": {
+          "to_lakes": 5.36,
+          "lake_burial": 3.82,
+          "sea_burial": 0.242,
+          "dredged_share_of_lake_input": 0.269
+        }
+      }
+    },
+    "eaten": [
+      3.52,
+      4.8
+    ],
+    "lost": [
+      0.352,
+      1.44
+    ],
+    "in_microbial_biomass": [
+      1.07,
+      3.47
+    ],
+    "sewage_recoverable_power_heavy": [
+      2.11,
+      4.32
+    ],
+    "sky_need_at_one_percent_cover": {
+      "mature_organism_only_low": 0.125,
+      "mature_organism_only_high": 0.827,
+      "mature_earth_forest_low": 0.00703,
+      "mature_earth_forest_high": 0.108,
+      "mature_designed_pools_low": 0.000437,
+      "mature_designed_pools_high": 0.0852,
+      "growing_organism_only_low": 0.13,
+      "growing_organism_only_high": 0.749,
+      "growing_earth_forest_low": 0.0276,
+      "growing_earth_forest_high": 0.267,
+      "growing_designed_pools_low": 0.0219,
+      "growing_designed_pools_high": 0.251
+    },
+    "reef_p_subsidy_g_m2_year": [
+      0.0338,
+      1.63
+    ]
+  },
+  "heights": {
+    "bands": {
+      "low_sky": {
+        "bottom_km": 0.0,
+        "top_km": 10.0,
+        "mass_share": 0.133,
+        "cloud_fraction_ring": {
+          "heights_km": [
+            1.0,
+            5.0,
+            10.0
+          ],
+          "day": [
+            0.0016,
+            0.018,
+            0.034
+          ],
+          "night": [
+            0.0011,
+            0.014,
+            0.007
+          ]
+        }
+      },
+      "storm_layer": {
+        "bottom_km": 10.0,
+        "top_km": 22.0,
+        "mass_share": 0.169,
+        "cloud_fraction_ring": {
+          "heights_km": [
+            10.0,
+            20.0
+          ],
+          "day": [
+            0.034,
+            0.024
+          ],
+          "night": [
+            0.007,
+            0.0097
+          ]
+        }
+      },
+      "cool_air": {
+        "bottom_km": 22.0,
+        "top_km": 35.0,
+        "mass_share": 0.151,
+        "cloud_fraction_ring": {
+          "heights_km": [
+            30.0
+          ],
+          "day": [
+            0.019
+          ],
+          "night": [
+            0.0087
+          ]
+        }
+      },
+      "flight_band": {
+        "bottom_km": 35.0,
+        "top_km": 45.0,
+        "mass_share": 0.0969,
+        "cloud_fraction_ring": {
+          "heights_km": [
+            40.0
+          ],
+          "day": [
+            0.0027
+          ],
+          "night": [
+            0.00011
+          ]
+        }
+      },
+      "high_air": {
+        "bottom_km": 45.0,
+        "top_km": 90.0,
+        "mass_share": 0.284,
+        "cloud_fraction_ring": {
+          "heights_km": [
+            55.0,
+            70.0
+          ],
+          "day": [
+            0.00083,
+            0.00094
+          ],
+          "night": [
+            0.00017,
+            0.00044
+          ]
+        }
+      }
+    },
+    "local_air_traffic": {
+      "wings, gliders and canopies": {
+        "bottom_km": 0.03,
+        "top_km": 0.3,
+        "aloft_per_million_people": 2790.0
+      },
+      "sky boats and air taxis": {
+        "bottom_km": 0.3,
+        "top_km": 1.5,
+        "aloft_per_million_people": 3260.0
+      },
+      "sky ferries": {
+        "bottom_km": 1.5,
+        "top_km": 2.5,
+        "aloft_per_million_people": 9.0
+      }
+    },
+    "sky_towns": {
+      "reference_height_km": 10.0,
+      "towns_of_50000": 696000.0,
+      "spacing_even_km": 5.21,
+      "spacing_busiest_band_km": 4.29,
+      "aerophyte_passes_per_town_day": {
+        "0.001": [
+          1.32,
+          13.2
+        ],
+        "0.01": [
+          13.2,
+          132.0
+        ],
+        "0.02": [
+          26.4,
+          264.0
+        ]
+      },
+      "encounters_per_town_day_mean": {
+        "drifting": [
+          2.13,
+          21.3
+        ],
+        "powered": [
+          1.07,
+          10.7
+        ]
+      }
+    },
+    "storms": {
+      "cloud_top_km": {
+        "median": 22.1,
+        "p90": 37.8,
+        "max": 83.8
+      },
+      "width_km": {
+        "median": 24.0,
+        "p90": 90.2,
+        "max": 264.0
+      },
+      "per_snapshot_on_ring": 6.6,
+      "drift_m_s": {
+        "p10": -3.4,
+        "median": -0.1,
+        "p90": 2.7
+      }
+    },
+    "flight_band_storm_cloud_share": {
+      "land": 0.0069,
+      "water": 0.0062
+    },
+    "cloud_at_30_km": {
+      "day": 0.019,
+      "night": 0.0087
+    },
+    "summit_crown_km": 35.6
+  }
+}

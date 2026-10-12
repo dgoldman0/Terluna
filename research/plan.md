@@ -24,10 +24,12 @@ its own lightning; haze barely touches the light; the regional magnets reach the
 
 ## The domain branches
 
-Since 9 October three domain branches carry their own work until a joint integration: `domain/resources` (where
-every material comes from and how its cycle closes), `domain/provisioning` (how resources and energy become what
-people and the array need) and `domain/ecology` (engineered organisms and their communities, in biosphere/ecology).
-The author's decisions in that work sit in each branch's copy of the register. The key points so far:
+From 9 October three domain branches carried their own work: `domain/resources` (where every material comes from
+and how its cycle closes), `domain/provisioning` (how resources and energy become what people and the array need) and
+`domain/ecology` (engineered organisms and their communities, in biosphere/ecology). On 12 October they were merged in
+a second joint integration ([integration/domains.md](integration/domains.md)), with four refreshes of main's studies,
+and a [synthesis](studies/domain_synthesis/README.md) fitted them together at the author's choices. The author's
+decisions in that work are in the register. The key points so far:
 
 - **The planned climate** (provisioning). The investigated climate is the planned climate: what the shield and the
   array add to the Moon's heat is answered so that the Moon keeps it.
@@ -42,7 +44,7 @@ The author's decisions in that work sit in each branch's copy of the register. T
 - **Nitrogen** (resources). Ordinary icy bodies hold the air's nitrogen bound, and the Kuiper belt's small bodies
   alone hold 80–800 times the need, so the conservation principles hold; the author asked for the extraction to be
   planned in detail, feasible and sustainable and protecting the major bodies.
-- **Opening findings** in each branch's README: the imports' redox account, delivery heat and the film plant's flows
+- **Opening findings** in each domain's README: the imports' redox account, delivery heat and the film plant's flows
   (resources); the night's energy, food land per person and transit at lunar gravity (provisioning); no vitamin D
   from sunlight, methane and N2O building up in an air with no OH, and pollen aloft for weeks (ecology).
 
@@ -191,15 +193,28 @@ ultraviolet window in the shield (ecology). Food comes from a blend of the three
 study sets to the optimum, with heritage meat from the homesteads as a luxury, and the comparison keeps the parks
 (provisioning).
 
-Waiting on the author: the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
+The synthesis of 12 October puts the author's choices together. C′ fed by the blend leaves 66–75% of the dry land
+wild beside the parks' fifth. Heat is the cost of that land: with fusion and close computing, 40–284 TW on the Moon,
+1.1–7.5 W/m², answered by 0.35–3.9% added dimming, about half of it at the high-cost end with power from the array,
+beside the fleet's own glow of 5.7–9.9 W/m². The wild's waters and soils make most of the methane and N2O, so the
+biomes' own budgets decide the air first; phosphorus closes by dredging 8–51% of what the lakes receive; and the
+sky's layers meet in two places, the towns among the reefs and the network among the tallest storms.
+
+Waiting on the author: the synthesis's decisions, and the taxonomy, on hold for later, with its open choices and the
+aerophytes' scientific name.
 
 ## Next work, in order
 
-The four refreshes the author ordered on 12 October come first: the lunar-cycle ecology register rerun on the corrected
-products, developed fines for the living waters, the forests' leaf area brought to the canopy model's range, and plant
-twilight from the solved sky (ecology, question 14).
+The four refreshes the author ordered on 12 October are done ([integration/domains.md](integration/domains.md)). The
+synthesis ranks two items first from the three domains together; they lead this list, and its
+[full order](studies/domain_synthesis/README.md#next-work-in-order) carries the domains' own next steps.
 
-1. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
+1. **The gases' warming in the deep column** (ecology, question 3): the line-by-line column with methane and N2O lines
+   added and swept over the synthesis's ranges, a few hours. It sets the levels the gases may reach, and so how much
+   biology and technology must remove.
+2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band, in
+   minutes.
+3. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
    its light redirected away from the Moon and used where it can be, for computing for instance. The biosphere and
    human work set the requirement's value; the shield's night-side attitude (rolls within the bundle's clearance),
    its films' scatter and switched states are tested against it in the shield's dynamics. Flights of the kept orbits
@@ -209,19 +224,20 @@ twilight from the solved sky (ecology, question 14).
    about 6–10 W/m² over the Moon at a first estimate, which the planned climate leaves no room for, so the author has
    it answered with added solar protection, by redirecting it away from the Moon, or both. The means to size, from
    the protection domain's optical tables with the ring stack's radiative transfer: films that absorb less, a heat
-   mirror on Moon-facing faces (the stack's overlapping layers weaken it), and added dimming.
-2. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
+   mirror on Moon-facing faces (the stack's overlapping layers weaken it), and added dimming. The synthesis's heat
+   ledger is people's part of the same budget.
+4. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
    storm needs CM1's field solver over terrain, which touches the paused climate programme and waits for the author.
-3. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
+5. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
    atmosphere, then the biomes' and cities' emissions in an air with no OH; about an hour of runs once added. The
    author holds N2O and methane by biology, with technologies making up the difference.
-4. **The biomes' nitrogen and the dark night** as biological requirements: biological fixation, and the light that
+6. **The biomes' nitrogen and the dark night** as biological requirements: biological fixation, and the light that
    dark-night organisms tolerate (biosphere, lunar-cycle ecology).
-5. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
-6. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
-7. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
-8. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
+7. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
+8. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
+9. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
+10. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
 
 The climate programme stays paused, and no rented compute is commissioned.
 

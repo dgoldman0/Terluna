@@ -19,7 +19,7 @@ Models live in their domain folders. This folder holds what spans domains:
 | [check.py](check.py), [checks.json](checks.json) | Byte integrity of the pinned imports and reproduction of the historical baseline |
 | [baselines/feasibility](baselines/feasibility/) | The September multi-domain feasibility script and its full report, kept intact |
 | [studies/](studies/) | Cross-domain studies, each with its runner, results and write-up |
-| [integration/](integration/README.md) | The joint integration of 8 October 2026: the five lines merged, the conflicts and repairs, the checks, and Codex's review that planned it |
+| [integration/](integration/README.md) | The joint integrations: of 8 October 2026, the five lines merged, the conflicts and repairs, the checks, and Codex's review that planned it; and [of 12 October 2026](integration/domains.md), the three domains merged with four refreshes of main's studies |
 
 ## Domains
 
@@ -65,6 +65,17 @@ the explorable experience, which reads them as baked products, is in
 | [sky_fleet](studies/sky_fleet/README.md) | The sky-ship study's product, the summit tower study's port and sized form, climate (the design run's air, the cloud-resolving ring's daytime mixed layer and storms) and the engineering flight models: the Open Moon's flyers from canopies, micro gliders and pedalled wings to sky boats, ferries, regional and long-haul ships, freighters and high platforms; how many the summit metropolis and its port need; how they share the air by height; the long-haul class for the crown, drawn to scale in visualization/sky-fleet | First-order sizing; reference flyers, people's power and cities' travel from published sources; the metropolis's travel a planning case; no flyer designed; the crown's berths a first arrangement |
 | [infrastructure_review](studies/infrastructure_review/README.md) | The four studies above and the metropolis brief, read against main's corrected climate, waves, tides and optical studies, the atmospheric electricity branch's storms, the sea-appearance branch's twilight and the solar-shield branch's work off the Moon: what holds, what changes, storm protection, the night, the coasts, infrastructure off the Moon and the open questions; the branch's closing work | A review of committed results on each branch, the studies rerun on a temporary copy with main's corrected inputs, the corrected run's winds exported, and light arithmetic |
 | [joint_synthesis](studies/joint_synthesis/README.md) | Every line of work after the joint integration: each line's assumptions about the others against their final answers, and joint calculations of the fleet's light in the night, the air under the shield with its lightning, lightning over the Moon and its nitrogen, the port's crown in the storms, haze, the ledgers with their cycle times, the regional magnets on the map and seven places through a lunar day | Built from the merged products, each calculation with its stated assumptions; the decisions it lists are the author's |
+| [aerial_ecology](studies/aerial_ecology/README.md) | Ecology, resources and provisioning: aeroplankton and large photosynthetic aerial organisms together, their consumers, food harvest and a functioning phosphorus cycle | A requirements evaluation; no safe yield or species count assumed |
+| [uv_biology](studies/uv_biology/README.md) | Protection, atmosphere and biology: restricted ultraviolet against vitamin D, plants and animals, with local ultraviolet provision | A fixed-column comparison; no added ultraviolet transmission adopted |
+| [aerophytes](studies/aerophytes/README.md) | Ecology, the design climate's winds and storms, the air's gases and the engineering of membranes and structure: the giant aerophytes' size limits, ages, water, storms, sailing and photoperiod, and the sky reefs' living sails | Screen values and conditional requirements; no organism size or route adopted |
+| [sky_ecology](studies/sky_ecology/README.md) | The aerophyte product, the design winds and resources' phosphorus: the sky's food web, tenants, guards and symbioses, and phosphorus aloft | Accounting on design guesses; no community or phosphorus cycle simulated |
+| [ways_of_living](studies/ways_of_living/README.md) | Provisioning, habitation, climate, illumination and geography: eighteen ways of living on and around the Moon, each placed on the atlas with its physical situation and its costs per billion residents | Costs by setting; the distribution is the author's choice |
+| [daily_life](studies/daily_life/README.md) | The ways of living through the Moon's 708.7-hour cycle: homes, movement, work, gathering, care and cultural life, from the products | The physical situation computed; how people organize it is open for the human paper |
+| [food_systems](studies/food_systems/README.md) | Provisioning, ecology's diets and yields, resources' phosphorus, climate, geography and the heat ledger: eight food systems per billion residents, their fit to the light cycle, seven mixes for 4–8 billion, and the author's blend with heritage meat | Screens on published measurements; the blend's fields not yet placed band by band |
+| [land_cities](studies/land_cities/README.md) | Geography (the atlas and the high ground), climate (rain and the water table) and engineering: the lava tubes and the highland cities for the ground's people | Mapped pits and rilles; the tubes' interiors unsurveyed |
+| [distributions](studies/distributions/README.md) | Every study of people: four distributions of 25–30 billion across Earth, the Moon, the array and the colonies, the author's C′, the wild share, traffic, phosphorus and synergies | Placement corners on design guesses; C′ placed with the power-heavy mix |
+| [living_light](studies/living_light/README.md) | Ecology's glowing organisms and night stores, illumination's twilight and Earthlight, and people at night: what living light gives, what people need outdoors at night, and the sky kept dark | Screen values; no glowing organism built |
+| [domain_synthesis](studies/domain_synthesis/README.md) | Resources, ecology and provisioning after the joint integration of 12 October: heat, land, methane and N2O, phosphorus and the sky's layers at the author's choices | Arithmetic on screen products; the gases' warming in the deep column comes next |
 
 The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)
 from a separate lineage (57 tests, 90-m spacing, 20-m/s reservoir flow), whose
@@ -91,6 +102,15 @@ OPENBLAS_NUM_THREADS=1 python -m research.studies.port_fire.run               # 
 OPENBLAS_NUM_THREADS=1 python -m research.studies.sky_ships.run               # results in studies/sky_ships/results
 OPENBLAS_NUM_THREADS=1 python -m research.studies.sky_fleet.run               # results in studies/sky_fleet/results
 python -m research.studies.joint_synthesis.night_sky                          # and the synthesis's other steps; its README lists them
+python -m research.studies.aerophytes.run                                    # results in studies/aerophytes/results
+python -m research.studies.sky_ecology.run --output research/studies/sky_ecology/results/sky_ecology.json
+python -m research.studies.ways_of_living.run                                # results in studies/ways_of_living/results
+python -m research.studies.daily_life.run                                    # results in studies/daily_life/results
+python -m research.studies.food_systems.run                                  # then food_systems.blend for the blend
+python -m research.studies.land_cities.run                                   # results in studies/land_cities/results
+python -m research.studies.distributions.run                                 # results in studies/distributions/results
+python -m research.studies.living_light.run --output research/studies/living_light/results/living_light.json
+python -m research.studies.domain_synthesis.ledgers                        # results in studies/domain_synthesis/results
 ```
 
 For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`
