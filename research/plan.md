@@ -157,10 +157,17 @@ among the middle latitudes' farms and the rest of that belt's people moved to th
 lift and wild land. Next: C′ as the planned distribution, starting with the high-latitude towns' water, the middle
 latitudes' farms and homesteads, and the sky towns' heights and traffic rules.
 
-Waiting on the author:
-- the aerophytes' scientific name, from six cloud-root candidates, and six choices about the taxonomic system;
-- how much of the Moon is kept wild and dark (the studies carry 30% and half);
-- the distribution of people, step six, from the costs above.
+The author then set the wild share: at least half of the land and of the dark sky wild is preferred, and it can come
+down to 30% wild with another 20% hybrid, land that is fairly wild, more heavily managed and carries people's daily
+life at low density. The food and distributions studies apply both (provisioning). Under the compromise farms and
+towns keep to the same half; the studies put grazing and the homesteads' homes on the hybrid fifth, and C′ fits every
+case with the poleward and twilit placements at the kept half's costs. With half wild it fits once the homesteads'
+homes count within their fields. At the author's request the earlier reading, half wild with another 20% hybrid, runs
+beside them for comparison, and at the high-cost end it draws 3,250 km³ a year from the seas to water its fields.
+What the hybrid land holds beyond those homes and grazing is next for C′. The author tied the taxonomy's open choices
+to the design path the aerophytes take and put the taxonomy on hold for later (ecology).
+
+Waiting on the author: the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 
