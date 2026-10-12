@@ -166,7 +166,12 @@ parks hold 4.68 million km², farms and towns keep to the same half as under hal
 the poleward and twilit placements once the homesteads' homes count within their fields, at the half's costs. At the
 author's request the earlier reading, half wild with another 20% hybrid, runs beside them for comparison with the
 same parks, and at the high-cost end it draws 3,250 km³ a year from the seas to water its fields. The parks' water,
-automation energy and night light remain to be sized. The author also set that the Moon's organisms are told apart
+automation energy and night light remain to be sized; the author wants the parks built around the lower water, with
+reservoirs and water features in the fog desert, where evaporation is slower, and plants suited to dry conditions,
+in the highlands above all. The author adopted a design for richness within the dry land: water placed sparingly
+where it shows, mirror pools in the fog desert and stone rivers in the highlands; dry-adapted planting with silver
+foliage and regional palettes; and the lunar cycle as the show, each garden a monthly performance of dawn and dusk
+blooms and living light (provisioning, habitation). The author also set that the Moon's organisms are told apart
 by regional variation across a connected world, the parks standing apart by their manicuring, and tied the
 taxonomy's open choices to the design path the aerophytes take, putting the taxonomy on hold for later (ecology).
 
