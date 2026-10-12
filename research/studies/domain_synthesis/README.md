@@ -56,8 +56,9 @@ At 8 billion on the Moon, pairs from the low-cost to the high-cost end:
 
 The blend buys its small fields with energy: C′'s heat with fusion rises 1.7–2.3 times over the power-heavy mix's,
 and food becomes 48–63% of it, the largest part at both ends. Power from the array leaves its conversion losses in
-space, so the same Moon gives 30–145 TW with close computing, about half the high-cost end's heat; with the array's
-power the residents' 11.0 TW stay just above food's 10.2 TW at the low-cost end. The planned climate keeps the
+space, so the same Moon gives 30–145 TW with close computing, about half the high-cost end's heat, and 32.5–157 TW
+once the deep air's absorption is counted (the power screen, below); with the array's power the residents' 11.0 TW
+stay just above food's 10.2 TW at the low-cost end. The planned climate keeps the
 investigated design case near 295 K, so every terawatt is answered: people's heat at 0.0087–0.014% of the sunlight a
 terawatt, provisioning's factor, and the fleet's glow as provisioning gives it, its W/m² over the design sunlight's
 293 W/m². The glow is the larger load. People and the fleet together would need 2.3–7.3% of the sunlight taken away
@@ -68,45 +69,54 @@ item 5). The parks' automation and amenities, which the register leaves to be si
 ## Power from the array: the chosen distribution
 
 The author chose power from the array for food and the sky towns on the design below (register, 12 October), which
-sizes the whole Moon's intake. Everything received ends as heat on the Moon, so the intake is the heat ledger's array
-parts (*screen*, [ledgers](results/ledgers.json), `array_power`). A beam leaves 1.38 W of heat on the Moon for each watt
-it delivers, its receiver's losses and its spill, where a fusion plant leaves 2.0–3.0 W; the transmitters' losses stay
-in space. The supply is ample: the light the planned 5% dimmer already takes would give 117–176 TW of electricity at
-20–30% conversion ([the shield's ledger](../solar_shield_array/results/integrated_ledger.json)), against the Moon's
-30–145 TW with close computing, and each further 1% of dimming taken to answer heat gives another 23–35 TW.
+sizes the whole Moon's intake; the [power screen](../../../provisioning/power.md) sizes it in turn. Everything received
+ends as heat on the Moon, so the intake is the heat ledger's array parts (*screen*, [ledgers](results/ledgers.json),
+`array_power`). Counting the deep air's absorption, a beam leaves 1.47–1.49 W of heat on the Moon for each watt it
+delivers, its receiver's losses, its spill and the air's share, where a fusion plant leaves 2.0–3.0 W; the
+transmitters' losses stay in space. The ledgers take 1.38 W from Earth service, so with close computing the array's
+heat is 32.5–33.0 TW and 155–157 TW against their 30–145 TW, and its dimming 0.28–2.2%. The intake takes 47–224 TW of
+electricity at the tiles. The light the planned 5% dimmer already takes gives 117–176 TW at 20–30% conversion
+([the shield's ledger](../solar_shield_array/results/integrated_ledger.json)), which covers the low-cost end; at the
+high-cost end collectors also take light the Moon never receives, of the 851 PW the night half intercepts, and each
+further 1% of dimming taken to answer heat gives another 23–35 TW.
 - **The sky towns take theirs on their own crowns.** Their control, hydrogen remade, trips and the aloft half of the
   residents come to 8.3–45 TW, 12–65 MW a town. The 696,000 towns' crowns, a kilometre across, make 547,000 km², so
-  the towns take it at 15–82 W/m², without lines or night storage. From the ring, 18,300–19,900 km away, a transmitter
-  5.1–5.6 km on a side puts 95% of a 2.45 GHz beam on one crown (2.2–2.4 km at 5.8 GHz), part of one 10 km tile.
+  the towns take it at 15–82 W/m², without lines or night storage. From the ring, 17,600–20,500 km away, a transmitter
+  5.0–5.8 km on a side puts 95% of a 2.45 GHz beam on one crown; a whole tile's aperture holds it with almost nothing
+  spilled.
 - **The ground takes the rest at its loads.** Food, the ground's half of the residents and close computing come to
-  22–100 TW, received at the power-made food plants, the lamp-lit farms and the cities' industry. A tile's aperture
-  focuses to 510–560 m at 2.45 GHz, so beams shaped flat light a receiver a few kilometres across evenly at the 1978
-  reference rectenna's 230 W/m² peak: 96,000–436,000 km², 0.4–1.9% of the dry land, closed ground with planting
-  beneath the mesh. The 1978 design's tapered beam, averaging 49 W/m², would need 0.45–2.05 million km². Meshes strung
-  over the blend's fields, at 33–54 W/m² with the crops in their shade, were the alternative set aside.
-- **Several beams for every receiver**, from tiles in different parts of the sky, for the uptime the author requires.
-  A grid joins the ground's receivers, backs each one up and serves the polar caps, since the ring stands below the
-  horizon within about 5° of its plane's poles.
+  22–100 TW, received at the power-made food plants, the lamp-lit farms and the cities' industry, on patches about
+  3 km across filled flat at the 1978 reference rectenna's 230 W/m² peak: 96,000–436,000 km², 0.4–1.9% of the dry land
+  but 36–59% of the land C′ settles, and 45–76% once the ground round each patch is closed to the public level. The
+  receivers' land is therefore a large part of the settled land; the food plants' and lamp farms' roofs, the lakes and
+  closed slopes could carry it, with planting beneath the mesh. Meshes strung over the blend's fields, at 33–54 W/m²
+  with the crops in their shade, were the alternative set aside.
+- **Several beams for every receiver**, three from tiles in different parts of the ring, each rated for half the
+  load. A tile stays above 30° for about 20 hours, so a receiver hands a beam over every 2–7 hours, and 3,500–25,000
+  whole-tile transmitters, 0.013–0.09% of the fleet, carry the 2.1–2.2 million beams. A grid joins the ground's
+  receivers and backs each one up. No polar cap is blind: the stack's rings tilt up to 24°, so tiles stand above every
+  horizon, and poleward of 60° the beams come from 20–45° up, losing less than lines run from 60°.
 - **Exposure.** All of these intensities exceed the 10 W/m² that ICNIRP (2020) sets for the public. The receivers are
   closed ground and the towns' crowns closed decks, with people beneath the rectenna, which stops the beam, and the
   columns above receivers are closed to flyers; the towns' columns cover 1.4% of the Moon. The beams are
   retrodirective, the 1978 reference's safety design: they focus only on a pilot signal sent up from the receiver and
   spread out when it is lost.
-- **Sky reefs.** The towns' beams cross the reefs' layer at 10–20 km. A reef drifting into a column would cut the
-  town's power and take the beam into its wet tissue, 15–82 W/m² there and 230 W/m² over a ground receiver. The beam
-  moves to another part of the ring before the reef arrives, 10–20° of offset for reefs a kilometre or two across
-  5–10 km above a town, so beams give way to reefs as towns do. What a reef takes when a switch comes late is still
-  to be checked.
-- **Weather and the deep air.** At 2.45 GHz rain costs 0.1–0.2 dB through 10 km at 50–100 mm/h; at 5.8 GHz 10 km at
-  50 mm/h takes about half the power (ITU-R P.838-3), and the towns fly in the storm layer, so towns and ground both
-  take 2.45 GHz. The dense, tall column absorbs an estimated 5–8% of a beam on its way down (*estimate*: Earth's
-  oxygen absorption scaled by the pressure squared and the scale height), which raises the array's heat by about 7%,
-  still about half of fusion's at the high-cost end.
+- **Sky reefs.** The beams cross the reefs' layer at 10–20 km, and at 1% cover a beam's column meets a reef 0.08–4.6
+  times a day, so receivers move one of their beams 0.2–14 times a day, make-before-break, to tiles whose columns miss
+  the reefs; clearing a reef 5–10 km above a town takes 10–31° of offset. Beams give way to reefs as towns do. A late
+  switch would put 5–77 W/m² on the reef, 1–18% of its overhead sun, in a band wet tissue absorbs.
+- **Weather and the deep air.** Raindrops fall 2.9 times slower on the Moon, so each millimetre an hour holds 2.9
+  times Earth's water: through 10 km at 50–100 mm/h a 2.45 GHz beam loses 0.26–0.54 dB, and at 50 mm/h a 5.8 GHz beam
+  loses 96% (ITU-R P.838-3). Towns and ground both take 2.45 GHz. The deep air takes 5.9% of a 2.45 GHz beam
+  overhead and 6.3–7.8% of the beams as used (ITU-R P.676-13 on the atmosphere domain's column).
+- **A fault across the whole ring**, the design's one common point of failure, leaves 2.5–7.5 TW of critical loads. A
+  week of them, 425–1,270 TWh, comes from the towns' own lifting hydrogen (0.015–0.06% of it) and the ground's stored
+  hydrogen, 21–58 Mt, or water through Korolev's 3.74 km head, 258–720 km³.
 - **The night stays dark**: microwaves make no light.
 
-The power screen (provisioning, question 3) firms up the sizing: the receivers and beams per tile, the grid's lines
-and losses, the air's absorption computed, and the reserves through the lunar cycle, storms and reef crossings, with
-days of storage for critical loads against a fault across the whole ring, the design's one common point of failure.
+The power screen's next work is a beam-assignment model through the lunar cycle, the transmitting tiles' design, the
+receivers' land with the cities' look, what a late switch does to a reef, and the causes and restart time of a fault
+across the ring.
 
 ## Land
 
@@ -249,9 +259,9 @@ Machine time is for this laptop, one core, alongside the author's other work.
    with their carbonates, the sky's biomass, the lakes' and seas' dissolved carbon, the sediments and people's stocks,
    with weathering's calcium and magnesium as the mineral strand, through the first thousands of years. Seconds a
    run. It sizes the managed return that holds 400 ppm, the build's carbon import and the oxygen burial leaves.
-4. **The power screen** (provisioning, question 3): the chosen design's receivers and beams per tile, the grid, the
-   deep air's absorption at 2.45 GHz, and reserves through the lunar cycle, storms, reef crossings and a fault across
-   the ring. Minutes to an hour.
+4. **The power screen** (provisioning, question 3): done on 12 October ([power](../../../provisioning/power.md)), the
+   figures in the power section above. Carrying its heat of 1.47–1.49 W a watt into the ledgers needs the deep air's
+   absorption upstream of provisioning's population screen, which the power screen itself reads.
 5. **The fleet's night and its glow** (plan, item 5; the planned branch research/array-industry): the night-side
    attitude, films and a heat mirror sized against the glow, with this heat ledger as the people's part of the same
    budget. About an hour of CPU for each set of kept orbits.

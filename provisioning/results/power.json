@@ -1,0 +1,4031 @@
+{
+ "schema": "terluna.provisioning.power/1",
+ "producer": {
+  "domain": "provisioning",
+  "files": {
+   "provisioning/power.py": "a511e7ec84587dc5ab0dd42350984dcd31a99abda9d15b5940bc35c88dbad015",
+   "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+  },
+  "inputs": {
+   "research/studies/domain_synthesis/results/ledgers.json": "3f4db0b973e5f4b38a9b5e3b934b49822c8c3a6d8e232bbc990b7213fcdd2b0b",
+   "provisioning/results/population.json": "d562cdabe6eee18fe40cfc16f6a65177ec16f7dd1fd8584a4dad80d271b85895",
+   "research/studies/solar_shield_array/results/electromagnetic.json": "a8184c148766522b0b0ec45268e40b381bcdd5b0481aa0de282d785f58af20b5",
+   "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa384b70a0cffda0ed8f62ec5737eea53e264e7f4e9acab4d6",
+   "research/studies/solar_shield_array/results/integrated_ledger.json": "68ad477ab2cc80c4dbe850a4fda9f6d9595094f323bbf07b3b7be8c8b117cc7a",
+   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9fd77dacafec9789a7c502731cca414acdb3352be0d2224bd",
+   "research/studies/distributions/results/distributions.json": "772447120d8542618f8e31172e2a6406f63d58ab72c639687b912758dd282ca2",
+   "research/studies/food_systems/results/food_blend.json": "14d9bd51eb21e437c1929a3195871b46f461bf898aa0d539512da9085caf2aed",
+   "research/studies/ways_of_living/results/ways_of_living.json": "b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a",
+   "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327a13d9a01db7bb711fb5177a5d2b0227c7085826ad8a85a65",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f3a09b17dc088037560bb5b7f31f4342ae16239d4bf22013a",
+   "research/studies/sky_ecology/results/sky_ecology.json": "2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3",
+   "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539f56257acad8d1727de612c7a477178f61e228abc906668bb",
+   "biosphere/ecology/results/people.json": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
+   "provisioning/results/first_screen.json": "f268f5b8800d29abd27b07ce66b58d4a8162c4d4b1cac6266c6fc93d1bd834f5",
+   "atmosphere/radiative_convective/results/inverse_climate.csv": "7cfea5fb1adf9ff53fe93c71540a97d1b23d27d5fdd8d51edc5a786444b62322",
+   "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32712fd94a00ea03f1b212a39bed21b7a54b3a4a61707a72c8",
+   "climate/results/crm/ring_ring_45n_lsw.json": "608921535125ea8ce92a83f49c550f06d1118a5f389b6426d7dc9925d98e62cc",
+   "climate/results/crm/ring_ring_45s_lsw.json": "fe6782e258b2da561ddfd1f01f5a47b8ad8605f9d02f8b2897613f9f6b918d38",
+   "climate/results/crm/ring_ring_80n_lsw.json": "135b346ce4def45f7debfd52be7c992c507bb41821204406438c333aa168eedf",
+   "climate/results/crm/ring_ring_80s_lsw.json": "ec69fbfb38c74c73830a5f5b204f223e762bf5e4818c485081a5c32d5e445f99",
+   "provisioning/power_sources.json": "46aaa5e45e4067aa1934c63228ebc7049b8c7b1aab18b8585f0f52873837e947"
+  },
+  "constants": {
+   "AVOGADRO": 6.02214076e+23,
+   "BOLTZMANN": 1.380649e-23,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "GAS_CONSTANT": 8.31446261815324,
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_EQUATOR_TO_ECLIPTIC_DEG": 1.5424,
+   "MOON_GM": 4902800118000.0,
+   "MOON_ORBIT_INCLINATION_DEG": 5.145,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "SOLAR_CONSTANT": 1361.0,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "SYNODIC_MONTH_DAYS": 29.53059
+  }
+ },
+ "evidence": "Screen-level arithmetic and one-dimensional radiative transfer on committed products. The gaseous absorption is ITU-R P.676-13 Annex 1 line by line, reproduced to 1e-12 against ITU-R Study Group 3's validation examples on Earth, then integrated through the atmosphere domain's prescribed moon_1.2atm column at 295 K with oxygen at Earth's partial pressure: a computed result for a prescribed clear-sky column, on line parameters fitted to Earth's air. Rain uses ITU-R P.838-3 with Earth's drop spectra, its rate scaled by the Moon's slower fall (an estimate). The ring's view is geometry on the held matched stack, circular rings at their layout radii and tilts. Receivers, beams, grid, faults and storage are sized from the products and labelled design guesses; nothing is simulated through time beyond sampling the lunar cycle and the libration of the ring plane.",
+ "reading_rule": "Pairs are [low-cost end, high-cost end] of C' with the food blend as the domain synthesis gives them, unless labelled. Intake is the beam power arriving at receivers and crowns, which the synthesis counts as heat on the Moon; delivered power is what reaches the loads. Absorption in dB and as the share of the beam lost; elevations in degrees; heights in km above the column's surface (sea level) unless named; latitudes are lunar, with the north and south alike. Tile counts are of the fleet's 28 million tiles; times in hours unless named; storage in TWh of electricity delivered.",
+ "assumptions": {
+  "design_guesses": {
+   "usable_elevation_deg": {
+    "value": 30.0,
+    "basis": "beams planned from 30 degrees up, where the air takes about 11% at sea level against 6% overhead"
+   },
+   "beams_per_receiver": {
+    "value": 3,
+    "rating_share": 0.5,
+    "basis": "three beams from different parts of the ring, each rated for half the load, switched make-before-break"
+   },
+   "receiver_side_km": {
+    "value": 3.0,
+    "basis": "a flat-filled patch a few kilometres across, as the domain synthesis sizes the ground receivers"
+   },
+   "storage_days": {
+    "value": 7.0,
+    "basis": "the critical loads carried through a fault across the whole ring for a week, after the 7-day fuel that Earth keeps for safety-related emergency power (US NRC Regulatory Guide 1.137)"
+   },
+   "tile_utilisation": {
+    "value": 0.5,
+    "basis": "half a transmitting tile's rating in use on average"
+   },
+   "small_collector_share": {
+    "value": 0.1,
+    "basis": "the variant with collectors over a tenth of each transmitting tile"
+   },
+   "transmitter": {
+    "value": "a sandwich of collector and phased array over a tile's clear face, sun-pointing collectors",
+    "basis": "each beam may use the whole aperture"
+   },
+   "tile_faults_per_year": {
+    "value": 0.1,
+    "basis": "one whole-tile outage a decade per tile"
+   },
+   "reassign_s": {
+    "value": 600.0
+   },
+   "fuel_cell": {
+    "value": 0.5,
+    "basis": "electricity per unit of hydrogen's lower heating value"
+   },
+   "battery_kwh_kg": {
+    "value": [
+     0.15,
+     0.3
+    ],
+    "basis": "pack specific energy"
+   },
+   "bridge_hours": {
+    "value": 1.0,
+    "basis": "batteries carry the critical loads while hydrogen plant starts"
+   },
+   "critical_shares": {
+    "value": {
+     "residents": 0.1,
+     "sky_control": 0.2,
+     "water": 1.0,
+     "cultures": 0.1,
+     "lamps": 0.05,
+     "close_computing": 0.25,
+     "hydrogen_remade": 0.0,
+     "trips": 0.0
+    },
+    "basis": "residents: ventilation, water and sewage pumps, refrigeration of food and medicine, safety lighting, communications and health care; sky control: towns drift with the wind and steer only to keep clear; water: all; cultures: the power-made food's living cultures kept alive at a tenth of their feed; lamps: the lamp-lit farms dark, with air and water kept moving; close computing: the millisecond control kept on the Moon; the towns' hydrogen remade and trips shed"
+   },
+   "dry_highland_height_km": {
+    "value": 4.0,
+    "basis": "the dry highland cities on ground 4 km or more above the sea, at the low end of it"
+   },
+   "ground_loads_follow_people": {
+    "value": true,
+    "basis": "food plants, lamp farms and close computing at the cities"
+   },
+   "composition": {
+    "value": "the middle of each C' pair, with the ground's 4 billion"
+   },
+   "reef_above_town_km": {
+    "value": [
+     5.0,
+     10.0
+    ],
+    "basis": "the synthesis's reefs 5-10 km above a town"
+   }
+  },
+  "estimates": {
+   "lunar_fall": {
+    "value": 2.942,
+    "basis": "attenuation with the water held, Earth's drop spectra"
+   },
+   "rain_cell": {
+    "value": "uniform at the storm's peak surface rate from the ground to its top or the 0 C level, as wide as the storm"
+   },
+   "circular_rings": {
+    "value": "the layout's forced eccentricities of 0.11-0.16 are left out; distances swing by that share about each orbit"
+   }
+  },
+  "published": {
+   "hvdc": {
+    "per_1000_km": [
+     0.02,
+     0.035
+    ],
+    "per_converter": 0.01,
+    "source": "US EIA 2018"
+   },
+   "public_limit_w_m2": {
+    "value": 10.0,
+    "source": "ICNIRP 2020"
+   },
+   "emergency_fuel_days": {
+    "value": 7.0,
+    "source": "US NRC Regulatory Guide 1.137"
+   },
+   "hydrogen_round_trip": {
+    "value": 0.4,
+    "source": "Headley & Schoenung 2020"
+   },
+   "hydrogen_lhv_kwh_kg": {
+    "value": 33.3
+   }
+  }
+ },
+ "absorption": {
+  "earth_checks": {
+   "specific_attenuation": {
+    "1": {
+     "itu_gamma_o": 0.005389,
+     "model_gamma_o": 0.005389,
+     "itu_gamma_w": 5.09e-05,
+     "model_gamma_w": 5.09e-05
+    },
+    "2": {
+     "itu_gamma_o": 0.006716,
+     "model_gamma_o": 0.006716,
+     "itu_gamma_w": 0.0002044,
+     "model_gamma_w": 0.0002044
+    },
+    "3": {
+     "itu_gamma_o": 0.007076,
+     "model_gamma_o": 0.007076,
+     "itu_gamma_w": 0.0004628,
+     "model_gamma_w": 0.0004628
+    },
+    "5": {
+     "itu_gamma_o": 0.0074,
+     "model_gamma_o": 0.0074,
+     "itu_gamma_w": 0.001313,
+     "model_gamma_w": 0.001313
+    },
+    "6": {
+     "itu_gamma_o": 0.007537,
+     "model_gamma_o": 0.007537,
+     "itu_gamma_w": 0.001922,
+     "model_gamma_w": 0.001922
+    },
+    "10": {
+     "itu_gamma_o": 0.008224,
+     "model_gamma_o": 0.008224,
+     "itu_gamma_w": 0.005974,
+     "model_gamma_w": 0.005974
+    },
+    "12": {
+     "itu_gamma_o": 0.008698,
+     "model_gamma_o": 0.008698,
+     "itu_gamma_w": 0.009535,
+     "model_gamma_w": 0.009535
+    },
+    "20": {
+     "itu_gamma_o": 0.01188,
+     "model_gamma_o": 0.01188,
+     "itu_gamma_w": 0.09705,
+     "model_gamma_w": 0.09705
+    },
+    "22": {
+     "itu_gamma_o": 0.01313,
+     "model_gamma_o": 0.01313,
+     "itu_gamma_w": 0.1742,
+     "model_gamma_w": 0.1742
+    },
+    "60": {
+     "itu_gamma_o": 14.62,
+     "model_gamma_o": 14.62,
+     "itu_gamma_w": 0.1548,
+     "model_gamma_w": 0.1548
+    },
+    "90": {
+     "itu_gamma_o": 0.03887,
+     "model_gamma_o": 0.03887,
+     "itu_gamma_w": 0.342,
+     "model_gamma_w": 0.342
+    },
+    "118": {
+     "itu_gamma_o": 1.135,
+     "model_gamma_o": 1.135,
+     "itu_gamma_w": 0.6059,
+     "model_gamma_w": 0.6059
+    },
+    "130": {
+     "itu_gamma_o": 0.04151,
+     "model_gamma_o": 0.04151,
+     "itu_gamma_w": 0.7518,
+     "model_gamma_w": 0.7518
+    },
+    "183": {
+     "itu_gamma_o": 0.01273,
+     "model_gamma_o": 0.01273,
+     "itu_gamma_w": 27.67,
+     "model_gamma_w": 27.67
+    },
+    "350": {
+     "itu_gamma_o": 0.03681,
+     "model_gamma_o": 0.03681,
+     "itu_gamma_w": 10.12,
+     "model_gamma_w": 10.12
+    }
+   },
+   "worst_relative_error": 4.219e-15,
+   "slant": {
+    "f_ghz": 28.0,
+    "elevation_deg": 30.0,
+    "layers": 922,
+    "attenuation_db": 0.4708,
+    "model_db": 0.4708,
+    "relative_error": 1.362e-12
+   },
+   "earth_zenith_p835_global": {
+    "2.45_ghz": {
+     "dry_db": 0.03529,
+     "wet_db": 0.0005174,
+     "total_db": 0.03581,
+     "share_lost": 0.008211
+    },
+    "5.8_ghz": {
+     "dry_db": 0.03742,
+     "wet_db": 0.003009,
+     "total_db": 0.04043,
+     "share_lost": 0.009267
+    }
+   }
+  },
+  "column_check": {
+   "290K": {
+    "product": {
+     "water_column_kg_m2": 136.4,
+     "tropopause_height_km": 75.1,
+     "surface_pressure_pa": 123100.0
+    },
+    "here": {
+     "water_column_kg_m2": 136.4,
+     "tropopause_height_km": 75.1,
+     "surface_pressure_pa": 123100.0
+    }
+   },
+   "300K": {
+    "product": {
+     "water_column_kg_m2": 305.8,
+     "tropopause_height_km": 96.17,
+     "surface_pressure_pa": 124300.0
+    },
+    "here": {
+     "water_column_kg_m2": 305.8,
+     "tropopause_height_km": 96.17,
+     "surface_pressure_pa": 124300.0
+    }
+   }
+  },
+  "air_check": [
+   {
+    "height_km": 0.0,
+    "volume_pressure_atm": 1.181,
+    "column_pressure_atm": 1.22,
+    "volume_temperature_c": 20.7,
+    "column_temperature_c": 21.85
+   },
+   {
+    "height_km": 10.0,
+    "volume_pressure_atm": 0.988,
+    "column_pressure_atm": 1.007,
+    "volume_temperature_c": 14.2,
+    "column_temperature_c": 14.21
+   },
+   {
+    "height_km": 20.0,
+    "volume_pressure_atm": 0.813,
+    "column_pressure_atm": 0.8291,
+    "volume_temperature_c": 5.1,
+    "column_temperature_c": 5.921
+   },
+   {
+    "height_km": 40.0,
+    "volume_pressure_atm": 0.542,
+    "column_pressure_atm": 0.5542,
+    "volume_temperature_c": -13.9,
+    "column_temperature_c": -12.61
+   }
+  ],
+  "model": "ITU-R P.676-13 Annex 1, equations 1-9 (line by line) and 13-19b (slant paths), refractivity by ITU-R P.453; layers 10 cm thick at the receiver, thickening by e^(1/100), to the column top at 1 Pa",
+  "composition": {
+   "o2_mole_fraction": 0.1746,
+   "o2_strength_scale": 0.8333,
+   "n2_pressure_induced_scale": 1.09,
+   "rule": "oxygen line strengths and the Debye term scaled by the oxygen mole fraction over Earth's 0.2095; widths kept as P.676 gives them for air at the total pressure"
+  },
+  "column": {
+   "scenario": "moon_1.2atm",
+   "surface_temperature_k": 295.0,
+   "surface_pressure_pa": 123600.0,
+   "water_column_kg_m2": 205.7,
+   "tropopause_km": 84.65,
+   "freezing_level_km": 26.61,
+   "top_km": 576.7,
+   "air_column_t_m2": 80.37
+  },
+  "receiver_heights_km": {
+   "lowland": 0.0,
+   "highland": 4.0,
+   "towns": 10.0,
+   "summit": 11.59
+  },
+  "by_elevation": {
+   "2.45_ghz": {
+    "lowland": {
+     "90_deg": {
+      "db": 0.2656,
+      "dry_db": 0.2572,
+      "share_lost": 0.05932
+     },
+     "60_deg": {
+      "db": 0.305,
+      "dry_db": 0.2953,
+      "share_lost": 0.06782
+     },
+     "45_deg": {
+      "db": 0.3697,
+      "dry_db": 0.3578,
+      "share_lost": 0.0816
+     },
+     "30_deg": {
+      "db": 0.5079,
+      "dry_db": 0.4914,
+      "share_lost": 0.1104
+     },
+     "20_deg": {
+      "db": 0.7023,
+      "dry_db": 0.6787,
+      "share_lost": 0.1493
+     },
+     "10_deg": {
+      "db": 1.139,
+      "dry_db": 1.097,
+      "share_lost": 0.2307
+     },
+     "5_deg": {
+      "db": 1.602,
+      "dry_db": 1.536,
+      "share_lost": 0.3085
+     }
+    },
+    "highland": {
+     "90_deg": {
+      "db": 0.2341,
+      "dry_db": 0.2282,
+      "share_lost": 0.05247
+     },
+     "60_deg": {
+      "db": 0.2688,
+      "dry_db": 0.262,
+      "share_lost": 0.06002
+     },
+     "45_deg": {
+      "db": 0.3258,
+      "dry_db": 0.3176,
+      "share_lost": 0.07228
+     },
+     "30_deg": {
+      "db": 0.4478,
+      "dry_db": 0.4362,
+      "share_lost": 0.09797
+     },
+     "20_deg": {
+      "db": 0.6193,
+      "dry_db": 0.6028,
+      "share_lost": 0.1329
+     },
+     "10_deg": {
+      "db": 1.005,
+      "dry_db": 0.9751,
+      "share_lost": 0.2065
+     },
+     "5_deg": {
+      "db": 1.413,
+      "dry_db": 1.366,
+      "share_lost": 0.2778
+     }
+    },
+    "towns": {
+     "90_deg": {
+      "db": 0.1937,
+      "dry_db": 0.1904,
+      "share_lost": 0.04363
+     },
+     "60_deg": {
+      "db": 0.2225,
+      "dry_db": 0.2186,
+      "share_lost": 0.04995
+     },
+     "45_deg": {
+      "db": 0.2698,
+      "dry_db": 0.265,
+      "share_lost": 0.06022
+     },
+     "30_deg": {
+      "db": 0.3708,
+      "dry_db": 0.3642,
+      "share_lost": 0.08184
+     },
+     "20_deg": {
+      "db": 0.5131,
+      "dry_db": 0.5036,
+      "share_lost": 0.1114
+     },
+     "10_deg": {
+      "db": 0.8331,
+      "dry_db": 0.8161,
+      "share_lost": 0.1746
+     },
+     "5_deg": {
+      "db": 1.172,
+      "dry_db": 1.145,
+      "share_lost": 0.2366
+     }
+    },
+    "summit": {
+     "90_deg": {
+      "db": 0.1843,
+      "dry_db": 0.1814,
+      "share_lost": 0.04154
+     },
+     "60_deg": {
+      "db": 0.2117,
+      "dry_db": 0.2083,
+      "share_lost": 0.04757
+     },
+     "45_deg": {
+      "db": 0.2566,
+      "dry_db": 0.2525,
+      "share_lost": 0.05737
+     },
+     "30_deg": {
+      "db": 0.3528,
+      "dry_db": 0.3471,
+      "share_lost": 0.07802
+     },
+     "20_deg": {
+      "db": 0.4882,
+      "dry_db": 0.4801,
+      "share_lost": 0.1063
+     },
+     "10_deg": {
+      "db": 0.7929,
+      "dry_db": 0.7783,
+      "share_lost": 0.1669
+     },
+     "5_deg": {
+      "db": 1.116,
+      "dry_db": 1.093,
+      "share_lost": 0.2266
+     }
+    }
+   },
+   "5.8_ghz": {
+    "lowland": {
+     "90_deg": {
+      "db": 0.3239,
+      "dry_db": 0.275,
+      "share_lost": 0.07188
+     },
+     "60_deg": {
+      "db": 0.3722,
+      "dry_db": 0.3159,
+      "share_lost": 0.08214
+     },
+     "45_deg": {
+      "db": 0.4516,
+      "dry_db": 0.3828,
+      "share_lost": 0.09876
+     },
+     "30_deg": {
+      "db": 0.6221,
+      "dry_db": 0.5259,
+      "share_lost": 0.1334
+     },
+     "20_deg": {
+      "db": 0.8642,
+      "dry_db": 0.7269,
+      "share_lost": 0.1804
+     },
+     "10_deg": {
+      "db": 1.422,
+      "dry_db": 1.177,
+      "share_lost": 0.2793
+     },
+     "5_deg": {
+      "db": 2.041,
+      "dry_db": 1.653,
+      "share_lost": 0.375
+     }
+    },
+    "highland": {
+     "90_deg": {
+      "db": 0.2773,
+      "dry_db": 0.2431,
+      "share_lost": 0.06186
+     },
+     "60_deg": {
+      "db": 0.3187,
+      "dry_db": 0.2792,
+      "share_lost": 0.07075
+     },
+     "45_deg": {
+      "db": 0.3866,
+      "dry_db": 0.3384,
+      "share_lost": 0.08516
+     },
+     "30_deg": {
+      "db": 0.5324,
+      "dry_db": 0.465,
+      "share_lost": 0.1154
+     },
+     "20_deg": {
+      "db": 0.7392,
+      "dry_db": 0.643,
+      "share_lost": 0.1565
+     },
+     "10_deg": {
+      "db": 1.214,
+      "dry_db": 1.042,
+      "share_lost": 0.2439
+     },
+     "5_deg": {
+      "db": 1.738,
+      "dry_db": 1.464,
+      "share_lost": 0.3297
+     }
+    },
+    "towns": {
+     "90_deg": {
+      "db": 0.2215,
+      "dry_db": 0.2019,
+      "share_lost": 0.04972
+     },
+     "60_deg": {
+      "db": 0.2545,
+      "dry_db": 0.2319,
+      "share_lost": 0.05691
+     },
+     "45_deg": {
+      "db": 0.3087,
+      "dry_db": 0.2811,
+      "share_lost": 0.06861
+     },
+     "30_deg": {
+      "db": 0.425,
+      "dry_db": 0.3864,
+      "share_lost": 0.09322
+     },
+     "20_deg": {
+      "db": 0.5898,
+      "dry_db": 0.5346,
+      "share_lost": 0.127
+     },
+     "10_deg": {
+      "db": 0.9668,
+      "dry_db": 0.8676,
+      "share_lost": 0.1996
+     },
+     "5_deg": {
+      "db": 1.379,
+      "dry_db": 1.22,
+      "share_lost": 0.272
+     }
+    },
+    "summit": {
+     "90_deg": {
+      "db": 0.209,
+      "dry_db": 0.1921,
+      "share_lost": 0.04698
+     },
+     "60_deg": {
+      "db": 0.2401,
+      "dry_db": 0.2207,
+      "share_lost": 0.05378
+     },
+     "45_deg": {
+      "db": 0.2912,
+      "dry_db": 0.2675,
+      "share_lost": 0.06486
+     },
+     "30_deg": {
+      "db": 0.401,
+      "dry_db": 0.3678,
+      "share_lost": 0.08819
+     },
+     "20_deg": {
+      "db": 0.5564,
+      "dry_db": 0.509,
+      "share_lost": 0.1203
+     },
+     "10_deg": {
+      "db": 0.9116,
+      "dry_db": 0.8263,
+      "share_lost": 0.1893
+     },
+     "5_deg": {
+      "db": 1.299,
+      "dry_db": 1.162,
+      "share_lost": 0.2585
+     }
+    }
+   }
+  },
+  "zenith_sensitivity_to_surface_temperature_db": {
+   "290K_2.45_ghz_zenith_db": 0.2727,
+   "290K_5.8_ghz_zenith_db": 0.319,
+   "300K_2.45_ghz_zenith_db": 0.2602,
+   "300K_5.8_ghz_zenith_db": 0.3363
+  },
+  "zenith_2_45_with_earths_oxygen_fraction_db": 0.317,
+  "moon_over_earth_zenith": {
+   "2.45_ghz": 7.416,
+   "5.8_ghz": 8.012
+  },
+  "by_latitude": {
+   "2.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.2657,
+     "beams_db": 0.3356,
+     "beams_share_lost": 0.07437
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.2342,
+     "beams_db": 0.2958,
+     "beams_share_lost": 0.06585
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.1938,
+     "beams_db": 0.2449,
+     "beams_share_lost": 0.05483
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.3241,
+     "beams_db": 0.4099,
+     "beams_share_lost": 0.09007
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.2775,
+     "beams_db": 0.3509,
+     "beams_share_lost": 0.07762
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2216,
+     "beams_db": 0.2802,
+     "beams_share_lost": 0.06248
+    }
+   },
+   "7.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.2659,
+     "beams_db": 0.3376,
+     "beams_share_lost": 0.07478
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.2344,
+     "beams_db": 0.2975,
+     "beams_share_lost": 0.06622
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.194,
+     "beams_db": 0.2463,
+     "beams_share_lost": 0.05514
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.3244,
+     "beams_db": 0.4123,
+     "beams_share_lost": 0.09056
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.2777,
+     "beams_db": 0.3529,
+     "beams_share_lost": 0.07805
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2218,
+     "beams_db": 0.2818,
+     "beams_share_lost": 0.06283
+    }
+   },
+   "12.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.2666,
+     "beams_db": 0.3414,
+     "beams_share_lost": 0.0756
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.235,
+     "beams_db": 0.3009,
+     "beams_share_lost": 0.06694
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.1945,
+     "beams_db": 0.2491,
+     "beams_share_lost": 0.05574
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.3252,
+     "beams_db": 0.417,
+     "beams_share_lost": 0.09154
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.2784,
+     "beams_db": 0.3569,
+     "beams_share_lost": 0.0789
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2223,
+     "beams_db": 0.285,
+     "beams_share_lost": 0.06352
+    }
+   },
+   "17.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.268,
+     "beams_db": 0.3472,
+     "beams_share_lost": 0.07684
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.2362,
+     "beams_db": 0.3061,
+     "beams_share_lost": 0.06804
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.1955,
+     "beams_db": 0.2534,
+     "beams_share_lost": 0.05667
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.3269,
+     "beams_db": 0.4241,
+     "beams_share_lost": 0.09304
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.2799,
+     "beams_db": 0.3631,
+     "beams_share_lost": 0.0802
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2235,
+     "beams_db": 0.2899,
+     "beams_share_lost": 0.06457
+    }
+   },
+   "22.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.2705,
+     "beams_db": 0.3552,
+     "beams_share_lost": 0.07852
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.2384,
+     "beams_db": 0.313,
+     "beams_share_lost": 0.06954
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.1974,
+     "beams_db": 0.2592,
+     "beams_share_lost": 0.05793
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.33,
+     "beams_db": 0.4339,
+     "beams_share_lost": 0.09507
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.2826,
+     "beams_db": 0.3714,
+     "beams_share_lost": 0.08196
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2256,
+     "beams_db": 0.2966,
+     "beams_share_lost": 0.066
+    }
+   },
+   "27.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.2748,
+     "beams_db": 0.365,
+     "beams_share_lost": 0.08061
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.2422,
+     "beams_db": 0.3217,
+     "beams_share_lost": 0.07141
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.2005,
+     "beams_db": 0.2664,
+     "beams_share_lost": 0.05949
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.3353,
+     "beams_db": 0.446,
+     "beams_share_lost": 0.09759
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.287,
+     "beams_db": 0.3818,
+     "beams_share_lost": 0.08415
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2292,
+     "beams_db": 0.3048,
+     "beams_share_lost": 0.06778
+    }
+   },
+   "32.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.2813,
+     "beams_db": 0.3763,
+     "beams_share_lost": 0.08299
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.2479,
+     "beams_db": 0.3317,
+     "beams_share_lost": 0.07353
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.2052,
+     "beams_db": 0.2746,
+     "beams_share_lost": 0.06127
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.3432,
+     "beams_db": 0.4598,
+     "beams_share_lost": 0.1005
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.2938,
+     "beams_db": 0.3936,
+     "beams_share_lost": 0.08664
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2346,
+     "beams_db": 0.3143,
+     "beams_share_lost": 0.06981
+    }
+   },
+   "37.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.2903,
+     "beams_db": 0.3886,
+     "beams_share_lost": 0.08559
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.2559,
+     "beams_db": 0.3426,
+     "beams_share_lost": 0.07584
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.2118,
+     "beams_db": 0.2836,
+     "beams_share_lost": 0.06322
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.3543,
+     "beams_db": 0.475,
+     "beams_share_lost": 0.1036
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.3033,
+     "beams_db": 0.4066,
+     "beams_share_lost": 0.08936
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2422,
+     "beams_db": 0.3246,
+     "beams_share_lost": 0.07202
+    }
+   },
+   "42.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.3023,
+     "beams_db": 0.4015,
+     "beams_share_lost": 0.0883
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.2665,
+     "beams_db": 0.3539,
+     "beams_share_lost": 0.07825
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.2206,
+     "beams_db": 0.293,
+     "beams_share_lost": 0.06524
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.369,
+     "beams_db": 0.4908,
+     "beams_share_lost": 0.1068
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.3159,
+     "beams_db": 0.4201,
+     "beams_share_lost": 0.0922
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2522,
+     "beams_db": 0.3354,
+     "beams_share_lost": 0.07432
+    }
+   },
+   "47.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.3177,
+     "beams_db": 0.4147,
+     "beams_share_lost": 0.09106
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.28,
+     "beams_db": 0.3655,
+     "beams_share_lost": 0.08071
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.2318,
+     "beams_db": 0.3027,
+     "beams_share_lost": 0.06731
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.3878,
+     "beams_db": 0.507,
+     "beams_share_lost": 0.1102
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.332,
+     "beams_db": 0.434,
+     "beams_share_lost": 0.09509
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2651,
+     "beams_db": 0.3465,
+     "beams_share_lost": 0.07668
+    }
+   },
+   "52.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.337,
+     "beams_db": 0.4272,
+     "beams_share_lost": 0.09368
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.297,
+     "beams_db": 0.3766,
+     "beams_share_lost": 0.08306
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.2459,
+     "beams_db": 0.3118,
+     "beams_share_lost": 0.06928
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.4114,
+     "beams_db": 0.5225,
+     "beams_share_lost": 0.1133
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.3522,
+     "beams_db": 0.4472,
+     "beams_share_lost": 0.09784
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.2812,
+     "beams_db": 0.3571,
+     "beams_share_lost": 0.07892
+    }
+   },
+   "57.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.3609,
+     "beams_db": 0.4404,
+     "beams_share_lost": 0.09642
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.3181,
+     "beams_db": 0.3882,
+     "beams_share_lost": 0.0855
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.2634,
+     "beams_db": 0.3214,
+     "beams_share_lost": 0.07134
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.4409,
+     "beams_db": 0.5387,
+     "beams_share_lost": 0.1166
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.3774,
+     "beams_db": 0.4611,
+     "beams_share_lost": 0.1007
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.3013,
+     "beams_db": 0.3681,
+     "beams_share_lost": 0.08126
+    }
+   },
+   "62.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.3906,
+     "beams_db": 0.4549,
+     "beams_share_lost": 0.09943
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.3443,
+     "beams_db": 0.401,
+     "beams_share_lost": 0.08819
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.285,
+     "beams_db": 0.332,
+     "beams_share_lost": 0.0736
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.4773,
+     "beams_db": 0.5566,
+     "beams_share_lost": 0.1203
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.4086,
+     "beams_db": 0.4764,
+     "beams_share_lost": 0.1039
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.3262,
+     "beams_db": 0.3803,
+     "beams_share_lost": 0.08384
+    }
+   },
+   "67.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.4268,
+     "beams_db": 0.4735,
+     "beams_share_lost": 0.1033
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.3762,
+     "beams_db": 0.4174,
+     "beams_share_lost": 0.09161
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.3115,
+     "beams_db": 0.3456,
+     "beams_share_lost": 0.07649
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.5219,
+     "beams_db": 0.5795,
+     "beams_share_lost": 0.1249
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.4467,
+     "beams_db": 0.496,
+     "beams_share_lost": 0.1079
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.3567,
+     "beams_db": 0.396,
+     "beams_share_lost": 0.08712
+    }
+   },
+   "72.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.4705,
+     "beams_db": 0.4986,
+     "beams_share_lost": 0.1084
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.4147,
+     "beams_db": 0.4396,
+     "beams_share_lost": 0.09623
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.3434,
+     "beams_db": 0.364,
+     "beams_share_lost": 0.08038
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.5759,
+     "beams_db": 0.6107,
+     "beams_share_lost": 0.1311
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.4929,
+     "beams_db": 0.5226,
+     "beams_share_lost": 0.1133
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.3935,
+     "beams_db": 0.4172,
+     "beams_share_lost": 0.09156
+    }
+   },
+   "77.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.521,
+     "beams_db": 0.5346,
+     "beams_share_lost": 0.1157
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.4593,
+     "beams_db": 0.4713,
+     "beams_share_lost": 0.1028
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.3804,
+     "beams_db": 0.3904,
+     "beams_share_lost": 0.08592
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.6384,
+     "beams_db": 0.6552,
+     "beams_share_lost": 0.1399
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.5463,
+     "beams_db": 0.5607,
+     "beams_share_lost": 0.121
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.4361,
+     "beams_db": 0.4476,
+     "beams_share_lost": 0.09787
+    }
+   },
+   "82.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.5756,
+     "beams_db": 0.5792,
+     "beams_share_lost": 0.1247
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.5075,
+     "beams_db": 0.5106,
+     "beams_share_lost": 0.1108
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.4204,
+     "beams_db": 0.423,
+     "beams_share_lost": 0.09274
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.7063,
+     "beams_db": 0.7107,
+     "beams_share_lost": 0.1508
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.6043,
+     "beams_db": 0.6081,
+     "beams_share_lost": 0.1305
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.4823,
+     "beams_db": 0.4853,
+     "beams_share_lost": 0.1057
+    }
+   },
+   "87.5": {
+    "2.45_ghz_lowland": {
+     "best_tile_db": 0.6019,
+     "beams_db": 0.6019,
+     "beams_share_lost": 0.1294
+    },
+    "2.45_ghz_highland": {
+     "best_tile_db": 0.5307,
+     "beams_db": 0.5307,
+     "beams_share_lost": 0.115
+    },
+    "2.45_ghz_towns": {
+     "best_tile_db": 0.4396,
+     "beams_db": 0.4396,
+     "beams_share_lost": 0.09624
+    },
+    "5.8_ghz_lowland": {
+     "best_tile_db": 0.7388,
+     "beams_db": 0.7388,
+     "beams_share_lost": 0.1564
+    },
+    "5.8_ghz_highland": {
+     "best_tile_db": 0.6322,
+     "beams_db": 0.6322,
+     "beams_share_lost": 0.1354
+    },
+    "5.8_ghz_towns": {
+     "best_tile_db": 0.5045,
+     "beams_db": 0.5045,
+     "beams_share_lost": 0.1096
+    }
+   }
+  },
+  "load_weighted": {
+   "2.45_ghz": {
+    "towns_db": 0.2823,
+    "towns_share_lost": 0.06292,
+    "ground_db": 0.3763,
+    "ground_share_lost": 0.083,
+    "towns_best_tile_db": 0.2295,
+    "ground_best_tile_db": 0.3035
+   },
+   "5.8_ghz": {
+    "towns_db": 0.3231,
+    "towns_share_lost": 0.0717,
+    "ground_db": 0.4513,
+    "ground_share_lost": 0.09869,
+    "towns_best_tile_db": 0.2625,
+    "ground_best_tile_db": 0.3637
+   }
+  },
+  "link": {
+   "chain": {
+    "tx": 0.7,
+    "capture": 0.9,
+    "rx": 0.85,
+    "bus": 0.95
+   },
+   "dc_efficiency_without_air": 0.5087,
+   "dc_efficiency_with_air": [
+    0.4693,
+    0.4696
+   ],
+   "heat_per_w_delivered_without_air": 1.376,
+   "heat_per_w_delivered_with_air": [
+    1.492,
+    1.491
+   ],
+   "towns_heat_per_w": 1.468,
+   "ground_heat_per_w": 1.501,
+   "absorbed_in_the_air_tw": [
+    2.56,
+    12.07
+   ],
+   "intake_tw": [
+    30.44,
+    144.9
+   ],
+   "share_of_beams_lost": [
+    0.07758,
+    0.07687
+   ],
+   "array_heat_with_close_computing_tw": {
+    "synthesis": [
+     30.4,
+     145.0
+    ],
+    "with_air": [
+     32.96,
+     157.1
+    ]
+   },
+   "added_dimming_percent": [
+    0.02222,
+    0.1677
+   ],
+   "rise_in_the_arrays_heat": [
+    0.08422,
+    0.08321
+   ],
+   "with_the_best_tiles": {
+    "towns_share_lost": 0.05146,
+    "ground_share_lost": 0.0675,
+    "share_of_beams_lost": [
+     0.06316,
+     0.06259
+    ],
+    "absorbed_in_the_air_tw": [
+     2.052,
+     9.674
+    ],
+    "heat_per_w_delivered": [
+     1.469,
+     1.468
+    ],
+    "rise_in_the_arrays_heat": [
+     0.0675,
+     0.06672
+    ]
+   },
+   "rule": "the main figures take each beam from a tile drawn at random from the arc above the usable elevation; the best tiles take every beam from the highest tile in view, the floor of what the air takes"
+  }
+ },
+ "rain": {
+  "model": "ITU-R P.838-3 equations 1-5, circular polarization (tilt 45 degrees)",
+  "cloud_on_the_path": {
+   "ground": {
+    "day": 0.034,
+    "night": 0.014,
+    "day_height_km": 10.0
+   },
+   "towns": {
+    "day": 0.034,
+    "night": 0.0097,
+    "day_height_km": 10.0
+   },
+   "rule": "the largest share of time the equatorial ring holds cloud at any height the path crosses, from the ecology work's sky bands"
+  },
+  "coefficients": {
+   "2.45_ghz": {
+    "kh": 0.0001285,
+    "ah": 1.114,
+    "kv": 0.0001417,
+    "av": 1.002,
+    "k": 0.0001351,
+    "alpha": 1.055
+   },
+   "5.8_ghz": {
+    "kh": 0.00056,
+    "ah": 1.614,
+    "kv": 0.0004006,
+    "av": 1.585,
+    "k": 0.0004803,
+    "alpha": 1.602
+   }
+  },
+  "check_table5": {
+   "2": {
+    "model": [
+     8.469e-05,
+     1.066,
+     9.977e-05,
+     0.949
+    ],
+    "table": [
+     8.47e-05,
+     1.066,
+     9.98e-05,
+     0.949
+    ]
+   },
+   "2.5": {
+    "model": [
+     0.0001321,
+     1.121,
+     0.0001464,
+     1.008
+    ],
+    "table": [
+     0.0001321,
+     1.121,
+     0.0001464,
+     1.008
+    ]
+   },
+   "3": {
+    "model": [
+     0.000139,
+     1.232,
+     0.0001942,
+     1.069
+    ],
+    "table": [
+     0.000139,
+     1.232,
+     0.0001942,
+     1.069
+    ]
+   },
+   "5": {
+    "model": [
+     0.0002162,
+     1.697,
+     0.0002428,
+     1.532
+    ],
+    "table": [
+     0.0002162,
+     1.697,
+     0.0002428,
+     1.532
+    ]
+   },
+   "5.5": {
+    "model": [
+     0.0003909,
+     1.65,
+     0.0003115,
+     1.588
+    ],
+    "table": [
+     0.0003909,
+     1.65,
+     0.0003115,
+     1.588
+    ]
+   },
+   "6": {
+    "model": [
+     0.0007056,
+     1.59,
+     0.0004878,
+     1.573
+    ],
+    "table": [
+     0.0007056,
+     1.59,
+     0.0004878,
+     1.573
+    ]
+   }
+  },
+  "check_validation_file": {
+   "14.25": {
+    "model": [
+     0.03919,
+     1.135,
+     0.04345,
+     1.059
+    ],
+    "itu": [
+     0.03919,
+     1.135,
+     0.04345,
+     1.059
+    ]
+   },
+   "29": {
+    "model": [
+     0.2224,
+     0.958,
+     0.2124,
+     0.9203
+    ],
+    "itu": [
+     0.2224,
+     0.958,
+     0.2124,
+     0.9203
+    ]
+   }
+  },
+  "lunar_fall_factor": 2.942,
+  "lunar_fall_rule": "at a sixth of the gravity raindrops fall about 2.9 times slower (CM1, V ~ g^((b+1)/3) with b = 0.8), so a lunar rain rate holds 2.9 times the water of the same rate on Earth; attenuation below 10 GHz goes with the water held, so P.838-3 is read at the Earth rate that holds the same water",
+  "specific_attenuation": {
+   "2.45_ghz": {
+    "1_mm_h": {
+     "earth_fall_db_km": 0.0001351,
+     "lunar_fall_db_km": 0.0004219
+    },
+    "5_mm_h": {
+     "earth_fall_db_km": 0.0007384,
+     "lunar_fall_db_km": 0.002306
+    },
+    "10_mm_h": {
+     "earth_fall_db_km": 0.001535,
+     "lunar_fall_db_km": 0.004793
+    },
+    "25_mm_h": {
+     "earth_fall_db_km": 0.004037,
+     "lunar_fall_db_km": 0.01261
+    },
+    "50_mm_h": {
+     "earth_fall_db_km": 0.00839,
+     "lunar_fall_db_km": 0.0262
+    },
+    "100_mm_h": {
+     "earth_fall_db_km": 0.01744,
+     "lunar_fall_db_km": 0.05446
+    }
+   },
+   "5.8_ghz": {
+    "1_mm_h": {
+     "earth_fall_db_km": 0.0004803,
+     "lunar_fall_db_km": 0.002705
+    },
+    "5_mm_h": {
+     "earth_fall_db_km": 0.006328,
+     "lunar_fall_db_km": 0.03565
+    },
+    "10_mm_h": {
+     "earth_fall_db_km": 0.01921,
+     "lunar_fall_db_km": 0.1082
+    },
+    "25_mm_h": {
+     "earth_fall_db_km": 0.08338,
+     "lunar_fall_db_km": 0.4697
+    },
+    "50_mm_h": {
+     "earth_fall_db_km": 0.2531,
+     "lunar_fall_db_km": 1.426
+    },
+    "100_mm_h": {
+     "earth_fall_db_km": 0.7684,
+     "lunar_fall_db_km": 4.328
+    }
+   }
+  },
+  "storms_by_ring": {
+   "equator": {
+    "latitude_deg": 0.0,
+    "ring_km": 10920.0,
+    "wet_share_above_0_1_mm_h": [
+     0.05717,
+     0.05284
+    ],
+    "p99_mm_h": [
+     4.547,
+     3.668
+    ],
+    "max_mm_h": [
+     57.62,
+     68.52
+    ],
+    "storms_per_snapshot": 6.553,
+    "width_km": {
+     "median": 24.04,
+     "p90": 90.17,
+     "max": 264.5
+    },
+    "rain_max_mm_h": {
+     "median": 3.715,
+     "p90": 18.13,
+     "max": 68.52
+    },
+    "cloud_top_km": {
+     "median": 22.07,
+     "p90": 37.79,
+     "max": 83.79
+    },
+    "coverage_above_1_mm_h": 0.01443
+   },
+   "45n": {
+    "latitude_deg": 45.0,
+    "ring_km": 7719.0,
+    "wet_share_above_0_1_mm_h": [
+     0.009293,
+     0.001898
+    ],
+    "p99_mm_h": [
+     0.07931,
+     8.245e-10
+    ],
+    "max_mm_h": [
+     16.8,
+     7.927
+    ],
+    "storms_per_snapshot": 0.5781,
+    "width_km": {
+     "median": 23.97,
+     "p90": 53.94,
+     "max": 95.89
+    },
+    "rain_max_mm_h": {
+     "median": 3.55,
+     "p90": 8.001,
+     "max": 16.8
+    },
+    "cloud_top_km": {
+     "median": 23.86,
+     "p90": 30.99,
+     "max": 39.79
+    },
+    "coverage_above_1_mm_h": 0.001795
+   },
+   "45s": {
+    "latitude_deg": 45.0,
+    "ring_km": 7719.0,
+    "wet_share_above_0_1_mm_h": [
+     0.00909,
+     0.003427
+    ],
+    "p99_mm_h": [
+     0.0714,
+     0.0004168
+    ],
+    "max_mm_h": [
+     17.53,
+     23.01
+    ],
+    "storms_per_snapshot": 0.6329,
+    "width_km": {
+     "median": 26.97,
+     "p90": 71.92,
+     "max": 137.8
+    },
+    "rain_max_mm_h": {
+     "median": 3.562,
+     "p90": 12.05,
+     "max": 23.01
+    },
+    "cloud_top_km": {
+     "median": 24.83,
+     "p90": 36.39,
+     "max": 63.79
+    },
+    "coverage_above_1_mm_h": 0.002211
+   },
+   "80n": {
+    "latitude_deg": 80.0,
+    "ring_km": 1896.0,
+    "wet_share_above_0_1_mm_h": [
+     0.0,
+     0.0
+    ],
+    "p99_mm_h": [
+     4.312e-10,
+     7.752e-11
+    ],
+    "max_mm_h": [
+     0.003918,
+     0.005828
+    ],
+    "storms_per_snapshot": 0.0,
+    "coverage_above_1_mm_h": 0.0
+   },
+   "80s": {
+    "latitude_deg": 80.0,
+    "ring_km": 1896.0,
+    "wet_share_above_0_1_mm_h": [
+     0.0,
+     0.0
+    ],
+    "p99_mm_h": [
+     0.001752,
+     1.346e-10
+    ],
+    "max_mm_h": [
+     0.004148,
+     1.979e-09
+    ],
+    "storms_per_snapshot": 0.0,
+    "coverage_above_1_mm_h": 0.0
+   }
+  },
+  "freezing_level_km": 26.61,
+  "operating_elevation_deg": {
+   "ground": 61.23,
+   "towns": 71.19
+  },
+  "fades": {
+   "p99_rate": {
+    "rate_mm_h": 4.547,
+    "rain_top_km": 22.07,
+    "width_km": 24.04,
+    "ground": {
+     "operating": {
+      "elevation_deg": 61.23,
+      "path_km": 25.18,
+      "2.45_ghz": {
+       "db": 0.05253,
+       "share_lost": 0.01202
+      },
+      "5.8_ghz": {
+       "db": 0.7708,
+       "share_lost": 0.1626
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "path_km": 27.76,
+      "2.45_ghz": {
+       "db": 0.05792,
+       "share_lost": 0.01325
+      },
+      "5.8_ghz": {
+       "db": 0.85,
+       "share_lost": 0.1778
+      }
+     }
+    },
+    "towns": {
+     "operating": {
+      "elevation_deg": 71.19,
+      "path_km": 12.75,
+      "2.45_ghz": {
+       "db": 0.0266,
+       "share_lost": 0.006106
+      },
+      "5.8_ghz": {
+       "db": 0.3903,
+       "share_lost": 0.08595
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "path_km": 24.14,
+      "2.45_ghz": {
+       "db": 0.05036,
+       "share_lost": 0.01153
+      },
+      "5.8_ghz": {
+       "db": 0.739,
+       "share_lost": 0.1565
+      }
+     }
+    }
+   },
+   "median_storm": {
+    "rate_mm_h": 3.715,
+    "rain_top_km": 22.07,
+    "width_km": 24.04,
+    "ground": {
+     "operating": {
+      "elevation_deg": 61.23,
+      "path_km": 25.18,
+      "2.45_ghz": {
+       "db": 0.04244,
+       "share_lost": 0.009724
+      },
+      "5.8_ghz": {
+       "db": 0.5576,
+       "share_lost": 0.1205
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "path_km": 27.76,
+      "2.45_ghz": {
+       "db": 0.0468,
+       "share_lost": 0.01072
+      },
+      "5.8_ghz": {
+       "db": 0.6149,
+       "share_lost": 0.132
+      }
+     }
+    },
+    "towns": {
+     "operating": {
+      "elevation_deg": 71.19,
+      "path_km": 12.75,
+      "2.45_ghz": {
+       "db": 0.02149,
+       "share_lost": 0.004936
+      },
+      "5.8_ghz": {
+       "db": 0.2824,
+       "share_lost": 0.06295
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "path_km": 24.14,
+      "2.45_ghz": {
+       "db": 0.04068,
+       "share_lost": 0.009324
+      },
+      "5.8_ghz": {
+       "db": 0.5346,
+       "share_lost": 0.1158
+      }
+     }
+    }
+   },
+   "p90_storm": {
+    "rate_mm_h": 18.13,
+    "rain_top_km": 26.61,
+    "width_km": 90.17,
+    "ground": {
+     "operating": {
+      "elevation_deg": 61.23,
+      "path_km": 30.36,
+      "2.45_ghz": {
+       "db": 0.2727,
+       "share_lost": 0.06085
+      },
+      "5.8_ghz": {
+       "db": 8.521,
+       "share_lost": 0.8594
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "path_km": 53.22,
+      "2.45_ghz": {
+       "db": 0.478,
+       "share_lost": 0.1042
+      },
+      "5.8_ghz": {
+       "db": 14.94,
+       "share_lost": 0.9679
+      }
+     }
+    },
+    "towns": {
+     "operating": {
+      "elevation_deg": 71.19,
+      "path_km": 17.55,
+      "2.45_ghz": {
+       "db": 0.1576,
+       "share_lost": 0.03564
+      },
+      "5.8_ghz": {
+       "db": 4.925,
+       "share_lost": 0.6783
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "path_km": 33.22,
+      "2.45_ghz": {
+       "db": 0.2984,
+       "share_lost": 0.06639
+      },
+      "5.8_ghz": {
+       "db": 9.324,
+       "share_lost": 0.8832
+      }
+     }
+    }
+   },
+   "largest_storm": {
+    "rate_mm_h": 68.52,
+    "rain_top_km": 26.61,
+    "width_km": 264.5,
+    "ground": {
+     "operating": {
+      "elevation_deg": 61.23,
+      "path_km": 30.36,
+      "2.45_ghz": {
+       "db": 1.109,
+       "share_lost": 0.2254
+      },
+      "5.8_ghz": {
+       "db": 71.7,
+       "share_lost": 1.0
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "path_km": 53.22,
+      "2.45_ghz": {
+       "db": 1.945,
+       "share_lost": 0.361
+      },
+      "5.8_ghz": {
+       "db": 125.7,
+       "share_lost": 1.0
+      }
+     }
+    },
+    "towns": {
+     "operating": {
+      "elevation_deg": 71.19,
+      "path_km": 17.55,
+      "2.45_ghz": {
+       "db": 0.6412,
+       "share_lost": 0.1373
+      },
+      "5.8_ghz": {
+       "db": 41.44,
+       "share_lost": 0.9999
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "path_km": 33.22,
+      "2.45_ghz": {
+       "db": 1.214,
+       "share_lost": 0.2438
+      },
+      "5.8_ghz": {
+       "db": 78.46,
+       "share_lost": 1.0
+      }
+     }
+    }
+   }
+  },
+  "crossing": {
+   "ground": {
+    "operating": {
+     "elevation_deg": 61.23,
+     "factor": 1.642,
+     "storm_share_equator": 0.0237,
+     "above_p99_share_equator": 0.01642,
+     "storm_share_45_deg": 0.003289
+    },
+    "usable_floor": {
+     "elevation_deg": 30.0,
+     "factor": 3.024,
+     "storm_share_equator": 0.04365,
+     "above_p99_share_equator": 0.03024,
+     "storm_share_45_deg": 0.006058
+    }
+   },
+   "towns": {
+    "operating": {
+     "elevation_deg": 71.19,
+     "factor": 1.218,
+     "storm_share_equator": 0.01757,
+     "above_p99_share_equator": 0.01218,
+     "storm_share_45_deg": 0.002439
+    },
+    "usable_floor": {
+     "elevation_deg": 30.0,
+     "factor": 2.107,
+     "storm_share_equator": 0.03041,
+     "above_p99_share_equator": 0.02107,
+     "storm_share_45_deg": 0.004221
+    }
+   }
+  }
+ },
+ "ring": {
+  "stack": {
+   "rings": 1859,
+   "sampled_rings": 93,
+   "radius_km": [
+    19360.0,
+    21390.0
+   ],
+   "tilt_deg": [
+    -23.79,
+    23.96
+   ],
+   "fleet_tiles": 28170000.0,
+   "orbit_days": [
+    2.797,
+    3.249
+   ],
+   "ring_plane_from_lunar_pole_deg": 6.687
+  },
+  "by_latitude": {
+   "2.5": {
+    "tiles_above_horizon": {
+     "mean": 13300000.0,
+     "least": 13250000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 10150000.0,
+     "least": 10040000.0
+    },
+    "tiles_above_usable": {
+     "mean": 8599000.0,
+     "least": 8425000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 6288000.0,
+     "least": 5976000.0
+    },
+    "highest_tile_deg": {
+     "mean": 89.27,
+     "least": 80.86
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 21.39,
+     "least": 20.49
+    },
+    "typical_usable_pass_h": 19.97
+   },
+   "7.5": {
+    "tiles_above_horizon": {
+     "mean": 13290000.0,
+     "least": 13240000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 10120000.0,
+     "least": 9946000.0
+    },
+    "tiles_above_usable": {
+     "mean": 8549000.0,
+     "least": 8273000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 6193000.0,
+     "least": 5687000.0
+    },
+    "highest_tile_deg": {
+     "mean": 88.67,
+     "least": 75.92
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 21.46,
+     "least": 20.56
+    },
+    "typical_usable_pass_h": 19.86
+   },
+   "12.5": {
+    "tiles_above_horizon": {
+     "mean": 13280000.0,
+     "least": 13230000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 10050000.0,
+     "least": 9803000.0
+    },
+    "tiles_above_usable": {
+     "mean": 8442000.0,
+     "least": 8046000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 5994000.0,
+     "least": 5126000.0
+    },
+    "highest_tile_deg": {
+     "mean": 87.38,
+     "least": 71.0
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 21.57,
+     "least": 20.94
+    },
+    "typical_usable_pass_h": 19.63
+   },
+   "17.5": {
+    "tiles_above_horizon": {
+     "mean": 13260000.0,
+     "least": 13200000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 9937000.0,
+     "least": 9606000.0
+    },
+    "tiles_above_usable": {
+     "mean": 8273000.0,
+     "least": 7726000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 5658000.0,
+     "least": 4440000.0
+    },
+    "highest_tile_deg": {
+     "mean": 85.23,
+     "least": 66.11
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 21.59,
+     "least": 20.69
+    },
+    "typical_usable_pass_h": 19.27
+   },
+   "22.5": {
+    "tiles_above_horizon": {
+     "mean": 13230000.0,
+     "least": 13160000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 9782000.0,
+     "least": 9330000.0
+    },
+    "tiles_above_usable": {
+     "mean": 8030000.0,
+     "least": 7252000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 5169000.0,
+     "least": 3770000.0
+    },
+    "highest_tile_deg": {
+     "mean": 81.9,
+     "least": 61.28
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 21.5,
+     "least": 19.97
+    },
+    "typical_usable_pass_h": 18.76
+   },
+   "27.5": {
+    "tiles_above_horizon": {
+     "mean": 13200000.0,
+     "least": 13090000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 9571000.0,
+     "least": 8946000.0
+    },
+    "tiles_above_usable": {
+     "mean": 7683000.0,
+     "least": 6447000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 4516000.0,
+     "least": 3126000.0
+    },
+    "highest_tile_deg": {
+     "mean": 77.68,
+     "least": 56.51
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 21.29,
+     "least": 19.28
+    },
+    "typical_usable_pass_h": 18.1
+   },
+   "32.5": {
+    "tiles_above_horizon": {
+     "mean": 13150000.0,
+     "least": 13010000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 9289000.0,
+     "least": 8391000.0
+    },
+    "tiles_above_usable": {
+     "mean": 7190000.0,
+     "least": 5540000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 3710000.0,
+     "least": 2266000.0
+    },
+    "highest_tile_deg": {
+     "mean": 72.72,
+     "least": 51.83
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 20.95,
+     "least": 18.15
+    },
+    "typical_usable_pass_h": 17.31
+   },
+   "37.5": {
+    "tiles_above_horizon": {
+     "mean": 13080000.0,
+     "least": 12890000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 8897000.0,
+     "least": 7425000.0
+    },
+    "tiles_above_usable": {
+     "mean": 6530000.0,
+     "least": 4655000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 2789000.0,
+     "least": 412300.0
+    },
+    "highest_tile_deg": {
+     "mean": 67.62,
+     "least": 47.25
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 20.49,
+     "least": 16.94
+    },
+    "typical_usable_pass_h": 16.42
+   },
+   "42.5": {
+    "tiles_above_horizon": {
+     "mean": 13000000.0,
+     "least": 12730000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 8351000.0,
+     "least": 6373000.0
+    },
+    "tiles_above_usable": {
+     "mean": 5681000.0,
+     "least": 3845000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 1908000.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 62.57,
+     "least": 42.8
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 19.84,
+     "least": 15.42
+    },
+    "typical_usable_pass_h": 15.45
+   },
+   "47.5": {
+    "tiles_above_horizon": {
+     "mean": 12890000.0,
+     "least": 12490000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 7620000.0,
+     "least": 5369000.0
+    },
+    "tiles_above_usable": {
+     "mean": 4653000.0,
+     "least": 2721000.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 1148000.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 57.56,
+     "least": 38.51
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 19.02,
+     "least": 13.08
+    },
+    "typical_usable_pass_h": 14.41
+   },
+   "52.5": {
+    "tiles_above_horizon": {
+     "mean": 12740000.0,
+     "least": 12030000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 6680000.0,
+     "least": 4428000.0
+    },
+    "tiles_above_usable": {
+     "mean": 3492000.0,
+     "least": 969300.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 627500.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 52.62,
+     "least": 34.42
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 17.92,
+     "least": 9.953
+    },
+    "typical_usable_pass_h": 13.44
+   },
+   "57.5": {
+    "tiles_above_horizon": {
+     "mean": 12510000.0,
+     "least": 10790000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 5510000.0,
+     "least": 3306000.0
+    },
+    "tiles_above_usable": {
+     "mean": 2392000.0,
+     "least": 53010.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 293200.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 47.75,
+     "least": 30.61
+    },
+    "share_of_time_with_no_usable_tile": 0.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 16.41,
+     "least": 3.708
+    },
+    "typical_usable_pass_h": 12.31
+   },
+   "62.5": {
+    "tiles_above_horizon": {
+     "mean": 12160000.0,
+     "least": 9363000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 4197000.0,
+     "least": 1823000.0
+    },
+    "tiles_above_usable": {
+     "mean": 1453000.0,
+     "least": 0.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 105300.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 42.99,
+     "least": 27.15
+    },
+    "share_of_time_with_no_usable_tile": 0.03125,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 14.77,
+     "least": 6.379
+    },
+    "typical_usable_pass_h": 11.18
+   },
+   "67.5": {
+    "tiles_above_horizon": {
+     "mean": 11700000.0,
+     "least": 8485000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 2949000.0,
+     "least": 711800.0
+    },
+    "tiles_above_usable": {
+     "mean": 814000.0,
+     "least": 0.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 19140.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 38.37,
+     "least": 24.16
+    },
+    "share_of_time_with_no_usable_tile": 0.1146,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 12.9,
+     "least": 2.147
+    },
+    "typical_usable_pass_h": 9.898
+   },
+   "72.5": {
+    "tiles_above_horizon": {
+     "mean": 11100000.0,
+     "least": 8283000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 1862000.0,
+     "least": 201100.0
+    },
+    "tiles_above_usable": {
+     "mean": 388300.0,
+     "least": 0.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 0.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 33.94,
+     "least": 21.79
+    },
+    "share_of_time_with_no_usable_tile": 0.2604,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 10.52,
+     "least": 0.5799
+    },
+    "typical_usable_pass_h": 8.162
+   },
+   "77.5": {
+    "tiles_above_horizon": {
+     "mean": 10400000.0,
+     "least": 8178000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 1116000.0,
+     "least": 20190.0
+    },
+    "tiles_above_usable": {
+     "mean": 142700.0,
+     "least": 0.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 0.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 29.85,
+     "least": 20.21
+    },
+    "share_of_time_with_no_usable_tile": 0.5312,
+    "share_of_time_with_no_tile_above_20_deg": 0.0,
+    "longest_usable_pass_h": {
+     "mean": 9.314,
+     "least": 3.708
+    },
+    "typical_usable_pass_h": 7.256
+   },
+   "82.5": {
+    "tiles_above_horizon": {
+     "mean": 9680000.0,
+     "least": 8173000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 611000.0,
+     "least": 0.0
+    },
+    "tiles_above_usable": {
+     "mean": 24920.0,
+     "least": 0.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 0.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 26.28,
+     "least": 19.55
+    },
+    "share_of_time_with_no_usable_tile": 0.7604,
+    "share_of_time_with_no_tile_above_20_deg": 0.02083,
+    "longest_usable_pass_h": {
+     "mean": 6.561,
+     "least": 0.9758
+    },
+    "typical_usable_pass_h": 5.262
+   },
+   "87.5": {
+    "tiles_above_horizon": {
+     "mean": 9255000.0,
+     "least": 8172000.0
+    },
+    "tiles_above_20_deg": {
+     "mean": 358600.0,
+     "least": 0.0
+    },
+    "tiles_above_usable": {
+     "mean": 0.0,
+     "least": 0.0
+    },
+    "tiles_above_45_deg": {
+     "mean": 0.0,
+     "least": 0.0
+    },
+    "highest_tile_deg": {
+     "mean": 24.49,
+     "least": 19.89
+    },
+    "share_of_time_with_no_usable_tile": 1.0,
+    "share_of_time_with_no_tile_above_20_deg": 0.01042,
+    "longest_usable_pass_h": {
+     "mean": 0.0,
+     "least": 0.0
+    },
+    "typical_usable_pass_h": 0.0
+   }
+  },
+  "middle_ring_alone_hidden_within_deg_of_its_poles": 4.984,
+  "tile": {
+   "side_km": 10.0,
+   "clear_side_km": 9.89,
+   "sunlight_gw": 133.1,
+   "electric_gw_per_km2": [
+    0.4083,
+    0.2722
+   ],
+   "rf_gw_per_km2": [
+    0.2858,
+    0.1905
+   ],
+   "whole_tile_rf_gw": [
+    27.96,
+    18.64
+   ],
+   "dimmer_share_rf_gw": [
+    1.398,
+    0.9319
+   ]
+  },
+  "tau": 2.04,
+  "distance_km": [
+   17620.0,
+   20470.0
+  ],
+  "apertures": {
+   "2.45_ghz": {
+    "town_crown_side_km": [
+     4.963,
+     5.766
+    ],
+    "ground_patch_side_km": [
+     1.466,
+     1.703
+    ],
+    "whole_tile_spot_m": [
+     501.8,
+     583.0
+    ]
+   },
+   "5.8_ghz": {
+    "town_crown_side_km": [
+     2.097,
+     2.436
+    ],
+    "ground_patch_side_km": [
+     0.6193,
+     0.7195
+    ],
+    "whole_tile_spot_m": [
+     212.0,
+     246.3
+    ]
+   }
+  },
+  "beams": {
+   "per_receiver": 3,
+   "rating_share": 0.5,
+   "towns": 696000.0,
+   "ground_receivers": [
+    10680.0,
+    48310.0
+   ],
+   "patch_side_km": 3.0,
+   "patch_gw": 2.07,
+   "total": [
+    2120000.0,
+    2233000.0
+   ],
+   "town_beam_mw_in_use": [
+    3.994,
+    21.5
+   ],
+   "ground_beam_gw_in_use": 0.69
+  },
+  "rf_in_use_tw": [
+   33.0,
+   157.0
+  ],
+  "rf_installed_tw": [
+   49.5,
+   235.4
+  ],
+  "electricity_at_the_tiles_tw": [
+   47.14,
+   224.2
+  ],
+  "dimmer_electric_tw": [
+   117.1,
+   175.7
+  ],
+  "collector_km2_in_use": [
+   115500.0,
+   823800.0
+  ],
+  "transmitting_tiles": [
+   3541.0,
+   25270.0
+  ],
+  "share_of_fleet": [
+   0.0001257,
+   0.000897
+  ],
+  "collector_and_aperture_km2_installed": [
+   346400.0,
+   2471000.0
+  ],
+  "whole_tile_tau_on_a_crown": [
+   3.499,
+   4.065
+  ],
+  "overhead_pass_middle_ring": {
+   "horizon_h": 30.29,
+   "usable_h": 19.84
+  },
+  "tiles_per_ring": 15150.0,
+  "seconds_between_tiles_on_a_ring": [
+   15.95,
+   18.53
+  ],
+  "handover_every_h_by_latitude": {
+   "2.5": 6.658,
+   "7.5": 6.621,
+   "12.5": 6.543,
+   "17.5": 6.423,
+   "22.5": 6.254,
+   "27.5": 6.033,
+   "32.5": 5.77,
+   "37.5": 5.473,
+   "42.5": 5.149,
+   "47.5": 4.805,
+   "52.5": 4.479,
+   "57.5": 4.103,
+   "62.5": 3.728,
+   "67.5": 3.299,
+   "72.5": 2.721,
+   "77.5": 2.419,
+   "82.5": 1.754,
+   "87.5": 0.0
+  },
+  "beams_per_transmitting_tile": [
+   598.6,
+   88.37
+  ],
+  "transmitting_tiles_in_usable_view_least": {
+   "2.5": [
+    1059.0,
+    7557.0
+   ],
+   "7.5": [
+    1040.0,
+    7421.0
+   ],
+   "12.5": [
+    1012.0,
+    7217.0
+   ],
+   "17.5": [
+    971.3,
+    6930.0
+   ],
+   "22.5": [
+    911.7,
+    6505.0
+   ],
+   "27.5": [
+    810.4,
+    5782.0
+   ],
+   "32.5": [
+    696.4,
+    4969.0
+   ],
+   "37.5": [
+    585.3,
+    4176.0
+   ],
+   "42.5": [
+    483.4,
+    3449.0
+   ],
+   "47.5": [
+    342.1,
+    2441.0
+   ],
+   "52.5": [
+    121.9,
+    869.4
+   ],
+   "57.5": [
+    6.664,
+    47.54
+   ],
+   "62.5": [
+    0.0,
+    0.0
+   ],
+   "67.5": [
+    0.0,
+    0.0
+   ],
+   "72.5": [
+    0.0,
+    0.0
+   ],
+   "77.5": [
+    0.0,
+    0.0
+   ],
+   "82.5": [
+    0.0,
+    0.0
+   ],
+   "87.5": [
+    0.0,
+    0.0
+   ]
+  },
+  "small_collector_variant": {
+   "collector_share_of_tile": 0.1,
+   "rf_gw_per_tile": [
+    2.796,
+    1.864
+   ],
+   "transmitting_tiles": [
+    35410.0,
+    252700.0
+   ],
+   "share_of_fleet": [
+    0.001257,
+    0.00897
+   ],
+   "beams_per_transmitting_tile": [
+    59.86,
+    8.837
+   ],
+   "transmitting_tiles_in_usable_view_least": {
+    "2.5": [
+     10590.0,
+     75570.0
+    ],
+    "7.5": [
+     10400.0,
+     74210.0
+    ],
+    "12.5": [
+     10120.0,
+     72170.0
+    ],
+    "17.5": [
+     9713.0,
+     69300.0
+    ],
+    "22.5": [
+     9117.0,
+     65050.0
+    ],
+    "27.5": [
+     8104.0,
+     57820.0
+    ],
+    "32.5": [
+     6964.0,
+     49690.0
+    ],
+    "37.5": [
+     5853.0,
+     41760.0
+    ],
+    "42.5": [
+     4834.0,
+     34490.0
+    ],
+    "47.5": [
+     3421.0,
+     24410.0
+    ],
+    "52.5": [
+     1219.0,
+     8694.0
+    ],
+    "57.5": [
+     66.64,
+     475.4
+    ],
+    "62.5": [
+     0.0,
+     0.0
+    ],
+    "67.5": [
+     0.0,
+     0.0
+    ],
+    "72.5": [
+     0.0,
+     0.0
+    ],
+    "77.5": [
+     0.0,
+     0.0
+    ],
+    "82.5": [
+     0.0,
+     0.0
+    ],
+    "87.5": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "heat_released_in_orbit_tw": [
+   105.3,
+   829.7
+  ],
+  "moon_w_m2_from_that_heat": [
+   0.005246,
+   0.04134
+  ],
+  "share_of_the_fleets_glow": [
+   0.0009269,
+   0.004168
+  ]
+ },
+ "grid": {
+  "rule": "receivers at the loads, the ground's intake spread as its people; poleward of the last band that always sees a usable tile, the loads take power by line when that loses less than their own low beams",
+  "composition_billion": {
+   "metropolis": 0.1,
+   "dry_highland": {
+    "30-45": 1.575,
+    "45-60": 0.6105,
+    "60-90": 0.4135
+   },
+   "scattered": 1.301,
+   "scattered_0_30": 0.618,
+   "scattered_high_latitude": 0.683
+  },
+  "groups": {
+   "metropolis": {
+    "lat_deg": [
+     5.0,
+     10.0
+    ],
+    "height": "summit",
+    "billion": 0.1,
+    "intake_tw": [
+     0.5525,
+     2.5
+    ],
+    "receiver_km2": [
+     2402.0,
+     10870.0
+    ]
+   },
+   "scattered_0_30": {
+    "lat_deg": [
+     0.0,
+     30.0
+    ],
+    "height": "lowland",
+    "billion": 0.618,
+    "intake_tw": [
+     3.414,
+     15.45
+    ],
+    "receiver_km2": [
+     14840.0,
+     67170.0
+    ]
+   },
+   "dry_30_45": {
+    "lat_deg": [
+     30.0,
+     45.0
+    ],
+    "height": "highland",
+    "billion": 1.575,
+    "intake_tw": [
+     8.702,
+     39.38
+    ],
+    "receiver_km2": [
+     37830.0,
+     171200.0
+    ]
+   },
+   "dry_45_60": {
+    "lat_deg": [
+     45.0,
+     60.0
+    ],
+    "height": "highland",
+    "billion": 0.6105,
+    "intake_tw": [
+     3.373,
+     15.26
+    ],
+    "receiver_km2": [
+     14670.0,
+     66360.0
+    ]
+   },
+   "dry_60_90": {
+    "lat_deg": [
+     60.0,
+     90.0
+    ],
+    "height": "highland",
+    "billion": 0.4135,
+    "intake_tw": [
+     2.285,
+     10.34
+    ],
+    "receiver_km2": [
+     9933.0,
+     44950.0
+    ]
+   },
+   "high_lowland_48.6_60": {
+    "lat_deg": [
+     48.6,
+     60.0
+    ],
+    "height": "lowland",
+    "billion": 0.2906,
+    "intake_tw": [
+     1.606,
+     7.266
+    ],
+    "receiver_km2": [
+     6981.0,
+     31590.0
+    ]
+   },
+   "high_lowland_60_75": {
+    "lat_deg": [
+     60.0,
+     75.0
+    ],
+    "height": "lowland",
+    "billion": 0.2926,
+    "intake_tw": [
+     1.617,
+     7.316
+    ],
+    "receiver_km2": [
+     7029.0,
+     31810.0
+    ]
+   },
+   "high_lowland_75_90": {
+    "lat_deg": [
+     75.0,
+     90.0
+    ],
+    "height": "lowland",
+    "billion": 0.09977,
+    "intake_tw": [
+     0.5512,
+     2.494
+    ],
+    "receiver_km2": [
+     2397.0,
+     10840.0
+    ]
+   }
+  },
+  "beam_loss_by_latitude_2_45": {
+   "2.5": {
+    "lowland": 0.07437,
+    "highland": 0.06585,
+    "no_usable_tile": 0.0
+   },
+   "7.5": {
+    "lowland": 0.07478,
+    "highland": 0.06622,
+    "no_usable_tile": 0.0
+   },
+   "12.5": {
+    "lowland": 0.0756,
+    "highland": 0.06694,
+    "no_usable_tile": 0.0
+   },
+   "17.5": {
+    "lowland": 0.07684,
+    "highland": 0.06804,
+    "no_usable_tile": 0.0
+   },
+   "22.5": {
+    "lowland": 0.07852,
+    "highland": 0.06954,
+    "no_usable_tile": 0.0
+   },
+   "27.5": {
+    "lowland": 0.08061,
+    "highland": 0.07141,
+    "no_usable_tile": 0.0
+   },
+   "32.5": {
+    "lowland": 0.08299,
+    "highland": 0.07353,
+    "no_usable_tile": 0.0
+   },
+   "37.5": {
+    "lowland": 0.08559,
+    "highland": 0.07584,
+    "no_usable_tile": 0.0
+   },
+   "42.5": {
+    "lowland": 0.0883,
+    "highland": 0.07825,
+    "no_usable_tile": 0.0
+   },
+   "47.5": {
+    "lowland": 0.09106,
+    "highland": 0.08071,
+    "no_usable_tile": 0.0
+   },
+   "52.5": {
+    "lowland": 0.09368,
+    "highland": 0.08306,
+    "no_usable_tile": 0.0
+   },
+   "57.5": {
+    "lowland": 0.09642,
+    "highland": 0.0855,
+    "no_usable_tile": 0.0
+   },
+   "62.5": {
+    "lowland": 0.09943,
+    "highland": 0.08819,
+    "no_usable_tile": 0.03125
+   },
+   "67.5": {
+    "lowland": 0.1033,
+    "highland": 0.09161,
+    "no_usable_tile": 0.1146
+   },
+   "72.5": {
+    "lowland": 0.1084,
+    "highland": 0.09623,
+    "no_usable_tile": 0.2604
+   },
+   "77.5": {
+    "lowland": 0.1157,
+    "highland": 0.1028,
+    "no_usable_tile": 0.5312
+   },
+   "82.5": {
+    "lowland": 0.1247,
+    "highland": 0.1108,
+    "no_usable_tile": 0.7604
+   },
+   "87.5": {
+    "lowland": 0.1294,
+    "highland": 0.115,
+    "no_usable_tile": 1.0
+   }
+  },
+  "always_usable_to_deg": 60.0,
+  "poleward_lines": {
+   "62.5": {
+    "km": 151.6,
+    "line_loss": [
+     0.02303,
+     0.02531
+    ],
+    "via_line_loss": [
+     0.1066,
+     0.1086
+    ],
+    "beam_loss_highland": 0.08819,
+    "beam_loss_lowland": 0.09943,
+    "line_better": false
+   },
+   "67.5": {
+    "km": 303.2,
+    "line_loss": [
+     0.02606,
+     0.03061
+    ],
+    "via_line_loss": [
+     0.1093,
+     0.1135
+    ],
+    "beam_loss_highland": 0.09161,
+    "beam_loss_lowland": 0.1033,
+    "line_better": false
+   },
+   "72.5": {
+    "km": 454.9,
+    "line_loss": [
+     0.0291,
+     0.03592
+    ],
+    "via_line_loss": [
+     0.1121,
+     0.1183
+    ],
+    "beam_loss_highland": 0.09623,
+    "beam_loss_lowland": 0.1084,
+    "line_better": false
+   },
+   "77.5": {
+    "km": 606.5,
+    "line_loss": [
+     0.03213,
+     0.04123
+    ],
+    "via_line_loss": [
+     0.1149,
+     0.1232
+    ],
+    "beam_loss_highland": 0.1028,
+    "beam_loss_lowland": 0.1157,
+    "line_better": false
+   },
+   "82.5": {
+    "km": 758.1,
+    "line_loss": [
+     0.03516,
+     0.04653
+    ],
+    "via_line_loss": [
+     0.1177,
+     0.1281
+    ],
+    "beam_loss_highland": 0.1108,
+    "beam_loss_lowland": 0.1247,
+    "line_better": false
+   },
+   "87.5": {
+    "km": 909.7,
+    "line_loss": [
+     0.03819,
+     0.05184
+    ],
+    "via_line_loss": [
+     0.1204,
+     0.1329
+    ],
+    "beam_loss_highland": 0.115,
+    "beam_loss_lowland": 0.1294,
+    "line_better": false
+   }
+  },
+  "load_share_poleward": 0.2015,
+  "load_share_taking_lines": 0.0,
+  "receiver_spacing_km": [
+   4.973,
+   3.903
+  ],
+  "receiver_km2": [
+   96000.0,
+   436000.0
+  ],
+  "settled_km2": [
+   264000.0,
+   736000.0
+  ],
+  "receivers_over_settled_land": [
+   0.3636,
+   0.5924
+  ],
+  "exposure": {
+   "public_limit_w_m2": 10.0,
+   "patch_level_w_m2": 230.0,
+   "edge_buffer_km": [
+    0.1755,
+    0.2038
+   ],
+   "closed_km2_per_patch": [
+    11.23,
+    11.61
+   ],
+   "closed_land_km2": [
+    119900.0,
+    561000.0
+   ],
+   "closed_over_settled_land": [
+    0.4541,
+    0.7622
+   ],
+   "rule": "a patch flat-filled at the 1978 peak with edges blurred by a whole tile's spot; the closed ground runs out to where the beam falls below the public level"
+  },
+  "backup": {
+   "rule": "each receiver tied to two neighbours by lines rated for its whole load",
+   "line_gw": 2.07,
+   "loss_through_a_neighbour": [
+    0.0201,
+    0.02014
+   ]
+  },
+  "hvdc": {
+   "per_1000_km": [
+    0.02,
+    0.035
+   ],
+   "per_converter": 0.01
+  }
+ },
+ "reserves": {
+  "storms": {
+   "fades": {
+    "p99_rate": {
+     "rate_mm_h": 4.547,
+     "rain_top_km": 22.07,
+     "width_km": 24.04,
+     "ground": {
+      "operating": {
+       "elevation_deg": 61.23,
+       "path_km": 25.18,
+       "2.45_ghz": {
+        "db": 0.05253,
+        "share_lost": 0.01202
+       },
+       "5.8_ghz": {
+        "db": 0.7708,
+        "share_lost": 0.1626
+       }
+      },
+      "usable_floor": {
+       "elevation_deg": 30.0,
+       "path_km": 27.76,
+       "2.45_ghz": {
+        "db": 0.05792,
+        "share_lost": 0.01325
+       },
+       "5.8_ghz": {
+        "db": 0.85,
+        "share_lost": 0.1778
+       }
+      }
+     },
+     "towns": {
+      "operating": {
+       "elevation_deg": 71.19,
+       "path_km": 12.75,
+       "2.45_ghz": {
+        "db": 0.0266,
+        "share_lost": 0.006106
+       },
+       "5.8_ghz": {
+        "db": 0.3903,
+        "share_lost": 0.08595
+       }
+      },
+      "usable_floor": {
+       "elevation_deg": 30.0,
+       "path_km": 24.14,
+       "2.45_ghz": {
+        "db": 0.05036,
+        "share_lost": 0.01153
+       },
+       "5.8_ghz": {
+        "db": 0.739,
+        "share_lost": 0.1565
+       }
+      }
+     }
+    },
+    "median_storm": {
+     "rate_mm_h": 3.715,
+     "rain_top_km": 22.07,
+     "width_km": 24.04,
+     "ground": {
+      "operating": {
+       "elevation_deg": 61.23,
+       "path_km": 25.18,
+       "2.45_ghz": {
+        "db": 0.04244,
+        "share_lost": 0.009724
+       },
+       "5.8_ghz": {
+        "db": 0.5576,
+        "share_lost": 0.1205
+       }
+      },
+      "usable_floor": {
+       "elevation_deg": 30.0,
+       "path_km": 27.76,
+       "2.45_ghz": {
+        "db": 0.0468,
+        "share_lost": 0.01072
+       },
+       "5.8_ghz": {
+        "db": 0.6149,
+        "share_lost": 0.132
+       }
+      }
+     },
+     "towns": {
+      "operating": {
+       "elevation_deg": 71.19,
+       "path_km": 12.75,
+       "2.45_ghz": {
+        "db": 0.02149,
+        "share_lost": 0.004936
+       },
+       "5.8_ghz": {
+        "db": 0.2824,
+        "share_lost": 0.06295
+       }
+      },
+      "usable_floor": {
+       "elevation_deg": 30.0,
+       "path_km": 24.14,
+       "2.45_ghz": {
+        "db": 0.04068,
+        "share_lost": 0.009324
+       },
+       "5.8_ghz": {
+        "db": 0.5346,
+        "share_lost": 0.1158
+       }
+      }
+     }
+    },
+    "p90_storm": {
+     "rate_mm_h": 18.13,
+     "rain_top_km": 26.61,
+     "width_km": 90.17,
+     "ground": {
+      "operating": {
+       "elevation_deg": 61.23,
+       "path_km": 30.36,
+       "2.45_ghz": {
+        "db": 0.2727,
+        "share_lost": 0.06085
+       },
+       "5.8_ghz": {
+        "db": 8.521,
+        "share_lost": 0.8594
+       }
+      },
+      "usable_floor": {
+       "elevation_deg": 30.0,
+       "path_km": 53.22,
+       "2.45_ghz": {
+        "db": 0.478,
+        "share_lost": 0.1042
+       },
+       "5.8_ghz": {
+        "db": 14.94,
+        "share_lost": 0.9679
+       }
+      }
+     },
+     "towns": {
+      "operating": {
+       "elevation_deg": 71.19,
+       "path_km": 17.55,
+       "2.45_ghz": {
+        "db": 0.1576,
+        "share_lost": 0.03564
+       },
+       "5.8_ghz": {
+        "db": 4.925,
+        "share_lost": 0.6783
+       }
+      },
+      "usable_floor": {
+       "elevation_deg": 30.0,
+       "path_km": 33.22,
+       "2.45_ghz": {
+        "db": 0.2984,
+        "share_lost": 0.06639
+       },
+       "5.8_ghz": {
+        "db": 9.324,
+        "share_lost": 0.8832
+       }
+      }
+     }
+    },
+    "largest_storm": {
+     "rate_mm_h": 68.52,
+     "rain_top_km": 26.61,
+     "width_km": 264.5,
+     "ground": {
+      "operating": {
+       "elevation_deg": 61.23,
+       "path_km": 30.36,
+       "2.45_ghz": {
+        "db": 1.109,
+        "share_lost": 0.2254
+       },
+       "5.8_ghz": {
+        "db": 71.7,
+        "share_lost": 1.0
+       }
+      },
+      "usable_floor": {
+       "elevation_deg": 30.0,
+       "path_km": 53.22,
+       "2.45_ghz": {
+        "db": 1.945,
+        "share_lost": 0.361
+       },
+       "5.8_ghz": {
+        "db": 125.7,
+        "share_lost": 1.0
+       }
+      }
+     },
+     "towns": {
+      "operating": {
+       "elevation_deg": 71.19,
+       "path_km": 17.55,
+       "2.45_ghz": {
+        "db": 0.6412,
+        "share_lost": 0.1373
+       },
+       "5.8_ghz": {
+        "db": 41.44,
+        "share_lost": 0.9999
+       }
+      },
+      "usable_floor": {
+       "elevation_deg": 30.0,
+       "path_km": 33.22,
+       "2.45_ghz": {
+        "db": 1.214,
+        "share_lost": 0.2438
+       },
+       "5.8_ghz": {
+        "db": 78.46,
+        "share_lost": 1.0
+       }
+      }
+     }
+    }
+   },
+   "rating_headroom_db": 1.761
+  },
+  "reefs": {
+   "beam_columns": {
+    "towns": {
+     "operating": {
+      "elevation_deg": 71.19,
+      "strip_km": [
+       1.0,
+       4.406
+      ],
+      "mean_width_km": 3.441,
+      "by_cover": {
+       "0.001": {
+        "crossings_per_beam_day": [
+         0.00762,
+         0.2498
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.003055,
+         0.00717
+        ],
+        "crossing_hours": [
+         1.234,
+         15.12
+        ],
+        "switches_per_receiver_day": [
+         0.02286,
+         0.7494
+        ]
+       },
+       "0.01": {
+        "crossings_per_beam_day": [
+         0.0762,
+         2.498
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.03013,
+         0.06943
+        ],
+        "crossing_hours": [
+         1.234,
+         15.12
+        ],
+        "switches_per_receiver_day": [
+         0.2286,
+         7.494
+        ]
+       },
+       "0.02": {
+        "crossings_per_beam_day": [
+         0.1524,
+         4.996
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.05935,
+         0.134
+        ],
+        "crossing_hours": [
+         1.234,
+         15.12
+        ],
+        "switches_per_receiver_day": [
+         0.4572,
+         14.99
+        ]
+       }
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "strip_km": [
+       1.0,
+       18.32
+      ],
+      "mean_width_km": 12.3,
+      "by_cover": {
+       "0.001": {
+        "crossings_per_beam_day": [
+         0.0198,
+         0.737
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.009875,
+         0.02547
+        ],
+        "crossing_hours": [
+         3.694,
+         39.72
+        ],
+        "switches_per_receiver_day": [
+         0.0594,
+         2.211
+        ]
+       },
+       "0.01": {
+        "crossings_per_beam_day": [
+         0.198,
+         7.37
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.09448,
+         0.2274
+        ],
+        "crossing_hours": [
+         3.694,
+         39.72
+        ],
+        "switches_per_receiver_day": [
+         0.594,
+         22.11
+        ]
+       },
+       "0.02": {
+        "crossings_per_beam_day": [
+         0.396,
+         14.74
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.18,
+         0.4031
+        ],
+        "crossing_hours": [
+         3.694,
+         39.72
+        ],
+        "switches_per_receiver_day": [
+         1.188,
+         44.22
+        ]
+       }
+      }
+     }
+    },
+    "ground": {
+     "operating": {
+      "elevation_deg": 61.23,
+      "strip_km": [
+       3.0,
+       8.491
+      ],
+      "mean_width_km": 7.316,
+      "by_cover": {
+       "0.001": {
+        "crossings_per_beam_day": [
+         0.01295,
+         0.4629
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.008411,
+         0.02456
+        ],
+        "crossing_hours": [
+         2.31,
+         25.88
+        ],
+        "switches_per_receiver_day": [
+         0.03884,
+         1.389
+        ]
+       },
+       "0.01": {
+        "crossings_per_beam_day": [
+         0.1295,
+         4.629
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.08099,
+         0.2202
+        ],
+        "crossing_hours": [
+         2.31,
+         25.88
+        ],
+        "switches_per_receiver_day": [
+         0.3884,
+         13.89
+        ]
+       },
+       "0.02": {
+        "crossings_per_beam_day": [
+         0.2589,
+         9.258
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.1554,
+         0.3919
+        ],
+        "crossing_hours": [
+         2.31,
+         25.88
+        ],
+        "switches_per_receiver_day": [
+         0.7768,
+         27.77
+        ]
+       }
+      }
+     },
+     "usable_floor": {
+      "elevation_deg": 30.0,
+      "strip_km": [
+       3.0,
+       20.32
+      ],
+      "mean_width_km": 14.85,
+      "by_cover": {
+       "0.001": {
+        "crossings_per_beam_day": [
+         0.0233,
+         0.8771
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.01789,
+         0.05422
+        ],
+        "crossing_hours": [
+         4.402,
+         46.8
+        ],
+        "switches_per_receiver_day": [
+         0.06991,
+         2.631
+        ]
+       },
+       "0.01": {
+        "crossings_per_beam_day": [
+         0.233,
+         8.771
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.1651,
+         0.4273
+        ],
+        "crossing_hours": [
+         4.402,
+         46.8
+        ],
+        "switches_per_receiver_day": [
+         0.6991,
+         26.31
+        ]
+       },
+       "0.02": {
+        "crossings_per_beam_day": [
+         0.4661,
+         17.54
+        ],
+        "share_of_time_blocked_without_switching": [
+         0.303,
+         0.6721
+        ],
+        "crossing_hours": [
+         4.402,
+         46.8
+        ],
+        "switches_per_receiver_day": [
+         1.398,
+         52.63
+        ]
+       }
+      }
+     }
+    }
+   },
+   "switch_offset_deg": [
+    10.27,
+    30.8
+   ],
+   "what_a_reef_takes": {
+    "town_beam_w_m2": [
+     5.1,
+     27.37
+    ],
+    "town_beam_rated_w_m2": [
+     7.65,
+     41.05
+    ],
+    "ground_beam_w_m2": 76.67,
+    "ground_beam_rated_w_m2": 115.0,
+    "overhead_sun_in_the_reef_layer_w_m2": [
+     647.6,
+     733.3
+    ]
+   }
+  },
+  "single_tiles": {
+   "tile_faults_per_year": 0.1,
+   "reassign_s": 600.0,
+   "beam_losses_per_receiver_year": 0.3,
+   "double_losses_per_receiver_year": 1.141e-06,
+   "double_losses_per_year_moonwide": [
+    0.8062,
+    0.8491
+   ],
+   "after_one_loss": "the other two beams carry the whole load at their rating",
+   "after_two_losses": "the last beam carries half the load until a fresh beam is placed",
+   "transmitting_tiles_failing_per_day": [
+    0.9696,
+    6.918
+   ]
+  },
+  "ring_fault": {
+   "days": 7.0,
+   "critical_share": {
+    "residents": 0.1,
+    "sky_control": 0.2,
+    "water": 1.0,
+    "cultures": 0.1,
+    "lamps": 0.05,
+    "close_computing": 0.25,
+    "hydrogen_remade": 0.0,
+    "trips": 0.0
+   },
+   "critical_tw": {
+    "residents_aloft": [
+     0.3997,
+     1.195
+    ],
+    "residents_ground": [
+     0.3997,
+     1.195
+    ],
+    "sky_control": [
+     0.05538,
+     0.5538
+    ],
+    "water": [
+     0.0007558,
+     0.02762
+    ],
+    "food_cultures": [
+     0.2939,
+     1.173
+    ],
+    "lamp_farms": [
+     0.2205,
+     2.23
+    ],
+    "close_computing": [
+     1.157,
+     1.157
+    ]
+   },
+   "critical_total_tw": [
+    2.527,
+    7.533
+   ],
+   "delivered_total_tw": [
+    22.12,
+    105.3
+   ],
+   "critical_share_of_delivered": [
+    0.1142,
+    0.07153
+   ],
+   "energy_twh": [
+    424.6,
+    1266.0
+   ],
+   "per_day_twh": [
+    60.66,
+    180.8
+   ],
+   "towns": {
+    "critical_tw": [
+     0.4551,
+     1.749
+    ],
+    "hydrogen_mt": [
+     4.592,
+     17.65
+    ],
+    "share_of_lifting_hydrogen": [
+     0.0001541,
+     0.0005923
+    ],
+    "share_of_reserve_lift": [
+     0.001027,
+     0.003949
+    ]
+   },
+   "ground": {
+    "critical_tw": [
+     2.072,
+     5.784
+    ],
+    "energy_twh": [
+     348.1,
+     971.7
+    ],
+    "hydrogen_mt": [
+     20.91,
+     58.36
+    ],
+    "electricity_to_make_it_twh": [
+     870.3,
+     2429.0
+    ],
+    "pumped_hydro_km3_at_korolevs_head": [
+     257.9,
+     719.7
+    ],
+    "korolev_level_m": [
+     1.833,
+     5.117
+    ],
+    "battery_bridge_twh": [
+     2.527,
+     7.533
+    ],
+    "battery_bridge_mt": [
+     8.424,
+     50.22
+    ]
+   },
+   "food": {
+    "rule": "the cities hold about a month of food (first screen), so production stops while the living cultures are kept alive"
+   },
+   "towns_hydrogen_unremade_share": [
+    0.0001916,
+    0.001916
+   ]
+  }
+ },
+ "summit": {
+  "people_billion": 0.1,
+  "latitude_deg": 5.375,
+  "ground_km": 11.59,
+  "brief_gw": 200.0,
+  "delivered_tw": {
+   "residents": [
+    0.09993,
+    0.2989
+   ],
+   "close_computing": [
+    0.05787,
+    0.05787
+   ],
+   "food": [
+    0.09225,
+    0.7037
+   ],
+   "total": [
+    0.25,
+    1.06
+   ]
+  },
+  "intake_tw": [
+   0.3441,
+   1.459
+  ],
+  "receiver_km2": [
+   1496.0,
+   6344.0
+  ],
+  "patches": [
+   166.2,
+   704.9
+  ],
+  "receiver_ring_width_km": [
+   6.732,
+   23.17
+  ],
+  "city_radius_km": 32.0,
+  "view": {
+   "tiles_above_horizon": {
+    "mean": 13300000.0,
+    "least": 13220000.0
+   },
+   "tiles_above_20_deg": {
+    "mean": 10140000.0,
+    "least": 9998000.0
+   },
+   "tiles_above_usable": {
+    "mean": 8578000.0,
+    "least": 8347000.0
+   },
+   "tiles_above_45_deg": {
+    "mean": 6246000.0,
+    "least": 5835000.0
+   },
+   "highest_tile_deg": {
+    "mean": 89.02,
+    "least": 78.02
+   },
+   "share_of_time_with_no_usable_tile": 0.0,
+   "share_of_time_with_no_tile_above_20_deg": 0.0,
+   "longest_usable_pass_h": {
+    "mean": 21.41,
+    "least": 20.52
+   },
+   "typical_usable_pass_h": 19.93,
+   "absorption": {
+    "2.45_ghz_summit": {
+     "best_tile_db": 0.1844,
+     "beams_db": 0.2336,
+     "beams_share_lost": 0.05236
+    },
+    "5.8_ghz_summit": {
+     "best_tile_db": 0.2091,
+     "beams_db": 0.2651,
+     "beams_share_lost": 0.05921
+    }
+   }
+  },
+  "beams_share_lost": 0.05236,
+  "heat_per_w_delivered": 1.452,
+  "critical_tw": [
+   0.03089,
+   0.08689
+  ],
+  "store_twh": [
+   5.189,
+   14.6
+  ],
+  "korolev_km3": [
+   3.844,
+   10.81
+  ],
+  "hydrogen_mt": [
+   0.3117,
+   0.8768
+  ],
+  "night_store_without_beams_twh": 70.9
+ },
+ "synthesis_check": {
+  "absorption_estimate_share": [
+   0.05,
+   0.08
+  ],
+  "absorption_computed_share": {
+   "zenith_sea_level": 0.05932,
+   "zenith_10_km": 0.04363,
+   "beams_load_weighted": [
+    0.07758,
+    0.07687
+   ],
+   "best_tiles_load_weighted": [
+    0.06316,
+    0.06259
+   ]
+  },
+  "heat_per_w": {
+   "synthesis": 1.376,
+   "with_air": [
+    1.492,
+    1.491
+   ]
+  },
+  "dimmer_against_tile_electricity": {
+   "dimmer_tw": [
+    117.1,
+    175.7
+   ],
+   "needed_tw": [
+    47.14,
+    224.2
+   ]
+  },
+  "polar": {
+   "synthesis": "the ring below the horizon within about 5 degrees of its plane's poles",
+   "computed": "the stack's tilted rings keep tiles above every horizon",
+   "tiles_above_the_horizon_at_the_pole": {
+    "mean": 9255000.0,
+    "least": 8172000.0
+   },
+   "highest_tile_at_the_pole_deg": {
+    "mean": 24.49,
+    "least": 19.89
+   }
+  },
+  "rain_10_km_50_100_mm_h_2_45_db": {
+   "earth_fall": [
+    0.0839,
+    0.1744
+   ],
+   "lunar_fall": [
+    0.262,
+    0.5446
+   ]
+  },
+  "rain_10_km_50_mm_h_5_8_share_lost": {
+   "earth_fall": 0.4417,
+   "lunar_fall": 0.9625
+  }
+ }
+}

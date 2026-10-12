@@ -508,6 +508,15 @@ is [distributions](../research/studies/distributions/README.md); numbers here ar
     Heritage meat at a kilogram a person a year takes 0.30 million km², a fifth of the homestead region, and its cattle
     add 1.6–1.7 Mt of methane a year, 0.34–1.6 ppm at steady state; red seaweed in cattle feed cut steers' methane yield
     by 45–68% over 147 days (Roque et al. 2021).
+62. **Beamed power holds through storms, reefs and the polar night, and its receivers take land equal to 36–59% of
+    C′'s settlements** (*screen*; [power](power.md)). On the author's chosen design the deep air takes 6.3–7.8% of the
+    2.45 GHz beams as used (ITU-R P.676-13 on the atmosphere domain's column), so each watt delivered leaves 1.47–1.49 W
+    of heat on the Moon, and the array's heat with close computing is 32.5–157 TW. The intake takes 47–224 TW of
+    electricity at the tiles, which the dimmer's light covers at the low-cost end, and 3,500–25,000 whole-tile
+    transmitters, 0.013–0.09% of the fleet. The stack's tilted rings leave no cap blind. Raindrops falling 2.9 times
+    slower make storms stop 5.8 GHz and barely touch 2.45 GHz. Sky reefs cross the beams' columns daily, so beams step
+    aside as a matter of routine. A fault across the whole ring leaves 2.5–7.5 TW of critical loads, and a week of
+    them, 425–1,270 TWh, comes from hydrogen or pumped water.
 
 ## Statements elsewhere that need correcting
 
@@ -525,6 +534,8 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 | [screen.py](screen.py) | The first screen: the heat ledger with the fleet's infrared, its heat mirror, computing and industry against the glow, food land, the night, tides and rivers, transit, fusion fuel, latency |
 | [population.md](population.md) | Population and living across the horizons: growth, the affluent band, what binds on the Moon and Earth, the array's habitats, commuting, Earth service |
 | [population.py](population.py) | Its screen, writing [results/population.json](results/population.json); sources in [population_sources.json](population_sources.json) |
+| [power.md](power.md) | The power system for the chosen beamed power: the deep air's absorption, rain, tiles and beams, the grid, reserves and the summit metropolis |
+| [power.py](power.py) | Its screen, writing [results/power.json](results/power.json); sources in [power_sources.json](power_sources.json) |
 | [computing.md](computing.md) | Computing in the array, supply against demand, from the fleet's control to the far-out tasks |
 | [computing.py](computing.py) | Its screen, writing [results/computing.json](results/computing.json); sources in [computing_sources.json](computing_sources.json) |
 | [results/first_screen.json](results/first_screen.json) | Its product (schema `terluna.provisioning.first-screen/1`) |

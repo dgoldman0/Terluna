@@ -232,9 +232,10 @@ and the power screen behind them; they lead this list, and the synthesis's
    and people's stocks, with weathering's calcium and magnesium as the mineral strand, through the first thousands of
    years in seconds a run. It sizes the managed return that holds 400 ppm (kilns, the magnesite route, dredged
    sediments), the build's carbon import and the oxygen that burial leaves in the air.
-4. **The power screen** (provisioning, question 3): for the chosen beamed design, the receivers and the beams each
-   tile carries, the grid's lines and losses, the deep air's absorption at 2.45 GHz, and the reserves through the
-   lunar cycle, storms, reef crossings and a fault across the ring. Minutes to an hour.
+4. **The power screen** (provisioning, question 3): done on 12 October on domain/provisioning
+   ([power](../provisioning/power.md)). The deep air takes 6.3–7.8% of the beams, so each watt delivered leaves
+   1.47–1.49 W of heat; the ground's receivers take land equal to 36–59% of C′'s settlements; a fault across the ring
+   leaves 2.5–7.5 TW of critical loads for a week's stores. Its next work: beams assigned through the lunar cycle.
 5. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
    its light redirected away from the Moon and used where it can be, for computing for instance. The biosphere and
    human work set the requirement's value; the shield's night-side attitude (rolls within the bundle's clearance),

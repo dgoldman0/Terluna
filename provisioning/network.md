@@ -65,9 +65,10 @@ model has been run.
 ## The array and space
 
 - **The array.** The ring fleet at 19,600–21,900 km is 0.13 s away by round trip, which keeps millisecond control
-  on the Moon, the Moon's AI services in the array and batch work for Earth at 2.56 s ([computing](computing.md)). A
-  ring band at 11.3–12.6 lunar radii stands above the horizon everywhere except within about 5° of its plane's poles
-  (*derived*). Nodes reach it by laser from above the weather.
+  on the Moon, the Moon's AI services in the array and batch work for Earth at 2.56 s ([computing](computing.md)). The
+  stack's rings, at 11.3–12.6 lunar radii and tilted up to 24°, keep 8–13 million tiles above every horizon, the
+  highest within 20–25° of it at the poles ([power](power.md), *screen*). Nodes reach it by laser from above the
+  weather.
 - **Position and time.** The fleet tracks its tiles' orbits closely to keep them clear, and it sits about as far from
   its users as GPS satellites are from theirs. Broadcasting those orbits with time gives the Moon a navigation and
   clock service, with the aerostats filling in the geometry.

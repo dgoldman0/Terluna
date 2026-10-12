@@ -60,13 +60,15 @@ on this laptop. The findings behind them are in the [README](README.md).
    alternatives: a grid from the day side, with 9–19% losses over 4,000–5,500 km, and storage at eight times Earth's
    pumped hydro for the metropolis alone. Fusion stays a conditional technology.
 
-   **How:** the power screen, a network model through the lunar cycle:
-   - the receivers and the beams each tile carries;
-   - the grid's lines and losses;
-   - the deep air's absorption at 2.45 GHz, computed;
-   - reserves for storms, reef crossings and tile faults, with days of storage for critical loads against a fault
-     across the whole ring;
-   - the summit city's power plan that its studies ask for.
+   The [power screen](power.md) sized it the same day. The deep air takes 6.3–7.8% of the beams as used, so each watt
+   delivered leaves 1.47–1.49 W of heat on the Moon; the tiles make 47–224 TW of electricity, which the dimmer's light
+   covers at the low-cost end; 3,500–25,000 whole-tile transmitters carry 2.1–2.2 million beams; the ground's
+   receivers take land equal to 36–59% of C′'s settlements; no polar cap is blind; rain barely touches 2.45 GHz and
+   storms stop 5.8 GHz; and a fault across the ring leaves 2.5–7.5 TW of critical loads, a week of them 425–1,270 TWh
+   from hydrogen or pumped water. The summit metropolis takes 0.25–1.06 TW on receivers round the city.
+
+   **Next:** a beam-assignment model through the lunar cycle, the transmitting tiles' design, the receivers' land with
+   the cities' look, what a late switch does to a reef, and the causes and restart time of a fault across the ring.
 4. **The food system.** The [food-systems study](../research/studies/food_systems/README.md) prices eight systems per
    billion residents, fits them to the lunar cycle and mixes them for 4, 6 and 8 billion, with the range each mix can
    be built over: rain-fed fields cost least and the rain feeds 9.1–27.0 billion outside a kept 30%; glass and lamps
