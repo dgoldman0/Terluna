@@ -460,6 +460,16 @@ is [distributions](../research/studies/distributions/README.md); numbers here ar
     homes count within the fields they work, 0.02–0.71% of their land. The farms' crews then come by regional ship
     from the dry highland cities poleward of 45°, 206 km away, or by sky boat from crew towns kept on the dry high
     ground at 30–45°.
+58. **C′ fits the author's wild share: at least half wild by preference, or 30% wild with another 20% hybrid.** Half
+    wild is the kept half of finding 57. Under the compromise, farms, cities and towns keep to the same half of each
+    zone and of the sky, so C′ keeps the kept half's land, heat, water and traffic. The study reads the hybrid fifth as
+    open to grazing and to the homesteads' homes beside their fields, up to 9,920 km², and every corner then fits with
+    the remedy's poleward and twilit placements alone. Farms, settlement and the homesteads' homes take 8.2–33% of the
+    dry land, and a light-polluted sky covers at most 14.7% of it, 17.2% with the metropolis lit at Earth's area a
+    person, so at least 82.8% keeps a dark sky against the preferred half and the compromise's 30%. Half wild
+    with another 20% hybrid, run beside them for comparison at the author's request, leaves farms and towns 30%: every
+    corner still fits with those placements, while the high-cost end draws 3,250 km³ a year from the seas to water its
+    fields and the sky towns have 1.7 times as many conflicts a day.
 
 ## Statements elsewhere that need correcting
 

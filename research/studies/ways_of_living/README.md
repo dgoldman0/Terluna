@@ -477,7 +477,9 @@ Stated once; the product's `assumptions` block holds them all.
   lie beside smaller lakes and rivers of 100 m³/s or more; the highlands start 4 km above the sea; the rain belt lies
   within 30°.
 - **Kept shares.** 30% and half, the Kunming–Montreal and Half-Earth levels in ecology's account, applied to every
-  home and to the sky. How much of the Moon is kept wild and dark is the author's to set.
+  home and to the sky. The author set the wild share on 11 October 2026, at least half wild by preference or 30% wild
+  with another 20% hybrid ([decisions](../../decisions.md#people-on-the-moon-and-beyond-11-october-2026)), and the
+  food and distributions studies apply it.
 - **Mixes.** A mix places people four times as densely in its favoured settings, after the metropolis's planned 100
   million and the undersea domes.
 - **Food.** Crops grow on the rain alone in the bands where most land is wet (0–45°), wettest first; beyond that they
