@@ -1,0 +1,21 @@
+{
+ "about": "Primary sources read for this study, with what was read and how far. The study's other numbers come from the committed and bound products named in the product's producer block. The task allowed at most five primary sources on habitat mass or energy per person for Mars or free-space settlements; two were read, and reading stopped there.",
+ "sources": [
+  {
+   "key": "globus2007_kalpana",
+   "citation": "Globus, Arora, Bajoria & Straut 2007, The Kalpana One Orbital Space Settlement Revised, AIAA Space 2007 conference paper",
+   "doi_or_url": "https://nss.org/wp-content/uploads/2017/07/Kalpana-One-2007.pdf",
+   "sha256_of_the_copy_read": "e23e96458c1d3c200eb9839ddcd5559e4d40ea0db60e02a2123161113ba2d59d",
+   "use": "A free-space settlement's mass and energy a resident: 3,000 residents in a cylinder 250 m in radius and 325 m long at 2 rpm; up to 10 t/m2 of lunar or asteroid shielding inside the hull, perhaps seven million tons in all; 170 m2 of 1 g living area a resident; about 60 kW of continuous power a resident, 50 kW for intensive lamp-lit agriculture and 10 kW for other purposes; 50 m2 of high-intensity controlled-environment agriculture to feed one person",
+   "access": "full text, all 12 pages (abstract, hull and interior morphology, power and thermal control, appendix)"
+  },
+  {
+   "key": "donofrio2021_city_npc",
+   "citation": "Donofrio & Kirk 2021, City NPC: Plan for Building a Million Person Martian City-State, arXiv:2112.06155",
+   "doi_or_url": "https://arxiv.org/abs/2112.06155",
+   "sha256_of_the_copy_read": "b81780358554e7043721e1d57e93874bf11548f07fb6c67a17ff64c391190f67",
+   "use": "A Mars city's power and food a person: its colony stage at 2 kWe a member, the Mars Society reference's minimum; the city of one million at 5 GWe, 5.46 kWe a person, from forty 141 MWe molten-salt reactors; 15,000 ha of greenhouse for the million at a 1,600 kcal/day aim; lava-tube districts 25 km long and 100 m across holding 25,000 people each",
+   "access": "full text (location, shelter, power, atmosphere and climate control, food sections); a design-competition plan, not peer reviewed"
+  }
+ ]
+}

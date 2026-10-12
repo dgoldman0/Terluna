@@ -71,7 +71,7 @@
     "commit": "d9bc800bc2c9bbb1fa186b376710ed9e81c0919c",
     "blob": "c854c05285193ee493859fa087cb74d05903b5a9",
     "sha256": "a6a5d0cf96b42a1a18921f61566a638487cec3e602bd2ca752542a1c4a31affe",
-    "read_from": "git object at the pinned commit",
+    "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "climate/results/gcm/zonal_winds_A28_dim5_moon.npz": {
@@ -79,7 +79,7 @@
     "commit": "d9bc800bc2c9bbb1fa186b376710ed9e81c0919c",
     "blob": "20ebd86705a416c8bd18bf1b013dacef7644bc1c",
     "sha256": "c9b1a0ae8e8733b5d9fb1b60600aa2c43329c9b82bb86ccf4f1bb4a4a58a97e6",
-    "read_from": "git object at the pinned commit",
+    "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "climate/gcm/zonal_winds.md": {

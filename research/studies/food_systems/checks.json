@@ -1,0 +1,352 @@
+{
+ "date": "2026-10-11",
+ "study": "research/studies/food_systems",
+ "branch": "domain/provisioning",
+ "base_commit": "b82e0dc",
+ "scope": "Numerical, provenance and software checks of a screen; no crop, hydrology or ecosystem model, and no empirical validation of any lunar food system.",
+ "tests": {
+  "command": "python3 -m pytest -q research/studies/food_systems",
+  "result": "19 passed",
+  "passed": 19,
+  "failed": 0,
+  "skipped": 0
+ },
+ "layer_check": {
+  "command": "python3 shared/check_layers.py",
+  "result": "873 files checked, 0 violations"
+ },
+ "make_check": "not run, as the brief instructs",
+ "review": {
+  "reviewer": "an independent read-only reviewer that recomputed the headline numbers from the product and the inputs with its own scripts",
+  "snapshot": "review/snapshot_1004 on the research drive (provisioning-runs/food_systems)",
+  "report": "provisioning-runs/food_systems/review/review_report.md",
+  "arithmetic": "133 of 133 system quantities and the mixes within 1% across 7 mixes, 3 populations, 2 kept shares and 2 ends; the findings concern modelling choices and the README.",
+  "findings": [
+   {
+    "id": "F3",
+    "severity": "E",
+    "finding": "Power-made food counted microbial protein for all 94.2 g, against the study's half-protein nucleic-acid cap.",
+    "resolution": "Half the protein from bacteria, the other half from a fungus fermented on sugar made from power, so the diet keeps its 94.2 g. Power-made food 0.716-2.86 -> 0.695-2.79 kW a resident (with F4, F7 and the confirmation's R10 and R12); the mix at 8 billion 5.78-23.0 -> 5.59-22.4 TW."
+   },
+   {
+    "id": "F4",
+    "severity": "E",
+    "finding": "Power-made sugar supplied all 2,500 kcal and the protein and produce energy came on top.",
+    "resolution": "Sugar supplies the intake less the protein energy (4.27-4.36 kcal/g, USDA FoodData Central records) and the lamp-grown lettuce and tomatoes' 75 kcal (confirmation R12): 2,010-2,020 kcal a day."
+   },
+   {
+    "id": "F15",
+    "severity": "E/M",
+    "finding": "Fish-feed crops took the diet's mean nitrogen per area; the feed carries 1-3 times the diet's N.",
+    "resolution": "Feed crops take the feed's own nitrogen over the chain's 40-60% efficiency, at the field or soilless N2O share, and on glass discharge the feed's phosphorus. Fog-desert glass mix at 8 billion: N2O 0.31-1.42 -> 0.50-3.38 ppb a year (feasible 0.50-0.71); greenhouse-heavy 0.22-1.14 -> 0.29-2.2."
+   },
+   {
+    "id": "F6",
+    "severity": "E",
+    "finding": "Glass transmission took 0.73 for the yield and 0.66 for the cooling at the low-cost end.",
+    "resolution": "One transmission per end for yield, cooling and the energy cap. Closed glass 2.09-12.6 -> 2.33-12.8 kW a resident (with F19)."
+   },
+   {
+    "id": "F2",
+    "severity": "M/E",
+    "finding": "The high-cost end paired ecology's rain shares at its 10.9 mm need with the capped 5.02 mm watering need.",
+    "resolution": "One need per end: the need held to the energy cap (4.85-5.02 mm a day) and ecology's rain shares raised in the same proportion, min(1, share x ecology need / capped need), 2.17 times at the high-cost end. Rain-fed land 2.62-5.90 -> 5.59-5.79 million km2 eq (5.28-5.46 in the bands the fill reaches); the rain feeds 4.67-29.7 -> 9.4-27.5 billion outside a kept 30%; rain-belt top-up 115-889 -> 115-522 km3 and 15.5-146 -> 13.1-85.8 W; rain-fed first at 8 billion 0-4,630 -> 0 km3 of sea water. The README states the alternative: at ecology's lowest efficiency the crop model's yields cannot be reached and the rain feeds 4.3 billion at that end."
+   },
+   {
+    "id": "F1",
+    "severity": "M",
+    "finding": "The 0-15 degree band was set to 1.000 where ecology divides by the equator's production.",
+    "resolution": "Bands now divided by the plant model's production at 0 degrees, as ecology does: rain-fed land at ecology's need 2.62-5.90 -> 2.58-5.79 million km2 eq; the README gives the remaining gap to ecology's 2.51-5.65 to band areas."
+   },
+   {
+    "id": "F7",
+    "severity": "M",
+    "finding": "Food losses were not applied to the protein systems that replace the animal part.",
+    "resolution": "Microbial protein, aquaponics, sea farms and fermentation grow 1.3-1.5 times the protein eaten. Aquaponic feed crops 34,200-206,000 -> 44,500-309,000 km2 (4.4-6.1 times ecology's animal part); microbial animal part 30.5-88.7 -> 39.7-133 W; seaweed 15,800-55,400 -> 20,500-83,100 km2; shellfish 30,700-272,000 -> 39,900-407,000 km2."
+   },
+   {
+    "id": "F13",
+    "severity": "M",
+    "finding": "Glass was placed with no zone capacity check; kept-half overflows were invisible.",
+    "resolution": "Every case's use of each zone, grazing included, is set against its land outside the kept share (zone_use_share); ends that overflow are flagged (feasible, overflowing) and the feasible range is reported beside the full range (feasible_to, feasible_range); the tables carry both kept shares."
+   },
+   {
+    "id": "F8",
+    "severity": "M",
+    "finding": "Finding 10's wild shares ignored grazing of up to 237% of the fog desert.",
+    "resolution": "Dry-land and fog-desert wild shares count grazing; rain-fed first's high-cost end is flagged and its feasible range ends 42-84% of the way (kept 30%)."
+   },
+   {
+    "id": "F16",
+    "severity": "M",
+    "finding": "'Under 2 MW' for lifting phosphorus held only for pure phosphorus.",
+    "resolution": "The README gives the food lifted: 1.32 kg a day for 4 billion residents aloft, 0.99 GW at resources' ideal 16.1 kJ per kg, 1.4 GW at its 70% efficiency (checks.food_lift_to_10_km in the product)."
+   },
+   {
+    "id": "F17",
+    "severity": "M",
+    "finding": "checks.json was missing.",
+    "resolution": "This file."
+   },
+   {
+    "id": "F19",
+    "severity": "m/M",
+    "finding": "The evaporation cap applied only at the equator, and the CO2's stomatal saving was ignored.",
+    "resolution": "The cap applies by latitude band to watered fields and by zone inside glass (2.0-3.4 mm a day); the house's CO2 cuts the water per unit growth through the gain and Nederhoff's 3-4% stomatal closure per 100 ppm, 1.0-1.21 times vented and 1.18-1.49 times closed. Fog-desert vented glass 212,000-804,000 -> 246,000-974,000 km2 (83-86% of its light-limited yield), drawing 233-680 -> 189-671 km3 from the seas; fog-desert watered fields 182,000-515,000 -> 247,000-736,000 km2."
+   },
+   {
+    "id": "F5",
+    "severity": "m",
+    "finding": "Nitrogen-fixation power was added in full beside microbial protein's own ammonia.",
+    "resolution": "The mixes scale fixation by the share of protein grown on crops."
+   },
+   {
+    "id": "F9",
+    "severity": "m",
+    "finding": "Some pairs broke the [low-cost, high-cost] order.",
+    "resolution": "The reading rule names the ranges kept smallest first: the basis and derived blocks, billions_the_rain_feeds, billions_the_waters_supply, residents_per_km2 and the fog nets' yields_low_to_high."
+   },
+   {
+    "id": "F10",
+    "severity": "m",
+    "finding": "Sugar's food energy came from Dinger & Platt's theoretical electricity per mole.",
+    "resolution": "Glucose's 3.72 kcal a gram, from its enthalpy of combustion, 2,805.0 kJ a mole (NIST Chemistry WebBook; confirmation R10). Fermentation's sugar crops 5,650-7,790 -> 7,050-11,200 km2 (with F7)."
+   },
+   {
+    "id": "F11",
+    "severity": "m",
+    "finding": "The 30-45 degree band was capped at the wet middle latitudes' area while booking fields to its highlands.",
+    "resolution": "The band's fill land is the wet middle latitudes plus its own highlands; the README states it."
+   },
+   {
+    "id": "F14",
+    "severity": "m",
+    "finding": "Finding 1's capacity counted every band, beyond the bands the fill reaches.",
+    "resolution": "The systems use the fillable rain-fed land (0-45 degrees), 5.28-5.46 million km2 eq; the all-band value stays in the basis."
+   },
+   {
+    "id": "F12",
+    "severity": "m",
+    "finding": "The array's 1,900-2,400 PW was not in the product.",
+    "resolution": "basis.array_intercepted_pw, from the population product."
+   },
+   {
+    "id": "F18",
+    "severity": "m",
+    "finding": "The Dutch-tomato check's upper bound was a lit crop.",
+    "resolution": "The check gives unlit tomatoes, 9,900-12,400 kcal/m2 a year (Raaphorst et al. 2002; de Gelder & Grootscholten 2011), and the lit hybrid's 16,700 apart; the README says the crop model's 11,200-15,500 sits between them."
+   },
+   {
+    "id": "F20",
+    "severity": "m",
+    "finding": "Pump efficiency was mixed within an end.",
+    "resolution": "One efficiency per end for lift, pipe and emitters (0.85 low-cost, 0.70 high-cost): top-up 1.18-1.44 -> 1.00-1.44 kWh/m3."
+   },
+   {
+    "id": "F26",
+    "severity": "m",
+    "finding": "The aquaponics low end mixed catfish electricity and water with tilapia fillets.",
+    "resolution": "Tilapia throughout: 3.09 kWh and 76 L per kg live. Aquaponics power 8.65-44.5 -> 45-66.8 W a resident (with F7)."
+   },
+   {
+    "id": "F27",
+    "severity": "m",
+    "finding": "'Fish emit the most N2O' failed at the low-cost end.",
+    "resolution": "Finding 7 now says the fish emit three to seven times the field diet's N2O."
+   },
+   {
+    "id": "fog",
+    "severity": "light",
+    "finding": "The cut-off was tested on bin means; two rings lie outside the fog desert.",
+    "resolution": "Resolved by the coordinator's first note (below); the bracket takes the 45 N and 45 S rings and shows the tilted rings beside them."
+   },
+   {
+    "id": "sea P",
+    "severity": "light",
+    "finding": "Drawn phosphorus was framed as a benefit; the farms' 50 m share was unstated.",
+    "resolution": "Resolved by the coordinator's third note (below); the README states the 2.9-5.9 times the seas shallower than 50 m."
+   },
+   {
+    "id": "fill",
+    "severity": "note",
+    "finding": "The fog-desert spill branch was never exercised.",
+    "resolution": "test_field_fill_spills_to_the_fog_desert exercises it on a synthetic basis; no product case reaches it."
+   },
+   {
+    "id": "rounding",
+    "severity": "m",
+    "finding": "3-figure values rounded again to 2 figures in the README.",
+    "resolution": "Tables and prose rounded once from the unrounded product (confirmation R5): 41.5-425 TW, 7.4-39 kcal per kWh, 30-87 kWh per kg of protein, 25-43% more land."
+   },
+   {
+    "id": "citations",
+    "severity": "m",
+    "finding": "blom2022 listed twice; sources.json omitted values parameters.py takes; Montero 2011 for 2010; the test description overstated.",
+    "resolution": "One blom2022 entry (99 sources); every source lists values_used; Montero et al. 2010; the README says every parameter names a source in sources.json."
+   },
+   {
+    "id": "writing",
+    "severity": "m",
+    "finding": "'Hydrogen-oxidizing' in a docstring.",
+    "resolution": "Now 'Hydrogen-oxidising'."
+   }
+  ]
+ },
+ "coordinator_notes": [
+  {
+   "note": "fog nets",
+   "asked": "Bracket the collection for gusts within each 10-degree bin, and state the method's reach once.",
+   "resolution": "Each bin's speeds spread as a Weibull distribution about its mean, from a Rayleigh spread with fog and wind independent and the means rounded down to each ring's whole-cycle spread (shape 1.06-1.34 from its median and 90th percentile) with the fog in the windiest share and the means rounded up. The ring products hold no fog and wind paired snapshot by snapshot (composites only; the committed fields files hold sections, storms and rain maps), so no snapshot pairing. Above the 1 m/s cut-off 0 -> 0-98 L/m2 a year; all wind 0.34-25 -> 0.007-145; Earth's sites 1,100-3,650. The README keeps the finding with Earth's evidence (Montecinos 2018, Rivera 2011, Mazoyer 2022) and states the method once, in finding 4."
+  },
+  {
+   "note": "unbuildable combinations",
+   "asked": "Flag every combination that overflows its zone and report the feasible range beside the full range.",
+   "resolution": "Flags per case and end; the feasible range runs to the fraction of the way, every input moved together, where the first zone fills. Rain-fed first fits to 42-84% (kept 30%) and 30-60% (kept half); greenhouse-heavy to 97% at 8 billion (kept 30%) and 64-91% at 6-8 billion (kept half); fog-desert glass to 16-57% (kept 30%), 13-36% at 4-6 billion and neither end at 8 billion (kept half); sea-supported at neither end. The README says plainly that at 4-8 billion pasture cannot carry the animal part."
+  },
+  {
+   "note": "sea farms",
+   "asked": "Bind resources/results/sea_phosphorus.json at edf7fb5, set the draw against it and mark the mix.",
+   "resolution": "Bound by git show with blob caf24c2d1f9fcf2a89945bb4b073848fbbad4c43 and its sha256. The waters' life can spare 21-56 kt a year (1.4-3.7 kt in the common-level waters; 44-377 kt with particle release); the sea-supported mix draws 0.86-4.1 Mt a year at 4-8 billion, 15-195 times that, so it fits at neither end; the waters carry the animal part of 0.04-0.26 billion people."
+  }
+ ],
+ "confirmation": {
+  "scope": "A focused confirmation of review/snapshot_final: it reproduced the systems, the mixes, all 42 feasibility cases, the fog bracket, the sea-farm ceiling and F2's scaling, which matches ecology's own formula, and listed residuals.",
+  "residuals": [
+   {
+    "id": "R1-R4",
+    "residual": "Prose double-rounded: 2.5-7.5%, 0.87-4.1 Mt, 0.05-0.078 TW, 30-88 kWh.",
+    "resolution": "Now 2.5-7.4%, 0.86-4.1 Mt, 0.05-0.077 TW and 30-87 kWh per kg of protein, rounded once."
+   },
+   {
+    "id": "R5",
+    "residual": "Table cells rounded twice, to whole percents from 3-figure values.",
+    "resolution": "tables.py and system_table.py read the unrounded product (the runner without its rounding) and round each cell once."
+   },
+   {
+    "id": "R6",
+    "residual": "The band-area bullet did not split the remaining gap to ecology's 2.51-5.65.",
+    "resolution": "Now: the band areas add 1.5% and ecology's shares, given to two figures, 1%."
+   },
+   {
+    "id": "R7",
+    "residual": "'Sits above' unlit Dutch tomatoes overstated the check.",
+    "resolution": "Now: overlaps the top of unlit Dutch tomatoes, 9,900-12,400 kcal/m2 a year, and stays below the lit hybrid 16,700."
+   },
+   {
+    "id": "R8",
+    "residual": "'The top of that range' for 2.74 g C per kg.",
+    "resolution": "Now 'near the top of that range'."
+   },
+   {
+    "id": "R9",
+    "residual": "'toward'.",
+    "resolution": "'towards'."
+   },
+   {
+    "id": "R10",
+    "residual": "Sugar made on power is glucose, 3.72 kcal a gram.",
+    "resolution": "glucose_combustion_kj_per_mol = 2,805.0 kJ a mole (NIST Chemistry WebBook, alpha-D-glucose, Ponomarev & Migarskaya 1960 as reanalysed by Cox & Pilcher 1970; the value read, against the confirmation's 2,803), giving 3.72 kcal a gram; the source is in sources.json with values_used and the README cites it."
+   },
+   {
+    "id": "R11",
+    "residual": "The feed's phosphorus was unstated.",
+    "resolution": "The README says the feed's phosphorus, 1.0-6.0 Mt a billion, cycles through the fields and the sludge, and that the mixes count the fields' losses for the diet alone."
+   },
+   {
+    "id": "R12",
+    "residual": "The power-made sugar subtracted the reference diet's 204 kcal of produce; the lamps grow lettuce and tomato.",
+    "resolution": "Sugar now covers the intake less the protein energy and the lettuce and tomatoes' 75 kcal (129 kcal more sugar). With R10, power-made food 0.673-2.71 -> 0.695-2.79 kW a resident, +3.3% and +2.9%; at 8 billion 5.41-21.7 -> 5.59-22.4 TW."
+   },
+   {
+    "id": "R13",
+    "residual": "Finding 2's latitude for the fog desert's watered fields.",
+    "resolution": "Now: the sunlight at 45-60 degrees lets them transpire enough for 71-75% of the crop model's production there."
+   },
+   {
+    "id": "R14",
+    "residual": "The reading rule missed the rain on glass and each ring's fog yields among the smallest-first ranges.",
+    "resolution": "Added to the rule."
+   },
+   {
+    "id": "docstring",
+    "residual": "run.py said four inputs live on other branches.",
+    "resolution": "Seven, as in BOUND."
+   },
+   {
+    "id": "test",
+    "residual": "test_vertical_farm_power_scales_with_light_use never called systems.vertical_farms.",
+    "resolution": "It now calls vertical_farms on a synthetic basis at both ends and checks the power against the formula and its scaling with efficacy."
+   },
+   {
+    "id": "records",
+    "residual": "checks.json slips (64-92%, 0.87-4.1, greenhouse-heavy N2O 0.30) and a stale before_after.txt.",
+    "resolution": "Fixed here (64-91%, 0.86-4.1, 0.29-2.2); before_after.txt regenerated from the final product."
+   }
+  ]
+ },
+ "not_done": [
+  "make check (by instruction)",
+  "a second review: the coordinator arranges a focused confirmation",
+  "no literature search in this round"
+ ],
+ "hashes": {
+  "product_sha256": "5767be0b3ff175309929f7089c9787abd917a38a60a6a8c644943c2ce4f99536",
+  "files_sha256": {
+   "mixes.py": "f7128c03c68fee5f9ee969652dfc0cebcdb7ebf1a7f459f80a6a250dd3125aef",
+   "parameters.py": "380459175e57700407702b0017b33944f18b0295b63ae589ade04dd72e3637f7",
+   "run.py": "c34fea609ebc70e0cf08aa703c83904357ac9304a3ccb6c41b6227a979c445ca",
+   "systems.py": "c171411cd69c0eb492777de3e5ab420995a841f860e45f850a5f57f14ca8b5e0",
+   "test_run.py": "6c9271573933e7aea2267dc4b6fc7525d9de1b848fe22361a6e8817268990fae",
+   "zones.py": "59f9cc439fcb8997818afcc2318495b83e07565d2a2718846bfa65d4986c6ccb",
+   "sources.json": "40a3c98981c16d28f02f2aae8ed345e15e367efbd6f199733bcf5084572eb14c",
+   "README.md": "eb0e28cd1ca38bc44ec81ddbaef32bfc2b8dcdb9ca67443ef60cce4aa89a2109"
+  }
+ },
+ "land_rules": {
+  "date": "2026-10-11",
+  "asked": "The author's wild share (research/decisions.md, People on the Moon and beyond): at least half of the land and of the dark sky wild preferred, applied to every zone, or 30% wild with another 20% hybrid as a compromise; and, at the author's request (\"You could have still kept (and you can restore if you can) the other run just as comparison.\"), the earlier reading, half wild with another 20% hybrid, beside them for comparison.",
+  "built": "Four land rules: kept_30 and kept_50 as before, wild_30_hybrid_20 and wild_50_hybrid_20. Fields, glass, cities and towns keep outside a rule's wild and hybrid shares; the study reads the hybrid part as open to grazing.",
+  "unchanged": "The kept_30 and kept_50 results match the committed product value for value.",
+  "tests": "python -m pytest research/studies/food_systems: passed (61 across both studies, 80 with ways of living)",
+  "review": {
+   "reviewer": "independent read-only reviewer, snapshot 1 (provisioning-runs/land_rules/review/snapshot_1.sha256)",
+   "report": "provisioning-runs/land_rules/review/review_report.md on the research drive",
+   "findings": "1 error (the rain-fed wild share against 1 - kept), 8 inconsistencies (reading rule, wild-share denominators unexplained, the middle-wet cap untested and unstated, the homesteads' count on uncapped fields, the comparison's request unrecorded, two-share framing in the intro and assumptions, the fog band's share under grazing, LandRule equality) and 7 wording points",
+   "applied": "all sixteen on 2026-10-11, before the confirmation",
+   "confirmation": {
+    "snapshot": "provisioning-runs/land_rules/review/snapshot_2.sha256",
+    "report": "provisioning-runs/land_rules/review/confirmation_report.md on the research drive",
+    "verdicts": "9 confirmed (2, 5, 6, 7, 8, 9, 12, 15, 16), 7 partly confirmed (1, 3, 4, 10, 11, 13, 14), none unconfirmed; 5 new points (A-E): the reading rule's wording for C′ and for the wild shares' subtractions, the hold test passing without the hold, the READMEs' check paragraphs, and this record",
+    "residuals": "Applied by the coordinator on 2026-10-11 after the confirmation and not reviewed: both reading rules extended; the hold test now checks the fill's room, and a test pins C′'s fits under every rule; 'of the land and of the dark sky' for the author's words; the dark-sky test in finding 58; the used-share label names the homesteads' homes; the register link's anchor; the check paragraphs list the new tests."
+   }
+  },
+  "files_sha256": {
+   "run.py": "6db6811b0999de1e36370b7c9a46b9a283af9b634d99281dea328c554ae39270",
+   "systems.py": "0a217b5eead0f76bd47a26090757611d0229bc642e8ea9917e0fc28393a9cf74",
+   "mixes.py": "513d7e1f32fbae1de1cca502081b651b7c95cc821be3702511f70448dfbfff39",
+   "test_run.py": "8b616d3ebc2f095a649f3490c3c520d825912f16683e74a4ad82d40beafa0ba4",
+   "README.md": "ef2228a951e3788c8dfc5eb00e22e87f122421b892470ec9a2e88b8acabf4211",
+   "results/food_systems.json": "f0a9e581026522041436146513e40ae4414ef385882d4d323b61971d5d8ca734"
+  },
+  "parks": {
+   "date": "2026-10-11",
+   "asked": "The author's direction for the hybrid land (research/decisions.md, People on the Moon and beyond): heavily manicured megaparks and great gardens, food gardens among them, for leisure and entertainment, with small shops, restrooms and places to rest, used by residents and visitors and kept by heavy automation.",
+   "built": "The hybrid part of each hybrid rule is parkland, closed to fields, glass, towns and grazing; the compromise gives the kept half's results in every case, and the comparison takes the same parks.",
+   "tests": "python -m pytest research/studies/food_systems: passed (63 across both studies, 82 with ways of living)",
+   "review": {
+    "reviewer": "independent read-only reviewer, snapshot 3 (provisioning-runs/land_rules/review/snapshot_3.sha256)",
+    "report": "provisioning-runs/land_rules/review/parks_review_report.md on the research drive",
+    "findings": "no errors; 6 inconsistencies (the middle-wet hold sentence named only C prime, the dark-sky bound left out the parks' light, the comparison also became parkland, the register's earlier description of hybrid land unmarked as replaced, the parks' water placed only in the dry highlands, a product key and comments leaving out grazing), wording points, and four untested claims",
+    "applied": "all on 2026-10-11 by the coordinator, not re-reviewed; the comparison taking the same parks is put to the author; tests added for the dark-sky bound with every park lit, the comparison's grazing against the land outside the closed share and the homesteads' homes on the farm half"
+   },
+   "files_sha256": {
+    "run.py": "7c1914c66654149564152444db9322f09ba53282fd22b7796d83231508ef26fb",
+    "systems.py": "c049b3435c3e2763451ef795b9db88d1db251bc5b36a5178b1140e760fdfb618",
+    "mixes.py": "4aaf17ee09d40296d3227136e46aa0d2414569bfe27476287352a065b3c75c65",
+    "test_run.py": "f341db2975756592d1e76519f894d27e733ce8ffcc14b19b6ba6cb75f4e6529b",
+    "README.md": "59607ab78387e84b197a678029791499f2867a2ec8667fdd96b12aa1ca9ed750",
+    "results/food_systems.json": "5696c5b38290d1935589c9ff52a2be994b484e59ff9dc7175fceb2e346389433"
+   }
+  }
+ }
+}

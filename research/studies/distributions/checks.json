@@ -1,0 +1,303 @@
+{
+ "date": "2026-10-11",
+ "study": "research/studies/distributions",
+ "branch": "domain/provisioning",
+ "base_commit": "fa595c8",
+ "scope": "Numerical, provenance and software checks of a screen that combines committed and bound products; no new climate, crop, ecosystem or habitat model, and no empirical validation of any distribution.",
+ "tests": {
+  "command": "python3 -m pytest -q research/studies/distributions",
+  "result": "34 passed",
+  "passed": 34,
+  "failed": 0,
+  "skipped": 0
+ },
+ "layer_check": {
+  "command": "python3 shared/check_layers.py",
+  "result": "887 files checked, 0 violations"
+ },
+ "make_check": "not run, as the brief instructs",
+ "review": {
+  "reviewer": "an independent read-only reviewer that recomputed every headline from the product and the inputs with its own scripts, none importing run.py",
+  "snapshot": "review/snapshot_1 on the research drive (provisioning-runs/distributions)",
+  "report": "provisioning-runs/distributions/review/round1/review_report.md",
+  "arithmetic": "all twelve headlines and all eight Moon cases recomputed; 303 comparisons with the product's leaves agree within 0.6% apart from R1 and R2",
+  "findings": [
+   {
+    "id": "R1",
+    "severity": "E",
+    "finding": "At 8 billion outside a kept half the high-cost end's fields reach the 30-45 degree highlands, part of the dry high ground; the README said they never do.",
+    "resolution": "The fields' band split follows the food study's fill: 325,753 km2 on the 30-45 degree highlands at that end. The dry high ground is then 19-78% used with 4 aloft and 29-94% with 2 outside half (the settlement alone 19-30% and 29-46%); finding 2 and D's narrative say so."
+   },
+   {
+    "id": "R2",
+    "severity": "E",
+    "finding": "The living-light row kept the shielded design's metropolis lit like a town (479-986 m2 a person).",
+    "resolution": "The metropolis town figure is keyed by design (living light 273-919 m2 a person). The row with living light: 0.23-7.0, 0.24-10.3, 0.25-13.6% -> 0.14-6.9, 0.15-10.2, 0.17-13.5%."
+   },
+   {
+    "id": "R3",
+    "severity": "M",
+    "finding": "The zone fit was the food study's, made with its own towns; no band was checked with this settlement.",
+    "resolution": "Each band outside the kept share (0-30 degree land, 30-45 degree highlands, highlands poleward of 45 degrees, lowlands poleward of 30 degrees) is checked at every corner with the fields and the settlement together; corners that overfill are unbuildable. Only 8 billion outside a kept half at the high-cost end overfills: the 30-45 degree highlands by 13,900-104,000 km2 and the 0-30 degree land by 12,900-149,000 km2, at 7 of 16 corners with 4 aloft and 8 with 2 or 3. The feasible range stands beside the full one (wild 38-84% with 4 aloft, 78-83% with 3, 76-82% with 2). Placing the dry highland towns poleward of 45 degrees first, with the scattered communities four times as dense on the twilit and Earthlit homes, fits all 16 corners for twice the water lift (1.47-54.6, 1.85-68.7 and 2.23-82.7 GW against 0.753-27.5, 0.948-34.6 and 1.14-41.7). Round 2's residual (a) adds the middle-wet zone as a band of its own: 8 of 16 corners then fit at 8 billion outside half in every case, 80-84% wild with 4 aloft, and the remedy gains a third placement."
+   },
+   {
+    "id": "R4",
+    "severity": "M",
+    "finding": "The highland and tower shares were tied, hiding the range of the dry high ground's settlement.",
+    "resolution": "Sixteen corners: highland share, tower share and scattered density each at both ends, every input at both ends. Dry high ground settled outside a kept 30%: 8.2, 12.7, 17.1, 26.0% -> 6.5-10, 10-16, 14-22, 21-33%; outside half 11.5, 17.7, 24.0, 36.4% -> 9.1-15, 14-22, 19-30, 29-46%. Highland towns at 6 billion 1.07-1.13 -> 0.85-1.43 billion on 85,000-143,000 km2."
+   },
+   {
+    "id": "R5",
+    "severity": "M",
+    "finding": "Lunokhod 1's nearest tube is a tie between rilles D and E1, broken by key order.",
+    "resolution": "Stated rule: every tube within 0.5 km of the nearest distance joins. Lunokhod 1 takes rilles D and E1 (0.124-3.04 million). Joined tubes 0.92-1.4 / 17.4-25.5 -> 1.04-1.60 / 19.2-28.5 million; with the domes 1.07-28.6 million."
+   },
+   {
+    "id": "R6",
+    "severity": "M",
+    "finding": "Fleet totals multiplied the busiest band's per-town rate by every town.",
+    "resolution": "Fleet totals take the occupancy-weighted density each town meets (1.12 times the even density): 0.09-7 -> 0.066-5.3 million conflicts a day outside a kept 30%. Finding 7 names the per-town rates as the equatorial band's."
+   },
+   {
+    "id": "R7",
+    "severity": "M",
+    "finding": "'Energy used' added primary energy to electricity.",
+    "resolution": "One basis: primary energy, with every electrical load at fusion's input of 2.0-3.03 W a watt, for the Moon, the colonies and Earth's off-land food. The Moon 9.6-38, 14-57, 19-75, 18-65 -> 11.1-65.4, 16.7-98.1, 22.3-131, 20.2-99.7 TW; everyone 55-177, 55-181, 55-185, 66-211 -> 60.1-233, 60.3-246, 60.4-258, 71.2-274 TW; the colonies 2.7-8.8 -> 3.39-14.4 TW a billion. The colonies' mixed 'living_and_food_electricity' key was dropped."
+   },
+   {
+    "id": "R8",
+    "severity": "M",
+    "finding": "'The residents ... is most of it' fails at the high-cost end, where the hydrogen remade leads.",
+    "resolution": "With S1: heat by component and share in the product. Finding 3: the residents give 66-74% of the heat at the favourable end; at the high-cost end with half aloft the hydrogen remade gives 45% (27-54 TW) and the residents 30%; with 2 of 8 billion aloft the residents lead at both ends (41-74%)."
+   },
+   {
+    "id": "R9",
+    "severity": "W",
+    "finding": "Double rounding in the README (78%, 0.37 GW, 57 and 12 TW, 2.3 Gt, 4.9 Mt, 20 million and others).",
+    "resolution": "The README is rounded once, half up, from the runner's unrounded values (build(rounded=False)); values quoted from three-figure products keep the product's figures. Among them: 77%, 0.36 GW, 2.25 Gt, 4.85 Mt, 0.505 and 0.775 MW, 0.0969 MW, 19.5 million, 5,030 Gt, 96-99%."
+   },
+   {
+    "id": "R10",
+    "severity": "W",
+    "finding": "'Many times over' holds at one pairing only.",
+    "resolution": "The ratio is given: 0.52-130 times, 0.21-62 with the gravity candidates."
+   },
+   {
+    "id": "R11",
+    "severity": "W",
+    "finding": "The distribution table's lit-sky row joined two metropolis treatments.",
+    "resolution": "With S2: the row names both, the metropolis as a town / at Earth's area, in every column."
+   },
+   {
+    "id": "R12",
+    "severity": "W",
+    "finding": "D 'asks the most of every place'; finding 6's title holds only at the high end.",
+    "resolution": "D asks the most of the dry high ground, the land and the array, and C puts more heat on the Moon (18.4-119 TW against 16.3-88.0). Finding 6's title: with half aloft the sky towns light the most at the high end; at the favourable end the metropolis lit as a town lights 47,900 km2 against 25,500-51,000 from the residents aloft."
+   },
+   {
+    "id": "R13",
+    "severity": "W",
+    "finding": "The mirror areas included the farm's own aperture.",
+    "resolution": "Mirrors beyond the farm 126 / 521 / 32,000 m2 a person; the collecting area 146 / 541 / 32,000 beside."
+   },
+   {
+    "id": "R14",
+    "severity": "W",
+    "finding": "checks.json was linked but missing.",
+    "resolution": "This file."
+   },
+   {
+    "id": "R15",
+    "severity": "W",
+    "finding": "Idle inputs, the 5 m/s literal, and an incomplete phrase check.",
+    "resolution": "The powered speed and duty come from inhabited volume, Earth's 8-14 billion from the shared population cases, the 1,610 m from daily life; a test checks every input feeds the basis; the Trojan and Kuiper-belt rows are phrase-checked in the bound note."
+   },
+   {
+    "id": "R16",
+    "severity": "W",
+    "finding": "Repeated capacity disclaimers, 'no allocation is made', the cities first as densities, guesses labelled twice, dense sentences.",
+    "resolution": "The colonies' uncomputed capacity is stated once, in the assumptions; the allocation line is gone; finding 2 opens with the cities as places; the guesses are labelled once, in the assumptions; findings 2 and 3 are split into shorter sentences."
+   }
+  ],
+  "self_found": [
+   {
+    "id": "S1",
+    "finding": "Finding 3's 'most of it' is wrong at the high end.",
+    "resolution": "Folded into R8."
+   },
+   {
+    "id": "S2",
+    "finding": "The lit-sky row spans the two metropolis treatments.",
+    "resolution": "Folded into R11."
+   },
+   {
+    "id": "S3",
+    "finding": "With the dry highland people split by band, those poleward of 45 degrees take no lit sky, the band edge nearest living light's 48.6 degrees.",
+    "resolution": "Lit shares with the metropolis as a town 7.95, 11.7, 15.5% -> 7.88, 11.6, 15.4% at the high end; the whole 45-60 degree band lit at 36 m2 a person would add at most 37,000 km2, 0.16% of the dry land (README departures)."
+   }
+  ]
+ },
+ "coordinator_notes": [
+  {
+   "note": "Earth sensitivity",
+   "asked": "One line for Earth at 8 and 11 billion beside the fixed 9: food off the land beyond 10.2 billion, its power and heat.",
+   "resolution": "Totals 24 and 29 billion at 8 (everyone's energy 2.0-6.0 TW less); 27 and 32 at 11, where 0.8 billion beyond 10.2 eat 0.556-2.23 TW of power-made food from the array on 11,400-45,600 km2 of rectenna, heating Earth by 0.77-3.1 TW (0.0011-0.0046 K; 1.4-5.6 TW and 0.0021-0.0083 K from thermal plants), everyone's energy 5.1-18.7 TW more. In the product as earth_sensitivity."
+  }
+ ],
+ "confirmation": {
+  "scope": "A focused confirmation of review/snapshot_2 (product eb4a7b3c..., README 11959ce4...) by the same reviewer: every round-1 item, S1-S3 and the Earth sensitivity line, with 723 comparisons against the product's leaves within 0.6% and the tests run once (29 passed). All items confirmed, with four residuals.",
+  "report": "provisioning-runs/distributions/review/round2/confirmation_report.md",
+  "verdicts": {
+   "R1/R3": "confirmed as built, with residuals (a) and (b)",
+   "R2": "confirmed",
+   "R4": "confirmed",
+   "R5": "confirmed",
+   "R6": "confirmed",
+   "R7": "confirmed, with a residual",
+   "R8/S1": "confirmed",
+   "R9": "confirmed",
+   "R10": "confirmed",
+   "R11/S2": "confirmed",
+   "R12": "confirmed",
+   "R13": "confirmed",
+   "R14": "confirmed (draft)",
+   "R15": "confirmed",
+   "R16": "confirmed",
+   "S3": "confirmed, with a residual",
+   "Earth sensitivity": "confirmed"
+  },
+  "residuals": [
+   {
+    "id": "R1/R3 (a)",
+    "severity": "M",
+    "residual": "The pooled 30-90 degree lowland band hid the middle-wet zone: at 8 billion with a kept half the high-cost end's rain-fed fields fill it (1.39 million km2), and the scattered communities' middle-band land, spread over its homes by area, puts 51.5% on it. The one 8_4 high-cost corner that fitted overfills it by 20,786 km2, and the remedy's high-cost corners by 18,675-160,008 km2.",
+    "resolution": "The middle-wet zone is a band of its own and the rest of the lowland poleward of 30 degrees (fog desert and polar) another; the middle-band land (ways of living's 30-48.6 degrees, 25.2% of the scattered land) covers the zone by area, 51.5% of it on the zone. The reviewer's 20,786 km2 and 18,675-106,671 / 23,343-133,340 / 28,012-160,008 km2 reproduce. At 8 billion outside half every high-cost corner now overfills (middle-wet zone 13,000-74,200, 16,200-92,800 and 19,500-111,000 km2 with 4, 3 and 2 aloft); 8 of 16 corners fit in each case, and the feasible wild land is 80-84% with 4 aloft (was 38-84%), 78-83% with 3 and 76-82% with 2. A third placement joins the remedy: where the fields fill the middle-wet zone the middle band's scattered communities settle the fog-desert side of their homes (at most 16, 20 and 24% of it outside the kept half). All three together fit 16 of 16; the poleward move alone, or with the twilit gathering, fits 8 (product remedy.buildable_corners_by_parts). README Finding 1, the land bands, Food, the distribution-table row, the C and D narratives, the assumptions, the departures and what remains say so; a test checks the zone band and both rules."
+   },
+   {
+    "id": "R1/R3 (b)",
+    "severity": "W",
+    "residual": "The C and D narratives credited all 16 fits to the poleward placement alone.",
+    "resolution": "Both narratives and Finding 1 name the three placements; the land-bands text says what each answers."
+   },
+   {
+    "id": "R7",
+    "severity": "W",
+    "residual": "earth_block's docstring named a thermal plant's input while the code uses fusion's 2.0-3.03 W a watt for Earth's food off the land, and the README did not name the factor for Earth.",
+    "resolution": "The docstring states fusion's input; the sentence under the distribution table and the Earth table's energy row name it."
+   },
+   {
+    "id": "S3",
+    "severity": "W",
+    "residual": "Under the poleward placement the 45-60 degree band holds up to 1.73 / 2.18 / 2.62 billion dry highland people, so the 37,000 km2 bound does not cover it.",
+    "resolution": "The remedy's bound stands beside the spread one: 62,000-94,000 km2, 0.27-0.40% of the dry land, in the land-bands text and the departures."
+   }
+  ],
+  "not_rechecked": "The four residual fixes were applied after the confirmation and checked by the study's tests and by reproducing the reviewer's own middle-wet figures; the reviewer has not read the revised files."
+ },
+ "not_done": [
+  "make check (by instruction)",
+  "no literature search beyond the two colony sources",
+  "the inputs' own science taken as given",
+  "an overlay of the scattered homes on the food study's zones (the middle-wet split is by area)",
+  "editorial review beyond the project's writing standards",
+  "a reviewer's confirmation of the four round-2 residual fixes (seen in passing in the C' round, outside its scope)",
+  "a census of Earth's farm regions behind the homestead guess (a labelled design range)",
+  "farm labour on the Moon's fields beyond the homesteads",
+  "a reviewer's read of the five C' residual fixes"
+ ],
+ "hashes": {
+  "product_sha256": "5d46b715f4048394a4dfb9629fd31f53e68c6ee7c0baca43b70b929083f7c3d3",
+  "files_sha256": {
+   "run.py": "6ee09af830e8f39236f3cd829c340970f8ddc0290bc3c64c6fd20c1d2a97b068",
+   "test_run.py": "528f434cfd5495fc0dc5a04b72156d80a6ea923237a3bf4e43e1d4cff8eaa76c",
+   "sources.json": "0ded725e77e94ad11e3dd70f2766f91e812d1fec6e72b2a783300008ff8ed51e",
+   "README.md": "7257d3d9e5262cd32abd5d5516875b6db9698d409ac2839fc9e6cc2243240c50"
+  }
+ },
+ "cprime": {
+  "date": "2026-10-11",
+  "asked": "The author's choice (research/decisions.md, last row, aaa2845): C, with the middle latitudes' population dropped and distributed where it is better sustained, homestead communities living among the farms there. Build C' beside A-D: C's totals; homesteads at a labelled design density from Earth's farm regions; the rest ranked by spare land, water energy, comfort under both models, rain and lightning, and night lighting, and placed by a stated rule; every band and corner re-checked.",
+  "built": "A design guess of 2-20 homestead residents a km2 of field, a household of four on 20-200 ha; the destination measures in basis.destinations (and the belt left, basis.origin_middle_lowland) and the ranking in moon.destination_ranking; move_middle places the 30-48.6 degree lowland people in the ranked order within spare land; moon.cprime over 32 corners, the case as placed and three variants (the remedy's poleward and twilit placements, the same with the homesteads' homes counted within the fields they work, and the moved people sent to the dry highland cities); the distribution C' with C's totals; the crews' craft from land cities' highland access (basis.crews).",
+  "found": "The high-latitude lowland homes rank first (mean rank 1.9 of 5 at both kept shares) and take everyone who moves: 0.25-0.40 billion outside a kept 30% and 0.22-0.40 billion outside a kept half, where 0-28 million stay as homesteaders. Homesteads, 2.8-28 million, exist only at 8 billion outside a kept half at the high-cost end, among 1.39 million km2 of middle-wet fields. C' keeps C's heat, energy, water lift and wild land; its lit sky is 0.493-14.7% against 0.503-15.4%. Outside a kept 30% all 32 corners fit; outside a kept half 16 fit as placed, the high-cost end overfilling the middle-wet zone by the homesteads' homes beside the fields (278-9,920 km2) and, as spread, the 30-45 degree highlands and the 0-30 degree land as in C; with the poleward and twilit placements only those homes overfill, and with them counted within the fields they work (0.02-0.71% of the fields' land) all 32 fit.",
+  "confirmation": {
+   "scope": "A focused confirmation of review/snapshot_cprime (product ce513f19..., README 5acb50d1...) by the same reviewer: C''s claim groups only, with its own recomputation on its round-2 module (never run.py), 173 comparisons with the product within 0.6%, A-D equal to snapshot 2 in 5,212 leaves outside the three 8-billion kept-half cases, the ranking reproduced and its first place robust to dropping any one measure, and the tests run once (34 passed). Every claim group confirmed, with two M and three W residuals.",
+   "report": "provisioning-runs/distributions/review/round_cprime/confirmation_report.md",
+   "residuals": [
+    {
+     "id": "C'-1",
+     "severity": "W",
+     "residual": "The lead paragraph's 'all 0.25-0.40 billion who leave' holds only outside a kept 30%; checks.json said the same.",
+     "resolution": "Both kept shares named: 0.25-0.40 billion outside a kept 30%, 0.22-0.40 billion outside a kept half with 0-28 million homesteaders."
+    },
+    {
+     "id": "C'-3",
+     "severity": "M",
+     "residual": "Crews 'by sky boat from the dry highland cities above the zone': where homesteads exist the corners fit only with the dry highland towns poleward of 45 degrees, 206 km from the zone's mean latitude of 38.2 degrees, beyond the four-seat sky boat's 66.7 km with its climb and the sky ferry's 180 km route.",
+     "resolution": "The crews come by regional ship, within its 1,500 km route, 4.80 kWh a crew member each way at 23.3 Wh a passenger-km; crew towns on the 84,200 km2 of highland that stays free at 30-45 degrees at that end would bring them within a sky boat's reach (4.16 kWh a boat, 1.04 kWh a seat, for 50 km with the climb). The craft are read from land cities' highland access (basis.crews), and the sky-fleet input is dropped; a test checks the distance against both ranges."
+    },
+    {
+     "id": "C'-6",
+     "severity": "M",
+     "residual": "The high-cost fit rested on the homesteads' homes on the zone's dry margin, off the fields the households work, against 'live among the fields' and the author's homesteads.",
+     "resolution": "The variant counts the homes within the fields they work (homestead_rule 'within_fields'): they take 0.02-0.71% of the middle-wet fields' land, which the crop model's factor-of-two uncertainty in the rain-fed land covers; with the remedy's poleward and twilit placements all 32 corners fit. Beside the fields the homes overfill the full zone by 278-9,920 km2, as the case as placed shows. The dry-margin variant is gone; the README's corners, lead and departures say so."
+    },
+    {
+     "id": "C'-7",
+     "severity": "W",
+     "residual": "'The first two vary independently' left out the homestead density.",
+     "resolution": "The Assumptions name the homestead density's variation over C''s 32 corners."
+    },
+    {
+     "id": "C'-8",
+     "severity": "W",
+     "residual": "checks.json's 'four variants' and the 0.25-0.40 wording.",
+     "resolution": "The case as placed and three variants; both kept shares named."
+    }
+   ],
+   "not_rechecked": "The residual fixes were applied after the confirmation and checked by the study's tests, which now cover the homes within the fields and the crews' ranges; the reviewer has not read them."
+  }
+ },
+ "land_rules": {
+  "date": "2026-10-11",
+  "asked": "The author's wild share (research/decisions.md, People on the Moon and beyond): at least half of the land and of the dark sky wild preferred, applied to every zone, or 30% wild with another 20% hybrid as a compromise; and, at the author's request (\"You could have still kept (and you can restore if you can) the other run just as comparison.\"), the earlier reading, half wild with another 20% hybrid, beside them for comparison.",
+  "built": "Four land rules: kept_30 and kept_50 as before, wild_30_hybrid_20 and wild_50_hybrid_20. Fields, glass, cities and towns keep outside a rule's wild and hybrid shares; the study reads the hybrid part as open to grazing and to the homesteads' homes beside their fields, and holds the middle-wet fields to the food fill's room against the food product's rounding (up to 0.5%).",
+  "unchanged": "The kept_30 and kept_50 results match the committed product value for value.",
+  "tests": "python -m pytest research/studies/distributions: passed (61 across both studies, 80 with ways of living)",
+  "review": {
+   "reviewer": "independent read-only reviewer, snapshot 1 (provisioning-runs/land_rules/review/snapshot_1.sha256)",
+   "report": "provisioning-runs/land_rules/review/review_report.md on the research drive",
+   "findings": "1 error (the rain-fed wild share against 1 - kept), 8 inconsistencies (reading rule, wild-share denominators unexplained, the middle-wet cap untested and unstated, the homesteads' count on uncapped fields, the comparison's request unrecorded, two-share framing in the intro and assumptions, the fog band's share under grazing, LandRule equality) and 7 wording points",
+   "applied": "all sixteen on 2026-10-11, before the confirmation",
+   "confirmation": {
+    "snapshot": "provisioning-runs/land_rules/review/snapshot_2.sha256",
+    "report": "provisioning-runs/land_rules/review/confirmation_report.md on the research drive",
+    "verdicts": "9 confirmed (2, 5, 6, 7, 8, 9, 12, 15, 16), 7 partly confirmed (1, 3, 4, 10, 11, 13, 14), none unconfirmed; 5 new points (A-E): the reading rule's wording for C′ and for the wild shares' subtractions, the hold test passing without the hold, the READMEs' check paragraphs, and this record",
+    "residuals": "Applied by the coordinator on 2026-10-11 after the confirmation and not reviewed: both reading rules extended; the hold test now checks the fill's room, and a test pins C′'s fits under every rule; 'of the land and of the dark sky' for the author's words; the dark-sky test in finding 58; the used-share label names the homesteads' homes; the register link's anchor; the check paragraphs list the new tests."
+   }
+  },
+  "files_sha256": {
+   "run.py": "4234497b99cc4c9007754a9c4b0e543a7470d56530b3d1762915fcb77fcc1b09",
+   "test_run.py": "2186e83e590fed1fc14de7594479b8b8e9a6b82909b6f253e5ebd7d44f219492",
+   "README.md": "2b6b6dd2ca5f4765e031ea20f2bdd9c01b5650b9e32e1a559c1583a4fe30bdb6",
+   "results/distributions.json": "1cde4d5837a10788bb6d2a9b99ec03ac64b98e6b24d23a9c5e8ca3110983ea35"
+  },
+  "parks": {
+   "date": "2026-10-11",
+   "asked": "The author's direction for the hybrid land (research/decisions.md, People on the Moon and beyond): heavily manicured megaparks and great gardens, food gardens among them, for leisure and entertainment, with small shops, restrooms and places to rest, used by residents and visitors and kept by heavy automation.",
+   "built": "The hybrid part of each hybrid rule is parkland, closed to farms, grazing, the homesteads' homes and towns; land.parks_km2 gives the parks, 4.68 million km², and the compromise gives the kept half's results beside them; the wild shares count against the land outside the closed share. The comparison of half wild with 20% hybrid takes the same parks.",
+   "tests": "python -m pytest research/studies/distributions: passed (63 across both studies, 82 with ways of living)",
+   "review": {
+    "reviewer": "independent read-only reviewer, snapshot 3 (provisioning-runs/land_rules/review/snapshot_3.sha256)",
+    "report": "provisioning-runs/land_rules/review/parks_review_report.md on the research drive",
+    "findings": "no errors; 6 inconsistencies (the middle-wet hold sentence named only C prime, the dark-sky bound left out the parks' light, the comparison also became parkland, the register's earlier description of hybrid land unmarked as replaced, the parks' water placed only in the dry highlands, a product key and comments leaving out grazing), wording points, and four untested claims",
+    "applied": "all on 2026-10-11 by the coordinator, not re-reviewed; the comparison taking the same parks is put to the author; tests added for the dark-sky bound with every park lit, the comparison's grazing against the land outside the closed share and the homesteads' homes on the farm half"
+   },
+   "files_sha256": {
+    "run.py": "9e5da04a39f33fbc5a991123c4919a49ba8a6552062d776731fbf5fa7d2675ba",
+    "test_run.py": "6af2538aa8b20fedc9ce9714242115523295dc3caba017a5f668a4798ee656e3",
+    "README.md": "9e091371c9c89a6d3d6861ec66e35ebaf59f8a46f24b8bcc8a66f9d17b995e11",
+    "results/distributions.json": "8af8eba6349a9c43ead69481322cc970d959257a8139f90811b5b7013c65e5f2"
+   }
+  }
+ }
+}

@@ -1,0 +1,215 @@
+{
+ "source_admission": "Published values used as constants or quoted ranges for population.py and population.md; no external dataset files are admitted to Git. 'access' records how far each source was checked on 2026-10-09: 'full text' means the document itself was read (local text copies kept with the domain's run records on the research drive, provisioning-runs/population/); 'abstract' means the publisher's or an index's abstract; 'reported via search summary' means a web search's summary of the source, not re-read; 'web page' means a page read through a fetching tool. Repository products and documents are cited by path in population.md and bound by hash in the product.",
+ "sources": [
+  {
+   "citation": "UN DESA Population Division 2024, World Population Prospects 2024: Summary of Results, UN DESA/POP/2024/TR/NO. 9 (advance unedited version)",
+   "doi_or_url": "https://www.un.org/development/desa/pd/sites/www.un.org.development.desa.pd/files/undesa_pd_2024_wpp_2024_advance_unedited_0.pdf",
+   "use": "8.2 billion in 2024; a peak near 10.3 billion in the mid-2080s; 10.2 billion in 2100; 80% probability of a peak this century; fertility 2.25 and replacement 2.1 births per woman",
+   "access": "full text"
+  },
+  {
+   "citation": "Vollset et al. 2020, The Lancet 396, 1285-1306",
+   "doi_or_url": "10.1016/S0140-6736(20)30677-2",
+   "use": "IHME reference scenario: a peak of 9.73 billion in 2064 and 8.79 billion in 2100",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "United Nations Population Division 1999, The World at Six Billion, ESA/P/WP.154",
+   "doi_or_url": "https://www.un.org/development/desa/pd/sites/www.un.org.development.desa.pd/files/files/documents/2020/Jan/un_1999_6billion.pdf",
+   "use": "World population 0.30 billion in year 0, 0.31 in 1000, 0.50 in 1500, 0.79 in 1750, 0.98 in 1800; the peak growth rate of 2.04% a year in the late 1960s",
+   "access": "full text"
+  },
+  {
+   "citation": "Our World in Data 2026, Energy use per person (Energy Institute Statistical Review of World Energy 2026, with EIA and Smil), substitution method",
+   "doi_or_url": "https://ourworldindata.org/grapher/per-capita-energy-use",
+   "use": "Primary energy per person in 2025: world 20,258 kWh, EU-27 32,290, high-income countries 52,512, United States 75,051, Germany 33,183, Japan 37,192, France 37,613, United Kingdom 25,129, Switzerland 27,197",
+   "access": "full text (the data file and its metadata)"
+  },
+  {
+   "citation": "Eurostat, Energy statistics - an overview, Statistics Explained (2024 data)",
+   "doi_or_url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Energy_statistics_-_an_overview",
+   "use": "EU final energy 36,755 PJ in 2024; transport 32.3%, households 26.0%, industry 24.5% of final energy; gross available energy 124 GJ per person",
+   "access": "web page"
+  },
+  {
+   "citation": "Eurostat 2024, EU population increases again in 2024 (news release, 11 July 2024)",
+   "doi_or_url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20240711-1",
+   "use": "EU population 449.2 million on 1 January 2024",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "Millward-Hopkins, Steinberger, Rao & Oswald 2020, Global Environmental Change 65, 102168",
+   "doi_or_url": "10.1016/j.gloenvcha.2020.102168",
+   "use": "Decent living takes 15.3 GJ of final energy per person a year, 13-18.4 by country",
+   "access": "reported via search summary; the provisioning literature search of 2026-10-09 read it in full"
+  },
+  {
+   "citation": "Vogel, Steinberger, O'Neill, Lamb & Krishnakumar 2021, Global Environmental Change 69, 102287",
+   "doi_or_url": "10.1016/j.gloenvcha.2021.102287",
+   "use": "All assessed needs are met at 60 GJ of final energy per person; beyond it a doubling of energy adds under 5% to need satisfaction; 70% of countries above 60 GJ meet all needs",
+   "access": "full text (accepted manuscript, White Rose eprint 182176)"
+  },
+  {
+   "citation": "Schulz, Kypreos, Barreto & Wokaun 2008, Energy Policy 36, 1303-1317",
+   "doi_or_url": "10.1016/j.enpol.2007.12.006",
+   "use": "The 2000 W society's target of 2,000 W of primary energy per person; 3,500 W feasible in Switzerland by 2050",
+   "access": "abstract"
+  },
+  {
+   "citation": "Vélez-Henao & Pauliuk 2023, Environmental Science & Technology 57, 14206-14217",
+   "doi_or_url": "10.1021/acs.est.3c03957",
+   "use": "Decent living takes about 42 t of material stocks per person (32 direct, 11 indirect) and a material footprint of 6 t a year (3-14), against stocks of 335 t in developed countries, 136 in China and 115 worldwide; its service levels of 15 m2 of shelter and 8.8 m2 of services per person, about 8,300 pkm a year, 2,100 kcal a day and 50 L of water a day",
+   "access": "full text"
+  },
+  {
+   "citation": "Krausmann et al. 2017, PNAS 114, 1880-1885",
+   "doi_or_url": "10.1073/pnas.1613773114",
+   "use": "Global in-use stocks of 792 Gt in 2010 after a 23-fold rise; the per-person stocks quoted by Vélez-Henao & Pauliuk come from it",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "Flanner 2009, Geophysical Research Letters 36, L02801",
+   "doi_or_url": "10.1029/2008GL036465",
+   "use": "Earth's anthropogenic heat flux of 0.028 W/m2 in 2005, 0.059 in 2040 and 0.19 in a 2100 scenario; 0.39 over the United States and 0.68 over western Europe; the 2100 scenario warms continental regions 0.4-0.9 K; cells above 3 W/m2 warm 0.15-0.24 K; fusion and added absorbed sunlight count as forcing",
+   "access": "full text"
+  },
+  {
+   "citation": "Forster et al. 2021, IPCC AR6 WG1 Chapter 7, The Earth's Energy Budget, Climate Feedbacks and Climate Sensitivity",
+   "doi_or_url": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-7/",
+   "use": "Equilibrium climate sensitivity 3 K (likely 2.5-4); forcing of doubled CO2 3.93 W/m2; total anthropogenic forcing 2.72 W/m2 over 1750-2019",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "FAO 2023, Land statistics and indicators 2000-2021: global, regional and country trends, FAOSTAT Analytical Brief 71",
+   "doi_or_url": "https://www.researchgate.net/publication/372345151_Land_statistics_and_indicators_2000-2021_Global_regional_and_country_trends_Analytical_Brief_71",
+   "use": "Agricultural land 4.8 billion ha in 2021, cropland 1.6 billion ha, permanent meadows and pastures 3.2 billion ha",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "Poore & Nemecek 2018, Science 360, 987-992",
+   "doi_or_url": "10.1126/science.aaq0216",
+   "use": "Diets without animal products would cut farmland by more than three-quarters (76%)",
+   "access": "reported via search summary; the provisioning literature search of 2026-10-09 read it in full"
+  },
+  {
+   "citation": "Peters, Picardy, Darrouzet-Nardi, Wilkins, Griffin & Fick 2016, Elementa: Science of the Anthropocene 4, 000116",
+   "doi_or_url": "10.12952/journal.elementa.000116",
+   "use": "Ten US diets take 0.13-1.08 ha of farmland per person a year, the baseline diet the most",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "Gerten et al. 2020, Nature Sustainability 3, 200-208",
+   "doi_or_url": "10.1038/s41893-019-0465-1",
+   "use": "Food systems transformed can feed 10.2 billion people within four terrestrial planetary boundaries; held strictly with today's food systems, 3.4 billion",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "IPCC 2019, Climate Change and Land (SRCCL), Summary for Policymakers, A.1",
+   "doi_or_url": "https://www.ipcc.ch/srccl/chapter/summary-for-policymakers/",
+   "use": "Human use directly affects more than 70% of Earth's 130 million km2 of ice-free land",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "Oki & Kanae 2006, Science 313, 1068-1072",
+   "doi_or_url": "10.1126/science.1128845",
+   "use": "45,500 km3 a year of discharge as the measure of available renewable freshwater; withdrawals of 3,800 km3 a year",
+   "access": "full text"
+  },
+  {
+   "citation": "Falkenmark, Lundqvist & Widstrand 1989, Natural Resources Forum 13, 258-267",
+   "doi_or_url": "10.1111/j.1477-8947.1989.tb00348.x",
+   "use": "Water stress below 1,700 m3 of renewable water per person a year, scarcity below 1,000 and absolute scarcity below 500",
+   "access": "reported via search summary (secondary accounts of the thresholds); bibliographic record checked on Crossref"
+  },
+  {
+   "citation": "Hoekstra & Mekonnen 2012, PNAS 109, 3232-3237",
+   "doi_or_url": "10.1073/pnas.1109936109",
+   "use": "The global average consumer's water footprint of 1,385 m3 a year; the United States 2,842; industrialized countries 1,250-2,850",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "Gleick 1996, Water International 21, 83-92",
+   "doi_or_url": "10.1080/02508069608686494",
+   "use": "Basic water requirement of 50 L per person a day",
+   "access": "reported by the provisioning literature search of 2026-10-09 (abstract); not re-read here"
+  },
+  {
+   "citation": "Leger, Matassa, Noor, Shepon, Milo & Bar-Even 2021, PNAS 118, e2015025118",
+   "doi_or_url": "10.1073/pnas.2015025118",
+   "use": "Microbial protein grown on photovoltaic electricity yields over ten times the protein per area of any staple crop",
+   "access": "reported via search summary; the provisioning literature search of 2026-10-09 read it in full"
+  },
+  {
+   "citation": "Allen, Lindberg & Grimmond 2011, International Journal of Climatology 31, 1990-2005",
+   "doi_or_url": "10.1002/joc.2210",
+   "use": "The hottest city cells release 100-577 W/m2 of human heat",
+   "access": "reported by the provisioning literature search of 2026-10-09 (abstract); not re-read here"
+  },
+  {
+   "citation": "IEA 2025, Energy and AI",
+   "doi_or_url": "https://www.iea.org/reports/energy-and-ai/executive-summary",
+   "use": "Data centres used 415 TWh in 2024, about 47 GW",
+   "access": "reported by the provisioning literature search of 2026-10-09 (summary); not re-read here"
+  },
+  {
+   "citation": "Johnson & Holbrow (eds) 1977, Space Settlements: A Design Study, NASA SP-413, chapter 5 and appendix 5E",
+   "doi_or_url": "https://nss.org/settlement/nasa/75SummerStudy/Chapt5.html",
+   "use": "The Stanford torus: 10,000 people, 1,800 m across, 1 rpm; a shield of 9.9 Mt, 1.7 m of lunar soil, 441 g/cm2 for 0.25 rem a year with a factor-two margin; 670,000 m2 of projected area; 20 m2 of farm per person; 3 kW of electricity per person",
+   "access": "full text (chapter 5, tables 5-1 and 5-2, and appendix 5E on the NSS mirror)"
+  },
+  {
+   "citation": "Globus & Hall 2017, Space Settlement Population Rotation Tolerance, NSS Space Settlement Journal",
+   "doi_or_url": "https://www.researchgate.net/publication/318471827_Space_Settlement_Population_Rotation_Tolerance",
+   "use": "Residents tolerate at least 4 rpm, and probably 6",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "US DOE & NASA 1978, Satellite Power System Concept Development and Evaluation Program: Reference System Report, DOE/ER-0023",
+   "doi_or_url": "https://nss.org/wp-content/uploads/SSP-DOE-1978-space-solar-power-Reference-System-Report.pdf",
+   "use": "A 5 GW satellite in geostationary orbit with a 1 km transmitting antenna at 2.45 GHz, a 10 km by 13 km rectenna, and at most 23 mW/cm2 at the rectenna's centre",
+   "access": "reported via search summary; the provisioning literature search of 2026-10-09 read it in full"
+  },
+  {
+   "citation": "Rodenbeck, Jaffe, Strassner, Hausgen, McSpadden et al. 2021, IEEE Journal of Microwaves 1, 229-259",
+   "doi_or_url": "10.1109/JMW.2020.3033992",
+   "use": "Beam collection efficiency set by the geometric mean of the apertures over wavelength times distance; a worked link at 10 GHz collects 95%",
+   "access": "full text"
+  },
+  {
+   "citation": "Criswell 2002, Solar power via the Moon, The Industrial Physicist 8(2), 12-15",
+   "doi_or_url": "https://www.sciencedaily.com/releases/2002/04/020416073334.htm",
+   "use": "The lunar solar power proposal: 20 TW for 10 billion people in 2050 beamed by microwaves from 20-40 power bases on the Moon's limbs",
+   "access": "reported via a news release (ScienceDaily, 2002) and a search summary; the article itself was not read"
+  },
+  {
+   "citation": "Angel 2006, PNAS 103, 17184-17189",
+   "doi_or_url": "10.1073/pnas.0608163103",
+   "use": "A sunshade near Sun-Earth L1 blocking 1.8% of sunlight, about 20 million tons in a cloud of gram-sized flyers 100,000 km long",
+   "access": "abstract"
+  },
+  {
+   "citation": "Boroson & Robinson 2014, Overview and results of the Lunar Laser Communication Demonstration, Proc. SPIE 8971, 89710S",
+   "doi_or_url": "10.1117/12.2045508",
+   "use": "622 Mbit/s downlink from lunar orbit to Earth in October 2013",
+   "access": "reported via search summary"
+  },
+  {
+   "citation": "IEA 2023, Global Hydrogen Review 2023",
+   "doi_or_url": "https://iea.blob.core.windows.net/assets/cb9d5903-0df2-4c6c-afa1-4012f9ed45d2/GlobalHydrogenReview2023.pdf",
+   "use": "Low-temperature electrolysis takes 50-52 kWh of electricity per kg of hydrogen",
+   "access": "full text"
+  },
+  {
+   "citation": "L3Harris (Aerojet Rocketdyne), RL10 engine product page",
+   "doi_or_url": "https://www.l3harris.com/all-capabilities/rl10-engine",
+   "use": "RL10B-2: 465.5 s of vacuum specific impulse on LOX/LH2 at a mixture ratio of 5.88",
+   "access": "reported via search summary; the page returned 404 on 2026-10-09"
+  },
+  {
+   "citation": "Schafer & Victor 2000, Transportation Research Part A 34, 171-205",
+   "doi_or_url": "10.1016/S0965-8564(98)00071-8",
+   "use": "People spend about 1.1 hours a day travelling, a budget stable across places and times",
+   "access": "reported via search summary"
+  }
+ ]
+}

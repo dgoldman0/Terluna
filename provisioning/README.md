@@ -1,0 +1,533 @@
+# Provisioning
+
+How the Open Moon turns resources and energy into what people and the array need. That covers:
+- energy, its storage through the night, and where its heat goes;
+- food;
+- building and making things;
+- computing;
+- transport;
+- water, sanitation and the services cities run on;
+- maintenance and repair.
+
+The word reaches past industry to everything a settled world provides itself with. The domain opened on 9 October
+2026 on the branch `domain/provisioning`. It starts from:
+- what the project already holds ([state.md](state.md));
+- the literature on human needs and their energy, urban metabolism, long-duration storage, power from space, waste
+  heat, food systems, materials, computing, transport, maintenance, life support and water
+  ([literature.md](literature.md), with its [sources](sources.json));
+- a first screen of the committed products ([screen.py](screen.py), [results/first_screen.json](results/first_screen.json)).
+
+Its open questions, in order, are in [questions.md](questions.md).
+
+**People and their ways of living, 9 October 2026.** The author found the first population distribution wrong:
+it left the sky empty of people and read heat and runoff as ceilings. The author set
+[shared comparison cases](../shared/scenarios/population.json) with lunar surface and aerial residents, and the
+[inhabited-volume study](../research/studies/inhabited_volume/README.md) evaluates both together. Three studies
+follow the order the author approved:
+- the design climate's winds as vectors, which set the days of drifting towns
+  ([climate/gcm/zonal_winds.md](../climate/gcm/zonal_winds.md));
+- eighteen ways of living built from the project's designs, with each one's physical situation, its costs per billion
+  residents and the shared cases' totals by mix ([ways of living](../research/studies/ways_of_living/README.md));
+- how people live in each through the lunar cycle ([daily life](../research/studies/daily_life/README.md)).
+
+The original placements stay as historical illustrations, and the distribution of people is the author's to choose.
+
+The author's decisions frame it:
+- **The Moon's cycle:** it keeps its 29.53-day cycle, and life stores resources across the night.
+- **Power:** fusion supplies most local power, supplemented by regional solar and wind (a planning assumption).
+- **The summit:** a commercial port of about 1.5 million people, in a beautiful, sustainable metropolis of about 100
+  million within 32 km. Regional agriculture and foraging feed it.
+- **Sky ships:** the Moon is a sky-ship world where lift is cheap, and the flyers stack by height.
+- **Orbit:** energy-intensive industry and computing belong in orbit, and the planned branch `research/array-industry`
+  takes the array's heat, computing and industry.
+- **The night:** the ring fleet keeps its light off the night zones, redirecting it and using it where it can, for
+  computing for instance.
+- **Automation:** heavy automation keeps the cities and the sky towns, the parks and their amenities run almost purely
+  by machine, and the whole system is engineered for extreme uptime; every consensus decision draws on the
+  near-continual input of a well-educated, involved population.
+- **The network:** a mesh of aerostats drifting near 30 km, fixed posts, fibre and towers, linked to the array
+  ([network.md](network.md)).
+
+## What the project already says
+
+Each finding follows from results the repository already holds, read together with the literature. Numbers marked
+*screen* come from [results/first_screen.json](results/first_screen.json).
+
+### Heat and energy
+
+1. **The ring fleet's own infrared heats the Moon more than all human use could.**
+   - **The flow.** The fleet's films absorb 3–4.5% of the sunlight they pass, 65–83 PW in all, warm to about 175 K
+     and radiate from both faces. The tiles stay radial-facing, so the same face looks at the Moon all orbit, and the
+     films emit a little more there than sunward: one layer sends 56% of its heat inward. A ring hidden behind another
+     absorbs that ring's glow and passes it on through both its faces, so the stack, about two layers deep in the
+     Moon's view, sends between half and 56% inward. A tile 19,355–21,392 km out sends the Moon 0.66–0.81% of what it
+     emits inward. The Moon receives 5.7–9.9 W/m² averaged over its surface (*screen*).
+   - **In proportion.** That is 1.9–3.4% of the design sunlight, the heat of 215–376 TW used on the Moon.
+   - **The warming.** If it acts like sunlight, the GCM's 1.9 K per 1% of sunlight puts the design case 3.7–6.4 K
+     warmer (*screen*). The design case of 294.9 K leaves it out. The 5% dimmer, chosen to bring the Moon from 303 to
+     294 K, removed 15.4 W/m² of sunlight at the top of the air.
+   - **The decision.** On 9 October the author made the investigated climate the planned one, so the glow is answered
+     with added solar protection, by redirecting it away from the Moon, or both
+     ([register](../research/decisions.md#solar-shield-and-habitat-array)).
+   - **The means.**
+     - Films that absorb less cut the glow however the stack lies; most of what they absorb is the ultraviolet the
+       titania stops.
+     - A heat mirror on Moon-facing faces, clear to sunlight and reflective in the thermal infrared, sends a layer's
+       glow outward, and the stack weakens it. By a two-layer estimate (*screen*), a mirror of emissivity 0.03–0.1 on
+       every tile cuts the Moon's share 1.5–2 times and traps the hidden layer between two weak emitters at
+       280–380 K. On the layer nearest the Moon alone it cuts the share 2–5 times, and 3–9 times with strong emitters
+       on the outer faces. The films absorb only 3–4.5% of sunlight, so a mirror that absorbs a few percent more adds
+       as much heat as it turns away; a sparse metal mesh or metasurface a few micrometres in pitch is the first
+       candidate.
+     - Added dimming answers what remains.
+   - **Computing and industry against the glow: poor.** The Moon receives 0.33–0.45% of the heat the films absorb,
+     so keeping a watt of glow off it means taking 221–303 W out of the films and rejecting it where the Moon does
+     not see it (*screen*). Halving the glow that way would take 32,600–41,600 TW of computing; the world's data
+     centres draw 0.047 TW (IEA 2025), and 100 TW of computing in orbit would cut the glow by 0.12–0.15%. The films'
+     heat holds little work: Carnot across every film gives 0.25 TW, and the best measured thermoradiative diodes over
+     every film 27 TW ([array_industry.md](../research/studies/solar_shield_array/array_industry.md)), and those
+     narrow-gap devices would also absorb the sunlight the films pass. Titania made photovoltaic could carry part of
+     its absorbed ultraviolet to outward radiators as current, but the contacts add absorption to films that absorb
+     3–4.5% now, and without users the current is only heat moved elsewhere. Thermodynamic and optical computers
+     raise the computing each watt buys; the heat still leaves wherever their radiators send it.
+   - **Computing and industry on the light: significant, limited by demand.** The night half intercepts about
+     850 PW the Moon never needs (joint synthesis), and its attitude keeps that light off the night. Each terawatt of
+     computing takes 2,450–3,670 km² of collectors and 830 km² of radiators, so 1,000 TW, about 20,000 times today's
+     data centres, takes 0.12–0.16% of the fleet's area (*screen*). With its collectors' heat, 2.9–4.4 W for each watt
+     of computing, it puts 0.15–0.22 W/m² on the Moon released near the fleet, 5–7×10⁻⁵ W/m² from the Sun–Earth
+     hubs (*screen*; the resources domain's industry screen), and less from radiators facing outward or edge-on to it. Energy is no limit there; demand, hardware mass
+     and latency are, and computing or industry used for nothing is only waste heat.
+   - **How industry changes the glow.** Industry and collection change the Moon's heat in three ways, and every
+     design for the array's industry has to be weighed by them:
+     - *What it puts on the films.* Each extra percent of sunlight the films absorb across the fleet adds
+       1.66–2.91 W/m² of glow (*screen*), so photovoltaics, contacts, coatings and trim hardware on the tiles count
+       against the planned climate.
+     - *How it dims.* The window rings carry the climate stack round their whole orbits and intercept 45–57 times the
+       sunlight the Moon receives, so a dimmer that absorbs on them gives 15–26% of its dimming back as glow where
+       the light crosses one such layer (*screen*); a dimmer that reflects gives none back. That weighs on the dimmer
+       as semitransparent photovoltaics and on the added dimming the glow needs. Collectors that take light bound for
+       the Moon dim it as well, and can feed industry if most of their heat leaves from faces that do not see the
+       Moon.
+     - *Where its heat goes.* A terawatt released in orbit puts 5×10⁻⁵ W/m² on the Moon and a terawatt used on the
+       Moon 0.026 W/m², so 100 TW of industry on the Moon would add 2.6 W/m², near half the glow's low end. Heavy
+       industry belongs in orbit with outward radiators.
+   - **Where it belongs.** With the shield's work on its films, sized from the protection domain's optical tables
+     and the ring stack's radiative transfer. It surfaced here in the heat ledger.
+   - *A first-order estimate: the stack's layering and how efficiently infrared absorbed aloft warms the ground decide
+     its size. The range across those is 1.8–9.9 K.*
+2. **Each terawatt used on the Moon warms it by 0.017–0.026 K, so a kelvin takes 38–61 TW** (*screen*).
+   - **The metropolis.** Its 200 GW is 0.005 W/m² over the Moon and 62 W/m² over its 32 km circle, near the hottest
+     city cells on Earth at 100–577 W/m² (Allen et al. 2011).
+   - **Decent living.** A decent life takes about 15 GJ of final energy per person a year (Millward-Hopkins et al.
+     2020), so a terawatt covers about two billion people at that level. Needs stop rising near 60 GJ (Vogel et al.
+     2021).
+   - **What follows.** The heat budget binds industry and computing, which belong in orbit, long before it binds
+     living standards.
+   - *Solid.*
+3. **The night is the energy problem.**
+   - **The size.** Carrying the metropolis through a 354-hour night takes 71 TWh, 7.9 times all of Earth's
+     pumped-hydro storage, and 52 km³ of water through Korolev's 3.74 km head (*screen*). An all-solar supply needs
+     about 6,100 km² of level panels for the mean alone, about twice the city, before storage.
+   - **Storage.** Grid storage classes stop near 160 hours (US DOE 2023), and hydrogen returns about 40% (Headley &
+     Schoenung 2020).
+   - **A grid round the Moon.** Every night-side point lies within 2,729 km of the terminator. High-voltage direct
+     current loses 2–3.5% per 1,000 km plus about 1% per converter (US EIA 2018), so such a grid loses 9–19% over
+     4,000–5,500 km, better than any storage round trip.
+   - **Fusion.** The register's planning assumption sidesteps the night if fusion holds.
+   - **Microwaves from the fleet's night half.** They would keep the night dark. The public exposure limit of
+     10 W/m² (ICNIRP 2020), though, puts 200 GW on 4,000–7,000 km² of receivers closed to people and sky ships.
+   - *Solid arithmetic.*
+4. **Rivers are the native source; tides are not.**
+   - **Tides.** Tidal power per area is a 320th of Earth's for the same range: a sixth of the gravity, one cycle a
+     month. Impounding the whole nearside sea would give 25–50 GW in theory (*screen*).
+   - **Rivers.** They carry 229,410 m³/s from land averaging 2,345 m above the sea, at most 0.87 TW gross (*screen*).
+   - **Waves.** They bring 87–731 W per metre of coast (the wave review).
+   - **Fusion fuel.** The seas and lakes hold 4.8×10¹⁴ kg of deuterium, enough for 5 TW over 10⁹ years (*screen*),
+     and the operation can deliver more with any water. Deuterium–tritium fusion also needs lithium to breed its
+     tritium, which the industrial architecture counts among the source industry's materials.
+   - *Solid.*
+
+### Food
+
+5. **Food takes about 60–80 m² a person at the crop model's potential and 130–340 m² in practice.**
+   - **The potential.** The day fruit gives 31–42 kcal per m² a day at the far side's equator, 60–80 m² a person at
+     2,500 kcal a day (*screen*).
+   - **In practice.** Allowing for the GCM's clouds (89% of clear sky), losses of 30–50% and a varied diet at 1.5–2.5
+     times the land of the energy-only fruit gives 131–341 m² a person (*screen*).
+   - **For the metropolis.** It needs 13,000–34,000 km² of cropland: 11–28% of the dry land within 300 km of the
+     summit and 4–10% within 500 km. Within 100 km the dry land, 18,700 km², is less than the need. Lakes, Korolev
+     and Hertzsprung among them, cover more of the ground within 300 km than dry land does (*screen*).
+   - **Against Earth.** Earth's crops feed about 6 people per hectare after feed, biofuels and other uses, about
+     1,700 m² a person (Cassidy et al. 2013). NASA's growth chambers gave potato 18.4 and wheat 11.3 g of edible
+     mass per m² a day (Wheeler et al. 2008). Biosphere 2 grew 81% of eight people's diet on 0.2 ha, about 250 m² a
+     person (Allen & Nelson 1999).
+   - **The timing.** The day fruit ripens at sunset, once a month, so the city holds about a month of food.
+   - **What follows.** The register's "regional agriculture and foraging" fits the land, given water and engineered
+     crops.
+   - *A planning range on a clear-sky model with no water or nutrient limits.*
+6. **Protein can run on the night's power, and food must not make methane.**
+   - **Protein.** Microbial protein grown on solar electricity yields over ten times the protein per area of any crop
+     (Leger et al. 2021), and it can run through the night on stored or firm power.
+   - **Animal products.** They use 83% of farmland for 18% of calories (Poore & Nemecek 2018).
+   - **Methane.** In an air without OH, methane lives for centuries (the ecology work), so ruminants, flooded paddies,
+     landfills and open anaerobic treatment would raise it unless designed out or captured.
+   - *Solid in direction.*
+
+### Building, making and moving
+
+7. **The air ends surface launch.**
+   - **The column.** A launch from the surface crosses 75 t of air per m², 7.3 times Earth's column. A mass driver's
+     2.4 km/s meets about 5 MPa of dynamic pressure near the ground.
+   - **Orbits.** They lie within the air below the exobase, 1,300–2,600 km up.
+   - **Freight to orbit.** It goes from altitude, by tether or by elevator, and a lunar elevator of today's materials
+     lifts about 584 t a year (Pearson et al. 2005).
+   - **What follows.** The surface and orbital economies trade little bulk mass: orbital industry draws on space
+     resources, and the surface makes its own.
+   - **The film plant.** Lifting its 73–147 t/s from the surface would carry 0.2–0.4 TW in the payload's orbital
+     energy alone. By S7's diagnostic each kg/s of loss budget allows about 9.4 MW deposited in the protected
+     region, 9.4–940 MW across the budgets.
+   - **Exhaust.** Rocket black carbon warms about 500 times as much per kilogram as soot from the ground (Ryan et al.
+     2022).
+   - *Solid physics.*
+8. **The far side's ground gives aluminium and glass.**
+   - **The ore.** Dry land is mostly feldspathic highland, since the 28% sea floods most of the iron and titanium
+     basalts (the resources work). Local building at the summit runs on aluminium, glass, ceramics and calcium
+     silicates, and its steel comes from distant dry mare or from space.
+   - **Stocks.** A decent life needs about 42 t of materials in use per person, against 335 t in developed countries
+     (Vélez-Henao & Pauliuk 2023), so the metropolis holds 4–34 Gt.
+   - **Embodied energy.** Steel 24 MJ/kg, cement 4.6 and concrete 0.95 (Hammond & Jones 2008).
+   - *Solid on the ground; the stocks are Earth figures.*
+9. **At a sixth of gravity, wings beat buoyancy on energy, and trains brake slowly.**
+   - **Air freight.** Wings and rotors cost about a sixth as much energy per tonne-km, while airships stay at Earth's.
+     The sky-fleet study already found winged liners matching airships per passenger-km. Its kilometre-class
+     freighters at 12–38 Wh per tonne-km sit near rail (0.24 MJ, or 67 Wh, per tonne-km) and far below air freight's
+     16.4 MJ (Krammer & Schäfer 2025).
+   - **Ground transit.** Standing riders take a sixth of Earth's 1–1.5 m/s², 0.17–0.25 m/s². Stopping from 30 m/s then
+     takes 1.8–2.7 km against 0.3–0.45 km on Earth, and accelerating at 1 m/s² tilts the apparent vertical by 32°
+     (*screen*). Metro and rail need seated or held riders, tilting cars and wide station spacing, or linear motors
+     with seated travel.
+   - *Solid physics.*
+10. **Computing in orbit is 0.13 s away.** That is the round trip to the ring radius (*screen*), so control that
+    closes in milliseconds stays on the Moon: sky-boat separation, grid protection, robots. Data centres used 415 TWh
+    in 2024, about 47 GW (IEA 2025), so a terawatt of orbital computing is about 21 times today's. *Solid.*
+
+### Water, sanitation and work
+
+11. **Water treatment carries the whole job of disinfection.**
+    - **Sunlight.** Under the shield it disinfects at 1–6% of Earth's rate (the ecology work).
+    - **Energy.** Water supply takes about 4% of the world's electricity, and wastewater holds 5–10 times the energy
+      its treatment needs (IEA 2016).
+    - **Nutrients.** Recovering nitrogen from urine takes 1.3–13 kWh per kg against about 9.4 for the best ammonia
+      plants (Larsen et al. 2021; IEA 2021). Urine and faeces could supply 22% of the world's phosphorus demand
+      (Mihelcic et al. 2011).
+    - **The metropolis.** It passes about 44 kt of phosphorus and 0.44 Mt of nitrogen a year through food and sewage
+      (digest arithmetic, [state.md](state.md)), so its sewage is one of the Moon's main phosphorus return paths.
+    - *Solid.*
+12. **Work and upkeep have measured sizes.**
+    - **Working hours.** A decent-living basket takes an 18-hour paid working week per person, and a "good life" 46
+      hours (McElroy & O'Neill 2025). Biosphere 2's crew worked 66 hours a week.
+    - **Maintenance.** Routine maintenance runs 2–4% of replacement value a year (NRC 1990).
+    - **Who works.** Who performs the maintenance of a settled world belongs to the human paper. These numbers give
+      it its scale. *Earth figures.*
+
+### People across the horizons
+
+The author's working scale of 9 October is 20–30 billion people across the Solar System by the frontier of thousands
+to tens of thousands of years, affluent by modern standards, mostly on Earth, the Moon and in the array. The study is
+[population.md](population.md), with its screen [population.py](population.py); numbers here are from it.
+
+13. **20–30 billion takes growth at the pre-industrial world's pace.** From the UN's 10.2 billion in 2100, 0.075–0.12%
+    a year reaches it by the year 3000 and 0.023–0.037% by 5000; the world grew 0.055% a year from year 0 to 1750. From
+    10 million in 2526, the Moon reaches a billion in 2756–2987 at 1–2% a year.
+14. **Affluence is 2–6 kW of primary energy a person, centred on Europe's 3.7.** Needs stop rising at 1.9 kW of final
+    energy (Vogel et al. 2021), 2.9 kW of primary energy, which gives the metropolis brief's 2 kW a basis.
+15. **People's heat on the Moon is answered by dimming, and a city's in the city.** With industry in orbit a person at
+    Europe's energy releases 2.8 kW on the Moon, and each terawatt there is answered by 0.009–0.014% more dimming, so
+    1% more answers the heat of 26–41 billion. Moving industry to orbit cuts a person's lunar heat by a quarter. Cities
+    at 40,000 people per km² release 60–240 W/m², so a city's heat is answered in the city.
+16. **The Moon's rivers carry 7,240 km³ a year, and the fresh seas supply beyond them.** Water drawn from the seas
+    and lakes and returned supplies people and farms beyond the runoff while the seas stay fresh. Food land is ample
+    by area, the dry land feeding 8.4–22 billion on Earth's 12% share in crops; the rain sets the rain-fed share, and
+    beyond it crops are irrigated from the fresh seas (finding 27).
+17. **Earth binds on food within planetary boundaries.** A transformed food system feeds 10.2 billion within four
+    boundaries (Gerten et al. 2020), so beyond that Earth grows part of its food off the land, for instance microbial
+    protein on power the array can send: 27% for the 14 billion of the Earth-heavier shared case (ways of living).
+    Thermal plants warm Earth 0.003–0.009 K a billion across the energy band.
+18. **The array's light is no limit; its habitats are its mass, and its commute is costly.** The whole population's
+    energy, 40–260 TW, is 0.005–0.03% of the night half's 851 PW. Habitats at the Stanford torus's 990 t of shield a
+    person take 248–990 Gt for a billion residents. The ring radius is 14.1 hours away on a minimum-energy transfer,
+    and a weekly rocket commute costs 18–46 kW a person, so the array's workers rotate and its tinkerers live there.
+19. **The array serves Earth with computing and power, and prototypes Earth's own arrays.** A 10.5 km transmitter
+    reaches a rectenna of the 1978 reference size on Earth from the Moon's distance, and receiving land limits it at
+    20,400 km² per TW; computing serves Earth over 1.28 s of light time. The film plant, photon-kept formations,
+    collectors and links are the industry that would build Earth's own arrays.
+20. **Affluence lasts the horizons as a plateau.** At 2% a year energy use would reach all the light the fleet
+    intercepts in about 580 years, so energy per person holds near the needs plateau and growth near zero.
+
+### Computing in the array
+
+The author called computing the valuable resource that turns the array's otherwise wasted energy into use, and asked
+what it is for. The study is [computing.md](computing.md), with its screen [computing.py](computing.py); numbers
+here are from it, with "today" the H100's 1.4×10¹² FLOP per joule.
+
+21. **The light outruns any computing the array can build, and mass binds first.** The night half's 851 PW powers
+    1,000 TW of computing on 0.4–0.6% of it, while a terawatt needs 7–34 Mt in orbit for radiators, collectors and
+    processors. So 1,000 TW weighs 15–74% of the fleet and renews 0.7–2.6 Gt of processors a year, the film plant's
+    scale.
+22. **Heat placement binds next.** With its collectors each watt computed releases 2.9–4.4 W, and from the ring radius
+    460–1,100 TW warms the Moon 0.1 K. The Earth–Moon L1 and L2 points cut that 9.5 times, 100,000 km 25 times and the
+    Earth–Sun hubs 5,600 times. Radiators should run hot: at the irreversible floor, operations per square metre grow
+    as T³.
+23. **A terawatt today is 1.4×10²⁴ FLOP/s, 94 times the world's AI computing.** CMOS has about 200-fold left, and the
+    irreversible floor at 330 K lies 4,700–470,000-fold beyond today; reversible logic goes below it by running slower.
+24. **Control, management and today's science take megawatts to terawatts.** The fleet's control is 20 MW. A
+    weather and climate twin of the whole Moon, run as a forecast service, takes 6–12 MW at 1 km, 6–12 GW at 100 m and
+    9–15 TW at 10 m; at 1 m it takes 38–44 TW in real time and 38,000–44,000 TW as a forecast service, the one
+    management task that fills the array. Following one gram of soil cell by cell takes 350 TW. A far-side radio
+    correlator for 100,000 dipoles takes 1 MW.
+25. **AI and digital minds span the array, and the far-out tasks pass it.** AI services for 20–30 billion people take
+    14–2,100 TW today and 0.07–10 TW at the CMOS limit, and a digital population the size of ours 14–21,000 TW. An
+    ancestor simulation (Bostrom 2003) runs in 8 days to 23 years on 1,000 TW. A trillion emulated minds at a
+    thousand times human speed, brains emulated molecule by molecule and a Matrioshka brain pass the array.
+26. **Latency divides the work.** The 0.13 s round trip to the ring radius fits inside the 0.21 s people leave between
+    turns in conversation, so the Moon's interactive services and forecasts can run in the array, with millisecond
+    control on the Moon and Earth's 2.56 s round trip suiting batch work.
+
+### Ways of living
+
+Steps three and four of the population work the author approved on 9 October: the ways of living, built from the
+project's designs, and what each holds and costs. The studies are [ways of living](../research/studies/ways_of_living/README.md)
+and, for the winds, [zonal_winds.md](../climate/gcm/zonal_winds.md); numbers here are from them.
+
+27. **Every shared case fits the Moon's land, and food grows fastest with its people.** Towns take 0.6–10% of the
+    23.4 million km² of dry land across the cases, aerial shares of 0–75% and four mixes of settings. Ten billion
+    lunar residents on the lunar design's plant-rich diet crop 1.4–3.9 million km², 35–224% of the rain-fed land
+    outside a kept 30%. At the high end 2.2 million km² are irrigated with 8,700 km³ a year lifted from the fresh seas
+    for 1.5 TW; irrigated from the start, crops and towns take 20–59% of the rain belt's land outside the kept 30%,
+    for 0.18–2.0 TW.
+28. **People's heat costs 0.08–1.8% more dimming across the cases.** With the sky towns' power, the irrigation lift
+    and the hydrogen remade after losses, the Moon takes 9–128 TW; total25 at its own split takes 17–72 TW and
+    0.15–1.0%.
+29. **People's light fills the dark night before their towns fill the land.** At the lunar design's 791–1,420 m² of
+    lit sky a person (ecology), 6–15 billion lunar residents light 20–91% of the dry land, and each billion in the far
+    side's twilit-night places lights 45–81% of that home.
+30. **Five billion aloft live in about 870,000 towns, and the lifting gas's upkeep is their largest cost.** They need
+    425 Gt of districts and carriers and 48 Gt of lifting gas, shade 1.8% of the Moon and stand 4.7–5.5 km apart
+    over the clear sky outside a kept 30–50%. Each percent a year of hydrogen lost takes 0.43 TW per billion aloft to
+    remake, so five billion at the joint ledger's 1–10% a year need 2.1–22 TW and keep 3.5–35 ppm of hydrogen in the
+    air.
+31. **Roaming towns live days the wind sets, and the wind gathers them.** Above about 8 km the air superrotates: a
+    town drifting at 10 km lives a 21.8-day day on the equator and one at 40 km 9.3 days, 4.3 at 60°. Near the ground
+    it lives about 34 days with a long evening, and it can hold the hour in the lowest 5 km at 40–75°, from the late
+    afternoon into the night: in 18–31% of 3-day means, up to 66% at the best hour. Passive routes gather: within 180
+    days every route at 2.5 km shares one track near the equator, and at 40–60 km routes collect over the poles within
+    a few years. The shear to sail on is about 4 m/s over 15 km near the ground and 6 m/s in and below the flight band.
+32. **A streamlined hull holds a place or a time of day cheaply.** The sky-ship study's 3 km hull holds a place at
+    10 km for 0.089 kW a resident, against 6.9 kW for a sphere held in 5 m/s, and follows the Sun for 0.18–0.50 kW
+    between 47° S and 47° N and 0.04–0.19 kW poleward of 60°.
+33. **Water costs little energy everywhere.** Lifting a billion residents' 18–55 km³ of domestic water a year from the
+    fresh seas takes 3.2–9.5 GW, and the makeup after 90–99% recovery 0.03–0.95 GW.
+
+### How people live
+
+Step five of the approved order: each setting through the lunar cycle, in the
+[daily-life study](../research/studies/daily_life/README.md); numbers here are from it.
+
+34. **People keep a 24-hour day indoors, and lighting it through the night is cheap.** The human clock entrains only to
+    days near 24 hours (Czeisler et al. 1999; Scheer et al. 2007), so homes need dark bedrooms through the 354-hour day
+    and daytime light through the night: 11–45 kWh a person each night, 2–7% of the night's 650 kWh at Europe's level.
+35. **The dusk is long shared time.** Practical dusk lasts 82–137 hours by latitude and moves west at 15.4 km/h on the
+    equator; a dusk-long gathering of a million people needs a third to a half of one sky-ferry line.
+36. **Moving about at a sixth of the gravity rewards seated, gentle transit.** People switch to running at 1.42 m/s
+    (De Witt et al. 2014), and stopping a wheelchair or bicycle from 5 m/s takes 12.8 m against 2.1 m on Earth.
+37. **The array answers inside conversation and Earth does not.** The array's 0.13 s round trip fits within the 0.21 s
+    people leave between turns, while Earth's 2.4–2.7 s does not. Holding a sky town at one hour against the mean wind
+    at 10 km takes 2.7–10 kW a resident for an unstreamlined sphere.
+
+### Food systems
+
+The author's direction of 11 October: count current and emerging agriculture, hydroponics and aquaponics, and the fog
+deserts with water extraction, in the food system. The study is
+[food systems](../research/studies/food_systems/README.md); numbers here are from it.
+
+38. **Rain-fed fields feed the plant-rich diet at the least cost, and the rain alone feeds 9.4–27.5 billion people
+    outside a kept 30%.** A billion residents crop 139,000–393,000 km² at the crop model's yields, 2.5–7.4% of what the
+    rain grows in the wet bands, for 6.3–14 W a resident of nitrogen fixation, once the crops' water need is held to
+    what the design sunlight can evaporate; farms at Earth's best 70–80% of potential need 25–43% more land. Water
+    lifted and piped from the fresh seas costs 0.92–1.44 kWh/m³, so topping up a billion residents' rain-belt fields
+    takes 115–522 km³ a year and 13–86 W a resident.
+39. **Glass takes more ground than fields, and the fog desert drinks from the seas.** Sunlit glass needs 1.2–2.5 times
+    the equatorial field area, 4–22 Gt of glass and steel and 0.15–1.2 kW a resident per billion, and closed houses
+    2.3–12.8 kW. The design run's fogs sit in nearly still air, so nets catch 0–98 L/m² a year above collection's 1 m/s
+    threshold against Earth's 1,100–3,650; water from the air costs 238–500 kWh/m³, from the seas 0.89–1.15.
+40. **Lamp-lit food costs tens of kilowatts a resident, and its heat binds.** Lamp-lit staples take 5.6–61 kW a
+    resident, and lit by ground solar a lamp farm needs more panel area than the fields it replaces. The fully lamp-lit
+    diet for 8 billion takes 41.5–425 TW, 0.50–8.1% more dimming with the array's power and 0.72–17.9% with fusion.
+    Microbial protein replaces the diet's animal part for 40–133 W a resident, and a whole diet made on power takes
+    0.70–2.8 kW.
+41. **Fish and soilless culture multiply N2O, which accumulates in every mix.** Aquaponic fish take 44,500–309,000 km²
+    of feed crops a billion, four to six times the animal part they replace, and emit 52–446 kt N of N2O, three to seven
+    times the field diet's. Soilless culture emits 0.72–1.19% of its nitrogen against the fields' 0.2–0.5%, and N2O has
+    no sink in the design air: the fog-desert glass mix adds 0.50–3.4 ppb a year at 8 billion against the wild
+    biosphere's 0.31–0.42.
+42. **The waters' phosphorus holds sea farms to the animal part of 0.04–0.26 billion people.** The waters' life can
+    spare 21–56 kt a year to seaweed, fish and sorption (resources' sea-phosphorus study); the sea-supported mix draws
+    0.86–4.1 Mt a year at 4–8 billion, 15–195 times that, so it cannot be built.
+43. **At 4–8 billion pasture cannot carry the diet's animal part, and the feasible mixes with fields leave 35–89% of the
+    dry land wild outside a kept 30% at 8 billion.** At ecology's upper grazing allowance the fog desert outside a kept
+    30% holds pasture for 3.4 billion people, so the animal part comes from microbial protein, aquaponics, sea farms or
+    animals fed on crops. Rain-fed first with grazing held to the fog desert uses 2.05–3.72 million km², 0.05–0.077 TW
+    and no sea water at 8 billion; fog-desert glass fits the fog desert only to 16% of the way to its high-cost end.
+    Lamps and power-made food leave 97% or more wild for 5.6–425 TW.
+
+### Cities on the land
+
+The author's directions of 11 October for the land: most of the ground's people in the drier highlands round the
+summit metropolis, taller cities, and the large lava tubes as the first phase's habitats and lasting cities
+([register](../research/decisions.md#people-on-the-moon-and-beyond-11-october-2026)). The study is
+[land cities](../research/studies/land_cities/README.md); numbers here are from it.
+
+44. **The known lava-tube candidates lie in the low basins' mare basalt, and the 28% sea covers most of them.** Of the
+    17 pit sites in and beside the maria, 13 lie under the sea, 54 m to 2.25 km down, and one under a rain-fed lake;
+    three stand on land, the Mare Tranquillitatis pit highest at 784 m. Of the 19 places of Coombs & Hawke's roofed
+    rille segments, 12 lie under the sea, and all three measured collapse chains do.
+45. **On land the rain lifts the water table over every pit floor within years to four centuries, unless the basalt
+    drains as freely as Hawaii's young flows.** Solved in two dimensions on the atlas, the central case brings it to
+    the ground at 4 of the 12 land places and to 6–330 m below it at the rest. Water presses with a sixth of Earth's
+    weight, so Earth's sealing holds far deeper: Earth's 15 m threshold for waterproofing sheets stands at 91 m.
+    Keeping a 1 km by 50 km tube dry takes 0.03–2.9 MW with the water table at the ground and 2.5–245 MW under 500 m of
+    sea, beside its residents' 5.2–28 GW.
+46. **The rough estimate of 7 million in a 1 km by 50 km tube with ten floors holds in arithmetic; as a 50 m vault with
+    streets and courts it holds 2.6–4.7 million.** The mapped tubes, each counted once, hold 2–52 million, those on dry
+    land 0.6–14 million; with the GRAIL candidates at the size gravity sees, 5–129 million.
+47. **Before the air, a tube roof is the Moon's best shelter, and the air ends that role once the surface pressure
+    reaches 16.8 kPa,** when its column weighs as much as Earth's atmosphere. A roof holds 1 atm by its weight from
+    19–21 m of basalt. The tubes matter most in the build's first steps.
+48. **3.90 million km² of dry ground stands 4 km or more above the sea, 91% of it on the far side, and 1.35 million km²
+    of it poleward of 30°, where both climate models put the most comfort and the ground is driest.** The far side's
+    equatorial massif round the summit is the wettest and stormiest ground on the Moon.
+49. **For the same steel per floor, towers rise three to four times as high at a sixth of the gravity, and heat and
+    daylight cap density first.** All 6 billion of the ground's people at 10,000 per km² would settle 15% of the high
+    ground, at the metropolis's density 3.8% and at the tower district's 1.8%.
+50. **Water reaches the highlands for 0.9–2.7 GW per billion people from the nearest lakes and 7–21 GW from the sea,
+    a tenth of that with 90% recovered.** With half to three quarters of the ground's people in the highlands, the
+    scattered communities hold 0.5–3 billion.
+
+### Distributions of people
+
+The author's decisions of 11 October set step six: 4–8 billion on the Moon with plenty kept wild, 2–4 billion of them
+aloft, the ground's people mostly in the drier highlands round the summit metropolis, and the array and the colonies
+carrying a decent share ([register](../research/decisions.md#people-on-the-moon-and-beyond-11-october-2026)). The study
+is [distributions](../research/studies/distributions/README.md); numbers here are from it.
+
+51. **The Moon carries 4–8 billion people with 61–94% of its dry land wild outside a kept 30%, and 31–92% outside a
+    kept half.** On the food study's power-heavy mix with half aloft, 4 billion leave 84–94% and 77–92%, 6 billion
+    76–91% and 61–88%, and 8 billion 64–88% and 34–84%. Checked band by band with the settlement in place, everything
+    fits outside a kept 30% and at 4 and 6 billion outside half. At 8 billion outside half every high-cost corner
+    overfills a band, the middle-wet zone's fields and towns at all of them, and the favourable end leaves 76–84%
+    wild. Three placements together fit every corner for twice the water lift: the dry highland towns poleward of 45°
+    first, the scattered communities gathered on the twilit and Earthlit homes, and the middle band's communities on
+    the fog-desert side of their homes.
+52. **The ground's 2–6 billion live in the summit metropolis, the dry highland cities and towns scattered across the
+    Moon, on 0.13–1.1 million km², 0.56–4.7% of the dry land.** The dry highland cities poleward of 30°, tower
+    districts of thirty storeys and highland towns on crater walls, hold 1.1–4.4 billion and settle 6.5–33% of the dry
+    high ground outside a kept 30%. They light almost none of the sky: 0–36 m² a person at 30–45° and none poleward of
+    45°.
+53. **The Moon uses 11–131 TW of primary energy; with fusion it takes 9.2–119 TW of heat, answered by 0.080–1.7% more
+    dimming, and with power from the array 7.7–71 TW and 0.066–0.98%.** The residents give 66–74% of the heat at the
+    favourable end. At the high-cost end with half aloft, remaking the sky towns' hydrogen after 10% of it is lost a
+    year gives 45%.
+54. **Two to four billion aloft live in 348,000–696,000 sky towns, 6.2–8.7 km apart outside a kept 30%, shading
+    0.72–1.44% of the Moon.** In the equatorial band, where the winds gather them, a town comes within three diameters
+    of another 0.50–20 times a day, and the fleet 0.066–5.3 million times, for tracking and traffic control to
+    resolve.
+55. **Regional weaknesses serve the whole.** A 50 km tube under 500 m of sea seeps 0.058–5.8 km³ of fresh water a
+    year, enough to water fields for 0.050–22 million people, and the Near-side Sea's sediment receives phosphorus for
+    19.5–226 million. Six undersea communities lie within 250 km of a mapped submerged tube, and joined they hold
+    1.07–28.6 million. The lake deltas' sediment and the towns' struvite return the farms' phosphorus. The fog desert's
+    glass drinking piped sea water can feed a billion highland residents on 0.25–0.97 million km², and the far side's
+    dark belt keeps the Moon's dark nights.
+56. **Four distributions of 25–30 billion were set out for the author, who chose C′.** Earth holds 9 billion in each,
+    within the 10.2 billion that eat inside four planetary boundaries. A puts the Moon at 4 billion (2 on the ground, 2
+    aloft), the array at 7 and the colonies at 5; B the Moon at 6 (3 and 3), 6 and 4; C the Moon at 8 (4 and 4), 5 and
+    3; D 30 billion with the Moon at 8 (6 and 2), the array at 8 and the colonies at 5. Everyone's primary energy is
+    60.1–274 TW; per billion the array needs 248–990 Gt of shield and 1,005 Gt of habitat, and the colonies 3.39–14.4
+    TW. Earth at 8 or 11 billion moves each total by one billion down or two up.
+57. **The author's distribution, C′, is C with the middle latitudes' lowland people moved, at C's costs.** Ranked on
+    spare land, water energy, comfort under both climate models, rain and lightning, and night lighting, the
+    high-latitude lowland homes poleward of 48.6° sustain people best and take everyone who leaves the lowland homes
+    at 30–48.6°: 0.25–0.40 billion outside a kept 30%, and 0.22–0.40 billion outside a kept half, where 0–28 million
+    stay as homesteaders. Homesteads stay where the middle latitudes hold farms, at 8 billion outside a kept half at
+    the high-cost end: 2.8–28 million people among 1.39 million km² of fields, a household of four on each 20–200 ha.
+    C′ keeps C's heat, energy, water lift and wild land and puts 0.49–14.7% of the dry land under a light-polluted sky
+    against C's 0.50–15.4%. Every corner fits outside a kept 30%. Outside a kept half the high-cost end fits with the
+    dry highland towns poleward of 45° first and the scattered towns gathered on the twilit homes, once the homesteads'
+    homes count within the fields they work, 0.02–0.71% of their land. The farms' crews then come by regional ship
+    from the dry highland cities poleward of 45°, 206 km away, or by sky boat from crew towns kept on the dry high
+    ground at 30–45°.
+58. **C′ fits the author's wild share: at least half wild by preference, or 30% wild with another 20% hybrid.** Half
+    wild is the kept half of finding 57. Under the compromise the hybrid fifth is the author's megaparks and great
+    gardens, 4.68 million km², about 585 m² for each of the Moon's 8 billion residents before visitors, with the small
+    shops, restrooms and places to rest they need. Farms, grazing, the homesteads' homes and towns keep to the same
+    half as under a kept half, so C′ keeps the half's land, heat, water and traffic, and every corner fits with the
+    remedy's poleward and twilit placements once the homesteads' homes count within their fields. Farms, settlement
+    and the homesteads' homes take 8.2–33% of the dry land. Towns, cities and sky towns put at most 14.7% of it under
+    a light-polluted sky, 17.2% with the metropolis lit at Earth's area a person, so even with every park lit at least
+    62.8% keeps a dark sky, above the preferred half and the compromise's 30%. Half wild with another 20% hybrid, run
+    beside them for comparison at the author's request with the same parks, leaves farms and towns 30%: every corner
+    still fits the same way, while the high-cost end draws 3,250 km³ a year from the seas to water its fields and the
+    sky towns have 1.7 times as many conflicts a day.
+
+### Automation, the network and food
+
+59. **At Earth's staffing the parks alone would need 50 million to 1.5 billion gardeners, so machines keep them**
+    (*derived*). An 18-hole golf course keeps 10–50 groundskeepers a km², Central Park about 110 staff and Butchart
+    Gardens about 310 gardeners. The author set the 4.68 million km² of parks, their amenities and food-service shops
+    included, as almost purely automated ([habitation](../habitation/README.md#parks-and-gardens)); the machines' energy
+    is still to size.
+
+60. **A mesh of about 1,500 aerostats drifting near 30 km covers the whole Moon, and the dense air barely shortens
+    radio's reach** (*derived*; [network.md](network.md)). Below 10 GHz the air absorbs a few thousandths to a hundredth
+    of a decibel per kilometre. The Moon's curvature sets the reach, 324 km to the horizon from 30 km against Earth's
+    619, and refraction adds about 1% where Earth's air adds 15%. At 30 km the mesh flies above the storms and the sky
+    reefs, where the winds keep drifting routes spread and the nights last 2–6 days; fixed posts there take about 0.5 kW
+    each against the wind. The array, 0.13 s away by round trip, stands above the horizon almost everywhere, and the
+    band where Earth flies its low satellites lies inside the Moon's air.
+
+61. **The author's food blend, set to the optimum, is power-heavy 40%, power-made 50% and fully lamp-lit 10%**
+    (*screen*; [food blend](../research/studies/food_systems/README.md#the-authors-blend)). With each mix between a
+    tenth and a half of the diet, it takes the least sunlight from wild life at the high-cost end, power-made at the cap
+    and lamps at the floor: at 8 billion its fields take 0.67–1.81 million km², none in the middle latitudes, and its
+    heat is 15–171 TW with fusion, 0.13–2.4% more dimming; each tenth of the diet under lamps takes 8.3–129 TW of heat.
+    Heritage meat at a kilogram a person a year takes 0.30 million km², a fifth of the homestead region, and its cattle
+    add 1.6–1.7 Mt of methane a year, 0.34–1.6 ppm at steady state; red seaweed in cattle feed cut steers' methane yield
+    by 45–68% over 147 days (Roque et al. 2021).
+
+## Statements elsewhere that need correcting
+
+The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting statements
+in other folders. They belong to main and are unchanged on this branch. The largest:
+- the metropolis brief quotes the canopy's gross photosynthesis as if it were food;
+- its 2 kW per person has no stated basis;
+- the status record's crown berths and port power are stale;
+- the joint ledger gives the film plant's power in terawatts under a label in watts.
+
+## Files
+
+| File | Holds |
+|---|---|
+| [screen.py](screen.py) | The first screen: the heat ledger with the fleet's infrared, its heat mirror, computing and industry against the glow, food land, the night, tides and rivers, transit, fusion fuel, latency |
+| [population.md](population.md) | Population and living across the horizons: growth, the affluent band, what binds on the Moon and Earth, the array's habitats, commuting, Earth service |
+| [population.py](population.py) | Its screen, writing [results/population.json](results/population.json); sources in [population_sources.json](population_sources.json) |
+| [computing.md](computing.md) | Computing in the array, supply against demand, from the fleet's control to the far-out tasks |
+| [computing.py](computing.py) | Its screen, writing [results/computing.json](results/computing.json); sources in [computing_sources.json](computing_sources.json) |
+| [results/first_screen.json](results/first_screen.json) | Its product (schema `terluna.provisioning.first-screen/1`) |
+| [state.md](state.md) | What the project already holds for provisioning, what others assume of it, and statements to correct |
+| [literature.md](literature.md) | The literature by topic, with what it means for the Open Moon |
+| [questions.md](questions.md) | The open questions, in order |
+| [sources.json](sources.json) | Every source cited, its use and how far it was read |
+| [../research/studies/food_systems/README.md](../research/studies/food_systems/README.md) | Food systems per billion residents, their fit to the lunar cycle and seven mixes for 4, 6 and 8 billion, with each mix's feasible range |
+| [../research/studies/land_cities/README.md](../research/studies/land_cities/README.md) | Lava tubes against the 28% atlas, their water and capacity, and highland and tall cities |
+| [../research/studies/distributions/README.md](../research/studies/distributions/README.md) | Four distributions of 25–30 billion across Earth, the Moon, the array and the colonies, with the Moon's land bands, energy, water, phosphorus, light and sky at 4–8 billion and the synergies among places |
+
+`python -m provisioning.screen` rewrites the product; `python -m pytest provisioning/tests` checks it.

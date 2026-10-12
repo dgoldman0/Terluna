@@ -1,0 +1,411 @@
+{
+ "source_admission": "Published values used in tubes.py, highlands.py, run.py and README.md; no external dataset files are admitted beyond the geography domain's hash-checked inputs (LOLA, GRAIL GL0420A and the IAU gazetteer archive). Two literature agents fetched and read the sources on 2026-10-11 with web tools, recording quotes and their places; \"access\" says how far each was read. Values from figures were read from the figure images. Where a paper could not be read, the value comes from the document named in \"access\". Project products are cited by path in the README and hashed in results/land_cities.json.",
+ "sources": [
+  {
+   "key": "lroc_pit_atlas",
+   "citation": "LROC Lunar Pits Atlas (Arizona State University), pages 1-21 and the list",
+   "doi_or_url": "https://lroc.im-ldi.com/atlases/pits/list",
+   "use": "Every pit outside impact melt: coordinates, funnel and inner diameters, depths (stereo or shadow), overhangs; 16 mare pits",
+   "access": "each page read through a summarising fetch on 2026-10-11; the Lacus Mortis, Tranquillitatis, Marius Hills and Ingenii pages re-fetched verbatim"
+  },
+  {
+   "key": "ashley_2011",
+   "citation": "Ashley, Robinson, Hawke, Boyd, Wagner, Speyerer, Hiesinger & van der Bogert 2011, First International Planetary Cave Research Workshop, abstract 8008",
+   "doi_or_url": "https://www.lpi.usra.edu/meetings/caves2011/pdf/8008.pdf",
+   "use": "Marius Hills pit floor 52 m below the mare, ~12 m of floor beneath a ceiling ~17 m high; Tranquillitatis pit ~107 m deep, ~20 m beneath a ceiling and an opening ~60 m high",
+   "access": "full text read"
+  },
+  {
+   "key": "haruyama_2009",
+   "citation": "Haruyama et al. 2009, Geophysical Research Letters 36, L21206",
+   "doi_or_url": "10.1029/2009GL040635",
+   "use": "The Marius Hills hole: 65 m across, 80-88 m deep by shadow, under a 20-25 m lava sheet",
+   "access": "abstract only (Crossref)"
+  },
+  {
+   "key": "haruyama_2010",
+   "citation": "Haruyama et al. 2010, 41st Lunar and Planetary Science Conference, abstract 1285",
+   "doi_or_url": "https://www.lpi.usra.edu/meetings/lpsc2010/pdf/1285.pdf",
+   "use": "The Tranquillitatis and Ingenii holes; surface ages 3.2-3.7 Gyr; interior temperatures 4-19 C from albedo",
+   "access": "full text read"
+  },
+  {
+   "key": "wagner_robinson_2014",
+   "citation": "Wagner & Robinson 2014, Icarus 237, 52-60",
+   "doi_or_url": "10.1016/j.icarus.2014.04.002",
+   "use": "Eight mare pits (Table 2) with sizes, depths and voids seen beyond the walls (7-20 m); the 253 K tube temperature after Horz",
+   "access": "full text read (accepted manuscript, Zenodo 895561)"
+  },
+  {
+   "key": "wagner_robinson_2022",
+   "citation": "Wagner & Robinson 2022, Journal of Geophysical Research: Planets 127, e2022JE007328",
+   "doi_or_url": "10.1029/2022JE007328",
+   "use": "The 21 pits outside impact melt that the LROC atlas lists",
+   "access": "abstract only (paraphrased); tables not read"
+  },
+  {
+   "key": "carrer_2024",
+   "citation": "Carrer, Pozzobon, Sauro, Castelletti, Patterson & Bruzzone 2024, Nature Astronomy 8, 1119-1126",
+   "doi_or_url": "10.1038/s41550-024-02302-y",
+   "use": "A cave conduit \"tens of metres long\" running west below the Tranquillitatis pit; secondary reports give 30-80 m, at least 45-60 m wide, 130-175 m below the surface",
+   "access": "abstract and figure captions; the dimensions from secondary reports (Eos, The Conversation, University of Padua, ESA)"
+  },
+  {
+   "key": "horvath_2022",
+   "citation": "Horvath, Hayne & Paige 2022, Geophysical Research Letters 49, e2022GL099710",
+   "doi_or_url": "10.1029/2022GL099710",
+   "use": "Beyond a pit's opening in permanent shadow, about 290 K and nearly constant",
+   "access": "abstract only (Crossref)"
+  },
+  {
+   "key": "horvath_2020",
+   "citation": "Horvath, Hayne & Paige 2020, Lunar Surface Science Workshop, abstract 5100",
+   "doi_or_url": "https://www.hou.usra.edu/meetings/lunarsurface2020/pdf/5100.pdf",
+   "use": "The model behind the 290 K cave: a pit about 100 m wide and deep with a 40 m ceiling",
+   "access": "full text read"
+  },
+  {
+   "key": "coombs_hawke_1992",
+   "citation": "Coombs & Hawke 1992, NASA Conference Publication 3166, vol. 1, 219-229",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/19930008249",
+   "use": "Table 1: 67 tube candidates on 20 nearside rilles (65 with sizes), each segment's length, width and minimum roof from its largest superposed crater; nine prime segments",
+   "access": "full text read (scan)"
+  },
+  {
+   "key": "horz_1985",
+   "citation": "Horz 1985, in Mendell (ed.), Lunar Bases and Space Activities of the 21st Century, 405-412",
+   "doi_or_url": "https://articles.adsabs.harvard.edu/pdf/1985lbsa.conf..405H",
+   "use": "Tubes tens to hundreds of metres inside; roofs over 10 m shelter; a constant -20 C",
+   "access": "full text read (scan)"
+  },
+  {
+   "key": "sauro_2020",
+   "citation": "Sauro, Pozzobon, Massironi, De Berardinis, Santagata & De Waele 2020, Earth-Science Reviews 209, 103288",
+   "doi_or_url": "10.1016/j.earscirev.2020.103288",
+   "use": "The Marius Hills South and North and Gruithuisen collapse chains (positions, collapses' widths and depths, intact lengths) and the tubes they imply, 500-800 m wide and 80-190 m high or a half to a third of that; the Kaku et al. depth of 75-150 m",
+   "access": "full text read (accepted manuscript, University of Bologna)"
+  },
+  {
+   "key": "greeley_1971",
+   "citation": "Greeley 1971, Science 172, 722-725",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/19710005212",
+   "use": "Rima Hadley about 135 km long, 900 m wide and 370 m deep, a channel partly roofed into a tube",
+   "access": "full text read (NASA preprint)"
+  },
+  {
+   "key": "iau_gazetteer",
+   "citation": "Gazetteer of Planetary Nomenclature, IAU WGPSN and USGS",
+   "doi_or_url": "https://planetarynames.wr.usgs.gov",
+   "use": "Named rilles' centres and lengths, read from the archive the geography domain fetches and hashes",
+   "access": "the hash-checked archive in geography/inputs"
+  },
+  {
+   "key": "chappaz_2017",
+   "citation": "Chappaz, Sood, Melosh, Howell, Blair, Milbury & Zuber 2017, Geophysical Research Letters 44, 105-112",
+   "doi_or_url": "10.1002/2016GL071588",
+   "use": "GRAIL finds tube candidates and sees only tubes \"with minimum widths of several kilometers, heights of hundreds of meters, and lengths of tens of kilometers\"",
+   "access": "abstract only; the candidate list was not retrieved"
+  },
+  {
+   "key": "chappaz_2014",
+   "citation": "Chappaz, Melosh, Howell and the GRAIL team 2014, 45th LPSC, abstract 1746",
+   "doi_or_url": "https://www.hou.usra.edu/meetings/lpsc2014/pdf/1746.pdf",
+   "use": "A buried structure south of Rima Sharp (311-316 E, 35-40 N); the method checked on Vallis Schroteri",
+   "access": "full text read"
+  },
+  {
+   "key": "sood_2016",
+   "citation": "Sood, Chappaz, Melosh, Howell & Milbury 2016, 47th LPSC, abstract 1509",
+   "doi_or_url": "https://www.hou.usra.edu/meetings/lpsc2016/pdf/1509.pdf",
+   "use": "A Bouguer low along the Marius Hills skylight rille (301-307 E, 11-16 N) and a mass deficit by the Sinus Iridum pit",
+   "access": "full text read"
+  },
+  {
+   "key": "blair_2015",
+   "citation": "Blair, Chappaz, Sood, Milbury, Bobet, Melosh, Howell & Freed 2015, 46th LPSC, abstract 2174 (e-poster)",
+   "doi_or_url": "https://www.hou.usra.edu/meetings/lpsc2015/eposter/2174.pdf",
+   "use": "Stable tubes to ~5 km wide (lithostatic) and ~3.5 km with 50-100 m roofs (Poisson); GRAIL suggests 1-4 km wide tubes continuing Vallis Schroteri and Rima Sharp",
+   "access": "full text read"
+  },
+  {
+   "key": "kaku_2017",
+   "citation": "Kaku et al. 2017, Geophysical Research Letters 44, 10,155-10,161",
+   "doi_or_url": "10.1002/2017GL074998",
+   "use": "Radar echoes of an intact tube along Marius Hills rille A and its southwest extension, within 13-15 N, 301.85-304.01 E",
+   "access": "abstract only; its depth and length from Sauro et al. 2020 and Naito et al. 2020"
+  },
+  {
+   "key": "kaku_2018",
+   "citation": "Kaku et al. 2018, 49th LPSC, abstract 1830",
+   "doi_or_url": "https://www.hou.usra.edu/meetings/lpsc2018/pdf/1830.pdf",
+   "use": "A radar candidate for \"a wide cave\" at 35.892 N, 313.235 E, west of Rima Mairan, inside the GRAIL deficit",
+   "access": "full text read"
+  },
+  {
+   "key": "blair_2017",
+   "citation": "Blair, Chappaz, Sood, Milbury, Bobet, Melosh, Howell & Freed 2017, Icarus 282, 47-55",
+   "doi_or_url": "10.1016/j.icarus.2016.10.008",
+   "use": "The widest stable span by roof thickness (Fig. 3) for lithostatic and Poisson stress states; a kilometre stable under 2 m",
+   "access": "not read; values from Blair et al. 2015 and Williams 2021's reproduction of Fig. 3, read to one 250 m column"
+  },
+  {
+   "key": "theinat_2020",
+   "citation": "Theinat, Modiriasari, Bobet, Melosh, Dyke, Ramirez, Maghareh & Gomez 2020, Icarus 338, 113442",
+   "doi_or_url": "10.1016/j.icarus.2019.113442",
+   "use": "The thinnest stable roof by width (Fig. 13): 100 m for 1 km, 1 km for 4 km",
+   "access": "not read; values from Williams 2021's summary and reproduction of Fig. 13"
+  },
+  {
+   "key": "williams_2021",
+   "citation": "Williams 2021, Deformation and failure of lunar lava tubes, MS thesis, University of Maryland",
+   "doi_or_url": "https://drum.lib.umd.edu/bitstreams/adaf26d6-53c6-45f1-9603-8fc60043cad8/download",
+   "use": "Summaries and figure reproductions of Blair et al. 2017 and Theinat et al. 2020",
+   "access": "full text read"
+  },
+  {
+   "key": "de_angelis_2002",
+   "citation": "De Angelis, Wilson, Clowdsley, Nealy, Humes & Clem 2002, Journal of Radiation Research 43 Suppl., S41-S45",
+   "doi_or_url": "https://spaceradiation.larc.nasa.gov/articles/2002/jrr-43-S41.pdf",
+   "use": "Effective dose by depth under 5 m of loose surface rock over 3.3 g/cm3 basalt (Fig. 3, read from the figure); no cosmic-ray dose observable past 6 m",
+   "access": "full text read; the depth curve read from its figure"
+  },
+  {
+   "key": "naito_2020",
+   "citation": "Naito, Hasebe, Shikishima, Amano, Haruyama, Matias-Lopes, Kim & Kodaira 2020, Journal of Radiological Protection 40, 947-961",
+   "doi_or_url": "10.1088/1361-6498/abb120",
+   "use": "Surface cosmic-ray dose 160.5-416 mSv a year; solar particle events up to 2,190 mSv; under 30 mSv a year on a 43 m pit floor, under 1 mSv 75 m into the tube; Earth's 0.39 mSv a year of cosmic rays (UNSCEAR 2008); the Kaku tube about 30 km long",
+   "access": "full text read"
+  },
+  {
+   "key": "zhang_2020",
+   "citation": "Zhang et al. 2020, Science Advances 6, eaaz1334",
+   "doi_or_url": "10.1126/sciadv.aaz1334",
+   "use": "Chang'E-4 measured 1,369 uSv a day of dose equivalent on the surface at solar minimum",
+   "access": "full text read (Europe PMC)"
+  },
+  {
+   "key": "nakamura_1979",
+   "citation": "Nakamura, Latham, Dorman, Ibrahim, Koyama & Horvath 1979, Proceedings of the Lunar and Planetary Science Conference 10th, 2299-2309",
+   "doi_or_url": "https://articles.adsabs.harvard.edu/pdf/1979LPSC...10.2299N",
+   "use": "Shallow moonquakes average about five a year; 28 in 1971-1976",
+   "access": "full text read, pp. 2299-2306"
+  },
+  {
+   "key": "nakamura_1980",
+   "citation": "Nakamura 1980, Proceedings of the Lunar and Planetary Science Conference 11th, 1847-1853",
+   "doi_or_url": "https://articles.adsabs.harvard.edu/pdf/1980LPSC...11.1847N",
+   "use": "The largest shallow moonquake observed at body-wave magnitude 4.8, a b-value of 0.55, and magnitude 7-7.5 extrapolated to once in 50-100 years Moon-wide",
+   "access": "full text read"
+  },
+  {
+   "key": "oberst_nakamura_1992",
+   "citation": "Oberst & Nakamura 1992, NASA Conference Publication 3166, vol. 1, 231-233",
+   "doi_or_url": "https://ntrs.nasa.gov/citations/19930008250",
+   "use": "The largest shallow moonquake above magnitude 5; a random site sees one above 4.5 within 100 km about once in 400 years; 10^14 J a year against Earth's 10^18; like the central United States' intraplate rate",
+   "access": "full text read (page images)"
+  },
+  {
+   "key": "watters_2019",
+   "citation": "Watters, Weber, Collins et al. 2019, Nature Geoscience 12, 411-417",
+   "doi_or_url": "10.1038/s41561-019-0362-2",
+   "use": "Eight of 28 shallow moonquakes within 30 km of young thrust-fault scarps",
+   "access": "abstract only"
+  },
+  {
+   "key": "kiefer_2012",
+   "citation": "Kiefer, Macke, Britt, Irving & Consolmagno 2012, 43rd LPSC, abstract 1642",
+   "doi_or_url": "https://www.lpi.usra.edu/meetings/lpsc2012/pdf/1642.pdf",
+   "use": "Mare basalt bulk densities 3,010-3,270 kg/m3 and \"a typical basalt porosity is ~7%\"",
+   "access": "full text read"
+  },
+  {
+   "key": "gong_2016",
+   "citation": "Gong, Wieczorek, Nimmo, Kiefer, Head, Huang, Smith & Zuber 2016, JGR Planets 121, 854-870",
+   "doi_or_url": "10.1002/2016JE005008",
+   "use": "Nearside mare basalt 0.74 km thick on average, one-sigma 100 m to 1.62 km",
+   "access": "abstract only (Crossref)"
+  },
+  {
+   "key": "hunt_1996",
+   "citation": "Hunt 1996, Geohydrology of the Island of Oahu, Hawaii, USGS Professional Paper 1412-B",
+   "doi_or_url": "10.3133/pp1412B",
+   "use": "Dike-free lava flows 500-5,000 ft/d (1.8e-3 to 1.8e-2 m/s); specific yield mostly 5-10%; the basal water table a few metres above the sea several miles inland",
+   "access": "full text read"
+  },
+  {
+   "key": "gingerich_oki_2000",
+   "citation": "Gingerich & Oki 2000, Ground Water in Hawaii, USGS Fact Sheet 126-00",
+   "doi_or_url": "https://pubs.usgs.gov/fs/2000/126/pdf/fs126-00.pdf",
+   "use": "Recharge is typically 10-50% of rainfall; in the most permeable rock the water table is a few feet above sea level",
+   "access": "full text read"
+  },
+  {
+   "key": "engott_2017",
+   "citation": "Engott, Johnson, Bassiouni, Izuka & Rotzoll 2017, USGS Scientific Investigations Report 2015-5010",
+   "doi_or_url": "10.3133/sir20155010",
+   "use": "Oahu's mean recharge is about 36% of precipitation",
+   "access": "abstract and publisher page"
+  },
+  {
+   "key": "kahle_2011",
+   "citation": "Kahle, Morgan, Welch, Ely, Hinkle, Vaccaro & Orzol 2011, USGS Scientific Investigations Report 2011-5124",
+   "doi_or_url": "10.3133/sir20115124",
+   "use": "The Columbia Plateau basalt units' median horizontal hydraulic conductivity, 70 ft/d (2.5e-4 m/s)",
+   "access": "abstract and publisher page"
+  },
+  {
+   "key": "burns_2016",
+   "citation": "Burns, Williams, Tolan & Kaven 2016, Proceedings, 41st Workshop on Geothermal Reservoir Engineering, Stanford, SGP-TR-209",
+   "doi_or_url": "https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2016/Burns.pdf",
+   "use": "Columbia River basalt bulk horizontal conductivity 3.0e-7 to 3.0e-5 m/s (after Hansen et al. 1994)",
+   "access": "full text read, pp. 1-7"
+  },
+  {
+   "key": "woessner_poeter_2020",
+   "citation": "Woessner & Poeter 2020, Hydrogeologic Properties of Earth Materials and Principles of Groundwater Flow, The Groundwater Project",
+   "doi_or_url": "10.21083/978-1-7770541-2-0",
+   "use": "The Dupuit mound between two water bodies under recharge (Box 6, eq. 6-7) and K = k g rho / mu (eq. 31)",
+   "access": "full text read (HTML)"
+  },
+  {
+   "key": "clifford_1993",
+   "citation": "Clifford 1993, Journal of Geophysical Research 98(E6), 10,973-11,016",
+   "doi_or_url": "10.1029/93JE00225",
+   "use": "Darcy's law with gravity explicit, v = -(k g / nu) dh/dr, applied to another world; the lunar crust's porosity profile",
+   "access": "full text read (scan)"
+  },
+  {
+   "key": "katibeh_2012",
+   "citation": "Katibeh & Aalianvari 2012, in Javaid (ed.), Drainage Systems, InTech, 75-88",
+   "doi_or_url": "https://cdn.intechopen.com/pdfs/30389/InTech-Common_approximations_to_the_water_inflow_into_tunnels.pdf",
+   "use": "Goodman et al.'s inflow to a tunnel; \"the practical minimum for tunnels is around 10^-6 cm/s\"",
+   "access": "full text read, pp. 75-83"
+  },
+  {
+   "key": "ita_1988",
+   "citation": "ITA Working Group on General Approaches to the Design of Tunnels 1988, Tunnelling and Underground Space Technology 3(3), 237-249",
+   "doi_or_url": "https://tunnel.ita-aites.org/media/k2/attachments/public/Tust_Vol_3_3_237-249.pdf",
+   "use": "Waterproofing sheets where the water stands more than 15 m above the crown",
+   "access": "full text read"
+  },
+  {
+   "key": "nasem_2024",
+   "citation": "National Academies of Sciences, Engineering, and Medicine 2024, Practices for Controlling Tunnel Leaks",
+   "doi_or_url": "10.17226/27840",
+   "use": "Allowable leakage below 0.002 gal/ft2/day in tunnels and 0.001 in underground public spaces; drained and undrained systems",
+   "access": "one chapter read through a summarising fetch"
+  },
+  {
+   "key": "nff_2009",
+   "citation": "Norwegian Tunnelling Society 2009, Subsea Tunnels, Publication 18",
+   "doi_or_url": "https://nff.no/wp-content/uploads/sites/2/2020/04/Publication-18.pdf",
+   "use": "Drained, pre-grouted and pumped subsea tunnels to 287 m below the sea; inflow typically 300 L/min per km; sumps for 24 hours; grouting against 2-3 MPa",
+   "access": "full text read, selected pages"
+  },
+  {
+   "key": "nff_2011",
+   "citation": "Norwegian Tunnelling Society 2011, Rock Mass Grouting in Norwegian Tunnelling, Publication 20",
+   "doi_or_url": "https://nff.no/wp-content/uploads/sites/2/2020/04/Publication-20.pdf",
+   "use": "Grouted tunnels near 2 L/min per 100 m, ungrouted ones 10-40; rock mass 1e-7 to 1e-8 m/s",
+   "access": "full text read, selected pages"
+  },
+  {
+   "key": "sika_tunnels",
+   "citation": "Sika AG (c. 2019-2021), Waterproofing: Sika Solutions for Watertight Tunnel Structures",
+   "doi_or_url": "https://www.sika.com/dam/dms/corporate/k/glo-sika-solutions-for-watertight-tunnel-structures.pdf",
+   "use": "Exposure classes of mined tunnels by water head (below 5 m, 5-30, 30-60, above 60 m) and the waterproofing each takes; watertightness class 1, completely dry, for spaces with people",
+   "access": "full text read, pp. 1-17 and 28-29 (a manufacturer's guide)"
+  },
+  {
+   "key": "nff_2001",
+   "citation": "Norwegian Tunnelling Society (articles of 2001), Water Control in Norwegian Tunnelling, Publication 12",
+   "doi_or_url": "https://nff.no/wp-content/uploads/sites/2/2020/04/Publication-12.pdf",
+   "use": "Subsea tunnels drained and pumped, seepage targets of 300 L/min per km set by grouting against pumping costs; lighting and ventilation dominate running costs; buffer reservoirs of at least 24 hours",
+   "access": "full text read, selected pages"
+  },
+  {
+   "key": "takai_2012",
+   "citation": "Takai 2012, Journal of the Institute of Electrical Installation Engineers of Japan 32(7), 470-473",
+   "doi_or_url": "10.14936/ieiej.32.470",
+   "use": "The Seikan Tunnel drains about 10 million m3 a year through three pump stations, with 84 hours' margin if all stop",
+   "access": "full text read (Japanese)"
+  },
+  {
+   "key": "cohen_2004",
+   "citation": "Cohen, Nelson & Wolff 2004, Energy Down the Drain, NRDC and Pacific Institute",
+   "doi_or_url": "https://www.nrdc.org/sites/default/files/edrain.pdf",
+   "use": "The State Water Project lifts water about 2,000 ft over the Tehachapis for about 3,000 kWh an acre-foot (2.4 kWh/m3)",
+   "access": "full text read, pp. i-12"
+  },
+  {
+   "key": "approved_document_f_2021",
+   "citation": "HM Government 2021, Approved Document F, Volume 2: Buildings other than dwellings",
+   "doi_or_url": "https://assets.publishing.service.gov.uk/media/62a761edd3bf7f03667c667e/ADF2_revised.pdf",
+   "use": "Offices take 10 L/s of outdoor air per person or 1 L/s per m2, whichever is higher",
+   "access": "full text read, pp. 4-11"
+  },
+  {
+   "key": "ashrae_62_1",
+   "citation": "ASHRAE Standard 62.1 rates, as summarised by Wikipedia, \"Ventilation (architecture)\"",
+   "doi_or_url": "https://en.wikipedia.org/wiki/Ventilation_(architecture)",
+   "use": "Offices 2.5 L/s a person plus 0.3 L/s per m2",
+   "access": "secondary summary only; the standard was not read"
+  },
+  {
+   "key": "singapore_mse",
+   "citation": "Singapore Ministry of Sustainability and the Environment, Water",
+   "doi_or_url": "https://www.mse.gov.sg/policies/water/",
+   "use": "Households used 141 litres a person a day in 2019",
+   "access": "publisher page read"
+  },
+  {
+   "key": "du_pisani_menge_2013",
+   "citation": "du Pisani & Menge 2013, Water Supply 13(2), 214-226",
+   "doi_or_url": "10.2166/ws.2013.009",
+   "use": "Windhoek has reclaimed drinking water directly since 1968; its drinking water holds 25% reclaimed water",
+   "access": "abstract only"
+  },
+  {
+   "key": "velux_daylight",
+   "citation": "VELUX, Daylight, Energy and Indoor Climate Book, \"Daylight level calculation\" (after CIBSE 2002)",
+   "doi_or_url": "https://www.velux.com/what-we-do/research-and-knowledge/deic-basic-book/daylight/daylight-calculations-and-measurements",
+   "use": "An average daylight factor of 2% counts as daylit and 5% as strongly daylit",
+   "access": "publisher page read"
+  },
+  {
+   "key": "engineering_toolbox_illuminance",
+   "citation": "Engineering ToolBox, \"Illuminance - Recommended Light Levels\" (after EN 12464)",
+   "doi_or_url": "https://www.engineeringtoolbox.com/light-level-rooms-d_708.html",
+   "use": "Homes 150 lux, offices and study 500 lux",
+   "access": "secondary compilation read; the standard was not read"
+  },
+  {
+   "key": "straube_2007",
+   "citation": "Straube 2007, Air Flow Control in Buildings, Building Science Digest BSD-014",
+   "doi_or_url": "https://buildingscience.com/documents/digests/bsd-014-air-flow-control-in-buildings",
+   "use": "The stack effect as the hydrostatic pressure difference of warm and cold air columns, 1.34 Pa across 1 m between 20 and -10 C on Earth",
+   "access": "full text read"
+  },
+  {
+   "key": "kheyroddin_2018",
+   "citation": "Kheyroddin, Mashhadiali & Kheyroddin 2018, International Journal of Civil and Environmental Engineering 12(6), 663-667",
+   "doi_or_url": "10.5281/zenodo.1317190",
+   "use": "Lateral-system steel of designed tube, diagrid and hexagrid towers: 9-15 psf at 48 storeys and 20-44 psf at 96 (44-72 and 98-215 kg/m2); Khan's premium for height after Ali & Moon 2007",
+   "access": "full text read; a weakly reviewed venue, so the numbers are indicative"
+  },
+  {
+   "key": "brown_2022",
+   "citation": "Brown et al. 2022, PLoS Biology 20, e3001571",
+   "doi_or_url": "10.1371/journal.pbio.3001571",
+   "use": "At least 250 lux of melanopic light at the eye by day",
+   "access": "reported in research/studies/daily_life/sources.json (full text)"
+  },
+  {
+   "key": "allen_2011",
+   "citation": "Allen, Lindberg & Grimmond 2011, International Journal of Climatology 31, 1990",
+   "doi_or_url": "10.1002/joc.2210",
+   "use": "City heat fluxes up to 100-577 W/m2",
+   "access": "reported in provisioning/sources.json (abstract)"
+  }
+ ]
+}
