@@ -158,14 +158,17 @@ lift and wild land. Next: C′ as the planned distribution, starting with the hi
 latitudes' farms and homesteads, and the sky towns' heights and traffic rules.
 
 The author then set the wild share: at least half of the land and of the dark sky wild is preferred, and it can come
-down to 30% wild with another 20% hybrid, land that is fairly wild, more heavily managed and carries people's daily
-life at low density. The food and distributions studies apply both (provisioning). Under the compromise farms and
-towns keep to the same half; the studies put grazing and the homesteads' homes on the hybrid fifth, and C′ fits every
-case with the poleward and twilit placements at the kept half's costs. With half wild it fits once the homesteads'
-homes count within their fields. At the author's request the earlier reading, half wild with another 20% hybrid, runs
-beside them for comparison, and at the high-cost end it draws 3,250 km³ a year from the seas to water its fields.
-What the hybrid land holds beyond those homes and grazing is next for C′. The author tied the taxonomy's open choices
-to the design path the aerophytes take and put the taxonomy on hold for later (ecology).
+down to 30% wild with another 20% hybrid. The hybrid land is heavily manicured megaparks and great gardens, food
+gardens among them, for leisure and entertainment, with the shops, restrooms and places to rest they need; residents
+and visitors use them, and heavy automation keeps them, as it keeps every land, the wild included, inspected,
+evaluated and preserved. The food and distributions studies apply both rules (provisioning). Under the compromise the
+parks hold 4.68 million km², farms and towns keep to the same half as under half wild, and C′ fits every case with
+the poleward and twilit placements once the homesteads' homes count within their fields, at the half's costs. At the
+author's request the earlier reading, half wild with another 20% hybrid, runs beside them for comparison with the
+same parks, and at the high-cost end it draws 3,250 km³ a year from the seas to water its fields. The parks' water,
+automation energy and night light remain to be sized. The author also set that the Moon's organisms are told apart
+by regional variation across a connected world, the parks standing apart by their manicuring, and tied the
+taxonomy's open choices to the design path the aerophytes take, putting the taxonomy on hold for later (ecology).
 
 Waiting on the author: the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
 
