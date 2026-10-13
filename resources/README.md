@@ -145,6 +145,10 @@ loss and the resupply that matches it take to replace the inventory.
      composition a design lever. Until then the plankton are freshwater, the spray is fresh and the density is near
      1,000 kg/m³.
    - **Assumptions to revisit.** The wave studies take 1,025 kg/m³ and the water optics Earth seawater at 38.4 g/kg.
+   - **Through the billion years** ([sea chemistry](../research/studies/sea_chemistry/README.md)): calcite and silica
+     keep fresh seas near 0.4 g/kg for 10,000 years, and left alone they turn alkaline, to pH 9 in 13,000–34,000 years
+     and a soda water of Earth's salinity in 24 million; held by calcite, a magnesium route, soda works and
+     silica-building life they stay fresh at 0.14 g/kg and pH 8.3.
    - *Solid for weathering alone.*
 
 ### The shield's material

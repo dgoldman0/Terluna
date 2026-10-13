@@ -90,7 +90,10 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
    or salted at delivery. Weathering, evaporation in closed lakes and salt works follow.
 
    **How:** a chemical model of the seas and lakes with the delivered composition as scenarios, beside the ecology
-   work's living waters.
+   work's living waters. **Done 13 October** ([sea chemistry](../research/studies/sea_chemistry/README.md)), through
+   the billion years: left alone the seas turn alkaline and fill with sediment and their own deposits within millions
+   of years, and every lasting state is a held one, with fresh, brackish or salted seas kept where the delivery sets
+   them by calcite, a magnesium route, soda works and silica-building life, and the sediment returned.
 10. **A geochemical map of the Moon's rock.** Elements by region on the atlas, separating dry ground from the flooded
    high-titanium basalts and KREEP. That sets what can be mined before flooding, and where the summit's steel and the
    shield's titania come from.

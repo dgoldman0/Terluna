@@ -206,7 +206,7 @@
     },
     {
       "topic": "resources",
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11; carbon_cycle_box_model_to_year_10000_with_the_managed_return_2026_10_12; industry_burial_basis_lakes_at_lake_rates_seas_at_marine_rates",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11; carbon_cycle_box_model_to_year_10000_with_the_managed_return_2026_10_12; industry_burial_basis_lakes_at_lake_rates_seas_at_marine_rates; sea_chemistry_through_a_billion_years_alkaline_unless_held_2026_10_13",
       "material": [
         "../resources/README.md",
         "../resources/state.md",
@@ -225,7 +225,9 @@
         "../resources/sea_phosphorus_waters.py",
         "../resources/sea_phosphorus_sources.json",
         "../resources/results/sea_phosphorus.json",
-        "../resources/results/sea_phosphorus_waters.json"
+        "../resources/results/sea_phosphorus_waters.json",
+        "studies/sea_chemistry/README.md",
+        "studies/sea_chemistry/results/sea_chemistry.json"
       ],
       "unresolved": [
         "The aerial phosphorus cycle: nutrient-specific stocks and annual throughput, natural retention, collection-to-delivery harvest return, land/sea donor depletion, sediment recovery and genuine irreversible losses. Six conservative box sensitivities are arithmetic, not a demonstrated lunar ecology; 1% footprint reference requires9.228MtP/year throughput and4.153–41.527Mt stock; at99.9% natural retention and99% food return the low assumed upward supply leaves10,726tP/year to return.",
