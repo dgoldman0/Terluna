@@ -76,6 +76,7 @@ the explorable experience, which reads them as baked products, is in
 | [distributions](studies/distributions/README.md) | Every study of people: four distributions of 25–30 billion across Earth, the Moon, the array and the colonies, the author's C′, the wild share, traffic, phosphorus and synergies | Placement corners on design guesses; C′ placed with the power-heavy mix |
 | [living_light](studies/living_light/README.md) | Ecology's glowing organisms and night stores, illumination's twilight and Earthlight, and people at night: what living light gives, what people need outdoors at night, and the sky kept dark | Screen values; no glowing organism built |
 | [domain_synthesis](studies/domain_synthesis/README.md) | Resources, ecology and provisioning after the joint integration of 12 October: heat, land, methane and N2O, phosphorus and the sky's layers at the author's choices | Arithmetic on screen products; the gases' warming in the deep column comes next |
+| [light_limitation](studies/light_limitation/README.md) | The canopy's light response, the food study's land by band, the GCM's soil water, the waters' and the sky's production: where and when light limits growth, and what the planned dimming costs the biosphere through light and, from Earth's models, through the rain | A screen on committed products and Earth's waters; the Moon's rain response needs the GCM |
 
 The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)
 from a separate lineage (57 tests, 90-m spacing, 20-m/s reservoir flow), whose

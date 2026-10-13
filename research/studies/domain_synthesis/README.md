@@ -193,7 +193,11 @@ the low pair it takes 0.86% more of the sunlight and spares contactors through 1
 first century, with N2O's decomposition at about a third; against Earth's air it saves 0.54% of the sunlight for
 decomposition about three times as large. The held pair and Earth's air differ only in N2O, which takes at least 365
 years to reach 0.1 ppm, so its level can still be raised to Earth's before any decomposition is built if the dimming
-proves cheap. What the dimming costs the biosphere depends on where light limits growth, the next work on ecology.
+proves cheap. The [light limitation](../light_limitation/README.md) study, done the same day, finds water holds
+most of the land's growth: light limits 10–40% of the living Moon's growth, so each 1% of dimming costs 0.07–0.30%
+of it through light, and the held pair's 1.69% costs 0.12–0.50%. In Earth's models a dimming that holds the
+temperature also takes about 1% of the rain for each 1%, which the rain-fed land would feel more; the Moon's
+response needs the GCM.
 
 The added dimming's light gives the array 40–59 TW more at 20–30% conversion.
 
@@ -269,8 +273,8 @@ network flies above most of it.
 Machine time is for this laptop, one core, alongside the author's other work.
 1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October, about 38 minutes on six
    workers with the levels below Earth's 1750 air ([reduced gases](../../../atmosphere/radiative_convective/README.md)).
-   The author chose the middle of three pairs weighed, 1.9 ppm of methane and 0.1 ppm of N2O (above). Next on
-   ecology: where light limits growth, which sizes what the dimming costs the biosphere.
+   The author chose the middle of three pairs weighed, 1.9 ppm of methane and 0.1 ppm of N2O (above). Where light
+   limits growth followed on 13 October ([light limitation](../light_limitation/README.md)).
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band,
    with the homestead belt holding the heritage farms. Minutes; the distributions README follows.
 3. **The fleet's night and its glow** (plan, item 3; the planned branch research/array-industry): the night-side

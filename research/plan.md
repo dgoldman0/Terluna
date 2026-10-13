@@ -220,8 +220,10 @@ synthesis ranks two items first from the three domains together; they lead this 
    minutes on six workers ([reduced gases](../atmosphere/radiative_convective/README.md)). Earth's present levels force
    4.7 W/m² all-sky on the Moon and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K. The author chose the
    balanced middle of three pairs weighed, 1.9 ppm of methane and 0.1 ppm of N2O: 3.58 W/m², answered by 1.69% added
-   dimming ([domain synthesis](studies/domain_synthesis/README.md#where-they-are-held)). Next on domain/ecology:
-   where light limits growth, which sizes what the dimming costs the biosphere.
+   dimming ([domain synthesis](studies/domain_synthesis/README.md#where-they-are-held)). Where light limits growth
+   followed on 13 October ([light limitation](studies/light_limitation/README.md)): water holds most of the land, light
+   limits 10–40% of the living Moon's growth, and each 1% of dimming costs 0.07–0.30% of it through light. Whether the
+   rain answers the dimming as Earth's models do, about 1% for each 1%, waits for a GCM run, the author's call.
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band, in
    minutes.
 3. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,

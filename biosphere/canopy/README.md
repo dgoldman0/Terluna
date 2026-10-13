@@ -21,6 +21,7 @@ coefficients (pinned in [inputs.json](inputs.json), ignored by Git), and
 | [model.py](model.py) | Reads the [surface-light product](../../illumination/surface_light/README.md), adds the sky's return of what the canopy reflects, and integrates over Sun heights, the solar cycle and latitude; leaf carbon over the cycle and the store it needs through the night (the reserve arithmetic of [long_night.py](../long_night.py)) |
 | [plant.py](plant.py) | The whole plant through the lunar cycle, with twilight and the chosen climate's temperatures, for ways of getting through the night (below) |
 | [fruit.py](fruit.py) | Fruit designed for the lunar day on that plant: how fast a large fruit can grow, when to set it, and how much of the plant's growth it can take (below) |
+| [light_response.py](light_response.py) | The plant with the Moon's light dimmed: how much of its photosynthesis, growth and night store follows the light, by latitude, leaf area, strategy and the Sun's height (below) |
 
 The base stand has a leaf area index of 5 in layers of 0.025, randomly placed leaves
 with a spherical angle distribution, soil reflecting 10%, and PROSPECT-D green leaves
@@ -331,3 +332,36 @@ The model sets these requirements; whether a plant can meet them is untested.
   their cells more (Marcelis 1993); the daylight case allows none of that.
 - The stand is the whole-plant model's (leaf area index 5, with stems and roots). A
   fruiting crop's own canopy, flowering, seeds, water and nutrients are not modelled.
+
+## The light response
+
+`python -m biosphere.canopy.light_response` (about a minute and a half on one thread, with `OPENBLAS_NUM_THREADS=1`)
+writes [results/light_response.json](results/light_response.json) (schema
+`terluna.biosphere.canopy-light-response/1`). It follows the whole plant's stand through the solar cycle with the
+Moon's light, direct, diffuse and twilight alike, scaled by 1 − d for dimmings d of 1, 5 and 10%, on the near side's
+three latitude bands. The temperatures stay the chosen climate's, since a dimming exists to keep them, and stem and
+root upkeep keeps its Earth calibration. The response, or elasticity, is the share lost for each share of light
+taken: 1 where growth follows the light, 0 where it ignores it. The undimmed runs reproduce plant.json.
+
+| Per 1% of light taken | Equator | 30° | 60° |
+|---|---|---|---|
+| Canopy photosynthesis | 0.47% | 0.51% | 0.64% |
+| Growth, Earth-like night; idling at a quarter | 0.67%; 0.58% | 0.75%; 0.63% | 1.09%; 0.87% |
+| The night's store | grows 0.09%; 0.08% | 0.10%; 0.09% | 0.21%; 0.28% |
+| Photosynthesis at leaf area index 1, 2 and 5 | 0.30, 0.38, 0.47% | 0.34, 0.42, 0.51% | 0.49, 0.57, 0.64% |
+
+At a 5% dimming. The responses barely change with the dimming's size: at the equator photosynthesis loses 0.46% per
+1% at 1% and 0.48% at 10%.
+
+- **Growth follows the light more than photosynthesis does.** The upkeep of leaves, stems and roots stays as the light
+  falls, so growth loses a larger share; most for the plant that respires through the night as by day, and most
+  poleward, where its margin is thinnest.
+- **Low Sun and twilight follow the light almost one for one.** The deep canopy at 22 °C loses 0.35% of its
+  photosynthesis for each 1% of light under an overhead Sun, 0.52% at 30°, 0.79% at 10°, 0.94% at sunrise and all of it
+  in deep twilight. At the equator the twilight and a Sun below 10° give 5% of the cycle's photosynthesis and 10% of
+  what a dimming takes; the Sun above 60° gives 44% and 36%.
+- **Deeper canopies follow the light more,** since their shaded leaves work far below saturation.
+- **The night's store grows** because the dimmed twilight shortens the hours of positive balance.
+
+The response holds where water, nutrients and sinks for the sugar are ample. The
+[light limitation study](../../research/studies/light_limitation/README.md) maps where on the Moon they are.
