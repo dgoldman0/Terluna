@@ -407,10 +407,10 @@ hemisphere (*screen*):
   outside the service arc, which the night decision moves on the night half anyway, the momentum store, and the
   dimmer, from 5% to about 7.5% of the titania stack's light.
 - **The next steps**, if the glow itself has to fall further:
-  - the annulus absorber, which brings the total to 3.4 W/m² and the dimming to 1.6%. It needs the atmosphere
+  - the annulus absorber, which brings the total to 3.8 W/m² and the dimming to 1.7%. It needs the atmosphere
     domain's check of 250–400 nm above the limb, the absorber's measured edge and opacity, and the annulus's light
     pressure restored;
-  - the ultraviolet mirror on the outer faces, which brings the total to 2.9 W/m² and the dimming to 1.3%, at about
+  - the ultraviolet mirror on the outer faces, which brings the total to 3.3 W/m² and the dimming to 1.5%, at about
     60% more fleet mass.
 
 ## Assumptions
