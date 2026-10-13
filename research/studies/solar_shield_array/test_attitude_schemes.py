@@ -114,3 +114,25 @@ def test_a_moving_mass_trades_ballast_for_store():
     assert all(b > a for a, b in zip(ballast, ballast[1:]))
     assert store[-1] < store[0]
     assert PRODUCT['moving_mass']['62.7_g_m2']['target_offset_m']['median'] > 500.
+
+
+def test_the_night_roll_rests_on_the_day_half_and_takes_a_larger_store_than_rolling_both_halves():
+    """The night half's roll alone: zero over the day half, the full roll at the anti-solar point, inside the
+    clearance at every phase; its push falls less than rolling both halves, and its roll torque, which does not
+    cancel over an orbit, takes a larger store; the centred filter leaves both stores about as they are."""
+    phases = np.radians(np.linspace(-180., 180., 721))
+    law = at.night_rolled(phases, 1., 30.)
+    day = np.abs(phases) <= np.pi/2
+    assert np.allclose(law[day], 0.)
+    assert np.isclose(at.night_rolled(np.pi, 1., 30.), 1.)
+    gap = PRODUCT['clearance']['laws']['night_rolled_80_deg']
+    assert gap['share_of_orbit_below_clearance'] == 0. and gap['min_gap_m'] >= at.DESIGN['clearance_m']
+    s = PRODUCT['schemes']
+    store = {k: s[k]['store_N_m_s']['trim_0.25']['median'] for k in
+             ('rolled_80_deg', 'night_rolled_80_deg', 'balanced_rolled_80_deg', 'balanced_night_rolled_80_deg')}
+    drive = {k: s[k]['eccentricity_drive']['over_as_built'] for k in ('rolled_80_deg', 'night_rolled_80_deg')}
+    assert drive['rolled_80_deg'] < drive['night_rolled_80_deg'] < 1.
+    assert store['night_rolled_80_deg'] > 3*store['rolled_80_deg']
+    for k in ('rolled_80_deg', 'night_rolled_80_deg'):
+        assert abs(store['balanced_'+k]/store[k]-1.) < .05
+

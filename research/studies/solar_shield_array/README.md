@@ -104,10 +104,13 @@ The planned branch opened on 12 October 2026 with [the fleet's glow](glow.md)
 ([glow.py](glow.py)). As built the stack puts 14.1 W/m² on the Moon: its own
 glow, 9.4 W/m² with each ring's night half at perilune, and 4.7 W/m² of the
 Moon's infrared and sunlight that the films image back. Heat mirrors on the
-Moon-facing faces raise that total. Rolling the night half 80°, the attitude
-the night decision calls for, leaves 7.2 W/m² and takes the films' reflections
-off the night; added dimming of 3.3% of the design sunlight answers the rest.
-The night roll's flights of the kept orbits wait for the author.
+Moon-facing faces raise that total. Rolling both halves 80° outside the service
+arc, inside the clearance along the kept orbits, leaves 5.7 W/m² with the
+eccentricity its push leaves and keeps the deep night dark; added dimming of
+2.6% of the design sunlight answers the rest. It takes a momentum store 5–12
+times the chosen one; rolling the night half alone takes 14–48 times and leaves
+8.7 W/m². The layout re-flown for the rolled push and a law through the nodes
+come next.
 
 The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response

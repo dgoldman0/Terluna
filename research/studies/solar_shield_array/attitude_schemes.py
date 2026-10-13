@@ -22,6 +22,8 @@ Schemes, evaluated along the twelve kept orbits of ring_keeping_run as photon_co
   the service arc, to the side that clearance allows (one side on the day half, the other on the night half), and
   pass through radial-facing at the nodes; a one-sided roll at the angle of largest side force measures the plane
   steering that rolling gives;
+- rolled on the night half: the same roll on the night half alone, the day half radial-facing, the attitude that
+  keeps the night half's reflections and most of its glow off the Moon (glow.py);
 - edge-on turns in pitch outside service (the earlier proposal), whose push is stated for comparison.
 
 Torques. Radiation torque from the visible filter area's first moments (8 solar points, the bundle's shadows and
@@ -73,6 +75,7 @@ FILES = list(dict.fromkeys(['research/studies/solar_shield_array/attitude_scheme
 DESIGN = dict(every=2, suns=8, rotation=.317, clearance_m=150., neighbour_rings=3, slip_step_m=10.,
               envelope_phases_deg=[0., 25., 45., 60., 80., 90., 100., 135., 180.], service_half_angle_deg=25.,
               filter_overlaps_m=[200., 400., 800.], design_overlap_m=400., roll_deg=[30., 60., 80.],
+              night_roll_deg=[80.],
               roll_ramp_deg=30., steer_roll_deg=35.26, ballast_reach_m=[250., 500., 1000., 1500., 2000., 3000.],
               ballast_travel_m=4500., trim_levels=[.1, .25], unload_s=3600., areal_masses_kg_m2=[.005, .026],
               turn_deg=65., turn_torques_N_m=[3e4, 1e5, 1e6])
@@ -124,6 +127,13 @@ def rolled(u, chi, service, width, day_sign=-1.):
     day = day_sign*chi*ramp(a, s, s+w)*ramp(np.pi/2-a, 0., w)
     night = -day_sign*chi*ramp(a-np.pi/2, 0., w)
     return np.where(a <= np.pi/2, day, night)
+
+
+def night_rolled(u, chi, width, day_sign=-1.):
+    """The rolled law's night half alone: zero over the day half, the night half's roll beyond the nodes with the
+    same cosine ramps."""
+    a = np.abs(np.angle(np.exp(1j*np.asarray(u, float))))
+    return np.where(a <= np.pi/2, 0., -day_sign*chi*ramp(a-np.pi/2, 0., np.radians(width)))
 
 
 def steering(u, chi, service, width, day_sign=-1.):
@@ -292,6 +302,9 @@ def main():
     laws = {'as_built': lambda u: (0., 0.)}
     for chi in DESIGN['roll_deg']:
         laws[f'rolled_{chi:g}_deg'] = (lambda c: lambda u: (float(rolled(u, np.radians(c), service, width, day_sign)), 0.))(chi)
+    for chi in DESIGN['night_roll_deg']:
+        laws[f'night_rolled_{chi:g}_deg'] = (
+            lambda c: lambda u: (float(night_rolled(u, np.radians(c), width, day_sign)), 0.))(chi)
     laws['steering'] = lambda u: (float(steering(u, np.radians(DESIGN['steer_roll_deg']), service, width, day_sign)), 0.)
     clearance['laws'] = {name: law_gap(law, *geom) for name, law in laws.items()}
     clearance['laws']['edge_on_pitch'] = law_gap(lambda u: (0., float(edge_on_pitch(u, service))), *geom)
@@ -307,6 +320,16 @@ def main():
     for chi in DESIGN['roll_deg']:
         schemes[f'rolled_{chi:g}_deg'] = dict(roll=lambda u, c=chi: rolled(u, np.radians(c), service, width, day_sign),
                                               filter=(rb.CLEAR, rb.CLEAR))
+    for chi in DESIGN['night_roll_deg']:
+        schemes[f'night_rolled_{chi:g}_deg'] = dict(
+            roll=lambda u, c=chi: night_rolled(u, np.radians(c), width, day_sign), filter=(rb.CLEAR, rb.CLEAR))
+    # The rolls with the design's centred filter, which removes most of the shingle's steady pitch torque.
+    centred = (BUNDLE['pitch_m']+DESIGN['design_overlap_m'], rb.CLEAR)
+    for chi in DESIGN['night_roll_deg']:
+        schemes[f'balanced_rolled_{chi:g}_deg'] = dict(
+            roll=lambda u, c=chi: rolled(u, np.radians(c), service, width, day_sign), filter=centred)
+        schemes[f'balanced_night_rolled_{chi:g}_deg'] = dict(
+            roll=lambda u, c=chi: night_rolled(u, np.radians(c), width, day_sign), filter=centred)
     schemes['steering'] = dict(roll=lambda u: steering(u, np.radians(DESIGN['steer_roll_deg']), service, width,
                                                        day_sign), filter=(rb.CLEAR, rb.CLEAR))
     names = list(schemes)

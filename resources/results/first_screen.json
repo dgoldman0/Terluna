@@ -12,10 +12,10 @@
    "geography/results/groundwater.json": "45375eb62f3bad0f",
    "research/studies/atmospheric_co2/results/atmospheric_co2.json": "80db612918d3fc44",
    "atmosphere/loss_response/results/euv_sweep.csv": "95527c374586e4f8",
-   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
+   "research/studies/solar_shield_array/results/array_heat.json": "32ef507f2e2771e7",
    "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "80b3ebef5077fb62",
    "research/studies/conservation/results/gates.json": "65b855711fbf1b06",
-   "research/studies/joint_synthesis/results/ledgers.json": "563f50e4a71b4cae"
+   "research/studies/joint_synthesis/results/ledgers.json": "d96081ff7549f471"
   },
   "constants": {
    "MOON_GM": 4902800118000.0,

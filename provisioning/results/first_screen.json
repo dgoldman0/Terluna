@@ -6,7 +6,7 @@
    "provisioning/screen.py": "8e99c0a521b8c240"
   },
   "inputs": {
-   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
+   "research/studies/solar_shield_array/results/array_heat.json": "32ef507f2e2771e7",
    "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa",
    "biosphere/canopy/results/fruit.json": "b26854d0ff421ab0",
    "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539",

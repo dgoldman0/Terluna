@@ -520,16 +520,18 @@ def first_screen(heat, layout):
 SUN = np.array([-1., 0., 0.])      # toward the Sun; the night side is +x, the rings' shared node line is y
 
 
-def fleet_rings(layout, heat, ledger):
+def fleet_rings(layout, heat, ledger, drive=1.):
     """Every ring of the stack: crossing height, apolune radius (the layout's radius, at the sunward crossing),
     forced eccentricity and tilt, from the flown matched rings by height; window rings are the middle share of the
-    stack that array_heat carries; the tiles are shared evenly among the rings."""
+    stack that array_heat carries; the tiles are shared evenly among the rings. With an attitude scheme's eccentricity
+    drive over the as-built one, the forced eccentricity scales with it (attitude_schemes' reading rule) and the
+    sunward crossing keeps its radius."""
     stack = layout['stack']
     flown = sorted(layout['flown']['matched']['rings'], key=lambda r: r['height_km'])
     hs = np.array([r['height_km'] for r in flown])
     heights = np.linspace(-stack['height_top_km'], stack['height_top_km'], stack['rings'])
     r_apo = np.interp(heights, hs, [r['radius_km'] for r in flown])
-    e = np.interp(heights, hs, [r['forced_eccentricity'] for r in flown])
+    e = np.interp(heights, hs, [r['forced_eccentricity'] for r in flown])*drive
     tilt = np.arcsin(heights/r_apo)
     share = heat['fleet']['window_ring_share']
     return dict(heights=heights, r_apo=r_apo, e=e, a=r_apo/(1+e), tilt=tilt,
@@ -1086,7 +1088,15 @@ ANSWERS = [
     ('rolled_outside_service_80_wide_gap_220', 'wide_gap_220', None, 'outside_service', 80., 0.),
     ('rolled_outside_service_80_wide_gap_250', 'wide_gap_250', None, 'outside_service', 80., 0.),
     ('rolled_outside_service_80_mesh_low_emitter', 'as_built', 'mesh_low+emitter_low', 'outside_service', 80., 0.),
+    ('rolled_outside_service_80_uv_mirror_outer_98', 'uv_mirror_outer_98', None, 'outside_service', 80., 0.),
 ]
+# The 80-degree rolls with the forced eccentricity their own push leaves: attitude_schemes' scheme for each law, its
+# drive scaling every ring's eccentricity about the sunward crossing's radius.
+OWN_ECCENTRICITY = [
+    ('night_roll_80_own_eccentricity', 'as_built', None, 'night', 80., 0., 'night_rolled_80_deg'),
+    ('rolled_outside_service_80_own_eccentricity', 'as_built', None, 'outside_service', 80., 0., 'rolled_80_deg'),
+]
+SCHEME_OF_LAW = {'night': 'night_rolled_{:g}_deg', 'outside_service': 'rolled_{:g}_deg'}
 
 
 def dimming(row, design_sun):
@@ -1144,12 +1154,18 @@ def costs(key, film, coat_key, law, chi, pitch, bundles, attitude_p):
                           T_sunward_one_K=b['T_sunward_one'], T_sunward_two_K=b['T_sunward_two'])
     out['by_ring'] = mass
     out['sail_loading'] = sail_loading(bundles, {ring: v['g_m2'] for ring, v in mass.items()})
-    if law != 'as_built':
-        scheme = attitude_p['schemes'].get(f'rolled_{chi:g}_deg') if chi else None
+    if law in SCHEME_OF_LAW and chi:
+        name = SCHEME_OF_LAW[law].format(chi)
+        scheme = attitude_p['schemes'].get(name)
         if scheme:
-            out['attitude_study'] = dict(scheme=f'rolled_{chi:g}_deg', law='outside service, both halves',
-                                         eccentricity_drive_over_as_built=scheme['eccentricity_drive']['over_as_built'],
-                                         store_N_m_s_median_trim_25=scheme['store_N_m_s']['trim_0.25']['median'])
+            centred = attitude_p['schemes'].get('balanced_'+name)
+            out['attitude_study'] = dict(
+                scheme=name, law='night half only' if law == 'night' else 'outside service, both halves',
+                eccentricity_drive_over_as_built=scheme['eccentricity_drive']['over_as_built'],
+                store_N_m_s_median_trim_25=scheme['store_N_m_s']['trim_0.25']['median'],
+                store_N_m_s_median_trim_25_centred_filter=(centred['store_N_m_s']['trim_0.25']['median']
+                                                           if centred else None),
+                clearance_min_gap_m=attitude_p['clearance']['laws'][name]['min_gap_m'])
     return out
 
 
@@ -1188,13 +1204,28 @@ def compute(verbose=True):
         return bundles[key]
     SAIL['as_built'] = {ring: b['pressure_coefficient'] for ring, b in bundle('as_built', None).items()}
     geos, answers = {}, {}
-    for key, film, coat, law, chi, pitch in ANSWERS:
-        gkey = (law, chi, pitch)
+    cases = [(key, film, coat, law, chi, pitch, None) for key, film, coat, law, chi, pitch in ANSWERS]+OWN_ECCENTRICITY
+    for key, film, coat, law, chi, pitch, scheme in cases:
+        if scheme is None:
+            S_case, fixed_case = S, fixed
+            gkey = (law, chi, pitch)
+        else:
+            drive = attitude_p['schemes'][scheme]['eccentricity_drive']['over_as_built']
+            rings_case = fleet_rings(layout, heat, ledger, drive)
+            S_case = fleet_samples(rings_case, DESIGN['samples_per_ring'])
+            fixed_case = dict(fixed, front=projected_counts(rings_case, S_case), shadow=moon_shadow(S_case['P']),
+                              sub_weight=S_case['r'].size/S_case['r'][sub].size)
+            gkey = (law, chi, pitch, scheme)
         if gkey not in geos:
-            normal, _ = attitude(S, law, chi, pitch)
-            geos[gkey] = specular_geometry({'P': S['P'][sub]}, normal[sub])
+            normal, _ = attitude(S_case, law, chi, pitch)
+            geos[gkey] = specular_geometry({'P': S_case['P'][sub]}, normal[sub])
         b = bundle(film, coat)
-        row = evaluate(S, fixed, b, geos[gkey], law, chi, pitch)
+        row = evaluate(S_case, fixed_case, b, geos[gkey], law, chi, pitch)
+        if scheme is not None:
+            row['eccentricity'] = dict(scheme=scheme, drive_over_as_built=drive,
+                                       range=[float(rings_case['e'].min()), float(rings_case['e'].max())],
+                                       perilune_km=[float((rings_case['a']*(1-rings_case['e'])).min()),
+                                                    float((rings_case['a']*(1-rings_case['e'])).max())])
         row['dimming'] = dimming(row, design_sun)
         # A coating that takes light out of the window rings' beam dims the Moon itself, unextracted; the rest is
         # added dimming, which extraction can turn into electricity.
@@ -1300,8 +1331,8 @@ ASSUMPTIONS = [
 
 
 IR_BANDS_UM = [(5., 7.5), (7.5, 8.5), (8.5, 9.6), (9.6, 12.), (12., 15.), (15., 20.), (20., 25.), (25., 40.), (40., 125.)]
-RECOMMENDED = 'night_roll_80'
-NEXT = ('night_roll_80_wide_gap_250', 'night_roll_80_uv_mirror_outer_98')
+RECOMMENDED = 'rolled_outside_service_80_own_eccentricity'
+NEXT = ('rolled_outside_service_80_wide_gap_250', 'rolled_outside_service_80_uv_mirror_outer_98')
 
 
 def film_summary(b, ring, heat, olr_w):

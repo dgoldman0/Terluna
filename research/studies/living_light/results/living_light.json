@@ -3,7 +3,7 @@
  "producer": {
   "study": "living_light",
   "files": {
-   "research/studies/living_light/run.py": "c325428531c5238bff990ea8a26a9581bc8075a57695aa1cdaddc70fad96da4e"
+   "research/studies/living_light/run.py": "49a9d7f13c589e61a579d7fe7edb8a710be76604f33e8e64ea8adef1d6ad8ccf"
   },
   "imported_code": {
    "illumination/calendar/geometry.py": "462b9f7174efa4aec4b96b37b7e2a5ba3f1bdaed5e2db53ce7c14b311e8a26dd",
@@ -32,16 +32,16 @@
    "research/studies/daily_life/results/daily_life.json": {
     "branch": "main",
     "commit": null,
-    "blob": "2ace65e65dc40d05d60fea6dfc332c2b2f70531c",
-    "sha256": "de64289da4914fed87c5cc94d2f3bef563b6c8a47f74ccd8d5ea153788175856",
+    "blob": "d41bb4832aaef660e3d1e0fd711ddfb2e1dbd24e",
+    "sha256": "9c8584f834725b633f70033a730aa4f5631ff49f56830891835d72dd19a7c578",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    },
    "research/studies/ways_of_living/results/ways_of_living.json": {
     "branch": "main",
     "commit": null,
-    "blob": "18626be739ed81c89f591781f497468443a47f55",
-    "sha256": "b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a",
+    "blob": "3a6a45b35aac697261fec074cc157bce494ccaf7",
+    "sha256": "8c2b3542dbe101eae6eb4bfe764c28662f422135426fce943368f871da0ed43b",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    }

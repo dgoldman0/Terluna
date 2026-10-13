@@ -6,11 +6,11 @@
    "resources/industry.py": "7a324986948b6b24"
   },
   "inputs": {
-   "resources/results/first_screen.json": "8925d2b67c0d6bb6",
-   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
-   "research/studies/solar_shield_array/results/integrated_ledger.json": "68ad477ab2cc80c4",
+   "resources/results/first_screen.json": "3ae61ad45a4fdaa1",
+   "research/studies/solar_shield_array/results/array_heat.json": "32ef507f2e2771e7",
+   "research/studies/solar_shield_array/results/integrated_ledger.json": "151f32d651483fff",
    "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa",
-   "research/studies/joint_synthesis/results/ledgers.json": "563f50e4a71b4cae",
+   "research/studies/joint_synthesis/results/ledgers.json": "d96081ff7549f471",
    "geography/results/atlas.json": "78cfbf2f469eb339",
    "geography/results/drainage.json": "18494e3d3656ead7",
    "engineering/reference/industrial_architecture/results/derived_industry_calculations.json": "2021602a5859f643",

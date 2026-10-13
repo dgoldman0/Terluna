@@ -2,12 +2,12 @@
   "schema": "terluna.resources.sea-phosphorus/1",
   "producer": {
     "files": {
-      "resources/sea_phosphorus.py": "d5f8a89368ce9935a78a8bc00739f463b139db3ff274159dd3cbcd1ffc84868f",
+      "resources/sea_phosphorus.py": "427f9f9a5d1d624b09a7b1de27353c7eb43c73d9120ed5268c27928f6fbec1c2",
       "resources/phosphorus.py": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43"
     },
     "inputs": {
-      "resources/results/phosphorus.json": "4089899e2b70e8b7888bb83e705e1773f316a1b3c220a43313a48b2578b615a5",
-      "resources/results/first_screen.json": "8925d2b67c0d6bb69d1479cc767fe9cc1e1788b9a87046a7dbf2be1b7a857f8d",
+      "resources/results/phosphorus.json": "5733272203ada934efb6ba843fd6b36010dcb3b366d8743a2206faa039fb49be",
+      "resources/results/first_screen.json": "3ae61ad45a4fdaa15be5afa4d7c4f5386aa80c2326c0dbd23dfb658c837c827d",
       "resources/results/sea_phosphorus_waters.json": "a38df83c99e8e615c2883031b495fa645ed75441ca7f01f983633a8562f9d86c",
       "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
       "geography/results/drainage.json": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d",
@@ -27,7 +27,7 @@
         "path_at_integration": "research/studies/sky_ecology/results/sky_ecology.json",
         "branch": "main",
         "commit": null,
-        "sha256": "2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3",
+        "sha256": "479fcc2558ecaa290a823e90facf24af8cb10160d19767f83160facffbbcefbe",
         "read_from": "in-tree"
       },
       "sky_phosphorus_note": {
@@ -48,14 +48,14 @@
         "path_at_integration": "research/studies/ways_of_living/results/ways_of_living.json",
         "branch": "main",
         "commit": null,
-        "sha256": "b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a",
+        "sha256": "8c2b3542dbe101eae6eb4bfe764c28662f422135426fce943368f871da0ed43b",
         "read_from": "in-tree"
       },
       "provisioning_decisions": {
         "path_at_integration": "research/decisions.md",
         "branch": "main",
         "commit": null,
-        "sha256": "74ae9cf6d209acd2c7ba13c402f085e0b1d7d330351a5682a07b6c7ce3299cd6",
+        "sha256": "25543d96a64371a8e5cc361edf4c48388b5a0af6e7e83477e816da96f77672eb",
         "read_from": "in-tree"
       }
     },

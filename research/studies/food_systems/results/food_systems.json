@@ -3,7 +3,7 @@
  "producer": {
   "study": "food_systems",
   "files": {
-   "research/studies/food_systems/run.py": "9bc93dc852ab1d6e",
+   "research/studies/food_systems/run.py": "a8af1f06f9193760",
    "research/studies/food_systems/zones.py": "59f9cc439fcb8997",
    "research/studies/food_systems/parameters.py": "380459175e577004",
    "research/studies/food_systems/systems.py": "c049b3435c3e2763",
@@ -17,9 +17,9 @@
    "SYNODIC_MONTH_DAYS": 29.53059
   },
   "inputs": {
-   "research/studies/ways_of_living/results/ways_of_living.json": "b55285cd89077ee8",
-   "provisioning/results/population.json": "d562cdabe6eee18f",
-   "research/studies/daily_life/results/daily_life.json": "de64289da4914fed",
+   "research/studies/ways_of_living/results/ways_of_living.json": "8c2b3542dbe101ea",
+   "provisioning/results/population.json": "ae48ecf3333307da",
+   "research/studies/daily_life/results/daily_life.json": "9c8584f834725b63",
    "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
    "biosphere/canopy/results/plant.json": "87cf08572ea40213",
    "biosphere/canopy/results/fruit.json": "b26854d0ff421ab0",
@@ -33,7 +33,7 @@
    "climate/results/gcm/radiation_check_A28_dim5_moon.json": "82f2d3baff7cb2c3",
    "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539",
    "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f"
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "d4b3a5f39abd7614"
   },
   "sources": "40a3c98981c16d28",
   "ignored_inputs": {
@@ -76,8 +76,8 @@
     "path_at_integration": "resources/results/phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "bab3177a4c9119a3f57fb4a6fc01e62307a2f444",
-    "sha256": "4089899e2b70e8b7888bb83e705e1773f316a1b3c220a43313a48b2578b615a5",
+    "blob": "34f14d047d9276de9040949f12df3515ef899906",
+    "sha256": "5733272203ada934efb6ba843fd6b36010dcb3b366d8743a2206faa039fb49be",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The aerial phosphorus return account, whose complete-diet P demand provisioning supplies; its lift energy per kg to 10 km."
@@ -106,8 +106,8 @@
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "742b34d4588707b23598a1b17016752c5cff949c",
-    "sha256": "926c4a95e930c4470689c277b67d0024f2be87d6a3ebf33142fbd4f03bca6b5f",
+    "blob": "81224da069061a152df03ae4404654efcdab429a",
+    "sha256": "c1c18206e0acd88ebca4b7bcd98eeea7c6fb74664d40720a85643c2b918d429b",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The land's phosphorus through the rain-fed lakes to the seas: the dissolved input the common-level waters receive, and what the waters' life can spare to seaweed, fish and sorption."

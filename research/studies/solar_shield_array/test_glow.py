@@ -248,3 +248,22 @@ def test_glow_md_states_the_products_numbers_and_sums(product):
         assert values[3] == pytest.approx(a['infrared_return_W_m2']['night'], abs=.051), key
         assert values[4] == pytest.approx(a['heat_total_W_m2']['night'], abs=.051), key
         assert values[5] == pytest.approx(a['night_lux_from_returns']['mean'], abs=.051), key
+
+
+def test_the_rolls_own_eccentricity_follows_their_drive_and_the_recommendation_takes_it(product, layout):
+    """The rows with their own eccentricity scale every ring's forced eccentricity by the law's drive from the
+    attitude study, so the night halves ride farther out; the recommended answer is the both-halves roll on it."""
+    answers = product['results']['answers']
+    schemes = json.loads(g.ATTITUDE.read_text())['schemes']
+    largest = max(r['forced_eccentricity'] for r in layout['flown']['matched']['rings'])
+    lowest = min(r['radius_km']*(1-r['forced_eccentricity'])/(1+r['forced_eccentricity'])
+                 for r in layout['flown']['matched']['rings'])
+    for key, scheme in (('night_roll_80_own_eccentricity', 'night_rolled_80_deg'),
+                        ('rolled_outside_service_80_own_eccentricity', 'rolled_80_deg')):
+        e = answers[key]['eccentricity']
+        drive = schemes[scheme]['eccentricity_drive']['over_as_built']
+        assert e['scheme'] == scheme and e['drive_over_as_built'] == pytest.approx(drive, rel=1e-5)
+        assert e['range'][1] <= largest*drive*(1+1e-6)
+        assert e['perilune_km'][0] > lowest
+    assert product['results']['recommended']['answer'] == 'rolled_outside_service_80_own_eccentricity'
+

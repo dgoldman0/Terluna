@@ -281,6 +281,14 @@ drive on the eccentricity to 0.36 of the radial-facing tiles'. Rolls of 30°,
 orbital rate takes 0.2–2 million N·m at 62.7 g/m² (median to 95th percentile),
 and the momentum store grows to 2–6×10¹⁰ N·m·s.
 
+Rolled 80° on the night half alone (12 October 2026, for the fleet's glow), the
+tiles keep the same clearance and the drive falls to 0.55, but the store grows
+to 2.7–9.0×10¹⁰ N·m·s a tile, 14–48 times the chosen one, against
+1.0–2.3×10¹⁰ for rolling both halves: rolling one way on the day half and the
+other on the night half cancels much of the roll torque over an orbit, and the
+night half alone does not. The centred filter leaves both rolled stores about as
+they are ([glow.md](glow.md)).
+
 **A centred filter holds the attitude.** The shadow torque comes from the
 overlap: each tile's filter is shaded along the 1.4 km where it lies under its
 neighbour. The filter can instead cover only the middle of each tile along the

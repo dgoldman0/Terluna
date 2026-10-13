@@ -2,7 +2,7 @@
  "schema": "terluna.research.fleet-glow/1",
  "producer": {
   "files": {
-   "research/studies/solar_shield_array/glow.py": "ec2d6c82da9a9d65cde30a3afa8be4795f1805e009dd4ff0811ca57e3898162b",
+   "research/studies/solar_shield_array/glow.py": "7415f7af68be36af501c3f8956c0be752f8f1a8f089028ed7a07147cc9eebf4e",
    "protection/model.py": "018cfbf6ac5e8ea6935480e09c4c2b69bf54b08c873d953d4b5e31c952d06647",
    "protection/spectra/annulus_film.py": "b1875c48b858b227673e864e2f5172a195a23c9507b1b85c3c118f8a86781aa1",
    "protection/spectra/short_wave.py": "c0b72e9b92e20c85f1c7c97d29cd1b8aaa75e8af08030c1ccf48a9295449414c",
@@ -35,12 +35,12 @@
   "correlated_k_table": "4d7f190b96de7e0a"
  },
  "inputs": {
-  "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9fd77dacafec9789a7c502731cca414acdb3352be0d2224bd",
+  "research/studies/solar_shield_array/results/array_heat.json": "32ef507f2e2771e7bc7b12fbb3d358e8db3281f6bb328f75ecb2fb06ccb54ecc",
   "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa384b70a0cffda0ed8f62ec5737eea53e264e7f4e9acab4d6",
-  "research/studies/solar_shield_array/results/integrated_ledger.json": "68ad477ab2cc80c4dbe850a4fda9f6d9595094f323bbf07b3b7be8c8b117cc7a",
-  "research/studies/solar_shield_array/results/attitude_schemes.json": "485cb1ca84437b320cfb2e2555a70d961ab271ebbc1d028cea9641861d839ac8",
+  "research/studies/solar_shield_array/results/integrated_ledger.json": "151f32d651483fffd880e7eb270a7e521705cef4a07c43b406d5029d5873f853",
+  "research/studies/solar_shield_array/results/attitude_schemes.json": "45f64db28c10d61c28d9f75579894365d99cb2334dfc0c8c3a1f656e37889449",
   "protection/spectra/annulus_film.json": "328f6698a2f021cf81e55e1c4b7b2a3e64280f3b6d9ec8fac67f4d8008eba630",
-  "provisioning/results/first_screen.json": "f268f5b8800d29abd27b07ce66b58d4a8162c4d4b1cac6266c6fc93d1bd834f5",
+  "provisioning/results/first_screen.json": "1835a68295f72d5560dae04fbc12529609af3209876e64a9693e9d300da91857",
   "illumination/fleet_light/results/night_light.json": "c58f6afe2f342d809f8407e6ad8eb4fba4732d100fabd32869b80ca0a33233ea",
   "research/studies/solar_shield_array/glow_sources.json": "4b1dfe32f2d72c927b39a8b9f1b797dc6705bd45196c8f06ef2e47e4687b5d64",
   "protection/sources/o.nff": "adb1540b11008383aaef0b8c4f5fb1a2bc5df14f3717ac4d58fc54fff92ba6cb",
@@ -4130,12 +4130,6 @@
       "mismatch_g_m2": 1.77636e-15,
       "as_built_annulus_tile_g_m2": 13.765,
       "reflection_to_match": 0.0
-     },
-     "attitude_study": {
-      "scheme": "rolled_30_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.857595,
-      "store_N_m_s_median_trim_25": 57712200000.0
      }
     }
    },
@@ -4268,12 +4262,6 @@
       "mismatch_g_m2": 1.77636e-15,
       "as_built_annulus_tile_g_m2": 13.765,
       "reflection_to_match": 0.0
-     },
-     "attitude_study": {
-      "scheme": "rolled_60_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.566958,
-      "store_N_m_s_median_trim_25": 61702600000.0
      }
     }
    },
@@ -4408,10 +4396,12 @@
       "reflection_to_match": 0.0
      },
      "attitude_study": {
-      "scheme": "rolled_80_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -4549,7 +4539,9 @@
       "scheme": "rolled_30_deg",
       "law": "outside service, both halves",
       "eccentricity_drive_over_as_built": 0.857595,
-      "store_N_m_s_median_trim_25": 57712200000.0
+      "store_N_m_s_median_trim_25": 57712200000.0,
+      "store_N_m_s_median_trim_25_centred_filter": null,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -4687,7 +4679,9 @@
       "scheme": "rolled_60_deg",
       "law": "outside service, both halves",
       "eccentricity_drive_over_as_built": 0.566958,
-      "store_N_m_s_median_trim_25": 61702600000.0
+      "store_N_m_s_median_trim_25": 61702600000.0,
+      "store_N_m_s_median_trim_25_centred_filter": null,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -4825,7 +4819,9 @@
       "scheme": "rolled_80_deg",
       "law": "outside service, both halves",
       "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -4960,10 +4956,12 @@
       "reflection_to_match": 0.0
      },
      "attitude_study": {
-      "scheme": "rolled_80_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -5098,10 +5096,12 @@
       "reflection_to_match": 0.0550079
      },
      "attitude_study": {
-      "scheme": "rolled_80_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -5236,10 +5236,12 @@
       "reflection_to_match": 0.0544651
      },
      "attitude_study": {
-      "scheme": "rolled_80_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -5374,10 +5376,12 @@
       "reflection_to_match": 0.0436206
      },
      "attitude_study": {
-      "scheme": "rolled_80_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -5512,10 +5516,12 @@
       "reflection_to_match": 0.000331741
      },
      "attitude_study": {
-      "scheme": "rolled_80_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -5650,10 +5656,12 @@
       "reflection_to_match": 0.00507552
      },
      "attitude_study": {
-      "scheme": "rolled_80_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -5788,10 +5796,12 @@
       "reflection_to_match": 0.0
      },
      "attitude_study": {
-      "scheme": "rolled_80_deg",
-      "law": "outside service, both halves",
-      "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -5929,7 +5939,9 @@
       "scheme": "rolled_80_deg",
       "law": "outside service, both halves",
       "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -6067,7 +6079,9 @@
       "scheme": "rolled_80_deg",
       "law": "outside service, both halves",
       "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    },
@@ -6205,54 +6219,500 @@
       "scheme": "rolled_80_deg",
       "law": "outside service, both halves",
       "eccentricity_drive_over_as_built": 0.481313,
-      "store_N_m_s_median_trim_25": 22874000000.0
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_uv_mirror_outer_98": {
+    "absorbed_PW": 11.9683,
+    "absorbed_by_half_PW": {
+     "day": 8.37693,
+     "night": 3.59138
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 6.15044,
+     "window": 5.81786
+    },
+    "glow_W_m2": {
+     "global": 1.00077,
+     "day": 1.77923,
+     "night": 0.22232
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 0.905564,
+     "night_half": 0.0952089
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.34599,
+     "window": 0.654783
+    },
+    "infrared_return_W_m2": {
+     "global": 1.37309,
+     "day": 2.73917,
+     "night": 0.00701368
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.522574,
+     "day": 1.04261,
+     "night": 0.00253637
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0811769,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.019581,
+       0.448493
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 2.37387,
+     "day": 4.5184,
+     "night": 0.229334
+    },
+    "heat_total_W_m2": {
+     "global": 2.89644,
+     "day": 5.56101,
+     "night": 0.23187
+    },
+    "dimming": {
+     "percent": 1.30223,
+     "records_convention_percent": 0.987493,
+     "glow_only_percent": 0.473885,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.30223,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.322812,
+     "absorbing_dimmer_gives_back": 0.152858,
+     "electricity_TW": [
+      28.9773,
+      43.466
+     ]
+    },
+    "costs": {
+     "films": "uv_mirror_outer_98",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 11.0368,
+       "t_per_tile": 1103.68,
+       "solar_absorptance": 0.00303676,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.226454,
+       "T_sunward_one_K": [
+        108.425
+       ],
+       "T_sunward_two_K": [
+        115.769,
+        116.383
+       ]
+      },
+      "window": {
+       "g_m2": 6.83826,
+       "t_per_tile": 683.826,
+       "solar_absorptance": 0.0202837,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.170535,
+       "T_sunward_one_K": [
+        147.667
+       ],
+       "T_sunward_two_K": [
+        166.528,
+        171.864
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.226454,
+      "window_dynamic_coefficient": 0.30071,
+      "window_tile_g_m2": 32.8383,
+      "annulus_tile_g_m2": 24.8018,
+      "matched_annulus_tile_g_m2": 24.7293,
+      "mismatch_g_m2": 0.072454,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.000331741
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "night_roll_80_own_eccentricity": {
+    "absorbed_PW": 45.378,
+    "absorbed_by_half_PW": {
+     "day": 40.2197,
+     "night": 5.15825
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 30.8767,
+     "window": 14.5013
+    },
+    "glow_W_m2": {
+     "global": 4.72307,
+     "day": 8.54017,
+     "night": 0.905972
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.60236,
+     "night_half": 0.120706
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.96639,
+     "window": 1.75668
+    },
+    "infrared_return_W_m2": {
+     "global": 2.82923,
+     "day": 5.6262,
+     "night": 0.032256
+    },
+    "sunlight_return_W_m2": {
+     "global": 1.11707,
+     "day": 2.21741,
+     "night": 0.016726
+    },
+    "night_lux_from_returns": {
+     "mean": 0.775643,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0125585,
+       0.481919,
+       3.98805
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 7.5523,
+     "day": 14.1664,
+     "night": 0.938228
+    },
+    "heat_total_W_m2": {
+     "global": 8.66937,
+     "day": 16.3838,
+     "night": 0.954954
+    },
+    "eccentricity": {
+     "scheme": "night_rolled_80_deg",
+     "drive_over_as_built": 0.54684,
+     "range": [
+      0.0584034,
+      0.0894784
+     ],
+     "perilune_km": [
+      17184.2,
+      18061.8
+     ]
+    },
+    "dimming": {
+     "percent": 3.957,
+     "records_convention_percent": 2.95568,
+     "glow_only_percent": 2.23646,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.957,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.390467,
+     "absorbing_dimmer_gives_back": 0.184893,
+     "electricity_TW": [
+      88.0513,
+      132.077
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_own_eccentricity": {
+    "absorbed_PW": 38.521,
+    "absorbed_by_half_PW": {
+     "day": 33.2172,
+     "night": 5.30382
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 27.1574,
+     "window": 11.3636
+    },
+    "glow_W_m2": {
+     "global": 3.46251,
+     "day": 6.45474,
+     "night": 0.47027
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 3.34216,
+     "night_half": 0.120346
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.19011,
+     "window": 1.27239
+    },
+    "infrared_return_W_m2": {
+     "global": 1.69327,
+     "day": 3.34534,
+     "night": 0.0411956
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.578593,
+     "day": 1.13697,
+     "night": 0.0202191
+    },
+    "night_lux_from_returns": {
+     "mean": 0.876856,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       5.90692e-06,
+       0.228071,
+       1.21711,
+       3.66199
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 5.15577,
+     "day": 9.80008,
+     "night": 0.511465
+    },
+    "heat_total_W_m2": {
+     "global": 5.73437,
+     "day": 10.937,
+     "night": 0.531684
+    },
+    "eccentricity": {
+     "scheme": "rolled_80_deg",
+     "drive_over_as_built": 0.481313,
+     "range": [
+      0.051405,
+      0.0787564
+     ],
+     "perilune_km": [
+      17438.4,
+      18405.8
+     ]
+    },
+    "dimming": {
+     "percent": 2.63862,
+     "records_convention_percent": 1.95504,
+     "glow_only_percent": 1.63956,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 2.63862,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.282821,
+     "absorbing_dimmer_gives_back": 0.133921,
+     "electricity_TW": [
+      58.7146,
+      88.0719
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
      }
     }
    }
   },
   "recommended": {
-   "answer": "night_roll_80",
+   "answer": "rolled_outside_service_80_own_eccentricity",
    "then": [
-    "night_roll_80_wide_gap_250",
-    "night_roll_80_uv_mirror_outer_98"
+    "rolled_outside_service_80_wide_gap_250",
+    "rolled_outside_service_80_uv_mirror_outer_98"
    ],
    "heat_W_m2": {
-    "global": 7.23522,
-    "day": 13.5985,
-    "night": 0.871887
+    "global": 5.73437,
+    "day": 10.937,
+    "night": 0.531684
    },
    "glow_W_m2": {
-    "global": 4.93433,
-    "day": 9.00625,
-    "night": 0.862399
+    "global": 3.46251,
+    "day": 6.45474,
+    "night": 0.47027
    },
    "infrared_return_W_m2": {
-    "global": 1.63449,
-    "day": 3.26201,
-    "night": 0.00697074
+    "global": 1.69327,
+    "day": 3.34534,
+    "night": 0.0411956
    },
    "sunlight_return_W_m2": {
-    "global": 0.6664,
-    "day": 1.33028,
-    "night": 0.00251784
+    "global": 0.578593,
+    "day": 1.13697,
+    "night": 0.0202191
    },
    "dimming": {
-    "percent": 3.33765,
-    "records_convention_percent": 2.46673,
-    "glow_only_percent": 2.33649,
+    "percent": 2.63862,
+    "records_convention_percent": 1.95504,
+    "glow_only_percent": 1.63956,
     "coating_provides_percent": 0.0,
-    "to_add_percent": 3.33765,
-    "absorbing_dimmer_glow_W_m2_per_percent": 0.407254,
-    "absorbing_dimmer_gives_back": 0.192842,
+    "to_add_percent": 2.63862,
+    "absorbing_dimmer_glow_W_m2_per_percent": 0.282821,
+    "absorbing_dimmer_gives_back": 0.133921,
     "electricity_TW": [
-     74.2697,
-     111.404
+     58.7146,
+     88.0719
     ]
    },
    "costs": {
     "films": "as_built",
     "coating": null,
-    "attitude": "night",
+    "attitude": "outside_service",
     "roll_deg": 80.0,
     "pitch_deg": 0.0,
     "by_ring": {
@@ -6299,11 +6759,13 @@
      "scheme": "rolled_80_deg",
      "law": "outside service, both halves",
      "eccentricity_drive_over_as_built": 0.481313,
-     "store_N_m_s_median_trim_25": 22874000000.0
+     "store_N_m_s_median_trim_25": 22874000000.0,
+     "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+     "clearance_min_gap_m": 222.504
     }
    },
    "night_lux": {
-    "mean": 0.0805158,
+    "mean": 0.876856,
     "by_angle_from_midnight_deg": {
      "edges": [
       0,
@@ -6323,10 +6785,10 @@
       0.0,
       0.0,
       0.0,
-      0.0,
-      0.0,
-      0.019581,
-      0.444686
+      5.90692e-06,
+      0.228071,
+      1.21711,
+      3.66199
      ]
     }
    }
