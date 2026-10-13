@@ -321,8 +321,9 @@ small beside its other flows, while their mass, 0.1–1.7 Gt, belongs in the
 
 `research/array-industry` takes up heat reuse, general computing and industry
 of the shield and habitat array, with the shield's reflectivity trim and
-momentum store and their power. It opens when the author chooses; on
-8 October too many branches were open off a stale main. It starts from:
+momentum store and their power. The author opened it on 12 October 2026 off
+main, with the fleet's glow and the night first ([glow.md](glow.md)). It
+starts from:
 - this note, [array_heat.json](results/array_heat.json) and
   [held_eccentricity.json](results/held_eccentricity.json);
 - the [integrated comparison](integrated_comparison.md) and its ledger: the

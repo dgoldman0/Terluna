@@ -100,6 +100,15 @@ The shield's trim and store depend on hardware the planned branch chooses.
 Holding the stack's eccentricities takes up to a fifth of the outermost rings'
 eccentricity drive ([held_eccentricity.py](held_eccentricity.py)).
 
+The planned branch opened on 12 October 2026 with [the fleet's glow](glow.md)
+([glow.py](glow.py)). As built the stack puts 14.1 W/m² on the Moon: its own
+glow, 9.4 W/m² with each ring's night half at perilune, and 4.7 W/m² of the
+Moon's infrared and sunlight that the films image back. Heat mirrors on the
+Moon-facing faces raise that total. Rolling the night half 80°, the attitude
+the night decision calls for, leaves 7.2 W/m² and takes the films' reflections
+off the night; added dimming of 3.3% of the design sunlight answers the rest.
+The night roll's flights of the kept orbits wait for the author.
+
 The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response
 columns. The local terminal matrix is full rank in those columns, with 34.2%
@@ -323,6 +332,7 @@ python -m protection.spectra.annulus_film
 python -m research.studies.solar_shield_array.integrated_ledger
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.held_eccentricity
 python -m research.studies.solar_shield_array.array_heat
+OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.glow
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py
 python visualization/solar-shield-array/cycling_plot.py
