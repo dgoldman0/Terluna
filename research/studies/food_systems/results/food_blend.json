@@ -5,7 +5,7 @@
   "module": "blend",
   "files": {
    "research/studies/food_systems/blend.py": "7c866446656ebf4e",
-   "research/studies/food_systems/run.py": "a8af1f06f9193760",
+   "research/studies/food_systems/run.py": "8c157d25e48a3b6f",
    "research/studies/food_systems/zones.py": "59f9cc439fcb8997",
    "research/studies/food_systems/parameters.py": "380459175e577004",
    "research/studies/food_systems/systems.py": "c049b3435c3e2763",
@@ -19,9 +19,9 @@
    "SYNODIC_MONTH_DAYS": 29.5
   },
   "inputs": {
-   "research/studies/ways_of_living/results/ways_of_living.json": "8c2b3542dbe101ea",
-   "provisioning/results/population.json": "ae48ecf3333307da",
-   "research/studies/daily_life/results/daily_life.json": "9c8584f834725b63",
+   "research/studies/ways_of_living/results/ways_of_living.json": "947d5b7232be81bc",
+   "provisioning/results/population.json": "c3fa7a2a492ef753",
+   "research/studies/daily_life/results/daily_life.json": "47dec4b1fb14bf63",
    "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
    "biosphere/canopy/results/plant.json": "87cf08572ea40213",
    "biosphere/canopy/results/fruit.json": "b26854d0ff421ab0",
@@ -35,11 +35,11 @@
    "climate/results/gcm/radiation_check_A28_dim5_moon.json": "82f2d3baff7cb2c3",
    "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539",
    "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "d4b3a5f39abd7614"
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "62002e2d2edd2710"
   },
   "food_product": {
    "path": "research/studies/food_systems/results/food_systems.json",
-   "sha256": "a34e50aba7ea4e31e9e5006c0f1bec8e4164a6a4e0689b1c0d24c2df8a6c4d33"
+   "sha256": "158457596200172abb888a06e9e3ecefc9a8a0ae73c3ed820b31e74d62d51070"
   },
   "ignored_inputs": {
    "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
@@ -69,7 +69,7 @@
     "path_at_integration": "resources/results/phosphorus.json",
     "branch": "main",
     "commit": null,
-    "sha256": "5733272203ada934efb6ba843fd6b36010dcb3b366d8743a2206faa039fb49be"
+    "sha256": "1f290bf55c6530a9c5530e904efe3f14dda3757ac5bb8f9fe3c6487807257965"
    },
    "resources_phosphorus_py": {
     "path_at_integration": "resources/phosphorus.py",
@@ -87,7 +87,7 @@
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "sha256": "c1c18206e0acd88ebca4b7bcd98eeea7c6fb74664d40720a85643c2b918d429b"
+    "sha256": "847f49fe8832c12d4568088f5313ee2ce6661a39729ce1a5886347de510f0ac7"
    }
   }
  },

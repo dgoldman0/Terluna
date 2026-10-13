@@ -265,5 +265,29 @@ def test_the_rolls_own_eccentricity_follows_their_drive_and_the_recommendation_t
         assert e['scheme'] == scheme and e['drive_over_as_built'] == pytest.approx(drive, rel=1e-5)
         assert e['range'][1] <= largest*drive*(1+1e-6)
         assert e['perilune_km'][0] > lowest
-    assert product['results']['recommended']['answer'] == 'rolled_outside_service_80_own_eccentricity'
 
+
+def test_the_rolled_layout_and_the_node_laws_and_the_twilight(product):
+    """The rows on the re-flown layout take its rings and forced eccentricities, whose flights carry the law's push;
+    the node laws' rows take their own drive and carry the clearance the attitude study finds them breaking, with
+    their tilt window as the attitude study sets it. The recommended answer's night light is under a hundredth of the
+    Moon's own twilight wherever it falls."""
+    answers = product['results']['answers']
+    rolled = json.loads(g.LAYOUT_ROLLED.read_text())
+    largest = max(r['forced_eccentricity'] for r in rolled['flown']['matched']['rings'])
+    for key, *_ in g.ROLLED_LAYOUT:
+        e = answers[key]['eccentricity']
+        assert e['scheme'] == 'ring_layout_rolled'
+        assert e['drive_over_as_built'] == pytest.approx(rolled['variant']['eccentricity_drive_over_as_built'])
+        assert e['range'][1] <= largest*(1+1e-6)
+    attitude = json.loads(g.ATTITUDE.read_text())
+    assert g.DESIGN['node_window_deg'] == attitude['design']['node_window_deg']
+    for key, film, coat, law, chi, pitch, scheme in g.OWN_ECCENTRICITY:
+        if law.startswith('outside_service_node_'):
+            study = answers[key]['costs']['attitude_study']
+            assert study['scheme'] == scheme == g.scheme_of(law, chi)
+            assert study['clearance_min_gap_m'] < attitude['design']['clearance_m']
+    rec = product['results']['recommended']
+    assert rec['answer'] == g.RECOMMENDED
+    lit = [b for b in rec['night_lux_against_twilight'] if b['returned_lux'] > 0 and b['twilight_lux'][0]]
+    assert lit and all(b['share_of_twilight'] < .01 for b in lit)

@@ -3,7 +3,7 @@
  "producer": {
   "study": "distributions",
   "files": {
-   "research/studies/distributions/run.py": "e89b7740ee95eb33"
+   "research/studies/distributions/run.py": "584d372e4047abb6"
   },
   "constants": {
    "AU": 149597870700.0,
@@ -15,14 +15,14 @@
    "SPEED_OF_LIGHT": 299792458.0
   },
   "inputs": {
-   "research/studies/food_systems/results/food_systems.json": "a34e50aba7ea4e31",
-   "research/studies/land_cities/results/land_cities.json": "1b22990245088a58",
-   "research/studies/ways_of_living/results/ways_of_living.json": "8c2b3542dbe101ea",
-   "research/studies/daily_life/results/daily_life.json": "9c8584f834725b63",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "d4b3a5f39abd7614",
+   "research/studies/food_systems/results/food_systems.json": "158457596200172a",
+   "research/studies/land_cities/results/land_cities.json": "6b5e4c647d352cab",
+   "research/studies/ways_of_living/results/ways_of_living.json": "947d5b7232be81bc",
+   "research/studies/daily_life/results/daily_life.json": "47dec4b1fb14bf63",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "62002e2d2edd2710",
    "research/studies/conservation/results/heritage_register.json": "b0756b08ac3fe0bc",
-   "provisioning/results/population.json": "ae48ecf3333307da",
-   "provisioning/results/computing.json": "ad9c7026a17434d1",
+   "provisioning/results/population.json": "c3fa7a2a492ef753",
+   "provisioning/results/computing.json": "48f60b85d0c33abb",
    "climate/results/gcm/zonal_winds_A28_dim5_moon.json": "a6a5d0cf96b42a1a",
    "shared/scenarios/population.json": "74ec20d6f8057977"
   },
@@ -32,8 +32,8 @@
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "81224da069061a152df03ae4404654efcdab429a",
-    "sha256": "c1c18206e0acd88ebca4b7bcd98eeea7c6fb74664d40720a85643c2b918d429b",
+    "blob": "919093f48c70dd802dae839043f360ff0363e9ce",
+    "sha256": "847f49fe8832c12d4568088f5313ee2ce6661a39729ce1a5886347de510f0ac7",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage recovery and the natural cycle kept beside them."
@@ -52,8 +52,8 @@
     "path_at_integration": "resources/results/phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "34f14d047d9276de9040949f12df3515ef899906",
-    "sha256": "5733272203ada934efb6ba843fd6b36010dcb3b366d8743a2206faa039fb49be",
+    "blob": "8808d22617ba1d8704d43dedaed7f2fecc5de3e4",
+    "sha256": "1f290bf55c6530a9c5530e904efe3f14dda3757ac5bb8f9fe3c6487807257965",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The energy to lift material to the sky towns at 10 km."
@@ -72,8 +72,8 @@
     "path_at_integration": "research/studies/living_light/results/living_light.json",
     "branch": "main",
     "commit": null,
-    "blob": "5d7867aa0f2031d1b43bf29e55dad04527f6449f",
-    "sha256": "fd3e984da4f7d12cfb00dd7ce2425f931a7114899d7e358ab86f4f72d976142f",
+    "blob": "7cc016895664875758b86115f7fbf820d0f29649",
+    "sha256": "eec656eabec411d3198f69ae27a41f371ef8a3ffcb19fa6caca957f62a8153e9",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "Land under a light-polluted sky a person by home and lighting design, the metropolis and residents aloft; lamp hours by home; the dark belt."
@@ -82,8 +82,8 @@
     "path_at_integration": "research/studies/sky_ecology/results/sky_ecology.json",
     "branch": "main",
     "commit": null,
-    "blob": "7add4ac51f7159492b27fff1f879067315584ac8",
-    "sha256": "479fcc2558ecaa290a823e90facf24af8cb10160d19767f83160facffbbcefbe",
+    "blob": "d756a5221a872a74d9c4f2671a218e7016a5a824",
+    "sha256": "53d6e48a9ef7889b36650404428f1dd150e0149a828ec505245e757aed26a7e3",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "Aerophyte cover and the encounter rule for bodies on the same wind tracks."

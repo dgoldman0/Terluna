@@ -50,7 +50,7 @@ BOUND = {
                            sha256="758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8"),
     "sky_ecology": dict(path="research/studies/sky_ecology/results/sky_ecology.json",
                         schema="terluna.research.sky-ecology/1", branch="main", commit=None,
-                        sha256="479fcc2558ecaa290a823e90facf24af8cb10160d19767f83160facffbbcefbe"),
+                        sha256="53d6e48a9ef7889b36650404428f1dd150e0149a828ec505245e757aed26a7e3"),
     "sky_phosphorus_note": dict(path="research/studies/sky_ecology/phosphorus.md", schema=None,
                                 branch="main", commit=None,
                                 sha256="65ec921e7a5dea769a120406c54a22e5bfc47d3077fb06439408b0b9d05f84a2"),
@@ -59,10 +59,10 @@ BOUND = {
                          sha256="cda0594b8b59acfb469a39b007f977d616db60307d325e80af759242d2baecd1"),
     "ways_of_living": dict(path="research/studies/ways_of_living/results/ways_of_living.json",
                            schema="terluna.research.ways-of-living/1", branch="main", commit=None,
-                           sha256="8c2b3542dbe101eae6eb4bfe764c28662f422135426fce943368f871da0ed43b"),
+                           sha256="947d5b7232be81bc6df64f19ba445629381f9366e7cc92418e09997cc068e3b7"),
     "provisioning_decisions": dict(path="research/decisions.md", schema=None, branch="main",
                                    commit=None,
-                                   sha256="25543d96a64371a8e5cc361edf4c48388b5a0af6e7e83477e816da96f77672eb"),
+                                   sha256="77bc58a7e4a91bba5768c060381ef765299d5bc59b55b4de795b7a5279cedaa2"),
 }
 # Bound at integration when provisioning's food-systems study is committed; until then the systems below stand alone.
 PENDING = {

@@ -236,8 +236,9 @@ synthesis ranks two items first from the three domains together; they lead this 
    ([glow.md](studies/solar_shield_array/glow.md)) finds 14.1 W/m² on the Moon as built, the glow itself with the
    night half at perilune and the Moon's own infrared and sunlight that the films image back. Heat mirrors raise that
    total. Rolled 80° outside the service arc on both halves, inside the clearance along the kept orbits, the fleet
-   leaves 5.7 W/m², answered by 2.6% added dimming, keeps the deep night dark and takes a momentum store 5–12 times
-   the chosen one. The layout re-flown for the rolled push (about 20 minutes) and a law through the nodes come next.
+   leaves 6.0 W/m² on the layout re-flown for its push (13 October), answered by 2.7% added dimming, keeps the deep
+   night dark and takes a momentum store 5–12 times the chosen one. Its light on the night's edge is under 1% of the
+   twilight there, and a tilt through the nodes breaks the clearance. The roll's own out-of-plane forces come next.
 4. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
    storm needs CM1's field solver over terrain, which touches the paused climate programme and waits for the author.

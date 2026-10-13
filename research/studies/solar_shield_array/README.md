@@ -105,12 +105,14 @@ The planned branch opened on 12 October 2026 with [the fleet's glow](glow.md)
 glow, 9.4 W/m² with each ring's night half at perilune, and 4.7 W/m² of the
 Moon's infrared and sunlight that the films image back. Heat mirrors on the
 Moon-facing faces raise that total. Rolling both halves 80° outside the service
-arc, inside the clearance along the kept orbits, leaves 5.7 W/m² with the
-eccentricity its push leaves and keeps the deep night dark; added dimming of
-2.6% of the design sunlight answers the rest. It takes a momentum store 5–12
-times the chosen one; rolling the night half alone takes 14–48 times and leaves
-8.7 W/m². The layout re-flown for the rolled push and a law through the nodes
-come next.
+arc, inside the clearance along the kept orbits, leaves 6.0 W/m² on the layout
+re-flown for its push ([ring_layout_rolled.py](ring_layout_rolled.py)), 350–500
+km further in and inside the photon roll's steering reach, and keeps the deep
+night dark; added dimming of 2.7% of the design sunlight answers the rest. It
+takes a momentum store 5–12 times the chosen one; rolling the night half alone
+takes 14–48 times and leaves 8.7 W/m². What the roll leaves on the night's edge
+is under 1% of the tall sky's own twilight there, and a tilt through the nodes
+that would cut it breaks the clearance.
 
 The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response
@@ -330,6 +332,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.attitude_schemes
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.plane_motion
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_layout
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_layout_rolled
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.bundle_validation
 python -m protection.spectra.annulus_film
 python -m research.studies.solar_shield_array.integrated_ledger

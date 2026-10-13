@@ -9,7 +9,7 @@
     "inputs": {
       "symbioses_scenarios.json": "7a9490b6ad0a400bb456f218f243bb68dbaf1bf7bb1339d549310bfcf28754f9",
       "symbioses_sources.json": "57076ad8b55ba3c751307ae78b09a7cfee34a0b482e2ac50858e3133aea1b877",
-      "results/sky_ecology.json": "479fcc2558ecaa290a823e90facf24af8cb10160d19767f83160facffbbcefbe"
+      "results/sky_ecology.json": "53d6e48a9ef7889b36650404428f1dd150e0149a828ec505245e757aed26a7e3"
     }
   },
   "evidence": "Algebraic requirements for illustrative scenarios; no defended population, coexistence, persistence or empirically calibrated rates.",

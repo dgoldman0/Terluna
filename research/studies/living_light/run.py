@@ -57,12 +57,12 @@ CROSS_BRANCH = {
         sha256='9707e4d1c7332ba352b90dbf77c66fde080ec5e0fe24e57b54067c61ecdcfc8d',
         schema='terluna.research.joint-synthesis-places/1'),
     'research/studies/daily_life/results/daily_life.json': dict(
-        branch='main', commit=PROVISIONING_COMMIT, blob='d41bb4832aaef660e3d1e0fd711ddfb2e1dbd24e',
-        sha256='9c8584f834725b633f70033a730aa4f5631ff49f56830891835d72dd19a7c578',
+        branch='main', commit=PROVISIONING_COMMIT, blob='bb3b666527ee6fc3cac21fe50ac97e74e0c1f28c',
+        sha256='47dec4b1fb14bf6353628cc11183bddace1041fd0ee1cfcc22565628565042f0',
         schema='terluna.research.daily-life/1'),
     'research/studies/ways_of_living/results/ways_of_living.json': dict(
-        branch='main', commit=PROVISIONING_COMMIT, blob='3a6a45b35aac697261fec074cc157bce494ccaf7',
-        sha256='8c2b3542dbe101eae6eb4bfe764c28662f422135426fce943368f871da0ed43b',
+        branch='main', commit=PROVISIONING_COMMIT, blob='25dca65203a75e3e4110a2e8680b73eb7603d7a1',
+        sha256='947d5b7232be81bc6df64f19ba445629381f9366e7cc92418e09997cc068e3b7',
         schema='terluna.research.ways-of-living/1'),
 }
 

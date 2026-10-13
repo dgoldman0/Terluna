@@ -45,14 +45,20 @@ for a coating, an absorber or the Moon's light. Sources, with how far each was r
 3. **Rolling outside the service arc halves the heat, and the attitude study keeps it inside the clearance**
    (*screen*; the attitude study's laws along the kept orbits).
    - Rolled 80° outside the service arc on both halves, the attitude study's law, the tiles meet the Sun and the
-     Moon obliquely there. With the forced eccentricity its push leaves, the glow falls to 3.5 W/m² (6.5 by day,
-     0.47 by night), the returned infrared to 1.7 W/m² and the returned sunlight to 0.58 W/m²: 5.7 W/m² in all.
+     Moon obliquely there. On the layout re-flown for its push (ring_layout_rolled), the glow falls to 3.6 W/m²
+     (6.7 by day, 0.48 by night), the returned infrared to 1.75 W/m² and the returned sunlight to 0.61 W/m²: 6.0
+     W/m² in all. The forced eccentricity falls to 0.053–0.094 and the night halves ride at 17,060–17,720 km.
+     Scaling the as-built eccentricity by the law's drive had given 5.7 W/m²: the re-flown stack sits 350–500 km
+     further in, and its edges keep 0.58–0.62 of their eccentricity against the drive's 0.48.
    - Rolled on the night half alone, the fleet leaves 8.7 W/m² with its own eccentricity: the smaller eccentricity
      turns the day half's tiles closer to the Moon's centre, and more of the Moon's own infrared comes back.
    - Both laws keep the stack's 222 m between shingles. Rolling both halves cuts the drive on the eccentricity to
      0.48 and takes a momentum store of 1.0–2.3×10¹⁰ N·m·s a tile, 5–12 times the chosen one. The night half alone
      cuts it to 0.55 and takes 2.7–9.0×10¹⁰ N·m·s, 14–48 times, since its roll torque does not cancel over an orbit.
      The design's centred filter leaves both stores about as they are.
+   - Tilting the tiles 3° or 6° toward the Sun through the nodes, where the roll passes through radial-facing,
+     cuts the night's edge light by a third to a half and the momentum store to 1.2–1.7×10¹⁰ N·m·s, with the push
+     unchanged. It breaks the clearance: with the roll ramping, neighbouring shingles meet over 3–7% of the orbit.
    - Tilts within the clearance's pitch envelope, −3° to +6°, change the glow by 0.1–0.4% and move the returns
      about: less infrared comes back (3.6 W/m²) and more of the day side's light reaches the night.
 4. **What the films absorb is the titania's ultraviolet absorption, and absorbing less costs light pressure**
@@ -78,20 +84,25 @@ for a coating, an absorber or the Moon's light. Sources, with how far each was r
      midnight's own light. The joint synthesis counted diffuse scatter and glints of sunlight; this is a third source.
    - Rolling the night half keeps its reflections off the Moon. On the layout's eccentricity 0.08 lux is left, all
      within 20° of the terminator, from day-half tiles near the nodes. With the smaller eccentricity a roll's push
-     leaves, those tiles pass radial-facing at the nodes closer to the Moon's centre and light the night's edge:
-     0.8–0.9 lux over the night hemisphere, 0.5–4.0 lux within 20° of the terminator, and none within 50° of
-     midnight. The night decision and the glow call for the same attitude, and a law that keeps a few degrees of
-     tilt through the nodes would take the edge's light off (next work).
+     leaves, those tiles pass radial-facing at the nodes closer to the Moon's centre and light the night's edge: on
+     the re-flown layout 0.8 lux over the night hemisphere, 3.5 lux within 10° of the terminator, 1.0 lux at 10–20°
+     and 0.12 at 20–30°, and none within 50° of midnight.
+   - **That light falls in the Moon's own twilight**, which the tall sky keeps bright long after sunset: the solved
+     sky gives 1,200–4,600 lux with the Sun 0–10° below the horizon, 180–1,200 lux at 10–20° and 24–180 lux at
+     20–30° (illumination/sky). The returns add 0.3–0.6% of it at each band's darker edge, and the night decision's
+     deep night stays dark. The tilt through the nodes that would cut it breaks the clearance (finding 3), and the
+     night does not need it.
 6. **The recommendation is to roll both halves outside the service arc and dim by extraction for the rest**
    (*screen*).
-   - With the eccentricity its push leaves, it leaves a glow of 3.5 W/m² (6.5 by day, 0.47 by night) and returns of
-     2.3 W/m², 5.7 W/m² in all. Added dimming of 2.6% of the design sunlight answers it and gives back 59–88 TW of
+   - On the layout re-flown for its push, it leaves a glow of 3.6 W/m² (6.7 by day, 0.48 by night) and returns of
+     2.4 W/m², 6.0 W/m² in all. Added dimming of 2.7% of the design sunlight answers it and gives back 61–91 TW of
      electricity.
    - It moves the attitude outside the service arc and the dimmer. The films, tile masses, sail loading,
      service-arc attitude and the protection's spectra stay as set. It takes a momentum store 5–12 times the chosen
-     one and a layout re-flown for half the push.
-   - The next steps, if the glow itself has to fall further, are the annulus absorber (3.4 W/m² with this roll) and
-     the ultraviolet mirror on the outer faces (2.9 W/m²), each with the costs above.
+     one, and the layout re-flown for half the push, 350–500 km further in, which keeps the design's 1 km between
+     strips inside the photon roll's steering reach.
+   - The next steps, if the glow itself has to fall further, are the annulus absorber (3.8 W/m² with this roll on the
+     re-flown layout) and the ultraviolet mirror on the outer faces (3.3 W/m²), each with the costs above.
 
 ## The films: what they absorb and why
 
@@ -246,14 +257,18 @@ through radial-facing at the nodes.
 | Rolled outside service 60° | 4.87 | 1.38 | 0.53 | 6.78 | 0.08 | push 0.57, store 6.2×10¹⁰ N·m·s |
 | Rolled outside service 80° | 3.76 | 1.37 | 0.52 | 5.66 | 0.08 | push 0.48, store 2.3×10¹⁰ N·m·s |
 | Rolled outside service 80°, its own eccentricity | 3.46 | 1.69 | 0.58 | 5.73 | 0.88 | perilune 17,440–18,410 km |
+| Rolled 80°, tilted 3° through the nodes, its own eccentricity | 3.48 | 1.69 | 0.57 | 5.74 | 0.51 | store 1.7×10¹⁰ N·m·s; gap 0 m |
+| Rolled 80°, tilted 6° through the nodes, its own eccentricity | 3.51 | 1.69 | 0.57 | 5.77 | 0.51 | store 1.2×10¹⁰ N·m·s; gap 0.05 m |
+| Rolled outside service 80°, on the re-flown layout | 3.60 | 1.75 | 0.61 | 5.95 | 0.80 | perilune 17,060–17,720 km |
 
 The last column is the attitude study's figure for each law along the kept orbits at 62.7 g/m²: the drive on the
 eccentricity against the as-built tiles', and the median momentum store at 25% trim against the chosen
 1.9×10⁹ N·m·s; at 5–26 g/m² the stores are 1.0–1.6×10¹⁰ (both halves) and 2.7–5.1×10¹⁰ N·m·s (night half). Turning
 a tile against gravity gradient and the orbital rate takes 0.2–2 MN·m at 62.7 g/m². The rows with their own
 eccentricity scale every ring's forced eccentricity by the law's drive about the sunward crossing's radius, the
-attitude study's first-order rule; the layout re-flown for that push is next work. Both laws keep the 222 m between
-shingles at every phase.
+attitude study's first-order rule. The re-flown layout (ring_layout_rolled) flies the calibration with the law's push
+and lays the stack out again, so its rings carry their own radii and eccentricities. Both roll laws keep the 222 m
+between shingles at every phase; the tilts through the nodes close it, the smallest gap in the last column.
 
 ## The answers screened
 
@@ -302,6 +317,11 @@ can supply, with the electricity it gives at 20–30% (*screen*).
 | Rolled outside service, UV mirror outer 98% `rolled_outside_service_80_uv_mirror_outer_98` | 1.00 | 1.37 | 0.52 | 2.90 | 1.30% | 1.30% | 29–43 TW |
 | Night roll 80°, its own eccentricity `night_roll_80_own_eccentricity` | 4.72 | 2.83 | 1.12 | 8.67 | 3.96% | 3.96% | 88–132 TW |
 | Rolled outside service 80°, its own eccentricity `rolled_outside_service_80_own_eccentricity` | 3.46 | 1.69 | 0.58 | 5.73 | 2.64% | 2.64% | 59–88 TW |
+| Rolled 80°, tilted 3° through the nodes `rolled_outside_service_80_node_3_own_eccentricity` | 3.48 | 1.69 | 0.57 | 5.74 | 2.64% | 2.64% | 59–88 TW |
+| Rolled 80°, tilted 6° through the nodes `rolled_outside_service_80_node_6_own_eccentricity` | 3.51 | 1.69 | 0.57 | 5.77 | 2.66% | 2.66% | 59–89 TW |
+| Rolled outside service 80°, re-flown layout `rolled_outside_service_80_rolled_layout` | 3.60 | 1.75 | 0.61 | 5.95 | 2.74% | 2.74% | 61–91 TW |
+| Re-flown layout, absorber 250 nm `rolled_outside_service_80_wide_gap_250_rolled_layout` | 1.52 | 1.75 | 0.53 | 3.80 | 1.73% | 1.73% | 38–58 TW |
+| Re-flown layout, UV mirror outer 98% `rolled_outside_service_80_uv_mirror_outer_98_rolled_layout` | 0.96 | 1.75 | 0.61 | 3.32 | 1.49% | 1.49% | 33–50 TW |
 
 ## By lunar day and night
 
@@ -320,6 +340,8 @@ hemisphere (*screen*):
 | Rolled outside service 80° `rolled_outside_service_80` | 7.05 | 0.47 | 2.74 | 0.01 | 0.48 | 0.08 |
 | Night roll 80°, its own eccentricity `night_roll_80_own_eccentricity` | 8.54 | 0.91 | 5.63 | 0.03 | 0.95 | 0.78 |
 | Rolled outside service 80°, its own eccentricity `rolled_outside_service_80_own_eccentricity` | 6.45 | 0.47 | 3.35 | 0.04 | 0.53 | 0.88 |
+| Rolled 80°, tilted 3° through the nodes `rolled_outside_service_80_node_3_own_eccentricity` | 6.47 | 0.49 | 3.33 | 0.04 | 0.54 | 0.51 |
+| Rolled outside service 80°, re-flown layout `rolled_outside_service_80_rolled_layout` | 6.72 | 0.48 | 3.46 | 0.04 | 0.53 | 0.80 |
 | Night roll, absorber 250 nm `night_roll_80_wide_gap_250` | 3.91 | 0.30 | 3.26 | 0.01 | 0.31 | 0.11 |
 | Night roll, UV mirror outer 98% `night_roll_80_uv_mirror_outer_98` | 2.25 | 0.31 | 3.26 | 0.01 | 0.32 | 0.08 |
 
@@ -332,8 +354,9 @@ hemisphere (*screen*):
   night's 0.86 W/m² comes mostly from day-half tiles near the terminator, and its light from their reflections
   within 20° of it.
 - **The night decision** keeps the fleet's light off the night zones, and the roll it calls for halves the heat the
-  stack puts on the Moon without adding mass. Pitch tilts send five times as much of the day side's light onto the
-  night, and heat mirrors 2.1–9.4 times as much.
+  stack puts on the Moon without adding mass. What the roll leaves lands within 30° of the terminator, where the
+  tall sky's own twilight is 180–1,500 times brighter. Pitch tilts send five times as much of the day side's light
+  onto the night, and heat mirrors 2.1–9.4 times as much.
 
 ## What remains: dimming and the power it gives back
 
@@ -358,21 +381,22 @@ hemisphere (*screen*):
 
 **Roll both halves 80° outside the service arc and answer the rest by extraction.**
 
-- **What it leaves** (*screen*), with the forced eccentricity its push leaves: the glow 3.5 W/m² (6.5 by day, 0.47
-  by night), the returned infrared 1.7 W/m² and the returned sunlight 0.58 W/m², 5.7 W/m² in all. The deep night
-  stays dark; the night's edge takes 1.2–3.7 lux within 20° of the terminator from day-half tiles passing
-  radial-facing at the nodes, which a node law can take off.
-- **The dimming** is 2.6% of the design sunlight, 2.0% in the synthesis's convention. Taken by extraction it gives
-  back 59–88 TW of electricity.
+- **What it leaves** (*screen*), on the layout re-flown for its push: the glow 3.6 W/m² (6.7 by day, 0.48 by
+  night), the returned infrared 1.75 W/m² and the returned sunlight 0.61 W/m², 6.0 W/m² in all. The deep night
+  stays dark. The night's edge takes 0.1–3.5 lux within 30° of the terminator from day-half tiles passing
+  radial-facing at the nodes, 0.3–0.6% of the twilight the tall sky already gives there.
+- **The dimming** is 2.7% of the design sunlight, 2.0% in the synthesis's convention. Taken by extraction it gives
+  back 61–91 TW of electricity.
 - **Its costs.** No film, mass or sail-loading change. The attitude outside the service arc carries the roll. Along
   the kept orbits the attitude study finds it inside the clearance, the drive on the eccentricity cut to 0.48, and a
   momentum store of 1.0–2.3×10¹⁰ N·m·s a tile, 5–12 times the chosen one: with rotors 400 m in radius at 1,000 m/s,
-  0.7–1.6 Gt across the fleet against its 46 Gt. The forced eccentricity scales with the drive, so the layout's radii
-  move with it. The night half rolled alone cuts the drive less (0.55), takes a store 14–48 times the chosen one and
+  0.7–1.6 Gt across the fleet against its 46 Gt. Re-flown for the smaller push, the stack's radii move 350–500 km in
+  and its forced eccentricity falls to 0.053–0.094; the design's 1 km between strips stays inside the photon roll's
+  steering reach. The night half rolled alone cuts the drive less (0.55), takes a store 14–48 times the chosen one and
   leaves 8.7 W/m².
 - **What it needs proven:**
-  - the layout re-flown for the rolled push, its clearances through the full stack and the keeping's plane drift;
-  - a law that holds a few degrees of tilt through the nodes;
+  - the rolled law's own out-of-plane forces flown with the layout (its strip turn and the keeping's plane drift,
+    0.03 km a day of crossing height), and the steering through the full stack;
   - the films' infrared reflectance, measured on the coated film;
   - the films' flatness, since slopes of a few degrees spread the specular image;
   - the glow and the returns as an infrared forcing in the GCM, which sets their efficacy;
@@ -457,11 +481,11 @@ hemisphere (*screen*):
 
 ## Next work
 
-1. The rolled law's layout and nodes. The attitude study has flown both roll laws along the kept orbits (push,
-   store, clearance). Next: the layout re-flown for the rolled push (ring_layout with the law's drive, about
-   20 minutes), the keeping's slow plane drift under it (0.03–0.04 km a day of crossing height), and a law that
-   keeps a few degrees of tilt through the nodes, so the day half's tiles keep their reflections off the night's
-   edge.
+1. The rolled law's own out-of-plane forces. The layout re-flown for the law's push (ring_layout_rolled, 13 October)
+   scales the radial-facing tile's sail force by the drive; the roll's out-of-plane pushes, which turn the strips
+   by about 0.001° a day and drift the crossing heights by 0.03 km a day along the kept orbits, are next in the
+   flights, with the keeping that holds them. The tilt through the nodes is set aside: it breaks the clearance, and
+   the light it would take off the night's edge is under 1% of the twilight there.
 2. In the atmosphere domain: the glow and the returns as an infrared forcing in the GCM, night side included; the
    Moon's outgoing infrared with clouds; and whether the annulus may pass 250–400 nm along its paths above the
    limb.

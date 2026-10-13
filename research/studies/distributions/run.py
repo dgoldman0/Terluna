@@ -68,8 +68,8 @@ BOUND = {
     'sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='81224da069061a152df03ae4404654efcdab429a',
-        sha256='c1c18206e0acd88ebca4b7bcd98eeea7c6fb74664d40720a85643c2b918d429b',
+        blob='919093f48c70dd802dae839043f360ff0363e9ce',
+        sha256='847f49fe8832c12d4568088f5313ee2ce6661a39729ce1a5886347de510f0ac7',
         note="The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage "
              'recovery and the natural cycle kept beside them.'),
     'industry_md': dict(
@@ -82,8 +82,8 @@ BOUND = {
     'phosphorus': dict(
         path='resources/results/phosphorus.json', schema='terluna.resources.phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='34f14d047d9276de9040949f12df3515ef899906',
-        sha256='5733272203ada934efb6ba843fd6b36010dcb3b366d8743a2206faa039fb49be',
+        blob='8808d22617ba1d8704d43dedaed7f2fecc5de3e4',
+        sha256='1f290bf55c6530a9c5530e904efe3f14dda3757ac5bb8f9fe3c6487807257965',
         note='The energy to lift material to the sky towns at 10 km.'),
     'ecology_people': dict(
         path='biosphere/ecology/results/people.json', schema='terluna.biosphere.ecology-people/1',
@@ -94,15 +94,15 @@ BOUND = {
     'living_light': dict(
         path='research/studies/living_light/results/living_light.json', schema='terluna.research.living-light/1',
         branch='main', worktree='terluna', commit=None,
-        blob='5d7867aa0f2031d1b43bf29e55dad04527f6449f',
-        sha256='fd3e984da4f7d12cfb00dd7ce2425f931a7114899d7e358ab86f4f72d976142f',
+        blob='7cc016895664875758b86115f7fbf820d0f29649',
+        sha256='eec656eabec411d3198f69ae27a41f371ef8a3ffcb19fa6caca957f62a8153e9',
         note='Land under a light-polluted sky a person by home and lighting design, the metropolis and residents '
              'aloft; lamp hours by home; the dark belt.'),
     'sky_ecology': dict(
         path='research/studies/sky_ecology/results/sky_ecology.json', schema='terluna.research.sky-ecology/1',
         branch='main', worktree='terluna', commit=None,
-        blob='7add4ac51f7159492b27fff1f879067315584ac8',
-        sha256='479fcc2558ecaa290a823e90facf24af8cb10160d19767f83160facffbbcefbe',
+        blob='d756a5221a872a74d9c4f2671a218e7016a5a824',
+        sha256='53d6e48a9ef7889b36650404428f1dd150e0149a828ec505245e757aed26a7e3',
         note="Aerophyte cover and the encounter rule for bodies on the same wind tracks."),
     'places': dict(
         path='research/studies/joint_synthesis/results/places.json',

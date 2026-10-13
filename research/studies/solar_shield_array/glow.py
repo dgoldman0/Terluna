@@ -49,15 +49,17 @@ OUT = HERE/'results'/'glow.json'
 SCHEMA = 'terluna.research.fleet-glow/1'
 HEAT = HERE/'results'/'array_heat.json'
 LAYOUT = HERE/'results'/'ring_layout.json'
+LAYOUT_ROLLED = HERE/'results'/'ring_layout_rolled.json'
 LEDGER = HERE/'results'/'integrated_ledger.json'
 ATTITUDE = HERE/'results'/'attitude_schemes.json'
 FILMS = ROOT/'protection'/'spectra'/'annulus_film.json'
 FIRST = ROOT/'provisioning'/'results'/'first_screen.json'
 NIGHT = ROOT/'illumination'/'fleet_light'/'results'/'night_light.json'
 SOURCES = HERE/'glow_sources.json'
+SKY = ROOT/'illumination'/'sky'/'results'/'solved_sky.json'
 MIDDLE = ROOT/'atmosphere'/'middle_atmosphere'/'results'
 COLUMNS = ('moon_1.2atm_titania_stack', 'moon_1.2atm_titania_stack_ts298')
-PRODUCTS = (HEAT, LAYOUT, LEDGER, ATTITUDE, FILMS, FIRST, NIGHT, SOURCES)
+PRODUCTS = (HEAT, LAYOUT, LEDGER, ATTITUDE, FILMS, FIRST, NIGHT, SOURCES, LAYOUT_ROLLED)
 OPTICAL = tuple(sw.SOURCES/n for n in af.INPUTS)
 
 DESIGN = dict(
@@ -71,6 +73,8 @@ DESIGN = dict(
     # The fleet's geometry and attitude (sourced): the shingle tilt of ring_bundle_run, the service arc, roll and ramp
     # of attitude_schemes, and its pitch envelope.
     shingle_deg=1.5, service_half_angle_deg=25., roll_ramp_deg=30., roll_deg=80., pitch_envelope_deg=[-3., 6.],
+    # The tilt through the nodes, as attitude_schemes sets it: in full within 10 degrees of each node, out by 20.
+    node_window_deg=[10., 20.],
     # Sampling (numerical choices).
     samples_per_ring=360, sun_samples=1440, sun_bin_km=[100., 50.], return_ring_stride=8, return_sample_stride=2,
     cap_nodes=[14, 28], landing_table=181,
@@ -585,8 +589,11 @@ def ramp(x, a, b):
 def roll_law(phase, law, chi_deg=None):
     """Roll about the line of tile centres (rad) at each phase from the sunward crossing. 'night': the night half
     only, ramped from the nodes; 'outside_service': attitude_schemes' rolled law, zero in the service arc and at the
-    nodes, one sign on the day half and the other on the night half, with cosine ramps."""
+    nodes, one sign on the day half and the other on the night half, with cosine ramps; 'outside_service_node_<deg>':
+    the same roll, with the tilt through the nodes that node_tilt gives."""
     chi = math.radians(DESIGN['roll_deg'] if chi_deg is None else chi_deg)
+    if law.startswith('outside_service_node_'):
+        law = 'outside_service'
     a = np.abs(phase)
     s, w = math.radians(DESIGN['service_half_angle_deg']), math.radians(DESIGN['roll_ramp_deg'])
     night = chi*ramp(a-np.pi/2, 0., w)
@@ -598,6 +605,18 @@ def roll_law(phase, law, chi_deg=None):
         day = -chi*ramp(a, s, s+w)*ramp(np.pi/2-a, 0., w)
         return np.where(a <= np.pi/2, day, night)
     raise ValueError(law)
+
+
+def node_tilt(phase, law):
+    """attitude_schemes' pitch through the nodes for an 'outside_service_node_<deg>' law (rad): the tilt toward the Sun
+    about the orbit normal where the roll passes through radial-facing, in full within the window's first angle of
+    each node and ramped out by its second; zero for every other law."""
+    if not law.startswith('outside_service_node_'):
+        return 0*phase
+    theta = math.radians(float(law.rsplit('_', 1)[1]))
+    lo, hi = (math.radians(x) for x in DESIGN['node_window_deg'])
+    off = np.abs(np.abs(phase)-np.pi/2)
+    return np.sign(np.sin(phase))*theta*(1-ramp(off, lo, hi))
 
 
 def rotate(x, axis, angle):
@@ -960,12 +979,16 @@ def film_bundle(spectrum, olr_w, q_col, ring, film_key, coat_key):
 
 
 def attitude(S, law='as_built', chi_deg=None, pitch_deg=0.):
+    """Each tile's normal under a law: pitched about the orbit normal (a constant pitch and the law's tilt through the
+    nodes) and then rolled about the line of tile centres, as attitude_schemes turns its frames."""
     chi = roll_law(S['phase'], law, chi_deg)
-    normal = rotate(S['normal'], S['v'], chi)
-    if pitch_deg:
+    pitch = node_tilt(S['phase'], law)+math.radians(pitch_deg)
+    normal = S['normal']
+    if np.any(pitch):
         h = np.cross(S['P'], S['v'])
         h = h/np.linalg.norm(h, axis=-1, keepdims=True)
-        normal = rotate(normal, h, np.full(chi.shape, math.radians(pitch_deg)))
+        normal = rotate(normal, h, np.broadcast_to(pitch, chi.shape))
+    normal = rotate(normal, S['v'], chi)
     return normal, chi
 
 
@@ -1095,8 +1118,27 @@ ANSWERS = [
 OWN_ECCENTRICITY = [
     ('night_roll_80_own_eccentricity', 'as_built', None, 'night', 80., 0., 'night_rolled_80_deg'),
     ('rolled_outside_service_80_own_eccentricity', 'as_built', None, 'outside_service', 80., 0., 'rolled_80_deg'),
+    ('rolled_outside_service_80_node_3_own_eccentricity', 'as_built', None, 'outside_service_node_3', 80., 0.,
+     'rolled_80_deg_node_3_deg'),
+    ('rolled_outside_service_80_node_6_own_eccentricity', 'as_built', None, 'outside_service_node_6', 80., 0.,
+     'rolled_80_deg_node_6_deg'),
+]
+# The rolled law on the layout re-flown for its push (ring_layout_rolled): the stack's radii and forced eccentricities
+# as that run lays them out, with the films the next answers would add.
+ROLLED_LAYOUT = [
+    ('rolled_outside_service_80_rolled_layout', 'as_built', None, 'outside_service', 80., 0., 'layout'),
+    ('rolled_outside_service_80_wide_gap_250_rolled_layout', 'wide_gap_250', None, 'outside_service', 80., 0., 'layout'),
+    ('rolled_outside_service_80_uv_mirror_outer_98_rolled_layout', 'uv_mirror_outer_98', None, 'outside_service', 80.,
+     0., 'layout'),
 ]
 SCHEME_OF_LAW = {'night': 'night_rolled_{:g}_deg', 'outside_service': 'rolled_{:g}_deg'}
+
+
+def scheme_of(law, chi):
+    """attitude_schemes' scheme for a rolled law at chi degrees, or None."""
+    if law.startswith('outside_service_node_'):
+        return f"rolled_{chi:g}_deg_node_{law.rsplit('_', 1)[1]}_deg"
+    return SCHEME_OF_LAW[law].format(chi) if law in SCHEME_OF_LAW else None
 
 
 def dimming(row, design_sun):
@@ -1154,13 +1196,14 @@ def costs(key, film, coat_key, law, chi, pitch, bundles, attitude_p):
                           T_sunward_one_K=b['T_sunward_one'], T_sunward_two_K=b['T_sunward_two'])
     out['by_ring'] = mass
     out['sail_loading'] = sail_loading(bundles, {ring: v['g_m2'] for ring, v in mass.items()})
-    if law in SCHEME_OF_LAW and chi:
-        name = SCHEME_OF_LAW[law].format(chi)
+    name = scheme_of(law, chi) if chi else None
+    if name:
         scheme = attitude_p['schemes'].get(name)
         if scheme:
             centred = attitude_p['schemes'].get('balanced_'+name)
             out['attitude_study'] = dict(
-                scheme=name, law='night half only' if law == 'night' else 'outside service, both halves',
+                scheme=name, law=('night half only' if law == 'night' else 'outside service, both halves'
+                                  + (', tilted through the nodes' if law.startswith('outside_service_node_') else '')),
                 eccentricity_drive_over_as_built=scheme['eccentricity_drive']['over_as_built'],
                 store_N_m_s_median_trim_25=scheme['store_N_m_s']['trim_0.25']['median'],
                 store_N_m_s_median_trim_25_centred_filter=(centred['store_N_m_s']['trim_0.25']['median']
@@ -1171,7 +1214,8 @@ def costs(key, film, coat_key, law, chi, pitch, bundles, attitude_p):
 
 def compute(verbose=True):
     """Every answer through the screen; returns the parts the product is built from."""
-    heat, layout, ledger, attitude_p, films_p, first_p, night_p, sources = (json.loads(p.read_text()) for p in PRODUCTS)
+    heat, layout, ledger, attitude_p, films_p, first_p, night_p, sources, layout_rolled = (
+        json.loads(p.read_text()) for p in PRODUCTS)
     top_of_air = ledger['requirements']['climate_top_of_air_W_m2']
     design_sun = top_of_air/4
     spectrum = solar_spectrum()
@@ -1204,14 +1248,19 @@ def compute(verbose=True):
         return bundles[key]
     SAIL['as_built'] = {ring: b['pressure_coefficient'] for ring, b in bundle('as_built', None).items()}
     geos, answers = {}, {}
-    cases = [(key, film, coat, law, chi, pitch, None) for key, film, coat, law, chi, pitch in ANSWERS]+OWN_ECCENTRICITY
+    cases = ([(key, film, coat, law, chi, pitch, None) for key, film, coat, law, chi, pitch in ANSWERS]
+             + OWN_ECCENTRICITY+ROLLED_LAYOUT)
     for key, film, coat, law, chi, pitch, scheme in cases:
         if scheme is None:
             S_case, fixed_case = S, fixed
             gkey = (law, chi, pitch)
         else:
-            drive = attitude_p['schemes'][scheme]['eccentricity_drive']['over_as_built']
-            rings_case = fleet_rings(layout, heat, ledger, drive)
+            if scheme == 'layout':                      # the re-flown layout carries the law's push in its flights
+                drive = layout_rolled['variant']['eccentricity_drive_over_as_built']
+                rings_case = fleet_rings(layout_rolled, heat, ledger)
+            else:
+                drive = attitude_p['schemes'][scheme]['eccentricity_drive']['over_as_built']
+                rings_case = fleet_rings(layout, heat, ledger, drive)
             S_case = fleet_samples(rings_case, DESIGN['samples_per_ring'])
             fixed_case = dict(fixed, front=projected_counts(rings_case, S_case), shadow=moon_shadow(S_case['P']),
                               sub_weight=S_case['r'].size/S_case['r'][sub].size)
@@ -1222,7 +1271,8 @@ def compute(verbose=True):
         b = bundle(film, coat)
         row = evaluate(S_case, fixed_case, b, geos[gkey], law, chi, pitch)
         if scheme is not None:
-            row['eccentricity'] = dict(scheme=scheme, drive_over_as_built=drive,
+            row['eccentricity'] = dict(scheme=scheme if scheme != 'layout' else 'ring_layout_rolled',
+                                       drive_over_as_built=drive,
                                        range=[float(rings_case['e'].min()), float(rings_case['e'].max())],
                                        perilune_km=[float((rings_case['a']*(1-rings_case['e'])).min()),
                                                     float((rings_case['a']*(1-rings_case['e'])).max())])
@@ -1247,7 +1297,7 @@ def compute(verbose=True):
                   f"back {row['sunlight_return_W_m2']['global']:4.2f}  dimming {row['dimming']['percent']:5.2f}%",
                   flush=True)
     return dict(products=dict(heat=heat, layout=layout, ledger=ledger, attitude=attitude_p, films=films_p,
-                              first=first_p, night=night_p), answers=answers, bundles=bundles, q_col=q_col, olr=olr,
+                              first=first_p, night=night_p, layout_rolled=layout_rolled), answers=answers, bundles=bundles, q_col=q_col, olr=olr,
                 olr_w=olr_w, rings=rings, S=S, fixed=fixed, spectrum=spectrum, geos=geos, design_sun=design_sun)
 
 
@@ -1268,7 +1318,7 @@ CODE = ['research/studies/solar_shield_array/glow.py', 'protection/model.py', 'p
 
 def input_files():
     from atmosphere.middle_atmosphere import fetch_inputs
-    files = list(PRODUCTS)+list(OPTICAL)+[fetch_inputs.path('whi2008_ref_solar_irradiance_ver2.dat')]
+    files = list(PRODUCTS)+[SKY]+list(OPTICAL)+[fetch_inputs.path('whi2008_ref_solar_irradiance_ver2.dat')]
     for name in COLUMNS:
         files += [MIDDLE/'profiles'/f'{name}.csv', MIDDLE/'cases'/f'{name}.json']
     return files
@@ -1331,8 +1381,8 @@ ASSUMPTIONS = [
 
 
 IR_BANDS_UM = [(5., 7.5), (7.5, 8.5), (8.5, 9.6), (9.6, 12.), (12., 15.), (15., 20.), (20., 25.), (25., 40.), (40., 125.)]
-RECOMMENDED = 'rolled_outside_service_80_own_eccentricity'
-NEXT = ('rolled_outside_service_80_wide_gap_250', 'rolled_outside_service_80_uv_mirror_outer_98')
+RECOMMENDED = 'rolled_outside_service_80_rolled_layout'
+NEXT = ('rolled_outside_service_80_wide_gap_250_rolled_layout', 'rolled_outside_service_80_uv_mirror_outer_98_rolled_layout')
 
 
 def film_summary(b, ring, heat, olr_w):
@@ -1359,6 +1409,23 @@ def film_summary(b, ring, heat, olr_w):
                 thermal=dict(normal_emissivity_at_film_K=dict(outer=e[0], moon_face=e[1], K=f['temperature_K']),
                              moon_infrared_normal_reflectance_one_layer=one['R_ir'], by_band=bands),
                 temperature_sunward_crossing_K=dict(one_layer=b['T_sunward_one'], two_layers=b['T_sunward_two']))
+
+
+def against_twilight(night_lux):
+    """The night light the films return, band by band from midnight, beside the Moon's own twilight there: the solved
+    sky's total horizontal illuminance for the design Moon's 1.2 atm column with the Sun at each band's edges below the
+    horizon (illumination/sky). The returns' share of the twilight is taken against the band's darker edge."""
+    rows = sorted(json.loads(SKY.read_text())['worlds']['moon_1.2atm']['samples'], key=lambda r: r['sun_deg'])
+    suns = np.array([r['sun_deg'] for r in rows])
+    lux = np.log(np.array([r['total_horizontal_lux'] for r in rows]))
+    edges = night_lux['by_angle_from_midnight_deg']['edges']
+    out = []
+    for lo, hi, returned in zip(edges[:-1], edges[1:], night_lux['by_angle_from_midnight_deg']['lux']):
+        deep, shallow = -(90.-lo), -(90.-hi)                 # the Sun's height at the band's two edges
+        sky = [float(np.exp(np.interp(x, suns, lux))) if x >= suns[0] else None for x in (deep, shallow)]
+        out.append(dict(from_midnight_deg=[lo, hi], sun_deg=[deep, shallow], returned_lux=returned,
+                        twilight_lux=sky, share_of_twilight=(returned/sky[0] if sky[0] else None)))
+    return out
 
 
 def build_product(c):
@@ -1491,7 +1558,8 @@ def build_product(c):
             recommended=dict(answer=RECOMMENDED, then=list(NEXT), heat_W_m2=rec['heat_total_W_m2'],
                              glow_W_m2=rec['glow_W_m2'], infrared_return_W_m2=rec['infrared_return_W_m2'],
                              sunlight_return_W_m2=rec['sunlight_return_W_m2'], dimming=rec['dimming'],
-                             costs=rec['costs'], night_lux=rec['night_lux_from_returns']),
+                             costs=rec['costs'], night_lux=rec['night_lux_from_returns'],
+                             night_lux_against_twilight=against_twilight(rec['night_lux_from_returns'])),
             records=records)),
         checks=checks)
 
