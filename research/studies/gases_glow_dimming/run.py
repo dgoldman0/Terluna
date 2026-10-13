@@ -271,6 +271,32 @@ def glow_dimming(runs, control, absorption, light):
         reaching_ground=dict(gcm_all_sky=gcm_ground, correlated_k_clear_sky_films_150_to_190_k=ck_ground))
 
 
+def made_up(runs, glow, light):
+    """What the plants' water design makes up: the rise in growth per litre of water the land evaporates that restores
+    the rain-fed growth, band by band, for the glow's part (the held point against the gases' run) and for the whole
+    plan (the held point against the design case). Rain-fed growth is the water transpired times the carbon fixed
+    per litre, so a rise of r in either factor (carbon per litre, or the transpired share of the evaporation) restores
+    a fall s in the evaporation when (1 + r)(1 + s) = 1."""
+    held, gases = glow['held'], runs['gases']
+    bands, out = light['land']['bands'], {}
+    def rise(s):
+        return 100.0 * (1.0 / (1.0 + s / 100.0) - 1.0)
+    for key in bands:
+        plan = held['means']['land_bands'][key]['evaporation_mm_day']['percent']
+        glow_part = 100.0 * ((1.0 + plan / 100.0) / (1.0 + gases['means']['land_bands'][key]['evaporation_mm_day']
+                                                       ['percent'] / 100.0) - 1.0)
+        out[key] = dict(evaporation_percent=dict(plan=plan, glow=glow_part),
+                        rise_percent=dict(plan=rise(plan), glow=rise(glow_part)))
+    def overall(which):
+        lost = [sum(bands[k]['rain_fed_gt_c'][e] * (1.0 - 1.0 / (1.0 + out[k]['rise_percent'][which] / 100.0))
+                    for k in bands) for e in (0, 1)]
+        grown = [sum(b['rain_fed_gt_c'][e] for b in bands.values()) for e in (0, 1)]
+        return [100.0 * (1.0 / (1.0 - lost[e] / grown[e]) - 1.0) for e in (0, 1)]
+    return dict(by_band=out, rise_percent=dict(plan=overall('plan'), glow=overall('glow')),
+                reference='CAM fixes 2-6 times as much carbon per litre as C3 and 1-5 times as much as C4 '
+                          '(Hartzell, Bartlett & Porporato 2018)')
+
+
 def results():
     data = {p: load(p, s) for p, s in INPUTS.items()}
     light = data['research/studies/light_limitation/results/light_limitation.json']
@@ -302,6 +328,7 @@ def results():
     _, psha = series(*CONTROL)
     hashes[PROGRESS.format(CONTROL[0])] = psha
     glow = glow_dimming(runs, control, absorption, light)
+    glow['made_up_by_plants'] = made_up(runs, glow, light)
     # The other pairs from the gases' run, in proportion to their warming.
     weighed = ledgers['gases']['pairs_weighed']
     g = runs['gases']

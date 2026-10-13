@@ -227,7 +227,9 @@ synthesis ranks two items first from the three domains together; they lead this 
    ([gases, glow and dimming](studies/gases_glow_dimming/README.md)), finds the held pair's dimming keeps the design
    temperature and takes 0.9% of the rain, about half Earth's response. The glow's infrared heats the upper air: it
    needs 0.71 of its watts in dimming, about 2.0% of the design sunlight, and takes 2.4% of the rain with the
-   temperature held.
+   temperature held. The author set the glow's further answers aside: the plants' water design makes up that rain,
+   with 3.2% more carbon per litre over the rain-fed land, and the 0.71 goes into the glow study and the synthesis's
+   dimming at the next integration.
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band, in
    minutes.
 3. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,

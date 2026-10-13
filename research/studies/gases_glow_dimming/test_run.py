@@ -146,3 +146,23 @@ def test_the_pairs_scale_with_their_warming(product):
         assert close(p['rain_percent']['all'], k * middle['rain_percent']['all'], rel=2e-3)
     assert product['pairs']['low']['rain_percent']['all'] > middle['rain_percent']['all'] \
         > product['pairs']['earth_2019']['rain_percent']['all']
+
+
+def test_the_plants_water_design_restores_what_the_evaporation_loses(product):
+    """Each band's rise in growth per litre undoes its fall in evaporation, the glow's part is the held point against
+    the gases' run, and the whole Moon's rise lies among the bands' that carry its growth."""
+    m = product['glow']['made_up_by_plants']
+    held, gases = product['glow']['held']['means'], product['runs']['gases']['means']
+    for key, b in m['by_band'].items():
+        for which in ('plan', 'glow'):
+            assert close((1 + b['rise_percent'][which] / 100) * (1 + b['evaporation_percent'][which] / 100), 1.0,
+                         rel=1e-4)
+        assert close(b['evaporation_percent']['plan'], held['land_bands'][key]['evaporation_mm_day']['percent'],
+                     rel=1e-4)
+        assert close((1 + b['evaporation_percent']['glow'] / 100)
+                     * (1 + gases['land_bands'][key]['evaporation_mm_day']['percent'] / 100),
+                     1 + b['evaporation_percent']['plan'] / 100, rel=1e-4)
+    wet = [m['by_band'][k]['rise_percent']['glow'] for k in ('0-15', '15-30', '30-45')]
+    for e in (0, 1):
+        assert min(wet) < m['rise_percent']['glow'][e] < max(wet)
+        assert m['rise_percent']['glow'][e] < m['rise_percent']['plan'][e]

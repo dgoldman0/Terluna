@@ -7,7 +7,10 @@
       "doi_or_url": "https://doi.org/10.1002/jgrd.50868",
       "use": "README: the comparison of the gases' rain response with Earth's G1 models, 0.76-1.38% of the rain for each 1% of dimming (4.5 +/- 1.3% at the twelve models' mean 4.22% solar reduction), and the fast response of the rain to CO2's heating of the air",
       "values_used": {
-        "global_precipitation_cut_percent": [3.2, 5.8],
+        "global_precipitation_cut_percent": [
+          3.2,
+          5.8
+        ],
         "mean_solar_reduction_percent": 4.22
       },
       "access": "full text read 2026-10-13 for the light limitation study (research/studies/light_limitation/sources.json): Table 1, the abstract and sections 3 and 4, where the precipitation's reduction is controlled by the surface energy budget and correlates with the fast response to 4xCO2"
@@ -27,6 +30,23 @@
       "use": "extract.py: pr is the large-scale (code 142) and convective (code 143, prc) rain together, so the large-scale rain is pr less prc; ntr, rst and rlut are the net, solar and thermal fluxes at the top of the air, rss, rls and nbr at the surface, hfls and hfss the latent and sensible fluxes, all positive downward",
       "values_used": {},
       "access": "source read 2026-10-13: the variable table (line 63 for prc) and the derived pr (lines 1582-1585)"
+    },
+    {
+      "key": "hartzell2018_photo3",
+      "citation": "Hartzell S, Bartlett MS, Porporato A 2018, Unified representation of the C3, C4, and CAM photosynthetic pathways with the Photo3 model, Ecological Modelling 384, 173-187",
+      "doi_or_url": "https://arxiv.org/abs/1804.10667",
+      "use": "README and run.py's made_up reference: the room the plants' water design has, CAM's photosynthetic water-use efficiency 2-6 times C3's and 1-5 times C4's depending on conditions, with C4 above C3",
+      "values_used": {
+        "cam_over_c3": [
+          2,
+          6
+        ],
+        "cam_over_c4": [
+          1,
+          5
+        ]
+      },
+      "access": "preprint text read 2026-10-13 where it compares the pathways: the introduction and section 3.3's 40-day drydown, with its figure 6"
     }
   ]
 }

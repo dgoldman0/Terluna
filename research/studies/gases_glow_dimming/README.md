@@ -57,6 +57,12 @@ atmosphere domain's correlated-k tables are cached.
   part through the rain, 1.8–2.6%, is more than three times the gases'. Each W/m² taken off the glow's infrared returns
   about 0.46% of the rain; the glow study's further answers (the annulus absorber, the ultraviolet mirror, the wider
   gap) are the levers.
+- **The plants make it up.** The author set the glow's further answers aside on 13 October, with the plants' water
+  design to make up the rain the glow takes. Rain-fed growth is the water the plants pass times the carbon they fix
+  per litre, so plants that fix 3.2% more carbon per litre, or take a 3.2% larger share of what the land evaporates,
+  restore the glow's part, and 4.1% the whole plan's. The dry bands need more: 2.0% within 15° of the equator, 4.0% at
+  15–30°, 5.6% at 30–45° and 11% at 45–60°. CAM plants on Earth fix 2–6 times as much carbon per litre as C3 plants
+  (Hartzell et al. 2018), so the design has room to spare.
 
 ## The runs against the design case
 
@@ -79,6 +85,14 @@ atmosphere domain's correlated-k tables are cached.
 | Gases | −1.7% | +0.1% | +0.3% | +1.1% | +3.3% | +1.3% |
 | Glow, watt for watt | −7.0% | −6.5% | −11.3% | −14.0% | +4.5% | +4.6% |
 | Glow, held | −3.9% | −3.5% | −5.9% | −9.2% | +4.1% | −3.6% |
+
+| What the plants make up, by band | 0–15° | 15–30° | 30–45° | 45–60° | All rain-fed land |
+|---|---|---|---|---|---|
+| Evaporation over land, the glow's part | −2.0% | −3.9% | −5.3% | −9.8% | |
+| More carbon per litre that restores it | +2.0% | +4.0% | +5.6% | +10.9% | +3.2% |
+| The same for the whole plan, gases and glow | +3.4% | +4.1% | +6.4% | +10.5% | +4.1% |
+
+The poleward bands' small rains change by a few per cent either way and carry little growth.
 
 The cloud decks are the climatology's: the low deck the most cover among the layers below half the surface pressure,
 the high deck above it. The poleward bands rain little, so their changes move little water. The held point, at 1.80%
@@ -163,13 +177,13 @@ ground gets almost none of it.
 
 - Carry the glow's efficacy into the glow study and the domain synthesis's dimming ledger at the next integration
   (research/array-industry): about 2.0% of the design sunlight for the recommended answer.
-- Weigh the glow's further answers against its rain: each W/m² of its infrared costs about 0.46% of the rain.
+- Build the water design into ecology's plants: the carbon per litre and the transpired share by band above.
 
 ## Files
 
 | File | Holds |
 |---|---|
-| [run.py](run.py) | The comparison: the runs' surface means, layers and first means, the glow's dimming that holds the temperature, the rain and the growth there, and the pairs |
+| [run.py](run.py) | The comparison: the runs' surface means, layers and first means, the glow's dimming that holds the temperature, the rain and the growth there, what the plants make up, and the pairs |
 | [extract.py](extract.py) | The layers and first 3-day means read from the GCM's output |
 | [glow_absorption.py](glow_absorption.py) | The spectral check of where the glow and the returned infrared are absorbed |
 | [test_run.py](test_run.py) | Their binding, regeneration and arithmetic |

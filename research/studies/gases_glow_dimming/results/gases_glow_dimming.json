@@ -2,11 +2,11 @@
   "schema": "terluna.research.gases-glow-dimming/1",
   "producer": {
     "files": {
-      "research/studies/gases_glow_dimming/run.py": "9e15a8e5785d5785fd0961d4ab127df52002a14821ada59b219f26e8bbcef5b3"
+      "research/studies/gases_glow_dimming/run.py": "3ad2b07a44dcd71f2db75d556509ec4eeb5a97678904c57fd01efc0cc1f5a7e7"
     },
     "inputs": {
-      "research/studies/light_limitation/results/light_limitation.json": "817949d493eb1795d60d039c98ddb5008992b739c2f73d1b7c1a6e93227042a9",
-      "research/studies/domain_synthesis/results/ledgers.json": "2de839ad2be8820efc9bf1d3e085468dc83ba030d5c8702e7e73b5f3861d47d5",
+      "research/studies/light_limitation/results/light_limitation.json": "c9169e7fd39b4e1b6095cb004f9f9f5a812eb5c4ed3b627e34f6e73b09419e0e",
+      "research/studies/domain_synthesis/results/ledgers.json": "88339c7e9df8686db044d9646e1f798c9fa27fe536e9f414ff9db1176613e7f5",
       "research/studies/gases_glow_dimming/results/glow_absorption.json": "e6230f2334fb8aedf97acb31ef78107f80f4bcdb1fbb4985093a83e0bc09406e"
     },
     "ignored_inputs": {
@@ -1848,6 +1848,81 @@
         0.019796,
         0.0249503
       ]
+    },
+    "made_up_by_plants": {
+      "by_band": {
+        "0-15": {
+          "evaporation_percent": {
+            "plan": -3.28327,
+            "glow": -1.97783
+          },
+          "rise_percent": {
+            "plan": 3.39473,
+            "glow": 2.01774
+          }
+        },
+        "15-30": {
+          "evaporation_percent": {
+            "plan": -3.9611,
+            "glow": -3.8517
+          },
+          "rise_percent": {
+            "plan": 4.12448,
+            "glow": 4.006
+          }
+        },
+        "30-45": {
+          "evaporation_percent": {
+            "plan": -5.97477,
+            "glow": -5.33904
+          },
+          "rise_percent": {
+            "plan": 6.35443,
+            "glow": 5.64017
+          }
+        },
+        "45-60": {
+          "evaporation_percent": {
+            "plan": -9.47491,
+            "glow": -9.80879
+          },
+          "rise_percent": {
+            "plan": 10.4666,
+            "glow": 10.8755
+          }
+        },
+        "60-75": {
+          "evaporation_percent": {
+            "plan": 3.8661,
+            "glow": 0.883799
+          },
+          "rise_percent": {
+            "plan": -3.72219,
+            "glow": -0.876057
+          }
+        },
+        "75-90": {
+          "evaporation_percent": {
+            "plan": -3.1109,
+            "glow": -5.61557
+          },
+          "rise_percent": {
+            "plan": 3.21078,
+            "glow": 5.94968
+          }
+        }
+      },
+      "rise_percent": {
+        "plan": [
+          4.05043,
+          4.10737
+        ],
+        "glow": [
+          3.16428,
+          3.23232
+        ]
+      },
+      "reference": "CAM fixes 2-6 times as much carbon per litre as C3 and 1-5 times as much as C4 (Hartzell, Bartlett & Porporato 2018)"
     }
   },
   "pairs": {
