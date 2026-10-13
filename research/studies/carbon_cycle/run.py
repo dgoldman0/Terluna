@@ -87,10 +87,11 @@ DESIGN_CO2_PPM = 400.0          # CO2 held at the level the planned climate was 
 DESIGN_SURFACE_K = 294.9
 LAND_AIR_K = 294.3
 SEA_SURFACE_K = 297.0
-# The held methane level: the author's rule of 12 October, to take whichever level keeps the world closest to the one
-# already planned, applied on domain/ecology in commit f38c9a9 (research/studies/domain_synthesis, gases.held). Its
-# working case: biology at the sources cuts 90% of methane's sources and contactors in open air oxidize the rest to CO2.
-HELD_METHANE_PPM = 0.3
+# The held methane level: the author's choice of 13 October, Earth's present methane with a third of its N2O, the
+# balanced middle of three pairs weighed (domain/ecology, research/studies/domain_synthesis, gases.held). Its working
+# case: biology at the sources cuts 90% of methane's sources, and the soils and contactors in open air oxidize the rest
+# to CO2.
+HELD_METHANE_PPM = 1.8663
 HELD_SOURCE_CUT = 0.9
 
 # --- Weathering --------------------------------------------------------------------------------------------------
@@ -1044,9 +1045,9 @@ def assumptions(data, st):
         ('co2_ppm', DESIGN_CO2_PPM, 'design choice',
          'held at the level the planned climate was run with: 48.6 Pa in the design\'s 121.6 kPa of dry air'),
         ('methane_held_ppm', HELD_METHANE_PPM, 'design choice',
-         'the author\'s rule of 12 October, to take the level that keeps the world closest to the one already '
-         'planned (domain/ecology f38c9a9); 90% of the sources cut at the sources, the rest oxidized by the soils '
-         'and by contactors in open air'),
+         'the author\'s choice of 13 October, Earth\'s present methane, the balanced middle of three pairs weighed '
+         '(domain/ecology, domain synthesis, gases.held); 90% of the sources cut at the sources, the rest oxidized '
+         'by the soils and by contactors in open air'),
         ('methane_soils_case_ppm', [c['steady_ppm'] for c in m['central']], 'project product',
          'no cut and no removal: the gas ledger\'s central sources at the blend\'s two ends over the soils\' central '
          'sink; the central corner takes their mean'),
@@ -1172,7 +1173,7 @@ def corner_summary(p):
 
 
 def questions(held, free):
-    """The four answers, gathered from the runs' summaries (methane held at 0.3 ppm unless named)."""
+    """The four answers, gathered from the runs' summaries (methane held at 1.9 ppm unless named)."""
     holds = {c: dict(start_year=free[f'{c}/held/natural']['start_year'],
                      years_to=free[f'{c}/held/natural']['years_to'],
                      co2_ppm_at_10000=free[f'{c}/held/natural']['co2_ppm']['10000'],

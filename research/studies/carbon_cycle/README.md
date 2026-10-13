@@ -13,19 +13,20 @@ reading rule and assumptions); [sources.json](sources.json) records each source 
 The parameters are the project's present ones: the corrected design case (294.9 K, the air over land at 294.3 K, the
 sea surface at 297.0 K), the drainage's 265 mm a year of runoff over the land, C′'s 23.4 million km² of dry land with
 the food blend, the seas and lakes at 28% water with the rain-fed lakes on 10.3% of the Moon, 8 billion people, CO2
-held at 400 ppm (48.6 Pa) and methane held at 0.3 ppm or left at the soils' steady state. The corners pair the low
-ends of every input, their middles and their high ends (the reading rule names them). The author takes carbon imports
-as part of the plan, so the answers measure the imports and the local return paths that keep the steady state.
+held at 400 ppm (48.6 Pa) and methane held at 1.9 ppm, the author's choice of 13 October, or left at the soils' steady
+state. The corners pair the low ends of every input, their middles and their high ends (the reading rule names them).
+The author takes carbon imports as part of the plan, so the answers measure the imports and the local return paths
+that keep the steady state.
 
 ## What it finds
 
 - **400 ppm needs holding.** Left alone once the biosphere is grown (year 922–940), the air falls below the
-  plants' comfortable 43 Pa in 135–377 years and to the 29 Pa that diverse ecosystems need in 749–2,067 years.
+  plants' comfortable 43 Pa in 135–376 years and to the 29 Pa that diverse ecosystems need in 749–2,070 years.
 - **Holding it takes 0.14–0.39 Gt C a year of return or import at year 10,000.** Kilns on the carbonate as it forms
   return 0.04–0.07 Gt C of it for 19–43 GW, and 0.05–0.11 Gt C for 22–58 GW with the magnesite route; dredging for
   phosphorus returns 1–45 Mt C. The lakes' and wet margins' organic burial is the largest sink, and most of it has no
   return yet.
-- **The build brings 983–1,352 Gt C by the year the biosphere is grown** (methane held, magnesium dissolved), the air's
+- **The build brings 985–1,354 Gt C by the year the biosphere is grown** (methane held, magnesium dissolved), the air's
   526 among it, and the steady state then imports 0.09–0.27 Gt C a year, 2,800–8,600 kg C/s, unless more of the burial
   comes back.
 - **Burial leaves 0.36–0.85% more oxygen in the air by year 10,000**, 0.08–0.18 kPa, about 0.04–0.09% a thousand years.
@@ -39,9 +40,9 @@ sky's stocks follow the CO2 study's leaf rate down to its compensation point, re
 
 | Corner | Grown in year | Years to 43 Pa (354 ppm) | 35 Pa (288 ppm) | 29 Pa (239 ppm) | 20 Pa (165 ppm) | CO2 in year 10,000 | Land carbon given back |
 |---|---|---|---|---|---|---|---|
-| Low | 940 | 377 | 1,153 | 2,067 | 4,210 | 70 ppm | 242 Gt C |
-| Central | 932 | 238 | 748 | 1,458 | 2,913 | 42 ppm | 268 Gt C |
-| High | 922 | 135 | 417 | 749 | 1,498 | 10 ppm | 268 Gt C |
+| Low | 940 | 376 | 1,153 | 2,070 | 4,221 | 70 ppm | 242 Gt C |
+| Central | 932 | 238 | 748 | 1,458 | 2,918 | 42 ppm | 268 Gt C |
+| High | 922 | 135 | 417 | 749 | 1,499 | 11 ppm | 268 Gt C |
 
 The thresholds are the CO2 study's plant table: comfortable from 43 Pa, productive C3 farming at 35 Pa, diverse
 ecosystems at 28–30 Pa (29 here), the glacial hard floor at 20 Pa. With methane at the soils' steady state the central
@@ -52,7 +53,7 @@ answer; the next section sizes them.
 
 To hold 400 ppm with no steady import, the Moon must return its whole net sink, the carbon its reservoirs take from
 the air each year. In the held runs the kilns calcine the carbonate as it forms and the deltas are dredged for the
-people's phosphorus; the import is what they leave (methane held at 0.3 ppm):
+people's phosphorus; the import is what they leave (methane held at 1.9 ppm):
 
 | Corner | Magnesium | Year | Net sink | Kilns | Dredged | Import | Kilns' power, minimum–best kilns |
 |---|---|---|---|---|---|---|---|
@@ -101,9 +102,9 @@ Earth's deltaic organic content of 0.7–1.5%. Returning all of the lakes' buria
 delta sediment a year, at 4–39 GW of fuel by resources' dredging energy. The seas bury 0.003 Gt C a year at Earth's
 rates for their shelves and deep floors, an upper bound for waters the rivers leave short of phosphorus.
 
-The remainder is the import: 0.09–0.27 Gt C a year at year 10,000. Methane held at 0.3 ppm costs no carbon once there:
-biology at the sources oxidizes 57–76 Tg a year to CO2, the soils take 0.9 Tg and the contactors 5.4–7.6 Tg, passing
-1.0–1.4% of the air a year.
+The remainder is the import: 0.09–0.27 Gt C a year at year 10,000. Methane held at 1.9 ppm costs no carbon once there:
+biology at the sources oxidizes 57–76 Tg a year to CO2, the soils take 5.4–5.5 Tg and the contactors 0.8–3.0 Tg,
+passing 0.03–0.09% of the air a year.
 
 ### The carbon the build imports
 
@@ -111,21 +112,21 @@ By the year the biosphere is grown the Moon holds, in Gt C (held methane, magnes
 
 | Corner | Grown in year | All | The air's CO2 | Plants and soils | Sky | People | Methane | Lakes' and seas' DIC | Organic sediments | Peat | Dry-soil carbonate |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| Low | 940 | 983 | 526 | 272 | 0.3 | 2.2 | 0.4 | 105 | 69 | 8.0 | 1.1 |
-| Central | 932 | 1,142 | 526 | 275 | 4.3 | 8.6 | 0.4 | 193 | 113 | 20 | 2.5 |
-| High | 922 | 1,352 | 526 | 268 | 10.3 | 41 | 0.4 | 324 | 129 | 50 | 3.8 |
+| Low | 940 | 985 | 526 | 272 | 0.3 | 2.2 | 2.2 | 105 | 69 | 8.0 | 1.1 |
+| Central | 932 | 1,145 | 526 | 275 | 4.3 | 8.6 | 2.5 | 193 | 113 | 20 | 2.5 |
+| High | 922 | 1,354 | 526 | 268 | 10.3 | 41 | 2.5 | 324 | 129 | 50 | 3.8 |
 
-- **The stocks the build fills** (the air, the plants and soils, the sky, people and methane) come to 800–845 Gt C; the
+- **The stocks the build fills** (the air, the plants and soils, the sky, people and methane) come to 802–847 Gt C; the
   sinks take another 183–507 Gt C meanwhile, most of it into the fresh waters' bicarbonate and the lakes' sediments.
-  Beyond the air the build brings 458–826 Gt C (central 617), at up to 3.8–5.4 Gt C a year around year 34, when the
+  Beyond the air the build brings 460–828 Gt C (central 619), at up to 3.8–5.4 Gt C a year around year 34, when the
   forests grow fastest.
 - **The steady import** after the grown year runs at 0.11–0.27 Gt C a year at year 10,000 with magnesium dissolved
   (central 0.186, 5,900 kg C/s) and 0.09–0.21 with the magnesite route (central 0.152, 4,800 kg C/s): 983–2,671 Gt C
   between the grown year and year 10,000, two to five times the air's own CO2.
-- **Variants.** Methane at the soils' steady state (25 ppm, central) puts 22–29 Gt C more into the build. Seas salted
+- **Variants.** Methane at the soils' steady state (25 ppm, central) puts 20–27 Gt C more into the build. Seas salted
   at delivery arrive with 261 Gt C of dissolved carbon, start at Earth's saturation and calcify from the first year,
   and then need 0.150–0.154 Gt C a year (central). Soils that build five times slower are grown only in year 4,655, and
-  the build then holds 1,897 Gt C, most of the difference in the sinks.
+  the build then holds 1,899 Gt C, most of the difference in the sinks.
 
 ### Oxygen
 
@@ -148,7 +149,7 @@ reduced carbon whose burning takes up the oxygen that burial leaves (resources' 
 | Reservoir or flux | Basis | Evidence | Range |
 |---|---|---|---|
 | Air CO2 | 400 ppm of the reference air's 1.094×10²⁰ mol: 526 Gt C | project product | held, or free from the grown year |
-| Methane | sources from the gas ledger (wild 58.9 Tg a year with the land's growth, people 4.1–25.7), the soils' central uptake, the held case's 90% cut at the sources and removal to 0.3 ppm | project product and design choice | 21.6–29 ppm at the soils' steady state |
+| Methane | sources from the gas ledger (wild 58.9 Tg a year with the land's growth, people 4.1–25.7), the soils' central uptake, the held case's 90% cut at the sources and removal to 1.9 ppm | project product and design choice | 21.6–29 ppm at the soils' steady state |
 | Silicate weathering | Dessert's basalt law at 294.3 K over the land's discharge, 0.109 Gt C a year at the catchment rate; developed soils start at 1, √10 or 10 times it and age as (1 + t/age)^−0.61 | Earth measurement and design guess | 0.109–1.09 Gt C a year at the seeding, 0.11–0.21 at year 10,000 |
 | Cations | the highland soil's Ca, Mg, Na and K in proportion | lunar measurement | Ca 65%, Mg 33%, Na and K 2% of the alkalinity |
 | Land plants and soils | Earth's biome stocks (IPCC TAR Table 3.2, WBGU) on the rain regions: forest where the wet bands get 2 mm a day, savanna on the rest of the wet land, desert on the fog desert and polar dry land; C′'s fields and towns at cropland stocks, the pasture at savanna stocks | Earth inventory with a design mapping | 282–290 Gt C at maturity |
@@ -206,7 +207,7 @@ published 25 °C values.
 - **The waters' carbon.** Resources' screen gives the seas and lakes at Earth's dissolved carbon 0.63–0.72 of the air's
   CO2. Fresh seas start with 3 Gt C and gain weathering's: 105–324 Gt C by the grown year and 470–1,106 Gt C by year
   10,000 with magnesium dissolved; salted at delivery they hold 261 Gt C at once.
-- **Consistent records.** The CO2 study's 200–2,100 years to 28 Pa matches the free runs' 749–2,067 years to 29 Pa,
+- **Consistent records.** The CO2 study's 200–2,100 years to 28 Pa matches the free runs' 749–2,070 years to 29 Pa,
   and ecology's finding 17 (fresh seas undersaturated until weathering supplies alkalinity) gets its timing: the seas
   pass calcite saturation by year 1,000–3,000.
 
