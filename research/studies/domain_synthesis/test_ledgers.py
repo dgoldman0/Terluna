@@ -94,6 +94,31 @@ def test_the_held_levels_take_the_deep_columns_pair_and_their_removal_adds_up(pr
             assert close(c['atmosphere_share_per_year'][e], left / (L.HELD_N2O_PPM * n['tg_n_per_ppb'] * 1e3))
 
 
+def test_the_weighed_pairs_trade_dimming_for_removal_and_the_held_one_is_the_middle(product):
+    """The dimming answers the warming with sunlight the Moon would have absorbed; from the low pair to Earth's 2019
+    air the dimming grows while N2O's decomposition shrinks and starts later, and the held pair is the middle one."""
+    g = product['gases']
+    h, w = g['held'], g['pairs_weighed']
+    pop = json.loads((L.ROOT / 'provisioning/results/population.json').read_text())
+    absorbed = (1.0 - L.DESIGN_PLANETARY_ALBEDO) * pop['heat']['design_sunlight_w_m2']
+    assert close(h['dimming_basis']['absorbed_sunlight_w_m2'], absorbed)
+    assert close(h['added_dimming_percent'], h['forcing_w_m2']['allsky'] / absorbed * 100.0)
+    assert (h['methane_ppm'], h['n2o_ppm']) == (w['middle']['methane_ppm'], w['middle']['n2o_ppm'])
+    assert close(w['middle']['added_dimming_percent'], h['added_dimming_percent'])
+    low, mid, earth = w['low'], w['middle'], w['earth_2019']
+    assert low['added_dimming_percent'] < mid['added_dimming_percent'] < earth['added_dimming_percent']
+    for cut in ('0.95', '0.5'):
+        for e in (0, 1):
+            assert low['n2o'][cut]['decomposition_tw'][e] > mid['n2o'][cut]['decomposition_tw'][e] > \
+                earth['n2o'][cut]['decomposition_tw'][e]
+            assert low['n2o'][cut]['years_to_reach_from_none'][e] < mid['n2o'][cut]['years_to_reach_from_none'][e] < \
+                earth['n2o'][cut]['years_to_reach_from_none'][e]
+    for cut in ('0.9', '0.5'):
+        assert mid['methane'][cut] == earth['methane'][cut]                # the same methane
+        assert all(a > b for a, b in zip(low['methane'][cut]['atmosphere_share_per_year'],
+                                         mid['methane'][cut]['atmosphere_share_per_year']))
+
+
 def test_people_losses_are_dredged_back(product):
     p = product['phosphorus']
     for land in p['by_land_loss'].values():

@@ -2,15 +2,15 @@
   "schema": "terluna.research.domain-synthesis-ledgers/1",
   "producer": {
     "files": {
-      "research/studies/domain_synthesis/ledgers.py": "bbf2e4ad599c82c8af696b3805540c18697bad95dbd0a700848500ee5618e5af"
+      "research/studies/domain_synthesis/ledgers.py": "d2a36f11e3d8070e91de7d9ca62e673f1367f5640ecfc1d9641e4c2146418991"
     },
     "inputs": {
-      "research/studies/distributions/results/distributions.json": "7bb5c9c1125da35d120ad30ca8281da5b230af2c2beea38caefe25430dafa65c",
-      "research/studies/food_systems/results/food_blend.json": "9d537677cfa5847b5d68bc3e32fdfff26e09c3ac3934bc6989d1817b652a8df6",
+      "research/studies/distributions/results/distributions.json": "660f74a11ce871e98e591901f8882560048b3f00c261a955893897d8201335a5",
+      "research/studies/food_systems/results/food_blend.json": "640ff325660002bb12fa2f4a31ae1a630f1e1047b3c443662638c6653d8472df",
       "provisioning/results/population.json": "d562cdabe6eee18fe40cfc16f6a65177ec16f7dd1fd8584a4dad80d271b85895",
       "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d",
       "biosphere/ecology/results/people.json": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
-      "resources/results/sea_phosphorus.json": "f1b386342c393750b16c860e8cc583202b713d59686517dc001a8f9c8759ac1a",
+      "resources/results/sea_phosphorus.json": "f59194b138920824899b5443a9f940c6a293278e103e0f828fc695ab255e96bd",
       "research/studies/sky_ecology/results/sky_ecology.json": "2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3",
       "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f3a09b17dc088037560bb5b7f31f4342ae16239d4bf22013a",
       "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327a13d9a01db7bb711fb5177a5d2b0227c7085826ad8a85a65",
@@ -516,24 +516,28 @@
     },
     "ground_temperature_k": 294.0,
     "held": {
-      "rule": "the levels that keep the Moon closest to its planned climate, which carries neither gas",
-      "methane_ppm": 0.3,
-      "n2o_ppm": 0.03,
+      "rule": "the author's choice among the three pairs weighed: the middle one, balancing the dimming against what holding the gases takes",
+      "methane_ppm": 1.87,
+      "n2o_ppm": 0.1,
       "forcing_w_m2": {
-        "allsky": 1.75,
-        "clear_sky_toa": 2.86,
-        "methane_alone_allsky": 1.05,
-        "n2o_alone_allsky": 0.834
+        "allsky": 3.58,
+        "clear_sky_toa": 5.83,
+        "methane_alone_allsky": 2.32,
+        "n2o_alone_allsky": 1.76
       },
-      "added_dimming_percent": 0.598,
+      "added_dimming_percent": 1.69,
       "warming_k_if_unanswered": [
-        1.09,
-        1.75
+        2.22,
+        3.57
       ],
+      "dimming_basis": {
+        "planetary_albedo": 0.28,
+        "absorbed_sunlight_w_m2": 211.0
+      },
       "beside": {
         "earth_2019": {
           "allsky_w_m2": 4.71,
-          "added_dimming_percent": 1.61
+          "added_dimming_percent": 2.23
         },
         "central_steady_state": {
           "allsky_w_m2": [
@@ -541,8 +545,8 @@
             8.29
           ],
           "added_dimming_percent": [
-            2.69,
-            2.83
+            3.73,
+            3.93
           ]
         }
       },
@@ -556,21 +560,25 @@
             21.6,
             29.0
           ],
+          "years_to_reach_from_none": [
+            54.4,
+            40.0
+          ],
           "removal_tg_yr": [
-            62.1,
-            83.7
+            57.6,
+            79.2
           ],
           "atmosphere_share_per_year": [
-            0.118,
-            0.159
+            0.0176,
+            0.0242
           ],
           "fan_tw": [
-            0.822,
-            1.11
+            0.122,
+            0.168
           ],
           "fan_dimming_percent": [
-            0.00982,
-            0.0212
+            0.00146,
+            0.00322
           ]
         },
         "0.5": {
@@ -582,21 +590,25 @@
             10.8,
             14.5
           ],
+          "years_to_reach_from_none": [
+            114.0,
+            82.9
+          ],
           "removal_tg_yr": [
-            30.6,
-            41.4
+            26.1,
+            36.9
           ],
           "atmosphere_share_per_year": [
-            0.0582,
-            0.0787
+            0.00795,
+            0.0113
           ],
           "fan_tw": [
-            0.405,
-            0.548
+            0.0554,
+            0.0784
           ],
           "fan_dimming_percent": [
-            0.00484,
-            0.0105
+            0.000662,
+            0.0015
           ]
         },
         "0.9": {
@@ -608,21 +620,25 @@
             2.16,
             2.9
           ],
+          "years_to_reach_from_none": [
+            1200.0,
+            621.0
+          ],
           "removal_tg_yr": [
-            5.42,
-            7.58
+            0.851,
+            3.01
           ],
           "atmosphere_share_per_year": [
-            0.0103,
-            0.0144
+            0.00026,
+            0.000919
           ],
           "fan_tw": [
-            0.0718,
-            0.1
+            0.00181,
+            0.0064
           ],
           "fan_dimming_percent": [
-            0.000857,
-            0.00192
+            2.16e-05,
+            0.000122
           ]
         }
       },
@@ -633,20 +649,20 @@
             1.68
           ],
           "years_to_reach_from_none": [
-            84.2,
-            54.8
+            281.0,
+            183.0
           ],
           "atmosphere_share_per_year": [
-            0.0119,
-            0.0182
+            0.00356,
+            0.00547
           ],
           "decomposition_tw": [
-            19.2,
-            29.5
+            5.75,
+            8.84
           ],
           "decomposition_dimming_percent": [
-            0.229,
-            0.563
+            0.0687,
+            0.169
           ]
         },
         "0.5": {
@@ -655,20 +671,20 @@
             0.84
           ],
           "years_to_reach_from_none": [
-            168.0,
-            110.0
+            561.0,
+            365.0
           ],
           "atmosphere_share_per_year": [
-            0.00594,
-            0.00912
+            0.00178,
+            0.00274
           ],
           "decomposition_tw": [
-            9.59,
-            14.7
+            2.88,
+            4.42
           ],
           "decomposition_dimming_percent": [
-            0.115,
-            0.281
+            0.0344,
+            0.0844
           ]
         },
         "0.95": {
@@ -677,26 +693,226 @@
             0.084
           ],
           "years_to_reach_from_none": [
-            1680.0,
-            1100.0
+            5610.0,
+            3650.0
           ],
           "atmosphere_share_per_year": [
-            0.000594,
-            0.000912
+            0.000178,
+            0.000274
           ],
           "decomposition_tw": [
-            0.959,
-            1.47
+            0.288,
+            0.442
           ],
           "decomposition_dimming_percent": [
-            0.0115,
-            0.0281
+            0.00344,
+            0.00844
           ]
         }
       },
       "guesses": {
         "contactor_pa": 100.0,
         "n2o_decomposition_kj_per_kg_air": 16.1
+      }
+    },
+    "pairs_weighed": {
+      "low": {
+        "methane_ppm": 0.3,
+        "n2o_ppm": 0.03,
+        "allsky_w_m2": 1.75,
+        "added_dimming_percent": 0.83,
+        "methane": {
+          "0.9": {
+            "years_to_reach_from_none": [
+              90.0,
+              65.7
+            ],
+            "atmosphere_share_per_year": [
+              0.0103,
+              0.0144
+            ],
+            "fan_tw": [
+              0.0718,
+              0.1
+            ]
+          },
+          "0.5": {
+            "years_to_reach_from_none": [
+              16.9,
+              12.6
+            ],
+            "atmosphere_share_per_year": [
+              0.0582,
+              0.0787
+            ],
+            "fan_tw": [
+              0.405,
+              0.548
+            ]
+          }
+        },
+        "n2o": {
+          "0.95": {
+            "years_to_reach_from_none": [
+              1680.0,
+              1100.0
+            ],
+            "atmosphere_share_per_year": [
+              0.000594,
+              0.000912
+            ],
+            "decomposition_tw": [
+              0.959,
+              1.47
+            ]
+          },
+          "0.5": {
+            "years_to_reach_from_none": [
+              168.0,
+              110.0
+            ],
+            "atmosphere_share_per_year": [
+              0.00594,
+              0.00912
+            ],
+            "decomposition_tw": [
+              9.59,
+              14.7
+            ]
+          }
+        }
+      },
+      "middle": {
+        "methane_ppm": 1.87,
+        "n2o_ppm": 0.1,
+        "allsky_w_m2": 3.58,
+        "added_dimming_percent": 1.69,
+        "methane": {
+          "0.9": {
+            "years_to_reach_from_none": [
+              1200.0,
+              621.0
+            ],
+            "atmosphere_share_per_year": [
+              0.00026,
+              0.000919
+            ],
+            "fan_tw": [
+              0.00181,
+              0.0064
+            ]
+          },
+          "0.5": {
+            "years_to_reach_from_none": [
+              114.0,
+              82.9
+            ],
+            "atmosphere_share_per_year": [
+              0.00795,
+              0.0113
+            ],
+            "fan_tw": [
+              0.0554,
+              0.0784
+            ]
+          }
+        },
+        "n2o": {
+          "0.95": {
+            "years_to_reach_from_none": [
+              5610.0,
+              3650.0
+            ],
+            "atmosphere_share_per_year": [
+              0.000178,
+              0.000274
+            ],
+            "decomposition_tw": [
+              0.288,
+              0.442
+            ]
+          },
+          "0.5": {
+            "years_to_reach_from_none": [
+              561.0,
+              365.0
+            ],
+            "atmosphere_share_per_year": [
+              0.00178,
+              0.00274
+            ],
+            "decomposition_tw": [
+              2.88,
+              4.42
+            ]
+          }
+        }
+      },
+      "earth_2019": {
+        "methane_ppm": 1.87,
+        "n2o_ppm": 0.332,
+        "allsky_w_m2": 4.71,
+        "added_dimming_percent": 2.23,
+        "methane": {
+          "0.9": {
+            "years_to_reach_from_none": [
+              1200.0,
+              621.0
+            ],
+            "atmosphere_share_per_year": [
+              0.00026,
+              0.000919
+            ],
+            "fan_tw": [
+              0.00181,
+              0.0064
+            ]
+          },
+          "0.5": {
+            "years_to_reach_from_none": [
+              114.0,
+              82.9
+            ],
+            "atmosphere_share_per_year": [
+              0.00795,
+              0.0113
+            ],
+            "fan_tw": [
+              0.0554,
+              0.0784
+            ]
+          }
+        },
+        "n2o": {
+          "0.95": {
+            "years_to_reach_from_none": [
+              18600.0,
+              12100.0
+            ],
+            "atmosphere_share_per_year": [
+              5.37e-05,
+              8.24e-05
+            ],
+            "decomposition_tw": [
+              0.0866,
+              0.133
+            ]
+          },
+          "0.5": {
+            "years_to_reach_from_none": [
+              1860.0,
+              1210.0
+            ],
+            "atmosphere_share_per_year": [
+              0.000537,
+              0.000824
+            ],
+            "decomposition_tw": [
+              0.866,
+              1.33
+            ]
+          }
+        }
       }
     }
   },

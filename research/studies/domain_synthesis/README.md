@@ -37,7 +37,7 @@ At 8 billion on the Moon, pairs from the low-cost to the high-cost end:
 | Wild share of the land outside the kept 30% and the parks | 75–89% | 34–83% |
 | Methane at the soils' central sink, steady state | 22–29 ppm, people 7–30% of the sources | |
 | N2O, rise a year | 0.36–0.55 ppb, people 12–23% of the sources | |
-| Methane and N2O held, by the author's rule | 0.3 and 0.03 ppm: 1.75 W/m², answered by 0.60% added dimming | |
+| Methane and N2O held at the author's choice | 1.9 and 0.1 ppm: 3.58 W/m², answered by 1.69% added dimming | |
 | Phosphorus dredged back, share of what the lakes receive | 20–51% and 8–27% at the two land losses | the same |
 
 ## Heat
@@ -156,39 +156,46 @@ steady state 7.9–8.3 W/m² (4.9–8.3 K), within the range of the fleet's glow
 
 ### Where they are held
 
-The author's rule of 12 October holds the gases at whichever levels keep things closest to the already planned world.
-The planned climate carries neither gas, and each part of their warming is answered by taking sunlight away, which
-keeps the mean temperature while the gases warm night as well as day; so they are held as low as the planned means
-reach. Below Earth's 1750 air the deep column's forcing falls about as the square root of the amount, and the pair
-held is 0.3 ppm of methane, a sixth of Earth's present, and 0.03 ppm of N2O, about a tenth (*screen*, `gases.held`):
+The author asked for the levels that keep things closest to the already planned world, and explained that as a
+balanced choice that limits how far the set knobs move. The planned climate carries neither gas. Each part of their
+warming is answered by dimming, which keeps the mean temperature while the gases warm night as well as day and takes
+its light from the biosphere; holding the gases lower moves biology's cuts and removal from open air instead. Three
+pairs from the deep column's grid were weighed (*screen*, `gases.pairs_weighed`), and on 13 October the author chose
+the middle one, to be kept while it continues to make sense. The gases warm in the infrared, which the Moon absorbs
+whole, so the dimming that answers them takes sunlight the Moon would have absorbed: the warming over the design
+sunlight's absorbed part, with the GCM design case's planetary albedo of 0.28, 1.39 times the warming over the design
+sunlight alone. Times run from none with the sources at full strength:
 
-| Held at 0.3 ppm of methane and 0.03 ppm of N2O | Low-cost end | High-cost end |
+| Methane and N2O | Warming, all-sky; added dimming | Methane, 90% cut: air passed a year; years to reach | N2O, 95% to half cut: decomposition; years to reach |
+|---|---|---|---|
+| 0.3 and 0.03 ppm, the lowest the planned means reach | 1.75 W/m²; 0.83% | 1.0–1.4%; 66–90 | 0.96–14.7 TW; 110–1,680 |
+| 1.9 and 0.1 ppm, held | 3.58 W/m²; 1.69% | 0.03–0.09%; 621–1,200 | 0.29–4.4 TW; 365–5,610 |
+| 1.9 and 0.33 ppm, Earth's 2019 air | 4.71 W/m²; 2.23% | 0.03–0.09%; 621–1,200 | 0.09–1.3 TW; 1,210–18,600 |
+
+| Held at 1.9 ppm of methane and 0.1 ppm of N2O | Low-cost end | High-cost end |
 |---|---|---|
-| Warming in the deep column, all-sky; added dimming that answers it | 1.75 W/m²; 0.60% | the same |
-| Beside them: Earth's 2019 air; the central steady state | 4.71 W/m², 1.61%; 7.88 W/m², 2.69% | 4.71 W/m², 1.61%; 8.29 W/m², 2.83% |
+| Warming in the deep column, all-sky; added dimming that answers it | 3.58 W/m²; 1.69% | the same |
+| Beside them: Earth's 2019 air; the central steady state | 4.71 W/m², 2.23%; 7.88 W/m², 3.73% | 4.71 W/m², 2.23%; 8.29 W/m², 3.93% |
 | Methane, biology at the sources cutting 90%: the soils alone would hold it at | 2.16 ppm | 2.90 ppm |
-| Removal from open air to 0.3 ppm, Tg a year; share of the air passed a year | 5.42; 1.03% | 7.58; 1.44% |
-| The same with biology cutting half | 30.6; 5.82% | 41.4; 7.87% |
-| N2O, biology cutting 95%: left a year, Tg N; years to reach 0.03 ppm from none | 0.055; 1,680 | 0.084; 1,100 |
-| Removal at 0.03 ppm: share of the air passed a year; catalytic decomposition | 0.059%; 0.96 TW | 0.091%; 1.47 TW |
-| The same with biology cutting half | 0.59%; 9.6 TW | 0.91%; 14.7 TW |
+| Years to reach 1.9 ppm; removal from open air, Tg a year; share of the air passed a year | 1,200; 0.85; 0.026% | 621; 3.01; 0.092% |
+| The same with biology cutting half | 114; 26.1; 0.80% | 83; 36.9; 1.13% |
+| N2O, biology cutting 95%: left a year, Tg N; years to reach 0.1 ppm | 0.055; 5,610 | 0.084; 3,650 |
+| Removal at 0.1 ppm: share of the air passed a year; catalytic decomposition | 0.018%; 0.29 TW | 0.027%; 0.44 TW |
+| The same with biology cutting half: years to reach; share; decomposition | 561; 0.18%; 2.9 TW | 365; 0.27%; 4.4 TW |
 
 Biology at the sources sets the size of the rest. N2O has no sink, so its removal takes all that biology leaves at any
-level, and the level sets only how much air it passes; heated catalytic decomposition is the costly part (*design
-guess*: the air heated by 400 K with 96% of that heat recovered). Methane's oxidizers work at the air's own temperature,
-so its removal costs fans, 0.07–0.10 TW at a 90% cut (*design guess*: 100 Pa through each contactor). Counted in the
-dimming that answers the warming and the removal's heat together, the held pair costs 0.61–0.63% of the sunlight when
-biology cuts 90% of the methane and 95% of the N2O, and 0.72–0.89% when it cuts half of each. The pair comes from the
-deep column's grid this way:
-- **N2O at 0.03 ppm** stays near the least across the bracket: at 0.01 ppm decomposition takes 29–44 TW when biology
-  cuts half, and at 0.1 ppm the warming is twice as large.
-- **Methane at 0.3 ppm** is the lowest level at which removal from open air passes no more of the air than Earth's
-  present methane would need without biology, 1.8–2.4% a year, with a 90% cut as the working case. Below it the power
-  stays small but the contactors grow: 0.1 ppm would save another 0.14% of the sunlight and pass 3.4–4.6% of the air a
-  year. At a 95% cut 0.1 ppm passes 1.6–2.2%, so the level moves down when the wet Moon's methane and nitrogen work
-  sizes what biology cuts (next work).
+level, and the level sets how much air it passes and when it starts; heated catalytic decomposition is the costly part
+(*design guess*: the air heated by 400 K with 96% of that heat recovered). Methane's oxidizers work at the air's own
+temperature, so its removal costs fans, under 0.01 TW at a 90% cut (*design guess*: 100 Pa through each contactor).
+Counted in the dimming that answers the warming and the removal's heat together, the held pair costs 1.69–1.70% of the
+sunlight when biology cuts 90% of the methane and 95% of the N2O, and 1.73–1.78% when it cuts half of each. Against
+the low pair it takes 0.86% more of the sunlight and spares contactors through 1.0–1.4% of the air a year from the
+first century, with N2O's decomposition at about a third; against Earth's air it saves 0.54% of the sunlight for
+decomposition about three times as large. The held pair and Earth's air differ only in N2O, which takes at least 365
+years to reach 0.1 ppm, so its level can still be raised to Earth's before any decomposition is built if the dimming
+proves cheap. What the dimming costs the biosphere depends on where light limits growth, the next work on ecology.
 
-The added dimming's light gives the array 14–21 TW more at 20–30% conversion.
+The added dimming's light gives the array 40–59 TW more at 20–30% conversion.
 
 ## Phosphorus
 
@@ -262,7 +269,8 @@ network flies above most of it.
 Machine time is for this laptop, one core, alongside the author's other work.
 1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October, about 38 minutes on six
    workers with the levels below Earth's 1750 air ([reduced gases](../../../atmosphere/radiative_convective/README.md)).
-   By the author's rule the gases are held at 0.3 and 0.03 ppm (above).
+   The author chose the middle of three pairs weighed, 1.9 ppm of methane and 0.1 ppm of N2O (above). Next on
+   ecology: where light limits growth, which sizes what the dimming costs the biosphere.
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band,
    with the homestead belt holding the heritage farms. Minutes; the distributions README follows.
 3. **The fleet's night and its glow** (plan, item 3; the planned branch research/array-industry): the night-side
@@ -289,9 +297,10 @@ Machine time is for this laptop, one core, alongside the author's other work.
 
 The author decided the list on 12 October
 ([register](../../decisions.md#the-domain-synthesiss-decisions-12-october-2026)):
-1. The levels at which methane and N2O are held wait for their warming in the deep column, which is the next work;
-   computed the same day, they follow the author's rule: "Whichever keeps things closest to the already planned
-   world." The pair held is 0.3 ppm of methane and 0.03 ppm of N2O.
+1. The levels at which methane and N2O are held wait for their warming in the deep column, which is the next work.
+   Once it was computed, the author asked for the levels that keep things closest to the planned world, meaning a
+   balanced choice that limits how far the set knobs move, and on 13 October chose the middle of the three pairs
+   weighed: 1.9 ppm of methane and 0.1 ppm of N2O, kept while it continues to make sense.
 2. Food and the sky towns run on power from the array, given a good distribution recommendation; the one above waits
    for the author.
 3. Added dimming can be had by extracting more of the sunlight; the fleet's glow is the harder problem to work out.

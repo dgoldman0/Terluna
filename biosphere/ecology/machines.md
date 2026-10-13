@@ -88,10 +88,10 @@ window in the shield near 200–240 nm, which would make ozone and heat the uppe
   homesteads bring back the ruminants the lunar design left out (provisioning register).
 - **Their warming:** Earth's present levels force 4.7 W/m² all-sky in the Moon's deep column and the central steady
   state 7.9–8.3 W/m², with N2O the larger lever per ppm ([questions](questions.md), item 3).
-- **Their levels:** by the author's rule, whichever keeps things closest to the already planned world, 0.3 ppm of
-  methane and 0.03 ppm of N2O, 1.75 W/m², answered by 0.60% added dimming. Methane's oxidizers and the N2O reducers
-  at the sources do most of the work; contactors in open air take the rest, methane's at the air's own temperature
-  and N2O's by heated catalytic decomposition.
+- **Their levels:** the author's choice, the balanced middle of three pairs weighed: 1.9 ppm of methane and 0.1 ppm
+  of N2O, 3.58 W/m², answered by 1.69% added dimming. Methane's oxidizers and the N2O reducers at the sources do most
+  of the work; contactors in open air take the rest, methane's at the air's own temperature and N2O's by heated
+  catalytic decomposition.
 
 ## What remains
 

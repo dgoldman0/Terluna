@@ -801,7 +801,7 @@
     },
     {
       "topic": "domain_synthesis",
-      "condition": "three_domains_merged_2026_10_12; four_refreshes_of_main_studies; former_cross_branch_inputs_read_in_tree; five_joint_ledgers_at_the_authors_choices; gases_warming_in_the_deep_column_computed; gases_held_at_0_3_and_0_03_ppm_by_the_authors_rule; authors_decisions_2026_10_12; array_power_recommendation_offered",
+      "condition": "three_domains_merged_2026_10_12; four_refreshes_of_main_studies; former_cross_branch_inputs_read_in_tree; five_joint_ledgers_at_the_authors_choices; gases_warming_in_the_deep_column_computed; gases_held_at_1_9_and_0_1_ppm_by_the_authors_choice; authors_decisions_2026_10_12; array_power_recommendation_offered",
       "material": [
         "studies/domain_synthesis/README.md",
         "integration/domains.md",
@@ -809,12 +809,12 @@
       ],
       "unresolved": [
         "C' placed band by band with the food blend (the distributions study still places it with the power-heavy mix).",
-        "The warming of methane and N2O in the deep column, which sets the levels they may reach.",
+        "Where light limits growth on the Moon, which sizes what the dimming costs the biosphere and checks the gas pair.",
         "The fleet's infrared glow and people's heat as one dimming budget.",
         "Ecology's land phosphorus loss still takes Earth's river concentrations at the register's former runoff; at the rerun register it would be about a fifth lower.",
         "Resources' sea phosphorus keeps its own food-system stand-ins; binding the food study's per-system phosphorus would close a loop with the food study, which reads it."
       ],
-      "next_session_task": "C' placed with the blend; the carbon cycle under the updated parameters (resources, question 7); the power screen (provisioning, question 3). The gases are held at 0.3 ppm of methane and 0.03 ppm of N2O by the author's rule (studies/domain_synthesis/README.md); the wet Moon's methane and nitrogen work sizes what biology cuts."
+      "next_session_task": "Where light limits growth on the Moon, which sizes what the dimming costs the biosphere and checks the gas pair; then the wet Moon's methane and nitrogen, which sizes what biology cuts. The gases are held at the author's choice of 13 October, 1.9 ppm of methane and 0.1 ppm of N2O (studies/domain_synthesis/README.md)."
     }
   ]
 }

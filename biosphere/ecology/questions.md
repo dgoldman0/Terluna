@@ -33,11 +33,12 @@ on this laptop. The findings behind them are in the [README](README.md).
    screen's central steady state (methane 21.6–29 ppm, N2O 0.55 ppm) 7.9–8.3 W/m², 4.9–8.3 K; the highest (230 and
    4.2 ppm) 14 W/m². N2O forces more per ppm and keeps building.
    The author chose on 12 October to hold both gases in check by biological means, coupled with advanced technologies
-   that make up the difference, with no ultraviolet window in the shield ([machines.md](machines.md)). The same day
-   the author set the levels by a rule: "Whichever keeps things closest to the already planned world." The planned
-   climate carries neither gas, so they are held low, at 0.3 ppm of methane and 0.03 ppm of N2O: 1.75 W/m² all-sky,
-   answered by 0.60% added dimming. With biology at the sources cutting 90% of the methane and 50–95% of the N2O,
-   removal from open air passes 1.0–1.4% of the air a year for methane and 0.06–0.9% for N2O
+   that make up the difference, with no ultraviolet window in the shield ([machines.md](machines.md)). Their levels
+   balance the dimming that answers the warming against what holding them takes. On 13 October the author chose the
+   middle of three pairs weighed, 1.9 ppm of methane (Earth's present) and 0.1 ppm of N2O (a third of Earth's): 3.58
+   W/m² all-sky, answered by 1.69% added dimming over the sunlight the Moon absorbs. With biology at the sources
+   cutting 90% of the methane, contactors in open air pass 0.03–0.09% of the air a year once methane reaches 1.9 ppm;
+   N2O's catalytic decomposition takes 0.29–4.4 TW once it reaches 0.1 ppm, 365–5,610 years from none
    ([domain synthesis](../../research/studies/domain_synthesis/README.md#where-they-are-held)).
 4. **The ecology's case in the ultraviolet decision (O3).** Keep the present short-wave shield, with adaptation to
    its spectrum and local UV provision as the working direction. A narrow attenuated UV-B window remains a

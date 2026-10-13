@@ -218,10 +218,10 @@ synthesis ranks two items first from the three domains together; they lead this 
 
 1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October on domain/ecology, about 38
    minutes on six workers ([reduced gases](../atmosphere/radiative_convective/README.md)). Earth's present levels force
-   4.7 W/m² all-sky on the Moon and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K. By the author's rule,
-   whichever levels keep things closest to the already planned world, the gases are held at 0.3 ppm of methane and
-   0.03 ppm of N2O: 1.75 W/m², answered by 0.60% added dimming
-   ([domain synthesis](studies/domain_synthesis/README.md#where-they-are-held)).
+   4.7 W/m² all-sky on the Moon and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K. The author chose the
+   balanced middle of three pairs weighed, 1.9 ppm of methane and 0.1 ppm of N2O: 3.58 W/m², answered by 1.69% added
+   dimming ([domain synthesis](studies/domain_synthesis/README.md#where-they-are-held)). Next on domain/ecology:
+   where light limits growth, which sizes what the dimming costs the biosphere.
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band, in
    minutes.
 3. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
