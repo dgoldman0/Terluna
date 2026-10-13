@@ -45,7 +45,7 @@
     },
     {
       "topic": "climate",
-      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed; design_case_28pct_seas_with_lakes_settles_303k; five_percent_dimmer_shield_settles_294k; author_chose_5pct_dimmer_shield; cloud_resolving_equatorial_ring_two_lunar_days_at_lunar_gravity; gravity_pair_without_radiation_does_not_convect; rings_at_80_and_45_degrees_with_gcm_vertical_wind; tilted_ring_pair_a_compared_at_two_equatorial_crossings; 3d_box_at_0e_crossing_forced_as_the_rings; land_surface_tests_at_0e_change_little; radiation_checked_against_line_by_line_at_0e; gcm_solar_split_checked_on_11_columns; gcm_sun_faults_found_earth_tilt_and_uneven_sweep; gcm_sun_tilt_fixed_and_shortwave_recalibrated_against_line_by_line; corrected_design_case_294.9k_warm_poles_rain_confined_to_the_tropics; author_set_the_investigated_climate_as_the_planned_climate_2026_10_09; wind_vectors_in_the_sun_frame_and_drifting_days_2026_10_09",
+      "condition": "periodic_conservative_spatial_linear_screen; uncalibrated; clear_sky_radiation_computed_for_prescribed_columns; single_column_month_long_day_night_with_weak_temperature_gradient_exchange; gcm_boundary_files_prepared; exoplasim_radiation_calibrated_to_line_by_line; exoplasim_design_case_settled_295k; exoplasim_cloud_water_corrected_and_bracketed_292_298k; exoplasim_convective_cloud_units_corrected_design_case_299.6k; slow_rotator_cloud_literature_reviewed; design_case_28pct_seas_with_lakes_settles_303k; five_percent_dimmer_shield_settles_294k; author_chose_5pct_dimmer_shield; cloud_resolving_equatorial_ring_two_lunar_days_at_lunar_gravity; gravity_pair_without_radiation_does_not_convect; rings_at_80_and_45_degrees_with_gcm_vertical_wind; tilted_ring_pair_a_compared_at_two_equatorial_crossings; 3d_box_at_0e_crossing_forced_as_the_rings; land_surface_tests_at_0e_change_little; radiation_checked_against_line_by_line_at_0e; gcm_solar_split_checked_on_11_columns; gcm_sun_faults_found_earth_tilt_and_uneven_sweep; gcm_sun_tilt_fixed_and_shortwave_recalibrated_against_line_by_line; corrected_design_case_294.9k_warm_poles_rain_confined_to_the_tropics; author_set_the_investigated_climate_as_the_planned_climate_2026_10_09; wind_vectors_in_the_sun_frame_and_drifting_days_2026_10_09; gases_glow_and_dimming_in_the_gcm_glow_needs_0_71_of_its_watts_2026_10_13",
       "material": [
         "../climate/reference/thermal_response.csv",
         "baselines/feasibility/model.py",
@@ -61,7 +61,10 @@
         "../visualization/equator-weather/",
         "studies/atmospheric_electricity/README.md",
         "../climate/gcm/zonal_winds.md",
-        "../climate/results/gcm/zonal_winds_A28_dim5_moon.json"
+        "../climate/results/gcm/zonal_winds_A28_dim5_moon.json",
+        "studies/gases_glow_dimming/README.md",
+        "studies/gases_glow_dimming/results/gases_glow_dimming.json",
+        "studies/gases_glow_dimming/results/glow_absorption.json"
       ],
       "unresolved": [
         "absolute cloud amount: PlaSim diagnoses cover (20-28%); published slow-rotator GCMs suggest no thick day-side deck at this sunlight, but models disagree widely on amounts",

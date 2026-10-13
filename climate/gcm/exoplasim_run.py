@@ -5,6 +5,9 @@
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --stop              # stop it cleanly
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --years 15 --folder A_full_column_clouds \
         --set cloud_water=full_column --start-from climate/gcm/runs/A/model/MOST_REST.00039   # a branch
+    climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --years 20 --folder A28_gases_glow \
+        --co2-ppm 755 --top-infrared 10.1718 0.5165 --set sunlight_scale=0.909867 \
+        --start-from climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029        # CO2 and infrared from space
 
 Run from the repository root with the GCM environment (climate/gcm/.venv, which holds ExoPlaSim and
 MPI-built executables). Each experiment lives in climate/gcm/runs/<name>/ (ignored by Git; on the
@@ -37,8 +40,11 @@ transmission (protection/spectra/shield_transmission.json) sets both the total f
 between ExoPlaSim's two solar bands. The air is the 1-D models' dry composition (O2 at 21,227 Pa,
 Earth's Ar/N2, 400 ppm CO2, N2 the balance), with the pressure set at the water level as on Earth:
 land stands above it, so the global mean surface pressure is a few per cent lower. The land albedo
-is a uniform placeholder. PlaSim counts 12 of the Moon's rotations in a 360-day year, which makes its
-model day 29.8 Earth days (the rotation keeps the true 27.32 days); a model year is 12 of them, and the
+is a uniform placeholder. --co2-ppm sets the CO2 the air carries instead of 400 ppm, with N2 the balance; PlaSim's
+radiation knows only water vapour, CO2 and ozone, so a run can carry another gas's warming as the CO2 that warms as
+much (its CO2 equivalent), and the run records the choice. --top-infrared adds infrared from space at the top of the
+air, by day and by night (TOP_INFRARED_EDITS). PlaSim counts 12 of the Moon's rotations in a 360-day year, which makes
+its model day 29.8 Earth days (the rotation keeps the true 27.32 days); a model year is 12 of them, and the
 output ten means per model day. The random seed is fixed, so runs repeat exactly. A patch to PlaSim's
 solang turns the Sun evenly at the synodic rate, one turn per 29.53 days, and the orbit is held to the
 Moon's elements with its 1.54 degree tilt. Runs before 2026-09-29 had PlaSim's own clock, which sweeps the
@@ -258,12 +264,33 @@ SHORTWAVE_EDITS = [
     ("     &         /(1.-2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))  &\n",
      "     &         /max(0.001,1.-swh2oscale*2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))  &\n"),
 ]
+# Infrared arriving from space at the top of the air, W/m2 over the day and the night hemispheres: the ring fleet's
+# glow and the Moon's own infrared its films return. PlaSim's longwave scheme takes the downward flux at the model's
+# top as zbd(:,0), the emission of the top layer (its ExoPlaSim note marks the place for an outside source), and
+# carries it down with the column's broadband transmissivities, so what enters there is absorbed in the air as the
+# air's own infrared is and the rest reaches the ground. 0 by day and night, the default, leaves the model as it was.
+TOP_INFRARED_EDITS = [
+    ("      real :: swh2oscale = 1.0   ! Terluna: multiplier on water vapour's shortwave absorptivity\n",
+     "      real :: swh2oscale = 1.0   ! Terluna: multiplier on water vapour's shortwave absorptivity\n"
+     "      real :: irtopday = 0.0     ! Terluna: infrared from space at the top of the air by day, W/m2\n"
+     "      real :: irtopnight = 0.0   ! Terluna: and by night\n"),
+    (",minwavel,rayscale,nsunclock,swh2oscale\n", ",minwavel,rayscale,nsunclock,swh2oscale,irtopday,irtopnight\n"),
+    ("      call mpbcr(swh2oscale)\n", "      call mpbcr(swh2oscale)\n      call mpbcr(irtopday)\n      call mpbcr(irtopnight)\n"),
+    ("      zbd(:,0)=SBK*zttop**4 !We could add IR flux from M dwarf host star here? --AYP\n",
+     "      zbd(:,0)=SBK*zttop**4 !We could add IR flux from M dwarf host star here? --AYP\n"
+     "      where (gmu0(:) > 0.)    ! Terluna: infrared from space at the top of the air\n"
+     "       zbd(:,0)=zbd(:,0)+irtopday\n"
+     "      elsewhere\n"
+     "       zbd(:,0)=zbd(:,0)+irtopnight\n"
+     "      endwhere\n"),
+]
 # (file, marker, edits) in the order applied; a marker appears only in the text its patch adds.
 PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
            ('rainmod.f90', 'Terluna: gravity for the heights below', RAINMOD_EDITS),
            ('rainmod.f90', 'Terluna: seconds per day in the convective cloud formula', CONVECTIVE_EDITS),
            ('radmod.f90', "Terluna: the Sun's clock", SUN_EDITS),
-           ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS)]
+           ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS),
+           ('radmod.f90', 'Terluna: infrared from space at the top of the air', TOP_INFRARED_EDITS)]
 
 
 def ensure_patched() -> dict:
@@ -293,13 +320,19 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
-def configuration(name, ncpus, overrides=None):
-    """Everything that determines the run apart from the input files the runner writes."""
+def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None):
+    """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
+    the air's 400 ppm of CO2, and top_infrared, (day, night) W/m2, adds infrared from space at the top of the air; each
+    is recorded when given, and left out the configuration is the one every earlier run had."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
     dry_bar = exp['pressure_pa'] / 1e5
-    co2 = CO2_PPM * 1e-6 * dry_bar
+    if co2_ppm is not None and not 0.0 < co2_ppm < 1e5:
+        raise ValueError('co2_ppm must lie between 0 and 100,000')
+    if top_infrared is not None and (len(top_infrared) != 2 or not all(0.0 <= x < 1000.0 for x in top_infrared)):
+        raise ValueError('top_infrared is (day, night) W/m2, each from 0 to 1000')
+    co2 = (CO2_PPM if co2_ppm is None else co2_ppm) * 1e-6 * dry_bar
     n2_ar = dry_bar - O2_PA / 1e5 - co2
     model = {**MODEL, **(overrides or {})}
     cloud_water_namelist(model['cloud_water'], planet['gravity_m_s2'])        # refuses an unknown choice
@@ -315,13 +348,18 @@ def configuration(name, ncpus, overrides=None):
         raise ValueError('fixed_orbit and whole_lunar_days are 0 or 1')
     if not 0.0 < model['sw_water_absorption'] <= 3.0:
         raise ValueError('sw_water_absorption must lie between 0 and 3')
-    return dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
-                exoplasim=version('exoplasim'), source=ensure_patched(),
-                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
-                            rotationperiod=planet['rotation_period_days'], year=365.25636,
-                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
-                gases_bar=dict(pN2=n2_ar / (1 + AR_PER_N2), pO2=O2_PA / 1e5, pAr=n2_ar * AR_PER_N2 / (1 + AR_PER_N2),
-                               pCO2=co2))
+    cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
+               exoplasim=version('exoplasim'), source=ensure_patched(),
+               planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
+                           rotationperiod=planet['rotation_period_days'], year=365.25636,
+                           obliquity=planet['obliquity_deg'], eccentricity=0.016715),
+               gases_bar=dict(pN2=n2_ar / (1 + AR_PER_N2), pO2=O2_PA / 1e5, pAr=n2_ar * AR_PER_N2 / (1 + AR_PER_N2),
+                              pCO2=co2))
+    if co2_ppm is not None:
+        cfg['co2_ppm'] = co2_ppm
+    if top_infrared is not None:
+        cfg['top_infrared_w_m2'] = dict(day=float(top_infrared[0]), night=float(top_infrared[1]))
+    return cfg
 
 
 def run_key(cfg, inputs) -> str:
@@ -461,6 +499,9 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('rainmod_namelist', 'CONVDAY', str(float(m['convective_day_s'])))
     if m['surface_cloud_rcrit'] > 0.0:                                 # the lowest layer is the last of RCRIT
         model._edit_namelist('rainmod_namelist', f"RCRIT({m['layers']})", str(float(m['surface_cloud_rcrit'])))
+    if 'top_infrared_w_m2' in cfg:
+        model._edit_namelist('radmod_namelist', 'IRTOPDAY', str(cfg['top_infrared_w_m2']['day']))
+        model._edit_namelist('radmod_namelist', 'IRTOPNIGHT', str(cfg['top_infrared_w_m2']['night']))
     from exoplasim import pyburn
     for code, (name, long_name) in CLEAR_SKY.items():
         pyburn.ilibrary[str(code)] = [name, long_name, 'W m-2']
@@ -627,8 +668,9 @@ def summarise_year(path: Path) -> dict:
 
 
 def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False,
-        overrides: dict | None = None, start_from: str | None = None) -> int:
-    cfg = configuration(name, ncpus, overrides)
+        overrides: dict | None = None, start_from: str | None = None, co2_ppm: float | None = None,
+        top_infrared: tuple | None = None) -> int:
+    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -734,6 +776,10 @@ def main(argv=None) -> int:
     parser.add_argument('--set', action='append', default=[], metavar='KEY=VALUE',
                         help='override a model setting, e.g. rayleigh_scale=1.5 (part of the run key)')
     parser.add_argument('--start-from', help='restart file to branch a new run from')
+    parser.add_argument('--co2-ppm', type=float, help='CO2 the air carries, ppm, in place of 400 (part of the run key)')
+    parser.add_argument('--top-infrared', type=float, nargs=2, metavar=('DAY', 'NIGHT'),
+                        help='infrared from space at the top of the air, W/m2 by day and by night '
+                             '(part of the run key)')
     args = parser.parse_args(argv)
     if args.status:
         return status(args.folder or args.experiment)
@@ -747,7 +793,8 @@ def main(argv=None) -> int:
         if key not in MODEL:
             parser.error(f'unknown model setting {key}')
         overrides[key] = type(MODEL[key])(value)
-    return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from)
+    return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
+               args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None)
 
 
 if __name__ == '__main__':

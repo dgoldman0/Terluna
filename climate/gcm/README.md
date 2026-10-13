@@ -117,6 +117,9 @@ environment to compile its FFT module.
 climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --years 40   # run or resume
 climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --status     # progress
 climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --stop       # stop cleanly
+climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --years 20 --folder A28_gases_glow --co2-ppm 755 \
+    --top-infrared 10.1718 0.5165 --set sunlight_scale=0.909867 \
+    --start-from climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029   # a branch with CO2 and infrared from space
 ```
 
 Runs live in `climate/gcm/runs/<experiment>/`. On the author's machine that folder
@@ -706,6 +709,38 @@ rows, and hour angles in degrees east of the subsolar point in 36 bins, as [clim
 them; its reading rule names every array. They describe the large-scale flow of the 3-day means at T21, and the
 routes are carried at fixed heights by that flow alone.
 
+### The gases, the glow and the dimming
+
+On 13 October the author asked for the GCM to run again with the held gas pair, the ring fleet's glow and the dimming
+that answers them. The runner gained two options for it. Each is part of the run key and recorded only when given, so
+earlier runs keep their keys:
+
+- `--co2-ppm` sets the air's CO2 in place of 400 ppm, N2 the balance. PlaSim's longwave radiation has water vapour,
+  CO2 and ozone only, so another gas's warming enters as the CO2 that warms as much. A calibration pair from
+  `A28_dim5_moon`'s year-29 restart (`A28_cal_control`, `A28_cal_co2_1022`, one year each) gives 5.27 W/m² at the top
+  of the air for 400 to 1,022 ppm over the first 3-day mean, 5.63 W/m² for each e-fold.
+- `--top-infrared DAY NIGHT` adds infrared from space to the downward flux at the top of PlaSim's air, over the
+  hemisphere where the Sun is up and the one where it is down, and PlaSim carries it down with its broadband
+  transmissivities (`TOP_INFRARED_EDITS` in [exoplasim_run.py](exoplasim_run.py)). At zero the patched build repeats
+  the unpatched one exactly (`A28_cal_control_patched`).
+
+Three branches from the same restart flew 20 years each, about 3⅓ minutes a model year on 4 ranks. Their years 10–19
+against the design case's years 20–29 are in
+[research/studies/gases_glow_dimming](../../research/studies/gases_glow_dimming/README.md):
+
+| | `A28_gases` | `A28_gases_glow` | `A28_gases_glow_held` |
+|---|---|---|---|
+| CO2; infrared from space by day / night | 755 ppm; none | 755 ppm; 10.17 / 0.52 W/m² | the same |
+| Sunlight scale (the design case's 0.95) | 0.933907 | 0.909867 | 0.916522 |
+| Surface temperature (design case 294.90 K) | 295.03 K | 293.64 K | 294.84 K |
+| Precipitation (2.24 mm/day) | 2.22 mm/day | 2.07 mm/day | 2.16 mm/day |
+| Cloud cover (23.5%) | 23.5% | 20.1% | 19.6% |
+
+- **The gases' dimming holds the design temperature** and takes 0.9% of the rain.
+- **The glow's infrared heats the upper air.** About 4% of it reaches the ground. Matched watt for watt by dimming, it
+  cools the Moon 1.3 K; the dimming that holds the temperature is 0.71 of that. Held there, the air above about 55 km
+  warms 0.3–2.1 K, the convective rain falls 3.9% and the high cloud's cover falls by a fifth.
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked
@@ -746,7 +781,8 @@ against the papers:
 | Thin convective cloud (`A28_dim5_moon_thin_convective`) | Done (15 years from `A28_dim5_moon`'s year 29, 2026-10-01): `convective_day_s` 2,400 s, the convective cloud near its floor; 296.6 K over years 5–14, settling near 297.1 K, warmer alike from the ground to 18 km. A test of whether the GCM's daytime cloud separates it from CM1 ([../crm](../crm/README.md), "The GCM's daytime cloud") |
 | More low cloud (`A28_dim5_moon_low_cloud`) | Done (15 years from `A28_dim5_moon`'s year 29, 2026-10-01): `surface_cloud_rcrit` 0.6, the lowest layer's cloud threshold lowered from 0.983; cloud cover 43%, 289.9 K over years 5–14, settling near 289.0 K, cooler about alike from the ground to 18 km. A test of whether CM1's foggy nights explain the gap ([../crm](../crm/README.md), "The GCM's low cloud at night") |
 | C, 1.0 atm | Not run: no current decision needs it. The 1-D balance puts 1.0 atm 0.2–1.3 K cooler than 1.2 atm, depending on the clouds, and 1.2 atm is the design pressure. The runner keeps it defined |
-| D, E | Need ExoPlaSim's ozone profile from the 1-D results, and a way to add the trace gases' forcing |
+| Gases, glow and dimming (`A28_gases`, `A28_gases_glow`, `A28_gases_glow_held`) | Done (20 years each from `A28_dim5_moon`'s year 29, 2026-10-13, above), with the calibration branches `A28_cal_control`, `A28_cal_co2_1022` and `A28_cal_control_patched` (one year each) |
+| D, E | D needs ExoPlaSim's ozone profile from the 1-D results; E's trace gases now enter as their CO2 equivalent (`--co2-ppm`, above) |
 
 ## First experiments
 

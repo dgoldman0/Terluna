@@ -222,8 +222,12 @@ synthesis ranks two items first from the three domains together; they lead this 
    balanced middle of three pairs weighed, 1.9 ppm of methane and 0.1 ppm of N2O: 3.58 W/m², answered by 1.69% added
    dimming ([domain synthesis](studies/domain_synthesis/README.md#where-they-are-held)). Where light limits growth
    followed on 13 October ([light limitation](studies/light_limitation/README.md)): water holds most of the land, light
-   limits 10–40% of the living Moon's growth, and each 1% of dimming costs 0.07–0.30% of it through light. Whether the
-   rain answers the dimming as Earth's models do, about 1% for each 1%, waits for a GCM run, the author's call.
+   limits 10–40% of the living Moon's growth, and each 1% of dimming costs 0.07–0.30% of it through light. The GCM,
+   run again with the gases, the glow and the dimming at the author's request
+   ([gases, glow and dimming](studies/gases_glow_dimming/README.md)), finds the held pair's dimming keeps the design
+   temperature and takes 0.9% of the rain, about half Earth's response. The glow's infrared heats the upper air: it
+   needs 0.71 of its watts in dimming, about 2.0% of the design sunlight, and takes 2.4% of the rain with the
+   temperature held.
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band, in
    minutes.
 3. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,

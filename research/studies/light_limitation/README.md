@@ -43,20 +43,23 @@ records each published value and how far it was read.
 - **What the dimming costs through light.** Light limits 10–40% of the living Moon's 16–26 Gt C a year of growth,
   and each 1% of dimming costs 0.07–0.30% of it. The dimming the plan now carries, 4.6–6.4%, costs 0.3–1.9%: the gases
   at the held pair take 1.69%, people's heat 0.26–2.0% with power from the array and close computing, and the fleet's
-  glow 2.64% with both halves of each orbit rolled outside the service arc (research/array-industry, 8be6d1e).
+  glow 2.64% with both halves of each orbit rolled outside the service arc (research/array-industry, 8be6d1e). The
+  GCM finds the glow's infrared needs 0.71 of its watts in dimming to hold the design temperature.
 - **The rain may cost more than the light.** In Earth's models, offsetting quadrupled CO2 with 3.5–5.0% less sunlight
   held the temperature within 0.3 K and cut global rain by 4.5 ± 1.3% (GeoMIP G1; Tilmes et al. 2013), 0.76–1.38% for
   each 1% of dimming: the rain follows the energy the surface receives. If the Moon's rain answered the dimming for the
   gases and the glow the same way, the rain-fed land, 57–87% of the growth, would lose 0.43–1.2% of the living Moon's
   growth for each 1% of that dimming, 0.7–5.2% at the plan's 1.7–4.3%. People's heat is released at the ground, where
   the dimming that answers it takes about as much energy from the surface as the heat adds, so it is left out. The
-  Moon's own response needs a GCM run with these forcings and the dimming.
+  GCM run with these forcings and the dimming gives the Moon's own response
+  ([gases, glow and dimming](../gases_glow_dimming/README.md)): the gases' dimming takes 0.55% of the rain for each 1%,
+  about half Earth's, and the glow, whose infrared heats the upper air, takes 2.4% more with the temperature held.
 - **The gas pair holds.** Through light, the middle pair's 1.69% costs 0.12–0.50% of the growth; the low pair would
   save 0.06–0.25% of it and Earth's present air would add 0.04–0.16%. Through the rain, at Earth's response, the low
   pair would save 0.4–1.0% and Earth's air would cost 0.2–0.6% more. Set against what the pairs move elsewhere, the
   low pair's contactors through 1.0–1.4% of the air from the first century and Earth's air's N2O plants a third the
-  middle pair's, these leave the middle pair the balanced choice. A GCM run that found a strong rain response would
-  move the balance toward the low pair.
+  middle pair's, these leave the middle pair the balanced choice. The GCM finds the gases' rain response about half
+  Earth's, which keeps it so.
 
 ## The land, band by band
 
@@ -106,11 +109,12 @@ roots stays, and most for the plant that respires through the night as by day.
 
 ## What it leaves out
 
-- **The rain's response on the Moon.** Earth's G1 sets the scale. Its land evaporation fell about 10%, partly through
-  CO2 closing the stomata, which the Moon's case lacks at 400 ppm; its fast response comes from CO2's absorption in
-  the air, as the gases' does here; the glow's share that reaches the ground through the infrared window behaves more
-  like people's heat. Sizing it needs the GCM with the gases, the glow and the dimming; the climate programme is
-  paused, and that run is the author's call.
+- **The rain's response on the Moon.** This screen takes Earth's G1 as its reference. Its land evaporation fell about
+  10%, partly through CO2 closing the stomata, which the Moon's case lacks at 400 ppm; its fast response comes from
+  CO2's absorption in the air, as the gases' does here. The GCM gives the Moon's own
+  ([gases, glow and dimming](../gases_glow_dimming/README.md)): about half Earth's for the gases, and for the glow,
+  whose infrared heats the upper air with about 4% reaching the ground, 0.46% of the rain for each W/m² of it with the
+  temperature held.
 - **Partial water limits.** Rain-fed land's light response is taken as zero. After rain, before the soil dries, plants
   follow the light for a while, so its true response is small and positive.
 - **The waters' and the sky's production** are design guesses on Earth's waters and the sky ecology's ranges; the

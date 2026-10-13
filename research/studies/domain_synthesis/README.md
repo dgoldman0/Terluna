@@ -195,9 +195,11 @@ decomposition about three times as large. The held pair and Earth's air differ o
 years to reach 0.1 ppm, so its level can still be raised to Earth's before any decomposition is built if the dimming
 proves cheap. The [light limitation](../light_limitation/README.md) study, done the same day, finds water holds
 most of the land's growth: light limits 10–40% of the living Moon's growth, so each 1% of dimming costs 0.07–0.30%
-of it through light, and the held pair's 1.69% costs 0.12–0.50%. In Earth's models a dimming that holds the
-temperature also takes about 1% of the rain for each 1%, which the rain-fed land would feel more; the Moon's
-response needs the GCM.
+of it through light, and the held pair's 1.69% costs 0.12–0.50%. The GCM, run again with the gases, the glow and the
+dimming the same day ([gases, glow and dimming](../gases_glow_dimming/README.md)), finds the held pair's dimming keeps
+the design temperature and takes 0.9% of the rain, about half Earth's response, which costs the rain-fed land
+0.5–0.7% of the living Moon's growth. The fleet's glow costs more: its infrared heats the upper air, needs 0.71 of
+its watts in dimming to hold the temperature, and still takes 2.4% of the rain.
 
 The added dimming's light gives the array 40–59 TW more at 20–30% conversion.
 
@@ -274,7 +276,8 @@ Machine time is for this laptop, one core, alongside the author's other work.
 1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October, about 38 minutes on six
    workers with the levels below Earth's 1750 air ([reduced gases](../../../atmosphere/radiative_convective/README.md)).
    The author chose the middle of three pairs weighed, 1.9 ppm of methane and 0.1 ppm of N2O (above). Where light
-   limits growth followed on 13 October ([light limitation](../light_limitation/README.md)).
+   limits growth followed on 13 October ([light limitation](../light_limitation/README.md)), and the GCM run with the
+   gases, the glow and the dimming ([gases, glow and dimming](../gases_glow_dimming/README.md)).
 2. **C′ placed with the blend:** the distributions study takes the blend as its food and places it band by band,
    with the homestead belt holding the heritage farms. Minutes; the distributions README follows.
 3. **The fleet's night and its glow** (plan, item 3; the planned branch research/array-industry): the night-side

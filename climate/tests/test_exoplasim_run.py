@@ -46,10 +46,11 @@ class RunnerTests(unittest.TestCase):
         # The convective patch edits text the cloud-water patch wrote, so it must come after it.
         order = [marker for name, marker, _ in er.PATCHES if name == 'rainmod.f90']
         self.assertEqual(order[0], 'Terluna: gravity for the heights below')
-        # The Sun's clock extends the namelist and broadcast lines the calibration patch wrote, and the
-        # shortwave path extends the Sun's.
+        # The Sun's clock extends the namelist and broadcast lines the calibration patch wrote, the shortwave
+        # path extends the Sun's, and the infrared from space extends the shortwave path's.
         radmod = [marker for name, marker, _ in er.PATCHES if name == 'radmod.f90']
-        self.assertEqual(radmod, ['Terluna: calibration multiplier', "Terluna: the Sun's clock", 'Terluna: calibrated absorptivity'])
+        self.assertEqual(radmod, ['Terluna: calibration multiplier', "Terluna: the Sun's clock", 'Terluna: calibrated absorptivity',
+                                  'Terluna: infrared from space at the top of the air'])
 
     def test_default_settings_are_the_corrected_physics(self):
         self.assertEqual(er.MODEL['cloud_water'], 'earth_path')
