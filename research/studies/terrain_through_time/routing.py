@@ -53,8 +53,11 @@ ATLAS = 'geography/results/atlas.json'
 GATES = 'research/studies/conservation/results/gates.json'
 INPUTS = (DRAINAGE, ATLAS, GATES)
 CODE = ('research/studies/terrain_through_time/routing.py', 'resources/sea_phosphorus_waters.py',
-        'research/studies/carbon_cycle/run.py', 'geography/drainage.py', 'geography/topography.py',
-        'geography/atlas.py', 'geography/nomenclature.py')
+        'geography/drainage.py', 'geography/topography.py', 'geography/atlas.py', 'geography/nomenclature.py')
+# The carbon cycle's weathering law spreads the rivers' hardness by temperature with Dessert et al.'s (2003) exponent;
+# it is copied here, and the tests hold it to the carbon cycle's, so that the carbon cycle can change without making
+# this routing stale.
+DESSERT_B = 0.0642
 IGNORED = ('climate/gcm/products/climatology_A28_dim5_moon.npz', 'geography/inputs/ldem_16.img',
            'geography/inputs/ldem_16.lbl', 'geography/inputs/ldem_4.img', 'geography/inputs/ldem_4.lbl',
            'geography/inputs/jggrx_0420a_sha.tab', 'geography/inputs/jggrx_0420a_sha.lbl',
@@ -566,7 +569,6 @@ def deltas(u, r, shape, cell_km, rock, passed_by_case, rates):
 def compute():
     from geography import drainage as gd
     from resources import sea_phosphorus_waters as spw
-    from research.studies.carbon_cycle import run as cc
     committed = json.loads((ROOT / DRAINAGE).read_text())
     gates = json.loads((ROOT / GATES).read_text())
     climatology = ROOT / IGNORED[0]
@@ -728,7 +730,7 @@ def compute():
     ts = climate_on_grid(clim, 'ts_k', rows, cols).ravel().astype(np.float64)
     runoff = np.where(outlet | (~outlet & (hf < r['level'][r['label']])), 0.0,
                       np.maximum(runoff_mm.ravel(), 0.0) * gd.MM_DAY * area)
-    b = cc.DESSERT_B
+    b = DESSERT_B
     t_ref = float(np.log((runoff * np.exp(b * (ts - 300.0))).sum() / runoff.sum()) / b + 300.0)
     weight = np.exp(b * (ts - t_ref))
     passes = (r['passed_on'] > 0).astype(np.float64)

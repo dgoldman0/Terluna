@@ -47,8 +47,8 @@ Two runners write two products:
   104,000 km² of new land. The largest deltas grow up to 38 km² in the first thousand years and 130–280 km² in ten
   thousand, reaching 9–13 km from their mouths; some fill their whole lake or crater water, as at Einthoven and
   Schlüter. The big rivers' deltas start small, since lakes upstream catch their rock until they fill.
-- **The seas fill in 0.8–11 million years.** A fifth of the land's rock reaches them past every lake, and their own
-  deposits add more; the [sea chemistry](../sea_chemistry/README.md)'s box gave 0.7–12 million.
+- **The seas fill in 0.9–15 million years.** A fifth of the land's rock reaches them past every lake, and their own
+  deposits add more; the [sea chemistry](../sea_chemistry/README.md)'s box gives 0.8–16 million.
 - **Keeping all of it is one loop and costs a few gigawatts.** At the start 38% of the land's rock settles in the lakes,
   41% in the 119,740 dry hollows of the drier middle latitudes and poles, and 21% in the seas. Dredging the lakes'
   deltas and carrying the rock back uphill keeps the lakes open and the relief standing. At the central 3.55 Gt a year
@@ -60,8 +60,8 @@ Two runners write two products:
   1–14 mm a century; spread on each catchment's highest third, 4–42 mm a century. Loess fell on China's Loess Plateau
   at about 10 mm a century in the Holocene and 21 in the last glacial maximum. The rivers, slopes and lakes downstream
   then shape the land as they would under slow uplift.
-- **The seas' stone builds the built land.** The seas must shed 0.39 km³ a year of calcite, magnesite, opal and salts
-  to stay fresh, enough for terraces 10 m high over 39,000 km² every thousand years, beside the land's own
+- **The seas' stone builds the built land.** The seas must shed 0.23 km³ a year of calcite, magnesite, opal and salts
+  to stay fresh, enough for terraces 10 m high over 23,000 km² every thousand years, beside the land's own
   0.27–2.7 km³ a year of rock.
 - **Travertine builds while the soils are young.** At the catchment rate the rivers carry 1.26 meq/L of alkalinity and,
   at the air's CO2, stand at 0.76 times calcite saturation: they build tufa on 0.2% of their length, where warm ground

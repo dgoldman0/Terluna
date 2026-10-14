@@ -7,7 +7,7 @@ life. This box model follows the common-level waters and the rain-fed lakes that
 to a billion years.
 
 `python -m research.studies.sea_chemistry.run` writes [results/sea_chemistry.json](results/sea_chemistry.json)
-(schema `terluna.research.sea-chemistry/1`, with its producer, the sha256 of its eight inputs, its evidence statement
+(schema `terluna.research.sea-chemistry/1`, with its producer, the sha256 of its ten inputs, its evidence statement
 and reading rule) in about fifteen seconds: 54 runs, each a delivery, a set of sinks, a fate for the sediment and one
 of the carbon cycle's three weathering corners. [sources.json](sources.json) records each published value and how far
 it was read.
@@ -15,48 +15,52 @@ it was read.
 ## What it finds
 
 - **The first thousands of years follow the carbon cycle.** Fresh water starts at pH 5.6 and takes weathering's
-  carbonate: pH 8.1 by year 1,000 and 8.7 by year 10,000, at 0.13 and 0.43 g/kg. The seas reach three times calcite
-  saturation in year 1,320–2,740 (central 1,750), where the
-  [carbon cycle](../carbon_cycle/README.md) finds 1,306–2,725 (central 1,742). Brackish water, Earth's seawater diluted
-  tenfold, moves from pH 7.4 to 8.5 over the same time, and salted water stays near 35.1 g/kg and pH 8.0 while its
-  calcium falls a sixth as calcite settles.
+  carbonate: pH 7.6 by year 1,000 and 8.5 by year 10,000, at 0.04 and 0.31 g/kg. The seas reach three times calcite
+  saturation in year 4,000–6,600 (central 6,600), where the [carbon cycle](../carbon_cycle/README.md) finds
+  3,975–6,555 (central 6,555): only a share of the weathering reaches the waters ([springs](../springs/README.md)), and
+  while the crust fills its floors draw off the waters' load with the water they take, which delivered water of the
+  seas' own make-up replaces. Brackish water, Earth's seawater diluted tenfold, moves from pH 7.4 to 8.4 over the same
+  time, and salted water stays near 35.1 g/kg and pH 8.0 while its calcium falls 7% as calcite settles.
 - **Left alone, the seas turn alkaline.** The Moon's rock gives the rivers calcium, magnesium and a little sodium and
-  potassium, each with the carbonate that balances it, and almost no chloride or sulphur. Calcite takes the calcium,
-  and the rest of the alkalinity stays in seas that have no outlet. Fresh seas reach pH 9 in 13,000–34,000 years.
-  Magnesium clays forming at pH 9 hold them near it for about a million years, and the sodium's soda then carries them
-  on: 1 g/kg after 0.5–0.6 million years, Earth's salinity as a soda water after 24 million and a saturated soda brine,
-  like Earth's soda lakes at about 300 g/kg, after 200 million. Without the clays, the magnesium keeps its carbonate in
+  potassium, each with the carbonate that balances it, and almost no chloride or sulphur. Calcite takes the calcium, and
+  the rest of the alkalinity stays in seas that have no outlet. Fresh seas reach pH 9 in 30,000–60,000 years. Magnesium
+  clays forming at pH 9 hold them near it for about a million years, and the sodium's soda then carries them on: 1 g/kg
+  after 0.7–1.3 million years, Earth's salinity as a soda water after 27–38 million and a saturated soda brine, like
+  Earth's soda lakes at about 300 g/kg, after 220–300 million. Without the clays, the magnesium keeps its carbonate in
   solution and the same path runs about fifteen times faster.
-- **Delivered salt sets only the start.** Chloride has no sink, so a salted sea keeps Earth's salinity, but
-  weathering's alkalinity gathers in it all the same: pH 9 after 0.21–0.30 million years and a tenth saltier after
-  0.17–0.24 million. Brackish seas join the fresh seas' path within ten million years.
+- **Delivered salt sets only the start.** Chloride has no sink but the floors' water, which delivered seawater replaces,
+  so a salted sea keeps Earth's salinity, but weathering's alkalinity gathers in it all the same: pH 9 after 0.30–0.53
+  million years and a tenth saltier after 0.25–0.42 million. Brackish seas join the fresh seas' path within ten million
+  years.
 - **Sediment fills the waters first.** The lakes catch nearly all the land's sediment and are full in 0.2–6.8 million
   years. The seas take the particles that pass and their own deposits of calcite, opal and magnesium minerals,
-  0.7–2.3 km³ a year, and are full in 0.7–12 million years. A Moon without plate tectonics has nothing that renews its
+  0.4–1.4 km³ a year, and are full in 0.8–16 million years. A Moon without plate tectonics has nothing that renews its
   basins. The [terrain study](../terrain_through_time/README.md) routes the rock lake by lake: at first the lakes take
   38% of it, dry hollows 41% and the seas 21%, so the lakes' capacity is 99% filled in 2–25 million years and the
-  seas in 0.8–11 million.
-- **Every lasting state is a held one.** Four flows at weathering's catchment rate keep the seas wherever the
-  delivery sets them, for the billion years:
-  - calcite, 296 Mt a year, which calcifiers build as they do on Earth;
-  - magnesium, 126 Mt a year of magnesite made where the rivers enter the lakes, the carbon cycle's managed route, or
-    242 Mt a year of magnesium clays at pH 9;
-  - soda and sodium sulphate, 20 Mt a year from soda works on the rivers;
-  - silica, 476 Mt a year of opal, which silica-building life holds at 0.1 mmol/kg.
+  seas in 0.9–15 million.
+- **Every lasting state is a held one.** Four flows at the mature Moon's weathering, the 59% of the catchment rate
+  that reaches the waters, keep the seas wherever the delivery sets them, for the billion years:
+  - calcite, 150 Mt a year, which calcifiers build as they do on Earth;
+  - magnesium, 95 Mt a year of magnesite made where the rivers enter the lakes, the carbon cycle's managed route, or
+    182 Mt a year of magnesium clays at pH 9;
+  - soda and sodium sulphate, 15 Mt a year from soda works on the rivers;
+  - silica, 282 Mt a year of opal, which silica-building life holds at 0.1 mmol/kg.
 
   Held this way, fresh seas stay hard fresh water at 0.14 g/kg and pH 8.3, brackish seas at 3.65 g/kg and pH 8.3, and
   salted seas Earth's seawater at 35.1 g/kg and pH 8.0. Open water for the billion years also needs the land's
   sediment, 0.7–8.3 Gt a year, returned to it, which the conservation study's gates price at 0.11–1.1 GW of ideal
-  lifting power for 0.71–7.1 Gt, and the seas' own deposits, 0.7–2.3 km³ a year, taken out.
+  lifting power for 0.71–7.1 Gt, and the seas' own deposits, 0.4–1.4 km³ a year, taken out.
 - **Phosphorus follows the lakes' trap.** While the lakes catch it, and dredging their deltas for people's phosphorus
   keeps them catching, the mixed seas hold 0.4–23 mg/m³ fresh and 0.9–116 salted, against Earth's ocean mean of 70;
   salt water frees part of the particles' phosphorus. Once the lakes are full the seas get the land's whole loss:
   7–350 mg/m³ fresh and 20–2,600 salted. Earth's mean delivered with the water falls to the rivers' level by year
   10,000 at a 1,000-year residence and by year 100,000 at 20,000 years. An alkaline sea with its calcium spent can
   hold far more, since apatite no longer takes the phosphate (Toner & Catling 2020).
-- **The carbon.** Weathering takes 0.109 Gt C a year from the air at the catchment rate. Calcite buries 0.036 Gt C a
-  year, and the magnesite route 0.018 more; the rest returns to the air. The air's CO2 is held at 400 ppm here, so
-  the resupply the carbon cycle sizes for its first 10,000 years runs on at that rate.
+- **The carbon.** The weathering that reaches the waters takes 0.065 Gt C a year from the air in the mature Moon,
+  59% of the catchment rate's 0.109. Calcite buries 0.018 Gt C a year, and the magnesite route 0.014 more; the rest
+  returns to the air. While the crust fills, its floors take 129 Gt C of the waters' carbon down by year 10,000 and
+  1,118 by a million years. The air's CO2 is held at 400 ppm here, so the resupply the carbon cycle sizes for its
+  first 10,000 years runs on at that rate.
 
 ## The seas over a billion years
 
@@ -64,21 +68,21 @@ Central weathering, seas kept open. Salinity in g/kg and pH; a dash where the br
 
 | Delivery and sinks | 1,000 years | 10,000 | 100,000 | 1 million | 10 million | 100 million | 1 billion |
 |---|---|---|---|---|---|---|---|
-| Fresh, natural (magnesium clays) | 0.13, 8.1 | 0.43, 8.7 | 0.81, 9.0 | 1.6, 9.1 | 15, 9.8 | 153, – | 291, – |
-| Fresh, magnesium kept | 0.13, 8.1 | 0.43, 8.7 | 2.5, 9.4 | 23, 10.0 | 221, – | 298, – | 298, – |
-| Fresh, held | 0.06, 7.9 | 0.14, 8.3 | 0.14, 8.3 | 0.14, 8.3 | 0.14, 8.3 | 0.14, 8.3 | 0.14, 8.3 |
-| Brackish, natural | 3.6, 8.1 | 3.9, 8.5 | 4.4, 9.0 | 4.8, 9.0 | 18, 9.8 | 156, – | 294, – |
-| Brackish, held | 3.6, 8.0 | 3.65, 8.3 | 3.65, 8.3 | 3.65, 8.3 | 3.65, 8.3 | 3.65, 8.3 | 3.65, 8.3 |
-| Salted, natural | 35.1, 8.0 | 35.2, 8.0 | 36, 8.6 | 40, 9.0 | 49, – | 187, – | 293, – |
+| Fresh, natural (magnesium clays) | 0.04, 7.6 | 0.31, 8.5 | 0.81, 9.0 | 0.96, 9.0 | 11, 9.7 | 116, – | 294, – |
+| Fresh, magnesium kept | 0.04, 7.6 | 0.31, 8.5 | 1.3, 9.2 | 14, 9.8 | 163, – | 294, – | 294, – |
+| Fresh, held | 0.02, 7.3 | 0.12, 8.2 | 0.14, 8.3 | 0.14, 8.3 | 0.14, 8.3 | 0.14, 8.3 | 0.14, 8.3 |
+| Brackish, natural | 3.6, 7.8 | 3.8, 8.4 | 4.4, 9.0 | 4.6, 9.0 | 14, 9.7 | 119, – | 296, – |
+| Brackish, held | 3.5, 7.6 | 3.63, 8.2 | 3.65, 8.3 | 3.65, 8.3 | 3.65, 8.3 | 3.65, 8.3 | 3.65, 8.3 |
+| Salted, natural | 35.1, 8.0 | 35.2, 8.0 | 35.3, 8.2 | 40, 9.0 | 44, – | 148, – | 294, – |
 | Salted, held | 35.1, 8.0 | 35.1, 8.0 | 35.1, 8.0 | 35.1, 8.0 | 35.1, 8.0 | 35.1, 8.0 | 35.1, 8.0 |
 
 | Milestone, years | Fresh, natural | Fresh, magnesium kept | Salted, natural |
 |---|---|---|---|
-| Calcite settles in the seas | 1,320–2,740 | 1,320–2,740 | from the start |
-| pH 9 | 13,000–34,000 | 13,000–34,000 | 211,000–298,000 |
-| 1 g/kg | 501,000–631,000 | 17,000–40,000 | |
-| Earth's salinity, or a tenth above it | 24 million | 1.5–1.7 million | 168,000–237,000 |
-| A saturated soda brine (300 g/kg) | 200 million | 13–14 million | 178 million |
+| Calcite settles in the seas | 4,000–6,600 | 4,000–6,600 | from the start |
+| pH 9 | 30,000–60,000 | 30,000–60,000 | 299,000–531,000 |
+| 1 g/kg | 708,000–1,259,000 | 38,000–75,000 | |
+| Earth's salinity, or a tenth above it | 27–38 million | 1.8–3.0 million | 251,000–422,000 |
+| A saturated soda brine (300 g/kg) | 224–300 million | 16–24 million | 200–282 million |
 
 Ranges run across the weathering corners. The natural seas' composition after a few million years is a soda water:
 sodium and potassium with carbonate, calcium below 0.01 mmol/kg and magnesium in clays. Without the clays it is a
@@ -90,9 +94,9 @@ magnesium-soda water.
 |---|---|---|
 | The land's erosion | 8.3 Gt a year (the soil loss the phosphorus particles imply) | 0.71 Gt a year (10 m/Myr, the conservation study) |
 | Dry density of what settles | 500 kg/m³ | 1,500 kg/m³ |
-| The seas' deposits | 2.3 km³ a year (natural seas, 80% porous) | 0.68 km³ a year (held seas, 50% porous) |
+| The seas' deposits | 1.4 km³ a year (natural seas, 80% porous) | 0.39 km³ a year (held seas, 50% porous) |
 | Lakes full | 196,000 years | 6.8 million |
-| Seas full | 0.73 million years | 12 million |
+| Seas full | 0.77 million years | 16 million |
 
 Without their own deposits the seas would be full in 0.83–29 million years. When the seas fill, their water spreads
 over the low ground the sediment builds: the volume stays, and the deep basins go.
@@ -104,9 +108,14 @@ over the low ground the sediment builds: the volume stays, and the deep basins g
   400 ppm and 1.216 bar. The lakes take 96.5% of the land's runoff and pass it on through 445 years of residence.
 - **Weathering**, imported from the carbon cycle: Dessert's basalt law over the land's discharge, 9.1×10¹² eq a year
   at the catchment rate, with the developed soils starting at 1, √10 or 10 times it and ageing toward it on White and
-  Brantley's law; erosion keeps the catchment rate renewed. The highland soil sets the cations: calcium 65% of the
-  alkalinity, magnesium 33%, sodium and potassium 2%. Its export gives 0.87 mol of silica and 0.0025 of sulphate for
-  each equivalent.
+  Brantley's law; erosion keeps the catchment rate renewed. The springs study's share of it reaches the waters, 36% at
+  1,000 years, 42% at 10,000 and 59% in the mature Moon at the centre (each corner takes stage 1's crust of the same
+  end), with its make-up: the highland soil's calcium, 65% of the alkalinity, magnesium 33% and sodium and potassium
+  2%, less the calcium the groundwater lays in the rock, so 45–56% calcium arrives. Its export gives 0.87 mol of silica
+  and 0.0025 of sulphate for each equivalent.
+- **The floors.** Stage 1's uptake through the lakes' and seas' floors, 2,400 km³ a year at first and nothing after ten
+  million years, draws off their water with its dissolved load. The water delivered to replace the seas' carries the
+  delivery's own make-up, fresh, brackish or salted; the lakes' comes from their rivers.
 - **The chemistry**, imported from the carbon cycle: Plummer and Busenberg's constants with Davies activities in fresh
   water, Earth's seawater constants in the salted sea, and its carbonate solver. Calcite settles where a water stands
   above three times saturation, or a salted sea's delivered 4.37. Magnesium clays form at pH 9 (*design guess*;

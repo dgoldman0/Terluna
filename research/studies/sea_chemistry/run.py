@@ -13,7 +13,10 @@ delivery to a billion years:
 - weathering on the carbon cycle's terms (research/studies/carbon_cycle): Dessert's basalt law over the land's
   discharge, the developed soils ageing toward the catchment rate, which erosion keeps renewing, and the highland
   soil's calcium, magnesium and sodium with potassium, with the silica and sulphate of its export (lunar cycle
-  ecology); the lakes take 96.5% of it and pass their water to the seas;
+  ecology), of which the share the springs study finds reaching the waters arrives, with the springs' make-up; the
+  lakes take 96.5% of it and pass their water to the seas;
+- the floors: while the crust fills (stage 1) the lakes' and seas' floors draw off water with its dissolved load, and
+  delivered fresh water replaces it;
 - the carbonate system of each box in equilibrium with the air's 400 ppm, through the carbon cycle's constants and
   solver, and calcite where a water stands above its threshold (three times saturation in fresh water, the
   delivered saturation in a salted sea);
@@ -53,7 +56,9 @@ CARBON = 'research/studies/carbon_cycle/results/carbon_cycle.json'
 INPUTS = {SCREEN: 'terluna.resources.first-screen/1', SEA_P: 'terluna.resources.sea-phosphorus/1',
           CO2_STUDY: 'terluna.research.atmospheric-co2/1', LUNAR_CYCLE: 'terluna.research.lunar-cycle-ecology/1',
           GATES: None, ATLAS: 'terluna.geography.atlas/1', DRAINAGE: 'terluna.geography.drainage/1',
-          CARBON: 'terluna.research.carbon-cycle/1'}
+          CARBON: 'terluna.research.carbon-cycle/1', cc.SPRINGS: 'terluna.research.springs/1',
+          cc.STAGE1: 'terluna.geography.groundwater-uptake/1'}
+FLOOR_SPANS = ('10', '100', '1000', '10000', '100000', '1e+06', '1e+07')   # stage 1's spans, to ten million years
 
 YEAR_S = cc.YEAR_S
 # Earth's reference seawater at a salinity of 35.165 (Millero et al. 2008), mol/kg; alkalinity eq/kg.
@@ -100,8 +105,10 @@ EVIDENCE = ('A box model on committed products: the rain-fed lakes and the commo
             'CO2 equilibrium with the air at 400 ppm, at the design case\'s temperatures, fed by the carbon cycle\'s '
             'weathering of the highland soil, with the carbon cycle\'s carbonate constants and solver (fresh water '
             'with Davies activities; Earth\'s seawater with its stoichiometric constants). Calcite, magnesium clays, '
-            'magnesite and opal leave the water at stated thresholds (design guesses and bounds); sodium, potassium, '
-            'chloride and sulphate leave only with pore water. Ion pairs are not followed. Beyond an ionic strength '
+            'magnesite and opal leave the water at stated thresholds (design guesses and bounds); the springs study '
+            'and stage 1 give the share of the weathering that reaches the waters and the floors\' uptake; sodium, '
+            'potassium, chloride and sulphate leave only with pore water and the water the floors take. Ion pairs are '
+            'not followed. Beyond an ionic strength '
             'of 0.5 mol/kg the activities fail, and the masses alone are reported.')
 READING_RULE = ('Concentrations in mmol/kg of water unless a key names g/kg or mg/m3; alkalinity in meq/kg. Years from '
                 'the water\'s delivery. corners are the carbon cycle\'s low, central and high weathering. Each run is a '
@@ -164,7 +171,45 @@ def setting(data):
         p_kg_yr=dict(after_lakes=sea_p['to_seas_dissolved_kg_yr'], without_lakes=sea_p['if_lakes_passed_all_dissolved_kg_yr'],
                      particulate_after_lakes=sea_p['to_seas_particulate_kg_yr'],
                      particulate_without_lakes=loss['particulate_kg_yr']),
-        lake_volume_m3=sea_p['lake_volume_m3'])
+        lake_volume_m3=sea_p['lake_volume_m3'], groundwater=cc.ground(data), floors=floors(data))
+
+
+def floors(data):
+    """The lakes' and seas' floors' uptake (kg a year) over each of stage 1's spans, for each crust."""
+    stage1 = data[cc.STAGE1]
+    areas = {b['band']: b for b in stage1['setting']['bands']}
+    out = {}
+    for case in set(cc.CRUST_CASES.values()):
+        rows, start = [], 0.0
+        for end in FLOOR_SPANS:
+            row = dict(start=start, end=float(end), seas_kg_yr=0.0, lakes_kg_yr=0.0)
+            for name, band in stage1['cases'][case]['bands'].items():
+                cols = band['columns']
+                for key, col, area in (('seas_kg_yr', 'sea_floor', 'sea_m2'), ('lakes_kg_yr', 'lake_floor', 'lake_m2')):
+                    if col in cols:
+                        row[key] += cols[col]['by_year'][end]['uptake_m_yr_since_last'] * areas[name][area] * 1e3
+            rows.append(row)
+            start = float(end)
+        out[case] = rows
+    return out
+
+
+def floor_at(rows, t, key):
+    for row in rows:
+        if t < row['end']:
+            return row[key]
+    return 0.0
+
+
+def arriving(st, case, t):
+    """The share of the catchment law's weathering that reaches the waters at year t, and its shares by ion: the
+    springs study's calcium, magnesium and alkali shares, the alkalis split as the highland soil's."""
+    g = st['groundwater'][case]
+    ratio = cc.at_year(g['years'], g['ratio'], t)
+    sh = {k: cc.at_year(g['years'], [x[k] for x in g['shares']], t) for k in ('ca', 'mg', 'mono')}
+    rock = st['shares']
+    alk = rock['na'] + rock['k']
+    return ratio, dict(ca=sh['ca'], mg=sh['mg'], na=sh['mono'] * rock['na'] / alk, k=sh['mono'] * rock['k'] / alk)
 
 
 def sediment_times(st, works):
@@ -341,7 +386,10 @@ def run(st, corner, delivery, sinks, sediment):
     lake_full = st['lake_volume_m3'] * DRY_DENSITY[1] / ((1.0 - passing) * erosion)
     porosity = 1.0 - DRY_DENSITY[1] / GRAIN_DENSITY
     cum = {k: 0.0 for k in ('weathering_eq', 'calcite', 'clays', 'magnesite', 'opal', 'pore_salts_g', 'sediment_m3',
-                            'soda_works', 'sulphate_works', 'soda_minerals', 'deposit_m3')}
+                            'soda_works', 'sulphate_works', 'soda_minerals', 'deposit_m3', 'floor_alkalinity_eq',
+                            'floor_carbon', 'floor_salts_g')}
+    case = cc.CRUST_CASES[corner]
+    floor_rows = st['floors'][case]
     # Each mole the sea deposits builds this much deposit (m3), at the middle porosity.
     build = {k: MOLAR_MASS[k] * 1e-3 / MINERAL_DENSITY[k] / (1.0 - 0.5 * sum(DEPOSIT_POROSITY))
              for k in ('calcite', 'magnesium_clays', 'opal')}
@@ -351,8 +399,13 @@ def run(st, corner, delivery, sinks, sediment):
     active_calcite = active_clays = False
     for t0, t1 in zip(grid[:-1], grid[1:]):
         dt = t1 - t0
-        w = st['weathering_eq_yr'] * cc.weathering_factor(0.5 * (t0 + t1), p)
+        tm = 0.5 * (t0 + t1)
+        ratio, sh = arriving(st, case, tm)
+        w = st['weathering_eq_yr'] * cc.weathering_factor(tm, p) * ratio
         cum['weathering_eq'] += w * dt
+        k_lake_floor = floor_at(floor_rows, tm, 'lakes_kg_yr') / lake['mass']
+        k_sea_floor = floor_at(floor_rows, tm, 'seas_kg_yr') / sea['mass']
+        cum['floor_carbon'] += (k_lake_floor * lake['dic'] + k_sea_floor * sea['dic']) * dt
         so4 = w * st['so4_per_eq']
         inflow = dict(ca=0.5 * w * sh['ca'], mg=0.5 * w * sh['mg'], na=w * sh['na'], k=w * sh['k'], so4=so4,
                       ta=w - 2.0 * so4, si=w * st['si_per_eq'])
@@ -367,9 +420,12 @@ def run(st, corner, delivery, sinks, sediment):
             inflow['na'] = inflow['k'] = inflow['so4'] = 0.0
         # The lakes: their share of the weathering, relaxing toward steady flow-through, and their outflow.
         to_lake = {k: v * st['lake_share'] for k, v in inflow.items()}
-        before = {k: lake[k] for k in to_lake}
-        decay(lake, to_lake, 1.0 / tau_lake, dt)
-        outflow = {k: before[k] + to_lake[k] * dt - lake[k] for k in to_lake}
+        k_lake = 1.0 / tau_lake + k_lake_floor
+        lost = decay(lake, to_lake, k_lake, dt)
+        outflow = {k: v / (tau_lake * k_lake) for k, v in lost.items()}
+        down = {k: v * k_lake_floor / k_lake for k, v in lost.items()}
+        cum['floor_alkalinity_eq'] += down['ta']
+        cum['floor_salts_g'] += molar_grams(down)
         cum['calcite'] += calcite(st, lake, False, cc.OMEGA_FRESH)
         # The seas: the rest of the weathering, the lakes' outflow and, if sediment settles, pore water's burial.
         k_pw = 0.0
@@ -379,8 +435,20 @@ def run(st, corner, delivery, sinks, sediment):
             cum['sediment_m3'] += v_rate * dt
         to_sea = {k: inflow[k] * (1.0 - st['lake_share']) + outflow[k] / dt for k in inflow}
         to_sea['cl'] = 0.0
-        lost = decay(sea, to_sea, k_pw, dt)
-        cum['pore_salts_g'] += molar_grams(lost)
+        # The water delivered to replace what the floors take carries the delivery's own salts.
+        share = dict(brackish=BRACKISH_SHARE, salted=1.0).get(delivery, 0.0)
+        if share > 0.0 and k_sea_floor > 0.0:
+            top = k_sea_floor * sea['mass'] * share
+            for key in ('na', 'k', 'mg', 'ca', 'cl', 'so4'):
+                to_sea[key] = to_sea.get(key, 0.0) + top * SEAWATER[key]
+            to_sea['ta'] += top * SEAWATER['alkalinity']
+        k_sea = k_pw + k_sea_floor
+        lost = decay(sea, to_sea, k_sea, dt)
+        pore = {k: v * k_pw / k_sea for k, v in lost.items()} if k_sea > 0 else lost
+        down = {k: v * k_sea_floor / k_sea for k, v in lost.items()} if k_sea > 0 else {}
+        cum['pore_salts_g'] += molar_grams(pore)
+        cum['floor_alkalinity_eq'] += down.get('ta', 0.0)
+        cum['floor_salts_g'] += molar_grams(down)
         # The minerals by the constants where the step ends inside their range (a step's inputs may carry the box
         # past it until calcite and clays take them), by the frozen caps below where it does not.
         trial, x_ca, x_mg, x_si = dict(sea), 0.0, 0.0, 0.0
@@ -480,9 +548,11 @@ def state(st, t, sea, lake, salted, cum, held0):
                     sulphate_works_mol=cum['sulphate_works'],
                     pore_water_salts_gt=cum['pore_salts_g'] / 1e15, sediment_km3=cum['sediment_m3'] / 1e9,
                     deposits_km3=cum['deposit_m3'] / 1e9),
+        floors=dict(alkalinity_eq=cum['floor_alkalinity_eq'], salts_gt=cum['floor_salts_g'] / 1e15,
+                    carbon_gt_c=cum['floor_carbon'] * cc.M_C / 1e15),
         co2_gt_c=dict(weathering_took=took * cc.M_C / 1e15, waters_gained=(held - held0) * cc.M_C / 1e15,
-                      carbonate=buried * cc.M_C / 1e15,
-                      returned=(took - (held - held0) - buried) * cc.M_C / 1e15))
+                      carbonate=buried * cc.M_C / 1e15, floors=cum['floor_carbon'] * cc.M_C / 1e15,
+                      returned=(took - (held - held0) - buried - cum['floor_carbon']) * cc.M_C / 1e15))
 
 
 # --- Phosphorus --------------------------------------------------------------------------------------------------
@@ -515,10 +585,12 @@ def phosphorus(st, sed, residence, start_mg_m3, extra_kg_yr=0.0, salted=False, e
 
 
 def works(st):
-    """What each sink takes a year once the soils have aged to the catchment rate, Mt a year: calcite from the
+    """What each sink takes a year once the soils have aged to the catchment rate, with the mature Moon's share of it
+    reaching the waters at the springs' make-up (the central crust), Mt a year: calcite from the
     calcium, magnesite or magnesium clays from the magnesium, soda from the sodium and potassium (as bicarbonates) and
     sodium sulphate from the sulphate."""
-    w, sh = st['weathering_eq_yr'], st['shares']
+    ratio, sh = arriving(st, 'central', 1.0e6)
+    w = st['weathering_eq_yr'] * ratio
     so4 = w * st['so4_per_eq']
     mt = dict(calcite=0.5 * w * sh['ca'] * 100.087 / 1e12, magnesite=0.5 * w * sh['mg'] * 84.314 / 1e12,
               magnesium_clays=0.5 * w * sh['mg'] * 0.25 * 647.8 / 1e12,
@@ -534,7 +606,8 @@ def works(st):
         built = [solid / (1.0 - f) for f in DEPOSIT_POROSITY]
         deposits[name] = dict(solids_km3_yr=solid, deposit_km3_yr=built,
                               seas_full_yr=[sea_km3 / built[1], sea_km3 / built[0]])
-    return dict(weathering_eq_yr=w, co2_gt_c_yr=w * cc.M_C / 1e15, minerals_mt_yr=mt, minerals_km3_yr=km3,
+    return dict(weathering_eq_yr=w, share_reaching_the_waters=ratio, shares=sh, co2_gt_c_yr=w * cc.M_C / 1e15,
+                minerals_mt_yr=mt, minerals_km3_yr=km3,
                 carbonate_burial_gt_c_yr=0.5 * w * sh['ca'] * cc.M_C / 1e15,
                 magnesite_burial_gt_c_yr=0.5 * w * sh['mg'] * cc.M_C / 1e15, deposits_in_the_seas=deposits)
 
@@ -562,7 +635,7 @@ def results():
         schema=SCHEMA,
         producer=dict(files={f: sha256(ROOT / f) for f in FILES}, inputs={k: sha256(ROOT / k) for k in INPUTS}),
         evidence=EVIDENCE, reading_rule=READING_RULE, report_years=list(REPORT_YEARS),
-        setting=rnd(dict({k: v for k, v in st.items() if not k.endswith('_const')}), 5),
+        setting=rnd(dict({k: v for k, v in st.items() if not k.endswith('_const') and k != 'groundwater'}), 5),
         sediment=rnd(sed), works_at_the_catchment_rate=rnd(wk), runs=rnd(runs), phosphorus_mg_m3=rnd(p))
 
 

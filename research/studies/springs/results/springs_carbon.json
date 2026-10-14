@@ -16,20 +16,20 @@
      "land": 1380.0
     },
     "carbon_gt_c_yr": {
-     "seas": 0.0002793,
-     "lakes": 0.0004104,
+     "seas": 0.0002761,
+     "lakes": 0.0002298,
      "land": 0.04718,
-     "total": 0.04787
+     "total": 0.04769
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 1.088,
-     "import_gt_c_yr": 1.084,
-     "weathering_gt_c_yr": 0.339
+     "net_sink_gt_c_yr": 0.9738,
+     "import_gt_c_yr": 0.9702,
+     "weathering_gt_c_yr": 0.1216
     },
-    "over_carbon_cycle_import": 0.04416,
-    "over_carbon_cycle_net_sink": 0.04401,
-    "seas_alkalinity_taken_eq_yr": 712600000.0,
-    "seas_alkalinity_over_weathering": 2.524e-05,
+    "over_carbon_cycle_import": 0.04915,
+    "over_carbon_cycle_net_sink": 0.04897,
+    "seas_alkalinity_taken_eq_yr": 255400000.0,
+    "seas_alkalinity_over_weathering": 2.523e-05,
     "land_water_from_state": "young_1000_yr"
    },
    "10-100": {
@@ -39,20 +39,20 @@
      "land": 630.1
     },
     "carbon_gt_c_yr": {
-     "seas": 0.0001223,
-     "lakes": 0.0007426,
+     "seas": 8.902e-05,
+     "lakes": 0.0002868,
      "land": 0.02123,
-     "total": 0.02209
+     "total": 0.0216
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 1.803,
-     "import_gt_c_yr": 1.794,
-     "weathering_gt_c_yr": 0.2941
+     "net_sink_gt_c_yr": 1.658,
+     "import_gt_c_yr": 1.65,
+     "weathering_gt_c_yr": 0.1054
     },
-    "over_carbon_cycle_import": 0.01231,
-    "over_carbon_cycle_net_sink": 0.01226,
-    "seas_alkalinity_taken_eq_yr": 4614000000.0,
-    "seas_alkalinity_over_weathering": 0.0001885,
+    "over_carbon_cycle_import": 0.01309,
+    "over_carbon_cycle_net_sink": 0.01303,
+    "seas_alkalinity_taken_eq_yr": 1650000000.0,
+    "seas_alkalinity_over_weathering": 0.0001879,
     "land_water_from_state": "young_1000_yr"
    },
    "100-1000": {
@@ -62,20 +62,20 @@
      "land": 265.5
     },
     "carbon_gt_c_yr": {
-     "seas": 0.0007049,
-     "lakes": 0.001125,
+     "seas": 0.000245,
+     "lakes": 0.0003807,
      "land": 0.008841,
-     "total": 0.01067
+     "total": 0.009467
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 0.4939,
-     "import_gt_c_yr": 0.4854,
-     "weathering_gt_c_yr": 0.1936
+     "net_sink_gt_c_yr": 0.4345,
+     "import_gt_c_yr": 0.426,
+     "weathering_gt_c_yr": 0.06942
     },
-    "over_carbon_cycle_import": 0.02199,
-    "over_carbon_cycle_net_sink": 0.02161,
-    "seas_alkalinity_taken_eq_yr": 57030000000.0,
-    "seas_alkalinity_over_weathering": 0.003538,
+    "over_carbon_cycle_import": 0.02222,
+    "over_carbon_cycle_net_sink": 0.02179,
+    "seas_alkalinity_taken_eq_yr": 18460000000.0,
+    "seas_alkalinity_over_weathering": 0.003194,
     "land_water_from_state": "young_1000_yr"
    },
    "1000-10000": {
@@ -85,20 +85,20 @@
      "land": 574.0
     },
     "carbon_gt_c_yr": {
-     "seas": 0.006064,
-     "lakes": 0.0003759,
+     "seas": 0.003713,
+     "lakes": 0.0001471,
      "land": 0.01617,
-     "total": 0.02261
+     "total": 0.02003
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 0.2468,
-     "import_gt_c_yr": 0.1921,
-     "weathering_gt_c_yr": 0.1332
+     "net_sink_gt_c_yr": 0.2496,
+     "import_gt_c_yr": 0.2357,
+     "weathering_gt_c_yr": 0.05351
     },
-    "over_carbon_cycle_import": 0.1177,
-    "over_carbon_cycle_net_sink": 0.09163,
-    "seas_alkalinity_taken_eq_yr": 512500000000.0,
-    "seas_alkalinity_over_weathering": 0.04621,
+    "over_carbon_cycle_import": 0.08499,
+    "over_carbon_cycle_net_sink": 0.08025,
+    "seas_alkalinity_taken_eq_yr": 310400000000.0,
+    "seas_alkalinity_over_weathering": 0.06968,
     "land_water_from_state": "young_10000_yr"
    },
    "10000-100000": {
@@ -108,20 +108,20 @@
      "land": 87.99
     },
     "carbon_gt_c_yr": {
-     "seas": 0.002268,
-     "lakes": 4.972e-05,
+     "seas": 0.001419,
+     "lakes": 2.079e-05,
      "land": 0.002206,
-     "total": 0.004524
+     "total": 0.003646
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 0.2379,
-     "import_gt_c_yr": 0.1863,
-     "weathering_gt_c_yr": 0.1235
+     "net_sink_gt_c_yr": 0.2407,
+     "import_gt_c_yr": 0.2205,
+     "weathering_gt_c_yr": 0.05245
     },
-    "over_carbon_cycle_import": 0.02429,
-    "over_carbon_cycle_net_sink": 0.01902,
-    "seas_alkalinity_taken_eq_yr": 193400000000.0,
-    "seas_alkalinity_over_weathering": 0.01881,
+    "over_carbon_cycle_import": 0.01653,
+    "over_carbon_cycle_net_sink": 0.01515,
+    "seas_alkalinity_taken_eq_yr": 119400000000.0,
+    "seas_alkalinity_over_weathering": 0.02735,
     "land_water_from_state": "mature"
    }
   },
@@ -133,20 +133,20 @@
      "land": 1690.0
     },
     "carbon_gt_c_yr": {
-     "seas": 0.0003935,
-     "lakes": 0.000585,
+     "seas": 0.000389,
+     "lakes": 0.0003276,
      "land": 0.05788,
-     "total": 0.05886
+     "total": 0.0586
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 1.088,
-     "import_gt_c_yr": 1.084,
-     "weathering_gt_c_yr": 0.339
+     "net_sink_gt_c_yr": 0.9738,
+     "import_gt_c_yr": 0.9702,
+     "weathering_gt_c_yr": 0.1216
     },
-    "over_carbon_cycle_import": 0.0543,
-    "over_carbon_cycle_net_sink": 0.05412,
-    "seas_alkalinity_taken_eq_yr": 1004000000.0,
-    "seas_alkalinity_over_weathering": 3.557e-05,
+    "over_carbon_cycle_import": 0.0604,
+    "over_carbon_cycle_net_sink": 0.06017,
+    "seas_alkalinity_taken_eq_yr": 359800000.0,
+    "seas_alkalinity_over_weathering": 3.554e-05,
     "land_water_from_state": "young_1000_yr"
    },
    "10-100": {
@@ -156,20 +156,20 @@
      "land": 834.5
     },
     "carbon_gt_c_yr": {
-     "seas": 0.0001756,
-     "lakes": 0.001107,
+     "seas": 0.0001278,
+     "lakes": 0.0004275,
      "land": 0.02825,
-     "total": 0.02954
+     "total": 0.02881
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 1.803,
-     "import_gt_c_yr": 1.794,
-     "weathering_gt_c_yr": 0.2941
+     "net_sink_gt_c_yr": 1.658,
+     "import_gt_c_yr": 1.65,
+     "weathering_gt_c_yr": 0.1054
     },
-    "over_carbon_cycle_import": 0.01646,
-    "over_carbon_cycle_net_sink": 0.01639,
-    "seas_alkalinity_taken_eq_yr": 6625000000.0,
-    "seas_alkalinity_over_weathering": 0.0002706,
+    "over_carbon_cycle_import": 0.01746,
+    "over_carbon_cycle_net_sink": 0.01737,
+    "seas_alkalinity_taken_eq_yr": 2369000000.0,
+    "seas_alkalinity_over_weathering": 0.0002698,
     "land_water_from_state": "young_1000_yr"
    },
    "100-1000": {
@@ -179,20 +179,20 @@
      "land": 1484.0
     },
     "carbon_gt_c_yr": {
-     "seas": 0.008892,
-     "lakes": 0.02257,
+     "seas": 0.003091,
+     "lakes": 0.007636,
      "land": 0.05093,
-     "total": 0.08239
+     "total": 0.06165
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 0.4939,
-     "import_gt_c_yr": 0.4854,
-     "weathering_gt_c_yr": 0.1936
+     "net_sink_gt_c_yr": 0.4345,
+     "import_gt_c_yr": 0.426,
+     "weathering_gt_c_yr": 0.06942
     },
-    "over_carbon_cycle_import": 0.1697,
-    "over_carbon_cycle_net_sink": 0.1668,
-    "seas_alkalinity_taken_eq_yr": 719400000000.0,
-    "seas_alkalinity_over_weathering": 0.04463,
+    "over_carbon_cycle_import": 0.1447,
+    "over_carbon_cycle_net_sink": 0.1419,
+    "seas_alkalinity_taken_eq_yr": 232800000000.0,
+    "seas_alkalinity_over_weathering": 0.04029,
     "land_water_from_state": "young_1000_yr"
    },
    "1000-10000": {
@@ -202,20 +202,20 @@
      "land": 919.5
     },
     "carbon_gt_c_yr": {
-     "seas": 0.01858,
-     "lakes": 0.004732,
+     "seas": 0.01137,
+     "lakes": 0.001852,
      "land": 0.02605,
-     "total": 0.04936
+     "total": 0.03928
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 0.2468,
-     "import_gt_c_yr": 0.1921,
-     "weathering_gt_c_yr": 0.1332
+     "net_sink_gt_c_yr": 0.2496,
+     "import_gt_c_yr": 0.2357,
+     "weathering_gt_c_yr": 0.05351
     },
-    "over_carbon_cycle_import": 0.2569,
-    "over_carbon_cycle_net_sink": 0.2,
-    "seas_alkalinity_taken_eq_yr": 1570000000000.0,
-    "seas_alkalinity_over_weathering": 0.1416,
+    "over_carbon_cycle_import": 0.1667,
+    "over_carbon_cycle_net_sink": 0.1573,
+    "seas_alkalinity_taken_eq_yr": 951100000000.0,
+    "seas_alkalinity_over_weathering": 0.2135,
     "land_water_from_state": "young_10000_yr"
    },
    "10000-100000": {
@@ -225,20 +225,20 @@
      "land": 141.9
     },
     "carbon_gt_c_yr": {
-     "seas": 0.003318,
-     "lakes": 0.0004133,
+     "seas": 0.002075,
+     "lakes": 0.0001728,
      "land": 0.003577,
-     "total": 0.007308
+     "total": 0.005825
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 0.2379,
-     "import_gt_c_yr": 0.1863,
-     "weathering_gt_c_yr": 0.1235
+     "net_sink_gt_c_yr": 0.2407,
+     "import_gt_c_yr": 0.2205,
+     "weathering_gt_c_yr": 0.05245
     },
-    "over_carbon_cycle_import": 0.03923,
-    "over_carbon_cycle_net_sink": 0.03072,
-    "seas_alkalinity_taken_eq_yr": 282800000000.0,
-    "seas_alkalinity_over_weathering": 0.02751,
+    "over_carbon_cycle_import": 0.02642,
+    "over_carbon_cycle_net_sink": 0.0242,
+    "seas_alkalinity_taken_eq_yr": 174600000000.0,
+    "seas_alkalinity_over_weathering": 0.03999,
     "land_water_from_state": "mature"
    }
   },
@@ -250,20 +250,20 @@
      "land": 2281.0
     },
     "carbon_gt_c_yr": {
-     "seas": 0.0005539,
-     "lakes": 0.0008695,
+     "seas": 0.0005476,
+     "lakes": 0.0004869,
      "land": 0.07968,
-     "total": 0.0811
+     "total": 0.08071
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 1.088,
-     "import_gt_c_yr": 1.084,
-     "weathering_gt_c_yr": 0.339
+     "net_sink_gt_c_yr": 0.9738,
+     "import_gt_c_yr": 0.9702,
+     "weathering_gt_c_yr": 0.1216
     },
-    "over_carbon_cycle_import": 0.07482,
-    "over_carbon_cycle_net_sink": 0.07456,
-    "seas_alkalinity_taken_eq_yr": 1413000000.0,
-    "seas_alkalinity_over_weathering": 5.007e-05,
+    "over_carbon_cycle_import": 0.08319,
+    "over_carbon_cycle_net_sink": 0.08288,
+    "seas_alkalinity_taken_eq_yr": 506500000.0,
+    "seas_alkalinity_over_weathering": 5.003e-05,
     "land_water_from_state": "young_1000_yr"
    },
    "10-100": {
@@ -273,20 +273,20 @@
      "land": 1176.0
     },
     "carbon_gt_c_yr": {
-     "seas": 0.0002845,
-     "lakes": 0.001997,
+     "seas": 0.000207,
+     "lakes": 0.0007712,
      "land": 0.04093,
-     "total": 0.04321
+     "total": 0.04191
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 1.803,
-     "import_gt_c_yr": 1.794,
-     "weathering_gt_c_yr": 0.2941
+     "net_sink_gt_c_yr": 1.658,
+     "import_gt_c_yr": 1.65,
+     "weathering_gt_c_yr": 0.1054
     },
-    "over_carbon_cycle_import": 0.02408,
-    "over_carbon_cycle_net_sink": 0.02397,
-    "seas_alkalinity_taken_eq_yr": 10730000000.0,
-    "seas_alkalinity_over_weathering": 0.0004383,
+    "over_carbon_cycle_import": 0.0254,
+    "over_carbon_cycle_net_sink": 0.02527,
+    "seas_alkalinity_taken_eq_yr": 3837000000.0,
+    "seas_alkalinity_over_weathering": 0.0004371,
     "land_water_from_state": "young_1000_yr"
    },
    "100-1000": {
@@ -296,20 +296,20 @@
      "land": 3109.0
     },
     "carbon_gt_c_yr": {
-     "seas": 0.03193,
-     "lakes": 0.07203,
+     "seas": 0.0111,
+     "lakes": 0.02437,
      "land": 0.1087,
-     "total": 0.2127
+     "total": 0.1442
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 0.4939,
-     "import_gt_c_yr": 0.4854,
-     "weathering_gt_c_yr": 0.1936
+     "net_sink_gt_c_yr": 0.4345,
+     "import_gt_c_yr": 0.426,
+     "weathering_gt_c_yr": 0.06942
     },
-    "over_carbon_cycle_import": 0.4382,
-    "over_carbon_cycle_net_sink": 0.4306,
-    "seas_alkalinity_taken_eq_yr": 2584000000000.0,
-    "seas_alkalinity_over_weathering": 0.1603,
+    "over_carbon_cycle_import": 0.3385,
+    "over_carbon_cycle_net_sink": 0.3319,
+    "seas_alkalinity_taken_eq_yr": 836200000000.0,
+    "seas_alkalinity_over_weathering": 0.1447,
     "land_water_from_state": "young_1000_yr"
    },
    "1000-10000": {
@@ -319,20 +319,20 @@
      "land": 1146.0
     },
     "carbon_gt_c_yr": {
-     "seas": 0.02979,
-     "lakes": 0.004671,
+     "seas": 0.01824,
+     "lakes": 0.001828,
      "land": 0.03279,
-     "total": 0.06725
+     "total": 0.05286
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 0.2468,
-     "import_gt_c_yr": 0.1921,
-     "weathering_gt_c_yr": 0.1332
+     "net_sink_gt_c_yr": 0.2496,
+     "import_gt_c_yr": 0.2357,
+     "weathering_gt_c_yr": 0.05351
     },
-    "over_carbon_cycle_import": 0.3501,
-    "over_carbon_cycle_net_sink": 0.2725,
-    "seas_alkalinity_taken_eq_yr": 2518000000000.0,
-    "seas_alkalinity_over_weathering": 0.227,
+    "over_carbon_cycle_import": 0.2243,
+    "over_carbon_cycle_net_sink": 0.2117,
+    "seas_alkalinity_taken_eq_yr": 1525000000000.0,
+    "seas_alkalinity_over_weathering": 0.3423,
     "land_water_from_state": "young_10000_yr"
    },
    "10000-100000": {
@@ -342,20 +342,20 @@
      "land": 135.7
     },
     "carbon_gt_c_yr": {
-     "seas": 0.001796,
-     "lakes": 8.408e-05,
+     "seas": 0.001123,
+     "lakes": 3.515e-05,
      "land": 0.003365,
-     "total": 0.005245
+     "total": 0.004523
     },
     "carbon_cycle": {
-     "net_sink_gt_c_yr": 0.2379,
-     "import_gt_c_yr": 0.1863,
-     "weathering_gt_c_yr": 0.1235
+     "net_sink_gt_c_yr": 0.2407,
+     "import_gt_c_yr": 0.2205,
+     "weathering_gt_c_yr": 0.05245
     },
-    "over_carbon_cycle_import": 0.02815,
-    "over_carbon_cycle_net_sink": 0.02205,
-    "seas_alkalinity_taken_eq_yr": 153100000000.0,
-    "seas_alkalinity_over_weathering": 0.01489,
+    "over_carbon_cycle_import": 0.02051,
+    "over_carbon_cycle_net_sink": 0.01879,
+    "seas_alkalinity_taken_eq_yr": 94560000000.0,
+    "seas_alkalinity_over_weathering": 0.02165,
     "land_water_from_state": "mature"
    }
   }
@@ -401,9 +401,9 @@
    "research/studies/springs/carbon.py": "c0630f5d65acac88c9efddb8ea5557f5c21127a9ca7afa07083de39b625119ff"
   },
   "inputs": {
-   "research/studies/springs/results/springs.json": "d898b39de4480037e6973db180b53ea5cd930e0c270a34444e3f9d5c01f4c5e1",
+   "research/studies/springs/results/springs.json": "b657370e8a10b5501e7a24924f45702bbe9617f7938a5b1e8d7db812f3dc244c",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
-   "research/studies/carbon_cycle/results/carbon_cycle.json": "76d1c40667e2f6a2c6badcad438d4636a7f89e823bead1fb56e5eb3b4ddf9870"
+   "research/studies/carbon_cycle/results/carbon_cycle.json": "b69ba25011c9aa51da1e5b2e616b052632a42cd91ccaf8c08e65840df937d69a"
   }
  }
 }

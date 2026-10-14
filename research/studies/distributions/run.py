@@ -68,15 +68,15 @@ BOUND = {
     'sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='d670df8968d4230b821f540ddc89008142264310',
-        sha256='2b2a12f70f3e5bdcaca8b492e1d12f4fcdea41d934445c7e8d3e8257ad11a1ee',
+        blob='f0066e1164f1bbfc0a4af0a68fdaf8127e743cb8',
+        sha256='9bae21823b64dc41c1fdc5cd71123712437158161f74ffba9c92c547cb9c6e0a',
         note="The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage "
              'recovery and the natural cycle kept beside them.'),
     'industry_md': dict(
         path='resources/industry.md', schema=None,
         branch='main', worktree='terluna', commit=None,
-        blob='5ff36d497682059c77f836fd0a1cc534319f17b3',
-        sha256='6ee555e1fc24c2348051f8dfe6daf91de29703adab8539c0139a7a917eb44eb3',
+        blob='d8096f52bd1cf31885c549dae456e609d5073f16',
+        sha256='c325110cad33d30c6d16e9f48b1d96d719c0df36094716e3b9ccd5f97dadf4c5',
         note="The array's habitats as the largest continuing material stream, the places' sunlight and the Moon's "
              "people's stocks; the values used are transcribed in TRANSCRIBED and checked against these bytes."),
     'phosphorus': dict(

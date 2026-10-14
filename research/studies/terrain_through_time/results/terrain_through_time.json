@@ -3,13 +3,13 @@
  "producer": {
   "files": {
    "research/studies/terrain_through_time/run.py": "aa40ee496d453303b343e771a7e6614b949bd9be24e4061b32c1ece3600d159d",
-   "research/studies/terrain_through_time/routing.py": "7977cff375a23923a438ca4d596ae20c9fe23a4ae3d1275d7c529a27f4b462fc",
-   "research/studies/carbon_cycle/run.py": "23ed44e54cfaa34f09734487ec2feda21638684d7145414838377edb90fa43a7"
+   "research/studies/terrain_through_time/routing.py": "c95eb4555354d661a1c426e196d824d1d4522e330db615f2d2466edd2c049156",
+   "research/studies/carbon_cycle/run.py": "6e905699a581db1546bf2ea24f171fe972fcb2a3363dacb8c2225b42b76b19cd"
   },
   "inputs": {
-   "research/studies/terrain_through_time/results/terrain_routing.json": "e786e80f718aaea2a1392bf9c14736e7f4f0ffd37e7ea76d44447f8608efa73b",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "28c8bf68d7f941454189ef74caeb307d08a5bd1df1c050a398183e394e74a99c",
-   "resources/results/sea_phosphorus.json": "2b2a12f70f3e5bdcaca8b492e1d12f4fcdea41d934445c7e8d3e8257ad11a1ee",
+   "research/studies/terrain_through_time/results/terrain_routing.json": "2becedbc85985f5d1225ea79f350abc8f9ee87545039881665ebc44a1eb4504c",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "f71614d17476d81cef4bfb7178c869d715ff2aa403681b43f8cca49591023544",
+   "resources/results/sea_phosphorus.json": "9bae21823b64dc41c1fdc5cd71123712437158161f74ffba9c92c547cb9c6e0a",
    "research/studies/conservation/results/gates.json": "65b855711fbf1b066f112f617e776bcb2f345fc48ccc5ff019aa9df3bbc4449e"
   }
  },
@@ -153,23 +153,23 @@
  },
  "seas": {
   "earliest": {
-   "deposits_km3_yr": 2.28319,
+   "deposits_km3_yr": 1.39689,
    "rock_share_at_start": 0.2066,
-   "seas_full_yr": 814885.0
+   "seas_full_yr": 863980.0
   },
   "central": {
-   "deposits_km3_yr": 0.913276,
+   "deposits_km3_yr": 0.558755,
    "rock_share_at_start": 0.206146,
-   "seas_full_yr": 2947820.0
+   "seas_full_yr": 3213380.0
   },
   "latest": {
-   "deposits_km3_yr": 0.682699,
+   "deposits_km3_yr": 0.385167,
    "rock_share_at_start": 0.206051,
-   "seas_full_yr": 10738500.0
+   "seas_full_yr": 14700300.0
   },
   "sea_chemistry_box_seas_full_yr": [
-   733549.0,
-   11951000.0
+   769773.0,
+   16092800.0
   ],
   "sea_chemistry_box_passing_share": [
    0.036196,
@@ -849,18 +849,18 @@
   },
   "built_land": {
    "seas_stone_km3_yr": {
-    "calcite": 0.109293,
-    "magnesite": 0.0418752,
-    "opal": 0.232056,
-    "soda_and_sulphate": 0.00896069
+    "calcite": 0.0552269,
+    "magnesite": 0.0315254,
+    "opal": 0.137357,
+    "soda_and_sulphate": 0.0065476
    },
-   "seas_stone_total_km3_yr": 0.392185,
+   "seas_stone_total_km3_yr": 0.230657,
    "seas_stone_mt_yr": {
-    "calcite": 296.185,
-    "magnesite": 126.044,
-    "opal": 475.715
+    "calcite": 149.665,
+    "magnesite": 94.8914,
+    "opal": 281.581
    },
-   "terraces_10_m_high_km2_per_millennium": 39218.5,
+   "terraces_10_m_high_km2_per_millennium": 23065.7,
    "land_rock_km3_yr": {
     "10 m/Myr": 0.273077,
     "50 m/Myr": 1.36538,

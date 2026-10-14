@@ -99,10 +99,12 @@ ten years of residence weathering comes under thermodynamic control (Maher 2010)
 centuries old, sit at the limit the CO2 they carry sets.
 
 **What it means for the other studies.** The terrain study takes springs at 1.5–3 times the rivers' load as a design
-guess; the springs carry 0.9–1.3 times the soil water's. The carbon cycle's weathering sink would fall to about 0.6 of
-its present value in the mature Moon and about 0.4 in the young Moon, and the filling crust adds a sink of up to a
-quarter of its import over the first 10,000 years; carrying both into it, and the floors' share of the seas' alkalinity
-into the sea chemistry, waits for the author.
+guess; the springs carry 0.9–1.3 times the soil water's. At the author's word the [carbon
+cycle](../carbon_cycle/README.md) takes the share of the weathering that reaches the waters, its make-up, the rock's
+calcite and the filling crust's carbon, and the [sea chemistry](../sea_chemistry/README.md) the same share with the
+floors' uptake: the seas calcify two to four thousand years later, the kilns return less, and holding 400 ppm imports
+0.12–0.33 Gt C a year at year 10,000 against 0.09–0.27. [results/springs_carbon.json](results/springs_carbon.json) sets
+the filling crust's carbon against the carbon cycle's import, which now includes it.
 
 ## How it is set up
 

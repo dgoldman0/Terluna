@@ -124,6 +124,24 @@ class Products(unittest.TestCase):
         for path, h in {**c['producer']['files'], **c['producer']['inputs']}.items():
             self.assertEqual(digest(path), h, path)
 
+    def test_its_carbon_cycle_constants_are_the_carbon_cycles(self):
+        k = self.product['setting']['carbon_cycle']
+        self.assertEqual((k['dessert_a'], k['dessert_b'], k['land_air_k'], k['age_exponent']),
+                         (cc.DESSERT_A, cc.DESSERT_B, cc.LAND_AIR_K, cc.AGE_EXPONENT))
+        self.assertAlmostEqual(k['fresh_factor'] / cc.FRESH_FACTOR[1], 1.0, places=5)
+        self.assertEqual(k['soil_age_yr'], cc.SOIL_AGE_AT_START_YR[1])
+        law = cc.DESSERT_A * math.exp(cc.DESSERT_B * (cc.LAND_AIR_K - 273.15)) / 1e3
+        self.assertAlmostEqual(self.product['setting']['catchment_load_meq_kg'] / law, 1.0, places=5)
+
+    def test_the_exports_cations_balance_its_alkalinity(self):
+        for v in self.product['cases'].values():
+            for row in v['states'].values():
+                for variant in row['variants'].values():
+                    w = variant['moon']['weathering']
+                    c = w['cations_mol_yr']
+                    total = w['quick_flow_mol_yr'] + w['springs_mol_yr'] + w['into_lakes_and_seas_mol_yr']
+                    self.assertAlmostEqual((2 * c['ca'] + 2 * c['mg'] + c['mono']) / total, 1.0, delta=0.01)
+
     def test_it_re_solves_stage_2(self):
         table = json.loads((sr.ROOT / 'geography/results/groundwater_table.json').read_text())
         for case, v in self.product['cases'].items():

@@ -66,7 +66,7 @@ No population distribution has been adopted.
    710–7,100 by weathering alone. Kilns returning the weathered carbon take 35–350 GW on the Moon (0.0009–0.009 W/m²);
    the buried carbon needs a return path or 2,370–5,970 kg/s of imported carbon, and its burial adds 0.20–0.50 Gt of O2
    a year to the air (*screen*). The carbon cycle box model (research/studies/carbon_cycle) follows the same sinks as
-   soils age and the waters calcify: kilns of 19–58 GW and an import of 2,800–8,600 kg C/s at year 10,000.
+   soils age and the waters calcify: kilns of 3.9–14 GW and an import of 3,600–10,300 kg C/s at year 10,000.
 7. **The crust decides whether the water import ends with the build.** Escaping hydrogen takes 0.022–0.024 kg/s of
    water, a cycle time of 2×10¹³ years. If the crust's pores fill after the seas, 5.0×10¹⁸–5.9×10¹⁹ kg over
    1,000–10,000 years is 1.6×10⁷–1.9×10⁹ kg/s, 2–210% of the build's water stream (*screen*).

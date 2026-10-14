@@ -27,6 +27,11 @@ def digest(path):
 
 # ---- The routing summary ---------------------------------------------------------------------------------------------
 
+def test_routing_spreads_hardness_with_the_carbon_cycles_exponent():
+    from research.studies.carbon_cycle import run as cc
+    assert rt.DESSERT_B == cc.DESSERT_B
+
+
 def test_routing_binds_its_code_and_inputs(routing):
     assert routing['schema'] == rt.SCHEMA
     for path, h in {**routing['producer']['files'], **routing['producer']['inputs']}.items():

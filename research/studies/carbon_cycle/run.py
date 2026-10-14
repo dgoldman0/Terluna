@@ -13,7 +13,10 @@ Resources' question 7 and the CO2 study's next work. From the seeding of the bio
 - organic burial in the lakes and seas, and the lake deltas dredged for phosphorus;
 - people's stocks: the food chain, bodies and built stocks;
 - the mineral strand: the calcium, magnesium, sodium and potassium weathering frees, in the waters, the carbonates and
-  the kilns' lime.
+  the kilns' lime;
+- the groundwater (the springs study and stage 1): the share of the catchment law's weathering that reaches the waters
+  and its make-up, the calcite the rock keeps, and the carbon the filling crust takes down with the water it draws from
+  the land, the lakes and the seas.
 
 Two modes run. Held: the managed return (kilns on the carbonate as it forms, the magnesite route, dredging) and an
 import keep CO2 at 400 ppm, and the model reports what each must supply. Free: once the biosphere is grown, the kilns,
@@ -55,6 +58,8 @@ ECO_PEOPLE = 'biosphere/ecology/results/people.json'
 ATLAS = 'geography/results/atlas.json'
 DRAINAGE = 'geography/results/drainage.json'
 FORCING = 'atmosphere/radiative_convective/results/inverse_climate.csv'
+SPRINGS = 'research/studies/springs/results/springs.json'
+STAGE1 = 'geography/results/groundwater_uptake.json'
 INPUTS = {
     SCREEN: 'terluna.resources.first-screen/1',
     SEA_P: 'terluna.resources.sea-phosphorus/1',
@@ -69,6 +74,8 @@ INPUTS = {
     ATLAS: 'terluna.geography.atlas/1',
     DRAINAGE: 'terluna.geography.drainage/1',
     FORCING: None,
+    SPRINGS: 'terluna.research.springs/1',
+    STAGE1: 'terluna.geography.groundwater-uptake/1',
 }
 
 YEAR_S = JULIAN_DAY * JULIAN_YEAR_DAYS
@@ -106,6 +113,20 @@ FRESH_FACTOR = (1.0, math.sqrt(10.0), 10.0)
 SOIL_AGE_AT_START_YR = (100.0, 100.0, 250.0)
 HIGHLAND_CAO_WT = 0.157         # Apollo 16 soil (Lunar Sourcebook Table 7.15), to recover the rock stock's mass basis
 HIGHLAND_FEO_WT = 0.051         # the same soil's FeO, oxidized as the rock weathers (2 FeO + 1/2 O2 -> Fe2O3)
+
+# --- Groundwater -------------------------------------------------------------------------------------------------
+# The springs study and stage 1. Only a share of the catchment law's weathering reaches the waters: nearly half of the
+# rivers' flow is rain on the lakes, which touches no rock, groundwater lays part of its calcium in the rock, and while
+# the crust fills it takes much of the recharge with its load. What arrives has the springs' calcium-poor make-up. The
+# rock's calcite keeps one carbon for each calcium it holds. While the crust fills, the land's water carries the soil's
+# CO2 down with it, and the lakes' and seas' floors draw off their dissolved load, which delivered fresh water
+# replaces. Each corner takes stage 1's crust of the same end; before 1,000 years the 1,000-year state holds.
+CRUST_CASES = dict(low='slow', central='central', high='fast')
+SPRING_STATES = ((1000.0, 'young_1000_yr'), (1.0e4, 'young_10000_yr'), (1.0e6, 'mature'))
+CRUST_SPANS = ((0.0, '10'), (10.0, '100'), (100.0, '1000'), (1000.0, '10000'), (1.0e4, '100000'))
+SPAN_STATE = {'10': 'young_1000_yr', '100': 'young_1000_yr', '1000': 'young_1000_yr', '10000': 'young_10000_yr',
+              '100000': 'mature'}
+CENTRAL_SOILS = dict(fresh_factor=FRESH_FACTOR[1], soil_age_yr=SOIL_AGE_AT_START_YR[1])
 
 # --- Land --------------------------------------------------------------------------------------------------------
 # Earth's carbon in plants and the top metre of soil (IPCC TAR WG1 Table 3.2 and Watson et al. 2000, the WBGU column,
@@ -173,6 +194,8 @@ EVIDENCE = ('A box model on committed products: the air and its 400 ppm of CO2, 
             'ledger\'s methane, the sky ecology\'s aerophytes, resources\' dredged deltas and its kilns. Its rates are '
             'Earth measurements carried to the Moon (the basalt weathering law, field ageing, biome inventories, lake '
             'and marine burial, peat and desert carbonate) beside design guesses, each labelled in the assumptions; '
+            'the groundwater\'s share of the weathering, the rock\'s calcite and the filling crust\'s uptake come '
+            'from the springs study and stage 1; '
             'its carbonate chemistry uses published constants at the design temperatures. A runnable calculation '
             'with checked conservation and step convergence: ecosystems, sediments and the seas enter as well-mixed '
             'boxes with Earth rates, and no lunar measurement stands behind any rate.')
@@ -388,7 +411,63 @@ def setting(data):
         salted_sea_const=sea_constants(SEA_SURFACE_K, SEA_SALINITY),
         heat_w_m2_per_tw=industry['heat_w_m2_per_tw_used'], sunlight_w_m2=industry['sunlight_w_m2'],
         sweep=forcing_sweep(FORCING), leaf_curve=curve, built_renewal_gt_yr=renewal,
-        small_waters_m2=atlas['small_lakes_share'] * MOON_AREA)
+        small_waters_m2=atlas['small_lakes_share'] * MOON_AREA, ground=ground(data))
+
+
+def ground(data):
+    """The groundwater's terms for each of stage 1's crusts: by year, the share of the catchment law's weathering that
+    reaches the waters, its cations' shares and the calcite the rock keeps (the springs study's central chemistry); by
+    span, the filling crust's uptake from the land, the lakes and the seas, with the carbon the land's water carries
+    at the water table."""
+    springs, stage1 = data[SPRINGS], data[STAGE1]
+    areas = {b['band']: b for b in stage1['setting']['bands']}
+    out = {}
+    for case in set(CRUST_CASES.values()):
+        states = springs['cases'][case]['states']
+        years, ratio, shares, rock = [], [], [], []
+        for year, name in SPRING_STATES:
+            moon = states[name]['variants']['central']['moon']
+            w = moon['weathering']
+            c = w['cations_mol_yr']
+            eq = 2.0 * c['ca'] + 2.0 * c['mg'] + c['mono']
+            years.append(year)
+            ratio.append(w['over_carbon_cycle_catchment'])
+            shares.append(dict(ca=2.0 * c['ca'] / eq, mg=2.0 * c['mg'] / eq, mono=c['mono'] / eq))
+            laid = moon['calcite_laid_gt_c_yr']
+            rock.append((laid['saturated_rock'] + laid['unsaturated_rock']) * MOL_PER_GT_C)
+        spans = []
+        for start, end in CRUST_SPANS:
+            entry = states[SPAN_STATE[end]]['variants']['central']['by_band']
+            row = dict(start=start, end=float(end), seas_kg_yr=0.0, lakes_kg_yr=0.0, land_kg_yr=0.0, land_mol_c_yr=0.0)
+            for name, band in stage1['cases'][case]['bands'].items():
+                cols = band['columns']
+                up = lambda key: cols[key]['by_year'][end]['uptake_m_yr_since_last'] if key in cols else 0.0
+                row['seas_kg_yr'] += up('sea_floor') * areas[name]['sea_m2'] * 1e3
+                row['lakes_kg_yr'] += up('lake_floor') * areas[name]['lake_m2'] * 1e3
+                kg = up('land') * areas[name]['land_m2'] * 1e3
+                row['land_kg_yr'] += kg
+                if name in entry:
+                    row['land_mol_c_yr'] += kg * entry[name]['water_table_entry']['dic_mmol_kg'] * 1e-3
+            spans.append(row)
+        out[case] = dict(years=years, ratio=ratio, shares=shares, rock_mol_yr=rock, spans=spans)
+    return out
+
+
+def at_year(years, values, t):
+    """Linear in the logarithm of the year between the springs study's states, held before the first."""
+    x = math.log10(max(t, years[0]))
+    xs = [math.log10(y) for y in years]
+    for (x0, v0), (x1, v1) in zip(zip(xs, values), zip(xs[1:], values[1:])):
+        if x <= x1:
+            return v0 + (v1 - v0) * (x - x0) / (x1 - x0)
+    return values[-1]
+
+
+def span_of(spans, t):
+    for row in spans:
+        if t < row['end']:
+            return row
+    return spans[-1]
 
 
 def leaf_rate(pa, curve):
@@ -512,7 +591,7 @@ def parameters(data, st, corner, methane='held', magnesium='natural', seas='fres
         sky=sky, people=n, food_mol=grown_g_yr * FOOD_RESIDENCE_YR / M_C + n * BODY_KG * BODY_CARBON * 1e3 / M_C,
         food_grown_mol_yr=grown_g_yr / M_C, built_mol=n * BUILT_T_C_PER_PERSON[i] * 1e6 / M_C,
         power_made_share=ledger['choices']['blend_weights']['power_made'],
-        feedback_w_m2_k=FEEDBACK_W_M2_K[i])
+        feedback_w_m2_k=FEEDBACK_W_M2_K[i], crust_case=CRUST_CASES[corner])
 
 
 # --- The model ---------------------------------------------------------------------------------------------------
@@ -538,13 +617,15 @@ def initial_state(st, p):
              soils={k: SOIL_START_SHARE * v['soils_mol'] for k, v in p['classes'].items()},
              peat=0.0, soil_carbonate=0.0, sky=SEED_SHARE * p['sky']['stock_mol'], food=p['food_mol'],
              built=p['built_mol'], lake=lake, sea=sea, lake_org=0.0, sea_org=0.0, calcite_sed=0.0, mgco3_sed=0.0,
+             rock_calcite=0.0, crust=0.0,
              cao=0.0, mgo=0.0, delivered=dict(ca=lake['ca'] + sea['ca'], mg=lake['mg'] + sea['mg'],
                                               mono=lake['mono'] + sea['mono'],
                                               offset=sea['ta'] - 2 * sea['ca'] - 2 * sea['mg'] - sea['mono']),
              cum={k: 0.0 for k in ('import', 'kiln_calcite', 'kiln_mg', 'dredged', 'calcite', 'calcite_lake',
                                    'mgco3', 'rock_ca', 'rock_mg', 'rock_mono', 'rock_ca_dry', 'ch4_made', 'ch4_cut',
                                    'ch4_removed', 'ch4_soil', 'o2_burial', 'o2_rock', 'lake_burial', 'sea_burial',
-                                   'weathering')})
+                                   'weathering', 'floor_ta', 'floor_ca', 'floor_mg', 'floor_mono', 'floor_dic',
+                                   'rock_ca_crust', 'crust_land')})
     s['initial_organic'] = organic(s)
     s['initial_total'] = carbon_total(s)
     s['omega_sea'] = OMEGA_FRESH if p['seas'] == 'fresh' else speciate(sea, st['pco2_atm'], sea_const(st, p))['omega']
@@ -559,7 +640,7 @@ def organic(s):
 def carbon_total(s):
     return (s['air_co2'] + s['air_ch4'] + sum(s['plants'].values()) + sum(s['soils'].values()) + s['peat']
             + s['soil_carbonate'] + s['sky'] + s['food'] + s['built'] + s['lake']['dic'] + s['sea']['dic']
-            + s['lake_org'] + s['sea_org'] + s['calcite_sed'] + s['mgco3_sed'])
+            + s['lake_org'] + s['sea_org'] + s['calcite_sed'] + s['mgco3_sed'] + s['rock_calcite'] + s['crust'])
 
 
 def land_organic(s):
@@ -649,10 +730,24 @@ def step(s, st, p, dt, held, managed):
     # falls.
     cool = 0.0 if held else forcing(ppm, st['sweep']) / p['feedback_w_m2_k']
     plants_help = 1.0 if held else plant_weathering(ppm)
-    w = (st['weathering_eq_yr'] * weathering_factor(t0 + 0.5 * dt, p) * math.exp(DESSERT_B * cool) * plants_help
-         * dt)
+    tm = t0 + 0.5 * dt
+    g = st['ground'][p['crust_case']]
+    intensity = math.exp(DESSERT_B * cool) * plants_help
+    w = st['weathering_eq_yr'] * weathering_factor(tm, p) * intensity * dt * at_year(g['years'], g['ratio'], tm)
     f['weathering'] = w
-    sh = st['cation_shares']
+    sh = {k: at_year(g['years'], [x[k] for x in g['shares']], tm) for k in ('ca', 'mg', 'mono')}
+    # The rock's calcite, carried from the springs study's central soils to the corner's, and the land water's carbon
+    # into the filling crust, which follows the plants' production.
+    x_rock = (at_year(g['years'], g['rock_mol_yr'], tm) * weathering_factor(tm, p)
+              / weathering_factor(tm, CENTRAL_SOILS) * intensity * dt)
+    span = span_of(g['spans'], tm)
+    c_land = span['land_mol_c_yr'] * prod * dt
+    s['rock_calcite'] += x_rock
+    s['crust'] += c_land
+    s['cum']['rock_ca_crust'] += x_rock
+    s['cum']['crust_land'] += c_land
+    f['rock_calcite'] = x_rock
+    air -= x_rock + c_land
     pco2 = s['air_co2'] / st['air_mol'] * st['dry_pa'] / ATM_PA
     lake, sea = s['lake'], s['sea']
     lc, sc = st['lake_const'], sea_const(st, p)
@@ -680,6 +775,29 @@ def step(s, st, p, dt, held, managed):
         moved = lake[key] * share
         lake[key] -= moved
         sea[key] += moved
+    # The floors draw off the waters' dissolved load while the crust fills; delivered fresh water replaces the water.
+    floors = 0.0
+    for box, key in ((lake, 'lakes_kg_yr'), (sea, 'seas_kg_yr')):
+        frac = min(1.0, span[key] * dt / box['mass'])
+        for k in ('ta', 'ca', 'mg', 'mono', 'dic'):
+            moved = box[k] * frac
+            box[k] -= moved
+            s['cum'][f'floor_{k}'] += moved
+            if k == 'dic':
+                floors += moved
+        if box is sea:
+            d = s['delivered']
+            d['offset'] *= 1.0 - frac
+            if p['seas'] == 'salted':                    # the delivered top-up is seawater, as the seas were
+                top = frac * sea['mass']
+                add = dict(ta=top * SEAWATER['alkalinity'], ca=top * SEAWATER['ca'], mg=top * SEAWATER['mg'])
+                for k, v in add.items():
+                    sea[k] += v
+                d['ca'] += add['ca']
+                d['mg'] += add['mg']
+                d['offset'] += add['ta'] - 2.0 * add['ca'] - 2.0 * add['mg']
+    s['crust'] += floors
+    f['crust'] = c_land + floors
     # Calcite where the waters stand above their saturation, then CO2 equilibrium with the air.
     x_lake = precipitate(lake, pco2, lc, OMEGA_FRESH)
     x_sea = precipitate(sea, pco2, sc, s['omega_sea'])
@@ -725,7 +843,7 @@ def step(s, st, p, dt, held, managed):
     f['dissolved'] = lake['dic'] + sea['dic'] - dic0
     # Oxygen: one O2 for each organic carbon buried and kept, four FeO for each O2 the rock takes.
     s['cum']['o2_burial'] += f['lake_burial'] + f['sea_burial'] + f['peat'] - f['dredged']
-    s['cum']['o2_rock'] += w * st['o2_per_eq']
+    s['cum']['o2_rock'] += (w + 2.0 * x_rock) * st['o2_per_eq']
     s['cum']['dredged'] += f['dredged']
     s['cum']['lake_burial'] += f['lake_burial']
     s['cum']['sea_burial'] += f['sea_burial']
@@ -750,7 +868,8 @@ def snapshot(s, st, p, f, dt):
                          soil_carbonate=gt(s['soil_carbonate']), sky=gt(s['sky']), people=gt(s['food'] + s['built']),
                          lake_dic=gt(s['lake']['dic']), sea_dic=gt(s['sea']['dic']),
                          organic_sediments=gt(s['lake_org'] + s['sea_org']),
-                         carbonate_sediments=gt(s['calcite_sed'] + s['mgco3_sed'])),
+                         carbonate_sediments=gt(s['calcite_sed'] + s['mgco3_sed']),
+                         rock_calcite=gt(s['rock_calcite']), filling_crust=gt(s['crust'])),
         waters=dict(lakes=water(s['lake'], lake), seas=water(s['sea'], sea)),
         cumulative_gt_c=dict(import_=gt(s['cum']['import']),
                              kilns=gt(s['cum']['kiln_calcite'] + s['cum']['kiln_mg']), dredged=gt(s['cum']['dredged']),
@@ -760,7 +879,8 @@ def snapshot(s, st, p, f, dt):
     if f is not None:
         r = {k: gt(v) / dt for k, v in f.items()}
         r['net_sink'] = (r['land'] + r['peat'] + r['soil_carbonate'] + r['sky'] + r['lake_burial'] + r['sea_burial']
-                         + r['methane'] + r['dissolved'] + r['calcite_lake'] + r['calcite_sea'] + r['mgco3'])
+                         + r['methane'] + r['dissolved'] + r['calcite_lake'] + r['calcite_sea'] + r['mgco3']
+                         + r['rock_calcite'] + r['crust'])
         r['kilns'] = r['kiln_calcite'] + r['kiln_mg']
         out['rates_gt_c_yr'] = r
         out['kilns'] = kiln_power(f['kiln_calcite'] / dt, f['kiln_mg'] / dt, st)
@@ -801,15 +921,16 @@ def checks_of(s, st):
     """Carbon and the cations, against their sources, as shares of the stock they balance."""
     c = carbon_total(s) - s['initial_total'] - s['cum']['import']
     d = s['delivered']
-    ca = (d['ca'] + s['cum']['rock_ca'] + s['cum']['rock_ca_dry']
-          - (s['lake']['ca'] + s['sea']['ca'] + s['cum']['calcite'] + s['soil_carbonate']))
-    mg = d['mg'] + s['cum']['rock_mg'] - (s['lake']['mg'] + s['sea']['mg'] + s['cum']['mgco3'])
-    mono = d['mono'] + s['cum']['rock_mono'] - (s['lake']['mono'] + s['sea']['mono'])
+    ca = (d['ca'] + s['cum']['rock_ca'] + s['cum']['rock_ca_dry'] + s['cum']['rock_ca_crust']
+          - (s['lake']['ca'] + s['sea']['ca'] + s['cum']['calcite'] + s['soil_carbonate'] + s['rock_calcite']
+             + s['cum']['floor_ca']))
+    mg = d['mg'] + s['cum']['rock_mg'] - (s['lake']['mg'] + s['sea']['mg'] + s['cum']['mgco3'] + s['cum']['floor_mg'])
+    mono = d['mono'] + s['cum']['rock_mono'] - (s['lake']['mono'] + s['sea']['mono'] + s['cum']['floor_mono'])
     ta = (s['lake']['ta'] + s['sea']['ta'] - 2 * (s['lake']['ca'] + s['sea']['ca'] + s['lake']['mg'] + s['sea']['mg'])
           - s['lake']['mono'] - s['sea']['mono'] - d['offset'])
     lime = s['cao'] - s['cum']['kiln_calcite'] + s['mgo'] - s['cum']['kiln_mg']
     scale_c = carbon_total(s)
-    scale_ca = d['ca'] + s['cum']['rock_ca'] + s['cum']['rock_ca_dry'] or 1.0
+    scale_ca = d['ca'] + s['cum']['rock_ca'] + s['cum']['rock_ca_dry'] + s['cum']['rock_ca_crust'] or 1.0
     scale_mg = d['mg'] + s['cum']['rock_mg'] or 1.0
     scale_mono = d['mono'] + s['cum']['rock_mono'] or 1.0
     scale_ta = abs(s['lake']['ta']) + abs(s['sea']['ta']) or 1.0
@@ -912,7 +1033,8 @@ def held_summary(run, st, p):
             lime_gt_yr=k['lime_gt_yr'],
             sinks=dict(land=r['land'], peat=r['peat'], soil_carbonate=r['soil_carbonate'], sky=r['sky'],
                        lake_burial=r['lake_burial'], sea_burial=r['sea_burial'], methane=r['methane'],
-                       waters_dissolved=r['dissolved'], carbonate=r['calcite_lake'] + r['calcite_sea'] + r['mgco3']))
+                       waters_dissolved=r['dissolved'], carbonate=r['calcite_lake'] + r['calcite_sea'] + r['mgco3'],
+                       rock_calcite=r['rock_calcite'], filling_crust=r['crust']))
     total_g = gt(carbon_total(s_g))
     w = grown['stocks_gt_c']
     filled = sum(w[k] for k in ('air_co2', 'air_ch4', 'land_plants', 'land_soils', 'sky', 'people'))
@@ -1060,6 +1182,12 @@ def assumptions(data, st):
         ('weathering_law', dict(a=DESSERT_A, b=DESSERT_B), 'Earth measurement',
          'Dessert et al. (2003) for basaltic catchments, CO2 consumed = runoff x a exp(b T); the highlands weather '
          'like basalt through their anorthite (resources finding 5)'),
+        ('groundwater', dict(springs=SPRINGS, stage_1=STAGE1, crusts=CRUST_CASES), 'project product',
+         'the springs study\'s share of the catchment law\'s weathering that reaches the waters, its cations and the '
+         'calcite the rock keeps, at 1,000 and 10,000 years and a million (the 1,000-year values held before), linear '
+         'in the logarithm of the year; stage 1\'s uptake by the floors and the land by span, the land\'s water with '
+         'the springs study\'s carbon at the water table; the waters\' load drawn off with the floors\' water, which '
+         'delivered fresh water replaces'),
         ('fresh_soil_factor', list(FRESH_FACTOR), 'design guess',
          'the developed soils start at this multiple of the catchment rate, within the CO2 study\'s 1-10 for fine '
          'glassy ground'),
@@ -1151,6 +1279,21 @@ def assumptions(data, st):
     return [dict(name=n, value=v, evidence=e, basis=b) for n, v, e, b in rows]
 
 
+def groundwater_setting(st):
+    """The groundwater's terms as the runs take them, for each of stage 1's crusts."""
+    out = {}
+    for case, g in sorted(st['ground'].items()):
+        out[case] = dict(
+            corners=[c for c, v in CRUST_CASES.items() if v == case],
+            reaching_the_waters={f'{y:g}': r for y, r in zip(g['years'], g['ratio'])},
+            cation_shares={f'{y:g}': sh for y, sh in zip(g['years'], g['shares'])},
+            rock_calcite_gt_c_yr={f'{y:g}': gt(m) for y, m in zip(g['years'], g['rock_mol_yr'])},
+            filling_crust={f'{r["start"]:g}-{r["end"]:g}': dict(
+                seas_km3_yr=r['seas_kg_yr'] / 1e12, lakes_km3_yr=r['lakes_kg_yr'] / 1e12,
+                land_km3_yr=r['land_kg_yr'] / 1e12, land_water_gt_c_yr=gt(r['land_mol_c_yr'])) for r in g['spans']})
+    return out
+
+
 def corner_summary(p):
     c = p['classes']
     return dict(
@@ -1230,7 +1373,8 @@ def results(step_scale=1.0):
         setting=dict(air_mol=st['air_mol'], co2_gt_c_at_400_ppm=gt(st['held_co2_mol']),
                      o2_kg=st['o2_mol'] * M_O2 * 1e-3, runoff_mm_yr=st['runoff_mm_yr'],
                      weathering_gt_c_yr_at_catchment_rate=gt(st['weathering_eq_yr']),
-                     cation_shares=st['cation_shares'], lakes=dict(area_m2=st['lake_m2'], water_kg=st['lake_kg']),
+                     cation_shares=st['cation_shares'], groundwater=groundwater_setting(st),
+                     lakes=dict(area_m2=st['lake_m2'], water_kg=st['lake_kg']),
                      seas=dict(area_m2=st['sea_m2'], water_kg=st['sea_kg'], shelf_share=st['shelf_share']),
                      sea_burial_gt_c_yr=gt(st['sea_burial_mol_yr']), tg_ch4_per_ppm=st['tg_ch4_per_ppm'],
                      forcing_w_m2=st['sweep'], leaf_curve=st['leaf_curve'],

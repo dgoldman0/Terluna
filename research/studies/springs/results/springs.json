@@ -18,6 +18,14 @@
    0.00172
   ],
   "calcite_saturation_in_rock": 1.0,
+  "carbon_cycle": {
+   "dessert_a": 323.44,
+   "dessert_b": 0.0642,
+   "land_air_k": 294.3,
+   "fresh_factor": 3.16228,
+   "soil_age_yr": 100.0,
+   "age_exponent": 0.61
+  },
   "ph_where_rock_stops": 9.5,
   "alkalinity_ceiling_meq_kg": 6.65388,
   "rock_per_kg_of_water_kg": 17.9101,
@@ -441,7 +449,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.712814,
          "land_water_alkalinity_meq_kg": 1.34609,
          "soil_water_alkalinity_meq_kg": 1.26235,
-         "springs_over_quick_flow": 1.24959
+         "springs_over_quick_flow": 1.24959,
+         "cations_mol_yr": {
+          "ca": 1528950000000.0,
+          "mg": 986918000000.0,
+          "mono": 128778000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.37262e-07,
@@ -814,7 +827,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.672309,
          "land_water_alkalinity_meq_kg": 1.41707,
          "soil_water_alkalinity_meq_kg": 1.41472,
-         "springs_over_quick_flow": 1.00905
+         "springs_over_quick_flow": 1.00905,
+         "cations_mol_yr": {
+          "ca": 1308940000000.0,
+          "mg": 1055810000000.0,
+          "mono": 137767000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.79366e-07,
@@ -1187,7 +1205,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.918401,
          "land_water_alkalinity_meq_kg": 1.82765,
          "soil_water_alkalinity_meq_kg": 1.87977,
-         "springs_over_quick_flow": 0.879965
+         "springs_over_quick_flow": 0.879965,
+         "cations_mol_yr": {
+          "ca": 1709400000000.0,
+          "mg": 1516130000000.0,
+          "mono": 197832000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.79185e-06,
@@ -1566,7 +1589,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.750143,
          "land_water_alkalinity_meq_kg": 1.40921,
          "soil_water_alkalinity_meq_kg": 1.25773,
-         "springs_over_quick_flow": 1.25592
+         "springs_over_quick_flow": 1.25592,
+         "cations_mol_yr": {
+          "ca": 1507090000000.0,
+          "mg": 1134290000000.0,
+          "mono": 148008000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.37262e-07,
@@ -1933,7 +1961,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.734749,
          "land_water_alkalinity_meq_kg": 1.3789,
          "soil_water_alkalinity_meq_kg": 1.25773,
-         "springs_over_quick_flow": 1.20471
+         "springs_over_quick_flow": 1.20471,
+         "cations_mol_yr": {
+          "ca": 1607610000000.0,
+          "mg": 987614000000.0,
+          "mono": 128869000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.37262e-07,
@@ -2300,7 +2333,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.694839,
          "land_water_alkalinity_meq_kg": 1.30914,
          "soil_water_alkalinity_meq_kg": 1.25773,
-         "springs_over_quick_flow": 1.08685
+         "springs_over_quick_flow": 1.08685,
+         "cations_mol_yr": {
+          "ca": 994013000000.0,
+          "mg": 1428010000000.0,
+          "mono": 186334000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.37262e-07,
@@ -2667,7 +2705,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.785263,
          "land_water_alkalinity_meq_kg": 1.45007,
          "soil_water_alkalinity_meq_kg": 1.25773,
-         "springs_over_quick_flow": 1.32496
+         "springs_over_quick_flow": 1.32496,
+         "cations_mol_yr": {
+          "ca": 1516190000000.0,
+          "mg": 1245080000000.0,
+          "mono": 162465000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.37262e-07,
@@ -3040,7 +3083,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.603164,
          "land_water_alkalinity_meq_kg": 1.41909,
          "soil_water_alkalinity_meq_kg": 1.40954,
-         "springs_over_quick_flow": 1.01964
+         "springs_over_quick_flow": 1.01964,
+         "cations_mol_yr": {
+          "ca": 975055000000.0,
+          "mg": 1134280000000.0,
+          "mono": 148007000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.15449e-08,
@@ -3407,7 +3455,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.614439,
          "land_water_alkalinity_meq_kg": 1.44459,
          "soil_water_alkalinity_meq_kg": 1.40954,
-         "springs_over_quick_flow": 1.0721
+         "springs_over_quick_flow": 1.0721,
+         "cations_mol_yr": {
+          "ca": 1059560000000.0,
+          "mg": 1093270000000.0,
+          "mono": 142655000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.15449e-08,
@@ -3774,7 +3827,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.595864,
          "land_water_alkalinity_meq_kg": 1.40259,
          "soil_water_alkalinity_meq_kg": 1.40954,
-         "springs_over_quick_flow": 0.985707
+         "springs_over_quick_flow": 0.985707,
+         "cations_mol_yr": {
+          "ca": 924386000000.0,
+          "mg": 1157040000000.0,
+          "mono": 150977000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.15449e-08,
@@ -4141,7 +4199,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.63038,
          "land_water_alkalinity_meq_kg": 1.44835,
          "soil_water_alkalinity_meq_kg": 1.40954,
-         "springs_over_quick_flow": 1.07984
+         "springs_over_quick_flow": 1.07984,
+         "cations_mol_yr": {
+          "ca": 977314000000.0,
+          "mg": 1224640000000.0,
+          "mono": 159798000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.15449e-08,
@@ -4514,7 +4577,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.676672,
          "land_water_alkalinity_meq_kg": 1.81351,
          "soil_water_alkalinity_meq_kg": 1.87289,
-         "springs_over_quick_flow": 0.872033
+         "springs_over_quick_flow": 0.872033,
+         "cations_mol_yr": {
+          "ca": 1201780000000.0,
+          "mg": 1171230000000.0,
+          "mono": 152829000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 7.1354e-07,
@@ -4881,7 +4949,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.679218,
          "land_water_alkalinity_meq_kg": 1.81979,
          "soil_water_alkalinity_meq_kg": 1.87289,
-         "springs_over_quick_flow": 0.885558
+         "springs_over_quick_flow": 0.885558,
+         "cations_mol_yr": {
+          "ca": 1217190000000.0,
+          "mg": 1165420000000.0,
+          "mono": 152070000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 7.1354e-07,
@@ -5248,7 +5321,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.676494,
          "land_water_alkalinity_meq_kg": 1.81304,
          "soil_water_alkalinity_meq_kg": 1.87289,
-         "springs_over_quick_flow": 0.871025
+         "springs_over_quick_flow": 0.871025,
+         "cations_mol_yr": {
+          "ca": 1200650000000.0,
+          "mg": 1171690000000.0,
+          "mono": 152888000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 7.1354e-07,
@@ -5615,7 +5693,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.727656,
          "land_water_alkalinity_meq_kg": 1.88959,
          "soil_water_alkalinity_meq_kg": 1.87289,
-         "springs_over_quick_flow": 1.03598
+         "springs_over_quick_flow": 1.03598,
+         "cations_mol_yr": {
+          "ca": 1219060000000.0,
+          "mg": 1328260000000.0,
+          "mono": 173318000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 7.1354e-07,
@@ -5994,7 +6077,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.776271,
          "land_water_alkalinity_meq_kg": 1.44397,
          "soil_water_alkalinity_meq_kg": 1.25137,
-         "springs_over_quick_flow": 1.24573
+         "springs_over_quick_flow": 1.24573,
+         "cations_mol_yr": {
+          "ca": 1394100000000.0,
+          "mg": 1329140000000.0,
+          "mono": 173434000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 1.37262e-07,
@@ -6367,7 +6455,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.554489,
          "land_water_alkalinity_meq_kg": 1.41075,
          "soil_water_alkalinity_meq_kg": 1.40241,
-         "springs_over_quick_flow": 1.01195
+         "springs_over_quick_flow": 1.01195,
+         "cations_mol_yr": {
+          "ca": 702895000000.0,
+          "mg": 1224370000000.0,
+          "mono": 159762000000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 7.53212e-25,
@@ -6740,7 +6833,12 @@
          "rivers_to_sea_alkalinity_meq_kg": 0.368066,
          "land_water_alkalinity_meq_kg": 1.84829,
          "soil_water_alkalinity_meq_kg": 1.86342,
-         "springs_over_quick_flow": 0.842627
+         "springs_over_quick_flow": 0.842627,
+         "cations_mol_yr": {
+          "ca": 804370000000.0,
+          "mg": 495626000000.0,
+          "mono": 64671900000.0
+         }
         },
         "calcite_laid_gt_c_yr": {
          "soil": 5.60356e-09,
@@ -6762,10 +6860,9 @@
  "producer": {
   "study": "research/studies/springs",
   "files": {
-   "research/studies/springs/run.py": "0105df3edfba7ef4cc0db0434c9d069012c0413afd30634d2ef8d2e6d896bbd5",
+   "research/studies/springs/run.py": "9507ae39e5970d704a1192dfe5c4bcbdab4ee1451a659667f5622c3cd1b98403",
    "geography/groundwater_table.py": "5dc3e22ebf651ef25e13210816ccd36f6509ef7f21b36260d3a25cf4a95cefd0",
-   "geography/groundwater_uptake.py": "cf32a0a1055391512aa01744a4e0245d8607c4cbd1e65d203c5f3d8837dfd16a",
-   "research/studies/carbon_cycle/run.py": "23ed44e54cfaa34f09734487ec2feda21638684d7145414838377edb90fa43a7"
+   "geography/groundwater_uptake.py": "cf32a0a1055391512aa01744a4e0245d8607c4cbd1e65d203c5f3d8837dfd16a"
   },
   "inputs": {
    "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",

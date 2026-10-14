@@ -54,13 +54,15 @@ def test_charge_balances_and_chloride_has_no_sink(product):
 
 
 def test_the_first_thousands_of_years_follow_the_carbon_cycle(product):
-    """The fresh seas reach three times calcite saturation when the carbon cycle finds it: in year 1,306-2,725, 1,742
-    at the centre (research/studies/carbon_cycle/README.md)."""
-    for corner, year in (('low', 2725.0), ('central', 1742.0), ('high', 1306.0)):
+    """The fresh seas reach three times calcite saturation when the carbon cycle's held runs find it, both taking the
+    weathering that reaches the waters and the floors' uptake."""
+    carbon = json.loads((S.ROOT / S.CARBON).read_text())
+    for corner in ('low', 'central', 'high'):
         got = find(product, 'fresh', 'natural', corner)['milestones_yr']['calcite_in_the_seas']
+        year = carbon['held'][f'{corner}/held/natural']['calcite_from_year']['sea']
         assert close(got, year, rel=0.03), corner
     rows = {row['year']: row for row in find(product, 'fresh', 'natural')['rows']}
-    assert 5.5 < rows[0]['ph'] < 5.6 and 8.0 < rows[1000]['ph'] < 8.2
+    assert 5.5 < rows[0]['ph'] < 5.6 and 7.4 < rows[1000]['ph'] < 7.9
 
 
 def test_held_seas_stay_where_the_delivery_set_them(product):
@@ -100,7 +102,7 @@ def test_sediment_fills_the_lakes_before_the_seas(product):
 
 def test_the_works_follow_weathering_and_phosphorus_follows_the_lakes(product):
     w = product['works_at_the_catchment_rate']
-    sh = product['setting']['shares']
+    sh = w['shares']
     assert close(w['minerals_mt_yr']['calcite'], 0.5 * w['weathering_eq_yr'] * sh['ca'] * 100.087 / 1e12, rel=1e-4)
     assert close(w['carbonate_burial_gt_c_yr'] + w['magnesite_burial_gt_c_yr'],
                  0.5 * w['weathering_eq_yr'] * (sh['ca'] + sh['mg']) * 12.011 / 1e15, rel=1e-4)

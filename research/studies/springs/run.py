@@ -53,8 +53,10 @@ INPUTS = {'geography/results/atlas.json': 'terluna.geography.atlas/1',
           'geography/results/drainage.json': 'terluna.geography.drainage/1',
           ROCK: 'terluna.research.lunar-cycle-ecology/1', AIR: 'terluna.research.atmospheric-co2/1'}
 IGNORED = gt.IGNORED
-CODE = ('research/studies/springs/run.py', 'geography/groundwater_table.py', 'geography/groundwater_uptake.py',
-        'research/studies/carbon_cycle/run.py')
+# The carbon cycle's weathering law, soils' factor and constants are imported from its code and recorded in the
+# setting, where the tests hold them to the carbon cycle's own; its code is left out of the binding so that the carbon
+# cycle, which reads this product, can change without making it stale.
+CODE = ('research/studies/springs/run.py', 'geography/groundwater_table.py', 'geography/groundwater_uptake.py')
 ATM_PA = 101325.0
 CACO3_G_MOL = 100.087
 # Travertine thresholds, as the terrain study uses them: Earth's streams build tufa conspicuously above a mean saturation
@@ -639,8 +641,10 @@ def summarise(s, base, hy, ch, chem):
     water = ch['water']
     quick = np.zeros(area.size)
     quick[li] = np.maximum(base['runoff_m3_yr'].ravel()[li] / YEAR_S - hy['rech_full'].ravel()[li] * area[li], 0.0)
-    soil_ta = np.zeros(area.size)
-    soil_ta[li] = water['soil']['ta']
+    soil_w = {key: np.zeros(area.size) for key in SPECIES}
+    for key in SPECIES:
+        soil_w[key][li] = water['soil'][key]
+    soil_ta = soil_w['ta']
     soil_x = np.zeros(area.size)
     soil_x[li] = water['calcite_mol_kg']['soil']
     rech_m3s = hy['fx']['rech']
@@ -706,6 +710,8 @@ def summarise(s, base, hy, ch, chem):
     river_ta = (eq_quick + eq_seep) / max((quick.sum() + seep[sp].sum()) * kg_yr, 1.0)
     soil_mean = float((quick * soil_ta).sum() / max(quick.sum(), 1e-300))
     laid = {key: float(((rech_m3s + (quick if key == 'soil' else 0.0)) * v).sum() * kg_yr) for key, v in calc.items()}
+    cations = {key: float(((quick * soil_w[key]).sum() + (seep[sp] * ws[key]).sum()
+                           + (q_fix * w_all[key][src]).sum()) * kg_yr) for key in ('ca', 'mg', 'mono')}
     discharge = base['discharge_m3_yr']
     law_total = chem['soil_load_eq_kg_at'](hy['age_yr']) * discharge * gt.RHO_WATER
     moon.update(
@@ -721,7 +727,8 @@ def summarise(s, base, hy, ch, chem):
             over_carbon_cycle_catchment=(eq_quick + eq_seep + eq_fixed) / max(law_total, 1e-300),
             rivers_to_sea_alkalinity_meq_kg=(eq_quick + eq_seep + eq_fixed) / (discharge * gt.RHO_WATER) * 1e3,
             land_water_alkalinity_meq_kg=river_ta * 1e3, soil_water_alkalinity_meq_kg=soil_mean * 1e3,
-            springs_over_quick_flow=float(moon['alkalinity_meq_kg'] / max(soil_mean * 1e3, 1e-12))),
+            springs_over_quick_flow=float(moon['alkalinity_meq_kg'] / max(soil_mean * 1e3, 1e-12)),
+            cations_mol_yr=cations),
         calcite_laid_gt_c_yr={key: v * cc.M_C / 1e15 for key, v in laid.items()},
         calcite_laid_mt_caco3_yr={key: v * CACO3_G_MOL / 1e12 for key, v in laid.items()})
     return dict(by_band=by_band, moon=moon)
@@ -814,6 +821,9 @@ def results():
     setting = dict(
         grid_pixels_per_degree=gt.PPD, air_co2_atm=p_air, ground_reference_k=base['t_ref_k'], cation_shares=shares,
         catchment_load_meq_kg=law * 1e3, soil_co2_brook=list(BROOK), calcite_saturation_in_rock=OMEGA_ROCK,
+        carbon_cycle=dict(dessert_a=cc.DESSERT_A, dessert_b=cc.DESSERT_B, land_air_k=cc.LAND_AIR_K,
+                          fresh_factor=corner['fresh_factor'], soil_age_yr=corner['soil_age_yr'],
+                          age_exponent=cc.AGE_EXPONENT),
         ph_where_rock_stops=PH_MAX, alkalinity_ceiling_meq_kg=TA_CEILING * 1e3,
         rock_per_kg_of_water_kg=kin['rock_per_kg_water'],
         rates_eq_kg_yr={k: v for k, v in kin.items() if k != 'rock_per_kg_water'}, ageing_exponent=AGEING,

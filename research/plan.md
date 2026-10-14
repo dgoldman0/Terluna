@@ -228,11 +228,15 @@ carries about the soil water's load, since below the soil the rock runs through 
 calcium as calcite underground; the springs are moderately hard, alkaline magnesium waters in the young Moon, and build
 almost no travertine. The land's weathering reaching the waters is about 0.6 of what the carbon cycle counts in the
 mature Moon and 0.2–0.5 in the young Moon, chiefly because nearly half the rivers' flow is rain on the lakes, and the
-filling crust takes up to a quarter of the carbon cycle's import down with its water over the first 10,000 years.
+filling crust takes up to a quarter of the carbon cycle's import down with its water over the first 10,000 years. At the
+author's word the carbon cycle and the sea chemistry took this in: the seas calcify two to four thousand years later,
+the kilns return less, holding 400 ppm imports 0.12–0.33 Gt C a year at year 10,000, and left alone the seas reach pH 9
+in 30,000–60,000 years. A general analysis of the deserts, from the author's Codex conversation on their climate, ran
+beside it as a note on the research drive.
 
-Waiting on the author: the array's power distribution recommendation (domain synthesis); carrying the springs study's
-weathering and filling-crust carbon into the carbon cycle, and the floors' share of the seas' alkalinity into the sea
-chemistry; and the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
+Waiting on the author: the array's power distribution recommendation (domain synthesis); the desert note (research
+drive, deserts/desert_analysis.md) for review; and the taxonomy, on hold for later, with its open choices and the
+aerophytes' scientific name.
 
 ## Next work, in order
 

@@ -74,10 +74,11 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
    sky's biomass, the lakes' and seas' dissolved carbon, the sediments, people's stocks and the mineral strand, from
    the seeding to year 10,000 at the corrected runoff and climate, with weathering that slows as soils age, the
    magnesite route and the kilns' lime. Left alone once the biosphere is grown, the air falls below the plants'
-   comfortable 43 Pa in 135–376 years. Holding 400 ppm takes 0.14–0.39 Gt C a year of return or import at year
-   10,000: kilns of 19–58 GW return the carbonate as it forms, and the lakes' organic burial, the largest sink, leaves
-   an import of 0.09–0.27 Gt C a year. The build brings 985–1,354 Gt C by the year the biosphere is grown, and burial
-   leaves 0.36–0.85% more oxygen in the air by year 10,000.
+   comfortable 43 Pa in 207–447 years. Holding 400 ppm takes 0.14–0.39 Gt C a year of return or import at year
+   10,000: kilns of 3.9–14 GW return the carbonate as it forms, and the lakes' organic burial, the largest sink, with
+   the filling crust and the rock's calcite, leaves an import of 0.12–0.33 Gt C a year. The build brings 951–1,251 Gt C
+   by the year the biosphere is grown, and burial leaves 0.36–0.86% more oxygen in the air by year 10,000 (revised on
+   14 October with the springs study's groundwater).
 
    **Next:** the imports' form and the redox account (items 4 and 8), burial by lake, calcite where the kilns can reach
    it, and the organic returns, as the study's next work lists them.
