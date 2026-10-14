@@ -258,14 +258,13 @@ These results are on `domain/ecology` (commit `55e5020` and the GCM's runs), not
   case's 294.90 K, with 7.6% less rain (*ecology branch*, climate/gcm/README.md).
 - At a scale of 0.9655 it settles at 294.40 K over years 10–19, with 2.25 mm/day of rain against the design case's 2.24
   (*ecology branch*, run log `gcm-runs/A28_corrected_9655.log` on the research drive).
-- A run at 0.9685, aimed at 294.9 K, is in progress. From the 0.9655 run and the dimming runs' 1.4–1.9 K per 1% of
-  sunlight, the scale that lands on 294.9 K is 0.968–0.969, a dimming of about 3.2% below the shield product in place
-  of 5% (*estimate*, pending). The run's years 10–14 average 294.75 K (*ecology branch*, run log
-  `gcm-runs/A28_corrected_9685.log`, at 19:16 on 14 October), which at the two runs' 1.1 K per 1% would put the scale
-  near 0.970 and the dimming nearer 3.0%; its years 10–19 decide it.
-- So the climate window would pass about 1,196 W/m² in place of 1,173.25, and the window tiles would turn away about
-  12.1% of the 1,361 W/m² in place of 13.795% (*estimate*, pending; at a scale of 0.970, 1,198 W/m² and 12.0%). The
-  trades below take the scale of 0.9685.
+- At a scale of 0.9685 it settles at 294.76 K over years 10–19, drifting 0.004 K a decade, with 2.29 mm/day of rain
+  (*ecology branch*, run log `gcm-runs/A28_corrected_9685.log`). The two runs move 1.13 K for each 1% of the design
+  sunlight, so the design case's 294.90 K needs a scale near 0.970: a dimming of about 3.0% below the shield product in
+  place of 5% (*estimate* from the two runs).
+- So the climate window would pass about 1,198 W/m² in place of 1,173.25, and the window tiles would turn away about
+  12.0% of the 1,361 W/m² in place of 13.795% (*estimate*). The trades below take the run's scale of 0.9685, with the
+  window at 1,196 W/m² and 12.1%; at 0.970 each moves a little further the same way.
 - The added dimming for the gases and the glow, 1.69% and 1.80% plus 0.21% of the design sunlight, was sized on the old
   radiation in `domain/ecology`'s gases_glow_dimming study and has not been measured again.
 
@@ -289,9 +288,10 @@ As built the stack puts 14.12 W/m² on the Moon (glow 9.37, the Moon's infrared 
 Moon's absorbed design sunlight, 0.72 × 293.3 = 211.2 W/m², that needs 2.75% more dimming at the ecology GCM's 0.71
 watts of dimming per watt of the glow's infrared, or 3.85% at this branch's efficacy of 1.
 
-The corrected radiation frees 0.9685/0.95 − 1 = 1.95% of the design sunlight, 71% of the roll's heat at 0.71. In total,
-the fleet without the roll under the corrected radiation needs 1,139 W/m² at the top of the air, against 1,150 W/m² for
-the old plan with the roll: 0.9% more dimming, so a much smaller roll could keep the planned temperature on heat alone.
+The corrected radiation frees 0.9685/0.95 − 1 = 1.95% of the design sunlight, 71% of the roll's heat at 0.71, and 2.1%
+and 77% at a scale of 0.970. In total, the fleet without the roll under the corrected radiation needs 1,139 W/m² at the
+top of the air, against 1,150 W/m² for the old plan with the roll: 0.9% more dimming, so a much smaller roll could keep
+the planned temperature on heat alone.
 
 - **The rain.** The extra glow takes about 3.7% more of the rain, at 0.46% for each W/m² of the glow's infrared, beside
   the rolled glow's 2.4%. Under the author's decision of 13 October the plants' water design makes up the glow's rain:
@@ -342,9 +342,9 @@ For the author; each says what it would change from the known design.
 4. **Treat the tiles' areal mass as a design variable bounded by the photon authority**, the edge rings' steering
    first and then the keeping, with the keeping flown at 20,000 km on the rolled layout. It would replace the one
    allocation of 13.765 g/m² with a bound that the hardware work designs to.
-5. **Carry the climate window's new transmission when the 0.9685 run lands**, through the redirected fraction in the
-   dynamics' scenario and the glow's design sunlight. It would change the common photon acceleration (about 12% less)
-   and the glow's dimming.
+5. **Carry the climate window's new transmission**, from the scale near 0.970 that holds the design temperature, through
+   the redirected fraction in the dynamics' scenario and the glow's design sunlight. It would change the common photon
+   acceleration (about 12% less) and the glow's dimming.
 6. **Screen the shingle angle and tile size together** with the supports, the clearance gate and the attitude study.
    It would depart from the flown 1.5° shingle and its clearance envelope, shadow torques and store.
 7. **Record the 14 October direction for the coupled model in the register** if the author confirms it (finding 13).
