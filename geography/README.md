@@ -24,6 +24,7 @@ climate-coupled shorelines are the next layer.
 | [nomenclature.py](nomenclature.py) | IAU lunar feature names from the USGS gazetteer archive (read by a small dBase reader built on the standard library) |
 | [drainage.py](drainage.py) | Rivers and rain-fed lakes above sea level: runoff from the climate run routed over the 16 px/deg terrain, with fill-and-spill lakes set by each depression's water balance ([results/drainage.json](results/drainage.json); grid product in `products/`). `--climatology` takes another run's climate product, `--out` writes elsewhere |
 | [groundwater.py](groundwater.py) | A first estimate of the water the porous crust takes up, from GRAIL's porosity, beside the seas and lakes ([results/groundwater.json](results/groundwater.json)) |
+| [groundwater_uptake.py](groundwater_uptake.py) | How fast the crust takes the water: heat and water down columns under the seas, lakes and land, the cold airless crust thawing from above ([results/groundwater_uptake.json](results/groundwater_uptake.json); sources in [groundwater_sources.json](groundwater_sources.json)) |
 | [lunar_ephemeris.py](lunar_ephemeris.py) | The Earth's and the Sun's directions over the Moon and their distances: the truncated ELP-2000/82 lunar theory with the optical librations, checked against JPL Horizons ([tides_ephemeris_check.csv](tides_ephemeris_check.csv)) |
 | [Calendar ephemeris check](CALENDAR_EPHEMERIS.md) | Independent pinned JPL comparisons across 2000–2500 TT, with horizon timing and conditional clear-sky brightness error propagation |
 | [tides.py](tides.py) | The monthly tide of every sea, 2026–2045: equilibrium height with each sea's volume held and the water's self-attraction, constituents, ranges and stations ([results/tides.json](results/tides.json); grid product in `products/`) |
@@ -163,9 +164,83 @@ saturating even its upper kilometre takes half as much again as the seas hold,
 and the whole porous crust five to seven times as much. Seas laid on dry crust
 drain into it until the pores beneath are full; how fast, and how deep the water
 reaches, depend on a permeability unknown within orders of magnitude, so the
-saturation depth is a question of time this estimate does not settle. It leaves
-out the maria's less porous basalt fill, closed pores, water bound into new
-minerals and the water table's shape on land.
+saturation depth is a question of time this estimate does not settle; the next
+section follows it. It leaves out the maria's less porous basalt fill, closed
+pores, water bound into new minerals and the water table's shape on land.
+
+## Groundwater: how fast the crust takes the water
+
+`python -m geography.groundwater_uptake` writes [results/groundwater_uptake.json](results/groundwater_uptake.json)
+(schema `terluna.geography.groundwater-uptake/1`) in a few seconds; [groundwater_sources.json](groundwater_sources.json)
+records the published values and how far each was read. It follows heat and water down one-dimensional columns under
+the seas' floors, the rain-fed lakes' floors and the land in six latitude bands, from the moment the planned climate
+and the water are in place.
+
+- **The airless crust is cold near the surface and hot below.** Its shattered megaregolith, 2-3 km thick under the
+  highlands and 1 km under the maria, conducts heat at about 0.2 W/m/K (Warren & Rasmussen 1987), so the Moon's
+  13-17 mW/m² of internal heat warms it by 65-85 K a kilometre from about 255 K at the equator, below the month's
+  heat wave, to some 440 K at the highland megaregolith's base. Rock below freezing reaches 240 m down at the equator,
+  630 m at 45-60°, about 1.5 km under the polar highlands and 5 km under the polar seas' mare floors. Water entering
+  it freezes and seals it, as in permafrost.
+- **The planned climate thaws it from above.** Ground at 289-294 K and floors near 290 K warm the cold layer through
+  in 530-560 years at the equator, 2,100-2,200 years at 30-45°, 5,600-7,900 at 45-60°, 18,000-21,000 at 60-75° and
+  56,000-250,000 near the poles (central values).
+- **Once thawed, the crust takes water fast.** The water runs down into the warm crust below under the seas' and
+  lakes' head. Moon-wide the crust holds a 103 m global layer within 1,000 years (14-296 m across the cases), 514 m
+  within 10,000 (198-840) and 1,075 m within 100,000 (528-1,264), against the seas' 282 m: 0.36, 1.8 and 3.8 times
+  the seas. A crust with no cold layer would hold 237 m by 1,000 years, so the cold halves the first millennium's
+  uptake and delays it by centuries. Over ten million years it nears the 1,560 m its pores hold to 20 km.
+- **Holding the seas takes a top-up of thousands of cubic kilometres a year.** At the central values the crust takes
+  1,500-4,100 km³ a year through the first thousand years and 1,700 km³ a year to 10,000, falling to 240 by 100,000
+  and about 10 by a million; the fast case's first millennium takes 12,000 a year. The rivers bring the seas
+  7,200 km³ a year. Without the top-up the seas would fall 17 m in a century and 370 m within a thousand years; a
+  fall of 50 m splits the Near-side Sea, whose maria join about 50 m below its planned level.
+- **On land the crust drinks the rain that soaks in.** In the wet tropics it takes about 60% of the recharge in the
+  first thousand years and 20% to 10,000; between 15° and 30° half to all of it for 10,000 years; between 30° and 45°
+  nearly all of it for 10,000 years and half to 100,000; on the dry lands all of it for a million. Springs and baseflow
+  stay weak while it fills, the water table's next stage.
+- **The floors' sediment slows it little.** Under kilometres of head a few metres of clay pass water faster than the
+  deep crust takes it, and the deep crust's low permeability sets the pace; the tightest seal costs the slow case a
+  quarter of its uptake by 10,000 years.
+
+| Moon-wide water held in the crust, global layer | 100 years | 1,000 | 10,000 | 100,000 | 1 million |
+|---|---|---|---|---|---|
+| Slow | 3 m | 14 m | 198 m | 528 m | 991 m |
+| Central | 5 m | 103 m | 514 m | 1,075 m | 1,347 m |
+| Fast | 7 m | 296 m | 840 m | 1,264 m | 1,347 m |
+| Central with a crust that never freezes the water | 105 m | 237 m | 555 m | 1,087 m | 1,347 m |
+| Central with an airless megaregolith of 0.5 W/m/K | 4 m | 17 m | 294 m | 884 m | 1,342 m |
+| The seas, for scale | 282 m | 282 m | 282 m | 282 m | 282 m |
+
+| Top-up that holds the seas, km³ a year | Slow | Central | Fast |
+|---|---|---|---|
+| First 10 years | 3,100 | 4,100 | 5,700 |
+| 10-100 years | 1,100 | 1,500 | 2,300 |
+| 100-1,000 years | 440 | 4,100 | 12,200 |
+| 1,000-10,000 years | 780 | 1,700 | 2,300 |
+| 10,000-100,000 years | 140 | 240 | 180 |
+| 100,000 years to 1 million | 20 | 11 | 4 |
+
+**How it is set up.** Heat moves by implicit conduction: the megaregolith's conductivity rises from its airless
+0.2 W/m/K to 0.3-0.8 once air fills its cracks and 1.0-2.0 once water does (*design guesses*), the bedrock below
+conducts 1.4 W/m/K, and water raises the heat capacity. The surface holds the ground's temperature from the climate
+run or the floors' water near the coldest sea surface, and the internal heat enters from below at 30 km. Water
+infiltrates on Green and Ampt's terms through the crust's permeability, log k = -14 - 3.2 log z at a kilometre's depth
+(Manning & Ingebritsen 1999) an order either way, capped at volcanic rock's 10⁻¹² m² near the surface (Gleeson et
+al. 2011), at lunar gravity and the water's temperature. It is ponded under the seas and lakes at their mean depths
+and fed on land by 10-30% of the rain (Earth's mean 17%; Moeck et al. 2020), at most the rain less evaporation and
+at least 1% of the rain on dry land (Scanlon et al. 2006). It stops where the rock is below freezing, and the floors'
+fine sediment builds up as a seal at 0.08-0.36 mm a year under the seas and 0.15-2.4 mm under the lakes (*design
+guesses* from the sea chemistry and terrain studies' totals). Porosity follows the profile above to 20 km, where the
+pores close. The slow and fast cases set every value toward slower or faster uptake together. The same formulation
+on a warm Martian crust (Shadab et al. 2025) reaches a water table 2-5 km down in 50-200 years; for the same rock the
+Moon's gravity makes it 2.3 times slower.
+
+**What it leaves out.** The build's own warming of the ground before the water arrives, which would thaw the low
+latitudes' cold layer sooner; the delivery's heat; water flowing sideways, from the seas under the land; the heat the
+inflowing water carries and the circulation it would set up through the hot megaregolith, with warm springs; air
+trapped ahead of the water; the maria's less porous basalt fill, for which a map of the maria's extent is needed;
+clays from weathering closing pores; and the crust's response to the water's load.
 
 ## The monthly tide
 

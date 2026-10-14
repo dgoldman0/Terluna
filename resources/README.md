@@ -153,6 +153,11 @@ loss and the resupply that matches it take to replace the inventory.
      the author holds the seas fresh on the condition that they are rich in life. Keeping them and the lakes open
      is one loop with the relief: 0.7–8.3 Gt of rock a year dredged and carried back uphill for 0.2–11 GW, while
      the seas' 0.39 km³ a year of calcite, magnesite and opal is stone for the built land.
+   - **The crust drinks more than the seas hold**
+     ([groundwater uptake](../geography/README.md#groundwater-how-fast-the-crust-takes-the-water)): once the cold
+     airless crust thaws, it takes 0.7–3 times the seas' water within 10,000 years (1.8 at the central values) and
+     3.5–4.8 times within a million. The water delivery the author keeps going must add 1,500–4,100 km³ a year
+     through the first thousand years and about 1,700 to 10,000 to hold the seas at 28%.
    - *Solid for weathering alone.*
 
 ### The shield's material

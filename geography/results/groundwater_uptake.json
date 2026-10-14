@@ -1,0 +1,6283 @@
+{
+ "schema": "terluna.geography.groundwater-uptake/1",
+ "evidence": "One-dimensional columns of heat and water on committed products and published values: the airless crust's temperatures from Apollo and Diviner with Warren & Rasmussen's megaregolith; conduction solved implicitly with the crust's properties changing as air and water fill it; Green-Ampt infiltration through Manning & Ingebritsen's permeability at lunar gravity, the water stopping where the rock is below freezing and the floors' sediment sealing them as it builds up. The air and water arrive at once with the planned climate; the build's own warming, delivery heat, lateral flow, the heat the inflowing water carries, hydrothermal circulation and trapped air are outside it. Earth's values are reference points; design guesses are named.",
+ "reading_rule": "Years from the moment the planned climate and the water are in place. Depths in m below the floor or ground; held water in m of water a square metre of floor or ground; Moon-wide amounts as a global layer in m, as kg and as a share of the seas' 1.07e19 kg. The seas' fall is the held water spread over the seas' area without top-up, and the share the seas would keep follows the atlas's levels. A frozen layer is the depth range below freezing; a column is thawed through once no part of it is.",
+ "setting": {
+  "bands": [
+   {
+    "band": "0-15",
+    "area_m2": 9817610000000.0,
+    "sea_m2": 1979800000000.0,
+    "lake_m2": 2397240000000.0,
+    "land_m2": 5440570000000.0,
+    "sea_depth_m": 608.592,
+    "lake_depth_m": 837.604,
+    "ground_k": 293.614,
+    "sea_surface_k": 298.127,
+    "rain_m_yr": 1.74634,
+    "evaporation_m_yr": 1.26665,
+    "mid_lat": 7.5
+   },
+   {
+    "band": "15-30",
+    "area_m2": 9148560000000.0,
+    "sea_m2": 2453910000000.0,
+    "lake_m2": 1115000000000.0,
+    "land_m2": 5579640000000.0,
+    "sea_depth_m": 787.111,
+    "lake_depth_m": 732.728,
+    "ground_k": 294.241,
+    "sea_surface_k": 298.152,
+    "rain_m_yr": 0.986574,
+    "evaporation_m_yr": 0.908099,
+    "mid_lat": 22.5
+   },
+   {
+    "band": "30-45",
+    "area_m2": 7856040000000.0,
+    "sea_m2": 2422820000000.0,
+    "lake_m2": 381807000000.0,
+    "land_m2": 5051420000000.0,
+    "sea_depth_m": 1048.85,
+    "lake_depth_m": 713.455,
+    "ground_k": 294.256,
+    "sea_surface_k": 297.137,
+    "rain_m_yr": 0.476076,
+    "evaporation_m_yr": 0.453731,
+    "mid_lat": 37.5
+   },
+   {
+    "band": "45-60",
+    "area_m2": 6028150000000.0,
+    "sea_m2": 2333600000000.0,
+    "lake_m2": 8654780000.0,
+    "land_m2": 3685900000000.0,
+    "sea_depth_m": 1263.24,
+    "lake_depth_m": 1019.5,
+    "ground_k": 293.677,
+    "sea_surface_k": 295.336,
+    "rain_m_yr": 0.0699595,
+    "evaporation_m_yr": 0.0704203,
+    "mid_lat": 52.5
+   },
+   {
+    "band": "60-75",
+    "area_m2": 3789460000000.0,
+    "sea_m2": 1082120000000.0,
+    "lake_m2": 0.0,
+    "land_m2": 2707340000000.0,
+    "sea_depth_m": 1543.37,
+    "lake_depth_m": 0.0,
+    "ground_k": 291.485,
+    "sea_surface_k": 293.266,
+    "rain_m_yr": 0.0194075,
+    "evaporation_m_yr": 0.0194208,
+    "mid_lat": 67.5
+   },
+   {
+    "band": "75-90",
+    "area_m2": 1292510000000.0,
+    "sea_m2": 348792000000.0,
+    "lake_m2": 19764100000.0,
+    "land_m2": 923957000000.0,
+    "sea_depth_m": 1178.72,
+    "lake_depth_m": 124.767,
+    "ground_k": 289.131,
+    "sea_surface_k": 291.08,
+    "rain_m_yr": 0.014862,
+    "evaporation_m_yr": 0.0147604,
+    "mid_lat": 82.5
+   }
+  ],
+  "porosity_phi0": 0.1352,
+  "porosity_e_folding_m": 16421,
+  "pore_bottom_m": 20000.0,
+  "seas_kg": 1.07071e+19,
+  "sea_level_m": -1654.2
+ },
+ "cases": {
+  "slow": {
+   "params": {
+    "airless_spread_k": -5.0,
+    "heat_flow": 0.013,
+    "k_air": 0.3,
+    "k_wet": 1.0,
+    "perm_1km": 1e-15,
+    "sea_bottom_offset_k": -2.0,
+    "lake_bottom_offset_k": -4.0,
+    "recharge_share": 0.1,
+    "phi0": 0.1352,
+    "porosity_e_folding_m": 16421,
+    "k_airless": 0.2,
+    "seal_perm": 1e-18,
+    "sea_sediment_mm_yr": 0.36,
+    "lake_sediment_mm_yr": 2.4
+   },
+   "bands": {
+    "0-15": {
+     "airless_top_k": 249.464,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        349.13
+       ],
+       "thawed_through_yr": 2113.49,
+       "by_year": {
+        "10": {
+         "front_m": 10.5075,
+         "held_m": 1.42016,
+         "seal_m": 0.0036,
+         "frozen_top_m": 11.0728,
+         "frozen_bottom_m": 349.13,
+         "uptake_m_yr_since_last": 0.142016
+        },
+        "100": {
+         "front_m": 36.8199,
+         "held_m": 4.97247,
+         "seal_m": 0.036,
+         "frozen_top_m": 38.1745,
+         "frozen_bottom_m": 349.13,
+         "uptake_m_yr_since_last": 0.0394701
+        },
+        "1000": {
+         "front_m": 145.168,
+         "held_m": 19.5402,
+         "seal_m": 0.36,
+         "frozen_top_m": 149.773,
+         "frozen_bottom_m": 349.13,
+         "uptake_m_yr_since_last": 0.0161864
+        },
+        "10000": {
+         "front_m": 2401.11,
+         "held_m": 302.012,
+         "seal_m": 3.6,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0313857
+        },
+        "100000": {
+         "front_m": 5793.18,
+         "held_m": 659.988,
+         "seal_m": 36.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00397751
+        },
+        "1e+06": {
+         "front_m": 12165.2,
+         "held_m": 1161.75,
+         "seal_m": 360.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000557514
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 3600.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 4.46199e-05
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        349.13
+       ],
+       "thawed_through_yr": 2238.72,
+       "by_year": {
+        "10": {
+         "front_m": 10.5075,
+         "held_m": 1.42016,
+         "seal_m": 0.024,
+         "frozen_top_m": 11.0728,
+         "frozen_bottom_m": 349.13,
+         "uptake_m_yr_since_last": 0.142016
+        },
+        "100": {
+         "front_m": 36.8199,
+         "held_m": 4.97247,
+         "seal_m": 0.24,
+         "frozen_top_m": 38.1745,
+         "frozen_bottom_m": 349.13,
+         "uptake_m_yr_since_last": 0.0394701
+        },
+        "1000": {
+         "front_m": 145.168,
+         "held_m": 19.5402,
+         "seal_m": 2.4,
+         "frozen_top_m": 149.773,
+         "frozen_bottom_m": 349.13,
+         "uptake_m_yr_since_last": 0.0161864
+        },
+        "10000": {
+         "front_m": 521.836,
+         "held_m": 69.443,
+         "seal_m": 24.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00554475
+        },
+        "100000": {
+         "front_m": 1073.0,
+         "held_m": 140.432,
+         "seal_m": 240.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000788763
+        },
+        "1e+06": {
+         "front_m": 1888.05,
+         "held_m": 241.136,
+         "seal_m": 2400.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000111894
+        },
+        "1e+07": {
+         "front_m": 3142.85,
+         "held_m": 386.726,
+         "seal_m": 24000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 1.61766e-05
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        349.13
+       ],
+       "thawed_through_yr": 1995.26,
+       "by_year": {
+        "10": {
+         "front_m": 11.2306,
+         "held_m": 1.51785,
+         "seal_m": 0.0,
+         "frozen_top_m": 12.2371,
+         "frozen_bottom_m": 349.13,
+         "uptake_m_yr_since_last": 0.151785
+        },
+        "100": {
+         "front_m": 42.4008,
+         "held_m": 5.7252,
+         "seal_m": 0.0,
+         "frozen_top_m": 43.9229,
+         "frozen_bottom_m": 349.13,
+         "uptake_m_yr_since_last": 0.0467483
+        },
+        "1000": {
+         "front_m": 164.141,
+         "held_m": 22.0813,
+         "seal_m": 0.0,
+         "frozen_top_m": 169.315,
+         "frozen_bottom_m": 349.13,
+         "uptake_m_yr_since_last": 0.0181734
+        },
+        "10000": {
+         "front_m": 3627.87,
+         "held_m": 440.086,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.046445
+        },
+        "100000": {
+         "front_m": 7693.04,
+         "held_m": 830.44,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00433726
+        },
+        "1e+06": {
+         "front_m": 15664.0,
+         "held_m": 1364.85,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000593791
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 2.20531e-05
+        }
+       },
+       "recharge_mm_yr": 174.634
+      }
+     }
+    },
+    "15-30": {
+     "airless_top_k": 245.1,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        417.411
+       ],
+       "thawed_through_yr": 3349.65,
+       "by_year": {
+        "10": {
+         "front_m": 9.44107,
+         "held_m": 1.27607,
+         "seal_m": 0.0036,
+         "frozen_top_m": 9.9743,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.127607
+        },
+        "100": {
+         "front_m": 34.2641,
+         "held_m": 4.62767,
+         "seal_m": 0.036,
+         "frozen_top_m": 35.542,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0372401
+        },
+        "1000": {
+         "front_m": 120.549,
+         "held_m": 16.2386,
+         "seal_m": 0.36,
+         "frozen_top_m": 124.416,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.012901
+        },
+        "10000": {
+         "front_m": 2104.01,
+         "held_m": 266.992,
+         "seal_m": 3.6,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0278615
+        },
+        "100000": {
+         "front_m": 5700.83,
+         "held_m": 651.189,
+         "seal_m": 36.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00426886
+        },
+        "1e+06": {
+         "front_m": 12057.4,
+         "held_m": 1154.78,
+         "seal_m": 360.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000559542
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 3600.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 4.53947e-05
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        417.411
+       ],
+       "thawed_through_yr": 3349.65,
+       "by_year": {
+        "10": {
+         "front_m": 10.5075,
+         "held_m": 1.42016,
+         "seal_m": 0.024,
+         "frozen_top_m": 11.0728,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.142016
+        },
+        "100": {
+         "front_m": 34.2641,
+         "held_m": 4.62767,
+         "seal_m": 0.24,
+         "frozen_top_m": 35.542,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.035639
+        },
+        "1000": {
+         "front_m": 127.637,
+         "held_m": 17.1896,
+         "seal_m": 2.4,
+         "frozen_top_m": 132.381,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0139577
+        },
+        "10000": {
+         "front_m": 453.209,
+         "held_m": 60.436,
+         "seal_m": 24.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00480516
+        },
+        "100000": {
+         "front_m": 939.853,
+         "held_m": 123.5,
+         "seal_m": 240.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000700712
+        },
+        "1e+06": {
+         "front_m": 1657.88,
+         "held_m": 213.202,
+         "seal_m": 2400.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 9.96686e-05
+        },
+        "1e+07": {
+         "front_m": 2755.88,
+         "held_m": 343.008,
+         "seal_m": 24000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 1.44229e-05
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        417.411
+       ],
+       "thawed_through_yr": 2818.38,
+       "by_year": {
+        "10": {
+         "front_m": 5.80542,
+         "held_m": 0.784754,
+         "seal_m": 0.0,
+         "frozen_top_m": 8.93802,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0784754
+        },
+        "100": {
+         "front_m": 36.8199,
+         "held_m": 4.97247,
+         "seal_m": 0.0,
+         "frozen_top_m": 38.1745,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0465302
+        },
+        "1000": {
+         "front_m": 145.168,
+         "held_m": 19.5402,
+         "seal_m": 0.0,
+         "frozen_top_m": 149.773,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0161864
+        },
+        "10000": {
+         "front_m": 3287.14,
+         "held_m": 402.765,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0425805
+        },
+        "100000": {
+         "front_m": 7581.02,
+         "held_m": 820.928,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00464625
+        },
+        "1e+06": {
+         "front_m": 15530.7,
+         "held_m": 1357.88,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000596614
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 2.28277e-05
+        }
+       },
+       "recharge_mm_yr": 78.4753
+      }
+     }
+    },
+    "30-45": {
+     "airless_top_k": 235.943,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        561.409
+       ],
+       "thawed_through_yr": 6683.44,
+       "by_year": {
+        "10": {
+         "front_m": 8.43497,
+         "held_m": 1.14012,
+         "seal_m": 0.0036,
+         "frozen_top_m": 8.93802,
+         "frozen_bottom_m": 561.409,
+         "uptake_m_yr_since_last": 0.114012
+        },
+        "100": {
+         "front_m": 27.4323,
+         "held_m": 3.70574,
+         "seal_m": 0.036,
+         "frozen_top_m": 28.5052,
+         "frozen_bottom_m": 561.409,
+         "uptake_m_yr_since_last": 0.028507
+        },
+        "1000": {
+         "front_m": 99.879,
+         "held_m": 13.4627,
+         "seal_m": 0.36,
+         "frozen_top_m": 103.125,
+         "frozen_bottom_m": 561.409,
+         "uptake_m_yr_since_last": 0.010841
+        },
+        "10000": {
+         "front_m": 1217.22,
+         "held_m": 158.617,
+         "seal_m": 3.6,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0161282
+        },
+        "100000": {
+         "front_m": 5402.01,
+         "held_m": 622.377,
+         "seal_m": 36.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00515289
+        },
+        "1e+06": {
+         "front_m": 11733.9,
+         "held_m": 1133.59,
+         "seal_m": 360.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000568011
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 3600.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 4.77492e-05
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        561.409
+       ],
+       "thawed_through_yr": 6683.44,
+       "by_year": {
+        "10": {
+         "front_m": 8.43497,
+         "held_m": 1.14012,
+         "seal_m": 0.024,
+         "frozen_top_m": 8.93802,
+         "frozen_bottom_m": 561.409,
+         "uptake_m_yr_since_last": 0.114012
+        },
+        "100": {
+         "front_m": 29.5782,
+         "held_m": 3.99537,
+         "seal_m": 0.24,
+         "frozen_top_m": 30.7155,
+         "frozen_bottom_m": 561.409,
+         "uptake_m_yr_since_last": 0.0317251
+        },
+        "1000": {
+         "front_m": 99.879,
+         "held_m": 13.4627,
+         "seal_m": 2.4,
+         "frozen_top_m": 103.125,
+         "frozen_bottom_m": 561.409,
+         "uptake_m_yr_since_last": 0.0105192
+        },
+        "10000": {
+         "front_m": 381.076,
+         "held_m": 50.9283,
+         "seal_m": 24.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00416285
+        },
+        "100000": {
+         "front_m": 827.364,
+         "held_m": 109.088,
+         "seal_m": 240.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000646223
+        },
+        "1e+06": {
+         "front_m": 1482.28,
+         "held_m": 191.625,
+         "seal_m": 2400.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 9.17077e-05
+        },
+        "1e+07": {
+         "front_m": 2474.66,
+         "held_m": 310.584,
+         "seal_m": 24000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 1.32177e-05
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        561.409
+       ],
+       "thawed_through_yr": 5956.62,
+       "by_year": {
+        "10": {
+         "front_m": 1.6528,
+         "held_m": 0.223447,
+         "seal_m": 0.0,
+         "frozen_top_m": 6.16803,
+         "frozen_bottom_m": 561.409,
+         "uptake_m_yr_since_last": 0.0223447
+        },
+        "100": {
+         "front_m": 16.5355,
+         "held_m": 2.23447,
+         "seal_m": 0.0,
+         "frozen_top_m": 22.597,
+         "frozen_bottom_m": 561.409,
+         "uptake_m_yr_since_last": 0.0223447
+        },
+        "1000": {
+         "front_m": 113.254,
+         "held_m": 15.2593,
+         "seal_m": 0.0,
+         "frozen_top_m": 116.902,
+         "frozen_bottom_m": 561.409,
+         "uptake_m_yr_since_last": 0.014472
+        },
+        "10000": {
+         "front_m": 1217.2,
+         "held_m": 158.614,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0159283
+        },
+        "100000": {
+         "front_m": 7178.44,
+         "held_m": 786.201,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00697318
+        },
+        "1e+06": {
+         "front_m": 15210.3,
+         "held_m": 1340.89,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00061632
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 2.47157e-05
+        }
+       },
+       "recharge_mm_yr": 22.3447
+      }
+     }
+    },
+    "45-60": {
+     "airless_top_k": 220.827,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        799.857
+       ],
+       "thawed_through_yr": 14962.4,
+       "by_year": {
+        "10": {
+         "front_m": 6.5904,
+         "held_m": 0.890843,
+         "seal_m": 0.0036,
+         "frozen_top_m": 7.03811,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.0890843
+        },
+        "100": {
+         "front_m": 21.6961,
+         "held_m": 2.93138,
+         "seal_m": 0.036,
+         "frozen_top_m": 22.597,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.0226727
+        },
+        "1000": {
+         "front_m": 77.381,
+         "held_m": 10.4373,
+         "seal_m": 0.36,
+         "frozen_top_m": 79.9524,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.00833991
+        },
+        "10000": {
+         "front_m": 359.541,
+         "held_m": 48.0817,
+         "seal_m": 3.6,
+         "frozen_top_m": 370.578,
+         "frozen_bottom_m": 754.11,
+         "uptake_m_yr_since_last": 0.00418271
+        },
+        "100000": {
+         "front_m": 4706.18,
+         "held_m": 553.219,
+         "seal_m": 36.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00561263
+        },
+        "1e+06": {
+         "front_m": 11004.2,
+         "held_m": 1084.21,
+         "seal_m": 360.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00058999
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 3600.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 5.32356e-05
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        799.857
+       ],
+       "thawed_through_yr": 15848.9,
+       "by_year": {
+        "10": {
+         "front_m": 6.5904,
+         "held_m": 0.890843,
+         "seal_m": 0.024,
+         "frozen_top_m": 7.03811,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.0890843
+        },
+        "100": {
+         "front_m": 23.4979,
+         "held_m": 3.17465,
+         "seal_m": 0.24,
+         "frozen_top_m": 24.4529,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.0253756
+        },
+        "1000": {
+         "front_m": 77.381,
+         "held_m": 10.4373,
+         "seal_m": 2.4,
+         "frozen_top_m": 79.9524,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.00806961
+        },
+        "10000": {
+         "front_m": 331.864,
+         "held_m": 44.4176,
+         "seal_m": 24.0,
+         "frozen_top_m": 370.578,
+         "frozen_bottom_m": 754.11,
+         "uptake_m_yr_since_last": 0.00377559
+        },
+        "100000": {
+         "front_m": 872.356,
+         "held_m": 114.864,
+         "seal_m": 240.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000782742
+        },
+        "1e+06": {
+         "front_m": 1668.02,
+         "held_m": 214.441,
+         "seal_m": 2400.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00011064
+        },
+        "1e+07": {
+         "front_m": 2885.89,
+         "held_m": 357.811,
+         "seal_m": 24000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 1.593e-05
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        799.857
+       ],
+       "thawed_through_yr": 21134.9,
+       "by_year": {
+        "10": {
+         "front_m": 0.0511978,
+         "held_m": 0.00692194,
+         "seal_m": 0.0,
+         "frozen_top_m": 3.84229,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.000692194
+        },
+        "100": {
+         "front_m": 0.516912,
+         "held_m": 0.0698854,
+         "seal_m": 0.0,
+         "frozen_top_m": 12.2371,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.000699594
+        },
+        "1000": {
+         "front_m": 5.17479,
+         "held_m": 0.699521,
+         "seal_m": 0.0,
+         "frozen_top_m": 43.9229,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.000699595
+        },
+        "10000": {
+         "front_m": 51.8263,
+         "held_m": 6.99588,
+         "seal_m": 0.0,
+         "frozen_top_m": 215.944,
+         "frozen_bottom_m": 754.11,
+         "uptake_m_yr_since_last": 0.000699595
+        },
+        "100000": {
+         "front_m": 525.786,
+         "held_m": 69.9603,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000699605
+        },
+        "1e+06": {
+         "front_m": 6215.66,
+         "held_m": 699.615,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000699617
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 9.59683e-05
+        }
+       },
+       "recharge_mm_yr": 0.699595
+      }
+     }
+    },
+    "60-75": {
+     "airless_top_k": 196.63,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        2167.94
+       ],
+       "thawed_through_yr": 59566.2,
+       "by_year": {
+        "10": {
+         "front_m": 4.94873,
+         "held_m": 0.668968,
+         "seal_m": 0.0036,
+         "frozen_top_m": 5.3472,
+         "frozen_bottom_m": 2167.94,
+         "uptake_m_yr_since_last": 0.0668968
+        },
+        "100": {
+         "front_m": 16.88,
+         "held_m": 2.281,
+         "seal_m": 0.036,
+         "frozen_top_m": 17.6364,
+         "frozen_bottom_m": 2167.94,
+         "uptake_m_yr_since_last": 0.0179115
+        },
+        "1000": {
+         "front_m": 55.7174,
+         "held_m": 7.52023,
+         "seal_m": 0.36,
+         "frozen_top_m": 57.6389,
+         "frozen_bottom_m": 2167.94,
+         "uptake_m_yr_since_last": 0.00582136
+        },
+        "10000": {
+         "front_m": 222.476,
+         "held_m": 29.8759,
+         "seal_m": 3.6,
+         "frozen_top_m": 229.4,
+         "frozen_bottom_m": 2167.94,
+         "uptake_m_yr_since_last": 0.00248396
+        },
+        "100000": {
+         "front_m": 2808.58,
+         "held_m": 349.022,
+         "seal_m": 36.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00354606
+        },
+        "1e+06": {
+         "front_m": 9605.31,
+         "held_m": 983.205,
+         "seal_m": 360.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000704648
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 3600.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 6.44583e-05
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        1138.1
+       ],
+       "thawed_through_yr": 53088.4,
+       "by_year": {
+        "10": {
+         "front_m": 0.0141401,
+         "held_m": 0.00191174,
+         "seal_m": 0.0,
+         "frozen_top_m": 2.50293,
+         "frozen_bottom_m": 1138.1,
+         "uptake_m_yr_since_last": 0.000191174
+        },
+        "100": {
+         "front_m": 0.143334,
+         "held_m": 0.0193787,
+         "seal_m": 0.0,
+         "frozen_top_m": 7.9604,
+         "frozen_bottom_m": 1138.1,
+         "uptake_m_yr_since_last": 0.000194077
+        },
+        "1000": {
+         "front_m": 1.43532,
+         "held_m": 0.194047,
+         "seal_m": 0.0,
+         "frozen_top_m": 28.5052,
+         "frozen_bottom_m": 1138.1,
+         "uptake_m_yr_since_last": 0.000194075
+        },
+        "10000": {
+         "front_m": 14.3608,
+         "held_m": 1.94073,
+         "seal_m": 0.0,
+         "frozen_top_m": 116.902,
+         "frozen_bottom_m": 1138.1,
+         "uptake_m_yr_since_last": 0.000194076
+        },
+        "100000": {
+         "front_m": 144.178,
+         "held_m": 19.4075,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000194076
+        },
+        "1e+06": {
+         "front_m": 1502.17,
+         "held_m": 194.081,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000194081
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000152139
+        }
+       },
+       "recharge_mm_yr": 0.194075
+      }
+     }
+    },
+    "75-90": {
+     "airless_top_k": 150.267,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        7118.21
+       ],
+       "thawed_through_yr": 562341.0,
+       "by_year": {
+        "10": {
+         "front_m": 3.48766,
+         "held_m": 0.471481,
+         "seal_m": 0.0036,
+         "frozen_top_m": 3.84229,
+         "frozen_bottom_m": 7118.21,
+         "uptake_m_yr_since_last": 0.0471481
+        },
+        "100": {
+         "front_m": 11.638,
+         "held_m": 1.5729,
+         "seal_m": 0.036,
+         "frozen_top_m": 12.2371,
+         "frozen_bottom_m": 7118.21,
+         "uptake_m_yr_since_last": 0.012238
+        },
+        "1000": {
+         "front_m": 39.5291,
+         "held_m": 5.33791,
+         "seal_m": 0.36,
+         "frozen_top_m": 40.965,
+         "frozen_bottom_m": 7118.21,
+         "uptake_m_yr_since_last": 0.00418334
+        },
+        "10000": {
+         "front_m": 136.479,
+         "held_m": 18.3755,
+         "seal_m": 3.6,
+         "frozen_top_m": 140.824,
+         "frozen_bottom_m": 7118.21,
+         "uptake_m_yr_since_last": 0.00144862
+        },
+        "100000": {
+         "front_m": 578.003,
+         "held_m": 76.7867,
+         "seal_m": 36.0,
+         "frozen_top_m": 595.593,
+         "frozen_bottom_m": 7118.21,
+         "uptake_m_yr_since_last": 0.000649013
+        },
+        "1e+06": {
+         "front_m": 5238.97,
+         "held_m": 606.435,
+         "seal_m": 360.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000588498
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 3600.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000106322
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        1818.91
+       ],
+       "thawed_through_yr": 158489.0,
+       "by_year": {
+        "10": {
+         "front_m": 2.81855,
+         "held_m": 0.381035,
+         "seal_m": 0.024,
+         "frozen_top_m": 3.1531,
+         "frozen_bottom_m": 1818.91,
+         "uptake_m_yr_since_last": 0.0381035
+        },
+        "100": {
+         "front_m": 9.39544,
+         "held_m": 1.2699,
+         "seal_m": 0.24,
+         "frozen_top_m": 9.9743,
+         "frozen_bottom_m": 1818.91,
+         "uptake_m_yr_since_last": 0.00987628
+        },
+        "1000": {
+         "front_m": 30.6966,
+         "held_m": 4.14631,
+         "seal_m": 2.4,
+         "frozen_top_m": 33.0585,
+         "frozen_bottom_m": 1818.91,
+         "uptake_m_yr_since_last": 0.00319601
+        },
+        "10000": {
+         "front_m": 80.3798,
+         "held_m": 10.8408,
+         "seal_m": 24.0,
+         "frozen_top_m": 96.8164,
+         "frozen_bottom_m": 1818.91,
+         "uptake_m_yr_since_last": 0.000743832
+        },
+        "100000": {
+         "front_m": 149.643,
+         "held_m": 20.1398,
+         "seal_m": 240.0,
+         "frozen_top_m": 417.411,
+         "frozen_bottom_m": 1715.48,
+         "uptake_m_yr_since_last": 0.000103322
+        },
+        "1e+06": {
+         "front_m": 243.004,
+         "held_m": 32.6122,
+         "seal_m": 2400.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 1.38583e-05
+        },
+        "1e+07": {
+         "front_m": 369.29,
+         "held_m": 49.3708,
+         "seal_m": 24000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 1.86206e-06
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        1818.91
+       ],
+       "thawed_through_yr": 158489.0,
+       "by_year": {
+        "10": {
+         "front_m": 0.0106451,
+         "held_m": 0.00143922,
+         "seal_m": 0.0,
+         "frozen_top_m": 1.88955,
+         "frozen_bottom_m": 1818.91,
+         "uptake_m_yr_since_last": 0.000143922
+        },
+        "100": {
+         "front_m": 0.10958,
+         "held_m": 0.0148151,
+         "seal_m": 0.0,
+         "frozen_top_m": 5.3472,
+         "frozen_bottom_m": 1818.91,
+         "uptake_m_yr_since_last": 0.000148621
+        },
+        "1000": {
+         "front_m": 1.09895,
+         "held_m": 0.148573,
+         "seal_m": 0.0,
+         "frozen_top_m": 16.1664,
+         "frozen_bottom_m": 1818.91,
+         "uptake_m_yr_since_last": 0.000148619
+        },
+        "10000": {
+         "front_m": 10.9959,
+         "held_m": 1.48615,
+         "seal_m": 0.0,
+         "frozen_top_m": 61.5972,
+         "frozen_bottom_m": 1818.91,
+         "uptake_m_yr_since_last": 0.00014862
+        },
+        "100000": {
+         "front_m": 110.295,
+         "held_m": 14.862,
+         "seal_m": 0.0,
+         "frozen_top_m": 417.411,
+         "frozen_bottom_m": 1715.48,
+         "uptake_m_yr_since_last": 0.00014862
+        },
+        "1e+06": {
+         "front_m": 1137.81,
+         "held_m": 148.624,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000148624
+        },
+        "1e+07": {
+         "front_m": 17919.3,
+         "held_m": 1474.6,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000147331
+        }
+       },
+       "recharge_mm_yr": 0.14862
+      }
+     }
+    }
+   },
+   "moon": {
+    "held": {
+     "10": {
+      "global_layer_m": 0.81483,
+      "kg": 3.09084e+16,
+      "share_of_seas": 0.00288672,
+      "seas_fall_m": 2.91011,
+      "seas_share_without_top_up": 0.279379,
+      "seas_level_without_top_up_m": -1656.98
+     },
+     "100": {
+      "global_layer_m": 3.40602,
+      "kg": 1.29198e+17,
+      "share_of_seas": 0.0120666,
+      "seas_fall_m": 12.1644,
+      "seas_share_without_top_up": 0.277403,
+      "seas_level_without_top_up_m": -1666.47
+     },
+     "1000": {
+      "global_layer_m": 13.875,
+      "kg": 5.26313e+17,
+      "share_of_seas": 0.0491556,
+      "seas_fall_m": 49.5539,
+      "seas_share_without_top_up": 0.269422,
+      "seas_level_without_top_up_m": -1704.89
+     },
+     "10000": {
+      "global_layer_m": 198.181,
+      "kg": 7.51748e+18,
+      "share_of_seas": 0.702104,
+      "seas_fall_m": 707.793,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "100000": {
+      "global_layer_m": 527.768,
+      "kg": 2.00195e+19,
+      "share_of_seas": 1.86974,
+      "seas_fall_m": 1884.89,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "1e+06": {
+      "global_layer_m": 991.085,
+      "kg": 3.75942e+19,
+      "share_of_seas": 3.51115,
+      "seas_fall_m": 3539.6,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "1e+07": {
+      "global_layer_m": 1437.27,
+      "kg": 5.45188e+19,
+      "share_of_seas": 5.09185,
+      "seas_fall_m": 5133.1,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     }
+    },
+    "top_up_km3_yr": {
+     "0-10": 3090.84,
+     "10-100": 1092.11,
+     "100-1000": 441.238,
+     "1000-10000": 776.797,
+     "10000-100000": 138.911,
+     "100000-1e+06": 19.5274,
+     "1e+06-1e+07": 1.88052
+    }
+   }
+  },
+  "central": {
+   "params": {
+    "airless_spread_k": 0.0,
+    "heat_flow": 0.015,
+    "k_air": 0.5,
+    "k_wet": 1.4,
+    "perm_1km": 1e-14,
+    "sea_bottom_offset_k": 0.0,
+    "lake_bottom_offset_k": -2.0,
+    "recharge_share": 0.2,
+    "phi0": 0.1352,
+    "porosity_e_folding_m": 16421,
+    "k_airless": 0.2,
+    "seal_perm": 1e-17,
+    "sea_sediment_mm_yr": 0.2,
+    "lake_sediment_mm_yr": 0.75
+   },
+   "bands": {
+    "0-15": {
+     "airless_top_k": 254.453,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        243.664
+       ],
+       "thawed_through_yr": 562.341,
+       "by_year": {
+        "10": {
+         "front_m": 15.4528,
+         "held_m": 2.08824,
+         "seal_m": 0.002,
+         "frozen_top_m": 16.1664,
+         "frozen_bottom_m": 243.664,
+         "uptake_m_yr_since_last": 0.208824
+        },
+        "100": {
+         "front_m": 55.7174,
+         "held_m": 7.52023,
+         "seal_m": 0.02,
+         "frozen_top_m": 57.6389,
+         "frozen_bottom_m": 243.664,
+         "uptake_m_yr_since_last": 0.0603554
+        },
+        "1000": {
+         "front_m": 2942.07,
+         "held_m": 364.171,
+         "seal_m": 0.2,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.396278
+        },
+        "10000": {
+         "front_m": 6759.87,
+         "held_m": 749.18,
+         "seal_m": 2.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0427788
+        },
+        "100000": {
+         "front_m": 14135.1,
+         "held_m": 1281.39,
+         "seal_m": 20.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00591349
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 200.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000313262
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 2000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        243.664
+       ],
+       "thawed_through_yr": 562.341,
+       "by_year": {
+        "10": {
+         "front_m": 15.4528,
+         "held_m": 2.08824,
+         "seal_m": 0.0075,
+         "frozen_top_m": 16.1664,
+         "frozen_bottom_m": 243.664,
+         "uptake_m_yr_since_last": 0.208824
+        },
+        "100": {
+         "front_m": 55.7174,
+         "held_m": 7.52023,
+         "seal_m": 0.075,
+         "frozen_top_m": 57.6389,
+         "frozen_bottom_m": 243.664,
+         "uptake_m_yr_since_last": 0.0603554
+        },
+        "1000": {
+         "front_m": 3183.85,
+         "held_m": 391.297,
+         "seal_m": 0.75,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.426419
+        },
+        "10000": {
+         "front_m": 8276.72,
+         "held_m": 878.968,
+         "seal_m": 7.5,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0541856
+        },
+        "100000": {
+         "front_m": 16931.9,
+         "held_m": 1428.4,
+         "seal_m": 75.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00610486
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 750.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000149916
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 7500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        243.664
+       ],
+       "thawed_through_yr": 530.884,
+       "by_year": {
+        "10": {
+         "front_m": 15.4528,
+         "held_m": 2.08824,
+         "seal_m": 0.0,
+         "frozen_top_m": 16.1664,
+         "frozen_bottom_m": 243.664,
+         "uptake_m_yr_since_last": 0.208824
+        },
+        "100": {
+         "front_m": 59.5604,
+         "held_m": 8.03798,
+         "seal_m": 0.0,
+         "frozen_top_m": 61.5972,
+         "frozen_bottom_m": 243.664,
+         "uptake_m_yr_since_last": 0.0661083
+        },
+        "1000": {
+         "front_m": 1543.38,
+         "held_m": 199.159,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.212357
+        },
+        "10000": {
+         "front_m": 7957.84,
+         "held_m": 852.67,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0726124
+        },
+        "100000": {
+         "front_m": 16693.1,
+         "held_m": 1416.8,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00626816
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000162806
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       },
+       "recharge_mm_yr": 349.268
+      }
+     }
+    },
+    "15-30": {
+     "airless_top_k": 250.002,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        291.8
+       ],
+       "thawed_through_yr": 944.061,
+       "by_year": {
+        "10": {
+         "front_m": 14.1064,
+         "held_m": 1.90637,
+         "seal_m": 0.002,
+         "frozen_top_m": 14.7796,
+         "frozen_bottom_m": 291.8,
+         "uptake_m_yr_since_last": 0.190637
+        },
+        "100": {
+         "front_m": 48.6716,
+         "held_m": 6.57066,
+         "seal_m": 0.02,
+         "frozen_top_m": 50.3817,
+         "frozen_bottom_m": 291.8,
+         "uptake_m_yr_since_last": 0.0518254
+        },
+        "1000": {
+         "front_m": 1804.7,
+         "held_m": 231.066,
+         "seal_m": 0.2,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.249439
+        },
+        "10000": {
+         "front_m": 6639.55,
+         "held_m": 738.363,
+         "seal_m": 2.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0563664
+        },
+        "100000": {
+         "front_m": 14024.8,
+         "held_m": 1275.07,
+         "seal_m": 20.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0059634
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 200.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00032029
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 2000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        291.8
+       ],
+       "thawed_through_yr": 944.061,
+       "by_year": {
+        "10": {
+         "front_m": 14.1064,
+         "held_m": 1.90637,
+         "seal_m": 0.0075,
+         "frozen_top_m": 14.7796,
+         "frozen_bottom_m": 291.8,
+         "uptake_m_yr_since_last": 0.190637
+        },
+        "100": {
+         "front_m": 48.6716,
+         "held_m": 6.57066,
+         "seal_m": 0.075,
+         "frozen_top_m": 50.3817,
+         "frozen_bottom_m": 291.8,
+         "uptake_m_yr_since_last": 0.0518254
+        },
+        "1000": {
+         "front_m": 934.199,
+         "held_m": 122.778,
+         "seal_m": 0.75,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.129119
+        },
+        "10000": {
+         "front_m": 8048.33,
+         "held_m": 860.185,
+         "seal_m": 7.5,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0819341
+        },
+        "100000": {
+         "front_m": 16763.4,
+         "held_m": 1420.24,
+         "seal_m": 75.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0062228
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 750.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000158992
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 7500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        291.8
+       ],
+       "thawed_through_yr": 891.251,
+       "by_year": {
+        "10": {
+         "front_m": 5.80542,
+         "held_m": 0.784754,
+         "seal_m": 0.0,
+         "frozen_top_m": 11.0728,
+         "frozen_bottom_m": 291.8,
+         "uptake_m_yr_since_last": 0.0784754
+        },
+        "100": {
+         "front_m": 48.6716,
+         "held_m": 6.57066,
+         "seal_m": 0.0,
+         "frozen_top_m": 50.3817,
+         "frozen_bottom_m": 291.8,
+         "uptake_m_yr_since_last": 0.0642878
+        },
+        "1000": {
+         "front_m": 316.06,
+         "held_m": 42.3227,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0397244
+        },
+        "10000": {
+         "front_m": 6257.54,
+         "held_m": 703.488,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0734628
+        },
+        "100000": {
+         "front_m": 16326.3,
+         "held_m": 1398.66,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0077241
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000182969
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       },
+       "recharge_mm_yr": 78.4753
+      }
+     }
+    },
+    "30-45": {
+     "airless_top_k": 240.662,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        417.411
+       ],
+       "thawed_through_yr": 2238.72,
+       "by_year": {
+        "10": {
+         "front_m": 11.638,
+         "held_m": 1.5729,
+         "seal_m": 0.002,
+         "frozen_top_m": 12.2371,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.15729
+        },
+        "100": {
+         "front_m": 39.5291,
+         "held_m": 5.33791,
+         "seal_m": 0.02,
+         "frozen_top_m": 40.965,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0418334
+        },
+        "1000": {
+         "front_m": 154.378,
+         "held_m": 20.7741,
+         "seal_m": 0.2,
+         "frozen_top_m": 159.259,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0171513
+        },
+        "10000": {
+         "front_m": 6220.02,
+         "held_m": 700.019,
+         "seal_m": 2.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0754717
+        },
+        "100000": {
+         "front_m": 13673.0,
+         "held_m": 1254.61,
+         "seal_m": 20.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00616207
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 200.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000343027
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 2000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        417.411
+       ],
+       "thawed_through_yr": 2113.49,
+       "by_year": {
+        "10": {
+         "front_m": 11.638,
+         "held_m": 1.5729,
+         "seal_m": 0.0075,
+         "frozen_top_m": 12.2371,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.15729
+        },
+        "100": {
+         "front_m": 39.5291,
+         "held_m": 5.33791,
+         "seal_m": 0.075,
+         "frozen_top_m": 40.965,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0418334
+        },
+        "1000": {
+         "front_m": 164.141,
+         "held_m": 22.0813,
+         "seal_m": 0.75,
+         "frozen_top_m": 169.315,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0186037
+        },
+        "10000": {
+         "front_m": 7479.85,
+         "held_m": 812.28,
+         "seal_m": 7.5,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0877999
+        },
+        "100000": {
+         "front_m": 16444.3,
+         "held_m": 1404.54,
+         "seal_m": 75.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00658069
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 750.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00017643
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 7500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        417.411
+       ],
+       "thawed_through_yr": 2113.49,
+       "by_year": {
+        "10": {
+         "front_m": 1.6528,
+         "held_m": 0.223447,
+         "seal_m": 0.0,
+         "frozen_top_m": 7.9604,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0223447
+        },
+        "100": {
+         "front_m": 16.5355,
+         "held_m": 2.23447,
+         "seal_m": 0.0,
+         "frozen_top_m": 30.7155,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0223447
+        },
+        "1000": {
+         "front_m": 154.378,
+         "held_m": 20.7741,
+         "seal_m": 0.0,
+         "frozen_top_m": 159.259,
+         "frozen_bottom_m": 417.411,
+         "uptake_m_yr_since_last": 0.0205996
+        },
+        "10000": {
+         "front_m": 1706.51,
+         "held_m": 219.136,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0220403
+        },
+        "100000": {
+         "front_m": 14708.1,
+         "held_m": 1313.58,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0121605
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000277495
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       },
+       "recharge_mm_yr": 22.3447
+      }
+     }
+    },
+    "45-60": {
+     "airless_top_k": 225.243,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        631.829
+       ],
+       "thawed_through_yr": 5623.41,
+       "by_year": {
+        "10": {
+         "front_m": 8.43497,
+         "held_m": 1.14012,
+         "seal_m": 0.002,
+         "frozen_top_m": 8.93802,
+         "frozen_bottom_m": 631.829,
+         "uptake_m_yr_since_last": 0.114012
+        },
+        "100": {
+         "front_m": 29.5782,
+         "held_m": 3.99537,
+         "seal_m": 0.02,
+         "frozen_top_m": 30.7155,
+         "frozen_bottom_m": 631.829,
+         "uptake_m_yr_since_last": 0.0317251
+        },
+        "1000": {
+         "front_m": 113.254,
+         "held_m": 15.2593,
+         "seal_m": 0.2,
+         "frozen_top_m": 116.902,
+         "frozen_bottom_m": 631.829,
+         "uptake_m_yr_since_last": 0.0125154
+        },
+        "10000": {
+         "front_m": 5022.94,
+         "held_m": 585.065,
+         "seal_m": 2.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0633118
+        },
+        "100000": {
+         "front_m": 12876.7,
+         "held_m": 1206.63,
+         "seal_m": 20.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00690624
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 200.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000396336
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 2000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        631.829
+       ],
+       "thawed_through_yr": 5623.41,
+       "by_year": {
+        "10": {
+         "front_m": 9.44107,
+         "held_m": 1.27607,
+         "seal_m": 0.0075,
+         "frozen_top_m": 9.9743,
+         "frozen_bottom_m": 631.829,
+         "uptake_m_yr_since_last": 0.127607
+        },
+        "100": {
+         "front_m": 29.5782,
+         "held_m": 3.99537,
+         "seal_m": 0.075,
+         "frozen_top_m": 30.7155,
+         "frozen_bottom_m": 631.829,
+         "uptake_m_yr_since_last": 0.0302145
+        },
+        "1000": {
+         "front_m": 113.254,
+         "held_m": 15.2593,
+         "seal_m": 0.75,
+         "frozen_top_m": 116.902,
+         "frozen_bottom_m": 631.829,
+         "uptake_m_yr_since_last": 0.0125154
+        },
+        "10000": {
+         "front_m": 5769.33,
+         "held_m": 657.72,
+         "seal_m": 7.5,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0713845
+        },
+        "100000": {
+         "front_m": 15942.6,
+         "held_m": 1379.24,
+         "seal_m": 75.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00801687
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 750.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000204546
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 7500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        631.829
+       ],
+       "thawed_through_yr": 7943.28,
+       "by_year": {
+        "10": {
+         "front_m": 0.0517459,
+         "held_m": 0.00699604,
+         "seal_m": 0.0,
+         "frozen_top_m": 5.3472,
+         "frozen_bottom_m": 631.829,
+         "uptake_m_yr_since_last": 0.000699604
+        },
+        "100": {
+         "front_m": 0.51746,
+         "held_m": 0.0699595,
+         "seal_m": 0.0,
+         "frozen_top_m": 17.6364,
+         "frozen_bottom_m": 631.829,
+         "uptake_m_yr_since_last": 0.000699594
+        },
+        "1000": {
+         "front_m": 5.17534,
+         "held_m": 0.699595,
+         "seal_m": 0.0,
+         "frozen_top_m": 65.7931,
+         "frozen_bottom_m": 631.829,
+         "uptake_m_yr_since_last": 0.000699595
+        },
+        "10000": {
+         "front_m": 51.8269,
+         "held_m": 6.99595,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000699595
+        },
+        "100000": {
+         "front_m": 525.787,
+         "held_m": 69.9604,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000699605
+        },
+        "1e+06": {
+         "front_m": 6215.66,
+         "held_m": 699.615,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000699617
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 9.59683e-05
+        }
+       },
+       "recharge_mm_yr": 0.699595
+      }
+     }
+    },
+    "60-75": {
+     "airless_top_k": 200.563,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        954.234
+       ],
+       "thawed_through_yr": 17782.8,
+       "by_year": {
+        "10": {
+         "front_m": 6.5904,
+         "held_m": 0.890843,
+         "seal_m": 0.002,
+         "frozen_top_m": 7.03811,
+         "frozen_bottom_m": 954.234,
+         "uptake_m_yr_since_last": 0.0890843
+        },
+        "100": {
+         "front_m": 21.6961,
+         "held_m": 2.93138,
+         "seal_m": 0.02,
+         "frozen_top_m": 22.597,
+         "frozen_bottom_m": 954.234,
+         "uptake_m_yr_since_last": 0.0226727
+        },
+        "1000": {
+         "front_m": 77.381,
+         "held_m": 10.4373,
+         "seal_m": 0.2,
+         "frozen_top_m": 79.9524,
+         "frozen_bottom_m": 954.234,
+         "uptake_m_yr_since_last": 0.00833991
+        },
+        "10000": {
+         "front_m": 381.614,
+         "held_m": 50.9993,
+         "seal_m": 2.0,
+         "frozen_top_m": 393.312,
+         "frozen_bottom_m": 1073.21,
+         "uptake_m_yr_since_last": 0.00450689
+        },
+        "100000": {
+         "front_m": 11056.2,
+         "held_m": 1087.8,
+         "seal_m": 20.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0115201
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 200.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000528361
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 2000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        954.234
+       ],
+       "thawed_through_yr": 21134.9,
+       "by_year": {
+        "10": {
+         "front_m": 0.0141938,
+         "held_m": 0.00191901,
+         "seal_m": 0.0,
+         "frozen_top_m": 3.84229,
+         "frozen_bottom_m": 954.234,
+         "uptake_m_yr_since_last": 0.000191901
+        },
+        "100": {
+         "front_m": 0.143388,
+         "held_m": 0.019386,
+         "seal_m": 0.0,
+         "frozen_top_m": 11.0728,
+         "frozen_bottom_m": 954.234,
+         "uptake_m_yr_since_last": 0.000194077
+        },
+        "1000": {
+         "front_m": 1.43537,
+         "held_m": 0.194054,
+         "seal_m": 0.0,
+         "frozen_top_m": 40.965,
+         "frozen_bottom_m": 954.234,
+         "uptake_m_yr_since_last": 0.000194075
+        },
+        "10000": {
+         "front_m": 14.3608,
+         "held_m": 1.94073,
+         "seal_m": 0.0,
+         "frozen_top_m": 203.249,
+         "frozen_bottom_m": 899.749,
+         "uptake_m_yr_since_last": 0.000194076
+        },
+        "100000": {
+         "front_m": 144.178,
+         "held_m": 19.4076,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000194076
+        },
+        "1e+06": {
+         "front_m": 1502.17,
+         "held_m": 194.081,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000194081
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000152139
+        }
+       },
+       "recharge_mm_yr": 0.194075
+      }
+     }
+    },
+    "75-90": {
+     "airless_top_k": 153.273,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        5118.21
+       ],
+       "thawed_through_yr": 251189.0,
+       "by_year": {
+        "10": {
+         "front_m": 4.19692,
+         "held_m": 0.567351,
+         "seal_m": 0.002,
+         "frozen_top_m": 4.57283,
+         "frozen_bottom_m": 5118.21,
+         "uptake_m_yr_since_last": 0.0567351
+        },
+        "100": {
+         "front_m": 15.4528,
+         "held_m": 2.08824,
+         "seal_m": 0.02,
+         "frozen_top_m": 16.1664,
+         "frozen_bottom_m": 5118.21,
+         "uptake_m_yr_since_last": 0.0168988
+        },
+        "1000": {
+         "front_m": 52.0919,
+         "held_m": 7.03166,
+         "seal_m": 0.2,
+         "frozen_top_m": 53.9046,
+         "frozen_bottom_m": 5118.21,
+         "uptake_m_yr_since_last": 0.00549269
+        },
+        "10000": {
+         "front_m": 197.086,
+         "held_m": 26.4868,
+         "seal_m": 2.0,
+         "frozen_top_m": 203.249,
+         "frozen_bottom_m": 5118.21,
+         "uptake_m_yr_since_last": 0.00216168
+        },
+        "100000": {
+         "front_m": 873.3,
+         "held_m": 114.985,
+         "seal_m": 20.0,
+         "frozen_top_m": 899.749,
+         "frozen_bottom_m": 5118.21,
+         "uptake_m_yr_since_last": 0.000983319
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 200.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00160927
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 2000.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        1525.85
+       ],
+       "thawed_through_yr": 56234.1,
+       "by_year": {
+        "10": {
+         "front_m": 3.48766,
+         "held_m": 0.471481,
+         "seal_m": 0.0075,
+         "frozen_top_m": 3.84229,
+         "frozen_bottom_m": 1525.85,
+         "uptake_m_yr_since_last": 0.0471481
+        },
+        "100": {
+         "front_m": 12.8363,
+         "held_m": 1.73478,
+         "seal_m": 0.075,
+         "frozen_top_m": 13.4714,
+         "frozen_bottom_m": 1525.85,
+         "uptake_m_yr_since_last": 0.0140367
+        },
+        "1000": {
+         "front_m": 42.4008,
+         "held_m": 5.7252,
+         "seal_m": 0.75,
+         "frozen_top_m": 43.9229,
+         "frozen_bottom_m": 1525.85,
+         "uptake_m_yr_since_last": 0.00443379
+        },
+        "10000": {
+         "front_m": 164.141,
+         "held_m": 22.0813,
+         "seal_m": 7.5,
+         "frozen_top_m": 169.315,
+         "frozen_bottom_m": 1525.85,
+         "uptake_m_yr_since_last": 0.00181734
+        },
+        "100000": {
+         "front_m": 7922.06,
+         "held_m": 849.687,
+         "seal_m": 75.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00919561
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 750.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000792937
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 7500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        1525.85
+       ],
+       "thawed_through_yr": 70794.6,
+       "by_year": {
+        "10": {
+         "front_m": 0.0107734,
+         "held_m": 0.00145656,
+         "seal_m": 0.0,
+         "frozen_top_m": 2.50293,
+         "frozen_bottom_m": 1525.85,
+         "uptake_m_yr_since_last": 0.000145656
+        },
+        "100": {
+         "front_m": 0.109708,
+         "held_m": 0.0148325,
+         "seal_m": 0.0,
+         "frozen_top_m": 6.16803,
+         "frozen_bottom_m": 1525.85,
+         "uptake_m_yr_since_last": 0.000148621
+        },
+        "1000": {
+         "front_m": 1.09908,
+         "held_m": 0.14859,
+         "seal_m": 0.0,
+         "frozen_top_m": 22.597,
+         "frozen_bottom_m": 1525.85,
+         "uptake_m_yr_since_last": 0.000148619
+        },
+        "10000": {
+         "front_m": 10.996,
+         "held_m": 1.48617,
+         "seal_m": 0.0,
+         "frozen_top_m": 90.8645,
+         "frozen_bottom_m": 1525.85,
+         "uptake_m_yr_since_last": 0.00014862
+        },
+        "100000": {
+         "front_m": 110.295,
+         "held_m": 14.862,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00014862
+        },
+        "1e+06": {
+         "front_m": 1137.81,
+         "held_m": 148.624,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000148624
+        },
+        "1e+07": {
+         "front_m": 18177.2,
+         "held_m": 1486.22,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000148622
+        }
+       },
+       "recharge_mm_yr": 0.14862
+      }
+     }
+    }
+   },
+   "moon": {
+    "held": {
+     "10": {
+      "global_layer_m": 1.08348,
+      "kg": 4.10991e+16,
+      "share_of_seas": 0.0038385,
+      "seas_fall_m": 3.8696,
+      "seas_share_without_top_up": 0.279174,
+      "seas_level_without_top_up_m": -1657.97
+     },
+     "100": {
+      "global_layer_m": 4.65657,
+      "kg": 1.76635e+17,
+      "share_of_seas": 0.016497,
+      "seas_fall_m": 16.6307,
+      "seas_share_without_top_up": 0.276449,
+      "seas_level_without_top_up_m": -1671.04
+     },
+     "1000": {
+      "global_layer_m": 102.792,
+      "kg": 3.89916e+18,
+      "share_of_seas": 0.364166,
+      "seas_fall_m": 367.117,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "10000": {
+      "global_layer_m": 514.256,
+      "kg": 1.95069e+19,
+      "share_of_seas": 1.82187,
+      "seas_fall_m": 1836.63,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "100000": {
+      "global_layer_m": 1075.16,
+      "kg": 4.07831e+19,
+      "share_of_seas": 3.80899,
+      "seas_fall_m": 3839.85,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "1e+06": {
+      "global_layer_m": 1347.22,
+      "kg": 5.1103e+19,
+      "share_of_seas": 4.77283,
+      "seas_fall_m": 4811.5,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "1e+07": {
+      "global_layer_m": 1561.45,
+      "kg": 5.92295e+19,
+      "share_of_seas": 5.53181,
+      "seas_fall_m": 5576.63,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     }
+    },
+    "top_up_km3_yr": {
+     "0-10": 4109.91,
+     "10-100": 1505.95,
+     "100-1000": 4136.14,
+     "1000-10000": 1734.19,
+     "10000-100000": 236.403,
+     "100000-1e+06": 11.4665,
+     "1e+06-1e+07": 0.902941
+    }
+   }
+  },
+  "fast": {
+   "params": {
+    "airless_spread_k": 5.0,
+    "heat_flow": 0.017,
+    "k_air": 0.8,
+    "k_wet": 2.0,
+    "perm_1km": 1e-13,
+    "sea_bottom_offset_k": 2.0,
+    "lake_bottom_offset_k": 0.0,
+    "recharge_share": 0.3,
+    "phi0": 0.1352,
+    "porosity_e_folding_m": 16421,
+    "k_airless": 0.2,
+    "seal_perm": 1.7e-16,
+    "sea_sediment_mm_yr": 0.08,
+    "lake_sediment_mm_yr": 0.15
+   },
+   "bands": {
+    "0-15": {
+     "airless_top_k": 259.442,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        159.259
+       ],
+       "thawed_through_yr": 133.352,
+       "by_year": {
+        "10": {
+         "front_m": 23.4979,
+         "held_m": 3.17465,
+         "seal_m": 0.0008,
+         "frozen_top_m": 24.4529,
+         "frozen_bottom_m": 159.259,
+         "uptake_m_yr_since_last": 0.317465
+        },
+        "100": {
+         "front_m": 99.879,
+         "held_m": 13.4627,
+         "seal_m": 0.008,
+         "frozen_top_m": 103.125,
+         "frozen_bottom_m": 149.773,
+         "uptake_m_yr_since_last": 0.114311
+        },
+        "1000": {
+         "front_m": 7040.26,
+         "held_m": 774.084,
+         "seal_m": 0.08,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.845135
+        },
+        "10000": {
+         "front_m": 15075.8,
+         "held_m": 1333.66,
+         "seal_m": 0.8,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.062175
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 8.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0025519
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 80.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 800.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        159.259
+       ],
+       "thawed_through_yr": 133.352,
+       "by_year": {
+        "10": {
+         "front_m": 23.4979,
+         "held_m": 3.17465,
+         "seal_m": 0.0015,
+         "frozen_top_m": 24.4529,
+         "frozen_bottom_m": 159.259,
+         "uptake_m_yr_since_last": 0.317465
+        },
+        "100": {
+         "front_m": 99.879,
+         "held_m": 13.4627,
+         "seal_m": 0.015,
+         "frozen_top_m": 103.125,
+         "frozen_bottom_m": 149.773,
+         "uptake_m_yr_since_last": 0.114311
+        },
+        "1000": {
+         "front_m": 8617.28,
+         "held_m": 906.496,
+         "seal_m": 0.15,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.99226
+        },
+        "10000": {
+         "front_m": 17632.8,
+         "held_m": 1461.48,
+         "seal_m": 1.5,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0616652
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 15.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00113163
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 150.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 1500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        159.259
+       ],
+       "thawed_through_yr": 133.352,
+       "by_year": {
+        "10": {
+         "front_m": 23.4979,
+         "held_m": 3.17465,
+         "seal_m": 0.0,
+         "frozen_top_m": 24.4529,
+         "frozen_bottom_m": 159.259,
+         "uptake_m_yr_since_last": 0.317465
+        },
+        "100": {
+         "front_m": 99.879,
+         "held_m": 13.4627,
+         "seal_m": 0.0,
+         "frozen_top_m": 103.125,
+         "frozen_bottom_m": 149.773,
+         "uptake_m_yr_since_last": 0.114311
+        },
+        "1000": {
+         "front_m": 3595.74,
+         "held_m": 436.599,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.470151
+        },
+        "10000": {
+         "front_m": 16660.2,
+         "held_m": 1415.19,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.108733
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00164594
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       },
+       "recharge_mm_yr": 479.691
+      }
+     }
+    },
+    "15-30": {
+     "airless_top_k": 254.904,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        203.249
+       ],
+       "thawed_through_yr": 266.073,
+       "by_year": {
+        "10": {
+         "front_m": 19.9964,
+         "held_m": 2.70186,
+         "seal_m": 0.0008,
+         "frozen_top_m": 20.8463,
+         "frozen_bottom_m": 203.249,
+         "uptake_m_yr_since_last": 0.270186
+        },
+        "100": {
+         "front_m": 77.381,
+         "held_m": 10.4373,
+         "seal_m": 0.008,
+         "frozen_top_m": 79.9524,
+         "frozen_bottom_m": 203.249,
+         "uptake_m_yr_since_last": 0.0859493
+        },
+        "1000": {
+         "front_m": 6711.39,
+         "held_m": 744.832,
+         "seal_m": 0.08,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.815994
+        },
+        "10000": {
+         "front_m": 14940.5,
+         "held_m": 1326.33,
+         "seal_m": 0.8,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0646106
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 8.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00263336
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 80.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 800.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        203.249
+       ],
+       "thawed_through_yr": 266.073,
+       "by_year": {
+        "10": {
+         "front_m": 19.9964,
+         "held_m": 2.70186,
+         "seal_m": 0.0015,
+         "frozen_top_m": 20.8463,
+         "frozen_bottom_m": 203.249,
+         "uptake_m_yr_since_last": 0.270186
+        },
+        "100": {
+         "front_m": 77.381,
+         "held_m": 10.4373,
+         "seal_m": 0.015,
+         "frozen_top_m": 79.9524,
+         "frozen_bottom_m": 203.249,
+         "uptake_m_yr_since_last": 0.0859493
+        },
+        "1000": {
+         "front_m": 8171.17,
+         "held_m": 870.32,
+         "seal_m": 0.15,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.955425
+        },
+        "10000": {
+         "front_m": 17473.9,
+         "held_m": 1454.11,
+         "seal_m": 1.5,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0648655
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 15.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00121356
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 150.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 1500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        203.249
+       ],
+       "thawed_through_yr": 281.838,
+       "by_year": {
+        "10": {
+         "front_m": 5.80542,
+         "held_m": 0.784754,
+         "seal_m": 0.0,
+         "frozen_top_m": 14.7796,
+         "frozen_bottom_m": 203.249,
+         "uptake_m_yr_since_last": 0.0784754
+        },
+        "100": {
+         "front_m": 58.1468,
+         "held_m": 7.84755,
+         "seal_m": 0.0,
+         "frozen_top_m": 65.7931,
+         "frozen_bottom_m": 203.249,
+         "uptake_m_yr_since_last": 0.0784755
+        },
+        "1000": {
+         "front_m": 587.897,
+         "held_m": 78.0777,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0780335
+        },
+        "10000": {
+         "front_m": 7157.79,
+         "held_m": 784.396,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0784799
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00865481
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       },
+       "recharge_mm_yr": 78.4753
+      }
+     }
+    },
+    "30-45": {
+     "airless_top_k": 245.38,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        309.808
+       ],
+       "thawed_through_yr": 749.894,
+       "by_year": {
+        "10": {
+         "front_m": 15.4528,
+         "held_m": 2.08824,
+         "seal_m": 0.0008,
+         "frozen_top_m": 16.1664,
+         "frozen_bottom_m": 309.808,
+         "uptake_m_yr_since_last": 0.208824
+        },
+        "100": {
+         "front_m": 55.7174,
+         "held_m": 7.52023,
+         "seal_m": 0.008,
+         "frozen_top_m": 57.6389,
+         "frozen_bottom_m": 309.808,
+         "uptake_m_yr_since_last": 0.0603554
+        },
+        "1000": {
+         "front_m": 5085.38,
+         "held_m": 591.271,
+         "seal_m": 0.08,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.648612
+        },
+        "10000": {
+         "front_m": 14472.5,
+         "held_m": 1300.48,
+         "seal_m": 0.8,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0788014
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 8.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00292052
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 80.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 800.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        309.808
+       ],
+       "thawed_through_yr": 707.946,
+       "by_year": {
+        "10": {
+         "front_m": 16.88,
+         "held_m": 2.281,
+         "seal_m": 0.0015,
+         "frozen_top_m": 17.6364,
+         "frozen_bottom_m": 309.808,
+         "uptake_m_yr_since_last": 0.2281
+        },
+        "100": {
+         "front_m": 59.5604,
+         "held_m": 8.03798,
+         "seal_m": 0.015,
+         "frozen_top_m": 61.5972,
+         "frozen_bottom_m": 309.808,
+         "uptake_m_yr_since_last": 0.0639665
+        },
+        "1000": {
+         "front_m": 6408.84,
+         "held_m": 717.397,
+         "seal_m": 0.15,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.788177
+        },
+        "10000": {
+         "front_m": 17125.7,
+         "held_m": 1437.69,
+         "seal_m": 1.5,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0800327
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 15.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00139597
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 150.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 1500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        309.808
+       ],
+       "thawed_through_yr": 891.251,
+       "by_year": {
+        "10": {
+         "front_m": 1.6528,
+         "held_m": 0.223447,
+         "seal_m": 0.0,
+         "frozen_top_m": 11.0728,
+         "frozen_bottom_m": 309.808,
+         "uptake_m_yr_since_last": 0.0223447
+        },
+        "100": {
+         "front_m": 16.5355,
+         "held_m": 2.23447,
+         "seal_m": 0.0,
+         "frozen_top_m": 40.965,
+         "frozen_bottom_m": 309.808,
+         "uptake_m_yr_since_last": 0.0223447
+        },
+        "1000": {
+         "front_m": 166.11,
+         "held_m": 22.3448,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0223448
+        },
+        "10000": {
+         "front_m": 1741.98,
+         "held_m": 223.454,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0223455
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0148875
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       },
+       "recharge_mm_yr": 22.3447
+      }
+     }
+    },
+    "45-60": {
+     "airless_top_k": 229.66,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        498.735
+       ],
+       "thawed_through_yr": 2238.72,
+       "by_year": {
+        "10": {
+         "front_m": 11.638,
+         "held_m": 1.5729,
+         "seal_m": 0.0008,
+         "frozen_top_m": 12.2371,
+         "frozen_bottom_m": 498.735,
+         "uptake_m_yr_since_last": 0.15729
+        },
+        "100": {
+         "front_m": 42.4008,
+         "held_m": 5.7252,
+         "seal_m": 0.008,
+         "frozen_top_m": 43.9229,
+         "frozen_bottom_m": 498.735,
+         "uptake_m_yr_since_last": 0.0461367
+        },
+        "1000": {
+         "front_m": 174.489,
+         "held_m": 23.466,
+         "seal_m": 0.08,
+         "frozen_top_m": 179.974,
+         "frozen_bottom_m": 498.735,
+         "uptake_m_yr_since_last": 0.019712
+        },
+        "10000": {
+         "front_m": 13175.0,
+         "held_m": 1224.87,
+         "seal_m": 0.8,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.13349
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 8.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00376062
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 80.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 800.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        498.735
+       ],
+       "thawed_through_yr": 2113.49,
+       "by_year": {
+        "10": {
+         "front_m": 12.8363,
+         "held_m": 1.73478,
+         "seal_m": 0.0015,
+         "frozen_top_m": 13.4714,
+         "frozen_bottom_m": 498.735,
+         "uptake_m_yr_since_last": 0.173478
+        },
+        "100": {
+         "front_m": 42.4008,
+         "held_m": 5.7252,
+         "seal_m": 0.015,
+         "frozen_top_m": 43.9229,
+         "frozen_bottom_m": 498.735,
+         "uptake_m_yr_since_last": 0.0443379
+        },
+        "1000": {
+         "front_m": 174.489,
+         "held_m": 23.466,
+         "seal_m": 0.15,
+         "frozen_top_m": 179.974,
+         "frozen_bottom_m": 498.735,
+         "uptake_m_yr_since_last": 0.019712
+        },
+        "10000": {
+         "front_m": 16205.5,
+         "held_m": 1392.59,
+         "seal_m": 1.5,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.152125
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 15.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00189707
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 150.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 1500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        498.735
+       ],
+       "thawed_through_yr": 3162.28,
+       "by_year": {
+        "10": {
+         "front_m": 0.0517459,
+         "held_m": 0.00699604,
+         "seal_m": 0.0,
+         "frozen_top_m": 7.03811,
+         "frozen_bottom_m": 498.735,
+         "uptake_m_yr_since_last": 0.000699604
+        },
+        "100": {
+         "front_m": 0.51746,
+         "held_m": 0.0699595,
+         "seal_m": 0.0,
+         "frozen_top_m": 24.4529,
+         "frozen_bottom_m": 498.735,
+         "uptake_m_yr_since_last": 0.000699594
+        },
+        "1000": {
+         "front_m": 5.17534,
+         "held_m": 0.699595,
+         "seal_m": 0.0,
+         "frozen_top_m": 103.125,
+         "frozen_bottom_m": 498.735,
+         "uptake_m_yr_since_last": 0.000699595
+        },
+        "10000": {
+         "front_m": 51.8269,
+         "held_m": 6.99595,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000699595
+        },
+        "100000": {
+         "front_m": 525.787,
+         "held_m": 69.9604,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000699605
+        },
+        "1e+06": {
+         "front_m": 6215.66,
+         "held_m": 699.615,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000699617
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 9.59683e-05
+        }
+       },
+       "recharge_mm_yr": 0.699595
+      }
+     }
+    },
+    "60-75": {
+     "airless_top_k": 204.495,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        799.857
+       ],
+       "thawed_through_yr": 7079.46,
+       "by_year": {
+        "10": {
+         "front_m": 8.43497,
+         "held_m": 1.14012,
+         "seal_m": 0.0008,
+         "frozen_top_m": 8.93802,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.114012
+        },
+        "100": {
+         "front_m": 29.5782,
+         "held_m": 3.99537,
+         "seal_m": 0.008,
+         "frozen_top_m": 30.7155,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.0317251
+        },
+        "1000": {
+         "front_m": 113.254,
+         "held_m": 15.2593,
+         "seal_m": 0.08,
+         "frozen_top_m": 116.902,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.0125154
+        },
+        "10000": {
+         "front_m": 9063.3,
+         "held_m": 941.696,
+         "seal_m": 0.8,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.102937
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 8.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00690704
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 80.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 800.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        799.857
+       ],
+       "thawed_through_yr": 8912.51,
+       "by_year": {
+        "10": {
+         "front_m": 0.0142114,
+         "held_m": 0.00192138,
+         "seal_m": 0.0,
+         "frozen_top_m": 4.57283,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.000192138
+        },
+        "100": {
+         "front_m": 0.143406,
+         "held_m": 0.0193883,
+         "seal_m": 0.0,
+         "frozen_top_m": 14.7796,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.000194077
+        },
+        "1000": {
+         "front_m": 1.43539,
+         "held_m": 0.194056,
+         "seal_m": 0.0,
+         "frozen_top_m": 57.6389,
+         "frozen_bottom_m": 799.857,
+         "uptake_m_yr_since_last": 0.000194075
+        },
+        "10000": {
+         "front_m": 14.3608,
+         "held_m": 1.94074,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000194076
+        },
+        "100000": {
+         "front_m": 144.178,
+         "held_m": 19.4076,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000194076
+        },
+        "1e+06": {
+         "front_m": 1502.17,
+         "held_m": 194.081,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000194081
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000152139
+        }
+       },
+       "recharge_mm_yr": 0.194075
+      }
+     }
+    },
+    "75-90": {
+     "airless_top_k": 156.278,
+     "columns": {
+      "sea_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        3460.31
+       ],
+       "thawed_through_yr": 100000.0,
+       "by_year": {
+        "10": {
+         "front_m": 5.74566,
+         "held_m": 0.776677,
+         "seal_m": 0.0008,
+         "frozen_top_m": 6.16803,
+         "frozen_bottom_m": 3460.31,
+         "uptake_m_yr_since_last": 0.0776677
+        },
+        "100": {
+         "front_m": 19.9964,
+         "held_m": 2.70186,
+         "seal_m": 0.008,
+         "frozen_top_m": 20.8463,
+         "frozen_bottom_m": 3460.31,
+         "uptake_m_yr_since_last": 0.021391
+        },
+        "1000": {
+         "front_m": 67.9521,
+         "held_m": 9.16814,
+         "seal_m": 0.08,
+         "frozen_top_m": 70.2407,
+         "frozen_bottom_m": 3460.31,
+         "uptake_m_yr_since_last": 0.00718475
+        },
+        "10000": {
+         "front_m": 300.541,
+         "held_m": 40.2636,
+         "seal_m": 0.8,
+         "frozen_top_m": 309.808,
+         "frozen_bottom_m": 3460.31,
+         "uptake_m_yr_since_last": 0.00345505
+        },
+        "100000": {
+         "front_m": 8007.87,
+         "held_m": 856.83,
+         "seal_m": 8.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00907296
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 80.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000785
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 800.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "lake_floor": {
+       "airless_frozen_layer_m": [
+        0.0,
+        1357.09
+       ],
+       "thawed_through_yr": 25118.9,
+       "by_year": {
+        "10": {
+         "front_m": 4.94873,
+         "held_m": 0.668968,
+         "seal_m": 0.0015,
+         "frozen_top_m": 5.3472,
+         "frozen_bottom_m": 1357.09,
+         "uptake_m_yr_since_last": 0.0668968
+        },
+        "100": {
+         "front_m": 16.88,
+         "held_m": 2.281,
+         "seal_m": 0.015,
+         "frozen_top_m": 17.6364,
+         "frozen_bottom_m": 1357.09,
+         "uptake_m_yr_since_last": 0.0179115
+        },
+        "1000": {
+         "front_m": 59.5604,
+         "held_m": 8.03798,
+         "seal_m": 0.15,
+         "frozen_top_m": 61.5972,
+         "frozen_bottom_m": 1357.09,
+         "uptake_m_yr_since_last": 0.00639665
+        },
+        "10000": {
+         "front_m": 266.564,
+         "held_m": 35.7485,
+         "seal_m": 1.5,
+         "frozen_top_m": 274.811,
+         "frozen_bottom_m": 1357.09,
+         "uptake_m_yr_since_last": 0.00307895
+        },
+        "100000": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 15.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0169731
+        },
+        "1e+06": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 150.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        },
+        "1e+07": {
+         "front_m": 20000.0,
+         "held_m": 1563.33,
+         "seal_m": 1500.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.0
+        }
+       }
+      },
+      "land": {
+       "airless_frozen_layer_m": [
+        0.0,
+        1357.09
+       ],
+       "thawed_through_yr": 31622.8,
+       "by_year": {
+        "10": {
+         "front_m": 0.0108375,
+         "held_m": 0.00146522,
+         "seal_m": 0.0,
+         "frozen_top_m": 2.50293,
+         "frozen_bottom_m": 1357.09,
+         "uptake_m_yr_since_last": 0.000146522
+        },
+        "100": {
+         "front_m": 0.109772,
+         "held_m": 0.0148411,
+         "seal_m": 0.0,
+         "frozen_top_m": 8.93802,
+         "frozen_bottom_m": 1357.09,
+         "uptake_m_yr_since_last": 0.000148621
+        },
+        "1000": {
+         "front_m": 1.09914,
+         "held_m": 0.148599,
+         "seal_m": 0.0,
+         "frozen_top_m": 30.7155,
+         "frozen_bottom_m": 1357.09,
+         "uptake_m_yr_since_last": 0.000148619
+        },
+        "10000": {
+         "front_m": 10.9961,
+         "held_m": 1.48618,
+         "seal_m": 0.0,
+         "frozen_top_m": 140.824,
+         "frozen_bottom_m": 1357.09,
+         "uptake_m_yr_since_last": 0.00014862
+        },
+        "100000": {
+         "front_m": 110.295,
+         "held_m": 14.862,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.00014862
+        },
+        "1e+06": {
+         "front_m": 1137.81,
+         "held_m": 148.624,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000148624
+        },
+        "1e+07": {
+         "front_m": 18177.2,
+         "held_m": 1486.22,
+         "seal_m": 0.0,
+         "frozen_top_m": null,
+         "frozen_bottom_m": null,
+         "uptake_m_yr_since_last": 0.000148622
+        }
+       },
+       "recharge_mm_yr": 0.14862
+      }
+     }
+    }
+   },
+   "moon": {
+    "held": {
+     "10": {
+      "global_layer_m": 1.51542,
+      "kg": 5.74836e+16,
+      "share_of_seas": 0.00536875,
+      "seas_fall_m": 5.41224,
+      "seas_share_without_top_up": 0.278844,
+      "seas_level_without_top_up_m": -1659.55
+     },
+     "100": {
+      "global_layer_m": 6.98161,
+      "kg": 2.64829e+17,
+      "share_of_seas": 0.024734,
+      "seas_fall_m": 24.9344,
+      "seas_share_without_top_up": 0.274676,
+      "seas_level_without_top_up_m": -1679.55
+     },
+     "1000": {
+      "global_layer_m": 295.583,
+      "kg": 1.12122e+19,
+      "share_of_seas": 1.04717,
+      "seas_fall_m": 1055.66,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "10000": {
+      "global_layer_m": 839.947,
+      "kg": 3.18612e+19,
+      "share_of_seas": 2.97571,
+      "seas_fall_m": 2999.82,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "100000": {
+      "global_layer_m": 1263.81,
+      "kg": 4.79393e+19,
+      "share_of_seas": 4.47734,
+      "seas_fall_m": 4513.62,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "1e+06": {
+      "global_layer_m": 1347.22,
+      "kg": 5.1103e+19,
+      "share_of_seas": 4.77283,
+      "seas_fall_m": 4811.5,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     },
+     "1e+07": {
+      "global_layer_m": 1561.45,
+      "kg": 5.92295e+19,
+      "share_of_seas": 5.53181,
+      "seas_fall_m": 5576.63,
+      "seas_share_without_top_up": null,
+      "seas_level_without_top_up_m": null
+     }
+    },
+    "top_up_km3_yr": {
+     "0-10": 5748.36,
+     "10-100": 2303.83,
+     "100-1000": 12163.7,
+     "1000-10000": 2294.33,
+     "10000-100000": 178.646,
+     "100000-1e+06": 3.51529,
+     "1e+06-1e+07": 0.902941
+    }
+   }
+  }
+ },
+ "warm_crust_central": {
+  "params": {
+   "airless_spread_k": 0.0,
+   "heat_flow": 0.015,
+   "k_air": 0.5,
+   "k_wet": 1.4,
+   "perm_1km": 1e-14,
+   "sea_bottom_offset_k": 0.0,
+   "lake_bottom_offset_k": -2.0,
+   "recharge_share": 0.2,
+   "phi0": 0.1352,
+   "porosity_e_folding_m": 16421,
+   "k_airless": 0.2,
+   "seal_perm": 1e-17,
+   "sea_sediment_mm_yr": 0.2,
+   "lake_sediment_mm_yr": 0.75
+  },
+  "bands": {
+   "0-15": {
+    "airless_top_k": 254.453,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       243.664
+      ],
+      "thawed_through_yr": 446.684,
+      "by_year": {
+       "10": {
+        "front_m": 1082.8,
+        "held_m": 141.672,
+        "seal_m": 0.002,
+        "frozen_top_m": 13.4714,
+        "frozen_bottom_m": 243.664,
+        "uptake_m_yr_since_last": 14.1672
+       },
+       "100": {
+        "front_m": 2022.52,
+        "held_m": 257.275,
+        "seal_m": 0.02,
+        "frozen_top_m": 50.3817,
+        "frozen_bottom_m": 243.664,
+        "uptake_m_yr_since_last": 1.28447
+       },
+       "1000": {
+        "front_m": 3652.02,
+        "held_m": 442.702,
+        "seal_m": 0.2,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.20603
+       },
+       "10000": {
+        "front_m": 6875.81,
+        "held_m": 759.529,
+        "seal_m": 2.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.035203
+       },
+       "100000": {
+        "front_m": 14163.1,
+        "held_m": 1283.0,
+        "seal_m": 20.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0058163
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000311482
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       243.664
+      ],
+      "thawed_through_yr": 421.697,
+      "by_year": {
+       "10": {
+        "front_m": 1124.64,
+        "held_m": 146.961,
+        "seal_m": 0.0075,
+        "frozen_top_m": 13.4714,
+        "frozen_bottom_m": 243.664,
+        "uptake_m_yr_since_last": 14.6961
+       },
+       "100": {
+        "front_m": 2237.42,
+        "held_m": 282.796,
+        "seal_m": 0.075,
+        "frozen_top_m": 50.3817,
+        "frozen_bottom_m": 243.664,
+        "uptake_m_yr_since_last": 1.50928
+       },
+       "1000": {
+        "front_m": 4459.89,
+        "held_m": 528.03,
+        "seal_m": 0.75,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.272482
+       },
+       "10000": {
+        "front_m": 8464.88,
+        "held_m": 894.248,
+        "seal_m": 7.5,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.040691
+       },
+       "100000": {
+        "front_m": 16977.9,
+        "held_m": 1430.62,
+        "seal_m": 75.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00595963
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00014746
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       243.664
+      ],
+      "thawed_through_yr": 446.684,
+      "by_year": {
+       "10": {
+        "front_m": 25.8538,
+        "held_m": 3.49269,
+        "seal_m": 0.0,
+        "frozen_top_m": 14.7796,
+        "frozen_bottom_m": 243.664,
+        "uptake_m_yr_since_last": 0.349269
+       },
+       "100": {
+        "front_m": 260.39,
+        "held_m": 34.9271,
+        "seal_m": 0.0,
+        "frozen_top_m": 53.9046,
+        "frozen_bottom_m": 243.664,
+        "uptake_m_yr_since_last": 0.349271
+       },
+       "1000": {
+        "front_m": 2810.79,
+        "held_m": 349.273,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.349274
+       },
+       "10000": {
+        "front_m": 8066.23,
+        "held_m": 861.666,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0569325
+       },
+       "100000": {
+        "front_m": 16716.5,
+        "held_m": 1417.95,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00618091
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000161535
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      },
+      "recharge_mm_yr": 349.268
+     }
+    }
+   },
+   "15-30": {
+    "airless_top_k": 250.002,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       291.8
+      ],
+      "thawed_through_yr": 707.946,
+      "by_year": {
+       "10": {
+        "front_m": 1093.09,
+        "held_m": 142.974,
+        "seal_m": 0.002,
+        "frozen_top_m": 12.2371,
+        "frozen_bottom_m": 291.8,
+        "uptake_m_yr_since_last": 14.2974
+       },
+       "100": {
+        "front_m": 2025.72,
+        "held_m": 257.658,
+        "seal_m": 0.02,
+        "frozen_top_m": 43.9229,
+        "frozen_bottom_m": 291.8,
+        "uptake_m_yr_since_last": 1.27426
+       },
+       "1000": {
+        "front_m": 3640.79,
+        "held_m": 441.486,
+        "seal_m": 0.2,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.204253
+       },
+       "10000": {
+        "front_m": 6833.91,
+        "held_m": 755.798,
+        "seal_m": 2.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0349236
+       },
+       "100000": {
+        "front_m": 14069.0,
+        "held_m": 1277.61,
+        "seal_m": 20.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00579787
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000317471
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       291.8
+      ],
+      "thawed_through_yr": 707.946,
+      "by_year": {
+       "10": {
+        "front_m": 1074.95,
+        "held_m": 140.679,
+        "seal_m": 0.0075,
+        "frozen_top_m": 12.2371,
+        "frozen_bottom_m": 291.8,
+        "uptake_m_yr_since_last": 14.0679
+       },
+       "100": {
+        "front_m": 2162.91,
+        "held_m": 273.985,
+        "seal_m": 0.075,
+        "frozen_top_m": 43.9229,
+        "frozen_bottom_m": 291.8,
+        "uptake_m_yr_since_last": 1.48119
+       },
+       "1000": {
+        "front_m": 4380.63,
+        "held_m": 519.843,
+        "seal_m": 0.75,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.273175
+       },
+       "10000": {
+        "front_m": 8369.25,
+        "held_m": 886.504,
+        "seal_m": 7.5,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0407401
+       },
+       "100000": {
+        "front_m": 16842.1,
+        "held_m": 1424.06,
+        "seal_m": 75.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00597286
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000154743
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       291.8
+      ],
+      "thawed_through_yr": 794.328,
+      "by_year": {
+       "10": {
+        "front_m": 5.80542,
+        "held_m": 0.784754,
+        "seal_m": 0.0,
+        "frozen_top_m": 11.0728,
+        "frozen_bottom_m": 291.8,
+        "uptake_m_yr_since_last": 0.0784754
+       },
+       "100": {
+        "front_m": 58.1468,
+        "held_m": 7.84755,
+        "seal_m": 0.0,
+        "frozen_top_m": 50.3817,
+        "frozen_bottom_m": 291.8,
+        "uptake_m_yr_since_last": 0.0784755
+       },
+       "1000": {
+        "front_m": 590.955,
+        "held_m": 78.4765,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0784766
+       },
+       "10000": {
+        "front_m": 6458.07,
+        "held_m": 721.896,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0714911
+       },
+       "100000": {
+        "front_m": 16349.0,
+        "held_m": 1399.79,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00753221
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000181705
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      },
+      "recharge_mm_yr": 78.4753
+     }
+    }
+   },
+   "30-45": {
+    "airless_top_k": 240.662,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       417.411
+      ],
+      "thawed_through_yr": 1584.89,
+      "by_year": {
+       "10": {
+        "front_m": 1081.71,
+        "held_m": 141.534,
+        "seal_m": 0.002,
+        "frozen_top_m": 9.9743,
+        "frozen_bottom_m": 417.411,
+        "uptake_m_yr_since_last": 14.1534
+       },
+       "100": {
+        "front_m": 1996.75,
+        "held_m": 254.193,
+        "seal_m": 0.02,
+        "frozen_top_m": 33.0585,
+        "frozen_bottom_m": 417.411,
+        "uptake_m_yr_since_last": 1.25177
+       },
+       "1000": {
+        "front_m": 3575.37,
+        "held_m": 434.386,
+        "seal_m": 0.2,
+        "frozen_top_m": 159.259,
+        "frozen_bottom_m": 393.312,
+        "uptake_m_yr_since_last": 0.200214
+       },
+       "10000": {
+        "front_m": 6691.16,
+        "held_m": 743.013,
+        "seal_m": 2.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0342919
+       },
+       "100000": {
+        "front_m": 13787.6,
+        "held_m": 1261.32,
+        "seal_m": 20.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00575895
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000335568
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       417.411
+      ],
+      "thawed_through_yr": 1584.89,
+      "by_year": {
+       "10": {
+        "front_m": 1013.88,
+        "held_m": 132.931,
+        "seal_m": 0.0075,
+        "frozen_top_m": 9.9743,
+        "frozen_bottom_m": 417.411,
+        "uptake_m_yr_since_last": 13.2931
+       },
+       "100": {
+        "front_m": 2060.43,
+        "held_m": 261.801,
+        "seal_m": 0.075,
+        "frozen_top_m": 33.0585,
+        "frozen_bottom_m": 417.411,
+        "uptake_m_yr_since_last": 1.43189
+       },
+       "1000": {
+        "front_m": 4273.25,
+        "held_m": 508.688,
+        "seal_m": 0.75,
+        "frozen_top_m": 159.259,
+        "frozen_bottom_m": 393.312,
+        "uptake_m_yr_since_last": 0.274318
+       },
+       "10000": {
+        "front_m": 8230.72,
+        "held_m": 875.206,
+        "seal_m": 7.5,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0407243
+       },
+       "100000": {
+        "front_m": 16613.8,
+        "held_m": 1412.92,
+        "seal_m": 75.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00597457
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000167125
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       417.411
+      ],
+      "thawed_through_yr": 2113.49,
+      "by_year": {
+       "10": {
+        "front_m": 1.6528,
+        "held_m": 0.223447,
+        "seal_m": 0.0,
+        "frozen_top_m": 7.9604,
+        "frozen_bottom_m": 417.411,
+        "uptake_m_yr_since_last": 0.0223447
+       },
+       "100": {
+        "front_m": 16.5355,
+        "held_m": 2.23447,
+        "seal_m": 0.0,
+        "frozen_top_m": 30.7155,
+        "frozen_bottom_m": 417.411,
+        "uptake_m_yr_since_last": 0.0223447
+       },
+       "1000": {
+        "front_m": 166.11,
+        "held_m": 22.3448,
+        "seal_m": 0.0,
+        "frozen_top_m": 159.259,
+        "frozen_bottom_m": 417.411,
+        "uptake_m_yr_since_last": 0.0223448
+       },
+       "10000": {
+        "front_m": 1741.98,
+        "held_m": 223.454,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0223455
+       },
+       "100000": {
+        "front_m": 14720.0,
+        "held_m": 1314.24,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0121199
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000276764
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      },
+      "recharge_mm_yr": 22.3447
+     }
+    }
+   },
+   "45-60": {
+    "airless_top_k": 225.243,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       631.829
+      ],
+      "thawed_through_yr": 3981.07,
+      "by_year": {
+       "10": {
+        "front_m": 1032.9,
+        "held_m": 135.347,
+        "seal_m": 0.002,
+        "frozen_top_m": 7.03811,
+        "frozen_bottom_m": 631.829,
+        "uptake_m_yr_since_last": 13.5347
+       },
+       "100": {
+        "front_m": 1889.09,
+        "held_m": 241.261,
+        "seal_m": 0.02,
+        "frozen_top_m": 24.4529,
+        "frozen_bottom_m": 631.829,
+        "uptake_m_yr_since_last": 1.17683
+       },
+       "1000": {
+        "front_m": 3382.06,
+        "held_m": 413.239,
+        "seal_m": 0.2,
+        "frozen_top_m": 96.8164,
+        "frozen_bottom_m": 631.829,
+        "uptake_m_yr_since_last": 0.191087
+       },
+       "10000": {
+        "front_m": 6337.57,
+        "held_m": 710.861,
+        "seal_m": 2.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0330691
+       },
+       "100000": {
+        "front_m": 13141.4,
+        "held_m": 1222.84,
+        "seal_m": 20.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00568862
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000378325
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       631.829
+      ],
+      "thawed_through_yr": 3758.37,
+      "by_year": {
+       "10": {
+        "front_m": 993.787,
+        "held_m": 130.375,
+        "seal_m": 0.0075,
+        "frozen_top_m": 7.03811,
+        "frozen_bottom_m": 631.829,
+        "uptake_m_yr_since_last": 13.0375
+       },
+       "100": {
+        "front_m": 1979.37,
+        "held_m": 252.111,
+        "seal_m": 0.075,
+        "frozen_top_m": 24.4529,
+        "frozen_bottom_m": 631.829,
+        "uptake_m_yr_since_last": 1.35263
+       },
+       "1000": {
+        "front_m": 4185.43,
+        "held_m": 499.51,
+        "seal_m": 0.75,
+        "frozen_top_m": 96.8164,
+        "frozen_bottom_m": 631.829,
+        "uptake_m_yr_since_last": 0.274888
+       },
+       "10000": {
+        "front_m": 8102.77,
+        "held_m": 864.686,
+        "seal_m": 7.5,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0405751
+       },
+       "100000": {
+        "front_m": 16361.4,
+        "held_m": 1400.41,
+        "seal_m": 75.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0059525
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00018102
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       631.829
+      ],
+      "thawed_through_yr": 7943.28,
+      "by_year": {
+       "10": {
+        "front_m": 0.0517459,
+        "held_m": 0.00699604,
+        "seal_m": 0.0,
+        "frozen_top_m": 5.3472,
+        "frozen_bottom_m": 631.829,
+        "uptake_m_yr_since_last": 0.000699604
+       },
+       "100": {
+        "front_m": 0.51746,
+        "held_m": 0.0699595,
+        "seal_m": 0.0,
+        "frozen_top_m": 17.6364,
+        "frozen_bottom_m": 631.829,
+        "uptake_m_yr_since_last": 0.000699594
+       },
+       "1000": {
+        "front_m": 5.17534,
+        "held_m": 0.699595,
+        "seal_m": 0.0,
+        "frozen_top_m": 65.7931,
+        "frozen_bottom_m": 631.829,
+        "uptake_m_yr_since_last": 0.000699595
+       },
+       "10000": {
+        "front_m": 51.8269,
+        "held_m": 6.99595,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000699595
+       },
+       "100000": {
+        "front_m": 525.787,
+        "held_m": 69.9604,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000699605
+       },
+       "1e+06": {
+        "front_m": 6215.66,
+        "held_m": 699.615,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000699617
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 9.59683e-05
+       }
+      },
+      "recharge_mm_yr": 0.699595
+     }
+    }
+   },
+   "60-75": {
+    "airless_top_k": 200.563,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       954.234
+      ],
+      "thawed_through_yr": 16788.0,
+      "by_year": {
+       "10": {
+        "front_m": 1015.65,
+        "held_m": 133.155,
+        "seal_m": 0.002,
+        "frozen_top_m": 5.3472,
+        "frozen_bottom_m": 954.234,
+        "uptake_m_yr_since_last": 13.3155
+       },
+       "100": {
+        "front_m": 1707.56,
+        "held_m": 219.264,
+        "seal_m": 0.02,
+        "frozen_top_m": 16.1664,
+        "frozen_bottom_m": 954.234,
+        "uptake_m_yr_since_last": 0.956762
+       },
+       "1000": {
+        "front_m": 2996.7,
+        "held_m": 370.335,
+        "seal_m": 0.2,
+        "frozen_top_m": 61.5972,
+        "frozen_bottom_m": 1011.99,
+        "uptake_m_yr_since_last": 0.167857
+       },
+       "10000": {
+        "front_m": 5619.61,
+        "held_m": 643.41,
+        "seal_m": 2.0,
+        "frozen_top_m": 393.312,
+        "frozen_bottom_m": 1206.89,
+        "uptake_m_yr_since_last": 0.0303417
+       },
+       "100000": {
+        "front_m": 11844.3,
+        "held_m": 1140.86,
+        "seal_m": 20.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00552726
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000469407
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       954.234
+      ],
+      "thawed_through_yr": 21134.9,
+      "by_year": {
+       "10": {
+        "front_m": 0.0143549,
+        "held_m": 0.00194078,
+        "seal_m": 0.0,
+        "frozen_top_m": 3.84229,
+        "frozen_bottom_m": 954.234,
+        "uptake_m_yr_since_last": 0.000194078
+       },
+       "100": {
+        "front_m": 0.143549,
+        "held_m": 0.0194078,
+        "seal_m": 0.0,
+        "frozen_top_m": 11.0728,
+        "frozen_bottom_m": 954.234,
+        "uptake_m_yr_since_last": 0.000194077
+       },
+       "1000": {
+        "front_m": 1.43553,
+        "held_m": 0.194076,
+        "seal_m": 0.0,
+        "frozen_top_m": 40.965,
+        "frozen_bottom_m": 954.234,
+        "uptake_m_yr_since_last": 0.000194075
+       },
+       "10000": {
+        "front_m": 14.361,
+        "held_m": 1.94076,
+        "seal_m": 0.0,
+        "frozen_top_m": 203.249,
+        "frozen_bottom_m": 899.749,
+        "uptake_m_yr_since_last": 0.000194076
+       },
+       "100000": {
+        "front_m": 144.178,
+        "held_m": 19.4076,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000194076
+       },
+       "1e+06": {
+        "front_m": 1502.17,
+        "held_m": 194.081,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000194081
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000152139
+       }
+      },
+      "recharge_mm_yr": 0.194075
+     }
+    }
+   },
+   "75-90": {
+    "airless_top_k": 153.273,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       5118.21
+      ],
+      "thawed_through_yr": 266073.0,
+      "by_year": {
+       "10": {
+        "front_m": 979.44,
+        "held_m": 128.549,
+        "seal_m": 0.002,
+        "frozen_top_m": 3.1531,
+        "frozen_bottom_m": 5118.21,
+        "uptake_m_yr_since_last": 12.8549
+       },
+       "100": {
+        "front_m": 1615.27,
+        "held_m": 207.988,
+        "seal_m": 0.02,
+        "frozen_top_m": 11.0728,
+        "frozen_bottom_m": 5118.21,
+        "uptake_m_yr_since_last": 0.882659
+       },
+       "1000": {
+        "front_m": 2696.09,
+        "held_m": 336.16,
+        "seal_m": 0.2,
+        "frozen_top_m": 35.542,
+        "frozen_bottom_m": 5118.21,
+        "uptake_m_yr_since_last": 0.142414
+       },
+       "10000": {
+        "front_m": 4595.34,
+        "held_m": 541.93,
+        "seal_m": 2.0,
+        "frozen_top_m": 159.259,
+        "frozen_bottom_m": 5118.21,
+        "uptake_m_yr_since_last": 0.0228633
+       },
+       "100000": {
+        "front_m": 8578.42,
+        "held_m": 903.384,
+        "seal_m": 20.0,
+        "frozen_top_m": 899.749,
+        "frozen_bottom_m": 5118.21,
+        "uptake_m_yr_since_last": 0.00401616
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000733273
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       1525.85
+      ],
+      "thawed_through_yr": 35481.3,
+      "by_year": {
+       "10": {
+        "front_m": 791.954,
+        "held_m": 104.531,
+        "seal_m": 0.0075,
+        "frozen_top_m": 2.50293,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 10.4531
+       },
+       "100": {
+        "front_m": 1398.88,
+        "held_m": 181.296,
+        "seal_m": 0.075,
+        "frozen_top_m": 8.93802,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.852945
+       },
+       "1000": {
+        "front_m": 2680.49,
+        "held_m": 334.369,
+        "seal_m": 0.75,
+        "frozen_top_m": 28.5052,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.170081
+       },
+       "10000": {
+        "front_m": 6182.71,
+        "held_m": 696.561,
+        "seal_m": 7.5,
+        "frozen_top_m": 140.824,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.0402435
+       },
+       "100000": {
+        "front_m": 13447.1,
+        "held_m": 1241.23,
+        "seal_m": 75.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00605186
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00035789
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       1525.85
+      ],
+      "thawed_through_yr": 70794.6,
+      "by_year": {
+       "10": {
+        "front_m": 0.0109927,
+        "held_m": 0.00148622,
+        "seal_m": 0.0,
+        "frozen_top_m": 2.50293,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.000148622
+       },
+       "100": {
+        "front_m": 0.109927,
+        "held_m": 0.0148621,
+        "seal_m": 0.0,
+        "frozen_top_m": 6.16803,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.000148621
+       },
+       "1000": {
+        "front_m": 1.09929,
+        "held_m": 0.14862,
+        "seal_m": 0.0,
+        "frozen_top_m": 22.597,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.000148619
+       },
+       "10000": {
+        "front_m": 10.9963,
+        "held_m": 1.4862,
+        "seal_m": 0.0,
+        "frozen_top_m": 90.8645,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.00014862
+       },
+       "100000": {
+        "front_m": 110.296,
+        "held_m": 14.862,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00014862
+       },
+       "1e+06": {
+        "front_m": 1137.81,
+        "held_m": 148.624,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000148624
+       },
+       "1e+07": {
+        "front_m": 18177.2,
+        "held_m": 1486.22,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000148622
+       }
+      },
+      "recharge_mm_yr": 0.14862
+     }
+    }
+   }
+  },
+  "moon": {
+   "held": {
+    "10": {
+     "global_layer_m": 54.4828,
+     "kg": 2.06666e+18,
+     "share_of_seas": 0.193018,
+     "seas_fall_m": 194.582,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    },
+    "100": {
+     "global_layer_m": 104.525,
+     "kg": 3.96487e+18,
+     "share_of_seas": 0.370304,
+     "seas_fall_m": 373.304,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    },
+    "1000": {
+     "global_layer_m": 237.249,
+     "kg": 8.99941e+18,
+     "share_of_seas": 0.840511,
+     "seas_fall_m": 847.321,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    },
+    "10000": {
+     "global_layer_m": 555.392,
+     "kg": 2.10673e+19,
+     "share_of_seas": 1.96761,
+     "seas_fall_m": 1983.55,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    },
+    "100000": {
+     "global_layer_m": 1086.56,
+     "kg": 4.12156e+19,
+     "share_of_seas": 3.84938,
+     "seas_fall_m": 3880.57,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    },
+    "1e+06": {
+     "global_layer_m": 1347.22,
+     "kg": 5.1103e+19,
+     "share_of_seas": 4.77283,
+     "seas_fall_m": 4811.5,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    },
+    "1e+07": {
+     "global_layer_m": 1561.45,
+     "kg": 5.92295e+19,
+     "share_of_seas": 5.53181,
+     "seas_fall_m": 5576.63,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    }
+   },
+   "top_up_km3_yr": {
+    "0-10": 206666.0,
+    "10-100": 21091.3,
+    "100-1000": 5593.94,
+    "1000-10000": 1340.88,
+    "10000-100000": 223.87,
+    "100000-1e+06": 10.986,
+    "1e+06-1e+07": 0.902941
+   }
+  }
+ },
+ "gentle_airless_gradient_central": {
+  "params": {
+   "airless_spread_k": 0.0,
+   "heat_flow": 0.015,
+   "k_air": 0.5,
+   "k_wet": 1.4,
+   "perm_1km": 1e-14,
+   "sea_bottom_offset_k": 0.0,
+   "lake_bottom_offset_k": -2.0,
+   "recharge_share": 0.2,
+   "phi0": 0.1352,
+   "porosity_e_folding_m": 16421,
+   "k_airless": 0.5,
+   "seal_perm": 1e-17,
+   "sea_sediment_mm_yr": 0.2,
+   "lake_sediment_mm_yr": 0.75
+  },
+  "bands": {
+   "0-15": {
+    "airless_top_k": 254.453,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       595.593
+      ],
+      "thawed_through_yr": 3548.13,
+      "by_year": {
+       "10": {
+        "front_m": 15.4528,
+        "held_m": 2.08824,
+        "seal_m": 0.002,
+        "frozen_top_m": 16.1664,
+        "frozen_bottom_m": 595.593,
+        "uptake_m_yr_since_last": 0.208824
+       },
+       "100": {
+        "front_m": 52.0919,
+        "held_m": 7.03166,
+        "seal_m": 0.02,
+        "frozen_top_m": 53.9046,
+        "frozen_bottom_m": 595.593,
+        "uptake_m_yr_since_last": 0.0549269
+       },
+       "1000": {
+        "front_m": 185.459,
+        "held_m": 24.9329,
+        "seal_m": 0.2,
+        "frozen_top_m": 191.272,
+        "frozen_bottom_m": 595.593,
+        "uptake_m_yr_since_last": 0.0198903
+       },
+       "10000": {
+        "front_m": 4941.45,
+        "held_m": 576.931,
+        "seal_m": 2.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0613331
+       },
+       "100000": {
+        "front_m": 11811.4,
+        "held_m": 1138.7,
+        "seal_m": 20.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00624186
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000471813
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       595.593
+      ],
+      "thawed_through_yr": 3548.13,
+      "by_year": {
+       "10": {
+        "front_m": 15.4528,
+        "held_m": 2.08824,
+        "seal_m": 0.0075,
+        "frozen_top_m": 16.1664,
+        "frozen_bottom_m": 595.593,
+        "uptake_m_yr_since_last": 0.208824
+       },
+       "100": {
+        "front_m": 52.0919,
+        "held_m": 7.03166,
+        "seal_m": 0.075,
+        "frozen_top_m": 53.9046,
+        "frozen_bottom_m": 595.593,
+        "uptake_m_yr_since_last": 0.0549269
+       },
+       "1000": {
+        "front_m": 185.459,
+        "held_m": 24.9329,
+        "seal_m": 0.75,
+        "frozen_top_m": 191.272,
+        "frozen_bottom_m": 595.593,
+        "uptake_m_yr_since_last": 0.0198903
+       },
+       "10000": {
+        "front_m": 5428.64,
+        "held_m": 624.966,
+        "seal_m": 7.5,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0666703
+       },
+       "100000": {
+        "front_m": 13210.5,
+        "held_m": 1227.02,
+        "seal_m": 75.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00668953
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000373673
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       595.593
+      ],
+      "thawed_through_yr": 3349.65,
+      "by_year": {
+       "10": {
+        "front_m": 15.4528,
+        "held_m": 2.08824,
+        "seal_m": 0.0,
+        "frozen_top_m": 16.1664,
+        "frozen_bottom_m": 595.593,
+        "uptake_m_yr_since_last": 0.208824
+       },
+       "100": {
+        "front_m": 52.0919,
+        "held_m": 7.03166,
+        "seal_m": 0.0,
+        "frozen_top_m": 53.9046,
+        "frozen_bottom_m": 595.593,
+        "uptake_m_yr_since_last": 0.0549269
+       },
+       "1000": {
+        "front_m": 197.086,
+        "held_m": 26.4868,
+        "seal_m": 0.0,
+        "frozen_top_m": 203.249,
+        "frozen_bottom_m": 595.593,
+        "uptake_m_yr_since_last": 0.0216168
+       },
+       "10000": {
+        "front_m": 5446.41,
+        "held_m": 626.692,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0666895
+       },
+       "100000": {
+        "front_m": 13037.2,
+        "held_m": 1216.49,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00655328
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00038538
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      },
+      "recharge_mm_yr": 349.268
+     }
+    }
+   },
+   "15-30": {
+    "airless_top_k": 250.002,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       754.11
+      ],
+      "thawed_through_yr": 5956.62,
+      "by_year": {
+       "10": {
+        "front_m": 14.1064,
+        "held_m": 1.90637,
+        "seal_m": 0.002,
+        "frozen_top_m": 14.7796,
+        "frozen_bottom_m": 754.11,
+        "uptake_m_yr_since_last": 0.190637
+       },
+       "100": {
+        "front_m": 45.4449,
+        "held_m": 6.13565,
+        "seal_m": 0.02,
+        "frozen_top_m": 47.0582,
+        "frozen_bottom_m": 754.11,
+        "uptake_m_yr_since_last": 0.046992
+       },
+       "1000": {
+        "front_m": 154.378,
+        "held_m": 20.7741,
+        "seal_m": 0.2,
+        "frozen_top_m": 159.259,
+        "frozen_bottom_m": 754.11,
+        "uptake_m_yr_since_last": 0.0162649
+       },
+       "10000": {
+        "front_m": 4266.89,
+        "held_m": 508.025,
+        "seal_m": 2.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0541389
+       },
+       "100000": {
+        "front_m": 11526.3,
+        "held_m": 1119.76,
+        "seal_m": 20.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00679709
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000492852
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       754.11
+      ],
+      "thawed_through_yr": 5956.62,
+      "by_year": {
+       "10": {
+        "front_m": 14.1064,
+        "held_m": 1.90637,
+        "seal_m": 0.0075,
+        "frozen_top_m": 14.7796,
+        "frozen_bottom_m": 754.11,
+        "uptake_m_yr_since_last": 0.190637
+       },
+       "100": {
+        "front_m": 45.4449,
+        "held_m": 6.13565,
+        "seal_m": 0.075,
+        "frozen_top_m": 47.0582,
+        "frozen_bottom_m": 754.11,
+        "uptake_m_yr_since_last": 0.046992
+       },
+       "1000": {
+        "front_m": 164.141,
+        "held_m": 22.0813,
+        "seal_m": 0.75,
+        "frozen_top_m": 169.315,
+        "frozen_bottom_m": 754.11,
+        "uptake_m_yr_since_last": 0.0177174
+       },
+       "10000": {
+        "front_m": 4337.06,
+        "held_m": 515.325,
+        "seal_m": 7.5,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0548049
+       },
+       "100000": {
+        "front_m": 12807.6,
+        "held_m": 1202.36,
+        "seal_m": 75.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00763367
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000401082
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       754.11
+      ],
+      "thawed_through_yr": 5623.41,
+      "by_year": {
+       "10": {
+        "front_m": 5.80542,
+        "held_m": 0.784754,
+        "seal_m": 0.0,
+        "frozen_top_m": 11.0728,
+        "frozen_bottom_m": 754.11,
+        "uptake_m_yr_since_last": 0.0784754
+       },
+       "100": {
+        "front_m": 45.4449,
+        "held_m": 6.13565,
+        "seal_m": 0.0,
+        "frozen_top_m": 47.0582,
+        "frozen_bottom_m": 754.11,
+        "uptake_m_yr_since_last": 0.0594545
+       },
+       "1000": {
+        "front_m": 174.489,
+        "held_m": 23.466,
+        "seal_m": 0.0,
+        "frozen_top_m": 179.974,
+        "frozen_bottom_m": 754.11,
+        "uptake_m_yr_since_last": 0.019256
+       },
+       "10000": {
+        "front_m": 3643.53,
+        "held_m": 441.782,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0464796
+       },
+       "100000": {
+        "front_m": 12604.5,
+        "held_m": 1189.69,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00831005
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00041516
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      },
+      "recharge_mm_yr": 78.4753
+     }
+    }
+   },
+   "30-45": {
+    "airless_top_k": 240.662,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       1206.89
+      ],
+      "thawed_through_yr": 14125.4,
+      "by_year": {
+       "10": {
+        "front_m": 11.638,
+        "held_m": 1.5729,
+        "seal_m": 0.002,
+        "frozen_top_m": 12.2371,
+        "frozen_bottom_m": 1206.89,
+        "uptake_m_yr_since_last": 0.15729
+       },
+       "100": {
+        "front_m": 36.8199,
+        "held_m": 4.97247,
+        "seal_m": 0.02,
+        "frozen_top_m": 38.1745,
+        "frozen_bottom_m": 1206.89,
+        "uptake_m_yr_since_last": 0.0377731
+       },
+       "1000": {
+        "front_m": 128.282,
+        "held_m": 17.2762,
+        "seal_m": 0.2,
+        "frozen_top_m": 132.381,
+        "frozen_bottom_m": 1206.89,
+        "uptake_m_yr_since_last": 0.0136708
+       },
+       "10000": {
+        "front_m": 578.003,
+        "held_m": 76.7867,
+        "seal_m": 2.0,
+        "frozen_top_m": 595.593,
+        "frozen_bottom_m": 1138.1,
+        "uptake_m_yr_since_last": 0.00661228
+       },
+       "100000": {
+        "front_m": 10702.1,
+        "held_m": 1063.12,
+        "seal_m": 20.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0109592
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00055579
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       1073.21
+      ],
+      "thawed_through_yr": 13335.2,
+      "by_year": {
+       "10": {
+        "front_m": 11.638,
+        "held_m": 1.5729,
+        "seal_m": 0.0075,
+        "frozen_top_m": 12.2371,
+        "frozen_bottom_m": 1073.21,
+        "uptake_m_yr_since_last": 0.15729
+       },
+       "100": {
+        "front_m": 39.5291,
+        "held_m": 5.33791,
+        "seal_m": 0.075,
+        "frozen_top_m": 40.965,
+        "frozen_bottom_m": 1073.21,
+        "uptake_m_yr_since_last": 0.0418334
+       },
+       "1000": {
+        "front_m": 128.282,
+        "held_m": 17.2762,
+        "seal_m": 0.75,
+        "frozen_top_m": 132.381,
+        "frozen_bottom_m": 1073.21,
+        "uptake_m_yr_since_last": 0.0132648
+       },
+       "10000": {
+        "front_m": 613.183,
+        "held_m": 81.3736,
+        "seal_m": 7.5,
+        "frozen_top_m": 631.829,
+        "frozen_bottom_m": 1011.99,
+        "uptake_m_yr_since_last": 0.00712194
+       },
+       "100000": {
+        "front_m": 11881.1,
+        "held_m": 1143.28,
+        "seal_m": 75.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.011799
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000466722
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       1073.21
+      ],
+      "thawed_through_yr": 13335.2,
+      "by_year": {
+       "10": {
+        "front_m": 1.6528,
+        "held_m": 0.223447,
+        "seal_m": 0.0,
+        "frozen_top_m": 7.9604,
+        "frozen_bottom_m": 1073.21,
+        "uptake_m_yr_since_last": 0.0223447
+       },
+       "100": {
+        "front_m": 16.5355,
+        "held_m": 2.23447,
+        "seal_m": 0.0,
+        "frozen_top_m": 28.5052,
+        "frozen_bottom_m": 1073.21,
+        "uptake_m_yr_since_last": 0.0223447
+       },
+       "1000": {
+        "front_m": 128.282,
+        "held_m": 17.2762,
+        "seal_m": 0.0,
+        "frozen_top_m": 132.381,
+        "frozen_bottom_m": 1073.21,
+        "uptake_m_yr_since_last": 0.016713
+       },
+       "10000": {
+        "front_m": 613.183,
+        "held_m": 81.3736,
+        "seal_m": 0.0,
+        "frozen_top_m": 631.829,
+        "frozen_bottom_m": 1011.99,
+        "uptake_m_yr_since_last": 0.00712194
+       },
+       "100000": {
+        "front_m": 11177.4,
+        "held_m": 1096.13,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0112751
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000519109
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      },
+      "recharge_mm_yr": 22.3447
+     }
+    }
+   },
+   "45-60": {
+    "airless_top_k": 225.243,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       2583.64
+      ],
+      "thawed_through_yr": 56234.1,
+      "by_year": {
+       "10": {
+        "front_m": 8.43497,
+        "held_m": 1.14012,
+        "seal_m": 0.002,
+        "frozen_top_m": 8.93802,
+        "frozen_bottom_m": 2583.64,
+        "uptake_m_yr_since_last": 0.114012
+       },
+       "100": {
+        "front_m": 29.5782,
+        "held_m": 3.99537,
+        "seal_m": 0.02,
+        "frozen_top_m": 30.7155,
+        "frozen_bottom_m": 2583.64,
+        "uptake_m_yr_since_last": 0.0317251
+       },
+       "1000": {
+        "front_m": 99.879,
+        "held_m": 13.4627,
+        "seal_m": 0.2,
+        "frozen_top_m": 103.125,
+        "frozen_bottom_m": 2583.64,
+        "uptake_m_yr_since_last": 0.0105192
+       },
+       "10000": {
+        "front_m": 381.614,
+        "held_m": 50.9993,
+        "seal_m": 2.0,
+        "frozen_top_m": 393.312,
+        "frozen_bottom_m": 2583.64,
+        "uptake_m_yr_since_last": 0.00417074
+       },
+       "100000": {
+        "front_m": 7794.76,
+        "held_m": 839.022,
+        "seal_m": 20.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0087558
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000804787
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       1525.85
+      ],
+      "thawed_through_yr": 35481.3,
+      "by_year": {
+       "10": {
+        "front_m": 9.44107,
+        "held_m": 1.27607,
+        "seal_m": 0.0075,
+        "frozen_top_m": 9.9743,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.127607
+       },
+       "100": {
+        "front_m": 29.5782,
+        "held_m": 3.99537,
+        "seal_m": 0.075,
+        "frozen_top_m": 30.7155,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.0302145
+       },
+       "1000": {
+        "front_m": 99.879,
+        "held_m": 13.4627,
+        "seal_m": 0.75,
+        "frozen_top_m": 103.125,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.0105192
+       },
+       "10000": {
+        "front_m": 381.614,
+        "held_m": 50.9993,
+        "seal_m": 7.5,
+        "frozen_top_m": 393.312,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.00417074
+       },
+       "100000": {
+        "front_m": 9854.6,
+        "held_m": 1001.84,
+        "seal_m": 75.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0105649
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000623877
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       1525.85
+      ],
+      "thawed_through_yr": 47315.1,
+      "by_year": {
+       "10": {
+        "front_m": 0.0517459,
+        "held_m": 0.00699604,
+        "seal_m": 0.0,
+        "frozen_top_m": 5.3472,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.000699604
+       },
+       "100": {
+        "front_m": 0.51746,
+        "held_m": 0.0699595,
+        "seal_m": 0.0,
+        "frozen_top_m": 16.1664,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.000699594
+       },
+       "1000": {
+        "front_m": 5.17534,
+        "held_m": 0.699595,
+        "seal_m": 0.0,
+        "frozen_top_m": 57.6389,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.000699595
+       },
+       "10000": {
+        "front_m": 51.8269,
+        "held_m": 6.99595,
+        "seal_m": 0.0,
+        "frozen_top_m": 229.4,
+        "frozen_bottom_m": 1525.85,
+        "uptake_m_yr_since_last": 0.000699595
+       },
+       "100000": {
+        "front_m": 525.787,
+        "held_m": 69.9604,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000699605
+       },
+       "1e+06": {
+        "front_m": 6215.66,
+        "held_m": 699.615,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000699617
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 9.59683e-05
+       }
+      },
+      "recharge_mm_yr": 0.699595
+     }
+    }
+   },
+   "60-75": {
+    "airless_top_k": 200.563,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       4868.21
+      ],
+      "thawed_through_yr": 211349.0,
+      "by_year": {
+       "10": {
+        "front_m": 6.5904,
+        "held_m": 0.890843,
+        "seal_m": 0.002,
+        "frozen_top_m": 7.03811,
+        "frozen_bottom_m": 4868.21,
+        "uptake_m_yr_since_last": 0.0890843
+       },
+       "100": {
+        "front_m": 21.6961,
+        "held_m": 2.93138,
+        "seal_m": 0.02,
+        "frozen_top_m": 22.597,
+        "frozen_bottom_m": 4868.21,
+        "uptake_m_yr_since_last": 0.0226727
+       },
+       "1000": {
+        "front_m": 72.5292,
+        "held_m": 9.78433,
+        "seal_m": 0.2,
+        "frozen_top_m": 74.9551,
+        "frozen_bottom_m": 4868.21,
+        "uptake_m_yr_since_last": 0.00761438
+       },
+       "10000": {
+        "front_m": 251.004,
+        "held_m": 33.6777,
+        "seal_m": 2.0,
+        "frozen_top_m": 258.784,
+        "frozen_bottom_m": 4868.21,
+        "uptake_m_yr_since_last": 0.00265482
+       },
+       "100000": {
+        "front_m": 926.198,
+        "held_m": 121.756,
+        "seal_m": 20.0,
+        "frozen_top_m": 954.234,
+        "frozen_bottom_m": 4868.21,
+        "uptake_m_yr_since_last": 0.000978648
+       },
+       "1e+06": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00160175
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.0
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       2298.52
+      ],
+      "thawed_through_yr": 133352.0,
+      "by_year": {
+       "10": {
+        "front_m": 0.0141938,
+        "held_m": 0.00191901,
+        "seal_m": 0.0,
+        "frozen_top_m": 3.84229,
+        "frozen_bottom_m": 2298.52,
+        "uptake_m_yr_since_last": 0.000191901
+       },
+       "100": {
+        "front_m": 0.143388,
+        "held_m": 0.019386,
+        "seal_m": 0.0,
+        "frozen_top_m": 11.0728,
+        "frozen_bottom_m": 2298.52,
+        "uptake_m_yr_since_last": 0.000194077
+       },
+       "1000": {
+        "front_m": 1.43537,
+        "held_m": 0.194054,
+        "seal_m": 0.0,
+        "frozen_top_m": 35.542,
+        "frozen_bottom_m": 2298.52,
+        "uptake_m_yr_since_last": 0.000194075
+       },
+       "10000": {
+        "front_m": 14.3608,
+        "held_m": 1.94073,
+        "seal_m": 0.0,
+        "frozen_top_m": 132.381,
+        "frozen_bottom_m": 2298.52,
+        "uptake_m_yr_since_last": 0.000194076
+       },
+       "100000": {
+        "front_m": 144.178,
+        "held_m": 19.4076,
+        "seal_m": 0.0,
+        "frozen_top_m": 848.348,
+        "frozen_bottom_m": 2044.75,
+        "uptake_m_yr_since_last": 0.000194076
+       },
+       "1e+06": {
+        "front_m": 1502.17,
+        "held_m": 194.081,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000194081
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000152139
+       }
+      },
+      "recharge_mm_yr": 0.194075
+     }
+    }
+   },
+   "75-90": {
+    "airless_top_k": 153.273,
+    "columns": {
+     "sea_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       9368.21
+      ],
+      "thawed_through_yr": 891251.0,
+      "by_year": {
+       "10": {
+        "front_m": 4.19692,
+        "held_m": 0.567351,
+        "seal_m": 0.002,
+        "frozen_top_m": 4.57283,
+        "frozen_bottom_m": 9368.21,
+        "uptake_m_yr_since_last": 0.0567351
+       },
+       "100": {
+        "front_m": 15.4528,
+        "held_m": 2.08824,
+        "seal_m": 0.02,
+        "frozen_top_m": 16.1664,
+        "frozen_bottom_m": 9368.21,
+        "uptake_m_yr_since_last": 0.0168988
+       },
+       "1000": {
+        "front_m": 48.6716,
+        "held_m": 6.57066,
+        "seal_m": 0.2,
+        "frozen_top_m": 50.3817,
+        "frozen_bottom_m": 9368.21,
+        "uptake_m_yr_since_last": 0.00498046
+       },
+       "10000": {
+        "front_m": 164.141,
+        "held_m": 22.0813,
+        "seal_m": 2.0,
+        "frozen_top_m": 169.315,
+        "frozen_bottom_m": 9368.21,
+        "uptake_m_yr_since_last": 0.0017234
+       },
+       "100000": {
+        "front_m": 544.814,
+        "held_m": 72.4504,
+        "seal_m": 20.0,
+        "frozen_top_m": 561.409,
+        "frozen_bottom_m": 9368.21,
+        "uptake_m_yr_since_last": 0.000559657
+       },
+       "1e+06": {
+        "front_m": 9352.27,
+        "held_m": 963.997,
+        "seal_m": 200.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000990607
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 2000.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 6.65925e-05
+       }
+      }
+     },
+     "lake_floor": {
+      "airless_frozen_layer_m": [
+       0.0,
+       6618.21
+      ],
+      "thawed_through_yr": 530884.0,
+      "by_year": {
+       "10": {
+        "front_m": 3.48766,
+        "held_m": 0.471481,
+        "seal_m": 0.0075,
+        "frozen_top_m": 3.84229,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.0471481
+       },
+       "100": {
+        "front_m": 11.638,
+        "held_m": 1.5729,
+        "seal_m": 0.075,
+        "frozen_top_m": 12.2371,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.012238
+       },
+       "1000": {
+        "front_m": 39.5291,
+        "held_m": 5.33791,
+        "seal_m": 0.75,
+        "frozen_top_m": 40.965,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.00418334
+       },
+       "10000": {
+        "front_m": 136.479,
+        "held_m": 18.3755,
+        "seal_m": 7.5,
+        "frozen_top_m": 140.824,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.00144862
+       },
+       "100000": {
+        "front_m": 578.003,
+        "held_m": 76.7867,
+        "seal_m": 75.0,
+        "frozen_top_m": 595.593,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.000649013
+       },
+       "1e+06": {
+        "front_m": 13379.3,
+        "held_m": 1237.18,
+        "seal_m": 750.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.00128932
+       },
+       "1e+07": {
+        "front_m": 20000.0,
+        "held_m": 1563.33,
+        "seal_m": 7500.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 3.62391e-05
+       }
+      }
+     },
+     "land": {
+      "airless_frozen_layer_m": [
+       0.0,
+       6618.21
+      ],
+      "thawed_through_yr": 630957.0,
+      "by_year": {
+       "10": {
+        "front_m": 0.0107734,
+        "held_m": 0.00145656,
+        "seal_m": 0.0,
+        "frozen_top_m": 2.50293,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.000145656
+       },
+       "100": {
+        "front_m": 0.109708,
+        "held_m": 0.0148325,
+        "seal_m": 0.0,
+        "frozen_top_m": 6.16803,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.000148621
+       },
+       "1000": {
+        "front_m": 1.09908,
+        "held_m": 0.14859,
+        "seal_m": 0.0,
+        "frozen_top_m": 20.8463,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.000148619
+       },
+       "10000": {
+        "front_m": 10.996,
+        "held_m": 1.48617,
+        "seal_m": 0.0,
+        "frozen_top_m": 74.9551,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.00014862
+       },
+       "100000": {
+        "front_m": 110.295,
+        "held_m": 14.862,
+        "seal_m": 0.0,
+        "frozen_top_m": 349.13,
+        "frozen_bottom_m": 6618.21,
+        "uptake_m_yr_since_last": 0.00014862
+       },
+       "1e+06": {
+        "front_m": 1137.81,
+        "held_m": 148.624,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000148624
+       },
+       "1e+07": {
+        "front_m": 18177.2,
+        "held_m": 1486.22,
+        "seal_m": 0.0,
+        "frozen_top_m": null,
+        "frozen_bottom_m": null,
+        "uptake_m_yr_since_last": 0.000148622
+       }
+      },
+      "recharge_mm_yr": 0.14862
+     }
+    }
+   }
+  },
+  "moon": {
+   "held": {
+    "10": {
+     "global_layer_m": 1.08348,
+     "kg": 4.10991e+16,
+     "share_of_seas": 0.0038385,
+     "seas_fall_m": 3.8696,
+     "seas_share_without_top_up": 0.279174,
+     "seas_level_without_top_up_m": -1657.97
+    },
+    "100": {
+     "global_layer_m": 4.32752,
+     "kg": 1.64153e+17,
+     "share_of_seas": 0.0153313,
+     "seas_fall_m": 15.4555,
+     "seas_share_without_top_up": 0.2767,
+     "seas_level_without_top_up_m": -1669.84
+    },
+    "1000": {
+     "global_layer_m": 16.9578,
+     "kg": 6.43248e+17,
+     "share_of_seas": 0.0600769,
+     "seas_fall_m": 60.5636,
+     "seas_share_without_top_up": 0.267083,
+     "seas_level_without_top_up_m": -1716.59
+    },
+    "10000": {
+     "global_layer_m": 294.227,
+     "kg": 1.11607e+19,
+     "share_of_seas": 1.04237,
+     "seas_fall_m": 1050.81,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    },
+    "100000": {
+     "global_layer_m": 884.187,
+     "kg": 3.35393e+19,
+     "share_of_seas": 3.13244,
+     "seas_fall_m": 3157.82,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    },
+    "1e+06": {
+     "global_layer_m": 1341.53,
+     "kg": 5.08875e+19,
+     "share_of_seas": 4.7527,
+     "seas_fall_m": 4791.21,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    },
+    "1e+07": {
+     "global_layer_m": 1561.45,
+     "kg": 5.92295e+19,
+     "share_of_seas": 5.53181,
+     "seas_fall_m": 5576.63,
+     "seas_share_without_top_up": null,
+     "seas_level_without_top_up_m": null
+    }
+   },
+   "top_up_km3_yr": {
+    "0-10": 4109.91,
+    "10-100": 1367.27,
+    "100-1000": 532.328,
+    "1000-10000": 1168.61,
+    "10000-100000": 248.651,
+    "100000-1e+06": 19.2759,
+    "1e+06-1e+07": 0.926884
+   }
+  }
+ },
+ "producer": {
+  "domain": "geography",
+  "files": {
+   "geography/groundwater_uptake.py": "cf32a0a1055391512aa01744a4e0245d8607c4cbd1e65d203c5f3d8837dfd16a",
+   "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29"
+  },
+  "inputs": {
+   "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+   "geography/results/drainage.json": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d",
+   "geography/results/groundwater.json": "45375eb62f3bad0f4da0b5ae5a4dae124cdd6f7034b484088a6d2caafd4b6ad2"
+  },
+  "ignored_inputs": {
+   "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5bffdfbfb191cfed5cc3f4397a9a7d0eb52269f925ee6f05c",
+   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693",
+   "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f8899bd4f5d712445f78c8882c85a1bc30bf631ac9dd14ab1c03",
+   "geography/inputs/ldem_16.img": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+   "geography/inputs/ldem_16.lbl": "9aef29463ccc6ed3a3fbe0df3ecd830a99c69e16b564f455507dee2697096579",
+   "geography/inputs/ldem_4.img": "c04632eba6449af49e3108ed7c25b3b1c450600abd3690df4fc815853a1af476",
+   "geography/inputs/ldem_4.lbl": "b5a197b4d417e3b5e0e84f8fe15f9a1d2203b8eb5d7213236c0ffbc86e940cc6",
+   "geography/inputs/jggrx_0420a_sha.tab": "962355f81ae40dab0ec39753e3820d731d4505633a262fc543afd6f6c7c0e50d",
+   "geography/inputs/jggrx_0420a_sha.lbl": "320b77ee552d221905bf0af55c1a554799e596e5d9e5dbf3f580c0ce60e07ea7"
+  },
+  "constants": {
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "SIDEREAL_MONTH_DAYS": 27.321661
+  }
+ }
+}

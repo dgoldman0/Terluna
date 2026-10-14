@@ -1,0 +1,144 @@
+{
+  "source_admission": "Published values used in groundwater_uptake.py and the README's groundwater section, each with how far it was read on 2026-10-13. A literature helper read most of the hydrological sources; its dossier, with quotes and gaps, is resources-runs/groundwater/literature.md on the research drive. The porosity profile comes from groundwater.py (Wieczorek et al. 2013; Wiggins et al. 2022). No outside dataset or full paper is committed. Earth's crust and Mars models serve as reference points for the Moon's.",
+  "sources": [
+    {
+      "key": "warren_rasmussen1987_megaregolith",
+      "citation": "Warren PH, Rasmussen KL 1987, Megaregolith insulation, internal temperatures, and bulk uranium content of the moon, Journal of Geophysical Research 92(B5), 3453 (doi:10.1029/JB092iB05p03453)",
+      "doi_or_url": "https://www.osti.gov/biblio/5949316",
+      "use": "K_MEGAREGOLITH_AIRLESS, K_BEDROCK, MEGAREGOLITH_M, HEAT_FLOW_W_M2: the megaregolith conducts about 20 kiloerg/s/cm/K (0.2 W/m/K) and the bedrock about seven times more; it is 2-3 km thick under the highlands and 1 km under the maria; the Apollo sites' heat flows run about 25% above regional means",
+      "values_used": {
+        "k_megaregolith_w_m_k": 0.2,
+        "bedrock_over_megaregolith": 7,
+        "highland_m": [
+          2000,
+          3000
+        ],
+        "mare_m": 1000,
+        "apollo_over_regional": 1.25
+      },
+      "access": "abstract read (OSTI record) 2026-10-13"
+    },
+    {
+      "key": "langseth1976_heat_flow",
+      "citation": "Langseth MG, Keihm SJ, Peters K 1976, Revised lunar heat-flow values, Proceedings of the 7th Lunar Science Conference, 3143-3171",
+      "doi_or_url": "https://www.lpi.usra.edu/meetings/lpsc2010/pdf/1353.pdf",
+      "use": "HEAT_FLOW_W_M2 and AIRLESS_EQUATOR_K: endogenic heat flow 21 mW/m2 at Apollo 15 and 16 mW/m2 at Apollo 17; mean temperatures below the month's heat wave of 252 +/- 5 K at 0.8 m (Apollo 15, 26 N) and 256 +/- 5 K at 1.3 m (Apollo 17, 20 N)",
+      "values_used": {
+        "apollo15_mw_m2": 21,
+        "apollo17_mw_m2": 16,
+        "apollo15_k": 252,
+        "apollo17_k": 256
+      },
+      "access": "citation as widely reproduced; the values as later papers and search summaries give them (the LPSC 2010 re-examination of the Apollo 15 data among them); the original not reread"
+    },
+    {
+      "key": "diviner_latitude",
+      "citation": "Hayne PO et al. 2017, Global regolith thermophysical properties of the Moon from the Diviner Lunar Radiometer Experiment, Journal of Geophysical Research: Planets 122; with the latitude scaling T(lat) = T(0) cos^(1/4)(lat) used by Crotts & Hummels 2009 (arXiv:0909.3832)",
+      "doi_or_url": "https://arxiv.org/abs/1711.00977",
+      "use": "the airless crust's temperature below the reach of the month's wave falling toward the poles as the fourth root of the cosine of latitude, near 250 K at the equator and at or below 200 K poleward of 65 degrees",
+      "values_used": {
+        "exponent": 0.25
+      },
+      "access": "citations as found; search summaries of both read 2026-10-13; not reread"
+    },
+    {
+      "key": "manning_ingebritsen1999_permeability",
+      "citation": "Manning CE, Ingebritsen SE 1999, Permeability of the continental crust: implications of geothermal data and metamorphic systems, Reviews of Geophysics 37(1), 127-150",
+      "doi_or_url": "https://doi.org/10.1029/1998rg900002",
+      "use": "PERM_1KM_M2, PERM_EXPONENT: the continental crust's mean permeability, log k = -14 - 3.2 log z (k in m2, z in km), shifted an order either way for the impact-shattered crust",
+      "values_used": {
+        "log_k_at_1km": -14,
+        "exponent": 3.2
+      },
+      "access": "abstract read by the helper"
+    },
+    {
+      "key": "gleeson2011_glhymps",
+      "citation": "Gleeson T, Smith L, Moosdorf N, Hartmann J, Durr HH, Manning AH, van Beek LPH, Jellinek AM 2011, Mapping permeability over the surface of the Earth, Geophysical Research Letters 38, L02401",
+      "doi_or_url": "https://doi.org/10.1029/2010GL045565",
+      "use": "PERM_CAP_M2: near-surface volcanic rock at log k = -12.5 +/- 1.8 and crystalline at -14.1 +/- 1.5 (m2), regional scale",
+      "values_used": {
+        "volcanic_log_k": -12.5,
+        "crystalline_log_k": -14.1
+      },
+      "access": "full text read by the helper"
+    },
+    {
+      "key": "huscroft2018_glhymps2",
+      "citation": "Huscroft J, Gleeson T, Hartmann J, Borker J 2018, Compiling and mapping global permeability of the unconsolidated and consolidated Earth: GLobal HYdrogeology MaPS 2.0 (GLHYMPS 2.0), Geophysical Research Letters 45, 1897-1904",
+      "doi_or_url": "https://doi.org/10.1002/2017GL075860",
+      "use": "SEAL_PERM_M2 fast end: clay-rich sediment at log k = -15.77 (m2), regional scale",
+      "values_used": {
+        "clay_log_k": -15.77
+      },
+      "access": "full text read by the helper"
+    },
+    {
+      "key": "clifford1993_megaregolith",
+      "citation": "Clifford SM 1993, A model for the hydrologic and climatic behavior of water on Mars, Journal of Geophysical Research 98(E6), 10,973-11,016",
+      "doi_or_url": "https://www.lpi.usra.edu/meetings/earlymars2012/reprintLibrary/Clifford_1993.pdf",
+      "use": "PORE_BOTTOM_M: the lunar megaregolith's pores close near 20 km, above about 1 kbar",
+      "values_used": {
+        "closure_km": 20
+      },
+      "access": "full text read by the helper (OCR)"
+    },
+    {
+      "key": "moeck2020_recharge",
+      "citation": "Moeck C, Grech-Cumbo N, Podgorski J, Bretzler A, Gurdak JJ, Berg M, Schirmer M 2020, A global-scale dataset of direct natural groundwater recharge rates: a review of variables, processes and relationships, Science of the Total Environment 717, 137042",
+      "doi_or_url": "https://doi.org/10.1016/j.scitotenv.2020.137042",
+      "use": "RECHARGE_SHARE: recharge is on average 0.17 of rain (quartiles 0.01 and 0.27)",
+      "values_used": {
+        "mean_share": 0.17
+      },
+      "access": "full text read by the helper"
+    },
+    {
+      "key": "scanlon2006_arid_recharge",
+      "citation": "Scanlon BR, Keese KE, Flint AL, Flint LE, Gaye CB, Edmunds WM, Simmers I 2006, Global synthesis of groundwater recharge in semiarid and arid regions, Hydrological Processes 20(15), 3335-3370",
+      "doi_or_url": "https://doi.org/10.1002/hyp.6335",
+      "use": "ARID_RECHARGE_SHARE: semi-arid and arid land recharges 0.1-5% of its rain",
+      "values_used": {
+        "share": [
+          0.001,
+          0.05
+        ]
+      },
+      "access": "abstract read by the helper"
+    },
+    {
+      "key": "shadab2025_infiltration",
+      "citation": "Shadab MA, Hiatt E, Bahia RS, Bohacek EV, Steinmann V, Hesse MA 2025, Infiltration dynamics on early Mars: geomorphic, climatic, and water storage implications, Geophysical Research Letters 52, e2024GL111939",
+      "doi_or_url": "https://doi.org/10.1029/2024GL111939",
+      "use": "README comparison: ponded, gravity-driven Green-Ampt infiltration into a dry Martian crust reaches a water table 2-5 km down in 50-200 years; the same formulation as here",
+      "values_used": {
+        "years_to_2_5_km": [
+          50,
+          200
+        ]
+      },
+      "access": "full text read by the helper (sections 2-4)"
+    },
+    {
+      "key": "hansson2004_frozen_soil",
+      "citation": "Hansson K, Simunek J, Mizoguchi M, Lundin L-C, van Genuchten MT 2004, Water flow and heat transport in frozen soil: numerical solution and freeze-thaw applications, Vadose Zone Journal 3",
+      "doi_or_url": "https://doi.org/10.2136/vzj2004.0693",
+      "use": "the stopping rule: ice in pores cuts conductivity by orders of magnitude (an impedance factor 10^(-omega q) on the ice content), so water stops where the rock is below freezing",
+      "values_used": {},
+      "access": "search summaries read 2026-10-13; not reread"
+    },
+    {
+      "key": "fan2013_water_table",
+      "citation": "Fan Y, Li H, Miguez-Macho G 2013, Global patterns of groundwater table depth, Science 339(6122), 940-943",
+      "doi_or_url": "https://doi.org/10.1126/science.1229881",
+      "use": "README: on Earth shallow groundwater shapes 22-32% of the land, the water table's next stage here",
+      "values_used": {
+        "share_of_land": [
+          0.22,
+          0.32
+        ]
+      },
+      "access": "abstract read by the helper"
+    }
+  ]
+}

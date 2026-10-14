@@ -217,8 +217,11 @@ atlas building down to districts, in which the young-Moon landforms to keep are 
 at the author's word: deltas move the shorelines first, covering 6.5% of the lake area within 10,000 years at the
 central rate and adding 104,000 km² of land at the common-level waters. The author keeps water delivery going to
 balance what the crust takes up, and wants groundwater modelled: the crust's uptake through time, the water table
-with its springs, baseflow and lake seepage, then the springs' load. Its preparation runs now; the model starts on
-the author's word.
+with its springs, baseflow and lake seepage, then the springs' load. Its first stage followed: the cold airless crust
+thaws from above in centuries at the equator and tens of thousands of years near the poles, and once thawed takes
+water fast, 1.8 times the seas' water within 10,000 years at the central values (0.7–3 across the cases), so holding
+the seas takes a top-up of thousands of cubic kilometres a year through the first millennia. The water table and the
+springs' load follow on the author's word.
 
 Waiting on the author: the array's power distribution recommendation (domain synthesis), and the taxonomy, on hold
 for later, with its open choices and the aerophytes' scientific name.
