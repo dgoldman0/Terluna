@@ -2,137 +2,109 @@
 
 14 October 2026 · `research/array-industry` · baseline commit `e1196f5`
 
-**The original roughly 200-fold mass discrepancy belongs to the tested
-straight-edge structure and hardware assumptions. It is not a bound on all
-known materials or all sail architectures.** This broader comparison finds
-that material substitutions improve that structure by a few times. Changing
-the support geometry produces much larger component savings, but none of the
-tested cases establishes a complete tile within the current mass, optical and
-clearance requirements.
+**The roughly 200-fold excess of the straight-edge tile comes from its structure and hardware assumptions, and a change
+of support geometry moves it far more than a change of material.** Material substitutions lighten that structure a few
+times. Curved cable edges on booms and a hub, smaller units and spinning membranes save much more component mass, at
+costs in coverage, clearance and inventory, and none of the tested cases closes a complete tile within the current mass,
+optical and clearance requirements.
 
-The [result](results/support_comparison.json) contains twelve whole-tile
-material substitutions, two additional load-envelope cases, thirty-two
-support cases and ten spinning-membrane diagnostics. The
-[material catalogue](support_materials.json) distinguishes measured properties,
-assumed engineering reductions, scalar proxies and experimental fibers. The
-[architecture source register](support_sources.json) distinguishes flight
-demonstrations, ground experiments and proposed designs. No prior flight,
-glow or tile product is overwritten.
+The [result](results/support_comparison.json) holds twelve whole-tile material substitutions, two further load
+envelopes, thirty-two support cases and ten spinning-membrane diagnostics. The
+[material catalogue](support_materials.json) keeps measured properties, assumed engineering reductions, scalar
+proxies and experimental fibres apart, and the [architecture source register](support_sources.json) keeps flight
+demonstrations, ground experiments and proposed designs apart. The flight, glow and tile products are unchanged.
 
 ## Material substitution in the same tile
 
-These cases retain the original 10 km square, 100 m frame depth, 5 m edge-bow
-allowance, load envelope and electrical assumptions. Each re-sizes the
-momentum store and its supply against the new assembled inertia. This is the
-prior **whole-tile accounting model**, with its original unresolved local
-buckling, equipment attachments and flexible-control limitations.
+These cases keep the original 10 km square, the 100 m frame depth, the 5 m allowance of edge bow, the load envelope and
+the electrical assumptions, and each resizes the momentum store and its supply against the new assembled inertia. This
+is the prior **whole-tile accounting model**, with its local buckling, equipment attachments and flexible control
+still open.
 
 | Frame material scenario | Modulus used, GPa | Density, kg/m³ | Annulus whole-tile mass, kg/m² |
 |---|---:|---:|---:|
 | Original generic composite assumption | 100 | 1,600 | 2.684 |
-| 6061-T6 aluminum | 68.3 | 2,700 | 6.603 |
+| 6061-T6 aluminium | 68.3 | 2,700 | 6.603 |
 | AS4/8552 UD carbon/epoxy | 128 | 1,580 | 2.074 |
 | M55J/#2500 UD carbon/epoxy proxy | 274 | 1,666 | 1.031 |
 | S-200-FH beryllium | 290 | 1,850 | 1.081 |
 | Grade F silicon carbide sensitivity | 430 | 3,200 | 1.263 |
 
-The inherited annulus allowance is **0.013765 kg/m²**. The lightest tested
-substitution remains about **75 times** that allowance. The window material
-cases are also retained in the product; its bare optical film already weighs
-26.921 g/m² against a complete-tile allowance of 26 g/m².
+The annulus allowance is **0.013765 kg/m²**, and the lightest substitution stays about **75 times** above it. The
+product also holds the window's material cases; the window's bare optical stack alone weighs 26.921 g/m² against its
+complete-tile allowance of 26 g/m².
 
-The original frame is largely stiffness-controlled. The selected materials
-provide at most 2.63 times its assumed modulus per unit density. That is a
-different limitation from tensile strength. The M55J case uses the composite's
-274 GPa flexural modulus as a scalar frame proxy and an inferred composite
-density. Its bare fiber's 540 GPa modulus is not assigned to an isotropic
-compression frame. AS4 uses the measured 128 GPa longitudinal compression
-modulus. [Toray M55J data](https://www.toraycma.com/wp-content/uploads/M55J-Data-Sheet.pdf),
-[Hexcel 8552 data](https://www.hexcel.com/wp-content/uploads/2025/12/HexPly_8552_eu_DataSheet1.pdf).
+Stiffness sets the original frame, and the selected materials give at most 2.63 times its assumed modulus per unit
+density, a limit of a different kind from tensile strength. The M55J case takes the composite's 274 GPa flexural
+modulus as a scalar proxy for the frame, with an inferred composite density; the bare fibre's 540 GPa belongs to
+tension members. AS4 takes its measured longitudinal compression modulus of 128 GPa
+([Toray M55J data](https://www.toraycma.com/wp-content/uploads/M55J-Data-Sheet.pdf),
+[Hexcel 8552 data](https://www.hexcel.com/wp-content/uploads/2025/12/HexPly_8552_eu_DataSheet1.pdf)).
 
-The SiC stress cap is a declared sensitivity: a flexural strength is not a
-qualified tensile allowable. Ceramic flaws, composite hoop plies, shell
-buckling, joints and long-term damage can reduce installed performance. None
-of these catalogued values qualifies fifteen years of service near 175 K.
-[3M SiC data](https://multimedia.3m.com/mws/media/993481O/3m-silicon-carbide-materials-properties.pdf).
+The silicon carbide's stress cap is a declared sensitivity drawn from a flexural strength. Ceramic flaws, composite
+hoop plies, shell buckling, joints and long-term damage lower installed performance, and fifteen years of service near
+175 K lies beyond every catalogued value
+([3M SiC data](https://multimedia.3m.com/mws/media/993481O/3m-silicon-carbide-materials-properties.pdf)).
 
-## Resolve the load before attributing savings to materials
+## The load, resolved
 
-The earlier transverse-load screen used the norm of angular acceleration and
-angular speed. For a flat sheet, the actual normal rigid acceleration has
-coefficients
+The tile study's transverse-load screen took the norms of the angular acceleration and speed. On a flat sheet the
+normal rigid acceleration is linear in position, with coefficients
 
 \[
 c_x=-\alpha_y+\omega_z\omega_x-3n^2u_zu_x,\qquad
-c_y=\alpha_x+\omega_z\omega_y-3n^2u_zu_y.
+c_y=\alpha_x+\omega_z\omega_y-3n^2u_zu_y,
 \]
 
-Here `u` is the lunar radial unit vector in the commanded frame. The square
-maximum is `L (|cx|+|cy|)/2`, maximized over time. The last terms subtract
-lunar differential gravity. Pure rotation about the sheet normal contributes
-in-plane stress, rather than the earlier norm's transverse centrifugal term.
+where `u` is the lunar radial unit vector in the commanded frame and the last terms subtract the Moon's differential
+gravity. Its largest value on the square is `L (|cx|+|cy|)/2`, maximized over time. Pure rotation about the sheet's
+normal stresses it in its own plane, with no transverse term.
 
-On the ideal circular 80° roll command, this resolves the 10 km envelope from
-1.891×10⁻⁴ to **7.913×10⁻⁵ m/s²**. Holding the material fixed, the old whole-tile
-ledger falls to **1.459 kg/m²**. Combining the resolved load and the M55J
-proxy gives **0.566 kg/m²**, still about **41 times** the allocation. These
-are separately recorded model and material changes.
+On the ideal circular 80° roll command this brings the 10 km envelope from 1.891×10⁻⁴ to **7.913×10⁻⁵ m/s²**. With the
+material unchanged the whole-tile ledger falls to **1.459 kg/m²**, and with the M55J proxy as well to **0.566 kg/m²**,
+still about **41 times** the allocation; the product records the two changes separately.
 
-The calculation retains full unrelieved solar pressure. Uniform illumination
-can partly accelerate a freely flying sail instead of bending it; the residual
-requires the actual mass distribution and force balance. The factor of two
-on static loading is a selected screen, not a general bound on resonant
-forcing. The new boom cases additionally use the exact spatial maximum of the linear rigid-body/gravity
-normal-acceleration field over a finite enclosing box, evaluated at sampled
-command times and including the normal tidal term. In-plane dynamic loads and full flexible equilibrium remain
-open.
+The calculation keeps the full solar pressure on the sheet, although uniform light partly accelerates a free sail
+instead of bending it (the part that bends it needs the actual mass distribution and force balance), and the factor of
+two on static loading is a chosen screen for a single step. The boom cases also take the exact largest normal
+acceleration of the linear rigid-body and gravity field over a finite enclosing box, at the sampled command times and
+with the normal tidal term. In-plane dynamic loads and the full flexible equilibrium are open.
 
 ## Cable edges with finite supports
 
-A tension-only net cannot hold its own aperture open in static free flight.
-The new model uses four inward-curved cable edges, four compression booms and
-a finite square hub. For prescribed isotropic membrane tension `T`, circular
-edge radius `R` needs cable force `T R`. All booms, hub members, braces, posts
-and a 20% joint allowance carry mass. The member screen includes compression,
-local Euler buckling, global cantilever buckling, web shear compliance, axial
-shortening, finite transverse stiffness and iterated own-mass loading. Tube
-shell buckling and the assembled hub's restraint are still unvalidated.
+A net of tension members alone holds no aperture open in free flight, so the model reacts four inward-curved cable
+edges against four compression booms and a finite square hub. Under a prescribed isotropic membrane tension `T`, an
+edge of radius `R` carries a cable force `T R`. Booms, hub members, braces, posts and a 20% allowance for joints all
+carry mass, and the members are sized for compression, local Euler buckling, global cantilever buckling, web shear
+compliance, axial shortening, finite transverse stiffness and their own iterated mass. Tube shell buckling and the
+assembled hub's restraint are open.
 
-At the **same 9.316 N/m prestress**, the original straight perimeter weighs
-149.95 million kg. With the same generic material and 500 m edge retreat,
-the curved-edge support weighs **5.70 million kg**. Using the M55J proxy for
-compression and Kevlar yarn for tension brings that support to **2.59 million
-kg**. These are support-only, in-plane calculations. The new and old member
-models have different completeness, so the ratio is not a controlled proof
-of a universally achievable architectural gain.
+At the **same 9.316 N/m of prestress** the straight perimeter weighs 149.95 million kg; the curved-edge support with
+the same generic material and a 500 m edge retreat weighs **5.70 million kg**, and with the M55J proxy in compression
+and Kevlar yarn in tension **2.59 million kg**. These are in-plane support masses from member models of different
+completeness, so their ratio indicates the gain of the geometry, which one member model would measure.
 
-Real tensile fibers are compared in their appropriate role: M55J fiber,
-S-2 glass, Kevlar 49 and Spectra S-1000, with the generic reference retained.
-At the same M55J-boom geometry, all tested cable choices give support masses
-between **2.57 and 2.61 million kg**. The compression structure and its minimum
-member sections dominate this case; a stronger cable alone changes little.
-The measured CNT and graphene fibers are included only as experimental
-tension sensitivities, with their millimetre-scale test gauges and assumed
-stress reductions exposed. They supply no compression-frame qualification.
-[CNT experiment](https://www.nature.com/articles/s41467-026-75150-1),
-[graphene-fiber experiment](https://www.nature.com/articles/s41467-024-44692-7).
+Real tensile fibres take the tension members: M55J fibre, S-2 glass, Kevlar 49 and Spectra S-1000, with the generic
+reference beside them. On the same M55J booms every cable gives a support of **2.57–2.61 million kg**: the compression
+structure and its minimum member sections set this case, and a stronger cable changes little. The measured carbon
+nanotube and graphene fibres enter as experimental tension sensitivities, with their millimetre-scale test gauges and
+assumed stress reductions stated; they bear on tension members only
+([carbon nanotube experiment](https://www.nature.com/articles/s41467-026-75150-1),
+[graphene-fibre experiment](https://www.nature.com/articles/s41467-024-44692-7)).
 
 ### Coverage and commanded-load subtotal
 
-The scallops remove real film area. The model charges the actual retained
-film, substrate and trim mass and integrates their area moments. A central
-square inside the loaded membrane contains a uniformly scaled copy of the
-old 8,900×9,890 m active rectangle. Both old pitches scale by the same factor;
-the inventory required by this construction scales inversely with its square. This is a
-sufficient planar construction, not a new ray trace or orbit solution.
+The scallops remove film area. The model charges the film, substrate and trim mass actually retained and integrates
+their area moments. A central square inside the loaded membrane holds a uniformly scaled copy of the old
+8,900 × 9,890 m active rectangle, both pitches scale by the same factor, and the inventory this construction needs
+scales inversely with that factor's square: a sufficient planar construction, ahead of a new ray trace and orbit
+solution.
 
-The following cases use the resolved command load, M55J compression members,
-Kevlar tension members and a scaled sag/displacement allowance. They charge
-the full prescribed membrane normal resultant through the four boom tips
-and the supports' own normal inertial loads. They are **sheet-plus-support
-subtotals**. The denominator is a reference gross square metre: mass multiplied
-by the inventory required by this construction relative to the old 10 km square. It permits
-comparison with the 13.765 g/m² allocation while charging lost useful area.
+The cases below take the resolved command load, M55J compression members, Kevlar tension members and a sag and
+displacement allowance scaled with the side. They carry the full prescribed normal resultant of the membrane through
+the four boom tips, with the supports' own normal inertial loads, and give **sheet-plus-support subtotals** per
+reference gross square metre: the mass times the inventory this construction needs, over the area of the old 10 km
+squares. That compares directly with the 13.765 g/m² allocation and charges the lost useful area.
 
 | Side | Edge retreat | Boom depth | Subtotal, g/reference m² | Inventory multiplier | Nominal support clearance |
 |---|---:|---:|---:|---:|---:|
@@ -142,45 +114,33 @@ comparison with the 13.765 g/m² allocation while charging lost useful area.
 | 3 km | 150 m | 30 m | 23.15 | 13.417 | 29.5 m |
 | 1 km | 50 m | 5 m | 19.48 | 120.756 | 14.8 m |
 
-The inherited clearance gate is **150 m**, unchanged. The 10 km, 50 m-deep
-case already misses it by about 1.5 m before rotors, sag, deformation reserves
-and swept-component checks. Counting only the distance between chord
-centrelines would incorrectly suggest a pass; finite tube radii consume
-another four metres across the pair of surfaces. Deepening the structure saves mass but consumes
-clearance. Smaller units require a new formation; a scaled 15 m gate would be
-a new precision requirement, not a pass of the existing gate.
+The clearance gate stays at **150 m**. The 10 km case 50 m deep misses it by about 1.5 m before rotors, sag, deformation
+reserves and swept components; measured between chord centre lines it would pass, and the finite tube radii take
+another four metres across the two surfaces. Deeper structure saves mass and spends clearance. Smaller units need a
+formation of their own, whose scaled gate (15 m for the 1 km units) is a new precision requirement.
 
-The 1 km case needs about **3.41 billion units** in this area-normalized
-inventory. If every unit retains the old 10 kW housekeeping and 5,000 kg
-avionics assumptions, those alone imply **34.1 TW and 17.0 Gt**. At the same
-15-year planned life and 1% yearly fault rate, they require about **261 million
-exchanges per year**. These are consequences of the specified per-unit
-overheads and lifetimes, not predictions for a redesigned bus or production
-system. Independent cells have independent control; dividing a mathematical
-membrane into cells does not create free supports or a shared controller.
+The 1 km case needs about **3.41 billion units** in this area-normalized inventory. With the tile's 10 kW of
+housekeeping and 5,000 kg of avionics on every unit, those alone come to **34.1 TW and 17.0 Gt**, and the same 15-year
+life and 1% yearly faults ask for about **261 million exchanges a year**: the consequence of those per-unit overheads
+and lifetimes, which a bus and production system designed for small units would change. Independent cells have their
+own supports and control; dividing one membrane into cells on paper gives it neither.
 
-Even the smallest subtotal exceeds the complete-tile allowance, before adding
-power, rotors, avionics and assembly reserve. Equipment reactions also matter:
-in the 10 km, 500 m-retreat, 100 m-depth case, imposing 100 N and 1 MN·m at
-each boom tip raises the subtotal from 32.73 to **48.19 g/reference m²**;
-1,000 N and 10 MN·m raise it to **251.50 g/reference m²**. These are explicit
-load sensitivities, with no claim that the omitted hardware has been sized.
+The smallest subtotal is above the complete-tile allowance before power, rotors, avionics and assembly reserve.
+Equipment reactions weigh as well: in the 10 km case with a 500 m retreat and 100 m depth, 100 N and 1 MN·m at each
+boom tip raise the subtotal from 32.73 to **48.19 g/reference m²**, and 1,000 N and 10 MN·m to
+**251.50 g/reference m²**, load sensitivities for hardware still to size.
 
-The membrane sag calculation assumes a fixed normal boundary. A curved cable
-does not supply that boundary automatically. Its normal deflection, loaded
-cut pattern, attachments, substrate/optical-film compatibility and complete
-spacecraft dynamics still need solving. The support-obscuration output is an
-upper bound from enclosing strips; opaque hardware reduces transmitted light
-and is not automatically an unfiltered UV opening.
+The sag calculation takes the membrane's normal boundary as fixed, which a curved cable supplies only once its normal
+deflection, loaded cut pattern, attachments, the substrate's compatibility with the optical film and the whole
+spacecraft's dynamics are solved. The support's obscuration is an upper bound from enclosing strips; opaque hardware
+blocks the light it covers, the ultraviolet included.
 
 ## Spinning membranes
 
-The diagnostic disk has 5 km radius, full film area and independently
-distributed rim ballast. Its edge prestress has an explicit inertial reaction:
-`Tedge = Mrim * axial_spin² / (2π)`. The calculation includes centrifugal
-membrane tension, concurrent static sag and stress, and the additional normal
-loads and angular momentum associated with precessing the spin axis. Actual
-axial spin is the added spin plus the command frame's normal component.
+The diagnostic disc is 5 km in radius, with full film area and rim ballast distributed on its own. Its edge prestress
+has an explicit inertial reaction: `Tedge = Mrim * axial_spin² / (2π)`. The calculation includes the centrifugal
+membrane tension, the concurrent static sag and stress, and the normal loads and angular momentum of precessing the spin
+axis; the axial spin is the added spin plus the command frame's normal component.
 
 | Case | Added spin, rad/s | Film-plus-ballast subtotal, g/reference m² | Substrate stress / assumed cap |
 |---|---:|---:|---:|
@@ -189,64 +149,52 @@ axial spin is the added spin plus the command frame's normal component.
 | Actual rolling command | 0.003 | 1,070.51 | 1.374 |
 | Actual rolling command | 0.010 | 325.52 | 4.564 |
 
-The quiet benchmark is not the commanded lunar orbit. At 0.001 rad/s, the
-rolling case requires about **566 MN·m** to redirect its spin angular momentum;
-the full rigid non-gravitational torque diagnostic is about 559 MN·m. Increasing
-spin lowers required ballast but raises membrane stress. The tested faster
-cases exceed the assumed substrate stress cap. Stronger or thicker substrates
-would need a new mass/load iteration and optical assessment. Even assigning
-every incident solar photon twice its momentum at the full 5 km lever arm
-gives only **3.57 MN·m**. The 0.001 rad/s rolling case requires about 157 times
-that generous direct-photon torque bound. It needs counter-momentum hardware,
-assisted external torque or a substantially changed normal history; their
-complete hardware masses have not been supplied.
+The fixed-normal benchmark carries the sunlight's pressure alone; the commanded lunar orbit adds the roll. At
+0.001 rad/s the rolling disc needs about **566 MN·m** to redirect its spin angular momentum, against about 559 MN·m from
+the full rigid non-gravitational torque diagnostic. Faster spin lowers the ballast and raises the membrane stress, and
+the faster cases tested exceed the assumed substrate stress cap; stronger or thicker substrates would take a new
+iteration of mass and load and a new optical assessment. Every incident solar photon given twice its momentum at the
+full 5 km lever arm makes **3.57 MN·m**, so the 0.001 rad/s rolling case needs about 157 times that bound:
+counter-momentum hardware, external torque or a much quieter normal history, whose hardware masses are still to size.
 
-These numbers already charge **1.585 times** the original count. A 5 km-radius
-disk leaves holes on the old rectangular grid; that grid needs a radius of at
-least 6.295 km, or correspondingly reduced pitches. These are planar coverage
-conditions. The homogenized trim distribution, planar rim under rolling loads,
-spin-flexible dynamics, ballast attachments, controller, power and collision
-geometry remain unresolved. Counter-rotation can reduce net angular momentum,
-but each surface still needs support, control and clearance.
+These numbers already charge **1.585 times** the original count: a disc 5 km in radius leaves holes in the old
+rectangular grid, which needs a radius of at least 6.295 km or correspondingly smaller pitches (planar coverage
+conditions). The homogenized trim, the planar rim under rolling loads, spin-flexible dynamics, ballast attachments, the
+controller, power and the collision geometry are open. Counter-rotation lowers the net angular momentum, and each
+surface still needs its own support, control and clearance.
 
-Spin support itself has flight evidence: IKAROS deployed a roughly 14 m square
-membrane centrifugally and demonstrated a reflectivity-control experiment.
-Its ordinary attitude operations used thrusters. That supports the physical
-principle, not the present scale or roll schedule.
-[JAXA mission](https://www.isas.jaxa.jp/en/missions/spacecraft/past/ikaros.html),
-[JAXA attitude experiment](https://www.jaxa.jp/press/2010/07/20100723_ikaros_e.html).
+Spin support has flight evidence. IKAROS deployed a membrane about 14 m square by spinning and controlled its attitude
+in an experiment with liquid-crystal reflectivity, while its ordinary attitude operations used thrusters: the physical
+principle at 14 m, on a schedule far quieter than the roll
+([JAXA mission](https://www.isas.jaxa.jp/en/missions/spacecraft/past/ikaros.html),
+[JAXA attitude experiment](https://www.jaxa.jp/press/2010/07/20100723_ikaros_e.html)).
 
 ## Architecture assessment and next comparison
 
-| Architecture | What this work establishes | Main unresolved requirement |
+| Architecture | What this work finds | Main open requirement |
 |---|---|---|
 | Straight rigid perimeter | Material substitution and load resolution leave a large mass excess | A different span, shape or load path |
 | Curved cable edge with booms/hub | Much lighter conditional support components; coverage and depth costs quantified | Flexible boundary, equipment reactions and complete control/power ledger |
-| Smaller independent sails | Lower support span and explicit inventory/overhead penalties | A new safe formation and much smaller per-unit bus/service costs |
-| Spinning filled membrane | Finite ballast, stress and precession trade, with planar coverage penalty | Rolling shape and controller closure, or a different normal history |
-| Striped net with booms | Existing ground-test architecture has finite external reactions | Full equivalent optical/support design, not a massless net |
-| Heliogyro blades | Credible solar-propulsion research direction | Its swept disk is not instantaneous filled-area shielding |
+| Smaller independent sails | Lower support span, with explicit inventory and overhead penalties | A new safe formation and much smaller per-unit bus and service costs |
+| Spinning filled membrane | Finite ballast, stress and precession trade, with a planar coverage penalty | Rolling shape and controller closure, or a different normal history |
+| Striped net with booms | Existing ground-test architecture with finite external reactions | A full equivalent optical and support design |
+| Heliogyro blades | Credible solar-propulsion research direction | Its blades shield only the part of the swept disc they cover at each instant |
 
-NASA's ACS3 deployed an approximately 80 m² sail; Solar Cruiser demonstrated
-a ground deployment of one quadrant of its approximately 1,652 m² design.
-These are relevant steps in boom deployment, far from a 10 km optical sheet.
-The L'Garde striped-net test retained four booms. CABLESSail studies actuated
-cables on booms to change shape and manage momentum; that deformation would
-also require a fresh filtering and coverage calculation here.
-[ACS3 deployment](https://www.nasa.gov/blogs/smallsatellites/2024/08/29/nasa-composite-booms-deploy-mission-sets-sail-in-space/),
+NASA's ACS3 deployed a sail of about 80 m², and Solar Cruiser deployed one quadrant of its design of about 1,652 m² on
+the ground: steps in boom deployment, far from a 10 km optical sheet. The L'Garde striped-net test kept four booms.
+CABLESSail actuates cables along the booms to change the sail's shape and manage momentum; here that deformation would
+need its own filtering and coverage calculation
+([ACS3 deployment](https://www.nasa.gov/blogs/smallsatellites/2024/08/29/nasa-composite-booms-deploy-mission-sets-sail-in-space/),
 [Solar Cruiser test](https://www.nasa.gov/centers-and-facilities/marshall/nasa-solar-sail-technology-passes-crucial-deployment-test/),
 [striped-net experiment](https://ntrs.nasa.gov/citations/20080015847),
-[CABLESSail preprint](https://arxiv.org/abs/2512.13493v2).
+[CABLESSail preprint](https://arxiv.org/abs/2512.13493v2)).
 
-The next useful engineering step is a coupled flexible cable/boom tile and
-coverage model, with the commanded normal history allowed to change. Compare
-10 km and intermediate spans with real bus placements, photon control,
-periodic momentum unloading, deformation-dependent optics and a replacement
-route. A second track can test a much quieter spin-normal history against the
-glow requirement. The source review does not identify a missing extraordinary
-material that alone rescues the current straight-edge layout. It identifies
-support geometry, normal-motion requirements and the mass/clearance trade as
-the more consequential design choices. No architecture is adopted here.
+The next engineering step is a coupled flexible model of a cable-and-boom tile and its coverage, with the commanded
+normal history free to change, comparing 10 km and intermediate spans with real bus placements, photon control,
+periodic unloading of momentum, optics that follow the deformation and a replacement route. A second track can test a
+much quieter history of the spin normal against the glow requirement. The source review finds the support geometry,
+the motion of the normal and the trade of mass against clearance more consequential than any single material for the
+straight-edge layout. The choice of architecture is the author's.
 
 ## Reproduction and evidence
 
@@ -256,17 +204,14 @@ python -m pytest engineering/test_array_support.py engineering/test_array_spin.p
 make check
 ```
 
-The recorded producer run used one numerical thread, about 2.4 seconds and a
-770 MiB process high-water memory reading. It records all producer and input
-hashes and the shared constants used. The square normal-load peak changes by
-0.0253% from 2,881 to 5,761 samples; cases use 2,881 samples. Numerical tests
-include direct cross-product and spherical-gravity comparisons, member load
-and inertia checks, retained-area quadrature refinement, actual-spin limits,
-static stress/sag identities, coverage normalization and baseline preservation.
-**All 81 focused tests passed.** The final `make check` passed with **2,134
-Python tests passed, 16 skipped**, and **191 JavaScript tests passed**. The
-layer check covered 969 files with zero violations; provenance/protection
-verification and ensemble integrity passed.
-[support_checks.json](support_checks.json) records the exact snapshot and commands.
-Physical qualification, a full scholarly-source review, flexible dynamic
-simulation and a new fleet propagation have not been performed.
+The producer runs on one numerical thread in about 2.3 seconds with a 91 MiB high-water mark; it was regenerated on
+14 October 2026 after the source check corrected the wording of its registers (the first run, inside a larger process,
+read 2.4 seconds and 770 MiB). It records every producer and input hash and the shared constants used. The square's
+normal-load peak changes by 0.0253% from 2,881 to 5,761 samples, and the cases use 2,881. The tests cover direct
+cross-product and spherical-gravity comparisons, member loads and inertia, refinement of the retained-area quadrature,
+the limits of actual spin, static stress and sag identities, coverage normalization and the preserved baseline; **all
+81 focused tests passed**. The final `make check` passed with **2,134 Python tests passed and 16 skipped**, and **191
+JavaScript tests passed**; the layer check covered 969 files with no violations, and provenance and protection
+verification and ensemble integrity passed. [support_checks.json](support_checks.json) records the exact snapshot and
+commands of that check. Physical qualification, a full reading of the sources, a flexible dynamic simulation and a new
+fleet propagation are later steps.

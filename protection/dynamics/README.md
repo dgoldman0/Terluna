@@ -33,13 +33,14 @@ exhaust paths and Earth-safe outgoing rays still to supply.
 
 ## Local failed-tile response
 
-[tile_failure.py](tile_failure.py) adds circular-orbit HCW fault dynamics with
-finite parallel tile envelopes, continuous clearance/contact events and capped
-independent backup acceleration. Physical claims stop at contact; returning
-a tile to its slot does not repair its filter. The
+[tile_failure.py](tile_failure.py) follows a failed tile in the
+Hill–Clohessy–Wiltshire equations of a circular orbit, with finite parallel
+tile envelopes, continuous clearance and contact events and a capped
+independent backup acceleration. The physical account ends at first contact,
+and a tile returned to its slot keeps its failed filter. The
 [tile study](../../research/studies/solar_shield_array/tile_design.md) records
-response windows and conditional replacement queues. This is a local
-disturbance test, not a propagation of the eccentric ring fleet.
+the response windows and the replacement queues: a local disturbance test
+around one slot of the eccentric ring fleet.
 
 ## Cycling membrane experiment
 

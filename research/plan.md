@@ -239,6 +239,9 @@ synthesis ranks two items first from the three domains together; they lead this 
    leaves 6.0 W/m² on the layout re-flown for its push (13 October), answered by 2.7% added dimming, keeps the deep
    night dark and takes a momentum store 5–12 times the chosen one. Its light on the night's edge is under 1% of the
    twilight there, and a tilt through the nodes breaks the clearance. The roll's own out-of-plane forces come next.
+   The tile, support and flexible work of 14 October and its
+   [constraints review](studies/solar_shield_array/constraints_review.md) put the binding limits on the tiles' areal
+   mass and the edge rings' photon steering; the review's recommendations wait for the author.
 4. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
    storm needs CM1's field solver over terrain, which touches the paused climate programme and waits for the author.

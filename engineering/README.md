@@ -6,30 +6,31 @@ The route model is Sun-only and circular/coplanar. Electric propulsion includes 
 
 ## Array tile hardware and service
 
-[array_flexible.py](array_flexible.py) adds a prescribed-prestress membrane,
-curved-edge cable and finite-support normal-mode model. It exports mass,
-geometry and modal data for the [coupled flexible study](../research/studies/solar_shield_array/flexible_coupling.md).
-Analytic sag/frequency and conservation checks verify the declared reduced
-model. Effective hub compliance, endpoint-lumped support inertia, wrinkling,
-attachments and material life remain physical-model limitations.
-
-[array_tile.py](array_tile.py) sizes a conditional membrane, finite perimeter
-truss, three-axis rotor store, optical trim and electrical supply.
+[array_tile.py](array_tile.py) sizes a membrane, a finite perimeter truss, a
+three-axis rotor store, optical trim and the electrical supply;
 [array_momentum.py](array_momentum.py) conserves angular momentum through a
-prescribed attitude and assembled inertia. [array_service.py](array_service.py)
-counts renewal, faults and finite replacement queues. The
-[tile study](../research/studies/solar_shield_array/tile_design.md) couples them:
-the tested 10 km rigid-edge design exceeds its mass allocation; numerical
-sizing convergence is not flexible-control or hardware validation.
+prescribed attitude and the assembled inertia; and
+[array_service.py](array_service.py) counts renewal, faults and finite
+replacement queues. The [tile study](../research/studies/solar_shield_array/tile_design.md)
+couples them: the 10 km rigid-edge tile weighs about 200 times its mass
+allocation, from converged rigid sizing ahead of flexible control and hardware.
 
-[array_support.py](array_support.py) supplies finite curved-edge cable, radial
-boom and hub screens, retained-sheet inertia and resolved normal-load envelopes.
-[array_spin.py](array_spin.py) screens ballasted spinning membranes, prestress,
-rigid torque and planar disk coverage. The
+[array_support.py](array_support.py) sizes curved-edge cables, radial booms and
+a finite hub, with the retained sheet's inertia and resolved normal-load
+envelopes, and [array_spin.py](array_spin.py) screens ballasted spinning
+membranes, their prestress, rigid torque and planar disc coverage. The
 [materials and architecture comparison](../research/studies/solar_shield_array/support_comparison.md)
-uses source-reviewed material scenarios and distinguishes whole-tile ledger
-substitutions from incomplete support and spin component accounts. No new
-architecture meets all mass, optical and clearance requirements.
+uses source-checked material scenarios and keeps whole-tile ledger
+substitutions apart from the support and spin component accounts; none of its
+architectures meets every mass, optical and clearance requirement.
+
+[array_flexible.py](array_flexible.py) builds a prescribed-prestress membrane
+with curved-edge cables and finite supports, and its normal modes, exporting
+mass, geometry and modes for the
+[coupled flexible study](../research/studies/solar_shield_array/flexible_coupling.md).
+Analytic sag, frequency and conservation checks verify the reduced model; the
+hub's compliance is an effective value, the support inertia is lumped at member
+endpoints, and wrinkling, attachments and material life lie outside it.
 
 ## Sourcing and conservation
 

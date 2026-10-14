@@ -249,23 +249,26 @@ lines put even less on it. Power delivered to the Moon ends as heat there,
 counted in the Open Moon's allocation, one of the three power ledgers the
 engineering domain keeps apart.
 
-## Hardware assessment added 14 October 2026
+## Hardware assessment of 14 October 2026
 
-The [tile design and service study](tile_design.md) now sizes an explicit
-perimeter-frame candidate against the rolled-law branch. It includes trim
-power, rotor storage, frame stiffness and their inertia feedback, then local
-fault response and population replacement queues. The rigid-edge 10 km
-candidate fails the current mass and local frame-clearance allowances;
-complete-tile hardware cannot yet be added to the 46 Gt optical inventory as
-a small correction.
+The [tile design and service study](tile_design.md) sizes an explicit
+perimeter-frame tile for the rolled law, with trim power, rotor storage, frame
+stiffness and the inertia they feed back, then the local fault response and
+the population's replacement queues. The rigid-edge 10 km tile fails the
+current mass and local clearance allowances, so a complete tile's hardware is
+a large term beside the 46 Gt optical inventory rather than a small correction.
+The [materials and support comparison](support_comparison.md), the
+[flexible screen](flexible_coupling.md) and the
+[constraints review](constraints_review.md) follow it.
 
-The momentum-store table below is a historical radial-facing comparison. Its
-1.9e9 N m s input is superseded as a hardware-sizing requirement: the roll
-changes the demand, and the earlier body-axis torque integral omitted momentum
-transport. The new study preserves those products as prior assumptions and
-uses a conserved calculation with actual assembled inertia. Next hardware
-work is a different load-path/shape architecture, then flexible control and
-independent failure containment before new orbit and industry claims.
+The momentum-store table below compares radial-facing schemes at the store the
+comparison chose, 1.9×10⁹ N·m·s. The roll changes that demand, and the attitude
+study's body-axis torque integral leaves out the transport of the stored
+momentum, so the tile study sizes its rotors with a conserved calculation on
+the assembled inertia and keeps the earlier products as its starting
+allocations. The next hardware work is a different load path and shape, then
+flexible control and independent failure containment, ahead of new orbit and
+industry results.
 
 ## The shield's own loads
 
