@@ -318,6 +318,41 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring_80n_lsw --hours 3 -
 climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_80n_lsw --from-day 29.5
 ```
 
+### The 45° rings on the design ground, with the curved air's light
+
+The two 45° rings above took their forcing from the run before the corrected design
+case, whose land at 45–60° evaporated about ten times as much as the design climate's,
+so their humid nights describe ground kept moist. Cases `ring_45n_lsw_twilight` and
+`ring_45s_lsw_twilight` run them again with what the setup now takes and with the
+curved air's light. Against `ring_45n_lsw` and `ring_45s_lsw` they differ in:
+
+- **the forcing**, the corrected design case `A28_dim5_moon`, years 20–29: seas of
+  22.7 °C at 45° N and 23.2 °C at 45° S, land ground at sea level 21.7 °C and 21.6 °C;
+- **the land's wetness**, the GCM's own on those rows: 0.012 at 45° N and 0.036 at
+  45° S, against 0.41 and 0.46;
+- **the water along the circles**, from the current geography product: 34% and 31%,
+  against 37% and 33%;
+- **the build**, `moon_omp_twilight` with `var20 = 1`. After RRTMG, every column takes
+  the curved air's sunlight by its own solar elevation, below the horizon too, and the
+  infrared the same geometry lets out, from `terluna_twilight.txt`, which the setup
+  writes from [../results/gcm/twilight.json](../results/gcm/twilight.json) in its full
+  form (the shells' widening as well as the curved light and escape; [the GCM's
+  account](../gcm/README.md#the-curved-airs-light)). Each shell's share heats or cools
+  the levels it overlaps, the infrared scaled with each level's temperature to the
+  fourth power; the ground takes its sunlight in the column's clear share and loses its
+  extra infrared from what reaches it. Shells above the model's 150 km are left out with
+  the air they stand for.
+
+The air, the sunlight, the grid and every other setting are the earlier rings'. In a
+two-hour test of each, the columns 2–10° past sunset gain 0.016–0.036 K a day of
+sunlight's heating, averaged over their levels, where RRTMG gives them none.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_twilight
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_lsw_twilight     # and ring_45s_lsw_twilight
+/media/projectspace/terluna-research/session-tools/twilight_rings.sh                 # both, 6 threads; rerun to resume
+```
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored

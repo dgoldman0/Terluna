@@ -867,6 +867,102 @@ def design_air():
                 sunlight_w_m2=progress['inputs']['flux_w_m2'], run=GCM_RUN)
 
 
+# The curved air's light (climate/gcm/twilight.py): RRTMG lights a column only while its Sun is up and lets each
+# column's infrared out through flat layers. With var20 = 1 the twilight build adds, after RRTMG, what the Moon's tall
+# curved air takes beyond a flat column of the same air, by each column's solar elevation (below the horizon too) from
+# terluna_twilight.txt: each shell's share of sunlight as heating of the levels it overlaps, and the ground's share to
+# the net shortwave at the ground in the column's clear share; and in every column at every hour, the infrared the same
+# geometry lets out beyond the flat column, each shell's at its design temperature scaled with the levels' own to the
+# fourth power, and the ground's taken from the infrared reaching it. Shells above the model's top are left out with
+# the air they stand for.
+TWILIGHT_TABLE = 'terluna_twilight.txt'
+TWILIGHT_MODES = ('curved', 'full')          # as climate/gcm/exoplasim_run.py: 'full' adds the shells' widening
+TWILIGHT_PATCH = ('radiation_driver.F', "Terluna: the curved air's twilight", [
+    ('  public :: radiation_driver\n',
+     '  public :: radiation_driver\n'
+     "  ! Terluna: the curved air's twilight table, read once from terluna_twilight.txt\n"
+     '  integer, save :: terluna_ntw = -1, terluna_nsh = 0\n'
+     '  real, save :: terluna_lwg = 0.0, terluna_tg = 1.0\n'
+     '  real, allocatable, save :: terluna_tel(:), terluna_tgr(:), terluna_tz(:), terluna_tsh(:,:), terluna_lw(:), terluna_tt(:)\n', 1),
+    ('      use input, only : var12,var16,var17,var18,var19   ! Terluna: the lunar day\n',
+     '      use input, only : var12,var16,var17,var18,var19,var20   ! Terluna: the lunar day, the twilight\n', 1),
+    ('      real :: terluna_lat,terluna_s   ! Terluna: tilted rings\n',
+     '      real :: terluna_lat,terluna_s   ! Terluna: tilted rings\n'
+     '      integer :: terluna_l,terluna_m,terluna_lo,terluna_hi   ! Terluna: the twilight\n'
+     '      real :: terluna_el,terluna_u,terluna_clear,terluna_e,terluna_f,terluna_ov\n'
+     '      real, allocatable :: terluna_s1(:)\n', 1),
+    ("                     xcoszen=coszen,yr=yr,julian=julian,mp_physics=mp_physics,co2out=co2out ) ! jararias 2013/08/14\n"
+     "\n            if( nstep.le.1 .and. myid.eq.0 ) print *,'  co2 = ',co2out\n",
+     "                     xcoszen=coszen,yr=yr,julian=julian,mp_physics=mp_physics,co2out=co2out ) ! jararias 2013/08/14\n"
+     "\n            if( nstep.le.1 .and. myid.eq.0 ) print *,'  co2 = ',co2out\n"
+     """
+            IF( var20.gt.0.5 )THEN
+              ! Terluna: the curved air's twilight. What the Moon's tall curved air adds to a flat column of the
+              ! same air (climate/gcm/twilight.py): by each column's solar elevation, below the horizon too, each
+              ! shell's share of sunlight as heating of the levels it overlaps and the ground's share in the column's
+              ! clear share; at every hour, each shell's extra infrared escape as cooling, scaled with the levels'
+              ! temperature (dum3) to the fourth power, and the ground's from the infrared reaching it. RRTMG's
+              ! tendencies are temperature tendencies here, converted below with them.
+              IF( terluna_ntw.lt.0 )THEN
+                open(unit=96,file='terluna_twilight.txt',status='old',action='read')
+                read(96,*) terluna_ntw,terluna_nsh
+                allocate( terluna_tel(terluna_ntw), terluna_tgr(terluna_ntw), terluna_tz(terluna_nsh+1),  &
+                          terluna_tsh(terluna_nsh,terluna_ntw), terluna_lw(terluna_nsh), terluna_tt(terluna_nsh) )
+                read(96,*) terluna_tz
+                do terluna_l=1,terluna_ntw
+                  read(96,*) terluna_tel(terluna_l),terluna_tgr(terluna_l),terluna_tsh(:,terluna_l)
+                enddo
+                read(96,*) terluna_lw,terluna_lwg
+                read(96,*) terluna_tt,terluna_tg
+                close(unit=96)
+                if( myid.eq.0 ) print *,'  twilight table: ',terluna_ntw,' elevations, ',terluna_nsh,' shells'
+              ENDIF
+              allocate( terluna_s1(terluna_nsh) )
+              do j=1,nj
+              do i=1,ni
+                terluna_el = asin( max(-1.0,min(1.0,coszen(i,j))) )*180.0/pi
+                terluna_s1(:) = 0.0
+                if( terluna_el.ge.terluna_tel(1) .and. terluna_el.le.terluna_tel(terluna_ntw) )then
+                  terluna_lo = 1
+                  terluna_hi = terluna_ntw
+                  do while( terluna_hi-terluna_lo.gt.1 )
+                    terluna_m = (terluna_lo+terluna_hi)/2
+                    if( terluna_tel(terluna_m).gt.terluna_el )then
+                      terluna_hi = terluna_m
+                    else
+                      terluna_lo = terluna_m
+                    endif
+                  enddo
+                  terluna_u = (terluna_el-terluna_tel(terluna_lo))/(terluna_tel(terluna_hi)-terluna_tel(terluna_lo))
+                  terluna_s1(:) = solcon*( (1.0-terluna_u)*terluna_tsh(:,terluna_lo) + terluna_u*terluna_tsh(:,terluna_hi) )
+                  terluna_clear = 1.0
+                  do k=1,nk
+                    terluna_clear = terluna_clear*(1.0-max(0.0,min(1.0,cldfra(i,j,k))))
+                  enddo
+                  gsw(i,j) = gsw(i,j) + terluna_clear*solcon*( (1.0-terluna_u)*terluna_tgr(terluna_lo)  &
+                                                            + terluna_u*terluna_tgr(terluna_hi) )
+                endif
+                glw(i,j) = glw(i,j) - terluna_lwg*(tsk(i,j)/terluna_tg)**4
+                do k=1,nk
+                  terluna_e = 0.0
+                  terluna_f = 0.0
+                  do terluna_l=1,terluna_nsh
+                    terluna_ov = min(zf(i,j,k+1),terluna_tz(terluna_l+1)) - max(zf(i,j,k),terluna_tz(terluna_l))
+                    if( terluna_ov.gt.0.0 )then
+                      terluna_ov = terluna_ov/(terluna_tz(terluna_l+1)-terluna_tz(terluna_l))
+                      terluna_e = terluna_e + terluna_s1(terluna_l)*terluna_ov
+                      terluna_f = terluna_f + terluna_lw(terluna_l)*terluna_ov*(dum3(i,j,k)/terluna_tt(terluna_l))**4
+                    endif
+                  enddo
+                  swten(i,j,k) = swten(i,j,k) + terluna_e/(rho(i,j,k)*cp*(zf(i,j,k+1)-zf(i,j,k)))
+                  lwten(i,j,k) = lwten(i,j,k) - terluna_f/(rho(i,j,k)*cp*(zf(i,j,k+1)-zf(i,j,k)))
+                enddo
+              enddo
+              enddo
+              deallocate( terluna_s1 )
+            ENDIF
+""", 1)])
+
 # label: (gravity, parallel mode)
 BUILDS = {'moon': (lambda: planet()['gravity_m_s2'], 'mpi'), 'earth_g': (lambda: EARTH_G, 'mpi'),
           'moon_omp': (lambda: planet()['gravity_m_s2'], 'omp'), 'earth_g_omp': (lambda: EARTH_G, 'omp'),
@@ -899,6 +995,8 @@ EARTH_FALL_PATCH = ('morrison.F', 'Terluna: Earth fall speeds for the rain test'
     ('ACN(K) = G*RHOW/(18.*MU(K))', 'ACN(K) = GFALL*RHOW/(18.*MU(K))', 1)])
 BUILDS['moon_omp_earth_fall'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_earth_fall'] = [EARTH_FALL_PATCH]
+BUILDS['moon_omp_twilight'] = BUILDS['moon_omp']
+BUILD_PATCHES['moon_omp_twilight'] = [TWILIGHT_PATCH]
 
 # Electrified storms (stage 2 of the atmospheric-electricity study): WRF-ELEC's NSSL microphysics with the field,
 # lightning and leakage of climate/crm/cm1_elec.py, at the Moon's gravity and at Earth's for the benchmark storm.
@@ -1023,6 +1121,13 @@ for _lat, _tag in ((80.0, '80n'), (-80.0, '80s'), (70.0, '70n'), (-70.0, '70s'),
                 'once a lunar day, seas and lakes of the 28% scenario at sea level, land as wet as the GCM\'s there, '
                 'the 5% dimmer shield, the GCM design case\'s row nearest the latitude as reference, and its mean '
                 'vertical wind there imposed as large-scale vertical advection')
+# The 45-degree rings again, on the design case GCM_RUN names and its land's wetness (their first runs took the run
+# before it, whose land evaporated ten times as much), with the curved air's twilight and side light added to RRTMG.
+for _tag in ('45n', '45s'):
+    CASES[f'ring_{_tag}_lsw_twilight'] = dict(
+        CASES[f'ring_{_tag}_lsw'], build='moon_omp_twilight', twilight='full',
+        purpose=CASES[f'ring_{_tag}_lsw']['purpose'] + ', with the curved air\'s twilight and side light '
+                '(climate/results/gcm/twilight.json)')
 
 
 def band_vertical_wind(lat, sigma_edges, flux, rows, radius, gravity):
@@ -1799,7 +1904,8 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
                        var16=0.0 if pair or box else round(length, 3), var17=0.0 if pair else round(air['sunlight_w_m2'], 3),
                        var18=0.0 if pair else cfg['start_hour_angle_deg'] + (cfg['node_deg'] if tilted else
                                                                              cfg['site']['lon_deg'] if box else 0.0),
-                       var19=0.0 if pair else round(solar_day_s(), 1)),
+                       var19=0.0 if pair else round(solar_day_s(), 1),
+                       **(dict(var20=1.0) if cfg.get('twilight') else {})),
         'param9': dict(output_format=1, output_filetype=2, output_sfcparams=int(bool(cfg.get('surface_output'))),
                        output_tke=0, output_km=0,
                        output_kh=0, output_uinterp=1, output_vinterp=int(rotating or box), output_v=0, output_winterp=1,
@@ -2046,7 +2152,7 @@ def setup_fine(name: str, cfg: dict) -> Path:
     return case
 
 
-RESTART_INPUTS = ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt',
+RESTART_INPUTS = ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt', TWILIGHT_TABLE,
                   'terluna_surface.txt', 'LANDUSE.TBL', 'cm1out_s.ctl', 'cm1out_stats.ctl', 'cm1out_metadata.ctl',
                   'cm1out_metadata.dat')
 
@@ -2161,6 +2267,30 @@ def setup_sample(name: str, cfg: dict) -> Path:
                   inputs={'namelist.template': hashlib.sha256((case / 'namelist.template').read_bytes()).hexdigest()[:16]})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case
+
+
+def write_twilight(path: Path, mode: str) -> dict:
+    """terluna_twilight.txt from the twilight product's shells: the elevation and shell counts, the shells' height
+    edges (m), then for each solar elevation (degrees) what the curved air adds to the ground and to each shell, per
+    unit sunlight at the beam; then the extra infrared each shell and the ground lose to space (W/m2) and the
+    temperatures it is given at. 'full' adds the shells' widening to both; with the product's identity."""
+    if mode not in TWILIGHT_MODES:
+        raise ValueError(f'twilight must be one of {TWILIGHT_MODES}')
+    product = HERE.parent / 'results' / 'gcm' / 'twilight.json'
+    data = json.loads(product.read_text())
+    term, cone, lw = data['cm1_term'], data['cm1_term_cone'], data['longwave']
+    full = mode == 'full'
+    edges = [1e3 * z for z in term['height_edges_km']]
+    rows = [f"{len(term['elevation_deg'])} {len(edges) - 1}", ' '.join(f'{z:.3f}' for z in edges)]
+    for i, el in enumerate(term['elevation_deg']):
+        shells = [a[i] + (b[i] if full else 0.0) for a, b in zip(term['shells'], cone['shells'])]
+        rows.append(' '.join(f'{x:.6e}' for x in [el, term['ground'][i]] + shells))
+    escape = [a + (b if full else 0.0) for a, b in zip(lw['shells']['curved'], lw['shells']['cone'])]
+    rows.append(' '.join(f'{x:.6e}' for x in escape + [lw['ground_curved_w_m2']]))
+    rows.append(' '.join(f'{x:.6e}' for x in lw['shells']['temperature_k'] + [lw['ground_temperature_k']]))
+    path.write_text('\n'.join(rows) + '\n')
+    return dict(product=str(product.relative_to(HERE.parents[1])), sha256=hashlib.sha256(product.read_bytes()).hexdigest()[:16],
+                mode=mode, elevations=len(term['elevation_deg']), shells=len(edges) - 1)
 
 
 def setup(name: str) -> Path:
@@ -2322,6 +2452,7 @@ def setup(name: str) -> Path:
         text, electricity = cm1_elec.run_files(case, cfg['elec'], text)
         electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=electricity)
     (case / 'namelist.template').write_text(text)
+    twilight = write_twilight(case / TWILIGHT_TABLE, cfg['twilight']) if cfg.get('twilight') else None
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     if tilted or box:                                                     # per-column arrays as rounded lists
         ref = {k: ([round(float(x), 6 if k == 'lapse_k_m' else 4) for x in v] if isinstance(v, np.ndarray) else v)
@@ -2340,11 +2471,12 @@ def setup(name: str) -> Path:
                   day_night=day_night,
                   terrain=terrain if cfg.get('terrain') else None,
                   electricity=electricity,
+                  twilight=twilight,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
                                                          'terluna_wls.txt', 'terluna_wls2d.txt', 'terluna_lsadv.txt',
-                                                         'perts.dat', 'terluna_surface2d.txt')
+                                                         'perts.dat', 'terluna_surface2d.txt', TWILIGHT_TABLE)
                           if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case

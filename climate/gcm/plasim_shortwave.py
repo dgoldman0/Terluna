@@ -84,12 +84,22 @@ def clear_sky(column: dict, mu: float, form: str | None = None, k: float = 1.0) 
     """Shares of the sunlight arriving at the top of a column reflected, absorbed in the air and absorbed by the
     ground at cosine of zenith mu, as PlaSim's swr has them in clear sky. The column holds sigma (full levels, top
     first), ps (Pa), t (K), q (kg/kg), albedo (diffuse, and direct unless albedo_direct is given), rcoeff, solar1
-    (the share of sunlight below 0.75 um) and gravity."""
+    (the share of sunlight below 0.75 um) and gravity; with magnification (a, b, c), the direct beam's water path
+    takes (mu + a) / (mu^2 + b mu + c), the Moon's (twilight.py), in place of Earth's 35 / sqrt(1 + 1224 mu^2)."""
+    net = net_flux(column, mu, form, k)
+    return dict(reflected=1.0 - net[0], air=net[0] - net[-1], ground=net[-1])
+
+
+def net_flux(column: dict, mu: float, form: str | None = None, k: float = 1.0) -> np.ndarray:
+    """clear_sky's net downward flux at each interface, top to ground, per unit of the sunlight arriving at the
+    top: its differences are the layers' absorption, as PlaSim's swr heats them."""
     c = column
     sigma, n = np.asarray(c['sigma'], float), len(c['sigma'])
     dsigma = np.diff(np.concatenate([[0.0], half_levels(sigma)]))
     solar2 = 1.0 - c['solar1']
-    m = 35.0 / np.sqrt(1.0 + 1224.0 * mu * mu)                      # the direct beam's magnification
+    lunar = c.get('magnification')
+    m = (35.0 / np.sqrt(1.0 + 1224.0 * mu * mu) if lunar is None     # the direct beam's magnification
+         else (mu + lunar[0]) / (mu * mu + lunar[1] * mu + lunar[2]))
     wv = 0.1 * dsigma * c['q'] * c['ps'] / c['gravity'] * np.sqrt(273.0 / c['t']) * sigma * c['ps'] / 1e5
     wvl, ywvl = np.cumsum(wv), np.cumsum(m * wv)
     a = lambda u: band_absorptivity(u, solar2, form, k)
@@ -108,9 +118,7 @@ def clear_sky(column: dict, mu: float, form: str | None = None, k: float = 1.0) 
     direct = direct(mu) if callable(direct) else direct
     visible = adding(r1, r1s, 1.0 - r1, 1.0 - r1s, direct, c['albedo'])
     infrared = adding(np.zeros(n), np.zeros(n), t2, t2u, direct, c['albedo'])
-    top = c['solar1'] * visible[0] + solar2 * infrared[0]
-    ground = c['solar1'] * visible[-1] + solar2 * infrared[-1]
-    return dict(reflected=1.0 - top, air=top - ground, ground=ground)
+    return c['solar1'] * visible + solar2 * infrared
 
 
 def ocean_direct_albedo(mu: float) -> float:

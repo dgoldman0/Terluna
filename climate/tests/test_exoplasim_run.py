@@ -70,9 +70,48 @@ class RunnerTests(unittest.TestCase):
 
     def test_patch_markers_mark_patched_text_only(self):
         # A marker must appear in what a patch adds and never in what it replaces, or it would apply twice.
-        for _, marker, edits in er.PATCHES:
+        for _, marker, edits in er.PATCHES + er.TWILIGHT_PATCHES:
             self.assertTrue(any(marker in new for _, new in edits))
             self.assertFalse(any(marker in old for old, _ in edits))
+
+    def test_the_twilight_patch_stays_out_of_the_shared_model(self):
+        markers = {marker for _, marker, _ in er.PATCHES}
+        self.assertFalse(markers & {marker for _, marker, _ in er.TWILIGHT_PATCHES})
+        # It extends the namelist and broadcast lines the infrared from space wrote, and keeps PlaSim's lines short.
+        old = ''.join(o for o, _ in er.TWILIGHT_EDITS)
+        self.assertIn('irtopnight', old)
+        for _, new in er.TWILIGHT_EDITS:
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        self.assertEqual(er.TWILIGHT_MODES, ('curved', 'full', 'path'))
+        added = ''.join(new for _, new in er.TWILIGHT_EDITS)
+        self.assertIn('call twilight_term', added)                      # the sunlight, at the end of swr
+        self.assertIn('call twilight_lw', added)                        # the infrared, at the end of lwr
+
+    def test_the_twilight_table_reads_as_the_patch_expects(self):
+        if not er.TWILIGHT_PRODUCT.exists():
+            self.skipTest('twilight.json not built')
+        import json
+        product = json.loads(er.TWILIGHT_PRODUCT.read_text())
+        term, cone, lw = product['gcm_term'], product['gcm_term_cone'], product['longwave']
+        tables = {}
+        for mode in ('curved', 'full'):
+            with tempfile.TemporaryDirectory() as d:
+                rows = er.twilight_table(Path(d) / 'twilight.dat', mode).read_text().strip().split('\n')
+            n = int(rows[0])
+            self.assertEqual((n, len(rows)), (len(term['elevation_deg']), n + 3))
+            table = np.array([[float(x) for x in r.split()] for r in rows[1:n + 1]])
+            self.assertEqual(table.shape, (n, 2 + len(term['layers'])))      # elevation, ground, each layer
+            self.assertTrue(np.all(np.diff(table[:, 0]) > 0) and n <= 400)  # rising, inside the patch's table
+            np.testing.assert_allclose(table[:, 1], term['ground'], rtol=1e-6, atol=1e-12)
+            escape, temperature = (np.array(r.split(), float) for r in rows[n + 1:n + 3])
+            self.assertEqual(escape.size, len(term['layers']) + 1)          # each layer, then the ground
+            self.assertTrue(np.all(temperature > 100.0))
+            tables[mode] = table, escape
+        # The full table adds the shells' widening to both the sunlight and the infrared (the product keeps six digits).
+        np.testing.assert_allclose(tables['full'][0][:, 2:] - tables['curved'][0][:, 2:], np.array(cone['layers']).T,
+                                   rtol=1e-4, atol=2e-9)
+        np.testing.assert_allclose(tables['full'][1][:-1] - tables['curved'][1][:-1], lw['gcm_layers']['cone'],
+                                   rtol=1e-5, atol=1e-8)
 
     def test_spectrum_tail_follows_the_sun(self):
         # A blackbody "measurement" that stops at 2.73 um must continue as the same blackbody, not as a

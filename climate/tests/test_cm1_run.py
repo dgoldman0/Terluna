@@ -64,6 +64,46 @@ def test_the_rain_test_build_takes_earth_fall_speeds_and_keeps_the_host_gravity_
     assert c.BUILD_PATCHES['moon_omp_earth_fall'] == [c.EARTH_FALL_PATCH]
 
 
+def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
+    name, marker, edits = c.TWILIGHT_PATCH
+    assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)
+    assert c.BUILD_PATCHES['moon_omp_twilight'] == [c.TWILIGHT_PATCH] and c.BUILDS['moon_omp_twilight'] == c.BUILDS['moon_omp']
+    assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != 'moon_omp_twilight')
+    sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
+    added = ''.join(new for _, new, _ in sun[2])
+    # It extends the lines the Sun's patch writes, which the build applies first.
+    for old in ('use input, only : var12,var16,var17,var18,var19', 'real :: terluna_lat,terluna_s'):
+        assert old in added and any(old in o for o, _, _ in edits)
+    for tag in ('45n', '45s'):
+        case = c.CASES[f'ring_{tag}_lsw_twilight']
+        assert case['twilight'] in c.TWILIGHT_MODES and case['build'] == 'moon_omp_twilight'
+        assert {k: v for k, v in case.items() if k not in ('twilight', 'build', 'purpose')} == \
+               {k: v for k, v in c.CASES[f'ring_{tag}_lsw'].items() if k not in ('build', 'purpose')}
+
+
+def test_the_twilight_table_reads_as_the_hook_expects(tmp_path):
+    product = c.HERE.parent / 'results' / 'gcm' / 'twilight.json'
+    if not product.exists():
+        pytest.skip('twilight.json not built')
+    tables = {}
+    for mode in c.TWILIGHT_MODES:
+        record = c.write_twilight(tmp_path / c.TWILIGHT_TABLE, mode)
+        rows = (tmp_path / c.TWILIGHT_TABLE).read_text().splitlines()
+        n, shells = (int(x) for x in rows[0].split())
+        assert (n, shells) == (record['elevations'], record['shells']) and len(rows) == n + 4
+        edges = np.array(rows[1].split(), float)
+        assert edges.size == shells + 1 and edges[0] == 0.0 and np.all(np.diff(edges) > 0)
+        table = np.array([r.split() for r in rows[2:n + 2]], float)
+        assert table.shape == (n, 2 + shells) and np.all(np.diff(table[:, 0]) > 0)
+        escape, temperature = (np.array(r.split(), float) for r in rows[n + 2:])
+        assert escape.size == temperature.size == shells + 1 and np.all(temperature > 100.0)
+        tables[mode] = table, escape
+    # The full table adds the shells' widening, which takes more sunlight and lets out more infrared.
+    assert tables['full'][1].sum() > tables['curved'][1].sum() > 0.0
+    with pytest.raises(ValueError):
+        c.write_twilight(tmp_path / c.TWILIGHT_TABLE, 'both')
+
+
 def test_a_case_set_up_from_another_takes_its_inputs_and_only_a_new_executable(tmp_path, monkeypatch):
     monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
     monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')

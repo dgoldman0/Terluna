@@ -284,6 +284,141 @@ TOP_INFRARED_EDITS = [
      "       zbd(:,0)=zbd(:,0)+irtopnight\n"
      "      endwhere\n"),
 ]
+# The curved air's sunlight (radmod.f90; climate/gcm/twilight.py). PlaSim lights a column only while its Sun is above
+# the horizon and stretches the direct beam's water path with Earth's horizon magnification, 35 / sqrt(1 + 1224 mu^2).
+# NTWILIGHT 1 adds, at the end of swr, what the Moon's tall curved air takes beyond a flat column of the same air, by
+# the solar elevation at each point (solang keeps the cosine below the horizon too): to each layer, and to the ground
+# in the column's clear share, from the table twilight.dat the runner writes from ../results/gcm/twilight.json. The
+# extra flux enters at the top, so the energy budget carries it. NTWILW 1 adds, at the end of lwr, the infrared the same
+# geometry lets out beyond a flat column, each layer's and the ground's at the design column's temperatures scaled with
+# their own to the fourth power. ZMLUNAR (a, b, c) replaces Earth's magnification with the Moon's,
+# (mu + a) / (mu^2 + b mu + c). The defaults, 0, leave the model as it was.
+TWILIGHT_EDITS = [
+    ("      real :: irtopnight = 0.0   ! Terluna: and by night\n",
+     "      real :: irtopnight = 0.0   ! Terluna: and by night\n"
+     "      integer :: ntwilight = 0   ! Terluna: 1 adds the curved air's twilight and side light (twilight.dat)\n"
+     "      real :: zmlunar(3) = 0.0   ! Terluna: the Moon's slant water path (mu+a)/(mu^2+b mu+c); 0 keeps Earth's\n"
+     "      integer, parameter :: NTWLMAX = 400 ! Terluna: elevations the twilight table may hold\n"
+     "      integer :: ntwl = 0        ! Terluna: elevations it holds\n"
+     "      real :: twlel(NTWLMAX) = 0.0       ! Terluna: solar elevation, degrees\n"
+     "      real :: twlg(NTWLMAX) = 0.0        ! Terluna: added to the ground, per unit sunlight at the beam\n"
+     "      real :: twlq(NLEV,NTWLMAX) = 0.0   ! Terluna: added to each layer, the same\n"
+     "      real :: gmuz(NHOR) = 0.0   ! Terluna: cosine of the solar zenith angle, below the horizon too\n"
+     "      integer :: ntwilw = 0      ! Terluna: 1 adds the curved air's extra infrared escape (twilight.dat)\n"
+     "      real :: twlw(NLEV+1) = 0.0 ! Terluna: extra infrared to space from each layer and the ground\n"
+     "      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n"),
+    (",minwavel,rayscale,nsunclock,swh2oscale,irtopday,irtopnight\n",
+     ",minwavel,rayscale,nsunclock,swh2oscale,irtopday,irtopnight  &\n     &               ,ntwilight,zmlunar,ntwilw\n"),
+    ("      call mpbcr(irtopnight)\n",
+     "      call mpbcr(irtopnight)\n"
+     "      call mpbci(ntwilight)\n"
+     "      call mpbcrn(zmlunar,3)\n"
+     "      call mpbci(ntwilw)\n"
+     "      if (ntwilight == 1 .or. ntwilw == 1) then   ! Terluna: the curved air's twilight table\n"
+     "       if (mypid == NROOT) then\n"
+     "        open(47,file='twilight.dat',form='formatted',status='old')\n"
+     "        read(47,*) ntwl\n"
+     "        if (ntwl < 2 .or. ntwl > NTWLMAX) stop 'twilight.dat: too few or too many elevations'\n"
+     "        do jtwl = 1, ntwl\n"
+     "         read(47,*) twlel(jtwl),twlg(jtwl),(twlq(jlev,jtwl),jlev=1,NLEV)\n"
+     "        enddo\n"
+     "        read(47,*) (twlw(jlev),jlev=1,NLEV+1)\n"
+     "        read(47,*) (twlt(jlev),jlev=1,NLEV+1)\n"
+     "        close(47)\n"
+     "       endif\n"
+     "       call mpbci(ntwl)\n"
+     "       call mpbcrn(twlel,NTWLMAX)\n"
+     "       call mpbcrn(twlg,NTWLMAX)\n"
+     "       call mpbcrn(twlq,NLEV*NTWLMAX)\n"
+     "       call mpbcrn(twlw,NLEV+1)\n"
+     "       call mpbcrn(twlt,NLEV+1)\n"
+     "      endif\n"),
+    ("      gmu0(:) = 0.0\n", "      gmu0(:) = 0.0\n      gmuz(:) = 0.0 ! Terluna: the cosine below the horizon too\n"),
+    ("         zmuz=sin(zdecl)*sid(jlat)+cola(jlat)*cos(zdecl)*cos(zhangle)\n"
+     "         if (zmuz > zdawn) gmu0(jhor) = zmuz\n",
+     "         zmuz=sin(zdecl)*sid(jlat)+cola(jlat)*cos(zdecl)*cos(zhangle)\n"
+     "         if (zmuz > zdawn) gmu0(jhor) = zmuz\n"
+     "         gmuz(jhor) = zmuz\n"),
+    ("          zmuz=solslatsdec+solclatcdec/PI\n         endif\n         if (zmuz > zdawn) gmu0(jhor) = zmuz\n",
+     "          zmuz=solslatsdec+solclatcdec/PI\n         endif\n         if (zmuz > zdawn) gmu0(jhor) = zmuz\n"
+     "         gmuz(jhor) = zmuz\n"),
+    ("       zm(:)=35./SQRT(1.+1224.*zmu0(:)*zmu0(:))\n",
+     "       zm(:)=35./SQRT(1.+1224.*zmu0(:)*zmu0(:))\n"
+     "       zm(:)=merge((zmu0(:)+zmlunar(1))                                       &\n"
+     "     &            /max(zmu0(:)*zmu0(:)+zmlunar(2)*zmu0(:)+zmlunar(3),1.e-12)    &\n"
+     "     &            ,zm(:),zmlunar(3) > 0.) ! Terluna: the Moon's slant path\n"),
+    ("      return\n      end subroutine swr\n",
+     "      if (ntwilight == 1) call twilight_term ! Terluna: the curved air's twilight and side light\n"
+     "      return\n      end subroutine swr\n"
+     "\n"
+     "      subroutine twilight_term\n"
+     "      use radmod\n"
+     "      implicit none\n"
+     "!\n"
+     "!     Terluna: the sunlight the Moon's curved air adds to the flat column (climate/gcm/twilight.py), by the\n"
+     "!     solar elevation at each point, below the horizon too: to each layer and, in the column's clear share,\n"
+     "!     to the ground, carried down from the top as net downward flux\n"
+     "!\n"
+     "      integer :: jhor, jlev, jlo, jhi, jmid\n"
+     "      real :: zel, zu, zsum, zclear, zsun\n"
+     "      zsun = gsol0 * gdist2\n"
+     "      do jhor = 1, NHOR\n"
+     "       zel = asin(max(-1.0, min(1.0, gmuz(jhor)))) * 180.0 / PI\n"
+     "       if (zel < twlel(1) .or. zel > twlel(ntwl)) cycle\n"
+     "       jlo = 1\n"
+     "       jhi = ntwl\n"
+     "       do while (jhi - jlo > 1)\n"
+     "        jmid = (jlo + jhi) / 2\n"
+     "        if (twlel(jmid) > zel) then\n"
+     "         jhi = jmid\n"
+     "        else\n"
+     "         jlo = jmid\n"
+     "        endif\n"
+     "       enddo\n"
+     "       zu = (zel - twlel(jlo)) / (twlel(jhi) - twlel(jlo))\n"
+     "       zclear = 1.0\n"
+     "       do jlev = 1, NLEV\n"
+     "        zclear = zclear * (1.0 - dcc(jhor,jlev) * nclouds)\n"
+     "       enddo\n"
+     "       zsum = zsun * ((1.0 - zu) * twlg(jlo) + zu * twlg(jhi)) * zclear\n"
+     "       dswfl(jhor,NLEP) = dswfl(jhor,NLEP) + zsum\n"
+     "       dfd(jhor,NLEP) = dfd(jhor,NLEP) + zsum\n"
+     "       do jlev = NLEV, 1, -1\n"
+     "        zsum = zsum + zsun * ((1.0 - zu) * twlq(jlev,jlo) + zu * twlq(jlev,jhi))\n"
+     "        dswfl(jhor,jlev) = dswfl(jhor,jlev) + zsum\n"
+     "        dfd(jhor,jlev) = dfd(jhor,jlev) + zsum\n"
+     "       enddo\n"
+     "      enddo\n"
+     "      return\n"
+     "      end subroutine twilight_term\n"),
+    ("      dlwfl(:,:)=dftu(:,:)+dftd(:,:)\n!\n      return\n      end subroutine lwr\n",
+     "      dlwfl(:,:)=dftu(:,:)+dftd(:,:)\n"
+     "      if (ntwilw == 1) call twilight_lw ! Terluna: the curved air's extra infrared escape\n"
+     "!\n      return\n      end subroutine lwr\n"
+     "\n"
+     "      subroutine twilight_lw\n"
+     "      use radmod\n"
+     "      implicit none\n"
+     "!\n"
+     "!     Terluna: the infrared the Moon's curved air loses beyond a flat column (climate/gcm/twilight.py): each\n"
+     "!     layer's and the ground's extra escape to space at the design column's temperatures, scaled with their\n"
+     "!     own to the fourth power, carried up to the top as upward flux (negative in PlaSim)\n"
+     "!\n"
+     "      integer :: jhor, jlev\n"
+     "      real :: zsum\n"
+     "      do jhor = 1, NHOR\n"
+     "       zsum = twlw(NLEP) * (dt(jhor,NLEP) / twlt(NLEP))**4\n"
+     "       dftu(jhor,NLEP) = dftu(jhor,NLEP) - zsum\n"
+     "       dlwfl(jhor,NLEP) = dlwfl(jhor,NLEP) - zsum\n"
+     "       do jlev = NLEV, 1, -1\n"
+     "        zsum = zsum + twlw(jlev) * (dt(jhor,jlev) / twlt(jlev))**4\n"
+     "        dftu(jhor,jlev) = dftu(jhor,jlev) - zsum\n"
+     "        dlwfl(jhor,jlev) = dlwfl(jhor,jlev) - zsum\n"
+     "       enddo\n"
+     "      enddo\n"
+     "      return\n"
+     "      end subroutine twilight_lw\n"),
+]
 # (file, marker, edits) in the order applied; a marker appears only in the text its patch adds.
 PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
            ('rainmod.f90', 'Terluna: gravity for the heights below', RAINMOD_EDITS),
@@ -291,15 +426,41 @@ PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
            ('radmod.f90', "Terluna: the Sun's clock", SUN_EDITS),
            ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS),
            ('radmod.f90', 'Terluna: infrared from space at the top of the air', TOP_INFRARED_EDITS)]
+# The twilight patch goes only into a copy of ExoPlaSim of its own, which runs with --twilight import first, so the
+# shared installation, and with it the key of every run without the twilight, stays as it was.
+TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS)]
+TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
+TWILIGHT_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'twilight.json'
+# 'curved' adds the curved light and the curved escape of infrared, 'full' the shells' widening on both sides as well
+# (twilight.json's cone_w_m2 and longwave.cone), and both put in the Moon's slant path; 'path' puts in that alone.
+TWILIGHT_MODES = ('curved', 'full', 'path')
 
 
-def ensure_patched() -> dict:
+def use_twilight_package():
+    """Put the twilight copy of ExoPlaSim first on the import path, copying the installed package there first if
+    it is missing; before anything imports exoplasim."""
+    import importlib.util
+    if 'exoplasim' in sys.modules:
+        raise RuntimeError('exoplasim is already imported; the twilight copy must come first')
+    target = TWILIGHT_PACKAGE / 'exoplasim'
+    if not target.exists():
+        source = Path(importlib.util.find_spec('exoplasim').origin).parent
+        tmp = TWILIGHT_PACKAGE / 'exoplasim.part'
+        shutil.copytree(source, tmp, ignore=shutil.ignore_patterns('__pycache__'))
+        tmp.rename(target)
+    sys.path.insert(0, str(TWILIGHT_PACKAGE))
+
+
+def ensure_patched(twilight: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
-    so ExoPlaSim rebuilds them), and return each patched file's hash for the run key."""
+    so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and return each patched file's
+    hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
+    if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
+        raise RuntimeError(f'the twilight patch belongs only in {TWILIGHT_PACKAGE}, not in {src}')
     hashes = {}
-    for name, marker, edits in PATCHES:
+    for name, marker, edits in PATCHES + (TWILIGHT_PATCHES if twilight else []):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -320,10 +481,11 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
-def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None):
+def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
-    the air's 400 ppm of CO2, and top_infrared, (day, night) W/m2, adds infrared from space at the top of the air; each
-    is recorded when given, and left out the configuration is the one every earlier run had."""
+    the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
+    twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
+    twilight product; each is recorded when given, and left out the configuration is the one every earlier run had."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -348,8 +510,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None):
         raise ValueError('fixed_orbit and whole_lunar_days are 0 or 1')
     if not 0.0 < model['sw_water_absorption'] <= 3.0:
         raise ValueError('sw_water_absorption must lie between 0 and 3')
+    if twilight is not None and twilight not in TWILIGHT_MODES:
+        raise ValueError(f'twilight must be one of {TWILIGHT_MODES}')
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
-               exoplasim=version('exoplasim'), source=ensure_patched(),
+               exoplasim=version('exoplasim'), source=ensure_patched(twilight is not None),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -359,13 +523,40 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None):
         cfg['co2_ppm'] = co2_ppm
     if top_infrared is not None:
         cfg['top_infrared_w_m2'] = dict(day=float(top_infrared[0]), night=float(top_infrared[1]))
+    if twilight is not None:
+        product = json.loads(TWILIGHT_PRODUCT.read_text())
+        lunar = product['magnification']
+        cfg['twilight'] = dict(mode=twilight, product=str(TWILIGHT_PRODUCT.relative_to(ROOT)),
+                               sha256=hashlib.sha256(TWILIGHT_PRODUCT.read_bytes()).hexdigest()[:16],
+                               magnification=[lunar['a'], lunar['b'], lunar['c']])
     return cfg
+
+
+def twilight_table(path: Path, mode: str):
+    """The twilight product's GCM terms as PlaSim's patch reads them: the number of elevations, then for each the solar
+    elevation (degrees), what the curved air adds to the ground and to each layer, top first, per unit sunlight at the
+    beam; then the extra infrared each layer and the ground lose to space (W/m2) and the temperatures it is given at.
+    'full' adds the shells' widening to both."""
+    product = json.loads(TWILIGHT_PRODUCT.read_text())
+    term, cone, lw = product['gcm_term'], product['gcm_term_cone'], product['longwave']
+    full = mode == 'full'
+    rows = [f"{len(term['elevation_deg'])}"]
+    for i, el in enumerate(term['elevation_deg']):
+        layers = [q[i] + (c[i] if full else 0.0) for q, c in zip(term['layers'], cone['layers'])]
+        rows.append(' '.join(f'{x:.6e}' for x in [el, term['ground'][i]] + layers))
+    escape = [a + (b if full else 0.0) for a, b in zip(lw['gcm_layers']['curved'], lw['gcm_layers']['cone'])]
+    rows.append(' '.join(f'{x:.6e}' for x in escape + [lw['ground_curved_w_m2']]))
+    rows.append(' '.join(f'{x:.6e}' for x in lw['gcm_layers']['temperature_k'] + [lw['ground_temperature_k']]))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text('\n'.join(rows) + '\n')
+    return path
 
 
 def run_key(cfg, inputs) -> str:
     """Changes if the settings or any written input file change, so a resume never mixes models."""
     digest = hashlib.sha256(json.dumps(cfg, sort_keys=True).encode())
-    for path in (inputs['landmap'], inputs['topomap'], inputs['starspec'], inputs['starspec'][:-4] + '_hr.dat'):
+    for path in (inputs['landmap'], inputs['topomap'], inputs['starspec'], inputs['starspec'][:-4] + '_hr.dat',
+                 *([inputs['twilight']] if 'twilight' in inputs else [])):
         digest.update(Path(path).read_bytes())
     return digest.hexdigest()[:16]
 
@@ -459,8 +650,11 @@ def prepare_inputs(cfg, rundir: Path) -> dict:
     folder = rundir / 'inputs'
     landmap, topomap, land_share = surface_files(cfg, folder)
     starspec, flux = sunlight(cfg, folder)
-    return dict(landmap=str(landmap), topomap=str(topomap), starspec=starspec,
-                flux_w_m2=flux * cfg['model']['sunlight_scale'], shield_flux_w_m2=flux, land_share=land_share)
+    out = dict(landmap=str(landmap), topomap=str(topomap), starspec=starspec,
+               flux_w_m2=flux * cfg['model']['sunlight_scale'], shield_flux_w_m2=flux, land_share=land_share)
+    if cfg.get('twilight', {}).get('mode') in ('curved', 'full'):
+        out['twilight'] = str(twilight_table(folder / 'twilight.dat', cfg['twilight']['mode']))
+    return out
 
 
 def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dict):
@@ -502,6 +696,13 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     if 'top_infrared_w_m2' in cfg:
         model._edit_namelist('radmod_namelist', 'IRTOPDAY', str(cfg['top_infrared_w_m2']['day']))
         model._edit_namelist('radmod_namelist', 'IRTOPNIGHT', str(cfg['top_infrared_w_m2']['night']))
+    if 'twilight' in inputs:
+        shutil.copy2(inputs['twilight'], workdir / 'twilight.dat')
+        model._edit_namelist('radmod_namelist', 'NTWILIGHT', '1')
+        model._edit_namelist('radmod_namelist', 'NTWILW', '1')
+    if cfg.get('twilight', {}).get('magnification'):
+        for i, x in enumerate(cfg['twilight']['magnification'], 1):
+            model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
     from exoplasim import pyburn
     for code, (name, long_name) in CLEAR_SKY.items():
         pyburn.ilibrary[str(code)] = [name, long_name, 'W m-2']
@@ -669,8 +870,10 @@ def summarise_year(path: Path) -> dict:
 
 def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False,
         overrides: dict | None = None, start_from: str | None = None, co2_ppm: float | None = None,
-        top_infrared: tuple | None = None) -> int:
-    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared)
+        top_infrared: tuple | None = None, twilight: str | None = None) -> int:
+    if twilight is not None:
+        use_twilight_package()
+    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -780,6 +983,10 @@ def main(argv=None) -> int:
     parser.add_argument('--top-infrared', type=float, nargs=2, metavar=('DAY', 'NIGHT'),
                         help='infrared from space at the top of the air, W/m2 by day and by night '
                              '(part of the run key)')
+    parser.add_argument('--twilight', choices=TWILIGHT_MODES,
+                        help="the curved air's sunlight and infrared from ../results/gcm/twilight.json: the curved "
+                             "parts, all of it (full) or the Moon's slant path alone, in the twilight copy of ExoPlaSim "
+                             '(part of the run key)')
     args = parser.parse_args(argv)
     if args.status:
         return status(args.folder or args.experiment)
@@ -794,7 +1001,7 @@ def main(argv=None) -> int:
             parser.error(f'unknown model setting {key}')
         overrides[key] = type(MODEL[key])(value)
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
-               args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None)
+               args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None, args.twilight)
 
 
 if __name__ == '__main__':
