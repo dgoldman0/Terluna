@@ -28,7 +28,10 @@
       "url": "https://ntrs.nasa.gov/api/citations/20050175895/downloads/20050175895.pdf?attachment=true",
       "read_scope": "Indexed NTRS abstract and metadata, plus retrieved PDF excerpt describing 10 m sail model ingredients. Direct page/PDF opens failed; this is not a full paper reading.",
       "supports": "Ground-test analysis used membrane or shell elements, boom/spreader beams, cable or truss elements, and measured concentrated masses.",
-      "limits": "No numerical test result from this source is adopted. It motivates treating membrane, support and attached mass separately; it does not establish our compliance or scale extrapolation."
+      "limits": "No numerical test result from this source is adopted. It motivates treating membrane, support and attached mass separately; it does not establish our compliance or scale extrapolation.",
+      "authors": "Sleight, Michii, Lichodziejewski, Derbès, Mann, Slade and Wang",
+      "report": "AIAA 2005-2121",
+      "access_note": "The full PDF opened in the source check of 14 October 2026; its model description matches the excerpt."
     }
   ],
   "new_model_assumptions": [

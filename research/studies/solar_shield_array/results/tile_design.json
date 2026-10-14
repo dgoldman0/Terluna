@@ -46,7 +46,7 @@
       "schema": "terluna.protection.annulus-film/1"
     },
     "research/studies/solar_shield_array/tile_sources.json": {
-      "sha256": "3fff0f7c8d9acecd4153e088e5d57be0122ea54cadcba109807859bfc3221acf",
+      "sha256": "83d115a2ec9c7e26f322fe8a8b53463aca801c8ef31a8e2364e8cece8205e351",
       "schema": "terluna.research.tile-hardware-sources/1"
     }
   },
@@ -23895,8 +23895,8 @@
     "queue_balance": true
   },
   "resources": {
-    "cpu_s": 6.600525276,
-    "max_rss_MiB": 90.21875,
+    "cpu_s": 6.108243597,
+    "max_rss_MiB": 89.9296875,
     "thread_environment": {
       "OPENBLAS_NUM_THREADS": "1",
       "OMP_NUM_THREADS": "1"

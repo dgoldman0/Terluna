@@ -52,6 +52,12 @@ INPUTS = {
 EVIDENCE = ('Executed fixed-case reduced-model numerical comparisons; no optimized '
     'candidate, empirically validated structure, full control/hardware closure, '
     'long-duration orbital service, continuous coverage or collision certificate.')
+MODEL_READING_RULE = ('SI units. Nodes in metres about the nodal centre of mass, nodal masses in kg, normal-only '
+    'modes mass-normalized in kg^(-1/2) with modal coordinates in m sqrt(kg), omega_squared in s^-2. Compare '
+    'physical probes across meshes and bases, not modal coordinates. Support masses are lumped at member '
+    'endpoints (metadata.nodal_inertia_relative_frobenius_error against the distributed reference) and the hub '
+    'restraint is an effective stiffness; read metadata.mass_rule, support_rule and geometry_rule before using the '
+    'model for attitude or control.')
 ABSOLUTE_TOLERANCES = dict(position_m=1e-5, velocity_m_s=1e-8,
     quaternion=1e-11, angular_velocity_rad_s=1e-13,
     modal_peak_displacement_m=1e-7, modal_peak_velocity_m_s=1e-9,
@@ -168,7 +174,8 @@ def export_model(model, reference, producer, inputs):
         model=payload, model_sha256=canonical_hash(payload),
         producer_hashes=producer['files'], constants=producer['constants'],
         input_hashes={path: value['sha256'] for path, value in inputs.items()},
-        evidence='Explicit numerical reduced-model input, not empirical material or hardware validation.')
+        evidence='Explicit numerical reduced-model input, not empirical material or hardware validation.',
+        reading_rule=MODEL_READING_RULE)
 
 
 def model_key(case):
@@ -201,7 +208,10 @@ def build_models(reference, cases, *, output=MODELS_OUT):
             optical_fractions=reference['optical_fractions'],
             optical_row_description=reference['optical_row_description']),
         resources=dict(models=resources, total_build_wall_s=time.perf_counter()-start),
-        evidence='Explicit fixed-case reduced input products for implementation benchmarks; no design selection.')
+        evidence='Explicit fixed-case reduced input products for implementation benchmarks; no design selection.',
+        reading_rule=('One reduced structural input per mesh and retained-mode count of the fixed benchmark cases. '
+                      'Each model carries its own schema, hash, provenance, evidence and reading rule; check its '
+                      'model_sha256 before use.'))
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(collection, separators=(',', ':'), allow_nan=False)+'\n')

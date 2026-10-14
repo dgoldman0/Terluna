@@ -2,7 +2,7 @@
   "schema": "terluna.research.array-flexible-benchmark/1",
   "producer": {
     "files": {
-      "research/studies/solar_shield_array/flexible_benchmark.py": "bc82aa325e0db47b3f5d42e825f0705b6d03b45a0df0e96f3ad61401434421cb",
+      "research/studies/solar_shield_array/flexible_benchmark.py": "6e6a2d7c5fb6584187a7a65411a5c8be2c540661e2a43353e7bef8ba6d5d66ef",
       "engineering/array_flexible.py": "2314d050b4b2a302d97a445c696e5ed0b8b1e54348ab0c229e7f8a6a6abadcc9",
       "protection/dynamics/flexible_fleet.py": "516bb895e63c89aecf2b72e9a3c4f648aeef22a11022f44665cd05e6d2594fe8",
       "protection/dynamics/flexible_optics.py": "3eeec9a3ed09300322142f019b92130274a0be09d04788405fa0487a656438f3",
@@ -24,27 +24,27 @@
   "inputs": {
     "research/studies/solar_shield_array/results/tile_design.json": {
       "schema": "terluna.research.array-tile-design/1",
-      "sha256": "8dc05d1ace209d470b5dede4bfb0af8ea6abe452e660d426159cf55ad16921b2"
+      "sha256": "079f15af9f52374337a36f3e18427f04bc653f84a7df2766ceb2cb4bbdcea91d"
     },
     "research/studies/solar_shield_array/results/support_comparison.json": {
       "schema": "terluna.research.array-support-comparison/1",
-      "sha256": "1cca62cf13e93e53719cbf22042c2df1f2de25f487c18170232c81dfc0d4d432"
+      "sha256": "84821a954ed407a8cc0104fc926e1fa7393fb94a3cf76e73590f4aa8a4837c8e"
     },
     "research/studies/solar_shield_array/support_materials.json": {
       "schema": "terluna.research.array-support-materials/1",
-      "sha256": "ec844eb3f7c7f5311bd72d6145c7c66205e3717bb6b28b34e2d4b613bb2c395d"
+      "sha256": "d6d5b83a0064b20538fdad14531baf2b9ca707fe23d8a39e626b943154e2cb70"
     },
     "research/studies/solar_shield_array/support_sources.json": {
       "schema": "terluna.research.array-support-sources/1",
-      "sha256": "0c077e4bc1c1eb3116dd26c2224ce247181fac857a60408826cb8bd18be5d110"
+      "sha256": "2afd4ed953e1c5424f31ce5746182ce300d4ff348d389a34ae1019ce2c82ce6d"
     },
     "engineering/flexible_sources.json": {
       "schema": "terluna.research.flexible-array-source-notes/1",
-      "sha256": "43cdedc4bf98e4c4553e40b87c8cd49c2bc5c8cb1a239bff6f49b5266c1a1c83"
+      "sha256": "55bef95aae8a3c2e1b63dbbf284c4000d051d177afde54df1075b1d388a0e411"
     },
     "research/studies/solar_shield_array/flexible_optics_sources.json": {
       "schema": "terluna.research.flexible-optics-source-notes/1",
-      "sha256": "32c1cf5b1c0a04f5b0720965c30916bfbc4e1d82241ae89215f96a31b56628f9"
+      "sha256": "130ac47f37f6d0cd47c2d82a3a4761ff85431d2ecd490267477e25f7b72dc0a2"
     },
     "protection/spectra/annulus_film.json": {
       "schema": "terluna.protection.annulus-film/1",
@@ -52,7 +52,7 @@
     },
     "research/studies/solar_shield_array/results/flexible_models.json": {
       "schema": "terluna.research.array-flexible-model-inputs/1",
-      "sha256": "edc771ffb8abb6f653f621258cd287e777d8c2dfcacf745114ba07c7511c62e0"
+      "sha256": "55bb3525a7188fcbe644816a3e42e2f451a91729c2a3e527646f80d6fd2c04f3"
     }
   },
   "baseline_commit": "669ddd3",
@@ -485,7 +485,7 @@
       "id": "lowest_mode_period",
       "lowest_mode_period_s": 621.7414650099748,
       "requested_period_fraction": 1.0,
-      "full_period_wall_estimate_s": 3.110187973896365,
+      "full_period_wall_estimate_s": 4.674705879141993,
       "period_cost_cap_applied": false,
       "period_cost_rule": "12 DOP853 stages per bounded step plus 50 startup calls, priced at the measured reference cost per RHS; if projected wall time exceeds 300 s, requested duration is capped at 1000 s. This is a rough resource estimate, not solver accuracy."
     }
@@ -1189,10 +1189,10 @@
         "bytes": 3406
       },
       "resources": {
-        "integration_wall_s": 0.45284336899931077,
-        "diagnostics_and_archive_wall_s": 0.04989857400141773,
-        "total_case_wall_s": 0.5051446280012897,
-        "process_cpu_s": 0.504403945,
+        "integration_wall_s": 0.6806371760030743,
+        "diagnostics_and_archive_wall_s": 0.07867051799985347,
+        "total_case_wall_s": 0.76198663499963,
+        "process_cpu_s": 0.7617624760000001,
         "rhs_evaluations": 182,
         "returned_samples": 13,
         "counted_rhs_evaluations": 182,
@@ -1202,7 +1202,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -1904,10 +1904,10 @@
         "bytes": 3407
       },
       "resources": {
-        "integration_wall_s": 1.5704807919973973,
-        "diagnostics_and_archive_wall_s": 0.13836473700212082,
-        "total_case_wall_s": 1.711838628998521,
-        "process_cpu_s": 1.707992259,
+        "integration_wall_s": 2.3093199400027515,
+        "diagnostics_and_archive_wall_s": 0.2158737269928679,
+        "total_case_wall_s": 2.529279389003932,
+        "process_cpu_s": 2.5288354899999996,
         "rhs_evaluations": 182,
         "returned_samples": 13,
         "counted_rhs_evaluations": 182,
@@ -1917,7 +1917,7 @@
         "triangles": 288,
         "nodes": 173,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -2619,10 +2619,10 @@
         "bytes": 3412
       },
       "resources": {
-        "integration_wall_s": 5.317518564999773,
-        "diagnostics_and_archive_wall_s": 0.37583698500020546,
-        "total_case_wall_s": 5.698001716998988,
-        "process_cpu_s": 5.694277959000001,
+        "integration_wall_s": 6.103272024003672,
+        "diagnostics_and_archive_wall_s": 0.5130087500001537,
+        "total_case_wall_s": 6.6221530370021355,
+        "process_cpu_s": 6.620362937,
         "rhs_evaluations": 182,
         "returned_samples": 13,
         "counted_rhs_evaluations": 182,
@@ -2632,7 +2632,7 @@
         "triangles": 512,
         "nodes": 293,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -3346,10 +3346,10 @@
         "bytes": 4578
       },
       "resources": {
-        "integration_wall_s": 1.6174402119977458,
-        "diagnostics_and_archive_wall_s": 0.13106947900087107,
-        "total_case_wall_s": 1.7526793590004672,
-        "process_cpu_s": 1.7505393900000001,
+        "integration_wall_s": 2.2057170390035026,
+        "diagnostics_and_archive_wall_s": 0.19104898399382364,
+        "total_case_wall_s": 2.40171105000627,
+        "process_cpu_s": 2.401564072000001,
         "rhs_evaluations": 182,
         "returned_samples": 13,
         "counted_rhs_evaluations": 182,
@@ -3359,7 +3359,7 @@
         "triangles": 288,
         "nodes": 173,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -4089,10 +4089,10 @@
         "bytes": 6130
       },
       "resources": {
-        "integration_wall_s": 1.8221188170027744,
-        "diagnostics_and_archive_wall_s": 0.170508303999668,
-        "total_case_wall_s": 1.9981721820004168,
-        "process_cpu_s": 1.9949612289999994,
+        "integration_wall_s": 2.051100464006595,
+        "diagnostics_and_archive_wall_s": 0.1835433469968848,
+        "total_case_wall_s": 2.2420806610025465,
+        "process_cpu_s": 2.241815097,
         "rhs_evaluations": 167,
         "returned_samples": 13,
         "counted_rhs_evaluations": 167,
@@ -4102,7 +4102,7 @@
         "triangles": 288,
         "nodes": 173,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -4872,10 +4872,10 @@
         "bytes": 9988
       },
       "resources": {
-        "integration_wall_s": 1.9016774779993284,
-        "diagnostics_and_archive_wall_s": 0.16660142600085237,
-        "total_case_wall_s": 2.079769234002015,
-        "process_cpu_s": 2.078635991999999,
+        "integration_wall_s": 2.0899275729971123,
+        "diagnostics_and_archive_wall_s": 0.178183470001386,
+        "total_case_wall_s": 2.2797789070027648,
+        "process_cpu_s": 2.2794728840000005,
         "rhs_evaluations": 167,
         "returned_samples": 13,
         "counted_rhs_evaluations": 167,
@@ -4885,7 +4885,7 @@
         "triangles": 288,
         "nodes": 173,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -5735,10 +5735,10 @@
         "bytes": 17796
       },
       "resources": {
-        "integration_wall_s": 1.8147425089991884,
-        "diagnostics_and_archive_wall_s": 0.16041859300094075,
-        "total_case_wall_s": 1.9955869240002357,
-        "process_cpu_s": 1.9947983880000013,
+        "integration_wall_s": 2.1783728630034602,
+        "diagnostics_and_archive_wall_s": 0.19546075599646429,
+        "total_case_wall_s": 2.3972899799991865,
+        "process_cpu_s": 2.3968786999999985,
         "rhs_evaluations": 170,
         "returned_samples": 13,
         "counted_rhs_evaluations": 170,
@@ -5748,7 +5748,7 @@
         "triangles": 288,
         "nodes": 173,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -6778,10 +6778,10 @@
         "bytes": 35159
       },
       "resources": {
-        "integration_wall_s": 2.5996904780004115,
-        "diagnostics_and_archive_wall_s": 0.19348004299899912,
-        "total_case_wall_s": 2.8448236330004875,
-        "process_cpu_s": 2.844352977,
+        "integration_wall_s": 3.222657320999133,
+        "diagnostics_and_archive_wall_s": 0.21444139999948675,
+        "total_case_wall_s": 3.4966450819993042,
+        "process_cpu_s": 3.4963987030000006,
         "rhs_evaluations": 239,
         "returned_samples": 13,
         "counted_rhs_evaluations": 239,
@@ -6791,7 +6791,7 @@
         "triangles": 288,
         "nodes": 173,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -7645,10 +7645,10 @@
         "bytes": 18133
       },
       "resources": {
-        "integration_wall_s": 0.7089365650026593,
-        "diagnostics_and_archive_wall_s": 0.0631196579997777,
-        "total_case_wall_s": 0.783659260996501,
-        "process_cpu_s": 0.7834344049999977,
+        "integration_wall_s": 0.7762263550030184,
+        "diagnostics_and_archive_wall_s": 0.06939979799790308,
+        "total_case_wall_s": 0.8577359470000374,
+        "process_cpu_s": 0.8577250670000005,
         "rhs_evaluations": 206,
         "returned_samples": 13,
         "counted_rhs_evaluations": 206,
@@ -7658,7 +7658,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -8928,10 +8928,10 @@
         "bytes": 58773
       },
       "resources": {
-        "integration_wall_s": 9.801410842999758,
-        "diagnostics_and_archive_wall_s": 0.4570344740022847,
-        "total_case_wall_s": 10.439902540998446,
-        "process_cpu_s": 10.435744856000003,
+        "integration_wall_s": 12.176588508998975,
+        "diagnostics_and_archive_wall_s": 0.572455640998669,
+        "total_case_wall_s": 12.942649582997547,
+        "process_cpu_s": 12.931356954000002,
         "rhs_evaluations": 317,
         "returned_samples": 13,
         "counted_rhs_evaluations": 317,
@@ -8941,7 +8941,7 @@
         "triangles": 512,
         "nodes": 293,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -10211,10 +10211,10 @@
         "bytes": 58763
       },
       "resources": {
-        "integration_wall_s": 46.42357244899904,
-        "diagnostics_and_archive_wall_s": 0.3951846609998029,
-        "total_case_wall_s": 46.98290702399754,
-        "process_cpu_s": 46.947978154999994,
+        "integration_wall_s": 58.412461678999534,
+        "diagnostics_and_archive_wall_s": 0.5355923890019767,
+        "total_case_wall_s": 59.1473533640019,
+        "process_cpu_s": 59.07292872800001,
         "rhs_evaluations": 1529,
         "returned_samples": 13,
         "counted_rhs_evaluations": 1529,
@@ -10224,7 +10224,7 @@
         "triangles": 512,
         "nodes": 293,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -10926,10 +10926,10 @@
         "bytes": 3369
       },
       "resources": {
-        "integration_wall_s": 0.7175243669989868,
-        "diagnostics_and_archive_wall_s": 0.05490224700042745,
-        "total_case_wall_s": 0.7743971739982953,
-        "process_cpu_s": 0.7739715910000058,
+        "integration_wall_s": 0.8932421509962296,
+        "diagnostics_and_archive_wall_s": 0.06867254400276579,
+        "total_case_wall_s": 0.9646170440028072,
+        "process_cpu_s": 0.9645167979999911,
         "rhs_evaluations": 257,
         "returned_samples": 13,
         "counted_rhs_evaluations": 257,
@@ -10939,7 +10939,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -11641,10 +11641,10 @@
         "bytes": 3372
       },
       "resources": {
-        "integration_wall_s": 1.2803544480011624,
-        "diagnostics_and_archive_wall_s": 0.06862845599971479,
-        "total_case_wall_s": 1.352184393999778,
-        "process_cpu_s": 1.3507018249999874,
+        "integration_wall_s": 1.3909691880035098,
+        "diagnostics_and_archive_wall_s": 0.06768650699814316,
+        "total_case_wall_s": 1.4610132270026952,
+        "process_cpu_s": 1.4605267080000033,
         "rhs_evaluations": 389,
         "returned_samples": 13,
         "counted_rhs_evaluations": 389,
@@ -11654,7 +11654,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -12356,10 +12356,10 @@
         "bytes": 3409
       },
       "resources": {
-        "integration_wall_s": 2.3352753549988847,
-        "diagnostics_and_archive_wall_s": 0.2431223460007459,
-        "total_case_wall_s": 2.581157050000911,
-        "process_cpu_s": 2.57982355099999,
+        "integration_wall_s": 2.738634123998054,
+        "diagnostics_and_archive_wall_s": 0.28185631900123553,
+        "total_case_wall_s": 3.022914597997442,
+        "process_cpu_s": 3.0135153389999942,
         "rhs_evaluations": 167,
         "returned_samples": 13,
         "counted_rhs_evaluations": 167,
@@ -12369,7 +12369,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 7,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -13071,10 +13071,10 @@
         "bytes": 3406
       },
       "resources": {
-        "integration_wall_s": 5.824061962997803,
-        "diagnostics_and_archive_wall_s": 0.7445477180008311,
-        "total_case_wall_s": 6.570847537997906,
-        "process_cpu_s": 6.569798797000004,
+        "integration_wall_s": 6.971897449002427,
+        "diagnostics_and_archive_wall_s": 0.7002403200021945,
+        "total_case_wall_s": 7.674514675003593,
+        "process_cpu_s": 7.672768662999999,
         "rhs_evaluations": 167,
         "returned_samples": 13,
         "counted_rhs_evaluations": 167,
@@ -13084,7 +13084,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 19,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -13648,10 +13648,10 @@
         "bytes": 2077
       },
       "resources": {
-        "integration_wall_s": 0.6302672009987873,
-        "diagnostics_and_archive_wall_s": 0.033994328001426766,
-        "total_case_wall_s": 0.666745025999262,
-        "process_cpu_s": 0.6665990899999912,
+        "integration_wall_s": 0.5778031450026901,
+        "diagnostics_and_archive_wall_s": 0.035147139002219774,
+        "total_case_wall_s": 0.615428206998331,
+        "process_cpu_s": 0.6154410639999952,
         "rhs_evaluations": 167,
         "returned_samples": 7,
         "counted_rhs_evaluations": 167,
@@ -13661,7 +13661,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -14647,10 +14647,10 @@
         "bytes": 4433
       },
       "resources": {
-        "integration_wall_s": 2.3305168919978314,
-        "diagnostics_and_archive_wall_s": 0.10590414500256884,
-        "total_case_wall_s": 2.4413685090003128,
-        "process_cpu_s": 2.4409387240000058,
+        "integration_wall_s": 2.3600933109992184,
+        "diagnostics_and_archive_wall_s": 0.12381925599765964,
+        "total_case_wall_s": 2.4902391520008678,
+        "process_cpu_s": 2.4901017710000133,
         "rhs_evaluations": 167,
         "returned_samples": 7,
         "counted_rhs_evaluations": 167,
@@ -14660,7 +14660,7 @@
         "triangles": 384,
         "nodes": 255,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -15224,10 +15224,10 @@
         "bytes": 2077
       },
       "resources": {
-        "integration_wall_s": 0.17295384500175714,
-        "diagnostics_and_archive_wall_s": 0.025309848999313544,
-        "total_case_wall_s": 0.2005509640002856,
-        "process_cpu_s": 0.20046418700000856,
+        "integration_wall_s": 0.24202726300427457,
+        "diagnostics_and_archive_wall_s": 0.05935601300006965,
+        "total_case_wall_s": 0.3042161890043644,
+        "process_cpu_s": 0.3041389850000087,
         "rhs_evaluations": 62,
         "returned_samples": 7,
         "counted_rhs_evaluations": 62,
@@ -15237,7 +15237,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -15801,10 +15801,10 @@
         "bytes": 2073
       },
       "resources": {
-        "integration_wall_s": 0.4524327290018846,
-        "diagnostics_and_archive_wall_s": 0.025507111997285392,
-        "total_case_wall_s": 0.4797966699989047,
-        "process_cpu_s": 0.4796015609999955,
+        "integration_wall_s": 0.5837847410002723,
+        "diagnostics_and_archive_wall_s": 0.037359346002631355,
+        "total_case_wall_s": 0.6246458410023479,
+        "process_cpu_s": 0.6245933180000094,
         "rhs_evaluations": 81,
         "returned_samples": 7,
         "counted_rhs_evaluations": 157,
@@ -15814,7 +15814,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -16276,10 +16276,10 @@
         "bytes": 1184
       },
       "resources": {
-        "integration_wall_s": 1.3205561009999656,
-        "diagnostics_and_archive_wall_s": 0.013282076000905363,
-        "total_case_wall_s": 1.3356322170002386,
-        "process_cpu_s": 1.3353689529999997,
+        "integration_wall_s": 1.835297557998274,
+        "diagnostics_and_archive_wall_s": 0.02044287299941061,
+        "total_case_wall_s": 1.8580492160035647,
+        "process_cpu_s": 1.8574031089999892,
         "rhs_evaluations": 491,
         "returned_samples": 3,
         "counted_rhs_evaluations": 491,
@@ -16289,7 +16289,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -16761,10 +16761,10 @@
         "bytes": 1185
       },
       "resources": {
-        "integration_wall_s": 0.24616167299973313,
-        "diagnostics_and_archive_wall_s": 0.01235282199922949,
-        "total_case_wall_s": 0.26040593400102807,
-        "process_cpu_s": 0.2604055850000009,
+        "integration_wall_s": 0.35188074400502956,
+        "diagnostics_and_archive_wall_s": 0.01948217699828092,
+        "total_case_wall_s": 0.37442764400475426,
+        "process_cpu_s": 0.37430715700000405,
         "rhs_evaluations": 95,
         "returned_samples": 3,
         "counted_rhs_evaluations": 95,
@@ -16774,7 +16774,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -17476,10 +17476,10 @@
         "bytes": 2459
       },
       "resources": {
-        "integration_wall_s": 0.41156705100002,
-        "diagnostics_and_archive_wall_s": 0.0704735500003153,
-        "total_case_wall_s": 0.4839230480029073,
-        "process_cpu_s": 0.4838495529999989,
+        "integration_wall_s": 0.4338949059965671,
+        "diagnostics_and_archive_wall_s": 0.07092038900009356,
+        "total_case_wall_s": 0.5074272670026403,
+        "process_cpu_s": 0.5074016940000092,
         "rhs_evaluations": 119,
         "returned_samples": 13,
         "counted_rhs_evaluations": 119,
@@ -17489,7 +17489,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -18191,10 +18191,10 @@
         "bytes": 3450
       },
       "resources": {
-        "integration_wall_s": 2.2229052869988664,
-        "diagnostics_and_archive_wall_s": 0.14276885200160905,
-        "total_case_wall_s": 2.368188447999273,
-        "process_cpu_s": 2.367849031999995,
+        "integration_wall_s": 2.2901420620037243,
+        "diagnostics_and_archive_wall_s": 0.14170563600055175,
+        "total_case_wall_s": 2.4342917000030866,
+        "process_cpu_s": 2.433923422999996,
         "rhs_evaluations": 230,
         "returned_samples": 13,
         "counted_rhs_evaluations": 230,
@@ -18204,7 +18204,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     },
@@ -18229,7 +18229,7 @@
         "id": "lowest_mode_period",
         "lowest_mode_period_s": 621.7414650099748,
         "requested_period_fraction": 1.0,
-        "full_period_wall_estimate_s": 3.110187973896365,
+        "full_period_wall_estimate_s": 4.674705879141993,
         "period_cost_cap_applied": false,
         "period_cost_rule": "12 DOP853 stages per bounded step plus 50 startup calls, priced at the measured reference cost per RHS; if projected wall time exceeds 300 s, requested duration is capped at 1000 s. This is a rough resource estimate, not solver accuracy."
       },
@@ -20936,10 +20936,10 @@
         "bytes": 22736
       },
       "resources": {
-        "integration_wall_s": 5.19424625299871,
-        "diagnostics_and_archive_wall_s": 0.4747197889992094,
-        "total_case_wall_s": 5.672604764000425,
-        "process_cpu_s": 5.670417934999989,
+        "integration_wall_s": 5.998245984999812,
+        "diagnostics_and_archive_wall_s": 0.5025720589983393,
+        "total_case_wall_s": 6.503568320003978,
+        "process_cpu_s": 6.50246145700001,
         "rhs_evaluations": 1577,
         "returned_samples": 101,
         "counted_rhs_evaluations": 1577,
@@ -20949,7 +20949,7 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "nonfinite_diagnostic_fields": []
     }
@@ -21858,10 +21858,10 @@
         "id": "cost1",
         "method": "DOP853",
         "resources": {
-          "integration_wall_s": 0.6302672009987873,
-          "diagnostics_and_archive_wall_s": 0.033994328001426766,
-          "total_case_wall_s": 0.666745025999262,
-          "process_cpu_s": 0.6665990899999912,
+          "integration_wall_s": 0.5778031450026901,
+          "diagnostics_and_archive_wall_s": 0.035147139002219774,
+          "total_case_wall_s": 0.615428206998331,
+          "process_cpu_s": 0.6154410639999952,
           "rhs_evaluations": 167,
           "returned_samples": 7,
           "counted_rhs_evaluations": 167,
@@ -21871,7 +21871,7 @@
           "triangles": 128,
           "nodes": 85,
           "source_directions": 1,
-          "peak_process_rss_MiB": 125.3828125
+          "peak_process_rss_MiB": 125.28125
         },
         "completed": true,
         "terminal_difference_from_DOP853": {
@@ -21906,10 +21906,10 @@
         "id": "solver_rk45",
         "method": "RK45",
         "resources": {
-          "integration_wall_s": 0.17295384500175714,
-          "diagnostics_and_archive_wall_s": 0.025309848999313544,
-          "total_case_wall_s": 0.2005509640002856,
-          "process_cpu_s": 0.20046418700000856,
+          "integration_wall_s": 0.24202726300427457,
+          "diagnostics_and_archive_wall_s": 0.05935601300006965,
+          "total_case_wall_s": 0.3042161890043644,
+          "process_cpu_s": 0.3041389850000087,
           "rhs_evaluations": 62,
           "returned_samples": 7,
           "counted_rhs_evaluations": 62,
@@ -21919,7 +21919,7 @@
           "triangles": 128,
           "nodes": 85,
           "source_directions": 1,
-          "peak_process_rss_MiB": 125.3828125
+          "peak_process_rss_MiB": 125.28125
         },
         "completed": true,
         "terminal_difference_from_DOP853": {
@@ -21954,10 +21954,10 @@
         "id": "solver_radau",
         "method": "Radau",
         "resources": {
-          "integration_wall_s": 0.4524327290018846,
-          "diagnostics_and_archive_wall_s": 0.025507111997285392,
-          "total_case_wall_s": 0.4797966699989047,
-          "process_cpu_s": 0.4796015609999955,
+          "integration_wall_s": 0.5837847410002723,
+          "diagnostics_and_archive_wall_s": 0.037359346002631355,
+          "total_case_wall_s": 0.6246458410023479,
+          "process_cpu_s": 0.6245933180000094,
           "rhs_evaluations": 81,
           "returned_samples": 7,
           "counted_rhs_evaluations": 157,
@@ -21967,7 +21967,7 @@
           "triangles": 128,
           "nodes": 85,
           "source_directions": 1,
-          "peak_process_rss_MiB": 125.3828125
+          "peak_process_rss_MiB": 125.28125
         },
         "completed": true,
         "terminal_difference_from_DOP853": {
@@ -22033,7 +22033,7 @@
         "second_maximum_norm": 54.63873180599896
       }
     },
-    "scalar_over_dimensioned_wall_ratio": 5.364588584841951,
+    "scalar_over_dimensioned_wall_ratio": 5.215680565834092,
     "scalar_rhs_evaluations": 491,
     "dimensioned_rhs_evaluations": 95,
     "final_work_difference_J": -2.2661611476237908e-10,
@@ -22142,74 +22142,74 @@
     "model_build": {
       "models": {
         "mesh8_modes6": {
-          "build_wall_s": 0.004477734000829514,
+          "build_wall_s": 0.006823932999395765,
           "nodes": 85,
           "triangles": 128,
           "retained_modes": 6
         },
         "mesh12_modes6": {
-          "build_wall_s": 0.0054784370004199445,
+          "build_wall_s": 0.008305059003760107,
           "nodes": 173,
           "triangles": 288,
           "retained_modes": 6
         },
         "mesh16_modes6": {
-          "build_wall_s": 0.010070753000036348,
+          "build_wall_s": 0.013847579000866972,
           "nodes": 293,
           "triangles": 512,
           "retained_modes": 6
         },
         "mesh12_modes12": {
-          "build_wall_s": 0.0070273509991238825,
+          "build_wall_s": 0.009585877000063192,
           "nodes": 173,
           "triangles": 288,
           "retained_modes": 12
         },
         "mesh12_modes20": {
-          "build_wall_s": 0.008748942000238458,
+          "build_wall_s": 0.011595433999900706,
           "nodes": 173,
           "triangles": 288,
           "retained_modes": 20
         },
         "mesh12_modes40": {
-          "build_wall_s": 0.014161974999296945,
+          "build_wall_s": 0.017615892000321764,
           "nodes": 173,
           "triangles": 288,
           "retained_modes": 40
         },
         "mesh12_modes80": {
-          "build_wall_s": 0.025236667999706697,
+          "build_wall_s": 0.03771667499677278,
           "nodes": 173,
           "triangles": 288,
           "retained_modes": 80
         },
         "mesh12_modes170": {
-          "build_wall_s": 0.04484372200022335,
+          "build_wall_s": 0.06023689400171861,
           "nodes": 173,
           "triangles": 288,
           "retained_modes": 170
         },
         "mesh8_modes82": {
-          "build_wall_s": 0.013196588999562664,
+          "build_wall_s": 0.01602145600190852,
           "nodes": 85,
           "triangles": 128,
           "retained_modes": 82
         },
         "mesh16_modes290": {
-          "build_wall_s": 0.1546707220004464,
+          "build_wall_s": 0.18537160999403568,
           "nodes": 293,
           "triangles": 512,
           "retained_modes": 290
         }
       },
-      "total_build_wall_s": 0.31764380400272785
+      "total_build_wall_s": 0.40353148999565747
     },
     "one_three_tile": {
       "one_tile": {
-        "integration_wall_s": 0.6302672009987873,
-        "diagnostics_and_archive_wall_s": 0.033994328001426766,
-        "total_case_wall_s": 0.666745025999262,
-        "process_cpu_s": 0.6665990899999912,
+        "integration_wall_s": 0.5778031450026901,
+        "diagnostics_and_archive_wall_s": 0.035147139002219774,
+        "total_case_wall_s": 0.615428206998331,
+        "process_cpu_s": 0.6154410639999952,
         "rhs_evaluations": 167,
         "returned_samples": 7,
         "counted_rhs_evaluations": 167,
@@ -22219,13 +22219,13 @@
         "triangles": 128,
         "nodes": 85,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
       "three_tiles": {
-        "integration_wall_s": 2.3305168919978314,
-        "diagnostics_and_archive_wall_s": 0.10590414500256884,
-        "total_case_wall_s": 2.4413685090003128,
-        "process_cpu_s": 2.4409387240000058,
+        "integration_wall_s": 2.3600933109992184,
+        "diagnostics_and_archive_wall_s": 0.12381925599765964,
+        "total_case_wall_s": 2.4902391520008678,
+        "process_cpu_s": 2.4901017710000133,
         "rhs_evaluations": 167,
         "returned_samples": 7,
         "counted_rhs_evaluations": 167,
@@ -22235,17 +22235,17 @@
         "triangles": 384,
         "nodes": 255,
         "source_directions": 1,
-        "peak_process_rss_MiB": 125.3828125
+        "peak_process_rss_MiB": 125.28125
       },
-      "wall_ratio_three_over_one": 3.697664876586709,
+      "wall_ratio_three_over_one": 4.084597550932732,
       "rhs_ratio_three_over_one": 1.0,
       "both_completed": true,
       "comparable_requested_duration_s": 30.0,
       "rule": "Measured one/three-tile fixed-prefix cost only; no linear large-fleet extrapolation, optimizer budget or accepted service duration."
     },
-    "total_wall_s": 102.53459031400052,
-    "total_process_cpu_s": 102.47090629,
-    "peak_process_rss_MiB": 126.1953125
+    "total_wall_s": 125.24701238900161,
+    "total_process_cpu_s": 125.114331635,
+    "peak_process_rss_MiB": 125.81640625
   },
   "limits": [
     "normal-only linear prestress model with assumed finite support compliances",

@@ -33,10 +33,10 @@
         "epoxy_composite_60pct_tensile_strength_Pa": 2860000000.0,
         "epoxy_composite_60pct_tensile_modulus_Pa": 134000000000.0,
         "epoxy_composite_60pct_compressive_strength_Pa": 1450000000.0,
-        "epoxy_composite_60pct_transverse_tensile_strength_Pa": 81000000.0
+        "epoxy_composite_90deg_tensile_strength_Pa": 81000000.0
       },
       "use": "Anchor the order of material stiffness/strength for a composite frame or rotor; distinguish fiber from laminate.",
-      "limits": "Composite figures normalized to 60% fiber volume with epoxy cured at 130 C. Density in the sheet is fiber density, not laminate density. Lot averages are explicitly not specification values. Joints, buckling, thermal cycling, damage and fatigue require separate allowables."
+      "limits": "The composite tensile strength and modulus and the compressive strength are normalized to 60% fiber volume with epoxy cured at 130 C; the 90-degree tensile strength row (ASTM D3039) carries no such footnote. Density in the sheet is fiber density, not laminate density. Lot averages are explicitly not specification values. Joints, buckling, thermal cycling, damage and fatigue require separate allowables."
     },
     {
       "id": "nasa_membrane_wrinkling_2003",
@@ -89,8 +89,9 @@
       "url": "https://ntrs.nasa.gov/citations/20040028026",
       "read_extent": "Complete NASA repository abstract and bibliographic record, plus introduction excerpt in indexed PDF. Full paper not read.",
       "evidence": "Coupon experiments on IM7/8552 carbon/epoxy at room temperature, 95 C and 135 C.",
-      "use": "Shows transverse time/temperature-dependent relaxation can limit composite flywheel pre-load and life.",
-      "limits": "Results are material- and temperature-specific. They establish neither a generic rotor lifetime nor a fatigue allowable for the proposed tile. Hoop-strength checks alone omit radial/preload failure mechanisms."
+      "use": "Reports that time- and temperature-dependent relaxation of the epoxy matrix may limit the long-term durability of composite flywheel rotors (compressive stress relaxed 16.4% at 135 C and 13% at 95 C), and that the relaxation data may bound radial pre-load stresses.",
+      "limits": "Results are material- and temperature-specific. They establish neither a generic rotor lifetime nor a fatigue allowable for the proposed tile. Hoop-strength checks alone omit radial/preload failure mechanisms.",
+      "access_note": "The full report was read in the source check of 14 October 2026, which the figures in use come from."
     },
     {
       "id": "nasa_pen_damage_2017",

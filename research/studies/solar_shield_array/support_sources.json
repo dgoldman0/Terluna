@@ -41,7 +41,7 @@
       "published": "2024-02-12",
       "read_scope": "Official technology article",
       "evidence_state": "Ground deployment of one quadrant; complete sail design",
-      "supports": "A quadrant deployed on the ground in January 2024. The complete design uses approximately 30 m composite booms and 17,780 square feet (about 1,652 square metres) of 2.5 micrometre aluminized polymer sail. NASA reported reaching TRL 6.",
+      "supports": "A quadrant deployed on the ground in January 2024. The complete design uses approximately 30 m composite booms and 17,780 square feet (about 1,652 square metres) of 2.5 micrometre aluminized polymer sail. NASA's Science Mission Directorate had funded the technology to reach technology readiness level 6, and the article quotes the project saying it had met that goal.",
       "does_not_establish": "Flight deployment of the complete sail, optical filtering, or deployment and operation at 10 km scale."
     },
     {
@@ -81,7 +81,7 @@
       "published": "2015-01-05",
       "read_scope": "NTRS abstract; related 2014 paper indexed experimental section",
       "evidence_state": "Analytical research and subscale ground experiments",
-      "supports": "NASA studied nonlinear flexible-blade dynamics, solar-elastic stability and deployment. Ground tests used hanging or spinning blade analogues; edge reinforcement and tip masses improved predicted torsional response. The related 2014 apparatus used 0.5 m membrane blades in a 2.5 m vacuum sphere.",
+      "supports": "NASA studied nonlinear flexible-blade dynamics, solar-elastic stability and deployment. Ground tests used hanging or spinning blade analogues; edge reinforcement and tip masses improved predicted torsional response. The related 2014 paper (Wilkie et al., Recent Progress in Heliogyro Solar Sail Structural Dynamics, ECSSMET 2014, NTRS 20140003899) used 0.5 m Kapton membrane blades in a 2.5 m vacuum sphere; the 2015 tests replaced them with a 0.46 m rope-ladder blade model to reduce low-pressure air effects.",
       "does_not_establish": "Flight of a kilometre-scale heliogyro or instantaneous filled-aperture optical coverage. Long narrow rotating blades occupy a small fraction of their swept disk."
     },
     {
@@ -93,7 +93,9 @@
       "related_url": "https://ntrs.nasa.gov/api/citations/20250003657/downloads/CABLESSail_Poster_Jamboree_FY25.pdf",
       "evidence_state": "Small-scale prototype tests and numerical torque allocation; preprint submitted to Advances in Space Research",
       "supports": "Actuated cables along structural booms change sail shape to generate momentum-management torque. Prototype work demonstrates controllable boom deformation; calculated torque robustness includes uncertain membrane shape.",
-      "does_not_establish": "A zero-boom support, a mass-qualified complete actuator or a 10 km shield controller. Changing optical shape for torque also requires renewed filter-incidence and coverage checks."
+      "does_not_establish": "A zero-boom support, a mass-qualified complete actuator or a 10 km shield controller. Changing optical shape for torque also requires renewed filter-incidence and coverage checks.",
+      "version_note": "The published date is that of arXiv version 2; version 1 was submitted on 2025-12-15.",
+      "authors": "Soojeong Lee, Michael States, Keegan R. Bunker and Ryan J. Caverly"
     }
   ],
   "comparison_rules": [

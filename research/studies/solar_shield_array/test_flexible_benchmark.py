@@ -97,6 +97,8 @@ def test_export_closes_mass_centres_geometry_and_rejects_tampering(model_product
     assert metadata['nodal_inertia_relative_frobenius_error'] > 0
     assert metadata['area_relative_error'] > 0
     assert not metadata['whole_spacecraft_budget_closed']
+    # A product crossing lanes states its schema, provenance, evidence and the rule for reading it (AGENTS.md).
+    assert model_product['evidence'] and model_product['reading_rule'] == fb.MODEL_READING_RULE
 
 
 def test_common_physical_probes_reproduce_affine_fields(model_product, reference):
@@ -205,8 +207,11 @@ def test_preserved_product_hashes_and_all_fixed_cases():
         assert not case['accepted_operating_design']
         if not case['integration_success']:
             assert case.get('failure') or case.get('solver_message')
+    assert result['evidence'] and result['reading_rule']
     models = json.loads(fb.MODELS_OUT.read_text())
+    assert models['evidence'] and models['reading_rule']
     for product in models['models'].values():
+        assert product['evidence'] and product['reading_rule'] == fb.MODEL_READING_RULE
         assert fb.canonical_hash(product['model']) == product['model_sha256']
         for path, digest in product['producer_hashes'].items():
             assert fb.td.digest(fb.ROOT/path) == digest

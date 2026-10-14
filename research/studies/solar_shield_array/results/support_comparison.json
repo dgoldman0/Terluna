@@ -30,15 +30,15 @@
   "inputs": {
     "research/studies/solar_shield_array/results/tile_design.json": {
       "schema": "terluna.research.array-tile-design/1",
-      "sha256": "8dc05d1ace209d470b5dede4bfb0af8ea6abe452e660d426159cf55ad16921b2"
+      "sha256": "079f15af9f52374337a36f3e18427f04bc653f84a7df2766ceb2cb4bbdcea91d"
     },
     "research/studies/solar_shield_array/support_materials.json": {
       "schema": "terluna.research.array-support-materials/1",
-      "sha256": "ec844eb3f7c7f5311bd72d6145c7c66205e3717bb6b28b34e2d4b613bb2c395d"
+      "sha256": "d6d5b83a0064b20538fdad14531baf2b9ca707fe23d8a39e626b943154e2cb70"
     },
     "research/studies/solar_shield_array/support_sources.json": {
       "schema": "terluna.research.array-support-sources/1",
-      "sha256": "0c077e4bc1c1eb3116dd26c2224ce247181fac857a60408826cb8bd18be5d110"
+      "sha256": "2afd4ed953e1c5424f31ce5746182ce300d4ff348d389a34ae1019ce2c82ce6d"
     }
   },
   "baseline_commit": "e1196f5",
@@ -13631,6 +13631,6 @@
     },
     "scope": "uniform disk, independently ballasted edge, no edge hoop tension; no complete actuator, attachment or normal edge dynamics"
   },
-  "runtime_s": 2.4646431599976495,
-  "peak_rss_MiB": 770.00390625
+  "runtime_s": 2.2979720319999615,
+  "peak_rss_MiB": 90.83984375
 }

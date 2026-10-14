@@ -68,7 +68,7 @@
       ],
       "measured_properties": "Density and longitudinal 25 C dry laminate properties from one product table.",
       "evidence": "Manufacturer typical properties with unqualified study sizing allowance.",
-      "properties_basis": "Density and longitudinal 25 C dry laminate properties from one product table. Screen modulus uses measured compression modulus 128 GPa rather than tensile 141 GPa. Screen stress = 0.5 times typical compression strength. UD property assumes axial load path; it is not an isotropic shell property.",
+      "properties_basis": "Nominal laminate density and longitudinal 25 C dry laminate properties from one product table, at a nominal fiber volume of 57.42%; the sheet calls its values representative. Screen modulus uses measured compression modulus 128 GPa rather than tensile 141 GPa. Screen stress = 0.5 times typical compression strength. UD property assumes axial load path; it is not an isotropic shell property.",
       "screening_derivation": "Screen modulus uses measured compression modulus 128 GPa rather than tensile 141 GPa. Screen stress = 0.5 times typical compression strength. UD property assumes axial load path; it is not an isotropic shell property.",
       "limitations": [
         "Tube hoop plies, off-axis reinforcement and local buckling can reduce installed axial performance.",
@@ -120,7 +120,7 @@
       "limitations": [
         "Low elongation and notch/damage sensitivity require component analysis; a metal label does not establish ductile load redistribution.",
         "Kilometre truss joins, thin sections and production throughput are unqualified.",
-        "Manufacturing exposure controls and recycling are required by the material supplier; their mass/cost is not estimated here."
+        "Beryllium manufacture needs exposure controls: the data sheet refers users to the safety data sheet and the regulatory exposure limits. Their mass and cost are not estimated here."
       ],
       "qualified_for_array_service": false
     },
@@ -204,7 +204,7 @@
       ],
       "measured_properties": "Manufacturer room-temperature reinforcement-fiber values.",
       "evidence": "Manufacturer typical properties with unqualified study sizing allowance.",
-      "properties_basis": "Manufacturer room-temperature reinforcement-fiber values. Screen stress =0.25 times tensile strength. Do not credit the stronger cryogenic table entry or treat fiber as a glass composite compression member.",
+      "properties_basis": "Manufacturer room-temperature reinforcement-fiber values; the sheet states no test basis (filament or strand). Screen stress =0.25 times tensile strength. Do not credit the stronger cryogenic table entry or treat fiber as a glass composite compression member.",
       "screening_derivation": "Screen stress =0.25 times tensile strength. Do not credit the stronger cryogenic table entry or treat fiber as a glass composite compression member.",
       "limitations": [
         "Surface flaws, handling abrasion, long cable statistics and terminations unqualified.",
@@ -274,12 +274,12 @@
       ],
       "measured_properties": "Matched rolled DS-CNTF strength, modulus and specific strength from primary experimental paper.",
       "evidence": "Experimental small-specimen tensile result with hypothetical installed allowance.",
-      "properties_basis": "Matched rolled DS-CNTF strength, modulus and specific strength from primary experimental paper. Density inferred as11.7GPa/(7.03e6Nm/kg)=1664.3kg/m3; rounding of reported quantities limits precision. Screen stress =0.25 tensile strength, a hypothetical transfer allowance, not qualified manufacturing performance.",
-      "screening_derivation": "Density inferred as11.7GPa/(7.03e6Nm/kg)=1664.3kg/m3; rounding of reported quantities limits precision. Screen stress =0.25 tensile strength, a hypothetical transfer allowance, not qualified manufacturing performance.",
+      "properties_basis": "Matched rolled DS-CNTF strength, modulus and specific strength from primary experimental paper. Density inferred as11.7GPa/(7.03e6Nm/kg)=1664.3kg/m3; the 7.03e6 N m/kg is the paper's specific strength before rolling, which it reports rolling changed little, and rounding of reported quantities limits precision. Screen stress =0.25 tensile strength, a hypothetical transfer allowance, not qualified manufacturing performance.",
+      "screening_derivation": "Density inferred as11.7GPa/(7.03e6Nm/kg)=1664.3kg/m3; the 7.03e6 N m/kg is the paper's specific strength before rolling, which it reports rolling changed little, and rounding of reported quantities limits precision. Screen stress =0.25 tensile strength, a hypothetical transfer allowance, not qualified manufacturing performance.",
       "limitations": [
         "Experimental centimetre-gauge tensile result; kilometre homogeneous production, joints and service life unproved.",
         "No matched compression-frame properties; cannot replace laminate in frame calculations.",
-        "Do not substitute14GPa high-strain-rate results for sustained-load allowables."
+        "Do not substitute high-strain-rate strengths, from this or other fibres, for sustained-load allowables."
       ],
       "qualified_for_array_service": false
     },
@@ -319,7 +319,7 @@
   },
   "universal_limits": [
     "No candidate is qualified here for 175 K vacuum, repeated eclipse/roll thermal cycles, fifteen-year sustained loading, or solar UV/particle exposure.",
-    "Source values are typical short-coupon measurements or laboratory results. Statistical allowables, defects at kilometre length, joints, local buckling, load reversals and deployment require separate evidence.",
+    "Source values are manufacturers' typical or specified minimum values and laboratory fiber, yarn, strand and coupon results. Statistical allowables, defects at kilometre length, joints, local buckling, load reversals and deployment require separate evidence.",
     "Axial fiber modulus is usable only in a tension-member sensitivity. A compression frame needs a matrix, transverse/hoop reinforcement, shear stiffness and a buckling model; bare fiber properties do not supply them.",
     "A single scalar modulus used by the engineering screen is a modeling assumption. Laminate orthotropy, layup, joints, creep and temperature dependence remain unresolved."
   ],
@@ -362,7 +362,7 @@
       ],
       "measured_properties": "Density and longitudinal 25 C dry laminate properties from one product table.",
       "evidence": "Manufacturer typical properties with unqualified study sizing allowance.",
-      "properties_basis": "Density and longitudinal 25 C dry laminate properties from one product table. Screen modulus uses measured compression modulus 128 GPa rather than tensile 141 GPa. Screen stress = 0.5 times typical compression strength. UD property assumes axial load path; it is not an isotropic shell property.",
+      "properties_basis": "Nominal laminate density and longitudinal 25 C dry laminate properties from one product table, at a nominal fiber volume of 57.42%; the sheet calls its values representative. Screen modulus uses measured compression modulus 128 GPa rather than tensile 141 GPa. Screen stress = 0.5 times typical compression strength. UD property assumes axial load path; it is not an isotropic shell property.",
       "screening_derivation": "Screen modulus uses measured compression modulus 128 GPa rather than tensile 141 GPa. Screen stress = 0.5 times typical compression strength. UD property assumes axial load path; it is not an isotropic shell property.",
       "limitations": [
         "Tube hoop plies, off-axis reinforcement and local buckling can reduce installed axial performance.",
@@ -414,7 +414,7 @@
       "limitations": [
         "Low elongation and notch/damage sensitivity require component analysis; a metal label does not establish ductile load redistribution.",
         "Kilometre truss joins, thin sections and production throughput are unqualified.",
-        "Manufacturing exposure controls and recycling are required by the material supplier; their mass/cost is not estimated here."
+        "Beryllium manufacture needs exposure controls: the data sheet refers users to the safety data sheet and the regulatory exposure limits. Their mass and cost are not estimated here."
       ],
       "qualified_for_array_service": false
     },
@@ -483,7 +483,7 @@
       ],
       "measured_properties": "Manufacturer room-temperature reinforcement-fiber values.",
       "evidence": "Manufacturer typical properties with unqualified study sizing allowance.",
-      "properties_basis": "Manufacturer room-temperature reinforcement-fiber values. Screen stress =0.25 times tensile strength. Do not credit the stronger cryogenic table entry or treat fiber as a glass composite compression member.",
+      "properties_basis": "Manufacturer room-temperature reinforcement-fiber values; the sheet states no test basis (filament or strand). Screen stress =0.25 times tensile strength. Do not credit the stronger cryogenic table entry or treat fiber as a glass composite compression member.",
       "screening_derivation": "Screen stress =0.25 times tensile strength. Do not credit the stronger cryogenic table entry or treat fiber as a glass composite compression member.",
       "limitations": [
         "Surface flaws, handling abrasion, long cable statistics and terminations unqualified.",
@@ -553,12 +553,12 @@
       ],
       "measured_properties": "Matched rolled DS-CNTF strength, modulus and specific strength from primary experimental paper.",
       "evidence": "Experimental small-specimen tensile result with hypothetical installed allowance.",
-      "properties_basis": "Matched rolled DS-CNTF strength, modulus and specific strength from primary experimental paper. Density inferred as11.7GPa/(7.03e6Nm/kg)=1664.3kg/m3; rounding of reported quantities limits precision. Screen stress =0.25 tensile strength, a hypothetical transfer allowance, not qualified manufacturing performance.",
-      "screening_derivation": "Density inferred as11.7GPa/(7.03e6Nm/kg)=1664.3kg/m3; rounding of reported quantities limits precision. Screen stress =0.25 tensile strength, a hypothetical transfer allowance, not qualified manufacturing performance.",
+      "properties_basis": "Matched rolled DS-CNTF strength, modulus and specific strength from primary experimental paper. Density inferred as11.7GPa/(7.03e6Nm/kg)=1664.3kg/m3; the 7.03e6 N m/kg is the paper's specific strength before rolling, which it reports rolling changed little, and rounding of reported quantities limits precision. Screen stress =0.25 tensile strength, a hypothetical transfer allowance, not qualified manufacturing performance.",
+      "screening_derivation": "Density inferred as11.7GPa/(7.03e6Nm/kg)=1664.3kg/m3; the 7.03e6 N m/kg is the paper's specific strength before rolling, which it reports rolling changed little, and rounding of reported quantities limits precision. Screen stress =0.25 tensile strength, a hypothetical transfer allowance, not qualified manufacturing performance.",
       "limitations": [
         "Experimental centimetre-gauge tensile result; kilometre homogeneous production, joints and service life unproved.",
         "No matched compression-frame properties; cannot replace laminate in frame calculations.",
-        "Do not substitute14GPa high-strain-rate results for sustained-load allowables."
+        "Do not substitute high-strain-rate strengths, from this or other fibres, for sustained-load allowables."
       ],
       "qualified_for_array_service": false
     },
@@ -603,7 +603,7 @@
       "author": "Hexcel",
       "source_kind": "manufacturer data sheet",
       "read_extent": "PDF pages 1-4 and 6: UD and woven tables, neat-resin data, operating-temperature statement and typical-property disclaimer. Cure-cycle pages inspected but not used to size fabrication.",
-      "facts": "AS4 UD laminate density 1580 kg/m3, 0-degree tensile modulus 141 GPa, compression modulus 128 GPa, compression strength 1531 MPa at 25 C dry. Cold table reaches -55 C, not 175 K. Resin density 1300 kg/m3 is used only as an explicitly assumed proxy for M55J/#2500 density."
+      "facts": "AS4 UD laminate density 1580 kg/m3, 0-degree tensile modulus 141 GPa, compression modulus 128 GPa, compression strength 1531 MPa at 25 C dry, at a nominal fiber volume of 57.42% (nominal laminate density; the sheet calls the values representative). Cold table reaches -55 C, not 175 K. Resin density 1300 kg/m3 is used only as an explicitly assumed proxy for M55J/#2500 density."
     },
     {
       "id": "toray_m55j",
@@ -621,7 +621,7 @@
       "author": "AGY",
       "source_kind": "manufacturer-authored data sheet hosted by a distributor",
       "read_extent": "Both PDF pages, especially physical-property table and disclaimer on page 2. Publisher identity and table checked in parsed PDF.",
-      "facts": "S-2 glass fiber at 23 C: density 2460 kg/m3, tensile modulus 86.9 GPa, tensile strength 4890 MPa. Table gives 8275 MPa at -196 C; that increase is not credited in the study. Data are reinforcement properties, not a glass composite beam."
+      "facts": "S-2 glass fiber at 23 C: density 2460 kg/m3, tensile modulus 86.9 GPa, tensile strength 4890 MPa. Table gives 8275 MPa at -196 C; that increase is not credited in the study. Data are reinforcement properties, not a glass composite beam; the sheet states no test basis."
     },
     {
       "id": "dupont_kevlar",
@@ -632,7 +632,8 @@
       "original_url": "https://www.dupont.com/content/dam/dupont/amer/us/en/safety/public/documents/en/Kevlar_Technical_Guide_0319.pdf",
       "access_note": "Original manufacturer URL and UK/French mirrors returned 404 during open; search index retained extracts. The complete manufacturer-authored PDF was instead opened at R&G. No silent substitution of property table.",
       "read_extent": "PDF pages 5-6 typical-property tables and notes, page 14 cryogenic paragraph, pages 16-17 radiation/UV discussion. Full chemical-resistance and short-fiber sections not reviewed.",
-      "facts": "Kevlar49 conditioned yarn: density 1440 kg/m3, tensile modulus 112.4 GPa, strength 3000 MPa. Impregnated strand properties differ. Guide reports no embrittlement down to -196 C but does not establish space life. UV discussion describes oxygen-dependent terrestrial degradation; it is not a vacuum degradation-rate measurement."
+      "facts": "Kevlar49 conditioned yarn: density 1440 kg/m3, tensile modulus 112.4 GPa, strength 3000 MPa. Impregnated strand properties differ. Guide reports no embrittlement down to -196 C but does not establish space life. UV discussion describes oxygen-dependent terrestrial degradation; it is not a vacuum degradation-rate measurement.",
+      "edition_note": "The R&G copy is the 07/17 edition; the original URL's 07/18 edition, retrievable from the Internet Archive, gives the same Kevlar 49 values and cryogenic and UV text."
     },
     {
       "id": "honeywell_spectra",
@@ -661,7 +662,7 @@
       "publication_date": "2026-07-02",
       "source_kind": "primary experimental paper",
       "read_extent": "Main-text abstract, Results through high strength/conductivity, CNT length-effect paragraph, and Methods mechanical testing and density determination. Supplementary information, raw data, transport experiments and independent replication not reviewed.",
-      "facts": "Use rolled DS-CNTF: strength 11.7 GPa, modulus 370 GPa, specific strength 7.03e6 N m/kg. Infer density from strength/specific strength. The 12.5 GPa thinner DS-THINF sample has modulus 260 GPa; do not mix maxima. Tests mostly 10 mm gauge and 0.0333/s strain rate, also 2-50 mm gauges. No compression or service-life qualification."
+      "facts": "Use rolled DS-CNTF: strength 11.7 GPa, modulus 370 GPa, specific strength 7.03e6 N m/kg (measured before rolling, which the paper reports changed it little). Infer density from strength/specific strength. The 12.5 GPa thinner DS-THINF sample has modulus 260 GPa; do not mix maxima. Tests mostly 10 mm gauge and 0.0333/s strain rate, also 2-50 mm gauges. No compression or service-life qualification."
     },
     {
       "id": "li_graphene_2024",
@@ -682,7 +683,7 @@
       "author": "Materion",
       "source_kind": "manufacturer data sheet hosted on manufacturer-linked CDN",
       "read_extent": "All three PDF pages: grade distinction, physical/mechanical tables, product forms, manufacturing and qualification limitations. Opened by following manufacturer page's S-200 data-sheet link.",
-      "facts": "S-200-FH hot-isostatically pressed grade has isotropic properties. Typical density1850kg/m3, modulus290GPa; minimum room-temperature ASTM E8 tensile yield296MPa and ultimate414MPa. Thickness and part geometry affect actual properties. Manufacturer's material use in space does not qualify this frame."
+      "facts": "S-200-FH hot-isostatically pressed grade has isotropic properties. Typical density1850kg/m3, modulus290GPa; minimum room-temperature ASTM E8 tensile yield296MPa and ultimate414MPa. Actual properties may vary by thickness and part number. Manufacturer's material use in space does not qualify this frame."
     },
     {
       "id": "3m_sic",

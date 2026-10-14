@@ -23,7 +23,8 @@
       "retrieved_metadata_url": "https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/20150021404.pdf",
       "read_scope": "NASA NTRS abstract and metadata, retrieved via the archival URL. The canonical page returned HTTP 403 during this review; no full-paper reading is claimed.",
       "supports": "Established solar-sail thrust models include specular and diffuse reflection, thermal emission and non-Lambertian scattering terms; coefficients depend on the tested sail construction.",
-      "limits": "The present model implements only direct absorption, specular reflection and straight transmission with caller-supplied grey energy fractions. No coefficients or material validation are adopted from this source."
+      "limits": "The present model implements only direct absorption, specular reflection and straight transmission with caller-supplied grey energy fractions. No coefficients or material validation are adopted from this source.",
+      "access_note": "In the source check of 14 October 2026 the canonical page and the full PDF opened; the archival .pdf address serves the NTRS record with the abstract."
     }
   ],
   "new_model_assumptions": [
