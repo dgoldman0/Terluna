@@ -925,7 +925,26 @@ and the curved air's test without the bands:
 - **The rain falls 7.6%**, over land 7.5% in the tropics and 5.5% at 30–60°: 2.6% for each kelvin against the
   dimming runs' 3.1%, the ground taking 5.6 W/m² more sunlight through thinner cloud and drier air.
 - **Holding the design temperature would take about 1.5–1.7% less dimming**, at the dimming runs' 1.72–1.9 K for
-  each 1% of sunlight: a sunlight scale near 0.965 in place of 0.95, not yet run.
+  each 1% of sunlight: a sunlight scale near 0.965 in place of 0.95, run below.
+
+**The new standard and the dimming that holds the design temperature.** With the curved air, the bands and the corrected
+ledger's terms as the runner's defaults, `A28_corrected_9655` branches from the design case's year-29 restart and
+`A28_corrected_9685` from its year 19. Their years 10–19 against the design case's 20–29:
+
+| | Design case | Scale 0.9655 | Scale 0.9685 |
+|---|---|---|---|
+| Surface temperature | 294.90 K | 294.40 K | 294.76 K, drifting 0.004 K a decade |
+| Air at 2 m | 294.37 K | 293.70 K | 294.02 K |
+| Cloud cover; in the top two layers | 23.5%; 4.2% and 8.5% | 20.1%; 0.2% and 5.3% | 19.9%; 0.2% and 5.5% |
+| Precipitation | 2.24 mm/day | 2.25 mm/day | 2.29 mm/day |
+| Sunlight taken by the ground; by the air | 120.6; 90.6 W/m² | 126.1; 101.1 W/m² | 126.1; 101.7 W/m² |
+| Water vapour | 176 kg/m² | 163 kg/m² | 167 kg/m² |
+
+- **The design temperature needs a sunlight scale near 0.970**, a dimming of about 3.0% below the shield product in
+  place of the design case's 5%. The two runs move 1.13 K for each 1% of sunlight, against 1.7–1.9 K in the dimming
+  runs of the old radiation, and their cloud hardly changes between them.
+- **The rain comes back ahead of the temperature.** At 0.9685 the Moon rains 2.5% more than the design case while
+  0.14 K cooler at the ground: the ground takes 5.6 W/m² more sunlight under the thinner high cloud.
 
 ### Cloud amount: what published models say
 

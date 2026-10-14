@@ -105,8 +105,8 @@ BOUND = {
     'resources_sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='ceb40af530a81ca788ba0af1f38ecfb741f177f8',
-        sha256='08135ce146082a7017397ec477d9f29193387a7732af4c9c9602e4a055c34364',
+        blob='433c4bf33da7fa3bc9b7ff03049aa4a76d1afe83',
+        sha256='a0837a433a04ae2071ff01afdef513546d9c6ca221654ef6ecde80949636c912',
         note='The land\'s phosphorus through the rain-fed lakes to the seas: the dissolved input the common-level '
              'waters receive, and what the waters\' life can spare to seaweed, fish and sorption.'),
 }
