@@ -223,10 +223,16 @@ fast, 1.8 times the seas' water within 10,000 years at the central values (0.7�
 takes a top-up of thousands of cubic kilometres a year through the first millennia. The water table followed: in the
 mature Moon groundwater comes out across a third of the land, three quarters of the tropics and little poleward of 45°,
 carries a quarter of the rivers' flow and feeds the lakes except at the dry poles; the young Moon is drier, its middle
-latitudes most of all. The springs' load follows on the author's word.
+latitudes most of all. The springs' load followed: the springs' water is a median 76 years old in the mature Moon and
+carries about the soil water's load, since below the soil the rock runs through the CO2 the water brought and lays its
+calcium as calcite underground; the springs are moderately hard, alkaline magnesium waters in the young Moon, and build
+almost no travertine. The land's weathering reaching the waters is about 0.6 of what the carbon cycle counts in the
+mature Moon and 0.2–0.5 in the young Moon, chiefly because nearly half the rivers' flow is rain on the lakes, and the
+filling crust takes up to a quarter of the carbon cycle's import down with its water over the first 10,000 years.
 
-Waiting on the author: the array's power distribution recommendation (domain synthesis), and the taxonomy, on hold
-for later, with its open choices and the aerophytes' scientific name.
+Waiting on the author: the array's power distribution recommendation (domain synthesis); carrying the springs study's
+weathering and filling-crust carbon into the carbon cycle, and the floors' share of the seas' alkalinity into the sea
+chemistry; and the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 

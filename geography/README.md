@@ -257,10 +257,12 @@ young Moon at 1,000 and 10,000 years.
   three quarters of the land within 15° of the equator, two fifths at 15-30°, a fifth at 30-45°, 4% at 45-60° and almost
   none nearer the poles. Elsewhere it lies deep, a median 364 m below the ground (170-635), deeper than 200 m under half
   the land and some 800 m under the dry high latitudes.
-- **A quarter of the rivers' flow is groundwater.** Of the 1,870 km³ a year that recharges the crust (1,070-2,490),
-  92% comes out at the surface, 6% seeps into the lakes and 2% into the seas: a quarter of the rivers' 7,240 km³ a year
-  (15-34%). Earth's rivers draw 59% of their flow from groundwater (Xie et al. 2024), so the Moon's rivers run
-  flashier.
+- **A quarter of the rivers' flow is groundwater, and half of the water that comes off the land.** Of the 1,870 km³
+  a year that recharges the crust (1,070-2,490), 92% comes out at the surface, 6% seeps into the lakes and 2% into the
+  seas: a quarter of the rivers' 7,240 km³ a year (15-34%), where Earth's rivers draw 59% of their flow from
+  groundwater (Xie et al. 2024). Nearly half of the Moon's river flow is rain on its lakes, net of their evaporation,
+  and the lakes even out what passes through them; of the water that comes off the land itself, groundwater is about
+  half ([the springs' load](../research/studies/springs/README.md)).
 - **The lakes gain groundwater, except at the dry poles.** On the 15 km grid 886 of 1,061 lakes, 96% of the lake area,
   take groundwater in, a median 5 cm a year. Of the 47 lakes losing more than 10 cm a year, 46 lie poleward of 75°,
   perched over deep water tables in the dry polar lands; they hold only if their beds seal, and the narrow polar cells

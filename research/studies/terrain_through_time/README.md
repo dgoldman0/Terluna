@@ -65,14 +65,16 @@ Two runners write two products:
   0.27–2.7 km³ a year of rock.
 - **Travertine builds while the soils are young.** At the catchment rate the rivers carry 1.26 meq/L of alkalinity and,
   at the air's CO2, stand at 0.76 times calcite saturation: they build tufa on 0.2% of their length, where warm ground
-  or evaporating lakes harden them. Tufa needs about twice that load (2.0 times for Earth's streams' threshold,
-  1.6 times for Plitvice's rule). The young soils supply it. In the carbon cycle's central case, 94% of the river
-  length builds tufa at first, 72% after 100 years, 24% after 300 and 0.5% after 1,000. With the fastest soils, 99%
-  builds for the first 1,000 years, 90% at 3,000 and 24% at 10,000; the slowest soils build none. Builders designed to
-  calcify from twice saturation keep 43% of the rivers building at 1,000 years in the central case and 30,000 with the
-  fastest soils. Once the soils reach the catchment rate, lasting barriers need springs carrying twice the rivers'
-  load, or builders that calcify from undersaturated water as freshwater shellfish do. Plitvice's barriers rise about
-  13.5 mm a year, 17 times faster than its lake floors fill, so a lake behind a living barrier deepens.
+  or evaporating lakes harden them. Tufa needs about twice that load (2.0 times for Earth's streams' threshold, 1.6
+  times for Plitvice's rule). The young soils supply it. In the carbon cycle's central case, 94% of the river length
+  builds tufa at first, 72% after 100 years, 24% after 300 and 0.5% after 1,000. With the fastest soils, 99% builds for
+  the first 1,000 years, 90% at 3,000 and 24% at 10,000; the slowest soils build none. Builders designed to calcify from
+  twice saturation keep 43% of the rivers building at 1,000 years in the central case and 30,000 with the fastest soils.
+  Once the soils reach the catchment rate, lasting barriers need springs carrying twice the rivers' load, or builders
+  that calcify from undersaturated water as freshwater shellfish do. The springs carry 0.9–1.3 times the soil water's
+  load and come to saturation or below it in air ([springs](../springs/README.md)), so the barriers rest on builders.
+  Plitvice's barriers rise about 13.5 mm a year, 17 times faster than its lake floors fill, so a lake behind a living
+  barrier deepens.
 - **Dam builders keep the small waters the grid cannot see.** The grid resolves only channels carrying 1 m³/s and
   more, 266,000 km of them. Under lunar floods, which move a stream bed's material 1.8 times as easily as Earth's at
   the same discharge and slope, dams persist on 3.4–7.8% of that length, 9,000–21,000 km with 36,000–310,000 dams
