@@ -1,0 +1,39 @@
+{
+  "schema": "terluna.research.flexible-optics-source-notes/1",
+  "reading_rule": "Primary method context and explicit model omissions. These references do not validate the new array geometry, optical coefficients, control authority or numerical coverage. No outside source bytes are redistributed.",
+  "sources": [
+    {
+      "id": "moller_trumbore_1997",
+      "title": "Fast, Minimum Storage Ray-Triangle Intersection",
+      "authors": "Tomas Moller and Ben Trumbore",
+      "year": 1997,
+      "doi": "10.1080/10867651.1997.10487468",
+      "url": "https://my.eng.utah.edu/~cs6965/papers/MT97.pdf",
+      "author_publications_url": "https://fileadmin.cs.lth.se/cs/Personal/Tomas_Akenine-Moller/publications.html",
+      "read_scope": "Author publication listing and retrieved seven-page primary paper mirror; PDF text extraction is incomplete. Used as algorithm attribution, not a full scholarly reading or adopted numerical tolerance specification.",
+      "supports": "The ray-triangle barycentric intersection construction used in the implementation.",
+      "limits": "The new implementation's tolerances, chunking, broad-phase culling, coincident-face handling and multilayer optical traversal are separately specified and tested assumptions. The cited method does not prove coverage under finite sampling."
+    },
+    {
+      "id": "heaton_artusio_glimpse_2015",
+      "title": "An Update to the NASA Reference Solar Sail Thrust Model",
+      "authors": "Andrew F. Heaton and Alexandra B. Artusio-Glimpse",
+      "year": 2015,
+      "url": "https://ntrs.nasa.gov/citations/20150021404",
+      "retrieved_metadata_url": "https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/20150021404.pdf",
+      "read_scope": "NASA NTRS abstract and metadata, retrieved via the archival URL. The canonical page returned HTTP 403 during this review; no full-paper reading is claimed.",
+      "supports": "Established solar-sail thrust models include specular and diffuse reflection, thermal emission and non-Lambertian scattering terms; coefficients depend on the tested sail construction.",
+      "limits": "The present model implements only direct absorption, specular reflection and straight transmission with caller-supplied grey energy fractions. No coefficients or material validation are adopted from this source."
+    }
+  ],
+  "new_model_assumptions": [
+    "Actual deformed triangle vertices determine face area, two-sided normals, direct-ray transmission and forces on every call.",
+    "Each face receives one centroid illumination sample; force is distributed equally among its three nodes, preserving total force, torque and affine virtual work.",
+    "Distinct forward crossings multiply scalar transmission. Coincident faces within the same tile merge using their minimum transmission; different tiles remain separate layers.",
+    "Finite-source quadrature is an explicitly constructed uniform-radiance spherical-cap rule, not a measured solar limb-darkening model or cited high-order quadrature.",
+    "Pressure is the sum of directional normal intensities divided by light speed. Converting a stated irradiance on the plane normal to the source centre requires the quadrature mean-cosine correction.",
+    "External eclipse transmission is a caller-supplied per-face and per-direction multiplier; it is recomputed from actual centroids and does not include diffraction unless the callback explicitly does so.",
+    "Receiver geometric coverage, any attenuating intersection and grey transmitted energy are distinct outputs. UV protection requires coefficients for that spectral band, not a broadband geometric inference.",
+    "No secondary reflected rays, diffuse scattering, thermal recoil or unmeshed opaque hardware is included. Spatial/source/time refinement remains necessary at boundaries and seams."
+  ]
+}

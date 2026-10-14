@@ -1,5 +1,13 @@
 # Solar shield and habitat array
 
+The [flexible screening and solver assessment](flexible_coupling.md) adds a
+16,200-configuration algebraic screen and a numerically verified reduced
+structure/optics/attitude/orbit/control model. The lightest configuration
+passing the stated member and parallel-clearance screens still exceeds the
+current mass allowance before complete operating hardware. Fixed solver
+benchmarks measure numerical sensitivity and compute cost; the coupled design
+search is explicitly deferred. These new products preserve the earlier baselines.
+
 The [materials and support comparison](support_comparison.md) broadens the
 14 October tile assessment. Source-based frame substitutions improve the
 tested design by a few times; finite cable/boom supports offer much larger

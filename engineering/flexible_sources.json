@@ -1,0 +1,42 @@
+{
+  "schema": "terluna.research.flexible-array-source-notes/1",
+  "reading_rule": "Method context and limitations only. These sources do not validate the new 10 km model or its assumed hub stiffness. The implementation is independently derived and checked against analytic identities.",
+  "sources": [
+    {
+      "id": "sleight_muheim_2004",
+      "title": "Parametric Studies of Square Solar Sails Using Finite Element Analysis",
+      "authors": "David W. Sleight and Danniella M. Muheim",
+      "url": "https://ntrs.nasa.gov/citations/20040074322",
+      "pdf_url": "https://ntrs.nasa.gov/api/citations/20040074322/downloads/20040074322.pdf",
+      "read_scope": "NTRS abstract and retrieved PDF passages on pretension, inertia relief, mesh convergence and eigenanalysis; not a complete scholarly review.",
+      "supports": "Full sail models couple membrane and boom properties, use nonlinear pretension and inertia relief, and check mesh-dependent displacement and frequencies.",
+      "limits": "Their nonlinear models are substantially richer than this prescribed-prestress, normal-only energy model; reported numerical frequencies are not experimental validation of our construction. The abstract flags nonphysical modes associated with omitted wrinkling."
+    },
+    {
+      "id": "zwolfer_gerstmayr_2021",
+      "title": "The nodal-based floating frame of reference formulation with modal reduction",
+      "authors": "Andreas Zwölfer and Johannes Gerstmayr",
+      "doi": "10.1007/s00707-020-02886-2",
+      "url": "https://link.springer.com/article/10.1007/s00707-020-02886-2",
+      "read_scope": "Open article abstract, introduction and derivation through equations 17; extracted text of modal-reduction context. Not a complete reproduction of the paper.",
+      "supports": "Separating large rigid motion from small relative elastic deformation requires consistent kinetic energy and inertial coupling. Modal reduction and nodal kinematics are appropriate implementation tools.",
+      "limits": "The paper develops a consistent-mass treatment; our mass is deliberately lumped and therefore retains the approximation cautioned about in this source. The support endpoint approximation does not reproduce exact frame inertia."
+    },
+    {
+      "id": "solar_sail_test_2005_excerpt",
+      "title": "Finite Element Analysis and Test Correlation of a 10-Meter Inflation-Deployed Solar Sail",
+      "url": "https://ntrs.nasa.gov/api/citations/20050175895/downloads/20050175895.pdf?attachment=true",
+      "read_scope": "Indexed NTRS abstract and metadata, plus retrieved PDF excerpt describing 10 m sail model ingredients. Direct page/PDF opens failed; this is not a full paper reading.",
+      "supports": "Ground-test analysis used membrane or shell elements, boom/spreader beams, cable or truss elements, and measured concentrated masses.",
+      "limits": "No numerical test result from this source is adopted. It motivates treating membrane, support and attached mass separately; it does not establish our compliance or scale extrapolation."
+    }
+  ],
+  "new_model_assumptions": [
+    "Uniform prescribed isotropic membrane tension and circular-edge cable tension are taken from the prior support product.",
+    "Linear triangle gradient energy and cable transverse slope energy act relative to the hub best-fit plane; this enforces affine normal rigid-motion invariance.",
+    "Four radial-boom endpoint compliances use inherited cantilever bending and web shear, including its declared amplification factor.",
+    "Hub twist stiffness is four times one inherited member reciprocal tip compliance: an uncalibrated effective restraint, not a solved frame eigenmodel.",
+    "Film mass is triangle-lumped and normalized to the analytic curved area; support masses are endpoint-lumped, preserving mass and centre of mass but not exact distributed-frame inertia.",
+    "Modal eigenproblems and analytic checks verify the stated model, not prestress realizability, nonlinear deformation, damage tolerance or flight performance."
+  ]
+}

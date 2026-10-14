@@ -6,6 +6,13 @@ The route model is Sun-only and circular/coplanar. Electric propulsion includes 
 
 ## Array tile hardware and service
 
+[array_flexible.py](array_flexible.py) adds a prescribed-prestress membrane,
+curved-edge cable and finite-support normal-mode model. It exports mass,
+geometry and modal data for the [coupled flexible study](../research/studies/solar_shield_array/flexible_coupling.md).
+Analytic sag/frequency and conservation checks verify the declared reduced
+model. Effective hub compliance, endpoint-lumped support inertia, wrinkling,
+attachments and material life remain physical-model limitations.
+
 [array_tile.py](array_tile.py) sizes a conditional membrane, finite perimeter
 truss, three-axis rotor store, optical trim and electrical supply.
 [array_momentum.py](array_momentum.py) conserves angular momentum through a

@@ -245,3 +245,16 @@ Under Earth's tide a whole stack of rings regresses together, so on those axes
 every pair's plane difference turns with the stack, and holding it there works
 against the common regression (see the solar shield array study's relative-orbit
 plan).
+
+## Flexible array propagation
+
+[flexible_fleet.py](flexible_fleet.py) propagates the centre of mass, quaternion,
+rotation and reduced membrane coordinates from the same nodal forces.
+[flexible_optics.py](flexible_optics.py) recalculates deformed triangle loading,
+mutual transmission, bounded reflection trim and sampled receiver coverage.
+[flexible_environment.py](flexible_environment.py) optionally supplies differential
+point gravity and spherical eclipses from a caller-supplied ephemeris.
+Momentum wheels have finite torque/capacity and an explicitly idealized mean-frame
+attachment. Energy/work and angular-impulse tests are numerical verification,
+not hardware or fleet qualification. The [fixed benchmarks and screen](../../research/studies/solar_shield_array/flexible_coupling.md)
+record their model limits and leave the coupled design search for later.
