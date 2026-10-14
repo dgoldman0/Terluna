@@ -218,10 +218,12 @@ at the author's word: deltas move the shorelines first, covering 6.5% of the lak
 central rate and adding 104,000 km² of land at the common-level waters. The author keeps water delivery going to
 balance what the crust takes up, and wants groundwater modelled: the crust's uptake through time, the water table
 with its springs, baseflow and lake seepage, then the springs' load. Its first stage followed: the cold airless crust
-thaws from above in centuries at the equator and tens of thousands of years near the poles, and once thawed takes
-water fast, 1.8 times the seas' water within 10,000 years at the central values (0.7–3 across the cases), so holding
-the seas takes a top-up of thousands of cubic kilometres a year through the first millennia. The water table and the
-springs' load follow on the author's word.
+thaws from above in centuries at the equator and tens of thousands of years near the poles, and once thawed takes water
+fast, 1.8 times the seas' water within 10,000 years at the central values (0.7–3 across the cases), so holding the seas
+takes a top-up of thousands of cubic kilometres a year through the first millennia. The water table followed: in the
+mature Moon groundwater comes out across a third of the land, three quarters of the tropics and little poleward of 45°,
+carries a quarter of the rivers' flow and feeds the lakes except at the dry poles; the young Moon is drier, its middle
+latitudes most of all. The springs' load follows on the author's word.
 
 Waiting on the author: the array's power distribution recommendation (domain synthesis), and the taxonomy, on hold
 for later, with its open choices and the aerophytes' scientific name.

@@ -144,7 +144,9 @@ is in the grids.
 
 Fresh craters (Pike 1977) diffused on a radial grid lose half their depth at κt = 0.024 D², a quarter at 0.055 D² and
 nine tenths at 0.11 D²; Minton et al.'s (2019) fit to diffused craters gives half at about 0.016 D². Equilibrium
-craters are already shallower than fresh ones and go sooner. Which of them hold water depends on the water table.
+craters are already shallower than fresh ones and go sooner. Which of them hold water depends on the water table:
+groundwater reaches the ground across three quarters of the mature tropics and two fifths of 15-30°, and little
+poleward of 45° ([geography](../../../geography/README.md#groundwater-the-water-table-on-land)).
 
 ## The relief
 

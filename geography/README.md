@@ -25,6 +25,7 @@ climate-coupled shorelines are the next layer.
 | [drainage.py](drainage.py) | Rivers and rain-fed lakes above sea level: runoff from the climate run routed over the 16 px/deg terrain, with fill-and-spill lakes set by each depression's water balance ([results/drainage.json](results/drainage.json); grid product in `products/`). `--climatology` takes another run's climate product, `--out` writes elsewhere |
 | [groundwater.py](groundwater.py) | A first estimate of the water the porous crust takes up, from GRAIL's porosity, beside the seas and lakes ([results/groundwater.json](results/groundwater.json)) |
 | [groundwater_uptake.py](groundwater_uptake.py) | How fast the crust takes the water: heat and water down columns under the seas, lakes and land, the cold airless crust thawing from above ([results/groundwater_uptake.json](results/groundwater_uptake.json); sources in [groundwater_sources.json](groundwater_sources.json)) |
+| [groundwater_table.py](groundwater_table.py) | The water table on land: steady sideways flow over the atlas at 15 km with the seas and lakes held, springs where it reaches the ground, the mature and young Moon ([results/groundwater_table.json](results/groundwater_table.json)) |
 | [lunar_ephemeris.py](lunar_ephemeris.py) | The Earth's and the Sun's directions over the Moon and their distances: the truncated ELP-2000/82 lunar theory with the optical librations, checked against JPL Horizons ([tides_ephemeris_check.csv](tides_ephemeris_check.csv)) |
 | [Calendar ephemeris check](CALENDAR_EPHEMERIS.md) | Independent pinned JPL comparisons across 2000–2500 TT, with horizon timing and conditional clear-sky brightness error propagation |
 | [tides.py](tides.py) | The monthly tide of every sea, 2026–2045: equilibrium height with each sea's volume held and the water's self-attraction, constituents, ranges and stations ([results/tides.json](results/tides.json); grid product in `products/`) |
@@ -241,6 +242,71 @@ latitudes' cold layer sooner; the delivery's heat; water flowing sideways, from 
 inflowing water carries and the circulation it would set up through the hot megaregolith, with warm springs; air
 trapped ahead of the water; the maria's less porous basalt fill, for which a map of the maria's extent is needed;
 clays from weathering closing pores; and the crust's response to the water's load.
+
+## Groundwater: the water table on land
+
+`python -m geography.groundwater_table` writes [results/groundwater_table.json](results/groundwater_table.json)
+(schema `terluna.geography.groundwater-table/1`) in about a minute and a half; its grids go to
+`research/runs/resources/groundwater/groundwater_table_2ppd.npz` (ignored by Git) for the atlas round. It solves the
+groundwater's sideways flow over the atlas averaged to 15 km, about the resolution of Earth's global groundwater
+models (de Graaf et al. 2015; Reinecke et al. 2019), for the mature Moon once the deep crust has filled and for the
+young Moon at 1,000 and 10,000 years.
+
+- **In the mature Moon groundwater comes out across a third of the land.** The water table stands at the ground across
+  32% of the land (25-39% across the cases), and groundwater comes out there as springs, seeps, wetlands and baseflow:
+  three quarters of the land within 15° of the equator, two fifths at 15-30°, a fifth at 30-45°, 4% at 45-60° and almost
+  none nearer the poles. Elsewhere it lies deep, a median 364 m below the ground (170-635), deeper than 200 m under half
+  the land and some 800 m under the dry high latitudes.
+- **A quarter of the rivers' flow is groundwater.** Of the 1,870 km³ a year that recharges the crust (1,070-2,490),
+  92% comes out at the surface, 6% seeps into the lakes and 2% into the seas: a quarter of the rivers' 7,240 km³ a year
+  (15-34%). Earth's rivers draw 59% of their flow from groundwater (Xie et al. 2024), so the Moon's rivers run
+  flashier.
+- **The lakes gain groundwater, except at the dry poles.** On the 15 km grid 886 of 1,061 lakes, 96% of the lake area,
+  take groundwater in, a median 5 cm a year. Of the 47 lakes losing more than 10 cm a year, 46 lie poleward of 75°,
+  perched over deep water tables in the dry polar lands; they hold only if their beds seal, and the narrow polar cells
+  overstate their rates.
+- **The young Moon is drier, and unevenly.** At 1,000 years the crust still takes three fifths of the tropics' recharge
+  and half of 15-30°'s: groundwater comes out across 23% of the land, 63% of the tropics, a third of 15-30° and 5% of
+  30-45°. At 10,000 years the tropics are wetter, 73%, and the middle latitudes drier, a tenth of 15-30° and 2.5% of
+  30-45°, since there the crust takes nearly all the recharge for ten thousand years. With the fastest-filling crust
+  the first thousand years' water table lies a kilometre down at the median and the lakes lose 44 km³ a year to it.
+- **The seas trade little.** They take 35 km³ a year of groundwater (21-61); near low coasts they feed the land's
+  crust less than 1 km³ a year.
+- **Crater hollows hold ponds where groundwater comes out.** Across three quarters of the mature tropics and two fifths
+  of 15-30° the water table reaches the ground within each 15 km cell, so its hollows hold water; poleward of 45° they
+  mostly stay dry. Under 2% of the land has its water table within 10 m of the ground without reaching it: at this
+  resolution a cell either seeps somewhere or keeps its water table far below its mean ground.
+
+| Mature Moon, central | Recharge | Land where it comes out | Median depth to water | Groundwater out at the ground |
+|---|---|---|---|---|
+| 0-15° | 264 mm a year | 76% | 0 m | 1,264 km³ a year |
+| 15-30° | 77 mm | 43% | 60 m | 371 km³ |
+| 30-45° | 19 mm | 18% | 295 m | 79 km³ |
+| 45-60° | 0.9 mm | 4% | 556 m | 3 km³ |
+| 60-75° | 0.2 mm | 0.5% | 808 m | 0.3 km³ |
+| 75-90° | 0.4 mm | 0.2% | 808 m | 5 km³ |
+
+| Land where groundwater comes out, and the median depth to water | 1,000 years | 10,000 years | Mature |
+|---|---|---|---|
+| Slow (permeability 10⁻¹⁵ m² at 1 km, 10% of the rain recharging) | 35%, 389 m | 32%, 419 m | 39%, 170 m |
+| Central | 23%, 687 m | 20%, 812 m | 32%, 364 m |
+| Fast (10⁻¹³ m², 30%) | 4%, 1,047 m | 16%, 1,010 m | 25%, 635 m |
+
+The slow crust carries less water sideways and takes less down, so its land is the wettest.
+
+**How it is set up.** The seas and the drainage product's lakes, cells by majority, hold their levels. Recharge on each
+cell follows stage 1's rule from the design climate. The transmissivity is stage 1's permeability integrated below the
+water table: 5×10⁻⁴ m²/s with the water table at the ground at the central values, 3×10⁻⁵ at 500 m and 1.5×10⁻⁶ at
+2 km. A smoothed drain lets water out where the water table reaches the ground. Newton's method with pseudo-transient
+continuation solves each state to a root-mean-square imbalance of 10⁻⁴ of the recharge, the mature state from a water
+table at the ground and the young states from the mature. The young states take stage 1's share of each band's
+recharge that the deep crust still takes.
+
+**What it leaves out.** Relief within a 15 km cell, where the valleys seep and the ridges stay dry; the atlas round's
+districts need finer regional solutions, which this solver did not reach on the 7.6 km grid. Evaporation from shallow
+water tables and wetlands, which would lower the seepage in the dry belt. The lakes' beds, left open, so their leakage
+is at its most. Flow through the deep crust; the water table's own changes through time, the young states being
+steady at each time; and the maria's basalt.
 
 ## The monthly tide
 
