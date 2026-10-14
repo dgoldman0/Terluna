@@ -11,6 +11,7 @@ and terraces for the built land and the gardens, and something for the wild. Thi
 - the small craters below the 1.9 km grid: their numbers at the saturation equilibrium of the Moon's small craters
   and how fast soil creep and accretion fill them, from a crater profile diffused in dimensionless time;
 - the seas' fill from the rock the routing sends them and their own deposits (the sea chemistry);
+- the deltas: the plains built where rivers meet standing water, beside the lake area the well-mixed boxes lose;
 - the relief: how fast each band lowers and how long its local relief takes to halve without uplift;
 - upkeep: carrying the rock back uphill, in place or onto each catchment's highest third, with its lift, haulage and
   dredging, and the seas' deposits as stone for the built land;
@@ -164,6 +165,18 @@ def seas(routing, sea_chem):
     out['sea_chemistry_box_seas_full_yr'] = sea_chem['sediment']['seas_full_yr']
     out['sea_chemistry_box_passing_share'] = sea_chem['setting']['particle_pass']
     return out
+
+
+def deltas(routing):
+    """The delta plains the routing builds at the mouths, beside the lake area the well-mixed boxes lose."""
+    d = routing['deltas']
+    box = routing['fill']['central']['survival']['all']
+    years = [f'{y:g}' for y in rt.DELTA_YEARS]
+    return dict(
+        by_case={name: dict(delta_share=d[name]['delta_share'], rock_gt_yr=d[name]['rock_gt_yr'],
+                            by_year=d[name]['by_year']) for name in rt.DELTA_SHARE},
+        box_lake_area_lost_central_km2={y: box['area_km2'] - box['open_area_km2'][y] for y in years},
+        mouths=d['mouths'], largest_central=d['largest_central'][:10])
 
 
 # --- Small craters -------------------------------------------------------------------------------------------------
@@ -375,6 +388,7 @@ def results():
         evidence=EVIDENCE, reading_rule=READING_RULE,
         lakes=lakes(routing, sea_chem),
         seas=seas(routing, sea_chem),
+        deltas=deltas(routing),
         small_craters=small_craters(routing),
         relief=relief(routing),
         upkeep=upkeep(routing, sea_chem, sea_p, gates),

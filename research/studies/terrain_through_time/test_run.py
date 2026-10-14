@@ -88,6 +88,23 @@ def test_channels_add_up(routing):
         assert math.isclose(sum(v for _, v in b['by_log_hardness']), b['length_km'], rel_tol=1e-4)
 
 
+def test_deltas_grow_and_stay_within_their_waters(routing):
+    d = routing['deltas']
+    for name in rt.DELTA_SHARE:
+        rows = [d[name]['by_year'][f'{y:g}'] for y in rt.DELTA_YEARS]
+        for key in ('lake_delta_km2', 'common_level_delta_km2', 'mouths_over_1_km2'):
+            assert all(a[key] <= b[key] for a, b in zip(rows, rows[1:])), (name, key)
+        assert all(0.0 <= r['lake_delta_share_of_lake_area'] <= 1.0 for r in rows)
+    ten = [d[n]['by_year']['10000']['lake_delta_km2'] for n in ('latest', 'central', 'earliest')]
+    assert ten[0] < ten[1] < ten[2]
+    big = [x['area_km2']['10000'] for x in d['largest_central']]
+    assert big == sorted(big, reverse=True)
+    for x in d['largest_central']:
+        assert x['area_km2']['100'] <= x['area_km2']['1000'] <= x['area_km2']['10000']
+        assert math.isclose(x['advance_km']['10000'], math.sqrt(2.0 * x['area_km2']['10000'] / math.pi), rel_tol=1e-4)
+        assert x['area_km2']['10000'] <= x['receiving_water_km2'] * (1.0 + 1e-6)
+
+
 @pytest.mark.skipif(not os.environ.get('TERLUNA_TERRAIN_REGENERATE')
                     or not all((rt.ROOT / p).exists() for p in rt.IGNORED),
                     reason='set TERLUNA_TERRAIN_REGENERATE=1 with the grid inputs restored (1-2 minutes, 5 GB)')

@@ -16,6 +16,8 @@ as resources' waters product does, and on it builds:
 - each unit's fill through time from the rock eroded on the land that drains to it first, with Siyam's form of Brune's
   curves at lunar settling keeping sediment in the spilling lakes as the sea phosphorus study keeps particles, closed
   depressions keeping all of it, accretion on the lake floors, and full units passing everything on;
+- the deltas: where the land's rock first meets standing water, and where full lakes upstream pass theirs on, a
+  delta fills the nearest water to the surface, building delta plain at 100, 1,000 and 10,000 years;
 - the lift and distance from each eroding cell to where its sediment first settles, for carrying it back;
 - the channels by slope and by discharge times slope, for where dam builders' dams would hold;
 - the rivers' hardness relative to the weathering law's mean, from the land's temperature through Dessert's law, with
@@ -52,10 +54,11 @@ GATES = 'research/studies/conservation/results/gates.json'
 INPUTS = (DRAINAGE, ATLAS, GATES)
 CODE = ('research/studies/terrain_through_time/routing.py', 'resources/sea_phosphorus_waters.py',
         'research/studies/carbon_cycle/run.py', 'geography/drainage.py', 'geography/topography.py',
-        'geography/atlas.py')
+        'geography/atlas.py', 'geography/nomenclature.py')
 IGNORED = ('climate/gcm/products/climatology_A28_dim5_moon.npz', 'geography/inputs/ldem_16.img',
            'geography/inputs/ldem_16.lbl', 'geography/inputs/ldem_4.img', 'geography/inputs/ldem_4.lbl',
-           'geography/inputs/jggrx_0420a_sha.tab', 'geography/inputs/jggrx_0420a_sha.lbl')
+           'geography/inputs/jggrx_0420a_sha.tab', 'geography/inputs/jggrx_0420a_sha.lbl',
+           'geography/inputs/MOON_nomenclature_center_pts.zip')
 YEAR_S = JULIAN_DAY * JULIAN_YEAR_DAYS
 GRAVITY_RATIO = MOON_SURFACE_GRAVITY / STANDARD_GRAVITY
 ROCK_DENSITY = 2600.0                    # kg/m3, the conservation study's eroded rock (screens.sediment_return_watts)
@@ -76,6 +79,13 @@ CASES = dict(
     central_rock_only=dict(erosion_m_myr=50.0, dry_density_kg_m3=1000.0, accretion_mm_yr=0.0),
     central_by_runoff=dict(erosion_m_myr=50.0, dry_density_kg_m3=1000.0, accretion_mm_yr=ACCRETION_MM_YR['central'],
                            pattern='relief_and_runoff'))
+# Deltas: what settles builds out from where the rivers meet standing water, filling the nearest water first at its
+# depth to the surface. The delta keeps from half of it to all, the fines spreading over the floor or passing on
+# (design guess, slower lunar settling favouring the spread); paired with the cases from latest to earliest.
+DELTA_SHARE = dict(earliest=1.0, central=0.75, latest=0.5)
+DELTA_YEARS = (100.0, 1000.0, 10000.0)
+DELTA_MIN_DEPTH_M = 1.0
+DELTA_TOP = 25
 STEPS_PER_DECADE = 20
 END_YEARS = 1e9
 SURVIVAL_YEARS = (100, 300, 1000, 3000, 1e4, 3e4, 1e5, 3e5, 1e6, 3e6, 1e7, 3e7, 1e8, 3e8, 1e9)
@@ -93,7 +103,9 @@ EVIDENCE = ('The geography drainage routing rerun with its committed climatology
             'relief alone and runoff kept as sensitivities; sediment settles on Siyam\'s (2000) form of '
             'Brune\'s (1953) median curve at lunar settling in spilling lakes and wholly in closed depressions, with '
             'design-guess accretion on lake floors; units fill in log-spaced steps of a twentieth of a decade with '
-            'constant erosion and no uplift. Hardness is Dessert et al.\'s (2003) temperature term over the climate '
+            'constant erosion and no uplift. Deltas fill the nearest water of their lake or sea to the surface from '
+            'each mouth, taking a design-guess share of what settles. Hardness is Dessert et al.\'s (2003) '
+            'temperature term over the climate '
             'run\'s surface temperature, relative to the runoff-weighted mean. Features below the 1.9 km grid are '
             'outside it.')
 READING_RULE = ('Units: 0 is the common-level waters; spilling lakes are resources\' retention bodies; each closed '
@@ -105,7 +117,10 @@ READING_RULE = ('Units: 0 is the common-level waters; spilling lakes are resourc
                 'are km of 16 pixel/degree channel cells (mean discharge at least 1 m3/s, not in lakes), binned by '
                 'slope in percent and by log10 of discharge times slope in m3/s; hardness is the channel water\'s '
                 'dissolved load relative to the weathering law at the runoff-weighted mean temperature, before the '
-                'young soils\' factor. Latitude bands are by absolute latitude.')
+                'young soils\' factor. Delta areas are km2 of delta plain at the water surface, each lake\'s total '
+                'capped at its area; advance is the radius of a half-disc of that area; the largest deltas are named '
+                'by the smallest IAU feature of 20 km or more that holds the mouth. Latitude bands are by absolute '
+                'latitude.')
 
 
 _T0 = time.time()
@@ -233,6 +248,7 @@ def units(r, shape, sea_level):
 
     parent = np.full(n_units, -1, np.int64)
     parent[0] = 0
+    entry = np.full(n_units, -1, np.int64)        # the cell where what a unit passes on enters its parent
     out_all = r['discharge'].copy()
     out_all[r['sinks']] = np.maximum(out_all[r['sinks']] + r['lake_net'][1:], 0.0)
     exits = np.flatnonzero((body > 0) & ~outlet & (body[final] != body))
@@ -242,10 +258,12 @@ def units(r, shape, sea_level):
         b = body[exits][order]
         first_of = np.r_[True, b[1:] != b[:-1]]
         parent[b[first_of]] = down[order][first_of]
+        entry[b[first_of]] = first[final[exits[order][first_of]]]
     no_exit = np.flatnonzero(parent[1:n_body + 1] < 0) + 1
     if no_exit.size:
         raise ValueError(f'{no_exit.size} spilling lakes have no outlet')
     parent[unit_of_node[closed_nodes]] = unit_first[r['spill_to'][closed_nodes]]
+    entry[unit_of_node[closed_nodes]] = first[r['spill_to'][closed_nodes]]
 
     depth = np.full(n_units, -1, np.int64)
     depth[0] = 0
@@ -298,9 +316,11 @@ def units(r, shape, sea_level):
     stop_level = np.where(outlet, sea_level, np.where(lake, r['lake_level'], hf))
     kind = np.where(closed, np.where(lake_m2 > 0, 2, 3), 1)
     kind[0] = 0
+    water_unit = np.where(lake | outlet, unit_stop, -1)
     return dict(n_body=n_body, n_units=n_units, parent=parent, depth=depth, closed=closed, kind=kind,
                 capacity=capacity, lake_m2=lake_m2, lake_m3=lake_m3, inflow_m3_yr=inflow, lat=lat_c, lon=lon_c,
-                unit_first=unit_first, first=first, stop_level=stop_level, census=census, tau=tau)
+                unit_first=unit_first, first=first, stop_level=stop_level, census=census, tau=tau, entry=entry,
+                water_unit=water_unit)
 
 
 # --- Fill through time ---------------------------------------------------------------------------------------------
@@ -328,6 +348,8 @@ def evolve(u, local, case, beta):
                                           / STEPS_PER_DECADE)])
     sea, lakes_left = [], []
     lake_cap = u['capacity'][lake].sum()
+    passed = np.zeros(n)
+    snaps = {}
     for t0, t1 in zip(edges[:-1], edges[1:]):
         dt = t1 - t0
         m_in = rate * dt
@@ -350,10 +372,14 @@ def evolve(u, local, case, beta):
             t_full[g[filled]] = t0 + dt * frac[filled]
             left[g] = new
             np.add.at(m_in, parent[g], m - kept)
+            passed[g] += m - kept
         sea.append(m_in[0] / dt)
         lakes_left.append(left[lake].sum() / lake_cap)
+        for y in DELTA_YEARS:
+            if abs(t1 - y) <= 1e-9 * y:
+                snaps[y] = passed.copy()
     sea = np.array(sea)
-    return t_lost, t_full, edges, sea, np.array(lakes_left), np.cumsum(sea * np.diff(edges))
+    return t_lost, t_full, edges, sea, np.array(lakes_left), np.cumsum(sea * np.diff(edges)), snaps
 
 
 def at_edges(edges, series, years):
@@ -411,6 +437,128 @@ def survival(u, t_lost):
                              open_area_km2={f'{y:g}': float(a[t > y].sum()) for y in SURVIVAL_YEARS},
                              area_weighted_median_life_yr=weighted_median(t, a))
     return out, by_band
+
+
+# --- Deltas ----------------------------------------------------------------------------------------------------------
+
+def place_names(lat, lon, min_km=20.0):
+    """The smallest IAU feature of at least min_km whose disc holds each point, else the nearest such feature."""
+    from geography import nomenclature
+    feats = [f for f in nomenclature.features() if (f.get('diameter_km') or 0.0) >= min_km]
+    flat = np.radians([f['lat'] for f in feats])
+    flon = np.radians([f['lon'] for f in feats])
+    rad = 0.5 * np.array([f['diameter_km'] for f in feats])
+    out = []
+    for la, lo in zip(np.radians(lat), np.radians(lon)):
+        s = np.sin(0.5 * (flat - la)) ** 2 + np.cos(la) * np.cos(flat) * np.sin(0.5 * (flon - lo)) ** 2
+        d = 2.0 * MOON_RADIUS / 1e3 * np.arcsin(np.sqrt(np.clip(s, 0.0, 1.0)))
+        inside = np.flatnonzero(d <= rad)
+        i = inside[np.argmin(rad[inside])] if inside.size else int(np.argmin(d - rad))
+        out.append(feats[i]['name'])
+    return out
+
+
+def grow(cell, vol, r, u, shape, cell_km):
+    """Fill a delta out from its mouth: the water cells of the same body nearest first, each to the surface, until the
+    volume is spent. Returns the delta's area (m2) and the depth (m) at its front."""
+    import heapq
+    rows, cols = shape
+    hf, area, wu, level = r['height'], r['area'], u['water_unit'], u['stop_level']
+    body = wu[cell]
+    heap = [(0.0, int(cell))]
+    seen = {int(cell)}
+    filled, front = 0.0, 0.0
+    while heap:
+        dist, c = heapq.heappop(heap)
+        depth = max(level[c] - hf[c], DELTA_MIN_DEPTH_M)
+        cap = depth * area[c]
+        front = depth
+        if vol < cap:
+            return filled + area[c] * vol / cap, front
+        vol -= cap
+        filled += area[c]
+        row, col = divmod(c, cols)
+        dx = cell_km * 1e3 * max(math.cos(math.radians(90.0 - (row + 0.5) / 16)), 1e-3)
+        for dr in (-1, 0, 1):
+            rr = row + dr
+            if not 0 <= rr < rows:
+                continue
+            for dc in (-1, 0, 1):
+                nb = rr * cols + (col + dc) % cols
+                if (dr or dc) and nb not in seen and wu[nb] == body:
+                    seen.add(nb)
+                    heapq.heappush(heap, (dist + math.hypot(dr * cell_km * 1e3, dc * dx), nb))
+    return filled, front                     # the whole body is delta
+
+
+def deltas(u, r, shape, cell_km, rock, passed_by_case, rates):
+    """Delta plains built where the land's rock first meets standing water and where full lakes pass theirs on."""
+    rows, cols = shape
+    hf, area, outlet, lake = r['height'], r['area'], r['outlet'], r['lake']
+    wu, level, first, entry = u['water_unit'], u['stop_level'], u['first'], u['entry']
+    cells = np.flatnonzero(~outlet & ~lake)
+    fs = first[cells]
+    wet = wu[fs] >= 0
+    from_units = np.flatnonzero((entry >= 0) & (wu[np.maximum(entry, 0)] >= 0))
+    from_units = from_units[from_units > 0]
+    mouths = np.unique(np.concatenate([fs[wet], entry[from_units]]))
+    own = np.bincount(np.searchsorted(mouths, fs[wet]), weights=rock[cells][wet], minlength=mouths.size)
+    k_up = np.searchsorted(mouths, entry[from_units])
+    # Each lake is one water; the common-level waters split into their connected seas and small waters.
+    from resources import sea_phosphorus_waters as spw
+    comp, n_comp, _ = spw.label_wrapped(outlet.reshape(shape))
+    comp = comp.ravel()
+    n_units = u['n_units']
+    body = np.where(outlet[mouths], n_units + comp[mouths], wu[mouths])
+    water_m2 = np.concatenate([u['lake_m2'], np.bincount(comp[outlet], weights=area[outlet], minlength=n_comp + 1)])
+    depth0 = np.maximum(level[mouths] - hf[mouths], DELTA_MIN_DEPTH_M)
+    cap0 = depth0 * area[mouths]
+    out, grids = {}, {}
+    for name, share in DELTA_SHARE.items():
+        rho = CASES[name]['dry_density_kg_m3']
+        gt = rates[name]
+        rows_out = {}
+        for y in DELTA_YEARS:
+            up = np.bincount(k_up, weights=passed_by_case[name][y][from_units], minlength=mouths.size)
+            vol = share * (own * gt * y + up) / rho
+            a = np.where(vol <= cap0, vol / depth0, 0.0)
+            front = depth0.copy()
+            for i in np.flatnonzero(vol > cap0):
+                a[i], front[i] = grow(mouths[i], vol[i], r, u, shape, cell_km)
+            per_body = np.minimum(np.bincount(body, weights=a, minlength=water_m2.size), water_m2)
+            rows_out[f'{y:g}'] = dict(
+                lake_delta_km2=float(per_body[1:n_units].sum() / 1e6),
+                lake_delta_share_of_lake_area=float(per_body[1:n_units].sum() / water_m2[1:n_units].sum()),
+                common_level_delta_km2=float(per_body[n_units:].sum() / 1e6),
+                mouths_over_1_km2=int((a > 1e6).sum()), mouths_over_10_km2=int((a > 1e7).sum()))
+            grids[f'delta_{name}_{y:g}'] = (a, front)
+        out[name] = dict(delta_share=share, rock_gt_yr=gt, by_year=rows_out)
+    # The largest deltas after 10,000 years in the central case, named for the atlas round.
+    a10, front10 = grids['delta_central_10000']
+    top = np.argsort(a10)[::-1][:DELTA_TOP]
+    lat, lon = latlon(mouths[top], cols, 16)
+    names = place_names(lat, ((lon + 180.0) % 360.0) - 180.0)
+    start = own * rates['central'] + np.bincount(k_up, weights=passed_by_case['central'][100.0][from_units] / 100.0,
+                                                 minlength=mouths.size)
+    largest = []
+    for j, i in enumerate(top):
+        b = int(body[i])
+        largest.append(dict(
+            place=names[j], lat=float(lat[j]), lon_east=float(((lon[j] + 180.0) % 360.0) - 180.0),
+            receiving='common-level water' if b >= n_units else 'rain-fed lake',
+            receiving_water_km2=float(water_m2[b] / 1e6),
+            rock_mt_yr_at_start=float(start[i] / 1e9), depth_at_mouth_m=float(depth0[i]),
+            area_km2={f'{y:g}': float(grids[f'delta_central_{y:g}'][0][i] / 1e6) for y in DELTA_YEARS},
+            advance_km={f'{y:g}': float(math.sqrt(2.0 * grids[f'delta_central_{y:g}'][0][i] / math.pi) / 1e3)
+                        for y in DELTA_YEARS},
+            front_depth_m_at_10000=float(front10[i])))
+    out['largest_central'] = largest
+    out['mouths'] = int(mouths.size)
+    arrays = dict(delta_mouth_cell=mouths.astype(np.int32), delta_body_unit=body.astype(np.int32),
+                  delta_rock_kg_yr_per_gt_yr=own.astype(np.float32), delta_depth_at_mouth_m=depth0.astype(np.float32))
+    for key, (a, front) in grids.items():
+        arrays[f'{key}_km2'] = (a / 1e6).astype(np.float32)
+    return out, arrays
 
 
 # --- The run ---------------------------------------------------------------------------------------------------------
@@ -525,12 +673,13 @@ def compute():
                              water_km3=float(u['lake_m3'][lake_u & m].sum() / 1e9),
                              own_rock_share=float(local[lake_u & m].sum() / 1e12))
                   for name, m in classes(u)})
-    fills, grids = {}, {}
+    fills, grids, passed_by_case = {}, {}, {}
     for name, case in CASES.items():
         case = dict(case, rock_gt_yr=gates['sediment_return'][f"{case['erosion_m_myr']:g} m/Myr"]['rock_gt_per_year'],
                     pattern=case.get('pattern', 'relief_and_rain'))
         own = np.bincount(u['unit_first'], weights=patterns[case['pattern']], minlength=u['n_units'])
-        t_lost, t_full, edges, sea, left, sea_cum = evolve(u, own, case, beta)
+        t_lost, t_full, edges, sea, left, sea_cum, snaps = evolve(u, own, case, beta)
+        passed_by_case[name] = snaps
         log(f'fill {name}')
         surv, by_band = survival(u, t_lost)
         dry = u['kind'] == 3
@@ -570,6 +719,11 @@ def compute():
     del t0_kept
 
     log('fills and upkeep')
+    rates = {name: gates['sediment_return'][f"{CASES[name]['erosion_m_myr']:g} m/Myr"]['rock_gt_per_year']
+             for name in DELTA_SHARE}
+    delta, delta_grids = deltas(u, r, shape, cell_km, rock, passed_by_case, rates)
+    grids.update(delta_grids)
+    log('deltas')
     # Channels: slope, discharge times slope, length and hardness.
     ts = climate_on_grid(clim, 'ts_k', rows, cols).ravel().astype(np.float64)
     runoff = np.where(outlet | (~outlet & (hf < r['level'][r['label']])), 0.0,
@@ -648,6 +802,7 @@ def compute():
         carrying_back=carrying,
         units=census,
         fill=fills,
+        deltas=delta,
         upkeep_at_start=upkeep,
         channels=dict(total_km=float(length.sum() / 1e3), slope_bins_percent=list(SLOPE_BINS_PERCENT),
                       log_qs_step=LOG_QS_STEP, log_hardness_step=LOG_HARDNESS_STEP, by_band=channel_bands),

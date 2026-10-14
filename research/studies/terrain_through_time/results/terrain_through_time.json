@@ -2,14 +2,14 @@
  "schema": "terluna.research.terrain-through-time/1",
  "producer": {
   "files": {
-   "research/studies/terrain_through_time/run.py": "60d7177ed4b08428f3850cbe2091a1aafd2c35fb16c8eb6a2b9badaa39245734",
-   "research/studies/terrain_through_time/routing.py": "50819399de0851025511713a26d7adba8628b92acf1b1332bdac5baa9e1759ca",
+   "research/studies/terrain_through_time/run.py": "aa40ee496d453303b343e771a7e6614b949bd9be24e4061b32c1ece3600d159d",
+   "research/studies/terrain_through_time/routing.py": "7977cff375a23923a438ca4d596ae20c9fe23a4ae3d1275d7c529a27f4b462fc",
    "research/studies/carbon_cycle/run.py": "23ed44e54cfaa34f09734487ec2feda21638684d7145414838377edb90fa43a7"
   },
   "inputs": {
-   "research/studies/terrain_through_time/results/terrain_routing.json": "31fbafb254020a3981bacac42f9f37a32a377b4cbba842f26a4976de29c01528",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "62a3bba03c97b9a65992b555e28dd58f99d9d810ba2949db7ff4bfe0bd967a47",
-   "resources/results/sea_phosphorus.json": "cb058257ed6bc0d74fa81135e57e594f9b0842d77de1239cb0b0a206c9581329",
+   "research/studies/terrain_through_time/results/terrain_routing.json": "e786e80f718aaea2a1392bf9c14736e7f4f0ffd37e7ea76d44447f8608efa73b",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "b9603975c9cbf1690258ed4fe38a7fdb359413f713f4d017f567e87ca05871d3",
+   "resources/results/sea_phosphorus.json": "f3e0f6f4b369750c680fd074a2393671dfbda3e7af6ef4522db4195dda55101e",
    "research/studies/conservation/results/gates.json": "65b855711fbf1b066f112f617e776bcb2f345fc48ccc5ff019aa9df3bbc4449e"
   }
  },
@@ -174,6 +174,299 @@
   "sea_chemistry_box_passing_share": [
    0.036196,
    0.042174
+  ]
+ },
+ "deltas": {
+  "by_case": {
+   "earliest": {
+    "delta_share": 1.0,
+    "rock_gt_yr": 7.1,
+    "by_year": {
+     "100": {
+      "lake_delta_km2": 34391.6,
+      "lake_delta_share_of_lake_area": 0.00876785,
+      "common_level_delta_km2": 9575.98,
+      "mouths_over_1_km2": 9857,
+      "mouths_over_10_km2": 116
+     },
+     "1000": {
+      "lake_delta_km2": 167262.0,
+      "lake_delta_share_of_lake_area": 0.042642,
+      "common_level_delta_km2": 62823.6,
+      "mouths_over_1_km2": 51177,
+      "mouths_over_10_km2": 2790
+     },
+     "10000": {
+      "lake_delta_km2": 693592.0,
+      "lake_delta_share_of_lake_area": 0.176825,
+      "common_level_delta_km2": 356987.0,
+      "mouths_over_1_km2": 185956,
+      "mouths_over_10_km2": 25529
+     }
+    }
+   },
+   "central": {
+    "delta_share": 0.75,
+    "rock_gt_yr": 3.55,
+    "by_year": {
+     "100": {
+      "lake_delta_km2": 9397.59,
+      "lake_delta_share_of_lake_area": 0.00239584,
+      "common_level_delta_km2": 2156.78,
+      "mouths_over_1_km2": 2217,
+      "mouths_over_10_km2": 2
+     },
+     "1000": {
+      "lake_delta_km2": 54175.2,
+      "lake_delta_share_of_lake_area": 0.0138115,
+      "common_level_delta_km2": 16377.7,
+      "mouths_over_1_km2": 16038,
+      "mouths_over_10_km2": 330
+     },
+     "10000": {
+      "lake_delta_km2": 255731.0,
+      "lake_delta_share_of_lake_area": 0.0651964,
+      "common_level_delta_km2": 103736.0,
+      "mouths_over_1_km2": 75948,
+      "mouths_over_10_km2": 5745
+     }
+    }
+   },
+   "latest": {
+    "delta_share": 0.5,
+    "rock_gt_yr": 0.71,
+    "by_year": {
+     "100": {
+      "lake_delta_km2": 1017.37,
+      "lake_delta_share_of_lake_area": 0.000259369,
+      "common_level_delta_km2": 211.162,
+      "mouths_over_1_km2": 83,
+      "mouths_over_10_km2": 0
+     },
+     "1000": {
+      "lake_delta_km2": 8533.8,
+      "lake_delta_share_of_lake_area": 0.00217562,
+      "common_level_delta_km2": 1941.27,
+      "mouths_over_1_km2": 1988,
+      "mouths_over_10_km2": 2
+     },
+     "10000": {
+      "lake_delta_km2": 50402.1,
+      "lake_delta_share_of_lake_area": 0.0128496,
+      "common_level_delta_km2": 15020.1,
+      "mouths_over_1_km2": 14865,
+      "mouths_over_10_km2": 292
+     }
+    }
+   }
+  },
+  "box_lake_area_lost_central_km2": {
+   "100": 830.0,
+   "1000": 11380.0,
+   "10000": 87340.0
+  },
+  "mouths": 598895,
+  "largest_central": [
+   {
+    "place": "Montes Cordillera",
+    "lat": -13.4062,
+    "lon_east": -106.781,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 1453.71,
+    "rock_mt_yr_at_start": 2.62018,
+    "depth_at_mouth_m": 63.0628,
+    "area_km2": {
+     "100": 3.11616,
+     "1000": 31.5185,
+     "10000": 276.541
+    },
+    "advance_km": {
+     "100": 1.40848,
+     "1000": 4.47943,
+     "10000": 13.2684
+    },
+    "front_depth_m_at_10000": 110.829
+   },
+   {
+    "place": "Einthoven",
+    "lat": -4.96875,
+    "lon_east": 109.844,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 236.221,
+    "rock_mt_yr_at_start": 0.474242,
+    "depth_at_mouth_m": 15.3706,
+    "area_km2": {
+     "100": 2.31403,
+     "1000": 30.4807,
+     "10000": 236.221
+    },
+    "advance_km": {
+     "100": 1.21374,
+     "1000": 4.40507,
+     "10000": 12.2631
+    },
+    "front_depth_m_at_10000": 10.3051
+   },
+   {
+    "place": "Schluter",
+    "lat": -5.21875,
+    "lon_east": -83.4688,
+    "receiving": "common-level water",
+    "receiving_water_km2": 239.498,
+    "rock_mt_yr_at_start": 0.0966896,
+    "depth_at_mouth_m": 1.88838,
+    "area_km2": {
+     "100": 3.73282,
+     "1000": 15.0358,
+     "10000": 234.619
+    },
+    "advance_km": {
+     "100": 1.54155,
+     "1000": 3.09388,
+     "10000": 12.2214
+    },
+    "front_depth_m_at_10000": 35.4628
+   },
+   {
+    "place": "Neander E",
+    "lat": -27.5312,
+    "lon_east": 41.6562,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 577.894,
+    "rock_mt_yr_at_start": 0.394337,
+    "depth_at_mouth_m": 9.49402,
+    "area_km2": {
+     "100": 3.11515,
+     "1000": 23.3629,
+     "10000": 217.961
+    },
+    "advance_km": {
+     "100": 1.40825,
+     "1000": 3.85659,
+     "10000": 11.7796
+    },
+    "front_depth_m_at_10000": 4.90991
+   },
+   {
+    "place": "Mendeleev",
+    "lat": 1.90625,
+    "lon_east": 141.969,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 1635.88,
+    "rock_mt_yr_at_start": 0.753464,
+    "depth_at_mouth_m": 35.7976,
+    "area_km2": {
+     "100": 1.57859,
+     "1000": 16.4272,
+     "10000": 193.271
+    },
+    "advance_km": {
+     "100": 1.00248,
+     "1000": 3.23387,
+     "10000": 11.0923
+    },
+    "front_depth_m_at_10000": 128.572
+   },
+   {
+    "place": "Mendeleev",
+    "lat": 5.46875,
+    "lon_east": 137.156,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 672.089,
+    "rock_mt_yr_at_start": 0.622082,
+    "depth_at_mouth_m": 2.32556,
+    "area_km2": {
+     "100": 4.30741,
+     "1000": 14.3031,
+     "10000": 183.431
+    },
+    "advance_km": {
+     "100": 1.65595,
+     "1000": 3.01756,
+     "10000": 10.8063
+    },
+    "front_depth_m_at_10000": 47.9415
+   },
+   {
+    "place": "Montes Cordillera",
+    "lat": -30.4688,
+    "lon_east": -111.781,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 1115.19,
+    "rock_mt_yr_at_start": 0.0176814,
+    "depth_at_mouth_m": 36.1796,
+    "area_km2": {
+     "100": 0.0366535,
+     "1000": 0.404471,
+     "10000": 180.223
+    },
+    "advance_km": {
+     "100": 0.152756,
+     "1000": 0.507439,
+     "10000": 10.7114
+    },
+    "front_depth_m_at_10000": 72.1469
+   },
+   {
+    "place": "Walker",
+    "lat": -24.0312,
+    "lon_east": -160.844,
+    "receiving": "common-level water",
+    "receiving_water_km2": 453.053,
+    "rock_mt_yr_at_start": 0.00684093,
+    "depth_at_mouth_m": 9.26094,
+    "area_km2": {
+     "100": 0.0554015,
+     "1000": 0.554015,
+     "10000": 179.572
+    },
+    "advance_km": {
+     "100": 0.187802,
+     "1000": 0.593883,
+     "10000": 10.692
+    },
+    "front_depth_m_at_10000": 115.257
+   },
+   {
+    "place": "Mendeleev",
+    "lat": 3.09375,
+    "lon_east": 138.406,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 179.294,
+    "rock_mt_yr_at_start": 0.459857,
+    "depth_at_mouth_m": 40.8246,
+    "area_km2": {
+     "100": 0.844816,
+     "1000": 22.5891,
+     "10000": 179.294
+    },
+    "advance_km": {
+     "100": 0.733366,
+     "1000": 3.79219,
+     "10000": 10.6837
+    },
+    "front_depth_m_at_10000": 5.70081
+   },
+   {
+    "place": "Montes Cordillera",
+    "lat": -6.78125,
+    "lon_east": -99.9062,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 420.006,
+    "rock_mt_yr_at_start": 0.0727399,
+    "depth_at_mouth_m": 58.6113,
+    "area_km2": {
+     "100": 0.0930791,
+     "1000": 1.57336,
+     "10000": 173.643
+    },
+    "advance_km": {
+     "100": 0.243426,
+     "1000": 1.00082,
+     "10000": 10.514
+    },
+    "front_depth_m_at_10000": 45.7948
+   }
   ]
  },
  "small_craters": {

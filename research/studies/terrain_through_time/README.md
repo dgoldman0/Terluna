@@ -12,8 +12,9 @@ Two runners write two products:
 - `python -m research.studies.terrain_through_time.routing` reruns geography's drainage routing, checks it against
   [geography/results/drainage.json](../../../geography/results/drainage.json) and writes
   [results/terrain_routing.json](results/terrain_routing.json) (schema `terluna.research.terrain-routing/1`) in about
-  a minute and a half with 5 GB. Its grids, each lake's and hollow's fill times, the channels and the local relief, go
-  to `research/runs/resources/terrain/terrain_16ppd.npz` (ignored by Git) for the atlas round.
+  a minute and a half with 5 GB. Its grids, each lake's and hollow's fill times, the deltas at every mouth, the
+  channels and the local relief, go to `research/runs/resources/terrain/terrain_16ppd.npz` (ignored by Git) for the
+  atlas round.
 - `python -m research.studies.terrain_through_time.run` reads that summary with the sea chemistry and the conservation
   gates and writes [results/terrain_through_time.json](results/terrain_through_time.json) (schema
   `terluna.research.terrain-through-time/1`) in seconds.
@@ -39,6 +40,13 @@ Two runners write two products:
 - **The relief wears down over millions of years.** The land lowers 1.2–12 mm a century, fastest in the wet tropics.
   Its local relief, about 1.1 km within 10 km, halves in 8 million years within 15° of the equator and 34 million
   poleward of 60° at the central rate (4–170 million across the cases).
+- **Deltas move the shorelines first.** Where rivers meet standing water the rock builds out as deltas, filling the
+  nearest water to the surface. At the central rate delta plains cover 54,000 km² of the lakes within 1,000 years and
+  256,000 km² within 10,000, 6.5% of their area (1.3–18% across the cases), against the 87,000 km² the lakes taken as
+  whole boxes lose by then. The common-level waters, the seas with the small waters at their level, gain 16,000 and
+  104,000 km² of new land. The largest deltas grow up to 38 km² in the first thousand years and 130–280 km² in ten
+  thousand, reaching 9–13 km from their mouths; some fill their whole lake or crater water, as at Einthoven and
+  Schlüter. The big rivers' deltas start small, since lakes upstream catch their rock until they fill.
 - **The seas fill in 0.8–11 million years.** A fifth of the land's rock reaches them past every lake, and their own
   deposits add more; the [sea chemistry](../sea_chemistry/README.md)'s box gave 0.7–12 million.
 - **Keeping all of it is one loop and costs a few gigawatts.** At the start 38% of the land's rock settles in the lakes,
@@ -92,6 +100,37 @@ A lake counts as lost when it is filled to marsh, under 2 m of open water or hal
 accretion the central median life is 27,000 years against 15,000; with erosion following runoff in place of rain,
 which sends 84% of the rock to the lakes, it is 9,600. The dry hollows fill as well: 19% of them within 10,000 years
 and half within 100,000 at the central rate.
+
+## Deltas
+
+Delta plain at the water's surface, central erosion with the earliest and latest cases in brackets.
+
+| | 100 years | 1,000 | 10,000 |
+|---|---|---|---|
+| In the lakes, km² | 9,400 (1,000–34,000) | 54,000 (8,500–167,000) | 256,000 (50,000–694,000) |
+| Share of the lake area | 0.24% | 1.4% | 6.5% (1.3–18) |
+| Lake area the boxes lose, central | 830 km² | 11,000 km² | 87,000 km² |
+| At the common-level waters, km² | 2,200 (210–9,600) | 16,000 (1,900–63,000) | 104,000 (15,000–357,000) |
+| Mouths with over 1 km² of delta | 2,200 | 16,000 | 76,000 |
+
+The largest after 10,000 years, central case:
+
+| Where | Into | Rock at the start | Depth at the mouth | Delta at 1,000 years | At 10,000 | Reach |
+|---|---|---|---|---|---|---|
+| Orientale's ring (Montes Cordillera) | a lake of 1,450 km² | 2.6 Mt a year | 63 m | 32 km² | 277 km² | 13 km |
+| Einthoven | a lake of 240 km² | 0.47 | 15 m | 31 | 236, the whole lake | 12 |
+| Schlüter | a common-level water of 240 km² | 0.10 | 2 m | 15 | 235, nearly all | 12 |
+| Neander E | a lake of 580 km² | 0.39 | 9 m | 23 | 218 | 12 |
+| Mendeleev | a lake of 1,640 km² | 0.75 | 36 m | 16 | 193 | 11 |
+| Mendeleev | a lake of 670 km² | 0.62 | 2 m | 14 | 183 | 11 |
+| Orientale's ring | a lake of 1,120 km² | 0.02 | 36 m | 0.4 | 180 | 11 |
+| Walker | a common-level water of 450 km² | 0.01 | 9 m | 0.6 | 180 | 11 |
+| Mendeleev | a lake of 180 km² | 0.46 | 41 m | 23 | 179, the whole lake | 11 |
+| Orientale's ring | a lake of 420 km² | 0.07 | 59 m | 1.6 | 174 | 11 |
+
+Mouths that start with little rock grow once lakes and hollows upstream fill and pass theirs on. Shallow water near the
+mouth, on the flooded maria's edges and in the lakes' shallow arms, lets a delta spread fastest. Every mouth's delta
+is in the grids.
 
 ## Small crater pools
 
@@ -197,6 +236,12 @@ At 4–15 dams a km and Earth's typical 0.35 ha a pond, the steady lunar case ho
 - **Dam builders.** The beaver-dam capacity model's thresholds (Macfarlane et al. 2017) as discharge times slope,
   carried to the Moon at equal Shields numbers, which allows 0.41 of Earth's value; baseflow and flood ratios to the
   mean flow are *design guesses*.
+- **Deltas.** At every cell where the land's rock first meets a lake or sea, and where full lakes and hollows
+  upstream pass theirs on as they fill, a delta fills the nearest water of the same lake or sea to its surface, cell
+  by cell outward, at each cell's depth (at least 1 m). It keeps half to all of what settles (*design guess*: fines
+  spread over the floor or pass on, and lunar settling is six times slower), paired from the latest case to the
+  earliest. The deltas in one lake, or in one connected sea or small water at the common level, together stop at its
+  area; reach is the radius of a half-disc of the delta's area.
 - **Upkeep.** Each eroding cell's lift to where its rock first settles, or to its catchment's highest third, and its
   straight distance there; lunar gravity; rail freight at 107 kJ a tonne-km (IEA 2019).
 
@@ -204,8 +249,9 @@ At 4–15 dams a km and Earth's typical 0.35 ha a pond, the steady lunar case ho
 
 - **What the grid cannot see.** Channels under 1 m³/s, ponds, springs and craters under 1.9 km enter only through the
   crater statistics and Earth's references.
-- **The lakes' shapes.** Each unit is a box; deltas build out from the inflows, and a lake's shallows turn to marsh
-  before its deeps fill.
+- **The deltas' shapes and the lakes' layers.** Deltas grow as fans from fixed mouths; switching channels, levees and
+  lobes are not followed, and the lakes' fill times take each lake as one box. How deep lakes layer is for ecology's
+  lake model (question 10).
 - **Uplift and the crust.** The land has none, and the crust's response to unloading and to the water is outside it.
 - **Wind and landslides.** Dust carried by wind, and the landslides that lunar gravity's taller cohesive slopes delay,
   are not followed; the dry land's storms enter through rain alone.

@@ -213,7 +213,12 @@ author held the seas fresh on the condition that they are rich in life, ecology 
 large lakes last; keeping lakes and relief is one loop of dredging and return uphill for 0.2–11 GW; the seas'
 deposits are stone for the built land; travertine builds while the young soils weather fast, and dam builders keep
 the small streams' ponds. The author set the next round, once these details are worked out, as a large round of
-atlas building down to districts, in which the young-Moon landforms to keep are chosen as a set.
+atlas building down to districts, in which the young-Moon landforms to keep are chosen as a set. Delta growth followed
+at the author's word: deltas move the shorelines first, covering 6.5% of the lake area within 10,000 years at the
+central rate and adding 104,000 km² of land at the common-level waters. The author keeps water delivery going to
+balance what the crust takes up, and wants groundwater modelled: the crust's uptake through time, the water table
+with its springs, baseflow and lake seepage, then the springs' load. Its preparation runs now; the model starts on
+the author's word.
 
 Waiting on the author: the array's power distribution recommendation (domain synthesis), and the taxonomy, on hold
 for later, with its open choices and the aerophytes' scientific name.
