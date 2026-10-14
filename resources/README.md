@@ -149,6 +149,10 @@ loss and the resupply that matches it take to replace the inventory.
      keep fresh seas near 0.4 g/kg for 10,000 years, and left alone they turn alkaline, to pH 9 in 13,000–34,000 years
      and a soda water of Earth's salinity in 24 million; held by calcite, a magnesium route, soda works and
      silica-building life they stay fresh at 0.14 g/kg and pH 8.3.
+   - **Held fresh, with the land's rock** ([terrain through time](../research/studies/terrain_through_time/README.md)):
+     the author holds the seas fresh on the condition that they are rich in life. Keeping them and the lakes open
+     is one loop with the relief: 0.7–8.3 Gt of rock a year dredged and carried back uphill for 0.2–11 GW, while
+     the seas' 0.39 km³ a year of calcite, magnesite and opal is stone for the built land.
    - *Solid for weathering alone.*
 
 ### The shield's material

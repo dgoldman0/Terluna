@@ -325,6 +325,11 @@ Each irreversible step waits until the record it destroys has been taken.
 
 Fresh regolith behaves like fresh volcanic ash, which set world sediment-yield records for years after the 1991 Pinatubo eruption. Soil crusts and vegetation early in the wet stage shorten that period.
 
+The [terrain study](../terrain_through_time/README.md) follows this erosion through the lakes and hollows. Carried
+back, the rock rises a mean 1.0 km to where it came from, or 1.7 km to each catchment's highest third, so the
+sediment return's ideal power is 0.04–0.6 GW against the 3 km gate's 0.11–1.1. Which young-Moon landforms to keep, a
+register like the heritage register for terrain, is chosen in the atlas round.
+
 ## 7. Replacing lost functions
 
 | Function | Why it ends | Replacement |

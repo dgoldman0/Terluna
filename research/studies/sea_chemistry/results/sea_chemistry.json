@@ -7,13 +7,13 @@
   },
   "inputs": {
    "resources/results/first_screen.json": "8925d2b67c0d6bb69d1479cc767fe9cc1e1788b9a87046a7dbf2be1b7a857f8d",
-   "resources/results/sea_phosphorus.json": "6851e7d49619ce211db5764a77865cf8ef46b6ac88fc6ba214a8ec9f1b9270d1",
+   "resources/results/sea_phosphorus.json": "cb058257ed6bc0d74fa81135e57e594f9b0842d77de1239cb0b0a206c9581329",
    "research/studies/atmospheric_co2/results/atmospheric_co2.json": "80db612918d3fc44d313b6aa93259ecfbad0bf869ea39de903a3fb09ace0d451",
    "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "80b3ebef5077fb625c9bd0dd181fe8fab8009453c5369037a64d4ad8f2cbdcd8",
    "research/studies/conservation/results/gates.json": "65b855711fbf1b066f112f617e776bcb2f345fc48ccc5ff019aa9df3bbc4449e",
    "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
    "geography/results/drainage.json": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d",
-   "research/studies/carbon_cycle/results/carbon_cycle.json": "fd12a69e749acc7808f31536f5d4455824954bde0a0442d63ff2239f03cd4a01"
+   "research/studies/carbon_cycle/results/carbon_cycle.json": "47a64fc7dd22ec93df773f365c47c2969d694269d4d2a900749d26ab75ef41b8"
   }
  },
  "evidence": "A box model on committed products: the rain-fed lakes and the common-level waters as well-mixed boxes in CO2 equilibrium with the air at 400 ppm, at the design case's temperatures, fed by the carbon cycle's weathering of the highland soil, with the carbon cycle's carbonate constants and solver (fresh water with Davies activities; Earth's seawater with its stoichiometric constants). Calcite, magnesium clays, magnesite and opal leave the water at stated thresholds (design guesses and bounds); sodium, potassium, chloride and sulphate leave only with pore water. Ion pairs are not followed. Beyond an ionic strength of 0.5 mol/kg the activities fail, and the masses alone are reported.",

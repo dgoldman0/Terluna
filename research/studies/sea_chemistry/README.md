@@ -33,7 +33,9 @@ it was read.
 - **Sediment fills the waters first.** The lakes catch nearly all the land's sediment and are full in 0.2–6.8 million
   years. The seas take the particles that pass and their own deposits of calcite, opal and magnesium minerals,
   0.7–2.3 km³ a year, and are full in 0.7–12 million years. A Moon without plate tectonics has nothing that renews its
-  basins.
+  basins. The [terrain study](../terrain_through_time/README.md) routes the rock lake by lake: at first the lakes take
+  38% of it, dry hollows 41% and the seas 21%, so the lakes' capacity is 99% filled in 2–25 million years and the
+  seas in 0.8–11 million.
 - **Every lasting state is a held one.** Four flows at weathering's catchment rate keep the seas wherever the
   delivery sets them, for the billion years:
   - calcite, 296 Mt a year, which calcifiers build as they do on Earth;

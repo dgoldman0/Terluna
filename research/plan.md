@@ -207,6 +207,14 @@ can be had by extracting more sunlight, and the fleet's glow is the problem to w
 person a year; sky towns fly in the reefs' layer, with the preference going to the reefs if they become part of the
 useful balancing system; and the network's stability decides how its nodes meet the tallest storms.
 
+On 13 October (resources) the seas' chemistry through a billion years found every lasting state a held one, and the
+author held the seas fresh on the condition that they are rich in life, ecology designing their communities. The
+[terrain study](studies/terrain_through_time/README.md) followed: left alone the small waters go first and the
+large lakes last; keeping lakes and relief is one loop of dredging and return uphill for 0.2–11 GW; the seas'
+deposits are stone for the built land; travertine builds while the young soils weather fast, and dam builders keep
+the small streams' ponds. The author set the next round, once these details are worked out, as a large round of
+atlas building down to districts, in which the young-Moon landforms to keep are chosen as a set.
+
 Waiting on the author: the array's power distribution recommendation (domain synthesis), and the taxonomy, on hold
 for later, with its open choices and the aerophytes' scientific name.
 

@@ -135,6 +135,10 @@ below −1,654 m unless the lakes' water is delivered on top, or groundwater and
 drier. [tests/test_drainage.py](tests/test_drainage.py) checks
 mass conservation, fill-and-spill and the closed-lake balance on synthetic terrain.
 
+The [terrain study](../research/studies/terrain_through_time/README.md) fills these lakes and closed hollows with the
+land's eroded rock: lakes under 10 km² last a median 4,600 years at the central erosion and the largest 1.5 million,
+and each lake's and hollow's fill times are in its grids for the atlas round.
+
 ## Groundwater: a first estimate
 
 The crust under the seas and land is porous. GRAIL's gravity gives the highland
