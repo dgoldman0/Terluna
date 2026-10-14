@@ -4,6 +4,17 @@
 
 The route model is Sun-only and circular/coplanar. Electric propulsion includes exhaust and propellant but omits dry mass, return fleets and complete extraction/capture systems. Growth is a required capacity curve with an imposed cap. Maintenance tables impose depletion timescales rather than predict escape. Oxygen process yields and energy benchmarks retain their separate process assumptions.
 
+## Array tile hardware and service
+
+[array_tile.py](array_tile.py) sizes a conditional membrane, finite perimeter
+truss, three-axis rotor store, optical trim and electrical supply.
+[array_momentum.py](array_momentum.py) conserves angular momentum through a
+prescribed attitude and assembled inertia. [array_service.py](array_service.py)
+counts renewal, faults and finite replacement queues. The
+[tile study](../research/studies/solar_shield_array/tile_design.md) couples them:
+the tested 10 km rigid-edge design exceeds its mass allocation; numerical
+sizing convergence is not flexible-control or hardware validation.
+
 ## Sourcing and conservation
 
 - **Where the air and water come from.** Water, nitrogen and oxygen all come from the Solar-System-wide resource operation ([conservation study](../research/studies/conservation/README.md), decision D4). The baseline's local oxygen production at 24.3 kWh/kg is superseded.

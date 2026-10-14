@@ -31,6 +31,16 @@ the point-mass acceleration residual and numerical convergence. The ideal
 optical ball is a lower bound on electrical thrust, with achievable materials,
 exhaust paths and Earth-safe outgoing rays still to supply.
 
+## Local failed-tile response
+
+[tile_failure.py](tile_failure.py) adds circular-orbit HCW fault dynamics with
+finite parallel tile envelopes, continuous clearance/contact events and capped
+independent backup acceleration. Physical claims stop at contact; returning
+a tile to its slot does not repair its filter. The
+[tile study](../../research/studies/solar_shield_array/tile_design.md) records
+response windows and conditional replacement queues. This is a local
+disturbance test, not a propagation of the eccentric ring fleet.
+
 ## Cycling membrane experiment
 
 [cycling.py](cycling.py) adds an ideal specular sail, Earth/Moon eclipse unions,

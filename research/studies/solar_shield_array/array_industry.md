@@ -249,6 +249,24 @@ lines put even less on it. Power delivered to the Moon ends as heat there,
 counted in the Open Moon's allocation, one of the three power ledgers the
 engineering domain keeps apart.
 
+## Hardware assessment added 14 October 2026
+
+The [tile design and service study](tile_design.md) now sizes an explicit
+perimeter-frame candidate against the rolled-law branch. It includes trim
+power, rotor storage, frame stiffness and their inertia feedback, then local
+fault response and population replacement queues. The rigid-edge 10 km
+candidate fails the current mass and local frame-clearance allowances;
+complete-tile hardware cannot yet be added to the 46 Gt optical inventory as
+a small correction.
+
+The momentum-store table below is a historical radial-facing comparison. Its
+1.9e9 N m s input is superseded as a hardware-sizing requirement: the roll
+changes the demand, and the earlier body-axis torque integral omitted momentum
+transport. The new study preserves those products as prior assumptions and
+uses a conserved calculation with actual assembled inertia. Next hardware
+work is a different load-path/shape architecture, then flexible control and
+independent failure containment before new orbit and industry claims.
+
 ## The shield's own loads
 
 The comparison left the shield's own loads, the reflectivity trim and the

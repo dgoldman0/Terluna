@@ -1,0 +1,123 @@
+{
+  "schema": "terluna.research.tile-hardware-sources/1",
+  "reviewed_on": "2026-10-14",
+  "scope": "Focused primary-source checks for a conditional tile engineering screen. No claim of full scholarly reading, hardware qualification or measured fleet lifetime. No external dataset or full paper is redistributed.",
+  "sources": [
+    {
+      "id": "tosoh_quartz_properties",
+      "title": "Tosoh Quartz: About Quartz Glass; physical properties of major quartz glass material",
+      "url": "https://www.tqgj.co.jp/en/quartz/",
+      "read_extent": "Mechanical, thermal and electrical characteristics table and notes; optical/material context scanned.",
+      "evidence": "Manufacturer typical-property table, not a certified allowable.",
+      "parameters": {
+        "young_modulus_Pa": 74000000000.0,
+        "typical_tensile_strength_Pa": 49000000.0,
+        "poisson_ratio_range": [
+          0.17,
+          0.18
+        ]
+      },
+      "use": "Scale for silica elastic response and a caution against using pristine theoretical strength.",
+      "limits": "Surface condition affects bending and tensile strength. Values are typical at 25 C and not guaranteed. Does not qualify 4 um silica film, joints, radiation damage, crack growth or kilometre-scale survival."
+    },
+    {
+      "id": "toray_t700s",
+      "title": "Toray TORAYCA T700S Carbon Fiber Data Sheet, revision 2025-11-24",
+      "url": "https://www.toraycma.com/wp-content/uploads/T700S-Data-Sheet.pdf",
+      "read_extent": "Both PDF pages: fiber and composite tables, volume-fraction note and lot-average disclaimer; packaging only scanned.",
+      "evidence": "Manufacturer typical material properties.",
+      "parameters": {
+        "fiber_density_kg_m3": 1800,
+        "fiber_tensile_strength_Pa": 4900000000.0,
+        "fiber_tensile_modulus_Pa": 230000000000.0,
+        "epoxy_composite_60pct_tensile_strength_Pa": 2860000000.0,
+        "epoxy_composite_60pct_tensile_modulus_Pa": 134000000000.0,
+        "epoxy_composite_60pct_compressive_strength_Pa": 1450000000.0,
+        "epoxy_composite_60pct_transverse_tensile_strength_Pa": 81000000.0
+      },
+      "use": "Anchor the order of material stiffness/strength for a composite frame or rotor; distinguish fiber from laminate.",
+      "limits": "Composite figures normalized to 60% fiber volume with epoxy cured at 130 C. Density in the sheet is fiber density, not laminate density. Lot averages are explicitly not specification values. Joints, buckling, thermal cycling, damage and fatigue require separate allowables."
+    },
+    {
+      "id": "nasa_membrane_wrinkling_2003",
+      "title": "Tessler, Sleight and Wang: Nonlinear Shell Modeling of Thin Membranes with Emphasis on Structural Wrinkling",
+      "url": "https://ntrs.nasa.gov/api/citations/20030064950/downloads/20030064950.pdf",
+      "read_extent": "Abstract/introduction, concluding remarks, and experimental configuration/result figure captions for 229 mm Mylar and 500 mm Kapton sheets. Not a complete derivation or full paper review.",
+      "evidence": "Nonlinear shell calculations compared with small laboratory membrane experiments.",
+      "use": "Supports treating pretension and wrinkle formation as structural phenomena requiring nonlinear membrane/shell analysis.",
+      "limits": "Simple taut-panel sag and frequency equations do not establish globally flat film, survive concentrated corner forces, or model buckled compressive regions. Polymer coupons do not validate silica film or 10 km structures."
+    },
+    {
+      "id": "nasa_solar_cruiser_controls_2023",
+      "title": "Tyler et al.: Attitude Control Approach for Solar Cruiser, a Large, Deep Space Solar Sail Mission, AAS-23-177",
+      "url": "https://ntrs.nasa.gov/api/citations/20230001111/downloads/Attitude%20Control%20Approach%20for%20Solar%20Cruiser%2C%20a%20Large%2C%20Deep%20Space%20Solar%20Sail%20Mission%20-%20Revised.pdf",
+      "read_extent": "Abstract, problem formulation and design sections, PDF pages 1-13, plus slew-performance discussion on pages 15-16. Not a full independent validation of simulations.",
+      "evidence": "Mission design and modeled controls response, not flight validation.",
+      "use": "Couples sail-shape uncertainties, thermal boom displacement, reaction-wheel momentum management, low flexible-mode frequencies, inertia changes and optical control geometry.",
+      "limits": "External actuators must desaturate wheels. A moving mass has only two torque directions; normal-axis torque needs separate devices. The proposed PDLC units use applied voltage and shaped/tented surfaces. Does not demonstrate zero holding power, 10-year life, full-area scalar reflectivity trim or giant sail hardware."
+    },
+    {
+      "id": "jaxa_ikaros_optical_control_2010",
+      "title": "JAXA: IKAROS Successful Attitude Control by Liquid Crystal Device, 23 July 2010",
+      "url": "https://www.jaxa.jp/press/2010/07/20100723_ikaros_e.html",
+      "read_extent": "Full short release and figure descriptions.",
+      "evidence": "Flight demonstration of small sunlight-driven attitude correction.",
+      "use": "Establishes that optical modulation can supply real attitude-control torque.",
+      "limits": "The release states normal IKAROS attitude operations used onboard thrusters. The demonstration is neither a full all-axis controller nor evidence of zero holding power, 10-20 year survival, or 10 km applicability."
+    },
+    {
+      "id": "nasa_sbir_electrochromic_2001",
+      "title": "NASA SBIR Phase I award: Thin Film, Variable Reflectance Materials for Solar Sail Control",
+      "url": "https://www.sbir.gov/awards/91793",
+      "read_extent": "Award identification and complete abstract.",
+      "evidence": "Proposal and development aims, not measured qualified hardware.",
+      "use": "Documents switching-only power electrochromic sail-control devices as an investigated technology route.",
+      "limits": "The promise of power only while switching, less than 20% covered area and low mass was prospective. This source cannot establish implemented optical contrast, switching energy, holding-power requirement, vacuum compatibility, radiation lifetime or bistability of a selected device."
+    },
+    {
+      "id": "nasa_flywheel_rotor_sizing_2012",
+      "title": "NASA/TM-2012-217808: Metallic Rotor Sizing and Performance Model for Flywheel Systems",
+      "url": "https://ntrs.nasa.gov/api/citations/20130000784/downloads/20130000784.pdf",
+      "read_extent": "Rotor sizing equations and discussion, report pages 2-4 (PDF pages 6-8); no full model replication.",
+      "evidence": "Analytical isotropic metallic rotor sizing.",
+      "use": "Stress, tip speed and stored energy identities. Thin free-ring force balance separately gives hoop stress rho*v^2, H=m*r*v and E=m*v^2/2.",
+      "limits": "The thin-ring relation is a derived screen, not a composite rotor qualification. The cited report itself excludes motor laminates and other subsystems from rotor mass; composite anisotropy, bearings, containment and fatigue need separate design."
+    },
+    {
+      "id": "nasa_flywheel_viscoelasticity_2004",
+      "title": "Thesken et al., NASA/TM-2004-212102: Time-Temperature Dependent Response of Filament Wound Composites for Flywheel Rotors",
+      "url": "https://ntrs.nasa.gov/citations/20040028026",
+      "read_extent": "Complete NASA repository abstract and bibliographic record, plus introduction excerpt in indexed PDF. Full paper not read.",
+      "evidence": "Coupon experiments on IM7/8552 carbon/epoxy at room temperature, 95 C and 135 C.",
+      "use": "Shows transverse time/temperature-dependent relaxation can limit composite flywheel pre-load and life.",
+      "limits": "Results are material- and temperature-specific. They establish neither a generic rotor lifetime nor a fatigue allowable for the proposed tile. Hoop-strength checks alone omit radial/preload failure mechanisms."
+    },
+    {
+      "id": "nasa_pen_damage_2017",
+      "title": "Kang et al., NASA/TP-2017-219644: Simulated Space Environment Effects on a Candidate Solar Sail Material",
+      "url": "https://ntrs.nasa.gov/api/citations/20170007244/downloads/20170007244.pdf",
+      "read_extent": "Abstract, section 3.3 simulated impact damage and section 4 conclusions; table of contents scanned. Not full experimental-methods review.",
+      "evidence": "Metallized PEN coupon irradiation, aging and artificial-notch measurements.",
+      "use": "Shows that optical survival does not guarantee mechanical survival; pre-existing cracks and radiation require separate tests.",
+      "limits": "PEN film is not silica/titania or a liquid-crystal trim device. Electron dose is a laboratory dose, not a predicted lunar-fleet service interval. No fleet failure rate or 10-20 year life is inferred."
+    },
+    {
+      "id": "mit_hcw_derivation_2008",
+      "title": "MIT OpenCourseWare 16.346 Astrodynamics, Lecture 26: The Clohessy-Wiltshire Equations of Relative Motion (Fall 2008)",
+      "url": "https://ocw.mit.edu/courses/16-346-astrodynamics-fall-2008/e4f0632a9f1c98f7e9b25492e1a30eb1_lec_26.pdf",
+      "read_extent": "All three content pages (PDF pages 2-4): rotating-frame derivation, first-order expansion, radial/tangential/normal component equations and homogeneous state-transition solution. Cover-page provenance also checked.",
+      "evidence": "Institutional teaching derivation of classical linear relative-orbit mechanics, citing Clohessy and Wiltshire (1960); not an experiment.",
+      "use": "Checks the HCW acceleration signs, mean motion and analytical unforced solution. The initial xi/eta/zeta convention corresponds to outward radial, along-track and orbit normal; the notes then switch to an alternate axis convention.",
+      "limits": "A circular reference orbit and small separation permit constant coefficients after discarding higher-order terms. Does not validate imposed residual acceleration, recovery authority, finite tile geometry, lunar third-body perturbations, eccentric orbit errors or any fleet collision claim."
+    },
+    {
+      "id": "jpl_formation_dynamics_2004",
+      "title": "Ploen, Scharf, Hadaegh and Acikmese: Dynamics of Earth orbiting formations (AIAA Guidance, Navigation and Control Conference, 2004)",
+      "url": "https://ntrs.nasa.gov/citations/20060043838",
+      "read_extent": "Complete NASA repository abstract and bibliographic record only. Record has no downloadable paper; linked handle could not be fetched.",
+      "evidence": "NASA/JPL primary research abstract reporting nonlinear and linearized formation dynamics.",
+      "use": "Independent scope check: Hill-Clohessy-Wiltshire equations arise by linearization around a circular reference orbit.",
+      "limits": "The full paper was not read. No equations or numerical error bounds are adopted from this abstract, and no Earth perturbation treatment is transferred to the lunar fleet."
+    }
+  ]
+}

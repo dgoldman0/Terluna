@@ -1,5 +1,13 @@
 # Solar shield and habitat array
 
+The [tile hardware and replacement assessment](tile_design.md) of 14 October
+2026 tests an explicit perimeter-frame tile, conserved angular momentum, local
+faults and fleet service. Its 10 km rigid-edge reference exceeds the current
+mass allowance by roughly 200 times and fails the local 150 m frame-clearance
+gate. Smaller-tile and relaxed-shape cases improve mass but do not close it.
+The prior orbit and glow results retain their stated light-tile inputs; they
+are not validation of this added hardware. No operating design is accepted.
+
 The [relative-orbit plan](relative_orbits.md) of 6 October 2026 sets the
 current direction for the formation, and the
 [integrated comparison](integrated_comparison.md) of the same day sets how
