@@ -817,6 +817,99 @@ first, so the shared installation and every other run's key stay as they were. C
 `moon_omp_twilight` build
 ([the CRM's account](../crm/README.md#the-45-rings-on-the-design-ground-with-the-curved-airs-light)).
 
+**The 20-year test.** `A28_dim5_moon_geometry` branches from the design case's year-29 restart with `--twilight full`,
+the refitted water and Rayleigh multipliers and the design case's settings otherwise (sunlight scale 0.95), and flew
+20 years on 4 ranks, about 3¾ minutes a model year. Its years 10–19 against the design case's years 20–29:
+
+| | Design case | With the curved air | Change (year-to-year spread) |
+|---|---|---|---|
+| Surface temperature | 294.90 K | 294.24 K | −0.65 K (0.04) |
+| Air at 2 m | 294.37 K | 293.58 K | −0.79 K (0.03) |
+| Cloud cover | 23.5% | 26.2% | +2.8 points, nearly all in the high deck |
+| Clouds' net effect at the top | −1.6 W/m² | +2.2 W/m² | +3.8 W/m² |
+| Precipitation | 2.24 mm/day | 2.20 mm/day | −1.6% |
+
+- **The clouds give back most of what the geometry takes.** In the first year the clear sky lost 5.4 W/m² at the top
+  of the air, as the ledger has it, and the clouds returned 3.5 W/m², reflecting less sunlight and holding more
+  infrared; the climate settled within about eight years.
+- **The evenings keep some warmth.** Land air cools 0.8–0.95 K at most local times, but at dusk at 30–60° only
+  0.3–0.6 K, the twilight holding the evening air up; dawn gains a little. The 3-day output means resolve local time
+  to about a tenth of the lunar day.
+- **The rain moves poleward**: 0.19 mm/day less over land within 15° of the equator, 0.02–0.05 mm/day more over land
+  at 30–60°.
+- **The sunlight side alone would mislead.** A first branch with only the curved sunlight
+  (`A28_dim5_moon_twilight`, stopped after four years) warmed 1.1, 2.1, 2.9 and 3.7 K in its first four years.
+
+**PlaSim's CO₂ and O₂.** PlaSim's sunlight has two bands: below 0.75 µm Rayleigh scattering and ozone, above it
+water vapour alone, Lacis and Hansen's absorptivity of a pressure-weighted water path. CO₂ and O₂ are not in either,
+and the calibration's water multiplier absorbs their share where the water is. The Moon's column holds 7.2 times
+Earth's air over each square metre, so their strongest lines go dark high up: with the Sun overhead CO₂ alone takes
+6.1 W/m² in the GCM's top layer (112–575 km), where PlaSim takes nothing. `plasim_shortwave.py gases` fits each band
+an absorptivity a u / ((1 + b u)^c + d u) of its own path u, each layer's mass of the gas weighted by (p / 1 bar)^n,
+to the line-by-line direct beam's loss above each of the column's 100 levels at slant factors 1 to 13
+([../results/gcm/shortwave_gases.json](../results/gcm/shortwave_gases.json)):
+
+| Band | Overhead Sun takes | n | Largest error, share of the band |
+|---|---|---|---|
+| CO₂ near infrared (2.0, 2.7 and 4.3 µm) | 22.2 W/m² | 0.83 | 0.06% |
+| O₂ near infrared (A band, 1.27 µm) | 8.9 W/m² | 0.95 | 0.13% |
+| O₂ visible (B and γ bands) | 3.4 W/m² | 0.88 | 0.04% |
+
+The runner's `--gas-bands` puts them into the twilight copy through `GAS_EDITS`, each multiplied into its PlaSim band's
+layer transmissions as water's are, along the Moon's slant path for well-mixed air (7.1 at the horizon), with the gases'
+mass fractions from the run's air (CO₂ 6.1×10⁻⁴, O₂ 0.194). With the bands and the Moon's slant factors the
+calibration refits to a water multiplier of 1.292 and a Rayleigh multiplier of 2.237, keeping the air's daily-mean
+share within 0.014 points on average and 0.24 rms
+([../results/gcm/shortwave_fit_A28_dim5_lunar.json](../results/gcm/shortwave_fit_A28_dim5_lunar.json)). The design column's absorbed sunlight by layer, global means, W/m², the line-by-line pseudo-spherical column against
+PlaSim's arithmetic on the same column:
+
+| GCM layer | Line-by-line | PlaSim as run | PlaSim with the bands |
+|---|---|---|---|
+| 112–575 km | 3.40 | 0.00 | 2.19 |
+| 85–112 km | 1.77 | 0.01 | 1.25 |
+| 66–85 km | 6.84 | 2.24 | 3.12 |
+| 49–66 km | 10.42 | 14.06 | 13.87 |
+| 35–49 km | 15.11 | 18.60 | 17.81 |
+| 24–35 km | 16.35 | 18.61 | 17.60 |
+| 14–24 km | 14.63 | 15.88 | 14.92 |
+| 7–14 km | 11.76 | 12.36 | 11.56 |
+| 2–7 km | 8.10 | 8.16 | 7.61 |
+| 0–2 km | 3.18 | 2.73 | 2.54 |
+| Whole column | 91.56 | 92.65 | 92.47 |
+
+The rest of the gap is water's: with the Sun overhead the line-by-line water takes 9.2 W/m² at 66–85 km, just under the
+design column's 86 km tropopause, and PlaSim's 5.2, its pressure-weighted path counting about a quarter of the water
+there. In the middle-atmosphere column the misplaced sunlight is worth 0.88 K of ground as run and 0.31 K with the
+bands ([its account](../../atmosphere/middle_atmosphere/README.md#the-curved-airs-light-2026-10-14)).
+
+**The 20-year test with the bands.** `A28_dim5_moon_geometry_gases` branches from the same restart with
+`--twilight full --gas-bands` and the multipliers refitted with them. Its years 10–19 against the design case's 20–29
+and the curved air's test without the bands:
+
+| | Design case | Curved air | Curved air with CO₂ and O₂ |
+|---|---|---|---|
+| Surface temperature | 294.90 K | 294.24 K | 292.02 K, still cooling 0.3 K a decade |
+| Air at 2 m | 294.37 K | 293.58 K | 291.57 K |
+| Cloud cover; high deck; low deck | 23.5%; 14.3%; 5.3% | 26.2%; 16.2%; 5.3% | 20.0%; 11.6%; 5.3% |
+| Clouds' net effect at the top | −1.6 W/m² | +2.2 W/m² | +0.5 W/m² |
+| Precipitation; over land | 2.24; 2.04 mm/day | 2.20; 2.01 mm/day | 2.07; 1.90 mm/day |
+| Land under 0.5 mm/day; over 2 mm/day | 42.2%; 39.2% | 41.1%; 39.8% | 43.4%; 37.6% |
+| Water vapour | 176 kg/m² | 162 kg/m² | 138 kg/m² |
+| Air in the top layer, 112–575 km | 170.0 K | 169.3 K | 176.6 K |
+
+- **The bands' heating clears the high cirrus, and the Moon cools 2.2 K more.** The top layer warms 7 K and its cloud
+  falls from 2.0% to 0.05%, and the next layer's, at 85–112 km round the 86 km tropopause, from 9.4% to 3.7%. The
+  cirrus held infrared: the clouds' longwave effect falls from 8.9 to 6.8 W/m². The column without clouds moved its
+  ground 0.57 K with the bands, so most of the cooling is this response of PlaSim's diagnostic, Earth-tuned clouds.
+- **The middle air cools about twice as much as the ground**: 5.0–5.7 K at 35–85 km against the design case.
+- **The ground cools evenly.** Land air is 2.6–2.95 K cooler at every latitude and time of day, least at noon in the
+  tropics and at dusk, most in the small hours; dusk at 30–60° keeps the twilight's warmth, 2.68 K cooler against
+  2.9 K at night.
+- **The rain falls 7.6%**, over land 7.5% in the tropics and 5.5% at 30–60°: 2.6% for each kelvin against the
+  dimming runs' 3.1%, the ground taking 5.6 W/m² more sunlight through thinner cloud and drier air.
+- **Holding the design temperature would take about 1.5–1.7% less dimming**, at the dimming runs' 1.72–1.9 K for
+  each 1% of sunlight: a sunlight scale near 0.965 in place of 0.95, not yet run.
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

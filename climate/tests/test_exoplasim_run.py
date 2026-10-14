@@ -87,6 +87,25 @@ class RunnerTests(unittest.TestCase):
         self.assertIn('call twilight_term', added)                      # the sunlight, at the end of swr
         self.assertIn('call twilight_lw', added)                        # the infrared, at the end of lwr
 
+    def test_the_gas_bands_follow_the_twilight_patch_and_the_fitter(self):
+        from climate.gcm import plasim_shortwave as ps
+        # They extend the module, namelist and broadcast lines the twilight patch wrote and the line the calibrated
+        # absorptivity wrote, and keep PlaSim's lines short.
+        twilight = ''.join(new for _, new in er.TWILIGHT_EDITS)
+        anchors = [old for old, _ in er.GAS_EDITS]
+        for old in anchors[:3]:
+            self.assertIn(old, twilight)
+        self.assertIn(anchors[6], ''.join(new for _, new in er.SHORTWAVE_EDITS))
+        for _, new in er.GAS_EDITS:
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        # ZGASQ's columns are the fitter's bands in order: CO2 and O2 beside the water, then O2 in the visible.
+        self.assertEqual(er.GAS_ORDER, tuple(name for name, _, _ in ps.GAS_BANDS))
+        self.assertEqual([band for _, _, band in ps.GAS_BANDS], [2, 2, 1])
+        # Earth's air: O2 is 23.1% of its mass and CO2 at 400 ppm 0.061%.
+        earth = er.gas_mass_fractions(dict(pN2=0.7808, pO2=0.2095, pAr=0.00934, pCO2=0.0004))
+        self.assertAlmostEqual(earth['O2'], 0.2314, places=3)
+        self.assertAlmostEqual(earth['CO2'] * 1e4, 6.08, places=1)
+
     def test_the_twilight_table_reads_as_the_patch_expects(self):
         if not er.TWILIGHT_PRODUCT.exists():
             self.skipTest('twilight.json not built')

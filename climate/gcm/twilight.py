@@ -499,20 +499,20 @@ def air_mass(edges, density, elevation):
 MAGNIFICATION_ELEVATIONS = np.radians(np.r_[np.linspace(0.0, 10.0, 101), np.linspace(10.5, 90.0, 160)])
 
 
-def magnification(edges, water):
-    """The Moon's slant factor for its water vapour (per metre of height, bottom-up) by solar elevation, and the
-    rational form PlaSim's patch takes for it, (mu + a) / (mu^2 + b mu + c): exactly 1 overhead, c = a / m(0) at the
-    horizon, a and b fitted in the logarithm."""
+def magnification(edges, density):
+    """The Moon's slant factor for an absorber (its density per metre of height, bottom-up) by solar elevation, and
+    the rational form PlaSim's patch takes for it, (mu + a) / (mu^2 + b mu + c): exactly 1 overhead, c = a / m(0) at
+    the horizon, a and b fitted in the logarithm."""
     from scipy.optimize import least_squares
     el = MAGNIFICATION_ELEVATIONS
     mu = np.sin(el)
-    m = air_mass(edges, water, el)
+    m = air_mass(edges, density, el)
     form = lambda p: (mu + p[0]) / (mu * mu + p[1] * mu + p[0] / m[0])
     fit = least_squares(lambda p: np.log(form(p)) - np.log(m), [0.18, 0.17], bounds=([1e-4, -0.5], [5.0, 5.0]))
     a, b = (float(x) for x in fit.x)
     error = form(fit.x) / m - 1.0
     return dict(form='(mu + a) / (mu^2 + b mu + c)', a=a, b=b, c=a / float(m[0]), horizon=float(m[0]),
-                max_error=float(np.max(np.abs(error))), elevation_deg=list(np.degrees(el[::10])), water=list(m[::10]))
+                max_error=float(np.max(np.abs(error))), elevation_deg=list(np.degrees(el[::10])), slant=list(m[::10]))
 
 
 def sphere_share(x, elevation):
@@ -641,6 +641,8 @@ def ledger() -> dict:
     tables = {k: (g @ e, onto_gcm_layers(a @ e, p_edges)) for k, (g, a) in per_channel.items()}
     shell_delta = shallow_a @ e - pa @ e                        # (shells bottom-up, elevations), W/m2 at the beam
     shell_cone = sphere_a @ e - shallow_a @ e
+    shell_means = {k: sphere_share((a @ e).T, grid) / 4.0
+                   for k, a in (('sphere', sphere_a), ('sphere_shallow', shallow_a), ('pseudo_spherical', pa))}
     del per_channel, sphere_a, shallow_a, pa, fa
     log('PlaSim on the design run\'s column')
     column = plasim_column(col, air_spec.molar_mass, albedo)
@@ -670,6 +672,7 @@ def ledger() -> dict:
     term_g = (tables['sphere_shallow'][0] - tables['pseudo_spherical'][0])[term] / covered
     term_q = (tables['sphere_shallow'][1] - tables['pseudo_spherical'][1])[:, term] / covered
     lunar = magnification(edges, water / dz)
+    lunar_air = magnification(edges, mass / dz)
     log('the outgoing infrared through flat layers and spherical shells')
     lwo = longwave_optics()
     lw = outgoing_infrared(lwo['nu'], lwo['absorption'].astype(float), edges, col['layer_t_k'], float(col['t_k'][0]))
@@ -746,6 +749,12 @@ def ledger() -> dict:
                           'elevation; the ground as in gcm_term.'),
             height_edges_km=list((edges - R) / 1e3), elevation_deg=list(np.degrees(grid[term])), ground=term_g,
             shells=shell_delta[:, term] / covered),
+        shells_w_m2=dict(
+            reading_rule=('The sunlight each of the design column\'s 100 shells absorbs (bottom-up), global means per '
+                          'square metre of ground, between the heights and pressures given: the sphere, its light on the '
+                          'flat column\'s volumes (sphere_shallow, so sphere_shallow / pseudo_spherical is the curved '
+                          'light\'s ratio of heating per unit mass) and the pseudo-spherical column.'),
+            height_edges_km=list((edges - R) / 1e3), pressure_edges_pa=list(p_edges), **shell_means),
         cm1_term_cone=dict(
             reading_rule=('The cone the twilight terms leave out, by shell (bottom-up) and solar elevation, as in '
                           'cm1_term: the more sunlight the widening shells above each square metre of ground take.'),
@@ -772,6 +781,7 @@ def ledger() -> dict:
                 curved=(float(sphere_share(term_g, grid[term]) + sphere_share(term_q.sum(0), grid[term])) * covered / 4.0
                         - float(lw['sphere_shallow'] - lw['flat'])))),
         magnification=lunar,
+        magnification_air=lunar_air,
         by_elevation=dict(elevation_deg=list(np.degrees(grid)),
                           **{k: dict(ground=g / covered, layers=a / covered) for k, (g, a) in tables.items()},
                           plasim_reflected=p_reflected),

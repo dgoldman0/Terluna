@@ -426,11 +426,80 @@ PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
            ('radmod.f90', "Terluna: the Sun's clock", SUN_EDITS),
            ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS),
            ('radmod.f90', 'Terluna: infrared from space at the top of the air', TOP_INFRARED_EDITS)]
+# CO2 and O2 in PlaSim's sunlight (radmod.f90, swr; climate/gcm/plasim_shortwave.py, GAS_BANDS). PlaSim's two bands hold
+# no CO2 or O2, whose strongest lines the Moon's deep column takes high up, so it puts that sunlight where its water
+# is. NGASBANDS 1 adds CO2 and O2 in the near-infrared band and O2 in the visible, each an absorptivity of its own
+# pressure-scaled path (ZGASQ, fitted in ../results/gcm/shortwave_gases.json) and the gases' mass fractions (ZGASW),
+# along the Moon's slant path for well-mixed air (ZMAIRLUNAR), multiplied into the layers' transmissions as water's
+# is. With the fractions at 0, the default, every transmission is multiplied by 1 and the model is as it was.
+def _gas_absorptivity(g, u):
+    return f"zgasq(1,{g})*{u}/((1.+zgasq(2,{g})*{u})**zgasq(3,{g})+zgasq(4,{g})*{u})"
+
+
+def _gas_layer(g, down, up):
+    a = lambda u: _gas_absorptivity(g, u)
+    return (f"        zgp(:)=zgyl(:,jlev,{g})\n"
+            f"        ztg(:)=(1.-{a('zgp(:)')})/ztgt(:,{g})\n"
+            f"        ztgt(:,{g})=ztgt(:,{g})*ztg(:)\n"
+            f"        zgp(:)=zgyt(:,{g})+zbetta*(zgut(:,{g})-zgul(:,jlev,{g}))\n"
+            f"        ztgu(:)=ztgtu(:,{g})/(1.-{a('zgp(:)')})\n"
+            f"        ztgtu(:,{g})=ztgtu(:,{g})/ztgu(:)\n"
+            f"        {down}(:)={down}(:)*ztg(:)\n"
+            f"        {up}(:)={up}(:)*ztgu(:)\n")
+
+
+GAS_EDITS = [
+    ("      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n",
+     "      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n"
+     "      integer :: ngasbands = 0   ! Terluna: 1 adds CO2 and O2 to the sunlight's absorbers\n"
+     "      real :: zgasq(5,3) = 0.0   ! Terluna: their fits (a, b, c, d, n): CO2 and O2 near infrared, O2 visible\n"
+     "      real :: zgasw(2) = 0.0     ! Terluna: the mass fractions of CO2 and O2\n"
+     "      real :: zmairlunar(3) = 0.0 ! Terluna: the Moon's slant factor for well-mixed air (0: the water's)\n"),
+    ("     &               ,ntwilight,zmlunar,ntwilw\n",
+     "     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar\n"),
+    ("      call mpbci(ntwilw)\n",
+     "      call mpbci(ntwilw)\n"
+     "      call mpbci(ngasbands)   ! Terluna: CO2 and O2 in the sunlight\n"
+     "      call mpbcrn(zgasq,15)\n"
+     "      call mpbcrn(zgasw,2)\n"
+     "      call mpbcrn(zmairlunar,3)\n"),
+    ("      real ztwvt(NHOR),ztwvtu(NHOR)! total water vapor transmissivities (d/u)\n",
+     "      real ztwvt(NHOR),ztwvtu(NHOR)! total water vapor transmissivities (d/u)\n"
+     "      real zgu(NHOR,3),zgut(NHOR,3),zgyt(NHOR,3)  ! Terluna: CO2 and O2 paths: layer, total, effective total\n"
+     "      real zgul(NHOR,NLEV,3),zgyl(NHOR,NLEV,3)   ! Terluna: their amounts above each layer's bottom\n"
+     "      real ztgt(NHOR,3),ztgtu(NHOR,3),ztg(NHOR),ztgu(NHOR),zgp(NHOR),zmg(NHOR)\n"),
+    ("       zwvt(:)=0.\n       zywvt(:)=0.\n",
+     "       zwvt(:)=0.\n       zywvt(:)=0.\n"
+     "       zmg(:)=merge((zmu0(:)+zmairlunar(1))                                   &\n"
+     "     &             /max(zmu0(:)*zmu0(:)+zmairlunar(2)*zmu0(:)+zmairlunar(3),1.e-12) &\n"
+     "     &             ,zm(:),zmairlunar(3) > 0.) ! Terluna: the slant path for CO2 and O2\n"
+     + ''.join(f"       zgut(:,{g})=0.\n       zgyt(:,{g})=0.\n" for g in (1, 2, 3))),
+    ("        zywvl(:,jlev)=zywvt(:)\n",
+     "        zywvl(:,jlev)=zywvt(:)\n"
+     + ''.join(f"        zgu(:,{g})=dsigma(jlev)*dp(:)/ga*zgasw({1 if g == 1 else 2})*(sigma(jlev)*dp(:)/1.e5)**zgasq(5,{g})\n"
+               f"        zgut(:,{g})=zgut(:,{g})+zgu(:,{g})\n"
+               f"        zgyt(:,{g})=zcs(:)*(zgyt(:,{g})+zmg(:)*zgu(:,{g}))+(1.-zcs(:))*(zgyt(:,{g})+zbetta*zgu(:,{g}))\n"
+               f"        zgul(:,jlev,{g})=zgut(:,{g})\n"
+               f"        zgyl(:,jlev,{g})=zgyt(:,{g})\n" for g in (1, 2, 3))),
+    ("     &            /zsolar2) ! Terluna: calibrated absorptivity\n",
+     "     &            /zsolar2) ! Terluna: calibrated absorptivity\n"
+     + ''.join(f"       ztgt(:,{g})=1.\n"
+               f"       zgp(:)=zgyt(:,{g})+zbetta*zgut(:,{g})\n"
+               f"       ztgtu(:,{g})=1.-{_gas_absorptivity(g, 'zgp(:)')}\n" for g in (1, 2, 3))),
+    ("        zto3tu(:)=zto3tu(:)/zto3u(:)\n",
+     "        zto3tu(:)=zto3tu(:)/zto3u(:)\n" + _gas_layer(3, 'zto3', 'zto3u')),
+    ("       ztwvtu(:)=ztwvtu(:)/ztwvu(:)\n",
+     "       ztwvtu(:)=ztwvtu(:)/ztwvu(:)\n" + _gas_layer(1, 'ztwv', 'ztwvu') + _gas_layer(2, 'ztwv', 'ztwvu')),
+]
 # The twilight patch goes only into a copy of ExoPlaSim of its own, which runs with --twilight import first, so the
 # shared installation, and with it the key of every run without the twilight, stays as it was.
-TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS)]
+TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS),
+                    ('radmod.f90', 'Terluna: CO2 and O2 in the sunlight', GAS_EDITS)]
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
 TWILIGHT_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'twilight.json'
+GASES_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_gases.json'
+GAS_ORDER = ('co2_nir', 'o2_nir', 'o2_vis')                     # PlaSim's ZGASQ columns
+MOLAR = dict(pN2=0.0280134, pO2=0.0319988, pAr=0.039948, pCO2=0.0440095)   # kg/mol
 # 'curved' adds the curved light and the curved escape of infrared, 'full' the shells' widening on both sides as well
 # (twilight.json's cone_w_m2 and longwave.cone), and both put in the Moon's slant path; 'path' puts in that alone.
 TWILIGHT_MODES = ('curved', 'full', 'path')
@@ -481,11 +550,12 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
-def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight=None):
+def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight=None, gas_bands=False):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
-    twilight product; each is recorded when given, and left out the configuration is the one every earlier run had."""
+    twilight product, and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); each is recorded when given, and
+    left out the configuration is the one every earlier run had."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -513,7 +583,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if twilight is not None and twilight not in TWILIGHT_MODES:
         raise ValueError(f'twilight must be one of {TWILIGHT_MODES}')
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
-               exoplasim=version('exoplasim'), source=ensure_patched(twilight is not None),
+               exoplasim=version('exoplasim'), source=ensure_patched(twilight is not None or gas_bands),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -529,7 +599,22 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['twilight'] = dict(mode=twilight, product=str(TWILIGHT_PRODUCT.relative_to(ROOT)),
                                sha256=hashlib.sha256(TWILIGHT_PRODUCT.read_bytes()).hexdigest()[:16],
                                magnification=[lunar['a'], lunar['b'], lunar['c']])
+    if gas_bands:
+        fits = json.loads(GASES_PRODUCT.read_text())
+        air = json.loads(TWILIGHT_PRODUCT.read_text())['magnification_air']
+        cfg['gas_bands'] = dict(product=str(GASES_PRODUCT.relative_to(ROOT)),
+                                sha256=hashlib.sha256(GASES_PRODUCT.read_bytes()).hexdigest()[:16],
+                                fits=[fits['fits'][k] for k in GAS_ORDER],
+                                mass_fractions=gas_mass_fractions(cfg['gases_bar']),
+                                magnification_air=[air['a'], air['b'], air['c']])
     return cfg
+
+
+def gas_mass_fractions(gases: dict) -> dict:
+    """The mass fractions of CO2 and O2 (GAS_EDITS' ZGASW) in air of these partial pressures (bar)."""
+    total = sum(gases.values())
+    molar = sum(gases[k] / total * MOLAR[k] for k in gases)
+    return dict(CO2=gases['pCO2'] / total * MOLAR['pCO2'] / molar, O2=gases['pO2'] / total * MOLAR['pO2'] / molar)
 
 
 def twilight_table(path: Path, mode: str):
@@ -703,6 +788,16 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
+    if 'gas_bands' in cfg:
+        g = cfg['gas_bands']
+        model._edit_namelist('radmod_namelist', 'NGASBANDS', '1')
+        for j, q in enumerate(g['fits'], 1):
+            for i, x in enumerate(q, 1):
+                model._edit_namelist('radmod_namelist', f'ZGASQ({i},{j})', repr(float(x)))
+        model._edit_namelist('radmod_namelist', 'ZGASW(1)', repr(float(g['mass_fractions']['CO2'])))
+        model._edit_namelist('radmod_namelist', 'ZGASW(2)', repr(float(g['mass_fractions']['O2'])))
+        for i, x in enumerate(g['magnification_air'], 1):
+            model._edit_namelist('radmod_namelist', f'ZMAIRLUNAR({i})', repr(float(x)))
     from exoplasim import pyburn
     for code, (name, long_name) in CLEAR_SKY.items():
         pyburn.ilibrary[str(code)] = [name, long_name, 'W m-2']
@@ -870,10 +965,10 @@ def summarise_year(path: Path) -> dict:
 
 def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False,
         overrides: dict | None = None, start_from: str | None = None, co2_ppm: float | None = None,
-        top_infrared: tuple | None = None, twilight: str | None = None) -> int:
-    if twilight is not None:
+        top_infrared: tuple | None = None, twilight: str | None = None, gas_bands: bool = False) -> int:
+    if twilight is not None or gas_bands:
         use_twilight_package()
-    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight)
+    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -983,6 +1078,9 @@ def main(argv=None) -> int:
     parser.add_argument('--top-infrared', type=float, nargs=2, metavar=('DAY', 'NIGHT'),
                         help='infrared from space at the top of the air, W/m2 by day and by night '
                              '(part of the run key)')
+    parser.add_argument('--gas-bands', action='store_true',
+                        help="CO2 and O2 in PlaSim's sunlight from ../results/gcm/shortwave_gases.json, in the twilight "
+                             'copy of ExoPlaSim (part of the run key)')
     parser.add_argument('--twilight', choices=TWILIGHT_MODES,
                         help="the curved air's sunlight and infrared from ../results/gcm/twilight.json: the curved "
                              "parts, all of it (full) or the Moon's slant path alone, in the twilight copy of ExoPlaSim "
@@ -1001,7 +1099,7 @@ def main(argv=None) -> int:
             parser.error(f'unknown model setting {key}')
         overrides[key] = type(MODEL[key])(value)
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
-               args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None, args.twilight)
+               args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None, args.twilight, args.gas_bands)
 
 
 if __name__ == '__main__':

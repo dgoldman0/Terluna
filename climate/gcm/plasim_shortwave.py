@@ -30,6 +30,38 @@ FORMS = ('path', 'scale', 'linear')
 # 'scale' k A(u) and 'linear' A(u) + k u, the last like a continuum growing with the path. 'path' keeps Lacis
 # and Hansen's ceiling; the other two are capped just short of absorbing the whole band. The runner uses
 # 'scale' (its SWH2OSCALE patch), which carried over best to a warmer, moister column the fit did not see.
+# PlaSim's bands hold no CO2 or O2, whose strongest lines the Moon's deep column takes high up. GAS_BANDS adds them
+# (the twilight copy's GAS_EDITS in exoplasim_run.py): CO2 and O2 in the near-infrared band (CO2's 2.0, 2.7 and 4.3 um,
+# O2's A band and 1.27 um) and O2 in the visible (its B and gamma bands), each an absorptivity of its own
+# pressure-scaled path, fitted by `gases` to the line-by-line model on the design column and combined with the
+# water's (or nothing's) by multiplying transmissions. The collision-induced absorption, low in the column, stays in
+# the water's calibration.
+GAS_BANDS = (('co2_nir', 'CO2', 2), ('o2_nir', 'O2', 2), ('o2_vis', 'O2', 1))    # name, gas, PlaSim band
+GAS_SLANTS = (1.0, 1.5, 2.0, 3.0, 5.0, 8.0, 13.0)
+GAS_P0 = 1e5
+GASES = RESULTS / 'shortwave_gases.json'
+DESIGN_FLUX_W_M2 = 1173.488286761312   # the design run's sunlight above the air (A28_dim5_moon's input record)
+
+
+def gas_absorptivity(u, q):
+    """A gas band's absorptivity of its effective path u (kg/m2 of the gas, each layer's scaled by (p / 1e5)^n), a
+    share of the band's sunlight: q = (a, b, c, d, n)."""
+    return np.minimum(q[0] * u / ((1.0 + q[1] * u) ** q[2] + q[3] * u), 0.999)
+
+
+def path_transmissivities(path, slant, absorptivity):
+    """PlaSim's layer transmissivities (top first) of an absorber whose layers hold path: down, from the direct
+    beam's slant path to each layer's bottom, and up, for the light the ground returns (the whole slant path down,
+    then BETA times the vertical path back up)."""
+    vertical, slanted = np.cumsum(path), np.cumsum(slant * path)
+    down, up = np.empty(path.size), np.empty(path.size)
+    above, above_up = 1.0, 1.0 - absorptivity(slanted[-1] + BETA * vertical[-1])
+    for l in range(path.size):
+        down[l] = (1.0 - absorptivity(slanted[l])) / above
+        above *= down[l]
+        up[l] = above_up / (1.0 - absorptivity(slanted[-1] + BETA * (vertical[-1] - vertical[l])))
+        above_up /= up[l]
+    return down, up
 
 
 def lacis_hansen(u):
@@ -85,7 +117,9 @@ def clear_sky(column: dict, mu: float, form: str | None = None, k: float = 1.0) 
     ground at cosine of zenith mu, as PlaSim's swr has them in clear sky. The column holds sigma (full levels, top
     first), ps (Pa), t (K), q (kg/kg), albedo (diffuse, and direct unless albedo_direct is given), rcoeff, solar1
     (the share of sunlight below 0.75 um) and gravity; with magnification (a, b, c), the direct beam's water path
-    takes (mu + a) / (mu^2 + b mu + c), the Moon's (twilight.py), in place of Earth's 35 / sqrt(1 + 1224 mu^2)."""
+    takes (mu + a) / (mu^2 + b mu + c), the Moon's (twilight.py), in place of Earth's 35 / sqrt(1 + 1224 mu^2); with
+    gases (fits, fractions and the well-mixed air's magnification, as shortwave_gases.json and twilight.json hold
+    them) the CO2 and O2 bands are added."""
     net = net_flux(column, mu, form, k)
     return dict(reflected=1.0 - net[0], air=net[0] - net[-1], ground=net[-1])
 
@@ -101,22 +135,28 @@ def net_flux(column: dict, mu: float, form: str | None = None, k: float = 1.0) -
     m = (35.0 / np.sqrt(1.0 + 1224.0 * mu * mu) if lunar is None     # the direct beam's magnification
          else (mu + lunar[0]) / (mu * mu + lunar[1] * mu + lunar[2]))
     wv = 0.1 * dsigma * c['q'] * c['ps'] / c['gravity'] * np.sqrt(273.0 / c['t']) * sigma * c['ps'] / 1e5
-    wvl, ywvl = np.cumsum(wv), np.cumsum(m * wv)
-    a = lambda u: band_absorptivity(u, solar2, form, k)
-    t2, t2u = np.empty(n), np.empty(n)
-    above, above_up = 1.0, 1.0 - a(ywvl[-1] + BETA * wvl[-1])
-    for l in range(n):
-        t2[l] = (1.0 - a(ywvl[l])) / above
-        above *= t2[l]
-        t2u[l] = above_up / (1.0 - a(ywvl[-1] + BETA * (wvl[-1] - wvl[l])))
-        above_up /= t2u[l]
+    t2, t2u = path_transmissivities(wv, m, lambda u: band_absorptivity(u, solar2, form, k))
+    t1, t1u = np.ones(n), np.ones(n)
+    gases = c.get('gases')
+    if gases:
+        air = gases.get('magnification')
+        mg = m if air is None else (mu + air[0]) / (mu * mu + air[1] * mu + air[2])
+        mass = dsigma * c['ps'] / c['gravity']
+        for name, gas, band in GAS_BANDS:
+            q = gases['fits'][name]
+            path = mass * gases['fractions'][gas] * (sigma * c['ps'] / GAS_P0) ** q[4]
+            down, up = path_transmissivities(path, mg, lambda u, q=q: gas_absorptivity(u, q))
+            if band == 2:
+                t2, t2u = t2 * down, t2u * up
+            else:
+                t1, t1u = t1 * down, t1u * up
     scale = c['rcoeff'] * c['ps'] / 101100.0 * 9.80665 / c['gravity']
     r1, r1s = np.zeros(n), np.zeros(n)
     r1[-1] = 1.0 - np.exp(scale * np.log(1.0 - 0.219 / (1.0 + 0.816 * mu)))
     r1s[-1] = 1.0 - np.exp(scale * np.log(1.0 - 0.144))
     direct = c.get('albedo_direct', c['albedo'])
     direct = direct(mu) if callable(direct) else direct
-    visible = adding(r1, r1s, 1.0 - r1, 1.0 - r1s, direct, c['albedo'])
+    visible = adding(r1, r1s, t1 - r1, t1u - r1s, direct, c['albedo'])
     infrared = adding(np.zeros(n), np.zeros(n), t2, t2u, direct, c['albedo'])
     return c['solar1'] * visible + solar2 * infrared
 
@@ -174,16 +214,72 @@ def validate(run: str, years) -> dict:
     return dict(run=run, years=list(years), columns=rows)
 
 
-def fit(check_path: Path, tests=()) -> dict:
+def gas_fit(processes: int = 2) -> dict:
+    """CO2 and O2 in PlaSim's bands, fitted to the line-by-line model (lines alone, no continuum or collision-induced
+    absorption) on the design column: for each band, the share of the band's sunlight the direct beam loses above each
+    of the column's 100 levels at slant factors GAS_SLANTS, against (a, b, c, d) and the pressure exponent n of
+    gas_absorptivity; with how the fit shares the absorption among the GCM's ten layers against the line-by-line."""
+    from dataclasses import replace
+    from scipy.optimize import least_squares
+    from atmosphere.radiative_convective import optics, shortwave as sw
+    from illumination.surface_light import model as surface
+    from climate.gcm import twilight as tw
+    col, air, _, _ = surface.build(surface.COLUMNS[tw.WORLD])
+    shield, _ = surface.sunlight('design')
+    mass, p = col['layer_mass_kg_m2'], col['layer_p_pa']
+    fractions = {'CO2': air.fractions['CO2'] * 0.04401 / air.molar_mass, 'O2': air.fractions['O2'] * 0.031999 / air.molar_mass}
+    energy = {1: tw.PLASIM_SOLAR1 * DESIGN_FLUX_W_M2, 2: (1.0 - tw.PLASIM_SOLAR1) * DESIGN_FLUX_W_M2}
+    m = np.array(GAS_SLANTS)
+    out = dict(fits={}, fractions=fractions, band_energy_w_m2=energy, checks={})
+    for gas in ('CO2', 'O2'):
+        cfg = replace(optics.SHORTWAVE, molecules=(gas,), continuum=False, cia=False, processes=processes)
+        nu, tau = optics.optical_depth(col, cfg)
+        e = sw.solar_spectrum(nu, shield=shield)[0] * np.gradient(nu)
+        for name, g, band in GAS_BANDS:
+            if g != gas:
+                continue
+            sel = nu < 1e7 / 750.0 if band == 2 else nu >= 1e7 / 750.0
+            above = np.cumsum(tau[::-1, sel], 0)[::-1]                     # above each layer's bottom
+            lbl = np.array([[e[sel] @ (1.0 - np.exp(-x * above[k])) for k in range(mass.size)] for x in m]) / energy[band]
+            paths = lambda n: np.cumsum((mass * fractions[gas] * (p / GAS_P0) ** n)[::-1])[::-1]
+            resid = lambda q: (gas_absorptivity(m[:, None] * paths(q[4])[None, :], q) - lbl).ravel() / lbl.max()
+            best = min((least_squares(resid, [1.0, 1.0, 0.5, 0.0, n0], bounds=([0, 0, 0.05, 0, 0], [1e6, 1e9, 2.0, 1e6, 1.5]))
+                        for n0 in (0.3, 0.6, 0.9)), key=lambda r: r.cost)
+            q = [float(x) for x in best.x]
+            fit = gas_absorptivity(m[:, None] * paths(q[4])[None, :], q)
+            layers = lambda a: (a - np.r_[a[1:], 0.0])                      # each layer's share, bottom-up
+            gcm = lambda a: tw.onto_gcm_layers(layers(a)[:, None], col['p_pa'])[:, 0] * energy[band]
+            out['fits'][name] = q
+            out['checks'][name] = dict(column_share_overhead=float(lbl[0, 0]), max_error=float(np.abs(fit - lbl).max()),
+                                       overhead_w_m2_by_gcm_layer=dict(line_by_line=list(gcm(lbl[0])), fit=list(gcm(fit[0]))),
+                                       slant_3_w_m2_by_gcm_layer=dict(line_by_line=list(gcm(lbl[3])), fit=list(gcm(fit[3]))))
+    return out
+
+
+def lunar_column(col: dict, gases: dict, product: dict) -> dict:
+    """A column with the Moon's slant factors (twilight.json) and the CO2 and O2 bands (shortwave_gases.json)."""
+    air = product['magnification_air']
+    return dict(col, magnification=[product['magnification'][k] for k in 'abc'],
+                gases=dict(fits=gases['fits'], fractions=gases['fractions'], magnification=[air[k] for k in 'abc']))
+
+
+def fit(check_path: Path, tests=(), lunar: bool = False) -> dict:
     """For each form, the setting that brings PlaSim's clear-sky air absorption to line-by-line's on the columns of
     a radiation check (the same mean profiles, surface albedo and Sun), with the Rayleigh multiplier refitted
     to keep the reflection; the columns' remaining differences; and the differences on the columns of other
     checks (`tests`), which the fit did not see."""
     from scipy.optimize import minimize
 
+    if lunar:
+        gases, product = json.loads(GASES.read_text()), json.loads((RESULTS / 'twilight.json').read_text())
+        dress = lambda col: lunar_column(col, gases, product)
+    else:
+        dress = lambda col: col
+
     def columns_of(check):
         f, sunlight, gravity, model = _run_context(check['run'], check['years'])
-        return [(c, dict(column(f, c['j'], c['i'], sunlight, gravity), albedo=c['surface_albedo'])) for c in check['columns']], model
+        return [(c, dress(dict(column(f, c['j'], c['i'], sunlight, gravity), albedo=c['surface_albedo'])))
+                for c in check['columns']], model
 
     def split(cols, form, k, rayscale):
         return [daily_split(dict(col, rcoeff=RCOEFF_PER_RAYSCALE * rayscale), c['lat_deg'], form, k) for c, col in cols]
@@ -221,18 +317,29 @@ def fit(check_path: Path, tests=()) -> dict:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('action', choices=('validate', 'fit'))
-    parser.add_argument('run')
+    parser.add_argument('action', choices=('validate', 'fit', 'gases'))
+    parser.add_argument('run', nargs='?')
     parser.add_argument('--years', type=int, nargs=2, default=(15, 24))
     parser.add_argument('--tests', nargs='*', default=[], help='other radiation checks in ../results/gcm to test the fit on')
+    parser.add_argument('--lunar', action='store_true', help="fit with the Moon's slant factors and the CO2 and O2 bands")
     args = parser.parse_args(argv)
+    if args.action == 'gases':
+        result = gas_fit()
+        for name, chk in result['checks'].items():
+            print(f"{name}: {np.round(result['fits'][name], 4)}  overhead share {chk['column_share_overhead']:.4f}  "
+                  f"max error {chk['max_error']:.4f}")
+        result.update(schema='terluna.climate.gcm-shortwave-gases/1',
+                      producer=dict(domain='climate', files={'gcm/plasim_shortwave.py': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16]}))
+        GASES.write_text(json.dumps(result, indent=1) + '\n')
+        print(GASES)
+        return 0
     if args.action == 'validate':
         result = validate(args.run, tuple(args.years))
         for r in result['columns']:
             d = r['difference_points']
             print(f"{r['label'][:40]:40s} {r['lat_deg']:6.1f}  copy - GCM: reflected {d['reflected']:+5.2f} air {d['air']:+5.2f} ground {d['ground']:+5.2f}")
     else:
-        result = fit(RESULTS / f'radiation_check_{args.run}.json', [RESULTS / t for t in args.tests])
+        result = fit(RESULTS / f'radiation_check_{args.run}.json', [RESULTS / t for t in args.tests], args.lunar)
         a = result['as_run']
         print(f"as run: mean difference from line-by-line, points: {a['mean_points']}; tests {a['tests']}")
         for form, r in result['forms'].items():
@@ -242,7 +349,7 @@ def main(argv=None) -> int:
                   producer=dict(domain='climate', files={'gcm/plasim_shortwave.py': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16]}))
     from climate.crm.ring_crossings import rounded
     RESULTS.mkdir(parents=True, exist_ok=True)
-    path = RESULTS / f'shortwave_{args.action}_{args.run}.json'
+    path = RESULTS / f"shortwave_{args.action}_{args.run}{'_lunar' if args.lunar else ''}.json"
     path.write_text(json.dumps(rounded(result, 5), indent=1) + '\n')
     print(path)
     return 0
