@@ -15,6 +15,15 @@ counts renewal, faults and finite replacement queues. The
 the tested 10 km rigid-edge design exceeds its mass allocation; numerical
 sizing convergence is not flexible-control or hardware validation.
 
+[array_support.py](array_support.py) supplies finite curved-edge cable, radial
+boom and hub screens, retained-sheet inertia and resolved normal-load envelopes.
+[array_spin.py](array_spin.py) screens ballasted spinning membranes, prestress,
+rigid torque and planar disk coverage. The
+[materials and architecture comparison](../research/studies/solar_shield_array/support_comparison.md)
+uses source-reviewed material scenarios and distinguishes whole-tile ledger
+substitutions from incomplete support and spin component accounts. No new
+architecture meets all mass, optical and clearance requirements.
+
 ## Sourcing and conservation
 
 - **Where the air and water come from.** Water, nitrogen and oxygen all come from the Solar-System-wide resource operation ([conservation study](../research/studies/conservation/README.md), decision D4). The baseline's local oxygen production at 24.3 kWh/kg is superseded.

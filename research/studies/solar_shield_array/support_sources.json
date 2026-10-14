@@ -1,0 +1,118 @@
+{
+  "schema": "terluna.research.array-support-sources/1",
+  "reviewed_on": "2026-10-14",
+  "evidence": "Primary-source architecture survey and analytic review. Flight demonstrations, ground tests, numerical studies and proposed designs are deliberately distinguished. No full papers or external dataset bytes are redistributed.",
+  "sources": [
+    {
+      "id": "acs3_deployment_2024",
+      "title": "NASA Composite Booms Deploy, Mission Sets Sail in Space",
+      "url": "https://www.nasa.gov/blogs/smallsatellites/2024/08/29/nasa-composite-booms-deploy-mission-sets-sail-in-space/",
+      "published": "2024-08-29",
+      "read_scope": "Official mission update",
+      "evidence_state": "Flight deployment",
+      "supports": "NASA confirmed successful deployment of the ACS3 booms and sail on 29 August 2024.",
+      "does_not_establish": "Precision shape control, a long-life optical filter, or kilometre-scale structures."
+    },
+    {
+      "id": "acs3_geometry_2023",
+      "title": "Advanced Composite Solar Sail System (ACS3) Mission Update",
+      "url": "https://ntrs.nasa.gov/citations/20230008378",
+      "document_url": "https://ntrs.nasa.gov/api/citations/20230008378/downloads/Wilkie_ACS3_mission_update_ISSS_2023_20230530_rev_a.pdf",
+      "published": "2023",
+      "read_scope": "NTRS abstract and indexed presentation geometry",
+      "evidence_state": "Preflight design specification; combine with the dated deployment report for deployment evidence",
+      "supports": "80 square metres, four roughly 7 m composite booms, a 14 m tip-to-tip diagonal, and a square membrane approximately 9 m on each side.",
+      "does_not_establish": "A mass or stiffness extrapolation to a 10 km membrane."
+    },
+    {
+      "id": "acs3_bend_2024",
+      "title": "Update on NASA's Advanced Composite Solar Sail System",
+      "url": "https://www.nasa.gov/blogs/smallsatellites/2024/10/22/update-on-nasas-advanced-composite-solar-sail-system/",
+      "published": "2024-10-22",
+      "read_scope": "Official mission update",
+      "evidence_state": "Dated flight observation",
+      "supports": "Operators reported an apparent slight bend in one boom following deployment; the spacecraft was slowly tumbling with attitude control not yet reengaged. The boom-deployment experiment had produced useful data.",
+      "does_not_establish": "Mission status after this dated report; successful deployment alone is not proof of closed-loop sail control."
+    },
+    {
+      "id": "solar_cruiser_ground_2024",
+      "title": "NASA Solar Sail Technology Passes Crucial Deployment Test",
+      "url": "https://www.nasa.gov/centers-and-facilities/marshall/nasa-solar-sail-technology-passes-crucial-deployment-test/",
+      "published": "2024-02-12",
+      "read_scope": "Official technology article",
+      "evidence_state": "Ground deployment of one quadrant; complete sail design",
+      "supports": "A quadrant deployed on the ground in January 2024. The complete design uses approximately 30 m composite booms and 17,780 square feet (about 1,652 square metres) of 2.5 micrometre aluminized polymer sail. NASA reported reaching TRL 6.",
+      "does_not_establish": "Flight deployment of the complete sail, optical filtering, or deployment and operation at 10 km scale."
+    },
+    {
+      "id": "striped_net_2006",
+      "title": "In-Vacuum Photogrammetry of a Ten-Meter Square Solar Sail",
+      "url": "https://ntrs.nasa.gov/citations/20080015847",
+      "doi": "10.1111/j.1747-1567.2006.00042.x",
+      "published": "2006-05-01",
+      "read_scope": "NTRS detailed abstract; full article not read",
+      "evidence_state": "Ground structural shape measurement",
+      "supports": "The L'Garde striped-net architecture attached membrane quadrants to thin strings supported by four inflatable, cold-rigidized booms. The 10 m test measured shape at approximately 1 torr using local cryogenic boom plates.",
+      "does_not_establish": "An unsupported tension net: the booms supply reaction loads. This is a structural characterization experiment, not a complete flight environment test."
+    },
+    {
+      "id": "ikaros_flight",
+      "title": "IKAROS Small Scale Solar Powered Sail Demonstration Satellite",
+      "url": "https://www.isas.jaxa.jp/en/missions/spacecraft/past/ikaros.html",
+      "read_scope": "Official spacecraft description",
+      "evidence_state": "Flight deployment, solar power and solar acceleration demonstrations",
+      "supports": "The 14 m square IKAROS membrane deployed using centrifugal force following its May 2010 launch. Thin-film solar cells generated electricity and solar-pressure acceleration was measured.",
+      "does_not_establish": "A 10 km spinning disk, a transparent filtering film, or a densely packed continuously covering shield."
+    },
+    {
+      "id": "ikaros_reflectivity_2010",
+      "title": "Small Solar Power Sail Demonstrator IKAROS: Successful Attitude Control by Liquid Crystal Device",
+      "url": "https://www.jaxa.jp/press/2010/07/20100723_ikaros_e.html",
+      "published": "2010-07-23",
+      "read_scope": "Official experiment report",
+      "evidence_state": "Flight attitude-control experiment",
+      "supports": "Synchronized liquid-crystal reflectivity changes produced gradual attitude control using solar pressure. JAXA explicitly identifies redirection of the spinning membrane's large angular momentum as a control requirement.",
+      "does_not_establish": "Routine wholly propellant-free control: the report explicitly says normal attitude operations used thrusters. It does not establish the torque or response time of the Terluna rolling command."
+    },
+    {
+      "id": "heliogyro_ground_2015",
+      "title": "Recent Advances in Heliogyro Solar Sail Structural Dynamics, Stability, and Control Research",
+      "url": "https://ntrs.nasa.gov/citations/20150006037",
+      "published": "2015-01-05",
+      "read_scope": "NTRS abstract; related 2014 paper indexed experimental section",
+      "evidence_state": "Analytical research and subscale ground experiments",
+      "supports": "NASA studied nonlinear flexible-blade dynamics, solar-elastic stability and deployment. Ground tests used hanging or spinning blade analogues; edge reinforcement and tip masses improved predicted torsional response. The related 2014 apparatus used 0.5 m membrane blades in a 2.5 m vacuum sphere.",
+      "does_not_establish": "Flight of a kilometre-scale heliogyro or instantaneous filled-aperture optical coverage. Long narrow rotating blades occupy a small fraction of their swept disk."
+    },
+    {
+      "id": "cablessail_2026",
+      "title": "Deployable Prototype Testing and Control Allocation of the CABLESSail Concept for Solar Sail Shape Control and Momentum Management",
+      "url": "https://arxiv.org/abs/2512.13493v2",
+      "published": "2026-03-07",
+      "read_scope": "Authors' abstract; accompanying NASA 2025 poster read in full",
+      "related_url": "https://ntrs.nasa.gov/api/citations/20250003657/downloads/CABLESSail_Poster_Jamboree_FY25.pdf",
+      "evidence_state": "Small-scale prototype tests and numerical torque allocation; preprint submitted to Advances in Space Research",
+      "supports": "Actuated cables along structural booms change sail shape to generate momentum-management torque. Prototype work demonstrates controllable boom deformation; calculated torque robustness includes uncertain membrane shape.",
+      "does_not_establish": "A zero-boom support, a mass-qualified complete actuator or a 10 km shield controller. Changing optical shape for torque also requires renewed filter-incidence and coverage checks."
+    }
+  ],
+  "comparison_rules": [
+    "Normalize to equal protected aperture area with explicit overlap, silhouette and operating-duty assumptions; do not keep the tile count fixed when shrinking tiles.",
+    "Separate supported film and support mass from the complete spacecraft mass. Do not compare one architecture's bare membrane with another's power, storage and avionics-inclusive ledger.",
+    "Keep identical film composition, load envelope, allowable sag and aperture-edge displacement when isolating material changes. Relaxed tolerances must be explicit separate sensitivities.",
+    "A cable net needs finite external reactions from booms, a compression ring, other anchors or centrifugal support. An isolated self-stressed network of straight tension-only elements cannot maintain its area in static equilibrium.",
+    "Spinning square membranes sweep a larger footprint and do not retain a fixed rectangular shadow. Circular membranes avoid spin-phase variation but leave covering/packing and shingle-clearance redesigns.",
+    "A heliogyro's swept disk is not its instantaneous absorbing or filtering area. Time-averaged solar thrust equivalence does not imply instantaneous radiation shielding equivalence.",
+    "Centrifugal stiffening is genuine physics, but reorienting the spin normal requires torque equal to the change in its angular momentum. Use H times normal-precession rate, not only rigid non-spinning inertia, for the 80-degree roll law.",
+    "Counter-rotation can reduce net angular momentum but retains individual support loads, differential control, extra film or hardware mass and clearance requirements.",
+    "Subdividing a tile reduces unsupported span only if each subcell has real supports or is independently controlled. A mathematical subdivision of one unsupported membrane leaves its global mechanics unchanged.",
+    "Smaller independently flown units increase count, fixed bus overhead, assembly and renewal operations for equal optical area; their orbit and collision model must be rerun.",
+    "The original rigid-rotation pressure envelope is conservative for the magnitude of its included rigid acceleration terms, not a universal upper bound on every environmental or flexible load. Include a separately labelled solar-only sensitivity without calling it a demonstrated operating mode."
+  ],
+  "analytic_review": {
+    "normal_rigid_acceleration": "For body-frame membrane point r=(x,y,0), [alpha cross r + omega cross (omega cross r)]_z = (-alpha_y+omega_z*omega_x)*x + (alpha_x+omega_z*omega_y)*y. On a square of side L its exact maximum magnitude is L/2 times the sum of the absolute values of these two coefficients.",
+    "centrifugal_interpretation": "Pure spin about the membrane normal loads the membrane in plane and gives no normal rigid acceleration. It should not be added as omega_spin squared times radius to a transverse sag load. Mixed precession and spin do create gyroscopic and normal dynamic effects.",
+    "translation_and_tides": "Uniform photon loading can partly accelerate the entire free sail instead of bending it. The residual depends on local areal loading and how central and edge masses are carried. Lunar gravity-gradient acceleration is separate; a blanket solar-plus-rotation bound does not include it automatically.",
+    "optical_interpretation": "Allowed out-of-plane sag, edge recession, slope and filter incidence are different constraints. A catenary edge recedes between corners; an inset square can conservatively guarantee area, but changing that area changes required unit count. The existing 5 m edge tolerance is a selected approximation, not a measured minimum required by the optics."
+  }
+}

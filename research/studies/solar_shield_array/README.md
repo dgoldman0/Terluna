@@ -1,5 +1,14 @@
 # Solar shield and habitat array
 
+The [materials and support comparison](support_comparison.md) broadens the
+14 October tile assessment. Source-based frame substitutions improve the
+tested design by a few times; finite cable/boom supports offer much larger
+component savings, with explicit coverage and clearance costs. Smaller units
+increase bus and renewal overhead; spinning membranes face the roll torque
+and stress trade. Whole-tile budgets, component subtotals and experimental
+material properties retain separate evidence states. No new architecture is
+accepted.
+
 The [tile hardware and replacement assessment](tile_design.md) of 14 October
 2026 tests an explicit perimeter-frame tile, conserved angular momentum, local
 faults and fleet service. Its 10 km rigid-edge reference exceeds the current

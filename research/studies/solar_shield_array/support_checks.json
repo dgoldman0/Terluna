@@ -1,0 +1,79 @@
+{
+  "schema": "terluna.research.array-support-checks/1",
+  "checked_on": "2026-10-14",
+  "branch": "research/array-industry",
+  "baseline_commit": "e1196f5",
+  "evidence": "Executed analytic/numerical tests and source/physics review, not physical qualification or scientific manuscript clearance.",
+  "product_sha256": "1cca62cf13e93e53719cbf22042c2df1f2de25f487c18170232c81dfc0d4d432",
+  "model_files": {
+    "engineering/array_momentum.py": "676d5f881be9717f1317536b9b78cc84f9b0f546a1befcb7fde89fb524d3ce6c",
+    "engineering/array_service.py": "3fe65bf93d92e739b8a6f1bcb5c20106179e2327e6930afe604d525c0f191fd5",
+    "engineering/array_spin.py": "b06691ec7299a4978ba6a16919421dbe00cefb840f9f8dc026783312ca9daa87",
+    "engineering/array_support.py": "f597fce290a1934cc9f8c07598c44a68d8db04e3172afbe8d2d653917357d2f6",
+    "engineering/array_tile.py": "2cbc0a36ffe0c84f01d2d51224017b3b82477c337e5d9fb2b23d9a0738f882f7",
+    "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+    "protection/dynamics/ring_bundle.py": "05543a75524dd0d3c9cbbb6aa0dc0b02d8d5a0d156c943b6d794184f3ecfb98d",
+    "protection/dynamics/tile_failure.py": "7514aaea70b0b8970129b7e2543cfcd92e6c4450d9c253803b07445884067a3b",
+    "research/studies/solar_shield_array/attitude_schemes.py": "1c4beb572ebaa0bbc6ec1c638eea728065e6e19f578f8e54fb78f26c0e2a3c19",
+    "research/studies/solar_shield_array/support_comparison.py": "b5e314247b467c9a2a47a536d1f4b09352a3751dd1c6a15ff1a75adc45a88edd",
+    "research/studies/solar_shield_array/tile_design.py": "9c94171c7c32d7da904a8f6e9ad4ac907b484826b97927a38a424ea13c6953c6",
+    "shared/provenance.py": "c59d32186d453a80992eb02203b644fe759aca869dc892d91af9aa74fd65c7f8"
+  },
+  "test_files": {
+    "engineering/test_array_support.py": "fbe84d754eec629ea943cc95993d68360c29df2daa0525726fcaca865ae14b5e",
+    "engineering/test_array_spin.py": "8f04802e3630745e2d727689e40d469c63a0283d8737b61d16e87ebdd8a811b9",
+    "research/studies/solar_shield_array/test_support_comparison.py": "4c675b0c908e2da3960d0490b36ca7b44456fcc04667c37e0d00451241e69043"
+  },
+  "focused_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 python -m pytest -q engineering/test_array_support.py engineering/test_array_spin.py research/studies/solar_shield_array/test_support_comparison.py",
+    "exit_code": 0,
+    "passed": 81,
+    "runtime_s": 1.29
+  },
+  "repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+    "status": "PASS",
+    "exit_code": 0,
+    "python_passed": 2134,
+    "python_skipped": 16,
+    "python_runtime_s": 432.05,
+    "js_passed": {
+      "immersion": 129,
+      "columns_and_transport": 48,
+      "calendar": 14
+    },
+    "layer_files": 969,
+    "layer_violations": 0,
+    "provenance": "PASS; protection verifier executed and five input hashes verified",
+    "ensemble": "PASS; planning/workspace integrity only",
+    "scope_note": "Full check on the final model, input, product and test snapshot; this check record and the report check summary were then updated before commit."
+  },
+  "numerical_refinement": {
+    "normal_load_relative_peak_change_2881_to_5761": 0.0002530934139244323,
+    "retained_area_moments": "Gauss-Legendre 64 vs 128 nodes plus independent strip integration checked in domain tests",
+    "normal_acceleration": "direct cross products and convergence to spherical lunar gravity; finite-box corners checked",
+    "baseline": "generic material exactly reproduces preserved annulus and window whole-tile ledger within integration-test tolerance"
+  },
+  "review": {
+    "scope": [
+      "material roles, source matching and engineering allowables",
+      "finite support reactions, member stability and own-load sizing",
+      "retained film area/inertia and equal-area inventory",
+      "spin/normal-motion coupling, concurrent stress/sag and torque",
+      "finite material envelopes and 150 m clearance boundary",
+      "report numerical statements and evidence limits"
+    ],
+    "material_source_entries": 11,
+    "architecture_source_entries": 9,
+    "full_scholarly_source_reading": false
+  },
+  "not_established": [
+    "qualified material/component lifetime at array temperature and radiation",
+    "cable normal boundary, compatible cut pattern and film/substrate optics",
+    "assembled flexible stability, equipment attachment and dynamic loads",
+    "complete control, power, deployment or momentum-unloading hardware for new supports",
+    "new shadow/coverage, glow and collision-safe fleet propagation",
+    "minimum inventory or globally optimal material/architecture",
+    "manufacturing and replacement routes"
+  ]
+}
