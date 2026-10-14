@@ -119,7 +119,8 @@ def clear_sky(column: dict, mu: float, form: str | None = None, k: float = 1.0) 
     (the share of sunlight below 0.75 um) and gravity; with magnification (a, b, c), the direct beam's water path
     takes (mu + a) / (mu^2 + b mu + c), the Moon's (twilight.py), in place of Earth's 35 / sqrt(1 + 1224 mu^2); with
     gases (fits, fractions and the well-mixed air's magnification, as shortwave_gases.json and twilight.json hold
-    them) the CO2 and O2 bands are added."""
+    them) the CO2 and O2 bands are added; with water_exponent n each layer's water path is weighted by (p / 1 bar)^n
+    in place of PlaSim's p / 1 bar."""
     net = net_flux(column, mu, form, k)
     return dict(reflected=1.0 - net[0], air=net[0] - net[-1], ground=net[-1])
 
@@ -134,7 +135,9 @@ def net_flux(column: dict, mu: float, form: str | None = None, k: float = 1.0) -
     lunar = c.get('magnification')
     m = (35.0 / np.sqrt(1.0 + 1224.0 * mu * mu) if lunar is None     # the direct beam's magnification
          else (mu + lunar[0]) / (mu * mu + lunar[1] * mu + lunar[2]))
-    wv = 0.1 * dsigma * c['q'] * c['ps'] / c['gravity'] * np.sqrt(273.0 / c['t']) * sigma * c['ps'] / 1e5
+    wv = 0.1 * dsigma * c['q'] * c['ps'] / c['gravity'] * np.sqrt(273.0 / c['t'])
+    exponent = c.get('water_exponent', 1.0)
+    wv = wv * sigma * c['ps'] / 1e5 if exponent == 1.0 else wv * (sigma * c['ps'] / 1e5) ** exponent
     t2, t2u = path_transmissivities(wv, m, lambda u: band_absorptivity(u, solar2, form, k))
     t1, t1u = np.ones(n), np.ones(n)
     gases = c.get('gases')
@@ -263,23 +266,31 @@ def lunar_column(col: dict, gases: dict, product: dict) -> dict:
                 gases=dict(fits=gases['fits'], fractions=gases['fractions'], magnification=[air[k] for k in 'abc']))
 
 
-def fit(check_path: Path, tests=(), lunar: bool = False) -> dict:
+_COLUMNS = {}
+
+
+def fit(check_path: Path, tests=(), lunar: bool = False, water_exponent: float = 1.0, forms=FORMS) -> dict:
     """For each form, the setting that brings PlaSim's clear-sky air absorption to line-by-line's on the columns of
     a radiation check (the same mean profiles, surface albedo and Sun), with the Rayleigh multiplier refitted
     to keep the reflection; the columns' remaining differences; and the differences on the columns of other
-    checks (`tests`), which the fit did not see."""
+    checks (`tests`), which the fit did not see. With lunar, the columns take the Moon's slant factors and the CO2
+    and O2 bands, and water_exponent weights their water paths (net_flux)."""
     from scipy.optimize import minimize
 
     if lunar:
         gases, product = json.loads(GASES.read_text()), json.loads((RESULTS / 'twilight.json').read_text())
-        dress = lambda col: lunar_column(col, gases, product)
+        dress = lambda col: dict(lunar_column(col, gases, product), water_exponent=water_exponent)
     else:
-        dress = lambda col: col
+        dress = lambda col: dict(col, water_exponent=water_exponent)
 
     def columns_of(check):
-        f, sunlight, gravity, model = _run_context(check['run'], check['years'])
-        return [(c, dress(dict(column(f, c['j'], c['i'], sunlight, gravity), albedo=c['surface_albedo'])))
-                for c in check['columns']], model
+        key = (check['run'], tuple(check['years']), tuple((c['j'], c['i']) for c in check['columns']))
+        if key not in _COLUMNS:                                   # the run's mean fields, read once
+            f, sunlight, gravity, model = _run_context(check['run'], check['years'])
+            _COLUMNS[key] = [(c, dict(column(f, c['j'], c['i'], sunlight, gravity), albedo=c['surface_albedo']))
+                             for c in check['columns']], model
+        cols, model = _COLUMNS[key]
+        return [(c, dress(col)) for c, col in cols], model
 
     def split(cols, form, k, rayscale):
         return [daily_split(dict(col, rcoeff=RCOEFF_PER_RAYSCALE * rayscale), c['lat_deg'], form, k) for c, col in cols]
@@ -304,7 +315,7 @@ def fit(check_path: Path, tests=(), lunar: bool = False) -> dict:
     out = dict(as_run=dict(rayleigh_scale=now, **summary(cols, split(cols, None, 1.0, now)),
                            tests={name: points(c, split(c, None, 1.0, now)) for name, c in others.items()}), forms={})
     starts = dict(path=5.0, scale=1.3, linear=0.002)
-    for form in FORMS:
+    for form in forms:
         best = minimize(lambda x: cost(form, x), [starts[form], now], method='Nelder-Mead',
                         options=dict(xatol=1e-4, fatol=1e-9, maxiter=400))
         out['forms'][form] = dict(k=float(best.x[0]), rayleigh_scale=float(best.x[1]), **summary(cols, split(cols, form, *best.x)),
@@ -315,9 +326,71 @@ def fit(check_path: Path, tests=(), lunar: bool = False) -> dict:
     return dict(run=check['run'], years=check['years'], check=check_path.name, **out)
 
 
+WATER_EXPONENTS = (1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3)
+
+
+def design_column(product: dict, gases: dict) -> dict:
+    """The twilight ledger's design column as PlaSim holds it, with the Moon's slant factors and the CO2 and O2
+    bands (lunar_column)."""
+    from illumination.surface_light import model as surface
+    from climate.gcm import twilight as tw
+    col, air, _, _ = surface.build(surface.COLUMNS[tw.WORLD])
+    return lunar_column(tw.plasim_column(col, air.molar_mass, tw.SKY_ALBEDO), gases, product)
+
+
+def design_layers(column: dict, product: dict, k: float, rayleigh: float, water_exponent: float = 1.0) -> np.ndarray:
+    """PlaSim's global-mean absorbed sunlight in each of the GCM's layers (top first), W/m2 of the ledger's sunlight,
+    on a design column at these water and Rayleigh settings, over the ledger's solar elevations."""
+    import math
+    from climate.gcm import twilight as tw
+    c = dict(column, rcoeff=RCOEFF_PER_RAYSCALE * rayleigh, water_exponent=water_exponent)
+    grid = np.radians(product['by_elevation']['elevation_deg'])
+    layers = np.zeros((len(c['sigma']), grid.size))
+    for i, el in enumerate(grid):
+        mu = math.sin(el)
+        if mu > 0.0:
+            net = net_flux(c, mu, 'scale', k)
+            layers[:, i] = mu * (net[:-1] - net[1:])
+    return tw.sphere_share(layers.T, grid) * product['sunlight']['covered_w_m2'] / 4.0
+
+
+def water_fit(check_path: Path, exponents=WATER_EXPONENTS) -> dict:
+    """The water path's pressure exponent that best shares PlaSim's absorbed sunlight among the GCM's layers as the
+    line-by-line column does: for each exponent, the water and Rayleigh multipliers (the 'scale' form) refitted on the
+    radiation check's columns with the Moon's slant factors and the CO2 and O2 bands, then PlaSim's global-mean
+    absorption by layer on the twilight ledger's design column against the line-by-line pseudo-spherical column's;
+    the best exponent refined by a parabola through its neighbours and refitted."""
+    product, gases = json.loads((RESULTS / 'twilight.json').read_text()), json.loads(GASES.read_text())
+    column = design_column(product, gases)
+    lbl = np.array(product['global_mean_w_m2']['whole_spectrum']['pseudo_spherical']['air_by_layer'])
+
+    def trial(n):
+        f = fit(check_path, lunar=True, water_exponent=n, forms=('scale',))['forms']['scale']
+        layers = design_layers(column, product, f['k'], f['rayleigh_scale'], n)
+        return dict(water_exponent=float(n), k=f['k'], rayleigh_scale=f['rayleigh_scale'], mean_points=f['mean_points'],
+                    rms_points=f['rms_points'], air_by_layer_w_m2=list(layers),
+                    difference_w_m2=list(layers - lbl), rms_layer_w_m2=float(np.sqrt(np.mean((layers - lbl) ** 2))))
+
+    rows = [trial(n) for n in exponents]
+    for r in rows:
+        print(f"n {r['water_exponent']:.2f}: k {r['k']:.4f} rayleigh {r['rayleigh_scale']:.4f}  layers rms "
+              f"{r['rms_layer_w_m2']:.3f} W/m2, air {r['mean_points']['air']:+.3f} points", flush=True)
+    i = int(np.argmin([r['rms_layer_w_m2'] for r in rows]))
+    best = rows[i]
+    if 0 < i < len(rows) - 1:
+        x = np.array([rows[j]['water_exponent'] for j in (i - 1, i, i + 1)])
+        y = np.array([rows[j]['rms_layer_w_m2'] for j in (i - 1, i, i + 1)])
+        a, b, _ = np.polyfit(x, y, 2)
+        if a > 0:
+            best = trial(round(float(-b / (2 * a)), 3))
+            print(f"refined n {best['water_exponent']:.3f}: k {best['k']:.4f} rayleigh {best['rayleigh_scale']:.4f}  "
+                  f"layers rms {best['rms_layer_w_m2']:.3f} W/m2", flush=True)
+    return dict(check=check_path.name, line_by_line_w_m2=list(lbl), trials=rows, best=best)
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('action', choices=('validate', 'fit', 'gases'))
+    parser.add_argument('action', choices=('validate', 'fit', 'gases', 'water'))
     parser.add_argument('run', nargs='?')
     parser.add_argument('--years', type=int, nargs=2, default=(15, 24))
     parser.add_argument('--tests', nargs='*', default=[], help='other radiation checks in ../results/gcm to test the fit on')
@@ -332,6 +405,17 @@ def main(argv=None) -> int:
                       producer=dict(domain='climate', files={'gcm/plasim_shortwave.py': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16]}))
         GASES.write_text(json.dumps(result, indent=1) + '\n')
         print(GASES)
+        return 0
+    if args.action == 'water':
+        result = water_fit(RESULTS / f'radiation_check_{args.run}.json')
+        result.update(schema='terluna.climate.gcm-shortwave-water/1',
+                      producer=dict(domain='climate', files={'gcm/plasim_shortwave.py': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16]},
+                                    inputs={p: hashlib.sha256((RESULTS / p).read_bytes()).hexdigest()[:16]
+                                            for p in ('twilight.json', 'shortwave_gases.json', f'radiation_check_{args.run}.json')}))
+        from climate.crm.ring_crossings import rounded
+        path = RESULTS / f'shortwave_water_{args.run}.json'
+        path.write_text(json.dumps(rounded(result, 6), indent=1) + '\n')
+        print(path)
         return 0
     if args.action == 'validate':
         result = validate(args.run, tuple(args.years))

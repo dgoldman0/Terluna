@@ -49,7 +49,10 @@ output ten means per model day. The random seed is fixed, so runs repeat exactly
 solang turns the Sun evenly at the synodic rate, one turn per 29.53 days, and the orbit is held to the
 Moon's elements with its 1.54 degree tilt. Runs before 2026-09-29 had PlaSim's own clock, which sweeps the
 Sun unevenly, and Earth's orbit for 1 AD with a 23.7 degree tilt: see the README ("How the Moon is set
-up").
+up"). Since 2026-10-14 the corrected radiation is the standard, as the author decided: new runs take the curved air's
+light and infrared (--twilight full) and CO2 and O2 in PlaSim's sunlight (--gas-bands), with the water and Rayleigh
+multipliers refitted with them, in the twilight copy of ExoPlaSim; --twilight none and --no-gas-bands leave them out.
+Every earlier run had neither, so none of them resumes under the new defaults.
 """
 from __future__ import annotations
 import argparse
@@ -99,11 +102,13 @@ MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, st
              # the Rayleigh multiplier then refitted beside the water absorption below. 1.0 and 0.024
              # reproduce the unmodified model, which absorbed about 14 W/m2 too much sunlight and emitted
              # 12 W/m2 too little when warm.
-             rayleigh_scale=2.215, h2o_continuum=0.004,
+             rayleigh_scale=2.237, h2o_continuum=0.004,
              # A multiplier on water vapour's absorptivity in PlaSim's near-infrared band (SHORTWAVE_EDITS below;
              # 1.0 is PlaSim's own). With the Rayleigh multiplier refitted beside it, it brings PlaSim's clear-sky
-             # split of the sunlight to line-by-line's on 11 columns of the design case (plasim_shortwave.py).
-             sw_water_absorption=1.356,
+             # split of the sunlight to line-by-line's on 11 columns of the design case (plasim_shortwave.py),
+             # with the Moon's slant factors and the CO2 and O2 bands since 2026-10-14
+             # (../results/gcm/shortwave_fit_A28_dim5_lunar.json); runs before had 1.356 and 2.215, fitted without.
+             sw_water_absorption=1.292,
              # How the radiation sees cloud water (CLOUD_WATER below). Runs A and B used 'plasim', ExoPlaSim
              # unmodified; 'earth_path' corrects its Earth-fitted formula for the Moon's gravity.
              cloud_water='earth_path',
@@ -491,8 +496,8 @@ GAS_EDITS = [
     ("       ztwvtu(:)=ztwvtu(:)/ztwvu(:)\n",
      "       ztwvtu(:)=ztwvtu(:)/ztwvu(:)\n" + _gas_layer(1, 'ztwv', 'ztwvu') + _gas_layer(2, 'ztwv', 'ztwvu')),
 ]
-# The twilight patch goes only into a copy of ExoPlaSim of its own, which runs with --twilight import first, so the
-# shared installation, and with it the key of every run without the twilight, stays as it was.
+# The twilight and gas patches go only into a copy of ExoPlaSim of its own, which every run imports first since the
+# corrected radiation became the standard (2026-10-14); the shared installation stays as the earlier runs had it.
 TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS),
                     ('radmod.f90', 'Terluna: CO2 and O2 in the sunlight', GAS_EDITS)]
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
@@ -550,7 +555,7 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
-def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight=None, gas_bands=False):
+def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
@@ -583,7 +588,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if twilight is not None and twilight not in TWILIGHT_MODES:
         raise ValueError(f'twilight must be one of {TWILIGHT_MODES}')
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
-               exoplasim=version('exoplasim'), source=ensure_patched(twilight is not None or gas_bands),
+               exoplasim=version('exoplasim'), source=ensure_patched(True),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -965,9 +970,8 @@ def summarise_year(path: Path) -> dict:
 
 def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False,
         overrides: dict | None = None, start_from: str | None = None, co2_ppm: float | None = None,
-        top_infrared: tuple | None = None, twilight: str | None = None, gas_bands: bool = False) -> int:
-    if twilight is not None or gas_bands:
-        use_twilight_package()
+        top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True) -> int:
+    use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
@@ -1078,13 +1082,13 @@ def main(argv=None) -> int:
     parser.add_argument('--top-infrared', type=float, nargs=2, metavar=('DAY', 'NIGHT'),
                         help='infrared from space at the top of the air, W/m2 by day and by night '
                              '(part of the run key)')
-    parser.add_argument('--gas-bands', action='store_true',
-                        help="CO2 and O2 in PlaSim's sunlight from ../results/gcm/shortwave_gases.json, in the twilight "
-                             'copy of ExoPlaSim (part of the run key)')
-    parser.add_argument('--twilight', choices=TWILIGHT_MODES,
+    parser.add_argument('--gas-bands', action=argparse.BooleanOptionalAction, default=True,
+                        help="CO2 and O2 in PlaSim's sunlight from ../results/gcm/shortwave_gases.json, the standard "
+                             'since 2026-10-14 (part of the run key)')
+    parser.add_argument('--twilight', choices=TWILIGHT_MODES + ('none',), default='full',
                         help="the curved air's sunlight and infrared from ../results/gcm/twilight.json: the curved "
-                             "parts, all of it (full) or the Moon's slant path alone, in the twilight copy of ExoPlaSim "
-                             '(part of the run key)')
+                             "parts, all of it (full, the standard since 2026-10-14), the Moon's slant path alone, or "
+                             'none (part of the run key)')
     args = parser.parse_args(argv)
     if args.status:
         return status(args.folder or args.experiment)
@@ -1099,7 +1103,8 @@ def main(argv=None) -> int:
             parser.error(f'unknown model setting {key}')
         overrides[key] = type(MODEL[key])(value)
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
-               args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None, args.twilight, args.gas_bands)
+               args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
+               None if args.twilight == 'none' else args.twilight, args.gas_bands)
 
 
 if __name__ == '__main__':

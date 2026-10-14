@@ -398,10 +398,11 @@ The column takes the Sun as a global and diurnal mean through a pseudo-spherical
 two-stream column, as flat a footing as the GCM's. The twilight ledger
 ([climate/gcm/twilight.py](../../climate/gcm/twilight.py),
 [twilight.json](../../climate/results/gcm/twilight.json)) finds that the Moon's
-tall curved air heats the design column's air, per unit mass, about 5% more than
-such a flat column in the troposphere, 14–15% more from 100 to 360 km and about
-20% more near the 0.3 Pa base, where the air stays lit long after the ground below
-has lost the Sun. [curved_light.py](curved_light.py) solves the three design
+tall curved air heats the design column's air, per unit mass, about 6% more than
+such a flat column in the troposphere, 10–18% more from 100 to 360 km and 19% more
+at the 0.3 Pa base, where the air stays lit long after the ground below has lost
+the Sun (the corrected ledger, whose channels keep the heights of the absorbed
+sunlight as well as its totals). [curved_light.py](curved_light.py) solves the three design
 cases behind the exobase table again with their near-infrared heating scaled by
 that ratio, runs the thermal column from the new base with the same heats, and
 measures what the GCM's sharing of its sunlight would do to the ground. It
@@ -409,11 +410,11 @@ writes [results/curved_light.json](results/curved_light.json).
 
 | Titania stack | Base at 0.3 Pa | Exobase, film alone: quiet Sun / maximum | 0.1% leak: quiet / maximum | Molecular loss, film alone |
 |---|---|---|---|---|
-| LTE | 163.3 → 168.5 K | 168.5 / 168.8 K | 194.2 / 234.6 K | 4×10⁻⁸ → 2×10⁻⁷ kg/s |
-| All heats | 191.5 → 197.2 K | 197.3 / 197.5 K | 223.6 / 264.2 K | 1.5×10⁻⁴ → 6×10⁻⁴ kg/s |
-| Collisional | 142.1 → 145.6 K | 145.6 / 145.9 K | 170.9 / 210.4 K | 1×10⁻¹¹ → 5×10⁻¹¹ kg/s |
+| LTE | 163.3 → 168.4 K | 168.4 / 168.7 K | 194.1 / 234.5 K | 4×10⁻⁸ → 2×10⁻⁷ kg/s |
+| All heats | 191.5 → 197.1 K | 197.2 / 197.5 K | 223.5 / 264.1 K | 1.5×10⁻⁴ → 6×10⁻⁴ kg/s |
+| Collisional | 142.1 → 145.7 K | 145.7 / 146.0 K | 170.9 / 210.5 K | 1×10⁻¹¹ → 5×10⁻¹¹ kg/s |
 
-- **The twilight warms the base 3.5–5.7 K, and the exobase follows.** The losses
+- **The twilight warms the base 3.6–5.6 K, and the exobase follows.** The losses
   rise two- to fivefold and stay negligible; behind the film alone the exobase
   stays 50–100 K under the 250 K target.
 - **Sharing the sunlight as PlaSim does would warm the ground about 0.9 K.** The
@@ -421,12 +422,14 @@ writes [results/curved_light.json](results/curved_light.json).
   of the air exactly (−0.118 W/m²). With its near-infrared heating shared among
   the GCM's ten layers as PlaSim shares its absorbed sunlight, the column total
   kept, the air above the tropopause loses most of its sunlight, the base falls
-  to 83 K and the column takes in 1.42 W/m² more at the top: a ground 0.88 K
+  to 85 K and the column takes in 1.42 W/m² more at the top: a ground 0.88 K
   warmer at the column's −1.62 W/m² per kelvin across its balance cases. With the
   CO2 and O2 bands PlaSim gains
   ([plasim_shortwave.py](../../climate/gcm/plasim_shortwave.py)), the same sharing
-  leaves 0.50 W/m², 0.31 K (`ground.with_bands`). The rest is water vapour's lines
-  in the upper troposphere. With the Sun overhead the line-by-line water takes
-  9.2 W/m² at 66–85 km, just under the 86 km tropopause, and PlaSim's 5.2: its
-  water path is weighted by pressure, as Lacis and Hansen's is, and counts about
-  a quarter of the water there.
+  leaves 0.31 W/m², 0.19 K (`ground.with_bands`). The rest is water vapour's, in
+  the upper troposphere: with the Sun overhead the line-by-line water takes
+  9.2 W/m² at 66–85 km, just under the 86 km tropopause, and PlaSim's 5.2. Lacis
+  and Hansen's curve of growth takes sunlight from the first water it meets, where
+  the line-by-line water's strongest lines go dark higher up; a pressure exponent
+  on PlaSim's water path does not move it ([the GCM's
+  account](../../climate/gcm/README.md#the-curved-airs-light)).

@@ -353,6 +353,12 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_lsw_twilight 
 /media/projectspace/terluna-research/session-tools/twilight_rings.sh                 # both, 6 threads; rerun to resume
 ```
 
+**Paused on 14 October**, the northern ring at day 9 of 59 and the southern one before it began. Two of their inputs
+changed while they ran. The twilight ledger's first channels put the near-infrared part of its terms too high, and the
+corrected ledger has replaced them ([the GCM's account](../gcm/README.md#the-curved-airs-light)). The GCM's design case
+is running again with its corrected radiation, which changes the air above 8–16 km that the rings are held to. The
+rings wait for both.
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored

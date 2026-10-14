@@ -2,12 +2,13 @@
 GCM's misplaced sunlight would move the ground.
 
     python -m atmosphere.middle_atmosphere.curved_light       # results/curved_light.json, about an hour on 4 cores
+    python -m atmosphere.middle_atmosphere.curved_light --processes 2
 
 The middle-atmosphere column (equilibrium.py) takes the Sun as a global and diurnal mean through a pseudo-spherical
 two-stream column, as flat a footing as the GCM's. climate/results/gcm/twilight.json gives, shell by shell, the
 sunlight the curved air puts into the design column's air per unit mass against that flat column (its shells_w_m2,
-sphere_shallow over pseudo_spherical): about 5% more in the troposphere, 14-15% more from 100 to 360 km and about 20%
-more at the thermosphere's 0.3 Pa base, where the air stays lit for long after the ground below has lost the Sun.
+sphere_shallow over pseudo_spherical): about 6% more in the troposphere, 10-18% more from 100 to 360 km and 19% more
+at the thermosphere's 0.3 Pa base, where the air stays lit for long after the ground below has lost the Sun.
 Two checks:
 
 - exobase: the three design cases behind the exobase table (cooling in local thermodynamic equilibrium; CO2's 15 um
@@ -23,14 +24,14 @@ Two checks:
   with surface temperature is how far the ground would move, the column's convection and humidity as the model holds
   them.
 
-Each solve is kept on the drive, so a stopped run resumes.
+Each solve is kept on the drive under a hash of the factor it was made with, so a stopped run resumes and a changed
+ledger solves again.
 """
 from __future__ import annotations
 
 import contextlib
 import hashlib
 import json
-import math
 import sys
 import time
 from dataclasses import replace
@@ -88,26 +89,15 @@ def plasim_shares(product):
 
 
 def plasim_band_shares(product):
-    """As plasim_shares, with PlaSim's CO2 and O2 bands and the Moon's slant factors (plasim_shortwave.py's lunar
+    """As plasim_shares, with PlaSim's CO2 and O2 bands and the Moon's slant factors (plasim_shortwave.py's design
     column) at the water and Rayleigh multipliers refitted with them, to three decimals as the GCM test sets them, on
     the ledger's column and solar elevations; and its global-mean absorption by layer, W/m2 of the ledger's sunlight."""
-    from illumination.surface_light import model as surface
-    from climate.gcm import plasim_shortwave as ps, twilight as tw
-    col, air, _, _ = surface.build(surface.COLUMNS[tw.WORLD])
+    from climate.gcm import plasim_shortwave as ps
     refit = json.loads(LUNAR_FIT.read_text())['forms']['scale']
     k, rayleigh = round(refit['k'], 3), round(refit['rayleigh_scale'], 3)
-    lunar = ps.lunar_column(tw.plasim_column(col, air.molar_mass, tw.SKY_ALBEDO), json.loads(GASES.read_text()), product)
-    column = dict(lunar, rcoeff=ps.RCOEFF_PER_RAYSCALE * rayleigh)
-    grid = np.radians(product['by_elevation']['elevation_deg'])
-    layers = np.zeros((len(column['sigma']), grid.size))
-    for i, el in enumerate(grid):
-        mu = math.sin(el)
-        if mu > 0.0:
-            net = ps.net_flux(column, mu, 'scale', k)
-            layers[:, i] = mu * (net[:-1] - net[1:])
-    plasim = tw.sphere_share(layers.T, grid)
+    plasim = ps.design_layers(ps.design_column(product, json.loads(GASES.read_text())), product, k, rayleigh)
     lbl = np.array(product['global_mean_w_m2']['whole_spectrum']['pseudo_spherical']['air_by_layer'])
-    return (plasim / plasim.sum()) / (lbl / lbl.sum()), plasim * product['sunlight']['covered_w_m2'] / 4.0
+    return (plasim / plasim.sum()) / (lbl / lbl.sum()), plasim
 
 
 @contextlib.contextmanager
@@ -147,6 +137,11 @@ def plasim_factor(product, share=None):
         layer = np.clip(np.searchsorted(half, sigma) - 1, 0, share.size - 1)
         return share[layer]
     return factor
+
+
+def tag(*arrays):
+    """A short hash of the arrays a factor is made from, for the stored solve's name."""
+    return hashlib.sha256(b''.join(np.ascontiguousarray(a, float).tobytes() for a in arrays)).hexdigest()[:8]
 
 
 def solved(label, case, factor=None, keep_total=False):
@@ -216,6 +211,11 @@ def exobase(solution, summary):
 
 
 def main(argv=None) -> int:
+    import argparse
+    global PROCESSES
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument('--processes', type=int, default=PROCESSES, help='processes for the near-infrared optics')
+    PROCESSES = parser.parse_args(argv).processes
     product = twilight()
     cases = runner.cases()
     lp, ratio = curved_ratio(product)
@@ -239,7 +239,7 @@ def main(argv=None) -> int:
     out['exobase'] = {}
     for name in EXOBASE_CASES:
         base = stored(name)
-        curved = solved(f'{name}_curved', cases[name], curved_factor(product))
+        curved = solved(f'{name}_curved_{tag(lp, ratio)}', cases[name], curved_factor(product))
         out['exobase'][name] = dict(stored=exobase(base, base['summary']), curved=exobase(curved, base['summary']),
                                     curved_solve_seconds=curved['seconds'])
         b, c = out['exobase'][name]['stored'], out['exobase'][name]['curved']
@@ -249,9 +249,9 @@ def main(argv=None) -> int:
     ts, net = np.array(slopes).T
     slope = float(np.polyfit(ts, net, 1)[0])
     again = solved(f'{GROUND_CASE}_again', cases[GROUND_CASE])
-    shared = solved(f'{GROUND_CASE}_plasim', cases[GROUND_CASE], plasim_factor(product), keep_total=True)
-    d_net = shared['budget']['net_toa'] - again['budget']['net_toa']
     half, share = plasim_shares(product)
+    shared = solved(f'{GROUND_CASE}_plasim_{tag(share)}', cases[GROUND_CASE], plasim_factor(product), keep_total=True)
+    d_net = shared['budget']['net_toa'] - again['budget']['net_toa']
     out['ground'] = dict(case=GROUND_CASE, stored_net_toa_w_m2=float(stored(GROUND_CASE)['summary']['net_toa']),
                          solved_again_net_toa_w_m2=again['budget']['net_toa'],
                          plasim_shared_net_toa_w_m2=shared['budget']['net_toa'], change_w_m2=d_net,
@@ -261,7 +261,8 @@ def main(argv=None) -> int:
     log(f'ground: net at the top {again["budget"]["net_toa"]:.2f} -> {shared["budget"]["net_toa"]:.2f} W/m2, '
         f'slope {slope:.2f} W/m2/K, ground {-d_net / slope:+.2f} K')
     band_share, band_w_m2 = plasim_band_shares(product)
-    bands = solved(f'{GROUND_CASE}_plasim_bands', cases[GROUND_CASE], plasim_factor(product, band_share), keep_total=True)
+    bands = solved(f'{GROUND_CASE}_plasim_bands_{tag(band_share)}', cases[GROUND_CASE], plasim_factor(product, band_share),
+                   keep_total=True)
     d_bands = bands['budget']['net_toa'] - again['budget']['net_toa']
     whole = product['global_mean_w_m2']['whole_spectrum']
     out['ground']['with_bands'] = dict(

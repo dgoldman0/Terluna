@@ -70,3 +70,12 @@ def test_gas_bands_are_plasims_own_at_no_gas_and_take_sunlight_from_the_ground()
         moon = p.clear_sky(moist_column(magnification=lunar, gases=dict(gases, fractions=dict(CO2=6.1e-4, O2=0.194))), mu)
         assert np.isclose(sum(moon.values()), 1.0)
         assert moon['air'] > base['air'] and moon['ground'] < base['ground'] and moon['reflected'] < base['reflected']
+
+
+def test_the_water_exponent_at_one_is_plasims_and_lower_weights_the_upper_air_more():
+    col = moist_column()
+    top = lambda net: net[0] - net[3]                                   # the top three layers' absorption
+    for mu in (0.2, 1.0):
+        base = p.net_flux(col, mu, 'scale', 1.3)
+        assert np.array_equal(base, p.net_flux(dict(col, water_exponent=1.0), mu, 'scale', 1.3))
+        assert top(p.net_flux(dict(col, water_exponent=0.5), mu, 'scale', 1.3)) > top(base)

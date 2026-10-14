@@ -60,6 +60,18 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(er.MODEL['sun_clock'], 'synodic')               # an even Sun, one turn per 29.53 days
         self.assertEqual((er.MODEL['fixed_orbit'], er.MODEL['whole_lunar_days']), (1, 1))
         self.assertEqual(er.SUN_CLOCKS.index('plasim'), 0)                # PlaSim's own clock is the default off
+        # Since 2026-10-14 the curved air and the CO2 and O2 bands are the standard, with the multipliers refitted
+        # with them.
+        import inspect
+        for f in (er.run, er.configuration):
+            params = inspect.signature(f).parameters
+            self.assertEqual((params['twilight'].default, params['gas_bands'].default), ('full', True))
+        refit = er.ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_fit_A28_dim5_lunar.json'
+        if refit.exists():
+            import json
+            scale = json.loads(refit.read_text())['forms']['scale']
+            self.assertEqual((er.MODEL['sw_water_absorption'], er.MODEL['rayleigh_scale']),
+                             (round(scale['k'], 3), round(scale['rayleigh_scale'], 3)))
 
     def test_clear_sky_output(self):
         off = er.output_variables({**er.MODEL, 'clear_sky': 0})

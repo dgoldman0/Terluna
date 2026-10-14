@@ -52,6 +52,7 @@ PROCESSES = 4
 GCM_LEVELS = 10
 PLASIM_SOLAR1 = 0.502127834309164          # PlaSim's own share of the design sunlight below 0.75 um (its MOST_DIAG)
 DESIGN_RUN = 'A28_dim5_moon'               # whose progress record holds that share
+DESIGN_RAYLEIGH, DESIGN_WATER = 2.215, 1.356   # its Rayleigh and water multipliers, as it ran
 SUN_CLASSES = (('below_horizon', -90.0, 0.0), ('low_sun_0_10_deg', 0.0, 10.0), ('day_above_10_deg', 10.0, 90.0))
 FINE_STEP = 0.025                          # cm^-1, the sky model's finer visible line grid
 SOLVED_NM = 1250.0                         # multiple scattering below this wavelength
@@ -64,6 +65,7 @@ SKY_QUALITY = 'standard'
 SKY_ALBEDO = 0.1                           # the sky model's ground, as in its products
 SKY_BATCH = 24
 CHUNK = 200
+BEAM_CHUNK = 400                           # beam channels summed per pass
 DIRECT_ELEVATIONS = np.radians(np.r_[np.linspace(-40.0, -10.0, 31)[:-1], np.linspace(-10.0, 10.0, 81)[:-1],
                                      np.linspace(10.0, 90.0, 41)])
 STANDARD = ROOT / 'research' / 'runs' / 'optical_comfort' / 'spherical' / f'{WORLD}_standard.npz'
@@ -230,12 +232,16 @@ FAITHFUL_PATHS = (0.03, 0.1, 0.3, 1.0, 3.0, 13.0)    # slant columns, in whole v
 
 
 def faithful_channels(absorption, scattering, energy, wavelength, edges_nm, tolerance, smooth_below_nm=0.0,
-                      xyz=None):
+                      xyz=None, heights=False):
     """Channels that keep the sunlight's absorbed energy. Within each band (edges in nm) the wavenumbers are sorted
     by whole-column absorption and bisected by energy until each group, carrying its layers' energy-weighted optical
     depths, absorbs a direct beam along slant columns of 0.03 to 13 whole columns within tolerance (a share of the
     group's sunlight) of what its members absorb. An averaged optical depth always absorbs more than its members,
-    so the bias of coarse groups runs one way. Bands below smooth_below_nm keep one channel."""
+    so the bias of coarse groups runs one way. Bands below smooth_below_nm keep one channel. With heights, each
+    group must also keep, within the same tolerance, what the beam loses above the bottom of every layer: members
+    with the same whole column can take it at different heights (narrow line cores high up, wings low down), and a
+    group that mixes them puts its sunlight too high. Such a group splits by the depth above the layer where it
+    errs most."""
     col = absorption.sum(0)
     m = np.asarray(FAITHFUL_PATHS)
     groups = []
@@ -254,11 +260,22 @@ def faithful_channels(absorption, scattering, energy, wavelength, edges_nm, tole
             total = e.sum()
             mean = col[g] @ e / total
             exact = (1.0 - np.exp(-m[:, None] * col[g][None, :])) @ e
-            if g.size == 1 or np.max(np.abs(total * (1.0 - np.exp(-m * mean)) - exact)) <= tolerance * total:
-                groups.append((g, lo, hi))
-            else:
-                k = int(np.clip(np.searchsorted(np.cumsum(e), 0.5 * total), 1, g.size - 1))
+            if g.size > 1 and np.max(np.abs(total * (1.0 - np.exp(-m * mean)) - exact)) > tolerance * total:
+                g = g[np.argsort(col[g], kind='stable')]
+                k = int(np.clip(np.searchsorted(np.cumsum(energy[g]), 0.5 * total), 1, g.size - 1))
                 stack += [g[:k], g[k:]]
+                continue
+            if g.size > 1 and heights:
+                depth = np.cumsum(absorption[::-1, g], 0)[::-1]               # above each layer's bottom
+                lost = 1.0 - np.exp(-m[:, None, None] * depth[None])
+                err = np.abs(total * (1.0 - np.exp(-m[:, None] * (depth @ e / total)[None])) - lost @ e)
+                if err.max() > tolerance * total:
+                    mi, li = np.unravel_index(np.argmax(err), err.shape)
+                    g = g[np.argsort(lost[mi, li], kind='stable')]
+                    k = int(np.clip(np.searchsorted(np.cumsum(energy[g]), 0.5 * total), 1, g.size - 1))
+                    stack += [g[:k], g[k:]]
+                    continue
+            groups.append((g, lo, hi))
     groups.sort(key=lambda x: (x[1], col[x[0]].mean()))
     rows = []
     for g, lo, hi in groups:
@@ -273,9 +290,11 @@ def faithful_channels(absorption, scattering, energy, wavelength, edges_nm, tole
 def channels(fine):
     """The ledger's channels over 360 nm-5 um, each marked for the multiple-scattering solve (below SOLVED_NM and not
     opaque) or the direct beam."""
+    # The solved channels below SOLVED_NM keep their whole-column test, so their multiple scattering stands; the
+    # beam channels above it keep the heights as well.
     parts = [faithful_channels(fine['absorption'], fine['scattering'], fine['energy'], fine['wavelength'], edges,
-                               TOLERANCE, smooth, fine['xyz'])
-             for edges, smooth in ((SKY_EDGES_NM, 500.0), (NIR_EDGES_NM, 0.0))]
+                               TOLERANCE, smooth, fine['xyz'], heights)
+             for edges, smooth, heights in ((SKY_EDGES_NM, 500.0, False), (NIR_EDGES_NM, 0.0, True))]
     ch = {k: np.concatenate([p[k] for p in parts], axis=1 if k in ('absorption', 'scattering') else 0) for k in parts[0]}
     ch['solved'] = (ch['wavelength'] < SOLVED_NM) & (ch['absorption'].sum(0) < OPAQUE)
     ch['height'] = fine['height']
@@ -454,7 +473,7 @@ def plasim_column(col, molar_mass, albedo):
     planet = json.loads((er.PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
     return dict(sigma=sigma, ps=er.EXPERIMENTS['A28']['pressure_pa'], t=at(col['layer_t_k']),
                 q=water_fraction(at(col['layer_x_h2o']), molar_mass), albedo=albedo,
-                rcoeff=ps.RCOEFF_PER_RAYSCALE * er.MODEL['rayleigh_scale'], solar1=PLASIM_SOLAR1,
+                rcoeff=ps.RCOEFF_PER_RAYSCALE * DESIGN_RAYLEIGH, solar1=PLASIM_SOLAR1,
                 gravity=planet['gravity_m_s2'])
 
 
@@ -462,14 +481,14 @@ def plasim(column, elevation):
     """PlaSim's clear sky on the column with the design run's water absorption: absorbed in each of its layers (top
     first) and by the ground, and reflected, per unit ground area per unit incident flux, by solar elevation;
     nothing while the Sun is below the horizon (its dawn, gmu0 > 0)."""
-    from climate.gcm import exoplasim_run as er, plasim_shortwave as ps
+    from climate.gcm import plasim_shortwave as ps
     layers = np.zeros((len(column['sigma']), elevation.size)); ground = np.zeros(elevation.size)
     reflected = np.zeros(elevation.size)
     for i, el in enumerate(elevation):
         mu = math.sin(el)
         if mu <= 0.0:
             continue
-        net = ps.net_flux(column, mu, 'scale', er.MODEL['sw_water_absorption'])
+        net = ps.net_flux(column, mu, 'scale', DESIGN_WATER)
         layers[:, i], ground[i], reflected[i] = mu * (net[:-1] - net[1:]), mu * net[-1], mu * (1.0 - net[0])
     return layers, ground, reflected
 
@@ -609,41 +628,54 @@ def ledger() -> dict:
     beam = np.flatnonzero(~ch['solved'])
     e = ch['energy']
     log(f'{e.size} channels, {pick.size} solved in {len(paths)} batches, {beam.size} by their beam')
-    sphere_g, sphere_a = np.zeros((grid.size, e.size)), np.zeros((len(edges) - 1, grid.size, e.size))
-    shallow_a = np.zeros_like(sphere_a)
+    # Each channel's light is summed into the energy-weighted fields as its batch is done, so no array holds every
+    # channel's shells and elevations at once.
+    bands = dict(visible=ch['wavelength'] < 830.0, near_infrared=ch['wavelength'] >= 830.0)
+    weights = dict(all=e, **{name: np.where(m, e, 0.0) for name, m in bands.items()})
+    kinds = ('sphere', 'sphere_shallow', 'pseudo_spherical', 'flat')
+    shape = (len(edges) - 1, grid.size)
+    sums = {k: {w: (np.zeros(grid.size), np.zeros(shape)) for w in weights} for k in kinds}
+    beams = {k: (np.zeros(grid.size), np.zeros(shape)) for k in ('sphere', 'pseudo_spherical')}
+
+    def add(sel, parts):
+        for k, (g, a) in parts.items():
+            for w, ew in weights.items():
+                sums[k][w][0][:] += g @ ew[sel]
+                sums[k][w][1][:] += a @ ew[sel]
+
+    ta, ts = ch['absorption'], ch['scattering']
     start = 0
     for path in paths:
         g, a, fl = field(path, albedo, grid)
         sel = pick[start:start + g.shape[1]]
-        sphere_g[:, sel], sphere_a[:, :, sel], shallow_a[:, :, sel] = g, a, fl
         start += g.shape[1]
+        pa, pg = two_stream(ta[:, sel], ts[:, sel], albedo, grid, edges)
+        fa, fg = two_stream(ta[:, sel], ts[:, sel], albedo, grid)
+        add(sel, dict(sphere=(g, a), sphere_shallow=(g, fl), pseudo_spherical=(pg, pa), flat=(fg, fa)))
     log('the beam channels: the curved beam and the two-stream')
-    ta, ts = ch['absorption'], ch['scattering']
-    ba, bg, bf = direct_beams(ta[:, beam], ts[:, beam], edges, albedo, grid)
-    pa, pg = two_stream(ta, ts, albedo, grid, edges)
-    da, dg = direct_only(ta[:, beam], ts[:, beam], albedo, grid, edges)
-    # The beam channels' sphere: the curved direct beam, with the diffuse and reflected light the pseudo-spherical
-    # two-stream adds to its own direct beam.
-    sphere_g[:, beam] = bg + pg[:, beam] - dg
-    sphere_a[:, :, beam] = ba + pa[:, :, beam] - da
-    shallow_a[:, :, beam] = bf + pa[:, :, beam] - da
-    beams = dict(sphere=(bg @ e[beam], ba @ e[beam]), pseudo_spherical=(dg @ e[beam], da @ e[beam]))
-    del ba, bf, da
-    fa, fg = two_stream(ta, ts, albedo, grid)
-    per_channel = dict(sphere=(sphere_g, sphere_a), sphere_shallow=(sphere_g, shallow_a), pseudo_spherical=(pg, pa),
-                       flat=(fg, fa))
+    for c0 in range(0, beam.size, BEAM_CHUNK):
+        sel = beam[c0:c0 + BEAM_CHUNK]
+        ba, bg, bf = direct_beams(ta[:, sel], ts[:, sel], edges, albedo, grid)
+        pa, pg = two_stream(ta[:, sel], ts[:, sel], albedo, grid, edges)
+        da, dg = direct_only(ta[:, sel], ts[:, sel], albedo, grid, edges)
+        fa, fg = two_stream(ta[:, sel], ts[:, sel], albedo, grid)
+        # The beam channels' sphere: the curved direct beam, with the diffuse and reflected light the
+        # pseudo-spherical two-stream adds to its own direct beam.
+        add(sel, dict(sphere=(bg + pg - dg, ba + pa - da), sphere_shallow=(bg + pg - dg, bf + pa - da),
+                      pseudo_spherical=(pg, pa), flat=(fg, fa)))
+        for k, (g, a) in dict(sphere=(bg, ba), pseudo_spherical=(dg, da)).items():
+            beams[k][0][:] += g @ e[sel]
+            beams[k][1][:] += a @ e[sel]
     covered = float(e.sum())
-    bands = dict(visible=ch['wavelength'] < 830.0, near_infrared=ch['wavelength'] >= 830.0)
-    by_band = {name: {k: global_means(g[:, m] @ e[m], onto_gcm_layers(a[:, :, m] @ e[m], p_edges), grid)
-                      for k, (g, a) in per_channel.items()} for name, m in bands.items()}
+    by_band = {name: {k: global_means(sums[k][name][0], onto_gcm_layers(sums[k][name][1], p_edges), grid)
+                      for k in kinds} for name in bands}
     by_band['beam_channels_direct_beam'] = {k: global_means(g, onto_gcm_layers(a, p_edges), grid)
                                             for k, (g, a) in beams.items()}
-    tables = {k: (g @ e, onto_gcm_layers(a @ e, p_edges)) for k, (g, a) in per_channel.items()}
-    shell_delta = shallow_a @ e - pa @ e                        # (shells bottom-up, elevations), W/m2 at the beam
-    shell_cone = sphere_a @ e - shallow_a @ e
-    shell_means = {k: sphere_share((a @ e).T, grid) / 4.0
-                   for k, a in (('sphere', sphere_a), ('sphere_shallow', shallow_a), ('pseudo_spherical', pa))}
-    del per_channel, sphere_a, shallow_a, pa, fa
+    tables = {k: (sums[k]['all'][0], onto_gcm_layers(sums[k]['all'][1], p_edges)) for k in kinds}
+    shell_delta = sums['sphere_shallow']['all'][1] - sums['pseudo_spherical']['all'][1]   # shells bottom-up, W/m2 at the beam
+    shell_cone = sums['sphere']['all'][1] - sums['sphere_shallow']['all'][1]
+    shell_means = {k: sphere_share(sums[k]['all'][1].T, grid) / 4.0
+                   for k in ('sphere', 'sphere_shallow', 'pseudo_spherical')}
     log('PlaSim on the design run\'s column')
     column = plasim_column(col, air_spec.molar_mass, albedo)
     p_layers, p_ground, p_reflected = plasim(column, grid)
@@ -686,7 +718,8 @@ def ledger() -> dict:
                   'refraction and without empirical check. The design column\'s line-by-line optics from 360 nm to 5 um '
                   f'(the sky model\'s {FINE_STEP} cm-1 visible grid, the radiative-convective model\'s near infrared) '
                   f'are grouped into {e.size} channels that keep the absorbed energy within {TOLERANCE:.0%} on slant '
-                  f'columns (reduction_check). The {pick.size} channels below {SOLVED_NM:.0f} nm with whole-column '
+                  f'columns, those above {SOLVED_NM:.0f} nm also above the bottom of every layer (reduction_check). The '
+                  f'{pick.size} channels below {SOLVED_NM:.0f} nm with whole-column '
                   f'absorption below {OPAQUE:g} take the spherical sky model\'s multiple scattering at its {SKY_QUALITY} '
                   'quality; the others take the direct beam through the same spherical shells with the diffuse and '
                   'reflected light of a pseudo-spherical two-stream column, so their twilight holds no scattered '
@@ -722,7 +755,7 @@ def ledger() -> dict:
                        air=list(air_mass(edges, mass / dz, elev)), water=list(air_mass(edges, water / dz, elev)),
                        plasim=list(35.0 / np.sqrt(1.0 + 1224.0 * mu * mu)), flat=list(1.0 / np.maximum(mu, 1e-300)))),
         gcm=dict(run=DESIGN_RUN, sigma=list(plasim_sigma()), half_level_height_km=list(heights / 1e3),
-                 rayleigh_scale=er.MODEL['rayleigh_scale'], sw_water_absorption=er.MODEL['sw_water_absorption'],
+                 rayleigh_scale=DESIGN_RAYLEIGH, sw_water_absorption=DESIGN_WATER,
                  rcoeff=column['rcoeff'], gravity_m_s2=column['gravity']),
         global_mean_w_m2=dict(by_band=by_band, whole_spectrum=whole),
         sphere_minus_pseudo_spherical_w_m2=difference('sphere', 'pseudo_spherical'),

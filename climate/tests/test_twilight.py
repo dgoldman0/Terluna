@@ -41,6 +41,23 @@ def test_faithful_channels_keep_the_energy_and_the_absorbed_beam():
             assert one > exact + 0.05
 
 
+def test_faithful_channels_with_heights_keep_where_the_beam_is_lost():
+    # Two kinds of member with the same whole column, one taking its light in the top layer and one in the bottom.
+    n = 400
+    absorption = np.zeros((3, n))
+    absorption[2, :n // 2] = 4.0                                        # layers bottom-up
+    absorption[0, n // 2:] = 4.0
+    scattering, energy, wavelength = np.zeros((3, n)), np.full(n, 1.0 / n), np.linspace(1300.0, 1310.0, n)
+    edges = np.array([1300.0, 1310.0 + 1e-9])
+    flat = tw.faithful_channels(absorption, scattering, energy, wavelength, edges, 0.01)
+    tall = tw.faithful_channels(absorption, scattering, energy, wavelength, edges, 0.01, heights=True)
+    assert flat['energy'].size == 1 and tall['energy'].size >= 2      # the whole columns agree; the heights do not
+    above = lambda a, e: e @ (1.0 - np.exp(-a[1:].sum(0)))              # the beam's loss above the bottom layer
+    exact = above(absorption, energy)
+    assert abs(above(tall['absorption'], tall['energy']) - exact) <= 0.01
+    assert above(flat['absorption'], flat['energy']) - exact > 0.3       # one channel takes the light too high
+
+
 def test_the_sphere_takes_the_disks_power_from_a_black_ground():
     a = np.radians(np.linspace(-90.0, 90.0, 721))
     assert tw.sphere_share(np.maximum(np.sin(a), 0.0), a) == pytest.approx(1.0, rel=1e-5)
@@ -102,6 +119,9 @@ def test_the_product_integrates_back_and_its_channels_keep_the_energy(product):
     for row in product['reduction_check']:
         for key in ('air', 'ground'):
             assert row['channels'][key] == pytest.approx(row['fine'][key], rel=0.01)
+        # and layer by layer, within 1% of the band's absorbed sunlight
+        assert np.allclose(row['channels']['air_by_layer'], row['fine']['air_by_layer'], rtol=0.0,
+                           atol=0.01 * row['fine']['air'])
 
 
 def test_the_pseudo_spherical_column_casts_no_light_below_the_horizon(product):
@@ -115,7 +135,7 @@ def test_the_pseudo_spherical_column_casts_no_light_below_the_horizon(product):
 def test_the_cone_and_the_curved_light_make_up_the_geometry(product):
     total, cone, light = (product[k] for k in ('sphere_minus_pseudo_spherical_w_m2', 'cone_w_m2', 'curved_light_w_m2'))
     for key in ('ground', 'air'):
-        assert cone[key] + light[key] == pytest.approx(total[key], abs=1e-6)
+        assert cone[key] + light[key] == pytest.approx(total[key], rel=1e-5, abs=1e-6)   # six figures kept
     assert cone['ground'] == 0.0 and cone['air'] > 0.0                  # the widening adds air above, not ground
     term = product['gcm_term']
     assert term['global_mean_w_m2']['air'] == pytest.approx(light['air'], rel=0.02)

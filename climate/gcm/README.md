@@ -759,8 +759,9 @@ $PY -m climate.gcm.twilight solve       # the sky's multiple scattering in 12 ba
 $PY -m climate.gcm.twilight ledger      # the product, 2.5 minutes
 ```
 
-**How the ledger is built.** The design column's line-by-line optics from 360 nm to 5 µm are grouped into 1,504
-channels that keep the absorbed energy within 1% on slant columns. The 282 channels below 1,250 nm that are not opaque
+**How the ledger is built.** The design column's line-by-line optics from 360 nm to 5 µm are grouped into 10,697
+channels that keep the absorbed energy within 1% on slant columns; the 10,415 above 1,250 nm keep, within the same 1%,
+what the beam loses above the bottom of every layer as well. The 282 channels below 1,250 nm that are not opaque
 take the spherical sky model's multiple scattering at its standard quality; the rest take the direct beam through the
 same 100 spherical shells with the diffuse light of a pseudo-spherical two-stream column. The flat and
 pseudo-spherical columns are the radiative-convective model's two-stream on the same layers, and PlaSim's is
@@ -773,33 +774,41 @@ at 46 km lets out 1.2250 times its flat escape against the exact 1.2253. All of 
 **The sky model's channels hold its colours and overstate its absorbed energy.** Its 114 production channels average
 optical depth over wavenumbers that mix windows with opaque water and O₂ lines, and an averaged depth absorbs more
 than its members: with the Sun overhead they absorb 104.5 W/m² above 500 nm against the fine grid's 66.2, 58% too
-much. The ledger's channels agree with the fine grid within 0.4–0.8%.
+much. The ledger's channels agree with the fine grid within 0.4–0.8% in total and, with the Sun overhead, within
+0.9 W/m² in every GCM layer.
+
+**Channels have to keep the heights as well.** The ledger's first channels were bisected on the whole column alone.
+Narrow line cores that go dark high up and wings that absorb low down can take the same share of the whole column, and
+a channel that mixes them puts its sunlight too high: above 1,250 nm, with the Sun overhead, those channels put
+19.0 W/m² at 66–85 km against the fine grid's 10.7 and 27.7 at 35–49 km against 35.1, with the column's total right
+within 0.2%. The test of the beam's loss above every layer corrects it with ten times the channels. The figures here
+are the corrected ledger's; the two 20-year tests below ran with the first one's terms.
 
 **What the geometry does**, global means at the design column's temperatures, W/m², against the pseudo-spherical
 column of the same air, whose totals PlaSim's calibrated arithmetic matches within 1.1 W/m²:
 
 | | Sunlight to the ground | Sunlight to the air | Infrared to space | Net |
 |---|---|---|---|---|
-| Cone: the shells widen above each square metre | 0 | +4.6 | +10.5 more | −6.0 |
-| Curved light and curved escape | +1.5 | +5.0 | +5.6 more | +0.9 |
-| All | +1.5 | +9.6 | +16.2 more | −5.1 |
+| Cone: the shells widen above each square metre | 0 | +4.0 | +10.5 more | −6.5 |
+| Curved light and curved escape | +1.5 | +4.8 | +5.6 more | +0.7 |
+| All | +1.5 | +8.8 | +16.2 more | −5.8 |
 
-- **The twilight is long and bright.** The curved light gives 2.7 W/m² with the Sun below the horizon (1.4 to the
+- **The twilight is long and bright.** The curved light gives 2.6 W/m² with the Sun below the horizon (1.4 to the
   ground) and 3.0 W/m² with it 0–10° up, where the beam crosses each column from the side and the flat column counts
-  only what enters its top: at 1° the air takes 34.7 W/m² per square metre of ground against 7.5. Overhead the
+  only what enters its top: at 1° the air takes 33.9 W/m² per square metre of ground against 7.5. Overhead the
   sphere's light on the flat column's layers matches the flat column within 0.1% in the air; its ground takes 1.3%
   less, the exact scattering reflecting more than the two-stream.
 - **The infrared leaves by the same geometry.** Most of it leaves from 15–100 km, where the shells are widest, and the
   upper air also sees space below its horizontal down to the ground's limb. At the same temperatures the shells lose
-  16.2 W/m² more than flat layers, which outweighs the 11.1 W/m² more sunlight they take.
-- **Almost none of it reaches the thermosphere.** Of the curved light's 5.0 W/m² in the air, 1.6 falls below 15 km,
-  2.0 at 15–50 km and 0.29 above 150 km; 0.006 W/m² falls above the thermosphere's 0.3 Pa base, 519 km up. The
+  16.2 W/m² more than flat layers, which outweighs the 10.3 W/m² more sunlight they take.
+- **Almost none of it reaches the thermosphere.** Of the curved light's 4.8 W/m² in the air, 1.0 falls below 15 km,
+  2.3 at 15–50 km and 0.14 above 150 km; 0.0007 W/m² falls above the thermosphere's 0.3 Pa base, 519 km up. The
   exobase tables run on millionths of a W/m², and that light comes in CO₂ and O₂ line cores whose molecules also cool
   and, at those pressures, re-emit much of what they absorb; the column here holds them in local equilibrium and stops
   at 0.1 Pa, so the middle-atmosphere model is where to judge it.
 - **PlaSim places its absorbed sunlight too low.** Its column's total matches; by layer it puts nothing in the top two
-  (above 85 km), where the line-by-line column takes 5.2 W/m², 4.6 W/m² less in the third (66–85 km) and 2.3–3.6 W/m²
-  more in the fourth to sixth (24–66 km).
+  (above 85 km), where the line-by-line column takes 4.2 W/m², 2.3 W/m² less in the third (66–85 km) and 2.1 W/m²
+  more in each of the fourth to sixth (24–66 km).
 - **The Moon's horizon slant factor is 13.5 for its water and 7.1 for well-mixed air**, against PlaSim's 35. The
   rational form (μ + 0.18401) / (μ² + 0.17006 μ + 0.013593) follows the water's within 0.30% at every elevation and is
   exactly 1 overhead. With it in PlaSim's arithmetic the calibration's water multiplier goes from 1.3564 to 1.3619 and
@@ -865,22 +874,30 @@ PlaSim's arithmetic on the same column:
 
 | GCM layer | Line-by-line | PlaSim as run | PlaSim with the bands |
 |---|---|---|---|
-| 112–575 km | 3.40 | 0.00 | 2.19 |
-| 85–112 km | 1.77 | 0.01 | 1.25 |
-| 66–85 km | 6.84 | 2.24 | 3.12 |
-| 49–66 km | 10.42 | 14.06 | 13.87 |
-| 35–49 km | 15.11 | 18.60 | 17.81 |
-| 24–35 km | 16.35 | 18.61 | 17.60 |
-| 14–24 km | 14.63 | 15.88 | 14.92 |
-| 7–14 km | 11.76 | 12.36 | 11.56 |
-| 2–7 km | 8.10 | 8.16 | 7.61 |
-| 0–2 km | 3.18 | 2.73 | 2.54 |
-| Whole column | 91.56 | 92.65 | 92.47 |
+| 112–575 km | 2.52 | 0.00 | 2.19 |
+| 85–112 km | 1.69 | 0.01 | 1.25 |
+| 66–85 km | 4.49 | 2.24 | 3.12 |
+| 49–66 km | 11.95 | 14.06 | 13.87 |
+| 35–49 km | 16.53 | 18.60 | 17.81 |
+| 24–35 km | 16.56 | 18.61 | 17.60 |
+| 14–24 km | 14.71 | 15.88 | 14.92 |
+| 7–14 km | 11.79 | 12.36 | 11.56 |
+| 2–7 km | 8.11 | 8.16 | 7.61 |
+| 0–2 km | 3.19 | 2.73 | 2.54 |
+| Whole column | 91.54 | 92.65 | 92.47 |
 
-The rest of the gap is water's: with the Sun overhead the line-by-line water takes 9.2 W/m² at 66–85 km, just under the
-design column's 86 km tropopause, and PlaSim's 5.2, its pressure-weighted path counting about a quarter of the water
-there. In the middle-atmosphere column the misplaced sunlight is worth 0.88 K of ground as run and 0.31 K with the
-bands ([its account](../../atmosphere/middle_atmosphere/README.md#the-curved-airs-light-2026-10-14)).
+With the bands PlaSim's layers come within 0.97 W/m² rms of the line-by-line column's, against 1.71 W/m² as run. The
+rest of the gap is water's, about 2 W/m² that PlaSim puts at 35–66 km in place of 66–85 km and the lowest 7 km: with
+the Sun overhead the line-by-line water takes 9.2 W/m² at 66–85 km, just under the design column's 86 km tropopause,
+and PlaSim's 5.2. A pressure exponent on PlaSim's water path does not move it (`plasim_shortwave.py water`,
+[../results/gcm/shortwave_water_A28_dim5.json](../results/gcm/shortwave_water_A28_dim5.json)): a lower exponent counts
+more of the upper water, but most of what it adds falls at 49–66 km, where PlaSim already takes too much, and every
+exponent below 1 fits the layers worse. Lacis and Hansen's curve of growth takes sunlight from the first water it
+meets, while the line-by-line water's strongest lines go dark higher up and leave less for the layers below; and
+PlaSim's water multiplier also stands in for what its bands leave out, water's visible bands and the
+collision-induced bands low in the column. In the middle-atmosphere column the misplaced sunlight is worth
+0.88 K of ground as run and 0.19 K with the bands
+([its account](../../atmosphere/middle_atmosphere/README.md#the-curved-airs-light-2026-10-14)).
 
 **The 20-year test with the bands.** `A28_dim5_moon_geometry_gases` branches from the same restart with
 `--twilight full --gas-bands` and the multipliers refitted with them. Its years 10–19 against the design case's 20–29
