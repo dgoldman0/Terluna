@@ -81,6 +81,20 @@ def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
                {k: v for k, v in c.CASES[f'ring_{tag}_lsw'].items() if k not in ('build', 'purpose')}
 
 
+def test_the_corrected_rings_take_their_own_gcm_run_with_and_without_the_twilight():
+    run, years = c.CORRECTED_GCM
+    assert run != c.GCM_RUN and years[1] - years[0] == 9
+    for tag in ('45n', '45s'):
+        plain, lit = c.CASES[f'ring_{tag}_corrected'], c.CASES[f'ring_{tag}_corrected_twilight']
+        assert plain['gcm'] == lit['gcm'] == c.CORRECTED_GCM and 'gcm' not in c.CASES[f'ring_{tag}_lsw']
+        assert plain['build'] == 'moon_omp' and 'twilight' not in plain
+        assert lit['build'] == 'moon_omp_twilight' and lit['twilight'] == 'full'
+        # Apart from the GCM run, the build and the twilight they are the earlier 45-degree rings.
+        same = lambda case: {k: v for k, v in case.items() if k not in ('gcm', 'twilight', 'build', 'purpose')}
+        assert same(plain) == same(lit) == same(c.CASES[f'ring_{tag}_lsw'])
+        assert '3% dimmer shield' in plain['purpose'] and '5% dimmer' not in lit['purpose']
+
+
 def test_the_twilight_table_reads_as_the_hook_expects(tmp_path):
     product = c.HERE.parent / 'results' / 'gcm' / 'twilight.json'
     if not product.exists():

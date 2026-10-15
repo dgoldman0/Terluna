@@ -929,22 +929,32 @@ and the curved air's test without the bands:
 
 **The new standard and the dimming that holds the design temperature.** With the curved air, the bands and the corrected
 ledger's terms as the runner's defaults, `A28_corrected_9655` branches from the design case's year-29 restart and
-`A28_corrected_9685` from its year 19. Their years 10–19 against the design case's 20–29:
+`A28_corrected_9685` from its year 19, and the new design case `A28_corrected_970` from that run's year 19. Their years
+10–19 against the old design case's 20–29:
 
-| | Design case | Scale 0.9655 | Scale 0.9685 |
-|---|---|---|---|
-| Surface temperature | 294.90 K | 294.40 K | 294.76 K, drifting 0.004 K a decade |
-| Air at 2 m | 294.37 K | 293.70 K | 294.02 K |
-| Cloud cover; in the top two layers | 23.5%; 4.2% and 8.5% | 20.1%; 0.2% and 5.3% | 19.9%; 0.2% and 5.5% |
-| Precipitation | 2.24 mm/day | 2.25 mm/day | 2.29 mm/day |
-| Sunlight taken by the ground; by the air | 120.6; 90.6 W/m² | 126.1; 101.1 W/m² | 126.1; 101.7 W/m² |
-| Water vapour | 176 kg/m² | 163 kg/m² | 167 kg/m² |
+| | Old design case | Scale 0.9655 | Scale 0.9685 | Scale 0.970, the design case |
+|---|---|---|---|---|
+| Surface temperature | 294.90 K | 294.40 K | 294.76 K, drifting 0.004 K a decade | 295.02 K, drifting 0.01 K a decade |
+| Air at 2 m | 294.37 K | 293.70 K | 294.02 K | 294.27 K |
+| Cloud cover; in the top two layers | 23.5%; 4.2% and 8.5% | 20.1%; 0.2% and 5.3% | 19.9%; 0.2% and 5.5% | 19.8%; 0.2% and 5.6% |
+| Precipitation | 2.24 mm/day | 2.25 mm/day | 2.29 mm/day | 2.31 mm/day |
+| Sunlight taken by the ground; by the air | 120.6; 90.6 W/m² | 126.1; 101.1 W/m² | 126.1; 101.7 W/m² | 126.3; 102.2 W/m² |
+| Water vapour | 176 kg/m² | 163 kg/m² | 167 kg/m² | 170 kg/m² |
 
 - **The design temperature needs a sunlight scale near 0.970**, a dimming of about 3.0% below the shield product in
   place of the design case's 5%. The two runs move 1.13 K for each 1% of sunlight, against 1.7–1.9 K in the dimming
   runs of the old radiation, and their cloud hardly changes between them.
 - **The rain comes back ahead of the temperature.** At 0.9685 the Moon rains 2.5% more than the design case while
   0.14 K cooler at the ground: the ground takes 5.6 W/m² more sunlight under the thinner high cloud.
+- **`A28_corrected_970` is the design case since 14 October**, the author having accepted it: 295.02 K at the ground
+  and 294.27 K at 2 m, 3.0% dimmer than the shield product, with 3.3% more rain than the old design case. It replaces
+  `A28_dim5_moon` as the source of the climatology and of the CM1 rings' forcing
+  ([the CRM's account](../crm/README.md#the-45-rings-on-the-corrected-radiations-design-case)).
+- **Its land is wetter.** Over land it rains 2.10 mm/day against 2.04; 40.3% of the land gets under 0.5 mm/day against
+  42.2%, and 41.7% over 2 mm/day against 39.2%. The gain lies poleward of 15°: 4% more rain at 15–30°, 12% more at
+  30–45° and 21% more at 45–60°, while the tropics keep theirs (`climatology A28_corrected_970:10-19`). The products
+  that read the old design case's climatology (geography's lakes and groundwater, the surface light, the canopy models)
+  still read `A28_dim5_moon`'s until they are regenerated.
 
 ### Cloud amount: what published models say
 

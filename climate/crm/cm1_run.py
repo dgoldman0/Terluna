@@ -857,14 +857,16 @@ def planet():
     return json.loads((HERE.parent / 'gcm' / 'products' / 'moon_gcm_configuration.json').read_text())['planet']
 
 
-def design_air():
-    """Carbon dioxide and oxygen mixing ratios of the design case's air, from its GCM run."""
-    progress = json.loads((HERE.parent / 'gcm' / 'runs' / GCM_RUN / 'progress.json').read_text())
+def design_air(run=None):
+    """Carbon dioxide and oxygen mixing ratios of the design case's air and its sunlight, from its GCM run (or
+    another run's)."""
+    run = run or GCM_RUN
+    progress = json.loads((HERE.parent / 'gcm' / 'runs' / run / 'progress.json').read_text())
     cfg = progress['configuration']
     gases = cfg['gases_bar']
     total = sum(gases.values())
     return dict(co2=gases['pCO2'] / total, o2=gases['pO2'] / total, surface_pa=cfg['pressure_pa'],
-                sunlight_w_m2=progress['inputs']['flux_w_m2'], run=GCM_RUN)
+                sunlight_w_m2=progress['inputs']['flux_w_m2'], run=run)
 
 
 # The curved air's light (climate/gcm/twilight.py): RRTMG lights a column only while its Sun is up and lets each
@@ -1127,6 +1129,19 @@ for _tag in ('45n', '45s'):
     CASES[f'ring_{_tag}_lsw_twilight'] = dict(
         CASES[f'ring_{_tag}_lsw'], build='moon_omp_twilight', twilight='full',
         purpose=CASES[f'ring_{_tag}_lsw']['purpose'] + ', with the curved air\'s twilight and side light '
+                '(climate/results/gcm/twilight.json)')
+# The 45-degree rings on the design case of the GCM's corrected radiation (the curved air's light and infrared, CO2
+# and O2 in its sunlight; 2026-10-14), at the sunlight scale of 0.970 that holds the design temperature, with and
+# without the curved air's terms in CM1: a case's 'gcm' run gives its reference, vertical wind, land and sunlight.
+CORRECTED_GCM = ('A28_corrected_970', (10, 19))
+for _tag in ('45n', '45s'):
+    CASES[f'ring_{_tag}_corrected'] = dict(
+        CASES[f'ring_{_tag}_lsw'], gcm=CORRECTED_GCM,
+        purpose=CASES[f'ring_{_tag}_lsw']['purpose'].replace('the 5% dimmer shield', 'the 3% dimmer shield')
+        .replace("the GCM design case's", "the corrected radiation's design case's"))
+    CASES[f'ring_{_tag}_corrected_twilight'] = dict(
+        CASES[f'ring_{_tag}_corrected'], build='moon_omp_twilight', twilight='full',
+        purpose=CASES[f'ring_{_tag}_corrected']['purpose'] + ', with the curved air\'s twilight and side light '
                 '(climate/results/gcm/twilight.json)')
 
 
@@ -2312,6 +2327,12 @@ def setup(name: str) -> Path:
         raise RuntimeError(f'build {cfg["build"]} first')
     build_record = json.loads((exe.parent / 'build.json').read_text())
     air, gravity = build_record['air'], build_record['gravity_m_s2']
+    run, years = cfg.get('gcm', (GCM_RUN, GCM_YEARS))
+    if run != air.get('run'):                     # the run's sunlight, in a build compiled with the same air
+        own = design_air(run)
+        if abs(own['co2'] - air['co2']) > 1e-12 or abs(own['o2'] - air['o2']) > 1e-12:
+            raise RuntimeError(f"build {cfg['build']} holds the air of {air.get('run')}, not of {run}")
+        air = dict(air, sunlight_w_m2=own['sunlight_w_m2'], run=run)
     case = RUNS / name
     if (case / 'progress.json').exists():
         raise RuntimeError(f'{case} has started; remove it to set up afresh')
@@ -2333,8 +2354,8 @@ def setup(name: str) -> Path:
     nz = len(zw) - 1
     track = tilted_path(nx, cfg['tilt_deg'], cfg['node_deg']) if tilted else None
     site = box_site(cfg, zw, nx_ring) if box else None
-    ref = (gcm_path_reference(track['lat'], track['lon'], cfg['tilt_deg'], zw) if tilted else site['ref'] if box
-           else gcm_equator_profile(band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude))
+    ref = (gcm_path_reference(track['lat'], track['lon'], cfg['tilt_deg'], zw, run, years) if tilted else site['ref']
+           if box else gcm_equator_profile(run, years, band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude))
     zh = 0.5 * (np.array(zw[1:]) + np.array(zw[:-1]))
     prof = ref['profile']
     zg = np.array(prof['z_m'][::-1]) * s                                  # GCM levels, bottom first
@@ -2420,7 +2441,7 @@ def setup(name: str) -> Path:
         vertical_wind = dict(z_m=[float(z) for z in zw], path_mean_m_s=[float(v) for v in wc.mean(axis=0)],
                              min_m_s=float(wc.min()), max_m_s=float(wc.max()), rows_deg=ref['rows_deg'])
     elif cfg.get('large_scale_w') == 'gcm':
-        vertical_wind = gcm_vertical_wind(latitude, cfg.get('band_deg', EQUATOR_BAND_DEG))
+        vertical_wind = gcm_vertical_wind(latitude, cfg.get('band_deg', EQUATOR_BAND_DEG), run, years)
         write_vertical_wind(case / 'terluna_wls.txt', vertical_wind, zw[-1])
     day_night = None
     if box and cfg.get('day_night'):                                      # the rings' day-night circulation there
@@ -2461,7 +2482,8 @@ def setup(name: str) -> Path:
                   grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1], **(dict(ny=cfg['ny']) if box else {})),
                   site=dict(cfg['site'], ring_columns=site['columns'], land_share=site['land_share'], wetness=site['wetness'],
                             wetness_class=wetness_class(site['wetness']), ground_k=site['ground_k']) if box else None,
-                  build=build_record, reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
+                  build=build_record, gcm=dict(run=run, years=list(years)), air=air,
+                  reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
                   path=dict(tilt_deg=cfg['tilt_deg'], node_deg=cfg['node_deg'], lat=[round(float(v), 4) for v in track['lat']],
                             lon=[round(float(v), 4) for v in track['lon']], dlon=[round(float(v), 4) for v in track['dlon']])
                   if tilted else None,

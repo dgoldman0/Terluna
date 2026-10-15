@@ -359,6 +359,29 @@ corrected ledger has replaced them ([the GCM's account](../gcm/README.md#the-cur
 is running again with its corrected radiation, which changes the air above 8–16 km that the rings are held to. The
 rings wait for both.
 
+### The 45° rings on the corrected radiation's design case
+
+Cases `ring_45n_corrected` and `ring_45s_corrected` run the 45° rings on the design case of the GCM's corrected
+radiation, `A28_corrected_970` years 10–19 ([the GCM's account](../gcm/README.md#the-curved-airs-light)), and
+`ring_45n_corrected_twilight` and `ring_45s_corrected_twilight` the same with the curved air's terms from the corrected
+ledger. A case's `gcm` setting names the run whose reference profile, vertical wind, land wetness and sunlight its setup
+takes. The builds keep the air they were compiled with, which the setup checks against the run's; it is the same, so
+only the sunlight moves, to 1,198 W/m² from 1,173. Against the twilight rings above they differ in:
+
+- **the forcing**: seas of 22.9 °C at 45° N and 23.4 °C at 45° S, land ground at sea level 22.0 °C and 21.9 °C, about
+  0.2–0.3 K warmer, and the land's wetness 0.014 and 0.046 against 0.012 and 0.036;
+- **the twilight table**, the corrected ledger's (its channels keep the heights of the absorbed sunlight);
+- **the controls**, the same rings on the build without the twilight hook.
+
+The water along the circles, the air, the grid and every other setting are the earlier rings'. Two model hours of each
+ran clean before the queue. The four run one after another on 6 threads, in blocks of two hours with half an hour's rest
+after each:
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected          # and the other three
+/media/projectspace/terluna-research/session-tools/corrected_rings.sh                 # the four; rerun to resume
+```
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored
