@@ -94,7 +94,11 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
    work's living waters. **Done 13 October** ([sea chemistry](../research/studies/sea_chemistry/README.md)), through
    the billion years: left alone the seas turn alkaline and fill with sediment and their own deposits within millions
    of years, and every lasting state is a held one, with fresh, brackish or salted seas kept where the delivery sets
-   them by calcite, a magnesium route, soda works and silica-building life, and the sediment returned.
+   them by calcite, a magnesium route, soda works and silica-building life, and the sediment returned. Followed on
+   15 October
+   ([closed lakes and salt seas](../research/studies/sea_chemistry/README.md#closed-lakes-soda-lakes-and-salt-seas)):
+   the Moon's closed lakes turn to soda, ocean-like water needs its chlorine brought, and the author leans to
+   aquariums for saltwater life, with the soda lakes left as their own local ecosystems. Open: salt seas or aquariums.
 10. **A geochemical map of the Moon's rock.** Elements by region on the atlas, separating dry ground from the flooded
    high-titanium basalts and KREEP. That sets what can be mined before flooding, and where the summit's steel and the
    shield's titania come from.
@@ -115,3 +119,20 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
     drainage oxidizes.
 15. **Earth's share.** The conservation principle weighs the project's effects on Earth as part of its costs. The
     ledger should carry them.
+16. **The shores' water table, groundwater stage 4.** The 15 km solver has no shores. The fresh seas feed the water
+    table under every shore, and at lunar gravity plants by the water draw on it from 15–25 m above the sea
+    ([geography's screen](../geography/README.md#shores-by-the-fresh-seas)). How wide and how lush the belts are, what
+    the ground can supply, where the sea's load settles and which small islands stay wooded throughout set the
+    shores' ecology and Jura Island's cover. The author asked on 15 October for the shorelines to be weighed more.
+
+    **How:** cross-shore water tables at tens of metres along the atlas's coasts, the sea a fixed head with its
+    monthly tide, the plants' draw from the climate's demand, the capillary reach at lunar gravity and the load's
+    balance; by latitude, shore slope and ground, with Jura Island as the worked case. Minutes on one core.
+17. **The delivered water's own chlorine.** The sea chemistry delivers pure water. Ice like comet 67P's carries about
+    1% of seawater's chloride, which has no sink: delivered as it comes it would hold the seas near 0.28 g/kg of
+    chloride, about 0.5–0.6 g/kg in all with the cations that balance it, at the line between fresh and brackish
+    water, and the shores' soils would gather it where plants draw. Cleaned out, it keeps the seas at 0.14 g/kg and
+    yields chlorine for salt water.
+
+    **How:** the sea chemistry with a chlorine-bearing delivery, and the chlorine's balance in the extraction plan
+    (question 2).

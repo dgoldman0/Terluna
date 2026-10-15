@@ -310,6 +310,43 @@ water tables and wetlands, which would lower the seepage in the dry belt. The la
 is at its most. Flow through the deep crust; the water table's own changes through time, the young states being
 steady at each time; and the maria's basalt.
 
+### Shores by the fresh seas
+
+15 October 2026, a *screen* of the water table under the shores, which the 15 km solver leaves out; the author asked
+for the shorelines and the seas' freshness to be weighed more. The shore study at tens of metres is
+[resources' question 16](../resources/questions.md).
+
+- **The sea feeds the shore's water table.** Under a salt sea, fresh groundwater floats on seawater as a lens reaching
+  about 40 times as far below sea level as its water table stands above it (the Ghyben–Herzberg relation, set by the
+  two densities and so the same at any gravity), and plants that draw on it pull salt water up. Under the held fresh
+  seas the crust is fresh to its base, the sea itself supplies the water table at the shore, and the spray carries no
+  salt.
+- **Lunar gravity lifts water higher in the soil and moves it more slowly through the ground.** In Gardner's
+  exponential soil, the height above the water table from which a soil still lifts a flux q to the roots is
+  ln(1 + εK/q)/(αε), with ε the ratio of lunar to Earth gravity (0.166) and the conductivity K and Gardner's α taken
+  in Earth's terms. A sandy loam (K 10⁻⁵ m/s, α 2 m⁻¹) lifts 3 mm a day from 11.7 m on the Moon and 2.8 m on Earth,
+  and a finer soil (α 1 m⁻¹) from 23 m and 5.7 m. The same rock conducts a sixth as well, so the sea's water moves
+  sideways through it six times more slowly; stage 2 already integrates at lunar gravity.
+- **Shore belts.** With 3–5 m of roots, plants draw on the water table from 15–25 m above the sea, against 6–10 m on
+  Earth, so on steep shores their belts are two to three times as wide. On flat shores the ground's supply sets the
+  width: a belt drawing E from the sea lowers the water table at its inland edge by EW²/2T, so at a metre a year and
+  stage 2's central 5×10⁻⁴ m²/s, with 10–20 m to spare, it is 0.56–0.79 km wide, and 1.8–2.5 km at ten times the
+  transmissivity, as in sandy ground. A freshwater shore on Earth, six times as transmissive with 4 m to spare, gives
+  0.87 km.
+- **Small islands.** The sea lies under the whole of a small island. Wooded throughout, a long island of half-width a
+  lowers its middle's water table by Ea²/2T: 8 m for an island a kilometre across at the central transmissivity and
+  32 m for one two kilometres across, a tenth of that in sandy ground. Low islands up to about a kilometre across in
+  ordinary ground, or a few kilometres in sand, can stay wooded from shore to shore on groundwater alone.
+- **The sea's load stays where the draw ends.** A metre a year at 0.14 g/kg leaves 140 g/m² a year. Most of it is
+  calcite, magnesium minerals and opal, a hardpan that cements about 18 cm of soil at 30% porosity each millennium.
+  Sodium and potassium are 2% of weathering's load ([sea chemistry](../research/studies/sea_chemistry/README.md)), so
+  salt in the harmful sense builds slowly. On the Okavango Delta's islands, whose water is fresher than the held seas
+  but carries more sodium beside its calcium, trees drawing the delta's water leave wooded rims round bare, salty
+  centres (McCarthy and Ellery 1994; *recalled*). Rain, the monthly tide (3.7 m typical on the Near-side Sea) or
+  flushing by people carries the load away.
+- **Jura Island.** Measured at LOLA's 16 px/deg on research/jura-island, only 2% of the island lies within 25 m of the
+  sea and its first 1–2 km inland stand a median 112 m up, so its belts are a rim of 1,100–2,600 km², 2–4.5% of it.
+
 ## The monthly tide
 
 Earth raises a tide on the Moon 12.9 m high at the sub-Earth point. Its permanent

@@ -61,6 +61,10 @@ it was read.
   returns to the air. While the crust fills, its floors take 129 Gt C of the waters' carbon down by year 10,000 and
   1,118 by a million years. The air's CO2 is held at 400 ppm here, so the resupply the carbon cycle sizes for its
   first 10,000 years runs on at that rate.
+- **Closed lakes turn to soda, and ocean-like water needs its chlorine brought** (15 October;
+  [below](#closed-lakes-soda-lakes-and-salt-seas)). A lake with no outlet in the dry belts becomes a soda lake at a pH
+  near 10, reaching the ocean's salinity in about 100,000 years at 10 m deep. Seawater's main salt has to come from off
+  the Moon: 36 Mt for each km³ of sea.
 
 ## The seas over a billion years
 
@@ -100,6 +104,72 @@ magnesium-soda water.
 
 Without their own deposits the seas would be full in 0.83–29 million years. When the seas fill, their water spreads
 over the low ground the sediment builds: the volume stays, and the deep basins go.
+
+## Closed lakes, soda lakes and salt seas
+
+15 October 2026. The author asked whether the load that gathers where plants by the fresh seas draw groundwater could
+make salt lakes, how such lakes would compare with Earth's ocean, and so whether ocean-like seas for saltwater life
+would come cheaply. This section answers from the study's results and published values (*screen*); the shores
+themselves are [geography's](../../../geography/README.md#shores-by-the-fresh-seas).
+
+- **A closed lake gathers what its rivers bring, and the Moon's water makes soda.** Weathering gives the waters
+  calcium, magnesium and 2% sodium and potassium, each with the carbonate that balances it, and almost no chloride or
+  sulphur. Its alkalinity exceeds its calcium, so on the chemical divides of evaporating waters (Hardie and Eugster
+  1970) a closed lake loses its calcium to calcite, its magnesium to clays and its silica to opal, and keeps its sodium
+  and potassium with carbonate. Rain from fresh seas brings no chloride, where on Earth sea spray salts even inland
+  rain. The Okavango's overflow ends in the Makgadikgadi Pans, whose brine is worked for both soda ash and common salt;
+  the Moon's pans would give soda alone.
+- **How fast.** The common-level waters and the lakes turn over once in about 1,900 years (13.8 million km³ against the
+  rivers' 7,240 km³ a year). A closed lake 10 m deep that evaporates 1.5 m a year turns over in 6.7, so it runs the
+  left-alone path roughly 290 times faster: 1 g/kg in 2,500–4,400 years, Earth's salinity as soda in 94,000–133,000
+  and a saturated soda brine in 0.8–1.0 million. A shallower lake goes faster in proportion to its depth. The scaling
+  leaves out the lake's own floor, its exchange with groundwater and the rain on it.
+
+  | | Earth's ocean | A closed lake on the Moon, in time | The held seas |
+  |---|---|---|---|
+  | Salinity | 35 g/kg | past 35 g/kg towards a saturated brine near 300 | 0.14 g/kg |
+  | Mainly | sodium chloride, magnesium sulphate | sodium carbonate and bicarbonate | calcium, magnesium bicarbonate |
+  | pH | 8.1 | about 10 | 8.3 |
+
+- **Soda lakes hold a rich, specialist life.** On Earth they are among the most productive waters: Arthrospira in
+  Lakes Bogoria and Natron feeds the lesser flamingos, Mono Lake's brine shrimp and alkali flies feed millions of
+  migrating birds, a tilapia lives in Lake Magadi at pH 10 and the pearl mullet in Lake Van's soda water (*Earth
+  evidence, recalled*). Corals, shellfish, sea urchins and nearly all sea fish need seawater's chloride, calcium and
+  magnesium at a pH near 8, which a soda lake lacks. The soda works can make one in years: a cubic kilometre at 30 g/kg
+  holds 30 Mt of soda, two years of the works' 15 Mt a year at the mature Moon's weathering.
+- **Ocean-like water needs its chlorine brought.** Seawater at 35.1 g/kg holds 36 Mt of salt per km³, 55% of it
+  chloride, which lunar rock cannot give. The separate seas, at the atlas's volumes:
+
+  | Sea | Volume | Salt for Earth's salinity |
+  |---|---|---|
+  | Moscoviense | 71,000 km³ | 2,600 Gt |
+  | Orientale | 75,000 km³ | 2,700 Gt |
+  | Humboldtianum | 331,000 km³ | 11,900 Gt |
+  | Smythii–Marginis | 351,000 km³ | 12,600 Gt |
+  | Near-side | 3.42 million km³ | 123,000 Gt |
+  | South Pole–Aitken | 4.84 million km³ | 174,000 Gt |
+
+  Chlorine is scarce off the Moon too. CI chondrites carry about 700 ppm (Lodders 2003), with several times as much
+  sodium, and comet 67P's ice carried hydrogen chloride at about 10⁻⁴ of its water (Dhooghe et al. 2017), about 1%
+  of seawater's chloride (*recalled*). At a few hundred ppm, the 10²⁰–10²¹ kg of small bodies the nitrogen plan
+  processes ([register](../../decisions.md), 9 October) hold 3×10¹⁶–7×10¹⁷ kg of chlorine, two to forty times what
+  the four smaller seas need (1.6×10¹⁶ kg), if it is kept. Aquariums need little: a million cubic metres of seawater
+  holds 36,000 t of salt.
+- **Once in, the salt stays.** Chloride has no sink but the floors' water, which delivered water of the sea's own
+  make-up replaces, and the four flows hold a salted sea at 35.1 g/kg and pH 8.0. Each separate sea is its own basin,
+  so salting one leaves the others fresh, and salting is simplest while a sea fills. A salt sea's own balance of
+  rivers and evaporation then sets whether its rivers freshen it, and the sea phosphorus study finds Orientale and the
+  crater waters taking much of the rivers' flow. Its shores turn Earth-like, with a salt wedge under them and salt in
+  the spray.
+- **The author's direction.** The seas stay fresh or near fresh, the author leaning to aquariums for saltwater life,
+  and the soda lakes stay as their own local ecosystems
+  ([register](../../decisions.md#salt-water-and-the-fresh-seas-15-october-2026)).
+- **Open: the delivered water's own chlorine.** This study delivers pure water. Ice like 67P's carries about
+  0.28 g/kg of chloride. Delivered as it comes, it would hold the seas near that, about 0.5–0.6 g/kg in all with the
+  cations that balance it, at the line between fresh and brackish water, and the shores' soils would gather it where
+  plants draw ([resources' question 17](../../../resources/questions.md)). Cleaning it from the water keeps the seas on
+  this study's path and yields chlorine for salt water. The land's closed lakes stay soda lakes either way, since
+  evaporation leaves the seas' salts behind and only spray carries them inland.
 
 ## How it is set up
 

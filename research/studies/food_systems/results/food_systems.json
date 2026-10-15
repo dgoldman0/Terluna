@@ -3,7 +3,7 @@
  "producer": {
   "study": "food_systems",
   "files": {
-   "research/studies/food_systems/run.py": "a96d0cc899e53dd3",
+   "research/studies/food_systems/run.py": "f8aa91c9a75e31d5",
    "research/studies/food_systems/zones.py": "59f9cc439fcb8997",
    "research/studies/food_systems/parameters.py": "380459175e577004",
    "research/studies/food_systems/systems.py": "c049b3435c3e2763",
@@ -106,8 +106,8 @@
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "f0066e1164f1bbfc0a4af0a68fdaf8127e743cb8",
-    "sha256": "9bae21823b64dc41c1fdc5cd71123712437158161f74ffba9c92c547cb9c6e0a",
+    "blob": "f8128040cc59782959ed132629792d4b0a8ddce5",
+    "sha256": "80d3442e0333334f2e81b5a6e5f006241439483499ab9ea60aa6af10b18b7b6a",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The land's phosphorus through the rain-fed lakes to the seas: the dissolved input the common-level waters receive, and what the waters' life can spare to seaweed, fish and sorption."

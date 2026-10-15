@@ -3,7 +3,7 @@
  "producer": {
   "study": "distributions",
   "files": {
-   "research/studies/distributions/run.py": "0d1d6b292408c96a"
+   "research/studies/distributions/run.py": "af1199bd4cd9ba5f"
   },
   "constants": {
    "AU": 149597870700.0,
@@ -15,7 +15,7 @@
    "SPEED_OF_LIGHT": 299792458.0
   },
   "inputs": {
-   "research/studies/food_systems/results/food_systems.json": "763102ca18fe548e",
+   "research/studies/food_systems/results/food_systems.json": "a16a7ef31ea6e9b5",
    "research/studies/land_cities/results/land_cities.json": "f411a050227dbe9f",
    "research/studies/ways_of_living/results/ways_of_living.json": "b55285cd89077ee8",
    "research/studies/daily_life/results/daily_life.json": "de64289da4914fed",
@@ -32,8 +32,8 @@
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "f0066e1164f1bbfc0a4af0a68fdaf8127e743cb8",
-    "sha256": "9bae21823b64dc41c1fdc5cd71123712437158161f74ffba9c92c547cb9c6e0a",
+    "blob": "f8128040cc59782959ed132629792d4b0a8ddce5",
+    "sha256": "80d3442e0333334f2e81b5a6e5f006241439483499ab9ea60aa6af10b18b7b6a",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage recovery and the natural cycle kept beside them."
