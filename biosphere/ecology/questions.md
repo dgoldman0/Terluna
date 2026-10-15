@@ -60,7 +60,9 @@ on this laptop. The findings behind them are in the [README](README.md).
    arithmetic).
 
    **How:** add stomatal conductance and a soil water bucket to the plant model, forced by the GCM's rain and the
-   CM1–GCM range. Hours.
+   CM1–GCM range. Hours. By the fresh seas the water table is a second source: at lunar gravity soil lifts water to
+   roots from about four times Earth's height above it, so shore belts draw on the sea from 15–25 m up (15 October,
+   [Fresh shores and soda lakes](README.md#fresh-shores-and-soda-lakes-15-october-2026)).
 7. **Nitrogen and its metals.**
    - How much fixation the biomes need and can afford.
    - Which micronutrients must be imported. Molybdenum and vanadium are the first; boron, cobalt, selenium and
@@ -78,7 +80,9 @@ on this laptop. The findings behind them are in the [README](README.md).
    so the map will show how much of the mix water and light provide. It will also show whether temperature needs a
    lever, such as window films that dim some latitudes more than others.
 
-   **How:** zoning on committed products; the lever is a question for the shield and climate work.
+   **How:** zoning on committed products; the lever is a question for the shield and climate work. The map also
+   carries the shore belts fed by the fresh seas (resources' question 16, the shores' water table) and the soda lakes
+   of the dry belts' closed basins: how many there are and where.
 10. **The waters as living systems.**
    - The seas' chemistry through time and the delivered water's salts, with the resources domain. Done there on
      13 October (research/studies/sea_chemistry on domain/resources): every lasting state is a held one, and the
@@ -96,6 +100,13 @@ on this laptop. The findings behind them are in the [README](README.md).
      do, or springs carrying twice the rivers' load.
    - Stratification and oxygen in deep crater lakes.
    - Monthly plankton cycles, intertidal monthly wetlands, and methane from lakes by depth.
+   - Soda lakes, which the author takes as their own local ecosystems (15 October): their communities for the Moon's
+     nearly chloride-free soda at a pH near 10, from Earth's soda-lake producers, grazers, birds and the few fish that
+     live in them, and how they change as a lake concentrates over its thousands of years.
+   - The fresh shores: the belts on the sea's water table, the monthly freshwater tidal marsh, small islands wooded
+     throughout, and the hardpan where the draw ends.
+   - Saltwater life, for which the author leans to aquariums over salt seas: which marine life is kept, and in what
+     volumes.
 
    **How:** a one-dimensional lake model through the lunar month, with the seas' composition as scenarios.
 11. **What may live wild.** Pollen and spores spread Moon-wide, and no containment is demonstrated for wild engineered

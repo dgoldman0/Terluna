@@ -153,6 +153,49 @@ every way of joining the two that was offered
   balanced middle of three pairs weighed: 3.58 W/m², answered by 1.69% added dimming, with biology cutting most of
   each source and removal from open air taking the rest.
 
+## Fresh shores and soda lakes, 15 October 2026
+
+The author asked how lush the shores of fresh seas could be with lunar gravity's help, and then whether the load that
+gathers where plants draw groundwater could make salt lakes. The water's side is on domain/resources (geography's
+shore screen and the sea chemistry's closed lakes) and Jura Island's numbers on research/jura-island; these are the
+living world's side. All are screens.
+- **Fresh seas make green shores under desert skies.** The held seas, 0.14 g/kg, feed the water table under every shore
+  with fresh water: no salt wedge rises under the shore when plants draw on it, and the spray waters what grows by the
+  sea. Earth's analogues are the shores of its great lakes and the tidal reaches of its big rivers above the salt. The
+  monthly tide, 3.7 m typical on the Near-side Sea, floods and drains a band of every shore once a month, a freshwater
+  tidal marsh on the month's beat (finding 18).
+- **Lunar gravity helps the roots and slows the ground.** Soil lifts a few millimetres a day to roots from about four
+  times Earth's height above the water table, 12 m against 3 m in a sandy loam, and a 50 m tree holds its water column
+  up with 0.08 MPa against Earth's 0.49. The sea's water moves sideways through the same rock six times more slowly.
+  On steep shores the belts reach 15–25 m above the sea, against 6–10 m on Earth, and so run two to three times as
+  wide; on flat shores the ground's supply holds them to 0.6–2.5 km, about Earth's width.
+- **Small low islands can be wooded throughout.** The sea lies under the whole of them. Up to about a kilometre across
+  in ordinary ground, or a few kilometres in sand, groundwater alone keeps them green from shore to shore. Where the
+  draw ends, in the middle, the sea's load settles as a hardpan of limestone, magnesium minerals and opal, cementing
+  about 18 cm of soil a millennium under a metre a year's draw. Salt builds slowly, since sodium and potassium are 2%
+  of the load. The Okavango Delta's islands, whose water is fresher but carries more sodium, show the end state left
+  alone: wooded rims round bare, salty centres (McCarthy and Ellery 1994; *recalled*). Rain, the tide or flushing keep
+  the middles green.
+- **High islands catch less cloud than Earth's.** Rising air cools by 1.6 K a kilometre at lunar gravity against
+  Earth's 9.8, so for the same humidity cloud bases stand six times higher, and a 2.7 km island lifts air as a 450 m
+  hill would on Earth. A high island's green comes mostly from the sea beneath it. Jura Island's box will show whether
+  its arc catches cloud. *Derived; to test.*
+- **Closed lakes become soda lakes, a biome of the dry belts.** The Moon's water carries calcium, magnesium and a
+  little sodium with carbonate and almost no chloride, and rain from fresh seas brings none, so a lake with no outlet
+  loses its calcium, magnesium and silica to its floor and keeps sodium carbonate. One 10 m deep reaches 1 g/kg in a
+  few thousand years and the ocean's salinity, as soda at a pH near 10, in about 100,000, and the soda works could
+  make one in years. On Earth soda lakes are among the most productive waters, with a specialist life: Arthrospira
+  feeding lesser flamingos at Bogoria and Natron, brine shrimp and alkali flies feeding millions of migrating birds at
+  Mono Lake, a tilapia at pH 10 in Magadi and the pearl mullet in Lake Van (*Earth evidence, recalled*). The author
+  takes them as their own local ecosystems, a biome that may be fairly common on the Moon
+  ([register](../../research/decisions.md#soda-lakes-15-october-2026)).
+- **Saltwater life needs its chlorine brought.** Ocean-like seas take 36 Mt of salt per km³, 55% of it chloride that
+  lunar rock cannot give: 2,600 Gt for Moscoviense, the smallest separate sea, and 12,600 for Smythii–Marginis. The
+  author leans to aquariums, where a million cubic metres takes 36,000 t (open, resources' register).
+- **The climate runs' land hides all of it.** Every run's land is bare placeholder ground at one dryness, with no water
+  table and no plants, so no grid shows a green shore. The cover has to come from the plants and the groundwater
+  ([questions](questions.md), items 6, 9 and 10).
+
 ## What the project already says
 
 Each finding below follows from results the repository already holds, read together, with the literature that
