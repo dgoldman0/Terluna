@@ -431,6 +431,22 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_jura
 /media/projectspace/terluna-research/session-tools/box_jura.sh                        # rerun to resume
 ```
 
+**What the box leaves out.**
+- **The land.** It is the placeholder land, bare and at one dryness everywhere, and its slab soil keeps a fixed
+  moisture availability, so rain never wets it. The shore belts the fresh sea feeds, the gardens and the plants are
+  missing; the [island study](../../research/studies/jura_island/README.md) sizes the belts at 2–4.5% of the island.
+- **The sea.** It holds one temperature, the bay and the open sea alike.
+- **The air above.** From 8 km up it is held to the design case's mean over the whole 45° N row, and the sinking and
+  the day-night circulation are imposed from the row and the flat-land ring, so the island cannot feed back on them.
+  The GCM behind them keeps PlaSim's Earth-tuned clouds, and the base design case carries no reduced gases, glow or
+  their dimming.
+- **Resolution and size.** The 6 km spacing smooths the arc to 2,135 m against LOLA's 2,717 m at 16 px/deg and
+  resolves sea-breeze fronts and storms only coarsely. The periodic edges put copies of the island 140–200 km beyond
+  its outer coasts. Two lunar days give one analysed day.
+- **The physics.** RRTMG takes the Sun's own spectrum scaled to 1,198 W/m², and the twilight table comes from one clear
+  design column. The boundary layer is Earth's empirical scheme run at lunar gravity. Cloud drops have a fixed number,
+  with no aerosols, lightning or tides, and earthshine is left out.
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored
