@@ -382,6 +382,22 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected    
 /media/projectspace/terluna-research/session-tools/corrected_rings.sh                 # the four; rerun to resume
 ```
 
+**The north pair** (`python -m climate.crm.ring_analysis ring_45n_corrected_twilight --from-day 29.5`, and the
+control, [ring_ring_45n_corrected_twilight.json](../results/crm/ring_ring_45n_corrected_twilight.json) and
+[ring_ring_45n_corrected.json](../results/crm/ring_ring_45n_corrected.json)), over the second lunar day:
+
+- **The curved air's light changes the ground by hundredths of a kelvin.** Over land the air at 2 m is 0.015 K cooler
+  at dusk twilight, 0.021 K cooler by day and 0.013 K warmer in the deep night, with the same sign and size over each
+  half of the lunar day. Humidity moves by tenths of a percent and the air aloft by 0.03–0.08 K, warmer near 100 km at
+  dusk and cooler there at night. Both rings are held above 8–16 km to the same corrected GCM state, which already
+  carries the twilight's large-scale effect, so the pair measures its local effect through the day.
+- **On the design ground the ring is a desert.** Against the old ring on the over-wet ground: no rain against
+  0.31 mm/day over land, no fog against 4.1% of samples, cloud over 1.4% of the land against 6.9%, land evaporating
+  0.18 mm/day against 1.97. The air over land reaches 37.8 °C at its warmest local time against 30.3 °C, and 39.2 °C in
+  the hottest 1% of samples; it falls to 17.2 °C at its coolest. Nights run 75% humid with dewpoints near 15.9 °C
+  against 96% and 19.5 °C, days 38% against 62%, the highest wet bulb is 25.5 °C, and the mixed layer reaches 13.2 km
+  by day against 7.1 km. The fog-desert nights the old rings showed belonged to their wet ground.
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored
