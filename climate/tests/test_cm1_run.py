@@ -68,7 +68,8 @@ def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     name, marker, edits = c.TWILIGHT_PATCH
     assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)
     assert c.BUILD_PATCHES['moon_omp_twilight'] == [c.TWILIGHT_PATCH] and c.BUILDS['moon_omp_twilight'] == c.BUILDS['moon_omp']
-    assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != 'moon_omp_twilight')
+    with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight'}               # the rings', and Jura's box
+    assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label not in with_hook)
     sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
     added = ''.join(new for _, new, _ in sun[2])
     # It extends the lines the Sun's patch writes, which the build applies first.
@@ -785,6 +786,8 @@ def test_a_box_on_a_parallel_ring_takes_the_rows_reference_and_the_columns_round
 def test_the_jura_box_is_the_island_and_its_sea_on_the_corrected_design_case():
     box = c.CASES['box_jura']
     assert box['kind'] == 'box' and (box['nx'], box['ny']) == (100, 90) and box['gcm'] == c.CORRECTED_GCM
-    assert box['terrain']['sea'] and box['build'] == 'moon_omp_terrain_sea'
-    assert box['site']['ring'] == 'ring_45n_corrected' and box['day_night']['rings'] == ('ring_45n_corrected',)
-    assert 'twilight' not in box
+    assert box['terrain']['sea'] and box['build'] == 'moon_omp_terrain_sea_twilight' and box['twilight'] == 'full'
+    assert box['site']['ring'] == 'ring_45n_corrected' and box['day_night']['rings'] == ('ring_45n_corrected_twilight',)
+    assert c.BUILD_PATCHES[box['build']] == c.TERRAIN_PATCHES + [c.SEA_COLUMNS_PATCH, c.TWILIGHT_PATCH]
+    # the hook places each shell by its column's own face heights, which over terrain stand on the column's ground
+    assert any('zf(i,j,k+1)' in new for _, new, _ in c.TWILIGHT_PATCH[2])

@@ -412,18 +412,21 @@ its atlas heights (up to 2,135 m at the box's spacing, a mean of 630 m), the atl
 level, held at the design case's 296.1 K; the land is the placeholder land at the GCM's wetness there (0.014). The
 reference is the corrected radiation's design case on the 45° N row, held from 8 km above each column's ground, with
 the row's mean vertical wind at each column's height, the Coriolis force of 45° and the day-night circulation of
-`ring_45n_corrected`; the sunlight is 1,198 W/m². It has no twilight hook, whose local effect the 45° N pair put at
-hundredths of a kelvin.
+`ring_45n_corrected_twilight`; the sunlight is 1,198 W/m². It carries the curved air's twilight from the corrected
+ledger, so the box is complete, although the 45° N pair put its local effect at hundredths of a kelvin. The hook
+places each shell's share by its column's own face heights, so a column on high ground takes the shells above its
+ground.
 
 Two pieces of the setup are new. A box can extend a ring along a circle of latitude, taking that ring's GCM row as its
 reference (`parallel_box_site`, and `ring_crossings.ring_position` for the day-night forcing). The build
 `moon_omp_terrain_sea` makes the two-dimensional surface's water columns sea for CM1's surface layer
 (`SEA_COLUMNS_PATCH`): the terrain build keeps the domain's land flag, under which a water column would run the soil
-with water's properties. In two model hours of a test run every water column was sea and every land column land, and
-the sea held its temperature. The box runs in two-hour blocks on 6 threads with half an hour's rest after each:
+with water's properties. `moon_omp_terrain_sea_twilight` adds the twilight hook to it. In two model hours of a test
+run every water column was sea and every land column land, the sea held its temperature and every field stayed
+finite. The box runs in two-hour blocks on 6 threads with half an hour's rest after each:
 
 ```sh
-climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_terrain_sea
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_terrain_sea_twilight
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_jura
 /media/projectspace/terluna-research/session-tools/box_jura.sh                        # rerun to resume
 ```

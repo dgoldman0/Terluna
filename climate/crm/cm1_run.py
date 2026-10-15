@@ -1009,6 +1009,10 @@ SEA_COLUMNS_PATCH = ('init_surface.F', 'Terluna: the two-dimensional surface wat
      'modulo(floor(yh(j)/dy),terluna_ny)+1).eq.16)   ! Terluna: the two-dimensional surface water columns are sea\n', 1)])
 BUILDS['moon_omp_terrain_sea'] = BUILDS['moon_omp_terrain']
 BUILD_PATCHES['moon_omp_terrain_sea'] = TERRAIN_PATCHES + [SEA_COLUMNS_PATCH]
+# The same with the curved air's twilight hook, which places each shell's share by its column's own face heights, so
+# over terrain a column takes the shells above its ground.
+BUILDS['moon_omp_terrain_sea_twilight'] = BUILDS['moon_omp_terrain']
+BUILD_PATCHES['moon_omp_terrain_sea_twilight'] = TERRAIN_PATCHES + [SEA_COLUMNS_PATCH, TWILIGHT_PATCH]
 
 # Electrified storms (stage 2 of the atmospheric-electricity study): WRF-ELEC's NSSL microphysics with the field,
 # lightning and leakage of climate/crm/cm1_elec.py, at the Moon's gravity and at Earth's for the benchmark storm.
@@ -1327,16 +1331,18 @@ CASES['box_highland_own_height'] = dict(
 # and 25.4-46.9 W in the 28% scenario's atlas, as a 3-D box about the island's centre at the 45 N ring's spacing,
 # 599 by 539 km, so 70-100 km of sea lie beyond its outer coasts: the island at its heights, the sea and islets round
 # it from the atlas, the corrected radiation's design case as reference, and the day-night circulation of the 45 N
-# ring on the same design case. The box has no twilight hook, whose local effect the 45 N pair put at hundredths of a
-# kelvin.
+# twilight ring on the same design case, with the curved air's twilight added to RRTMG, so the box is complete,
+# although the 45 N pair put the twilight's local effect at hundredths of a kelvin.
 CASES['box_jura'] = dict(
     CASES['box_0e'], nx=100, ny=90, site=dict(ring='ring_45n_corrected', lat_deg=45.0, lon_deg=323.875, radius_m=100.0e3),
-    day_night=dict(rings=('ring_45n_corrected',), from_day=29.5, wavenumbers=5, bins=36, harmonics=4, top_m=16000.0),
-    build='moon_omp_terrain_sea', terrain=dict(half_width_deg=0.125, passes=2, taper_km=50.0, sea=True),
-    gcm=CORRECTED_GCM, surface_output=True,
+    day_night=dict(rings=('ring_45n_corrected_twilight',), from_day=29.5, wavenumbers=5, bins=36, harmonics=4,
+                   top_m=16000.0),
+    build='moon_omp_terrain_sea_twilight', twilight='full',
+    terrain=dict(half_width_deg=0.125, passes=2, taper_km=50.0, sea=True), gcm=CORRECTED_GCM, surface_output=True,
     purpose='Jura Island, the arc of Montes Jura round the flooded Sinus Iridum (box centre 45.0 N, 36.1 W), as a 3-D '
             'box 599 by 539 km with the island at its heights and the atlas\'s sea and islets round it, the 3% dimmer '
-            'shield, the corrected radiation\'s design case as reference and the 45 N ring\'s day-night circulation')
+            'shield, the corrected radiation\'s design case as reference, the 45 N twilight ring\'s day-night '
+            'circulation and the curved air\'s twilight and side light (climate/results/gcm/twilight.json)')
 # The benchmark storm of the electrified build (stage 2 of the atmospheric-electricity study): CM1's own supercell
 # (Weisman and Rotunno 2000: the Weisman and Klemp sounding, the quarter-circle hodograph, a warm bubble, 1 km spacing,
 # 120 km square, two hours) at Earth's gravity, with WRF-ELEC's NSSL microphysics with hail, its default charging, its
