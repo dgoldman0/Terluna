@@ -398,6 +398,36 @@ control, [ring_ring_45n_corrected_twilight.json](../results/crm/ring_ring_45n_co
   against 96% and 19.5 °C, days 38% against 62%, the highest wet bulb is 25.5 °C, and the mixed layer reaches 13.2 km
   by day against 7.1 km. The fog-desert nights the old rings showed belonged to their wet ground.
 
+## Jura Island
+
+Jura Island is the arc of Montes Jura, with the craters Sharp and Louville, round the flooded Sinus Iridum: 58,357 km²
+at 38.4–51.6° N and 25.4–46.9° W in the 28% scenario's atlas, its summit 2,514 m above the sea at 45.6° N, 39.4° W.
+Small islets lie within 10–100 km of its coasts and La Condamine Island (519 km²) 32 km off; larger land begins about
+250 km out. Lunokhod 1 and Luna 17 lie 865 m down 61 km off its coast, a proposed undersea heritage community
+([conservation](../../research/studies/conservation/README.md#9-candidate-community-settings)).
+
+Case `box_jura` is a 3-D box about the island's centre (45.0° N, 36.1° W), 100 by 90 columns at the 45° N ring's
+5,993 m, 599 by 539 km, so 70–100 km of sea lie beyond its outer coasts before its periodic edges. The island stands at
+its atlas heights (up to 2,135 m at the box's spacing, a mean of 630 m), the atlas's sea and islets round it at sea
+level, held at the design case's 296.1 K; the land is the placeholder land at the GCM's wetness there (0.014). The
+reference is the corrected radiation's design case on the 45° N row, held from 8 km above each column's ground, with
+the row's mean vertical wind at each column's height, the Coriolis force of 45° and the day-night circulation of
+`ring_45n_corrected`; the sunlight is 1,198 W/m². It has no twilight hook, whose local effect the 45° N pair put at
+hundredths of a kelvin.
+
+Two pieces of the setup are new. A box can extend a ring along a circle of latitude, taking that ring's GCM row as its
+reference (`parallel_box_site`, and `ring_crossings.ring_position` for the day-night forcing). The build
+`moon_omp_terrain_sea` makes the two-dimensional surface's water columns sea for CM1's surface layer
+(`SEA_COLUMNS_PATCH`): the terrain build keeps the domain's land flag, under which a water column would run the soil
+with water's properties. In two model hours of a test run every water column was sea and every land column land, and
+the sea held its temperature. The box runs in two-hour blocks on 6 threads with half an hour's rest after each:
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_terrain_sea
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_jura
+/media/projectspace/terluna-research/session-tools/box_jura.sh                        # rerun to resume
+```
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored

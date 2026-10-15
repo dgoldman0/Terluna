@@ -999,6 +999,16 @@ BUILDS['moon_omp_earth_fall'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_earth_fall'] = [EARTH_FALL_PATCH]
 BUILDS['moon_omp_twilight'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_twilight'] = [TWILIGHT_PATCH]
+# Boxes over terrain with sea around it (2026-10-15, Jura Island): the terrain build's two-dimensional surface sets each
+# column's ground and land use but keeps the domain's land flag, so a water column would run CM1's soil with water's
+# properties. This build makes its water columns (land use 16) sea, whose surface temperature CM1 holds.
+SEA_COLUMNS_PATCH = ('init_surface.F', 'Terluna: the two-dimensional surface water columns are sea', [
+    ('            tsk(i,j) = terluna_tsk(modulo(floor(xh(i)/dx),terluna_nx)+1,modulo(floor(yh(j)/dy),terluna_ny)+1)\n',
+     '            tsk(i,j) = terluna_tsk(modulo(floor(xh(i)/dx),terluna_nx)+1,modulo(floor(yh(j)/dy),terluna_ny)+1)\n'
+     '            xland(i,j) = merge(2.0,1.0,terluna_lu(modulo(floor(xh(i)/dx),terluna_nx)+1,'
+     'modulo(floor(yh(j)/dy),terluna_ny)+1).eq.16)   ! Terluna: the two-dimensional surface water columns are sea\n', 1)])
+BUILDS['moon_omp_terrain_sea'] = BUILDS['moon_omp_terrain']
+BUILD_PATCHES['moon_omp_terrain_sea'] = TERRAIN_PATCHES + [SEA_COLUMNS_PATCH]
 
 # Electrified storms (stage 2 of the atmospheric-electricity study): WRF-ELEC's NSSL microphysics with the field,
 # lightning and leakage of climate/crm/cm1_elec.py, at the Moon's gravity and at Earth's for the benchmark storm.
@@ -1313,6 +1323,20 @@ CASES['box_highland'] = dict(
 CASES['box_highland_own_height'] = dict(
     CASES['box_highland'],
     purpose=CASES['box_highland']['purpose'] + ', the forcing held and applied at each column\'s own height')
+# Jura Island (2026-10-15): the 2.5 km arc of Montes Jura round the flooded Sinus Iridum, 58,000 km2 at 38.4-51.6 N
+# and 25.4-46.9 W in the 28% scenario's atlas, as a 3-D box about the island's centre at the 45 N ring's spacing,
+# 599 by 539 km, so 70-100 km of sea lie beyond its outer coasts: the island at its heights, the sea and islets round
+# it from the atlas, the corrected radiation's design case as reference, and the day-night circulation of the 45 N
+# ring on the same design case. The box has no twilight hook, whose local effect the 45 N pair put at hundredths of a
+# kelvin.
+CASES['box_jura'] = dict(
+    CASES['box_0e'], nx=100, ny=90, site=dict(ring='ring_45n_corrected', lat_deg=45.0, lon_deg=323.875, radius_m=100.0e3),
+    day_night=dict(rings=('ring_45n_corrected',), from_day=29.5, wavenumbers=5, bins=36, harmonics=4, top_m=16000.0),
+    build='moon_omp_terrain_sea', terrain=dict(half_width_deg=0.125, passes=2, taper_km=50.0, sea=True),
+    gcm=CORRECTED_GCM, surface_output=True,
+    purpose='Jura Island, the arc of Montes Jura round the flooded Sinus Iridum (box centre 45.0 N, 36.1 W), as a 3-D '
+            'box 599 by 539 km with the island at its heights and the atlas\'s sea and islets round it, the 3% dimmer '
+            'shield, the corrected radiation\'s design case as reference and the 45 N ring\'s day-night circulation')
 # The benchmark storm of the electrified build (stage 2 of the atmospheric-electricity study): CM1's own supercell
 # (Weisman and Rotunno 2000: the Weisman and Klemp sounding, the quarter-circle hodograph, a warm bubble, 1 km spacing,
 # 120 km square, two hours) at Earth's gravity, with WRF-ELEC's NSSL microphysics with hail, its default charging, its
@@ -1793,15 +1817,18 @@ def box_columns(lat0: float, lon0: float, heading_deg: float, nx: int, ny: int, 
     return np.degrees(lat), np.degrees(lon) % 360.0
 
 
-def box_heights(raw, dx: float, passes: int = 2, taper_m: float = 50.0e3) -> dict:
+def box_heights(raw, dx: float, passes: int = 2, taper_m: float = 50.0e3, wet=None) -> dict:
     """A box's ground heights (m, ny by nx) from the atlas's (atlas_heights), smoothed by `passes` of a 1-2-1 filter in
     x and in y and blended toward the mean of the box's edge columns over taper_m at each side (a cosine taper), so the
-    ground joins where the box wraps round; the largest slope and the heights' spread with them."""
+    ground joins where the box wraps round; the largest slope and the heights' spread with them. Columns that wet marks
+    as water keep their level."""
     import numpy as np
-    h = np.asarray(raw, dtype=float).copy()
+    raw = np.asarray(raw, dtype=float)
+    held = np.zeros(raw.shape, bool) if wet is None else np.asarray(wet, bool)
+    h = raw.copy()
     for _ in range(passes):
         for axis in (0, 1):
-            h = 0.25 * np.roll(h, 1, axis) + 0.5 * h + 0.25 * np.roll(h, -1, axis)
+            h = np.where(held, raw, 0.25 * np.roll(h, 1, axis) + 0.5 * h + 0.25 * np.roll(h, -1, axis))
     edge = float(np.concatenate([h[0], h[-1], h[1:-1, 0], h[1:-1, -1]]).mean())
     ny, nx = h.shape
 
@@ -1809,21 +1836,24 @@ def box_heights(raw, dx: float, passes: int = 2, taper_m: float = 50.0e3) -> dic
         d = np.minimum(np.arange(n) + 0.5, n - np.arange(n) - 0.5) * dx
         return np.where(d < taper_m, 0.5 * (1.0 - np.cos(np.pi * d / taper_m)), 1.0)
     w = weight(ny)[:, None] * weight(nx)[None, :]
-    h = np.maximum(edge + (h - edge) * w, 0.0)
+    h = np.where(held, raw, np.maximum(edge + (h - edge) * w, 0.0))
     slope = np.hypot((np.roll(h, -1, 1) - h) / dx, (np.roll(h, -1, 0) - h) / dx)
     return dict(heights=h, edge_m=edge, max_slope=float(slope.max()), p99_slope=float(np.percentile(slope, 99)),
                 min_m=float(h.min()), max_m=float(h.max()), mean_m=float(h.mean()))
 
 
-def box_site(cfg: dict, zw, nx_ring: int) -> dict:
+def box_site(cfg: dict, zw, nx_ring: int, run=GCM_RUN, years=GCM_YEARS) -> dict:
     """What a box takes from the ring it extends: the ring's GCM reference (upper air and wind along the ring), and
     over the ring's columns within the site's radius of it, the mean land wetness and ground temperature of the land
-    columns and the mean GCM vertical wind on the w levels zw."""
+    columns and the mean GCM vertical wind on the w levels zw. A ring along a circle of latitude gives its row's
+    reference (parallel_box_site)."""
     import numpy as np
     site = cfg['site']
     ring = CASES[site['ring']]
+    if ring.get('kind') != 'tilted':
+        return parallel_box_site(cfg, zw, nx_ring, ring, run, years)
     track = tilted_path(nx_ring, ring['tilt_deg'], ring['node_deg'])
-    ref = gcm_path_reference(track['lat'], track['lon'], ring['tilt_deg'], zw)
+    ref = gcm_path_reference(track['lat'], track['lon'], ring['tilt_deg'], zw, run, years)
     a, b = np.radians(site['lat_deg']), np.radians(track['lat'])
     cosd = np.sin(a) * np.sin(b) + np.cos(a) * np.cos(b) * np.cos(np.radians(track['lon'] - site['lon_deg']))
     centre = int(np.argmax(cosd))
@@ -1842,6 +1872,29 @@ def box_site(cfg: dict, zw, nx_ring: int) -> dict:
                 wetness=float(ref['wetness'][cols][land].mean()), ground_k=float(ref['land_k'][cols][land].mean()),
                 w_m_s=[float(v) for v in np.asarray(ref['w_columns'])[cols].mean(axis=0)],
                 heading_deg=float(heading % 360.0), lapse_k_m=float(np.asarray(ref['lapse_k_m'])[cols].mean()))
+
+
+def parallel_box_site(cfg: dict, zw, nx_ring: int, ring: dict, run=GCM_RUN, years=GCM_YEARS) -> dict:
+    """box_site for a ring along a circle of latitude: the GCM's reference on the ring's row as the ring takes it
+    (gcm_equator_profile, its sea surface, its land's wetness and ground carried to sea level, its lapse), the row's
+    mean vertical wind on the w levels zw, and the ring's columns within the site's radius; the box's x axis runs east
+    along the parallel."""
+    import numpy as np
+    site = cfg['site']
+    latitude, band = ring['latitude_deg'], ring.get('band_deg', EQUATOR_BAND_DEG)
+    if abs(site['lat_deg'] - latitude) > 2.0 * band:
+        raise ValueError(f"the site at {site['lat_deg']} degrees lies off {site['ring']} at {latitude} degrees")
+    ref = gcm_equator_profile(run, years, band=band, latitude=latitude)
+    wind = gcm_vertical_wind(latitude, band, run, years)
+    w = np.interp(zw, wind['z_m'], wind['w_m_s'], left=0.0, right=0.0)
+    length = 2.0 * math.pi * planet()['radius_m'] * math.cos(math.radians(latitude))
+    dx = length / nx_ring
+    gap = ((np.arange(nx_ring) + 0.5) * dx - (site['lon_deg'] % 360.0) / 360.0 * length + 0.5 * length) % length - 0.5 * length
+    cols = np.flatnonzero(np.abs(gap) <= site['radius_m'])
+    return dict(ref=dict(ref, sea_k=ref['sea_surface_k']), columns=[int(c) for c in cols], land_share=None,
+                surface_product=None, wetness=float(ref['land_wetness']), ground_k=float(ref['land_ground_k']),
+                w_m_s=[float(v) for v in w], heading_deg=90.0, lapse_k_m=float(ref['lapse_k_m']),
+                sea_k=float(ref['sea_surface_k']))
 
 
 def write_day_night(path: Path, forcing: dict) -> None:
@@ -2346,14 +2399,16 @@ def setup(name: str) -> Path:
         nx, dx = cfg['nx'], cfg['dx_moon_m'] * s
         length = nx * dx
     elif box:                                                             # the spacing of the ring it extends
-        nx_ring, dx, _ = ring_grid(0.0, cfg['dx_target_m'], cfg['ranks'])
+        host = CASES[cfg['site']['ring']]                              # a tilted ring's spacing is the equator's
+        nx_ring, dx, _ = ring_grid(0.0 if host.get('kind') == 'tilted' else host.get('latitude_deg', 0.0),
+                                   cfg['dx_target_m'], cfg['ranks'])
         nx, length = cfg['nx'], cfg['nx'] * dx
     else:
         nx, dx, length = ring_grid(latitude, cfg['dx_target_m'], cfg['ranks'])
     zw = [z * s for z in vertical_grid(**cfg['z_grid'])]
     nz = len(zw) - 1
     track = tilted_path(nx, cfg['tilt_deg'], cfg['node_deg']) if tilted else None
-    site = box_site(cfg, zw, nx_ring) if box else None
+    site = box_site(cfg, zw, nx_ring, run, years) if box else None
     ref = (gcm_path_reference(track['lat'], track['lon'], cfg['tilt_deg'], zw, run, years) if tilted else site['ref']
            if box else gcm_equator_profile(run, years, band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude))
     zh = 0.5 * (np.array(zw[1:]) + np.array(zw[:-1]))
@@ -2394,17 +2449,22 @@ def setup(name: str) -> Path:
     elif box:
         segments = [(-1e9, 1e9, 1, wetness_class(site['wetness']), site['ground_k'], site['ground_k'])]
         water_share, surface_sha = 0.0, site['surface_product']
-        if cfg.get('terrain'):                                            # the ground at its heights, all of it land
+        if cfg.get('terrain'):                    # the ground at its heights: all of it land, or with the atlas's sea
             t = cfg['terrain']
             blat, blon = box_columns(cfg['site']['lat_deg'], cfg['site']['lon_deg'], site['heading_deg'], nx, cfg['ny'], dx)
             raw, wet = atlas_heights(blat.ravel(), blon.ravel(), t['half_width_deg'])
-            shape = box_heights(raw.reshape(blat.shape), dx, t['passes'], t['taper_km'] * 1000.0)
+            sea = bool(t.get('sea'))
+            wet = wet.reshape(blat.shape) & sea
+            shape = box_heights(raw.reshape(blat.shape), dx, t['passes'], t['taper_km'] * 1000.0, wet if sea else None)
             heights = shape.pop('heights')
             np.asarray(heights, dtype='<f4').tofile(case / 'perts.dat')   # CM1's itern = 4: nx by ny reals, x fastest
             ground = site['ground_k'] - site['lapse_k_m'] * heights       # carried from sea level to each column's height
+            water = (site['sea_k'] - site['lapse_k_m'] * heights) if sea else ground   # the sea, and raised lakes
             row = wetness_class(site['wetness'])
             (case / 'terluna_surface2d.txt').write_text(f'{nx} {cfg["ny"]}\n' + ''.join(
-                f'{g:.3f} {g:.3f} {row:d}\n' for g in ground.ravel()))
+                f'{s:.3f} {s:.3f} 16\n' if w else f'{g:.3f} {g:.3f} {row:d}\n'
+                for g, s, w in zip(ground.ravel(), water.ravel(), wet.ravel())))
+            water_share = float(wet.mean())
             terrain = dict(t, source='the 28% scenario atlas, 0.25-degree cells', heading_deg=site['heading_deg'],
                            water_share=float(wet.mean()), lapse_k_m=site['lapse_k_m'], **shape)
     elif tilted:
