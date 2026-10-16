@@ -1295,6 +1295,13 @@ CASES['ring_45n_corrected_gcm_land'] = dict(
     CASES['ring_45n_corrected'], land={k: GCM_LAND[k] for k in ('roughness_cm', 'therin')},
     purpose=CASES['ring_45n_corrected']['purpose'] + ', its land given the GCM\'s roughness (2 m) and soil thermal '
             'inertia')
+# The confirming test of the heat budget (the author's go-ahead of 2026-10-16): ring_45n_corrected with the heat and
+# vapour the GCM's circulation carries sideways at 45 N imposed by height, the same at every hour through CM1's
+# large-scale advection, so the pair differs in that alone.
+CASES['ring_45n_corrected_sideways'] = dict(
+    CASES['ring_45n_corrected'], sideways=True,
+    purpose=CASES['ring_45n_corrected']['purpose'] + ', with the heat and vapour the GCM\'s circulation carries '
+            'sideways at that latitude imposed by height')
 # The rain test's box: box_0e_small's inputs as they were written, run with Earth's fall speeds, so the pair differs in
 # how fast rain, snow, graupel, ice and cloud droplets fall and in nothing else. Both keep the forcing of the GCM before
 # its correction, with which box_0e_small was set up.
@@ -1862,6 +1869,25 @@ def write_day_night(path: Path, forcing: dict) -> None:
                               for a, b in zip(th, qv)))
 
 
+def sideways_forcing(run, years, latitude, band, ref) -> dict:
+    """The heat and vapour the GCM's circulation carries sideways at a ring's latitude, as terluna_lsadv.txt takes
+    them in one local-time bin, so the same at every hour: the zonal-mean meridional circulation's advection and the
+    resolved eddies' flux convergence (ring_heat_budget.gcm_sideways), on the GCM's levels at its sea columns' heights
+    with a level at the ground holding the lowest level's values; theta tendencies (K/s), the temperature tendencies
+    over each level's Exner function, and vapour tendencies (kg/kg/s)."""
+    import numpy as np
+    from climate.crm.ring_heat_budget import gcm_sideways
+    g = gcm_sideways(run, years, latitude, band)
+    sigma = np.asarray(g['sigma'], float)
+    heat = (np.asarray(g['mean_meridional_k_day']) + np.asarray(g['eddies_k_day'])) / 86400.0      # K/s, top first
+    vapour = (np.asarray(g['vapour']['mean_meridional_g_kg_day'])
+              + np.asarray(g['vapour']['eddies_g_kg_day'])) / 8.64e7                              # kg/kg/s
+    exner = (sigma * ref['surface_pa_sea'] / 1.0e5) ** (287.04 / 1005.7)
+    z, th, qv = np.asarray(ref['profile']['z_m'], float)[::-1], (heat / exner)[::-1], vapour[::-1]   # ground first
+    return dict(z_m=np.r_[0.0, z], theta_k_s=np.r_[th[0], th][None, :], qv_kg_kg_s=np.r_[qv[0], qv][None, :],
+                rows_deg=g['rows_deg'])
+
+
 def write_vertical_wind_2d(path: Path, zw, w_columns) -> None:
     """terluna_wls2d.txt: the column and level counts, the level heights (m), then one line per column of its
     vertical wind (m/s), columns evenly spaced from x = 0."""
@@ -1919,7 +1945,8 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
         'param3': dict(fcor=float(f'{turning:.6e}'), rdalpha=round(gravity / EARTH_G / 300.0, 8), zd=0.77 * ztop,
                        l_inf=round(75.0 * EARTH_G / gravity, 1), ndcnst=cfg['droplets_cm3']),
         'param6': dict(stretch_z=4, ztop=ztop),
-        'param8': dict(**(dict(var11=1.0 if cfg.get('day_night') else 0.0) if box else {}),
+        'param8': dict(**(dict(var11=1.0 if cfg.get('day_night') else 0.0) if box
+                          else dict(var11=1.0) if cfg.get('sideways') else {}),
                        var12=cfg['tilt_deg'] if tilted else 0.0,
                        var13=(3.0 if box and cfg.get('terrain') else 2.0 if tilted else 1.0)
                        if cfg.get('large_scale_w') else 0.0,          # 3: at each column's own height
@@ -2454,6 +2481,14 @@ def setup(name: str) -> Path:
     elif cfg.get('large_scale_w') == 'gcm':
         vertical_wind = gcm_vertical_wind(latitude, cfg.get('band_deg', EQUATOR_BAND_DEG), run, years)
         write_vertical_wind(case / 'terluna_wls.txt', vertical_wind, zw[-1])
+    sideways = None
+    if cfg.get('sideways') and not (box or tilted):                      # the GCM's transport between latitudes
+        forcing = sideways_forcing(run, years, latitude, cfg.get('band_deg', EQUATOR_BAND_DEG), ref)
+        write_day_night(case / 'terluna_lsadv.txt', forcing)
+        low = forcing['z_m'] < 2000.0
+        sideways = dict(rows_deg=forcing['rows_deg'], lowest_2_km=dict(
+            theta_k_day=float(forcing['theta_k_s'][0, low].mean() * 86400.0),
+            qv_g_kg_day=float(forcing['qv_kg_kg_s'][0, low].mean() * 8.64e7)))
     day_night = None
     if box and cfg.get('day_night'):                                      # the rings' day-night circulation there
         from climate.crm.ring_crossings import day_night_advection
@@ -2501,7 +2536,7 @@ def setup(name: str) -> Path:
                   latitude_deg=latitude, coriolis_1_s=turning_rate(cfg, latitude),
                   land_moisture=None if pair else site['wetness'] if box else land_moisture(cfg, ref),
                   large_scale_w=vertical_wind,
-                  day_night=day_night,
+                  day_night=day_night, sideways=sideways,
                   terrain=terrain if cfg.get('terrain') else None,
                   electricity=electricity,
                   twilight=twilight,

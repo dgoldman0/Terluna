@@ -400,7 +400,12 @@ control, [ring_ring_45n_corrected_twilight.json](../results/crm/ring_ring_45n_co
 
 **The south** resumed on 16 October with its twilight ring alone, from day 7. Its control is dropped: the north pair
 settled the twilight's local effect, and the twilight ring gives the southern climate on the design ground, whose land
-is about three times as wet as the north's (0.046 against 0.014).
+is about three times as wet as the north's (0.046 against 0.014). Over its second lunar day
+([ring_ring_45s_corrected_twilight.json](../results/crm/ring_ring_45s_corrected_twilight.json)) its land evaporates
+0.69 mm/day against the north's 0.18, its nights reach 94% humidity against 88%, with fog in 0.4% of land samples
+against none, and its afternoons peak at 36.0 °C against 37.8; it rains 0.01 mm/day, the north's desert all but
+unchanged. Both rings drift warm from the GCM's state without the GCM's sideways transport, so their absolute warmth
+and humidity wait for the confirming test ([below](#what-else-divides-cm1-and-the-gcm-at-the-crossing)).
 
 ## Tilted rings
 
@@ -1049,9 +1054,19 @@ from the lowest 1.8 km and mostly by its eddies, and dries the lowest layer by 0
 - **What it leaves out.** The GCM's sideways terms come from 3-day means, which miss its faster eddies, so they are a
   floor. Its own radiative heating is not in its output, so the budget does not close on the GCM's side.
 
-The test that would confirm it is a ring with the GCM's sideways heat and vapour transport imposed by height as well,
-through the large-scale advection the boxes already use for the day-night circulation; if its lower air stays near the
-GCM's through two lunar days, the gap is explained.
+**The confirming test** (case `ring_45n_corrected_sideways`, the author's go-ahead of 16 October) is
+`ring_45n_corrected` with that sideways heat and vapour imposed by height, the same at every hour, through the
+large-scale advection the boxes use for the day-night circulation (`var11 = 1`, one local-time bin in
+`terluna_lsadv.txt` on the GCM's levels): −0.28 K and −0.20 g/kg a day in the lowest 2 km. Its inputs match the
+control's byte for byte except that file and the switch. In a two-model-hour test its lowest 2 km ended 0.021 K
+cooler and 0.015 g/kg drier than the control's, as the forcing gives. It runs from 16 October in two-hour blocks with
+half-hour rests; if its lower air stays near the GCM's through two lunar days, the gap is explained.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.ring_heat_budget ring_45n_corrected --from-day 29.5       # seconds
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected_sideways
+/media/projectspace/terluna-research/session-tools/sideways_ring.sh                  # 6 threads; rerun to resume
+```
 
 **The land test on dry ground** (case `ring_45n_corrected_gcm_land`) is `ring_45n_corrected` with the GCM's roughness
 (2 m) and soil thermal inertia (THERIN 4.97), keeping the GCM's own wetness as the control does. A circle of latitude's

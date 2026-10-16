@@ -577,6 +577,35 @@ def test_the_dry_ground_land_ring_differs_from_its_control_in_the_land_alone():
     assert float(given[4]) == 200.0 and float(given[5]) == 4.97 and float(plain[4]) == 10.0 and float(plain[5]) == 4.0
 
 
+def test_the_sideways_ring_differs_from_its_control_in_the_transport_alone():
+    ring, control = c.CASES['ring_45n_corrected_sideways'], c.CASES['ring_45n_corrected']
+    assert set(ring) - {'sideways'} == set(control) - {'sideways'} and ring['sideways'] is True
+    assert {k: v for k, v in ring.items() if k not in ('sideways', 'purpose')} == \
+           {k: v for k, v in control.items() if k not in ('sideways', 'purpose')}
+
+
+def test_sideways_forcing_stands_ground_first_in_theta_and_vapour(monkeypatch):
+    from climate.crm import ring_heat_budget as hb
+    gcm = dict(sigma=[0.1, 0.5, 0.9], rows_deg=[52.6, 47.1, 41.5],
+               mean_meridional_k_day=[-0.1, 0.0, -0.2], eddies_k_day=[0.0, 0.1, -0.1],
+               vapour=dict(mean_meridional_g_kg_day=[0.0, 0.0, -0.1], eddies_g_kg_day=[0.0, 0.0, 0.05]))
+    monkeypatch.setattr(hb, 'gcm_sideways', lambda *args: gcm)
+    ref = dict(surface_pa_sea=1.2e5, profile=dict(z_m=[30000.0, 10000.0, 1000.0]))
+    f = c.sideways_forcing('run', (10, 19), 45.0, 3.0, ref)
+    assert f['z_m'].tolist() == [0.0, 1000.0, 10000.0, 30000.0] and f['theta_k_s'].shape == (1, 4)
+    exner = (0.9 * 1.2e5 / 1.0e5) ** (287.04 / 1005.7)
+    assert f['theta_k_s'][0, 0] == f['theta_k_s'][0, 1] == pytest.approx(-0.3 / 86400.0 / exner)
+    assert f['qv_kg_kg_s'][0, 1] == pytest.approx(-0.05 / 8.64e7) and f['qv_kg_kg_s'][0, 3] == 0.0
+
+
+@needs_planet
+def test_the_sideways_ring_switches_on_the_large_scale_advection():
+    air = dict(sunlight_w_m2=1198.0)
+    on = c.case_settings(c.CASES['ring_45n_corrected_sideways'], 1288, 5993.1, 111, 150000.0, air, 1.6242)
+    off = c.case_settings(c.CASES['ring_45n_corrected'], 1288, 5993.1, 111, 150000.0, air, 1.6242)
+    assert on['param8']['var11'] == 1.0 and 'var11' not in off['param8']
+
+
 @needs_planet
 def test_the_land_tests_are_quarter_boxes_that_write_the_radiation_at_the_ground():
     air = dict(sunlight_w_m2=1300.0)
