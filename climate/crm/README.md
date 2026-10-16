@@ -398,6 +398,10 @@ control, [ring_ring_45n_corrected_twilight.json](../results/crm/ring_ring_45n_co
   against 96% and 19.5 °C, days 38% against 62%, the highest wet bulb is 25.5 °C, and the mixed layer reaches 13.2 km
   by day against 7.1 km. The fog-desert nights the old rings showed belonged to their wet ground.
 
+**The south** resumed on 16 October with its twilight ring alone, from day 7. Its control is dropped: the north pair
+settled the twilight's local effect, and the twilight ring gives the southern climate on the design ground, whose land
+is about three times as wet as the north's (0.046 against 0.014).
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored
@@ -990,6 +994,43 @@ climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --set sunlight_sca
     --start-from climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029 --folder A28_dim5_moon_low_cloud --years 15
 climate/gcm/.venv/bin/python -m climate.gcm.compare --levels A28_dim5_moon:20-29 A28_dim5_moon_low_cloud:5-14
 climate/gcm/.venv/bin/python -m climate.crm.ring_comfort ring_equator ring_70_45e ring_70_135e --gcm A28_dim5_moon_low_cloud:5-14
+```
+
+**At 45° N on the corrected design case** (the author asked on 16 October for this and the land test below to be
+prepared; [gcm_profiles.py](gcm_profiles.py),
+[profiles_ring_45n_corrected.json](../results/crm/profiles_ring_45n_corrected.json)). The land surface was left out of
+the gap on wet ground, where the land evaporated 101–105 W/m². On the design ground the 45° N ring is a desert, so the
+comparison was taken there. Each model's air is averaged over the GCM's lowest four layers, 0–1.8, 1.8–6.5, 6.5–13.7
+and 13.7–22.9 km above the ground, by local time in the GCM's 36-degree bins. The GCM's land on that row stands a mean
+2.2 km up and the ring's at sea level, so over land the two compare through differences in height above the ground;
+over the sea they compare directly.
+
+- **The ground heats the air alike.** Near noon the land gives the air 195 W/m² of heat in CM1 against 208–225 in the
+  GCM, and both evaporate little, 13–21 W/m².
+- **The lowest air takes different shapes.** By day CM1 mixes its lowest 7 km to the dry adiabat, 1.6–1.7 K a kilometre
+  between its two lowest layers, under a mixed layer 14–19.5 km deep in the early afternoon; through the night its air
+  at 2 m falls up to 5 K below the layer 1.8–6.5 km up. The GCM stays stable by day, 1.4 K a kilometre, and its air
+  near the ground stays 2.7 K above that layer all night.
+- **Over the sea CM1's whole lower air is warmer.** At the same heights CM1 runs 4.3–7.8 K warmer than the GCM in the
+  lowest layer, 5–6 K in the second and 2.2–2.8 K in the third, and within about a degree in the fourth, where it is
+  held to the GCM. Its air at 2 m is warmer than the sea, which takes 8–12 W/m² of heat from it by day and evaporates
+  13–52 W/m² against the GCM's 64–97.
+
+So CM1's warm offset belongs to its whole free lower air, over the sea as over the land. A candidate, untested: the
+ring takes the GCM's sinking, which warms its air, without the sideways transport of heat that balances the sinking in
+the GCM and that a ring cannot have. A heat budget of the ring's lower air from its snapshots, its radiative heating
+against the imposed sinking and the ground's heat, would test it.
+
+**The land test on dry ground** (case `ring_45n_corrected_gcm_land`) is `ring_45n_corrected` with the GCM's roughness
+(2 m) and soil thermal inertia (THERIN 4.97), keeping the GCM's own wetness as the control does. A circle of latitude's
+setup now passes a case's land settings to its one land row. Its inputs match the control's byte for byte except the
+two placeholder rows of the land-use table, and a two-model-hour test ran clean with the land's roughness at 2 m
+against the control's 0.1 m. It waits, since the warm offset over the sea lies outside the land.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.gcm_profiles ring_45n_corrected --from-day 29.5      # seconds
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected_gcm_land
+/media/projectspace/terluna-research/session-tools/gcm_land_ring.sh               # 6 threads; rerun to resume
 ```
 
 ## A box over the highlands

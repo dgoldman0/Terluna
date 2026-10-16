@@ -1287,6 +1287,14 @@ for _tag, _land in (('', None), ('_rough', dict(roughness_cm=GCM_LAND['roughness
             'with the placeholder land' if _land is None else 'with the placeholder land given the GCM\'s '
             + ', '.join({'roughness_cm': 'roughness (2 m)', 'therin': 'soil thermal inertia',
                          'wetness': 'full wetness'}[k] for k in _land)))
+# The land test on dry ground: those boxes' land evaporated 101-105 W/m2, so their land surface mattered little to the
+# air. The 45 N ring on the corrected radiation's design case is a desert whose land gives the air its heat, and by
+# day its air near the ground runs far warmer than the GCM's. This ring is ring_45n_corrected with the GCM's roughness
+# and soil, keeping the GCM's own wetness there as the control does, so the pair differs in those two alone.
+CASES['ring_45n_corrected_gcm_land'] = dict(
+    CASES['ring_45n_corrected'], land={k: GCM_LAND[k] for k in ('roughness_cm', 'therin')},
+    purpose=CASES['ring_45n_corrected']['purpose'] + ', its land given the GCM\'s roughness (2 m) and soil thermal '
+            'inertia')
 # The rain test's box: box_0e_small's inputs as they were written, run with Earth's fall speeds, so the pair differs in
 # how fast rain, snow, graupel, ice and cloud droplets fall and in nothing else. Both keep the forcing of the GCM before
 # its correction, with which box_0e_small was set up.
@@ -2429,6 +2437,9 @@ def setup(name: str) -> Path:
     if tilted or box:                                                     # land-use rows for the wetness classes
         rows = landuse_rows(WETNESS_CLASSES, cfg.get('land'))
         table = [next((r for i, r in rows.items() if line.startswith(f'{i},')), line) for line in table]
+    elif cfg.get('land'):                         # a circle of latitude's one land row, its wetness as written above
+        row = landuse_rows(((index, round(land_moisture(cfg, ref), 2)),), cfg['land'])[index]
+        table = [row if line.startswith(f'{index},') else line for line in table]
     (case / 'LANDUSE.TBL').write_text(''.join(table))
     vertical_wind = None
     if box and cfg.get('large_scale_w') == 'gcm':

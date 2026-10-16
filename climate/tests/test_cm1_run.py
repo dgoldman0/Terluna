@@ -563,6 +563,20 @@ def test_land_overrides_reach_the_right_columns_of_the_table():
     assert 'roughness 200 cm' in rough[30] and 'wetness 1.00' in rough[30]
 
 
+def test_the_dry_ground_land_ring_differs_from_its_control_in_the_land_alone():
+    ring, control = c.CASES['ring_45n_corrected_gcm_land'], c.CASES['ring_45n_corrected']
+    assert set(ring) - {'land'} == set(control) - {'land'}
+    assert {k: v for k, v in ring.items() if k not in ('land', 'purpose')} == \
+           {k: v for k, v in control.items() if k not in ('land', 'purpose')}
+    assert ring['land'] == dict(roughness_cm=200.0, therin=4.97) and control.get('land') is None
+    # a circle of latitude's one land row: the control's row (its wetness written in two places), roughness and soil
+    index, base = c.PLACEHOLDER_LAND
+    plain = base.replace('.50', f'{0.014:.2f}'.lstrip('0')).split(',')
+    given = c.landuse_rows(((index, round(0.014, 2)),), ring['land'])[index].split(',')
+    assert given[:4] == plain[:4] and given[6] == plain[6] and given[7].split("'")[0] == plain[7].split("'")[0]
+    assert float(given[4]) == 200.0 and float(given[5]) == 4.97 and float(plain[4]) == 10.0 and float(plain[5]) == 4.0
+
+
 @needs_planet
 def test_the_land_tests_are_quarter_boxes_that_write_the_radiation_at_the_ground():
     air = dict(sunlight_w_m2=1300.0)
