@@ -49,20 +49,24 @@ slope (*screen*):
 ## The heights
 
 Rising air cools by 1.6 K a kilometre at lunar gravity against Earth's 9.8, so for the same humidity its cloud base
-stands six times higher, and the 2.7 km arc lifts air as a 450 m hill would on Earth (*derived*). The arc catches cloud
-only from the most humid sea air, and the island's green comes mostly from the sea beneath it. The bare box tests
-whether the arc catches any.
+stands six times higher, and the 2.7 km arc lifts air as a 450 m hill would on Earth (*derived*); at the box's 6 km
+spacing, where it stands 2,135 m high, as a 350 m hill. The bare box found it catches none: through its second lunar
+day no cloud and no rain formed over the island at any height or hour, and the air over the land kept a dewpoint near
+14 °C ([the CRM's account](../../../climate/crm/README.md#jura-island)). The island's green comes from the sea beneath
+it and from people's watering, and its heights stay dry land.
 
 ## What follows
 
 Open; the author has not chosen these. The recommendation is to take them in this order:
 
-1. **The bare box runs to its end.** It gives the sky's share of the island's water (rain, cloud, dew and the shore
-   nights' humidity) and the baseline a planted run is compared with.
+1. **The bare box runs to its end.** Done on 16 October
+   ([the CRM's account](../../../climate/crm/README.md#jura-island)): the sky gives the island no water at all, the
+   bay's low shores have muggier nights than the open sea's, and the whole island is comfortable for about a third of
+   the lunar cycle, too hot in the afternoons. It is the baseline a planted run is compared with.
 2. **The shores' water table at tens of metres,** resources' question 16 on domain/resources, with Jura Island as its
    worked case.
-3. **The island's cover:** the belts from 2, the heights' cover from the box's rain, cloud and dew, and the gardens
-   placed with the author.
+3. **The island's cover:** the belts from 2, the heights as dry land, since the box gives them no rain or cloud, and
+   the gardens placed with the author.
 4. **A planted box run,** if the cover's share of the box's shore columns is large enough to matter, against the bare
    run. CM1's land categories already take a class for each column.
 

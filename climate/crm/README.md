@@ -447,6 +447,31 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_jura
   design column. The boundary layer is Earth's empirical scheme run at lunar gravity. Cloud drops have a fixed number,
   with no aerosols, lightning or tides, and earthshine is left out.
 
+**What the box shows** (run on 15–16 October, 59 days in 16.4 wall hours on 6 threads;
+`python -m climate.crm.jura_analysis box_jura --from-day 29.5`,
+[jura_box_jura.json](../results/crm/jura_box_jura.json)), over the second lunar day, on the island's 1,572 columns
+beyond the blended edges, a mean 645 m up:
+
+- **No rain and no cloud over the island**, at any height or hour. The arc, 2,135 m high at the box's spacing, lifts the
+  air as a 350 m hill would on Earth ([the island study](../../research/studies/jura_island/README.md#the-heights)). A
+  trace of cloud gathers over the open sea before dawn, 0.2–0.5% of it.
+- **Hot days everywhere, warm slopes at night.** By day the air at 2 m is 31.3 °C at the median and 34.9 °C at the 95th
+  percentile, as warm 1.8 km up as at the shore (31.2 against 30.3 °C), since a dry mixed layer cools by only 1.6 K a
+  kilometre. At night the low ground runs coolest, 18.1 °C at the 5th percentile below 100 m, and the slopes at
+  0.5–1.5 km warmest, near 21 °C, as cold air drains to the low ground. The dewpoint stays near 14 °C over the land and
+  19 °C over the bay and the sea.
+- **Calm air and a weak sea breeze.** The median wind at 10 m over the land is 0.4 m/s. On the coasts the wind blows
+  onshore at about 1.1 m/s around noon on the bay's side and 0.9 m/s on the open sea's, and offshore at 0.2–0.4 m/s
+  through the night.
+- **Comfort.** The island is comfortable for 249 hours of each lunar day on the strict terms and 343 on the loose,
+  too hot for about 300. Low ground below 250 m does best, 318–320 hours, and the slopes at 0.5–1.5 km worst, 172–187,
+  their nights too humid. The land facing the bay is mostly the arc's inner slopes, a mean 1,090 m up, with 170 hours;
+  its low ground below 500 m, 39 columns, has 218 hours against 307 on the open sea's side, with muggier nights.
+- **Beside the GCM and the flat ring.** The GCM's two land cells within 150 km, 0.5 and 1.1 km up, average 21.5 °C with
+  a lowest-layer dewpoint of 15.6 °C, 211 comfortable hours and 11.4 mm of rain per lunar day: milder days, and rain
+  where the box has none. The flat ring's land near the site, at sea level, averages 26.0 °C with a dewpoint of 19.1 °C
+  and no comfortable hours; the island's air is drier.
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored
