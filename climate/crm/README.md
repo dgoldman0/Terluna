@@ -1016,10 +1016,42 @@ over the sea they compare directly.
   held to the GCM. Its air at 2 m is warmer than the sea, which takes 8–12 W/m² of heat from it by day and evaporates
   13–52 W/m² against the GCM's 64–97.
 
-So CM1's warm offset belongs to its whole free lower air, over the sea as over the land. A candidate, untested: the
-ring takes the GCM's sinking, which warms its air, without the sideways transport of heat that balances the sinking in
-the GCM and that a ring cannot have. A heat budget of the ring's lower air from its snapshots, its radiative heating
-against the imposed sinking and the ground's heat, would test it.
+So CM1's warm offset belongs to its whole free lower air, over the sea as over the land.
+
+**The heat budget of the ring's lower air** (the author's go-ahead of 16 October;
+[ring_heat_budget.py](ring_heat_budget.py),
+[heat_budget_ring_45n_corrected.json](../results/crm/heat_budget_ring_45n_corrected.json)) finds why. From the
+ring's snapshots, as ring means over the second lunar day: its radiation, the imposed sinking on each column's own
+air, the nudging toward the GCM's reference above 8 km and the storage, with CM1's own transport, turbulence and
+convection as the rest. From the GCM's 3-day means at 47° N and the rows either side: the heat its
+circulation carries sideways, which a ring cannot have.
+
+| Layer | Ring against GCM | Radiation | Imposed sinking | Nudging | Rest | Storage | GCM's sideways transport |
+|---|---|---|---|---|---|---|---|
+| 0–1.8 km | 25.6 against 19.8 °C | −0.32 | +0.07 | 0 | +0.30 | +0.055 | −0.29 (eddies −0.22) |
+| 1.8–6.5 km | 24.1 against 18.3 °C | −0.32 | +0.07 | 0 | +0.27 | +0.017 | −0.08 |
+| 6.5–13.7 km | 16.5 against 13.7 °C | −0.22 | +0.03 | −0.12 | +0.33 | +0.016 | −0.06 |
+| 13.7–23 km | 6.5 against 5.9 °C | −0.16 | +0.06 | −0.01 | +0.12 | +0.009 | −0.06 |
+
+K a day of temperature. Below 8 km the ring's air takes 33.7 W/m² from the ground through its turbulence and
+convection, the ground's whole 33.2, and 7.5 W/m² from the imposed sinking, and radiates 38.0 away; the 3.1 W/m² left
+over still warms it. The GCM's circulation carries about 15 W/m² of heat sideways out of the same air, 8.5 W/m² of it
+from the lowest 1.8 km and mostly by its eddies, and dries the lowest layer by 0.2 g/kg a day.
+
+- **The ring drifts from the GCM's state.** It starts from the GCM's profile, the reference it is held to aloft, and
+  without the sideways loss its lower air warms until radiation balances: the lowest 1.8 km from 20.0 to 26.0 °C over
+  the first lunar day and on to 26.7 °C by day 59, still 0.055 K a day warmer near the ground, and 1.8–6.5 km from
+  18.2 to 25.0 °C. At 6.5–13.7 km, partly held, it warms by 3.6 K, and at 13.7–23 km, held, by under a degree.
+- **So the gap lies in how CM1 is driven.** The rings and boxes take the GCM's sinking and its upper air but none of
+  the heat and vapour its circulation moves between latitudes. Their absolute warmth near the ground runs high for that
+  reason, at 45° N by about 6 K over the second lunar day and still growing; the shapes within a lunar day, the
+  breezes and the contrasts between places rest on the terrain, the sea and the Sun, as before.
+- **What it leaves out.** The GCM's sideways terms come from 3-day means, which miss its faster eddies, so they are a
+  floor. Its own radiative heating is not in its output, so the budget does not close on the GCM's side.
+
+The test that would confirm it is a ring with the GCM's sideways heat and vapour transport imposed by height as well,
+through the large-scale advection the boxes already use for the day-night circulation; if its lower air stays near the
+GCM's through two lunar days, the gap is explained.
 
 **The land test on dry ground** (case `ring_45n_corrected_gcm_land`) is `ring_45n_corrected` with the GCM's roughness
 (2 m) and soil thermal inertia (THERIN 4.97), keeping the GCM's own wetness as the control does. A circle of latitude's
