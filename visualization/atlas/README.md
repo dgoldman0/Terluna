@@ -5,7 +5,7 @@ Map sheets of the Open Moon at its selected standing-water share. They draw the 
 ```sh
 python -m geography.atlas
 python -m research.studies.conservation.run
-climate/gcm/.venv/bin/python -m climate.gcm.climatology A:30-39   # the cloud and rainfall climatology
+climate/gcm/.venv/bin/python -m climate.gcm.climatology A28_corrected_970:10-19   # the design case's clouds and rain
 python visualization/atlas/render.py      # out/: three sheets, globe.html and manifest.json (kept out of Git)
 ```
 
@@ -34,20 +34,27 @@ python visualization/atlas/render.py      # out/: three sheets, globe.html and m
 16 pixels per degree (1.9 km), with relief at 8. The map mode stays at the atlas's 4. JPEG keeps the page
 near 9 MB.
 
+On 16 October the globe took its clouds and ground cover from the corrected design case in place of run A, and
+the lakes as the drainage product holds them, 10.3% of the Moon in place of the first estimate's 12%, and was
+republished to its private claude.ai page. The lakes follow the design case once it settles, after the glow pair
+([register](../../research/decisions.md#the-globe-and-the-glow-pair-16-october-2026)).
+
 **Appearance mode** estimates how the Open Moon looks from outside its air. One full-screen pass traces each
 pixel's ray through the atmosphere, two cloud decks and the surface:
 
 - **Computed:**
   - land, sea and relief: LOLA above the GRAIL geoid at 16 pixels per degree through the geography domain,
     filled to the atlas product's sea level;
-  - rivers and rain-fed lakes above sea level, from the geography domain's drainage product (12% of the Moon
-    in lakes); river width follows discharge;
+  - rivers and rain-fed lakes above sea level, from the geography domain's drainage product (10.3% of the Moon
+    in lakes, routed with the dimmer design case's climate before its radiation was corrected); river width
+    follows discharge;
   - the air, from the illumination domain's engine atmosphere: optical depth and scale height;
   - the halo around the limb and the sunlit air beyond the terminator, which come out of the same ray-march
     through the air's full 484 km;
   - the ground's direct and diffuse light at every Sun height, from the Open Moon sky atlas.
 - **Informed:**
-  - the low and high cloud decks, from the climate domain's GCM climatology. Each moves with the Sun
+  - the low and high cloud decks, from the climate domain's GCM climatology of the design case
+    (`A28_corrected_970`, years 10–19; run A's until 16 October). Each moves with the Sun
     through the run's composite by latitude and local time and is carried east by its mean wind: 1.3 m/s for
     the low deck and 6.3 m/s for the high deck, whose clouds are drawn out east-west as that wind is;
   - light scattered more than once in the air, an isotropic source proportional to the sky atlas's diffuse

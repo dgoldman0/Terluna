@@ -7,7 +7,8 @@ Called by render.py. Every input is a domain product, and each piece says what k
   Open Moon clear-sky atlas, 55 scattering orders), and land, sea and relief at 16 pixels per degree
   (LOLA above the GRAIL geoid through the geography domain, at the atlas product's sea level), with
   the geography domain's rivers and rain-fed lakes above sea level;
-- informed: cloud cover from the climate domain's ExoPlaSim climatology (run A), a low and a high deck
+- informed: cloud cover from the climate domain's ExoPlaSim climatology (the design case, A28_corrected_970
+  years 10-19, since 16 October; run A before), a low and a high deck
   each moved with the Sun through its hour-angle composite, placed at the deck's cover-weighted
   height and carried east by the deck's cover-weighted mean wind; light scattered more than once, an
   isotropic source scaled from the sky atlas's diffuse light so that the air seen straight down
@@ -26,7 +27,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 ENGINE = ROOT / 'illumination' / 'sky' / 'products' / 'engine_atmosphere.json'
 SKY_ATLAS = ROOT / 'illumination' / 'sky' / 'data' / 'moon_atlas.npz'
-CLIMATOLOGY = ROOT / 'climate' / 'gcm' / 'products' / 'climatology_A.npz'
+CLIMATOLOGY = ROOT / 'climate' / 'gcm' / 'products' / 'climatology_A28_corrected_970.npz'   # the design case
 DRAINAGE = ROOT / 'geography' / 'products' / 'drainage_28pct_16ppd.npz'
 DRAINAGE_SCHEMA = 'terluna.geography.drainage/1'
 # Channel width from discharge: Earth's relation, about 7.2 m per (m3/s)^0.5, widened by 1.6 because flow in

@@ -167,8 +167,8 @@
     <h2>What the appearance shows</h2>
     <p><b>Computed.</b> Land, sea and water depth come from LOLA topography above the GRAIL geoid at 16 pixels per
       degree (1.9 km), filled to the geography atlas's common sea level. Rivers and the rain-fed lakes above sea level
-      come from the geography domain's drainage estimate, which routes the climate run's runoff over the terrain: the
-      lakes cover a further 12% of the Moon, and holding their water takes about a third as much again as the seas.
+      come from the geography domain's drainage estimate, which routes the climate run's runoff over the terrain:
+      <span id="lake-figures"></span>.
       The air comes from the illumination domain's Open Moon atmosphere, <span id="air-figures"></span>. The page ray-marches that air through its whole height, so the
       halo around the limb and the sunlit air beyond the terminator come from the same calculation as the haze over
       the disk. The ground's direct and diffuse light at each Sun height comes from the Open Moon clear-sky atlas,
@@ -539,6 +539,9 @@
     ' and ' + tau[2] + ' in red, green and blue and a scale height of ' + P.scaleHeightKm.toFixed(1) + ' km, ' +
     'reaching ' + fmt(P.topKm - P.radiusKm) + ' km';
   document.getElementById('clim-run').textContent = P.climatology.run + ' (model years ' + P.climatology.years.join('–') + ')';
+  const figure = (label) => (D.figures.find(([k]) => k.startsWith(label)) || [null, ''])[1];
+  document.getElementById('lake-figures').textContent = 'the lakes cover a further ' +
+    figure('Rain-fed lakes').split(' · ')[0] + ' of the Moon and hold ' + figure('Water in those lakes');
   document.getElementById('cloud-figures').textContent = Math.round(P.clouds.totalCover * 100) + '% cover, a low deck ' +
     'of ' + Math.round(P.clouds.lowCover * 100) + '% below about 34 km, drawn at its cover-weighted height of ' +
     Math.round(P.clouds.lowKm) + ' km, and a high deck of ' + Math.round(P.clouds.highCover * 100) + '% drawn at ' +
