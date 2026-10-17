@@ -68,7 +68,8 @@ def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     name, marker, edits = c.TWILIGHT_PATCH
     assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)
     assert c.BUILD_PATCHES['moon_omp_twilight'] == [c.TWILIGHT_PATCH] and c.BUILDS['moon_omp_twilight'] == c.BUILDS['moon_omp']
-    assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != 'moon_omp_twilight')
+    with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight'}               # the rings', and Jura's box
+    assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label not in with_hook)
     sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
     added = ''.join(new for _, new, _ in sun[2])
     # It extends the lines the Sun's patch writes, which the build applies first.
@@ -809,3 +810,51 @@ def test_vapour_above_the_gcms_top_keeps_that_levels_share_of_ice_saturation():
     p, t = 1e5 * np.interp(z, zz, exner) ** (cp / rd), theta_at(z) * np.interp(z, zz, exner)
     share = q * p / (0.622 + q) / saturation_pressure(t)
     assert np.allclose(share, share[0], rtol=0.01)
+
+
+def test_the_sea_build_makes_the_two_dimensional_water_columns_sea():
+    name, marker, edits = c.SEA_COLUMNS_PATCH
+    assert name == 'init_surface.F' and c.BUILD_PATCHES['moon_omp_terrain_sea'] == c.TERRAIN_PATCHES + [c.SEA_COLUMNS_PATCH]
+    old, new, count = edits[0]
+    assert count == 1 and old in c.SURFACE_2D_BLOCK and marker in new and marker not in old
+    assert 'xland(i,j) = merge(2.0,1.0,' in new and '.eq.16)' in new          # land use 16, water, is sea
+    assert c.BUILDS['moon_omp_terrain_sea'] == c.BUILDS['moon_omp_terrain']
+
+
+def test_a_box_keeps_its_waters_at_their_level_and_smooths_its_land():
+    raw = np.zeros((20, 20))
+    raw[8:12, 8:12] = 2000.0                                                  # an island in a sea
+    wet = raw == 0.0
+    out = c.box_heights(raw, 6000.0, passes=2, taper_m=30000.0, wet=wet)
+    assert np.all(out['heights'][wet] == 0.0)                                  # the sea stays at sea level
+    assert out['heights'][~wet].max() < 2000.0 and out['heights'][~wet].min() > 0.0
+    dry = c.box_heights(raw, 6000.0, passes=2, taper_m=30000.0)                # without the mask the island spreads
+    assert (dry['heights'][wet] > 0.0).any()
+
+
+def test_a_box_on_a_parallel_ring_takes_the_rows_reference_and_the_columns_round_it(monkeypatch):
+    profile = dict(sea_surface_k=296.0, land_ground_k=295.0, land_wetness=0.02, lapse_k_m=0.0016, rows_deg=[45.0],
+                   profile=dict(z_m=[0.0, 1000.0]))
+    monkeypatch.setattr(c, 'gcm_equator_profile', lambda run, years, band, latitude: dict(profile, latitude_deg=latitude))
+    monkeypatch.setattr(c, 'gcm_vertical_wind', lambda lat, band, run, years: dict(z_m=[0.0, 5.0e4], w_m_s=[0.0, -0.005]))
+    cfg = c.CASES['box_jura']
+    zw = [0.0, 1000.0, 2.5e4, 2.0e5]
+    site = c.parallel_box_site(cfg, zw, 1288, c.CASES['ring_45n_corrected'], *c.CORRECTED_GCM)
+    assert site['heading_deg'] == 90.0 and site['sea_k'] == 296.0 and site['wetness'] == 0.02
+    assert site['w_m_s'][0] == 0.0 and site['w_m_s'][-1] == 0.0 and site['w_m_s'][2] == pytest.approx(-0.0025)
+    # the ring runs east from 0 E: the columns within 100 km of 323.875 E
+    length = 2.0 * np.pi * c.planet()['radius_m'] * np.cos(np.radians(45.0))
+    centres = (np.array(site['columns']) + 0.5) * length / 1288 / length * 360.0
+    assert np.all(np.abs(centres - 323.875) <= 100.0e3 / length * 360.0 + 1e-9) and len(site['columns']) >= 30
+    with pytest.raises(ValueError):
+        c.parallel_box_site(dict(cfg, site=dict(cfg['site'], lat_deg=20.0)), zw, 1288, c.CASES['ring_45n_corrected'])
+
+
+def test_the_jura_box_is_the_island_and_its_sea_on_the_corrected_design_case():
+    box = c.CASES['box_jura']
+    assert box['kind'] == 'box' and (box['nx'], box['ny']) == (100, 90) and box['gcm'] == c.CORRECTED_GCM
+    assert box['terrain']['sea'] and box['build'] == 'moon_omp_terrain_sea_twilight' and box['twilight'] == 'full'
+    assert box['site']['ring'] == 'ring_45n_corrected' and box['day_night']['rings'] == ('ring_45n_corrected_twilight',)
+    assert c.BUILD_PATCHES[box['build']] == c.TERRAIN_PATCHES + [c.SEA_COLUMNS_PATCH, c.TWILIGHT_PATCH]
+    # the hook places each shell by its column's own face heights, which over terrain stand on the column's ground
+    assert any('zf(i,j,k+1)' in new for _, new, _ in c.TWILIGHT_PATCH[2])

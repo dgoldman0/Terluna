@@ -408,6 +408,80 @@ unchanged. Both rings drift warm from the GCM's state, and the GCM's sideways tr
 of it ([below](#what-else-divides-cm1-and-the-gcm-at-the-crossing)), so their absolute warmth runs high and their
 humidity with it.
 
+## Jura Island
+
+Jura Island is the arc of Montes Jura, with the craters Sharp and Louville, round the flooded Sinus Iridum: 58,357 km²
+at 38.4–51.6° N and 25.4–46.9° W in the 28% scenario's atlas, its summit 2,514 m above the sea at 45.6° N, 39.4° W.
+Small islets lie within 10–100 km of its coasts and La Condamine Island (519 km²) 32 km off; larger land begins about
+250 km out. Lunokhod 1 and Luna 17 lie 865 m down 61 km off its coast, a proposed undersea heritage community
+([conservation](../../research/studies/conservation/README.md#9-candidate-community-settings)).
+
+Case `box_jura` is a 3-D box about the island's centre (45.0° N, 36.1° W), 100 by 90 columns at the 45° N ring's
+5,993 m, 599 by 539 km, so 70–100 km of sea lie beyond its outer coasts before its periodic edges. The island stands at
+its atlas heights (up to 2,135 m at the box's spacing, a mean of 630 m), the atlas's sea and islets round it at sea
+level, held at the design case's 296.1 K; the land is the placeholder land at the GCM's wetness there (0.014). The
+reference is the corrected radiation's design case on the 45° N row, held from 8 km above each column's ground, with
+the row's mean vertical wind at each column's height, the Coriolis force of 45° and the day-night circulation of
+`ring_45n_corrected_twilight`; the sunlight is 1,198 W/m². It carries the curved air's twilight from the corrected
+ledger, so the box is complete, although the 45° N pair put its local effect at hundredths of a kelvin. The hook
+places each shell's share by its column's own face heights, so a column on high ground takes the shells above its
+ground.
+
+Two pieces of the setup are new. A box can extend a ring along a circle of latitude, taking that ring's GCM row as its
+reference (`parallel_box_site`, and `ring_crossings.ring_position` for the day-night forcing). The build
+`moon_omp_terrain_sea` makes the two-dimensional surface's water columns sea for CM1's surface layer
+(`SEA_COLUMNS_PATCH`): the terrain build keeps the domain's land flag, under which a water column would run the soil
+with water's properties. `moon_omp_terrain_sea_twilight` adds the twilight hook to it. In two model hours of a test
+run every water column was sea and every land column land, the sea held its temperature and every field stayed
+finite. The box runs in two-hour blocks on 6 threads with half an hour's rest after each:
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_terrain_sea_twilight
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_jura
+/media/projectspace/terluna-research/session-tools/box_jura.sh                        # rerun to resume
+```
+
+**What the box leaves out.**
+- **The land.** It is the placeholder land, bare and at one dryness everywhere, and its slab soil keeps a fixed
+  moisture availability, so rain never wets it. The shore belts the fresh sea feeds, the gardens and the plants are
+  missing; the [island study](../../research/studies/jura_island/README.md) sizes the belts at 2–4.5% of the island.
+- **The sea.** It holds one temperature, the bay and the open sea alike.
+- **The air above.** From 8 km up it is held to the design case's mean over the whole 45° N row, and the sinking and
+  the day-night circulation are imposed from the row and the flat-land ring, so the island cannot feed back on them.
+  The GCM behind them keeps PlaSim's Earth-tuned clouds, and the base design case carries no reduced gases, glow or
+  their dimming.
+- **Resolution and size.** The 6 km spacing smooths the arc to 2,135 m against LOLA's 2,717 m at 16 px/deg and
+  resolves sea-breeze fronts and storms only coarsely. The periodic edges put copies of the island 140–200 km beyond
+  its outer coasts. Two lunar days give one analysed day.
+- **The physics.** RRTMG takes the Sun's own spectrum scaled to 1,198 W/m², and the twilight table comes from one clear
+  design column. The boundary layer is Earth's empirical scheme run at lunar gravity. Cloud drops have a fixed number,
+  with no aerosols, lightning or tides, and earthshine is left out.
+
+**What the box shows** (run on 15–16 October, 59 days in 16.4 wall hours on 6 threads;
+`python -m climate.crm.jura_analysis box_jura --from-day 29.5`,
+[jura_box_jura.json](../results/crm/jura_box_jura.json)), over the second lunar day, on the island's 1,572 columns
+beyond the blended edges, a mean 645 m up:
+
+- **No rain and no cloud over the island**, at any height or hour. The arc, 2,135 m high at the box's spacing, lifts the
+  air as a 350 m hill would on Earth ([the island study](../../research/studies/jura_island/README.md#the-heights)). A
+  trace of cloud gathers over the open sea before dawn, 0.2–0.5% of it.
+- **Hot days everywhere, warm slopes at night.** By day the air at 2 m is 31.3 °C at the median and 34.9 °C at the 95th
+  percentile, as warm 1.8 km up as at the shore (31.2 against 30.3 °C), since a dry mixed layer cools by only 1.6 K a
+  kilometre. At night the low ground runs coolest, 18.1 °C at the 5th percentile below 100 m, and the slopes at
+  0.5–1.5 km warmest, near 21 °C, as cold air drains to the low ground. The dewpoint stays near 14 °C over the land and
+  19 °C over the bay and the sea.
+- **Calm air and a weak sea breeze.** The median wind at 10 m over the land is 0.4 m/s. On the coasts the wind blows
+  onshore at about 1.1 m/s around noon on the bay's side and 0.9 m/s on the open sea's, and offshore at 0.2–0.4 m/s
+  through the night.
+- **Comfort.** The island is comfortable for 249 hours of each lunar day on the strict terms and 343 on the loose,
+  too hot for about 300. Low ground below 250 m does best, 318–320 hours, and the slopes at 0.5–1.5 km worst, 172–187,
+  their nights too humid. The land facing the bay is mostly the arc's inner slopes, a mean 1,090 m up, with 170 hours;
+  its low ground below 500 m, 39 columns, has 218 hours against 307 on the open sea's side, with muggier nights.
+- **Beside the GCM and the flat ring.** The GCM's two land cells within 150 km, 0.5 and 1.1 km up, average 21.5 °C with
+  a lowest-layer dewpoint of 15.6 °C, 211 comfortable hours and 11.4 mm of rain per lunar day: milder days, and rain
+  where the box has none. The flat ring's land near the site, at sea level, averages 26.0 °C with a dewpoint of 19.1 °C
+  and no comfortable hours; the island's air is drier.
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored

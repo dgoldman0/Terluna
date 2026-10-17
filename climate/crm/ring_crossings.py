@@ -164,7 +164,7 @@ def day_night_advection(names, lat_deg: float, lon_deg: float, from_day: float, 
         record = geo['record']
         tap, start = record['configuration']['output_s'], record['configuration']['start_hour_angle_deg']
         nx, dx, zh = record['grid']['nx'], geo['dx'], geo['zh']
-        cols = patch_columns(nx, along_ring(ring_path(record), lat_deg, lon_deg), radius_m, dx)
+        cols = patch_columns(nx, ring_position(record, lat_deg, lon_deg), radius_m, dx)
         th, qv, count = np.zeros((bins, zh.size)), np.zeros((bins, zh.size)), np.zeros(bins)
         outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
         for n in [n for n in outputs if (n - 1) * tap >= from_day * 86400.0]:
@@ -183,6 +183,14 @@ def day_night_advection(names, lat_deg: float, lon_deg: float, from_day: float, 
     return dict(z_m=zh, hour_angle_deg=centres, theta_k_s=fit(total_th), qv_kg_kg_s=fit(total_qv), rings=used,
                 wavenumbers=wavenumbers, shortest_wave_km=nx * dx / wavenumbers / 1000.0, harmonics=harmonics,
                 top_m=top_m, from_day=from_day)
+
+
+def ring_position(record: dict, lat_deg: float, lon_deg: float) -> float:
+    """Where a place lies along a ring, as a share of its length from x = 0: on a great circle the point of it nearest
+    the place (along_ring), and on a ring along a circle of latitude, which runs east from 0 E, the place's longitude."""
+    if not record.get('path') and record.get('latitude_deg', 0.0) != 0.0:
+        return (lon_deg % 360.0) / 360.0
+    return along_ring(ring_path(record), lat_deg, lon_deg)
 
 
 def patch_columns(nx: int, along: float, radius_m: float, dx: float) -> np.ndarray:

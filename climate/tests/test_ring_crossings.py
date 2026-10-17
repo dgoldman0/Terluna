@@ -163,3 +163,11 @@ def test_planet_scale_advection_carries_the_long_waves_along_and_up():
     expect_th = -(2.0 * kx * np.cos(phase[i]) + 0.1 * np.sin(phase[i]) * 0.01)
     expect_qv = -(2.0 * -1e-3 * kx * np.sin(phase[i]) + 0.1 * np.sin(phase[i]) * -1e-6)
     assert dth == pytest.approx(np.full(3, expect_th), rel=1e-9) and dqv == pytest.approx(np.full(3, expect_qv), rel=1e-9)
+
+
+def test_a_place_on_a_parallel_ring_lies_at_its_longitude():
+    parallel = dict(case='ring_45n', latitude_deg=45.0)
+    assert rc.ring_position(parallel, 45.0, 323.875) == pytest.approx(323.875 / 360.0)
+    assert rc.ring_position(parallel, 45.0, -36.125) == pytest.approx(323.875 / 360.0)
+    tilted = dict(case='ring_a', path=dict(tilt_deg=45.0, node_deg=0.0))
+    assert rc.ring_position(tilted, 0.0, 0.0) == pytest.approx(0.0)

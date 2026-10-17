@@ -1,0 +1,196 @@
+{
+ "schema": "terluna.research.jura-shores/1",
+ "producer": {
+  "study": "research/studies/jura_island",
+  "files": {
+   "research/studies/jura_island/shores.py": "af3e29fe1f1dd93e76854d67a8f789fa19ebf3d4bec3a33c0527800b737668cd",
+   "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29",
+   "geography/fetch_inputs.py": "eadef4f9b0d45b5bcb30c06143e538aca1c3aca93d347bf7d1b2062bebc66b6d"
+  },
+  "inputs": {
+   "geography/inputs/ldem_16.img": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+   "geography/inputs/jggrx_0420a_sha.tab": "962355f81ae40dab0ec39753e3820d731d4505633a262fc543afd6f6c7c0e50d",
+   "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e"
+  },
+  "constants": {
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "SIDEREAL_MONTH_DAYS": 27.321661
+  }
+ },
+ "evidence": "Heights from LOLA at 16 px/deg, about 1.9 km north-south by 1.3 km east-west at 45 N, less the degree-200 GRAIL geoid and the 28% atlas's sea level; the island is the connected land holding the highest ground near box_jura's centre. The belt screen takes as assumed ranges how high above the sea roots and capillary rise reach the water table and how wide a belt the ground can feed on a flat shore, with each coastal pixel's mean height over half its width as its shore slope. It sizes the belts and maps none; the shore study at tens of metres would.",
+ "reading_rule": "Areas in km2 and heights in m above the atlas's sea level. Distances in km from the nearest sea pixel, the east-west spacing taken at 45 N. The coast length counts pixel edges, a staircase; coast_km is pi/4 of it, the mean for a coast of random direction. Shares are of the island.",
+ "frame_deg": {
+  "south": 36.0,
+  "north": 54.0,
+  "west": 309.0,
+  "east": 339.0
+ },
+ "pixels_per_degree": 16,
+ "sea_level_m": -1654.2,
+ "island": {
+  "area_km2": 57824,
+  "summit_m": 2717,
+  "summit_lat_deg": 44.406,
+  "summit_lon_deg": 320.719,
+  "lat_range_deg": [
+   38.34,
+   51.72
+  ],
+  "lon_range_deg": [
+   313.03,
+   334.84
+  ],
+  "mean_height_m": 713
+ },
+ "heights_km2": {
+  "0-10 m": 466,
+  "10-25 m": 764,
+  "25-50 m": 1304,
+  "50-100 m": 3030,
+  "100-250 m": 9877,
+  "250-500 m": 12777,
+  "500-1000 m": 13640,
+  "1000-5000 m": 15966
+ },
+ "heights_share": {
+  "0-10 m": 0.0081,
+  "10-25 m": 0.0132,
+  "25-50 m": 0.0225,
+  "50-100 m": 0.0524,
+  "100-250 m": 0.1708,
+  "250-500 m": 0.221,
+  "500-1000 m": 0.2359,
+  "1000-5000 m": 0.2761
+ },
+ "below_reach_km2": {
+  "15 m": 715,
+  "25 m": 1230
+ },
+ "near_sea": [
+  {
+   "within_km": 2,
+   "area_km2": 6191,
+   "share": 0.1071,
+   "median_height_m": 83
+  },
+  {
+   "within_km": 5,
+   "area_km2": 17093,
+   "share": 0.2956,
+   "median_height_m": 206
+  },
+  {
+   "within_km": 10,
+   "area_km2": 31496,
+   "share": 0.5447,
+   "median_height_m": 346
+  },
+  {
+   "within_km": 20,
+   "area_km2": 48039,
+   "share": 0.8308,
+   "median_height_m": 471
+  }
+ ],
+ "inland_heights_m": [
+  {
+   "from_km": 0.0,
+   "to_km": 2.5,
+   "p10": 19,
+   "p25": 49,
+   "median": 112,
+   "p75": 215,
+   "p90": 355
+  },
+  {
+   "from_km": 2.5,
+   "to_km": 4.5,
+   "p10": 120,
+   "p25": 194,
+   "median": 332,
+   "p75": 553,
+   "p90": 849
+  },
+  {
+   "from_km": 4.5,
+   "to_km": 7.0,
+   "p10": 181,
+   "p25": 291,
+   "median": 509,
+   "p75": 871,
+   "p90": 1285
+  }
+ ],
+ "coast_staircase_km": 5379,
+ "coast_km": 4225,
+ "belts": {
+  "low": {
+   "reach_m": 15.0,
+   "supply_km": 0.56,
+   "area_km2": 1084,
+   "share": 0.0187
+  },
+  "high": {
+   "reach_m": 25.0,
+   "supply_km": 2.5,
+   "area_km2": 2627,
+   "share": 0.0454
+  }
+ },
+ "islets": {
+  "count": 93,
+  "largest": [
+   {
+    "area_km2": 519,
+    "top_m": 634
+   },
+   {
+    "area_km2": 231,
+    "top_m": 1259
+   },
+   {
+    "area_km2": 217,
+    "top_m": 1382
+   },
+   {
+    "area_km2": 211,
+    "top_m": 616
+   },
+   {
+    "area_km2": 196,
+    "top_m": 227
+   },
+   {
+    "area_km2": 188,
+    "top_m": 610
+   },
+   {
+    "area_km2": 176,
+    "top_m": 806
+   },
+   {
+    "area_km2": 175,
+    "top_m": 645
+   },
+   {
+    "area_km2": 166,
+    "top_m": 217
+   },
+   {
+    "area_km2": 163,
+    "top_m": 456
+   },
+   {
+    "area_km2": 123,
+    "top_m": 222
+   },
+   {
+    "area_km2": 84,
+    "top_m": 292
+   }
+  ]
+ }
+}
