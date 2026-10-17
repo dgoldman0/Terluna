@@ -1103,8 +1103,23 @@ means over the second lunar day): the sideways transport takes about a third of 
   RRTMG cools them more: by 0.15 K a day in the lowest 1.8 km (4.5 W/m²), 0.12 at 1.8–6.5 km (8.5 W/m²) and 0.11 at
   6.5–13.7 km (10.2 W/m²). Its sunlight came within 2.5 points of line-by-line at the crossing, with 8 W/m² less
   absorbed in the air ([radiation, above](#what-else-divides-cm1-and-the-gcm-at-the-crossing)). Both push its air
-  cooler, so the warmth comes from elsewhere, and part of the gap may lie on the GCM's side, whose heating by process
-  its runs do not yet write.
+  cooler, so the warmth comes from elsewhere, and part of the gap may lie on the GCM's side.
+- **The GCM's side.** The same morning a year of the design case wrote PlaSim's heating by process at every level
+  (`A28_corrected_970_heating`, with the runner's new `--heating-diagnostics`; [gcm_heating.py](gcm_heating.py),
+  [gcm_heating_A28_corrected_970_heating.json](../results/crm/gcm_heating_A28_corrected_970_heating.json)). At 47° N
+  its lowest 1.8 km take 42.8 W/m² from the ground, pass 17.6 W/m² up through turbulence and dry convective
+  adjustment, and radiate 9.9 W/m² away, 12.8 by longwave less 2.9 of sunlight; the 17.3 W/m² left leaves with its
+  circulation, about 8.3 sideways and the rest in its vertical motions. The processes' own sum matches the total its
+  diabatic step hands the dynamics within 0.02 K a day. On 151 cloud-free 3-day mean columns there, PlaSim's
+  longwave cools the lowest layer by 0.44 K a day where the correlated-k model gives 0.07, 10.6 W/m² more, and the
+  next layer 11.4 W/m² more; RRTMG's excess on CM1's columns is 4.5 and 8.5 W/m².
+- **So part of the gap is the GCM running cool.** PlaSim sheds about 6 W/m² more by longwave from its lowest layer
+  than CM1 does, worth about 1.5 K of the 3.7 at the ring's 4 W/m² a kelvin. Against the line-by-line model both
+  over-cool their lower air, PlaSim by about 2.5 K's worth near the ground and RRTMG by about 1 K's. PlaSim's water
+  continuum was fitted to the line-by-line model's outgoing longwave at the top, which leaves its cooling by height
+  free; fitting that, as its sunlight was fitted by height on 14 October, would move the design case's lower air.
+  The rest of the gap, a degree or two, lies in how the two models carry the ground's heat upward: by day CM1's
+  resolved dry convection where the GCM's stable layer leaves part of it to its resolved circulation.
 - **For the cases that follow.** The sideways transport is part of the GCM's forcing that a slice of it lacks, so
   forced rings and boxes are better driven with it; their warmth near the ground still runs about 4 K high at 45° N
   until the rest is found.

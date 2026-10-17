@@ -168,6 +168,20 @@ CLEAR_SKY = {101: ('rsscs', 'surface_net_shortwave_flux_clear_sky'),
              102: ('rlscs', 'surface_net_longwave_flux_clear_sky'),
              103: ('rstcs', 'toa_net_shortwave_flux_clear_sky'),
              104: ('rltcs', 'toa_net_longwave_flux_clear_sky')}
+# PlaSim's gridpoint diagnostics (NDIAGGP = 1) write the temperature tendency of each process at every level as
+# codes 21-29, K/s: the sum of all of them that the gridpoint diabatic step (gridpointd) hands the dynamics, the
+# nudging of the top level (mknudge), the surface's sensible heat into the lowest layer (mkshfl), vertical diffusion
+# (vdiff), longwave and shortwave radiation (radmod), large-scale condensation (mklsp), Kuo convection (kuo) and dry
+# convective adjustment (mkdca). The dynamics' own tendency is not among them.
+HEATING = {21: ('dt_diab', 'temperature_tendency_summed_over_the_physics'),
+           22: ('dt_nudge', 'temperature_tendency_due_to_top_level_nudging'),
+           23: ('dt_sfc', 'temperature_tendency_due_to_surface_sensible_heat'),
+           24: ('dt_vdif', 'temperature_tendency_due_to_vertical_diffusion'),
+           25: ('dt_lw', 'temperature_tendency_due_to_longwave_radiation'),
+           26: ('dt_sw', 'temperature_tendency_due_to_shortwave_radiation'),
+           27: ('dt_lsp', 'temperature_tendency_due_to_large_scale_condensation'),
+           28: ('dt_conv', 'temperature_tendency_due_to_convection'),
+           29: ('dt_dca', 'temperature_tendency_due_to_dry_convective_adjustment')}
 
 
 def output_variables(model: dict) -> list:
@@ -555,12 +569,14 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
-def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True):
+def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
+                  heating=False):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
-    twilight product, and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); each is recorded when given, and
-    left out the configuration is the one every earlier run had."""
+    twilight product, and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating writes each process's
+    temperature tendency (HEATING). Each is recorded when given, and left out the configuration is the one every
+    earlier run had."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -598,6 +614,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['co2_ppm'] = co2_ppm
     if top_infrared is not None:
         cfg['top_infrared_w_m2'] = dict(day=float(top_infrared[0]), night=float(top_infrared[1]))
+    if heating:
+        cfg['heating_diagnostics'] = True
+        cfg['output'] = cfg['output'] + [name for name, _ in HEATING.values()]
     if twilight is not None:
         product = json.loads(TWILIGHT_PRODUCT.read_text())
         lunar = product['magnification']
@@ -807,6 +826,11 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     for code, (name, long_name) in CLEAR_SKY.items():
         pyburn.ilibrary[str(code)] = [name, long_name, 'W m-2']
         pyburn.slibrary[name] = [code, long_name, 'W m-2']
+    if cfg.get('heating_diagnostics'):
+        model._edit_namelist('plasim_namelist', 'NDIAGGP', '1')
+        for code, (name, long_name) in HEATING.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, 'K s-1']
+            pyburn.slibrary[name] = [code, long_name, 'K s-1']
     model.cfgpostprocessor(ftype='regular', extension='.nc', variables=cfg['output'],
                            times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
@@ -971,9 +995,10 @@ def summarise_year(path: Path, times_per_year: int | None = None) -> dict:
 
 def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False,
         overrides: dict | None = None, start_from: str | None = None, co2_ppm: float | None = None,
-        top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True) -> int:
+        top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True,
+        heating: bool = False) -> int:
     use_twilight_package()
-    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands)
+    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -1087,6 +1112,9 @@ def main(argv=None) -> int:
     parser.add_argument('--gas-bands', action=argparse.BooleanOptionalAction, default=True,
                         help="CO2 and O2 in PlaSim's sunlight from ../results/gcm/shortwave_gases.json, the standard "
                              'since 2026-10-14 (part of the run key)')
+    parser.add_argument('--heating-diagnostics', action='store_true',
+                        help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
+                             'the run key)')
     parser.add_argument('--twilight', choices=TWILIGHT_MODES + ('none',), default='full',
                         help="the curved air's sunlight and infrared from ../results/gcm/twilight.json: the curved "
                              "parts, all of it (full, the standard since 2026-10-14), the Moon's slant path alone, or "
@@ -1106,7 +1134,7 @@ def main(argv=None) -> int:
         overrides[key] = type(MODEL[key])(value)
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
-               None if args.twilight == 'none' else args.twilight, args.gas_bands)
+               None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics)
 
 
 if __name__ == '__main__':
