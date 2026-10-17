@@ -3,6 +3,10 @@
 14 October 2026 · `research/array-industry` · a review of commits `e1196f5`, `669ddd3` and `25df091` and of the branch
 since `fadb0ab`
 
+Since the joint integration of 17 October the climate side it read on `domain/ecology` is in this tree, and the glow's
+dimming carries the GCM's infrared efficacy of 0.71 ([glow](glow.md)), which finding 14 asked for; the review stands
+as written on 14 October.
+
 This review reads the branch's three newest commits, the [tile hardware](tile_design.md),
 [materials and supports](support_comparison.md) and [flexible coupling](flexible_coupling.md), against the ring fleet as
 designed: about 28.2 million tiles 10 km square in 1,859 nested rings near 20,000 km, a shadow of four lunar radii,

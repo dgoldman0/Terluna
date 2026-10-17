@@ -1,0 +1,653 @@
+{
+ "schema": "terluna.research.climate-targets/1",
+ "producer": {
+  "files": {
+   "research/studies/climate_targets/run.py": "8a90641d8b9f4ce34951cac657452c28eb3a8d3762e09d8b9343a05ab817495c",
+   "research/studies/climate_targets/extract.py": "7e2d398b669742f60e69b404de28f96afe1ed04dd6ede9871ee3ba91e855e078"
+  },
+  "inputs": {
+   "research/runs/climate_targets/extract.json": "82efaf5146107e3a219148edb02cc7f3f092b079173a90711eff335db28d2ad9",
+   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "45f1c3254d4566b5260bd80d8672ea6b6cd32a80a7a28f4ee0450fd0337ff891",
+   "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
+   "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
+   "atmosphere/radiative_convective/results/summary.json": "8fb31329ebcbca52ea9ac1c0af06ed5e357c02267dce8b47250334ae91c39171",
+   "research/studies/light_limitation/results/light_limitation.json": "cd8927bb12ca0029dff4bd8bcd2eaef5646fad992f31687c9c6098301da7ceff",
+   "provisioning/results/power.json": "b6d9f1120d7c831c7bcf64102f4670885260422fe068c83a3af7254ea05a2f83",
+   "resources/results/first_screen.json": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
+   "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e"
+  },
+  "constants": {
+   "MOON_RADIUS": 1737400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "JULIAN_DAY": 86400.0
+  }
+ },
+ "evidence": "Arithmetic on two ExoPlaSim runs and committed products. The two runs share the design sunlight (scale 0.970); the design case flew PlaSim's earlier longwave and liquid optics for all cloud, the test the longwave refitted by height and ice optics for cloud colder than -38 C, and neither carries the gases, the glow or their dimming. The dimming a target needs is the test's top-of-air gain per kelvin times the kelvins to shed, at the test's albedo; the climate at a target between the two runs is interpolated linearly in the ground's temperature, so it mixes the two physics and carries neither the refit's high cloud at the cooler end nor the dimming's own cut to the rain. The heat beyond the sunlight takes the GCM's efficacies for the gases and the glow and an efficacy of 1 for heat released at the ground.",
+ "reading_rule": "W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. A dimming is the share of the sunlight reaching the Moon that the fleet takes away, at the test's albedo, and the sunlight scale the GCM would fly for it is the design scale times what remains. Heat at the ground is in the 3-day means at the lowest model level, about 0.9 km up, pooled over land cells and means; deserts are land under 0.5 mm of rain a day. Pairs are [low, high] ends: the two fits for the feedback, the light study's and Earth's models' ends for the costs.",
+ "runs": {
+  "design": {
+   "run": "A28_corrected_970",
+   "ground_k": 295.0230045582492,
+   "rain_mm_day": 2.3132941177182866,
+   "land_rain_mm_day": 2.251244176727905,
+   "land_desert": 0.3759517526614269,
+   "wet_bulb_median_c": 15.395771842664118,
+   "wet_bulb_p99_c": 20.987262407175322,
+   "wet_bulb_above_28": 0.0,
+   "wet_bulb_above_31": 0.0,
+   "wet_bulb_above_28_tropics": 0.0,
+   "land_air_median_c": 18.601464843750023,
+   "sea_median_c": 22.984826660156273,
+   "ladder": [
+    {
+     "height_km": 0.9,
+     "air_c": 19.55665899367,
+     "pressure_atm": 1.1334667664384903
+    },
+    {
+     "height_km": 2,
+     "air_c": 18.767605208395366,
+     "pressure_atm": 1.1096372039677975
+    },
+    {
+     "height_km": 5,
+     "air_c": 16.412650061516672,
+     "pressure_atm": 1.0469154411516381
+    },
+    {
+     "height_km": 10,
+     "air_c": 11.74391657026166,
+     "pressure_atm": 0.949278625481083
+    },
+    {
+     "height_km": 15,
+     "air_c": 7.0799646831411,
+     "pressure_atm": 0.858803032578525
+    },
+    {
+     "height_km": 20,
+     "air_c": 2.438455508592199,
+     "pressure_atm": 0.7760428343176393
+    },
+    {
+     "height_km": 25,
+     "air_c": -2.1634275314314664,
+     "pressure_atm": 0.6998899199349314
+    },
+    {
+     "height_km": 30,
+     "air_c": -7.057798173768731,
+     "pressure_atm": 0.630256825931004
+    },
+    {
+     "height_km": 35,
+     "air_c": -12.520050823586416,
+     "pressure_atm": 0.5658815281969941
+    },
+    {
+     "height_km": 40,
+     "air_c": -17.982950842966602,
+     "pressure_atm": 0.5080785993311583
+    }
+   ],
+   "height_of_20c_km": null,
+   "freezing_level_km": 22.649410564528015,
+   "top_of_air_w_m2": {
+    "incoming": 312.9718304707239,
+    "reflected": 84.43664933827829,
+    "absorbed": 228.5351811324456,
+    "outgoing_infrared": 228.43284592546783,
+    "outgoing_infrared_clear_sky": 235.18443704035585,
+    "net": 0.10233521278479431
+   }
+  },
+  "test": {
+   "run": "A28_corrected_970_lw_ice",
+   "ground_k": 306.5234791232695,
+   "rain_mm_day": 3.3185989040159947,
+   "land_rain_mm_day": 3.339485646051127,
+   "land_desert": 0.18865215009555975,
+   "wet_bulb_median_c": 25.851486437040762,
+   "wet_bulb_p99_c": 31.030957465211724,
+   "wet_bulb_above_28": 0.17562657502863688,
+   "wet_bulb_above_31": 0.010438144329896907,
+   "wet_bulb_above_28_tropics": 0.34263307984790875,
+   "land_air_median_c": 32.33855590820315,
+   "sea_median_c": 33.96309814453127,
+   "ladder": [
+    {
+     "height_km": 0.9,
+     "air_c": 32.097228539800824,
+     "pressure_atm": 1.134526792565008
+    },
+    {
+     "height_km": 2,
+     "air_c": 31.152189331281647,
+     "pressure_atm": 1.1116263175813572
+    },
+    {
+     "height_km": 5,
+     "air_c": 28.285805556632226,
+     "pressure_atm": 1.0512401972662562
+    },
+    {
+     "height_km": 10,
+     "air_c": 22.0367779230844,
+     "pressure_atm": 0.9566182531607368
+    },
+    {
+     "height_km": 15,
+     "air_c": 17.22976674837099,
+     "pressure_atm": 0.8684875298562773
+    },
+    {
+     "height_km": 20,
+     "air_c": 12.732691038551025,
+     "pressure_atm": 0.7878084525809571
+    },
+    {
+     "height_km": 25,
+     "air_c": 8.877434467673083,
+     "pressure_atm": 0.7131279671056443
+    },
+    {
+     "height_km": 30,
+     "air_c": 4.95920538863686,
+     "pressure_atm": 0.6452389019332947
+    },
+    {
+     "height_km": 35,
+     "air_c": 0.620848300236787,
+     "pressure_atm": 0.582043971101517
+    },
+    {
+     "height_km": 40,
+     "air_c": -3.717508788163343,
+     "pressure_atm": 0.5250384718156907
+    }
+   ],
+   "height_of_20c_km": 12.118549186861244,
+   "freezing_level_km": 35.71553388481645,
+   "top_of_air_w_m2": {
+    "incoming": 312.1938560849066,
+    "reflected": 86.82848417491735,
+    "absorbed": 225.36537190998925,
+    "outgoing_infrared": 224.74237229320187,
+    "outgoing_infrared_clear_sky": 241.5219190685501,
+    "net": 0.6229996210080381
+   },
+   "planetary_albedo": 0.2781236160884051
+  }
+ },
+ "settled": {
+  "fits": [
+   {
+    "years": [
+     5,
+     19
+    ],
+    "feedback_w_m2_k": 2.156769650056263,
+    "balance_k": 306.822705561034
+   },
+   {
+    "years": [
+     0,
+     19
+    ],
+    "feedback_w_m2_k": 1.6529421052591653,
+    "balance_k": 307.11382429735096
+   }
+  ],
+  "feedback_w_m2_k": [
+   1.6529421052591653,
+   2.156769650056263
+  ],
+  "balance_k": [
+   306.822705561034,
+   307.11382429735096
+  ],
+  "saturated_column_max_outgoing_w_m2": 238.98252272447897,
+  "clear_sky_outgoing_over_the_saturated_column_w_m2": 2.539396344071122
+ },
+ "heat_beyond_sunlight": {
+  "gases": {
+   "held_pair_ppm": "1.8663+0.1",
+   "forcing_w_m2": 3.57749843829207,
+   "basis": "all-sky forcing of the held pair in the deep column, efficacy 1 as the GCM found it (its 1.69% over the absorbed sunlight held the design temperature)",
+   "absorbed_sunlight_w_m2": [
+    3.57749843829207,
+    3.57749843829207
+   ],
+   "dimming_percent": [
+    1.5874215315212312,
+    1.5874215315212312
+   ]
+  },
+  "glow": {
+   "answer": "rolled_outside_service_80_rolled_layout",
+   "infrared_w_m2": 5.3441399999999994,
+   "sunlight_back_w_m2": 0.610045,
+   "efficacy": 0.710631,
+   "basis": "the recommended answer, both halves rolled 80 degrees on the re-flown layout, at the GCM's held-branch efficacy for its infrared and the albedo for its returned sunlight",
+   "absorbed_sunlight_w_m2": [
+    4.23694395234,
+    4.23694395234
+   ],
+   "dimming_percent": [
+    1.8800332617347408,
+    1.8800332617347408
+   ]
+  },
+  "beamed_power": {
+   "heat_tw": [
+    33.0,
+    156.97
+   ],
+   "basis": "the power screen's intake at the loads and the deep air's share of the beams, all released at or near the ground",
+   "absorbed_sunlight_w_m2": [
+    0.869970330150629,
+    4.1381588704164916
+   ],
+   "dimming_percent": [
+    0.3860266210276947,
+    1.836199960688401
+   ]
+  },
+  "answered_in_every_target": {
+   "absorbed_sunlight_w_m2": [
+    8.6844127207827,
+    11.952601261048562
+   ],
+   "dimming_percent": [
+    3.8534814142836664,
+    5.3036547539443735
+   ]
+  },
+  "water_top_up": {
+   "fall_mj_per_kg": [
+    1.22,
+    2.74
+   ],
+   "first_millennium_central_km3_yr": [
+    1505.95,
+    4136.14
+   ],
+   "to_10000_years_central_km3_yr": 1734.19,
+   "first_millennium_fast_peak_km3_yr": 12163.7,
+   "first_millennium_w_m2": [
+    1.5348181207487208,
+    9.467434903926396
+   ],
+   "to_10000_years_w_m2": [
+    1.76743333896957,
+    3.969481433423461
+   ],
+   "fast_peak_w_m2": [
+    12.396870530463305,
+    27.842151847106113
+   ],
+   "basis": "geography's groundwater top-up through the first ten thousand years; the fall from the exobase to the far cislunar terminal (resources' first screen); all of it spent on the Moon, the case without energy recovery on the way down",
+   "first_millennium_dimming_percent": [
+    0.6810354704189986,
+    4.200927065098396
+   ]
+  }
+ },
+ "targets": [
+  {
+   "name": "no further dimming",
+   "ground_k": 306.5234791232695,
+   "settles_k": [
+    306.822705561034,
+    307.11382429735096
+   ],
+   "absorbed_sunlight_to_shed_w_m2": [
+    0.0,
+    0.0
+   ],
+   "dimming_percent": [
+    0.0,
+    0.0
+   ],
+   "with_the_heat_beyond_sunlight_percent": [
+    3.8534814142836664,
+    5.3036547539443735
+   ],
+   "sunlight_scale": [
+    0.9185545488867395,
+    0.9326212302814484
+   ],
+   "sunlight_taken_tw": [
+    0.0,
+    0.0
+   ],
+   "electricity_tw": [
+    0.0,
+    0.0
+   ],
+   "growth_cost_through_light_percent": [
+    0.0,
+    0.0
+   ],
+   "land_rain_mm_day": 3.339485646051127,
+   "land_rain_with_the_dimmings_own_cut_mm_day": [
+    3.339485646051127,
+    3.339485646051127
+   ],
+   "climate": {
+    "ground_k": 306.5234791232695,
+    "rain_mm_day": 3.3185989040159947,
+    "land_rain_mm_day": 3.339485646051127,
+    "land_desert": 0.18865215009555975,
+    "wet_bulb_median_c": 25.851486437040762,
+    "wet_bulb_p99_c": 31.030957465211724,
+    "wet_bulb_above_28": 0.17562657502863688,
+    "wet_bulb_above_31": 0.010438144329896907,
+    "wet_bulb_above_28_tropics": 0.34263307984790875,
+    "land_air_median_c": 32.33855590820315,
+    "sea_median_c": 33.96309814453127,
+    "ladder": [
+     {
+      "height_km": 0.9,
+      "air_c": 32.097228539800824,
+      "pressure_atm": 1.134526792565008
+     },
+     {
+      "height_km": 2,
+      "air_c": 31.152189331281647,
+      "pressure_atm": 1.1116263175813572
+     },
+     {
+      "height_km": 5,
+      "air_c": 28.285805556632226,
+      "pressure_atm": 1.0512401972662562
+     },
+     {
+      "height_km": 10,
+      "air_c": 22.0367779230844,
+      "pressure_atm": 0.9566182531607368
+     },
+     {
+      "height_km": 15,
+      "air_c": 17.22976674837099,
+      "pressure_atm": 0.8684875298562773
+     },
+     {
+      "height_km": 20,
+      "air_c": 12.732691038551025,
+      "pressure_atm": 0.7878084525809571
+     },
+     {
+      "height_km": 25,
+      "air_c": 8.877434467673083,
+      "pressure_atm": 0.7131279671056443
+     },
+     {
+      "height_km": 30,
+      "air_c": 4.95920538863686,
+      "pressure_atm": 0.6452389019332947
+     },
+     {
+      "height_km": 35,
+      "air_c": 0.620848300236787,
+      "pressure_atm": 0.582043971101517
+     },
+     {
+      "height_km": 40,
+      "air_c": -3.717508788163343,
+      "pressure_atm": 0.5250384718156907
+     }
+    ],
+    "height_of_20c_km": 12.118549186861244,
+    "freezing_level_km": 35.71553388481645
+   },
+   "interpolated_share_of_the_way": 1.0,
+   "margin_to_the_saturated_column_w_m2": [
+    13.617150814489719,
+    13.617150814489719
+   ],
+   "margin_if_the_heat_beyond_sunlight_goes_unanswered_w_m2": [
+    1.664549553441157,
+    4.9327380937070195
+   ]
+  },
+  {
+   "name": "295 K",
+   "ground_k": 295.0,
+   "settles_k": [
+    295.0,
+    295.0
+   ],
+   "absorbed_sunlight_to_shed_w_m2": [
+    19.542247819914802,
+    26.126728590640685
+   ],
+   "dimming_percent": [
+    8.671362265769899,
+    11.593053701735368
+   ],
+   "with_the_heat_beyond_sunlight_percent": [
+    12.524843680053566,
+    16.89670845567974
+   ],
+   "sunlight_scale": [
+    0.8061019279799064,
+    0.8485090163034804
+   ],
+   "sunlight_taken_tw": [
+    1026.8835116722596,
+    1372.8772171400135
+   ],
+   "electricity_tw": [
+    205.37670233445192,
+    411.86316514200405
+   ],
+   "growth_cost_through_light_percent": [
+    0.606995358603893,
+    3.4199508420119336
+   ],
+   "land_rain_mm_day": 2.2490673522735114,
+   "land_rain_with_the_dimmings_own_cut_mm_day": [
+    1.8892522436800843,
+    2.141792608116944
+   ],
+   "climate": {
+    "ground_k": 295.0,
+    "rain_mm_day": 2.311283192657424,
+    "land_rain_mm_day": 2.2490673522735114,
+    "land_desert": 0.37632641064557554,
+    "wet_bulb_median_c": 15.37485713222641,
+    "wet_bulb_p99_c": 20.96717186511171,
+    "land_air_median_c": 18.57398635059911,
+    "sea_median_c": 22.962866671947936,
+    "ladder": [
+     {
+      "height_km": 0.9,
+      "air_c": 19.531573919052303,
+      "pressure_atm": 1.1334646460535762
+     },
+     {
+      "height_km": 2,
+      "air_c": 18.742832153576053,
+      "pressure_atm": 1.1096332251163399
+     },
+     {
+      "height_km": 5,
+      "air_c": 16.38890002445122,
+      "pressure_atm": 1.046906790282199
+     },
+     {
+      "height_km": 10,
+      "air_c": 11.723327617414235,
+      "pressure_atm": 0.949263943922376
+     },
+     {
+      "height_km": 15,
+      "air_c": 7.0596618937642255,
+      "pressure_atm": 0.8587836605447466
+     },
+     {
+      "height_km": 20,
+      "air_c": 2.4178638069592515,
+      "pressure_atm": 0.7760192993887852
+     },
+     {
+      "height_km": 25,
+      "air_c": -2.185512720311637,
+      "pressure_atm": 0.6998634396861797
+     },
+     {
+      "height_km": 30,
+      "air_c": -7.081835952111667,
+      "pressure_atm": 0.6302268570772719
+     },
+     {
+      "height_km": 35,
+      "air_c": -12.546336745757026,
+      "pressure_atm": 0.5658491982390307
+     },
+     {
+      "height_km": 40,
+      "air_c": -18.01148620390717,
+      "pressure_atm": 0.5080446742637826
+     }
+    ],
+    "height_of_20c_km": null,
+    "freezing_level_km": 22.626185141097594
+   },
+   "interpolated_share_of_the_way": -0.0020003138235005586,
+   "margin_to_the_saturated_column_w_m2": [
+    33.15939863440451,
+    39.7438794051304
+   ],
+   "margin_if_the_heat_beyond_sunlight_goes_unanswered_w_m2": [
+    21.206797373355947,
+    31.0594666843477
+   ]
+  },
+  {
+   "name": "300 K",
+   "ground_k": 300.0,
+   "settles_k": [
+    300.0,
+    300.0
+   ],
+   "absorbed_sunlight_to_shed_w_m2": [
+    11.277537293618977,
+    15.34288034035937
+   ],
+   "dimming_percent": [
+    5.004112742805588,
+    6.808002582795774
+   ],
+   "with_the_heat_beyond_sunlight_percent": [
+    8.857594157089254,
+    12.111657336740148
+   ],
+   "sunlight_scale": [
+    0.8525169238336205,
+    0.8840813366762342
+   ],
+   "sunlight_taken_tw": [
+    592.599029845729,
+    806.2199900576326
+   ],
+   "electricity_tw": [
+    118.5198059691458,
+    241.86599701728977
+   ],
+   "growth_cost_through_light_percent": [
+    0.35028789199639115,
+    2.008360761924753
+   ],
+   "land_rain_mm_day": 2.7221962928101067,
+   "land_rain_with_the_dimmings_own_cut_mm_day": [
+    2.4664447651959764,
+    2.647266553804146
+   ],
+   "climate": {
+    "ground_k": 300.0,
+    "rain_mm_day": 2.7483541937774265,
+    "land_rain_mm_day": 2.7221962928101067,
+    "land_desert": 0.2948951612188973,
+    "wet_bulb_median_c": 19.92063241100431,
+    "wet_bulb_p99_c": 25.333815607181794,
+    "land_air_median_c": 24.546388179231343,
+    "sea_median_c": 27.735831223239753,
+    "ladder": [
+     {
+      "height_km": 0.9,
+      "air_c": 24.983770467651297,
+      "pressure_atm": 1.1339255079599804
+     },
+     {
+      "height_km": 2,
+      "air_c": 24.127211751508078,
+      "pressure_atm": 1.1104980214350977
+     },
+     {
+      "height_km": 5,
+      "air_c": 21.550928525096236,
+      "pressure_atm": 1.0487870414362566
+     },
+     {
+      "height_km": 10,
+      "air_c": 16.198300060781655,
+      "pressure_atm": 0.9524549547098691
+     },
+     {
+      "height_km": 15,
+      "air_c": 11.472437213532949,
+      "pressure_atm": 0.8629941377833158
+     },
+     {
+      "height_km": 20,
+      "air_c": 6.893433693992287,
+      "pressure_atm": 0.7811345745006071
+     },
+     {
+      "height_km": 25,
+      "air_c": 2.614663975303304,
+      "pressure_atm": 0.7056188748622974
+     },
+     {
+      "height_km": 30,
+      "air_c": -1.8572673943252003,
+      "pressure_atm": 0.6367405343684073
+     },
+     {
+      "height_km": 35,
+      "air_c": -6.833138107940628,
+      "pressure_atm": 0.5728760573539068
+     },
+     {
+      "height_km": 40,
+      "air_c": -11.809376032648295,
+      "pressure_atm": 0.5154182275848419
+     }
+    ],
+    "height_of_20c_km": 6.448754135875594,
+    "freezing_level_km": 27.923416930166923
+   },
+   "interpolated_share_of_the_way": 0.43276435364578325,
+   "margin_to_the_saturated_column_w_m2": [
+    24.89468810810868,
+    28.960031154849077
+   ],
+   "margin_if_the_heat_beyond_sunlight_goes_unanswered_w_m2": [
+    12.94208684706012,
+    20.275618434066377
+   ]
+  }
+ ],
+ "costs_per_percent": {
+  "growth_through_light_percent": [
+   0.07,
+   0.295
+  ],
+  "land_rain_percent": [
+   0.550057,
+   1.38
+  ]
+ }
+}

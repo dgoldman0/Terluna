@@ -1,0 +1,15 @@
+{
+ "source_admission": "Published values cited in README.md, with how far each was read for this study on 2026-10-17. The study's numbers are arithmetic on the GCM's output and the project's committed products; the one outside source gives a human limit for reading the wet-bulb temperatures. No outside dataset or full paper is committed.",
+ "sources": [
+  {
+   "key": "vecellio2022_wet_bulb_limit",
+   "citation": "Vecellio DJ, Wolf ST, Cottle RM, Kenney WL 2022, Evaluating the 35 C wet-bulb temperature adaptability threshold for young, healthy subjects (PSU HEAT Project), Journal of Applied Physiology 132(2), 340-345",
+   "doi_or_url": "https://doi.org/10.1152/japplphysiol.00738.2021",
+   "use": "README: a wet-bulb temperature near 31 C as about where young, healthy adults doing light activity in warm, humid air can no longer hold their core temperature steady, against the 35 C theoretical limit",
+   "values_used": {
+    "critical_wet_bulb_warm_humid_c": 31
+   },
+   "access": "known from the literature as its abstract states it (critical wet-bulb temperatures of about 30-31 C in warm, humid conditions at light activity); not re-read for this study"
+  }
+ ]
+}

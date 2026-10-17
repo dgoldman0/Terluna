@@ -150,9 +150,10 @@ ground gets almost none of it.
 - **The glow as infrared from space.** A patch to PlaSim's longwave scheme adds infrared to the downward flux at the
   top of its air, 10.17 W/m² where the Sun is up and 0.52 where it is down (`--top-infrared`), and PlaSim carries it
   down with its broadband transmissivities. Those are the recommended answer's glow, 3.60 W/m² (6.72 by day and 0.48
-  by night), and returned infrared, 1.75 W/m² (3.46 and 0.04), from the glow study on research/array-industry
-  (a59f5a9). The returned sunlight, 0.61 W/m², and the dimming that answers it cancel and are left out. At zero the
-  patch changes nothing: the design year flown again on the patched build is identical to the unpatched one.
+  by night), and returned infrared, 1.75 W/m² (3.46 and 0.04), from the
+  [glow study](../solar_shield_array/glow.md), read from research/array-industry at a59f5a9. The returned sunlight,
+  0.61 W/m², and the dimming that answers it cancel and are left out. At zero the patch changes nothing: the design
+  year flown again on the patched build is identical to the unpatched one.
 - **The dimming as less sunlight.** The design dimmer passes 0.95 of the titania stack's sunlight; the runs pass
   0.933907, 0.909867 and 0.916522.
 - **The held run's dimming** came from the watt-for-watt run's cooling and the 1.9 K for each 1% of sunlight that the
@@ -175,8 +176,9 @@ ground gets almost none of it.
 
 ## Next work
 
-- Carry the glow's efficacy into the glow study and the domain synthesis's dimming ledger at the next integration
-  (research/array-industry): about 2.0% of the design sunlight for the recommended answer.
+- The glow's efficacy went into the glow study at the integration of 17 October: its recommended answer takes 2.0% of
+  the design sunlight, within 1% of the domain synthesis's convention, and its whole table of answers follows
+  ([glow](../solar_shield_array/glow.md)). The rerun on the GCM's final radiation waits on the target climate.
 - Build the water design into ecology's plants: the carbon per litre and the transpired share by band above.
 
 ## Files

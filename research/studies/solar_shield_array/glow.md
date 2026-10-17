@@ -95,14 +95,16 @@ for a coating, an absorber or the Moon's light. Sources, with how far each was r
 6. **The recommendation is to roll both halves outside the service arc and dim by extraction for the rest**
    (*screen*).
    - On the layout re-flown for its push, it leaves a glow of 3.6 W/m² (6.7 by day, 0.48 by night) and returns of
-     2.4 W/m², 6.0 W/m² in all. Added dimming of 2.7% of the design sunlight answers it and gives back 61–91 TW of
-     electricity.
+     2.4 W/m², 6.0 W/m² in all. Added dimming of 2.0% of the design sunlight answers it at the GCM's infrared
+     efficacy (2.7% at an efficacy of 1) and gives back 45–67 TW of electricity.
    - It moves the attitude outside the service arc and the dimmer. The films, tile masses, sail loading,
      service-arc attitude and the protection's spectra stay as set. It takes a momentum store 5–12 times the chosen
      one, and the layout re-flown for half the push, 350–500 km further in, which keeps the design's 1 km between
      strips inside the photon roll's steering reach.
-   - The next steps, if the glow itself has to fall further, are the annulus absorber (3.8 W/m² with this roll on the
-     re-flown layout) and the ultraviolet mirror on the outer faces (3.3 W/m²), each with the costs above.
+   - The annulus absorber (3.8 W/m² with this roll on the re-flown layout) and the ultraviolet mirror on the outer
+     faces (3.3 W/m²) would cut it further, each with the costs above. The author set both aside on 13 October, the
+     plants' water design making up the rain the glow takes
+     ([register](../../decisions.md#the-gas-pair-13-october-2026)).
 
 ## The films: what they absorb and why
 
@@ -272,56 +274,57 @@ between shingles at every phase; the tilts through the nodes close it, the small
 
 ## The answers screened
 
-All in W/m² averaged over the Moon. Dimming is the added share of the design sunlight that answers the total. The
-coating's share of it is light the coating takes out of the window's beam; "to add" is the rest, which extraction
-can supply, with the electricity it gives at 20–30% (*screen*).
+All in W/m² averaged over the Moon. Dimming is the added share of the design sunlight that answers the total, with
+the infrared at the GCM's efficacy of 0.71 (below). The coating's share of it is light the coating takes out of the
+window's beam; "to add" is the rest, which extraction can supply, with the electricity it gives at 20–30%
+(*screen*).
 
 | Answer | Glow | Infrared back | Sunlight back | Total | Dimming | To add | Electricity |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| As built `as_built` | 9.37 | 4.04 | 0.71 | 14.12 | 6.59% | 6.59% | 147–220 TW |
-| Annulus titania 0.05 µm `thin_titania` | 8.56 | 4.08 | 0.85 | 13.49 | 6.28% | 6.28% | 140–209 TW |
-| Annulus absorber, 220 nm edge `wide_gap_220` | 3.71 | 4.04 | 0.63 | 8.38 | 3.88% | 3.88% | 86–130 TW |
-| Annulus absorber, 250 nm edge `wide_gap_250` | 3.94 | 4.04 | 0.63 | 8.61 | 3.99% | 3.99% | 89–133 TW |
-| UV mirror, outer faces, 95% `uv_mirror_outer_95` | 5.81 | 4.04 | 0.71 | 10.55 | 4.90% | 4.90% | 109–164 TW |
-| UV mirror, outer faces, 98% `uv_mirror_outer_98` | 5.71 | 4.04 | 0.71 | 10.45 | 4.85% | 4.85% | 108–162 TW |
-| UV mirror, both faces, 98% `uv_mirror_both_98` | 2.19 | 4.04 | 0.71 | 6.94 | 3.19% | 3.19% | 71–106 TW |
-| Mesh heat mirror, low end `mesh_low` | 5.41 | 17.11 | 1.41 | 23.93 | 11.14% | 6.14% | 137–205 TW |
-| Mesh heat mirror, high end `mesh_high` | 7.90 | 13.31 | 3.13 | 24.35 | 11.11% | −8.89% | none |
-| Metasurface, low end `metasurface_low` | 5.93 | 16.16 | 1.41 | 23.50 | 10.94% | 5.94% | 132–198 TW |
-| Metasurface, high end `metasurface_high` | 8.60 | 11.41 | 3.13 | 23.14 | 10.54% | −9.46% | none |
-| Conducting oxide, low end `tco_low` | 8.91 | 16.92 | 1.00 | 26.83 | 12.57% | 7.57% | 169–253 TW |
-| Conducting oxide, high end `tco_high` | 18.66 | 15.02 | 1.35 | 35.03 | 16.41% | 1.41% | 31–47 TW |
-| Silver stack, low end `silver_low` | 7.17 | 18.64 | 2.24 | 28.04 | 12.98% | −2.02% | none |
-| Silver stack, high end `silver_high` | 12.70 | 17.11 | 3.14 | 32.95 | 15.19% | −14.81% | none |
-| Strong outer emitter `emitter` | 8.80 | 4.16 | 0.71 | 13.67 | 6.38% | 6.38% | 142–213 TW |
-| Mesh and outer emitter `mesh_low_emitter` | 5.17 | 17.11 | 1.37 | 23.65 | 11.02% | 6.02% | 134–201 TW |
-| Mesh on the nearest layer, emitter `mesh_low_nearest_emitter` | 2.62 | 17.11 | 1.09 | 20.82 | 9.72% | 4.72% | 105–157 TW |
-| Pitch +6° `pitch_plus_6` | 9.36 | 3.59 | 0.75 | 13.70 | 6.39% | 6.39% | 142–213 TW |
-| Pitch −3° `pitch_minus_3` | 9.34 | 3.59 | 0.75 | 13.68 | 6.38% | 6.38% | 142–213 TW |
-| Night roll 30° `night_roll_30` | 8.15 | 1.63 | 0.67 | 10.45 | 4.86% | 4.86% | 108–162 TW |
-| Night roll 60° `night_roll_60` | 5.73 | 1.63 | 0.67 | 8.03 | 3.72% | 3.72% | 83–124 TW |
-| Night roll 80° `night_roll_80` | 4.93 | 1.63 | 0.67 | 7.24 | 3.34% | 3.34% | 74–111 TW |
-| Rolled outside service 30° `rolled_outside_service_30` | 7.86 | 1.41 | 0.54 | 9.81 | 4.57% | 4.57% | 102–153 TW |
-| Rolled outside service 60° `rolled_outside_service_60` | 4.87 | 1.38 | 0.53 | 6.78 | 3.14% | 3.14% | 70–105 TW |
-| Rolled outside service 80° `rolled_outside_service_80` | 3.76 | 1.37 | 0.52 | 5.66 | 2.61% | 2.61% | 58–87 TW |
-| Night roll, thin titania `night_roll_80_thin_titania` | 4.53 | 1.65 | 0.80 | 6.97 | 3.20% | 3.20% | 71–107 TW |
-| Night roll, absorber 220 nm `night_roll_80_wide_gap_220` | 1.99 | 1.63 | 0.59 | 4.21 | 1.92% | 1.92% | 43–64 TW |
-| Night roll, absorber 250 nm `night_roll_80_wide_gap_250` | 2.10 | 1.63 | 0.59 | 4.33 | 1.97% | 1.97% | 44–66 TW |
-| Night roll, absorber, window mirror `night_roll_80_wide_gap_250_window_mirror` | 1.15 | 1.63 | 0.59 | 3.37 | 1.52% | 1.52% | 34–51 TW |
-| Night roll, UV mirror outer 98% `night_roll_80_uv_mirror_outer_98` | 1.28 | 1.63 | 0.67 | 3.58 | 1.61% | 1.61% | 36–54 TW |
-| Night roll, emitter `night_roll_80_emitter` | 4.62 | 1.69 | 0.67 | 6.98 | 3.22% | 3.22% | 72–107 TW |
-| Night roll, mesh and emitter `night_roll_80_mesh_low_emitter` | 2.83 | 6.95 | 1.30 | 11.07 | 5.07% | 0.07% | 2 TW |
-| Rolled outside service, absorber 220 nm `rolled_outside_service_80_wide_gap_220` | 1.49 | 1.37 | 0.46 | 3.32 | 1.51% | 1.51% | 34–50 TW |
-| Rolled outside service, absorber 250 nm `rolled_outside_service_80_wide_gap_250` | 1.58 | 1.37 | 0.46 | 3.41 | 1.55% | 1.55% | 35–52 TW |
-| Rolled outside service, mesh, emitter `rolled_outside_service_80_mesh_low_emitter` | 1.98 | 5.87 | 1.02 | 8.88 | 4.07% | −0.93% | none |
-| Rolled outside service, UV mirror outer 98% `rolled_outside_service_80_uv_mirror_outer_98` | 1.00 | 1.37 | 0.52 | 2.90 | 1.30% | 1.30% | 29–43 TW |
-| Night roll 80°, its own eccentricity `night_roll_80_own_eccentricity` | 4.72 | 2.83 | 1.12 | 8.67 | 3.96% | 3.96% | 88–132 TW |
-| Rolled outside service 80°, its own eccentricity `rolled_outside_service_80_own_eccentricity` | 3.46 | 1.69 | 0.58 | 5.73 | 2.64% | 2.64% | 59–88 TW |
-| Rolled 80°, tilted 3° through the nodes `rolled_outside_service_80_node_3_own_eccentricity` | 3.48 | 1.69 | 0.57 | 5.74 | 2.64% | 2.64% | 59–88 TW |
-| Rolled 80°, tilted 6° through the nodes `rolled_outside_service_80_node_6_own_eccentricity` | 3.51 | 1.69 | 0.57 | 5.77 | 2.66% | 2.66% | 59–89 TW |
-| Rolled outside service 80°, re-flown layout `rolled_outside_service_80_rolled_layout` | 3.60 | 1.75 | 0.61 | 5.95 | 2.74% | 2.74% | 61–91 TW |
-| Re-flown layout, absorber 250 nm `rolled_outside_service_80_wide_gap_250_rolled_layout` | 1.52 | 1.75 | 0.53 | 3.80 | 1.73% | 1.73% | 38–58 TW |
-| Re-flown layout, UV mirror outer 98% `rolled_outside_service_80_uv_mirror_outer_98_rolled_layout` | 0.96 | 1.75 | 0.61 | 3.32 | 1.49% | 1.49% | 33–50 TW |
+| As built `as_built` | 9.37 | 4.04 | 0.71 | 14.12 | 4.75% | 4.75% | 106–159 TW |
+| Annulus titania 0.05 µm `thin_titania` | 8.56 | 4.08 | 0.85 | 13.49 | 4.54% | 4.54% | 101–152 TW |
+| Annulus absorber, 220 nm edge `wide_gap_220` | 3.71 | 4.04 | 0.63 | 8.38 | 2.82% | 2.82% | 63–94 TW |
+| Annulus absorber, 250 nm edge `wide_gap_250` | 3.94 | 4.04 | 0.63 | 8.61 | 2.90% | 2.90% | 64–97 TW |
+| UV mirror, outer faces, 95% `uv_mirror_outer_95` | 5.81 | 4.04 | 0.71 | 10.55 | 3.55% | 3.55% | 79–119 TW |
+| UV mirror, outer faces, 98% `uv_mirror_outer_98` | 5.71 | 4.04 | 0.71 | 10.45 | 3.52% | 3.52% | 78–117 TW |
+| UV mirror, both faces, 98% `uv_mirror_both_98` | 2.19 | 4.04 | 0.71 | 6.94 | 2.34% | 2.34% | 52–78 TW |
+| Mesh heat mirror, low end `mesh_low` | 5.41 | 17.11 | 1.41 | 23.93 | 8.06% | 3.06% | 68–102 TW |
+| Mesh heat mirror, high end `mesh_high` | 7.90 | 13.31 | 3.13 | 24.35 | 8.21% | −11.79% | none |
+| Metasurface, low end `metasurface_low` | 5.93 | 16.16 | 1.41 | 23.50 | 7.91% | 2.91% | 65–97 TW |
+| Metasurface, high end `metasurface_high` | 8.60 | 11.41 | 3.13 | 23.14 | 7.80% | −12.20% | none |
+| Conducting oxide, low end `tco_low` | 8.91 | 16.92 | 1.00 | 26.83 | 9.03% | 4.03% | 90–135 TW |
+| Conducting oxide, high end `tco_high` | 18.66 | 15.02 | 1.35 | 35.03 | 11.79% | −3.21% | none |
+| Silver stack, low end `silver_low` | 7.17 | 18.64 | 2.24 | 28.04 | 9.45% | −5.55% | none |
+| Silver stack, high end `silver_high` | 12.70 | 17.11 | 3.14 | 32.95 | 11.10% | −18.90% | none |
+| Strong outer emitter `emitter` | 8.80 | 4.16 | 0.71 | 13.67 | 4.60% | 4.60% | 102–154 TW |
+| Mesh and outer emitter `mesh_low_emitter` | 5.17 | 17.11 | 1.37 | 23.65 | 7.97% | 2.97% | 66–99 TW |
+| Mesh on the nearest layer, emitter `mesh_low_nearest_emitter` | 2.62 | 17.11 | 1.09 | 20.82 | 7.01% | 2.01% | 45–67 TW |
+| Pitch +6° `pitch_plus_6` | 9.36 | 3.59 | 0.75 | 13.70 | 4.61% | 4.61% | 103–154 TW |
+| Pitch −3° `pitch_minus_3` | 9.34 | 3.59 | 0.75 | 13.68 | 4.61% | 4.61% | 103–154 TW |
+| Night roll 30° `night_roll_30` | 8.15 | 1.63 | 0.67 | 10.45 | 3.52% | 3.52% | 78–117 TW |
+| Night roll 60° `night_roll_60` | 5.73 | 1.63 | 0.67 | 8.03 | 2.71% | 2.71% | 60–90 TW |
+| Night roll 80° `night_roll_80` | 4.93 | 1.63 | 0.67 | 7.24 | 2.44% | 2.44% | 54–81 TW |
+| Rolled outside service 30° `rolled_outside_service_30` | 7.86 | 1.41 | 0.54 | 9.81 | 3.30% | 3.30% | 74–110 TW |
+| Rolled outside service 60° `rolled_outside_service_60` | 4.87 | 1.38 | 0.53 | 6.78 | 2.28% | 2.28% | 51–76 TW |
+| Rolled outside service 80° `rolled_outside_service_80` | 3.76 | 1.37 | 0.52 | 5.66 | 1.91% | 1.91% | 42–64 TW |
+| Night roll, thin titania `night_roll_80_thin_titania` | 4.53 | 1.65 | 0.80 | 6.97 | 2.35% | 2.35% | 52–78 TW |
+| Night roll, absorber 220 nm `night_roll_80_wide_gap_220` | 1.99 | 1.63 | 0.59 | 4.21 | 1.42% | 1.42% | 32–47 TW |
+| Night roll, absorber 250 nm `night_roll_80_wide_gap_250` | 2.10 | 1.63 | 0.59 | 4.33 | 1.46% | 1.46% | 32–49 TW |
+| Night roll, absorber, window mirror `night_roll_80_wide_gap_250_window_mirror` | 1.15 | 1.63 | 0.59 | 3.37 | 1.14% | 1.14% | 25–38 TW |
+| Night roll, UV mirror outer 98% `night_roll_80_uv_mirror_outer_98` | 1.28 | 1.63 | 0.67 | 3.58 | 1.21% | 1.21% | 27–40 TW |
+| Night roll, emitter `night_roll_80_emitter` | 4.62 | 1.69 | 0.67 | 6.98 | 2.35% | 2.35% | 52–79 TW |
+| Night roll, mesh and emitter `night_roll_80_mesh_low_emitter` | 2.83 | 6.95 | 1.30 | 11.07 | 3.73% | −1.27% | none |
+| Rolled outside service, absorber 220 nm `rolled_outside_service_80_wide_gap_220` | 1.49 | 1.37 | 0.46 | 3.32 | 1.12% | 1.12% | 25–37 TW |
+| Rolled outside service, absorber 250 nm `rolled_outside_service_80_wide_gap_250` | 1.58 | 1.37 | 0.46 | 3.41 | 1.15% | 1.15% | 26–38 TW |
+| Rolled outside service, mesh, emitter `rolled_outside_service_80_mesh_low_emitter` | 1.98 | 5.87 | 1.02 | 8.88 | 2.99% | −2.01% | none |
+| Rolled outside service, UV mirror outer 98% `rolled_outside_service_80_uv_mirror_outer_98` | 1.00 | 1.37 | 0.52 | 2.90 | 0.98% | 0.98% | 22–33 TW |
+| Night roll 80°, its own eccentricity `night_roll_80_own_eccentricity` | 4.72 | 2.83 | 1.12 | 8.67 | 2.92% | 2.92% | 65–98 TW |
+| Rolled outside service 80°, its own eccentricity `rolled_outside_service_80_own_eccentricity` | 3.46 | 1.69 | 0.58 | 5.73 | 1.93% | 1.93% | 43–64 TW |
+| Rolled 80°, tilted 3° through the nodes `rolled_outside_service_80_node_3_own_eccentricity` | 3.48 | 1.69 | 0.57 | 5.74 | 1.93% | 1.93% | 43–64 TW |
+| Rolled 80°, tilted 6° through the nodes `rolled_outside_service_80_node_6_own_eccentricity` | 3.51 | 1.69 | 0.57 | 5.77 | 1.94% | 1.94% | 43–65 TW |
+| Rolled outside service 80°, re-flown layout `rolled_outside_service_80_rolled_layout` | 3.60 | 1.75 | 0.61 | 5.95 | 2.01% | 2.01% | 45–67 TW |
+| Re-flown layout, absorber 250 nm `rolled_outside_service_80_wide_gap_250_rolled_layout` | 1.52 | 1.75 | 0.53 | 3.80 | 1.28% | 1.28% | 28–43 TW |
+| Re-flown layout, UV mirror outer 98% `rolled_outside_service_80_uv_mirror_outer_98_rolled_layout` | 0.96 | 1.75 | 0.61 | 3.32 | 1.12% | 1.12% | 25–37 TW |
 
 ## By lunar day and night
 
@@ -361,17 +364,20 @@ hemisphere (*screen*):
 ## What remains: dimming and the power it gives back
 
 - **The conversion.** The Moon absorbs all of the infrared the stack sends it and 72% of the sunlight (planetary
-  albedo 0.280), so each W/m² of infrared takes 1/0.72 = 1.39 times as much top-of-air sunlight away. At the
-  design sunlight's 293.3 W/m², 1% of dimming answers 2.11 W/m² of infrared. The domain synthesis divides by
-  293.3 W/m², which at an infrared efficacy of 1 gives 0.72 of the dimming the energy balance needs. If the
-  infrared, absorbed high in the air, warms the ground half as much as sunlight does, its share of the dimming
-  halves.
+  albedo 0.280), so each W/m² of infrared takes 1/0.72 = 1.39 times as much top-of-air sunlight away at an
+  efficacy of 1. The infrared heats the upper air, and in the GCM's held glow branch
+  ([gases, glow and dimming](../gases_glow_dimming/README.md), 13 October) the dimming that holds the design
+  temperature is 0.71 of its watts matched as absorbed sunlight, so each W/m² of infrared takes 0.99 times as much
+  top-of-air sunlight away, and the domain synthesis's convention, its W/m² over the design sunlight's 293.3 W/m²,
+  holds for the glow to 1%. At the design sunlight, 1% of dimming answers 2.97 W/m² of the infrared. On the
+  corrected radiation of 17 October the pair gave about 0.59; its rerun on the final radiation waits on the
+  target climate.
 - **The electricity.** 1% of the design sunlight over the Moon's disc carries 111 TW of light, which collectors at
   20–30% turn into 22–33 TW. That is the synthesis's 23–35 TW per 1% of the titania stack's light, taken on the
   design sunlight.
 - **The dimmer's form** decides its own costs (*screen*):
-  - Absorbing in the window rings' films, it absorbs round their whole orbits. As built it gives back 36% of its
-    dimming as glow, and 19% with the night roll.
+  - Absorbing in the window rings' films, it absorbs round their whole orbits. As built it gives back 25% of its
+    dimming as glow, and 14% with the night roll.
   - Reflecting from the window tiles, it adds 2ΔR to their light pressure: 3.3% more dimming raises the window's
     coefficient from 0.276 to about 0.34, and one sail loading moves with it.
   - Collectors that take light only while they cross the window, and reject their heat from faces that do not see
@@ -385,8 +391,8 @@ hemisphere (*screen*):
   night), the returned infrared 1.75 W/m² and the returned sunlight 0.61 W/m², 6.0 W/m² in all. The deep night
   stays dark. The night's edge takes 0.1–3.5 lux within 30° of the terminator from day-half tiles passing
   radial-facing at the nodes, 0.3–0.6% of the twilight the tall sky already gives there.
-- **The dimming** is 2.7% of the design sunlight, 2.0% in the synthesis's convention. Taken by extraction it gives
-  back 61–91 TW of electricity.
+- **The dimming** is 2.0% of the design sunlight at the GCM's efficacy, within 1% of the synthesis's convention
+  (2.7% at an efficacy of 1). Taken by extraction it gives back 45–67 TW of electricity.
 - **Its costs.** No film, mass or sail-loading change. The attitude outside the service arc carries the roll. Along
   the kept orbits the attitude study finds it inside the clearance, the drive on the eccentricity cut to 0.48, and a
   momentum store of 1.0–2.3×10¹⁰ N·m·s a tile, 5–12 times the chosen one: with rotors 400 m in radius at 1,000 m/s,
@@ -399,19 +405,20 @@ hemisphere (*screen*):
     0.03 km a day of crossing height), and the steering through the full stack;
   - the films' infrared reflectance, measured on the coated film;
   - the films' flatness, since slopes of a few degrees spread the specular image;
-  - the glow and the returns as an infrared forcing in the GCM, which sets their efficacy;
+  - the glow and the returns as an infrared forcing in the GCM's final radiation, whose run waits on the target
+    climate (the held branch of 13 October set the efficacy at 0.71);
   - a form of the added dimming that neither absorbs in the window films nor reflects from the window tiles, and
     where its light goes (O5, S7).
 - **The knobs it moves least:** the films and their protection, the tile masses and the one sail loading, the
   service arc's attitude, and the climate's design sunlight, which the dimming restores. It moves the attitude
   outside the service arc, which the night decision moves on the night half anyway, the momentum store, and the
-  dimmer, from 5% to about 7.5% of the titania stack's light.
-- **The next steps**, if the glow itself has to fall further:
-  - the annulus absorber, which brings the total to 3.8 W/m² and the dimming to 1.7%. It needs the atmosphere
-    domain's check of 250–400 nm above the limb, the absorber's measured edge and opacity, and the annulus's light
-    pressure restored;
-  - the ultraviolet mirror on the outer faces, which brings the total to 3.3 W/m² and the dimming to 1.5%, at about
-    60% more fleet mass.
+  dimmer, from 5% to about 6.9% of the titania stack's light.
+- **Set aside by the author** on 13 October, with the plants' water design making up the rain the glow takes:
+  - the annulus absorber, which would bring the total to 3.8 W/m² and the dimming to 1.3%. It would need the
+    atmosphere domain's check of 250–400 nm above the limb, the absorber's measured edge and opacity, and the
+    annulus's light pressure restored;
+  - the ultraviolet mirror on the outer faces, which would bring the total to 3.3 W/m² and the dimming to 1.1%, at
+    about 60% more fleet mass.
 
 ## Assumptions
 
@@ -436,7 +443,8 @@ hemisphere (*screen*):
   uniform and Lambertian (*design guess*).
 - **The Moon's reflected sunlight** (*design guess*): a Lambertian day side with the planetary albedo 0.28, flat in
   wavelength.
-- **Infrared efficacy 1** (*design guess*): the provisioning screen's range is 0.5–1.
+- **Infrared efficacy 0.71** (*GCM run*): the held glow branch of the gases, glow and dimming study, 13 October; about
+  0.59 on the corrected radiation of 17 October. The answers at an efficacy of 1 are in the product beside them.
 - **Wide-gap absorber, ultraviolet mirror, heat mirrors and emitters** (*design guesses*): as stated in the tables,
   anchored to the measured coatings in glow_sources.json.
 - **Rolls** (sourced): attitude_schemes' law, zero in the 25° service arc and at the nodes, with 30° cosine ramps.
@@ -454,7 +462,7 @@ hemisphere (*screen*):
 - **The provisioning screen** places the tiles 19,355–21,392 km out. Those are the layout's apolune radii, and the
   night half rides at 15,375–16,021 km.
 - **The domain synthesis** answers heat with its W/m² over 293.3 W/m². For infrared at an efficacy of 1 it takes
-  1.39 times that.
+  1.39 times that; at the GCM's 0.71, 0.99 times, so the convention holds for the glow.
 - **The joint synthesis's night light** counts diffuse scatter and glints of sunlight. The films' specular
   reflection of the Moon's day side adds 1.6 lux over the night hemisphere as built.
 - **illumination/fleet_light** builds the rings with the layout's radius as the semi-major axis, which puts their
@@ -477,7 +485,8 @@ hemisphere (*screen*):
   could take up to about 40%, which would raise the films' mean absorptance by about 6%.
 - **The rolled stacks' opening** and the night-only roll's push and store are design guesses. The coatings, the
   absorber and the mirror are design guesses with measured anchors.
-- **No climate model is run.** The dimming equivalence uses the energy balance at an infrared efficacy of 1.
+- **No climate model is run here.** The dimming takes the GCM's efficacy from the gases, glow and dimming study, whose
+  runs carry the glow as infrared added at the top of the air.
 
 ## Next work
 
@@ -486,12 +495,13 @@ hemisphere (*screen*):
    by about 0.001° a day and drift the crossing heights by 0.03 km a day along the kept orbits, are next in the
    flights, with the keeping that holds them. The tilt through the nodes is set aside: it breaks the clearance, and
    the light it would take off the night's edge is under 1% of the twilight there.
-2. In the atmosphere domain: the glow and the returns as an infrared forcing in the GCM, night side included; the
-   Moon's outgoing infrared with clouds; and whether the annulus may pass 250–400 nm along its paths above the
-   limb.
-3. In the protection domain: a wide-gap absorber's measured edge and opacity below 175 nm at 1–2 g/m², with the
-   annulus's light pressure restored; and the ultraviolet mirror's measured broadband reflectance and stress on
-   4 µm of silica.
+2. In the atmosphere domain: the Moon's outgoing infrared with clouds. The GCM carried the glow and the returns as
+   infrared at the top of its air on 13 October, night side included, and set the efficacy at 0.71
+   ([gases, glow and dimming](../gases_glow_dimming/README.md)); the rerun on its final radiation waits on the target
+   climate.
+3. Only if the author returns to the absorber or the mirror: whether the annulus may pass 250–400 nm along its paths
+   above the limb, a wide-gap absorber's measured edge and opacity below 175 nm at 1–2 g/m², and the ultraviolet
+   mirror's measured broadband reflectance and stress on 4 µm of silica.
 4. The films' measured infrared reflectance and their flatness at the scale of a tile.
 5. In illumination: the films' specular reflection of the day side added to the night-light model.
 6. The added dimming's form: collectors that take light only in the window, where they ride, and where their heat

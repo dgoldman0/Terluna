@@ -40,8 +40,9 @@ The author's decisions frame it:
 - **The summit:** a commercial port of about 1.5 million people, in a beautiful, sustainable metropolis of about 100
   million within 32 km. Regional agriculture and foraging feed it.
 - **Sky ships:** the Moon is a sky-ship world where lift is cheap, and the flyers stack by height.
-- **Orbit:** energy-intensive industry and computing belong in orbit, and the planned branch `research/array-industry`
-  takes the array's heat, computing and industry.
+- **Orbit:** energy-intensive industry and computing belong in orbit, and the array-industry work takes the array's
+  heat, computing and industry ([array industry](../research/studies/solar_shield_array/array_industry.md),
+  [glow](../research/studies/solar_shield_array/glow.md)).
 - **The night:** the ring fleet keeps its light off the night zones, redirecting it and using it where it can, for
   computing for instance.
 - **Automation:** heavy automation keeps the cities and the sky towns, the parks and their amenities run almost purely
@@ -64,6 +65,10 @@ Each finding follows from results the repository already holds, read together wi
      absorbs that ring's glow and passes it on through both its faces, so the stack, about two layers deep in the
      Moon's view, sends between half and 56% inward. A tile 19,355–21,392 km out sends the Moon 0.66–0.81% of what it
      emits inward. The Moon receives 5.7–9.9 W/m² averaged over its surface (*screen*).
+   - **Since then.** The glow screen of 12–13 October ([glow](../research/studies/solar_shield_array/glow.md)) puts the
+     glow at 9.4 W/m² as built, with each ring's night half riding at perilune, and finds the films imaging another
+     4.7 W/m² of the Moon's own infrared and sunlight back onto it, 14.1 W/m² in all; rolled 80° on both halves the
+     fleet leaves 6.0 W/m², which 2.0% of the design sunlight answers at the GCM's infrared efficacy of 0.71.
    - **In proportion.** That is 1.9–3.4% of the design sunlight, the heat of 215–376 TW used on the Moon.
    - **The warming.** If it acts like sunlight, the GCM's 1.9 K per 1% of sunlight puts the design case 3.7–6.4 K
      warmer (*screen*). The design case of 294.9 K leaves it out. The 5% dimmer, chosen to bring the Moon from 303 to

@@ -7,13 +7,13 @@
   },
   "inputs": {
    "resources/results/first_screen.json": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
-   "resources/results/sea_phosphorus.json": "ef55387e2fa29271ab5afdf6ceb4c096f21c6356a94d0bf889c3ee3728e1d1cf",
+   "resources/results/sea_phosphorus.json": "87b0b03bf04192f390cf65e476490f4f19c3601d54ff9b8eeef3d6e864d4e11f",
    "research/studies/atmospheric_co2/results/atmospheric_co2.json": "80db612918d3fc44d313b6aa93259ecfbad0bf869ea39de903a3fb09ace0d451",
    "research/studies/lunar_cycle_ecology/results/lunar_cycle_ecology.json": "80b3ebef5077fb625c9bd0dd181fe8fab8009453c5369037a64d4ad8f2cbdcd8",
    "research/studies/conservation/results/gates.json": "65b855711fbf1b066f112f617e776bcb2f345fc48ccc5ff019aa9df3bbc4449e",
    "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
    "geography/results/drainage.json": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d",
-   "research/studies/carbon_cycle/results/carbon_cycle.json": "7d54937b5508ed01e78c81294c3207d00af4ada59dc8a54bbd7950552d345439",
+   "research/studies/carbon_cycle/results/carbon_cycle.json": "92abb53bf026c3b3066b2993015a6ef870fed6cb4d2e6cc63bd33c37511ff8cd",
    "research/studies/springs/results/springs.json": "b657370e8a10b5501e7a24924f45702bbe9617f7938a5b1e8d7db812f3dc244c",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e"
   }
@@ -81,50 +81,6 @@
   },
   "lake_volume_m3": 3108600000000000.0,
   "floors": {
-   "slow": [
-    {
-     "start": 0.0,
-     "end": 10.0,
-     "seas_kg_yr": 1167300000000000.0,
-     "lakes_kg_yr": 543850000000000.0
-    },
-    {
-     "start": 10.0,
-     "end": 100.0,
-     "seas_kg_yr": 315150000000000.0,
-     "lakes_kg_yr": 146880000000000.0
-    },
-    {
-     "start": 100.0,
-     "end": 1000.0,
-     "seas_kg_yr": 117190000000000.0,
-     "lakes_kg_yr": 58515000000000.0
-    },
-    {
-     "start": 1000.0,
-     "end": 10000.0,
-     "seas_kg_yr": 182540000000000.0,
-     "lakes_kg_yr": 20287000000000.0
-    },
-    {
-     "start": 10000.0,
-     "end": 100000.0,
-     "seas_kg_yr": 47996000000000.0,
-     "lakes_kg_yr": 2927700000000.0
-    },
-    {
-     "start": 100000.0,
-     "end": 1000000.0,
-     "seas_kg_yr": 6197600000000.0,
-     "lakes_kg_yr": 415610000000.0
-    },
-    {
-     "start": 1000000.0,
-     "end": 10000000.0,
-     "seas_kg_yr": 546490000000.0,
-     "lakes_kg_yr": 60082000000.0
-    }
-   ],
    "fast": [
     {
      "start": 0.0,
@@ -211,6 +167,50 @@
      "end": 10000000.0,
      "seas_kg_yr": 0.0,
      "lakes_kg_yr": 0.0
+    }
+   ],
+   "slow": [
+    {
+     "start": 0.0,
+     "end": 10.0,
+     "seas_kg_yr": 1167300000000000.0,
+     "lakes_kg_yr": 543850000000000.0
+    },
+    {
+     "start": 10.0,
+     "end": 100.0,
+     "seas_kg_yr": 315150000000000.0,
+     "lakes_kg_yr": 146880000000000.0
+    },
+    {
+     "start": 100.0,
+     "end": 1000.0,
+     "seas_kg_yr": 117190000000000.0,
+     "lakes_kg_yr": 58515000000000.0
+    },
+    {
+     "start": 1000.0,
+     "end": 10000.0,
+     "seas_kg_yr": 182540000000000.0,
+     "lakes_kg_yr": 20287000000000.0
+    },
+    {
+     "start": 10000.0,
+     "end": 100000.0,
+     "seas_kg_yr": 47996000000000.0,
+     "lakes_kg_yr": 2927700000000.0
+    },
+    {
+     "start": 100000.0,
+     "end": 1000000.0,
+     "seas_kg_yr": 6197600000000.0,
+     "lakes_kg_yr": 415610000000.0
+    },
+    {
+     "start": 1000000.0,
+     "end": 10000000.0,
+     "seas_kg_yr": 546490000000.0,
+     "lakes_kg_yr": 60082000000.0
     }
    ]
   }

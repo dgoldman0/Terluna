@@ -1,7 +1,7 @@
 # The joint integration of 8 October 2026
 
 The second joint integration, of the three domain branches on 12 October 2026, is recorded in
-[domains.md](domains.md).
+[domains.md](domains.md), and the third, of five branches on 17 October 2026, in [five-branches.md](five-branches.md).
 
 Five states of the work became one on 8 October 2026: main at `2f2e0a1`, sea appearance at `46681f4`, the solar
 shield and habitat array at `eeaecbc`, atmospheric electricity at `24d236b` and infrastructure at `625f60e`. The author

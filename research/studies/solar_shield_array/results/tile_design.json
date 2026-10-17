@@ -38,7 +38,7 @@
       "schema": "terluna.research.array-heat/1"
     },
     "research/studies/solar_shield_array/results/glow.json": {
-      "sha256": "b59d696ebbb3b39e181ef8f3024be56b258e64dbc4c89d1217bbcefb12e9f923",
+      "sha256": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
       "schema": "terluna.research.fleet-glow/1"
     },
     "protection/spectra/annulus_film.json": {
@@ -23895,8 +23895,8 @@
     "queue_balance": true
   },
   "resources": {
-    "cpu_s": 6.108243597,
-    "max_rss_MiB": 89.9296875,
+    "cpu_s": 5.0223331259999995,
+    "max_rss_MiB": 89.91015625,
     "thread_environment": {
       "OPENBLAS_NUM_THREADS": "1",
       "OMP_NUM_THREADS": "1"

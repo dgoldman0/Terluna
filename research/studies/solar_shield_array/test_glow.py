@@ -198,9 +198,12 @@ def test_the_screens_own_sums_close(product):
         assert row['absorbed_PW'] == pytest.approx(sum(row['absorbed_by_ring_PW'].values()), rel=1e-5)
         d = row['dimming']
         a = g.DESIGN['planetary_albedo']
-        expect = 100*(row['infrared_total_W_m2']['global']/((1-a)*r['design_sunlight_W_m2'])
+        one = 100*(row['infrared_total_W_m2']['global']/((1-a)*r['design_sunlight_W_m2'])
+                   + row['sunlight_return_W_m2']['global']/r['design_sunlight_W_m2'])
+        expect = 100*(g.DESIGN['infrared_efficacy']*row['infrared_total_W_m2']['global']/((1-a)*r['design_sunlight_W_m2'])
                       + row['sunlight_return_W_m2']['global']/r['design_sunlight_W_m2'])
         assert d['percent'] == pytest.approx(expect, rel=1e-5)
+        assert d['percent_at_efficacy_1'] == pytest.approx(one, rel=1e-5)
         # The product keeps six significant figures, so the difference closes to the larger term's rounding.
         assert d['to_add_percent'] == pytest.approx(d['percent']-d['coating_provides_percent'],
                                                     abs=1e-5*max(1., abs(d['percent'])))
@@ -291,3 +294,10 @@ def test_the_rolled_layout_and_the_node_laws_and_the_twilight(product):
     assert rec['answer'] == g.RECOMMENDED
     lit = [b for b in rec['night_lux_against_twilight'] if b['returned_lux'] > 0 and b['twilight_lux'][0]]
     assert lit and all(b['share_of_twilight'] < .01 for b in lit)
+
+
+def test_the_efficacy_is_the_gcms_held_glow_branch():
+    """The glow's dimming carries the GCM's efficacy (register, 13 October), read from the gases, glow and dimming
+    study's product; the glow study keeps it as a constant because that study takes the glow's answer from here."""
+    gcm = json.loads((g.ROOT/'research/studies/gases_glow_dimming/results/gases_glow_dimming.json').read_text())
+    assert g.DESIGN['infrared_efficacy'] == pytest.approx(gcm['glow']['held']['efficacy'], abs=5e-5)

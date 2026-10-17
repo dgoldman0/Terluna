@@ -344,8 +344,9 @@ for the shorelines and the seas' freshness to be weighed more. The shore study a
   but carries more sodium beside its calcium, trees drawing the delta's water leave wooded rims round bare, salty
   centres (McCarthy and Ellery 1994; *recalled*). Rain, the monthly tide (3.7 m typical on the Near-side Sea) or
   flushing by people carries the load away.
-- **Jura Island.** Measured at LOLA's 16 px/deg on research/jura-island, only 2% of the island lies within 25 m of the
-  sea and its first 1–2 km inland stand a median 112 m up, so its belts are a rim of 1,100–2,600 km², 2–4.5% of it.
+- **Jura Island.** Measured at LOLA's 16 px/deg in [its study](../research/studies/jura_island/README.md), only 2% of
+  the island lies within 25 m of the sea and its first 1–2 km inland stand a median 112 m up, so its belts are a rim of
+  1,100–2,600 km², 2–4.5% of it.
 
 ## The monthly tide
 

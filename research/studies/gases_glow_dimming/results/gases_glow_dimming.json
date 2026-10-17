@@ -2,11 +2,11 @@
   "schema": "terluna.research.gases-glow-dimming/1",
   "producer": {
     "files": {
-      "research/studies/gases_glow_dimming/run.py": "3ad2b07a44dcd71f2db75d556509ec4eeb5a97678904c57fd01efc0cc1f5a7e7"
+      "research/studies/gases_glow_dimming/run.py": "36b595e6a99f25a13344e93b232198e4b365db7c993a2c148599adac630c2ecc"
     },
     "inputs": {
-      "research/studies/light_limitation/results/light_limitation.json": "e29876f0f8e678aa9ff4a43cc98fcbef35566bad86285e3ad2a66b7dd3a92fd3",
-      "research/studies/domain_synthesis/results/ledgers.json": "0a535e472ed994a18ea1e1fc126d4870e957e300b098eb77e2c32c593eaf7f01",
+      "research/studies/light_limitation/results/light_limitation.json": "cd8927bb12ca0029dff4bd8bcd2eaef5646fad992f31687c9c6098301da7ceff",
+      "research/studies/domain_synthesis/results/ledgers.json": "d0782e4ceee46903daf482ed2ea503835a43a341e9efe708351d3aa90f0eda93",
       "research/studies/gases_glow_dimming/results/glow_absorption.json": "e6230f2334fb8aedf97acb31ef78107f80f4bcdb1fbb4985093a83e0bc09406e"
     },
     "ignored_inputs": {
@@ -50,7 +50,7 @@
         "day": 10.1718,
         "night": 0.5165
       },
-      "source": "research/array-industry a59f5a9, research/studies/solar_shield_array/results/glow.json"
+      "source": "research/studies/solar_shield_array/results/glow.json, results.recommended"
     },
     "glow_infrared_w_m2": 5.3441399999999994,
     "glow_watt_for_watt_dimming_percent": 2.5305533584260673,

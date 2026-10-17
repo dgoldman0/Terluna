@@ -33,11 +33,11 @@ GRAIL geoid, against the atlas's sea level of −1,654 m.
 
 ## Its shores
 
-The fresh sea under every shore feeds its water table, and at lunar gravity plants draw on it from 15–25 m above the
-sea (geography's shore screen, "Shores by the fresh seas", on domain/resources). The product's belt screen takes that
-reach, and the widest belt the ground can feed on a flat shore (0.56 km at the groundwater model's central
-transmissivity, 2.5 km in sandy ground), with each coastal pixel's mean height over half its width as its shore's
-slope (*screen*):
+The fresh sea under every shore feeds its water table, and at lunar gravity plants draw on it from 15–25 m above the sea
+([geography's shore screen](../../../geography/README.md#shores-by-the-fresh-seas)). The product's belt screen takes
+that reach, and the widest belt the ground can feed on a flat shore (0.56 km at the groundwater model's central
+transmissivity, 2.5 km in sandy ground), with each coastal pixel's mean height over half its width as its shore's slope
+(*screen*):
 
 - **A green rim.** The belts cover 1,084–2,627 km², 1.9–4.5% of the island. On its steep shores most are 100–200 m wide,
   and only the low flats reach the ground's supply limit; 715–1,230 km² of the island lies below the reach.
@@ -63,8 +63,8 @@ Open; the author has not chosen these. The recommendation is to take them in thi
    ([the CRM's account](../../../climate/crm/README.md#jura-island)): the sky gives the island no water at all, the
    bay's low shores have muggier nights than the open sea's, and the whole island is comfortable for about a third of
    the lunar cycle, too hot in the afternoons. It is the baseline a planted run is compared with.
-2. **The shores' water table at tens of metres,** resources' question 16 on domain/resources, with Jura Island as its
-   worked case.
+2. **The shores' water table at tens of metres,** [resources' question 16](../../../resources/questions.md), with Jura
+   Island as its worked case.
 3. **The island's cover:** the belts from 2, the heights as dry land, since the box gives them no rain or cloud, and
    the gardens placed with the author.
 4. **A planted box run,** if the cover's share of the box's shore columns is large enough to matter, against the bare

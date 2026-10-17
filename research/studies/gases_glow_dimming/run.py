@@ -64,11 +64,13 @@ CALIBRATION = dict(co2_ppm=1022.0, control_co2_ppm=400.0, forcing_w_m2_first_mea
 DESIGN_SCALE = 0.95                        # the design dimmer passes 0.95 of the titania stack's sunlight
 DESIGN_SUNLIGHT_W_M2 = 293.312             # the design sunlight at the top of the air, over the whole Moon
 DESIGN_ALBEDO = 0.280                      # the design case's planetary albedo
-# The glow's recommended answer (research/array-industry a59f5a9, results/glow.json, results.recommended): both
-# halves of each orbit rolled 80 degrees outside the service arc, on the layout re-flown for that law's push.
+# The glow's recommended answer (research/studies/solar_shield_array/results/glow.json, results.recommended, first
+# read from research/array-industry at a59f5a9 and in this tree since the integration of 17 October): both halves of
+# each orbit rolled 80 degrees outside the service arc, on the layout re-flown for that law's push. The glow study
+# takes its infrared efficacy from this study, so the answer is copied here rather than bound; a test holds the two.
 GLOW = dict(answer='rolled_outside_service_80_rolled_layout', glow_w_m2=3.59739, infrared_return_w_m2=1.74675,
             sunlight_return_w_m2=0.610045, top_infrared_w_m2=dict(day=10.1718, night=0.5165),
-            source='research/array-industry a59f5a9, research/studies/solar_shield_array/results/glow.json')
+            source='research/studies/solar_shield_array/results/glow.json, results.recommended')
 GLOW_HELD_DIMMING_PERCENT = 1.83
 BANDS = ((0, 15), (15, 30), (30, 45), (45, 60), (60, 75), (75, 90))
 EVIDENCE = ("ExoPlaSim runs of the design case, T21 with 10 layers and a 50 m mixed-layer sea, branched from its "

@@ -156,9 +156,11 @@ every way of joining the two that was offered
 ## Fresh shores and soda lakes, 15 October 2026
 
 The author asked how lush the shores of fresh seas could be with lunar gravity's help, and then whether the load that
-gathers where plants draw groundwater could make salt lakes. The water's side is on domain/resources (geography's
-shore screen and the sea chemistry's closed lakes) and Jura Island's numbers on research/jura-island; these are the
-living world's side. All are screens.
+gathers where plants draw groundwater could make salt lakes. The water's side is geography's
+[shore screen](../../geography/README.md#shores-by-the-fresh-seas) and the sea chemistry's
+[closed lakes](../../research/studies/sea_chemistry/README.md#closed-lakes-soda-lakes-and-salt-seas), and Jura Island's
+numbers are in [its study](../../research/studies/jura_island/README.md); these are the living world's side. All are
+screens.
 - **Fresh seas make green shores under desert skies.** The held seas, 0.14 g/kg, feed the water table under every shore
   with fresh water: no salt wedge rises under the shore when plants draw on it, and the spray waters what grows by the
   sea. Earth's analogues are the shores of its great lakes and the tidal reaches of its big rivers above the salt. The

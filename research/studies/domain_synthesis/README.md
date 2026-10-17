@@ -1,5 +1,10 @@
 # The three domains together
 
+Since the joint integration of 17 October ([record](../../integration/five-branches.md)) the heat the plan adds beyond
+the sunlight, with the gases held, the fleet's glow from the glow screen at the GCM's efficacy, the beamed power with
+the deep air's share and the water top-up's fall, is in
+[what each target climate takes](../climate_targets/README.md), beside the three target climates.
+
 The resources, ecology and provisioning branches merged on 12 October 2026, and four refreshes of main's studies
 followed on the merged tree ([integration record](../../integration/domains.md)). This study fits the branches together
 at the author's choices: distribution C′ (8 billion on the Moon, 4 billion on the ground and 4 billion aloft, under the
@@ -309,16 +314,16 @@ Machine time is for this laptop, one core, alongside the author's other work.
    gases, the glow and the dimming ([gases, glow and dimming](../gases_glow_dimming/README.md)).
 2. **C′ placed with the blend:** done on 12 October (provisioning). Every corner fits band by band under every rule
    at 1–2 kg of heritage meat ([distributions](../distributions/README.md#with-the-authors-food-the-blend)).
-3. **The carbon cycle under the updated parameters** (resources, question 7): a box model of the air, plants, soils
-   with their carbonates, the sky's biomass, the lakes' and seas' dissolved carbon, the sediments and people's stocks,
-   with weathering's calcium and magnesium as the mineral strand, through the first thousands of years. Seconds a
-   run. It sizes the managed return that holds 400 ppm, the build's carbon import and the oxygen burial leaves.
+3. **The carbon cycle under the updated parameters** (resources, question 7): done on 12 October and carried with
+   the groundwater on 14 October ([carbon cycle](../carbon_cycle/README.md)). Holding 400 ppm imports 0.12–0.33 Gt C
+   a year at year 10,000, with kilns of 3.9–14 GW.
 4. **The power screen** (provisioning, question 3): done on 12 October ([power](../../../provisioning/power.md)), the
    figures in the power section above. Carrying its heat of 1.47–1.49 W a watt into the ledgers needs the deep air's
    absorption upstream of provisioning's population screen, which the power screen itself reads.
-5. **The fleet's night and its glow** (plan, item 5; the planned branch research/array-industry): the night-side
-   attitude, films and a heat mirror sized against the glow, with this heat ledger as the people's part of the same
-   budget. About an hour of CPU for each set of kept orbits.
+5. **The fleet's night and its glow** (plan, item 4): screened on research/array-industry from 12 October
+   ([glow](../solar_shield_array/glow.md)). Rolling both halves 80° keeps the deep night dark and leaves 6.0 W/m²,
+   2.0% of the design sunlight at the GCM's efficacy; heat mirrors make it worse. The roll's own out-of-plane forces
+   in the flights come next.
 6. **The wet Moon's methane and nitrogen:** methane from the lakes by depth with oxidation in their waters and
    sediments, and the biomes' nitrogen cycle ending in N2. Screens of minutes, with the literature.
 7. **Traffic and the network:** the sky shared between 10 and 30 km, with the towns giving way to reefs (passes,

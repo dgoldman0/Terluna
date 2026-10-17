@@ -2,7 +2,7 @@
 
 The [constraints review](constraints_review.md) of 14 October 2026 reads the
 tile, support and flexible work below against the fleet as designed and the
-climate's corrected radiation on domain/ecology. The tiles' areal mass and the
+climate's corrected radiation ([climate/gcm](../../../climate/gcm/README.md)). The tiles' areal mass and the
 photons' authority bind together: one sail loading ties every ring's
 acceleration to the window tiles', the annulus allowance stands at 13.765 g/m²
 (3.55 g/m² above its film), and the rolled layout's edge rings need 0.86–0.95
@@ -144,7 +144,8 @@ Moon-facing faces raise that total. Rolling both halves 80° outside the service
 arc, inside the clearance along the kept orbits, leaves 6.0 W/m² on the layout
 re-flown for its push ([ring_layout_rolled.py](ring_layout_rolled.py)), 350–500
 km further in and inside the photon roll's steering reach, and keeps the deep
-night dark; added dimming of 2.7% of the design sunlight answers the rest. It
+night dark; added dimming of 2.0% of the design sunlight answers the rest at the GCM's infrared efficacy of 0.71
+(2.7% at an efficacy of 1). It
 takes a momentum store 5–12 times the chosen one; rolling the night half alone
 takes 14–48 times and leaves 8.7 W/m². What the roll leaves on the night's edge
 is under 1% of the tall sky's own twilight there, and a tilt through the nodes

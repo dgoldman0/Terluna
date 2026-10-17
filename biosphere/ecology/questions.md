@@ -84,20 +84,20 @@ on this laptop. The findings behind them are in the [README](README.md).
    carries the shore belts fed by the fresh seas (resources' question 16, the shores' water table) and the soda lakes
    of the dry belts' closed basins: how many there are and where.
 10. **The waters as living systems.**
-   - The seas' chemistry through time and the delivered water's salts, with the resources domain. Done there on
-     13 October (research/studies/sea_chemistry on domain/resources): every lasting state is a held one, and the
-     author holds the seas fresh, hard fresh water near 0.14 g/kg and pH 8.3, on the condition that they are rich in
+   - The seas' chemistry through time and the delivered water's salts, with the resources domain. Done there on 13
+     October ([sea chemistry](../../research/studies/sea_chemistry/README.md)): every lasting state is a held one, and
+     the author holds the seas fresh, hard fresh water near 0.14 g/kg and pH 8.3, on the condition that they are rich in
      life (resources' register, "The seas through time"). Their communities are ecology's to design for high
-     biodiversity, as Earth's old, clear fresh lakes hold hundreds of endemic species through variety of habitat:
-     rocky shores, shallows, deltas, reefs and deeps.
-   - The small waters' builders, from resources' terrain study of 13 October
-     (research/studies/terrain_through_time on domain/resources). Left alone the small lakes and crater pools fill
-     within centuries to tens of thousands of years. Dam builders keep ponds on the small streams below the 1.9 km
-     grid, as beaver once held 13% of a boreal landscape in ponds. Travertine builders (mosses, microbes and
-     stoneworts) build barriers that rise faster than lakes fill, on most rivers while the young soils weather fast.
-     Once the soils age the rivers carry about half the load natural tufa needs and sit at 0.76 times calcite
-     saturation, so lasting barriers need builders that calcify from undersaturated water, as freshwater shellfish
-     do, or springs carrying twice the rivers' load.
+     biodiversity, as Earth's old, clear fresh lakes hold hundreds of endemic species through variety of habitat: rocky
+     shores, shallows, deltas, reefs and deeps.
+   - The small waters' builders, from resources' terrain study of 13 October ([terrain through
+     time](../../research/studies/terrain_through_time/README.md)). Left alone the small lakes and crater pools fill
+     within centuries to tens of thousands of years. Dam builders keep ponds on the small streams below the 1.9 km grid,
+     as beaver once held 13% of a boreal landscape in ponds. Travertine builders (mosses, microbes and stoneworts) build
+     barriers that rise faster than lakes fill, on most rivers while the young soils weather fast. Once the soils age
+     the rivers carry about half the load natural tufa needs and sit at 0.76 times calcite saturation, so lasting
+     barriers need builders that calcify from undersaturated water, as freshwater shellfish do, or springs carrying
+     twice the rivers' load.
    - Stratification and oxygen in deep crater lakes.
    - Monthly plankton cycles, intertidal monthly wetlands, and methane from lakes by depth.
    - Soda lakes, which the author takes as their own local ecosystems (15 October): their communities for the Moon's

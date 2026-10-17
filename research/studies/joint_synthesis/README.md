@@ -20,7 +20,9 @@ fit together and inform on the whole and what comes next."
   anywhere. Tiles tilted 1.5–6° in the keeping envelope would add mirror glints averaging hundreds to over a
   thousand lux. Rolling the night half's tiles by 80°, which the shield's clearance study allows, keeps every glint
   off the Moon and brings the glow to about 2 lux at 0.1% scatter and 0.02 lux at 0.001%. The author's decision is
-  that the fleet avoids lighting the night zones.
+  that the fleet avoids lighting the night zones. The glow screen of 12 October adds the films' specular reflection
+  of the Moon's own day side, 1.6 lux over the night hemisphere as built; rolling both halves keeps the deep night
+  dark ([glow](../solar_shield_array/glow.md)).
 - **The air under the shield has no oxidant.** The titania stack removes the ultraviolet that makes OH, ozone and
   HO2, so the design column holds none of them. Gases released into the air (hydrogen, methane, carbon monoxide,
   organic compounds and lightning's NO) leave only through soils, rain and escape. Lightning's NO accumulates in the

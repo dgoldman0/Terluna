@@ -28,15 +28,20 @@ From 9 October three domain branches carried their own work: `domain/resources` 
 and how its cycle closes), `domain/provisioning` (how resources and energy become what people and the array need) and
 `domain/ecology` (engineered organisms and their communities, in biosphere/ecology). On 12 October they were merged in
 a second joint integration ([integration/domains.md](integration/domains.md)), with four refreshes of main's studies,
-and a [synthesis](studies/domain_synthesis/README.md) fitted them together at the author's choices. The author's
-decisions in that work are in the register. The key points so far:
+and a [synthesis](studies/domain_synthesis/README.md) fitted them together at the author's choices. On 17 October the
+three, with `research/array-industry` and `research/jura-island`, were merged in a third
+([integration/five-branches.md](integration/five-branches.md)), and
+[what each target climate takes](studies/climate_targets/README.md) set the author's open question of the target
+climate across the domains. The author's decisions in that work are in the register. The key points so far:
 
 - **The planned climate** (provisioning). The investigated climate is the planned climate: what the shield and the
-  array add to the Moon's heat is answered so that the Moon keeps it.
+  array add to the Moon's heat is answered so that the Moon keeps it. Since 17 October the author weighs a warmer,
+  lusher Moon instead (below).
 - **The fleet's own infrared glow** (provisioning). The films absorb 3–4.5% of the sunlight they pass, 65–83 PW over
   the fleet, and their glow puts 5.7–9.9 W/m² on the Moon, 1.9–3.4% of the design sunlight. It is answered with added
   solar protection, by redirecting it away from the Moon, or both. Films that absorb less cut it however the stack
-  lies; a heat mirror on Moon-facing faces is weakened by the stack's two overlapping layers.
+  lies; a heat mirror on Moon-facing faces is weakened by the stack's two overlapping layers. The glow screen of 12
+  October replaces the first estimate (below).
 - **Computing and industry** (provisioning). Against the glow they do little, since keeping a watt of it off the
   Moon takes 221–303 W out of the films. On the light the fleet turns away or collects they are significant, with
   demand the limit. Every industrial use is weighed by what it puts on the films, how it dims and where its heat
@@ -239,77 +244,87 @@ the kilns return less, holding 400 ppm imports 0.12–0.33 Gt C a year at year 1
 in 30,000–60,000 years. A general analysis of the deserts, from the author's Codex conversation on their climate, ran
 beside it as a note on the research drive.
 
-Waiting on the author: the desert note (research drive, deserts/desert_analysis.md) for review; and the taxonomy, on
-hold for later, with its open choices and the aerophytes' scientific name.
+From 13 October (ecology) the climate work ran again at the author's asks. The GCM with the gases, the glow and the
+dimming found the middle pair's 1.69% holding the design temperature and the glow's infrared needing 0.71 of its watts
+([gases, glow and dimming](studies/gases_glow_dimming/README.md)). The Moon's tall, curved air takes in 10.3 W/m² more
+sunlight than flat columns of the same air and lets out 16.2 W/m² more infrared; with it and CO2 and O2 bands in
+PlaSim's sunlight as the GCM's standard, the design case moved to a sunlight scale of 0.970 at 295.0 K
+([climate/gcm](../climate/gcm/README.md#the-curved-airs-light)). The 45° rings ran again on it and found deserts with
+hot afternoons. Part of CM1's warmth over the GCM came from the heat the GCM carries between latitudes, which a ring
+cannot, and part from PlaSim's longwave over-cooling the lower air. Refitted by height against the correlated-k model,
+with ice optics for its cold cloud, the GCM's longwave takes the Moon at the same sunlight to 306.5 K over years 10–19
+of a 20-year test, settling at 306.8–307.1 K ([where the corrected Moon
+settles](../climate/gcm/README.md#where-the-corrected-moon-settles)). The author then asked whether the Moon needs
+cooling back at all or might stay hotter and wetter, much of it a world for recreation, and holds new runs until the
+target climate is chosen.
+
+The array-industry branch opened on 12 October with the fleet's glow: 14.1 W/m² on the Moon as built, the glow with
+each ring's night half at perilune and the Moon's own infrared and sunlight imaged back by the flat films, and heat
+mirrors make it worse. Rolled 80° on both halves on the layout re-flown for that push, the fleet keeps the deep night
+dark and leaves 6.0 W/m², which 2.0% of the design sunlight answers at the GCM's efficacy
+([glow](studies/solar_shield_array/glow.md)). The author staged the array's feasibility on 14 October: the tile
+hardware, a materials and support comparison, and a cheap geometry screen with the coupled flexible model implemented,
+verified and benchmarked, the coupled design search coming later. A review found the tiles' areal mass and the photons'
+authority binding together ([constraints review](studies/solar_shield_array/constraints_review.md)). On 15 October the
+author laid out Jura Island, the arc of Montes Jura round Sinus Iridum, as mostly hybrid, its bay a great garden with
+one harbour town, and its 3-D CM1 box found a dry island with calm air, hot afternoons and warm slopes at night
+([Jura Island](studies/jura_island/README.md)); its rerun waits on the GCM's longwave and the fresh shores.
+
+At the joint integration of 17 October, [what each target climate takes](studies/climate_targets/README.md) set three
+targets side by side. Keeping the warm Moon still takes the 3.9–5.3% of dimming that answers the gases, the glow and
+the beamed power; 300 K takes 5.0–6.8% more, and the design temperature 8.7–11.6% more. The water the author keeps
+delivering to balance the crust brings 1.5–9.5 W/m² of heat in its fall through the first thousand years unless it is
+lowered with energy recovery.
+
+Waiting on the author: the target climate, with new runs held until it is chosen (register, 17 October); the
+constraints review's recommendations for the fleet; the build's delivery heat, which the water top-up extends for
+millennia; the desert note (research drive, deserts/desert_analysis.md) for review; and the taxonomy, on hold for
+later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 
-The four refreshes the author ordered on 12 October are done ([integration/domains.md](integration/domains.md)). The
-synthesis ranks two items first from the three domains together, and on 12 October the author put the carbon cycle
-and the power screen behind them; they lead this list, and the synthesis's
-[full order](studies/domain_synthesis/README.md#next-work-in-order) carries the domains' own next steps.
+Done since 12 October and merged on 17 October ([integration/five-branches.md](integration/five-branches.md)): the
+gases' warming in the deep column and the pair the author chose; where light limits growth; the GCM with the gases, the
+glow and the dimming; C′ placed with the blend; the power screen; the carbon cycle; the seas' chemistry, the terrain,
+the deltas and the three groundwater stages carried into the carbon cycle; the fresh shores and the soda lakes; the
+fleet's glow, its roll and the tile, support and flexible work; the curved air's light and the corrected radiation's
+design case; the 45° rings and the Jura Island box; the GCM's longwave refit and ice optics. What follows ranks what
+the integration found next.
 
-1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October on domain/ecology, about 38
-   minutes on six workers ([reduced gases](../atmosphere/radiative_convective/README.md)). Earth's present levels force
-   4.7 W/m² all-sky on the Moon and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K. The author chose the
-   balanced middle of three pairs weighed, 1.9 ppm of methane and 0.1 ppm of N2O: 3.58 W/m², answered by 1.69% added
-   dimming ([domain synthesis](studies/domain_synthesis/README.md#where-they-are-held)). Where light limits growth
-   followed on 13 October ([light limitation](studies/light_limitation/README.md)): water holds most of the land, light
-   limits 10–40% of the living Moon's growth, and each 1% of dimming costs 0.07–0.30% of it through light. The GCM,
-   run again with the gases, the glow and the dimming at the author's request
-   ([gases, glow and dimming](studies/gases_glow_dimming/README.md)), finds the held pair's dimming keeps the design
-   temperature and takes 0.9% of the rain, about half Earth's response. The glow's infrared heats the upper air: it
-   needs 0.71 of its watts in dimming, about 2.0% of the design sunlight, and takes 2.4% of the rain with the
-   temperature held. The author set the glow's further answers aside: the plants' water design makes up that rain,
-   with 3.2% more carbon per litre over the rain-fed land, and the 0.71 goes into the glow study and the synthesis's
-   dimming at the next integration.
-2. **C′ placed with the blend:** done on 12 October on domain/provisioning. Every one of C′'s 32 corners fits band by
-   band under every rule at 1–2 kg of heritage meat, with 0.6–12 million homesteaders among the heritage farms
-   ([distributions](studies/distributions/README.md#with-the-authors-food-the-blend)).
-3. **The carbon cycle under the updated parameters** (resources, question 7, on domain/resources): a box model of the
-   air, plants, soils with their carbonates, the sky's biomass, the lakes' and seas' dissolved carbon, the sediments
-   and people's stocks, with weathering's calcium and magnesium as the mineral strand, through the first thousands of
-   years in seconds a run. It sizes the managed return that holds 400 ppm (kilns, the magnesite route, dredged
-   sediments), the build's carbon import and the oxygen that burial leaves in the air.
-4. **The power screen** (provisioning, question 3): done on 12 October on domain/provisioning
-   ([power](../provisioning/power.md)). The deep air takes 6.3–7.8% of the beams, so each watt delivered leaves
-   1.47–1.49 W of heat; the ground's receivers take land equal to 36–59% of C′'s settlements; a fault across the ring
-   leaves 2.5–7.5 TW of critical loads for a week's stores. Its next work: beams assigned through the lunar cycle.
-5. **The Moon's night with the ring fleet.** The author has decided that the fleet avoids lighting the night zones,
-   its light redirected away from the Moon and used where it can be, for computing for instance. The biosphere and
-   human work set the requirement's value; the shield's night-side attitude (rolls within the bundle's clearance),
-   its films' scatter and switched states are tested against it in the shield's dynamics. Flights of the kept orbits
-   take about an hour of CPU each set. This joins the planned branch research/array-industry, with the trim and store
-   hardware and power, heat reuse, computing and industry
-   ([array_industry.md](studies/solar_shield_array/array_industry.md)). The fleet's own infrared glow goes with it:
-   about 6–10 W/m² over the Moon at a first estimate, which the planned climate leaves no room for, so the author has
-   it answered with added solar protection, by redirecting it away from the Moon, or both. The means to size, from
-   the protection domain's optical tables with the ring stack's radiative transfer: films that absorb less, a heat
-   mirror on Moon-facing faces (the stack's overlapping layers weaken it), and added dimming. The synthesis's heat
-   ledger is people's part of the same budget. The branch opened on 12 October, and its glow screen
-   ([glow.md](studies/solar_shield_array/glow.md)) finds 14.1 W/m² on the Moon as built, the glow itself with the
-   night half at perilune and the Moon's own infrared and sunlight that the films image back. Heat mirrors raise that
-   total. Rolled 80° outside the service arc on both halves, inside the clearance along the kept orbits, the fleet
-   leaves 6.0 W/m² on the layout re-flown for its push (13 October), answered by 2.7% added dimming, keeps the deep
-   night dark and takes a momentum store 5–12 times the chosen one. Its light on the night's edge is under 1% of the
-   twilight there, and a tilt through the nodes breaks the clearance. The roll's own out-of-plane forces come next.
-   The tile, support and flexible work of 14 October and its
-   [constraints review](studies/solar_shield_array/constraints_review.md) put the binding limits on the tiles' areal
-   mass and the edge rings' photon steering; the review's recommendations wait for the author.
-6. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
+1. **The target climate**, the author's choice among the warm Moon near 307 K, 300 K and the design temperature of
+   295 K, set out across the domains in [what each target climate takes](studies/climate_targets/README.md). Then the
+   design case for the chosen target, a 20-year GCM run of about 1.5 hours on four ranks; the glow pair from it, two
+   more; and geography's lakes, the atlas globe and the studies that read the design climate, regenerated once.
+2. **The heat beyond the sunlight:** the water top-up's fall recovered on the way down, as resources' first screen
+   asks of the build's deliveries (resources); and the power screen's heat carried into the ledgers, which needs the
+   deep air's absorption upstream of provisioning's population screen.
+3. **The GCM's open checks at the chosen target:** the high cloud's range from its water and its crystals' size,
+   offline in minutes, and the longwave refit checked at the settled state, whose layers stray 5–7 W/m² at 302 K. A
+   CM1 ring that makes its own upper vapour comes later.
+4. **The fleet:** the rolled law's own out-of-plane forces in the flights; the constraints review's recommendations,
+   for the author; the tile inventory matched to the eccentric rings' length, about 11% fewer tiles; illumination's
+   fleet light on the layout's radii, whose sunward crossings it puts 11–16% too far out, with the films' specular
+   light on the night; and the coupled design search at the later date the author set.
+5. **The shores and the waters:** groundwater by the fresh seas (resources, question 16), the delivered water's
+   chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores.
+6. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
+   round once these details are worked out.
+7. **The wet Moon's methane and nitrogen:** the lakes' methane by depth, with its oxidation in their waters and
+   sediments, and the biomes' nitrogen ending in N2.
+8. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
-   storm needs CM1's field solver over terrain, which touches the paused climate programme and waits for the author.
-7. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
+   storm needs CM1's field solver over terrain, which waits for the author.
+9. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
    atmosphere, then the biomes' and cities' emissions in an air with no OH; about an hour of runs once added. The
    author holds N2O and methane by biology, with technologies making up the difference.
-8. **The biomes' nitrogen and the dark night** as biological requirements: biological fixation, and the light that
+10. **The biomes' nitrogen and the dark night** as biological requirements: biological fixation, and the light that
    dark-night organisms tolerate (biosphere, lunar-cycle ecology).
-9. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
-10. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
-11. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
-12. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
+11. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
+12. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
+13. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
+14. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
 
-The climate programme stays paused, and no rented compute is commissioned.
+New runs wait on the author's choice of the target climate, and no rented compute is commissioned.
 
 ## Conservation through the transformation
 

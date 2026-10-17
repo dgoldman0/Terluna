@@ -100,8 +100,12 @@ DESIGN = dict(
         tco=dict(emissivity=[.11, .21], solar=[.03, .1], blocked=[.05, .15], g_m2=[.5, 1.5]),
         silver=dict(emissivity=[.02, .1], solar=[.04, .1], blocked=[.15, .3], g_m2=[.1, .3]),
         emitter=dict(emissivity=[.85, .85], solar=[.002, .01], blocked=[0., 0.], g_m2=[2., 10.])),
-    # The climate's response and the power the added dimming gives back.
-    infrared_efficacy=1., conversion=[.2, .3],
+    # The climate's response and the power the added dimming gives back. The efficacy is the GCM's: in the held glow
+    # branch of the gases, glow and dimming study (13 October, results/gases_glow_dimming.json, glow.held.efficacy)
+    # the dimming that holds the design temperature is 0.71 of the glow's infrared watts matched as sunlight the Moon
+    # absorbs, since the infrared heats the upper air. The register carries it (13 October). On the corrected
+    # radiation of 17 October the pair gave about 0.59; its rerun on the final radiation waits on the target climate.
+    infrared_efficacy=.7106, conversion=[.2, .3],
 )
 
 EVIDENCE = ('A screen. The films\' optics are computed from the protection domain\'s optical constants and layer '
@@ -1149,6 +1153,7 @@ def dimming(row, design_sun):
     ir, sw_ = row['infrared_total_W_m2']['global'], row['sunlight_return_W_m2']['global']
     d = 100*(DESIGN['infrared_efficacy']*ir/((1-a)*design_sun)+sw_/design_sun)
     return dict(percent=d, records_convention_percent=100*(ir+sw_)/design_sun,
+                percent_at_efficacy_1=100*(ir/((1-a)*design_sun)+sw_/design_sun),
                 glow_only_percent=100*DESIGN['infrared_efficacy']*row['glow_W_m2']['global']/((1-a)*design_sun))
 
 
@@ -1365,8 +1370,9 @@ ASSUMPTIONS = [
      '211.2 W/m2; uniform over the Moon and Lambertian (design guess)'),
     ('the Moon\'s reflected sunlight', 'design guess', 'a Lambertian day side with the planetary albedo 0.28, flat in '
      'wavelength, its spectrum the sunlight the window stack passes'),
-    ('infrared efficacy', 'design guess', 'the climate answers absorbed infrared as it answers absorbed sunlight '
-     '(efficacy 1; the provisioning screen\'s range is 0.5-1)'),
+    ('infrared efficacy', 'GCM run', 'the dimming that holds the design temperature against the glow is 0.71 of its '
+     'infrared watts matched as absorbed sunlight (the gases, glow and dimming study\'s held branch, 13 October); '
+     'about 0.59 on the corrected radiation of 17 October; efficacy 1, the energy balance alone, is kept beside it'),
     ('wide-gap absorber', 'design guess', 'an absorber with a step edge at 220 or 250 nm in the titania\'s place, '
      '1-2 g/m2, assumed to hold the film\'s present opacity below 175 nm'),
     ('ultraviolet mirror', 'design guess', 'lossless, reflecting 95-98% of 245-390 nm (annulus) or 245-340 nm (window, '
@@ -1534,7 +1540,9 @@ def build_product(c):
                     f"{fleet['perilune_km'][0]:,.0f}-{fleet['perilune_km'][1]:,.0f} km"),
         dict(record='domain synthesis heat ledger', states='the dimming that answers heat is its W/m2 over 293 W/m2',
              screen=f"infrared the Moon absorbs whole is matched by sunlight it absorbs (1 - {DESIGN['planetary_albedo']}) of, "
-                    f"so the dimming is {1/(1-DESIGN['planetary_albedo']):.2f} times that at efficacy 1"),
+                    f"so the dimming is {1/(1-DESIGN['planetary_albedo']):.2f} times that at efficacy 1 and "
+                    f"{DESIGN['infrared_efficacy']/(1-DESIGN['planetary_albedo']):.2f} times at the GCM's "
+                    f"{DESIGN['infrared_efficacy']:.2f}"),
         dict(record='joint synthesis, the night with the ring fleet',
              states='the fleet lights the night by diffuse scatter and glints of sunlight',
              screen=f"the films' specular reflection of the Moon's own day side also lands on the night: "

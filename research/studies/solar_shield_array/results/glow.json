@@ -2,7 +2,7 @@
  "schema": "terluna.research.fleet-glow/1",
  "producer": {
   "files": {
-   "research/studies/solar_shield_array/glow.py": "8f596bf0526174c3068d4253e06e3d815f5993ae480d3f4b16702ca9c5b31fe3",
+   "research/studies/solar_shield_array/glow.py": "511513c55980c29f5dcc9566daabe86b92e791412a86d2f0716243a887bfff49",
    "protection/model.py": "018cfbf6ac5e8ea6935480e09c4c2b69bf54b08c873d953d4b5e31c952d06647",
    "protection/spectra/annulus_film.py": "b1875c48b858b227673e864e2f5172a195a23c9507b1b85c3c118f8a86781aa1",
    "protection/spectra/short_wave.py": "c0b72e9b92e20c85f1c7c97d29cd1b8aaa75e8af08030c1ccf48a9295449414c",
@@ -117,8 +117,8 @@
   },
   {
    "name": "infrared efficacy",
-   "evidence": "design guess",
-   "statement": "the climate answers absorbed infrared as it answers absorbed sunlight (efficacy 1; the provisioning screen's range is 0.5-1)"
+   "evidence": "GCM run",
+   "statement": "the dimming that holds the design temperature against the glow is 0.71 of its infrared watts matched as absorbed sunlight (the gases, glow and dimming study's held branch, 13 October); about 0.59 on the corrected radiation of 17 October; efficacy 1, the energy balance alone, is kept beside it"
   },
   {
    "name": "wide-gap absorber",
@@ -336,7 +336,7 @@
     ]
    }
   },
-  "infrared_efficacy": 1.0,
+  "infrared_efficacy": 0.7106,
   "conversion": [
    0.2,
    0.3
@@ -1439,16 +1439,17 @@
      "night": 13.4632
     },
     "dimming": {
-     "percent": 6.59173,
+     "percent": 4.75416,
      "records_convention_percent": 4.81384,
-     "glow_only_percent": 4.43831,
+     "percent_at_efficacy_1": 6.59173,
+     "glow_only_percent": 3.15386,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 6.59173,
+     "to_add_percent": 4.75416,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.754026,
-     "absorbing_dimmer_gives_back": 0.357045,
+     "absorbing_dimmer_gives_back": 0.253716,
      "electricity_TW": [
-      146.68,
-      220.019
+      105.79,
+      158.685
      ]
     },
     "costs": {
@@ -1571,16 +1572,17 @@
      "night": 12.701
     },
     "dimming": {
-     "percent": 6.27595,
+     "percent": 4.54321,
      "records_convention_percent": 4.5995,
-     "glow_only_percent": 4.05566,
+     "percent_at_efficacy_1": 6.27595,
+     "glow_only_percent": 2.88195,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 6.27595,
+     "to_add_percent": 4.54321,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.754026,
-     "absorbing_dimmer_gives_back": 0.357045,
+     "absorbing_dimmer_gives_back": 0.253716,
      "electricity_TW": [
-      139.653,
-      209.479
+      101.096,
+      151.644
      ]
     },
     "costs": {
@@ -1703,16 +1705,17 @@
      "night": 7.8787
     },
     "dimming": {
-     "percent": 3.88386,
+     "percent": 2.8219,
      "records_convention_percent": 2.85639,
-     "glow_only_percent": 1.75823,
+     "percent_at_efficacy_1": 3.88386,
+     "glow_only_percent": 1.2494,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 3.88386,
+     "to_add_percent": 2.8219,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.754026,
-     "absorbing_dimmer_gives_back": 0.357045,
+     "absorbing_dimmer_gives_back": 0.253716,
      "electricity_TW": [
-      86.4238,
-      129.636
+      62.7931,
+      94.1896
      ]
     },
     "costs": {
@@ -1835,16 +1838,17 @@
      "night": 8.1114
     },
     "dimming": {
-     "percent": 3.99134,
+     "percent": 2.89828,
      "records_convention_percent": 2.93378,
-     "glow_only_percent": 1.86571,
+     "percent_at_efficacy_1": 3.99134,
+     "glow_only_percent": 1.32577,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 3.99134,
+     "to_add_percent": 2.89828,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.754026,
-     "absorbing_dimmer_gives_back": 0.357045,
+     "absorbing_dimmer_gives_back": 0.253716,
      "electricity_TW": [
-      88.8154,
-      133.223
+      64.4926,
+      96.7389
      ]
     },
     "costs": {
@@ -1967,16 +1971,17 @@
      "night": 12.8963
     },
     "dimming": {
-     "percent": 4.90344,
+     "percent": 3.55446,
      "records_convention_percent": 3.59828,
-     "glow_only_percent": 2.75002,
+     "percent_at_efficacy_1": 4.90344,
+     "glow_only_percent": 1.95417,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 4.90344,
+     "to_add_percent": 3.55446,
      "absorbing_dimmer_glow_W_m2_per_percent": 1.18263,
-     "absorbing_dimmer_gives_back": 0.559998,
+     "absorbing_dimmer_gives_back": 0.397934,
      "electricity_TW": [
-      109.112,
-      163.668
+      79.0941,
+      118.641
      ]
     },
     "costs": {
@@ -2099,16 +2104,17 @@
      "night": 12.9019
     },
     "dimming": {
-     "percent": 4.85486,
+     "percent": 3.51994,
      "records_convention_percent": 3.5633,
-     "glow_only_percent": 2.70144,
+     "percent_at_efficacy_1": 4.85486,
+     "glow_only_percent": 1.91964,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 4.85486,
+     "to_add_percent": 3.51994,
      "absorbing_dimmer_glow_W_m2_per_percent": 1.21258,
-     "absorbing_dimmer_gives_back": 0.574177,
+     "absorbing_dimmer_gives_back": 0.40801,
      "electricity_TW": [
-      108.031,
-      162.046
+      78.3259,
+      117.489
      ]
     },
     "costs": {
@@ -2231,16 +2237,17 @@
      "night": 6.43763
     },
     "dimming": {
-     "percent": 3.19069,
+     "percent": 2.33738,
      "records_convention_percent": 2.3651,
-     "glow_only_percent": 1.03727,
+     "percent_at_efficacy_1": 3.19069,
+     "glow_only_percent": 0.737087,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 3.19069,
+     "to_add_percent": 2.33738,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.786396,
-     "absorbing_dimmer_gives_back": 0.372373,
+     "absorbing_dimmer_gives_back": 0.264608,
      "electricity_TW": [
-      70.9995,
-      106.499
+      52.0115,
+      78.0173
      ]
     },
     "costs": {
@@ -2363,16 +2370,17 @@
      "night": 23.721
     },
     "dimming": {
-     "percent": 11.1433,
+     "percent": 8.05711,
      "records_convention_percent": 8.15735,
-     "glow_only_percent": 2.56026,
+     "percent_at_efficacy_1": 11.1433,
+     "glow_only_percent": 1.81932,
      "coating_provides_percent": 5.0,
-     "to_add_percent": 6.14329,
+     "to_add_percent": 3.05711,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.365147,
-     "absorbing_dimmer_gives_back": 0.172904,
+     "absorbing_dimmer_gives_back": 0.122866,
      "electricity_TW": [
-      136.701,
-      205.051
+      68.0269,
+      102.04
      ]
     },
     "costs": {
@@ -2495,13 +2503,14 @@
      "night": 20.8727
     },
     "dimming": {
-     "percent": 11.113,
+     "percent": 8.20584,
      "records_convention_percent": 8.30027,
-     "glow_only_percent": 3.74264,
+     "percent_at_efficacy_1": 11.113,
+     "glow_only_percent": 2.65952,
      "coating_provides_percent": 20.0,
-     "to_add_percent": -8.88696,
+     "to_add_percent": -11.7942,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.394118,
-     "absorbing_dimmer_gives_back": 0.186622,
+     "absorbing_dimmer_gives_back": 0.132614,
      "electricity_TW": [
       0.0,
       0.0
@@ -2627,16 +2636,17 @@
      "night": 23.1598
     },
     "dimming": {
-     "percent": 10.9399,
+     "percent": 7.91258,
      "records_convention_percent": 8.01091,
-     "glow_only_percent": 2.80709,
+     "percent_at_efficacy_1": 10.9399,
+     "glow_only_percent": 1.99471,
      "coating_provides_percent": 5.0,
-     "to_add_percent": 5.9399,
+     "to_add_percent": 2.91258,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.402873,
-     "absorbing_dimmer_gives_back": 0.190768,
+     "absorbing_dimmer_gives_back": 0.13556,
      "electricity_TW": [
-      132.175,
-      198.263
+      64.8109,
+      97.2163
      ]
     },
     "costs": {
@@ -2759,13 +2769,14 @@
      "night": 19.3422
     },
     "dimming": {
-     "percent": 10.543,
+     "percent": 7.80076,
      "records_convention_percent": 7.88983,
-     "glow_only_percent": 4.073,
+     "percent_at_efficacy_1": 10.543,
+     "glow_only_percent": 2.89428,
      "coating_provides_percent": 20.0,
-     "to_add_percent": -9.45702,
+     "to_add_percent": -12.1992,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.432504,
-     "absorbing_dimmer_gives_back": 0.204799,
+     "absorbing_dimmer_gives_back": 0.14553,
      "electricity_TW": [
       0.0,
       0.0
@@ -2891,16 +2902,17 @@
      "night": 26.6993
     },
     "dimming": {
-     "percent": 12.5726,
+     "percent": 9.03261,
      "records_convention_percent": 9.14759,
-     "glow_only_percent": 4.21841,
+     "percent_at_efficacy_1": 12.5726,
+     "glow_only_percent": 2.9976,
      "coating_provides_percent": 5.0,
-     "to_add_percent": 7.5726,
+     "to_add_percent": 4.03261,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.366297,
-     "absorbing_dimmer_gives_back": 0.173448,
+     "absorbing_dimmer_gives_back": 0.123252,
      "electricity_TW": [
-      168.506,
-      252.759
+      89.7339,
+      134.601
      ]
     },
     "costs": {
@@ -3023,16 +3035,17 @@
      "night": 31.8966
     },
     "dimming": {
-     "percent": 16.4076,
+     "percent": 11.7924,
      "records_convention_percent": 11.9423,
-     "glow_only_percent": 8.83408,
+     "percent_at_efficacy_1": 16.4076,
+     "glow_only_percent": 6.2775,
      "coating_provides_percent": 15.0,
-     "to_add_percent": 1.40762,
+     "to_add_percent": -3.20756,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.367929,
-     "absorbing_dimmer_gives_back": 0.174221,
+     "absorbing_dimmer_gives_back": 0.123802,
      "electricity_TW": [
-      31.3224,
-      46.9837
+      0.0,
+      0.0
      ]
     },
     "costs": {
@@ -3155,13 +3168,14 @@
      "night": 26.4315
     },
     "dimming": {
-     "percent": 12.9829,
+     "percent": 9.44644,
      "records_convention_percent": 9.56131,
-     "glow_only_percent": 3.39594,
+     "percent_at_efficacy_1": 12.9829,
+     "glow_only_percent": 2.41316,
      "coating_provides_percent": 15.0,
-     "to_add_percent": -2.01707,
+     "to_add_percent": -5.55356,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.251306,
-     "absorbing_dimmer_gives_back": 0.118998,
+     "absorbing_dimmer_gives_back": 0.0845601,
      "electricity_TW": [
       0.0,
       0.0
@@ -3287,13 +3301,14 @@
      "night": 27.5895
     },
     "dimming": {
-     "percent": 15.1872,
+     "percent": 11.1017,
      "records_convention_percent": 11.2344,
-     "glow_only_percent": 6.01349,
+     "percent_at_efficacy_1": 15.1872,
+     "glow_only_percent": 4.27319,
      "coating_provides_percent": 30.0,
-     "to_add_percent": -14.8128,
+     "to_add_percent": -18.8983,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.246022,
-     "absorbing_dimmer_gives_back": 0.116496,
+     "absorbing_dimmer_gives_back": 0.082782,
      "electricity_TW": [
       0.0,
       0.0
@@ -3419,16 +3434,17 @@
      "night": 13.0642
     },
     "dimming": {
-     "percent": 6.38084,
+     "percent": 4.60429,
      "records_convention_percent": 4.66199,
-     "glow_only_percent": 4.16711,
+     "percent_at_efficacy_1": 6.38084,
+     "glow_only_percent": 2.96115,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 6.38084,
+     "to_add_percent": 4.60429,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.643368,
-     "absorbing_dimmer_gives_back": 0.304646,
+     "absorbing_dimmer_gives_back": 0.216482,
      "electricity_TW": [
-      141.987,
-      212.98
+      102.455,
+      153.682
      ]
     },
     "costs": {
@@ -3551,16 +3567,17 @@
      "night": 23.502
     },
     "dimming": {
-     "percent": 11.0183,
+     "percent": 7.96511,
      "records_convention_percent": 8.06428,
-     "glow_only_percent": 2.44643,
+     "percent_at_efficacy_1": 11.0183,
+     "glow_only_percent": 1.73843,
      "coating_provides_percent": 5.0,
-     "to_add_percent": 6.01835,
+     "to_add_percent": 2.96511,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.330972,
-     "absorbing_dimmer_gives_back": 0.156721,
+     "absorbing_dimmer_gives_back": 0.111366,
      "electricity_TW": [
-      133.921,
-      200.881
+      65.9797,
+      98.9696
      ]
     },
     "costs": {
@@ -3683,16 +3700,17 @@
      "night": 21.0913
     },
     "dimming": {
-     "percent": 9.7151,
+     "percent": 7.01119,
      "records_convention_percent": 7.09902,
-     "glow_only_percent": 1.23936,
+     "percent_at_efficacy_1": 9.7151,
+     "glow_only_percent": 0.880687,
      "coating_provides_percent": 5.0,
-     "to_add_percent": 4.7151,
+     "to_add_percent": 2.01119,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.201461,
-     "absorbing_dimmer_gives_back": 0.0953956,
+     "absorbing_dimmer_gives_back": 0.0677881,
      "electricity_TW": [
-      104.921,
-      157.381
+      44.7531,
+      67.1296
      ]
     },
     "costs": {
@@ -3815,16 +3833,17 @@
      "night": 12.7344
     },
     "dimming": {
-     "percent": 6.39005,
+     "percent": 4.6146,
      "records_convention_percent": 4.67227,
-     "glow_only_percent": 4.43307,
+     "percent_at_efficacy_1": 6.39005,
+     "glow_only_percent": 3.15014,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 6.39005,
+     "to_add_percent": 4.6146,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.751849,
-     "absorbing_dimmer_gives_back": 0.356014,
+     "absorbing_dimmer_gives_back": 0.252984,
      "electricity_TW": [
-      142.192,
-      213.287
+      102.684,
+      154.026
      ]
     },
     "costs": {
@@ -3947,16 +3966,17 @@
      "night": 12.7171
     },
     "dimming": {
-     "percent": 6.37936,
+     "percent": 4.60699,
      "records_convention_percent": 4.66455,
-     "glow_only_percent": 4.4227,
+     "percent_at_efficacy_1": 6.37936,
+     "glow_only_percent": 3.14277,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 6.37936,
+     "to_add_percent": 4.60699,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.750601,
-     "absorbing_dimmer_gives_back": 0.355423,
+     "absorbing_dimmer_gives_back": 0.252564,
      "electricity_TW": [
-      141.954,
-      212.931
+      102.515,
+      153.772
      ]
     },
     "costs": {
@@ -4079,16 +4099,17 @@
      "night": 6.80795
     },
     "dimming": {
-     "percent": 4.85998,
+     "percent": 3.51932,
      "records_convention_percent": 3.56286,
-     "glow_only_percent": 3.85844,
+     "percent_at_efficacy_1": 4.85998,
+     "glow_only_percent": 2.74181,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 4.85998,
+     "to_add_percent": 3.51932,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.663094,
-     "absorbing_dimmer_gives_back": 0.313987,
+     "absorbing_dimmer_gives_back": 0.223119,
      "electricity_TW": [
-      108.144,
-      162.217
+      78.312,
+      117.468
      ]
     },
     "costs": {
@@ -4211,16 +4232,17 @@
      "night": 2.34664
     },
     "dimming": {
-     "percent": 3.71565,
+     "percent": 2.70611,
      "records_convention_percent": 2.7389,
-     "glow_only_percent": 2.7144,
+     "percent_at_efficacy_1": 3.71565,
+     "glow_only_percent": 1.92885,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 3.71565,
+     "to_add_percent": 2.70611,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.471192,
-     "absorbing_dimmer_gives_back": 0.223118,
+     "absorbing_dimmer_gives_back": 0.158548,
      "electricity_TW": [
-      82.6809,
-      124.021
+      60.2165,
+      90.3247
      ]
     },
     "costs": {
@@ -4343,16 +4365,17 @@
      "night": 0.871887
     },
     "dimming": {
-     "percent": 3.33765,
+     "percent": 2.43749,
      "records_convention_percent": 2.46673,
-     "glow_only_percent": 2.33649,
+     "percent_at_efficacy_1": 3.33765,
+     "glow_only_percent": 1.66031,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 3.33765,
+     "to_add_percent": 2.43749,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.407254,
-     "absorbing_dimmer_gives_back": 0.192842,
+     "absorbing_dimmer_gives_back": 0.137034,
      "electricity_TW": [
-      74.2697,
-      111.404
+      54.2391,
+      81.3587
      ]
     },
     "costs": {
@@ -4483,16 +4506,17 @@
      "night": 6.70188
     },
     "dimming": {
-     "percent": 4.57423,
+     "percent": 3.30389,
      "records_convention_percent": 3.34516,
-     "glow_only_percent": 3.72015,
+     "percent_at_efficacy_1": 4.57423,
+     "glow_only_percent": 2.64354,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 4.57423,
+     "to_add_percent": 3.30389,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.638729,
-     "absorbing_dimmer_gives_back": 0.30245,
+     "absorbing_dimmer_gives_back": 0.214921,
      "electricity_TW": [
-      101.786,
-      152.679
+      73.5184,
+      110.278
      ]
     },
     "costs": {
@@ -4623,16 +4647,17 @@
      "night": 2.04987
     },
     "dimming": {
-     "percent": 3.14087,
+     "percent": 2.28395,
      "records_convention_percent": 2.31179,
-     "glow_only_percent": 2.30566,
+     "percent_at_efficacy_1": 3.14087,
+     "glow_only_percent": 1.6384,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 3.14087,
+     "to_add_percent": 2.28395,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.394284,
-     "absorbing_dimmer_gives_back": 0.186701,
+     "absorbing_dimmer_gives_back": 0.13267,
      "electricity_TW": [
-      69.8908,
-      104.836
+      50.8227,
+      76.234
      ]
     },
     "costs": {
@@ -4763,16 +4788,17 @@
      "night": 0.479962
     },
     "dimming": {
-     "percent": 2.60901,
+     "percent": 1.90552,
      "records_convention_percent": 1.92837,
-     "glow_only_percent": 1.78066,
+     "percent_at_efficacy_1": 2.60901,
+     "glow_only_percent": 1.26534,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 2.60901,
+     "to_add_percent": 1.90552,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.304118,
-     "absorbing_dimmer_gives_back": 0.144006,
+     "absorbing_dimmer_gives_back": 0.10233,
      "electricity_TW": [
-      58.0558,
-      87.0837
+      42.4018,
+      63.6026
      ]
     },
     "costs": {
@@ -4903,16 +4929,17 @@
      "night": 0.791251
     },
     "dimming": {
-     "percent": 3.19668,
+     "percent": 2.35005,
      "records_convention_percent": 2.37755,
-     "glow_only_percent": 2.14363,
+     "percent_at_efficacy_1": 3.19668,
+     "glow_only_percent": 1.52326,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 3.19668,
+     "to_add_percent": 2.35005,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.407254,
-     "absorbing_dimmer_gives_back": 0.192842,
+     "absorbing_dimmer_gives_back": 0.137034,
      "electricity_TW": [
-      71.1328,
-      106.699
+      52.2935,
+      78.4402
      ]
     },
     "costs": {
@@ -5043,16 +5070,17 @@
      "night": 0.287772
     },
     "dimming": {
-     "percent": 1.91772,
+     "percent": 1.42088,
      "records_convention_percent": 1.43702,
-     "glow_only_percent": 0.942846,
+     "percent_at_efficacy_1": 1.91772,
+     "glow_only_percent": 0.669987,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 1.91772,
+     "to_add_percent": 1.42088,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.407254,
-     "absorbing_dimmer_gives_back": 0.192842,
+     "absorbing_dimmer_gives_back": 0.137034,
      "electricity_TW": [
-      42.6733,
-      64.0099
+      31.6175,
+      47.4262
      ]
     },
     "costs": {
@@ -5183,16 +5211,17 @@
      "night": 0.308132
     },
     "dimming": {
-     "percent": 1.97057,
+     "percent": 1.45843,
      "records_convention_percent": 1.47507,
-     "glow_only_percent": 0.995692,
+     "percent_at_efficacy_1": 1.97057,
+     "glow_only_percent": 0.707539,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 1.97057,
+     "to_add_percent": 1.45843,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.407254,
-     "absorbing_dimmer_gives_back": 0.192842,
+     "absorbing_dimmer_gives_back": 0.137034,
      "electricity_TW": [
-      43.8492,
-      65.7738
+      32.4531,
+      48.6796
      ]
     },
     "costs": {
@@ -5323,16 +5352,17 @@
      "night": 0.191687
     },
     "dimming": {
-     "percent": 1.5194,
+     "percent": 1.13783,
      "records_convention_percent": 1.15023,
-     "glow_only_percent": 0.544525,
+     "percent_at_efficacy_1": 1.5194,
+     "glow_only_percent": 0.386939,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 1.5194,
+     "to_add_percent": 1.13783,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.433553,
-     "absorbing_dimmer_gives_back": 0.205295,
+     "absorbing_dimmer_gives_back": 0.145883,
      "electricity_TW": [
-      33.8098,
-      50.7147
+      25.3191,
+      37.9786
      ]
     },
     "costs": {
@@ -5463,16 +5493,17 @@
      "night": 0.317747
     },
     "dimming": {
-     "percent": 1.60661,
+     "percent": 1.2074,
      "records_convention_percent": 1.22037,
-     "glow_only_percent": 0.605445,
+     "percent_at_efficacy_1": 1.60661,
+     "glow_only_percent": 0.430229,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 1.60661,
+     "to_add_percent": 1.2074,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.433553,
-     "absorbing_dimmer_gives_back": 0.205295,
+     "absorbing_dimmer_gives_back": 0.145883,
      "electricity_TW": [
-      35.7503,
-      53.6254
+      26.8672,
+      40.3008
      ]
     },
     "costs": {
@@ -5603,16 +5634,17 @@
      "night": 0.819185
     },
     "dimming": {
-     "percent": 3.21714,
+     "percent": 2.35185,
      "records_convention_percent": 2.37995,
-     "glow_only_percent": 2.1894,
+     "percent_at_efficacy_1": 3.21714,
+     "glow_only_percent": 1.55579,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 3.21714,
+     "to_add_percent": 2.35185,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.346967,
-     "absorbing_dimmer_gives_back": 0.164295,
+     "absorbing_dimmer_gives_back": 0.116748,
      "electricity_TW": [
-      71.588,
-      107.382
+      52.3334,
+      78.5001
      ]
     },
     "costs": {
@@ -5743,16 +5775,17 @@
      "night": 0.585366
     },
     "dimming": {
-     "percent": 5.06999,
+     "percent": 3.73053,
      "records_convention_percent": 3.77404,
-     "glow_only_percent": 1.33773,
+     "percent_at_efficacy_1": 5.06999,
+     "glow_only_percent": 0.950589,
      "coating_provides_percent": 5.0,
-     "to_add_percent": 0.0699933,
+     "to_add_percent": -1.26947,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.184376,
-     "absorbing_dimmer_gives_back": 0.0873056,
+     "absorbing_dimmer_gives_back": 0.0620394,
      "electricity_TW": [
-      1.5575,
-      2.33624
+      0.0,
+      0.0
      ]
     },
     "costs": {
@@ -5883,16 +5916,17 @@
      "night": 0.122258
     },
     "dimming": {
-     "percent": 1.51297,
+     "percent": 1.1204,
      "records_convention_percent": 1.13315,
-     "glow_only_percent": 0.706313,
+     "percent_at_efficacy_1": 1.51297,
+     "glow_only_percent": 0.501906,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 1.51297,
+     "to_add_percent": 1.1204,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.304118,
-     "absorbing_dimmer_gives_back": 0.144006,
+     "absorbing_dimmer_gives_back": 0.10233,
      "electricity_TW": [
-      33.6667,
-      50.5
+      24.9312,
+      37.3968
      ]
     },
     "costs": {
@@ -6023,16 +6057,17 @@
      "night": 0.135003
     },
     "dimming": {
-     "percent": 1.55467,
+     "percent": 1.15003,
      "records_convention_percent": 1.16318,
-     "glow_only_percent": 0.748015,
+     "percent_at_efficacy_1": 1.55467,
+     "glow_only_percent": 0.531539,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 1.55467,
+     "to_add_percent": 1.15003,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.304118,
-     "absorbing_dimmer_gives_back": 0.144006,
+     "absorbing_dimmer_gives_back": 0.10233,
      "electricity_TW": [
-      34.5947,
-      51.892
+      25.5906,
+      38.3859
      ]
     },
     "costs": {
@@ -6163,13 +6198,14 @@
      "night": 0.301659
     },
     "dimming": {
-     "percent": 4.0677,
+     "percent": 2.99116,
      "records_convention_percent": 3.02612,
-     "glow_only_percent": 0.939142,
+     "percent_at_efficacy_1": 4.0677,
+     "glow_only_percent": 0.667354,
      "coating_provides_percent": 5.0,
-     "to_add_percent": -0.932302,
+     "to_add_percent": -2.00884,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.124423,
-     "absorbing_dimmer_gives_back": 0.0589166,
+     "absorbing_dimmer_gives_back": 0.0418661,
      "electricity_TW": [
       0.0,
       0.0
@@ -6303,16 +6339,17 @@
      "night": 0.23187
     },
     "dimming": {
-     "percent": 1.30223,
+     "percent": 0.976927,
      "records_convention_percent": 0.987493,
-     "glow_only_percent": 0.473885,
+     "percent_at_efficacy_1": 1.30223,
+     "glow_only_percent": 0.336742,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 1.30223,
+     "to_add_percent": 0.976927,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.322812,
-     "absorbing_dimmer_gives_back": 0.152858,
+     "absorbing_dimmer_gives_back": 0.108621,
      "electricity_TW": [
-      28.9773,
-      43.466
+      21.7386,
+      32.6079
      ]
     },
     "costs": {
@@ -6455,16 +6492,17 @@
      ]
     },
     "dimming": {
-     "percent": 3.957,
+     "percent": 2.92206,
      "records_convention_percent": 2.95568,
-     "glow_only_percent": 2.23646,
+     "percent_at_efficacy_1": 3.957,
+     "glow_only_percent": 1.58923,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 3.957,
+     "to_add_percent": 2.92206,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.390467,
-     "absorbing_dimmer_gives_back": 0.184893,
+     "absorbing_dimmer_gives_back": 0.131385,
      "electricity_TW": [
-      88.0513,
-      132.077
+      65.0218,
+      97.5328
      ]
     },
     "costs": {
@@ -6607,16 +6645,17 @@
      ]
     },
     "dimming": {
-     "percent": 2.63862,
+     "percent": 1.93209,
      "records_convention_percent": 1.95504,
-     "glow_only_percent": 1.63956,
+     "percent_at_efficacy_1": 2.63862,
+     "glow_only_percent": 1.16507,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 2.63862,
+     "to_add_percent": 1.93209,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.282821,
-     "absorbing_dimmer_gives_back": 0.133921,
+     "absorbing_dimmer_gives_back": 0.0951644,
      "electricity_TW": [
-      58.7146,
-      88.0719
+      42.9929,
+      64.4894
      ]
     },
     "costs": {
@@ -6759,16 +6798,17 @@
      ]
     },
     "dimming": {
-     "percent": 2.64004,
+     "percent": 1.93232,
      "records_convention_percent": 1.9553,
-     "glow_only_percent": 1.6468,
+     "percent_at_efficacy_1": 2.64004,
+     "glow_only_percent": 1.17022,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 2.64004,
+     "to_add_percent": 1.93232,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.283031,
-     "absorbing_dimmer_gives_back": 0.13402,
+     "absorbing_dimmer_gives_back": 0.0952347,
      "electricity_TW": [
-      58.7462,
-      88.1194
+      42.998,
+      64.497
      ]
     },
     "costs": {
@@ -6911,16 +6951,17 @@
      ]
     },
     "dimming": {
-     "percent": 2.65725,
+     "percent": 1.94448,
      "records_convention_percent": 1.96763,
-     "glow_only_percent": 1.66438,
+     "percent_at_efficacy_1": 2.65725,
+     "glow_only_percent": 1.18271,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 2.65725,
+     "to_add_percent": 1.94448,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.284129,
-     "absorbing_dimmer_gives_back": 0.134541,
+     "absorbing_dimmer_gives_back": 0.0956045,
      "electricity_TW": [
-      59.1294,
-      88.694
+      43.2687,
+      64.9031
      ]
     },
     "costs": {
@@ -7063,16 +7104,17 @@
      ]
     },
     "dimming": {
-     "percent": 2.73854,
+     "percent": 2.00619,
      "records_convention_percent": 2.02998,
-     "glow_only_percent": 1.70343,
+     "percent_at_efficacy_1": 2.73854,
+     "glow_only_percent": 1.21046,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 2.73854,
+     "to_add_percent": 2.00619,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.292146,
-     "absorbing_dimmer_gives_back": 0.138337,
+     "absorbing_dimmer_gives_back": 0.098302,
      "electricity_TW": [
-      60.938,
-      91.4071
+      44.6419,
+      66.9629
      ]
     },
     "costs": {
@@ -7215,16 +7257,17 @@
      ]
     },
     "dimming": {
-     "percent": 1.72687,
+     "percent": 1.27985,
      "records_convention_percent": 1.29437,
-     "glow_only_percent": 0.717515,
+     "percent_at_efficacy_1": 1.72687,
+     "glow_only_percent": 0.509866,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 1.72687,
+     "to_add_percent": 1.27985,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.292146,
-     "absorbing_dimmer_gives_back": 0.138337,
+     "absorbing_dimmer_gives_back": 0.098302,
      "electricity_TW": [
-      38.4264,
-      57.6395
+      28.4793,
+      42.719
      ]
     },
     "costs": {
@@ -7367,16 +7410,17 @@
      ]
     },
     "dimming": {
-     "percent": 1.48988,
+     "percent": 1.1189,
      "records_convention_percent": 1.13095,
-     "glow_only_percent": 0.454782,
+     "percent_at_efficacy_1": 1.48988,
+     "glow_only_percent": 0.323168,
      "coating_provides_percent": 0.0,
-     "to_add_percent": 1.48988,
+     "to_add_percent": 1.1189,
      "absorbing_dimmer_glow_W_m2_per_percent": 0.30967,
-     "absorbing_dimmer_gives_back": 0.146634,
+     "absorbing_dimmer_gives_back": 0.104198,
      "electricity_TW": [
-      33.153,
-      49.7295
+      24.8979,
+      37.3468
      ]
     },
     "costs": {
@@ -7463,16 +7507,17 @@
     "night": 0.0183276
    },
    "dimming": {
-    "percent": 2.73854,
+    "percent": 2.00619,
     "records_convention_percent": 2.02998,
-    "glow_only_percent": 1.70343,
+    "percent_at_efficacy_1": 2.73854,
+    "glow_only_percent": 1.21046,
     "coating_provides_percent": 0.0,
-    "to_add_percent": 2.73854,
+    "to_add_percent": 2.00619,
     "absorbing_dimmer_glow_W_m2_per_percent": 0.292146,
-    "absorbing_dimmer_gives_back": 0.138337,
+    "absorbing_dimmer_gives_back": 0.098302,
     "electricity_TW": [
-     60.938,
-     91.4071
+     44.6419,
+     66.9629
     ]
    },
    "costs": {
@@ -7729,7 +7774,7 @@
    {
     "record": "domain synthesis heat ledger",
     "states": "the dimming that answers heat is its W/m2 over 293 W/m2",
-    "screen": "infrared the Moon absorbs whole is matched by sunlight it absorbs (1 - 0.28) of, so the dimming is 1.39 times that at efficacy 1"
+    "screen": "infrared the Moon absorbs whole is matched by sunlight it absorbs (1 - 0.28) of, so the dimming is 1.39 times that at efficacy 1 and 0.99 times at the GCM's 0.71"
    },
    {
     "record": "joint synthesis, the night with the ring fleet",

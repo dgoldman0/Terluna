@@ -166,3 +166,16 @@ def test_the_plants_water_design_restores_what_the_evaporation_loses(product):
     for e in (0, 1):
         assert min(wet) < m['rise_percent']['glow'][e] < max(wet)
         assert m['rise_percent']['glow'][e] < m['rise_percent']['plan'][e]
+
+
+def test_the_glow_is_the_glow_studys_recommended_answer():
+    """The runs' glow is the glow study's recommended answer, copied because that study takes its efficacy from here."""
+    glow = json.loads((R.ROOT / 'research/studies/solar_shield_array/results/glow.json').read_text())
+    rec = glow['results']['recommended']
+    assert R.GLOW['answer'] == rec['answer']
+    for mine, theirs in (('glow_w_m2', 'glow_W_m2'), ('infrared_return_w_m2', 'infrared_return_W_m2'),
+                         ('sunlight_return_w_m2', 'sunlight_return_W_m2')):
+        assert close(R.GLOW[mine], rec[theirs]['global'], rel=1e-4), mine
+    for half in ('day', 'night'):
+        assert close(R.GLOW['top_infrared_w_m2'][half],
+                     rec['glow_W_m2'][half] + rec['infrared_return_W_m2'][half], rel=1e-4), half

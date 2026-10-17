@@ -82,6 +82,8 @@ the explorable experience, which reads them as baked products, is in
 | [domain_synthesis](studies/domain_synthesis/README.md) | Resources, ecology and provisioning after the joint integration of 12 October: heat, land, methane and N2O, phosphorus and the sky's layers at the author's choices | Arithmetic on screen products; the gases' warming in the deep column comes next |
 | [light_limitation](studies/light_limitation/README.md) | The canopy's light response, the food study's land by band, the GCM's soil water, the waters' and the sky's production: where and when light limits growth, and what the planned dimming costs the biosphere through light and, from Earth's models, through the rain | A screen on committed products and Earth's waters; the Moon's rain response is the GCM's, in gases_glow_dimming |
 | [gases_glow_dimming](studies/gases_glow_dimming/README.md) | Climate's GCM with the gases, the fleet's glow and the dimming, the atmosphere domain's correlated-k radiation, the light study's growth: whether the dimming holds the design climate, what the rain does, and what the glow's infrared needs | Three 20-year runs of one model at T21 and a clear-sky spectral check; the held point interpolated |
+| [jura_island](studies/jura_island/README.md) | Geography (the atlas and LOLA's shores), the CRM's 3-D box on the corrected design case and the groundwater's shore reach: Jura Island's layout, its climate and its shore belts | One box of two lunar days on placeholder land; the rerun waits on the GCM's longwave and the fresh shores |
+| [climate_targets](studies/climate_targets/README.md) | The GCM's settled warm Moon and design case, the gases, the fleet's glow, the beamed power and the water top-up, light and rain: what each target climate takes and the heat beyond the sunlight, after the joint integration of 17 October | Arithmetic on two runs of different physics, interpolated by the ground's temperature; no target is run |
 
 The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)
 from a separate lineage (57 tests, 90-m spacing, 20-m/s reservoir flow), whose
@@ -118,6 +120,7 @@ python -m research.studies.land_cities.run                                   # r
 python -m research.studies.distributions.run                                 # results in studies/distributions/results
 python -m research.studies.living_light.run --output research/studies/living_light/results/living_light.json
 python -m research.studies.domain_synthesis.ledgers                        # results in studies/domain_synthesis/results
+python -m research.studies.climate_targets.run                             # after its extract, with the climate venv
 ```
 
 For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`
