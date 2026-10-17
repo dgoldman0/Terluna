@@ -872,8 +872,8 @@ and the correction alone, global means:
 
 Ice keeps nearly all the cloud, 27% of the sky at 81–107 km against 30%. It reflects 3.3 W/m² more sunlight
 and traps 3.4 W/m² less infrared, so the high cloud's net warming over the uncorrected year falls from 12.4 to
-5.7 W/m². The top of the air still gains 13 W/m² over the year, and the 20-year test with both
-(`A28_corrected_970_lw_ice`, from 17 October) finds where the Moon settles.
+5.7 W/m². The top of the air still gains 13 W/m² over the year; the 20-year test with both settles near 307 K
+([below](#where-the-corrected-moon-settles)).
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.gcm.plasim_ice_optics write          # seconds
@@ -881,6 +881,79 @@ climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --folder A28_corre
     --set sunlight_scale=0.970 --longwave-correction --ice-optics --heating-diagnostics \
     --start-from climate/gcm/runs/A28_corrected_970/model/MOST_REST.00019
 ```
+
+### Where the corrected Moon settles
+
+The 20-year test with the longwave correction and the ice optics (`A28_corrected_970_lw_ice`, 17 October, from
+`A28_corrected_970`'s year 19 at the design sunlight scale of 0.970, 4 ranks, about 4.7 minutes a year) settles near
+307 K. Over years 10–19 the ground averages 306.5 K, 11.5 K above the design case, and still warms 0.08 K a year, while
+the top of the air gains 0.24 W/m² over the last five years. Over those years the gain falls 2.2 W/m² for each kelvin
+the ground warms, so the balance lies at 306.8–307.1 K. Global means over years 10–19 (`progress.json`; the air is at
+2 m, its warmest and coldest the extremes of the year's 3-day means, the equator's land within 12°, the poles beyond
+70°):
+
+| Years 10–19 | Design case (`A28_corrected_970`) | Correction and ice (`A28_corrected_970_lw_ice`) |
+|---|---|---|
+| Ground; air | 295.0; 294.3 K | 306.5; 307.0 K |
+| Top of the air; planetary albedo | +0.1 W/m²; 0.270 | +0.6 W/m²; 0.278 |
+| Cloud effect: sunlight; infrared; net | −6.4; +6.8; +0.3 W/m² | −10.8; +16.8; +6.0 W/m² |
+| Cloud cover; rain | 19.8%; 2.31 mm/day | 38.3%; 3.32 mm/day |
+| Air: warmest; coldest | 303.3; 287.1 K | 314.9; 297.7 K |
+| Equator's land: air; its swing through the year's 3-day means | 294.4; 6.7 K | 306.4; 5.5 K |
+| Poles' air | 292.7 K | 307.8 K |
+
+The warmth reaches every latitude. The poles' air warms 15 K and the equator's land 12 K, and the land's surface
+poleward of 60° is the warmest, 34.4–34.8 °C against 32.3–32.8 °C within 30° of the equator. The rain rises 44% and
+reaches further poleward, and the land under 0.5 mm a day, the desert measure of 14 October, halves, from 37.6% to
+18.9%. The rain is still heaviest near the equator:
+
+| Land, years 10–19 | Design case: desert; rain | Correction and ice: desert; rain |
+|---|---|---|
+| 0–15° | 0%; 4.88 mm/day | 0%; 6.09 mm/day |
+| 15–30° | 1%; 2.87 mm/day | 1%; 4.22 mm/day |
+| 30–45° | 34%; 1.52 mm/day | 3%; 3.01 mm/day |
+| 45–60° | 85%; 0.24 mm/day | 22%; 1.22 mm/day |
+| 60–75° | 100%; 0.06 mm/day | 93%; 0.17 mm/day |
+| 75–90° | 100%; 0.04 mm/day | 100%; 0.04 mm/day |
+| Below 2 km; 2–4 km; 4 km and up | 46%; 36%; 4% | 24%; 16%; 1% |
+| All land | 37.6%; 2.25 mm/day | 18.9%; 3.34 mm/day |
+
+The heat at the ground is humid. In the 3-day means of the lowest level, about 0.9 km above the ground, the land's air
+has a median of 32.3 °C (18.6 in the design case), 37.5 °C at the 99th percentile and 40.4 °C at most; its wet-bulb
+temperature has a median of 25.9 °C (15.4), 31.0 °C at the 99th percentile (21.0) and 34.0 °C at most (23.8), above
+28 °C for 17.6% of the land's time and above 31 °C for 1.0%. The seas' surface has a median of 34.0 °C (23.0) and
+36.7 °C at the 99th percentile. The air cools about 1 K a kilometre upward, and the freezing level stands a median
+36 km above the ground (23 km in the design case). The figures come from the run's output files and the T21 boundary
+file, by the scripts in `session-tools/climate_settled_2026-10-17` on the research drive; the wet-bulb temperature is
+the psychrometric one over water with Bolton's saturation.
+
+Place by place, in the same 3-day means of years 10–19, with the design case's figures in brackets (`readout.py`):
+
+| Land | Wet-bulb: median; 99th percentile | Time above 28 °C wet-bulb | Air: median |
+|---|---|---|---|
+| 0–15° | 27.0; 31.8 °C (17.3; 21.8) | 34% (0) | 31.7 °C (19.3) |
+| 15–30° | 27.0; 31.4 °C (17.1; 21.3) | 33% (0) | 32.0 °C (19.4) |
+| 30–45° | 26.6; 30.9 °C (16.2; 20.5) | 24% (0) | 31.7 °C (19.1) |
+| 45–60° | 25.7; 30.2 °C (15.2; 18.3) | 12% (0) | 31.9 °C (18.8) |
+| 60–90° | 25.0; 28.7 °C (14.3; 17.3) | 2.8% (0) | 33.1 °C (18.1) |
+| Below 1 km | 27.1; 31.8 °C (16.4; 21.6) | 36% (0) | 33.3 °C (19.6) |
+| 4 km and up | 24.8; 28.5 °C (15.4; 18.8) | 2.3% (0) | 29.3 °C (17.6) |
+| Coasts, the land beside the sea | 26.3; 31.3 °C (16.0; 21.2) | 23% (0) | 32.5 °C (18.9) |
+
+Each place's warmest tenth of its 3-day means, its afternoons, averages a wet-bulb temperature of 29.2 °C and air of
+34.9 °C (18.7 and 22.9), and its coolest tenth 22.7 and 30.2 °C (13.0 and 17.2). The seas' surface has a median of
+35.3 °C within 15° of the equator and 33.1 °C poleward of 60° (25.8 and 19.8). Over the land the air 10 km up, 22.0 °C
+at 0.96 atm, is near the design case's at the lowest level, 19.6 °C at 1.13 atm; 20 km up it is 12.7 °C at 0.79 atm
+and 30 km up 5.0 °C at 0.65 atm (2.4 and −7.1 °C at the same heights in the design case).
+
+The base of the thermosphere barely follows the ground: the middle-atmosphere cases at ground temperatures of 288 and
+308 K ([results/cases](../../atmosphere/middle_atmosphere/results/cases/), titania stack at 1.2 atm) put the 0.3 Pa
+base at 163.3 and 163.4 K. Through the escape model's thermal column at solar maximum, behind the film alone, the
+exobase warms from 163.6 to 163.7 K and the escape rises from 4.4 × 10⁻⁸ to 5.8 × 10⁻⁸ kg/s, an atmospheric cycle
+time of about 1.5 × 10¹⁸ years; with 0.1% of the far ultraviolet transmitted, from 3.2 × 10⁻³ to 3.8 × 10⁻³ kg/s,
+about 2.3 × 10¹³ years (`exobase_warm.py`, with the scripts above). Whether the Moon is held warm or brought back to
+the design temperature is the author's open question
+([register](../../research/decisions.md#the-target-climate-17-october-2026)); new runs wait on it.
 
 ### The curved air's light
 
@@ -1142,7 +1215,7 @@ against the papers:
 | The glow pair on the corrected radiation (`A28_corrected_gases_glow`, `A28_corrected_gases_glow_held`) | Done (20 years each from `A28_corrected_970`'s year 19, 2026-10-17), with 13 October's added dimming on the design scale of 0.970: the held branch 0.61 K below the design case (above). It runs again on the radiation with both corrections |
 | The longwave by height, a year (`A28_corrected_970_lwcheck`) | Done (1 year from `A28_corrected_970`'s year 19 on 2 ranks, 2026-10-17): `--longwave-correction`, the patch reproducing its Python copy; the high cloud forms (above) |
 | Ice optics, a year (`A28_corrected_970_icecheck`, `A28_corrected_970_lwcheck_rebuilt`) | Done (1 year each from `A28_corrected_970`'s year 19, 2026-10-17): the correction with `--ice-optics` on 4 ranks, and the longwave year again on the rebuilt model without them on 2 ranks, which repeats it exactly (above) |
-| The 20-year test of both (`A28_corrected_970_lw_ice`) | Running from 2026-10-17, 20 years from `A28_corrected_970`'s year 19 at 0.970 with `--longwave-correction --ice-optics` and the heating diagnostics, on 4 ranks |
+| The 20-year test of both (`A28_corrected_970_lw_ice`) | Done (20 years from `A28_corrected_970`'s year 19 at 0.970 with `--longwave-correction --ice-optics` and the heating diagnostics, on 4 ranks, 2026-10-17): 306.5 K over years 10–19, settling at 306.8–307.1 K ([above](#where-the-corrected-moon-settles)) |
 | D, E | D needs ExoPlaSim's ozone profile from the 1-D results; E's trace gases now enter as their CO2 equivalent (`--co2-ppm`, above) |
 
 ## First experiments
