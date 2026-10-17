@@ -4,7 +4,7 @@
   {
    "citation": "HM Government 2013, The Building Regulations 2010, Approved Document K: Protection from falling, collision and impact, 2013 edition",
    "doi_or_url": "https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf",
-   "use": "Table 1.1: general-access stairs rise 150-170 mm and go 250-400 mm, with 2R + G between 550 and 700 mm; paragraph 1.18: at most 12 risers a flight on general-access stairs and 16 on utility stairs; paragraph 1.12: 2 m clear headroom on escape routes; paragraph 1.34: handrails 900-1000 mm above the pitch line; Diagram 2.1: ramps at 1:12 for flights to 2 m, 1:15 to 5 m and 1:20 to 10 m; requirement K2: guarding where a fall exceeds 600 mm in dwellings, and two risers or 380 mm in other buildings; Diagram 3.1: guarding 900 mm along flights and 1100 mm elsewhere; paragraphs 1.39 and 3.3: where children under five may be, no opening a 100 mm sphere passes and no horizontal rails to climb",
+   "use": "Table 1.1: general-access stairs rise 150-170 mm and go 250-400 mm, with 2R + G between 550 and 700 mm; paragraph 1.18: at most 12 risers a flight on general-access stairs and 16 on utility stairs; paragraph 1.20: landings at least as long as the flight is wide; paragraph 1.12: 2 m clear headroom on escape routes; paragraph 1.34: handrails 900-1000 mm above the pitch line; Diagram 2.1: ramps at 1:12 for flights to 2 m, 1:15 to 5 m and 1:20 to 10 m; requirement K2: guarding where a fall exceeds 600 mm in dwellings, and two risers or 380 mm in other buildings; Diagram 3.1: guarding 900 mm along flights and 1100 mm elsewhere; paragraphs 1.39 and 3.3: where children under five may be, no opening a 100 mm sphere passes and no horizontal rails to climb",
    "access": "full text (sha256 134e7b07b0730474efd6b5b65ce0bc7a9cf5db05bfa8491588b7884d42c10e51)"
   },
   {
@@ -22,8 +22,8 @@
   {
    "citation": "Markovic, Dizdar, Jukic & Cardinale 2004, Journal of Strength and Conditioning Research 18, 551-555",
    "doi_or_url": "10.1519/1533-4287(2004)18<551:RAFVOS>2.0.CO;2",
-   "use": "In 93 male physical-education students (19.6 years, 180 cm, 77 kg) the countermovement jump lifted the centre of mass 35.3 +/- 4.5 cm and the Abalakow jump with an arm swing 52.2 +/- 6.2 cm, from flight time on a contact mat; the standing long jump reached 251.5 cm",
-   "access": "full text with table 1"
+   "use": "In 93 male physical-education students (19.6 years, 180 cm, 77 kg) the countermovement jump lifted the centre of mass 35.3 +/- 4.5 cm after take-off, from flight time on a contact mat. The Abalakow jumps, read from a belt and tape at the waist from standing, reached 46.2 +/- 4.8 cm without the arm swing and 52.2 +/- 6.2 cm with it; the belt read 11 cm above the mat for jumps of the same movement, the push-off's extension from standing that the belt includes",
+   "access": "full text with table 1 and the methods"
   },
   {
    "citation": "Polet, Schroeder & Bertram 2018, Journal of Experimental Biology 221, jeb162024",
@@ -52,14 +52,20 @@
   {
    "citation": "The daily-life study, research/studies/daily_life (9 October 2026)",
    "doi_or_url": "research/studies/daily_life/README.md",
-   "use": "Falls with drag, ending at 17.9 m/s; the sixfold jump with the same push; braking at 0.97 m/s2 with an assumed friction of 0.6; rails, soft ground and canopies as access design",
+   "use": "Falls with quadratic drag, ending at 17.9 m/s (like 16 m on Earth); a jump six times as high at the same take-off speed; braking at 0.97 m/s2 with an assumed friction of 0.6; rails, soft ground and canopies as access design",
    "access": "repository product research/studies/daily_life/results/daily_life.json, compared in the tests"
   },
   {
    "citation": "The summit port's ring 0 drawings, immersion/world/summit/ring0/draw.py (28 September 2026)",
    "doi_or_url": "immersion/world/summit/ring0/draw.py",
-   "use": "Railings 2.2 m high at both edges of the roof park, drawn for lunar gravity (lines 330 and 442); in the section, the inner gallery's balcony over the hollow at 1.2 m and the galleries' balustrades over the 9 m nave at 1.1 m (lines 413 and 416)",
+   "use": "Railings 2.2 m high at both edges of the roof park, drawn for lunar gravity (lines 330 and 442); the lanes' voids railed and bridged, with no height given (line 330); in the section, the inner gallery's balcony over the hollow at 1.2 m and the galleries' balustrades over the 9 m nave at 1.1 m (lines 413 and 416)",
    "access": "source code"
+  },
+  {
+   "citation": "The summit metropolis brief, habitation/summit_metropolis/README.md, and the register's row of 27 September 2026 on the metropolis's third dimension",
+   "doi_or_url": "habitation/summit_metropolis/README.md",
+   "use": "The register designs glider and parkour zones into the metropolis; the brief adds that the rest of the architecture then does not invite either",
+   "access": "repository files"
   }
  ]
 }

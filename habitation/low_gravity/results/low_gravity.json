@@ -3,15 +3,15 @@
  "producer": {
   "domain": "habitation",
   "files": {
-   "habitation/low_gravity/movement.py": "7feb3bb7a8692934"
+   "habitation/low_gravity/movement.py": "af012c7a4d59ea6f"
   },
   "constants": {
    "MOON_SURFACE_GRAVITY": 1.6242188765608128,
    "STANDARD_GRAVITY": 9.80665
   }
  },
- "evidence": "Closed-form mechanics at the shared lunar gravity, set against Earth's building codes and measurements of people moving on Earth and in simulated lunar gravity (sources.json). Hops keep Earth's take-off speeds, steady running follows Polet et al. (2018), grip on a dry floor is 0.6 and a hand holds its grip strength: assumptions, stated in movement.py. Entries marked \"design choice\" are this note's choices. No human-factors test at lunar gravity stands behind any of them; the longest stay on the Moon is 75 hours.",
- "reading_rule": "Lengths in metres, speeds in m/s, times in seconds, energies per kilogram of body in J/kg. \"like_earth\" is the Earth drop or step with the same impact speed. Guard heights are measured from the walking surface or, along stairs, from the nosings' line. Falls are without drag.",
+ "evidence": "Closed-form mechanics at the shared lunar gravity, set against Earth's building codes and measurements of people moving on Earth and in simulated lunar gravity (sources.json). Hops keep Earth's take-off speeds, which sets jumps low, with the same leg work as an upper bound; steady running follows Polet et al. (2018); falls take the daily-life study's drag; a centre of mass sits at 0.55 of stature; grip on a dry floor is 0.6 and a hand holds its grip strength: assumptions, stated in movement.py. Entries marked \"design choice\" are this note's choices, for the author's review. No human-factors test at lunar gravity stands behind any of them; the longest stay on the Moon is 75 hours.",
+ "reading_rule": "Lengths in metres, speeds in m/s, times in seconds, energies per kilogram of body in J/kg. \"like_earth\" is the Earth drop or step with the same impact speed. A hop's rise is its rise after take-off unless marked from standing. Guard heights are measured from the walking surface, along stairs from the nosings' line, and from any foothold closer than its reach. Physical limits use the full grip of 0.6; design turns, landings and ramps use half of it.",
  "gravity": {
   "moon_m_s2": 1.6242,
   "earth_m_s2": 9.80665,
@@ -25,7 +25,7 @@
    "moon_rise_m": 0.3,
    "earth_airtime_s": 0.2,
    "moon_airtime_s": 1.22,
-   "guard_above_its_top_m": 1.35
+   "guard_keeping_earths_margin_at_its_top_m": 1.35
   },
   {
    "name": "a hop that rises 10 cm on Earth",
@@ -34,16 +34,16 @@
    "moon_rise_m": 0.6,
    "earth_airtime_s": 0.29,
    "moon_airtime_s": 1.72,
-   "guard_above_its_top_m": 1.6
+   "guard_keeping_earths_margin_at_its_top_m": 1.6
   },
   {
-   "name": "the hop the 2.2 m guard covers",
+   "name": "the hop the 2.2 m guard is sized for",
    "earth_rise_m": 0.2184,
    "take_off_m_s": 2.07,
    "moon_rise_m": 1.32,
    "earth_airtime_s": 0.42,
    "moon_airtime_s": 2.55,
-   "guard_above_its_top_m": 2.2
+   "guard_keeping_earths_margin_at_its_top_m": 2.2
   },
   {
    "name": "countermovement jump",
@@ -52,132 +52,249 @@
    "moon_rise_m": 2.13,
    "earth_airtime_s": 0.54,
    "moon_airtime_s": 3.24,
-   "guard_above_its_top_m": 2.88
+   "guard_keeping_earths_margin_at_its_top_m": 2.88
   },
   {
    "name": "jump with an arm swing",
-   "earth_rise_m": 0.522,
-   "take_off_m_s": 3.2,
-   "moon_rise_m": 3.15,
-   "earth_airtime_s": 0.65,
-   "moon_airtime_s": 3.94,
-   "guard_above_its_top_m": 3.73
+   "earth_rise_m": 0.413,
+   "take_off_m_s": 2.85,
+   "moon_rise_m": 2.49,
+   "earth_airtime_s": 0.58,
+   "moon_airtime_s": 3.5,
+   "guard_keeping_earths_margin_at_its_top_m": 3.18
   }
  ],
+ "jump_bounds": {
+  "countermovement jump": {
+   "earth_take_off_m_s": 2.63,
+   "same_take_off_speed": {
+    "take_off_m_s": 2.63,
+    "moon_rise_m": 2.13
+   },
+   "same_leg_work": [
+    {
+     "push_off_m": 0.35,
+     "take_off_m_s": 3.56,
+     "moon_rise_m": 3.89
+    },
+    {
+     "push_off_m": 0.45,
+     "take_off_m_s": 3.78,
+     "moon_rise_m": 4.4
+    }
+   ],
+   "rise_measured_from": "take-off"
+  },
+  "jump with an arm swing": {
+   "earth_take_off_m_s": 2.85,
+   "same_take_off_speed": {
+    "take_off_m_s": 2.85,
+    "moon_rise_m": 2.6
+   },
+   "same_leg_work": [
+    {
+     "push_off_m": 0.35,
+     "take_off_m_s": 3.72,
+     "moon_rise_m": 4.37
+    },
+    {
+     "push_off_m": 0.45,
+     "take_off_m_s": 3.93,
+     "moon_rise_m": 4.87
+    }
+   ],
+   "rise_measured_from": "standing"
+  }
+ },
  "falls": [
   {
    "drop_m": 1.0,
    "impact_m_s": 1.8,
-   "like_earth_m": 0.166,
+   "like_earth_m": 0.165,
    "seconds": 1.11
   },
   {
    "drop_m": 2.0,
-   "impact_m_s": 2.55,
-   "like_earth_m": 0.331,
+   "impact_m_s": 2.54,
+   "like_earth_m": 0.328,
    "seconds": 1.57
   },
   {
    "drop_m": 3.0,
-   "impact_m_s": 3.12,
-   "like_earth_m": 0.497,
-   "seconds": 1.92
-  },
-  {
-   "drop_m": 4.6,
-   "impact_m_s": 3.87,
-   "like_earth_m": 0.762,
-   "seconds": 2.38
+   "impact_m_s": 3.1,
+   "like_earth_m": 0.489,
+   "seconds": 1.93
   },
   {
    "drop_m": 10.0,
-   "impact_m_s": 5.7,
-   "like_earth_m": 1.656,
-   "seconds": 3.51
+   "impact_m_s": 5.56,
+   "like_earth_m": 1.575,
+   "seconds": 3.54
   },
   {
    "drop_m": 30.0,
-   "impact_m_s": 9.87,
-   "like_earth_m": 4.969,
-   "seconds": 6.08
+   "impact_m_s": 9.17,
+   "like_earth_m": 4.284,
+   "seconds": 6.23
   }
  ],
  "unguarded_drops": {
   "UK, buildings other than dwellings (two risers, or 380 mm)": {
    "earth_drop_m": 0.38,
-   "moon_drop_same_impact_m": 2.29,
-   "moon_seconds": 1.68,
+   "impact_m_s": 2.73,
+   "moon_drop_same_impact_m": 2.32,
+   "moon_seconds": 1.69,
    "earth_seconds": 0.28
   },
   "UK, dwellings": {
    "earth_drop_m": 0.6,
-   "moon_drop_same_impact_m": 3.62,
-   "moon_seconds": 2.11,
+   "impact_m_s": 3.43,
+   "moon_drop_same_impact_m": 3.69,
+   "moon_seconds": 2.14,
    "earth_seconds": 0.35
   },
   "IBC 1015.2 (30 inches)": {
    "earth_drop_m": 0.762,
-   "moon_drop_same_impact_m": 4.6,
-   "moon_seconds": 2.38,
+   "impact_m_s": 3.87,
+   "moon_drop_same_impact_m": 4.71,
+   "moon_seconds": 2.42,
    "earth_seconds": 0.39
   }
  },
  "guards": {
-  "rule": "H = H_earth + (g_E/g_M - 1) j: Earth's guard, raised by the extra height a hop that rises j on Earth gains at lunar gravity, keeps Earth's margin over the centre of mass at the hop's top",
+  "rules": {
+   "standing_and_leaning": "Tipping over a guard turns on where the centre of mass stands against its top, which gravity leaves alone: Earth's height keeps Earth's margin.",
+   "hops": "H = H_Earth + (g_E/g_M - 1) j keeps the margin Earth's guard has at the top of the same hop, one that rises j after take-off on Earth.",
+   "stumbling_and_running": "H = c + (g_E/g_M) (H_Earth - c) costs the same lift per kilogram over the top as Earth's guard, so that the same impact speed carries the centre of mass over it on both worlds if the same share of the impact's energy goes into the lift."
+  },
   "by_hop": [
    {
     "earth_hop_m": 0.0,
+    "moon_rise_m": 0.0,
     "uk_based_m": 1.1,
     "ibc_based_m": 1.07
    },
    {
     "earth_hop_m": 0.05,
+    "moon_rise_m": 0.3,
     "uk_based_m": 1.35,
     "ibc_based_m": 1.32
    },
    {
     "earth_hop_m": 0.1,
+    "moon_rise_m": 0.6,
     "uk_based_m": 1.6,
     "ibc_based_m": 1.57
    },
    {
-    "earth_hop_m": 0.15,
-    "uk_based_m": 1.86,
-    "ibc_based_m": 1.82
-   },
-   {
     "earth_hop_m": 0.2,
+    "moon_rise_m": 1.21,
     "uk_based_m": 2.11,
     "ibc_based_m": 2.07
    },
    {
-    "earth_hop_m": 0.25,
-    "uk_based_m": 2.36,
-    "ibc_based_m": 2.33
-   },
-   {
-    "earth_hop_m": 0.3,
-    "uk_based_m": 2.61,
-    "ibc_based_m": 2.58
+    "earth_hop_m": 0.2184,
+    "moon_rise_m": 1.32,
+    "uk_based_m": 2.2,
+    "ibc_based_m": 2.17
    },
    {
     "earth_hop_m": 0.353,
+    "moon_rise_m": 2.13,
     "uk_based_m": 2.88,
     "ibc_based_m": 2.85
    },
    {
-    "earth_hop_m": 0.522,
-    "uk_based_m": 3.73,
-    "ibc_based_m": 3.7
+    "earth_hop_m": 0.413,
+    "moon_rise_m": 2.49,
+    "uk_based_m": 3.18,
+    "ibc_based_m": 3.15
    }
   ],
-  "summit_drawings": {
-   "height_m": 2.2,
-   "covers_earth_hop_m": 0.218,
+  "sized_hop": {
+   "guard_m": 2.2,
+   "earth_hop_m": 0.2184,
    "take_off_m_s": 2.07,
-   "share_of_countermovement_jump": 0.62
+   "share_of_countermovement_jump": 0.62,
+   "example_adult": {
+    "stature_m": 1.75,
+    "com_m": 0.963,
+    "com_over_top_at_the_hops_top_m": {
+     "earth": 0.081,
+     "moon": 0.081
+    }
+   },
+   "hands_rise_m": 1.32
   },
-  "hands_rise_in_that_hop_m": 1.32,
+  "by_stature": [
+   {
+    "stature_m": 1.91,
+    "com_m": 1.05,
+    "earth_lift_j_kg": 0.49,
+    "earth_lift_speed_m_s": 0.99,
+    "moon_guard_same_lift_m": 1.35,
+    "moon_lift_over_2_2_m_j_kg": 1.87,
+    "moon_lift_speed_over_2_2_m_m_s": 1.93
+   },
+   {
+    "stature_m": 1.75,
+    "com_m": 0.963,
+    "earth_lift_j_kg": 1.35,
+    "earth_lift_speed_m_s": 1.64,
+    "moon_guard_same_lift_m": 1.79,
+    "moon_lift_over_2_2_m_j_kg": 2.01,
+    "moon_lift_speed_over_2_2_m_m_s": 2.0
+   },
+   {
+    "stature_m": 1.62,
+    "com_m": 0.891,
+    "earth_lift_j_kg": 2.05,
+    "earth_lift_speed_m_s": 2.02,
+    "moon_guard_same_lift_m": 2.15,
+    "moon_lift_over_2_2_m_j_kg": 2.13,
+    "moon_lift_speed_over_2_2_m_m_s": 2.06
+   },
+   {
+    "stature_m": 1.4,
+    "com_m": 0.77,
+    "earth_lift_j_kg": 3.24,
+    "earth_lift_speed_m_s": 2.54,
+    "moon_guard_same_lift_m": 2.76,
+    "moon_lift_over_2_2_m_j_kg": 2.32,
+    "moon_lift_speed_over_2_2_m_m_s": 2.16
+   },
+   {
+    "stature_m": 1.2,
+    "com_m": 0.66,
+    "earth_lift_j_kg": 4.31,
+    "earth_lift_speed_m_s": 2.94,
+    "moon_guard_same_lift_m": 3.32,
+    "moon_lift_over_2_2_m_j_kg": 2.5,
+    "moon_lift_speed_over_2_2_m_m_s": 2.24
+   },
+   {
+    "stature_m": 1.0,
+    "com_m": 0.55,
+    "earth_lift_j_kg": 5.39,
+    "earth_lift_speed_m_s": 3.28,
+    "moon_guard_same_lift_m": 3.87,
+    "moon_lift_over_2_2_m_j_kg": 2.68,
+    "moon_lift_speed_over_2_2_m_m_s": 2.32
+   }
+  ],
+  "energy_kept": {
+   "guard_m": 2.2,
+   "lowest_com_m": 0.882,
+   "shortest_stature_m": 1.6,
+   "children_need_m": [
+    2.76,
+    3.87
+   ],
+   "for_statures_m": [
+    1.0,
+    1.4
+   ]
+  },
   "push_and_impact": {
    "body_kg": 75.0,
    "standing_push_n": {
@@ -190,35 +307,67 @@
     "3 m/s": 338
    }
   },
-  "classes": [
-   {
-    "drops_m": [
-     0.0,
-     2.29
-    ],
-    "guard_m": null,
-    "kind": "design choice",
-    "why": "lands no harder than the strictest Earth code's unguarded 380 mm"
-   },
-   {
-    "drops_m": [
-     2.29,
-     4.6
-    ],
-    "guard_m": 1.1,
-    "kind": "design choice",
-    "why": "lands like the 0.38-0.76 m drops Earth's codes guard in some places and not in others"
-   },
-   {
-    "drops_m": [
-     4.6,
-     null
-    ],
-    "guard_m": 2.2,
-    "kind": "design choice",
-    "why": "keeps Earth's margin over the centre of mass at the top of a hop that rises 0.22 m on Earth, with a top that gives no grip"
+  "bands": {
+   "kind": "design choice, for the author's review",
+   "rows": [
+    {
+     "drops_m": [
+      0.0,
+      2.32
+     ],
+     "guard": null,
+     "why": "lands no harder than the strictest Earth code's unguarded 380 mm"
+    },
+    {
+     "drops_m": [
+      2.32,
+      4.71
+     ],
+     "options_m": [
+      1.1,
+      2.2
+     ],
+     "why": "lands like the 0.38-0.76 m drops Earth's codes guard in some places and not others; Earth's 1.1 m keeps Earth's margin for standing and leaning and costs stumbling and running a sixth of Earth's lift, 2.2 m keeps the longer drops' guard"
+    },
+    {
+     "drops_m": [
+      4.71,
+      null
+     ],
+     "guard_m": 2.2,
+     "why": "keeps Earth's lift for every adult whose centre of mass stands at the lowest_com_m of energy_kept or higher, and Earth's margin at the top of the sized hop"
+    },
+    {
+     "drops_m": [
+      4.71,
+      null
+     ],
+     "where": "where young children play",
+     "options": [
+      "guards of children_need_m in energy_kept",
+      "play kept back from the edge"
+     ]
+    }
+   ]
+  },
+  "footholds": {
+   "take_off_m_s": 2.07,
+   "rule": "the guard's height counts from any surface a foot can use that stands closer to it than reach_m",
+   "reach_m": {
+    "a kerb": {
+     "height_m": 0.15,
+     "reach_m": 0.89
+    },
+    "a bench seat or a planter's rim": {
+     "height_m": 0.45,
+     "reach_m": 1.54
+    },
+    "a free-standing handrail": {
+     "height_m": 1.0,
+     "reach_m": 2.3
+    }
    }
-  ],
+  },
   "opening_sphere_m": 0.1
  },
  "stairs": {
@@ -326,8 +475,20 @@
    }
   },
   "flight_rise_choice_m": 12.0,
-  "landing_m": 3.0,
-  "landing_need_from_2_m_s_m": 2.35,
+  "landings": {
+   "everyday": {
+    "depth_m": 3.0,
+    "arrival_m_s": 1.42,
+    "needed_m": 2.37
+   },
+   "bounding": {
+    "depth_m": 4.5,
+    "arrival_m_s": 2.0,
+    "needed_m": 4.4
+   },
+   "grip_share": 0.5,
+   "kind": "design choice"
+  },
   "headroom_m": {
    "UK escape routes": 2.5,
    "IBC (80 inches)": 2.54,
@@ -340,25 +501,33 @@
   "1 m/s": {
    "moon_m": 0.51,
    "earth_m": 0.08,
+   "moon_at_half_grip_m": 1.03,
    "moon_turn_radius_m": 1.03,
+   "moon_turn_radius_at_half_grip_m": 2.05,
    "earth_turn_radius_m": 0.17
   },
   "1.42 m/s": {
    "moon_m": 1.03,
    "earth_m": 0.17,
+   "moon_at_half_grip_m": 2.07,
    "moon_turn_radius_m": 2.07,
+   "moon_turn_radius_at_half_grip_m": 4.14,
    "earth_turn_radius_m": 0.34
   },
   "2 m/s": {
    "moon_m": 2.05,
    "earth_m": 0.34,
+   "moon_at_half_grip_m": 4.1,
    "moon_turn_radius_m": 4.1,
+   "moon_turn_radius_at_half_grip_m": 8.21,
    "earth_turn_radius_m": 0.68
   },
   "3 m/s": {
    "moon_m": 4.62,
    "earth_m": 0.76,
+   "moon_at_half_grip_m": 9.24,
    "moon_turn_radius_m": 9.24,
+   "moon_turn_radius_at_half_grip_m": 18.47,
    "earth_turn_radius_m": 1.53
   }
  },
@@ -427,8 +596,8 @@
    "1:12": {
     "share_of_grip": 0.139,
     "run_out_per_m_of_run": 0.1384,
-    "longest_run_for_the_landing_m": 21.7,
-    "rise_of_that_run_m": 1.8,
+    "run_for_the_landing_m": 10.8,
+    "adk_max_going_m": 2.0,
     "stop_on_the_ramp_from_walking_m": {
      "moon": 1.21,
      "earth": 0.2
@@ -438,8 +607,8 @@
    "1:15": {
     "share_of_grip": 0.111,
     "run_out_per_m_of_run": 0.1109,
-    "longest_run_for_the_landing_m": 27.1,
-    "rise_of_that_run_m": 1.8,
+    "run_for_the_landing_m": 13.5,
+    "adk_max_going_m": 5.0,
     "stop_on_the_ramp_from_walking_m": {
      "moon": 1.17,
      "earth": 0.19
@@ -449,8 +618,8 @@
    "1:20": {
     "share_of_grip": 0.083,
     "run_out_per_m_of_run": 0.0832,
-    "longest_run_for_the_landing_m": 36.0,
-    "rise_of_that_run_m": 1.8,
+    "run_for_the_landing_m": 18.0,
+    "adk_max_going_m": 10.0,
     "stop_on_the_ramp_from_walking_m": {
      "moon": 1.13,
      "earth": 0.19
@@ -460,41 +629,43 @@
   },
   "steep_paths": {
    "10 degrees": {
-    "share_of_grip": 0.29,
-    "stop_from_walking_m": {
+    "share_of_grip_up_or_down": 0.29,
+    "stop_going_down_from_walking_m": {
      "moon": 1.5,
      "earth": 0.2
     }
    },
    "18.4 degrees": {
-    "share_of_grip": 0.55,
-    "stop_from_walking_m": {
+    "share_of_grip_up_or_down": 0.55,
+    "stop_going_down_from_walking_m": {
      "moon": 2.4,
      "earth": 0.4
     }
    },
    "25 degrees": {
-    "share_of_grip": 0.78,
-    "stop_from_walking_m": {
+    "share_of_grip_up_or_down": 0.78,
+    "stop_going_down_from_walking_m": {
      "moon": 5.1,
      "earth": 0.8
     }
    },
    "30 degrees": {
-    "share_of_grip": 0.96,
-    "stop_from_walking_m": {
+    "share_of_grip_up_or_down": 0.96,
+    "stop_going_down_from_walking_m": {
      "moon": 31.6,
      "earth": 5.2
     }
    }
   },
+  "steepest_within_half_grip_deg": 16.7,
   "landing_m": 3.0,
-  "run_rise_for_the_landing_m": 1.8,
+  "grip_share": 0.5,
+  "run_rise_for_the_landing_m": 0.9,
   "earth": {
    "ada_max_slope": 0.08333333333333333,
    "ada_max_rise_m": 0.76,
    "ada_landing_m": 1.525,
-   "uk_gradient_by_going_m": {
+   "adk_max_going_m": {
     "1:12": 2.0,
     "1:15": 5.0,
     "1:20": 10.0
@@ -506,24 +677,44 @@
  },
  "movement_halls": {
   "jump": "jump with an arm swing",
-  "jump_rise_m": 3.15,
-  "head_top_m": 5.05,
-  "needed_m": 6.05,
-  "clear_height_m": 6.5,
-  "kind": "design choice",
+  "jump_rise_from_standing_m": 2.6,
+  "head_top_m": 4.5,
+  "needed_m": 5.5,
+  "clear_height_m": 6.0,
+  "kind": "design choice, provisional",
+  "needed_at_the_same_leg_work_m": [
+   7.27,
+   7.77
+  ],
   "running_hop": {
    "along_m_s": 3.0,
    "up_m_s": 2.63,
    "airtime_s": 3.24,
    "length_m": 9.7,
-   "earth_length_m": 1.6
+   "earth_length_m": 1.6,
+   "at_the_same_leg_work": {
+    "up_m_s": [
+     3.56,
+     3.78
+    ],
+    "length_m": [
+     13.1,
+     14.0
+    ]
+   }
   },
+  "grip_share": 0.5,
   "banking_deg": {
-   "1.42 m/s at 1 m": 20.2,
-   "2 m/s at 2 m": 20.0,
-   "3 m/s at 3 m": 30.6,
-   "3 m/s at 5 m": 17.0,
-   "5 m/s at 10 m": 26.0
+   "1.42 m/s at 1 m": 34.4,
+   "2 m/s at 2 m": 34.2,
+   "3 m/s at 3 m": 44.9,
+   "3 m/s at 5 m": 31.2,
+   "5 m/s at 10 m": 40.3
+  },
+  "level_turn_radius_m": {
+   "1.42 m/s": 4.14,
+   "2 m/s": 8.21,
+   "3 m/s": 18.47
   },
   "running_airtime_ratio": 2.46
  },

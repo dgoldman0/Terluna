@@ -323,10 +323,10 @@ the integration found next.
 12. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
 13. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
 14. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
-15. **A district wind study** for dense towers, the author's direction of 15 October
-   ([register](decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)): empty domains as matched
-   controls, gaps from 645 m down to 50 m, podium and infill layouts, a diagonal wind, neutral and stable air and grid
-   checks, forced by the chosen climate's winds.
+15. **A district wind study** of layouts denser than the sparse pilot, the author's direction of 15 October
+   ([register](decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)), by the method recovered from
+   ChatGPT's follow-up: empty domains as matched controls, gaps from 645 m down to 50 m, podium and infill layouts, a
+   diagonal wind, neutral and stable air and grid checks, forced by the chosen climate's winds.
 
 New runs wait on the author's choice of the target climate, and no rented compute is commissioned.
 

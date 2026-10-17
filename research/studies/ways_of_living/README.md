@@ -27,9 +27,10 @@ arithmetic on cited values. Other numbers come from the product named beside the
    end fills the wet land to 45° and leaves 2.2 million km² of crop-model yield to irrigate: 8,800 km³ a year, 1.2
    times the rivers' flow, lifted from the seas for 1.5 TW (*screen*). Irrigated to the crop model's yield from the
    start, crops and towns take 20–60% of the rain belt's land outside the kept 30% for 0.18–2.1 TW of pumping
-   (*screen*). The seas are held fresh, as hard fresh water near 0.14 g/kg and pH 8.3, by the author's decision of
-   13 October ([register](../../decisions.md#the-seas-through-time-13-october-2026)); left alone they would reach
-   pH 9 in 30,000–60,000 years and a gram of salt per kilogram after 0.7–1.3 million
+   (*screen*). By the author's direction of 13 October the seas are held fresh, as hard fresh water near 0.14 g/kg and
+   pH 8.3, on the condition that they are rich in life
+   ([register](../../decisions.md#the-seas-through-time-13-october-2026)); left alone they would reach pH 9 in
+   30,000–60,000 years and a gram of salt per kilogram after 0.7–1.3 million
    ([sea chemistry](../sea_chemistry/README.md)). The water lifted from them stays fresh.
 
 3. **People's heat costs 0.08–1.8% more dimming across the cases.** At 2.0–6.0 kW of primary energy a person with
