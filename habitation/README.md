@@ -132,6 +132,20 @@ Butchart Gardens keeps 50 gardeners all year and 20 more in summer on 22 ha
 million km² of parks would need 50 million to 1.5 billion gardeners. Much of the machines' work can run through the long
 night by infrared and lidar, so the living light keeps the dark.
 
+## Building at a sixth of Earth's gravity
+
+The [low-gravity design note](low_gravity/README.md), 17 October 2026, sets out guards, stairs, handholds, ramps and
+halls for moving under the author's rule that the architecture show the Moon's gravity and the added spring in a step.
+At a sixth of the weight the same push lifts a body 6.04 times as high, falls land like a sixth of the drop, grip stops
+and turns a sixth as hard, and a hand holds six times its grip. Its design choices:
+- no guard on drops up to 2.3 m, Earth's 1.1 m guard on 2.3–4.6 m, and above that the 2.2 m lunar guard the summit
+  drawings carry, continuous, unclimbable and with a top that gives no grip, keeping Earth's margin over the centre of
+  mass at the top of a hop that rises 0.22 m on Earth;
+- everyday stairs of 150 mm rise and 400 mm going and bounding stairs of 300 and 600 mm, in flights rising up to 12 m
+  between 3 m landings, with 2.5 m of headroom and handrails on both sides;
+- Earth's ramp gradients in runs rising up to 1.8 m between 3 m landings, and halls for moving 6.5 m clear with banked
+  turns, apart from calm rooms at human scale.
+
 ## Community settings from the atlas
 
 The [conservation study](../research/studies/conservation/README.md) lists candidate settings for communities on the 28% [atlas](../geography/README.md#atlas-at-the-selected-water-share):
