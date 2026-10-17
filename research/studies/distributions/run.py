@@ -42,6 +42,7 @@ class MissingInput(RuntimeError):
 # Committed products on this branch: path -> schema.
 INPUTS = {
     'research/studies/food_systems/results/food_systems.json': 'terluna.research.food-systems/1',
+    'research/studies/food_systems/results/food_blend.json': 'terluna.research.food-blend/1',
     'research/studies/land_cities/results/land_cities.json': 'terluna.research.land-cities/1',
     'research/studies/ways_of_living/results/ways_of_living.json': 'terluna.research.ways-of-living/1',
     'research/studies/daily_life/results/daily_life.json': 'terluna.research.daily-life/1',
@@ -53,6 +54,7 @@ INPUTS = {
     'shared/scenarios/population.json': 'terluna.scenario.population/1',
 }
 KEYS = dict(food='research/studies/food_systems/results/food_systems.json',
+            blend='research/studies/food_systems/results/food_blend.json',
             land='research/studies/land_cities/results/land_cities.json',
             wol='research/studies/ways_of_living/results/ways_of_living.json',
             daily='research/studies/daily_life/results/daily_life.json',
@@ -68,8 +70,8 @@ BOUND = {
     'sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='86261f20f16a2ffbc2a45a20362f43b664bc9a93',
-        sha256='9fb7acc3ea48903501af57223d496cb0be542a901bb351ec8e56ae14e13eff31',
+        blob='60ad87157fc629624e2988e61c4c00f49286d8e9',
+        sha256='896032f4469bad84598300bf0120c1f5c7c357c16d83cfe1a66ac5ec518ccf3d',
         note="The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage "
              'recovery and the natural cycle kept beside them.'),
     'industry_md': dict(
@@ -209,6 +211,10 @@ class LandRule(float):
 KEPT = (LandRule(0.3), LandRule(0.5), LandRule(0.5, 0.2, 'wild_30_hybrid_20'),
         LandRule(0.7, 0.2, 'wild_50_hybrid_20'))
 CHOSEN_MIX = 'power_heavy'
+# The author's food (register, 12 October): the food study's blend of the power-heavy, power-made and fully lamp-lit
+# mixes, read here as one more mix, with heritage meat from the homesteads at the author's 1-2 kg a person a year.
+BLEND = 'blend'
+HERITAGE_KG = ('1', '2')
 SUPPLIES = ('fusion', 'array')
 DESIGNS = ('shielded', 'twilight', 'living')
 DISTRICT_T = ('20.0', '50.0', '100.0')
@@ -275,8 +281,12 @@ READING_RULE = ('People in billions unless named; areas km2; water km3 a year; p
                 'primary_tw counts the residents\' primary energy and the electricity at fusion\'s input, 2.0-3.0 W '
                 'a watt (one basis); electricity_tw is the electricity alone; heat_by_component_tw splits the heat. '
                 'fusion and array name the supply whose heat the Moon takes. The chosen food mix is the food study\'s '
-                'power-heavy mix; food_menu gives every mix. distributions holds the four for the author to choose '
-                'among; earth_sensitivity moves Earth to 8 and 11 billion beside them.')
+                'power-heavy mix; food_menu gives every mix. moon.cprime_with_blend places C\' with the author\'s '
+                'food, the food study\'s blend read as one more mix, at 1 and 2 kg of heritage meat a person a year: '
+                'its homesteads live among the heritage farms in the middle-wet zone, whose pasture counts in that '
+                'band, and destination_ranking_with_blend ranks the moved people\'s destinations with it. '
+                'distributions holds the four for the author to choose among; earth_sensitivity moves Earth to 8 '
+                'and 11 billion beside them.')
 MARKS = dict(
     screen='Numbers computed here: the placement of people and its land, the land bands, energy, heat, dimming, '
            'water, phosphorus, lit sky, wild land and sky, sky traffic, the tube pairs, the synergies, and every '
@@ -726,6 +736,34 @@ def food_block(food, mix, moon, kept):
     return dict(block=block, reach=reach, both_ends=bool(feasible[1]))
 
 
+def with_blend(food, blend):
+    """The food study's mixes with the author's blend added as one more, shaped like a mix's case so that the band
+    check and C' read it unchanged: its fields by zone, the highlands' less the food study's towns; no grazing and no
+    watered fog desert, which the blend leaves empty; and the heritage meat's pasture by case, for the homestead belt
+    in the middle latitudes' wet lowlands, where the blend grows no staple crops."""
+    cases = {}
+    for moon, rules in blend['blend'].items():
+        cases[moon] = {}
+        for rule, c in rules.items():
+            zones, towns = c['land_km2'], c['towns_km2']
+            if max(zones['fog_desert']) > 0.0 or max(zones['glass']) > 0.0:
+                raise ValueError(f'the blend at {moon} billion, {rule}, uses the fog desert or glass')
+            ref = food['mixes'][CHOSEN_MIX]['cases'][moon][rule]['people_billion']
+            if ref['lunar'] != [float(moon)] * 2:
+                raise ValueError('the blend and the mixes differ in population')
+            fields = dict(field_km2_by_zone=dict(rain_belt=list(zones['rain_belt']),
+                                                 middle_wet=list(zones['middle_wet']),
+                                                 highlands=[zones['highlands'][e] - towns[e] for e in (0, 1)]),
+                          fog_desert_watered_km2=[0.0, 0.0])
+            pasture = {kg: blend['heritage_meat']['cases'][f'{moon}_billion_{kg}_kg']['land_km2'] for kg in HERITAGE_KG}
+            cases[moon][rule] = dict(people_billion=ref, land_km2=zones, grazing_km2=[0.0, 0.0], fields=fields,
+                                     power_tw=c['power_tw'], heat=c['heat'], water_km3_year=c['water_km3_year'],
+                                     phosphorus_mt_year=c['phosphorus_mt_year'], n2o=c['n2o'], methane=c['methane'],
+                                     heritage_pasture_km2=pasture, feasible=list(c['feasible']), feasible_to=1.0,
+                                     feasible_range=None)
+    return dict(food, mixes=dict(food['mixes'], **{BLEND: dict(cases=cases)}))
+
+
 def food_town_km2(B, surface_billion, end, reach):
     """The food study's town allowance on the highlands, 25-100 m2 a person, moved with its other inputs."""
     lo, hi = B['food']['settlement_m2']
@@ -830,7 +868,7 @@ def land_bands(B, blk, reach, place, e, kept, wet_rule='area'):
     use = dict(all_land_0_30=fields_0_30 + a['metropolis'] + sl['low_0_30'],
                highlands_30_45=fields_30_45 + place['dry_area_by_band']['30-45'],
                highlands_45_90=place['dry_area_by_band']['45-60'] + place['dry_area_by_band']['60-90'],
-               middle_wet_zone=middle_wet + on_mw + homes_on_mw,
+               middle_wet_zone=middle_wet + on_mw + homes_on_mw + place.get('heritage_pasture_km2', 0.0),
                fog_desert_and_polar=(fog_watered + grazing + middle_land - on_mw + sl['high'] + homes_elsewhere))
     cap = dict(all_land_0_30=(dry_b['0-15'] + dry_b['15-30']) * out_share,
                highlands_30_45=hb['30-45'] * out_share,
@@ -889,12 +927,13 @@ def moon_corner(B, food, moon, aloft, kept, supply, combo, end, rule='spread', d
     food_high = blk['land_km2']['highlands'][e] - towns_fs
     grazing = blk['grazing_km2'][e]
     settled = place['settled_km2']
-    used = food_land + grazing + settled
+    pasture = place.get('heritage_pasture_km2', 0.0)
+    used = food_land + grazing + settled + pasture
     a = place['areas_km2']
     bands = land_bands(B, blk, reach, place, e, kept, wet_rule)
     land = dict(
         settled_km2=settled, settled_by_setting_km2=a, food_km2=food_land, grazing_km2=grazing,
-        used_km2=used, used_share_of_dry_land=used / dry_land,
+        heritage_pasture_km2=pasture, used_km2=used, used_share_of_dry_land=used / dry_land,
         wild_share_outside_kept=1.0 - used / (dry_land * (1.0 - kept)),
         parks_km2=dry_land * hybrid_share(kept), parks_share_of_dry_land=hybrid_share(kept),
         highlands_used_share_outside_kept=(food_high + a['metropolis'] + a['tower_districts'] + a['highland_towns'])
@@ -1017,18 +1056,22 @@ def middle_wet_fields(B, blk, e, kept):
 
 def move_middle(B, place, blk, reach, e, kept, wet_rule, spec):
     """C': the scattered communities of the 30-48.6 degree lowland homes leave, except homesteads among the farms
-    there, at the guessed density on the middle-wet zone's fields; the rest go to the destinations in `spec['order']`,
-    each taking what its spare land outside the kept share holds at its own density."""
+    there, at the guessed density on the middle-wet zone's fields and, with the blend, on the heritage farms' pasture
+    (spec['heritage_kg']); the rest go to the destinations in `spec['order']`, each taking what its spare land outside
+    the kept share holds at its own density."""
     fields_mw = middle_wet_fields(B, blk, e, kept)
+    kg = spec.get('heritage_kg')
+    pasture = blk['heritage_pasture_km2'][kg] if kg else 0.0
     density = GUESSES['homestead_people_per_km2']['value'][spec['h_end']]
     middle_people = place['people']['scattered'] * place['scattered_share_middle']
-    homesteads = min(density * fields_mw / 1e9, middle_people)
+    homesteads = min(density * (fields_mw + pasture) / 1e9, middle_people)
     moved = middle_people - homesteads
     m2 = place['scattered_m2']
     new = copy.deepcopy(place)
     new['scattered_land_km2']['middle'] = 0.0
     new['homestead_land_km2'] = homesteads * 1e9 * m2 / 1e6
     new['homestead_rule'] = spec.get('homes_on', 'zone')
+    new['heritage_pasture_km2'] = pasture
     share_mid = B['scattered']['home_share_middle']
     by_home = new['scattered_by_home']
     for h in by_home:
@@ -1078,7 +1121,7 @@ def move_middle(B, place, blk, reach, e, kept, wet_rule, spec):
         new['scattered_share_middle'] = new['homestead_land_km2'] / scattered_land
     new['moved'] = dict(middle_billion=middle_people, homesteads_billion=homesteads, moved_billion=moved,
                         placed_billion=placed, unplaced_billion=left, homestead_land_km2=new['homestead_land_km2'],
-                        middle_wet_fields_km2=fields_mw)
+                        middle_wet_fields_km2=fields_mw, heritage_pasture_km2=pasture)
     return new
 
 
@@ -1125,14 +1168,14 @@ def rank_destinations(B, spare_km2):
     return dict(ranks=measures, order=order, spare_land_km2=spare_km2)
 
 
-def destination_spare_for_ranking(B, food, moon, aloft, kept):
+def destination_spare_for_ranking(B, food, moon, aloft, kept, mix=CHOSEN_MIX):
     """The least spare land each destination keeps over C's corners as spread, with the middle latitudes' lowland
     land counted as moved out (the spare land the move can use)."""
     least = {k: math.inf for k in DESTINATIONS}
     for combo in COMBOS:
         place = placement(B, moon - aloft, combo, kept=kept)
         place['scattered_land_km2']['middle'] = 0.0
-        fb = food_block(food, CHOSEN_MIX, moon, kept)
+        fb = food_block(food, mix, moon, kept)
         for e in (0, 1):
             spare = destination_spare_km2(B, fb['block'], fb['reach'], place, e, kept)
             for k in least:
@@ -1241,7 +1284,7 @@ CPRIME_VARIANTS = {
 }
 
 
-def cprime_case(B, food, moon, aloft, rankings, c_case):
+def cprime_case(B, food, moon, aloft, rankings, c_case, mix=CHOSEN_MIX, heritage_kg=None):
     """The author's C': C with the middle latitudes' lowland people moved by the ranking, homesteads staying among
     the farms there. Corners: the 8 placement combinations, the homestead density at both ends and every input at
     both ends (32). Besides the case as placed, three variants: the remedy's poleward and twilit placements, the same
@@ -1256,8 +1299,8 @@ def cprime_case(B, food, moon, aloft, rankings, c_case):
         for name, spec in CPRIME_VARIANTS.items():
             kw = {k: v for k, v in spec.items() if k in ('rule', 'dry_rule')}
             middle = dict(order=dry_order if spec.get('dest') == 'dry' else order,
-                          homes_on=spec.get('homes_on', 'zone'))
-            rows = {s: [moon_corner(B, food, moon, aloft, kept, s, c, e, mix=CHOSEN_MIX,
+                          homes_on=spec.get('homes_on', 'zone'), heritage_kg=heritage_kg)
+            rows = {s: [moon_corner(B, food, moon, aloft, kept, s, c, e, mix=mix,
                                     middle=dict(middle, h_end=h), **kw) for c, h, e in corners] for s in SUPPLIES}
             ok = [i for i, row in enumerate(rows['fusion']) if row['buildable']]
             overfilling = [dict(highland_share=rows['fusion'][i]['highland_share'],
@@ -1839,6 +1882,11 @@ def build(rounded=True):
     rank_spare = {kept_key(k): destination_spare_for_ranking(B, food, 8, 4, k) for k in KEPT}
     rankings = {kk: rank_destinations(B, v) for kk, v in rank_spare.items()}
     cprime = cprime_case(B, food, 8, 4, rankings, moon_cases['8_4'])
+    food_b = with_blend(food, d['blend'])
+    rank_blend = {kept_key(k): rank_destinations(B, destination_spare_for_ranking(B, food_b, 8, 4, k, mix=BLEND))
+                  for k in KEPT}
+    cprime_blend = {f'{kg}_kg': cprime_case(B, food_b, 8, 4, rank_blend, moon_cases['8_4'], mix=BLEND, heritage_kg=kg)
+                    for kg in HERITAGE_KG}
     dists = {k: distribution(B, k, spec, dict(moon_cases, cprime=cprime)) for k, spec in DISTRIBUTIONS.items()}
     chk = checks(B, d['wol'], moon_cases)
     chk['transcribed_phrases'] = transcribed_check(industry_text)
@@ -1857,7 +1905,8 @@ def build(rounded=True):
                                             read_from='in-tree',
                                             note=v['note']) for k, v in BOUND.items()}),
         evidence=EVIDENCE, reading_rule=READING_RULE, marks=MARKS,
-        assumptions=dict(design_guesses=GUESSES, chosen_mix=CHOSEN_MIX, moon_billion=list(MOON_BILLION),
+        assumptions=dict(design_guesses=GUESSES, chosen_mix=CHOSEN_MIX, blend_mix=BLEND,
+                         heritage_kg_per_person_year=[float(k) for k in HERITAGE_KG], moon_billion=list(MOON_BILLION),
                          aloft_billion=list(ALOFT_BILLION), supplies=list(SUPPLIES),
                          land_rules={kept_key(k): dict(closed=float(k), hybrid=hybrid_share(k)) for k in KEPT},
                          combinations=[list(c) for c in COMBOS], twilit_homes=list(TWILIT_HOMES),
@@ -1866,7 +1915,8 @@ def build(rounded=True):
         transcribed={k: dict(value=v['value'], phrase=v['phrase'], unit=v['unit']) for k, v in TRANSCRIBED.items()},
         basis=rnd(B),
         moon=dict(cases=rnd(moon_cases), twilit_scattering=rnd(twilit), cprime=rnd(cprime),
-                  destination_ranking=rnd(rankings)),
+                  destination_ranking=rnd(rankings), cprime_with_blend=rnd(cprime_blend),
+                  destination_ranking_with_blend=rnd(rank_blend)),
         food_menu=rnd(menu),
         tubes_and_undersea=rnd(tubes),
         synergies=rnd(syn),

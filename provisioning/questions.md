@@ -53,16 +53,22 @@ on this laptop. The findings behind them are in the [README](README.md).
 
    **How:** the author's choice first; then the land-cities water screen poleward of 45°, a sky-traffic model on the
    design winds at kilometre scale, and the resources work's dredging rates.
-3. **The power system through the night.** Fusion is a planning assumption and a conditional technology. The
-   alternatives:
-   - a grid from the day side, with 9–19% losses over 4,000–5,500 km;
-   - storage at eight times Earth's pumped hydro for the metropolis alone;
-   - power from orbit, including microwaves from the fleet's night half.
+3. **The power system.** On 12 October the author chose beamed power from the ring fleet for food and the sky towns,
+   on the design in the [domain synthesis](../research/studies/domain_synthesis/README.md#power-from-the-array-the-chosen-distribution)
+   (register): 2.45 GHz beams to the towns' crowns, closed receivers at the ground's loads joined by a grid, and
+   several beams for every receiver. It serves the night from the ring's night-side tiles, in place of the earlier
+   alternatives: a grid from the day side, with 9–19% losses over 4,000–5,500 km, and storage at eight times Earth's
+   pumped hydro for the metropolis alone. Fusion stays a conditional technology.
 
-   Beaming keeps the night dark but closes 4,000–7,000 km² of receivers to people and sky ships for 200 GW.
+   The [power screen](power.md) sized it the same day. The deep air takes 6.3–7.8% of the beams as used, so each watt
+   delivered leaves 1.47–1.49 W of heat on the Moon; the tiles make 47–224 TW of electricity, which the dimmer's light
+   covers at the low-cost end; 3,500–25,000 whole-tile transmitters carry 2.1–2.2 million beams; the ground's
+   receivers take land equal to 36–59% of C′'s settlements; no polar cap is blind; rain barely touches 2.45 GHz and
+   storms stop 5.8 GHz; and a fault across the ring leaves 2.5–7.5 TW of critical loads, a week of them 425–1,270 TWh
+   from hydrogen or pumped water. The summit metropolis takes 0.25–1.06 TW on receivers round the city.
 
-   **How:** a network model of sources, storage, lines and reserves through the lunar cycle, and the summit city's
-   power plan that its studies ask for.
+   **Next:** a beam-assignment model through the lunar cycle, the transmitting tiles' design, the receivers' land with
+   the cities' look, what a late switch does to a reef, and the causes and restart time of a fault across the ring.
 4. **The food system.** The [food-systems study](../research/studies/food_systems/README.md) prices eight systems per
    billion residents, fits them to the lunar cycle and mixes them for 4, 6 and 8 billion, with the range each mix can
    be built over: rain-fed fields cost least and the rain feeds 9.1–27.0 billion outside a kept 30%; glass and lamps

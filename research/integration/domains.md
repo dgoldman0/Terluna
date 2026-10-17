@@ -112,8 +112,8 @@ and seed records, and research/provenance.json, are the same as at every source 
   generated images wait for the author's look.
 - **The sea scenes' land** is still bare Apollo soil, a placeholder beside the developed-soil waters.
 - **The Earth-visibility result** records Nubium at midnight before the refresh; it runs on an external eye model.
-- **C′ with the blend:** the distributions study still places C′ with the power-heavy mix; the synthesis gives the
-  totals with the blend, and placing it band by band is next.
+- **C′ with the blend:** the distributions study places C′ with the blend band by band since 12 October
+  (provisioning), and every corner fits.
 - **Ecology's land phosphorus loss** takes Earth's river concentrations at the register's former runoff, in the
   people screen (0.063–0.178 g/m² a year) and the sky-ecology screen's dissolved part; at the rerun register's runoff
   it would be about a fifth lower. Resources' notes keep the bound until ecology moves it.
