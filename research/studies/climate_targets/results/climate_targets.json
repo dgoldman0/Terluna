@@ -1,12 +1,12 @@
 {
- "schema": "terluna.research.climate-targets/2",
+ "schema": "terluna.research.climate-targets/3",
  "producer": {
   "files": {
-   "research/studies/climate_targets/run.py": "7610e351c37201187b804960f8bf821081f6d9a72b5383cf6ffc3dcd33f35a93",
-   "research/studies/climate_targets/extract.py": "4f7bf74b975ee504ace6d4c5477a0aad0d19d7a43ce3a042abfeaca2ee25e9e2"
+   "research/studies/climate_targets/run.py": "676db180bc3281e39fec0812c1b97c362fd0e3bf61668adfa8beae33f00a7236",
+   "research/studies/climate_targets/extract.py": "33e16e0c710df4ccfbd77bd5fccfa70b09738c471919f343b12a88ba3875536b"
   },
   "inputs": {
-   "research/runs/climate_targets/extract.json": "1ef863f057482e8b9db5c7b04837a7e50df6b5cb6a2d120406b581104c34bdce",
+   "research/runs/climate_targets/extract.json": "9d5e9033e1c284857228b96e110240a570fe759a81c84f0a1a999ca324742c3f",
    "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "203f81df46d1ef704cc3cb7c153a1757186bc229d2dc128319bcaadfeccf465b",
    "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
@@ -22,8 +22,8 @@
    "JULIAN_DAY": 86400.0
   }
  },
- "evidence": "Arithmetic on two ExoPlaSim runs and committed products. The two runs share the design sunlight (scale 0.970); the design case flew PlaSim's earlier longwave and liquid optics for all cloud, the test the longwave refitted by height and ice optics for cloud colder than -38 C, and neither carries the gases, the glow or their dimming. The dimming a target needs is the test's top-of-air gain per kelvin times the kelvins to shed, at the test's albedo; the climate at a target between the two runs is interpolated linearly in the ground's temperature, so it mixes the two physics and carries neither the refit's high cloud at the cooler end nor the dimming's own cut to the rain. The heat beyond the sunlight takes the GCM's efficacies for the gases and the glow and an efficacy of 1 for heat released at the ground. The heat at 2 m takes the output's 2 m air with the lowest level's specific humidity, capped at saturation, as in air mixed through the lowest kilometre.",
- "reading_rule": "W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. A dimming is the share of the sunlight reaching the Moon that the fleet takes away, at the test's albedo, and the sunlight scale the GCM would fly for it is the design scale times what remains. Heat is in the 3-day means, each about a tenth of the lunar day, at the lowest model level, about 0.9 km up, and at 2 m; the land's figures are weighted by land area and the seas' by sea area, quantiles and shares of time included. Deserts are land under 0.5 mm of rain a day. Pairs are [low, high] ends: the two fits for the feedback, the light study's and Earth's models' ends for the costs.",
+ "evidence": "Arithmetic on ExoPlaSim runs and committed products. The two runs the targets stand on share the design sunlight (scale 0.970); the design case flew PlaSim's earlier longwave and liquid optics for all cloud, the test the longwave refitted by height and ice optics for cloud colder than -38 C, and neither carries the gases, the glow or their dimming. The dimming a target needs is the test's top-of-air gain per kelvin times the kelvins to shed, at the test's albedo; the climate at a target between the two runs is interpolated linearly in the ground's temperature, so it mixes the two physics and carries neither the refit's high cloud at the cooler end nor the dimming's own cut to the rain. The heat beyond the sunlight takes the GCM's efficacies for the gases and the glow and an efficacy of 1 for heat released at the ground. The glow's efficacy is a range, from the held branch of 13 October on the earlier radiation and from the glow pair on the corrected radiation of 17 October (the design case's own radiation, before the longwave refit): the pair's held branch is carried to the design case's temperature by the pair's own response to its dimming, the gases keep their 1.69% of 13 October for want of a gases-only branch, and the glow's share is counted in watts of the design case's absorbed sunlight. The heat at 2 m takes the output's 2 m air with the lowest level's specific humidity, capped at saturation, as in air mixed through the lowest kilometre. The day's and the night's 3-day means are told apart by the output's mean cosine of the Sun's zenith angle. How much the 3-day means smooth the extremes comes from the design case's two years written every 6.5 hours alone; carried to the warmer targets it is a sensitivity.",
+ "reading_rule": "W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. A dimming is the share of the sunlight reaching the Moon that the fleet takes away, at the test's albedo, and the sunlight scale the GCM would fly for it is the design scale times what remains. Heat is in the 3-day means, each about a tenth of the lunar day, at the lowest model level, about 0.9 km up, and at 2 m; the land's figures are weighted by land area and the seas' by sea area, quantiles and shares of time included. The day's means are those the Sun is up for more than half of; day_ and night_ figures in a climate are the land's in them. Deserts are land under 0.5 mm of rain a day. Pairs are [low, high] ends: the two fits for the feedback, the glow's two efficacies, the power screen's two ends and the light study's and Earth's models' ends for the costs; figures that carry several of them pair the ends that give the least and the most. glow_efficacy holds the corrected radiation's efficacy and how it was found: dimming in per cent of the design case's sunlight, in_points_of_dimming the same share counted in points as on 13 October. dimming_curve gives the dimming for each ground temperature, negative where a target lies above a fit's balance. smoothing compares the land's heat in the 6.5-hour means with the 3-day means their elevens make over the same two years; ratio_above_the_median is the extreme's height above the median at 6.5 hours over its height in the 3-day means, and a target's at_6_5_hours applies it to that target's 99th percentiles.",
  "runs": {
   "design": {
    "run": "A28_corrected_970",
@@ -37,13 +37,31 @@
    "wet_bulb_above_31": 0.0,
    "wet_bulb_above_28_tropics": 0.0,
    "land_air_median_c": 18.994775390625023,
+   "land_air_p99_c": 26.068018151403443,
    "wet_bulb_2m_median_c": 16.693787518806804,
    "wet_bulb_2m_p99_c": 21.94425078834609,
    "wet_bulb_2m_above_28": 0.0,
    "wet_bulb_2m_above_31": 0.0,
    "wet_bulb_2m_above_28_tropics": 0.0,
    "land_air_2m_median_c": 20.416833496093773,
+   "land_air_2m_p99_c": 27.77281266615697,
    "sea_median_c": 24.19448639309788,
+   "day_wet_bulb_2m_median_c": 17.276960951339337,
+   "day_wet_bulb_2m_p99_c": 22.28164362825662,
+   "day_land_air_2m_median_c": 22.236169433593773,
+   "day_land_air_2m_p99_c": 28.238719335446135,
+   "day_wet_bulb_median_c": 16.53238418388918,
+   "day_wet_bulb_p99_c": 21.602845836442743,
+   "day_land_air_median_c": 20.780725097656273,
+   "day_land_air_p99_c": 26.50224212575018,
+   "night_wet_bulb_2m_median_c": 16.206948457330164,
+   "night_wet_bulb_2m_p99_c": 21.004817558012444,
+   "night_land_air_2m_median_c": 19.544915771484398,
+   "night_land_air_2m_p99_c": 23.525426990328192,
+   "night_wet_bulb_median_c": 15.481037693366211,
+   "night_wet_bulb_p99_c": 20.28420054242101,
+   "night_land_air_median_c": 18.123834228515648,
+   "night_land_air_p99_c": 22.087012405785888,
    "ladder": [
     {
      "height_km": 0.9,
@@ -149,6 +167,72 @@
       },
       "above_28": 0.0,
       "above_31": 0.0
+     },
+     "day": {
+      "share_of_land_time": 0.5004032072362427,
+      "lowest_level": {
+       "wet_bulb": {
+        "median": 16.53238418388918,
+        "p99": 21.602845836442743,
+        "top": 23.830331651944334
+       },
+       "air": {
+        "median": 20.780725097656273,
+        "p99": 26.50224212575018,
+        "top": 28.417932128906273
+       },
+       "above_28": 0.0,
+       "above_31": 0.0
+      },
+      "at_2_m": {
+       "wet_bulb": {
+        "median": 17.276960951339337,
+        "p99": 22.28164362825662,
+        "top": 24.578427011715917
+       },
+       "air": {
+        "median": 22.236169433593773,
+        "p99": 28.238719335446135,
+        "top": 30.457208251953148
+       },
+       "above_28": 0.0,
+       "above_31": 0.0
+      },
+      "czen_above": {
+       "times_cos_latitude": 0.07789597363763946,
+       "window_degrees": 36.0
+      }
+     },
+     "night": {
+      "share_of_land_time": 0.4995967927637574,
+      "lowest_level": {
+       "wet_bulb": {
+        "median": 15.481037693366211,
+        "p99": 20.28420054242101,
+        "top": 23.265466308549946
+       },
+       "air": {
+        "median": 18.123834228515648,
+        "p99": 22.087012405785888,
+        "top": 25.436761474609398
+       },
+       "above_28": 0.0,
+       "above_31": 0.0
+      },
+      "at_2_m": {
+       "wet_bulb": {
+        "median": 16.206948457330164,
+        "p99": 21.004817558012444,
+        "top": 23.96696004905226
+       },
+       "air": {
+        "median": 19.544915771484398,
+        "p99": 23.525426990328192,
+        "top": 26.955041503906273
+       },
+       "above_28": 0.0,
+       "above_31": 0.0
+      }
      }
     },
     "coasts": {
@@ -563,13 +647,31 @@
    "wet_bulb_above_31": 0.015553907014108238,
    "wet_bulb_above_28_tropics": 0.3676974117386847,
    "land_air_median_c": 32.06813964843752,
+   "land_air_p99_c": 37.51940340941939,
    "wet_bulb_2m_median_c": 26.90629883020774,
    "wet_bulb_2m_p99_c": 31.87511504547608,
    "wet_bulb_2m_above_28": 0.3207834216980595,
    "wet_bulb_2m_above_31": 0.033021523989361055,
    "wet_bulb_2m_above_28_tropics": 0.46177689039668596,
    "land_air_2m_median_c": 33.53780517578127,
+   "land_air_2m_p99_c": 39.21505126953127,
    "sea_median_c": 34.61846313476565,
+   "day_wet_bulb_2m_median_c": 27.073226791787285,
+   "day_wet_bulb_2m_p99_c": 32.06458243370682,
+   "day_land_air_2m_median_c": 34.55776367187502,
+   "day_land_air_2m_p99_c": 39.62013666396697,
+   "day_wet_bulb_median_c": 26.45343236161586,
+   "day_wet_bulb_p99_c": 31.493335315762263,
+   "day_land_air_median_c": 33.077102944871505,
+   "day_land_air_p99_c": 37.89554980217297,
+   "night_wet_bulb_2m_median_c": 26.750801408252546,
+   "night_wet_bulb_2m_p99_c": 31.639977255716214,
+   "night_land_air_2m_median_c": 32.8859802246094,
+   "night_land_air_2m_p99_c": 35.961635423796245,
+   "night_wet_bulb_median_c": 26.138951389230183,
+   "night_wet_bulb_p99_c": 31.06042221256198,
+   "night_land_air_median_c": 31.417779541015648,
+   "night_land_air_p99_c": 34.47823695945776,
    "ladder": [
     {
      "height_km": 0.9,
@@ -675,6 +777,72 @@
       },
       "above_28": 0.17562657502863688,
       "above_31": 0.010438144329896907
+     },
+     "day": {
+      "share_of_land_time": 0.5004059208275808,
+      "lowest_level": {
+       "wet_bulb": {
+        "median": 26.45343236161586,
+        "p99": 31.493335315762263,
+        "top": 34.026950949282764
+       },
+       "air": {
+        "median": 33.077102944871505,
+        "p99": 37.89554980217297,
+        "top": 40.40969238281252
+       },
+       "above_28": 0.2646354695532767,
+       "above_31": 0.02008476362361915
+      },
+      "at_2_m": {
+       "wet_bulb": {
+        "median": 27.073226791787285,
+        "p99": 32.06458243370682,
+        "top": 34.7537701803177
+       },
+       "air": {
+        "median": 34.55776367187502,
+        "p99": 39.62013666396697,
+        "top": 42.2611022949219
+       },
+       "above_28": 0.35181227584555896,
+       "above_31": 0.04089359119575413
+      },
+      "czen_above": {
+       "times_cos_latitude": 0.07789597363763946,
+       "window_degrees": 36.0
+      }
+     },
+     "night": {
+      "share_of_land_time": 0.49959407917241905,
+      "lowest_level": {
+       "wet_bulb": {
+        "median": 26.138951389230183,
+        "p99": 31.06042221256198,
+        "top": 33.67898392736561
+       },
+       "air": {
+        "median": 31.417779541015648,
+        "p99": 34.47823695945776,
+        "top": 37.2045837402344
+       },
+       "above_28": 0.20765573439854196,
+       "above_31": 0.011015687751030135
+      },
+      "at_2_m": {
+       "wet_bulb": {
+        "median": 26.750801408252546,
+        "p99": 31.639977255716214,
+        "top": 34.39065321132705
+       },
+       "air": {
+        "median": 32.8859802246094,
+        "p99": 35.961635423796245,
+        "top": 38.70662841796877
+       },
+       "above_28": 0.28970414558328883,
+       "above_31": 0.025136664653643757
+      }
      }
     },
     "coasts": {
@@ -1114,17 +1282,52 @@
    "infrared": 16.779546775348223
   }
  },
+ "glow_efficacy": {
+  "runs": {
+   "design": "A28_corrected_970",
+   "watt_for_watt": "A28_corrected_gases_glow",
+   "held": "A28_corrected_gases_glow_held"
+  },
+  "added_dimming_percent": {
+   "watt_for_watt": 4.2200000000000015,
+   "held": 3.51999999999999
+  },
+  "ground_k": {
+   "design": 295.023,
+   "watt_for_watt": 293.453,
+   "held": 294.412
+  },
+  "ground_trend_k_per_decade": {
+   "watt_for_watt": -0.11212121212108736,
+   "held": 0.01939393939397945
+  },
+  "response_k_per_percent": 1.3699999999999817,
+  "dimming_that_holds_percent": 3.0740145985400957,
+  "gases_dimming_percent": 1.694,
+  "glow_dimming_percent": 1.3800145985400958,
+  "design_absorbed_sunlight_w_m2": 228.5351811324456,
+  "dimming_that_holds_w_m2": 7.025204830811428,
+  "glow_w_m2": 3.1538188624277996,
+  "infrared_w_m2": 5.3441399999999994,
+  "efficacy": 0.5901452548825068,
+  "in_points_of_dimming": 0.5463240690974247,
+  "with_the_gases_at_their_forcing": {
+   "gases_w_m2": 3.57749843829207,
+   "glow_w_m2": 3.447706392519358,
+   "efficacy": 0.64513773825524
+  }
+ },
  "shared_dimming": {
   "dimming_percent": [
-   3.8534814142836664,
+   3.567770843730986,
    5.3036547539443735
   ],
   "growth_cost_through_light_percent": [
-   0.2697436989998567,
+   0.24974395906116903,
    1.56457815241359
   ],
   "land_rain_cut_percent": [
-   2.119634426296631,
+   1.962477326990135,
    7.319043560443235
   ]
  },
@@ -1146,14 +1349,21 @@
    "answer": "rolled_outside_service_80_rolled_layout",
    "infrared_w_m2": 5.3441399999999994,
    "sunlight_back_w_m2": 0.610045,
-   "efficacy": 0.710631,
-   "basis": "the recommended answer, both halves rolled 80 degrees on the re-flown layout, at the GCM's held-branch efficacy for its infrared and the albedo for its returned sunlight",
+   "efficacy": [
+    0.5901452548825068,
+    0.710631
+   ],
+   "efficacy_sources": {
+    "held_branch_13_october": 0.710631,
+    "corrected_radiation_17_october": 0.5901452548825068
+   },
+   "basis": "the recommended answer, both halves rolled 80 degrees on the re-flown layout, at the GCM's efficacy for its infrared, from the glow pair on the corrected radiation of 17 October to the held branch of 13 October, and the albedo for its returned sunlight",
    "absorbed_sunlight_w_m2": [
-    4.23694395234,
+    3.5930512624277995,
     4.23694395234
    ],
    "dimming_percent": [
-    1.8800332617347408,
+    1.59432269118206,
     1.8800332617347408
    ]
   },
@@ -1178,11 +1388,11 @@
   ],
   "answered_in_every_target": {
    "absorbed_sunlight_w_m2": [
-    8.6844127207827,
+    8.040520030870498,
     11.952601261048562
    ],
    "dimming_percent": [
-    3.8534814142836664,
+    3.567770843730986,
     5.3036547539443735
    ]
   },
@@ -1216,6 +1426,674 @@
    ]
   }
  },
+ "dimming_curve": {
+  "per_kelvin_percent": [
+   0.7334499045928622,
+   0.9570102237879187
+  ],
+  "targets": [
+   {
+    "ground_k": 295.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     20.023450236802923,
+     25.498852535589567
+    ],
+    "dimming_percent": [
+     8.884883275146757,
+     11.314450094743831
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     12.452654118877742,
+     16.618104848688205
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.8602498340809848,
+     0.8838166322310764
+    ],
+    "sunlight_scale": [
+     0.8088043829677244,
+     0.8492092550468858
+    ]
+   },
+   {
+    "ground_k": 295.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     19.19697918417334,
+     24.420467710561432
+    ],
+    "dimming_percent": [
+     8.518158322850326,
+     10.835944982849872
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     12.085929166581312,
+     16.139599736794246
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.8648913336663562,
+     0.8873738642683519
+    ],
+    "sunlight_scale": [
+     0.8134458825530958,
+     0.8527664870841613
+    ]
+   },
+   {
+    "ground_k": 296.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     18.370508131543758,
+     23.3420828855333
+    ],
+    "dimming_percent": [
+     8.151433370553896,
+     10.357439870955911
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     11.719204214284883,
+     15.661094624900285
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.8695328332517277,
+     0.8909310963056272
+    ],
+    "sunlight_scale": [
+     0.8180873821384672,
+     0.8563237191214366
+    ]
+   },
+   {
+    "ground_k": 296.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     17.544037078914176,
+     22.26369806050517
+    ],
+    "dimming_percent": [
+     7.784708418257464,
+     9.878934759061954
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     11.35247926198845,
+     15.182589513006327
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.874174332837099,
+     0.8944883283429025
+    ],
+    "sunlight_scale": [
+     0.8227288817238386,
+     0.859880951158712
+    ]
+   },
+   {
+    "ground_k": 297.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     16.717566026284594,
+     21.18531323547704
+    ],
+    "dimming_percent": [
+     7.417983465961034,
+     9.400429647167993
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     10.98575430969202,
+     14.704084401112366
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.8788158324224704,
+     0.898045560380178
+    ],
+    "sunlight_scale": [
+     0.8273703813092099,
+     0.8634381831959874
+    ]
+   },
+   {
+    "ground_k": 297.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     15.89109497365501,
+     20.10692841044891
+    ],
+    "dimming_percent": [
+     7.051258513664602,
+     8.921924535274036
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     10.619029357395588,
+     14.225579289218409
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.8834573320078418,
+     0.9016027924174533
+    ],
+    "sunlight_scale": [
+     0.8320118808945813,
+     0.8669954152332628
+    ]
+   },
+   {
+    "ground_k": 298.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     15.064623921025428,
+     19.028543585420774
+    ],
+    "dimming_percent": [
+     6.684533561368171,
+     8.443419423380075
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     10.252304405099157,
+     13.747074177324448
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.8880988315932132,
+     0.9051600244547288
+    ],
+    "sunlight_scale": [
+     0.8366533804799529,
+     0.8705526472705382
+    ]
+   },
+   {
+    "ground_k": 298.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     14.238152868395845,
+     17.950158760392643
+    ],
+    "dimming_percent": [
+     6.31780860907174,
+     7.964914311486115
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     9.885579452802727,
+     13.268569065430489
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.8927403311785846,
+     0.9087172564920041
+    ],
+    "sunlight_scale": [
+     0.8412948800653243,
+     0.8741098793078135
+    ]
+   },
+   {
+    "ground_k": 299.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     13.411681815766261,
+     16.871773935364512
+    ],
+    "dimming_percent": [
+     5.9510836567753085,
+     7.486409199592156
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     9.518854500506293,
+     12.79006395353653
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.8973818307639561,
+     0.9122744885292794
+    ],
+    "sunlight_scale": [
+     0.8459363796506957,
+     0.8776671113450889
+    ]
+   },
+   {
+    "ground_k": 299.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     12.58521076313668,
+     15.793389110336381
+    ],
+    "dimming_percent": [
+     5.584358704478877,
+     7.007904087698197
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     9.152129548209864,
+     12.31155884164257
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9020233303493274,
+     0.9158317205665549
+    ],
+    "sunlight_scale": [
+     0.8505778792360671,
+     0.8812243433823643
+    ]
+   },
+   {
+    "ground_k": 300.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     11.758739710507097,
+     14.715004285308249
+    ],
+    "dimming_percent": [
+     5.217633752182446,
+     6.529398975804237
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     8.785404595913432,
+     11.83305372974861
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9066648299346989,
+     0.9193889526038302
+    ],
+    "sunlight_scale": [
+     0.8552193788214385,
+     0.8847815754196396
+    ]
+   },
+   {
+    "ground_k": 300.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     10.932268657877515,
+     13.636619460280118
+    ],
+    "dimming_percent": [
+     4.850908799886015,
+     6.050893863910278
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     8.418679643617,
+     11.35454861785465
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9113063295200703,
+     0.9229461846411057
+    ],
+    "sunlight_scale": [
+     0.8598608784068098,
+     0.8883388074569151
+    ]
+   },
+   {
+    "ground_k": 301.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     10.10579760524793,
+     12.558234635251987
+    ],
+    "dimming_percent": [
+     4.484183847589584,
+     5.572388752016319
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     8.05195469132057,
+     10.876043505960691
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9159478291054417,
+     0.926503416678381
+    ],
+    "sunlight_scale": [
+     0.8645023779921812,
+     0.8918960394941904
+    ]
+   },
+   {
+    "ground_k": 301.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     9.279326552618349,
+     11.479849810223854
+    ],
+    "dimming_percent": [
+     4.117458895293153,
+     5.0938836401223595
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     7.685229739024138,
+     10.397538394066732
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9205893286908131,
+     0.9300606487156563
+    ],
+    "sunlight_scale": [
+     0.8691438775775527,
+     0.8954532715314658
+    ]
+   },
+   {
+    "ground_k": 302.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     8.452855499988766,
+     10.401464985195723
+    ],
+    "dimming_percent": [
+     3.750733942996722,
+     4.6153785282284
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     7.318504786727708,
+     9.919033282172773
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9252308282761845,
+     0.9336178807529318
+    ],
+    "sunlight_scale": [
+     0.873785377162924,
+     0.8990105035687412
+    ]
+   },
+   {
+    "ground_k": 302.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     7.626384447359183,
+     9.32308016016759
+    ],
+    "dimming_percent": [
+     3.384008990700291,
+     4.13687341633444
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     6.951779834431276,
+     9.440528170278814
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9298723278615559,
+     0.9371751127902072
+    ],
+    "sunlight_scale": [
+     0.8784268767482954,
+     0.9025677356060167
+    ]
+   },
+   {
+    "ground_k": 303.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     6.799913394729601,
+     8.24469533513946
+    ],
+    "dimming_percent": [
+     3.0172840384038597,
+     3.658368304440482
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     6.585054882134846,
+     8.962023058384855
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9345138274469272,
+     0.9407323448274826
+    ],
+    "sunlight_scale": [
+     0.883068376333667,
+     0.906124967643292
+    ]
+   },
+   {
+    "ground_k": 303.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     5.973442342100018,
+     7.166310510111328
+    ],
+    "dimming_percent": [
+     2.650559086107428,
+     3.1798631925465224
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     6.218329929838414,
+     8.483517946490895
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9391553270322986,
+     0.9442895768647579
+    ],
+    "sunlight_scale": [
+     0.8877098759190383,
+     0.9096821996805673
+    ]
+   },
+   {
+    "ground_k": 304.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     5.146971289470436,
+     6.087925685083197
+    ],
+    "dimming_percent": [
+     2.283834133810997,
+     2.701358080652563
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     5.851604977541983,
+     8.005012834596936
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9437968266176702,
+     0.9478468089020332
+    ],
+    "sunlight_scale": [
+     0.8923513755044097,
+     0.9132394317178427
+    ]
+   },
+   {
+    "ground_k": 304.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     4.320500236840853,
+     5.009540860055065
+    ],
+    "dimming_percent": [
+     1.917109181514566,
+     2.222852968758604
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     5.484880025245552,
+     7.526507722702977
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9484383262030415,
+     0.9514040409393087
+    ],
+    "sunlight_scale": [
+     0.8969928750897811,
+     0.9167966637551181
+    ]
+   },
+   {
+    "ground_k": 305.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     3.49402918421127,
+     3.931156035026933
+    ],
+    "dimming_percent": [
+     1.5503842292181351,
+     1.7443478568646447
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     5.118155072949121,
+     7.048002610809018
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9530798257884129,
+     0.9549612729765841
+    ],
+    "sunlight_scale": [
+     0.9016343746751524,
+     0.9203538957923935
+    ]
+   },
+   {
+    "ground_k": 305.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     2.6675581315816874,
+     2.8527712099988016
+    ],
+    "dimming_percent": [
+     1.1836592769217038,
+     1.2658427449706853
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     4.75143012065269,
+     6.569497498915059
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9577213253737844,
+     0.9585185050138595
+    ],
+    "sunlight_scale": [
+     0.9062758742605239,
+     0.9239111278296689
+    ]
+   },
+   {
+    "ground_k": 306.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     1.77438638497067,
+     1.841087078952105
+    ],
+    "dimming_percent": [
+     0.7873376330767259,
+     0.8169343246252728
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     4.355108476807712,
+     6.120589078569647
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9620757370511348,
+     0.9623628249591557
+    ],
+    "sunlight_scale": [
+     0.9106302859378744,
+     0.9277554477749652
+    ]
+   },
+   {
+    "ground_k": 306.5,
+    "absorbed_sunlight_to_shed_w_m2": [
+     0.6960015599425384,
+     1.0146160263225223
+    ],
+    "dimming_percent": [
+     0.30883252118276666,
+     0.45020937232884173
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     3.8766033649137523,
+     5.753864126273215
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9656329690884101,
+     0.9670043245445271
+    ],
+    "sunlight_scale": [
+     0.9141875179751499,
+     0.9323969473603365
+    ]
+   },
+   {
+    "ground_k": 307.0,
+    "absorbed_sunlight_to_shed_w_m2": [
+     -0.3823832650855932,
+     0.1881449736929396
+    ],
+    "dimming_percent": [
+     -0.16967259071119267,
+     0.08348442003241055
+    ],
+    "with_the_heat_beyond_sunlight_percent": [
+     3.398098253019793,
+     5.387139173976784
+    ],
+    "sunlight_scale_of_its_design_case": [
+     0.9691902011256857,
+     0.9716458241298985
+    ],
+    "sunlight_scale": [
+     0.9177447500124252,
+     0.9370384469457079
+    ]
+   }
+  ]
+ },
+ "smoothing": {
+  "run": "A28_corrected_970_eddies",
+  "years": [
+   0,
+   1
+  ],
+  "hours_each": 6.5,
+  "means_to_a_3_day_mean": 11,
+  "at_2_m": {
+   "wet_bulb": {
+    "median": {
+     "at_6_5_hours": 16.66532099874507,
+     "in_3_day_means": 16.641712887685802
+    },
+    "p99": {
+     "at_6_5_hours": 22.181717694773493,
+     "in_3_day_means": 21.857364834468736,
+     "excess_k": 0.3243528603047565,
+     "ratio_above_the_median": 1.0576619667711897
+    },
+    "top": {
+     "at_6_5_hours": 25.087619836062913,
+     "in_3_day_means": 24.146917369435755,
+     "excess_k": 0.9407024666271582,
+     "ratio_above_the_median": 1.1221944529023753
+    }
+   },
+   "air": {
+    "median": {
+     "at_6_5_hours": 20.372583007812523,
+     "in_3_day_means": 20.36501169642375
+    },
+    "p99": {
+     "at_6_5_hours": 27.943761396576807,
+     "in_3_day_means": 27.719314225316502,
+     "excess_k": 0.2244471712603051,
+     "ratio_above_the_median": 1.0294896571115337
+    },
+    "top": {
+     "at_6_5_hours": 30.766717529296898,
+     "in_3_day_means": 30.1040810324929,
+     "excess_k": 0.6626364968039979,
+     "ratio_above_the_median": 1.0672615793984706
+    }
+   }
+  },
+  "lowest_level": {
+   "wet_bulb": {
+    "median": {
+     "at_6_5_hours": 15.932708565710364,
+     "in_3_day_means": 15.91070833744634
+    },
+    "p99": {
+     "at_6_5_hours": 21.509288156175185,
+     "in_3_day_means": 21.190567798434582,
+     "excess_k": 0.31872035774060237,
+     "ratio_above_the_median": 1.0561984900675825
+    },
+    "top": {
+     "at_6_5_hours": 24.336957920480813,
+     "in_3_day_means": 23.53163632398048,
+     "excess_k": 0.8053215965003346,
+     "ratio_above_the_median": 1.1027855622859064
+    }
+   },
+   "air": {
+    "median": {
+     "at_6_5_hours": 18.950769042968773,
+     "in_3_day_means": 18.943407663264324
+    },
+    "p99": {
+     "at_6_5_hours": 26.231652832031273,
+     "in_3_day_means": 26.0208370411597,
+     "excess_k": 0.2108157908715711,
+     "ratio_above_the_median": 1.0287469362537989
+    },
+    "top": {
+     "at_6_5_hours": 28.831384277343773,
+     "in_3_day_means": 28.263130326704584,
+     "excess_k": 0.568253950639189,
+     "ratio_above_the_median": 1.0601833972093428
+    }
+   }
+  }
+ },
  "targets": [
   {
    "name": "no further dimming",
@@ -1233,7 +2111,7 @@
     0.0
    ],
    "with_the_heat_beyond_sunlight_percent": [
-    3.8534814142836664,
+    3.567770843730986,
     5.3036547539443735
    ],
    "sunlight_scale_of_its_design_case": [
@@ -1242,7 +2120,7 @@
    ],
    "sunlight_scale": [
     0.9185545488867395,
-    0.9326212302814484
+    0.9353926228158094
    ],
    "sunlight_taken_tw": [
     0.0,
@@ -1272,13 +2150,31 @@
     "wet_bulb_above_31": 0.015553907014108238,
     "wet_bulb_above_28_tropics": 0.3676974117386847,
     "land_air_median_c": 32.06813964843752,
+    "land_air_p99_c": 37.51940340941939,
     "wet_bulb_2m_median_c": 26.90629883020774,
     "wet_bulb_2m_p99_c": 31.87511504547608,
     "wet_bulb_2m_above_28": 0.3207834216980595,
     "wet_bulb_2m_above_31": 0.033021523989361055,
     "wet_bulb_2m_above_28_tropics": 0.46177689039668596,
     "land_air_2m_median_c": 33.53780517578127,
+    "land_air_2m_p99_c": 39.21505126953127,
     "sea_median_c": 34.61846313476565,
+    "day_wet_bulb_2m_median_c": 27.073226791787285,
+    "day_wet_bulb_2m_p99_c": 32.06458243370682,
+    "day_land_air_2m_median_c": 34.55776367187502,
+    "day_land_air_2m_p99_c": 39.62013666396697,
+    "day_wet_bulb_median_c": 26.45343236161586,
+    "day_wet_bulb_p99_c": 31.493335315762263,
+    "day_land_air_median_c": 33.077102944871505,
+    "day_land_air_p99_c": 37.89554980217297,
+    "night_wet_bulb_2m_median_c": 26.750801408252546,
+    "night_wet_bulb_2m_p99_c": 31.639977255716214,
+    "night_land_air_2m_median_c": 32.8859802246094,
+    "night_land_air_2m_p99_c": 35.961635423796245,
+    "night_wet_bulb_median_c": 26.138951389230183,
+    "night_wet_bulb_p99_c": 31.06042221256198,
+    "night_land_air_median_c": 31.417779541015648,
+    "night_land_air_p99_c": 34.47823695945776,
     "ladder": [
      {
       "height_km": 0.9,
@@ -1335,6 +2231,12 @@
     "freezing_level_km": 35.78484591614473
    },
    "interpolated_share_of_the_way": 1.0,
+   "at_6_5_hours": {
+    "wet_bulb_2m_p99_c": 32.16162676097303,
+    "land_air_2m_p99_c": 39.382471310173756,
+    "wet_bulb_p99_c": 31.582161688768164,
+    "land_air_p99_c": 37.67611054125898
+   },
    "clear_sky_absorbed_w_m2": [
     236.17079868181733,
     236.17079868181733
@@ -1344,7 +2246,7 @@
     2.8117240426616377
    ],
    "gap_with_the_added_heat_answered_w_m2": [
-    1.6816807073880398,
+    1.0069157709954197,
     1.838378125669692
    ],
    "gap_with_the_added_heat_unanswered_w_m2": [
@@ -1368,7 +2270,7 @@
     11.314450094743831
    ],
    "with_the_heat_beyond_sunlight_percent": [
-    12.738364689430423,
+    12.452654118877742,
     16.6181048486882
    ],
    "sunlight_scale_of_its_design_case": [
@@ -1377,7 +2279,7 @@
    ],
    "sunlight_scale": [
     0.8088043829677245,
-    0.8464378625125248
+    0.8492092550468858
    ],
    "sunlight_taken_tw": [
     1052.1691815825395,
@@ -1404,10 +2306,28 @@
     "wet_bulb_median_c": 15.941001503729277,
     "wet_bulb_p99_c": 21.23948312107108,
     "land_air_median_c": 18.968624559380462,
+    "land_air_p99_c": 26.045111787173603,
     "wet_bulb_2m_median_c": 16.673359291257952,
     "wet_bulb_2m_p99_c": 21.924385943293245,
     "land_air_2m_median_c": 20.390587435065136,
+    "land_air_2m_p99_c": 27.749924598106848,
     "sea_median_c": 24.173635168325674,
+    "day_wet_bulb_2m_median_c": 17.257365345360004,
+    "day_wet_bulb_2m_p99_c": 22.26207468052962,
+    "day_land_air_2m_median_c": 22.211522378311376,
+    "day_land_air_2m_p99_c": 28.215952929032866,
+    "day_wet_bulb_median_c": 16.51253897407566,
+    "day_wet_bulb_p99_c": 21.58306175361607,
+    "day_land_air_median_c": 20.756128483069503,
+    "day_land_air_p99_c": 26.479451934909637,
+    "night_wet_bulb_2m_median_c": 16.185857442519477,
+    "night_wet_bulb_2m_p99_c": 20.98354390105399,
+    "night_land_air_2m_median_c": 19.5182294558386,
+    "night_land_air_2m_p99_c": 23.500550670686792,
+    "night_wet_bulb_median_c": 15.459718521270698,
+    "night_wet_bulb_p99_c": 20.26264471724912,
+    "night_land_air_median_c": 18.097242165938194,
+    "night_land_air_p99_c": 22.06222606802108,
     "ladder": [
      {
       "height_km": 0.9,
@@ -1464,6 +2384,12 @@
     "freezing_level_km": 22.699547850548374
    },
    "interpolated_share_of_the_way": -0.0020003138235005586,
+   "at_6_5_hours": {
+    "wet_bulb_2m_p99_c": 22.227170467617537,
+    "land_air_2m_p99_c": 27.966948927613114,
+    "wet_bulb_p99_c": 21.53724978761653,
+    "land_air_p99_c": 26.248539114411795
+   },
    "clear_sky_absorbed_w_m2": [
     209.44937152660518,
     215.187298888956
@@ -1473,8 +2399,8 @@
     29.533151197873792
    ],
    "gap_with_the_added_heat_answered_w_m2": [
-    22.821877918530987,
-    28.403107862600194
+    21.990415563856743,
+    28.559805280881847
    ],
    "gap_with_the_added_heat_unanswered_w_m2": [
     10.296194126814413,
@@ -1497,7 +2423,7 @@
     6.529398975804237
    ],
    "with_the_heat_beyond_sunlight_percent": [
-    9.071115166466113,
+    8.785404595913432,
     11.83305372974861
    ],
    "sunlight_scale_of_its_design_case": [
@@ -1506,7 +2432,7 @@
    ],
    "sunlight_scale": [
     0.8552193788214385,
-    0.8820101828852787
+    0.8847815754196396
    ],
    "sunlight_taken_tw": [
     617.8846997560089,
@@ -1533,10 +2459,28 @@
     "wet_bulb_median_c": 20.43139879367548,
     "wet_bulb_p99_c": 25.60495807348194,
     "land_air_median_c": 24.652461423633135,
+    "land_air_p99_c": 31.023769490937564,
     "wet_bulb_2m_median_c": 21.11339837558548,
     "wet_bulb_2m_p99_c": 26.24197483972696,
     "land_air_2m_median_c": 26.095122324258362,
+    "land_air_2m_p99_c": 32.72460565960708,
     "sea_median_c": 28.705611950124407,
+    "day_wet_bulb_2m_median_c": 21.516435605923057,
+    "day_wet_bulb_2m_p99_c": 26.515350817153525,
+    "day_land_air_2m_median_c": 27.568516200009164,
+    "day_land_air_2m_p99_c": 33.16419104919637,
+    "day_wet_bulb_median_c": 20.825860186011745,
+    "day_wet_bulb_p99_c": 25.883097123200876,
+    "day_land_air_median_c": 26.1021591088907,
+    "day_land_air_p99_c": 31.43285955822483,
+    "night_wet_bulb_2m_median_c": 20.769952164572274,
+    "night_wet_bulb_2m_p99_c": 25.6073355705089,
+    "night_land_air_2m_median_c": 25.318452906487774,
+    "night_land_air_2m_p99_c": 28.907374694842233,
+    "night_wet_bulb_median_c": 20.093402825169324,
+    "night_wet_bulb_p99_c": 24.94776514824325,
+    "night_land_air_median_c": 23.8769798790821,
+    "night_land_air_p99_c": 27.449492690635456,
     "ladder": [
      {
       "height_km": 0.9,
@@ -1593,6 +2537,12 @@
     "freezing_level_km": 27.996459799563016
    },
    "interpolated_share_of_the_way": 0.43276435364578325,
+   "at_6_5_hours": {
+    "wet_bulb_2m_p99_c": 26.53769864538579,
+    "land_air_2m_p99_c": 32.92010684999314,
+    "wet_bulb_p99_c": 25.89570429328219,
+    "land_air_p99_c": 31.206925077801678
+   },
    "clear_sky_absorbed_w_m2": [
     220.75026497153806,
     223.84827137699597
@@ -1602,8 +2552,8 @@
     18.23225775294091
    ],
    "gap_with_the_added_heat_answered_w_m2": [
-    14.160905430491027,
-    17.102214417667312
+    13.329443075816783,
+    17.258911835948965
    ],
    "gap_with_the_added_heat_unanswered_w_m2": [
     1.6352216387744534,

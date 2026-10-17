@@ -1,5 +1,7 @@
 """What the study reads from the GCM's own output: the design case and the 20-year test of the longwave refitted by
-height with ice optics for the cold cloud, over years 10-19 of each, and the test's year-by-year progress.
+height with ice optics for the cold cloud, over years 10-19 of each, and the test's year-by-year progress; the glow
+pair on the corrected radiation, from its runs' yearly records; and the design case's two years written every
+6.5 hours.
 
     climate/gcm/.venv/bin/python -m research.studies.climate_targets.extract     # about a minute; needs netCDF4
 
@@ -13,6 +15,12 @@ fraction above one half), the seas' by each sea cell's sea area. Each place's wa
 cell's own warmest and coolest tenth of its 3-day means. The coasts are land cells with a sea cell among their eight
 neighbours, joined across the longitude seam and kept apart across the poles. The land's wet-bulb figures counted cell
 by cell, as the readout of 17 October counted them, stand beside the weighted ones under their own name.
+
+The land's heat is also split into the day's 3-day means and the night's by the output's czen, each mean's average
+cosine of the Sun's zenith angle: a mean is the day's when the Sun is up for more than half of it, which a mean of
+czen above half_sunlit() times the cosine of the latitude marks. The design case's 6.5-hour years
+(A28_corrected_970_eddies, two years from the design case's year 19, eleven means to each 3-day mean) give the land's
+heat in those means and in the 3-day means their elevens make, over the same two years.
 """
 from __future__ import annotations
 import hashlib
@@ -24,11 +32,16 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 OUT = ROOT / 'research' / 'runs' / 'climate_targets' / 'extract.json'
-SCHEMA = 'terluna.research.climate-targets-extract/2'
+SCHEMA = 'terluna.research.climate-targets-extract/3'
 RUNS_DIR = ROOT / 'climate' / 'gcm' / 'runs'
 BOUNDARY = ROOT / 'climate' / 'gcm' / 'products' / 'moon_28pct_water_lakes_gaussian_T21.nc'
 DESIGN, TEST = 'A28_corrected_970', 'A28_corrected_970_lw_ice'
 YEARS = (10, 19)
+# The glow pair on the corrected radiation, from the design case's year 19 with 13 October's added dimming: the gases
+# and the glow matched watt for watt, and held at the design temperature (climate/gcm README).
+GLOW_PAIR = ('A28_corrected_gases_glow', 'A28_corrected_gases_glow_held')
+# The design case's years written every 6.5 hours, 110 means a lunar day, from its year 19.
+EDDIES, EDDY_YEARS = 'A28_corrected_970_eddies', (0, 1)
 BANDS = ((0, 15), (15, 30), (30, 45), (45, 60), (60, 90))
 HEIGHTS_KM = (0.9, 2, 5, 10, 15, 20, 25, 30, 35, 40)
 DESERT_MM_DAY = 0.5                  # the desert measure of 14 October: land under 0.5 mm of rain a day
@@ -122,10 +135,30 @@ def freezing_height(ta, z):
     return z2 + (t2 - FREEZING_K) / np.maximum(t2 - t1, 1e-6) * (z1 - z2)
 
 
-def read(run, b):
+def half_sunlit(window):
+    """The mean of the Sun's cosine, over the cosine of the latitude, in a mean of the given width (radians of hour
+    angle) that the Sun is up for half of: with its declination zero, a mean centred on sunrise or sunset. A mean the
+    Sun is up for more of has a larger one, and every mean wholly in the day one larger still."""
+    return (1.0 - np.cos(window / 2.0)) / window
+
+
+def heat_in(hot, wl, land, sel=None):
+    """The land's heat at both heights in the means of its cells (land, times by cells) that a selection of them
+    picks, weighted by land area, with the selection's share of the land's time."""
+    ww = np.broadcast_to(wl, land.shape)
+    m = land if sel is None else land & sel
+    out = dict(share_of_land_time=float((ww * m).sum() / (ww * land).sum()))
+    for height, (tw, air) in hot.items():
+        x, a, w = tw[m], air[m], ww[m]
+        out[height] = dict(wet_bulb=wstats(x, w), air=wstats(a, w), above_28=share(x, w, 28.0),
+                           above_31=share(x, w, 31.0))
+    return out
+
+
+def read(run, b, model):
     """Means and distributions over the run's years 10-19."""
     import netCDF4
-    files, toa, fields = {}, {}, {k: [] for k in ('ta', 'hus', 'ps', 'ts', 'tas', 'pr')}
+    files, toa, fields = {}, {}, {k: [] for k in ('ta', 'hus', 'ps', 'ts', 'tas', 'pr', 'czen')}
     for year in range(YEARS[0], YEARS[1] + 1):
         path = output(run, year)
         files[str(path.relative_to(ROOT))] = sha256(path)
@@ -195,6 +228,12 @@ def read(run, b):
     x = hot['lowest_level'][0][on_land]
     land_heat['counted_by_cell'] = dict(wet_bulb=dict(median=float(np.median(x)), p99=float(np.percentile(x, 99))),
                                         above_28=float((x > 28.0).mean()), above_31=float((x > 31.0).mean()))
+    # the day's 3-day means, the Sun up for more than half of each, and the night's, from the output's czen
+    window = 2.0 * np.pi / model['writes_per_lunar_day']
+    day = np.concatenate(fields['czen']) > half_sunlit(window) * np.cos(np.radians(lat))[:, None]
+    land_heat['day'], land_heat['night'] = heat_in(hot, wl, on_land, day), heat_in(hot, wl, on_land, ~day)
+    land_heat['day']['czen_above'] = dict(times_cos_latitude=float(half_sunlit(window)),
+                                          window_degrees=float(np.degrees(window)))
     out = dict(top_of_air_w_m2=dict(incoming=t['rst'] - t['rsut'], reflected=-t['rsut'], absorbed=t['rst'],
                                      absorbed_clear_sky=t['rstcs'], outgoing_infrared=-t['rlut'],
                                      outgoing_infrared_clear_sky=-t['rltcs'], net=t['ntr']),
@@ -231,23 +270,112 @@ def read(run, b):
     return out, files
 
 
-def progress(run):
+def record(run):
+    """A run's own yearly record and settings (progress.json) and its sha256."""
     path = RUNS_DIR / run / 'progress.json'
-    p = json.loads(path.read_text())
-    return ([dict(year=y['year'], ground_k=y['surface_k'], top_of_air_net_w_m2=y['toa_net_w_m2'])
-             for y in p['years']], {str(path.relative_to(ROOT)): sha256(path)})
+    return json.loads(path.read_text()), {str(path.relative_to(ROOT)): sha256(path)}
+
+
+def progress(p):
+    return [dict(year=y['year'], ground_k=y['surface_k'], top_of_air_net_w_m2=y['toa_net_w_m2']) for y in p['years']]
+
+
+def differs(a, b):
+    """The settings in which two runs differ: the model's by name, and every other part of their configuration but
+    the run key and the state each starts from."""
+    ma, mb = a['configuration']['model'], b['configuration']['model']
+    ca, cb = a['configuration'], b['configuration']
+    rest = [k for k in set(ca) | set(cb) if k not in ('model', 'key', 'initial_state') and ca.get(k) != cb.get(k)]
+    return sorted([k for k in set(ma) | set(mb) if ma.get(k) != mb.get(k)] + rest)
+
+
+# What a glow branch changes from the design case: its sunlight, the CO2 that carries the gases (with the air's gases
+# and the sunlight bands the CO2 sets), and the infrared added at the top of the air.
+GLOW_SETTINGS = ['co2_ppm', 'gas_bands', 'gases_bar', 'sunlight_scale', 'top_infrared_w_m2']
+
+
+def glow_pair(records):
+    """The glow pair's ground and settings over years 10-19 beside the design case's, from each run's yearly record.
+    The branches start from the design case's year 19 and differ from it in their sunlight, their CO2 and the infrared
+    added at the top of the air alone."""
+    design = records[DESIGN]
+    out = {}
+    for run in (DESIGN,) + GLOW_PAIR:
+        p = records[run]
+        c = p['configuration']
+        if run != DESIGN and (differs(design, p) != GLOW_SETTINGS
+                              or c['initial_state']['path'] != f'climate/gcm/runs/{DESIGN}/model/MOST_REST.00019'):
+            raise ValueError(f'{run} is not a branch of {DESIGN} in its sunlight, gases and glow alone')
+        rows = [y for y in p['years'] if YEARS[0] <= y['year'] <= YEARS[1]]
+        if len(rows) != YEARS[1] - YEARS[0] + 1:
+            raise ValueError(f'{run}: years {YEARS[0]}-{YEARS[1]} are not all in its record')
+        ground = [y['surface_k'] for y in rows]
+        out[run] = dict(sunlight_scale=c['model']['sunlight_scale'], co2_ppm=c.get('co2_ppm'),
+                        top_infrared_w_m2=c.get('top_infrared_w_m2'), key=c['key'], ground_k=float(np.mean(ground)),
+                        ground_trend_k_per_decade=float(10.0 * np.polyfit([y['year'] for y in rows], ground, 1)[0]),
+                        rain_mm_day=float(np.mean([y['precipitation_mm_day'] for y in rows])))
+    return out
+
+
+def eddies(b, records):
+    """The design case's years written every 6.5 hours: the land's heat at both heights in those means and in the
+    3-day means their elevens make, over the same years."""
+    import netCDF4
+    p, design = records[EDDIES], records[DESIGN]
+    if differs(design, p) != ['writes_per_lunar_day']:
+        raise ValueError(f'{EDDIES} differs from {DESIGN} in more than how often it writes')
+    per, rest = divmod(p['configuration']['model']['writes_per_lunar_day'],
+                       design['configuration']['model']['writes_per_lunar_day'])
+    if rest:
+        raise ValueError(f'{EDDIES}: its means do not fall into whole 3-day means')
+    files, f = {}, {k: [] for k in ('tas', 'ta', 'hus', 'ps')}
+    for year in range(EDDY_YEARS[0], EDDY_YEARS[1] + 1):
+        path = output(EDDIES, year)
+        files[str(path.relative_to(ROOT))] = sha256(path)
+        with netCDF4.Dataset(path) as d:
+            lat = np.asarray(d['lat'][:], float)
+            sigma = np.asarray(d['lev'][:], float)
+            if d['tas'].shape[0] % per:
+                raise ValueError(f'{path}: {d["tas"].shape[0]} means do not make whole 3-day means')
+            f['tas'].append(np.asarray(d['tas'][:], float))
+            f['ta'].append(np.asarray(d['ta'][:, -1], float))           # the lowest level alone
+            f['hus'].append(np.asarray(d['hus'][:, -1], float))
+            f['ps'].append(np.asarray(d['ps'][:], float) * 100.0)
+    f = {k: np.concatenate(v) for k, v in f.items()}
+    order = [int(np.argmin(np.abs(b['lat'] - x))) for x in lat]
+    land, area = b['land'][order], b['area'][order]
+    island, wl = land > 0.5, land * area
+
+    def heat(tas, ta, hus, ps):
+        hot = dict(lowest_level=(wet_bulb(ta, hus, ps * sigma[-1]) - 273.15, ta - 273.15),
+                   at_2_m=(wet_bulb(tas, np.minimum(hus, qsat(tas, ps)), ps) - 273.15, tas - 273.15))
+        out = heat_in(hot, wl, np.broadcast_to(island, tas.shape))
+        del out['share_of_land_time']
+        return out
+
+    m = p['configuration']['model']
+    return dict(run=EDDIES, years=list(EDDY_YEARS), start=p['configuration']['initial_state']['path'],
+                writes_per_lunar_day=m['writes_per_lunar_day'], means_to_a_3_day_mean=per, means=int(f['tas'].shape[0]),
+                hours_each=m['steps_per_lunar_day'] * m['timestep_min'] / 60.0 / m['writes_per_lunar_day'],
+                at_6_5_hours=heat(**f),
+                in_3_day_means=heat(**{k: v.reshape(-1, per, *v.shape[1:]).mean(axis=1) for k, v in f.items()})), files
 
 
 def extract():
     b = boundary()
     files = {str(BOUNDARY.relative_to(ROOT)): sha256(BOUNDARY)}
+    records = {}
+    for run in (DESIGN, TEST) + GLOW_PAIR + (EDDIES,):
+        records[run], f = record(run)
+        files.update(f)
     runs = {}
     for run in (DESIGN, TEST):
-        runs[run], f = read(run, b)
+        runs[run], f = read(run, b, records[run]['configuration']['model'])
         files.update(f)
-    years, f = progress(TEST)
+    ed, f = eddies(b, records)
     files.update(f)
-    return dict(schema=SCHEMA, years=list(YEARS), runs=runs, test_progress=years,
+    return dict(schema=SCHEMA, years=list(YEARS), runs=runs, test_progress=progress(records[TEST]),
+                glow_pair=glow_pair(records), eddies=ed,
                 producer=dict(files={str(Path(__file__).resolve().relative_to(ROOT)): sha256(__file__)}, read=files))
 
 

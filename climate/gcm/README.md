@@ -757,9 +757,13 @@ Their years 10–19 against the design case's, from the runs' yearly means:
 | Cloud cover | 19.8% | 17.0% | 16.6% |
 
 On this radiation the same dimming cools more. The held branch ends 0.61 K below the design case, where on the old
-radiation it ended within 0.06 K, so holding the temperature takes about 0.3 points less dimming at 1.9 K a point:
-0.59 of the glow's watts in place of 0.71, if the gases' dimming still holds as it did. With no gases-only branch on
-this radiation the two parts cannot be told apart. The held branch rains 5.5% less, against 3.6% on the old radiation.
+radiation it ended within 0.06 K. The two branches differ by 0.70 points of dimming and 0.96 K, 1.37 K a point, so
+holding the temperature takes 0.45 points less than the held branch, 3.07% in all. If the gases' 1.69% still holds as
+it did, the glow's 1.38% is 3.15 W/m² of this radiation's absorbed sunlight against the glow's 5.34 W/m² of infrared:
+0.59 of its watts in place of 0.71, which
+[the target-climate study](../../research/studies/climate_targets/README.md#the-heat-beyond-the-sunlight) binds to the
+runs' records. With no gases-only branch on this radiation the two parts cannot be told apart. The held branch rains
+5.5% less, against 3.6% on the old radiation.
 The same morning the longwave was found to cool the lower air too much (below), and the author asked for the pair to
 run again with its correction in place, from a design case that lands on the design temperature under it; the lakes
 and the climate's other readers follow whatever that changes in the design case's rain.
