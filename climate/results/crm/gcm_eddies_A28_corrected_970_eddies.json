@@ -1,0 +1,262 @@
+{
+ "schema": "terluna.climate.crm-gcm-eddies/1",
+ "run": "A28_corrected_970_eddies",
+ "years": [
+  0,
+  1
+ ],
+ "latitude_deg": 45.0,
+ "rows_deg": [
+  52.60652542114258,
+  47.06964111328125,
+  41.53246307373047
+ ],
+ "block": 11,
+ "surface_pa": 121590.0,
+ "levels": [
+  {
+   "sigma": 0.038299560546875,
+   "sigma_span": [
+    0.0,
+    0.07659912109375
+   ],
+   "w_m2_per_k_day": 66.63418063306196,
+   "eddies_k_day": {
+    "written": 0.0015925587489489855,
+    "blocks": 0.001699563434805166,
+    "missed": -0.0001070046858561804
+   },
+   "eddies_w_m2": {
+    "written": 0.10611884734622987,
+    "blocks": 0.11324901691215465,
+    "missed": -0.0071301695659247745
+   },
+   "mean_meridional_k_day": -4.500533345633167e-05,
+   "eddies_vapour_g_kg_day": {
+    "written": 1.4763094037835985e-06,
+    "blocks": 7.109953823574499e-07
+   }
+  },
+  {
+   "sigma": 0.11909961700439453,
+   "sigma_span": [
+    0.07659912109375,
+    0.16160011291503906
+   ],
+   "w_m2_per_k_day": 73.94303436036869,
+   "eddies_k_day": {
+    "written": 0.054900479642865034,
+    "blocks": 0.05578131989560075,
+    "missed": -0.0008808402527357151
+   },
+   "eddies_w_m2": {
+    "written": 4.059508052633091,
+    "blocks": 4.1246400537071235,
+    "missed": -0.06513200107403282
+   },
+   "mean_meridional_k_day": -0.00509024791181503,
+   "eddies_vapour_g_kg_day": {
+    "written": 0.00017323186255259324,
+    "blocks": 0.00012425720100147356
+   }
+  },
+  {
+   "sigma": 0.21084976196289062,
+   "sigma_span": [
+    0.16160011291503906,
+    0.2600994110107422
+   ],
+   "w_m2_per_k_day": 85.68531763577155,
+   "eddies_k_day": {
+    "written": 0.008129736238219262,
+    "blocks": 0.0005355089799177138,
+    "missed": 0.007594227258301549
+   },
+   "eddies_w_m2": {
+    "written": 0.69659903186686,
+    "blocks": 0.045885257041057316,
+    "missed": 0.6507137748258027
+   },
+   "mean_meridional_k_day": -0.0037727291911982454,
+   "eddies_vapour_g_kg_day": {
+    "written": -2.445041016475508e-05,
+    "blocks": 0.00010924349241337502
+   }
+  },
+  {
+   "sigma": 0.3168497085571289,
+   "sigma_span": [
+    0.2600994110107422,
+    0.3736000061035156
+   ],
+   "w_m2_per_k_day": 98.73506441562795,
+   "eddies_k_day": {
+    "written": -0.005135186303606084,
+    "blocks": -0.021167321076678194,
+    "missed": 0.01603213477307211
+   },
+   "eddies_w_m2": {
+    "written": -0.507022950472797,
+    "blocks": -2.0899568100121004,
+    "missed": 1.5829338595393034
+   },
+   "mean_meridional_k_day": 0.0009449271425257078,
+   "eddies_vapour_g_kg_day": {
+    "written": -0.0005910568766717236,
+    "blocks": -3.836719592432824e-05
+   }
+  },
+  {
+   "sigma": 0.4368000030517578,
+   "sigma_span": [
+    0.3736000061035156,
+    0.5
+   ],
+   "w_m2_per_k_day": 109.9563533504237,
+   "eddies_k_day": {
+    "written": -0.09637207164134698,
+    "blocks": -0.09382998812769883,
+    "missed": -0.0025420835136481523
+   },
+   "eddies_w_m2": {
+    "written": -10.596721562508295,
+    "blocks": -10.317203329435312,
+    "missed": -0.27951823307298285
+   },
+   "mean_meridional_k_day": 0.0030903810104612453,
+   "eddies_vapour_g_kg_day": {
+    "written": -0.0001746525884763286,
+    "blocks": -0.0036407246718744685
+   }
+  },
+  {
+   "sigma": 0.5668001174926758,
+   "sigma_span": [
+    0.5,
+    0.6336002349853516
+   ],
+   "w_m2_per_k_day": 116.21989996122572,
+   "eddies_k_day": {
+    "written": -0.020006723912550126,
+    "blocks": -0.02249970960890337,
+    "missed": 0.002492985696353242
+   },
+   "eddies_w_m2": {
+    "written": -2.325179451668438,
+    "blocks": -2.6149139999033784,
+    "missed": 0.28973454823494044
+   },
+   "mean_meridional_k_day": 0.0003623483933940393,
+   "eddies_vapour_g_kg_day": {
+    "written": 0.0052708962942888005,
+    "blocks": -0.003239181227889118
+   }
+  },
+  {
+   "sigma": 0.6993503570556641,
+   "sigma_span": [
+    0.6336002349853516,
+    0.7651004791259766
+   ],
+   "w_m2_per_k_day": 114.39310133381035,
+   "eddies_k_day": {
+    "written": -0.04843651534445176,
+    "blocks": -0.045920585995781714,
+    "missed": -0.0025159293486700443
+   },
+   "eddies_w_m2": {
+    "written": -5.5408032080545295,
+    "blocks": -5.2529982471234105,
+    "missed": -0.28780496093111985
+   },
+   "mean_meridional_k_day": -0.007545903380951968,
+   "eddies_vapour_g_kg_day": {
+    "written": -0.0012949586393059508,
+    "blocks": -0.012288228168524325
+   }
+  },
+  {
+   "sigma": 0.8233499526977539,
+   "sigma_span": [
+    0.7651004791259766,
+    0.8815994262695312
+   ],
+   "w_m2_per_k_day": 101.34335455395397,
+   "eddies_k_day": {
+    "written": -0.02514358778012696,
+    "blocks": -0.02526984707365337,
+    "missed": 0.00012625929352640813
+   },
+   "eddies_w_m2": {
+    "written": -2.548135531159871,
+    "blocks": -2.5609310715094495,
+    "missed": 0.012795540349578525
+   },
+   "mean_meridional_k_day": -0.017884419760743044,
+   "eddies_vapour_g_kg_day": {
+    "written": 0.023160910354181056,
+    "blocks": 0.017588805459254248
+   }
+  },
+  {
+   "sigma": 0.9240999221801758,
+   "sigma_span": [
+    0.8815994262695312,
+    0.9666004180908203
+   ],
+   "w_m2_per_k_day": 73.94303436036869,
+   "eddies_k_day": {
+    "written": -0.10011934489149836,
+    "blocks": -0.09209961393772612,
+    "missed": -0.008019730953772244
+   },
+   "eddies_w_m2": {
+    "written": -7.4031281594496665,
+    "blocks": -6.8101249179739725,
+    "missed": -0.5930032414756934
+   },
+   "mean_meridional_k_day": 0.01011889837899168,
+   "eddies_vapour_g_kg_day": {
+    "written": 0.05393180889401657,
+    "blocks": 0.04850219479328989
+   }
+  },
+  {
+   "sigma": 0.9833002090454102,
+   "sigma_span": [
+    0.9666004180908203,
+    1.0
+   ],
+   "w_m2_per_k_day": 29.05456018589512,
+   "eddies_k_day": {
+    "written": -0.2079215620297263,
+    "blocks": -0.21757716895603046,
+    "missed": 0.009655606926304156
+   },
+   "eddies_w_m2": {
+    "written": -6.041069537938008,
+    "blocks": -6.321608950509659,
+    "missed": 0.2805394125716499
+   },
+   "mean_meridional_k_day": -0.0793588781294991,
+   "eddies_vapour_g_kg_day": {
+    "written": -0.0676500214337074,
+    "blocks": -0.04721341758639027
+   }
+  }
+ ],
+ "lowest_two_w_m2": {
+  "written": -13.444197697387676,
+  "blocks": -13.131733868483632,
+  "missed": -0.3124638289040435
+ },
+ "evidence": "The GCM's zonal-eddy heat and vapour flux convergence at the row and the rows either side, from each output's deviations from its zonal mean, averaged over the run; the block means hold the same data as coarser means would, so the difference is what those means miss. Covariances faster than the outputs themselves stay out of both.",
+ "reading_rule": "K/day of temperature at each GCM level (the top first), and W/m2 through each level's mass; positive warms the air. The mean meridional advection is the same either way.",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/gcm_eddies.py": "e013b87ea81cfdff",
+   "crm/ring_heat_budget.py": "579d588f292fc4e6"
+  }
+ }
+}

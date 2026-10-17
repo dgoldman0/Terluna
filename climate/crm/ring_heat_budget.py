@@ -126,10 +126,31 @@ def ring_budget(name, from_day):
                 nudge_m=(namelist_number(text, 'var14'), namelist_number(text, 'var15')))
 
 
-def gcm_sideways(run, years, latitude, band):
+def block_means(a, block):
+    """Means over consecutive blocks of `block` outputs along the first axis, a trailing part block left out."""
+    if block <= 1:
+        return a
+    n = a.shape[0] // block * block
+    return a[:n].reshape((n // block, block) + a.shape[1:]).mean(axis=1)
+
+
+def zonal_eddy_sums(v, t, q, block=1):
+    """Sums over time of the zonal means of the northward wind, temperature and vapour (time, level, row, longitude)
+    and of their zonal-eddy covariances, the deviations from each time's zonal mean; with block > 1 the outputs are
+    first averaged in blocks, as coarser means would hold them. Returns the sums and the number of times."""
+    v, t, q = (block_means(a, block) for a in (v, t, q))
+    vm, tm, qm = (a.mean(axis=3, keepdims=True) for a in (v, t, q))
+    eddy = ((v - vm) * (t - tm)).mean(axis=3)                             # (time, lev, rows)
+    eddy_q = ((v - vm) * (q - qm)).mean(axis=3)
+    return dict(v=vm[..., 0].sum(axis=0), t=tm[..., 0].sum(axis=0), q=qm[..., 0].sum(axis=0),
+                eddy=eddy.sum(axis=0), eddy_q=eddy_q.sum(axis=0)), v.shape[0]
+
+
+def gcm_sideways(run, years, latitude, band, block=1):
     """The GCM's sideways heat transport at the ring's row (K/day of temperature, by level, the top level first): the
-    zonal-mean meridional circulation's advection and the resolved eddies' heat flux convergence, from 3-day means
-    at the row and the rows either side, with the zonal-mean temperature and northward wind."""
+    zonal-mean meridional circulation's advection and the resolved eddies' heat flux convergence, from the run's
+    means (3-day means for the runner's standard output) at the row and the rows either side, with the zonal-mean
+    temperature and northward wind. block > 1 first averages the outputs in blocks of that many."""
     import netCDF4
     from climate.crm.cm1_run import planet
     radius = planet()['radius_m']
@@ -145,13 +166,9 @@ def gcm_sideways(run, years, latitude, band):
             v = np.asarray(d['va'][:, :, rows, :], float)                  # (time, lev, 3, lon)
             t = np.asarray(d['ta'][:, :, rows, :], float)
             q = np.asarray(d['hus'][:, :, rows, :], float)
-        vm, tm, qm = (a.mean(axis=3, keepdims=True) for a in (v, t, q))
-        eddy = ((v - vm) * (t - tm)).mean(axis=3)                         # (time, lev, 3)
-        eddy_q = ((v - vm) * (q - qm)).mean(axis=3)
-        part = dict(v=vm[..., 0].sum(axis=0), t=tm[..., 0].sum(axis=0), q=qm[..., 0].sum(axis=0),
-                    eddy=eddy.sum(axis=0), eddy_q=eddy_q.sum(axis=0))
+        part, n = zonal_eddy_sums(v, t, q, block)
         sums = part if sums is None else {k: sums[k] + part[k] for k in sums}
-        count += v.shape[0]
+        count += n
     mean = {k: v / count for k, v in sums.items()}                      # (lev, 3): rows north, middle, south
     phi = np.radians(lat[rows])
     dphi = phi[0] - phi[2]                                               # north minus south

@@ -928,8 +928,9 @@ def _on_signal(signum, frame):
             pass
     sys.exit(128 + signum)
 
-def summarise_year(path: Path) -> dict:
-    """Headline numbers from one year of output (3-day means), for watching the run settle at a glance."""
+def summarise_year(path: Path, times_per_year: int | None = None) -> dict:
+    """Headline numbers from one year of output, for watching the run settle at a glance. The year holds
+    times_per_year means, the runner's 120 (about 3 days each) unless the run writes more often."""
     import netCDF4
     with netCDF4.Dataset(path) as d:
         clear = 'rstcs' in d.variables
@@ -937,7 +938,7 @@ def summarise_year(path: Path) -> dict:
         v = {k: np.asarray(d[k][:], dtype=float) for k in keys}
         lat = np.asarray(d['lat'][:], dtype=float)
         times = d['time'].size
-    expected = MODEL['writes_per_lunar_day'] * MODEL['lunar_days_per_year']
+    expected = times_per_year or MODEL['writes_per_lunar_day'] * MODEL['lunar_days_per_year']
     if times != expected:
         raise RuntimeError(f'{path.name}: {times} output times, expected {expected}; the calendar is not as assumed')
     nodes, weights = np.polynomial.legendre.leggauss(lat.size)       # Gaussian weights of the T21 rows
@@ -1034,7 +1035,8 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
             if not (out.is_file() and rest.is_file()):
                 print(f'{name}: year {year} produced no output or restart; stopping.', file=sys.stderr)
                 return 1
-            entry = dict(year=year, seconds=round(time.time() - start, 1), **summarise_year(out))
+            writes = cfg['model']['writes_per_lunar_day'] * cfg['model']['lunar_days_per_year']
+            entry = dict(year=year, seconds=round(time.time() - start, 1), **summarise_year(out, writes))
             if 'model_sunlight' not in progress:
                 # The Sun's light splits about evenly across 0.75 um; anything far off means a broken spectrum.
                 progress['model_sunlight'] = model_reported_sunlight(workdir)

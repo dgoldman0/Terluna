@@ -1087,10 +1087,15 @@ means over the second lunar day): the sideways transport takes about a third of 
   the 8.5 W/m² the transport takes from it.
 - **What is left.** About 4 K below 6.5 km. Each kelvin the lowest layer cools gives back about 4 W/m², so the 3.7 K
   left there would need about 15 W/m² more taken from it, nearly twice what the GCM's 3-day means carry sideways.
-  Two candidates remain. The transport imposed is a floor, since 3-day means miss the faster eddies, which a short
-  GCM run with daily output would measure. And the two models shed the ground's heat differently: by day CM1 mixes
-  its lower air dry to 14–19 km where the GCM's stays stable. The land test waits behind both, since over land the
-  ground heats the air alike in the two models.
+- **The faster eddies are not it.** On 17 October the design case ran two more years writing a mean every 6.5 hours
+  (`A28_corrected_970_eddies`; [gcm_eddies.py](gcm_eddies.py),
+  [gcm_eddies_A28_corrected_970_eddies.json](../results/crm/gcm_eddies_A28_corrected_970_eddies.json)). Its eddies
+  take −0.208 K a day from the lowest layer and −0.100 from the next, and the same outputs averaged into 3-day means
+  give −0.218 and −0.092: over the lowest two layers 13.4 W/m² against 13.1, so the 3-day means miss 2%. At 45° N the
+  GCM's eddies are slow, as on a world that turns once a month, and its two years agree with the ten the ring used.
+- **So the rest lies in the models' physics:** how each sheds the heat the ground gives it, by radiation, convection
+  and turbulence. By day CM1 mixes its lower air dry to 14–19 km where the GCM's stays stable. The land test waits
+  behind this, since over land the ground heats the air alike in the two models.
 - **For the cases that follow.** The sideways transport is part of the GCM's forcing that a slice of it lacks, so
   forced rings and boxes are better driven with it; their warmth near the ground still runs about 4 K high at 45° N
   until the rest is found.

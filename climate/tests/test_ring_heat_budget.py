@@ -27,3 +27,24 @@ def test_the_forcing_files_read_as_cm1_writes_them(tmp_path):
     z, th = hb.read_reference(tmp_path / 'ref.dat')
     assert z.tolist() == [0.0, 50.0] and th.tolist() == [278.5, 278.6]
     assert hb.namelist_number(' lsnudge_tau        =    259200.0,\n var14     =   8000.0,\n', 'var14') == 8000.0
+
+
+def test_block_means_average_consecutive_outputs():
+    a = np.arange(12.0).reshape(12, 1)
+    assert np.allclose(hb.block_means(a, 3)[:, 0], [1.0, 4.0, 7.0, 10.0])
+    assert np.allclose(hb.block_means(a, 5)[:, 0], [2.0, 7.0])           # the last two outputs make no block
+    assert hb.block_means(a, 1) is a
+
+
+def test_coarser_means_miss_the_eddies_faster_than_them():
+    # A wave that turns over every output: each output holds its covariance, and pairs of outputs average it away.
+    times, lon = 22, 16
+    phase = np.arange(times)[:, None] * np.pi + np.linspace(0.0, 2.0 * np.pi, lon, endpoint=False)[None, :]
+    v = np.cos(phase)[:, None, None, :] * np.ones((1, 2, 3, 1))
+    t = 2.0 * v
+    fine, n = hb.zonal_eddy_sums(v, t, np.zeros_like(v))
+    coarse, m = hb.zonal_eddy_sums(v, t, np.zeros_like(v), block=2)
+    assert (n, m) == (22, 11)
+    assert np.allclose(fine['eddy'] / n, 1.0)
+    assert np.allclose(coarse['eddy'] / m, 0.0)
+    assert np.allclose(fine['t'] / n, coarse['t'] / m)                  # the zonal means are the same either way

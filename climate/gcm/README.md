@@ -1003,6 +1003,8 @@ against the papers:
 | More low cloud (`A28_dim5_moon_low_cloud`) | Done (15 years from `A28_dim5_moon`'s year 29, 2026-10-01): `surface_cloud_rcrit` 0.6, the lowest layer's cloud threshold lowered from 0.983; cloud cover 43%, 289.9 K over years 5–14, settling near 289.0 K, cooler about alike from the ground to 18 km. A test of whether CM1's foggy nights explain the gap ([../crm](../crm/README.md), "The GCM's low cloud at night") |
 | C, 1.0 atm | Not run: no current decision needs it. The 1-D balance puts 1.0 atm 0.2–1.3 K cooler than 1.2 atm, depending on the clouds, and 1.2 atm is the design pressure. The runner keeps it defined |
 | Gases, glow and dimming (`A28_gases`, `A28_gases_glow`, `A28_gases_glow_held`) | Done (20 years each from `A28_dim5_moon`'s year 29, 2026-10-13, above), with the calibration branches `A28_cal_control`, `A28_cal_co2_1022` and `A28_cal_control_patched` (one year each) |
+| Eddies every 6.5 hours (`A28_corrected_970_eddies`) | Done (2 years from `A28_corrected_970`'s year 19, 2026-10-17): `writes_per_lunar_day` 110, eleven means to each standard 3-day mean, for the eddies' transport the 3-day means miss at 45° N, 2% of it ([the CRM's account](../crm/README.md#what-else-divides-cm1-and-the-gcm-at-the-crossing)) |
+| The glow pair on the corrected radiation (`A28_corrected_gases_glow`, `A28_corrected_gases_glow_held`) | Running from the morning of 2026-10-17, 20 years each from `A28_corrected_970`'s year 19, with 13 October's added dimming on the design scale of 0.970 (above) |
 | D, E | D needs ExoPlaSim's ozone profile from the 1-D results; E's trace gases now enter as their CO2 equivalent (`--co2-ppm`, above) |
 
 ## First experiments
