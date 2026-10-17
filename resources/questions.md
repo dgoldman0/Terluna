@@ -69,15 +69,19 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
 
    **How:** with the planned `research/array-industry` branch, a stock-and-flow model of the fleet's materials with
    damage rates (protons, meteoroids) and recovery steps.
-7. **The carbon cycle as a box model.** The parts are:
-   - air, plants, soils with their carbonates, and the seas' dissolved carbon;
-   - burial in lakes and seas;
-   - the kilns and where their lime goes.
+7. **The carbon cycle as a box model.** Answered on 12 October 2026, at the author's request, by the
+   [carbon cycle](../research/studies/carbon_cycle/README.md): the air, the plants and soils with their carbonate, the
+   sky's biomass, the lakes' and seas' dissolved carbon, the sediments, people's stocks and the mineral strand, from
+   the seeding to year 10,000 at the corrected runoff and climate, with weathering that slows as soils age, the
+   magnesite route and the kilns' lime. Left alone once the biosphere is grown, the air falls below the plants'
+   comfortable 43 Pa in 207–447 years. Holding 400 ppm takes 0.14–0.39 Gt C a year of return or import at year
+   10,000: kilns of 3.9–14 GW return the carbonate as it forms, and the lakes' organic burial, the largest sink, with
+   the filling crust and the rock's calcite, leaves an import of 0.12–0.33 Gt C a year. The build brings 951–1,251 Gt C
+   by the year the biosphere is grown, and burial leaves 0.36–0.86% more oxygen in the air by year 10,000 (revised on
+   14 October with the springs study's groundwater).
 
-   It needs the corrected runoff and climate, weathering that slows as soils form, and the magnesite route. The CO2
-   study names it as next work.
-
-   **How:** a box model through the first thousands of years, run in seconds.
+   **Next:** the imports' form and the redox account (items 4 and 8), burial by lake, calcite where the kilns can reach
+   it, and the organic returns, as the study's next work lists them.
 8. **The oxygen budget against the ground.** Ferrous and metallic iron and sulfides take oxygen as the surface
    weathers, and organic burial returns it. The industrial architecture's step "establish the final oxygen regime"
    needs its size and timing.
@@ -87,7 +91,14 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
    or salted at delivery. Weathering, evaporation in closed lakes and salt works follow.
 
    **How:** a chemical model of the seas and lakes with the delivered composition as scenarios, beside the ecology
-   work's living waters.
+   work's living waters. **Done 13 October** ([sea chemistry](../research/studies/sea_chemistry/README.md)), through
+   the billion years: left alone the seas turn alkaline and fill with sediment and their own deposits within millions
+   of years, and every lasting state is a held one, with fresh, brackish or salted seas kept where the delivery sets
+   them by calcite, a magnesium route, soda works and silica-building life, and the sediment returned. Followed on
+   15 October
+   ([closed lakes and salt seas](../research/studies/sea_chemistry/README.md#closed-lakes-soda-lakes-and-salt-seas)):
+   the Moon's closed lakes turn to soda, ocean-like water needs its chlorine brought, and the author leans to
+   aquariums for saltwater life, with the soda lakes left as their own local ecosystems. Open: salt seas or aquariums.
 10. **A geochemical map of the Moon's rock.** Elements by region on the atlas, separating dry ground from the flooded
    high-titanium basalts and KREEP. That sets what can be mined before flooding, and where the summit's steel and the
    shield's titania come from.
@@ -108,3 +119,20 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
     drainage oxidizes.
 15. **Earth's share.** The conservation principle weighs the project's effects on Earth as part of its costs. The
     ledger should carry them.
+16. **The shores' water table, groundwater stage 4.** The 15 km solver has no shores. The fresh seas feed the water
+    table under every shore, and at lunar gravity plants by the water draw on it from 15–25 m above the sea
+    ([geography's screen](../geography/README.md#shores-by-the-fresh-seas)). How wide and how lush the belts are, what
+    the ground can supply, where the sea's load settles and which small islands stay wooded throughout set the
+    shores' ecology and Jura Island's cover. The author asked on 15 October for the shorelines to be weighed more.
+
+    **How:** cross-shore water tables at tens of metres along the atlas's coasts, the sea a fixed head with its
+    monthly tide, the plants' draw from the climate's demand, the capillary reach at lunar gravity and the load's
+    balance; by latitude, shore slope and ground, with Jura Island as the worked case. Minutes on one core.
+17. **The delivered water's own chlorine.** The sea chemistry delivers pure water. Ice like comet 67P's carries about
+    1% of seawater's chloride, which has no sink: delivered as it comes it would hold the seas near 0.28 g/kg of
+    chloride, about 0.5–0.6 g/kg in all with the cations that balance it, at the line between fresh and brackish
+    water, and the shores' soils would gather it where plants draw. Cleaned out, it keeps the seas at 0.14 g/kg and
+    yields chlorine for salt water.
+
+    **How:** the sea chemistry with a chlorine-bearing delivery, and the chlorine's balance in the extraction plan
+    (question 2).

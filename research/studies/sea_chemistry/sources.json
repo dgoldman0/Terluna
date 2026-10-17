@@ -1,0 +1,53 @@
+{
+  "source_admission": "Published values used in run.py and README.md, each with how far it was read for this study on 2026-10-13. The carbonate constants and the weathering law come from the carbon cycle study and are recorded in its sources.json. No outside dataset or full paper is committed. Earth's waters serve as reference points for the Moon's engineered seas.",
+  "sources": [
+    {
+      "key": "millero2008_reference_seawater",
+      "citation": "Millero FJ, Feistel R, Wright DG, McDougall TJ 2008, The composition of Standard Seawater and the definition of the Reference-Composition Salinity Scale, Deep-Sea Research I 55, 50-72",
+      "doi_or_url": "https://doi.org/10.1016/j.dsr.2007.10.001",
+      "use": "SEAWATER: the salted and brackish deliveries, Earth's reference seawater at a salinity of 35.165",
+      "values_used": {"na_mol_kg": 0.46906, "k_mol_kg": 0.01021, "mg_mol_kg": 0.05282, "ca_mol_kg": 0.01028, "cl_mol_kg": 0.54586, "so4_mol_kg": 0.02824},
+      "access": "the reference composition's major ions as widely reproduced (the basis of TEOS-10); not reread for this study"
+    },
+    {
+      "key": "lueker2000_constants",
+      "citation": "Lueker TJ, Dickson AG, Keeling CD 2000, Ocean pCO2 calculated from dissolved inorganic carbon, alkalinity, and equations for K1 and K2: validation based on laboratory measurements of CO2 in gas and seawater at equilibrium, Marine Chemistry 70, 105-119",
+      "doi_or_url": "https://doi.org/10.1016/S0304-4203(00)00022-0",
+      "use": "VALID_SALINITY_G_KG: the salinity range, 19-43, over which the carbon cycle's seawater constants were fitted",
+      "values_used": {"salinity_range": [19, 43]},
+      "access": "the fit's stated range as the carbon cycle study takes it; not reread for this study"
+    },
+    {
+      "key": "gunnarsson2000_silica",
+      "citation": "Gunnarsson I, Arnorsson S 2000, Amorphous silica solubility and the thermodynamic properties of H4SiO4 in the range of 0 to 350 C at Psat, Geochimica et Cosmochimica Acta 64, 2295-2307",
+      "doi_or_url": "https://doi.org/10.1016/S0016-7037(99)00426-3",
+      "use": "SILICA_LOG_K_25C: amorphous silica's solubility as H4SiO4, log K = -2.71 at 25 C from the paper's temperature equation; with silicic acid's first dissociation, pKa 9.82, the standard value at 25 C",
+      "values_used": {"log_k_25c": -2.71, "pka": 9.82},
+      "access": "the solubility equation as widely reproduced, evaluated at 298.15 K; not reread for this study"
+    },
+    {
+      "key": "tosca2014_mg_silicates",
+      "citation": "Tosca NJ, Masterson AL 2014, Chemical controls on incipient Mg-silicate crystallization at 25 C: implications for early and late diagenesis, Clay Minerals 49, 165-194",
+      "doi_or_url": "https://doi.org/10.1180/claymin.2014.049.2.03",
+      "use": "PH_CLAY: magnesium clays (kerolite-, stevensite- and sepiolite-like hydrated 2:1 silicates) forming rapidly from alkaline, silica-rich water at 25 C; the threshold of pH 9 is this study's design guess",
+      "values_used": {},
+      "access": "abstract read 2026-10-13"
+    },
+    {
+      "key": "toner2020_soda_phosphate",
+      "citation": "Toner JD, Catling DC 2020, A carbonate-rich lake solution to the phosphate problem of the origin of life, Proceedings of the National Academy of Sciences 117, 883-888",
+      "doi_or_url": "https://doi.org/10.1073/pnas.1916109117",
+      "use": "README: an alkaline, calcium-poor water keeps phosphate that apatite would otherwise take, so a soda sea can hold far more phosphorus than Earth-calibrated burial gives",
+      "values_used": {},
+      "access": "abstract and summaries read 2026-10-13: carbonate-rich lakes concentrate phosphate because calcium is sequestered in carbonate minerals"
+    },
+    {
+      "key": "mineral_densities",
+      "citation": "Standard mineral densities: calcite 2.71, magnesite 3.01, opal-A about 2.05, sepiolite-like clays about 2.1, nahcolite and trona about 2.2, thenardite 2.66 g/cm3",
+      "doi_or_url": "textbook values",
+      "use": "MINERAL_DENSITY: the volume of the waters' deposits, with the deposit porosity a design guess of 0.5-0.8",
+      "values_used": {"calcite": 2710, "magnesite": 3010, "opal": 2050, "magnesium_clays": 2100, "soda": 2200, "sodium_sulphate": 2660},
+      "access": "textbook values; not reread for this study"
+    }
+  ]
+}

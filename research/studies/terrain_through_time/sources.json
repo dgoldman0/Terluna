@@ -1,0 +1,277 @@
+{
+  "source_admission": "Published values used in routing.py, run.py and README.md, each with how far it was read for this study on 2026-10-13. A literature helper gathered most of them; its dossier, with quotes and the gaps it left, is research/runs/resources/terrain/literature.md on the research drive. The lake trapping comes from the sea phosphorus study, the weathering law and carbonate solver from the carbon cycle, and the dredging fuel from resources' sea phosphorus routes; they are recorded in those studies' sources. No outside dataset or full paper is committed. Earth's landscapes serve as reference points for the Moon's engineered ones.",
+  "sources": [
+    {
+      "key": "ahnert1970_relief",
+      "citation": "Ahnert F 1970, Functional relationships between denudation, relief, and uplift in large, mid-latitude drainage basins, American Journal of Science 268, 243-263",
+      "doi_or_url": "ADS bibcode 1970AmJS..268..243A",
+      "use": "routing.py: the land's rock comes off in proportion to local relief; README: Earth's coefficient, D = 0.1535 H (mm a thousand years, H the mean local relief in m in 20 x 20 km cells), a relief e-folding of about 6.5 million years",
+      "values_used": {
+        "coefficient_per_myr": 0.1535
+      },
+      "access": "original not read; the relation as three later papers state it, read in full by the helper, and the coefficient from search excerpts of Gunnell 1998"
+    },
+    {
+      "key": "montgomery_brandon2002",
+      "citation": "Montgomery DR, Brandon MT 2002, Topographic controls on erosion rates in tectonically active mountain ranges, Earth and Planetary Science Letters 201, 481-489",
+      "doi_or_url": "https://gis.ess.washington.edu/grg/publications/pdfs/Montgomery_Brandon.pdf",
+      "use": "RELIEF_HALF_WIDTH_KM: local relief as the highest less the lowest ground within about 10 km; README: erosion rises steeply where relief passes 1-1.5 km in active ranges",
+      "values_used": {
+        "window_diameter_km": 10
+      },
+      "access": "full text read by the helper"
+    },
+    {
+      "key": "syvitski_milliman2007_bqart",
+      "citation": "Syvitski JPM, Milliman JD 2007, Geology, geography, and humans battle for dominance over the delivery of fluvial sediment to the coastal ocean, Journal of Geology 115, 1-19",
+      "doi_or_url": "https://doi.org/10.1086/509246",
+      "use": "WATER_EXPONENT: the BQART model's exponent on water discharge, Qs = omega B Q^0.31 A^0.5 R T, taken here on rain to spread the land's rock with the water that moves it",
+      "values_used": {
+        "water_exponent": 0.31
+      },
+      "access": "the model's equation as search summaries and citing papers give it, checked 2026-10-13; not reread"
+    },
+    {
+      "key": "roering2007_diffusivity",
+      "citation": "Roering JJ, Perron JT, Kirchner JW 2007, Functional relationships between denudation and hillslope form and relief, Earth and Planetary Science Letters 264, 245-258",
+      "doi_or_url": "https://doi.org/10.1016/j.epsl.2007.09.035",
+      "use": "KAPPA_M2_YR: soil creep's diffusivity, 0.003 m2 a year in the humid, forested Oregon Coast Range (from Roering et al. 1999) and 0.038 (+0.040/-0.024) in semi-arid Gabilan Mesa, with their geometric middle 0.01",
+      "values_used": {
+        "oregon_coast_range_m2_yr": 0.003,
+        "gabilan_mesa_m2_yr": 0.038
+      },
+      "access": "full text read by the helper (section 3)"
+    },
+    {
+      "key": "richardson2019_climate_life_creep",
+      "citation": "Richardson PW, Perron JT, Schurr ND 2019, Influences of climate and life on hillslope sediment transport, Geology 47, 423-426",
+      "doi_or_url": "https://doi.org/10.1130/G45305.1",
+      "use": "README: soil creep rises strongly with moisture among dry sites and with plant cover from deserts to forests, so the engineered biomes speed it",
+      "values_used": {},
+      "access": "abstract read by the helper; the compiled values were not reached"
+    },
+    {
+      "key": "fassett_thomson2014_lunar_diffusion",
+      "citation": "Fassett CI, Thomson BJ 2014, Crater degradation on the lunar maria: topographic diffusion and the rate of erosion on the Moon, Journal of Geophysical Research: Planets 119, 2255-2271",
+      "doi_or_url": "https://doi.org/10.1002/2014JE004698",
+      "use": "KAPPA_AIRLESS_M2_YR: the Moon's small craters now degrade at about 5.5 m2 a million years",
+      "values_used": {
+        "kappa_m2_myr": 5.5
+      },
+      "access": "abstract read by the helper; O'Brien & Byrne 2022 (Planetary Science Journal 3, 235) checked the value in full text"
+    },
+    {
+      "key": "minton2019_equilibrium",
+      "citation": "Minton DA, Fassett CI, Hirabayashi M, Howl BA, Richardson JE 2019, The equilibrium size-frequency distribution of small craters reveals the effects of distal ejecta on lunar landscape morphology, Icarus 326, 63-87",
+      "doi_or_url": "arXiv:1902.07746 (preprint)",
+      "use": "README: its fit of crater depth to diffusion halves a crater's depth at kappa t of about 0.016 D^2, beside this study's 0.024 D^2 from Pike's profile; GEOMETRIC_SATURATION and the equilibrium shares of Gault (1970) and Xiao & Werner (2015) as it gives them",
+      "values_used": {
+        "half_depth_kappa_t_over_d2": 0.016,
+        "geometric_saturation": 1.54
+      },
+      "access": "preprint full text read by the helper (section 1.2)"
+    },
+    {
+      "key": "xiao_werner2015_equilibrium",
+      "citation": "Xiao Z, Werner SC 2015, Size-frequency distribution of crater populations in equilibrium on the Moon, Journal of Geophysical Research: Planets 120, 2277-2292",
+      "doi_or_url": "https://doi.org/10.1002/2015JE004860",
+      "use": "EQUILIBRIUM_SHARE: small craters in equilibrium stand at 0.69-3.9% of geometric saturation where equilibrium sets in below a radius of 500 m",
+      "values_used": {
+        "share_of_geometric_saturation": [
+          0.0069,
+          0.039
+        ]
+      },
+      "access": "abstract read by the helper; the range as Minton et al. 2019 quote it"
+    },
+    {
+      "key": "pike1977_crater_shape",
+      "citation": "Pike RJ 1977, Size-dependence in the shape of fresh impact craters on the Moon, in Roddy DJ, Pepin RO, Merrill RB (eds), Impact and Explosion Cratering, Pergamon, 489-509",
+      "doi_or_url": "https://ui.adsabs.harvard.edu/abs/1977iecp.symp..489P",
+      "use": "CRATER_DEPTH, CRATER_RIM: fresh simple craters stand 0.196 D from rim to floor (d = 0.196 D^1.01 below about 15 km) with a rim about 0.036 D high",
+      "values_used": {
+        "depth_over_diameter": 0.196,
+        "rim_over_diameter": 0.036
+      },
+      "access": "the depth relation confirmed in search summaries 2026-10-13; the rim height as widely reproduced; not reread"
+    },
+    {
+      "key": "mcgetchin1973_ejecta",
+      "citation": "McGetchin TR, Settle M, Head JW 1973, Radial thickness variation in impact crater ejecta: implications for lunar basin deposits, Earth and Planetary Science Letters 20, 226-236",
+      "doi_or_url": "citation as widely reproduced; not checked",
+      "use": "crater_profile: the ejecta thins as the inverse cube of distance from the centre",
+      "values_used": {
+        "exponent": -3
+      },
+      "access": "the decay law as widely reproduced; not reread"
+    },
+    {
+      "key": "baud2021_lake_sediment",
+      "citation": "Baud A, Jenny J-P, Francus P, Gregory-Eaves I 2021, Global acceleration of lake sediment accumulation rates associated with recent human population growth and land-use changes, Journal of Paleolimnology 66, 453-467 (data: Zenodo 5360710)",
+      "doi_or_url": "https://doi.org/10.1007/s10933-021-00217-6",
+      "use": "ACCRETION_MM_YR high end and README: Earth's natural lakes accumulated a median 0.92 mm a year before 1900 (interquartile 0.45-1.46; tundra 0.31, boreal 0.59, temperate 0.94-1.11)",
+      "values_used": {
+        "median_mm_yr": 0.92,
+        "interquartile_mm_yr": [
+          0.45,
+          1.46
+        ]
+      },
+      "access": "the helper's own statistics from the published dataset (159 natural lakes, pre-1900 levels); the paper itself not read"
+    },
+    {
+      "key": "baikal_core_2010",
+      "citation": "Radiocarbon 52 (2010), 1449-1457, the dating of core VER99G12 on Lake Baikal's Buguldeika Saddle",
+      "doi_or_url": "https://doi.org/10.1017/S0033822200046531",
+      "use": "ACCRETION_MM_YR low end: about 0.14 mm a year over 30,000 years at one site of a deep oligotrophic lake",
+      "values_used": {
+        "mm_yr": 0.136
+      },
+      "access": "abstract read by the helper; one saddle site, not a lake-wide value"
+    },
+    {
+      "key": "loisel2014_peat",
+      "citation": "Loisel J et al. 2014, A database and synthesis of northern peatland soil properties and Holocene carbon and nitrogen accumulation, The Holocene 24, 1028-1042",
+      "doi_or_url": "https://doi.org/10.1177/0959683614538073",
+      "use": "ACCRETION_MM_YR central: 23 g C a square metre a year at 0.12 g/cm3 and 47% carbon, about 0.41 mm a year of peat",
+      "values_used": {
+        "g_c_m2_yr": 23,
+        "bulk_density_g_cm3": 0.12,
+        "carbon_share": 0.47
+      },
+      "access": "abstract and discussion read by the helper"
+    },
+    {
+      "key": "merz_preiss_riding1999_tufa",
+      "citation": "Merz-Preiss M, Riding R 1999, Cyanobacterial tufa calcification in two freshwater streams: ambient environment, chemical thresholds and biological processes, Sedimentary Geology 126, 103-124",
+      "doi_or_url": "https://doi.org/10.1016/S0037-0738(99)00035-4",
+      "use": "SI_TUFA: calcium carbonate deposition in freshwater streams becomes conspicuous above a mean annual saturation index of 0.75",
+      "values_used": {
+        "saturation_index": 0.75
+      },
+      "access": "not read; the threshold as Beltran-Magos et al. 2013 (Hidrobiologica 23, 3-16) report it, read in part by the helper"
+    },
+    {
+      "key": "plitvice_tufa",
+      "citation": "Plitvice Lakes National Park, How tufa is formed, and Age and growth of the tufa barriers; Sironic A et al. 2017, Changes in the geochemical parameters of karst lakes over the past three decades - the case of Plitvice Lakes, Croatia, Applied Geochemistry 78, 12-22",
+      "doi_or_url": "https://doi.org/10.1016/j.apgeochem.2016.11.013",
+      "use": "SI_PLITVICE and README: barriers grow where the water stands above three times saturation with pH above 8 and little dissolved organic carbon; the lakes stand at 3-10 times with calcium 1.2-1.5 mmol/L; barriers rise about 13.5 mm a year (5.6 at Kozjak's exit), about 17 times faster than the lake floors fill",
+      "values_used": {
+        "omega": 3,
+        "barrier_mm_yr": 13.5,
+        "lake_calcium_mmol_l": [
+          1.2,
+          1.5
+        ]
+      },
+      "access": "the park's pages read by the helper (they cite no literature); Sironic et al. accepted manuscript read in full, its figure read for the chemistry"
+    },
+    {
+      "key": "pelechaty2013_chara",
+      "citation": "Pelechaty M et al. 2013, The significance of Chara vegetation in the precipitation of lacustrine calcium carbonate, Sedimentology 60, 1017-1035",
+      "doi_or_url": "https://doi.org/10.1111/sed.12020",
+      "use": "README: stonewort meadows in a hard-water lake carry 438 g of calcium carbonate a square metre on average and 686 at most, 59-76% of their dry weight",
+      "values_used": {
+        "caco3_g_m2_mean": 438,
+        "caco3_g_m2_max": 685.5
+      },
+      "access": "abstract read by the helper"
+    },
+    {
+      "key": "macfarlane2017_brat",
+      "citation": "Macfarlane WW, Wheaton JM, Bouwes N, Jensen ML, Gilbert JT, Hough-Snee N, Shivik JA 2017, Modeling the capacity of riverscapes to support beaver dams, Geomorphology 277, 72-99",
+      "doi_or_url": "https://doi.org/10.1016/j.geomorph.2015.11.019",
+      "use": "BRAT_LIMITS_W_M, BRAT_SLOPE_MAX, BRAT_DENSITY_PER_KM: dams built below 150 W/m at baseflow and persisting below 1,200 W/m in the two-year flood, built with breaches and blowouts up to 190 and 2,400; none on slopes over 23%; 4-15 dams a km frequent and 15-40 pervasive",
+      "values_used": {
+        "baseflow_w_m": [
+          150,
+          190
+        ],
+        "flood_w_m": [
+          1200,
+          2400
+        ],
+        "slope_max": 0.23,
+        "frequent_per_km": [
+          4,
+          15
+        ],
+        "pervasive_per_km": [
+          15,
+          40
+        ]
+      },
+      "access": "full text read by the helper; the stream-power breakpoints read off its figure 6"
+    },
+    {
+      "key": "martin2015_beaver_ponds",
+      "citation": "Martin SL, Jasinski BL, Kendall AD, Dahl TA, Hyndman DW 2015, Quantifying beaver dam dynamics and sediment retention using aerial imagery, habitat characteristics, and economic drivers, Landscape Ecology 30, 1129-1144",
+      "doi_or_url": "https://doi.org/10.1007/s10980-015-0165-9",
+      "use": "POND_HA_PER_DAM: individual impoundments about 0.35 ha, mostly 0.01-0.5 ha",
+      "values_used": {
+        "pond_ha": 0.35
+      },
+      "access": "results read in full text by the helper"
+    },
+    {
+      "key": "naiman1988_beaver",
+      "citation": "Naiman RJ, Johnston CA, Kelley JC 1988, Alteration of North American streams by beaver, BioScience 38, 753-762",
+      "doi_or_url": "https://doi.org/10.2307/1310784",
+      "use": "README: on the Kabetogama Peninsula beaver impounded under 1% of 294 km2 in 1940 and 13% in 1986 behind 835 dams; North America held 60-400 million beaver before Europeans (Seton 1929); pond succession runs over 1-100 and 50-200 years, and to bog or forested wetland over 200-2,000",
+      "values_used": {
+        "impounded_share_1986": 0.13,
+        "dams_1986": 835,
+        "population_millions": [
+          60,
+          400
+        ]
+      },
+      "access": "full text read by the helper"
+    },
+    {
+      "key": "kohfeld_harrison2003_loess",
+      "citation": "Kohfeld KE, Harrison SP 2003, Glacial-interglacial changes in dust deposition on the Chinese Loess Plateau, Quaternary Science Reviews 22, 1859-1878",
+      "doi_or_url": "https://doi.org/10.1016/S0277-3791(03)00166-5",
+      "use": "LOESS_MM_PER_CENTURY: a median 310 g a square metre a year in the last glacial maximum and about half that in the Holocene, at 1.5 t/m3 about 21 and 10 mm a century",
+      "values_used": {
+        "glacial_g_m2_yr": 310,
+        "glacial_over_holocene": 2.1
+      },
+      "access": "search summaries of the abstract only; the density is the helper's assumption"
+    },
+    {
+      "key": "unep2019_sand",
+      "citation": "UNEP 2019, Sand and Sustainability: Finding New Solutions for Environmental Governance of Global Sand Resources, press release of 7 May 2019",
+      "doi_or_url": "https://www.unep.org/news-and-stories/press-release/rising-demand-sand-calls-resource-governance",
+      "use": "EARTH_SAND_GRAVEL_GT_YR: the world uses 40-50 Gt of sand and gravel a year",
+      "values_used": {
+        "gt_yr": [
+          40,
+          50
+        ]
+      },
+      "access": "press release read by the helper"
+    },
+    {
+      "key": "iea2019_rail",
+      "citation": "IEA 2019, The Future of Rail: Opportunities for Energy and the Environment, figure 1.28 (2016 data)",
+      "doi_or_url": "IEA report, 2019, pages 53-54",
+      "use": "RAIL_KJ_PER_TONNE_KM: the world's freight trains use about 107 kJ of final energy a tonne-km",
+      "values_used": {
+        "kj_per_tonne_km": 107
+      },
+      "access": "read off the figure by the helper"
+    },
+    {
+      "key": "ancient_lakes",
+      "citation": "Salzburger W, Van Bocxlaer B, Cohen AS 2014, Ecology and evolution of the African Great Lakes and their faunas, Annual Review of Ecology, Evolution, and Systematics 45, 519-545; Reid AJ et al. 2019, Emerging threats and persistent conservation challenges for freshwater biodiversity, Biological Reviews 94",
+      "doi_or_url": "https://doi.org/10.1111/brv.12480",
+      "use": "the register's row on the held fresh seas: fresh waters cover about 2.3% of Earth's surface and hold at least 9.5% of described animal species (Reid et al.); Lake Malawi holds at least 700 cichlid species, Tanganyika about 250 and Baikal about 2,600 animal species, mostly endemic",
+      "values_used": {
+        "freshwater_share_of_surface": 0.023,
+        "share_of_animal_species": 0.095
+      },
+      "access": "Reid et al. through search summaries; Salzburger et al. abstract; the species counts from secondary sources, not checked against the reviews"
+    }
+  ]
+}

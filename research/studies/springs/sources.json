@@ -1,0 +1,141 @@
+{
+  "source_admission": "Published values used in run.py, carbon.py and README.md, each with how far it was read for this study on 2026-10-14. A literature helper gathered most of them; its dossier, with quotes and the gaps it left, is resources-runs/springs/literature.md on the research drive (research/runs/resources/springs). The groundwater sources of stages 1 and 2 are in geography/groundwater_sources.json; the weathering law, the young soils' factor and the carbonate constants come from the carbon cycle's sources.json; the travertine thresholds from the terrain study's. No outside dataset or full paper is committed.",
+  "sources": [
+    {
+      "key": "brook1983_soil_co2",
+      "citation": "Brook GA, Folkoff ME, Box EO 1983, A world model of soil carbon dioxide, Earth Surface Processes and Landforms 8(1), 79-88",
+      "doi_or_url": "https://doi.org/10.1002/esp.3290080108",
+      "use": "BROOK: mean growing-season soil CO2, log10 pCO2 (atm) = -3.47 + 2.09 (1 - exp(-k AET)), AET in mm a year, 67% of the variation explained, an upper limit of 3.5% at AET of 2,000 mm and more",
+      "values_used": {"intercept": -3.47, "amplitude": 2.09, "k_per_mm": 0.00172},
+      "access": "abstract read by the helper; the indexed abstract prints k as 0.0172, and only k = 0.00172 per mm gives the abstract's own stated limit of log pCO2 = -1.45 at 2,000 mm, so 0.00172 is used; the full text was not read"
+    },
+    {
+      "key": "white_brantley2003_field_rates",
+      "citation": "White AF, Brantley SL 2003, The effect of time on the weathering of silicate minerals: why do weathering rates differ in the laboratory and field?, Chemical Geology 202(3-4), 479-506",
+      "doi_or_url": "https://doi.org/10.1016/j.chemgeo.2003.03.001",
+      "use": "WHITE_BRANTLEY, AGEING: the field silicate weathering rate R = 3.1e-13 t^-0.61 mol/m2/s with t in years, over six orders of magnitude of weathering duration",
+      "values_used": {"coefficient_mol_m2_s": 3.1e-13, "exponent": -0.61},
+      "access": "full text read by the helper"
+    },
+    {
+      "key": "maher_chamberlain2014_damkohler",
+      "citation": "Maher K, Chamberlain CP 2014, Hydrologic regulation of chemical weathering and the geologic carbon cycle, Science 343(6178), 1502-1504; parameters as Graham RJ, Pierrehumbert RT 2020, Thermodynamic and energetic limits on continental silicate weathering strongly impact the climate and habitability of wet, rocky worlds (arXiv:2004.14058v2), Table 1, gives them from Table S1 of its supplement",
+      "doi_or_url": "https://doi.org/10.1126/science.1250770",
+      "use": "SPECIFIC_SURFACE_M2_KG: a weathering assemblage's specific surface of 100 m2/kg; README: concentration rising toward a thermodynamic limit with the fluid's travel time",
+      "values_used": {"specific_surface_m2_kg": 100.0},
+      "access": "abstract read; the parameters through Graham & Pierrehumbert's full text, read by the helper"
+    },
+    {
+      "key": "maher2010_residence_time",
+      "citation": "Maher K 2010, The dependence of chemical weathering rates on fluid residence time, Earth and Planetary Science Letters 294(1-2), 101-110",
+      "doi_or_url": "https://doi.org/10.1016/j.epsl.2010.03.010",
+      "use": "README: from 5 days to 10 years of fluid residence weathering is transport-controlled; beyond 10 years thermodynamic control sustains it",
+      "values_used": {"thermodynamic_control_beyond_yr": 10},
+      "access": "full text read by the helper"
+    },
+    {
+      "key": "palandri_kharaka2004_rates",
+      "citation": "Palandri JL, Kharaka YK 2004, A compilation of rate parameters of water-mineral interaction kinetics for application to geochemical modeling, U.S. Geological Survey Open-File Report 2004-1068",
+      "doi_or_url": "https://pubs.usgs.gov/of/2004/1068/",
+      "use": "README: at 25 C and neutral pH anorthite dissolves at 10^-9.12 mol/m2/s, faster than bytownite (10^-9.82), labradorite (10^-10.91), diopside (10^-11.11), augite (10^-11.97) and enstatite (10^-12.72)",
+      "values_used": {"anorthite_neutral_log_k": -9.12, "labradorite_neutral_log_k": -10.91, "augite_neutral_log_k": -11.97},
+      "access": "full text read by the helper"
+    },
+    {
+      "key": "steinkampf_hearn1996_columbia",
+      "citation": "Steinkampf WC, Hearn PP Jr 1996, Ground-water geochemistry of the Columbia Plateau aquifer system, Washington, Oregon, and Idaho, U.S. Geological Survey Open-File Report 95-467",
+      "doi_or_url": "https://pubs.usgs.gov/of/1995/0467/report.pdf",
+      "use": "COLUMBIA, TA_CEILING and README: unit means of pH 7.64-7.89, calcium 23-46 mg/L and bicarbonate 170-203 mg/L, bicarbonate up to 406 mg/L, mean corrected radiocarbon ages of 3,180-4,660 years (mean 3,830) in Miocene flood basalt near 14-18 C; calcite precipitation removes the divalent cations downgradient",
+      "values_used": {"bicarbonate_mg_l": [170, 203], "bicarbonate_max_mg_l": 406, "corrected_age_mean_yr": 3830, "temperature_c": [14.4, 18.3]},
+      "access": "full text read by the stage 2 helper (resources-runs/groundwater/literature.md)"
+    },
+    {
+      "key": "banks_frengstad2006_anorthosite",
+      "citation": "Banks D, Frengstad B 2006, Evolution of groundwater chemical composition by plagioclase hydrolysis in Norwegian anorthosites, Geochimica et Cosmochimica Acta 70(6), 1337-1355",
+      "doi_or_url": "https://doi.org/10.1016/j.gca.2005.11.025",
+      "use": "README comparison: groundwater in the Egersund anorthosites runs from pH 5.40 to 9.93 with calcium of 1.5-41 mg/L; calcium is depleted and the pH rises as calcite precipitates while alkalinity accumulates from plagioclase hydrolysis",
+      "values_used": {"ph": [5.4, 9.93], "calcium_mg_l": [1.5, 41]},
+      "access": "search summaries of the abstract only (the publisher withholds it from open indexes); not read"
+    },
+    {
+      "key": "derry_maher_chadwick2026_basalt",
+      "citation": "Derry LA, Maher K, Chadwick OA 2026, Critical zone processes limit alkalinity export from natural basaltic systems, Nature",
+      "doi_or_url": "https://doi.org/10.1038/s41586-026-10936-3",
+      "use": "README comparison: in a basaltic aquifer in southwestern Idaho 40% of the CO2 reacted stays in older groundwater and a further 10-30% precipitates as calcite as pCO2 falls under closed conditions; in several river systems about 70% of the calcium is removed, with carbonate precipitating in the deeper vadose zone, groundwater and riparian zones; basaltic catchments carry 0.1-3.0 mmol/L of bicarbonate",
+      "values_used": {"calcite_share_of_reacted_co2": [0.1, 0.3], "calcium_removed": 0.7},
+      "access": "full text read by the helper (PubMed Central)"
+    },
+    {
+      "key": "romano2024_basalt_aquifers",
+      "citation": "Romano P, Brusca L, Liotta M 2024, Element mobility during basalt-water-CO2 interaction: observations in natural systems vs. laboratory experiments and implication for carbon storage, Geochemical Transactions",
+      "doi_or_url": "https://doi.org/10.1186/s12932-024-00087-7",
+      "use": "README comparison: basaltic aquifers worldwide at pH 6-8, alkalinity mostly 1-10 meq/L, calcium 0.01-10 mmol/L; travertine where volcanic CO2 enters them (Etna, Eyjafjallajokull)",
+      "values_used": {"alkalinity_meq_l": [1, 10], "ph": [6, 8]},
+      "access": "full text read by the helper (PubMed Central)"
+    },
+    {
+      "key": "gislason_eugster1987_iceland",
+      "citation": "Gislason SR, Eugster HP 1987, Meteoric water-basalt interactions. II: A field study in N.E. Iceland, Geochimica et Cosmochimica Acta 51(10), 2841-2855",
+      "doi_or_url": "https://doi.org/10.1016/0016-7037(87)90162-1",
+      "use": "README comparison: cold springs in young basalt with residence times of 60 days to 4 years, 0.1-1 g of basalt reacted per kg of water, all but four undersaturated with calcite",
+      "values_used": {"residence_yr": [0.16, 4]},
+      "access": "abstract read by the stage 2 helper"
+    },
+    {
+      "key": "deep_vadose_co2",
+      "citation": "Affek HP, Ronen D, Yakir D 1998, Production of CO2 in the capillary fringe of a deep phreatic aquifer, Water Resources Research 34(5), 989-996; Benavente J et al. 2010, Air carbon dioxide contents in the vadose zone of a Mediterranean karst, Vadose Zone Journal 9(1), 126-136; Wood WW, Petraitis MJ 1984, Origin and distribution of carbon dioxide in the unsaturated zone of the Southern High Plains of Texas, Water Resources Research 20(9), 1193-1208",
+      "doi_or_url": "https://doi.org/10.1029/98WR00095; https://doi.org/10.2136/vzj2009.0027; https://doi.org/10.1029/WR020i009p01193",
+      "use": "the open-rock variant: CO2 below the root zone up to 2% in a capillary fringe at 29 m, averaging nearly 4% (to 6%) in karst boreholes to 60 m, and higher at depth than in the soil on the Southern High Plains",
+      "values_used": {"capillary_fringe_percent": 2, "karst_mean_percent": 4},
+      "access": "abstracts read by the helper"
+    },
+    {
+      "key": "campbell1974_clapp_hornberger1978",
+      "citation": "Campbell GS 1974, A simple method for determining unsaturated conductivity from moisture retention data, Soil Science 117, 311-314; Clapp RB, Hornberger GM 1978, Empirical equations for some soil hydraulic properties, Water Resources Research 14(4), 601-604",
+      "doi_or_url": "https://doi.org/10.1097/00010694-197406000-00001; https://doi.org/10.1029/WR014i004p00601",
+      "use": "B_ROCK, B_SOIL, SOIL_POROSITY, SOIL_K_M_S: conductivity K = Ks (theta/phi)^(2b+3); b of 4.38 for loamy sand and 5.39 for loam, loam's porosity 0.451 and saturated conductivity 7.0e-4 cm/s",
+      "values_used": {"b_loamy_sand": 4.38, "b_loam": 5.39, "loam_porosity": 0.451, "loam_ks_m_s": 7.0e-6},
+      "access": "the relation and Clapp & Hornberger's table as widely reproduced; the originals not reread"
+    },
+    {
+      "key": "vogel1967_haitjema1995_cardenas2010",
+      "citation": "Vogel JC 1967, Investigation of groundwater flow with radiocarbon, Isotopes in Hydrology, IAEA, Vienna; Haitjema HM 1995, On the residence time distribution in idealized groundwatersheds, Journal of Hydrology 172, 127-146; Cardenas MB, Jiang X-W 2010, Groundwater flow, transport, and residence times through topography-driven basins with exponentially decreasing permeability and porosity, Water Resources Research 46, W11538",
+      "doi_or_url": "https://doi.org/10.1016/0022-1694(95)02732-5; https://doi.org/10.1029/2010WR009370",
+      "use": "saturated_spread: with uniform recharge, porosity and thickness the outflow's ages are exponential with mean porosity x thickness / recharge, whatever the watershed's size (Vogel; Haitjema); with permeability and porosity falling with depth they grow a power-law tail (Cardenas & Jiang), which the generalization here reproduces",
+      "values_used": {},
+      "access": "Haitjema by search summary, Cardenas & Jiang abstract read by the helper; Vogel as usually cited, not checked"
+    },
+    {
+      "key": "kessler_harvey2001_dic_flux",
+      "citation": "Kessler TJ, Harvey CF 2001, The global flux of carbon dioxide into groundwater, Geophysical Research Letters 28(2), 279-282",
+      "doi_or_url": "https://doi.org/10.1029/2000GL011505",
+      "use": "README comparison for the filling crust: Earth's dissolved inorganic carbon flows down into groundwater at about 0.2 Gt C a year",
+      "values_used": {"gt_c_yr": 0.2},
+      "access": "abstract read by the helper"
+    },
+    {
+      "key": "godsey2009_chemostasis",
+      "citation": "Godsey SE, Kirchner JW, Clow DW 2009, Concentration-discharge relationships reflect chemostatic characteristics of US catchments, Hydrological Processes 23(13), 1844-1864",
+      "doi_or_url": "https://doi.org/10.1002/hyp.7315",
+      "use": "README: weathering solutes in 59 US catchments vary by factors of only 3-20 while discharge varies by orders of magnitude, so the soil water's catchment load is carried by the quick flow too",
+      "values_used": {},
+      "access": "abstract read by the helper"
+    },
+    {
+      "key": "hyperalkaline_travertine",
+      "citation": "Chavagnac V et al. 2013, Characterization of hyperalkaline fluids produced by low-temperature serpentinization of mantle peridotites in the Oman and Ligurian ophiolites, Geochemistry, Geophysics, Geosystems 14(7), 2496-2522; Leleu T et al. 2016, Travertines associated with hyperalkaline springs, Journal of Sedimentary Research 86(11), 1328-1343",
+      "doi_or_url": "https://doi.org/10.1002/ggge.20147; https://doi.org/10.2110/jsr.2016.79",
+      "use": "README comparison: springs that take CO2 from the air build travertine where their water reaches pH 10.5-11.9 with calcium accumulated in it; the Moon's alkaline springs stop near pH 9.5 with little calcium",
+      "values_used": {"ph": [10.5, 11.9]},
+      "access": "abstracts read by the helper"
+    },
+    {
+      "key": "pentecost2005_rates",
+      "citation": "Pentecost A 2005, Travertine, Springer",
+      "doi_or_url": "https://doi.org/10.1007/1-4020-3606-X",
+      "use": "README: travertine grows 1-1,000 mm a year (mean about 200) and ambient-temperature tufa about 5 mm a year",
+      "values_used": {"travertine_mm_yr_mean": 200, "tufa_mm_yr": 5},
+      "access": "figures as later papers quote them, by search summary; not read"
+    }
+  ]
+}

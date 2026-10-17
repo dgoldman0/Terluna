@@ -1,0 +1,1610 @@
+{
+ "schema": "terluna.research.terrain-through-time/1",
+ "producer": {
+  "files": {
+   "research/studies/terrain_through_time/run.py": "aa40ee496d453303b343e771a7e6614b949bd9be24e4061b32c1ece3600d159d",
+   "research/studies/terrain_through_time/routing.py": "c95eb4555354d661a1c426e196d824d1d4522e330db615f2d2466edd2c049156",
+   "research/studies/carbon_cycle/run.py": "6e905699a581db1546bf2ea24f171fe972fcb2a3363dacb8c2225b42b76b19cd"
+  },
+  "inputs": {
+   "research/studies/terrain_through_time/results/terrain_routing.json": "2becedbc85985f5d1225ea79f350abc8f9ee87545039881665ebc44a1eb4504c",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "48b4c22230f5aee605c788cacea34714efaf8675409b90677b32785084f826f9",
+   "resources/results/sea_phosphorus.json": "55a0794985710578beb7efee36c197e58405780a64c7ca13e8f8be5c799a83a2",
+   "research/studies/conservation/results/gates.json": "65b855711fbf1b066f112f617e776bcb2f345fc48ccc5ff019aa9df3bbc4449e"
+  }
+ },
+ "evidence": "Calculations on committed products: the routing summary (geography's drainage rerun, erosion by relief and rain, units filled in log-spaced steps), the sea chemistry's works and the sea phosphorus study's dredging. Crater degradation is linear diffusion of Pike's fresh profile on a radial grid; travertine is the carbon cycle's carbonate solver at the land's air temperature; dam builders take Earth's capacity thresholds through equal Shields numbers. Earth's values are reference points, design guesses are named, and nothing here is validated against a lunar landscape.",
+ "reading_rule": "Years from the start of the wet world. Survival shares are of the routing's rain-fed lakes by count and by area at the start. Rates of rock in Gt a year; power in GW; lowering in m a million years and mm a century; craters by rim-to-floor diameter in m; saturation as Omega and its log10, SI. Cases are the routing's: earliest (100 m/Myr, loose sediment, fast accretion), central and latest (10 m/Myr, dense, slow).",
+ "lakes": {
+  "earliest": {
+   "open_share_by_count": {
+    "1000": 0.731742,
+    "10000": 0.353336,
+    "100000": 0.0971208,
+    "1e+06": 0.00344101,
+    "1e+07": 0.0
+   },
+   "open_share_by_area": {
+    "1000": 0.990623,
+    "10000": 0.936846,
+    "100000": 0.716508,
+    "1e+06": 0.111782,
+    "1e+07": 0.0
+   },
+   "median_life_yr": 4250.13,
+   "area_weighted_median_life_yr": 252624.0,
+   "median_life_by_size_yr": {
+    "0_to_10_km2": 1319.89,
+    "10_to_100_km2": 9728.26,
+    "100_to_1000_km2": 59936.8,
+    "1000_to_10000_km2": 205503.0,
+    "over_10000_km2": 494725.0
+   },
+   "all_but_one_percent_filled_yr": 2238720.0
+  },
+  "central": {
+   "open_share_by_count": {
+    "1000": 0.876931,
+    "10000": 0.571032,
+    "100000": 0.207128,
+    "1e+06": 0.0328301,
+    "1e+07": 3.51124e-05
+   },
+   "open_share_by_area": {
+    "1000": 0.997099,
+    "10000": 0.977733,
+    "100000": 0.862505,
+    "1e+06": 0.399299,
+    "1e+07": 6.33779e-08
+   },
+   "median_life_yr": 14947.5,
+   "area_weighted_median_life_yr": 815814.0,
+   "median_life_by_size_yr": {
+    "0_to_10_km2": 4638.46,
+    "10_to_100_km2": 33953.8,
+    "100_to_1000_km2": 202989.0,
+    "1000_to_10000_km2": 676838.0,
+    "over_10000_km2": 1482090.0
+   },
+   "all_but_one_percent_filled_yr": 5623410.0
+  },
+  "latest": {
+   "open_share_by_count": {
+    "1000": 0.973315,
+    "10000": 0.822156,
+    "100000": 0.476264,
+    "1e+06": 0.150211,
+    "1e+07": 0.013764
+   },
+   "open_share_by_area": {
+    "1000": 0.99961,
+    "10000": 0.995184,
+    "100000": 0.964522,
+    "1e+06": 0.79194,
+    "1e+07": 0.240887
+   },
+   "median_life_yr": 88416.4,
+   "area_weighted_median_life_yr": 4165870.0,
+   "median_life_by_size_yr": {
+    "0_to_10_km2": 28160.7,
+    "10_to_100_km2": 198331.0,
+    "100_to_1000_km2": 1127760.0,
+    "1000_to_10000_km2": 3539510.0,
+    "over_10000_km2": 6868420.0
+   },
+   "all_but_one_percent_filled_yr": 25118900.0
+  },
+  "central_rock_only": {
+   "open_share_by_count": {
+    "1000": 0.914221,
+    "10000": 0.658181,
+    "100000": 0.304881,
+    "1e+06": 0.0948736,
+    "1e+07": 0.0288975
+   },
+   "open_share_by_area": {
+    "1000": 0.998011,
+    "10000": 0.983368,
+    "100000": 0.910212,
+    "1e+06": 0.639696,
+    "1e+07": 0.121376
+   },
+   "median_life_yr": 27060.2,
+   "area_weighted_median_life_yr": 1748060.0,
+   "median_life_by_size_yr": {
+    "0_to_10_km2": 8620.61,
+    "10_to_100_km2": 56051.9,
+    "100_to_1000_km2": 362364.0,
+    "1000_to_10000_km2": 1265010.0,
+    "over_10000_km2": 3614900.0
+   },
+   "all_but_one_percent_filled_yr": 39810700.0
+  },
+  "central_by_runoff": {
+   "open_share_by_count": {
+    "1000": 0.838237,
+    "10000": 0.493223,
+    "100000": 0.171313,
+    "1e+06": 0.0252458,
+    "1e+07": 0.000210674
+   },
+   "open_share_by_area": {
+    "1000": 0.995447,
+    "10000": 0.965514,
+    "100000": 0.808394,
+    "1e+06": 0.316038,
+    "1e+07": 1.81081e-05
+   },
+   "median_life_yr": 9636.7,
+   "area_weighted_median_life_yr": 489493.0,
+   "median_life_by_size_yr": {
+    "0_to_10_km2": 3077.33,
+    "10_to_100_km2": 20663.8,
+    "100_to_1000_km2": 127406.0,
+    "1000_to_10000_km2": 412011.0,
+    "over_10000_km2": 1044490.0
+   },
+   "all_but_one_percent_filled_yr": 4466840.0
+  },
+  "sea_chemistry_box_lakes_full_yr": [
+   196092.0,
+   6814160.0
+  ]
+ },
+ "seas": {
+  "earliest": {
+   "deposits_km3_yr": 1.39689,
+   "rock_share_at_start": 0.2066,
+   "seas_full_yr": 863980.0
+  },
+  "central": {
+   "deposits_km3_yr": 0.558755,
+   "rock_share_at_start": 0.206146,
+   "seas_full_yr": 3213380.0
+  },
+  "latest": {
+   "deposits_km3_yr": 0.385167,
+   "rock_share_at_start": 0.206051,
+   "seas_full_yr": 14700300.0
+  },
+  "sea_chemistry_box_seas_full_yr": [
+   769773.0,
+   16092800.0
+  ],
+  "sea_chemistry_box_passing_share": [
+   0.036196,
+   0.042174
+  ]
+ },
+ "deltas": {
+  "by_case": {
+   "earliest": {
+    "delta_share": 1.0,
+    "rock_gt_yr": 7.1,
+    "by_year": {
+     "100": {
+      "lake_delta_km2": 34391.6,
+      "lake_delta_share_of_lake_area": 0.00876785,
+      "common_level_delta_km2": 9575.98,
+      "mouths_over_1_km2": 9857,
+      "mouths_over_10_km2": 116
+     },
+     "1000": {
+      "lake_delta_km2": 167262.0,
+      "lake_delta_share_of_lake_area": 0.042642,
+      "common_level_delta_km2": 62823.6,
+      "mouths_over_1_km2": 51177,
+      "mouths_over_10_km2": 2790
+     },
+     "10000": {
+      "lake_delta_km2": 693592.0,
+      "lake_delta_share_of_lake_area": 0.176825,
+      "common_level_delta_km2": 356987.0,
+      "mouths_over_1_km2": 185956,
+      "mouths_over_10_km2": 25529
+     }
+    }
+   },
+   "central": {
+    "delta_share": 0.75,
+    "rock_gt_yr": 3.55,
+    "by_year": {
+     "100": {
+      "lake_delta_km2": 9397.59,
+      "lake_delta_share_of_lake_area": 0.00239584,
+      "common_level_delta_km2": 2156.78,
+      "mouths_over_1_km2": 2217,
+      "mouths_over_10_km2": 2
+     },
+     "1000": {
+      "lake_delta_km2": 54175.2,
+      "lake_delta_share_of_lake_area": 0.0138115,
+      "common_level_delta_km2": 16377.7,
+      "mouths_over_1_km2": 16038,
+      "mouths_over_10_km2": 330
+     },
+     "10000": {
+      "lake_delta_km2": 255731.0,
+      "lake_delta_share_of_lake_area": 0.0651964,
+      "common_level_delta_km2": 103736.0,
+      "mouths_over_1_km2": 75948,
+      "mouths_over_10_km2": 5745
+     }
+    }
+   },
+   "latest": {
+    "delta_share": 0.5,
+    "rock_gt_yr": 0.71,
+    "by_year": {
+     "100": {
+      "lake_delta_km2": 1017.37,
+      "lake_delta_share_of_lake_area": 0.000259369,
+      "common_level_delta_km2": 211.162,
+      "mouths_over_1_km2": 83,
+      "mouths_over_10_km2": 0
+     },
+     "1000": {
+      "lake_delta_km2": 8533.8,
+      "lake_delta_share_of_lake_area": 0.00217562,
+      "common_level_delta_km2": 1941.27,
+      "mouths_over_1_km2": 1988,
+      "mouths_over_10_km2": 2
+     },
+     "10000": {
+      "lake_delta_km2": 50402.1,
+      "lake_delta_share_of_lake_area": 0.0128496,
+      "common_level_delta_km2": 15020.1,
+      "mouths_over_1_km2": 14865,
+      "mouths_over_10_km2": 292
+     }
+    }
+   }
+  },
+  "box_lake_area_lost_central_km2": {
+   "100": 830.0,
+   "1000": 11380.0,
+   "10000": 87340.0
+  },
+  "mouths": 598895,
+  "largest_central": [
+   {
+    "place": "Montes Cordillera",
+    "lat": -13.4062,
+    "lon_east": -106.781,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 1453.71,
+    "rock_mt_yr_at_start": 2.62018,
+    "depth_at_mouth_m": 63.0628,
+    "area_km2": {
+     "100": 3.11616,
+     "1000": 31.5185,
+     "10000": 276.541
+    },
+    "advance_km": {
+     "100": 1.40848,
+     "1000": 4.47943,
+     "10000": 13.2684
+    },
+    "front_depth_m_at_10000": 110.829
+   },
+   {
+    "place": "Einthoven",
+    "lat": -4.96875,
+    "lon_east": 109.844,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 236.221,
+    "rock_mt_yr_at_start": 0.474242,
+    "depth_at_mouth_m": 15.3706,
+    "area_km2": {
+     "100": 2.31403,
+     "1000": 30.4807,
+     "10000": 236.221
+    },
+    "advance_km": {
+     "100": 1.21374,
+     "1000": 4.40507,
+     "10000": 12.2631
+    },
+    "front_depth_m_at_10000": 10.3051
+   },
+   {
+    "place": "Schluter",
+    "lat": -5.21875,
+    "lon_east": -83.4688,
+    "receiving": "common-level water",
+    "receiving_water_km2": 239.498,
+    "rock_mt_yr_at_start": 0.0966896,
+    "depth_at_mouth_m": 1.88838,
+    "area_km2": {
+     "100": 3.73282,
+     "1000": 15.0358,
+     "10000": 234.619
+    },
+    "advance_km": {
+     "100": 1.54155,
+     "1000": 3.09388,
+     "10000": 12.2214
+    },
+    "front_depth_m_at_10000": 35.4628
+   },
+   {
+    "place": "Neander E",
+    "lat": -27.5312,
+    "lon_east": 41.6562,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 577.894,
+    "rock_mt_yr_at_start": 0.394337,
+    "depth_at_mouth_m": 9.49402,
+    "area_km2": {
+     "100": 3.11515,
+     "1000": 23.3629,
+     "10000": 217.961
+    },
+    "advance_km": {
+     "100": 1.40825,
+     "1000": 3.85659,
+     "10000": 11.7796
+    },
+    "front_depth_m_at_10000": 4.90991
+   },
+   {
+    "place": "Mendeleev",
+    "lat": 1.90625,
+    "lon_east": 141.969,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 1635.88,
+    "rock_mt_yr_at_start": 0.753464,
+    "depth_at_mouth_m": 35.7976,
+    "area_km2": {
+     "100": 1.57859,
+     "1000": 16.4272,
+     "10000": 193.271
+    },
+    "advance_km": {
+     "100": 1.00248,
+     "1000": 3.23387,
+     "10000": 11.0923
+    },
+    "front_depth_m_at_10000": 128.572
+   },
+   {
+    "place": "Mendeleev",
+    "lat": 5.46875,
+    "lon_east": 137.156,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 672.089,
+    "rock_mt_yr_at_start": 0.622082,
+    "depth_at_mouth_m": 2.32556,
+    "area_km2": {
+     "100": 4.30741,
+     "1000": 14.3031,
+     "10000": 183.431
+    },
+    "advance_km": {
+     "100": 1.65595,
+     "1000": 3.01756,
+     "10000": 10.8063
+    },
+    "front_depth_m_at_10000": 47.9415
+   },
+   {
+    "place": "Montes Cordillera",
+    "lat": -30.4688,
+    "lon_east": -111.781,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 1115.19,
+    "rock_mt_yr_at_start": 0.0176814,
+    "depth_at_mouth_m": 36.1796,
+    "area_km2": {
+     "100": 0.0366535,
+     "1000": 0.404471,
+     "10000": 180.223
+    },
+    "advance_km": {
+     "100": 0.152756,
+     "1000": 0.507439,
+     "10000": 10.7114
+    },
+    "front_depth_m_at_10000": 72.1469
+   },
+   {
+    "place": "Walker",
+    "lat": -24.0312,
+    "lon_east": -160.844,
+    "receiving": "common-level water",
+    "receiving_water_km2": 453.053,
+    "rock_mt_yr_at_start": 0.00684093,
+    "depth_at_mouth_m": 9.26094,
+    "area_km2": {
+     "100": 0.0554015,
+     "1000": 0.554015,
+     "10000": 179.572
+    },
+    "advance_km": {
+     "100": 0.187802,
+     "1000": 0.593883,
+     "10000": 10.692
+    },
+    "front_depth_m_at_10000": 115.257
+   },
+   {
+    "place": "Mendeleev",
+    "lat": 3.09375,
+    "lon_east": 138.406,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 179.294,
+    "rock_mt_yr_at_start": 0.459857,
+    "depth_at_mouth_m": 40.8246,
+    "area_km2": {
+     "100": 0.844816,
+     "1000": 22.5891,
+     "10000": 179.294
+    },
+    "advance_km": {
+     "100": 0.733366,
+     "1000": 3.79219,
+     "10000": 10.6837
+    },
+    "front_depth_m_at_10000": 5.70081
+   },
+   {
+    "place": "Montes Cordillera",
+    "lat": -6.78125,
+    "lon_east": -99.9062,
+    "receiving": "rain-fed lake",
+    "receiving_water_km2": 420.006,
+    "rock_mt_yr_at_start": 0.0727399,
+    "depth_at_mouth_m": 58.6113,
+    "area_km2": {
+     "100": 0.0930791,
+     "1000": 1.57336,
+     "10000": 173.643
+    },
+    "advance_km": {
+     "100": 0.243426,
+     "1000": 1.00082,
+     "10000": 10.514
+    },
+    "front_depth_m_at_10000": 45.7948
+   }
+  ]
+ },
+ "small_craters": {
+  "dimensionless_kappa_t_over_d2": {
+   "0.5": 0.0241888,
+   "0.25": 0.0549113,
+   "0.1": 0.110456
+  },
+  "kappa_m2_yr": [
+   0.003,
+   0.01,
+   0.04
+  ],
+  "equilibrium_share_of_saturation": [
+   0.0069,
+   0.039
+  ],
+  "craters": [
+   {
+    "diameter_m": 10.0,
+    "depth_m": 1.96,
+    "per_km2_larger": [
+     106.26,
+     600.6
+    ],
+    "half_depth_by_creep_yr": {
+     "0.003": 806.292,
+     "0.01": 241.888,
+     "0.04": 60.4719
+    },
+    "half_depth_by_accretion_yr": {
+     "low": 9800.0,
+     "central": 2450.0,
+     "high": 980.0
+    },
+    "half_depth_together_yr": {
+     "low": 744.997,
+     "central": 220.152,
+     "high": 56.9573
+    },
+    "half_depth_airless_yr": 439795.0
+   },
+   {
+    "diameter_m": 30.0,
+    "depth_m": 5.88,
+    "per_km2_larger": [
+     11.8067,
+     66.7333
+    ],
+    "half_depth_by_creep_yr": {
+     "0.003": 7256.63,
+     "0.01": 2176.99,
+     "0.04": 544.247
+    },
+    "half_depth_by_accretion_yr": {
+     "low": 29400.0,
+     "central": 7350.0,
+     "high": 2940.0
+    },
+    "half_depth_together_yr": {
+     "low": 5820.09,
+     "central": 1679.53,
+     "high": 459.234
+    },
+    "half_depth_airless_yr": 3958160.0
+   },
+   {
+    "diameter_m": 100.0,
+    "depth_m": 19.6,
+    "per_km2_larger": [
+     1.0626,
+     6.006
+    ],
+    "half_depth_by_creep_yr": {
+     "0.003": 80629.2,
+     "0.01": 24188.8,
+     "0.04": 6047.19
+    },
+    "half_depth_by_accretion_yr": {
+     "low": 98000.0,
+     "central": 24500.0,
+     "high": 9800.0
+    },
+    "half_depth_together_yr": {
+     "low": 44235.0,
+     "central": 12171.7,
+     "high": 3739.62
+    },
+    "half_depth_airless_yr": 43979500.0
+   },
+   {
+    "diameter_m": 300.0,
+    "depth_m": 58.8,
+    "per_km2_larger": [
+     0.118067,
+     0.667333
+    ],
+    "half_depth_by_creep_yr": {
+     "0.003": 725663.0,
+     "0.01": 217699.0,
+     "0.04": 54424.7
+    },
+    "half_depth_by_accretion_yr": {
+     "low": 294000.0,
+     "central": 73500.0,
+     "high": 29400.0
+    },
+    "half_depth_together_yr": {
+     "low": 209231.0,
+     "central": 54948.2,
+     "high": 19088.5
+    },
+    "half_depth_airless_yr": 395816000.0
+   },
+   {
+    "diameter_m": 1000.0,
+    "depth_m": 196.0,
+    "per_km2_larger": [
+     0.010626,
+     0.06006
+    ],
+    "half_depth_by_creep_yr": {
+     "0.003": 8062920.0,
+     "0.01": 2418880.0,
+     "0.04": 604719.0
+    },
+    "half_depth_by_accretion_yr": {
+     "low": 980000.0,
+     "central": 245000.0,
+     "high": 98000.0
+    },
+    "half_depth_together_yr": {
+     "low": 873795.0,
+     "central": 222467.0,
+     "high": 84333.1
+    },
+    "half_depth_airless_yr": 4397950000.0
+   }
+  ]
+ },
+ "relief": {
+  "earliest": {
+   "rock_gt_yr": 7.1,
+   "land_lowering_m_myr": 116.751,
+   "by_band": {
+    "0_15": {
+     "lowering_m_myr": 158.885,
+     "lowering_mm_per_century": 15.8885,
+     "relief_m": 940.349,
+     "relief_e_folding_myr": 5.91844,
+     "relief_half_life_myr": 4.10235
+    },
+    "15_30": {
+     "lowering_m_myr": 154.287,
+     "lowering_mm_per_century": 15.4287,
+     "relief_m": 1111.07,
+     "relief_e_folding_myr": 7.20131,
+     "relief_half_life_myr": 4.99157
+    },
+    "30_45": {
+     "lowering_m_myr": 113.381,
+     "lowering_mm_per_century": 11.3381,
+     "relief_m": 1128.09,
+     "relief_e_folding_myr": 9.94958,
+     "relief_half_life_myr": 6.89653
+    },
+    "45_60": {
+     "lowering_m_myr": 68.9037,
+     "lowering_mm_per_century": 6.89037,
+     "relief_m": 1136.85,
+     "relief_e_folding_myr": 16.4991,
+     "relief_half_life_myr": 11.4363
+    },
+    "60_90": {
+     "lowering_m_myr": 49.1723,
+     "lowering_mm_per_century": 4.91723,
+     "relief_m": 1196.79,
+     "relief_e_folding_myr": 24.3387,
+     "relief_half_life_myr": 16.8703
+    }
+   }
+  },
+  "central": {
+   "rock_gt_yr": 3.55,
+   "land_lowering_m_myr": 58.3755,
+   "by_band": {
+    "0_15": {
+     "lowering_m_myr": 79.4423,
+     "lowering_mm_per_century": 7.94423,
+     "relief_m": 940.349,
+     "relief_e_folding_myr": 11.8369,
+     "relief_half_life_myr": 8.2047
+    },
+    "15_30": {
+     "lowering_m_myr": 77.1436,
+     "lowering_mm_per_century": 7.71436,
+     "relief_m": 1111.07,
+     "relief_e_folding_myr": 14.4026,
+     "relief_half_life_myr": 9.98313
+    },
+    "30_45": {
+     "lowering_m_myr": 56.6903,
+     "lowering_mm_per_century": 5.66903,
+     "relief_m": 1128.09,
+     "relief_e_folding_myr": 19.8992,
+     "relief_half_life_myr": 13.7931
+    },
+    "45_60": {
+     "lowering_m_myr": 34.4519,
+     "lowering_mm_per_century": 3.44519,
+     "relief_m": 1136.85,
+     "relief_e_folding_myr": 32.9982,
+     "relief_half_life_myr": 22.8726
+    },
+    "60_90": {
+     "lowering_m_myr": 24.5861,
+     "lowering_mm_per_century": 2.45861,
+     "relief_m": 1196.79,
+     "relief_e_folding_myr": 48.6774,
+     "relief_half_life_myr": 33.7406
+    }
+   }
+  },
+  "latest": {
+   "rock_gt_yr": 0.71,
+   "land_lowering_m_myr": 11.6751,
+   "by_band": {
+    "0_15": {
+     "lowering_m_myr": 15.8885,
+     "lowering_mm_per_century": 1.58885,
+     "relief_m": 940.349,
+     "relief_e_folding_myr": 59.1844,
+     "relief_half_life_myr": 41.0235
+    },
+    "15_30": {
+     "lowering_m_myr": 15.4287,
+     "lowering_mm_per_century": 1.54287,
+     "relief_m": 1111.07,
+     "relief_e_folding_myr": 72.0131,
+     "relief_half_life_myr": 49.9157
+    },
+    "30_45": {
+     "lowering_m_myr": 11.3381,
+     "lowering_mm_per_century": 1.13381,
+     "relief_m": 1128.09,
+     "relief_e_folding_myr": 99.4958,
+     "relief_half_life_myr": 68.9653
+    },
+    "45_60": {
+     "lowering_m_myr": 6.89037,
+     "lowering_mm_per_century": 0.689037,
+     "relief_m": 1136.85,
+     "relief_e_folding_myr": 164.991,
+     "relief_half_life_myr": 114.363
+    },
+    "60_90": {
+     "lowering_m_myr": 4.91723,
+     "lowering_mm_per_century": 0.491723,
+     "relief_m": 1196.79,
+     "relief_e_folding_myr": 243.387,
+     "relief_half_life_myr": 168.703
+    }
+   }
+  }
+ },
+ "upkeep": {
+  "where_the_rock_settles_at_the_start": {
+   "lakes": 0.382226,
+   "dry_hollows": 0.411727,
+   "common_level_waters": 0.206046
+  },
+  "dredging_fuel_mj_per_kg": 43.0,
+  "lakes_holding_half_of_the_lakes_catch": 1281,
+  "lakes_holding_nine_tenths": 9612,
+  "mean_lift_m": 1032.75,
+  "mean_lift_to_heads_m": 1673.5,
+  "heads_share_of_land": 0.327871,
+  "mean_distance_km": 9.33542,
+  "rates": {
+   "10 m/Myr": {
+    "rock_gt_yr": 0.71,
+    "lift_gw_in_place": 0.0377393,
+    "lift_gw_to_heads": 0.061154,
+    "haulage_tonne_km_yr": 6628150000.0,
+    "haulage_gw_at_rail_energy": 0.0224736,
+    "share_of_earth_sand_and_gravel": [
+     0.0142,
+     0.01775
+    ],
+    "lake_dredging_km3_yr": [
+     0.18092,
+     0.542761
+    ],
+    "lake_dredging_fuel_gw": [
+     0.101073,
+     0.850493
+    ],
+    "spread_in_place_mm_per_century": 1.16751,
+    "spread_on_heads_mm_per_century": 3.56088,
+    "loess_falls_mm_per_century": [
+     10.0,
+     21.0
+    ]
+   },
+   "50 m/Myr": {
+    "rock_gt_yr": 3.55,
+    "lift_gw_in_place": 0.188697,
+    "lift_gw_to_heads": 0.30577,
+    "haulage_tonne_km_yr": 33140700000.0,
+    "haulage_gw_at_rail_energy": 0.112368,
+    "share_of_earth_sand_and_gravel": [
+     0.071,
+     0.08875
+    ],
+    "lake_dredging_km3_yr": [
+     0.904602,
+     2.7138
+    ],
+    "lake_dredging_fuel_gw": [
+     0.505366,
+     4.25247
+    ],
+    "spread_in_place_mm_per_century": 5.83755,
+    "spread_on_heads_mm_per_century": 17.8044,
+    "loess_falls_mm_per_century": [
+     10.0,
+     21.0
+    ]
+   },
+   "100 m/Myr": {
+    "rock_gt_yr": 7.1,
+    "lift_gw_in_place": 0.377393,
+    "lift_gw_to_heads": 0.61154,
+    "haulage_tonne_km_yr": 66281500000.0,
+    "haulage_gw_at_rail_energy": 0.224736,
+    "share_of_earth_sand_and_gravel": [
+     0.142,
+     0.1775
+    ],
+    "lake_dredging_km3_yr": [
+     1.8092,
+     5.42761
+    ],
+    "lake_dredging_fuel_gw": [
+     1.01073,
+     8.50493
+    ],
+    "spread_in_place_mm_per_century": 11.6751,
+    "spread_on_heads_mm_per_century": 35.6088,
+    "loess_falls_mm_per_century": [
+     10.0,
+     21.0
+    ]
+   },
+   "soil loss the phosphorus particles imply": {
+    "rock_gt_yr": 8.2754,
+    "lift_gw_in_place": 0.43987,
+    "lift_gw_to_heads": 0.71278,
+    "haulage_tonne_km_yr": 77254300000.0,
+    "haulage_gw_at_rail_energy": 0.261941,
+    "share_of_earth_sand_and_gravel": [
+     0.165508,
+     0.206885
+    ],
+    "lake_dredging_km3_yr": [
+     2.10872,
+     6.32615
+    ],
+    "lake_dredging_fuel_gw": [
+     1.17806,
+     9.91292
+    ],
+    "spread_in_place_mm_per_century": 13.6079,
+    "spread_on_heads_mm_per_century": 41.5038,
+    "loess_falls_mm_per_century": [
+     10.0,
+     21.0
+    ]
+   }
+  },
+  "built_land": {
+   "seas_stone_km3_yr": {
+    "calcite": 0.0552269,
+    "magnesite": 0.0315254,
+    "opal": 0.137357,
+    "soda_and_sulphate": 0.0065476
+   },
+   "seas_stone_total_km3_yr": 0.230657,
+   "seas_stone_mt_yr": {
+    "calcite": 149.665,
+    "magnesite": 94.8914,
+    "opal": 281.581
+   },
+   "terraces_10_m_high_km2_per_millennium": 23065.7,
+   "land_rock_km3_yr": {
+    "10 m/Myr": 0.273077,
+    "50 m/Myr": 1.36538,
+    "100 m/Myr": 2.73077
+   }
+  }
+ },
+ "travertine": {
+  "law_alkalinity_meq_kg": 1.25745,
+  "pco2_atm": 0.00048,
+  "air_k": 294.3,
+  "saturation_index": {
+   "tufa": 0.75,
+   "plitvice": 0.477121,
+   "designed": 0.30103
+  },
+  "spring_factor": [
+   1.5,
+   2.0,
+   3.0
+  ],
+  "load_needed": {
+   "tufa": 2.04429,
+   "plitvice": 1.62913,
+   "designed": 1.40885
+  },
+  "at_load": {
+   "0.5": {
+    "alkalinity_meq_kg": 0.628727,
+    "calcium_mmol_kg": 0.20438,
+    "ph": 7.89442,
+    "omega": 0.104747
+   },
+   "1": {
+    "alkalinity_meq_kg": 1.25745,
+    "calcium_mmol_kg": 0.40876,
+    "ph": 8.18628,
+    "omega": 0.761435
+   },
+   "1.5": {
+    "alkalinity_meq_kg": 1.88618,
+    "calcium_mmol_kg": 0.61314,
+    "ph": 8.35466,
+    "omega": 2.38316
+   },
+   "2": {
+    "alkalinity_meq_kg": 2.51491,
+    "calcium_mmol_kg": 0.817521,
+    "ph": 8.47264,
+    "omega": 5.29417
+   },
+   "3": {
+    "alkalinity_meq_kg": 3.77236,
+    "calcium_mmol_kg": 1.22628,
+    "ph": 8.63618,
+    "omega": 15.9852
+   },
+   "5": {
+    "alkalinity_meq_kg": 6.28727,
+    "calcium_mmol_kg": 2.0438,
+    "ph": 8.83602,
+    "omega": 61.6773
+   },
+   "10": {
+    "alkalinity_meq_kg": 12.5745,
+    "calcium_mmol_kg": 4.0876,
+    "ph": 9.09143,
+    "omega": 348.87
+   }
+  },
+  "rivers_at_the_catchment_rate_by_band": {
+   "0_15": {
+    "tufa": 7.38797e-05,
+    "plitvice": 0.000237467,
+    "designed": 0.00138709
+   },
+   "15_30": {
+    "tufa": 0.00552873,
+    "plitvice": 0.00933418,
+    "designed": 0.014543
+   },
+   "30_45": {
+    "tufa": 0.00744148,
+    "plitvice": 0.0226876,
+    "designed": 0.0330638
+   },
+   "45_60": {
+    "tufa": 0.518128,
+    "plitvice": 0.518128,
+    "designed": 0.518128
+   },
+   "60_90": {
+    "tufa": 0.0,
+    "plitvice": 0.0,
+    "designed": 0.0
+   }
+  },
+  "corners": {
+   "low": {
+    "fresh_factor": 1.0,
+    "soil_age_at_start_yr": 100.0,
+    "by_year": {
+     "0": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     },
+     "10": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     },
+     "100": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     },
+     "300": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     },
+     "1000": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     },
+     "3000": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     },
+     "10000": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     },
+     "30000": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     },
+     "100000": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     },
+     "1e+06": {
+      "soils_factor": 1.0,
+      "rivers": {
+       "tufa": 0.00153191,
+       "plitvice": 0.00281795,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     }
+    }
+   },
+   "central": {
+    "fresh_factor": 3.16228,
+    "soil_age_at_start_yr": 100.0,
+    "by_year": {
+     "0": {
+      "soils_factor": 3.16228,
+      "rivers": {
+       "tufa": 0.935296,
+       "plitvice": 0.977152,
+       "designed": 0.989478
+      },
+      "spring_land_building_tufa": {
+       "1.5": 1.0,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "10": {
+      "soils_factor": 3.04015,
+      "rivers": {
+       "tufa": 0.935296,
+       "plitvice": 0.977152,
+       "designed": 0.987549
+      },
+      "spring_land_building_tufa": {
+       "1.5": 1.0,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "100": {
+      "soils_factor": 2.41672,
+      "rivers": {
+       "tufa": 0.715997,
+       "plitvice": 0.935296,
+       "designed": 0.96544
+      },
+      "spring_land_building_tufa": {
+       "1.5": 1.0,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "300": {
+      "soils_factor": 1.92823,
+      "rivers": {
+       "tufa": 0.242571,
+       "plitvice": 0.715997,
+       "designed": 0.8983
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.998041,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "1000": {
+      "soils_factor": 1.5008,
+      "rivers": {
+       "tufa": 0.00499783,
+       "plitvice": 0.146067,
+       "designed": 0.429207
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.772909,
+       "2": 0.998041,
+       "3": 1.0
+      }
+     },
+     "3000": {
+      "soils_factor": 1.26618,
+      "rivers": {
+       "tufa": 0.00330123,
+       "plitvice": 0.0162066,
+       "designed": 0.146067
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.254447,
+       "2": 0.964963,
+       "3": 1.0
+      }
+     },
+     "10000": {
+      "soils_factor": 1.1295,
+      "rivers": {
+       "tufa": 0.00221929,
+       "plitvice": 0.0044038,
+       "designed": 0.0162066
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.0770103,
+       "2": 0.772909,
+       "3": 1.0
+      }
+     },
+     "30000": {
+      "soils_factor": 1.06653,
+      "rivers": {
+       "tufa": 0.0020879,
+       "plitvice": 0.00389355,
+       "designed": 0.00830609
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.0308789,
+       "2": 0.631487,
+       "3": 1.0
+      }
+     },
+     "100000": {
+      "soils_factor": 1.03196,
+      "rivers": {
+       "tufa": 0.00179302,
+       "plitvice": 0.00330123,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.0125912,
+       "2": 0.513285,
+       "3": 1.0
+      }
+     },
+     "1e+06": {
+      "soils_factor": 1.00785,
+      "rivers": {
+       "tufa": 0.00179302,
+       "plitvice": 0.00330123,
+       "designed": 0.00499783
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.00333475,
+       "2": 0.513285,
+       "3": 0.998041
+      }
+     }
+    }
+   },
+   "high": {
+    "fresh_factor": 10.0,
+    "soil_age_at_start_yr": 250.0,
+    "by_year": {
+     "0": {
+      "soils_factor": 10.0,
+      "rivers": {
+       "tufa": 0.999247,
+       "plitvice": 0.999651,
+       "designed": 0.999689
+      },
+      "spring_land_building_tufa": {
+       "1.5": 1.0,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "10": {
+      "soils_factor": 9.78723,
+      "rivers": {
+       "tufa": 0.999247,
+       "plitvice": 0.999651,
+       "designed": 0.999689
+      },
+      "spring_land_building_tufa": {
+       "1.5": 1.0,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "100": {
+      "soils_factor": 8.33001,
+      "rivers": {
+       "tufa": 0.998761,
+       "plitvice": 0.999371,
+       "designed": 0.999651
+      },
+      "spring_land_building_tufa": {
+       "1.5": 1.0,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "300": {
+      "soils_factor": 6.56371,
+      "rivers": {
+       "tufa": 0.996887,
+       "plitvice": 0.998593,
+       "designed": 0.999193
+      },
+      "spring_land_building_tufa": {
+       "1.5": 1.0,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "1000": {
+      "soils_factor": 4.37187,
+      "rivers": {
+       "tufa": 0.987549,
+       "plitvice": 0.993949,
+       "designed": 0.996887
+      },
+      "spring_land_building_tufa": {
+       "1.5": 1.0,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "3000": {
+      "soils_factor": 2.88251,
+      "rivers": {
+       "tufa": 0.8983,
+       "plitvice": 0.96544,
+       "designed": 0.984667
+      },
+      "spring_land_building_tufa": {
+       "1.5": 1.0,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "10000": {
+      "soils_factor": 1.93421,
+      "rivers": {
+       "tufa": 0.242571,
+       "plitvice": 0.715997,
+       "designed": 0.8983
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.998041,
+       "2": 1.0,
+       "3": 1.0
+      }
+     },
+     "30000": {
+      "soils_factor": 1.48277,
+      "rivers": {
+       "tufa": 0.00499783,
+       "plitvice": 0.146067,
+       "designed": 0.429207
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.772909,
+       "2": 0.998041,
+       "3": 1.0
+      }
+     },
+     "100000": {
+      "soils_factor": 1.23245,
+      "rivers": {
+       "tufa": 0.00281795,
+       "plitvice": 0.00830609,
+       "designed": 0.0709236
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.254447,
+       "2": 0.925015,
+       "3": 1.0
+      }
+     },
+     "1e+06": {
+      "soils_factor": 1.05714,
+      "rivers": {
+       "tufa": 0.0020879,
+       "plitvice": 0.00389355,
+       "designed": 0.00830609
+      },
+      "spring_land_building_tufa": {
+       "1.5": 0.0125912,
+       "2": 0.631487,
+       "3": 1.0
+      }
+     }
+    }
+   }
+  }
+ },
+ "dam_builders": {
+  "limits_w_m": {
+   "dams_persist": [
+    150.0,
+    1200.0
+   ],
+   "with_blowouts": [
+    190.0,
+    2400.0
+   ]
+  },
+  "slope_max": 0.23,
+  "flow_regimes": {
+   "steady": [
+    0.3,
+    4.0
+   ],
+   "flashy": [
+    0.2,
+    10.0
+   ]
+  },
+  "lunar_scale": 0.40697,
+  "density_per_km": {
+   "frequent": [
+    4.0,
+    15.0
+   ],
+   "pervasive": [
+    15.0,
+    40.0
+   ]
+  },
+  "pond_ha_per_dam": 0.35,
+  "channel_km": 266244.0,
+  "cases": {
+   "dams_persist/steady/equal_shields_number": {
+    "dams_hold_km": 20830.6,
+    "share_of_channels": 0.0782388,
+    "by_band_km": {
+     "0_15": 17022.7,
+     "15_30": 3248.76,
+     "30_45": 557.194,
+     "45_60": 0,
+     "60_90": 1.94444
+    },
+    "dams": {
+     "frequent": [
+      83322.5,
+      312459.0
+     ],
+     "pervasive": [
+      312459.0,
+      833225.0
+     ]
+    },
+    "pond_km2_at_frequent": [
+     291.629,
+     1093.61
+    ]
+   },
+   "dams_persist/steady/earth_discharge_times_slope": {
+    "dams_hold_km": 45743.6,
+    "share_of_channels": 0.171811,
+    "by_band_km": {
+     "0_15": 36573.2,
+     "15_30": 7836.38,
+     "30_45": 1332.0,
+     "45_60": 0,
+     "60_90": 2.07777
+    },
+    "dams": {
+     "frequent": [
+      182975.0,
+      686154.0
+     ],
+     "pervasive": [
+      686154.0,
+      1829750.0
+     ]
+    },
+    "pond_km2_at_frequent": [
+     640.411,
+     2401.54
+    ]
+   },
+   "dams_persist/flashy/equal_shields_number": {
+    "dams_hold_km": 8932.12,
+    "share_of_channels": 0.0335486,
+    "by_band_km": {
+     "0_15": 7396.0,
+     "15_30": 1337.92,
+     "30_45": 196.301,
+     "45_60": 0,
+     "60_90": 1.89586
+    },
+    "dams": {
+     "frequent": [
+      35728.5,
+      133982.0
+     ],
+     "pervasive": [
+      133982.0,
+      357285.0
+     ]
+    },
+    "pond_km2_at_frequent": [
+     125.05,
+     468.936
+    ]
+   },
+   "dams_persist/flashy/earth_discharge_times_slope": {
+    "dams_hold_km": 20830.6,
+    "share_of_channels": 0.0782388,
+    "by_band_km": {
+     "0_15": 17022.7,
+     "15_30": 3248.76,
+     "30_45": 557.194,
+     "45_60": 0,
+     "60_90": 1.94444
+    },
+    "dams": {
+     "frequent": [
+      83322.5,
+      312459.0
+     ],
+     "pervasive": [
+      312459.0,
+      833225.0
+     ]
+    },
+    "pond_km2_at_frequent": [
+     291.629,
+     1093.61
+    ]
+   },
+   "with_blowouts/steady/equal_shields_number": {
+    "dams_hold_km": 37660.2,
+    "share_of_channels": 0.14145,
+    "by_band_km": {
+     "0_15": 30345.3,
+     "15_30": 6243.48,
+     "30_45": 1069.33,
+     "45_60": 0,
+     "60_90": 2.07777
+    },
+    "dams": {
+     "frequent": [
+      150641.0,
+      564903.0
+     ],
+     "pervasive": [
+      564903.0,
+      1506410.0
+     ]
+    },
+    "pond_km2_at_frequent": [
+     527.243,
+     1977.16
+    ]
+   },
+   "with_blowouts/steady/earth_discharge_times_slope": {
+    "dams_hold_km": 78306.7,
+    "share_of_channels": 0.294116,
+    "by_band_km": {
+     "0_15": 61705.0,
+     "15_30": 14132.0,
+     "30_45": 2465.29,
+     "45_60": 1.89521,
+     "60_90": 2.46743
+    },
+    "dams": {
+     "frequent": [
+      313227.0,
+      1174600.0
+     ],
+     "pervasive": [
+      1174600.0,
+      3132270.0
+     ]
+    },
+    "pond_km2_at_frequent": [
+     1096.29,
+     4111.1
+    ]
+   },
+   "with_blowouts/flashy/equal_shields_number": {
+    "dams_hold_km": 17070.1,
+    "share_of_channels": 0.0641143,
+    "by_band_km": {
+     "0_15": 13998.3,
+     "15_30": 2640.8,
+     "30_45": 429.053,
+     "45_60": 0,
+     "60_90": 1.89586
+    },
+    "dams": {
+     "frequent": [
+      68280.2,
+      256051.0
+     ],
+     "pervasive": [
+      256051.0,
+      682802.0
+     ]
+    },
+    "pond_km2_at_frequent": [
+     238.981,
+     896.178
+    ]
+   },
+   "with_blowouts/flashy/earth_discharge_times_slope": {
+    "dams_hold_km": 37660.2,
+    "share_of_channels": 0.14145,
+    "by_band_km": {
+     "0_15": 30345.3,
+     "15_30": 6243.48,
+     "30_45": 1069.33,
+     "45_60": 0,
+     "60_90": 2.07777
+    },
+    "dams": {
+     "frequent": [
+      150641.0,
+      564903.0
+     ],
+     "pervasive": [
+      564903.0,
+      1506410.0
+     ]
+    },
+    "pond_km2_at_frequent": [
+     527.243,
+     1977.16
+    ]
+   }
+  }
+ }
+}

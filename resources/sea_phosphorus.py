@@ -50,7 +50,7 @@ BOUND = {
                            sha256="758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8"),
     "sky_ecology": dict(path="research/studies/sky_ecology/results/sky_ecology.json",
                         schema="terluna.research.sky-ecology/1", branch="main", commit=None,
-                        sha256="2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3"),
+                        sha256="2d0f1f08d95cfb0f3c20f11b5097535c4d97b9cbb439fe76a5315378f819342a"),
     "sky_phosphorus_note": dict(path="research/studies/sky_ecology/phosphorus.md", schema=None,
                                 branch="main", commit=None,
                                 sha256="65ec921e7a5dea769a120406c54a22e5bfc47d3077fb06439408b0b9d05f84a2"),
@@ -62,7 +62,7 @@ BOUND = {
                            sha256="b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a"),
     "provisioning_decisions": dict(path="research/decisions.md", schema=None, branch="main",
                                    commit=None,
-                                   sha256="1ccb2a9c8634dbbfbe5abd7b8ee7c495b0a9df2bd02ceb13003159e772a2e639"),
+                                   sha256="c3c3b5224d2599cd37d911335eb21490ae60227a17800e2e13459c3bb823f412"),
 }
 # Bound at integration when provisioning's food-systems study is committed; until then the systems below stand alone.
 PENDING = {

@@ -3,7 +3,7 @@
  "producer": {
   "domain": "resources",
   "files": {
-   "resources/industry.py": "7a324986948b6b24"
+   "resources/industry.py": "c7c94f450fb890ef"
   },
   "inputs": {
    "resources/results/first_screen.json": "8925d2b67c0d6bb6",
@@ -495,47 +495,48 @@
     0.0354,
     1.13
    ],
-   "burial_at_lake_rates_kg_s": [
-    373.0,
-    4710.0
+   "burial_kg_s": [
+    138.0,
+    1740.0
    ],
-   "sea_carbon_burial_gt_yr": [
-    0.202,
-    0.51
+   "carbon_burial_gt_yr": [
+    0.0747,
+    0.188
    ],
+   "burial_basis": "the rain-fed lakes at lake rates and the seas at Earth's deep-sea rate",
    "burial_cycle_years": [
-    17000000.0,
-    215000000.0
+    46000000.0,
+    580000000.0
    ],
    "windows": {
     "years_500_1000": {
      "kg": [
-      5880000000000.0,
-      74300000000000.0
+      2180000000000.0,
+      27500000000000.0
      ],
      "air_nitrogens": [
-      2.33e-06,
-      2.94e-05
+      8.61e-07,
+      1.09e-05
      ]
     },
     "years_1000_10000": {
      "kg": [
-      106000000000000.0,
-      1340000000000000.0
+      39200000000000.0,
+      494000000000000.0
      ],
      "air_nitrogens": [
-      4.19e-05,
-      0.000529
+      1.55e-05,
+      0.000196
      ]
     },
     "operation_1e9": {
      "kg": [
-      1.18e+19,
-      1.49e+20
+      4.36e+18,
+      5.49e+19
      ],
      "air_nitrogens": [
-      4.65,
-      58.8
+      1.72,
+      21.7
      ]
     }
    }
@@ -552,8 +553,8 @@
     2.73
    ],
    "burial_gt_co2_yr": [
-    0.739,
-    1.87
+    0.274,
+    0.691
    ],
    "cycle_years": {
     "weathering": [
@@ -561,8 +562,8 @@
      7060.0
     ],
     "weathering_and_burial": [
-     419.0,
-     1910.0
+     564.0,
+     3530.0
     ]
    },
    "kilns_gw": [
@@ -574,17 +575,18 @@
     0.00923
    ],
    "import_as_carbon_kg_s": [
-    8760.0,
-    39800.0
+    4730.0,
+    29600.0
    ],
    "burial_import_as_carbon_kg_s": [
-    6390.0,
-    16200.0
+    2370.0,
+    5970.0
    ],
    "burial_o2_release_gt_yr": [
-    0.538,
-    1.36
+    0.199,
+    0.502
    ],
+   "burial_basis": "the rain-fed lakes at lake rates and the seas at Earth's deep-sea rate",
    "note": "Kilns return the weathered carbon on the Moon; buried organic carbon needs its own return path or an import."
   },
   "film": {
@@ -1214,8 +1216,8 @@
     1880000000.0
    ],
    "carbon_if_imported_for_weathering_and_burial": [
-    8760.0,
-    39800.0
+    4730.0,
+    29600.0
    ]
   },
   "packets_per_day": {

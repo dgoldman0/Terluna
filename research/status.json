@@ -206,7 +206,7 @@
     },
     {
       "topic": "resources",
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11; carbon_cycle_box_model_to_year_10000_with_the_managed_return_2026_10_12; industry_burial_basis_lakes_at_lake_rates_seas_at_marine_rates; sea_chemistry_through_a_billion_years_alkaline_unless_held_2026_10_13; terrain_through_time_small_waters_first_upkeep_a_few_gigawatts_2026_10_13; terrain_deltas_move_the_shorelines_first_2026_10_13; groundwater_model_prepared_2026_10_13; groundwater_stage_1_the_crust_drinks_more_than_the_seas_hold_2026_10_13; groundwater_stage_2_water_table_a_third_of_the_land_seeps_2026_10_13; groundwater_stage_3_springs_carry_the_soils_load_and_build_little_travertine_2026_10_14; carbon_cycle_and_sea_chemistry_take_the_groundwater_2026_10_14",
       "material": [
         "../resources/README.md",
         "../resources/state.md",
@@ -225,7 +225,21 @@
         "../resources/sea_phosphorus_waters.py",
         "../resources/sea_phosphorus_sources.json",
         "../resources/results/sea_phosphorus.json",
-        "../resources/results/sea_phosphorus_waters.json"
+        "../resources/results/sea_phosphorus_waters.json",
+        "studies/sea_chemistry/README.md",
+        "studies/sea_chemistry/results/sea_chemistry.json",
+        "studies/terrain_through_time/README.md",
+        "studies/terrain_through_time/results/terrain_routing.json",
+        "studies/terrain_through_time/results/terrain_through_time.json",
+        "../geography/groundwater_uptake.py",
+        "../geography/results/groundwater_uptake.json",
+        "../geography/groundwater_table.py",
+        "../geography/results/groundwater_table.json",
+        "studies/springs/run.py",
+        "studies/springs/results/springs.json",
+        "studies/springs/results/springs_carbon.json",
+        "studies/springs/carbon.py",
+        "studies/carbon_cycle/results/carbon_cycle.json"
       ],
       "unresolved": [
         "The aerial phosphorus cycle: nutrient-specific stocks and annual throughput, natural retention, collection-to-delivery harvest return, land/sea donor depletion, sediment recovery and genuine irreversible losses. Six conservative box sensitivities are arithmetic, not a demonstrated lunar ecology; 1% footprint reference requires9.228MtP/year throughput and4.153–41.527Mt stock; at99.9% natural retention and99% food return the low assumed upward supply leaves10,726tP/year to return.",
@@ -237,9 +251,11 @@
         "the shield's material life cycle: the film plant's recovery fraction, which sets 73-1,470 kg/s of fresh feed; the film's life; where failed tiles go; lunar feed before the air, then recycling or small bodies",
         "carbon and oxygen budgets through time: a box model with soils' carbonates, the seas' dissolved carbon, burial, kilns and lime, and rock oxidation taking the air's oxygen on a 4-120 million year cycle",
         "the seas' composition through time and the delivered water's salts; a geochemical map separating dry from flooded ore; the crust's water uptake; micronutrients and critical elements element by element; lift gas; what weathering releases; Earth's share of the costs",
-        "Phosphorus from the waters (resources/sea_phosphorus.md, 2026-10-11): the rain-fed lakes keep 96% of the land's 1.47-4.16 Tg a year and the common-level waters receive 55-180 kt, the great seas least; dredging the lake deltas can supply people's 0.18-1.44 Tg a year and the waters' life can spare 21-56 kt. Open: the great seas' inflow once common-level pits spill, lunar lake retention, delta grades and dredgeable share, the food systems' efficiencies from provisioning, the carriers' lake food webs, and whether the living seas need phosphorus delivered."
+        "Phosphorus from the waters (resources/sea_phosphorus.md, 2026-10-11): the rain-fed lakes keep 96% of the land's 1.47-4.16 Tg a year and the common-level waters receive 55-180 kt, the great seas least; dredging the lake deltas can supply people's 0.18-1.44 Tg a year and the waters' life can spare 21-56 kt. Open: the great seas' inflow once common-level pits spill, lunar lake retention, delta grades and dredgeable share, the food systems' efficiencies from provisioning, the carriers' lake food webs, and whether the living seas need phosphorus delivered.",
+        "The terrain through time (research/studies/terrain_through_time, 2026-10-13): left alone the small waters go first and the large lakes last, and keeping lakes and relief costs 0.2-11 GW as one loop of dredging and return. Open: the springs' load from a groundwater model, the small streams below the 1.9 km grid where dam builders work, the deltas' shapes beyond fans from fixed mouths, and the set of landforms to keep, chosen in the atlas round.",
+        "Groundwater (2026-10-13, 2026-10-14): stages 1-3 done (geography/groundwater_uptake.py, groundwater_table.py; research/studies/springs). The crust takes 0.7-3 times the seas' water within 10,000 years; groundwater comes out across a third of the mature land; the springs carry about the soil water's load and build little travertine, the rock laying the calcium. The carbon cycle and the sea chemistry take the springs study's weathering, the rock's calcite, the filling crust's carbon and the floors' uptake (2026-10-14). Open: regional water tables finer than 15 km for the districts; secondary clays and zeolites; evaporation from shallow water tables; a map of the maria's extent."
       ],
-      "next_session_task": "Rerun the drainage with common-level pits that fill and spill, then give each sea and large lake its own phosphorus box; bind provisioning's food systems; size delta dredging against delta habitats; settle with ecology whether the seas need phosphorus delivered for their living waters and sea-feeding flyers."
+      "next_session_task": "Groundwater: stages 1-3 are done and the carbon cycle and sea chemistry take them in (2026-10-14); the desert note on the research drive (deserts/desert_analysis.md) waits for the author's review. The author's next round is atlas building down to districts, with the young-Moon landforms to keep chosen in it as a set; the terrain study's grids (research/runs/resources/terrain) give each lake's and hollow's fill times and upkeep. The carbon cycle box model (research/studies/carbon_cycle) is in place; its next work: the imports' form and the redox account (questions 4 and 8), burial by lake, calcite where the kilns can reach it, and the organic returns. Rerun the drainage with common-level pits that fill and spill, then give each sea and large lake its own phosphorus box; bind provisioning's food systems; size delta dredging against delta habitats; settle with ecology whether the seas need phosphorus delivered for their living waters and sea-feeding flyers."
     },
     {
       "topic": "provisioning",
@@ -667,7 +683,7 @@
         "ocean carbonate chemistry and uptake",
         "how weathering slows as soils form, and the size of the managed return"
       ],
-      "next_session_task": "A box model of air, plants, soils, ocean and carbonate sediments with a managed return, run with the water inventory and the mineral cycle."
+      "next_session_task": "Its box model is the carbon cycle (studies/carbon_cycle, 2026-10-12), which revises this study's weathering, land biosphere and burial; this study stays the literature synthesis of plant CO2 needs."
     },
     {
       "topic": "protection_architecture",

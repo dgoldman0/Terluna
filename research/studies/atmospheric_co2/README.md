@@ -3,8 +3,9 @@
 25 September 2026. What CO2 level the Open Moon's plants need, how fast the land
 would take CO2 out of the air, and what a settled Moon has to return to keep it.
 
-This is a literature synthesis with small calculations, not a carbon-cycle
-model. `python -m research.studies.atmospheric_co2.run` writes
+This is a literature synthesis with small calculations; the box model it asked
+for is the [carbon cycle](../carbon_cycle/README.md).
+`python -m research.studies.atmospheric_co2.run` writes
 [results/atmospheric_co2.json](results/atmospheric_co2.json) (schema `terluna.research.atmospheric-co2/1`,
 with its evidence statement and reading rule). [sources.json](sources.json)
 records each source and how far it was checked. The atmosphere's response to CO2
@@ -65,7 +66,7 @@ this is imported with the biosphere.
 ## The settled Moon
 
 Once forests and soils stop growing, photosynthesis is balanced by respiration
-and decay, apart from a small leak into peat and sediments. The geological loop
+and decay, apart from the carbon that peat and sediments bury. The geological loop
 does not close by itself:
 
 - **Weathering is a one-way sink.** Silicate rock takes CO2 into bicarbonate;
@@ -100,7 +101,8 @@ magnesium, potassium and phosphorus that weathering frees for plants.
 
 ## Next work
 
-A box model of the air, plants, soils, ocean and carbonate sediments, with
-weathering that slows as soils develop and a managed return, run together with
-the water inventory and the mineral cycle. It would size the return step and
-show how it changes over the Moon's first thousands of years.
+The box model this section asked for is the [carbon cycle](../carbon_cycle/README.md) (12 October 2026): the air,
+plants, soils, sky, waters and sediments with weathering that slows as soils age and a managed return, at the
+corrected runoff and climate. It revises this study's weathering (its 26 °C and 349 mm run it 1.8 times high), its
+land biosphere (282–290 Gt C over the dry land, against 410–437 here) and its burial, which in the lakes and wet
+margins is the largest steady sink.

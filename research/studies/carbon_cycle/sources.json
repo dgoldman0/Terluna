@@ -1,0 +1,151 @@
+{
+  "schema": "terluna.research.sources/1",
+  "checked": "2026-10-12",
+  "scope": "Sources for the carbon-cycle box model's rates, inventories and constants. Committed project products are bound by sha256 in the product (producer.inputs) and not listed here. 'access' says what was actually read for this study; sources reused from other studies keep the access those studies record. No paper or dataset is redistributed.",
+  "sources": [
+    {
+      "id": "dessert_2003",
+      "citation": "Dessert, C., Dupre, B., Gaillardet, J., Francois, L. M. and Allegre, C. J. (2003). Basalt weathering laws and the impact of basalt weathering on the global carbon cycle. Chemical Geology 202, 257-273.",
+      "doi": "10.1016/j.chemgeo.2002.10.001",
+      "access": "Reused from the CO2 study, which checked the formula in the full text; this study reproduces the CO2 study's twelve weathering cases (checks.law).",
+      "use": "CO2 consumed by basalt weathering = runoff x 323.44 exp(0.0642 T) mol km-2 a year, applied to the land's discharge at the design case's air over land.",
+      "limit": "Earth's basaltic catchments, applied to developed highland soils; the anorthite argument for the highlands is resources' finding 5.",
+      "component": "weathering"
+    },
+    {
+      "id": "white_brantley_2003",
+      "citation": "White, A. F. and Brantley, S. L. (2003). The effect of time on the weathering of silicate minerals: why do weathering rates differ in the laboratory and field? Chemical Geology 202, 479-506.",
+      "doi": "10.1016/j.chemgeo.2003.03.001",
+      "access": "Reported by resources' literature search of 2026-10-09 (abstract); not re-read here.",
+      "use": "Field weathering rates fall as t^-0.61, the exponent of the fresh soils' ageing.",
+      "limit": "A fit across minerals and settings; the soils' age at the start and their starting factor are design guesses.",
+      "component": "weathering"
+    },
+    {
+      "id": "berner_kothavala_2001",
+      "citation": "Berner, R. A. and Kothavala, Z. (2001). GEOCARB III: a revised model of atmospheric CO2 over Phanerozoic time. American Journal of Science 301, 182-204.",
+      "doi": "10.2475/ajs.301.2.182",
+      "access": "Full text read (the journal's PDF): equation 5, f(CO2) = [2 RCO2/(1 + RCO2)]^FERT for weathering affected by vascular plants, and FERT = 0.4 as GEOCARB II assumed it (35% of plants responding).",
+      "use": "Plant-assisted weathering against CO2 in the free runs, relative to 400 ppm.",
+      "limit": "The authors call FERT poorly known.",
+      "component": "free_run"
+    },
+    {
+      "id": "ipcc_tar_table_3_2",
+      "citation": "Prentice, I. C. et al. (2001). The carbon cycle and atmospheric carbon dioxide. In Climate Change 2001: The Scientific Basis (IPCC TAR WG1), Table 3.2; the WBGU column as Watson, R. T. et al. (eds) (2000), Land Use, Land-Use Change and Forestry, IPCC, print it; checked in 't Mannetje, L. (2007), The role of grasslands and forests as carbon stores, Tropical Grasslands 41, 50-54, Table 1.",
+      "doi": "",
+      "access": "'t Mannetje's Table 1 read in full text (PDF): areas and plant, soil and total carbon by biome. The IPCC pages refused the fetch; the CO2 study reports reading the full table.",
+      "use": "Plants and the top metre of soil: tropical forests 17.6e6 km2, 212 and 216 Gt C; tropical savannas 22.5e6, 66 and 264; deserts and semi-deserts 45.5e6, 8 and 191; wetlands 3.5e6, 15 and 225; croplands 16.0e6, 3 and 128.",
+      "limit": "Earth's inventories with one-metre soils; the IGBP column of the same table gives a global mean about 10% lower.",
+      "component": "land"
+    },
+    {
+      "id": "poorter_2016_post_kwon_2000",
+      "citation": "Poorter, L. et al. (2016), Biomass resilience of Neotropical secondary forests, Nature 530, 211-214; Post, W. M. and Kwon, K. C. (2000), Soil carbon sequestration and land-use change: processes and potential, Global Change Biology 6, 317-327.",
+      "doi": "10.1038/nature16512; 10.1046/j.1365-2486.2000.00308.x",
+      "access": "Reused from the CO2 study (reported there); not re-read here.",
+      "use": "Forest regrowth in about 50 years; soil carbon building at about 33 g C m-2 a year on establishment.",
+      "limit": "Earth's former farmland and pasture; lunar developed soils may build slower, which the slow-soil variant brackets.",
+      "component": "land"
+    },
+    {
+      "id": "loisel_2014",
+      "citation": "Loisel, J. et al. (2014). A database and synthesis of northern peatland soil properties and Holocene carbon and nitrogen accumulation. The Holocene 24(9), 1028-1042.",
+      "doi": "10.1177/0959683614538073",
+      "access": "Abstract read (NASA GISS publication page): Holocene time-weighted accumulation 23 +/- 2 g C m-2 a year from 151 cores, 25-28 in the warmer early Holocene, 18-19 at its least.",
+      "use": "Peat accumulation in the wet margins, 18-28 g C m-2 a year.",
+      "limit": "Northern peatlands; the Moon's wet margins are warm, which can raise both production and decay.",
+      "component": "land"
+    },
+    {
+      "id": "schlesinger_1985",
+      "citation": "Schlesinger, W. H. (1985). The formation of caliche in soils of the Mojave Desert, California. Geochimica et Cosmochimica Acta 49, 57-66.",
+      "doi": "10.1016/0016-7037(85)90191-7",
+      "access": "Reported through a search summary of the abstract: 1.0-3.5 g CaCO3 m-2 a year, 0.12-0.42 g C; the paper not read.",
+      "use": "Carbonate building in the dry soils of the fog desert and polar dry land.",
+      "limit": "On Earth much desert carbonate takes its calcium from dust; on the Moon it comes from silicate, so each carbon is a sink.",
+      "component": "land"
+    },
+    {
+      "id": "mendonca_2017",
+      "citation": "Mendonca, R. et al. (2017). Organic carbon burial in global lakes and reservoirs. Nature Communications 8, 1694.",
+      "doi": "10.1038/s41467-017-01789-6",
+      "access": "Reported by resources' literature search of 2026-10-09 (abstract and passages); not re-read here.",
+      "use": "Lakes and reservoirs bury 19-48 g C m-2 a year, applied to the rain-fed lakes.",
+      "limit": "Earth's lakes, many of them small and shallow; deep crater lakes like most lunar ones bury less per area on Earth.",
+      "component": "burial"
+    },
+    {
+      "id": "duarte_2005",
+      "citation": "Duarte, C. M., Middelburg, J. J. and Caraco, N. (2005). Major role of marine vegetation on the oceanic carbon cycle. Biogeosciences 2, 1-8.",
+      "doi": "10.5194/bg-2-1-2005",
+      "access": "Full text read (the journal's PDF): Table 1 (burial by habitat: estuaries 45 g C m-2 a year over 1.8e12 m2, unvegetated shelf 17 on the tenth of 26.6e12 m2 that is depositional, deep sea 6 Tg a year after Berner 1982) and Table 2 with its text (deltaic and shelf sediment at 0.7-1.5% organic carbon after Hedges and Keil 1995, Berner's 0.75%).",
+      "use": "The seas' burial at Earth's rates for their settings; the dredged deltas' organic content.",
+      "limit": "Earth's ocean, fed with Earth's nutrients; the lunar seas receive little phosphorus, so these are upper bounds for them.",
+      "component": "burial"
+    },
+    {
+      "id": "plummer_busenberg_1982",
+      "citation": "Plummer, L. N. and Busenberg, E. (1982). The solubilities of calcite, aragonite and vaterite in CO2-H2O solutions between 0 and 90 C, and an evaluation of the aqueous model for the system CaCO3-CO2-H2O. Geochimica et Cosmochimica Acta 46, 1011-1040.",
+      "doi": "10.1016/0016-7037(82)90056-4",
+      "access": "Coefficients as the standard analytic forms give them; a search confirmed the K1 coefficients; the tests check the 25 C values (pK1 6.352, pK2 10.329, log KH -1.468, pKsp 8.48).",
+      "use": "Fresh-water CO2 solubility, K1, K2 and calcite's Ksp at the design temperatures.",
+      "limit": "No ion pairs (CaHCO3+, CaCO3, MgCO3) are carried; they lower free-ion activities by several per cent at these strengths.",
+      "component": "waters"
+    },
+    {
+      "id": "seawater_constants",
+      "citation": "Weiss, R. F. (1974), Marine Chemistry 2, 203-215 (K0); Lueker, T. J., Dickson, A. G. and Keeling, C. D. (2000), Marine Chemistry 70, 105-119 (K1, K2); Dickson, A. G. (1990), Deep-Sea Research 37, 755-766 (KB); Uppstrom, L. R. (1974), Deep-Sea Research 21, 161-162 (boron); Millero, F. J. (1995), Geochimica et Cosmochimica Acta 59, 661-677 (Kw, as the DOE handbook of Dickson and Goyet 1994 gives it); Mucci, A. (1983), American Journal of Science 283, 780-799 (calcite).",
+      "doi": "",
+      "access": "Standard forms, not re-read; the tests check their 25 C, S 35 values (K0 0.0284, pK1 5.847, pK2 8.966, pKB 8.5975, Ksp 4.27e-7).",
+      "use": "The salted seas' carbonate system at the sea surface temperature.",
+      "limit": "Stoichiometric constants at salinity 35; the weathering's additions are taken as not changing them.",
+      "component": "waters"
+    },
+    {
+      "id": "fresh_water_activity",
+      "citation": "Harned, H. S. and Owen, B. B. (1958), The Physical Chemistry of Electrolytic Solutions (pKw = 4470.99/T - 6.0875 + 0.01706 T); Davies, C. W. (1962), Ion Association (the Davies equation), with its A from the common linear fit in temperature.",
+      "doi": "",
+      "access": "Textbook forms, not re-read; the tests check pKw 13.995 at 25 C.",
+      "use": "The water product and the activity coefficients in the lakes and the fresh seas.",
+      "limit": "Davies holds to ionic strengths of a few tenths; the waters here stay below 0.05.",
+      "component": "waters"
+    },
+    {
+      "id": "seawater_composition",
+      "citation": "Earth's seawater at salinity 35: alkalinity about 2.3 meq/kg, calcium 10.28 mmol/kg, magnesium 52.8 mmol/kg (the reference composition of Millero, F. J. et al. 2008, Deep-Sea Research I 55, 50-72).",
+      "doi": "10.1016/j.dsr.2007.10.001",
+      "access": "Textbook values, not re-read.",
+      "use": "The salted seas at delivery.",
+      "limit": "A design case for the delivered water's salts, which resources leaves as a lever.",
+      "component": "waters"
+    },
+    {
+      "id": "schorcht_2013",
+      "citation": "Schorcht, F. et al. (2013). Best Available Techniques Reference Document for the Production of Cement, Lime and Magnesium Oxide. JRC Reference Report EUR 26129 EN.",
+      "doi": "",
+      "access": "Reported by resources' literature search of 2026-10-09 (full text, lime and magnesia sections); not re-read here.",
+      "use": "Calcination at its minimum, 3.2 GJ a tonne of lime (4.08 GJ a tonne of CO2); magnesite at 2.57 GJ a tonne of CO2; the best lime kilns at 3.2-4.2 GJ a tonne of lime.",
+      "limit": "The magnesite kilns' practical energy is scaled from the lime kilns' ratio, a design guess.",
+      "component": "return"
+    },
+    {
+      "id": "lunar_sourcebook",
+      "citation": "Heiken, G. H., Vaniman, D. T. and French, B. M. (eds) (1991). Lunar Sourcebook. Cambridge University Press, Table 7.15.",
+      "doi": "",
+      "access": "Through resources' literature register and the lunar-cycle register's rock stocks (reported, full text of chapters 5-8 and 11).",
+      "use": "The Apollo 16 highland soil: CaO 15.7 wt%, FeO 5.1 wt%, and the Ca, Mg, Na and K the register's stock carries.",
+      "limit": "One average soil for the dry land, which is mostly highland; dry mare remnants carry more magnesium and iron.",
+      "component": "weathering"
+    },
+    {
+      "id": "walpole_2012",
+      "citation": "Walpole, S. C. et al. (2012). The weight of nations: an estimation of adult human biomass. BMC Public Health 12, 439.",
+      "doi": "10.1186/1471-2458-12-439",
+      "access": "Not read; the 62 kg adult mean is quoted from memory and carries only the people's bodies, under 0.1 Gt C.",
+      "use": "People's bodies, with 18% of their mass carbon (textbook).",
+      "limit": "Adults; a population with children weighs less on average.",
+      "component": "people"
+    }
+  ]
+}

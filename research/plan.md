@@ -212,7 +212,35 @@ On the recommendation's full report the author chose beamed power from the ring 
 every receiver (provisioning). They also put the carbon cycle under the updated parameters on the work coming up
 (resources).
 
-Waiting on the author: the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
+On 13 October (resources) the seas' chemistry through a billion years found every lasting state a held one, and the
+author held the seas fresh on the condition that they are rich in life, ecology designing their communities. The
+[terrain study](studies/terrain_through_time/README.md) followed: left alone the small waters go first and the
+large lakes last; keeping lakes and relief is one loop of dredging and return uphill for 0.2–11 GW; the seas'
+deposits are stone for the built land; travertine builds while the young soils weather fast, and dam builders keep
+the small streams' ponds. The author set the next round, once these details are worked out, as a large round of
+atlas building down to districts, in which the young-Moon landforms to keep are chosen as a set. Delta growth followed
+at the author's word: deltas move the shorelines first, covering 6.5% of the lake area within 10,000 years at the
+central rate and adding 104,000 km² of land at the common-level waters. The author keeps water delivery going to
+balance what the crust takes up, and wants groundwater modelled: the crust's uptake through time, the water table
+with its springs, baseflow and lake seepage, then the springs' load. Its first stage followed: the cold airless crust
+thaws from above in centuries at the equator and tens of thousands of years near the poles, and once thawed takes water
+fast, 1.8 times the seas' water within 10,000 years at the central values (0.7–3 across the cases), so holding the seas
+takes a top-up of thousands of cubic kilometres a year through the first millennia. The water table followed: in the
+mature Moon groundwater comes out across a third of the land, three quarters of the tropics and little poleward of 45°,
+carries a quarter of the rivers' flow and feeds the lakes except at the dry poles; the young Moon is drier, its middle
+latitudes most of all. The springs' load followed: the springs' water is a median 76 years old in the mature Moon and
+carries about the soil water's load, since below the soil the rock runs through the CO2 the water brought and lays its
+calcium as calcite underground; the springs are moderately hard, alkaline magnesium waters in the young Moon, and build
+almost no travertine. The land's weathering reaching the waters is about 0.6 of what the carbon cycle counts in the
+mature Moon and 0.2–0.5 in the young Moon, chiefly because nearly half the rivers' flow is rain on the lakes, and the
+filling crust takes up to a quarter of the carbon cycle's import down with its water over the first 10,000 years. At the
+author's word the carbon cycle and the sea chemistry took this in: the seas calcify two to four thousand years later,
+the kilns return less, holding 400 ppm imports 0.12–0.33 Gt C a year at year 10,000, and left alone the seas reach pH 9
+in 30,000–60,000 years. A general analysis of the deserts, from the author's Codex conversation on their climate, ran
+beside it as a note on the research drive.
+
+Waiting on the author: the desert note (research drive, deserts/desert_analysis.md) for review; and the taxonomy, on
+hold for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 

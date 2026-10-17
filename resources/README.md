@@ -114,14 +114,17 @@ loss and the resupply that matches it take to replace the inventory.
      The seas and lakes at Earth's dissolved inorganic carbon hold 0.6–0.7 times it (*screen*). Both come on top of
      the biosphere's 1.5–1.6×10¹⁵ kg.
    - *Solid chemistry; the rates are Earth field rates.*
-6. **Burial in the seas can rival weathering.** Lakes and reservoirs bury 19–48 g C m⁻² a year (Mendonça et al. 2017).
-   At those rates the lunar seas would bury 0.7–1.9 Gt CO2 a year and leave the matching oxygen in the air
-   (literature register).
+6. **Burial in the lakes rivals weathering.** Lakes and reservoirs bury 19–48 g C m⁻² a year (Mendonça et al. 2017).
+   Over the rain-fed lakes, 10.3% of the Moon, that is 0.27–0.69 Gt CO2 a year, and the wet margins' peat adds
+   0.03–0.21 Gt; the seas at Earth's marine rates bury about 0.01 Gt. Each carbon buried leaves its oxygen in the air
+   ([carbon cycle](../research/studies/carbon_cycle/README.md); this finding first took lake rates over the seas).
    - **The return.** Burning carbonate back takes 4.08 GJ per tonne of CO2 from calcite and 2.57 GJ from magnesite,
      with the best kilns at 3.2–4.2 GJ per tonne of lime (JRC BREF 2013).
    - **Steering.** Weathering products steered toward magnesium carbonate return more cheaply.
-   - **Size.** The return is an Earth-scale lime industry, 27–610 GW depending on the sink. It sits on the Moon,
-     since it releases its CO2 into the lunar air.
+   - **Size.** The kilns take 3.9–14 GW at year 10,000 and at most 15 GW, making 0.04–0.13 Gt of lime a year
+     ([carbon cycle](../research/studies/carbon_cycle/README.md); revised on 14 October, when the springs study showed
+     less of the weathering reaching the waters and the seas calcifying later). It sits on the Moon, since it releases
+     its CO2 into the lunar air.
    - *Earth rates.*
 7. **The sea floods most of the Moon's ore.** At 28% water the atlas puts these maria 99–100% under water:
    - Imbrium, Nubium, Serenitatis, Crisium, Humorum and Nectaris;
@@ -143,6 +146,19 @@ loss and the resupply that matches it take to replace the inventory.
      composition a design lever. Until then the plankton are freshwater, the spray is fresh and the density is near
      1,000 kg/m³.
    - **Assumptions to revisit.** The wave studies take 1,025 kg/m³ and the water optics Earth seawater at 38.4 g/kg.
+   - **Through the billion years** ([sea chemistry](../research/studies/sea_chemistry/README.md)): calcite and silica
+     keep fresh seas near 0.4 g/kg for 10,000 years, and left alone they turn alkaline, to pH 9 in 13,000–34,000 years
+     and a soda water of Earth's salinity in 24 million; held by calcite, a magnesium route, soda works and
+     silica-building life they stay fresh at 0.14 g/kg and pH 8.3.
+   - **Held fresh, with the land's rock** ([terrain through time](../research/studies/terrain_through_time/README.md)):
+     the author holds the seas fresh on the condition that they are rich in life. Keeping them and the lakes open
+     is one loop with the relief: 0.7–8.3 Gt of rock a year dredged and carried back uphill for 0.2–11 GW, while
+     the seas' 0.23 km³ a year of calcite, magnesite and opal is stone for the built land.
+   - **The crust drinks more than the seas hold**
+     ([groundwater uptake](../geography/README.md#groundwater-how-fast-the-crust-takes-the-water)): once the cold
+     airless crust thaws, it takes 0.7–3 times the seas' water within 10,000 years (1.8 at the central values) and
+     3.5–4.8 times within a million. The water delivery the author keeps going must add 1,500–4,100 km³ a year
+     through the first thousand years and about 1,700 to 10,000 to hold the seas at 28%.
    - *Solid for weathering alone.*
 
 ### The shield's material
@@ -215,9 +231,11 @@ is [industry.md](industry.md), with its screen [industry.py](industry.py); numbe
     a day; from one plant 6–12% of the fleet is in transit, and eight plants across the stack's tilts bring that to
     0.7–1.5%. Electric tugs would release 69–1,070 kg/s of exhaust inside the protected region, which S7 governs.
 18. **On the near horizons the air needs resupply of its CO2 alone.** Escape (cycle times of 70 billion years and
-    more), rock (0.008–0.25% of the oxygen by year 10,000) and burial (0.004–0.05% of the nitrogen) leave the air as
-    built, while weathering and burial turn its CO2 over in 419–1,910 years. Kilns of 35–350 GW return the weathered
-    carbon; the buried carbon needs a return path or 6,400–16,200 kg/s imported.
+    more), rock (0.008–0.25% of the oxygen by year 10,000) and burial (0.0016–0.020% of the nitrogen) leave the air as
+    built, while weathering and burial turn its CO2 over in 564–3,530 years. The carbon cycle box model sizes the
+    answer: kilns of 3.9–14 GW return the carbonate as it forms, and the lakes' burial, the filling crust and the rock's
+    calcite leave an import of 3,600–10,300 kg C/s at year 10,000 unless more of the burial comes back
+    ([carbon cycle](../research/studies/carbon_cycle/README.md)).
 19. **The array's habitats set the largest stream after the build.** The Stanford torus shields each person with
     990 t (Johnson & Holbrow 1977), 990 Gt for each billion residents. As water, the shield for 0.1–14 billion
     residents is 0.003–0.1% of what the build delivers.

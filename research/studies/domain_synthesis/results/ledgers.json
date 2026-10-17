@@ -5,13 +5,13 @@
       "research/studies/domain_synthesis/ledgers.py": "04bfaa09658204ad139237c5c42c28f59173a544f5346341418acd2ecc5a0270"
     },
     "inputs": {
-      "research/studies/distributions/results/distributions.json": "772447120d8542618f8e31172e2a6406f63d58ab72c639687b912758dd282ca2",
-      "research/studies/food_systems/results/food_blend.json": "14d9bd51eb21e437c1929a3195871b46f461bf898aa0d539512da9085caf2aed",
+      "research/studies/distributions/results/distributions.json": "4d3ab33bdf382f30ef357f68fd1bc0867abdb61fe4219528e41dd18141ddfd45",
+      "research/studies/food_systems/results/food_blend.json": "7107dcd923b8d79323178e6fae109cbccc6119d5ece6c3ec8994cf48530f1402",
       "provisioning/results/population.json": "d562cdabe6eee18fe40cfc16f6a65177ec16f7dd1fd8584a4dad80d271b85895",
       "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d",
       "biosphere/ecology/results/people.json": "758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8",
-      "resources/results/sea_phosphorus.json": "896032f4469bad84598300bf0120c1f5c7c357c16d83cfe1a66ac5ec518ccf3d",
-      "research/studies/sky_ecology/results/sky_ecology.json": "2f8156f73806aab57002a07a6a6ec79230d728f02c891ccbab15c764ca6bebf3",
+      "resources/results/sea_phosphorus.json": "55a0794985710578beb7efee36c197e58405780a64c7ca13e8f8be5c799a83a2",
+      "research/studies/sky_ecology/results/sky_ecology.json": "2d0f1f08d95cfb0f3c20f11b5097535c4d97b9cbb439fe76a5315378f819342a",
       "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f3a09b17dc088037560bb5b7f31f4342ae16239d4bf22013a",
       "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327a13d9a01db7bb711fb5177a5d2b0227c7085826ad8a85a65",
       "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d42be3598a6f4896cc72c4c5aa0432ad9b468dbc08191f684",
