@@ -1096,6 +1096,15 @@ means over the second lunar day): the sideways transport takes about a third of 
 - **So the rest lies in the models' physics:** how each sheds the heat the ground gives it, by radiation, convection
   and turbulence. By day CM1 mixes its lower air dry to 14–19 km where the GCM's stays stable. The land test waits
   behind this, since over land the ground heats the air alike in the two models.
+- **CM1's radiation errs toward cooling.** On 17 October 990 of the ring's own columns, cloud-free below 25 km over
+  the second lunar day, went through the atmosphere domain's correlated-k model, which follows the line-by-line model
+  ([ring_radiation.py](ring_radiation.py),
+  [radiation_ring_45n_corrected_sideways.json](../results/crm/radiation_ring_45n_corrected_sideways.json)). CM1's
+  RRTMG cools them more: by 0.15 K a day in the lowest 1.8 km (4.5 W/m²), 0.12 at 1.8–6.5 km (8.5 W/m²) and 0.11 at
+  6.5–13.7 km (10.2 W/m²). Its sunlight came within 2.5 points of line-by-line at the crossing, with 8 W/m² less
+  absorbed in the air ([radiation, above](#what-else-divides-cm1-and-the-gcm-at-the-crossing)). Both push its air
+  cooler, so the warmth comes from elsewhere, and part of the gap may lie on the GCM's side, whose heating by process
+  its runs do not yet write.
 - **For the cases that follow.** The sideways transport is part of the GCM's forcing that a slice of it lacks, so
   forced rings and boxes are better driven with it; their warmth near the ground still runs about 4 K high at 45° N
   until the rest is found.
