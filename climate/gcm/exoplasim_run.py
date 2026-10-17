@@ -510,12 +510,73 @@ GAS_EDITS = [
     ("       ztwvtu(:)=ztwvtu(:)/ztwvu(:)\n",
      "       ztwvtu(:)=ztwvtu(:)/ztwvu(:)\n" + _gas_layer(1, 'ztwv', 'ztwvu') + _gas_layer(2, 'ztwv', 'ztwvu')),
 ]
-# The twilight and gas patches go only into a copy of ExoPlaSim of its own, which every run imports first since the
-# corrected radiation became the standard (2026-10-14); the shared installation stays as the earlier runs had it.
+# The longwave by height (2026-10-17): Sasamori's broadband absorptivities put PlaSim's longwave cooling too low in the
+# Moon's moist, massive air, by up to 12 W/m2 a layer against the correlated-k model, which its own continuum and path
+# exponents cannot move (plasim_longwave.py). NLWCORR 1 adds, after the curved air's escape, each layer's extra escape
+# to space fitted over land and over sea, scaled with its own temperature to the fourth power, from lwcorr.dat.
+LW_CORRECTION_EDITS = [
+    ("      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n",
+     "      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n"
+     "      integer :: nlwcorr = 0     ! Terluna: 1 adds the longwave by height (lwcorr.dat)\n"
+     "      real :: lwcl(NLEV+1) = 0.0 ! Terluna: the longwave by height, extra escape of each layer over land\n"
+     "      real :: lwcs(NLEV+1) = 0.0 ! Terluna: the same over sea\n"
+     "      real :: lwct(NLEV+1) = 0.0 ! Terluna: the temperatures they are given at\n"),
+    ("     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar\n",
+     "     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar,nlwcorr\n"),
+    ("      call mpbci(ntwilw)\n",
+     "      call mpbci(ntwilw)\n"
+     "      call mpbci(nlwcorr)\n"
+     "      if (nlwcorr == 1) then   ! Terluna: the longwave by height\n"
+     "       if (mypid == NROOT) then\n"
+     "        open(48,file='lwcorr.dat',form='formatted',status='old')\n"
+     "        read(48,*) (lwcl(jlev),jlev=1,NLEV+1)\n"
+     "        read(48,*) (lwcs(jlev),jlev=1,NLEV+1)\n"
+     "        read(48,*) (lwct(jlev),jlev=1,NLEV+1)\n"
+     "        close(48)\n"
+     "       endif\n"
+     "       call mpbcrn(lwcl,NLEV+1)\n"
+     "       call mpbcrn(lwcs,NLEV+1)\n"
+     "       call mpbcrn(lwct,NLEV+1)\n"
+     "      endif\n"),
+    ("      if (ntwilw == 1) call twilight_lw ! Terluna: the curved air's extra infrared escape\n",
+     "      if (ntwilw == 1) call twilight_lw ! Terluna: the curved air's extra infrared escape\n"
+     "      if (nlwcorr == 1) call lw_correction ! Terluna: the longwave by height\n"),
+    ("      end subroutine twilight_lw\n",
+     "      end subroutine twilight_lw\n"
+     "\n"
+     "      subroutine lw_correction\n"
+     "      use radmod\n"
+     "      implicit none\n"
+     "!\n"
+     "!     Terluna: the longwave by height (climate/gcm/plasim_longwave.py): each layer's and the ground's extra\n"
+     "!     escape to space, fitted over land and over sea to the correlated-k model, scaled with its own\n"
+     "!     temperature to the fourth power and carried up to the top as upward flux (negative in PlaSim)\n"
+     "!\n"
+     "      integer :: jhor, jlev\n"
+     "      real :: zsum, zland\n"
+     "      do jhor = 1, NHOR\n"
+     "       zland = dls(jhor)\n"
+     "       zsum = (zland*lwcl(NLEP) + (1.-zland)*lwcs(NLEP)) * (dt(jhor,NLEP) / lwct(NLEP))**4\n"
+     "       dftu(jhor,NLEP) = dftu(jhor,NLEP) - zsum\n"
+     "       dlwfl(jhor,NLEP) = dlwfl(jhor,NLEP) - zsum\n"
+     "       do jlev = NLEV, 1, -1\n"
+     "        zsum = zsum + (zland*lwcl(jlev) + (1.-zland)*lwcs(jlev)) * (dt(jhor,jlev) / lwct(jlev))**4\n"
+     "        dftu(jhor,jlev) = dftu(jhor,jlev) - zsum\n"
+     "        dlwfl(jhor,jlev) = dlwfl(jhor,jlev) - zsum\n"
+     "       enddo\n"
+     "      enddo\n"
+     "      return\n"
+     "      end subroutine lw_correction\n"),
+]
+# The twilight, gas and longwave patches go only into a copy of ExoPlaSim of its own, which every run imports first
+# since the corrected radiation became the standard (2026-10-14); the shared installation stays as the earlier runs had
+# it.
 TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS),
-                    ('radmod.f90', 'Terluna: CO2 and O2 in the sunlight', GAS_EDITS)]
+                    ('radmod.f90', 'Terluna: CO2 and O2 in the sunlight', GAS_EDITS),
+                    ('radmod.f90', 'Terluna: the longwave by height', LW_CORRECTION_EDITS)]
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
 TWILIGHT_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'twilight.json'
+LONGWAVE_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json'
 GASES_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_gases.json'
 GAS_ORDER = ('co2_nir', 'o2_nir', 'o2_vis')                     # PlaSim's ZGASQ columns
 MOLAR = dict(pN2=0.0280134, pO2=0.0319988, pAr=0.039948, pCO2=0.0440095)   # kg/mol
@@ -570,13 +631,13 @@ def _atomic_write(path: Path, text: str):
 
 
 def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
-                  heating=False):
+                  heating=False, longwave_correction=False):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
     twilight product, and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating writes each process's
-    temperature tendency (HEATING). Each is recorded when given, and left out the configuration is the one every
-    earlier run had."""
+    temperature tendency (HEATING), and longwave_correction the longwave by height (LW_CORRECTION_EDITS). Each is
+    recorded when given, and left out the configuration is the one every earlier run had."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -614,6 +675,11 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['co2_ppm'] = co2_ppm
     if top_infrared is not None:
         cfg['top_infrared_w_m2'] = dict(day=float(top_infrared[0]), night=float(top_infrared[1]))
+    if longwave_correction:
+        product = json.loads(LONGWAVE_PRODUCT.read_text())
+        cfg['longwave_correction'] = dict(product=str(LONGWAVE_PRODUCT.relative_to(ROOT)),
+                                          sha256=hashlib.sha256(LONGWAVE_PRODUCT.read_bytes()).hexdigest()[:16],
+                                          **{k: product['correction'][k] for k in ('land', 'sea', 'tref')})
     if heating:
         cfg['heating_diagnostics'] = True
         cfg['output'] = cfg['output'] + [name for name, _ in HEATING.values()]
@@ -809,6 +875,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         shutil.copy2(inputs['twilight'], workdir / 'twilight.dat')
         model._edit_namelist('radmod_namelist', 'NTWILIGHT', '1')
         model._edit_namelist('radmod_namelist', 'NTWILW', '1')
+    if 'longwave_correction' in cfg:
+        c = cfg['longwave_correction']
+        (workdir / 'lwcorr.dat').write_text(''.join(' '.join(f'{x:.6e}' for x in c[k]) + '\n' for k in ('land', 'sea', 'tref')))
+        model._edit_namelist('radmod_namelist', 'NLWCORR', '1')
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
@@ -996,9 +1066,9 @@ def summarise_year(path: Path, times_per_year: int | None = None) -> dict:
 def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False,
         overrides: dict | None = None, start_from: str | None = None, co2_ppm: float | None = None,
         top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True,
-        heating: bool = False) -> int:
+        heating: bool = False, longwave_correction: bool = False) -> int:
     use_twilight_package()
-    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating)
+    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -1112,6 +1182,9 @@ def main(argv=None) -> int:
     parser.add_argument('--gas-bands', action=argparse.BooleanOptionalAction, default=True,
                         help="CO2 and O2 in PlaSim's sunlight from ../results/gcm/shortwave_gases.json, the standard "
                              'since 2026-10-14 (part of the run key)')
+    parser.add_argument('--longwave-correction', action='store_true',
+                        help='the longwave by height, fitted to the correlated-k model (LONGWAVE_PRODUCT; part of the '
+                             'run key)')
     parser.add_argument('--heating-diagnostics', action='store_true',
                         help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
                              'the run key)')
@@ -1134,7 +1207,8 @@ def main(argv=None) -> int:
         overrides[key] = type(MODEL[key])(value)
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
-               None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics)
+               None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
+               args.longwave_correction)
 
 
 if __name__ == '__main__':

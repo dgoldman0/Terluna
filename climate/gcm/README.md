@@ -743,10 +743,50 @@ against the design case's years 20–29 are in
   cools the Moon 1.3 K; the dimming that holds the temperature is 0.71 of that. Held there, the air above about 55 km
   warms 0.3–2.1 K, the convective rain falls 3.9% and the high cloud's cover falls by a fifth.
 
-**Next: the glow pair on the corrected radiation**, which the author asked on 16 October to run soon. These
-branches flew on the radiation before its correction; the held gases and the glow, matched watt for watt and held
-at the design temperature, run again from `A28_corrected_970`, and the lakes and the climate's other readers
-follow whatever they change in the design case's rain.
+**The glow pair on the corrected radiation**, which the author asked on 16 October to run soon, flew on 17 October
+from `A28_corrected_970` with 13 October's added dimming (`A28_corrected_gases_glow`, `A28_corrected_gases_glow_held`).
+The same morning the longwave was found to cool the lower air too much (below), and the author asked for the pair to
+run again with its correction in place, from a design case that lands on the design temperature under it; the lakes
+and the climate's other readers follow whatever that changes in the design case's rain.
+
+### The longwave by height
+
+On 17 October the 45° N ring's heat budget turned to the GCM's own heating by process (`A28_corrected_970_heating`,
+the runner's `--heating-diagnostics`). On its cloud-free columns PlaSim's longwave cooled the lowest 1.8 km 10.6 W/m²
+more than the atmosphere domain's correlated-k model, which follows the line-by-line spectroscopy, and the next layer
+11.4 W/m² more ([the CRM's account](../crm/README.md#what-else-divides-cm1-and-the-gcm-at-the-crossing)). The author
+asked for it to be refitted by height. [plasim_longwave.py](plasim_longwave.py) copies PlaSim's longwave, Sasamori's
+broadband absorptivities with the curved air's escape, and reproduces its own heating on the run's cloud-free 3-day
+means within 0.01 K a day on average. Against correlated-k on about 2,100 of those columns, from every latitude:
+
+| Layer from the ground | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | Outgoing |
+|---|---|---|---|---|---|---|---|---|---|---|
+| PlaSim's error, W/m² | −9.7 | −11.9 | −6.7 | −5.1 | −3.6 | +0.4 | +4.6 | +9.7 | +12.0 | +3.7 |
+
+It cools the lower air too much and the upper air too little, alike at every latitude, and the lowest layer by
+16 W/m² over the sea against 6 over land. Its continuum was fitted to the outgoing longwave alone, and its own settings
+cannot move the cooling: refitting the continuum, with or without a term on the vapour's own pressure, lowers the
+fit's score from 738 to 697, and a power of pressure on the paths to 644. So each layer gets an extra escape to space,
+fitted over land and over sea and scaled with its own temperature to the fourth power, as the curved air's escape is,
+the top layer's carrying the outgoing longwave to correlated-k's
+([longwave_A28_corrected_970_heating.json](../results/gcm/longwave_A28_corrected_970_heating.json)). It runs from
++12 W/m² high up to −6 W/m² in the lowest layer over land and −16 over the sea, and removes the mean error of every
+layer over land and over sea, leaving 1–5 W/m² from column to column and within 2.5 W/m² in every band of latitude.
+The runner's `--longwave-correction` writes it to `lwcorr.dat` for a patch that adds it after the curved air's escape
+(`lw_correction` in radmod.f90).
+
+In the GCM the patch reproduces the copy: a year from the design case with it (`A28_corrected_970_lwcheck`, 2 ranks)
+gives PlaSim's own longwave heating within 0.02 K a day of the copy's on its cloud-free columns, the lowest layer now
+cooling 0.24 K a day where it cooled 0.45. That year also shows what the correction does to the climate. The top two
+levels cool 11 and 7 K, high cloud forms in them, from 20% to 46% of the sky, and its longwave effect rises from 6.6 to
+19.7 W/m²; the lower air warms 2–3.6 K, the ground 3.0 K over the year and 4.8 K by its end, and the top of the air
+gains 19.6 W/m², still warming. The upper levels' extra cooling is what the correlated-k model gives, and PlaSim's
+cloud, fitted to Earth by relative humidity, answers it.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave validate A28_corrected_970_heating --year 0   # a second
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave fit A28_corrected_970_heating --year 0 --every 20   # 2 min
+```
 
 ### The curved air's light
 

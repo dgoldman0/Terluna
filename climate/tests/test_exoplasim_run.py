@@ -118,6 +118,17 @@ class RunnerTests(unittest.TestCase):
         self.assertAlmostEqual(earth['O2'], 0.2314, places=3)
         self.assertAlmostEqual(earth['CO2'] * 1e4, 6.08, places=1)
 
+    def test_the_longwave_correction_follows_the_twilight_and_gas_patches(self):
+        # It extends the module, namelist, broadcast and lwr lines the twilight and gas patches wrote, keeps PlaSim's
+        # lines short, and runs after the curved air's escape.
+        written = ''.join(new for _, new in er.TWILIGHT_EDITS + er.GAS_EDITS)
+        for old, _ in er.LW_CORRECTION_EDITS:
+            self.assertIn(old, written)
+        for _, new in er.LW_CORRECTION_EDITS:
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        added = ''.join(new for _, new in er.LW_CORRECTION_EDITS)
+        self.assertLess(added.index('call twilight_lw'), added.index('call lw_correction'))
+
     def test_the_twilight_table_reads_as_the_patch_expects(self):
         if not er.TWILIGHT_PRODUCT.exists():
             self.skipTest('twilight.json not built')
