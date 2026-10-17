@@ -70,8 +70,8 @@ BOUND = {
     'sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='354361a6e2a8a58459ac1fdc4965ad4c77c012ca',
-        sha256='21aa1c006d7bfae1be3c1b26a42d9ce1f4763887aaa5c7fdd0a17fdaa422816c',
+        blob='c2f7cb5a77b72ab9a205d10ca5fae0758dce3e3a',
+        sha256='c2525042dc842699a53a56d47cf77ce7ca52dd208fb76134241a589cf9604dc4',
         note="The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage "
              'recovery and the natural cycle kept beside them.'),
     'industry_md': dict(
@@ -96,15 +96,15 @@ BOUND = {
     'living_light': dict(
         path='research/studies/living_light/results/living_light.json', schema='terluna.research.living-light/1',
         branch='main', worktree='terluna', commit=None,
-        blob='7cc016895664875758b86115f7fbf820d0f29649',
-        sha256='eec656eabec411d3198f69ae27a41f371ef8a3ffcb19fa6caca957f62a8153e9',
+        blob='2bc02f79bad23782adda579909d71c38123e6c5c',
+        sha256='84d846224c61e2f392245a4a48cadb0a9f25f2727dd15c4bb9189d483e5ce05e',
         note='Land under a light-polluted sky a person by home and lighting design, the metropolis and residents '
              'aloft; lamp hours by home; the dark belt.'),
     'sky_ecology': dict(
         path='research/studies/sky_ecology/results/sky_ecology.json', schema='terluna.research.sky-ecology/1',
         branch='main', worktree='terluna', commit=None,
-        blob='e3707a9243677f650be3e03346c14693a346b22e',
-        sha256='e3966bb9197e626e2761b71a0bcdf4b226b295184d75ed6771bfd2df39742f43',
+        blob='3466cf5122666b6b505de9d78e6524b3d4637409',
+        sha256='51df4eae02040393b997a01f56de7f1fe29bd6232c0571bef5e67dadfebbefef',
         note="Aerophyte cover and the encounter rule for bodies on the same wind tracks."),
     'places': dict(
         path='research/studies/joint_synthesis/results/places.json',

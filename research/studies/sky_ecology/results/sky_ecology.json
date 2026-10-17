@@ -3,7 +3,7 @@
  "producer": {
   "study": "sky_ecology",
   "files": {
-   "research/studies/sky_ecology/run.py": "16623f5fb75e289a6f17354bd764b2cc55417c6723f474d78bb66a20db3a4129",
+   "research/studies/sky_ecology/run.py": "ead37ecb87fbfc14ed50e04d94e28ca4dbf35223e538ada8270e2d855b4a0705",
    "research/studies/sky_ecology/food_web.py": "bbba895cdab7384c309269bf832d1a8d1890db75aa0fa7fcbd441cad4dccd87c",
    "research/studies/sky_ecology/tenants.py": "94d1281e51b3bad08dc002bd1dd2f27c5140f942b3c061786dc778fadbe59a9e",
    "research/studies/sky_ecology/phosphorus.py": "03362cdb663f2640fc38ff2f74466c2f86153b8ae247ce01d08b6ab535fb424e",
@@ -93,8 +93,8 @@
    "research/studies/ways_of_living/results/ways_of_living.json": {
     "branch": "main",
     "commit": null,
-    "blob": "25dca65203a75e3e4110a2e8680b73eb7603d7a1",
-    "sha256": "947d5b7232be81bc6df64f19ba445629381f9366e7cc92418e09997cc068e3b7",
+    "blob": "e6f8e14280fb8207f86941851fefca025e3542a9",
+    "sha256": "5d8693aaf3e44bab15633c11159501926e0124148b95f1fa1204618011d3ce28",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    }
