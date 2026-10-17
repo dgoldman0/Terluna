@@ -67,26 +67,82 @@ def smoothstep(a, b, x):
     return t * t * (3 - 2 * t)
 
 
-def fbm(shape, seed, octaves=7, base=(6, 3), gain=0.55, stretch=1.0):
-    """Fractal value noise in float32, seamless in longitude: each octave is a random lattice enlarged with
-    cubic interpolation. stretch > 1 elongates features east-west."""
-    import cv2
+def table_noise(table, x, y, z):
+    """Value noise in 3D from a 256-cubed table of random values, wrapping, with the quintic fade the page uses."""
+    flat = table.reshape(-1)
+    xi, yi, zi = np.floor(x), np.floor(y), np.floor(z)
+    fade = lambda t: (t * t * t * (t * (t * 6.0 - 15.0) + 10.0)).astype(np.float32)
+    u, v, w = fade(x - xi), fade(y - yi), fade(z - zi)
+    i0, j0, k0 = (xi.astype(np.int64) & 255), (yi.astype(np.int64) & 255), (zi.astype(np.int64) & 255)
+    i0, i1 = i0 << 16, ((i0 + 1) & 255) << 16
+    j0, j1 = j0 << 8, ((j0 + 1) & 255) << 8
+    k1 = (k0 + 1) & 255
+    lerp = lambda a, b, t: a + t * (b - a)
+    near = lerp(lerp(flat[i0 + j0 + k0], flat[i1 + j0 + k0], u), lerp(flat[i0 + j1 + k0], flat[i1 + j1 + k0], u), v)
+    far = lerp(lerp(flat[i0 + j0 + k1], flat[i1 + j0 + k1], u), lerp(flat[i0 + j1 + k1], flat[i1 + j1 + k1], u), v)
+    return lerp(near, far, w)
+
+
+def sphere_fbm(shape, seed, octaves, base, spread, gain=0.55):
+    """Fractal value noise evaluated in 3D at the sphere's points, so that it is round everywhere, the poles
+    included, and seamless in longitude: base cells round the equator at the first octave and twice as many at
+    each next, down to cells two pixels across. Float32 with mean 0.5 and standard deviation `spread`."""
     rng = np.random.default_rng(seed)
-    h, w = shape
-    out = np.zeros(shape, np.float32)
-    amp, total = 1.0, 0.0
-    for o in range(octaves):
-        nx, ny = int(base[0] * 2 ** o), max(2, int(round(base[1] * 2 ** o * stretch)))
-        if nx > w // 2 or ny > h // 2:
-            break
-        lattice = rng.random((ny, nx), dtype=np.float32)
-        pad = np.concatenate([lattice[:, -2:], lattice, lattice[:, :2]], axis=1)
-        big = cv2.resize(pad, (int(round(pad.shape[1] * w / nx)), h), interpolation=cv2.INTER_CUBIC)
-        x0 = int(round(2 * w / nx))
-        out += amp * big[:, x0:x0 + w]
-        total += amp
-        amp *= gain
-    return out / total
+    table = rng.random((256, 256, 256), dtype=np.float32)
+    rows, cols = shape
+    ppd = cols / 360.0
+    freqs = [base / (2.0 * np.pi) * 2 ** o for o in range(octaves)]
+    freqs = [f for f in freqs if np.degrees(1.0 / f) * ppd >= 2.0]
+    shifts = rng.random((len(freqs), 3)) * 256.0
+    amps = gain ** np.arange(len(freqs))
+    lon = np.radians(-180.0 + (np.arange(cols) + 0.5) / ppd)
+    out = np.empty(shape, np.float32)
+    for r0 in range(0, rows, 96):
+        lat = np.radians(90.0 - (np.arange(r0, min(rows, r0 + 96)) + 0.5) / ppd)[:, None]
+        x, y, z = np.cos(lat) * np.cos(lon), np.cos(lat) * np.sin(lon), np.sin(lat) + 0.0 * lon
+        acc = np.zeros(x.shape)
+        for f, (a, b, c), amp in zip(freqs, shifts, amps):
+            acc += amp * table_noise(table, x * f + a, y * f + b, z * f + c)
+        out[r0:r0 + 96] = acc
+    return (0.5 + (out - out.mean()) * (spread / out.std())).astype(np.float32)
+
+
+def sphere_blur(a, sigma, lat):
+    """A Gaussian blur that is round on the ground: sigma rows north-south and, in each row, sigma / cos(latitude)
+    columns east-west, wrapping round, so that it keeps its shape up to the poles. In float64."""
+    from scipy import fft
+    from scipy.ndimage import gaussian_filter1d
+    out = gaussian_filter1d(a.astype(np.float64), sigma, axis=0, mode='nearest')
+    across = sigma / np.maximum(np.cos(np.radians(lat)), 1e-3)
+    response = np.exp(-2.0 * np.pi ** 2 * (across[:, None] * np.fft.rfftfreq(a.shape[1])[None, :]) ** 2)
+    return fft.irfft(fft.rfft(out, axis=1) * response, n=a.shape[1], axis=1)
+
+
+def sphere_laplacian(a, lat):
+    """The Laplacian on the ground in pixel units, from a field blurred with sphere_blur: the north-south second
+    difference plus the east-west one scaled by 1 / cos^2(latitude) for the columns' closer spacing."""
+    c2 = np.maximum(np.cos(np.radians(lat)), 1e-3)[:, None] ** 2
+    north, south = np.vstack([a[:1], a[:-1]]), np.vstack([a[1:], a[-1:]])
+    return (north + south - 2.0 * a) + (np.roll(a, 1, axis=1) + np.roll(a, -1, axis=1) - 2.0 * a) / c2
+
+
+def shore_distance_km(water, ppd):
+    """Distance on the ground to the nearest water, in km: the nearest 0.25-degree cell holding any water, found
+    among the cells' points on the sphere (so that it is round up to the poles) and spread back to the grid."""
+    import cv2
+    from scipy.spatial import cKDTree
+    k = max(1, ppd // 4)
+    rows, cols = water.shape[0] // k, water.shape[1] // k
+    wet = water[:rows * k, :cols * k].reshape(rows, k, cols, k).any(axis=(1, 3))
+    lat = np.radians(90.0 - (np.arange(rows) + 0.5) * k / ppd)[:, None]
+    lon = np.radians(-180.0 + (np.arange(cols) + 0.5) * k / ppd)[None, :]
+    points = np.stack([np.cos(lat) * np.cos(lon), np.cos(lat) * np.sin(lon), np.sin(lat) + 0.0 * lon], axis=-1)
+    chord, _ = cKDTree(points[wet]).query(points[~wet])
+    dist = np.zeros((rows, cols), np.float32)
+    dist[~wet] = 2.0 * np.arcsin(np.minimum(chord / 2.0, 1.0)) * MOON_KM
+    pad = np.concatenate([dist[:, -1:], dist, dist[:, :1]], axis=1)
+    big = cv2.resize(pad, (pad.shape[1] * k, water.shape[0]), interpolation=cv2.INTER_LINEAR)
+    return big[:, k:k + water.shape[1]]
 
 
 def regrid(field, lat_src, lon_src, lat_dst, lon_dst):
@@ -105,17 +161,17 @@ def regrid(field, lat_src, lon_src, lat_dst, lon_dst):
     return a * (1 - ty) + b * ty
 
 
-def wrapped(filter_, a, pad=32):
-    """Apply an image filter as if longitude wrapped around: pad east and west from the far side, then crop."""
-    out = filter_(np.concatenate([a[:, -pad:], a, a[:, :pad]], axis=1))
-    return out[:, pad:pad + a.shape[1]]
-
-
-def gradients(a, dy):
-    """North-south and east-west differences per metre of arc (east-west before the cos(latitude) factor),
-    central and wrapping in longitude."""
+def gradients(a, dy, lat):
+    """North-south and east-west slopes per metre of ground, central and wrapping in longitude. Each east-west
+    difference spans about the same ground as a north-south one, two rows: towards the poles, where the grid's
+    columns crowd together, it reaches across as many columns as make that up (at most an eighth of the way
+    round), so that noise between near neighbours does not swell into spokes."""
     gy = np.gradient(a, axis=0) / dy
-    gx = (np.roll(a, -1, axis=1) - np.roll(a, 1, axis=1)) / (2.0 * dy)
+    cos = np.maximum(np.cos(np.radians(lat)), 1e-6)
+    gx = np.empty(a.shape, np.float32)
+    for i, (row, c) in enumerate(zip(a, cos)):
+        m = int(np.clip(np.round(1.0 / c), 1, a.shape[1] // 8))
+        gx[i] = (np.roll(row, -m) - np.roll(row, m)) / (2.0 * m * dy * c)
     return gy, gx
 
 
@@ -151,7 +207,6 @@ def drainage_grids(shape, path=DRAINAGE):
 def surface_colour(height, level, clim, ppd, drainage=None):
     """Guesstimated surface reflectance (linear sRGB, float32), the water mask (sea and lakes) and the share
     of each cell that river channels cover, 180 W at the left edge."""
-    import cv2
     height = height.astype(np.float32)
     rows, cols = height.shape
     lat = 90.0 - (np.arange(rows) + 0.5) / ppd
@@ -171,26 +226,23 @@ def surface_colour(height, level, clim, ppd, drainage=None):
     rain = climate_field(clim, 'pr_mm_day', height.shape)
     wet = rain
     wet += 1.5 * smoothstep(0.02, 0.2, climate_field(clim, 'mrso_m', height.shape))
-    pad = cols // 8
-    tiled = np.concatenate([water[:, -pad:], water, water[:, :pad]], axis=1)
-    shore_km = cv2.distanceTransform((~tiled).astype(np.uint8), cv2.DIST_L2, 5)[:, pad:pad + cols] * km
-    wet += 1.4 * np.exp(-shore_km / 120.0)
-    del tiled, shore_km
+    wet += 1.4 * np.exp(-shore_distance_km(water, ppd) / 120.0)
     land_height = np.maximum(height, level)
     wet += 0.8 * np.exp(-(land_height - level) / 400.0)
-    curvature = wrapped(lambda a: cv2.Laplacian(cv2.GaussianBlur(a, (0, 0), 3.0), cv2.CV_32F, ksize=3), land_height)
+    curvature = sphere_laplacian(sphere_blur(land_height, 3.0, lat), lat).astype(np.float32)
     wet += 0.6 * np.clip(curvature / (curvature[~water].std() + 1e-6), -2.5, 2.5)   # wetter in hollows
     del curvature
-    wet += 2.5 * (fbm(height.shape, 11, octaves=9, base=(24, 12)) - 0.5)
+    # The noise keeps the spread (0.146) the earlier grid noise had, so that the cover keeps its balance.
+    wet += 2.5 * (sphere_fbm(height.shape, 11, octaves=9, base=24, spread=0.146) - 0.5)
     if discharge is not None:                        # floodplains: wetter ground along larger rivers
-        wet += 0.9 * np.minimum(wrapped(lambda a: cv2.GaussianBlur(a, (0, 0), 2.5), np.log10(1.0 + discharge).astype(np.float32)), 2.0)
+        wet += 0.9 * np.minimum(sphere_blur(np.log10(1.0 + discharge), 2.5, lat).astype(np.float32), 2.0)
     veg = smoothstep(0.4, 3.2, wet)
     dense = smoothstep(3.2, 5.5, wet)
     del wet
     basaltic = smoothstep(level + 900.0, level + 150.0, height) * smoothstep(
-        0.35, 0.65, fbm(height.shape, 17, octaves=8, base=(18, 9)))
-    gy, gx = gradients(land_height, km * 1000.0)
-    rocky = 0.5 * smoothstep(0.35, 0.7, np.hypot(gx / np.maximum(np.cos(np.radians(lat)), 0.05)[:, None], gy))
+        0.35, 0.65, sphere_fbm(height.shape, 17, octaves=8, base=18, spread=0.127))
+    gy, gx = gradients(land_height, km * 1000.0, lat)
+    rocky = 0.5 * smoothstep(0.35, 0.7, np.hypot(gx, gy))
     del gy, gx, land_height
     grass = smoothstep(0.0, 0.35, veg)
     wooded = smoothstep(0.35, 1.0, veg)
@@ -211,14 +263,14 @@ def surface_colour(height, level, clim, ppd, drainage=None):
     return colour, water, river, surface_level
 
 
-def relief_normals(height, level, ppd):
-    """Tangent-space normals of the surface with water flat at its level, relief baked at NORMAL_STRENGTH."""
-    surf = np.maximum(height, level).astype(np.float32)
+def relief_normals(height, ppd):
+    """Tangent-space normals of the ground, sea floors and lake beds included, relief baked at NORMAL_STRENGTH.
+    The globe's appearance mode flattens them under water, and its map mode under the sea."""
+    surf = height.astype(np.float32)
     lat = 90.0 - (np.arange(surf.shape[0]) + 0.5) / ppd
     dy = MOON_KM * 1000.0 * np.radians(1.0 / ppd)
-    gy, gx = gradients(surf, dy)
-    n = np.stack([-(gx / np.maximum(np.cos(np.radians(lat)), 1e-3)[:, None]) * NORMAL_STRENGTH,
-                  gy * NORMAL_STRENGTH, np.ones_like(surf)], axis=-1)
+    gy, gx = gradients(surf, dy, lat)
+    n = np.stack([-gx * NORMAL_STRENGTH, gy * NORMAL_STRENGTH, np.ones_like(surf)], axis=-1)
     n /= np.linalg.norm(n, axis=-1, keepdims=True)
     return np.round((n + 1) / 2 * 255).astype(np.uint8)
 
@@ -367,13 +419,13 @@ def build(height, level, ppd):
     clim['deck_sigma'] = clim_meta['deck_sigma']
     h = np.roll(height, height.shape[1] // 2, axis=1)
     drainage = drainage_grids(h.shape)
-    colour, water, river, surface_level = surface_colour(h, level, clim, ppd, drainage)
+    colour, water, river, _ = surface_colour(h, level, clim, ppd, drainage)
     albedo = np.empty(colour.shape, np.uint8)
     for c in range(3):
         albedo[..., c] = np.round(srgb_encode(colour[..., c]) * 255)
     del colour
-    half = block_mean(np.maximum(h, surface_level), 2)
-    normal = relief_normals(half, level, ppd // 2)
+    half = block_mean(h, 2)
+    normal = relief_normals(half, ppd // 2)
     wet_share = water.astype(np.float32) if river is None else np.maximum(water.astype(np.float32), river)
     water_mask = np.round(wet_share * 255).astype(np.uint8)
     del half, wet_share

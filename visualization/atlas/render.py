@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Map sheets and a 3D globe of the Open Moon atlas: near and far side, a global sheet, the polar regions,
-and an interactive globe page with an appearance mode and a map mode.
+and an interactive globe page with an appearance mode and a topography mode.
 
     python visualization/atlas/render.py      # writes visualization/atlas/out/ (kept out of Git)
 
@@ -9,7 +9,8 @@ geography/products) and the conservation study's register and targets. Water is
 drawn in depth bands of one blue hue, land as neutral shaded relief. The globe's
 appearance mode also reads the illumination domain's engine atmosphere and sky atlas,
 the climate domain's GCM climatology and the geography domain's drainage product
-(see appearance.py). The manifest records
+(see appearance.py). The topography, as a mode and as an overlay on the appearance, reads
+one relief texture, the atlas grid's heights relative to sea level in whole metres. The manifest records
 product hashes and faithfulness checks: the water share of the rendered near-side
 disk against the product's Earth-facing disk share, and the water share of each
 globe texture against the product's.
@@ -69,7 +70,13 @@ POLAR_TARGET_OFFSETS = {'Shackleton': (6, -12), 'de Gerlache': (-100, 4), 'Sverd
                         'Shoemaker': (10, 10), 'Faustini': (8, -13), 'Nobile': (6, -4), 'Cabeus': (-112, -12),
                         'Hermite': (-42, 4), 'Whipple': (6, 4), 'Peary': (6, -4), 'Rozhdestvenskiy': (6, 4)}
 DISPLAY = {'Rumker': 'Rümker', 'Karman': 'Kármán', 'Schrodinger': 'Schrödinger'}
-LAND_PLACEHOLDER = '#b9b4aa'   # neutral land until the biosphere and climate supply surface cover
+# Topography: metres below and above sea level, interpolated in sRGB; the two stops at 0 m make the coast an edge.
+# Below sea level each of the sheets' depth bands keeps its colour at the band's middle depth (the last band's at
+# 5.5 km), between a lighter shore and darker deepest water, so that the globe and the sheets read alike.
+BAND_MIDDLES = [125, 375, 750, 1500, 3000, 5500]
+TOPO = ([(-7000, '#0a2a5a')] + [(-d, col) for d, (_, col) in reversed(list(zip(BAND_MIDDLES, BANDS)))]
+        + [(0, '#d6e8fb'), (0, '#4e8f54'), (300, '#78a85c'), (800, '#a9bd6a'), (1500, '#d5cf86'), (2500, '#d9b47a'),
+           (3500, '#c5916a'), (5000, '#a87664'), (7000, '#9a8278'), (9000, '#c4bcb5'), (12000, '#f4f1ed')])
 SURFACE_PPD = 16               # the appearance mode's surface and water mask; relief at half this
 
 
@@ -182,27 +189,35 @@ def jpeg_data_uri(array, quality=88):
     return 'data:image/jpeg;base64,' + base64.b64encode(buffer.getvalue()).decode('ascii')
 
 
-def globe_textures(height, level, lat, ppd):
-    """Map-mode textures, 180 W at the left edge: colour by depth band with neutral land and the
-    sea-clamped surface as 8-bit displacement."""
-    h = np.roll(height, height.shape[1] // 2, axis=1)
-    depth = level - h
-    water = depth > 0
-    colour = np.empty(h.shape + (3,), dtype=np.uint8)
-    colour[:] = np.round(hexrgb(LAND_PLACEHOLDER) * 255).astype(np.uint8)
-    lo = 0.0
-    for hi, col in BANDS:
-        colour[water & (depth >= lo) & (depth < hi)] = np.round(hexrgb(col) * 255).astype(np.uint8)
-        lo = hi
-    surf = np.maximum(h, level)
-    top = float(surf.max())
-    displacement = np.round((surf - level) / (top - level) * 255).astype(np.uint8)
-    return colour, displacement, (top - level) / 1000.0, water
+def relief_texture(height, level):
+    """The map and topography modes' texture, 180 W at the left edge: the height relative to sea level in whole
+    metres above the lowest cell, high byte in red and low byte in green. The page adds back half a metre, so
+    that every cell stays on its side of sea level. Returns the texture, the lowest whole metre and the decoded
+    heights."""
+    h = np.roll(height, height.shape[1] // 2, axis=1) - level
+    low = int(np.floor(h.min()))
+    v = np.floor(h - low).astype(np.int64)
+    if v.max() > 0xFFFF:
+        raise ValueError(f'relief of {v.max()} m does not fit 16 bits')
+    rgb = np.zeros(h.shape + (3,), np.uint8)
+    rgb[..., 0], rgb[..., 1] = v >> 8, v & 0xFF
+    return rgb, low, decode_relief(rgb, low)
 
 
-def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
+def decode_relief(rgb, low):
+    """Heights relative to sea level from the relief texture, as the page reads them."""
+    return rgb[..., 0].astype(np.int64) * 256 + rgb[..., 1] + low + 0.5
+
+
+def write_globe(atlas, height, ppd, sites, targets, hashes):
     level = atlas['sea_level_m']
-    colour, displacement, relief_km, water = globe_textures(height, level, lat, ppd)
+    relief, low, decoded = relief_texture(height, level)
+    water = decoded < 0
+    exact = np.roll(height, height.shape[1] // 2, axis=1) - level
+    relief_error = float(np.abs(decoded - exact).max())
+    relief_off_side = int(((decoded < 0) != (exact < 0)).sum())
+    highest, lowest = round(float(exact.max())), round(float(exact.min()))
+    del exact
     fine, _, _ = tp.height_above_geoid(SURFACE_PPD, atlas['grid']['geoid_degree'])
     looks, params, sources, masks = appearance.build(fine.astype(np.float32), level, SURFACE_PPD)
     del fine
@@ -217,9 +232,9 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
     comparison = next(r for r in atlas['share_comparison'] if abs(r['share'] - atlas['share']) < 1e-9)
     minus = lambda v: f'{v:,.0f}'.replace('-', '\u2212')
     data = dict(
-        share=atlas['share'], levelText=minus(level) + ' m', landColour=LAND_PLACEHOLDER,
-        heightRangeKm=relief_km, normalStrength=appearance.NORMAL_STRENGTH,
-        bands=[[label, col] for (_, col), label in zip(BANDS, BAND_LABELS)],
+        share=atlas['share'], levelText=minus(level) + ' m', normalStrength=appearance.NORMAL_STRENGTH,
+        relief=dict(low=low, highest=highest, lowest=lowest),
+        topo=[[h, col] for h, col in TOPO],
         figures=[['Water', f"{atlas['share']:.0%} of the surface"], ['Sea level (geoid)', minus(level) + ' m'],
                  ['Near side under water', f"{comparison['near_side_water']:.0%}"],
                  ['Main land mass', f"{atlas['main_land_share']:.1%}"], ['Islands', f"{atlas['island_share']:.1%}"],
@@ -230,8 +245,7 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
                      f"{drained['lakes']['bodies']:,} lakes"],
                     ['Water in those lakes', f"{drained['lakes']['volume_km3'] / 1e6:.1f} million km\u00b3"],
                     ['Rivers into the seas', f"{drained['rivers']['discharge_to_sea_m3s']:,} m\u00b3/s"]] if drained else []),
-        textures=dict(colour=png_data_uri(colour), height=png_data_uri(displacement),
-                      normal=jpeg_data_uri(looks['normal']), albedo=jpeg_data_uri(looks['albedo']),
+        textures=dict(relief=png_data_uri(relief), normal=jpeg_data_uri(looks['normal']), albedo=jpeg_data_uri(looks['albedo']),
                       water=png_data_uri(looks['water']), cloudSun=png_data_uri(looks['cloud_sun']),
                       cloudGeo=png_data_uri(looks['cloud_geo'])),
         appearance=params,
@@ -265,8 +279,10 @@ def write_globe(atlas, height, lat, ppd, sites, targets, hashes):
     products = {str(Path(v).relative_to(ROOT)): digest(v) for v in sources.values()}
     lakes = drained['lakes']['area_share'] if drained else 0.0
     passed = (all(abs(v - atlas['water_share']) <= 0.002 for v in (texture_water, surface_water))
-              and abs(lake_water - lakes) <= 0.002 and 0.0 <= mask_water - atlas['water_share'] - lakes <= 0.004)
-    return dict(map_texture_water_share=round(texture_water, 4), surface_sea_share=round(surface_water, 4),
+              and abs(lake_water - lakes) <= 0.002 and 0.0 <= mask_water - atlas['water_share'] - lakes <= 0.004
+              and relief_error <= 0.5 and relief_off_side == 0)
+    return dict(relief_max_error_m=round(relief_error, 3), relief_cells_off_side=relief_off_side,
+                map_texture_water_share=round(texture_water, 4), surface_sea_share=round(surface_water, 4),
                 surface_lake_share=round(lake_water, 4), product_water_share=atlas['water_share'],
                 product_lake_share=lakes, water_mask_share_with_rivers=round(mask_water, 4), tolerance=0.002,
                 passed=passed, page_bytes=len(page.encode()), appearance_products=products)
@@ -398,7 +414,7 @@ def main():
 
     product_disk = next(r['earth_facing_disk_water'] for r in atlas['share_comparison'] if abs(r['share'] - atlas['share']) < 1e-9)
     products = {str(p.relative_to(ROOT)): digest(p) for p in (atlas_path, grid_path, reg_path, tgt_path)}
-    globe = write_globe(atlas, height, lat, ppd, sites, targets,
+    globe = write_globe(atlas, height, ppd, sites, targets,
                         dict(atlas_json=products[str(atlas_path.relative_to(ROOT))],
                              atlas_grid=products[str(grid_path.relative_to(ROOT))],
                              register=products[str(reg_path.relative_to(ROOT))]))
