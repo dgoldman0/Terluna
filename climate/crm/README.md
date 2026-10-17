@@ -33,7 +33,14 @@ its source for every build and compiles it outside the repository
   (B + 1)/3, and the Best number is proportional to g, so at a fixed size
   V ∝ g^((B+1)/3). Cloud droplets (Stokes law, B = 2) fall 6 times slower,
   raindrops (B = 0.8) 2.9 times, graupel (B = 0.37) 2.3 times; the caps on mean
-  fall speeds scale alike.
+  fall speeds scale alike. The single-drop solver of
+  [atmosphere/rain](../../atmosphere/rain/README.md#the-check-on-cm1s-fall-speeds)
+  checks the rain's factor (17 October 2026): with gravity alone changed in the
+  Moon's air, it slows a 0.2 mm drop 4.4 times and a 6 mm drop 1.9 times, and
+  meets the 2.9 near 1.4 mm. So the drizzle here falls too fast and the large
+  drops too slowly, and per metre of fall the drizzle loses about a third less
+  water than it would and the millimetre drops about a tenth more. CM1 was not
+  rerun.
 - **The Sun keeps the lunar day**, 29.53 Earth days, at the chosen 5% dimmer
   shield's 1,173.5 W/m² above the air (the GCM run `A28_dim5`). On a domain that wraps the Moon the hour angle
   grows eastward along x, so the terminator crosses the domain once a lunar day.

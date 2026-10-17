@@ -1,0 +1,123 @@
+{
+ "source_admission": "The equations and data behind atmosphere/rain, with how far each was read. The solver's equations are Loftus and Wordsworth's (2021) as their rainprops code implements them; that code is vendored unmodified in vendor/rainprops (MIT licence, commit e2df9c2, each file pinned in PROVENANCE.json), and the port was checked against it and against the recovered solver of 11 October 2026. The rain work of 11 October read Loftus and Wordsworth in full and the drop-size sources as each access entry states; the port of 17 October read the vendored code and none of the papers again. The only outside data committed is the Gunn-Kinzer transcription in the vendored subset.",
+ "sources": [
+  {
+   "key": "loftus_wordsworth2021",
+   "citation": "Loftus K, Wordsworth RD 2021, The physics of falling raindrops in diverse planetary atmospheres, Journal of Geophysical Research: Planets 126, e2020JE006653",
+   "doi_or_url": "https://doi.org/10.1029/2020JE006653 (arXiv:2102.09570)",
+   "use": "drops.py: the equilibrium shape (eq. 2), drag and terminal speed (eqs. 3-8), evaporation and the drop's heat balance (eqs. 10-11), ventilation (eqs. 12-14) and the stability screen (eq. 22), with its g^(-1/2) scaling",
+   "access": "full text read in the rain work of 11 October 2026; the port follows the equations as rainprops codes them"
+  },
+  {
+   "key": "rainprops",
+   "citation": "Loftus K 2021, rainprops: raindrop properties in planetary atmospheres, code, commit e2df9c2102112526f05109051dfffeeb5c318967, MIT licence",
+   "doi_or_url": "https://github.com/kaitlyn-loftus/rainprops",
+   "use": "drops.py adapts src/drop_prop.py (shape, drag, ventilation, stability) and src/planet.py (the gases' transport properties and heat capacities, from its data/gas_properties.csv); the test of Earth's fall speeds reads data/gunn1949_r_m_v_mpers.csv",
+   "access": "vendored unmodified in vendor/rainprops with its licence and file hashes; read for the port"
+  },
+  {
+   "key": "gunn_kinzer1949",
+   "citation": "Gunn R, Kinzer GD 1949, The terminal velocity of fall for water droplets in stagnant air, Journal of Meteorology 6, 243-248",
+   "doi_or_url": "https://doi.org/10.1175/1520-0469(1949)006<0243:TTVOFF>2.0.CO;2",
+   "use": "the 34 measured fall speeds from 0.1 to 5.8 mm that test the solver on Earth, in air at 20 C, 1013 hPa and 50% relative humidity as Loftus and Wordsworth's validation sets it",
+   "values_used": {
+    "points": 34,
+    "diameter_range_mm": [
+     0.1,
+     5.8
+    ]
+   },
+   "access": "the rainprops transcription (radius in m, speed in m/s); the paper itself not read"
+  },
+  {
+   "key": "green1975",
+   "citation": "Green AW 1975, An approximation for the shapes of large raindrops, Journal of Applied Meteorology 14, 1578-1583",
+   "doi_or_url": "https://doi.org/10.1175/1520-0450(1975)014<1578:AAFTSO>2.0.CO;2",
+   "use": "the equilibrium oblate shape, through Loftus and Wordsworth's eq. 2",
+   "access": "through Loftus and Wordsworth and rainprops"
+  },
+  {
+   "key": "clift_gauvin1970",
+   "citation": "Clift R, Gauvin WH 1970, Proceedings of Chemeca '70; as tabulated in Clift R, Grace JR, Weber ME, Bubbles, Drops, and Particles (Academic Press 1978; Dover 2005), table 5.1",
+   "doi_or_url": "",
+   "use": "the sphere's drag coefficient, 24/Re (1 + 0.15 Re^0.687) + 0.42 / (1 + 4.25e4 Re^-1.16)",
+   "access": "through Loftus and Wordsworth and rainprops"
+  },
+  {
+   "key": "loth2008",
+   "citation": "Loth E 2008, Drag of non-spherical solid particles of regular and irregular shape, Powder Technology 182, 342-353",
+   "doi_or_url": "https://doi.org/10.1016/j.powtec.2007.06.001",
+   "use": "the oblate spheroid's drag factor from its surface area (eqs. 21a and 25)",
+   "access": "through Loftus and Wordsworth and rainprops"
+  },
+  {
+   "key": "pruppacher_klett2010",
+   "citation": "Pruppacher HR, Klett JD 2010, Microphysics of Clouds and Precipitation, 2nd edition, Springer",
+   "doi_or_url": "",
+   "use": "the ventilation factors for vapour and heat (eqs. 13-57 and 13-58), measured below a Reynolds number of about 2,600",
+   "access": "through Loftus and Wordsworth and rainprops"
+  },
+  {
+   "key": "reid1977",
+   "citation": "Reid RC, Prausnitz JM, Sherwood TK 1977, The Properties of Gases and Liquids, 3rd edition, McGraw-Hill",
+   "doi_or_url": "",
+   "use": "Chapman-Enskog viscosity with the Neufeld collision integrals, Eucken's conductivity, Wilke's mixing rule and the vapour's binary diffusion coefficients",
+   "access": "through rainprops, which cites its equations 9-3.9, 9-4.3, 9-5.2, 10-3.3, 10-6.1, 10-6.4 and 11-3.2"
+  },
+  {
+   "key": "borgnakke_sonntag2009",
+   "citation": "Borgnakke C, Sonntag RE 2009, Fundamentals of Thermodynamics, 7th edition, Wiley, table A.6",
+   "doi_or_url": "",
+   "use": "the gases' heat-capacity polynomials",
+   "access": "through rainprops' data/gas_properties.csv"
+  },
+  {
+   "key": "wagner_pruss2002",
+   "citation": "Wagner W, Pruss A 2002, The IAPWS formulation 1995 for the thermodynamic properties of ordinary water substance for general and scientific use, Journal of Physical and Chemical Reference Data 31, 387-535",
+   "doi_or_url": "https://doi.org/10.1063/1.1461829",
+   "use": "the saturation pressure over liquid water, eq. 2.5, from atmosphere/radiative_convective/thermodynamics.py; the latent heat's linear fit agrees with IAPWS-95's enthalpy of vaporization within 0.01% from 0 to 40 C",
+   "access": "through the repository's thermodynamics module; the latent heat set beside IAPWS-95's enthalpy of vaporization as steam tables give it (2500.9 kJ/kg at 0.01 C, 2453.5 at 20 C, 2406.0 at 40 C), known from the literature and not re-read"
+  },
+  {
+   "key": "iapws_surface_tension",
+   "citation": "IAPWS 1994 (revised 2014), Revised Release on Surface Tension of Ordinary Water Substance; Vargaftik NB, Volkov BN, Voljak LD 1983, International tables of the surface tension of water, Journal of Physical and Chemical Reference Data 12, 817-820",
+   "doi_or_url": "https://doi.org/10.1063/1.555688",
+   "use": "surface tension 235.8 mN/m tau^1.256 (1 - 0.625 tau), tau = 1 - T/647.096 K",
+   "values_used": {
+    "B_mN_m": 235.8,
+    "b": -0.625,
+    "mu": 1.256,
+    "critical_temperature_k": 647.096
+   },
+   "access": "the release's coefficients as known from the literature; not re-read for the port. rainprops carries 235 mN/m and 647.15 K"
+  },
+  {
+   "key": "cm1_morrison",
+   "citation": "Bryan GH, CM1 release 22.0, src/morrison.F: the Morrison double-moment microphysics (Morrison H, Thompson G, Tatarskii V 2009, Monthly Weather Review 137, 991-1007)",
+   "doi_or_url": "https://www2.mmm.ucar.edu/people/bryan/cm1/",
+   "use": "the rain's fall-speed law V = 841.99667 (rhosu/rho)^0.54 D^0.8 and its 9.1 m/s cap on mean fall speeds, which the CM1 check compares, recorded in shared/constants.json (model_closures.cm1_r22_morrison_rain) with the lines and the file's SHA-256",
+   "access": "read in the pinned CM1 source on the research drive; the paper not read"
+  },
+  {
+   "key": "ulbrich1983",
+   "citation": "Ulbrich CW 1983, Natural variations in the analytical form of the raindrop size distribution, Journal of Climate and Applied Meteorology 22, 1764-1775",
+   "doi_or_url": "https://doi.org/10.1175/1520-0450(1983)022<1764:NVITAF>2.0.CO;2",
+   "use": "the three-parameter gamma form of the bounded cloud-base spectra, whose parameters are scenario choices",
+   "access": "abstract, in the rain work of 11 October 2026"
+  },
+  {
+   "key": "low_list1982",
+   "citation": "Low TB, List R 1982, Collision, coalescence and breakup of raindrops. Part I, Journal of the Atmospheric Sciences 39, 1591-1606",
+   "doi_or_url": "https://doi.org/10.1175/1520-0469(1982)039<1591:CCABOR>2.0.CO;2",
+   "use": "the distinction between collision, coalescence and breakup that the encounter diagnostic leaves unresolved",
+   "access": "abstract, in the rain work of 11 October 2026"
+  },
+  {
+   "key": "hu_srivastava1995",
+   "citation": "Hu Z, Srivastava RC 1995, Evolution of raindrop size distribution by coalescence, breakup, and evaporation: theory and observations, Journal of the Atmospheric Sciences 52, 1761-1783",
+   "doi_or_url": "https://doi.org/10.1175/1520-0469(1995)052<1761:EORSDB>2.0.CO;2",
+   "use": "heavy rain approaching a collisional equilibrium of sizes, the process the independent drops leave out",
+   "access": "abstract, in the rain work of 11 October 2026"
+  }
+ ]
+}

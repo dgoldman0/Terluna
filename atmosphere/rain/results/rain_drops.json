@@ -1,0 +1,2064 @@
+{
+ "schema": "terluna.atmosphere.rain-drops/1",
+ "evidence": "A runnable calculation of independent single drops: the solver reproduces 34 Gunn-Kinzer fall speeds on Earth to 0.20 m/s (root mean square) and 7.4% at most, and its lunar values are that physics carried to lunar gravity and air. The air at 2 m pairs each target's median land temperature with its median land wet-bulb temperature. Survival holds the parcel column below the cloud fixed and the drops independent, so it filters sizes under that air; the spectra are bounded scenario boundary conditions. The CM1 check compares fall-speed laws; CM1 was not rerun.",
+ "reading_rule": "Diameters are volume-equivalent, in mm. fall_speed gives the still-air terminal speed at 2 m in m/s, null above the stability screen. survival starts each drop at the cloud base and gives what reaches the ground; its rain section gives the share of the water leaving the cloud base that reaches the ground for each spectrum, the same at any rain rate, and the encounters along the central spectrum's paths at 5 mm/h, which grow in proportion to it. cm1_check gives, by diameter, the solver's ratio of Earth-gravity to lunar-gravity speed in the Moon's air beside CM1's single factor, CM1's whole lunar law in that air over the solver's speed, and the water lost per metre of fall at CM1's speed over that at the solver's, with the same ventilation. Interpolate in log diameter.",
+ "assumptions": [
+  "Each target's air at 2 m is its median land temperature at 2 m with its median land wet-bulb temperature at 2 m, paired; the specific humidity follows from the targets' psychrometric relation at 1.2 atm, where the GCM computed it at each cell's own surface pressure, which moves the vapour pressure by 0.6%.",
+  "The Moon's air is at 1.2 atm, the design pressure at the water level; the land's mean surface pressure in the GCM is 1.16 atm, and pressure_sensitivity gives its effect on the fall speeds.",
+  "The column below the cloud cools at the dry adiabat g/cp and holds the 2 m vapour mole fraction, so its cloud base is the parcel saturation height; the rain neither cools nor moistens it, and the air is still.",
+  "Earth's air carries the same temperature and relative humidity at 2 m as the Moon's, at 1 atm.",
+  "Drops are pure liquid water in their equilibrium shape, each falling independently of the others."
+ ],
+ "targets": {
+  "hot_world": {
+   "name_in_targets": "no further dimming",
+   "ground_k": 306.5234791232695,
+   "air_2m_k": 306.68780517578125,
+   "wet_bulb_2m_k": 300.0562988302077,
+   "specific_humidity": 0.015531535760933931,
+   "vapour_pressure_pa": 3007.751070259864,
+   "relative_humidity": 0.5795886253066064
+  },
+  "resort": {
+   "name_in_targets": "300 K",
+   "ground_k": 300.0,
+   "air_2m_k": 299.2451223242583,
+   "wet_bulb_2m_k": 294.26339837558544,
+   "specific_humidity": 0.010822753125721257,
+   "vapour_pressure_pa": 2101.8327225978346,
+   "relative_humidity": 0.6213348361470784
+  },
+  "lock": {
+   "name_in_targets": "295 K",
+   "ground_k": 295.0,
+   "air_2m_k": 293.5405874350651,
+   "wet_bulb_2m_k": 289.82335929125793,
+   "specific_humidity": 0.008219556020863108,
+   "vapour_pressure_pa": 1598.79161341318,
+   "relative_humidity": 0.6671645117144308
+  }
+ },
+ "diameters_mm": [
+  0.1,
+  0.2,
+  0.3,
+  0.5,
+  0.7,
+  1.0,
+  1.5,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  8.0,
+  10.0
+ ],
+ "cloud_base_diameters_mm": [
+  0.2,
+  0.3,
+  0.5,
+  0.7,
+  1.0,
+  1.5,
+  2.0,
+  3.0,
+  4.0,
+  5.0,
+  6.0
+ ],
+ "airs": {
+  "hot_world": {
+   "moon": {
+    "gravity_m_s2": 1.6242188765608128,
+    "pressure_pa": 121590.0,
+    "temperature_k": 306.68780517578125,
+    "relative_humidity": 0.5795886253066064,
+    "dry_fractions": {
+     "N2": 0.8153104493254115,
+     "O2": 0.1745785015215067,
+     "Ar": 0.009711049153081852,
+     "CO2": 0.00039999999999999996
+    },
+    "dry_molar_mass_kg_mol": 0.028831461087186188,
+    "density_kg_m3": 1.3620238625688845,
+    "viscosity_pa_s": 1.830285371936294e-05,
+    "vapour_diffusivity_m2_s": 1.8749235113949397e-05
+   },
+   "earth": {
+    "gravity_m_s2": 9.80665,
+    "pressure_pa": 101325.0,
+    "temperature_k": 306.68780517578125,
+    "relative_humidity": 0.5795886253066064,
+    "dry_fractions": {
+     "N2": 0.7808,
+     "O2": 0.2095,
+     "Ar": 0.0093,
+     "CO2": 0.0004
+    },
+    "dry_molar_mass_kg_mol": 0.02896573152,
+    "density_kg_m3": 1.1380705545490912,
+    "viscosity_pa_s": 1.836558910608306e-05,
+    "vapour_diffusivity_m2_s": 2.2475480441645514e-05
+   },
+   "moon_air_earth_gravity": {
+    "gravity_m_s2": 9.80665,
+    "pressure_pa": 121590.0,
+    "temperature_k": 306.68780517578125,
+    "relative_humidity": 0.5795886253066064,
+    "dry_fractions": {
+     "N2": 0.8153104493254115,
+     "O2": 0.1745785015215067,
+     "Ar": 0.009711049153081852,
+     "CO2": 0.00039999999999999996
+    },
+    "dry_molar_mass_kg_mol": 0.028831461087186188,
+    "density_kg_m3": 1.3620238625688845,
+    "viscosity_pa_s": 1.830285371936294e-05,
+    "vapour_diffusivity_m2_s": 1.8749235113949397e-05
+   }
+  },
+  "resort": {
+   "moon": {
+    "gravity_m_s2": 1.6242188765608128,
+    "pressure_pa": 121590.0,
+    "temperature_k": 299.2451223242583,
+    "relative_humidity": 0.6213348361470784,
+    "dry_fractions": {
+     "N2": 0.8153104493254115,
+     "O2": 0.1745785015215067,
+     "Ar": 0.009711049153081852,
+     "CO2": 0.00039999999999999996
+    },
+    "dry_molar_mass_kg_mol": 0.028831461087186188,
+    "density_kg_m3": 1.3998377105509974,
+    "viscosity_pa_s": 1.8032909437647778e-05,
+    "vapour_diffusivity_m2_s": 1.7887067661022117e-05
+   },
+   "earth": {
+    "gravity_m_s2": 9.80665,
+    "pressure_pa": 101325.0,
+    "temperature_k": 299.2451223242583,
+    "relative_humidity": 0.6213348361470784,
+    "dry_fractions": {
+     "N2": 0.7808,
+     "O2": 0.2095,
+     "Ar": 0.0093,
+     "CO2": 0.0004
+    },
+    "dry_molar_mass_kg_mol": 0.02896573152,
+    "density_kg_m3": 1.170363230664689,
+    "viscosity_pa_s": 1.8105135437756283e-05,
+    "vapour_diffusivity_m2_s": 2.1445126041634377e-05
+   },
+   "moon_air_earth_gravity": {
+    "gravity_m_s2": 9.80665,
+    "pressure_pa": 121590.0,
+    "temperature_k": 299.2451223242583,
+    "relative_humidity": 0.6213348361470784,
+    "dry_fractions": {
+     "N2": 0.8153104493254115,
+     "O2": 0.1745785015215067,
+     "Ar": 0.009711049153081852,
+     "CO2": 0.00039999999999999996
+    },
+    "dry_molar_mass_kg_mol": 0.028831461087186188,
+    "density_kg_m3": 1.3998377105509974,
+    "viscosity_pa_s": 1.8032909437647778e-05,
+    "vapour_diffusivity_m2_s": 1.7887067661022117e-05
+   }
+  },
+  "lock": {
+   "moon": {
+    "gravity_m_s2": 1.6242188765608128,
+    "pressure_pa": 121590.0,
+    "temperature_k": 293.5405874350651,
+    "relative_humidity": 0.6671645117144308,
+    "dry_fractions": {
+     "N2": 0.8153104493254115,
+     "O2": 0.1745785015215067,
+     "Ar": 0.009711049153081852,
+     "CO2": 0.00039999999999999996
+    },
+    "dry_molar_mass_kg_mol": 0.028831461087186188,
+    "density_kg_m3": 1.429270856616576,
+    "viscosity_pa_s": 1.7811295402149295e-05,
+    "vapour_diffusivity_m2_s": 1.7234445418649722e-05
+   },
+   "earth": {
+    "gravity_m_s2": 9.80665,
+    "pressure_pa": 101325.0,
+    "temperature_k": 293.5405874350651,
+    "relative_humidity": 0.6671645117144308,
+    "dry_fractions": {
+     "N2": 0.7808,
+     "O2": 0.2095,
+     "Ar": 0.0093,
+     "CO2": 0.0004
+    },
+    "dry_molar_mass_kg_mol": 0.02896573152,
+    "density_kg_m3": 1.1953645481830188,
+    "viscosity_pa_s": 1.788813848328198e-05,
+    "vapour_diffusivity_m2_s": 2.0664253283595002e-05
+   },
+   "moon_air_earth_gravity": {
+    "gravity_m_s2": 9.80665,
+    "pressure_pa": 121590.0,
+    "temperature_k": 293.5405874350651,
+    "relative_humidity": 0.6671645117144308,
+    "dry_fractions": {
+     "N2": 0.8153104493254115,
+     "O2": 0.1745785015215067,
+     "Ar": 0.009711049153081852,
+     "CO2": 0.00039999999999999996
+    },
+    "dry_molar_mass_kg_mol": 0.028831461087186188,
+    "density_kg_m3": 1.429270856616576,
+    "viscosity_pa_s": 1.7811295402149295e-05,
+    "vapour_diffusivity_m2_s": 1.7234445418649722e-05
+   }
+  }
+ },
+ "fall_speed": {
+  "hot_world": {
+   "moon": {
+    "terminal_speed_m_s": [
+     0.045859205473519654,
+     0.15516879229499386,
+     0.28739863426329754,
+     0.5563033265187873,
+     0.8093899418218816,
+     1.158063269599383,
+     1.6769840974302626,
+     2.1380126179462158,
+     2.924114907303428,
+     3.5547710924343265,
+     4.050953651578121,
+     4.433709102170991,
+     4.940705710092526,
+     5.213577807227688
+    ],
+    "axis_ratio": [
+     0.9999570258481327,
+     0.9998281532341194,
+     0.9996135314966593,
+     0.9989281317855404,
+     0.9979039811164128,
+     0.9957432191617721,
+     0.9905345639790103,
+     0.983442271422847,
+     0.9643507150075831,
+     0.9401398245844216,
+     0.91251835290806,
+     0.8829774285717235,
+     0.8224840463517669,
+     0.7644260131378643
+    ],
+    "stable_diameter_mm": 16.178997477512148
+   },
+   "earth": {
+    "terminal_speed_m_s": [
+     0.24631047719276558,
+     0.7082748159823744,
+     1.1779187634319552,
+     2.037881889551127,
+     2.8035246115020143,
+     3.819533294441342,
+     5.236628619454503,
+     6.3629104062064785,
+     7.9031415298081855,
+     8.75054214274333,
+     9.167840695613531,
+     9.333479053536331,
+     null,
+     null
+    ],
+    "axis_ratio": [
+     0.9997406002924162,
+     0.9989642132546885,
+     0.9976762345664201,
+     0.9936042104129599,
+     0.9876330439203139,
+     0.9754555057841716,
+     0.9481824992305978,
+     0.9149618999751885,
+     0.8413919419993892,
+     0.769196010789822,
+     0.703964372399554,
+     0.6468418540883348,
+     null,
+     null
+    ],
+    "stable_diameter_mm": 6.583620163185601
+   },
+   "moon_air_earth_gravity": {
+    "terminal_speed_m_s": [
+     0.2421981320163563,
+     0.6818825689239068,
+     1.1214693085814806,
+     1.9207350692062202,
+     2.6304034612615195,
+     3.5705232479674844,
+     4.876747739890489,
+     5.907282564326774,
+     7.297137302983123,
+     8.045031428357444,
+     8.402637875468647,
+     8.535668082681406,
+     null,
+     null
+    ],
+    "axis_ratio": [
+     0.9997406585230372,
+     0.998964445364754,
+     0.9976767537947191,
+     0.993605626493548,
+     0.9876357456458075,
+     0.975460723796156,
+     0.9481928666883437,
+     0.9149777083030942,
+     0.8414170094447457,
+     0.7692270759254016,
+     0.7039987243376608,
+     0.6468776932594207,
+     null,
+     null
+    ],
+    "stable_diameter_mm": 6.584359671885371
+   }
+  },
+  "resort": {
+   "moon": {
+    "terminal_speed_m_s": [
+     0.04642543217570415,
+     0.15633986127087487,
+     0.2884524110092762,
+     0.55584115398679,
+     0.8068911261187797,
+     1.1524575333551066,
+     1.6665425879256184,
+     2.1231005872395627,
+     2.9008274704633066,
+     3.5235882395861866,
+     4.012562419731601,
+     4.3891239616260185,
+     4.887258257730265,
+     5.155349334702322
+    ],
+    "axis_ratio": [
+     0.9999577263195837,
+     0.9998309535086849,
+     0.9996198260812307,
+     0.9989455633220723,
+     0.9979379910251429,
+     0.9958119602564534,
+     0.9906856689003819,
+     0.983702494202844,
+     0.9648879491297694,
+     0.9409953293460516,
+     0.9136954448779635,
+     0.8844537754113986,
+     0.8244461014186412,
+     0.7667159333538798
+    ],
+    "stable_diameter_mm": 16.31250195549808
+   },
+   "earth": {
+    "terminal_speed_m_s": [
+     0.24837632447450408,
+     0.7096746958520469,
+     1.1762410599621647,
+     2.028754207937091,
+     2.7872720486814497,
+     3.7936968418147234,
+     5.197048136699117,
+     6.311553540357329,
+     7.833219415795275,
+     8.668506262619013,
+     9.078901576835824,
+     9.241092084263828,
+     null,
+     null
+    ],
+    "axis_ratio": [
+     0.9997448250248158,
+     0.9989810537134962,
+     0.9977139082769497,
+     0.9937069720237967,
+     0.9878291425857257,
+     0.9758343990171701,
+     0.9489359514291088,
+     0.9161118422928103,
+     0.8432185916924745,
+     0.7714627944879566,
+     0.7064735317164224,
+     0.6494616251236226,
+     null,
+     null
+    ],
+    "stable_diameter_mm": 6.637927913659638
+   },
+   "moon_air_earth_gravity": {
+    "terminal_speed_m_s": [
+     0.24422752650671467,
+     0.6831448266105705,
+     1.1198253260136486,
+     1.9123020506295814,
+     2.6155466187402787,
+     3.547002414718882,
+     4.84060978931776,
+     5.860107470644537,
+     7.232397773698757,
+     7.969062334265834,
+     8.32056631439387,
+     8.45080355286371,
+     null,
+     null
+    ],
+    "axis_ratio": [
+     0.9997448837217109,
+     0.998981287695441,
+     0.9977144317417522,
+     0.9937084000778775,
+     0.9878318683069108,
+     0.9758396677608607,
+     0.9489464378739447,
+     0.9161278624657118,
+     0.8432440848680093,
+     0.7714944747106853,
+     0.7065086359816634,
+     0.6494983054613127,
+     null,
+     null
+    ],
+    "stable_diameter_mm": 6.638691932094231
+   }
+  },
+  "lock": {
+   "moon": {
+    "terminal_speed_m_s": [
+     0.0469033283687242,
+     0.15734192803177827,
+     0.2894069202975855,
+     0.555701143690284,
+     0.805253553866514,
+     1.1485278768506393,
+     1.6590325909551424,
+     2.1122565071926602,
+     2.8836431442481056,
+     3.500316782226379,
+     3.9836681255406985,
+     4.355365838098484,
+     4.846497716919082,
+     5.110772219663592
+    ],
+    "axis_ratio": [
+     0.9999582358695082,
+     0.9998329905529305,
+     0.9996244051041648,
+     0.9989582445183401,
+     0.9979627343486637,
+     0.9958619784221545,
+     0.9907956529249045,
+     0.9838919824177137,
+     0.9652795805370644,
+     0.9416197772497282,
+     0.9145557807452784,
+     0.885534247480396,
+     0.8258853793814362,
+     0.7683988569501161
+    ],
+    "stable_diameter_mm": 16.411721313292762
+   },
+   "earth": {
+    "terminal_speed_m_s": [
+     0.2501713963725792,
+     0.7111534063067636,
+     1.17551647846567,
+     2.0226020926151347,
+     2.7759049131584814,
+     3.775274675720591,
+     5.16835720141917,
+     6.273857984781412,
+     7.780924555038269,
+     8.606449113322702,
+     9.011180499028127,
+     9.170479078780573,
+     null,
+     null
+    ],
+    "axis_ratio": [
+     0.999747898224316,
+     0.9989933045789959,
+     0.9977413168517696,
+     0.9937817526588838,
+     0.9879718976292373,
+     0.9761104227462623,
+     0.9494856664791073,
+     0.916952216693622,
+     0.8445575950672295,
+     0.7731284310356297,
+     0.7083205696093396,
+     0.6513926651290368,
+     null,
+     null
+    ],
+    "stable_diameter_mm": 6.678287660401901
+   },
+   "moon_air_earth_gravity": {
+    "terminal_speed_m_s": [
+     0.24595628490418583,
+     0.6844205069220679,
+     1.1189813569653388,
+     1.9064547374672858,
+     2.6049479533678537,
+     3.529954976929411,
+     4.814021244239648,
+     5.824984511110451,
+     7.183368555218701,
+     7.910971260101193,
+     8.25747521591287,
+     8.385370829013581,
+     null,
+     null
+    ],
+    "axis_ratio": [
+     0.9997479573361435,
+     0.9989935402247117,
+     0.9977418440747625,
+     0.993783191273093,
+     0.9879746443516063,
+     0.9761157353096841,
+     0.9494962535551793,
+     0.9169684131242786,
+     0.8445834356649418,
+     0.7731606085914703,
+     0.7083562792695712,
+     0.6514300205018723,
+     null,
+     null
+    ],
+    "stable_diameter_mm": 6.6790711916275685
+   }
+  }
+ },
+ "survival": {
+  "hot_world": {
+   "moon": {
+    "cloud_base_m": 7418.9583953672245,
+    "cloud_base_k": 294.9995400683789,
+    "cloud_base_pa": 105957.04335352409,
+    "lapse_k_km": 1.5754590448574453,
+    "smallest_surviving_mm": 2.4235312780363993,
+    "drops": [
+     {
+      "initial_diameter_mm": 0.2,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 2735.7476069113604
+     },
+     {
+      "initial_diameter_mm": 0.3,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 2836.0815504009493
+     },
+     {
+      "initial_diameter_mm": 0.5,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3010.2285070479243
+     },
+     {
+      "initial_diameter_mm": 0.7,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3165.859898681345
+     },
+     {
+      "initial_diameter_mm": 1.0,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3365.5413332558187
+     },
+     {
+      "initial_diameter_mm": 1.5,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3633.059479200811
+     },
+     {
+      "initial_diameter_mm": 2.0,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3849.4376680112814
+     },
+     {
+      "initial_diameter_mm": 3.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.2336998793040751,
+      "surface_diameter_mm": 1.8478813575588717,
+      "impact_speed_m_s": 2.004040720258457,
+      "fall_time_s": 2751.332038931364
+     },
+     {
+      "initial_diameter_mm": 4.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.5192951914063509,
+      "surface_diameter_mm": 3.215126697454198,
+      "impact_speed_m_s": 3.074254881012952,
+      "fall_time_s": 2129.4797610459077
+     },
+     {
+      "initial_diameter_mm": 5.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.672005128139557,
+      "surface_diameter_mm": 4.37953028013006,
+      "impact_speed_m_s": 3.761443581844591,
+      "fall_time_s": 1828.8942395066847
+     },
+     {
+      "initial_diameter_mm": 6.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.760488023244102,
+      "surface_diameter_mm": 5.476654913032797,
+      "impact_speed_m_s": 4.251591386079395,
+      "fall_time_s": 1653.6202620424558
+     }
+    ],
+    "rain": {
+     "grid_mm": [
+      0.1,
+      6.0,
+      64
+     ],
+     "levels": 33,
+     "spectra": [
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 0.7514836414759527,
+       "water_survival_fraction": 0.00034311149184272296,
+       "number_survival_fraction": 3.441334887926869e-05,
+       "arrival_diameter_mm_by_number": 1.0844021878255699,
+       "arrival_speed_m_s_by_number": 1.2438238571001325
+      },
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 0.7500358851991261,
+       "water_survival_fraction": 6.4934373835647695e-06,
+       "number_survival_fraction": 1.4470676912618313e-06,
+       "arrival_diameter_mm_by_number": 0.9779704163073704,
+       "arrival_speed_m_s_by_number": 1.127815908058205
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 1.4997904911517759,
+       "water_survival_fraction": 0.04599895656653771,
+       "number_survival_fraction": 0.010519288332422378,
+       "arrival_diameter_mm_by_number": 1.3937682755147245,
+       "arrival_speed_m_s_by_number": 1.5698414169103942
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 1.4999983051032082,
+       "water_survival_fraction": 0.017274813392084712,
+       "number_survival_fraction": 0.009901296776394656,
+       "arrival_diameter_mm_by_number": 1.2260548024267977,
+       "arrival_speed_m_s_by_number": 1.3982216375928216
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 2.439526735515277,
+       "water_survival_fraction": 0.22105190354491933,
+       "number_survival_fraction": 0.08770228515028462,
+       "arrival_diameter_mm_by_number": 1.770163849856661,
+       "arrival_speed_m_s_by_number": 1.9308760265194063
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 2.4906323183677923,
+       "water_survival_fraction": 0.18587857481494716,
+       "number_survival_fraction": 0.16671942272867277,
+       "arrival_diameter_mm_by_number": 1.6470672370423112,
+       "arrival_speed_m_s_by_number": 1.81844348724272
+      }
+     ],
+     "central_encounters": {
+      "dm_mm": 1.5,
+      "shape_mu": 3.0,
+      "rain_mm_h": 5.0,
+      "tau_by_surface_water": 36.04308700771874,
+      "volume_exposure_by_surface_water": 1.123035202017363,
+      "surface_water_share_tau_above_1": 1.0
+     }
+    }
+   },
+   "earth": {
+    "cloud_base_m": 1226.878107341283,
+    "cloud_base_k": 294.99693273252933,
+    "cloud_base_pa": 88283.47677874676,
+    "lapse_k_km": 9.528960027322308,
+    "smallest_surviving_mm": 0.7503013276166419,
+    "drops": [
+     {
+      "initial_diameter_mm": 0.2,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 463.1922865945013
+     },
+     {
+      "initial_diameter_mm": 0.3,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 486.58930767148775
+     },
+     {
+      "initial_diameter_mm": 0.5,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 526.6834793420616
+     },
+     {
+      "initial_diameter_mm": 0.7,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 559.3967425641384
+     },
+     {
+      "initial_diameter_mm": 1.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.36969978462920494,
+      "surface_diameter_mm": 0.7177112148781185,
+      "impact_speed_m_s": 2.8692666552198585,
+      "fall_time_s": 341.4659853212646
+     },
+     {
+      "initial_diameter_mm": 1.5,
+      "status": "surface",
+      "surviving_water_fraction": 0.7024185819611289,
+      "surface_diameter_mm": 1.3333881455328525,
+      "impact_speed_m_s": 4.803011763724908,
+      "fall_time_s": 235.23944916184226
+     },
+     {
+      "initial_diameter_mm": 2.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.8271418241296987,
+      "surface_diameter_mm": 1.877399319475854,
+      "impact_speed_m_s": 6.118950260234461,
+      "fall_time_s": 190.63214544091466
+     },
+     {
+      "initial_diameter_mm": 3.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9190630818534341,
+      "surface_diameter_mm": 2.916775668192877,
+      "impact_speed_m_s": 7.821619583066758,
+      "fall_time_s": 151.86257117984994
+     },
+     {
+      "initial_diameter_mm": 4.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9524015712070668,
+      "surface_diameter_mm": 3.9355009877085703,
+      "impact_speed_m_s": 8.736090293342865,
+      "fall_time_s": 136.60753462474457
+     },
+     {
+      "initial_diameter_mm": 5.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9684378378921779,
+      "surface_diameter_mm": 4.946833055533887,
+      "impact_speed_m_s": 9.18527748188848,
+      "fall_time_s": 130.1176651404333
+     },
+     {
+      "initial_diameter_mm": 6.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9775213442778219,
+      "surface_diameter_mm": 5.95470155772586,
+      "impact_speed_m_s": 9.36725068407614,
+      "fall_time_s": 127.64672293784541
+     }
+    ],
+    "rain": {
+     "grid_mm": [
+      0.1,
+      6.0,
+      64
+     ],
+     "levels": 33,
+     "spectra": [
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 0.7514836414759526,
+       "water_survival_fraction": 0.26167393552968937,
+       "number_survival_fraction": 0.09324376706761742,
+       "arrival_diameter_mm_by_number": 0.6109738039440992,
+       "arrival_speed_m_s_by_number": 2.472113912158788
+      },
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 0.7500358851991259,
+       "water_survival_fraction": 0.2047575816106358,
+       "number_survival_fraction": 0.14966288430308666,
+       "arrival_diameter_mm_by_number": 0.5677091476991735,
+       "arrival_speed_m_s_by_number": 2.3067940393082
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 1.4997904911517757,
+       "water_survival_fraction": 0.6539178151928996,
+       "number_survival_fraction": 0.3863800232404288,
+       "arrival_diameter_mm_by_number": 0.8691452674659362,
+       "arrival_speed_m_s_by_number": 3.3949580121779497
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 1.499998305103208,
+       "water_survival_fraction": 0.66174416157467,
+       "number_survival_fraction": 0.6833718977625899,
+       "arrival_diameter_mm_by_number": 0.9338691285536961,
+       "arrival_speed_m_s_by_number": 3.608821173351649
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 2.439526735515278,
+       "water_survival_fraction": 0.8332602569293851,
+       "number_survival_fraction": 0.6245676195699096,
+       "arrival_diameter_mm_by_number": 1.1868737420565432,
+       "arrival_speed_m_s_by_number": 4.388079639846297
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 2.4906323183677923,
+       "water_survival_fraction": 0.8554879985503525,
+       "number_survival_fraction": 0.9170457348803973,
+       "arrival_diameter_mm_by_number": 1.4940139522166638,
+       "arrival_speed_m_s_by_number": 5.2248354737299785
+      }
+     ],
+     "central_encounters": {
+      "dm_mm": 1.5,
+      "shape_mu": 3.0,
+      "rain_mm_h": 5.0,
+      "tau_by_surface_water": 1.3466670577137394,
+      "volume_exposure_by_surface_water": 0.4484515057689893,
+      "surface_water_share_tau_above_1": 0.5581710552746391
+     }
+    }
+   }
+  },
+  "resort": {
+   "moon": {
+    "cloud_base_m": 6094.9306256285645,
+    "cloud_base_k": 289.60211028046257,
+    "cloud_base_pa": 108289.4025241735,
+    "lapse_k_km": 1.582136473095835,
+    "smallest_surviving_mm": 1.9287103736175188,
+    "drops": [
+     {
+      "initial_diameter_mm": 0.2,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 2893.5754772773057
+     },
+     {
+      "initial_diameter_mm": 0.3,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 2999.991154099432
+     },
+     {
+      "initial_diameter_mm": 0.5,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3185.1111004453164
+     },
+     {
+      "initial_diameter_mm": 0.7,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3349.6554338116453
+     },
+     {
+      "initial_diameter_mm": 1.0,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3559.392078648948
+     },
+     {
+      "initial_diameter_mm": 1.5,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3838.3521519666847
+     },
+     {
+      "initial_diameter_mm": 2.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.035908723572649515,
+      "surface_diameter_mm": 0.6598268512588182,
+      "impact_speed_m_s": 0.758254143343159,
+      "fall_time_s": 3507.582714240128
+     },
+     {
+      "initial_diameter_mm": 3.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.4869072613566564,
+      "surface_diameter_mm": 2.360134056867694,
+      "impact_speed_m_s": 2.423538565921418,
+      "fall_time_s": 2175.5192577852945
+     },
+     {
+      "initial_diameter_mm": 4.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.6915570518423857,
+      "surface_diameter_mm": 3.5372791108256894,
+      "impact_speed_m_s": 3.2551112919173186,
+      "fall_time_s": 1738.148926418847
+     },
+     {
+      "initial_diameter_mm": 5.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.7930651754844312,
+      "surface_diameter_mm": 4.628137973671673,
+      "impact_speed_m_s": 3.8479368661841455,
+      "fall_time_s": 1508.0327088616575
+     },
+     {
+      "initial_diameter_mm": 6.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.8503467066172717,
+      "surface_diameter_mm": 5.684382080815742,
+      "impact_speed_m_s": 4.285167401396688,
+      "fall_time_s": 1370.1887742574788
+     }
+    ],
+    "rain": {
+     "grid_mm": [
+      0.1,
+      6.0,
+      64
+     ],
+     "levels": 33,
+     "spectra": [
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 0.7514836414759525,
+       "water_survival_fraction": 0.0031298764371559097,
+       "number_survival_fraction": 0.0005466489580653065,
+       "arrival_diameter_mm_by_number": 0.8039265784254837,
+       "arrival_speed_m_s_by_number": 0.9229292442525505
+      },
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 0.7500358851991261,
+       "water_survival_fraction": 0.00022969439992176618,
+       "number_survival_fraction": 0.00010306377371065399,
+       "arrival_diameter_mm_by_number": 0.6753081350439041,
+       "arrival_speed_m_s_by_number": 0.7667667191232234
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 1.4997904911517754,
+       "water_survival_fraction": 0.11895123802892807,
+       "number_survival_fraction": 0.038702765809817574,
+       "arrival_diameter_mm_by_number": 1.1629996685986508,
+       "arrival_speed_m_s_by_number": 1.3259579210722832
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 1.4999983051032078,
+       "water_survival_fraction": 0.06912629897672103,
+       "number_survival_fraction": 0.05566795596869747,
+       "arrival_diameter_mm_by_number": 1.0285313054003655,
+       "arrival_speed_m_s_by_number": 1.1809588549329553
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 2.439526735515278,
+       "water_survival_fraction": 0.36840739250135657,
+       "number_survival_fraction": 0.18272734621939302,
+       "arrival_diameter_mm_by_number": 1.5551899190462757,
+       "arrival_speed_m_s_by_number": 1.71867088522742
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 2.4906323183677928,
+       "water_survival_fraction": 0.3475012981833568,
+       "number_survival_fraction": 0.36259408639338003,
+       "arrival_diameter_mm_by_number": 1.5170610920177248,
+       "arrival_speed_m_s_by_number": 1.682673469819061
+      }
+     ],
+     "central_encounters": {
+      "dm_mm": 1.5,
+      "shape_mu": 3.0,
+      "rain_mm_h": 5.0,
+      "tau_by_surface_water": 26.091899565181706,
+      "volume_exposure_by_surface_water": 1.3695372680816675,
+      "surface_water_share_tau_above_1": 1.0
+     }
+    }
+   },
+   "earth": {
+    "cloud_base_m": 1006.949119841815,
+    "cloud_base_k": 289.60068482813637,
+    "cloud_base_pa": 90232.97743395508,
+    "lapse_k_km": 9.577879662516663,
+    "smallest_surviving_mm": 0.6105628235293156,
+    "drops": [
+     {
+      "initial_diameter_mm": 0.2,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 486.6681668974661
+     },
+     {
+      "initial_diameter_mm": 0.3,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 511.2302748921625
+     },
+     {
+      "initial_diameter_mm": 0.5,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 552.9254965381965
+     },
+     {
+      "initial_diameter_mm": 0.7,
+      "status": "surface",
+      "surviving_water_fraction": 0.20071206034968658,
+      "surface_diameter_mm": 0.4098477259230183,
+      "impact_speed_m_s": 1.658550067723389,
+      "fall_time_s": 407.51629636957904
+     },
+     {
+      "initial_diameter_mm": 1.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.5877943152450817,
+      "surface_diameter_mm": 0.8376741761127668,
+      "impact_speed_m_s": 3.268036214199778,
+      "fall_time_s": 272.75756704689655
+     },
+     {
+      "initial_diameter_mm": 1.5,
+      "status": "surface",
+      "surviving_water_fraction": 0.8119373709103576,
+      "surface_diameter_mm": 1.3993685293031037,
+      "impact_speed_m_s": 4.942481815828788,
+      "fall_time_s": 193.08989017613885
+     },
+     {
+      "initial_diameter_mm": 2.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.8922205367162134,
+      "surface_diameter_mm": 1.9253989654862076,
+      "impact_speed_m_s": 6.167880076998529,
+      "fall_time_s": 157.53010517774757
+     },
+     {
+      "initial_diameter_mm": 3.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9504434156206417,
+      "surface_diameter_mm": 2.9496014867883766,
+      "impact_speed_m_s": 7.7875630810484395,
+      "fall_time_s": 126.08118881756711
+     },
+     {
+      "initial_diameter_mm": 4.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.971363531980433,
+      "surface_diameter_mm": 3.9614476657647217,
+      "impact_speed_m_s": 8.664313244564815,
+      "fall_time_s": 113.62503887661477
+     },
+     {
+      "initial_diameter_mm": 5.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9813712903050849,
+      "surface_diameter_mm": 4.968757336316199,
+      "impact_speed_m_s": 9.094445827680923,
+      "fall_time_s": 108.32837116687666
+     },
+     {
+      "initial_diameter_mm": 6.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9870072798725733,
+      "surface_diameter_mm": 5.973901199786095,
+      "impact_speed_m_s": 9.267071040619742,
+      "fall_time_s": 106.32730838724814
+     }
+    ],
+    "rain": {
+     "grid_mm": [
+      0.1,
+      6.0,
+      64
+     ],
+     "levels": 33,
+     "spectra": [
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 0.7514836414759527,
+       "water_survival_fraction": 0.4031433205825061,
+       "number_survival_fraction": 0.19811820745575834,
+       "arrival_diameter_mm_by_number": 0.5157603763150906,
+       "arrival_speed_m_s_by_number": 2.0913713417170365
+      },
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 0.7500358851991259,
+       "water_survival_fraction": 0.3621340322888588,
+       "number_survival_fraction": 0.3423418689555338,
+       "arrival_diameter_mm_by_number": 0.4958471291327999,
+       "arrival_speed_m_s_by_number": 2.012756375237817
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 1.4997904911517754,
+       "water_survival_fraction": 0.7595921694630783,
+       "number_survival_fraction": 0.5342988216864412,
+       "arrival_diameter_mm_by_number": 0.7840097794875184,
+       "arrival_speed_m_s_by_number": 3.084053180210585
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 1.4999983051032078,
+       "water_survival_fraction": 0.7748792970704395,
+       "number_survival_fraction": 0.8369968107319079,
+       "arrival_diameter_mm_by_number": 0.912761713704101,
+       "arrival_speed_m_s_by_number": 3.5157504438833547
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 2.439526735515278,
+       "water_survival_fraction": 0.8914187949145184,
+       "number_survival_fraction": 0.7390649569808871,
+       "arrival_diameter_mm_by_number": 1.108904640660172,
+       "arrival_speed_m_s_by_number": 4.127796039912046
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 2.4906323183677923,
+       "water_survival_fraction": 0.9089285541226778,
+       "number_survival_fraction": 0.9658002888029966,
+       "arrival_diameter_mm_by_number": 1.504217222511123,
+       "arrival_speed_m_s_by_number": 5.210345649012525
+      }
+     ],
+     "central_encounters": {
+      "dm_mm": 1.5,
+      "shape_mu": 3.0,
+      "rain_mm_h": 5.0,
+      "tau_by_surface_water": 1.1267245476101044,
+      "volume_exposure_by_surface_water": 0.500084935606606,
+      "surface_water_share_tau_above_1": 0.43223385698648675
+     }
+    }
+   }
+  },
+  "lock": {
+   "moon": {
+    "cloud_base_m": 4956.52647159117,
+    "cloud_base_k": 285.68018101618406,
+    "cloud_base_pa": 110468.72837726647,
+    "lapse_k_km": 1.58586995629575,
+    "smallest_surviving_mm": 1.5306499151401785,
+    "drops": [
+     {
+      "initial_diameter_mm": 0.2,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3044.8689020583456
+     },
+     {
+      "initial_diameter_mm": 0.3,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3156.873153291602
+     },
+     {
+      "initial_diameter_mm": 0.5,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3351.8918346416185
+     },
+     {
+      "initial_diameter_mm": 0.7,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3524.350947423984
+     },
+     {
+      "initial_diameter_mm": 1.0,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 3742.841073175176
+     },
+     {
+      "initial_diameter_mm": 1.5,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 4031.3972090966085
+     },
+     {
+      "initial_diameter_mm": 2.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.3278417127985662,
+      "surface_diameter_mm": 1.379064987014972,
+      "impact_speed_m_s": 1.541802777277082,
+      "fall_time_s": 2529.844776555978
+     },
+     {
+      "initial_diameter_mm": 3.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.6750303724790376,
+      "surface_diameter_mm": 2.631655434762895,
+      "impact_speed_m_s": 2.6195736972037773,
+      "fall_time_s": 1743.124590404304
+     },
+     {
+      "initial_diameter_mm": 4.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.8089370543243285,
+      "surface_diameter_mm": 3.7270472712683635,
+      "impact_speed_m_s": 3.347553386833507,
+      "fall_time_s": 1412.759488341336
+     },
+     {
+      "initial_diameter_mm": 5.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.8731863368944924,
+      "surface_diameter_mm": 4.779021468780656,
+      "impact_speed_m_s": 3.8894630369241145,
+      "fall_time_s": 1232.684826046055
+     },
+     {
+      "initial_diameter_mm": 6.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9089437459543607,
+      "surface_diameter_mm": 5.8120621852486405,
+      "impact_speed_m_s": 4.296124107712965,
+      "fall_time_s": 1123.3306643847038
+     }
+    ],
+    "rain": {
+     "grid_mm": [
+      0.1,
+      6.0,
+      64
+     ],
+     "levels": 33,
+     "spectra": [
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 0.7514836414759527,
+       "water_survival_fraction": 0.016854927004153444,
+       "number_survival_fraction": 0.0027642045419986085,
+       "arrival_diameter_mm_by_number": 0.8861949558944502,
+       "arrival_speed_m_s_by_number": 1.021606758948227
+      },
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 0.7500358851991258,
+       "water_survival_fraction": 0.003258150600306671,
+       "number_survival_fraction": 0.0011520377847190684,
+       "arrival_diameter_mm_by_number": 0.8011395944498886,
+       "arrival_speed_m_s_by_number": 0.9217871049908475
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 1.4997904911517757,
+       "water_survival_fraction": 0.2381248917930084,
+       "number_survival_fraction": 0.08206019631307732,
+       "arrival_diameter_mm_by_number": 1.1823070843259724,
+       "arrival_speed_m_s_by_number": 1.3416301763370546
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 1.4999983051032082,
+       "water_survival_fraction": 0.18222818256265416,
+       "number_survival_fraction": 0.13968016910045458,
+       "arrival_diameter_mm_by_number": 1.0927130146744302,
+       "arrival_speed_m_s_by_number": 1.2479258863219387
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 2.439526735515278,
+       "water_survival_fraction": 0.524403269228647,
+       "number_survival_fraction": 0.276904423257978,
+       "arrival_diameter_mm_by_number": 1.5352803951043097,
+       "arrival_speed_m_s_by_number": 1.6926365267761134
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 2.4906323183677928,
+       "water_survival_fraction": 0.5239999337599606,
+       "number_survival_fraction": 0.5306848188439256,
+       "arrival_diameter_mm_by_number": 1.5703452967483582,
+       "arrival_speed_m_s_by_number": 1.725488716189458
+      }
+     ],
+     "central_encounters": {
+      "dm_mm": 1.5,
+      "shape_mu": 3.0,
+      "rain_mm_h": 5.0,
+      "tau_by_surface_water": 22.25237939463789,
+      "volume_exposure_by_surface_water": 1.7220158129119771,
+      "surface_water_share_tau_above_1": 1.0
+     }
+    }
+   },
+   "earth": {
+    "cloud_base_m": 818.4200046740916,
+    "cloud_base_k": 285.67936482955616,
+    "cloud_base_pa": 92052.3391991406,
+    "lapse_k_km": 9.605364679031025,
+    "smallest_surviving_mm": 0.4954678365514883,
+    "drops": [
+     {
+      "initial_diameter_mm": 0.2,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 509.2037753424643
+     },
+     {
+      "initial_diameter_mm": 0.3,
+      "status": "evaporated",
+      "surviving_water_fraction": 0.0,
+      "surface_diameter_mm": null,
+      "impact_speed_m_s": null,
+      "fall_time_s": 534.7440095397313
+     },
+     {
+      "initial_diameter_mm": 0.5,
+      "status": "surface",
+      "surviving_water_fraction": 0.018205020017036055,
+      "surface_diameter_mm": 0.13153269683126645,
+      "impact_speed_m_s": 0.38944163404314436,
+      "fall_time_s": 532.0228562153836
+     },
+     {
+      "initial_diameter_mm": 0.7,
+      "status": "surface",
+      "surviving_water_fraction": 0.4754811224155213,
+      "surface_diameter_mm": 0.5463561043666026,
+      "impact_speed_m_s": 2.205281192660772,
+      "fall_time_s": 311.1820006971735
+     },
+     {
+      "initial_diameter_mm": 1.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.7411673561246137,
+      "surface_diameter_mm": 0.9049795407092462,
+      "impact_speed_m_s": 3.4747620836355235,
+      "fall_time_s": 219.11502927858885
+     },
+     {
+      "initial_diameter_mm": 1.5,
+      "status": "surface",
+      "surviving_water_fraction": 0.8843723712359912,
+      "surface_diameter_mm": 1.4398026917356568,
+      "impact_speed_m_s": 5.019263483378555,
+      "fall_time_s": 157.2915147298082
+     },
+     {
+      "initial_diameter_mm": 2.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9344741693041361,
+      "surface_diameter_mm": 1.955325643906112,
+      "impact_speed_m_s": 6.19026744324392,
+      "fall_time_s": 128.852671148038
+     },
+     {
+      "initial_diameter_mm": 3.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9704546015068581,
+      "surface_diameter_mm": 2.9701587523619506,
+      "impact_speed_m_s": 7.756506808684029,
+      "fall_time_s": 103.45322259188893
+     },
+     {
+      "initial_diameter_mm": 4.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.983289624525265,
+      "surface_diameter_mm": 3.9775942290598554,
+      "impact_speed_m_s": 8.607365888508788,
+      "fall_time_s": 93.357938538158
+     },
+     {
+      "initial_diameter_mm": 5.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9893889254390626,
+      "surface_diameter_mm": 4.982251951627768,
+      "impact_speed_m_s": 9.024696378152296,
+      "fall_time_s": 89.06960931145731
+     },
+     {
+      "initial_diameter_mm": 6.0,
+      "status": "surface",
+      "surviving_water_fraction": 0.9927928364468681,
+      "surface_diameter_mm": 5.985550904766648,
+      "impact_speed_m_s": 9.190836341729627,
+      "fall_time_s": 87.4604817779038
+     }
+    ],
+    "rain": {
+     "grid_mm": [
+      0.1,
+      6.0,
+      64
+     ],
+     "levels": 33,
+     "spectra": [
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 0.7514836414759526,
+       "water_survival_fraction": 0.5491320692212601,
+       "number_survival_fraction": 0.30313002160528346,
+       "arrival_diameter_mm_by_number": 0.49431423867792607,
+       "arrival_speed_m_s_by_number": 2.0004087727802737
+      },
+      {
+       "dm_mm": 0.75,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 0.7500358851991259,
+       "water_survival_fraction": 0.5312853453922728,
+       "number_survival_fraction": 0.5139643544633505,
+       "arrival_diameter_mm_by_number": 0.4971052266834505,
+       "arrival_speed_m_s_by_number": 2.011379583985875
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 1.4997904911517757,
+       "water_survival_fraction": 0.8407986746403544,
+       "number_survival_fraction": 0.6377952252402794,
+       "arrival_diameter_mm_by_number": 0.7554795403822205,
+       "arrival_speed_m_s_by_number": 2.9717281777980045
+      },
+      {
+       "dm_mm": 1.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 1.499998305103208,
+       "water_survival_fraction": 0.8569157529555689,
+       "number_survival_fraction": 0.9095397412537767,
+       "arrival_diameter_mm_by_number": 0.9265042156183447,
+       "arrival_speed_m_s_by_number": 3.543711425388499
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 0.0,
+       "realized_dm_mm": 2.4395267355152774,
+       "water_survival_fraction": 0.9317819932409659,
+       "number_survival_fraction": 0.8082904620963888,
+       "arrival_diameter_mm_by_number": 1.0787476372489888,
+       "arrival_speed_m_s_by_number": 4.01671318457509
+      },
+      {
+       "dm_mm": 2.5,
+       "shape_mu": 3.0,
+       "realized_dm_mm": 2.4906323183677923,
+       "water_survival_fraction": 0.944324413240708,
+       "number_survival_fraction": 0.9834987610628447,
+       "arrival_diameter_mm_by_number": 1.524561235716673,
+       "arrival_speed_m_s_by_number": 5.2304982940855655
+      }
+     ],
+     "central_encounters": {
+      "dm_mm": 1.5,
+      "shape_mu": 3.0,
+      "rain_mm_h": 5.0,
+      "tau_by_surface_water": 0.8829408273959339,
+      "volume_exposure_by_surface_water": 0.5065101647683397,
+      "surface_water_share_tau_above_1": 0.3327297114640079
+     }
+    }
+   }
+  }
+ },
+ "cm1_check": {
+  "hot_world": {
+   "cm1_slowing_at_every_size": 2.9418103549307233,
+   "crossing_diameter_mm": 1.3914321444763067,
+   "equal_speed_diameter_mm": 0.5582456625321045,
+   "cm1_mean_fall_speed_cap_m_s": 2.7346870550060793,
+   "solver_diameter_at_the_cap_mm": 2.7387494120456486,
+   "diameter_mm": [
+    0.1,
+    0.2,
+    0.3,
+    0.5,
+    0.7,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "slowing_by_gravity": [
+    5.281341652467312,
+    4.394456893287981,
+    3.9021386147369688,
+    3.45267586520778,
+    3.249859338924648,
+    3.083184953446162,
+    2.908046502863924,
+    2.762978344815072,
+    2.4955029245798097,
+    2.263164411761929,
+    2.0742369817524944,
+    1.9251754876074
+   ],
+   "rigid_sphere_slowing_by_gravity": [
+    5.2820078710635014,
+    4.398600339936653,
+    3.909783087558283,
+    3.468366143635606,
+    3.277757405430785,
+    3.135201985904559,
+    3.012290644171354,
+    2.928045035574269,
+    2.7842160538395757,
+    2.660104943791422,
+    2.560861617081315,
+    2.48627358383449
+   ],
+   "solver_speed_m_s": [
+    0.045859205473519654,
+    0.15516879229499386,
+    0.28739863426329754,
+    0.5563033265187873,
+    0.8093899418218816,
+    1.158063269599383,
+    1.6769840974302626,
+    2.1380126179462158,
+    2.924114907303428,
+    3.5547710924343265,
+    4.050953651578121,
+    4.433709102170991
+   ],
+   "cm1_speed_m_s": [
+    0.15965282824215607,
+    0.27797171911605667,
+    0.3844798820476387,
+    0.5785656157927139,
+    0.7572774914049625,
+    1.0073412454642323,
+    1.3933159980066383,
+    1.753882977340613,
+    2.425904053828361,
+    3.0536876277587086,
+    3.6505022454811855,
+    4.223744281125261
+   ],
+   "cm1_over_solver": [
+    3.4813692604060473,
+    1.7914151099893862,
+    1.3377930032033525,
+    1.0400182566105414,
+    0.9356151494795975,
+    0.8698499226322142,
+    0.830846279426081,
+    0.8203333145084057,
+    0.829619946798018,
+    0.8590391753375959,
+    0.9011463866191279,
+    0.952643527979109
+   ],
+   "earth_law_over_solver_on_earth": [
+    2.101051941857857,
+    1.2721603960143544,
+    1.0580381772018133,
+    0.9202729745365218,
+    0.8755757679011582,
+    0.8548883024845227,
+    0.8624638624438147,
+    0.8934862286691333,
+    0.994985883345244,
+    1.1311825763635033,
+    1.2907098369472305,
+    1.466888547344408
+   ],
+   "water_lost_per_metre_cm1_over_solver": [
+    0.307679056310843,
+    0.6237690228907982,
+    0.8028001150945322,
+    0.9732666814045059,
+    1.0444528874001657,
+    1.0902914010321694,
+    1.1153373303192868,
+    1.1198262607987108,
+    1.1086108379453943,
+    1.085746198448401,
+    1.0572450901987551,
+    1.0260581809503442
+   ]
+  },
+  "resort": {
+   "cm1_slowing_at_every_size": 2.9418103549307233,
+   "crossing_diameter_mm": 1.379629186866591,
+   "equal_speed_diameter_mm": 0.5367611364121748,
+   "cm1_mean_fall_speed_cap_m_s": 2.694544930802984,
+   "solver_diameter_at_the_cap_mm": 2.713067510324243,
+   "diameter_mm": [
+    0.1,
+    0.2,
+    0.3,
+    0.5,
+    0.7,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "slowing_by_gravity": [
+    5.26064088283332,
+    4.369613872350519,
+    3.8821839696033487,
+    3.440375072830661,
+    3.241511195347132,
+    3.0777727699801884,
+    2.9045821117256727,
+    2.76016478251923,
+    2.4932188650790845,
+    2.261632685890031,
+    2.073629128727779,
+    1.9253964177701148
+   ],
+   "rigid_sphere_slowing_by_gravity": [
+    5.261291348590895,
+    4.373650582946145,
+    3.8896408988036564,
+    3.4557238901746348,
+    3.268844499795778,
+    3.128793871483743,
+    3.0068786301181474,
+    2.922122697414452,
+    2.7764799838671905,
+    2.6515620221332252,
+    2.552680142315736,
+    2.4790895184582364
+   ],
+   "solver_speed_m_s": [
+    0.04642543217570415,
+    0.15633986127087487,
+    0.2884524110092762,
+    0.55584115398679,
+    0.8068911261187797,
+    1.1524575333551066,
+    1.6665425879256184,
+    2.1231005872395627,
+    2.9008274704633066,
+    3.5235882395861866,
+    4.012562419731601,
+    4.3891239616260185
+   ],
+   "cm1_speed_m_s": [
+    0.15730930463899273,
+    0.2738914075303934,
+    0.37883615065596277,
+    0.5700729245481065,
+    0.7461615112197567,
+    0.9925546111704462,
+    1.3728636893069077,
+    1.7281379517131947,
+    2.3902945161098477,
+    3.008862934634664,
+    3.596916986329309,
+    4.161744474886128
+   ],
+   "cm1_over_solver": [
+    3.3884295151767594,
+    1.7518974707022954,
+    1.3133402121009832,
+    1.025604024565721,
+    0.9247362959720006,
+    0.8612504864112945,
+    0.823779541701206,
+    0.8139689481034457,
+    0.8240043713210152,
+    0.8539201319925019,
+    0.8964139644636121,
+    0.9481947904119677
+   ],
+   "earth_law_over_solver_on_earth": [
+    2.052332291110975,
+    1.2506118819658865,
+    1.0436588075731366,
+    0.9105513533181885,
+    0.8674749583202651,
+    0.8478035901409525,
+    0.8560007440445224,
+    0.8872491668835502,
+    0.9888139538162214,
+    1.1247644987107395,
+    1.2838094548861447,
+    1.459336943160573
+   ],
+   "water_lost_per_metre_cm1_over_solver": [
+    0.3164965849424918,
+    0.6361987545060563,
+    0.8146091353250782,
+    0.9827475237608103,
+    1.0523073410660952,
+    1.096763085157048,
+    1.120687425626512,
+    1.1245782714576813,
+    1.1126053701059508,
+    1.0891563441910668,
+    1.0601644045762093,
+    1.028582518962308
+   ]
+  },
+  "lock": {
+   "cm1_slowing_at_every_size": 2.9418103549307233,
+   "crossing_diameter_mm": 1.369837768207353,
+   "equal_speed_diameter_mm": 0.5204600776586733,
+   "cm1_mean_fall_speed_cap_m_s": 2.6644374608250514,
+   "solver_diameter_at_the_cap_mm": 2.6930989730124937,
+   "diameter_mm": [
+    0.1,
+    0.2,
+    0.3,
+    0.5,
+    0.7,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "slowing_by_gravity": [
+    5.243898321471637,
+    4.349892717622196,
+    3.8664637176427408,
+    3.430719477751938,
+    3.234941268945549,
+    3.0734604253654223,
+    2.90170384264007,
+    2.7577069788992015,
+    2.4910740323562908,
+    2.2600729454747848,
+    2.0728321124371,
+    1.9252965515922225
+   ],
+   "rigid_sphere_slowing_by_gravity": [
+    5.244537058087765,
+    4.353850201931838,
+    3.873781983593424,
+    3.4458169289637635,
+    3.2618594096553277,
+    3.123748913105184,
+    3.002560389482683,
+    2.9173524297446947,
+    2.7702504884553516,
+    2.6447430953376476,
+    2.546209715425864,
+    2.473456285780952
+   ],
+   "solver_speed_m_s": [
+    0.0469033283687242,
+    0.15734192803177827,
+    0.2894069202975855,
+    0.555701143690284,
+    0.805253553866514,
+    1.1485278768506393,
+    1.6590325909551424,
+    2.1122565071926602,
+    2.8836431442481056,
+    3.500316782226379,
+    3.9836681255406985,
+    4.355365838098484
+   ],
+   "cm1_speed_m_s": [
+    0.15555161074696452,
+    0.2708310847147788,
+    0.3746032288360134,
+    0.5637032206085438,
+    0.7378242832741669,
+    0.9814643124652145,
+    1.357524011041723,
+    1.7088286201432712,
+    2.363586585000772,
+    2.975243435684527,
+    3.556726871500994,
+    4.115243265943168
+   ],
+   "cm1_over_solver": [
+    3.316430116091474,
+    1.7212899835578421,
+    1.2943824164633793,
+    1.0143999648176354,
+    0.9162633058015355,
+    0.8545411323898143,
+    0.8182624129524579,
+    0.809006204655715,
+    0.8196529413548723,
+    0.8499926208941927,
+    0.8928271029149155,
+    0.944867416175503
+   ],
+   "earth_law_over_solver_on_earth": [
+    2.0144810314886983,
+    1.2338476463947416,
+    1.032450210953083,
+    0.9029555802559429,
+    0.8611418218272959,
+    0.8422718384238647,
+    0.8509838552844088,
+    0.8824500820045964,
+    0.9841620956655015,
+    1.1200175370280228,
+    1.278777980788987,
+    1.453884179991063
+   ],
+   "water_lost_per_metre_cm1_over_solver": [
+    0.32367647544533057,
+    0.646260797321051,
+    0.8239913642401335,
+    0.9902315084039484,
+    1.0584955666909284,
+    1.1018578450713499,
+    1.1248957251169123,
+    1.1283093023326527,
+    1.1157193238500924,
+    1.091786264242348,
+    1.06238698559012,
+    1.0304784430691185
+   ]
+  }
+ },
+ "pressure_sensitivity": {
+  "resort": {
+   "pressure_pa": 117536.99999999999,
+   "diameter_mm": [
+    0.1,
+    0.2,
+    0.3,
+    0.5,
+    0.7,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+   ],
+   "speed_ratio": [
+    1.0018050000793695,
+    1.0046227514490755,
+    1.0069097328727046,
+    1.009578261918578,
+    1.0109268323477927,
+    1.0119880689741956,
+    1.012855811774511,
+    1.0133579905392376,
+    1.0140944985283213,
+    1.0147547798791803,
+    1.0153691570935057,
+    1.0159122703884291
+   ]
+  }
+ },
+ "grid_check": {
+  "resort": {
+   "moon": {
+    "classes": 128,
+    "spectra": [
+     {
+      "dm_mm": 0.75,
+      "shape_mu": 0.0,
+      "water_survival_fraction": 0.0031150219560396163
+     },
+     {
+      "dm_mm": 0.75,
+      "shape_mu": 3.0,
+      "water_survival_fraction": 0.00022613960330561807
+     },
+     {
+      "dm_mm": 1.5,
+      "shape_mu": 0.0,
+      "water_survival_fraction": 0.11888181361480607
+     },
+     {
+      "dm_mm": 1.5,
+      "shape_mu": 3.0,
+      "water_survival_fraction": 0.0690447645654658
+     },
+     {
+      "dm_mm": 2.5,
+      "shape_mu": 0.0,
+      "water_survival_fraction": 0.3683152707322746
+     },
+     {
+      "dm_mm": 2.5,
+      "shape_mu": 3.0,
+      "water_survival_fraction": 0.3474285342555331
+     }
+    ]
+   },
+   "earth": {
+    "classes": 128,
+    "spectra": [
+     {
+      "dm_mm": 0.75,
+      "shape_mu": 0.0,
+      "water_survival_fraction": 0.40302622783072967
+     },
+     {
+      "dm_mm": 0.75,
+      "shape_mu": 3.0,
+      "water_survival_fraction": 0.36199165805643013
+     },
+     {
+      "dm_mm": 1.5,
+      "shape_mu": 0.0,
+      "water_survival_fraction": 0.7595708132267521
+     },
+     {
+      "dm_mm": 1.5,
+      "shape_mu": 3.0,
+      "water_survival_fraction": 0.7748692395150155
+     },
+     {
+      "dm_mm": 2.5,
+      "shape_mu": 0.0,
+      "water_survival_fraction": 0.8914061510419978
+     },
+     {
+      "dm_mm": 2.5,
+      "shape_mu": 3.0,
+      "water_survival_fraction": 0.9089245372234219
+     }
+    ]
+   }
+  }
+ },
+ "producer": {
+  "domain": "atmosphere",
+  "files": {
+   "atmosphere/rain/drops.py": "e3b1a394e50e2ccdd1b3fed6109519fe060ea1f572eb6283baa49311425afc82",
+   "atmosphere/rain/distributions.py": "19aea8e4e269e4146630f59bcffdab2140c2327dd459bbbe85931917f2e917f4",
+   "atmosphere/rain/product.py": "529746205ed5e19510b627214ab84e45cdaa06b09aa45099f985ac9a59e0165b",
+   "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+  },
+  "inputs": {
+   "research/studies/climate_targets/results/climate_targets.json": "cf0e8d8502357e90c3d92d51d20d1e26973c394bdce6bcb3251466c83bbd5d94"
+  },
+  "constants": {
+   "AVOGADRO": 6.02214076e+23,
+   "BOLTZMANN": 1.380649e-23,
+   "CM1_DRY_AIR_GAS_CONSTANT": 287.04,
+   "CM1_GRAVITY": 9.81,
+   "CM1_RAIN_DENSITY_EXPONENT": 0.54,
+   "CM1_RAIN_DENSITY_REFERENCE_PRESSURE": 85000.0,
+   "CM1_RAIN_DENSITY_REFERENCE_TEMPERATURE": 273.15,
+   "CM1_RAIN_FALL_CAP": 9.1,
+   "CM1_RAIN_FALL_COEFFICIENT": 841.99667,
+   "CM1_RAIN_FALL_EXPONENT": 0.8,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "GAS_CONSTANT": 8.31446261815324,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665
+  }
+ }
+}
