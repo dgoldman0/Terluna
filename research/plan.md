@@ -32,7 +32,10 @@ and a [synthesis](studies/domain_synthesis/README.md) fitted them together at th
 three, with `research/array-industry` and `research/jura-island`, were merged in a third
 ([integration/five-branches.md](integration/five-branches.md)), and
 [what each target climate takes](studies/climate_targets/README.md) set the author's open question of the target
-climate across the domains. The author's decisions in that work are in the register. The key points so far:
+climate across the domains. The author's decisions in that work are in the register. After it two more domains opened
+off `domain/ecology`: `domain/climate`, for the target climate's comparison and what follows the choice (the design
+case, the glow pair, the high cloud and the climate's readers), and `domain/atmosphere`, for the rain's physics and
+sound, brought in from the author's earlier work, and the air's other physics. The key points so far:
 
 - **The planned climate** (provisioning). The investigated climate is the planned climate: what the shield and the
   array add to the Moon's heat is answered so that the Moon keeps it. Since 17 October the author weighs a warmer,
