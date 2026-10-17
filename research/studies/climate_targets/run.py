@@ -22,7 +22,7 @@ from shared import constants as K
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 OUT = HERE / 'results' / 'climate_targets.json'
-SCHEMA = 'terluna.research.climate-targets/1'
+SCHEMA = 'terluna.research.climate-targets/2'
 CODE = ('research/studies/climate_targets/run.py', 'research/studies/climate_targets/extract.py')
 EXTRACT = 'research/runs/climate_targets/extract.json'
 GASES_GLOW = 'research/studies/gases_glow_dimming/results/gases_glow_dimming.json'
@@ -33,7 +33,7 @@ LIGHT = 'research/studies/light_limitation/results/light_limitation.json'
 POWER = 'provisioning/results/power.json'
 RESOURCES = 'resources/results/first_screen.json'
 GROUNDWATER = 'geography/results/groundwater_uptake.json'
-INPUTS = {EXTRACT: 'terluna.research.climate-targets-extract/1', GASES_GLOW: 'terluna.research.gases-glow-dimming/1',
+INPUTS = {EXTRACT: 'terluna.research.climate-targets-extract/2', GASES_GLOW: 'terluna.research.gases-glow-dimming/1',
           GLOW: 'terluna.research.fleet-glow/1', GAS_FORCING: 'terluna.atmosphere.reduced-gas-forcing/1',
           COLUMN: None, LIGHT: 'terluna.research.light-limitation/1', POWER: 'terluna.provisioning.power/1',
           RESOURCES: 'terluna.resources.first-screen/1', GROUNDWATER: 'terluna.geography.groundwater-uptake/1'}
@@ -54,13 +54,17 @@ EVIDENCE = ('Arithmetic on two ExoPlaSim runs and committed products. The two ru
             'the kelvins to shed, at the test\'s albedo; the climate at a target between the two runs is interpolated '
             'linearly in the ground\'s temperature, so it mixes the two physics and carries neither the refit\'s high '
             'cloud at the cooler end nor the dimming\'s own cut to the rain. The heat beyond the sunlight takes the '
-            'GCM\'s efficacies for the gases and the glow and an efficacy of 1 for heat released at the ground.')
+            'GCM\'s efficacies for the gases and the glow and an efficacy of 1 for heat released at the ground. The '
+            'heat at 2 m takes the output\'s 2 m air with the lowest level\'s specific humidity, capped at saturation, '
+            'as in air mixed through the lowest kilometre.')
 READING_RULE = ('W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. '
                 'A dimming is the share of the sunlight reaching the Moon that the fleet takes away, at the test\'s '
                 'albedo, and the sunlight scale the GCM would fly for it is the design scale times what remains. '
-                'Heat at the ground is in the 3-day means at the lowest model level, about 0.9 km up, pooled over '
-                'land cells and means; deserts are land under 0.5 mm of rain a day. Pairs are [low, high] ends: the '
-                'two fits for the feedback, the light study\'s and Earth\'s models\' ends for the costs.')
+                'Heat is in the 3-day means, each about a tenth of the lunar day, at the lowest model level, about '
+                '0.9 km up, and at 2 m; the land\'s figures are weighted by land area and the seas\' by sea area, '
+                'quantiles and shares of time included. Deserts are land under 0.5 mm of rain a day. Pairs are '
+                '[low, high] ends: the two fits for the feedback, the light study\'s and Earth\'s models\' ends for '
+                'the costs.')
 
 
 def digest(path) -> str:
@@ -93,7 +97,8 @@ def crossing(ladder, celsius):
 
 
 # Shares of time past a threshold do not interpolate: they follow the tail of the distribution.
-RUNS_ONLY = ('wet_bulb_above_28', 'wet_bulb_above_31', 'wet_bulb_above_28_tropics')
+RUNS_ONLY = ('wet_bulb_above_28', 'wet_bulb_above_31', 'wet_bulb_above_28_tropics',
+             'wet_bulb_2m_above_28', 'wet_bulb_2m_above_31', 'wet_bulb_2m_above_28_tropics')
 
 
 def heights(ladder):
@@ -104,15 +109,24 @@ def climate(run):
     """The figures the targets interpolate, from one run's years 10-19. A crossing height is None where the lowest
     level is already colder."""
     h = run['heat']
+    g = h['land']['at_2_m']
     return dict(ground_k=run['ground_k'], rain_mm_day=run['rain_mm_day'], land_rain_mm_day=run['land']['all']['rain_mm_day'],
                 land_desert=run['land']['all']['desert'],
                 wet_bulb_median_c=h['land']['wet_bulb']['median'], wet_bulb_p99_c=h['land']['wet_bulb']['p99'],
                 wet_bulb_above_28=h['land']['above_28'], wet_bulb_above_31=h['land']['above_31'],
                 wet_bulb_above_28_tropics=h['bands']['0-15']['above_28'],
-                land_air_median_c=h['land']['air']['median'], sea_median_c=run['seas']['all']['median'],
+                land_air_median_c=h['land']['air']['median'],
+                wet_bulb_2m_median_c=g['wet_bulb']['median'], wet_bulb_2m_p99_c=g['wet_bulb']['p99'],
+                wet_bulb_2m_above_28=g['above_28'], wet_bulb_2m_above_31=g['above_31'],
+                wet_bulb_2m_above_28_tropics=h['bands']['0-15']['at_2_m']['above_28'],
+                land_air_2m_median_c=g['air']['median'], sea_median_c=run['seas']['all']['median'],
                 ladder=[dict(height_km=x['height_km'], air_c=x['air_c'], pressure_atm=x['pressure_atm'])
                         for x in run['sky_over_land']],
                 **heights(run['sky_over_land']))
+
+
+def comfort(run):
+    return dict(heat=run['heat'], seas=run['seas'], freezing_level_over_land_km=run['freezing_level_over_land_km'])
 
 
 def interpolate(a, b, ground_k):
@@ -255,8 +269,11 @@ def results():
                       constants=dict(MOON_RADIUS=K.MOON_RADIUS, JULIAN_YEAR_DAYS=K.JULIAN_YEAR_DAYS,
                                      JULIAN_DAY=K.JULIAN_DAY)),
         evidence=EVIDENCE, reading_rule=READING_RULE,
-        runs=dict(design=dict(run=DESIGN, **climate(design), top_of_air_w_m2=design['top_of_air_w_m2']),
-                  test=dict(run=TEST, **climate(test), top_of_air_w_m2=toa, planetary_albedo=albedo)),
+        # each run's heat place by place at both heights, its seas by band and the column freezing level, which the
+        # climate README reads; they are the runs' own and do not interpolate
+        runs=dict(design=dict(run=DESIGN, **climate(design), **comfort(design),
+                              top_of_air_w_m2=design['top_of_air_w_m2']),
+                  test=dict(run=TEST, **climate(test), **comfort(test), top_of_air_w_m2=toa, planetary_albedo=albedo)),
         settled=dict(fits=fits, feedback_w_m2_k=lam, balance_k=bal,
                      saturated_column_max_outgoing_w_m2=saturated,
                      clear_sky_outgoing_over_the_saturated_column_w_m2=toa['outgoing_infrared_clear_sky'] - saturated,

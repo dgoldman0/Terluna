@@ -291,10 +291,12 @@ fleet's glow, its roll and the tile, support and flexible work; the curved air's
 design case; the 45° rings and the Jura Island box; the GCM's longwave refit and ice optics. What follows ranks what
 the integration found next.
 
-1. **The target climate**, the author's choice among the warm Moon near 307 K, 300 K and the design temperature of
-   295 K, set out across the domains in [what each target climate takes](studies/climate_targets/README.md). Then the
-   design case for the chosen target, a 20-year GCM run of about 1.5 hours on four ranks; the glow pair from it, two
-   more; and geography's lakes, the atlas globe and the studies that read the design climate, regenerated once.
+1. **The target climate**, the author's choice among the hot world near 307 K, the resort between (300 K in the study)
+   and the lock, the design temperature of 295 K, set out across the domains in
+   [what each target climate takes](studies/climate_targets/README.md), whose heat figures are weighted by area and
+   read at 2 m since 17 October. The author leans towards the resort. Then the design case for the chosen target, a
+   20-year GCM run of about 1.5 hours on four ranks; the glow pair from it, two more; and geography's lakes, the atlas
+   globe and the studies that read the design climate, regenerated once.
 2. **The heat beyond the sunlight:** the water top-up's fall recovered on the way down, as resources' first screen
    asks of the build's deliveries (resources); and the power screen's heat carried into the ledgers, which needs the
    deep air's absorption upstream of provisioning's population screen.

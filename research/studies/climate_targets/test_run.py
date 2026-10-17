@@ -3,8 +3,10 @@ import hashlib
 import json
 import math
 
+import numpy as np
 import pytest
 
+from research.studies.climate_targets import extract as X
 from research.studies.climate_targets import run as R
 from research.studies.domain_synthesis import ledgers as L
 
@@ -32,6 +34,47 @@ def test_product_binds_its_code_and_inputs(product):
 @pytest.mark.skipif(not extract_present(), reason='the GCM extract (research/runs, ignored) is not here')
 def test_a_fresh_run_matches_the_product(product):
     assert json.loads(json.dumps(R.results())) == product
+
+
+@pytest.mark.skipif(not extract_present(), reason='the GCM extract (research/runs, ignored) is not here')
+def test_the_extract_comes_from_the_current_extract_code():
+    """The extract records the code that made it and the files it read; the small ones are checked here, the output
+    years by a fresh extract."""
+    ex = json.loads((R.ROOT / R.EXTRACT).read_text())
+    assert ex['schema'] == X.SCHEMA
+    for path, h in ex['producer']['files'].items():
+        assert hashlib.sha256((R.ROOT / path).read_bytes()).hexdigest() == h, path
+    for path, h in ex['producer']['read'].items():
+        p = R.ROOT / path
+        if p.is_file() and p.stat().st_size < 50_000_000:
+            assert hashlib.sha256(p.read_bytes()).hexdigest() == h, path
+
+
+def test_the_extract_weights_quantiles_by_area():
+    rng = np.random.default_rng(0)
+    x = rng.normal(size=20001)
+    assert X.wquantile(x, np.ones_like(x), 0.5) == pytest.approx(np.median(x), abs=1e-12)
+    assert X.wquantile(x, np.ones_like(x), 0.99) == pytest.approx(np.percentile(x, 99), abs=1e-3)
+    # a cell twice another's area counts as two of it
+    a, b = np.array([1.0, 2.0, 2.0, 3.0]), np.array([1.0, 2.0, 3.0])
+    assert X.wquantile(b, np.array([1.0, 2.0, 1.0]), 0.5) == pytest.approx(X.wquantile(a, np.ones(4), 0.5))
+    assert X.share(np.array([27.0, 29.0]), np.array([3.0, 1.0]), 28.0) == pytest.approx(0.25)
+
+
+def test_the_coasts_join_the_seam_and_never_a_pole():
+    sea = np.zeros((6, 8), bool)
+    sea[-1, 3] = True                                    # a sea cell in the row nearest one pole
+    near = X.beside(sea)
+    assert not near[0].any() and near[-2:, 2:5].all()
+    sea = np.zeros((6, 8), bool)
+    sea[2, 0] = True                                     # and one on the longitude seam
+    assert X.beside(sea)[1:4, -1].all()
+
+
+def test_the_freezing_height_is_the_first_crossing_from_the_ground():
+    ta = np.array([200.0, 230.0, 260.0, 270.0, 280.0, 290.0]).reshape(1, 6, 1, 1)     # levels from the top down
+    z = np.array([30e3, 20e3, 10e3, 6e3, 3e3, 1e3]).reshape(1, 6, 1, 1)
+    assert X.freezing_height(ta, z).item() == pytest.approx(3e3 + (280.0 - 273.15) / 10.0 * 3e3)
 
 
 def test_the_held_pair_is_the_domain_synthesis(product):
@@ -96,11 +139,33 @@ def test_cooler_targets_take_more_dimming_and_leave_more_margin(product):
     assert not any(k in mid['climate'] for k in R.RUNS_ONLY)
 
 
-def test_the_extract_agrees_with_the_climate_readme(product):
-    """The figures the GCM README states for the settled test (Where the corrected Moon settles)."""
+def test_the_product_agrees_with_the_climate_readme(product):
+    """The figures the GCM README states for the settled test (Where the corrected Moon settles), with the design
+    case's, which it gives in brackets."""
     test, design = product['runs']['test'], product['runs']['design']
     assert round(test['ground_k'], 1) == 306.5 and round(design['ground_k'], 1) == 295.0
     assert round(100 * test['land_desert'], 1) == 18.9 and round(100 * design['land_desert'], 1) == 37.6
-    assert round(test['wet_bulb_median_c'], 1) == 25.9 and round(test['wet_bulb_p99_c'], 1) == 31.0
-    assert round(100 * test['wet_bulb_above_28'], 1) == 17.6
-    assert round(test['sea_median_c'], 1) == 34.0
+    # wet-bulb at 2 m (median, 99th percentile), air at 2 m, the same at 0.9 km, and the seas' median
+    for run, figures in ((test, (26.9, 31.9, 33.5, 26.3, 31.3, 32.1, 34.6)),
+                         (design, (16.7, 21.9, 20.4, 16.0, 21.3, 19.0, 24.2))):
+        land = run['heat']['land']
+        got = (land['at_2_m']['wet_bulb']['median'], land['at_2_m']['wet_bulb']['p99'], land['at_2_m']['air']['median'],
+               land['wet_bulb']['median'], land['wet_bulb']['p99'], land['air']['median'], run['seas']['all']['median'])
+        assert tuple(round(x, 1) for x in got) == figures
+    land = test['heat']['land']
+    assert round(100 * land['at_2_m']['above_28']) == 32 and round(100 * land['at_2_m']['above_31'], 1) == 3.3
+    assert round(100 * land['above_28'], 1) == 23.6 and round(100 * land['above_31'], 1) == 1.6
+    assert round(100 * land['counted_by_cell']['above_28'], 1) == 17.6
+    assert round(test['freezing_level_over_land_km']) == 36 and round(design['freezing_level_over_land_km']) == 23
+    # the place-by-place table: wet-bulb at 2 m (median, 99th percentile) and time above 28 C (at 2 m, 0.9 km up)
+    table = {('bands', '0-15'): (27.8, 32.4, 46, 37), ('bands', '15-30'): (27.7, 32.0, 44, 34),
+             ('bands', '30-45'): (27.2, 31.5, 35, 24), ('bands', '45-60'): (26.4, 30.8, 19, 12),
+             ('bands', '60-90'): (25.6, 29.3, 6.2, 2.9), ('below_1_km',): (28.4, 32.6, 57, 46),
+             ('from_4_km',): (25.4, 29.1, 5.7, 2.5), ('coasts',): (27.3, 32.1, 39, 30)}
+    for path, (median, p99, at_2_m, at_level) in table.items():
+        h = test['heat']
+        for k in path:
+            h = h[k]
+        assert (round(h['at_2_m']['wet_bulb']['median'], 1), round(h['at_2_m']['wet_bulb']['p99'], 1)) == (median, p99)
+        for share, figure in ((h['at_2_m']['above_28'], at_2_m), (h['above_28'], at_level)):
+            assert round(100 * share, 1 if figure < 10 else 0) == figure, path

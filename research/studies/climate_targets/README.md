@@ -5,9 +5,10 @@ temperature, with more dimming tested, or kept hotter and wetter provided it sta
 weather aloft, long coasts and perhaps a life chiefly of recreation
 ([register](../../decisions.md#the-target-climate-17-october-2026)). New runs wait on the choice. This study sets
 three targets side by side across the domains, at the joint integration of the five branches
-([record](../../integration/five-branches.md)): the warm Moon the corrected GCM settles on, the design temperature
-of 295 K, and 300 K between them. With them it sets the heat the plan adds to the Moon beyond its sunlight, which
-every target answers. [run.py](run.py) is arithmetic on the GCM's output and the domains' committed products
+([record](../../integration/five-branches.md)): the hot world, the warm Moon the corrected GCM settles on; the lock,
+the design temperature of 295 K; and between them the resort, a tropical resort Moon, which the study sets at 300 K.
+With them it sets the heat the plan adds to the Moon beyond its sunlight, which every target answers.
+[run.py](run.py) is arithmetic on the GCM's output and the domains' committed products
 ([results/climate_targets.json](results/climate_targets.json)); no model runs.
 
 ## Where the corrected Moon settles
@@ -51,7 +52,7 @@ Each target's dimming is the test's gain per kelvin times the kelvins it sheds, 
 the Moon at the test's albedo. Its climate is interpolated between the two runs by the ground's temperature, so the
 295 K column is the design case's own climate.
 
-| | No further dimming | 300 K | 295 K |
+| | The hot world: no further dimming | The resort: 300 K | The lock: 295 K |
 |---|---|---|---|
 | Ground | 306.5 K, settling at 306.8–307.1 | 300 K | 295 K |
 | Absorbed sunlight to shed | none | 11.8–14.7 W/m² | 20.0–25.5 W/m² |
@@ -63,17 +64,24 @@ the Moon at the test's albedo. Its climate is interpolated between the two runs 
 | Growth lost through light to the target's own dimming | none | 0.37–1.9% | 0.62–3.3% |
 | Rain on land, a day | 3.34 mm | 2.72 mm; 2.48–2.64 with the dimming's own cut | 2.25 mm; 1.90–2.14 |
 | Land under 0.5 mm a day | 18.9% | 29% | 38% |
-| Land wet-bulb: median; 99th percentile | 25.9; 31.0 °C | 19.9; 25.3 °C | 15.4; 21.0 °C |
-| Land air, median | 32.3 °C | 24.5 °C | 18.6 °C |
-| Seas' surface, median | 34.0 °C | 27.7 °C | 23.0 °C |
-| Air at 20 °C over the land | 12.1 km up | 6.4 km up | below the lowest level, 0.9 km up |
-| Freezing level over the land | 35.7 km | 27.9 km | 22.6 km |
+| Land wet-bulb at 2 m: median; 99th percentile | 26.9; 31.9 °C | 21.1; 26.2 °C | 16.7; 21.9 °C |
+| Land wet-bulb 0.9 km up: median; 99th percentile | 26.3; 31.3 °C | 20.4; 25.6 °C | 15.9; 21.2 °C |
+| Land air, median: at 2 m; 0.9 km up | 33.5; 32.1 °C | 26.1; 24.7 °C | 20.4; 19.0 °C |
+| Seas' surface, median | 34.6 °C | 28.7 °C | 24.2 °C |
+| Air at 20 °C over the land | 12.2 km up | 6.5 km up | below the lowest level, 0.9 km up |
+| Freezing level over the land | 35.8 km | 28.0 km | 22.7 km |
 | Clear-sky absorbed sunlight, and its gap to a saturated column's 239.0 W/m² | 236.2; 2.8 W/m² | 220.8–223.8; 15.1–18.2 W/m² | 209.4–215.2; 23.8–29.5 W/m² |
 | That gap with the added heat at full watts: answered; unanswered | 1.7–1.8; −10.7 to −7.4 W/m² | 14.2–17.1; 1.6–8.0 W/m² | 22.8–28.4; 10.3–19.3 W/m² |
 
-The heat at the ground is in the 3-day means at the lowest model level, about 0.9 km up, pooled over the land's cells.
-In the warm Moon the wet-bulb temperature passes 28 °C for 17.6% of the land's time: 34% within 15° of the equator,
-36% on land below 1 km and 2.3% on ground above 4 km. It passes 31 °C for 1.0%. The rain's own cut takes the GCM's
+The heat is in the 3-day means, each about a tenth of the lunar day, at 2 m and at the lowest model level, about
+0.9 km up. The land's figures are weighted by land area and the seas' by sea area. The output gives the air at 2 m and
+no humidity there, so the wet-bulb temperature at 2 m takes the lowest level's specific humidity, capped at
+saturation, as in air mixed through the lowest kilometre. In the hot world the wet-bulb temperature at 2 m passes
+28 °C for 32% of the land's time: 46% within 15° of the equator, 57% on land below 1 km and 5.7% on ground above 4 km.
+It passes 31 °C for 3.3%. At 0.9 km the same shares are 23.6%, 37%, 46% and 2.5%, with 1.6% above 31 °C. Until
+17 October's correction the figures counted every land cell alike, so the small polar cells, a third of the land's
+cells and a sixth of its area, weighed as much as the equatorial ones, and the lowest level's time above 28 °C read
+17.6%; the coasts also took in polar cells across the pole. The rain's own cut takes the GCM's
 0.55% of the rain for each 1% of dimming at a held temperature (the gases, glow and dimming study) and Earth's models'
 1.38% (the light study). The costs in the table are each target's own dimming. The 3.9–5.3% every target shares for
 the added heat costs a further 0.27–1.56% of the growth through light and 2.1–7.3% of the land's rain, which brings the
@@ -88,13 +96,14 @@ full watts they would ask its clear sky to send out 7–11 W/m² more than a sat
 wholly to unsaturated air. Keeping the warm Moon still takes the 3.9–5.3% of dimming that answers them, a sunlight
 scale near 0.92–0.93.
 
-**Comfort at the ground follows the target closely.** At 307 K the Moon's land is hot and humid at every latitude,
-the poles included. The wet-bulb temperature passes 28 °C for a third of the time near the equator and in the
-lowlands, and 31 °C, near where young, healthy adults can no longer keep up light activity in humid heat (Vecellio
-et al. 2022), for 1% of the land's time; the seas are at a bath's 34 °C. Its comfort lives aloft, where the air is
-20–25 °C from about 8 to 12 km up at 0.92–1.00 atm, and its freezing air from 36 km up near 0.58 atm. At 300 K the
-ground is a warm tropical one, with seas near 28 °C and the wet-bulb's 99th percentile near 25 °C, 20 °C air 6 km up
-and freezing air above 28 km. At 295 K it is the design case.
+**Comfort at the ground follows the target closely.** In the hot world, at 307 K, the Moon's land is hot and humid at
+every latitude, the poles included. At 2 m the wet-bulb temperature passes 28 °C for a third of the land's time,
+nearly half of it near the equator and more than half in the lowlands, and passes 31 °C, near where young, healthy
+adults can no longer keep up light activity in humid heat (Vecellio et al. 2022), for 3% of the land's time; the seas
+are at a bath's 35 °C. Its comfort lives aloft, where the air is 20–25 °C from about 8 to 12 km up at 0.92–1.00 atm,
+and its freezing air from 36 km up near 0.58 atm. In the resort, at 300 K, the ground is a warm tropical one, with
+seas near 29 °C, the 2 m wet-bulb's 99th percentile near 26 °C, 20 °C air 6.5 km up and freezing air above 28 km. The
+lock, at 295 K, is the design case.
 
 **Every kelvin below the warm Moon is dimming.** 300 K takes 5.2–6.5% of the sunlight beyond the plan's additions and
 295 K 8.9–11.3%. The dimmer would go from the corrected design case's 3% of the titania stack's light to 12–15% for
@@ -126,7 +135,9 @@ Island box.
   cloud, whose amount at the cooler end is unknown. A run at the chosen target settles it.
 - **The feedback** is the warming test's, applied to cooling; it is the GCM's for this state and Earth-tuned in its
   clouds and convection.
-- **The heat at the ground** is in 3-day means; afternoons within them are hotter.
+- **The heat at the ground** is in 3-day means, each about a tenth of the lunar day, so the means follow the day and
+  the night and average away weather shorter than three days. The wet-bulb temperature at 2 m carries the lowest
+  level's humidity down to the ground, as air mixed by the day's heating does.
 - **The efficacies** are the GCM's of 13 October on the earlier radiation; the glow pair on the corrected radiation of
   17 October gave about 0.59 for the glow, and its rerun on the final radiation waits on the target.
 - **The top-up's heat** spends all the fall energy on the Moon, the case without recovery.

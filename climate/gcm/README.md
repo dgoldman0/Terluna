@@ -918,42 +918,50 @@ reaches further poleward, and the land under 0.5 mm a day, the desert measure of
 | Below 2 km; 2–4 km; 4 km and up | 46%; 36%; 4% | 24%; 16%; 1% |
 | All land | 37.6%; 2.25 mm/day | 18.9%; 3.34 mm/day |
 
-The heat at the ground is humid. In the 3-day means of the lowest level, about 0.9 km above the ground, the land's air
-has a median of 32.3 °C (18.6 in the design case), 37.5 °C at the 99th percentile and 40.4 °C at most; its wet-bulb
-temperature has a median of 25.9 °C (15.4), 31.0 °C at the 99th percentile (21.0) and 34.0 °C at most (23.8), above
-28 °C for 17.6% of the land's time and above 31 °C for 1.0%. The seas' surface has a median of 34.0 °C (23.0) and
-36.7 °C at the 99th percentile. The air cools about 1 K a kilometre upward, and the freezing level stands a median
-36 km above the ground (23 km in the design case). The figures come from the run's output files and the T21 boundary
-file, by the scripts in `session-tools/climate_settled_2026-10-17` on the research drive; the wet-bulb temperature is
-the psychrometric one over water with Bolton's saturation.
+The heat at the ground is humid. In the 3-day means, each about a tenth of the lunar day, the land's air at 2 m has a
+median of 33.5 °C (20.4 in the design case), 39.2 °C at the 99th percentile and 42.3 °C at most. Its wet-bulb
+temperature at 2 m has a median of 26.9 °C (16.7), 31.9 °C at the 99th percentile (21.9) and 34.8 °C at most (24.6),
+and passes 28 °C for 32% of the land's time and 31 °C for 3.3%. At the lowest level, about 0.9 km above the ground,
+the air's median is 32.1 °C (19.0) and the wet-bulb temperature's 26.3 °C (16.0), with 31.3 °C at the 99th percentile
+(21.3), passing 28 °C for 23.6% of the land's time and 31 °C for 1.6%. The seas' surface has a median of 34.6 °C
+(24.2) and 36.8 °C at the 99th percentile. The air cools about 1 K a kilometre upward, and the freezing level stands a
+median 36 km above the ground (23 km in the design case). The land's figures are weighted by land area and the seas'
+by sea area. The output gives the air's temperature at 2 m and no humidity there, so the wet-bulb temperature at 2 m
+takes the lowest level's specific humidity, capped at saturation, as in air mixed through the lowest kilometre; the
+wet-bulb temperature is the psychrometric one over water with Bolton's saturation. The figures come from the run's
+output files and the T21 boundary file through the target-climate study's
+[extract](../../research/studies/climate_targets/extract.py), and its product carries them. The first readout counted
+every land cell alike, so the small polar cells, a third of the land's cells and a sixth of its area, weighed as much
+as the equatorial ones, and it put the lowest level's time above 28 °C at 17.6%.
 
-Place by place, in the same 3-day means of years 10–19, with the design case's figures in brackets (`readout.py`):
+Place by place, in the same 3-day means of years 10–19, with the design case's figures in brackets:
 
-| Land | Wet-bulb: median; 99th percentile | Time above 28 °C wet-bulb | Air: median |
+| Land | Wet-bulb at 2 m: median; 99th percentile | Time above 28 °C wet-bulb: at 2 m; 0.9 km up | Air at 2 m: median |
 |---|---|---|---|
-| 0–15° | 27.0; 31.8 °C (17.3; 21.8) | 34% (0) | 31.7 °C (19.3) |
-| 15–30° | 27.0; 31.4 °C (17.1; 21.3) | 33% (0) | 32.0 °C (19.4) |
-| 30–45° | 26.6; 30.9 °C (16.2; 20.5) | 24% (0) | 31.7 °C (19.1) |
-| 45–60° | 25.7; 30.2 °C (15.2; 18.3) | 12% (0) | 31.9 °C (18.8) |
-| 60–90° | 25.0; 28.7 °C (14.3; 17.3) | 2.8% (0) | 33.1 °C (18.1) |
-| Below 1 km | 27.1; 31.8 °C (16.4; 21.6) | 36% (0) | 33.3 °C (19.6) |
-| 4 km and up | 24.8; 28.5 °C (15.4; 18.8) | 2.3% (0) | 29.3 °C (17.6) |
-| Coasts, the land beside the sea | 26.3; 31.3 °C (16.0; 21.2) | 23% (0) | 32.5 °C (18.9) |
+| 0–15° | 27.8; 32.4 °C (18.1; 22.5) | 46%; 37% (0) | 33.4 °C (20.9) |
+| 15–30° | 27.7; 32.0 °C (17.9; 22.0) | 44%; 34% (0) | 33.5 °C (20.9) |
+| 30–45° | 27.2; 31.5 °C (16.9; 21.2) | 35%; 24% (0) | 33.3 °C (20.5) |
+| 45–60° | 26.4; 30.8 °C (15.9; 19.0) | 19%; 12% (0) | 33.3 °C (20.2) |
+| 60–90° | 25.6; 29.3 °C (15.1; 18.1) | 6.2%; 2.9% (0) | 34.5 °C (19.6) |
+| Below 1 km | 28.4; 32.6 °C (17.9; 22.5) | 57%; 46% (0) | 34.7 °C (21.7) |
+| 4 km and up | 25.4; 29.1 °C (16.2; 19.6) | 5.7%; 2.5% (0) | 30.7 °C (18.9) |
+| Coasts, the land beside the sea | 27.3; 32.1 °C (17.3; 22.0) | 39%; 30% (0) | 33.7 °C (20.7) |
 
-Each place's warmest tenth of its 3-day means, its afternoons, averages a wet-bulb temperature of 29.2 °C and air of
-34.9 °C (18.7 and 22.9), and its coolest tenth 22.7 and 30.2 °C (13.0 and 17.2). The seas' surface has a median of
-35.3 °C within 15° of the equator and 33.1 °C poleward of 60° (25.8 and 19.8). Over the land the air 10 km up, 22.0 °C
-at 0.96 atm, is near the design case's at the lowest level, 19.6 °C at 1.13 atm; 20 km up it is 12.7 °C at 0.79 atm
-and 30 km up 5.0 °C at 0.65 atm (2.4 and −7.1 °C at the same heights in the design case).
+Each place's warmest tenth of its 3-day means, its afternoons, averages a wet-bulb temperature at 2 m of 29.8 °C and
+air of 36.7 °C (19.4 and 24.6), and its coolest tenth 23.3 and 31.7 °C (13.7 and 18.6). The seas' surface has a
+median of 35.5 °C within 15° of the equator and 33.3 °C poleward of 60° (26.0 and 20.4). Over the land the air 10 km
+up, 22.1 °C at 0.96 atm, is near the design case's at the lowest level, 19.6 °C at 1.14 atm; 20 km up it is 12.8 °C
+at 0.79 atm and 30 km up 5.0 °C at 0.65 atm (2.5 and −7.0 °C at the same heights in the design case).
 
 The base of the thermosphere barely follows the ground: the middle-atmosphere cases at ground temperatures of 288 and
 308 K ([results/cases](../../atmosphere/middle_atmosphere/results/cases/), titania stack at 1.2 atm) put the 0.3 Pa
 base at 163.3 and 163.4 K. Through the escape model's thermal column at solar maximum, behind the film alone, the
 exobase warms from 163.6 to 163.7 K and the escape rises from 4.4 × 10⁻⁸ to 5.8 × 10⁻⁸ kg/s, an atmospheric cycle
 time of about 1.5 × 10¹⁸ years; with 0.1% of the far ultraviolet transmitted, from 3.2 × 10⁻³ to 3.8 × 10⁻³ kg/s,
-about 2.3 × 10¹³ years (`exobase_warm.py`, with the scripts above). Whether the Moon is held warm or brought back to
-the design temperature is the author's open question
-([register](../../research/decisions.md#the-target-climate-17-october-2026)); new runs wait on it.
+about 2.3 × 10¹³ years (`exobase_warm.py` in `session-tools/climate_settled_2026-10-17` on the research drive). Which
+target the Moon takes, the hot world it settles on here, the resort between or the design temperature, the lock, is
+the author's open question ([register](../../research/decisions.md#the-target-climate-17-october-2026)); new runs wait
+on it.
 
 ### The curved air's light
 
