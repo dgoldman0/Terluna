@@ -31,6 +31,17 @@ the point-mass acceleration residual and numerical convergence. The ideal
 optical ball is a lower bound on electrical thrust, with achievable materials,
 exhaust paths and Earth-safe outgoing rays still to supply.
 
+## Local failed-tile response
+
+[tile_failure.py](tile_failure.py) follows a failed tile in the
+Hill–Clohessy–Wiltshire equations of a circular orbit, with finite parallel
+tile envelopes, continuous clearance and contact events and a capped
+independent backup acceleration. The physical account ends at first contact,
+and a tile returned to its slot keeps its failed filter. The
+[tile study](../../research/studies/solar_shield_array/tile_design.md) records
+the response windows and the replacement queues: a local disturbance test
+around one slot of the eccentric ring fleet.
+
 ## Cycling membrane experiment
 
 [cycling.py](cycling.py) adds an ideal specular sail, Earth/Moon eclipse unions,
@@ -235,3 +246,16 @@ Under Earth's tide a whole stack of rings regresses together, so on those axes
 every pair's plane difference turns with the stack, and holding it there works
 against the common regression (see the solar shield array study's relative-orbit
 plan).
+
+## Flexible array propagation
+
+[flexible_fleet.py](flexible_fleet.py) propagates the centre of mass, quaternion,
+rotation and reduced membrane coordinates from the same nodal forces.
+[flexible_optics.py](flexible_optics.py) recalculates deformed triangle loading,
+mutual transmission, bounded reflection trim and sampled receiver coverage.
+[flexible_environment.py](flexible_environment.py) optionally supplies differential
+point gravity and spherical eclipses from a caller-supplied ephemeris.
+Momentum wheels have finite torque/capacity and an explicitly idealized mean-frame
+attachment. Energy/work and angular-impulse tests are numerical verification,
+not hardware or fleet qualification. The [fixed benchmarks and screen](../../research/studies/solar_shield_array/flexible_coupling.md)
+record their model limits and leave the coupled design search for later.

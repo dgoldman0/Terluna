@@ -1,0 +1,72 @@
+{
+  "schema": "terluna.research.array-tile-checks/1",
+  "checked_on": "2026-10-14",
+  "branch": "research/array-industry",
+  "base_commit": "3a0b3fd36d3974a946aea2cb8825b8f907a51b5e",
+  "evidence": "Executed numerical and repository checks plus focused source/physics review; no empirical validation or manuscript clearance.",
+  "product_sha256": "8dc05d1ace209d470b5dede4bfb0af8ea6abe452e660d426159cf55ad16921b2",
+  "model_files": {
+    "research/studies/solar_shield_array/tile_design.py": "9c94171c7c32d7da904a8f6e9ad4ac907b484826b97927a38a424ea13c6953c6",
+    "engineering/array_tile.py": "2cbc0a36ffe0c84f01d2d51224017b3b82477c337e5d9fb2b23d9a0738f882f7",
+    "engineering/array_momentum.py": "676d5f881be9717f1317536b9b78cc84f9b0f546a1befcb7fde89fb524d3ce6c",
+    "engineering/array_service.py": "3fe65bf93d92e739b8a6f1bcb5c20106179e2327e6930afe604d525c0f191fd5",
+    "protection/dynamics/tile_failure.py": "7514aaea70b0b8970129b7e2543cfcd92e6c4450d9c253803b07445884067a3b",
+    "research/studies/solar_shield_array/attitude_schemes.py": "1c4beb572ebaa0bbc6ec1c638eea728065e6e19f578f8e54fb78f26c0e2a3c19",
+    "protection/dynamics/ring_bundle.py": "05543a75524dd0d3c9cbbb6aa0dc0b02d8d5a0d156c943b6d794184f3ecfb98d",
+    "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+    "shared/provenance.py": "c59d32186d453a80992eb02203b644fe759aca869dc892d91af9aa74fd65c7f8"
+  },
+  "test_files": {
+    "engineering/test_array_tile.py": "802d6d757a319b4cfeb30446898ecc2afb549b2eef48b923ddac4e304f44ee75",
+    "engineering/test_array_momentum.py": "4348156738b8f16959d79edb9122cad568b9d17be7955fa3ea17062477679cac",
+    "engineering/test_array_service.py": "adb6d08cbb3dbc64cf045e4eac4bf60557bc10d81e22f867d5ee731dd9d0e1e1",
+    "protection/dynamics/test_tile_failure.py": "3ace74e0b0394342cb15cbef28422ef03deae17991e22007a8133cb6057d04d1",
+    "research/studies/solar_shield_array/test_tile_design.py": "7f38b3b29badf29825a4bc512a229f697dcb69fdaadd62d665514d5bdfd161f1"
+  },
+  "repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+    "exit_code": 0,
+    "python_passed": 2053,
+    "python_skipped": 16,
+    "python_runtime_s": 442.22,
+    "js_passed": {
+      "immersion": 129,
+      "columns_and_transport": 48,
+      "calendar": 14
+    },
+    "layer_violations": 0,
+    "provenance": "PASS, protection verifier executed and five input hashes verified",
+    "ensemble": "PASS, integrity only",
+    "scope_note": "Complete make check rerun passed on the final model, source, product and test snapshot immediately before commit; only this check record and the report check wording were then updated."
+  },
+  "final_focused_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest -q engineering/test_array_tile.py engineering/test_array_momentum.py engineering/test_array_service.py protection/dynamics/test_tile_failure.py research/studies/solar_shield_array/test_tile_design.py",
+    "exit_code": 0,
+    "passed": 50,
+    "runtime_s": 2.74
+  },
+  "final_layer_check": {
+    "files": 959,
+    "violations": 0
+  },
+  "numerical_refinement": {
+    "momentum_relative_peak_refinement": 0.00010136748315514588,
+    "fault_safety_event_refinement_s": 4.547473508864641e-13,
+    "fault_contact_event_refinement_s": 9.094947017729282e-13,
+    "queue_balance": true
+  },
+  "review": {
+    "scope": "Independent review of structural load paths, frame stiffness, momentum transport, fixed-point sizing, local fault equations, queue accounting, source limits and report claims.",
+    "sources": 11,
+    "full_scholarly_reading": false
+  },
+  "not_established": [
+    "qualified material/device performance and lifetime",
+    "complete structural attachment, deployment and rotor containment",
+    "flexible-body controller, photon allocation and periodic unloading",
+    "swept component clearance on the actual eccentric rolled fleet",
+    "failed-object containment, removal and replacement insertion",
+    "manufacturing processes, spare production and component reuse",
+    "whole-fleet orbital propagation and total spectral coverage"
+  ]
+}

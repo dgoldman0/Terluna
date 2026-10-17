@@ -85,8 +85,8 @@ BOUND = {
     'resources_phosphorus': dict(
         path='resources/results/phosphorus.json', schema='terluna.resources.phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='99876491f7456974b32a179bf4f99b86c6fe65f8',
-        sha256='5a22b880141da23f3f45aa3be4f5a46f9d98c5d1fdb68c2224fdd44e77cafc52',
+        blob='d924ac5ff6ca8c75bc490ee67deccebe9a838c72',
+        sha256='adc90d7349332c31bb1c94af3c8061f022a5e8639e676534187c9f6b09e4421a',
         note='The aerial phosphorus return account, whose complete-diet P demand provisioning supplies; its lift '
              'energy per kg to 10 km.'),
     'resources_phosphorus_py': dict(
@@ -105,8 +105,8 @@ BOUND = {
     'resources_sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='8a9d2b3df1e3e810b6e7f4f09483ff4edbd5e701',
-        sha256='55a0794985710578beb7efee36c197e58405780a64c7ca13e8f8be5c799a83a2',
+        blob='47ed7213fcf73a5ca9e03f84107316dc959e59a2',
+        sha256='86b1d24cc3c91eb039984ce1617bf30a179236a1546907bd3155ae3eb9dc9c5d',
         note='The land\'s phosphorus through the rain-fed lakes to the seas: the dissolved input the common-level '
              'waters receive, and what the waters\' life can spare to seaweed, fish and sorption.'),
 }

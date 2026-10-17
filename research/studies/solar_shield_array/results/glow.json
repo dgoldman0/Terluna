@@ -1,0 +1,7752 @@
+{
+ "schema": "terluna.research.fleet-glow/1",
+ "producer": {
+  "files": {
+   "research/studies/solar_shield_array/glow.py": "8f596bf0526174c3068d4253e06e3d815f5993ae480d3f4b16702ca9c5b31fe3",
+   "protection/model.py": "018cfbf6ac5e8ea6935480e09c4c2b69bf54b08c873d953d4b5e31c952d06647",
+   "protection/spectra/annulus_film.py": "b1875c48b858b227673e864e2f5172a195a23c9507b1b85c3c118f8a86781aa1",
+   "protection/spectra/short_wave.py": "c0b72e9b92e20c85f1c7c97d29cd1b8aaa75e8af08030c1ccf48a9295449414c",
+   "atmosphere/middle_atmosphere/escape.py": "5571aa6a55a04bb3c188ff66fea1c7d42f10b0a57eca0ee87bff0ebe8e8e5f71",
+   "atmosphere/middle_atmosphere/lbl_check.py": "153ff01c4dec4fcd37d63efe4868b637ca64bbd9ddc11b35c9bbc90d6da8bfd1",
+   "atmosphere/middle_atmosphere/equilibrium.py": "265bc854a481936e739d9fc4b6a2a6e34986f35740ee89bd8793f7c8f3590f4f",
+   "atmosphere/middle_atmosphere/run.py": "551829d244329d129d33b78eeffc61584f33311e7c5648a62f8e255295258acd",
+   "atmosphere/radiative_convective/ck.py": "97abc1ae6ba32a06873e5a8855231d2f7ff1fc960ced50053640854d3bea1199",
+   "atmosphere/radiative_convective/longwave.py": "87a40a93f2e82dab85908b9a44607dd05f604250f8c91ae66f7d0e60505ad468",
+   "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+  },
+  "constants": {
+   "AU": 149597870700.0,
+   "AVOGADRO": 6.02214076e+23,
+   "BOLTZMANN": 1.380649e-23,
+   "CLASSICAL_ELECTRON_RADIUS": 2.8179403262e-15,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "ELEMENTARY_CHARGE": 1.602176634e-19,
+   "GAS_CONSTANT": 8.31446261815324,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "PLANCK": 6.62607015e-34,
+   "SOLAR_CONSTANT": 1361.0,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "STEFAN_BOLTZMANN": 5.670374419e-08,
+   "SUN_RADIUS": 695700000.0,
+   "SYNODIC_MONTH_DAYS": 29.53059
+  },
+  "correlated_k_table": "4d7f190b96de7e0a"
+ },
+ "inputs": {
+  "research/studies/solar_shield_array/results/array_heat.json": "8ade010fcbf805adf71a90c74e4357ad699067f5fbc8f445267fc984e80a1aa1",
+  "research/studies/solar_shield_array/results/ring_layout.json": "456338e771bbc4aa384b70a0cffda0ed8f62ec5737eea53e264e7f4e9acab4d6",
+  "research/studies/solar_shield_array/results/integrated_ledger.json": "6a12af0ddfa96b2f9df655013efbb75a10cdcfcbd685b9b8275fe58cfa6a73dc",
+  "research/studies/solar_shield_array/results/attitude_schemes.json": "55c2d051a72a30642506570a4ca97dee8c10692f9f39e398282940e1f34d3228",
+  "protection/spectra/annulus_film.json": "328f6698a2f021cf81e55e1c4b7b2a3e64280f3b6d9ec8fac67f4d8008eba630",
+  "provisioning/results/first_screen.json": "7696e01a81a9d460000b0289a8476d24e2ad115b2bee41b66de744de1d522701",
+  "illumination/fleet_light/results/night_light.json": "c58f6afe2f342d809f8407e6ad8eb4fba4732d100fabd32869b80ca0a33233ea",
+  "research/studies/solar_shield_array/glow_sources.json": "4b1dfe32f2d72c927b39a8b9f1b797dc6705bd45196c8f06ef2e47e4687b5d64",
+  "research/studies/solar_shield_array/results/ring_layout_rolled.json": "b26d63ed1f4fb1462188a7224b01fc8dd2456fb08be1d39e711c540dd6cafd4e",
+  "illumination/sky/results/solved_sky.json": "a94333cd71a83169df57796cf199b06ec4efff12b1d1f2f9f9ac07bec01f7c6a",
+  "protection/sources/o.nff": "adb1540b11008383aaef0b8c4f5fb1a2bc5df14f3717ac4d58fc54fff92ba6cb",
+  "protection/sources/si.nff": "2bbd2aef0292aa392a61942b1c401171b5bc30bb77ab1cab9c08b6264048019a",
+  "protection/sources/ti.nff": "f3e3c7c01ec8dfff224ac0b95b5e4b4997721e7147ec4fe601deaf0cc762fad3",
+  "protection/sources/SiO2_Franta.yml": "89e3065c48040e9347fb8707371d5528ab45ff4e05be5fd6644658b588ce458e",
+  "protection/sources/TiO2_Siefke.yml": "9b03947949e54cd98f58a989bd031a5fddb1a36a9d9f7fd64d5ff2bd68c2885c",
+  "protection/sources/TSIS1_HSRS_stride100.csv": "0ae235c6912f26773c0e9b71ea3924aaf8856c74a511dc07e86b60b3c1b88172",
+  "atmosphere/middle_atmosphere/inputs/whi2008_ref_solar_irradiance_ver2.dat": "270869df7761805c451c0be7927cb9d06f88745fa6beab55b1bf929f6f2110ed",
+  "atmosphere/middle_atmosphere/results/profiles/moon_1.2atm_titania_stack.csv": "e7079c911c9e70c475dec5fd3c2eecdad7e5e9435e63a7b31c68c644cecc3605",
+  "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack.json": "3045438e2bc6df545f09378248ab083d47c66bb626ddf4f73f05702a4c911fba",
+  "atmosphere/middle_atmosphere/results/profiles/moon_1.2atm_titania_stack_ts298.csv": "2144c1b0f2818eb4eb09e5bf2bdd1d3d7fd1bf67326873a5f27fc631d4dffb0c",
+  "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack_ts298.json": "eda1499f9ba2c3a5d3289aca15e4c3e81afa90d8adac33bb1d72c8446b9d75eb"
+ },
+ "evidence": "A screen. The films' optics are computed from the protection domain's optical constants and layer sequence with the thin-film recursion taken to oblique incidence; the stack's thermal state from an N-layer model of parallel specular plates; the fleet from the shield study's layout, with tiles held as the dynamics hold them and sunlight attenuated by projected layer counts; the Moon's outgoing infrared from the atmosphere domain's correlated-k model on its titania-stack columns scaled to the GCM design case. No dynamics, attitude law, coating or climate model is run; coatings and the Moon's angular emission are design guesses labelled in assumptions.",
+ "reading_rule": "Heat on the Moon in W/m2 averaged over the whole Moon (global), its day hemisphere (day) or its night hemisphere (night); PW of sunlight absorbed in the films; temperatures K at the sunward crossing for the ring in the stack's middle. The glow is the films' own emission; the returns are the Moon's own outgoing infrared and reflected sunlight that the films reflect back onto it. Added dimming in percent of the design sunlight (1,173.25 W/m2 at the top of the air, 293.3 W/m2 averaged over the Moon) at the stated infrared efficacy; power from that dimming in TW of electricity at the ledger's 20-30% conversion. Ranges pair low and high design guesses.",
+ "assumptions": [
+  {
+   "name": "films",
+   "evidence": "sourced",
+   "statement": "the comparison's films: 0.1 um of titania on 4 um of silica on the annulus rings, the window stack (1 um on 10 um) on the window rings, both with the protection domain's anti-reflection and matching layers (array_heat, annulus_film)"
+  },
+  {
+   "name": "optical constants",
+   "evidence": "sourced",
+   "statement": "Franta silica and Siefke titania, CXRO below 24.8 nm, Malitson silica without absorption at 210-2,500 nm, as the protection domain evaluates its films"
+  },
+  {
+   "name": "oblique incidence",
+   "evidence": "estimate",
+   "statement": "smooth specular films, s and p averaged; the protection domain's recursion reproduced to 1e-15 at normal incidence"
+  },
+  {
+   "name": "solar infrared beyond 2.5 um",
+   "evidence": "estimate",
+   "statement": "a 5,772 K blackbody's shape scaled so the spectrum gives the solar constant: 45.4 W/m2"
+  },
+  {
+   "name": "the stack",
+   "evidence": "estimate",
+   "statement": "at each point of the sky, the local layers as parallel infinite plates sharing the local absorbed sunlight evenly, no conduction between them; thermal bands 2-125 um, held beyond"
+  },
+  {
+   "name": "tiles and rings",
+   "evidence": "sourced",
+   "statement": "every ring of the layout on the flown matched rings' apolune radius and forced eccentricity by height, the inventory's 28.2 million tiles shared evenly and spaced evenly in time, held perpendicular to the velocity with the 1.5 degree shingle (ring_bundle); keeping tilts left out"
+  },
+  {
+   "name": "window rings",
+   "evidence": "sourced",
+   "statement": "the middle 26% of the stack by height, array_heat's share"
+  },
+  {
+   "name": "sunlight on each tile",
+   "evidence": "estimate",
+   "statement": "attenuated by the films the projected counts put in front (fleet_light's rule), with the Moon's penumbra linear"
+  },
+  {
+   "name": "layers in the Moon's view",
+   "evidence": "estimate",
+   "statement": "along-track tiles over a tile's angular length times rings over a strip's angular width; a rolled stack opens to 1 + (n - 1)|cos roll| layers (design guess)"
+  },
+  {
+   "name": "the Moon's outgoing infrared",
+   "evidence": "estimate",
+   "statement": "the atmosphere domain's correlated-k model on the clear titania-stack columns at 288 and 298 K, interpolated to 294.9 K and scaled to the GCM design case's (1 - 0.280) S/4 = 211.2 W/m2; uniform over the Moon and Lambertian (design guess)"
+  },
+  {
+   "name": "the Moon's reflected sunlight",
+   "evidence": "design guess",
+   "statement": "a Lambertian day side with the planetary albedo 0.28, flat in wavelength, its spectrum the sunlight the window stack passes"
+  },
+  {
+   "name": "infrared efficacy",
+   "evidence": "design guess",
+   "statement": "the climate answers absorbed infrared as it answers absorbed sunlight (efficacy 1; the provisioning screen's range is 0.5-1)"
+  },
+  {
+   "name": "wide-gap absorber",
+   "evidence": "design guess",
+   "statement": "an absorber with a step edge at 220 or 250 nm in the titania's place, 1-2 g/m2, assumed to hold the film's present opacity below 175 nm"
+  },
+  {
+   "name": "ultraviolet mirror",
+   "evidence": "design guess",
+   "statement": "lossless, reflecting 95-98% of 245-390 nm (annulus) or 245-340 nm (window, keeping its spectrum) ahead of the titania; mass from quarter-wave HfO2 (n 2.1) and silica stacks"
+  },
+  {
+   "name": "heat mirrors and emitters",
+   "evidence": "design guess",
+   "statement": "grey opaque coatings of the stated emissivity, sunlight absorbed and taken out of the beam, and mass, anchored to measured coatings (glow_sources.json)"
+  },
+  {
+   "name": "rolls",
+   "evidence": "sourced",
+   "statement": "attitude_schemes' law: zero in the 25 degree service arc and at the nodes, 30 degree cosine ramps; the night roll keeps the night half only"
+  },
+  {
+   "name": "dimming's electricity",
+   "evidence": "sourced",
+   "statement": "1% of the design sunlight over the Moon's disc is the ledger's dimmer light scaled, at 20-30% conversion"
+  }
+ ],
+ "design": {
+  "films": {
+   "annulus": [
+    0.1,
+    4.0
+   ],
+   "window": [
+    1.0,
+    10.0
+   ]
+  },
+  "thermal_um": [
+   2.0,
+   125.0
+  ],
+  "thermal_points": 4000,
+  "thermal_bins": 60,
+  "far_um": 1000.0,
+  "mu_nodes": 8,
+  "sun_cosines": [
+   1.0,
+   0.95,
+   0.9,
+   0.8,
+   0.7,
+   0.6,
+   0.5,
+   0.4,
+   0.3,
+   0.2,
+   0.15,
+   0.1,
+   0.06,
+   0.03
+  ],
+  "solar_tail_um": [
+   2.5,
+   125.0
+  ],
+  "solar_tail_points": 1500,
+  "sun_temperature_K": 5772.0,
+  "reference_K": 200.0,
+  "shingle_deg": 1.5,
+  "service_half_angle_deg": 25.0,
+  "roll_ramp_deg": 30.0,
+  "roll_deg": 80.0,
+  "pitch_envelope_deg": [
+   -3.0,
+   6.0
+  ],
+  "node_window_deg": [
+   10.0,
+   20.0
+  ],
+  "samples_per_ring": 360,
+  "sun_samples": 1440,
+  "sun_bin_km": [
+   100.0,
+   50.0
+  ],
+  "return_ring_stride": 8,
+  "return_sample_stride": 2,
+  "cap_nodes": [
+   14,
+   28
+  ],
+  "landing_table": 181,
+  "planetary_albedo": 0.28,
+  "surface_K": 294.9,
+  "lumens_per_watt": 94.04849375459222,
+  "thin_titania_um": 0.05,
+  "wide_gap_edge_nm": [
+   220.0,
+   250.0
+  ],
+  "wide_gap_g_m2": [
+   1.0,
+   2.0
+  ],
+  "uv_mirror_nm": {
+   "annulus": [
+    245.0,
+    390.0
+   ],
+   "window": [
+    245.0,
+    340.0
+   ]
+  },
+  "uv_mirror_reflectance": [
+   0.95,
+   0.98
+  ],
+  "uv_mirror_index": 2.1,
+  "uv_mirror_density": [
+   9.68,
+   2.2
+  ],
+  "coatings": {
+   "mesh": {
+    "emissivity": [
+     0.1,
+     0.3
+    ],
+    "solar": [
+     0.005,
+     0.02
+    ],
+    "blocked": [
+     0.05,
+     0.2
+    ],
+    "g_m2": [
+     0.02,
+     0.2
+    ]
+   },
+   "metasurface": {
+    "emissivity": [
+     0.15,
+     0.4
+    ],
+    "solar": [
+     0.005,
+     0.02
+    ],
+    "blocked": [
+     0.05,
+     0.2
+    ],
+    "g_m2": [
+     0.02,
+     0.2
+    ]
+   },
+   "tco": {
+    "emissivity": [
+     0.11,
+     0.21
+    ],
+    "solar": [
+     0.03,
+     0.1
+    ],
+    "blocked": [
+     0.05,
+     0.15
+    ],
+    "g_m2": [
+     0.5,
+     1.5
+    ]
+   },
+   "silver": {
+    "emissivity": [
+     0.02,
+     0.1
+    ],
+    "solar": [
+     0.04,
+     0.1
+    ],
+    "blocked": [
+     0.15,
+     0.3
+    ],
+    "g_m2": [
+     0.1,
+     0.3
+    ]
+   },
+   "emitter": {
+    "emissivity": [
+     0.85,
+     0.85
+    ],
+    "solar": [
+     0.002,
+     0.01
+    ],
+    "blocked": [
+     0.0,
+     0.0
+    ],
+    "g_m2": [
+     2.0,
+     10.0
+    ]
+   }
+  },
+  "infrared_efficacy": 1.0,
+  "conversion": [
+   0.2,
+   0.3
+  ]
+ },
+ "results": {
+  "films": {
+   "annulus": {
+    "titania_um": 0.1,
+    "silica_um": 4.0,
+    "solar_absorptance": {
+     "normal_outer_face": 0.0303365,
+     "normal_inner_face": 0.0321358,
+     "within_0p1_2500_nm": 0.0302455,
+     "beyond_2500_nm": 0.0329779,
+     "array_heat": 0.030246
+    },
+    "absorbed_points_of_sunlight_by_band": {
+     "0_200_nm": 0.00678351,
+     "200_242_nm": 0.108604,
+     "242_320_nm": 1.5543,
+     "320_340_nm": 0.772583,
+     "340_360_nm": 0.336162,
+     "360_380_nm": 0.0770024,
+     "380_400_nm": 0.0158169,
+     "400_700_nm": 0.00504133,
+     "700_2500_nm": 6.54306e-10,
+     "beyond_2500_nm": 0.109919
+    },
+    "by_incidence": {
+     "cosines": [
+      1.0,
+      0.95,
+      0.9,
+      0.8,
+      0.7,
+      0.6,
+      0.5,
+      0.4,
+      0.3,
+      0.2,
+      0.15,
+      0.1,
+      0.06,
+      0.03
+     ],
+     "outer_face": [
+      0.0303365,
+      0.0300723,
+      0.0299528,
+      0.0300648,
+      0.0305725,
+      0.0311768,
+      0.0316059,
+      0.031649,
+      0.0308774,
+      0.0283619,
+      0.0257932,
+      0.021586,
+      0.0162349,
+      0.0101689
+     ],
+     "inner_face": [
+      0.0321358,
+      0.0321404,
+      0.0321707,
+      0.0318935,
+      0.0317322,
+      0.0315835,
+      0.0313248,
+      0.0308866,
+      0.0299466,
+      0.0276405,
+      0.0251436,
+      0.0210046,
+      0.0159036,
+      0.010045
+     ]
+    },
+    "reflectance": {
+     "solar_outer": 0.0578919,
+     "visible_moon_face": 0.0132022,
+     "moonlight_moon_face": 0.0437445
+    },
+    "pressure_coefficient": 0.14612,
+    "thermal": {
+     "normal_emissivity_at_film_K": {
+      "outer": 0.370213,
+      "moon_face": 0.442263,
+      "K": 172.893
+     },
+     "moon_infrared_normal_reflectance_one_layer": 0.187582,
+     "by_band": {
+      "5_7.5_um": {
+       "R_moon_face": 0.0688709,
+       "T": 0.85839
+      },
+      "7.5_8.5_um": {
+       "R_moon_face": 0.211016,
+       "T": 0.324943
+      },
+      "8.5_9.6_um": {
+       "R_moon_face": 0.42818,
+       "T": 0.00355302
+      },
+      "9.6_12_um": {
+       "R_moon_face": 0.15446,
+       "T": 0.563022
+      },
+      "12_15_um": {
+       "R_moon_face": 0.0546533,
+       "T": 0.420411
+      },
+      "15_20_um": {
+       "R_moon_face": 0.0315725,
+       "T": 0.374778
+      },
+      "20_25_um": {
+       "R_moon_face": 0.300194,
+       "T": 0.0904166
+      },
+      "25_40_um": {
+       "R_moon_face": 0.183451,
+       "T": 0.405965
+      },
+      "40_125_um": {
+       "R_moon_face": 0.239157,
+       "T": 0.642756
+      }
+     }
+    },
+    "temperature_sunward_crossing_K": {
+     "one_layer": [
+      174.535
+     ],
+     "two_layers": [
+      191.099,
+      191.689
+     ]
+    }
+   },
+   "window": {
+    "titania_um": 1.0,
+    "silica_um": 10.0,
+    "solar_absorptance": {
+     "normal_outer_face": 0.0449892,
+     "normal_inner_face": 0.0477141,
+     "within_0p1_2500_nm": 0.0448721,
+     "beyond_2500_nm": 0.0483846,
+     "array_heat": 0.044873
+    },
+    "absorbed_points_of_sunlight_by_band": {
+     "0_200_nm": 0.00678354,
+     "200_242_nm": 0.108605,
+     "242_320_nm": 1.57893,
+     "320_340_nm": 0.914428,
+     "340_360_nm": 1.01968,
+     "360_380_nm": 0.488068,
+     "380_400_nm": 0.10079,
+     "400_700_nm": 0.0339158,
+     "700_2500_nm": 4.5914e-09,
+     "beyond_2500_nm": 0.161271
+    },
+    "by_incidence": {
+     "cosines": [
+      1.0,
+      0.95,
+      0.9,
+      0.8,
+      0.7,
+      0.6,
+      0.5,
+      0.4,
+      0.3,
+      0.2,
+      0.15,
+      0.1,
+      0.06,
+      0.03
+     ],
+     "outer_face": [
+      0.0449892,
+      0.0451432,
+      0.0454555,
+      0.0464611,
+      0.047543,
+      0.0483984,
+      0.0487834,
+      0.0483936,
+      0.0466711,
+      0.0423172,
+      0.0380299,
+      0.031407,
+      0.0233561,
+      0.0144571
+     ],
+     "inner_face": [
+      0.0477141,
+      0.0477516,
+      0.047794,
+      0.0477989,
+      0.0482364,
+      0.048188,
+      0.048124,
+      0.0475167,
+      0.046042,
+      0.042168,
+      0.0381686,
+      0.0316626,
+      0.0237792,
+      0.0147859
+     ]
+    },
+    "reflectance": {
+     "solar_outer": 0.050418,
+     "visible_moon_face": 0.0210371,
+     "moonlight_moon_face": 0.0371205
+    },
+    "pressure_coefficient": 0.145825,
+    "thermal": {
+     "normal_emissivity_at_film_K": {
+      "outer": 0.443617,
+      "moon_face": 0.684792,
+      "K": 175.769
+     },
+     "moon_infrared_normal_reflectance_one_layer": 0.209775,
+     "by_band": {
+      "5_7.5_um": {
+       "R_moon_face": 0.121276,
+       "T": 0.68869
+      },
+      "7.5_8.5_um": {
+       "R_moon_face": 0.226882,
+       "T": 0.128451
+      },
+      "8.5_9.6_um": {
+       "R_moon_face": 0.427517,
+       "T": 6.72191e-05
+      },
+      "9.6_12_um": {
+       "R_moon_face": 0.125041,
+       "T": 0.314104
+      },
+      "12_15_um": {
+       "R_moon_face": 0.0736445,
+       "T": 0.102489
+      },
+      "15_20_um": {
+       "R_moon_face": 0.0761269,
+       "T": 0.0389801
+      },
+      "20_25_um": {
+       "R_moon_face": 0.320547,
+       "T": 0.00381984
+      },
+      "25_40_um": {
+       "R_moon_face": 0.224384,
+       "T": 0.06233
+      },
+      "40_125_um": {
+       "R_moon_face": 0.303428,
+       "T": 0.305796
+      }
+     }
+    },
+    "temperature_sunward_crossing_K": {
+     "one_layer": [
+      177.315
+     ],
+     "two_layers": [
+      201.282,
+      207.036
+     ]
+    }
+   }
+  },
+  "outgoing_infrared": {
+   "bands_cm1": [
+    [
+     1.0,
+     350.0
+    ],
+    [
+     350.0,
+     500.0
+    ],
+    [
+     500.0,
+     630.0
+    ],
+    [
+     630.0,
+     700.0
+    ],
+    [
+     700.0,
+     820.0
+    ],
+    [
+     820.0,
+     980.0
+    ],
+    [
+     980.0,
+     1080.0
+    ],
+    [
+     1080.0,
+     1180.0
+    ],
+    [
+     1180.0,
+     1390.0
+    ],
+    [
+     1390.0,
+     1480.0
+    ],
+    [
+     1480.0,
+     1800.0
+    ],
+    [
+     1800.0,
+     2080.0
+    ],
+    [
+     2080.0,
+     2250.0
+    ],
+    [
+     2250.0,
+     2380.0
+    ],
+    [
+     2380.0,
+     2600.0
+    ],
+    [
+     2600.0,
+     3000.0
+    ]
+   ],
+   "clear_sky_W_m2": 227.158,
+   "design_W_m2": 211.185,
+   "columns": {
+    "moon_1.2atm_titania_stack": {
+     "surface_K": 288.0,
+     "olr_W_m2": 215.259
+    },
+    "moon_1.2atm_titania_stack_ts298": {
+     "surface_K": 298.0,
+     "olr_W_m2": 232.504
+    }
+   },
+   "band_W_m2": [
+    26.6903,
+    34.4677,
+    28.5638,
+    1.70481,
+    22.2918,
+    41.2055,
+    20.4887,
+    16.1076,
+    14.1573,
+    1.38977,
+    1.53346,
+    1.45795,
+    0.626283,
+    0.000111631,
+    0.245973,
+    0.25385
+   ],
+   "table_key": "4d7f190b96de7e0a"
+  },
+  "stacks": {
+   "annulus": {
+    "column_absorbed_W_m2": 55.6558,
+    "rows": [
+     {
+      "layers": 1,
+      "toward_moon_share": 0.553763,
+      "inward_hemispheric_share": 0.532897,
+      "temperature_K": {
+       "inner": 186.728,
+       "outer": 186.728,
+       "max": 186.728
+      },
+      "moon_infrared_reflectance": 0.187582,
+      "moonlight_reflectance": 0.0437445,
+      "visible_reflectance": 0.0132022
+     },
+     {
+      "layers": 2,
+      "toward_moon_share": 0.561936,
+      "inward_hemispheric_share": 0.52995,
+      "temperature_K": {
+       "inner": 174.489,
+       "outer": 175.121,
+       "max": 175.121
+      },
+      "moon_infrared_reflectance": 0.215265,
+      "moonlight_reflectance": 0.0837501,
+      "visible_reflectance": 0.0260573
+     },
+     {
+      "layers": 3,
+      "toward_moon_share": 0.564746,
+      "inward_hemispheric_share": 0.5259,
+      "temperature_K": {
+       "inner": 168.016,
+       "outer": 169.403,
+       "max": 177.216
+      },
+      "moon_infrared_reflectance": 0.227154,
+      "moonlight_reflectance": 0.120471,
+      "visible_reflectance": 0.0385787
+     },
+     {
+      "layers": 4,
+      "toward_moon_share": 0.566002,
+      "inward_hemispheric_share": 0.522446,
+      "temperature_K": {
+       "inner": 163.965,
+       "outer": 165.977,
+       "max": 177.304
+      },
+      "moon_infrared_reflectance": 0.233299,
+      "moonlight_reflectance": 0.154291,
+      "visible_reflectance": 0.0507793
+     },
+     {
+      "layers": 5,
+      "toward_moon_share": 0.566675,
+      "inward_hemispheric_share": 0.519663,
+      "temperature_K": {
+       "inner": 161.17,
+       "outer": 163.682,
+       "max": 180.156
+      },
+      "moon_infrared_reflectance": 0.236897,
+      "moonlight_reflectance": 0.185536,
+      "visible_reflectance": 0.0626711
+     },
+     {
+      "layers": 6,
+      "toward_moon_share": 0.567101,
+      "inward_hemispheric_share": 0.517428,
+      "temperature_K": {
+       "inner": 159.118,
+       "outer": 162.029,
+       "max": 182.078
+      },
+      "moon_infrared_reflectance": 0.239201,
+      "moonlight_reflectance": 0.214485,
+      "visible_reflectance": 0.0742657
+     },
+     {
+      "layers": 7,
+      "toward_moon_share": 0.567418,
+      "inward_hemispheric_share": 0.515615,
+      "temperature_K": {
+       "inner": 157.543,
+       "outer": 160.777,
+       "max": 185.073
+      },
+      "moon_infrared_reflectance": 0.240776,
+      "moonlight_reflectance": 0.241379,
+      "visible_reflectance": 0.0855738
+     },
+     {
+      "layers": 8,
+      "toward_moon_share": 0.567686,
+      "inward_hemispheric_share": 0.514125,
+      "temperature_K": {
+       "inner": 156.293,
+       "outer": 159.793,
+       "max": 187.441
+      },
+      "moon_infrared_reflectance": 0.241903,
+      "moonlight_reflectance": 0.266424,
+      "visible_reflectance": 0.0966061
+     },
+     {
+      "layers": 9,
+      "toward_moon_share": 0.567933,
+      "inward_hemispheric_share": 0.512884,
+      "temperature_K": {
+       "inner": 155.274,
+       "outer": 158.996,
+       "max": 190.34
+      },
+      "moon_infrared_reflectance": 0.242736,
+      "moonlight_reflectance": 0.289801,
+      "visible_reflectance": 0.107372
+     },
+     {
+      "layers": 10,
+      "toward_moon_share": 0.568171,
+      "inward_hemispheric_share": 0.511839,
+      "temperature_K": {
+       "inner": 154.425,
+       "outer": 158.335,
+       "max": 192.772
+      },
+      "moon_infrared_reflectance": 0.243367,
+      "moonlight_reflectance": 0.311669,
+      "visible_reflectance": 0.117882
+     },
+     {
+      "layers": 11,
+      "toward_moon_share": 0.568407,
+      "inward_hemispheric_share": 0.510947,
+      "temperature_K": {
+       "inner": 153.706,
+       "outer": 157.776,
+       "max": 195.504
+      },
+      "moon_infrared_reflectance": 0.243853,
+      "moonlight_reflectance": 0.332166,
+      "visible_reflectance": 0.128144
+     },
+     {
+      "layers": 12,
+      "toward_moon_share": 0.568646,
+      "inward_hemispheric_share": 0.510178,
+      "temperature_K": {
+       "inner": 153.086,
+       "outer": 157.295,
+       "max": 197.87
+      },
+      "moon_infrared_reflectance": 0.244234,
+      "moonlight_reflectance": 0.351414,
+      "visible_reflectance": 0.138167
+     },
+     {
+      "layers": 14,
+      "toward_moon_share": 0.56914,
+      "inward_hemispheric_share": 0.508923,
+      "temperature_K": {
+       "inner": 152.068,
+       "outer": 156.505,
+       "max": 202.677
+      },
+      "moon_infrared_reflectance": 0.244777,
+      "moonlight_reflectance": 0.386584,
+      "visible_reflectance": 0.157528
+     },
+     {
+      "layers": 16,
+      "toward_moon_share": 0.569665,
+      "inward_hemispheric_share": 0.507944,
+      "temperature_K": {
+       "inner": 151.26,
+       "outer": 155.875,
+       "max": 207.186
+      },
+      "moon_infrared_reflectance": 0.24513,
+      "moonlight_reflectance": 0.417906,
+      "visible_reflectance": 0.176027
+     },
+     {
+      "layers": 20,
+      "toward_moon_share": 0.57083,
+      "inward_hemispheric_share": 0.50652,
+      "temperature_K": {
+       "inner": 150.037,
+       "outer": 154.913,
+       "max": 215.364
+      },
+      "moon_infrared_reflectance": 0.245534,
+      "moonlight_reflectance": 0.471228,
+      "visible_reflectance": 0.210657
+     },
+     {
+      "layers": 24,
+      "toward_moon_share": 0.572144,
+      "inward_hemispheric_share": 0.505534,
+      "temperature_K": {
+       "inner": 149.137,
+       "outer": 154.193,
+       "max": 222.567
+      },
+      "moon_infrared_reflectance": 0.245743,
+      "moonlight_reflectance": 0.514841,
+      "visible_reflectance": 0.242449
+     },
+     {
+      "layers": 28,
+      "toward_moon_share": 0.573567,
+      "inward_hemispheric_share": 0.504813,
+      "temperature_K": {
+       "inner": 148.434,
+       "outer": 153.623,
+       "max": 228.963
+      },
+      "moon_infrared_reflectance": 0.245866,
+      "moonlight_reflectance": 0.551093,
+      "visible_reflectance": 0.271736
+     },
+     {
+      "layers": 32,
+      "toward_moon_share": 0.575041,
+      "inward_hemispheric_share": 0.504262,
+      "temperature_K": {
+       "inner": 147.863,
+       "outer": 153.155,
+       "max": 234.694
+      },
+      "moon_infrared_reflectance": 0.245945,
+      "moonlight_reflectance": 0.581633,
+      "visible_reflectance": 0.298799
+     }
+    ]
+   },
+   "window": {
+    "column_absorbed_W_m2": 81.0894,
+    "rows": [
+     {
+      "layers": 1,
+      "toward_moon_share": 0.616649,
+      "inward_hemispheric_share": 0.589015,
+      "temperature_K": {
+       "inner": 189.363,
+       "outer": 189.363,
+       "max": 189.363
+      },
+      "moon_infrared_reflectance": 0.209775,
+      "moonlight_reflectance": 0.0371205,
+      "visible_reflectance": 0.0210371
+     },
+     {
+      "layers": 2,
+      "toward_moon_share": 0.586535,
+      "inward_hemispheric_share": 0.556281,
+      "temperature_K": {
+       "inner": 182.376,
+       "outer": 187.952,
+       "max": 187.952
+      },
+      "moon_infrared_reflectance": 0.2197,
+      "moonlight_reflectance": 0.0712351,
+      "visible_reflectance": 0.0411751
+     },
+     {
+      "layers": 3,
+      "toward_moon_share": 0.57418,
+      "inward_hemispheric_share": 0.541147,
+      "temperature_K": {
+       "inner": 178.987,
+       "outer": 187.1,
+       "max": 198.288
+      },
+      "moon_infrared_reflectance": 0.222234,
+      "moonlight_reflectance": 0.102671,
+      "visible_reflectance": 0.0604688
+     },
+     {
+      "layers": 4,
+      "toward_moon_share": 0.567967,
+      "inward_hemispheric_share": 0.532435,
+      "temperature_K": {
+       "inner": 176.96,
+       "outer": 186.526,
+       "max": 204.356
+      },
+      "moon_infrared_reflectance": 0.223191,
+      "moonlight_reflectance": 0.131708,
+      "visible_reflectance": 0.0789691
+     },
+     {
+      "layers": 5,
+      "toward_moon_share": 0.564437,
+      "inward_hemispheric_share": 0.526781,
+      "temperature_K": {
+       "inner": 175.587,
+       "outer": 186.102,
+       "max": 212.175
+      },
+      "moon_infrared_reflectance": 0.223673,
+      "moonlight_reflectance": 0.158592,
+      "visible_reflectance": 0.0967227
+     },
+     {
+      "layers": 6,
+      "toward_moon_share": 0.562286,
+      "inward_hemispheric_share": 0.522822,
+      "temperature_K": {
+       "inner": 174.58,
+       "outer": 185.762,
+       "max": 217.858
+      },
+      "moon_infrared_reflectance": 0.223975,
+      "moonlight_reflectance": 0.183532,
+      "visible_reflectance": 0.113773
+     },
+     {
+      "layers": 7,
+      "toward_moon_share": 0.560937,
+      "inward_hemispheric_share": 0.519898,
+      "temperature_K": {
+       "inner": 173.795,
+       "outer": 185.474,
+       "max": 224.1
+      },
+      "moon_infrared_reflectance": 0.224195,
+      "moonlight_reflectance": 0.206716,
+      "visible_reflectance": 0.130159
+     },
+     {
+      "layers": 8,
+      "toward_moon_share": 0.560098,
+      "inward_hemispheric_share": 0.51765,
+      "temperature_K": {
+       "inner": 173.157,
+       "outer": 185.22,
+       "max": 229.046
+      },
+      "moon_infrared_reflectance": 0.224368,
+      "moonlight_reflectance": 0.228305,
+      "visible_reflectance": 0.145918
+     },
+     {
+      "layers": 9,
+      "toward_moon_share": 0.559606,
+      "inward_hemispheric_share": 0.515869,
+      "temperature_K": {
+       "inner": 172.622,
+       "outer": 184.992,
+       "max": 234.223
+      },
+      "moon_infrared_reflectance": 0.22451,
+      "moonlight_reflectance": 0.248443,
+      "visible_reflectance": 0.161084
+     },
+     {
+      "layers": 10,
+      "toward_moon_share": 0.559361,
+      "inward_hemispheric_share": 0.514422,
+      "temperature_K": {
+       "inner": 172.163,
+       "outer": 184.782,
+       "max": 238.527
+      },
+      "moon_infrared_reflectance": 0.224632,
+      "moonlight_reflectance": 0.267257,
+      "visible_reflectance": 0.17569
+     },
+     {
+      "layers": 11,
+      "toward_moon_share": 0.559296,
+      "inward_hemispheric_share": 0.513222,
+      "temperature_K": {
+       "inner": 171.762,
+       "outer": 184.588,
+       "max": 242.94
+      },
+      "moon_infrared_reflectance": 0.224736,
+      "moonlight_reflectance": 0.284859,
+      "visible_reflectance": 0.189765
+     },
+     {
+      "layers": 12,
+      "toward_moon_share": 0.559366,
+      "inward_hemispheric_share": 0.51221,
+      "temperature_K": {
+       "inner": 171.406,
+       "outer": 184.407,
+       "max": 246.727
+      },
+      "moon_infrared_reflectance": 0.224828,
+      "moonlight_reflectance": 0.301351,
+      "visible_reflectance": 0.203335
+     },
+     {
+      "layers": 14,
+      "toward_moon_share": 0.559784,
+      "inward_hemispheric_share": 0.510598,
+      "temperature_K": {
+       "inner": 170.799,
+       "outer": 184.08,
+       "max": 253.939
+      },
+      "moon_infrared_reflectance": 0.22498,
+      "moonlight_reflectance": 0.331351,
+      "visible_reflectance": 0.229066
+     },
+     {
+      "layers": 16,
+      "toward_moon_share": 0.560436,
+      "inward_hemispheric_share": 0.509367,
+      "temperature_K": {
+       "inner": 170.295,
+       "outer": 183.789,
+       "max": 260.371
+      },
+      "moon_infrared_reflectance": 0.225101,
+      "moonlight_reflectance": 0.357874,
+      "visible_reflectance": 0.253067
+     },
+     {
+      "layers": 20,
+      "toward_moon_share": 0.562061,
+      "inward_hemispheric_share": 0.507608,
+      "temperature_K": {
+       "inner": 169.492,
+       "outer": 183.289,
+       "max": 271.459
+      },
+      "moon_infrared_reflectance": 0.22528,
+      "moonlight_reflectance": 0.402398,
+      "visible_reflectance": 0.296514
+     },
+     {
+      "layers": 24,
+      "toward_moon_share": 0.563797,
+      "inward_hemispheric_share": 0.506408,
+      "temperature_K": {
+       "inner": 168.867,
+       "outer": 182.868,
+       "max": 280.799
+      },
+      "moon_infrared_reflectance": 0.225402,
+      "moonlight_reflectance": 0.437963,
+      "visible_reflectance": 0.334754
+     },
+     {
+      "layers": 28,
+      "toward_moon_share": 0.565477,
+      "inward_hemispheric_share": 0.505536,
+      "temperature_K": {
+       "inner": 168.351,
+       "outer": 182.498,
+       "max": 288.87
+      },
+      "moon_infrared_reflectance": 0.225487,
+      "moonlight_reflectance": 0.46669,
+      "visible_reflectance": 0.368634
+     },
+     {
+      "layers": 32,
+      "toward_moon_share": 0.567043,
+      "inward_hemispheric_share": 0.504872,
+      "temperature_K": {
+       "inner": 167.908,
+       "outer": 182.164,
+       "max": 295.975
+      },
+      "moon_infrared_reflectance": 0.225549,
+      "moonlight_reflectance": 0.490104,
+      "visible_reflectance": 0.398825
+     }
+    ]
+   }
+  },
+  "fleet": {
+   "rings": 1859,
+   "window_rings": 483,
+   "tiles": 28169500.0,
+   "apolune_km": [
+    19355.4,
+    21390.8
+   ],
+   "perilune_km": [
+    15374.9,
+    16021.2
+   ],
+   "forced_eccentricity": [
+    0.106802,
+    0.163628
+   ],
+   "ring_length_over_circle_at_apolune": 0.886331,
+   "along_track_layers": {
+    "apolune": 1.51416,
+    "designed": 1.17647
+   },
+   "normal_off_moon_centre_deg": {
+    "max": 10.9175,
+    "at_sunward_crossing": 1.5,
+    "within_service_arc_max": 6.09169
+   },
+   "absorbed_PW": 67.6604,
+   "lit_factor": 0.516879,
+   "array_heat_absorbed_PW": [
+    65.1197,
+    83.2883
+   ],
+   "array_heat_lit_factor": [
+    0.5,
+    0.63662
+   ],
+   "layers_in_moon_view": {
+    "mean": 2.61707,
+    "first_screen": 2.03
+   },
+   "sky_covered": {
+    "share": 0.26532,
+    "lune": 0.266167
+   },
+   "specular_image_landing_share": 0.340415,
+   "glow_weighted": {
+    "view_factor": 0.00922903,
+    "moon_share": 0.570969,
+    "first_screen_view_factor": [
+     0.0066,
+     0.00806
+    ],
+    "first_screen_moon_share": [
+     0.5,
+     0.561
+    ]
+   }
+  },
+  "first_screen": {
+   "rebuilt_W_m2": [
+    5.66216,
+    9.91793
+   ],
+   "product_W_m2": [
+    5.66,
+    9.92
+   ]
+  },
+  "two_layer_check": {
+   "rebuilt": {
+    "two_layers_as_is": 0.534,
+    "mirror_0.03_outer_faces_as_now": {
+     "every_tile": {
+      "share": 0.283,
+      "cut": 1.9,
+      "hottest_layer_K": 376
+     },
+     "nearest_layer_only": {
+      "share": 0.111,
+      "cut": 4.8,
+      "hottest_layer_K": 287
+     }
+    },
+    "mirror_0.03_outer_faces_strong": {
+     "every_tile": {
+      "share": 0.264,
+      "cut": 2.0,
+      "hottest_layer_K": 371
+     },
+     "nearest_layer_only": {
+      "share": 0.062,
+      "cut": 8.6,
+      "hottest_layer_K": 251
+     }
+    },
+    "mirror_0.1_outer_faces_as_now": {
+     "every_tile": {
+      "share": 0.346,
+      "cut": 1.5,
+      "hottest_layer_K": 292
+     },
+     "nearest_layer_only": {
+      "share": 0.271,
+      "cut": 2.0,
+      "hottest_layer_K": 268
+     }
+    },
+    "mirror_0.1_outer_faces_strong": {
+     "every_tile": {
+      "share": 0.293,
+      "cut": 1.8,
+      "hottest_layer_K": 282
+     },
+     "nearest_layer_only": {
+      "share": 0.171,
+      "cut": 3.1,
+      "hottest_layer_K": 241
+     }
+    }
+   },
+   "product": {
+    "two_layers_as_is": 0.534,
+    "mirror_0.03_outer_faces_as_now": {
+     "every_tile": {
+      "share": 0.283,
+      "cut": 1.9,
+      "hottest_layer_K": 376
+     },
+     "nearest_layer_only": {
+      "share": 0.111,
+      "cut": 4.8,
+      "hottest_layer_K": 287
+     }
+    },
+    "mirror_0.03_outer_faces_strong": {
+     "every_tile": {
+      "share": 0.264,
+      "cut": 2.0,
+      "hottest_layer_K": 371
+     },
+     "nearest_layer_only": {
+      "share": 0.062,
+      "cut": 8.6,
+      "hottest_layer_K": 251
+     }
+    },
+    "mirror_0.1_outer_faces_as_now": {
+     "every_tile": {
+      "share": 0.346,
+      "cut": 1.5,
+      "hottest_layer_K": 292
+     },
+     "nearest_layer_only": {
+      "share": 0.271,
+      "cut": 2.0,
+      "hottest_layer_K": 268
+     }
+    },
+    "mirror_0.1_outer_faces_strong": {
+     "every_tile": {
+      "share": 0.293,
+      "cut": 1.8,
+      "hottest_layer_K": 282
+     },
+     "nearest_layer_only": {
+      "share": 0.171,
+      "cut": 3.1,
+      "hottest_layer_K": 241
+     }
+    }
+   }
+  },
+  "design_sunlight_W_m2": 293.312,
+  "dimmer_light_TW_per_percent": 111.26,
+  "answers": {
+   "as_built": {
+    "absorbed_PW": 67.6604,
+    "absorbed_by_half_PW": {
+     "day": 41.4593,
+     "night": 26.2011
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 44.447,
+     "window": 23.2135
+    },
+    "glow_W_m2": {
+     "global": 9.37305,
+     "day": 9.70711,
+     "night": 9.03898
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.81786,
+     "night_half": 4.55519
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 5.98074,
+     "window": 3.3923
+    },
+    "infrared_return_W_m2": {
+     "global": 4.03634,
+     "day": 3.68961,
+     "night": 4.38307
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.71022,
+     "day": 1.37932,
+     "night": 0.0411213
+    },
+    "night_lux_from_returns": {
+     "mean": 1.64076,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.993317,
+       1.0034,
+       1.05118,
+       1.13002,
+       1.25228,
+       1.42475,
+       1.62803,
+       1.91362,
+       2.60757
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 13.4094,
+     "day": 13.3967,
+     "night": 13.4221
+    },
+    "heat_total_W_m2": {
+     "global": 14.1196,
+     "day": 14.776,
+     "night": 13.4632
+    },
+    "dimming": {
+     "percent": 6.59173,
+     "records_convention_percent": 4.81384,
+     "glow_only_percent": 4.43831,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 6.59173,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.754026,
+     "absorbing_dimmer_gives_back": 0.357045,
+     "electricity_TW": [
+      146.68,
+      220.019
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "thin_titania": {
+    "absorbed_PW": 62.605,
+    "absorbed_by_half_PW": {
+     "day": 38.4789,
+     "night": 24.1261
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 39.3916,
+     "window": 23.2135
+    },
+    "glow_W_m2": {
+     "global": 8.56495,
+     "day": 8.90815,
+     "night": 8.22175
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.42378,
+     "night_half": 4.14117
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 5.17265,
+     "window": 3.3923
+    },
+    "infrared_return_W_m2": {
+     "global": 4.07938,
+     "day": 3.72857,
+     "night": 4.4302
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.846562,
+     "day": 1.64405,
+     "night": 0.0490704
+    },
+    "night_lux_from_returns": {
+     "mean": 2.57925,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       1.58743,
+       1.62738,
+       1.6986,
+       1.80919,
+       1.98943,
+       2.23414,
+       2.52527,
+       2.93216,
+       4.13969
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 12.6443,
+     "day": 12.6367,
+     "night": 12.6519
+    },
+    "heat_total_W_m2": {
+     "global": 13.4909,
+     "day": 14.2808,
+     "night": 12.701
+    },
+    "dimming": {
+     "percent": 6.27595,
+     "records_convention_percent": 4.5995,
+     "glow_only_percent": 4.05566,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 6.27595,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.754026,
+     "absorbing_dimmer_gives_back": 0.357045,
+     "electricity_TW": [
+      139.653,
+      209.479
+     ]
+    },
+    "costs": {
+     "films": "thin_titania",
+     "coating": null,
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": -0.195,
+       "t_per_tile": -19.5,
+       "solar_absorptance": 0.0273234,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.161576,
+       "T_sunward_one_K": [
+        173.372
+       ],
+       "T_sunward_two_K": [
+        189.181,
+        189.436
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.161576,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.57,
+      "matched_annulus_tile_g_m2": 15.221,
+      "mismatch_g_m2": -1.65099,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "wide_gap_220": {
+    "absorbed_PW": 25.3979,
+    "absorbed_by_half_PW": {
+     "day": 15.7285,
+     "night": 9.66943
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 2.18444,
+     "window": 23.2135
+    },
+    "glow_W_m2": {
+     "global": 3.71311,
+     "day": 3.96693,
+     "night": 3.45929
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.97154,
+     "night_half": 1.74157
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.320807,
+     "window": 3.3923
+    },
+    "infrared_return_W_m2": {
+     "global": 4.03634,
+     "day": 3.68961,
+     "night": 4.38307
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.628708,
+     "day": 1.22108,
+     "night": 0.0363405
+    },
+    "night_lux_from_returns": {
+     "mean": 2.02352,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       1.2346,
+       1.25686,
+       1.31426,
+       1.40619,
+       1.5523,
+       1.75456,
+       1.99414,
+       2.32983,
+       3.23341
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 7.74945,
+     "day": 7.65654,
+     "night": 7.84236
+    },
+    "heat_total_W_m2": {
+     "global": 8.37816,
+     "day": 8.87762,
+     "night": 7.8787
+    },
+    "dimming": {
+     "percent": 3.88386,
+     "records_convention_percent": 2.85639,
+     "glow_only_percent": 1.75823,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.88386,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.754026,
+     "absorbing_dimmer_gives_back": 0.357045,
+     "electricity_TW": [
+      86.4238,
+      129.636
+     ]
+    },
+    "costs": {
+     "films": "wide_gap_220",
+     "coating": null,
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 1.11,
+       "t_per_tile": 111.0,
+       "solar_absorptance": 0.00137138,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.0478877,
+       "T_sunward_one_K": [
+        93.3503
+       ],
+       "T_sunward_two_K": [
+        98.6577,
+        99.2259
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.0478877,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 14.875,
+      "matched_annulus_tile_g_m2": 4.51116,
+      "mismatch_g_m2": 10.3638,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0550079
+     }
+    }
+   },
+   "wide_gap_250": {
+    "absorbed_PW": 26.9887,
+    "absorbed_by_half_PW": {
+     "day": 16.656,
+     "night": 10.3327
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 3.77521,
+     "window": 23.2135
+    },
+    "glow_W_m2": {
+     "global": 3.94009,
+     "day": 4.1882,
+     "night": 3.69199
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 2.07946,
+     "night_half": 1.86063
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.547792,
+     "window": 3.3923
+    },
+    "infrared_return_W_m2": {
+     "global": 4.03634,
+     "day": 3.68961,
+     "night": 4.38307
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.628708,
+     "day": 1.22108,
+     "night": 0.0363405
+    },
+    "night_lux_from_returns": {
+     "mean": 2.02352,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       1.2346,
+       1.25686,
+       1.31426,
+       1.40619,
+       1.5523,
+       1.75456,
+       1.99414,
+       2.32983,
+       3.23341
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 7.97644,
+     "day": 7.87781,
+     "night": 8.07506
+    },
+    "heat_total_W_m2": {
+     "global": 8.60514,
+     "day": 9.09889,
+     "night": 8.1114
+    },
+    "dimming": {
+     "percent": 3.99134,
+     "records_convention_percent": 2.93378,
+     "glow_only_percent": 1.86571,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.99134,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.754026,
+     "absorbing_dimmer_gives_back": 0.357045,
+     "electricity_TW": [
+      88.8154,
+      133.223
+     ]
+    },
+    "costs": {
+     "films": "wide_gap_250",
+     "coating": null,
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 1.11,
+       "t_per_tile": 111.0,
+       "solar_absorptance": 0.00245685,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.0489732,
+       "T_sunward_one_K": [
+        104.125
+       ],
+       "T_sunward_two_K": [
+        110.881,
+        111.483
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.0489732,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 14.875,
+      "matched_annulus_tile_g_m2": 4.61342,
+      "mismatch_g_m2": 10.2615,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0544651
+     }
+    }
+   },
+   "uv_mirror_outer_95": {
+    "absorbed_PW": 35.3381,
+    "absorbed_by_half_PW": {
+     "day": 10.4469,
+     "night": 24.8912
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 19.5595,
+     "window": 15.7787
+    },
+    "glow_W_m2": {
+     "global": 5.80764,
+     "day": 3.14322,
+     "night": 8.47206
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.29722,
+     "night_half": 4.51042
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 3.31938,
+     "window": 2.48826
+    },
+    "infrared_return_W_m2": {
+     "global": 4.03634,
+     "day": 3.68961,
+     "night": 4.38307
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.71022,
+     "day": 1.37932,
+     "night": 0.0411213
+    },
+    "night_lux_from_returns": {
+     "mean": 1.64076,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.993317,
+       1.0034,
+       1.05118,
+       1.13002,
+       1.25228,
+       1.42475,
+       1.62803,
+       1.91362,
+       2.60757
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 9.84398,
+     "day": 6.83283,
+     "night": 12.8551
+    },
+    "heat_total_W_m2": {
+     "global": 10.5542,
+     "day": 8.21215,
+     "night": 12.8963
+    },
+    "dimming": {
+     "percent": 4.90344,
+     "records_convention_percent": 3.59828,
+     "glow_only_percent": 2.75002,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 4.90344,
+     "absorbing_dimmer_glow_W_m2_per_percent": 1.18263,
+     "absorbing_dimmer_gives_back": 0.559998,
+     "electricity_TW": [
+      109.112,
+      163.668
+     ]
+    },
+    "costs": {
+     "films": "uv_mirror_outer_95",
+     "coating": null,
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 8.1912,
+       "t_per_tile": 819.12,
+       "solar_absorptance": 0.00387247,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.223994,
+       "T_sunward_one_K": [
+        113.643
+       ],
+       "T_sunward_two_K": [
+        121.706,
+        122.33
+       ]
+      },
+      "window": {
+       "g_m2": 5.07516,
+       "t_per_tile": 507.516,
+       "solar_absorptance": 0.02104,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.169778,
+       "T_sunward_one_K": [
+        148.9
+       ],
+       "T_sunward_two_K": [
+        167.97,
+        173.332
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.223994,
+      "window_dynamic_coefficient": 0.299953,
+      "window_tile_g_m2": 31.0752,
+      "annulus_tile_g_m2": 21.9562,
+      "matched_annulus_tile_g_m2": 23.2058,
+      "mismatch_g_m2": -1.24966,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "uv_mirror_outer_98": {
+    "absorbed_PW": 34.3284,
+    "absorbed_by_half_PW": {
+     "day": 9.47722,
+     "night": 24.8512
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 18.7845,
+     "window": 15.5439
+    },
+    "glow_W_m2": {
+     "global": 5.70504,
+     "day": 2.93242,
+     "night": 8.47766
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.1834,
+     "night_half": 4.52164
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 3.24549,
+     "window": 2.45955
+    },
+    "infrared_return_W_m2": {
+     "global": 4.03634,
+     "day": 3.68961,
+     "night": 4.38307
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.71022,
+     "day": 1.37932,
+     "night": 0.0411213
+    },
+    "night_lux_from_returns": {
+     "mean": 1.64076,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.993317,
+       1.0034,
+       1.05118,
+       1.13002,
+       1.25228,
+       1.42475,
+       1.62803,
+       1.91362,
+       2.60757
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 9.74138,
+     "day": 6.62203,
+     "night": 12.8607
+    },
+    "heat_total_W_m2": {
+     "global": 10.4516,
+     "day": 8.00135,
+     "night": 12.9019
+    },
+    "dimming": {
+     "percent": 4.85486,
+     "records_convention_percent": 3.5633,
+     "glow_only_percent": 2.70144,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 4.85486,
+     "absorbing_dimmer_glow_W_m2_per_percent": 1.21258,
+     "absorbing_dimmer_gives_back": 0.574177,
+     "electricity_TW": [
+      108.031,
+      162.046
+     ]
+    },
+    "costs": {
+     "films": "uv_mirror_outer_98",
+     "coating": null,
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 11.0368,
+       "t_per_tile": 1103.68,
+       "solar_absorptance": 0.00303676,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.226454,
+       "T_sunward_one_K": [
+        108.425
+       ],
+       "T_sunward_two_K": [
+        115.769,
+        116.383
+       ]
+      },
+      "window": {
+       "g_m2": 6.83826,
+       "t_per_tile": 683.826,
+       "solar_absorptance": 0.0202837,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.170535,
+       "T_sunward_one_K": [
+        147.667
+       ],
+       "T_sunward_two_K": [
+        166.528,
+        171.864
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.226454,
+      "window_dynamic_coefficient": 0.30071,
+      "window_tile_g_m2": 32.8383,
+      "annulus_tile_g_m2": 24.8018,
+      "matched_annulus_tile_g_m2": 24.7293,
+      "mismatch_g_m2": 0.072454,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.000331741
+     }
+    }
+   },
+   "uv_mirror_both_98": {
+    "absorbed_PW": 15.0106,
+    "absorbed_by_half_PW": {
+     "day": 9.46442,
+     "night": 5.54616
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 4.21531,
+     "window": 10.7953
+    },
+    "glow_W_m2": {
+     "global": 2.19057,
+     "day": 2.3677,
+     "night": 2.01343
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.18163,
+     "night_half": 1.00893
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.595463,
+     "window": 1.5951
+    },
+    "infrared_return_W_m2": {
+     "global": 4.03634,
+     "day": 3.68961,
+     "night": 4.38307
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.71022,
+     "day": 1.37932,
+     "night": 0.0411213
+    },
+    "night_lux_from_returns": {
+     "mean": 1.64076,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.993317,
+       1.0034,
+       1.05118,
+       1.13002,
+       1.25228,
+       1.42475,
+       1.62803,
+       1.91362,
+       2.60757
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 6.22691,
+     "day": 6.05731,
+     "night": 6.39651
+    },
+    "heat_total_W_m2": {
+     "global": 6.93713,
+     "day": 7.43663,
+     "night": 6.43763
+    },
+    "dimming": {
+     "percent": 3.19069,
+     "records_convention_percent": 2.3651,
+     "glow_only_percent": 1.03727,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.19069,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.786396,
+     "absorbing_dimmer_gives_back": 0.372373,
+     "electricity_TW": [
+      70.9995,
+      106.499
+     ]
+    },
+    "costs": {
+     "films": "uv_mirror_both_98",
+     "coating": null,
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 22.0736,
+       "t_per_tile": 2207.36,
+       "solar_absorptance": 0.00303676,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.226454,
+       "T_sunward_one_K": [
+        108.425
+       ],
+       "T_sunward_two_K": [
+        115.769,
+        116.383
+       ]
+      },
+      "window": {
+       "g_m2": 13.6765,
+       "t_per_tile": 1367.65,
+       "solar_absorptance": 0.0202837,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.170535,
+       "T_sunward_one_K": [
+        147.667
+       ],
+       "T_sunward_two_K": [
+        166.528,
+        171.864
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.226454,
+      "window_dynamic_coefficient": 0.30071,
+      "window_tile_g_m2": 39.6765,
+      "annulus_tile_g_m2": 35.8386,
+      "matched_annulus_tile_g_m2": 29.879,
+      "mismatch_g_m2": 5.95961,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.022584
+     }
+    }
+   },
+   "mesh_low": {
+    "absorbed_PW": 72.831,
+    "absorbed_by_half_PW": {
+     "day": 46.4923,
+     "night": 26.3387
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 48.6581,
+     "window": 24.1729
+    },
+    "glow_W_m2": {
+     "global": 5.40689,
+     "day": 5.78695,
+     "night": 5.02683
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 2.89582,
+     "night_half": 2.51107
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 3.58155,
+     "window": 1.82534
+    },
+    "infrared_return_W_m2": {
+     "global": 17.114,
+     "day": 15.6137,
+     "night": 18.6144
+    },
+    "sunlight_return_W_m2": {
+     "global": 1.40561,
+     "day": 2.73144,
+     "night": 0.0797727
+    },
+    "night_lux_from_returns": {
+     "mean": 5.87777,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       3.68713,
+       3.74914,
+       3.91087,
+       4.16669,
+       4.57339,
+       5.13415,
+       5.78849,
+       6.69904,
+       9.26428
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 22.5209,
+     "day": 21.4006,
+     "night": 23.6412
+    },
+    "heat_total_W_m2": {
+     "global": 23.9265,
+     "day": 24.1321,
+     "night": 23.721
+    },
+    "dimming": {
+     "percent": 11.1433,
+     "records_convention_percent": 8.15735,
+     "glow_only_percent": 2.56026,
+     "coating_provides_percent": 5.0,
+     "to_add_percent": 6.14329,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.365147,
+     "absorbing_dimmer_gives_back": 0.172904,
+     "electricity_TW": [
+      136.701,
+      205.051
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "mesh_low",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.02,
+       "t_per_tile": 2.0,
+       "solar_absorptance": 0.0353365,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.24112,
+       "T_sunward_one_K": [
+        190.252
+       ],
+       "T_sunward_two_K": [
+        271.282,
+        212.779
+       ]
+      },
+      "window": {
+       "g_m2": 0.02,
+       "t_per_tile": 2.0,
+       "solar_absorptance": 0.0499892,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.240825,
+       "T_sunward_one_K": [
+        208.099
+       ],
+       "T_sunward_two_K": [
+        295.746,
+        232.592
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.24112,
+      "window_dynamic_coefficient": 0.371,
+      "window_tile_g_m2": 26.02,
+      "annulus_tile_g_m2": 13.785,
+      "matched_annulus_tile_g_m2": 16.9109,
+      "mismatch_g_m2": -3.12596,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "mesh_high": {
+    "absorbed_PW": 84.0363,
+    "absorbed_by_half_PW": {
+     "day": 59.979,
+     "night": 24.0573
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 57.9927,
+     "window": 26.0436
+    },
+    "glow_W_m2": {
+     "global": 7.9039,
+     "day": 9.5803,
+     "night": 6.22751
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.91061,
+     "night_half": 2.99329
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 5.34256,
+     "window": 2.56134
+    },
+    "infrared_return_W_m2": {
+     "global": 13.3109,
+     "day": 12.144,
+     "night": 14.4778
+    },
+    "sunlight_return_W_m2": {
+     "global": 3.13092,
+     "day": 6.09452,
+     "night": 0.167325
+    },
+    "night_lux_from_returns": {
+     "mean": 15.3558,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       10.4035,
+       10.5636,
+       10.9388,
+       11.5036,
+       12.4143,
+       13.6452,
+       15.0089,
+       16.9026,
+       23.436
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 21.2148,
+     "day": 21.7243,
+     "night": 20.7054
+    },
+    "heat_total_W_m2": {
+     "global": 24.3457,
+     "day": 27.8188,
+     "night": 20.8727
+    },
+    "dimming": {
+     "percent": 11.113,
+     "records_convention_percent": 8.30027,
+     "glow_only_percent": 3.74264,
+     "coating_provides_percent": 20.0,
+     "to_add_percent": -8.88696,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.394118,
+     "absorbing_dimmer_gives_back": 0.186622,
+     "electricity_TW": [
+      0.0,
+      0.0
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "mesh_high",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.2,
+       "t_per_tile": 20.0,
+       "solar_absorptance": 0.0503365,
+       "taken_out_of_beam": 0.2,
+       "pressure_coefficient": 0.52612,
+       "T_sunward_one_K": [
+        191.834
+       ],
+       "T_sunward_two_K": [
+        239.101,
+        220.38
+       ]
+      },
+      "window": {
+       "g_m2": 0.2,
+       "t_per_tile": 20.0,
+       "solar_absorptance": 0.0649892,
+       "taken_out_of_beam": 0.2,
+       "pressure_coefficient": 0.525825,
+       "T_sunward_one_K": [
+        207.23
+       ],
+       "T_sunward_two_K": [
+        256.085,
+        238.027
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.52612,
+      "window_dynamic_coefficient": 0.656,
+      "window_tile_g_m2": 26.2,
+      "annulus_tile_g_m2": 13.965,
+      "matched_annulus_tile_g_m2": 21.0127,
+      "mismatch_g_m2": -7.04777,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "metasurface_low": {
+    "absorbed_PW": 72.831,
+    "absorbed_by_half_PW": {
+     "day": 46.4923,
+     "night": 26.3387
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 48.6581,
+     "window": 24.1729
+    },
+    "glow_W_m2": {
+     "global": 5.92814,
+     "day": 6.35649,
+     "night": 5.4998
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 3.18165,
+     "night_half": 2.74649
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 3.91421,
+     "window": 2.01393
+    },
+    "infrared_return_W_m2": {
+     "global": 16.1633,
+     "day": 14.7463,
+     "night": 17.5802
+    },
+    "sunlight_return_W_m2": {
+     "global": 1.40561,
+     "day": 2.73144,
+     "night": 0.0797727
+    },
+    "night_lux_from_returns": {
+     "mean": 5.87777,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       3.68713,
+       3.74914,
+       3.91087,
+       4.16669,
+       4.57339,
+       5.13415,
+       5.78849,
+       6.69904,
+       9.26428
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 22.0914,
+     "day": 21.1028,
+     "night": 23.08
+    },
+    "heat_total_W_m2": {
+     "global": 23.497,
+     "day": 23.8342,
+     "night": 23.1598
+    },
+    "dimming": {
+     "percent": 10.9399,
+     "records_convention_percent": 8.01091,
+     "glow_only_percent": 2.80709,
+     "coating_provides_percent": 5.0,
+     "to_add_percent": 5.9399,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.402873,
+     "absorbing_dimmer_gives_back": 0.190768,
+     "electricity_TW": [
+      132.175,
+      198.263
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "metasurface_low",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.02,
+       "t_per_tile": 2.0,
+       "solar_absorptance": 0.0353365,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.24112,
+       "T_sunward_one_K": [
+        186.235
+       ],
+       "T_sunward_two_K": [
+        250.004,
+        209.837
+       ]
+      },
+      "window": {
+       "g_m2": 0.02,
+       "t_per_tile": 2.0,
+       "solar_absorptance": 0.0499892,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.240825,
+       "T_sunward_one_K": [
+        204.334
+       ],
+       "T_sunward_two_K": [
+        272.912,
+        230.134
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.24112,
+      "window_dynamic_coefficient": 0.371,
+      "window_tile_g_m2": 26.02,
+      "annulus_tile_g_m2": 13.785,
+      "matched_annulus_tile_g_m2": 16.9109,
+      "mismatch_g_m2": -3.12596,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "metasurface_high": {
+    "absorbed_PW": 84.0363,
+    "absorbed_by_half_PW": {
+     "day": 59.979,
+     "night": 24.0573
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 57.9927,
+     "window": 26.0436
+    },
+    "glow_W_m2": {
+     "global": 8.60157,
+     "day": 10.4378,
+     "night": 6.76533
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 5.34741,
+     "night_half": 3.25417
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 5.79077,
+     "window": 2.81081
+    },
+    "infrared_return_W_m2": {
+     "global": 11.4094,
+     "day": 10.4091,
+     "night": 12.4096
+    },
+    "sunlight_return_W_m2": {
+     "global": 3.13092,
+     "day": 6.09452,
+     "night": 0.167325
+    },
+    "night_lux_from_returns": {
+     "mean": 15.3558,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       10.4035,
+       10.5636,
+       10.9388,
+       11.5036,
+       12.4143,
+       13.6452,
+       15.0089,
+       16.9026,
+       23.436
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 20.0109,
+     "day": 20.8469,
+     "night": 19.1749
+    },
+    "heat_total_W_m2": {
+     "global": 23.1418,
+     "day": 26.9415,
+     "night": 19.3422
+    },
+    "dimming": {
+     "percent": 10.543,
+     "records_convention_percent": 7.88983,
+     "glow_only_percent": 4.073,
+     "coating_provides_percent": 20.0,
+     "to_add_percent": -9.45702,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.432504,
+     "absorbing_dimmer_gives_back": 0.204799,
+     "electricity_TW": [
+      0.0,
+      0.0
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "metasurface_high",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.2,
+       "t_per_tile": 20.0,
+       "solar_absorptance": 0.0503365,
+       "taken_out_of_beam": 0.2,
+       "pressure_coefficient": 0.52612,
+       "T_sunward_one_K": [
+        186.086
+       ],
+       "T_sunward_two_K": [
+        226.684,
+        215.879
+       ]
+      },
+      "window": {
+       "g_m2": 0.2,
+       "t_per_tile": 20.0,
+       "solar_absorptance": 0.0649892,
+       "taken_out_of_beam": 0.2,
+       "pressure_coefficient": 0.525825,
+       "T_sunward_one_K": [
+        201.63
+       ],
+       "T_sunward_two_K": [
+        243.355,
+        234.178
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.52612,
+      "window_dynamic_coefficient": 0.656,
+      "window_tile_g_m2": 26.2,
+      "annulus_tile_g_m2": 13.965,
+      "matched_annulus_tile_g_m2": 21.0127,
+      "mismatch_g_m2": -7.04777,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "tco_low": {
+    "absorbed_PW": 118.414,
+    "absorbed_by_half_PW": {
+     "day": 75.9836,
+     "night": 42.4309
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 82.5596,
+     "window": 35.8549
+    },
+    "glow_W_m2": {
+     "global": 8.90864,
+     "day": 9.58225,
+     "night": 8.23503
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.79935,
+     "night_half": 4.1093
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 6.16181,
+     "window": 2.74683
+    },
+    "infrared_return_W_m2": {
+     "global": 16.9239,
+     "day": 15.4402,
+     "night": 18.4075
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.998521,
+     "day": 1.94035,
+     "night": 0.056691
+    },
+    "night_lux_from_returns": {
+     "mean": 3.45536,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       2.16559,
+       2.19787,
+       2.29351,
+       2.44593,
+       2.68667,
+       3.02025,
+       3.40881,
+       3.94956,
+       5.43559
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 25.8325,
+     "day": 25.0225,
+     "night": 26.6426
+    },
+    "heat_total_W_m2": {
+     "global": 26.831,
+     "day": 26.9628,
+     "night": 26.6993
+    },
+    "dimming": {
+     "percent": 12.5726,
+     "records_convention_percent": 9.14759,
+     "glow_only_percent": 4.21841,
+     "coating_provides_percent": 5.0,
+     "to_add_percent": 7.5726,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.366297,
+     "absorbing_dimmer_gives_back": 0.173448,
+     "electricity_TW": [
+      168.506,
+      252.759
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "tco_low",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.5,
+       "t_per_tile": 50.0,
+       "solar_absorptance": 0.0603365,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.21612,
+       "T_sunward_one_K": [
+        215.085
+       ],
+       "T_sunward_two_K": [
+        304.159,
+        241.51
+       ]
+      },
+      "window": {
+       "g_m2": 0.5,
+       "t_per_tile": 50.0,
+       "solar_absorptance": 0.0749892,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.215825,
+       "T_sunward_one_K": [
+        228.02
+       ],
+       "T_sunward_two_K": [
+        320.861,
+        255.445
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.21612,
+      "window_dynamic_coefficient": 0.346,
+      "window_tile_g_m2": 26.5,
+      "annulus_tile_g_m2": 14.265,
+      "matched_annulus_tile_g_m2": 16.5526,
+      "mismatch_g_m2": -2.28761,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "tco_high": {
+    "absorbed_PW": 218.969,
+    "absorbed_by_half_PW": {
+     "day": 151.753,
+     "night": 67.2168
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 158.132,
+     "window": 60.8371
+    },
+    "glow_W_m2": {
+     "global": 18.6563,
+     "day": 21.8287,
+     "night": 15.4838
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 11.1294,
+     "night_half": 7.52687
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 13.3217,
+     "window": 5.33458
+    },
+    "infrared_return_W_m2": {
+     "global": 15.0223,
+     "day": 13.7054,
+     "night": 16.3393
+    },
+    "sunlight_return_W_m2": {
+     "global": 1.34981,
+     "day": 2.62607,
+     "night": 0.0735471
+    },
+    "night_lux_from_returns": {
+     "mean": 5.50629,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       3.64518,
+       3.69904,
+       3.83971,
+       4.05599,
+       4.4012,
+       4.87248,
+       5.40339,
+       6.13823,
+       8.46713
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 33.6786,
+     "day": 35.5341,
+     "night": 31.823
+    },
+    "heat_total_W_m2": {
+     "global": 35.0284,
+     "day": 38.1602,
+     "night": 31.8966
+    },
+    "dimming": {
+     "percent": 16.4076,
+     "records_convention_percent": 11.9423,
+     "glow_only_percent": 8.83408,
+     "coating_provides_percent": 15.0,
+     "to_add_percent": 1.40762,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.367929,
+     "absorbing_dimmer_gives_back": 0.174221,
+     "electricity_TW": [
+      31.3224,
+      46.9837
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "tco_high",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 1.5,
+       "t_per_tile": 150.0,
+       "solar_absorptance": 0.130337,
+       "taken_out_of_beam": 0.15,
+       "pressure_coefficient": 0.34612,
+       "T_sunward_one_K": [
+        249.515
+       ],
+       "T_sunward_two_K": [
+        324.743,
+        284.991
+       ]
+      },
+      "window": {
+       "g_m2": 1.5,
+       "t_per_tile": 150.0,
+       "solar_absorptance": 0.144989,
+       "taken_out_of_beam": 0.15,
+       "pressure_coefficient": 0.345825,
+       "T_sunward_one_K": [
+        257.829
+       ],
+       "T_sunward_two_K": [
+        333.41,
+        293.396
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.34612,
+      "window_dynamic_coefficient": 0.476,
+      "window_tile_g_m2": 27.5,
+      "annulus_tile_g_m2": 15.265,
+      "matched_annulus_tile_g_m2": 19.9965,
+      "mismatch_g_m2": -4.73149,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "silver_low": {
+    "absorbed_PW": 121.541,
+    "absorbed_by_half_PW": {
+     "day": 83.9936,
+     "night": 37.5471
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 85.5974,
+     "window": 35.9432
+    },
+    "glow_W_m2": {
+     "global": 7.17172,
+     "day": 8.30288,
+     "night": 6.04057
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.24155,
+     "night_half": 2.93017
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 5.03589,
+     "window": 2.13583
+    },
+    "infrared_return_W_m2": {
+     "global": 18.6353,
+     "day": 17.0016,
+     "night": 20.269
+    },
+    "sunlight_return_W_m2": {
+     "global": 2.23751,
+     "day": 4.3531,
+     "night": 0.121924
+    },
+    "night_lux_from_returns": {
+     "mean": 10.5462,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       6.98184,
+       7.09345,
+       7.36193,
+       7.77238,
+       8.43075,
+       9.32632,
+       10.3367,
+       11.736,
+       16.2448
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 25.807,
+     "day": 25.3045,
+     "night": 26.3095
+    },
+    "heat_total_W_m2": {
+     "global": 28.0445,
+     "day": 29.6576,
+     "night": 26.4315
+    },
+    "dimming": {
+     "percent": 12.9829,
+     "records_convention_percent": 9.56131,
+     "glow_only_percent": 3.39594,
+     "coating_provides_percent": 15.0,
+     "to_add_percent": -2.01707,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.251306,
+     "absorbing_dimmer_gives_back": 0.118998,
+     "electricity_TW": [
+      0.0,
+      0.0
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "silver_low",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.1,
+       "t_per_tile": 10.0,
+       "solar_absorptance": 0.0703365,
+       "taken_out_of_beam": 0.15,
+       "pressure_coefficient": 0.40612,
+       "T_sunward_one_K": [
+        233.004
+       ],
+       "T_sunward_two_K": [
+        463.754,
+        257.847
+       ]
+      },
+      "window": {
+       "g_m2": 0.1,
+       "t_per_tile": 10.0,
+       "solar_absorptance": 0.0849892,
+       "taken_out_of_beam": 0.15,
+       "pressure_coefficient": 0.405825,
+       "T_sunward_one_K": [
+        243.373
+       ],
+       "T_sunward_two_K": [
+        485.272,
+        268.493
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.40612,
+      "window_dynamic_coefficient": 0.536,
+      "window_tile_g_m2": 26.1,
+      "annulus_tile_g_m2": 13.865,
+      "matched_annulus_tile_g_m2": 19.7756,
+      "mismatch_g_m2": -5.91067,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "silver_high": {
+    "absorbed_PW": 184.43,
+    "absorbed_by_half_PW": {
+     "day": 141.031,
+     "night": 43.3989
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 133.473,
+     "window": 50.9568
+    },
+    "glow_W_m2": {
+     "global": 12.6996,
+     "day": 16.5858,
+     "night": 8.81342
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 8.6288,
+     "night_half": 4.0708
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 9.13254,
+     "window": 3.56705
+    },
+    "infrared_return_W_m2": {
+     "global": 17.114,
+     "day": 15.6137,
+     "night": 18.6144
+    },
+    "sunlight_return_W_m2": {
+     "global": 3.13824,
+     "day": 6.11478,
+     "night": 0.161706
+    },
+    "night_lux_from_returns": {
+     "mean": 14.9192,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       10.5185,
+       10.6593,
+       10.9944,
+       11.4865,
+       12.2883,
+       13.3613,
+       14.5039,
+       16.1143,
+       22.4201
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 29.8136,
+     "day": 32.1995,
+     "night": 27.4278
+    },
+    "heat_total_W_m2": {
+     "global": 32.9519,
+     "day": 38.3142,
+     "night": 27.5895
+    },
+    "dimming": {
+     "percent": 15.1872,
+     "records_convention_percent": 11.2344,
+     "glow_only_percent": 6.01349,
+     "coating_provides_percent": 30.0,
+     "to_add_percent": -14.8128,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.246022,
+     "absorbing_dimmer_gives_back": 0.116496,
+     "electricity_TW": [
+      0.0,
+      0.0
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "silver_high",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.3,
+       "t_per_tile": 30.0,
+       "solar_absorptance": 0.130337,
+       "taken_out_of_beam": 0.3,
+       "pressure_coefficient": 0.64612,
+       "T_sunward_one_K": [
+        261.119
+       ],
+       "T_sunward_two_K": [
+        377.209,
+        294.08
+       ]
+      },
+      "window": {
+       "g_m2": 0.3,
+       "t_per_tile": 30.0,
+       "solar_absorptance": 0.144989,
+       "taken_out_of_beam": 0.3,
+       "pressure_coefficient": 0.645825,
+       "T_sunward_one_K": [
+        267.865
+       ],
+       "T_sunward_two_K": [
+        386.117,
+        300.355
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.64612,
+      "window_dynamic_coefficient": 0.776,
+      "window_tile_g_m2": 26.3,
+      "annulus_tile_g_m2": 14.065,
+      "matched_annulus_tile_g_m2": 21.8982,
+      "mismatch_g_m2": -7.83319,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "emitter": {
+    "absorbed_PW": 71.528,
+    "absorbed_by_half_PW": {
+     "day": 43.8677,
+     "night": 27.6603
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 47.322,
+     "window": 24.206
+    },
+    "glow_W_m2": {
+     "global": 8.80031,
+     "day": 9.10658,
+     "night": 8.49405
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.51887,
+     "night_half": 4.28145
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 5.77718,
+     "window": 3.02313
+    },
+    "infrared_return_W_m2": {
+     "global": 4.16375,
+     "day": 3.79851,
+     "night": 4.52899
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.710148,
+     "day": 1.37918,
+     "night": 0.0411175
+    },
+    "night_lux_from_returns": {
+     "mean": 1.64069,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.993302,
+       1.00338,
+       1.05117,
+       1.13,
+       1.25225,
+       1.4247,
+       1.62797,
+       1.91352,
+       2.60741
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 12.9641,
+     "day": 12.9051,
+     "night": 13.023
+    },
+    "heat_total_W_m2": {
+     "global": 13.6742,
+     "day": 14.2843,
+     "night": 13.0642
+    },
+    "dimming": {
+     "percent": 6.38084,
+     "records_convention_percent": 4.66199,
+     "glow_only_percent": 4.16711,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 6.38084,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.643368,
+     "absorbing_dimmer_gives_back": 0.304646,
+     "electricity_TW": [
+      141.987,
+      212.98
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "emitter_low",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 2.0,
+       "t_per_tile": 200.0,
+       "solar_absorptance": 0.0323365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14412,
+       "T_sunward_one_K": [
+        149.077
+       ],
+       "T_sunward_two_K": [
+        178.089,
+        175.737
+       ]
+      },
+      "window": {
+       "g_m2": 2.0,
+       "t_per_tile": 200.0,
+       "solar_absorptance": 0.0469892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.143825,
+       "T_sunward_one_K": [
+        163.483
+       ],
+       "T_sunward_two_K": [
+        195.251,
+        192.824
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14412,
+      "window_dynamic_coefficient": 0.274,
+      "window_tile_g_m2": 28.0,
+      "annulus_tile_g_m2": 15.765,
+      "matched_annulus_tile_g_m2": 14.7276,
+      "mismatch_g_m2": 1.03733,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.00507552
+     }
+    }
+   },
+   "mesh_low_emitter": {
+    "absorbed_PW": 76.4777,
+    "absorbed_by_half_PW": {
+     "day": 48.8516,
+     "night": 27.6261
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 51.3702,
+     "window": 25.1074
+    },
+    "glow_W_m2": {
+     "global": 5.16649,
+     "day": 5.52324,
+     "night": 4.80975
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 2.76338,
+     "night_half": 2.40311
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 3.4458,
+     "window": 1.72069
+    },
+    "infrared_return_W_m2": {
+     "global": 17.114,
+     "day": 15.6137,
+     "night": 18.6144
+    },
+    "sunlight_return_W_m2": {
+     "global": 1.37302,
+     "day": 2.66811,
+     "night": 0.0779244
+    },
+    "night_lux_from_returns": {
+     "mean": 5.6839,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       3.56539,
+       3.62502,
+       3.78146,
+       4.029,
+       4.42241,
+       4.96499,
+       5.59805,
+       6.47897,
+       8.95782
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 22.2805,
+     "day": 21.1369,
+     "night": 23.4241
+    },
+    "heat_total_W_m2": {
+     "global": 23.6535,
+     "day": 23.805,
+     "night": 23.502
+    },
+    "dimming": {
+     "percent": 11.0183,
+     "records_convention_percent": 8.06428,
+     "glow_only_percent": 2.44643,
+     "coating_provides_percent": 5.0,
+     "to_add_percent": 6.01835,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.330972,
+     "absorbing_dimmer_gives_back": 0.156721,
+     "electricity_TW": [
+      133.921,
+      200.881
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "mesh_low+emitter_low",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 2.02,
+       "t_per_tile": 202.0,
+       "solar_absorptance": 0.0373365,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.23912,
+       "T_sunward_one_K": [
+        175.252
+       ],
+       "T_sunward_two_K": [
+        269.286,
+        196.469
+       ]
+      },
+      "window": {
+       "g_m2": 2.02,
+       "t_per_tile": 202.0,
+       "solar_absorptance": 0.0519892,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.238825,
+       "T_sunward_one_K": [
+        190.375
+       ],
+       "T_sunward_two_K": [
+        292.522,
+        213.421
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.23912,
+      "window_dynamic_coefficient": 0.369,
+      "window_tile_g_m2": 28.02,
+      "annulus_tile_g_m2": 15.785,
+      "matched_annulus_tile_g_m2": 18.1576,
+      "mismatch_g_m2": -2.37263,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "mesh_low_nearest_emitter": {
+    "absorbed_PW": 76.4777,
+    "absorbed_by_half_PW": {
+     "day": 48.8516,
+     "night": 27.6261
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 51.3702,
+     "window": 25.1074
+    },
+    "glow_W_m2": {
+     "global": 2.61734,
+     "day": 2.81583,
+     "night": 2.41884
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.40898,
+     "night_half": 1.20835
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 1.56995,
+     "window": 1.04738
+    },
+    "infrared_return_W_m2": {
+     "global": 17.114,
+     "day": 15.6137,
+     "night": 18.6144
+    },
+    "sunlight_return_W_m2": {
+     "global": 1.09093,
+     "day": 2.12382,
+     "night": 0.0580505
+    },
+    "night_lux_from_returns": {
+     "mean": 3.48326,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       2.43318,
+       2.45083,
+       2.52379,
+       2.6391,
+       2.8297,
+       3.09124,
+       3.37414,
+       3.79299,
+       5.32163
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 19.7314,
+     "day": 18.4295,
+     "night": 21.0332
+    },
+    "heat_total_W_m2": {
+     "global": 20.8223,
+     "day": 20.5533,
+     "night": 21.0913
+    },
+    "dimming": {
+     "percent": 9.7151,
+     "records_convention_percent": 7.09902,
+     "glow_only_percent": 1.23936,
+     "coating_provides_percent": 5.0,
+     "to_add_percent": 4.7151,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.201461,
+     "absorbing_dimmer_gives_back": 0.0953956,
+     "electricity_TW": [
+      104.921,
+      157.381
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "mesh_low_nearest+emitter_low",
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 2.02,
+       "t_per_tile": 202.0,
+       "solar_absorptance": 0.0373365,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.23912,
+       "T_sunward_one_K": [
+        175.252
+       ],
+       "T_sunward_two_K": [
+        217.97,
+        216.608
+       ]
+      },
+      "window": {
+       "g_m2": 2.02,
+       "t_per_tile": 202.0,
+       "solar_absorptance": 0.0519892,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.238825,
+       "T_sunward_one_K": [
+        190.375
+       ],
+       "T_sunward_two_K": [
+        254.116,
+        240.838
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.23912,
+      "window_dynamic_coefficient": 0.369,
+      "window_tile_g_m2": 28.02,
+      "annulus_tile_g_m2": 15.785,
+      "matched_annulus_tile_g_m2": 18.1576,
+      "mismatch_g_m2": -2.37263,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "pitch_plus_6": {
+    "absorbed_PW": 67.7586,
+    "absorbed_by_half_PW": {
+     "day": 41.5962,
+     "night": 26.1625
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 44.5481,
+     "window": 23.2106
+    },
+    "glow_W_m2": {
+     "global": 9.36199,
+     "day": 9.70467,
+     "night": 9.0193
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.82856,
+     "night_half": 4.53343
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 5.97948,
+     "window": 3.38251
+    },
+    "infrared_return_W_m2": {
+     "global": 3.59405,
+     "day": 3.65488,
+     "night": 3.53322
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.748309,
+     "day": 1.31471,
+     "night": 0.181911
+    },
+    "night_lux_from_returns": {
+     "mean": 7.94812,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       5.16008,
+       4.77953,
+       4.67544,
+       4.66526,
+       4.70743,
+       5.20335,
+       6.2275,
+       9.15628,
+       17.245
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 12.956,
+     "day": 13.3596,
+     "night": 12.5525
+    },
+    "heat_total_W_m2": {
+     "global": 13.7043,
+     "day": 14.6743,
+     "night": 12.7344
+    },
+    "dimming": {
+     "percent": 6.39005,
+     "records_convention_percent": 4.67227,
+     "glow_only_percent": 4.43307,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 6.39005,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.751849,
+     "absorbing_dimmer_gives_back": 0.356014,
+     "electricity_TW": [
+      142.192,
+      213.287
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": 6.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "pitch_minus_3": {
+    "absorbed_PW": 67.5978,
+    "absorbed_by_half_PW": {
+     "day": 41.4328,
+     "night": 26.1649
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 44.4275,
+     "window": 23.1703
+    },
+    "glow_W_m2": {
+     "global": 9.34008,
+     "day": 9.67718,
+     "night": 9.00297
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.80627,
+     "night_half": 4.5338
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 5.96318,
+     "window": 3.37689
+    },
+    "infrared_return_W_m2": {
+     "global": 3.59351,
+     "day": 3.65454,
+     "night": 3.53248
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.748136,
+     "day": 1.31458,
+     "night": 0.181692
+    },
+    "night_lux_from_returns": {
+     "mean": 7.92594,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       5.00292,
+       4.84197,
+       4.68029,
+       4.60643,
+       4.78461,
+       5.15036,
+       6.20828,
+       9.06172,
+       17.2445
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 12.9336,
+     "day": 13.3317,
+     "night": 12.5355
+    },
+    "heat_total_W_m2": {
+     "global": 13.6817,
+     "day": 14.6463,
+     "night": 12.7171
+    },
+    "dimming": {
+     "percent": 6.37936,
+     "records_convention_percent": 4.66455,
+     "glow_only_percent": 4.4227,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 6.37936,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.750601,
+     "absorbing_dimmer_gives_back": 0.355423,
+     "electricity_TW": [
+      141.954,
+      212.931
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "as_built",
+     "roll_deg": null,
+     "pitch_deg": -3.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "night_roll_30": {
+    "absorbed_PW": 63.4323,
+    "absorbed_by_half_PW": {
+     "day": 41.4593,
+     "night": 21.973
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 41.5587,
+     "window": 21.8735
+    },
+    "glow_W_m2": {
+     "global": 8.14845,
+     "day": 9.49844,
+     "night": 6.79847
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.81786,
+     "night_half": 3.3306
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 5.16525,
+     "window": 2.98321
+    },
+    "infrared_return_W_m2": {
+     "global": 1.6348,
+     "day": 3.26262,
+     "night": 0.00697074
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.667075,
+     "day": 1.33163,
+     "night": 0.00251784
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0805158,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.019581,
+       0.444686
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 9.78325,
+     "day": 12.7611,
+     "night": 6.80544
+    },
+    "heat_total_W_m2": {
+     "global": 10.4503,
+     "day": 14.0927,
+     "night": 6.80795
+    },
+    "dimming": {
+     "percent": 4.85998,
+     "records_convention_percent": 3.56286,
+     "glow_only_percent": 3.85844,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 4.85998,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.663094,
+     "absorbing_dimmer_gives_back": 0.313987,
+     "electricity_TW": [
+      108.144,
+      162.217
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 30.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "night_roll_60": {
+    "absorbed_PW": 52.2633,
+    "absorbed_by_half_PW": {
+     "day": 41.4593,
+     "night": 10.804
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 34.4146,
+     "window": 17.8487
+    },
+    "glow_W_m2": {
+     "global": 5.73241,
+     "day": 9.12767,
+     "night": 2.33715
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.81786,
+     "night_half": 0.914555
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 3.61255,
+     "window": 2.11986
+    },
+    "infrared_return_W_m2": {
+     "global": 1.63456,
+     "day": 3.26215,
+     "night": 0.00697074
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.666565,
+     "day": 1.33061,
+     "night": 0.00251784
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0805158,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.019581,
+       0.444686
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 7.36697,
+     "day": 12.3898,
+     "night": 2.34412
+    },
+    "heat_total_W_m2": {
+     "global": 8.03354,
+     "day": 13.7204,
+     "night": 2.34664
+    },
+    "dimming": {
+     "percent": 3.71565,
+     "records_convention_percent": 2.7389,
+     "glow_only_percent": 2.7144,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.71565,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.471192,
+     "absorbing_dimmer_gives_back": 0.223118,
+     "electricity_TW": [
+      82.6809,
+      124.021
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 60.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     }
+    }
+   },
+   "night_roll_80": {
+    "absorbed_PW": 45.6857,
+    "absorbed_by_half_PW": {
+     "day": 41.4593,
+     "night": 4.22633
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 30.7941,
+     "window": 14.8916
+    },
+    "glow_W_m2": {
+     "global": 4.93433,
+     "day": 9.00625,
+     "night": 0.862399
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.81786,
+     "night_half": 0.11647
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 3.10212,
+     "window": 1.8322
+    },
+    "infrared_return_W_m2": {
+     "global": 1.63449,
+     "day": 3.26201,
+     "night": 0.00697074
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.6664,
+     "day": 1.33028,
+     "night": 0.00251784
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0805158,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.019581,
+       0.444686
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 6.56882,
+     "day": 12.2683,
+     "night": 0.869369
+    },
+    "heat_total_W_m2": {
+     "global": 7.23522,
+     "day": 13.5985,
+     "night": 0.871887
+    },
+    "dimming": {
+     "percent": 3.33765,
+     "records_convention_percent": 2.46673,
+     "glow_only_percent": 2.33649,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.33765,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.407254,
+     "absorbing_dimmer_gives_back": 0.192842,
+     "electricity_TW": [
+      74.2697,
+      111.404
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_30": {
+    "absorbed_PW": 62.0753,
+    "absorbed_by_half_PW": {
+     "day": 40.1023,
+     "night": 21.973
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 40.6956,
+     "window": 21.3796
+    },
+    "glow_W_m2": {
+     "global": 7.85639,
+     "day": 9.02043,
+     "night": 6.69236
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.5258,
+     "night_half": 3.3306
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 4.9828,
+     "window": 2.87359
+    },
+    "infrared_return_W_m2": {
+     "global": 1.41369,
+     "day": 2.82039,
+     "night": 0.00699441
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.541676,
+     "day": 1.08082,
+     "night": 0.00252845
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0808549,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.019581,
+       0.446639
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 9.27009,
+     "day": 11.8408,
+     "night": 6.69935
+    },
+    "heat_total_W_m2": {
+     "global": 9.81176,
+     "day": 12.9216,
+     "night": 6.70188
+    },
+    "dimming": {
+     "percent": 4.57423,
+     "records_convention_percent": 3.34516,
+     "glow_only_percent": 3.72015,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 4.57423,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.638729,
+     "absorbing_dimmer_gives_back": 0.30245,
+     "electricity_TW": [
+      101.786,
+      152.679
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 30.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "rolled_30_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.857595,
+      "store_N_m_s_median_trim_25": 57712200000.0,
+      "store_N_m_s_median_trim_25_centred_filter": null,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_60": {
+    "absorbed_PW": 47.9375,
+    "absorbed_by_half_PW": {
+     "day": 37.1335,
+     "night": 10.804
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 31.9649,
+     "window": 15.9725
+    },
+    "glow_W_m2": {
+     "global": 4.86921,
+     "day": 7.69808,
+     "night": 2.04034
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 3.95466,
+     "night_half": 0.914555
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 3.09536,
+     "window": 1.77385
+    },
+    "infrared_return_W_m2": {
+     "global": 1.384,
+     "day": 2.761,
+     "night": 0.00699882
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.527547,
+     "day": 1.05256,
+     "night": 0.00252992
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0809368,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.019581,
+       0.44711
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 6.25322,
+     "day": 10.4591,
+     "night": 2.04734
+    },
+    "heat_total_W_m2": {
+     "global": 6.78076,
+     "day": 11.5117,
+     "night": 2.04987
+    },
+    "dimming": {
+     "percent": 3.14087,
+     "records_convention_percent": 2.31179,
+     "glow_only_percent": 2.30566,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.14087,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.394284,
+     "absorbing_dimmer_gives_back": 0.186701,
+     "electricity_TW": [
+      69.8908,
+      104.836
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 60.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "rolled_60_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.566958,
+      "store_N_m_s_median_trim_25": 61702600000.0,
+      "store_N_m_s_median_trim_25_centred_filter": null,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80": {
+    "absorbed_PW": 39.683,
+    "absorbed_by_half_PW": {
+     "day": 35.4566,
+     "night": 4.22633
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 27.7035,
+     "window": 11.9794
+    },
+    "glow_W_m2": {
+     "global": 3.76049,
+     "day": 7.05056,
+     "night": 0.470412
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 3.64402,
+     "night_half": 0.11647
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.39228,
+     "window": 1.3682
+    },
+    "infrared_return_W_m2": {
+     "global": 1.37309,
+     "day": 2.73917,
+     "night": 0.00701368
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.522574,
+     "day": 1.04261,
+     "night": 0.00253637
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0811769,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.019581,
+       0.448493
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 5.13358,
+     "day": 9.78974,
+     "night": 0.477426
+    },
+    "heat_total_W_m2": {
+     "global": 5.65615,
+     "day": 10.8323,
+     "night": 0.479962
+    },
+    "dimming": {
+     "percent": 2.60901,
+     "records_convention_percent": 1.92837,
+     "glow_only_percent": 1.78066,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 2.60901,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.304118,
+     "absorbing_dimmer_gives_back": 0.144006,
+     "electricity_TW": [
+      58.0558,
+      87.0837
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "night_roll_80_thin_titania": {
+    "absorbed_PW": 42.228,
+    "absorbed_by_half_PW": {
+     "day": 38.4789,
+     "night": 3.74906
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 27.3364,
+     "window": 14.8916
+    },
+    "glow_W_m2": {
+     "global": 4.52702,
+     "day": 8.27307,
+     "night": 0.780973
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.42378,
+     "night_half": 0.103244
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.69482,
+     "window": 1.8322
+    },
+    "infrared_return_W_m2": {
+     "global": 1.65114,
+     "day": 3.29522,
+     "night": 0.00706878
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.795486,
+     "day": 1.58776,
+     "night": 0.00320905
+    },
+    "night_lux_from_returns": {
+     "mean": 0.1593,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0395767,
+       0.879
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 6.17817,
+     "day": 11.5683,
+     "night": 0.788042
+    },
+    "heat_total_W_m2": {
+     "global": 6.97365,
+     "day": 13.1561,
+     "night": 0.791251
+    },
+    "dimming": {
+     "percent": 3.19668,
+     "records_convention_percent": 2.37755,
+     "glow_only_percent": 2.14363,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.19668,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.407254,
+     "absorbing_dimmer_gives_back": 0.192842,
+     "electricity_TW": [
+      71.1328,
+      106.699
+     ]
+    },
+    "costs": {
+     "films": "thin_titania",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": -0.195,
+       "t_per_tile": -19.5,
+       "solar_absorptance": 0.0273234,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.161576,
+       "T_sunward_one_K": [
+        173.372
+       ],
+       "T_sunward_two_K": [
+        189.181,
+        189.436
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.161576,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.57,
+      "matched_annulus_tile_g_m2": 15.221,
+      "mismatch_g_m2": -1.65099,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "night_roll_80_wide_gap_220": {
+    "absorbed_PW": 16.3631,
+    "absorbed_by_half_PW": {
+     "day": 15.7285,
+     "night": 0.634607
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 1.47151,
+     "window": 14.8916
+    },
+    "glow_W_m2": {
+     "global": 1.99115,
+     "day": 3.7036,
+     "night": 0.278695
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.97154,
+     "night_half": 0.0196102
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.158946,
+     "window": 1.8322
+    },
+    "infrared_return_W_m2": {
+     "global": 1.63449,
+     "day": 3.26201,
+     "night": 0.00697074
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.589308,
+     "day": 1.17651,
+     "night": 0.00210572
+    },
+    "night_lux_from_returns": {
+     "mean": 0.112481,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.027693,
+       0.620899
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 3.62564,
+     "day": 6.96562,
+     "night": 0.285666
+    },
+    "heat_total_W_m2": {
+     "global": 4.21495,
+     "day": 8.14213,
+     "night": 0.287772
+    },
+    "dimming": {
+     "percent": 1.91772,
+     "records_convention_percent": 1.43702,
+     "glow_only_percent": 0.942846,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.91772,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.407254,
+     "absorbing_dimmer_gives_back": 0.192842,
+     "electricity_TW": [
+      42.6733,
+      64.0099
+     ]
+    },
+    "costs": {
+     "films": "wide_gap_220",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 1.11,
+       "t_per_tile": 111.0,
+       "solar_absorptance": 0.00137138,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.0478877,
+       "T_sunward_one_K": [
+        93.3503
+       ],
+       "T_sunward_two_K": [
+        98.6577,
+        99.2259
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.0478877,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 14.875,
+      "matched_annulus_tile_g_m2": 4.51116,
+      "mismatch_g_m2": 10.3638,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0550079
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "night_roll_80_wide_gap_250": {
+    "absorbed_PW": 17.4172,
+    "absorbed_by_half_PW": {
+     "day": 16.656,
+     "night": 0.761184
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 2.52559,
+     "window": 14.8916
+    },
+    "glow_W_m2": {
+     "global": 2.10275,
+     "day": 3.90645,
+     "night": 0.299056
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 2.07946,
+     "night_half": 0.0232877
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.270548,
+     "window": 1.8322
+    },
+    "infrared_return_W_m2": {
+     "global": 1.63449,
+     "day": 3.26201,
+     "night": 0.00697074
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.589308,
+     "day": 1.17651,
+     "night": 0.00210572
+    },
+    "night_lux_from_returns": {
+     "mean": 0.112481,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.027693,
+       0.620899
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 3.73724,
+     "day": 7.16846,
+     "night": 0.306026
+    },
+    "heat_total_W_m2": {
+     "global": 4.32655,
+     "day": 8.34497,
+     "night": 0.308132
+    },
+    "dimming": {
+     "percent": 1.97057,
+     "records_convention_percent": 1.47507,
+     "glow_only_percent": 0.995692,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.97057,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.407254,
+     "absorbing_dimmer_gives_back": 0.192842,
+     "electricity_TW": [
+      43.8492,
+      65.7738
+     ]
+    },
+    "costs": {
+     "films": "wide_gap_250",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 1.11,
+       "t_per_tile": 111.0,
+       "solar_absorptance": 0.00245685,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.0489732,
+       "T_sunward_one_K": [
+        104.125
+       ],
+       "T_sunward_two_K": [
+        110.881,
+        111.483
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.0489732,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 14.875,
+      "matched_annulus_tile_g_m2": 4.61342,
+      "mismatch_g_m2": 10.2615,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0544651
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "night_roll_80_wide_gap_250_window_mirror": {
+    "absorbed_PW": 9.74765,
+    "absorbed_by_half_PW": {
+     "day": 8.98647,
+     "night": 0.761181
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 2.52559,
+     "window": 7.22206
+    },
+    "glow_W_m2": {
+     "global": 1.14995,
+     "day": 2.1173,
+     "night": 0.182611
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.12653,
+     "night_half": 0.0234243
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.270548,
+     "window": 0.879407
+    },
+    "infrared_return_W_m2": {
+     "global": 1.63449,
+     "day": 3.26201,
+     "night": 0.00697074
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.589308,
+     "day": 1.17651,
+     "night": 0.00210572
+    },
+    "night_lux_from_returns": {
+     "mean": 0.112481,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.027693,
+       0.620899
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 2.78445,
+     "day": 5.37931,
+     "night": 0.189582
+    },
+    "heat_total_W_m2": {
+     "global": 3.37375,
+     "day": 6.55582,
+     "night": 0.191687
+    },
+    "dimming": {
+     "percent": 1.5194,
+     "records_convention_percent": 1.15023,
+     "glow_only_percent": 0.544525,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.5194,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.433553,
+     "absorbing_dimmer_gives_back": 0.205295,
+     "electricity_TW": [
+      33.8098,
+      50.7147
+     ]
+    },
+    "costs": {
+     "films": "wide_gap_250_window_mirror",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 1.11,
+       "t_per_tile": 111.0,
+       "solar_absorptance": 0.00245685,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.0489732,
+       "T_sunward_one_K": [
+        104.125
+       ],
+       "T_sunward_two_K": [
+        110.881,
+        111.483
+       ]
+      },
+      "window": {
+       "g_m2": 6.83826,
+       "t_per_tile": 683.826,
+       "solar_absorptance": 0.0202837,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.170535,
+       "T_sunward_one_K": [
+        147.667
+       ],
+       "T_sunward_two_K": [
+        166.528,
+        171.864
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.0489732,
+      "window_dynamic_coefficient": 0.30071,
+      "window_tile_g_m2": 32.8383,
+      "annulus_tile_g_m2": 14.875,
+      "matched_annulus_tile_g_m2": 5.348,
+      "mismatch_g_m2": 9.52697,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0436206
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "night_roll_80_uv_mirror_outer_98": {
+    "absorbed_PW": 13.0686,
+    "absorbed_by_half_PW": {
+     "day": 9.47722,
+     "night": 3.59138
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 5.84654,
+     "window": 7.22206
+    },
+    "glow_W_m2": {
+     "global": 1.27861,
+     "day": 2.24896,
+     "night": 0.308258
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.1834,
+     "night_half": 0.0952089
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.399202,
+     "window": 0.879407
+    },
+    "infrared_return_W_m2": {
+     "global": 1.63449,
+     "day": 3.26201,
+     "night": 0.00697074
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.6664,
+     "day": 1.33028,
+     "night": 0.00251784
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0805158,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.019581,
+       0.444686
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 2.9131,
+     "day": 5.51097,
+     "night": 0.315229
+    },
+    "heat_total_W_m2": {
+     "global": 3.5795,
+     "day": 6.84126,
+     "night": 0.317747
+    },
+    "dimming": {
+     "percent": 1.60661,
+     "records_convention_percent": 1.22037,
+     "glow_only_percent": 0.605445,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.60661,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.433553,
+     "absorbing_dimmer_gives_back": 0.205295,
+     "electricity_TW": [
+      35.7503,
+      53.6254
+     ]
+    },
+    "costs": {
+     "films": "uv_mirror_outer_98",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 11.0368,
+       "t_per_tile": 1103.68,
+       "solar_absorptance": 0.00303676,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.226454,
+       "T_sunward_one_K": [
+        108.425
+       ],
+       "T_sunward_two_K": [
+        115.769,
+        116.383
+       ]
+      },
+      "window": {
+       "g_m2": 6.83826,
+       "t_per_tile": 683.826,
+       "solar_absorptance": 0.0202837,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.170535,
+       "T_sunward_one_K": [
+        147.667
+       ],
+       "T_sunward_two_K": [
+        166.528,
+        171.864
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.226454,
+      "window_dynamic_coefficient": 0.30071,
+      "window_tile_g_m2": 32.8383,
+      "annulus_tile_g_m2": 24.8018,
+      "matched_annulus_tile_g_m2": 24.7293,
+      "mismatch_g_m2": 0.072454,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.000331741
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "night_roll_80_emitter": {
+    "absorbed_PW": 48.3625,
+    "absorbed_by_half_PW": {
+     "day": 43.8677,
+     "night": 4.4948
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 32.8237,
+     "window": 15.5388
+    },
+    "glow_W_m2": {
+     "global": 4.62369,
+     "day": 8.43808,
+     "night": 0.809287
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.51887,
+     "night_half": 0.104819
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.99332,
+     "window": 1.63037
+    },
+    "infrared_return_W_m2": {
+     "global": 1.69066,
+     "day": 3.37394,
+     "night": 0.00738016
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.666353,
+     "day": 1.33019,
+     "night": 0.00251776
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0805149,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0195808,
+       0.444681
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 6.31434,
+     "day": 11.812,
+     "night": 0.816667
+    },
+    "heat_total_W_m2": {
+     "global": 6.9807,
+     "day": 13.1422,
+     "night": 0.819185
+    },
+    "dimming": {
+     "percent": 3.21714,
+     "records_convention_percent": 2.37995,
+     "glow_only_percent": 2.1894,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.21714,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.346967,
+     "absorbing_dimmer_gives_back": 0.164295,
+     "electricity_TW": [
+      71.588,
+      107.382
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "emitter_low",
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 2.0,
+       "t_per_tile": 200.0,
+       "solar_absorptance": 0.0323365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14412,
+       "T_sunward_one_K": [
+        149.077
+       ],
+       "T_sunward_two_K": [
+        178.089,
+        175.737
+       ]
+      },
+      "window": {
+       "g_m2": 2.0,
+       "t_per_tile": 200.0,
+       "solar_absorptance": 0.0469892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.143825,
+       "T_sunward_one_K": [
+        163.483
+       ],
+       "T_sunward_two_K": [
+        195.251,
+        192.824
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14412,
+      "window_dynamic_coefficient": 0.274,
+      "window_tile_g_m2": 28.0,
+      "annulus_tile_g_m2": 15.765,
+      "matched_annulus_tile_g_m2": 14.7276,
+      "mismatch_g_m2": 1.03733,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.00507552
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "night_roll_80_mesh_low_emitter": {
+    "absorbed_PW": 53.3377,
+    "absorbed_by_half_PW": {
+     "day": 48.8516,
+     "night": 4.48611
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 36.6352,
+     "window": 16.7025
+    },
+    "glow_W_m2": {
+     "global": 2.82508,
+     "day": 5.09991,
+     "night": 0.550247
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 2.76338,
+     "night_half": 0.0616978
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 1.86652,
+     "window": 0.958558
+    },
+    "infrared_return_W_m2": {
+     "global": 6.94941,
+     "day": 13.8685,
+     "night": 0.0303008
+    },
+    "sunlight_return_W_m2": {
+     "global": 1.29525,
+     "day": 2.58568,
+     "night": 0.00481738
+    },
+    "night_lux_from_returns": {
+     "mean": 0.325506,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0801494,
+       1.7968
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 9.77449,
+     "day": 18.9684,
+     "night": 0.580548
+    },
+    "heat_total_W_m2": {
+     "global": 11.0697,
+     "day": 21.5541,
+     "night": 0.585366
+    },
+    "dimming": {
+     "percent": 5.06999,
+     "records_convention_percent": 3.77404,
+     "glow_only_percent": 1.33773,
+     "coating_provides_percent": 5.0,
+     "to_add_percent": 0.0699933,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.184376,
+     "absorbing_dimmer_gives_back": 0.0873056,
+     "electricity_TW": [
+      1.5575,
+      2.33624
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "mesh_low+emitter_low",
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 2.02,
+       "t_per_tile": 202.0,
+       "solar_absorptance": 0.0373365,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.23912,
+       "T_sunward_one_K": [
+        175.252
+       ],
+       "T_sunward_two_K": [
+        269.286,
+        196.469
+       ]
+      },
+      "window": {
+       "g_m2": 2.02,
+       "t_per_tile": 202.0,
+       "solar_absorptance": 0.0519892,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.238825,
+       "T_sunward_one_K": [
+        190.375
+       ],
+       "T_sunward_two_K": [
+        292.522,
+        213.421
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.23912,
+      "window_dynamic_coefficient": 0.369,
+      "window_tile_g_m2": 28.02,
+      "annulus_tile_g_m2": 15.785,
+      "matched_annulus_tile_g_m2": 18.1576,
+      "mismatch_g_m2": -2.37263,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_wide_gap_220": {
+    "absorbed_PW": 13.3,
+    "absorbed_by_half_PW": {
+     "day": 12.6654,
+     "night": 0.634607
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 1.3206,
+     "window": 11.9794
+    },
+    "glow_W_m2": {
+     "global": 1.49163,
+     "day": 2.87013,
+     "night": 0.113122
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.47202,
+     "night_half": 0.0196102
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.123421,
+     "window": 1.3682
+    },
+    "infrared_return_W_m2": {
+     "global": 1.37309,
+     "day": 2.73917,
+     "night": 0.00701368
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.458955,
+     "day": 0.915788,
+     "night": 0.00212164
+    },
+    "night_lux_from_returns": {
+     "mean": 0.113345,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.027693,
+       0.625878
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 2.86472,
+     "day": 5.6093,
+     "night": 0.120136
+    },
+    "heat_total_W_m2": {
+     "global": 3.32367,
+     "day": 6.52509,
+     "night": 0.122258
+    },
+    "dimming": {
+     "percent": 1.51297,
+     "records_convention_percent": 1.13315,
+     "glow_only_percent": 0.706313,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.51297,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.304118,
+     "absorbing_dimmer_gives_back": 0.144006,
+     "electricity_TW": [
+      33.6667,
+      50.5
+     ]
+    },
+    "costs": {
+     "films": "wide_gap_220",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 1.11,
+       "t_per_tile": 111.0,
+       "solar_absorptance": 0.00137138,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.0478877,
+       "T_sunward_one_K": [
+        93.3503
+       ],
+       "T_sunward_two_K": [
+        98.6577,
+        99.2259
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.0478877,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 14.875,
+      "matched_annulus_tile_g_m2": 4.51116,
+      "mismatch_g_m2": 10.3638,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0550079
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_wide_gap_250": {
+    "absorbed_PW": 14.2466,
+    "absorbed_by_half_PW": {
+     "day": 13.4854,
+     "night": 0.761184
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 2.26716,
+     "window": 11.9794
+    },
+    "glow_W_m2": {
+     "global": 1.57969,
+     "day": 3.03352,
+     "night": 0.125868
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.55641,
+     "night_half": 0.0232877
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.21149,
+     "window": 1.3682
+    },
+    "infrared_return_W_m2": {
+     "global": 1.37309,
+     "day": 2.73917,
+     "night": 0.00701368
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.458955,
+     "day": 0.915788,
+     "night": 0.00212164
+    },
+    "night_lux_from_returns": {
+     "mean": 0.113345,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.027693,
+       0.625878
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 2.95279,
+     "day": 5.77269,
+     "night": 0.132882
+    },
+    "heat_total_W_m2": {
+     "global": 3.41174,
+     "day": 6.68848,
+     "night": 0.135003
+    },
+    "dimming": {
+     "percent": 1.55467,
+     "records_convention_percent": 1.16318,
+     "glow_only_percent": 0.748015,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.55467,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.304118,
+     "absorbing_dimmer_gives_back": 0.144006,
+     "electricity_TW": [
+      34.5947,
+      51.892
+     ]
+    },
+    "costs": {
+     "films": "wide_gap_250",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 1.11,
+       "t_per_tile": 111.0,
+       "solar_absorptance": 0.00245685,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.0489732,
+       "T_sunward_one_K": [
+        104.125
+       ],
+       "T_sunward_two_K": [
+        110.881,
+        111.483
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.0489732,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 14.875,
+      "matched_annulus_tile_g_m2": 4.61342,
+      "mismatch_g_m2": 10.2615,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0544651
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_mesh_low_emitter": {
+    "absorbed_PW": 46.4903,
+    "absorbed_by_half_PW": {
+     "day": 42.0042,
+     "night": 4.48611
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 32.9703,
+     "window": 13.52
+    },
+    "glow_W_m2": {
+     "global": 1.98333,
+     "day": 3.70033,
+     "night": 0.266324
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.92163,
+     "night_half": 0.0616978
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 1.33646,
+     "window": 0.646865
+    },
+    "infrared_return_W_m2": {
+     "global": 5.87256,
+     "day": 11.7146,
+     "night": 0.0304824
+    },
+    "sunlight_return_W_m2": {
+     "global": 1.02012,
+     "day": 2.03538,
+     "night": 0.00485305
+    },
+    "night_lux_from_returns": {
+     "mean": 0.328,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0801494,
+       1.81116
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 7.85588,
+     "day": 15.415,
+     "night": 0.296806
+    },
+    "heat_total_W_m2": {
+     "global": 8.876,
+     "day": 17.4503,
+     "night": 0.301659
+    },
+    "dimming": {
+     "percent": 4.0677,
+     "records_convention_percent": 3.02612,
+     "glow_only_percent": 0.939142,
+     "coating_provides_percent": 5.0,
+     "to_add_percent": -0.932302,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.124423,
+     "absorbing_dimmer_gives_back": 0.0589166,
+     "electricity_TW": [
+      0.0,
+      0.0
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": "mesh_low+emitter_low",
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 2.02,
+       "t_per_tile": 202.0,
+       "solar_absorptance": 0.0373365,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.23912,
+       "T_sunward_one_K": [
+        175.252
+       ],
+       "T_sunward_two_K": [
+        269.286,
+        196.469
+       ]
+      },
+      "window": {
+       "g_m2": 2.02,
+       "t_per_tile": 202.0,
+       "solar_absorptance": 0.0519892,
+       "taken_out_of_beam": 0.05,
+       "pressure_coefficient": 0.238825,
+       "T_sunward_one_K": [
+        190.375
+       ],
+       "T_sunward_two_K": [
+        292.522,
+        213.421
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.23912,
+      "window_dynamic_coefficient": 0.369,
+      "window_tile_g_m2": 28.02,
+      "annulus_tile_g_m2": 15.785,
+      "matched_annulus_tile_g_m2": 18.1576,
+      "mismatch_g_m2": -2.37263,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_uv_mirror_outer_98": {
+    "absorbed_PW": 11.9683,
+    "absorbed_by_half_PW": {
+     "day": 8.37693,
+     "night": 3.59138
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 6.15044,
+     "window": 5.81786
+    },
+    "glow_W_m2": {
+     "global": 1.00077,
+     "day": 1.77923,
+     "night": 0.22232
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 0.905564,
+     "night_half": 0.0952089
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.34599,
+     "window": 0.654783
+    },
+    "infrared_return_W_m2": {
+     "global": 1.37309,
+     "day": 2.73917,
+     "night": 0.00701368
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.522574,
+     "day": 1.04261,
+     "night": 0.00253637
+    },
+    "night_lux_from_returns": {
+     "mean": 0.0811769,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.019581,
+       0.448493
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 2.37387,
+     "day": 4.5184,
+     "night": 0.229334
+    },
+    "heat_total_W_m2": {
+     "global": 2.89644,
+     "day": 5.56101,
+     "night": 0.23187
+    },
+    "dimming": {
+     "percent": 1.30223,
+     "records_convention_percent": 0.987493,
+     "glow_only_percent": 0.473885,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.30223,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.322812,
+     "absorbing_dimmer_gives_back": 0.152858,
+     "electricity_TW": [
+      28.9773,
+      43.466
+     ]
+    },
+    "costs": {
+     "films": "uv_mirror_outer_98",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 11.0368,
+       "t_per_tile": 1103.68,
+       "solar_absorptance": 0.00303676,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.226454,
+       "T_sunward_one_K": [
+        108.425
+       ],
+       "T_sunward_two_K": [
+        115.769,
+        116.383
+       ]
+      },
+      "window": {
+       "g_m2": 6.83826,
+       "t_per_tile": 683.826,
+       "solar_absorptance": 0.0202837,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.170535,
+       "T_sunward_one_K": [
+        147.667
+       ],
+       "T_sunward_two_K": [
+        166.528,
+        171.864
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.226454,
+      "window_dynamic_coefficient": 0.30071,
+      "window_tile_g_m2": 32.8383,
+      "annulus_tile_g_m2": 24.8018,
+      "matched_annulus_tile_g_m2": 24.7293,
+      "mismatch_g_m2": 0.072454,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.000331741
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "night_roll_80_own_eccentricity": {
+    "absorbed_PW": 45.378,
+    "absorbed_by_half_PW": {
+     "day": 40.2197,
+     "night": 5.15825
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 30.8767,
+     "window": 14.5013
+    },
+    "glow_W_m2": {
+     "global": 4.72307,
+     "day": 8.54017,
+     "night": 0.905972
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 4.60236,
+     "night_half": 0.120706
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.96639,
+     "window": 1.75668
+    },
+    "infrared_return_W_m2": {
+     "global": 2.82923,
+     "day": 5.6262,
+     "night": 0.032256
+    },
+    "sunlight_return_W_m2": {
+     "global": 1.11707,
+     "day": 2.21741,
+     "night": 0.016726
+    },
+    "night_lux_from_returns": {
+     "mean": 0.775643,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0125585,
+       0.481919,
+       3.98805
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 7.5523,
+     "day": 14.1664,
+     "night": 0.938228
+    },
+    "heat_total_W_m2": {
+     "global": 8.66937,
+     "day": 16.3838,
+     "night": 0.954954
+    },
+    "eccentricity": {
+     "scheme": "night_rolled_80_deg",
+     "drive_over_as_built": 0.54684,
+     "range": [
+      0.0584034,
+      0.0894784
+     ],
+     "perilune_km": [
+      17184.2,
+      18061.8
+     ]
+    },
+    "dimming": {
+     "percent": 3.957,
+     "records_convention_percent": 2.95568,
+     "glow_only_percent": 2.23646,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 3.957,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.390467,
+     "absorbing_dimmer_gives_back": 0.184893,
+     "electricity_TW": [
+      88.0513,
+      132.077
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "night",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "night_rolled_80_deg",
+      "law": "night half only",
+      "eccentricity_drive_over_as_built": 0.54684,
+      "store_N_m_s_median_trim_25": 90039500000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 89969400000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_own_eccentricity": {
+    "absorbed_PW": 38.521,
+    "absorbed_by_half_PW": {
+     "day": 33.2172,
+     "night": 5.30382
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 27.1574,
+     "window": 11.3636
+    },
+    "glow_W_m2": {
+     "global": 3.46251,
+     "day": 6.45474,
+     "night": 0.47027
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 3.34216,
+     "night_half": 0.120346
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.19011,
+     "window": 1.27239
+    },
+    "infrared_return_W_m2": {
+     "global": 1.69327,
+     "day": 3.34534,
+     "night": 0.0411956
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.578593,
+     "day": 1.13697,
+     "night": 0.0202191
+    },
+    "night_lux_from_returns": {
+     "mean": 0.876856,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       5.90692e-06,
+       0.228071,
+       1.21711,
+       3.66199
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 5.15577,
+     "day": 9.80008,
+     "night": 0.511465
+    },
+    "heat_total_W_m2": {
+     "global": 5.73437,
+     "day": 10.937,
+     "night": 0.531684
+    },
+    "eccentricity": {
+     "scheme": "rolled_80_deg",
+     "drive_over_as_built": 0.481313,
+     "range": [
+      0.051405,
+      0.0787564
+     ],
+     "perilune_km": [
+      17438.4,
+      18405.8
+     ]
+    },
+    "dimming": {
+     "percent": 2.63862,
+     "records_convention_percent": 1.95504,
+     "glow_only_percent": 1.63956,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 2.63862,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.282821,
+     "absorbing_dimmer_gives_back": 0.133921,
+     "electricity_TW": [
+      58.7146,
+      88.0719
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_node_3_own_eccentricity": {
+    "absorbed_PW": 38.6461,
+    "absorbed_by_half_PW": {
+     "day": 33.1757,
+     "night": 5.47038
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 27.2768,
+     "window": 11.3693
+    },
+    "glow_W_m2": {
+     "global": 3.47779,
+     "day": 6.46522,
+     "night": 0.490371
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 3.33886,
+     "night_half": 0.13893
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.20446,
+     "window": 1.27333
+    },
+    "infrared_return_W_m2": {
+     "global": 1.68668,
+     "day": 3.3346,
+     "night": 0.0387518
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.57068,
+     "day": 1.12698,
+     "night": 0.0143835
+    },
+    "night_lux_from_returns": {
+     "mean": 0.508524,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.00954493,
+       0.42081,
+       2.51177
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 5.16447,
+     "day": 9.79982,
+     "night": 0.529123
+    },
+    "heat_total_W_m2": {
+     "global": 5.73515,
+     "day": 10.9268,
+     "night": 0.543506
+    },
+    "eccentricity": {
+     "scheme": "rolled_80_deg_node_3_deg",
+     "drive_over_as_built": 0.481372,
+     "range": [
+      0.0514113,
+      0.078766
+     ],
+     "perilune_km": [
+      17438.2,
+      18405.5
+     ]
+    },
+    "dimming": {
+     "percent": 2.64004,
+     "records_convention_percent": 1.9553,
+     "glow_only_percent": 1.6468,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 2.64004,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.283031,
+     "absorbing_dimmer_gives_back": 0.13402,
+     "electricity_TW": [
+      58.7462,
+      88.1194
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "outside_service_node_3",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg_node_3_deg",
+      "law": "outside service, both halves, tilted through the nodes",
+      "eccentricity_drive_over_as_built": 0.481372,
+      "store_N_m_s_median_trim_25": 17196400000.0,
+      "store_N_m_s_median_trim_25_centred_filter": null,
+      "clearance_min_gap_m": 2.94903e-13
+     }
+    }
+   },
+   "rolled_outside_service_80_node_6_own_eccentricity": {
+    "absorbed_PW": 38.9615,
+    "absorbed_by_half_PW": {
+     "day": 33.2632,
+     "night": 5.69834
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 27.5525,
+     "window": 11.409
+    },
+    "glow_W_m2": {
+     "global": 3.51492,
+     "day": 6.49843,
+     "night": 0.531419
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 3.35032,
+     "night_half": 0.164599
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.23665,
+     "window": 1.27828
+    },
+    "infrared_return_W_m2": {
+     "global": 1.68641,
+     "day": 3.33406,
+     "night": 0.0387674
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.569979,
+     "day": 1.12557,
+     "night": 0.0143854
+    },
+    "night_lux_from_returns": {
+     "mean": 0.508731,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.00961329,
+       0.417113,
+       2.51648
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 5.20134,
+     "day": 9.83249,
+     "night": 0.570186
+    },
+    "heat_total_W_m2": {
+     "global": 5.77132,
+     "day": 10.9581,
+     "night": 0.584572
+    },
+    "eccentricity": {
+     "scheme": "rolled_80_deg_node_6_deg",
+     "drive_over_as_built": 0.481557,
+     "range": [
+      0.051431,
+      0.0787962
+     ],
+     "perilune_km": [
+      17437.5,
+      18404.5
+     ]
+    },
+    "dimming": {
+     "percent": 2.65725,
+     "records_convention_percent": 1.96763,
+     "glow_only_percent": 1.66438,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 2.65725,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.284129,
+     "absorbing_dimmer_gives_back": 0.134541,
+     "electricity_TW": [
+      59.1294,
+      88.694
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "outside_service_node_6",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg_node_6_deg",
+      "law": "outside service, both halves, tilted through the nodes",
+      "eccentricity_drive_over_as_built": 0.481557,
+      "store_N_m_s_median_trim_25": 11909900000.0,
+      "store_N_m_s_median_trim_25_centred_filter": null,
+      "clearance_min_gap_m": 0.0530763
+     }
+    }
+   },
+   "rolled_outside_service_80_rolled_layout": {
+    "absorbed_PW": 38.3714,
+    "absorbed_by_half_PW": {
+     "day": 33.2134,
+     "night": 5.15802
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 27.0743,
+     "window": 11.2971
+    },
+    "glow_W_m2": {
+     "global": 3.59739,
+     "day": 6.71649,
+     "night": 0.478301
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 3.48012,
+     "night_half": 0.117273
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 2.28305,
+     "window": 1.31434
+    },
+    "infrared_return_W_m2": {
+     "global": 1.74675,
+     "day": 3.4553,
+     "night": 0.038196
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.610045,
+     "day": 1.20176,
+     "night": 0.0183276
+    },
+    "night_lux_from_returns": {
+     "mean": 0.801553,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.119466,
+       0.995877,
+       3.54165
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 5.34414,
+     "day": 10.1718,
+     "night": 0.516497
+    },
+    "heat_total_W_m2": {
+     "global": 5.95419,
+     "day": 11.3736,
+     "night": 0.534824
+    },
+    "eccentricity": {
+     "scheme": "ring_layout_rolled",
+     "drive_over_as_built": 0.481313,
+     "range": [
+      0.0534009,
+      0.0936425
+     ],
+     "perilune_km": [
+      17058.1,
+      17717.9
+     ]
+    },
+    "dimming": {
+     "percent": 2.73854,
+     "records_convention_percent": 2.02998,
+     "glow_only_percent": 1.70343,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 2.73854,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.292146,
+     "absorbing_dimmer_gives_back": 0.138337,
+     "electricity_TW": [
+      60.938,
+      91.4071
+     ]
+    },
+    "costs": {
+     "films": "as_built",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0303365,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.14612,
+       "T_sunward_one_K": [
+        174.535
+       ],
+       "T_sunward_two_K": [
+        191.099,
+        191.689
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.14612,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 13.765,
+      "matched_annulus_tile_g_m2": 13.765,
+      "mismatch_g_m2": 1.77636e-15,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_wide_gap_250_rolled_layout": {
+    "absorbed_PW": 13.4913,
+    "absorbed_by_half_PW": {
+     "day": 12.6072,
+     "night": 0.884144
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 2.1942,
+     "window": 11.2971
+    },
+    "glow_W_m2": {
+     "global": 1.51528,
+     "day": 2.90588,
+     "night": 0.124684
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 1.49493,
+     "night_half": 0.0203486
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.200941,
+     "window": 1.31434
+    },
+    "infrared_return_W_m2": {
+     "global": 1.74675,
+     "day": 3.4553,
+     "night": 0.038196
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.53452,
+     "day": 1.05276,
+     "night": 0.0162799
+    },
+    "night_lux_from_returns": {
+     "mean": 0.982681,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.132438,
+       1.166,
+       4.40797
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 3.26203,
+     "day": 6.36118,
+     "night": 0.16288
+    },
+    "heat_total_W_m2": {
+     "global": 3.79655,
+     "day": 7.41394,
+     "night": 0.17916
+    },
+    "eccentricity": {
+     "scheme": "ring_layout_rolled",
+     "drive_over_as_built": 0.481313,
+     "range": [
+      0.0534009,
+      0.0936425
+     ],
+     "perilune_km": [
+      17058.1,
+      17717.9
+     ]
+    },
+    "dimming": {
+     "percent": 1.72687,
+     "records_convention_percent": 1.29437,
+     "glow_only_percent": 0.717515,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.72687,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.292146,
+     "absorbing_dimmer_gives_back": 0.138337,
+     "electricity_TW": [
+      38.4264,
+      57.6395
+     ]
+    },
+    "costs": {
+     "films": "wide_gap_250",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 1.11,
+       "t_per_tile": 111.0,
+       "solar_absorptance": 0.00245685,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.0489732,
+       "T_sunward_one_K": [
+        104.125
+       ],
+       "T_sunward_two_K": [
+        110.881,
+        111.483
+       ]
+      },
+      "window": {
+       "g_m2": 0.0,
+       "t_per_tile": 0.0,
+       "solar_absorptance": 0.0449892,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.145825,
+       "T_sunward_one_K": [
+        177.315
+       ],
+       "T_sunward_two_K": [
+        201.282,
+        207.036
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.0489732,
+      "window_dynamic_coefficient": 0.276,
+      "window_tile_g_m2": 26.0,
+      "annulus_tile_g_m2": 14.875,
+      "matched_annulus_tile_g_m2": 4.61342,
+      "mismatch_g_m2": 10.2615,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.0544651
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   },
+   "rolled_outside_service_80_uv_mirror_outer_98_rolled_layout": {
+    "absorbed_PW": 12.1805,
+    "absorbed_by_half_PW": {
+     "day": 7.80028,
+     "night": 4.38019
+    },
+    "absorbed_by_ring_PW": {
+     "annulus": 6.65128,
+     "window": 5.52919
+    },
+    "glow_W_m2": {
+     "global": 0.960431,
+     "day": 1.69955,
+     "night": 0.221315
+    },
+    "glow_by_half_W_m2": {
+     "day_half": 0.863324,
+     "night_half": 0.0971072
+    },
+    "glow_by_ring_W_m2": {
+     "annulus": 0.332306,
+     "window": 0.628125
+    },
+    "infrared_return_W_m2": {
+     "global": 1.74675,
+     "day": 3.4553,
+     "night": 0.038196
+    },
+    "sunlight_return_W_m2": {
+     "global": 0.610045,
+     "day": 1.20176,
+     "night": 0.0183276
+    },
+    "night_lux_from_returns": {
+     "mean": 0.801553,
+     "by_angle_from_midnight_deg": {
+      "edges": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50,
+       60,
+       70,
+       80,
+       90
+      ],
+      "lux": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.119466,
+       0.995877,
+       3.54165
+      ]
+     }
+    },
+    "infrared_total_W_m2": {
+     "global": 2.70718,
+     "day": 5.15485,
+     "night": 0.259511
+    },
+    "heat_total_W_m2": {
+     "global": 3.31723,
+     "day": 6.35661,
+     "night": 0.277838
+    },
+    "eccentricity": {
+     "scheme": "ring_layout_rolled",
+     "drive_over_as_built": 0.481313,
+     "range": [
+      0.0534009,
+      0.0936425
+     ],
+     "perilune_km": [
+      17058.1,
+      17717.9
+     ]
+    },
+    "dimming": {
+     "percent": 1.48988,
+     "records_convention_percent": 1.13095,
+     "glow_only_percent": 0.454782,
+     "coating_provides_percent": 0.0,
+     "to_add_percent": 1.48988,
+     "absorbing_dimmer_glow_W_m2_per_percent": 0.30967,
+     "absorbing_dimmer_gives_back": 0.146634,
+     "electricity_TW": [
+      33.153,
+      49.7295
+     ]
+    },
+    "costs": {
+     "films": "uv_mirror_outer_98",
+     "coating": null,
+     "attitude": "outside_service",
+     "roll_deg": 80.0,
+     "pitch_deg": 0.0,
+     "by_ring": {
+      "annulus": {
+       "g_m2": 11.0368,
+       "t_per_tile": 1103.68,
+       "solar_absorptance": 0.00303676,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.226454,
+       "T_sunward_one_K": [
+        108.425
+       ],
+       "T_sunward_two_K": [
+        115.769,
+        116.383
+       ]
+      },
+      "window": {
+       "g_m2": 6.83826,
+       "t_per_tile": 683.826,
+       "solar_absorptance": 0.0202837,
+       "taken_out_of_beam": 0.0,
+       "pressure_coefficient": 0.170535,
+       "T_sunward_one_K": [
+        147.667
+       ],
+       "T_sunward_two_K": [
+        166.528,
+        171.864
+       ]
+      }
+     },
+     "sail_loading": {
+      "annulus_coefficient": 0.226454,
+      "window_dynamic_coefficient": 0.30071,
+      "window_tile_g_m2": 32.8383,
+      "annulus_tile_g_m2": 24.8018,
+      "matched_annulus_tile_g_m2": 24.7293,
+      "mismatch_g_m2": 0.072454,
+      "as_built_annulus_tile_g_m2": 13.765,
+      "reflection_to_match": 0.000331741
+     },
+     "attitude_study": {
+      "scheme": "rolled_80_deg",
+      "law": "outside service, both halves",
+      "eccentricity_drive_over_as_built": 0.481313,
+      "store_N_m_s_median_trim_25": 22874000000.0,
+      "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+      "clearance_min_gap_m": 222.504
+     }
+    }
+   }
+  },
+  "recommended": {
+   "answer": "rolled_outside_service_80_rolled_layout",
+   "then": [
+    "rolled_outside_service_80_wide_gap_250_rolled_layout",
+    "rolled_outside_service_80_uv_mirror_outer_98_rolled_layout"
+   ],
+   "heat_W_m2": {
+    "global": 5.95419,
+    "day": 11.3736,
+    "night": 0.534824
+   },
+   "glow_W_m2": {
+    "global": 3.59739,
+    "day": 6.71649,
+    "night": 0.478301
+   },
+   "infrared_return_W_m2": {
+    "global": 1.74675,
+    "day": 3.4553,
+    "night": 0.038196
+   },
+   "sunlight_return_W_m2": {
+    "global": 0.610045,
+    "day": 1.20176,
+    "night": 0.0183276
+   },
+   "dimming": {
+    "percent": 2.73854,
+    "records_convention_percent": 2.02998,
+    "glow_only_percent": 1.70343,
+    "coating_provides_percent": 0.0,
+    "to_add_percent": 2.73854,
+    "absorbing_dimmer_glow_W_m2_per_percent": 0.292146,
+    "absorbing_dimmer_gives_back": 0.138337,
+    "electricity_TW": [
+     60.938,
+     91.4071
+    ]
+   },
+   "costs": {
+    "films": "as_built",
+    "coating": null,
+    "attitude": "outside_service",
+    "roll_deg": 80.0,
+    "pitch_deg": 0.0,
+    "by_ring": {
+     "annulus": {
+      "g_m2": 0.0,
+      "t_per_tile": 0.0,
+      "solar_absorptance": 0.0303365,
+      "taken_out_of_beam": 0.0,
+      "pressure_coefficient": 0.14612,
+      "T_sunward_one_K": [
+       174.535
+      ],
+      "T_sunward_two_K": [
+       191.099,
+       191.689
+      ]
+     },
+     "window": {
+      "g_m2": 0.0,
+      "t_per_tile": 0.0,
+      "solar_absorptance": 0.0449892,
+      "taken_out_of_beam": 0.0,
+      "pressure_coefficient": 0.145825,
+      "T_sunward_one_K": [
+       177.315
+      ],
+      "T_sunward_two_K": [
+       201.282,
+       207.036
+      ]
+     }
+    },
+    "sail_loading": {
+     "annulus_coefficient": 0.14612,
+     "window_dynamic_coefficient": 0.276,
+     "window_tile_g_m2": 26.0,
+     "annulus_tile_g_m2": 13.765,
+     "matched_annulus_tile_g_m2": 13.765,
+     "mismatch_g_m2": 1.77636e-15,
+     "as_built_annulus_tile_g_m2": 13.765,
+     "reflection_to_match": 0.0
+    },
+    "attitude_study": {
+     "scheme": "rolled_80_deg",
+     "law": "outside service, both halves",
+     "eccentricity_drive_over_as_built": 0.481313,
+     "store_N_m_s_median_trim_25": 22874000000.0,
+     "store_N_m_s_median_trim_25_centred_filter": 23056000000.0,
+     "clearance_min_gap_m": 222.504
+    }
+   },
+   "night_lux": {
+    "mean": 0.801553,
+    "by_angle_from_midnight_deg": {
+     "edges": [
+      0,
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90
+     ],
+     "lux": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.119466,
+      0.995877,
+      3.54165
+     ]
+    }
+   },
+   "night_lux_against_twilight": [
+    {
+     "from_midnight_deg": [
+      0,
+      10
+     ],
+     "sun_deg": [
+      -90.0,
+      -80.0
+     ],
+     "returned_lux": 0.0,
+     "twilight_lux": [
+      null,
+      null
+     ],
+     "share_of_twilight": null
+    },
+    {
+     "from_midnight_deg": [
+      10,
+      20
+     ],
+     "sun_deg": [
+      -80.0,
+      -70.0
+     ],
+     "returned_lux": 0.0,
+     "twilight_lux": [
+      null,
+      null
+     ],
+     "share_of_twilight": null
+    },
+    {
+     "from_midnight_deg": [
+      20,
+      30
+     ],
+     "sun_deg": [
+      -70.0,
+      -60.0
+     ],
+     "returned_lux": 0.0,
+     "twilight_lux": [
+      null,
+      null
+     ],
+     "share_of_twilight": null
+    },
+    {
+     "from_midnight_deg": [
+      30,
+      40
+     ],
+     "sun_deg": [
+      -60.0,
+      -50.0
+     ],
+     "returned_lux": 0.0,
+     "twilight_lux": [
+      null,
+      null
+     ],
+     "share_of_twilight": null
+    },
+    {
+     "from_midnight_deg": [
+      40,
+      50
+     ],
+     "sun_deg": [
+      -50.0,
+      -40.0
+     ],
+     "returned_lux": 0.0,
+     "twilight_lux": [
+      null,
+      null
+     ],
+     "share_of_twilight": null
+    },
+    {
+     "from_midnight_deg": [
+      50,
+      60
+     ],
+     "sun_deg": [
+      -40.0,
+      -30.0
+     ],
+     "returned_lux": 0.0,
+     "twilight_lux": [
+      null,
+      24.3666
+     ],
+     "share_of_twilight": null
+    },
+    {
+     "from_midnight_deg": [
+      60,
+      70
+     ],
+     "sun_deg": [
+      -30.0,
+      -20.0
+     ],
+     "returned_lux": 0.119466,
+     "twilight_lux": [
+      24.3666,
+      179.345
+     ],
+     "share_of_twilight": 0.00490289
+    },
+    {
+     "from_midnight_deg": [
+      70,
+      80
+     ],
+     "sun_deg": [
+      -20.0,
+      -10.0
+     ],
+     "returned_lux": 0.995877,
+     "twilight_lux": [
+      179.345,
+      1185.32
+     ],
+     "share_of_twilight": 0.00555285
+    },
+    {
+     "from_midnight_deg": [
+      80,
+      90
+     ],
+     "sun_deg": [
+      -10.0,
+      0.0
+     ],
+     "returned_lux": 3.54165,
+     "twilight_lux": [
+      1185.32,
+      4639.52
+     ],
+     "share_of_twilight": 0.00298792
+    }
+   ]
+  },
+  "records": [
+   {
+    "record": "provisioning README finding 1 and the register row of 9 October",
+    "states": "the Moon receives 5.7-9.9 W/m2 of glow",
+    "screen": "9.4 W/m2 of glow, and 4.0 W/m2 of the Moon's own infrared and 0.71 W/m2 of its reflected sunlight returned by the films"
+   },
+   {
+    "record": "provisioning README finding 1 and the register row of 9 October",
+    "states": "a heat mirror on Moon-facing faces cuts the Moon's share 1.5-2 times, or 3-9 times on the nearest layer",
+    "screen": "the cuts hold for the glow, but a mirror facing the Moon images the Moon onto itself: the candidates return 11-19 W/m2 of its own infrared and raise the heat the Moon receives by 6.7-20.9 W/m2"
+   },
+   {
+    "record": "provisioning screen.heat()",
+    "states": "a deep stack sends half its heat toward the Moon",
+    "screen": "along the Moon's direction the semi-transparent stack sends 0.58 (annulus) and 0.57 (window) of its heat at 32 layers"
+   },
+   {
+    "record": "provisioning screen.heat()",
+    "states": "tiles 19,355-21,392 km from the Moon",
+    "screen": "the layout's radii are apolune radii; the night half rides at perilune, 15,375-16,021 km"
+   },
+   {
+    "record": "domain synthesis heat ledger",
+    "states": "the dimming that answers heat is its W/m2 over 293 W/m2",
+    "screen": "infrared the Moon absorbs whole is matched by sunlight it absorbs (1 - 0.28) of, so the dimming is 1.39 times that at efficacy 1"
+   },
+   {
+    "record": "joint synthesis, the night with the ring fleet",
+    "states": "the fleet lights the night by diffuse scatter and glints of sunlight",
+    "screen": "the films' specular reflection of the Moon's own day side also lands on the night: 1.6 lux averaged over the night hemisphere as built"
+   }
+  ]
+ },
+ "checks": {
+  "optics_reproduce_annulus_film": true,
+  "emissivities_reproduce_array_heat": true,
+  "solar_spectrum_gives_solar_constant": true,
+  "stack_energy_balance": true,
+  "two_layer_estimate_reproduced": true,
+  "first_screen_reproduced": true,
+  "sky_covered_matches_lune": true,
+  "absorbed_within_array_heat_range": true,
+  "outgoing_infrared_closes": true
+ }
+}

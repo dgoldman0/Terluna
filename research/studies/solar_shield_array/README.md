@@ -1,5 +1,40 @@
 # Solar shield and habitat array
 
+The [constraints review](constraints_review.md) of 14 October 2026 reads the
+tile, support and flexible work below against the fleet as designed and the
+climate's corrected radiation on domain/ecology. The tiles' areal mass and the
+photons' authority bind together: one sail loading ties every ring's
+acceleration to the window tiles', the annulus allowance stands at 13.765 g/m²
+(3.55 g/m² above its film), and the rolled layout's edge rings need 0.86–0.95
+of the photon roll's reach as the dynamics model the films, more than the reach
+by the review's estimate once only the reflected light steers. Its findings
+and recommendations wait for the author.
+
+The [flexible screen and coupled solver](flexible_coupling.md) screens 16,200
+configurations algebraically and adds a reduced model coupling the structure,
+optics, attitude, orbit and bounded control, verified numerically. The
+lightest film-plus-support subtotal passing its member and 150 m clearance
+screens is 21.5–23.6 g/m², with 5 km tiles at a 3° shingle in 4.3 times the
+count; at the design's 1.5° shingle it is 139–345 g/m², against 13.765 g/m² for
+a complete tile. Fixed benchmarks measure the numerical sensitivity and compute
+cost, and the coupled design search follows them.
+
+The [materials and support comparison](support_comparison.md) widens the tile
+assessment. Measured frame materials lighten the rigid frame a few times;
+curved cable edges on booms and a hub save much more component mass, at stated
+costs in coverage and clearance; smaller units add bus and renewal overhead;
+and spinning membranes trade the roll's torque against membrane stress.
+Whole-tile budgets, component subtotals and experimental material properties
+are kept as separate evidence states.
+
+The [tile hardware and replacement assessment](tile_design.md) sizes an explicit
+perimeter-frame tile, conserves its angular momentum, and tests local faults
+and the fleet's service. Its 10 km rigid-edge reference weighs about 200 times
+the current allocation and fails the local 150 m clearance gate; smaller tiles
+and relaxed shapes lighten it without closing it. The orbit and glow results
+rest on the light tiles of their inputs, and the hardware's mass enters them
+once a tile design closes.
+
 The [relative-orbit plan](relative_orbits.md) of 6 October 2026 sets the
 current direction for the formation, and the
 [integrated comparison](integrated_comparison.md) of the same day sets how
@@ -31,9 +66,10 @@ in a model with one propagated tile per ring; the edge rings first come within
 under gravity alone. Most of it is the keeping law's fixed frame working
 against the stack's common regression under Earth's tide, 20° a month, and it
 grows with the bundle's height. The ring fleet keeps station with photon
-forces, so it releases no exhaust: along the kept run, tilts of about 2° with
-25% reflectivity trim reach 1.6 times the keeping demand over each orbit
-([photon_control.py](photon_control.py)). Shingle shadows, though, put a steady
+forces, so it releases no exhaust: along the kept run (15,000 km, 62.7 g/m²
+tiles), tilts of about 2° with 25% reflectivity trim reach 1.6 times the keeping
+demand over each orbit ([photon_control.py](photon_control.py)), and lighter
+tiles gain reach in proportion. Shingle shadows, though, put a steady
 pitch torque of about 28,000 N·m on every radial-facing tile, which reflectivity
 trim cannot hold. Tiles cannot turn edge-on to the Sun outside service, because
 rings slide past one another 1 km apart and a tile pitched more than a few
@@ -99,6 +135,20 @@ where the array's heat arises:
 The shield's trim and store depend on hardware the planned branch chooses.
 Holding the stack's eccentricities takes up to a fifth of the outermost rings'
 eccentricity drive ([held_eccentricity.py](held_eccentricity.py)).
+
+The planned branch opened on 12 October 2026 with [the fleet's glow](glow.md)
+([glow.py](glow.py)). As built the stack puts 14.1 W/m² on the Moon: its own
+glow, 9.4 W/m² with each ring's night half at perilune, and 4.7 W/m² of the
+Moon's infrared and sunlight that the films image back. Heat mirrors on the
+Moon-facing faces raise that total. Rolling both halves 80° outside the service
+arc, inside the clearance along the kept orbits, leaves 6.0 W/m² on the layout
+re-flown for its push ([ring_layout_rolled.py](ring_layout_rolled.py)), 350–500
+km further in and inside the photon roll's steering reach, and keeps the deep
+night dark; added dimming of 2.7% of the design sunlight answers the rest. It
+takes a momentum store 5–12 times the chosen one; rolling the night half alone
+takes 14–48 times and leaves 8.7 W/m². What the roll leaves on the night's edge
+is under 1% of the tall sky's own twilight there, and a tilt through the nodes
+that would cut it breaks the clearance.
 
 The [expanded coupled-cycle investigation](expanded_cycle.md) adds
 in-plane and arrival-acquisition controls and measures nine full-cycle response
@@ -244,7 +294,7 @@ accepted.
 The [electromagnetic feasibility study](electromagnetic.md) uses the actual
 mass-loaded group, time-resolved loads and extended square coils to compare
 local generation/storage, microwave/laser and inductive transfer, magnetic
-control and solar-wind scales. It favors local Sun-tracking generation and
+control and solar-wind scales. It favours local Sun-tracking generation and
 short buffers, conditional microwave assistance and a narrow magnetic-trim
 follow-up. A static return allocation improves about 10% after cooling, while
 tested departure states do not improve. No new trajectory, plasma protection,
@@ -318,11 +368,13 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.attitude_schemes
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.plane_motion
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_layout
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.ring_layout_rolled
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.bundle_validation
 python -m protection.spectra.annulus_film
 python -m research.studies.solar_shield_array.integrated_ledger
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m research.studies.solar_shield_array.held_eccentricity
 python -m research.studies.solar_shield_array.array_heat
+OPENBLAS_NUM_THREADS=1 python -m research.studies.solar_shield_array.glow
 python -m pytest protection/dynamics research/studies/solar_shield_array
 python visualization/solar-shield-array/plot.py
 python visualization/solar-shield-array/cycling_plot.py
@@ -339,7 +391,7 @@ pilot without optimization, nodal-span propagation or the final exporter.
 The final comparisons preserve a four-lunar-radius protected region and the
 selected climate spectrum. Optical control is an optimistic lower bound;
 10-g/m² films require a replacement optical stack. The 19-year test and ideal
-feedback propagation establish numerical behavior for the tested families.
+feedback propagation establish numerical behaviour for the tested families.
 Final holding architecture, actual filter/PV forces, safe plumes, tile seams,
 habitat capacity and long-term resource closure remain open.
 

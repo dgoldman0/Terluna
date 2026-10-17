@@ -6,10 +6,10 @@
    "provisioning/computing.py": "0e09f130e9702d4e"
   },
   "inputs": {
-   "research/studies/solar_shield_array/results/array_heat.json": "d964f1a5e1dec2e9",
-   "research/studies/joint_synthesis/results/ledgers.json": "563f50e4a71b4cae",
+   "research/studies/solar_shield_array/results/array_heat.json": "8ade010fcbf805ad",
+   "research/studies/joint_synthesis/results/ledgers.json": "cf31bfbf2e29f1d7",
    "illumination/fleet_light/results/night_light.json": "c58f6afe2f342d80",
-   "provisioning/results/first_screen.json": "f268f5b8800d29ab",
+   "provisioning/results/first_screen.json": "7696e01a81a9d460",
    "provisioning/computing_sources.json": "8ced0e54562327b2"
   },
   "constants": {

@@ -56,8 +56,8 @@ WINDS_COMMIT = None
 WAYS_COMMIT = None
 CROSS_BRANCH = {
     'resources/results/phosphorus.json': dict(branch='main', commit=RESOURCES_COMMIT,
-        blob='99876491f7456974b32a179bf4f99b86c6fe65f8',
-        sha256='5a22b880141da23f3f45aa3be4f5a46f9d98c5d1fdb68c2224fdd44e77cafc52',
+        blob='d924ac5ff6ca8c75bc490ee67deccebe9a838c72',
+        sha256='adc90d7349332c31bb1c94af3c8061f022a5e8639e676534187c9f6b09e4421a',
         schema='terluna.resources.phosphorus/1'),
     'resources/phosphorus.py': dict(branch='main', commit=RESOURCES_COMMIT,
         blob='0b8568bc8af9c5ffc09e6baf9287bc86404cdf09',
@@ -76,8 +76,8 @@ CROSS_BRANCH = {
         blob='c8ead8b6f8217ba3032806902c79f91b7ef45592',
         sha256='de35ebdcfab234b9fc8f110672018a4d279da7bc84ceb0e0cab5ac9b22b3822f'),
     'research/studies/ways_of_living/results/ways_of_living.json': dict(branch='main', commit=WAYS_COMMIT,
-        blob='18626be739ed81c89f591781f497468443a47f55',
-        sha256='b55285cd89077ee8a2366e638b942e2ac0faa890d25fdf0c6f15ff8a3dffa65a',
+        blob='25dca65203a75e3e4110a2e8680b73eb7603d7a1',
+        sha256='947d5b7232be81bc6df64f19ba445629381f9366e7cc92418e09997cc068e3b7',
         schema='terluna.research.ways-of-living/1'),
 }
 # The atlas grid is an ignored input on the research drive; land and sea under the routes need it.

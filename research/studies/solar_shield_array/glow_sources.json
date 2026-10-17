@@ -1,0 +1,160 @@
+{
+ "schema": "terluna.research.fleet-glow-sources/1",
+ "accessed": "2026-10-12",
+ "reading": "Each entry records what was read for the glow screen and what it was used for. Repository products and code were read in full where they feed the screen; outside sources were read as abstracts, publisher pages or search summaries, as each entry says, and only for the named measured values. Nothing here is admitted as a manuscript source, and no outside bytes are kept.",
+ "sources": [
+  {
+   "id": "decisions_register",
+   "citation": "research/decisions.md: 'Water and climate', 'Solar shield and habitat array' and 'The domain synthesis's decisions, 12 October 2026'",
+   "kind": "the author's register of decisions",
+   "read": "the three sections in full",
+   "used_for": ["the investigated climate is the planned climate", "the glow is answered with added solar protection, redirection or both", "added dimming is had by extracting more light; the glow is the harder problem", "the fleet keeps its light off the night zones and uses what it turns away", "the ring fleet's form: radial-facing tiles, centred filters, 25% trim, a momentum store, one sail loading"]
+  },
+  {
+   "id": "provisioning_first_screen",
+   "citation": "provisioning/README.md finding 1; provisioning/screen.py heat(), heat_mirror(), two_layers(), industry(); provisioning/results/first_screen.json",
+   "kind": "repository screen and product",
+   "read": "the heat and energy section of the README, the heat functions and the product's heat section in full",
+   "used_for": ["the first screen's 5.7-9.9 W/m2, rebuilt from the same inputs", "the two-layer estimate of heat mirrors, rebuilt with the N-layer model in grey opaque mode", "the absorbing dimmer's give-back of 15-26%"]
+  },
+  {
+   "id": "array_heat",
+   "citation": "research/studies/solar_shield_array/array_heat.py and results/array_heat.json",
+   "kind": "repository screen and product",
+   "read": "in full",
+   "used_for": ["the films (0.1 um titania on 4 um silica; 1 um on 10 um), their absorbed sunlight and face emissivities, which the screen's optics reproduce", "the fleet's tile count and the window rings' share"]
+  },
+  {
+   "id": "ring_layout",
+   "citation": "research/studies/solar_shield_array/ring_layout.py and results/ring_layout.json",
+   "kind": "repository flight product",
+   "read": "the stack, the flown matched rings, and the clearance function (radius at apolune, perilune r(1-e)/(1+e), nodes r(1-e))",
+   "used_for": ["1,859 rings over an 8,625 km stack, each ring's apolune radius and forced eccentricity by height", "the layout's radius read as the sunward crossing's"]
+  },
+  {
+   "id": "integrated_ledger",
+   "citation": "research/studies/solar_shield_array/results/integrated_ledger.json and integrated_comparison.md",
+   "kind": "repository ledger and note",
+   "read": "requirements, the ring fleet row at 20,000 km and electricity; the comparison's gates, photon control, attitude, annulus film and ring-plane sections",
+   "used_for": ["the 10 km tile side, the design sunlight of 1,173.25 W/m2 and the 5% dimmer", "the dimmer's 586 TW of light and 20-30% conversion", "photon keeping's 2 degree interior tilts"]
+  },
+  {
+   "id": "attitude_schemes",
+   "citation": "research/studies/solar_shield_array/attitude_schemes.py and results/attitude_schemes.json",
+   "kind": "repository screen and product",
+   "read": "the header, the roll law and the product's design, clearance envelope and schemes",
+   "used_for": ["the 25 degree service arc, the 30 degree ramps and the rolled law outside service", "the pitch envelope of -3 to +6 degrees", "the rolled schemes' eccentricity drive (0.86, 0.57, 0.48) and store"]
+  },
+  {
+   "id": "ring_bundle",
+   "citation": "protection/dynamics/ring_bundle.py tile_frames(); research/studies/solar_shield_array/ring_bundle_run.py DESIGN tilt_deg",
+   "kind": "repository dynamics code",
+   "read": "the tile frame and the bundle's design",
+   "used_for": ["tiles held perpendicular to the velocity in the orbit plane, tilted 1.5 degrees about the orbit normal as shingles"]
+  },
+  {
+   "id": "annulus_film",
+   "citation": "protection/spectra/annulus_film.py, short_wave.py, protection/model.py and protection/spectra/annulus_film.json",
+   "kind": "repository optics code and product",
+   "read": "in full",
+   "used_for": ["the layer sequence, optical constants and stable thin-film recursion the screen takes to oblique incidence", "the films' ultraviolet transmission and the lightest titania meeting each level"]
+  },
+  {
+   "id": "protection_requirements",
+   "citation": "research/studies/protection_architecture/requirements.md (O1-O8, R2, E2, S7); protection/README.md",
+   "kind": "repository requirements",
+   "read": "the optical shield's rows, R2 and the environment rows",
+   "used_for": ["O1's UV transmission below 175 nm, the cut-off choice O3, the window's spectrum E2 and O4, rejected light O5 and S7"]
+  },
+  {
+   "id": "middle_atmosphere",
+   "citation": "atmosphere/middle_atmosphere/README.md; results/profiles and cases for moon_1.2atm_titania_stack at 288 and 298 K; lbl_check.rebuild()",
+   "kind": "repository model results",
+   "read": "the results and slant-path sections; the two columns in full through the rebuild",
+   "used_for": ["behind the titania stack no light below about 340 nm reaches the air: no ozone, a cold dry upper atmosphere", "the columns whose outgoing infrared the screen computes"]
+  },
+  {
+   "id": "correlated_k",
+   "citation": "atmosphere/radiative_convective/ck.py CKLongwave.fluxes and results/ck_validation.json",
+   "kind": "repository radiation model",
+   "read": "the module header, the band table and the flux routine; the validation's lunar column (230.3 W/m2 against line-by-line's 230.3)",
+   "used_for": ["the Moon's outgoing infrared in 16 bands"]
+  },
+  {
+   "id": "gcm_design_case",
+   "citation": "climate/gcm/README.md, 'The corrected design case' (A28_dim5_moon, years 20-29)",
+   "kind": "repository model results",
+   "read": "the dimmer branches and the corrected design case",
+   "used_for": ["planetary albedo 0.280 and surface 294.9 K", "the response of 1.9 K per 1% of sunlight"]
+  },
+  {
+   "id": "joint_synthesis_night",
+   "citation": "research/studies/joint_synthesis/README.md section 1; illumination/fleet_light/model.py and results/night_light.json",
+   "kind": "repository study and product",
+   "read": "the night section and the model in full",
+   "used_for": ["the night half's 0.85 EW and its diffuse and mirror light", "the rolled night half's 2.2 lux at 0.1% scatter", "the Moon's shadow on night-side tiles"]
+  },
+  {
+   "id": "domain_synthesis_heat",
+   "citation": "research/studies/domain_synthesis/README.md 'Heat' and results/ledgers.json",
+   "kind": "repository study and product",
+   "read": "the heat and power sections and the ledger's heat block",
+   "used_for": ["the glow as the larger load and the dimming convention (the heat over the design sunlight)", "each further 1% of dimming taken to answer heat gives 23-35 TW"]
+  },
+  {
+   "id": "provisioning_power",
+   "citation": "provisioning/power.md on domain/provisioning (read from its worktree, not on this branch)",
+   "kind": "repository note",
+   "read": "the findings to the intake",
+   "used_for": ["the dimmer's light gives 117-176 TW of electricity"]
+  },
+  {
+   "id": "fan_bachner_1976",
+   "citation": "J. C. C. Fan and F. J. Bachner, Transparent heat mirrors for solar-energy applications. Applied Optics 15, 1012 (1976); and Transparent heat-mirror films of TiO2/Ag/TiO2, Applied Physics Letters 25, 693 (1974)",
+   "url": "https://opg.optica.org/ao/abstract.cfm?uri=ao-15-4-1012",
+   "kind": "measured coating",
+   "read": "abstracts and a search summary",
+   "used_for": ["a silver dielectric-metal-dielectric heat mirror passes 84% at 0.5 um and reflects 98-99% at 10 um; silver's free carriers also reflect the solar near infrared"]
+  },
+  {
+   "id": "intechopen_low_e",
+   "citation": "Silver-Based Low-Emissivity Coating Technology for Energy-Saving Window Applications, IntechOpen chapter 53792",
+   "url": "https://www.intechopen.com/chapters/53792",
+   "kind": "review",
+   "read": "the page, through a fetch summary",
+   "used_for": ["sputtered silver coatings reach emissivities of 0.02-0.08, single silver layers about 0.1; a double-silver stack passes about 70% of visible light and reflects over 90% beyond 1 um"]
+  },
+  {
+   "id": "ito_azo_low_e",
+   "citation": "ITO and AZO films for low emissivity coatings in hybrid photovoltaic-thermal applications (ResearchGate record 317721849)",
+   "url": "https://www.researchgate.net/publication/317721849_ITO_and_AZO_films_for_low_emissivity_coatings_in_hybrid_photovoltaic-thermal_applications",
+   "kind": "measured coating",
+   "read": "a search summary of the abstract",
+   "used_for": ["ITO films reach infrared reflectance of 89.5% (emittance under 0.11), and a 75 nm film 0.21 emissivity at 5-20 um; free-carrier absorption lowers their near-infrared transmission"]
+  },
+  {
+   "id": "woo_2022",
+   "citation": "Woo et al., Visibly Transparent and Infrared Reflective Coatings for Personal Thermal Management and Thermal Camouflage. Advanced Functional Materials (2022) 2201432",
+   "url": "https://advanced.onlinelibrary.wiley.com/doi/10.1002/adfm.202201432",
+   "kind": "measured coating",
+   "read": "a search summary of the abstract",
+   "used_for": ["a patterned oxide-metal-oxide nano-mesh passes over 80% at 550 nm with emissivity under 0.2 at 7-14 um, the anchor for the mesh and metasurface design guesses"]
+  },
+  {
+   "id": "torchio_2002",
+   "citation": "P. Torchio, A. Gatto, M. Alvisi, G. Albrand, N. Kaiser and C. Amra, High-reflectivity HfO2/SiO2 ultraviolet mirrors. Applied Optics 41, 3256 (2002)",
+   "url": "https://opg.optica.org/ao/abstract.cfm?uri=ao-41-16-3256",
+   "kind": "measured coating",
+   "read": "the abstract",
+   "used_for": ["HfO2/SiO2 mirrors reflect about 99% near 250 nm, the anchor for the ultraviolet mirror's reflectance; layer counts not given in the abstract"]
+  },
+  {
+   "id": "optosigma_broadband",
+   "citation": "OptoSigma, Broadband Dielectric Mirrors (catalogue page)",
+   "url": "https://www.optosigma.com/us_en/products/optics/mirrors/dielectric-mirrors/broadband-dielectric-mirror.html",
+   "kind": "commercial specification",
+   "read": "a search summary",
+   "used_for": ["broadband ultraviolet dielectric mirrors cover 245-400 nm at up to 98% average reflectance"]
+  }
+ ]
+}

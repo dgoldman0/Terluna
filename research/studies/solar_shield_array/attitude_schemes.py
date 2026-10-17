@@ -22,6 +22,11 @@ Schemes, evaluated along the twelve kept orbits of ring_keeping_run as photon_co
   the service arc, to the side that clearance allows (one side on the day half, the other on the night half), and
   pass through radial-facing at the nodes; a one-sided roll at the angle of largest side force measures the plane
   steering that rolling gives;
+- rolled on the night half: the same roll on the night half alone, the day half radial-facing, the attitude that
+  keeps the night half's reflections and most of its glow off the Moon (glow.py);
+- rolled with a tilt through the nodes: the rolled law, with the tiles pitched a few degrees toward the Sun about the
+  orbit normal where the roll passes through radial-facing at the nodes, so the reflection of the Moon's bright limb
+  in a tile there lands on the day side (glow.py);
 - edge-on turns in pitch outside service (the earlier proposal), whose push is stated for comparison.
 
 Torques. Radiation torque from the visible filter area's first moments (8 solar points, the bundle's shadows and
@@ -73,7 +78,9 @@ FILES = list(dict.fromkeys(['research/studies/solar_shield_array/attitude_scheme
 DESIGN = dict(every=2, suns=8, rotation=.317, clearance_m=150., neighbour_rings=3, slip_step_m=10.,
               envelope_phases_deg=[0., 25., 45., 60., 80., 90., 100., 135., 180.], service_half_angle_deg=25.,
               filter_overlaps_m=[200., 400., 800.], design_overlap_m=400., roll_deg=[30., 60., 80.],
-              roll_ramp_deg=30., steer_roll_deg=35.26, ballast_reach_m=[250., 500., 1000., 1500., 2000., 3000.],
+              night_roll_deg=[80.],
+              roll_ramp_deg=30., steer_roll_deg=35.26, node_roll_deg=80., node_tilt_deg=[3., 6.],
+              node_window_deg=[10., 20.], ballast_reach_m=[250., 500., 1000., 1500., 2000., 3000.],
               ballast_travel_m=4500., trim_levels=[.1, .25], unload_s=3600., areal_masses_kg_m2=[.005, .026],
               turn_deg=65., turn_torques_N_m=[3e4, 1e5, 1e6])
 HOUR = 3600.
@@ -124,6 +131,23 @@ def rolled(u, chi, service, width, day_sign=-1.):
     day = day_sign*chi*ramp(a, s, s+w)*ramp(np.pi/2-a, 0., w)
     night = -day_sign*chi*ramp(a-np.pi/2, 0., w)
     return np.where(a <= np.pi/2, day, night)
+
+
+def night_rolled(u, chi, width, day_sign=-1.):
+    """The rolled law's night half alone: zero over the day half, the night half's roll beyond the nodes with the
+    same cosine ramps."""
+    a = np.abs(np.angle(np.exp(1j*np.asarray(u, float))))
+    return np.where(a <= np.pi/2, 0., -day_sign*chi*ramp(a-np.pi/2, 0., np.radians(width)))
+
+
+def node_pitch(u, theta, window):
+    """Pitch (rad) about the orbit normal through the nodes, where the rolled law passes through radial-facing: theta
+    in full within window[0] degrees of each node and ramped out by window[1]. A positive pitch about the orbit normal
+    turns a tile's Moon-facing side toward the Sun on the half orbit after the sunward crossing (0 < u < pi) and away
+    from it on the other, so the sign follows sin u and the tilt is toward the Sun at both nodes."""
+    u = np.angle(np.exp(1j*np.asarray(u, float)))
+    off = np.abs(np.abs(u)-np.pi/2)
+    return np.sign(np.sin(u))*theta*(1-ramp(off, np.radians(window[0]), np.radians(window[1])))
 
 
 def steering(u, chi, service, width, day_sign=-1.):
@@ -292,6 +316,13 @@ def main():
     laws = {'as_built': lambda u: (0., 0.)}
     for chi in DESIGN['roll_deg']:
         laws[f'rolled_{chi:g}_deg'] = (lambda c: lambda u: (float(rolled(u, np.radians(c), service, width, day_sign)), 0.))(chi)
+    for chi in DESIGN['night_roll_deg']:
+        laws[f'night_rolled_{chi:g}_deg'] = (
+            lambda c: lambda u: (float(night_rolled(u, np.radians(c), width, day_sign)), 0.))(chi)
+    for theta in DESIGN['node_tilt_deg']:
+        laws[f"rolled_{DESIGN['node_roll_deg']:g}_deg_node_{theta:g}_deg"] = (lambda th: lambda u: (
+            float(rolled(u, np.radians(DESIGN['node_roll_deg']), service, width, day_sign)),
+            float(node_pitch(u, np.radians(th), DESIGN['node_window_deg']))))(theta)
     laws['steering'] = lambda u: (float(steering(u, np.radians(DESIGN['steer_roll_deg']), service, width, day_sign)), 0.)
     clearance['laws'] = {name: law_gap(law, *geom) for name, law in laws.items()}
     clearance['laws']['edge_on_pitch'] = law_gap(lambda u: (0., float(edge_on_pitch(u, service))), *geom)
@@ -307,6 +338,22 @@ def main():
     for chi in DESIGN['roll_deg']:
         schemes[f'rolled_{chi:g}_deg'] = dict(roll=lambda u, c=chi: rolled(u, np.radians(c), service, width, day_sign),
                                               filter=(rb.CLEAR, rb.CLEAR))
+    for chi in DESIGN['night_roll_deg']:
+        schemes[f'night_rolled_{chi:g}_deg'] = dict(
+            roll=lambda u, c=chi: night_rolled(u, np.radians(c), width, day_sign), filter=(rb.CLEAR, rb.CLEAR))
+    # The rolls with the design's centred filter, which removes most of the shingle's steady pitch torque.
+    centred = (BUNDLE['pitch_m']+DESIGN['design_overlap_m'], rb.CLEAR)
+    for chi in DESIGN['night_roll_deg']:
+        schemes[f'balanced_rolled_{chi:g}_deg'] = dict(
+            roll=lambda u, c=chi: rolled(u, np.radians(c), service, width, day_sign), filter=centred)
+        schemes[f'balanced_night_rolled_{chi:g}_deg'] = dict(
+            roll=lambda u, c=chi: night_rolled(u, np.radians(c), width, day_sign), filter=centred)
+    # The rolled law with a tilt toward the Sun through the nodes.
+    for theta in DESIGN['node_tilt_deg']:
+        schemes[f"rolled_{DESIGN['node_roll_deg']:g}_deg_node_{theta:g}_deg"] = dict(
+            roll=lambda u: rolled(u, np.radians(DESIGN['node_roll_deg']), service, width, day_sign),
+            pitch=lambda u, th=theta: node_pitch(u, np.radians(th), DESIGN['node_window_deg']),
+            filter=(rb.CLEAR, rb.CLEAR))
     schemes['steering'] = dict(roll=lambda u: steering(u, np.radians(DESIGN['steer_roll_deg']), service, width,
                                                        day_sign), filter=(rb.CLEAR, rb.CLEAR))
     names = list(schemes)
@@ -316,7 +363,8 @@ def main():
     commanded = {}
     for name, sch in schemes.items():
         roll = 0. if sch['roll'] is None else sch['roll'](u_all)
-        commanded[name] = body_frames(s, tilt, roll)
+        pitch = sch['pitch'](u_all) if sch.get('pitch') else 0.
+        commanded[name] = body_frames(s, tilt, roll, pitch)
     pick = np.arange(0, len(t), DESIGN['every'])
     dt = np.gradient(t[pick])
     rec = {name: dict(force=[], torque=[], normal=[], cap=[], gravity=[]) for name in names}
@@ -329,8 +377,9 @@ def main():
         u_c = phase(retarded_sun(sample), everything.mean(axis=0))
         for name, sch in schemes.items():
             roll = 0. if sch['roll'] is None else float(sch['roll'](u_c))
-            common = body_frames(everything.mean(axis=0), tilt, roll)
-            normals = body_frames(everything, tilt, roll)[:, :, 2]
+            pitch = float(sch['pitch'](u_c)) if sch.get('pitch') else 0.
+            common = body_frames(everything.mean(axis=0), tilt, roll, pitch)
+            normals = body_frames(everything, tilt, roll, pitch)[:, :, 2]
             fu, fv = sch['filter']
             shaded = shade(env, t[i], q, common, sample, bodies, fu, fv)
             force, torque, normal, cap = load(q, normals, shaded, fraction, fu, fv)

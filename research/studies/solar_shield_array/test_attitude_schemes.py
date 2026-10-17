@@ -114,3 +114,48 @@ def test_a_moving_mass_trades_ballast_for_store():
     assert all(b > a for a, b in zip(ballast, ballast[1:]))
     assert store[-1] < store[0]
     assert PRODUCT['moving_mass']['62.7_g_m2']['target_offset_m']['median'] > 500.
+
+
+def test_the_night_roll_rests_on_the_day_half_and_takes_a_larger_store_than_rolling_both_halves():
+    """The night half's roll alone: zero over the day half, the full roll at the anti-solar point, inside the
+    clearance at every phase; its push falls less than rolling both halves, and its roll torque, which does not
+    cancel over an orbit, takes a larger store; the centred filter leaves both stores about as they are."""
+    phases = np.radians(np.linspace(-180., 180., 721))
+    law = at.night_rolled(phases, 1., 30.)
+    day = np.abs(phases) <= np.pi/2
+    assert np.allclose(law[day], 0.)
+    assert np.isclose(at.night_rolled(np.pi, 1., 30.), 1.)
+    gap = PRODUCT['clearance']['laws']['night_rolled_80_deg']
+    assert gap['share_of_orbit_below_clearance'] == 0. and gap['min_gap_m'] >= at.DESIGN['clearance_m']
+    s = PRODUCT['schemes']
+    store = {k: s[k]['store_N_m_s']['trim_0.25']['median'] for k in
+             ('rolled_80_deg', 'night_rolled_80_deg', 'balanced_rolled_80_deg', 'balanced_night_rolled_80_deg')}
+    drive = {k: s[k]['eccentricity_drive']['over_as_built'] for k in ('rolled_80_deg', 'night_rolled_80_deg')}
+    assert drive['rolled_80_deg'] < drive['night_rolled_80_deg'] < 1.
+    assert store['night_rolled_80_deg'] > 3*store['rolled_80_deg']
+    for k in ('rolled_80_deg', 'night_rolled_80_deg'):
+        assert abs(store['balanced_'+k]/store[k]-1.) < .05
+
+
+
+def test_a_tilt_toward_the_sun_through_the_nodes_breaks_the_clearance_and_keeps_the_push():
+    """The node law pitches each tile's Moon-facing side toward the Sun at both nodes (the sign follows sin u), in full
+    near the nodes and nowhere in the service arc or at the anti-solar point. With the roll ramping through the nodes,
+    shingled tiles pitched that far come closer than the clearance, while the push stays the rolled law's."""
+    w, theta = at.DESIGN['node_window_deg'], np.radians(3.)
+    assert np.isclose(at.node_pitch(np.pi/2, theta, w), theta)
+    assert np.isclose(at.node_pitch(-np.pi/2, theta, w), -theta)
+    for u in (0., np.radians(25.), np.radians(60.), np.pi):
+        assert at.node_pitch(u, theta, w) == 0.
+    # A tile at u = +90 degrees on an orbit in the x-y plane, the Sun along +x, moving away from it: a positive pitch
+    # turns its Moon-facing side toward the Sun.
+    state = np.array([0., 2e7, 0., -490., 0., 0.])
+    flat = at.body_frames(state, 0.)[:, 2]
+    tilted = at.body_frames(state, 0., 0., theta)[:, 2]
+    assert -tilted[0] > -flat[0] + .9*np.sin(theta)
+    s, c = PRODUCT['schemes'], PRODUCT['clearance']['laws']
+    for t in at.DESIGN['node_tilt_deg']:
+        name = f"rolled_{at.DESIGN['node_roll_deg']:g}_deg_node_{t:g}_deg"
+        assert c[name]['min_gap_m'] < at.DESIGN['clearance_m'] and c[name]['share_of_orbit_below_clearance'] > 0.
+        assert np.isclose(s[name]['eccentricity_drive']['over_as_built'],
+                          s['rolled_80_deg']['eccentricity_drive']['over_as_built'], rtol=1e-2)

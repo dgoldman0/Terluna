@@ -3,7 +3,7 @@
  "producer": {
   "study": "distributions",
   "files": {
-   "research/studies/distributions/run.py": "cf00a867176571ea"
+   "research/studies/distributions/run.py": "65b52225e0c2871d"
   },
   "constants": {
    "AU": 149597870700.0,
@@ -15,15 +15,15 @@
    "SPEED_OF_LIGHT": 299792458.0
   },
   "inputs": {
-   "research/studies/food_systems/results/food_systems.json": "ea4ca7a5e9ed2ec9",
-   "research/studies/food_systems/results/food_blend.json": "7107dcd923b8d793",
-   "research/studies/land_cities/results/land_cities.json": "f411a050227dbe9f",
-   "research/studies/ways_of_living/results/ways_of_living.json": "b55285cd89077ee8",
-   "research/studies/daily_life/results/daily_life.json": "de64289da4914fed",
-   "research/studies/inhabited_volume/results/inhabited_volume.json": "871b0c663204cb0f",
+   "research/studies/food_systems/results/food_systems.json": "6c8e1667822f8b21",
+   "research/studies/food_systems/results/food_blend.json": "f3f5dbf75a41b2d9",
+   "research/studies/land_cities/results/land_cities.json": "6b5e4c647d352cab",
+   "research/studies/ways_of_living/results/ways_of_living.json": "947d5b7232be81bc",
+   "research/studies/daily_life/results/daily_life.json": "47dec4b1fb14bf63",
+   "research/studies/inhabited_volume/results/inhabited_volume.json": "62002e2d2edd2710",
    "research/studies/conservation/results/heritage_register.json": "b0756b08ac3fe0bc",
-   "provisioning/results/population.json": "d562cdabe6eee18f",
-   "provisioning/results/computing.json": "ec954e941d869d21",
+   "provisioning/results/population.json": "c3fa7a2a492ef753",
+   "provisioning/results/computing.json": "48f60b85d0c33abb",
    "climate/results/gcm/zonal_winds_A28_dim5_moon.json": "a6a5d0cf96b42a1a",
    "shared/scenarios/population.json": "74ec20d6f8057977"
   },
@@ -33,8 +33,8 @@
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "8a9d2b3df1e3e810b6e7f4f09483ff4edbd5e701",
-    "sha256": "55a0794985710578beb7efee36c197e58405780a64c7ca13e8f8be5c799a83a2",
+    "blob": "47ed7213fcf73a5ca9e03f84107316dc959e59a2",
+    "sha256": "86b1d24cc3c91eb039984ce1617bf30a179236a1546907bd3155ae3eb9dc9c5d",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage recovery and the natural cycle kept beside them."
@@ -53,8 +53,8 @@
     "path_at_integration": "resources/results/phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "99876491f7456974b32a179bf4f99b86c6fe65f8",
-    "sha256": "5a22b880141da23f3f45aa3be4f5a46f9d98c5d1fdb68c2224fdd44e77cafc52",
+    "blob": "d924ac5ff6ca8c75bc490ee67deccebe9a838c72",
+    "sha256": "adc90d7349332c31bb1c94af3c8061f022a5e8639e676534187c9f6b09e4421a",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The energy to lift material to the sky towns at 10 km."
@@ -73,8 +73,8 @@
     "path_at_integration": "research/studies/living_light/results/living_light.json",
     "branch": "main",
     "commit": null,
-    "blob": "7479768679bda3bb5ef2178f141f48271571485a",
-    "sha256": "24941b1f4e33eb849aeaaaffdd80df7428b37727daf661b4de5a97195b454521",
+    "blob": "7cc016895664875758b86115f7fbf820d0f29649",
+    "sha256": "eec656eabec411d3198f69ae27a41f371ef8a3ffcb19fa6caca957f62a8153e9",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "Land under a light-polluted sky a person by home and lighting design, the metropolis and residents aloft; lamp hours by home; the dark belt."
@@ -83,8 +83,8 @@
     "path_at_integration": "research/studies/sky_ecology/results/sky_ecology.json",
     "branch": "main",
     "commit": null,
-    "blob": "6493e42a80df6e1bed18430411729935a02daa6b",
-    "sha256": "2d0f1f08d95cfb0f3c20f11b5097535c4d97b9cbb439fe76a5315378f819342a",
+    "blob": "e3707a9243677f650be3e03346c14693a346b22e",
+    "sha256": "e3966bb9197e626e2761b71a0bcdf4b226b295184d75ed6771bfd2df39742f43",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "Aerophyte cover and the encounter rule for bodies on the same wind tracks."

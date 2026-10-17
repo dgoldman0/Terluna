@@ -1,0 +1,816 @@
+{
+  "schema": "terluna.research.array-flexible-checks/1",
+  "checked_on": "2026-10-14",
+  "branch": "research/array-industry",
+  "baseline_commit": "669ddd3",
+  "evidence": "Numerical implementation verification and fixed-case benchmarking, not empirical hardware validation or a coupled design search.",
+  "model_files": {
+    "engineering/array_flexible.py": "2314d050b4b2a302d97a445c696e5ed0b8b1e54348ab0c229e7f8a6a6abadcc9",
+    "protection/dynamics/flexible_fleet.py": "516bb895e63c89aecf2b72e9a3c4f648aeef22a11022f44665cd05e6d2594fe8",
+    "protection/dynamics/flexible_optics.py": "3eeec9a3ed09300322142f019b92130274a0be09d04788405fa0487a656438f3",
+    "protection/dynamics/flexible_environment.py": "ce79f33171ab39d1aecb461d2594ad1c3eb29425f3efdc55c96d1a6e2c33db7b",
+    "research/studies/solar_shield_array/geometry_screen.py": "62bda0c69eca3db4265a1b599f398aa9279c2b783b377348c52c1595d09b19db",
+    "research/studies/solar_shield_array/flexible_benchmark.py": "bc82aa325e0db47b3f5d42e825f0705b6d03b45a0df0e96f3ad61401434421cb"
+  },
+  "test_files": {
+    "engineering/test_array_flexible.py": "53d20d127ba725c00799064142e06a5e1da5c72d9b926e5ecd9efcc84dbfe25f",
+    "protection/dynamics/test_flexible_fleet.py": "5f9ed9ac7f72f9608263de864c78f5e1b8e9f202b03e167e9cf82b8936a6b882",
+    "protection/dynamics/test_flexible_fleet_energy.py": "3aae8ef9e4385d51b081c8c68946fecfe2c948ec4d69ef581b99d885430c0434",
+    "protection/dynamics/test_flexible_optics.py": "e2d55c5234b7884b50e35d8bda430a22f2740512951d51f39ea40c9497f3fb40",
+    "protection/dynamics/test_flexible_environment.py": "92c175a2c681b514fbdb82d7a6ef2151c391b05b16bc1fe6b68415fc3a3113e9",
+    "research/studies/solar_shield_array/test_geometry_screen.py": "d1a4fe2f839c5ec6bfca500303018bd5727944085cb677c4908dfb7eb4b9cdfa",
+    "research/studies/solar_shield_array/test_flexible_benchmark.py": "f8ff7557ef3a16f97af476df369ab3b55d20e92646b5e4f5a267e92e73ce3eb8"
+  },
+  "coupled_design_search_executed": false,
+  "focused_check": {
+    "status": "passed",
+    "passed": 119,
+    "elapsed_s": 8.66,
+    "command": "python -m pytest engineering/test_array_flexible.py protection/dynamics/test_flexible_fleet.py protection/dynamics/test_flexible_fleet_energy.py protection/dynamics/test_flexible_optics.py protection/dynamics/test_flexible_environment.py research/studies/solar_shield_array/test_geometry_screen.py research/studies/solar_shield_array/test_flexible_benchmark.py",
+    "numerical_threads": 1,
+    "log": "research/runs/solar_shield_array_flexible_benchmark/checks/focused.log"
+  },
+  "repository_check": {
+    "status": "passed",
+    "command": "make check",
+    "exit_code": 0,
+    "python_passed": 2253,
+    "python_skipped": 16,
+    "python_elapsed_s": 452.62,
+    "javascript_test_groups_passed": [
+      129,
+      48,
+      14
+    ],
+    "layer_check": {
+      "files": 975,
+      "violations": 0
+    },
+    "provenance_and_ensemble_checks": "passed; see exact log for input availability and validator scope",
+    "log": "research/runs/solar_shield_array_flexible_benchmark/checks/make_check.log",
+    "scope": "Frozen model, tests and numerical products; final report and this check record completed from the results afterward."
+  },
+  "initial_benchmark_issue": {
+    "completed": 17,
+    "cases": 18,
+    "failure": "Radau finite-difference Jacobian perturbed inactive wheel coordinates, triggering an overly strict RHS input guard. Fixed by excluding inactive coordinates from mechanics and diagnostics, while rejecting nonzero initial inactive wheel momentum. Regression compares Radau and DOP853.",
+    "archive": "research/runs/solar_shield_array_flexible_benchmark/initial_implementation",
+    "files": {
+      "flexible_benchmark.json": "ff09ce664e05152c03b9ab33c46a8c4f4983b4e88a09ac1dd4735005572fdbf0",
+      "flexible_fleet.py": "51ae362e64a7b25e5a0dc8922b3a561366e6b7bb5c2e3fbf433dbb788eafa469"
+    }
+  },
+  "review": {
+    "independent_reduced_mechanics_derivation": true,
+    "optics_and_controller_review": true,
+    "full_scholarly_source_reading": false,
+    "full_fleet_orbital_replay": false,
+    "empirical_validation": false,
+    "final_source_and_provenance_review": true,
+    "all_benchmark_producer_input_model_state_hashes_checked": true,
+    "saved_state_probe_reconstruction_checked": true,
+    "substantive_manuscript_review": false,
+    "exact_build_pdf_review": false
+  },
+  "not_established": [
+    "nonlinear membrane/frame and actuator attachment fidelity",
+    "material lifetime or flight qualification",
+    "rate-limited trim, switching electricity, complete bus or momentum unloading",
+    "continuous coverage or swept collision clearance",
+    "hardware shadow and thermal recoil models",
+    "fleet fault/service or manufacturing/resource closure"
+  ],
+  "products": {
+    "research/studies/solar_shield_array/results/geometry_screen.json": "74a2050121fae1552bcb45bdfe85a6617540b90d8950ca102b088f8373cfc1db",
+    "research/studies/solar_shield_array/results/flexible_models.json": "edc771ffb8abb6f653f621258cd287e777d8c2dfcacf745114ba07c7511c62e0",
+    "research/studies/solar_shield_array/results/flexible_benchmark.json": "1ac86370853c41877189716a3801234a7571881b94c6e76b7c6e7ef10a9d7070"
+  },
+  "logs": {
+    "focused.log": {
+      "path": "research/runs/solar_shield_array_flexible_benchmark/checks/focused.log",
+      "sha256": "d7e7e2a0a69b944c035b7c83b319047ae60c7213c322cb540f96a59138d360a4"
+    },
+    "make_check.log": {
+      "path": "research/runs/solar_shield_array_flexible_benchmark/checks/make_check.log",
+      "sha256": "72bceef7786273bb72a00247f8b7d7f711ad4d8393586ce411df987756768ff8"
+    },
+    "benchmark.log": {
+      "path": "research/runs/solar_shield_array_flexible_benchmark/checks/benchmark.log",
+      "sha256": "762dc7a7cd68694162325bde2102f7a5ef68e3acd4936803d2c8a4f98a637ba4"
+    },
+    "geometry_screen.log": {
+      "path": "research/runs/solar_shield_array_flexible_benchmark/checks/geometry_screen.log",
+      "sha256": "5fa8cb07934fd5b4771822977ee62fe1dcb26d42710cdbf75fa474b047817e03"
+    },
+    "interrupted_make_check.log": {
+      "path": "research/runs/solar_shield_array_flexible_benchmark/checks/interrupted_make_check.log",
+      "sha256": "a7279198d94f7d0f1c18482af2f014bfda315f72da3fb258cb840ad962313e83"
+    }
+  },
+  "earlier_interrupted_check": {
+    "status": "interrupted_by_agent",
+    "passed_before_interrupt": 1822,
+    "skipped_before_interrupt": 16,
+    "reason": "Added complete normal-basis mesh/time comparisons after the truncated modal sequence failed the declared displacement criterion; final make check supersedes this partial run.",
+    "log": "research/runs/solar_shield_array_flexible_benchmark/checks/interrupted_make_check.log"
+  },
+  "machine": {
+    "cpu": "11th Gen Intel Core i9-11980HK @ 2.60 GHz",
+    "logical_cpus": 16,
+    "physical_cpus": 8,
+    "memory_bytes": 33383329792,
+    "platform": "Linux x86_64",
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "scipy": "1.16.2",
+    "numerical_threads": 1
+  },
+  "cheap_screen": {
+    "mechanical_cases": 2700,
+    "spacing_configurations": 16200,
+    "converged_mechanical_cases": 2650,
+    "conditional_geometry_and_member_passes": 2404,
+    "component_mass_within_inherited_total_allowance": 0,
+    "wall_s": 297.5806436310013,
+    "peak_process_rss_MiB": 163.27734375,
+    "evidence": "Conditional algebraic sizing and sufficient local planar geometry; no achieved lower-load attitude, complete spacecraft, validated material life, coupled flexible control, full-fleet coverage or collision certificate."
+  },
+  "fixed_benchmark": {
+    "cases": 24,
+    "completed": 24,
+    "wall_s": 102.53459031400052,
+    "cpu_s": 102.47090629,
+    "peak_process_rss_MiB": 126.1953125,
+    "endpoint_probe_resolution": {
+      "absolute_probe_tolerance_m": 0.0001,
+      "relative_probe_tolerance": 0.01,
+      "criterion": "maximum common physical shape-probe difference <= 0.1 mm + 1% of reference peak probe displacement; a declared benchmark criterion, not a physical requirement or certified error bound",
+      "fixed_mesh12_modal_errors_against_complete_basis": [
+        {
+          "first": "mesh12",
+          "second": "modes170",
+          "comparable": true,
+          "maximum_shape_probe_difference_m": 0.018805794407105517,
+          "reference_maximum_shape_probe_displacement_m": 0.06186325280620354,
+          "declared_probe_tolerance_m": 0.0007186325280620355,
+          "meets_declared_probe_tolerance": false
+        },
+        {
+          "first": "modes12",
+          "second": "modes170",
+          "comparable": true,
+          "maximum_shape_probe_difference_m": 0.028217310687757246,
+          "reference_maximum_shape_probe_displacement_m": 0.06186325280620354,
+          "declared_probe_tolerance_m": 0.0007186325280620355,
+          "meets_declared_probe_tolerance": false
+        },
+        {
+          "first": "modes20",
+          "second": "modes170",
+          "comparable": true,
+          "maximum_shape_probe_difference_m": 0.018211612087847648,
+          "reference_maximum_shape_probe_displacement_m": 0.06186325280620354,
+          "declared_probe_tolerance_m": 0.0007186325280620355,
+          "meets_declared_probe_tolerance": false
+        },
+        {
+          "first": "modes40",
+          "second": "modes170",
+          "comparable": true,
+          "maximum_shape_probe_difference_m": 0.003461380722993568,
+          "reference_maximum_shape_probe_displacement_m": 0.06186325280620354,
+          "declared_probe_tolerance_m": 0.0007186325280620355,
+          "meets_declared_probe_tolerance": false
+        },
+        {
+          "first": "modes80",
+          "second": "modes170",
+          "comparable": true,
+          "maximum_shape_probe_difference_m": 0.002043074877340789,
+          "reference_maximum_shape_probe_displacement_m": 0.06186325280620354,
+          "declared_probe_tolerance_m": 0.0007186325280620355,
+          "meets_declared_probe_tolerance": false
+        },
+        {
+          "first": "modes170",
+          "second": "modes170",
+          "comparable": true,
+          "maximum_shape_probe_difference_m": 0.0,
+          "reference_maximum_shape_probe_displacement_m": 0.06186325280620354,
+          "declared_probe_tolerance_m": 0.0007186325280620355,
+          "meets_declared_probe_tolerance": true
+        }
+      ],
+      "complete_basis_mesh_comparisons": [
+        {
+          "first": "full_mesh8",
+          "second": "modes170",
+          "comparable": true,
+          "maximum_shape_probe_difference_m": 0.0007405242102705781,
+          "reference_maximum_shape_probe_displacement_m": 0.06186325280620354,
+          "declared_probe_tolerance_m": 0.0007186325280620355,
+          "meets_declared_probe_tolerance": false
+        },
+        {
+          "first": "modes170",
+          "second": "full_mesh16",
+          "comparable": true,
+          "maximum_shape_probe_difference_m": 0.00017564667098855097,
+          "reference_maximum_shape_probe_displacement_m": 0.06202228746915188,
+          "declared_probe_tolerance_m": 0.0007202228746915188,
+          "meets_declared_probe_tolerance": true
+        }
+      ],
+      "complete_basis_time_comparison": {
+        "first": "full_mesh16",
+        "second": "full_mesh16_step",
+        "comparable": true,
+        "maximum_shape_probe_difference_m": 1.2110451530489286e-13,
+        "reference_maximum_shape_probe_displacement_m": 0.06202228746922465,
+        "declared_probe_tolerance_m": 0.0007202228746922465,
+        "meets_declared_probe_tolerance": true
+      },
+      "complete_basis_definition": "all N-3 elastic normal degrees of freedom after three affine rigid normal modes are removed: mesh8=82, mesh12=170, mesh16=290",
+      "final_complete_basis_mesh_pair_meets_declared_probe_tolerance": true,
+      "complete_basis_time_pair_meets_declared_probe_tolerance": true,
+      "reading_rule": "Do not infer mesh convergence from a six-mode mesh sequence. Full discrete bases remove modal truncation for each mesh, but leave mesh geometry, assumed stiffness, endpoint inertia and all physical-model limitations."
+    },
+    "reading_rule": "Resolution assessment in the main benchmark compares nine terminal probes. The separate saved-state audit below extends the comparison to all 13 saved times. Low-mode solver/source/trim/long-period cases do not establish modal convergence."
+  },
+  "saved_probe_history_audit": {
+    "evidence": "Derived read-only reconstruction from existing saved solver states and model products; no new dynamics run.",
+    "script": {
+      "path": "research/runs/solar_shield_array_flexible_benchmark/checks/audit_saved_probe_histories.py",
+      "sha256": "2ea110c5eefcef8b5fb4097c247ad7f74207ac44c06feb94c78ac488fcc87af8"
+    },
+    "archive": {
+      "path": "research/runs/solar_shield_array_flexible_benchmark/checks/saved_probe_history_audit.json",
+      "sha256": "95610a05282b5a4c7a911d860ac03d25ad4f3eeb60d28b5edfb7663ed4056940"
+    },
+    "reproduction": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python research/runs/solar_shield_array_flexible_benchmark/checks/audit_saved_probe_histories.py --repo-root . --output /tmp/saved_probe_history_audit.json",
+    "inputs": {
+      "benchmark": {
+        "path": "/home/kir/Documents/Projects/terluna-array-industry/research/studies/solar_shield_array/results/flexible_benchmark.json",
+        "sha256": "1ac86370853c41877189716a3801234a7571881b94c6e76b7c6e7ef10a9d7070"
+      },
+      "model_collection": {
+        "path": "/home/kir/Documents/Projects/terluna-array-industry/research/studies/solar_shield_array/results/flexible_models.json",
+        "sha256": "edc771ffb8abb6f653f621258cd287e777d8c2dfcacf745114ba07c7511c62e0"
+      },
+      "cases": {
+        "mesh12": {
+          "state_archive": "research/runs/solar_shield_array_flexible_benchmark/mesh12.npz",
+          "state_archive_sha256": "0006734cfcdf5a21eb5cf53e6e2292fb07cacaf0332220e0dcd80d16378cfdc1",
+          "model_key": "mesh12_modes6",
+          "canonical_model_sha256": "d7fe32d8bc01e407da5735bee2bbe25ded31ce11135c51b44ef1b3a83a8e38f6",
+          "retained_modes": 6
+        },
+        "modes12": {
+          "state_archive": "research/runs/solar_shield_array_flexible_benchmark/modes12.npz",
+          "state_archive_sha256": "39b2b41e9569e0570108694a78f6d9fbaab5e30066cdbe324802481adb344d3d",
+          "model_key": "mesh12_modes12",
+          "canonical_model_sha256": "47518626c48aa02370f3976e3a5d99040003971e1cc1f35b45cfa8f722c5c16c",
+          "retained_modes": 12
+        },
+        "modes20": {
+          "state_archive": "research/runs/solar_shield_array_flexible_benchmark/modes20.npz",
+          "state_archive_sha256": "015342cf03684bfae8220f295a804589b0b3f8bfa5e4f863e17cb952f2fe0676",
+          "model_key": "mesh12_modes20",
+          "canonical_model_sha256": "e8cb189424004451bfafdf935047bd1d4daead3000d3e00012c5351c8091a348",
+          "retained_modes": 20
+        },
+        "modes40": {
+          "state_archive": "research/runs/solar_shield_array_flexible_benchmark/modes40.npz",
+          "state_archive_sha256": "e5c9f033234ccacd4c038a3969702694107b878322000ff0d24d8a596e60b5de",
+          "model_key": "mesh12_modes40",
+          "canonical_model_sha256": "3bdc17790d4c3f76db8ae55f6ece37ce9cd00359c7daba84ad38e6d6ebc20cda",
+          "retained_modes": 40
+        },
+        "modes80": {
+          "state_archive": "research/runs/solar_shield_array_flexible_benchmark/modes80.npz",
+          "state_archive_sha256": "314cbd65c87bc7c4bb153b8cd12accda6de5ac57fe822b29f0b2d72b507a112a",
+          "model_key": "mesh12_modes80",
+          "canonical_model_sha256": "c008006c05384a25de86bc5fe3e1b98f1762e97f5449576c1c7ea6d5e6d356e6",
+          "retained_modes": 80
+        },
+        "modes170": {
+          "state_archive": "research/runs/solar_shield_array_flexible_benchmark/modes170.npz",
+          "state_archive_sha256": "4c6fa1336a97e1cc3274decaace2e89502a8f3fd12fcd01efcfa47ee955da8ea",
+          "model_key": "mesh12_modes170",
+          "canonical_model_sha256": "5d3c8699690ad333248da82cda258b93ea632c93bf53379189a26638f7f5ee25",
+          "retained_modes": 170
+        },
+        "full_mesh16": {
+          "state_archive": "research/runs/solar_shield_array_flexible_benchmark/full_mesh16.npz",
+          "state_archive_sha256": "120b653930182618cbc4bd205e714b23301197d720fed2595e2932fb6cec28ad",
+          "model_key": "mesh16_modes290",
+          "canonical_model_sha256": "e2357c62384d6e803b19d66723fc83321abbb89c6b6499b4b409e9bfb8c60bc6",
+          "retained_modes": 290
+        },
+        "full_mesh16_step": {
+          "state_archive": "research/runs/solar_shield_array_flexible_benchmark/full_mesh16_step.npz",
+          "state_archive_sha256": "62e4704316deaa8bced99dc6d71bfeed5ad59ddfec53ea049d5bb8b16cb17d11",
+          "model_key": "mesh16_modes290",
+          "canonical_model_sha256": "e2357c62384d6e803b19d66723fc83321abbb89c6b6499b4b409e9bfb8c60bc6",
+          "retained_modes": 290
+        }
+      }
+    },
+    "criterion": {
+      "absolute_tolerance_m": 0.0001,
+      "relative_tolerance": 0.01,
+      "rule": "Maximum difference over shared saved times and the same nine physical probes <= 0.1 mm + 1% of the reference maximum displacement observed over those times/probes."
+    },
+    "comparisons": [
+      {
+        "first": "mesh12",
+        "reference": "modes170",
+        "comparison_kind": "fixed_mesh12_modal_truncation",
+        "shared_output_times_s": [
+          0.0,
+          5.0,
+          10.0,
+          15.0,
+          20.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0
+        ],
+        "shared_output_count": 13,
+        "physical_probe_count": 9,
+        "maximum_over_saved_times_and_probes_m": 0.018805794407105544,
+        "maximum_at_time_s": 60.0,
+        "maximum_at_probe_xy_m": [
+          0.0,
+          0.0
+        ],
+        "reference_observed_peak_displacement_m": 0.06186325280620354,
+        "reference_peak_at_time_s": 60.0,
+        "reference_peak_at_probe_xy_m": [
+          -2500.0,
+          2500.0
+        ],
+        "declared_tolerance_m": 0.0007186325280620355,
+        "meets_declared_observed_probe_criterion": false,
+        "terminal_maximum_probe_difference_m": 0.018805794407105544,
+        "timewise_maximum_probe_differences_m": [
+          0.0018205520762072129,
+          0.0017425602444585062,
+          0.00151920678262173,
+          0.0011434932800547977,
+          0.0008104356324572862,
+          0.001976652401056562,
+          0.003615980237486334,
+          0.00552988994012283,
+          0.007707739840316211,
+          0.010137775133251328,
+          0.012807110765588478,
+          0.01570162730782483,
+          0.018805794407105544
+        ],
+        "timewise_reference_maximum_probe_displacements_m": [
+          0.003755651681056805,
+          0.003311960494129285,
+          0.003441295736571864,
+          0.005537535675699202,
+          0.008471388684365047,
+          0.012241979829735421,
+          0.016848018354497913,
+          0.022287472386085434,
+          0.0285571162248992,
+          0.035651984934735446,
+          0.04356476409242296,
+          0.05229898334272465,
+          0.06186325280620354
+        ]
+      },
+      {
+        "first": "modes12",
+        "reference": "modes170",
+        "comparison_kind": "fixed_mesh12_modal_truncation",
+        "shared_output_times_s": [
+          0.0,
+          5.0,
+          10.0,
+          15.0,
+          20.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0
+        ],
+        "shared_output_count": 13,
+        "physical_probe_count": 9,
+        "maximum_over_saved_times_and_probes_m": 0.028217310687757242,
+        "maximum_at_time_s": 60.0,
+        "maximum_at_probe_xy_m": [
+          0.0,
+          0.0
+        ],
+        "reference_observed_peak_displacement_m": 0.06186325280620354,
+        "reference_peak_at_time_s": 60.0,
+        "reference_peak_at_probe_xy_m": [
+          -2500.0,
+          2500.0
+        ],
+        "declared_tolerance_m": 0.0007186325280620355,
+        "meets_declared_observed_probe_criterion": false,
+        "terminal_maximum_probe_difference_m": 0.028217310687757242,
+        "timewise_maximum_probe_differences_m": [
+          0.00043878210170534334,
+          0.0003674449843350737,
+          0.0007094015735259871,
+          0.001923841879933935,
+          0.0035938855632716947,
+          0.00568964540059134,
+          0.008173156775037483,
+          0.01099880610052714,
+          0.014113924516519835,
+          0.017459563794320343,
+          0.02097145791076738,
+          0.024581157765204104,
+          0.028217310687757242
+        ],
+        "timewise_reference_maximum_probe_displacements_m": [
+          0.003755651681056805,
+          0.003311960494129285,
+          0.003441295736571864,
+          0.005537535675699202,
+          0.008471388684365047,
+          0.012241979829735421,
+          0.016848018354497913,
+          0.022287472386085434,
+          0.0285571162248992,
+          0.035651984934735446,
+          0.04356476409242296,
+          0.05229898334272465,
+          0.06186325280620354
+        ]
+      },
+      {
+        "first": "modes20",
+        "reference": "modes170",
+        "comparison_kind": "fixed_mesh12_modal_truncation",
+        "shared_output_times_s": [
+          0.0,
+          5.0,
+          10.0,
+          15.0,
+          20.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0
+        ],
+        "shared_output_count": 13,
+        "physical_probe_count": 9,
+        "maximum_over_saved_times_and_probes_m": 0.01821161208784766,
+        "maximum_at_time_s": 60.0,
+        "maximum_at_probe_xy_m": [
+          0.0,
+          0.0
+        ],
+        "reference_observed_peak_displacement_m": 0.06186325280620354,
+        "reference_peak_at_time_s": 60.0,
+        "reference_peak_at_probe_xy_m": [
+          -2500.0,
+          2500.0
+        ],
+        "declared_tolerance_m": 0.0007186325280620355,
+        "meets_declared_observed_probe_criterion": false,
+        "terminal_maximum_probe_difference_m": 0.01821161208784766,
+        "timewise_maximum_probe_differences_m": [
+          0.0003512259084822453,
+          0.00015352791486695225,
+          0.00043274519878991514,
+          0.0013873837833403586,
+          0.002677535870845749,
+          0.0042589072355313645,
+          0.006077353227170377,
+          0.008070785045320675,
+          0.010171304701291961,
+          0.012307481884312972,
+          0.014406691185030358,
+          0.016397437859384648,
+          0.01821161208784766
+        ],
+        "timewise_reference_maximum_probe_displacements_m": [
+          0.003755651681056805,
+          0.003311960494129285,
+          0.003441295736571864,
+          0.005537535675699202,
+          0.008471388684365047,
+          0.012241979829735421,
+          0.016848018354497913,
+          0.022287472386085434,
+          0.0285571162248992,
+          0.035651984934735446,
+          0.04356476409242296,
+          0.05229898334272465,
+          0.06186325280620354
+        ]
+      },
+      {
+        "first": "modes40",
+        "reference": "modes170",
+        "comparison_kind": "fixed_mesh12_modal_truncation",
+        "shared_output_times_s": [
+          0.0,
+          5.0,
+          10.0,
+          15.0,
+          20.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0
+        ],
+        "shared_output_count": 13,
+        "physical_probe_count": 9,
+        "maximum_over_saved_times_and_probes_m": 0.003461380722993568,
+        "maximum_at_time_s": 60.0,
+        "maximum_at_probe_xy_m": [
+          -2500.0,
+          2500.0
+        ],
+        "reference_observed_peak_displacement_m": 0.06186325280620354,
+        "reference_peak_at_time_s": 60.0,
+        "reference_peak_at_probe_xy_m": [
+          -2500.0,
+          2500.0
+        ],
+        "declared_tolerance_m": 0.0007186325280620355,
+        "meets_declared_observed_probe_criterion": false,
+        "terminal_maximum_probe_difference_m": 0.003461380722993568,
+        "timewise_maximum_probe_differences_m": [
+          0.00010146620930591779,
+          6.879856066448848e-05,
+          0.00018491565387764107,
+          0.00042404400129443303,
+          0.0007393056054515873,
+          0.0011148260854029566,
+          0.0015348853191062741,
+          0.001964572805871069,
+          0.002378212816541103,
+          0.002752859475804559,
+          0.0030738729673364315,
+          0.0033147938255916193,
+          0.003461380722993568
+        ],
+        "timewise_reference_maximum_probe_displacements_m": [
+          0.003755651681056805,
+          0.003311960494129285,
+          0.003441295736571864,
+          0.005537535675699202,
+          0.008471388684365047,
+          0.012241979829735421,
+          0.016848018354497913,
+          0.022287472386085434,
+          0.0285571162248992,
+          0.035651984934735446,
+          0.04356476409242296,
+          0.05229898334272465,
+          0.06186325280620354
+        ]
+      },
+      {
+        "first": "modes80",
+        "reference": "modes170",
+        "comparison_kind": "fixed_mesh12_modal_truncation",
+        "shared_output_times_s": [
+          0.0,
+          5.0,
+          10.0,
+          15.0,
+          20.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0
+        ],
+        "shared_output_count": 13,
+        "physical_probe_count": 9,
+        "maximum_over_saved_times_and_probes_m": 0.0024097952441535925,
+        "maximum_at_time_s": 50.0,
+        "maximum_at_probe_xy_m": [
+          -2500.0,
+          0.0
+        ],
+        "reference_observed_peak_displacement_m": 0.06186325280620354,
+        "reference_peak_at_time_s": 60.0,
+        "reference_peak_at_probe_xy_m": [
+          -2500.0,
+          2500.0
+        ],
+        "declared_tolerance_m": 0.0007186325280620355,
+        "meets_declared_observed_probe_criterion": false,
+        "terminal_maximum_probe_difference_m": 0.002043074877340817,
+        "timewise_maximum_probe_differences_m": [
+          8.96852681353459e-05,
+          0.00014554382598220682,
+          0.00030756602718810875,
+          0.000559622802289266,
+          0.0008765548874742745,
+          0.0012727680170468072,
+          0.0016656291008165028,
+          0.002007238341883405,
+          0.002261369021337653,
+          0.0024008517311506702,
+          0.0024097952441535925,
+          0.002286443939559485,
+          0.002043074877340817
+        ],
+        "timewise_reference_maximum_probe_displacements_m": [
+          0.003755651681056805,
+          0.003311960494129285,
+          0.003441295736571864,
+          0.005537535675699202,
+          0.008471388684365047,
+          0.012241979829735421,
+          0.016848018354497913,
+          0.022287472386085434,
+          0.0285571162248992,
+          0.035651984934735446,
+          0.04356476409242296,
+          0.05229898334272465,
+          0.06186325280620354
+        ]
+      },
+      {
+        "first": "modes170",
+        "reference": "full_mesh16",
+        "comparison_kind": "complete_basis_mesh",
+        "shared_output_times_s": [
+          0.0,
+          5.0,
+          10.0,
+          15.0,
+          20.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0
+        ],
+        "shared_output_count": 13,
+        "physical_probe_count": 9,
+        "maximum_over_saved_times_and_probes_m": 0.00018793833688020636,
+        "maximum_at_time_s": 35.0,
+        "maximum_at_probe_xy_m": [
+          2500.0,
+          0.0
+        ],
+        "reference_observed_peak_displacement_m": 0.06202228746915192,
+        "reference_peak_at_time_s": 60.0,
+        "reference_peak_at_probe_xy_m": [
+          -2500.0,
+          2500.0
+        ],
+        "declared_tolerance_m": 0.0007202228746915193,
+        "meets_declared_observed_probe_criterion": true,
+        "terminal_maximum_probe_difference_m": 0.00017564667098867587,
+        "timewise_maximum_probe_differences_m": [
+          7.882775993679585e-05,
+          7.797161562634442e-05,
+          7.542258500186651e-05,
+          8.007332758242714e-05,
+          0.00011680379800155368,
+          0.00015111211745725411,
+          0.00017653114956820912,
+          0.00018793833688020636,
+          0.00018230083158624066,
+          0.00015894136911892565,
+          0.00011924502770432888,
+          9.501716480951605e-05,
+          0.00017564667098867587
+        ],
+        "timewise_reference_maximum_probe_displacements_m": [
+          0.003773345140291495,
+          0.0033375086045802937,
+          0.0034487589280266565,
+          0.0055440729545892685,
+          0.008476272912621428,
+          0.012244521185689927,
+          0.016848167991683847,
+          0.022286838255012462,
+          0.02856032398781843,
+          0.0356682124143064,
+          0.04360921048161437,
+          0.05238277122480012,
+          0.06202228746915192
+        ]
+      },
+      {
+        "first": "full_mesh16",
+        "reference": "full_mesh16_step",
+        "comparison_kind": "complete_basis_time",
+        "shared_output_times_s": [
+          0.0,
+          5.0,
+          10.0,
+          15.0,
+          20.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0
+        ],
+        "shared_output_count": 13,
+        "physical_probe_count": 9,
+        "maximum_over_saved_times_and_probes_m": 1.211530875622202e-13,
+        "maximum_at_time_s": 60.0,
+        "maximum_at_probe_xy_m": [
+          0.0,
+          -2500.0
+        ],
+        "reference_observed_peak_displacement_m": 0.06202228746922462,
+        "reference_peak_at_time_s": 60.0,
+        "reference_peak_at_probe_xy_m": [
+          -2500.0,
+          2500.0
+        ],
+        "declared_tolerance_m": 0.0007202228746922462,
+        "meets_declared_observed_probe_criterion": true,
+        "terminal_maximum_probe_difference_m": 1.211530875622202e-13,
+        "timewise_maximum_probe_differences_m": [
+          0.0,
+          1.3676993565470141e-14,
+          1.8927567846382942e-14,
+          3.4177521923695053e-14,
+          5.6751478516581244e-14,
+          6.850769951327607e-14,
+          7.827419268302549e-14,
+          8.815517760218938e-14,
+          1.0222725443931324e-13,
+          1.0114825643725567e-13,
+          1.0383360837806777e-13,
+          1.0057232824323137e-13,
+          1.211530875622202e-13
+        ],
+        "timewise_reference_maximum_probe_displacements_m": [
+          0.003773345140291495,
+          0.0033375086045739134,
+          0.0034487589280293536,
+          0.0055440729545900595,
+          0.008476272912620984,
+          0.012244521185689503,
+          0.016848167991697,
+          0.022286838255023513,
+          0.02856032398784312,
+          0.035668212414339685,
+          0.0436092104816693,
+          0.05238277122488924,
+          0.06202228746922462
+        ]
+      }
+    ],
+    "resources": {
+      "wall_s": 0.7659285490008187,
+      "cpu_s": 0.765717554,
+      "peak_process_rss_MiB": 112.48046875
+    },
+    "caveats": [
+      "Only shared stored output times (5 s cadence) and nine common body-plane probes are audited.",
+      "No interpolation in time, dense-output evaluation, dynamics replay or new integration is performed.",
+      "Peaks between outputs, other membrane locations, edge/cable shapes and optical seams are not bounded.",
+      "A complete normal basis removes truncation for that mesh only; physical stiffness, support inertia and geometry assumptions remain.",
+      "The criterion is a declared numerical benchmark comparison, not a certified error bound or operational requirement."
+    ]
+  },
+  "remaining_numerical_and_model_limits": [
+    "Displacement comparisons sample nine common probes and 5-second outputs for a fixed 60-second case; no whole-field or continuous-time error bound.",
+    "Maximum sampled slope changes by 25.35 percent from the complete 12-division to 16-division mesh. Normal/slope convergence is not established.",
+    "Every tested truncated basis through 80 modes fails the endpoint criterion. Long-period, trim, source and solver timing cases retain six modes.",
+    "Endpoint-lumped support inertia differs by about 24 percent from the distributed-frame reference; full modal completion does not repair this model approximation.",
+    "Bounded trim completes numerically but has nonzero force/torque residuals. No operational control authority or closed hardware budget is established.",
+    "The benchmark uses fixed sunlight and lunar point gravity. Ephemeris and eclipse hooks have synthetic-fixture tests, not a full-fleet replay."
+  ]
+}

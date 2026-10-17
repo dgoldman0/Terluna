@@ -1,0 +1,4358 @@
+{
+  "schema": "terluna.research.array-geometry-screen/1",
+  "producer": {
+    "files": {
+      "engineering/array_momentum.py": "676d5f881be9717f1317536b9b78cc84f9b0f546a1befcb7fde89fb524d3ce6c",
+      "engineering/array_service.py": "3fe65bf93d92e739b8a6f1bcb5c20106179e2327e6930afe604d525c0f191fd5",
+      "engineering/array_spin.py": "b06691ec7299a4978ba6a16919421dbe00cefb840f9f8dc026783312ca9daa87",
+      "engineering/array_support.py": "f597fce290a1934cc9f8c07598c44a68d8db04e3172afbe8d2d653917357d2f6",
+      "engineering/array_tile.py": "2cbc0a36ffe0c84f01d2d51224017b3b82477c337e5d9fb2b23d9a0738f882f7",
+      "protection/dynamics/optical.py": "06a13ae9f24834876edbc12b513deaa5e3735f02f8249eb57c8996d74ce00b56",
+      "protection/dynamics/ring_bundle.py": "05543a75524dd0d3c9cbbb6aa0dc0b02d8d5a0d156c943b6d794184f3ecfb98d",
+      "protection/dynamics/tile_failure.py": "7514aaea70b0b8970129b7e2543cfcd92e6c4450d9c253803b07445884067a3b",
+      "research/studies/solar_shield_array/attitude_schemes.py": "1c4beb572ebaa0bbc6ec1c638eea728065e6e19f578f8e54fb78f26c0e2a3c19",
+      "research/studies/solar_shield_array/geometry_screen.py": "62bda0c69eca3db4265a1b599f398aa9279c2b783b377348c52c1595d09b19db",
+      "research/studies/solar_shield_array/support_comparison.py": "b5e314247b467c9a2a47a536d1f4b09352a3751dd1c6a15ff1a75adc45a88edd",
+      "research/studies/solar_shield_array/tile_design.py": "9c94171c7c32d7da904a8f6e9ad4ac907b484826b97927a38a424ea13c6953c6",
+      "shared/provenance.py": "c59d32186d453a80992eb02203b644fe759aca869dc892d91af9aa74fd65c7f8"
+    },
+    "constants": {
+      "AU": 149597870700.0,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "SOLAR_CONSTANT": 1361.0,
+      "SPEED_OF_LIGHT": 299792458.0,
+      "SUN_RADIUS": 695700000.0
+    }
+  },
+  "inputs": {
+    "research/studies/solar_shield_array/results/tile_design.json": {
+      "schema": "terluna.research.array-tile-design/1",
+      "sha256": "079f15af9f52374337a36f3e18427f04bc653f84a7df2766ceb2cb4bbdcea91d"
+    },
+    "research/studies/solar_shield_array/support_materials.json": {
+      "schema": "terluna.research.array-support-materials/1",
+      "sha256": "d6d5b83a0064b20538fdad14531baf2b9ca707fe23d8a39e626b943154e2cb70"
+    },
+    "research/studies/solar_shield_array/support_sources.json": {
+      "schema": "terluna.research.array-support-sources/1",
+      "sha256": "2afd4ed953e1c5424f31ce5746182ce300d4ff348d389a34ae1019ce2c82ce6d"
+    },
+    "research/studies/solar_shield_array/results/support_comparison.json": {
+      "schema": "terluna.research.array-support-comparison/1",
+      "sha256": "84821a954ed407a8cc0104fc926e1fa7393fb94a3cf76e73590f4aa8a4837c8e"
+    }
+  },
+  "baseline_commit": "669ddd3",
+  "evidence": "Conditional algebraic sizing and sufficient local planar geometry; no achieved lower-load attitude, complete spacecraft, validated material life, coupled flexible control, full-fleet coverage or collision certificate.",
+  "reading_rule": "Representative candidates and model failures only. No universal optimum or architecture-wide infeasibility claim. Load-factor and service-pose choices do not demonstrate feasible commands. All old products remain unchanged.",
+  "inherited_fields": {
+    "reference_side_m": 10000,
+    "reference_gross_area_m2": 100000000,
+    "reference_population": 28233094,
+    "service_lattice": {
+      "optical_width_m": 8900.0,
+      "optical_height_m": 9890.0,
+      "pitch_m": [
+        8500.0,
+        9286.456
+      ],
+      "coverage_multiplicity": {
+        "1": 0.8910077618922212,
+        "2": 0.10593379788168665,
+        "4": 0.003058440226092203
+      }
+    },
+    "safety_clearance_m": 150.0,
+    "design": {
+      "side_m": 10000,
+      "film_areal_mass_kg_m2": 0.010211188096789173,
+      "target_total_areal_mass_kg_m2": 0.013765000000000001,
+      "pressure_Pa": 6.633566478847176e-07,
+      "angular_acceleration_rad_s2": 1.53784836209102e-08,
+      "required_momentum_N_m_s": 744294293111.9342,
+      "required_torque_N_m": 89710848.45971912,
+      "orbit_period_s": 253806.51619146363,
+      "allowable_sag_m": 5.0,
+      "membrane_dynamic_factor": 2.0,
+      "substrate_areal_mass_kg_m2": 0.001,
+      "substrate_density_kg_m3": 1400.0,
+      "substrate_admissible_stress_Pa": 100000000.0,
+      "angular_speed_rad_s": 0.00010659283364143187,
+      "frame_depth_m": 100.0,
+      "frame_bay_m": 50.0,
+      "chord_radius_m": 2.0,
+      "frame_allowable_edge_bow_m": 5.0,
+      "structure": {
+        "density_kg_m3": 1600.0,
+        "youngs_modulus_Pa": 100000000000.0,
+        "admissible_stress_Pa": 500000000.0
+      },
+      "rotor_radius_m": 100.0,
+      "rotor_rim_speed_m_s": 1000.0,
+      "rotor_density_kg_m3": 1600.0,
+      "rotor_admissible_stress_Pa": 2000000000.0,
+      "rotor_support_mass_fraction": 0.5,
+      "trim_area_fraction": 0.25,
+      "trim_hardware_areal_mass_kg_m2": 0.002,
+      "trim_switch_J_m2": 5.0,
+      "trim_switches_per_orbit": 20,
+      "trim_switch_duration_s": 20000.0,
+      "trim_hold_W_m2": 0.0,
+      "housekeeping_W": 10000.0,
+      "eclipse_s": 14400.0,
+      "slew_duration_s": 20000.0,
+      "recharge_s": 200000.0,
+      "bus_voltage_V": 10000.0,
+      "wire_loss_fraction": 0.02,
+      "wire_resistivity_ohm_m": 2.8e-08,
+      "wire_density_kg_m3": 2700.0,
+      "battery_specific_energy_J_kg": 720000.0,
+      "battery_depth_of_discharge": 0.8,
+      "converter_efficiency": 0.9,
+      "electronics_specific_power_W_kg": 2000.0,
+      "generator_specific_power_W_kg": 200.0,
+      "radiator_specific_heat_rejection_W_kg": 100.0,
+      "avionics_and_sensors_kg": 5000.0,
+      "mass_growth_fraction": 0.2
+    },
+    "normal_acceleration_m_s2": 7.91269496408684e-05,
+    "command_samples": 2881,
+    "hub_fraction": 0.1
+  },
+  "field_provenance": {
+    "design": "baseline.hardware.variants.annulus_reference.design",
+    "lattice": "baseline.fleet_service.ideal_service_lattice",
+    "population": "baseline.fleet_service.population",
+    "safety_clearance": "baseline.local_failures.cases.*.config.safety_clearance_m",
+    "normal_load": "comparison.loading.resolved_normal_acceleration_m_s2",
+    "hub_fraction": "comparison.command_loaded_supports[reference side/depth].support.hub_member.length_m / reference side"
+  },
+  "grid": {
+    "mechanical": {
+      "side_m": [
+        1000.0,
+        2000.0,
+        3000.0,
+        5000.0,
+        7500.0,
+        10000.0
+      ],
+      "retreat_fraction": [
+        0.005,
+        0.025,
+        0.05,
+        0.075,
+        0.1
+      ],
+      "depth_fraction": [
+        0.003,
+        0.005,
+        0.0075,
+        0.01,
+        0.015
+      ],
+      "compression_material_id": [
+        "generic_composite_baseline",
+        "as4_8552_ud",
+        "m55j_2500_ud"
+      ],
+      "cable_material_id": [
+        "kevlar49_yarn",
+        "spectra1000_100"
+      ],
+      "normal_load_factor": [
+        0.25,
+        0.5,
+        1.0
+      ]
+    },
+    "shingle_deg": [
+      1.5,
+      2.0,
+      3.0
+    ],
+    "pitch_factor": [
+      0.9,
+      1.0
+    ]
+  },
+  "assumptions": {
+    "load_factors": "scale all normal inertial/gravity coefficients of the inherited sampled command; solar pressure unchanged; lower factors are hypothetical load envelopes, not solved attitudes",
+    "load_density": "full trim hardware density applied everywhere for the normal-load envelope; actual trim area fraction used for mass",
+    "geometry": "scalloped support uses inherited dimension ratios; membrane sag stays at the inherited absolute tolerance",
+    "envelope": "finite outer tube/brace/cable envelope plus prescribed membrane sag and member deflection allowance; joint protrusions and global deformation remain unbounded",
+    "coverage": "sufficient inscribed rectangle projected at the scenario shingle angle; inherited pitch-to-active-rectangle ratios preserved; pitch factor below one increases overlap and population",
+    "clearance": "parallel along-pitch neighbour plane separation minus two finite normal half-envelopes; 150 m inherited gate unchanged; no sliding adjacent-ring, fault or fleet collision replay",
+    "bus": "fixed inherited avionics/housekeeping and hypothetical area-scaled equipment; power generation/storage/wiring, actuators, rotor supports and equipment-load closure omitted",
+    "classification": "member and geometric screens organize follow-up candidates; conservative failed screens cannot reject all supports or attitudes"
+  },
+  "archives": {
+    "mechanical": {
+      "path": "research/runs/solar_shield_array_geometry_screen/mechanical.jsonl",
+      "sha256": "653c7082e15895b9efd0da108e45f8f9ed36283ed07b4be8a7674524181df283",
+      "rows": 2700,
+      "bytes": 3866824,
+      "reading_rule": "Every enumerated configuration is retained, including failures; ignored reproducible local run artifact."
+    },
+    "configurations": {
+      "path": "research/runs/solar_shield_array_geometry_screen/configurations.jsonl",
+      "sha256": "5f2595d5dba9b0a6ef39149ace720bb62c8f6a819b27d8dd99b64fc257c6d89e",
+      "rows": 16200,
+      "bytes": 30912018,
+      "reading_rule": "Every enumerated configuration is retained, including failures; ignored reproducible local run artifact."
+    }
+  },
+  "summary": {
+    "mechanical_count": 2700,
+    "configuration_count": 16200,
+    "converged_mechanical_count": 2650,
+    "mechanical_failure_reasons": {
+      "Self-load sizing diverged for this truss geometry": 30,
+      "Self-load sizing did not converge in 300 iterations": 20
+    },
+    "filter_counts": {
+      "component_mass_within_inherited_total_allowance": 0,
+      "geometry_and_member_screens": 2404,
+      "mechanical_converged": 15900,
+      "member_model_domain": 15900,
+      "parallel_150m_clearance": 2404,
+      "substrate_stress": 15900,
+      "thin_wall_model_domain": 15900
+    },
+    "all_converged_distributions": {
+      "subtotal_kg_per_reference_gross_m2": {
+        "minimum": 0.017015678029778252,
+        "p10": 0.022126878793830983,
+        "median": 0.0306730291034433,
+        "p90": 0.10757297349157333,
+        "maximum": 1.7571739672699862
+      },
+      "equivalent_population": {
+        "minimum": 28233094.0,
+        "p10": 42090202.92085659,
+        "median": 313701044.4444444,
+        "p90": 3777624860.4868503,
+        "maximum": 5327041307.17091
+      },
+      "nominal_parallel_envelope_clearance_m": {
+        "minimum": -12.015525151970706,
+        "p10": 3.6464700909416905,
+        "median": 48.991675060292984,
+        "p90": 185.9453980965977,
+        "maximum": 390.8348097221003
+      },
+      "support_shadow_fraction_upper_bound": {
+        "minimum": 0.010248030010834967,
+        "p10": 0.011670821763702864,
+        "median": 0.027439171647620338,
+        "p90": 0.0545500630317535,
+        "maximum": 0.06463747304770297
+      }
+    },
+    "geometry_member_pass_distributions": {
+      "subtotal_kg_per_reference_gross_m2": {
+        "minimum": 0.021472367512743736,
+        "p10": 0.031060397569774842,
+        "median": 0.06896354440725158,
+        "p90": 0.3890343659708539,
+        "maximum": 1.7571739672699862
+      },
+      "equivalent_population": {
+        "minimum": 28233094.0,
+        "p10": 30598761.369943492,
+        "median": 50192167.11111111,
+        "p90": 112932376.0,
+        "maximum": 168360811.68342635
+      },
+      "nominal_parallel_envelope_clearance_m": {
+        "minimum": 150.16680224245317,
+        "p10": 159.46139541709564,
+        "median": 210.5815262457494,
+        "p90": 308.33074683403754,
+        "maximum": 390.8348097221003
+      },
+      "support_shadow_fraction_upper_bound": {
+        "minimum": 0.01025517553680796,
+        "p10": 0.010838817106323385,
+        "median": 0.02207747782927989,
+        "p90": 0.04791149065290851,
+        "maximum": 0.06463747304770297
+      }
+    },
+    "pareto_objectives": [
+      "minimize normalized component or component-plus-assumed-bus mass",
+      "minimize equivalent population",
+      "maximize parallel-envelope clearance"
+    ],
+    "pareto_rule": "within common normal-load and bus scenarios, after member and parallel-clearance filters; dominance is conditional on this model and is never physical impossibility",
+    "pareto_strata": [
+      {
+        "normal_load_factor": 0.25,
+        "bus_scenario": "support_and_sheet_only",
+        "eligible_count": 864,
+        "pareto_count": 20,
+        "dominated_count": 844,
+        "pareto_ids": [
+          "m01491_s5",
+          "m01563_s5",
+          "m02049_s5",
+          "m02121_s5",
+          "m02031_s5",
+          "m01959_s5",
+          "m02499_s5",
+          "m02427_s5",
+          "m02571_s5",
+          "m02409_s5",
+          "m02481_s5",
+          "m02391_s5",
+          "m02337_s5",
+          "m02463_s5",
+          "m02373_s5",
+          "m02319_s5",
+          "m02301_s5",
+          "m02355_s5",
+          "m02283_s5",
+          "m02265_s5"
+        ]
+      },
+      {
+        "normal_load_factor": 0.25,
+        "bus_scenario": "fixed_inherited_equipment",
+        "eligible_count": 864,
+        "pareto_count": 20,
+        "dominated_count": 844,
+        "pareto_ids": [
+          "m01491_s5",
+          "m01563_s5",
+          "m02049_s5",
+          "m02121_s5",
+          "m02031_s5",
+          "m01959_s5",
+          "m02499_s5",
+          "m02427_s5",
+          "m02571_s5",
+          "m02409_s5",
+          "m02481_s5",
+          "m02391_s5",
+          "m02337_s5",
+          "m02463_s5",
+          "m02373_s5",
+          "m02319_s5",
+          "m02301_s5",
+          "m02355_s5",
+          "m02283_s5",
+          "m02265_s5"
+        ]
+      },
+      {
+        "normal_load_factor": 0.25,
+        "bus_scenario": "area_scaled_equipment_hypothesis",
+        "eligible_count": 864,
+        "pareto_count": 20,
+        "dominated_count": 844,
+        "pareto_ids": [
+          "m01491_s5",
+          "m01563_s5",
+          "m02049_s5",
+          "m02121_s5",
+          "m02031_s5",
+          "m01959_s5",
+          "m02499_s5",
+          "m02427_s5",
+          "m02571_s5",
+          "m02409_s5",
+          "m02481_s5",
+          "m02391_s5",
+          "m02337_s5",
+          "m02463_s5",
+          "m02373_s5",
+          "m02319_s5",
+          "m02301_s5",
+          "m02355_s5",
+          "m02283_s5",
+          "m02265_s5"
+        ]
+      },
+      {
+        "normal_load_factor": 0.5,
+        "bus_scenario": "support_and_sheet_only",
+        "eligible_count": 820,
+        "pareto_count": 23,
+        "dominated_count": 797,
+        "pareto_ids": [
+          "m01492_s5",
+          "m01564_s5",
+          "m02050_s5",
+          "m01978_s5",
+          "m02122_s5",
+          "m02032_s5",
+          "m01960_s5",
+          "m02518_s5",
+          "m02590_s5",
+          "m02428_s5",
+          "m02500_s5",
+          "m02572_s5",
+          "m02410_s5",
+          "m02482_s5",
+          "m02392_s5",
+          "m02338_s5",
+          "m02464_s5",
+          "m02374_s5",
+          "m02320_s5",
+          "m02302_s5",
+          "m02356_s5",
+          "m02284_s5",
+          "m02266_s5"
+        ]
+      },
+      {
+        "normal_load_factor": 0.5,
+        "bus_scenario": "fixed_inherited_equipment",
+        "eligible_count": 820,
+        "pareto_count": 23,
+        "dominated_count": 797,
+        "pareto_ids": [
+          "m01492_s5",
+          "m01564_s5",
+          "m02050_s5",
+          "m01978_s5",
+          "m02122_s5",
+          "m02032_s5",
+          "m01960_s5",
+          "m02518_s5",
+          "m02590_s5",
+          "m02428_s5",
+          "m02500_s5",
+          "m02572_s5",
+          "m02410_s5",
+          "m02482_s5",
+          "m02392_s5",
+          "m02338_s5",
+          "m02464_s5",
+          "m02374_s5",
+          "m02320_s5",
+          "m02302_s5",
+          "m02356_s5",
+          "m02284_s5",
+          "m02266_s5"
+        ]
+      },
+      {
+        "normal_load_factor": 0.5,
+        "bus_scenario": "area_scaled_equipment_hypothesis",
+        "eligible_count": 820,
+        "pareto_count": 23,
+        "dominated_count": 797,
+        "pareto_ids": [
+          "m01492_s5",
+          "m01564_s5",
+          "m02050_s5",
+          "m01978_s5",
+          "m02122_s5",
+          "m02032_s5",
+          "m01960_s5",
+          "m02518_s5",
+          "m02590_s5",
+          "m02428_s5",
+          "m02500_s5",
+          "m02572_s5",
+          "m02410_s5",
+          "m02482_s5",
+          "m02392_s5",
+          "m02338_s5",
+          "m02464_s5",
+          "m02374_s5",
+          "m02320_s5",
+          "m02302_s5",
+          "m02356_s5",
+          "m02284_s5",
+          "m02266_s5"
+        ]
+      },
+      {
+        "normal_load_factor": 1.0,
+        "bus_scenario": "support_and_sheet_only",
+        "eligible_count": 720,
+        "pareto_count": 23,
+        "dominated_count": 697,
+        "pareto_ids": [
+          "m01493_s5",
+          "m01565_s5",
+          "m02051_s5",
+          "m01979_s5",
+          "m02123_s5",
+          "m01961_s5",
+          "m02033_s5",
+          "m02519_s5",
+          "m02591_s5",
+          "m02429_s5",
+          "m02501_s5",
+          "m02573_s5",
+          "m02411_s5",
+          "m02483_s5",
+          "m02393_s5",
+          "m02339_s5",
+          "m02465_s5",
+          "m02375_s5",
+          "m02321_s5",
+          "m02303_s5",
+          "m02357_s5",
+          "m02285_s5",
+          "m02267_s5"
+        ]
+      },
+      {
+        "normal_load_factor": 1.0,
+        "bus_scenario": "fixed_inherited_equipment",
+        "eligible_count": 720,
+        "pareto_count": 23,
+        "dominated_count": 697,
+        "pareto_ids": [
+          "m01493_s5",
+          "m01565_s5",
+          "m02051_s5",
+          "m01979_s5",
+          "m02123_s5",
+          "m01961_s5",
+          "m02033_s5",
+          "m02519_s5",
+          "m02591_s5",
+          "m02429_s5",
+          "m02501_s5",
+          "m02573_s5",
+          "m02411_s5",
+          "m02483_s5",
+          "m02393_s5",
+          "m02339_s5",
+          "m02465_s5",
+          "m02375_s5",
+          "m02321_s5",
+          "m02303_s5",
+          "m02357_s5",
+          "m02285_s5",
+          "m02267_s5"
+        ]
+      },
+      {
+        "normal_load_factor": 1.0,
+        "bus_scenario": "area_scaled_equipment_hypothesis",
+        "eligible_count": 720,
+        "pareto_count": 23,
+        "dominated_count": 697,
+        "pareto_ids": [
+          "m01493_s5",
+          "m01565_s5",
+          "m02051_s5",
+          "m01979_s5",
+          "m02123_s5",
+          "m01961_s5",
+          "m02033_s5",
+          "m02519_s5",
+          "m02591_s5",
+          "m02429_s5",
+          "m02501_s5",
+          "m02573_s5",
+          "m02411_s5",
+          "m02483_s5",
+          "m02393_s5",
+          "m02339_s5",
+          "m02465_s5",
+          "m02375_s5",
+          "m02321_s5",
+          "m02303_s5",
+          "m02357_s5",
+          "m02285_s5",
+          "m02267_s5"
+        ]
+      }
+    ],
+    "representatives": [
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00027_s1",
+          "mechanical_id": "m00027",
+          "side_m": 1000.0,
+          "retreat_fraction": 0.005,
+          "depth_fraction": 0.005,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.1,
+          "pitch_m": [
+            850.0,
+            928.6456000000001
+          ],
+          "projected_protected_rectangle_m": [
+            890.0,
+            989.0
+          ],
+          "physical_protected_rectangle_m": [
+            890.3050853168725,
+            989.0
+          ],
+          "protected_core_side_m": 990.0,
+          "reference_gross_area_per_unit_m2": 1000000.0000000001,
+          "equivalent_population": 2823309399.9999995,
+          "inventory_multiplier": 99.99999999999999,
+          "support_and_sheet_subtotal_kg": 17700.876164797693,
+          "subtotal_kg_per_reference_gross_m2": 0.01770087616479769,
+          "nominal_parallel_envelope_clearance_m": 5.850286437712828,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.016361409199023257,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02270087616479769,
+              "fleet_bus_inventory_kg": 14116546999999.998,
+              "fleet_housekeeping_W": 28233093999999.996,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 50.00000000000001,
+              "assumed_housekeeping_per_unit_W": 100.00000000000001,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.01775087616479769,
+              "fleet_bus_inventory_kg": 141165470000.0,
+              "fleet_housekeeping_W": 282330940000.0,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00111_s1",
+          "mechanical_id": "m00111",
+          "side_m": 1000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.09605662285136501,
+          "pitch_m": [
+            816.4812942366026,
+            892.0256016177958
+          ],
+          "projected_protected_rectangle_m": [
+            854.9039433771486,
+            950.0
+          ],
+          "physical_protected_rectangle_m": [
+            855.1969980293517,
+            950.0
+          ],
+          "protected_core_side_m": 950.0,
+          "reference_gross_area_per_unit_m2": 922687.479360938,
+          "equivalent_population": 3059876136.994349,
+          "inventory_multiplier": 108.37905817174516,
+          "support_and_sheet_subtotal_kg": 16669.179843429913,
+          "subtotal_kg_per_reference_gross_m2": 0.018065900119263723,
+          "nominal_parallel_envelope_clearance_m": 4.972888633576915,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.017294854714327745,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.023484853027850982,
+              "fleet_bus_inventory_kg": 15299380684971.744,
+              "fleet_housekeeping_W": 30598761369943.49,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 50.00000000000001,
+              "assumed_housekeeping_per_unit_W": 100.00000000000001,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.018120089648349595,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00105_s1",
+          "mechanical_id": "m00105",
+          "side_m": 1000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.003,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.09605662285136501,
+          "pitch_m": [
+            816.4812942366026,
+            892.0256016177958
+          ],
+          "projected_protected_rectangle_m": [
+            854.9039433771486,
+            950.0
+          ],
+          "physical_protected_rectangle_m": [
+            855.1969980293517,
+            950.0
+          ],
+          "protected_core_side_m": 950.0,
+          "reference_gross_area_per_unit_m2": 922687.479360938,
+          "equivalent_population": 3059876136.994349,
+          "inventory_multiplier": 108.37905817174516,
+          "support_and_sheet_subtotal_kg": 15700.153070913388,
+          "subtotal_kg_per_reference_gross_m2": 0.017015678029778252,
+          "nominal_parallel_envelope_clearance_m": 6.9728886335769165,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.010831796804045926,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02243463093836551,
+              "fleet_bus_inventory_kg": 15299380684971.744,
+              "fleet_housekeeping_W": 30598761369943.49,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 50.00000000000001,
+              "assumed_housekeeping_per_unit_W": 100.00000000000001,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.017069867558864124,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00567_s1",
+          "mechanical_id": "m00567",
+          "side_m": 2000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.19211324570273003,
+          "pitch_m": [
+            1632.9625884732052,
+            1784.0512032355916
+          ],
+          "projected_protected_rectangle_m": [
+            1709.8078867542972,
+            1900.0
+          ],
+          "physical_protected_rectangle_m": [
+            1710.3939960587034,
+            1900.0
+          ],
+          "protected_core_side_m": 1900.0,
+          "reference_gross_area_per_unit_m2": 3690749.917443752,
+          "equivalent_population": 764969034.2485873,
+          "inventory_multiplier": 27.09476454293629,
+          "support_and_sheet_subtotal_kg": 67902.93419553938,
+          "subtotal_kg_per_reference_gross_m2": 0.01839814013802636,
+          "nominal_parallel_envelope_clearance_m": 19.945861763176865,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.017295449045231854,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.019752878365173174,
+              "fleet_bus_inventory_kg": 3824845171242.936,
+              "fleet_housekeeping_W": 7649690342485.872,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 200.00000000000003,
+              "assumed_housekeeping_per_unit_W": 400.00000000000006,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.018452329667112233,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00561_s1",
+          "mechanical_id": "m00561",
+          "side_m": 2000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.19211324570273003,
+          "pitch_m": [
+            1632.9625884732052,
+            1784.0512032355916
+          ],
+          "projected_protected_rectangle_m": [
+            1709.8078867542972,
+            1900.0
+          ],
+          "physical_protected_rectangle_m": [
+            1710.3939960587034,
+            1900.0
+          ],
+          "protected_core_side_m": 1900.0,
+          "reference_gross_area_per_unit_m2": 3690749.917443752,
+          "equivalent_population": 764969034.2485873,
+          "inventory_multiplier": 27.09476454293629,
+          "support_and_sheet_subtotal_kg": 71415.01460953805,
+          "subtotal_kg_per_reference_gross_m2": 0.019349730056757886,
+          "nominal_parallel_envelope_clearance_m": 19.945829137374453,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.01729550204049463,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.0207044682839047,
+              "fleet_bus_inventory_kg": 3824845171242.936,
+              "fleet_housekeeping_W": 7649690342485.872,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 200.00000000000003,
+              "assumed_housekeeping_per_unit_W": 400.00000000000006,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.019403919585843758,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00573_s1",
+          "mechanical_id": "m00573",
+          "side_m": 2000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.19211324570273003,
+          "pitch_m": [
+            1632.9625884732052,
+            1784.0512032355916
+          ],
+          "projected_protected_rectangle_m": [
+            1709.8078867542972,
+            1900.0
+          ],
+          "physical_protected_rectangle_m": [
+            1710.3939960587034,
+            1900.0
+          ],
+          "protected_core_side_m": 1900.0,
+          "reference_gross_area_per_unit_m2": 3690749.917443752,
+          "equivalent_population": 764969034.2485873,
+          "inventory_multiplier": 27.09476454293629,
+          "support_and_sheet_subtotal_kg": 67632.09419532887,
+          "subtotal_kg_per_reference_gross_m2": 0.01832475667768124,
+          "nominal_parallel_envelope_clearance_m": 19.945877267153833,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.01729542386156676,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.01967949490482805,
+              "fleet_bus_inventory_kg": 3824845171242.936,
+              "fleet_housekeeping_W": 7649690342485.872,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 200.00000000000003,
+              "assumed_housekeeping_per_unit_W": 400.00000000000006,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.01837894620676711,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m01035_s1",
+          "mechanical_id": "m01035",
+          "side_m": 3000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.28816986855409504,
+          "pitch_m": [
+            2449.443882709808,
+            2676.0768048533873
+          ],
+          "projected_protected_rectangle_m": [
+            2564.711830131446,
+            2850.0
+          ],
+          "physical_protected_rectangle_m": [
+            2565.590994088055,
+            2850.0
+          ],
+          "protected_core_side_m": 2850.0,
+          "reference_gross_area_per_unit_m2": 8304187.314248442,
+          "equivalent_population": 339986237.44381654,
+          "inventory_multiplier": 12.04211757463835,
+          "support_and_sheet_subtotal_kg": 164653.81743781018,
+          "subtotal_kg_per_reference_gross_m2": 0.019827806286991486,
+          "nominal_parallel_envelope_clearance_m": 27.418855113568974,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025471223546104108,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020429912165723405,
+              "fleet_bus_inventory_kg": 1699931187219.0828,
+              "fleet_housekeeping_W": 3399862374438.1655,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 450.0,
+              "assumed_housekeeping_per_unit_W": 900.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.019881995816077358,
+              "fleet_bus_inventory_kg": 152993806849.71744,
+              "fleet_housekeeping_W": 305987613699.4349,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m01029_s1",
+          "mechanical_id": "m01029",
+          "side_m": 3000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.28816986855409504,
+          "pitch_m": [
+            2449.443882709808,
+            2676.0768048533873
+          ],
+          "projected_protected_rectangle_m": [
+            2564.711830131446,
+            2850.0
+          ],
+          "physical_protected_rectangle_m": [
+            2565.590994088055,
+            2850.0
+          ],
+          "protected_core_side_m": 2850.0,
+          "reference_gross_area_per_unit_m2": 8304187.314248442,
+          "equivalent_population": 339986237.44381654,
+          "inventory_multiplier": 12.04211757463835,
+          "support_and_sheet_subtotal_kg": 172350.83074537385,
+          "subtotal_kg_per_reference_gross_m2": 0.02075468967922386,
+          "nominal_parallel_envelope_clearance_m": 27.41882409316368,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025471257580970075,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02135679555795578,
+              "fleet_bus_inventory_kg": 1699931187219.0828,
+              "fleet_housekeeping_W": 3399862374438.1655,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 450.0,
+              "assumed_housekeeping_per_unit_W": 900.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020808879208309733,
+              "fleet_bus_inventory_kg": 152993806849.71744,
+              "fleet_housekeeping_W": 305987613699.4349,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m01023_s1",
+          "mechanical_id": "m01023",
+          "side_m": 3000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.28816986855409504,
+          "pitch_m": [
+            2449.443882709808,
+            2676.0768048533873
+          ],
+          "projected_protected_rectangle_m": [
+            2564.711830131446,
+            2850.0
+          ],
+          "physical_protected_rectangle_m": [
+            2565.590994088055,
+            2850.0
+          ],
+          "protected_core_side_m": 2850.0,
+          "reference_gross_area_per_unit_m2": 8304187.314248442,
+          "equivalent_population": 339986237.44381654,
+          "inventory_multiplier": 12.04211757463835,
+          "support_and_sheet_subtotal_kg": 155991.26820800206,
+          "subtotal_kg_per_reference_gross_m2": 0.01878465192377706,
+          "nominal_parallel_envelope_clearance_m": 34.918849452911076,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.01729597797706118,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.01938675780250898,
+              "fleet_bus_inventory_kg": 1699931187219.0828,
+              "fleet_housekeeping_W": 3399862374438.1655,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 450.0,
+              "assumed_housekeeping_per_unit_W": 900.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.018838841452862933,
+              "fleet_bus_inventory_kg": 152993806849.71744,
+              "fleet_housekeeping_W": 305987613699.4349,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m01485_s5",
+          "mechanical_id": "m01485",
+          "side_m": 5000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.48028311425682507,
+          "pitch_m": [
+            4082.4064711830133,
+            4460.128008088979
+          ],
+          "projected_protected_rectangle_m": [
+            4274.519716885743,
+            4750.0
+          ],
+          "physical_protected_rectangle_m": [
+            4280.385836912245,
+            4750.0
+          ],
+          "protected_core_side_m": 4750.0,
+          "reference_gross_area_per_unit_m2": 23067186.984023448,
+          "equivalent_population": 122395045.47977397,
+          "inventory_multiplier": 4.335162326869806,
+          "support_and_sheet_subtotal_kg": 590334.8622152158,
+          "subtotal_kg_per_reference_gross_m2": 0.025591974549132816,
+          "nominal_parallel_envelope_clearance_m": 159.1563170145714,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025472319870641153,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.025808732665476307,
+              "fleet_bus_inventory_kg": 611975227398.8699,
+              "fleet_housekeeping_W": 1223950454797.7397,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 1250.0,
+              "assumed_housekeeping_per_unit_W": 2500.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.025646164078218688,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m01479_s5",
+          "mechanical_id": "m01479",
+          "side_m": 5000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.48028311425682507,
+          "pitch_m": [
+            4082.4064711830133,
+            4460.128008088979
+          ],
+          "projected_protected_rectangle_m": [
+            4274.519716885743,
+            4750.0
+          ],
+          "physical_protected_rectangle_m": [
+            4280.385836912245,
+            4750.0
+          ],
+          "protected_core_side_m": 4750.0,
+          "reference_gross_area_per_unit_m2": 23067186.984023448,
+          "equivalent_population": 122395045.47977397,
+          "inventory_multiplier": 4.335162326869806,
+          "support_and_sheet_subtotal_kg": 650993.8836329984,
+          "subtotal_kg_per_reference_gross_m2": 0.028221641593484413,
+          "nominal_parallel_envelope_clearance_m": 159.15622477496282,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025472380592541286,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.028438399709827904,
+              "fleet_bus_inventory_kg": 611975227398.8699,
+              "fleet_housekeeping_W": 1223950454797.7397,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 1250.0,
+              "assumed_housekeeping_per_unit_W": 2500.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.028275831122570285,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m01491_s5",
+          "mechanical_id": "m01491",
+          "side_m": 5000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.48028311425682507,
+          "pitch_m": [
+            4082.4064711830133,
+            4460.128008088979
+          ],
+          "projected_protected_rectangle_m": [
+            4274.519716885743,
+            4750.0
+          ],
+          "physical_protected_rectangle_m": [
+            4280.385836912245,
+            4750.0
+          ],
+          "protected_core_side_m": 4750.0,
+          "reference_gross_area_per_unit_m2": 23067186.984023448,
+          "equivalent_population": 122395045.47977397,
+          "inventory_multiplier": 4.335162326869806,
+          "support_and_sheet_subtotal_kg": 495307.11640613026,
+          "subtotal_kg_per_reference_gross_m2": 0.021472367512743736,
+          "nominal_parallel_envelope_clearance_m": 159.15649254875876,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.02547220431542499,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.021689125629087227,
+              "fleet_bus_inventory_kg": 611975227398.8699,
+              "fleet_housekeeping_W": 1223950454797.7397,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 1250.0,
+              "assumed_housekeeping_per_unit_W": 2500.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.021526557041829607,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02061_s5",
+          "mechanical_id": "m02061",
+          "side_m": 7500.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.6825075834175935,
+          "pitch_m": [
+            5801.314459049545,
+            6338.076643073812
+          ],
+          "projected_protected_rectangle_m": [
+            6074.317492416582,
+            6750.0
+          ],
+          "physical_protected_rectangle_m": [
+            6082.653557717402,
+            6750.0
+          ],
+          "protected_core_side_m": 6750.0,
+          "reference_gross_area_per_unit_m2": 46581660.14225234,
+          "equivalent_population": 60609892.20603347,
+          "inventory_multiplier": 2.1467676268861453,
+          "support_and_sheet_subtotal_kg": 1225418.506733498,
+          "subtotal_kg_per_reference_gross_m2": 0.026306887796426356,
+          "nominal_parallel_envelope_clearance_m": 170.61723095390127,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05455065068192609,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.026414226177770665,
+              "fleet_bus_inventory_kg": 303049461030.16736,
+              "fleet_housekeeping_W": 606098922060.3347,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 2812.5,
+              "assumed_housekeeping_per_unit_W": 5625.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02636726563593253,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02055_s5",
+          "mechanical_id": "m02055",
+          "side_m": 7500.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.6825075834175935,
+          "pitch_m": [
+            5801.314459049545,
+            6338.076643073812
+          ],
+          "projected_protected_rectangle_m": [
+            6074.317492416582,
+            6750.0
+          ],
+          "physical_protected_rectangle_m": [
+            6082.653557717402,
+            6750.0
+          ],
+          "protected_core_side_m": 6750.0,
+          "reference_gross_area_per_unit_m2": 46581660.14225234,
+          "equivalent_population": 60609892.20603347,
+          "inventory_multiplier": 2.1467676268861453,
+          "support_and_sheet_subtotal_kg": 1275745.5171216116,
+          "subtotal_kg_per_reference_gross_m2": 0.027387291763018004,
+          "nominal_parallel_envelope_clearance_m": 170.6172005104888,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.054550665636506505,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.027494630144362313,
+              "fleet_bus_inventory_kg": 303049461030.16736,
+              "fleet_housekeeping_W": 606098922060.3347,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 2812.5,
+              "assumed_housekeeping_per_unit_W": 5625.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.027447669602524177,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02049_s5",
+          "mechanical_id": "m02049",
+          "side_m": 7500.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.01,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.6825075834175935,
+          "pitch_m": [
+            5801.314459049545,
+            6338.076643073812
+          ],
+          "projected_protected_rectangle_m": [
+            6074.317492416582,
+            6750.0
+          ],
+          "physical_protected_rectangle_m": [
+            6082.653557717402,
+            6750.0
+          ],
+          "protected_core_side_m": 6750.0,
+          "reference_gross_area_per_unit_m2": 46581660.14225234,
+          "equivalent_population": 60609892.20603347,
+          "inventory_multiplier": 2.1467676268861453,
+          "support_and_sheet_subtotal_kg": 1098692.0654091146,
+          "subtotal_kg_per_reference_gross_m2": 0.023586365579369623,
+          "nominal_parallel_envelope_clearance_m": 208.11722539853403,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.03636053755930553,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.023693703960713932,
+              "fleet_bus_inventory_kg": 303049461030.16736,
+              "fleet_housekeeping_W": 606098922060.3347,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 2812.5,
+              "assumed_housekeeping_per_unit_W": 5625.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.023646743418875796,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02511_s5",
+          "mechanical_id": "m02511",
+          "side_m": 10000.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.910010111223458,
+          "pitch_m": [
+            7735.085945399393,
+            8450.768857431749
+          ],
+          "projected_protected_rectangle_m": [
+            8099.0899898887765,
+            9000.0
+          ],
+          "physical_protected_rectangle_m": [
+            8110.204743623202,
+            9000.0
+          ],
+          "protected_core_side_m": 9000.0,
+          "reference_gross_area_per_unit_m2": 82811840.25289303,
+          "equivalent_population": 34093064.36589383,
+          "inventory_multiplier": 1.207556790123457,
+          "support_and_sheet_subtotal_kg": 2423200.4639334613,
+          "subtotal_kg_per_reference_gross_m2": 0.029261521740531624,
+          "nominal_parallel_envelope_clearance_m": 230.8229115868701,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.054551445119263985,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.029321899580037798,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.029321899580037798,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02505_s5",
+          "mechanical_id": "m02505",
+          "side_m": 10000.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.910010111223458,
+          "pitch_m": [
+            7735.085945399393,
+            8450.768857431749
+          ],
+          "projected_protected_rectangle_m": [
+            8099.0899898887765,
+            9000.0
+          ],
+          "physical_protected_rectangle_m": [
+            8110.204743623202,
+            9000.0
+          ],
+          "protected_core_side_m": 9000.0,
+          "reference_gross_area_per_unit_m2": 82811840.25289303,
+          "equivalent_population": 34093064.36589383,
+          "inventory_multiplier": 1.207556790123457,
+          "support_and_sheet_subtotal_kg": 2583998.839659663,
+          "subtotal_kg_per_reference_gross_m2": 0.0312032534450216,
+          "nominal_parallel_envelope_clearance_m": 230.82285335052063,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05455146657464952,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03126363128452777,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03126363128452777,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02499_s5",
+          "mechanical_id": "m02499",
+          "side_m": 10000.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.01,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.25,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.910010111223458,
+          "pitch_m": [
+            7735.085945399393,
+            8450.768857431749
+          ],
+          "projected_protected_rectangle_m": [
+            8099.0899898887765,
+            9000.0
+          ],
+          "physical_protected_rectangle_m": [
+            8110.204743623202,
+            9000.0
+          ],
+          "protected_core_side_m": 9000.0,
+          "reference_gross_area_per_unit_m2": 82811840.25289303,
+          "equivalent_population": 34093064.36589383,
+          "inventory_multiplier": 1.207556790123457,
+          "support_and_sheet_subtotal_kg": 2222941.093586781,
+          "subtotal_kg_per_reference_gross_m2": 0.026843276116051806,
+          "nominal_parallel_envelope_clearance_m": 280.82290095979903,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.03636133257130383,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02690365395555798,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02690365395555798,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00028_s1",
+          "mechanical_id": "m00028",
+          "side_m": 1000.0,
+          "retreat_fraction": 0.005,
+          "depth_fraction": 0.005,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.1,
+          "pitch_m": [
+            850.0,
+            928.6456000000001
+          ],
+          "projected_protected_rectangle_m": [
+            890.0,
+            989.0
+          ],
+          "physical_protected_rectangle_m": [
+            890.3050853168725,
+            989.0
+          ],
+          "protected_core_side_m": 990.0,
+          "reference_gross_area_per_unit_m2": 1000000.0000000001,
+          "equivalent_population": 2823309399.9999995,
+          "inventory_multiplier": 99.99999999999999,
+          "support_and_sheet_subtotal_kg": 17811.00542561128,
+          "subtotal_kg_per_reference_gross_m2": 0.01781100542561128,
+          "nominal_parallel_envelope_clearance_m": 5.850281903559964,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.016361488862599853,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.022811005425611278,
+              "fleet_bus_inventory_kg": 14116546999999.998,
+              "fleet_housekeeping_W": 28233093999999.996,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 50.00000000000001,
+              "assumed_housekeeping_per_unit_W": 100.00000000000001,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.01786100542561128,
+              "fleet_bus_inventory_kg": 141165470000.0,
+              "fleet_housekeeping_W": 282330940000.0,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00112_s1",
+          "mechanical_id": "m00112",
+          "side_m": 1000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.09605662285136501,
+          "pitch_m": [
+            816.4812942366026,
+            892.0256016177958
+          ],
+          "projected_protected_rectangle_m": [
+            854.9039433771486,
+            950.0
+          ],
+          "physical_protected_rectangle_m": [
+            855.1969980293517,
+            950.0
+          ],
+          "protected_core_side_m": 950.0,
+          "reference_gross_area_per_unit_m2": 922687.479360938,
+          "equivalent_population": 3059876136.994349,
+          "inventory_multiplier": 108.37905817174516,
+          "support_and_sheet_subtotal_kg": 16669.22431802476,
+          "subtotal_kg_per_reference_gross_m2": 0.018065948320410745,
+          "nominal_parallel_envelope_clearance_m": 4.972888633576915,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.01729488587767562,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.023484901228998004,
+              "fleet_bus_inventory_kg": 15299380684971.744,
+              "fleet_housekeeping_W": 30598761369943.49,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 50.00000000000001,
+              "assumed_housekeeping_per_unit_W": 100.00000000000001,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.018120137849496617,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00106_s1",
+          "mechanical_id": "m00106",
+          "side_m": 1000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.003,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.09605662285136501,
+          "pitch_m": [
+            816.4812942366026,
+            892.0256016177958
+          ],
+          "projected_protected_rectangle_m": [
+            854.9039433771486,
+            950.0
+          ],
+          "physical_protected_rectangle_m": [
+            855.1969980293517,
+            950.0
+          ],
+          "protected_core_side_m": 950.0,
+          "reference_gross_area_per_unit_m2": 922687.479360938,
+          "equivalent_population": 3059876136.994349,
+          "inventory_multiplier": 108.37905817174516,
+          "support_and_sheet_subtotal_kg": 15700.204135469834,
+          "subtotal_kg_per_reference_gross_m2": 0.01701573337306359,
+          "nominal_parallel_envelope_clearance_m": 6.9728886335769165,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.010831827967393801,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.022434686281650847,
+              "fleet_bus_inventory_kg": 15299380684971.744,
+              "fleet_housekeeping_W": 30598761369943.49,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 50.00000000000001,
+              "assumed_housekeeping_per_unit_W": 100.00000000000001,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.01706992290214946,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00568_s1",
+          "mechanical_id": "m00568",
+          "side_m": 2000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.19211324570273003,
+          "pitch_m": [
+            1632.9625884732052,
+            1784.0512032355916
+          ],
+          "projected_protected_rectangle_m": [
+            1709.8078867542972,
+            1900.0
+          ],
+          "physical_protected_rectangle_m": [
+            1710.3939960587034,
+            1900.0
+          ],
+          "protected_core_side_m": 1900.0,
+          "reference_gross_area_per_unit_m2": 3690749.917443752,
+          "equivalent_population": 764969034.2485873,
+          "inventory_multiplier": 27.09476454293629,
+          "support_and_sheet_subtotal_kg": 68855.71735968259,
+          "subtotal_kg_per_reference_gross_m2": 0.018656294492955704,
+          "nominal_parallel_envelope_clearance_m": 19.945851955280506,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.01729555076867012,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020011032720102517,
+              "fleet_bus_inventory_kg": 3824845171242.936,
+              "fleet_housekeeping_W": 7649690342485.872,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 200.00000000000003,
+              "assumed_housekeeping_per_unit_W": 400.00000000000006,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.018710484022041576,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00580_s1",
+          "mechanical_id": "m00580",
+          "side_m": 2000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.19211324570273003,
+          "pitch_m": [
+            1632.9625884732052,
+            1784.0512032355916
+          ],
+          "projected_protected_rectangle_m": [
+            1709.8078867542972,
+            1900.0
+          ],
+          "physical_protected_rectangle_m": [
+            1710.3939960587034,
+            1900.0
+          ],
+          "protected_core_side_m": 1900.0,
+          "reference_gross_area_per_unit_m2": 3690749.917443752,
+          "equivalent_population": 764969034.2485873,
+          "inventory_multiplier": 27.09476454293629,
+          "support_and_sheet_subtotal_kg": 72477.95640932157,
+          "subtotal_kg_per_reference_gross_m2": 0.01963773163463768,
+          "nominal_parallel_envelope_clearance_m": 14.945877267153833,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025470761912805884,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020992469861784494,
+              "fleet_bus_inventory_kg": 3824845171242.936,
+              "fleet_housekeeping_W": 7649690342485.872,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 200.00000000000003,
+              "assumed_housekeeping_per_unit_W": 400.00000000000006,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.019691921163723553,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00574_s1",
+          "mechanical_id": "m00574",
+          "side_m": 2000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.19211324570273003,
+          "pitch_m": [
+            1632.9625884732052,
+            1784.0512032355916
+          ],
+          "projected_protected_rectangle_m": [
+            1709.8078867542972,
+            1900.0
+          ],
+          "physical_protected_rectangle_m": [
+            1710.3939960587034,
+            1900.0
+          ],
+          "protected_core_side_m": 1900.0,
+          "reference_gross_area_per_unit_m2": 3690749.917443752,
+          "equivalent_population": 764969034.2485873,
+          "inventory_multiplier": 27.09476454293629,
+          "support_and_sheet_subtotal_kg": 67633.09999201502,
+          "subtotal_kg_per_reference_gross_m2": 0.01832502919592513,
+          "nominal_parallel_envelope_clearance_m": 19.945877267153833,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.017295509653687154,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.019679767423071943,
+              "fleet_bus_inventory_kg": 3824845171242.936,
+              "fleet_housekeeping_W": 7649690342485.872,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 200.00000000000003,
+              "assumed_housekeeping_per_unit_W": 400.00000000000006,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.018379218725011002,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m01036_s1",
+          "mechanical_id": "m01036",
+          "side_m": 3000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.28816986855409504,
+          "pitch_m": [
+            2449.443882709808,
+            2676.0768048533873
+          ],
+          "projected_protected_rectangle_m": [
+            2564.711830131446,
+            2850.0
+          ],
+          "physical_protected_rectangle_m": [
+            2565.590994088055,
+            2850.0
+          ],
+          "protected_core_side_m": 2850.0,
+          "reference_gross_area_per_unit_m2": 8304187.314248442,
+          "equivalent_population": 339986237.44381654,
+          "inventory_multiplier": 12.04211757463835,
+          "support_and_sheet_subtotal_kg": 167217.4659520756,
+          "subtotal_kg_per_reference_gross_m2": 0.020136523855279795,
+          "nominal_parallel_envelope_clearance_m": 27.41884340363795,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.02547139002211214,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020738629734011714,
+              "fleet_bus_inventory_kg": 1699931187219.0828,
+              "fleet_housekeeping_W": 3399862374438.1655,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 450.0,
+              "assumed_housekeeping_per_unit_W": 900.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020190713384365667,
+              "fleet_bus_inventory_kg": 152993806849.71744,
+              "fleet_housekeeping_W": 305987613699.4349,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m01030_s1",
+          "mechanical_id": "m01030",
+          "side_m": 3000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.28816986855409504,
+          "pitch_m": [
+            2449.443882709808,
+            2676.0768048533873
+          ],
+          "projected_protected_rectangle_m": [
+            2564.711830131446,
+            2850.0
+          ],
+          "physical_protected_rectangle_m": [
+            2565.590994088055,
+            2850.0
+          ],
+          "protected_core_side_m": 2850.0,
+          "reference_gross_area_per_unit_m2": 8304187.314248442,
+          "equivalent_population": 339986237.44381654,
+          "inventory_multiplier": 12.04211757463835,
+          "support_and_sheet_subtotal_kg": 175671.8025335871,
+          "subtotal_kg_per_reference_gross_m2": 0.02115460500658107,
+          "nominal_parallel_envelope_clearance_m": 27.418809104451967,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.02547142765438076,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.021756710885312988,
+              "fleet_bus_inventory_kg": 1699931187219.0828,
+              "fleet_housekeeping_W": 3399862374438.1655,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 450.0,
+              "assumed_housekeeping_per_unit_W": 900.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02120879453566694,
+              "fleet_bus_inventory_kg": 152993806849.71744,
+              "fleet_housekeeping_W": 305987613699.4349,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m01024_s1",
+          "mechanical_id": "m01024",
+          "side_m": 3000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.28816986855409504,
+          "pitch_m": [
+            2449.443882709808,
+            2676.0768048533873
+          ],
+          "projected_protected_rectangle_m": [
+            2564.711830131446,
+            2850.0
+          ],
+          "physical_protected_rectangle_m": [
+            2565.590994088055,
+            2850.0
+          ],
+          "protected_core_side_m": 2850.0,
+          "reference_gross_area_per_unit_m2": 8304187.314248442,
+          "equivalent_population": 339986237.44381654,
+          "inventory_multiplier": 12.04211757463835,
+          "support_and_sheet_subtotal_kg": 158831.42783522233,
+          "subtotal_kg_per_reference_gross_m2": 0.019126667285394337,
+          "nominal_parallel_envelope_clearance_m": 34.918837144662405,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.017296144933691124,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.019728773164126256,
+              "fleet_bus_inventory_kg": 1699931187219.0828,
+              "fleet_housekeeping_W": 3399862374438.1655,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 450.0,
+              "assumed_housekeeping_per_unit_W": 900.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.01918085681448021,
+              "fleet_bus_inventory_kg": 152993806849.71744,
+              "fleet_housekeeping_W": 305987613699.4349,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m01486_s5",
+          "mechanical_id": "m01486",
+          "side_m": 5000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.48028311425682507,
+          "pitch_m": [
+            4082.4064711830133,
+            4460.128008088979
+          ],
+          "projected_protected_rectangle_m": [
+            4274.519716885743,
+            4750.0
+          ],
+          "physical_protected_rectangle_m": [
+            4280.385836912245,
+            4750.0
+          ],
+          "protected_core_side_m": 4750.0,
+          "reference_gross_area_per_unit_m2": 23067186.984023448,
+          "equivalent_population": 122395045.47977397,
+          "inventory_multiplier": 4.335162326869806,
+          "support_and_sheet_subtotal_kg": 623303.5931085467,
+          "subtotal_kg_per_reference_gross_m2": 0.027021222550467582,
+          "nominal_parallel_envelope_clearance_m": 159.1562628019278,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025472670803834804,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.027237980666811074,
+              "fleet_bus_inventory_kg": 611975227398.8699,
+              "fleet_housekeeping_W": 1223950454797.7397,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 1250.0,
+              "assumed_housekeeping_per_unit_W": 2500.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.027075412079553454,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m01480_s5",
+          "mechanical_id": "m01480",
+          "side_m": 5000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.48028311425682507,
+          "pitch_m": [
+            4082.4064711830133,
+            4460.128008088979
+          ],
+          "projected_protected_rectangle_m": [
+            4274.519716885743,
+            4750.0
+          ],
+          "physical_protected_rectangle_m": [
+            4280.385836912245,
+            4750.0
+          ],
+          "protected_core_side_m": 4750.0,
+          "reference_gross_area_per_unit_m2": 23067186.984023448,
+          "equivalent_population": 122395045.47977397,
+          "inventory_multiplier": 4.335162326869806,
+          "support_and_sheet_subtotal_kg": 693701.8541604319,
+          "subtotal_kg_per_reference_gross_m2": 0.03007310144236037,
+          "nominal_parallel_envelope_clearance_m": 159.156155382779,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025472741518523932,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03028985955870386,
+              "fleet_bus_inventory_kg": 611975227398.8699,
+              "fleet_housekeeping_W": 1223950454797.7397,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 1250.0,
+              "assumed_housekeeping_per_unit_W": 2500.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03012729097144624,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m01492_s5",
+          "mechanical_id": "m01492",
+          "side_m": 5000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.48028311425682507,
+          "pitch_m": [
+            4082.4064711830133,
+            4460.128008088979
+          ],
+          "projected_protected_rectangle_m": [
+            4274.519716885743,
+            4750.0
+          ],
+          "physical_protected_rectangle_m": [
+            4280.385836912245,
+            4750.0
+          ],
+          "protected_core_side_m": 4750.0,
+          "reference_gross_area_per_unit_m2": 23067186.984023448,
+          "equivalent_population": 122395045.47977397,
+          "inventory_multiplier": 4.335162326869806,
+          "support_and_sheet_subtotal_kg": 511591.7259498561,
+          "subtotal_kg_per_reference_gross_m2": 0.022178331770761183,
+          "nominal_parallel_envelope_clearance_m": 159.1564672231442,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025472536232107282,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.022395089887104674,
+              "fleet_bus_inventory_kg": 611975227398.8699,
+              "fleet_housekeeping_W": 1223950454797.7397,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 1250.0,
+              "assumed_housekeeping_per_unit_W": 2500.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.022232521299847055,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02062_s5",
+          "mechanical_id": "m02062",
+          "side_m": 7500.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.6825075834175935,
+          "pitch_m": [
+            5801.314459049545,
+            6338.076643073812
+          ],
+          "projected_protected_rectangle_m": [
+            6074.317492416582,
+            6750.0
+          ],
+          "physical_protected_rectangle_m": [
+            6082.653557717402,
+            6750.0
+          ],
+          "protected_core_side_m": 6750.0,
+          "reference_gross_area_per_unit_m2": 46581660.14225234,
+          "equivalent_population": 60609892.20603347,
+          "inventory_multiplier": 2.1467676268861453,
+          "support_and_sheet_subtotal_kg": 1259803.5077979518,
+          "subtotal_kg_per_reference_gross_m2": 0.027045053867782505,
+          "nominal_parallel_envelope_clearance_m": 170.61720615532155,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05455108470961308,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.027152392249126814,
+              "fleet_bus_inventory_kg": 303049461030.16736,
+              "fleet_housekeeping_W": 606098922060.3347,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 2812.5,
+              "assumed_housekeeping_per_unit_W": 5625.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02710543170728868,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02056_s5",
+          "mechanical_id": "m02056",
+          "side_m": 7500.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.6825075834175935,
+          "pitch_m": [
+            5801.314459049545,
+            6338.076643073812
+          ],
+          "projected_protected_rectangle_m": [
+            6074.317492416582,
+            6750.0
+          ],
+          "physical_protected_rectangle_m": [
+            6082.653557717402,
+            6750.0
+          ],
+          "protected_core_side_m": 6750.0,
+          "reference_gross_area_per_unit_m2": 46581660.14225234,
+          "equivalent_population": 60609892.20603347,
+          "inventory_multiplier": 2.1467676268861453,
+          "support_and_sheet_subtotal_kg": 1320154.3504931317,
+          "subtotal_kg_per_reference_gross_m2": 0.02834064622131561,
+          "nominal_parallel_envelope_clearance_m": 170.61716876830675,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.054551103075068344,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.028447984602659918,
+              "fleet_bus_inventory_kg": 303049461030.16736,
+              "fleet_housekeeping_W": 606098922060.3347,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 2812.5,
+              "assumed_housekeeping_per_unit_W": 5625.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.028401024060821782,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02050_s5",
+          "mechanical_id": "m02050",
+          "side_m": 7500.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.01,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.6825075834175935,
+          "pitch_m": [
+            5801.314459049545,
+            6338.076643073812
+          ],
+          "projected_protected_rectangle_m": [
+            6074.317492416582,
+            6750.0
+          ],
+          "physical_protected_rectangle_m": [
+            6082.653557717402,
+            6750.0
+          ],
+          "protected_core_side_m": 6750.0,
+          "reference_gross_area_per_unit_m2": 46581660.14225234,
+          "equivalent_population": 60609892.20603347,
+          "inventory_multiplier": 2.1467676268861453,
+          "support_and_sheet_subtotal_kg": 1136594.8562079798,
+          "subtotal_kg_per_reference_gross_m2": 0.024400050421926046,
+          "nominal_parallel_envelope_clearance_m": 208.1171993328736,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.0363609718885082,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.024507388803270354,
+              "fleet_bus_inventory_kg": 303049461030.16736,
+              "fleet_housekeeping_W": 606098922060.3347,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 2812.5,
+              "assumed_housekeeping_per_unit_W": 5625.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02446042826143222,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02512_s5",
+          "mechanical_id": "m02512",
+          "side_m": 10000.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.910010111223458,
+          "pitch_m": [
+            7735.085945399393,
+            8450.768857431749
+          ],
+          "projected_protected_rectangle_m": [
+            8099.0899898887765,
+            9000.0
+          ],
+          "physical_protected_rectangle_m": [
+            8110.204743623202,
+            9000.0
+          ],
+          "protected_core_side_m": 9000.0,
+          "reference_gross_area_per_unit_m2": 82811840.25289303,
+          "equivalent_population": 34093064.36589383,
+          "inventory_multiplier": 1.207556790123457,
+          "support_and_sheet_subtotal_kg": 2568098.575414945,
+          "subtotal_kg_per_reference_gross_m2": 0.031011248724486937,
+          "nominal_parallel_envelope_clearance_m": 230.8228528050515,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05455208573883184,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03107162656399311,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03107162656399311,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02596_s5",
+          "mechanical_id": "m02596",
+          "side_m": 10000.0,
+          "retreat_fraction": 0.075,
+          "depth_fraction": 0.015,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.8594539939332659,
+          "pitch_m": [
+            7305.35894843276,
+            7981.281698685541
+          ],
+          "projected_protected_rectangle_m": [
+            7649.140546006067,
+            8500.0
+          ],
+          "physical_protected_rectangle_m": [
+            7659.637813421914,
+            8500.0
+          ],
+          "protected_core_side_m": 8500.0,
+          "reference_gross_area_per_unit_m2": 73866116.76878424,
+          "equivalent_population": 38221982.195673354,
+          "inventory_multiplier": 1.3538006920415224,
+          "support_and_sheet_subtotal_kg": 2450719.7255552527,
+          "subtotal_kg_per_reference_gross_m2": 0.03317786060456511,
+          "nominal_parallel_envelope_clearance_m": 208.3327018830487,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05914526834070932,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03324555063916718,
+              "fleet_bus_inventory_kg": 191109910978.36676,
+              "fleet_housekeeping_W": 382219821956.7335,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03324555063916718,
+              "fleet_bus_inventory_kg": 191109910978.36676,
+              "fleet_housekeeping_W": 382219821956.7335,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02518_s5",
+          "mechanical_id": "m02518",
+          "side_m": 10000.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 0.5,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.910010111223458,
+          "pitch_m": [
+            7735.085945399393,
+            8450.768857431749
+          ],
+          "projected_protected_rectangle_m": [
+            8099.0899898887765,
+            9000.0
+          ],
+          "physical_protected_rectangle_m": [
+            8110.204743623202,
+            9000.0
+          ],
+          "protected_core_side_m": 9000.0,
+          "reference_gross_area_per_unit_m2": 82811840.25289303,
+          "equivalent_population": 34093064.36589383,
+          "inventory_multiplier": 1.207556790123457,
+          "support_and_sheet_subtotal_kg": 2288464.196899302,
+          "subtotal_kg_per_reference_gross_m2": 0.027634504799201758,
+          "nominal_parallel_envelope_clearance_m": 230.82299495192018,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05455203336920641,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02769488263870793,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02769488263870793,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00119_s1",
+          "mechanical_id": "m00119",
+          "side_m": 1000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.09605662285136501,
+          "pitch_m": [
+            816.4812942366026,
+            892.0256016177958
+          ],
+          "projected_protected_rectangle_m": [
+            854.9039433771486,
+            950.0
+          ],
+          "physical_protected_rectangle_m": [
+            855.1969980293517,
+            950.0
+          ],
+          "protected_core_side_m": 950.0,
+          "reference_gross_area_per_unit_m2": 922687.479360938,
+          "equivalent_population": 3059876136.994349,
+          "inventory_multiplier": 108.37905817174516,
+          "support_and_sheet_subtotal_kg": 16597.5872047144,
+          "subtotal_kg_per_reference_gross_m2": 0.01798830869170355,
+          "nominal_parallel_envelope_clearance_m": 4.972888633576915,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.017294946541865724,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02340726160029081,
+              "fleet_bus_inventory_kg": 15299380684971.744,
+              "fleet_housekeeping_W": 30598761369943.49,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 50.00000000000001,
+              "assumed_housekeeping_per_unit_W": 100.00000000000001,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.018042498220789422,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00113_s1",
+          "mechanical_id": "m00113",
+          "side_m": 1000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.09605662285136501,
+          "pitch_m": [
+            816.4812942366026,
+            892.0256016177958
+          ],
+          "projected_protected_rectangle_m": [
+            854.9039433771486,
+            950.0
+          ],
+          "physical_protected_rectangle_m": [
+            855.1969980293517,
+            950.0
+          ],
+          "protected_core_side_m": 950.0,
+          "reference_gross_area_per_unit_m2": 922687.479360938,
+          "equivalent_population": 3059876136.994349,
+          "inventory_multiplier": 108.37905817174516,
+          "support_and_sheet_subtotal_kg": 16669.313267355865,
+          "subtotal_kg_per_reference_gross_m2": 0.018066044722858044,
+          "nominal_parallel_envelope_clearance_m": 4.972888633576915,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.017294946541865724,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.023484997631445303,
+              "fleet_bus_inventory_kg": 15299380684971.744,
+              "fleet_housekeeping_W": 30598761369943.49,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 50.00000000000001,
+              "assumed_housekeeping_per_unit_W": 100.00000000000001,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.018120234251943916,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00107_s1",
+          "mechanical_id": "m00107",
+          "side_m": 1000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.003,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.09605662285136501,
+          "pitch_m": [
+            816.4812942366026,
+            892.0256016177958
+          ],
+          "projected_protected_rectangle_m": [
+            854.9039433771486,
+            950.0
+          ],
+          "physical_protected_rectangle_m": [
+            855.1969980293517,
+            950.0
+          ],
+          "protected_core_side_m": 950.0,
+          "reference_gross_area_per_unit_m2": 922687.479360938,
+          "equivalent_population": 3059876136.994349,
+          "inventory_multiplier": 108.37905817174516,
+          "support_and_sheet_subtotal_kg": 15700.3062648066,
+          "subtotal_kg_per_reference_gross_m2": 0.017015844059876894,
+          "nominal_parallel_envelope_clearance_m": 6.9728886335769165,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.010831888631583905,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.022434796968464153,
+              "fleet_bus_inventory_kg": 15299380684971.744,
+              "fleet_housekeeping_W": 30598761369943.49,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 50.00000000000001,
+              "assumed_housekeeping_per_unit_W": 100.00000000000001,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.017070033588962766,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00569_s1",
+          "mechanical_id": "m00569",
+          "side_m": 2000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.19211324570273003,
+          "pitch_m": [
+            1632.9625884732052,
+            1784.0512032355916
+          ],
+          "projected_protected_rectangle_m": [
+            1709.8078867542972,
+            1900.0
+          ],
+          "physical_protected_rectangle_m": [
+            1710.3939960587034,
+            1900.0
+          ],
+          "protected_core_side_m": 1900.0,
+          "reference_gross_area_per_unit_m2": 3690749.917443752,
+          "equivalent_population": 764969034.2485873,
+          "inventory_multiplier": 27.09476454293629,
+          "support_and_sheet_subtotal_kg": 70797.72061117504,
+          "subtotal_kg_per_reference_gross_m2": 0.019182475701363753,
+          "nominal_parallel_envelope_clearance_m": 19.945831964224226,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.01729574647561253,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020537213928510566,
+              "fleet_bus_inventory_kg": 3824845171242.936,
+              "fleet_housekeeping_W": 7649690342485.872,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 200.00000000000003,
+              "assumed_housekeeping_per_unit_W": 400.00000000000006,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.019236665230449625,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00581_s1",
+          "mechanical_id": "m00581",
+          "side_m": 2000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.19211324570273003,
+          "pitch_m": [
+            1632.9625884732052,
+            1784.0512032355916
+          ],
+          "projected_protected_rectangle_m": [
+            1709.8078867542972,
+            1900.0
+          ],
+          "physical_protected_rectangle_m": [
+            1710.3939960587034,
+            1900.0
+          ],
+          "protected_core_side_m": 1900.0,
+          "reference_gross_area_per_unit_m2": 3690749.917443752,
+          "equivalent_population": 764969034.2485873,
+          "inventory_multiplier": 27.09476454293629,
+          "support_and_sheet_subtotal_kg": 72480.16486923819,
+          "subtotal_kg_per_reference_gross_m2": 0.019638330011652112,
+          "nominal_parallel_envelope_clearance_m": 14.945877267153833,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025470925147557198,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020993068238798925,
+              "fleet_bus_inventory_kg": 3824845171242.936,
+              "fleet_housekeeping_W": 7649690342485.872,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 200.00000000000003,
+              "assumed_housekeeping_per_unit_W": 400.00000000000006,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.019692519540737984,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m00575_s1",
+          "mechanical_id": "m00575",
+          "side_m": 2000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.005,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.19211324570273003,
+          "pitch_m": [
+            1632.9625884732052,
+            1784.0512032355916
+          ],
+          "projected_protected_rectangle_m": [
+            1709.8078867542972,
+            1900.0
+          ],
+          "physical_protected_rectangle_m": [
+            1710.3939960587034,
+            1900.0
+          ],
+          "protected_core_side_m": 1900.0,
+          "reference_gross_area_per_unit_m2": 3690749.917443752,
+          "equivalent_population": 764969034.2485873,
+          "inventory_multiplier": 27.09476454293629,
+          "support_and_sheet_subtotal_kg": 67635.11159444653,
+          "subtotal_kg_per_reference_gross_m2": 0.018325574234867487,
+          "nominal_parallel_envelope_clearance_m": 19.945877267153833,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.01729567288843847,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.0196803124620143,
+              "fleet_bus_inventory_kg": 3824845171242.936,
+              "fleet_housekeeping_W": 7649690342485.872,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 200.00000000000003,
+              "assumed_housekeeping_per_unit_W": 400.00000000000006,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.01837976376395336,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m01037_s1",
+          "mechanical_id": "m01037",
+          "side_m": 3000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.28816986855409504,
+          "pitch_m": [
+            2449.443882709808,
+            2676.0768048533873
+          ],
+          "projected_protected_rectangle_m": [
+            2564.711830131446,
+            2850.0
+          ],
+          "physical_protected_rectangle_m": [
+            2565.590994088055,
+            2850.0
+          ],
+          "protected_core_side_m": 2850.0,
+          "reference_gross_area_per_unit_m2": 8304187.314248442,
+          "equivalent_population": 339986237.44381654,
+          "inventory_multiplier": 12.04211757463835,
+          "support_and_sheet_subtotal_kg": 172344.76298060644,
+          "subtotal_kg_per_reference_gross_m2": 0.020753958991856416,
+          "nominal_parallel_envelope_clearance_m": 27.418819983775904,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.0254717023457217,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.021356064870588335,
+              "fleet_bus_inventory_kg": 1699931187219.0828,
+              "fleet_housekeeping_W": 3399862374438.1655,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 450.0,
+              "assumed_housekeeping_per_unit_W": 900.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020808148520942288,
+              "fleet_bus_inventory_kg": 152993806849.71744,
+              "fleet_housekeeping_W": 305987613699.4349,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m01049_s1",
+          "mechanical_id": "m01049",
+          "side_m": 3000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.01,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.28816986855409504,
+          "pitch_m": [
+            2449.443882709808,
+            2676.0768048533873
+          ],
+          "projected_protected_rectangle_m": [
+            2564.711830131446,
+            2850.0
+          ],
+          "physical_protected_rectangle_m": [
+            2565.590994088055,
+            2850.0
+          ],
+          "protected_core_side_m": 2850.0,
+          "reference_gross_area_per_unit_m2": 8304187.314248442,
+          "equivalent_population": 339986237.44381654,
+          "inventory_multiplier": 12.04211757463835,
+          "support_and_sheet_subtotal_kg": 177286.3163707248,
+          "subtotal_kg_per_reference_gross_m2": 0.021349026661107995,
+          "nominal_parallel_envelope_clearance_m": 19.918860840523266,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.033754055818193796,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.021951132539839914,
+              "fleet_bus_inventory_kg": 1699931187219.0828,
+              "fleet_housekeeping_W": 3399862374438.1655,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 450.0,
+              "assumed_housekeeping_per_unit_W": 900.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.021403216190193867,
+              "fleet_bus_inventory_kg": 152993806849.71744,
+              "fleet_housekeeping_W": 305987613699.4349,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_failed_geometry_or_member_screen",
+        "record": {
+          "id": "m01115_s1",
+          "mechanical_id": "m01115",
+          "side_m": 3000.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.005,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 1.5,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.2730030333670374,
+          "pitch_m": [
+            2320.525783619818,
+            2535.2306572295247
+          ],
+          "projected_protected_rectangle_m": [
+            2429.726996966633,
+            2700.0
+          ],
+          "physical_protected_rectangle_m": [
+            2430.5598891360523,
+            2700.0
+          ],
+          "protected_core_side_m": 2700.0,
+          "reference_gross_area_per_unit_m2": 7453065.622760374,
+          "equivalent_population": 378811826.2877092,
+          "inventory_multiplier": 13.417297668038408,
+          "support_and_sheet_subtotal_kg": 146779.92794563615,
+          "subtotal_kg_per_reference_gross_m2": 0.019693899849398296,
+          "nominal_parallel_envelope_clearance_m": 31.54417637083557,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.018630903859961745,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.020364764732800217,
+              "fleet_bus_inventory_kg": 1894059131438.546,
+              "fleet_housekeeping_W": 3788118262877.092,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 450.0,
+              "assumed_housekeeping_per_unit_W": 900.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.01975427768890447,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": false,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": false
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m01487_s5",
+          "mechanical_id": "m01487",
+          "side_m": 5000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.48028311425682507,
+          "pitch_m": [
+            4082.4064711830133,
+            4460.128008088979
+          ],
+          "projected_protected_rectangle_m": [
+            4274.519716885743,
+            4750.0
+          ],
+          "physical_protected_rectangle_m": [
+            4280.385836912245,
+            4750.0
+          ],
+          "protected_core_side_m": 4750.0,
+          "reference_gross_area_per_unit_m2": 23067186.984023448,
+          "equivalent_population": 122395045.47977397,
+          "inventory_multiplier": 4.335162326869806,
+          "support_and_sheet_subtotal_kg": 689241.0548952085,
+          "subtotal_kg_per_reference_gross_m2": 0.02987971855313712,
+          "nominal_parallel_envelope_clearance_m": 159.15615437664056,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.02547331180268243,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03009647666948061,
+              "fleet_bus_inventory_kg": 611975227398.8699,
+              "fleet_housekeeping_W": 1223950454797.7397,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 1250.0,
+              "assumed_housekeeping_per_unit_W": 2500.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02993390808222299,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m01481_s5",
+          "mechanical_id": "m01481",
+          "side_m": 5000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.48028311425682507,
+          "pitch_m": [
+            4082.4064711830133,
+            4460.128008088979
+          ],
+          "projected_protected_rectangle_m": [
+            4274.519716885743,
+            4750.0
+          ],
+          "physical_protected_rectangle_m": [
+            4280.385836912245,
+            4750.0
+          ],
+          "protected_core_side_m": 4750.0,
+          "reference_gross_area_per_unit_m2": 23067186.984023448,
+          "equivalent_population": 122395045.47977397,
+          "inventory_multiplier": 4.335162326869806,
+          "support_and_sheet_subtotal_kg": 779117.7952152984,
+          "subtotal_kg_per_reference_gross_m2": 0.033776021140112265,
+          "nominal_parallel_envelope_clearance_m": 159.15601659841133,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.025473402502953393,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03399277925645575,
+              "fleet_bus_inventory_kg": 611975227398.8699,
+              "fleet_housekeeping_W": 1223950454797.7397,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 1250.0,
+              "assumed_housekeeping_per_unit_W": 2500.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03383021066919814,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m01493_s5",
+          "mechanical_id": "m01493",
+          "side_m": 5000.0,
+          "retreat_fraction": 0.025,
+          "depth_fraction": 0.0075,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.48028311425682507,
+          "pitch_m": [
+            4082.4064711830133,
+            4460.128008088979
+          ],
+          "projected_protected_rectangle_m": [
+            4274.519716885743,
+            4750.0
+          ],
+          "physical_protected_rectangle_m": [
+            4280.385836912245,
+            4750.0
+          ],
+          "protected_core_side_m": 4750.0,
+          "reference_gross_area_per_unit_m2": 23067186.984023448,
+          "equivalent_population": 122395045.47977397,
+          "inventory_multiplier": 4.335162326869806,
+          "support_and_sheet_subtotal_kg": 544160.9450373079,
+          "subtotal_kg_per_reference_gross_m2": 0.023590260286796085,
+          "nominal_parallel_envelope_clearance_m": 159.15641657191514,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.02547313919792744,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.023807018403139577,
+              "fleet_bus_inventory_kg": 611975227398.8699,
+              "fleet_housekeeping_W": 1223950454797.7397,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 1250.0,
+              "assumed_housekeeping_per_unit_W": 2500.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.023644449815881957,
+              "fleet_bus_inventory_kg": 152993806849.71747,
+              "fleet_housekeeping_W": 305987613699.43494,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02063_s5",
+          "mechanical_id": "m02063",
+          "side_m": 7500.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.6825075834175935,
+          "pitch_m": [
+            5801.314459049545,
+            6338.076643073812
+          ],
+          "projected_protected_rectangle_m": [
+            6074.317492416582,
+            6750.0
+          ],
+          "physical_protected_rectangle_m": [
+            6082.653557717402,
+            6750.0
+          ],
+          "protected_core_side_m": 6750.0,
+          "reference_gross_area_per_unit_m2": 46581660.14225234,
+          "equivalent_population": 60609892.20603347,
+          "inventory_multiplier": 2.1467676268861453,
+          "support_and_sheet_subtotal_kg": 1328573.5099268593,
+          "subtotal_kg_per_reference_gross_m2": 0.028521386010494802,
+          "nominal_parallel_envelope_clearance_m": 170.6171565581621,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.054551848341957795,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02862872439183911,
+              "fleet_bus_inventory_kg": 303049461030.16736,
+              "fleet_housekeeping_W": 606098922060.3347,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 2812.5,
+              "assumed_housekeeping_per_unit_W": 5625.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.028581763850000975,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02057_s5",
+          "mechanical_id": "m02057",
+          "side_m": 7500.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.6825075834175935,
+          "pitch_m": [
+            5801.314459049545,
+            6338.076643073812
+          ],
+          "projected_protected_rectangle_m": [
+            6074.317492416582,
+            6750.0
+          ],
+          "physical_protected_rectangle_m": [
+            6082.653557717402,
+            6750.0
+          ],
+          "protected_core_side_m": 6750.0,
+          "reference_gross_area_per_unit_m2": 46581660.14225234,
+          "equivalent_population": 60609892.20603347,
+          "inventory_multiplier": 2.1467676268861453,
+          "support_and_sheet_subtotal_kg": 1408972.0172361722,
+          "subtotal_kg_per_reference_gross_m2": 0.030247355137910825,
+          "nominal_parallel_envelope_clearance_m": 170.6171052839427,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05455187352916313,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.030354693519255134,
+              "fleet_bus_inventory_kg": 303049461030.16736,
+              "fleet_housekeeping_W": 606098922060.3347,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 2812.5,
+              "assumed_housekeeping_per_unit_W": 5625.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.030307732977417,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02051_s5",
+          "mechanical_id": "m02051",
+          "side_m": 7500.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.01,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.6825075834175935,
+          "pitch_m": [
+            5801.314459049545,
+            6338.076643073812
+          ],
+          "projected_protected_rectangle_m": [
+            6074.317492416582,
+            6750.0
+          ],
+          "physical_protected_rectangle_m": [
+            6082.653557717402,
+            6750.0
+          ],
+          "protected_core_side_m": 6750.0,
+          "reference_gross_area_per_unit_m2": 46581660.14225234,
+          "equivalent_population": 60609892.20603347,
+          "inventory_multiplier": 2.1467676268861453,
+          "support_and_sheet_subtotal_kg": 1212400.4378057097,
+          "subtotal_kg_per_reference_gross_m2": 0.02602742010703887,
+          "nominal_parallel_envelope_clearance_m": 208.1171472015527,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.036361736123884325,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.02613475848838318,
+              "fleet_bus_inventory_kg": 303049461030.16736,
+              "fleet_housekeeping_W": 606098922060.3347,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 2812.5,
+              "assumed_housekeeping_per_unit_W": 5625.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.026087797946545043,
+              "fleet_bus_inventory_kg": 170465321829.46912,
+              "fleet_housekeeping_W": 340930643658.93823,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02603_s5",
+          "mechanical_id": "m02603",
+          "side_m": 10000.0,
+          "retreat_fraction": 0.075,
+          "depth_fraction": 0.015,
+          "compression_material_id": "as4_8552_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.8594539939332659,
+          "pitch_m": [
+            7305.35894843276,
+            7981.281698685541
+          ],
+          "projected_protected_rectangle_m": [
+            7649.140546006067,
+            8500.0
+          ],
+          "physical_protected_rectangle_m": [
+            7659.637813421914,
+            8500.0
+          ],
+          "protected_core_side_m": 8500.0,
+          "reference_gross_area_per_unit_m2": 73866116.76878424,
+          "equivalent_population": 38221982.195673354,
+          "inventory_multiplier": 1.3538006920415224,
+          "support_and_sheet_subtotal_kg": 2509525.1224464364,
+          "subtotal_kg_per_reference_gross_m2": 0.03397396847463572,
+          "nominal_parallel_envelope_clearance_m": 208.3326712027386,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05914623198748179,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03404165850923779,
+              "fleet_bus_inventory_kg": 191109910978.36676,
+              "fleet_housekeeping_W": 382219821956.7335,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03404165850923779,
+              "fleet_bus_inventory_kg": 191109910978.36676,
+              "fleet_housekeeping_W": 382219821956.7335,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02597_s5",
+          "mechanical_id": "m02597",
+          "side_m": 10000.0,
+          "retreat_fraction": 0.075,
+          "depth_fraction": 0.015,
+          "compression_material_id": "generic_composite_baseline",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.8594539939332659,
+          "pitch_m": [
+            7305.35894843276,
+            7981.281698685541
+          ],
+          "projected_protected_rectangle_m": [
+            7649.140546006067,
+            8500.0
+          ],
+          "physical_protected_rectangle_m": [
+            7659.637813421914,
+            8500.0
+          ],
+          "protected_core_side_m": 8500.0,
+          "reference_gross_area_per_unit_m2": 73866116.76878424,
+          "equivalent_population": 38221982.195673354,
+          "inventory_multiplier": 1.3538006920415224,
+          "support_and_sheet_subtotal_kg": 2718522.909492389,
+          "subtotal_kg_per_reference_gross_m2": 0.03680338196201529,
+          "nominal_parallel_envelope_clearance_m": 208.33259418553638,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05914626275169958,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03687107199661736,
+              "fleet_bus_inventory_kg": 191109910978.36676,
+              "fleet_housekeeping_W": 382219821956.7335,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.03687107199661736,
+              "fleet_bus_inventory_kg": 191109910978.36676,
+              "fleet_housekeeping_W": 382219821956.7335,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      },
+      {
+        "selection": "least_component_mass_in_geometry_member_stratum",
+        "record": {
+          "id": "m02519_s5",
+          "mechanical_id": "m02519",
+          "side_m": 10000.0,
+          "retreat_fraction": 0.05,
+          "depth_fraction": 0.015,
+          "compression_material_id": "m55j_2500_ud",
+          "cable_material_id": "spectra1000_100",
+          "normal_load_factor": 1.0,
+          "shingle_deg": 3.0,
+          "pitch_factor": 1.0,
+          "converged": true,
+          "complete_spacecraft_budget": false,
+          "validated_design": false,
+          "lower_load_attitude_demonstrated": false,
+          "pitch_scale": 0.910010111223458,
+          "pitch_m": [
+            7735.085945399393,
+            8450.768857431749
+          ],
+          "projected_protected_rectangle_m": [
+            8099.0899898887765,
+            9000.0
+          ],
+          "physical_protected_rectangle_m": [
+            8110.204743623202,
+            9000.0
+          ],
+          "protected_core_side_m": 9000.0,
+          "reference_gross_area_per_unit_m2": 82811840.25289303,
+          "equivalent_population": 34093064.36589383,
+          "inventory_multiplier": 1.207556790123457,
+          "support_and_sheet_subtotal_kg": 2433538.0187249216,
+          "subtotal_kg_per_reference_gross_m2": 0.029386353585348635,
+          "nominal_parallel_envelope_clearance_m": 230.8229400316809,
+          "required_parallel_clearance_m": 150.0,
+          "support_shadow_fraction_upper_bound": 0.05455311300434885,
+          "bus_scenarios": {
+            "fixed_inherited_equipment": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.029446731424854808,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            },
+            "area_scaled_equipment_hypothesis": {
+              "assumed_mass_per_unit_kg": 5000.0,
+              "assumed_housekeeping_per_unit_W": 10000.0,
+              "subtotal_with_bus_kg_per_reference_gross_m2": 0.029446731424854808,
+              "fleet_bus_inventory_kg": 170465321829.46918,
+              "fleet_housekeeping_W": 340930643658.93835,
+              "bus_requirements_demonstrated": false,
+              "power_system_mass_included": false
+            }
+          },
+          "filters": {
+            "mechanical_converged": true,
+            "member_model_domain": true,
+            "thin_wall_model_domain": true,
+            "substrate_stress": true,
+            "parallel_150m_clearance": true,
+            "component_mass_within_inherited_total_allowance": false,
+            "geometry_and_member_screens": true
+          }
+        }
+      }
+    ]
+  },
+  "runtime_s": 310.33586416300386,
+  "peak_rss_MiB": 163.16015625
+}
