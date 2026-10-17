@@ -887,10 +887,10 @@ climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --folder A28_corre
 The 20-year test with the longwave correction and the ice optics (`A28_corrected_970_lw_ice`, 17 October, from
 `A28_corrected_970`'s year 19 at the design sunlight scale of 0.970, 4 ranks, about 4.7 minutes a year) settles near
 307 K. Over years 10–19 the ground averages 306.5 K, 11.5 K above the design case, and still warms 0.08 K a year, while
-the top of the air gains 0.24 W/m² over the last five years. Over those years the gain falls 2.2 W/m² for each kelvin
-the ground warms, so the balance lies at 306.8–307.1 K. Global means over years 10–19 (`progress.json`; the air is at
-2 m, its warmest and coldest the extremes of the year's 3-day means, the equator's land within 12°, the poles beyond
-70°):
+the top of the air gains 0.24 W/m² over the last five years. Fitted against the ground's temperature, the gain falls
+2.2 W/m² for each kelvin over years 5–19, which puts the balance at 306.8 K, and 1.65 W/m² over years 0–19, at 307.1 K.
+Global means over years 10–19 (`progress.json`; the air is at 2 m, its warmest and coldest the extremes of the year's
+3-day means, the equator's land within 12°, the poles beyond 70°):
 
 | Years 10–19 | Design case (`A28_corrected_970`) | Correction and ice (`A28_corrected_970_lw_ice`) |
 |---|---|---|
@@ -903,7 +903,7 @@ the ground warms, so the balance lies at 306.8–307.1 K. Global means over year
 | Poles' air | 292.7 K | 307.8 K |
 
 The warmth reaches every latitude. The poles' air warms 15 K and the equator's land 12 K, and the land's surface
-poleward of 60° is the warmest, 34.4–34.8 °C against 32.3–32.8 °C within 30° of the equator. The rain rises 44% and
+poleward of 60° is the warmest, 34.4–34.8 °C against 32.3–32.8 °C within 30° of the equator. The rain rises 43% and
 reaches further poleward, and the land under 0.5 mm a day, the desert measure of 14 October, halves, from 37.6% to
 18.9%. The rain is still heaviest near the equator:
 

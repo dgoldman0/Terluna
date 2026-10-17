@@ -152,8 +152,13 @@ def heat_beyond_sunlight(data, absorbed, area):
                   basis='the recommended answer, both halves rolled 80 degrees on the re-flown layout, at the GCM\'s '
                         'held-branch efficacy for its infrared and the albedo for its returned sunlight'),
         beamed_power=item([tw * 1e12 / area for tw in power_tw], heat_tw=power_tw,
-                          basis='the power screen\'s intake at the loads and the deep air\'s share of the beams, all '
-                                'released at or near the ground'))
+                          basis='the power screen\'s intake, the beams arriving at the receivers and the towns\' '
+                                'crowns, and the deep air\'s share of the beams; all of it ends as heat at or near the '
+                                'ground'))
+    # What the air must send out besides the sunlight it absorbs, at full watts: the gases' forcing, all of the glow's
+    # infrared, the returned sunlight the Moon absorbs and the beamed power's heat. The GCM's efficacy weighs the glow's
+    # infrared at 0.71 for the ground's temperature; a column's ceiling on its outgoing infrared counts all of it.
+    out['to_send_out_w_m2'] = [gas + infrared + (1.0 - albedo) * sunlight + tw * 1e12 / area for tw in power_tw]
     out['answered_in_every_target'] = dict(
         absorbed_sunlight_w_m2=[sum(out[k]['absorbed_sunlight_w_m2'][e] for k in ('gases', 'glow', 'beamed_power'))
                                 for e in (0, 1)])
@@ -196,6 +201,7 @@ def results():
     fits = [fit(ex['test_progress'], w) for w in FITS]
     lam = sorted(f['feedback_w_m2_k'] for f in fits)
     bal = sorted(f['balance_k'] for f in fits)
+    clear = toa['absorbed_clear_sky']
     saturated = data[COLUMN]['moon_1.2atm']['saturated']['max_olr']
     conversion = data[GLOW]['design']['conversion']
     light = data[LIGHT]['cost_through_light']['per_percent_dimming']
@@ -203,6 +209,11 @@ def results():
                 data[LIGHT]['rain_pathway']['precipitation_cut_per_percent_dimming'][1]]
     heat = heat_beyond_sunlight(data, absorbed, area)
     every = heat['answered_in_every_target']['absorbed_sunlight_w_m2']
+    every_dim = heat['answered_in_every_target']['dimming_percent']
+    send = heat['to_send_out_w_m2']
+    shared = dict(dimming_percent=every_dim,
+                  growth_cost_through_light_percent=[light[0] * every_dim[0], light[1] * every_dim[1]],
+                  land_rain_cut_percent=[rain_cut[0] * every_dim[0], rain_cut[1] * every_dim[1]])
     a, b = climate(design), climate(test)
     targets = []
     for name, target in [('no further dimming', None)] + [(f'{t:g} K', t) for t in TARGETS_K]:
@@ -210,27 +221,34 @@ def results():
             shed = [0.0, 0.0]
             state, frac = dict(b), 1.0
         else:
-            # low end: the weaker feedback over the cooler balance; high end: the stronger over the warmer
-            shed = [lam[0] * (bal[0] - target), lam[1] * (bal[1] - target)]
+            # each fit's own feedback times its own balance's distance from the target
+            shed = sorted(f['feedback_w_m2_k'] * (f['balance_k'] - target) for f in fits)
             state, frac = interpolate(a, b, target)
         dim = [100.0 * s / absorbed for s in shed]
         total = [100.0 * (s + e) / absorbed for s, e in zip(shed, every)]
         taken_tw = [d / 100.0 * incoming * area / 1e12 for d in dim]
         rain = state['land_rain_mm_day']
+        # the clear sky's load against a saturated column's ceiling: the clear-sky sunlight left after the dimming,
+        # with the added heat at full watts, answered by its own dimming or not; ends pair the most and least load
+        load_answered = [clear * (1.0 - (dim[1] + every_dim[0]) / 100.0) + send[0],
+                         clear * (1.0 - (dim[0] + every_dim[1]) / 100.0) + send[1]]
+        load_unanswered = [clear * (1.0 - dim[1] / 100.0) + send[0], clear * (1.0 - dim[0] / 100.0) + send[1]]
         targets.append(dict(
             name=name, ground_k=state['ground_k'] if target is not None else test['ground_k'],
             settles_k=bal if target is None else [target, target],
             absorbed_sunlight_to_shed_w_m2=shed, dimming_percent=dim,
             with_the_heat_beyond_sunlight_percent=total,
+            sunlight_scale_of_its_design_case=[DESIGN_SCALE * (1.0 - d / 100.0) for d in dim][::-1],
             sunlight_scale=[DESIGN_SCALE * (1.0 - t / 100.0) for t in total][::-1],
             sunlight_taken_tw=taken_tw, electricity_tw=[taken_tw[0] * conversion[0], taken_tw[1] * conversion[1]],
             growth_cost_through_light_percent=[light[0] * dim[0], light[1] * dim[1]],
             land_rain_mm_day=rain, land_rain_with_the_dimmings_own_cut_mm_day=[
                 rain * (1.0 - rain_cut[1] / 100.0 * dim[1]), rain * (1.0 - rain_cut[0] / 100.0 * dim[0])],
             climate=state, interpolated_share_of_the_way=frac,
-            margin_to_the_saturated_column_w_m2=[saturated - (absorbed - s) for s in shed],
-            margin_if_the_heat_beyond_sunlight_goes_unanswered_w_m2=[saturated - (absorbed - s) - e
-                                                                    for s, e in zip(shed, every[::-1])]))
+            clear_sky_absorbed_w_m2=[clear * (1.0 - d / 100.0) for d in dim][::-1],
+            gap_to_the_saturated_ceiling_w_m2=sorted(saturated - clear * (1.0 - d / 100.0) for d in dim),
+            gap_with_the_added_heat_answered_w_m2=sorted(saturated - x for x in load_answered),
+            gap_with_the_added_heat_unanswered_w_m2=sorted(saturated - x for x in load_unanswered)))
     return dict(
         schema=SCHEMA,
         producer=dict(files={c: digest(c) for c in CODE}, inputs={p: digest(p) for p in INPUTS},
@@ -241,7 +259,11 @@ def results():
                   test=dict(run=TEST, **climate(test), top_of_air_w_m2=toa, planetary_albedo=albedo)),
         settled=dict(fits=fits, feedback_w_m2_k=lam, balance_k=bal,
                      saturated_column_max_outgoing_w_m2=saturated,
-                     clear_sky_outgoing_over_the_saturated_column_w_m2=toa['outgoing_infrared_clear_sky'] - saturated),
+                     clear_sky_outgoing_over_the_saturated_column_w_m2=toa['outgoing_infrared_clear_sky'] - saturated,
+                     clear_sky_absorbed_w_m2=clear,
+                     cloud_effect_w_m2=dict(sunlight=absorbed - clear,
+                                            infrared=toa['outgoing_infrared_clear_sky'] - toa['outgoing_infrared'])),
+        shared_dimming=shared,
         heat_beyond_sunlight=heat,
         targets=targets,
         costs_per_percent=dict(growth_through_light_percent=light, land_rain_percent=rain_cut))
@@ -258,7 +280,9 @@ def main(argv=None) -> int:
               f"scale {t['sunlight_scale'][0]:.3f}-{t['sunlight_scale'][1]:.3f}, "
               f"wet-bulb {t['climate']['wet_bulb_median_c']:.1f}/{t['climate']['wet_bulb_p99_c']:.1f} C, "
               f"desert {100*t['climate']['land_desert']:.0f}%, sea {t['climate']['sea_median_c']:.1f} C, "
-              f"margin {t['margin_to_the_saturated_column_w_m2'][0]:.1f}-{t['margin_to_the_saturated_column_w_m2'][1]:.1f} W/m2")
+              f"clear gap {t['gap_to_the_saturated_ceiling_w_m2'][0]:.1f}-{t['gap_to_the_saturated_ceiling_w_m2'][1]:.1f}, "
+              f"answered {t['gap_with_the_added_heat_answered_w_m2'][0]:.1f}-{t['gap_with_the_added_heat_answered_w_m2'][1]:.1f}, "
+              f"unanswered {t['gap_with_the_added_heat_unanswered_w_m2'][0]:.1f}-{t['gap_with_the_added_heat_unanswered_w_m2'][1]:.1f} W/m2")
     print('wrote', OUT.relative_to(ROOT))
     return 0
 

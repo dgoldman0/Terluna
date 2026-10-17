@@ -65,10 +65,6 @@ Each finding follows from results the repository already holds, read together wi
      absorbs that ring's glow and passes it on through both its faces, so the stack, about two layers deep in the
      Moon's view, sends between half and 56% inward. A tile 19,355–21,392 km out sends the Moon 0.66–0.81% of what it
      emits inward. The Moon receives 5.7–9.9 W/m² averaged over its surface (*screen*).
-   - **Since then.** The glow screen of 12–13 October ([glow](../research/studies/solar_shield_array/glow.md)) puts the
-     glow at 9.4 W/m² as built, with each ring's night half riding at perilune, and finds the films imaging another
-     4.7 W/m² of the Moon's own infrared and sunlight back onto it, 14.1 W/m² in all; rolled 80° on both halves the
-     fleet leaves 6.0 W/m², which 2.0% of the design sunlight answers at the GCM's infrared efficacy of 0.71.
    - **In proportion.** That is 1.9–3.4% of the design sunlight, the heat of 215–376 TW used on the Moon.
    - **The warming.** If it acts like sunlight, the GCM's 1.9 K per 1% of sunlight puts the design case 3.7–6.4 K
      warmer (*screen*). The design case of 294.9 K leaves it out. The 5% dimmer, chosen to bring the Moon from 303 to
@@ -122,6 +118,10 @@ Each finding follows from results the repository already holds, read together wi
      and the ring stack's radiative transfer. It surfaced here in the heat ledger.
    - *A first-order estimate: the stack's layering and how efficiently infrared absorbed aloft warms the ground decide
      its size. The range across those is 1.8–9.9 K.*
+   - **Since then.** The glow screen of 12–13 October ([glow](../research/studies/solar_shield_array/glow.md)) puts the
+     glow at 9.4 W/m² as built, with each ring's night half riding at perilune, and finds the films imaging another
+     4.7 W/m² of the Moon's own infrared and sunlight back onto it, 14.1 W/m² in all; rolled 80° on both halves the
+     fleet leaves 6.0 W/m², which 2.0% of the design sunlight answers at the GCM's infrared efficacy of 0.71.
 2. **Each terawatt used on the Moon warms it by 0.017–0.026 K, so a kelvin takes 38–61 TW** (*screen*).
    - **The metropolis.** Its 200 GW is 0.005 W/m² over the Moon and 62 W/m² over its 32 km circle, near the hottest
      city cells on Earth at 100–577 W/m² (Allen et al. 2011).

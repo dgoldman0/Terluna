@@ -44,8 +44,10 @@ def test_the_test_settles_near_where_its_last_years_stand(product):
     assert 0.0 < s['feedback_w_m2_k'][0] <= s['feedback_w_m2_k'][1]
     test = product['runs']['test']
     assert test['ground_k'] < s['balance_k'][0] <= s['balance_k'][1] < test['ground_k'] + 1.0
-    # its clear sky already sends out more than a saturated column can, so its balance rests on dry air and cloud
+    # its unsaturated clear sky already sends out more than a saturated column can, and its cloud warms it on net
     assert s['clear_sky_outgoing_over_the_saturated_column_w_m2'] > 0.0
+    assert s['cloud_effect_w_m2']['sunlight'] < 0.0 < s['cloud_effect_w_m2']['infrared']
+    assert s['cloud_effect_w_m2']['sunlight'] + s['cloud_effect_w_m2']['infrared'] > 0.0
 
 
 def test_the_heat_beyond_sunlight_adds_up(product):
@@ -72,9 +74,20 @@ def test_cooler_targets_take_more_dimming_and_leave_more_margin(product):
     assert warm['dimming_percent'] == [0.0, 0.0]
     for e in (0, 1):
         assert 0.0 < mid['dimming_percent'][e] < cool['dimming_percent'][e]
-        assert warm['margin_to_the_saturated_column_w_m2'][e] < mid['margin_to_the_saturated_column_w_m2'][e]
-        assert mid['margin_to_the_saturated_column_w_m2'][e] < cool['margin_to_the_saturated_column_w_m2'][e]
+        for gap in ('gap_to_the_saturated_ceiling_w_m2', 'gap_with_the_added_heat_answered_w_m2',
+                    'gap_with_the_added_heat_unanswered_w_m2'):
+            assert warm[gap][e] < mid[gap][e] < cool[gap][e], gap
+            assert warm[gap][0] <= warm[gap][1] and cool[gap][0] <= cool[gap][1], gap
     assert cool['sunlight_scale'][1] < mid['sunlight_scale'][1] < warm['sunlight_scale'][1] < R.DESIGN_SCALE
+    for x in (warm, mid, cool):
+        assert x['sunlight_scale'][1] < x['sunlight_scale_of_its_design_case'][0] or x is warm
+    assert warm['sunlight_scale_of_its_design_case'] == [R.DESIGN_SCALE, R.DESIGN_SCALE]
+    # each fit's own feedback with its own balance
+    fits = product['settled']['fits']
+    for x, target in ((mid, 300.0), (cool, 295.0)):
+        assert x['absorbed_sunlight_to_shed_w_m2'] == sorted(f['feedback_w_m2_k'] * (f['balance_k'] - target) for f in fits)
+    # the warm Moon's clear sky with the added heat unanswered would have to send out more than a saturated column can
+    assert warm['gap_with_the_added_heat_unanswered_w_m2'][1] < 0.0 < warm['gap_with_the_added_heat_answered_w_m2'][0]
     # the interpolated climate lies between the two runs, and threshold shares stay with the runs
     a, b = product['runs']['design'], product['runs']['test']
     for k in ('land_desert', 'wet_bulb_median_c', 'sea_median_c', 'land_rain_mm_day'):

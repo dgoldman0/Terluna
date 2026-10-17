@@ -272,7 +272,7 @@ one harbour town, and its 3-D CM1 box found a dry island with calm air, hot afte
 
 At the joint integration of 17 October, [what each target climate takes](studies/climate_targets/README.md) set three
 targets side by side. Keeping the warm Moon still takes the 3.9–5.3% of dimming that answers the gases, the glow and
-the beamed power; 300 K takes 5.0–6.8% more, and the design temperature 8.7–11.6% more. The water the author keeps
+the beamed power; 300 K takes 5.2–6.5% more, and the design temperature 8.9–11.3% more. The water the author keeps
 delivering to balance the crust brings 1.5–9.5 W/m² of heat in its fall through the first thousand years unless it is
 lowered with energy recovery.
 

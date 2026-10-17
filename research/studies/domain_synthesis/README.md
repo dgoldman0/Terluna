@@ -70,7 +70,7 @@ terawatt, provisioning's factor, and the fleet's glow as provisioning gives it, 
 293 W/m². The glow is the larger load. People and the fleet together would need 2.3–7.3% of the sunlight taken away
 if dimming answered both, 2.2–5.4% with the array's power. The fleet's answer is still open: films that absorb less, a
 heat mirror on its Moon-facing faces, redirecting the glow, or added dimming ([plan](../../plan.md), next work
-item 5). The parks' automation and amenities, which the register leaves to be sized, are not in the ledger.
+item 4). The parks' automation and amenities, which the register leaves to be sized, are not in the ledger.
 
 ## Power from the array: the chosen distribution
 
@@ -278,7 +278,7 @@ ships fly at 20–30 km. The towns share the reefs' wind tracks, and the author'
 the distributions study's encounter rule, with reefs a kilometre or two across making up half the aerophyte cover, a
 town passes 0.04–1.2 reefs a day at 1% cover, drifting 0.1–1 m/s apart; the distributions study's 13–132 passes a day
 count 100 m bodies making up the whole cover. Sizing the towns' steering reserves for those meetings is next work
-(item 5). The network's 30 km sits above the median storm and below the tallest: a drifting node spends about 1–2%
+(item 7). The network's 30 km sits above the median storm and below the tallest: a drifting node spends about 1–2%
 of its time in cloud, one storm in ten reaches 38 km, and the largest storm on the ring tops 84 km. The heights come
 from the products named in the [ledgers](results/ledgers.json), the reefs' band from sky ecology, the network's and
 the ring fleet's from [provisioning/network.md](../../../provisioning/network.md), and the regional ships' and gliders'

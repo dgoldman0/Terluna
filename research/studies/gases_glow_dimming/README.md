@@ -177,7 +177,7 @@ ground gets almost none of it.
 ## Next work
 
 - The glow's efficacy went into the glow study at the integration of 17 October: its recommended answer takes 2.0% of
-  the design sunlight, within 1% of the domain synthesis's convention, and its whole table of answers follows
+  the design sunlight, about 1% below the domain synthesis's convention, and its whole table of answers follows
   ([glow](../solar_shield_array/glow.md)). The rerun on the GCM's final radiation waits on the target climate.
 - Build the water design into ecology's plants: the carbon per litre and the transpired share by band above.
 

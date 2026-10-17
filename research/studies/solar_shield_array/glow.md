@@ -32,13 +32,14 @@ for a coating, an absorber or the Moon's light. Sources, with how far each was r
      up to 11° near the nodes, where the forced eccentricity tilts them, so 34% of what they reflect lands. That
      returns 4.0 W/m² of the Moon's own infrared and 0.71 W/m² of its reflected sunlight.
    - **In proportion.** The 14.1 W/m² is 4.8% of the design sunlight. The Moon absorbs all of the infrared and 72%
-     of the sunlight, so dimming answers it at 6.6% of the design sunlight.
+     of the sunlight, and the GCM answers the infrared at 0.71 of its watts, so dimming answers it at
+     4.8% of the design sunlight (6.6% at an efficacy of 1).
 2. **Heat mirrors on the Moon-facing faces raise the Moon's heat** (*screen* on *design guesses*).
    - On every tile, a face that reflects the thermal infrared cuts the glow to 5.2–8.9 W/m² at the candidates'
      favourable ends, and 2.6 W/m² on the nearest layer alone. It reflects the Moon's own infrared as well, and
      returns 11–19 W/m² of it.
-   - Every candidate raises the heat on the Moon, by 6.7–21 W/m², and the dimming that answers it rises from 6.6% to
-     9.7–16%.
+   - Every candidate raises the heat on the Moon, by 6.7–21 W/m², and the dimming that answers it rises from
+     4.8% to 7.0–11.8%.
    - The conducting oxides and silver stacks also absorb 3–10% of the sunlight, doubling or tripling the films'
      heat, and reflect the solar near infrared that the window has to pass.
    - Behind a mirror on every tile the hidden layer runs at 227–485 K at the sunward crossing.
@@ -369,7 +370,7 @@ hemisphere (*screen*):
   ([gases, glow and dimming](../gases_glow_dimming/README.md), 13 October) the dimming that holds the design
   temperature is 0.71 of its watts matched as absorbed sunlight, so each W/m² of infrared takes 0.99 times as much
   top-of-air sunlight away, and the domain synthesis's convention, its W/m² over the design sunlight's 293.3 W/m²,
-  holds for the glow to 1%. At the design sunlight, 1% of dimming answers 2.97 W/m² of the infrared. On the
+  holds for the glow to about 1%. At the design sunlight, 1% of dimming answers 2.97 W/m² of the infrared. On the
   corrected radiation of 17 October the pair gave about 0.59; its rerun on the final radiation waits on the
   target climate.
 - **The electricity.** 1% of the design sunlight over the Moon's disc carries 111 TW of light, which collectors at
@@ -377,9 +378,9 @@ hemisphere (*screen*):
   design sunlight.
 - **The dimmer's form** decides its own costs (*screen*):
   - Absorbing in the window rings' films, it absorbs round their whole orbits. As built it gives back 25% of its
-    dimming as glow, and 14% with the night roll.
-  - Reflecting from the window tiles, it adds 2ΔR to their light pressure: 3.3% more dimming raises the window's
-    coefficient from 0.276 to about 0.34, and one sail loading moves with it.
+    dimming as glow, 14% with the night roll and 10% with both halves rolled.
+  - Reflecting from the window tiles, it adds 2ΔR to their light pressure: the recommended answer's 2.0% more
+    dimming raises the window's coefficient from 0.276 to about 0.32, and one sail loading moves with it.
   - Collectors that take light only while they cross the window, and reject their heat from faces that do not see
     the Moon, keep both small.
 
@@ -391,7 +392,7 @@ hemisphere (*screen*):
   night), the returned infrared 1.75 W/m² and the returned sunlight 0.61 W/m², 6.0 W/m² in all. The deep night
   stays dark. The night's edge takes 0.1–3.5 lux within 30° of the terminator from day-half tiles passing
   radial-facing at the nodes, 0.3–0.6% of the twilight the tall sky already gives there.
-- **The dimming** is 2.0% of the design sunlight at the GCM's efficacy, within 1% of the synthesis's convention
+- **The dimming** is 2.0% of the design sunlight at the GCM's efficacy, about 1% below the synthesis's convention
   (2.7% at an efficacy of 1). Taken by extraction it gives back 45–67 TW of electricity.
 - **Its costs.** No film, mass or sail-loading change. The attitude outside the service arc carries the roll. Along
   the kept orbits the attitude study finds it inside the clearance, the drive on the eccentricity cut to 0.48, and a
@@ -412,7 +413,7 @@ hemisphere (*screen*):
 - **The knobs it moves least:** the films and their protection, the tile masses and the one sail loading, the
   service arc's attitude, and the climate's design sunlight, which the dimming restores. It moves the attitude
   outside the service arc, which the night decision moves on the night half anyway, the momentum store, and the
-  dimmer, from 5% to about 6.9% of the titania stack's light.
+  dimmer, from 5% to about 6.9% of the titania stack's light on the 5% dimmer's design case.
 - **Set aside by the author** on 13 October, with the plants' water design making up the rain the glow takes:
   - the annulus absorber, which would bring the total to 3.8 W/m² and the dimming to 1.3%. It would need the
     atmosphere domain's check of 250–400 nm above the limb, the absorber's measured edge and opacity, and the
@@ -462,7 +463,7 @@ hemisphere (*screen*):
 - **The provisioning screen** places the tiles 19,355–21,392 km out. Those are the layout's apolune radii, and the
   night half rides at 15,375–16,021 km.
 - **The domain synthesis** answers heat with its W/m² over 293.3 W/m². For infrared at an efficacy of 1 it takes
-  1.39 times that; at the GCM's 0.71, 0.99 times, so the convention holds for the glow.
+  1.39 times that; at the GCM's 0.71, 0.99 times, so the convention holds for the glow to about 1%.
 - **The joint synthesis's night light** counts diffuse scatter and glints of sunlight. The films' specular
   reflection of the Moon's day side adds 1.6 lux over the night hemisphere as built.
 - **illumination/fleet_light** builds the rings with the layout's radius as the semi-major axis, which puts their

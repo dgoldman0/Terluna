@@ -26,9 +26,10 @@ ancestor of the result. The synthesis is [research/studies/climate_targets](../s
 
 Git combined most of the tree. Where more than one branch changed a shared document, the resolution kept every side's
 entries.
-- **Decision register:** every branch's rows stand. The dated sections follow the order in which each first appeared,
-  from the gas pair of 13 October to the target climate of 17 October, with Jura Island's among them. In the domain
-  synthesis's decisions, ecology's methane rows and provisioning's power rows stand together.
+- **Decision register:** every branch's rows stand, with one Decision cell reworded (below, after the review). The dated
+  sections follow the order in which each first appeared, from the gas pair of 13 October to the target climate of 17
+  October, with Jura Island's among them. In the domain synthesis's decisions, ecology's methane rows and provisioning's
+  power rows stand together.
 - **Plan:** each branch's paragraphs, provisioning's numbering of the next work with ecology's finished first item and
   array-industry's glow, then brought up to this integration (below).
 - **Status record:** merged topic by topic at the JSON level, condition tokens as tag lists and lists by a three-way
@@ -59,7 +60,7 @@ entries.
   held glow branch of the gases, glow and dimming study. It is a constant in
   [glow.py](../studies/solar_shield_array/glow.py) with a test against that study's product, which takes the glow's
   answer from the glow study and so cannot be bound back. The recommended answer's dimming is 2.0% of the design
-  sunlight (2.7% at an efficacy of 1), within 1% of the domain synthesis's convention, and gives back 45–67 TW. Every
+  sunlight (2.7% at an efficacy of 1), about 1% below the domain synthesis's convention, and gives back 45–67 TW. Every
   answer in [glow.md](../studies/solar_shield_array/glow.md) follows; the absorbing dimmer returns 25% of its dimming as
   glow as built and 14% with the night roll.
 - **Downstream:** the tile design, the support comparison, the flexible benchmark and the geometry screen were rebuilt
@@ -88,13 +89,37 @@ entries.
 
 [What each target climate takes](../studies/climate_targets/README.md) answers the author's open question across the
 domains, from the GCM's two runs and the domains' products. Keeping the warm Moon, near 307 K, still takes the 3.9–5.3%
-of dimming that answers the gases, the glow and the beamed power; left unanswered they would warm it about 4–7 K more
-and bring it within 2–5 W/m² of what a saturated column can send out. 300 K takes 5.0–6.8% more of the sunlight and
-the design temperature 8.7–11.6% more. At 307 K the wet-bulb temperature passes 28 °C for a third of the time near
-the equator and in the lowlands, and the comfortable air lies 8–12 km up; at 300 K the ground is warm and tropical,
-with seas near 28 °C. The water the author keeps delivering to balance the crust brings 1.5–9.5 W/m² of heat in its
-fall through the first thousand years unless it is lowered with energy recovery, as the build's deliveries already
-must be.
+of dimming that answers the gases, the glow and the beamed power; left unanswered they would warm it about 4–7 K more,
+and at full watts they would ask its clear sky to send out 7–11 W/m² more than a saturated column can. The GCM holds
+the warm Moon stable by its restoring gain of 1.65–2.16 W/m² a kelvin, on air that stays unsaturated, and its cloud
+warms it 6.0 W/m² net. 300 K takes 5.2–6.5% more of the sunlight and the design temperature 8.9–11.3% more. At 307 K
+the wet-bulb temperature passes 28 °C for a third of the time near the equator and in the lowlands, and the
+comfortable air lies 8–12 km up; at 300 K the ground is warm and tropical, with seas near 28 °C. The water the author
+keeps delivering to balance the crust brings 1.5–9.5 W/m² of heat in its fall through the first thousand years unless
+it is lowered with energy recovery, as the build's deliveries already must be.
+
+## The review
+
+An independent review of the synthesis commit (`8e60aea`) reproduced the product and confirmed the register's rows,
+the status merge, the links and the heat items' arithmetic, and found fourteen faults, corrected in the commit after
+it:
+- **The feedback** paired one fit's slope with the other fit's balance; each fit now keeps its own, which narrows the
+  dimming at 300 K from 5.0–6.8% to 5.2–6.5% and at 295 K from 8.7–11.6% to 8.9–11.3%.
+- **The stability reading** compared all-sky absorbed sunlight with the saturated column's clear-sky ceiling and gave
+  the cloud a share in holding the balance, though it warms the Moon on net. The comparison is now clear sky against
+  clear sky, with the added heat at full watts, and the restoring gain and the Manabe–Wetherald columns lead.
+- **The costs** now name each target's own dimming and give the shared dimming's cost beside them; the warm Moon's land
+  rain falls to 3.10–3.27 mm a day with it.
+- **Two sunlight scales**, the target's own design case and the plan's whole dimming, in place of one.
+- **Figures:** the land's rain rises 48% (the 44% was the whole Moon's, and 43% when unrounded); the absorbing dimmer
+  returns 10% of its dimming as glow with both halves rolled; the glow note's as-built and heat-mirror dimmings
+  follow the efficacy; the convention matches to about 1% (1.2%); the beamed power is the beams arriving at the
+  receivers and crowns; the GCM README's balance gives each fit its own window.
+- **Pointers:** the domain synthesis's plan item and its traffic item, two status tasks still waiting on the 0.9685
+  run, and provisioning's finding 1, whose note now follows the decision.
+
+The register's row of the target climate, written on ecology with some of the author's own phrases in its Decision
+column, was put in my words at the synthesis commit; the phrases stay in its Source column.
 
 ## Outside Git
 
@@ -110,11 +135,11 @@ must be.
 ## Checks
 
 `make check` ran before every commit: the layer check, the Python and JavaScript tests, the provenance check and the
-ensemble validator. Python tests passed at each merge: 2,000 with 16 skipped after provisioning, 2,066 with 19
-skipped after resources, 2,334 after array-industry, 2,412 after ecology and 2,421 after Jura Island, each with 19
-skipped. Ecology's record of the settled test passed 2,063 with 16 skipped on its own branch. Two merges first failed
-on a product outside the settle tool's reach (the power screen, then the symbioses), and one on the reduced gases;
-each was rebuilt or re-derived as above before its commit.
+ensemble validator. Python tests passed at each merge: 2,000 with 16 skipped after provisioning, 2,066 with 19 skipped
+after resources, 2,334 after array-industry, 2,412 after ecology and 2,421 after Jura Island, each with 19 skipped, and
+the synthesis commit 2,430 with 19 skipped. Ecology's record of the settled test passed 2,063 with 16 skipped on its own
+branch. Two merges first failed on a product outside the settle tool's reach (the power screen, then the symbioses), and
+one on the reduced gases; each was rebuilt or re-derived as above before its commit.
 
 ## Still to do from the integration
 

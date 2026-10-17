@@ -85,7 +85,7 @@ def read(run, b):
         with netCDF4.Dataset(path) as d:
             lat = np.asarray(d['lat'][:], float)
             sigma = np.asarray(d['lev'][:], float)
-            for k in ('rst', 'rsut', 'rlut', 'rltcs', 'ntr'):
+            for k in ('rst', 'rsut', 'rlut', 'rltcs', 'rstcs', 'ntr'):
                 toa.setdefault(k, []).append(np.asarray(d[k][:], float).mean(axis=0))
             for k in fields:
                 fields[k].append(np.asarray(d[k][:], float))
@@ -124,8 +124,8 @@ def read(run, b):
                     air=stats(a))
 
     out = dict(top_of_air_w_m2=dict(incoming=t['rst'] - t['rsut'], reflected=-t['rsut'], absorbed=t['rst'],
-                                     outgoing_infrared=-t['rlut'], outgoing_infrared_clear_sky=-t['rltcs'],
-                                     net=t['ntr']),
+                                     absorbed_clear_sky=t['rstcs'], outgoing_infrared=-t['rlut'],
+                                     outgoing_infrared_clear_sky=-t['rltcs'], net=t['ntr']),
                ground_k=gmean(ts.mean(axis=0)), rain_mm_day=gmean(rain),
                land=dict(all=land_share(np.ones_like(island)),
                          bands={f'{lo}-{hi}': land_share((alat >= lo) & (alat < hi)) for lo, hi in BANDS}),

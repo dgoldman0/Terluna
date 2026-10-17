@@ -2,17 +2,17 @@
  "schema": "terluna.research.climate-targets/1",
  "producer": {
   "files": {
-   "research/studies/climate_targets/run.py": "8a90641d8b9f4ce34951cac657452c28eb3a8d3762e09d8b9343a05ab817495c",
-   "research/studies/climate_targets/extract.py": "7e2d398b669742f60e69b404de28f96afe1ed04dd6ede9871ee3ba91e855e078"
+   "research/studies/climate_targets/run.py": "16ccee9ef7d4cf4599a6cd687a4d30188739980636966a3bee6defa86ffaacf4",
+   "research/studies/climate_targets/extract.py": "bbfc52664248657c7f373292cc04637584af98b042bbfec36db1f8af966cdb48"
   },
   "inputs": {
-   "research/runs/climate_targets/extract.json": "82efaf5146107e3a219148edb02cc7f3f092b079173a90711eff335db28d2ad9",
-   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "45f1c3254d4566b5260bd80d8672ea6b6cd32a80a7a28f4ee0450fd0337ff891",
+   "research/runs/climate_targets/extract.json": "59198a14a586a79d13c0045a39a385d31d215f72b6df5f3813978a82830f6a76",
+   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "9e3113ce6775f7706c572482159a31f27da840e1659d326a19d0b2ce33343242",
    "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
    "atmosphere/radiative_convective/results/summary.json": "8fb31329ebcbca52ea9ac1c0af06ed5e357c02267dce8b47250334ae91c39171",
-   "research/studies/light_limitation/results/light_limitation.json": "cd8927bb12ca0029dff4bd8bcd2eaef5646fad992f31687c9c6098301da7ceff",
-   "provisioning/results/power.json": "b6d9f1120d7c831c7bcf64102f4670885260422fe068c83a3af7254ea05a2f83",
+   "research/studies/light_limitation/results/light_limitation.json": "378fbb564125e581c4974b335912fa124df3e755246c1c3f6975910ba7443857",
+   "provisioning/results/power.json": "41015c65fb3d117cc9c4c9e3c02eae1460777e4c8d2a9f86110308e9efb2901b",
    "resources/results/first_screen.json": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e"
   },
@@ -96,6 +96,7 @@
     "incoming": 312.9718304707239,
     "reflected": 84.43664933827829,
     "absorbed": 228.5351811324456,
+    "absorbed_clear_sky": 234.95764009298753,
     "outgoing_infrared": 228.43284592546783,
     "outgoing_infrared_clear_sky": 235.18443704035585,
     "net": 0.10233521278479431
@@ -172,6 +173,7 @@
     "incoming": 312.1938560849066,
     "reflected": 86.82848417491735,
     "absorbed": 225.36537190998925,
+    "absorbed_clear_sky": 236.17079868181733,
     "outgoing_infrared": 224.74237229320187,
     "outgoing_infrared_clear_sky": 241.5219190685501,
     "net": 0.6229996210080381
@@ -207,7 +209,26 @@
    307.11382429735096
   ],
   "saturated_column_max_outgoing_w_m2": 238.98252272447897,
-  "clear_sky_outgoing_over_the_saturated_column_w_m2": 2.539396344071122
+  "clear_sky_outgoing_over_the_saturated_column_w_m2": 2.539396344071122,
+  "clear_sky_absorbed_w_m2": 236.17079868181733,
+  "cloud_effect_w_m2": {
+   "sunlight": -10.805426771828081,
+   "infrared": 16.779546775348223
+  }
+ },
+ "shared_dimming": {
+  "dimming_percent": [
+   3.8534814142836664,
+   5.3036547539443735
+  ],
+  "growth_cost_through_light_percent": [
+   0.2697436989998567,
+   1.56457815241359
+  ],
+  "land_rain_cut_percent": [
+   2.119634426296631,
+   7.319043560443235
+  ]
  },
  "heat_beyond_sunlight": {
   "gases": {
@@ -243,7 +264,7 @@
     33.0,
     156.97
    ],
-   "basis": "the power screen's intake at the loads and the deep air's share of the beams, all released at or near the ground",
+   "basis": "the power screen's intake, the beams arriving at the receivers and the towns' crowns, and the deep air's share of the beams; all of it ends as heat at or near the ground",
    "absorbed_sunlight_w_m2": [
     0.869970330150629,
     4.1381588704164916
@@ -253,6 +274,10 @@
     1.836199960688401
    ]
   },
+  "to_send_out_w_m2": [
+   10.230841168442698,
+   13.49902970870856
+  ],
   "answered_in_every_target": {
    "absorbed_sunlight_w_m2": [
     8.6844127207827,
@@ -312,6 +337,10 @@
    "with_the_heat_beyond_sunlight_percent": [
     3.8534814142836664,
     5.3036547539443735
+   ],
+   "sunlight_scale_of_its_design_case": [
+    0.97,
+    0.97
    ],
    "sunlight_scale": [
     0.9185545488867395,
@@ -402,13 +431,21 @@
     "freezing_level_km": 35.71553388481645
    },
    "interpolated_share_of_the_way": 1.0,
-   "margin_to_the_saturated_column_w_m2": [
-    13.617150814489719,
-    13.617150814489719
+   "clear_sky_absorbed_w_m2": [
+    236.17079868181733,
+    236.17079868181733
    ],
-   "margin_if_the_heat_beyond_sunlight_goes_unanswered_w_m2": [
-    1.664549553441157,
-    4.9327380937070195
+   "gap_to_the_saturated_ceiling_w_m2": [
+    2.8117240426616377,
+    2.8117240426616377
+   ],
+   "gap_with_the_added_heat_answered_w_m2": [
+    1.6816807073880398,
+    1.838378125669692
+   ],
+   "gap_with_the_added_heat_unanswered_w_m2": [
+    -10.68730566604691,
+    -7.419117125781071
    ]
   },
   {
@@ -419,37 +456,41 @@
     295.0
    ],
    "absorbed_sunlight_to_shed_w_m2": [
-    19.542247819914802,
-    26.126728590640685
+    20.023450236802923,
+    25.498852535589567
    ],
    "dimming_percent": [
-    8.671362265769899,
-    11.593053701735368
+    8.884883275146757,
+    11.314450094743831
    ],
    "with_the_heat_beyond_sunlight_percent": [
-    12.524843680053566,
-    16.89670845567974
+    12.738364689430423,
+    16.6181048486882
+   ],
+   "sunlight_scale_of_its_design_case": [
+    0.8602498340809848,
+    0.8838166322310764
    ],
    "sunlight_scale": [
-    0.8061019279799064,
-    0.8485090163034804
+    0.8088043829677245,
+    0.8464378625125248
    ],
    "sunlight_taken_tw": [
-    1026.8835116722596,
-    1372.8772171400135
+    1052.1691815825395,
+    1339.8843099653961
    ],
    "electricity_tw": [
-    205.37670233445192,
-    411.86316514200405
+    210.43383631650792,
+    401.96529298961883
    ],
    "growth_cost_through_light_percent": [
-    0.606995358603893,
-    3.4199508420119336
+    0.6219418292602731,
+    3.33776277794943
    ],
    "land_rain_mm_day": 2.2490673522735114,
    "land_rain_with_the_dimmings_own_cut_mm_day": [
-    1.8892522436800843,
-    2.141792608116944
+    1.8978992998986866,
+    2.1391511071680824
    ],
    "climate": {
     "ground_k": 295.0,
@@ -516,13 +557,21 @@
     "freezing_level_km": 22.626185141097594
    },
    "interpolated_share_of_the_way": -0.0020003138235005586,
-   "margin_to_the_saturated_column_w_m2": [
-    33.15939863440451,
-    39.7438794051304
+   "clear_sky_absorbed_w_m2": [
+    209.44937152660518,
+    215.187298888956
    ],
-   "margin_if_the_heat_beyond_sunlight_goes_unanswered_w_m2": [
-    21.206797373355947,
-    31.0594666843477
+   "gap_to_the_saturated_ceiling_w_m2": [
+    23.79522383552296,
+    29.533151197873792
+   ],
+   "gap_with_the_added_heat_answered_w_m2": [
+    22.821877918530987,
+    28.403107862600194
+   ],
+   "gap_with_the_added_heat_unanswered_w_m2": [
+    10.296194126814413,
+    19.302310029431084
    ]
   },
   {
@@ -533,37 +582,41 @@
     300.0
    ],
    "absorbed_sunlight_to_shed_w_m2": [
-    11.277537293618977,
-    15.34288034035937
+    11.758739710507097,
+    14.715004285308249
    ],
    "dimming_percent": [
-    5.004112742805588,
-    6.808002582795774
+    5.217633752182446,
+    6.529398975804237
    ],
    "with_the_heat_beyond_sunlight_percent": [
-    8.857594157089254,
-    12.111657336740148
+    9.071115166466113,
+    11.83305372974861
+   ],
+   "sunlight_scale_of_its_design_case": [
+    0.9066648299346989,
+    0.9193889526038302
    ],
    "sunlight_scale": [
-    0.8525169238336205,
-    0.8840813366762342
+    0.8552193788214385,
+    0.8820101828852787
    ],
    "sunlight_taken_tw": [
-    592.599029845729,
-    806.2199900576326
+    617.8846997560089,
+    773.227082883015
    ],
    "electricity_tw": [
-    118.5198059691458,
-    241.86599701728977
+    123.57693995120178,
+    231.9681248649045
    ],
    "growth_cost_through_light_percent": [
-    0.35028789199639115,
-    2.008360761924753
+    0.36523436265277126,
+    1.9261726978622498
    ],
    "land_rain_mm_day": 2.7221962928101067,
    "land_rain_with_the_dimmings_own_cut_mm_day": [
-    2.4664447651959764,
-    2.647266553804146
+    2.4769108743403754,
+    2.644069368942974
    ],
    "climate": {
     "ground_k": 300.0,
@@ -630,13 +683,21 @@
     "freezing_level_km": 27.923416930166923
    },
    "interpolated_share_of_the_way": 0.43276435364578325,
-   "margin_to_the_saturated_column_w_m2": [
-    24.89468810810868,
-    28.960031154849077
+   "clear_sky_absorbed_w_m2": [
+    220.75026497153806,
+    223.84827137699597
    ],
-   "margin_if_the_heat_beyond_sunlight_goes_unanswered_w_m2": [
-    12.94208684706012,
-    20.275618434066377
+   "gap_to_the_saturated_ceiling_w_m2": [
+    15.134251347483001,
+    18.23225775294091
+   ],
+   "gap_with_the_added_heat_answered_w_m2": [
+    14.160905430491027,
+    17.102214417667312
+   ],
+   "gap_with_the_added_heat_unanswered_w_m2": [
+    1.6352216387744534,
+    8.001416584498202
    ]
   }
  ],
