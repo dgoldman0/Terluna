@@ -1120,6 +1120,16 @@ means over the second lunar day): the sideways transport takes about a third of 
   free; fitting that, as its sunlight was fitted by height on 14 October, would move the design case's lower air.
   The rest of the gap, a degree or two, lies in how the two models carry the ground's heat upward: by day CM1's
   resolved dry convection where the GCM's stable layer leaves part of it to its resolved circulation.
+- **The ring's ice high up came from its start.** Every column holds ice above 107 km, 1.1 g/m², which is why the
+  radiation check took columns cloud-free below 25 km. Above the GCM's top level (130 km) the starting sounding and
+  the nudging reference kept the top's vapour while the temperature kept falling, so 140–150 km began 6–15 times
+  saturated over ice. The ice formed within three days and stayed at the same amount through both lunar days,
+  falling and subliming that slowly, with no point reaching the 125% of ice saturation the Morrison scheme needs to
+  make more. At 63–107 km the ring's ice comes and goes, in 10–33% of columns, in air held to the GCM's mean vapour
+  at 76–79% of ice saturation; where it holds ice it holds 1.5–3.5 times the water the GCM gives its clouds there.
+  Since 17 October the runner keeps the top level's share of ice saturation above it, its vapour falling with the
+  temperature (`held_share_above`); cases set up before keep their inputs. The GCM's side of the high cloud is in
+  [its account](../gcm/README.md#the-high-cloud-and-its-ice).
 - **For the cases that follow.** The sideways transport is part of the GCM's forcing that a slice of it lacks, so
   forced rings and boxes are better driven with it; their warmth near the ground still runs about 4 K high at 45° N
   until the rest is found.

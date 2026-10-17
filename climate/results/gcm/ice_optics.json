@@ -1,0 +1,257 @@
+{
+ "schema": "terluna.climate.gcm-ice-optics/1",
+ "ice_below_k": 235.15,
+ "near_ir_weights": [
+  0.6164,
+  0.2283,
+  0.0811,
+  0.0742
+ ],
+ "radius_below_180k_per_k": 0.055202617134899885,
+ "comparison": [
+  {
+   "liquid": {
+    "water_g_m2": 0.5,
+    "visible_reflection": 0.001898270015416038,
+    "near_ir_reflection": 0.0014201547810395478,
+    "near_ir_absorption": 0.0007396974453396661,
+    "emissivity": 0.07964885277987532
+   },
+   "ice": [
+    {
+     "t_k": 165.0,
+     "radius_um": 2.5898817161841294,
+     "visible_reflection": 0.09604671676147805,
+     "near_ir_reflection": 0.08399515891788807,
+     "near_ir_absorption": 0.029106268515374754,
+     "emissivity": 0.2772037847471742
+    },
+    {
+     "t_k": 180.0,
+     "radius_um": 5.92779,
+     "visible_reflection": 0.047722027880164004,
+     "near_ir_reflection": 0.04166017469725237,
+     "near_ir_absorption": 0.01489704031000066,
+     "emissivity": 0.13425810316131492
+    },
+    {
+     "t_k": 189.0,
+     "radius_um": 9.74075,
+     "visible_reflection": 0.030573554030566323,
+     "near_ir_reflection": 0.026621392358102222,
+     "near_ir_absorption": 0.009830953274732152,
+     "emissivity": 0.08548283771639087
+    },
+    {
+     "t_k": 200.0,
+     "radius_um": 17.6986,
+     "visible_reflection": 0.01748992076598436,
+     "near_ir_reflection": 0.015147780272561065,
+     "near_ir_absorption": 0.005995056497678599,
+     "emissivity": 0.0497653878166624
+    },
+    {
+     "t_k": 217.0,
+     "radius_um": 32.787,
+     "visible_reflection": 0.009567804400132813,
+     "near_ir_reflection": 0.008205089950419159,
+     "near_ir_absorption": 0.003702901815037174,
+     "emissivity": 0.02903505315376942
+    },
+    {
+     "t_k": 230.0,
+     "radius_um": 40.5552,
+     "visible_reflection": 0.007716501961391822,
+     "near_ir_reflection": 0.00658376552022914,
+     "near_ir_absorption": 0.0031750153347661174,
+     "emissivity": 0.024315431533342702
+    }
+   ]
+  },
+  {
+   "liquid": {
+    "water_g_m2": 1.5,
+    "visible_reflection": 0.011319219746089567,
+    "near_ir_reflection": 0.008480307448689984,
+    "near_ir_absorption": 0.0037171106832285064,
+    "emissivity": 0.22042002661529958
+   },
+   "ice": [
+    {
+     "t_k": 165.0,
+     "radius_um": 2.5898817161841294,
+     "visible_reflection": 0.21817622037354306,
+     "near_ir_reflection": 0.18995279975551205,
+     "near_ir_absorption": 0.06372782668994477,
+     "emissivity": 0.6223864155250638
+    },
+    {
+     "t_k": 180.0,
+     "radius_um": 5.92779,
+     "visible_reflection": 0.11865811199483967,
+     "near_ir_reflection": 0.10342783023470856,
+     "near_ir_absorption": 0.03703170762745165,
+     "emissivity": 0.3511186289889411
+    },
+    {
+     "t_k": 189.0,
+     "radius_um": 9.74075,
+     "visible_reflection": 0.07935373021202849,
+     "near_ir_reflection": 0.06904317053643363,
+     "near_ir_absorption": 0.02574112743186065,
+     "emissivity": 0.23515121658582638
+    },
+    {
+     "t_k": 200.0,
+     "radius_um": 17.6986,
+     "visible_reflection": 0.04737658413540148,
+     "near_ir_reflection": 0.041021763333358566,
+     "near_ir_absorption": 0.016419541919657187,
+     "emissivity": 0.14198963062850145
+    },
+    {
+     "t_k": 217.0,
+     "radius_um": 32.787,
+     "visible_reflection": 0.026865480823350895,
+     "near_ir_reflection": 0.023033461948997958,
+     "near_ir_absorption": 0.010486068889036334,
+     "emissivity": 0.08460053407243051
+    },
+    {
+     "t_k": 230.0,
+     "radius_um": 40.5552,
+     "visible_reflection": 0.021891592588991763,
+     "near_ir_reflection": 0.01867168328891261,
+     "near_ir_absorption": 0.009073013437939094,
+     "emissivity": 0.07118695022893196
+    }
+   ]
+  },
+  {
+   "liquid": {
+    "water_g_m2": 4.7,
+    "visible_reflection": 0.07595591005784419,
+    "near_ir_reflection": 0.0561926253590993,
+    "near_ir_absorption": 0.02083113348889156,
+    "emissivity": 0.5416856607295285
+   },
+   "ice": [
+    {
+     "t_k": 165.0,
+     "radius_um": 2.5898817161841294,
+     "visible_reflection": 0.440580163477211,
+     "near_ir_reflection": 0.37722973142268523,
+     "near_ir_absorption": 0.11571062251629352,
+     "emissivity": 0.9527121927320035
+    },
+    {
+     "t_k": 180.0,
+     "radius_um": 5.92779,
+     "visible_reflection": 0.26845148228330973,
+     "near_ir_reflection": 0.23203803736058498,
+     "near_ir_absorption": 0.07963495001809129,
+     "emissivity": 0.742100029680288
+    },
+    {
+     "t_k": 189.0,
+     "radius_um": 9.74075,
+     "visible_reflection": 0.19103248223213554,
+     "near_ir_reflection": 0.16531404779006115,
+     "near_ir_absorption": 0.06087045462555443,
+     "emissivity": 0.5682786914845279
+    },
+    {
+     "t_k": 200.0,
+     "radius_um": 17.6986,
+     "visible_reflection": 0.12188961868595838,
+     "near_ir_reflection": 0.10515869293658915,
+     "near_ir_absorption": 0.042486567936768374,
+     "emissivity": 0.3811150129670945
+    },
+    {
+     "t_k": 217.0,
+     "radius_um": 32.787,
+     "visible_reflection": 0.07305017457686004,
+     "near_ir_reflection": 0.06245399951358213,
+     "near_ir_absorption": 0.028938962231705195,
+     "emissivity": 0.24192288761802605
+    },
+    {
+     "t_k": 230.0,
+     "radius_um": 40.5552,
+     "visible_reflection": 0.06052087288949001,
+     "near_ir_reflection": 0.05148071541838879,
+     "near_ir_absorption": 0.025466891177185882,
+     "emissivity": 0.20656984856652827
+    }
+   ]
+  },
+  {
+   "liquid": {
+    "water_g_m2": 15.0,
+    "visible_reflection": 0.3009644008751367,
+    "near_ir_reflection": 0.21037246325269335,
+    "near_ir_absorption": 0.08175854856730717,
+    "emissivity": 0.9170900334248273
+   },
+   "ice": [
+    {
+     "t_k": 165.0,
+     "radius_um": 2.5898817161841294,
+     "visible_reflection": 0.7111179531400404,
+     "near_ir_reflection": 0.5853831863435585,
+     "near_ir_absorption": 0.1853636593414222,
+     "emissivity": 0.9999410510471937
+    },
+    {
+     "t_k": 180.0,
+     "radius_um": 5.92779,
+     "visible_reflection": 0.5193873868798256,
+     "near_ir_reflection": 0.43748362699248167,
+     "near_ir_absorption": 0.14117879539678915,
+     "emissivity": 0.9867671600408802
+    },
+    {
+     "t_k": 189.0,
+     "radius_um": 9.74075,
+     "visible_reflection": 0.4009431263207616,
+     "near_ir_reflection": 0.3401696998034782,
+     "near_ir_absorption": 0.11824089405152183,
+     "emissivity": 0.9314897105703648
+    },
+    {
+     "t_k": 200.0,
+     "radius_um": 17.6986,
+     "visible_reflection": 0.2777365646962507,
+     "near_ir_reflection": 0.23618723542008546,
+     "near_ir_absorption": 0.09357376612426434,
+     "emissivity": 0.7837653115486912
+    },
+    {
+     "t_k": 217.0,
+     "radius_um": 32.787,
+     "visible_reflection": 0.18015000831140715,
+     "near_ir_reflection": 0.15231909974254387,
+     "near_ir_absorption": 0.07151128929202531,
+     "emissivity": 0.5868511510753469
+    },
+    {
+     "t_k": 230.0,
+     "radius_um": 40.5552,
+     "visible_reflection": 0.1531019296395941,
+     "near_ir_reflection": 0.12887489140656325,
+     "near_ir_absorption": 0.06502766683899577,
+     "emissivity": 0.5221593573058835
+    }
+   ]
+  }
+ ],
+ "evidence": "Ebert and Curry (1992) ice optics and Kristj\u00e1nsson and Mitchell's radius by temperature as CAM3 and RRTMG carry them, in the atmosphere domain's delta-scaled PIFM two-stream, against PlaSim's liquid-water optics on the same water paths; the radius follows the table's trend below 180 K and the optics their formulas below 10 \u00b5m.",
+ "reading_rule": "A fully cloudy layer alone over a black ground: reflection and absorption are means over the sunlit disk (weights 2 mu0) in PlaSim's visible band (below 0.75 \u00b5m) and near-infrared band, and emissivity is 1 - exp(-1.66 kappa W) for water path W.",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/plasim_ice_optics.py": "c21af4d40819633b"
+  }
+ }
+}

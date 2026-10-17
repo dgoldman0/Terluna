@@ -2343,6 +2343,26 @@ def write_twilight(path: Path, mode: str) -> dict:
                 mode=mode, elevations=len(term['elevation_deg']), shells=len(edges) - 1)
 
 
+def held_share_above(zg, theta_at, qv_below, surface_pa, gravity, ztop):
+    """Vapour (kg/kg) at any height: the GCM's own up to its top level zg[-1], and above it whatever keeps that level's
+    share of ice saturation as the temperature falls. The pressure comes from the potential temperature profile
+    hydrostatically, at the build's gravity over the case's heights, as CM1 takes it from the sounding."""
+    import numpy as np
+    from atmosphere.radiative_convective.thermodynamics import saturation_pressure
+    cp, rd = 1005.7, 287.04
+    z = np.linspace(0.0, max(ztop, zg[-1]) * 1.01, 4001)
+    q = qv_below(z)
+    inv_tv = 1.0 / (theta_at(z) * (1.0 + 0.61 * q))
+    exner = (surface_pa / 1e5) ** (rd / cp) - gravity / cp * np.concatenate(
+        [[0.0], np.cumsum(0.5 * (inv_tv[1:] + inv_tv[:-1]) * np.diff(z))])
+    p, t = 1e5 * exner ** (cp / rd), theta_at(z) * exner
+    e = q * p / (0.622 + q)
+    share = float(np.interp(zg[-1], z, e / saturation_pressure(t)))
+    e_held = share * saturation_pressure(t)
+    log_held = np.log(0.622 * e_held / (p - e_held))
+    return lambda zz: np.where(np.asarray(zz) <= zg[-1], qv_below(zz), np.exp(np.interp(zz, z, log_held)))
+
+
 def setup(name: str) -> Path:
     """Write a case's inputs into climate/crm/runs/<name>: namelist, sounding, grid, nudging profile,
     surface segments, land-use table and links to the executable and radiation tables."""
@@ -2399,7 +2419,11 @@ def setup(name: str) -> Path:
     uu = np.array(prof['u_m_s'][::-1]) * (0.0 if pair else 1.0)
     top_slope = (th[-1] - th[-2]) / (zg[-1] - zg[-2])
     theta_at = lambda z: np.where(z <= zg[-1], np.interp(z, zg, th), th[-1] + top_slope * (z - zg[-1]))
-    qv_at = lambda z: np.exp(np.interp(z, zg, np.log(np.maximum(qv, 1e-9))))
+    qv_below = lambda z: np.exp(np.interp(z, zg, np.log(np.maximum(qv, 1e-9))))
+    # Above the GCM's top level the vapour falls with the temperature, keeping that level's share of ice saturation.
+    # Holding the vapour itself left the top of ring_45n_corrected_sideways 6-15 times saturated at the start, and the
+    # ice that formed there at once stayed at 1.1 g/m2 for the whole run (2026-10-17).
+    qv_at = held_share_above(zg, theta_at, qv_below, ref['surface_pa_sea'], gravity, zw[-1])
     u_at = lambda z: np.interp(z, zg, uu)
     kappa = 287.04 / 1005.7
     theta_sfc = ref['air_over_sea_k'] * (1e5 / ref['surface_pa_sea']) ** kappa

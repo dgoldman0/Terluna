@@ -13,6 +13,8 @@ ExoPlaSim, the first model installed (2026-09-25).
 | `products/moon_gcm_configuration.json` | Radius, gravity, rotation (synchronous, 27.32 d) and solar day (29.53 d), obliquity 1.54°, solar constant, and pointers to the atmosphere, ozone and shield products |
 | [exoplasim_run.py](exoplasim_run.py) | Runs the ExoPlaSim experiments one simulated year at a time, resumable after any stop |
 | [cloud_water.py](cloud_water.py) | Recomputes from a year of output the cloud water PlaSim's radiation sees, layer by layer, as PlaSim has it and with the runner's corrections |
+| [plasim_longwave.py](plasim_longwave.py) | PlaSim's clear-sky longwave column by column, checked against its own heating, and the correction by height fitted to the correlated-k model that the runner's `--longwave-correction` adds (`../results/gcm/longwave_<run>.json`) |
+| [plasim_ice_optics.py](plasim_ice_optics.py) | The ice optics the runner's `--ice-optics` gives cloud colder than −38 °C, beside PlaSim's liquid-water optics (`../results/gcm/ice_optics.json`) |
 | [compare.py](compare.py) | The numbers behind the run tables, and where a run still warming or cooling would settle |
 | [climatology.py](climatology.py) | A run's surface climatology over chosen years, for display and other lanes: cloud in a low deck (the lowest 34 km) and a high deck, precipitation, evaporation, soil moisture, temperature, water vapour, sea ice and snow, with cloud composited against the Sun by latitude and local time, and land air temperature the same way for all land and for the near and far sides. It writes `products/climatology_<run>.npz` (`terluna.climate.gcm-climatology/1`) |
 | [sun_check.py](sun_check.py) | Where a run's Sun shines: its sunlight along the equator against PlaSim's solar-position arithmetic, and by latitude against the orbit the run asked for and the one PlaSim's log reports. It writes `../results/gcm/sun_check_<run>.json` in seconds |
@@ -745,6 +747,19 @@ against the design case's years 20–29 are in
 
 **The glow pair on the corrected radiation**, which the author asked on 16 October to run soon, flew on 17 October
 from `A28_corrected_970` with 13 October's added dimming (`A28_corrected_gases_glow`, `A28_corrected_gases_glow_held`).
+Their years 10–19 against the design case's, from the runs' yearly means:
+
+| | `A28_corrected_970` | `A28_corrected_gases_glow` | `A28_corrected_gases_glow_held` |
+|---|---|---|---|
+| Sunlight scale | 0.970 | 0.929066 | 0.935856 |
+| Surface temperature | 295.02 K | 293.45 K, cooling 0.1 K a decade | 294.41 K |
+| Precipitation | 2.31 mm/day | 2.11 mm/day | 2.19 mm/day |
+| Cloud cover | 19.8% | 17.0% | 16.6% |
+
+On this radiation the same dimming cools more. The held branch ends 0.61 K below the design case, where on the old
+radiation it ended within 0.06 K, so holding the temperature takes about 0.3 points less dimming at 1.9 K a point:
+0.59 of the glow's watts in place of 0.71, if the gases' dimming still holds as it did. With no gases-only branch on
+this radiation the two parts cannot be told apart. The held branch rains 5.5% less, against 3.6% on the old radiation.
 The same morning the longwave was found to cool the lower air too much (below), and the author asked for the pair to
 run again with its correction in place, from a design case that lands on the design temperature under it; the lakes
 and the climate's other readers follow whatever that changes in the design case's rain.
@@ -786,6 +801,85 @@ cloud, fitted to Earth by relative humidity, answers it.
 ```sh
 climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave validate A28_corrected_970_heating --year 0   # a second
 climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave fit A28_corrected_970_heating --year 0 --every 20   # 2 min
+```
+
+### The high cloud and its ice
+
+On 17 October, before the 20-year test of the correction, the author asked for a look at PlaSim's high cloud: its
+humidity thresholds, how coarse its top levels are, and CM1 as a check that may itself lean on Earth.
+
+- **Its thresholds sit near where ice appears.** PlaSim reckons saturation over liquid water at every temperature
+  (Magnus-Tetens in `rainmod.f90`), for its cloud and for rain-out alike. Cloud grows as ((RH − rcrit)/(1 − rcrit))²
+  above rcrit = max(0.85, σ, 1 − σ). In the cold upper air ice saturation is 1.6–1.7 times lower, so the high cloud
+  starts at 136–149% of ice saturation and vapour stays in the air up to 160–169%. Clean air makes ice by itself at
+  154–167% at those temperatures (homogeneous freezing, Koop et al. 2000, as Kärcher and Lohmann 2002 fit it);
+  ice-nucleating particles start cirrus at 110–130%. After the correction the 81–107 km layer sits at 105% of ice
+  saturation in the 3-day means and 29% of them pass the cloud threshold: the state of Earth's tropical tropopause
+  layer, at the same pressures and temperatures, where thin cirrus is common.
+- **Its top layers are Earth's.** The top three are 0–9 kPa (above 107 km, reaching the top of the air), 9–20 kPa
+  (81–107 km) and 20–32 kPa (63–81 km), PlaSim's σ levels for Earth at the same pressures. Through the 81–107 km layer
+  the temperature runs from about 180 to 204 K and ice saturation changes 55-fold, while one humidity and one cloud
+  fraction stand for the whole layer. On Earth these levels lie at the tropopause with warmer air above. Behind the
+  titania stack the Moon's air keeps cooling upward, 150–177 K above an 86-km tropopause in the
+  [middle-atmosphere model](../../atmosphere/middle_atmosphere/README.md), so the coldest, most saturated air falls in
+  the two layers the grid resolves worst.
+- **CM1 checks less than it seemed.** The 45° N ring holds ice in every column above 107 km, but that ice comes from
+  its start, and below it the ring's air is held to the GCM's vapour
+  ([the CRM's account](../crm/README.md#what-else-divides-cm1-and-the-gcm-at-the-crossing)). Where it makes ice of
+  its own, at 63–107 km in 10–33% of columns, it holds 1.5–3.5 times the water PlaSim gives its clouds there.
+- **The correction's upper part stands.** On the ring's cloud-free columns RRTMG and the correlated-k model agree on
+  the clear-sky cooling at 81–107 km, 0.18 and 0.17 K a day; on the GCM's own PlaSim cools that layer 0.04 K a day where
+  correlated-k cools it 0.19. Its sunlight there was fitted by layer on 14 October (above).
+- **The cloud's optics were liquid water's.** PlaSim gives every cloud Stephens' (1978) fit of reflection to water
+  path and 0.1 m²/g of infrared absorption. Ice with the same water reflects more sunlight and, from crystals of about
+  15 µm up, traps less infrared.
+
+[plasim_ice_optics.py](plasim_ice_optics.py) gives cloud colder than −38 °C, where cloud water freezes by itself, CAM3's
+ice optics as RRTMG carries them: Ebert and Curry's (1992) extinction, single-scattering albedo and asymmetry in
+sunlight, through the atmosphere domain's delta-scaled PIFM two-stream (PlaSim's near-infrared band as the sum of
+their four bands, weighted by the TSIS-1 sunlight), and their grey infrared absorption, 0.005 + 1/r m²/g. The
+effective radius r comes from the layer's temperature through Kristjánsson and Mitchell's table for hexagonal columns,
+180–274 K, as CAM3 and WRF's RRTMG carry it. A fully cloudy layer alone, as means over the sunlit disk
+([ice_optics.json](../results/gcm/ice_optics.json)):
+
+| Cloud after the correction | Water | PlaSim's reflection; emissivity | Ice: radius; reflection; emissivity |
+|---|---|---|---|
+| 81–107 km, 189 K | 1.5 g/m² | 1.1%; 0.22 | 9.7 µm; 7.9%; 0.24 |
+| 63–81 km, 217 K | 4.7 g/m² | 7.6%; 0.54 | 32.8 µm; 7.3%; 0.24 |
+
+Two stretches lie past what the sources measured. Below 180 K, where the table ends, the radius follows the table's
+own trend, 5.5% smaller per kelvin, to 2.6 µm at 165 K, the top layer's temperature after the correction (5% of its
+sky clouded in the check year). Ebert and Curry fitted crystals of 10 µm and more, which the table gives from 190 K, so
+the cloud of the top two layers rests on their formulas carried to smaller crystals. Small ice absorbs strongly in the
+infrared per gram, as the formula's 1/r does. The lunar side may also differ: in a sixth of Earth's gravity crystals
+can grow larger before they fall, which would reflect less and trap less. The range for the high cloud, from its water
+and its crystals' size, follows the 20-year test.
+
+The runner's `--ice-optics` puts it into the twilight copy (`ICE_OPTICS_EDITS`: `ice_cloud_sw` after PlaSim sets each
+layer's liquid optics in `swr`, `ice_cloud_lw` after its cloud transmissivities in `lwr`), switched by `NICEOPT`. The
+patch's own Fortran, compiled as PlaSim compiles, reproduces the Python copy to nine figures, and with `NICEOPT` 0 the
+rebuilt model repeats the longwave check year exactly (`A28_corrected_970_lwcheck_rebuilt`). A year from the design
+case with both the correction and the ice optics (`A28_corrected_970_icecheck`, 4 ranks), against the uncorrected year
+and the correction alone, global means:
+
+| | Uncorrected (`A28_corrected_970_heating`) | Correction (`A28_corrected_970_lwcheck`) | Correction and ice |
+|---|---|---|---|
+| Ground: the year; its last 36 days | 294.99; 295.20 K | 298.04; 299.93 K | 297.46; 298.77 K |
+| Top of the air: the year; its last 36 days | −0.2; −0.9 W/m² | +19.5; +22.3 W/m² | +13.1; +15.5 W/m² |
+| Cloud effect: sunlight; infrared | −6.4; +6.6 W/m² | −7.1; +19.7 W/m² | −10.4; +16.4 W/m² |
+| Cloud cover: all; 81–107 km; 63–81 km | 19.6%; 5.6%; 6.1% | 45.7%; 29.9%; 13.6% | 43.1%; 27.0%; 14.1% |
+| Top two levels | 175.6, 196.2 K | 164.5, 189.3 K | 165.6, 189.2 K |
+
+Ice keeps nearly all the cloud, 27% of the sky at 81–107 km against 30%. It reflects 3.3 W/m² more sunlight
+and traps 3.4 W/m² less infrared, so the high cloud's net warming over the uncorrected year falls from 12.4 to
+5.7 W/m². The top of the air still gains 13 W/m² over the year, and the 20-year test with both
+(`A28_corrected_970_lw_ice`, from 17 October) finds where the Moon settles.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_ice_optics write          # seconds
+climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --folder A28_corrected_970_icecheck --years 1 --ncpus 4 \
+    --set sunlight_scale=0.970 --longwave-correction --ice-optics --heating-diagnostics \
+    --start-from climate/gcm/runs/A28_corrected_970/model/MOST_REST.00019
 ```
 
 ### The curved air's light
@@ -1045,7 +1139,10 @@ against the papers:
 | Gases, glow and dimming (`A28_gases`, `A28_gases_glow`, `A28_gases_glow_held`) | Done (20 years each from `A28_dim5_moon`'s year 29, 2026-10-13, above), with the calibration branches `A28_cal_control`, `A28_cal_co2_1022` and `A28_cal_control_patched` (one year each) |
 | Eddies every 6.5 hours (`A28_corrected_970_eddies`) | Done (2 years from `A28_corrected_970`'s year 19, 2026-10-17): `writes_per_lunar_day` 110, eleven means to each standard 3-day mean, for the eddies' transport the 3-day means miss at 45° N, 2% of it ([the CRM's account](../crm/README.md#what-else-divides-cm1-and-the-gcm-at-the-crossing)) |
 | Heating by process (`A28_corrected_970_heating`) | Done (1 year from `A28_corrected_970`'s year 19 on 2 ranks, 2026-10-17): `--heating-diagnostics`, PlaSim's temperature tendency of each process at every level (codes 21-29). At 47° N its longwave cools the lowest 1.8 km 10.6 W/m² more than the correlated-k model and the next layer 11.4 W/m² more: its water continuum was fitted to the outgoing longwave, which leaves its cooling by height free ([the CRM's account](../crm/README.md#what-else-divides-cm1-and-the-gcm-at-the-crossing)) |
-| The glow pair on the corrected radiation (`A28_corrected_gases_glow`, `A28_corrected_gases_glow_held`) | Running from the morning of 2026-10-17, 20 years each from `A28_corrected_970`'s year 19, with 13 October's added dimming on the design scale of 0.970 (above) |
+| The glow pair on the corrected radiation (`A28_corrected_gases_glow`, `A28_corrected_gases_glow_held`) | Done (20 years each from `A28_corrected_970`'s year 19, 2026-10-17), with 13 October's added dimming on the design scale of 0.970: the held branch 0.61 K below the design case (above). It runs again on the radiation with both corrections |
+| The longwave by height, a year (`A28_corrected_970_lwcheck`) | Done (1 year from `A28_corrected_970`'s year 19 on 2 ranks, 2026-10-17): `--longwave-correction`, the patch reproducing its Python copy; the high cloud forms (above) |
+| Ice optics, a year (`A28_corrected_970_icecheck`, `A28_corrected_970_lwcheck_rebuilt`) | Done (1 year each from `A28_corrected_970`'s year 19, 2026-10-17): the correction with `--ice-optics` on 4 ranks, and the longwave year again on the rebuilt model without them on 2 ranks, which repeats it exactly (above) |
+| The 20-year test of both (`A28_corrected_970_lw_ice`) | Running from 2026-10-17, 20 years from `A28_corrected_970`'s year 19 at 0.970 with `--longwave-correction --ice-optics` and the heating diagnostics, on 4 ranks |
 | D, E | D needs ExoPlaSim's ozone profile from the 1-D results; E's trace gases now enter as their CO2 equivalent (`--co2-ppm`, above) |
 
 ## First experiments

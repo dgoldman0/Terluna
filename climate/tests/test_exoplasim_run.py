@@ -129,6 +129,20 @@ class RunnerTests(unittest.TestCase):
         added = ''.join(new for _, new in er.LW_CORRECTION_EDITS)
         self.assertLess(added.index('call twilight_lw'), added.index('call lw_correction'))
 
+    def test_ice_optics_follow_the_longwave_patch(self):
+        # They extend the module, namelist and broadcast lines the longwave patch wrote and the subroutine it added,
+        # keep PlaSim's lines short, and act only where NICEOPT asks, after PlaSim has set the liquid optics.
+        written = ''.join(new for _, new in er.LW_CORRECTION_EDITS)
+        anchors = [old for old, _ in er.ICE_OPTICS_EDITS]
+        for old in anchors[:3] + anchors[5:]:
+            self.assertIn(old, written)
+        for _, new in er.ICE_OPTICS_EDITS:
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        sw, lw = er.ICE_OPTICS_EDITS[3][1], er.ICE_OPTICS_EDITS[4][1]
+        self.assertLess(sw.index('endwhere'), sw.index('if (niceopt == 1) call ice_cloud_sw'))
+        self.assertLess(lw.index('endif'), lw.index('if (niceopt == 1 .and. clgray <= 0.) call ice_cloud_lw'))
+        self.assertEqual(er.TWILIGHT_PATCHES[-1][1], 'Terluna: ice optics for cold cloud')
+
     def test_the_twilight_table_reads_as_the_patch_expects(self):
         if not er.TWILIGHT_PRODUCT.exists():
             self.skipTest('twilight.json not built')

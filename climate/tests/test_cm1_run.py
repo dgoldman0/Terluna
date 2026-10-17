@@ -785,3 +785,27 @@ def test_a_rerun_from_a_restart_takes_the_run_s_inputs_and_restart_and_its_own_e
     assert c.status('again').startswith('again: 7.50 of 14.50 days')
     with pytest.raises(RuntimeError, match='has been set up'):
         c.setup('again')
+
+
+def test_vapour_above_the_gcms_top_keeps_that_levels_share_of_ice_saturation():
+    from atmosphere.radiative_convective.thermodynamics import saturation_pressure
+    zg = np.array([1e3, 20e3, 60e3, 100e3, 130e3])
+    th = np.array([300.0, 310.0, 330.0, 370.0, 420.0])
+    qv = np.array([1.2e-2, 3e-3, 2e-4, 4e-6, 3e-7])
+    slope = (th[-1] - th[-2]) / (zg[-1] - zg[-2])
+    theta_at = lambda z: np.where(z <= zg[-1], np.interp(z, zg, th), th[-1] + slope * (z - zg[-1]))
+    qv_below = lambda z: np.exp(np.interp(z, zg, np.log(qv)))
+    qv_at = c.held_share_above(zg, theta_at, qv_below, 121400.0, 1.6242, 150e3)
+    below = np.linspace(0.0, 130e3, 50)
+    assert np.array_equal(qv_at(below), qv_below(below))
+    # Above the top the vapour falls, and its share of ice saturation stays the top level's.
+    z = np.linspace(130e3, 150e3, 9)
+    q = qv_at(z)
+    assert np.all(np.diff(q) < 0)
+    cp, rd, g = 1005.7, 287.04, 1.6242
+    zz = np.linspace(0.0, 150e3, 30001)
+    inv = 1.0 / (theta_at(zz) * (1.0 + 0.61 * qv_at(zz)))
+    exner = (121400.0 / 1e5) ** (rd / cp) - g / cp * np.concatenate([[0.0], np.cumsum(0.5 * (inv[1:] + inv[:-1]) * np.diff(zz))])
+    p, t = 1e5 * np.interp(z, zz, exner) ** (cp / rd), theta_at(z) * np.interp(z, zz, exner)
+    share = q * p / (0.622 + q) / saturation_pressure(t)
+    assert np.allclose(share, share[0], rtol=0.01)
