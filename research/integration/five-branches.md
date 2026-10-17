@@ -123,14 +123,16 @@ column, was put in my words at the synthesis commit; the phrases stay in its Sou
 
 ## Outside Git
 
-- **The worktree** links main's ignored inputs as the domain worktrees do, and holds hash-identical copies of the run
+- **The worktree** linked main's ignored inputs as the domain worktrees do, and held hash-identical copies of the run
   folders only the ecology and array-industry worktrees held: `research/runs/gases_glow_dimming`, `sky_ecology`,
   `solar_shield_array_flexible_benchmark` and `solar_shield_array_geometry_screen`, the last two rewritten by their
-  rebuilds here. `research/runs/climate_targets` links `terluna-research/climate-targets-runs`, which holds the
-  synthesis's extract. Main's checkout takes the same folders and link with the fast-forward.
+  rebuilds there. `research/runs/climate_targets` links `terluna-research/climate-targets-runs`, which holds the
+  synthesis's extract. Main's checkout took the same folders and link with the fast-forward.
 - **The session tools** on the research drive: the settle tool gained the power screen, study-relative inputs and the
   synthesis (its earlier copy is `settle.py.2026-10-17.bak`); the settled test's analysis scripts are in
-  `climate_settled_2026-10-17`; the check logs are `make_check_integration3_*.log`.
+  `climate_settled_2026-10-17`; the check logs are `make_check_integration3_*.log`; the merge helpers, among them the
+  field-by-field comparison of products with hashes set aside and the status record's merge at the JSON level, are in
+  `integration3`.
 
 ## Checks
 
@@ -141,6 +143,18 @@ the synthesis commit 2,430 with 19 skipped. Ecology's record of the settled test
 branch. Two merges first failed on a product outside the settle tool's reach (the power screen, then the symbioses), and
 one on the reduced gases; each was rebuilt or re-derived as above before its commit.
 
+## Afterwards
+
+Main's own checkout passed `make check` after the fast-forward, with 2,430 Python tests passed and 19 skipped. At the
+author's word the same day, the integration's worktree was removed and its branch deleted locally, once every folder
+it held outside Git was found to match main's checkout or to link the research drive; GitHub keeps the branch for the
+author. The five branches then moved up to main by fast-forward. Each was an ancestor of main, its worktree held
+nothing uncommitted, and none of main's new files would land on a file already there. Each worktree took the run
+folders it lacked from main's checkout, the links to the research drive's run folders and copies of the four folders
+above, so its checks read what main's do, and Jura Island's links into ecology's worktree became copies. Each worktree
+then passed `make check` with the same 2,430 Python tests passed and 19 skipped; the logs are
+`make_check_moved_up_*.log` with the session tools.
+
 ## Still to do from the integration
 
 - **The target climate,** the author's choice; then the design case for it, the glow pair from it, and geography's
@@ -148,6 +162,3 @@ one on the reduced gases; each was rebuilt or re-derived as above before its com
 - **The heat beyond the sunlight:** the power screen's heat in the ledgers, and the water top-up's energy recovery.
 - **The fleet's records:** illumination's fleet light on the layout's radii and the tile inventory against the
   eccentric rings' length.
-- **The branches:** domain/provisioning, domain/resources, domain/ecology, research/array-industry and
-  research/jura-island stand where they merged; whether they move to the new main, and whether this worktree is
-  removed, is the author's call.
