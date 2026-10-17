@@ -1,0 +1,399 @@
+{
+  "schema": "terluna.research.glow-absorption/1",
+  "producer": {
+    "files": {
+      "research/studies/gases_glow_dimming/glow_absorption.py": "4805f736c3c14a59d4a05c1250eabf177198c3eb1c6d2d7c83ed0e4b94118985"
+    },
+    "inputs": {
+      "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack.json": "3045438e2bc6df545f09378248ab083d47c66bb626ddf4f73f05702a4c911fba",
+      "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack_ts298.json": "eda1499f9ba2c3a5d3289aca15e4c3e81afa90d8adac33bb1d72c8446b9d75eb",
+      "atmosphere/middle_atmosphere/results/profiles/moon_1.2atm_titania_stack.csv": "e7079c911c9e70c475dec5fd3c2eecdad7e5e9435e63a7b31c68c644cecc3605",
+      "atmosphere/middle_atmosphere/results/profiles/moon_1.2atm_titania_stack_ts298.csv": "2144c1b0f2818eb4eb09e5bf2bdd1d3d7fd1bf67326873a5f27fc631d4dffb0c"
+    },
+    "ck_table_key": "4d7f190b96de7e0a"
+  },
+  "evidence": "The atmosphere domain's correlated-k thermal radiation (16 bands, 16 g-points, H2O lines and MT_CKD continuum, CO2, O3 and collision-induced absorption, checked against its line-by-line model) on the middle atmosphere's clear titania-stack columns at 1.2 atm. Clear sky: clouds would stop more of both before the ground. The glow is taken as grey and isotropic over a range of film temperatures; the films' own spectral emissivity and the fleet's place in the sky are not followed.",
+  "reading_rule": "Shares are of the infrared arriving at the top of the air. ground is the share reaching the surface; by_plasim_layer[k] the share absorbed in PlaSim's layer k, top first, between PLASIM_SIGMA_HALF[k] and [k+1] of the surface pressure; above_tropopause the share absorbed above the column's tropopause. at_design interpolates the two columns linearly to the design surface temperature.",
+  "design": {
+    "columns": [
+      "moon_1.2atm_titania_stack",
+      "moon_1.2atm_titania_stack_ts298"
+    ],
+    "design_surface_k": 294.9,
+    "glow_k": [
+      150.0,
+      170.0,
+      190.0,
+      230.0,
+      270.0,
+      300.0
+    ],
+    "plasim_sigma_half": [
+      0.0,
+      0.076,
+      0.162,
+      0.26,
+      0.374,
+      0.5,
+      0.634,
+      0.764,
+      0.882,
+      0.966,
+      1.0
+    ]
+  },
+  "columns": {
+    "moon_1.2atm_titania_stack": {
+      "surface_k": 288.0,
+      "olr_w_m2": 215.3,
+      "returned_infrared": {
+        "ground": 0.1153,
+        "by_plasim_layer": [
+          0.02134,
+          0.02772,
+          0.06288,
+          0.13,
+          0.1661,
+          0.1408,
+          0.1107,
+          0.1096,
+          0.08219,
+          0.03327
+        ],
+        "above_tropopause": 0.04142
+      },
+      "glow": {
+        "150_k": {
+          "ground": 0.01051,
+          "by_plasim_layer": [
+            0.1043,
+            0.09952,
+            0.1851,
+            0.2625,
+            0.1853,
+            0.09211,
+            0.03133,
+            0.01577,
+            0.009666,
+            0.003913
+          ],
+          "above_tropopause": 0.1781
+        },
+        "170_k": {
+          "ground": 0.01866,
+          "by_plasim_layer": [
+            0.1117,
+            0.08944,
+            0.1625,
+            0.239,
+            0.1882,
+            0.1018,
+            0.04094,
+            0.02498,
+            0.0162,
+            0.006558
+          ],
+          "above_tropopause": 0.1783
+        },
+        "190_k": {
+          "ground": 0.02825,
+          "by_plasim_layer": [
+            0.1166,
+            0.08109,
+            0.1437,
+            0.2177,
+            0.1862,
+            0.1083,
+            0.05019,
+            0.03493,
+            0.0235,
+            0.009511
+          ],
+          "above_tropopause": 0.1771
+        },
+        "230_k": {
+          "ground": 0.04795,
+          "by_plasim_layer": [
+            0.1181,
+            0.06816,
+            0.1163,
+            0.1852,
+            0.1768,
+            0.1151,
+            0.06604,
+            0.05364,
+            0.03755,
+            0.0152
+          ],
+          "above_tropopause": 0.1692
+        },
+        "270_k": {
+          "ground": 0.06408,
+          "by_plasim_layer": [
+            0.1124,
+            0.05899,
+            0.09962,
+            0.1667,
+            0.1679,
+            0.1174,
+            0.0774,
+            0.06773,
+            0.0482,
+            0.01951
+          ],
+          "above_tropopause": 0.1567
+        },
+        "300_k": {
+          "ground": 0.07284,
+          "by_plasim_layer": [
+            0.1064,
+            0.05404,
+            0.09217,
+            0.1601,
+            0.1635,
+            0.1179,
+            0.08316,
+            0.07481,
+            0.05346,
+            0.02164
+          ],
+          "above_tropopause": 0.147
+        }
+      }
+    },
+    "moon_1.2atm_titania_stack_ts298": {
+      "surface_k": 298.0,
+      "olr_w_m2": 232.5,
+      "returned_infrared": {
+        "ground": 0.02296,
+        "by_plasim_layer": [
+          0.02364,
+          0.04306,
+          0.1339,
+          0.1869,
+          0.1609,
+          0.1316,
+          0.1426,
+          0.1026,
+          0.03694,
+          0.01495
+        ],
+        "above_tropopause": 0.03411
+      },
+      "glow": {
+        "150_k": {
+          "ground": 0.0016,
+          "by_plasim_layer": [
+            0.109,
+            0.1406,
+            0.3239,
+            0.2403,
+            0.1149,
+            0.03404,
+            0.01975,
+            0.01114,
+            0.003334,
+            0.00135
+          ],
+          "above_tropopause": 0.1449
+        },
+        "170_k": {
+          "ground": 0.002996,
+          "by_plasim_layer": [
+            0.1164,
+            0.1253,
+            0.2876,
+            0.2375,
+            0.1255,
+            0.04558,
+            0.03166,
+            0.01902,
+            0.005929,
+            0.0024
+          ],
+          "above_tropopause": 0.1492
+        },
+        "190_k": {
+          "ground": 0.004726,
+          "by_plasim_layer": [
+            0.1212,
+            0.1127,
+            0.2566,
+            0.2305,
+            0.132,
+            0.05695,
+            0.04463,
+            0.02797,
+            0.008989,
+            0.003638
+          ],
+          "above_tropopause": 0.1515
+        },
+        "230_k": {
+          "ground": 0.008513,
+          "by_plasim_layer": [
+            0.1225,
+            0.09348,
+            0.2109,
+            0.214,
+            0.1377,
+            0.07677,
+            0.06911,
+            0.04555,
+            0.01527,
+            0.006181
+          ],
+          "above_tropopause": 0.1485
+        },
+        "270_k": {
+          "ground": 0.01194,
+          "by_plasim_layer": [
+            0.1165,
+            0.0804,
+            0.1842,
+            0.2019,
+            0.1386,
+            0.0911,
+            0.08749,
+            0.05916,
+            0.0204,
+            0.008259
+          ],
+          "above_tropopause": 0.1393
+        },
+        "300_k": {
+          "ground": 0.01409,
+          "by_plasim_layer": [
+            0.1103,
+            0.07362,
+            0.1735,
+            0.1967,
+            0.1382,
+            0.09836,
+            0.09665,
+            0.06605,
+            0.02316,
+            0.009373
+          ],
+          "above_tropopause": 0.1312
+        }
+      }
+    }
+  },
+  "at_design": {
+    "returned_infrared": {
+      "ground": 0.05158,
+      "by_plasim_layer": [
+        0.02293,
+        0.03831,
+        0.1119,
+        0.1693,
+        0.1625,
+        0.1345,
+        0.1327,
+        0.1047,
+        0.05097,
+        0.02063
+      ],
+      "above_tropopause": 0.03638
+    },
+    "glow": {
+      "150_k": {
+        "ground": 0.004363,
+        "by_plasim_layer": [
+          0.1075,
+          0.1279,
+          0.2809,
+          0.2472,
+          0.1367,
+          0.05204,
+          0.02334,
+          0.01258,
+          0.005297,
+          0.002144
+        ],
+        "above_tropopause": 0.1552
+      },
+      "170_k": {
+        "ground": 0.007851,
+        "by_plasim_layer": [
+          0.115,
+          0.1142,
+          0.2488,
+          0.238,
+          0.1449,
+          0.06302,
+          0.03454,
+          0.02087,
+          0.009113,
+          0.003689
+        ],
+        "above_tropopause": 0.1582
+      },
+      "190_k": {
+        "ground": 0.01202,
+        "by_plasim_layer": [
+          0.1198,
+          0.1029,
+          0.2216,
+          0.2266,
+          0.1488,
+          0.07287,
+          0.04635,
+          0.03013,
+          0.01349,
+          0.005459
+        ],
+        "above_tropopause": 0.1594
+      },
+      "230_k": {
+        "ground": 0.02074,
+        "by_plasim_layer": [
+          0.1211,
+          0.08563,
+          0.1816,
+          0.2051,
+          0.1498,
+          0.08864,
+          0.06815,
+          0.04806,
+          0.02218,
+          0.008977
+        ],
+        "above_tropopause": 0.1549
+      },
+      "270_k": {
+        "ground": 0.0281,
+        "by_plasim_layer": [
+          0.1153,
+          0.07376,
+          0.158,
+          0.1909,
+          0.1477,
+          0.09927,
+          0.08436,
+          0.06182,
+          0.02902,
+          0.01175
+        ],
+        "above_tropopause": 0.1447
+      },
+      "300_k": {
+        "ground": 0.0323,
+        "by_plasim_layer": [
+          0.1091,
+          0.06755,
+          0.1483,
+          0.1854,
+          0.146,
+          0.1044,
+          0.09247,
+          0.06877,
+          0.03255,
+          0.01318
+        ],
+        "above_tropopause": 0.1361
+      }
+    }
+  }
+}

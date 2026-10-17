@@ -1,0 +1,792 @@
+{
+ "schema": "terluna.biosphere.canopy-light-response/1",
+ "producer": {
+  "domain": "biosphere",
+  "files": {
+   "biosphere/canopy/light_response.py": "7ee2146eadcc7bf7",
+   "biosphere/canopy/plant.py": "59cccf4987e840b9",
+   "biosphere/canopy/model.py": "a0432ee55ced9a88",
+   "biosphere/canopy/radiation.py": "efee02f040d919dd",
+   "biosphere/canopy/leaf.py": "1b73e4e1a597c4ab",
+   "biosphere/canopy/leaf_optics.py": "91ac3ddf64733355",
+   "biosphere/long_night.py": "10b3ed59853a4aa4"
+  },
+  "inputs": {
+   "surface_light_sha256": "e2406dbceb34193e",
+   "solved_sky_sha256": "a94333cd71a83169",
+   "climatology_sha256": "3fb185c8087ea9b5",
+   "climatology_run": "A28_dim5_moon",
+   "climatology_years": [
+    20,
+    29
+   ],
+   "plant_sha256": "87cf08572ea40213"
+  }
+ },
+ "evidence": "The plant model's carbon budget (plant.py) recomputed with the Moon's light scaled, at the chosen climate's temperatures and the Earth calibration of stem and root upkeep: a clear-sky, one-dimensional stand with ample water, nutrients and sinks for its sugar, and no acclimation to the dimmer light. The response is a property of the canopy and plant models; where water, nutrients or sinks limit growth the light matters less.",
+ "reading_rule": "Carbon is g C per m2 of ground over one solar cycle, as in plant.json; bands are |latitude| ranges of land on the near side. elasticity[d] is the share of photosynthesis, growth or store lost per share of light taken at dimming d (a store elasticity below zero is a larger store). by_lai gives the canopy's gross photosynthesis alone at each leaf area. by_sun_height is the deep canopy (leaf area index 5) at 22 C leaf temperature; by_part splits the deep canopy's photosynthesis over the cycle and its loss at a 5% dimming by the Sun's height, twilight below the horizon.",
+ "settings": {
+  "dimmings": [
+   0.01,
+   0.05,
+   0.1
+  ],
+  "strategies": [
+   "earth_like",
+   "idle_quarter"
+  ],
+  "side": "near",
+  "bands_abs_latitude": {
+   "0": [
+    0.0,
+    15.0
+   ],
+   "30": [
+    20.0,
+    40.0
+   ],
+   "60": [
+    50.0,
+    70.0
+   ]
+  },
+  "stem_root_respiration_25c": 1.54368,
+  "sun_height_row_leaf_c": 22.0,
+  "parts_by_sun_height_deg": {
+   "twilight": [
+    -90.0,
+    0.0
+   ],
+   "low_sun": [
+    0.0,
+    10.0
+   ],
+   "morning_and_afternoon": [
+    10.0,
+    30.0
+   ],
+   "middle_sun": [
+    30.0,
+    60.0
+   ],
+   "high_sun": [
+    60.0,
+    90.0
+   ]
+  }
+ },
+ "bands": {
+  "0": {
+   "earth_like": {
+    "base": {
+     "gpp": 400.282,
+     "twilight_gpp": 6.56912,
+     "growth": 223.977,
+     "store": 48.579,
+     "carbon_use_efficiency": 0.559547
+    },
+    "dimmed": {
+     "0.01": {
+      "gpp": 398.429,
+      "twilight_gpp": 6.50561,
+      "growth": 222.494,
+      "store": 48.6202,
+      "carbon_use_efficiency": 0.558428
+     },
+     "0.05": {
+      "gpp": 390.859,
+      "twilight_gpp": 6.25109,
+      "growth": 216.438,
+      "store": 48.7905,
+      "carbon_use_efficiency": 0.55375
+     },
+     "0.1": {
+      "gpp": 381.025,
+      "twilight_gpp": 5.93191,
+      "growth": 208.571,
+      "store": 49.0166,
+      "carbon_use_efficiency": 0.547394
+     }
+    },
+    "elasticity": {
+     "0.01": {
+      "gpp": 0.463037,
+      "growth": 0.662017,
+      "store": -0.0848172
+     },
+     "0.05": {
+      "gpp": 0.47083,
+      "growth": 0.673158,
+      "store": -0.0870645
+     },
+     "0.1": {
+      "gpp": 0.481084,
+      "growth": 0.68782,
+      "store": -0.0900871
+     }
+    }
+   },
+   "idle_quarter": {
+    "base": {
+     "gpp": 400.282,
+     "twilight_gpp": 6.56912,
+     "growth": 255.627,
+     "store": 10.8916,
+     "carbon_use_efficiency": 0.638617
+    },
+    "dimmed": {
+     "0.01": {
+      "gpp": 398.429,
+      "twilight_gpp": 6.50561,
+      "growth": 254.192,
+      "store": 10.8998,
+      "carbon_use_efficiency": 0.637986
+     },
+     "0.05": {
+      "gpp": 390.859,
+      "twilight_gpp": 6.25109,
+      "growth": 248.268,
+      "store": 10.9333,
+      "carbon_use_efficiency": 0.635185
+     },
+     "0.1": {
+      "gpp": 381.025,
+      "twilight_gpp": 5.93191,
+      "growth": 240.57,
+      "store": 10.9775,
+      "carbon_use_efficiency": 0.631374
+     }
+    },
+    "elasticity": {
+     "0.01": {
+      "gpp": 0.463037,
+      "growth": 0.561456,
+      "store": -0.0749327
+     },
+     "0.05": {
+      "gpp": 0.47083,
+      "growth": 0.575778,
+      "store": -0.0766042
+     },
+     "0.1": {
+      "gpp": 0.481084,
+      "growth": 0.589041,
+      "store": -0.0788622
+     }
+    }
+   },
+   "by_lai": {
+    "1": {
+     "gpp": 174.212,
+     "elasticity": {
+      "0.01": 0.291266,
+      "0.05": 0.299692,
+      "0.1": 0.310986
+     }
+    },
+    "2": {
+     "gpp": 281.462,
+     "elasticity": {
+      "0.01": 0.367341,
+      "0.05": 0.376186,
+      "0.1": 0.387905
+     }
+    },
+    "3": {
+     "gpp": 344.332,
+     "elasticity": {
+      "0.01": 0.417075,
+      "0.05": 0.42556,
+      "0.1": 0.436743
+     }
+    },
+    "4": {
+     "gpp": 380.104,
+     "elasticity": {
+      "0.01": 0.446321,
+      "0.05": 0.454396,
+      "0.1": 0.465025
+     }
+    },
+    "5": {
+     "gpp": 400.282,
+     "elasticity": {
+      "0.01": 0.463037,
+      "0.05": 0.47083,
+      "0.1": 0.481084
+     }
+    }
+   },
+   "by_part_at_5_percent": {
+    "twilight": {
+     "hours": 354.367,
+     "share_of_photosynthesis": 0.0164112,
+     "share_of_the_loss": 0.0337501,
+     "elasticity": 0.968273
+    },
+    "low_sun": {
+     "hours": 39.3741,
+     "share_of_photosynthesis": 0.035005,
+     "share_of_the_loss": 0.0637917,
+     "elasticity": 0.858021
+    },
+    "morning_and_afternoon": {
+     "hours": 78.7482,
+     "share_of_photosynthesis": 0.146592,
+     "share_of_the_loss": 0.19417,
+     "elasticity": 0.623642
+    },
+    "middle_sun": {
+     "hours": 118.122,
+     "share_of_photosynthesis": 0.359764,
+     "share_of_the_loss": 0.34479,
+     "elasticity": 0.451233
+    },
+    "high_sun": {
+     "hours": 118.122,
+     "share_of_photosynthesis": 0.442228,
+     "share_of_the_loss": 0.363498,
+     "elasticity": 0.387008
+    }
+   }
+  },
+  "30": {
+   "earth_like": {
+    "base": {
+     "gpp": 371.876,
+     "twilight_gpp": 7.67232,
+     "growth": 202.652,
+     "store": 45.2329,
+     "carbon_use_efficiency": 0.544944
+    },
+    "dimmed": {
+     "0.01": {
+      "gpp": 370.016,
+      "twilight_gpp": 7.59825,
+      "growth": 201.164,
+      "store": 45.2786,
+      "carbon_use_efficiency": 0.543662
+     },
+     "0.05": {
+      "gpp": 362.429,
+      "twilight_gpp": 7.30138,
+      "growth": 195.094,
+      "store": 45.4672,
+      "carbon_use_efficiency": 0.538296
+     },
+     "0.1": {
+      "gpp": 352.595,
+      "twilight_gpp": 6.92904,
+      "growth": 187.227,
+      "store": 45.7178,
+      "carbon_use_efficiency": 0.530997
+     }
+    },
+    "elasticity": {
+     "0.01": {
+      "gpp": 0.500164,
+      "growth": 0.73426,
+      "store": -0.100861
+     },
+     "0.05": {
+      "gpp": 0.508085,
+      "growth": 0.745889,
+      "store": -0.103562
+     },
+     "0.1": {
+      "gpp": 0.518495,
+      "growth": 0.761171,
+      "store": -0.107194
+     }
+    }
+   },
+   "idle_quarter": {
+    "base": {
+     "gpp": 371.876,
+     "twilight_gpp": 7.67232,
+     "growth": 232.569,
+     "store": 9.91488,
+     "carbon_use_efficiency": 0.625392
+    },
+    "dimmed": {
+     "0.01": {
+      "gpp": 370.016,
+      "twilight_gpp": 7.59825,
+      "growth": 231.126,
+      "store": 9.92393,
+      "carbon_use_efficiency": 0.624638
+     },
+     "0.05": {
+      "gpp": 362.429,
+      "twilight_gpp": 7.30138,
+      "growth": 225.207,
+      "store": 9.96123,
+      "carbon_use_efficiency": 0.621381
+     },
+     "0.1": {
+      "gpp": 352.595,
+      "twilight_gpp": 6.92904,
+      "growth": 217.525,
+      "store": 10.0106,
+      "carbon_use_efficiency": 0.616925
+     }
+    },
+    "elasticity": {
+     "0.01": {
+      "gpp": 0.500164,
+      "growth": 0.620117,
+      "store": -0.091215
+     },
+     "0.05": {
+      "gpp": 0.508085,
+      "growth": 0.633108,
+      "store": -0.0934902
+     },
+     "0.1": {
+      "gpp": 0.518495,
+      "growth": 0.646861,
+      "store": -0.0965631
+     }
+    }
+   },
+   "by_lai": {
+    "1": {
+     "gpp": 169.482,
+     "elasticity": {
+      "0.01": 0.329943,
+      "0.05": 0.339037,
+      "0.1": 0.351175
+     }
+    },
+    "2": {
+     "gpp": 268.738,
+     "elasticity": {
+      "0.01": 0.409849,
+      "0.05": 0.418992,
+      "0.1": 0.431064
+     }
+    },
+    "3": {
+     "gpp": 324.407,
+     "elasticity": {
+      "0.01": 0.457969,
+      "0.05": 0.466591,
+      "0.1": 0.477933
+     }
+    },
+    "4": {
+     "gpp": 355.033,
+     "elasticity": {
+      "0.01": 0.485026,
+      "0.05": 0.493218,
+      "0.1": 0.503984
+     }
+    },
+    "5": {
+     "gpp": 371.876,
+     "elasticity": {
+      "0.01": 0.500164,
+      "0.05": 0.508085,
+      "0.1": 0.518495
+     }
+    }
+   },
+   "by_part_at_5_percent": {
+    "twilight": {
+     "hours": 354.367,
+     "share_of_photosynthesis": 0.0206314,
+     "share_of_the_loss": 0.0392651,
+     "elasticity": 0.966974
+    },
+    "low_sun": {
+     "hours": 45.5263,
+     "share_of_photosynthesis": 0.0436637,
+     "share_of_the_loss": 0.0734147,
+     "elasticity": 0.854277
+    },
+    "morning_and_afternoon": {
+     "hours": 93.2674,
+     "share_of_photosynthesis": 0.18777,
+     "share_of_the_loss": 0.230588,
+     "elasticity": 0.623946
+    },
+    "middle_sun": {
+     "hours": 215.573,
+     "share_of_photosynthesis": 0.747935,
+     "share_of_the_loss": 0.656732,
+     "elasticity": 0.446129
+    },
+    "high_sun": {
+     "hours": 0.0,
+     "share_of_photosynthesis": 0.0,
+     "share_of_the_loss": 0.0,
+     "elasticity": 0.0
+    }
+   }
+  },
+  "60": {
+   "earth_like": {
+    "base": {
+     "gpp": 267.914,
+     "twilight_gpp": 14.0477,
+     "growth": 126.396,
+     "store": 36.7253,
+     "carbon_use_efficiency": 0.47178
+    },
+    "dimmed": {
+     "0.01": {
+      "gpp": 266.212,
+      "twilight_gpp": 13.9124,
+      "growth": 125.035,
+      "store": 36.8012,
+      "carbon_use_efficiency": 0.469682
+     },
+     "0.05": {
+      "gpp": 259.301,
+      "twilight_gpp": 13.3699,
+      "growth": 119.506,
+      "store": 37.114,
+      "carbon_use_efficiency": 0.460878
+     },
+     "0.1": {
+      "gpp": 250.416,
+      "twilight_gpp": 12.6895,
+      "growth": 112.398,
+      "store": 37.5274,
+      "carbon_use_efficiency": 0.448845
+     }
+    },
+    "elasticity": {
+     "0.01": {
+      "gpp": 0.635113,
+      "growth": 1.07697,
+      "store": -0.206699
+     },
+     "0.05": {
+      "gpp": 0.642933,
+      "growth": 1.09022,
+      "store": -0.211639
+     },
+     "0.1": {
+      "gpp": 0.653123,
+      "growth": 1.1075,
+      "store": -0.218406
+     }
+    }
+   },
+   "idle_quarter": {
+    "base": {
+     "gpp": 267.914,
+     "twilight_gpp": 14.0477,
+     "growth": 153.059,
+     "store": 6.66211,
+     "carbon_use_efficiency": 0.571301
+    },
+    "dimmed": {
+     "0.01": {
+      "gpp": 266.212,
+      "twilight_gpp": 13.9124,
+      "growth": 151.74,
+      "store": 6.68015,
+      "carbon_use_efficiency": 0.569997
+     },
+     "0.05": {
+      "gpp": 259.301,
+      "twilight_gpp": 13.3699,
+      "growth": 146.432,
+      "store": 6.75409,
+      "carbon_use_efficiency": 0.564718
+     },
+     "0.1": {
+      "gpp": 250.416,
+      "twilight_gpp": 12.6895,
+      "growth": 139.629,
+      "store": 6.85096,
+      "carbon_use_efficiency": 0.557587
+     }
+    },
+    "elasticity": {
+     "0.01": {
+      "gpp": 0.635113,
+      "growth": 0.861963,
+      "store": -0.270795
+     },
+     "0.05": {
+      "gpp": 0.642933,
+      "growth": 0.865993,
+      "store": -0.276151
+     },
+     "0.1": {
+      "gpp": 0.653123,
+      "growth": 0.877494,
+      "store": -0.283467
+     }
+    }
+   },
+   "by_lai": {
+    "1": {
+     "gpp": 138.634,
+     "elasticity": {
+      "0.01": 0.476802,
+      "0.05": 0.487054,
+      "0.1": 0.500541
+     }
+    },
+    "2": {
+     "gpp": 206.753,
+     "elasticity": {
+      "0.01": 0.560171,
+      "0.05": 0.569454,
+      "0.1": 0.581578
+     }
+    },
+    "3": {
+     "gpp": 240.879,
+     "elasticity": {
+      "0.01": 0.602016,
+      "0.05": 0.610527,
+      "0.1": 0.621624
+     }
+    },
+    "4": {
+     "gpp": 258.516,
+     "elasticity": {
+      "0.01": 0.623591,
+      "0.05": 0.631657,
+      "0.1": 0.642168
+     }
+    },
+    "5": {
+     "gpp": 267.914,
+     "elasticity": {
+      "0.01": 0.635113,
+      "0.05": 0.642933,
+      "0.1": 0.653123
+     }
+    }
+   },
+   "by_part_at_5_percent": {
+    "twilight": {
+     "hours": 354.367,
+     "share_of_photosynthesis": 0.0524337,
+     "share_of_the_loss": 0.0786938,
+     "elasticity": 0.96493
+    },
+    "low_sun": {
+     "hours": 79.9787,
+     "share_of_photosynthesis": 0.107339,
+     "share_of_the_loss": 0.140801,
+     "elasticity": 0.843364
+    },
+    "morning_and_afternoon": {
+     "hours": 274.388,
+     "share_of_photosynthesis": 0.840228,
+     "share_of_the_loss": 0.780505,
+     "elasticity": 0.597234
+    },
+    "middle_sun": {
+     "hours": 0.0,
+     "share_of_photosynthesis": 0.0,
+     "share_of_the_loss": 0.0,
+     "elasticity": 0.0
+    },
+    "high_sun": {
+     "hours": 0.0,
+     "share_of_photosynthesis": 0.0,
+     "share_of_the_loss": 0.0,
+     "elasticity": 0.0
+    }
+   }
+  }
+ },
+ "by_sun_height": {
+  "elevation_deg": [
+   -35.0,
+   -30.0,
+   -25.0,
+   -20.0,
+   -18.0,
+   -15.0,
+   -12.0,
+   -10.0,
+   -8.0,
+   -6.0,
+   -5.0,
+   -4.0,
+   -3.0,
+   -2.0,
+   -1.0,
+   0.0,
+   1.0,
+   2.0,
+   3.0,
+   5.0,
+   7.0,
+   10.0,
+   15.0,
+   20.0,
+   30.0,
+   45.0,
+   60.0,
+   75.0,
+   90.0
+  ],
+  "par_umol_m2_s": [
+   0.146831,
+   0.39647,
+   1.07054,
+   2.91813,
+   4.35173,
+   7.80725,
+   13.6378,
+   19.2864,
+   26.6493,
+   35.9168,
+   41.3006,
+   47.1927,
+   53.5831,
+   60.4514,
+   67.7623,
+   75.4899,
+   84.4019,
+   93.6948,
+   103.662,
+   125.694,
+   150.593,
+   193.28,
+   277.549,
+   375.042,
+   604.213,
+   955.808,
+   1247.47,
+   1437.82,
+   1503.76
+  ],
+  "gpp_umol_m2_s": [
+   0.0107255,
+   0.0289559,
+   0.0781511,
+   0.212767,
+   0.316988,
+   0.567373,
+   0.987153,
+   1.39056,
+   1.91145,
+   2.55896,
+   2.93088,
+   3.33427,
+   3.76743,
+   4.22785,
+   4.71202,
+   5.21704,
+   5.78007,
+   6.35089,
+   6.94413,
+   8.18378,
+   9.46827,
+   11.4143,
+   14.5357,
+   17.3623,
+   22.341,
+   27.5764,
+   30.7423,
+   32.4525,
+   32.9937
+  ],
+  "elasticity": {
+   "0.01": [
+    0.999904,
+    0.99974,
+    0.999296,
+    0.998071,
+    0.997111,
+    0.994765,
+    0.990703,
+    0.986641,
+    0.981163,
+    0.973972,
+    0.969646,
+    0.964789,
+    0.959379,
+    0.953404,
+    0.946871,
+    0.939779,
+    0.929027,
+    0.916981,
+    0.903327,
+    0.871552,
+    0.835335,
+    0.777839,
+    0.688125,
+    0.614741,
+    0.509228,
+    0.419565,
+    0.372861,
+    0.349426,
+    0.342201
+   ],
+   "0.05": [
+    0.999908,
+    0.99975,
+    0.999325,
+    0.998149,
+    0.997228,
+    0.994979,
+    0.991084,
+    0.987192,
+    0.981943,
+    0.975058,
+    0.970917,
+    0.966268,
+    0.961091,
+    0.955374,
+    0.949122,
+    0.942335,
+    0.932028,
+    0.920461,
+    0.907323,
+    0.876624,
+    0.841417,
+    0.785098,
+    0.696398,
+    0.623302,
+    0.517691,
+    0.427583,
+    0.380553,
+    0.356948,
+    0.349672
+   ],
+   "0.1": [
+    0.999912,
+    0.999763,
+    0.99936,
+    0.998247,
+    0.997375,
+    0.995245,
+    0.991559,
+    0.987878,
+    0.982917,
+    0.976412,
+    0.972501,
+    0.968112,
+    0.963224,
+    0.957828,
+    0.951926,
+    0.945518,
+    0.935769,
+    0.924807,
+    0.912324,
+    0.883009,
+    0.849129,
+    0.794396,
+    0.707116,
+    0.634468,
+    0.528798,
+    0.438149,
+    0.390708,
+    0.366886,
+    0.359545
+   ]
+  }
+ }
+}

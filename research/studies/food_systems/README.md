@@ -587,7 +587,7 @@ the share of rain the gutters keep (80–95%), the emitter pressure and the wate
 | `resources/results/phosphorus.json` | domain/resources | `4089899e2b70e8b7…` |
 | `resources/phosphorus.py` | domain/resources | `48f3ef951dc6d781…` |
 | `resources/phosphorus.md` | domain/resources | `afa8db4d5e8b698c…` |
-| `resources/results/sea_phosphorus.json` | domain/resources | `9fb7acc3ea489035…` |
+| `resources/results/sea_phosphorus.json` | domain/resources | `16507b01be544f2f…` |
 
 The runner reads them in the tree, which has held every former branch's inputs since the joint integration of 12
 October 2026, and refuses bytes whose sha256 differs; the full hashes and Git blobs are in `run.py` and in the product's

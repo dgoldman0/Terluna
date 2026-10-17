@@ -1,0 +1,65 @@
+{
+  "source_admission": "Published values used in run.py and README.md, each with how far it was read for this study on 2026-10-13. The GeoMIP paper was read in full text (a copy outside the repository); the others are values this study takes as the literature states them, or as standard forms whose use here is a design guess, and are marked so. No outside dataset or full paper is committed. Earth's measurements and models serve as reference points for the Moon's engineered biosphere and its waters.",
+  "sources": [
+    {
+      "key": "tilmes2013_geomip",
+      "citation": "Tilmes S, Fasullo J, Lamarque J-F, Marsh DR, Mills M, Alterskjær K, et al. 2013, The hydrological impact of geoengineering in the Geoengineering Model Intercomparison Project (GeoMIP), Journal of Geophysical Research: Atmospheres 118, 11036-11058",
+      "doi_or_url": "https://doi.org/10.1002/jgrd.50868",
+      "use": "G1_SOLAR_REDUCTION, G1_PRECIPITATION: the rain's response to a dimming that holds the temperature",
+      "values_used": {
+        "solar_reduction_percent_by_model": [3.8, 4.0, 4.7, 4.1, 4.3, 4.5, 3.9, 4.1, 3.5, 5.0, 4.7, 4.0],
+        "global_precipitation_cut_percent": [3.2, 5.8],
+        "land_evaporation_cut_percent": 10
+      },
+      "access": "full text read 2026-10-13: Table 1 (the twelve models' solar reductions, from Kravitz et al. 2013), the abstract (\"Global precipitation is reduced by around 4.5%\"), section 3 (\"4.5 +/- 1.3%\"; \"Total precipitation amount is controlled by the surface energy budget\"; the reduction correlates with the fast response to 4xCO2) and section 4 (\"For G1, evaporation decreases by around 10% over land\", with CO2's physiological effect on stomata named as a likely cause)"
+    },
+    {
+      "key": "kravitz2013_geomip",
+      "citation": "Kravitz B, Caldeira K, Boucher O, Robock A, Rasch PJ, Alterskjær K, et al. 2013, Climate model response from the Geoengineering Model Intercomparison Project (GeoMIP), Journal of Geophysical Research: Atmospheres 118, 8320-8332",
+      "doi_or_url": "https://doi.org/10.1002/jgrd.50646",
+      "use": "the G1 experiment's design and its models' solar reductions, as Tilmes et al. (2013) Table 1 summarises them",
+      "values_used": {},
+      "access": "cited through Tilmes et al. 2013, Table 1; not read separately"
+    },
+    {
+      "key": "behrenfeld_falkowski1997_vgpm",
+      "citation": "Behrenfeld MJ, Falkowski PG 1997, Photosynthetic rates derived from satellite-based chlorophyll concentration, Limnology and Oceanography 42, 1-20",
+      "doi_or_url": "https://doi.org/10.4319/lo.1997.42.1.0001",
+      "use": "VGPM_E: the light term E0/(E0 + 4.1) of the vertically generalised production model, E0 in mol photons m-2 per day, whose elasticity 4.1/(E0 + 4.1) stands for a nutrient-poor sea's response to its light",
+      "values_used": {"vgpm_light_constant_mol_m2_day": 4.1},
+      "access": "the model's standard form as widely reproduced; not reread for this study"
+    },
+    {
+      "key": "talling1957_column",
+      "citation": "Talling JF 1957, The phytoplankton population as a compound photosynthetic system, New Phytologist 56, 133-149",
+      "doi_or_url": "New Phytologist 56(2), 133-149 (no link checked)",
+      "use": "EK_UMOL: a self-shaded, nutrient-replete water column's areal production, proportional to ln(2 E0/Ek), for the lakes' and coasts' response to their light at fixed biomass; Ek 100-300 umol m-2 s-1 is a design guess on Earth's phytoplankton",
+      "values_used": {"ek_umol_m2_s": [100.0, 300.0]},
+      "access": "the integral's standard form; not reread for this study"
+    },
+    {
+      "key": "field1998_npp",
+      "citation": "Field CB, Behrenfeld MJ, Randerson JT, Falkowski P 1998, Primary production of the biosphere: integrating terrestrial and oceanic components, Science 281, 237-240",
+      "doi_or_url": "https://doi.org/10.1126/science.281.5374.237",
+      "use": "the anchor for the waters' production guesses: Earth's ocean, 48.5 Pg C a year, about 135 g C m-2 on average; the open sea's 50-150 g C m-2 a year, the coasts' 300-1,000 and the lakes' 100-400 are design guesses about that anchor",
+      "values_used": {"ocean_npp_pg_c_yr": 48.5, "global_npp_pg_c_yr": 104.9},
+      "access": "abstract and record pages fetched 2026-10-13 (global 104.9 Pg C a year, about half oceanic); the biome table not read"
+    },
+    {
+      "key": "nemani2003_constraints",
+      "citation": "Nemani RR, Keeling CD, Hashimoto H, Jolly WM, Piper SC, Tucker CJ, Myneni RB, Running SW 2003, Climate-driven increases in global terrestrial net primary production from 1982 to 1999, Science 300, 1560-1563",
+      "doi_or_url": "https://doi.org/10.1126/science.1082750",
+      "use": "Earth's comparison in the README: water limits growth on about 40% of the vegetated land, temperature on 33% and radiation on 27%",
+      "values_used": {"water_share": 0.40, "temperature_share": 0.33, "radiation_share": 0.27},
+      "access": "the abstract's figures as widely cited; not reread for this study"
+    },
+    {
+      "key": "exoplasim_landmod",
+      "citation": "ExoPlaSim 3.4.2, plasim/src/landmod.f90 (Paradise et al. 2022, after PlaSim, Fraedrich et al. 2005)",
+      "doi_or_url": "climate/gcm/.venv/lib/python3.13/site-packages/exoplasim/plasim/src/landmod.f90",
+      "use": "GCM_STRESS_M: the land's evaporation runs at drhs = min(1, W/(drhsfull wsmax)) of its potential, with drhsfull 0.4 and wsmax 0.5 m, which the design run's landmod namelist leaves at their defaults",
+      "values_used": {"drhsfull": 0.4, "wsmax_m": 0.5},
+      "access": "source read 2026-10-13 (lines 52-59 and 406-407), and the run's landmod_namelist"
+    }
+  ]
+}

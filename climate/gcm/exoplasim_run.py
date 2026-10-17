@@ -5,6 +5,9 @@
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --stop              # stop it cleanly
     climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A --years 15 --folder A_full_column_clouds \
         --set cloud_water=full_column --start-from climate/gcm/runs/A/model/MOST_REST.00039   # a branch
+    climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --years 20 --folder A28_gases_glow \
+        --co2-ppm 755 --top-infrared 10.1718 0.5165 --set sunlight_scale=0.909867 \
+        --start-from climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029        # CO2 and infrared from space
 
 Run from the repository root with the GCM environment (climate/gcm/.venv, which holds ExoPlaSim and
 MPI-built executables). Each experiment lives in climate/gcm/runs/<name>/ (ignored by Git; on the
@@ -37,13 +40,19 @@ transmission (protection/spectra/shield_transmission.json) sets both the total f
 between ExoPlaSim's two solar bands. The air is the 1-D models' dry composition (O2 at 21,227 Pa,
 Earth's Ar/N2, 400 ppm CO2, N2 the balance), with the pressure set at the water level as on Earth:
 land stands above it, so the global mean surface pressure is a few per cent lower. The land albedo
-is a uniform placeholder. PlaSim counts 12 of the Moon's rotations in a 360-day year, which makes its
-model day 29.8 Earth days (the rotation keeps the true 27.32 days); a model year is 12 of them, and the
+is a uniform placeholder. --co2-ppm sets the CO2 the air carries instead of 400 ppm, with N2 the balance; PlaSim's
+radiation knows only water vapour, CO2 and ozone, so a run can carry another gas's warming as the CO2 that warms as
+much (its CO2 equivalent), and the run records the choice. --top-infrared adds infrared from space at the top of the
+air, by day and by night (TOP_INFRARED_EDITS). PlaSim counts 12 of the Moon's rotations in a 360-day year, which makes
+its model day 29.8 Earth days (the rotation keeps the true 27.32 days); a model year is 12 of them, and the
 output ten means per model day. The random seed is fixed, so runs repeat exactly. A patch to PlaSim's
 solang turns the Sun evenly at the synodic rate, one turn per 29.53 days, and the orbit is held to the
 Moon's elements with its 1.54 degree tilt. Runs before 2026-09-29 had PlaSim's own clock, which sweeps the
 Sun unevenly, and Earth's orbit for 1 AD with a 23.7 degree tilt: see the README ("How the Moon is set
-up").
+up"). Since 2026-10-14 the corrected radiation is the standard, as the author decided: new runs take the curved air's
+light and infrared (--twilight full) and CO2 and O2 in PlaSim's sunlight (--gas-bands), with the water and Rayleigh
+multipliers refitted with them, in the twilight copy of ExoPlaSim; --twilight none and --no-gas-bands leave them out.
+Every earlier run had neither, so none of them resumes under the new defaults.
 """
 from __future__ import annotations
 import argparse
@@ -58,6 +67,7 @@ import sys
 import time
 import numpy as np
 from shared.constants import STANDARD_GRAVITY
+from climate.gcm import plasim_ice_optics as pio
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -93,11 +103,13 @@ MODEL = dict(resolution='T21', layers=10, timestep_min=30.0, land_albedo=0.2, st
              # the Rayleigh multiplier then refitted beside the water absorption below. 1.0 and 0.024
              # reproduce the unmodified model, which absorbed about 14 W/m2 too much sunlight and emitted
              # 12 W/m2 too little when warm.
-             rayleigh_scale=2.215, h2o_continuum=0.004,
+             rayleigh_scale=2.237, h2o_continuum=0.004,
              # A multiplier on water vapour's absorptivity in PlaSim's near-infrared band (SHORTWAVE_EDITS below;
              # 1.0 is PlaSim's own). With the Rayleigh multiplier refitted beside it, it brings PlaSim's clear-sky
-             # split of the sunlight to line-by-line's on 11 columns of the design case (plasim_shortwave.py).
-             sw_water_absorption=1.356,
+             # split of the sunlight to line-by-line's on 11 columns of the design case (plasim_shortwave.py),
+             # with the Moon's slant factors and the CO2 and O2 bands since 2026-10-14
+             # (../results/gcm/shortwave_fit_A28_dim5_lunar.json); runs before had 1.356 and 2.215, fitted without.
+             sw_water_absorption=1.292,
              # How the radiation sees cloud water (CLOUD_WATER below). Runs A and B used 'plasim', ExoPlaSim
              # unmodified; 'earth_path' corrects its Earth-fitted formula for the Moon's gravity.
              cloud_water='earth_path',
@@ -157,6 +169,20 @@ CLEAR_SKY = {101: ('rsscs', 'surface_net_shortwave_flux_clear_sky'),
              102: ('rlscs', 'surface_net_longwave_flux_clear_sky'),
              103: ('rstcs', 'toa_net_shortwave_flux_clear_sky'),
              104: ('rltcs', 'toa_net_longwave_flux_clear_sky')}
+# PlaSim's gridpoint diagnostics (NDIAGGP = 1) write the temperature tendency of each process at every level as
+# codes 21-29, K/s: the sum of all of them that the gridpoint diabatic step (gridpointd) hands the dynamics, the
+# nudging of the top level (mknudge), the surface's sensible heat into the lowest layer (mkshfl), vertical diffusion
+# (vdiff), longwave and shortwave radiation (radmod), large-scale condensation (mklsp), Kuo convection (kuo) and dry
+# convective adjustment (mkdca). The dynamics' own tendency is not among them.
+HEATING = {21: ('dt_diab', 'temperature_tendency_summed_over_the_physics'),
+           22: ('dt_nudge', 'temperature_tendency_due_to_top_level_nudging'),
+           23: ('dt_sfc', 'temperature_tendency_due_to_surface_sensible_heat'),
+           24: ('dt_vdif', 'temperature_tendency_due_to_vertical_diffusion'),
+           25: ('dt_lw', 'temperature_tendency_due_to_longwave_radiation'),
+           26: ('dt_sw', 'temperature_tendency_due_to_shortwave_radiation'),
+           27: ('dt_lsp', 'temperature_tendency_due_to_large_scale_condensation'),
+           28: ('dt_conv', 'temperature_tendency_due_to_convection'),
+           29: ('dt_dca', 'temperature_tendency_due_to_dry_convective_adjustment')}
 
 
 def output_variables(model: dict) -> list:
@@ -258,21 +284,502 @@ SHORTWAVE_EDITS = [
     ("     &         /(1.-2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))  &\n",
      "     &         /max(0.001,1.-swh2oscale*2.9*zwv(:)/((1.+141.5*zwv(:))**0.635+5.925*zwv(:))  &\n"),
 ]
+# Infrared arriving from space at the top of the air, W/m2 over the day and the night hemispheres: the ring fleet's
+# glow and the Moon's own infrared its films return. PlaSim's longwave scheme takes the downward flux at the model's
+# top as zbd(:,0), the emission of the top layer (its ExoPlaSim note marks the place for an outside source), and
+# carries it down with the column's broadband transmissivities, so what enters there is absorbed in the air as the
+# air's own infrared is and the rest reaches the ground. 0 by day and night, the default, leaves the model as it was.
+TOP_INFRARED_EDITS = [
+    ("      real :: swh2oscale = 1.0   ! Terluna: multiplier on water vapour's shortwave absorptivity\n",
+     "      real :: swh2oscale = 1.0   ! Terluna: multiplier on water vapour's shortwave absorptivity\n"
+     "      real :: irtopday = 0.0     ! Terluna: infrared from space at the top of the air by day, W/m2\n"
+     "      real :: irtopnight = 0.0   ! Terluna: and by night\n"),
+    (",minwavel,rayscale,nsunclock,swh2oscale\n", ",minwavel,rayscale,nsunclock,swh2oscale,irtopday,irtopnight\n"),
+    ("      call mpbcr(swh2oscale)\n", "      call mpbcr(swh2oscale)\n      call mpbcr(irtopday)\n      call mpbcr(irtopnight)\n"),
+    ("      zbd(:,0)=SBK*zttop**4 !We could add IR flux from M dwarf host star here? --AYP\n",
+     "      zbd(:,0)=SBK*zttop**4 !We could add IR flux from M dwarf host star here? --AYP\n"
+     "      where (gmu0(:) > 0.)    ! Terluna: infrared from space at the top of the air\n"
+     "       zbd(:,0)=zbd(:,0)+irtopday\n"
+     "      elsewhere\n"
+     "       zbd(:,0)=zbd(:,0)+irtopnight\n"
+     "      endwhere\n"),
+]
+# The curved air's sunlight (radmod.f90; climate/gcm/twilight.py). PlaSim lights a column only while its Sun is above
+# the horizon and stretches the direct beam's water path with Earth's horizon magnification, 35 / sqrt(1 + 1224 mu^2).
+# NTWILIGHT 1 adds, at the end of swr, what the Moon's tall curved air takes beyond a flat column of the same air, by
+# the solar elevation at each point (solang keeps the cosine below the horizon too): to each layer, and to the ground
+# in the column's clear share, from the table twilight.dat the runner writes from ../results/gcm/twilight.json. The
+# extra flux enters at the top, so the energy budget carries it. NTWILW 1 adds, at the end of lwr, the infrared the same
+# geometry lets out beyond a flat column, each layer's and the ground's at the design column's temperatures scaled with
+# their own to the fourth power. ZMLUNAR (a, b, c) replaces Earth's magnification with the Moon's,
+# (mu + a) / (mu^2 + b mu + c). The defaults, 0, leave the model as it was.
+TWILIGHT_EDITS = [
+    ("      real :: irtopnight = 0.0   ! Terluna: and by night\n",
+     "      real :: irtopnight = 0.0   ! Terluna: and by night\n"
+     "      integer :: ntwilight = 0   ! Terluna: 1 adds the curved air's twilight and side light (twilight.dat)\n"
+     "      real :: zmlunar(3) = 0.0   ! Terluna: the Moon's slant water path (mu+a)/(mu^2+b mu+c); 0 keeps Earth's\n"
+     "      integer, parameter :: NTWLMAX = 400 ! Terluna: elevations the twilight table may hold\n"
+     "      integer :: ntwl = 0        ! Terluna: elevations it holds\n"
+     "      real :: twlel(NTWLMAX) = 0.0       ! Terluna: solar elevation, degrees\n"
+     "      real :: twlg(NTWLMAX) = 0.0        ! Terluna: added to the ground, per unit sunlight at the beam\n"
+     "      real :: twlq(NLEV,NTWLMAX) = 0.0   ! Terluna: added to each layer, the same\n"
+     "      real :: gmuz(NHOR) = 0.0   ! Terluna: cosine of the solar zenith angle, below the horizon too\n"
+     "      integer :: ntwilw = 0      ! Terluna: 1 adds the curved air's extra infrared escape (twilight.dat)\n"
+     "      real :: twlw(NLEV+1) = 0.0 ! Terluna: extra infrared to space from each layer and the ground\n"
+     "      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n"),
+    (",minwavel,rayscale,nsunclock,swh2oscale,irtopday,irtopnight\n",
+     ",minwavel,rayscale,nsunclock,swh2oscale,irtopday,irtopnight  &\n     &               ,ntwilight,zmlunar,ntwilw\n"),
+    ("      call mpbcr(irtopnight)\n",
+     "      call mpbcr(irtopnight)\n"
+     "      call mpbci(ntwilight)\n"
+     "      call mpbcrn(zmlunar,3)\n"
+     "      call mpbci(ntwilw)\n"
+     "      if (ntwilight == 1 .or. ntwilw == 1) then   ! Terluna: the curved air's twilight table\n"
+     "       if (mypid == NROOT) then\n"
+     "        open(47,file='twilight.dat',form='formatted',status='old')\n"
+     "        read(47,*) ntwl\n"
+     "        if (ntwl < 2 .or. ntwl > NTWLMAX) stop 'twilight.dat: too few or too many elevations'\n"
+     "        do jtwl = 1, ntwl\n"
+     "         read(47,*) twlel(jtwl),twlg(jtwl),(twlq(jlev,jtwl),jlev=1,NLEV)\n"
+     "        enddo\n"
+     "        read(47,*) (twlw(jlev),jlev=1,NLEV+1)\n"
+     "        read(47,*) (twlt(jlev),jlev=1,NLEV+1)\n"
+     "        close(47)\n"
+     "       endif\n"
+     "       call mpbci(ntwl)\n"
+     "       call mpbcrn(twlel,NTWLMAX)\n"
+     "       call mpbcrn(twlg,NTWLMAX)\n"
+     "       call mpbcrn(twlq,NLEV*NTWLMAX)\n"
+     "       call mpbcrn(twlw,NLEV+1)\n"
+     "       call mpbcrn(twlt,NLEV+1)\n"
+     "      endif\n"),
+    ("      gmu0(:) = 0.0\n", "      gmu0(:) = 0.0\n      gmuz(:) = 0.0 ! Terluna: the cosine below the horizon too\n"),
+    ("         zmuz=sin(zdecl)*sid(jlat)+cola(jlat)*cos(zdecl)*cos(zhangle)\n"
+     "         if (zmuz > zdawn) gmu0(jhor) = zmuz\n",
+     "         zmuz=sin(zdecl)*sid(jlat)+cola(jlat)*cos(zdecl)*cos(zhangle)\n"
+     "         if (zmuz > zdawn) gmu0(jhor) = zmuz\n"
+     "         gmuz(jhor) = zmuz\n"),
+    ("          zmuz=solslatsdec+solclatcdec/PI\n         endif\n         if (zmuz > zdawn) gmu0(jhor) = zmuz\n",
+     "          zmuz=solslatsdec+solclatcdec/PI\n         endif\n         if (zmuz > zdawn) gmu0(jhor) = zmuz\n"
+     "         gmuz(jhor) = zmuz\n"),
+    ("       zm(:)=35./SQRT(1.+1224.*zmu0(:)*zmu0(:))\n",
+     "       zm(:)=35./SQRT(1.+1224.*zmu0(:)*zmu0(:))\n"
+     "       zm(:)=merge((zmu0(:)+zmlunar(1))                                       &\n"
+     "     &            /max(zmu0(:)*zmu0(:)+zmlunar(2)*zmu0(:)+zmlunar(3),1.e-12)    &\n"
+     "     &            ,zm(:),zmlunar(3) > 0.) ! Terluna: the Moon's slant path\n"),
+    ("      return\n      end subroutine swr\n",
+     "      if (ntwilight == 1) call twilight_term ! Terluna: the curved air's twilight and side light\n"
+     "      return\n      end subroutine swr\n"
+     "\n"
+     "      subroutine twilight_term\n"
+     "      use radmod\n"
+     "      implicit none\n"
+     "!\n"
+     "!     Terluna: the sunlight the Moon's curved air adds to the flat column (climate/gcm/twilight.py), by the\n"
+     "!     solar elevation at each point, below the horizon too: to each layer and, in the column's clear share,\n"
+     "!     to the ground, carried down from the top as net downward flux\n"
+     "!\n"
+     "      integer :: jhor, jlev, jlo, jhi, jmid\n"
+     "      real :: zel, zu, zsum, zclear, zsun\n"
+     "      zsun = gsol0 * gdist2\n"
+     "      do jhor = 1, NHOR\n"
+     "       zel = asin(max(-1.0, min(1.0, gmuz(jhor)))) * 180.0 / PI\n"
+     "       if (zel < twlel(1) .or. zel > twlel(ntwl)) cycle\n"
+     "       jlo = 1\n"
+     "       jhi = ntwl\n"
+     "       do while (jhi - jlo > 1)\n"
+     "        jmid = (jlo + jhi) / 2\n"
+     "        if (twlel(jmid) > zel) then\n"
+     "         jhi = jmid\n"
+     "        else\n"
+     "         jlo = jmid\n"
+     "        endif\n"
+     "       enddo\n"
+     "       zu = (zel - twlel(jlo)) / (twlel(jhi) - twlel(jlo))\n"
+     "       zclear = 1.0\n"
+     "       do jlev = 1, NLEV\n"
+     "        zclear = zclear * (1.0 - dcc(jhor,jlev) * nclouds)\n"
+     "       enddo\n"
+     "       zsum = zsun * ((1.0 - zu) * twlg(jlo) + zu * twlg(jhi)) * zclear\n"
+     "       dswfl(jhor,NLEP) = dswfl(jhor,NLEP) + zsum\n"
+     "       dfd(jhor,NLEP) = dfd(jhor,NLEP) + zsum\n"
+     "       do jlev = NLEV, 1, -1\n"
+     "        zsum = zsum + zsun * ((1.0 - zu) * twlq(jlev,jlo) + zu * twlq(jlev,jhi))\n"
+     "        dswfl(jhor,jlev) = dswfl(jhor,jlev) + zsum\n"
+     "        dfd(jhor,jlev) = dfd(jhor,jlev) + zsum\n"
+     "       enddo\n"
+     "      enddo\n"
+     "      return\n"
+     "      end subroutine twilight_term\n"),
+    ("      dlwfl(:,:)=dftu(:,:)+dftd(:,:)\n!\n      return\n      end subroutine lwr\n",
+     "      dlwfl(:,:)=dftu(:,:)+dftd(:,:)\n"
+     "      if (ntwilw == 1) call twilight_lw ! Terluna: the curved air's extra infrared escape\n"
+     "!\n      return\n      end subroutine lwr\n"
+     "\n"
+     "      subroutine twilight_lw\n"
+     "      use radmod\n"
+     "      implicit none\n"
+     "!\n"
+     "!     Terluna: the infrared the Moon's curved air loses beyond a flat column (climate/gcm/twilight.py): each\n"
+     "!     layer's and the ground's extra escape to space at the design column's temperatures, scaled with their\n"
+     "!     own to the fourth power, carried up to the top as upward flux (negative in PlaSim)\n"
+     "!\n"
+     "      integer :: jhor, jlev\n"
+     "      real :: zsum\n"
+     "      do jhor = 1, NHOR\n"
+     "       zsum = twlw(NLEP) * (dt(jhor,NLEP) / twlt(NLEP))**4\n"
+     "       dftu(jhor,NLEP) = dftu(jhor,NLEP) - zsum\n"
+     "       dlwfl(jhor,NLEP) = dlwfl(jhor,NLEP) - zsum\n"
+     "       do jlev = NLEV, 1, -1\n"
+     "        zsum = zsum + twlw(jlev) * (dt(jhor,jlev) / twlt(jlev))**4\n"
+     "        dftu(jhor,jlev) = dftu(jhor,jlev) - zsum\n"
+     "        dlwfl(jhor,jlev) = dlwfl(jhor,jlev) - zsum\n"
+     "       enddo\n"
+     "      enddo\n"
+     "      return\n"
+     "      end subroutine twilight_lw\n"),
+]
 # (file, marker, edits) in the order applied; a marker appears only in the text its patch adds.
 PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
            ('rainmod.f90', 'Terluna: gravity for the heights below', RAINMOD_EDITS),
            ('rainmod.f90', 'Terluna: seconds per day in the convective cloud formula', CONVECTIVE_EDITS),
            ('radmod.f90', "Terluna: the Sun's clock", SUN_EDITS),
-           ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS)]
+           ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS),
+           ('radmod.f90', 'Terluna: infrared from space at the top of the air', TOP_INFRARED_EDITS)]
+# CO2 and O2 in PlaSim's sunlight (radmod.f90, swr; climate/gcm/plasim_shortwave.py, GAS_BANDS). PlaSim's two bands hold
+# no CO2 or O2, whose strongest lines the Moon's deep column takes high up, so it puts that sunlight where its water
+# is. NGASBANDS 1 adds CO2 and O2 in the near-infrared band and O2 in the visible, each an absorptivity of its own
+# pressure-scaled path (ZGASQ, fitted in ../results/gcm/shortwave_gases.json) and the gases' mass fractions (ZGASW),
+# along the Moon's slant path for well-mixed air (ZMAIRLUNAR), multiplied into the layers' transmissions as water's
+# is. With the fractions at 0, the default, every transmission is multiplied by 1 and the model is as it was.
+def _gas_absorptivity(g, u):
+    return f"zgasq(1,{g})*{u}/((1.+zgasq(2,{g})*{u})**zgasq(3,{g})+zgasq(4,{g})*{u})"
 
 
-def ensure_patched() -> dict:
+def _gas_layer(g, down, up):
+    a = lambda u: _gas_absorptivity(g, u)
+    return (f"        zgp(:)=zgyl(:,jlev,{g})\n"
+            f"        ztg(:)=(1.-{a('zgp(:)')})/ztgt(:,{g})\n"
+            f"        ztgt(:,{g})=ztgt(:,{g})*ztg(:)\n"
+            f"        zgp(:)=zgyt(:,{g})+zbetta*(zgut(:,{g})-zgul(:,jlev,{g}))\n"
+            f"        ztgu(:)=ztgtu(:,{g})/(1.-{a('zgp(:)')})\n"
+            f"        ztgtu(:,{g})=ztgtu(:,{g})/ztgu(:)\n"
+            f"        {down}(:)={down}(:)*ztg(:)\n"
+            f"        {up}(:)={up}(:)*ztgu(:)\n")
+
+
+GAS_EDITS = [
+    ("      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n",
+     "      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n"
+     "      integer :: ngasbands = 0   ! Terluna: 1 adds CO2 and O2 to the sunlight's absorbers\n"
+     "      real :: zgasq(5,3) = 0.0   ! Terluna: their fits (a, b, c, d, n): CO2 and O2 near infrared, O2 visible\n"
+     "      real :: zgasw(2) = 0.0     ! Terluna: the mass fractions of CO2 and O2\n"
+     "      real :: zmairlunar(3) = 0.0 ! Terluna: the Moon's slant factor for well-mixed air (0: the water's)\n"),
+    ("     &               ,ntwilight,zmlunar,ntwilw\n",
+     "     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar\n"),
+    ("      call mpbci(ntwilw)\n",
+     "      call mpbci(ntwilw)\n"
+     "      call mpbci(ngasbands)   ! Terluna: CO2 and O2 in the sunlight\n"
+     "      call mpbcrn(zgasq,15)\n"
+     "      call mpbcrn(zgasw,2)\n"
+     "      call mpbcrn(zmairlunar,3)\n"),
+    ("      real ztwvt(NHOR),ztwvtu(NHOR)! total water vapor transmissivities (d/u)\n",
+     "      real ztwvt(NHOR),ztwvtu(NHOR)! total water vapor transmissivities (d/u)\n"
+     "      real zgu(NHOR,3),zgut(NHOR,3),zgyt(NHOR,3)  ! Terluna: CO2 and O2 paths: layer, total, effective total\n"
+     "      real zgul(NHOR,NLEV,3),zgyl(NHOR,NLEV,3)   ! Terluna: their amounts above each layer's bottom\n"
+     "      real ztgt(NHOR,3),ztgtu(NHOR,3),ztg(NHOR),ztgu(NHOR),zgp(NHOR),zmg(NHOR)\n"),
+    ("       zwvt(:)=0.\n       zywvt(:)=0.\n",
+     "       zwvt(:)=0.\n       zywvt(:)=0.\n"
+     "       zmg(:)=merge((zmu0(:)+zmairlunar(1))                                   &\n"
+     "     &             /max(zmu0(:)*zmu0(:)+zmairlunar(2)*zmu0(:)+zmairlunar(3),1.e-12) &\n"
+     "     &             ,zm(:),zmairlunar(3) > 0.) ! Terluna: the slant path for CO2 and O2\n"
+     + ''.join(f"       zgut(:,{g})=0.\n       zgyt(:,{g})=0.\n" for g in (1, 2, 3))),
+    ("        zywvl(:,jlev)=zywvt(:)\n",
+     "        zywvl(:,jlev)=zywvt(:)\n"
+     + ''.join(f"        zgu(:,{g})=dsigma(jlev)*dp(:)/ga*zgasw({1 if g == 1 else 2})*(sigma(jlev)*dp(:)/1.e5)**zgasq(5,{g})\n"
+               f"        zgut(:,{g})=zgut(:,{g})+zgu(:,{g})\n"
+               f"        zgyt(:,{g})=zcs(:)*(zgyt(:,{g})+zmg(:)*zgu(:,{g}))+(1.-zcs(:))*(zgyt(:,{g})+zbetta*zgu(:,{g}))\n"
+               f"        zgul(:,jlev,{g})=zgut(:,{g})\n"
+               f"        zgyl(:,jlev,{g})=zgyt(:,{g})\n" for g in (1, 2, 3))),
+    ("     &            /zsolar2) ! Terluna: calibrated absorptivity\n",
+     "     &            /zsolar2) ! Terluna: calibrated absorptivity\n"
+     + ''.join(f"       ztgt(:,{g})=1.\n"
+               f"       zgp(:)=zgyt(:,{g})+zbetta*zgut(:,{g})\n"
+               f"       ztgtu(:,{g})=1.-{_gas_absorptivity(g, 'zgp(:)')}\n" for g in (1, 2, 3))),
+    ("        zto3tu(:)=zto3tu(:)/zto3u(:)\n",
+     "        zto3tu(:)=zto3tu(:)/zto3u(:)\n" + _gas_layer(3, 'zto3', 'zto3u')),
+    ("       ztwvtu(:)=ztwvtu(:)/ztwvu(:)\n",
+     "       ztwvtu(:)=ztwvtu(:)/ztwvu(:)\n" + _gas_layer(1, 'ztwv', 'ztwvu') + _gas_layer(2, 'ztwv', 'ztwvu')),
+]
+# The longwave by height (2026-10-17): Sasamori's broadband absorptivities put PlaSim's longwave cooling too low in the
+# Moon's moist, massive air, by up to 12 W/m2 a layer against the correlated-k model, which its own continuum and path
+# exponents cannot move (plasim_longwave.py). NLWCORR 1 adds, after the curved air's escape, each layer's extra escape
+# to space fitted over land and over sea, scaled with its own temperature to the fourth power, from lwcorr.dat.
+LW_CORRECTION_EDITS = [
+    ("      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n",
+     "      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n"
+     "      integer :: nlwcorr = 0     ! Terluna: 1 adds the longwave by height (lwcorr.dat)\n"
+     "      real :: lwcl(NLEV+1) = 0.0 ! Terluna: the longwave by height, extra escape of each layer over land\n"
+     "      real :: lwcs(NLEV+1) = 0.0 ! Terluna: the same over sea\n"
+     "      real :: lwct(NLEV+1) = 0.0 ! Terluna: the temperatures they are given at\n"),
+    ("     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar\n",
+     "     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar,nlwcorr\n"),
+    ("      call mpbci(ntwilw)\n",
+     "      call mpbci(ntwilw)\n"
+     "      call mpbci(nlwcorr)\n"
+     "      if (nlwcorr == 1) then   ! Terluna: the longwave by height\n"
+     "       if (mypid == NROOT) then\n"
+     "        open(48,file='lwcorr.dat',form='formatted',status='old')\n"
+     "        read(48,*) (lwcl(jlev),jlev=1,NLEV+1)\n"
+     "        read(48,*) (lwcs(jlev),jlev=1,NLEV+1)\n"
+     "        read(48,*) (lwct(jlev),jlev=1,NLEV+1)\n"
+     "        close(48)\n"
+     "       endif\n"
+     "       call mpbcrn(lwcl,NLEV+1)\n"
+     "       call mpbcrn(lwcs,NLEV+1)\n"
+     "       call mpbcrn(lwct,NLEV+1)\n"
+     "      endif\n"),
+    ("      if (ntwilw == 1) call twilight_lw ! Terluna: the curved air's extra infrared escape\n",
+     "      if (ntwilw == 1) call twilight_lw ! Terluna: the curved air's extra infrared escape\n"
+     "      if (nlwcorr == 1) call lw_correction ! Terluna: the longwave by height\n"),
+    ("      end subroutine twilight_lw\n",
+     "      end subroutine twilight_lw\n"
+     "\n"
+     "      subroutine lw_correction\n"
+     "      use radmod\n"
+     "      implicit none\n"
+     "!\n"
+     "!     Terluna: the longwave by height (climate/gcm/plasim_longwave.py): each layer's and the ground's extra\n"
+     "!     escape to space, fitted over land and over sea to the correlated-k model, scaled with its own\n"
+     "!     temperature to the fourth power and carried up to the top as upward flux (negative in PlaSim)\n"
+     "!\n"
+     "      integer :: jhor, jlev\n"
+     "      real :: zsum, zland\n"
+     "      do jhor = 1, NHOR\n"
+     "       zland = dls(jhor)\n"
+     "       zsum = (zland*lwcl(NLEP) + (1.-zland)*lwcs(NLEP)) * (dt(jhor,NLEP) / lwct(NLEP))**4\n"
+     "       dftu(jhor,NLEP) = dftu(jhor,NLEP) - zsum\n"
+     "       dlwfl(jhor,NLEP) = dlwfl(jhor,NLEP) - zsum\n"
+     "       do jlev = NLEV, 1, -1\n"
+     "        zsum = zsum + (zland*lwcl(jlev) + (1.-zland)*lwcs(jlev)) * (dt(jhor,jlev) / lwct(jlev))**4\n"
+     "        dftu(jhor,jlev) = dftu(jhor,jlev) - zsum\n"
+     "        dlwfl(jhor,jlev) = dlwfl(jhor,jlev) - zsum\n"
+     "       enddo\n"
+     "      enddo\n"
+     "      return\n"
+     "      end subroutine lw_correction\n"),
+]
+# Ice optics for cold cloud (2026-10-17): PlaSim gives every cloud liquid water's optics, which for the Moon's thin,
+# cold upper cloud reflect a seventh to a half of the sunlight ice crystals with the same water would, and at 63-81 km
+# trap twice their infrared. NICEOPT 1 gives cloud colder than TICEOPT (-38 °C) CAM3's ice optics (plasim_ice_optics.py):
+# Ebert and Curry's in sunlight through the atmosphere domain's PIFM two-stream, and their grey absorption in the
+# infrared, at the effective radius Kristjánsson and Mitchell's table gives for the layer's temperature.
+def _fortran_list(values, fmt, per_line=8):
+    rows = [', '.join(fmt.format(v) for v in values[i:i + per_line]) for i in range(0, len(values), per_line)]
+    return ' &\n     &   '.join(row + ',' if k < len(rows) - 1 else row for k, row in enumerate(rows))
+
+
+ICE_ROUTINES = (
+    "\n"
+    "      subroutine ice_cloud_sw(jlev,zmu0,zcs,losun,zr1,zr1s,zr2,zt2,zr2s,zt2s)\n"
+    "      use radmod\n"
+    "      implicit none\n"
+    "!\n"
+    "!     Terluna: ice optics for cold cloud (climate/gcm/plasim_ice_optics.py). Where a sunlit layer's cloud is colder\n"
+    "!     than ticeopt, its reflection and transmission come from Ebert and Curry's (1992) ice optics as CAM3 and RRTMG\n"
+    "!     carry them, at the radius ice_radius gives, through the atmosphere domain's delta-scaled PIFM two-stream:\n"
+    "!     band 1 from their visible band, band 2 as the sunlight-weighted sum of their four near-infrared bands. As in\n"
+    "!     PlaSim, light under cloud higher up (1 - zcs) counts as diffuse.\n"
+    "!\n"
+    "      integer, intent(in) :: jlev\n"
+    "      real, intent(in) :: zmu0(NHOR), zcs(NHOR)\n"
+    "      logical, intent(in) :: losun(NHOR)\n"
+    "      real, intent(inout) :: zr1(NHOR), zr1s(NHOR), zr2(NHOR), zt2(NHOR), zr2s(NHOR), zt2s(NHOR)\n"
+    f"      real, parameter :: zea = {pio.EC_A:.3e}, zeb = {pio.EC_B:.3f}   ! extinction per g/m2: zea + zeb/r, r in microns\n"
+    f"      real, parameter :: zec(5) = (/{_fortran_list(pio.EC_C, '{:.3e}')}/)   ! 1 - omega: zec + zed r\n"
+    f"      real, parameter :: zed(5) = (/{_fortran_list(pio.EC_D, '{:.3e}')}/)\n"
+    f"      real, parameter :: zee(5) = (/{_fortran_list(pio.EC_E, '{:.3e}')}/)   ! asymmetry: zee + zef r\n"
+    f"      real, parameter :: zef(5) = (/{_fortran_list(pio.EC_F, '{:.3e}')}/)\n"
+    f"      real, parameter :: zew(4) = (/{_fortran_list(pio.NIR_WEIGHTS, '{:.4f}')}/)   ! bands 2-5 in band 2\n"
+    "      real, external :: ice_radius\n"
+    "      integer :: jhor, jb\n"
+    "      real :: zre, zwp, ztau, zmu, zrd, ztd, zrf, ztf, zr, zt, zrs, zts\n"
+    "      do jhor = 1, NHOR\n"
+    "       if (.not. losun(jhor)) cycle\n"
+    "       if (dcc(jhor,jlev) <= 0. .or. dt(jhor,jlev) >= ticeopt) cycle\n"
+    "       zre = ice_radius(dt(jhor,jlev))\n"
+    "       zwp = min(1000.,1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev))\n"
+    "       ztau = zwp*(zea+zeb/zre)\n"
+    f"       zmu = max(zmu0(jhor),{pio.MU_FLOOR:.0e})\n"
+    "       call ice_pifm(ztau,1.-zec(1)-zed(1)*zre,min(zee(1)+zef(1)*zre,0.9999),zmu,zrd,ztd,zrf,ztf)\n"
+    "       zr1s(jhor) = zrf\n"
+    "       zr1(jhor) = zcs(jhor)*zrd+(1.-zcs(jhor))*zrf\n"
+    "       zr = 0.\n"
+    "       zt = 0.\n"
+    "       zrs = 0.\n"
+    "       zts = 0.\n"
+    "       do jb = 2, 5\n"
+    "        call ice_pifm(ztau,1.-zec(jb)-zed(jb)*zre,min(zee(jb)+zef(jb)*zre,0.9999),zmu,zrd,ztd,zrf,ztf)\n"
+    "        zr = zr+zew(jb-1)*zrd\n"
+    "        zt = zt+zew(jb-1)*ztd\n"
+    "        zrs = zrs+zew(jb-1)*zrf\n"
+    "        zts = zts+zew(jb-1)*ztf\n"
+    "       enddo\n"
+    "       zr2s(jhor) = zrs\n"
+    "       zt2s(jhor) = zts\n"
+    "       zr2(jhor) = zcs(jhor)*zr+(1.-zcs(jhor))*zrs\n"
+    "       zt2(jhor) = zcs(jhor)*zt+(1.-zcs(jhor))*zts\n"
+    "      enddo\n"
+    "      return\n"
+    "      end subroutine ice_cloud_sw\n"
+    "\n"
+    "      subroutine ice_cloud_lw(jlev,ztaucc)\n"
+    "      use radmod\n"
+    "      implicit none\n"
+    "!\n"
+    "!     Terluna: ice optics for cold cloud in the infrared: Ebert and Curry's grey absorption, 0.005 + 1/r m2/g, in\n"
+    "!     place of acllwr where the layer is colder than ticeopt, with PlaSim's diffusivity factor\n"
+    "!\n"
+    "      integer, intent(in) :: jlev\n"
+    "      real, intent(inout) :: ztaucc(NHOR)\n"
+    "      real, external :: ice_radius\n"
+    "      integer :: jhor\n"
+    "      real :: zwp\n"
+    "      do jhor = 1, NHOR\n"
+    "       if (dt(jhor,jlev) >= ticeopt) cycle\n"
+    "       zwp = 1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev)\n"
+    "       ztaucc(jhor) = 1.-dcc(jhor,jlev)*(1.-exp(-1.66*(0.005+1./ice_radius(dt(jhor,jlev)))*zwp))\n"
+    "      enddo\n"
+    "      return\n"
+    "      end subroutine ice_cloud_lw\n"
+    "\n"
+    "      real function ice_radius(zt)\n"
+    "      implicit none\n"
+    "!\n"
+    "!     Terluna: the ice effective radius (microns) at temperature zt (K): Kristjansson and Mitchell's table for\n"
+    "!     hexagonal columns at 180-274 K as CAM3 and WRF's RRTMG carry it (reicalc), and below 180 K its own trend\n"
+    "!\n"
+    "      real, intent(in) :: zt\n"
+    f"      real, parameter :: zretab(95) = (/{_fortran_list(pio.RETAB, '{:.6g}')}/)\n"
+    "      integer :: ji\n"
+    "      real :: zc\n"
+    "      if (zt < 180.) then\n"
+    "       ice_radius = zretab(1)*exp(log(zretab(2)/zretab(1))*(zt-180.))\n"
+    "      else\n"
+    "       ji = min(int(zt-179.),94)\n"
+    "       zc = zt-real(179+ji)\n"
+    "       ice_radius = zretab(ji)*(1.-zc)+zretab(ji+1)*zc\n"
+    "      endif\n"
+    "      return\n"
+    "      end function ice_radius\n"
+    "\n"
+    "      subroutine ice_pifm(ptau,pom,pg,pmu,prdir,ptdir,prdif,ptdif)\n"
+    "      implicit none\n"
+    "!\n"
+    "!     Terluna: a homogeneous layer's delta-scaled PIFM two-stream (Zdunkowski et al. 1980, Joseph et al. 1976) as\n"
+    "!     in the atmosphere domain's shortwave.layer_properties: the direct beam's reflection and total transmission per\n"
+    "!     unit flux on a horizontal surface, then the diffuse reflection and transmission\n"
+    "!\n"
+    "      real, intent(in) :: ptau, pom, pg, pmu\n"
+    "      real, intent(out) :: prdir, ptdir, prdif, ptdif\n"
+    "      real :: zf, zts, zoms, zgs, zg1, zg2, zg3, zg4, zlam, zmu, zgam, ze, zeb, zden, zdet, za, zb, zup, zdn\n"
+    "      real :: za1, za2\n"
+    "      zf = pg*pg\n"
+    "      zts = (1.-pom*zf)*ptau\n"
+    "      zoms = min((1.-zf)*pom/(1.-pom*zf),1.-1.e-9)\n"
+    "      zgs = (pg-zf)/(1.-zf)\n"
+    "      zg1 = (8.-zoms*(5.+3.*zgs))/4.\n"
+    "      zg2 = 3.*zoms*(1.-zgs)/4.\n"
+    "      zg3 = (2.-3.*zgs*pmu)/4.\n"
+    "      zg4 = 1.-zg3\n"
+    "      zlam = sqrt(max(zg1*zg1-zg2*zg2,1.e-30))\n"
+    "      zmu = pmu\n"
+    "      if (abs(1.-(zlam*zmu)**2) < 1.e-6) zmu = zmu*(1.+1.e-4)\n"
+    "      zgam = zg2/(zg1+zlam)\n"
+    "      ze = exp(-zlam*zts)\n"
+    "      zeb = exp(-zts/zmu)\n"
+    "      zden = 1.-zgam*zgam*ze*ze\n"
+    "      prdif = zgam*(1.-ze*ze)/zden\n"
+    "      ptdif = ze*(1.-zgam*zgam)/zden\n"
+    "      zdet = 1./zmu**2-zlam*zlam\n"
+    "      za = zg1+1./zmu\n"
+    "      zb = zg1-1./zmu\n"
+    "      zup = zoms*(-zb*zg3-zg2*zg4)/zdet\n"
+    "      zdn = -zoms*(za*zg4+zg2*zg3)/zdet\n"
+    "      za1 = (zgam*ze*zup*zeb-zdn)/zden\n"
+    "      za2 = -zgam*ze*za1-zup*zeb\n"
+    "      prdir = max((zgam*za1+za2*ze+zup)/zmu,0.)\n"
+    "      ptdir = max((za1*ze+zgam*za2+zdn*zeb)/zmu,0.)+zeb\n"
+    "      return\n"
+    "      end subroutine ice_pifm\n")
+ICE_OPTICS_EDITS = [
+    ("      real :: lwct(NLEV+1) = 0.0 ! Terluna: the temperatures they are given at\n",
+     "      real :: lwct(NLEV+1) = 0.0 ! Terluna: the temperatures they are given at\n"
+     "      integer :: niceopt = 0     ! Terluna: ice optics for cold cloud, 1 for cloud colder than ticeopt\n"
+     f"      real :: ticeopt = {pio.ICE_BELOW_K:.2f}   ! Terluna: the temperature below which cloud is ice\n"),
+    ("     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar,nlwcorr\n",
+     "     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar,nlwcorr,niceopt,ticeopt\n"),
+    ("      call mpbci(nlwcorr)\n",
+     "      call mpbci(nlwcorr)\n"
+     "      call mpbci(niceopt)\n"
+     "      call mpbcr(ticeopt)\n"),
+    ("         zrcl2(:,jlev)=zcs(:)*zrcl2(:,jlev)+(1.-zcs(:))*zrcl2s(:,jlev)\n"
+     "        endwhere\n",
+     "         zrcl2(:,jlev)=zcs(:)*zrcl2(:,jlev)+(1.-zcs(:))*zrcl2s(:,jlev)\n"
+     "        endwhere\n"
+     "        if (niceopt == 1) call ice_cloud_sw(jlev,zmu0,zcs,losun,zrcl1(:,jlev),zrcl1s(:,jlev) & ! Terluna: ice\n"
+     "     &                       ,zrcl2(:,jlev),ztcl2(:,jlev),zrcl2s(:,jlev),ztcl2s(:,jlev))\n"),
+    ("        ztaucc0(:,jlev)=1.-dcc(:,jlev)*(1.-exp(zzf3*dql(:,jlev)*dp(:)))\n"
+     "       endif\n",
+     "        ztaucc0(:,jlev)=1.-dcc(:,jlev)*(1.-exp(zzf3*dql(:,jlev)*dp(:)))\n"
+     "       endif\n"
+     "       if (niceopt == 1 .and. clgray <= 0.) call ice_cloud_lw(jlev,ztaucc0(:,jlev)) ! Terluna: ice\n"),
+    ("      end subroutine lw_correction\n",
+     "      end subroutine lw_correction\n" + ICE_ROUTINES),
+]
+# The twilight, gas, longwave and ice patches go only into a copy of ExoPlaSim of its own, which every run imports
+# first since the corrected radiation became the standard (2026-10-14); the shared installation stays as the earlier
+# runs had it.
+TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS),
+                    ('radmod.f90', 'Terluna: CO2 and O2 in the sunlight', GAS_EDITS),
+                    ('radmod.f90', 'Terluna: the longwave by height', LW_CORRECTION_EDITS),
+                    ('radmod.f90', 'Terluna: ice optics for cold cloud', ICE_OPTICS_EDITS)]
+TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
+TWILIGHT_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'twilight.json'
+LONGWAVE_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json'
+GASES_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_gases.json'
+GAS_ORDER = ('co2_nir', 'o2_nir', 'o2_vis')                     # PlaSim's ZGASQ columns
+MOLAR = dict(pN2=0.0280134, pO2=0.0319988, pAr=0.039948, pCO2=0.0440095)   # kg/mol
+# 'curved' adds the curved light and the curved escape of infrared, 'full' the shells' widening on both sides as well
+# (twilight.json's cone_w_m2 and longwave.cone), and both put in the Moon's slant path; 'path' puts in that alone.
+TWILIGHT_MODES = ('curved', 'full', 'path')
+
+
+def use_twilight_package():
+    """Put the twilight copy of ExoPlaSim first on the import path, copying the installed package there first if
+    it is missing; before anything imports exoplasim."""
+    import importlib.util
+    if 'exoplasim' in sys.modules:
+        raise RuntimeError('exoplasim is already imported; the twilight copy must come first')
+    target = TWILIGHT_PACKAGE / 'exoplasim'
+    if not target.exists():
+        source = Path(importlib.util.find_spec('exoplasim').origin).parent
+        tmp = TWILIGHT_PACKAGE / 'exoplasim.part'
+        shutil.copytree(source, tmp, ignore=shutil.ignore_patterns('__pycache__'))
+        tmp.rename(target)
+    sys.path.insert(0, str(TWILIGHT_PACKAGE))
+
+
+def ensure_patched(twilight: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
-    so ExoPlaSim rebuilds them), and return each patched file's hash for the run key."""
+    so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and return each patched file's
+    hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
+    if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
+        raise RuntimeError(f'the twilight patch belongs only in {TWILIGHT_PACKAGE}, not in {src}')
     hashes = {}
-    for name, marker, edits in PATCHES:
+    for name, marker, edits in PATCHES + (TWILIGHT_PATCHES if twilight else []):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -293,13 +800,24 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
-def configuration(name, ncpus, overrides=None):
-    """Everything that determines the run apart from the input files the runner writes."""
+def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
+                  heating=False, longwave_correction=False, ice_optics=False):
+    """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
+    the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
+    twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
+    twilight product, and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating writes each process's
+    temperature tendency (HEATING), longwave_correction the longwave by height (LW_CORRECTION_EDITS), and ice_optics
+    ice optics for cloud colder than -38 °C (ICE_OPTICS_EDITS). Each is recorded when given, and left out the
+    configuration is the one every earlier run had."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
     dry_bar = exp['pressure_pa'] / 1e5
-    co2 = CO2_PPM * 1e-6 * dry_bar
+    if co2_ppm is not None and not 0.0 < co2_ppm < 1e5:
+        raise ValueError('co2_ppm must lie between 0 and 100,000')
+    if top_infrared is not None and (len(top_infrared) != 2 or not all(0.0 <= x < 1000.0 for x in top_infrared)):
+        raise ValueError('top_infrared is (day, night) W/m2, each from 0 to 1000')
+    co2 = (CO2_PPM if co2_ppm is None else co2_ppm) * 1e-6 * dry_bar
     n2_ar = dry_bar - O2_PA / 1e5 - co2
     model = {**MODEL, **(overrides or {})}
     cloud_water_namelist(model['cloud_water'], planet['gravity_m_s2'])        # refuses an unknown choice
@@ -315,19 +833,80 @@ def configuration(name, ncpus, overrides=None):
         raise ValueError('fixed_orbit and whole_lunar_days are 0 or 1')
     if not 0.0 < model['sw_water_absorption'] <= 3.0:
         raise ValueError('sw_water_absorption must lie between 0 and 3')
-    return dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
-                exoplasim=version('exoplasim'), source=ensure_patched(),
-                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
-                            rotationperiod=planet['rotation_period_days'], year=365.25636,
-                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
-                gases_bar=dict(pN2=n2_ar / (1 + AR_PER_N2), pO2=O2_PA / 1e5, pAr=n2_ar * AR_PER_N2 / (1 + AR_PER_N2),
-                               pCO2=co2))
+    if twilight is not None and twilight not in TWILIGHT_MODES:
+        raise ValueError(f'twilight must be one of {TWILIGHT_MODES}')
+    cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
+               exoplasim=version('exoplasim'), source=ensure_patched(True),
+               planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
+                           rotationperiod=planet['rotation_period_days'], year=365.25636,
+                           obliquity=planet['obliquity_deg'], eccentricity=0.016715),
+               gases_bar=dict(pN2=n2_ar / (1 + AR_PER_N2), pO2=O2_PA / 1e5, pAr=n2_ar * AR_PER_N2 / (1 + AR_PER_N2),
+                              pCO2=co2))
+    if co2_ppm is not None:
+        cfg['co2_ppm'] = co2_ppm
+    if top_infrared is not None:
+        cfg['top_infrared_w_m2'] = dict(day=float(top_infrared[0]), night=float(top_infrared[1]))
+    if longwave_correction:
+        product = json.loads(LONGWAVE_PRODUCT.read_text())
+        cfg['longwave_correction'] = dict(product=str(LONGWAVE_PRODUCT.relative_to(ROOT)),
+                                          sha256=hashlib.sha256(LONGWAVE_PRODUCT.read_bytes()).hexdigest()[:16],
+                                          **{k: product['correction'][k] for k in ('land', 'sea', 'tref')})
+    if ice_optics:
+        cfg['ice_optics'] = dict(below_k=pio.ICE_BELOW_K, near_ir_weights=list(pio.NIR_WEIGHTS),
+                                 radius='Kristjansson and Mitchell, as CAM3 and RRTMG carry it; its trend below 180 K',
+                                 optics='Ebert and Curry (1992), as RRTMG carries them (iceflag 1 and 0)')
+    if heating:
+        cfg['heating_diagnostics'] = True
+        cfg['output'] = cfg['output'] + [name for name, _ in HEATING.values()]
+    if twilight is not None:
+        product = json.loads(TWILIGHT_PRODUCT.read_text())
+        lunar = product['magnification']
+        cfg['twilight'] = dict(mode=twilight, product=str(TWILIGHT_PRODUCT.relative_to(ROOT)),
+                               sha256=hashlib.sha256(TWILIGHT_PRODUCT.read_bytes()).hexdigest()[:16],
+                               magnification=[lunar['a'], lunar['b'], lunar['c']])
+    if gas_bands:
+        fits = json.loads(GASES_PRODUCT.read_text())
+        air = json.loads(TWILIGHT_PRODUCT.read_text())['magnification_air']
+        cfg['gas_bands'] = dict(product=str(GASES_PRODUCT.relative_to(ROOT)),
+                                sha256=hashlib.sha256(GASES_PRODUCT.read_bytes()).hexdigest()[:16],
+                                fits=[fits['fits'][k] for k in GAS_ORDER],
+                                mass_fractions=gas_mass_fractions(cfg['gases_bar']),
+                                magnification_air=[air['a'], air['b'], air['c']])
+    return cfg
+
+
+def gas_mass_fractions(gases: dict) -> dict:
+    """The mass fractions of CO2 and O2 (GAS_EDITS' ZGASW) in air of these partial pressures (bar)."""
+    total = sum(gases.values())
+    molar = sum(gases[k] / total * MOLAR[k] for k in gases)
+    return dict(CO2=gases['pCO2'] / total * MOLAR['pCO2'] / molar, O2=gases['pO2'] / total * MOLAR['pO2'] / molar)
+
+
+def twilight_table(path: Path, mode: str):
+    """The twilight product's GCM terms as PlaSim's patch reads them: the number of elevations, then for each the solar
+    elevation (degrees), what the curved air adds to the ground and to each layer, top first, per unit sunlight at the
+    beam; then the extra infrared each layer and the ground lose to space (W/m2) and the temperatures it is given at.
+    'full' adds the shells' widening to both."""
+    product = json.loads(TWILIGHT_PRODUCT.read_text())
+    term, cone, lw = product['gcm_term'], product['gcm_term_cone'], product['longwave']
+    full = mode == 'full'
+    rows = [f"{len(term['elevation_deg'])}"]
+    for i, el in enumerate(term['elevation_deg']):
+        layers = [q[i] + (c[i] if full else 0.0) for q, c in zip(term['layers'], cone['layers'])]
+        rows.append(' '.join(f'{x:.6e}' for x in [el, term['ground'][i]] + layers))
+    escape = [a + (b if full else 0.0) for a, b in zip(lw['gcm_layers']['curved'], lw['gcm_layers']['cone'])]
+    rows.append(' '.join(f'{x:.6e}' for x in escape + [lw['ground_curved_w_m2']]))
+    rows.append(' '.join(f'{x:.6e}' for x in lw['gcm_layers']['temperature_k'] + [lw['ground_temperature_k']]))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text('\n'.join(rows) + '\n')
+    return path
 
 
 def run_key(cfg, inputs) -> str:
     """Changes if the settings or any written input file change, so a resume never mixes models."""
     digest = hashlib.sha256(json.dumps(cfg, sort_keys=True).encode())
-    for path in (inputs['landmap'], inputs['topomap'], inputs['starspec'], inputs['starspec'][:-4] + '_hr.dat'):
+    for path in (inputs['landmap'], inputs['topomap'], inputs['starspec'], inputs['starspec'][:-4] + '_hr.dat',
+                 *([inputs['twilight']] if 'twilight' in inputs else [])):
         digest.update(Path(path).read_bytes())
     return digest.hexdigest()[:16]
 
@@ -421,8 +1000,11 @@ def prepare_inputs(cfg, rundir: Path) -> dict:
     folder = rundir / 'inputs'
     landmap, topomap, land_share = surface_files(cfg, folder)
     starspec, flux = sunlight(cfg, folder)
-    return dict(landmap=str(landmap), topomap=str(topomap), starspec=starspec,
-                flux_w_m2=flux * cfg['model']['sunlight_scale'], shield_flux_w_m2=flux, land_share=land_share)
+    out = dict(landmap=str(landmap), topomap=str(topomap), starspec=starspec,
+               flux_w_m2=flux * cfg['model']['sunlight_scale'], shield_flux_w_m2=flux, land_share=land_share)
+    if cfg.get('twilight', {}).get('mode') in ('curved', 'full'):
+        out['twilight'] = str(twilight_table(folder / 'twilight.dat', cfg['twilight']['mode']))
+    return out
 
 
 def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dict):
@@ -461,10 +1043,42 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('rainmod_namelist', 'CONVDAY', str(float(m['convective_day_s'])))
     if m['surface_cloud_rcrit'] > 0.0:                                 # the lowest layer is the last of RCRIT
         model._edit_namelist('rainmod_namelist', f"RCRIT({m['layers']})", str(float(m['surface_cloud_rcrit'])))
+    if 'top_infrared_w_m2' in cfg:
+        model._edit_namelist('radmod_namelist', 'IRTOPDAY', str(cfg['top_infrared_w_m2']['day']))
+        model._edit_namelist('radmod_namelist', 'IRTOPNIGHT', str(cfg['top_infrared_w_m2']['night']))
+    if 'twilight' in inputs:
+        shutil.copy2(inputs['twilight'], workdir / 'twilight.dat')
+        model._edit_namelist('radmod_namelist', 'NTWILIGHT', '1')
+        model._edit_namelist('radmod_namelist', 'NTWILW', '1')
+    if 'longwave_correction' in cfg:
+        c = cfg['longwave_correction']
+        (workdir / 'lwcorr.dat').write_text(''.join(' '.join(f'{x:.6e}' for x in c[k]) + '\n' for k in ('land', 'sea', 'tref')))
+        model._edit_namelist('radmod_namelist', 'NLWCORR', '1')
+    if 'ice_optics' in cfg:
+        model._edit_namelist('radmod_namelist', 'NICEOPT', '1')
+        model._edit_namelist('radmod_namelist', 'TICEOPT', str(cfg['ice_optics']['below_k']))
+    if cfg.get('twilight', {}).get('magnification'):
+        for i, x in enumerate(cfg['twilight']['magnification'], 1):
+            model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
+    if 'gas_bands' in cfg:
+        g = cfg['gas_bands']
+        model._edit_namelist('radmod_namelist', 'NGASBANDS', '1')
+        for j, q in enumerate(g['fits'], 1):
+            for i, x in enumerate(q, 1):
+                model._edit_namelist('radmod_namelist', f'ZGASQ({i},{j})', repr(float(x)))
+        model._edit_namelist('radmod_namelist', 'ZGASW(1)', repr(float(g['mass_fractions']['CO2'])))
+        model._edit_namelist('radmod_namelist', 'ZGASW(2)', repr(float(g['mass_fractions']['O2'])))
+        for i, x in enumerate(g['magnification_air'], 1):
+            model._edit_namelist('radmod_namelist', f'ZMAIRLUNAR({i})', repr(float(x)))
     from exoplasim import pyburn
     for code, (name, long_name) in CLEAR_SKY.items():
         pyburn.ilibrary[str(code)] = [name, long_name, 'W m-2']
         pyburn.slibrary[name] = [code, long_name, 'W m-2']
+    if cfg.get('heating_diagnostics'):
+        model._edit_namelist('plasim_namelist', 'NDIAGGP', '1')
+        for code, (name, long_name) in HEATING.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, 'K s-1']
+            pyburn.slibrary[name] = [code, long_name, 'K s-1']
     model.cfgpostprocessor(ftype='regular', extension='.nc', variables=cfg['output'],
                            times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
@@ -586,8 +1200,9 @@ def _on_signal(signum, frame):
             pass
     sys.exit(128 + signum)
 
-def summarise_year(path: Path) -> dict:
-    """Headline numbers from one year of output (3-day means), for watching the run settle at a glance."""
+def summarise_year(path: Path, times_per_year: int | None = None) -> dict:
+    """Headline numbers from one year of output, for watching the run settle at a glance. The year holds
+    times_per_year means, the runner's 120 (about 3 days each) unless the run writes more often."""
     import netCDF4
     with netCDF4.Dataset(path) as d:
         clear = 'rstcs' in d.variables
@@ -595,7 +1210,7 @@ def summarise_year(path: Path) -> dict:
         v = {k: np.asarray(d[k][:], dtype=float) for k in keys}
         lat = np.asarray(d['lat'][:], dtype=float)
         times = d['time'].size
-    expected = MODEL['writes_per_lunar_day'] * MODEL['lunar_days_per_year']
+    expected = times_per_year or MODEL['writes_per_lunar_day'] * MODEL['lunar_days_per_year']
     if times != expected:
         raise RuntimeError(f'{path.name}: {times} output times, expected {expected}; the calendar is not as assumed')
     nodes, weights = np.polynomial.legendre.leggauss(lat.size)       # Gaussian weights of the T21 rows
@@ -627,8 +1242,12 @@ def summarise_year(path: Path) -> dict:
 
 
 def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False,
-        overrides: dict | None = None, start_from: str | None = None) -> int:
-    cfg = configuration(name, ncpus, overrides)
+        overrides: dict | None = None, start_from: str | None = None, co2_ppm: float | None = None,
+        top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True,
+        heating: bool = False, longwave_correction: bool = False, ice_optics: bool = False) -> int:
+    use_twilight_package()
+    cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
+                        ice_optics)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -690,7 +1309,8 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
             if not (out.is_file() and rest.is_file()):
                 print(f'{name}: year {year} produced no output or restart; stopping.', file=sys.stderr)
                 return 1
-            entry = dict(year=year, seconds=round(time.time() - start, 1), **summarise_year(out))
+            writes = cfg['model']['writes_per_lunar_day'] * cfg['model']['lunar_days_per_year']
+            entry = dict(year=year, seconds=round(time.time() - start, 1), **summarise_year(out, writes))
             if 'model_sunlight' not in progress:
                 # The Sun's light splits about evenly across 0.75 um; anything far off means a broken spectrum.
                 progress['model_sunlight'] = model_reported_sunlight(workdir)
@@ -734,6 +1354,25 @@ def main(argv=None) -> int:
     parser.add_argument('--set', action='append', default=[], metavar='KEY=VALUE',
                         help='override a model setting, e.g. rayleigh_scale=1.5 (part of the run key)')
     parser.add_argument('--start-from', help='restart file to branch a new run from')
+    parser.add_argument('--co2-ppm', type=float, help='CO2 the air carries, ppm, in place of 400 (part of the run key)')
+    parser.add_argument('--top-infrared', type=float, nargs=2, metavar=('DAY', 'NIGHT'),
+                        help='infrared from space at the top of the air, W/m2 by day and by night '
+                             '(part of the run key)')
+    parser.add_argument('--gas-bands', action=argparse.BooleanOptionalAction, default=True,
+                        help="CO2 and O2 in PlaSim's sunlight from ../results/gcm/shortwave_gases.json, the standard "
+                             'since 2026-10-14 (part of the run key)')
+    parser.add_argument('--longwave-correction', action='store_true',
+                        help='the longwave by height, fitted to the correlated-k model (LONGWAVE_PRODUCT; part of the '
+                             'run key)')
+    parser.add_argument('--ice-optics', action='store_true',
+                        help='ice optics for cloud colder than -38 C (plasim_ice_optics.py; part of the run key)')
+    parser.add_argument('--heating-diagnostics', action='store_true',
+                        help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
+                             'the run key)')
+    parser.add_argument('--twilight', choices=TWILIGHT_MODES + ('none',), default='full',
+                        help="the curved air's sunlight and infrared from ../results/gcm/twilight.json: the curved "
+                             "parts, all of it (full, the standard since 2026-10-14), the Moon's slant path alone, or "
+                             'none (part of the run key)')
     args = parser.parse_args(argv)
     if args.status:
         return status(args.folder or args.experiment)
@@ -747,7 +1386,10 @@ def main(argv=None) -> int:
         if key not in MODEL:
             parser.error(f'unknown model setting {key}')
         overrides[key] = type(MODEL[key])(value)
-    return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from)
+    return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
+               args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
+               None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
+               args.longwave_correction, args.ice_optics)
 
 
 if __name__ == '__main__':

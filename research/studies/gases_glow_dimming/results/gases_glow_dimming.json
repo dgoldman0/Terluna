@@ -1,0 +1,1981 @@
+{
+  "schema": "terluna.research.gases-glow-dimming/1",
+  "producer": {
+    "files": {
+      "research/studies/gases_glow_dimming/run.py": "3ad2b07a44dcd71f2db75d556509ec4eeb5a97678904c57fd01efc0cc1f5a7e7"
+    },
+    "inputs": {
+      "research/studies/light_limitation/results/light_limitation.json": "0890f3e64db656ae0c488a8cd3934b2522ff79fa42de3047c8f1dab622020d4b",
+      "research/studies/domain_synthesis/results/ledgers.json": "65f5310c5edb7c5e6231361f10bbb6bf96ed460f630f814122d056e5ab3d3410",
+      "research/studies/gases_glow_dimming/results/glow_absorption.json": "e6230f2334fb8aedf97acb31ef78107f80f4bcdb1fbb4985093a83e0bc09406e"
+    },
+    "ignored_inputs": {
+      "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5bffdfbfb191cfed5cc3f4397a9a7d0eb52269f925ee6f05c",
+      "research/runs/gases_glow_dimming/extract.json": "ecc5ef4b32636f67a81875eda298e7e874f7f86bd34044334ef5ebf9e5606cd1",
+      "climate/gcm/products/climatology_A28_gases.npz": "975780d823038e03a9b5a92b25b49b4815e7dcade05ca47f9f6be8ef27495ea4",
+      "climate/gcm/runs/A28_gases/progress.json": "6421836993654a10e46d8832ed869dd1850310aaeb5866b4de639ac96c58a206",
+      "climate/gcm/products/climatology_A28_gases_glow.npz": "32518b4f607da27e7626d953526bd7b8ef5c2173646bec3cb6b37b9c875407fb",
+      "climate/gcm/runs/A28_gases_glow/progress.json": "73be43dd72ebc144ac567644336fc0be987edce9b16cf9a3ce6d8b98fbb86055",
+      "climate/gcm/products/climatology_A28_gases_glow_held.npz": "1819a85326efdb12e75600c00e0861f076ec45475228cbcd7affba36d8c669d2",
+      "climate/gcm/runs/A28_gases_glow_held/progress.json": "e5fedb9a76433083f71ce6840fa6ea37f666d61e3e5e54215dd4019a46b1b307",
+      "climate/gcm/runs/A28_dim5_moon/progress.json": "d287252f152cb52f5b9f07f35f1e51fca87bddab6226fd960a1c35bdfc31be6d"
+    }
+  },
+  "evidence": "ExoPlaSim runs of the design case, T21 with 10 layers and a 50 m mixed-layer sea, branched from its year-29 restart: the gases as their CO2 equivalent in PlaSim's own radiation, the glow as infrared added at the top of the air and carried down by PlaSim's broadband transmissivities, and the dimming as less sunlight. The control is the design case's own years 20-29; each run's years 10-19 are its climate. PlaSim's clouds and convection are Earth-tuned (climate/gcm/README, Clouds), and the rain-fed growth takes the light limitation study's water-limited land to grow in proportion to the water it evaporates. The held point is interpolated between the two glow runs, linearly in their dimming.",
+  "reading_rule": "Means are area-weighted over the stated surface; precipitation and evaporation mm a day of water, evaporation upward; changes are run less control, relative changes in per cent of the control. Bands are |latitude| ranges of land. Dimming is per cent of the design sunlight. Growth is Gt C a year; its pairs are the light limitation study's [low, high] ends. first_means are W/m2, positive downward, over the first ten 3-day means of each branch less the branch it differs from (FAST). glow.held is the plan with the temperature held at the control's; pairs scales the gases' run to the other pairs in proportion to their warming.",
+  "setup": {
+    "control": {
+      "run": "A28_dim5_moon",
+      "years": [
+        20,
+        29
+      ]
+    },
+    "calibration": {
+      "co2_ppm": 1022.0,
+      "control_co2_ppm": 400.0,
+      "forcing_w_m2_first_mean": 5.266,
+      "forcing_w_m2_first_ten_means": 5.297
+    },
+    "calibration_check_first_ten_means_w_m2": 5.2968180746780975,
+    "co2_equivalent_ppm": 755.0,
+    "gases_forcing_allsky_w_m2": 3.58,
+    "gases_dimming_percent": 1.69,
+    "glow": {
+      "answer": "rolled_outside_service_80_rolled_layout",
+      "glow_w_m2": 3.59739,
+      "infrared_return_w_m2": 1.74675,
+      "sunlight_return_w_m2": 0.610045,
+      "top_infrared_w_m2": {
+        "day": 10.1718,
+        "night": 0.5165
+      },
+      "source": "research/array-industry a59f5a9, research/studies/solar_shield_array/results/glow.json"
+    },
+    "glow_infrared_w_m2": 5.3441399999999994,
+    "glow_watt_for_watt_dimming_percent": 2.5305533584260673,
+    "glow_held_dimming_percent": 1.83,
+    "design_scale": 0.95,
+    "design_sunlight_w_m2": 293.312
+  },
+  "control": {
+    "surface_k": 294.895,
+    "land_surface_k": 293.484,
+    "rain_mm_day": {
+      "all": 2.23775,
+      "land": 2.04423,
+      "sea": 2.52744
+    },
+    "evaporation_mm_day": {
+      "all": 2.23911,
+      "land": 1.65197,
+      "sea": 3.11802
+    },
+    "land_soil_water_m": 0.112593,
+    "cloud_cover": {
+      "all": 0.234664,
+      "low_deck": 0.0530034,
+      "high_deck": 0.143222
+    },
+    "water_vapour_kg_m2": 175.836,
+    "land_bands": {
+      "0-15": {
+        "rain_mm_day": 4.78122,
+        "evaporation_mm_day": 3.4679,
+        "soil_water_m": 0.28721,
+        "surface_k": 293.614
+      },
+      "15-30": {
+        "rain_mm_day": 2.70109,
+        "evaporation_mm_day": 2.48624,
+        "soil_water_m": 0.132004,
+        "surface_k": 294.241
+      },
+      "30-45": {
+        "rain_mm_day": 1.30342,
+        "evaporation_mm_day": 1.24225,
+        "soil_water_m": 0.0625291,
+        "surface_k": 294.256
+      },
+      "45-60": {
+        "rain_mm_day": 0.191539,
+        "evaporation_mm_day": 0.1928,
+        "soil_water_m": 0.00299087,
+        "surface_k": 293.677
+      },
+      "60-75": {
+        "rain_mm_day": 0.053135,
+        "evaporation_mm_day": 0.0531712,
+        "soil_water_m": 0.000978261,
+        "surface_k": 291.485
+      },
+      "75-90": {
+        "rain_mm_day": 0.0406898,
+        "evaporation_mm_day": 0.0404119,
+        "soil_water_m": 0.0162758,
+        "surface_k": 289.131
+      }
+    }
+  },
+  "runs": {
+    "gases": {
+      "run": "A28_gases",
+      "years": [
+        10,
+        19
+      ],
+      "series": {
+        "years": [
+          10,
+          19
+        ],
+        "surface_k": [
+          294.98,
+          295.01,
+          295.04,
+          295.01,
+          295.06,
+          295.07,
+          295.04,
+          295.04,
+          295.03,
+          295.07
+        ],
+        "rain_mm_day": [
+          2.204,
+          2.215,
+          2.21,
+          2.224,
+          2.222,
+          2.212,
+          2.228,
+          2.22,
+          2.216,
+          2.225
+        ],
+        "toa_net_w_m2": [
+          0.13,
+          0.42,
+          -0.18,
+          0.42,
+          -0.08,
+          -0.05,
+          -0.33,
+          0.13,
+          -0.13,
+          -0.03
+        ],
+        "trend_per_decade": {
+          "surface_k": 0.0636364,
+          "rain_mm_day": 0.0150303,
+          "toa_net_w_m2": -0.361212
+        },
+        "configuration": {
+          "co2_ppm": 755.0,
+          "top_infrared_w_m2": null,
+          "sunlight_scale": 0.933907,
+          "initial_state": {
+            "path": "climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029",
+            "sha256": "3d19d93541515be9"
+          },
+          "key": "313b3fc26019de7e"
+        }
+      },
+      "means": {
+        "surface_k": {
+          "run": 295.034,
+          "control": 294.895,
+          "change": 0.138208,
+          "percent": 0.0468667
+        },
+        "land_surface_k": {
+          "run": 293.661,
+          "control": 293.484,
+          "change": 0.176699,
+          "percent": 0.0602073
+        },
+        "rain_mm_day": {
+          "all": {
+            "run": 2.21696,
+            "control": 2.23775,
+            "change": -0.0207887,
+            "percent": -0.929
+          },
+          "land": {
+            "run": 2.02519,
+            "control": 2.04423,
+            "change": -0.0190481,
+            "percent": -0.931796
+          },
+          "sea": {
+            "run": 2.50404,
+            "control": 2.52744,
+            "change": -0.0233943,
+            "percent": -0.925615
+          }
+        },
+        "evaporation_mm_day": {
+          "all": {
+            "run": 2.2175,
+            "control": 2.23911,
+            "change": -0.0216052,
+            "percent": -0.964902
+          },
+          "land": {
+            "run": 1.63789,
+            "control": 1.65197,
+            "change": -0.0140828,
+            "percent": -0.852486
+          },
+          "sea": {
+            "run": 3.08515,
+            "control": 3.11802,
+            "change": -0.0328658,
+            "percent": -1.05406
+          }
+        },
+        "land_soil_water_m": {
+          "run": 0.111316,
+          "control": 0.112593,
+          "change": -0.00127673,
+          "percent": -1.13393
+        },
+        "cloud_cover": {
+          "all": {
+            "run": 0.235061,
+            "control": 0.234664,
+            "change": 0.000397037,
+            "percent": 0.169194
+          },
+          "low_deck": {
+            "run": 0.0534852,
+            "control": 0.0530034,
+            "change": 0.000481789,
+            "percent": 0.908978
+          },
+          "high_deck": {
+            "run": 0.143552,
+            "control": 0.143222,
+            "change": 0.000329335,
+            "percent": 0.229946
+          }
+        },
+        "water_vapour_kg_m2": {
+          "run": 178.557,
+          "control": 175.836,
+          "change": 2.72108,
+          "percent": 1.54751
+        },
+        "land_bands": {
+          "0-15": {
+            "rain_mm_day": {
+              "run": 4.69945,
+              "control": 4.78122,
+              "change": -0.0817776,
+              "percent": -1.71039
+            },
+            "evaporation_mm_day": {
+              "run": 3.42172,
+              "control": 3.4679,
+              "change": -0.0461848,
+              "percent": -1.33178
+            },
+            "soil_water_m": {
+              "run": 0.282139,
+              "control": 0.28721,
+              "change": -0.00507035,
+              "percent": -1.76538
+            },
+            "surface_k": {
+              "run": 293.753,
+              "control": 293.614,
+              "change": 0.139588,
+              "percent": 0.0475413
+            }
+          },
+          "15-30": {
+            "rain_mm_day": {
+              "run": 2.70482,
+              "control": 2.70109,
+              "change": 0.00372925,
+              "percent": 0.138064
+            },
+            "evaporation_mm_day": {
+              "run": 2.48341,
+              "control": 2.48624,
+              "change": -0.00282895,
+              "percent": -0.113784
+            },
+            "soil_water_m": {
+              "run": 0.133385,
+              "control": 0.132004,
+              "change": 0.00138099,
+              "percent": 1.04617
+            },
+            "surface_k": {
+              "run": 294.364,
+              "control": 294.241,
+              "change": 0.12281,
+              "percent": 0.041738
+            }
+          },
+          "30-45": {
+            "rain_mm_day": {
+              "run": 1.30782,
+              "control": 1.30342,
+              "change": 0.00439328,
+              "percent": 0.337057
+            },
+            "evaporation_mm_day": {
+              "run": 1.23391,
+              "control": 1.24225,
+              "change": -0.00834273,
+              "percent": -0.671583
+            },
+            "soil_water_m": {
+              "run": 0.0618481,
+              "control": 0.0625291,
+              "change": -0.000680961,
+              "percent": -1.08903
+            },
+            "surface_k": {
+              "run": 294.428,
+              "control": 294.256,
+              "change": 0.172569,
+              "percent": 0.0586458
+            }
+          },
+          "45-60": {
+            "rain_mm_day": {
+              "run": 0.1936,
+              "control": 0.191539,
+              "change": 0.00206115,
+              "percent": 1.0761
+            },
+            "evaporation_mm_day": {
+              "run": 0.193514,
+              "control": 0.1928,
+              "change": 0.00071373,
+              "percent": 0.370192
+            },
+            "soil_water_m": {
+              "run": 0.00306116,
+              "control": 0.00299087,
+              "change": 7.02833e-05,
+              "percent": 2.34993
+            },
+            "surface_k": {
+              "run": 293.883,
+              "control": 293.677,
+              "change": 0.205908,
+              "percent": 0.0701137
+            }
+          },
+          "60-75": {
+            "rain_mm_day": {
+              "run": 0.0549111,
+              "control": 0.053135,
+              "change": 0.00177619,
+              "percent": 3.34279
+            },
+            "evaporation_mm_day": {
+              "run": 0.054743,
+              "control": 0.0531712,
+              "change": 0.00157183,
+              "percent": 2.95617
+            },
+            "soil_water_m": {
+              "run": 0.00100076,
+              "control": 0.000978261,
+              "change": 2.25015e-05,
+              "percent": 2.30016
+            },
+            "surface_k": {
+              "run": 291.743,
+              "control": 291.485,
+              "change": 0.258336,
+              "percent": 0.0886277
+            }
+          },
+          "75-90": {
+            "rain_mm_day": {
+              "run": 0.0412237,
+              "control": 0.0406898,
+              "change": 0.000533928,
+              "percent": 1.31219
+            },
+            "evaporation_mm_day": {
+              "run": 0.0414843,
+              "control": 0.0404119,
+              "change": 0.0010724,
+              "percent": 2.65369
+            },
+            "soil_water_m": {
+              "run": 0.0146217,
+              "control": 0.0162758,
+              "change": -0.00165413,
+              "percent": -10.1631
+            },
+            "surface_k": {
+              "run": 289.447,
+              "control": 289.131,
+              "change": 0.316067,
+              "percent": 0.109316
+            }
+          }
+        }
+      },
+      "layers": {
+        "sigma": [
+          0.0382996,
+          0.1191,
+          0.21085,
+          0.31685,
+          0.4368,
+          0.5668,
+          0.69935,
+          0.82335,
+          0.9241,
+          0.9833
+        ],
+        "temperature_change_k": [
+          -0.201342,
+          0.205382,
+          0.151212,
+          0.184141,
+          0.191038,
+          0.183666,
+          0.152336,
+          0.104635,
+          0.0951263,
+          0.111574
+        ],
+        "humidity_percent": [
+          -4.17851,
+          3.13079,
+          1.62688,
+          1.08705,
+          1.35613,
+          1.84374,
+          1.94182,
+          1.69941,
+          1.2102,
+          1.06533
+        ],
+        "cloud_change": [
+          0.00488967,
+          -0.00323398,
+          -0.000726503,
+          -0.000505624,
+          -0.000103499,
+          -0.000135036,
+          -0.000181683,
+          0.000452259,
+          0.000267975,
+          -3.6145e-06
+        ],
+        "control_temperature_k": [
+          169.988,
+          196.649,
+          219.22,
+          239.183,
+          255.872,
+          268.79,
+          278.073,
+          285.628,
+          290.76,
+          292.932
+        ],
+        "control_cloud": [
+          0.041625,
+          0.0850588,
+          0.0465031,
+          0.0203313,
+          0.00734904,
+          0.00777957,
+          0.0116043,
+          0.0222362,
+          0.024842,
+          0.0185372
+        ],
+        "convective_share_of_rain": 0.894498,
+        "control_convective_share_of_rain": 0.895173,
+        "convective_rain_percent": -1.00365,
+        "large_scale_rain_percent": -0.291489
+      },
+      "first_means": {
+        "against": "A28_cal_control_patched",
+        "toa_net": -0.122473,
+        "toa_sunlight": -3.45002,
+        "toa_infrared": 3.32754,
+        "surface_sunlight": -2.04197,
+        "surface_infrared": 0.434117,
+        "surface_radiation": -1.60785,
+        "surface_latent": 0.507293,
+        "surface_sensible": 0.507823,
+        "air_radiation": 1.48538,
+        "surface_k": 0.00253205
+      },
+      "added_dimming_percent": 1.694,
+      "rain_per_percent_dimming": {
+        "all": -0.548406,
+        "land": -0.550057
+      },
+      "rain_fed_growth": {
+        "by_band": {
+          "0-15": {
+            "evaporation_percent": -1.33178,
+            "growth_change_gt_c": [
+              -0.103213,
+              -0.104545
+            ]
+          },
+          "15-30": {
+            "evaporation_percent": -0.113784,
+            "growth_change_gt_c": [
+              -0.00483584,
+              -0.00497238
+            ]
+          },
+          "30-45": {
+            "evaporation_percent": -0.671583,
+            "growth_change_gt_c": [
+              -0.0120885,
+              -0.0143719
+            ]
+          },
+          "45-60": {
+            "evaporation_percent": 0.370192,
+            "growth_change_gt_c": [
+              0.000614518,
+              0.000721873
+            ]
+          },
+          "60-75": {
+            "evaporation_percent": 2.95617,
+            "growth_change_gt_c": [
+              0.00089572,
+              0.001079
+            ]
+          },
+          "75-90": {
+            "evaporation_percent": 2.65369,
+            "growth_change_gt_c": [
+              0.000209111,
+              0.000253162
+            ]
+          }
+        },
+        "change_gt_c": [
+          -0.118418,
+          -0.121835
+        ],
+        "share_of_living_moon_percent": [
+          -0.730974,
+          -0.477784
+        ]
+      },
+      "through_light_percent_of_growth": [
+        0.11858,
+        0.49973
+      ]
+    },
+    "gases_and_glow": {
+      "run": "A28_gases_glow",
+      "years": [
+        10,
+        19
+      ],
+      "series": {
+        "years": [
+          10,
+          19
+        ],
+        "surface_k": [
+          293.72,
+          293.69,
+          293.64,
+          293.67,
+          293.67,
+          293.64,
+          293.62,
+          293.6,
+          293.59,
+          293.55
+        ],
+        "rain_mm_day": [
+          2.078,
+          2.076,
+          2.071,
+          2.059,
+          2.083,
+          2.083,
+          2.056,
+          2.058,
+          2.066,
+          2.045
+        ],
+        "toa_net_w_m2": [
+          -0.24,
+          -0.26,
+          -0.27,
+          0.38,
+          -0.04,
+          -0.55,
+          -0.08,
+          -0.23,
+          -0.35,
+          -0.34
+        ],
+        "trend_per_decade": {
+          "surface_k": -0.158182,
+          "rain_mm_day": -0.0267273,
+          "toa_net_w_m2": -0.195152
+        },
+        "configuration": {
+          "co2_ppm": 755.0,
+          "top_infrared_w_m2": {
+            "day": 10.1718,
+            "night": 0.5165
+          },
+          "sunlight_scale": 0.909867,
+          "initial_state": {
+            "path": "climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029",
+            "sha256": "3d19d93541515be9"
+          },
+          "key": "4e5025739b73a6c5"
+        }
+      },
+      "means": {
+        "surface_k": {
+          "run": 293.637,
+          "control": 294.895,
+          "change": -1.2587,
+          "percent": -0.42683
+        },
+        "land_surface_k": {
+          "run": 292.131,
+          "control": 293.484,
+          "change": -1.35321,
+          "percent": -0.461085
+        },
+        "rain_mm_day": {
+          "all": {
+            "run": 2.06691,
+            "control": 2.23775,
+            "change": -0.170835,
+            "percent": -7.63425
+          },
+          "land": {
+            "run": 1.88809,
+            "control": 2.04423,
+            "change": -0.156148,
+            "percent": -7.63845
+          },
+          "sea": {
+            "run": 2.33461,
+            "control": 2.52744,
+            "change": -0.192822,
+            "percent": -7.62917
+          }
+        },
+        "evaporation_mm_day": {
+          "all": {
+            "run": 2.06622,
+            "control": 2.23911,
+            "change": -0.172888,
+            "percent": -7.72129
+          },
+          "land": {
+            "run": 1.51397,
+            "control": 1.65197,
+            "change": -0.137997,
+            "percent": -8.35348
+          },
+          "sea": {
+            "run": 2.8929,
+            "control": 3.11802,
+            "change": -0.225118,
+            "percent": -7.2199
+          }
+        },
+        "land_soil_water_m": {
+          "run": 0.111398,
+          "control": 0.112593,
+          "change": -0.00119487,
+          "percent": -1.06123
+        },
+        "cloud_cover": {
+          "all": {
+            "run": 0.200656,
+            "control": 0.234664,
+            "change": -0.0340072,
+            "percent": -14.4919
+          },
+          "low_deck": {
+            "run": 0.0537979,
+            "control": 0.0530034,
+            "change": 0.000794467,
+            "percent": 1.4989
+          },
+          "high_deck": {
+            "run": 0.115547,
+            "control": 0.143222,
+            "change": -0.0276755,
+            "percent": -19.3234
+          }
+        },
+        "water_vapour_kg_m2": {
+          "run": 163.408,
+          "control": 175.836,
+          "change": -12.4283,
+          "percent": -7.06812
+        },
+        "land_bands": {
+          "0-15": {
+            "rain_mm_day": {
+              "run": 4.44447,
+              "control": 4.78122,
+              "change": -0.336751,
+              "percent": -7.0432
+            },
+            "evaporation_mm_day": {
+              "run": 3.21131,
+              "control": 3.4679,
+              "change": -0.256592,
+              "percent": -7.39906
+            },
+            "soil_water_m": {
+              "run": 0.284,
+              "control": 0.28721,
+              "change": -0.00320933,
+              "percent": -1.11742
+            },
+            "surface_k": {
+              "run": 292.4,
+              "control": 293.614,
+              "change": -1.21395,
+              "percent": -0.413451
+            }
+          },
+          "15-30": {
+            "rain_mm_day": {
+              "run": 2.5244,
+              "control": 2.70109,
+              "change": -0.176694,
+              "percent": -6.54156
+            },
+            "evaporation_mm_day": {
+              "run": 2.29614,
+              "control": 2.48624,
+              "change": -0.190099,
+              "percent": -7.64605
+            },
+            "soil_water_m": {
+              "run": 0.135277,
+              "control": 0.132004,
+              "change": 0.00327296,
+              "percent": 2.47944
+            },
+            "surface_k": {
+              "run": 292.959,
+              "control": 294.241,
+              "change": -1.28204,
+              "percent": -0.435712
+            }
+          },
+          "30-45": {
+            "rain_mm_day": {
+              "run": 1.15595,
+              "control": 1.30342,
+              "change": -0.147471,
+              "percent": -11.3141
+            },
+            "evaporation_mm_day": {
+              "run": 1.09402,
+              "control": 1.24225,
+              "change": -0.148226,
+              "percent": -11.9321
+            },
+            "soil_water_m": {
+              "run": 0.0573867,
+              "control": 0.0625291,
+              "change": -0.00514238,
+              "percent": -8.22399
+            },
+            "surface_k": {
+              "run": 292.921,
+              "control": 294.256,
+              "change": -1.33444,
+              "percent": -0.453496
+            }
+          },
+          "45-60": {
+            "rain_mm_day": {
+              "run": 0.164742,
+              "control": 0.191539,
+              "change": -0.0267966,
+              "percent": -13.9902
+            },
+            "evaporation_mm_day": {
+              "run": 0.164413,
+              "control": 0.1928,
+              "change": -0.0283874,
+              "percent": -14.7237
+            },
+            "soil_water_m": {
+              "run": 0.00263361,
+              "control": 0.00299087,
+              "change": -0.000357262,
+              "percent": -11.9451
+            },
+            "surface_k": {
+              "run": 292.189,
+              "control": 293.677,
+              "change": -1.4879,
+              "percent": -0.506646
+            }
+          },
+          "60-75": {
+            "rain_mm_day": {
+              "run": 0.0554998,
+              "control": 0.053135,
+              "change": 0.00236489,
+              "percent": 4.45072
+            },
+            "evaporation_mm_day": {
+              "run": 0.0555214,
+              "control": 0.0531712,
+              "change": 0.00235019,
+              "percent": 4.42005
+            },
+            "soil_water_m": {
+              "run": 0.00114317,
+              "control": 0.000978261,
+              "change": 0.000164907,
+              "percent": 16.8572
+            },
+            "surface_k": {
+              "run": 289.966,
+              "control": 291.485,
+              "change": -1.51885,
+              "percent": -0.521073
+            }
+          },
+          "75-90": {
+            "rain_mm_day": {
+              "run": 0.0425498,
+              "control": 0.0406898,
+              "change": 0.00185996,
+              "percent": 4.57108
+            },
+            "evaporation_mm_day": {
+              "run": 0.041333,
+              "control": 0.0404119,
+              "change": 0.000921152,
+              "percent": 2.27941
+            },
+            "soil_water_m": {
+              "run": 0.0285004,
+              "control": 0.0162758,
+              "change": 0.0122246,
+              "percent": 75.1089
+            },
+            "surface_k": {
+              "run": 287.539,
+              "control": 289.131,
+              "change": -1.59171,
+              "percent": -0.550514
+            }
+          }
+        }
+      },
+      "layers": {
+        "sigma": [
+          0.0382996,
+          0.1191,
+          0.21085,
+          0.31685,
+          0.4368,
+          0.5668,
+          0.69935,
+          0.82335,
+          0.9241,
+          0.9833
+        ],
+        "temperature_change_k": [
+          0.929339,
+          -0.12175,
+          -1.06011,
+          -1.48419,
+          -1.51394,
+          -1.2982,
+          -1.05964,
+          -1.03972,
+          -1.08868,
+          -1.12037
+        ],
+        "humidity_percent": [
+          31.1377,
+          -4.31307,
+          -13.8031,
+          -15.5348,
+          -10.8537,
+          -9.10238,
+          -7.422,
+          -6.27327,
+          -6.21026,
+          -6.38912
+        ],
+        "cloud_change": [
+          -0.014532,
+          -0.0187052,
+          -0.00812237,
+          -0.0015519,
+          -7.97758e-05,
+          -0.000347153,
+          -0.000595514,
+          -0.000271977,
+          0.000383757,
+          0.000958057
+        ],
+        "control_temperature_k": [
+          169.988,
+          196.649,
+          219.22,
+          239.183,
+          255.872,
+          268.79,
+          278.073,
+          285.628,
+          290.76,
+          292.932
+        ],
+        "control_cloud": [
+          0.041625,
+          0.0850588,
+          0.0465031,
+          0.0203313,
+          0.00734904,
+          0.00777957,
+          0.0116043,
+          0.0222362,
+          0.024842,
+          0.0185372
+        ],
+        "convective_share_of_rain": 0.88945,
+        "control_convective_share_of_rain": 0.895173,
+        "convective_rain_percent": -8.22477,
+        "large_scale_rain_percent": -2.59151
+      },
+      "first_means": {
+        "against": "A28_gases",
+        "toa_net": -0.153748,
+        "toa_sunlight": -5.22291,
+        "toa_infrared": 5.06916,
+        "surface_sunlight": -2.97634,
+        "surface_infrared": 0.202469,
+        "surface_radiation": -2.77387,
+        "surface_latent": 0.804391,
+        "surface_sensible": 0.682494,
+        "air_radiation": 2.62012,
+        "surface_k": -0.0521297,
+        "glow_share_reaching_ground": 0.0378861
+      },
+      "added_dimming_percent": 4.22453,
+      "rain_per_percent_dimming": {
+        "all": -1.80713,
+        "land": -1.80812
+      },
+      "rain_fed_growth": {
+        "by_band": {
+          "0-15": {
+            "evaporation_percent": -7.39906,
+            "growth_change_gt_c": [
+              -0.573428,
+              -0.580827
+            ]
+          },
+          "15-30": {
+            "evaporation_percent": -7.64605,
+            "growth_change_gt_c": [
+              -0.324957,
+              -0.334132
+            ]
+          },
+          "30-45": {
+            "evaporation_percent": -11.9321,
+            "growth_change_gt_c": [
+              -0.214778,
+              -0.255347
+            ]
+          },
+          "45-60": {
+            "evaporation_percent": -14.7237,
+            "growth_change_gt_c": [
+              -0.0244414,
+              -0.0287112
+            ]
+          },
+          "60-75": {
+            "evaporation_percent": 4.42005,
+            "growth_change_gt_c": [
+              0.00133927,
+              0.00161332
+            ]
+          },
+          "75-90": {
+            "evaporation_percent": 2.27941,
+            "growth_change_gt_c": [
+              0.000179617,
+              0.000217456
+            ]
+          }
+        },
+        "change_gt_c": [
+          -1.13608,
+          -1.19719
+        ],
+        "share_of_living_moon_percent": [
+          -7.01287,
+          -4.69485
+        ]
+      },
+      "through_light_percent_of_growth": [
+        0.295717,
+        1.24624
+      ]
+    },
+    "gases_and_glow_held": {
+      "run": "A28_gases_glow_held",
+      "years": [
+        10,
+        19
+      ],
+      "series": {
+        "years": [
+          10,
+          19
+        ],
+        "surface_k": [
+          294.87,
+          294.85,
+          294.86,
+          294.83,
+          294.86,
+          294.83,
+          294.87,
+          294.86,
+          294.8,
+          294.8
+        ],
+        "rain_mm_day": [
+          2.168,
+          2.151,
+          2.151,
+          2.159,
+          2.152,
+          2.178,
+          2.138,
+          2.174,
+          2.161,
+          2.158
+        ],
+        "toa_net_w_m2": [
+          -0.19,
+          -0.03,
+          0.16,
+          -0.12,
+          0.26,
+          -0.42,
+          0.17,
+          -0.26,
+          -0.38,
+          0.08
+        ],
+        "trend_per_decade": {
+          "surface_k": -0.0539394,
+          "rain_mm_day": 0.00351515,
+          "toa_net_w_m2": -0.11697
+        },
+        "configuration": {
+          "co2_ppm": 755.0,
+          "top_infrared_w_m2": {
+            "day": 10.1718,
+            "night": 0.5165
+          },
+          "sunlight_scale": 0.916522,
+          "initial_state": {
+            "path": "climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029",
+            "sha256": "3d19d93541515be9"
+          },
+          "key": "02318a3350c1c65b"
+        }
+      },
+      "means": {
+        "surface_k": {
+          "run": 294.841,
+          "control": 294.895,
+          "change": -0.0545424,
+          "percent": -0.0184955
+        },
+        "land_surface_k": {
+          "run": 293.473,
+          "control": 293.484,
+          "change": -0.0104299,
+          "percent": -0.00355382
+        },
+        "rain_mm_day": {
+          "all": {
+            "run": 2.15834,
+            "control": 2.23775,
+            "change": -0.0794088,
+            "percent": -3.5486
+          },
+          "land": {
+            "run": 1.95871,
+            "control": 2.04423,
+            "change": -0.0855281,
+            "percent": -4.18387
+          },
+          "sea": {
+            "run": 2.45719,
+            "control": 2.52744,
+            "change": -0.0702486,
+            "percent": -2.77944
+          }
+        },
+        "evaporation_mm_day": {
+          "all": {
+            "run": 2.15808,
+            "control": 2.23911,
+            "change": -0.0810242,
+            "percent": -3.6186
+          },
+          "land": {
+            "run": 1.58235,
+            "control": 1.65197,
+            "change": -0.0696161,
+            "percent": -4.21413
+          },
+          "sea": {
+            "run": 3.01992,
+            "control": 3.11802,
+            "change": -0.0981014,
+            "percent": -3.14628
+          }
+        },
+        "land_soil_water_m": {
+          "run": 0.110801,
+          "control": 0.112593,
+          "change": -0.00179239,
+          "percent": -1.59192
+        },
+        "cloud_cover": {
+          "all": {
+            "run": 0.195883,
+            "control": 0.234664,
+            "change": -0.0387809,
+            "percent": -16.5262
+          },
+          "low_deck": {
+            "run": 0.0535275,
+            "control": 0.0530034,
+            "change": 0.000524056,
+            "percent": 0.988721
+          },
+          "high_deck": {
+            "run": 0.1132,
+            "control": 0.143222,
+            "change": -0.030022,
+            "percent": -20.9618
+          }
+        },
+        "water_vapour_kg_m2": {
+          "run": 176.792,
+          "control": 175.836,
+          "change": 0.956336,
+          "percent": 0.543879
+        },
+        "land_bands": {
+          "0-15": {
+            "rain_mm_day": {
+              "run": 4.59451,
+              "control": 4.78122,
+              "change": -0.18671,
+              "percent": -3.90507
+            },
+            "evaporation_mm_day": {
+              "run": 3.34786,
+              "control": 3.4679,
+              "change": -0.120045,
+              "percent": -3.46162
+            },
+            "soil_water_m": {
+              "run": 0.283563,
+              "control": 0.28721,
+              "change": -0.00364673,
+              "percent": -1.26971
+            },
+            "surface_k": {
+              "run": 293.578,
+              "control": 293.614,
+              "change": -0.0359718,
+              "percent": -0.0122514
+            }
+          },
+          "15-30": {
+            "rain_mm_day": {
+              "run": 2.60532,
+              "control": 2.70109,
+              "change": -0.0957704,
+              "percent": -3.54562
+            },
+            "evaporation_mm_day": {
+              "run": 2.38379,
+              "control": 2.48624,
+              "change": -0.102452,
+              "percent": -4.12078
+            },
+            "soil_water_m": {
+              "run": 0.132385,
+              "control": 0.132004,
+              "change": 0.000380529,
+              "percent": 0.28827
+            },
+            "surface_k": {
+              "run": 294.227,
+              "control": 294.241,
+              "change": -0.01396,
+              "percent": -0.00474441
+            }
+          },
+          "30-45": {
+            "rain_mm_day": {
+              "run": 1.22654,
+              "control": 1.30342,
+              "change": -0.0768831,
+              "percent": -5.89855
+            },
+            "evaporation_mm_day": {
+              "run": 1.16482,
+              "control": 1.24225,
+              "change": -0.0774282,
+              "percent": -6.23291
+            },
+            "soil_water_m": {
+              "run": 0.0590873,
+              "control": 0.0625291,
+              "change": -0.00344177,
+              "percent": -5.50428
+            },
+            "surface_k": {
+              "run": 294.251,
+              "control": 294.256,
+              "change": -0.00473091,
+              "percent": -0.00160775
+            }
+          },
+          "45-60": {
+            "rain_mm_day": {
+              "run": 0.173969,
+              "control": 0.191539,
+              "change": -0.0175692,
+              "percent": -9.17269
+            },
+            "evaporation_mm_day": {
+              "run": 0.174094,
+              "control": 0.1928,
+              "change": -0.0187062,
+              "percent": -9.70235
+            },
+            "soil_water_m": {
+              "run": 0.00274506,
+              "control": 0.00299087,
+              "change": -0.000245815,
+              "percent": -8.21883
+            },
+            "surface_k": {
+              "run": 293.658,
+              "control": 293.677,
+              "change": -0.0191297,
+              "percent": -0.00651386
+            }
+          },
+          "60-75": {
+            "rain_mm_day": {
+              "run": 0.0553265,
+              "control": 0.053135,
+              "change": 0.00219159,
+              "percent": 4.12456
+            },
+            "evaporation_mm_day": {
+              "run": 0.0552396,
+              "control": 0.0531712,
+              "change": 0.00206841,
+              "percent": 3.8901
+            },
+            "soil_water_m": {
+              "run": 0.00103386,
+              "control": 0.000978261,
+              "change": 5.56041e-05,
+              "percent": 5.68398
+            },
+            "surface_k": {
+              "run": 291.508,
+              "control": 291.485,
+              "change": 0.023102,
+              "percent": 0.00792563
+            }
+          },
+          "75-90": {
+            "rain_mm_day": {
+              "run": 0.0392321,
+              "control": 0.0406898,
+              "change": -0.00145774,
+              "percent": -3.58258
+            },
+            "evaporation_mm_day": {
+              "run": 0.0392491,
+              "control": 0.0404119,
+              "change": -0.00116278,
+              "percent": -2.87733
+            },
+            "soil_water_m": {
+              "run": 0.0136918,
+              "control": 0.0162758,
+              "change": -0.00258402,
+              "percent": -15.8764
+            },
+            "surface_k": {
+              "run": 289.239,
+              "control": 289.131,
+              "change": 0.108354,
+              "percent": 0.0374759
+            }
+          }
+        }
+      },
+      "layers": {
+        "sigma": [
+          0.0382996,
+          0.1191,
+          0.21085,
+          0.31685,
+          0.4368,
+          0.5668,
+          0.69935,
+          0.82335,
+          0.9241,
+          0.9833
+        ],
+        "temperature_change_k": [
+          2.12651,
+          1.23107,
+          0.708803,
+          0.25882,
+          0.081974,
+          0.061448,
+          0.062163,
+          -0.00303427,
+          -0.0450478,
+          -0.0463869
+        ],
+        "humidity_percent": [
+          71.0663,
+          19.7735,
+          8.14062,
+          -2.44274,
+          -1.24049,
+          -0.000498851,
+          0.875193,
+          1.15071,
+          0.40681,
+          0.0681806
+        ],
+        "cloud_change": [
+          -0.0153997,
+          -0.0167741,
+          -0.0120706,
+          -0.0034921,
+          -0.000416999,
+          -0.000315375,
+          -0.000401286,
+          0.000242881,
+          0.000434449,
+          0.000107441
+        ],
+        "control_temperature_k": [
+          169.988,
+          196.649,
+          219.22,
+          239.183,
+          255.872,
+          268.79,
+          278.073,
+          285.628,
+          290.76,
+          292.932
+        ],
+        "control_cloud": [
+          0.041625,
+          0.0850588,
+          0.0465031,
+          0.0203313,
+          0.00734904,
+          0.00777957,
+          0.0116043,
+          0.0222362,
+          0.024842,
+          0.0185372
+        ],
+        "convective_share_of_rain": 0.891575,
+        "control_convective_share_of_rain": 0.895173,
+        "convective_rain_percent": -3.93622,
+        "large_scale_rain_percent": -0.238541
+      },
+      "first_means": {
+        "against": "A28_gases",
+        "toa_net": 1.34295,
+        "toa_sunlight": -3.75947,
+        "toa_infrared": 5.10242,
+        "surface_sunlight": -2.20176,
+        "surface_infrared": 0.216893,
+        "surface_radiation": -1.98486,
+        "surface_latent": 1.01716,
+        "surface_sensible": 0.16905,
+        "air_radiation": 3.32782,
+        "surface_k": -0.0157874,
+        "glow_share_reaching_ground": 0.0405852
+      },
+      "added_dimming_percent": 3.524,
+      "rain_per_percent_dimming": {
+        "all": -1.00698,
+        "land": -1.18725
+      },
+      "rain_fed_growth": {
+        "by_band": {
+          "0-15": {
+            "evaporation_percent": -3.46162,
+            "growth_change_gt_c": [
+              -0.268275,
+              -0.271737
+            ]
+          },
+          "15-30": {
+            "evaporation_percent": -4.12078,
+            "growth_change_gt_c": [
+              -0.175133,
+              -0.180078
+            ]
+          },
+          "30-45": {
+            "evaporation_percent": -6.23291,
+            "growth_change_gt_c": [
+              -0.112192,
+              -0.133384
+            ]
+          },
+          "45-60": {
+            "evaporation_percent": -9.70235,
+            "growth_change_gt_c": [
+              -0.0161059,
+              -0.0189196
+            ]
+          },
+          "60-75": {
+            "evaporation_percent": 3.8901,
+            "growth_change_gt_c": [
+              0.0011787,
+              0.00141989
+            ]
+          },
+          "75-90": {
+            "evaporation_percent": -2.87733,
+            "growth_change_gt_c": [
+              -0.000226733,
+              -0.000274497
+            ]
+          }
+        },
+        "change_gt_c": [
+          -0.570755,
+          -0.602973
+        ],
+        "share_of_living_moon_percent": [
+          -3.52318,
+          -2.3646
+        ]
+      },
+      "through_light_percent_of_growth": [
+        0.24668,
+        1.03958
+      ]
+    }
+  },
+  "glow": {
+    "infrared_w_m2": 5.34414,
+    "watt_for_watt_dimming_percent": 2.53053,
+    "held_run_dimming_percent": 1.83,
+    "response_k_per_percent": 1.71894,
+    "held": {
+      "glow_dimming_percent": 1.79827,
+      "plan_dimming_percent": 3.49227,
+      "efficacy": 0.710631,
+      "interpolation": 1.04529,
+      "means": {
+        "surface_k": {
+          "run": 294.895,
+          "control": 294.895,
+          "change": -2.22045e-16,
+          "percent": -5.55112e-17
+        },
+        "land_surface_k": {
+          "run": 293.534,
+          "control": 293.484,
+          "change": 0.0503913,
+          "percent": 0.01717
+        },
+        "rain_mm_day": {
+          "all": {
+            "run": 2.16248,
+            "control": 2.23775,
+            "change": -0.0752677,
+            "percent": -3.36354
+          },
+          "land": {
+            "run": 1.9619,
+            "control": 2.04423,
+            "change": -0.0823294,
+            "percent": -4.0274
+          },
+          "sea": {
+            "run": 2.46274,
+            "control": 2.52744,
+            "change": -0.0646967,
+            "percent": -2.55978
+          }
+        },
+        "evaporation_mm_day": {
+          "all": {
+            "run": 2.16224,
+            "control": 2.23911,
+            "change": -0.0768632,
+            "percent": -3.43277
+          },
+          "land": {
+            "run": 1.58545,
+            "control": 1.65197,
+            "change": -0.0665188,
+            "percent": -4.02664
+          },
+          "sea": {
+            "run": 3.02567,
+            "control": 3.11802,
+            "change": -0.0923482,
+            "percent": -2.96176
+          }
+        },
+        "land_soil_water_m": {
+          "run": 0.110774,
+          "control": 0.112593,
+          "change": -0.00181945,
+          "percent": -1.61595
+        },
+        "cloud_cover": {
+          "all": {
+            "run": 0.195666,
+            "control": 0.234664,
+            "change": -0.0389971,
+            "percent": -16.6183
+          },
+          "low_deck": {
+            "run": 0.0535152,
+            "control": 0.0530034,
+            "change": 0.000511808,
+            "percent": 0.965612
+          },
+          "high_deck": {
+            "run": 0.113094,
+            "control": 0.143222,
+            "change": -0.0301283,
+            "percent": -21.036
+          }
+        },
+        "water_vapour_kg_m2": {
+          "run": 177.399,
+          "control": 175.836,
+          "change": 1.56259,
+          "percent": 0.888664
+        },
+        "land_bands": {
+          "0-15": {
+            "rain_mm_day": {
+              "run": 4.60131,
+              "control": 4.78122,
+              "change": -0.179914,
+              "percent": -3.76293
+            },
+            "evaporation_mm_day": {
+              "run": 3.35404,
+              "control": 3.4679,
+              "change": -0.113861,
+              "percent": -3.28327
+            },
+            "soil_water_m": {
+              "run": 0.283543,
+              "control": 0.28721,
+              "change": -0.00366654,
+              "percent": -1.27661
+            },
+            "surface_k": {
+              "run": 293.631,
+              "control": 293.614,
+              "change": 0.0173845,
+              "percent": 0.00592088
+            }
+          },
+          "15-30": {
+            "rain_mm_day": {
+              "run": 2.60899,
+              "control": 2.70109,
+              "change": -0.092105,
+              "percent": -3.40992
+            },
+            "evaporation_mm_day": {
+              "run": 2.38776,
+              "control": 2.48624,
+              "change": -0.0984825,
+              "percent": -3.9611
+            },
+            "soil_water_m": {
+              "run": 0.132254,
+              "control": 0.132004,
+              "change": 0.000249517,
+              "percent": 0.189021
+            },
+            "surface_k": {
+              "run": 294.284,
+              "control": 294.241,
+              "change": 0.0434777,
+              "percent": 0.0147762
+            }
+          },
+          "30-45": {
+            "rain_mm_day": {
+              "run": 1.22974,
+              "control": 1.30342,
+              "change": -0.0736858,
+              "percent": -5.65325
+            },
+            "evaporation_mm_day": {
+              "run": 1.16803,
+              "control": 1.24225,
+              "change": -0.0742214,
+              "percent": -5.97477
+            },
+            "soil_water_m": {
+              "run": 0.0591643,
+              "control": 0.0625291,
+              "change": -0.00336475,
+              "percent": -5.38109
+            },
+            "surface_k": {
+              "run": 294.311,
+              "control": 294.256,
+              "change": 0.055498,
+              "percent": 0.0188605
+            }
+          },
+          "45-60": {
+            "rain_mm_day": {
+              "run": 0.174387,
+              "control": 0.191539,
+              "change": -0.0171513,
+              "percent": -8.95448
+            },
+            "evaporation_mm_day": {
+              "run": 0.174533,
+              "control": 0.1928,
+              "change": -0.0182676,
+              "percent": -9.47491
+            },
+            "soil_water_m": {
+              "run": 0.00275011,
+              "control": 0.00299087,
+              "change": -0.000240767,
+              "percent": -8.05005
+            },
+            "surface_k": {
+              "run": 293.725,
+              "control": 293.677,
+              "change": 0.0473983,
+              "percent": 0.0161396
+            }
+          },
+          "60-75": {
+            "rain_mm_day": {
+              "run": 0.0553187,
+              "control": 0.053135,
+              "change": 0.00218374,
+              "percent": 4.10979
+            },
+            "evaporation_mm_day": {
+              "run": 0.0552269,
+              "control": 0.0531712,
+              "change": 0.00205565,
+              "percent": 3.8661
+            },
+            "soil_water_m": {
+              "run": 0.00102891,
+              "control": 0.000978261,
+              "change": 5.06533e-05,
+              "percent": 5.17789
+            },
+            "surface_k": {
+              "run": 291.578,
+              "control": 291.485,
+              "change": 0.0929445,
+              "percent": 0.0318866
+            }
+          },
+          "75-90": {
+            "rain_mm_day": {
+              "run": 0.0390818,
+              "control": 0.0406898,
+              "change": -0.00160802,
+              "percent": -3.9519
+            },
+            "evaporation_mm_day": {
+              "run": 0.0391547,
+              "control": 0.0404119,
+              "change": -0.00125717,
+              "percent": -3.1109
+            },
+            "soil_water_m": {
+              "run": 0.013021,
+              "control": 0.0162758,
+              "change": -0.00325478,
+              "percent": -19.9976
+            },
+            "surface_k": {
+              "run": 289.316,
+              "control": 289.131,
+              "change": 0.185359,
+              "percent": 0.0641089
+            }
+          }
+        }
+      },
+      "rain_fed_growth": {
+        "by_band": {
+          "0-15": {
+            "evaporation_percent": -3.28327,
+            "growth_change_gt_c": [
+              -0.254453,
+              -0.257737
+            ]
+          },
+          "15-30": {
+            "evaporation_percent": -3.9611,
+            "growth_change_gt_c": [
+              -0.168347,
+              -0.1731
+            ]
+          },
+          "30-45": {
+            "evaporation_percent": -5.97477,
+            "growth_change_gt_c": [
+              -0.107546,
+              -0.12786
+            ]
+          },
+          "45-60": {
+            "evaporation_percent": -9.47491,
+            "growth_change_gt_c": [
+              -0.0157283,
+              -0.0184761
+            ]
+          },
+          "60-75": {
+            "evaporation_percent": 3.8661,
+            "growth_change_gt_c": [
+              0.00117143,
+              0.00141113
+            ]
+          },
+          "75-90": {
+            "evaporation_percent": -3.1109,
+            "growth_change_gt_c": [
+              -0.000245139,
+              -0.00029678
+            ]
+          }
+        },
+        "change_gt_c": [
+          -0.545148,
+          -0.576059
+        ],
+        "share_of_living_moon_percent": [
+          -3.36511,
+          -2.25905
+        ]
+      },
+      "glow_rain_percent": {
+        "all": -2.43454,
+        "land": -3.0956
+      },
+      "glow_rain_percent_per_w_m2": -0.455554,
+      "glow_growth_percent_of_living_moon": [
+        -2.63414,
+        -1.78127
+      ],
+      "through_light_percent_of_growth": [
+        0.244459,
+        1.03022
+      ]
+    },
+    "at_the_gases_temperature": {
+      "glow_dimming_percent": 1.71787,
+      "efficacy": 0.678857
+    },
+    "reaching_ground": {
+      "gcm_all_sky": [
+        0.0378861,
+        0.0405852
+      ],
+      "correlated_k_clear_sky_films_150_to_190_k": [
+        0.019796,
+        0.0249503
+      ]
+    },
+    "made_up_by_plants": {
+      "by_band": {
+        "0-15": {
+          "evaporation_percent": {
+            "plan": -3.28327,
+            "glow": -1.97783
+          },
+          "rise_percent": {
+            "plan": 3.39473,
+            "glow": 2.01774
+          }
+        },
+        "15-30": {
+          "evaporation_percent": {
+            "plan": -3.9611,
+            "glow": -3.8517
+          },
+          "rise_percent": {
+            "plan": 4.12448,
+            "glow": 4.006
+          }
+        },
+        "30-45": {
+          "evaporation_percent": {
+            "plan": -5.97477,
+            "glow": -5.33904
+          },
+          "rise_percent": {
+            "plan": 6.35443,
+            "glow": 5.64017
+          }
+        },
+        "45-60": {
+          "evaporation_percent": {
+            "plan": -9.47491,
+            "glow": -9.80879
+          },
+          "rise_percent": {
+            "plan": 10.4666,
+            "glow": 10.8755
+          }
+        },
+        "60-75": {
+          "evaporation_percent": {
+            "plan": 3.8661,
+            "glow": 0.883799
+          },
+          "rise_percent": {
+            "plan": -3.72219,
+            "glow": -0.876057
+          }
+        },
+        "75-90": {
+          "evaporation_percent": {
+            "plan": -3.1109,
+            "glow": -5.61557
+          },
+          "rise_percent": {
+            "plan": 3.21078,
+            "glow": 5.94968
+          }
+        }
+      },
+      "rise_percent": {
+        "plan": [
+          4.05043,
+          4.10737
+        ],
+        "glow": [
+          3.16428,
+          3.23232
+        ]
+      },
+      "reference": "CAM fixes 2-6 times as much carbon per litre as C3 and 1-5 times as much as C4 (Hartzell, Bartlett & Porporato 2018)"
+    }
+  },
+  "pairs": {
+    "low": {
+      "methane_ppm": 0.3,
+      "n2o_ppm": 0.03,
+      "added_dimming_percent": 0.83,
+      "rain_percent": {
+        "all": -0.45412,
+        "land": -0.455487
+      },
+      "rain_fed_growth_percent_of_living_moon": [
+        -0.35732,
+        -0.233553
+      ],
+      "through_light_percent_of_growth": [
+        0.0581,
+        0.24485
+      ]
+    },
+    "middle": {
+      "methane_ppm": 1.87,
+      "n2o_ppm": 0.1,
+      "added_dimming_percent": 1.69,
+      "rain_percent": {
+        "all": -0.929,
+        "land": -0.931796
+      },
+      "rain_fed_growth_percent_of_living_moon": [
+        -0.730974,
+        -0.477784
+      ],
+      "through_light_percent_of_growth": [
+        0.1183,
+        0.49855
+      ]
+    },
+    "earth_2019": {
+      "methane_ppm": 1.87,
+      "n2o_ppm": 0.332,
+      "added_dimming_percent": 2.23,
+      "rain_percent": {
+        "all": -1.22223,
+        "land": -1.22591
+      },
+      "rain_fed_growth_percent_of_living_moon": [
+        -0.9617,
+        -0.628592
+      ],
+      "through_light_percent_of_growth": [
+        0.1561,
+        0.65785
+      ]
+    }
+  }
+}

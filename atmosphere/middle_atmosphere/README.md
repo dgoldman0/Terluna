@@ -15,6 +15,7 @@ exobase. Equations, data and limits are in [METHODS.md](METHODS.md).
 | [balance.py](balance.py) | Balance surface temperatures solved from each case's runs at several surface temperatures; writes `results/balance.json` |
 | [escape.py](escape.py) | Exobase temperature and molecular loss with each case's upper temperature as the thermal column's base; heating by ultraviolet leaking through a filter; bounds on atomic-oxygen loss |
 | [lbl_check.py](lbl_check.py) | Re-solves a finished case's upper air with line-by-line CO2 cooling, to measure the correlated-k error there |
+| [curved_light.py](curved_light.py) | The design cases again with the Moon's curved air's heating of the upper air (the twilight ledger's ratio of curved to flat sunlight per unit mass), the thermal column from the new base, and the ground the GCM's sharing of its sunlight would give; writes `results/curved_light.json` |
 | [benchmarks.py](benchmarks.py) | Line-by-line thermal and solar fluxes on the equilibrium profiles, for checking a 3-D model's radiation; writes `results/radiation_benchmarks.json` |
 | [limb_heat.py](limb_heat.py) | Short-wave sunlight that passes the solar shield's window, annulus films and gaps, traced through the air along slant paths above the limb: where it heats, the state the heated air settles to, its loss, and the gap transmission each budget allows; writes `results/limb_heat.json` |
 | [inputs.json](inputs.json), [fetch_inputs.py](fetch_inputs.py) | Ultraviolet cross-sections and quantum yields (JPL recommendations via the MPI-Mainz atlas), hash-checked, not redistributed |
@@ -390,3 +391,45 @@ cycle 21's year, with the range across the years around each maximum from cycle
   transmission of 2×10⁻⁴ and solar maximum, 0.003 kg/s against 0.11 with all
   near-infrared heating and 2×10⁻⁶ against 3×10⁻⁴ in LTE. The loss response
   takes the traced shape since 7 October.
+
+### The curved air's light (2026-10-14)
+
+The column takes the Sun as a global and diurnal mean through a pseudo-spherical
+two-stream column, as flat a footing as the GCM's. The twilight ledger
+([climate/gcm/twilight.py](../../climate/gcm/twilight.py),
+[twilight.json](../../climate/results/gcm/twilight.json)) finds that the Moon's
+tall curved air heats the design column's air, per unit mass, about 6% more than
+such a flat column in the troposphere, 10–18% more from 100 to 360 km and 19% more
+at the 0.3 Pa base, where the air stays lit long after the ground below has lost
+the Sun (the corrected ledger, whose channels keep the heights of the absorbed
+sunlight as well as its totals). [curved_light.py](curved_light.py) solves the three design
+cases behind the exobase table again with their near-infrared heating scaled by
+that ratio, runs the thermal column from the new base with the same heats, and
+measures what the GCM's sharing of its sunlight would do to the ground. It
+writes [results/curved_light.json](results/curved_light.json).
+
+| Titania stack | Base at 0.3 Pa | Exobase, film alone: quiet Sun / maximum | 0.1% leak: quiet / maximum | Molecular loss, film alone |
+|---|---|---|---|---|
+| LTE | 163.3 → 168.4 K | 168.4 / 168.7 K | 194.1 / 234.5 K | 4×10⁻⁸ → 2×10⁻⁷ kg/s |
+| All heats | 191.5 → 197.1 K | 197.2 / 197.5 K | 223.5 / 264.1 K | 1.5×10⁻⁴ → 6×10⁻⁴ kg/s |
+| Collisional | 142.1 → 145.7 K | 145.7 / 146.0 K | 170.9 / 210.5 K | 1×10⁻¹¹ → 5×10⁻¹¹ kg/s |
+
+- **The twilight warms the base 3.6–5.6 K, and the exobase follows.** The losses
+  rise two- to fivefold and stay negligible; behind the film alone the exobase
+  stays 50–100 K under the 250 K target.
+- **Sharing the sunlight as PlaSim does would warm the ground about 0.9 K.** The
+  design case at 298 K, solved again, reproduces its stored imbalance at the top
+  of the air exactly (−0.118 W/m²). With its near-infrared heating shared among
+  the GCM's ten layers as PlaSim shares its absorbed sunlight, the column total
+  kept, the air above the tropopause loses most of its sunlight, the base falls
+  to 85 K and the column takes in 1.42 W/m² more at the top: a ground 0.88 K
+  warmer at the column's −1.62 W/m² per kelvin across its balance cases. With the
+  CO2 and O2 bands PlaSim gains
+  ([plasim_shortwave.py](../../climate/gcm/plasim_shortwave.py)), the same sharing
+  leaves 0.31 W/m², 0.19 K (`ground.with_bands`). The rest is water vapour's, in
+  the upper troposphere: with the Sun overhead the line-by-line water takes
+  9.2 W/m² at 66–85 km, just under the 86 km tropopause, and PlaSim's 5.2. Lacis
+  and Hansen's curve of growth takes sunlight from the first water it meets, where
+  the line-by-line water's strongest lines go dark higher up; a pressure exponent
+  on PlaSim's water path does not move it ([the GCM's
+  account](../../climate/gcm/README.md#the-curved-airs-light)).

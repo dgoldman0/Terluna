@@ -26,12 +26,20 @@ on this laptop. The findings behind them are in the [README](README.md).
      can feed; the night's light aloft; and how people's traffic and light share the volume.
    - **How:** a food-web budget of the sky by height band from the climate runs, the land's export of pollen, spores,
      insects and migrants, and the illumination solver's twilit sky aloft.
-3. **How much the reduced gases warm the Moon.** The screen puts methane near 20 ppm at central values, and N2O builds
-   0.3–0.4 ppb a year. Their effect in a column 7.6 times Earth's has not been computed.
+3. **How much the reduced gases warm the Moon.** Answered on 12 October 2026, the next work the author set that day:
+   the line-by-line column with HITRAN's CH4 and N2O lines added, about 23 minutes on six workers
+   ([reduced gases](../../atmosphere/radiative_convective/README.md)). The planned climate carries neither gas, so
+   whatever the Moon keeps adds to it. Earth's present levels force 4.7 W/m² all-sky on the Moon, 2.9–4.7 K; the
+   screen's central steady state (methane 21.6–29 ppm, N2O 0.55 ppm) 7.9–8.3 W/m², 4.9–8.3 K; the highest (230 and
+   4.2 ppm) 14 W/m². N2O forces more per ppm and keeps building.
    The author chose on 12 October to hold both gases in check by biological means, coupled with advanced technologies
-   that make up the difference, with no ultraviolet window in the shield ([machines.md](machines.md)).
-
-   **How:** the line-by-line radiative–convective column with CH4 and N2O added, a sweep of a few hours.
+   that make up the difference, with no ultraviolet window in the shield ([machines.md](machines.md)). Their levels
+   balance the dimming that answers the warming against what holding them takes. On 13 October the author chose the
+   middle of three pairs weighed, 1.9 ppm of methane (Earth's present) and 0.1 ppm of N2O (a third of Earth's): 3.58
+   W/m² all-sky, answered by 1.69% added dimming over the sunlight the Moon absorbs. With biology at the sources
+   cutting 90% of the methane, contactors in open air pass 0.03–0.09% of the air a year once methane reaches 1.9 ppm;
+   N2O's catalytic decomposition takes 0.29–4.4 TW once it reaches 0.1 ppm, 365–5,610 years from none
+   ([domain synthesis](../../research/studies/domain_synthesis/README.md#where-they-are-held)).
 4. **The ecology's case in the ultraviolet decision (O3).** Keep the present short-wave shield, with adaptation to
    its spectrum and local UV provision as the working direction. A narrow attenuated UV-B window remains a
    candidate. The [fixed-column evaluation](../../research/studies/uv_biology/README.md) gives overhead UVI
@@ -52,7 +60,9 @@ on this laptop. The findings behind them are in the [README](README.md).
    arithmetic).
 
    **How:** add stomatal conductance and a soil water bucket to the plant model, forced by the GCM's rain and the
-   CM1–GCM range. Hours.
+   CM1–GCM range. Hours. By the fresh seas the water table is a second source: at lunar gravity soil lifts water to
+   roots from about four times Earth's height above it, so shore belts draw on the sea from 15–25 m up (15 October,
+   [Fresh shores and soda lakes](README.md#fresh-shores-and-soda-lakes-15-october-2026)).
 7. **Nitrogen and its metals.**
    - How much fixation the biomes need and can afford.
    - Which micronutrients must be imported. Molybdenum and vanadium are the first; boron, cobalt, selenium and
@@ -70,11 +80,33 @@ on this laptop. The findings behind them are in the [README](README.md).
    so the map will show how much of the mix water and light provide. It will also show whether temperature needs a
    lever, such as window films that dim some latitudes more than others.
 
-   **How:** zoning on committed products; the lever is a question for the shield and climate work.
+   **How:** zoning on committed products; the lever is a question for the shield and climate work. The map also
+   carries the shore belts fed by the fresh seas (resources' question 16, the shores' water table) and the soda lakes
+   of the dry belts' closed basins: how many there are and where.
 10. **The waters as living systems.**
-   - The seas' chemistry through time and the delivered water's salts, with the resources domain.
+   - The seas' chemistry through time and the delivered water's salts, with the resources domain. Done there on
+     13 October (research/studies/sea_chemistry on domain/resources): every lasting state is a held one, and the
+     author holds the seas fresh, hard fresh water near 0.14 g/kg and pH 8.3, on the condition that they are rich in
+     life (resources' register, "The seas through time"). Their communities are ecology's to design for high
+     biodiversity, as Earth's old, clear fresh lakes hold hundreds of endemic species through variety of habitat:
+     rocky shores, shallows, deltas, reefs and deeps.
+   - The small waters' builders, from resources' terrain study of 13 October
+     (research/studies/terrain_through_time on domain/resources). Left alone the small lakes and crater pools fill
+     within centuries to tens of thousands of years. Dam builders keep ponds on the small streams below the 1.9 km
+     grid, as beaver once held 13% of a boreal landscape in ponds. Travertine builders (mosses, microbes and
+     stoneworts) build barriers that rise faster than lakes fill, on most rivers while the young soils weather fast.
+     Once the soils age the rivers carry about half the load natural tufa needs and sit at 0.76 times calcite
+     saturation, so lasting barriers need builders that calcify from undersaturated water, as freshwater shellfish
+     do, or springs carrying twice the rivers' load.
    - Stratification and oxygen in deep crater lakes.
    - Monthly plankton cycles, intertidal monthly wetlands, and methane from lakes by depth.
+   - Soda lakes, which the author takes as their own local ecosystems (15 October): their communities for the Moon's
+     nearly chloride-free soda at a pH near 10, from Earth's soda-lake producers, grazers, birds and the few fish that
+     live in them, and how they change as a lake concentrates over its thousands of years.
+   - The fresh shores: the belts on the sea's water table, the monthly freshwater tidal marsh, small islands wooded
+     throughout, and the hardpan where the draw ends.
+   - Saltwater life, for which the author leans to aquariums over salt seas: which marine life is kept, and in what
+     volumes.
 
    **How:** a one-dimensional lake model through the lunar month, with the seas' composition as scenarios.
 11. **What may live wild.** Pollen and spores spread Moon-wide, and no containment is demonstrated for wild engineered

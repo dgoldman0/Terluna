@@ -68,6 +68,57 @@ def test_the_gases_follow_their_sources_and_sinks(product):
         assert close(case['rise_ppb_per_year'], case['sources_tg_n_yr']['total'] / n['tg_n_per_ppb'])
 
 
+def test_the_held_levels_take_the_deep_columns_pair_and_their_removal_adds_up(product):
+    """The held pair's warming is the deep column's, below Earth's 2019 air and the central steady state; methane's
+    removal is what the sources biology leaves exceed the soils' uptake at the held level, N2O's all that biology
+    leaves, and each passes the air that carries it at that level."""
+    h = product['gases']['held']
+    forcing = json.loads((L.ROOT / 'atmosphere/radiative_convective/results/reduced_gases.json').read_text())
+    pair = forcing['moon_at_design']['both'][f'{L.HELD_CH4_PPM:g}+{L.HELD_N2O_PPM:g}']
+    assert close(h['forcing_w_m2']['allsky'], pair['allsky_w_m2'])
+    assert h['forcing_w_m2']['allsky'] < h['beside']['earth_2019']['allsky_w_m2']
+    assert h['beside']['earth_2019']['allsky_w_m2'] < min(h['beside']['central_steady_state']['allsky_w_m2'])
+    m = product['gases']['methane']
+    for cut, c in h['methane_by_source_cut'].items():
+        for e in (0, 1):
+            left = (1.0 - float(cut)) * m['central'][e]['sources_tg_yr']['total']
+            k = m['central'][e]['soil_sink_tg_yr_per_ppm']
+            assert close(c['sources_left_tg_yr'][e], left)
+            assert close(c['removal_tg_yr'][e], max(0.0, left - k * L.HELD_CH4_PPM))
+            assert close(c['atmosphere_share_per_year'][e], c['removal_tg_yr'][e] / (L.HELD_CH4_PPM * m['tg_per_ppm']))
+    n = product['gases']['n2o']
+    for cut, c in h['n2o_by_source_cut'].items():
+        for e, case in enumerate((n['low'], n['high'])):
+            left = (1.0 - float(cut)) * case['sources_tg_n_yr']['total']
+            assert close(c['sources_left_tg_n_yr'][e], left)
+            assert close(c['atmosphere_share_per_year'][e], left / (L.HELD_N2O_PPM * n['tg_n_per_ppb'] * 1e3))
+
+
+def test_the_weighed_pairs_trade_dimming_for_removal_and_the_held_one_is_the_middle(product):
+    """The dimming answers the warming with sunlight the Moon would have absorbed; from the low pair to Earth's 2019
+    air the dimming grows while N2O's decomposition shrinks and starts later, and the held pair is the middle one."""
+    g = product['gases']
+    h, w = g['held'], g['pairs_weighed']
+    pop = json.loads((L.ROOT / 'provisioning/results/population.json').read_text())
+    absorbed = (1.0 - L.DESIGN_PLANETARY_ALBEDO) * pop['heat']['design_sunlight_w_m2']
+    assert close(h['dimming_basis']['absorbed_sunlight_w_m2'], absorbed)
+    assert close(h['added_dimming_percent'], h['forcing_w_m2']['allsky'] / absorbed * 100.0)
+    assert (h['methane_ppm'], h['n2o_ppm']) == (w['middle']['methane_ppm'], w['middle']['n2o_ppm'])
+    assert close(w['middle']['added_dimming_percent'], h['added_dimming_percent'])
+    low, mid, earth = w['low'], w['middle'], w['earth_2019']
+    assert low['added_dimming_percent'] < mid['added_dimming_percent'] < earth['added_dimming_percent']
+    for cut in ('0.95', '0.5'):
+        for e in (0, 1):
+            assert low['n2o'][cut]['decomposition_tw'][e] > mid['n2o'][cut]['decomposition_tw'][e] > \
+                earth['n2o'][cut]['decomposition_tw'][e]
+            assert low['n2o'][cut]['years_to_reach_from_none'][e] < mid['n2o'][cut]['years_to_reach_from_none'][e] < \
+                earth['n2o'][cut]['years_to_reach_from_none'][e]
+    for cut in ('0.9', '0.5'):
+        assert mid['methane'][cut] == earth['methane'][cut]                # the same methane
+        assert all(a > b for a, b in zip(low['methane'][cut]['atmosphere_share_per_year'],
+                                         mid['methane'][cut]['atmosphere_share_per_year']))
+
+
 def test_people_losses_are_dredged_back(product):
     p = product['phosphorus']
     for land in p['by_land_loss'].values():

@@ -86,14 +86,20 @@ window in the shield near 200–240 nm, which would make ozone and heat the uppe
   from open air at parts per million comes last.
 - **Methane** has soils as its only sink too (finding 25), and the heritage cattle the author allowed on the
   homesteads bring back the ruminants the lunar design left out (provisioning register).
-- **First:** the deep column's warming of both gases ([questions](questions.md), item 3).
+- **Their warming:** Earth's present levels force 4.7 W/m² all-sky in the Moon's deep column and the central steady
+  state 7.9–8.3 W/m², with N2O the larger lever per ppm ([questions](questions.md), item 3).
+- **Their levels:** the author's choice, the balanced middle of three pairs weighed: 1.9 ppm of methane and 0.1 ppm
+  of N2O, 3.58 W/m², answered by 1.69% added dimming. Methane's oxidizers and the N2O reducers at the sources do most
+  of the work; contactors in open air take the rest, methane's at the air's own temperature and N2O's by heated
+  catalytic decomposition.
 
 ## What remains
 
 - The signal vocabulary, its channels and its regional dialects.
 - The reporter traits and the watermark scheme.
 - A test for each starting constraint.
-- The N2O and methane budget with its sinks, and the column's warming.
+- The N2O and methane budget with its sinks, and what biology at the sources cuts, which sets how far the held levels
+  can move down.
 
 ## Sources
 

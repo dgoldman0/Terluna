@@ -1,0 +1,417 @@
+{
+ "run": "A28_dim5",
+ "years": [
+  15,
+  24
+ ],
+ "check": "radiation_check_A28_dim5.json",
+ "as_run": {
+  "rayleigh_scale": 1.8,
+  "mean_points": {
+   "reflected": -1.45322,
+   "air": -6.22757,
+   "ground": 7.68351
+  },
+  "rms_points": {
+   "reflected": 1.90462,
+   "air": 6.22945,
+   "ground": 7.7707
+  },
+  "by_column": {
+   "reflected": [
+    -0.19706,
+    -2.20106,
+    -1.08788,
+    -0.8062,
+    -0.28903,
+    -0.22274,
+    -0.45932,
+    -1.56525,
+    -1.93422,
+    -3.07868,
+    -4.14399
+   ],
+   "air": [
+    -6.4641,
+    -6.21182,
+    -6.30022,
+    -6.36147,
+    -6.33349,
+    -6.42599,
+    -5.99117,
+    -6.03343,
+    -6.10332,
+    -6.18119,
+    -6.09702
+   ],
+   "ground": [
+    6.67116,
+    8.42288,
+    7.3881,
+    7.15767,
+    6.62252,
+    6.65873,
+    6.45049,
+    7.59868,
+    8.03754,
+    9.26987,
+    10.24101
+   ]
+  },
+  "tests": {
+   "radiation_check_A28_site.json": {
+    "reflected": [
+     0.20433
+    ],
+    "air": [
+     -7.89454
+    ],
+    "ground": [
+     7.69021
+    ]
+   },
+   "radiation_check_A28_dim8_site.json": {
+    "reflected": [
+     -0.22479
+    ],
+    "air": [
+     -6.38291
+    ],
+    "ground": [
+     6.6077
+    ]
+   }
+  }
+ },
+ "forms": {
+  "path": {
+   "k": 4.54004,
+   "rayleigh_scale": 2.21601,
+   "mean_points": {
+    "reflected": 0.05369,
+    "air": 0.02069,
+    "ground": -0.07166
+   },
+   "rms_points": {
+    "reflected": 0.74198,
+    "air": 0.1612,
+    "ground": 0.74525
+   },
+   "by_column": {
+    "reflected": [
+     0.76935,
+     -1.00885,
+     -0.08738,
+     0.21626,
+     0.65156,
+     0.75349,
+     0.2749,
+     0.71073,
+     0.40807,
+     -0.57306,
+     -1.52442
+    ],
+    "air": [
+     -0.2091,
+     -0.00105,
+     -0.0384,
+     -0.10844,
+     -0.06607,
+     -0.17165,
+     0.31372,
+     0.25363,
+     0.16775,
+     0.03023,
+     0.05699
+    ],
+    "ground": [
+     -0.55025,
+     1.0199,
+     0.12578,
+     -0.11782,
+     -0.58548,
+     -0.57183,
+     -0.58861,
+     -0.96436,
+     -0.57582,
+     0.55283,
+     1.46742
+    ]
+   },
+   "tests": {
+    "radiation_check_A28_site.json": {
+     "reflected": [
+      1.2193
+     ],
+     "air": [
+      -1.76353
+     ],
+     "ground": [
+      0.54423
+     ]
+    },
+    "radiation_check_A28_dim8_site.json": {
+     "reflected": [
+      0.73873
+     ],
+     "air": [
+      -0.12275
+     ],
+     "ground": [
+      -0.61598
+     ]
+    }
+   }
+  },
+  "scale": {
+   "k": 1.29199,
+   "rayleigh_scale": 2.23712,
+   "mean_points": {
+    "reflected": 0.04764,
+    "air": 0.01357,
+    "ground": -0.05849
+   },
+   "rms_points": {
+    "reflected": 0.72528,
+    "air": 0.23896,
+    "ground": 0.57059
+   },
+   "by_column": {
+    "reflected": [
+     0.68922,
+     -1.06199,
+     -0.12179,
+     0.16229,
+     0.59592,
+     0.67584,
+     0.31489,
+     0.77445,
+     0.47219,
+     -0.51182,
+     -1.46512
+    ],
+    "air": [
+     -0.2191,
+     0.16534,
+     -0.12492,
+     -0.13927,
+     -0.17806,
+     -0.18491,
+     -0.23295,
+     0.11829,
+     0.12481,
+     0.2839,
+     0.53615
+    ],
+    "ground": [
+     -0.46012,
+     0.90665,
+     0.24671,
+     -0.03302,
+     -0.41787,
+     -0.48094,
+     -0.08194,
+     -0.89275,
+     -0.59699,
+     0.23792,
+     0.92897
+    ]
+   },
+   "tests": {
+    "radiation_check_A28_site.json": {
+     "reflected": [
+      0.96626
+     ],
+     "air": [
+      -1.02447
+     ],
+     "ground": [
+      0.05821
+     ]
+    },
+    "radiation_check_A28_dim8_site.json": {
+     "reflected": [
+      0.67085
+     ],
+     "air": [
+      -0.18432
+     ],
+     "ground": [
+      -0.48654
+     ]
+    }
+   }
+  },
+  "linear": {
+   "k": 0.00203,
+   "rayleigh_scale": 2.31603,
+   "mean_points": {
+    "reflected": 0.0305,
+    "air": -0.15084,
+    "ground": 0.12307
+   },
+   "rms_points": {
+    "reflected": 0.71828,
+    "air": 0.98765,
+    "ground": 0.64754
+   },
+   "by_column": {
+    "reflected": [
+     0.37415,
+     -1.25713,
+     -0.1997,
+     -0.017,
+     0.41709,
+     0.37366,
+     0.57841,
+     0.99844,
+     0.69098,
+     -0.32461,
+     -1.29877
+    ],
+    "air": [
+     -0.37067,
+     0.50295,
+     -0.60077,
+     -0.41205,
+     -0.67582,
+     -0.35122,
+     -1.92835,
+     -0.54981,
+     -0.2636,
+     0.91696,
+     2.07311
+    ],
+    "ground": [
+     0.00652,
+     0.76418,
+     0.80047,
+     0.41905,
+     0.25873,
+     -0.01245,
+     1.34994,
+     -0.44863,
+     -0.42738,
+     -0.58235,
+     -0.77434
+    ]
+   },
+   "tests": {
+    "radiation_check_A28_site.json": {
+     "reflected": [
+      -0.45301
+     ],
+     "air": [
+      2.00882
+     ],
+     "ground": [
+      -1.55581
+     ]
+    },
+    "radiation_check_A28_dim8_site.json": {
+     "reflected": [
+      0.42442
+     ],
+     "air": [
+      -0.51239
+     ],
+     "ground": [
+      0.08798
+     ]
+    }
+   }
+  }
+ },
+ "columns": [
+  {
+   "label": "site land",
+   "lat_deg": 2.7689,
+   "lon_deg": 0.0,
+   "land": true
+  },
+  {
+   "label": "land, water vapour at its 5th percentile",
+   "lat_deg": -52.6065,
+   "lon_deg": 258.75,
+   "land": true
+  },
+  {
+   "label": "land, water vapour at its 25th percentile",
+   "lat_deg": 35.9951,
+   "lon_deg": 241.875,
+   "land": true
+  },
+  {
+   "label": "land, water vapour at its 50th percentile",
+   "lat_deg": -30.4576,
+   "lon_deg": 11.25,
+   "land": true
+  },
+  {
+   "label": "land, water vapour at its 75th percentile",
+   "lat_deg": 8.3067,
+   "lon_deg": 106.875,
+   "land": true
+  },
+  {
+   "label": "land, water vapour at its 95th percentile",
+   "lat_deg": 8.3067,
+   "lon_deg": 286.875,
+   "land": true
+  },
+  {
+   "label": "tropical highland",
+   "lat_deg": 2.7689,
+   "lon_deg": 196.875,
+   "land": true
+  },
+  {
+   "label": "sea near 0 degrees",
+   "lat_deg": 2.7689,
+   "lon_deg": 315.0,
+   "land": false
+  },
+  {
+   "label": "sea near 25 degrees",
+   "lat_deg": 24.9199,
+   "lon_deg": 16.875,
+   "land": false
+  },
+  {
+   "label": "sea near 45 degrees",
+   "lat_deg": 47.0696,
+   "lon_deg": 348.75,
+   "land": false
+  },
+  {
+   "label": "sea near 60 degrees",
+   "lat_deg": 58.143,
+   "lon_deg": 320.625,
+   "land": false
+  }
+ ],
+ "test_columns": {
+  "radiation_check_A28_site.json": [
+   {
+    "run": "A28",
+    "label": "site land",
+    "water_kg_m2": 338.184
+   }
+  ],
+  "radiation_check_A28_dim8_site.json": [
+   {
+    "run": "A28_dim8",
+    "label": "site land",
+    "water_kg_m2": 186.8
+   }
+  ]
+ },
+ "schema": "terluna.climate.gcm-shortwave/1",
+ "action": "fit",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/plasim_shortwave.py": "e2b6468895a6fdd4"
+  }
+ }
+}

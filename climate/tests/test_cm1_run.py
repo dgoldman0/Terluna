@@ -64,6 +64,60 @@ def test_the_rain_test_build_takes_earth_fall_speeds_and_keeps_the_host_gravity_
     assert c.BUILD_PATCHES['moon_omp_earth_fall'] == [c.EARTH_FALL_PATCH]
 
 
+def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
+    name, marker, edits = c.TWILIGHT_PATCH
+    assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)
+    assert c.BUILD_PATCHES['moon_omp_twilight'] == [c.TWILIGHT_PATCH] and c.BUILDS['moon_omp_twilight'] == c.BUILDS['moon_omp']
+    assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != 'moon_omp_twilight')
+    sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
+    added = ''.join(new for _, new, _ in sun[2])
+    # It extends the lines the Sun's patch writes, which the build applies first.
+    for old in ('use input, only : var12,var16,var17,var18,var19', 'real :: terluna_lat,terluna_s'):
+        assert old in added and any(old in o for o, _, _ in edits)
+    for tag in ('45n', '45s'):
+        case = c.CASES[f'ring_{tag}_lsw_twilight']
+        assert case['twilight'] in c.TWILIGHT_MODES and case['build'] == 'moon_omp_twilight'
+        assert {k: v for k, v in case.items() if k not in ('twilight', 'build', 'purpose')} == \
+               {k: v for k, v in c.CASES[f'ring_{tag}_lsw'].items() if k not in ('build', 'purpose')}
+
+
+def test_the_corrected_rings_take_their_own_gcm_run_with_and_without_the_twilight():
+    run, years = c.CORRECTED_GCM
+    assert run != c.GCM_RUN and years[1] - years[0] == 9
+    for tag in ('45n', '45s'):
+        plain, lit = c.CASES[f'ring_{tag}_corrected'], c.CASES[f'ring_{tag}_corrected_twilight']
+        assert plain['gcm'] == lit['gcm'] == c.CORRECTED_GCM and 'gcm' not in c.CASES[f'ring_{tag}_lsw']
+        assert plain['build'] == 'moon_omp' and 'twilight' not in plain
+        assert lit['build'] == 'moon_omp_twilight' and lit['twilight'] == 'full'
+        # Apart from the GCM run, the build and the twilight they are the earlier 45-degree rings.
+        same = lambda case: {k: v for k, v in case.items() if k not in ('gcm', 'twilight', 'build', 'purpose')}
+        assert same(plain) == same(lit) == same(c.CASES[f'ring_{tag}_lsw'])
+        assert '3% dimmer shield' in plain['purpose'] and '5% dimmer' not in lit['purpose']
+
+
+def test_the_twilight_table_reads_as_the_hook_expects(tmp_path):
+    product = c.HERE.parent / 'results' / 'gcm' / 'twilight.json'
+    if not product.exists():
+        pytest.skip('twilight.json not built')
+    tables = {}
+    for mode in c.TWILIGHT_MODES:
+        record = c.write_twilight(tmp_path / c.TWILIGHT_TABLE, mode)
+        rows = (tmp_path / c.TWILIGHT_TABLE).read_text().splitlines()
+        n, shells = (int(x) for x in rows[0].split())
+        assert (n, shells) == (record['elevations'], record['shells']) and len(rows) == n + 4
+        edges = np.array(rows[1].split(), float)
+        assert edges.size == shells + 1 and edges[0] == 0.0 and np.all(np.diff(edges) > 0)
+        table = np.array([r.split() for r in rows[2:n + 2]], float)
+        assert table.shape == (n, 2 + shells) and np.all(np.diff(table[:, 0]) > 0)
+        escape, temperature = (np.array(r.split(), float) for r in rows[n + 2:])
+        assert escape.size == temperature.size == shells + 1 and np.all(temperature > 100.0)
+        tables[mode] = table, escape
+    # The full table adds the shells' widening, which takes more sunlight and lets out more infrared.
+    assert tables['full'][1].sum() > tables['curved'][1].sum() > 0.0
+    with pytest.raises(ValueError):
+        c.write_twilight(tmp_path / c.TWILIGHT_TABLE, 'both')
+
+
 def test_a_case_set_up_from_another_takes_its_inputs_and_only_a_new_executable(tmp_path, monkeypatch):
     monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
     monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
@@ -509,6 +563,49 @@ def test_land_overrides_reach_the_right_columns_of_the_table():
     assert 'roughness 200 cm' in rough[30] and 'wetness 1.00' in rough[30]
 
 
+def test_the_dry_ground_land_ring_differs_from_its_control_in_the_land_alone():
+    ring, control = c.CASES['ring_45n_corrected_gcm_land'], c.CASES['ring_45n_corrected']
+    assert set(ring) - {'land'} == set(control) - {'land'}
+    assert {k: v for k, v in ring.items() if k not in ('land', 'purpose')} == \
+           {k: v for k, v in control.items() if k not in ('land', 'purpose')}
+    assert ring['land'] == dict(roughness_cm=200.0, therin=4.97) and control.get('land') is None
+    # a circle of latitude's one land row: the control's row (its wetness written in two places), roughness and soil
+    index, base = c.PLACEHOLDER_LAND
+    plain = base.replace('.50', f'{0.014:.2f}'.lstrip('0')).split(',')
+    given = c.landuse_rows(((index, round(0.014, 2)),), ring['land'])[index].split(',')
+    assert given[:4] == plain[:4] and given[6] == plain[6] and given[7].split("'")[0] == plain[7].split("'")[0]
+    assert float(given[4]) == 200.0 and float(given[5]) == 4.97 and float(plain[4]) == 10.0 and float(plain[5]) == 4.0
+
+
+def test_the_sideways_ring_differs_from_its_control_in_the_transport_alone():
+    ring, control = c.CASES['ring_45n_corrected_sideways'], c.CASES['ring_45n_corrected']
+    assert set(ring) - {'sideways'} == set(control) - {'sideways'} and ring['sideways'] is True
+    assert {k: v for k, v in ring.items() if k not in ('sideways', 'purpose')} == \
+           {k: v for k, v in control.items() if k not in ('sideways', 'purpose')}
+
+
+def test_sideways_forcing_stands_ground_first_in_theta_and_vapour(monkeypatch):
+    from climate.crm import ring_heat_budget as hb
+    gcm = dict(sigma=[0.1, 0.5, 0.9], rows_deg=[52.6, 47.1, 41.5],
+               mean_meridional_k_day=[-0.1, 0.0, -0.2], eddies_k_day=[0.0, 0.1, -0.1],
+               vapour=dict(mean_meridional_g_kg_day=[0.0, 0.0, -0.1], eddies_g_kg_day=[0.0, 0.0, 0.05]))
+    monkeypatch.setattr(hb, 'gcm_sideways', lambda *args: gcm)
+    ref = dict(surface_pa_sea=1.2e5, profile=dict(z_m=[30000.0, 10000.0, 1000.0]))
+    f = c.sideways_forcing('run', (10, 19), 45.0, 3.0, ref)
+    assert f['z_m'].tolist() == [0.0, 1000.0, 10000.0, 30000.0] and f['theta_k_s'].shape == (1, 4)
+    exner = (0.9 * 1.2e5 / 1.0e5) ** (287.04 / 1005.7)
+    assert f['theta_k_s'][0, 0] == f['theta_k_s'][0, 1] == pytest.approx(-0.3 / 86400.0 / exner)
+    assert f['qv_kg_kg_s'][0, 1] == pytest.approx(-0.05 / 8.64e7) and f['qv_kg_kg_s'][0, 3] == 0.0
+
+
+@needs_planet
+def test_the_sideways_ring_switches_on_the_large_scale_advection():
+    air = dict(sunlight_w_m2=1198.0)
+    on = c.case_settings(c.CASES['ring_45n_corrected_sideways'], 1288, 5993.1, 111, 150000.0, air, 1.6242)
+    off = c.case_settings(c.CASES['ring_45n_corrected'], 1288, 5993.1, 111, 150000.0, air, 1.6242)
+    assert on['param8']['var11'] == 1.0 and 'var11' not in off['param8']
+
+
 @needs_planet
 def test_the_land_tests_are_quarter_boxes_that_write_the_radiation_at_the_ground():
     air = dict(sunlight_w_m2=1300.0)
@@ -688,3 +785,27 @@ def test_a_rerun_from_a_restart_takes_the_run_s_inputs_and_restart_and_its_own_e
     assert c.status('again').startswith('again: 7.50 of 14.50 days')
     with pytest.raises(RuntimeError, match='has been set up'):
         c.setup('again')
+
+
+def test_vapour_above_the_gcms_top_keeps_that_levels_share_of_ice_saturation():
+    from atmosphere.radiative_convective.thermodynamics import saturation_pressure
+    zg = np.array([1e3, 20e3, 60e3, 100e3, 130e3])
+    th = np.array([300.0, 310.0, 330.0, 370.0, 420.0])
+    qv = np.array([1.2e-2, 3e-3, 2e-4, 4e-6, 3e-7])
+    slope = (th[-1] - th[-2]) / (zg[-1] - zg[-2])
+    theta_at = lambda z: np.where(z <= zg[-1], np.interp(z, zg, th), th[-1] + slope * (z - zg[-1]))
+    qv_below = lambda z: np.exp(np.interp(z, zg, np.log(qv)))
+    qv_at = c.held_share_above(zg, theta_at, qv_below, 121400.0, 1.6242, 150e3)
+    below = np.linspace(0.0, 130e3, 50)
+    assert np.array_equal(qv_at(below), qv_below(below))
+    # Above the top the vapour falls, and its share of ice saturation stays the top level's.
+    z = np.linspace(130e3, 150e3, 9)
+    q = qv_at(z)
+    assert np.all(np.diff(q) < 0)
+    cp, rd, g = 1005.7, 287.04, 1.6242
+    zz = np.linspace(0.0, 150e3, 30001)
+    inv = 1.0 / (theta_at(zz) * (1.0 + 0.61 * qv_at(zz)))
+    exner = (121400.0 / 1e5) ** (rd / cp) - g / cp * np.concatenate([[0.0], np.cumsum(0.5 * (inv[1:] + inv[:-1]) * np.diff(zz))])
+    p, t = 1e5 * np.interp(z, zz, exner) ** (cp / rd), theta_at(z) * np.interp(z, zz, exner)
+    share = q * p / (0.622 + q) / saturation_pressure(t)
+    assert np.allclose(share, share[0], rtol=0.01)

@@ -46,10 +46,11 @@ class RunnerTests(unittest.TestCase):
         # The convective patch edits text the cloud-water patch wrote, so it must come after it.
         order = [marker for name, marker, _ in er.PATCHES if name == 'rainmod.f90']
         self.assertEqual(order[0], 'Terluna: gravity for the heights below')
-        # The Sun's clock extends the namelist and broadcast lines the calibration patch wrote, and the
-        # shortwave path extends the Sun's.
+        # The Sun's clock extends the namelist and broadcast lines the calibration patch wrote, the shortwave
+        # path extends the Sun's, and the infrared from space extends the shortwave path's.
         radmod = [marker for name, marker, _ in er.PATCHES if name == 'radmod.f90']
-        self.assertEqual(radmod, ['Terluna: calibration multiplier', "Terluna: the Sun's clock", 'Terluna: calibrated absorptivity'])
+        self.assertEqual(radmod, ['Terluna: calibration multiplier', "Terluna: the Sun's clock", 'Terluna: calibrated absorptivity',
+                                  'Terluna: infrared from space at the top of the air'])
 
     def test_default_settings_are_the_corrected_physics(self):
         self.assertEqual(er.MODEL['cloud_water'], 'earth_path')
@@ -59,6 +60,18 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(er.MODEL['sun_clock'], 'synodic')               # an even Sun, one turn per 29.53 days
         self.assertEqual((er.MODEL['fixed_orbit'], er.MODEL['whole_lunar_days']), (1, 1))
         self.assertEqual(er.SUN_CLOCKS.index('plasim'), 0)                # PlaSim's own clock is the default off
+        # Since 2026-10-14 the curved air and the CO2 and O2 bands are the standard, with the multipliers refitted
+        # with them.
+        import inspect
+        for f in (er.run, er.configuration):
+            params = inspect.signature(f).parameters
+            self.assertEqual((params['twilight'].default, params['gas_bands'].default), ('full', True))
+        refit = er.ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_fit_A28_dim5_lunar.json'
+        if refit.exists():
+            import json
+            scale = json.loads(refit.read_text())['forms']['scale']
+            self.assertEqual((er.MODEL['sw_water_absorption'], er.MODEL['rayleigh_scale']),
+                             (round(scale['k'], 3), round(scale['rayleigh_scale'], 3)))
 
     def test_clear_sky_output(self):
         off = er.output_variables({**er.MODEL, 'clear_sky': 0})
@@ -69,9 +82,92 @@ class RunnerTests(unittest.TestCase):
 
     def test_patch_markers_mark_patched_text_only(self):
         # A marker must appear in what a patch adds and never in what it replaces, or it would apply twice.
-        for _, marker, edits in er.PATCHES:
+        for _, marker, edits in er.PATCHES + er.TWILIGHT_PATCHES:
             self.assertTrue(any(marker in new for _, new in edits))
             self.assertFalse(any(marker in old for old, _ in edits))
+
+    def test_the_twilight_patch_stays_out_of_the_shared_model(self):
+        markers = {marker for _, marker, _ in er.PATCHES}
+        self.assertFalse(markers & {marker for _, marker, _ in er.TWILIGHT_PATCHES})
+        # It extends the namelist and broadcast lines the infrared from space wrote, and keeps PlaSim's lines short.
+        old = ''.join(o for o, _ in er.TWILIGHT_EDITS)
+        self.assertIn('irtopnight', old)
+        for _, new in er.TWILIGHT_EDITS:
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        self.assertEqual(er.TWILIGHT_MODES, ('curved', 'full', 'path'))
+        added = ''.join(new for _, new in er.TWILIGHT_EDITS)
+        self.assertIn('call twilight_term', added)                      # the sunlight, at the end of swr
+        self.assertIn('call twilight_lw', added)                        # the infrared, at the end of lwr
+
+    def test_the_gas_bands_follow_the_twilight_patch_and_the_fitter(self):
+        from climate.gcm import plasim_shortwave as ps
+        # They extend the module, namelist and broadcast lines the twilight patch wrote and the line the calibrated
+        # absorptivity wrote, and keep PlaSim's lines short.
+        twilight = ''.join(new for _, new in er.TWILIGHT_EDITS)
+        anchors = [old for old, _ in er.GAS_EDITS]
+        for old in anchors[:3]:
+            self.assertIn(old, twilight)
+        self.assertIn(anchors[6], ''.join(new for _, new in er.SHORTWAVE_EDITS))
+        for _, new in er.GAS_EDITS:
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        # ZGASQ's columns are the fitter's bands in order: CO2 and O2 beside the water, then O2 in the visible.
+        self.assertEqual(er.GAS_ORDER, tuple(name for name, _, _ in ps.GAS_BANDS))
+        self.assertEqual([band for _, _, band in ps.GAS_BANDS], [2, 2, 1])
+        # Earth's air: O2 is 23.1% of its mass and CO2 at 400 ppm 0.061%.
+        earth = er.gas_mass_fractions(dict(pN2=0.7808, pO2=0.2095, pAr=0.00934, pCO2=0.0004))
+        self.assertAlmostEqual(earth['O2'], 0.2314, places=3)
+        self.assertAlmostEqual(earth['CO2'] * 1e4, 6.08, places=1)
+
+    def test_the_longwave_correction_follows_the_twilight_and_gas_patches(self):
+        # It extends the module, namelist, broadcast and lwr lines the twilight and gas patches wrote, keeps PlaSim's
+        # lines short, and runs after the curved air's escape.
+        written = ''.join(new for _, new in er.TWILIGHT_EDITS + er.GAS_EDITS)
+        for old, _ in er.LW_CORRECTION_EDITS:
+            self.assertIn(old, written)
+        for _, new in er.LW_CORRECTION_EDITS:
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        added = ''.join(new for _, new in er.LW_CORRECTION_EDITS)
+        self.assertLess(added.index('call twilight_lw'), added.index('call lw_correction'))
+
+    def test_ice_optics_follow_the_longwave_patch(self):
+        # They extend the module, namelist and broadcast lines the longwave patch wrote and the subroutine it added,
+        # keep PlaSim's lines short, and act only where NICEOPT asks, after PlaSim has set the liquid optics.
+        written = ''.join(new for _, new in er.LW_CORRECTION_EDITS)
+        anchors = [old for old, _ in er.ICE_OPTICS_EDITS]
+        for old in anchors[:3] + anchors[5:]:
+            self.assertIn(old, written)
+        for _, new in er.ICE_OPTICS_EDITS:
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        sw, lw = er.ICE_OPTICS_EDITS[3][1], er.ICE_OPTICS_EDITS[4][1]
+        self.assertLess(sw.index('endwhere'), sw.index('if (niceopt == 1) call ice_cloud_sw'))
+        self.assertLess(lw.index('endif'), lw.index('if (niceopt == 1 .and. clgray <= 0.) call ice_cloud_lw'))
+        self.assertEqual(er.TWILIGHT_PATCHES[-1][1], 'Terluna: ice optics for cold cloud')
+
+    def test_the_twilight_table_reads_as_the_patch_expects(self):
+        if not er.TWILIGHT_PRODUCT.exists():
+            self.skipTest('twilight.json not built')
+        import json
+        product = json.loads(er.TWILIGHT_PRODUCT.read_text())
+        term, cone, lw = product['gcm_term'], product['gcm_term_cone'], product['longwave']
+        tables = {}
+        for mode in ('curved', 'full'):
+            with tempfile.TemporaryDirectory() as d:
+                rows = er.twilight_table(Path(d) / 'twilight.dat', mode).read_text().strip().split('\n')
+            n = int(rows[0])
+            self.assertEqual((n, len(rows)), (len(term['elevation_deg']), n + 3))
+            table = np.array([[float(x) for x in r.split()] for r in rows[1:n + 1]])
+            self.assertEqual(table.shape, (n, 2 + len(term['layers'])))      # elevation, ground, each layer
+            self.assertTrue(np.all(np.diff(table[:, 0]) > 0) and n <= 400)  # rising, inside the patch's table
+            np.testing.assert_allclose(table[:, 1], term['ground'], rtol=1e-6, atol=1e-12)
+            escape, temperature = (np.array(r.split(), float) for r in rows[n + 1:n + 3])
+            self.assertEqual(escape.size, len(term['layers']) + 1)          # each layer, then the ground
+            self.assertTrue(np.all(temperature > 100.0))
+            tables[mode] = table, escape
+        # The full table adds the shells' widening to both the sunlight and the infrared (the product keeps six digits).
+        np.testing.assert_allclose(tables['full'][0][:, 2:] - tables['curved'][0][:, 2:], np.array(cone['layers']).T,
+                                   rtol=1e-4, atol=2e-9)
+        np.testing.assert_allclose(tables['full'][1][:-1] - tables['curved'][1][:-1], lw['gcm_layers']['cone'],
+                                   rtol=1e-5, atol=1e-8)
 
     def test_spectrum_tail_follows_the_sun(self):
         # A blackbody "measurement" that stops at 2.73 um must continue as the same blackbody, not as a

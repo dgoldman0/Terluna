@@ -318,6 +318,96 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run run ring_80n_lsw --hours 3 -
 climate/gcm/.venv/bin/python -m climate.crm.ring_analysis ring_80n_lsw --from-day 29.5
 ```
 
+### The 45° rings on the design ground, with the curved air's light
+
+The two 45° rings above took their forcing from the run before the corrected design
+case, whose land at 45–60° evaporated about ten times as much as the design climate's,
+so their humid nights describe ground kept moist. Cases `ring_45n_lsw_twilight` and
+`ring_45s_lsw_twilight` run them again with what the setup now takes and with the
+curved air's light. Against `ring_45n_lsw` and `ring_45s_lsw` they differ in:
+
+- **the forcing**, the corrected design case `A28_dim5_moon`, years 20–29: seas of
+  22.7 °C at 45° N and 23.2 °C at 45° S, land ground at sea level 21.7 °C and 21.6 °C;
+- **the land's wetness**, the GCM's own on those rows: 0.012 at 45° N and 0.036 at
+  45° S, against 0.41 and 0.46;
+- **the water along the circles**, from the current geography product: 34% and 31%,
+  against 37% and 33%;
+- **the build**, `moon_omp_twilight` with `var20 = 1`. After RRTMG, every column takes
+  the curved air's sunlight by its own solar elevation, below the horizon too, and the
+  infrared the same geometry lets out, from `terluna_twilight.txt`, which the setup
+  writes from [../results/gcm/twilight.json](../results/gcm/twilight.json) in its full
+  form (the shells' widening as well as the curved light and escape; [the GCM's
+  account](../gcm/README.md#the-curved-airs-light)). Each shell's share heats or cools
+  the levels it overlaps, the infrared scaled with each level's temperature to the
+  fourth power; the ground takes its sunlight in the column's clear share and loses its
+  extra infrared from what reaches it. Shells above the model's 150 km are left out with
+  the air they stand for.
+
+The air, the sunlight, the grid and every other setting are the earlier rings'. In a
+two-hour test of each, the columns 2–10° past sunset gain 0.016–0.036 K a day of
+sunlight's heating, averaged over their levels, where RRTMG gives them none.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_twilight
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_lsw_twilight     # and ring_45s_lsw_twilight
+/media/projectspace/terluna-research/session-tools/twilight_rings.sh                 # both, 6 threads; rerun to resume
+```
+
+**Paused on 14 October**, the northern ring at day 9 of 59 and the southern one before it began. Two of their inputs
+changed while they ran. The twilight ledger's first channels put the near-infrared part of its terms too high, and the
+corrected ledger has replaced them ([the GCM's account](../gcm/README.md#the-curved-airs-light)). The GCM's design case
+is running again with its corrected radiation, which changes the air above 8–16 km that the rings are held to. The
+rings wait for both.
+
+### The 45° rings on the corrected radiation's design case
+
+Cases `ring_45n_corrected` and `ring_45s_corrected` run the 45° rings on the design case of the GCM's corrected
+radiation, `A28_corrected_970` years 10–19 ([the GCM's account](../gcm/README.md#the-curved-airs-light)), and
+`ring_45n_corrected_twilight` and `ring_45s_corrected_twilight` the same with the curved air's terms from the corrected
+ledger. A case's `gcm` setting names the run whose reference profile, vertical wind, land wetness and sunlight its setup
+takes. The builds keep the air they were compiled with, which the setup checks against the run's; it is the same, so
+only the sunlight moves, to 1,198 W/m² from 1,173. Against the twilight rings above they differ in:
+
+- **the forcing**: seas of 22.9 °C at 45° N and 23.4 °C at 45° S, land ground at sea level 22.0 °C and 21.9 °C, about
+  0.2–0.3 K warmer, and the land's wetness 0.014 and 0.046 against 0.012 and 0.036;
+- **the twilight table**, the corrected ledger's (its channels keep the heights of the absorbed sunlight);
+- **the controls**, the same rings on the build without the twilight hook.
+
+The water along the circles, the air, the grid and every other setting are the earlier rings'. Two model hours of each
+ran clean before the queue. The four run one after another on 6 threads, in blocks of two hours with half an hour's rest
+after each:
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected          # and the other three
+/media/projectspace/terluna-research/session-tools/corrected_rings.sh                 # the four; rerun to resume
+```
+
+**The north pair** (`python -m climate.crm.ring_analysis ring_45n_corrected_twilight --from-day 29.5`, and the
+control, [ring_ring_45n_corrected_twilight.json](../results/crm/ring_ring_45n_corrected_twilight.json) and
+[ring_ring_45n_corrected.json](../results/crm/ring_ring_45n_corrected.json)), over the second lunar day:
+
+- **The curved air's light changes the ground by hundredths of a kelvin.** Over land the air at 2 m is 0.015 K cooler
+  at dusk twilight, 0.021 K cooler by day and 0.013 K warmer in the deep night, with the same sign and size over each
+  half of the lunar day. Humidity moves by tenths of a percent and the air aloft by 0.03–0.08 K, warmer near 100 km at
+  dusk and cooler there at night. Both rings are held above 8–16 km to the same corrected GCM state, which already
+  carries the twilight's large-scale effect, so the pair measures its local effect through the day.
+- **On the design ground the ring is a desert.** Against the old ring on the over-wet ground: no rain against
+  0.31 mm/day over land, no fog against 4.1% of samples, cloud over 1.4% of the land against 6.9%, land evaporating
+  0.18 mm/day against 1.97. The air over land reaches 37.8 °C at its warmest local time against 30.3 °C, and 39.2 °C in
+  the hottest 1% of samples; it falls to 17.2 °C at its coolest. Nights run 75% humid with dewpoints near 15.9 °C
+  against 96% and 19.5 °C, days 38% against 62%, the highest wet bulb is 25.5 °C, and the mixed layer reaches 13.2 km
+  by day against 7.1 km. The fog-desert nights the old rings showed belonged to their wet ground.
+
+**The south** resumed on 16 October with its twilight ring alone, from day 7. Its control is dropped: the north pair
+settled the twilight's local effect, and the twilight ring gives the southern climate on the design ground, whose land
+is about three times as wet as the north's (0.046 against 0.014). Over its second lunar day
+([ring_ring_45s_corrected_twilight.json](../results/crm/ring_ring_45s_corrected_twilight.json)) its land evaporates
+0.69 mm/day against the north's 0.18, its nights reach 94% humidity against 88%, with fog in 0.4% of land samples
+against none, and its afternoons peak at 36.0 °C against 37.8; it rains 0.01 mm/day, the north's desert all but
+unchanged. Both rings drift warm from the GCM's state, and the GCM's sideways transport accounts for about a third
+of it ([below](#what-else-divides-cm1-and-the-gcm-at-the-crossing)), so their absolute warmth runs high and their
+humidity with it.
+
 ## Tilted rings
 
 Four rings run along great circles tilted 45° to the equator, in two mirrored
@@ -910,6 +1000,150 @@ climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28 --set sunlight_sca
     --start-from climate/gcm/runs/A28_dim5_moon/model/MOST_REST.00029 --folder A28_dim5_moon_low_cloud --years 15
 climate/gcm/.venv/bin/python -m climate.gcm.compare --levels A28_dim5_moon:20-29 A28_dim5_moon_low_cloud:5-14
 climate/gcm/.venv/bin/python -m climate.crm.ring_comfort ring_equator ring_70_45e ring_70_135e --gcm A28_dim5_moon_low_cloud:5-14
+```
+
+**At 45° N on the corrected design case** (the author asked on 16 October for this and the land test below to be
+prepared; [gcm_profiles.py](gcm_profiles.py),
+[profiles_ring_45n_corrected.json](../results/crm/profiles_ring_45n_corrected.json)). The land surface was left out of
+the gap on wet ground, where the land evaporated 101–105 W/m². On the design ground the 45° N ring is a desert, so the
+comparison was taken there. Each model's air is averaged over the GCM's lowest four layers, 0–1.8, 1.8–6.5, 6.5–13.7
+and 13.7–22.9 km above the ground, by local time in the GCM's 36-degree bins. The GCM's land on that row stands a mean
+2.2 km up and the ring's at sea level, so over land the two compare through differences in height above the ground;
+over the sea they compare directly.
+
+- **The ground heats the air alike.** Near noon the land gives the air 195 W/m² of heat in CM1 against 208–225 in the
+  GCM, and both evaporate little, 13–21 W/m².
+- **The lowest air takes different shapes.** By day CM1 mixes its lowest 7 km to the dry adiabat, 1.6–1.7 K a kilometre
+  between its two lowest layers, under a mixed layer 14–19.5 km deep in the early afternoon; through the night its air
+  at 2 m falls up to 5 K below the layer 1.8–6.5 km up. The GCM stays stable by day, 1.4 K a kilometre, and its air
+  near the ground stays 2.7 K above that layer all night.
+- **Over the sea CM1's whole lower air is warmer.** At the same heights CM1 runs 4.3–7.8 K warmer than the GCM in the
+  lowest layer, 5–6 K in the second and 2.2–2.8 K in the third, and within about a degree in the fourth, where it is
+  held to the GCM. Its air at 2 m is warmer than the sea, which takes 8–12 W/m² of heat from it by day and evaporates
+  13–52 W/m² against the GCM's 64–97.
+
+So CM1's warm offset belongs to its whole free lower air, over the sea as over the land.
+
+**The heat budget of the ring's lower air** (the author's go-ahead of 16 October;
+[ring_heat_budget.py](ring_heat_budget.py),
+[heat_budget_ring_45n_corrected.json](../results/crm/heat_budget_ring_45n_corrected.json)) finds why. From the
+ring's snapshots, as ring means over the second lunar day: its radiation, the imposed sinking on each column's own
+air, the nudging toward the GCM's reference above 8 km and the storage, with CM1's own transport, turbulence and
+convection as the rest. From the GCM's 3-day means at 47° N and the rows either side: the heat its
+circulation carries sideways, which a ring cannot have.
+
+| Layer | Ring against GCM | Radiation | Imposed sinking | Nudging | Rest | Storage | GCM's sideways transport |
+|---|---|---|---|---|---|---|---|
+| 0–1.8 km | 25.6 against 19.8 °C | −0.32 | +0.07 | 0 | +0.30 | +0.055 | −0.29 (eddies −0.22) |
+| 1.8–6.5 km | 24.1 against 18.3 °C | −0.32 | +0.07 | 0 | +0.27 | +0.017 | −0.08 |
+| 6.5–13.7 km | 16.5 against 13.7 °C | −0.22 | +0.03 | −0.12 | +0.33 | +0.016 | −0.06 |
+| 13.7–23 km | 6.5 against 5.9 °C | −0.16 | +0.06 | −0.01 | +0.12 | +0.009 | −0.06 |
+
+K a day of temperature. Below 8 km the ring's air takes 33.7 W/m² from the ground through its turbulence and
+convection, the ground's whole 33.2, and 7.5 W/m² from the imposed sinking, and radiates 38.0 away; the 3.1 W/m² left
+over still warms it. The GCM's circulation carries about 15 W/m² of heat sideways out of the same air, 8.5 W/m² of it
+from the lowest 1.8 km and mostly by its eddies, and dries the lowest layer by 0.2 g/kg a day.
+
+- **The ring drifts from the GCM's state.** It starts from the GCM's profile, the reference it is held to aloft, and
+  without the sideways loss its lower air warms until radiation balances: the lowest 1.8 km from 20.0 to 26.0 °C over
+  the first lunar day and on to 26.7 °C by day 59, still 0.055 K a day warmer near the ground, and 1.8–6.5 km from
+  18.2 to 25.0 °C. At 6.5–13.7 km, partly held, it warms by 3.6 K, and at 13.7–23 km, held, by under a degree.
+- **Part of the gap lies in how CM1 is driven.** The rings and boxes take the GCM's sinking and its upper air but
+  none of the heat and vapour its circulation moves between latitudes. Their absolute warmth near the ground runs
+  high, at 45° N by about 6 K over the second lunar day and still growing, about a third of it for that reason (the
+  confirming test below); the shapes within a lunar day, the breezes and the contrasts between places rest on the
+  terrain, the sea and the Sun, as before.
+- **What it leaves out.** The GCM's sideways terms come from 3-day means, which miss its faster eddies, so they are a
+  floor. Its own radiative heating is not in its output, so the budget does not close on the GCM's side.
+
+**The confirming test** (case `ring_45n_corrected_sideways`, the author's go-ahead of 16 October) is
+`ring_45n_corrected` with that sideways heat and vapour imposed by height, the same at every hour, through the
+large-scale advection the boxes use for the day-night circulation (`var11 = 1`, one local-time bin in
+`terluna_lsadv.txt` on the GCM's levels): −0.28 K and −0.20 g/kg a day in the lowest 2 km. Its inputs match the
+control's byte for byte except that file and the switch. In a two-model-hour test its lowest 2 km ended 0.021 K
+cooler and 0.015 g/kg drier than the control's, as the forcing gives. It ran on 16 October in two-hour blocks with
+half-hour rests, 59 days in 5.7 wall hours.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.ring_heat_budget ring_45n_corrected --from-day 29.5       # seconds
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected_sideways
+/media/projectspace/terluna-research/session-tools/sideways_ring.sh                  # 6 threads; rerun to resume
+```
+
+**What the confirming test found**
+([heat_budget_ring_45n_corrected_sideways.json](../results/crm/heat_budget_ring_45n_corrected_sideways.json), ring
+means over the second lunar day): the sideways transport takes about a third of the warm offset away.
+
+| Layer | Control | With the sideways transport | GCM |
+|---|---|---|---|
+| 0–1.8 km | 25.6 °C | 23.5 °C | 19.8 °C |
+| 1.8–6.5 km | 24.1 °C | 22.3 °C | 18.3 °C |
+| 6.5–13.7 km | 16.5 °C | 15.4 °C | 13.7 °C |
+| 13.7–23 km | 6.5 °C | 6.1 °C | 5.9 °C |
+
+- **Part of the drift.** Its lowest 1.8 km warm from 20.0 to 24.2 °C over the first lunar day and to 24.6 °C by day
+  59, against the control's 26.0 and 26.7, and still warm 0.050 K a day near the ground against 0.055. About 2 K
+  cooler, that layer radiates 4.1 W/m² less and takes about 4.3 W/m² more from the ground, which together balance
+  the 8.5 W/m² the transport takes from it.
+- **What is left.** About 4 K below 6.5 km. Each kelvin the lowest layer cools gives back about 4 W/m², so the 3.7 K
+  left there would need about 15 W/m² more taken from it, nearly twice what the GCM's 3-day means carry sideways.
+- **The faster eddies are not it.** On 17 October the design case ran two more years writing a mean every 6.5 hours
+  (`A28_corrected_970_eddies`; [gcm_eddies.py](gcm_eddies.py),
+  [gcm_eddies_A28_corrected_970_eddies.json](../results/crm/gcm_eddies_A28_corrected_970_eddies.json)). Its eddies
+  take −0.208 K a day from the lowest layer and −0.100 from the next, and the same outputs averaged into 3-day means
+  give −0.218 and −0.092: over the lowest two layers 13.4 W/m² against 13.1, so the 3-day means miss 2%. At 45° N the
+  GCM's eddies are slow, as on a world that turns once a month, and its two years agree with the ten the ring used.
+- **So the rest lies in the models' physics:** how each sheds the heat the ground gives it, by radiation, convection
+  and turbulence. By day CM1 mixes its lower air dry to 14–19 km where the GCM's stays stable. The land test waits
+  behind this, since over land the ground heats the air alike in the two models.
+- **CM1's radiation errs toward cooling.** On 17 October 990 of the ring's own columns, cloud-free below 25 km over
+  the second lunar day, went through the atmosphere domain's correlated-k model, which follows the line-by-line model
+  ([ring_radiation.py](ring_radiation.py),
+  [radiation_ring_45n_corrected_sideways.json](../results/crm/radiation_ring_45n_corrected_sideways.json)). CM1's
+  RRTMG cools them more: by 0.15 K a day in the lowest 1.8 km (4.5 W/m²), 0.12 at 1.8–6.5 km (8.5 W/m²) and 0.11 at
+  6.5–13.7 km (10.2 W/m²). Its sunlight came within 2.5 points of line-by-line at the crossing, with 8 W/m² less
+  absorbed in the air ([radiation, above](#what-else-divides-cm1-and-the-gcm-at-the-crossing)). Both push its air
+  cooler, so the warmth comes from elsewhere, and part of the gap may lie on the GCM's side.
+- **The GCM's side.** The same morning a year of the design case wrote PlaSim's heating by process at every level
+  (`A28_corrected_970_heating`, with the runner's new `--heating-diagnostics`; [gcm_heating.py](gcm_heating.py),
+  [gcm_heating_A28_corrected_970_heating.json](../results/crm/gcm_heating_A28_corrected_970_heating.json)). At 47° N
+  its lowest 1.8 km take 42.8 W/m² from the ground, pass 17.6 W/m² up through turbulence and dry convective
+  adjustment, and radiate 9.9 W/m² away, 12.8 by longwave less 2.9 of sunlight; the 17.3 W/m² left leaves with its
+  circulation, about 8.3 sideways and the rest in its vertical motions. The processes' own sum matches the total its
+  diabatic step hands the dynamics within 0.02 K a day. On 151 cloud-free 3-day mean columns there, PlaSim's
+  longwave cools the lowest layer by 0.44 K a day where the correlated-k model gives 0.07, 10.6 W/m² more, and the
+  next layer 11.4 W/m² more; RRTMG's excess on CM1's columns is 4.5 and 8.5 W/m².
+- **So part of the gap is the GCM running cool.** PlaSim sheds about 6 W/m² more by longwave from its lowest layer
+  than CM1 does, worth about 1.5 K of the 3.7 at the ring's 4 W/m² a kelvin. Against the line-by-line model both
+  over-cool their lower air, PlaSim by about 2.5 K's worth near the ground and RRTMG by about 1 K's. PlaSim's water
+  continuum was fitted to the line-by-line model's outgoing longwave at the top, which leaves its cooling by height
+  free; fitting that, as its sunlight was fitted by height on 14 October, would move the design case's lower air.
+  The rest of the gap, a degree or two, lies in how the two models carry the ground's heat upward: by day CM1's
+  resolved dry convection where the GCM's stable layer leaves part of it to its resolved circulation.
+- **The ring's ice high up came from its start.** Every column holds ice above 107 km, 1.1 g/m², which is why the
+  radiation check took columns cloud-free below 25 km. Above the GCM's top level (130 km) the starting sounding and
+  the nudging reference kept the top's vapour while the temperature kept falling, so 140–150 km began 6–15 times
+  saturated over ice. The ice formed within three days and stayed at the same amount through both lunar days,
+  falling and subliming that slowly, with no point reaching the 125% of ice saturation the Morrison scheme needs to
+  make more. At 63–107 km the ring's ice comes and goes, in 10–33% of columns, in air held to the GCM's mean vapour
+  at 76–79% of ice saturation; where it holds ice it holds 1.5–3.5 times the water the GCM gives its clouds there.
+  Since 17 October the runner keeps the top level's share of ice saturation above it, its vapour falling with the
+  temperature (`held_share_above`); cases set up before keep their inputs. The GCM's side of the high cloud is in
+  [its account](../gcm/README.md#the-high-cloud-and-its-ice).
+- **For the cases that follow.** The sideways transport is part of the GCM's forcing that a slice of it lacks, so
+  forced rings and boxes are better driven with it; their warmth near the ground still runs about 4 K high at 45° N
+  until the rest is found.
+
+**The land test on dry ground** (case `ring_45n_corrected_gcm_land`) is `ring_45n_corrected` with the GCM's roughness
+(2 m) and soil thermal inertia (THERIN 4.97), keeping the GCM's own wetness as the control does. A circle of latitude's
+setup now passes a case's land settings to its one land row. Its inputs match the control's byte for byte except the
+two placeholder rows of the land-use table, and a two-model-hour test ran clean with the land's roughness at 2 m
+against the control's 0.1 m. It waits, since the warm offset over the sea lies outside the land.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.gcm_profiles ring_45n_corrected --from-day 29.5      # seconds
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected_gcm_land
+/media/projectspace/terluna-research/session-tools/gcm_land_ring.sh               # 6 threads; rerun to resume
 ```
 
 ## A box over the highlands

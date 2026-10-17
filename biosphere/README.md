@@ -27,7 +27,9 @@ through the cycle, with the chosen climate's temperatures and the long twilight 
 Moon's tall sky, which leaves only 254 of the 354 night hours dark at the equator and 120
 at 60°. Every evergreen way through the night closes its carbon budget; idling at a
 quarter of the daytime upkeep cuts the store from 49 to 11 g C per m² of ground, while
-regrowing the canopy every cycle leaves a tenth of the growth or none. Stomata, water,
+regrowing the canopy every cycle leaves a tenth of the growth or none. With water ample,
+each 1% of light taken costs 0.46–0.65% of its photosynthesis and 0.56–1.1% of its growth
+([light_response.py](canopy/light_response.py)). Stomata, water,
 acclimation to continuous light, full sugar stores and whether leaves survive weeks of
 darkness are not yet in it. [fruit.py](canopy/fruit.py) designs fruit for the lunar
 day on that plant, with the fruit's developmental program as the design variable. A

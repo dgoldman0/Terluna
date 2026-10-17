@@ -249,9 +249,20 @@ synthesis ranks two items first from the three domains together, and on 12 Octob
 and the power screen behind them; they lead this list, and the synthesis's
 [full order](studies/domain_synthesis/README.md#next-work-in-order) carries the domains' own next steps.
 
-1. **The gases' warming in the deep column** (ecology, question 3): the line-by-line column with methane and N2O lines
-   added and swept over the synthesis's ranges, a few hours. It sets the levels the gases may reach, and so how much
-   biology and technology must remove.
+1. **The gases' warming in the deep column** (ecology, question 3): done on 12 October on domain/ecology, about 38
+   minutes on six workers ([reduced gases](../atmosphere/radiative_convective/README.md)). Earth's present levels force
+   4.7 W/m² all-sky on the Moon and the screen's central steady state 7.9–8.3 W/m², 4.9–8.3 K. The author chose the
+   balanced middle of three pairs weighed, 1.9 ppm of methane and 0.1 ppm of N2O: 3.58 W/m², answered by 1.69% added
+   dimming ([domain synthesis](studies/domain_synthesis/README.md#where-they-are-held)). Where light limits growth
+   followed on 13 October ([light limitation](studies/light_limitation/README.md)): water holds most of the land, light
+   limits 10–40% of the living Moon's growth, and each 1% of dimming costs 0.07–0.30% of it through light. The GCM,
+   run again with the gases, the glow and the dimming at the author's request
+   ([gases, glow and dimming](studies/gases_glow_dimming/README.md)), finds the held pair's dimming keeps the design
+   temperature and takes 0.9% of the rain, about half Earth's response. The glow's infrared heats the upper air: it
+   needs 0.71 of its watts in dimming, about 2.0% of the design sunlight, and takes 2.4% of the rain with the
+   temperature held. The author set the glow's further answers aside: the plants' water design makes up that rain,
+   with 3.2% more carbon per litre over the rain-fed land, and the 0.71 goes into the glow study and the synthesis's
+   dimming at the next integration.
 2. **C′ placed with the blend:** done on 12 October on domain/provisioning. Every one of C′'s 32 corners fits band by
    band under every rule at 1–2 kg of heritage meat, with 0.6–12 million homesteaders among the heritage farms
    ([distributions](studies/distributions/README.md#with-the-authors-food-the-blend)).

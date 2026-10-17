@@ -857,15 +857,113 @@ def planet():
     return json.loads((HERE.parent / 'gcm' / 'products' / 'moon_gcm_configuration.json').read_text())['planet']
 
 
-def design_air():
-    """Carbon dioxide and oxygen mixing ratios of the design case's air, from its GCM run."""
-    progress = json.loads((HERE.parent / 'gcm' / 'runs' / GCM_RUN / 'progress.json').read_text())
+def design_air(run=None):
+    """Carbon dioxide and oxygen mixing ratios of the design case's air and its sunlight, from its GCM run (or
+    another run's)."""
+    run = run or GCM_RUN
+    progress = json.loads((HERE.parent / 'gcm' / 'runs' / run / 'progress.json').read_text())
     cfg = progress['configuration']
     gases = cfg['gases_bar']
     total = sum(gases.values())
     return dict(co2=gases['pCO2'] / total, o2=gases['pO2'] / total, surface_pa=cfg['pressure_pa'],
-                sunlight_w_m2=progress['inputs']['flux_w_m2'], run=GCM_RUN)
+                sunlight_w_m2=progress['inputs']['flux_w_m2'], run=run)
 
+
+# The curved air's light (climate/gcm/twilight.py): RRTMG lights a column only while its Sun is up and lets each
+# column's infrared out through flat layers. With var20 = 1 the twilight build adds, after RRTMG, what the Moon's tall
+# curved air takes beyond a flat column of the same air, by each column's solar elevation (below the horizon too) from
+# terluna_twilight.txt: each shell's share of sunlight as heating of the levels it overlaps, and the ground's share to
+# the net shortwave at the ground in the column's clear share; and in every column at every hour, the infrared the same
+# geometry lets out beyond the flat column, each shell's at its design temperature scaled with the levels' own to the
+# fourth power, and the ground's taken from the infrared reaching it. Shells above the model's top are left out with
+# the air they stand for.
+TWILIGHT_TABLE = 'terluna_twilight.txt'
+TWILIGHT_MODES = ('curved', 'full')          # as climate/gcm/exoplasim_run.py: 'full' adds the shells' widening
+TWILIGHT_PATCH = ('radiation_driver.F', "Terluna: the curved air's twilight", [
+    ('  public :: radiation_driver\n',
+     '  public :: radiation_driver\n'
+     "  ! Terluna: the curved air's twilight table, read once from terluna_twilight.txt\n"
+     '  integer, save :: terluna_ntw = -1, terluna_nsh = 0\n'
+     '  real, save :: terluna_lwg = 0.0, terluna_tg = 1.0\n'
+     '  real, allocatable, save :: terluna_tel(:), terluna_tgr(:), terluna_tz(:), terluna_tsh(:,:), terluna_lw(:), terluna_tt(:)\n', 1),
+    ('      use input, only : var12,var16,var17,var18,var19   ! Terluna: the lunar day\n',
+     '      use input, only : var12,var16,var17,var18,var19,var20   ! Terluna: the lunar day, the twilight\n', 1),
+    ('      real :: terluna_lat,terluna_s   ! Terluna: tilted rings\n',
+     '      real :: terluna_lat,terluna_s   ! Terluna: tilted rings\n'
+     '      integer :: terluna_l,terluna_m,terluna_lo,terluna_hi   ! Terluna: the twilight\n'
+     '      real :: terluna_el,terluna_u,terluna_clear,terluna_e,terluna_f,terluna_ov\n'
+     '      real, allocatable :: terluna_s1(:)\n', 1),
+    ("                     xcoszen=coszen,yr=yr,julian=julian,mp_physics=mp_physics,co2out=co2out ) ! jararias 2013/08/14\n"
+     "\n            if( nstep.le.1 .and. myid.eq.0 ) print *,'  co2 = ',co2out\n",
+     "                     xcoszen=coszen,yr=yr,julian=julian,mp_physics=mp_physics,co2out=co2out ) ! jararias 2013/08/14\n"
+     "\n            if( nstep.le.1 .and. myid.eq.0 ) print *,'  co2 = ',co2out\n"
+     """
+            IF( var20.gt.0.5 )THEN
+              ! Terluna: the curved air's twilight. What the Moon's tall curved air adds to a flat column of the
+              ! same air (climate/gcm/twilight.py): by each column's solar elevation, below the horizon too, each
+              ! shell's share of sunlight as heating of the levels it overlaps and the ground's share in the column's
+              ! clear share; at every hour, each shell's extra infrared escape as cooling, scaled with the levels'
+              ! temperature (dum3) to the fourth power, and the ground's from the infrared reaching it. RRTMG's
+              ! tendencies are temperature tendencies here, converted below with them.
+              IF( terluna_ntw.lt.0 )THEN
+                open(unit=96,file='terluna_twilight.txt',status='old',action='read')
+                read(96,*) terluna_ntw,terluna_nsh
+                allocate( terluna_tel(terluna_ntw), terluna_tgr(terluna_ntw), terluna_tz(terluna_nsh+1),  &
+                          terluna_tsh(terluna_nsh,terluna_ntw), terluna_lw(terluna_nsh), terluna_tt(terluna_nsh) )
+                read(96,*) terluna_tz
+                do terluna_l=1,terluna_ntw
+                  read(96,*) terluna_tel(terluna_l),terluna_tgr(terluna_l),terluna_tsh(:,terluna_l)
+                enddo
+                read(96,*) terluna_lw,terluna_lwg
+                read(96,*) terluna_tt,terluna_tg
+                close(unit=96)
+                if( myid.eq.0 ) print *,'  twilight table: ',terluna_ntw,' elevations, ',terluna_nsh,' shells'
+              ENDIF
+              allocate( terluna_s1(terluna_nsh) )
+              do j=1,nj
+              do i=1,ni
+                terluna_el = asin( max(-1.0,min(1.0,coszen(i,j))) )*180.0/pi
+                terluna_s1(:) = 0.0
+                if( terluna_el.ge.terluna_tel(1) .and. terluna_el.le.terluna_tel(terluna_ntw) )then
+                  terluna_lo = 1
+                  terluna_hi = terluna_ntw
+                  do while( terluna_hi-terluna_lo.gt.1 )
+                    terluna_m = (terluna_lo+terluna_hi)/2
+                    if( terluna_tel(terluna_m).gt.terluna_el )then
+                      terluna_hi = terluna_m
+                    else
+                      terluna_lo = terluna_m
+                    endif
+                  enddo
+                  terluna_u = (terluna_el-terluna_tel(terluna_lo))/(terluna_tel(terluna_hi)-terluna_tel(terluna_lo))
+                  terluna_s1(:) = solcon*( (1.0-terluna_u)*terluna_tsh(:,terluna_lo) + terluna_u*terluna_tsh(:,terluna_hi) )
+                  terluna_clear = 1.0
+                  do k=1,nk
+                    terluna_clear = terluna_clear*(1.0-max(0.0,min(1.0,cldfra(i,j,k))))
+                  enddo
+                  gsw(i,j) = gsw(i,j) + terluna_clear*solcon*( (1.0-terluna_u)*terluna_tgr(terluna_lo)  &
+                                                            + terluna_u*terluna_tgr(terluna_hi) )
+                endif
+                glw(i,j) = glw(i,j) - terluna_lwg*(tsk(i,j)/terluna_tg)**4
+                do k=1,nk
+                  terluna_e = 0.0
+                  terluna_f = 0.0
+                  do terluna_l=1,terluna_nsh
+                    terluna_ov = min(zf(i,j,k+1),terluna_tz(terluna_l+1)) - max(zf(i,j,k),terluna_tz(terluna_l))
+                    if( terluna_ov.gt.0.0 )then
+                      terluna_ov = terluna_ov/(terluna_tz(terluna_l+1)-terluna_tz(terluna_l))
+                      terluna_e = terluna_e + terluna_s1(terluna_l)*terluna_ov
+                      terluna_f = terluna_f + terluna_lw(terluna_l)*terluna_ov*(dum3(i,j,k)/terluna_tt(terluna_l))**4
+                    endif
+                  enddo
+                  swten(i,j,k) = swten(i,j,k) + terluna_e/(rho(i,j,k)*cp*(zf(i,j,k+1)-zf(i,j,k)))
+                  lwten(i,j,k) = lwten(i,j,k) - terluna_f/(rho(i,j,k)*cp*(zf(i,j,k+1)-zf(i,j,k)))
+                enddo
+              enddo
+              enddo
+              deallocate( terluna_s1 )
+            ENDIF
+""", 1)])
 
 # label: (gravity, parallel mode)
 BUILDS = {'moon': (lambda: planet()['gravity_m_s2'], 'mpi'), 'earth_g': (lambda: EARTH_G, 'mpi'),
@@ -899,6 +997,8 @@ EARTH_FALL_PATCH = ('morrison.F', 'Terluna: Earth fall speeds for the rain test'
     ('ACN(K) = G*RHOW/(18.*MU(K))', 'ACN(K) = GFALL*RHOW/(18.*MU(K))', 1)])
 BUILDS['moon_omp_earth_fall'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_earth_fall'] = [EARTH_FALL_PATCH]
+BUILDS['moon_omp_twilight'] = BUILDS['moon_omp']
+BUILD_PATCHES['moon_omp_twilight'] = [TWILIGHT_PATCH]
 
 # Electrified storms (stage 2 of the atmospheric-electricity study): WRF-ELEC's NSSL microphysics with the field,
 # lightning and leakage of climate/crm/cm1_elec.py, at the Moon's gravity and at Earth's for the benchmark storm.
@@ -1023,6 +1123,26 @@ for _lat, _tag in ((80.0, '80n'), (-80.0, '80s'), (70.0, '70n'), (-70.0, '70s'),
                 'once a lunar day, seas and lakes of the 28% scenario at sea level, land as wet as the GCM\'s there, '
                 'the 5% dimmer shield, the GCM design case\'s row nearest the latitude as reference, and its mean '
                 'vertical wind there imposed as large-scale vertical advection')
+# The 45-degree rings again, on the design case GCM_RUN names and its land's wetness (their first runs took the run
+# before it, whose land evaporated ten times as much), with the curved air's twilight and side light added to RRTMG.
+for _tag in ('45n', '45s'):
+    CASES[f'ring_{_tag}_lsw_twilight'] = dict(
+        CASES[f'ring_{_tag}_lsw'], build='moon_omp_twilight', twilight='full',
+        purpose=CASES[f'ring_{_tag}_lsw']['purpose'] + ', with the curved air\'s twilight and side light '
+                '(climate/results/gcm/twilight.json)')
+# The 45-degree rings on the design case of the GCM's corrected radiation (the curved air's light and infrared, CO2
+# and O2 in its sunlight; 2026-10-14), at the sunlight scale of 0.970 that holds the design temperature, with and
+# without the curved air's terms in CM1: a case's 'gcm' run gives its reference, vertical wind, land and sunlight.
+CORRECTED_GCM = ('A28_corrected_970', (10, 19))
+for _tag in ('45n', '45s'):
+    CASES[f'ring_{_tag}_corrected'] = dict(
+        CASES[f'ring_{_tag}_lsw'], gcm=CORRECTED_GCM,
+        purpose=CASES[f'ring_{_tag}_lsw']['purpose'].replace('the 5% dimmer shield', 'the 3% dimmer shield')
+        .replace("the GCM design case's", "the corrected radiation's design case's"))
+    CASES[f'ring_{_tag}_corrected_twilight'] = dict(
+        CASES[f'ring_{_tag}_corrected'], build='moon_omp_twilight', twilight='full',
+        purpose=CASES[f'ring_{_tag}_corrected']['purpose'] + ', with the curved air\'s twilight and side light '
+                '(climate/results/gcm/twilight.json)')
 
 
 def band_vertical_wind(lat, sigma_edges, flux, rows, radius, gravity):
@@ -1167,6 +1287,21 @@ for _tag, _land in (('', None), ('_rough', dict(roughness_cm=GCM_LAND['roughness
             'with the placeholder land' if _land is None else 'with the placeholder land given the GCM\'s '
             + ', '.join({'roughness_cm': 'roughness (2 m)', 'therin': 'soil thermal inertia',
                          'wetness': 'full wetness'}[k] for k in _land)))
+# The land test on dry ground: those boxes' land evaporated 101-105 W/m2, so their land surface mattered little to the
+# air. The 45 N ring on the corrected radiation's design case is a desert whose land gives the air its heat, and by
+# day its air near the ground runs far warmer than the GCM's. This ring is ring_45n_corrected with the GCM's roughness
+# and soil, keeping the GCM's own wetness there as the control does, so the pair differs in those two alone.
+CASES['ring_45n_corrected_gcm_land'] = dict(
+    CASES['ring_45n_corrected'], land={k: GCM_LAND[k] for k in ('roughness_cm', 'therin')},
+    purpose=CASES['ring_45n_corrected']['purpose'] + ', its land given the GCM\'s roughness (2 m) and soil thermal '
+            'inertia')
+# The confirming test of the heat budget (the author's go-ahead of 2026-10-16): ring_45n_corrected with the heat and
+# vapour the GCM's circulation carries sideways at 45 N imposed by height, the same at every hour through CM1's
+# large-scale advection, so the pair differs in that alone.
+CASES['ring_45n_corrected_sideways'] = dict(
+    CASES['ring_45n_corrected'], sideways=True,
+    purpose=CASES['ring_45n_corrected']['purpose'] + ', with the heat and vapour the GCM\'s circulation carries '
+            'sideways at that latitude imposed by height')
 # The rain test's box: box_0e_small's inputs as they were written, run with Earth's fall speeds, so the pair differs in
 # how fast rain, snow, graupel, ice and cloud droplets fall and in nothing else. Both keep the forcing of the GCM before
 # its correction, with which box_0e_small was set up.
@@ -1734,6 +1869,25 @@ def write_day_night(path: Path, forcing: dict) -> None:
                               for a, b in zip(th, qv)))
 
 
+def sideways_forcing(run, years, latitude, band, ref) -> dict:
+    """The heat and vapour the GCM's circulation carries sideways at a ring's latitude, as terluna_lsadv.txt takes
+    them in one local-time bin, so the same at every hour: the zonal-mean meridional circulation's advection and the
+    resolved eddies' flux convergence (ring_heat_budget.gcm_sideways), on the GCM's levels at its sea columns' heights
+    with a level at the ground holding the lowest level's values; theta tendencies (K/s), the temperature tendencies
+    over each level's Exner function, and vapour tendencies (kg/kg/s)."""
+    import numpy as np
+    from climate.crm.ring_heat_budget import gcm_sideways
+    g = gcm_sideways(run, years, latitude, band)
+    sigma = np.asarray(g['sigma'], float)
+    heat = (np.asarray(g['mean_meridional_k_day']) + np.asarray(g['eddies_k_day'])) / 86400.0      # K/s, top first
+    vapour = (np.asarray(g['vapour']['mean_meridional_g_kg_day'])
+              + np.asarray(g['vapour']['eddies_g_kg_day'])) / 8.64e7                              # kg/kg/s
+    exner = (sigma * ref['surface_pa_sea'] / 1.0e5) ** (287.04 / 1005.7)
+    z, th, qv = np.asarray(ref['profile']['z_m'], float)[::-1], (heat / exner)[::-1], vapour[::-1]   # ground first
+    return dict(z_m=np.r_[0.0, z], theta_k_s=np.r_[th[0], th][None, :], qv_kg_kg_s=np.r_[qv[0], qv][None, :],
+                rows_deg=g['rows_deg'])
+
+
 def write_vertical_wind_2d(path: Path, zw, w_columns) -> None:
     """terluna_wls2d.txt: the column and level counts, the level heights (m), then one line per column of its
     vertical wind (m/s), columns evenly spaced from x = 0."""
@@ -1791,7 +1945,8 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
         'param3': dict(fcor=float(f'{turning:.6e}'), rdalpha=round(gravity / EARTH_G / 300.0, 8), zd=0.77 * ztop,
                        l_inf=round(75.0 * EARTH_G / gravity, 1), ndcnst=cfg['droplets_cm3']),
         'param6': dict(stretch_z=4, ztop=ztop),
-        'param8': dict(**(dict(var11=1.0 if cfg.get('day_night') else 0.0) if box else {}),
+        'param8': dict(**(dict(var11=1.0 if cfg.get('day_night') else 0.0) if box
+                          else dict(var11=1.0) if cfg.get('sideways') else {}),
                        var12=cfg['tilt_deg'] if tilted else 0.0,
                        var13=(3.0 if box and cfg.get('terrain') else 2.0 if tilted else 1.0)
                        if cfg.get('large_scale_w') else 0.0,          # 3: at each column's own height
@@ -1799,7 +1954,8 @@ def case_settings(cfg, nx, dx, nz, ztop, air, gravity):
                        var16=0.0 if pair or box else round(length, 3), var17=0.0 if pair else round(air['sunlight_w_m2'], 3),
                        var18=0.0 if pair else cfg['start_hour_angle_deg'] + (cfg['node_deg'] if tilted else
                                                                              cfg['site']['lon_deg'] if box else 0.0),
-                       var19=0.0 if pair else round(solar_day_s(), 1)),
+                       var19=0.0 if pair else round(solar_day_s(), 1),
+                       **(dict(var20=1.0) if cfg.get('twilight') else {})),
         'param9': dict(output_format=1, output_filetype=2, output_sfcparams=int(bool(cfg.get('surface_output'))),
                        output_tke=0, output_km=0,
                        output_kh=0, output_uinterp=1, output_vinterp=int(rotating or box), output_v=0, output_winterp=1,
@@ -2046,7 +2202,7 @@ def setup_fine(name: str, cfg: dict) -> Path:
     return case
 
 
-RESTART_INPUTS = ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt',
+RESTART_INPUTS = ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt', TWILIGHT_TABLE,
                   'terluna_surface.txt', 'LANDUSE.TBL', 'cm1out_s.ctl', 'cm1out_stats.ctl', 'cm1out_metadata.ctl',
                   'cm1out_metadata.dat')
 
@@ -2163,6 +2319,50 @@ def setup_sample(name: str, cfg: dict) -> Path:
     return case
 
 
+def write_twilight(path: Path, mode: str) -> dict:
+    """terluna_twilight.txt from the twilight product's shells: the elevation and shell counts, the shells' height
+    edges (m), then for each solar elevation (degrees) what the curved air adds to the ground and to each shell, per
+    unit sunlight at the beam; then the extra infrared each shell and the ground lose to space (W/m2) and the
+    temperatures it is given at. 'full' adds the shells' widening to both; with the product's identity."""
+    if mode not in TWILIGHT_MODES:
+        raise ValueError(f'twilight must be one of {TWILIGHT_MODES}')
+    product = HERE.parent / 'results' / 'gcm' / 'twilight.json'
+    data = json.loads(product.read_text())
+    term, cone, lw = data['cm1_term'], data['cm1_term_cone'], data['longwave']
+    full = mode == 'full'
+    edges = [1e3 * z for z in term['height_edges_km']]
+    rows = [f"{len(term['elevation_deg'])} {len(edges) - 1}", ' '.join(f'{z:.3f}' for z in edges)]
+    for i, el in enumerate(term['elevation_deg']):
+        shells = [a[i] + (b[i] if full else 0.0) for a, b in zip(term['shells'], cone['shells'])]
+        rows.append(' '.join(f'{x:.6e}' for x in [el, term['ground'][i]] + shells))
+    escape = [a + (b if full else 0.0) for a, b in zip(lw['shells']['curved'], lw['shells']['cone'])]
+    rows.append(' '.join(f'{x:.6e}' for x in escape + [lw['ground_curved_w_m2']]))
+    rows.append(' '.join(f'{x:.6e}' for x in lw['shells']['temperature_k'] + [lw['ground_temperature_k']]))
+    path.write_text('\n'.join(rows) + '\n')
+    return dict(product=str(product.relative_to(HERE.parents[1])), sha256=hashlib.sha256(product.read_bytes()).hexdigest()[:16],
+                mode=mode, elevations=len(term['elevation_deg']), shells=len(edges) - 1)
+
+
+def held_share_above(zg, theta_at, qv_below, surface_pa, gravity, ztop):
+    """Vapour (kg/kg) at any height: the GCM's own up to its top level zg[-1], and above it whatever keeps that level's
+    share of ice saturation as the temperature falls. The pressure comes from the potential temperature profile
+    hydrostatically, at the build's gravity over the case's heights, as CM1 takes it from the sounding."""
+    import numpy as np
+    from atmosphere.radiative_convective.thermodynamics import saturation_pressure
+    cp, rd = 1005.7, 287.04
+    z = np.linspace(0.0, max(ztop, zg[-1]) * 1.01, 4001)
+    q = qv_below(z)
+    inv_tv = 1.0 / (theta_at(z) * (1.0 + 0.61 * q))
+    exner = (surface_pa / 1e5) ** (rd / cp) - gravity / cp * np.concatenate(
+        [[0.0], np.cumsum(0.5 * (inv_tv[1:] + inv_tv[:-1]) * np.diff(z))])
+    p, t = 1e5 * exner ** (cp / rd), theta_at(z) * exner
+    e = q * p / (0.622 + q)
+    share = float(np.interp(zg[-1], z, e / saturation_pressure(t)))
+    e_held = share * saturation_pressure(t)
+    log_held = np.log(0.622 * e_held / (p - e_held))
+    return lambda zz: np.where(np.asarray(zz) <= zg[-1], qv_below(zz), np.exp(np.interp(zz, z, log_held)))
+
+
 def setup(name: str) -> Path:
     """Write a case's inputs into climate/crm/runs/<name>: namelist, sounding, grid, nudging profile,
     surface segments, land-use table and links to the executable and radiation tables."""
@@ -2182,6 +2382,12 @@ def setup(name: str) -> Path:
         raise RuntimeError(f'build {cfg["build"]} first')
     build_record = json.loads((exe.parent / 'build.json').read_text())
     air, gravity = build_record['air'], build_record['gravity_m_s2']
+    run, years = cfg.get('gcm', (GCM_RUN, GCM_YEARS))
+    if run != air.get('run'):                     # the run's sunlight, in a build compiled with the same air
+        own = design_air(run)
+        if abs(own['co2'] - air['co2']) > 1e-12 or abs(own['o2'] - air['o2']) > 1e-12:
+            raise RuntimeError(f"build {cfg['build']} holds the air of {air.get('run')}, not of {run}")
+        air = dict(air, sunlight_w_m2=own['sunlight_w_m2'], run=run)
     case = RUNS / name
     if (case / 'progress.json').exists():
         raise RuntimeError(f'{case} has started; remove it to set up afresh')
@@ -2203,8 +2409,8 @@ def setup(name: str) -> Path:
     nz = len(zw) - 1
     track = tilted_path(nx, cfg['tilt_deg'], cfg['node_deg']) if tilted else None
     site = box_site(cfg, zw, nx_ring) if box else None
-    ref = (gcm_path_reference(track['lat'], track['lon'], cfg['tilt_deg'], zw) if tilted else site['ref'] if box
-           else gcm_equator_profile(band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude))
+    ref = (gcm_path_reference(track['lat'], track['lon'], cfg['tilt_deg'], zw, run, years) if tilted else site['ref']
+           if box else gcm_equator_profile(run, years, band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude))
     zh = 0.5 * (np.array(zw[1:]) + np.array(zw[:-1]))
     prof = ref['profile']
     zg = np.array(prof['z_m'][::-1]) * s                                  # GCM levels, bottom first
@@ -2213,7 +2419,11 @@ def setup(name: str) -> Path:
     uu = np.array(prof['u_m_s'][::-1]) * (0.0 if pair else 1.0)
     top_slope = (th[-1] - th[-2]) / (zg[-1] - zg[-2])
     theta_at = lambda z: np.where(z <= zg[-1], np.interp(z, zg, th), th[-1] + top_slope * (z - zg[-1]))
-    qv_at = lambda z: np.exp(np.interp(z, zg, np.log(np.maximum(qv, 1e-9))))
+    qv_below = lambda z: np.exp(np.interp(z, zg, np.log(np.maximum(qv, 1e-9))))
+    # Above the GCM's top level the vapour falls with the temperature, keeping that level's share of ice saturation.
+    # Holding the vapour itself left the top of ring_45n_corrected_sideways 6-15 times saturated at the start, and the
+    # ice that formed there at once stayed at 1.1 g/m2 for the whole run (2026-10-17).
+    qv_at = held_share_above(zg, theta_at, qv_below, ref['surface_pa_sea'], gravity, zw[-1])
     u_at = lambda z: np.interp(z, zg, uu)
     kappa = 287.04 / 1005.7
     theta_sfc = ref['air_over_sea_k'] * (1e5 / ref['surface_pa_sea']) ** kappa
@@ -2278,6 +2488,9 @@ def setup(name: str) -> Path:
     if tilted or box:                                                     # land-use rows for the wetness classes
         rows = landuse_rows(WETNESS_CLASSES, cfg.get('land'))
         table = [next((r for i, r in rows.items() if line.startswith(f'{i},')), line) for line in table]
+    elif cfg.get('land'):                         # a circle of latitude's one land row, its wetness as written above
+        row = landuse_rows(((index, round(land_moisture(cfg, ref), 2)),), cfg['land'])[index]
+        table = [row if line.startswith(f'{index},') else line for line in table]
     (case / 'LANDUSE.TBL').write_text(''.join(table))
     vertical_wind = None
     if box and cfg.get('large_scale_w') == 'gcm':
@@ -2290,8 +2503,16 @@ def setup(name: str) -> Path:
         vertical_wind = dict(z_m=[float(z) for z in zw], path_mean_m_s=[float(v) for v in wc.mean(axis=0)],
                              min_m_s=float(wc.min()), max_m_s=float(wc.max()), rows_deg=ref['rows_deg'])
     elif cfg.get('large_scale_w') == 'gcm':
-        vertical_wind = gcm_vertical_wind(latitude, cfg.get('band_deg', EQUATOR_BAND_DEG))
+        vertical_wind = gcm_vertical_wind(latitude, cfg.get('band_deg', EQUATOR_BAND_DEG), run, years)
         write_vertical_wind(case / 'terluna_wls.txt', vertical_wind, zw[-1])
+    sideways = None
+    if cfg.get('sideways') and not (box or tilted):                      # the GCM's transport between latitudes
+        forcing = sideways_forcing(run, years, latitude, cfg.get('band_deg', EQUATOR_BAND_DEG), ref)
+        write_day_night(case / 'terluna_lsadv.txt', forcing)
+        low = forcing['z_m'] < 2000.0
+        sideways = dict(rows_deg=forcing['rows_deg'], lowest_2_km=dict(
+            theta_k_day=float(forcing['theta_k_s'][0, low].mean() * 86400.0),
+            qv_g_kg_day=float(forcing['qv_kg_kg_s'][0, low].mean() * 8.64e7)))
     day_night = None
     if box and cfg.get('day_night'):                                      # the rings' day-night circulation there
         from climate.crm.ring_crossings import day_night_advection
@@ -2322,6 +2543,7 @@ def setup(name: str) -> Path:
         text, electricity = cm1_elec.run_files(case, cfg['elec'], text)
         electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=electricity)
     (case / 'namelist.template').write_text(text)
+    twilight = write_twilight(case / TWILIGHT_TABLE, cfg['twilight']) if cfg.get('twilight') else None
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     if tilted or box:                                                     # per-column arrays as rounded lists
         ref = {k: ([round(float(x), 6 if k == 'lapse_k_m' else 4) for x in v] if isinstance(v, np.ndarray) else v)
@@ -2330,21 +2552,23 @@ def setup(name: str) -> Path:
                   grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1], **(dict(ny=cfg['ny']) if box else {})),
                   site=dict(cfg['site'], ring_columns=site['columns'], land_share=site['land_share'], wetness=site['wetness'],
                             wetness_class=wetness_class(site['wetness']), ground_k=site['ground_k']) if box else None,
-                  build=build_record, reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
+                  build=build_record, gcm=dict(run=run, years=list(years)), air=air,
+                  reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
                   path=dict(tilt_deg=cfg['tilt_deg'], node_deg=cfg['node_deg'], lat=[round(float(v), 4) for v in track['lat']],
                             lon=[round(float(v), 4) for v in track['lon']], dlon=[round(float(v), 4) for v in track['dlon']])
                   if tilted else None,
                   latitude_deg=latitude, coriolis_1_s=turning_rate(cfg, latitude),
                   land_moisture=None if pair else site['wetness'] if box else land_moisture(cfg, ref),
                   large_scale_w=vertical_wind,
-                  day_night=day_night,
+                  day_night=day_night, sideways=sideways,
                   terrain=terrain if cfg.get('terrain') else None,
                   electricity=electricity,
+                  twilight=twilight,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
                                                          'terluna_wls.txt', 'terluna_wls2d.txt', 'terluna_lsadv.txt',
-                                                         'perts.dat', 'terluna_surface2d.txt')
+                                                         'perts.dat', 'terluna_surface2d.txt', TWILIGHT_TABLE)
                           if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case
