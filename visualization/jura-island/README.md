@@ -12,17 +12,25 @@ The view reads the [Jura Island study](../../research/studies/jura_island/README
 
 - `research/studies/jura_island/results/shores.json` (`terluna.research.jura-shores/1`) gives the common water level,
   −1,654.2 m relative to the geoid, the island's summit and the input hashes the study measured;
-- `geography/results/atlas.json` (`terluna.geography.atlas/1`) gives the water share, 28% of the Moon, and must be the
-  atlas whose sha256 the island study recorded;
-- LOLA's LDEM_16 and LDEM_4 and the GRAIL GL0420A coefficients, through
-  [geography's inputs](../../geography/fetch_inputs.py), must match `geography/inputs.json` and the hashes in the
-  island study's product.
+- `geography/results/atlas.json` (`terluna.geography.atlas/1`) gives the water share, 28% of the Moon;
+- LOLA's LDEM_16 and the GRAIL GL0420A coefficients, through [geography's inputs](../../geography/fetch_inputs.py),
+  give the terrain, and LOLA's LDEM_4 gives the global surround.
 
 [terrain.py](terrain.py) regenerates the terrain from those inputs in about a second, as the island study does: LOLA's
 radii at their native pixel centres less the degree-200 geoid evaluated on the same centres, less the common water
 level. The island is the connected land holding the product's summit. Its area, 57,824 km², its summit, 2,717 m at
-44.41° N, 39.28° W, and its extent equal the island study's. Any difference in a product or an input stops the build,
-and no array is kept in Git.
+44.41° N, 39.28° W, and its extent equal the island study's, and no array is kept in Git. Six things stop the build:
+
+- a schema other than the two above;
+- an atlas other than the one whose sha256 the island study recorded;
+- the two products giving different sea levels;
+- input bytes other than the pinned ones: LDEM_16 and GL0420A are held to `geography/inputs.json` and to the hashes
+  the island study's product recorded, and LDEM_4 to `geography/inputs.json` alone;
+- an island product at other than LOLA's native 16 px/deg;
+- a summit in the island product that falls under water in the regenerated terrain.
+
+Any other change to the products carries through to the view: a new water level, water share or summit reaches the
+terrain, the panels and the texts.
 
 ```sh
 python3 -m pytest visualization/jura-island/tests                                    # no OpenGL needed
@@ -33,7 +41,8 @@ python3 visualization/jura-island/render_flyover.py                             
 ```
 
 Outputs go to `out/` (kept out of Git) or to `--out`, each with a record (`render-record.json`, `map-record.json`)
-listing the products, inputs and code read, by sha256, with the camera's checks and the soundings. The flyover
+listing the products, inputs and code read, by sha256, and the soundings; the flyover's record adds the camera's
+checks. The flyover
 needs moderngl and glcontext ([requirements.txt](requirements.txt)) and an EGL driver; the film also needs ffmpeg.
 The map needs only the repository's packages. Both use the DejaVu Sans fonts.
 
@@ -65,8 +74,9 @@ are catalogued with their sha256 on the research drive, in
 [repository_import.json](repository_import.json) records each member's hash and what became of it, and keeps the
 original's settings, checks, chapters and soundings, without its ChatGPT Library identifier. The tests hold the port
 to that record: the same lowest altitude (16.924 km) and height above the ground (16.768 km), the same largest turn
-of the camera (0.435° a frame), four panel changes with 0.75 s fades and holds of at least 6.5 s, and the seven
-soundings within 0.5 m and identical when rounded.
+of the camera (0.435° a frame), four panel changes with 0.75 s fades and holds of at least 6.5 s, the island's
+22,869 pixels by their count and by the sha256 of the packed mask, and the seven soundings within 0.15 m and identical
+when rounded.
 
 ### How this port departs from the original
 
@@ -74,16 +84,20 @@ soundings within 0.5 m and identical when rounded.
   pixel centres, as the island study evaluates it, where the original interpolated it from 4 px/deg; heights move by
   at most 0.49 m, and the island keeps every one of its 22,869 pixels.
 - **The water level from the island study.** The common water level is the product's −1,654.2 m, the atlas's value,
-  in place of the −1,654.16 m saved with the original arrays and the hard-coded text; heights move by 0.037 m.
+  which the original map already gave. The original arrays held −1,654.16 m, and the film's text rounded it to
+  −1,654 m. Heights move by a further 0.037 m: in all, 19 pixels of the crop move by more than 0.5 m, the largest by
+  0.53 m, and the island's largest move is 0.37 m.
 - **The water share from the atlas,** checked against the hash the island study recorded, in place of the hard-coded
   28%; the summit's place and height, on the panels and the map, come from the island study's product.
 - **The view named.** The frame and the map call it a common-water-level view with illustrative lighting and haze.
 - **Depth colours on their pixels.** The depth texture's texel centres sit on the terrain's pixel centres. The
   original mapped the crop's first and last pixel centres to the texture's edges, which misplaced the depth colours
-  by up to half a pixel towards the crop's edges and by almost nothing near the island.
+  by up to half a pixel towards the crop's edges and by up to a fifth of a pixel over the island.
 - **Smaller changes.** The 2 px/deg surround closes its seam at 0° E; the band edges and the contour interval reach
-  the shader from [water_depth.py](water_depth.py); frames render at a fraction of full size with `--scale`; each
-  output carries its record.
+  the shader from [water_depth.py](water_depth.py); stills render at chosen times with `--frames` and at a fraction of
+  full size with `--scale`, and `--out` replaces `--output`; outputs go to `out/`, the stills named by their time,
+  each with its record; the map writes its soundings into that record in place of rewriting
+  `bathymetry-soundings.json`; and the film's MP4 takes a new title and a comment drawn from the captions.
 
 The camera's keys and splines, the unwrapped heading and pitch, the chapters, their panels and fades, the route map
 and its position marker are the original's. Frames rendered at full size at 0, 22 and 43.9 s differ from the original
@@ -95,9 +109,9 @@ coasts, and the captions by design. Test frames at 800 × 450 and the rendered m
 | File | Holds |
 |---|---|
 | [film.py](film.py) | The frame size and rate, the camera path, the chapters and fades, and the frame's texts; no OpenGL |
-| [terrain.py](terrain.py) | The products' and inputs' checks, the regenerated terrain, the island and the soundings |
+| [terrain.py](terrain.py) | The products' and inputs' checks, the regenerated terrain, the island, the soundings, and the depth texture's bounds and the surround |
 | [water_depth.py](water_depth.py) | The depth bands, their colours, the contour interval and the named points |
 | [render_flyover.py](render_flyover.py) | The scene, its overlays, stills, contact sheets and the film |
 | [render_map.py](render_map.py) | The topography and water-depth map |
 | [repository_import.json](repository_import.json) | The recovered source, its outputs and its record |
-| [tests/test_flyover.py](tests/test_flyover.py) | The camera, the panels, the inputs' hashes, the water level and the terrain against the products |
+| [tests/test_flyover.py](tests/test_flyover.py) | The camera, the panels, the inputs' hashes, the water level, the terrain against the products and the original, and the texels and the seam |

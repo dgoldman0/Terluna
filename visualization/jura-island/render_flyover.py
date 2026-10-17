@@ -10,7 +10,7 @@ product, input and code file it read by sha256. Needs moderngl with an EGL drive
 
 The land stands at true relief on the reference sphere and the water is the sphere itself, the common level that
 every basin below it fills, coloured by depth with 250 m contours. The light comes from a fixed direction in the
-north-west, a cartographer's convention, and the haze is a display formula; the illumination models compute neither.
+north-west, a cartographer's convention, and the haze is a display formula.
 """
 from __future__ import annotations
 
@@ -47,8 +47,8 @@ CODE = ('film.py', 'terrain.py', 'water_depth.py', 'render_flyover.py')
 VIEW = ('A common-water-level view: LOLA terrain at 16 px/deg less the degree-200 GRAIL geoid, with every basin '
         'below the atlas\'s sea level filled to it, drawn at true relief on the reference sphere with the water '
         'surface on the sphere itself. Depth bands and 250 m contours overlay the water. The light comes from a fixed '
-        'direction in the north-west and the haze is a display formula; the illumination models compute neither. '
-        'Lake levels, tides, erosion and crustal loading are left out, and travel time is compressed.')
+        'direction in the north-west and the haze is a display formula. Lake levels, tides, erosion and crustal '
+        'loading are left out, and travel time is compressed.')
 
 VERTEX = '''
 #version 330
@@ -137,17 +137,15 @@ class Flyover:
         texture.repeat_x = texture.repeat_y = False
         texture.use(0)
         self.program['depth_map'].value = 0
-        half = 0.5 / t.pixels_per_degree
-        self.bounds = (t.lon.min() - half, t.lon.max() + half, t.lat.min() - half, t.lat.max() + half)
+        self.bounds = t.texture_bounds()
         self.meshes = []
         rows = (t.lat >= film.MESH['south']) & (t.lat <= film.MESH['north'])
         cols = (t.lon >= film.MESH['west']) & (t.lon <= film.MESH['east'])
         lat, lon = t.lat[rows], t.lon[cols]
         # A coarser surround at 2 px/deg hides the regional mesh's edge; its land stops 0.25 deg inside that edge
-        lon2 = np.append(t.lon4[::2], t.lon4[0] + 360.0)               # the 0/360 seam closed
-        z2 = t.z4[::2, ::2] / 1000
-        z2 = np.concatenate([z2, z2[:, :1]], axis=1)
-        glon, glat = np.meshgrid(lon2, t.lat4[::2])
+        lon2, lat2, z2 = t.surround()
+        glon, glat = np.meshgrid(lon2, lat2)
+        z2 = z2 / 1000
         cut = (lat.min() + 0.25, lat.max() - 0.25, lon.min() + 0.25, lon.max() - 0.25)
         self.mesh(glon, glat, z2, water=False, cut=cut)
         self.mesh(glon, glat, z2, water=True)
@@ -175,8 +173,7 @@ class Flyover:
             # shading normals from heights smoothed slightly at the grid's spacing; the vertices keep the samples
             dr, dc = np.gradient(film.xyz(lon, lat, gaussian_filter(z, 0.65)), axis=(0, 1))
             n = film.norm(np.cross(dr, dc))
-        x0, x1, y0, y1 = self.bounds
-        uv = np.stack([(lon - x0) / (x1 - x0), (y1 - lat) / (y1 - y0)], axis=-1)
+        uv = terrain_data.texture_uv(lon, lat, self.bounds)
         vertices = np.concatenate([p, n, z[..., None], uv], axis=2).reshape(-1, 9).astype('f4')
         ny, nx = z.shape
         ij = np.arange(ny * nx, dtype=np.uint32).reshape(ny, nx)

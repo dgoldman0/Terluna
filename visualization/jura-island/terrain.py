@@ -119,6 +119,24 @@ class Terrain:
     def cell_area_km2(self):
         return Grid(self.lat, self.lon, self.pixels_per_degree).cell_area_m2 / 1e6
 
+    def texture_bounds(self):
+        """The regional crop's outer edges (west, east, south, north; degrees), half a pixel beyond its outermost
+        pixel centres, so that each pixel centre falls on the centre of its texel in the depth texture."""
+        half = 0.5 / self.pixels_per_degree
+        return self.lon.min() - half, self.lon.max() + half, self.lat.min() - half, self.lat.max() + half
+
+    def surround(self, step=2):
+        """The global surround at every second 4 px/deg sample, with its first column repeated a turn to the east so
+        that its mesh closes at 0 deg E: longitudes, latitudes and heights (m)."""
+        z = self.z4[::step, ::step]
+        return np.append(self.lon4[::step], self.lon4[0] + 360.0), self.lat4[::step], np.concatenate([z, z[:, :1]], 1)
+
+
+def texture_uv(lon, lat, bounds):
+    """The depth texture's coordinates of points: u from the west edge, v from the north edge."""
+    west, east, south, north = bounds
+    return np.stack([(lon - west) / (east - west), (north - lat) / (north - south)], axis=-1)
+
 
 def build(island_path=None, atlas_path=None):
     p = products(island_path, atlas_path)

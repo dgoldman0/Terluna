@@ -16,7 +16,7 @@
   "bathymetry-soundings.json": {
    "bytes": 1507,
    "sha256": "ced92a0e21bd71f0ceb163f4ca224baef67cddb822715a66a042c8b39deaa63e",
-   "disposition": "Its depths kept below as source_record.soundings; render_map.py writes them again."
+   "disposition": "Its depths kept below as source_record.soundings; render_map.py writes the regenerated soundings into its record."
   },
   "render-metadata.json": {
    "bytes": 5384,
@@ -93,7 +93,14 @@
    "island_area_km2": 57823.68015241281,
    "summit_m": 2717.019871879728,
    "atlas_4ppd_island_area_km2": 58357.13004290297,
-   "atlas_4ppd_summit_m": 2514.107865468766
+   "atlas_4ppd_summit_m": 2514.107865468766,
+   "island_pixels": 22869,
+   "island_mask_shape": [
+    592,
+    944
+   ],
+   "island_mask_sha256": "78bb27fc695fb084eb4deed2022bc839af5cc7a1824bcc854cd101e4a3479785",
+   "island_mask_packing": "numpy.packbits of the island mask flattened in C order, rows from north to south and columns from west to east"
   },
   "checks": {
    "frames": 2640,

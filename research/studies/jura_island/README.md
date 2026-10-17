@@ -59,8 +59,8 @@ it and from people's watering, and its heights stay dry land.
 
 [visualization/jura-island](../../../visualization/jura-island/README.md) draws the island from this product and the
 atlas it was measured against: a 44-second flyover and a map of its topography and water depth at the common water
-level, their terrain regenerated from the same LOLA and GRAIL bytes, with illustrative lighting. It ports the flyover
-made in ChatGPT on 15 October, whose film, map and source are catalogued on the research drive.
+level, the island regenerated from the LOLA and GRAIL bytes this study measured, with illustrative lighting. It ports
+the flyover made in ChatGPT on 15 October, whose film, map and source are catalogued on the research drive.
 
 ## What follows
 

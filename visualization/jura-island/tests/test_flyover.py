@@ -6,6 +6,7 @@ None of these tests needs OpenGL. The tests that build the terrain skip when geo
 not fetched (python -m geography.fetch_inputs --download). The original film's numbers come from its record,
 repository_import.json.
 """
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -224,12 +225,47 @@ def test_terrain_measures_as_the_island_study(ground):
 @needs_inputs
 def test_terrain_reproduces_the_original_island_and_soundings(ground):
     original = ORIGINAL['terrain']
+    # the same pixels: their count, and the sha256 of the packed mask the original saved
+    assert list(ground.island.shape) == original['island_mask_shape']
+    assert int(ground.island.sum()) == original['island_pixels']
+    assert hashlib.sha256(np.packbits(ground.island).tobytes()).hexdigest() == original['island_mask_sha256']
     assert ground.cell_area_km2()[ground.island].sum() == pytest.approx(original['island_area_km2'], abs=0.01)
-    # the original interpolated a 4 px/deg geoid and set its level 0.037 m higher; the heights agree within 0.5 m
-    assert ground.z[ground.island].max() == pytest.approx(original['summit_m'], abs=0.5)
+    # the original interpolated a 4 px/deg geoid and set its level 0.037 m higher: across the crop 19 pixels move by
+    # up to 0.527 m, on the island the largest move is 0.368 m, the summit moves 0.089 m and a sounding 0.142 m
+    assert ground.z[ground.island].max() == pytest.approx(original['summit_m'], abs=0.1)
     recorded = {s['name']: s for s in ORIGINAL['soundings']}
     for s in terrain.soundings(ground):
         r = recorded[s['name']]
         assert (s['longitude_deg'], s['latitude_deg']) == (r['longitude_deg'], r['latitude_deg'])
-        assert s['depth_m'] == pytest.approx(r['depth_m'], abs=0.5)
+        assert s['depth_m'] == pytest.approx(r['depth_m'], abs=0.15)
         assert s['display_depth_m'] == r['display_depth_m']
+
+
+# The renderer's arithmetic
+
+def made_up_terrain():
+    """A Terrain on the flyover's grids with made-up heights, for the arithmetic that needs no inputs."""
+    grid = terrain.regional_grid(16)
+    lat4, lon4 = 90.0 - (np.arange(720) + 0.5) / 4, (np.arange(1440) + 0.5) / 4 - 360.0
+    shape = (grid.lat_deg.size, grid.lon_deg.size)
+    return terrain.Terrain(lat=grid.lat_deg, lon=grid.lon_deg - 360.0, z=np.zeros(shape), island=np.zeros(shape, bool),
+                           lat4=lat4, lon4=lon4, z4=np.add.outer(lat4, 1000 * lon4), sea_level_m=0.0, water_share=0.28,
+                           pixels_per_degree=16, summit=(0.0, 0.0, 0.0), hashes={})
+
+
+def test_depth_texels_sit_on_the_pixel_centres():
+    # OpenGL samples texel i of n at its centre, (i + 0.5) / n: every pixel centre must fall there
+    t = made_up_terrain()
+    bounds = t.texture_bounds()
+    u = terrain.texture_uv(t.lon, np.full(t.lon.shape, t.lat[0]), bounds)[:, 0]
+    v = terrain.texture_uv(np.full(t.lat.shape, t.lon[0]), t.lat, bounds)[:, 1]
+    np.testing.assert_allclose(u * t.lon.size - 0.5, np.arange(t.lon.size), atol=1e-9)
+    np.testing.assert_allclose(v * t.lat.size - 0.5, np.arange(t.lat.size), atol=1e-9)
+
+
+def test_the_surround_closes_its_seam():
+    t = made_up_terrain()
+    lon, lat, z = t.surround()
+    assert lon[-1] - lon[0] == pytest.approx(360.0) and np.allclose(np.diff(lon), 0.5)
+    assert np.array_equal(lat, t.lat4[::2]) and z.shape == (lat.size, lon.size)
+    assert np.array_equal(z[:, -1], z[:, 0]) and np.array_equal(z[:, :-1], t.z4[::2, ::2])
