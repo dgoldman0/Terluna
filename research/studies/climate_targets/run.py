@@ -1,6 +1,6 @@
-"""What each target climate takes, across the domains: the warm Moon the GCM settles on with its longwave refitted by
-height and ice optics for its cold cloud, the design temperature the plan was built for, and a target between them,
-with the heat the plan puts on the Moon beyond its sunlight, which every target answers.
+"""What each target climate takes, across the domains: the hot world the GCM settles on with its longwave refitted by
+height and ice optics for its cold cloud, the lock at the design temperature the plan was built for, and the resort
+between them, with the heat the plan puts on the Moon beyond its sunlight, which every target answers.
 
     python -m research.studies.climate_targets.run        # under a second
 
@@ -23,12 +23,13 @@ from pathlib import Path
 
 import numpy as np
 
+from research.studies.climate_targets import extract as X
 from shared import constants as K
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 OUT = HERE / 'results' / 'climate_targets.json'
-SCHEMA = 'terluna.research.climate-targets/3'
+SCHEMA = 'terluna.research.climate-targets/4'
 CODE = ('research/studies/climate_targets/run.py', 'research/studies/climate_targets/extract.py')
 EXTRACT = 'research/runs/climate_targets/extract.json'
 GASES_GLOW = 'research/studies/gases_glow_dimming/results/gases_glow_dimming.json'
@@ -39,12 +40,13 @@ LIGHT = 'research/studies/light_limitation/results/light_limitation.json'
 POWER = 'provisioning/results/power.json'
 RESOURCES = 'resources/results/first_screen.json'
 GROUNDWATER = 'geography/results/groundwater_uptake.json'
-INPUTS = {EXTRACT: 'terluna.research.climate-targets-extract/3', GASES_GLOW: 'terluna.research.gases-glow-dimming/1',
+INPUTS = {EXTRACT: 'terluna.research.climate-targets-extract/4', GASES_GLOW: 'terluna.research.gases-glow-dimming/1',
           GLOW: 'terluna.research.fleet-glow/1', GAS_FORCING: 'terluna.atmosphere.reduced-gas-forcing/1',
           COLUMN: None, LIGHT: 'terluna.research.light-limitation/1', POWER: 'terluna.provisioning.power/1',
           RESOURCES: 'terluna.resources.first-screen/1', GROUNDWATER: 'terluna.geography.groundwater-uptake/1'}
 DESIGN, TEST = 'A28_corrected_970', 'A28_corrected_970_lw_ice'
-# The glow pair on the corrected radiation: the gases and the glow matched watt for watt, and held.
+# The glow pair on the corrected radiation: the gases and the glow with 13 October's 4.22% of added dimming, and with
+# its 3.52%.
 WW, HELD = 'A28_corrected_gases_glow', 'A28_corrected_gases_glow_held'
 DESIGN_SCALE = 0.970                 # the design case's sunlight, as a share of what the titania stack passes
 TARGETS_K = (295.0, 300.0)           # the design temperature and one between it and where the corrected GCM settles
@@ -62,35 +64,47 @@ EVIDENCE = ('Arithmetic on ExoPlaSim runs and committed products. The two runs t
             'the gases, the glow or their dimming. The dimming a target needs is the test\'s top-of-air gain per '
             'kelvin times the kelvins to shed, at the test\'s albedo; the climate at a target between the two runs is '
             'interpolated linearly in the ground\'s temperature, so it mixes the two physics and carries neither the '
-            'refit\'s high cloud at the cooler end nor the dimming\'s own cut to the rain. The heat beyond the '
-            'sunlight takes the GCM\'s efficacies for the gases and the glow and an efficacy of 1 for heat released at '
-            'the ground. The glow\'s efficacy is a range, from the held branch of 13 October on the earlier radiation '
-            'and from the glow pair on the corrected radiation of 17 October (the design case\'s own radiation, before '
-            'the longwave refit): the pair\'s held branch is carried to the design case\'s temperature by the pair\'s '
-            'own response to its dimming, the gases keep their 1.69% of 13 October for want of a gases-only branch, '
-            'and the glow\'s share is counted in watts of the design case\'s absorbed sunlight. The heat at 2 m takes '
-            'the output\'s 2 m air with the lowest level\'s specific humidity, capped at saturation, as in air mixed '
-            'through the lowest kilometre. The day\'s and the night\'s 3-day means are told apart by the output\'s '
-            'mean cosine of the Sun\'s zenith angle. How much the 3-day means smooth the extremes comes from the '
-            'design case\'s two years written every 6.5 hours alone; carried to the warmer targets it is a '
-            'sensitivity.')
+            'refit\'s high cloud at the cooler end nor the dimming\'s own cut to the rain, and a target at either end '
+            'takes that run\'s own climate. The heat beyond the sunlight takes the GCM\'s efficacies for the gases and '
+            'the glow and an efficacy of 1 for heat released at the ground. The glow\'s efficacy is a range, from the '
+            'held branch of 13 October on the earlier radiation and from the glow pair on the corrected radiation of '
+            '17 October (the design case\'s own radiation, before the longwave refit). The pair fixes only the total '
+            'the gases and the glow take together, its held branch carried to the design case\'s temperature by the '
+            'pair\'s own response to its dimming; the gases take their forcing, as on 13 October, and the glow the '
+            'rest. Land and water are the model\'s own mask. The 2 m air is the lowest level\'s air carried down the '
+            'dry adiabat, and the 2 m wet-bulb temperature carries the lowest level\'s humidity down with it, capped '
+            'at saturation: the reading of a well-mixed lowest kilometre, as by day. At night the air near the ground '
+            'cools below it in calm air, so the night\'s figures at 2 m read warm. The wet-bulb temperature is capped '
+            'at the air\'s own where the air is supersaturated. The day\'s and the night\'s 3-day means are told '
+            'apart by the output\'s mean cosine of the Sun\'s zenith angle against the Sun\'s synodic travel through '
+            'each mean, a cut exact where the Sun\'s declination is zero. How much the 3-day means smooth the extremes '
+            'comes from the design case\'s two years written every 6.5 hours alone; carried to the warmer targets it '
+            'is a sensitivity.')
 READING_RULE = ('W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. '
                 'A dimming is the share of the sunlight reaching the Moon that the fleet takes away, at the test\'s '
                 'albedo, and the sunlight scale the GCM would fly for it is the design scale times what remains. '
                 'Heat is in the 3-day means, each about a tenth of the lunar day, at the lowest model level, about '
-                '0.9 km up, and at 2 m; the land\'s figures are weighted by land area and the seas\' by sea area, '
-                'quantiles and shares of time included. The day\'s means are those the Sun is up for more than half '
-                'of; day_ and night_ figures in a climate are the land\'s in them. Deserts are land under 0.5 mm of '
-                'rain a day. Pairs are [low, high] ends: the two fits for the feedback, the glow\'s two efficacies, '
-                'the power screen\'s two ends and the light study\'s and Earth\'s models\' ends for the costs; '
-                'figures that carry several of them pair the ends that give the least and the most. glow_efficacy '
-                'holds the corrected radiation\'s efficacy and how it was found: dimming in per cent of the design '
-                'case\'s sunlight, in_points_of_dimming the same share counted in points as on 13 October. '
-                'dimming_curve gives the dimming for each ground temperature, negative where a target lies above a '
-                'fit\'s balance. smoothing compares the land\'s heat in the 6.5-hour means with the 3-day means their '
-                'elevens make over the same two years; ratio_above_the_median is the extreme\'s height above the '
-                'median at 6.5 hours over its height in the 3-day means, and a target\'s at_6_5_hours applies it to '
-                'that target\'s 99th percentiles.')
+                '0.9 km up, and at 2 m. Land and water are the model\'s own mask; land figures are weighted by land '
+                'area and the seas\' by water area, quantiles and shares of time included. The day\'s means are those '
+                'the Sun is up for more than half of; day_ and night_ figures in a climate are the land\'s in them, '
+                'and a tenth\'s day and afternoon are the shares of its means in the day and in the day\'s afternoon. '
+                'Each place\'s tenths are ranked by one quantity (by_wet_bulb, by_air) with the others over the same '
+                'means. Deserts are land under 0.5 mm of rain a day. A climate\'s freezing_level_km and '
+                'height_of_20c_km are where the land\'s mean profile, a land-area mean at each height, crosses 0 and '
+                '20 C; a run\'s '
+                'freezing_level_over_land_km is the median of the land\'s column crossings. Pairs are [low, high] '
+                'ends: the two fits for the feedback, the glow\'s two efficacies, the power screen\'s two ends and the '
+                'light study\'s and Earth\'s models\' ends for the costs; figures that carry several of them pair the '
+                'ends that give the least and the most. glow_efficacy holds the corrected radiation\'s efficacy and '
+                'how it was found, dimming in per cent of the design case\'s sunlight; gases_and_glow_w_m2 is the '
+                'total the pair fixes, and with_the_gases_at_their_points the other split of it. dimming_curve gives '
+                'the dimming for each ground temperature, negative where a target lies above a fit\'s balance. '
+                'smoothing compares the land\'s heat in the 6.5-hour means with the 3-day means their elevens make '
+                'over the same two years; ratio_above_the_median is the extreme\'s height above the median at 6.5 '
+                'hours over its height in the 3-day means, and a target\'s at_6_5_hours applies it to that target\'s '
+                '99th percentiles. wet_bulb_per_kelvin_of_air is the change in the wet-bulb temperature for a kelvin '
+                'of air at a fixed humidity, at a run\'s day medians at 2 m and the land\'s 5th and 95th percentile '
+                'surface pressures.')
 
 
 def digest(path) -> str:
@@ -173,12 +187,18 @@ def climate(run):
 
 
 def comfort(run):
-    return dict(heat=run['heat'], seas=run['seas'], freezing_level_over_land_km=run['freezing_level_over_land_km'])
+    """A run's own figures beside its climate: its heat place by place at both heights, its seas, its land's rain and
+    deserts by band and height, the land the model runs on and the median of the land's column crossings of
+    freezing."""
+    return dict(heat=run['heat'], seas=run['seas'], land=run['land'], land_and_water=run['land_and_water'],
+                freezing_level_over_land_km=run['freezing_level_over_land_km'],
+                land_columns_that_never_freeze=run['land_columns_that_never_freeze'])
 
 
 def interpolate(a, b, ground_k):
-    """A target's climate between the two runs, linear in the ground's temperature, the sky ladder height by height."""
-    f = (ground_k - a['ground_k']) / (b['ground_k'] - a['ground_k'])
+    """A target's climate between the two runs, linear in the ground's temperature, the sky ladder height by height;
+    a target beyond either run takes that run's own climate."""
+    f = min(max((ground_k - a['ground_k']) / (b['ground_k'] - a['ground_k']), 0.0), 1.0)
     out = {k: a[k] + f * (b[k] - a[k]) for k in a
            if k not in RUNS_ONLY and k not in ('ladder', 'height_of_20c_km', 'freezing_level_km')}
     out['ladder'] = [dict(height_km=x['height_km'], air_c=x['air_c'] + f * (y['air_c'] - x['air_c']),
@@ -190,38 +210,54 @@ def interpolate(a, b, ground_k):
 
 
 def corrected_efficacy(ex, gases_glow, infrared, gas_forcing):
-    """The glow's efficacy from the glow pair on the corrected radiation of 17 October, found as the gases, glow and
-    dimming study found its 0.71 on the earlier radiation. The two branches differ in their dimming alone, so their
-    grounds give the model's response to it, which carries the held branch to the design case's temperature. With no
-    gases-only branch on this radiation, the gases keep the 1.69% of the sunlight that held them on 13 October, and
-    the rest is the glow's. That share is counted in watts of the design case's absorbed sunlight against the
-    infrared it answers, as the heat beyond the sunlight is counted: on 13 October the watt-for-watt branch's 2.53%
-    was the glow's watts on that radiation's absorbed sunlight, and here a point of dimming takes about 8% more, the
-    curved air's light among it."""
+    """The glow's efficacy from the glow pair on the corrected radiation of 17 October. The two branches differ in
+    their dimming alone, so their grounds give the model's response to it, which carries the held branch to the
+    design case's temperature: the gases and the glow together hold it with that much of the design case's absorbed
+    sunlight, and the pair fixes only that total. The gases take their forcing, as the heat beyond the sunlight books
+    them and as 13 October's 1.69% was their forcing over that radiation's absorbed sunlight, and the glow takes the
+    rest. The other split keeps the gases at their 1.69% of this radiation's absorbed sunlight, which is larger, the
+    curved air's light among it; it gives the same total."""
     pair = ex['glow_pair']
-    design, ww, held = pair[DESIGN], pair[WW], pair[HELD]
+    design, more, less = pair[DESIGN], pair[WW], pair[HELD]
 
     def dimming(r):
         return 100.0 * (1.0 - r['sunlight_scale'] / design['sunlight_scale'])
 
-    response = (held['ground_k'] - ww['ground_k']) / (dimming(ww) - dimming(held))    # K for each 1% of dimming
-    hold = dimming(held) - (design['ground_k'] - held['ground_k']) / response
-    gases = gases_glow['runs']['gases']['added_dimming_percent']
+    response = (less['ground_k'] - more['ground_k']) / (dimming(more) - dimming(less))    # K for each 1% of dimming
+    hold = dimming(less) - (design['ground_k'] - less['ground_k']) / response
     absorbed = ex['runs'][DESIGN]['top_of_air_w_m2']['absorbed']
     total = hold / 100.0 * absorbed
-    glow = (hold - gases) / 100.0 * absorbed
+    points = gases_glow['runs']['gases']['added_dimming_percent']
+    at_points = points / 100.0 * absorbed
     return dict(
-        runs=dict(design=DESIGN, watt_for_watt=WW, held=HELD),
-        added_dimming_percent=dict(watt_for_watt=dimming(ww), held=dimming(held)),
-        ground_k=dict(design=design['ground_k'], watt_for_watt=ww['ground_k'], held=held['ground_k']),
-        ground_trend_k_per_decade=dict(watt_for_watt=ww['ground_trend_k_per_decade'],
-                                       held=held['ground_trend_k_per_decade']),
-        response_k_per_percent=response, dimming_that_holds_percent=hold, gases_dimming_percent=gases,
-        glow_dimming_percent=hold - gases, design_absorbed_sunlight_w_m2=absorbed, dimming_that_holds_w_m2=total,
-        glow_w_m2=glow, infrared_w_m2=infrared, efficacy=glow / infrared,
-        in_points_of_dimming=(hold - gases) / (dimming(ww) - gases),
-        with_the_gases_at_their_forcing=dict(gases_w_m2=gas_forcing, glow_w_m2=total - gas_forcing,
-                                             efficacy=(total - gas_forcing) / infrared))
+        added_dimming_percent={WW: dimming(more), HELD: dimming(less)},
+        ground_k={DESIGN: design['ground_k'], WW: more['ground_k'], HELD: less['ground_k']},
+        ground_trend_k_per_decade={WW: more['ground_trend_k_per_decade'], HELD: less['ground_trend_k_per_decade']},
+        response_k_per_percent=response, dimming_that_holds_percent=hold, design_absorbed_sunlight_w_m2=absorbed,
+        gases_and_glow_w_m2=total, gases_w_m2=gas_forcing, glow_w_m2=total - gas_forcing, infrared_w_m2=infrared,
+        efficacy=(total - gas_forcing) / infrared,
+        with_the_gases_at_their_points=dict(gases_dimming_percent=points, gases_w_m2=at_points,
+                                            glow_w_m2=total - at_points, efficacy=(total - at_points) / infrared))
+
+
+def wet_bulb_per_kelvin_of_air(run):
+    """How far a kelvin of air moves the wet-bulb temperature at a fixed humidity: at the land's day medians at 2 m,
+    the humidity that gives that wet-bulb temperature at that air, over the land's 5th to 95th percentile surface
+    pressures."""
+    land = run['heat']['land']
+    t = land['day']['at_2_m']['air']['median'] + 273.15
+    tw = land['day']['at_2_m']['wet_bulb']['median'] + 273.15
+    lv = 2.501e6 - 2370.0 * (tw - 273.15)
+    pressures = [land['surface_pressure_bar']['p05'], land['surface_pressure_bar']['p95']]
+    out = []
+    for bar in pressures:
+        p = np.array([bar * 1e5])
+        # the psychrometric balance solved for the humidity, then the wet-bulb temperature a kelvin either side
+        q = (X.qsat(np.array([tw]), p) - X.CP * (t - tw) / lv) / (1.0 + 1850.0 * (t - tw) / lv)
+        up, down = (float(X.wet_bulb(np.array([t + d]), q, p)[0]) for d in (0.5, -0.5))
+        out.append(dict(pressure_bar=bar, specific_humidity=float(q[0]), k_per_k=up - down))
+    return dict(air_c=t - 273.15, wet_bulb_c=tw - 273.15, at=out,
+                k_per_k=sorted(x['k_per_k'] for x in out))
 
 
 def heat_beyond_sunlight(data, absorbed, area, corrected):
@@ -248,8 +284,9 @@ def heat_beyond_sunlight(data, absorbed, area, corrected):
         glow=item([e * infrared + (1.0 - albedo) * sunlight for e in efficacy], answer=glow['answer'],
                   infrared_w_m2=infrared, sunlight_back_w_m2=sunlight, efficacy=efficacy, efficacy_sources=sources,
                   basis='the recommended answer, both halves rolled 80 degrees on the re-flown layout, at the GCM\'s '
-                        'efficacy for its infrared, from the glow pair on the corrected radiation of 17 October to '
-                        'the held branch of 13 October, and the albedo for its returned sunlight'),
+                        'efficacy for its infrared, from the glow pair on the corrected radiation of 17 October with '
+                        'the gases at their forcing to the held branch of 13 October, and the albedo for its '
+                        'returned sunlight'),
         beamed_power=item([tw * 1e12 / area for tw in power_tw], heat_tw=power_tw,
                           basis='the power screen\'s intake, the beams arriving at the receivers and the towns\' '
                                 'crowns, and the deep air\'s share of the beams; all of it ends as heat at or near the '
@@ -290,7 +327,7 @@ def heat_beyond_sunlight(data, absorbed, area, corrected):
 
 
 def dimming_curve(fits, absorbed, every_dim):
-    """The dimming for each ground temperature from the design temperature to where the warm Moon settles, with the
+    """The dimming for each ground temperature from the design temperature to where the hot world settles, with the
     sunlight scale of a design case for it, before and after the heat beyond the sunlight is answered too."""
     rows = []
     for target in CURVE_K:
@@ -308,8 +345,10 @@ def smoothing(eddies):
     """How much the 3-day means smooth the land's heat in the design case: each extreme in the 6.5-hour means against
     the same in the 3-day means their elevens make over the same two years, by its excess and by the ratio of its
     height above the median."""
-    out = dict(run=eddies['run'], years=eddies['years'], hours_each=eddies['hours_each'],
-               means_to_a_3_day_mean=eddies['means_to_a_3_day_mean'])
+    out = dict(run=eddies['run'], years=eddies['years'], start=eddies['start'], hours_each=eddies['hours_each'],
+               means_to_a_3_day_mean=eddies['means_to_a_3_day_mean'],
+               supersaturated_lowest_level={k: eddies[k]['lowest_level']['supersaturated']
+                                            for k in ('at_6_5_hours', 'in_3_day_means')})
     for height in ('at_2_m', 'lowest_level'):
         out[height] = {}
         for var in ('wet_bulb', 'air'):
@@ -418,6 +457,8 @@ def results():
         heat_beyond_sunlight=heat,
         dimming_curve=dimming_curve(fits, absorbed, every_dim),
         smoothing=smooth,
+        wet_bulb_per_kelvin_of_air=dict(design=wet_bulb_per_kelvin_of_air(design),
+                                        test=wet_bulb_per_kelvin_of_air(test)),
         targets=targets,
         costs_per_percent=dict(growth_through_light_percent=light, land_rain_percent=rain_cut))
 

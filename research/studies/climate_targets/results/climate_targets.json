@@ -1,18 +1,18 @@
 {
- "schema": "terluna.research.climate-targets/3",
+ "schema": "terluna.research.climate-targets/4",
  "producer": {
   "files": {
-   "research/studies/climate_targets/run.py": "676db180bc3281e39fec0812c1b97c362fd0e3bf61668adfa8beae33f00a7236",
-   "research/studies/climate_targets/extract.py": "33e16e0c710df4ccfbd77bd5fccfa70b09738c471919f343b12a88ba3875536b"
+   "research/studies/climate_targets/run.py": "5f6382cc337f1fbf75f0e97afb4e59a09a3dad93294d2a912c57fde47726b9b2",
+   "research/studies/climate_targets/extract.py": "5c6571bc69d33ec153f3e86d4e05fc7737205862c7c5df51cf9b70f8b7c04cd7"
   },
   "inputs": {
-   "research/runs/climate_targets/extract.json": "9d5e9033e1c284857228b96e110240a570fe759a81c84f0a1a999ca324742c3f",
-   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "203f81df46d1ef704cc3cb7c153a1757186bc229d2dc128319bcaadfeccf465b",
+   "research/runs/climate_targets/extract.json": "c400d48bb1a5640eb19d0c0823753eb6bd57dccec68cc3f968adb827f6317ed0",
+   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "21e1f27368b08b1ea7f0091cb468e2d0245e942fd344246de5bc9bd28c1a3c17",
    "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
    "atmosphere/radiative_convective/results/summary.json": "8fb31329ebcbca52ea9ac1c0af06ed5e357c02267dce8b47250334ae91c39171",
-   "research/studies/light_limitation/results/light_limitation.json": "3f1753a68416f30f2e2f4acdaa6a3eb1f744cba836db15e6d223f4600f986f1b",
-   "provisioning/results/power.json": "bf1e53b3328225f400c842ec5f56b672a558752769a437c78c461b5dbde9d93d",
+   "research/studies/light_limitation/results/light_limitation.json": "80944a697f7202c2b1ff5aa80ccfd6f1023aeeaced2fbe16e67325d86f7180c2",
+   "provisioning/results/power.json": "1307108787787f53c0d93c1ed3135e006ab5bbb897af9800ab354a914e694dd7",
    "resources/results/first_screen.json": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e"
   },
@@ -22,163 +22,212 @@
    "JULIAN_DAY": 86400.0
   }
  },
- "evidence": "Arithmetic on ExoPlaSim runs and committed products. The two runs the targets stand on share the design sunlight (scale 0.970); the design case flew PlaSim's earlier longwave and liquid optics for all cloud, the test the longwave refitted by height and ice optics for cloud colder than -38 C, and neither carries the gases, the glow or their dimming. The dimming a target needs is the test's top-of-air gain per kelvin times the kelvins to shed, at the test's albedo; the climate at a target between the two runs is interpolated linearly in the ground's temperature, so it mixes the two physics and carries neither the refit's high cloud at the cooler end nor the dimming's own cut to the rain. The heat beyond the sunlight takes the GCM's efficacies for the gases and the glow and an efficacy of 1 for heat released at the ground. The glow's efficacy is a range, from the held branch of 13 October on the earlier radiation and from the glow pair on the corrected radiation of 17 October (the design case's own radiation, before the longwave refit): the pair's held branch is carried to the design case's temperature by the pair's own response to its dimming, the gases keep their 1.69% of 13 October for want of a gases-only branch, and the glow's share is counted in watts of the design case's absorbed sunlight. The heat at 2 m takes the output's 2 m air with the lowest level's specific humidity, capped at saturation, as in air mixed through the lowest kilometre. The day's and the night's 3-day means are told apart by the output's mean cosine of the Sun's zenith angle. How much the 3-day means smooth the extremes comes from the design case's two years written every 6.5 hours alone; carried to the warmer targets it is a sensitivity.",
- "reading_rule": "W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. A dimming is the share of the sunlight reaching the Moon that the fleet takes away, at the test's albedo, and the sunlight scale the GCM would fly for it is the design scale times what remains. Heat is in the 3-day means, each about a tenth of the lunar day, at the lowest model level, about 0.9 km up, and at 2 m; the land's figures are weighted by land area and the seas' by sea area, quantiles and shares of time included. The day's means are those the Sun is up for more than half of; day_ and night_ figures in a climate are the land's in them. Deserts are land under 0.5 mm of rain a day. Pairs are [low, high] ends: the two fits for the feedback, the glow's two efficacies, the power screen's two ends and the light study's and Earth's models' ends for the costs; figures that carry several of them pair the ends that give the least and the most. glow_efficacy holds the corrected radiation's efficacy and how it was found: dimming in per cent of the design case's sunlight, in_points_of_dimming the same share counted in points as on 13 October. dimming_curve gives the dimming for each ground temperature, negative where a target lies above a fit's balance. smoothing compares the land's heat in the 6.5-hour means with the 3-day means their elevens make over the same two years; ratio_above_the_median is the extreme's height above the median at 6.5 hours over its height in the 3-day means, and a target's at_6_5_hours applies it to that target's 99th percentiles.",
+ "evidence": "Arithmetic on ExoPlaSim runs and committed products. The two runs the targets stand on share the design sunlight (scale 0.970); the design case flew PlaSim's earlier longwave and liquid optics for all cloud, the test the longwave refitted by height and ice optics for cloud colder than -38 C, and neither carries the gases, the glow or their dimming. The dimming a target needs is the test's top-of-air gain per kelvin times the kelvins to shed, at the test's albedo; the climate at a target between the two runs is interpolated linearly in the ground's temperature, so it mixes the two physics and carries neither the refit's high cloud at the cooler end nor the dimming's own cut to the rain, and a target at either end takes that run's own climate. The heat beyond the sunlight takes the GCM's efficacies for the gases and the glow and an efficacy of 1 for heat released at the ground. The glow's efficacy is a range, from the held branch of 13 October on the earlier radiation and from the glow pair on the corrected radiation of 17 October (the design case's own radiation, before the longwave refit). The pair fixes only the total the gases and the glow take together, its held branch carried to the design case's temperature by the pair's own response to its dimming; the gases take their forcing, as on 13 October, and the glow the rest. Land and water are the model's own mask. The 2 m air is the lowest level's air carried down the dry adiabat, and the 2 m wet-bulb temperature carries the lowest level's humidity down with it, capped at saturation: the reading of a well-mixed lowest kilometre, as by day. At night the air near the ground cools below it in calm air, so the night's figures at 2 m read warm. The wet-bulb temperature is capped at the air's own where the air is supersaturated. The day's and the night's 3-day means are told apart by the output's mean cosine of the Sun's zenith angle against the Sun's synodic travel through each mean, a cut exact where the Sun's declination is zero. How much the 3-day means smooth the extremes comes from the design case's two years written every 6.5 hours alone; carried to the warmer targets it is a sensitivity.",
+ "reading_rule": "W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. A dimming is the share of the sunlight reaching the Moon that the fleet takes away, at the test's albedo, and the sunlight scale the GCM would fly for it is the design scale times what remains. Heat is in the 3-day means, each about a tenth of the lunar day, at the lowest model level, about 0.9 km up, and at 2 m. Land and water are the model's own mask; land figures are weighted by land area and the seas' by water area, quantiles and shares of time included. The day's means are those the Sun is up for more than half of; day_ and night_ figures in a climate are the land's in them, and a tenth's day and afternoon are the shares of its means in the day and in the day's afternoon. Each place's tenths are ranked by one quantity (by_wet_bulb, by_air) with the others over the same means. Deserts are land under 0.5 mm of rain a day. A climate's freezing_level_km and height_of_20c_km are where the land's mean profile, a land-area mean at each height, crosses 0 and 20 C; a run's freezing_level_over_land_km is the median of the land's column crossings. Pairs are [low, high] ends: the two fits for the feedback, the glow's two efficacies, the power screen's two ends and the light study's and Earth's models' ends for the costs; figures that carry several of them pair the ends that give the least and the most. glow_efficacy holds the corrected radiation's efficacy and how it was found, dimming in per cent of the design case's sunlight; gases_and_glow_w_m2 is the total the pair fixes, and with_the_gases_at_their_points the other split of it. dimming_curve gives the dimming for each ground temperature, negative where a target lies above a fit's balance. smoothing compares the land's heat in the 6.5-hour means with the 3-day means their elevens make over the same two years; ratio_above_the_median is the extreme's height above the median at 6.5 hours over its height in the 3-day means, and a target's at_6_5_hours applies it to that target's 99th percentiles. wet_bulb_per_kelvin_of_air is the change in the wet-bulb temperature for a kelvin of air at a fixed humidity, at a run's day medians at 2 m and the land's 5th and 95th percentile surface pressures.",
  "runs": {
   "design": {
    "run": "A28_corrected_970",
    "ground_k": 295.0230045582492,
    "rain_mm_day": 2.3132941177182866,
-   "land_rain_mm_day": 2.251244176727905,
-   "land_desert": 0.3759517526614269,
-   "wet_bulb_median_c": 15.961661424933025,
-   "wet_bulb_p99_c": 21.259568285636732,
+   "land_rain_mm_day": 1.9793775341177524,
+   "land_desert": 0.4228810439510795,
+   "wet_bulb_median_c": 15.911056301700494,
+   "wet_bulb_p99_c": 21.249172560758836,
    "wet_bulb_above_28": 0.0,
    "wet_bulb_above_31": 0.0,
    "wet_bulb_above_28_tropics": 0.0,
-   "land_air_median_c": 18.994775390625023,
-   "land_air_p99_c": 26.068018151403443,
-   "wet_bulb_2m_median_c": 16.693787518806804,
-   "wet_bulb_2m_p99_c": 21.94425078834609,
+   "land_air_median_c": 19.018273925781273,
+   "land_air_p99_c": 26.076929273105552,
+   "wet_bulb_2m_median_c": 16.646044758179865,
+   "wet_bulb_2m_p99_c": 21.93785934087677,
    "wet_bulb_2m_above_28": 0.0,
    "wet_bulb_2m_above_31": 0.0,
    "wet_bulb_2m_above_28_tropics": 0.0,
-   "land_air_2m_median_c": 20.416833496093773,
-   "land_air_2m_p99_c": 27.77281266615697,
-   "sea_median_c": 24.19448639309788,
-   "day_wet_bulb_2m_median_c": 17.276960951339337,
-   "day_wet_bulb_2m_p99_c": 22.28164362825662,
-   "day_land_air_2m_median_c": 22.236169433593773,
-   "day_land_air_2m_p99_c": 28.238719335446135,
-   "day_wet_bulb_median_c": 16.53238418388918,
-   "day_wet_bulb_p99_c": 21.602845836442743,
-   "day_land_air_median_c": 20.780725097656273,
-   "day_land_air_p99_c": 26.50224212575018,
-   "night_wet_bulb_2m_median_c": 16.206948457330164,
-   "night_wet_bulb_2m_p99_c": 21.004817558012444,
-   "night_land_air_2m_median_c": 19.544915771484398,
-   "night_land_air_2m_p99_c": 23.525426990328192,
-   "night_wet_bulb_median_c": 15.481037693366211,
-   "night_wet_bulb_p99_c": 20.28420054242101,
-   "night_land_air_median_c": 18.123834228515648,
-   "night_land_air_p99_c": 22.087012405785888,
+   "land_air_2m_median_c": 20.440484619140648,
+   "land_air_2m_p99_c": 27.80251137245035,
+   "sea_median_c": 24.124910118458846,
+   "day_wet_bulb_2m_median_c": 17.277443603552296,
+   "day_wet_bulb_2m_p99_c": 22.278035830175178,
+   "day_land_air_2m_median_c": 22.382775878906273,
+   "day_land_air_2m_p99_c": 28.26109892502864,
+   "day_wet_bulb_median_c": 16.52734797467542,
+   "day_wet_bulb_p99_c": 21.59854550858308,
+   "day_land_air_median_c": 20.920068359375023,
+   "day_land_air_p99_c": 26.503462454450823,
+   "night_wet_bulb_2m_median_c": 16.126066977977136,
+   "night_wet_bulb_2m_p99_c": 20.93362949429771,
+   "night_land_air_2m_median_c": 19.529351806640648,
+   "night_land_air_2m_p99_c": 23.384024865149428,
+   "night_wet_bulb_median_c": 15.397846706721698,
+   "night_wet_bulb_p99_c": 20.207716637089767,
+   "night_land_air_median_c": 18.109460449218773,
+   "night_land_air_p99_c": 21.949259826546474,
    "ladder": [
     {
      "height_km": 0.9,
-     "air_c": 19.584607667284843,
-     "pressure_atm": 1.1354984528458614
+     "air_c": 19.62296369702733,
+     "pressure_atm": 1.1378336156978948
     },
     {
      "height_km": 2,
-     "air_c": 18.811477690009383,
-     "pressure_atm": 1.1116299310484854
+     "air_c": 18.86932705276365,
+     "pressure_atm": 1.1139208848968591
     },
     {
      "height_km": 5,
-     "air_c": 16.4892830490229,
-     "pressure_atm": 1.0488075316543215
+     "air_c": 16.58525475180693,
+     "pressure_atm": 1.0509840615764714
     },
     {
      "height_km": 10,
-     "air_c": 11.836233732502194,
-     "pressure_atm": 0.9510201820164182
+     "air_c": 11.941152635567562,
+     "pressure_atm": 0.9530246300090676
     },
     {
      "height_km": 15,
-     "air_c": 7.16064844704789,
-     "pressure_atm": 0.8604018532444209
+     "air_c": 7.256622655413935,
+     "pressure_atm": 0.8622423561864544
     },
     {
      "height_km": 20,
-     "air_c": 2.509649252285328,
-     "pressure_atm": 0.7775091091346461
+     "air_c": 2.5993811258567234,
+     "pressure_atm": 0.7791983840349042
     },
     {
      "height_km": 25,
-     "air_c": -2.0989755648288337,
-     "pressure_atm": 0.7012275887232305
+     "air_c": -2.012067219541393,
+     "pressure_atm": 0.7027712264580674
     },
     {
      "height_km": 30,
-     "air_c": -6.999458740407476,
-     "pressure_atm": 0.6314775581722322
+     "air_c": -6.914135311124994,
+     "pressure_atm": 0.6328899294255841
     },
     {
      "height_km": 35,
-     "air_c": -12.469849602804231,
-     "pressure_atm": 0.5669865632637936
+     "air_c": -12.387953827161596,
+     "pressure_atm": 0.5682699119206785
     },
     {
      "height_km": 40,
-     "air_c": -17.940721602689223,
-     "pressure_atm": 0.5090796469781492
+     "air_c": -17.86203671104235,
+     "pressure_atm": 0.5102466503932441
     }
    ],
    "height_of_20c_km": null,
-   "freezing_level_km": 22.722774528060658,
+   "freezing_level_km": 22.81839991599463,
    "heat": {
     "land": {
      "wet_bulb": {
-      "median": 15.961661424933025,
-      "p99": 21.259568285636732,
-      "top": 23.830331651944334
+      "median": 15.911056301700494,
+      "p99": 21.249172560758836,
+      "top": 23.516851079052287
      },
      "above_28": 0.0,
      "above_31": 0.0,
      "air": {
-      "median": 18.994775390625023,
-      "p99": 26.068018151403443,
+      "median": 19.018273925781273,
+      "p99": 26.076929273105552,
       "top": 28.417932128906273
      },
-     "warmest_tenth": {
-      "wet_bulb": 18.708857551745126,
-      "air": 23.038959190099252
-     },
-     "coolest_tenth": {
-      "wet_bulb": 12.912354759971837,
-      "air": 17.147093722582593
+     "tenths": {
+      "by_wet_bulb": {
+       "warmest": {
+        "wet_bulb": 18.713731144118025,
+        "air": 21.630240676022375,
+        "ground": 23.652355366069038,
+        "day": 0.7960010843553127,
+        "afternoon": 0.5857347553859488
+       },
+       "coolest": {
+        "wet_bulb": 12.83976814750657,
+        "air": 18.18208970777015,
+        "ground": 17.946495566458207,
+        "day": 0.3386527608303698,
+        "afternoon": 0.05743921073197404
+       }
+      },
+      "by_air": {
+       "warmest": {
+        "wet_bulb": 17.54351440288852,
+        "air": 23.18868602054165,
+        "ground": 26.306695294905655,
+        "day": 0.9777440426932683,
+        "afternoon": 0.8118377795408461
+       },
+       "coolest": {
+        "wet_bulb": 14.72306755829407,
+        "air": 17.11872498771511,
+        "ground": 16.74084139439065,
+        "day": 0.17468416773893433,
+        "afternoon": 0.011818531284204157
+       }
+      }
      },
      "at_2_m": {
       "wet_bulb": {
-       "median": 16.693787518806804,
-       "p99": 21.94425078834609,
+       "median": 16.646044758179865,
+       "p99": 21.93785934087677,
        "top": 24.578427011715917
       },
       "above_28": 0.0,
       "above_31": 0.0,
       "air": {
-       "median": 20.416833496093773,
-       "p99": 27.77281266615697,
+       "median": 20.440484619140648,
+       "p99": 27.80251137245035,
        "top": 30.457208251953148
       },
-      "warmest_tenth": {
-       "wet_bulb": 19.42526038506538,
-       "air": 24.59981729087349
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 19.43321401289782,
+         "air": 23.150017842180986,
+         "ground": 23.71948176202316,
+         "day": 0.7989167916113435,
+         "afternoon": 0.5883101944408204
+        },
+        "coolest": {
+         "wet_bulb": 13.607541649893031,
+         "air": 19.598116971506922,
+         "ground": 17.92873634615771,
+         "day": 0.3368998656908126,
+         "afternoon": 0.056697720142058594
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 18.287536668906654,
+         "air": 24.76354911936612,
+         "ground": 26.353892439296793,
+         "day": 0.9779405403228618,
+         "afternoon": 0.8037823013720596
+        },
+        "coolest": {
+         "wet_bulb": 15.46904472852587,
+         "air": 18.530001269701255,
+         "ground": 16.75093894951445,
+         "day": 0.17536908481760843,
+         "afternoon": 0.011886975892891984
+        }
+       }
       },
-      "coolest_tenth": {
-       "wet_bulb": 13.678297564729698,
-       "air": 18.559084139591707
+      "air_down_the_dry_adiabat": {
+       "mean_k": 0.04128713403234329,
+       "sd_k": 0.08170782056106607,
+       "above_the_lowest_level_k": 1.454885878670554
       }
      },
-     "counted_by_cell": {
-      "wet_bulb": {
-       "median": 15.395771842664118,
-       "p99": 20.987262407175322
-      },
-      "above_28": 0.0,
-      "above_31": 0.0
-     },
      "day": {
-      "share_of_land_time": 0.5004032072362427,
+      "share_of_land_time": 0.49996868819262813,
       "lowest_level": {
        "wet_bulb": {
-        "median": 16.53238418388918,
-        "p99": 21.602845836442743,
-        "top": 23.830331651944334
+        "median": 16.52734797467542,
+        "p99": 21.59854550858308,
+        "top": 23.516851079052287
        },
        "air": {
-        "median": 20.780725097656273,
-        "p99": 26.50224212575018,
+        "median": 20.920068359375023,
+        "p99": 26.503462454450823,
         "top": 28.417932128906273
        },
        "above_28": 0.0,
@@ -186,34 +235,34 @@
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 17.276960951339337,
-        "p99": 22.28164362825662,
+        "median": 17.277443603552296,
+        "p99": 22.278035830175178,
         "top": 24.578427011715917
        },
        "air": {
-        "median": 22.236169433593773,
-        "p99": 28.238719335446135,
+        "median": 22.382775878906273,
+        "p99": 28.26109892502864,
         "top": 30.457208251953148
        },
        "above_28": 0.0,
        "above_31": 0.0
       },
       "czen_above": {
-       "times_cos_latitude": 0.07789597363763946,
-       "window_degrees": 36.0
+       "times_cos_latitude": 0.07857315082621794,
+       "window_degrees": 36.31827417442943
       }
      },
      "night": {
-      "share_of_land_time": 0.4995967927637574,
+      "share_of_land_time": 0.500031311807372,
       "lowest_level": {
        "wet_bulb": {
-        "median": 15.481037693366211,
-        "p99": 20.28420054242101,
-        "top": 23.265466308549946
+        "median": 15.397846706721698,
+        "p99": 20.207716637089767,
+        "top": 23.190675917572662
        },
        "air": {
-        "median": 18.123834228515648,
-        "p99": 22.087012405785888,
+        "median": 18.109460449218773,
+        "p99": 21.949259826546474,
         "top": 25.436761474609398
        },
        "above_28": 0.0,
@@ -221,410 +270,905 @@
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 16.206948457330164,
-        "p99": 21.004817558012444,
-        "top": 23.96696004905226
+        "median": 16.126066977977136,
+        "p99": 20.93362949429771,
+        "top": 23.828118389567976
        },
        "air": {
-        "median": 19.544915771484398,
-        "p99": 23.525426990328192,
+        "median": 19.529351806640648,
+        "p99": 23.384024865149428,
         "top": 26.955041503906273
        },
        "above_28": 0.0,
        "above_31": 0.0
       }
+     },
+     "readout_of_17_october": {
+      "wet_bulb": {
+       "median": 15.395771842664118,
+       "p99": 20.987262407175322
+      },
+      "above_28": 0.0,
+      "above_31": 0.0
+     },
+     "saturated": {
+      "capped_at_2_m": 0.0016802051226588834,
+      "supersaturated_lowest_level": 0.01673137945064389
+     },
+     "surface_pressure_bar": {
+      "p05": 1.1241044921875,
+      "p50": 1.179309326171875,
+      "p95": 1.206364501953125
      }
     },
     "coasts": {
      "wet_bulb": {
-      "median": 16.53695339063469,
-      "p99": 21.349833264717443,
-      "top": 23.830331651944334
+      "median": 16.461946949845295,
+      "p99": 21.298521915019418,
+      "top": 23.481103515581083
      },
      "above_28": 0.0,
      "above_31": 0.0,
      "air": {
-      "median": 19.295617675781273,
-      "p99": 26.13808653598283,
+      "median": 19.326013183593773,
+      "p99": 26.212356940344506,
       "top": 28.417932128906273
      },
-     "warmest_tenth": {
-      "wet_bulb": 19.086582652376293,
-      "air": 22.872474715370867
-     },
-     "coolest_tenth": {
-      "wet_bulb": 13.448428878931955,
-      "air": 17.48908297500769
+     "tenths": {
+      "by_wet_bulb": {
+       "warmest": {
+        "wet_bulb": 19.101597410027182,
+        "air": 21.752050242811663,
+        "ground": 23.851252494125312,
+        "day": 0.7971236475623227,
+        "afternoon": 0.6083292935349689
+       },
+       "coolest": {
+        "wet_bulb": 13.262570577327844,
+        "air": 18.41657632757439,
+        "ground": 18.232842732965654,
+        "day": 0.33838831422950466,
+        "afternoon": 0.05529335781416914
+       }
+      },
+      "by_air": {
+       "warmest": {
+        "wet_bulb": 17.901364828063063,
+        "air": 23.24597153399159,
+        "ground": 26.457303447771885,
+        "day": 0.9760647579170837,
+        "afternoon": 0.8307302174013103
+       },
+       "coolest": {
+        "wet_bulb": 15.12751280339963,
+        "air": 17.393665788405603,
+        "ground": 17.09469157068836,
+        "day": 0.19422873566561333,
+        "afternoon": 0.013128255515657149
+       }
+      }
      },
      "at_2_m": {
       "wet_bulb": {
-       "median": 17.26102022027796,
-       "p99": 22.03747345112755,
+       "median": 17.19151342408089,
+       "p99": 21.988714369810587,
        "top": 24.578427011715917
       },
       "above_28": 0.0,
       "above_31": 0.0,
       "air": {
-       "median": 20.718041992187523,
-       "p99": 27.827569945333114,
+       "median": 20.74975813684855,
+       "p99": 27.939606587859952,
        "top": 30.457208251953148
       },
-      "warmest_tenth": {
-       "wet_bulb": 19.798686678652224,
-       "air": 24.430154413828724
-      },
-      "coolest_tenth": {
-       "wet_bulb": 14.20574878070941,
-       "air": 18.89679999646585
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 19.818424555538822,
+         "air": 23.26564296446612,
+         "ground": 23.909324538858943,
+         "day": 0.7989114094055043,
+         "afternoon": 0.6095999056869119
+        },
+        "coolest": {
+         "wet_bulb": 14.024175515755767,
+         "air": 19.830171738988604,
+         "ground": 18.20964132705739,
+         "day": 0.3357948646160994,
+         "afternoon": 0.05424884917366237
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 18.640797894174003,
+         "air": 24.83033262853353,
+         "ground": 26.517540493711124,
+         "day": 0.9765070102508094,
+         "afternoon": 0.8206688325250803
+        },
+        "coolest": {
+         "wet_bulb": 15.86983755954822,
+         "air": 18.801317985519667,
+         "ground": 17.102925407793965,
+         "day": 0.19436201903503347,
+         "afternoon": 0.013207995315491265
+        }
+       }
       }
      }
     },
     "bands": {
      "0-15": {
       "wet_bulb": {
-       "median": 17.418950562221443,
-       "p99": 21.82193136144219,
-       "top": 23.830331651944334
+       "median": 17.589046131577874,
+       "p99": 21.841379847807712,
+       "top": 23.516851079052287
       },
       "above_28": 0.0,
       "above_31": 0.0,
       "air": {
-       "median": 19.471673583984398,
-       "p99": 25.642012341914477,
+       "median": 19.623584865168525,
+       "p99": 25.649584242649276,
        "top": 28.137292480468773
       },
-      "warmest_tenth": {
-       "wet_bulb": 20.142066684881275,
-       "air": 22.821127303622227
-      },
-      "coolest_tenth": {
-       "wet_bulb": 13.689610053701946,
-       "air": 17.44680974566381
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 20.37304761986388,
+         "air": 22.154761801306524,
+         "ground": 23.931397762788407,
+         "day": 0.9009959982021459,
+         "afternoon": 0.7632586916878591
+        },
+        "coolest": {
+         "wet_bulb": 13.674842672629156,
+         "air": 18.32426447175144,
+         "ground": 17.668095535463056,
+         "day": 0.3261014834196006,
+         "afternoon": 0.026935372606474047
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 19.435518607435597,
+         "air": 23.145295094027002,
+         "ground": 25.540613594713662,
+         "day": 0.9920466850591471,
+         "afternoon": 0.8750693986031183
+        },
+        "coolest": {
+         "wet_bulb": 15.421841838966248,
+         "air": 17.459780091387007,
+         "ground": 16.97575898362777,
+         "day": 0.21384088066048312,
+         "afternoon": 0.0045181890172426705
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 18.13506029011549,
-        "p99": 22.49749852964382,
+        "median": 18.3074484221196,
+        "p99": 22.522117583722906,
         "top": 24.578427011715917
        },
        "above_28": 0.0,
        "above_31": 0.0,
        "air": {
-        "median": 20.893244297490565,
-        "p99": 27.28873283647983,
+        "median": 21.0463578808626,
+        "p99": 27.320684368306694,
         "top": 30.013757324218773
        },
-       "warmest_tenth": {
-        "wet_bulb": 20.83282508096827,
-        "air": 24.33224956829061
-       },
-       "coolest_tenth": {
-        "wet_bulb": 14.440975583869587,
-        "air": 18.85720322067933
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 21.064862911744182,
+          "air": 23.598535189822684,
+          "ground": 23.92785786354353,
+          "day": 0.8981228802014843,
+          "afternoon": 0.7627235076500194
+         },
+         "coolest": {
+          "wet_bulb": 14.42762219813248,
+          "air": 19.739936666956766,
+          "ground": 17.65996414123268,
+          "day": 0.32606124117671853,
+          "afternoon": 0.026472986932602666
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 20.121493931059316,
+          "air": 24.67004539708751,
+          "ground": 25.605200229902223,
+          "day": 0.992353436650768,
+          "afternoon": 0.8655204852259041
+         },
+         "coolest": {
+          "wet_bulb": 16.16652089948115,
+          "air": 18.86887355867446,
+          "ground": 16.98766723390337,
+          "day": 0.21574234092781244,
+          "afternoon": 0.004870656092257483
+         }
+        }
        }
       }
      },
      "15-30": {
       "wet_bulb": {
-       "median": 17.144343114554168,
-       "p99": 21.291421460774167,
+       "median": 17.206079667215363,
+       "p99": 21.256902562442733,
        "top": 23.243005371049946
       },
       "above_28": 0.0,
       "above_31": 0.0,
       "air": {
-       "median": 19.46548158627507,
-       "p99": 26.53256111090438,
+       "median": 19.514936641808408,
+       "p99": 26.528800730455867,
        "top": 28.397821044921898
       },
-      "warmest_tenth": {
-       "wet_bulb": 19.889995451323756,
-       "air": 23.473363217100534
-      },
-      "coolest_tenth": {
-       "wet_bulb": 13.481012533746219,
-       "air": 17.512957367833632
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 20.001551624595294,
+         "air": 22.28396255138119,
+         "ground": 24.44607750292697,
+         "day": 0.8483812528987732,
+         "afternoon": 0.6876981747256318
+        },
+        "coolest": {
+         "wet_bulb": 13.41551009562512,
+         "air": 18.440001451519027,
+         "ground": 18.014763846083305,
+         "day": 0.3285265328136034,
+         "afternoon": 0.03614319765788164
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 18.81010041447433,
+         "air": 23.69409234092892,
+         "ground": 26.920247364557614,
+         "day": 0.9926644117244444,
+         "afternoon": 0.8619946442709451
+        },
+        "coolest": {
+         "wet_bulb": 15.287970455950727,
+         "air": 17.480214027143546,
+         "ground": 17.047805017664047,
+         "day": 0.1635968495835848,
+         "afternoon": 0.0032575168055473174
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 17.86612078551876,
-        "p99": 21.976184409132006,
+        "median": 17.929447163137503,
+        "p99": 21.94718002467556,
         "top": 24.443917892048034
        },
        "above_28": 0.0,
        "above_31": 0.0,
        "air": {
-        "median": 20.88528632714653,
-        "p99": 28.251281578566193,
+        "median": 20.935081692602566,
+        "p99": 28.270929870364277,
         "top": 30.457208251953148
        },
-       "warmest_tenth": {
-        "wet_bulb": 20.595482469276703,
-        "air": 25.043689372629053
-       },
-       "coolest_tenth": {
-        "wet_bulb": 14.238518891991031,
-        "air": 18.923101100500073
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 20.71054498735314,
+          "air": 23.76945642582299,
+          "ground": 24.473683706679257,
+          "day": 0.8459729047502001,
+          "afternoon": 0.6871863113703169
+         },
+         "coolest": {
+          "wet_bulb": 14.174982923477344,
+          "air": 19.85519539830867,
+          "ground": 17.990750429914957,
+          "day": 0.3261012422924201,
+          "afternoon": 0.03528270573367304
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 19.537728346002783,
+          "air": 25.286313973572398,
+          "ground": 26.99048896980363,
+          "day": 0.9926367624487122,
+          "afternoon": 0.8509019663303878
+         },
+         "coolest": {
+          "wet_bulb": 16.036446174840496,
+          "air": 18.889176427469412,
+          "ground": 17.058053767660155,
+          "day": 0.16405146431990608,
+          "afternoon": 0.003480304427701231
+         }
+        }
        }
       }
      },
      "30-45": {
       "wet_bulb": {
-       "median": 16.156065135220956,
-       "p99": 20.54755788192571,
+       "median": 16.1310401554119,
+       "p99": 20.5788417206022,
        "top": 23.14839997647323
       },
       "above_28": 0.0,
       "above_31": 0.0,
       "air": {
-       "median": 19.118320040056208,
-       "p99": 26.48704051173203,
+       "median": 19.154504394531273,
+       "p99": 26.513174653997716,
        "top": 28.417932128906273
       },
-      "warmest_tenth": {
-       "wet_bulb": 18.857974866980044,
-       "air": 23.930325844172238
-      },
-      "coolest_tenth": {
-       "wet_bulb": 12.852270824163314,
-       "air": 17.069409543430798
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 18.894618760408733,
+         "air": 22.262349472646747,
+         "ground": 24.740572483538738,
+         "day": 0.8278775747674586,
+         "afternoon": 0.6339749520427302
+        },
+        "coolest": {
+         "wet_bulb": 12.795930645725731,
+         "air": 18.17220887832589,
+         "ground": 17.907523123885365,
+         "day": 0.32493375570500105,
+         "afternoon": 0.037052485156978156
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 17.61609456204013,
+         "air": 24.105562927579708,
+         "ground": 27.911418355216433,
+         "day": 0.9989494264588675,
+         "afternoon": 0.8257123643028523
+        },
+        "coolest": {
+         "wet_bulb": 14.670838784946849,
+         "air": 17.04826719429595,
+         "ground": 16.57484334625865,
+         "day": 0.12470975505030343,
+         "afternoon": 0.002783739458949609
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 16.893004989023563,
-        "p99": 21.244042029350638,
+        "median": 16.8718850976155,
+        "p99": 21.273672597646456,
         "top": 24.038638485259185
        },
        "above_28": 0.0,
        "above_31": 0.0,
        "air": {
-        "median": 20.542871093750023,
-        "p99": 28.258240779914853,
+        "median": 20.579034423828148,
+        "p99": 28.30258329852586,
         "top": 30.220147705078148
        },
-       "warmest_tenth": {
-        "wet_bulb": 19.586199691128027,
-        "air": 25.564233194253223
-       },
-       "coolest_tenth": {
-        "wet_bulb": 13.620897052168408,
-        "air": 18.48248807106477
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 19.62692915381638,
+          "air": 23.84542493291841,
+          "ground": 24.85466262844994,
+          "day": 0.8326901667627374,
+          "afternoon": 0.6366543726653145
+         },
+         "coolest": {
+          "wet_bulb": 13.5662351473355,
+          "air": 19.589033658575364,
+          "ground": 17.88200667507903,
+          "day": 0.3224080050394585,
+          "afternoon": 0.036197726677379194
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 18.384052574738426,
+          "air": 25.76105356990033,
+          "ground": 27.977790854928283,
+          "day": 0.9993947015005469,
+          "afternoon": 0.8144784061652488
+         },
+         "coolest": {
+          "wet_bulb": 15.416337472910476,
+          "air": 18.460385857108918,
+          "ground": 16.580770735618493,
+          "day": 0.12430941194384272,
+          "afternoon": 0.002956620342124275
+         }
+        }
        }
       }
      },
      "45-60": {
       "wet_bulb": {
-       "median": 15.150878510424393,
-       "p99": 18.267670633933175,
+       "median": 15.128360794681361,
+       "p99": 18.261001042817387,
        "top": 21.895022297482342
       },
       "above_28": 0.0,
       "above_31": 0.0,
       "air": {
-       "median": 18.816857910156273,
-       "p99": 25.97863399572562,
+       "median": 18.805352783203148,
+       "p99": 25.973291134706987,
        "top": 27.778985595703148
       },
-      "warmest_tenth": {
-       "wet_bulb": 17.305474048984305,
-       "air": 23.78589656227215
-      },
-      "coolest_tenth": {
-       "wet_bulb": 12.305827716323742,
-       "air": 16.809712199971848
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 17.293840473144833,
+         "air": 21.63056356466339,
+         "ground": 23.887730101804515,
+         "day": 0.7257454690086397,
+         "afternoon": 0.42315504571108015
+        },
+        "coolest": {
+         "wet_bulb": 12.276974978593433,
+         "air": 18.06060481301418,
+         "ground": 18.154196455638278,
+         "day": 0.3336075625762768,
+         "afternoon": 0.06802399632888773
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 16.127106092093225,
+         "air": 23.812753179316786,
+         "ground": 27.62579673822637,
+         "day": 0.9910276403459535,
+         "afternoon": 0.8222550277557826
+        },
+        "coolest": {
+         "wet_bulb": 14.211883133137734,
+         "air": 16.798028923380702,
+         "ground": 16.375256492137254,
+         "day": 0.1458296979860163,
+         "afternoon": 0.00307767232472916
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 15.900132959257377,
-        "p99": 19.00414569972393,
+        "median": 15.876396712644715,
+        "p99": 18.998007372383412,
         "top": 22.555273398934958
        },
        "above_28": 0.0,
        "above_31": 0.0,
        "air": {
-        "median": 20.24554679385729,
-        "p99": 27.655749644321237,
+        "median": 20.23343120948593,
+        "p99": 27.66003606460876,
         "top": 29.444665527343773
        },
-       "warmest_tenth": {
-        "wet_bulb": 18.050026340556336,
-        "air": 25.411680988364164
-       },
-       "coolest_tenth": {
-        "wet_bulb": 13.083172382257093,
-        "air": 18.22357134769998
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 18.040011682009183,
+          "air": 23.261752091263908,
+          "ground": 24.0657322330623,
+          "day": 0.7393875919189502,
+          "afternoon": 0.4331676748493082
+         },
+         "coolest": {
+          "wet_bulb": 13.054882033238968,
+          "air": 19.475144636995378,
+          "ground": 18.124766997106104,
+          "day": 0.33001063404088365,
+          "afternoon": 0.06672743066761348
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 16.927223224128465,
+          "air": 25.445485618454924,
+          "ground": 27.649217778214275,
+          "day": 0.9913288342950726,
+          "afternoon": 0.8172140698600419
+         },
+         "coolest": {
+          "wet_bulb": 14.955032133722389,
+          "air": 18.21149323061127,
+          "ground": 16.385742593569855,
+          "day": 0.14600464257227036,
+          "afternoon": 0.0028975961164525374
+         }
+        }
        }
       }
      },
      "60-90": {
       "wet_bulb": {
-       "median": 14.385699418239831,
-       "p99": 17.394745130598437,
+       "median": 14.371670186745089,
+       "p99": 17.384771000460663,
        "top": 19.637123912552966
       },
       "above_28": 0.0,
       "above_31": 0.0,
       "air": {
-       "median": 18.168267822265648,
-       "p99": 23.41128970635048,
+       "median": 18.155633544921898,
+       "p99": 23.420940140855357,
        "top": 25.052209472656273
       },
-      "warmest_tenth": {
-       "wet_bulb": 16.41319173355997,
-       "air": 20.864371712412215
-      },
-      "coolest_tenth": {
-       "wet_bulb": 11.771461387446452,
-       "air": 16.740163349800667
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 16.403202492767225,
+         "air": 19.413223565183014,
+         "ground": 20.799623903089728,
+         "day": 0.6291820696165729,
+         "afternoon": 0.34665812202457996
+        },
+        "coolest": {
+         "wet_bulb": 11.7555655746609,
+         "air": 17.876115038964038,
+         "ground": 18.107271519024575,
+         "day": 0.3901453271986595,
+         "afternoon": 0.13717482705515596
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 15.053692975685154,
+         "air": 20.8755399260045,
+         "ground": 23.26909511015674,
+         "day": 0.9001969067919615,
+         "afternoon": 0.6423237354148315
+        },
+        "coolest": {
+         "wet_bulb": 13.801187941878304,
+         "air": 16.724414081284323,
+         "ground": 16.72780583505696,
+         "day": 0.22589033602930791,
+         "afternoon": 0.05212156637879079
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 15.130486747073338,
-        "p99": 18.117982345629823,
+        "median": 15.11655816081239,
+        "p99": 18.10890094686944,
         "top": 20.36219255756197
        },
        "above_28": 0.0,
        "above_31": 0.0,
        "air": {
-        "median": 19.59033636659446,
-        "p99": 24.940777718801442,
+        "median": 19.578240966796898,
+        "p99": 24.953971042236425,
         "top": 26.654687500000023
        },
-       "warmest_tenth": {
-        "wet_bulb": 17.136110955559253,
-        "air": 22.323566812892945
-       },
-       "coolest_tenth": {
-        "wet_bulb": 12.554206635926198,
-        "air": 18.153190846939868
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 17.126582124311536,
+          "air": 20.870022068612165,
+          "ground": 20.823061661437755,
+          "day": 0.6312589921758885,
+          "afternoon": 0.34835264714925773
+         },
+         "coolest": {
+          "wet_bulb": 12.538537687512783,
+          "air": 19.294050890702827,
+          "ground": 18.104583552283284,
+          "day": 0.3895994627458439,
+          "afternoon": 0.13690356757264668
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 15.80431715830438,
+          "air": 22.33682674338576,
+          "ground": 23.27008993830634,
+          "day": 0.9000054489544153,
+          "afternoon": 0.6401844154985113
+         },
+         "coolest": {
+          "wet_bulb": 14.550412659411192,
+          "air": 18.13755080161041,
+          "ground": 16.740174037694285,
+          "day": 0.22701659289151602,
+          "afternoon": 0.05176733354254048
+         }
+        }
        }
       }
      }
     },
     "below_1_km": {
      "wet_bulb": {
-      "median": 17.1689640663884,
-      "p99": 21.798714886878166,
-      "top": 23.830331651944334
+      "median": 17.09450662633838,
+      "p99": 21.777616769704235,
+      "top": 23.516851079052287
      },
      "above_28": 0.0,
      "above_31": 0.0,
      "air": {
-      "median": 20.233841559917767,
-      "p99": 26.71931352484549,
+      "median": 20.14969042261169,
+      "p99": 26.741157352040528,
       "top": 28.417932128906273
      },
-     "warmest_tenth": {
-      "wet_bulb": 19.708227159251937,
-      "air": 24.54125789764149
-     },
-     "coolest_tenth": {
-      "wet_bulb": 13.964819709957599,
-      "air": 17.977264237480455
+     "tenths": {
+      "by_wet_bulb": {
+       "warmest": {
+        "wet_bulb": 19.671783852259743,
+        "air": 23.03755859752159,
+        "ground": 25.57632038376692,
+        "day": 0.8272527699498934,
+        "afternoon": 0.6431701058241195
+       },
+       "coolest": {
+        "wet_bulb": 13.875463021319351,
+        "air": 18.873033991779792,
+        "ground": 19.327233638384946,
+        "day": 0.312636604132498,
+        "afternoon": 0.04437480302067705
+       }
+      },
+      "by_air": {
+       "warmest": {
+        "wet_bulb": 18.564956868757108,
+        "air": 24.56859482703929,
+        "ground": 28.100510949544123,
+        "day": 0.989942827784902,
+        "afternoon": 0.8751565031258476
+       },
+       "coolest": {
+        "wet_bulb": 15.529134443085471,
+        "air": 17.886959816278566,
+        "ground": 18.112439350358137,
+        "day": 0.17890505678749008,
+        "afternoon": 0.0035044946785515647
+       }
+      }
      },
      "at_2_m": {
       "wet_bulb": {
-       "median": 17.901918159450453,
-       "p99": 22.478401406038138,
+       "median": 17.83159175991508,
+       "p99": 22.459447428082097,
        "top": 24.578427011715917
       },
       "above_28": 0.0,
       "above_31": 0.0,
       "air": {
-       "median": 21.662256717351536,
-       "p99": 28.46485983121501,
+       "median": 21.5769649503473,
+       "p99": 28.500192785311107,
        "top": 30.457208251953148
       },
-      "warmest_tenth": {
-       "wet_bulb": 20.427684667024394,
-       "air": 26.143914570526988
-      },
-      "coolest_tenth": {
-       "wet_bulb": 14.723419260416403,
-       "air": 19.390360799647688
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 20.395117780936786,
+         "air": 24.601887978948398,
+         "ground": 25.659919241592302,
+         "day": 0.8315242093319507,
+         "afternoon": 0.6468888160955998
+        },
+        "coolest": {
+         "wet_bulb": 14.635253253170033,
+         "air": 20.287150780689633,
+         "ground": 19.301137538736427,
+         "day": 0.3098026179106084,
+         "afternoon": 0.04305590679720311
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 19.312901030331698,
+         "air": 26.18779215673296,
+         "ground": 28.168026135571143,
+         "day": 0.9906596933198208,
+         "afternoon": 0.8641004021373905
+        },
+        "coolest": {
+         "wet_bulb": 16.26590390184216,
+         "air": 19.298436835236238,
+         "ground": 18.11619271040358,
+         "day": 0.1783963930417694,
+         "afternoon": 0.003472976414719141
+        }
+       }
       }
      }
     },
     "from_4_km": {
      "wet_bulb": {
-      "median": 15.451226086052767,
-      "p99": 18.86080202774855,
+      "median": 15.323967444295633,
+      "p99": 19.015178615075637,
       "top": 20.648440142757238
      },
      "above_28": 0.0,
      "above_31": 0.0,
      "air": {
-      "median": 17.52134582328844,
-      "p99": 21.957695607821073,
-      "top": 24.639001464843773
+      "median": 17.465325927734398,
+      "p99": 22.161358245947085,
+      "top": 24.258508300781273
      },
-     "warmest_tenth": {
-      "wet_bulb": 17.41634575245112,
-      "air": 19.68916001823475
-     },
-     "coolest_tenth": {
-      "wet_bulb": 12.278777485343385,
-      "air": 16.14122929032981
+     "tenths": {
+      "by_wet_bulb": {
+       "warmest": {
+        "wet_bulb": 17.501605173545034,
+        "air": 18.88209285186392,
+        "ground": 20.195667775114245,
+        "day": 0.8168273046394341,
+        "afternoon": 0.589490739423496
+       },
+       "coolest": {
+        "wet_bulb": 11.943879626261507,
+        "air": 16.975884028616363,
+        "ground": 15.080274799662819,
+        "day": 0.333667880728801,
+        "afternoon": 0.04593237817113389
+       }
+      },
+      "by_air": {
+       "warmest": {
+        "wet_bulb": 16.476944566565194,
+        "air": 19.968827191589035,
+        "ground": 22.11712452496007,
+        "day": 0.9658708228922012,
+        "afternoon": 0.7277461235082624
+       },
+       "coolest": {
+        "wet_bulb": 14.138233551904042,
+        "air": 15.932453906864444,
+        "ground": 14.47761043770764,
+        "day": 0.17802030025091536,
+        "afternoon": 0.030582329530288915
+       }
+      }
      },
      "at_2_m": {
       "wet_bulb": {
-       "median": 16.165137021250814,
-       "p99": 19.55683654277356,
+       "median": 16.047054837346316,
+       "p99": 19.712962000130442,
        "top": 21.307176196363685
       },
       "above_28": 0.0,
       "above_31": 0.0,
       "air": {
-       "median": 18.933702894355093,
-       "p99": 23.55275773284535,
-       "top": 26.125604248046898
+       "median": 18.874643986126184,
+       "p99": 23.807742689740806,
+       "top": 25.899468994140648
       },
-      "warmest_tenth": {
-       "wet_bulb": 18.120898104409946,
-       "air": 21.156747503519107
-      },
-      "coolest_tenth": {
-       "wet_bulb": 13.0337729139402,
-       "air": 17.539620382302886
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 18.212214377377727,
+         "air": 20.2838495633032,
+         "ground": 20.16807266017632,
+         "day": 0.8096562936277455,
+         "afternoon": 0.586301558688782
+        },
+        "coolest": {
+         "wet_bulb": 12.704313975433548,
+         "air": 18.38116897662676,
+         "ground": 15.071048398919835,
+         "day": 0.33302974000064967,
+         "afternoon": 0.04552412818375886
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 17.187102954436188,
+         "air": 21.45919916906154,
+         "ground": 22.146615297958782,
+         "day": 0.9648492949636533,
+         "afternoon": 0.7206169550680673
+        },
+        "coolest": {
+         "wet_bulb": 14.908293419169032,
+         "air": 17.325606744571175,
+         "ground": 14.508983798607531,
+         "day": 0.18185002284536744,
+         "afternoon": 0.03284677982562589
+        }
+       }
       }
      }
     }
    },
    "seas": {
     "all": {
-     "median": 24.19448639309788,
-     "p99": 27.675033506240457,
+     "median": 24.124910118458846,
+     "p99": 27.651751621918258,
      "top": 29.077935791015648
     },
     "bands": {
      "0-15": {
-      "median": 26.033258056640648,
-      "p99": 28.242064571178666,
+      "median": 25.819830943980246,
+      "p99": 28.153006998851502,
       "top": 29.077935791015648
      },
      "15-30": {
-      "median": 25.612573242187523,
-      "p99": 27.164025878906273,
+      "median": 25.535959255681522,
+      "p99": 27.135757060242906,
       "top": 27.938806152343773
      },
      "30-45": {
-      "median": 24.555383300781273,
-      "p99": 26.221490478515648,
+      "median": 24.440696164248923,
+      "p99": 26.192033981444144,
       "top": 26.967156982421898
      },
      "45-60": {
-      "median": 22.358056640625023,
-      "p99": 24.02881292057842,
+      "median": 22.364526367187523,
+      "p99": 24.022796579460284,
       "top": 24.506341552734398
      },
      "60-90": {
-      "median": 20.438867187500023,
-      "p99": 21.92918693642622,
+      "median": 20.38082116075783,
+      "p99": 21.907704565665558,
       "top": 22.570703125000023
      }
     }
    },
-   "freezing_level_over_land_km": 22.918971889761846,
+   "land": {
+    "all": {
+     "desert": 0.4228810439510795,
+     "rain_mm_day": 1.9793775341177524,
+     "ground_c": 20.53415611978827
+    },
+    "bands": {
+     "0-15": {
+      "desert": 0.0,
+      "rain_mm_day": 4.616028810903041,
+      "ground_c": 20.47858453954263
+     },
+     "15-30": {
+      "desert": 0.012719063174424516,
+      "rain_mm_day": 2.7778183256581577,
+      "ground_c": 20.966667480752495
+     },
+     "30-45": {
+      "desert": 0.378042687368968,
+      "rain_mm_day": 1.4221317816434513,
+      "ground_c": 21.036306613600356
+     },
+     "45-60": {
+      "desert": 0.8648238395363994,
+      "rain_mm_day": 0.2267130629013775,
+      "ground_c": 20.763363206053576
+     },
+     "60-75": {
+      "desert": 1.0,
+      "rain_mm_day": 0.05604252870747682,
+      "ground_c": 19.369462843113546
+     },
+     "75-90": {
+      "desert": 1.0,
+      "rain_mm_day": 0.044055468475946304,
+      "ground_c": 18.903089951808553
+     }
+    },
+    "heights": {
+     "below_2_km": {
+      "desert": 0.47493300463532384,
+      "rain_mm_day": 1.4488463395715163,
+      "ground_c": 21.39317897180945
+     },
+     "2_to_4_km": {
+      "desert": 0.388369448870862,
+      "rain_mm_day": 2.3309988939454627,
+      "ground_c": 19.489737415761937
+     },
+     "from_4_km": {
+      "desert": 0.09275172440388446,
+      "rain_mm_day": 5.344809518257314,
+      "ground_c": 17.387891278156246
+     }
+    }
+   },
+   "land_and_water": {
+    "land_cells": 1289,
+    "water_share_of_area": 0.4005176130473503,
+    "water_cells_with_land_fraction_above_half": 166
+   },
+   "freezing_level_over_land_km": 22.968438801825705,
+   "land_columns_that_never_freeze": 0.0,
    "top_of_air_w_m2": {
     "incoming": 312.9718304707239,
     "reflected": 84.43664933827829,
@@ -639,138 +1183,261 @@
    "run": "A28_corrected_970_lw_ice",
    "ground_k": 306.5234791232695,
    "rain_mm_day": 3.3185989040159947,
-   "land_rain_mm_day": 3.339485646051127,
-   "land_desert": 0.18865215009555975,
-   "wet_bulb_median_c": 26.29000138890549,
-   "wet_bulb_p99_c": 31.300575016523577,
-   "wet_bulb_above_28": 0.23616873123715873,
-   "wet_bulb_above_31": 0.015553907014108238,
-   "wet_bulb_above_28_tropics": 0.3676974117386847,
-   "land_air_median_c": 32.06813964843752,
-   "land_air_p99_c": 37.51940340941939,
-   "wet_bulb_2m_median_c": 26.90629883020774,
-   "wet_bulb_2m_p99_c": 31.87511504547608,
-   "wet_bulb_2m_above_28": 0.3207834216980595,
-   "wet_bulb_2m_above_31": 0.033021523989361055,
-   "wet_bulb_2m_above_28_tropics": 0.46177689039668596,
-   "land_air_2m_median_c": 33.53780517578127,
-   "land_air_2m_p99_c": 39.21505126953127,
-   "sea_median_c": 34.61846313476565,
-   "day_wet_bulb_2m_median_c": 27.073226791787285,
-   "day_wet_bulb_2m_p99_c": 32.06458243370682,
-   "day_land_air_2m_median_c": 34.55776367187502,
-   "day_land_air_2m_p99_c": 39.62013666396697,
-   "day_wet_bulb_median_c": 26.45343236161586,
-   "day_wet_bulb_p99_c": 31.493335315762263,
-   "day_land_air_median_c": 33.077102944871505,
-   "day_land_air_p99_c": 37.89554980217297,
-   "night_wet_bulb_2m_median_c": 26.750801408252546,
-   "night_wet_bulb_2m_p99_c": 31.639977255716214,
-   "night_land_air_2m_median_c": 32.8859802246094,
-   "night_land_air_2m_p99_c": 35.961635423796245,
-   "night_wet_bulb_median_c": 26.138951389230183,
-   "night_wet_bulb_p99_c": 31.06042221256198,
-   "night_land_air_median_c": 31.417779541015648,
-   "night_land_air_p99_c": 34.47823695945776,
+   "land_rain_mm_day": 2.9396616277950023,
+   "land_desert": 0.20145539966735823,
+   "wet_bulb_median_c": 26.310594687577016,
+   "wet_bulb_p99_c": 31.29259847146381,
+   "wet_bulb_above_28": 0.23791017318138402,
+   "wet_bulb_above_31": 0.015406694219353877,
+   "wet_bulb_above_28_tropics": 0.3914595747515153,
+   "land_air_median_c": 32.12618408203127,
+   "land_air_p99_c": 37.55708824588651,
+   "wet_bulb_2m_median_c": 26.927866862527434,
+   "wet_bulb_2m_p99_c": 31.86694487066023,
+   "wet_bulb_2m_above_28": 0.32353203436162176,
+   "wet_bulb_2m_above_31": 0.032926561051115556,
+   "wet_bulb_2m_above_28_tropics": 0.4907912776464734,
+   "land_air_2m_median_c": 33.59600219726565,
+   "land_air_2m_p99_c": 39.26386459353617,
+   "sea_median_c": 34.45217285156252,
+   "day_wet_bulb_2m_median_c": 27.10475454571064,
+   "day_wet_bulb_2m_p99_c": 32.06787181747413,
+   "day_land_air_2m_median_c": 34.67717895507815,
+   "day_land_air_2m_p99_c": 39.66325127372134,
+   "day_wet_bulb_median_c": 26.482744693126975,
+   "day_wet_bulb_p99_c": 31.49585802064787,
+   "day_land_air_median_c": 33.19307861328127,
+   "day_land_air_p99_c": 37.92966529977799,
+   "night_wet_bulb_2m_median_c": 26.76333980818699,
+   "night_wet_bulb_2m_p99_c": 31.615049891811555,
+   "night_land_air_2m_median_c": 32.9167419433594,
+   "night_land_air_2m_p99_c": 35.94787054920408,
+   "night_wet_bulb_median_c": 26.151317422711983,
+   "night_wet_bulb_p99_c": 31.036666875436158,
+   "night_land_air_median_c": 31.448687607323,
+   "night_land_air_p99_c": 34.463705172959365,
    "ladder": [
     {
      "height_km": 0.9,
-     "air_c": 32.20084007947827,
-     "pressure_atm": 1.1364680427929494
+     "air_c": 32.30489123039098,
+     "pressure_atm": 1.13870124998037
     },
     {
      "height_km": 2,
-     "air_c": 31.264360534553703,
-     "pressure_atm": 1.1135366411142837
+     "air_c": 31.38514362745326,
+     "pressure_atm": 1.1157338583892185
     },
     {
      "height_km": 5,
-     "air_c": 28.413115476700455,
-     "pressure_atm": 1.0530688617942474
+     "air_c": 28.563755518127095,
+     "pressure_atm": 1.0551712805051503
     },
     {
      "height_km": 10,
-     "air_c": 22.148366881892912,
-     "pressure_atm": 0.9583161263752156
+     "air_c": 22.27123512933008,
+     "pressure_atm": 0.9602678504306046
     },
     {
      "height_km": 15,
-     "air_c": 17.31966608619831,
-     "pressure_atm": 0.8700550962522212
+     "air_c": 17.42091963296491,
+     "pressure_atm": 0.8718560936945325
     },
     {
      "height_km": 20,
-     "air_c": 12.806258864846427,
-     "pressure_atm": 0.789253738066914
+     "air_c": 12.892165566374103,
+     "pressure_atm": 0.7909135690483032
     },
     {
      "height_km": 25,
-     "air_c": 8.949640091960077,
-     "pressure_atm": 0.7144520908469126
+     "air_c": 9.034122686199396,
+     "pressure_atm": 0.7159729987730036
     },
     {
      "height_km": 30,
-     "air_c": 5.029864697258745,
-     "pressure_atm": 0.6464548148067591
+     "air_c": 5.113667958135579,
+     "pressure_atm": 0.6478518288909896
     },
     {
      "height_km": 35,
-     "air_c": 0.6824155428905669,
-     "pressure_atm": 0.5831513604824591
+     "air_c": 0.762585055124589,
+     "pressure_atm": 0.5844257334764426
     },
     {
      "height_km": 40,
-     "air_c": -3.6650336114777247,
-     "pressure_atm": 0.526046923145186
+     "air_c": -3.5884978478863445,
+     "pressure_atm": 0.5272092642043866
     }
    ],
-   "height_of_20c_km": 12.224580661332809,
-   "freezing_level_km": 35.78484591614473,
+   "height_of_20c_km": 12.341327209572393,
+   "freezing_level_km": 35.87631639309479,
    "heat": {
     "land": {
      "wet_bulb": {
-      "median": 26.29000138890549,
-      "p99": 31.300575016523577,
+      "median": 26.310594687577016,
+      "p99": 31.29259847146381,
       "top": 34.026950949282764
      },
-     "above_28": 0.23616873123715873,
-     "above_31": 0.015553907014108238,
+     "above_28": 0.23791017318138402,
+     "above_31": 0.015406694219353877,
      "air": {
-      "median": 32.06813964843752,
-      "p99": 37.51940340941939,
+      "median": 32.12618408203127,
+      "p99": 37.55708824588651,
       "top": 40.40969238281252
      },
-     "warmest_tenth": {
-      "wet_bulb": 29.200693562077884,
-      "air": 35.07900360975342
-     },
-     "coolest_tenth": {
-      "wet_bulb": 22.649322967594575,
-      "air": 30.212197054979466
+     "tenths": {
+      "by_wet_bulb": {
+       "warmest": {
+        "wet_bulb": 29.260826380291846,
+        "air": 32.33847890483062,
+        "ground": 33.29719351390443,
+        "day": 0.5672969788717653,
+        "afternoon": 0.42878286509335906
+       },
+       "coolest": {
+        "wet_bulb": 22.61062015408409,
+        "air": 31.8456984353737,
+        "ground": 32.1724914833744,
+        "day": 0.42368307120630677,
+        "afternoon": 0.08251097219149028
+       }
+      },
+      "by_air": {
+       "warmest": {
+        "wet_bulb": 26.6633516151256,
+        "air": 35.28923212376852,
+        "ground": 37.609282463107455,
+        "day": 0.9759970265789981,
+        "afternoon": 0.6991892992428719
+       },
+       "coolest": {
+        "wet_bulb": 25.826869531264936,
+        "air": 30.262345279801213,
+        "ground": 30.637609101477686,
+        "day": 0.19219617187993218,
+        "afternoon": 0.030071286784098334
+       }
+      }
      },
      "at_2_m": {
       "wet_bulb": {
-       "median": 26.90629883020774,
-       "p99": 31.87511504547608,
+       "median": 26.927866862527434,
+       "p99": 31.86694487066023,
        "top": 34.7537701803177
       },
-      "above_28": 0.3207834216980595,
-      "above_31": 0.033021523989361055,
+      "above_28": 0.32353203436162176,
+      "above_31": 0.032926561051115556,
       "air": {
-       "median": 33.53780517578127,
-       "p99": 39.21505126953127,
+       "median": 33.59600219726565,
+       "p99": 39.26386459353617,
        "top": 42.2611022949219
       },
-      "warmest_tenth": {
-       "wet_bulb": 29.78638968855831,
-       "air": 36.6654036228363
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 29.846797607712357,
+         "air": 33.819588993410825,
+         "ground": 33.31707871959183,
+         "day": 0.5689692403742131,
+         "afternoon": 0.42967049936130786
+        },
+        "coolest": {
+         "wet_bulb": 23.268047214487222,
+         "air": 33.30979735412216,
+         "ground": 32.139508568591474,
+         "day": 0.42085452573854093,
+         "afternoon": 0.08036315782220758
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 27.292680223323416,
+         "air": 36.8882270143821,
+         "ground": 37.659544035933315,
+         "day": 0.975890050045301,
+         "afternoon": 0.694107302603274
+        },
+        "coolest": {
+         "wet_bulb": 26.44254269277491,
+         "air": 31.7209060131649,
+         "ground": 30.64120567171575,
+         "day": 0.19453162048622177,
+         "afternoon": 0.03021384444899922
+        }
+       }
       },
-      "coolest_tenth": {
-       "wet_bulb": 23.305176767230332,
-       "air": 31.67067287346378
+      "air_down_the_dry_adiabat": {
+       "mean_k": 0.015287056980428142,
+       "sd_k": 0.07076140310921838,
+       "above_the_lowest_level_k": 1.4899886518501204
       }
      },
-     "counted_by_cell": {
+     "day": {
+      "share_of_land_time": 0.4999639937662529,
+      "lowest_level": {
+       "wet_bulb": {
+        "median": 26.482744693126975,
+        "p99": 31.49585802064787,
+        "top": 34.026950949282764
+       },
+       "air": {
+        "median": 33.19307861328127,
+        "p99": 37.92966529977799,
+        "top": 40.40969238281252
+       },
+       "above_28": 0.26772363238584357,
+       "above_31": 0.02021601452007367
+      },
+      "at_2_m": {
+       "wet_bulb": {
+        "median": 27.10475454571064,
+        "p99": 32.06787181747413,
+        "top": 34.7537701803177
+       },
+       "air": {
+        "median": 34.67717895507815,
+        "p99": 39.66325127372134,
+        "top": 42.2611022949219
+       },
+       "above_28": 0.3561176846298473,
+       "above_31": 0.04131050722696976
+      },
+      "czen_above": {
+       "times_cos_latitude": 0.07857315082621794,
+       "window_degrees": 36.31827417442943
+      }
+     },
+     "night": {
+      "share_of_land_time": 0.5000360062337472,
+      "lowest_level": {
+       "wet_bulb": {
+        "median": 26.151317422711983,
+        "p99": 31.036666875436158,
+        "top": 33.67898392736561
+       },
+       "air": {
+        "median": 31.448687607323,
+        "p99": 34.463705172959365,
+        "top": 37.2045837402344
+       },
+       "above_28": 0.20810100754925756,
+       "above_31": 0.010598066530801031
+      },
+      "at_2_m": {
+       "wet_bulb": {
+        "median": 26.76333980818699,
+        "p99": 31.615049891811555,
+        "top": 34.39065321132705
+       },
+       "air": {
+        "median": 32.9167419433594,
+        "p99": 35.94787054920408,
+        "top": 38.70662841796877
+       },
+       "above_28": 0.2909510769016172,
+       "above_31": 0.02454382228561569
+      }
+     },
+     "readout_of_17_october": {
       "wet_bulb": {
        "median": 25.851486437040762,
        "p99": 31.030957465211724
@@ -778,463 +1445,884 @@
       "above_28": 0.17562657502863688,
       "above_31": 0.010438144329896907
      },
-     "day": {
-      "share_of_land_time": 0.5004059208275808,
-      "lowest_level": {
-       "wet_bulb": {
-        "median": 26.45343236161586,
-        "p99": 31.493335315762263,
-        "top": 34.026950949282764
-       },
-       "air": {
-        "median": 33.077102944871505,
-        "p99": 37.89554980217297,
-        "top": 40.40969238281252
-       },
-       "above_28": 0.2646354695532767,
-       "above_31": 0.02008476362361915
-      },
-      "at_2_m": {
-       "wet_bulb": {
-        "median": 27.073226791787285,
-        "p99": 32.06458243370682,
-        "top": 34.7537701803177
-       },
-       "air": {
-        "median": 34.55776367187502,
-        "p99": 39.62013666396697,
-        "top": 42.2611022949219
-       },
-       "above_28": 0.35181227584555896,
-       "above_31": 0.04089359119575413
-      },
-      "czen_above": {
-       "times_cos_latitude": 0.07789597363763946,
-       "window_degrees": 36.0
-      }
+     "saturated": {
+      "capped_at_2_m": 2.03398751622685e-05,
+      "supersaturated_lowest_level": 0.0009798996345438363
      },
-     "night": {
-      "share_of_land_time": 0.49959407917241905,
-      "lowest_level": {
-       "wet_bulb": {
-        "median": 26.138951389230183,
-        "p99": 31.06042221256198,
-        "top": 33.67898392736561
-       },
-       "air": {
-        "median": 31.417779541015648,
-        "p99": 34.47823695945776,
-        "top": 37.2045837402344
-       },
-       "above_28": 0.20765573439854196,
-       "above_31": 0.011015687751030135
-      },
-      "at_2_m": {
-       "wet_bulb": {
-        "median": 26.750801408252546,
-        "p99": 31.639977255716214,
-        "top": 34.39065321132705
-       },
-       "air": {
-        "median": 32.8859802246094,
-        "p99": 35.961635423796245,
-        "top": 38.70662841796877
-       },
-       "above_28": 0.28970414558328883,
-       "above_31": 0.025136664653643757
-      }
+     "surface_pressure_bar": {
+      "p05": 1.126440185546875,
+      "p50": 1.1791072998046874,
+      "p95": 1.204797119140625
      }
     },
     "coasts": {
      "wet_bulb": {
-      "median": 26.728002521240438,
-      "p99": 31.5088802523689,
+      "median": 26.74995372754493,
+      "p99": 31.42313155934203,
       "top": 34.026950949282764
      },
-     "above_28": 0.2955846982912774,
-     "above_31": 0.021915232173068053,
+     "above_28": 0.29028057395702456,
+     "above_31": 0.019417611654930028,
      "air": {
-      "median": 32.27034912109377,
-      "p99": 37.676596367375566,
+      "median": 32.29061279296877,
+      "p99": 37.66341897265477,
       "top": 40.40969238281252
      },
-     "warmest_tenth": {
-      "wet_bulb": 29.48664386764882,
-      "air": 34.89836640998824
-     },
-     "coolest_tenth": {
-      "wet_bulb": 23.13642482273592,
-      "air": 30.39870518882723
+     "tenths": {
+      "by_wet_bulb": {
+       "warmest": {
+        "wet_bulb": 29.591841784555825,
+        "air": 32.513968784727936,
+        "ground": 33.430977969475435,
+        "day": 0.5917832594573342,
+        "afternoon": 0.4474649869576205
+       },
+       "coolest": {
+        "wet_bulb": 23.024606216260004,
+        "air": 31.979398731172626,
+        "ground": 32.20011193138787,
+        "day": 0.42211432752773803,
+        "afternoon": 0.08733121035688468
+       }
+      },
+      "by_air": {
+       "warmest": {
+        "wet_bulb": 27.04722504810677,
+        "air": 35.229216307641984,
+        "ground": 37.53265301549979,
+        "day": 0.9721962461441216,
+        "afternoon": 0.7111998626549981
+       },
+       "coolest": {
+        "wet_bulb": 26.171642272886853,
+        "air": 30.462880269024563,
+        "ground": 30.748801019961235,
+        "day": 0.2154711036447977,
+        "afternoon": 0.03389401978271177
+       }
+      }
      },
      "at_2_m": {
       "wet_bulb": {
-       "median": 27.340177105281697,
-       "p99": 32.08118773528694,
+       "median": 27.363283454846794,
+       "p99": 31.998307802218463,
        "top": 34.61801318250275
       },
-      "above_28": 0.3896693637396103,
-      "above_31": 0.045961499102798946,
+      "above_28": 0.3881295563759396,
+      "above_31": 0.04174332491153418,
       "air": {
-       "median": 33.74025878906252,
-       "p99": 39.38041294607799,
+       "median": 33.76140747070315,
+       "p99": 39.37796514720773,
        "top": 42.2611022949219
       },
-      "warmest_tenth": {
-       "wet_bulb": 30.06968489127618,
-       "air": 36.483704434558945
-      },
-      "coolest_tenth": {
-       "wet_bulb": 23.787014397177582,
-       "air": 31.85564393848597
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 30.174988776589387,
+         "air": 33.998088535746,
+         "ground": 33.454133372589176,
+         "day": 0.593813247234829,
+         "afternoon": 0.4486865578752478
+        },
+        "coolest": {
+         "wet_bulb": 23.67790022810929,
+         "air": 33.447701959566814,
+         "ground": 32.16967092934059,
+         "day": 0.4195907050203975,
+         "afternoon": 0.08544996162060016
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 27.670993896815126,
+         "air": 36.82863859297743,
+         "ground": 37.59007594522918,
+         "day": 0.9722257786855978,
+         "afternoon": 0.7042156421957355
+        },
+        "coolest": {
+         "wet_bulb": 26.784635513815317,
+         "air": 31.92060794488976,
+         "ground": 30.753055099512366,
+         "day": 0.21802450602145446,
+         "afternoon": 0.034118971711828226
+        }
+       }
       }
      }
     },
     "bands": {
      "0-15": {
       "wet_bulb": {
-       "median": 27.15378450667262,
-       "p99": 31.857589261875724,
+       "median": 27.341117072684543,
+       "p99": 31.897019883228115,
        "top": 34.026950949282764
       },
-      "above_28": 0.3676974117386847,
-      "above_31": 0.035755234919716945,
+      "above_28": 0.3914595747515153,
+      "above_31": 0.0380596461297412,
       "air": {
-       "median": 31.885628833624356,
-       "p99": 37.105244326972496,
+       "median": 32.03181742675255,
+       "p99": 37.17832780864252,
        "top": 40.40969238281252
       },
-      "warmest_tenth": {
-       "wet_bulb": 29.924481331938182,
-       "air": 34.14968916617612
-      },
-      "coolest_tenth": {
-       "wet_bulb": 23.23515827126033,
-       "air": 30.072115004809728
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 30.203600052455673,
+         "air": 32.590781873118054,
+         "ground": 33.167946546233495,
+         "day": 0.7499735661213645,
+         "afternoon": 0.5955679680185714
+        },
+        "coolest": {
+         "wet_bulb": 23.2732240052685,
+         "air": 31.414490787056398,
+         "ground": 30.730667840957846,
+         "day": 0.38668481962705303,
+         "afternoon": 0.05074749995756302
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 28.182177650819394,
+         "air": 34.496745089936475,
+         "ground": 35.73655900547425,
+         "day": 0.9746492292507886,
+         "afternoon": 0.7543282266599768
+        },
+        "coolest": {
+         "wet_bulb": 26.2866743821457,
+         "air": 30.216571360668294,
+         "ground": 30.01408821597097,
+         "day": 0.2731355320864391,
+         "afternoon": 0.03514538400429743
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 27.75808929390603,
-        "p99": 32.426807283430946,
+        "median": 27.94415522200588,
+        "p99": 32.46335373238412,
         "top": 34.7537701803177
        },
-       "above_28": 0.46177689039668596,
-       "above_31": 0.07028741776389051,
+       "above_28": 0.4907912776464734,
+       "above_31": 0.0749902501974247,
        "air": {
-        "median": 33.35476074218752,
-        "p99": 38.74283053178984,
+        "median": 33.50066528320315,
+        "p99": 38.83819504367735,
         "top": 42.2611022949219
        },
-       "warmest_tenth": {
-        "wet_bulb": 30.502288547017322,
-        "air": 35.6757660528398
-       },
-       "coolest_tenth": {
-        "wet_bulb": 23.879822151731346,
-        "air": 31.530664853695832
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 30.780456841632716,
+          "air": 34.06272837256339,
+          "ground": 33.18156428204749,
+          "day": 0.7499589180591583,
+          "afternoon": 0.5960761711612518
+         },
+         "coolest": {
+          "wet_bulb": 23.918963103655024,
+          "air": 32.88232969721662,
+          "ground": 30.7215115021278,
+          "day": 0.3866659568649763,
+          "afternoon": 0.049933872525654344
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 28.77629338212846,
+          "air": 36.03276580816929,
+          "ground": 35.78090091837783,
+          "day": 0.9734927459807351,
+          "afternoon": 0.7483961409715023
+         },
+         "coolest": {
+          "wet_bulb": 26.898685015467297,
+          "air": 31.675616229285914,
+          "ground": 30.02420322181428,
+          "day": 0.27783517629832166,
+          "afternoon": 0.03548721720164887
+         }
+        }
        }
       }
      },
      "15-30": {
       "wet_bulb": {
-       "median": 27.08046464893043,
-       "p99": 31.448725505665454,
-       "top": 33.85077502624779
+       "median": 27.16880073773291,
+       "p99": 31.432338027033953,
+       "top": 33.60035000626954
       },
-      "above_28": 0.3377621156463939,
-      "above_31": 0.02099167507745235,
+      "above_28": 0.3490838309245659,
+      "above_31": 0.020866579379922413,
       "air": {
-       "median": 32.03255615234377,
-       "p99": 37.30137194517564,
+       "median": 32.06759033203127,
+       "p99": 37.3590789516241,
        "top": 39.86687622070315
       },
-      "warmest_tenth": {
-       "wet_bulb": 29.913971770484213,
-       "air": 34.74778663177332
-      },
-      "coolest_tenth": {
-       "wet_bulb": 23.075515838147346,
-       "air": 30.28344862671078
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 30.05331896829953,
+         "air": 32.65134953503721,
+         "ground": 33.47983842155288,
+         "day": 0.6807925550014915,
+         "afternoon": 0.5453897883748646
+        },
+        "coolest": {
+         "wet_bulb": 23.04817184653368,
+         "air": 31.666766801053367,
+         "ground": 31.405814342079363,
+         "day": 0.41813735066051466,
+         "afternoon": 0.05909074024995839
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 27.735398040274625,
+         "air": 34.984091710491654,
+         "ground": 37.14176763031626,
+         "day": 0.9861642933378851,
+         "afternoon": 0.7211891863524207
+        },
+        "coolest": {
+         "wet_bulb": 26.254312221826332,
+         "air": 30.332074683439007,
+         "ground": 30.3158918159859,
+         "day": 0.21540717809704055,
+         "afternoon": 0.03348205750280482
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 27.690434310724747,
-        "p99": 32.02318580938063,
+        "median": 27.77783090850514,
+        "p99": 32.00657387706984,
         "top": 34.457591889019454
        },
-       "above_28": 0.4443745688405916,
-       "above_31": 0.046291927505896245,
+       "above_28": 0.45913055471796027,
+       "above_31": 0.0467543668252444,
        "air": {
-        "median": 33.5018070932736,
-        "p99": 38.984238079316384,
+        "median": 33.536937753191545,
+        "p99": 39.070023471792176,
         "top": 41.77864990234377
        },
-       "warmest_tenth": {
-        "wet_bulb": 30.49434972857023,
-        "air": 36.31623981878871
-       },
-       "coolest_tenth": {
-        "wet_bulb": 23.725108941883068,
-        "air": 31.74285544767713
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 30.63369399218819,
+          "air": 34.13397894716591,
+          "ground": 33.5023745103972,
+          "day": 0.6826215573414401,
+          "afternoon": 0.5463131921494601
+         },
+         "coolest": {
+          "wet_bulb": 23.699439937028234,
+          "air": 33.13702654229328,
+          "ground": 31.382176668153928,
+          "day": 0.4162216877205777,
+          "afternoon": 0.05789960625079279
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 28.341016157231252,
+          "air": 36.5691541003553,
+          "ground": 37.21712491452646,
+          "day": 0.9866168067468629,
+          "afternoon": 0.714323915984864
+         },
+         "coolest": {
+          "wet_bulb": 26.86667170160993,
+          "air": 31.791736297982055,
+          "ground": 30.322086958444046,
+          "day": 0.2187429674755023,
+          "afternoon": 0.033688619023465635
+         }
+        }
        }
       }
      },
      "30-45": {
       "wet_bulb": {
-       "median": 26.58819959547568,
-       "p99": 30.9291906838446,
+       "median": 26.629740931811448,
+       "p99": 30.94653565740368,
        "top": 33.5741302403265
       },
-      "above_28": 0.24394405071537004,
-      "above_31": 0.008804407418815568,
+      "above_28": 0.24931617697036118,
+      "above_31": 0.009009734327548804,
       "air": {
-       "median": 31.79673979520734,
-       "p99": 37.59877170033276,
+       "median": 31.856378173828148,
+       "p99": 37.63869628906252,
        "top": 39.85515747070315
       },
-      "warmest_tenth": {
-       "wet_bulb": 29.50824577837889,
-       "air": 35.238129319670776
-      },
-      "coolest_tenth": {
-       "wet_bulb": 22.63015757924885,
-       "air": 30.071429235868028
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 29.588912914491807,
+         "air": 32.22207291387528,
+         "ground": 33.03933625944652,
+         "day": 0.5641196815510457,
+         "afternoon": 0.4708219808793091
+        },
+        "coolest": {
+         "wet_bulb": 22.599165589605388,
+         "air": 31.648780646985767,
+         "ground": 31.736046173342736,
+         "day": 0.42893937505118634,
+         "afternoon": 0.05702064894993069
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 26.77810586756642,
+         "air": 35.44029329490724,
+         "ground": 38.01895085288921,
+         "day": 0.9838027335087806,
+         "afternoon": 0.6789186887736253
+        },
+        "coolest": {
+         "wet_bulb": 25.95954176668007,
+         "air": 30.10771791481652,
+         "ground": 30.339466035965682,
+         "day": 0.20607258776931367,
+         "afternoon": 0.03469339559872858
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 27.20407630641643,
-        "p99": 31.512383765351693,
+        "median": 27.24669773675649,
+        "p99": 31.525469490005303,
         "top": 34.12605014974076
        },
-       "above_28": 0.3481026713021573,
-       "above_31": 0.02242911410600714,
+       "above_28": 0.35549294293467665,
+       "above_31": 0.023005545601951487,
        "air": {
-        "median": 33.26438040297505,
-        "p99": 39.32926464987913,
+        "median": 33.323664816631904,
+        "p99": 39.377015097405064,
         "top": 41.8428894042969
        },
-       "warmest_tenth": {
-        "wet_bulb": 30.092149151520335,
-        "air": 36.845924689724264
-       },
-       "coolest_tenth": {
-        "wet_bulb": 23.286607702922062,
-        "air": 31.5299351438214
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 30.17288432714012,
+          "air": 33.70411131337216,
+          "ground": 33.06218363870467,
+          "day": 0.5660481801294701,
+          "afternoon": 0.47197944030642724
+         },
+         "coolest": {
+          "wet_bulb": 23.25705407697036,
+          "air": 33.11334593435872,
+          "ground": 31.698555957110162,
+          "day": 0.42650160067465315,
+          "afternoon": 0.055568524596690046
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 27.408178189374222,
+          "air": 37.062930780276865,
+          "ground": 38.090768585502005,
+          "day": 0.9841899499293372,
+          "afternoon": 0.670950310247096
+         },
+         "coolest": {
+          "wet_bulb": 26.573283433475485,
+          "air": 31.566113399413716,
+          "ground": 30.34380337281829,
+          "day": 0.20840631827965525,
+          "afternoon": 0.03468725327079967
+         }
+        }
        }
       }
      },
      "45-60": {
       "wet_bulb": {
-       "median": 25.735937993795176,
-       "p99": 30.214181178688417,
-       "top": 33.14196166987358
+       "median": 25.71785314614491,
+       "p99": 30.18403201440073,
+       "top": 33.05678453047341
       },
-      "above_28": 0.1178719309177701,
-      "above_31": 0.0025803222881917065,
+      "above_28": 0.11617621865579679,
+      "above_31": 0.0023661749463195123,
       "air": {
-       "median": 31.853448486328148,
-       "p99": 37.884734766968556,
-       "top": 40.08315429687502
+       "median": 31.845330810546898,
+       "p99": 37.8895787709641,
+       "top": 39.8559509277344
       },
-      "warmest_tenth": {
-       "wet_bulb": 28.58733790819961,
-       "air": 36.14888979971273
-      },
-      "coolest_tenth": {
-       "wet_bulb": 22.207910528744875,
-       "air": 29.899640691152786
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 28.573884037324934,
+         "air": 31.748447659707963,
+         "ground": 32.88733516996877,
+         "day": 0.4118682230273426,
+         "afternoon": 0.2984270833803866
+        },
+        "coolest": {
+         "wet_bulb": 22.182404514322,
+         "air": 31.897371558534555,
+         "ground": 33.08514244933664,
+         "day": 0.4432725932975423,
+         "afternoon": 0.10320744327963996
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 25.334925063915698,
+         "air": 36.170227744066736,
+         "ground": 39.529084260914914,
+         "day": 0.9979279631141231,
+         "afternoon": 0.6733829180191201
+        },
+        "coolest": {
+         "wet_bulb": 25.42218582454809,
+         "air": 29.88435780672218,
+         "ground": 30.638715248330207,
+         "day": 0.11659257977043885,
+         "afternoon": 0.020085560529828947
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 26.36544433057261,
-        "p99": 30.796045989949665,
-        "top": 33.99722750187914
+        "median": 26.348143385209543,
+        "p99": 30.76714372101602,
+        "top": 33.61419500604552
        },
-       "above_28": 0.18960505618116863,
-       "above_31": 0.007217977213405519,
+       "above_28": 0.18741614805304957,
+       "above_31": 0.006837093847149053,
        "air": {
-        "median": 33.32126941958183,
-        "p99": 39.605561186241154,
+        "median": 33.31279907226565,
+        "p99": 39.617515336928776,
         "top": 41.70610961914065
        },
-       "warmest_tenth": {
-        "wet_bulb": 29.177615523919002,
-        "air": 37.83494450081329
-       },
-       "coolest_tenth": {
-        "wet_bulb": 22.873970854425483,
-        "air": 31.35511215827972
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 29.16440642245575,
+          "air": 33.23336204115662,
+          "ground": 32.91303672268081,
+          "day": 0.4144833475335975,
+          "afternoon": 0.29925524591781805
+         },
+         "coolest": {
+          "wet_bulb": 22.849133833640852,
+          "air": 33.34954794985976,
+          "ground": 33.014393653594695,
+          "day": 0.4366529802036637,
+          "afternoon": 0.09863076759610792
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 26.0069833273426,
+          "air": 37.86313754354975,
+          "ground": 39.578354041014606,
+          "day": 0.9981045419216119,
+          "afternoon": 0.6703819688110966
+         },
+         "coolest": {
+          "wet_bulb": 26.040112176104184,
+          "air": 31.33952431115456,
+          "ground": 30.637002879135153,
+          "day": 0.11744965836730387,
+          "afternoon": 0.020230741482946835
+         }
+        }
        }
       }
      },
      "60-90": {
       "wet_bulb": {
-       "median": 24.935433998528453,
-       "p99": 28.751097198353516,
-       "top": 32.783113312082776
+       "median": 24.915695403816184,
+       "p99": 28.714743731114698,
+       "top": 32.31109493813301
       },
-      "above_28": 0.029496359995066588,
-      "above_31": 9.906095361849319e-05,
+      "above_28": 0.02807952231901868,
+      "above_31": 8.737522415484621e-05,
       "air": {
-       "median": 32.9997497558594,
-       "p99": 37.39285919298011,
+       "median": 32.98220214843752,
+       "p99": 37.395072220759396,
        "top": 39.28276977539065
       },
-      "warmest_tenth": {
-       "wet_bulb": 27.486443698363306,
-       "air": 35.567931002816636
-      },
-      "coolest_tenth": {
-       "wet_bulb": 21.73814635021406,
-       "air": 30.907834421936318
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 27.461844369426395,
+         "air": 32.47734908827669,
+         "ground": 34.10139081778261,
+         "day": 0.36930409520938884,
+         "afternoon": 0.16384647883277637
+        },
+        "coolest": {
+         "wet_bulb": 21.71789820097685,
+         "air": 32.84445686553047,
+         "ground": 34.564481583531595,
+         "day": 0.45418158988744617,
+         "afternoon": 0.16163831407769508
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 24.748992381027687,
+         "air": 35.56060004335501,
+         "ground": 38.117902702651364,
+         "day": 0.9337622370703986,
+         "afternoon": 0.6531852142355561
+        },
+        "coolest": {
+         "wet_bulb": 25.023153020657002,
+         "air": 30.882595503592604,
+         "ground": 32.24093287028822,
+         "day": 0.11774233068880052,
+         "afternoon": 0.024402488043848224
+        }
+       }
       },
       "at_2_m": {
        "wet_bulb": {
-        "median": 25.568969281026074,
-        "p99": 29.344279355938912,
-        "top": 33.3472355138058
+        "median": 25.55036125673831,
+        "p99": 29.307206779153255,
+        "top": 32.87250775340817
        },
-       "above_28": 0.06175602799616067,
-       "above_31": 0.000499283801176923,
+       "above_28": 0.059336059547896135,
+       "above_31": 0.0004536039293584462,
        "air": {
-        "median": 34.4758659524401,
-        "p99": 39.02919146351737,
+        "median": 34.45916137695315,
+        "p99": 39.03741665929348,
         "top": 40.9667907714844
        },
-       "warmest_tenth": {
-        "wet_bulb": 28.08832594857403,
-        "air": 37.13354239397793
-       },
-       "coolest_tenth": {
-        "wet_bulb": 22.407113668216436,
-        "air": 32.36845427171732
+       "tenths": {
+        "by_wet_bulb": {
+         "warmest": {
+          "wet_bulb": 28.064002332102394,
+          "air": 33.96489377586261,
+          "ground": 34.117530471627745,
+          "day": 0.37189855944343114,
+          "afternoon": 0.1649624386182388
+         },
+         "coolest": {
+          "wet_bulb": 22.38730928246251,
+          "air": 34.309788752978776,
+          "ground": 34.53558786650846,
+          "day": 0.45007389713277085,
+          "afternoon": 0.15840747116600828
+         }
+        },
+        "by_air": {
+         "warmest": {
+          "wet_bulb": 25.403963483252443,
+          "air": 37.12961084504335,
+          "ground": 38.125560962293335,
+          "day": 0.9336824727853873,
+          "afternoon": 0.6525334913870987
+         },
+         "coolest": {
+          "wet_bulb": 25.647360869753754,
+          "air": 32.34336616811255,
+          "ground": 32.23746918411482,
+          "day": 0.1173227941195108,
+          "afternoon": 0.024386730604226775
+         }
+        }
        }
       }
      }
     },
     "below_1_km": {
      "wet_bulb": {
-      "median": 27.7527592297486,
-      "p99": 31.983035384411682,
+      "median": 27.694959075207766,
+      "p99": 31.967326111525683,
       "top": 34.026950949282764
      },
-     "above_28": 0.4558636225261769,
-     "above_31": 0.04555473760843507,
+     "above_28": 0.44529845706144533,
+     "above_31": 0.04395456855116697,
      "air": {
-      "median": 33.19576416015627,
-      "p99": 38.15382423123976,
+      "median": 33.13640747070315,
+      "p99": 38.184197872874265,
       "top": 40.40969238281252
      },
-     "warmest_tenth": {
-      "wet_bulb": 30.565851300537947,
-      "air": 36.88712830384128
-     },
-     "coolest_tenth": {
-      "wet_bulb": 23.937034946988028,
-      "air": 31.508148884939956
+     "tenths": {
+      "by_wet_bulb": {
+       "warmest": {
+        "wet_bulb": 30.537876671168526,
+        "air": 33.556447574028056,
+        "ground": 34.48311783703935,
+        "day": 0.5048381375409358,
+        "afternoon": 0.37255944947570624
+       },
+       "coolest": {
+        "wet_bulb": 23.86943961096457,
+        "air": 33.00931334401084,
+        "ground": 33.54539777341937,
+        "day": 0.4507037346635363,
+        "afternoon": 0.1046420804360122
+       }
+      },
+      "by_air": {
+       "warmest": {
+        "wet_bulb": 27.775433783449643,
+        "air": 36.935029986240835,
+        "ground": 39.7584988670774,
+        "day": 0.9929449341910014,
+        "afternoon": 0.7738008350437077
+       },
+       "coolest": {
+        "wet_bulb": 26.954221442294923,
+        "air": 31.44284982922986,
+        "ground": 31.83670252141558,
+        "day": 0.21391595397708618,
+        "afternoon": 0.01768248730261737
+       }
+      }
      },
      "at_2_m": {
       "wet_bulb": {
-       "median": 28.363451505131852,
-       "p99": 32.55326784959949,
+       "median": 28.306186725492452,
+       "p99": 32.5360020463374,
        "top": 34.7537701803177
       },
-      "above_28": 0.5660480412431954,
-      "above_31": 0.08978068932469975,
+      "above_28": 0.555906162714263,
+      "above_31": 0.08699787307214109,
       "air": {
-       "median": 34.6701599121094,
-       "p99": 39.88671887350576,
+       "median": 34.6101013183594,
+       "p99": 39.92415080196782,
        "top": 42.2611022949219
       },
-      "warmest_tenth": {
-       "wet_bulb": 31.146609919239864,
-       "air": 38.515716347152356
-      },
-      "coolest_tenth": {
-       "wet_bulb": 24.587668338796334,
-       "air": 32.97202270268922
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 31.119128499168585,
+         "air": 35.05465079053933,
+         "ground": 34.51563342779828,
+         "day": 0.5078672741161478,
+         "afternoon": 0.3739605081149912
+        },
+        "coolest": {
+         "wet_bulb": 24.521439413088476,
+         "air": 34.480951177233074,
+         "ground": 33.50202011296317,
+         "day": 0.4472531556760494,
+         "afternoon": 0.10145665035663406
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 28.407486466269404,
+         "air": 38.57899049208799,
+         "ground": 39.82753602127419,
+         "day": 0.9930851537349668,
+         "afternoon": 0.7644019048959602
+        },
+        "coolest": {
+         "wet_bulb": 27.561991558191526,
+         "air": 32.90591604765924,
+         "ground": 31.8404847837008,
+         "day": 0.21670317163426756,
+         "afternoon": 0.017798493166552767
+        }
+       }
       }
      }
     },
     "from_4_km": {
      "wet_bulb": {
-      "median": 24.82456169074985,
-      "p99": 28.53018924761406,
+      "median": 24.817720762655746,
+      "p99": 28.687595826801438,
       "top": 30.824102948809752
      },
-     "above_28": 0.0245105274482221,
+     "above_28": 0.03060284753838141,
      "above_31": 0.0,
      "air": {
-      "median": 29.210365650690115,
-      "p99": 33.23684082031252,
+      "median": 29.271841114749574,
+      "p99": 33.852195715540375,
       "top": 36.1799255371094
      },
-     "warmest_tenth": {
-      "wet_bulb": 27.10573749034061,
-      "air": 30.781087984840585
-     },
-     "coolest_tenth": {
-      "wet_bulb": 21.452244596224038,
-      "air": 27.714412350257877
+     "tenths": {
+      "by_wet_bulb": {
+       "warmest": {
+        "wet_bulb": 27.30943018144227,
+        "air": 29.5625808629939,
+        "ground": 30.043548434916225,
+        "day": 0.749230663449667,
+        "afternoon": 0.5938561376163024
+       },
+       "coolest": {
+        "wet_bulb": 21.148691416068697,
+        "air": 28.9393384100354,
+        "ground": 28.169261155156818,
+        "day": 0.3769038124844495,
+        "afternoon": 0.04106761366813048
+       }
+      },
+      "by_air": {
+       "warmest": {
+        "wet_bulb": 25.303706774471017,
+        "air": 31.03026991582746,
+        "ground": 31.38180265248112,
+        "day": 0.8823932379921741,
+        "afternoon": 0.5894161578251084
+       },
+       "coolest": {
+        "wet_bulb": 24.150281974192016,
+        "air": 27.624586565641525,
+        "ground": 27.425475318457487,
+        "day": 0.25348434162270345,
+        "afternoon": 0.06902831726188098
+       }
+      }
      },
      "at_2_m": {
       "wet_bulb": {
-       "median": 25.434741159407057,
-       "p99": 29.109479089620372,
+       "median": 25.428802491128476,
+       "p99": 29.26921478073584,
        "top": 31.372356554042312
       },
-      "above_28": 0.05672927801634246,
-      "above_31": 3.9570961093149634e-05,
+      "above_28": 0.06717214069964639,
+      "above_31": 6.729994915166764e-05,
       "air": {
-       "median": 30.664788818359398,
-       "p99": 34.77185491226808,
+       "median": 30.72496774927582,
+       "p99": 35.47055618653406,
        "top": 38.0068298339844
       },
-      "warmest_tenth": {
-       "wet_bulb": 27.69399397681674,
-       "air": 32.26212861576805
-      },
-      "coolest_tenth": {
-       "wet_bulb": 22.101151343760478,
-       "air": 29.156118224713673
+      "tenths": {
+       "by_wet_bulb": {
+        "warmest": {
+         "wet_bulb": 27.896142094915827,
+         "air": 31.01313724655487,
+         "ground": 30.047685479760073,
+         "day": 0.7491573858227228,
+         "afternoon": 0.5936192147637763
+        },
+        "coolest": {
+         "wet_bulb": 21.801846154376747,
+         "air": 30.38868448480711,
+         "ground": 28.16023432853401,
+         "day": 0.3764216536126022,
+         "afternoon": 0.04038398144147838
+        }
+       },
+       "by_air": {
+        "warmest": {
+         "wet_bulb": 25.90572423984876,
+         "air": 32.51767282358645,
+         "ground": 31.387713400780033,
+         "day": 0.8788881492325249,
+         "afternoon": 0.5888719311124845
+        },
+        "coolest": {
+         "wet_bulb": 24.775933042806273,
+         "air": 29.064204107117064,
+         "ground": 27.433860473224374,
+         "day": 0.2574379246897894,
+         "afternoon": 0.07131488468745617
+        }
+       }
       }
      }
     }
    },
    "seas": {
     "all": {
-     "median": 34.61846313476565,
-     "p99": 36.809043205361164,
-     "top": 37.68316040039065
+     "median": 34.45217285156252,
+     "p99": 36.79590683663334,
+     "top": 37.7427917480469
     },
     "bands": {
      "0-15": {
-      "median": 35.51158396162844,
-      "p99": 37.066670544247124,
-      "top": 37.68316040039065
+      "median": 35.25957641601565,
+      "p99": 37.047883255132376,
+      "top": 37.7427917480469
      },
      "15-30": {
-      "median": 35.31827872646488,
-      "p99": 36.62112375294677,
+      "median": 35.18547017069901,
+      "p99": 36.57378540039065,
       "top": 37.26030883789065
      },
      "30-45": {
-      "median": 35.003103103089465,
-      "p99": 36.15960083007815,
+      "median": 34.90285644531252,
+      "p99": 36.13783124892674,
       "top": 36.78542480468752
      },
      "45-60": {
-      "median": 33.9209392734617,
-      "p99": 35.03695068359377,
+      "median": 33.90984959862516,
+      "p99": 35.031742433725874,
       "top": 35.62493286132815
      },
      "60-90": {
-      "median": 33.25188598632815,
-      "p99": 34.408656012193006,
+      "median": 33.2219351187065,
+      "p99": 34.39168359539028,
       "top": 34.84005126953127
      }
     }
    },
-   "freezing_level_over_land_km": 35.98270427912114,
+   "land": {
+    "all": {
+     "desert": 0.20145539966735823,
+     "rain_mm_day": 2.9396616277950023,
+     "ground_c": 33.06352790923896
+    },
+    "bands": {
+     "0-15": {
+      "desert": 0.0,
+      "rain_mm_day": 5.451994010369874,
+      "ground_c": 31.876079636280416
+     },
+     "15-30": {
+      "desert": 0.005876701735493982,
+      "rain_mm_day": 3.982743544055652,
+      "ground_c": 32.52083409210547
+     },
+     "30-45": {
+      "desert": 0.020821925353219358,
+      "rain_mm_day": 2.9294343947373687,
+      "ground_c": 32.79099708786509
+     },
+     "45-60": {
+      "desert": 0.17941763508330705,
+      "rain_mm_day": 1.2718335303683652,
+      "ground_c": 33.7903601411084
+     },
+     "60-75": {
+      "desert": 0.9305106729840873,
+      "rain_mm_day": 0.17195672061274425,
+      "ground_c": 34.88698672653344
+     },
+     "75-90": {
+      "desert": 1.0,
+      "rain_mm_day": 0.03955859750303945,
+      "ground_c": 34.74210721482792
+     }
+    },
+    "heights": {
+     "below_2_km": {
+      "desert": 0.23281690540329092,
+      "rain_mm_day": 2.38372619621883,
+      "ground_c": 34.017912564834454
+     },
+     "2_to_4_km": {
+      "desert": 0.17680672233746433,
+      "rain_mm_day": 3.0608737597316233,
+      "ground_c": 32.00961943426501
+     },
+     "from_4_km": {
+      "desert": 0.02123981132829092,
+      "rain_mm_day": 7.664771681979823,
+      "ground_c": 29.05195876818066
+     }
+    }
+   },
+   "land_and_water": {
+    "land_cells": 1289,
+    "water_share_of_area": 0.4005176130473503,
+    "water_cells_with_land_fraction_above_half": 166
+   },
+   "freezing_level_over_land_km": 36.03190528042156,
+   "land_columns_that_never_freeze": 0.0,
    "top_of_air_w_m2": {
     "incoming": 312.1938560849066,
     "reflected": 86.82848417491735,
@@ -1283,51 +2371,45 @@
   }
  },
  "glow_efficacy": {
-  "runs": {
-   "design": "A28_corrected_970",
-   "watt_for_watt": "A28_corrected_gases_glow",
-   "held": "A28_corrected_gases_glow_held"
-  },
   "added_dimming_percent": {
-   "watt_for_watt": 4.2200000000000015,
-   "held": 3.51999999999999
+   "A28_corrected_gases_glow": 4.2200000000000015,
+   "A28_corrected_gases_glow_held": 3.51999999999999
   },
   "ground_k": {
-   "design": 295.023,
-   "watt_for_watt": 293.453,
-   "held": 294.412
+   "A28_corrected_970": 295.023,
+   "A28_corrected_gases_glow": 293.453,
+   "A28_corrected_gases_glow_held": 294.412
   },
   "ground_trend_k_per_decade": {
-   "watt_for_watt": -0.11212121212108736,
-   "held": 0.01939393939397945
+   "A28_corrected_gases_glow": -0.11212121212108736,
+   "A28_corrected_gases_glow_held": 0.01939393939397945
   },
   "response_k_per_percent": 1.3699999999999817,
   "dimming_that_holds_percent": 3.0740145985400957,
-  "gases_dimming_percent": 1.694,
-  "glow_dimming_percent": 1.3800145985400958,
   "design_absorbed_sunlight_w_m2": 228.5351811324456,
-  "dimming_that_holds_w_m2": 7.025204830811428,
-  "glow_w_m2": 3.1538188624277996,
+  "gases_and_glow_w_m2": 7.025204830811428,
+  "gases_w_m2": 3.57749843829207,
+  "glow_w_m2": 3.447706392519358,
   "infrared_w_m2": 5.3441399999999994,
-  "efficacy": 0.5901452548825068,
-  "in_points_of_dimming": 0.5463240690974247,
-  "with_the_gases_at_their_forcing": {
-   "gases_w_m2": 3.57749843829207,
-   "glow_w_m2": 3.447706392519358,
-   "efficacy": 0.64513773825524
+  "efficacy": 0.64513773825524,
+  "with_the_gases_at_their_points": {
+   "gases_dimming_percent": 1.694,
+   "gases_w_m2": 3.8713859683836285,
+   "glow_w_m2": 3.1538188624277996,
+   "efficacy": 0.5901452548825068
   }
  },
  "shared_dimming": {
   "dimming_percent": [
-   3.567770843730986,
+   3.698175762463992,
    5.3036547539443735
   ],
   "growth_cost_through_light_percent": [
-   0.24974395906116903,
+   0.25887230337247946,
    1.56457815241359
   ],
   "land_rain_cut_percent": [
-   1.962477326990135,
+   2.034207465373656,
    7.319043560443235
   ]
  },
@@ -1350,20 +2432,20 @@
    "infrared_w_m2": 5.3441399999999994,
    "sunlight_back_w_m2": 0.610045,
    "efficacy": [
-    0.5901452548825068,
+    0.64513773825524,
     0.710631
    ],
    "efficacy_sources": {
     "held_branch_13_october": 0.710631,
-    "corrected_radiation_17_october": 0.5901452548825068
+    "corrected_radiation_17_october": 0.64513773825524
    },
-   "basis": "the recommended answer, both halves rolled 80 degrees on the re-flown layout, at the GCM's efficacy for its infrared, from the glow pair on the corrected radiation of 17 October to the held branch of 13 October, and the albedo for its returned sunlight",
+   "basis": "the recommended answer, both halves rolled 80 degrees on the re-flown layout, at the GCM's efficacy for its infrared, from the glow pair on the corrected radiation of 17 October with the gases at their forcing to the held branch of 13 October, and the albedo for its returned sunlight",
    "absorbed_sunlight_w_m2": [
-    3.5930512624277995,
+    3.886938792519358,
     4.23694395234
    ],
    "dimming_percent": [
-    1.59432269118206,
+    1.7247276099150664,
     1.8800332617347408
    ]
   },
@@ -1388,11 +2470,11 @@
   ],
   "answered_in_every_target": {
    "absorbed_sunlight_w_m2": [
-    8.040520030870498,
+    8.334407560962056,
     11.952601261048562
    ],
    "dimming_percent": [
-    3.567770843730986,
+    3.698175762463992,
     5.3036547539443735
    ]
   },
@@ -1443,7 +2525,7 @@
      11.314450094743831
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     12.452654118877742,
+     12.583059037610749,
      16.618104848688205
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1452,7 +2534,7 @@
     ],
     "sunlight_scale": [
      0.8088043829677244,
-     0.8492092550468858
+     0.8479443273351758
     ]
    },
    {
@@ -1466,7 +2548,7 @@
      10.835944982849872
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     12.085929166581312,
+     12.216334085314317,
      16.139599736794246
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1475,7 +2557,7 @@
     ],
     "sunlight_scale": [
      0.8134458825530958,
-     0.8527664870841613
+     0.8515015593724511
     ]
    },
    {
@@ -1489,7 +2571,7 @@
      10.357439870955911
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     11.719204214284883,
+     11.849609133017887,
      15.661094624900285
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1498,7 +2580,7 @@
     ],
     "sunlight_scale": [
      0.8180873821384672,
-     0.8563237191214366
+     0.8550587914097264
     ]
    },
    {
@@ -1512,7 +2594,7 @@
      9.878934759061954
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     11.35247926198845,
+     11.482884180721456,
      15.182589513006327
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1521,7 +2603,7 @@
     ],
     "sunlight_scale": [
      0.8227288817238386,
-     0.859880951158712
+     0.8586160234470018
     ]
    },
    {
@@ -1535,7 +2617,7 @@
      9.400429647167993
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     10.98575430969202,
+     11.116159228425026,
      14.704084401112366
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1544,7 +2626,7 @@
     ],
     "sunlight_scale": [
      0.8273703813092099,
-     0.8634381831959874
+     0.8621732554842773
     ]
    },
    {
@@ -1558,7 +2640,7 @@
      8.921924535274036
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     10.619029357395588,
+     10.749434276128595,
      14.225579289218409
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1567,7 +2649,7 @@
     ],
     "sunlight_scale": [
      0.8320118808945813,
-     0.8669954152332628
+     0.8657304875215526
     ]
    },
    {
@@ -1581,7 +2663,7 @@
      8.443419423380075
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     10.252304405099157,
+     10.382709323832163,
      13.747074177324448
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1590,7 +2672,7 @@
     ],
     "sunlight_scale": [
      0.8366533804799529,
-     0.8705526472705382
+     0.869287719558828
     ]
    },
    {
@@ -1604,7 +2686,7 @@
      7.964914311486115
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     9.885579452802727,
+     10.015984371535732,
      13.268569065430489
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1613,7 +2695,7 @@
     ],
     "sunlight_scale": [
      0.8412948800653243,
-     0.8741098793078135
+     0.8728449515961033
     ]
    },
    {
@@ -1627,7 +2709,7 @@
      7.486409199592156
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     9.518854500506293,
+     9.6492594192393,
      12.79006395353653
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1636,7 +2718,7 @@
     ],
     "sunlight_scale": [
      0.8459363796506957,
-     0.8776671113450889
+     0.8764021836333787
     ]
    },
    {
@@ -1650,7 +2732,7 @@
      7.007904087698197
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     9.152129548209864,
+     9.282534466942868,
      12.31155884164257
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1659,7 +2741,7 @@
     ],
     "sunlight_scale": [
      0.8505778792360671,
-     0.8812243433823643
+     0.8799594156706542
     ]
    },
    {
@@ -1673,7 +2755,7 @@
      6.529398975804237
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     8.785404595913432,
+     8.915809514646439,
      11.83305372974861
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1682,7 +2764,7 @@
     ],
     "sunlight_scale": [
      0.8552193788214385,
-     0.8847815754196396
+     0.8835166477079296
     ]
    },
    {
@@ -1696,7 +2778,7 @@
      6.050893863910278
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     8.418679643617,
+     8.549084562350007,
      11.35454861785465
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1705,7 +2787,7 @@
     ],
     "sunlight_scale": [
      0.8598608784068098,
-     0.8883388074569151
+     0.8870738797452049
     ]
    },
    {
@@ -1719,7 +2801,7 @@
      5.572388752016319
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     8.05195469132057,
+     8.182359610053576,
      10.876043505960691
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1728,7 +2810,7 @@
     ],
     "sunlight_scale": [
      0.8645023779921812,
-     0.8918960394941904
+     0.8906311117824802
     ]
    },
    {
@@ -1742,7 +2824,7 @@
      5.0938836401223595
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     7.685229739024138,
+     7.815634657757144,
      10.397538394066732
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1751,7 +2833,7 @@
     ],
     "sunlight_scale": [
      0.8691438775775527,
-     0.8954532715314658
+     0.8941883438197556
     ]
    },
    {
@@ -1765,7 +2847,7 @@
      4.6153785282284
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     7.318504786727708,
+     7.448909705460714,
      9.919033282172773
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1774,7 +2856,7 @@
     ],
     "sunlight_scale": [
      0.873785377162924,
-     0.8990105035687412
+     0.8977455758570311
     ]
    },
    {
@@ -1788,7 +2870,7 @@
      4.13687341633444
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     6.951779834431276,
+     7.082184753164283,
      9.440528170278814
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1797,7 +2879,7 @@
     ],
     "sunlight_scale": [
      0.8784268767482954,
-     0.9025677356060167
+     0.9013028078943064
     ]
    },
    {
@@ -1811,7 +2893,7 @@
      3.658368304440482
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     6.585054882134846,
+     6.715459800867851,
      8.962023058384855
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1820,7 +2902,7 @@
     ],
     "sunlight_scale": [
      0.883068376333667,
-     0.906124967643292
+     0.9048600399315818
     ]
    },
    {
@@ -1834,7 +2916,7 @@
      3.1798631925465224
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     6.218329929838414,
+     6.34873484857142,
      8.483517946490895
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1843,7 +2925,7 @@
     ],
     "sunlight_scale": [
      0.8877098759190383,
-     0.9096821996805673
+     0.9084172719688572
     ]
    },
    {
@@ -1857,7 +2939,7 @@
      2.701358080652563
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     5.851604977541983,
+     5.982009896274989,
      8.005012834596936
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1866,7 +2948,7 @@
     ],
     "sunlight_scale": [
      0.8923513755044097,
-     0.9132394317178427
+     0.9119745040061326
     ]
    },
    {
@@ -1880,7 +2962,7 @@
      2.222852968758604
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     5.484880025245552,
+     5.615284943978558,
      7.526507722702977
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1889,7 +2971,7 @@
     ],
     "sunlight_scale": [
      0.8969928750897811,
-     0.9167966637551181
+     0.915531736043408
     ]
    },
    {
@@ -1903,7 +2985,7 @@
      1.7443478568646447
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     5.118155072949121,
+     5.248559991682127,
      7.048002610809018
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1912,7 +2994,7 @@
     ],
     "sunlight_scale": [
      0.9016343746751524,
-     0.9203538957923935
+     0.9190889680806834
     ]
    },
    {
@@ -1926,7 +3008,7 @@
      1.2658427449706853
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     4.75143012065269,
+     4.881835039385695,
      6.569497498915059
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1935,7 +3017,7 @@
     ],
     "sunlight_scale": [
      0.9062758742605239,
-     0.9239111278296689
+     0.9226462001179587
     ]
    },
    {
@@ -1949,7 +3031,7 @@
      0.8169343246252728
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     4.355108476807712,
+     4.485513395540718,
      6.120589078569647
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1958,7 +3040,7 @@
     ],
     "sunlight_scale": [
      0.9106302859378744,
-     0.9277554477749652
+     0.926490520063255
     ]
    },
    {
@@ -1972,7 +3054,7 @@
      0.45020937232884173
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     3.8766033649137523,
+     4.007008283646758,
      5.753864126273215
     ],
     "sunlight_scale_of_its_design_case": [
@@ -1981,7 +3063,7 @@
     ],
     "sunlight_scale": [
      0.9141875179751499,
-     0.9323969473603365
+     0.9311320196486264
     ]
    },
    {
@@ -1995,7 +3077,7 @@
      0.08348442003241055
     ],
     "with_the_heat_beyond_sunlight_percent": [
-     3.398098253019793,
+     3.5285031717527993,
      5.387139173976784
     ],
     "sunlight_scale_of_its_design_case": [
@@ -2004,7 +3086,7 @@
     ],
     "sunlight_scale": [
      0.9177447500124252,
-     0.9370384469457079
+     0.9357735192339979
     ]
    }
   ]
@@ -2015,83 +3097,133 @@
    0,
    1
   ],
+  "start": {
+   "path": "climate/gcm/runs/A28_corrected_970/model/MOST_REST.00019",
+   "sha256": "cc83ad0f936e5c0213df5a8929f02af8c62581376fcac8df877a62310b20ef19"
+  },
   "hours_each": 6.5,
   "means_to_a_3_day_mean": 11,
+  "supersaturated_lowest_level": {
+   "at_6_5_hours": 0.019176494886386522,
+   "in_3_day_means": 0.0025083949516118997
+  },
   "at_2_m": {
    "wet_bulb": {
     "median": {
-     "at_6_5_hours": 16.66532099874507,
-     "in_3_day_means": 16.641712887685802
+     "at_6_5_hours": 16.615185840003086,
+     "in_3_day_means": 16.589181757763782
     },
     "p99": {
-     "at_6_5_hours": 22.181717694773493,
-     "in_3_day_means": 21.857364834468736,
-     "excess_k": 0.3243528603047565,
-     "ratio_above_the_median": 1.0576619667711897
+     "at_6_5_hours": 22.17659452811325,
+     "in_3_day_means": 21.855537395241385,
+     "excess_k": 0.3210571328718643,
+     "ratio_above_the_median": 1.0560260398163843
     },
     "top": {
      "at_6_5_hours": 25.087619836062913,
-     "in_3_day_means": 24.146917369435755,
-     "excess_k": 0.9407024666271582,
-     "ratio_above_the_median": 1.1221944529023753
+     "in_3_day_means": 24.06741356531245,
+     "excess_k": 1.0202062707504638,
+     "ratio_above_the_median": 1.1329461581423024
     }
    },
    "air": {
     "median": {
-     "at_6_5_hours": 20.372583007812523,
-     "in_3_day_means": 20.36501169642375
+     "at_6_5_hours": 20.397943115234398,
+     "in_3_day_means": 20.38986150488179
     },
     "p99": {
-     "at_6_5_hours": 27.943761396576807,
-     "in_3_day_means": 27.719314225316502,
-     "excess_k": 0.2244471712603051,
-     "ratio_above_the_median": 1.0294896571115337
+     "at_6_5_hours": 27.969934082031273,
+     "in_3_day_means": 27.74706623460258,
+     "excess_k": 0.2228678474286916,
+     "ratio_above_the_median": 1.0291940002985664
     },
     "top": {
      "at_6_5_hours": 30.766717529296898,
      "in_3_day_means": 30.1040810324929,
      "excess_k": 0.6626364968039979,
-     "ratio_above_the_median": 1.0672615793984706
+     "ratio_above_the_median": 1.0673811091658905
     }
    }
   },
   "lowest_level": {
    "wet_bulb": {
     "median": {
-     "at_6_5_hours": 15.932708565710364,
-     "in_3_day_means": 15.91070833744634
+     "at_6_5_hours": 15.879553557263524,
+     "in_3_day_means": 15.855262192603133
     },
     "p99": {
-     "at_6_5_hours": 21.509288156175185,
-     "in_3_day_means": 21.190567798434582,
-     "excess_k": 0.31872035774060237,
-     "ratio_above_the_median": 1.0561984900675825
+     "at_6_5_hours": 21.50353786246548,
+     "in_3_day_means": 21.18789329774104,
+     "excess_k": 0.3156445647244368,
+     "ratio_above_the_median": 1.0546359188025085
     },
     "top": {
      "at_6_5_hours": 24.336957920480813,
-     "in_3_day_means": 23.53163632398048,
-     "excess_k": 0.8053215965003346,
-     "ratio_above_the_median": 1.1027855622859064
+     "in_3_day_means": 23.37425453789524,
+     "excess_k": 0.9627033825855733,
+     "ratio_above_the_median": 1.1248055556956051
     }
    },
    "air": {
     "median": {
-     "at_6_5_hours": 18.950769042968773,
-     "in_3_day_means": 18.943407663264324
+     "at_6_5_hours": 18.975762939453148,
+     "in_3_day_means": 18.968860561040483
     },
     "p99": {
-     "at_6_5_hours": 26.231652832031273,
-     "in_3_day_means": 26.0208370411597,
-     "excess_k": 0.2108157908715711,
-     "ratio_above_the_median": 1.0287469362537989
+     "at_6_5_hours": 26.239770267330506,
+     "in_3_day_means": 26.028524374981092,
+     "excess_k": 0.21124589234941382,
+     "ratio_above_the_median": 1.0289452188266013
     },
     "top": {
      "at_6_5_hours": 28.831384277343773,
      "in_3_day_means": 28.263130326704584,
      "excess_k": 0.568253950639189,
-     "ratio_above_the_median": 1.0601833972093428
+     "ratio_above_the_median": 1.0603975983460616
     }
    }
+  }
+ },
+ "wet_bulb_per_kelvin_of_air": {
+  "design": {
+   "air_c": 22.382775878906273,
+   "wet_bulb_c": 17.277443603552285,
+   "at": [
+    {
+     "pressure_bar": 1.1241044921875,
+     "specific_humidity": 0.00885806555699364,
+     "k_per_k": 0.37319531546995677
+    },
+    {
+     "pressure_bar": 1.206364501953125,
+     "specific_humidity": 0.00810779206707129,
+     "k_per_k": 0.38980172230117205
+    }
+   ],
+   "k_per_k": [
+    0.37319531546995677,
+    0.38980172230117205
+   ]
+  },
+  "test": {
+   "air_c": 34.67717895507815,
+   "wet_bulb_c": 27.104754545710648,
+   "at": [
+    {
+     "pressure_bar": 1.126440185546875,
+     "specific_humidity": 0.0168342631055246,
+     "k_per_k": 0.2632714359999113
+    },
+    {
+     "pressure_bar": 1.204797119140625,
+     "specific_humidity": 0.015522756143577237,
+     "k_per_k": 0.27640509395018853
+    }
+   ],
+   "k_per_k": [
+    0.2632714359999113,
+    0.27640509395018853
+   ]
   }
  },
  "targets": [
@@ -2111,7 +3243,7 @@
     0.0
    ],
    "with_the_heat_beyond_sunlight_percent": [
-    3.567770843730986,
+    3.698175762463992,
     5.3036547539443735
    ],
    "sunlight_scale_of_its_design_case": [
@@ -2120,7 +3252,7 @@
    ],
    "sunlight_scale": [
     0.9185545488867395,
-    0.9353926228158094
+    0.9341276951040992
    ],
    "sunlight_taken_tw": [
     0.0,
@@ -2134,108 +3266,108 @@
     0.0,
     0.0
    ],
-   "land_rain_mm_day": 3.339485646051127,
+   "land_rain_mm_day": 2.9396616277950023,
    "land_rain_with_the_dimmings_own_cut_mm_day": [
-    3.339485646051127,
-    3.339485646051127
+    2.9396616277950023,
+    2.9396616277950023
    ],
    "climate": {
     "ground_k": 306.5234791232695,
     "rain_mm_day": 3.3185989040159947,
-    "land_rain_mm_day": 3.339485646051127,
-    "land_desert": 0.18865215009555975,
-    "wet_bulb_median_c": 26.29000138890549,
-    "wet_bulb_p99_c": 31.300575016523577,
-    "wet_bulb_above_28": 0.23616873123715873,
-    "wet_bulb_above_31": 0.015553907014108238,
-    "wet_bulb_above_28_tropics": 0.3676974117386847,
-    "land_air_median_c": 32.06813964843752,
-    "land_air_p99_c": 37.51940340941939,
-    "wet_bulb_2m_median_c": 26.90629883020774,
-    "wet_bulb_2m_p99_c": 31.87511504547608,
-    "wet_bulb_2m_above_28": 0.3207834216980595,
-    "wet_bulb_2m_above_31": 0.033021523989361055,
-    "wet_bulb_2m_above_28_tropics": 0.46177689039668596,
-    "land_air_2m_median_c": 33.53780517578127,
-    "land_air_2m_p99_c": 39.21505126953127,
-    "sea_median_c": 34.61846313476565,
-    "day_wet_bulb_2m_median_c": 27.073226791787285,
-    "day_wet_bulb_2m_p99_c": 32.06458243370682,
-    "day_land_air_2m_median_c": 34.55776367187502,
-    "day_land_air_2m_p99_c": 39.62013666396697,
-    "day_wet_bulb_median_c": 26.45343236161586,
-    "day_wet_bulb_p99_c": 31.493335315762263,
-    "day_land_air_median_c": 33.077102944871505,
-    "day_land_air_p99_c": 37.89554980217297,
-    "night_wet_bulb_2m_median_c": 26.750801408252546,
-    "night_wet_bulb_2m_p99_c": 31.639977255716214,
-    "night_land_air_2m_median_c": 32.8859802246094,
-    "night_land_air_2m_p99_c": 35.961635423796245,
-    "night_wet_bulb_median_c": 26.138951389230183,
-    "night_wet_bulb_p99_c": 31.06042221256198,
-    "night_land_air_median_c": 31.417779541015648,
-    "night_land_air_p99_c": 34.47823695945776,
+    "land_rain_mm_day": 2.9396616277950023,
+    "land_desert": 0.20145539966735823,
+    "wet_bulb_median_c": 26.310594687577016,
+    "wet_bulb_p99_c": 31.29259847146381,
+    "wet_bulb_above_28": 0.23791017318138402,
+    "wet_bulb_above_31": 0.015406694219353877,
+    "wet_bulb_above_28_tropics": 0.3914595747515153,
+    "land_air_median_c": 32.12618408203127,
+    "land_air_p99_c": 37.55708824588651,
+    "wet_bulb_2m_median_c": 26.927866862527434,
+    "wet_bulb_2m_p99_c": 31.86694487066023,
+    "wet_bulb_2m_above_28": 0.32353203436162176,
+    "wet_bulb_2m_above_31": 0.032926561051115556,
+    "wet_bulb_2m_above_28_tropics": 0.4907912776464734,
+    "land_air_2m_median_c": 33.59600219726565,
+    "land_air_2m_p99_c": 39.26386459353617,
+    "sea_median_c": 34.45217285156252,
+    "day_wet_bulb_2m_median_c": 27.10475454571064,
+    "day_wet_bulb_2m_p99_c": 32.06787181747413,
+    "day_land_air_2m_median_c": 34.67717895507815,
+    "day_land_air_2m_p99_c": 39.66325127372134,
+    "day_wet_bulb_median_c": 26.482744693126975,
+    "day_wet_bulb_p99_c": 31.49585802064787,
+    "day_land_air_median_c": 33.19307861328127,
+    "day_land_air_p99_c": 37.92966529977799,
+    "night_wet_bulb_2m_median_c": 26.76333980818699,
+    "night_wet_bulb_2m_p99_c": 31.615049891811555,
+    "night_land_air_2m_median_c": 32.9167419433594,
+    "night_land_air_2m_p99_c": 35.94787054920408,
+    "night_wet_bulb_median_c": 26.151317422711983,
+    "night_wet_bulb_p99_c": 31.036666875436158,
+    "night_land_air_median_c": 31.448687607323,
+    "night_land_air_p99_c": 34.463705172959365,
     "ladder": [
      {
       "height_km": 0.9,
-      "air_c": 32.20084007947827,
-      "pressure_atm": 1.1364680427929494
+      "air_c": 32.30489123039098,
+      "pressure_atm": 1.13870124998037
      },
      {
       "height_km": 2,
-      "air_c": 31.264360534553703,
-      "pressure_atm": 1.1135366411142837
+      "air_c": 31.38514362745326,
+      "pressure_atm": 1.1157338583892185
      },
      {
       "height_km": 5,
-      "air_c": 28.413115476700455,
-      "pressure_atm": 1.0530688617942474
+      "air_c": 28.563755518127095,
+      "pressure_atm": 1.0551712805051503
      },
      {
       "height_km": 10,
-      "air_c": 22.148366881892912,
-      "pressure_atm": 0.9583161263752156
+      "air_c": 22.27123512933008,
+      "pressure_atm": 0.9602678504306046
      },
      {
       "height_km": 15,
-      "air_c": 17.31966608619831,
-      "pressure_atm": 0.8700550962522212
+      "air_c": 17.42091963296491,
+      "pressure_atm": 0.8718560936945325
      },
      {
       "height_km": 20,
-      "air_c": 12.806258864846427,
-      "pressure_atm": 0.789253738066914
+      "air_c": 12.892165566374103,
+      "pressure_atm": 0.7909135690483032
      },
      {
       "height_km": 25,
-      "air_c": 8.949640091960077,
-      "pressure_atm": 0.7144520908469126
+      "air_c": 9.034122686199396,
+      "pressure_atm": 0.7159729987730036
      },
      {
       "height_km": 30,
-      "air_c": 5.029864697258745,
-      "pressure_atm": 0.6464548148067591
+      "air_c": 5.113667958135579,
+      "pressure_atm": 0.6478518288909896
      },
      {
       "height_km": 35,
-      "air_c": 0.6824155428905669,
-      "pressure_atm": 0.5831513604824591
+      "air_c": 0.762585055124589,
+      "pressure_atm": 0.5844257334764426
      },
      {
       "height_km": 40,
-      "air_c": -3.6650336114777247,
-      "pressure_atm": 0.526046923145186
+      "air_c": -3.5884978478863445,
+      "pressure_atm": 0.5272092642043866
      }
     ],
-    "height_of_20c_km": 12.224580661332809,
-    "freezing_level_km": 35.78484591614473
+    "height_of_20c_km": 12.341327209572393,
+    "freezing_level_km": 35.87631639309479
    },
    "interpolated_share_of_the_way": 1.0,
    "at_6_5_hours": {
-    "wet_bulb_2m_p99_c": 32.16162676097303,
-    "land_air_2m_p99_c": 39.382471310173756,
-    "wet_bulb_p99_c": 31.582161688768164,
-    "land_air_p99_c": 37.67611054125898
+    "wet_bulb_2m_p99_c": 32.143661851800104,
+    "land_air_2m_p99_c": 39.42933217002513,
+    "wet_bulb_p99_c": 31.56479482567404,
+    "land_air_p99_c": 37.7142869553356
    },
    "clear_sky_absorbed_w_m2": [
     236.17079868181733,
@@ -2246,7 +3378,7 @@
     2.8117240426616377
    ],
    "gap_with_the_added_heat_answered_w_m2": [
-    1.0069157709954197,
+    1.3148941090875326,
     1.838378125669692
    ],
    "gap_with_the_added_heat_unanswered_w_m2": [
@@ -2270,7 +3402,7 @@
     11.314450094743831
    ],
    "with_the_heat_beyond_sunlight_percent": [
-    12.452654118877742,
+    12.583059037610749,
     16.6181048486882
    ],
    "sunlight_scale_of_its_design_case": [
@@ -2279,7 +3411,7 @@
    ],
    "sunlight_scale": [
     0.8088043829677245,
-    0.8492092550468858
+    0.8479443273351758
    ],
    "sunlight_taken_tw": [
     1052.1691815825395,
@@ -2293,102 +3425,102 @@
     0.6219418292602731,
     3.33776277794943
    ],
-   "land_rain_mm_day": 2.2490673522735114,
+   "land_rain_mm_day": 1.9793775341177524,
    "land_rain_with_the_dimmings_own_cut_mm_day": [
-    1.8978992998986866,
-    2.1391511071680824
+    1.6703186911853851,
+    1.8826415488764319
    ],
    "climate": {
     "ground_k": 295.0,
-    "rain_mm_day": 2.311283192657424,
-    "land_rain_mm_day": 2.2490673522735114,
-    "land_desert": 0.37632641064557554,
-    "wet_bulb_median_c": 15.941001503729277,
-    "wet_bulb_p99_c": 21.23948312107108,
-    "land_air_median_c": 18.968624559380462,
-    "land_air_p99_c": 26.045111787173603,
-    "wet_bulb_2m_median_c": 16.673359291257952,
-    "wet_bulb_2m_p99_c": 21.924385943293245,
-    "land_air_2m_median_c": 20.390587435065136,
-    "land_air_2m_p99_c": 27.749924598106848,
-    "sea_median_c": 24.173635168325674,
-    "day_wet_bulb_2m_median_c": 17.257365345360004,
-    "day_wet_bulb_2m_p99_c": 22.26207468052962,
-    "day_land_air_2m_median_c": 22.211522378311376,
-    "day_land_air_2m_p99_c": 28.215952929032866,
-    "day_wet_bulb_median_c": 16.51253897407566,
-    "day_wet_bulb_p99_c": 21.58306175361607,
-    "day_land_air_median_c": 20.756128483069503,
-    "day_land_air_p99_c": 26.479451934909637,
-    "night_wet_bulb_2m_median_c": 16.185857442519477,
-    "night_wet_bulb_2m_p99_c": 20.98354390105399,
-    "night_land_air_2m_median_c": 19.5182294558386,
-    "night_land_air_2m_p99_c": 23.500550670686792,
-    "night_wet_bulb_median_c": 15.459718521270698,
-    "night_wet_bulb_p99_c": 20.26264471724912,
-    "night_land_air_median_c": 18.097242165938194,
-    "night_land_air_p99_c": 22.06222606802108,
+    "rain_mm_day": 2.3132941177182866,
+    "land_rain_mm_day": 1.9793775341177524,
+    "land_desert": 0.4228810439510795,
+    "wet_bulb_median_c": 15.911056301700494,
+    "wet_bulb_p99_c": 21.249172560758836,
+    "land_air_median_c": 19.018273925781273,
+    "land_air_p99_c": 26.076929273105552,
+    "wet_bulb_2m_median_c": 16.646044758179865,
+    "wet_bulb_2m_p99_c": 21.93785934087677,
+    "land_air_2m_median_c": 20.440484619140648,
+    "land_air_2m_p99_c": 27.80251137245035,
+    "sea_median_c": 24.124910118458846,
+    "day_wet_bulb_2m_median_c": 17.277443603552296,
+    "day_wet_bulb_2m_p99_c": 22.278035830175178,
+    "day_land_air_2m_median_c": 22.382775878906273,
+    "day_land_air_2m_p99_c": 28.26109892502864,
+    "day_wet_bulb_median_c": 16.52734797467542,
+    "day_wet_bulb_p99_c": 21.59854550858308,
+    "day_land_air_median_c": 20.920068359375023,
+    "day_land_air_p99_c": 26.503462454450823,
+    "night_wet_bulb_2m_median_c": 16.126066977977136,
+    "night_wet_bulb_2m_p99_c": 20.93362949429771,
+    "night_land_air_2m_median_c": 19.529351806640648,
+    "night_land_air_2m_p99_c": 23.384024865149428,
+    "night_wet_bulb_median_c": 15.397846706721698,
+    "night_wet_bulb_p99_c": 20.207716637089767,
+    "night_land_air_median_c": 18.109460449218773,
+    "night_land_air_p99_c": 21.949259826546474,
     "ladder": [
      {
       "height_km": 0.9,
-      "air_c": 19.559371243190235,
-      "pressure_atm": 1.135496513361687
+      "air_c": 19.62296369702733,
+      "pressure_atm": 1.1378336156978948
      },
      {
       "height_km": 2,
-      "air_c": 18.78656801631301,
-      "pressure_atm": 1.1116261170299835
+      "air_c": 18.86932705276365,
+      "pressure_atm": 1.1139208848968591
      },
      {
       "height_km": 5,
-      "air_c": 16.465431642188715,
-      "pressure_atm": 1.0487990076567362
+      "air_c": 16.58525475180693,
+      "pressure_atm": 1.0509840615764714
      },
      {
       "height_km": 10,
-      "air_c": 11.815606230013689,
-      "pressure_atm": 0.9510055878380619
+      "air_c": 11.941152635567562,
+      "pressure_atm": 0.9530246300090676
      },
      {
       "height_km": 15,
-      "air_c": 7.140327223631112,
-      "pressure_atm": 0.8603825437289907
+      "air_c": 7.256622655413935,
+      "pressure_atm": 0.8622423561864544
      },
      {
       "height_km": 20,
-      "air_c": 2.4890528017421336,
-      "pressure_atm": 0.777485616191041
+      "air_c": 2.5993811258567234,
+      "pressure_atm": 0.7791983840349042
      },
      {
       "height_km": 25,
-      "air_c": -2.1210762634576534,
-      "pressure_atm": 0.7012011355688236
+      "air_c": -2.012067219541393,
+      "pressure_atm": 0.7027712264580674
      },
      {
       "height_km": 30,
-      "air_c": -7.023521162367199,
-      "pressure_atm": 0.631447598958748
+      "air_c": -6.914135311124994,
+      "pressure_atm": 0.6328899294255841
      },
      {
       "height_km": 35,
-      "air_c": -12.49615826058551,
-      "pressure_atm": 0.566954228596463
+      "air_c": -12.387953827161596,
+      "pressure_atm": 0.5682699119206785
      },
      {
       "height_km": 40,
-      "air_c": -17.969277458718025,
-      "pressure_atm": 0.5090457071010851
+      "air_c": -17.86203671104235,
+      "pressure_atm": 0.5102466503932441
      }
     ],
     "height_of_20c_km": null,
-    "freezing_level_km": 22.699547850548374
+    "freezing_level_km": 22.81839991599463
    },
-   "interpolated_share_of_the_way": -0.0020003138235005586,
+   "interpolated_share_of_the_way": 0.0,
    "at_6_5_hours": {
-    "wet_bulb_2m_p99_c": 22.227170467617537,
-    "land_air_2m_p99_c": 27.966948927613114,
-    "wet_bulb_p99_c": 21.53724978761653,
-    "land_air_p99_c": 26.248539114411795
+    "wet_bulb_2m_p99_c": 22.23433875538787,
+    "land_air_2m_p99_c": 28.017438383684528,
+    "wet_bulb_p99_c": 21.540825447247098,
+    "land_air_p99_c": 26.281243596755413
    },
    "clear_sky_absorbed_w_m2": [
     209.44937152660518,
@@ -2399,7 +3531,7 @@
     29.533151197873792
    ],
    "gap_with_the_added_heat_answered_w_m2": [
-    21.990415563856743,
+    22.298393901948828,
     28.559805280881847
    ],
    "gap_with_the_added_heat_unanswered_w_m2": [
@@ -2423,7 +3555,7 @@
     6.529398975804237
    ],
    "with_the_heat_beyond_sunlight_percent": [
-    8.785404595913432,
+    8.915809514646439,
     11.83305372974861
    ],
    "sunlight_scale_of_its_design_case": [
@@ -2432,7 +3564,7 @@
    ],
    "sunlight_scale": [
     0.8552193788214385,
-    0.8847815754196396
+    0.8835166477079296
    ],
    "sunlight_taken_tw": [
     617.8846997560089,
@@ -2446,102 +3578,102 @@
     0.36523436265277126,
     1.9261726978622498
    ],
-   "land_rain_mm_day": 2.7221962928101067,
+   "land_rain_mm_day": 2.3949542592343143,
    "land_rain_with_the_dimmings_own_cut_mm_day": [
-    2.4769108743403754,
-    2.644069368942974
+    2.1791552151889872,
+    2.3262191685391054
    ],
    "climate": {
     "ground_k": 300.0,
     "rain_mm_day": 2.7483541937774265,
-    "land_rain_mm_day": 2.7221962928101067,
-    "land_desert": 0.2948951612188973,
-    "wet_bulb_median_c": 20.43139879367548,
-    "wet_bulb_p99_c": 25.60495807348194,
-    "land_air_median_c": 24.652461423633135,
-    "land_air_p99_c": 31.023769490937564,
-    "wet_bulb_2m_median_c": 21.11339837558548,
-    "wet_bulb_2m_p99_c": 26.24197483972696,
-    "land_air_2m_median_c": 26.095122324258362,
-    "land_air_2m_p99_c": 32.72460565960708,
-    "sea_median_c": 28.705611950124407,
-    "day_wet_bulb_2m_median_c": 21.516435605923057,
-    "day_wet_bulb_2m_p99_c": 26.515350817153525,
-    "day_land_air_2m_median_c": 27.568516200009164,
-    "day_land_air_2m_p99_c": 33.16419104919637,
-    "day_wet_bulb_median_c": 20.825860186011745,
-    "day_wet_bulb_p99_c": 25.883097123200876,
-    "day_land_air_median_c": 26.1021591088907,
-    "day_land_air_p99_c": 31.43285955822483,
-    "night_wet_bulb_2m_median_c": 20.769952164572274,
-    "night_wet_bulb_2m_p99_c": 25.6073355705089,
-    "night_land_air_2m_median_c": 25.318452906487774,
-    "night_land_air_2m_p99_c": 28.907374694842233,
-    "night_wet_bulb_median_c": 20.093402825169324,
-    "night_wet_bulb_p99_c": 24.94776514824325,
-    "night_land_air_median_c": 23.8769798790821,
-    "night_land_air_p99_c": 27.449492690635456,
+    "land_rain_mm_day": 2.3949542592343143,
+    "land_desert": 0.3270559181220337,
+    "wet_bulb_median_c": 20.411605809478857,
+    "wet_bulb_p99_c": 25.595609283394385,
+    "land_air_median_c": 24.6909101921978,
+    "land_air_p99_c": 31.045132850711944,
+    "wet_bulb_2m_median_c": 21.09565085546877,
+    "wet_bulb_2m_p99_c": 26.234813622467207,
+    "land_air_2m_median_c": 26.133723680713654,
+    "land_air_2m_p99_c": 32.76257649107957,
+    "sea_median_c": 28.594181300080642,
+    "day_wet_bulb_2m_median_c": 21.530353471511585,
+    "day_wet_bulb_2m_p99_c": 26.514727873516836,
+    "day_land_air_2m_median_c": 27.703355279626525,
+    "day_land_air_2m_p99_c": 33.19554401638139,
+    "day_wet_bulb_median_c": 20.83568880082346,
+    "day_wet_bulb_p99_c": 25.881749560697124,
+    "day_land_air_median_c": 26.23138970919483,
+    "day_land_air_p99_c": 31.448315743434442,
+    "night_wet_bulb_2m_median_c": 20.729499478896756,
+    "night_wet_bulb_2m_p99_c": 25.556167488646672,
+    "night_land_air_2m_median_c": 25.32293704616167,
+    "night_land_air_2m_p99_c": 28.821209421914705,
+    "night_wet_bulb_median_c": 20.05156551057609,
+    "night_wet_bulb_p99_c": 24.894100287650094,
+    "night_land_air_median_c": 23.882202468430027,
+    "night_land_air_p99_c": 27.365065678122328,
     "ladder": [
      {
       "height_km": 0.9,
-      "air_c": 25.044463332592713,
-      "pressure_atm": 1.1359180568126144
+      "air_c": 25.111249868986114,
+      "pressure_atm": 1.138209096887351
      },
      {
       "height_km": 2,
-      "air_c": 24.200641485255268,
-      "pressure_atm": 1.1124550871977006
+      "air_c": 24.28572632305838,
+      "pressure_atm": 1.1147054751984569
      },
      {
       "height_km": 5,
-      "air_c": 21.64949268256741,
-      "pressure_atm": 1.0506516834379978
+      "air_c": 21.769122893588996,
+      "pressure_atm": 1.0527961406697146
      },
      {
       "height_km": 10,
-      "air_c": 16.29895736960752,
-      "pressure_atm": 0.9541776066610888
+      "air_c": 16.411644109088318,
+      "pressure_atm": 0.956159237613108
      },
      {
       "height_km": 15,
-      "air_c": 11.557109149330934,
-      "pressure_atm": 0.8645794327152773
+      "air_c": 11.655368067167572,
+      "pressure_atm": 0.8664028390852581
      },
      {
       "height_km": 20,
-      "air_c": 6.965654856008291,
-      "pressure_atm": 0.7825917658833286
+      "air_c": 7.053731331472602,
+      "pressure_atm": 0.7842682985050686
      },
      {
       "height_km": 25,
-      "air_c": 2.6824714485621,
-      "pressure_atm": 0.7069506818370731
+      "air_c": 2.7683300152650947,
+      "pressure_atm": 0.7084844829209196
      },
      {
       "height_km": 30,
-      "air_c": -1.7935963581097827,
-      "pressure_atm": 0.6379591809590602
+      "air_c": -1.7089308035248036,
+      "pressure_atm": 0.6393649061770434
      },
      {
       "height_km": 35,
-      "air_c": -6.778018078049659,
-      "pressure_atm": 0.5739821112839445
+      "air_c": -6.696869367675274,
+      "pressure_atm": 0.5752615755938754
      },
      {
       "height_km": 40,
-      "air_c": -11.762712716323708,
-      "pressure_atm": 0.5164224792817064
+      "air_c": -11.684957890690674,
+      "pressure_atm": 0.5175874649953662
      }
     ],
-    "height_of_20c_km": 6.541427713384175,
-    "freezing_level_km": 27.996459799563016
+    "height_of_20c_km": 6.6510778341363785,
+    "freezing_level_km": 28.091544280430497
    },
    "interpolated_share_of_the_way": 0.43276435364578325,
    "at_6_5_hours": {
-    "wet_bulb_2m_p99_c": 26.53769864538579,
-    "land_air_2m_p99_c": 32.92010684999314,
-    "wet_bulb_p99_c": 25.89570429328219,
-    "land_air_p99_c": 31.206925077801678
+    "wet_bulb_2m_p99_c": 26.52274056027394,
+    "land_air_2m_p99_c": 32.956099222004546,
+    "wet_bulb_p99_c": 25.878842076267155,
+    "land_air_p99_c": 31.229057216035585
    },
    "clear_sky_absorbed_w_m2": [
     220.75026497153806,
@@ -2552,7 +3684,7 @@
     18.23225775294091
    ],
    "gap_with_the_added_heat_answered_w_m2": [
-    13.329443075816783,
+    13.637421413908868,
     17.258911835948965
    ],
    "gap_with_the_added_heat_unanswered_w_m2": [

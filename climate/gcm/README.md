@@ -758,12 +758,13 @@ Their years 10–19 against the design case's, from the runs' yearly means:
 
 On this radiation the same dimming cools more. The held branch ends 0.61 K below the design case, where on the old
 radiation it ended within 0.06 K. The two branches differ by 0.70 points of dimming and 0.96 K, 1.37 K a point, so
-holding the temperature takes 0.45 points less than the held branch, 3.07% in all. If the gases' 1.69% still holds as
-it did, the glow's 1.38% is 3.15 W/m² of this radiation's absorbed sunlight against the glow's 5.34 W/m² of infrared:
-0.59 of its watts in place of 0.71, which
-[the target-climate study](../../research/studies/climate_targets/README.md#the-heat-beyond-the-sunlight) binds to the
-runs' records. With no gases-only branch on this radiation the two parts cannot be told apart. The held branch rains
-5.5% less, against 3.6% on the old radiation.
+holding the temperature takes 0.45 points less than the held branch: 3.07% of the design case's sunlight, 7.03 W/m² of
+its 228.5 W/m² absorbed, for the gases and the glow together. The pair fixes only that total, since no gases-only
+branch flew on this radiation. With the gases at their forcing, 3.58 W/m², as on 13 October, the glow takes
+3.45 W/m², 0.645 of its 5.34 W/m² of infrared; on the old radiation it took 0.71. Kept at their 1.69% of this
+radiation's sunlight, 3.87 W/m², the gases would leave the glow 0.59, with the same total.
+[The target-climate study](../../research/studies/climate_targets/README.md#the-heat-beyond-the-sunlight) binds both
+to the runs' records. The held branch rains 5.5% less, against 3.6% on the old radiation.
 The same morning the longwave was found to cool the lower air too much (below), and the author asked for the pair to
 run again with its correction in place, from a design case that lands on the design temperature under it; the lakes
 and the climate's other readers follow whatever that changes in the design case's rain.
@@ -907,55 +908,77 @@ Global means over years 10–19 (`progress.json`; the air is at 2 m, its warmest
 | Poles' air | 292.7 K | 307.8 K |
 
 The warmth reaches every latitude. The poles' air warms 15 K and the equator's land 12 K, and the land's surface
-poleward of 60° is the warmest, 34.4–34.8 °C against 32.3–32.8 °C within 30° of the equator. The rain rises 43% and
-reaches further poleward, and the land under 0.5 mm a day, the desert measure of 14 October, halves, from 37.6% to
-18.9%. The rain is still heaviest near the equator:
+poleward of 60° is the warmest, 34.7–34.9 °C against 31.9–32.5 °C within 30° of the equator. The rain rises 43% and
+reaches further poleward, and the land under 0.5 mm a day, the desert measure of 14 October, halves, from 42.3% to
+20.1%. The rain is still heaviest near the equator:
 
 | Land, years 10–19 | Design case: desert; rain | Correction and ice: desert; rain |
 |---|---|---|
-| 0–15° | 0%; 4.88 mm/day | 0%; 6.09 mm/day |
-| 15–30° | 1%; 2.87 mm/day | 1%; 4.22 mm/day |
-| 30–45° | 34%; 1.52 mm/day | 3%; 3.01 mm/day |
-| 45–60° | 85%; 0.24 mm/day | 22%; 1.22 mm/day |
+| 0–15° | 0%; 4.62 mm/day | 0%; 5.45 mm/day |
+| 15–30° | 1%; 2.78 mm/day | 1%; 3.98 mm/day |
+| 30–45° | 38%; 1.42 mm/day | 2%; 2.93 mm/day |
+| 45–60° | 86%; 0.23 mm/day | 18%; 1.27 mm/day |
 | 60–75° | 100%; 0.06 mm/day | 93%; 0.17 mm/day |
 | 75–90° | 100%; 0.04 mm/day | 100%; 0.04 mm/day |
-| Below 2 km; 2–4 km; 4 km and up | 46%; 36%; 4% | 24%; 16%; 1% |
-| All land | 37.6%; 2.25 mm/day | 18.9%; 3.34 mm/day |
+| Below 2 km; 2–4 km; 4 km and up | 47%; 39%; 9% | 23%; 18%; 2% |
+| All land | 42.3%; 1.98 mm/day | 20.1%; 2.94 mm/day |
 
 The heat at the ground is humid. In the 3-day means, each about a tenth of the lunar day, the land's air at 2 m has a
-median of 33.5 °C (20.4 in the design case), 39.2 °C at the 99th percentile and 42.3 °C at most. Its wet-bulb
-temperature at 2 m has a median of 26.9 °C (16.7), 31.9 °C at the 99th percentile (21.9) and 34.8 °C at most (24.6),
+median of 33.6 °C (20.4 in the design case), 39.3 °C at the 99th percentile and 42.3 °C at most. Its wet-bulb
+temperature at 2 m has a median of 26.9 °C (16.6), 31.9 °C at the 99th percentile (21.9) and 34.8 °C at most (24.6),
 and passes 28 °C for 32% of the land's time and 31 °C for 3.3%. At the lowest level, about 0.9 km above the ground,
-the air's median is 32.1 °C (19.0) and the wet-bulb temperature's 26.3 °C (16.0), with 31.3 °C at the 99th percentile
-(21.3), passing 28 °C for 23.6% of the land's time and 31 °C for 1.6%. The seas' surface has a median of 34.6 °C
-(24.2) and 36.8 °C at the 99th percentile. The air cools about 1 K a kilometre upward, and the freezing level stands a
-median 36 km above the ground (23 km in the design case). The land's figures are weighted by land area and the seas'
-by sea area. The output gives the air's temperature at 2 m and no humidity there, so the wet-bulb temperature at 2 m
-takes the lowest level's specific humidity, capped at saturation, as in air mixed through the lowest kilometre; the
-wet-bulb temperature is the psychrometric one over water with Bolton's saturation. The figures come from the run's
-output files and the T21 boundary file through the target-climate study's
-[extract](../../research/studies/climate_targets/extract.py), and its product carries them. The first readout counted
-every land cell alike, so the small polar cells, a third of the land's cells and a sixth of its area, weighed as much
-as the equatorial ones, and it put the lowest level's time above 28 °C at 17.6%.
+the air's median is 32.1 °C (19.0) and the wet-bulb temperature's 26.3 °C (15.9), with 31.3 °C at the 99th percentile
+(21.2), passing 28 °C for 23.8% of the land's time and 31 °C for 1.5%. The seas' surface has a median of 34.5 °C
+(24.1) and 36.8 °C at the 99th percentile. The air cools about 1 K a kilometre upward, and the median of the land's
+columns crosses freezing 36 km above the ground (23 km in the design case).
+
+The land is the model's own, the cells it runs as land. The runner turns cells to water, least land first, until the
+planned water share is met (`land_mask` in [exoplasim_run.py](exoplasim_run.py)), so 166 cells with a land fraction
+of 0.50–0.59 run as water and water covers 40.05% of the Moon against the planned 40.02%. The land's figures are
+weighted by land area and the seas' by water area, their quantiles included. The output's air at 2 m is the lowest
+level's carried down the dry adiabat to the ground's pressure (`mkshfl` in PlaSim's fluxmod.f90): over land it stands
+1.5 K above the lowest level's air and within 0.02 K of that air times σ^−0.286 (standard deviation 0.07 K). The
+wet-bulb temperature at 2 m carries the lowest level's specific humidity down with it, capped at saturation, which
+binds in 0.002% of the land's means here and 0.17% in the design case. Together they read a well-mixed lowest
+kilometre, as by day. The wet-bulb temperature is the psychrometric one over water with Bolton's saturation, capped
+at the air's own temperature where the air is supersaturated. The figures come from the run's output files and the
+T21 boundary file through the target-climate study's [extract](../../research/studies/climate_targets/extract.py),
+and its product carries them. The first readout of 17 October counted every cell with a land fraction above one half
+alike and put the lowest level's time above 28 °C at 17.6%.
 
 Place by place, in the same 3-day means of years 10–19, with the design case's figures in brackets:
 
 | Land | Wet-bulb at 2 m: median; 99th percentile | Time above 28 °C wet-bulb: at 2 m; 0.9 km up | Air at 2 m: median |
 |---|---|---|---|
-| 0–15° | 27.8; 32.4 °C (18.1; 22.5) | 46%; 37% (0) | 33.4 °C (20.9) |
-| 15–30° | 27.7; 32.0 °C (17.9; 22.0) | 44%; 34% (0) | 33.5 °C (20.9) |
-| 30–45° | 27.2; 31.5 °C (16.9; 21.2) | 35%; 24% (0) | 33.3 °C (20.5) |
-| 45–60° | 26.4; 30.8 °C (15.9; 19.0) | 19%; 12% (0) | 33.3 °C (20.2) |
-| 60–90° | 25.6; 29.3 °C (15.1; 18.1) | 6.2%; 2.9% (0) | 34.5 °C (19.6) |
-| Below 1 km | 28.4; 32.6 °C (17.9; 22.5) | 57%; 46% (0) | 34.7 °C (21.7) |
-| 4 km and up | 25.4; 29.1 °C (16.2; 19.6) | 5.7%; 2.5% (0) | 30.7 °C (18.9) |
-| Coasts, the land beside the sea | 27.3; 32.1 °C (17.3; 22.0) | 39%; 30% (0) | 33.7 °C (20.7) |
+| 0–15° | 27.9; 32.5 °C (18.3; 22.5) | 49%; 39% (0) | 33.5 °C (21.0) |
+| 15–30° | 27.8; 32.0 °C (17.9; 21.9) | 46%; 35% (0) | 33.5 °C (20.9) |
+| 30–45° | 27.2; 31.5 °C (16.9; 21.3) | 36%; 25% (0) | 33.3 °C (20.6) |
+| 45–60° | 26.3; 30.8 °C (15.9; 19.0) | 19%; 12% (0) | 33.3 °C (20.2) |
+| 60–90° | 25.6; 29.3 °C (15.1; 18.1) | 5.9%; 2.8% (0) | 34.5 °C (19.6) |
+| Below 1 km | 28.3; 32.5 °C (17.8; 22.5) | 56%; 45% (0) | 34.6 °C (21.6) |
+| 4 km and up | 25.4; 29.3 °C (16.0; 19.7) | 6.7%; 3.1% (0) | 30.7 °C (18.9) |
+| Coasts, the land beside the sea | 27.4; 32.0 °C (17.2; 22.0) | 39%; 29% (0) | 33.8 °C (20.7) |
 
-Each place's warmest tenth of its 3-day means, its afternoons, averages a wet-bulb temperature at 2 m of 29.8 °C and
-air of 36.7 °C (19.4 and 24.6), and its coolest tenth 23.3 and 31.7 °C (13.7 and 18.6). The seas' surface has a
-median of 35.5 °C within 15° of the equator and 33.3 °C poleward of 60° (26.0 and 20.4). Over the land the air 10 km
-up, 22.1 °C at 0.96 atm, is near the design case's at the lowest level, 19.6 °C at 1.14 atm; 20 km up it is 12.8 °C
-at 0.79 atm and 30 km up 5.0 °C at 0.65 atm (2.5 and −7.0 °C at the same heights in the design case).
+Each cell's warmest and coolest tenth of its 3-day means, ranked by one quantity with the other over the same means,
+averaged over the land at 2 m (the design case in brackets):
+
+| Land, at 2 m | Wet-bulb | Air | In the day; its afternoon |
+|---|---|---|---|
+| Warmest tenth by the wet-bulb temperature | 29.8 °C (19.4) | 33.8 °C (23.2) | 57%; 43% (80%; 59%) |
+| Coolest tenth by the wet-bulb temperature | 23.3 °C (13.6) | 33.3 °C (19.6) | 42%; 8% (34%; 6%) |
+| Warmest tenth by the air | 27.3 °C (18.3) | 36.9 °C (24.8) | 98%; 69% (98%; 80%) |
+| Coolest tenth by the air | 26.4 °C (15.5) | 31.7 °C (18.5) | 19%; 3% (18%; 1%) |
+
+The air's warmest tenth falls mostly in its afternoons. The wet-bulb temperature's warmest tenth is split between the
+day and the night, and its coolest comes in air near the median's warmth: in the hot world the wet-bulb temperature
+follows the humidity more than the air. In the air's coolest tenth, mostly nights, the 2 m air stands 1.1 K above the
+ground's own temperature (1.8 K in the design case); in calm night air the air near the ground cools below the lowest
+level's air carried down, as the cloud-resolving ring's calm, saturated land nights show ([the
+CRM's account](../crm/README.md#what-the-ring-shows)), so the 2 m figures read warm at night. The seas' surface has a
+median of 35.3 °C within 15° of the equator and 33.2 °C poleward of 60° (25.8 and 20.4). Over the land, in land-area
+means at each height above the ground, the air 10 km up, 22.3 °C at 0.96 atm, is near the design case's at the lowest
+level, 19.6 °C at 1.14 atm; 20 km up it is 12.9 °C at 0.79 atm and 30 km up 5.1 °C at 0.65 atm (2.6 and −6.9 °C at the
+same heights in the design case).
 
 The base of the thermosphere barely follows the ground: the middle-atmosphere cases at ground temperatures of 288 and
 308 K ([results/cases](../../atmosphere/middle_atmosphere/results/cases/), titania stack at 1.2 atm) put the 0.3 Pa

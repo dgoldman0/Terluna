@@ -98,7 +98,8 @@ comfortable air lies 8–12 km up; at 300 K the ground is warm and tropical, wit
 keeps delivering to balance the crust brings 1.5–9.5 W/m² of heat in its fall through the first thousand years unless
 it is lowered with energy recovery, as the build's deliveries already must be. These heat figures counted every land
 cell alike; weighted by area after the integration, with 2 m added, the time above 28 °C at 2 m is nearly half near
-the equator and more than half in the lowlands, and the seas at 300 K stand near 29 °C (the study's README).
+the equator and more than half in the lowlands, and the seas at 300 K stand near 29 °C; with the glow's efficacy
+carried as a range, 0.645–0.71, the dimming every target shares is 3.7–5.3% (the study's README).
 
 ## The review
 

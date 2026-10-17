@@ -274,10 +274,11 @@ one harbour town, and its 3-D CM1 box found a dry island with calm air, hot afte
 ([Jura Island](studies/jura_island/README.md)); its rerun waits on the GCM's longwave and the fresh shores.
 
 At the joint integration of 17 October, [what each target climate takes](studies/climate_targets/README.md) set three
-targets side by side. Keeping the warm Moon still takes the 3.9–5.3% of dimming that answers the gases, the glow and
-the beamed power; 300 K takes 5.2–6.5% more, and the design temperature 8.9–11.3% more. The water the author keeps
-delivering to balance the crust brings 1.5–9.5 W/m² of heat in its fall through the first thousand years unless it is
-lowered with energy recovery.
+targets side by side: the hot world, the resort between and the lock. Keeping the hot world still takes 3.7–5.3% of
+dimming to answer the gases, the glow (at an efficacy of 0.645–0.71) and the beamed power; the resort at 300 K takes
+5.2–6.5% more, and the lock at the design temperature 8.9–11.3% more, about 0.73–0.96% of the sunlight a kelvin. The
+water the author keeps delivering to balance the crust brings 1.5–9.5 W/m² of heat in its fall through the first
+thousand years unless it is lowered with energy recovery.
 
 Waiting on the author: the target climate, with new runs held until it is chosen (register, 17 October); the
 constraints review's recommendations for the fleet; the build's delivery heat, which the water top-up extends for
