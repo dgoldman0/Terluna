@@ -3,8 +3,9 @@
 **17 October 2026.** A design note for the Open Moon's architecture: guards and railings, stairs, handholds, ramps
 and halls for moving, at the Moon's gravity of 1.624 m/s², 0.166 of Earth's. It carries the author's rule for
 low-gravity architecture, set in their ChatGPT work of 15 October and confirmed on 17 October
-([register](../../research/decisions.md)): the architecture's guards and circulation show the Moon's gravity and the
-added spring in a step, and do not look terrestrial. It builds on the
+([register](../../research/decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)):
+the architecture's guards and circulation show the Moon's gravity and the added spring in a step, and do not look
+terrestrial. It builds on the
 [daily-life study](../../research/studies/daily_life/README.md#5-homes-and-mobility-across-bodies-and-generations)'s
 falls, sixfold jump, braking distances and access design, and on the 2.2 m railings of the summit port's
 [ring 0 drawings](../../immersion/world/summit/ring0/draw.py).
@@ -166,8 +167,9 @@ are a *design choice*:
 The author's criteria: the guards and circulation show the Moon's gravity and the added spring in a step, and do not
 look terrestrial. The scene accepted on 15 October carried continuous tall guards, inhabited spans with visible
 support, human-scale spaces and a separate hall for moving, and the author found it suited the semi-arid parks,
-gardens and their amenities, its setting left provisional (register). The figures above give these forms (*design
-choice*):
+gardens and their amenities, its setting left provisional
+([register](../../research/decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)). The figures above
+give these forms (*design choice*):
 - **Tall, continuous guards** of 2.2 m along every long drop, clear or finely open, their tops curving inward. Earth's
   waist-high rail appears only along drops of 2.3–4.6 m.
 - **Open edges.** Level changes under 2.3 m carry no guard: terraces, stepped gardens, plinths and quays that people

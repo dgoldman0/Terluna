@@ -135,7 +135,8 @@ night by infrared and lidar, so the living light keeps the dark.
 ## Building at a sixth of Earth's gravity
 
 The [low-gravity design note](low_gravity/README.md), 17 October 2026, sets out guards, stairs, handholds, ramps and
-halls for moving under the author's rule that the architecture show the Moon's gravity and the added spring in a step.
+halls for moving under the author's rule that the architecture show the Moon's gravity and the added spring in a step
+([register](../research/decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)).
 At a sixth of the weight the same push lifts a body 6.04 times as high, falls land like a sixth of the drop, grip stops
 and turns a sixth as hard, and a hand holds six times its grip. Its design choices:
 - no guard on drops up to 2.3 m, Earth's 1.1 m guard on 2.3–4.6 m, and above that the 2.2 m lunar guard the summit
