@@ -139,17 +139,18 @@ loss and the resupply that matches it take to replace the inventory.
      mare remnants or from space.
    - *Solid on the flooding.*
 8. **The seas start fresh.**
-   - **How long.** Weathering alone brings the seas and lakes to 1 g/kg in 1,100–11,000 years counting everything it
-     dissolves (cations with their bicarbonate and silica), or 8,700–87,000 years by the cations alone. It takes
-     0.3–3 million years to reach Earth's salinity (*screen*).
+   - **How long.** Fresh water starts at pH 5.6 and takes weathering's carbonate: pH 7.6 and 0.04 g/kg by year 1,000,
+     pH 8.5 and 0.31 g/kg by year 10,000. Left alone, the seas reach pH 9 in 30,000–60,000 years, 1 g/kg after
+     0.7–1.3 million years and Earth's salinity as a soda water after 27–38 million
+     ([sea chemistry](../research/studies/sea_chemistry/README.md)). The first screen counted weathering's whole
+     dissolved load with no sinks and gave 1 g/kg in 1,100–87,000 years.
    - **What follows.** Any salt the seas need for millennia comes with the delivered water, which makes the water's
      composition a design lever. Until then the plankton are freshwater, the spray is fresh and the density is near
      1,000 kg/m³.
    - **Assumptions to revisit.** The wave studies take 1,025 kg/m³ and the water optics Earth seawater at 38.4 g/kg.
-   - **Through the billion years** ([sea chemistry](../research/studies/sea_chemistry/README.md)): calcite and silica
-     keep fresh seas near 0.4 g/kg for 10,000 years, and left alone they turn alkaline, to pH 9 in 13,000–34,000 years
-     and a soda water of Earth's salinity in 24 million; held by calcite, a magnesium route, soda works and
-     silica-building life they stay fresh at 0.14 g/kg and pH 8.3.
+   - **Held fresh through the billion years** ([sea chemistry](../research/studies/sea_chemistry/README.md)): held by
+     calcite, a magnesium route, soda works and silica-building life, the seas stay hard fresh water at 0.14 g/kg and
+     pH 8.3.
    - **Held fresh, with the land's rock** ([terrain through time](../research/studies/terrain_through_time/README.md)):
      the author holds the seas fresh on the condition that they are rich in life. Keeping them and the lakes open
      is one loop with the relief: 0.7–8.3 Gt of rock a year dredged and carried back uphill for 0.2–11 GW, while
