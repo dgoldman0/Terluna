@@ -357,6 +357,12 @@ and [floater_viability.md](integration/floater_viability.md).
 |---|---|---|
 | Soda lakes, which the Moon's own water makes in closed basins in the dry belts, are left as their own local ecosystems: a biome that may be fairly common on the Moon. | Author, 2026-10-15 ("(might just be better todo that and leave the soda lakes as their own local ecosystem). Actually good to know about the soda lakes. It brings up a very interesting biome that may be somewhat common in this world."), on whether the load gathering by the fresh seas' shores could make salt lakes | Direction. The Moon's water carries calcium, magnesium and a little sodium with carbonate and almost no chloride, so a closed lake keeps sodium carbonate at a pH near 10, reaching the ocean's salinity in about 100,000 years at 10 m deep (the sea chemistry on domain/resources). Their communities are [question 10](../biosphere/ecology/questions.md) and where they lie belongs to the biome map, question 9 ([ecology](../biosphere/ecology/README.md#fresh-shores-and-soda-lakes-15-october-2026)). |
 
+## The rings' missing transport, 16 October 2026
+
+| Decision | Source | Status |
+|---|---|---|
+| The heat budget of the 45° N ring's lower air is worked out alongside the current work, and a ring with the GCM's sideways heat and vapour imposed by height tests whether that transport explains the warm drift of CM1's forced rings and boxes. | Author, 2026-10-16 ("Let's do the heat budget alongside current work then."; on the proposed confirming ring, "Do it.") | Done on domain/ecology. Below 8 km at 45° N the GCM's circulation carries about 15 W/m² of heat sideways out of the air, which a ring cannot do. With it imposed (`ring_45n_corrected_sideways`), the warm offset over the second lunar day falls by about a third, from 5.9 to 3.7 K in the lowest 1.8 km and from 5.8 to 4.0 K at 1.8–6.5 km, and the lowest layer still warms 0.05 K a day. What is left is open: the GCM's faster eddies, which its 3-day means miss, and the different ways the two models shed the ground's heat ([the CRM's account](../climate/crm/README.md#what-else-divides-cm1-and-the-gcm-at-the-crossing)). |
+
 ## The globe and the glow pair, 16 October 2026
 
 | Decision | Source | Status |

@@ -404,8 +404,9 @@ is about three times as wet as the north's (0.046 against 0.014). Over its secon
 ([ring_ring_45s_corrected_twilight.json](../results/crm/ring_ring_45s_corrected_twilight.json)) its land evaporates
 0.69 mm/day against the north's 0.18, its nights reach 94% humidity against 88%, with fog in 0.4% of land samples
 against none, and its afternoons peak at 36.0 °C against 37.8; it rains 0.01 mm/day, the north's desert all but
-unchanged. Both rings drift warm from the GCM's state without the GCM's sideways transport, so their absolute warmth
-and humidity wait for the confirming test ([below](#what-else-divides-cm1-and-the-gcm-at-the-crossing)).
+unchanged. Both rings drift warm from the GCM's state, and the GCM's sideways transport accounts for about a third
+of it ([below](#what-else-divides-cm1-and-the-gcm-at-the-crossing)), so their absolute warmth runs high and their
+humidity with it.
 
 ## Tilted rings
 
@@ -1047,10 +1048,11 @@ from the lowest 1.8 km and mostly by its eddies, and dries the lowest layer by 0
   without the sideways loss its lower air warms until radiation balances: the lowest 1.8 km from 20.0 to 26.0 °C over
   the first lunar day and on to 26.7 °C by day 59, still 0.055 K a day warmer near the ground, and 1.8–6.5 km from
   18.2 to 25.0 °C. At 6.5–13.7 km, partly held, it warms by 3.6 K, and at 13.7–23 km, held, by under a degree.
-- **So the gap lies in how CM1 is driven.** The rings and boxes take the GCM's sinking and its upper air but none of
-  the heat and vapour its circulation moves between latitudes. Their absolute warmth near the ground runs high for that
-  reason, at 45° N by about 6 K over the second lunar day and still growing; the shapes within a lunar day, the
-  breezes and the contrasts between places rest on the terrain, the sea and the Sun, as before.
+- **Part of the gap lies in how CM1 is driven.** The rings and boxes take the GCM's sinking and its upper air but
+  none of the heat and vapour its circulation moves between latitudes. Their absolute warmth near the ground runs
+  high, at 45° N by about 6 K over the second lunar day and still growing, about a third of it for that reason (the
+  confirming test below); the shapes within a lunar day, the breezes and the contrasts between places rest on the
+  terrain, the sea and the Sun, as before.
 - **What it leaves out.** The GCM's sideways terms come from 3-day means, which miss its faster eddies, so they are a
   floor. Its own radiative heating is not in its output, so the budget does not close on the GCM's side.
 
@@ -1059,14 +1061,39 @@ from the lowest 1.8 km and mostly by its eddies, and dries the lowest layer by 0
 large-scale advection the boxes use for the day-night circulation (`var11 = 1`, one local-time bin in
 `terluna_lsadv.txt` on the GCM's levels): −0.28 K and −0.20 g/kg a day in the lowest 2 km. Its inputs match the
 control's byte for byte except that file and the switch. In a two-model-hour test its lowest 2 km ended 0.021 K
-cooler and 0.015 g/kg drier than the control's, as the forcing gives. It runs from 16 October in two-hour blocks with
-half-hour rests; if its lower air stays near the GCM's through two lunar days, the gap is explained.
+cooler and 0.015 g/kg drier than the control's, as the forcing gives. It ran on 16 October in two-hour blocks with
+half-hour rests, 59 days in 5.7 wall hours.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.ring_heat_budget ring_45n_corrected --from-day 29.5       # seconds
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected_sideways
 /media/projectspace/terluna-research/session-tools/sideways_ring.sh                  # 6 threads; rerun to resume
 ```
+
+**What the confirming test found**
+([heat_budget_ring_45n_corrected_sideways.json](../results/crm/heat_budget_ring_45n_corrected_sideways.json), ring
+means over the second lunar day): the sideways transport takes about a third of the warm offset away.
+
+| Layer | Control | With the sideways transport | GCM |
+|---|---|---|---|
+| 0–1.8 km | 25.6 °C | 23.5 °C | 19.8 °C |
+| 1.8–6.5 km | 24.1 °C | 22.3 °C | 18.3 °C |
+| 6.5–13.7 km | 16.5 °C | 15.4 °C | 13.7 °C |
+| 13.7–23 km | 6.5 °C | 6.1 °C | 5.9 °C |
+
+- **Part of the drift.** Its lowest 1.8 km warm from 20.0 to 24.2 °C over the first lunar day and to 24.6 °C by day
+  59, against the control's 26.0 and 26.7, and still warm 0.050 K a day near the ground against 0.055. About 2 K
+  cooler, that layer radiates 4.1 W/m² less and takes about 4.3 W/m² more from the ground, which together balance
+  the 8.5 W/m² the transport takes from it.
+- **What is left.** About 4 K below 6.5 km. Each kelvin the lowest layer cools gives back about 4 W/m², so the 3.7 K
+  left there would need about 15 W/m² more taken from it, nearly twice what the GCM's 3-day means carry sideways.
+  Two candidates remain. The transport imposed is a floor, since 3-day means miss the faster eddies, which a short
+  GCM run with daily output would measure. And the two models shed the ground's heat differently: by day CM1 mixes
+  its lower air dry to 14–19 km where the GCM's stays stable. The land test waits behind both, since over land the
+  ground heats the air alike in the two models.
+- **For the cases that follow.** The sideways transport is part of the GCM's forcing that a slice of it lacks, so
+  forced rings and boxes are better driven with it; their warmth near the ground still runs about 4 K high at 45° N
+  until the rest is found.
 
 **The land test on dry ground** (case `ring_45n_corrected_gcm_land`) is `ring_45n_corrected` with the GCM's roughness
 (2 m) and soil thermal inertia (THERIN 4.97), keeping the GCM's own wetness as the control does. A circle of latitude's
