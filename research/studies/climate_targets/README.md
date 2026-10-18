@@ -10,6 +10,8 @@ temperature of 295 K; and between them the resort, a tropical resort Moon, which
 sets the heat the plan adds to the Moon beyond its sunlight, which every target answers, the winter each target leaves
 on the summit tower, and the resort's best value near 300 K. [run.py](run.py) is arithmetic on the GCM's output and
 the domains' committed products ([results/climate_targets.json](results/climate_targets.json)); no model runs.
+[The three target climates compared](comparison.md) sets them out for the author's choice, with each one's case, plant
+growth, the lakes and the levers that ease the shield.
 
 ## Where the corrected Moon settles
 
