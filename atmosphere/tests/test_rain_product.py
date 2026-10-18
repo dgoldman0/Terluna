@@ -86,6 +86,26 @@ def test_spectra_hold_on_a_finer_grid():
             assert abs(c['water_survival_fraction'] - f['water_survival_fraction']) < 5e-4
 
 
+def test_column_sensitivities():
+    """The parcel started at the GCM's lowest level and the repository's heat capacity move the cloud base by tens of
+    metres; the GCM's mean air over land is more stable than the column and implies about 1.155 atm at the ground."""
+    for key, _ in rain.TARGETS:
+        sens = PRODUCT['column_sensitivity'][key]
+        base = PRODUCT['survival'][key]['moon']['cloud_base_m']
+        lowest = sens['lowest_level']
+        assert 850 < lowest['height_m'] < 950 and -40 < lowest['cloud_base_change_m'] < 0
+        assert lowest['cloud_base_m'] == pytest.approx(base + lowest['cloud_base_change_m'], abs=1e-6)
+        cp = sens['repository_heat_capacity']
+        assert cp['column_heat_capacity_j_kg_k'] / cp['heat_capacity_j_kg_k'] - 1 == pytest.approx(0.0083, abs=5e-4)
+        assert -0.012 < cp['cloud_base_change_m'] / base < -0.009
+        assert -0.01 < cp['smallest_surviving_change'] <= 0
+        air = sens['gcm_land_air']
+        assert air['height_km'] == [0.9, 2.0, 5.0]
+        assert 0.7 < air['gcm_lapse_k_km'] < 1.0 < PRODUCT['survival'][key]['moon']['lapse_k_km']
+        assert 2.5 < air['gcm_air_k'][2] - air['column_air_k'][2] < 4.5
+        assert air['ground_pressure_atm'] == pytest.approx(1.155, abs=0.002)
+
+
 def test_cm1_check():
     factor = (9.81 / MOON_SURFACE_GRAVITY)**0.6
     for key, _ in rain.TARGETS:

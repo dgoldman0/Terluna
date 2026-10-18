@@ -1,18 +1,20 @@
 """The rain product: fall speed and survival by drop size in the Moon's air at 2 m in the three target climates,
 beside Earth's air, and the check of CM1's rain fall speeds against the single-drop solver.
 
-    python -m atmosphere.rain.product        # about three and a half minutes on one thread
+    python -m atmosphere.rain.product        # about four minutes on one thread
     # -> atmosphere/rain/results/rain_drops.json
 
-The air at 2 m is each target's median over land from the climate targets' product
-(research/studies/climate_targets): its 2 m air temperature and 2 m wet-bulb temperature, from which the specific
-humidity follows by inverting that study's own psychrometric relation. The Moon's air is the repository's design air,
+The air at 2 m is each target's median over land in the climate targets' product (research/studies/climate_targets):
+their 2 m temperature, the GCM's lowest level, 0.88-0.91 km up, carried down the dry adiabat to the ground, and their
+2 m wet-bulb temperature, which carries the lowest level's humidity, from which the specific humidity follows by
+inverting that study's own psychrometric relation. The Moon's air is the repository's design air,
 1.2 atm with Earth's oxygen partial pressure and 400 ppm of CO2 (atmosphere/radiative_convective/thermodynamics.py,
 earthlike_air), under lunar gravity. Earth's air is Earth's dry air at 1 atm under standard gravity, at the same
 temperature and relative humidity. A third air, the Moon's under Earth's gravity, isolates gravity for the CM1 check.
 
-Survival starts each drop at the parcel cloud base at its terminal speed, in still air, and follows it to the ground;
-the rain work's bounded cloud-base spectra weigh the classes into the share of the water that arrives. The CM1 check
+Survival starts each drop at the parcel cloud base of a daytime mixed layer at its terminal speed, in still air, and
+follows it to the ground; the rain work's bounded cloud-base spectra weigh the classes into the share of the water that
+arrives, and the column's sensitivities set the GCM's mean air over land beside it. The CM1 check
 sets the solver's slowing by gravity alone beside the one factor CM1's Morrison scheme applies at every size,
 (g / 9.81)^((B + 1) / 3) with B = 0.8, and sets CM1's whole rain law in the Moon's air beside the solver.
 """
@@ -30,10 +32,10 @@ from scipy.optimize import brentq
 
 from shared.constants import (CM1_DRY_AIR_GAS_CONSTANT, CM1_GRAVITY, CM1_RAIN_DENSITY_EXPONENT,
                               CM1_RAIN_DENSITY_REFERENCE_PRESSURE, CM1_RAIN_DENSITY_REFERENCE_TEMPERATURE,
-                              CM1_RAIN_FALL_CAP, CM1_RAIN_FALL_COEFFICIENT, CM1_RAIN_FALL_EXPONENT,
+                              CM1_RAIN_FALL_CAP, CM1_RAIN_FALL_COEFFICIENT, CM1_RAIN_FALL_EXPONENT, GAS_CONSTANT,
                               MOON_SURFACE_GRAVITY, STANDARD_GRAVITY)
 from shared.provenance import constants_used
-from atmosphere.radiative_convective.thermodynamics import DryAir, earthlike_air
+from atmosphere.radiative_convective.thermodynamics import CP_VAPOUR, DryAir, earthlike_air
 from atmosphere.rain import distributions, drops
 
 HERE = Path(__file__).resolve().parent
@@ -48,7 +50,8 @@ CODE = ('atmosphere/rain/drops.py', 'atmosphere/rain/distributions.py', 'atmosph
 TARGETS = (('hot_world', 'no further dimming'), ('resort', '300 K'), ('lock', '295 K'))
 ATMOSPHERE_PA = 101325.0
 MOON_PRESSURE_PA = 1.2 * ATMOSPHERE_PA       # the design pressure at the water level (research/decisions.md)
-LAND_MEAN_PRESSURE_PA = 1.16 * ATMOSPHERE_PA  # the land's mean surface pressure in the GCM (climate/gcm/README.md)
+# The GCM's global mean surface pressure (climate/gcm/README.md); the targets' ladder implies 1.155 atm over land.
+MEAN_SURFACE_PRESSURE_PA = 1.16 * ATMOSPHERE_PA
 CO2_PPM = 400.0
 SPEED_MM = (0.1, 0.2, 0.3, 0.5, 0.7, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0)
 CLOUD_BASE_MM = (0.2, 0.3, 0.5, 0.7, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0, 6.0)
@@ -66,8 +69,9 @@ GCM_HEAT_CAPACITY = 1004.64
 
 EVIDENCE = ('A runnable calculation of independent single drops: the solver reproduces 34 Gunn-Kinzer fall speeds '
             'on Earth to 0.20 m/s (root mean square) and 7.4% at most, and its lunar values are that physics carried '
-            'to lunar gravity and air. The air at 2 m pairs each target\'s median land temperature with its median '
-            'land wet-bulb temperature. Survival holds the parcel column below the cloud fixed and the drops '
+            'to lunar gravity and air. The air at 2 m is the targets\' 2 m state over land, the GCM\'s lowest level '
+            'carried down the dry adiabat with that level\'s humidity. Survival holds the parcel column below the '
+            'cloud fixed and the drops '
             'independent, so it filters sizes under that air; the spectra are bounded scenario boundary '
             'conditions. The CM1 check compares fall-speed laws; CM1 was not rerun.')
 READING_RULE = ('Diameters are volume-equivalent, in mm. fall_speed gives the still-air terminal speed at 2 m in m/s, '
@@ -78,15 +82,21 @@ READING_RULE = ('Diameters are volume-equivalent, in mm. fall_speed gives the st
                 'diameter, the solver\'s ratio of Earth-gravity to lunar-gravity speed in the Moon\'s air beside '
                 'CM1\'s single factor, CM1\'s whole lunar law in that air over the solver\'s speed, and the water '
                 'lost per metre of fall at CM1\'s speed over that at the solver\'s, with the same ventilation. '
-                'Interpolate in log diameter.')
+                'column_sensitivity gives the cloud base with the parcel started at the GCM\'s lowest level, the '
+                'cloud base and smallest surviving drop with the repository\'s heat capacity, and the GCM\'s mean '
+                'air over land beside the column. Interpolate in log diameter.')
 ASSUMPTIONS = [
-    'Each target\'s air at 2 m is its median land temperature at 2 m with its median land wet-bulb temperature at 2 m, '
-    'paired; the specific humidity follows from the targets\' psychrometric relation at 1.2 atm, where the GCM '
-    'computed it at each cell\'s own surface pressure, which moves the vapour pressure by 0.6%.',
-    'The Moon\'s air is at 1.2 atm, the design pressure at the water level; the land\'s mean surface pressure in the '
-    'GCM is 1.16 atm, and pressure_sensitivity gives its effect on the fall speeds.',
-    'The column below the cloud cools at the dry adiabat g/cp and holds the 2 m vapour mole fraction, so its cloud '
-    'base is the parcel saturation height; the rain neither cools nor moistens it, and the air is still.',
+    'Each target\'s air at 2 m pairs its median land temperature at 2 m, the GCM\'s lowest level (0.88-0.91 km up) '
+    'carried down the dry adiabat, with its median land wet-bulb temperature at 2 m, which carries the lowest '
+    'level\'s humidity, held in the GCM\'s output as one step at each 3-day window\'s boundary. The specific '
+    'humidity follows from the targets\' psychrometric relation at 1.2 atm, where the targets\' extractor computed '
+    'it at each cell\'s own surface pressure, which moves the vapour pressure by 0.6%.',
+    'The Moon\'s air is at 1.2 atm, the design pressure at the water level; pressure_sensitivity gives the fall '
+    'speeds at 1.16 atm, the GCM\'s global mean surface pressure, close to the 1.155 atm its air implies over land.',
+    'The column below the cloud is a well-mixed daytime convective layer: it cools at the dry adiabat g/cp and holds '
+    'the 2 m vapour mole fraction, so its cloud base is the parcel saturation height; the rain neither cools nor '
+    'moistens it, and the air is still. Its cp is the transport model\'s, which carries argon as nitrogen, 0.8% above '
+    'thermodynamics.py\'s; column_sensitivity gives the column with the repository\'s cp.',
     'Earth\'s air carries the same temperature and relative humidity at 2 m as the Moon\'s, at 1 atm.',
     'Drops are pure liquid water in their equilibrium shape, each falling independently of the others.',
 ]
@@ -308,7 +318,7 @@ def cm1_check(cols):
 
 
 def pressure_sensitivity(air):
-    """Fall speeds at the land's mean surface pressure over those at 1.2 atm, at a target's 2 m air (the same
+    """Fall speeds at the GCM's mean surface pressure over those at 1.2 atm, at a target's 2 m air (the same
     composition, which is uniform with height)."""
     composition = earthlike_air(MOON_PRESSURE_PA, CO2_PPM)
 
@@ -317,10 +327,53 @@ def pressure_sensitivity(air):
                             surface_temperature_k=air['air_2m_k'], surface_relative_humidity=air['relative_humidity'],
                             air=composition)
 
-    high, low = at(MOON_PRESSURE_PA), at(LAND_MEAN_PRESSURE_PA)
-    return dict(pressure_pa=LAND_MEAN_PRESSURE_PA, diameter_mm=list(SPEED_MM[:12]),
+    high, low = at(MOON_PRESSURE_PA), at(MEAN_SURFACE_PRESSURE_PA)
+    return dict(pressure_pa=MEAN_SURFACE_PRESSURE_PA, diameter_mm=list(SPEED_MM[:12]),
                 speed_ratio=[drops.terminal_speed(mm * 1e-3, low) / drops.terminal_speed(mm * 1e-3, high)
                              for mm in SPEED_MM[:12]])
+
+
+LADDER_KM = (0.9, 2.0, 5.0)
+
+
+def column_sensitivity(air, climate, column):
+    """How the cloud base and the smallest surviving drop move with the column's construction, and the GCM's mean air
+    over land beside the column at the ladder's heights.
+
+    The parcel started at the GCM's lowest level begins where the targets' 2 m air was carried down from, at the height
+    the carry-down implies on the GCM's dry adiabat, with that level's median land temperature and the same vapour. The
+    repository's heat capacity (thermodynamics.py, the moist air's) replaces the transport model's in the dry adiabat.
+    """
+    gravity = column.gravity_m_s2
+    t_low = climate['land_air_median_c'] + 273.15
+    z_low = (air['air_2m_k'] - t_low) * GCM_HEAT_CAPACITY / gravity
+    p_low = column.state(z_low)['pressure_pa']
+    vapour = column.describe()['vapour_mole_fraction']
+    lowest = drops.Column(gravity_m_s2=gravity, surface_pressure_pa=p_low, surface_temperature_k=t_low,
+                          surface_relative_humidity=vapour * p_low / drops.liquid_saturation_pressure(t_low),
+                          air=column.air)
+    q = air['specific_humidity']
+    cp = (1 - q) * column.air.cp + q * CP_VAPOUR
+    repository = replace(column, lapse_k_m=gravity / cp, cloud_base_m=None)
+    smallest, again = smallest_surviving(column), smallest_surviving(repository)
+    ladder = {row['height_km']: row for row in climate['ladder']}
+    gcm = [ladder[h]['air_c'] + 273.15 for h in LADDER_KM]
+    # the land's mean ground pressure: the ladder's lowest pressure carried down hydrostatically
+    molar = (1 - vapour) * column.air.molar_mass + vapour * drops.WATER_MOLAR_MASS
+    ground = ladder[LADDER_KM[0]]['pressure_atm'] * math.exp(gravity * molar * LADDER_KM[0] * 1e3
+                                                             / (GAS_CONSTANT * gcm[0]))
+    return dict(
+        lowest_level=dict(height_m=z_low, temperature_k=t_low, cloud_base_m=z_low + lowest.cloud_base_m,
+                          cloud_base_change_m=z_low + lowest.cloud_base_m - column.cloud_base_m),
+        repository_heat_capacity=dict(
+            heat_capacity_j_kg_k=cp, column_heat_capacity_j_kg_k=gravity / column.lapse_k_m,
+            lapse_k_km=repository.lapse_k_m * 1e3, cloud_base_m=repository.cloud_base_m,
+            cloud_base_change_m=repository.cloud_base_m - column.cloud_base_m, smallest_surviving_mm=again,
+            smallest_surviving_change=again / smallest - 1),
+        gcm_land_air=dict(height_km=list(LADDER_KM), gcm_air_k=gcm,
+                          column_air_k=[column.state(h * 1e3)['temperature_k'] for h in LADDER_KM],
+                          gcm_lapse_k_km=(gcm[0] - gcm[-1]) / (LADDER_KM[-1] - LADDER_KM[0]),
+                          ground_pressure_atm=ground))
 
 
 def describe(column):
@@ -335,15 +388,17 @@ def describe(column):
 def build():
     targets = json.loads(TARGETS_PRODUCT.read_text())
     air = target_air(targets)
+    climates = {t['name']: t['climate'] for t in targets['targets']}
     product = dict(schema=SCHEMA, evidence=EVIDENCE, reading_rule=READING_RULE, assumptions=ASSUMPTIONS,
                    targets=air, diameters_mm=list(SPEED_MM), cloud_base_diameters_mm=list(CLOUD_BASE_MM),
-                   airs={}, fall_speed={}, survival={}, cm1_check={})
-    for key, _ in TARGETS:
+                   airs={}, fall_speed={}, survival={}, cm1_check={}, column_sensitivity={})
+    for key, name in TARGETS:
         cols = columns(air[key])
         product['airs'][key] = {world: describe(c) for world, c in cols.items()}
         product['fall_speed'][key] = {world: speeds(c) for world, c in cols.items()}
         product['survival'][key] = {world: survival(cols[world]) for world in ('moon', 'earth')}
         product['cm1_check'][key] = cm1_check(cols)
+        product['column_sensitivity'][key] = column_sensitivity(air[key], climates[name], cols['moon'])
     product['pressure_sensitivity'] = dict(resort=pressure_sensitivity(air['resort']))
     resort = columns(air['resort'])
     product['grid_check'] = dict(resort={world: grid_check(resort[world]) for world in ('moon', 'earth')})

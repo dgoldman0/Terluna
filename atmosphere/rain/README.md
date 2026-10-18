@@ -39,11 +39,6 @@ drag and ventilation. The air's viscosity, conductivity and vapour diffusivity c
 mixed by Wilke's rule (Reid, Prausnitz and Sherwood 1977), so the Moon's air, with less oxygen in a denser column,
 takes its own values. These are the equations of Loftus and Wordsworth (2021) as their code implements them.
 
-The air below the cloud is hydrostatic, cools at the dry adiabat g/cp and keeps its vapour mole fraction, so the cloud
-base is where it saturates: a parcel estimate for a well-mixed layer. Under lunar gravity that air cools 1.6 K per km
-as it rises, six times more slowly than on Earth, so air of the same temperature and humidity saturates six times
-higher.
-
 The port changes three things from the recovered solver, each named in its code. The saturation pressure is the
 repository's (Wagner and Pruss 2002), where the recovered copy dropped a digit from one coefficient. The surface
 tension takes the IAPWS coefficient of 235.8 mN/m and critical temperature, where rainprops carries 235 mN/m, which
@@ -60,7 +55,7 @@ Together they move fall speeds by at most 0.08% (at 6 mm on Earth) and fall time
 | Inertial regime: rigid 6 mm spheres | Slowed by lunar gravity 2.47–2.49 times, against √(9.81/1.62) = 2.46 | Physical limit |
 | The stability screen | Grows 2.46 times at lunar gravity, as g^(−1/2) (Loftus and Wordsworth 2021) | Physical scaling |
 | Released at rest over 0.1 m and 1 m | Below the vacuum free-fall speed and the terminal speed | Physical bound |
-| Saturated isothermal air over 0.1 m; mass ledger; tighter integration | No evaporation or cooling; mass closes to rounding; status unchanged and evaporated share within 10⁻⁴ | Numerical checks |
+| Saturated isothermal air over 0.1 m; the water lost; tighter integration | No evaporation or cooling; the water a drop loses equals its evaporation rate integrated along its fall within 10⁻⁶; status unchanged and evaporated share within 10⁻⁴ | Numerical checks |
 
 The lunar values are this physics carried to lunar gravity and air, and the evaporation rests on its laboratory
 ventilation law: both are runnable calculations.
@@ -68,11 +63,16 @@ ventilation law: both are runnable calculations.
 ## Results
 
 The air at 2 m is each target's median over land in the
-[climate targets](../../research/studies/climate_targets/README.md): its air temperature and wet-bulb temperature at
-2 m, from which the humidity follows by that study's own psychrometric relation. The Moon's air is the design air at
-1.2 atm, with Earth's oxygen partial pressure (21,227 Pa) and 400 ppm of CO2 (`earthlike_air` in
-[thermodynamics.py](../radiative_convective/thermodynamics.py)). Earth's air is at 1 atm, with the same temperature
-and relative humidity.
+[climate targets](../../research/studies/climate_targets/README.md), whose 2 m state is the GCM's lowest level,
+0.88–0.91 km up, carried down to the ground: their 2 m temperature is that level's on the dry adiabat, 1.42–1.47 K
+warmer in the medians, and their extractor computes the 2 m wet-bulb temperature from that level's specific humidity,
+capped at saturation. The GCM's output holds that humidity as one step at each 3-day window's boundary, which
+`domain/climate` is correcting. Each target here pairs the two medians, and the humidity inverts the extractor's
+wet-bulb relation at 1.2 atm, where the extractor used each cell's own surface pressure; that moves the vapour pressure
+by 0.6%. Started from the lowest level itself, the parcel's cloud base comes 21–30 m lower (`column_sensitivity`).
+The Moon's air is the design air at 1.2 atm, with Earth's oxygen partial pressure (21,227 Pa) and 400 ppm of CO2
+(`earthlike_air` in [thermodynamics.py](../radiative_convective/thermodynamics.py)). Earth's air is at 1 atm, with the
+same temperature and relative humidity.
 
 | | Hot world | Resort | Lock |
 |---|---|---|---|
@@ -95,20 +95,31 @@ In still air at 2 m, in m/s:
 | Stability screen | 16.2 mm | 16.3 mm | 16.4 mm | 6.6 mm |
 
 Drops on the Moon also keep rounder: a 6 mm drop is 0.88 as tall as it is wide, against 0.65 on Earth. The hot
-world's warmer air is 5% less dense than the lock's, so its large drops fall 2% faster. At the land's mean surface
-pressure in the GCM, 1.16 atm, the resort's drops fall 0.2% (0.1 mm) to 1.6% (6 mm) faster than at 1.2 atm
-(`pressure_sensitivity`).
+world's warmer air is 5% less dense than the lock's, so its large drops fall 2% faster. At 1.16 atm, the GCM's global
+mean surface pressure and close to the 1.155 atm its air implies over land, the resort's drops fall 0.2% (0.1 mm) to
+1.6% (6 mm) faster than at 1.2 atm (`pressure_sensitivity`).
 
 ### Survival below the cloud
 
-Each drop leaves the parcel cloud base at its terminal speed and falls through still air:
+Each drop leaves the parcel cloud base at its terminal speed and falls through still air. The column below the cloud is
+hydrostatic, cools at the dry adiabat g/cp and keeps the 2 m vapour mole fraction, so the cloud base is where it
+saturates. Under lunar gravity that air cools 1.6 K per km as it rises, six times more slowly than on Earth, so air of
+the same temperature and humidity saturates six times higher. The column stands for the daytime convective mixed layer
+under a raining cell, which CM1's box finds 8–10 km deep at 65–75% humidity
+([climate/crm](../../climate/crm/README.md)); the GCM's mean air over land, through day and night, cools only
+0.76–0.92 K per km between 0.9 and 5 km and stands 2.8–4.0 K warmer than the column at 5 km (`column_sensitivity`). The
+rain neither cools nor moistens the column: rain falling through air its own evaporation has moistened would lose less,
+and a cloud base below the parcel height would shorten the fall. Gravity holds its surface value, 0.85% above its value
+at 7.4 km. The dry adiabat takes the gas-transport model's heat capacity, which carries argon, 1% of the air, as
+nitrogen and so stands 0.8% above the repository's (`thermodynamics.py`); with the repository's, the cloud bases sit
+49–78 m (1.0%) lower and the smallest surviving drop 0.3–0.6% smaller (`column_sensitivity`).
 
 | | Hot world | Resort | Lock |
 |---|---|---|---|
-| Cloud base: Moon; Earth | 7.42 km; 1.23 km | 6.10 km; 1.01 km | 4.96 km; 0.82 km |
+| Cloud base: Moon; Earth | 7.42 km; 1.23 km | 6.09 km; 1.01 km | 4.96 km; 0.82 km |
 | Smallest drop reaching the ground: Moon; Earth | 2.42 mm; 0.75 mm | 1.93 mm; 0.61 mm | 1.53 mm; 0.50 mm |
-| Water reaching the ground, mean drop 0.75 mm: Moon; Earth | 0%; 21–26% | 0–0.3%; 36–40% | 0.3–1.7%; 53–55% |
-| The same, mean drop 1.5 mm | 1.7–4.6%; 65–66% | 6.9–12%; 76–78% | 18–24%; 84–86% |
+| Water reaching the ground, mean drop 0.75 mm: Moon; Earth | 0%; 20–26% | 0–0.3%; 36–40% | 0.3–1.7%; 53–55% |
+| The same, mean drop 1.5 mm | 1.7–4.6%; 65–66% | 6.9–12%; 76–77% | 18–24%; 84–86% |
 | The same, mean drop 2.5 mm | 19–22%; 83–86% | 35–37%; 89–91% | 52%; 93–94% |
 | Encounters on the way down, central spectrum: Moon; Earth | 36; 1.3 | 26; 1.1 | 22; 0.9 |
 
@@ -161,8 +172,8 @@ Moon's air at 2 m, slows each size by its own factor. At the resort's air:
 | 6 mm | 1.93 | 2.48 | 2.94 | 0.95 | 1.46 | 1.03 |
 
 The hot world and the lock differ from these by under 3% (`cm1_check`). At the review's air, 20 °C and 80% humidity,
-the solver gives 4.35, 3.43, 3.07, 2.76, 2.49 and 1.93 at 0.2, 0.5, 1, 2, 3 and 6 mm, as the assessment's rerun of the
-recovered solver did.
+the solver gives 4.35, 3.43, 3.07, 2.76, 2.49 and 1.93 at 0.2, 0.5, 1, 2, 3 and 6 mm. The assessment's rerun of the
+recovered solver gave the same to 3 mm and 1.92 at 6 mm (1.9243), which the port's surface tension moves to 1.9252.
 
 The two agree at 1.37–1.39 mm. Small drops fall in the viscous regime, where speed follows gravity itself (Stokes
 drops fall 6.04 times slower); large ones fall in the inertial regime, where a rigid sphere's speed follows the square
@@ -185,12 +196,6 @@ drizzle and millimetre drops; a CM1 run with a size-dependent law would measure 
 
 ## Assumptions and limits
 
-- **The air.** Each target's 2 m state pairs its median land temperature with its median land wet-bulb temperature.
-  The humidity follows from the targets' psychrometric relation at 1.2 atm, where the GCM computed it at each cell's
-  own surface pressure; that moves the vapour pressure by 0.6%.
-- **The column.** Below the cloud the air cools at the dry adiabat and holds the 2 m vapour, and the rain neither cools
-  nor moistens it. Rain falling through air its own evaporation has moistened would lose less, and a cloud base below
-  the parcel height would shorten the fall. Gravity is held at its surface value; at 7.4 km it is 0.85% less.
 - **The drops.** Pure liquid water in the equilibrium shape, held during acceleration, with near-ambient liquid
   properties; the warm-water domain runs from 0 to 40 °C at the ground with the cloud base above freezing. Argon, 1% of
   the air, takes nitrogen's transport properties. The ventilation law was measured below a Reynolds number of 2,600,

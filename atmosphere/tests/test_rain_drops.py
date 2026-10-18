@@ -120,12 +120,14 @@ def test_inertial_regime_scalings():
 
 def test_slowing_by_gravity_spans_the_regimes():
     """With gravity alone changed in the Moon's air at 20 C and 80%, the slowing falls with size through CM1's single
-    factor; the review's rerun of the recovered solver gave 4.35, 3.43, 3.07, 2.76, 2.49 and 1.93."""
+    factor. The assessment's rerun of the recovered solver gave 4.35, 3.43, 3.07, 2.76, 2.49 and 1.92 at 0.2, 0.5, 1,
+    2, 3 and 6 mm (4.3480, 3.4298, 3.0729, 2.7570, 2.4901 and 1.9243 from the recovered run's terminal speeds); the
+    port's surface tension moves the last to 1.9252."""
     lunar = moon(air=RECOVERED_MOON_AIR)
     same_air = replace(lunar, gravity_m_s2=STANDARD_GRAVITY, lapse_k_m=None, cloud_base_m=None)
     slowing = [drops.terminal_speed(mm * 1e-3, same_air) / drops.terminal_speed(mm * 1e-3, lunar)
                for mm in (0.2, 0.5, 1, 2, 3, 6)]
-    assert np.round(slowing, 2).tolist() == [4.35, 3.43, 3.07, 2.76, 2.49, 1.93]
+    assert slowing == pytest.approx([4.3480, 3.4298, 3.0729, 2.7570, 2.4901, 1.9243], rel=1e-3)
     cm1 = (9.81 / MOON_SURFACE_GRAVITY)**0.6
     assert slowing[2] > cm1 > slowing[3]
 
@@ -184,16 +186,23 @@ def test_updraft_lengthens_the_fall_and_keeps_the_slip():
     assert a['surface_speed_m_s'] - b['surface_speed_m_s'] == pytest.approx(1.0, abs=1e-3)
 
 
-def test_mass_closes_and_tighter_integration_agrees():
+def test_water_lost_is_the_evaporation_integrated_along_the_fall():
+    """The mass a drop loses between the cloud base and the ground equals its evaporation rate, evaluated on the
+    solution's own path, integrated over the fall time; and a tighter integration gives the same fall."""
     central = moon(303.106, 0.765)
+    heights = np.linspace(central.cloud_base_m, 0.0, 801)
     for mm in (2.0, 5.0):
-        ordinary = drops.fall(mm * 1e-3, central, sample_heights_m=[central.cloud_base_m, 0])
+        ordinary = drops.fall(mm * 1e-3, central, sample_heights_m=heights)
         tight = drops.fall(mm * 1e-3, central, sample_heights_m=[central.cloud_base_m, 0], rtol=2e-8)
         assert ordinary['status'] == tight['status'] == 'surface'
         assert abs(ordinary['evaporated_mass_fraction'] - tight['evaporated_mass_fraction']) < 1e-4
-        kept = ordinary['surface_mass_kg'] / ordinary['initial_mass_kg']
-        assert kept + ordinary['evaporated_mass_fraction'] == pytest.approx(1.0, abs=1e-12)
-        track = ordinary['trajectory']
+        track = {k: np.array(v, dtype=float) for k, v in ordinary['trajectory'].items()}
+        mass = drops.WATER_DENSITY * np.pi * track['diameter_m']**3 / 6
+        rate = np.array([drops.drop_rates([z, u, m, t], central)[2] for z, u, m, t in
+                         zip(track['altitude_m'], track['speed_m_s'], mass, track['drop_temperature_k'])])
+        integrated = np.sum(0.5 * (rate[1:] + rate[:-1]) * np.diff(track['time_s']))
+        lost = ordinary['surface_mass_kg'] - ordinary['initial_mass_kg']
+        assert integrated < 0 and integrated == pytest.approx(lost, rel=1e-5)
         assert track['altitude_m'][0] == central.cloud_base_m and track['altitude_m'][-1] == 0.0
 
 

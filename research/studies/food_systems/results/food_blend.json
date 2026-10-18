@@ -5,7 +5,7 @@
   "module": "blend",
   "files": {
    "research/studies/food_systems/blend.py": "7c866446656ebf4e",
-   "research/studies/food_systems/run.py": "da127a06ea92f657",
+   "research/studies/food_systems/run.py": "0963459522e62e2d",
    "research/studies/food_systems/zones.py": "59f9cc439fcb8997",
    "research/studies/food_systems/parameters.py": "380459175e577004",
    "research/studies/food_systems/systems.py": "c049b3435c3e2763",
@@ -39,7 +39,7 @@
   },
   "food_product": {
    "path": "research/studies/food_systems/results/food_systems.json",
-   "sha256": "c3f736c1065a79eafb530df2634f3eebfe2c0019b135053d00f0c4c677746787"
+   "sha256": "f50685572562b4c1bd7ad0489ef1a4168fbf5e77155b5d0de5784389111cb49a"
   },
   "ignored_inputs": {
    "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc1",
@@ -87,7 +87,7 @@
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "sha256": "16934ae5f87e179d893ec7d6e77718a50ac5045c75051adf7ee9b7eeb2106536"
+    "sha256": "c0074bf1adafdec3de7631be517b3a7248f21e2fa2cfdf17509fe98e50829f2f"
    }
   }
  },

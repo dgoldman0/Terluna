@@ -38,12 +38,15 @@ WATER_DENSITY = 998.2                     # kg/m3
 WATER_HEAT_CAPACITY = 4184.0              # J/kg/K
 GROUND_RANGE_K = (273.15, 313.15)         # the warm-water domain at the ground
 CUTOFF_DIAMETER = 1e-6                    # m: a drop this small has evaporated
+CUTOFF_MASS = WATER_DENSITY * math.pi * CUTOFF_DIAMETER**3 / 6
 LARGEST_DIAMETER = 0.03                   # m: the solver's upper bound on size
 
 # Each gas: molar mass (kg/mol), Lennard-Jones collision diameter (angstrom) and well depth over Boltzmann's constant
 # (K), and the coefficients of cp = c0 + c1 t + c2 t^2 + c3 t^3 (kJ/kg/K, t = T / 1000 K), as rainprops tabulates them
 # (its data/gas_properties.csv, after Reid, Prausnitz and Sherwood 1977 and Borgnakke and Sonntag 2009). Argon, about
-# 1% of the dry air, takes nitrogen's transport and heat capacity; the dry air's own molar mass sets the density.
+# 1% of the dry air, takes nitrogen's transport, heat capacity and molar mass here, which puts the moist air's heat
+# capacity 0.8% above thermodynamics.py's and the column's default dry adiabat g/cp 0.8% below it; the dry air's own
+# molar mass sets the density.
 GASES = {
     'N2': (0.0280134, 3.798, 71.4, (1.11, -0.48, 0.96, -0.42)),
     'O2': (0.031998, 3.467, 106.7, (0.88, -0.0001, 0.54, -0.33)),
@@ -262,6 +265,29 @@ def ventilation(reynolds, number):
     return 1 + 0.108 * x * x if x < 1.4 else 0.78 + 0.308 * x
 
 
+def drop_rates(y, column, evaporation=True):
+    """Rates of change of a falling drop's state y = (height m, downward speed over the ground m/s, mass kg,
+    temperature K): its fall, its acceleration under gravity, buoyancy and drag, its ventilated evaporation and its
+    heat balance, with the air-relative speed setting drag and ventilation."""
+    z, u, m, td = y
+    m = max(m, CUTOFF_MASS * 0.05)
+    d = (6 * m / (math.pi * WATER_DENSITY))**(1 / 3)
+    air = column.state(max(z, -1.0))
+    relative = u + column.updraft_m_s
+    force, _, reynolds = drag(d, relative, air, column.gravity_m_s2, td)
+    du = column.gravity_m_s2 * (1 - air['density_kg_m3'] / WATER_DENSITY) - math.copysign(force, relative) / m
+    if not evaporation:
+        return [-u, du, 0.0, 0.0]
+    schmidt = air['viscosity_pa_s'] / (air['vapour_diffusivity_m2_s'] * air['density_kg_m3'])
+    prandtl = air['viscosity_pa_s'] * air['heat_capacity_j_kg_k'] / air['thermal_conductivity_w_m_k']
+    dm = (2 * math.pi * d * air['vapour_diffusivity_m2_s'] * ventilation(reynolds, schmidt) * WATER_MOLAR_MASS
+          / GAS_CONSTANT * (air['vapour_pressure_pa'] / air['temperature_k']
+                            - liquid_saturation_pressure(td) / td))
+    heat = 2 * math.pi * d * air['thermal_conductivity_w_m_k'] * ventilation(reynolds, prandtl) * (
+        air['temperature_k'] - td)
+    return [-u, du, dm, (heat + latent_heat(td) * dm) / (m * WATER_HEAT_CAPACITY)]
+
+
 def fall(initial_diameter_m, column, sample_heights_m=None, initial_speed_m_s=None, max_time_s=20000.0,
          rtol=2e-6, evaporation=True):
     """Follow one drop from the cloud base to the ground: height, downward speed over the ground, mass and temperature.
@@ -299,26 +325,10 @@ def fall(initial_diameter_m, column, sample_heights_m=None, initial_speed_m_s=No
     if u0 <= 0 and initial_speed_m_s is None:
         result.update(status='lofted_initial', trajectory=None)
         return result
-    cutoff_mass = WATER_DENSITY * math.pi * CUTOFF_DIAMETER**3 / 6
+    cutoff_mass = CUTOFF_MASS
 
     def rates(t, y):
-        z, u, m, td = y
-        m = max(m, cutoff_mass * 0.05)
-        d = (6 * m / (math.pi * WATER_DENSITY))**(1 / 3)
-        air = column.state(max(z, -1.0))
-        relative = u + column.updraft_m_s
-        force, _, reynolds = drag(d, relative, air, column.gravity_m_s2, td)
-        du = column.gravity_m_s2 * (1 - air['density_kg_m3'] / WATER_DENSITY) - math.copysign(force, relative) / m
-        if not evaporation:
-            return [-u, du, 0.0, 0.0]
-        schmidt = air['viscosity_pa_s'] / (air['vapour_diffusivity_m2_s'] * air['density_kg_m3'])
-        prandtl = air['viscosity_pa_s'] * air['heat_capacity_j_kg_k'] / air['thermal_conductivity_w_m_k']
-        dm = (2 * math.pi * d * air['vapour_diffusivity_m2_s'] * ventilation(reynolds, schmidt) * WATER_MOLAR_MASS
-              / GAS_CONSTANT * (air['vapour_pressure_pa'] / air['temperature_k']
-                                - liquid_saturation_pressure(td) / td))
-        heat = 2 * math.pi * d * air['thermal_conductivity_w_m_k'] * ventilation(reynolds, prandtl) * (
-            air['temperature_k'] - td)
-        return [-u, du, dm, (heat + latent_heat(td) * dm) / (m * WATER_HEAT_CAPACITY)]
+        return drop_rates(y, column, evaporation)
 
     def ground(t, y):
         return y[0]

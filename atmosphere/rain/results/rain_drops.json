@@ -1,11 +1,11 @@
 {
  "schema": "terluna.atmosphere.rain-drops/1",
- "evidence": "A runnable calculation of independent single drops: the solver reproduces 34 Gunn-Kinzer fall speeds on Earth to 0.20 m/s (root mean square) and 7.4% at most, and its lunar values are that physics carried to lunar gravity and air. The air at 2 m pairs each target's median land temperature with its median land wet-bulb temperature. Survival holds the parcel column below the cloud fixed and the drops independent, so it filters sizes under that air; the spectra are bounded scenario boundary conditions. The CM1 check compares fall-speed laws; CM1 was not rerun.",
- "reading_rule": "Diameters are volume-equivalent, in mm. fall_speed gives the still-air terminal speed at 2 m in m/s, null above the stability screen. survival starts each drop at the cloud base and gives what reaches the ground; its rain section gives the share of the water leaving the cloud base that reaches the ground for each spectrum, the same at any rain rate, and the encounters along the central spectrum's paths at 5 mm/h, which grow in proportion to it. cm1_check gives, by diameter, the solver's ratio of Earth-gravity to lunar-gravity speed in the Moon's air beside CM1's single factor, CM1's whole lunar law in that air over the solver's speed, and the water lost per metre of fall at CM1's speed over that at the solver's, with the same ventilation. Interpolate in log diameter.",
+ "evidence": "A runnable calculation of independent single drops: the solver reproduces 34 Gunn-Kinzer fall speeds on Earth to 0.20 m/s (root mean square) and 7.4% at most, and its lunar values are that physics carried to lunar gravity and air. The air at 2 m is the targets' 2 m state over land, the GCM's lowest level carried down the dry adiabat with that level's humidity. Survival holds the parcel column below the cloud fixed and the drops independent, so it filters sizes under that air; the spectra are bounded scenario boundary conditions. The CM1 check compares fall-speed laws; CM1 was not rerun.",
+ "reading_rule": "Diameters are volume-equivalent, in mm. fall_speed gives the still-air terminal speed at 2 m in m/s, null above the stability screen. survival starts each drop at the cloud base and gives what reaches the ground; its rain section gives the share of the water leaving the cloud base that reaches the ground for each spectrum, the same at any rain rate, and the encounters along the central spectrum's paths at 5 mm/h, which grow in proportion to it. cm1_check gives, by diameter, the solver's ratio of Earth-gravity to lunar-gravity speed in the Moon's air beside CM1's single factor, CM1's whole lunar law in that air over the solver's speed, and the water lost per metre of fall at CM1's speed over that at the solver's, with the same ventilation. column_sensitivity gives the cloud base with the parcel started at the GCM's lowest level, the cloud base and smallest surviving drop with the repository's heat capacity, and the GCM's mean air over land beside the column. Interpolate in log diameter.",
  "assumptions": [
-  "Each target's air at 2 m is its median land temperature at 2 m with its median land wet-bulb temperature at 2 m, paired; the specific humidity follows from the targets' psychrometric relation at 1.2 atm, where the GCM computed it at each cell's own surface pressure, which moves the vapour pressure by 0.6%.",
-  "The Moon's air is at 1.2 atm, the design pressure at the water level; the land's mean surface pressure in the GCM is 1.16 atm, and pressure_sensitivity gives its effect on the fall speeds.",
-  "The column below the cloud cools at the dry adiabat g/cp and holds the 2 m vapour mole fraction, so its cloud base is the parcel saturation height; the rain neither cools nor moistens it, and the air is still.",
+  "Each target's air at 2 m pairs its median land temperature at 2 m, the GCM's lowest level (0.88-0.91 km up) carried down the dry adiabat, with its median land wet-bulb temperature at 2 m, which carries the lowest level's humidity, held in the GCM's output as one step at each 3-day window's boundary. The specific humidity follows from the targets' psychrometric relation at 1.2 atm, where the targets' extractor computed it at each cell's own surface pressure, which moves the vapour pressure by 0.6%.",
+  "The Moon's air is at 1.2 atm, the design pressure at the water level; pressure_sensitivity gives the fall speeds at 1.16 atm, the GCM's global mean surface pressure, close to the 1.155 atm its air implies over land.",
+  "The column below the cloud is a well-mixed daytime convective layer: it cools at the dry adiabat g/cp and holds the 2 m vapour mole fraction, so its cloud base is the parcel saturation height; the rain neither cools nor moistens it, and the air is still. Its cp is the transport model's, which carries argon as nitrogen, 0.8% above thermodynamics.py's; column_sensitivity gives the column with the repository's cp.",
   "Earth's air carries the same temperature and relative humidity at 2 m as the Moon's, at 1 atm.",
   "Drops are pure liquid water in their equilibrium shape, each falling independently of the others."
  ],
@@ -1923,6 +1923,116 @@
    ]
   }
  },
+ "column_sensitivity": {
+  "hot_world": {
+   "lowest_level": {
+    "height_m": 909.0429847219815,
+    "temperature_k": 305.2181396484375,
+    "cloud_base_m": 7389.0159225547695,
+    "cloud_base_change_m": -29.94247281245498
+   },
+   "repository_heat_capacity": {
+    "heat_capacity_j_kg_k": 1022.166854944931,
+    "column_heat_capacity_j_kg_k": 1030.9496028237152,
+    "lapse_k_km": 1.588995836348379,
+    "cloud_base_m": 7340.748247055035,
+    "cloud_base_change_m": -78.21014831218963,
+    "smallest_surviving_mm": 2.410069492838718,
+    "smallest_surviving_change": -0.005554615828432197
+   },
+   "gcm_land_air": {
+    "height_km": [
+     0.9,
+     2.0,
+     5.0
+    ],
+    "gcm_air_k": [
+     305.35084007947825,
+     304.4143605345537,
+     301.56311547670043
+    ],
+    "column_air_k": [
+     305.26989203540955,
+     303.5368870860664,
+     298.810509951494
+    ],
+    "gcm_lapse_k_km": 0.9238352689701986,
+    "ground_pressure_atm": 1.1553134152843894
+   }
+  },
+  "resort": {
+   "lowest_level": {
+    "height_m": 892.3396151342662,
+    "temperature_k": 297.80246142363313,
+    "cloud_base_m": 6070.613534327209,
+    "cloud_base_change_m": -24.317091301355504
+   },
+   "repository_heat_capacity": {
+    "heat_capacity_j_kg_k": 1018.1404351292723,
+    "column_heat_capacity_j_kg_k": 1026.5984661756981,
+    "lapse_k_km": 1.5952798067140779,
+    "cloud_base_m": 6033.112484094269,
+    "cloud_base_change_m": -61.81814153429514,
+    "smallest_surviving_mm": 1.9179971284477615,
+    "smallest_surviving_change": -0.005554615828432308
+   },
+   "gcm_land_air": {
+    "height_km": [
+     0.9,
+     2.0,
+     5.0
+    ],
+    "gcm_air_k": [
+     298.1944633325927,
+     297.35064148525527,
+     294.7994926825674
+    ],
+    "column_air_k": [
+     297.8211994984721,
+     296.08084937806666,
+     291.33443995877917
+    ],
+    "gcm_lapse_k_km": 0.8280416219573903,
+    "ground_pressure_atm": 1.1552650679570726
+   }
+  },
+  "lock": {
+   "lowest_level": {
+    "height_m": 879.5371141435761,
+    "temperature_k": 292.11862455938046,
+    "cloud_base_m": 4935.34210763635,
+    "cloud_base_change_m": -21.184363954819673
+   },
+   "repository_heat_capacity": {
+    "heat_capacity_j_kg_k": 1015.9144745744818,
+    "column_heat_capacity_j_kg_k": 1024.1816298447557,
+    "lapse_k_km": 1.5987752091445697,
+    "cloud_base_m": 4907.448571189193,
+    "cloud_base_change_m": -49.077900401976876,
+    "smallest_surviving_mm": 1.5263929092770105,
+    "smallest_surviving_change": -0.0027811753824701357
+   },
+   "gcm_land_air": {
+    "height_km": [
+     0.9,
+     2.0,
+     5.0
+    ],
+    "gcm_air_k": [
+     292.7093712431902,
+     291.936568016313,
+     289.6154316421887
+    ],
+    "column_air_k": [
+     292.11330447439894,
+     290.36884752247363,
+     285.61123765358633
+    ],
+    "gcm_lapse_k_km": 0.7546194148784203,
+    "ground_pressure_atm": 1.1552329312052987
+   }
+  }
+ },
  "pressure_sensitivity": {
   "resort": {
    "pressure_pa": 117536.99999999999,
@@ -2033,13 +2143,13 @@
  "producer": {
   "domain": "atmosphere",
   "files": {
-   "atmosphere/rain/drops.py": "e3b1a394e50e2ccdd1b3fed6109519fe060ea1f572eb6283baa49311425afc82",
+   "atmosphere/rain/drops.py": "11a2115808a681715503311d62eb9632cf05fdcc40d0600c1da8847de9372712",
    "atmosphere/rain/distributions.py": "19aea8e4e269e4146630f59bcffdab2140c2327dd459bbbe85931917f2e917f4",
-   "atmosphere/rain/product.py": "529746205ed5e19510b627214ab84e45cdaa06b09aa45099f985ac9a59e0165b",
+   "atmosphere/rain/product.py": "a06e85e3bfdb8f3e556803d90dced5a1cde80dfa3c0dfcf2892f7d4edfabf66a",
    "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
   },
   "inputs": {
-   "research/studies/climate_targets/results/climate_targets.json": "fe68fde2cd01ab921e5edea279a93642d1efb662a1228fcd7672d1c09b287d7b"
+   "research/studies/climate_targets/results/climate_targets.json": "9b5b561446f6f7e017509546b72ca8c2741ed4655fb0f1b58631a6abeda4d69a"
   },
   "constants": {
    "AVOGADRO": 6.02214076e+23,
