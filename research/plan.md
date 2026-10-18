@@ -300,9 +300,13 @@ the integration found next.
 1. **The target climate**, the author's choice among the hot world near 307 K, the resort between (300 K in the study)
    and the lock, the design temperature of 295 K, set out across the domains in
    [what each target climate takes](studies/climate_targets/README.md), whose heat figures are weighted by area and
-   read at 2 m since 17 October. The author leans towards the resort. Then the design case for the chosen target, a
-   20-year GCM run of about 1.5 hours on four ranks; the glow pair from it, two more; and geography's lakes, the atlas
-   globe and the studies that read the design climate, regenerated once.
+   read at 2 m since 17 October. The author leans towards the resort and lets it vary a little near 300 K, and wants
+   winter within at least the tallest sky tower: the summit tower keeps a winter at its top, with 2 km of margin, up to
+   about 302 K, and the study proposes the resort at 301 K, within 300–302 K, for the author's choice. Then the design
+   case for the chosen target, a 20-year GCM run of about 1.5 hours on four ranks, which also settles the tower's air
+   with one physics; the glow pair from it, two more, at which the glow study and the domain synthesis take the
+   efficacy it gives; and geography's lakes, the atlas globe and the studies that read the design climate, the
+   metropolis brief's winter parks among them, regenerated once.
 2. **The heat beyond the sunlight:** the water top-up's fall recovered on the way down, as resources' first screen
    asks of the build's deliveries (resources); and the power screen's heat carried into the ledgers, which needs the
    deep air's absorption upstream of provisioning's population screen.

@@ -7,9 +7,9 @@ weather aloft, long coasts and perhaps a life chiefly of recreation
 three targets side by side across the domains, at the joint integration of the five branches
 ([record](../../integration/five-branches.md)): the hot world, where the corrected GCM settles; the lock, the design
 temperature of 295 K; and between them the resort, a tropical resort Moon, which the study sets at 300 K. With them it
-sets the heat the plan adds to the Moon beyond its sunlight, which every target answers. [run.py](run.py) is
-arithmetic on the GCM's output and the domains' committed products
-([results/climate_targets.json](results/climate_targets.json)); no model runs.
+sets the heat the plan adds to the Moon beyond its sunlight, which every target answers, the winter each target leaves
+on the summit tower, and the resort's best value near 300 K. [run.py](run.py) is arithmetic on the GCM's output and
+the domains' committed products ([results/climate_targets.json](results/climate_targets.json)); no model runs.
 
 ## Where the corrected Moon settles
 
@@ -211,6 +211,116 @@ sensitivity, the 99th percentiles in 6.5-hour means, with the 3-day means' in br
 | Wet-bulb 0.9 km up | 31.1 (30.9) °C | 25.6 (25.3) °C | 21.4 (21.1) °C |
 | Air 0.9 km up | 37.7 (37.6) °C | 31.2 (31.0) °C | 26.3 (26.1) °C |
 
+## Winter on the tower
+
+The summit tower stands on the Moon's highest ground, at 5.4° N, 158.6° W, 11.6 km above sea level, and rises 24 km to
+35.6 km ([summit tower](../summit_tower/README.md#the-central-port)). Its disks begin 12.3 km above the summit, the
+second, at 13.8 km, holds the open winter parks, the blocks are sealed from the third, at 15.3 km, and the crown's
+terminal stands at 23.4 km ([register](../../decisions.md#the-summit-port-and-metropolis)).
+
+**How the tower meets the model.** T21 smooths the summit away. The cell holding it, centred at 2.8° N, 157.5° W, is
+42% land, its land averaging 9.1 km above sea level in the boundary file, and the runner runs it as lake water at its
+lakes' level. The model's own ground is 8.0 km there and 7.6 km at the summit's place, between the four cell
+centres round it. The output carries no orography, so the extract takes the ground from the sea-level pressure, which
+pyburn wrote by carrying the lowest level's air down from that ground at the standard atmosphere's 6.5 K/km; inverted
+the same way, every mean gives the same ground to 0.01 m. Each column's levels rise hypsometrically from its ground
+with the virtual temperature, heights take inverse-square gravity, and the tower is mapped onto the column by height
+above sea level: its foot stands 4.0 km above the model's ground and its top 28.0 km. Each cell's air is interpolated
+linearly in geopotential to heights every 250 m and weighted bilinearly between the four cell centres; the cell
+holding the summit alone, or with its eight neighbours by area, moves the air at the summit and the top by 0.06 K at
+most. The design case's levels over the summit stand at 8.5, 11.7, 17.6, 25.8, 36.2 and 48.7 km above sea level, so
+the tower spans three of its layers and its air is interpolated across 8–10 km between levels.
+
+The mean is over the 3-day means of years 10–19, through the lunar month, and the tenths are the warmest and coolest
+tenth of them at each height. A target between the runs takes their air interpolated by the ground's temperature,
+height by height, as the targets' climates do, so it mixes the two runs' physics:
+
+| Ground | Mean air reaches 0 °C, above the summit | It reaches −5 °C | Tower in sub-freezing air | Air at the top, 24 km up: mean (cold; warm tenth) | Open winter disk, 13.8 km up |
+|---|---|---|---|---|---|
+| 295 K, the lock | 14.1 km | 19.4 km | 9.9 km | −9.3 (−9.9; −8.8) °C | 0.2 °C |
+| 296 K | 15.1 km | 20.4 km | 8.9 km | −8.3 (−8.9; −7.7) °C | 1.1 °C |
+| 297 K | 16.1 km | 21.6 km | 7.9 km | −7.2 (−7.8; −6.7) °C | 2.0 °C |
+| 298 K | 17.1 km | 22.7 km | 6.9 km | −6.2 (−6.7; −5.6) °C | 2.9 °C |
+| 299 K | 18.2 km | 23.9 km | 5.8 km | −5.1 (−5.7; −4.6) °C | 3.8 °C |
+| 300 K, the resort | 19.3 km | 25.1 km | 4.7 km | −4.0 (−4.6; −3.5) °C | 4.7 °C |
+| 301 K | 20.5 km | 26.2 km | 3.5 km | −3.0 (−3.6; −2.4) °C | 5.6 °C |
+| 302 K | 21.7 km | 27.4 km | 2.3 km | −1.9 (−2.5; −1.4) °C | 6.5 °C |
+| 303 K | 23.0 km | above 28 km | 1.0 km | −0.9 (−1.5; −0.3) °C | 7.4 °C |
+| 304 K | 24.3 km | above 28 km | none | 0.2 (−0.4; 0.7) °C | 8.3 °C |
+| 305 K | 25.6 km | above 28 km | none | 1.3 (0.7; 1.8) °C | 9.2 °C |
+| 306 K | 26.9 km | above 28 km | none | 2.3 (1.7; 2.8) °C | 10.1 °C |
+| 307 K, the hot world | 27.6 km | above 28 km | none | 2.9 (2.3; 3.4) °C | 10.6 °C |
+
+Each kelvin of the target raises the freezing level 1.11 km and warms the top's air 1.06 K. The air over the summit
+changes little through the lunar month: its warm and cold tenths lie 0.5–0.6 K either side of the mean at the top.
+
+**The warmest target with a winter at the top.** The top's mean air reaches 0 °C at 303.8 K, and its warm tenth at
+303.3 K. In the design case's 6.5-hour years the top's warm tenth stands 0.68 K above its mean, against 0.56 K in the
+3-day means, and its warmest mean 1.25 K, against 0.82 K; carried to the targets, the warmest 6.5-hour mean at the top
+reaches 0 °C at 302.6 K. With 1.5 km of the tower below freezing under the top, the depth of the design's winter parks
+from 13.5 to 15 km, the warmest target is 302.65 K, and with 2 km it is 302.25 K. The margin taken here is the 2 km: it
+holds a winter park's depth of sub-freezing air under the top, keeps the top's warmest 6.5-hour mean at about
+−0.4 °C, and leaves about 0.4 K for the interpolation and the coarse layers. **The tower keeps a winter at its top up to
+about 302 K.**
+
+**The interpolation.** The test's own warming, year by year from 297.5 to 306.8 K, draws its own line of the top's air
+against the ground, 1.10 K a kelvin over years 5–19 and 1.15 over years 0–19. On it the top is 0.3–0.6 K colder than
+the interpolation at 300 K, 0.2–0.4 K colder at 302 K, and 0.5–1.0 K colder than the design case at 295 K: the
+refitted longwave cools the upper air, so the interpolation, which keeps the earlier physics at the cool end, if
+anything sets the freezing level high. The model's air is the free air of 3-day means in cells 170 km across; the
+tower's own structure, its people's heat and the summit's sunlit ground warm the air next to it, and a design case
+at the chosen target, with one physics, settles the figures.
+
+**Against the metropolis brief.** The [brief](../../../habitation/summit_metropolis/README.md#parks-and-air-by-height)
+puts the summit's air at about 12 °C, cooling 0.9 °C a kilometre, about 1 °C at the first disk, 12.3 km up, the
+winter parks at 0 to −1 °C at 13.5–15 km, freezing at 13.9 km and −9 °C at the top. The design case gives 12.3 °C,
+0.90 K a kilometre, 1.5 °C at the first disk, 0.5 to −0.8 °C at 13.5–15 km, freezing at 14.1 km and −9.3 °C at the
+top. The brief's figures come from the earlier design case (`A28_dim5_moon`, years 20–29) through the site product
+([site_winds.py](../../../climate/gcm/site_winds.py)), which gives 12.1 °C, 1.4 °C, 0.4 to −1.0 °C, 13.9 km and
+−9.4 °C. That product took the model's ground as 6,946 m, from the sea-level pressure read as if the air below the
+ground were isothermal; pyburn's own extrapolation returns 7,615 m. On the model's own ground the earlier design case
+is 0.7 K warmer at the summit and 0.9 K at the top, freezing at 14.8 km, and the design case's air is 0.4–0.8 K
+colder than that, its middle air cooled by the gas bands and the curved light. The two differences nearly cancel: the
+design case lies within 0.3 K and 0.15 km of the brief's source at every height.
+
+**At the resort the winter moves up the tower.** At 300 K the open winter parks at 13.8 km stand at 4.7 °C, and
+winter begins at 19.3 km, in the top 4.7 km of the tower: the two highest disks, at 19.9 and 21.4 km and now sealed,
+and the crown, with the freezing level's air at 0.66 atm. Open winter decks would move up to them.
+
+## The resort's best value
+
+The author lets the resort vary a little near 300 K, to whatever suits the other constraints best
+([register](../../decisions.md#the-target-climate-17-october-2026)). The candidates against each constraint, the
+dimming from the dimming curve and the climate interpolated as above:
+
+| | 298 K | 299 K | 300 K | 301 K | 302 K | 303 K |
+|---|---|---|---|---|---|---|
+| Tower in sub-freezing air; the top's mean air | 6.9 km; −6.2 °C | 5.8 km; −5.1 °C | 4.7 km; −4.0 °C | 3.5 km; −3.0 °C | 2.3 km; −1.9 °C | 1.0 km; −0.9 °C |
+| Land wet-bulb at 2 m: median; 99th percentile | 19.3; 24.3 °C | 20.2; 25.1 °C | 21.1; 26.0 °C | 22.0; 26.8 °C | 22.9; 27.7 °C | 23.8; 28.5 °C |
+| Its own dimming; with the heat beyond the sunlight | 6.7–8.4%; 10.4–13.7% | 6.0–7.5%; 9.6–12.8% | 5.2–6.5%; 8.9–11.8% | 4.5–5.6%; 8.2–10.9% | 3.8–4.6%; 7.4–9.9% | 3.0–3.7%; 6.7–9.0% |
+| Sunlight its own dimming takes | 792–1,000 TW | 705–887 TW | 618–773 TW | 531–660 TW | 444–547 TW | 357–433 TW |
+| Rain on land, a day; land under 0.5 mm | 2.53 mm; 33% | 2.63 mm; 31% | 2.72 mm; 29% | 2.82 mm; 28% | 2.91 mm; 26% | 3.01 mm; 25% |
+| Seas' oxygen at saturation | 8.05 mg/L | 7.92 mg/L | 7.79 mg/L | 7.68 mg/L | 7.57 mg/L | 7.46 mg/L |
+| Eutrophic shallows' nights below 2 mg/L | 42–87% | 50–90% | 57–93% | 61–94% | 65–95% | 68–96% |
+| Under a saturated column, the added heat answered | 17.1–21.8 W/m² | 15.4–19.5 W/m² | 13.6–17.3 W/m² | 11.9–15.0 W/m² | 10.2–12.7 W/m² | 8.4–10.5 W/m² |
+
+The rain and deserts count every cell's land, before the dimming's own cut. The oxygen comes from ecology's waters'
+oxygen in the three targets ([lake_oxygen](../lake_oxygen/README.md), on `domain/ecology` at bd0097c, bound by its
+hash until the branches meet): saturation interpolated by the seas' median warmth, and the eutrophic shallows' nights,
+across its three lakes, interpolated by the ground's temperature between its lock, resort and hot world, a guide to a
+model run at three points only. Each kelvin warmer raises the freezing level over the summit 1.1 km and the ground's
+wet-bulb 99th percentile 0.85 K, takes 0.73–0.96% of the sunlight off the dimming, 87–114 TW, and adds 0.1 mm of
+rain a day on land with 1.6 points less desert, and costs the seas 0.11 mg/L of oxygen and the margin under a
+saturated column 1.7–2.3 W/m².
+
+**The recommendation is 301 K, within 300–302 K.** Only the tower's winter sets a line: with its 2 km margin it holds to
+about 302 K, which makes 302 K the band's warm edge. The array's dimming, the rain and the deserts favour the warm end,
+and comfort at the ground, the waters' oxygen and the margin under a saturated column the cool end, with no line among
+them across the band. 301 K keeps 3.5 km of the tower in winter, the top at −3.0 °C and its warmest 6.5-hour mean at
+−1.7 °C, a kelvin inside the tower's line; against 300 K it takes 0.7–1.0 points off the dimming, 87–113 TW of sunlight,
+adds 3.5% to the land's rain and brings the ground's wet-bulb 99th percentile to 26.8 °C, 27.1 °C by day. 302 K takes as
+much again off the dimming at the line itself; 300 K keeps the ground's humid heat 0.8 K lower.
+
 ## What it means
 
 **The hot world needs the plan's dimming all the same.** Its 306.5 K carries none of the gases, the glow or the beamed
@@ -245,6 +355,12 @@ of the rain at a held temperature beyond what the cooling does.
 1.3–1.8 W/m² under the saturated column's ceiling in the hot world, 14–17 W/m² at 300 K and 22–29 W/m² at 295 K. The
 hot world is stable in the GCM all the same, held by its restoring gain.
 
+**The tower's winter caps the resort near 302 K.** Each kelvin raises the freezing level over the summit 1.1 km. The
+lock keeps 9.9 km of the tower in winter, the resort at 300 K 4.7 km and 302 K 2.3 km, and from about 303.8 K the
+tower's top is above freezing. With 2 km of winter kept under the top, the tower holds a winter up to about 302 K,
+and the recommended resort is 301 K, within 300–302 K. Above about 296 K the open winter parks of 13.5–15 km
+lose their winter, which moves up to the sealed disks and the crown.
+
 **What the choice reopens.** The register's planned climate near 295 K (9 October), the mix of climates with the
 hottest days pleasantly warm (25 September) and the 5% dimmer's 295 K; the design case for the chosen target, a 20-year
 GCM run of about 1.5 hours on four ranks, and the glow pair from it, two more; then geography's lakes, the atlas globe,
@@ -260,15 +376,21 @@ Island box.
   clouds and convection.
 - **The saturated column's ceiling** is the radiative–convective model's clear, fully saturated column with a 200 K
   stratosphere.
+- **The tower's air** is the free air of 3-day means over cells about 170 km across, on a ground that T21 puts 4.0 km
+  below the summit, interpolated linearly across layers 8–10 km thick; the structure, its people and the summit's own
+  ground warm the air beside it. The winter margin is a judgement: a winter park's depth under the top, the warmest
+  6.5-hour mean below freezing and about 0.4 K for the interpolation.
+- **The waters' oxygen** between ecology's three targets is interpolated; its lake model ran at those three alone.
 
 ## Running it
 
 ```sh
-climate/gcm/.venv/bin/python -m research.studies.climate_targets.extract   # about a minute; needs netCDF4
+climate/gcm/.venv/bin/python -m research.studies.climate_targets.extract   # about 80 s; needs netCDF4
 python -m research.studies.climate_targets.run                              # under a second
 ```
 
-The extract reads the two runs' output in `climate/gcm/runs`, the glow pair's yearly records and the design case's
-two 6.5-hour years, about 2 GB at most, and writes `research/runs/climate_targets/extract.json` (ignored, on the
-research drive), with the sha256 and size of every file it read; [test_run.py](test_run.py) checks the binding and
-the arithmetic.
+The extract reads the two runs' output in `climate/gcm/runs`, the glow pair's yearly records, the design case's two
+6.5-hour years, and the summit's cells in the test's twenty years and the earlier design case's years 20–29, about
+3 GB at most, and writes `research/runs/climate_targets/extract.json` (ignored, on the research drive), with the
+sha256 and size of every file it read; [test_run.py](test_run.py) checks the binding and the arithmetic. The run
+reads ecology's waters' oxygen from Git at its pinned commit until the branches meet.

@@ -781,3 +781,214 @@ def test_the_climate_readme_states_the_glow_pair(product):
     agree(found(r'Kept at their ([\d.]+)% of this radiation\'s sunlight, ([\d.]+) W/m², the gases would leave the glow '
                 r'([\d.]+), with the same total', text),
           [other['gases_dimming_percent'], other['gases_w_m2'], other['efficacy']])
+
+
+# ------------------------------------------------------------------------------------------------- winter on the tower
+def test_the_ground_comes_back_from_pyburns_sea_level_pressure():
+    """pyburn's sea-level pressure (ISA lapse from the lowest level) inverted returns the geopotential it used."""
+    phis = np.array([0.0005, 1000.0, 13000.0, 20000.0])
+    t, sigma, ps = np.array([290.0, 285.0, 280.0, 250.0]), 0.9833, np.array([1.2e5, 1.15e5, 1.0e5, 0.95e5])
+    c = X.RD * X.RLAPSE / X.GRAVITY
+    tstar = (1.0 + c * (1.0 / sigma - 1.0)) * t
+    tstar = np.where(tstar < 255.0, 0.5 * (255.0 + tstar), tstar)
+    a = phis / (X.RD * tstar)
+    psl = ps * np.exp(a * (1.0 - c * a * (0.5 - c * a / 3.0)))
+    assert X.ground_geopotential(ps, psl, t, sigma) == pytest.approx(phis, rel=1e-9, abs=1e-6)
+
+
+def test_heights_take_inverse_square_gravity():
+    z = np.array([0.0, 11589.0, 35589.0])
+    assert X.geometric(X.geopotential(z)) == pytest.approx(z, abs=1e-6)
+    # at the tower's top a geopotential height is 2% short of the height
+    assert X.geopotential(z[2]) / X.GRAVITY == pytest.approx(z[2] * X.MOON_RADIUS / (X.MOON_RADIUS + z[2]))
+
+
+def test_the_site_weights_hold_the_summit():
+    lat = np.array([85.76059, 80.268776, 74.74454, 69.212975, 63.678635, 58.142956, 52.606525, 47.06964, 41.532463,
+                    35.99508, 30.457554, 24.91993, 19.38223, 13.844483, 8.306703, 2.7689028])
+    lat = np.concatenate([lat, -lat[::-1]])
+    lon = np.arange(64) * 5.625
+    (row, col), w = X.site_weights(lat, lon, 5.375, 201.375)
+    assert (row, col) == (15, 36)                      # the cell from 0 to 5.54 N, centred at 202.5 E
+    for v in w.values():
+        assert v.sum() == pytest.approx(1.0)
+    b = w['bilinear']
+    assert b[15, 36] == pytest.approx((1 - (5.375 - 2.7689028) / (8.306703 - 2.7689028)) * 0.8)
+    assert set(zip(*np.nonzero(b))) == {(14, 35), (14, 36), (15, 35), (15, 36)}
+    assert np.count_nonzero(w['block']) == 9 and w['holding'][15, 36] == 1.0
+
+
+def test_the_ladder_reads_a_column_linearly_in_geopotential():
+    sigma = np.array([0.5, 0.8, 0.98])
+    t = np.array([[250.0, 270.0, 290.0]]).reshape(1, 3, 1, 1)
+    q = np.zeros_like(t)
+    ps = np.full((1, 1, 1), 1.1e5)
+    phis = np.full((1, 1), X.geopotential(8000.0))
+    phi = X.level_geopotential(t, q, ps, phis, sigma)
+    assert phi[0, 2, 0, 0] == pytest.approx(phis[0, 0] + X.RD * 290.0 * np.log(1 / 0.98))
+    air, p = X.on_ladder(t, phi, ps, sigma, np.ones((1, 1)))
+    z = X.geometric(phi[0, :, 0, 0])
+    lad = np.asarray(X.LADDER_M)
+    inside = (lad > z[2]) & (lad < z[0])
+    expect = np.interp(X.geopotential(lad[inside]), phi[0, ::-1, 0, 0], t[0, ::-1, 0, 0])
+    assert air[0, inside] == pytest.approx(expect)
+
+
+def test_crossing_finds_the_first_fall_through_freezing():
+    lad = [0.0, 1000.0, 2000.0, 3000.0]
+    assert R.crossing_m(lad, [3.0, 1.0, -1.0, -3.0], 0.0) == pytest.approx(1500.0)
+    assert R.crossing_m(lad, [3.0, 2.0, 1.0, 0.5], 0.0) is None
+
+
+@pytest.mark.skipif(not extract_present(), reason='the GCM extract (research/runs, ignored) is not here')
+def test_the_summit_column_is_the_models_own_ground_and_air():
+    ex = json.loads((R.ROOT / R.EXTRACT).read_text())
+    s = ex['summit']
+    tower = json.loads((R.ROOT / R.SUMMIT_TOWER).read_text())['site']
+    assert (s['site']['lat_deg'], s['site']['lon_deg'], s['site']['ground_above_sea_m']) == \
+        (tower['lat_deg'], tower['lon_deg'], tower['ground_above_sea_m'])
+    for run in (R.DESIGN, R.TEST, R.OLD_DESIGN):
+        r = s['runs'][run]
+        assert r['ground_spread_m'] < 0.05                 # one orography through every mean
+        assert round(r['ground_under_m']['bilinear']) == 7615 and round(r['ground_m'][2][2]) == 8017
+        assert r['air_c']['bilinear']['means'] == 1199
+    assert len(s['test_years']) == 20
+    e = s['eddies']
+    assert e['at_6_5_hours']['air_c']['bilinear']['means'] == 2639
+    assert e['in_3_day_means']['air_c']['bilinear']['means'] == 239
+
+
+def test_the_tower_follows_the_targets(product):
+    T = product['tower']
+    rows = {r['ground_k']: r for r in T['targets']}
+    assert T['site']['top_above_sea_m'] == 35589.0 and T['site']['tower_height_m'] == 24000.0
+    temps = sorted(rows)
+    for lo, hi in zip(temps, temps[1:]):
+        assert rows[hi]['top_c']['mean'] > rows[lo]['top_c']['mean']
+        a, b = rows[lo]['freezing_above_summit_km'], rows[hi]['freezing_above_summit_km']
+        assert b > a
+    for r in T['targets']:
+        top = r['top_c']
+        assert top['cold_tenth'] < top['mean'] < top['warm_tenth'] < top['highest_6_5_hour_mean']
+        z = r['freezing_above_summit_km']
+        assert r['tower_below_freezing_km'] == pytest.approx(min(max(24.0 - z, 0.0), 24.0))
+        assert (top['mean'] < 0.0) == (z < 24.0)
+    # the lock and the hot world take the runs' own air
+    assert rows[295.0]['top_c']['mean'] == pytest.approx(T['runs'][R.DESIGN]['mean']['top_c'])
+    assert rows[307.0]['top_c']['mean'] == pytest.approx(T['runs'][R.TEST]['mean']['top_c'])
+    w = T['warmest_targets']
+    assert w['freezing_2_km_below_the_top'] < w['freezing_1.5_km_below_the_top'] < w['top_mean_at_0c']
+    assert w['top_highest_6_5_hour_mean_at_0c'] < w['top_warm_tenth_at_0c'] < w['top_mean_at_0c']
+    # the weighting of the cells barely matters
+    for run in T['weighting_against_bilinear_k'].values():
+        for v in run.values():
+            assert abs(v['summit_c']) < 0.1 and abs(v['top_c']) < 0.1
+
+
+def test_the_brief_comes_from_the_site_product(product):
+    b = product['tower']['brief']
+    site = b['site_product']
+    assert site['run'] == R.OLD_DESIGN and site['ground_height_m'] == 6946.0
+    assert round(site['summit_c']) == 12 and round(site['freezing_above_summit_km'], 1) == 13.9
+    assert round(site['top_c']) == -9 and round(site['lapse_k_per_km'], 1) == 0.9
+    assert round(b['model_ground_under_the_weights_m']) == 7615
+    # on the model's own ground the earlier design case is warmer, and the design case cooler than it
+    for k in ('summit_c', 'top_c'):
+        assert b['earlier_design_case'][k] > b['design_case'][k] > site[k]
+        assert abs(b['design_case'][k] - site[k]) < 0.3
+
+
+def test_the_resort_band_matches_the_targets(product):
+    band = {r['ground_k']: r for r in product['resort_band']['rows']}
+    t = {x['name']: x for x in product['targets']}['300 K']
+    r = band[300.0]
+    assert r['dimming']['own_percent'] == pytest.approx(t['dimming_percent'])
+    assert r['dimming']['sunlight_scale'] == pytest.approx(t['sunlight_scale'])
+    assert r['dimming']['sunlight_taken_tw'] == pytest.approx(t['sunlight_taken_tw'])
+    assert r['rain']['land_rain_mm_day'] == pytest.approx(t['land_rain_mm_day'])
+    assert r['gap_with_the_added_heat_answered_w_m2'] == pytest.approx(t['gap_with_the_added_heat_answered_w_m2'])
+    assert r['comfort']['wet_bulb_2m_p99_c'] == pytest.approx(t['climate']['wet_bulb_2m_p99_c'])
+    o = product['resort_band']['oxygen_source']
+    assert o['sha256'] == R.LAKE_OXYGEN['sha256'] and o['saturation']['resort']['mg_l'] == 7.777
+    temps = sorted(band)
+    for lo, hi in zip(temps, temps[1:]):
+        assert band[hi]['oxygen']['saturation_mg_l'] < band[lo]['oxygen']['saturation_mg_l']
+        assert band[hi]['dimming']['own_percent'][1] < band[lo]['dimming']['own_percent'][1]
+        assert band[hi]['tower']['tower_below_freezing_km'] < band[lo]['tower']['tower_below_freezing_km']
+
+
+def test_the_lake_oxygen_pin_reads():
+    data, source = R.lake_oxygen()
+    assert data['schema'] == R.LAKE_OXYGEN['schema'] and source in ('in-tree', 'git object at the pinned commit')
+
+
+def test_the_study_readme_states_the_tower(product):
+    text = section(STUDY_README, '## Winter on the tower')
+    rows = table(text, 'Ground')
+    T = {r['ground_k']: r for r in product['tower']['targets']}
+    labels = {295: '295 K, the lock', 300: '300 K, the resort', 307: '307 K, the hot world'}
+    for k in range(295, 308):
+        r, cells = T[float(k)], rows[labels.get(k, f'{k} K')]
+        agree(numbers(cells[0]), [r['freezing_above_summit_km']], (k, 'freezing'))
+        if r['minus_5_above_summit_km'] is None:
+            assert cells[1] == 'above 28 km'
+        else:
+            agree(numbers(cells[1]), [r['minus_5_above_summit_km']], (k, 'minus 5'))
+        if r['tower_below_freezing_km'] == 0.0:
+            assert cells[2] == 'none'
+        else:
+            agree(numbers(cells[2]), [r['tower_below_freezing_km']], (k, 'below'))
+        top = r['top_c']
+        agree(numbers(cells[3]), [top['mean'], top['cold_tenth'], top['warm_tenth']], (k, 'top'))
+        agree(numbers(cells[4]), [r['decks_c']['open_winter_disk_m']], (k, 'winter disk'))
+    T0 = product['tower']
+    w = T0['warmest_targets']
+    flat_text = flat(text)
+    agree(found(r'raises the freezing level ([\d.]+) km and warms the top\'s air ([\d.]+) K', flat_text),
+          [T0['freezing_rise_km_per_k_295_to_303'], T0['top_rise_k_per_k']])
+    agree(found(r'The top\'s mean air reaches 0 °C at ([\d.]+) K, and its warm tenth at ([\d.]+) K', flat_text),
+          [w['top_mean_at_0c'], w['top_warm_tenth_at_0c']])
+    sm = T0['smoothing_at_the_top_k']
+    agree(found(r'warm tenth stands ([\d.]+) K above its mean, against ([\d.]+) K in the 3-day means, and its warmest '
+                r'mean ([\d.]+) K, against ([\d.]+) K', flat_text),
+          [sm['warm_tenth']['at_6_5_hours'], sm['warm_tenth']['in_3_day_means'], sm['high']['at_6_5_hours'],
+           sm['high']['in_3_day_means']])
+    agree(found(r'reaches 0 °C at ([\d.]+) K\. With 1\.5 km', flat_text), [w['top_highest_6_5_hour_mean_at_0c']])
+    agree(found(r'the warmest target is ([\d.]+) K, and with 2 km it is ([\d.]+) K', flat_text),
+          [w['freezing_1.5_km_below_the_top'], w['freezing_2_km_below_the_top']])
+    b = T0['brief']
+    agree(found(r'The design case gives ([\d.]+) °C, ([\d.]+) K a kilometre, ([\d.]+) °C at the first disk, ([\d.]+) to '
+                r'(−[\d.]+) °C at 13\.5–15 km, freezing at ([\d.]+) km and (−[\d.]+) °C', flat_text),
+          [b['design_case'][k] for k in ('summit_c', 'lapse_k_per_km', 'disks_from_c')] + b['design_case']['winter_parks_c']
+          + [b['design_case']['freezing_above_summit_km'], b['design_case']['top_c']])
+    agree(found(r'which gives ([\d.]+) °C, ([\d.]+) °C, ([\d.]+) to (−[\d.]+) °C, ([\d.]+) km and (−[\d.]+) °C', flat_text),
+          [b['site_product']['summit_c'], b['site_product']['disks_from_c']] + b['site_product']['winter_parks_c']
+          + [b['site_product']['freezing_above_summit_km'], b['site_product']['top_c']])
+    agree(found(r'took the model\'s ground as ([\d,]+) m, .* returns ([\d,]+) m', flat_text),
+          [b['site_product']['ground_height_m'], b['model_ground_under_the_weights_m']])
+    lines = T0['test_years']['lines']
+    agree(found(r'against the ground, ([\d.]+) K a kelvin over years 5–19 and ([\d.]+) over years 0–19', flat_text),
+          [lines['5-19']['k_per_k'], lines['0-19']['k_per_k']])
+
+
+def test_the_study_readme_states_the_resort_band(product):
+    text = section(STUDY_README, "## The resort's best value")
+    rows = table(text, '')
+    band = {r['ground_k']: r for r in product['resort_band']['rows']}
+    keys = [298.0, 299.0, 300.0, 301.0, 302.0, 303.0]
+    for cell, k in zip(rows["Tower in sub-freezing air; the top's mean air"], keys):
+        agree(numbers(cell), [band[k]['tower']['tower_below_freezing_km'], band[k]['tower']['top_c']], k)
+    for cell, k in zip(rows['Land wet-bulb at 2 m: median; 99th percentile'], keys):
+        agree(numbers(cell), [band[k]['comfort']['wet_bulb_2m_median_c'], band[k]['comfort']['wet_bulb_2m_p99_c']], k)
+    for cell, k in zip(rows['Its own dimming; with the heat beyond the sunlight'], keys):
+        agree(numbers(cell), band[k]['dimming']['own_percent'] + band[k]['dimming']['with_the_heat_beyond_sunlight_percent'], k)
+    for cell, k in zip(rows['Sunlight its own dimming takes'], keys):
+        agree(numbers(cell), band[k]['dimming']['sunlight_taken_tw'], k)
+    for cell, k in zip(rows['Rain on land, a day; land under 0.5 mm'], keys):
+        agree(numbers(cell), [band[k]['rain']['land_rain_mm_day'], 100 * band[k]['rain']['land_desert']], k)
+    for cell, k in zip(rows["Seas' oxygen at saturation"], keys):
+        agree(numbers(cell), [band[k]['oxygen']['saturation_mg_l']], k)
+    for cell, k in zip(rows["Eutrophic shallows' nights below 2 mg/L"], keys):
+        agree(numbers(cell), [100 * v for v in band[k]['oxygen']['shallow_eutrophic_hypoxic_nights']], k)
+    for cell, k in zip(rows['Under a saturated column, the added heat answered'], keys):
+        agree(numbers(cell), band[k]['gap_with_the_added_heat_answered_w_m2'], k)

@@ -1,7 +1,8 @@
 """What the study reads from the GCM's own output: the design case and the 20-year test of the longwave refitted by
 height with ice optics for the cold cloud, over years 10-19 of each, and the test's year-by-year progress; the glow
-pair on the corrected radiation, from its runs' yearly records; and the design case's two years written every
-6.5 hours.
+pair on the corrected radiation, from its runs' yearly records; the design case's two years written every
+6.5 hours; and the air over the summit, where the summit tower stands, in those runs, in the test's every year and in
+the earlier design case whose air the metropolis brief reads.
 
     climate/gcm/.venv/bin/python -m research.studies.climate_targets.extract     # about a minute; needs netCDF4
 
@@ -34,6 +35,13 @@ swings it through the tilt, 1.54 degrees either way. Of the day's means, those w
 afternoon's. The design case's 6.5-hour years (A28_corrected_970_eddies, two years from the design case's year-19
 restart, eleven means to each 3-day mean) give the land's heat in those means and in the 3-day means their elevens
 make, over the same two years, each 6.5-hour mean's humidity from its start and its end as in the 3-day output.
+
+The summit's air is read at the T21 cells round it. The output carries no orography, so the model's own ground comes
+from its sea-level pressure, which pyburn extrapolated from that ground at the standard atmosphere's 6.5 K/km
+(ground_geopotential); the levels' geopotential rises from it hypsometrically with the virtual temperature, and
+heights take inverse-square gravity. Each column is interpolated linearly in geopotential to a ladder of heights
+above the model's sea level, then weighted over the cells: bilinearly between the four cell centres round the summit,
+the cell holding it alone, and that cell with its eight neighbours by area.
 """
 from __future__ import annotations
 import hashlib
@@ -42,10 +50,13 @@ import sys
 from pathlib import Path
 import numpy as np
 
+from atmosphere.radiative_convective.thermodynamics import R_VAPOUR
+from shared.constants import MOON_RADIUS
+
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 OUT = ROOT / 'research' / 'runs' / 'climate_targets' / 'extract.json'
-SCHEMA = 'terluna.research.climate-targets-extract/4'
+SCHEMA = 'terluna.research.climate-targets-extract/5'
 RUNS_DIR = ROOT / 'climate' / 'gcm' / 'runs'
 BOUNDARY = ROOT / 'climate' / 'gcm' / 'products' / 'moon_28pct_water_lakes_gaussian_T21.nc'
 DESIGN, TEST = 'A28_corrected_970', 'A28_corrected_970_lw_ice'
@@ -505,11 +516,214 @@ def eddies(b, records, island):
                                        for k, v in fine.items()})), files
 
 
+# ------------------------------------------------------------------------------------- the summit tower's air
+# The summit's place and height come from the summit tower study's product; the column is read at the T21 cells
+# round it, on heights above the model's sea level, and the runner maps the tower onto it.
+SUMMIT_TOWER = ROOT / 'research' / 'studies' / 'summit_tower' / 'results' / 'summit_tower.json'
+OLD_DESIGN, OLD_YEARS = 'A28_dim5_moon', (20, 29)    # the earlier design case, whose air the metropolis brief reads
+TEST_YEARS = (0, 19)                                  # the test's every year, for the line its own warming draws
+LADDER_M = tuple(10000.0 + 250.0 * i for i in range(121))     # heights above sea level, 10 to 40 km
+NEAR = 2                                              # the block read: the holding cell and two cells either side
+RLAPSE = 0.0065      # the lapse rate pyburn extrapolates the sea-level pressure with (pyburn.py, line 217)
+
+
+def ground_geopotential(ps_pa, psl_pa, t_lowest, sigma_lowest):
+    """The model's own surface geopotential (m2/s2) from its sea-level pressure. The output carries no orography;
+    pyburn writes the sea-level pressure from it, extrapolating the lowest level's air to the ground at the standard
+    atmosphere's 6.5 K/km and down to sea level along that lapse rate (pyburn.py, lines 1933-1948):
+    ln(psl/ps) = a - c a^2/2 + c^2 a^3/3, with a the geopotential over R T* and c = R 0.0065/g. Solved for a by
+    Newton's method, it returns the geopotential pyburn used, the same in every mean."""
+    c = RD * RLAPSE / GRAVITY
+    tstar = (1.0 + c * (1.0 / sigma_lowest - 1.0)) * t_lowest
+    tstar = np.where(tstar < 255.0, 0.5 * (255.0 + tstar), tstar)
+    target = np.log(psl_pa / ps_pa)
+    a = target.copy()
+    for _ in range(60):
+        a = a - (a - c * a ** 2 / 2.0 + c ** 2 * a ** 3 / 3.0 - target) / (1.0 - c * a + c ** 2 * a ** 2)
+    return a * RD * tstar
+
+
+def geometric(phi):
+    """Height (m) of a geopotential under inverse-square gravity; the GCM's own heights take gravity constant."""
+    return MOON_RADIUS * phi / (GRAVITY * MOON_RADIUS - phi)
+
+
+def geopotential(z):
+    return GRAVITY * MOON_RADIUS * z / (MOON_RADIUS + z)
+
+
+def cell_edges(lat):
+    """The Gaussian rows' edges (degrees), from the cumulative Gaussian weights, north to south as the rows run."""
+    _, w = np.polynomial.legendre.leggauss(lat.size)
+    edges = np.degrees(np.arcsin(np.clip(-1.0 + np.concatenate([[0.0], np.cumsum(w)]), -1.0, 1.0)))
+    return edges[::-1] if lat[0] > lat[-1] else edges
+
+
+def site_weights(lat, lon, site_lat, site_lon):
+    """The cell holding the site (row, column), and three weightings over the whole grid: bilinear between the four
+    cell centres round the site, the holding cell alone, and the holding cell with its eight neighbours by area."""
+    edges = cell_edges(lat)
+    lo, hi = np.minimum(edges[:-1], edges[1:]), np.maximum(edges[:-1], edges[1:])
+    row = int(np.where((site_lat >= lo) & (site_lat < hi))[0][0])
+    step = 360.0 / lon.size
+    col = int(np.floor(((site_lon - lon[0]) % 360.0) / step + 0.5)) % lon.size
+    order = np.argsort(lat)
+    la = lat[order]
+    k = int(np.clip(np.searchsorted(la, site_lat) - 1, 0, la.size - 2))
+    wy = (site_lat - la[k]) / (la[k + 1] - la[k])
+    x = ((site_lon - lon[0]) % 360.0) / step
+    j = int(np.floor(x)) % lon.size
+    wx = x - np.floor(x)
+    bilinear = np.zeros((lat.size, lon.size))
+    for r, fy in ((order[k], 1.0 - wy), (order[k + 1], wy)):
+        for cc, fx in ((j, 1.0 - wx), ((j + 1) % lon.size, wx)):
+            bilinear[r, cc] += fy * fx
+    holding = np.zeros_like(bilinear)
+    holding[row, col] = 1.0
+    block = np.zeros_like(bilinear)
+    for r in (row - 1, row, row + 1):
+        for cc in (col - 1, col, col + 1):
+            block[r, cc % lon.size] = np.cos(np.radians(lat[r]))
+    return (row, col), dict(bilinear=bilinear, holding=holding, block=block / block.sum())
+
+
+def level_geopotential(t, q, ps_pa, phis, sigma):
+    """Each level's geopotential (m2/s2) over the model's own ground, hypsometric with the virtual temperature: the
+    lowest level at its own air above the ground, each step up at the mean of the two levels'. The levels run from the
+    top down; t and q are (means, levels, rows, columns)."""
+    tv = t * (1.0 + q * (R_VAPOUR / RD - 1.0))
+    phi = np.empty_like(t)
+    phi[:, -1] = phis + RD * tv[:, -1] * np.log(1.0 / sigma[-1])
+    for lev in range(sigma.size - 2, -1, -1):
+        phi[:, lev] = phi[:, lev + 1] + RD * 0.5 * (tv[:, lev] + tv[:, lev + 1]) * np.log(sigma[lev + 1] / sigma[lev])
+    return phi
+
+
+def on_ladder(t, phi, ps_pa, sigma, weights):
+    """The air (K) and its pressure (Pa) at the ladder's heights above sea level, each cell's column interpolated
+    linearly in geopotential between its levels, then weighted over the cells: (means, heights)."""
+    target = geopotential(np.asarray(LADDER_M))
+    cells = [(r, c, w) for (r, c), w in np.ndenumerate(weights) if w > 0.0]
+    air = np.zeros((t.shape[0], target.size))
+    pressure = np.zeros_like(air)
+    lnsig = np.log(sigma[::-1])
+    for r, c, w in cells:
+        for m in range(t.shape[0]):
+            p = phi[m, ::-1, r, c]                       # from the lowest level up
+            if target[0] < p[0]:
+                raise ValueError('the ladder starts below a column\'s lowest level')
+            air[m] += w * np.interp(target, p, t[m, ::-1, r, c])
+            pressure[m] += w * np.exp(np.interp(target, p, lnsig)) * ps_pa[m, r, c]
+    return air, pressure
+
+
+def summit_block(run, years, rows, cols, files):
+    """The block's air, humidity, surface and sea-level pressure from a run's yearly output, its files hashed."""
+    import netCDF4
+    f = {k: [] for k in ('ta', 'hus', 'ps', 'psl')}
+    for year in range(years[0], years[1] + 1):
+        path = output(run, year)
+        key = str(path.relative_to(ROOT))
+        if key not in files:
+            files[key] = sha256(path)
+        with netCDF4.Dataset(path) as d:
+            sigma = np.asarray(d['lev'][:], float)
+            f['ta'].append(np.asarray(d['ta'][:, :, rows, cols], float))
+            f['hus'].append(np.asarray(d['hus'][:, :, rows, cols], float))
+            f['ps'].append(np.asarray(d['ps'][:, rows, cols], float) * 100.0)
+            f['psl'].append(np.asarray(d['psl'][:, rows, cols], float))     # written in Pa, labelled hPa
+    return {k: np.concatenate(v) for k, v in f.items()}, sigma
+
+
+def ladder_stats(x):
+    """A series of means at the ladder's heights: the mean, the warmest and coolest tenth ranked at each height, the
+    10th and 90th percentiles and the extremes."""
+    order = np.sort(x, axis=0)
+    k = max(1, x.shape[0] // 10)
+    r = lambda v: [round(float(a), 4) for a in v]
+    return dict(mean=r(x.mean(axis=0)), warm_tenth=r(order[-k:].mean(axis=0)), cold_tenth=r(order[:k].mean(axis=0)),
+                p10=r(np.percentile(x, 10, axis=0)), p90=r(np.percentile(x, 90, axis=0)), low=r(x.min(axis=0)),
+                high=r(x.max(axis=0)), means=int(x.shape[0]))
+
+
+def summit(records, files):
+    """The summit's column in the design case and the test over years 10-19, the test's every year, the earlier
+    design case's years 20-29 and the design case's 6.5-hour years: the model's own ground round the summit, and the
+    air at heights above sea level in each 3-day mean, under three weightings of the cells round it."""
+    import netCDF4
+    site = json.loads(SUMMIT_TOWER.read_text())['site']
+    files[str(SUMMIT_TOWER.relative_to(ROOT))] = sha256(SUMMIT_TOWER)
+    with netCDF4.Dataset(output(DESIGN, YEARS[0])) as d:
+        lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
+    (row, col), weights = site_weights(lat, lon, site['lat_deg'], site['lon_deg'])
+    rows, cols = slice(row - NEAR, row + NEAR + 1), np.arange(col - NEAR, col + NEAR + 1) % lon.size
+    local = {k: w[rows][:, cols] for k, w in weights.items()}
+    if any(abs(w.sum() - 1.0) > 1e-12 for w in local.values()):
+        raise ValueError('a weighting reaches beyond the block read')
+    b = boundary()
+    order = [int(np.argmin(np.abs(b['lat'] - x))) for x in lat]
+    out = dict(site=dict(lat_deg=site['lat_deg'], lon_deg=site['lon_deg'], ground_above_sea_m=site['ground_above_sea_m']),
+               holding_cell=dict(row=row, column=col, lat_deg=float(lat[row]), lon_deg=float(lon[col])),
+               block=dict(lat_deg=[float(v) for v in lat[rows]], lon_deg=[float(v) for v in lon[cols]],
+                          weights={k: [[round(float(v), 6) for v in r] for r in w] for k, w in local.items()},
+                          boundary_land_fraction=[[round(float(v), 4) for v in r] for r in b['land'][order][rows][:, cols]],
+                          boundary_land_elevation_m=[[round(float(v), 1) for v in r]
+                                                     for r in b['elevation'][order][rows][:, cols]]),
+               ladder_m=list(LADDER_M), runs={})
+
+    def column(run, years, per=1):
+        f, sigma = summit_block(run, years, rows, cols, files)
+        phis = ground_geopotential(f['ps'], f['psl'], f['ta'][:, -1], sigma[-1])
+        spread = float(np.abs(phis - phis.mean(axis=0)).max() / GRAVITY)
+        phis = phis.mean(axis=0)
+        # each mean's humidity from its start and its end (window_humidity); the last mean has no next record
+        q = window_humidity(f['hus'])
+        t, ps = f['ta'][:-1], f['ps'][:-1]
+        if per > 1:                                       # the 3-day means the 6.5-hour means' elevens make
+            n = (t.shape[0] // per) * per
+            t, q, ps = (v[:n].reshape(-1, per, *v.shape[1:]).mean(axis=1) for v in (t, q, ps))
+        phi = level_geopotential(t, q, ps, phis, sigma)
+        ground = geometric(phis)
+        levels = dict(sigma=[float(v) for v in sigma],
+                      height_m=[round(float((local['bilinear'] * geometric(phi[:, k]).mean(axis=0)).sum()), 1)
+                                for k in range(sigma.size)],
+                      air_c=[round(float((local['bilinear'] * t[:, k].mean(axis=0)).sum()) - 273.15, 3)
+                             for k in range(sigma.size)])
+        ladders, pressure = {}, None
+        for name, w in local.items():
+            air, p = on_ladder(t, phi, ps, sigma, w)
+            ladders[name] = air - 273.15
+            if name == 'bilinear':
+                pressure = p
+        return dict(ground_m=[[round(float(v), 1) for v in r] for r in ground], ground_spread_m=spread,
+                    ground_under_m={k: float((w * ground).sum()) for k, w in local.items()},
+                    levels=levels, pressure_atm=[round(float(v), 5) for v in pressure.mean(axis=0) / 101325.0],
+                    air_c={k: ladder_stats(v) for k, v in ladders.items()}), ladders['bilinear']
+
+    out['runs'][DESIGN], _ = column(DESIGN, YEARS)
+    whole, series = column(TEST, TEST_YEARS)
+    # years 10-19 of the test's twenty, with each mean's humidity from the next record as in a read of those years
+    per_year = records[TEST]['configuration']['model']['writes_per_lunar_day'] * \
+        records[TEST]['configuration']['model']['lunar_days_per_year']
+    start = (YEARS[0] - TEST_YEARS[0]) * per_year
+    out['runs'][TEST], _ = column(TEST, YEARS)
+    out['test_years'] = [dict(year=TEST_YEARS[0] + i, air_c=[round(float(v), 4) for v in
+                                                            series[i * per_year:(i + 1) * per_year].mean(axis=0)])
+                         for i in range(TEST_YEARS[1] - TEST_YEARS[0] + 1)]
+    if not np.allclose(series[start:].mean(axis=0), out['runs'][TEST]['air_c']['bilinear']['mean'], atol=1e-3):
+        raise ValueError('the test\'s years 10-19 differ between the two reads')
+    out['runs'][OLD_DESIGN], _ = column(OLD_DESIGN, OLD_YEARS)
+    p = records[EDDIES]['configuration']['model']['writes_per_lunar_day'] // \
+        records[DESIGN]['configuration']['model']['writes_per_lunar_day']
+    out['eddies'] = dict(at_6_5_hours=column(EDDIES, EDDY_YEARS)[0], in_3_day_means=column(EDDIES, EDDY_YEARS, p)[0])
+    return out
+
+
 def extract():
     b = boundary()
     files = {str(BOUNDARY.relative_to(ROOT)): sha256(BOUNDARY)}
     records = {}
-    for run in (DESIGN, TEST) + GLOW_PAIR + (EDDIES,):
+    for run in (DESIGN, TEST) + GLOW_PAIR + (EDDIES, OLD_DESIGN):
         records[run], f = record(run)
         files.update(f)
     runs, lands = {}, {}
@@ -521,8 +735,9 @@ def extract():
     ed, f = eddies(b, records, lands[DESIGN])
     files.update(f)
     pair = glow_pair(records, files)
+    top = summit(records, files)
     return dict(schema=SCHEMA, years=list(YEARS), runs=runs, test_progress=progress(records[TEST]),
-                glow_pair=pair, eddies=ed,
+                glow_pair=pair, eddies=ed, summit=top,
                 producer=dict(files={str(Path(__file__).resolve().relative_to(ROOT)): sha256(__file__)}, read=files,
                               sizes={p: (ROOT / p).stat().st_size for p in files}))
 

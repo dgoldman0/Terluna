@@ -1,20 +1,31 @@
 {
- "schema": "terluna.research.climate-targets/4",
+ "schema": "terluna.research.climate-targets/5",
  "producer": {
   "files": {
-   "research/studies/climate_targets/run.py": "72074aeac0fb410ebe900f01ccbfb8e6395a7edfc24ea3b970e149f11319d9d7",
-   "research/studies/climate_targets/extract.py": "32257eacb5204b10bfdbb68de57915371728ada0d38c514c1d755c70f8e9cb5e"
+   "research/studies/climate_targets/run.py": "1630ce4e193df9946267ff39344596867c71d3bf40ef1f9afece531126fbd8e6",
+   "research/studies/climate_targets/extract.py": "09b05b8231143c2fb41b72b8e186def9a9c0ded363d6de2a8aa9c8c21b8ed7cb"
   },
   "inputs": {
-   "research/runs/climate_targets/extract.json": "69bbb1a5037319d1a7949e9a76f6e10931fa6f3f7082a7896422a1647293b15c",
-   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "f5c599b931c88932df2c7e1e73e2b366a7b540adacbe1a2d31f52df923341e31",
+   "research/runs/climate_targets/extract.json": "a019e00f6f2ac4e2519fd3632203d1261c6dcc882ae91f4238f5765a608594d4",
+   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "96c15daef5e9711ed8c2059a901ff83aabb9d71102f77a92f19aba6cf215d0c3",
    "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
    "atmosphere/radiative_convective/results/summary.json": "8fb31329ebcbca52ea9ac1c0af06ed5e357c02267dce8b47250334ae91c39171",
-   "research/studies/light_limitation/results/light_limitation.json": "a0292a360568e4219c3e4cc80d43c826d62eaf107a0ab79686f8151f3244a949",
-   "provisioning/results/power.json": "5edfe1ff537e12c609d3e1628d20be145dc2588014af6de4489f1fe7de1d67bb",
+   "research/studies/light_limitation/results/light_limitation.json": "856d27071e06559a02ce187c5936b0d5e88283e1292b7f36e934ff3fedecd82a",
+   "provisioning/results/power.json": "f5e80c7d136371ec14833cde7d6bb6267ac66741615e83edc48ada5fde20220d",
    "resources/results/first_screen.json": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
-   "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e"
+   "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
+   "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539f56257acad8d1727de612c7a477178f61e228abc906668bb",
+   "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d42be3598a6f4896cc72c4c5aa0432ad9b468dbc08191f684",
+   "climate/results/gcm/site_winds_A28_dim5_moon_summit.json": "45aeeebcf685564b1e3db9a9430f24b99b0264ed61d1c74e8015c78b7949b2b8"
+  },
+  "pinned_inputs": {
+   "research/studies/lake_oxygen/results/lake_oxygen.json": {
+    "branch": "domain/ecology",
+    "commit": "bd0097c7c8544da17988e4164deb681209ba6753",
+    "sha256": "3025a7b7c8db090b9c1b1c40add90ff3c31f902263253e3fe6327286a08d6f99",
+    "bind": "Read in-tree once the branches meet; until then from Git at the commit."
+   }
   },
   "constants": {
    "MOON_RADIUS": 1737400.0,
@@ -22,8 +33,8 @@
    "JULIAN_DAY": 86400.0
   }
  },
- "evidence": "Arithmetic on ExoPlaSim runs and committed products. The two runs the targets stand on share the design sunlight (scale 0.970); the design case flew PlaSim's earlier longwave and liquid optics for all cloud, the test the longwave refitted by height and ice optics for cloud colder than -38 C, and neither carries the gases, the glow or their dimming. The dimming a target needs is the test's top-of-air gain per kelvin times the kelvins to shed, at the test's albedo; the climate at a target between the two runs is interpolated linearly in the ground's temperature, so it mixes the two physics and carries neither the refit's high cloud at the cooler end nor the dimming's own cut to the rain, and a target at either end takes that run's own climate. The heat beyond the sunlight takes the GCM's efficacies for the gases and the glow and an efficacy of 1 for heat released at the ground. The glow's efficacy is a range, from the held branch of 13 October on the earlier radiation and from the glow pair on the corrected radiation of 17 October (the design case's own radiation, before the longwave refit). The pair fixes only the total the gases and the glow take together, its held branch carried to the design case's temperature by the pair's own response to its dimming; the gases take their forcing, as on 13 October, and the glow the rest. Land and water are the model's own mask for the heat, the seas and the sky; the land's rain and deserts count every cell's land with that cell's own rain, the model's own land cells giving the dry bound, since the grid cannot resolve the coasts. The 2 m air is the lowest level's air carried down the dry adiabat, and the 2 m wet-bulb temperature carries the lowest level's humidity down with it, capped at saturation: the reading of a well-mixed lowest kilometre, as by day. At night the air near the ground cools below it in calm air, so the night's figures at 2 m read warm. The output's humidity is a snapshot at each mean's first step (ExoPlaSim 3.4.2, plasim.f90 line 3218), so each mean's humidity is that of its start and its end, and each run's last mean, with no next record, leaves the heat. The wet-bulb temperature is capped at the air's own where the air is supersaturated. The day's and the night's 3-day means are told apart by the output's mean cosine of the Sun's zenith angle against the Sun's synodic travel through each mean, a cut exact where the Sun's declination is zero. How much the 3-day means smooth the extremes comes from the design case's two years written every 6.5 hours alone; carried to the warmer targets it is a sensitivity.",
- "reading_rule": "W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. A dimming is the share of the sunlight reaching the Moon that the fleet takes away, at the test's albedo, and the sunlight scale the GCM would fly for it is the design scale times what remains. Heat is in the 3-day means, each about a tenth of the lunar day, at the lowest model level, about 0.9 km up, and at 2 m. Land and water are the model's own mask; land figures are weighted by land area and the seas' by water area, quantiles and shares of time included. The day's means are those the Sun is up for more than half of; day_ and night_ figures in a climate are the land's in them, and a tenth's day and afternoon are the shares of its means in the day and in the day's afternoon. Each place's tenths are ranked by one quantity (by_wet_bulb, by_air) with the others over the same means. Deserts are land under 0.5 mm of rain a day; a run's land.every_cell counts every cell's land fraction times its area with the cell's own rain, the headline, and land.model_land the model's own land cells alone, the dry bound, which a climate carries as model_land_rain_mm_day and model_land_desert. A climate's freezing_level_km and height_of_20c_km are where the land's mean profile, a land-area mean at each height, crosses 0 and 20 C; a run's freezing_level_over_land_km is the median of the land's column crossings. Pairs are [low, high] ends: the two fits for the feedback, the glow's two efficacies, the power screen's two ends and the light study's and Earth's models' ends for the costs; figures that carry several of them pair the ends that give the least and the most. glow_efficacy holds the corrected radiation's efficacy and how it was found, dimming in per cent of the design case's sunlight; gases_and_glow_w_m2 is the total the pair fixes, and with_the_gases_at_their_points the other split of it. dimming_curve gives the dimming for each ground temperature, negative where a target lies above a fit's balance. smoothing compares the land's heat in the 6.5-hour means with the 3-day means their elevens make over the same two years; ratio_above_the_median is the extreme's height above the median at 6.5 hours over its height in the 3-day means, and a target's at_6_5_hours applies it to that target's 99th percentiles. wet_bulb_per_kelvin_of_air is the change in the wet-bulb temperature for a kelvin of air at a fixed humidity, at a run's day medians at 2 m and the land's 5th and 95th percentile surface pressures.",
+ "evidence": "Arithmetic on ExoPlaSim runs and committed products. The two runs the targets stand on share the design sunlight (scale 0.970); the design case flew PlaSim's earlier longwave and liquid optics for all cloud, the test the longwave refitted by height and ice optics for cloud colder than -38 C, and neither carries the gases, the glow or their dimming. The dimming a target needs is the test's top-of-air gain per kelvin times the kelvins to shed, at the test's albedo; the climate at a target between the two runs is interpolated linearly in the ground's temperature, so it mixes the two physics and carries neither the refit's high cloud at the cooler end nor the dimming's own cut to the rain, and a target at either end takes that run's own climate. The heat beyond the sunlight takes the GCM's efficacies for the gases and the glow and an efficacy of 1 for heat released at the ground. The glow's efficacy is a range, from the held branch of 13 October on the earlier radiation and from the glow pair on the corrected radiation of 17 October (the design case's own radiation, before the longwave refit). The pair fixes only the total the gases and the glow take together, its held branch carried to the design case's temperature by the pair's own response to its dimming; the gases take their forcing, as on 13 October, and the glow the rest. Land and water are the model's own mask for the heat, the seas and the sky; the land's rain and deserts count every cell's land with that cell's own rain, the model's own land cells giving the dry bound, since the grid cannot resolve the coasts. The 2 m air is the lowest level's air carried down the dry adiabat, and the 2 m wet-bulb temperature carries the lowest level's humidity down with it, capped at saturation: the reading of a well-mixed lowest kilometre, as by day. At night the air near the ground cools below it in calm air, so the night's figures at 2 m read warm. The output's humidity is a snapshot at each mean's first step (ExoPlaSim 3.4.2, plasim.f90 line 3218), so each mean's humidity is that of its start and its end, and each run's last mean, with no next record, leaves the heat. The wet-bulb temperature is capped at the air's own where the air is supersaturated. The day's and the night's 3-day means are told apart by the output's mean cosine of the Sun's zenith angle against the Sun's synodic travel through each mean, a cut exact where the Sun's declination is zero. How much the 3-day means smooth the extremes comes from the design case's two years written every 6.5 hours alone; carried to the warmer targets it is a sensitivity. The summit tower's air is the free air over the summit in the 3-day means, read at the T21 cells round it on the model's own ground, which T21 sets 4.0 km below the summit, by height above sea level with inverse-square gravity, interpolated linearly in geopotential across the model's layers; a target between the runs takes it interpolated by the ground's temperature, which mixes the two physics. The resort's oxygen interpolates ecology's three targets.",
+ "reading_rule": "W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. A dimming is the share of the sunlight reaching the Moon that the fleet takes away, at the test's albedo, and the sunlight scale the GCM would fly for it is the design scale times what remains. Heat is in the 3-day means, each about a tenth of the lunar day, at the lowest model level, about 0.9 km up, and at 2 m. Land and water are the model's own mask; land figures are weighted by land area and the seas' by water area, quantiles and shares of time included. The day's means are those the Sun is up for more than half of; day_ and night_ figures in a climate are the land's in them, and a tenth's day and afternoon are the shares of its means in the day and in the day's afternoon. Each place's tenths are ranked by one quantity (by_wet_bulb, by_air) with the others over the same means. Deserts are land under 0.5 mm of rain a day; a run's land.every_cell counts every cell's land fraction times its area with the cell's own rain, the headline, and land.model_land the model's own land cells alone, the dry bound, which a climate carries as model_land_rain_mm_day and model_land_desert. A climate's freezing_level_km and height_of_20c_km are where the land's mean profile, a land-area mean at each height, crosses 0 and 20 C; a run's freezing_level_over_land_km is the median of the land's column crossings. Pairs are [low, high] ends: the two fits for the feedback, the glow's two efficacies, the power screen's two ends and the light study's and Earth's models' ends for the costs; figures that carry several of them pair the ends that give the least and the most. glow_efficacy holds the corrected radiation's efficacy and how it was found, dimming in per cent of the design case's sunlight; gases_and_glow_w_m2 is the total the pair fixes, and with_the_gases_at_their_points the other split of it. dimming_curve gives the dimming for each ground temperature, negative where a target lies above a fit's balance. smoothing compares the land's heat in the 6.5-hour means with the 3-day means their elevens make over the same two years; ratio_above_the_median is the extreme's height above the median at 6.5 hours over its height in the 3-day means, and a target's at_6_5_hours applies it to that target's 99th percentiles. wet_bulb_per_kelvin_of_air is the change in the wet-bulb temperature for a kelvin of air at a fixed humidity, at a run's day medians at 2 m and the land's 5th and 95th percentile surface pressures. tower.targets gives, for every half kelvin, heights above the summit in km, the mean, warm and cold tenths of the air (C) at the top, 24 km up, and at the decks (decks_c, by height above the summit), and the tower's length below freezing in the mean; warmest_targets are ground temperatures (K) at which the top, or the height a margin below it, reaches 0 C. resort_band.rows are the resort's candidates; their oxygen comes from the pinned lake_oxygen product, the shallows' share of nights below 2 mg/L as [least, most] over its three lakes.",
  "runs": {
   "design": {
    "run": "A28_corrected_970",
@@ -3825,5 +3836,1985 @@
    0.550057,
    1.38
   ]
+ },
+ "tower": {
+  "site": {
+   "lat_deg": 5.375,
+   "lon_deg": 201.375,
+   "ground_above_sea_m": 11589,
+   "holding_cell": {
+    "row": 15,
+    "column": 36,
+    "lat_deg": 2.7689027786254883,
+    "lon_deg": 202.5
+   },
+   "tower_height_m": 24000.0,
+   "top_above_sea_m": 35589.0,
+   "decks_above_summit_m": {
+    "open_disk_m": 12253.06651066664,
+    "open_winter_disk_m": 13784.69982449997,
+    "first_sealed_disk_m": 15316.3331383333,
+    "highest_disk_m": 21442.86639366662,
+    "terminal_m": 23441.0,
+    "top_m": 24000.0
+   }
+  },
+  "orography": {
+   "holding_cell_land_fraction": 0.4207,
+   "holding_cell_land_elevation_m": 9125.3,
+   "model_ground_m": {
+    "A28_corrected_970": {
+     "holding_cell": 8017.4,
+     "bilinear": 7615.2673546672395,
+     "holding": 8017.44761798698,
+     "block": 7647.269135005896,
+     "spread_through_the_means_m": 0.005897977026131559
+    },
+    "A28_corrected_970_lw_ice": {
+     "holding_cell": 8017.4,
+     "bilinear": 7615.267403560043,
+     "holding": 8017.447647189485,
+     "block": 7647.269156766153,
+     "spread_through_the_means_m": 0.006034534209443187
+    },
+    "A28_dim5_moon": {
+     "holding_cell": 8017.4,
+     "bilinear": 7615.267392156591,
+     "holding": 8017.447600272505,
+     "block": 7647.269120216253,
+     "spread_through_the_means_m": 0.00624705516620034
+    }
+   },
+   "design_levels": {
+    "sigma": [
+     0.038299560546875,
+     0.11909961700439453,
+     0.21084976196289062,
+     0.3168497085571289,
+     0.4368000030517578,
+     0.5668001174926758,
+     0.6993503570556641,
+     0.8233499526977539,
+     0.9240999221801758,
+     0.9833002090454102
+    ],
+    "height_m": [
+     146059.2,
+     103561.7,
+     80800.8,
+     63349.0,
+     48688.4,
+     36226.5,
+     25849.5,
+     17618.8,
+     11708.1,
+     8491.2
+    ],
+    "air_c": [
+     -98.399,
+     -80.565,
+     -60.937,
+     -40.385,
+     -23.251,
+     -9.922,
+     -0.152,
+     6.605,
+     12.18,
+     15.626
+    ]
+   },
+   "test_levels": {
+    "sigma": [
+     0.038299560546875,
+     0.11909961700439453,
+     0.21084976196289062,
+     0.3168497085571289,
+     0.4368000030517578,
+     0.5668001174926758,
+     0.6993503570556641,
+     0.8233499526977539,
+     0.9240999221801758,
+     0.9833002090454102
+    ],
+    "height_m": [
+     151346.1,
+     108630.8,
+     84727.6,
+     66063.8,
+     50474.6,
+     37364.9,
+     26545.6,
+     18003.1,
+     11869.5,
+     8526.2
+    ],
+    "air_c": [
+     -102.934,
+     -76.192,
+     -47.093,
+     -25.177,
+     -9.468,
+     1.544,
+     9.765,
+     15.941,
+     22.0,
+     25.852
+    ]
+   }
+  },
+  "runs": {
+   "A28_corrected_970": {
+    "ground_k": 295.0230045582492,
+    "mean": {
+     "summit_c": 12.3353012,
+     "top_c": -9.3201752
+    },
+    "warm_tenth": {
+     "summit_c": 12.8679672,
+     "top_c": -8.7545712
+    },
+    "cold_tenth": {
+     "summit_c": 11.8074768,
+     "top_c": -9.8939132
+    },
+    "p10": {
+     "summit_c": 11.9551424,
+     "top_c": -9.727342
+    },
+    "p90": {
+     "summit_c": 12.7326976,
+     "top_c": -8.895540800000001
+    },
+    "low": {
+     "summit_c": 11.3444236,
+     "top_c": -10.2890568
+    },
+    "high": {
+     "summit_c": 13.3921388,
+     "top_c": -8.4257636
+    }
+   },
+   "A28_corrected_970_lw_ice": {
+    "ground_k": 306.5234791232695,
+    "mean": {
+     "summit_c": 22.3505184,
+     "top_c": 2.8885448
+    },
+    "warm_tenth": {
+     "summit_c": 23.042478,
+     "top_c": 3.401552
+    },
+    "cold_tenth": {
+     "summit_c": 21.6258624,
+     "top_c": 2.2723071999999997
+    },
+    "p10": {
+     "summit_c": 21.8158148,
+     "top_c": 2.4438904000000004
+    },
+    "p90": {
+     "summit_c": 22.876974,
+     "top_c": 3.2764263999999996
+    },
+    "low": {
+     "summit_c": 21.0989836,
+     "top_c": 1.8092895999999998
+    },
+    "high": {
+     "summit_c": 23.6935876,
+     "top_c": 3.8261596
+    }
+   }
+  },
+  "targets": [
+   {
+    "ground_k": 295.0,
+    "share_of_the_way": 0.0,
+    "freezing_above_summit_km": 14.055785417628057,
+    "minus_5_above_summit_km": 19.39995497026338,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 14.574712686567164,
+     "cold": 13.52728717472119
+    },
+    "tower_below_freezing_km": 9.944214582371943,
+    "tower_below_freezing_in_the_warm_tenth_km": 9.425287313432836,
+    "pressure_at_freezing_atm": 0.7278861329026304,
+    "top_c": {
+     "mean": -9.3201752,
+     "warm_tenth": -8.7545712,
+     "cold_tenth": -9.8939132,
+     "warm_tenth_at_6_5_hours": -8.644506400000001,
+     "highest_6_5_hour_mean": -8.069505600000001
+    },
+    "summit_c": 12.3353012,
+    "decks_c": {
+     "open_disk_m": 1.486179114461887,
+     "open_winter_disk_m": 0.23083434636702466,
+     "first_sealed_disk_m": -1.1460451488633008,
+     "highest_disk_m": -6.921428916931689,
+     "terminal_m": -8.796416,
+     "top_m": -9.3201752
+    }
+   },
+   {
+    "ground_k": 295.5,
+    "share_of_the_way": 0.04147615292342782,
+    "freezing_above_summit_km": 14.556359627981841,
+    "minus_5_above_summit_km": 19.905285810544793,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 15.04268266978133,
+     "cold": 14.018191166961234
+    },
+    "tower_below_freezing_km": 9.443640372018159,
+    "tower_below_freezing_in_the_warm_tenth_km": 8.95731733021867,
+    "pressure_at_freezing_atm": 0.7211787765191405,
+    "top_c": {
+     "mean": -8.81380446228069,
+     "warm_tenth": -8.25038197520077,
+     "cold_tenth": -9.389305182189473,
+     "warm_tenth_at_6_5_hours": -8.13813566228069,
+     "highest_6_5_hour_mean": -7.563134862280691
+    },
+    "summit_c": 12.750693880148546,
+    "decks_c": {
+     "open_disk_m": 1.910176789488234,
+     "open_winter_disk_m": 0.6610914833017796,
+     "first_sealed_disk_m": -0.7049218761946485,
+     "highest_disk_m": -6.4341816430668946,
+     "terminal_m": -8.294222242689301,
+     "top_m": -8.81380446228069
+    }
+   },
+   {
+    "ground_k": 296.0,
+    "share_of_the_way": 0.08495261967035621,
+    "freezing_above_summit_km": 15.055141356619195,
+    "minus_5_above_summit_km": 20.44413825106441,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 15.533249004192076,
+     "cold": 14.532504100003345
+    },
+    "tower_below_freezing_km": 8.944858643380805,
+    "tower_below_freezing_in_the_warm_tenth_km": 8.466750995807924,
+    "pressure_at_freezing_atm": 0.7145318932377603,
+    "top_c": {
+     "mean": -8.283012453178129,
+     "warm_tenth": -7.721876689124406,
+     "cold_tenth": -8.860360905533073,
+     "warm_tenth_at_6_5_hours": -7.60734365317813,
+     "highest_6_5_hour_mean": -7.032342853178131
+    },
+    "summit_c": 13.18612013770761,
+    "decks_c": {
+     "open_disk_m": 2.3546230440164724,
+     "open_winter_disk_m": 1.1120990813571519,
+     "first_sealed_disk_m": -0.24252408990811208,
+     "highest_disk_m": -5.923435385119028,
+     "terminal_m": -7.767808661599891,
+     "top_m": -8.283012453178129
+    }
+   },
+   {
+    "ground_k": 296.5,
+    "share_of_the_way": 0.1284290864172846,
+    "freezing_above_summit_km": 15.5549903986022,
+    "minus_5_above_summit_km": 20.992594648194558,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 16.03251087567055,
+     "cold": 15.036074922653967
+    },
+    "tower_below_freezing_km": 8.4450096013978,
+    "tower_below_freezing_in_the_warm_tenth_km": 7.967489124329451,
+    "pressure_at_freezing_atm": 0.7079449384127607,
+    "top_c": {
+     "mean": -7.7522204440755695,
+     "warm_tenth": -7.193371403048042,
+     "cold_tenth": -8.331416628876669,
+     "warm_tenth_at_6_5_hours": -7.076551644075571,
+     "highest_6_5_hour_mean": -6.501550844075571
+    },
+    "summit_c": 13.621546395266677,
+    "decks_c": {
+     "open_disk_m": 2.79906929854471,
+     "open_winter_disk_m": 1.563106679412524,
+     "first_sealed_disk_m": 0.21987369637842422,
+     "highest_disk_m": -5.412689127171162,
+     "terminal_m": -7.241395080510481,
+     "top_m": -7.7522204440755695
+    }
+   },
+   {
+    "ground_k": 297.0,
+    "share_of_the_way": 0.17190555316421297,
+    "freezing_above_summit_km": 16.062931548491967,
+    "minus_5_above_summit_km": 21.550836445084663,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 16.542448955894034,
+     "cold": 15.542609985708907
+    },
+    "tower_below_freezing_km": 7.937068451508032,
+    "tower_below_freezing_in_the_warm_tenth_km": 7.4575510441059665,
+    "pressure_at_freezing_atm": 0.7013255969918201,
+    "top_c": {
+     "mean": -7.22142843497301,
+     "warm_tenth": -6.664866116971678,
+     "cold_tenth": -7.802472352220268,
+     "warm_tenth_at_6_5_hours": -6.545759634973011,
+     "highest_6_5_hour_mean": -5.970758834973012
+    },
+    "summit_c": 14.05697265282574,
+    "decks_c": {
+     "open_disk_m": 3.2435155530729483,
+     "open_winter_disk_m": 2.014114277467896,
+     "first_sealed_disk_m": 0.6822714826649605,
+     "highest_disk_m": -4.901942869223295,
+     "terminal_m": -6.7149814994210715,
+     "top_m": -7.22142843497301
+    }
+   },
+   {
+    "ground_k": 297.5,
+    "share_of_the_way": 0.21538201991114134,
+    "freezing_above_summit_km": 16.580111332581296,
+    "minus_5_above_summit_km": 22.11917174225956,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 17.062994026276005,
+     "cold": 16.056681692188803
+    },
+    "tower_below_freezing_km": 7.4198886674187055,
+    "tower_below_freezing_in_the_warm_tenth_km": 6.937005973723993,
+    "pressure_at_freezing_atm": 0.6946662232145149,
+    "top_c": {
+     "mean": -6.6906364258704505,
+     "warm_tenth": -6.136360830895313,
+     "cold_tenth": -7.273528075563867,
+     "warm_tenth_at_6_5_hours": -6.014967625870452,
+     "highest_6_5_hour_mean": -5.439966825870452
+    },
+    "summit_c": 14.492398910384805,
+    "decks_c": {
+     "open_disk_m": 3.6879618076011855,
+     "open_winter_disk_m": 2.465121875523268,
+     "first_sealed_disk_m": 1.1446692689514968,
+     "highest_disk_m": -4.391196611275428,
+     "terminal_m": -6.188567918331662,
+     "top_m": -6.6906364258704505
+    }
+   },
+   {
+    "ground_k": 298.0,
+    "share_of_the_way": 0.2588584866580697,
+    "freezing_above_summit_km": 17.106593986133987,
+    "minus_5_above_summit_km": 22.697907873781368,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 17.59414769978817,
+     "cold": 16.578387508199548
+    },
+    "tower_below_freezing_km": 6.893406013866014,
+    "tower_below_freezing_in_the_warm_tenth_km": 6.405852300211831,
+    "pressure_at_freezing_atm": 0.6879726349141162,
+    "top_c": {
+     "mean": -6.159844416767892,
+     "warm_tenth": -5.607855544818949,
+     "cold_tenth": -6.744583798907465,
+     "warm_tenth_at_6_5_hours": -5.484175616767893,
+     "highest_6_5_hour_mean": -4.9091748167678935
+    },
+    "summit_c": 14.92782516794387,
+    "decks_c": {
+     "open_disk_m": 4.132408062129424,
+     "open_winter_disk_m": 2.91612947357864,
+     "first_sealed_disk_m": 1.607067055238033,
+     "highest_disk_m": -3.880450353327562,
+     "terminal_m": -5.662154337242252,
+     "top_m": -6.159844416767892
+    }
+   },
+   {
+    "ground_k": 298.5,
+    "share_of_the_way": 0.3023349534049981,
+    "freezing_above_summit_km": 17.642798602302438,
+    "minus_5_above_summit_km": 23.287286794314824,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 18.137237024942355,
+     "cold": 17.10789536286447
+    },
+    "tower_below_freezing_km": 6.357201397697561,
+    "tower_below_freezing_in_the_warm_tenth_km": 5.862762975057645,
+    "pressure_at_freezing_atm": 0.6812327988392985,
+    "top_c": {
+     "mean": -5.629052407665331,
+     "warm_tenth": -5.079350258742584,
+     "cold_tenth": -6.215639522251063,
+     "warm_tenth_at_6_5_hours": -4.953383607665333,
+     "highest_6_5_hour_mean": -4.378382807665333
+    },
+    "summit_c": 15.363251425502934,
+    "decks_c": {
+     "open_disk_m": 4.576854316657662,
+     "open_winter_disk_m": 3.367137071634012,
+     "first_sealed_disk_m": 2.0694648415245696,
+     "highest_disk_m": -3.3697040953796953,
+     "terminal_m": -5.135740756152842,
+     "top_m": -5.629052407665331
+    }
+   },
+   {
+    "ground_k": 299.0,
+    "share_of_the_way": 0.3458114201519265,
+    "freezing_above_summit_km": 18.188928067264104,
+    "minus_5_above_summit_km": 23.88764512561514,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 18.691602570529355,
+     "cold": 17.645653429467306
+    },
+    "tower_below_freezing_km": 5.811071932735897,
+    "tower_below_freezing_in_the_warm_tenth_km": 5.308397429470646,
+    "pressure_at_freezing_atm": 0.6744647180516284,
+    "top_c": {
+     "mean": -5.098260398562772,
+     "warm_tenth": -4.550844972666218,
+     "cold_tenth": -5.68669524559466,
+     "warm_tenth_at_6_5_hours": -4.422591598562773,
+     "highest_6_5_hour_mean": -3.8475907985627735
+    },
+    "summit_c": 15.798677683062001,
+    "decks_c": {
+     "open_disk_m": 5.0213005711859005,
+     "open_winter_disk_m": 3.8181446696893846,
+     "first_sealed_disk_m": 2.5318626278111065,
+     "highest_disk_m": -2.858957837431829,
+     "terminal_m": -4.609327175063433,
+     "top_m": -5.098260398562772
+    }
+   },
+   {
+    "ground_k": 299.5,
+    "share_of_the_way": 0.38928788689885485,
+    "freezing_above_summit_km": 18.74524237498251,
+    "minus_5_above_summit_km": 24.485281828067432,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 19.257339117418056,
+     "cold": 18.192088275426002
+    },
+    "tower_below_freezing_km": 5.25475762501749,
+    "tower_below_freezing_in_the_warm_tenth_km": 4.742660882581946,
+    "pressure_at_freezing_atm": 0.6676516266209639,
+    "top_c": {
+     "mean": -4.567468389460213,
+     "warm_tenth": -4.022339686589855,
+     "cold_tenth": -5.1577509689382595,
+     "warm_tenth_at_6_5_hours": -3.8917995894602146,
+     "highest_6_5_hour_mean": -3.316798789460215
+    },
+    "summit_c": 16.23410394062107,
+    "decks_c": {
+     "open_disk_m": 5.465746825714137,
+     "open_winter_disk_m": 4.269152267744755,
+     "first_sealed_disk_m": 2.994260414097642,
+     "highest_disk_m": -2.348211579483962,
+     "terminal_m": -4.082913593974022,
+     "top_m": -4.567468389460213
+    }
+   },
+   {
+    "ground_k": 300.0,
+    "share_of_the_way": 0.43276435364578325,
+    "freezing_above_summit_km": 19.312070003639274,
+    "minus_5_above_summit_km": 25.076298832652917,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 19.83517765567067,
+     "cold": 18.746267094590404
+    },
+    "tower_below_freezing_km": 4.687929996360726,
+    "tower_below_freezing_in_the_warm_tenth_km": 4.164822344329332,
+    "pressure_at_freezing_atm": 0.6608035614158517,
+    "top_c": {
+     "mean": -4.036676380357653,
+     "warm_tenth": -3.49383440051349,
+     "cold_tenth": -4.628806692281858,
+     "warm_tenth_at_6_5_hours": -3.3610075803576542,
+     "highest_6_5_hour_mean": -2.7860067803576545
+    },
+    "summit_c": 16.669530198180134,
+    "decks_c": {
+     "open_disk_m": 5.910193080242376,
+     "open_winter_disk_m": 4.720159865800128,
+     "first_sealed_disk_m": 3.456658200384179,
+     "highest_disk_m": -1.8374653215360952,
+     "terminal_m": -3.556500012884613,
+     "top_m": -4.036676380357653
+    }
+   },
+   {
+    "ground_k": 300.5,
+    "share_of_the_way": 0.47624082039271165,
+    "freezing_above_summit_km": 19.889672798495717,
+    "minus_5_above_summit_km": 25.657826645436995,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 20.42526014438998,
+     "cold": 19.30823347053172
+    },
+    "tower_below_freezing_km": 4.110327201504282,
+    "tower_below_freezing_in_the_warm_tenth_km": 3.57473985561002,
+    "pressure_at_freezing_atm": 0.6539123547523054,
+    "top_c": {
+     "mean": -3.505884371255094,
+     "warm_tenth": -2.9653291144371248,
+     "cold_tenth": -4.099862415625456,
+     "warm_tenth_at_6_5_hours": -2.830215571255095,
+     "highest_6_5_hour_mean": -2.2552147712550954
+    },
+    "summit_c": 17.104956455739195,
+    "decks_c": {
+     "open_disk_m": 6.3546393347706145,
+     "open_winter_disk_m": 5.1711674638555,
+     "first_sealed_disk_m": 3.9190559866707155,
+     "highest_disk_m": -1.3267190635882287,
+     "terminal_m": -3.0300864317952034,
+     "top_m": -3.505884371255094
+    }
+   },
+   {
+    "ground_k": 301.0,
+    "share_of_the_way": 0.51971728713964,
+    "freezing_above_summit_km": 20.478406820797492,
+    "minus_5_above_summit_km": 26.24495584713217,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 21.029001370151427,
+     "cold": 19.878098825249833
+    },
+    "tower_below_freezing_km": 3.5215931792025077,
+    "tower_below_freezing_in_the_warm_tenth_km": 2.9709986298485744,
+    "pressure_at_freezing_atm": 0.646983988993271,
+    "top_c": {
+     "mean": -2.975092362152534,
+     "warm_tenth": -2.4368238283607604,
+     "cold_tenth": -3.570918138969054,
+     "warm_tenth_at_6_5_hours": -2.299423562152535,
+     "highest_6_5_hour_mean": -1.7244227621525354
+    },
+    "summit_c": 17.540382713298264,
+    "decks_c": {
+     "open_disk_m": 6.799085589298852,
+     "open_winter_disk_m": 5.622175061910872,
+     "first_sealed_disk_m": 4.381453772957252,
+     "highest_disk_m": -0.8159728056403622,
+     "terminal_m": -2.503672850705793,
+     "top_m": -2.975092362152534
+    }
+   },
+   {
+    "ground_k": 301.5,
+    "share_of_the_way": 0.5631937538865684,
+    "freezing_above_summit_km": 21.078636132056044,
+    "minus_5_above_summit_km": 26.8335575088833,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 21.647469131969533,
+     "cold": 20.457470305118353
+    },
+    "tower_below_freezing_km": 2.921363867943957,
+    "tower_below_freezing_in_the_warm_tenth_km": 2.352530868030466,
+    "pressure_at_freezing_atm": 0.640013029089318,
+    "top_c": {
+     "mean": -2.444300353049974,
+     "warm_tenth": -1.9083185422843953,
+     "cold_tenth": -3.0419738623126515,
+     "warm_tenth_at_6_5_hours": -1.7686315530499752,
+     "highest_6_5_hour_mean": -1.1936307530499755
+    },
+    "summit_c": 17.975808970857326,
+    "decks_c": {
+     "open_disk_m": 7.243531843827091,
+     "open_winter_disk_m": 6.073182659966245,
+     "first_sealed_disk_m": 4.843851559243788,
+     "highest_disk_m": -0.30522654769249496,
+     "terminal_m": -1.977259269616383,
+     "top_m": -2.444300353049974
+    }
+   },
+   {
+    "ground_k": 302.0,
+    "share_of_the_way": 0.6066702206334967,
+    "freezing_above_summit_km": 21.690561755310103,
+    "minus_5_above_summit_km": 27.43498793602019,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 22.280094948615567,
+     "cold": 21.04709587591284
+    },
+    "tower_below_freezing_km": 2.3094382446898964,
+    "tower_below_freezing_in_the_warm_tenth_km": 1.719905051384434,
+    "pressure_at_freezing_atm": 0.6329960131314792,
+    "top_c": {
+     "mean": -1.9135083439474156,
+     "warm_tenth": -1.3798132562080319,
+     "cold_tenth": -2.513029585656251,
+     "warm_tenth_at_6_5_hours": -1.237839543947417,
+     "highest_6_5_hour_mean": -0.6628387439474173
+    },
+    "summit_c": 18.41123522841639,
+    "decks_c": {
+     "open_disk_m": 7.687978098355328,
+     "open_winter_disk_m": 6.5241902580216165,
+     "first_sealed_disk_m": 5.306249345530324,
+     "highest_disk_m": 0.20551971025537047,
+     "terminal_m": -1.4508456885269743,
+     "top_m": -1.9135083439474156
+    }
+   },
+   {
+    "ground_k": 302.5,
+    "share_of_the_way": 0.6501466873804251,
+    "freezing_above_summit_km": 22.31467819947638,
+    "minus_5_above_summit_km": 28.049844372372974,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 22.926829988956044,
+     "cold": 21.647077446748707
+    },
+    "tower_below_freezing_km": 1.6853218005236195,
+    "tower_below_freezing_in_the_warm_tenth_km": 1.073170011043956,
+    "pressure_at_freezing_atm": 0.6259465200636061,
+    "top_c": {
+     "mean": -1.3827163348448563,
+     "warm_tenth": -0.8513079701316669,
+     "cold_tenth": -1.9840853089998491,
+     "warm_tenth_at_6_5_hours": -0.7070475348448577,
+     "highest_6_5_hour_mean": -0.13204673484485796
+    },
+    "summit_c": 18.84666148597546,
+    "decks_c": {
+     "open_disk_m": 8.132424352883564,
+     "open_winter_disk_m": 6.9751978560769885,
+     "first_sealed_disk_m": 5.76864713181686,
+     "highest_disk_m": 0.716265968203237,
+     "terminal_m": -0.9244321074375645,
+     "top_m": -1.3827163348448563
+    }
+   },
+   {
+    "ground_k": 303.0,
+    "share_of_the_way": 0.6936231541273535,
+    "freezing_above_summit_km": 22.95121543294656,
+    "minus_5_above_summit_km": null,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 23.5883783669811,
+     "cold": 22.258056781741463
+    },
+    "tower_below_freezing_km": 1.048784567053437,
+    "tower_below_freezing_in_the_warm_tenth_km": 0.41162163301889815,
+    "pressure_at_freezing_atm": 0.6188545358012761,
+    "top_c": {
+     "mean": -0.8519243257422964,
+     "warm_tenth": -0.32280268405530227,
+     "cold_tenth": -1.4551410323434475,
+     "warm_tenth_at_6_5_hours": -0.17625552574229775,
+     "highest_6_5_hour_mean": 0.398745274257702
+    },
+    "summit_c": 19.28208774353452,
+    "decks_c": {
+     "open_disk_m": 8.576870607411804,
+     "open_winter_disk_m": 7.4262054541323606,
+     "first_sealed_disk_m": 6.231044918103397,
+     "highest_disk_m": 1.2270122261511034,
+     "terminal_m": -0.3980185263481548,
+     "top_m": -0.8519243257422964
+    }
+   },
+   {
+    "ground_k": 303.5,
+    "share_of_the_way": 0.7370996208742819,
+    "freezing_above_summit_km": 23.600650220992407,
+    "minus_5_above_summit_km": null,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 24.262911739358685,
+     "cold": 22.880414956578388
+    },
+    "tower_below_freezing_km": 0.3993497790075926,
+    "tower_below_freezing_in_the_warm_tenth_km": 0.0,
+    "pressure_at_freezing_atm": 0.6117165338868541,
+    "top_c": {
+     "mean": -0.32113231663973707,
+     "warm_tenth": 0.20570260202106266,
+     "cold_tenth": -0.9261967556870451,
+     "warm_tenth_at_6_5_hours": 0.35453648336026156,
+     "highest_6_5_hour_mean": 0.9295372833602613
+    },
+    "summit_c": 19.717514001093587,
+    "decks_c": {
+     "open_disk_m": 9.021316861940042,
+     "open_winter_disk_m": 7.877213052187733,
+     "first_sealed_disk_m": 6.693442704389933,
+     "highest_disk_m": 1.7377584840989715,
+     "terminal_m": 0.1283950547412556,
+     "top_m": -0.32113231663973707
+    }
+   },
+   {
+    "ground_k": 304.0,
+    "share_of_the_way": 0.7805760876212103,
+    "freezing_above_summit_km": 24.26175608173981,
+    "minus_5_above_summit_km": null,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 24.938169970386276,
+     "cold": 23.51488984558513
+    },
+    "tower_below_freezing_km": 0.0,
+    "tower_below_freezing_in_the_warm_tenth_km": 0.0,
+    "pressure_at_freezing_atm": 0.6045541726558409,
+    "top_c": {
+     "mean": 0.20965969246282223,
+     "warm_tenth": 0.7342078880974275,
+     "cold_tenth": -0.39725247903064376,
+     "warm_tenth_at_6_5_hours": 0.8853284924628209,
+     "highest_6_5_hour_mean": 1.4603292924628206
+    },
+    "summit_c": 20.152940258652652,
+    "decks_c": {
+     "open_disk_m": 9.46576311646828,
+     "open_winter_disk_m": 8.328220650243106,
+     "first_sealed_disk_m": 7.1558404906764705,
+     "highest_disk_m": 2.248504742046838,
+     "terminal_m": 0.6548086358306646,
+     "top_m": 0.20965969246282223
+    }
+   },
+   {
+    "ground_k": 304.5,
+    "share_of_the_way": 0.8240525543681387,
+    "freezing_above_summit_km": 24.927847770244597,
+    "minus_5_above_summit_km": null,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 25.607966101912346,
+     "cold": 24.16236430559389
+    },
+    "tower_below_freezing_km": 0.0,
+    "tower_below_freezing_in_the_warm_tenth_km": 0.0,
+    "pressure_at_freezing_atm": 0.5974238769173189,
+    "top_c": {
+     "mean": 0.7404517015653826,
+     "warm_tenth": 1.262713174173792,
+     "cold_tenth": 0.13169179762575875,
+     "warm_tenth_at_6_5_hours": 1.4161205015653813,
+     "highest_6_5_hour_mean": 1.991121301565381
+    },
+    "summit_c": 20.588366516211718,
+    "decks_c": {
+     "open_disk_m": 9.910209370996519,
+     "open_winter_disk_m": 8.779228248298478,
+     "first_sealed_disk_m": 7.618238276963006,
+     "highest_disk_m": 2.759250999994704,
+     "terminal_m": 1.181222216920075,
+     "top_m": 0.7404517015653826
+    }
+   },
+   {
+    "ground_k": 305.0,
+    "share_of_the_way": 0.867529021115067,
+    "freezing_above_summit_km": 25.59429039079213,
+    "minus_5_above_summit_km": null,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 26.260194541238686,
+     "cold": 24.818096250898066
+    },
+    "tower_below_freezing_km": 0.0,
+    "tower_below_freezing_in_the_warm_tenth_km": 0.0,
+    "pressure_at_freezing_atm": 0.5903581417869743,
+    "top_c": {
+     "mean": 1.2712437106679408,
+     "warm_tenth": 1.791218460250155,
+     "cold_tenth": 0.6606360742821601,
+     "warm_tenth_at_6_5_hours": 1.9469125106679395,
+     "highest_6_5_hour_mean": 2.521913310667939
+    },
+    "summit_c": 21.023792773770783,
+    "decks_c": {
+     "open_disk_m": 10.354655625524757,
+     "open_winter_disk_m": 9.23023584635385,
+     "first_sealed_disk_m": 8.080636063249543,
+     "highest_disk_m": 3.269997257942571,
+     "terminal_m": 1.7076357980094838,
+     "top_m": 1.2712437106679408
+    }
+   },
+   {
+    "ground_k": 305.5,
+    "share_of_the_way": 0.9110054878619954,
+    "freezing_above_summit_km": 26.254759965330887,
+    "minus_5_above_summit_km": null,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 26.889714821457993,
+     "cold": 25.482482963491194
+    },
+    "tower_below_freezing_km": 0.0,
+    "tower_below_freezing_in_the_warm_tenth_km": 0.0,
+    "pressure_at_freezing_atm": 0.583400117455987,
+    "top_c": {
+     "mean": 1.8020357197705013,
+     "warm_tenth": 2.31972374632652,
+     "cold_tenth": 1.1895803509385614,
+     "warm_tenth_at_6_5_hours": 2.4777045197704997,
+     "highest_6_5_hour_mean": 3.0527053197704994
+    },
+    "summit_c": 21.459219031329848,
+    "decks_c": {
+     "open_disk_m": 10.799101880052994,
+     "open_winter_disk_m": 9.68124344440922,
+     "first_sealed_disk_m": 8.543033849536078,
+     "highest_disk_m": 3.7807435158904372,
+     "terminal_m": 2.2340493790988947,
+     "top_m": 1.8020357197705013
+    }
+   },
+   {
+    "ground_k": 306.0,
+    "share_of_the_way": 0.9544819546089238,
+    "freezing_above_summit_km": 26.90528412455452,
+    "minus_5_above_summit_km": null,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 27.534870943834598,
+     "cold": 26.146682428580593
+    },
+    "tower_below_freezing_km": 0.0,
+    "tower_below_freezing_in_the_warm_tenth_km": 0.0,
+    "pressure_at_freezing_atm": 0.576567087253168,
+    "top_c": {
+     "mean": 2.3328277288730606,
+     "warm_tenth": 2.8482290324028856,
+     "cold_tenth": 1.718524627594964,
+     "warm_tenth_at_6_5_hours": 3.008496528873059,
+     "highest_6_5_hour_mean": 3.583497328873059
+    },
+    "summit_c": 21.894645288888913,
+    "decks_c": {
+     "open_disk_m": 11.243548134581232,
+     "open_winter_disk_m": 10.132251042464594,
+     "first_sealed_disk_m": 9.005431635822616,
+     "highest_disk_m": 4.291489773838304,
+     "terminal_m": 2.7604629601883035,
+     "top_m": 2.3328277288730606
+    }
+   },
+   {
+    "ground_k": 306.5,
+    "share_of_the_way": 0.9979584213558522,
+    "freezing_above_summit_km": 27.57144805812603,
+    "minus_5_above_summit_km": null,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 28.19735444301217,
+     "cold": 26.804825867471003
+    },
+    "tower_below_freezing_km": 0.0,
+    "tower_below_freezing_in_the_warm_tenth_km": 0.0,
+    "pressure_at_freezing_atm": 0.5696756502238588,
+    "top_c": {
+     "mean": 2.86361973797562,
+     "warm_tenth": 3.3767343184792504,
+     "cold_tenth": 2.2474689042513654,
+     "warm_tenth_at_6_5_hours": 3.5392885379756187,
+     "highest_6_5_hour_mean": 4.1142893379756185
+    },
+    "summit_c": 22.33007154644798,
+    "decks_c": {
+     "open_disk_m": 11.68799438910947,
+     "open_winter_disk_m": 10.583258640519967,
+     "first_sealed_disk_m": 9.467829422109151,
+     "highest_disk_m": 4.80223603178617,
+     "terminal_m": 3.2868765412777137,
+     "top_m": 2.86361973797562
+    }
+   },
+   {
+    "ground_k": 307.0,
+    "share_of_the_way": 1.0,
+    "freezing_above_summit_km": 27.603116477272728,
+    "minus_5_above_summit_km": null,
+    "freezing_above_summit_in_the_tenths_km": {
+     "warm": 28.228937324602434,
+     "cold": 26.836035697287006
+    },
+    "tower_below_freezing_km": 0.0,
+    "tower_below_freezing_in_the_warm_tenth_km": 0.0,
+    "pressure_at_freezing_atm": 0.5693498721590909,
+    "top_c": {
+     "mean": 2.8885448,
+     "warm_tenth": 3.4015519999999997,
+     "cold_tenth": 2.2723072000000006,
+     "warm_tenth_at_6_5_hours": 3.5642135999999986,
+     "highest_6_5_hour_mean": 4.139214399999998
+    },
+    "summit_c": 22.3505184,
+    "decks_c": {
+     "open_disk_m": 11.708864805902952,
+     "open_winter_disk_m": 10.604437166500421,
+     "first_sealed_disk_m": 9.489542811356692,
+     "highest_disk_m": 4.8262197804857685,
+     "terminal_m": 3.311595999999999,
+     "top_m": 2.8885448
+    }
+   }
+  ],
+  "warmest_targets": {
+   "top_mean_at_0c": 303.80250296833094,
+   "top_warm_tenth_at_0c": 303.30539210539575,
+   "top_warm_tenth_at_6_5_hours_at_0c": 303.16603068878175,
+   "top_highest_6_5_hour_mean_at_0c": 302.6243865135311,
+   "freezing_1.5_km_below_the_top": 302.6465876344778,
+   "freezing_2_km_below_the_top": 302.2491353628545
+  },
+  "freezing_rise_km_per_k_295_to_303": 1.111928751914813,
+  "top_rise_k_per_k": 1.0615840182051188,
+  "smoothing_at_the_top_k": {
+   "warm_tenth": {
+    "at_6_5_hours": 0.6756687999999986,
+    "in_3_day_means": 0.5599176000000003
+   },
+   "cold_tenth": {
+    "at_6_5_hours": -0.6977588000000026,
+    "in_3_day_means": -0.5700092000000012
+   },
+   "high": {
+    "at_6_5_hours": 1.2506695999999984,
+    "in_3_day_means": 0.8188991999999988
+   },
+   "low": {
+    "at_6_5_hours": -1.4839100000000016,
+    "in_3_day_means": -0.7306792000000009
+   }
+  },
+  "brief": {
+   "stated": {
+    "summit_c": 12.0,
+    "lapse_k_per_km": 0.9,
+    "disks_from_km": 12.3,
+    "disks_c": 1.0,
+    "winter_parks_km": [
+     13.5,
+     15.0
+    ],
+    "winter_parks_c": [
+     0.0,
+     -1.0
+    ],
+    "freezing_above_summit_km": 13.9,
+    "top_c": -9.0
+   },
+   "site_product": {
+    "run": "A28_dim5_moon",
+    "years": [
+     20,
+     29
+    ],
+    "ground_height_m": 6946.0,
+    "summit_c": 12.081441226575816,
+    "disks_from_c": 1.4207230574984067,
+    "winter_parks_c": [
+     0.3892465089216606,
+     -1.0086394491854012
+    ],
+    "top_c": -9.422678499394914,
+    "freezing_above_summit_km": 13.917680541103033,
+    "lapse_k_per_km": 0.8960049885821139
+   },
+   "model_ground_under_the_weights_m": 7615.267392156591,
+   "earlier_design_case": {
+    "summit_c": 12.7794168,
+    "disks_from_c": 2.08028420710882,
+    "winter_parks_c": [
+     1.0649896,
+     -0.2282276
+    ],
+    "top_c": -8.5442444,
+    "freezing_above_summit_km": 14.753287694974002,
+    "lapse_k_per_km": 0.8884858833333333
+   },
+   "design_case": {
+    "summit_c": 12.3353012,
+    "disks_from_c": 1.486179114461887,
+    "winter_parks_c": [
+     0.4656336,
+     -0.8467296
+    ],
+    "top_c": -9.3201752,
+    "freezing_above_summit_km": 14.055785417628057,
+    "lapse_k_per_km": 0.9023115166666665
+   }
+  },
+  "test_years": {
+   "years": [
+    {
+     "year": 0,
+     "ground_k": 297.46,
+     "top_c": -7.7526596
+    },
+    {
+     "year": 1,
+     "ground_k": 299.63,
+     "top_c": -5.022786
+    },
+    {
+     "year": 2,
+     "ground_k": 301.2,
+     "top_c": -3.0392344
+    },
+    {
+     "year": 3,
+     "ground_k": 302.45,
+     "top_c": -1.5928764
+    },
+    {
+     "year": 4,
+     "ground_k": 303.43,
+     "top_c": -0.5322744
+    },
+    {
+     "year": 5,
+     "ground_k": 304.16,
+     "top_c": 0.3220156
+    },
+    {
+     "year": 6,
+     "ground_k": 304.78,
+     "top_c": 0.9320563999999999
+    },
+    {
+     "year": 7,
+     "ground_k": 305.23,
+     "top_c": 1.47137
+    },
+    {
+     "year": 8,
+     "ground_k": 305.61,
+     "top_c": 1.8436192
+    },
+    {
+     "year": 9,
+     "ground_k": 305.91,
+     "top_c": 2.1390056
+    },
+    {
+     "year": 10,
+     "ground_k": 306.08,
+     "top_c": 2.3615396
+    },
+    {
+     "year": 11,
+     "ground_k": 306.22,
+     "top_c": 2.5787972
+    },
+    {
+     "year": 12,
+     "ground_k": 306.35,
+     "top_c": 2.701782
+    },
+    {
+     "year": 13,
+     "ground_k": 306.5,
+     "top_c": 2.824782
+    },
+    {
+     "year": 14,
+     "ground_k": 306.55,
+     "top_c": 2.9316720000000003
+    },
+    {
+     "year": 15,
+     "ground_k": 306.62,
+     "top_c": 2.9754092
+    },
+    {
+     "year": 16,
+     "ground_k": 306.67,
+     "top_c": 3.0344296
+    },
+    {
+     "year": 17,
+     "ground_k": 306.73,
+     "top_c": 3.1032788
+    },
+    {
+     "year": 18,
+     "ground_k": 306.75,
+     "top_c": 3.1677568
+    },
+    {
+     "year": 19,
+     "ground_k": 306.77,
+     "top_c": 3.2083076
+    }
+   ],
+   "lines": {
+    "5-19": {
+     "k_per_k": 1.103646253735601,
+     "at_295_k": {
+      "line_c": -9.835480085490246,
+      "interpolated_c": -9.3201752
+     },
+     "at_300_k": {
+      "line_c": -4.317248816812253,
+      "interpolated_c": -4.036676380357653
+     },
+     "at_302_k": {
+      "line_c": -2.109956309341044,
+      "interpolated_c": -1.9135083439474156
+     }
+    },
+    "0-19": {
+     "k_per_k": 1.1504384580409313,
+     "at_295_k": {
+      "line_c": -10.339727618189158,
+      "interpolated_c": -9.3201752
+     },
+     "at_300_k": {
+      "line_c": -4.587535327984483,
+      "interpolated_c": -4.036676380357653
+     },
+     "at_302_k": {
+      "line_c": -2.2866584119026356,
+      "interpolated_c": -1.9135083439474156
+     }
+    }
+   }
+  },
+  "weighting_against_bilinear_k": {
+   "A28_corrected_970": {
+    "holding": {
+     "summit_c": 0.023421599999998932,
+     "top_c": -0.05731719999999996
+    },
+    "block": {
+     "summit_c": -0.05216120000000046,
+     "top_c": -0.002474799999999888
+    }
+   },
+   "A28_corrected_970_lw_ice": {
+    "holding": {
+     "summit_c": -0.04630719999999755,
+     "top_c": -0.01822720000000011
+    },
+    "block": {
+     "summit_c": -0.027278799999997716,
+     "top_c": 0.0042135999999999285
+    }
+   }
+  }
+ },
+ "resort_band": {
+  "candidates_k": [
+   298.0,
+   298.5,
+   299.0,
+   299.5,
+   300.0,
+   300.5,
+   301.0,
+   301.5,
+   302.0,
+   302.5,
+   303.0
+  ],
+  "rows": [
+   {
+    "ground_k": 298.0,
+    "share_of_the_way": 0.2588584866580697,
+    "tower": {
+     "freezing_above_summit_km": 17.106593986133987,
+     "tower_below_freezing_km": 6.893406013866014,
+     "top_c": -6.159844416767892,
+     "top_warm_tenth_c": -5.607855544818949
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 19.259594715019016,
+     "wet_bulb_2m_p99_c": 24.289859600773553,
+     "day_wet_bulb_2m_p99_c": 24.615995129372795,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 24.538123561616786,
+     "land_air_2m_median_c": 23.84580145679102,
+     "sea_median_c": 26.798209720870346
+    },
+    "dimming": {
+     "own_percent": [
+      6.684533561368171,
+      8.443419423380075
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      10.382709323832163,
+      13.747074177324446
+     ],
+     "sunlight_scale": [
+      0.8366533804799529,
+      0.869287719558828
+     ],
+     "sunlight_taken_tw": [
+      791.5984924866211,
+      999.8899737159675
+     ],
+     "electricity_tw": [
+      158.31969849732423,
+      299.96699211479023
+     ],
+     "growth_cost_through_light_percent": [
+      0.467917349295772,
+      2.4908087298971218
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.5329447165954684,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.2378080548608565,
+      2.4398115187902576
+     ],
+     "land_desert": 0.3274676609895686,
+     "model_land_desert": 0.36556313676450736
+    },
+    "oxygen": {
+     "saturation_mg_l": 8.050714467276272,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.315328455234189,
+      1.1109293383588372
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.42430667331771355,
+      0.8662930873886412
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     17.10181040912485,
+     21.779269213922106
+    ]
+   },
+   {
+    "ground_k": 298.5,
+    "share_of_the_way": 0.3023349534049981,
+    "tower": {
+     "freezing_above_summit_km": 17.642798602302438,
+     "tower_below_freezing_km": 6.357201397697561,
+     "top_c": -5.629052407665331,
+     "top_warm_tenth_c": -5.079350258742584
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 19.708653726579183,
+     "wet_bulb_2m_p99_c": 24.71040458742465,
+     "day_wet_bulb_2m_p99_c": 25.033739064021177,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 24.95726126556523,
+     "land_air_2m_median_c": 24.417750245332652,
+     "sea_median_c": 27.24720261567292
+    },
+    "dimming": {
+     "own_percent": [
+      6.31780860907174,
+      7.964914311486115
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      10.015984371535732,
+      13.268569065430489
+     ],
+     "sunlight_scale": [
+      0.8412948800653243,
+      0.8728449515961033
+     ],
+     "sunlight_taken_tw": [
+      748.1700443039681,
+      943.2242510077293
+     ],
+     "electricity_tw": [
+      149.6340088607936,
+      282.9672753023188
+     ],
+     "growth_cost_through_light_percent": [
+      0.44224660263502186,
+      2.349649721888404
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.580257610649128,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.296646486017881,
+      2.490589663148092
+     ],
+     "land_desert": 0.3193245360469008,
+     "model_land_desert": 0.355936332103889
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.986431343571058,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.27574634142564175,
+      1.0386970037691279
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.4619800049882851,
+      0.8829698155414809
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     16.23571316032087,
+     20.64917986942882
+    ]
+   },
+   {
+    "ground_k": 299.0,
+    "share_of_the_way": 0.3458114201519265,
+    "tower": {
+     "freezing_above_summit_km": 18.188928067264104,
+     "tower_below_freezing_km": 5.811071932735897,
+     "top_c": -5.098260398562772,
+     "top_warm_tenth_c": -4.550844972666218
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 20.157712738139352,
+     "wet_bulb_2m_p99_c": 25.130949574075753,
+     "day_wet_bulb_2m_p99_c": 25.45148299866956,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 25.376398969513673,
+     "land_air_2m_median_c": 24.98969903387428,
+     "sea_median_c": 27.696195510475494
+    },
+    "dimming": {
+     "own_percent": [
+      5.9510836567753085,
+      7.486409199592156
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      9.6492594192393,
+      12.790063953536528
+     ],
+     "sunlight_scale": [
+      0.8459363796506957,
+      0.8764021836333787
+     ],
+     "sunlight_taken_tw": [
+      704.741596121315,
+      886.5585282994913
+     ],
+     "electricity_tw": [
+      140.948319224263,
+      265.96755848984736
+     ],
+     "growth_cost_through_light_percent": [
+      0.41657585597427166,
+      2.208490713879686
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.6275705047027875,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.3561097663168087,
+      2.5415586862928228
+     ],
+     "land_desert": 0.3111814111042329,
+     "model_land_desert": 0.34630952744327054
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.922148219865844,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.2361642276170945,
+      0.9664646691794185
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.49965333665885675,
+      0.8996465436943206
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     15.36961591151686,
+     19.519090524935507
+    ]
+   },
+   {
+    "ground_k": 299.5,
+    "share_of_the_way": 0.38928788689885485,
+    "tower": {
+     "freezing_above_summit_km": 18.74524237498251,
+     "tower_below_freezing_km": 5.25475762501749,
+     "top_c": -4.567468389460213,
+     "top_warm_tenth_c": -4.022339686589855
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 20.60677174969952,
+     "wet_bulb_2m_p99_c": 25.55149456072685,
+     "day_wet_bulb_2m_p99_c": 25.869226933317943,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 25.795536673462113,
+     "land_air_2m_median_c": 25.561647822415914,
+     "sea_median_c": 28.14518840527807
+    },
+    "dimming": {
+     "own_percent": [
+      5.584358704478877,
+      7.007904087698197
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      9.28253446694287,
+      12.31155884164257
+     ],
+     "sunlight_scale": [
+      0.8505778792360671,
+      0.8799594156706542
+     ],
+     "sunlight_taken_tw": [
+      661.3131479386619,
+      829.8928055912531
+     ],
+     "electricity_tw": [
+      132.2626295877324,
+      248.96784167737593
+     ],
+     "growth_cost_through_light_percent": [
+      0.3909051093135214,
+      2.067331705870968
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.674883398756447,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.4161978957576404,
+      2.59271858822445
+     ],
+     "land_desert": 0.30303828616156514,
+     "model_land_desert": 0.33668272278265216
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.857865096160629,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.1965821138085473,
+      0.8942323345897093
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.5373266683294284,
+      0.9163232718471603
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     14.503518662712878,
+     18.38900118044225
+    ]
+   },
+   {
+    "ground_k": 300.0,
+    "share_of_the_way": 0.43276435364578325,
+    "tower": {
+     "freezing_above_summit_km": 19.312070003639274,
+     "tower_below_freezing_km": 4.687929996360726,
+     "top_c": -4.036676380357653,
+     "top_warm_tenth_c": -3.49383440051349
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 21.055830761259685,
+     "wet_bulb_2m_p99_c": 25.97203954737795,
+     "day_wet_bulb_2m_p99_c": 26.286970867966325,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 26.214674377410553,
+     "land_air_2m_median_c": 26.133596610957543,
+     "sea_median_c": 28.594181300080642
+    },
+    "dimming": {
+     "own_percent": [
+      5.217633752182446,
+      6.529398975804237
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      8.915809514646439,
+      11.83305372974861
+     ],
+     "sunlight_scale": [
+      0.8552193788214385,
+      0.8835166477079296
+     ],
+     "sunlight_taken_tw": [
+      617.8846997560089,
+      773.227082883015
+     ],
+     "electricity_tw": [
+      123.57693995120178,
+      231.9681248649045
+     ],
+     "growth_cost_through_light_percent": [
+      0.36523436265277126,
+      1.9261726978622498
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.7221962928101067,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.4769108743403754,
+      2.644069368942974
+     ],
+     "land_desert": 0.2948951612188973,
+     "model_land_desert": 0.3270559181220337
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.793581972455415,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.157,
+      0.822
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.575,
+      0.933
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     13.637421413908868,
+     17.258911835948965
+    ]
+   },
+   {
+    "ground_k": 300.5,
+    "share_of_the_way": 0.47624082039271165,
+    "tower": {
+     "freezing_above_summit_km": 19.889672798495717,
+     "tower_below_freezing_km": 4.110327201504282,
+     "top_c": -3.505884371255094,
+     "top_warm_tenth_c": -2.9653291144371248
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 21.504889772819855,
+     "wet_bulb_2m_p99_c": 26.392584534029048,
+     "day_wet_bulb_2m_p99_c": 26.70471480261471,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 26.633812081358993,
+     "land_air_2m_median_c": 26.705545399499172,
+     "sea_median_c": 29.043174194883218
+    },
+    "dimming": {
+     "own_percent": [
+      4.850908799886015,
+      6.050893863910278
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      8.549084562350007,
+      11.354548617854652
+     ],
+     "sunlight_scale": [
+      0.8598608784068098,
+      0.8870738797452049
+     ],
+     "sunlight_taken_tw": [
+      574.4562515733558,
+      716.5613601747767
+     ],
+     "electricity_tw": [
+      114.89125031467115,
+      214.968408052433
+     ],
+     "growth_cost_through_light_percent": [
+      0.33956361599202106,
+      1.7850136898535318
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.7695091868637665,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.5382487020650144,
+      2.695611028448395
+     ],
+     "land_desert": 0.28675203627622947,
+     "model_land_desert": 0.31742911346141534
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.736297501065028,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.14504319006375435,
+      0.7632123511467921
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.5930118611219085,
+      0.9375221268348621
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     12.771324165104886,
+     16.12882249145568
+    ]
+   },
+   {
+    "ground_k": 301.0,
+    "share_of_the_way": 0.51971728713964,
+    "tower": {
+     "freezing_above_summit_km": 20.478406820797492,
+     "tower_below_freezing_km": 3.5215931792025077,
+     "top_c": -2.975092362152534,
+     "top_warm_tenth_c": -2.4368238283607604
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 21.953948784380025,
+     "wet_bulb_2m_p99_c": 26.81312952068015,
+     "day_wet_bulb_2m_p99_c": 27.12245873726309,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 27.052949785307437,
+     "land_air_2m_median_c": 27.277494188040805,
+     "sea_median_c": 29.492167089685793
+    },
+    "dimming": {
+     "own_percent": [
+      4.484183847589584,
+      5.572388752016319
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      8.182359610053576,
+      10.876043505960693
+     ],
+     "sunlight_scale": [
+      0.8645023779921812,
+      0.8906311117824802
+     ],
+     "sunlight_taken_tw": [
+      531.0278033907027,
+      659.8956374665389
+     ],
+     "electricity_tw": [
+      106.20556067814056,
+      197.96869123996166
+     ],
+     "growth_cost_through_light_percent": [
+      0.3138928693312709,
+      1.6438546818448139
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.816822080917426,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.600211378931556,
+      2.747343566740712
+     ],
+     "land_desert": 0.27860891133356164,
+     "model_land_desert": 0.30780230880079695
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.681445915608605,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.13308638012750867,
+      0.7044247022935843
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.6110237222438171,
+      0.9420442536697243
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     11.905226916300904,
+     14.998733146962394
+    ]
+   },
+   {
+    "ground_k": 301.5,
+    "share_of_the_way": 0.5631937538865684,
+    "tower": {
+     "freezing_above_summit_km": 21.078636132056044,
+     "tower_below_freezing_km": 2.921363867943957,
+     "top_c": -2.444300353049974,
+     "top_warm_tenth_c": -1.9083185422843953
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 22.40300779594019,
+     "wet_bulb_2m_p99_c": 27.233674507331248,
+     "day_wet_bulb_2m_p99_c": 27.540202671911473,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 27.472087489255877,
+     "land_air_2m_median_c": 27.849442976582434,
+     "sea_median_c": 29.94115998448837
+    },
+    "dimming": {
+     "own_percent": [
+      4.117458895293153,
+      5.0938836401223595
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      7.815634657757145,
+      10.397538394066734
+     ],
+     "sunlight_scale": [
+      0.8691438775775527,
+      0.8941883438197556
+     ],
+     "sunlight_taken_tw": [
+      487.59935520804964,
+      603.2299147583008
+     ],
+     "electricity_tw": [
+      97.51987104160993,
+      180.96897442749022
+     ],
+     "growth_cost_through_light_percent": [
+      0.2882221226705207,
+      1.502695673836096
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.864134974971085,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.662798904940002,
+      2.7992669838199262
+     ],
+     "land_desert": 0.2704657863908938,
+     "model_land_desert": 0.2981755041401785
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.626594330152183,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.12112957019126303,
+      0.6456370534403765
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.6290355833657255,
+      0.9465663805045864
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     11.039129667496894,
+     13.86864380246908
+    ]
+   },
+   {
+    "ground_k": 302.0,
+    "share_of_the_way": 0.6066702206334967,
+    "tower": {
+     "freezing_above_summit_km": 21.690561755310103,
+     "tower_below_freezing_km": 2.3094382446898964,
+     "top_c": -1.9135083439474156,
+     "top_warm_tenth_c": -1.3798132562080319
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 22.852066807500357,
+     "wet_bulb_2m_p99_c": 27.654219493982346,
+     "day_wet_bulb_2m_p99_c": 27.957946606559855,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 27.89122519320432,
+     "land_air_2m_median_c": 28.421391765124064,
+     "sea_median_c": 30.39015287929094
+    },
+    "dimming": {
+     "own_percent": [
+      3.750733942996722,
+      4.6153785282284
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      7.4489097054607125,
+      9.919033282172775
+     ],
+     "sunlight_scale": [
+      0.873785377162924,
+      0.8977455758570311
+     ],
+     "sunlight_taken_tw": [
+      444.1709070253967,
+      546.5641920500626
+     ],
+     "electricity_tw": [
+      88.83418140507933,
+      163.9692576150188
+     ],
+     "growth_cost_through_light_percent": [
+      0.2625513760097706,
+      1.361536665827378
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.911447869024745,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.7260112800903515,
+      2.851381279686037
+     ],
+     "land_desert": 0.262322661448226,
+     "model_land_desert": 0.2885486994795602
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.57174274469576,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.10917276025501736,
+      0.5868494045871687
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.6470474444876341,
+      0.9510885073394486
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     10.173032418692912,
+     12.738554457975795
+    ]
+   },
+   {
+    "ground_k": 302.5,
+    "share_of_the_way": 0.6501466873804251,
+    "tower": {
+     "freezing_above_summit_km": 22.31467819947638,
+     "tower_below_freezing_km": 1.6853218005236195,
+     "top_c": -1.3827163348448563,
+     "top_warm_tenth_c": -0.8513079701316669
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 23.301125819060523,
+     "wet_bulb_2m_p99_c": 28.074764480633448,
+     "day_wet_bulb_2m_p99_c": 28.375690541208236,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 28.310362897152764,
+     "land_air_2m_median_c": 28.993340553665696,
+     "sea_median_c": 30.839145774093517
+    },
+    "dimming": {
+     "own_percent": [
+      3.384008990700291,
+      4.13687341633444
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      7.082184753164282,
+      9.440528170278816
+     ],
+     "sunlight_scale": [
+      0.8784268767482954,
+      0.9013028078943065
+     ],
+     "sunlight_taken_tw": [
+      400.7424588427436,
+      489.89846934182435
+     ],
+     "electricity_tw": [
+      80.14849176854872,
+      146.9695408025473
+     ],
+     "growth_cost_through_light_percent": [
+      0.23688062934902038,
+      1.2203776578186598
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 2.9587607630784043,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.7898485043826047,
+      2.9036864543390437
+     ],
+     "land_desert": 0.2541795365055582,
+     "model_land_desert": 0.27892189481894175
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.516891159239337,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.0972159503187717,
+      0.5280617557339609
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.6650593056095426,
+      0.9556106341743107
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     9.30693516988893,
+     11.608465113482538
+    ]
+   },
+   {
+    "ground_k": 303.0,
+    "share_of_the_way": 0.6936231541273535,
+    "tower": {
+     "freezing_above_summit_km": 22.95121543294656,
+     "tower_below_freezing_km": 1.048784567053437,
+     "top_c": -0.8519243257422964,
+     "top_warm_tenth_c": -0.32280268405530227
+    },
+    "comfort": {
+     "wet_bulb_2m_median_c": 23.750184830620693,
+     "wet_bulb_2m_p99_c": 28.495309467284546,
+     "day_wet_bulb_2m_p99_c": 28.79343447585662,
+     "wet_bulb_2m_p99_at_6_5_hours_c": 28.729500601101204,
+     "land_air_2m_median_c": 29.565289342207326,
+     "sea_median_c": 31.288138668896092
+    },
+    "dimming": {
+     "own_percent": [
+      3.0172840384038597,
+      3.658368304440482
+     ],
+     "with_the_heat_beyond_sunlight_percent": [
+      6.715459800867851,
+      8.962023058384855
+     ],
+     "sunlight_scale": [
+      0.883068376333667,
+      0.9048600399315818
+     ],
+     "sunlight_taken_tw": [
+      357.3140106600905,
+      433.2327466335864
+     ],
+     "electricity_tw": [
+      71.4628021320181,
+      129.9698239900759
+     ],
+     "growth_cost_through_light_percent": [
+      0.2112098826882702,
+      1.079218649809942
+     ]
+    },
+    "rain": {
+     "land_rain_mm_day": 3.006073657132064,
+     "with_the_dimmings_own_cut_mm_day": [
+      2.8543105778167615,
+      2.956182507778948
+     ],
+     "land_desert": 0.24603641156289036,
+     "model_land_desert": 0.2692950901583233
+    },
+    "oxygen": {
+     "saturation_mg_l": 7.4620395737829135,
+     "deep_oligotrophic_deepest_tenth_mg_l": [
+      0.08525914038252605,
+      0.46927410688075305
+     ],
+     "shallow_eutrophic_hypoxic_nights": [
+      0.6830711667314512,
+      0.9601327610091729
+     ]
+    },
+    "gap_with_the_added_heat_answered_w_m2": [
+     8.44083792108492,
+     10.478375768989224
+    ]
+   }
+  ],
+  "oxygen_source": {
+   "path": "research/studies/lake_oxygen/results/lake_oxygen.json",
+   "branch": "domain/ecology",
+   "commit": "bd0097c7c8544da17988e4164deb681209ba6753",
+   "sha256": "3025a7b7c8db090b9c1b1c40add90ff3c31f902263253e3fe6327286a08d6f99",
+   "read_from": "git object at the pinned commit",
+   "targets_ground_k": {
+    "lock": 295.0230045582492,
+    "resort": 300.0,
+    "hot": 306.5234791232695
+   },
+   "deep": {
+    "lock": [
+     0.551,
+     1.541
+    ],
+    "resort": [
+     0.157,
+     0.822
+    ],
+    "hot": [
+     0.001,
+     0.055
+    ]
+   },
+   "shallow": {
+    "lock": [
+     0.2,
+     0.767
+    ],
+    "resort": [
+     0.575,
+     0.933
+    ],
+    "hot": [
+     0.81,
+     0.992
+    ]
+   },
+   "saturation": {
+    "lock": {
+     "sea_median_c": 24.17,
+     "mg_l": 8.427
+    },
+    "resort": {
+     "sea_median_c": 28.71,
+     "mg_l": 7.777
+    },
+    "hot": {
+     "sea_median_c": 34.62,
+     "mg_l": 7.055
+    }
+   }
+  }
  }
 }
