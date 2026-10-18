@@ -1,0 +1,205 @@
+{
+ "source_admission": "Published values cited in README.md and run.py, with how far each was read for this screening on 2026-10-17. The study's own numbers are arithmetic on the project's committed products; these sources give Earth's responses (cirrus thinning, methane's warmth, surface albedo) and two reference constants. No outside dataset or full paper is committed. Lenton & Vaughan 2009 is open access (CC BY 3.0) and was read in its methods and Table 1; the others were read at abstract or summary level as stated.",
+ "sources": [
+  {
+   "key": "ipcc_ar6_wg1_ch4_cct",
+   "citation": "Lee JY, Marotzke J, et al. 2021, Future Global Climate: Scenario-Based Projections and Near-Term Information, Chapter 4 of Climate Change 2021: The Physical Science Basis (IPCC AR6 WG1), section 4.6.3.3",
+   "doi_or_url": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-4/",
+   "use": "README, the high cloud: Earth's cirrus warm the planet by about 5 W/m2 on net; cirrus thinning could take at most about 1-2 W/m2, with low confidence, and overseeding could warm",
+   "values_used": {
+    "cirrus_net_w_m2": 5.0,
+    "cct_max_w_m2": [
+     1.0,
+     2.0
+    ]
+   },
+   "access": "known from the assessment as quoted in secondary summaries (search results of 2026-10-17); the chapter was not re-read for this study"
+  },
+  {
+   "key": "ipcc_ar6_wg1_ch7_erf_2xco2",
+   "citation": "Forster P, Storelvmo T, et al. 2021, The Earth's Energy Budget, Climate Feedbacks, and Climate Sensitivity, Chapter 7 of IPCC AR6 WG1",
+   "doi_or_url": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-7/",
+   "use": "run.py AR6_ERF_2XCO2: the effective radiative forcing of doubled CO2, 3.93 W/m2, set against the Earth control's own per-doubling change to carry the Moon's clear-sky CO2 forcing to all-sky",
+   "values_used": {
+    "erf_2xco2_w_m2": 3.93
+   },
+   "access": "a standard value of the assessment, known from it; not re-read"
+  },
+  {
+   "key": "mitchell_finnegan_2009",
+   "citation": "Mitchell DL, Finnegan W 2009, Modification of cirrus clouds to reduce global warming, Environmental Research Letters 4, 045102",
+   "doi_or_url": "https://doi.org/10.1088/1748-9326/4/4/045102",
+   "use": "README table: the first estimate of cirrus seeding, a net cloud forcing more negative than -2.8 W/m2, delivered by airliners",
+   "values_used": {
+    "net_w_m2": -2.8
+   },
+   "access": "abstract read (OSTI record)"
+  },
+  {
+   "key": "storelvmo_2013",
+   "citation": "Storelvmo T, Kristjansson JE, Muri H, Pfeffer M, Barahona D, Nenes A 2013, Cirrus cloud seeding has potential to cool climate, Geophysical Research Letters 40, 178-182",
+   "doi_or_url": "https://doi.org/10.1029/2012GL054201",
+   "use": "README table: net cloud forcing down to -2.0 W/m2 at an optimal seeding concentration, with warming from too many ice nuclei",
+   "values_used": {
+    "net_w_m2_at_optimum": -2.0
+   },
+   "access": "abstract as summarized in search results; not read in full"
+  },
+  {
+   "key": "muri_2014",
+   "citation": "Muri H, Kristjansson JE, Storelvmo T, Pfeffer MA 2014, The climatic effects of modifying cirrus clouds in a climate engineering framework, Journal of Geophysical Research: Atmospheres",
+   "doi_or_url": "https://doi.org/10.1002/2013JD021063",
+   "use": "README table: ice falling twice as fast, -1.55 W/m2 and -0.94 K globally",
+   "values_used": {
+    "net_w_m2": -1.55,
+    "cooling_k": 0.94
+   },
+   "access": "values as a summary page (climateinterventions.org) quotes the paper; the publisher's page was not reachable"
+  },
+  {
+   "key": "gasparini_lohmann_2016",
+   "citation": "Gasparini B, Lohmann U 2016, Why cirrus cloud seeding cannot substantially cool the planet, Journal of Geophysical Research: Atmospheres",
+   "doi_or_url": "https://doi.org/10.1002/2015JD024666",
+   "use": "README table: ECHAM-HAM's cirrus radiative effect 5.7 W/m2, with no seeding strategy giving significant cooling",
+   "values_used": {
+    "cirrus_effect_w_m2": 5.7
+   },
+   "access": "abstract as summarized in search results"
+  },
+  {
+   "key": "gasparini_2020",
+   "citation": "Gasparini B, McGraw Z, Storelvmo T, Lohmann U 2020, To what extent can cirrus cloud seeding counteract global warming?, Environmental Research Letters 15, 054002",
+   "doi_or_url": "https://doi.org/10.1088/1748-9326/ab71a3",
+   "use": "README table and run.py INP_PER_LITRE: favourable seeding gives -0.8 W/m2 in ECHAM (1 particle a litre, at night only) and -1.8 W/m2 in CESM (18 a litre); seeding reduced the CO2 rise in precipitation",
+   "values_used": {
+    "net_w_m2": [
+     -0.8,
+     -1.8
+    ],
+    "particles_per_litre": [
+     1,
+     18
+    ]
+   },
+   "access": "abstract read"
+  },
+  {
+   "key": "liu_shi_2021",
+   "citation": "Liu J, Shi X 2021, Estimating the potential cooling effect of cirrus thinning achieved via the seeding approach, Atmospheric Chemistry and Physics 21, 10609",
+   "doi_or_url": "https://doi.org/10.5194/acp-21-10609-2021",
+   "use": "README table: CAM5 with seeding set by local conditions, -1.36 W/m2, -2.0 W/m2 kept out of low latitudes, where seeding warmed; fixed seeding at 20 and 200 a litre gave -0.27 and +0.35 W/m2",
+   "values_used": {
+    "net_w_m2": [
+     -1.36,
+     -2.0
+    ]
+   },
+   "access": "abstract read"
+  },
+  {
+   "key": "penner_2015",
+   "citation": "Penner JE, Zhou C, Liu X 2015, Can cirrus cloud seeding be used for geoengineering?, Geophysical Research Letters 42, 8777-8782",
+   "doi_or_url": "https://www.semanticscholar.org/paper/70d40ce7bad9e3d9d391fabf2bda222b0abb1122",
+   "use": "README table: a net cooling of -0.74 W/m2 only with subgrid updrafts below 0.2 m/s and no deposition on existing ice during nucleation",
+   "values_used": {
+    "net_w_m2": -0.74
+   },
+   "access": "abstract as summarized in search results"
+  },
+  {
+   "key": "tully_2022",
+   "citation": "Tully C, Neubauer D, Omanovic N, Lohmann U 2022, Cirrus cloud thinning using a more physically based ice microphysics scheme in the ECHAM-HAM general circulation model, Atmospheric Chemistry and Physics 22, 11455",
+   "doi_or_url": "https://doi.org/10.5194/acp-22-11455-2022",
+   "use": "README table and run.py CCT_OVERSEEDING_W_M2: no significant cooling except -0.36 W/m2 at 1 particle a litre, warming up to 4.9 W/m2 from overseeding at the highest concentration; cirrus thinning unlikely to be feasible globally",
+   "values_used": {
+    "net_w_m2_best": -0.36,
+    "overseeding_w_m2": 4.9
+   },
+   "access": "abstract read"
+  },
+  {
+   "key": "kristjansson_2015",
+   "citation": "Kristjansson JE, Muri H, Schmidt H 2015, The hydrological cycle response to cirrus cloud thinning, Geophysical Research Letters 42, 10807-10815",
+   "doi_or_url": "https://doi.org/10.1002/2015GL066795",
+   "use": "README: cirrus thinning avoids the weakening of the water cycle that solar dimming brings",
+   "values_used": {},
+   "access": "abstract as summarized in search results"
+  },
+  {
+   "key": "yvon_durocher_2014",
+   "citation": "Yvon-Durocher G et al. 2014, Methane fluxes show consistent temperature dependence across microbial to ecosystem scales, Nature 507, 488-491",
+   "doi_or_url": "https://doi.org/10.1038/nature13164",
+   "use": "run.py METHANOGENESIS_EV: methane emissions' average temperature dependence of 0.96 eV, a 57-fold rise from 0 to 30 C, applied between the targets' sea medians as an upper-end indicator",
+   "values_used": {
+    "activation_ev": 0.96
+   },
+   "access": "abstract as summarized in search results; the 57-fold rise from 0 to 30 C reproduced from 0.96 eV"
+  },
+  {
+   "key": "lenton_vaughan_2009",
+   "citation": "Lenton TM, Vaughan NE 2009, The radiative forcing potential of different climate geoengineering options, Atmospheric Chemistry and Physics 9, 5539-5561",
+   "doi_or_url": "https://doi.org/10.5194/acp-9-5539-2009",
+   "use": "run.py EARTH_F_A and the README: the two-way transmittance for surface albedo, 0.73 under a clear sky and about 0.48 over land with clouds; Table 1's land options (desert 0.44 brighter over 2% of Earth -2.12 W/m2; settlements 0.15 brighter -0.15 W/m2; urban areas 0.1 brighter -0.047 W/m2)",
+   "values_used": {
+    "f_a_clear": 0.73,
+    "f_a_all_sky_land": 0.48,
+    "desert_albedo_rise": 0.44
+   },
+   "access": "open access; abstract, section 2.1 (equations 1-5) and Table 1 read"
+  },
+  {
+   "key": "menon_2010",
+   "citation": "Menon S, Akbari H, Mahanama S, Sednev I, Levinson R 2010, Radiative forcing and temperature response to changes in urban albedos and associated CO2 offsets, Environmental Research Letters 5, 014005",
+   "doi_or_url": "https://doi.org/10.1088/1748-9326/5/1/014005",
+   "use": "run.py CITY_ALBEDO_RISE: roofs and pavements of urban areas raised by 0.1",
+   "values_used": {
+    "urban_albedo_rise": 0.1
+   },
+   "access": "abstract as summarized in search results"
+  },
+  {
+   "key": "irvine_2011",
+   "citation": "Irvine PJ, Ridgwell AJ, Lunt DJ 2011, Climatic effects of surface albedo geoengineering, Journal of Geophysical Research: Atmospheres",
+   "doi_or_url": "https://doi.org/10.1029/2011JD016281",
+   "use": "README: desert brightening reduces precipitation over land by 3.9% per kelvin of cooling against 1.0% for a sunshade, and weakens the Indian and African monsoons",
+   "values_used": {
+    "land_precipitation_percent_per_k": {
+     "desert": 3.9,
+     "sunshade": 1.0
+    }
+   },
+   "access": "abstract as summarized in search results"
+  },
+  {
+   "key": "oleson_2010",
+   "citation": "Oleson KW, Bonan GB, Feddema J 2010, Effects of white roofs on urban temperature in a global climate model, Geophysical Research Letters",
+   "doi_or_url": "https://doi.org/10.1029/2009GL042194",
+   "use": "README: white roofs everywhere cut the annual urban heat island by 33%, the daily maximum by 0.6 C and the minimum by 0.3 C",
+   "values_used": {
+    "heat_island_cut": 0.33,
+    "daily_max_cooling_c": 0.6
+   },
+   "access": "abstract as summarized in search results"
+  },
+  {
+   "key": "ridgwell_2009",
+   "citation": "Ridgwell A et al. 2009, Tackling regional climate change by leaf albedo bio-geoengineering, Current Biology",
+   "doi_or_url": "not checked in this session",
+   "use": "run.py PARK_ALBEDO_RISE: crop canopy albedo raised by 0.04 as the reference for silver foliage",
+   "values_used": {
+    "canopy_albedo_rise": 0.04
+   },
+   "access": "known from the literature; not re-read for this study"
+  },
+  {
+   "key": "pearson_2005_elevator",
+   "citation": "Pearson J et al. 2005, Lunar space elevators for cislunar space development, NASA Institute for Advanced Concepts final report",
+   "doi_or_url": "not checked in this session; the value is the provisioning register's",
+   "use": "run.py ELEVATOR_T_PER_YEAR: a lunar elevator of today's materials lifts about 584 t a year, as provisioning's register and resources' finding 11 carry it",
+   "values_used": {
+    "t_per_year": 584
+   },
+   "access": "taken from the project's provisioning register; not re-read"
+  }
+ ]
+}
