@@ -328,6 +328,11 @@ the integration found next.
 12. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
 13. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
 14. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
+15. **The rain column at the integration:** the rebuild gives the rain column's dry adiabat the repository's heat
+   capacity, which lowers the cloud bases 49–78 m and the smallest surviving drop 0.3–0.6% (atmosphere/rain), and
+   the rain products and the sound lab's renders follow.
+16. **CM1's next run** takes the size-dependent lunar rain law from atmosphere/rain in place of its one factor of
+   2.94, so that its drizzle falls more slowly and its large drops faster than they now do.
 
 New runs wait on the author's choice of the target climate, and no rented compute is commissioned.
 
