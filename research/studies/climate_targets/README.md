@@ -77,10 +77,10 @@ target beyond a run takes that run's own climate, so the 295 K column is the des
 | Sunlight scale with the added heat answered too | 0.919–0.934 | 0.855–0.884 | 0.809–0.848 |
 | Sunlight the target's own dimming takes; electricity at 20–30% | none | 618–773 TW; 124–232 TW | 1,052–1,340 TW; 210–402 TW |
 | Growth lost through light to the target's own dimming | none | 0.37–1.9% | 0.62–3.3% |
-| Rain on land, a day | 2.94 mm | 2.39 mm; 2.18–2.33 with the dimming's own cut | 1.98 mm; 1.67–1.88 |
-| Land under 0.5 mm a day | 20.1% | 33% | 42% |
-| Land wet-bulb at 2 m: median; 99th percentile | 26.9; 31.9 °C | 21.1; 26.2 °C | 16.6; 21.9 °C |
-| Land wet-bulb 0.9 km up: median; 99th percentile | 26.3; 31.3 °C | 20.4; 25.6 °C | 15.9; 21.2 °C |
+| Rain on land, a day, every cell's land (the model's land cells) | 3.34 mm (2.94) | 2.72 mm (2.39); 2.48–2.64 with the dimming's own cut | 2.25 mm (1.98); 1.90–2.14 |
+| Land under 0.5 mm a day, the same | 18.9% (20.1%) | 29% (33%) | 38% (42%) |
+| Land wet-bulb at 2 m: median; 99th percentile | 26.9; 31.5 °C | 21.1; 26.0 °C | 16.6; 21.8 °C |
+| Land wet-bulb 0.9 km up: median; 99th percentile | 26.3; 30.9 °C | 20.4; 25.3 °C | 15.9; 21.1 °C |
 | Land air, median: at 2 m; 0.9 km up | 33.6; 32.1 °C | 26.1; 24.7 °C | 20.4; 19.0 °C |
 | Seas' surface, median | 34.5 °C | 28.6 °C | 24.1 °C |
 | Where the land's mean profile reaches 20 °C | 12.3 km up | 6.7 km up | below the lowest level, 0.9 km up |
@@ -89,21 +89,34 @@ target beyond a run takes that run's own climate, so the 295 K column is the des
 | That gap with the added heat at full watts: answered; unanswered | 1.3–1.8; −10.7 to −7.4 W/m² | 13.6–17.3; 1.6–8.0 W/m² | 22.3–28.6; 10.3–19.3 W/m² |
 
 The heat is in the 3-day means, each about a tenth of the lunar day, at 2 m and at the lowest model level, about
-0.9 km up. Land and water are the model's own: it runs 166 cells with a land fraction of 0.50–0.59 as water, and the
-land's figures, its rain and deserts among them, are weighted by land area and the seas' by water area. The output's
-air at 2 m is the lowest level's carried down the dry adiabat to the ground's pressure, which it matches within
-0.02 K over land, and the wet-bulb temperature at 2 m carries the lowest level's specific humidity down with it,
-capped at saturation: together they read a well-mixed lowest kilometre, as by day. The wet-bulb temperature is capped
-at the air's own temperature where the air is supersaturated. The land's mean profile is the land-area mean of its
-columns' air at each height above the ground; the median of the columns' own freezing heights is 36 km in the hot
-world and 23 km in the lock. In the hot world the wet-bulb temperature at 2 m passes 28 °C for 32% of the land's time:
-49% within 15° of the equator, 56% on land below 1 km and 6.7% on ground above 4 km. It passes 31 °C for 3.3%. At
-0.9 km the same shares are 23.8%, 39%, 45% and 3.1%, with 1.5% above 31 °C. The first readout of 17 October, which
-counted every cell with a land fraction above one half alike, put the lowest level's time above 28 °C at 17.6%. The
-rain's own cut takes the GCM's 0.55% of the rain for each 1% of dimming at a held temperature (the gases, glow and
-dimming study) and Earth's models' 1.38% (the light study). The costs in the table are each target's own dimming. The
-3.7–5.3% every target shares for the added heat costs a further 0.26–1.56% of the growth through light and 2.0–7.3% of
-the land's rain, which brings the hot world's to 2.72–2.88 mm a day. The gap to the saturated column counts the added
+0.9 km up, on the model's own land: it runs 166 cells with a land fraction of 0.50–0.59 as water, and the land's heat
+is weighted by land area and the seas' by water area. The output's air at 2 m is the lowest level's carried down the
+dry adiabat to the ground's pressure, within 0.02–0.04 K on average over land, and the wet-bulb temperature at 2 m
+carries the lowest level's specific humidity down with it, capped at saturation: together they read a well-mixed
+lowest kilometre, as by day. The output's humidity is a snapshot: ExoPlaSim 3.4.2 computes it only at the steps where
+mod(nstep, nafter) is zero (plasim.f90, line 3218) and adds that held value at every step of the mean (outmod.f90,
+line 2556), so each record holds the humidity at its mean's first step, while the air, the pressure and the Sun's
+cosine are true means. Each mean's humidity is therefore the mean of its start and its end, the next record's; each
+run's last mean, with no next record, leaves the heat's statistics, which cover 1,199 of the 1,200. The wet-bulb
+temperature is capped at the air's own temperature where the air is supersaturated, which with the humidity as
+written held in 1.7% of the design case's land means at the lowest level and now holds in 0.24%. The land's mean
+profile is the land-area mean of its columns' air at each height above the ground; the median of the columns' own
+freezing heights is 36 km in the hot world and 23 km in the lock. In the hot world the wet-bulb temperature at 2 m
+passes 28 °C for 31% of the land's time: 49% within 15° of the equator, 56% on land below 1 km and 4.6% on ground
+above 4 km. It passes 31 °C for 2.1%. At 0.9 km the same shares are 22.3%, 38%, 44% and 1.7%, with 0.8% above 31 °C.
+The first readout of 17 October, which took the humidity as written and counted every cell with a land fraction above
+one half alike, put the lowest level's time above 28 °C at 17.6%.
+
+The rain falls on a cell's land as well as on its water, so the land's rain and deserts count every cell's land
+fraction and area with that cell's own rain; the model's own land cells alone give the dry bound, in brackets. The
+18% of the boundary file's land that lies in cells the model runs as water is mostly coast and lakeshore, and those
+cells rain 5.15 mm a day in the hot world. The T21 grid, about 170 km a cell, cannot resolve the coasts, and coast
+and island hydrology, geography's groundwater work and the shore study to come, decides where between the two the
+real coasts lie. The rain's own cut takes the GCM's 0.55% of the rain for each 1% of dimming at a held temperature
+(the gases, glow and dimming study) and Earth's models' 1.38% (the light study). The costs in the table are each
+target's own dimming. The 3.7–5.3% every target shares for the added heat costs a further 0.26–1.56% of the growth
+through light and 2.0–7.3% of the land's rain, which brings the hot world's to 3.10–3.27 mm a day (2.72–2.88). The
+gap to the saturated column counts the added
 heat at full watts, the glow's 5.34 W/m² of infrared among them, where the dimming answers the glow at the GCM's
 efficacy; its ends take the ends of the feedback, the glow's efficacy and the beamed power that leave the clear sky the
 most load and the least.
@@ -145,22 +158,22 @@ half of the land's time each. In the land's 3-day means, the day's figure first 
 
 | Land: the day's means; the night's | The hot world | The resort: 300 K | The lock: 295 K |
 |---|---|---|---|
-| Wet-bulb at 2 m: median | 27.1; 26.8 °C | 21.5; 20.7 °C | 17.3; 16.1 °C |
-| Wet-bulb at 2 m: 99th percentile | 32.1; 31.6 °C | 26.5; 25.6 °C | 22.3; 20.9 °C |
+| Wet-bulb at 2 m: median | 27.3; 26.6 °C | 21.7; 20.6 °C | 17.4; 16.0 °C |
+| Wet-bulb at 2 m: 99th percentile | 31.7; 30.9 °C | 26.3; 25.0 °C | 22.1; 20.5 °C |
 | Air at 2 m: median | 34.7; 32.9 °C | 27.7; 25.3 °C | 22.4; 19.5 °C |
 | Air at 2 m: 99th percentile | 39.7; 35.9 °C | 33.2; 28.8 °C | 28.3; 23.4 °C |
-| Wet-bulb 0.9 km up: median | 26.5; 26.2 °C | 20.8; 20.1 °C | 16.5; 15.4 °C |
-| Wet-bulb 0.9 km up: 99th percentile | 31.5; 31.0 °C | 25.9; 24.9 °C | 21.6; 20.2 °C |
+| Wet-bulb 0.9 km up: median | 26.7; 26.0 °C | 21.0; 19.9 °C | 16.6; 15.3 °C |
+| Wet-bulb 0.9 km up: 99th percentile | 31.2; 30.4 °C | 25.7; 24.4 °C | 21.5; 19.8 °C |
 | Air 0.9 km up: median | 33.2; 31.4 °C | 26.2; 23.9 °C | 20.9; 18.1 °C |
 | Air 0.9 km up: 99th percentile | 37.9; 34.5 °C | 31.4; 27.4 °C | 26.5; 21.9 °C |
 
 The night eases the air more than the humid heat. In the hot world the night's air at 2 m is 1.8 K cooler at the
-median and 3.7 K at the 99th percentile, while its wet-bulb temperature falls 0.3 K at the median and from 32.1 to
-31.6 °C at the 99th percentile. At a fixed humidity a kelvin of air moves the wet-bulb temperature 0.26–0.28 K at the
+median and 3.7 K at the 99th percentile, while its wet-bulb temperature falls 0.7 K at the median and from 31.7 to
+30.9 °C at the 99th percentile. At a fixed humidity a kelvin of air moves the wet-bulb temperature 0.26–0.27 K at the
 hot world's day medians and 0.37–0.39 K at the lock's, over the land's surface pressures. At 2 m the hot world's
-wet-bulb temperature passes 28 °C for 36% of the day's land time and 29% of the night's, and 31 °C for 4.1% and 2.5%;
-at 0.9 km, 26.8% and 20.8%, and 2.0% and 1.1%. In the lock the night takes 1.2 K off the wet-bulb median at 2 m and
-2.9 K off the air's. The night's figures at 2 m read warm: the 2 m air is the lowest level's carried down, and in
+wet-bulb temperature passes 28 °C for 38.7% of the day's land time and 23.8% of the night's, and 31 °C for 3.3% and
+0.9%; at 0.9 km, 29.0% and 15.7%, and 1.4% and 0.3%. In the lock the night takes 1.4 K off the wet-bulb median at 2 m
+and 2.9 K off the air's. The night's figures at 2 m read warm: the 2 m air is the lowest level's carried down, and in
 calm night air the air near the ground cools below it, as the cloud-resolving ring's calm, saturated land nights show
 ([the CRM's account](../../../climate/crm/README.md#what-the-ring-shows)). In each place's coolest tenth of its means
 by the air, 81% of them nights in the hot world, the 2 m air stands 1.1 K above the ground's own temperature, and
@@ -171,29 +184,31 @@ by the air, 81% of them nights in the hot world, the 2 m air stands 1.1 K above 
 `A28_corrected_970_eddies` carried the design case on from its year-19 restart for two years, its years 0 and 1,
 writing every 6.5 hours: eleven means to each 3-day mean, 1,320 a year. It saved the output every run saves, the air's
 temperature, humidity and winds at every level, the surface pressure, the 2 m air, the rain, the fluxes and the Sun's
-cosine. Over those two years the land's heat in the 6.5-hour means stands against the 3-day means their elevens make,
-with each extreme's excess and the ratio of its height above the median:
+cosine. Each 6.5-hour mean takes its humidity from its start and its end, as the 3-day output does, and the last
+record, with no next one, leaves the 239 whole 3-day means and the 2,629 6.5-hour means within them. Over those
+means the land's heat in the 6.5-hour means stands against the 3-day means their elevens make, with each extreme's
+excess and the ratio of its height above the median:
 
 | Design case, land, its two 6.5-hour years | Median: 6.5 hours; 3-day means | 99th percentile: the same (excess; ratio) | Top: the same (excess; ratio) |
 |---|---|---|---|
-| Wet-bulb at 2 m | 16.62; 16.59 °C | 22.2; 21.9 °C (+0.32 K; 1.056) | 25.1; 24.1 °C (+1.02 K; 1.133) |
+| Wet-bulb at 2 m | 16.61; 16.58 °C | 22.1; 21.9 °C (+0.29 K; 1.049) | 25.0; 24.1 °C (+0.97 K; 1.126) |
 | Air at 2 m | 20.40; 20.39 °C | 28.0; 27.7 °C (+0.22 K; 1.029) | 30.8; 30.1 °C (+0.66 K; 1.067) |
-| Wet-bulb 0.9 km up | 15.88; 15.86 °C | 21.5; 21.2 °C (+0.32 K; 1.055) | 24.3; 23.4 °C (+0.96 K; 1.125) |
-| Air 0.9 km up | 18.98; 18.97 °C | 26.2; 26.0 °C (+0.21 K; 1.029) | 28.8; 28.3 °C (+0.57 K; 1.060) |
+| Wet-bulb 0.9 km up | 15.88; 15.85 °C | 21.5; 21.2 °C (+0.28 K; 1.048) | 24.3; 23.4 °C (+0.91 K; 1.117) |
+| Air 0.9 km up | 18.97; 18.97 °C | 26.2; 26.0 °C (+0.21 K; 1.029) | 28.8; 28.3 °C (+0.57 K; 1.060) |
 
 The 3-day means smooth the land's 99th percentile by 0.2–0.3 K and its top by 0.6–1.0 K. The 3-day means made from the
 two years match the design case's own 3-day output over its years 10–19 within 0.1 K at the median and the 99th
-percentile (the wet-bulb temperature at 2 m: 16.59 and 21.86 °C against 16.65 and 21.94 °C). In the 6.5-hour means
-1.9% of the land's lowest-level means are supersaturated, against 0.25% of the 3-day means, and the wet-bulb
+percentile (the wet-bulb temperature at 2 m: 16.58 and 21.85 °C against 16.59 and 21.79 °C). In the 6.5-hour means
+1.6% of the land's lowest-level means are supersaturated, against 0.21% of the 3-day means, and the wet-bulb
 temperature takes the air's own there. The 6.5-hour means are themselves means, in cells about 170 km across. The
 ratios are the design case's alone; stretching each target's 99th percentile above its median by them gives, as a
 sensitivity, the 99th percentiles in 6.5-hour means, with the 3-day means' in brackets:
 
 | Land, 99th percentile | The hot world | The resort: 300 K | The lock: 295 K |
 |---|---|---|---|
-| Wet-bulb at 2 m | 32.1 (31.9) °C | 26.5 (26.2) °C | 22.2 (21.9) °C |
+| Wet-bulb at 2 m | 31.7 (31.5) °C | 26.2 (26.0) °C | 22.0 (21.8) °C |
 | Air at 2 m | 39.4 (39.3) °C | 33.0 (32.8) °C | 28.0 (27.8) °C |
-| Wet-bulb 0.9 km up | 31.6 (31.3) °C | 25.9 (25.6) °C | 21.5 (21.2) °C |
+| Wet-bulb 0.9 km up | 31.1 (30.9) °C | 25.6 (25.3) °C | 21.4 (21.1) °C |
 | Air 0.9 km up | 37.7 (37.6) °C | 31.2 (31.0) °C | 26.3 (26.1) °C |
 
 ## What it means
@@ -205,14 +220,13 @@ wholly to unsaturated air. Keeping the hot world still takes the 3.7–5.3% of d
 scale of 0.92–0.93.
 
 **Comfort at the ground follows the target closely.** In the hot world, at 307 K, the Moon's land is hot and humid at
-every latitude, the poles included. At 2 m the wet-bulb temperature passes 28 °C for 32% of the land's time, 49%
+every latitude, the poles included. At 2 m the wet-bulb temperature passes 28 °C for 31% of the land's time, 49%
 within 15° of the equator and 56% on land below 1 km, and passes 31 °C, near where young, healthy adults can no longer
-keep up light activity in humid heat (Vecellio et al. 2022), for 3% of the land's time; the seas are at a bath's
-34.5 °C. Its nights cool the air at 2 m by 1.8 K at the median and its wet-bulb temperature by 0.3 K, which still
-passes 28 °C for 29% of the night's land time. Its comfort lives aloft, where the air is 20–25 °C from about 8 to 12 km
-up at 0.92–1.00 atm, and its freezing air from 36 km up near 0.58 atm. In the resort, at 300 K, the ground is a warm
-tropical one, with seas near 29 °C, the 2 m wet-bulb's 99th percentile near 26 °C, 26.5 °C by day and 25.6 °C by
-night, 20 °C air 6.7 km up and freezing air above 28 km. The lock, at 295 K, is the design case.
+keep up light activity in humid heat (Vecellio et al. 2022), for 2% of the land's time; the seas are at a bath's
+34.5 °C. Its comfort lives aloft, where the air is 20–25 °C from about 8 to 12 km up at 0.92–1.00 atm, and its
+freezing air from 36 km up near 0.57 atm. In the resort, at 300 K, the ground is a warm tropical one, with seas near
+29 °C, the 2 m wet-bulb's 99th percentile near 26 °C, 26.3 °C by day and 25.0 °C by night, 20 °C air 6.7 km up and
+freezing air above 28 km. The lock, at 295 K, is the design case.
 
 **Every kelvin below the hot world is dimming.** 300 K takes 5.2–6.5% of the sunlight beyond the plan's additions and
 295 K 8.9–11.3%, each kelvin 0.73–0.96% of it. The dimmer would go from the corrected design case's 3% of the titania
@@ -222,14 +236,14 @@ power the array could use, 124–402 TW at 20–30%, but the fleet's tiles and p
 light pressure, and an absorbing one returns 10% of its dimming as glow with both halves rolled and 25% as built
 ([glow](../solar_shield_array/glow.md)).
 
-**Dimming takes rain and light from the living Moon.** The hot world's land rains 2.94 mm a day against the lock's
-1.98 and has half its desert, 20.1% against 42.3%. Each 1% of dimming takes 0.07–0.30% of the living Moon's growth
-through light, and its own 0.55–1.38% of the rain at a held temperature beyond what the cooling does.
+**Dimming takes rain and light from the living Moon.** The hot world's land rains 3.34 mm a day against the lock's
+2.25 and has half its desert, 18.9% against 37.6%; on the model's own land cells, 2.94 against 1.98 mm and 20.1%
+against 42.3%. Each 1% of dimming takes 0.07–0.30% of the living Moon's growth through light, and its own 0.55–1.38%
+of the rain at a held temperature beyond what the cooling does.
 
 **The gap to a saturated column widens with dimming.** With the added heat answered, the clear sky's load sits
 1.3–1.8 W/m² under the saturated column's ceiling in the hot world, 14–17 W/m² at 300 K and 22–29 W/m² at 295 K. The
-hot world is stable in the GCM all the same, held by its restoring gain; the narrow gap measures how far its balance
-leans on its air staying unsaturated.
+hot world is stable in the GCM all the same, held by its restoring gain.
 
 **What the choice reopens.** The register's planned climate near 295 K (9 October), the mix of climates with the
 hottest days pleasantly warm (25 September) and the 5% dimmer's 295 K; the design case for the chosen target, a 20-year
@@ -244,10 +258,8 @@ Island box.
   whose amount at the cooler end is unknown. A run at the chosen target settles it.
 - **The feedback** is the warming test's, applied to cooling; it is the GCM's for this state and Earth-tuned in its
   clouds and convection.
-- **The top-up's heat** spends all the fall energy on the Moon, the case without recovery.
 - **The saturated column's ceiling** is the radiative–convective model's clear, fully saturated column with a 200 K
-  stratosphere. It measures how far the balance leans on the air staying unsaturated; the same model's
-  Manabe–Wetherald columns, with Earth's humidity falling off with height, mark no runaway below 320 K.
+  stratosphere.
 
 ## Running it
 

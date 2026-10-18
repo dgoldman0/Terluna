@@ -9,19 +9,23 @@ It reads the ExoPlaSim output in climate/gcm/runs (ignored by Git) and the T21 b
 and writes research/runs/climate_targets/extract.json (ignored), with the sha256 and size of every file it read;
 run.py binds it.
 
-Land and water are the model's own mask (lsm), for every statistic. The runner turns cells to water, least land
-first, until the planned water share is met, so cells with a land fraction a little above one half run as water.
-Land cells are weighted by their land area (land fraction times cell area) and water cells by their water area, the
-quantiles included. The coasts are land cells with a water cell among their eight neighbours, joined across the
-longitude seam and kept apart across the poles. The land's rain and deserts are the land cells' too.
+Land and water are the model's own mask (lsm) for the heat, the seas and the sky. The runner turns cells to water,
+least land first, until the planned water share is met, so cells with a land fraction a little above one half run as
+water. Land cells are weighted by their land area (land fraction times cell area) and water cells by their water
+area, the quantiles included. The coasts are land cells with a water cell among their eight neighbours, joined across
+the longitude seam and kept apart across the poles. The land's rain and deserts are counted two ways: every cell's
+land with that cell's own rain, since the rain falls on a cell's land as on its water, and the model's own land cells
+alone.
 
 The heat is in the 3-day means, each about a tenth of the lunar day, at two heights. One is the lowest model level,
 about 0.9 km above the ground. The other is 2 m, where the output's air is the lowest level's carried down the dry
 adiabat to the ground's pressure (PlaSim's mkshfl, with its kappa of 0.286), and the wet-bulb temperature carries the
 lowest level's specific humidity down with it, capped at saturation there: the reading of a well-mixed lowest
-kilometre, as by day. The wet-bulb temperature is the psychrometric one over water with Bolton's saturation, capped at
-the air's own temperature where the air is supersaturated. Each place's warmest and coolest tenth are each cell's own
-tenth of its 3-day means ranked by one quantity, with the others averaged over the same means.
+kilometre, as by day. The output's humidity is the humidity at each mean's first step (window_humidity), so a mean's
+humidity is that of its start and its end, the next record's, and each run's last mean leaves the heat's statistics.
+The wet-bulb temperature is the psychrometric one over water with Bolton's saturation, capped at the air's own
+temperature where the air is supersaturated. Each place's warmest and coolest tenth are each cell's own tenth of its
+3-day means ranked by one quantity, with the others averaged over the same means.
 
 The day's 3-day means are those the Sun is up for more than half of. The output's czen is each mean's average cosine
 of the Sun's zenith angle, and a mean is the day's when its czen exceeds half_sunlit() of the Sun's travel through the
@@ -29,7 +33,7 @@ mean times the cosine of the latitude; the cut is exact where the Sun's declinat
 swings it through the tilt, 1.54 degrees either way. Of the day's means, those with the Sun past its highest are the
 afternoon's. The design case's 6.5-hour years (A28_corrected_970_eddies, two years from the design case's year-19
 restart, eleven means to each 3-day mean) give the land's heat in those means and in the 3-day means their elevens
-make, over the same two years.
+make, over the same two years, each 6.5-hour mean's humidity from its start and its end as in the 3-day output.
 """
 from __future__ import annotations
 import hashlib
@@ -94,6 +98,15 @@ def wet_bulb(t, q, p):
         f = qsat(tw, p) - q - (CP + 1850.0 * q) / lv * (t - tw)
         lo, hi = np.where(f < 0, tw, lo), np.where(f < 0, hi, tw)
     return 0.5 * (lo + hi)
+
+
+def window_humidity(written):
+    """Each mean's specific humidity from the output's records along time. ExoPlaSim 3.4.2 computes its output
+    humidity only at the steps where mod(nstep, nafter) == 0 (plasim.f90, gridpointd, line 3218) and adds that held
+    value at every step of the mean (outmod.f90, outaccu, line 2556), so each record holds the humidity at its mean's
+    first step while the temperatures, the pressure and the Sun's cosine are true means. A mean's humidity is the mean
+    of its start and its end, the next record's; the last record has no next one and gives none."""
+    return 0.5 * (written[:-1] + written[1:])
 
 
 def boundary():
@@ -231,43 +244,60 @@ def read(run, b, configuration):
     ps, ts, pr = np.concatenate(fields['ps']) * 100.0, np.concatenate(fields['ts']), np.concatenate(fields['pr'])
     tas, czen = np.concatenate(fields['tas']), np.concatenate(fields['czen'])
     del fields
-    t0, q0, p0 = ta[:, -1], q[:, -1], ps * sigma[-1]
-    # wet-bulb and air temperatures (C) at the two heights in every 3-day mean
-    hot = dict(lowest_level=(wet_bulb(t0, q0, p0) - 273.15, t0 - 273.15),
-               at_2_m=(wet_bulb(tas, np.minimum(q0, qsat(tas, ps)), ps) - 273.15, tas - 273.15))
     sst = ts - 273.15
     alat = np.abs(lat)[:, None] * np.ones(land.shape)
     coast = island & beside(sea)
     wl, ws = land * area, (1.0 - land) * area          # each cell's land and water area
-    on_land = np.broadcast_to(island, sst.shape)
-    lw = np.broadcast_to(wl, sst.shape)[on_land]        # the land means' weights
-    # rain, deserts and the ground's temperature on the land, by land area
+    on_land_all = np.broadcast_to(island, sst.shape)
+    lw_all = np.broadcast_to(wl, sst.shape)[on_land_all]
+    # The heat. Each record's humidity is the humidity at its mean's first step (window_humidity), so a mean's own is
+    # taken from its start and its end, the next record's; the last mean has no next record and leaves the heat's
+    # statistics, which cover the other means.
+    qm = window_humidity(q[:, -1])
+    n = qm.shape[0]
+    t0, p0, tas_h, ps_h = ta[:n, -1], ps[:n] * sigma[-1], tas[:n], ps[:n]
+    # wet-bulb and air temperatures (C) at the two heights in every 3-day mean
+    hot = dict(lowest_level=(wet_bulb(t0, qm, p0) - 273.15, t0 - 273.15),
+               at_2_m=(wet_bulb(tas_h, np.minimum(qm, qsat(tas_h, ps_h)), ps_h) - 273.15, tas_h - 273.15))
+    on_land = np.broadcast_to(island, t0.shape)
+    lw = np.broadcast_to(wl, t0.shape)[on_land]         # the heat's land means' weights
+    # rain and deserts on the land, counted two ways: every cell's land with that cell's own rain, and the model's own
+    # land cells alone; the ground's temperature on the model's land
     rain = pr.mean(axis=0) * 86400.0 * 1000.0
     dry = rain < DESERT_MM_DAY
     ground = sst.mean(axis=0)
 
-    def land_share(mask):
-        ww = wl * (island & mask)
-        return dict(desert=float((ww * dry).sum() / ww.sum()), rain_mm_day=float((ww * rain).sum() / ww.sum()),
-                    ground_c=float((ww * ground).sum() / ww.sum()))
+    def land_share(weights, mask, with_ground):
+        ww = weights * mask
+        out = dict(desert=float((ww * dry).sum() / ww.sum()), rain_mm_day=float((ww * rain).sum() / ww.sum()))
+        if with_ground:
+            out['ground_c'] = float((ww * ground).sum() / ww.sum())
+        return out
 
     def elevations(lo, hi):
         return ((elevation >= lo) if lo is not None else True) & ((elevation < hi) if hi is not None else True)
 
+    def rain_and_deserts(weights, with_ground=False):
+        return dict(all=land_share(weights, np.ones_like(island), with_ground),
+                    bands={f'{lo}-{hi}': land_share(weights, (alat >= lo) & (alat < hi), with_ground)
+                           for lo, hi in RAIN_BANDS},
+                    heights={name: land_share(weights, elevations(lo, hi), with_ground)
+                             for name, lo, hi in HEIGHT_CLASSES})
+
     # the day's 3-day means, the Sun up for more than half of each, and among them the afternoon's, the Sun past its
     # highest: the next mean's czen below the last one's
     window = sun_window(configuration)
-    day = czen > half_sunlit(window) * np.cos(np.radians(lat))[:, None]
-    falling = np.empty_like(day)
+    day_all = czen > half_sunlit(window) * np.cos(np.radians(lat))[:, None]
+    falling = np.empty_like(day_all)
     falling[1:-1] = czen[2:] < czen[:-2]
     falling[0], falling[-1] = czen[1] < czen[0], czen[-1] < czen[-2]
-    afternoon = day & falling
+    day, afternoon = day_all[:n], (day_all & falling)[:n]
     # each cell's warmest and coolest tenth of its 3-day means, ranked by the wet-bulb temperature and by the air, with
     # the other quantities over the same means
-    k = max(1, sst.shape[0] // 10)
+    k = max(1, n // 10)
     sets = {}
     for height, (tw, air) in hot.items():
-        others = dict(wet_bulb=tw, air=air, ground=sst, day=day.astype(float), afternoon=afternoon.astype(float))
+        others = dict(wet_bulb=tw, air=air, ground=sst[:n], day=day.astype(float), afternoon=afternoon.astype(float))
         sets[height] = dict(by_wet_bulb=ranked_tenths(tw, others, k), by_air=ranked_tenths(air, others, k))
 
     def heat_at(height, mask):
@@ -291,33 +321,39 @@ def read(run, b, configuration):
         return wstats(sst[m], np.broadcast_to(ws, sst.shape)[m])
 
     land_heat = heat(island)
+    land_heat['means'] = dict(of_the_run=int(sst.shape[0]), in_the_heat=n)
     land_heat['day'], land_heat['night'] = heat_in(hot, wl, on_land, day), heat_in(hot, wl, on_land, ~day)
     land_heat['day']['czen_above'] = dict(times_cos_latitude=float(half_sunlit(window)),
                                           window_degrees=float(np.degrees(window)))
-    # the first readout of 17 October, which counted every cell with a land fraction above one half alike
-    x = hot['lowest_level'][0][np.broadcast_to(land > 0.5, sst.shape)]
+    # the first readout of 17 October, which took the output's humidity as written and counted every cell with a land
+    # fraction above one half alike
+    x = (wet_bulb(ta[:, -1], q[:, -1], ps * sigma[-1]) - 273.15)[np.broadcast_to(land > 0.5, sst.shape)]
     land_heat['readout_of_17_october'] = dict(
         wet_bulb=dict(median=float(np.median(x)), p99=float(np.percentile(x, 99))),
         above_28=float((x > 28.0).mean()), above_31=float((x > 31.0).mean()))
     # what the 2 m figures are: the lowest level's air down the dry adiabat, the saturation caps, the ground's pressure
-    adiabat = (tas - t0 * sigma[-1] ** -AKAP)[on_land]
+    adiabat = (tas_h - t0 * sigma[-1] ** -AKAP)[on_land]
     land_heat['at_2_m']['air_down_the_dry_adiabat'] = dict(
         mean_k=wmean(adiabat, lw), sd_k=float(np.sqrt(wmean((adiabat - wmean(adiabat, lw)) ** 2, lw))),
-        above_the_lowest_level_k=wmean((tas - t0)[on_land], lw))
-    land_heat['saturated'] = dict(capped_at_2_m=share((q0 - qsat(tas, ps))[on_land], lw, 0.0),
-                                  supersaturated_lowest_level=share((q0 - qsat(t0, p0))[on_land], lw, 0.0))
-    land_heat['surface_pressure_bar'] = {f'p{round(100 * p):02d}': wquantile(ps[on_land] / 1e5, lw, p)
+        above_the_lowest_level_k=wmean((tas_h - t0)[on_land], lw))
+    land_heat['saturated'] = dict(
+        capped_at_2_m=share((qm - qsat(tas_h, ps_h))[on_land], lw, 0.0),
+        supersaturated_lowest_level=share((qm - qsat(t0, p0))[on_land], lw, 0.0),
+        supersaturated_lowest_level_as_written=share((q[:, -1] - qsat(ta[:, -1], ps * sigma[-1]))[on_land_all],
+                                                     lw_all, 0.0))
+    land_heat['surface_pressure_bar'] = {f'p{round(100 * p):02d}': wquantile(ps_h[on_land] / 1e5, lw, p)
                                          for p in (0.05, 0.5, 0.95)}
+    in_water = wl * sea                                  # the boundary file's land in cells the model runs as water
     out = dict(top_of_air_w_m2=dict(incoming=t['rst'] - t['rsut'], reflected=-t['rsut'], absorbed=t['rst'],
                                      absorbed_clear_sky=t['rstcs'], outgoing_infrared=-t['rlut'],
                                      outgoing_infrared_clear_sky=-t['rltcs'], net=t['ntr']),
                ground_k=gmean(ts.mean(axis=0)), rain_mm_day=gmean(rain),
                land_and_water=dict(land_cells=int(island.sum()),
                                    water_share_of_area=float(area[sea].sum() / area.sum()),
-                                   water_cells_with_land_fraction_above_half=int((sea & (land > 0.5)).sum())),
-               land=dict(all=land_share(np.ones_like(island)),
-                         bands={f'{lo}-{hi}': land_share((alat >= lo) & (alat < hi)) for lo, hi in RAIN_BANDS},
-                         heights={name: land_share(elevations(lo, hi)) for name, lo, hi in HEIGHT_CLASSES}),
+                                   water_cells_with_land_fraction_above_half=int((sea & (land > 0.5)).sum()),
+                                   land_in_water_cells=float(in_water.sum() / wl.sum()),
+                                   its_rain_mm_day=float((in_water * rain).sum() / in_water.sum())),
+               land=dict(every_cell=rain_and_deserts(wl), model_land=rain_and_deserts(wl * island, True)),
                heat=dict(land=land_heat, coasts=heat(coast),
                          bands={f'{lo}-{hi}': heat(island & (alat >= lo) & (alat < hi)) for lo, hi in BANDS},
                          below_1_km=heat(island & (elevation < 1000.0)),
@@ -345,10 +381,10 @@ def read(run, b, configuration):
                            pressure_atm=float((al * ph).sum() / al.sum() / ph.shape[0])))
     out['sky_over_land'] = ladder
     # the median of the land's column crossings of freezing, over the columns that freeze at all
-    fh = freezing_height(ta, z)[on_land]
+    fh = freezing_height(ta, z)[on_land_all]
     freezes = np.isfinite(fh)
-    out['freezing_level_over_land_km'] = wquantile(fh[freezes], lw[freezes], 0.5) / 1000.0
-    out['land_columns_that_never_freeze'] = float(lw[~freezes].sum() / lw.sum())
+    out['freezing_level_over_land_km'] = wquantile(fh[freezes], lw_all[freezes], 0.5) / 1000.0
+    out['land_columns_that_never_freeze'] = float(lw_all[~freezes].sum() / lw_all.sum())
     return out, files, island
 
 
@@ -453,12 +489,20 @@ def eddies(b, records, island):
                                                       np.broadcast_to(wl, tas.shape)[land], 0.0)
         return out
 
+    # each 6.5-hour mean's humidity from its start and its end (window_humidity); the last record has no next one,
+    # so the whole 3-day means the rest make are kept, and the 6.5-hour means are the same ones
+    written = f['hus']
+    blocks = (written.shape[0] - 1) // per
+    keep = blocks * per
+    fine = dict(tas=f['tas'][:keep], ta=f['ta'][:keep], hus=window_humidity(written)[:keep], ps=f['ps'][:keep])
     m = p['configuration']['model']
     return dict(run=EDDIES, years=list(EDDY_YEARS), start=began,
-                writes_per_lunar_day=m['writes_per_lunar_day'], means_to_a_3_day_mean=per, means=int(f['tas'].shape[0]),
+                writes_per_lunar_day=m['writes_per_lunar_day'], means_to_a_3_day_mean=per,
+                means=int(written.shape[0]), means_kept=keep, three_day_means_kept=blocks,
                 hours_each=m['steps_per_lunar_day'] * m['timestep_min'] / 60.0 / m['writes_per_lunar_day'],
-                at_6_5_hours=heat(**f),
-                in_3_day_means=heat(**{k: v.reshape(-1, per, *v.shape[1:]).mean(axis=1) for k, v in f.items()})), files
+                at_6_5_hours=heat(**fine),
+                in_3_day_means=heat(**{k: v.reshape(-1, per, *v.shape[1:]).mean(axis=1)
+                                       for k, v in fine.items()})), files
 
 
 def extract():

@@ -76,7 +76,7 @@ def agree(written, values, what=''):
 def found(pattern, text):
     m = re.search(pattern, flat(text))
     assert m, pattern
-    return [g.replace('−', '-') for g in m.groups()]
+    return [g.replace('−', '-').replace(',', '') for g in m.groups()]
 
 
 # ------------------------------------------------------------------------------------------ binding and regeneration
@@ -217,15 +217,42 @@ def test_the_test_settles_near_where_its_last_years_stand(product):
     assert s['cloud_effect_w_m2']['sunlight'] + s['cloud_effect_w_m2']['infrared'] > 0.0
 
 
-def test_the_land_is_the_models_own(product):
+def test_the_land_is_the_models_own_and_its_rain_is_counted_both_ways(product):
     for run in ('design', 'test'):
         lw = product['runs'][run]['land_and_water']
         assert lw['land_cells'] == 1289 and lw['water_cells_with_land_fraction_above_half'] == 166
         assert round(100 * lw['water_share_of_area'], 2) == 40.05
+        assert round(100 * lw['land_in_water_cells']) == 18 and lw['its_rain_mm_day'] > 3.0
         assert product['runs'][run]['land_columns_that_never_freeze'] == 0.0
         land = product['runs'][run]['land']
-        bands = [b['desert'] for b in land['bands'].values()]
-        assert min(bands) >= 0.0 and max(bands) <= 1.0 and 0.0 < land['all']['desert'] < 1.0
+        for count in ('every_cell', 'model_land'):
+            bands = [b['desert'] for b in land[count]['bands'].values()]
+            assert min(bands) >= 0.0 and max(bands) <= 1.0 and 0.0 < land[count]['all']['desert'] < 1.0
+        # the model's own land cells are the dry bound: less rain, more desert
+        every, model = land['every_cell']['all'], land['model_land']['all']
+        assert model['rain_mm_day'] < every['rain_mm_day'] and model['desert'] > every['desert']
+        c = product['runs'][run]
+        assert (c['land_rain_mm_day'], c['land_desert']) == (every['rain_mm_day'], every['desert'])
+        assert (c['model_land_rain_mm_day'], c['model_land_desert']) == (model['rain_mm_day'], model['desert'])
+    assert [round(100 * product['runs'][r]['land']['every_cell']['all']['desert'], 1) for r in ('test', 'design')] == \
+        [18.9, 37.6]
+    assert round(product['runs']['test']['land_and_water']['its_rain_mm_day'], 2) == 5.15
+
+
+def test_a_means_humidity_is_that_of_its_start_and_its_end():
+    written = np.array([0.010, 0.012, 0.011, 0.015])           # each record's humidity at its mean's first step
+    assert X.window_humidity(written) == pytest.approx([0.011, 0.0115, 0.013])
+
+
+def test_the_heat_leaves_out_the_last_mean_and_its_supersaturation_falls(product):
+    for run in ('design', 'test'):
+        land = product['runs'][run]['heat']['land']
+        assert land['means'] == dict(of_the_run=1200, in_the_heat=1199)
+        sat = land['saturated']
+        assert sat['supersaturated_lowest_level'] < sat['supersaturated_lowest_level_as_written']
+    design = product['runs']['design']['heat']['land']['saturated']
+    assert round(100 * design['supersaturated_lowest_level_as_written'], 2) == 1.67
+    assert round(100 * design['supersaturated_lowest_level'], 2) == 0.24
 
 
 def test_the_2_m_air_is_the_lowest_level_carried_down_the_dry_adiabat(product):
@@ -433,7 +460,7 @@ def test_the_wet_bulb_per_kelvin_of_air_is_bound(product):
             assert X.wet_bulb(np.array([t]), q, p)[0] - 273.15 == pytest.approx(s['wet_bulb_c'], abs=1e-6)
             change = X.wet_bulb(np.array([t + 0.5]), q, p)[0] - X.wet_bulb(np.array([t - 0.5]), q, p)[0]
             assert change == pytest.approx(at['k_per_k'], abs=1e-9)
-    assert [round(x, 2) for x in product['wet_bulb_per_kelvin_of_air']['test']['k_per_k']] == [0.26, 0.28]
+    assert [round(x, 2) for x in product['wet_bulb_per_kelvin_of_air']['test']['k_per_k']] == [0.26, 0.27]
     assert [round(x, 2) for x in product['wet_bulb_per_kelvin_of_air']['design']['k_per_k']] == [0.37, 0.39]
 
 
@@ -441,6 +468,7 @@ def test_the_short_weather_stretches_the_tails_a_little(product):
     s = product['smoothing']
     assert s['run'] == 'A28_corrected_970_eddies' and s['years'] == [0, 1] and s['hours_each'] == 6.5
     assert s['means_to_a_3_day_mean'] == 11
+    assert (s['means'], s['means_kept'], s['three_day_means_kept']) == (2640, 2629, 239)
     assert s['start']['path'] == X.START and s['start']['sha256'].startswith('cc83ad0f')
     assert 0.0 < s['supersaturated_lowest_level']['in_3_day_means'] < s['supersaturated_lowest_level']['at_6_5_hours']
     design = product['runs']['design']['heat']['land']
@@ -506,12 +534,25 @@ def test_the_study_readme_states_the_three_targets(product):
             else:
                 agree(numbers(cell), x['gap_with_the_added_heat_answered_w_m2']
                       + x['gap_with_the_added_heat_unanswered_w_m2'], key)
-    rain = rows['Rain on land, a day']
-    agree(numbers(rain[0]), [warm['land_rain_mm_day']])
+    rain = rows["Rain on land, a day, every cell's land (the model's land cells)"]
+    agree(numbers(rain[0]), [warm['land_rain_mm_day'], warm['climate']['model_land_rain_mm_day']])
     for cell, x in zip(rain[1:], (resort, lock)):
-        agree(numbers(cell), [x['land_rain_mm_day']] + x['land_rain_with_the_dimmings_own_cut_mm_day'], 'rain')
-    for cell, x in zip(rows['Land under 0.5 mm a day'], (warm, resort, lock)):
-        agree(numbers(cell), [100 * x['climate']['land_desert']], 'desert')
+        agree(numbers(cell), [x['land_rain_mm_day'], x['climate']['model_land_rain_mm_day']]
+              + x['land_rain_with_the_dimmings_own_cut_mm_day'], 'rain')
+    for cell, x in zip(rows['Land under 0.5 mm a day, the same'], (warm, resort, lock)):
+        agree(numbers(cell), [100 * x['climate']['land_desert'], 100 * x['climate']['model_land_desert']], 'desert')
+    text = flat(section(STUDY_README, '## The three targets'))
+    test = product['runs']['test']
+    agree(found(r'leaves the heat\'s statistics, which cover ([\d,]+) of the ([\d,]+)\.', text),
+          [test['heat']['land']['means']['in_the_heat'], test['heat']['land']['means']['of_the_run']])
+    sat = product['runs']['design']['heat']['land']['saturated']
+    agree(found(r'held in ([\d.]+)% of the design case\'s land means at the lowest level and now holds in '
+                r'([\d.]+)%', text),
+          [100 * sat['supersaturated_lowest_level_as_written'], 100 * sat['supersaturated_lowest_level']])
+    lw = test['land_and_water']
+    agree(found(r'The (\d+)% of the boundary file\'s land that lies in cells the model runs as water is mostly '
+                r'coast and lakeshore, and those cells rain ([\d.]+) mm a day in the hot world', text),
+          [100 * lw['land_in_water_cells'], lw['its_rain_mm_day']])
     for key, pair in (('Land wet-bulb at 2 m: median; 99th percentile', ('wet_bulb_2m_median_c', 'wet_bulb_2m_p99_c')),
                       ('Land wet-bulb 0.9 km up: median; 99th percentile', ('wet_bulb_median_c', 'wet_bulb_p99_c')),
                       ('Land air, median: at 2 m; 0.9 km up', ('land_air_2m_median_c', 'land_air_median_c'))):
@@ -603,10 +644,12 @@ def test_the_climate_readme_states_the_settled_heat(product):
     text = settled()
     test, design = product['runs']['test'], product['runs']['design']
     lt, ld = test['heat']['land'], design['heat']['land']
-    agree(found(r'from ([\d.]+)% to ([\d.]+)%\. The rain is still heaviest', text),
-          [100 * design['land_desert'], 100 * test['land_desert']])
-    poles = [test['land']['bands'][b]['ground_c'] for b in ('60-75', '75-90')]
-    tropics = [test['land']['bands'][b]['ground_c'] for b in ('0-15', '15-30')]
+    agree(found(r'halves, from ([\d.]+)% to ([\d.]+)% counting every cell\'s land and from ([\d.]+)% to ([\d.]+)% on '
+                r'the model\'s own land cells', text),
+          [100 * design['land_desert'], 100 * test['land_desert'], 100 * design['model_land_desert'],
+           100 * test['model_land_desert']])
+    poles = [test['land']['model_land']['bands'][b]['ground_c'] for b in ('60-75', '75-90')]
+    tropics = [test['land']['model_land']['bands'][b]['ground_c'] for b in ('0-15', '15-30')]
     agree(found(r'poleward of 60° is the warmest, ([\d.]+)–([\d.]+) °C against ([\d.]+)–([\d.]+) °C within 30°', text),
           sorted(poles) + sorted(tropics))
     agree(found(r'the land\'s air at 2 m has a median of ([\d.]+) °C \(([\d.]+) in the design case\), ([\d.]+) °C at '
@@ -636,23 +679,37 @@ def test_the_climate_readme_states_the_settled_heat(product):
                 r'σ\^−0\.286 \(standard deviation ([\d.]+) K\)', text),
           [a['above_the_lowest_level_k'], 0.02, a['sd_k']])
     assert abs(a['mean_k']) < 0.02 and abs(ld['at_2_m']['air_down_the_dry_adiabat']['mean_k']) < 0.05
-    agree(found(r'binds in ([\d.]+)% of the land\'s means here and ([\d.]+)% in the design case', text),
-          [100 * lt['saturated']['capped_at_2_m'], 100 * ld['saturated']['capped_at_2_m']])
+    assert lt['saturated']['capped_at_2_m'] == 0.0
+    agree(found(r'binds in none of the land\'s means here and ([\d.]+)% in the design case', text),
+          [100 * ld['saturated']['capped_at_2_m']])
+    agree(found(r'with the humidity as written, ([\d.]+)% of the design case\'s land means at the lowest level, '
+                r'and with each mean\'s own, ([\d.]+)%', text),
+          [100 * ld['saturated']['supersaturated_lowest_level_as_written'],
+           100 * ld['saturated']['supersaturated_lowest_level']])
     agree(found(r'put the lowest level\'s time above 28 °C at ([\d.]+)%', text),
           [100 * lt['readout_of_17_october']['above_28']])
 
 
 def test_the_climate_readme_states_the_deserts(product):
-    rows = table(settled(), 'Land, years 10–19')
+    rows = table(settled(), "Land, years 10–19: every cell's land (the model's land cells)")
     design, test = product['runs']['design']['land'], product['runs']['test']['land']
     for label, band in (('0–15°', '0-15'), ('15–30°', '15-30'), ('30–45°', '30-45'), ('45–60°', '45-60'),
                         ('60–75°', '60-75'), ('75–90°', '75-90')):
         for cell, land in zip(rows[label], (design, test)):
-            agree(numbers(cell), [100 * land['bands'][band]['desert'], land['bands'][band]['rain_mm_day']], label)
+            agree(numbers(cell), [v for count in ('every_cell', 'model_land')
+                                  for v in (100 * land[count]['bands'][band]['desert'],
+                                            land[count]['bands'][band]['rain_mm_day'])], label)
     for cell, land in zip(rows['Below 2 km; 2–4 km; 4 km and up'], (design, test)):
-        agree(numbers(cell), [100 * land['heights'][k]['desert'] for k in ('below_2_km', '2_to_4_km', 'from_4_km')])
+        agree(numbers(cell), [100 * land[count]['heights'][k]['desert'] for count in ('every_cell', 'model_land')
+                              for k in ('below_2_km', '2_to_4_km', 'from_4_km')])
     for cell, land in zip(rows['All land'], (design, test)):
-        agree(numbers(cell), [100 * land['all']['desert'], land['all']['rain_mm_day']], 'all land')
+        agree(numbers(cell), [v for count in ('every_cell', 'model_land')
+                              for v in (100 * land[count]['all']['desert'], land[count]['all']['rain_mm_day'])],
+              'all land')
+    lw = product['runs']['test']['land_and_water']
+    agree(found(r'The (\d+)% of the boundary file\'s land that lies in cells the model runs as water is mostly '
+                r'coast and lakeshore, and those cells rain ([\d.]+) mm a day here', settled()),
+          [100 * lw['land_in_water_cells'], lw['its_rain_mm_day']])
 
 
 def test_the_climate_readme_states_the_places(product):

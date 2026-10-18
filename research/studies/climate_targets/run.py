@@ -71,13 +71,18 @@ EVIDENCE = ('Arithmetic on ExoPlaSim runs and committed products. The two runs t
             '17 October (the design case\'s own radiation, before the longwave refit). The pair fixes only the total '
             'the gases and the glow take together, its held branch carried to the design case\'s temperature by the '
             'pair\'s own response to its dimming; the gases take their forcing, as on 13 October, and the glow the '
-            'rest. Land and water are the model\'s own mask. The 2 m air is the lowest level\'s air carried down the '
-            'dry adiabat, and the 2 m wet-bulb temperature carries the lowest level\'s humidity down with it, capped '
-            'at saturation: the reading of a well-mixed lowest kilometre, as by day. At night the air near the ground '
-            'cools below it in calm air, so the night\'s figures at 2 m read warm. The wet-bulb temperature is capped '
-            'at the air\'s own where the air is supersaturated. The day\'s and the night\'s 3-day means are told '
-            'apart by the output\'s mean cosine of the Sun\'s zenith angle against the Sun\'s synodic travel through '
-            'each mean, a cut exact where the Sun\'s declination is zero. How much the 3-day means smooth the extremes '
+            'rest. Land and water are the model\'s own mask for the heat, the seas and the sky; the land\'s rain and '
+            'deserts count every cell\'s land with that cell\'s own rain, the model\'s own land cells giving the dry '
+            'bound, since the grid cannot resolve the coasts. The 2 m air is the lowest level\'s air carried down '
+            'the dry adiabat, and the 2 m wet-bulb temperature carries the lowest level\'s humidity down with it, '
+            'capped at saturation: the reading of a well-mixed lowest kilometre, as by day. At night the air near the '
+            'ground cools below it in calm air, so the night\'s figures at 2 m read warm. The output\'s humidity is a '
+            'snapshot at each mean\'s first step (ExoPlaSim 3.4.2, plasim.f90 line 3218), so each mean\'s humidity is '
+            'that of its start and its end, and each run\'s last mean, with no next record, leaves the heat. The '
+            'wet-bulb temperature is capped at the air\'s own where the air is supersaturated. The day\'s and the '
+            'night\'s 3-day means are told apart by the output\'s mean cosine of the Sun\'s zenith angle against the '
+            'Sun\'s synodic travel through each mean, a cut exact where the Sun\'s declination is zero. How much the '
+            '3-day means smooth the extremes '
             'comes from the design case\'s two years written every 6.5 hours alone; carried to the warmer targets it '
             'is a sensitivity.')
 READING_RULE = ('W/m2 are means over the whole Moon; absorbed sunlight is what the Moon takes in at the top of the air. '
@@ -89,7 +94,10 @@ READING_RULE = ('W/m2 are means over the whole Moon; absorbed sunlight is what t
                 'the Sun is up for more than half of; day_ and night_ figures in a climate are the land\'s in them, '
                 'and a tenth\'s day and afternoon are the shares of its means in the day and in the day\'s afternoon. '
                 'Each place\'s tenths are ranked by one quantity (by_wet_bulb, by_air) with the others over the same '
-                'means. Deserts are land under 0.5 mm of rain a day. A climate\'s freezing_level_km and '
+                'means. Deserts are land under 0.5 mm of rain a day; a run\'s land.every_cell counts every cell\'s '
+                'land fraction times its area with the cell\'s own rain, the headline, and land.model_land the '
+                'model\'s own land cells alone, the dry bound, which a climate carries as model_land_rain_mm_day and '
+                'model_land_desert. A climate\'s freezing_level_km and '
                 'height_of_20c_km are where the land\'s mean profile, a land-area mean at each height, crosses 0 and '
                 '20 C; a run\'s '
                 'freezing_level_over_land_km is the median of the land\'s column crossings. Pairs are [low, high] '
@@ -169,8 +177,10 @@ def climate(run):
     level is already colder."""
     h = run['heat']
     g = h['land']['at_2_m']
-    return dict(ground_k=run['ground_k'], rain_mm_day=run['rain_mm_day'], land_rain_mm_day=run['land']['all']['rain_mm_day'],
-                land_desert=run['land']['all']['desert'],
+    every, model = run['land']['every_cell']['all'], run['land']['model_land']['all']
+    return dict(ground_k=run['ground_k'], rain_mm_day=run['rain_mm_day'], land_rain_mm_day=every['rain_mm_day'],
+                land_desert=every['desert'], model_land_rain_mm_day=model['rain_mm_day'],
+                model_land_desert=model['desert'],
                 wet_bulb_median_c=h['land']['wet_bulb']['median'], wet_bulb_p99_c=h['land']['wet_bulb']['p99'],
                 wet_bulb_above_28=h['land']['above_28'], wet_bulb_above_31=h['land']['above_31'],
                 wet_bulb_above_28_tropics=h['bands']['0-15']['above_28'],
@@ -346,7 +356,8 @@ def smoothing(eddies):
     the same in the 3-day means their elevens make over the same two years, by its excess and by the ratio of its
     height above the median."""
     out = dict(run=eddies['run'], years=eddies['years'], start=eddies['start'], hours_each=eddies['hours_each'],
-               means_to_a_3_day_mean=eddies['means_to_a_3_day_mean'],
+               means_to_a_3_day_mean=eddies['means_to_a_3_day_mean'], means=eddies['means'],
+               means_kept=eddies['means_kept'], three_day_means_kept=eddies['three_day_means_kept'],
                supersaturated_lowest_level={k: eddies[k]['lowest_level']['supersaturated']
                                             for k in ('at_6_5_hours', 'in_3_day_means')})
     for height in ('at_2_m', 'lowest_level'):
