@@ -36,7 +36,7 @@ of the year against 107.
 **Most of it rises with the overturns, which bring up far more methane than their oxygen can oxidise.** Between
 overturns the anoxic water stores 0.2–0.8 mol per m² oligotrophic in the lock and the resort, 3–4 in the hot world, and
 5–18 eutrophic, with 35–100 µM at the floor oligotrophic and 130–390 µM eutrophic and in new reservoirs, Tanganyika's
-range (170–220 µM). When it turns over, an eutrophic lake or new reservoir holds 0–5 g of oxygen per m² against the
+range (170–220 µM). When it turns over, a eutrophic lake or new reservoir holds 0–5 g of oxygen per m² against the
 80–1,480 g its stored methane would take; an oligotrophic lake in the lock holds 240–430 g against 0–14. Earth's lakes
 oxidise 54–98% of their stored methane at the autumn overturn, while oxygen enters as the mixed layer deepens over
 weeks; the Moon's deep lakes turn over in one cold spell into water with almost no oxygen. The central flux lets half of
@@ -44,13 +44,13 @@ what the overturned lake's oxygen cannot meet escape, and 15% of the rest, the s
 bracket runs from 98% oxidised at the low methane share to 50% at the high.
 
 **Bubbles reach six times deeper on the Moon but carry little of the lakes' methane.** A floor bubbles where its
-porewater methane reaches the local pressure less its nitrogen; at a sixth of Earth's gravity the same pressure lies
-six times deeper, so the floors bubble down to 50–60 m where Earth's stop near 10 m. The steady porewater balance
-behind this (Bazhin 2010, as Langenegger et al. 2019 apply it) gives 11% of Lake Soppen's production as bubbles at
-10 m, against the 10–17% measured. Bubbles rise more slowly at lunar gravity (a 5 mm bubble at 0.15 m/s against 0.23)
-and lose more of their methane on the way: from 30 m a 10 mm bubble keeps 87% with a contaminated surface and 44%
-clean, and a 5 mm one 67% and 5%. But 94% of the lake area lies in lakes deeper than 100 m, and only 4.2% of the floor
-is shallower than 10 m, so bubbles carry 2–16% of the lakes' methane, where on Earth, whose lakes are small and
+porewater methane reaches the local pressure less its nitrogen; at a sixth of Earth's gravity the same pressure lies six
+times deeper, so floors bubble to six times the depth of Earth's, which bubble mostly in their top 10–20 m. The steady
+porewater balance behind this (Bazhin 2010, as Langenegger et al. 2019 apply it) gives 11% of Lake Soppen's production
+as bubbles at 10 m, against the 10–17% measured. Bubbles rise more slowly at lunar gravity (a 5 mm bubble at 0.15 m/s
+against 0.23) and lose more of their methane on the way: from 30 m a 10 mm bubble keeps 87% with a contaminated surface
+and 44% clean, and a 5 mm one 67% and 5%. But 94% of the lake area lies in lakes deeper than 100 m, and only 4.2% of the
+floor is shallower than 10 m, so bubbles carry 2–16% of the lakes' methane, where on Earth, whose lakes are small and
 shallow, they carry about half (Bastviken et al. 2011).
 
 **What it does to the air and the dimming.** The air holds no OH, so the soils' 2.92 Tg a year for each ppm
