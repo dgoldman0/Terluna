@@ -1,6 +1,6 @@
 """The Jura Island flyover keeps its camera and panels, and reads its water level and terrain from the products.
 
-    python3 -m pytest visualization/jura-island/tests
+    python3 -m pytest visualization/jura-island/tests      # and in make check, with the other Python tests
 
 None of these tests needs OpenGL. The tests that build the terrain skip when geography's LOLA and GRAIL inputs are
 not fetched (python -m geography.fetch_inputs --download). The original film's numbers come from its record,
@@ -16,9 +16,21 @@ import pytest
 
 TOOL = Path(__file__).resolve().parents[1]
 ROOT = TOOL.parents[1]
-sys.path[:0] = [str(TOOL), str(ROOT)]
-import film  # noqa: E402
-import terrain  # noqa: E402
+PLAIN = ('film', 'terrain', 'water_depth')        # the tool's modules, which import each other by these names
+# make check runs every test in one session: the tool's modules come from its own folder, and the folder and the
+# names leave the session again once imported, so no other test meets them
+for name in PLAIN:
+    sys.modules.pop(name, None)
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
+sys.path.insert(0, str(TOOL))
+try:
+    import film  # noqa: E402
+    import terrain  # noqa: E402
+finally:
+    sys.path.remove(str(TOOL))
+    for name in PLAIN:
+        sys.modules.pop(name, None)
 from geography import fetch_inputs  # noqa: E402
 
 ORIGINAL = json.loads((TOOL / 'repository_import.json').read_text())['source_record']

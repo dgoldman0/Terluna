@@ -33,7 +33,7 @@ Any other change to the products carries through to the view: a new water level,
 terrain, the panels and the texts.
 
 ```sh
-python3 -m pytest visualization/jura-island/tests                                    # no OpenGL needed
+python3 -m pytest visualization/jura-island/tests                                    # no OpenGL; in make check too
 python3 visualization/jura-island/render_map.py                                      # out/jura-island-topography.png
 python3 visualization/jura-island/render_flyover.py --frames 0 22 43.9 --scale 0.5   # stills at 800 x 450
 python3 visualization/jura-island/render_flyover.py --preview                        # eight stills and a contact sheet
