@@ -365,7 +365,14 @@ which.
     limnic eruption, but an isolated hypolimnion reaches its bubble point 3.5–6.7 times sooner than on Earth, so
     meromictic and spring-fed lakes and deep new reservoirs are the hazard. Anoxic floors can at most cancel the
     phosphorus retention. *Arithmetic on the lake model's columns with Earth's rates; Osborn's form, the energetic
-    regime as its other end.*
+    regime as its other end.* At the resort's 301 K ([the lakes by kind](../../research/studies/lake_kinds/README.md))
+    four of every five lakes, a tenth of the area, are mixed to their floors on most nights by Osborn's rule, the
+    giants hold seven tenths of the area with anoxic depths in mesotrophic and richer water, and chemoclines do not
+    hold under the wind's mixing. The seas ([the seas' oxygen](../../research/studies/sea_oxygen/README.md)) renew
+    their deep water within years by Osborn's rule; by the energetic regime their two largest basins, half their
+    area, go decades without overturning, mesotrophic or even nutrient-poor depths anoxic, and the basins are many
+    Rossby radii across, beyond what one column can hold. *Lake-model columns at 301 K on a first-estimate lake set
+    and the GCM's sea cells; Osborn's form, the energetic regime at a few columns.*
 18. **The monthly tide makes flats exposed for days.** Ranges of 2.5–3.7 m on shores sloping 1:50–1:100 expose about
     20,000–30,000 km² for days each month, the most productive kind of coast on Earth and a methane and N2O source.
     Low water drifts through the lunar day on the tidal lines' beat of about a year (digest arithmetic). *Rough.*

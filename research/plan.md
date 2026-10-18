@@ -333,6 +333,9 @@ the integration found next.
 15. **A basin-scale model of one crater lake**, to settle the deep mixing's form (Osborn's rule against Shih and
    Bouffard's energetic regime) and the wind's share, which move the deep lakes' oxygen and methane two- to
    sevenfold (studies/lake_oxygen, mixing_forms).
+16. **A three-dimensional model of the seas' basins** on their LOLA bathymetry under the GCM's 301 K weather, with
+   the Moon's rotation, the cold ends, sills and slopes, to place the deep water's renewal and oxygen between the
+   columns' bounds (studies/sea_oxygen).
 
 New runs wait on the author's choice of the target climate, and no rented compute is commissioned.
 

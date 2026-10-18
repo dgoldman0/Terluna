@@ -123,7 +123,29 @@ on this laptop. The findings behind them are in the [README](README.md).
      spring-fed lakes and deep new reservoirs are the hazard. Anoxic floors can at most cancel the phosphorus
      retention, 10–27 mg/m³ at steady state. Oxygenating the depths takes 3.5–15 kW per km² at the demand, up to 59
      with the devices' stirring. The giants' own methane is the methane tracer's to settle.
-   - Monthly plankton cycles, intertidal monthly wetlands, and the seas' own deep basins in the lake model.
+   - The lakes by kind at the resort's 301 K, answered on 18 October ([the lakes by
+     kind](../../research/studies/lake_kinds/README.md)). By Osborn's rule the nights reach the floors of lakes to
+     168–239 m on half of them, a depth interpolated between the ladder's 100 m and 352 m rungs. Four fifths of the
+     27,865 lakes, a tenth of the area (226,500–629,700 km² across that bracket), are self-ventilated. The deep lakes
+     to 1,000 m, a fifth of the area, turn over in a third to two thirds of the lunar cycles with oxic floors in
+     nutrient-poor water. The giants, seven tenths of the area, turn over about once a year with their mesotrophic and
+     richer depths anoxic, and the deepest go anoxic even in nutrient-poor water. Chemoclines of 0.1–1 kg/m³ at 20 m
+     do not hold under the wind's mixing. Needs: 6,199 profiling moorings for the deep lakes and giants, nutrient
+     limits first, and oxygenation where deep-water life is chosen; degassing does not pay. By the energetic regime
+     the 352 m lake at 301 K turns over a ninth to a quarter as often and its mesotrophic and richer depths go anoxic,
+     so the census leans towards more mixing.
+   - Monthly plankton cycles and intertidal monthly wetlands.
+   - The seas' deep basins in the lake model, answered on 18 October at 301 K ([the seas'
+     oxygen](../../research/studies/sea_oxygen/README.md)). The seas cover 10.62 million km², 28% of the surface, at
+     a mean depth of 1,009 m, the large ones deep basins joined only above sills of 76–181 m. By Osborn's rule a
+     basin's deep water turns over 20–330 times a century, and the seas' deepest tenth averages 4.1 mg/L
+     oligotrophic, 2.1 mesotrophic (half the area under 0.5) and 1.5 eutrophic. By Shih and Bouffard's form, run at
+     the two largest basins, Procellarum goes 90 years without overturning and keeps at most 1.5 mg/L in
+     nutrient-poor water, and Ingenii goes anoxic in every state. Mesotrophic water leaves half the seas' area under
+     1 mg/L in every column. The large basins are many internal Rossby radii across (6–170 km), so the wind drives
+     upwelling along their shores and waves round them, which a column cannot hold. Shelves and bays keep their
+     median night at 3.7 mg/L or more under the wind's mixing. A three-dimensional basin model would place the deep
+     water between the bounds.
    - Soda lakes, which the author takes as their own local ecosystems (15 October): their communities for the Moon's
      nearly chloride-free soda at a pH near 10, from Earth's soda-lake producers, grazers, birds and the few fish that
      live in them, and how they change as a lake concentrates over its thousands of years.
