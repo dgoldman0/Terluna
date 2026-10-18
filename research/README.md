@@ -84,6 +84,7 @@ the explorable experience, which reads them as baked products, is in
 | [gases_glow_dimming](studies/gases_glow_dimming/README.md) | Climate's GCM with the gases, the fleet's glow and the dimming, the atmosphere domain's correlated-k radiation, the light study's growth: whether the dimming holds the design climate, what the rain does, and what the glow's infrared needs | Three 20-year runs of one model at T21 and a clear-sky spectral check; the held point interpolated |
 | [jura_island](studies/jura_island/README.md) | Geography (the atlas and LOLA's shores), the CRM's 3-D box on the corrected design case and the groundwater's shore reach: Jura Island's layout, its climate and its shore belts | One box of two lunar days on placeholder land; the rerun waits on the GCM's longwave and the fresh shores |
 | [climate_targets](studies/climate_targets/README.md) | The GCM's settled warm Moon and design case, the gases, the fleet's glow, the beamed power and the water top-up, light and rain: what each target climate takes and the heat beyond the sunlight, after the joint integration of 17 October | Arithmetic on two runs of different physics, interpolated by the ground's temperature; no target is run |
+| [lake_oxygen](studies/lake_oxygen/README.md) | Climate (the GCM's forcing over three crater lakes and the waters' surface), geography (the rain-fed lakes and their depths), resources (the held fresh seas) and ecology (oxygen demand by trophic state): the oxygen the seas and lakes hold at saturation in each target climate, and a lake model through the lunar month for stratification, mixing and dissolved oxygen in deep crater lakes and productive shallows | A one-dimensional lake model on one GCM's 3-day means at T21, the resort interpolated between two physics; oxygen demand as bounded scenarios from Earth's lakes |
 
 The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)
 from a separate lineage (57 tests, 90-m spacing, 20-m/s reservoir flow), whose
@@ -121,6 +122,7 @@ python -m research.studies.distributions.run                                 # r
 python -m research.studies.living_light.run --output research/studies/living_light/results/living_light.json
 python -m research.studies.domain_synthesis.ledgers                        # results in studies/domain_synthesis/results
 python -m research.studies.climate_targets.run                             # after its extract, with the climate venv
+python -m research.studies.lake_oxygen.run                                 # after its lakes and its extract (climate venv)
 ```
 
 For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`
