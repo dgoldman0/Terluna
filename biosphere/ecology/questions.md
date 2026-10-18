@@ -98,7 +98,17 @@ on this laptop. The findings behind them are in the [README](README.md).
      the rivers carry about half the load natural tufa needs and sit at 0.76 times calcite saturation, so lasting
      barriers need builders that calcify from undersaturated water, as freshwater shellfish do, or springs carrying
      twice the rivers' load.
-   - Stratification and oxygen in deep crater lakes.
+   - Stratification and oxygen in deep crater lakes, answered on 17 October in the three targets ([the waters'
+     oxygen](../../research/studies/lake_oxygen/README.md)). The held fresh seas hold 7.06, 7.78 and 8.43 mg/L at
+     saturation in the hot world, the resort and the lock, a fifth more than seawater would. A lunar night mixes a 352 m
+     crater lake to a median 12–15 m; its deep water sits at the temperature of the coldest spell in ten years of the
+     GCM's weather and turns over only then, three to six lunar cycles in the decade, and is a mean 2.5–3.8 years from
+     its last contact with the air. Its deepest tenth is anoxic in mesotrophic and richer water in every target, and in
+     oligotrophic water averages 0.6–1.5 mg/L in the lock, 0.2–0.8 in the resort and under 0.1 in the hot world; the
+     dissipation below the mixed layer moves it most, to 2.7–3.6 mg/L at ten times its central value. An overturn brings
+     the anoxic water up and leaves the whole lake at 0.1–4.9 mg/L in oligotrophic water and about 0.01 mg/L in
+     eutrophic water. Productive shallows 3 m deep fall in the median night to 1.4–2.7 mg/L in the lock, 0.7–1.9 in the
+     resort and 0.4–1.1 in the hot world, and their floors stay anoxic through most of the day.
    - Monthly plankton cycles, intertidal monthly wetlands, and methane from lakes by depth.
    - Soda lakes, which the author takes as their own local ecosystems (15 October): their communities for the Moon's
      nearly chloride-free soda at a pH near 10, from Earth's soda-lake producers, grazers, birds and the few fish that
@@ -108,7 +118,9 @@ on this laptop. The findings behind them are in the [README](README.md).
    - Saltwater life, for which the author leans to aquariums over salt seas: which marine life is kept, and in what
      volumes.
 
-   **How:** a one-dimensional lake model through the lunar month, with the seas' composition as scenarios.
+   **How:** the one-dimensional lake model through the lunar month is built ([lake.py](lake.py)); the monthly plankton,
+   methane by depth and the soda lakes' concentration can ride in it as further tracers, with the seas' composition as
+   scenarios.
 11. **What may live wild.** Pollen and spores spread Moon-wide, and no containment is demonstrated for wild engineered
     organisms. On 12 October the author answered in general terms: no containment, the biomes shaped by climate and the
     parks by manicuring, no hard limits on wild designs, regions kept distinct loosely, and six starting constraints

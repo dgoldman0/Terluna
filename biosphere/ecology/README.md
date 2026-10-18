@@ -341,14 +341,19 @@ which.
 
 ### Waters
 
-17. **The first seas are fresh, mixed each month, and eutrophic at first.** Weathering alone takes 1,100–87,000 years
-    to bring the seas to 1 g/kg (the resources screen), so unless the delivered water carries salts the living seas
-    begin as fresh to hard waters. Ice delivered fresh would leave them near pH 5.6 and undersaturated in carbonate,
-    so calcifiers cannot build until weathering supplies alkalinity. New reservoirs run eutrophic for a decade
-    (Paterson et al. 2019). The 354-hour heating and cooling give monthly stratification and overturn, which keeps
-    waters oxygenated. Deep crater lakes, with a median depth of 352 m, risk anoxia, and productive shallows run short
-    of oxygen late in the night at the night winds' gas exchange. The living-water guesses take Earth seawater at
-    38.4 g/kg. *Solid if the water arrives fresh; its composition is open.*
+17. **The seas are held fresh, deep crater lakes turn over rarely, and new waters run eutrophic.** The seas' make-up
+    through time is the [sea chemistry](../../research/studies/sea_chemistry/README.md)'s, revised with the groundwater
+    on 14 October: delivered fresh, they start near pH 5.6 and take weathering's carbonate, and the author holds them
+    as hard fresh water near 0.14 g/kg and pH 8.3 (the register's rows of 13 October). New reservoirs run eutrophic
+    for a decade (Paterson et al. 2019). Through ten years of each target's lunar months in a lake model ([the waters'
+    oxygen](../../research/studies/lake_oxygen/README.md)), the 354-hour nights mix deep crater lakes, with a median
+    depth of 352 m, only to 12–15 m. Their deep water sits at the temperature of the rarest cold spell and turns over
+    only in it, a few lunar cycles in a decade, so it goes anoxic in mesotrophic water and richer and runs hypoxic or
+    anoxic in oligotrophic water. An overturn brings that water up: just after one the whole lake holds 0.1–4.9 mg/L
+    of oxygen in oligotrophic water and about 0.01 mg/L in eutrophic water. Productive shallows run hypoxic in the
+    night, the median night's lowest at 0.4–2.7 mg/L across the targets, and their floors are anoxic through most of
+    the day. The living-water guesses take Earth seawater at 38.4 g/kg. *A lake model on one GCM's climate, with
+    oxygen demand from Earth's lakes.*
 18. **The monthly tide makes flats exposed for days.** Ranges of 2.5–3.7 m on shores sloping 1:50–1:100 expose about
     20,000–30,000 km² for days each month, the most productive kind of coast on Earth and a methane and N2O source.
     Low water drifts through the lunar day on the tidal lines' beat of about a year (digest arithmetic). *Rough.*
@@ -424,7 +429,8 @@ forests' leaf area and air, plant twilight and the waters' fines, and the rest w
 | [people.py](people.py) | Its screen, writing [results/people.json](results/people.json); sources in [people_sources.json](people_sources.json) |
 | [taxonomy.md](taxonomy.md) | The taxonomic system: principles, the author's choices, the functional classification, the first register and names for the aerophytes |
 | [taxa.py](taxa.py) | The register as code, writing [results/taxa.json](results/taxa.json) (schema `terluna.biosphere.ecology-taxa/1`); sources in [taxonomy_sources.json](taxonomy_sources.json) |
+| [lake.py](lake.py) | A one-dimensional lake through the lunar month: heat, convective and wind mixing, ice and dissolved oxygen with its demand, debt and respiration's solutes, and the oxygen water holds at saturation; [the waters' oxygen](../../research/studies/lake_oxygen/README.md) runs it in the three targets |
 
 `python -m biosphere.ecology.screen`, `python -m biosphere.ecology.people` and `python -m biosphere.ecology.taxa`
 rewrite the products; `python -m pytest biosphere/tests/test_ecology_screen.py biosphere/tests/test_ecology_people.py
-biosphere/tests/test_taxa.py` checks them.
+biosphere/tests/test_taxa.py biosphere/tests/test_lake.py` checks them and the lake model.
