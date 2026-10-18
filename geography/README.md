@@ -347,6 +347,11 @@ for the shorelines and the seas' freshness to be weighed more. The shore study a
 - **Jura Island.** Measured at LOLA's 16 px/deg in [its study](../research/studies/jura_island/README.md), only 2% of
   the island lies within 25 m of the sea and its first 1–2 km inland stand a median 112 m up, so its belts are a rim of
   1,100–2,600 km², 2–4.5% of it.
+- **Moon-wide at 301 K.** The [coast-water study](../research/studies/coast_water/README.md) takes this screen's belts
+  along every shore at 16 px/deg with the plants' demand at 301 K. In the deserts the strips beside the water are a
+  median 135–650 m wide and the belts cover 0.4–1.5% of the desert land after a check on four coasts at 100 m.
+  Islands under 10 km² have 64–78% of their land within reach: 394–575 are green throughout by the strips, 189–387
+  as discs.
 
 ## The monthly tide
 

@@ -384,6 +384,11 @@ Island box.
   ground warm the air beside it. The winter margin is a judgement: a winter park's depth under the top, the warmest
   6.5-hour mean below freezing and about 0.4 K for the interpolation.
 - **The waters' oxygen** between ecology's three targets is interpolated; its lake model ran at those three alone.
+- **The deserts between the runs depend on the form.** The interpolated shares give 27.9% (30.8%) at 301 K; each
+  cell's rain moved linearly gives 22.5% (24.8%) and by a constant factor a kelvin 28.1% (31.5%), the difference lying
+  at 30–45° and 45–60° ([coast water](../coast_water/README.md#what-it-finds)). Over 301–302 K the linear form falls
+  0.9 points a kelvin where the factor form falls 1.8 and the shares 1.6, so the deserts' pull towards the band's
+  warm end depends on the form as well.
 
 ## Running it
 

@@ -318,7 +318,12 @@ the integration found next.
    fleet light on the layout's radii, whose sunward crossings it puts 11–16% too far out, with the films' specular
    light on the night; and the coupled design search at the later date the author set.
 5. **The shores and the waters:** groundwater by the fresh seas (resources, question 16), the delivered water's
-   chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores.
+   chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores. The
+   [coast-water study](studies/coast_water/README.md) (18 October) takes the shores' belts Moon-wide at 16 px/deg: at
+   301 K they put 0.4–1.5% of the desert land within plants' reach (0.40–1.07% at the central crust, taking the 100 m
+   check's ratios from four non-desert coasts to carry over to the deserts) and up to 394–575 small islands green
+   throughout, and the night's dew and fog add almost nothing. The deserts at 301 K are 22.5–28% of the land as the
+   interpolation's form leaves them. The 2-D CM1 slice waits on the design case at 301 K and the coasts' design.
 6. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
    round once these details are worked out.
 7. **The wet Moon's methane and nitrogen:** the lakes' methane by depth, with its oxidation in their waters and
