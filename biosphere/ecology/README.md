@@ -353,7 +353,13 @@ which.
     of oxygen in oligotrophic water and about 0.01 mg/L in eutrophic water. Productive shallows run hypoxic in the
     night, the median night's lowest at 0.4–2.7 mg/L across the targets, and their floors are anoxic through most of
     the day. The living-water guesses take Earth seawater at 38.4 g/kg. *A lake model on one GCM's climate, with
-    oxygen demand from Earth's lakes.*
+    oxygen demand from Earth's lakes.* What the anoxic water does ([lake
+    anoxia](../../research/studies/lake_anoxia/README.md)): the lakes' methane follows their trophic state, 2.3–13 Tg a
+    year oligotrophic to 69–110 eutrophic, most of it brought up by overturns too poor in oxygen to oxidise it, and only
+    oligotrophic lakes fit the air's held 1.87 ppm. No lake in the targets nears a limnic eruption, but at lunar gravity
+    an isolated hypolimnion reaches its bubble point four to six times sooner than on Earth, so lakes that never turn
+    over are the hazard. Once mesotrophic, the lakes' anoxic floors would release many times their dissolved
+    phosphorus and carry them further. *Arithmetic on the lake model's columns with Earth's rates.*
 18. **The monthly tide makes flats exposed for days.** Ranges of 2.5–3.7 m on shores sloping 1:50–1:100 expose about
     20,000–30,000 km² for days each month, the most productive kind of coast on Earth and a methane and N2O source.
     Low water drifts through the lunar day on the tidal lines' beat of about a year (digest arithmetic). *Rough.*

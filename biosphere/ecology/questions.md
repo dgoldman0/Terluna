@@ -109,7 +109,19 @@ on this laptop. The findings behind them are in the [README](README.md).
      the anoxic water up and leaves the whole lake at 0.1–4.9 mg/L in oligotrophic water and about 0.01 mg/L in
      eutrophic water. Productive shallows 3 m deep fall in the median night to 1.4–2.7 mg/L in the lock, 0.7–1.9 in the
      resort and 0.4–1.1 in the hot world, and their floors stay anoxic through most of the day.
-   - Monthly plankton cycles, intertidal monthly wetlands, and methane from lakes by depth.
+   - What the anoxic depths do, answered on 17 October ([lake anoxia](../../research/studies/lake_anoxia/README.md)).
+     Methane follows the trophic state: the Moon's lakes would send 2.3–13 Tg a year to the air oligotrophic, 20–53
+     mesotrophic and 69–110 eutrophic (centrals, lock to hot world), against the 39 Tg the domain synthesis's ledger
+     carries. Most rises with the overturns, whose nearly anoxic water cannot oxidise what the depths stored, and
+     bubbles, which form down to 50–60 m at lunar gravity, carry 2–16% of it. Only oligotrophic lakes fit the held
+     1.87 ppm: eutrophic lakes left alone would hold the air at 25–39 ppm, 66–110 Tg a year of removal or 1.6–1.8% more
+     dimming. No lake in the targets nears a limnic eruption (the 352 m lakes' floors reach 0.16–0.20 of their bubble
+     point), but an isolated hypolimnion reaches it four to six times sooner than on Earth, within 1–20 years for an
+     eutrophic one at 20–50 m, so meromictic soda and spring-fed lakes and deep new reservoirs are where the hazard
+     lies. The dissolved phosphorus keeps the lakes ultra-oligotrophic; once mesotrophic, their anoxic floors would
+     release 4–210 times that load. Oxygenating the depths takes 3.5–134 kW per km² (14–525 GW for all lakes), and
+     circulation 54–102 kW; nutrient limits under 0.16 g P m⁻² a year come first.
+   - Monthly plankton cycles, intertidal monthly wetlands, and the seas' own deep basins in the lake model.
    - Soda lakes, which the author takes as their own local ecosystems (15 October): their communities for the Moon's
      nearly chloride-free soda at a pH near 10, from Earth's soda-lake producers, grazers, birds and the few fish that
      live in them, and how they change as a lake concentrates over its thousands of years.
@@ -119,8 +131,8 @@ on this laptop. The findings behind them are in the [README](README.md).
      volumes.
 
    **How:** the one-dimensional lake model through the lunar month is built ([lake.py](lake.py)); the monthly plankton,
-   methane by depth and the soda lakes' concentration can ride in it as further tracers, with the seas' composition as
-   scenarios.
+   methane, CO2 and phosphorus as tracers of their own (the anoxia study derives them from its oxygen and debt), and the
+   soda lakes' concentration can ride in it, with the seas' composition as scenarios.
 11. **What may live wild.** Pollen and spores spread Moon-wide, and no containment is demonstrated for wild engineered
     organisms. On 12 October the author answered in general terms: no containment, the biomes shaped by climate and the
     parks by manicuring, no hard limits on wild designs, regions kept distinct loosely, and six starting constraints
