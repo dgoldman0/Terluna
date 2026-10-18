@@ -2,7 +2,7 @@
   "schema": "terluna.resources.sea-phosphorus/1",
   "producer": {
     "files": {
-      "resources/sea_phosphorus.py": "626792d56b644c89f426732edeeba768594bcd419f4ebccc2b7744c281befbd6",
+      "resources/sea_phosphorus.py": "4b63042be2864ba565881c3872c0b65e0de3fe7098c5bf58387c46093d6b77d3",
       "resources/phosphorus.py": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43"
     },
     "inputs": {
@@ -55,7 +55,7 @@
         "path_at_integration": "research/decisions.md",
         "branch": "main",
         "commit": null,
-        "sha256": "92ae0c9c2ef61bcadf8b2640c29e5f0d58cc11223b49c526308d10cceb6fcce4",
+        "sha256": "5aa2600007def9820d38d8451f06be66f8b6cb5da0b3e74648db92ba74210f21",
         "read_from": "in-tree"
       }
     },

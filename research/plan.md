@@ -302,7 +302,7 @@ the integration found next.
    [what each target climate takes](studies/climate_targets/README.md), whose heat figures are weighted by area and
    read at 2 m since 17 October. The author leans towards the resort and lets it vary a little near 300 K, and wants
    winter within at least the tallest sky tower: the summit tower keeps a winter at its top, with 2 km of margin, up to
-   about 302 K, and the study proposes the resort at 301 K, within 300–302 K, for the author's choice. Then the design
+   about 302 K, and the author set the resort at 301 K on 18 October, as the study proposed. Then the design
    case for the chosen target, a 20-year GCM run of about 1.5 hours on four ranks, which also settles the tower's air
    with one physics; the glow pair from it, two more, at which the glow study and the domain synthesis take the
    efficacy it gives; and geography's lakes, the atlas globe and the studies that read the design climate, the

@@ -321,7 +321,8 @@ and comfort at the ground, the waters' oxygen and the margin under a saturated c
 them across the band. 301 K keeps 3.5 km of the tower in winter, the top at −3.0 °C and its warmest 6.5-hour mean at
 −1.7 °C, a kelvin inside the tower's line; against 300 K it takes 0.7–1.0 points off the dimming, 87–113 TW of sunlight,
 adds 3.5% to the land's rain and brings the ground's wet-bulb 99th percentile to 26.8 °C, 27.1 °C by day. 302 K takes as
-much again off the dimming at the line itself; 300 K keeps the ground's humid heat 0.8 K lower.
+much again off the dimming at the line itself; 300 K keeps the ground's humid heat 0.8 K lower. The author set the
+resort at 301 K on 18 October.
 
 ## What it means
 
@@ -360,8 +361,8 @@ hot world is stable in the GCM all the same, held by its restoring gain.
 **The tower's winter caps the resort near 302 K.** Each kelvin raises the freezing level over the summit 1.1 km. The
 lock keeps 9.9 km of the tower in winter, the resort at 300 K 4.7 km and 302 K 2.3 km, and from about 303.8 K the
 tower's top is above freezing. With 2 km of winter kept under the top, the tower holds a winter up to about 302 K,
-and the recommended resort is 301 K, within 300–302 K. Above about 296 K the open winter parks of 13.5–15 km
-lose their winter, which moves up to the sealed disks and the crown.
+and the author set the resort at 301 K on 18 October, within 300–302 K. Above about 296 K the open winter parks of
+13.5–15 km lose their winter, which moves up to the sealed disks and the crown.
 
 **What the choice reopens.** The register's planned climate near 295 K (9 October), the mix of climates with the
 hottest days pleasantly warm (25 September) and the 5% dimmer's 295 K; the design case for the chosen target, a 20-year

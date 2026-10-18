@@ -2,7 +2,7 @@
 
 17 October 2026 · `domain/climate`. The author is choosing the Moon's target climate among three, and may carry it as a
 range or a distribution across them. The hot world is where the corrected GCM settles, 306.5 K over the 20-year test's
-years 10–19 and 306.8–307.1 K at balance by its fitted feedback; the resort is the middle target, proposed at 301 K
+years 10–19 and 306.8–307.1 K at balance by its fitted feedback; the resort is the middle target, set at 301 K
 within 300–302 K; and the lock is the design temperature, 295 K, the design case itself. The hot world and the lock are
 the GCM's output, two runs on two physics, and the resort is interpolated between them by the ground's temperature.
 Through every correction of the day, from the heat weighted by area and read at 2 m (d3aff3c) to the model's own land
@@ -162,8 +162,8 @@ and no lever has yet run in a climate model.
   settles its climate and the tower's air with one physics; the glow pair from it, two more runs, fixes the glow's
   efficacy, now 0.645–0.71; geography's lakes, the atlas globe and the studies that read the design climate then
   regenerate once. A range carried by its ends takes a design case at each end.
-- **The author's choices.** The target, or the range or distribution to carry; the resort's value within 300–302 K; and
-  the levers' questions: whether the glow's set-aside answers return if a cooler target is chosen, whether the beams'
-  food may be made in orbit with its carbon taken as the import, and whether the high cloud's range runs before the
-  choice. The choice reopens the register's planned climate near 295 K (9 October), its hottest days pleasantly warm (25
-  September) and the 5% dimmer's 295 K.
+- **The author's choices.** The target, or the range or distribution to carry (the resort set at 301 K on 18 October);
+  and the levers' questions: whether the glow's set-aside answers return if a cooler target is chosen, whether the
+  beams' food may be made in orbit with its carbon taken as the import, and whether the high cloud's range runs before
+  the choice. The choice reopens the register's planned climate near 295 K (9 October), its hottest days pleasantly warm
+  (25 September) and the 5% dimmer's 295 K.
