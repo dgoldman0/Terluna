@@ -19,12 +19,14 @@ arriving at the ground by the audio lab [visualization/rain-audio](../../visuali
 | [distributions.py](distributions.py) | Cloud-base gamma spectra, the ledger of what reaches the ground, the collision-encounter diagnostic and arrival fluxes |
 | [product.py](product.py) | The product [results/rain_drops.json](results/rain_drops.json), schema `terluna.atmosphere.rain-drops/1` |
 | [arrivals.py](arrivals.py) | The product [results/rain_arrivals.json](results/rain_arrivals.json), schema `terluna.atmosphere.rain-arrivals/1`: the drops arriving at the ground |
+| [rates.py](rates.py) | The product [results/rain_rates.json](results/rain_rates.json), schema `terluna.atmosphere.rain-rates/1`: the GCM's rain rates on each target's land |
 | [sources.json](sources.json) | The equations' and data's sources, with how far each was read |
 | [vendor/rainprops/](vendor/rainprops/) | Loftus's rainprops at commit `e2df9c2` (MIT licence): the code the solver adapts, with the Gunn–Kinzer fall speeds, unmodified, each file pinned in its `PROVENANCE.json` |
 
 ```sh
 python -m atmosphere.rain.product                 # about three and a half minutes on one thread
 python -m atmosphere.rain.arrivals                # about two minutes
+climate/gcm/.venv/bin/python -m atmosphere.rain.rates   # seconds; reads the GCM's output with netCDF4
 python -m pytest atmosphere/tests/test_rain_*.py
 ```
 
@@ -154,6 +156,26 @@ own moistening of the air would let more water through. A 3 mm drop released at 
 85–97% of their water at 4.8–5.4 m/s, and exceed Earth's stability screen. The airs are the rain product's, so their
 humidity inherits the climate targets' pairing of the GCM's 2 m temperature with its lowest level's humidity, which the
 GCM's output holds as a snapshot at each 3-day window's boundary (`domain/climate` is correcting it).
+
+### Rain rates on the land
+
+`rain_rates.json` reads the GCM's rain, a true mean over each output window, on the land of the two runs behind the
+climate targets, each cell weighed by its land area, and sets each target between them as the targets do. A mean is
+wet at 0.1 mm/h or more. The design case's two years written every 6.5 hours (`A28_corrected_970_eddies`) give the
+weather within the 3-day means, and each target's 6.5-hour figures take the design case's ratios of the two:
+
+| Land rain | Hot world | Resort | Lock |
+|---|---|---|---|
+| Mean | 3.34 mm/day | 2.72 mm/day | 2.25 mm/day |
+| 3-day means: wet share of the time; wet median; 99th percentile | 24%; 0.39; 2.48 mm/h | 21%; 0.35; 2.36 mm/h | 18%; 0.31; 2.28 mm/h |
+| 6.5-hour means: the same | 12.5%; 0.71; 5.50 mm/h | 10.9%; 0.62; 5.25 mm/h | 9.6%; 0.56; 5.05 mm/h |
+
+The 3-day means smooth the rain into spells nearly twice as common and about half as hard: in the design case the land
+is wet in 18.4% of its 3-day means and 9.7% of its 6.5-hour means, and the 6.5-hour wet median is 1.8 times the 3-day
+one, its 99th percentile 2.2 times and its largest 2.3 times (14.3 against 6.3 mm/h over the same two years). The
+6.5-hour years averaged eleven at a time match the design case's own 3-day output over its years 10–19 within 0.8% at
+the wet share and every quantile to the 99th. Every figure is a mean over a T21 cell, about 170 km across: rain at a
+point under a shower falls harder and for less time.
 
 ### The check on CM1's fall speeds
 

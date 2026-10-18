@@ -1,16 +1,17 @@
 """The rain each audition hears, read from the atmosphere domain's arrivals product.
 
-A scene is the rain arriving on one surface in one target climate, on the Moon or on Earth, at a rain rate chosen at
-the ground: the drops of a bounded cloud-base spectrum that survive the fall (atmosphere/rain/results/
+A scene is the rain arriving on one surface in one target climate, on the Moon or on Earth, at a rain rate on the
+ground: the drops of a bounded cloud-base spectrum that survive the fall (atmosphere/rain/results/
 rain_arrivals.json), each class with its size, its speed at impact and its number per square metre per second; for
 grass and leaves a share of the same water arriving as drips released at rest from leaves; and, as a sensitivity, a
 share arriving as drops of 8-12 mm. The air at 2 m, which sets the sound's speed and its absorption, comes from the
 same product, and the sound speed from the thunder model (atmosphere/electricity/thunder.py).
 
-The ground rain rate is the scene's choice, 5 mm/h by default, as in the rain work's auditions. With independent drops
-the arriving spectrum keeps its shape at any rate, and the product gives the rain leaving the cloud base that a rate
-at the ground takes. Rain falls vertically onto a horizontal surface in still air, so the impact speed is the speed
-normal to the surface.
+The Moon's rain falls at the GCM's rates for its target (atmosphere/rain/results/rain_rates.json): a median rainy
+6.5 hours on the land and a heavy one. The Earth texture stands for Earth rain of 5 mm/h, the rain work's assumption
+for its recordings, whose own rain went unmeasured. With independent drops the arriving spectrum keeps its shape at
+any rate, and the arrivals product gives the rain leaving the cloud base that a rate at the ground takes. Rain falls
+vertically onto a horizontal surface in still air, so the impact speed is the speed normal to the surface.
 """
 from __future__ import annotations
 
@@ -33,9 +34,11 @@ from atmosphere.electricity import thunder  # noqa: E402
 
 ARRIVALS = ROOT / 'atmosphere' / 'rain' / 'results' / 'rain_arrivals.json'
 ARRIVALS_SCHEMA = 'terluna.atmosphere.rain-arrivals/1'
+RATES = ROOT / 'atmosphere' / 'rain' / 'results' / 'rain_rates.json'
+RATES_SCHEMA = 'terluna.atmosphere.rain-rates/1'
 TARGETS = ('hot_world', 'resort', 'lock')
 WORLDS = ('moon', 'earth')
-DEFAULT_RAIN_MM_H = 5.0
+EARTH_REFERENCE_MM_H = 5.0          # the rain the Earth texture stands for
 # The grass and leaves' assumed water route, as in the rain work: a quarter of the rain reaches the surface as 3 mm
 # drips released at rest 1 m above it. Interception, storage and release wait on biosphere/canopy.
 DEFAULT_DRIPS = dict(fraction=0.25, diameter_mm=3.0, height_m=1.0)
@@ -46,6 +49,20 @@ def load_arrivals(path=ARRIVALS) -> dict:
     if product.get('schema') != ARRIVALS_SCHEMA:
         raise ValueError(f'Expected {ARRIVALS_SCHEMA}, found {product.get("schema")}')
     return product
+
+
+def load_rates(path=RATES) -> dict:
+    product = json.loads(Path(path).read_text())
+    if product.get('schema') != RATES_SCHEMA:
+        raise ValueError(f'Expected {RATES_SCHEMA}, found {product.get("schema")}')
+    return product
+
+
+def gcm_rates(rates, target) -> dict:
+    """A target's rain rates on the land (mm/h) from the GCM's 6.5-hour means: the median wet mean, a median rainy
+    6.5 hours, and the 99th percentile of the wet means, a heavy one."""
+    wet = rates['targets'][target]['six_and_a_half_hour_means']['wet']
+    return dict(median=wet['p50'], heavy=wet['p99'])
 
 
 @dataclass(frozen=True)
@@ -172,7 +189,7 @@ class Scene:
                     components=[p.describe() for p in self.components()])
 
 
-def scene(product, target, world, surface, rain_mm_h=DEFAULT_RAIN_MM_H, spectrum=None, drip_fraction=None,
+def scene(product, target, world, surface, rain_mm_h=EARTH_REFERENCE_MM_H, spectrum=None, drip_fraction=None,
           drip_diameter_mm=DEFAULT_DRIPS['diameter_mm'], drip_height_m=DEFAULT_DRIPS['height_m'],
           tail_fraction=0.0) -> Scene:
     """The scene for one surface. Grass and leaves route drip_fraction of the water (a quarter by default) through

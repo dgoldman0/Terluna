@@ -18,7 +18,7 @@ def test_every_scene_delivers_its_rain_once(surface):
             if s.drips is not None:
                 assert s.drips.rain_mm_h == pytest.approx(7.0 * scenes.DEFAULT_DRIPS['fraction'])
     heavy = scenes.scene(PRODUCT, 'lock', 'moon', surface, tail_fraction=0.02)
-    assert heavy.tail.rain_mm_h == pytest.approx(0.02 * scenes.DEFAULT_RAIN_MM_H)
+    assert heavy.tail.rain_mm_h == pytest.approx(0.02 * scenes.EARTH_REFERENCE_MM_H)
     assert abs(heavy.ledger()['balance_mm_h']) < 1e-12
 
 
@@ -50,3 +50,14 @@ def test_the_air_carries_the_thunder_models_sound_speed():
             assert dry < air['sound_speed_m_s'] < dry * 1.01                     # vapour lightens the air
         moon, earth = (scenes.air(PRODUCT, target, w) for w in ('moon', 'earth'))
         assert moon['x_o2'] < earth['x_o2'] and moon['pressure_pa'] > earth['pressure_pa']
+
+
+def test_the_moons_rates_are_the_gcms():
+    rates = scenes.load_rates()
+    for target in scenes.TARGETS:
+        r = scenes.gcm_rates(rates, target)
+        wet = rates['targets'][target]['six_and_a_half_hour_means']['wet']
+        assert r == dict(median=wet['p50'], heavy=wet['p99'])
+        assert rates['wet_threshold_mm_h'] < r['median'] < r['heavy'] < 20
+    lock, hot = (scenes.gcm_rates(rates, t) for t in ('lock', 'hot_world'))
+    assert hot['median'] > lock['median'] and hot['heavy'] > lock['heavy']
