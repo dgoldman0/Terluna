@@ -5,10 +5,11 @@
 For the design case (A28_corrected_970, the lock) and the 20-year test with the longwave refitted by height and ice
 optics for the cold cloud (A28_corrected_970_lw_ice, the hot world), over years 10-19 of each, in their 3-day means
 (10 to a lunar day):
-- at the T21 cell under each lake of results/lakes.json, and at the nearest water cell in the same row: the air at
-  2 m, the lowest level's air, humidity and wind (about 0.9 km up), the surface pressure, the surface's net shortwave
-  and longwave, its albedo and temperature, the sensible and latent heat, the mean cosine of the Sun's zenith angle
-  and PlaSim's land mask;
+- at the T21 cell under each lake of results/lakes.json, and at the nearest water cell in the same row: PlaSim's
+  tas, which is not air at 2 m but the lowest level's temperature brought down its dry adiabat to the surface pressure,
+  that level's potential temperature at the surface (fluxmod.f90's dtsa); the lowest level's air, humidity and wind
+  (about 0.9 km up), the surface pressure, the surface's net shortwave and longwave, its albedo and temperature, the
+  sensible and latent heat, the mean cosine of the Sun's zenith angle and PlaSim's land mask;
 - at every water cell (land fraction under one half in the T21 boundary file, as climate_targets counts the seas):
   the surface temperature and pressure, with each cell's sea area and latitude;
 - the subsolar longitude of each mean, from the Sun's height near the equator.

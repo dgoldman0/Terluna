@@ -315,7 +315,9 @@ the integration found next.
 6. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
    round once these details are worked out.
 7. **The wet Moon's methane and nitrogen:** the lakes' methane by depth, with its oxidation in their waters and
-   sediments, and the biomes' nitrogen ending in N2.
+   sediments, and the biomes' nitrogen ending in N2. The lake model was corrected after the review of 18 October and
+   its deep mixing is now driven by the wind (studies/lake_oxygen and lake_anoxia); the methane tracer on its columns
+   counts the giants' own anoxic methane and what their rare overturns release.
 8. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
    storm needs CM1's field solver over terrain, which waits for the author.
@@ -328,6 +330,9 @@ the integration found next.
 12. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
 13. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
 14. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
+15. **A basin-scale model of one crater lake**, to settle the deep mixing's form (Osborn's rule against Shih and
+   Bouffard's energetic regime) and the wind's share, which move the deep lakes' oxygen and methane two- to
+   sevenfold (studies/lake_oxygen, mixing_forms).
 
 New runs wait on the author's choice of the target climate, and no rented compute is commissioned.
 

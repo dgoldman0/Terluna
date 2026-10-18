@@ -161,6 +161,90 @@
    "doi_or_url": "geography/groundwater_sources.json",
    "use": "The heat flow through the lake floor, geography's central regional value of 0.015 W/m2",
    "access": "through geography's groundwater uptake product"
+  },
+  {
+   "key": "markager1992",
+   "citation": "Markager S, Jespersen AM, Madsen TV, Berdalet E, Weisburd R 1992, Diel changes in dark respiration in a plankton community, Hydrobiologia 238, 119-130",
+   "doi_or_url": "https://doi.org/10.1007/BF00048780",
+   "use": "A eutrophic lake's plankton community: dark respiration falls exponentially through the night at a time coefficient of 0.04 an hour towards a near-constant level by the night's end (0.3 an hour in darkened samples during the day), with respiration following the cells' carbohydrate at night; the evidence for respiration running down through a long night, behind the labile pool's 2-7 days (a design bracket, 4 days central)",
+   "access": "abstract"
+  },
+  {
+   "key": "crowe2008",
+   "citation": "Crowe SA, O'Neill AH, Katsev S, Hehanussa P, Haffner GD, Sundby B, Mucci A, Fowle DA 2008, The biogeochemistry of tropical lakes: a case study from Lake Matano, Indonesia, Limnology and Oceanography 53, 319-331",
+   "doi_or_url": "https://doi.org/10.4319/lo.2008.53.1.0319",
+   "use": "Ferruginous Lake Matano: its anoxic water below about 120 m holds 40-120 uM of Fe(II); the iron bracket caps iron reduction's dissolved load at 120 uM with its bicarbonate",
+   "access": "abstract and summaries"
+  },
+  {
+   "key": "plasim_fluxmod",
+   "citation": "ExoPlaSim 3.4.2, plasim/src/fluxmod.f90 (Paradise et al. 2022; PlaSim, Fraedrich et al. 2005)",
+   "doi_or_url": "the GCM's own source in climate/gcm",
+   "use": "tas is dtsa, the lowest level's temperature times sigma(NLEV)^-kappa; the transfer coefficients take the lowest level's height znl, its wind floored at zumin = 1 m/s and its potential temperature and humidity (subroutine surflx, mkshfl and mkevap): the pairing the lakes now take",
+   "access": "formula checked: the source read"
+  },
+  {
+   "key": "review_2026_10_18",
+   "citation": "Independent review of the lake model and the two lake studies, 18 October 2026, kept on the research drive (review-lakes-2026-10-18/findings.md with its check scripts)",
+   "doi_or_url": "research drive",
+   "use": "The surface exchange's pairing, the Lake number and the diffusivity cap, the anaerobic products in the density, the night respiration, the demand's reference temperature and the resolution check's step, all corrected here; its slab and Lake-number scripts are reused; its re-check of the same day (fix_review.md): the spin-up settled at the analysis step, the Lake number at the month's thermocline, the unstable interfaces' diffusivity at least the cap, the iron bracket's CO2 netted off, the solute carried without its density and the warm kinetics kept beside the bounds",
+   "access": "read in full"
+  },
+  {
+   "key": "integration_history_review_2026_10_17",
+   "citation": "Integration history review of 17 October 2026, finding F04 (freshwater oxygen), kept on the research drive (integration-history-review-2026-10-17/assessment.md with its work/scripts/o2_saturation.py)",
+   "doi_or_url": "research drive",
+   "use": "Saturation of 7.14, 7.93 and 8.63 mg/L at the sea medians climate_targets gave then (34.0, 27.7 and 23.0 C) from the same fit, which this study's saturation reproduces to 0.02 mg/L",
+   "access": "read in full"
+  },
+  {
+   "key": "wuest2000",
+   "citation": "Wuest A, Piepke G, Van Senden DC 2000, Turbulent kinetic energy balance as a tool for estimating vertical diffusivity in wind-forced stratified waters, Limnology and Oceanography 45(6), 1388-1400",
+   "doi_or_url": "https://doi.org/10.4319/lo.2000.45.6.1388",
+   "use": "The wind's deep mixing: 0.3 +/- 0.1% of the wind's energy flux P10 = rho_air C10 W10^3, 10 m above the lake, is transferred as turbulent kinetic energy into the stratified water across lakes (0.42% in Lake Alpnach, about 90% of it dissipated in the bottom boundary layer), the central share 0.3% with the bracket 0.2-0.4%; their mixing efficiency 0.15, against the model's 0.2",
+   "access": "abstract and its summaries"
+  },
+  {
+   "key": "wuest_lorke2003",
+   "citation": "Wuest A, Lorke A 2003, Small-scale hydrodynamics in lakes, Annual Review of Fluid Mechanics 35, 373-412",
+   "doi_or_url": "https://doi.org/10.1146/annurev.fluid.35.101101.161220",
+   "use": "The drag coefficient at 10 m over lakes, C10(U10), for P10",
+   "access": "through Gaudard et al. (2017), eq. 5"
+  },
+  {
+   "key": "gaudard2017",
+   "citation": "Gaudard A, Schwefel R, Raman Vinna L, Schmid M, Wuest A, Bouffard D 2017, Optimizing the parameterization of deep mixing and internal seiches in one-dimensional hydrodynamic models: a case study with Simstrat v1.3, Geoscientific Model Development 10, 3411-3423",
+   "doi_or_url": "https://doi.org/10.5194/gmd-10-3411-2017",
+   "use": "Simstrat's C10 relation from Wuest & Lorke (2003), its eq. 5, which the lake model takes; its seiche energy is a share of rho_air C10 U10^3 reduced at high Wedderburn numbers, with no enhancement at low ones",
+   "access": "read: section 2"
+  },
+  {
+   "key": "yeates_imberger2003",
+   "citation": "Yeates PS, Imberger J 2003, Pseudo two-dimensional simulations of internal and boundary fluxes in stratified lakes and reservoirs, International Journal of River Basin Management 1(4), 297-319",
+   "doi_or_url": "https://doi.org/10.1080/15715124.2003.9635214",
+   "use": "DYRESM's hypolimnetic diffusivity, inversely proportional to the Lake number and calibrated on Lake Kinneret and the Canning and Mundaring reservoirs: K = 200 K_M (N^2/N_max^2)/L_N, the Lake-number bracket on the 0-15 lakes",
+   "access": "secondary: the form as the Mono Lake benthic boundary layer study gives it (Saline Systems 4:11, 2008, PMC2535590)"
+  },
+  {
+   "key": "shih2005",
+   "citation": "Shih LH, Koseff JR, Ivey GN, Ferziger JH 2005, Parameterization of turbulent fluxes and scales using homogeneous sheared stably stratified turbulence simulations, Journal of Fluid Mechanics 525, 193-214",
+   "doi_or_url": "https://doi.org/10.1017/S0022112004002587",
+   "use": "The mixing efficiency falling with the buoyancy Reynolds number Re_b = eps/(nu N^2): molecular diffusion below about 7, Osborn's 0.2 at 7-100, and K = 2 nu Re_b^(1/2) above 100, the form mixing_forms.py runs beside Osborn's rule",
+   "access": "the form as the independent review of 18 October gives it (final_review.md) and as Bouffard & Boegman (2013) carry it to lakes; the paper not read"
+  },
+  {
+   "key": "bouffard_boegman2013",
+   "citation": "Bouffard D, Boegman L 2013, A diapycnal diffusivity model for stratified environmental flows, Dynamics of Atmospheres and Oceans 61-62, 14-34",
+   "doi_or_url": "https://doi.org/10.1016/j.dynatmoce.2013.02.002",
+   "use": "Shih et al.'s regimes carried to lakes and other stratified environmental flows, the energetic regime's K = 2 nu Re_b^(1/2)",
+   "access": "as the independent review of 18 October gives it (final_review.md); the paper not read"
+  },
+  {
+   "key": "review_2026_10_18_final",
+   "citation": "Independent review of the lake foundation, 18 October 2026, its last check (review-lakes-2026-10-18/final_review.md with checks/energetic_regime*.py, p10_drag.py and recount_final.py), kept on the research drive",
+   "doi_or_url": "research drive",
+   "use": "Osborn's rule applied at buoyancy Reynolds numbers of 10^3-10^5 and Shih and Bouffard's alternative, the 1,925 m lake's bubble-point basis, the pans' extension of the share and the drag's coverage, all answered here and in mixing_forms.py",
+   "access": "read in full"
   }
  ]
 }

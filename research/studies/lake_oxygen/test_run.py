@@ -45,7 +45,7 @@ def test_lakes_product_binds_its_code_and_inputs(chosen):
         assert digest(path) == h, path
     for path, h in chosen['producer']['inputs'].items():
         if path.startswith('geography/inputs/') and not present(path):
-            continue                                     # LOLA and the gazetteer are fetched, not committed
+            continue                                     # LOLA and the gazetteer are fetched
         assert digest(path) == h, path
 
 
@@ -96,10 +96,13 @@ def test_the_targets_temperatures_are_climate_targets_own(product):
 
 
 def test_every_run_conserves_heat_and_oxygen(product):
+    # against the column's own heat and oxygen, and as a mean flux over the lake: the implicit diffusion's round-off,
+    # which the wind's large diffusivities across near-neutral water raise
     for group, cases in product['runs'].items():
         for key, case in cases.items():
-            assert abs(case['budget']['heat_relative_error']) < 1e-8, (group, key)
-            assert case['budget']['oxygen_relative_error'] < 1e-8, (group, key)
+            b = case['budget']
+            assert abs(b['heat_relative_error']) < 1e-8 and abs(b['heat_error_w_m2']) < 1e-6, (group, key)
+            assert b['oxygen_relative_error'] < 1e-6 and b['oxygen_error_g_m2_day'] < 1e-6, (group, key)
 
 
 def test_production_meets_each_scenario(product):
@@ -121,29 +124,115 @@ def test_no_lake_freezes_and_the_deep_runs_settle(product):
 
 def test_the_slab_follows_the_gcms_own_water(product):
     for check in product['checks']['slab']:
-        for name in ('lunar_free_convection', 'earth_free_convection'):
-            assert abs(check[name]['bias_k']) < 1.5, (check['site'], check['run'], name)
-            assert check[name]['correlation'] > 0.85, (check['site'], check['run'], name)
-        # free convection carried to lunar gravity leaves the water warmer than Earth's constant does
-        assert check['lunar_free_convection']['model_mean_c'] > check['earth_free_convection']['model_mean_c']
+        key = (check['site'], check['run'])
+        level, ten = check['lowest_level'], check['ten_metres']
+        # paired as PlaSim pairs it and with PlaSim's own Earth constant, the slab follows the GCM's slab ocean
+        assert abs(level['earth_free_convection']['bias_k']) < 0.5, key
+        assert level['earth_free_convection']['correlation'] > 0.9, key
+        for pairing in (level, ten):
+            assert pairing['lunar_free_convection']['correlation'] > 0.85, key
+            # free convection carried to lunar gravity leaves the water warmer than Earth's constant does
+            assert pairing['lunar_free_convection']['model_mean_c'] > pairing['earth_free_convection']['model_mean_c']
+        # the 10 m pairing exchanges more heat for the same air and runs the water cooler
+        assert ten['earth_free_convection']['model_mean_c'] < level['earth_free_convection']['model_mean_c'], key
 
 
 def test_the_answers_are_the_central_runs(product):
-    for target, a in product['answers'].items():
-        for site, o in a['overturn'].items():
-            case = product['runs']['deep'][f'{target}/{site}']
-            assert o['complete_overturns'] == case['mixing']['complete_overturns']
-        for site, entry in a['shallows_late_night'].items():
-            case = product['runs']['shallow'][f'{target}/{site}']
-            for trophic, v in entry.items():
-                n = case['oxygen'][f'{trophic}/renewal/supply']['nights']['surface_minimum']
-                assert v['median'] == n[1]
-                assert v['bracket_of_medians'][0] <= v['median'] <= v['bracket_of_medians'][1]
+    for label, group in (('central', 'deep'), ('eta_low', 'deep_eta_low'), ('eta_high', 'deep_eta_high')):
+        for target, a in product['answers'][label].items():
+            for site, o in a['overturn'].items():
+                case = product['runs'][group][f'{target}/{site}']
+                assert o['complete_overturns'] == case['mixing']['complete_overturns']
+                assert o['lake_number'] == case['lake_number']
+            for site, entry in a['shallows_late_night'].items():
+                case = product['runs']['shallow'][f'{target}/{site}']
+                for trophic, v in entry.items():
+                    n = case['oxygen'][f'{trophic}/renewal/supply']['nights']['surface_minimum']
+                    assert v['median'] == n[1]
+                    assert v['bracket_of_medians'][0] <= v['median'] <= v['bracket_of_medians'][1]
+                    assert set(v['labile_brackets']) == {'labile_2d', 'labile_7d'}
+                    # the warm kinetics are a transient beside the bracket, which spans the transfers and the pool
+                    lows = [case['oxygen'][f'{trophic}/{tr}/supply']['nights']['surface_minimum'][1]
+                            for tr in R.TRANSFER] + list(v['labile_brackets'].values())
+                    assert v['bracket_of_medians'] == [min(lows), max(lows)]
+                    assert len(v['warm_transient']) == 2
+
+
+def test_the_wind_sets_the_deep_mixing_with_its_bracket_and_the_sensitivity_rows(product):
+    runs = product['runs']
+    for eta, group in (('central', 'deep'), ('low', 'deep_eta_low'), ('high', 'deep_eta_high')):
+        assert set(runs[group]) == set(runs['deep'])
+        for key, case in runs[group].items():
+            mix = case['deep_mixing']
+            assert case['case']['deep_mixing'] == mix['treatment'] == 'wind'
+            assert mix['wind_share'] == R.WIND_SHARE[eta] and mix['cap_m2_s'] == R.CAP_WIND
+            # the raised cap holds no interface back; the old cap held many under the same wind
+            assert mix['share_held_by_the_cap'] < 1e-3, (group, key)
+            assert mix['dissipation_w_kg']['mean'] > 0.0
+    for key, case in runs['wind_old_cap'].items():
+        assert case['deep_mixing']['cap_m2_s'] == R.CAP['central']
+        assert case['deep_mixing']['share_held_by_the_cap'] > runs['deep'][f'{key}/0-15']['deep_mixing'][
+            'share_held_by_the_cap']
+    # a cap ten times the wind's changes nothing: it held nothing back
+    for key, case in runs['wind_cap_raised'].items():
+        central = runs['deep'][f'{key}/0-15']
+        mix = case['deep_mixing']
+        assert mix['cap_m2_s'] == R.CAP_WIND_RAISED and mix['share_held_by_the_cap'] == 0
+        n = central['mixing']['complete_overturns']
+        assert abs(case['mixing']['complete_overturns'] - n) <= max(1, 0.1 * n), key
+        for trophic in R.TROPHIC:
+            a = case['oxygen'][f'{trophic}/renewal/supply']['deepest_tenth']['mean']
+            b = central['oxygen'][f'{trophic}/renewal/supply']['deepest_tenth']['mean']
+            assert abs(a - b) <= 0.1, (key, trophic, a, b)
+    # a larger share of the wind's energy dissipates more below the mixed layer, in proportion at the median (the mean
+    # takes the spikes of the hours when a deep mixed layer leaves little water below it)
+    for key, case in runs['deep'].items():
+        mid = case['deep_mixing']['dissipation_w_kg']['median']
+        for group, eta in (('deep_eta_low', 'low'), ('deep_eta_high', 'high')):
+            other = runs[group][key]['deep_mixing']['dissipation_w_kg']['median']
+            assert other / mid == pytest.approx(R.WIND_SHARE[eta] / R.WIND_SHARE['central'], rel=0.05), (group, key)
+    for key, case in runs['deep_fixed'].items():
+        target, band, diss = key.split('/')
+        assert case['case']['deep_mixing'] == 'dissipation' and case['case']['dissipation'] == R.DISSIPATION[diss]
+        assert case['case']['cap'] == R.CAP['central']
+    assert {v['case']['deep_mixing'] for v in runs['deep_lake_number'].values()} == {'lake_number'}
+    for group in ('deep', 'deep_eta_low', 'deep_eta_high'):
+        for key, case in runs[group].items():
+            ln = case['lake_number']
+            assert set(ln) == set(R.LAKE_NUMBER_BELOW_M)
+            for rule in ln.values():
+                assert 0.0 < rule['p10'] <= rule['median'] <= rule['p90'], (group, key)
+            # the month's thermocline lies deeper than the day's warm layer, and the Lake number grows with z_T
+            assert ln['month']['median'] >= ln['day']['median'], (group, key)
+
+
+def test_the_deep_lakes_settle_at_the_analysis_step(product):
+    for group in ('deep', 'deep_eta_low', 'deep_eta_high', 'deep_lake_number', 'deep_fixed', 'wind_old_cap',
+                  'wind_cap_raised', 'sensitivity'):
+        for key, case in product['runs'][group].items():
+            spun = case['settling']['spin_up']
+            fine = spun['at_the_analysis_step']
+            assert fine['step_s'] == case['case']['step_s'], (group, key)
+            assert 2 <= fine['passes'] <= fine['limit'], (group, key)
+            assert len(fine['bottom_age_days_by_pass']) == fine['passes']
+
+
+def test_iron_reduction_nets_off_the_co2_it_consumes():
+    salts = (0.125 * 55.845 + 0.25 * 61.017) * 0.8e-3          # the Fe2+ and HCO3- of a gram of O2 equivalents
+    co2 = 0.25 * 44.01 * 0.284e-3                             # 7/32 consumed and 1/32 not made, at Kivu's coefficient
+    assert R.IRON['per_debt'] == pytest.approx((1.0 - R.METHANE_SHARE) * (salts - co2))
+    assert R.IRON['per_debt'] / ((1.0 - R.METHANE_SHARE) * salts) == pytest.approx(0.824, abs=0.005)
+    assert R.IRON['cap'] == pytest.approx((0.120 * 55.845 + 0.240 * 61.017) * 0.8e-3 - 0.240 * 44.01 * 0.284e-3)
 
 
 def test_scenarios_carry_their_sources():
     s = {x.name: x for x in R.scenarios()}
-    assert len(s) == len(R.TROPHIC) * len(R.TRANSFER) * len(R.KINETICS)
+    assert len(s) == len(R.TROPHIC) * (len(R.TRANSFER) * len(R.KINETICS) + 2)
+    assert s['oligotrophic/renewal/supply'].labile_days == R.LABILE_DAYS['central']
+    assert s['oligotrophic/renewal/supply/labile_2d'].labile_days == 2.0
+    assert s['oligotrophic/renewal/supply/labile_7d'].labile_days == 7.0
+    assert s['eutrophic/cole_caraco/warm'].reference_c == R.SOURCE_C == 6.0
+    assert s['eutrophic/renewal/supply'].reference_c == 20.0 and s['eutrophic/renewal/supply'].activation_ev == 0.0
     eu = s['eutrophic/renewal/supply']
     assert eu.gpp == pytest.approx(2.0 * 32.0 / 12.0) and eu.attenuation == pytest.approx(1.7)
     assert eu.sediment + eu.deep_water == pytest.approx(0.90)                      # Muller et al.'s mean
@@ -152,6 +241,9 @@ def test_scenarios_carry_their_sources():
     assert s['oligotrophic/renewal/warm'].activation_ev == pytest.approx(0.62)
     assert R.SOLUTE['co2'] == pytest.approx(44.01 / 32.0 * 0.284e-3)
     assert np.isclose(R.kd(1.0), 1.7)
+    # the iron bracket: Matano's 120 uM of Fe(II) with its bicarbonate at the model's salinity term, net of the CO2
+    # iron reduction consumes (test_iron_reduction_nets_off_the_co2_it_consumes)
+    assert R.IRON['cap'] < (0.120 * 55.845 + 0.240 * 61.017) * 0.8e-3
 
 
 def test_each_windows_humidity_spans_its_opening_and_closing_records():
@@ -166,3 +258,59 @@ def test_each_windows_humidity_spans_its_opening_and_closing_records():
     linear = np.linspace(0.010, 0.020, 1001)              # a steady trend: the mean of the ends is the window mean
     assert R.window_humidity(linear[:-1:100])[:-1] == pytest.approx(
         [linear[i * 100:(i + 1) * 100 + 1].mean() for i in range(9)], rel=1e-12)
+
+
+# --- the mixing's form below the mixed layer (mixing_forms.py) -----------------------------------------------------
+
+def test_the_energetic_regime_follows_shih_and_bouffard():
+    from research.studies.lake_oxygen import mixing_forms as MF
+    ph = L.Physics(deep_mixing='wind', max_diffusivity=1.0)
+    eps = 1e-9
+    reb = np.array([1.0, 50.0, 100.0, 1e4])
+    n2 = eps / (MF.NU * reb)
+    k = MF.shih_bouffard(n2, ph, eps)
+    assert k[0] == 0.0                                                  # the diffusive regime: molecular alone
+    assert k[1] == pytest.approx(0.2 * eps / n2[1])                     # the intermediate: Osborn's rule
+    assert k[3] == pytest.approx(2.0 * MF.NU * np.sqrt(1e4))            # the energetic: 2 nu Re_b^(1/2)
+    above = MF.shih_bouffard(np.array([eps / (MF.NU * 100.0 * (1 + 1e-9))]), ph, eps)[0]
+    assert above == pytest.approx(k[2], rel=1e-6)                       # continuous at Re_b = 100
+    # Osborn's rule over the energetic regime's is 0.1 Re_b^(1/2): ten times at Re_b = 10^4
+    assert 0.2 * eps / n2[3] / k[3] == pytest.approx(0.1 * np.sqrt(1e4))
+    # unstable interfaces and the cap as lake.py's
+    assert MF.shih_bouffard(np.array([-1e-6]), ph, eps)[0] == L.diffusivity(np.array([-1e-6]), ph, eps)[0]
+    # the wrapper restores lake.py's own functions
+    with MF.mixing_form('shih_bouffard', 1e5):
+        assert L.diffusivity is MF.shih_bouffard and L.wind_dissipation is not MF._WIND
+    assert L.diffusivity is MF._OSBORN and L.wind_dissipation is MF._WIND
+
+
+@pytest.fixture(scope='module')
+def forms():
+    from research.studies.lake_oxygen import mixing_forms as MF
+    if not MF.OUT.is_file():
+        pytest.skip('the mixing forms run has not written its product')
+    return json.loads(MF.OUT.read_text())
+
+
+def test_the_mixing_forms_product_binds_its_code_and_inputs(forms):
+    from research.studies.lake_oxygen import mixing_forms as MF
+    assert forms['schema'] == MF.SCHEMA
+    for path, h in forms['producer']['files'].items():
+        assert digest(path) == h, path
+    for path, h in forms['producer']['inputs'].items():
+        if path.startswith('research/runs/') and not present(path):
+            continue
+        assert digest(path) == h, path
+
+
+def test_the_energetic_regime_mixes_the_deep_lakes_less(forms):
+    for target, rows in forms['comparison']['lake_oxygen_convention'].items():
+        o, s = rows['osborn'], rows['shih_bouffard']
+        assert s['complete_overturns'] <= o['complete_overturns'], target
+        assert s['bottom_age_years'] >= o['bottom_age_years'], target
+        for trophic in R.TROPHIC:
+            assert s['deepest_tenth'][trophic]['mean'] <= o['deepest_tenth'][trophic]['mean'] + 0.05, (target, trophic)
+    for name, run in forms['runs'].items():
+        b = run['budget']
+        assert abs(b['heat_relative_error']) < 1e-8 and b['oxygen_relative_error'] < 1e-6, name
+        assert run['deep_mixing']['share_held_by_the_cap'] < 1e-3, name

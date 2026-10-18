@@ -341,25 +341,31 @@ which.
 
 ### Waters
 
-17. **The seas are held fresh, deep crater lakes turn over rarely, and new waters run eutrophic.** The seas' make-up
-    through time is the [sea chemistry](../../research/studies/sea_chemistry/README.md)'s, revised with the groundwater
-    on 14 October: delivered fresh, they start near pH 5.6 and take weathering's carbonate, and the author holds them
-    as hard fresh water near 0.14 g/kg and pH 8.3 (the register's rows of 13 October). New reservoirs run eutrophic
-    for a decade (Paterson et al. 2019). Through ten years of each target's lunar months in a lake model ([the waters'
-    oxygen](../../research/studies/lake_oxygen/README.md)), the 354-hour nights mix deep crater lakes, with a median
-    depth of 352 m, only to 12–15 m. Their deep water sits at the temperature of the rarest cold spell and turns over
-    only in it, a few lunar cycles in a decade, so it goes anoxic in mesotrophic water and richer and runs hypoxic or
-    anoxic in oligotrophic water. An overturn brings that water up: just after one the whole lake holds 0.1–4.9 mg/L
-    of oxygen in oligotrophic water and about 0.01 mg/L in eutrophic water. Productive shallows run hypoxic in the
-    night, the median night's lowest at 0.4–2.7 mg/L across the targets, and their floors are anoxic through most of
-    the day. The living-water guesses take Earth seawater at 38.4 g/kg. *A lake model on one GCM's climate, with
-    oxygen demand from Earth's lakes.* What the anoxic water does ([lake
-    anoxia](../../research/studies/lake_anoxia/README.md)): the lakes' methane follows their trophic state, 2.3–13 Tg a
-    year oligotrophic to 69–110 eutrophic, most of it brought up by overturns too poor in oxygen to oxidise it, and only
-    oligotrophic lakes fit the air's held 1.87 ppm. No lake in the targets nears a limnic eruption, but at lunar gravity
-    an isolated hypolimnion reaches its bubble point four to six times sooner than on Earth, so lakes that never turn
-    over are the hazard. Once mesotrophic, the lakes' anoxic floors would release many times their dissolved
-    phosphorus and carry them further. *Arithmetic on the lake model's columns with Earth's rates.*
+17. **The seas are held fresh, the deep lakes' oxygen rests on how the wind mixes them, and new waters run eutrophic.**
+    The seas' make-up through time is the [sea chemistry](../../research/studies/sea_chemistry/README.md)'s, revised
+    with the groundwater on 14 October: delivered fresh, they start near pH 5.6 and take weathering's carbonate, and
+    the author holds them as hard fresh water near 0.14 g/kg and pH 8.3 (the register's rows of 13 October). New
+    reservoirs run eutrophic for a decade (Paterson et al. 2019). Through ten years of each target's lunar months in a
+    lake model ([the waters' oxygen](../../research/studies/lake_oxygen/README.md), corrected after the independent
+    review of 18 October and rerun with the mixing below the mixed layer driven by the wind, as the author chose that
+    day), the 354-hour nights mix the top of deep crater lakes, median depth 352 m, to 9–14 m even in their calmest
+    cycles, and the share of the wind's energy that Earth's lakes pass below keeps their deep water near neutral. By
+    Osborn's rule for that mixing they turn over every second lunar month in the lock and the resort and every fourth
+    in the hot world, their oligotrophic and mesotrophic deep water oxic in the cooler targets and richer water running
+    low. By Shih and Bouffard's energetic regime, the other end of the mixing's form, they turn over about once a year,
+    oligotrophic deep water keeps its oxygen in the cooler targets and the lock's mesotrophic water keeps 2.9 mg/L, and
+    richer water runs low or anoxic. The very deep lakes, half the lake area, keep anoxic depths in richer water either
+    way. Productive shallows stay above 2 mg/L on almost every night under the wind's share and fall to 1.7–4.0 mg/L
+    at its bracket's fixed dissipation. The living-water guesses take Earth seawater at 38.4 g/kg. *A lake model on one
+    GCM's climate, oxygen demand from Earth's lakes, the stirring set by Earth's measured share of the wind's energy,
+    its range and the mixing's form as brackets.* What the anoxic water does ([lake
+    anoxia](../../research/studies/lake_anoxia/README.md)): methane follows the trophic state, 0.29–0.37 Tg a year
+    oligotrophic to 4.2–23 eutrophic by Osborn's rule and two to four times more in the hot world's eutrophic lakes by
+    the energetic regime, and oligotrophic lakes hold the air under the held 1.87 ppm. No lake in the targets nears a
+    limnic eruption, but an isolated hypolimnion reaches its bubble point 3.5–6.7 times sooner than on Earth, so
+    meromictic and spring-fed lakes and deep new reservoirs are the hazard. Anoxic floors can at most cancel the
+    phosphorus retention. *Arithmetic on the lake model's columns with Earth's rates; Osborn's form, the energetic
+    regime as its other end.*
 18. **The monthly tide makes flats exposed for days.** Ranges of 2.5–3.7 m on shores sloping 1:50–1:100 expose about
     20,000–30,000 km² for days each month, the most productive kind of coast on Earth and a methane and N2O source.
     Low water drifts through the lunar day on the tidal lines' beat of about a year (digest arithmetic). *Rough.*

@@ -98,29 +98,31 @@ on this laptop. The findings behind them are in the [README](README.md).
      the rivers carry about half the load natural tufa needs and sit at 0.76 times calcite saturation, so lasting
      barriers need builders that calcify from undersaturated water, as freshwater shellfish do, or springs carrying
      twice the rivers' load.
-   - Stratification and oxygen in deep crater lakes, answered on 17 October in the three targets ([the waters'
+   - Stratification and oxygen in deep crater lakes, answered on 17 October and rerun on 18 October on the corrected
+     model with the deep mixing driven by the wind, as the author chose that day ([the waters'
      oxygen](../../research/studies/lake_oxygen/README.md)). The held fresh seas hold 7.06, 7.78 and 8.43 mg/L at
-     saturation in the hot world, the resort and the lock, a fifth more than seawater would. A lunar night mixes a 352 m
-     crater lake to a median 12–15 m; its deep water sits at the temperature of the coldest spell in ten years of the
-     GCM's weather and turns over only then, three to six lunar cycles in the decade, and is a mean 2.5–3.8 years from
-     its last contact with the air. Its deepest tenth is anoxic in mesotrophic and richer water in every target, and in
-     oligotrophic water averages 0.6–1.5 mg/L in the lock, 0.2–0.8 in the resort and under 0.1 in the hot world; the
-     dissipation below the mixed layer moves it most, to 2.7–3.6 mg/L at ten times its central value. An overturn brings
-     the anoxic water up and leaves the whole lake at 0.1–4.9 mg/L in oligotrophic water and about 0.01 mg/L in
-     eutrophic water. Productive shallows 3 m deep fall in the median night to 1.4–2.7 mg/L in the lock, 0.7–1.9 in the
-     resort and 0.4–1.1 in the hot world, and their floors stay anoxic through most of the day.
-   - What the anoxic depths do, answered on 17 October ([lake anoxia](../../research/studies/lake_anoxia/README.md)).
-     Methane follows the trophic state: the Moon's lakes would send 2.3–13 Tg a year to the air oligotrophic, 20–53
-     mesotrophic and 69–110 eutrophic (centrals, lock to hot world), against the 39 Tg the domain synthesis's ledger
-     carries. Most rises with the overturns, whose nearly anoxic water cannot oxidise what the depths stored, and
-     bubbles, which form down to 50–60 m at lunar gravity, carry 2–16% of it. Only oligotrophic lakes fit the held
-     1.87 ppm: eutrophic lakes left alone would hold the air at 25–39 ppm, 66–110 Tg a year of removal or 1.6–1.8% more
-     dimming. No lake in the targets nears a limnic eruption (the 352 m lakes' floors reach 0.16–0.20 of their bubble
-     point), but an isolated hypolimnion reaches it four to six times sooner than on Earth, within 1–20 years for an
-     eutrophic one at 20–50 m, so meromictic soda and spring-fed lakes and deep new reservoirs are where the hazard
-     lies. The dissolved phosphorus keeps the lakes ultra-oligotrophic; once mesotrophic, their anoxic floors would
-     release 4–210 times that load. Oxygenating the depths takes 3.5–134 kW per km² (14–525 GW for all lakes), and
-     circulation 54–102 kW; nutrient limits under 0.16 g P m⁻² a year come first.
+     saturation in the hot world, the resort and the lock. With the share of the wind's energy that Earth's lakes pass
+     below the mixed layer (0.3%, 0.2–0.4%) and Osborn's rule, 352 m crater lakes turn over in 55–74 of 120 lunar
+     cycles in the lock and the resort and 29–30 in the hot world; their oligotrophic and mesotrophic deep water stays
+     oxic in the cooler targets, eutrophic water keeps 1.9–4.2 mg/L there and runs anoxic half the time in the hot
+     world, and new reservoirs run low. By Shih and Bouffard's energetic regime, the other end of the mixing's form,
+     the 0–15° lake turns over 8–12 times in ten years, oligotrophic deep water keeps 3.4–4.8 mg/L in the cooler
+     targets and the lock's mesotrophic water 2.9 mg/L, and richer water runs low or anoxic. The very deep lakes, half
+     the lake area, turn over about once a year with their richer depths anoxic (Osborn), or once in decades and anoxic
+     throughout (energetic regime). Productive 3 m shallows stay above 2 mg/L on almost every night under the wind's
+     share; at its bracket's fixed dissipation they fall to 1.7–4.0 mg/L, below 2 mg/L on up to 70% of nights in the
+     hot world. A basin-scale model of one crater lake would settle the share and the form.
+   - What the anoxic depths do, answered on 17 October and rerun on 18 October ([lake
+     anoxia](../../research/studies/lake_anoxia/README.md)). By Osborn's rule the lakes would send 0.29–0.37 Tg of
+     methane a year oligotrophic, 2.1–3.9 mesotrophic, 4.2–23 eutrophic and 7.9–52 from new reservoirs, mostly the
+     floors' own bubbles where the overturns keep the depths oxic, against the 39 Tg the domain synthesis's ledger
+     carries. By the energetic regime the hot world's eutrophic lakes send two to four times as much (20–37 Tg with
+     the 0–15° lake standing for all), while oligotrophic and mesotrophic lakes in the cooler targets change little.
+     Oligotrophic lakes hold the air at 0.91–1.7 ppm, under the held 1.87. No lake in the targets nears a limnic
+     eruption; an isolated hypolimnion reaches its bubble point 3.5–6.7 times sooner than on Earth, so meromictic and
+     spring-fed lakes and deep new reservoirs are the hazard. Anoxic floors can at most cancel the phosphorus
+     retention, 10–27 mg/m³ at steady state. Oxygenating the depths takes 3.5–15 kW per km² at the demand, up to 59
+     with the devices' stirring. The giants' own methane is the methane tracer's to settle.
    - Monthly plankton cycles, intertidal monthly wetlands, and the seas' own deep basins in the lake model.
    - Soda lakes, which the author takes as their own local ecosystems (15 October): their communities for the Moon's
      nearly chloride-free soda at a pH near 10, from Earth's soda-lake producers, grazers, birds and the few fish that
