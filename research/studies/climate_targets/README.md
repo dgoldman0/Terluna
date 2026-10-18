@@ -309,8 +309,8 @@ oxygen in the three targets ([lake_oxygen](../lake_oxygen/README.md), on `domain
 hash until the branches meet): saturation interpolated by the seas' median warmth, and the eutrophic shallows' nights,
 across its three lakes, interpolated by the ground's temperature between its lock, resort and hot world, a guide to a
 model run at three points only. Each kelvin warmer raises the freezing level over the summit 1.1 km and the ground's
-wet-bulb 99th percentile 0.85 K, takes 0.73–0.96% of the sunlight off the dimming, 87–114 TW, and adds 0.1 mm of
-rain a day on land with 1.6 points less desert, and costs the seas 0.11 mg/L of oxygen and the margin under a
+wet-bulb 99th percentile 0.84 K, takes 0.73–0.96% of the sunlight off the dimming, 87–113 TW, and adds 0.1 mm of
+rain a day on land with 1.6 points less desert, and costs the seas 0.12 mg/L of oxygen and the margin under a
 saturated column 1.7–2.3 W/m².
 
 **The recommendation is 301 K, within 300–302 K.** Only the tower's winter sets a line: with its 2 km margin it holds to
