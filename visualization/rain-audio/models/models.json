@@ -1,0 +1,319 @@
+{
+ "schema": "terluna.visualization.rain-texture-models/1",
+ "evidence": "Statistics fitted to 36 seconds of one CC0 field recording each, on 11 October 2026: textures with no physical calibration. Rendered with their recorded seeds they reproduce the rain work's raw masters bit for bit, and the concrete and puddle models refit from their recordings to the same arrays (the puddles' to within 1e-16). The files are byte for byte those whose sha256 the lunar and stereo export manifests of 13 October record.",
+ "reading_rule": "Load a model with texture.load(surface) and render with texture.synthesize(model, seconds, seed); a render reproduces only with the same model, seed, duration and numerical environment. A model's level is the recording's digital level, which fixes no sound pressure. archive_master gives the sha256 of the float32 little-endian samples of the archive's 30 s master and its peak and level; recovered_renderer_short_render the sha256 of a 3 s synthesis by the recovered code of 11 October in numpy 2.3.3 and scipy 1.16.2.",
+ "models": [
+  {
+   "surface": "concrete",
+   "file": "concrete.npz",
+   "sha256": "7b357cf9db6d88c6849743fd6be81aae58420a6961c06abb845813fbe6205bf2",
+   "bytes": 771323,
+   "arrays": {
+    "model_version": [],
+    "envelope_rate": [],
+    "bands": [],
+    "training_seconds": [],
+    "latent_knots": [
+     257
+    ],
+    "amplitude_quantiles": [
+     64,
+     257
+    ],
+    "modulation_frequency_hz": [
+     45
+    ],
+    "modulation_cholesky": [
+     45,
+     64,
+     64
+    ],
+    "constant_bands": [
+     64
+    ],
+    "mean_amplitude": [
+     64
+    ],
+    "rms_amplitude": [
+     64
+    ],
+    "metadata_json": [],
+    "radial_reference_quantiles": [
+     257
+    ],
+    "radial_pilot_quantiles": [
+     257
+    ],
+    "radial_correction_strength": [],
+    "radial_calibration_seed": [],
+    "radial_calibration_seconds": [],
+    "audio_sample_rate": [],
+    "reference_rms": [],
+    "source_sha256": [],
+    "source_file": [],
+    "training_start_seconds": [],
+    "training_duration_seconds": [],
+    "renderer_version": [],
+    "audio_bands": [],
+    "envelope_coordinates": []
+   },
+   "source": {
+    "file": "bsb1289.wav",
+    "title": "Rain on concrete",
+    "creator": "Joseph Sardin / BigSoundBank (LaSonotheque)",
+    "licence": "CC0 1.0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source_page": "https://bigsoundbank.com/rain-on-concrete-s1289.html",
+    "sha256": "e4876e37514c40728637c6caaed6068209c00f77b80557752f237bb02c7bdbef",
+    "bytes": 11632858,
+    "format": "pcm_s24le, 48000 Hz, 1 channel",
+    "equipment": "SoundDevices MixPre-3 + Sennheiser ME66",
+    "material": "concrete slab",
+    "recording_conditions": "Outdoor natural rain; source describes big drops on a small concrete slab."
+   },
+   "fit": {
+    "interval_s": [
+     2,
+     38
+    ],
+    "comparison_interval_s": [
+     44,
+     74
+    ],
+    "bands": 64,
+    "envelope_rate_hz": 4000.0,
+    "latent_knots": 257,
+    "renderer_version": 3,
+    "pilot_seed": 17011,
+    "pilot_seconds": 120.0,
+    "channel": "first"
+   },
+   "archive_master": {
+    "seed": 1001,
+    "seconds": 30.0,
+    "samples_sha256": "524f6e1affd595ad7fac1e82817fc05a23ecaad7e27561b047e6a3b070d3f266",
+    "peak": 0.8406974673271179,
+    "rms_dbfs": -35.8761360545995
+   },
+   "recovered_renderer_short_render": {
+    "seed": 1001,
+    "seconds": 3.0,
+    "samples_sha256": "98cb149c74643c1ee4908f5f41c4ccc9908f6760a21a64dd596ca64ba1aff5a2"
+   }
+  },
+  {
+   "surface": "puddles",
+   "file": "puddles.npz",
+   "sha256": "1aca0a5398dd8e272cde5d1980777ec7dd5dfd6e64d0ec7c950ca0c85a778aac",
+   "bytes": 771445,
+   "arrays": {
+    "model_version": [],
+    "envelope_rate": [],
+    "bands": [],
+    "training_seconds": [],
+    "latent_knots": [
+     257
+    ],
+    "amplitude_quantiles": [
+     64,
+     257
+    ],
+    "modulation_frequency_hz": [
+     45
+    ],
+    "modulation_cholesky": [
+     45,
+     64,
+     64
+    ],
+    "constant_bands": [
+     64
+    ],
+    "mean_amplitude": [
+     64
+    ],
+    "rms_amplitude": [
+     64
+    ],
+    "metadata_json": [],
+    "radial_reference_quantiles": [
+     257
+    ],
+    "radial_pilot_quantiles": [
+     257
+    ],
+    "radial_correction_strength": [],
+    "radial_calibration_seed": [],
+    "radial_calibration_seconds": [],
+    "audio_sample_rate": [],
+    "reference_rms": [],
+    "source_sha256": [],
+    "source_file": [],
+    "training_start_seconds": [],
+    "training_duration_seconds": [],
+    "renderer_version": [],
+    "audio_bands": [],
+    "envelope_coordinates": []
+   },
+   "source": {
+    "file": "bsb1290.wav",
+    "title": "Rain on Puddle",
+    "creator": "Joseph Sardin / BigSoundBank (LaSonotheque)",
+    "licence": "CC0 1.0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source_page": "https://bigsoundbank.com/rain-on-puddle-s1290.html",
+    "sha256": "412c59465f8b2c1e0d6f5d44b5a38d3b916347d2de2f38f4c2c360cf6788c06c",
+    "bytes": 11227960,
+    "format": "pcm_s24le, 48000 Hz, 1 channel",
+    "equipment": "SoundDevices MixPre-3 + Sennheiser ME66",
+    "material": "small puddles of water",
+    "recording_conditions": "Outdoor natural rain; source describes big drops on small puddles."
+   },
+   "fit": {
+    "interval_s": [
+     2,
+     38
+    ],
+    "comparison_interval_s": [
+     44,
+     74
+    ],
+    "bands": 64,
+    "envelope_rate_hz": 4000.0,
+    "latent_knots": 257,
+    "renderer_version": 3,
+    "pilot_seed": 17011,
+    "pilot_seconds": 120.0,
+    "channel": "first"
+   },
+   "archive_master": {
+    "seed": 2001,
+    "seconds": 30.0,
+    "samples_sha256": "4a76ff13cb71ddf38105f97fa85dff02672a3c0f927aca0db56282c333765939",
+    "peak": 0.3285636603832245,
+    "rms_dbfs": -35.9982195003758
+   },
+   "recovered_renderer_short_render": {
+    "seed": 2001,
+    "seconds": 3.0,
+    "samples_sha256": "796101fe15a22d7a198f42fa96b39f98be8d5deec56af4a5914a4fd5f0831be9"
+   }
+  },
+  {
+   "surface": "grass-leaves",
+   "file": "grass-leaves.npz",
+   "sha256": "7605c1ffb84fed5dbb5091475464d6c164fb58e808bbef844d3567e99b728ccb",
+   "bytes": 771815,
+   "arrays": {
+    "model_version": [],
+    "envelope_rate": [],
+    "bands": [],
+    "training_seconds": [],
+    "latent_knots": [
+     257
+    ],
+    "amplitude_quantiles": [
+     64,
+     257
+    ],
+    "modulation_frequency_hz": [
+     45
+    ],
+    "modulation_cholesky": [
+     45,
+     64,
+     64
+    ],
+    "constant_bands": [
+     64
+    ],
+    "mean_amplitude": [
+     64
+    ],
+    "rms_amplitude": [
+     64
+    ],
+    "metadata_json": [],
+    "radial_reference_quantiles": [
+     257
+    ],
+    "radial_pilot_quantiles": [
+     257
+    ],
+    "radial_correction_strength": [],
+    "radial_calibration_seed": [],
+    "radial_calibration_seconds": [],
+    "audio_sample_rate": [],
+    "reference_rms": [],
+    "source_sha256": [],
+    "source_file": [],
+    "training_start_seconds": [],
+    "training_duration_seconds": [],
+    "renderer_version": [],
+    "audio_bands": [],
+    "envelope_coordinates": []
+   },
+   "source": {
+    "file": "fs584268.mp3",
+    "title": "Rain on grass and leaves",
+    "creator": "SamsterBirdies",
+    "licence": "CC0 1.0",
+    "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source_page": "https://freesound.org/people/SamsterBirdies/sounds/584268/",
+    "sha256": "b79f9077fe56b5ff84d1cf8de61da53a8f1469f76fdc27045805484a0a4c65f8",
+    "bytes": 4229448,
+    "format": "mp3, 48000 Hz, 2 channels",
+    "equipment": "Tascam DR100mkIII internal unidirectional microphones",
+    "material": "grass and leaves",
+    "recording_conditions": "Natural rain on grass and leaves with quiet splashes; source uploaded 2021-08-21."
+   },
+   "fit": {
+    "interval_s": [
+     44,
+     80
+    ],
+    "comparison_interval_s": [
+     96,
+     126
+    ],
+    "bands": 64,
+    "envelope_rate_hz": 4000.0,
+    "latent_knots": 257,
+    "renderer_version": 3,
+    "pilot_seed": 17011,
+    "pilot_seconds": 120.0,
+    "channel": "first"
+   },
+   "archive_master": {
+    "seed": 3001,
+    "seconds": 30.0,
+    "samples_sha256": "ca78dd773e53a9c07eb28f9b48ee05ff4a9864c1c12c6dfbb1f2bb3fdfb84810",
+    "peak": 0.1569995880126953,
+    "rms_dbfs": -39.207851732401274
+   },
+   "recovered_renderer_short_render": {
+    "seed": 3001,
+    "seconds": 3.0,
+    "samples_sha256": "aa5e3da29f0c2cfcedb516c53472cb153c974ac7a6d910070a60b664a434cfc6"
+   }
+  }
+ ],
+ "stereo_geometry": {
+  "spacing_m": 0.08,
+  "listener_height_m": 1.6,
+  "radius_edges_m": [
+   0.2,
+   2.0,
+   6.0,
+   16.0,
+   40.0
+  ],
+  "latent_envelope_correlation": 0.85,
+  "basis": "Chosen on 13 October among spaced omnidirectional pairs of 0.04-0.24 m by matching the grass recording's power-weighted coherence between channels, seconds 44-80, in 250-1000, 1000-4000 and 4000-12000 Hz; the 0.08 m pair gives 0.656, 0.083 and 0.014 against the recording's 0.496, 0.120 and 0.008. The envelope correlation 0.85 was set from a 15 s pilot. Both are effective rendering values: the recorder's real geometry and directional pickup are unknown."
+ },
+ "producer": {
+  "code": "the rain work's independent/rain_synth.py and copula_texture.py (11 October 2026), ported as visualization/rain-audio/texture.py",
+  "archive": "open-moon-rain-generator.zip, SHA-256 f44c3edf172bc1833eef62b582aefd50d20c8d52198057f753a9df1d8d3986a1",
+  "archive_member_directory": "rain_research/independent/models/"
+ }
+}

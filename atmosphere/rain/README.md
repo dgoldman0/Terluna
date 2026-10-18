@@ -10,18 +10,21 @@ assessment of that day on the research drive, `integration-history-review-2026-1
 files match the original archive (`open-moon-rain-generator.zip`, SHA-256 `f44c3edf…`) byte for byte, and its solver
 matches the hash its checks recorded on 11 October. It comes in cleaned up: the code reads the repository's constants
 and air, its prose follows the project's standards, and its weather is rebound from the old CM1 box to the target
-climates. The rain's sound, which the same work built on this physics, comes next on `domain/atmosphere`.
+climates. The rain's sound, which the same work built on this physics, is rendered from the drops this domain gives
+arriving at the ground by the audio lab [visualization/rain-audio](../../visualization/rain-audio/README.md).
 
 | File | Holds |
 |---|---|
 | [drops.py](drops.py) | The single-drop solver: the air column, equilibrium shape, drag, terminal speed, stability screen, ventilated evaporation and the fall from cloud base to ground |
 | [distributions.py](distributions.py) | Cloud-base gamma spectra, the ledger of what reaches the ground, the collision-encounter diagnostic and arrival fluxes |
 | [product.py](product.py) | The product [results/rain_drops.json](results/rain_drops.json), schema `terluna.atmosphere.rain-drops/1` |
+| [arrivals.py](arrivals.py) | The product [results/rain_arrivals.json](results/rain_arrivals.json), schema `terluna.atmosphere.rain-arrivals/1`: the drops arriving at the ground |
 | [sources.json](sources.json) | The equations' and data's sources, with how far each was read |
 | [vendor/rainprops/](vendor/rainprops/) | Loftus's rainprops at commit `e2df9c2` (MIT licence): the code the solver adapts, with the Gunn–Kinzer fall speeds, unmodified, each file pinned in its `PROVENANCE.json` |
 
 ```sh
 python -m atmosphere.rain.product                 # about three and a half minutes on one thread
+python -m atmosphere.rain.arrivals                # about two minutes
 python -m pytest atmosphere/tests/test_rain_*.py
 ```
 
@@ -120,6 +123,27 @@ ground travels in drops that meet more than one other, so collisions and coalesc
 these shares are a filter on independent drops. CM1's box loses 85% of its falling water to evaporation
 ([climate/crm](../../climate/crm/README.md)), within the range above.
 
+### The drops arriving at the ground
+
+`rain_arrivals.json` keeps the ground's side of the same falls, class by class, for every bounded spectrum: each
+surviving class's size and speed at impact and its drops per square metre per second for each mm/h of rain on the
+ground. For the central spectrum (1.5 mm, shape 3), at 1 mm/h on the ground:
+
+| | Hot world | Resort | Lock |
+|---|---|---|---|
+| Drops arriving per m² per second: Moon; Earth | 151; 294 | 213; 308 | 203; 304 |
+| Their median size and speed: Moon | 1.23 mm, 1.40 m/s | 1.03 mm, 1.18 m/s | 1.09 mm, 1.25 m/s |
+| The same: Earth | 0.93 mm, 3.61 m/s | 0.91 mm, 3.52 m/s | 0.93 mm, 3.54 m/s |
+| Rain leaving the cloud base per mm/h on the ground: Moon; Earth | 58; 1.5 mm/h | 14; 1.3 mm/h | 5.5; 1.2 mm/h |
+
+The Moon's drops arrive shrunk to sizes near Earth's, at about a third of the speed, and fewer of them carry the same
+water. Its rain rate at the ground asks a heavy rain of the cloud base in this column, where coalescence and the rain's
+own moistening of the air would let more water through. A 3 mm drop released at rest 1 m up, as from a leaf, strikes at
+1.59–1.60 m/s on the Moon and 4.01 m/s on Earth; drops of 8–12 mm leaving the cloud base reach the Moon's ground with
+85–97% of their water at 4.8–5.4 m/s, and exceed Earth's stability screen. The airs are the rain product's, so their
+humidity inherits the climate targets' pairing of the GCM's 2 m temperature with its lowest level's humidity, which the
+GCM's output holds as a snapshot at each 3-day window's boundary (`domain/climate` is correcting it).
+
 ### The check on CM1's fall speeds
 
 CM1's Morrison and NSSL schemes slow every raindrop at lunar gravity by one factor, (g / 9.81)^((B + 1)/3) with
@@ -174,5 +198,5 @@ drizzle and millimetre drops; a CM1 run with a size-dependent law would measure 
 - **Independent drops.** Each drop falls alone; the encounter diagnostic shows that on the Moon collisions,
   coalescence and breakup would reshape the spectrum. The stability screen is a size scale for breakup.
 - **The canopy and the impacts.** The recovered work's impact descriptors and canopy water ledger
-  (`physical_event_interface.py`) wait for the rain's sound on this branch and for `biosphere/canopy`, whose
-  interception, storage and drip release they need.
+  (`physical_event_interface.py`) wait for `biosphere/canopy`, whose interception, storage and drip release they need;
+  until then the rain's sound takes an assumed share of the water as drips (rain_arrivals.json gives their falls).
