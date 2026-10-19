@@ -341,14 +341,43 @@ which.
 
 ### Waters
 
-17. **The first seas are fresh, mixed each month, and eutrophic at first.** Weathering alone takes 1,100–87,000 years
-    to bring the seas to 1 g/kg (the resources screen), so unless the delivered water carries salts the living seas
-    begin as fresh to hard waters. Ice delivered fresh would leave them near pH 5.6 and undersaturated in carbonate,
-    so calcifiers cannot build until weathering supplies alkalinity. New reservoirs run eutrophic for a decade
-    (Paterson et al. 2019). The 354-hour heating and cooling give monthly stratification and overturn, which keeps
-    waters oxygenated. Deep crater lakes, with a median depth of 352 m, risk anoxia, and productive shallows run short
-    of oxygen late in the night at the night winds' gas exchange. The living-water guesses take Earth seawater at
-    38.4 g/kg. *Solid if the water arrives fresh; its composition is open.*
+17. **The seas are held fresh, the deep lakes' oxygen rests on how the wind mixes them, and new waters run eutrophic.**
+    The seas' make-up through time is the [sea chemistry](../../research/studies/sea_chemistry/README.md)'s, revised
+    with the groundwater on 14 October: delivered fresh, they start near pH 5.6 and take weathering's carbonate, and
+    the author holds them as hard fresh water near 0.14 g/kg and pH 8.3 (the register's rows of 13 October). New
+    reservoirs run eutrophic for a decade (Paterson et al. 2019). Through ten years of each target's lunar months in a
+    lake model ([the waters' oxygen](../../research/studies/lake_oxygen/README.md), corrected after the independent
+    review of 18 October and rerun with the mixing below the mixed layer driven by the wind, as the author chose that
+    day), the 354-hour nights mix the top of deep crater lakes, median depth 352 m, to 9–14 m even in their calmest
+    cycles, and the share of the wind's energy that Earth's lakes pass below keeps their deep water near neutral. By
+    Osborn's rule for that mixing they turn over every second lunar month in the lock and the resort and every fourth
+    in the hot world, their oligotrophic and mesotrophic deep water oxic in the cooler targets and richer water running
+    low. By Shih and Bouffard's energetic regime, the other end of the mixing's form, they turn over about once a year,
+    oligotrophic deep water keeps its oxygen in the cooler targets and the lock's mesotrophic water keeps 2.9 mg/L, and
+    richer water runs low or anoxic. The very deep lakes, half the lake area, keep anoxic depths in richer water either
+    way. Productive shallows stay above 2 mg/L on almost every night under the wind's share and fall to 1.7–4.0 mg/L
+    at its bracket's fixed dissipation. The living-water guesses take Earth seawater at 38.4 g/kg. *A lake model on one
+    GCM's climate, oxygen demand from Earth's lakes, the stirring set by Earth's measured share of the wind's energy,
+    its range and the mixing's form as brackets.* What the anoxic water does ([lake
+    anoxia](../../research/studies/lake_anoxia/README.md)): methane follows the trophic state, 0.29–0.37 Tg a year
+    oligotrophic to 4.2–23 eutrophic by Osborn's rule and two to four times more in the hot world's eutrophic lakes by
+    the energetic regime, and oligotrophic lakes hold the air under the held 1.87 ppm. No lake in the targets nears a
+    limnic eruption, but an isolated hypolimnion reaches its bubble point 3.5–6.7 times sooner than on Earth, so
+    meromictic and spring-fed lakes and deep new reservoirs are the hazard. Anoxic floors can at most cancel the
+    phosphorus retention. *Arithmetic on the lake model's columns with Earth's rates; Osborn's form, the energetic
+    regime as its other end.* At the resort's 301 K ([the lakes by kind](../../research/studies/lake_kinds/README.md))
+    four of every five lakes, a tenth of the area, are mixed to their floors on most nights by Osborn's rule, the
+    giants hold seven tenths of the area with anoxic depths in mesotrophic and richer water, and chemoclines do not
+    hold under the wind's mixing. The seas ([the seas' oxygen](../../research/studies/sea_oxygen/README.md)) renew
+    their deep water within years by Osborn's rule; by the energetic regime their two largest basins, half their
+    area, go decades without overturning, mesotrophic or even nutrient-poor depths anoxic, and the basins are many
+    Rossby radii across, beyond what one column can hold. *Lake-model columns at 301 K on a first-estimate lake set
+    and the GCM's sea cells; Osborn's form, the energetic regime at a few columns.* Traced through those columns
+    ([lake methane](../../research/studies/lake_methane/README.md)), nutrient-poor lakes and seas send 0.57 Tg of
+    methane a year at 301 K and hold the air at 1.01–1.75 ppm, under the held 1.87 with a thin margin at the methane
+    share's centre; at its high end, or by the energetic regime, they need a removal of up to a few Tg a year or a
+    designed methanotroph community. Richer waters send 7.8 Tg a year mesotrophic and more, most of it from the
+    giants. *An offline tracer on saved columns with Earth's methanotroph rates.*
 18. **The monthly tide makes flats exposed for days.** Ranges of 2.5–3.7 m on shores sloping 1:50–1:100 expose about
     20,000–30,000 km² for days each month, the most productive kind of coast on Earth and a methane and N2O source.
     Low water drifts through the lunar day on the tidal lines' beat of about a year (digest arithmetic). *Rough.*
@@ -424,7 +453,8 @@ forests' leaf area and air, plant twilight and the waters' fines, and the rest w
 | [people.py](people.py) | Its screen, writing [results/people.json](results/people.json); sources in [people_sources.json](people_sources.json) |
 | [taxonomy.md](taxonomy.md) | The taxonomic system: principles, the author's choices, the functional classification, the first register and names for the aerophytes |
 | [taxa.py](taxa.py) | The register as code, writing [results/taxa.json](results/taxa.json) (schema `terluna.biosphere.ecology-taxa/1`); sources in [taxonomy_sources.json](taxonomy_sources.json) |
+| [lake.py](lake.py) | A one-dimensional lake through the lunar month: heat, convective and wind mixing, ice and dissolved oxygen with its demand, debt and respiration's solutes, and the oxygen water holds at saturation; [the waters' oxygen](../../research/studies/lake_oxygen/README.md) runs it in the three targets |
 
 `python -m biosphere.ecology.screen`, `python -m biosphere.ecology.people` and `python -m biosphere.ecology.taxa`
 rewrite the products; `python -m pytest biosphere/tests/test_ecology_screen.py biosphere/tests/test_ecology_people.py
-biosphere/tests/test_taxa.py` checks them.
+biosphere/tests/test_taxa.py biosphere/tests/test_lake.py` checks them and the lake model.

@@ -327,7 +327,13 @@ the integration found next.
 6. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
    round once these details are worked out.
 7. **The wet Moon's methane and nitrogen:** the lakes' methane by depth, with its oxidation in their waters and
-   sediments, and the biomes' nitrogen ending in N2.
+   sediments, and the biomes' nitrogen ending in N2. The lake model was corrected after the review of 18 October and
+   its deep mixing is now driven by the wind (studies/lake_oxygen and lake_anoxia); the methane tracer on its columns
+   counts the giants' own anoxic methane and what their rare overturns release. Done for 301 K on 18 October
+   (studies/lake_methane): nutrient-poor waters fit the held 1.87 ppm with a thin margin at the methane share's centre
+   and need a removal or a designed community beyond it. Follow-ons: giants as new reservoirs and eutrophic giants at
+   1,000 and 3,500 m; a meromictic step strong enough to hold; longer seas tracing; Shih and Bouffard's form at more
+   depths and basins, with the ventilated depth under it.
 8. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
    a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
    storm needs CM1's field solver over terrain, which waits for the author.
@@ -348,6 +354,12 @@ the integration found next.
 16. **CM1's next run** takes the size-dependent lunar rain law from atmosphere/rain, the solver's slowing by gravity
    from 5.3 at 0.1 mm to 1.9 at 6 mm, so that its drizzle falls more slowly and its large drops faster than under
    its present single factor of 2.94.
+17. **A basin-scale model of one crater lake**, to settle the deep mixing's form (Osborn's rule against Shih and
+   Bouffard's energetic regime) and the wind's share, which move the deep lakes' oxygen and methane two- to
+   sevenfold (studies/lake_oxygen, mixing_forms).
+18. **A three-dimensional model of the seas' basins** on their LOLA bathymetry under the GCM's 301 K weather, with
+   the Moon's rotation, the cold ends, sills and slopes, to place the deep water's renewal and oxygen between the
+   columns' bounds (studies/sea_oxygen).
 
 New runs wait on the author's choice of the target climate, and no rented compute is commissioned.
 

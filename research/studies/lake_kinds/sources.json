@@ -1,0 +1,89 @@
+{
+ "source_admission": "Published values the study uses, with how far each was read on 2026-10-18. No outside dataset or full paper is committed; the study's other inputs are the project's committed products (the waters' oxygen, the anoxic depths, climate_targets, the sea chemistry, the springs, geography's drainage and groundwater) and the lake model's own columns. 'read' means the pages holding the values were read; 'abstract' means the abstract or a summary of it; 'secondary' means a later paper or summary quoting it; 'through' names the project study whose sources.json records the reading.",
+ "sources": [
+  {
+   "key": "jellison2024_mono",
+   "citation": "Jellison R, Vignardi C, Melack JM 2024, Mono Lake Limnological Monitoring 2023 Annual Report, Earth Research Institute, University of California Santa Barbara, submitted to the Los Angeles Department of Water and Power, 30 April 2024",
+   "doi_or_url": "https://waterboards.ca.gov/monolake/docs/2026/john-melack-report.pdf",
+   "use": "Mono Lake, a closed soda lake: salinity 69-91 g/kg at 2 m over 1991-2023; meromictic episodes 1982-1988 (6.5 years), 1994-2003 (9.0), 2005-2007 (2.0), 2010-2012 (2.0) and 2017-2020 (3.9), each begun by a rise of the lake's surface of 2.4-8.6 ft (0.7-2.6 m) in a year of high freshwater inflow, with about a 2 ft rise enough at current levels and a larger one needed when the lake was fresher; density stratification from salinity between 2 and 32 m of -2.7 to 15.6 kg/m3 against -0.4 to 5.1 from warmth",
+   "access": "read: chapter 1 and the section on density stratification and meromictic episodes, with its table of episodes"
+  },
+  {
+   "key": "jellison1993",
+   "citation": "Jellison R, Melack JM 1993, Meromixis in hypersaline Mono Lake, California. 1. Stratification and vertical mixing during the onset, persistence, and breakdown of meromixis, Limnology and Oceanography 38(5), 1008-1019; Jellison R, Miller LG, Melack JM, Dana GL 1993, part 2, Nitrogen fluxes, 1020-1039",
+   "doi_or_url": "https://doi.org/10.4319/lo.1993.38.5.1008",
+   "use": "Meromixis began with the large freshwater inflows of 1982-1983 and held until November 1988; ammonium gathered to about 500 uM beneath the chemocline",
+   "access": "abstract of part 2 and summaries; part 1 not reached"
+  },
+  {
+   "key": "noaa_oxymooron",
+   "citation": "NOAA, Oxygen Mooring Observation Network (OxyMoorON), Lake Erie",
+   "doi_or_url": "https://www.noaa.gov/oxygen-mooring-observation-network-oxymooron",
+   "use": "Ten moorings across Lake Erie's central basin, each with six to eight temperature and dissolved oxygen sensors through the water column, logging every 20 minutes from May to September; the scale of an Earth lake's oxygen network for the proposed moorings",
+   "access": "read: the project page"
+  },
+  {
+   "key": "lake_erie_area",
+   "citation": "Michigan Sea Grant, Great Lakes fast facts: Lake Erie",
+   "doi_or_url": "https://www.michiganseagrant.org/topics/great-lakes-fast-facts/lake-erie/",
+   "use": "Lake Erie's surface, 9,910 square miles (25,667 km2); its central basin averages about 18 m deep",
+   "access": "summary"
+  },
+  {
+   "key": "mcbride1975",
+   "citation": "McBride MS, Pfannkuch HO 1975, The distribution of seepage within lakebeds, Journal of Research of the U.S. Geological Survey 3, 505-512",
+   "doi_or_url": "secondary",
+   "use": "Groundwater seepage into a lake falls off exponentially with distance from the shore, so most of it enters in a narrow band near the shore; measured at Lake Sallie, Minnesota",
+   "access": "secondary: as later lake-seepage studies summarise it"
+  },
+  {
+   "key": "abril2005",
+   "citation": "Abril G, Guerin F, Richard S, Delmas R, Galy-Lacaux C, Gosse P et al. 2005, Carbon dioxide and methane emissions and the carbon budget of a 10-year old tropical reservoir (Petit Saut, French Guiana), Global Biogeochemical Cycles 19, GB4007",
+   "doi_or_url": "https://doi.org/10.1029/2005GB002457",
+   "use": "Petit Saut flooded 350 km2 of uncleared tropical forest in 1994-1995; its hypolimnion is anoxic and rich in methane (above 400 uM) below an oxycline near 5 m, and its emissions fall as the flooded soil and biomass are used up",
+   "access": "abstract and summaries"
+  },
+  {
+   "key": "paterson2019",
+   "citation": "Paterson MJ, Beaty KG, Findlay DL, Findlay WJ, Schiff SL, St.Louis VL, Venkiteswaran JJ 2019, Long-term changes in nutrient dynamics and plankton communities following the creation of a new reservoir, Canadian Journal of Fisheries and Aquatic Sciences 76(8), 1459-1469",
+   "doi_or_url": "https://doi.org/10.1139/cjfas-2018-0197",
+   "use": "New reservoirs run eutrophic for their first six to fourteen years, the new-reservoir scenario",
+   "access": "through lake_oxygen: abstract"
+  },
+  {
+   "key": "fukushima2017",
+   "citation": "Fukushima T, Matsushita B, Subehi L, Setiawan F, Wibowo H 2017, Will hypolimnetic waters become anoxic in all deep tropical lakes?, Scientific Reports 7, 45320",
+   "doi_or_url": "https://doi.org/10.1038/srep45320",
+   "use": "Deep tropical lakes are oligomictic; fish die when strong winds bring their oxygen-poor deep water to the surface",
+   "access": "through lake_oxygen: abstract and introduction read"
+  },
+  {
+   "key": "lake_oxygen_scenarios",
+   "citation": "The waters' oxygen study's trophic scenarios: Wetzel (2001), Carlson (1977), Steinsberger et al. (2020), Muller et al. (2012); its transfer velocities (Tedford et al. 2014; Cole & Caraco 1998), respiration's warm kinetics (Yvon-Durocher et al. 2012), the labile pool (Markager et al. 1992) the Lake number (Imberger & Patterson 1990) and the wind's deep mixing (Wuest, Piepke & Van Senden 2000; Gaudard et al. 2017)",
+   "doi_or_url": "through research/studies/lake_oxygen/sources.json",
+   "use": "Oxygen demand by trophic state, fixed by supply, with its brackets on the transfer, on the warm kinetics from the source hypolimnia's 6 C and on the labile pool's 2-7 days; the wind's deep mixing (Wuest, Piepke & Van Senden 2000: 0.3 +/- 0.1% of P10 below the mixed layer, with Wuest & Lorke's 2003 drag as Simstrat takes it), the treatment the author chose, which the Lake number under 1 calls for",
+   "access": "through lake_oxygen"
+  },
+  {
+   "key": "lake_anoxia_remedies",
+   "citation": "The anoxic depths study's gas physics and remedies: Weiss (1970), Yamamoto et al. (1976), Plummer & Busenberg (1982), Vollenweider (1976), Nurnberg (1984, 1997), Lorenzen & Fast (1977), Moore et al. (2015), Kling et al. (2005), the OECD trophic boundaries and Lake Kivu's density coefficients (Schmid et al. 2004)",
+   "doi_or_url": "through research/studies/lake_anoxia/sources.json",
+   "use": "The isolated hypolimnion's bubble point, oxygenation and circulation power, degassing pipes, Vollenweider's permissible load with its settling brackets for lunar gravity and the retention cancelled under anoxic floors at steady state, and the 0.284e-3 per g/kg that dissolved CO2 adds to the density, run at 301 K on this study's columns",
+   "access": "through lake_anoxia"
+  },
+  {
+   "key": "sea_chemistry_soda",
+   "citation": "The sea chemistry study's left-alone path of the fresh seas and its scaling for closed lakes (Hardie & Eugster 1970 for the chemical divides)",
+   "doi_or_url": "through research/studies/sea_chemistry/sources.json",
+   "use": "The years for the left-alone seas to reach 1 g/kg, Earth's salinity and a saturated soda brine by weathering corner, and the waters' turnover of about 1,900 years that a closed lake's own turnover divides",
+   "access": "through sea_chemistry"
+  },
+  {
+   "key": "springs_water",
+   "citation": "The springs study's mature, central springs by band (alkalinity, calcium, magnesium, pH, CO2) and its land water's and rivers' alkalinity",
+   "doi_or_url": "through research/studies/springs/sources.json",
+   "use": "The groundwater's dissolved load against the lakes' 0.04 g/kg, with the weathering's 0.87 mol of silica for each equivalent (sea chemistry) as the upper bracket",
+   "access": "through springs"
+  }
+ ]
+}

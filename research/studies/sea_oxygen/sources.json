@@ -1,0 +1,46 @@
+{
+ "source_admission": "Published values and equations the study uses beyond those it shares with the waters' oxygen study, with how far each was read on 2026-10-18. The shared physics (oxygen at saturation, the mixed layer's energy balance, the diffusivity below it, the light, the bulk fluxes, the transfer velocities and the trophic states' production and demand) is the lake model's and lake_oxygen's, and its sources are research/studies/lake_oxygen/sources.json; the Earth lakes the seas are compared with are lake_anoxia's, research/studies/lake_anoxia/sources.json. No outside dataset or full paper is committed; the study's inputs are the project's committed products (geography's atlas and drainage, climate_targets, sea_chemistry, groundwater uptake, lake_oxygen), LOLA, the GRAIL geoid and the IAU gazetteer as geography fetches them, and the GCM's own output. 'known' means a standard relation or value used as is and not re-read.",
+ "shared": [
+  {
+   "file": "research/studies/lake_oxygen/sources.json",
+   "use": "every source of the lake model's physics, the wind's deep mixing (wuest2000, wuest_lorke2003, gaudard2017) and Osborn's rule that turns it into a diffusivity (osborn1980), the other form of that rule for energetic water that mixing_forms.py runs (shih2005, bouffard_boegman2013), the Lake number's diffusivity (yeates_imberger2003), the labile pool (markager1992) and the trophic states' production and demand, which this study takes through lake_oxygen's physics(), scenarios() and mixing_forms.py"
+  },
+  {
+   "file": "research/studies/lake_anoxia/sources.json",
+   "keys": [
+    "malawi_baikal"
+   ],
+   "use": "Lake Malawi anoxic below about 200-250 m and meromictic; Lake Baikal above 80% of saturation to its 1,642 m floor, renewed by thermobaric downwelling of 10-100 km3 a year: Earth's deep lakes the seas' deep water is set beside"
+  }
+ ],
+ "sources": [
+  {
+   "key": "baines1969",
+   "citation": "Baines WD, Turner JS 1969, Turbulent buoyant convection from a source in a confined region, Journal of Fluid Mechanics 37, 51-80",
+   "doi_or_url": "https://doi.org/10.1017/S0022112069000413",
+   "use": "The filling box: dense water made at one end of a basin sinks to its floor and fills it from below, lifting the older water; the frame for what horizontal exchange does to a sea whose coldest end makes its densest water",
+   "access": "known; not re-read"
+  },
+  {
+   "key": "wuest_lorke2003",
+   "citation": "Wuest A, Lorke A 2003, Small-scale hydrodynamics in lakes, Annual Review of Fluid Mechanics 35, 373-412",
+   "doi_or_url": "https://doi.org/10.1146/annurev.fluid.35.101101.161220",
+   "use": "Mixing in a stratified lake's deep water happens mostly in the boundary layers on its slopes, where basin-scale internal waves break: a process a one-dimensional column does not carry (lake_oxygen's sources hold the same paper for the wind's drag at 10 m)",
+   "access": "known; not re-read"
+  },
+  {
+   "key": "plasim_spectral_orography",
+   "citation": "PlaSim (ExoPlaSim) at T21 holds the surface geopotential as a truncated spectral series; the project's climate/gcm/exoplasim_run.py surface_files() sets each water cell at its water surface before the truncation",
+   "doi_or_url": "climate/gcm/exoplasim_run.py",
+   "use": "Why the GCM's surface pressure at sea cells beside high land lies below the seas' 1.2 atm (1.163-1.207 atm at the cells chosen, against a sea-level pressure of 1.199-1.200 atm in the same output): the truncated series raises the model's surface there",
+   "access": "inferred from the GCM's own surface and sea-level pressures at those cells and the project's code; the spectral truncation known"
+  },
+  {
+   "key": "moon_equator_to_ecliptic",
+   "citation": "The Moon's equator lies 1.5424 degrees from the ecliptic; the synodic month is 29.53059 days (shared/constants.json)",
+   "doi_or_url": "shared/constants.json",
+   "use": "Almost no seasons: the lunar night of about 354 hours is the seas' only regular cooling, and the coldest spell in the record sets their deep water",
+   "access": "the project's constants"
+  }
+ ]
+}

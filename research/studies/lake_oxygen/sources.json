@@ -1,0 +1,250 @@
+{
+ "source_admission": "Published values and equations the study uses, with how far each was read on 2026-10-17. No outside dataset or full paper is committed; the study's other inputs are the project's committed products and the GCM's own output. 'formula checked' means the equation was transcribed from the source and verified by the tests; 'abstract' means the values were read from the abstract or a summary of it; 'secondary' means the value was read in a later paper or summary that quotes it.",
+ "sources": [
+  {
+   "key": "usgs2011_oxygen_solubility",
+   "citation": "U.S. Geological Survey Office of Water Quality 2011, Change to solubility equations for oxygen in water, Technical Memorandum 2011.03 (with S.A. Rounds's attachment)",
+   "doi_or_url": "https://water.usgs.gov/water-resources/memos/documents/WQ.2011.03.pdf",
+   "use": "biosphere/ecology/lake.py oxygen_saturation: Garcia and Gordon's baseline (equations 12-14), Benson and Krause's pressure factor with the vapour pressure and the virial term (equations 9-11), the 1.42905 mg/mL conversion and the stated validity of 0-40 C, 0-40 g/kg and 0.5-1.1 atm; Weiss's salinity factor (equation 3) as an independent check",
+   "access": "formula checked: the memorandum read in full and its equations transcribed"
+  },
+  {
+   "key": "garcia1992",
+   "citation": "Garcia HE, Gordon LI 1992, Oxygen solubility in seawater: better fitting equations, Limnology and Oceanography 37(6), 1307-1312",
+   "doi_or_url": "https://doi.org/10.4319/lo.1992.37.6.1307",
+   "use": "The fit to Benson and Krause's data in mL/L, as the USGS memorandum gives it",
+   "access": "secondary: through the USGS memorandum"
+  },
+  {
+   "key": "benson1984",
+   "citation": "Benson BB, Krause D 1984, The concentration and isotopic fractionation of oxygen dissolved in freshwater and seawater in equilibrium with the atmosphere, Limnology and Oceanography 29(3), 620-632; Benson BB, Krause D 1980, Limnology and Oceanography 25, 662-671",
+   "doi_or_url": "https://doi.org/10.4319/lo.1984.29.3.0620",
+   "use": "The pressure factor and the vapour pressure; the reference O2 mole fraction of dry air, 0.20946",
+   "access": "secondary: through the USGS memorandum"
+  },
+  {
+   "key": "usgs_dotables",
+   "citation": "U.S. Geological Survey DOTABLES, oxygen solubility in fresh water at 760 mm Hg",
+   "doi_or_url": "https://water.usgs.gov/software/DOTABLES/",
+   "use": "Check values: 9.09 mg/L at 20 C, 6.95 mg/L at 35 C and 14.62 mg/L at 0 C",
+   "access": "values as the task states them; reproduced by the fit to 0.005 mg/L"
+  },
+  {
+   "key": "hipsey2019_glm",
+   "citation": "Hipsey MR et al. 2019, A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON), Geoscientific Model Development 12, 473-523",
+   "doi_or_url": "https://doi.org/10.5194/gmd-12-473-2019",
+   "use": "The surface mixed layer's energy balance (equations 41-45: convective overturn and wind stirring against lifting and acceleration) and its coefficients C_K 0.2, C_W 0.23 and C_T 0.51; the bulk coefficients of 0.0013 as a comparison",
+   "access": "formula checked: sections 2.5-2.6 and table 1 read"
+  },
+  {
+   "key": "osborn1980",
+   "citation": "Osborn TR 1980, Estimates of the local rate of vertical diffusion from dissipation measurements, Journal of Physical Oceanography 10, 83-89",
+   "doi_or_url": "https://doi.org/10.1175/1520-0485(1980)010<0083:EOTLRO>2.0.CO;2",
+   "use": "The diffusivity below the mixed layer as a mixing efficiency of 0.2 times the dissipation over the squared buoyancy frequency",
+   "access": "known relation; not re-read"
+  },
+  {
+   "key": "paulson1977",
+   "citation": "Paulson CA, Simpson JJ 1977, Irradiance measurements in the upper ocean, Journal of Physical Oceanography 7, 952-956",
+   "doi_or_url": "https://doi.org/10.1175/1520-0485(1977)007<0952:IMITUO>2.0.CO;2",
+   "use": "The sunlight's near-infrared share, 0.58, absorbed over 0.35 m (water type I)",
+   "access": "known values; not re-read"
+  },
+  {
+   "key": "kell1975",
+   "citation": "Kell GS 1975, Density, thermal expansivity, and compressibility of liquid water from 0 to 150 C, Journal of Chemical and Engineering Data 20(1), 97-105",
+   "doi_or_url": "https://doi.org/10.1021/je60064a005",
+   "use": "The density of fresh water at one atmosphere",
+   "access": "formula checked against 999.97 kg/m3 at 4 C and 998.20 at 20 C"
+  },
+  {
+   "key": "wanninkhof1992",
+   "citation": "Wanninkhof R 1992, Relationship between wind speed and gas exchange over the ocean, Journal of Geophysical Research 97(C5), 7373-7382",
+   "doi_or_url": "https://doi.org/10.1029/92JC00188",
+   "use": "The Schmidt number of O2 in fresh water at 20 C, 530 from the freshwater fit, carried to other temperatures by the Stokes-Einstein scaling",
+   "access": "known fit; not re-read"
+  },
+  {
+   "key": "tedford2014",
+   "citation": "Tedford EW, MacIntyre S, Miller SD, Czikowsky MJ 2014, Similarity scaling of turbulence in a temperate lake during fall cooling, Journal of Geophysical Research: Oceans; applied as in Erkkila et al. (2018) and Kiuru P et al. 2019, Applicability and consequences of the integration of alternative models for CO2 transfer velocity into a process-based lake model, Biogeosciences 16, 3297",
+   "doi_or_url": "https://doi.org/10.5194/bg-16-3297-2019",
+   "use": "The surface-renewal transfer k = c (nu eps)^(1/4) Sc^(-1/2) with c 0.5, eps = 0.56 u*^3/(kappa z) + 0.77 B under cooling and 0.6 u*^3/(kappa z) under heating at z 0.15 m",
+   "access": "formula checked: as Kiuru et al. (2019) set it out (equations 7 and 13)"
+  },
+  {
+   "key": "cole1998",
+   "citation": "Cole JJ, Caraco NF 1998, Atmospheric exchange of carbon dioxide in a low-wind oligotrophic lake measured by the addition of SF6, Limnology and Oceanography 43(4), 647-656",
+   "doi_or_url": "https://doi.org/10.4319/lo.1998.43.4.0647",
+   "use": "The alternative transfer k600 = 2.07 + 0.215 U10^1.7 cm/h, for winds under 9 m/s",
+   "access": "abstract and its summaries"
+  },
+  {
+   "key": "jahne1987",
+   "citation": "Jahne B et al. 1987, On the parameters influencing air-water gas exchange, Journal of Geophysical Research 92(C2), 1937-1949",
+   "doi_or_url": "https://doi.org/10.1029/JC092iC02p01937",
+   "use": "The Schmidt number exponent: -2/3 below 3.7 m/s, -1/2 above",
+   "access": "known rule; not re-read"
+  },
+  {
+   "key": "miller1992",
+   "citation": "Miller MJ, Beljaars ACM, Palmer TN 1992, The sensitivity of the ECMWF model to the parameterization of evaporation from the tropical oceans, Journal of Climate 5, 418-434",
+   "doi_or_url": "https://doi.org/10.1175/1520-0442(1992)005<0418:TSOTEM>2.0.CO;2",
+   "use": "The free-convection transfer over water in unstable air, 0.0016 dtheta^(1/3) m/s, as PlaSim's fluxmod.f90 carries it at Earth's gravity; the study carries it to lunar gravity by (g/g_Earth)^(1/3)",
+   "access": "formula checked: in PlaSim's source (ExoPlaSim 3.4.2 fluxmod.f90); the paper not re-read"
+  },
+  {
+   "key": "wetzel2001",
+   "citation": "Wetzel RG 2001, Limnology: Lake and River Ecosystems, 3rd edition, Academic Press",
+   "doi_or_url": "book",
+   "use": "Primary production by trophic state: oligotrophic 50-300, mesotrophic 250-1,000, eutrophic above 1,000 mg C per m2 a day",
+   "access": "secondary: the ranges as summaries attribute them to Wetzel (2001)"
+  },
+  {
+   "key": "solomon2013",
+   "citation": "Solomon CT et al. 2013, Ecosystem respiration: drivers of daily variability and background respiration in lakes around the globe, Limnology and Oceanography 58(3), 849-866",
+   "doi_or_url": "https://doi.org/10.4319/lo.2013.58.3.0849",
+   "use": "Mean annual gross production and respiration of 0.1-5.0 mg O2 per L a day across the network's lakes, rising with phosphorus: the check on the scenarios' volumetric rates",
+   "access": "abstract"
+  },
+  {
+   "key": "carlson1977",
+   "citation": "Carlson RE 1977, A trophic state index for lakes, Limnology and Oceanography 22(2), 361-369; Poole HH, Atkins WRG 1929, Journal of the Marine Biological Association 16, 297-324",
+   "doi_or_url": "https://doi.org/10.4319/lo.1977.22.2.0361",
+   "use": "Secchi depths by trophic state (oligotrophic beyond 4 m, mesotrophic 2-4 m, eutrophic 0.5-2 m) and the attenuation 1.7 over the Secchi depth",
+   "access": "known index and relation; not re-read"
+  },
+  {
+   "key": "steinsberger2020",
+   "citation": "Steinsberger T, Schwefel R, Wuest A, Muller B 2020, Hypolimnetic oxygen depletion rates in deep lakes: effects of trophic state and organic matter accumulation, Limnology and Oceanography 65, 3128-3138",
+   "doi_or_url": "https://doi.org/10.1002/lno.11578",
+   "use": "Deep European lakes of 48-372 m: sediment oxygen uptake 7.9-10.6 mmol per m2 a day, independent of trophic state; reduced compounds 0.6-3.6; water-column mineralization 2.1-27.4",
+   "access": "abstract"
+  },
+  {
+   "key": "muller2012",
+   "citation": "Muller B, Bryant LD, Matzinger A, Wuest A 2012, Hypolimnetic oxygen depletion in eutrophic lakes, Environmental Science and Technology 46(18), 9964-9971",
+   "doi_or_url": "https://doi.org/10.1021/es301422r",
+   "use": "Eleven eutrophic lakes: areal hypolimnetic mineralization 0.47-1.31 g O2 per m2 a day (mean 0.90), of which a benthic flux of reduced substances 0.37 +- 0.12; it grows with the hypolimnion's thickness up to about 25 m",
+   "access": "abstract"
+  },
+  {
+   "key": "paterson2019",
+   "citation": "Paterson MJ, Beaty KG, Findlay DL, Findlay WJ, Schiff SL, St.Louis VL, Venkiteswaran JJ 2019, Long-term changes in nutrient dynamics and plankton communities following the creation of a new reservoir, Canadian Journal of Fisheries and Aquatic Sciences 76(8), 1459-1469",
+   "doi_or_url": "https://doi.org/10.1139/cjfas-2018-0197",
+   "use": "A new reservoir runs eutrophic for six to fourteen years (ecology's finding 17)",
+   "access": "reported by the literature search of 2026-10-09 (abstract); bibliographic details confirmed 2026-10-17"
+  },
+  {
+   "key": "yvondurocher2012",
+   "citation": "Yvon-Durocher G et al. 2012, Reconciling the temperature dependence of respiration across timescales and ecosystem types, Nature 487, 472-476",
+   "doi_or_url": "https://doi.org/10.1038/nature11205",
+   "use": "Ecosystem respiration's apparent activation energy, 0.62 eV, the same across ecosystem types, lakes among them: the warm-kinetics bound",
+   "access": "abstract"
+  },
+  {
+   "key": "fukushima2017",
+   "citation": "Fukushima T, Matsushita B, Subehi L, Setiawan F, Wibowo H 2017, Will hypolimnetic waters become anoxic in all deep tropical lakes?, Scientific Reports 7, 45320",
+   "doi_or_url": "https://doi.org/10.1038/srep45320",
+   "use": "Deep tropical lakes in Indonesia are oligomictic or meromictic, their oxygen-deficient deep water shoaling; fish die when strong winds bring it up",
+   "access": "abstract and introduction read"
+  },
+  {
+   "key": "kivu_density",
+   "citation": "Schmid M et al. 2004, How hazardous is the gas accumulation in Lake Kivu? Arguments for a risk assessment in light of the Nyiragongo volcano eruption of 2002, Acta Vulcanologica; the density relation rho(T)(1 + beta_S S + beta_CO2 CO2 + beta_CH4 CH4) as later Kivu studies use it (Sommer T et al. 2019, The role of double diffusion for the heat and salt balance in Lake Kivu, Limnology and Oceanography)",
+   "doi_or_url": "https://doi.org/10.1002/lno.11066",
+   "use": "Dissolved CO2's contraction coefficient, 0.284e-3 per g/kg: what respiration's CO2 adds to the deep water's density",
+   "access": "secondary: the coefficient as a summary of the Kivu literature states it; the original not read"
+  },
+  {
+   "key": "langseth1976",
+   "citation": "Langseth MG, Keihm SJ, Peters K 1976, Revised lunar heat-flow values, Proceedings of the 7th Lunar Science Conference, 3143-3171",
+   "doi_or_url": "geography/groundwater_sources.json",
+   "use": "The heat flow through the lake floor, geography's central regional value of 0.015 W/m2",
+   "access": "through geography's groundwater uptake product"
+  },
+  {
+   "key": "markager1992",
+   "citation": "Markager S, Jespersen AM, Madsen TV, Berdalet E, Weisburd R 1992, Diel changes in dark respiration in a plankton community, Hydrobiologia 238, 119-130",
+   "doi_or_url": "https://doi.org/10.1007/BF00048780",
+   "use": "A eutrophic lake's plankton community: dark respiration falls exponentially through the night at a time coefficient of 0.04 an hour towards a near-constant level by the night's end (0.3 an hour in darkened samples during the day), with respiration following the cells' carbohydrate at night; the evidence for respiration running down through a long night, behind the labile pool's 2-7 days (a design bracket, 4 days central)",
+   "access": "abstract"
+  },
+  {
+   "key": "crowe2008",
+   "citation": "Crowe SA, O'Neill AH, Katsev S, Hehanussa P, Haffner GD, Sundby B, Mucci A, Fowle DA 2008, The biogeochemistry of tropical lakes: a case study from Lake Matano, Indonesia, Limnology and Oceanography 53, 319-331",
+   "doi_or_url": "https://doi.org/10.4319/lo.2008.53.1.0319",
+   "use": "Ferruginous Lake Matano: its anoxic water below about 120 m holds 40-120 uM of Fe(II); the iron bracket caps iron reduction's dissolved load at 120 uM with its bicarbonate",
+   "access": "abstract and summaries"
+  },
+  {
+   "key": "plasim_fluxmod",
+   "citation": "ExoPlaSim 3.4.2, plasim/src/fluxmod.f90 (Paradise et al. 2022; PlaSim, Fraedrich et al. 2005)",
+   "doi_or_url": "the GCM's own source in climate/gcm",
+   "use": "tas is dtsa, the lowest level's temperature times sigma(NLEV)^-kappa; the transfer coefficients take the lowest level's height znl, its wind floored at zumin = 1 m/s and its potential temperature and humidity (subroutine surflx, mkshfl and mkevap): the pairing the lakes now take",
+   "access": "formula checked: the source read"
+  },
+  {
+   "key": "review_2026_10_18",
+   "citation": "Independent review of the lake model and the two lake studies, 18 October 2026, kept on the research drive (review-lakes-2026-10-18/findings.md with its check scripts)",
+   "doi_or_url": "research drive",
+   "use": "The surface exchange's pairing, the Lake number and the diffusivity cap, the anaerobic products in the density, the night respiration, the demand's reference temperature and the resolution check's step, all corrected here; its slab and Lake-number scripts are reused; its re-check of the same day (fix_review.md): the spin-up settled at the analysis step, the Lake number at the month's thermocline, the unstable interfaces' diffusivity at least the cap, the iron bracket's CO2 netted off, the solute carried without its density and the warm kinetics kept beside the bounds",
+   "access": "read in full"
+  },
+  {
+   "key": "integration_history_review_2026_10_17",
+   "citation": "Integration history review of 17 October 2026, finding F04 (freshwater oxygen), kept on the research drive (integration-history-review-2026-10-17/assessment.md with its work/scripts/o2_saturation.py)",
+   "doi_or_url": "research drive",
+   "use": "Saturation of 7.14, 7.93 and 8.63 mg/L at the sea medians climate_targets gave then (34.0, 27.7 and 23.0 C) from the same fit, which this study's saturation reproduces to 0.02 mg/L",
+   "access": "read in full"
+  },
+  {
+   "key": "wuest2000",
+   "citation": "Wuest A, Piepke G, Van Senden DC 2000, Turbulent kinetic energy balance as a tool for estimating vertical diffusivity in wind-forced stratified waters, Limnology and Oceanography 45(6), 1388-1400",
+   "doi_or_url": "https://doi.org/10.4319/lo.2000.45.6.1388",
+   "use": "The wind's deep mixing: 0.3 +/- 0.1% of the wind's energy flux P10 = rho_air C10 W10^3, 10 m above the lake, is transferred as turbulent kinetic energy into the stratified water across lakes (0.42% in Lake Alpnach, about 90% of it dissipated in the bottom boundary layer), the central share 0.3% with the bracket 0.2-0.4%; their mixing efficiency 0.15, against the model's 0.2",
+   "access": "abstract and its summaries"
+  },
+  {
+   "key": "wuest_lorke2003",
+   "citation": "Wuest A, Lorke A 2003, Small-scale hydrodynamics in lakes, Annual Review of Fluid Mechanics 35, 373-412",
+   "doi_or_url": "https://doi.org/10.1146/annurev.fluid.35.101101.161220",
+   "use": "The drag coefficient at 10 m over lakes, C10(U10), for P10",
+   "access": "through Gaudard et al. (2017), eq. 5"
+  },
+  {
+   "key": "gaudard2017",
+   "citation": "Gaudard A, Schwefel R, Raman Vinna L, Schmid M, Wuest A, Bouffard D 2017, Optimizing the parameterization of deep mixing and internal seiches in one-dimensional hydrodynamic models: a case study with Simstrat v1.3, Geoscientific Model Development 10, 3411-3423",
+   "doi_or_url": "https://doi.org/10.5194/gmd-10-3411-2017",
+   "use": "Simstrat's C10 relation from Wuest & Lorke (2003), its eq. 5, which the lake model takes; its seiche energy is a share of rho_air C10 U10^3 reduced at high Wedderburn numbers, with no enhancement at low ones",
+   "access": "read: section 2"
+  },
+  {
+   "key": "yeates_imberger2003",
+   "citation": "Yeates PS, Imberger J 2003, Pseudo two-dimensional simulations of internal and boundary fluxes in stratified lakes and reservoirs, International Journal of River Basin Management 1(4), 297-319",
+   "doi_or_url": "https://doi.org/10.1080/15715124.2003.9635214",
+   "use": "DYRESM's hypolimnetic diffusivity, inversely proportional to the Lake number and calibrated on Lake Kinneret and the Canning and Mundaring reservoirs: K = 200 K_M (N^2/N_max^2)/L_N, the Lake-number bracket on the 0-15 lakes",
+   "access": "secondary: the form as the Mono Lake benthic boundary layer study gives it (Saline Systems 4:11, 2008, PMC2535590)"
+  },
+  {
+   "key": "shih2005",
+   "citation": "Shih LH, Koseff JR, Ivey GN, Ferziger JH 2005, Parameterization of turbulent fluxes and scales using homogeneous sheared stably stratified turbulence simulations, Journal of Fluid Mechanics 525, 193-214",
+   "doi_or_url": "https://doi.org/10.1017/S0022112004002587",
+   "use": "The mixing efficiency falling with the buoyancy Reynolds number Re_b = eps/(nu N^2): molecular diffusion below about 7, Osborn's 0.2 at 7-100, and K = 2 nu Re_b^(1/2) above 100, the form mixing_forms.py runs beside Osborn's rule",
+   "access": "the form as the independent review of 18 October gives it (final_review.md) and as Bouffard & Boegman (2013) carry it to lakes; the paper not read"
+  },
+  {
+   "key": "bouffard_boegman2013",
+   "citation": "Bouffard D, Boegman L 2013, A diapycnal diffusivity model for stratified environmental flows, Dynamics of Atmospheres and Oceans 61-62, 14-34",
+   "doi_or_url": "https://doi.org/10.1016/j.dynatmoce.2013.02.002",
+   "use": "Shih et al.'s regimes carried to lakes and other stratified environmental flows, the energetic regime's K = 2 nu Re_b^(1/2)",
+   "access": "as the independent review of 18 October gives it (final_review.md); the paper not read"
+  },
+  {
+   "key": "review_2026_10_18_final",
+   "citation": "Independent review of the lake foundation, 18 October 2026, its last check (review-lakes-2026-10-18/final_review.md with checks/energetic_regime*.py, p10_drag.py and recount_final.py), kept on the research drive",
+   "doi_or_url": "research drive",
+   "use": "Osborn's rule applied at buoyancy Reynolds numbers of 10^3-10^5 and Shih and Bouffard's alternative, the 1,925 m lake's bubble-point basis, the pans' extension of the share and the drag's coverage, all answered here and in mixing_forms.py",
+   "access": "read in full"
+  }
+ ]
+}

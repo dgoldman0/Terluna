@@ -98,8 +98,64 @@ on this laptop. The findings behind them are in the [README](README.md).
      the rivers carry about half the load natural tufa needs and sit at 0.76 times calcite saturation, so lasting
      barriers need builders that calcify from undersaturated water, as freshwater shellfish do, or springs carrying
      twice the rivers' load.
-   - Stratification and oxygen in deep crater lakes.
-   - Monthly plankton cycles, intertidal monthly wetlands, and methane from lakes by depth.
+   - Stratification and oxygen in deep crater lakes, answered on 17 October and rerun on 18 October on the corrected
+     model with the deep mixing driven by the wind, as the author chose that day ([the waters'
+     oxygen](../../research/studies/lake_oxygen/README.md)). The held fresh seas hold 7.06, 7.78 and 8.43 mg/L at
+     saturation in the hot world, the resort and the lock. With the share of the wind's energy that Earth's lakes pass
+     below the mixed layer (0.3%, 0.2–0.4%) and Osborn's rule, 352 m crater lakes turn over in 55–74 of 120 lunar
+     cycles in the lock and the resort and 29–30 in the hot world; their oligotrophic and mesotrophic deep water stays
+     oxic in the cooler targets, eutrophic water keeps 1.9–4.2 mg/L there and runs anoxic half the time in the hot
+     world, and new reservoirs run low. By Shih and Bouffard's energetic regime, the other end of the mixing's form,
+     the 0–15° lake turns over 8–12 times in ten years, oligotrophic deep water keeps 3.4–4.8 mg/L in the cooler
+     targets and the lock's mesotrophic water 2.9 mg/L, and richer water runs low or anoxic. The very deep lakes, half
+     the lake area, turn over about once a year with their richer depths anoxic (Osborn), or once in decades and anoxic
+     throughout (energetic regime). Productive 3 m shallows stay above 2 mg/L on almost every night under the wind's
+     share; at its bracket's fixed dissipation they fall to 1.7–4.0 mg/L, below 2 mg/L on up to 70% of nights in the
+     hot world. A basin-scale model of one crater lake would settle the share and the form.
+   - What the anoxic depths do, answered on 17 October and rerun on 18 October ([lake
+     anoxia](../../research/studies/lake_anoxia/README.md)). By Osborn's rule the lakes would send 0.29–0.37 Tg of
+     methane a year oligotrophic, 2.1–3.9 mesotrophic, 4.2–23 eutrophic and 7.9–52 from new reservoirs, mostly the
+     floors' own bubbles where the overturns keep the depths oxic, against the 39 Tg the domain synthesis's ledger
+     carries. By the energetic regime the hot world's eutrophic lakes send two to four times as much (20–37 Tg with
+     the 0–15° lake standing for all), while oligotrophic and mesotrophic lakes in the cooler targets change little.
+     Oligotrophic lakes hold the air at 0.91–1.7 ppm, under the held 1.87. No lake in the targets nears a limnic
+     eruption; an isolated hypolimnion reaches its bubble point 3.5–6.7 times sooner than on Earth, so meromictic and
+     spring-fed lakes and deep new reservoirs are the hazard. Anoxic floors can at most cancel the phosphorus
+     retention, 10–27 mg/m³ at steady state. Oxygenating the depths takes 3.5–15 kW per km² at the demand, up to 59
+     with the devices' stirring. The giants' own methane is the methane tracer's to settle.
+   - The lakes by kind at the resort's 301 K, answered on 18 October ([the lakes by
+     kind](../../research/studies/lake_kinds/README.md)). By Osborn's rule the nights reach the floors of lakes to
+     168–239 m on half of them, a depth interpolated between the ladder's 100 m and 352 m rungs. Four fifths of the
+     27,865 lakes, a tenth of the area (226,500–629,700 km² across that bracket), are self-ventilated. The deep lakes
+     to 1,000 m, a fifth of the area, turn over in a third to two thirds of the lunar cycles with oxic floors in
+     nutrient-poor water. The giants, seven tenths of the area, turn over about once a year with their mesotrophic and
+     richer depths anoxic, and the deepest go anoxic even in nutrient-poor water. Chemoclines of 0.1–1 kg/m³ at 20 m
+     do not hold under the wind's mixing. Needs: 6,199 profiling moorings for the deep lakes and giants, nutrient
+     limits first, and oxygenation where deep-water life is chosen; degassing does not pay. By the energetic regime
+     the 352 m lake at 301 K turns over a ninth to a quarter as often and its mesotrophic and richer depths go anoxic,
+     so the census leans towards more mixing.
+   - The lakes' and seas' methane at 301 K, answered on 18 October by a tracer on the corrected model's columns ([lake
+     methane](../../research/studies/lake_methane/README.md)). At the methane share's centre, with Earth's
+     methanotroph community and Osborn's form, nutrient-poor lakes and seas send 0.57 Tg a year (the seas 0.42 with
+     their shelves, the lakes 0.15) and hold the air at 1.01–1.75 ppm, under the held 1.87 with 0.35 Tg a year of room
+     at the ledger's high-cost end, which the 3,500 m giant settling anoxic could take most of. At the share's 0.8
+     they need 0.5–2.6 Tg a year of removal; by Shih and Bouffard's form, 0.77 at the high-cost end with Earth's
+     community, while a designed community fits. Mesotrophic waters send 7.8 Tg a year (3.5–4.2 ppm). In mesotrophic
+     and eutrophic lakes the giants make 79–87% of the methane and their oxyclines oxidise 88–99% of what they make.
+     Anaerobic oxidation, mostly by iron, cuts the nutrient-poor methane 37–50% at the high-erosion end of its
+     acceptors' supply and about 5% at the conservation rate.
+   - Monthly plankton cycles and intertidal monthly wetlands.
+   - The seas' deep basins in the lake model, answered on 18 October at 301 K ([the seas'
+     oxygen](../../research/studies/sea_oxygen/README.md)). The seas cover 10.62 million km², 28% of the surface, at
+     a mean depth of 1,009 m, the large ones deep basins joined only above sills of 76–181 m. By Osborn's rule a
+     basin's deep water turns over 20–330 times a century, and the seas' deepest tenth averages 4.1 mg/L
+     oligotrophic, 2.1 mesotrophic (half the area under 0.5) and 1.5 eutrophic. By Shih and Bouffard's form, run at
+     the two largest basins, Procellarum goes 90 years without overturning and keeps at most 1.5 mg/L in
+     nutrient-poor water, and Ingenii goes anoxic in every state. Mesotrophic water leaves half the seas' area under
+     1 mg/L in every column. The large basins are many internal Rossby radii across (6–170 km), so the wind drives
+     upwelling along their shores and waves round them, which a column cannot hold. Shelves and bays keep their
+     median night at 3.7 mg/L or more under the wind's mixing. A three-dimensional basin model would place the deep
+     water between the bounds.
    - Soda lakes, which the author takes as their own local ecosystems (15 October): their communities for the Moon's
      nearly chloride-free soda at a pH near 10, from Earth's soda-lake producers, grazers, birds and the few fish that
      live in them, and how they change as a lake concentrates over its thousands of years.
@@ -108,7 +164,9 @@ on this laptop. The findings behind them are in the [README](README.md).
    - Saltwater life, for which the author leans to aquariums over salt seas: which marine life is kept, and in what
      volumes.
 
-   **How:** a one-dimensional lake model through the lunar month, with the seas' composition as scenarios.
+   **How:** the one-dimensional lake model through the lunar month is built ([lake.py](lake.py)); the monthly plankton,
+   methane, CO2 and phosphorus as tracers of their own (the anoxia study derives them from its oxygen and debt), and the
+   soda lakes' concentration can ride in it, with the seas' composition as scenarios.
 11. **What may live wild.** Pollen and spores spread Moon-wide, and no containment is demonstrated for wild engineered
     organisms. On 12 October the author answered in general terms: no containment, the biomes shaped by climate and the
     parks by manicuring, no hard limits on wild designs, regions kept distinct loosely, and six starting constraints
