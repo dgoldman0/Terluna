@@ -7,39 +7,52 @@ import pytest
 
 from shared.constants import MOON_SURFACE_GRAVITY
 from shared.provenance import constants_changed
-from atmosphere.rain import drops, product as rain
+from atmosphere.rain import drops, product as rain, targets as climate_targets
 
 PRODUCT = json.loads(rain.OUT.read_text())
-TARGETS = json.loads(rain.TARGETS_PRODUCT.read_text())
+DATA, BINDING = climate_targets.load()
+READ = climate_targets.read(DATA)
 WORLDS = ('moon', 'earth', 'moon_air_earth_gravity')
 
 
 def test_header_and_bindings():
+    """The code and the in-tree inputs by hash; the climate targets as targets.py binds them now, from Git at the
+    pinned commit (its sha256 checked as it is read) until the branches meet, in the tree after."""
     assert PRODUCT['schema'] == rain.SCHEMA
     assert PRODUCT['evidence'] and PRODUCT['reading_rule'] and PRODUCT['assumptions']
     producer = PRODUCT['producer']
     assert set(producer['files']) == set(rain.CODE)
-    for path, digest in {**producer['files'], **producer['inputs']}.items():
+    for kind, entries in BINDING.items():
+        assert producer[kind] == entries, kind
+    for path, digest in {**producer['files'], **producer.get('inputs', {})}.items():
         assert hashlib.sha256((rain.ROOT / path).read_bytes()).hexdigest() == digest, path
     assert not constants_changed(producer['constants'])
-    assert TARGETS['schema'] == rain.TARGETS_SCHEMA
+    assert DATA['schema'] == climate_targets.SCHEMA
 
 
 def test_targets_air_reproduces_the_climate_targets():
-    by_name = {t['name']: t for t in TARGETS['targets']}
-    for key, name in rain.TARGETS:
+    for key in rain.TARGETS:
         air = PRODUCT['targets'][key]
-        climate = by_name[name]['climate']
+        climate = READ[key]['climate']
         assert air['air_2m_k'] == pytest.approx(climate['land_air_2m_median_c'] + 273.15, abs=1e-9)
         assert rain.wet_bulb(air['air_2m_k'], air['specific_humidity'], rain.MOON_PRESSURE_PA) == pytest.approx(
             climate['wet_bulb_2m_median_c'] + 273.15, abs=1e-6)
         assert 0.5 < air['relative_humidity'] < 0.75
-    assert [PRODUCT['targets'][k]['air_2m_k'] for k, _ in rain.TARGETS] == sorted(
-        (PRODUCT['targets'][k]['air_2m_k'] for k, _ in rain.TARGETS), reverse=True)
+    assert [PRODUCT['targets'][k]['air_2m_k'] for k in rain.TARGETS] == sorted(
+        (PRODUCT['targets'][k]['air_2m_k'] for k in rain.TARGETS), reverse=True)
+    # The resort is the resort band's candidate at 301 K; the lock is the design case and the hot world the test.
+    row = next(r for r in DATA['resort_band']['rows'] if r['ground_k'] == 301.0)
+    resort = PRODUCT['targets']['resort']
+    assert (resort['held_in'], resort['ground_k'], resort['share_of_the_way']) == (
+        'resort_band.rows', 301.0, row['share_of_the_way'])
+    assert resort['air_2m_k'] == row['comfort']['land_air_2m_median_c'] + 273.15
+    assert resort['wet_bulb_2m_k'] == row['comfort']['wet_bulb_2m_median_c'] + 273.15
+    assert PRODUCT['targets']['lock']['share_of_the_way'] == 0.0
+    assert PRODUCT['targets']['hot_world']['share_of_the_way'] == 1.0
 
 
 def test_values_reproduce_from_the_code():
-    air = rain.target_air(TARGETS)
+    air = rain.target_air(READ)
     assert air == PRODUCT['targets']
     columns = rain.columns(air['resort'])
     speeds = PRODUCT['fall_speed']['resort']
@@ -55,7 +68,7 @@ def test_values_reproduce_from_the_code():
 
 
 def test_fall_speeds_and_survival_hold_together():
-    for key, _ in rain.TARGETS:
+    for key in rain.TARGETS:
         speeds = PRODUCT['fall_speed'][key]
         for world in WORLDS:
             v = [x for x in speeds[world]['terminal_speed_m_s'] if x is not None]
@@ -87,28 +100,31 @@ def test_spectra_hold_on_a_finer_grid():
 
 
 def test_column_sensitivities():
-    """The parcel started at the GCM's lowest level and the repository's heat capacity move the cloud base by tens of
-    metres; the GCM's mean air over land is more stable than the column and implies about 1.155 atm at the ground."""
-    for key, _ in rain.TARGETS:
+    """The column's dry adiabat takes the repository's heat capacity; the parcel started at the GCM's lowest level and
+    the transport model's heat capacity, the recovered solver's, move the cloud base by tens of metres. The GCM's mean
+    air over land is more stable than the column and implies about 1.158 atm at the ground."""
+    for key in rain.TARGETS:
         sens = PRODUCT['column_sensitivity'][key]
-        base = PRODUCT['survival'][key]['moon']['cloud_base_m']
+        moon = PRODUCT['survival'][key]['moon']
+        base = moon['cloud_base_m']
         lowest = sens['lowest_level']
-        assert 850 < lowest['height_m'] < 950 and -40 < lowest['cloud_base_change_m'] < 0
+        assert 850 < lowest['height_m'] < 950 and -30 < lowest['cloud_base_change_m'] < 0
         assert lowest['cloud_base_m'] == pytest.approx(base + lowest['cloud_base_change_m'], abs=1e-6)
-        cp = sens['repository_heat_capacity']
-        assert cp['column_heat_capacity_j_kg_k'] / cp['heat_capacity_j_kg_k'] - 1 == pytest.approx(0.0083, abs=5e-4)
-        assert -0.012 < cp['cloud_base_change_m'] / base < -0.009
-        assert -0.01 < cp['smallest_surviving_change'] <= 0
+        cp = sens['transport_heat_capacity']
+        assert MOON_SURFACE_GRAVITY / cp['column_heat_capacity_j_kg_k'] * 1e3 == pytest.approx(moon['lapse_k_km'])
+        assert cp['heat_capacity_j_kg_k'] / cp['column_heat_capacity_j_kg_k'] - 1 == pytest.approx(0.0083, abs=5e-4)
+        assert 0.009 < cp['cloud_base_change_m'] / base < 0.012
+        assert 0 < cp['smallest_surviving_change'] < 0.01
         air = sens['gcm_land_air']
         assert air['height_km'] == [0.9, 2.0, 5.0]
-        assert 0.7 < air['gcm_lapse_k_km'] < 1.0 < PRODUCT['survival'][key]['moon']['lapse_k_km']
+        assert 0.7 < air['gcm_lapse_k_km'] < 1.0 < moon['lapse_k_km']
         assert 2.5 < air['gcm_air_k'][2] - air['column_air_k'][2] < 4.5
-        assert air['ground_pressure_atm'] == pytest.approx(1.155, abs=0.002)
+        assert air['ground_pressure_atm'] == pytest.approx(1.158, abs=0.002)
 
 
 def test_cm1_check():
     factor = (9.81 / MOON_SURFACE_GRAVITY)**0.6
-    for key, _ in rain.TARGETS:
+    for key in rain.TARGETS:
         check = PRODUCT['cm1_check'][key]
         assert check['cm1_slowing_at_every_size'] == pytest.approx(factor, rel=1e-12)
         assert 1.0 < check['crossing_diameter_mm'] < 1.5

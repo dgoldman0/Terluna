@@ -14,22 +14,24 @@ Moon's rain and brought into the repository on 17 October.
     drops.fall(0.002, column)                # from the cloud base to the ground
 
 Sizes are volume-equivalent diameters in metres, and vertical air speed is positive upward. The air below the cloud
-is hydrostatic under constant gravity, cools linearly with height (by default at the dry-adiabatic rate g/cp) and
-holds a uniform vapour mole fraction, so the cloud base is where that air saturates: a parcel estimate for a
-well-mixed layer. The rain leaves the air's temperature and vapour unchanged, and drops fall independently. The water is
-pure liquid, with the ground between 273.15 and 313.15 K and the cloud base at or above the triple point.
+is hydrostatic under constant gravity, cools linearly with height (by default at the dry adiabat g/cp, with the
+repository's heat capacity of the moist air) and holds a uniform vapour mole fraction, so the cloud base is where that
+air saturates: a parcel estimate for a well-mixed layer. The rain leaves the air's temperature and vapour unchanged,
+and drops fall independently. The water is pure liquid, with the ground between 273.15 and 313.15 K and the cloud base
+at or above the triple point.
 """
 from __future__ import annotations
 
 import math
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.optimize import brentq
 
 from shared.constants import GAS_CONSTANT
-from atmosphere.radiative_convective.thermodynamics import DryAir, MOLAR_MASS, TRIPLE_POINT_K, saturation_pressure
+from atmosphere.radiative_convective.thermodynamics import (CP_VAPOUR, DryAir, MOLAR_MASS, TRIPLE_POINT_K,
+                                                            saturation_pressure)
 
 WATER_MOLAR_MASS = MOLAR_MASS['H2O']
 # Liquid water near ambient temperature: its density at 20 C, held fixed so that a drop's mass rho pi D^3 / 6 is the
@@ -44,9 +46,9 @@ LARGEST_DIAMETER = 0.03                   # m: the solver's upper bound on size
 # Each gas: molar mass (kg/mol), Lennard-Jones collision diameter (angstrom) and well depth over Boltzmann's constant
 # (K), and the coefficients of cp = c0 + c1 t + c2 t^2 + c3 t^3 (kJ/kg/K, t = T / 1000 K), as rainprops tabulates them
 # (its data/gas_properties.csv, after Reid, Prausnitz and Sherwood 1977 and Borgnakke and Sonntag 2009). Argon, about
-# 1% of the dry air, takes nitrogen's transport, heat capacity and molar mass here, which puts the moist air's heat
-# capacity 0.8% above thermodynamics.py's and the column's default dry adiabat g/cp 0.8% below it; the dry air's own
-# molar mass sets the density.
+# 1% of the dry air, takes nitrogen's transport, heat capacity and molar mass here, which puts this heat capacity of
+# the moist air 0.8% above thermodynamics.py's. It enters the Prandtl number of a drop's heat exchange; the column's
+# dry adiabat takes the repository's (moist_heat_capacity), and the dry air's own molar mass sets the density.
 GASES = {
     'N2': (0.0280134, 3.798, 71.4, (1.11, -0.48, 0.96, -0.42)),
     'O2': (0.031998, 3.467, 106.7, (0.88, -0.0001, 0.54, -0.33)),
@@ -111,13 +113,23 @@ def transport(temperature_k, pressure_pa, vapour_fraction, dry_fractions):
     return float(viscosity), float(diffusivity), float(conductivity), float(heat_capacity)
 
 
+def moist_heat_capacity(vapour_mole_fraction, air):
+    """The heat capacity at constant pressure of moist air (J/kg/K) as the repository takes it
+    (atmosphere/radiative_convective/thermodynamics.py): the dry air's, from each gas's molar heat capacity, and the
+    vapour's, weighted by mass."""
+    x = float(vapour_mole_fraction)
+    q = x * WATER_MOLAR_MASS / (x * WATER_MOLAR_MASS + (1 - x) * air.molar_mass)
+    return (1 - q) * air.cp + q * CP_VAPOUR
+
+
 @dataclass(frozen=True)
 class Column:
     """The air a drop falls through.
 
     surface_pressure_pa is the total pressure at the ground; air supplies the dry composition and molar mass (its own
-    pressure is not used). lapse_k_m defaults to the dry adiabat g/cp of the moist air at the ground and cloud_base_m
-    to the height where that air saturates. updraft_m_s is a uniform vertical air speed, positive upward.
+    pressure is not used). lapse_k_m defaults to the dry adiabat g/cp with the repository's heat capacity of the moist
+    air at the ground (moist_heat_capacity), and cloud_base_m to the height where that air saturates. updraft_m_s is a
+    uniform vertical air speed, positive upward.
     """
     gravity_m_s2: float
     surface_pressure_pa: float
@@ -146,7 +158,7 @@ class Column:
             raise ValueError('Vapour above a tenth of the air lies outside the dilute-vapour domain')
         object.__setattr__(self, '_vapour', vapour)
         object.__setattr__(self, '_molar_mass', (1 - vapour) * self.air.molar_mass + vapour * WATER_MOLAR_MASS)
-        cp = transport(self.surface_temperature_k, self.surface_pressure_pa, vapour, self.air.fractions)[3]
+        cp = moist_heat_capacity(vapour, self.air)
         lapse = self.gravity_m_s2 / cp if self.lapse_k_m is None else float(self.lapse_k_m)
         if not (math.isfinite(lapse) and lapse >= 0):
             raise ValueError('The lapse rate must be finite and non-negative')
@@ -200,6 +212,14 @@ class Column:
         out['air'] = dict(fractions=dict(self.air.fractions), molar_mass_kg_mol=self.air.molar_mass)
         out['vapour_mole_fraction'] = self._vapour
         return out
+
+
+def transport_adiabat(column):
+    """The column with its dry adiabat at the transport model's heat capacity at the ground, which carries argon as
+    nitrogen and stands 0.8% above the repository's, and its parcel cloud base: the recovered solver's column of
+    11 October."""
+    cp = column.state(0.0)['heat_capacity_j_kg_k']
+    return replace(column, lapse_k_m=column.gravity_m_s2 / cp, cloud_base_m=None)
 
 
 def axis_ratio(diameter_m, gravity_m_s2, air_density_kg_m3, temperature_k):

@@ -72,8 +72,9 @@ def test_port_reproduces_the_recovered_terminal_speeds(world, recovered):
 
 
 def test_port_reproduces_the_recovered_representative_drops():
-    """The recovered representative-drops.json: cloud drops from the central lunar column and drips from rest."""
-    central = moon(303.106, 0.765, RECOVERED_MOON_AIR)
+    """The recovered representative-drops.json: cloud drops from the central lunar column, with the recovered solver's
+    dry adiabat, and drips from rest."""
+    central = drops.transport_adiabat(moon(303.106, 0.765, RECOVERED_MOON_AIR))
     assert central.cloud_base_m == pytest.approx(3629.772, rel=1e-4)
     assert drops.fall(1e-3, central, sample_heights_m=[central.cloud_base_m, 0])['status'] == 'evaporated'
     for mm, diameter_mm, speed, time in ((1.5, 0.902656, 1.048099, 2438.409), (2.0, 1.620508, 1.790074, 1775.958),
@@ -87,6 +88,20 @@ def test_port_reproduces_the_recovered_representative_drops():
         r = drops.fall(mm * 1e-3, replace(central, cloud_base_m=height), initial_speed_m_s=0.0,
                        sample_heights_m=[height, 0])
         assert r['surface_speed_m_s'] == pytest.approx(speed, rel=1e-3)
+
+
+def test_the_column_takes_the_repositorys_heat_capacity():
+    """The column's dry adiabat takes the moist air's heat capacity as thermodynamics.py gives it. The transport
+    model's, the recovered solver's, carries argon as nitrogen and stands 0.8% higher, which raises the cloud base
+    about 1%: on the Moon at 30 C and 76.5% by 0.84% and 1.04%, on Earth at 20 C and 50% by 0.77% and 0.94%."""
+    for c in (moon(303.106, 0.765), column()):
+        vapour = c.describe()['vapour_mole_fraction']
+        assert c.lapse_k_m == pytest.approx(c.gravity_m_s2 / drops.moist_heat_capacity(vapour, c.air), rel=1e-12)
+        assert drops.moist_heat_capacity(0.0, c.air) == pytest.approx(c.air.cp, rel=1e-12)
+        recovered = drops.transport_adiabat(c)
+        assert recovered.gravity_m_s2 / recovered.lapse_k_m == pytest.approx(c.state(0.0)['heat_capacity_j_kg_k'])
+        assert 0.0075 < c.lapse_k_m / recovered.lapse_k_m - 1 < 0.009
+        assert 0.009 < recovered.cloud_base_m / c.cloud_base_m - 1 < 0.0115
 
 
 def test_stokes_limit():

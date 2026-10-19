@@ -28,14 +28,15 @@ from pathlib import Path
 import numpy as np
 
 from shared.provenance import constants_used
-from atmosphere.rain import distributions, drops, product
+from atmosphere.rain import distributions, drops, product, targets as climate_targets
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 SCHEMA = 'terluna.atmosphere.rain-arrivals/1'
 OUT = HERE / 'results' / 'rain_arrivals.json'
 CODE = ('atmosphere/rain/arrivals.py', 'atmosphere/rain/product.py', 'atmosphere/rain/drops.py',
-        'atmosphere/rain/distributions.py', 'atmosphere/radiative_convective/thermodynamics.py')
+        'atmosphere/rain/distributions.py', 'atmosphere/rain/targets.py',
+        'atmosphere/radiative_convective/thermodynamics.py')
 WORLDS = ('moon', 'earth')
 DRIP_DIAMETERS_MM = (1.0, 2.0, 3.0, 4.0, 5.0)
 DRIP_HEIGHTS_M = (0.25, 0.5, 1.0, 2.0, 4.0)
@@ -56,9 +57,9 @@ READING_RULE = ('Diameters are volume-equivalent, in mm; speeds are downward at 
                 'released at rest; tail gives the falls of 8-12 mm drops from the cloud base, absent where they exceed '
                 'the stability screen.')
 ASSUMPTIONS = [
-    'The columns, airs and spectra are the rain product\'s (results/rain_drops.json): each target\'s 2 m air, the dry '
-    'adiabat and fixed vapour below a parcel cloud base, still air, and the bounded gamma spectra on 64 classes from '
-    '0.1 to 6 mm.',
+    'The columns, airs and spectra are the rain product\'s (results/rain_drops.json): each target\'s 2 m air, the '
+    'resort\'s at 301 K, the dry adiabat at the repository\'s heat capacity and fixed vapour below a parcel cloud '
+    'base, still air, and the bounded gamma spectra on 64 classes from 0.1 to 6 mm.',
     'Drops fall independently, so the arriving spectrum keeps its shape at any rain rate. The rain product\'s '
     'encounter diagnostic finds that on the Moon every surviving drop meets more than one other on the way down, so '
     'collisions and coalescence would reshape it, and at the rates of a shower the rain\'s own moistening of the air '
@@ -81,9 +82,10 @@ def air_at_ground(column) -> dict:
     described = column.describe()
     return dict(gravity_m_s2=column.gravity_m_s2, temperature_k=state['temperature_k'],
                 pressure_pa=state['pressure_pa'], relative_humidity=state['relative_humidity'],
-                vapour_pressure_pa=state['vapour_pressure_pa'], vapour_mole_fraction=described['vapour_mole_fraction'], density_kg_m3=state['density_kg_m3'],
-                dry_fractions=dict(column.air.fractions), dry_molar_mass_kg_mol=column.air.molar_mass,
-                cloud_base_m=column.cloud_base_m, stable_diameter_mm=drops.stable_diameter(column) * 1e3)
+                vapour_pressure_pa=state['vapour_pressure_pa'], vapour_mole_fraction=described['vapour_mole_fraction'],
+                density_kg_m3=state['density_kg_m3'], dry_fractions=dict(column.air.fractions),
+                dry_molar_mass_kg_mol=column.air.molar_mass, cloud_base_m=column.cloud_base_m,
+                stable_diameter_mm=drops.stable_diameter(column) * 1e3)
 
 
 def classes(column):
@@ -166,18 +168,18 @@ def world(column) -> dict:
 
 
 def build() -> dict:
-    targets = json.loads(product.TARGETS_PRODUCT.read_text())
-    air = product.target_air(targets)
+    data, binding = climate_targets.load()
+    air = product.target_air(climate_targets.read(data))
     out = dict(schema=SCHEMA, evidence=EVIDENCE, reading_rule=READING_RULE, assumptions=ASSUMPTIONS,
                grid_mm=list(product.SPECTRUM_GRID_MM),
                spectra=[dict(dm_mm=dm, shape_mu=mu) for dm, mu in product.SPECTRA],
                central_spectrum=dict(dm_mm=product.CENTRAL_SPECTRUM[0], shape_mu=product.CENTRAL_SPECTRUM[1]),
                targets={})
-    for key, name in product.TARGETS:
+    for key in product.TARGETS:
         columns = product.columns(air[key])
-        out['targets'][key] = dict(name_in_targets=name, **{w: world(columns[w]) for w in WORLDS})
-    out['producer'] = dict(domain='atmosphere', files={p: sha256(ROOT / p) for p in CODE},
-                           inputs={str(product.TARGETS_PRODUCT.relative_to(ROOT)): sha256(product.TARGETS_PRODUCT)},
+        out['targets'][key] = dict(name_in_targets=air[key]['name_in_targets'], held_in=air[key]['held_in'],
+                                   **{w: world(columns[w]) for w in WORLDS})
+    out['producer'] = dict(domain='atmosphere', files={p: sha256(ROOT / p) for p in CODE}, **binding,
                            constants=constants_used([ROOT / p for p in CODE]))
     return out
 
@@ -187,7 +189,7 @@ def main(argv=None) -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(result, indent=1, allow_nan=False) + '\n')
     central = (product.CENTRAL_SPECTRUM[0], product.CENTRAL_SPECTRUM[1])
-    for key, _ in product.TARGETS:
+    for key in product.TARGETS:
         line = []
         for w in WORLDS:
             row = next(s for s in result['targets'][key][w]['spectra'] if (s['dm_mm'], s['shape_mu']) == central)

@@ -1,9 +1,9 @@
 # Rain audio
 
 An audio lab for the Open Moon's rain: it renders how rain sounds on concrete, puddles and grass with leaves in the
-three target climates, the hot world, the resort and the lock, beside the same rain on Earth, in mono and in stereo,
-near and far, and how thunder sounds below its flash. The sound starts from Earth rain textures fitted to CC0 field
-recordings, which the author accepted as the listening baseline, and carries them to the Moon with the drops the
+three target climates, the hot world, the resort at 301 K and the lock, beside the same rain on Earth, in mono and in
+stereo, near and far, and how thunder sounds below its flash. The sound starts from Earth rain textures fitted to CC0
+field recordings, which the author accepted as the listening baseline, and carries them to the Moon with the drops the
 atmosphere domain computes arriving at the ground.
 
 It is the rain work of 11–13 October 2026, done in ChatGPT and recovered on 17 October (the assessment of that day on
@@ -22,8 +22,9 @@ python3 visualization/rain-audio/fetch_inputs.py --source <folder>   # the recor
 `pyproject.toml`'s test paths, the refit skipped where the recordings are absent. ffmpeg waits: it is not installed
 here, so the auditions are WAV files, the grass model, fitted from an MP3, is not refitted, and the stereo spacing keeps
 its fit of 13 October; MP3 export and those refits follow once it is. Renders go to the folder given, here ignored by
-Git; those of 17 October are on the research drive in `atmosphere-rain-audio-2026-10-17/renders/`. No one has heard
-them yet.
+Git. Those of 19 October, at the corrected climate targets with the resort at 301 K, are on the research drive in
+`atmosphere-rain-audio-2026-10-19/renders/`, and those of 17 October stay in
+`atmosphere-rain-audio-2026-10-17/renders/`. No one has heard them yet.
 
 ## What it reads
 
@@ -33,7 +34,7 @@ them yet.
 | [atmosphere/electricity/thunder.py](../../atmosphere/electricity/thunder.py) | The air's absorption by ISO 9613-1, its oxygen and nitrogen relaxation scaled to the air's own fractions (`absorption_db_per_m`), and the sound speed in moist air (`sound_speed`) |
 | [research/studies/atmospheric_electricity/results/thunder.json](../../research/studies/atmospheric_electricity/results/thunder.json) (`terluna.research.atmospheric-electricity-thunder/1`) | Each flash's first sound, the span of its sound and the loudest second of each octave band below it |
 | [models/](models/) and [models/models.json](models/models.json) (`terluna.visualization.rain-texture-models/1`) | The three texture models, 2.3 MB, with their sources' hashes, credits and fit intervals, the archive's recorded samples, and the stereo spacing's basis |
-| [atmosphere/rain/results/rain_rates.json](../../atmosphere/rain/results/rain_rates.json) (`terluna.atmosphere.rain-rates/1`) | Each target's rain on the land in the GCM's 3-day means and, from the design case's 6.5-hour years, within them: the wet share of the time and the wet means' quantiles |
+| [atmosphere/rain/results/rain_rates.json](../../atmosphere/rain/results/rain_rates.json) (`terluna.atmosphere.rain-rates/1`) | Each target's rain on the land in the GCM's 3-day means and, from the design case's 6.5-hour years, within them: the wet share of the time and the wet means' quantiles, beside the cut the target's own dimming makes in its mean |
 | [inputs.json](inputs.json) | The three CC0 recordings behind the models, restored by hash from the research drive or the rain work's archive; needed only to refit |
 
 The lab keeps the models in Git as a small product, in keeping with the lane's committed assets of a few megabytes,
@@ -90,25 +91,26 @@ under one envelope stretched to the product's span, each band scaled so its loud
 
 ## What it renders
 
-The renders of 17 October are on the drive with a manifest of every file's hash, level, gain and source. Per target
+The renders of 19 October are on the drive with a manifest of every file's hash, level, gain and source. Per target
 there are comparisons in mono and stereo, Earth's rain, then the Moon's median rainy 6.5 hours, then its heavy one:
 each 12 s passage at the rain work's listening level of −35.4 LUFS (`*-matched.wav`), and the whole 30 s renders with
 one gain, keeping the model's relative levels (`*-shared-gain.wav`). The Moon's heavy rain on concrete plays again with
 1% of its water in 8–12 mm drops, and a patch of heavy rain on grass plays near, middle and far. Across the targets
 each surface has the Earth texture, then the three Moons' median rain, then their heavy rain, at one gain; four thunder
 events play at one gain and each at −23 LUFS. A gain that would lift a true peak above −1 dBFS stops there. The renders
-at a fixed 5 mm/h of earlier that day are kept beside them in `renders-5mm-2026-10-17/`.
+of 17 October, with the resort at 300 K, and those at a fixed 5 mm/h of earlier that day are kept in
+`atmosphere-rain-audio-2026-10-17/`, in `renders/` and `renders-5mm-2026-10-17/`.
 
 The rates, from the rain-rate product (the rain README gives its 3-day means), and the rain arriving at them, central
 spectrum, from the arrivals product:
 
-| | Hot world | Resort | Lock | Earth reference |
+| | Hot world | Resort, 301 K | Lock | Earth reference |
 |---|---|---|---|---|
-| A median rainy 6.5 hours; a heavy one | 0.71; 5.50 mm/h | 0.62; 5.25 mm/h | 0.56; 5.05 mm/h | 5 mm/h |
-| The land's time in wet 6.5-hour means | 12.5% | 10.9% | 9.6% | |
-| Drops arriving per m² per second, per mm/h | 151 | 213 | 203 | 308, in the resort's air |
-| Their median size and speed | 1.23 mm, 1.40 m/s | 1.03 mm, 1.18 m/s | 1.09 mm, 1.25 m/s | 0.91 mm, 3.52 m/s |
-| Rain leaving the cloud base that each rate takes, independent drops | 41; 318 mm/h | 9.0; 76 mm/h | 3.1; 28 mm/h | 6.5 mm/h |
+| A median rainy 6.5 hours; a heavy one | 0.71; 5.50 mm/h | 0.64; 5.29 mm/h | 0.56; 5.05 mm/h | 5 mm/h |
+| The land's time in wet 6.5-hour means | 12.5% | 11.1% | 9.6% | |
+| Drops arriving per m² per second, per mm/h | 154 | 191 | 225 | 305, in the resort's air |
+| Their median size and speed | 1.22 mm, 1.39 m/s | 1.10 mm, 1.26 m/s | 1.02 mm, 1.17 m/s | 0.92 mm, 3.53 m/s |
+| Rain leaving the cloud base that each rate takes, independent drops | 41; 323 mm/h | 12; 100 mm/h | 3.4; 31 mm/h | 6.6 mm/h |
 | A 3 mm drip released from 1 m strikes at | 1.60 m/s | 1.59 m/s | 1.59 m/s | 4.01 m/s |
 
 The transfer and the levels it gives, the Moon at each rate against the Earth reference in the same target's air:
@@ -116,28 +118,40 @@ The transfer and the levels it gives, the Moon at each rate against the Earth re
 | Surface | Target | Transfer at 100 Hz; 1 kHz; 10 kHz: median rain; heavy rain | Moon minus Earth, mono, median; heavy |
 |---|---|---|---|
 | Concrete | Hot world | −14.7; −22.0; −28.6 dB; −5.8; −13.1; −19.6 dB | −26.2; −17.3 dB |
-| | Resort | −16.0; −23.2; −29.7 dB; −6.7; −14.0; −20.5 dB | −27.4; −18.1 dB |
-| | Lock | −17.0; −24.3; −30.7 dB; −7.5; −14.7; −21.2 dB | −28.4; −18.9 dB |
-| Puddles | Hot world | −15.1; −24.6; −28.7 dB; −6.2; −15.7; −19.8 dB | −26.5; −17.6 dB |
-| | Resort | −16.3; −25.8; −29.8 dB; −7.1; −16.5; −20.6 dB | −27.7; −18.5 dB |
-| | Lock | −17.4; −26.8; −30.8 dB; −7.9; −17.3; −21.3 dB | −28.8; −19.2 dB |
-| Grass and leaves | Hot world | −15.4; −22.4; −28.6 dB; −6.4; −13.4; −19.6 dB | −25.2; −16.3 dB |
-| | Resort | −16.5; −23.6; −29.7 dB; −7.2; −14.3; −20.4 dB | −26.4; −17.1 dB |
-| | Lock | −17.4; −24.6; −30.7 dB; −7.9; −15.0; −21.1 dB | −27.4; −17.8 dB |
+| | Resort | −15.7; −23.0; −29.5 dB; −6.5; −13.8; −20.3 dB | −27.2; −18.0 dB |
+| | Lock | −17.0; −24.2; −30.7 dB; −7.4; −14.7; −21.1 dB | −28.4; −18.8 dB |
+| Puddles | Hot world | −15.1; −24.6; −28.7 dB; −6.2; −15.6; −19.7 dB | −26.5; −17.6 dB |
+| | Resort | −16.1; −25.6; −29.6 dB; −6.9; −16.4; −20.4 dB | −27.5; −18.3 dB |
+| | Lock | −17.4; −26.8; −30.8 dB; −7.8; −17.2; −21.2 dB | −28.7; −19.2 dB |
+| Grass and leaves | Hot world | −15.4; −22.4; −28.5 dB; −6.4; −13.4; −19.6 dB | −25.2; −16.3 dB |
+| | Resort | −16.3; −23.3; −29.5 dB; −7.1; −14.2; −20.3 dB | −26.2; −17.0 dB |
+| | Lock | −17.4; −24.5; −30.6 dB; −7.8; −15.0; −21.1 dB | −27.3; −17.8 dB |
 
-The Moon's heavy rain, near the Earth reference's rate, is 16–19 dB quieter than Earth's rain and darker, its highs
-falling 13–14 dB more than its lows, because its drops strike at about a third of Earth's speed: each carries less
-momentum and presses three to four times as long. Its median rainy 6.5 hours, about a ninth of that rate, is 25–29 dB
-below the Earth reference. The hot world is the loudest of the three targets: it rains harder, and its drier, deeper
-fall leaves only larger, faster drops. Loudness falls about 1 LU more than level, and the stereo renders give the same
-differences within 0.1 dB. The Earth texture stands for a slightly different Earth rain in each target's air, and the
-three Earth scenes' force spectra differ by at most 0.45 dB.
+The Moon's heavy rain falls at 5.05–5.50 mm/h, so near the Earth reference's 5 mm/h that the rates themselves differ
+by 0.05–0.4 dB, and its 16–19 dB below the Earth reference is the drops' own physics at nearly equal rain. They strike
+at about a third of Earth's speed, each carries less momentum and presses 3.3–3.4 times as long, so the Moon's rain is
+also darker, its highs falling 13–14 dB more than its lows. Its median rainy 6.5 hours falls at a seventh to a ninth of
+the reference's rate, which takes another 8.5–9.5 dB, so it plays 25–29 dB below the Earth reference. The hot world is
+the loudest of the three targets: it rains harder, and its drier, deeper fall leaves only larger, faster drops.
+Loudness falls about 1 LU more than level, and the stereo renders give the same differences within 0.1 dB. The Earth
+texture stands for a slightly different Earth rain in each target's air, and the three Earth scenes' force spectra
+differ by at most 0.45 dB.
+
+Four things beside the drops set these comparisons. The Moon's rates are means over a T21 cell about 170 km across and
+over 6.5 hours, set against an Earth reference heard at a point, so a listener under a lunar shower hears heavier rain
+than these. The recordings' own rain went unmeasured, and the Earth reference takes the rain work's 5 mm/h for it; at
+another rate every Moon passage would move against the Earth one by ten times the logarithm of the two rates' ratio,
+3 dB for a factor of two. The texture keeps the recording's density of impacts at every rate, so the median rain plays
+as a quieter dense rain: on the Moon it brings 108–126 drops to each square metre a second, against about 1,500 in the
+Earth reference. And the GCM's runs take the design sunlight without the dimming the resort and the lock need, which
+cuts their land's mean rain by 2.5–7.7% and 4.9–16% (rain_rates.json); spread evenly over the rates, that would lower
+their passages by another 0.1–0.7 dB.
 
 The Moon's air, with less oxygen and more nitrogen than Earth's, absorbs about 3.5% more than Earth's mixture would at
 125 Hz and 5–14% less at 4–8 kHz; at 1.2 atm the same humidity holds less vapour. Over 40 m it takes 0.2–0.3 dB at 1 kHz
-and 3.2–4.2 dB at 10 kHz, against 3.7–4.8 dB in Earth's air of the same temperature and humidity. In 30 s on a 4 m²
-patch of heavy rain the large-drop audition carries two drops of 7.8–8.9 mm striking at 4.8–5.1 m/s in each target,
-where 3.8–4.5 are expected; each carries 1,300–2,600 times the impulse of the median arriving drop and stands far above
+and 3.2–4.2 dB at 10 kHz, against 3.7–4.9 dB in Earth's air of the same temperature and humidity. In 30 s on a 4 m²
+patch of heavy rain the large-drop audition carries two drops of 7.8–10.8 mm striking at 4.8–5.2 m/s in each target,
+where 3.8–4.5 are expected; each carries 1,300–4,000 times the impulse of the median arriving drop and stands far above
 the quiet lunar bed.
 
 The thunder events, below their flashes, with central acoustic efficiency:
@@ -165,7 +179,7 @@ In the shared-gain thunder file full scale stands for 23.2 Pa, 121 dB re 20 µPa
 | The thunder layer | Each band's loudest second within 0.01 dB of the product, within 0.5 dB when filtered back out of the whole event; the envelope's span within 1% | Faithfulness to the product |
 | The loudness meter | A full-scale 997 Hz sine at −3.01 LKFS and EBU Tech 3341's first case at −23.0 LUFS | Standard reference readings |
 | The arrivals product (atmosphere/tests/test_rain_arrivals.py) | Survival shares equal the rain product's to 3e-16; each spectrum's fluxes deliver 1 mm/h; drips below the vacuum and terminal speeds | Numerical checks of a runnable calculation |
-| The rain-rate product (atmosphere/tests/test_rain_rates.py) | The runs' and the targets' land rain equal the climate targets' to 1e-9; the 6.5-hour years averaged in elevens match the design case's own 3-day means within 0.8% to the 99th percentile | Statistics of the GCM's output |
+| The rain-rate product (atmosphere/tests/test_rain_rates.py) | The runs' and the targets' land rain equal the climate targets' to 1e-9; the 6.5-hour years averaged in elevens match the design case's own 3-day means in distribution, within 0.8% to the 99th percentile | Statistics of the GCM's output |
 
 The lunar sound itself is a rendering of an assumed transfer: no lunar rain has been heard, and listening judges it.
 
@@ -192,19 +206,19 @@ layer gave way to the rain generator. The drive catalogues these records
 ## Assumptions and limits
 
 - **The drops.** The bounded cloud-base spectra are scenario boundary conditions, and the drops fall independently in
-  the rain product's parcel column. At the heavy rates that column asks 28–318 mm/h of the cloud base, where
+  the rain product's parcel column. At the heavy rates that column asks 31–323 mm/h of the cloud base, where
   coalescence and the rain's own moistening of the air would let more through; the rain product's encounter diagnostic
   says collisions would reshape the arriving spectrum.
 - **The humidity.** Each target's air at 2 m comes through the arrivals product from the climate targets' wet-bulb
   temperature at 2 m, which pairs the GCM's 2 m air temperature over each 3-day window with the lowest level's specific
-  humidity. In the GCM's output files that humidity (`hus`) is a single-step snapshot at each window's boundary, and
-  `domain/climate` is correcting it. The humidity sets the cloud base, how much of each drop evaporates on the way down
-  and the air's absorption; the products keep it as it stands until the integration.
+  humidity over the model's own land. The output holds that humidity (`hus`) as a snapshot at each window's first step,
+  and the climate targets take each window's as the mean of the records at its start and its end. The humidity sets the
+  cloud base, how much of each drop evaporates on the way down and the air's absorption.
 - **The rain rates.** The Moon's are the GCM's: means over a T21 cell about 170 km across and over 6.5 hours, so rain
   at a point under a shower falls harder and for less time. Only the design case wrote every 6.5 hours, so the hot
-  world and the resort take its ratios of 6.5-hour to 3-day rain. The Earth texture stands for 5 mm/h, and at every
-  rate its timing keeps the recording's statistics: a lighter rain is quieter with the texture's own density of
-  fluctuations.
+  world and the resort take its ratios of 6.5-hour to 3-day rain. The runs carry no dimming; the resort's and the
+  lock's would cut their mean rain by 2.5–16%. The Earth texture stands for 5 mm/h, and at every rate its timing keeps
+  the recording's statistics: a lighter rain is quieter with the texture's own density of fluctuations.
 - **The force pulse.** Its gamma shape, its widths of 0.24, 0.32 and 0.44 D/U and the puddles' factor of 1.6 are
   declared approximations. Incident momentum stands for the impulse delivered, and the surface's response to force and
   the path to the microphone are taken as the same on Earth and the Moon, so they cancel in the ratio; this holds best

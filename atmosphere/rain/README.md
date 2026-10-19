@@ -17,16 +17,17 @@ arriving at the ground by the audio lab [visualization/rain-audio](../../visuali
 |---|---|
 | [drops.py](drops.py) | The single-drop solver: the air column, equilibrium shape, drag, terminal speed, stability screen, ventilated evaporation and the fall from cloud base to ground |
 | [distributions.py](distributions.py) | Cloud-base gamma spectra, the ledger of what reaches the ground, the collision-encounter diagnostic and arrival fluxes |
-| [product.py](product.py) | The product [results/rain_drops.json](results/rain_drops.json), schema `terluna.atmosphere.rain-drops/1` |
+| [product.py](product.py) | The product [results/rain_drops.json](results/rain_drops.json), schema `terluna.atmosphere.rain-drops/2` |
 | [arrivals.py](arrivals.py) | The product [results/rain_arrivals.json](results/rain_arrivals.json), schema `terluna.atmosphere.rain-arrivals/1`: the drops arriving at the ground |
 | [rates.py](rates.py) | The product [results/rain_rates.json](results/rain_rates.json), schema `terluna.atmosphere.rain-rates/1`: the GCM's rain rates on each target's land |
+| [targets.py](targets.py) | The three target climates as the products read them from the climate targets' product: the hot world, the resort at 301 K and the lock, and that product's binding, by commit on `domain/climate` until the branches meet |
 | [sources.json](sources.json) | The equations' and data's sources, with how far each was read |
 | [vendor/rainprops/](vendor/rainprops/) | Loftus's rainprops at commit `e2df9c2` (MIT licence): the code the solver adapts, with the Gunn–Kinzer fall speeds, unmodified, each file pinned in its `PROVENANCE.json` |
 
 ```sh
 python -m atmosphere.rain.product                 # about three and a half minutes on one thread
 python -m atmosphere.rain.arrivals                # about two minutes
-climate/gcm/.venv/bin/python -m atmosphere.rain.rates   # seconds; reads the GCM's output with netCDF4
+climate/gcm/.venv/bin/python -m atmosphere.rain.rates   # about ten seconds; reads the GCM's output with netCDF4
 python -m pytest atmosphere/tests/test_rain_*.py
 ```
 
@@ -41,18 +42,22 @@ drag and ventilation. The air's viscosity, conductivity and vapour diffusivity c
 mixed by Wilke's rule (Reid, Prausnitz and Sherwood 1977), so the Moon's air, with less oxygen in a denser column,
 takes its own values. These are the equations of Loftus and Wordsworth (2021) as their code implements them.
 
-The port changes three things from the recovered solver, each named in its code. The saturation pressure is the
+The port changes four things from the recovered solver, each named in its code. The saturation pressure is the
 repository's (Wagner and Pruss 2002), where the recovered copy dropped a digit from one coefficient. The surface
 tension takes the IAPWS coefficient of 235.8 mN/m and critical temperature, where rainprops carries 235 mN/m, which
 read 0.3% low at 20 °C. The gas constant and gravities come from [shared/constants.json](../../shared/constants.json).
-Together they move fall speeds by at most 0.08% (at 6 mm on Earth) and fall times by at most 0.03%.
+Together these three move fall speeds by at most 0.08% (at 6 mm on Earth) and fall times by at most 0.03%. The fourth,
+as the author decided on 17 October, gives the column's dry adiabat the repository's heat capacity of the moist air
+([thermodynamics.py](../radiative_convective/thermodynamics.py)). The recovered solver took the gas-transport model's,
+which carries argon, 1% of the air, as nitrogen and stands 0.8% higher, so its cloud bases sit about 1% higher
+(`drops.transport_adiabat` gives its column).
 
 ## Checks
 
 | Check | Result | Evidence state |
 |---|---|---|
 | Earth's fall speeds: 34 Gunn–Kinzer measurements, 0.1–5.8 mm, in air at 20 °C and 50% humidity | 0.200 m/s root mean square and 7.43% at most (at 0.1 mm); the solver runs 2.6–6.4% slow from 0.6 to 2.4 mm, most at 1 mm | Empirical validation on Earth |
-| The recovered solver's saved speeds, drops and drips, on its own inputs | Within 0.08% in speed and 0.03% in fall time | Reproduction of the original |
+| The recovered solver's saved speeds, drops and drips, on its own inputs and column | Within 0.08% in speed and 0.03% in fall time | Reproduction of the original |
 | Stokes limit: drops of 2–10 µm | Within 0.5% of (ρw − ρa) g D² / 18μ, falling as g and as D² | Physical limit |
 | Inertial regime: rigid 6 mm spheres | Slowed by lunar gravity 2.47–2.49 times, against √(9.81/1.62) = 2.46 | Physical limit |
 | The stability screen | Grows 2.46 times at lunar gravity, as g^(−1/2) (Loftus and Wordsworth 2021) | Physical scaling |
@@ -64,22 +69,25 @@ ventilation law: both are runnable calculations.
 
 ## Results
 
-The air at 2 m is each target's median over land in the
-[climate targets](../../research/studies/climate_targets/README.md), whose 2 m state is the GCM's lowest level,
-0.88–0.91 km up, carried down to the ground: their 2 m temperature is that level's on the dry adiabat, 1.42–1.47 K
-warmer in the medians, and their extractor computes the 2 m wet-bulb temperature from that level's specific humidity,
-capped at saturation. The GCM's output holds that humidity as one step at each 3-day window's boundary, which
-`domain/climate` is correcting. Each target here pairs the two medians, and the humidity inverts the extractor's
-wet-bulb relation at 1.2 atm, where the extractor used each cell's own surface pressure; that moves the vapour pressure
-by 0.6%. Started from the lowest level itself, the parcel's cloud base comes 21–30 m lower (`column_sensitivity`).
+The air at 2 m is each target's median over the model's own land in the
+[climate targets](../../research/studies/climate_targets/README.md), `domain/climate`'s corrected product of
+19 October (schema `/5`), which [targets.py](targets.py) reads from Git at its commit, checking its SHA-256, until the
+branches meet. The hot world and the lock are its targets; the resort is its resort band's candidate at 301 K, where
+the author set it on 18 October, 52% of the way from the design case to the test. Their 2 m state is the GCM's lowest
+level, 0.88–0.91 km up, carried down to the ground: their 2 m temperature is that level's on the dry adiabat,
+1.42–1.47 K warmer in the medians, and their extractor computes the 2 m wet-bulb temperature from that level's specific
+humidity, capped at saturation, each 3-day mean's humidity the mean of the records at its start and its end. Each
+target here pairs the two medians, and the humidity inverts the extractor's wet-bulb relation at 1.2 atm, where the
+extractor used each cell's own surface pressure; at the land's mean pressure the vapour pressure would stand 0.6–0.7%
+higher. Started from the lowest level itself, the parcel's cloud base comes 12–20 m lower (`column_sensitivity`).
 The Moon's air is the design air at 1.2 atm, with Earth's oxygen partial pressure (21,227 Pa) and 400 ppm of CO2
 (`earthlike_air` in [thermodynamics.py](../radiative_convective/thermodynamics.py)). Earth's air is at 1 atm, with the
 same temperature and relative humidity.
 
-| | Hot world | Resort | Lock |
+| | Hot world | Resort, 301 K | Lock |
 |---|---|---|---|
-| Air at 2 m over land: median temperature; relative humidity | 33.5 °C; 58% | 26.1 °C; 62% | 20.4 °C; 67% |
-| Air density: Moon; Earth | 1.362; 1.138 kg/m³ | 1.400; 1.170 kg/m³ | 1.429; 1.195 kg/m³ |
+| Air at 2 m over land: median temperature; relative humidity | 33.6 °C; 58% | 27.3 °C; 61% | 20.4 °C; 66% |
+| Air density: Moon; Earth | 1.362; 1.138 kg/m³ | 1.394; 1.165 kg/m³ | 1.429; 1.195 kg/m³ |
 
 ### Fall speed
 
@@ -87,18 +95,18 @@ In still air at 2 m, in m/s:
 
 | Diameter | Moon, hot world | Moon, resort | Moon, lock | Earth, the resort's air |
 |---|---|---|---|---|
-| 0.2 mm | 0.155 | 0.156 | 0.157 | 0.710 |
+| 0.2 mm | 0.155 | 0.156 | 0.157 | 0.709 |
 | 0.5 mm | 0.556 | 0.556 | 0.556 | 2.03 |
-| 1 mm | 1.158 | 1.152 | 1.149 | 3.79 |
-| 2 mm | 2.14 | 2.12 | 2.11 | 6.31 |
-| 3 mm | 2.92 | 2.90 | 2.88 | 7.83 |
-| 6 mm | 4.43 | 4.39 | 4.36 | 9.24 |
+| 1 mm | 1.158 | 1.153 | 1.148 | 3.80 |
+| 2 mm | 2.14 | 2.13 | 2.11 | 6.32 |
+| 3 mm | 2.92 | 2.90 | 2.88 | 7.84 |
+| 6 mm | 4.43 | 4.40 | 4.36 | 9.26 |
 | 10 mm | 5.21 | 5.16 | 5.11 | above the screen |
 | Stability screen | 16.2 mm | 16.3 mm | 16.4 mm | 6.6 mm |
 
 Drops on the Moon also keep rounder: a 6 mm drop is 0.88 as tall as it is wide, against 0.65 on Earth. The hot
 world's warmer air is 5% less dense than the lock's, so its large drops fall 2% faster. At 1.16 atm, the GCM's global
-mean surface pressure and close to the 1.155 atm its air implies over land, the resort's drops fall 0.2% (0.1 mm) to
+mean surface pressure and close to the 1.158 atm its air implies over land, the resort's drops fall 0.2% (0.1 mm) to
 1.6% (6 mm) faster than at 1.2 atm (`pressure_sensitivity`).
 
 ### Survival below the cloud
@@ -109,26 +117,27 @@ saturates. Under lunar gravity that air cools 1.6 K per km as it rises, six time
 the same temperature and humidity saturates six times higher. The column stands for the daytime convective mixed layer
 under a raining cell, which CM1's box finds 8–10 km deep at 65–75% humidity
 ([climate/crm](../../climate/crm/README.md)); the GCM's mean air over land, through day and night, cools only
-0.76–0.92 K per km between 0.9 and 5 km and stands 2.8–4.0 K warmer than the column at 5 km (`column_sensitivity`). The
+0.74–0.91 K per km between 0.9 and 5 km and stands 2.9–4.1 K warmer than the column at 5 km (`column_sensitivity`). The
 rain neither cools nor moistens the column: rain falling through air its own evaporation has moistened would lose less,
 and a cloud base below the parcel height would shorten the fall. Gravity holds its surface value, 0.85% above its value
-at 7.4 km. The dry adiabat takes the gas-transport model's heat capacity, which carries argon, 1% of the air, as
-nitrogen and so stands 0.8% above the repository's (`thermodynamics.py`); with the repository's, the cloud bases sit
-49–78 m (1.0%) lower and the smallest surviving drop 0.3–0.6% smaller (`column_sensitivity`).
+at 7.4 km. The dry adiabat takes the repository's heat capacity of the moist air (`thermodynamics.py`), as the author
+decided on 17 October. With the gas-transport model's, which the recovered solver took and which stands 0.8% higher,
+the cloud bases would sit 51–78 m (1.0–1.1%) higher and the smallest surviving drop 0.3–0.6% larger
+(`column_sensitivity`).
 
-| | Hot world | Resort | Lock |
+| | Hot world | Resort, 301 K | Lock |
 |---|---|---|---|
-| Cloud base: Moon; Earth | 7.42 km; 1.23 km | 6.09 km; 1.01 km | 4.96 km; 0.82 km |
-| Smallest drop reaching the ground: Moon; Earth | 2.42 mm; 0.75 mm | 1.93 mm; 0.61 mm | 1.53 mm; 0.50 mm |
-| Water reaching the ground, mean drop 0.75 mm: Moon; Earth | 0%; 20–26% | 0–0.3%; 36–40% | 0.3–1.7%; 53–55% |
-| The same, mean drop 1.5 mm | 1.7–4.6%; 65–66% | 6.9–12%; 76–77% | 18–24%; 84–86% |
-| The same, mean drop 2.5 mm | 19–22%; 83–86% | 35–37%; 89–91% | 52%; 93–94% |
-| Encounters on the way down, central spectrum: Moon; Earth | 36; 1.3 | 26; 1.1 | 22; 0.9 |
+| Cloud base: Moon; Earth | 7.40 km; 1.22 km | 6.36 km; 1.05 km | 5.10 km; 0.84 km |
+| Smallest drop reaching the ground: Moon; Earth | 2.43 mm; 0.75 mm | 2.03 mm; 0.64 mm | 1.58 mm; 0.51 mm |
+| Water reaching the ground, mean drop 0.75 mm: Moon; Earth | 0–0.03%; 20–26% | 0.01–0.2%; 33–37% | 0.2–1.4%; 51–53% |
+| The same, mean drop 1.5 mm | 1.7–4.6%; 65–66% | 5.3–9.9%; 74–75% | 16–22%; 83–85% |
+| The same, mean drop 2.5 mm | 18–22%; 83–85% | 31–33%; 88–90% | 50%; 93–94% |
+| Encounters on the way down, central spectrum: Moon; Earth | 34; 1.4 | 29; 1.1 | 21; 0.9 |
 
 A 1 mm drop leaves the cloud base at 1.2 m/s and evaporates after 56–62 minutes, 2.8–3.1 km below it. The spectra are
 the rain work's bounded set: gamma concentrations at the cloud base with mass-weighted mean diameters of 0.75, 1.5 and
 2.5 mm, each range spanning shape parameters 0 and 3, on 64 classes from 0.1 to 6 mm; on twice as many classes the
-resort's shares move by at most 0.014 percentage points (`grid_check`). With independent drops the share reaching the
+resort's shares move by at most 0.015 percentage points (`grid_check`). With independent drops the share reaching the
 ground is the same at any rain rate. The encounters are the expected number of drops each surviving
 drop's path meets (geometric kernel, efficiency 1), weighted by the water reaching the ground, for the central
 spectrum (1.5 mm, shape 3) at 5 mm/h; they grow in proportion to the rain rate. On the Moon all the water reaching the
@@ -142,54 +151,60 @@ these shares are a filter on independent drops. CM1's box loses 85% of its falli
 surviving class's size and speed at impact and its drops per square metre per second for each mm/h of rain on the
 ground. For the central spectrum (1.5 mm, shape 3), at 1 mm/h on the ground:
 
-| | Hot world | Resort | Lock |
+| | Hot world | Resort, 301 K | Lock |
 |---|---|---|---|
-| Drops arriving per m² per second: Moon; Earth | 151; 294 | 213; 308 | 203; 304 |
-| Their median size and speed: Moon | 1.23 mm, 1.40 m/s | 1.03 mm, 1.18 m/s | 1.09 mm, 1.25 m/s |
-| The same: Earth | 0.93 mm, 3.61 m/s | 0.91 mm, 3.52 m/s | 0.93 mm, 3.54 m/s |
-| Rain leaving the cloud base per mm/h on the ground: Moon; Earth | 58; 1.5 mm/h | 14; 1.3 mm/h | 5.5; 1.2 mm/h |
+| Drops arriving per m² per second: Moon; Earth | 154; 295 | 191; 305 | 225; 307 |
+| Their median size and speed: Moon | 1.22 mm, 1.39 m/s | 1.10 mm, 1.26 m/s | 1.02 mm, 1.17 m/s |
+| The same: Earth | 0.93 mm, 3.61 m/s | 0.92 mm, 3.53 m/s | 0.92 mm, 3.52 m/s |
+| Rain leaving the cloud base per mm/h on the ground: Moon; Earth | 59; 1.5 mm/h | 19; 1.3 mm/h | 6.1; 1.2 mm/h |
 
 The Moon's drops arrive shrunk to sizes near Earth's, at about a third of the speed, and fewer of them carry the same
 water. Its rain rate at the ground asks a heavy rain of the cloud base in this column, where coalescence and the rain's
 own moistening of the air would let more water through. A 3 mm drop released at rest 1 m up, as from a leaf, strikes at
-1.59–1.60 m/s on the Moon and 4.01 m/s on Earth; drops of 8–12 mm leaving the cloud base reach the Moon's ground with
-85–97% of their water at 4.8–5.4 m/s, and exceed Earth's stability screen. The airs are the rain product's, so their
-humidity inherits the climate targets' pairing of the GCM's 2 m temperature with its lowest level's humidity, which the
-GCM's output holds as a snapshot at each 3-day window's boundary (`domain/climate` is correcting it).
+1.59–1.60 m/s on the Moon and 4.01–4.02 m/s on Earth; drops of 8–12 mm leaving the cloud base reach the Moon's ground
+with 85–97% of their water at 4.8–5.4 m/s, and exceed Earth's stability screen. The airs are the rain product's, so
+their humidity is the climate targets' pairing of the GCM's 2 m temperature with its lowest level's humidity, each
+3-day mean's from the records at its start and its end.
 
 ### Rain rates on the land
 
-`rain_rates.json` reads the GCM's rain, a true mean over each output window, on the land of the two runs behind the
-climate targets, each cell weighed by its land area, and sets each target between them as the targets do. A mean is
-wet at 0.1 mm/h or more. The design case's two years written every 6.5 hours (`A28_corrected_970_eddies`) give the
-weather within the 3-day means, and each target's 6.5-hour figures take the design case's ratios of the two:
+`rain_rates.json` reads the GCM's rain, a true mean over each output window (ExoPlaSim's `outmod.f90` sums it at every
+step, divides by the steps as it writes and starts again), on the land of the two runs behind the climate targets, each
+cell weighed by its land area, and sets each target between them as the targets do: the lock is the design case, the
+hot world the test and the resort at 301 K 52% of the way between them. A mean is wet at 0.1 mm/h or more. The design
+case's two years written every 6.5 hours (`A28_corrected_970_eddies`) give the weather within the 3-day means, and each
+target's 6.5-hour figures take the design case's ratios of the two:
 
-| Land rain | Hot world | Resort | Lock |
+| Land rain | Hot world | Resort, 301 K | Lock |
 |---|---|---|---|
-| Mean | 3.34 mm/day | 2.72 mm/day | 2.25 mm/day |
-| 3-day means: wet share of the time; wet median; 99th percentile | 24%; 0.39; 2.48 mm/h | 21%; 0.35; 2.36 mm/h | 18%; 0.31; 2.28 mm/h |
-| 6.5-hour means: the same | 12.5%; 0.71; 5.50 mm/h | 10.9%; 0.62; 5.25 mm/h | 9.6%; 0.56; 5.05 mm/h |
+| Mean | 3.34 mm/day | 2.82 mm/day | 2.25 mm/day |
+| 3-day means: wet share of the time; wet median; 99th percentile | 24%; 0.39; 2.48 mm/h | 21%; 0.35; 2.38 mm/h | 18%; 0.31; 2.28 mm/h |
+| 6.5-hour means: the same | 12.5%; 0.71; 5.50 mm/h | 11.1%; 0.64; 5.29 mm/h | 9.6%; 0.56; 5.05 mm/h |
+| Mean with the dimming's own cut | 3.34 mm/day | 2.60–2.75 mm/day | 1.90–2.14 mm/day |
 
-The 3-day means smooth the rain into spells nearly twice as common and about half as hard: in the design case the land
-is wet in 18.4% of its 3-day means and 9.7% of its 6.5-hour means, and the 6.5-hour wet median is 1.8 times the 3-day
-one, its 99th percentile 2.2 times and its largest 2.3 times (14.3 against 6.3 mm/h over the same two years). The
-6.5-hour years averaged eleven at a time match the design case's own 3-day output over its years 10–19 within 0.8% at
-the wet share and every quantile to the 99th. Every figure is a mean over a T21 cell, about 170 km across: rain at a
-point under a shower falls harder and for less time.
+The 3-day means smooth the rain into spells nearly twice as common and about half as hard: over the design case's two
+years written every 6.5 hours the land is wet in 18.5% of the 3-day means their elevens make and 9.7% of the 6.5-hour
+means, and the 6.5-hour wet median is 1.8 times the 3-day one, its 99th percentile 2.2 times and its largest 2.3 times
+(14.3 against 6.3 mm/h). The 6.5-hour years averaged eleven at a time match the design case's own 3-day output over its
+years 10–19 in distribution, within 0.8% at the wet share and every quantile to the 99th. Every figure is a mean over a
+T21 cell, about 170 km across: rain at a point under a shower falls harder and for less time. Both runs take the design
+sunlight without the dimming the resort and the lock need, which cuts their land's mean rain by 2.5–7.7% and 4.9–16% in
+the climate targets; each target's entry carries that cut, and how it divides between how often and how hard it rains
+is open.
 
 ### The check on CM1's fall speeds
 
 CM1's Morrison and NSSL schemes slow every raindrop at lunar gravity by one factor, (g / 9.81)^((B + 1)/3) with
 B = 0.8, which is 2.94 ([climate/crm](../../climate/crm/README.md)). The solver, with gravity alone changed in the
-Moon's air at 2 m, slows each size by its own factor. At the resort's air:
+Moon's air at 2 m, slows each size by its own factor. At the resort's air, 301 K:
 
 | Diameter | Slowing by gravity: solver | Rigid sphere | CM1 | CM1's lunar law over the solver | Its Earth law over the solver on Earth | Water lost per metre, CM1 over the solver |
 |---|---|---|---|---|---|---|
-| 0.1 mm | 5.26 | 5.26 | 2.94 | 3.39 | 2.05 | 0.32 |
-| 0.2 mm | 4.37 | 4.37 | 2.94 | 1.75 | 1.25 | 0.64 |
+| 0.1 mm | 5.26 | 5.26 | 2.94 | 3.40 | 2.06 | 0.32 |
+| 0.2 mm | 4.37 | 4.38 | 2.94 | 1.76 | 1.25 | 0.63 |
 | 0.5 mm | 3.44 | 3.46 | 2.94 | 1.03 | 0.91 | 0.98 |
 | 1 mm | 3.08 | 3.13 | 2.94 | 0.86 | 0.85 | 1.10 |
-| 2 mm | 2.76 | 2.92 | 2.94 | 0.81 | 0.89 | 1.13 |
+| 2 mm | 2.76 | 2.92 | 2.94 | 0.81 | 0.89 | 1.12 |
 | 3 mm | 2.49 | 2.78 | 2.94 | 0.82 | 0.99 | 1.11 |
 | 6 mm | 1.93 | 2.48 | 2.94 | 0.95 | 1.46 | 1.03 |
 

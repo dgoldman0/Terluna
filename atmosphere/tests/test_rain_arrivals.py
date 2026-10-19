@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 
 from shared.provenance import constants_changed
-from atmosphere.rain import arrivals, drops, product as rain
+from atmosphere.rain import arrivals, drops, product as rain, targets as climate_targets
 
 PRODUCT = json.loads(arrivals.OUT.read_text())
 RAIN = json.loads(rain.OUT.read_text())
@@ -18,14 +18,16 @@ def test_header_and_bindings():
     assert PRODUCT['evidence'] and PRODUCT['reading_rule'] and PRODUCT['assumptions']
     producer = PRODUCT['producer']
     assert set(producer['files']) == set(arrivals.CODE)
-    for path, digest in {**producer['files'], **producer['inputs']}.items():
+    for kind, entries in climate_targets.load()[1].items():
+        assert producer[kind] == entries, kind
+    for path, digest in {**producer['files'], **producer.get('inputs', {})}.items():
         assert hashlib.sha256((arrivals.ROOT / path).read_bytes()).hexdigest() == digest, path
     assert not constants_changed(producer['constants'])
     assert [(s['dm_mm'], s['shape_mu']) for s in PRODUCT['spectra']] == list(rain.SPECTRA)
 
 
 def test_survival_shares_are_the_rain_products():
-    for key, _ in rain.TARGETS:
+    for key in rain.TARGETS:
         for world in arrivals.WORLDS:
             ours = PRODUCT['targets'][key][world]
             theirs = RAIN['survival'][key][world]
@@ -37,7 +39,7 @@ def test_survival_shares_are_the_rain_products():
 
 
 def test_ground_fluxes_close_the_water_ledger():
-    for key, _ in rain.TARGETS:
+    for key in rain.TARGETS:
         for world in arrivals.WORLDS:
             side = PRODUCT['targets'][key][world]
             size = np.array([0.0 if x is None else x for x in side['classes']['surface_diameter_mm']]) * 1e-3
@@ -55,7 +57,7 @@ def test_ground_fluxes_close_the_water_ledger():
 
 def test_the_moons_rain_arrives_slower_and_sparser():
     central = (PRODUCT['central_spectrum']['dm_mm'], PRODUCT['central_spectrum']['shape_mu'])
-    for key, _ in rain.TARGETS:
+    for key in rain.TARGETS:
         rows = {w: next(s for s in PRODUCT['targets'][key][w]['spectra'] if (s['dm_mm'], s['shape_mu']) == central)
                 for w in arrivals.WORLDS}
         assert rows['moon']['arrivals_m2_s_per_mm_h'] < rows['earth']['arrivals_m2_s_per_mm_h']
@@ -65,7 +67,7 @@ def test_the_moons_rain_arrives_slower_and_sparser():
 
 
 def test_a_class_reproduces_from_the_code():
-    air = rain.target_air(json.loads(rain.TARGETS_PRODUCT.read_text()))
+    air = rain.target_air(climate_targets.read(climate_targets.load()[0]))
     moon = rain.columns(air['lock'])['moon']
     side = PRODUCT['targets']['lock']['moon']['classes']
     # The largest class, far from the survival threshold: near it the adaptive integration turns the rounding of a
@@ -76,7 +78,7 @@ def test_a_class_reproduces_from_the_code():
 
 
 def test_drips_fall_below_both_bounds_and_faster_from_higher():
-    for key, _ in rain.TARGETS:
+    for key in rain.TARGETS:
         for world in arrivals.WORLDS:
             side = PRODUCT['targets'][key][world]
             g = side['air']['gravity_m_s2']
@@ -95,7 +97,7 @@ def test_drips_fall_below_both_bounds_and_faster_from_higher():
 
 
 def test_the_tail_reaches_the_moons_ground_and_breaks_up_on_earth():
-    for key, _ in rain.TARGETS:
+    for key in rain.TARGETS:
         moon, earth = (PRODUCT['targets'][key][w]['tail'] for w in arrivals.WORLDS)
         assert all(r['status'] == 'surface' and r['surviving_water_fraction'] > 0.85 for r in moon)
         assert all(r['status'] == 'above the stability screen' for r in earth)
