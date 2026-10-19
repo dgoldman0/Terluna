@@ -52,7 +52,11 @@ Sun unevenly, and Earth's orbit for 1 AD with a 23.7 degree tilt: see the README
 up"). Since 2026-10-14 the corrected radiation is the standard, as the author decided: new runs take the curved air's
 light and infrared (--twilight full) and CO2 and O2 in PlaSim's sunlight (--gas-bands), with the water and Rayleigh
 multipliers refitted with them, in the twilight copy of ExoPlaSim; --twilight none and --no-gas-bands leave them out.
-Every earlier run had neither, so none of them resumes under the new defaults.
+Every earlier run had neither, so none of them resumes under the new defaults. Since 2026-10-19 the curved air's terms
+come from the ledger on the design climate's 301 K column (--twilight-ledger 301k; 294.9k gives the earlier one) and
+each layer's are taken in the clear share above it (--twilight-clear-share, TWILIGHT_CLEAR_EDITS), and experiment A28R
+reads the lakes surface built from the geography domain's current routing (boundary.lakes_name), which needs a cold
+start.
 """
 from __future__ import annotations
 import argparse
@@ -91,6 +95,12 @@ EXPERIMENTS = {
     # land-sea mask and orography, so a change of coastline needs a cold start.
     'A28': dict(pressure_pa=121590.0, water=28, lakes=True, shield='titania_stack', mldepth=50.0,
                 purpose='design case with the atlas seas and rain-fed lakes'),
+    # The same seas with the lakes of the routing the geography domain carries since 2026-09-29 (the A28_dim5_moon
+    # climate), on the surface named by that drainage product's content (boundary.lakes_name): 10.34% of the Moon in
+    # lakes against run A's 12.02%. A28's surface, run A's lakes, stays as every A28 run read it. A new coastline
+    # needs a cold start.
+    'A28R': dict(pressure_pa=121590.0, water=28, lakes='98842fc2a648f889', shield='titania_stack', mldepth=50.0,
+                 purpose='design case with the atlas seas and the rain-fed lakes of the current routing'),
 }
 # PlaSim's model day is 1430 half-hour steps (29.8 Earth days; with the synodic Sun clock the Sun's own day
 # is the real 29.53). A model year is 12 of them, 17,160 steps (whole_lunar_days; ExoPlaSim's own year is
@@ -158,10 +168,23 @@ SUN_CLOCKS = ('plasim', 'model_day', 'synodic')
 #   full_column  the same mixing ratio kept over the Moon's column, which holds six times Earth's mass
 #                per pascal of pressure: six times Earth's water path, the upper bound.
 CLOUD_WATER = ('plasim', 'earth_path', 'full_column')
-# Kept in each year's 3-day means (ExoPlaSim writes about 100 fields by default, 100 MB a year).
+# Kept in each year's 3-day means (ExoPlaSim writes about 100 fields by default, 100 MB a year). The surface stress,
+# tauu and tauv (PlaSim's codes 180 and 181, means over each output interval), joined on 2026-10-19 so that the waters'
+# studies can set the 10 m wind from the model's own stress beside the neutral profile from the lowest level. ExoPlaSim's
+# postprocessor also names uas and vas, the 10 m wind (codes 165 and 166), but PlaSim 3.4.2 writes neither (outmod.f90),
+# and the postprocessor then leaves a requested name out of the file without an error, so they are not asked for;
+# test_exoplasim_run checks every name here against the codes PlaSim writes.
 OUTPUT = ['ta', 'ua', 'va', 'hus', 'cl',
           'ts', 'tas', 'maxt', 'mint', 'ps', 'psl', 'pr', 'prc', 'evap', 'prw', 'clt', 'sic', 'sit', 'snd', 'mrso',
-          'rst', 'rsut', 'rlut', 'ntr', 'nbr', 'rss', 'rls', 'hfss', 'hfls', 'alb', 'czen', 'lsm']
+          'rst', 'rsut', 'rlut', 'ntr', 'nbr', 'rss', 'rls', 'hfss', 'hfls', 'alb', 'czen', 'lsm', 'tauu', 'tauv']
+# The codes PlaSim 3.4.2 writes to its raw output (outmod.f90's writegp calls on unit 40), and the names ExoPlaSim's
+# postprocessor derives from them (pyburn.dataset): a name outside both comes out of the postprocessor as nothing.
+# The diagnostics' own codes (the heating's 21-29 among them) come on top when their switches are on.
+PLASIM_CODES = (101, 102, 103, 104, 105, 106, 107, 110, 129, 130, 133, 138, 139, 140, 141, 142, 143, 144, 146, 147, 152,
+                155, 159, 160, 161, 162, 164, 167, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183,
+                184, 201, 202, 203, 204, 205, 207, 208, 209, 210, 211, 218, 221, 229, 230, 232, 265, 266, 267, 268, 269,
+                298, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 410, 411)
+DERIVED = ('ua', 'va', 'spd', 'ps', 'psl', 'pr', 'ntr', 'nbr', 'hfns', 'wfn', 'zg', 'hur', 'wap', 'wa', 'stf', 'psi')
 # PlaSim's clear-sky fluxes, written when the diagnostic is on but unknown to ExoPlaSim's postprocessor,
 # which the runner teaches them. Unlike the other fluxes they are snapshots at each output time, not
 # means over it: sound for global and lunar-day averages, not for single times.
@@ -737,16 +760,76 @@ ICE_OPTICS_EDITS = [
     ("      end subroutine lw_correction\n",
      "      end subroutine lw_correction\n" + ICE_ROUTINES),
 ]
+# The curved air's terms in the clear share (2026-10-19). The twilight patch puts its sunlight into each layer of every
+# column and only the ground's into the column's clear share, and lets out its infrared in every column, cloudy or
+# not, while the terms are clear-sky values (twilight.json, twilight_301k.json). NTWLCLEAR 1 adds each layer's sunlight
+# in the share of the column clear of cloud above it, by PlaSim's own random overlap of cover (its zcs in swr), and lets
+# each layer's and the ground's extra infrared through the clouds above it at PlaSim's own longwave transmissivity of
+# each cloudy layer (ztaucc0 in lwr, ice optics included). 0, the default, leaves the model as it was.
+TWILIGHT_CLEAR_EDITS = [
+    ("      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n",
+     "      real :: twlt(NLEV+1) = 0.0 ! Terluna: the temperatures it is given at\n"
+     "      integer :: ntwlclear = 0   ! Terluna: 1 puts the twilight's terms in the clear share above each layer\n"
+     "      real :: twltau(NHOR,NLEV) = 1.0 ! Terluna: each layer's longwave cloud transmissivity, from lwr\n"),
+    ("     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar,nlwcorr,niceopt,ticeopt\n",
+     "     &               ,ntwilight,zmlunar,ntwilw,ngasbands,zgasq,zgasw,zmairlunar,nlwcorr,niceopt,ticeopt  &\n"
+     "     &               ,ntwlclear\n"),
+    ("      call mpbcr(ticeopt)\n", "      call mpbcr(ticeopt)\n      call mpbci(ntwlclear)\n"),
+    ("      real :: zel, zu, zsum, zclear, zsun\n", "      real :: zel, zu, zsum, zclear, zsun, zabove(NLEV)\n"),
+    ("       zclear = 1.0\n"
+     "       do jlev = 1, NLEV\n"
+     "        zclear = zclear * (1.0 - dcc(jhor,jlev) * nclouds)\n"
+     "       enddo\n",
+     "       zclear = 1.0\n"
+     "       do jlev = 1, NLEV\n"
+     "        zabove(jlev) = zclear      ! Terluna: the clear share above each layer\n"
+     "        zclear = zclear * (1.0 - dcc(jhor,jlev) * nclouds)\n"
+     "       enddo\n"
+     "       if (ntwlclear /= 1) zabove(:) = 1.0\n"),
+    ("        zsum = zsum + zsun * ((1.0 - zu) * twlq(jlev,jlo) + zu * twlq(jlev,jhi))\n",
+     "        zsum = zsum + zsun * ((1.0 - zu) * twlq(jlev,jlo) + zu * twlq(jlev,jhi)) * zabove(jlev)\n"),
+    ("      integer :: jhor, jlev\n"
+     "      real :: zsum\n"
+     "      do jhor = 1, NHOR\n"
+     "       zsum = twlw(NLEP) * (dt(jhor,NLEP) / twlt(NLEP))**4\n",
+     "      integer :: jhor, jlev\n"
+     "      real :: zsum, zclear, zabove(NLEV)\n"
+     "      do jhor = 1, NHOR\n"
+     "       zclear = 1.0\n"
+     "       do jlev = 1, NLEV\n"
+     "        zabove(jlev) = zclear      ! Terluna: the longwave's clear share above each layer\n"
+     "        if (ntwlclear == 1) zclear = zclear * twltau(jhor,jlev)\n"
+     "       enddo\n"
+     "       zsum = twlw(NLEP) * (dt(jhor,NLEP) / twlt(NLEP))**4 * zclear\n"),
+    ("        zsum = zsum + twlw(jlev) * (dt(jhor,jlev) / twlt(jlev))**4\n",
+     "        zsum = zsum + twlw(jlev) * (dt(jhor,jlev) / twlt(jlev))**4 * zabove(jlev)\n"),
+    ("       if (niceopt == 1 .and. clgray <= 0.) call ice_cloud_lw(jlev,ztaucc0(:,jlev)) ! Terluna: ice\n",
+     "       if (niceopt == 1 .and. clgray <= 0.) call ice_cloud_lw(jlev,ztaucc0(:,jlev)) ! Terluna: ice\n"
+     "       if (ntwlclear == 1) twltau(:,jlev) = ztaucc0(:,jlev) ! Terluna: for the twilight's clear share\n"),
+]
 # The twilight, gas, longwave and ice patches go only into a copy of ExoPlaSim of its own, which every run imports
 # first since the corrected radiation became the standard (2026-10-14); the shared installation stays as the earlier
-# runs had it.
+# runs had it. The twilight's clear share follows them, from 2026-10-19.
 TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS),
                     ('radmod.f90', 'Terluna: CO2 and O2 in the sunlight', GAS_EDITS),
                     ('radmod.f90', 'Terluna: the longwave by height', LW_CORRECTION_EDITS),
-                    ('radmod.f90', 'Terluna: ice optics for cold cloud', ICE_OPTICS_EDITS)]
+                    ('radmod.f90', 'Terluna: ice optics for cold cloud', ICE_OPTICS_EDITS),
+                    ('radmod.f90', "Terluna: 1 puts the twilight's terms in the clear share", TWILIGHT_CLEAR_EDITS)]
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
-TWILIGHT_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'twilight.json'
-LONGWAVE_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json'
+# The curved air's ledgers (twilight.py): on the design climate's 301 K column, the standard since 2026-10-19, and on
+# the 294.9 K column every run from 14 to 19 October took. The Moon's slant factors (ZMLUNAR, ZMAIRLUNAR) stay the 294.9 K
+# ledger's, with which the shortwave calibration was refitted (shortwave_fit_A28_dim5_lunar.json); the 301 K ledger
+# records its own column's beside them.
+TWILIGHT_LEDGERS = {'301k': ROOT / 'climate' / 'results' / 'gcm' / 'twilight_301k.json',
+                    '294.9k': ROOT / 'climate' / 'results' / 'gcm' / 'twilight.json'}
+TWILIGHT_PRODUCT = TWILIGHT_LEDGERS['301k']
+SLANT_PRODUCT = TWILIGHT_LEDGERS['294.9k']
+# The longwave by height (plasim_longwave.py): fitted on the design case's columns near 295 K, and refitted on 19 October
+# on the columns of the 20-year test with the correction as it passed 301.2 K (its year 2), since the first does not hold
+# there (longwave_check_301k.json); new runs with --longwave-correction take the refit.
+LONGWAVE_FITS = {'301k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_lw_ice.json',
+                 '295k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json'}
+LONGWAVE_PRODUCT = LONGWAVE_FITS['301k']
 GASES_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_gases.json'
 GAS_ORDER = ('co2_nir', 'o2_nir', 'o2_vis')                     # PlaSim's ZGASQ columns
 MOLAR = dict(pN2=0.0280134, pO2=0.0319988, pAr=0.039948, pCO2=0.0440095)   # kg/mol
@@ -801,14 +884,18 @@ def _atomic_write(path: Path, text: str):
 
 
 def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
-                  heating=False, longwave_correction=False, ice_optics=False):
+                  heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
+                  twilight_clear_share=True, longwave_fit='301k'):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
-    twilight product, and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating writes each process's
-    temperature tendency (HEATING), longwave_correction the longwave by height (LW_CORRECTION_EDITS), and ice_optics
-    ice optics for cloud colder than -38 °C (ICE_OPTICS_EDITS). Each is recorded when given, and left out the
-    configuration is the one every earlier run had."""
+    ledger twilight_ledger names (TWILIGHT_LEDGERS), its terms in the clear share above each layer with
+    twilight_clear_share (TWILIGHT_CLEAR_EDITS), and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating
+    writes each process's temperature tendency (HEATING), longwave_correction the longwave by height
+    (LW_CORRECTION_EDITS) from the fit longwave_fit names (LONGWAVE_FITS), and ice_optics ice optics for cloud colder
+    than -38 °C (ICE_OPTICS_EDITS). Each is recorded when given, and left out the configuration is the one every
+    earlier run had; the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October
+    did, and the 295 K fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -835,6 +922,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         raise ValueError('sw_water_absorption must lie between 0 and 3')
     if twilight is not None and twilight not in TWILIGHT_MODES:
         raise ValueError(f'twilight must be one of {TWILIGHT_MODES}')
+    if twilight_ledger not in TWILIGHT_LEDGERS:
+        raise ValueError(f'twilight_ledger must be one of {tuple(TWILIGHT_LEDGERS)}')
+    if longwave_fit not in LONGWAVE_FITS:
+        raise ValueError(f'longwave_fit must be one of {tuple(LONGWAVE_FITS)}')
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'), source=ensure_patched(True),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
@@ -847,9 +938,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if top_infrared is not None:
         cfg['top_infrared_w_m2'] = dict(day=float(top_infrared[0]), night=float(top_infrared[1]))
     if longwave_correction:
-        product = json.loads(LONGWAVE_PRODUCT.read_text())
-        cfg['longwave_correction'] = dict(product=str(LONGWAVE_PRODUCT.relative_to(ROOT)),
-                                          sha256=hashlib.sha256(LONGWAVE_PRODUCT.read_bytes()).hexdigest()[:16],
+        fit = LONGWAVE_FITS[longwave_fit]
+        product = json.loads(fit.read_text())
+        cfg['longwave_correction'] = dict(product=str(fit.relative_to(ROOT)),
+                                          sha256=hashlib.sha256(fit.read_bytes()).hexdigest()[:16],
                                           **{k: product['correction'][k] for k in ('land', 'sea', 'tref')})
     if ice_optics:
         cfg['ice_optics'] = dict(below_k=pio.ICE_BELOW_K, near_ir_weights=list(pio.NIR_WEIGHTS),
@@ -859,14 +951,20 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['heating_diagnostics'] = True
         cfg['output'] = cfg['output'] + [name for name, _ in HEATING.values()]
     if twilight is not None:
-        product = json.loads(TWILIGHT_PRODUCT.read_text())
-        lunar = product['magnification']
-        cfg['twilight'] = dict(mode=twilight, product=str(TWILIGHT_PRODUCT.relative_to(ROOT)),
-                               sha256=hashlib.sha256(TWILIGHT_PRODUCT.read_bytes()).hexdigest()[:16],
+        ledger = TWILIGHT_LEDGERS[twilight_ledger]
+        lunar = json.loads(SLANT_PRODUCT.read_text())['magnification']
+        cfg['twilight'] = dict(mode=twilight, product=str(ledger.relative_to(ROOT)),
+                               sha256=hashlib.sha256(ledger.read_bytes()).hexdigest()[:16],
                                magnification=[lunar['a'], lunar['b'], lunar['c']])
+        if ledger != SLANT_PRODUCT:
+            cfg['twilight'].update(slant_product=str(SLANT_PRODUCT.relative_to(ROOT)),
+                                   slant_sha256=hashlib.sha256(SLANT_PRODUCT.read_bytes()).hexdigest()[:16])
+        if twilight_clear_share and twilight in ('curved', 'full'):
+            cfg['twilight']['clear_share'] = ('each layer\'s sunlight in the cover clear above it, its infrared and the '
+                                              'ground\'s through the clouds above at their longwave transmissivity')
     if gas_bands:
         fits = json.loads(GASES_PRODUCT.read_text())
-        air = json.loads(TWILIGHT_PRODUCT.read_text())['magnification_air']
+        air = json.loads(SLANT_PRODUCT.read_text())['magnification_air']
         cfg['gas_bands'] = dict(product=str(GASES_PRODUCT.relative_to(ROOT)),
                                 sha256=hashlib.sha256(GASES_PRODUCT.read_bytes()).hexdigest()[:16],
                                 fits=[fits['fits'][k] for k in GAS_ORDER],
@@ -882,12 +980,12 @@ def gas_mass_fractions(gases: dict) -> dict:
     return dict(CO2=gases['pCO2'] / total * MOLAR['pCO2'] / molar, O2=gases['pO2'] / total * MOLAR['pO2'] / molar)
 
 
-def twilight_table(path: Path, mode: str):
-    """The twilight product's GCM terms as PlaSim's patch reads them: the number of elevations, then for each the solar
-    elevation (degrees), what the curved air adds to the ground and to each layer, top first, per unit sunlight at the
-    beam; then the extra infrared each layer and the ground lose to space (W/m2) and the temperatures it is given at.
-    'full' adds the shells' widening to both."""
-    product = json.loads(TWILIGHT_PRODUCT.read_text())
+def twilight_table(path: Path, mode: str, ledger: Path | None = None):
+    """A twilight ledger's GCM terms (TWILIGHT_PRODUCT without one) as PlaSim's patch reads them: the number of
+    elevations, then for each the solar elevation (degrees), what the curved air adds to the ground and to each layer,
+    top first, per unit sunlight at the beam; then the extra infrared each layer and the ground lose to space (W/m2)
+    and the temperatures it is given at. 'full' adds the shells' widening to both."""
+    product = json.loads((ledger or TWILIGHT_PRODUCT).read_text())
     term, cone, lw = product['gcm_term'], product['gcm_term_cone'], product['longwave']
     full = mode == 'full'
     rows = [f"{len(term['elevation_deg'])}"]
@@ -931,12 +1029,23 @@ def land_mask(land_fraction, area, water_share):
     return (~sea).reshape(land_fraction.shape).astype(float)
 
 
+def surface_product(water, lakes):
+    """The T21 surface an experiment reads: without lakes the seas alone; lakes True, the surface of 2026-09-25 with run
+    A's lakes, kept as it is (boundary.SUPERSEDED); lakes a drainage product's content hash, the surface built from
+    that drainage (boundary.lakes_name)."""
+    if lakes is True:
+        return f'moon_{water}pct_water_lakes_gaussian_T21.nc'
+    if lakes:
+        return f'moon_{water}pct_water_lakes_{lakes}_gaussian_T21.nc'
+    return f'moon_{water}pct_water_gaussian_T21.nc'
+
+
 def surface_files(cfg, folder: Path):
     """Land mask (code 172) and surface geopotential (code 129) at T21 from the geography product. With
     lakes, the water share is the product's (seas and lakes) and water cells stand at their water surface."""
     import netCDF4
     lakes = cfg.get('lakes', False)
-    name = f"moon_{cfg['water']}pct_water_lakes_gaussian_T21.nc" if lakes else f"moon_{cfg['water']}pct_water_gaussian_T21.nc"
+    name = surface_product(cfg['water'], lakes)
     with netCDF4.Dataset(PRODUCTS / name) as d:
         land = np.asarray(d['land_fraction'][:], dtype=float)
         height = np.asarray(d['land_elevation_m'][:], dtype=float)
@@ -1003,7 +1112,8 @@ def prepare_inputs(cfg, rundir: Path) -> dict:
     out = dict(landmap=str(landmap), topomap=str(topomap), starspec=starspec,
                flux_w_m2=flux * cfg['model']['sunlight_scale'], shield_flux_w_m2=flux, land_share=land_share)
     if cfg.get('twilight', {}).get('mode') in ('curved', 'full'):
-        out['twilight'] = str(twilight_table(folder / 'twilight.dat', cfg['twilight']['mode']))
+        out['twilight'] = str(twilight_table(folder / 'twilight.dat', cfg['twilight']['mode'],
+                                             ROOT / cfg['twilight']['product']))
     return out
 
 
@@ -1050,6 +1160,8 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         shutil.copy2(inputs['twilight'], workdir / 'twilight.dat')
         model._edit_namelist('radmod_namelist', 'NTWILIGHT', '1')
         model._edit_namelist('radmod_namelist', 'NTWILW', '1')
+        if cfg['twilight'].get('clear_share'):
+            model._edit_namelist('radmod_namelist', 'NTWLCLEAR', '1')
     if 'longwave_correction' in cfg:
         c = cfg['longwave_correction']
         (workdir / 'lwcorr.dat').write_text(''.join(' '.join(f'{x:.6e}' for x in c[k]) + '\n' for k in ('land', 'sea', 'tref')))
@@ -1244,10 +1356,11 @@ def summarise_year(path: Path, times_per_year: int | None = None) -> dict:
 def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: bool = False,
         overrides: dict | None = None, start_from: str | None = None, co2_ppm: float | None = None,
         top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True,
-        heating: bool = False, longwave_correction: bool = False, ice_optics: bool = False) -> int:
+        heating: bool = False, longwave_correction: bool = False, ice_optics: bool = False,
+        twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k') -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
-                        ice_optics)
+                        ice_optics, twilight_ledger, twilight_clear_share, longwave_fit)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -1362,17 +1475,28 @@ def main(argv=None) -> int:
                         help="CO2 and O2 in PlaSim's sunlight from ../results/gcm/shortwave_gases.json, the standard "
                              'since 2026-10-14 (part of the run key)')
     parser.add_argument('--longwave-correction', action='store_true',
-                        help='the longwave by height, fitted to the correlated-k model (LONGWAVE_PRODUCT; part of the '
+                        help='the longwave by height, fitted to the correlated-k model (LONGWAVE_FITS; part of the '
                              'run key)')
+    parser.add_argument('--longwave-fit', choices=tuple(LONGWAVE_FITS), default='301k',
+                        help='which fit --longwave-correction adds: the refit on the 301 K columns (the standard since '
+                             '2026-10-19) or the fit near 295 K the runs of 17 October took (part of the run key)')
     parser.add_argument('--ice-optics', action='store_true',
                         help='ice optics for cloud colder than -38 C (plasim_ice_optics.py; part of the run key)')
     parser.add_argument('--heating-diagnostics', action='store_true',
                         help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
                              'the run key)')
     parser.add_argument('--twilight', choices=TWILIGHT_MODES + ('none',), default='full',
-                        help="the curved air's sunlight and infrared from ../results/gcm/twilight.json: the curved "
+                        help="the curved air's sunlight and infrared from the twilight ledger: the curved "
                              "parts, all of it (full, the standard since 2026-10-14), the Moon's slant path alone, or "
                              'none (part of the run key)')
+    parser.add_argument('--twilight-ledger', choices=tuple(TWILIGHT_LEDGERS), default='301k',
+                        help="the ledger the terms come from: the design climate's 301 K column (twilight_301k.json, "
+                             'the standard since 2026-10-19) or the 294.9 K column (twilight.json) the runs of 14 to 19 '
+                             'October took (part of the run key)')
+    parser.add_argument('--twilight-clear-share', action=argparse.BooleanOptionalAction, default=True,
+                        help="the twilight's terms in the clear share above each layer (TWILIGHT_CLEAR_EDITS), the "
+                             'standard since 2026-10-19; --no-twilight-clear-share adds them in every column as the '
+                             'earlier runs did (part of the run key)')
     args = parser.parse_args(argv)
     if args.status:
         return status(args.folder or args.experiment)
@@ -1389,7 +1513,8 @@ def main(argv=None) -> int:
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
-               args.longwave_correction, args.ice_optics)
+               args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
+               args.longwave_fit)
 
 
 if __name__ == '__main__':

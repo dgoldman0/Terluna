@@ -98,15 +98,52 @@ def test_plasims_layers_add_up_to_its_air():
     assert np.sum(net[:-1] - net[1:]) == pytest.approx(s['air']) and net[-1] == pytest.approx(s['ground'])
 
 
-@pytest.fixture(scope='module')
-def product():
-    if not tw.OUT.exists():
-        pytest.skip('twilight.json not built')
-    return json.loads(tw.OUT.read_text())
+def test_the_301_k_column_is_built_between_the_stored_cases_that_bracket_it():
+    from illumination.surface_light import model as surface
+    assert tw.design_column() is surface.COLUMNS[tw.WORLD]
+    assert tw.design_column(surface.DESIGN_TS) is surface.COLUMNS[tw.WORLD]
+    column = tw.design_column(301.0)
+    assert column.name == 'moon_1.2atm_ts301' and column.surface_temperature_k == 301.0
+    (lo, wlo), (hi, whi) = column.stored
+    assert (lo, hi) == ('moon_1.2atm_titania_stack_ts298', 'moon_1.2atm_titania_stack_ts308')
+    assert (wlo, whi) == pytest.approx((0.7, 0.3))
+    # The design column's own weights come out of the same rule.
+    again = tw.design_column(294.9000001)
+    assert [w for _, w in again.stored] == pytest.approx([w for _, w in surface.COLUMNS[tw.WORLD].stored], abs=1e-6)
+    with pytest.raises(ValueError):
+        tw.design_column(312.0)
+    assert tw.product_path(column).name == 'twilight_301k.json' and tw.product_path(tw.design_column()) == tw.OUT
+    assert tw.registered(column) == column.name and surface.COLUMNS[column.name] == column
+
+
+LEDGERS = [tw.OUT, tw.RESULTS / 'twilight_301k.json']
+
+
+@pytest.fixture(scope='module', params=LEDGERS, ids=[p.name for p in LEDGERS])
+def product(request):
+    if not request.param.exists():
+        pytest.skip(f'{request.param.name} not built')
+    return json.loads(request.param.read_text())
+
+
+def test_the_301_k_ledger_records_its_column_and_its_solved_orders():
+    path = tw.RESULTS / 'twilight_301k.json'
+    if not path.exists():
+        pytest.skip('twilight_301k.json not built')
+    product = json.loads(path.read_text())
+    assert product['schema'] == tw.SCHEMA and product['column_name'] == 'moon_1.2atm_ts301'
+    source = product['column']['source']
+    assert source['surface_temperature_k'] == 301.0
+    assert source['stored_cases'] == {'moon_1.2atm_titania_stack_ts298': 0.7, 'moon_1.2atm_titania_stack_ts308': 0.3}
+    channels = product['channels']
+    assert channels['orders_converged'] is True                      # the sky model's own rule (solved_sky.py)
+    for row in channels['continued_orders']:
+        assert row['final_order'] > channels['order_cap']
+        assert max(row['ground_increment_fraction'], row['maximum_increment_fraction']) < channels['increment_tolerance']
 
 
 def test_the_product_integrates_back_and_its_channels_keep_the_energy(product):
-    assert product['schema'] == tw.SCHEMA
+    assert product['schema'] in (tw.SCHEMA, 'terluna.climate.gcm-twilight/1')
     by = product['by_elevation']
     a = np.radians(by['elevation_deg'])
     flux = product['sunlight']['covered_w_m2']

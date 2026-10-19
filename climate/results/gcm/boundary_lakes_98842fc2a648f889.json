@@ -1,0 +1,830 @@
+{
+ "schema": "terluna.climate.gcm-boundary-lakes/1",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/boundary.py": "b7dc76a6681c5334"
+  }
+ },
+ "inputs": {
+  "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693",
+  "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f8899bd4f5d712445f78c8882c85a1bc30bf631ac9dd14ab1c03"
+ },
+ "routing_run": "A28_dim5_moon",
+ "files": {
+  "moon_28pct_water_lakes_98842fc2a648f889_regular_4x5.nc": "4b998b0bde802d42d203d49ada879c2450e8c07d36e2dcf32f9ec8d7b7df8ef3",
+  "moon_28pct_water_lakes_98842fc2a648f889_regular_2x2.5.nc": "5a5d0db30877460e4e92e2305f16ae2bd8f51abcb5446c5898f1f052b0f07a5b",
+  "moon_28pct_water_lakes_98842fc2a648f889_gaussian_T21.nc": "4fc4d5ccd583e00836f978447bb7feb16277202ee66f35c48004a3377f63a9e1",
+  "moon_28pct_water_lakes_98842fc2a648f889_gaussian_T42.nc": "a97f37b6520c5f8f0eb9b6406e7a758c80fc482ebeaadd0934c41ac74821e059"
+ },
+ "shares": {
+  "seas": 0.27999928623479153,
+  "lakes": 0.10340689683080045,
+  "water": 0.383406183065592
+ },
+ "t21": {
+  "water_share": 0.3834061829476184,
+  "lake_share": 0.10340689671282688,
+  "mask_land_share": 0.6162376229868974,
+  "mask_water_cells": 734,
+  "cells": 2048
+ },
+ "superseded": {
+  "files": "moon_28pct_water_lakes_<grid>.nc",
+  "built": "2026-09-25",
+  "source_sha256": "dc283827f349fdc1+060219b12f480619",
+  "lakes": "the rain-fed lakes of run A's runoff",
+  "note": "The drainage product this surface records, 060219b12f480619, was overwritten under its name (geography/products/drainage_28pct_16ppd.npz) on 2026-09-29 by the A28_dim5_moon routing, 98842fc2a648f889, and no copy of it survives: the surface every A28 run read until 2026-10-19 cannot be regenerated from what it records. It is kept unchanged as the record of those runs.",
+  "t21_sha256": "4081b8600b8d33b635047e462e4c086dd8e389670165d8fe96eca6a01f1bd9a6",
+  "water_share": 0.4002223003247921,
+  "lake_share": 0.12022301409000058,
+  "mask_land_share": 0.5994823869526498
+ },
+ "changed_cells": {
+  "count": 111,
+  "area_share": 0.07082879478061244,
+  "land_to_water": 43,
+  "water_to_land": 68,
+  "cells": [
+   {
+    "lat": 85.761,
+    "lon": 123.75,
+    "land_fraction_was": 0.9909,
+    "land_fraction": 0.5972,
+    "land": false
+   },
+   {
+    "lat": 85.761,
+    "lon": 275.625,
+    "land_fraction_was": 0.6267,
+    "land_fraction": 0.5782,
+    "land": false
+   },
+   {
+    "lat": 85.761,
+    "lon": 303.75,
+    "land_fraction_was": 0.974,
+    "land_fraction": 0.5937,
+    "land": false
+   },
+   {
+    "lat": 63.679,
+    "lon": 112.5,
+    "land_fraction_was": 0.5976,
+    "land_fraction": 0.5976,
+    "land": false
+   },
+   {
+    "lat": 63.679,
+    "lon": 315.0,
+    "land_fraction_was": 0.5982,
+    "land_fraction": 0.5982,
+    "land": false
+   },
+   {
+    "lat": 52.607,
+    "lon": 180.0,
+    "land_fraction_was": 0.5845,
+    "land_fraction": 1.0,
+    "land": true
+   },
+   {
+    "lat": 52.607,
+    "lon": 275.625,
+    "land_fraction_was": 0.5948,
+    "land_fraction": 0.5948,
+    "land": false
+   },
+   {
+    "lat": 47.07,
+    "lon": 180.0,
+    "land_fraction_was": 0.5062,
+    "land_fraction": 0.9995,
+    "land": true
+   },
+   {
+    "lat": 47.07,
+    "lon": 185.625,
+    "land_fraction_was": 0.5805,
+    "land_fraction": 0.9093,
+    "land": true
+   },
+   {
+    "lat": 47.07,
+    "lon": 191.25,
+    "land_fraction_was": 0.2573,
+    "land_fraction": 0.8637,
+    "land": true
+   },
+   {
+    "lat": 47.07,
+    "lon": 196.875,
+    "land_fraction_was": 0.3513,
+    "land_fraction": 0.8203,
+    "land": true
+   },
+   {
+    "lat": 47.07,
+    "lon": 202.5,
+    "land_fraction_was": 0.5143,
+    "land_fraction": 0.8939,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 163.125,
+    "land_fraction_was": 0.4411,
+    "land_fraction": 1.0,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 168.75,
+    "land_fraction_was": 0.502,
+    "land_fraction": 0.946,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 174.375,
+    "land_fraction_was": 0.5174,
+    "land_fraction": 0.8879,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 180.0,
+    "land_fraction_was": 0.5291,
+    "land_fraction": 0.9627,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 185.625,
+    "land_fraction_was": 0.4835,
+    "land_fraction": 0.9748,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 191.25,
+    "land_fraction_was": 0.4163,
+    "land_fraction": 1.0,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 196.875,
+    "land_fraction_was": 0.4514,
+    "land_fraction": 0.8903,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 202.5,
+    "land_fraction_was": 0.4282,
+    "land_fraction": 0.7926,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 208.125,
+    "land_fraction_was": 0.5245,
+    "land_fraction": 0.8295,
+    "land": true
+   },
+   {
+    "lat": 41.532,
+    "lon": 230.625,
+    "land_fraction_was": 0.5205,
+    "land_fraction": 1.0,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 135.0,
+    "land_fraction_was": 0.573,
+    "land_fraction": 1.0,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 146.25,
+    "land_fraction_was": 0.5877,
+    "land_fraction": 1.0,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 157.5,
+    "land_fraction_was": 0.5363,
+    "land_fraction": 1.0,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 163.125,
+    "land_fraction_was": 0.5467,
+    "land_fraction": 1.0,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 168.75,
+    "land_fraction_was": 0.5001,
+    "land_fraction": 0.9865,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 174.375,
+    "land_fraction_was": 0.3866,
+    "land_fraction": 0.9674,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 180.0,
+    "land_fraction_was": 0.5083,
+    "land_fraction": 0.6919,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 185.625,
+    "land_fraction_was": 0.5095,
+    "land_fraction": 0.8825,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 191.25,
+    "land_fraction_was": 0.4833,
+    "land_fraction": 0.9249,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 196.875,
+    "land_fraction_was": 0.2615,
+    "land_fraction": 0.6608,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 213.75,
+    "land_fraction_was": 0.4998,
+    "land_fraction": 0.8527,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 219.375,
+    "land_fraction_was": 0.5616,
+    "land_fraction": 0.6914,
+    "land": true
+   },
+   {
+    "lat": 35.995,
+    "lon": 225.0,
+    "land_fraction_was": 0.5864,
+    "land_fraction": 0.6563,
+    "land": true
+   },
+   {
+    "lat": 30.458,
+    "lon": 129.375,
+    "land_fraction_was": 0.53,
+    "land_fraction": 0.9985,
+    "land": true
+   },
+   {
+    "lat": 30.458,
+    "lon": 151.875,
+    "land_fraction_was": 0.597,
+    "land_fraction": 0.597,
+    "land": false
+   },
+   {
+    "lat": 30.458,
+    "lon": 163.125,
+    "land_fraction_was": 0.545,
+    "land_fraction": 0.9667,
+    "land": true
+   },
+   {
+    "lat": 30.458,
+    "lon": 168.75,
+    "land_fraction_was": 0.509,
+    "land_fraction": 0.9995,
+    "land": true
+   },
+   {
+    "lat": 30.458,
+    "lon": 180.0,
+    "land_fraction_was": 0.5042,
+    "land_fraction": 0.6641,
+    "land": true
+   },
+   {
+    "lat": 30.458,
+    "lon": 185.625,
+    "land_fraction_was": 0.3765,
+    "land_fraction": 0.9263,
+    "land": true
+   },
+   {
+    "lat": 30.458,
+    "lon": 191.25,
+    "land_fraction_was": 0.2597,
+    "land_fraction": 0.6237,
+    "land": true
+   },
+   {
+    "lat": 30.458,
+    "lon": 247.5,
+    "land_fraction_was": 0.6127,
+    "land_fraction": 0.4804,
+    "land": false
+   },
+   {
+    "lat": 24.92,
+    "lon": 123.75,
+    "land_fraction_was": 0.5254,
+    "land_fraction": 0.9537,
+    "land": true
+   },
+   {
+    "lat": 24.92,
+    "lon": 129.375,
+    "land_fraction_was": 0.5259,
+    "land_fraction": 0.8559,
+    "land": true
+   },
+   {
+    "lat": 24.92,
+    "lon": 185.625,
+    "land_fraction_was": 0.3855,
+    "land_fraction": 0.8154,
+    "land": true
+   },
+   {
+    "lat": 24.92,
+    "lon": 191.25,
+    "land_fraction_was": 0.0012,
+    "land_fraction": 0.6488,
+    "land": true
+   },
+   {
+    "lat": 24.92,
+    "lon": 236.25,
+    "land_fraction_was": 0.4479,
+    "land_fraction": 0.7355,
+    "land": true
+   },
+   {
+    "lat": 19.382,
+    "lon": 123.75,
+    "land_fraction_was": 0.5818,
+    "land_fraction": 0.848,
+    "land": true
+   },
+   {
+    "lat": 19.382,
+    "lon": 129.375,
+    "land_fraction_was": 0.5062,
+    "land_fraction": 0.8276,
+    "land": true
+   },
+   {
+    "lat": 19.382,
+    "lon": 185.625,
+    "land_fraction_was": 0.5708,
+    "land_fraction": 0.7297,
+    "land": true
+   },
+   {
+    "lat": 19.382,
+    "lon": 241.875,
+    "land_fraction_was": 0.5274,
+    "land_fraction": 0.7026,
+    "land": true
+   },
+   {
+    "lat": 19.382,
+    "lon": 253.125,
+    "land_fraction_was": 0.7574,
+    "land_fraction": 0.5058,
+    "land": false
+   },
+   {
+    "lat": 13.844,
+    "lon": 123.75,
+    "land_fraction_was": 0.5873,
+    "land_fraction": 0.671,
+    "land": true
+   },
+   {
+    "lat": 13.844,
+    "lon": 168.75,
+    "land_fraction_was": 0.4756,
+    "land_fraction": 0.6946,
+    "land": true
+   },
+   {
+    "lat": 13.844,
+    "lon": 208.125,
+    "land_fraction_was": 0.5956,
+    "land_fraction": 0.5956,
+    "land": false
+   },
+   {
+    "lat": 13.844,
+    "lon": 253.125,
+    "land_fraction_was": 0.6525,
+    "land_fraction": 0.4398,
+    "land": false
+   },
+   {
+    "lat": 13.844,
+    "lon": 264.375,
+    "land_fraction_was": 0.7589,
+    "land_fraction": 0.5079,
+    "land": false
+   },
+   {
+    "lat": 13.844,
+    "lon": 315.0,
+    "land_fraction_was": 0.5978,
+    "land_fraction": 0.593,
+    "land": false
+   },
+   {
+    "lat": 8.307,
+    "lon": 45.0,
+    "land_fraction_was": 0.6619,
+    "land_fraction": 0.5765,
+    "land": false
+   },
+   {
+    "lat": 8.307,
+    "lon": 95.625,
+    "land_fraction_was": 0.5908,
+    "land_fraction": 0.5908,
+    "land": false
+   },
+   {
+    "lat": 8.307,
+    "lon": 168.75,
+    "land_fraction_was": 0.537,
+    "land_fraction": 0.8478,
+    "land": true
+   },
+   {
+    "lat": 2.769,
+    "lon": 0.0,
+    "land_fraction_was": 0.736,
+    "land_fraction": 0.5292,
+    "land": false
+   },
+   {
+    "lat": 2.769,
+    "lon": 264.375,
+    "land_fraction_was": 0.5962,
+    "land_fraction": 0.5807,
+    "land": false
+   },
+   {
+    "lat": 2.769,
+    "lon": 281.25,
+    "land_fraction_was": 1.0,
+    "land_fraction": 0.5946,
+    "land": false
+   },
+   {
+    "lat": 2.769,
+    "lon": 320.625,
+    "land_fraction_was": 0.6557,
+    "land_fraction": 0.5982,
+    "land": false
+   },
+   {
+    "lat": 2.769,
+    "lon": 331.875,
+    "land_fraction_was": 0.994,
+    "land_fraction": 0.5227,
+    "land": false
+   },
+   {
+    "lat": -2.769,
+    "lon": 129.375,
+    "land_fraction_was": 0.5924,
+    "land_fraction": 0.5924,
+    "land": false
+   },
+   {
+    "lat": -2.769,
+    "lon": 168.75,
+    "land_fraction_was": 0.4661,
+    "land_fraction": 0.7873,
+    "land": true
+   },
+   {
+    "lat": -2.769,
+    "lon": 174.375,
+    "land_fraction_was": 0.5246,
+    "land_fraction": 0.8756,
+    "land": true
+   },
+   {
+    "lat": -2.769,
+    "lon": 275.625,
+    "land_fraction_was": 0.9565,
+    "land_fraction": 0.5212,
+    "land": false
+   },
+   {
+    "lat": -2.769,
+    "lon": 281.25,
+    "land_fraction_was": 0.9854,
+    "land_fraction": 0.5612,
+    "land": false
+   },
+   {
+    "lat": -2.769,
+    "lon": 286.875,
+    "land_fraction_was": 0.9779,
+    "land_fraction": 0.4293,
+    "land": false
+   },
+   {
+    "lat": -2.769,
+    "lon": 292.5,
+    "land_fraction_was": 0.6727,
+    "land_fraction": 0.5722,
+    "land": false
+   },
+   {
+    "lat": -2.769,
+    "lon": 298.125,
+    "land_fraction_was": 0.5971,
+    "land_fraction": 0.5541,
+    "land": false
+   },
+   {
+    "lat": -8.307,
+    "lon": 90.0,
+    "land_fraction_was": 0.6051,
+    "land_fraction": 0.4822,
+    "land": false
+   },
+   {
+    "lat": -8.307,
+    "lon": 174.375,
+    "land_fraction_was": 0.4303,
+    "land_fraction": 0.674,
+    "land": true
+   },
+   {
+    "lat": -8.307,
+    "lon": 180.0,
+    "land_fraction_was": 0.4503,
+    "land_fraction": 0.6082,
+    "land": true
+   },
+   {
+    "lat": -8.307,
+    "lon": 275.625,
+    "land_fraction_was": 0.8306,
+    "land_fraction": 0.5394,
+    "land": false
+   },
+   {
+    "lat": -13.844,
+    "lon": 112.5,
+    "land_fraction_was": 0.5913,
+    "land_fraction": 0.5913,
+    "land": false
+   },
+   {
+    "lat": -13.844,
+    "lon": 219.375,
+    "land_fraction_was": 0.5319,
+    "land_fraction": 0.6562,
+    "land": true
+   },
+   {
+    "lat": -13.844,
+    "lon": 264.375,
+    "land_fraction_was": 0.5973,
+    "land_fraction": 0.5801,
+    "land": false
+   },
+   {
+    "lat": -13.844,
+    "lon": 275.625,
+    "land_fraction_was": 0.9756,
+    "land_fraction": 0.5125,
+    "land": false
+   },
+   {
+    "lat": -19.382,
+    "lon": 78.75,
+    "land_fraction_was": 0.5596,
+    "land_fraction": 0.6428,
+    "land": true
+   },
+   {
+    "lat": -19.382,
+    "lon": 95.625,
+    "land_fraction_was": 0.5431,
+    "land_fraction": 0.5993,
+    "land": true
+   },
+   {
+    "lat": -19.382,
+    "lon": 101.25,
+    "land_fraction_was": 0.5375,
+    "land_fraction": 0.9218,
+    "land": true
+   },
+   {
+    "lat": -19.382,
+    "lon": 135.0,
+    "land_fraction_was": 0.4898,
+    "land_fraction": 0.8786,
+    "land": true
+   },
+   {
+    "lat": -19.382,
+    "lon": 140.625,
+    "land_fraction_was": 0.5527,
+    "land_fraction": 0.8227,
+    "land": true
+   },
+   {
+    "lat": -19.382,
+    "lon": 213.75,
+    "land_fraction_was": 0.5678,
+    "land_fraction": 0.7903,
+    "land": true
+   },
+   {
+    "lat": -19.382,
+    "lon": 219.375,
+    "land_fraction_was": 0.5031,
+    "land_fraction": 0.8601,
+    "land": true
+   },
+   {
+    "lat": -19.382,
+    "lon": 225.0,
+    "land_fraction_was": 0.4103,
+    "land_fraction": 0.6929,
+    "land": true
+   },
+   {
+    "lat": -19.382,
+    "lon": 281.25,
+    "land_fraction_was": 0.8966,
+    "land_fraction": 0.5756,
+    "land": false
+   },
+   {
+    "lat": -24.92,
+    "lon": 135.0,
+    "land_fraction_was": 0.5426,
+    "land_fraction": 0.8987,
+    "land": true
+   },
+   {
+    "lat": -24.92,
+    "lon": 225.0,
+    "land_fraction_was": 0.5107,
+    "land_fraction": 0.7775,
+    "land": true
+   },
+   {
+    "lat": -24.92,
+    "lon": 230.625,
+    "land_fraction_was": 0.4084,
+    "land_fraction": 0.8045,
+    "land": true
+   },
+   {
+    "lat": -24.92,
+    "lon": 236.25,
+    "land_fraction_was": 0.3193,
+    "land_fraction": 0.6999,
+    "land": true
+   },
+   {
+    "lat": -24.92,
+    "lon": 264.375,
+    "land_fraction_was": 0.5914,
+    "land_fraction": 0.5487,
+    "land": false
+   },
+   {
+    "lat": -24.92,
+    "lon": 281.25,
+    "land_fraction_was": 0.8395,
+    "land_fraction": 0.5499,
+    "land": false
+   },
+   {
+    "lat": -24.92,
+    "lon": 286.875,
+    "land_fraction_was": 0.9388,
+    "land_fraction": 0.4473,
+    "land": false
+   },
+   {
+    "lat": -24.92,
+    "lon": 292.5,
+    "land_fraction_was": 0.975,
+    "land_fraction": 0.5723,
+    "land": false
+   },
+   {
+    "lat": -30.458,
+    "lon": 135.0,
+    "land_fraction_was": 0.5005,
+    "land_fraction": 0.9985,
+    "land": true
+   },
+   {
+    "lat": -30.458,
+    "lon": 140.625,
+    "land_fraction_was": 0.5662,
+    "land_fraction": 0.7172,
+    "land": true
+   },
+   {
+    "lat": -30.458,
+    "lon": 236.25,
+    "land_fraction_was": 0.5656,
+    "land_fraction": 0.8411,
+    "land": true
+   },
+   {
+    "lat": -30.458,
+    "lon": 241.875,
+    "land_fraction_was": 0.4986,
+    "land_fraction": 0.8477,
+    "land": true
+   },
+   {
+    "lat": -30.458,
+    "lon": 275.625,
+    "land_fraction_was": 0.7393,
+    "land_fraction": 0.3354,
+    "land": false
+   },
+   {
+    "lat": -30.458,
+    "lon": 286.875,
+    "land_fraction_was": 0.9154,
+    "land_fraction": 0.3992,
+    "land": false
+   },
+   {
+    "lat": -30.458,
+    "lon": 292.5,
+    "land_fraction_was": 0.9484,
+    "land_fraction": 0.4007,
+    "land": false
+   },
+   {
+    "lat": -35.995,
+    "lon": 264.375,
+    "land_fraction_was": 0.5891,
+    "land_fraction": 0.5891,
+    "land": false
+   },
+   {
+    "lat": -41.532,
+    "lon": 219.375,
+    "land_fraction_was": 0.594,
+    "land_fraction": 0.594,
+    "land": false
+   },
+   {
+    "lat": -58.143,
+    "lon": 45.0,
+    "land_fraction_was": 0.5881,
+    "land_fraction": 0.5881,
+    "land": false
+   },
+   {
+    "lat": -63.679,
+    "lon": 247.5,
+    "land_fraction_was": 0.5959,
+    "land_fraction": 0.5959,
+    "land": false
+   }
+  ]
+ },
+ "evidence": "Area-conserving averages of the atlas's seas and the drainage estimate's rain-fed lakes onto the GCM grids, and PlaSim's binary mask from the T21 grid as the runner makes it; the geography domain's first estimate of the lakes, from one climate run's runoff, not predicted shorelines.",
+ "reading_rule": "shares are of the Moon's surface on the atlas's 4 pixel/degree grid; t21 gives the T21 file's water share and the binary mask PlaSim runs, cells counted on the 32 x 64 Gaussian grid; changed_cells lists the cells whose mask differs from the superseded surface's, with their land fractions on both, and land the new mask."
+}
