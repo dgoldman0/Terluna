@@ -48,16 +48,17 @@ kind by kind, shared among the people on the Moon:
 |---|---|---|---|---|
 | Earth's | 318–346 g; 159–173 g | 88–393% | 37–46 g; 19–23 g | 10–53% |
 | The square root of g/6 | 114–141 g; 57–71 g | 32–161% | 11–19 g; 5–10 g | 3–22% |
-| g/6 | 32–58 g; 16–29 g | 9–66% | 1–9 g; up to 4 g | none to 10% |
+| g/6 | 32–58 g; 16–29 g | 9–66% | 1–9 g; up to 4 g | 0.2–10% |
 
 The plan loses 44–180 g of phosphorus a person a year (the food study and the sea phosphorus screen), against 1.76–2.4
 kg in Earth's practice. Most of a field's loss leaves bound to soil, and the deltas keep it, while the vented glass
 houses' bleed alone carries 0–90 g of phosphorus a person a year in nutrient solution, which fits the oxic room at the
-middle settling with 4 billion and passes it with 8. With the giants' floors oxic, most of the design loss could arrive
-dissolved; with their depths anoxic, the dissolved part must be kept from the lakes, recovered as struvite or sent to
-the seas. The trophic state is a tipping point (lake anoxia): once a deep lake's floor goes anoxic it gives back what
-the floor held, the methane follows the table above, and the giants go anoxic at depth when mesotrophic. The mixing's
-form, which a basin-scale model of one crater lake would settle, decides between the two cases.
+middle settling with 4 billion and passes it with 8. With the giants' floors oxic, 32–161% of the design loss could
+arrive dissolved at the middle settling, all of it with Earth's settling and 9–66% at g/6; with their depths anoxic, the
+dissolved part must be kept from the lakes, recovered as struvite or sent to the seas. The trophic state is a tipping
+point (lake anoxia): once a deep lake's floor goes anoxic it gives back what the floor held, the methane follows the
+table above, and the giants go anoxic at depth when mesotrophic. The mixing's form, which a basin-scale model of one
+crater lake would settle, decides between the two cases.
 
 **The seas get almost none of it.** The lakes hold 96% of the land's phosphorus, and on the rivers alone the held fresh
 seas reach 0.27–1.1 mg/m³ of dissolved phosphorus at 1,000 years; dust falling on the waters adds to it, to 0.71–1.79
@@ -66,8 +67,10 @@ of 70 mg/m³. The author held the seas fresh on the condition that they are rich
 biodiversity, as Earth's old, clear fresh lakes hold hundreds of endemic species through variety of habitat and time,
 with phosphorus from the dredged deltas for the open seas if they need more production. On the rivers alone the seas run
 ultra-oligotrophic, a question of production for ecology's community design, which the delta lever answers. A
-mesotrophic sea would bring its own methane, 4.3 Tg a year, and a deepest tenth of 2.1 mg/L under Osborn's rule and 0.88
-mg/L with Shih and Bouffard's form at the two great basins (the seas' oxygen): the cost of that richer state alone.
+mesotrophic sea would bring its own methane, 4.3 Tg a year, and a deepest tenth of 2.1 mg/L under Osborn's rule and at
+most 0.88 mg/L with Shih and Bouffard's form at the two great basins (the seas' oxygen), the cost of that richer state;
+the dust envelope's top, 18–28 mg/m³, is itself mesotrophic by the lakes' classes (10–35 mg/m³), so that cost could come
+with the dust unchosen.
 
 **The resort's dimming with the levers worth pursuing.** At 301 K the resort's own dimming is 4.5–5.6% of the hot
 world's absorbed sunlight and 8.2–10.9% with the gases, the glow and the beamed power answered (the targets). The
@@ -102,7 +105,7 @@ the 75–90° ones'. Spread over the deserts as their area lies, the watered lan
 
 The heat is the power's, with the beams' 1.5 W for each watt delivered; the albedo cost carries the levers' desert
 kernels, the hot world's and the lock's, at each band's own sunlight. Through the first 10,000 years the deserts'
-groundwater lies a median 1,320–1,326 m down, which raises the lift about 1.7 times. The water returns as rain, so the
+groundwater lies a median 1,320–1,326 m down, which raises the lift about 1.8 times. The water returns as rain, so the
 cycle closes, but where it falls is the GCM's to say, and with 0.17 mm of rain a day on the deserts their groundwater
 would be mined unless the lakes and rivers feed it. Gardens poleward of 60° also meet the low Sun and its cold. The
 scale leaves the choice to the author.
