@@ -1,0 +1,107 @@
+{
+ "schema": "terluna.climate.crm-rain-sizes/1",
+ "case": "ring_45s_corrected_twilight",
+ "purpose": "the circle of latitude 45 S as a 2-D ring, the Sun crossing it once a lunar day, seas and lakes of the 28% scenario at sea level, land as wet as the GCM's there, the 3% dimmer shield, the corrected radiation's design case's row nearest the latitude as reference, and its mean vertical wind there imposed as large-scale vertical advection, with the curved air's twilight and side light (climate/results/gcm/twilight.json)",
+ "build": "moon_omp_twilight",
+ "executable_sha256": "f51a3ffac2ca09bc",
+ "evidence": "CM1's own state: rain mass and number in every 3-D output of the span, read as Morrison's exponential spectrum. It says where the scheme puts the rain's sizes under its limits; it measures no drop.",
+ "reading_rule": "Diameters in mm. mass_share gives the share of the rain's mass (grid cells with rain above 1e-8 kg/kg, weighted by rain mass per square metre) whose mean diameter 1/lambda lies in each bin of edges_mm. limits are the case's own (cm1_run.rain_limits). at_cap is the share within 0.5% of the cap on the mean diameter; held_cells describes those cells and all rain cells by rain content (g/m3) and height (km above the model's ground).",
+ "span_days": [
+  29.625,
+  59.125
+ ],
+ "snapshots": 119,
+ "stride": 2,
+ "limits": {
+  "breakup_cutoff_m": 0.3,
+  "breakup_rate_per_m": 2300000.0,
+  "equilibrium_m": 0.6013683393738892,
+  "mean_diameter_cap_m": 2.8,
+  "fall_speed_cap_m_s": 3.093333322709817
+ },
+ "edges_mm": [
+  0.0,
+  0.02,
+  0.05,
+  0.1,
+  0.2,
+  0.3,
+  0.45,
+  0.6,
+  0.8,
+  1.0,
+  1.25,
+  1.5,
+  1.75,
+  2.0,
+  2.5,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  8.0
+ ],
+ "mass_share": [
+  1.2025126560899425e-06,
+  0.0007275043269757005,
+  0.0052005936234327385,
+  0.028701698734691684,
+  0.045479052835223195,
+  0.10303881074559505,
+  0.4012650407678442,
+  0.36903698504632193,
+  0.024189381824631498,
+  0.012298542230906253,
+  0.005389133900505553,
+  0.0025263728148638065,
+  0.0011708070152229909,
+  0.0008277343014157644,
+  0.00014713931971391177,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "mass_weighted_mean_diameter_mm": 0.5650252072471014,
+ "mass_median_mean_diameter_mm": 0.5942965508438647,
+ "beyond_cutoff": 0.9198899479670207,
+ "beyond_equilibrium": 0.39058140974198224,
+ "at_cap": 3.224055372710033e-05,
+ "rain_water_path_kg_m2": 0.012913797502870307,
+ "held_cells": {
+  "count": 3559,
+  "share_of_rain_cells": 0.055221958447764896,
+  "rain_g_m3": {
+   "median": 6.164626393001527e-05,
+   "p10": 1.8308903236174956e-05,
+   "p90": 0.0002700622717384249
+  },
+  "height_km": {
+   "median": 1.2876255,
+   "p10": 0.25,
+   "p90": 3.7738194999999997
+  }
+ },
+ "rain_cells": {
+  "count": 64449,
+  "rain_g_m3": {
+   "median": 0.0013617450604215264,
+   "p10": 3.2728399673942477e-05,
+   "p90": 0.05002222955226898
+  },
+  "height_km": {
+   "median": 4.4600235,
+   "p10": 0.55,
+   "p90": 18.870947500000003
+  }
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/rain_sizes.py": "f869b4742034aa51",
+   "crm/ring_analysis.py": "cee51ef7e823cee3",
+   "crm/cm1_run.py": "3f13bc74c6f11e49"
+  }
+ }
+}

@@ -41,6 +41,10 @@ its source for every build and compiles it outside the repository
   drops too slowly, and per metre of fall the drizzle loses about a third less
   water than it would and the millimetre drops about a tenth more. CM1 was not
   rerun.
+- **Rain's size limits are Earth's in every build but one.** Morrison's breakup
+  holds rain's mean diameter near 0.60 mm and caps it at 2.8 mm, and the lunar
+  runs' rain sits at that equilibrium; the `moon_omp_rain_limits` build scales the
+  limits from the namelist ([Rain limits at lunar gravity](#rain-limits-at-lunar-gravity)).
 - **The Sun keeps the lunar day**, 29.53 Earth days, at the chosen 5% dimmer
   shield's 1,173.5 W/m² above the air (the GCM run `A28_dim5`). On a domain that wraps the Moon the hour angle
   grows eastward along x, so the terminator crosses the domain once a lunar day.
@@ -1226,6 +1230,141 @@ climate/gcm/.venv/bin/python -m climate.crm.gcm_profiles ring_45n_corrected --fr
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected_gcm_land
 /media/projectspace/terluna-research/session-tools/gcm_land_ring.sh               # 6 threads; rerun to resume
 ```
+
+## Rain limits at lunar gravity
+
+Morrison's scheme limits its rain with Earth's values. Self-collection is offset by breakup above a mean diameter of
+0.30 mm, CM1's `brkup_db`, by the factor 2 − exp(2300 m⁻¹ (D_m − 0.30 mm)) (Verlinde and Cotton 1993), so the mean
+diameter D_m = 1/λ of rain's exponential spectrum settles at 0.60 mm; that mean diameter is capped at 2.8 mm, and the
+rain's mean fall speeds at 9.1 m/s in the scheme's reference air, which the Terluna builds carry to the Moon by the
+single factor 2.94 as 3.09 m/s. No runner sets `brkup_db`; the namelist every case starts from writes CM1's 300 µm.
+The world-crafting team's check of 19 October raised the same point (their B28). The author approved patching and
+testing the limits on 19 October.
+
+**Where the rain sits** ([rain_sizes.py](rain_sizes.py), `rain_sizes_<case>.json`). Over the second lunar day of four
+runs, the breakup equilibrium sets the size of nearly all the rain:
+
+| | Small box | Its Earth-fall twin | 45° S ring | Equatorial ring |
+|---|---|---|---|---|
+| Rain's mass at mean diameters of 0.45–0.80 mm | 95% | 85% | 77% | 91% |
+| Beyond the breakup cutoff, 0.30 mm | 98% | 95% | 92% | 97% |
+| Held at the 2.8 mm cap | 0.05% | 0.0005% | 0.003% | 1.0% |
+| Rain in the cells held at the cap, median; in all rain cells | 0.04; 0.66 mg/m³ | 0.06; 0.71 mg/m³ | 0.06; 1.4 mg/m³ | 0.04; 2.5 mg/m³ |
+| Rain aloft, mean | 0.40 kg/m² | 0.14 kg/m² | 0.013 kg/m² | 0.54 kg/m² |
+
+The 45° N ring on the corrected design case holds 0.07 g/m² of rain aloft, about 6,000 times less than the small box,
+too little to test the limits on.
+
+**The lunar limits** ([atmosphere/rain](../../atmosphere/rain/README.md#breakup-at-lunar-gravity),
+`rain_breakup.json`). Colliding drops coalesce or break by their Weber number, and with the single-drop solver's
+terminal speeds a lunar pair of drops collides as an Earth pair of the same size ratio when it is s times as large. At
+equal air density s is the ratio of capillary lengths, 2.46; the Moon's air, 1.2 times as dense, raises it to 2.78
+for Morrison's spectrum at the equilibrium. The cap follows the largest drop that holds together, which grows with the
+capillary length alone, and the fall-speed cap that drop's terminal speed, (g/9.81)^¼ of Earth's:
+
+| | CM1 (Earth) | Lunar, at the design air |
+|---|---|---|
+| Breakup cutoff | 0.30 mm | 0.84 mm |
+| Breakup rate | 2,300 /m | 826 /m |
+| Mean diameter where breakup balances | 0.60 mm | 1.68 mm |
+| Cap on the mean diameter | 2.8 mm | 6.88 mm |
+| Cap on the mean fall speeds, in the reference air | 9.1 m/s (the Terluna builds: 3.09 m/s) | 5.80 m/s |
+
+At the lunar equilibrium Morrison's mass-weighted fall speed in the Moon's air at 2 m is 4.47 m/s by its power law
+(4.21 m/s by the solver for the same spectrum); the builds' cap holds it at 2.70 m/s there, and the scaled cap, 5.07
+m/s, leaves it free.
+
+**The cap stays, rescaled.** It holds thin rain sorted by its fall, a tenth to a sixtieth of the median rain cell's,
+1.2–1.6 km up. In rain that thin, breakup at the cap restores the size over about four hours, 1/(5.78 × 312 × W) s at
+W = 0.04 mg/m³, while falling rain sorts its sizes across a 100 m layer in about a minute, and below 1e-8 kg/kg the
+scheme leaves self-collection and breakup out. Without the cap that rain's mean diameter would have no bound. Where the
+rain is thick breakup holds it: at the cap with 1 g/m³ it restores the size in half a second.
+
+**The patch** (`RAIN_LIMITS_PATCHES` in [cm1_run.py](cm1_run.py); build `moon_omp_rain_limits`). It adds three entries
+to the namelist's `&param3` beside CM1's `brkup_db`: `brkup_gscale`, 0 to keep CM1's limits or 1 to scale them with
+gravity; `brkup_rhor`, the surface air's density over Earth's sea-level air at the same temperature, which in CM1,
+whose air takes Earth's gas constant, is the surface pressure over 1013.25 hPa; and `brkup_rhoexp`, the exponent of
+that ratio in the scale of the collisions. With `brkup_gscale = 1` and the build's gravity g, the breakup's two
+lengths scale by √(9.81/g) · `brkup_rhor`^`brkup_rhoexp`, the cap by √(9.81/g), and the fall-speed cap becomes
+9.1 (g/9.81)^¼ m/s. At its default it keeps CM1's own limits. Its header in `morrison.F` states what it changes, its
+default and its source, so other CM1 series can take it; it applies after Terluna's core patch, which gives the
+build's gravity and the fall-speed cap. Terluna's runner writes the lunar values for a case with `rain_limits='lunar'`
+(`brkup_gscale = 1`, `brkup_rhoexp = 0.687` from the breakup product, `brkup_rhor` from the case's sounding: 1.1965 at
+the small box's 1,212 hPa) and CM1's own for `rain_limits='earth'`. No other build takes the patch, so every existing
+executable and run stays as it was.
+
+**The build and the smoke test** (19 October). `moon_omp_rain_limits` built cleanly at `-O3 -march=native` in four
+minutes on two jobs (executable `1dc13187bb93677a`); every source it leaves alone matches `moon_omp_o3`'s byte for byte.
+From the small box's day-42.0 restart, with 2.4 kg/m² of rain aloft, each ran two model hours on one thread. At its
+default the new build repeated `moon_omp_o3` bit for bit in every output, statistic and restart file. With the lunar
+limits it ran normally and logged the limits above. After the first hour the rain's mass-median mean diameter stood at
+1.57 mm against 0.60 mm at the default; after two the rain aloft stood at 2.3 kg/m² against 2.8, and 3.1 mm of rain had
+reached the ground against 0.93 mm. That is the transient of limits switched on in mid-storm, in one realization; the
+test below measures them settled. The script and its record are `crm-runs/smoke_rain_limits/` on the research drive.
+
+**The proposed test** (cases `box_0e_small_rain_control` and `box_0e_small_lunar_rain`, defined and not set up or run).
+The small box's inputs as written run two lunar days on the rain-limits build, once with CM1's limits written out and
+once with the lunar ones, so the pair shares one executable and differs in its namelist's rain limits alone; both write
+the budgets of potential temperature and vapour and the radiative heating. Of the four runs measured above, the box
+holds the most rain aloft after the equatorial ring and resolves it in three dimensions, and its rain test of 30
+September frames the comparison: 85% of its falling water evaporated. Its forcing is the GCM's before the correction, so
+it shows how far the limits move CM1's answers in a known rainy box; the design climate at 301 K has no CM1 case yet.
+Over the second lunar day, against the spread between the control and `box_0e_small` itself (the same physics built at
+`-O2`, another realization):
+
+- the rain reaching the ground per lunar day, and how often and how hard it rains (the share of ground under 1 mm/h
+  or more);
+- the rain's sizes: its mass by mean diameter, beyond the cutoff and the equilibrium and at the cap (`rain_sizes.py`),
+  and the spectrum by height;
+- the microphysics' water budget: water condensed, evaporated back from cloud, evaporated from rain on the way down
+  and reaching the ground, and the share of the falling water that evaporates;
+- cloud by day and by night, fog and cloud by height;
+- the air at 2 m and at the GCM's lowest layer, its dewpoint and comfort;
+- the column's heating: the microphysics', the radiation's and the boundary layer's heating and moistening by height
+  from the budgets, and the energy at the ground.
+
+Each run takes about 2.3–2.8 wall hours on 4 threads (the rain test's twin took 2.32 hours), so the pair takes about
+5–6 hours one after the other with a half-hour rest between, or about 3 hours side by side on 8 threads; each writes
+about 12 GB with the budgets, where the small box wrote 5.7 GB. The analysis takes minutes: `box_analysis` with the
+control as reference and `rain_sizes` for each arm, and a short reading of the budgets that is still to be written. A
+cheaper pair would start both from the small box's day-29.5 restart, in about half the time, with a first lunar day
+built under Earth's limits.
+
+```sh
+python -m atmosphere.rain.breakup                                           # about a minute: rain_breakup.json
+python -m climate.crm.rain_sizes box_0e_small --from-day 29.5               # about a minute
+python -m climate.crm.cm1_run build moon_omp_rain_limits --jobs 2           # four minutes
+# the test, once approved:
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_small_rain_control
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_small_lunar_rain
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_small_rain_control --hours 4 --threads 4
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_small_lunar_rain --hours 4 --threads 4
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_lunar_rain --from-day 29.5 \
+    --reference box_0e_small_rain_control
+```
+
+**Other Earth-tuned constants in Morrison's rain**, changed only where the physics gives the value:
+
+- The self-collection rate, 5.78 m³ kg⁻¹ s⁻¹ (Seifert and Beheng 2001), carries Earth's collision kernel, the volume
+  drops sweep at their difference in fall speed with collision efficiency near one. At the scheme's own lunar speeds it
+  would be 2.94 times smaller, by the solver's 2.5–3.4 times for drops of 0.5–3 mm. It sets how fast the rain reaches
+  the breakup equilibrium, whose size is the breakup law's; it stays for the size-dependent fall law of the plan.
+- Autoconversion and accretion (Khairoutdinov and Kogan 2000: 1,350 q_c^2.47 N_c^−1.79 and 67 (q_c q_r)^1.15) are fits
+  to Earth's bin model. At lunar gravity droplets settle 6 times slower and collide less efficiently, so rain forms
+  more slowly by a factor that needs a lunar collision calculation; they stay.
+- The floor on the mean diameter, 20 µm (`LAMMAXR`), bounds drizzle at the cloud's edge and has no scaling with
+  gravity of its own; it stays.
+- For the ice, drops shed by wet graupel are taken as 1 mm (`PRACG/5.2E-7`), snow's and graupel's mean diameters are
+  capped at 2 mm (`LAMMINS`, `LAMMING`), and their fall-speed caps follow the single factor; listed.
+- The NSSL scheme of the electrified runs carries Earth limits of its own: self-collection reduced above a mean volume
+  diameter of 0.6 mm by exp(−2500 m⁻¹ (D − 0.6 mm)) and stopped above 2.0 mm, and the mass-weighted diameter capped at
+  6 mm (`xvrmx0` with `imaxdiaopt = 3`), its active breakup off for two moments. Carried as Morrison's are, the
+  collisional lengths would scale by about 2.8 and the cap by 2.46; it is not patched, since no NSSL run is planned.
+
+**Open.** Whether the lunar limits change the answers is the test's to show, and the author decides whether it runs
+and whether the limits join CM1's next run with the size-dependent fall law. The similarity carries Earth's collision
+outcomes to the Moon by the Weber number; no lunar collision has been measured. The reading of the budgets for the
+column's heating is to be written with the test.
 
 ## A box over the highlands
 
