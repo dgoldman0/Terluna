@@ -85,6 +85,7 @@ the explorable experience, which reads them as baked products, is in
 | [jura_island](studies/jura_island/README.md) | Geography (the atlas and LOLA's shores), the CRM's 3-D box on the corrected design case and the groundwater's shore reach: Jura Island's layout, its climate and its shore belts | One box of two lunar days on placeholder land; the rerun waits on the GCM's longwave and the fresh shores |
 | [climate_targets](studies/climate_targets/README.md) | The GCM's settled warm Moon and design case, the gases, the fleet's glow, the beamed power and the water top-up, light and rain: what each target climate takes and the heat beyond the sunlight, after the joint integration of 17 October | Arithmetic on two runs of different physics, interpolated by the ground's temperature; no target is run |
 | [coast_water](studies/coast_water/README.md) | Geography's shores at LOLA's 16 px/deg with the atlas's seas, the drainage product's lakes and the 15 km water table, the GCM's design case and hot world, FAO-56's demand and the CM1 rings' and Jura box's nights: how well the fresh seas and lakes water the deserts' coasts and islands at the resort's 301 K | Steady belts at 16 px/deg checked on four non-desert coasts at 100 m, and night balances on the GCM's 3-day means, the resort interpolated between two physics, its deserts 22.5–28% by the interpolation's form; the 2-D CM1 slice costed and unrun |
+| [heat_levers](studies/heat_levers/README.md) | The target climates, the gases' forcing and removal, the column's CO2 and pressure, the GCM's high cloud, the beams, the water top-up, the glow (read only) and the surface's reflection: what could take pressure off the shield's dimming, in W/m² and points, with costs and side effects | Arithmetic on committed products and Earth's literature; no lever runs in a climate model |
 
 The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)
 from a separate lineage (57 tests, 90-m spacing, 20-m/s reservoir flow), whose
@@ -123,6 +124,7 @@ python -m research.studies.living_light.run --output research/studies/living_lig
 python -m research.studies.domain_synthesis.ledgers                        # results in studies/domain_synthesis/results
 python -m research.studies.climate_targets.run                             # after its extract, with the climate venv
 python -m research.studies.coast_water.run                                 # after its extract (climate venv) and shores
+python -m research.studies.heat_levers.run                                 # after climate_targets' extract
 ```
 
 For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`

@@ -1,0 +1,1061 @@
+{
+ "schema": "terluna.research.heat-levers/2",
+ "producer": {
+  "files": {
+   "research/studies/heat_levers/run.py": "a1d27158d5de0d9cc0a1386451e49bb5cad1ab34d13d7e1a1efda07aa90ebaa4"
+  },
+  "inputs": {
+   "research/studies/climate_targets/results/climate_targets.json": "ab9f6deff3fea7797c1b958dc26a1eeb36a2cfc6798a1a60818fc23debad3dbb",
+   "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
+   "atmosphere/radiative_convective/results/summary.json": "8fb31329ebcbca52ea9ac1c0af06ed5e357c02267dce8b47250334ae91c39171",
+   "research/studies/domain_synthesis/results/ledgers.json": "41f572697e25d91fc21fb97268e9ccb7d4248e7a9b109a8276626b5894490cb2",
+   "research/studies/food_systems/results/food_systems.json": "a896160ff19ff7c3fac9d9343a75431be1ff3b1521b1e2c1de8ebed82418da57",
+   "research/studies/carbon_cycle/results/carbon_cycle.json": "6121830203ffaaf3877a691eda80d854c9e5ff41bfaebf8a899aebe40591ed7e",
+   "provisioning/results/power.json": "c0339163ccbae88d7fbd28bbecf7b1fc2c26ab99e3fb1e183fcbb26b766c4ab2",
+   "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
+   "research/studies/atmospheric_co2/results/atmospheric_co2.json": "80db612918d3fc44d313b6aa93259ecfbad0bf869ea39de903a3fb09ace0d451",
+   "climate/results/gcm/radiation_check_A28_dim5_moon.json": "82f2d3baff7cb2c3260818bcab20b9f0b940f84e36c4edb9a294fd477d373ae5",
+   "climate/gcm/products/climatology_A28_corrected_970.npz": "6708f56b47fdca081be146c5ad35d3c1c89b7284b95dbe5c4958d0aee505d966",
+   "resources/results/industry.json": "7ac8754b4ec1c3c4f50bd55f4803cad6e5d0a9f1709cc9e7eb0a68af8ce3e79c",
+   "resources/results/first_screen.json": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
+   "research/runs/climate_targets/extract.json": "a019e00f6f2ac4e2519fd3632203d1261c6dcc882ae91f4238f5765a608594d4"
+  },
+  "constants": {
+   "MOON_RADIUS": 1737400.0,
+   "MOON_GM": 4902800118000.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "JULIAN_DAY": 86400.0,
+   "BOLTZMANN": 1.380649e-23,
+   "ELEMENTARY_CHARGE": 1.602176634e-19,
+   "SOLAR_CONSTANT": 1361.0,
+   "SPEED_OF_LIGHT": 299792458.0
+  }
+ },
+ "evidence": "A screening on committed products. Forcings come from the deep column (line-by-line, clear sky, prescribed humidity; all-sky by AR6 ratios on its Earth control), the cloud effects and absorbed sunlight from two ExoPlaSim runs, costs from the domain synthesis, the food study, the carbon cycle, the power screen and the glow study (read only), surface-albedo kernels by latitude from the GCM radiation check's clear-sky line-by-line shares with Earth's cloud masking scaled by cover, and the cirrus, methane and albedo responses from published Earth studies. No lever is run in a climate model; each W/m2 is treated as absorbed sunlight at efficacy 1 except the glow, which takes the GCM's 0.645-0.71. The climate targets and their extract are the corrected ones.",
+ "reading_rule": "W/m2 are means over the whole Moon, positive for what a lever takes off the balance. A point of dimming is 1% of the hot world's absorbed sunlight, 225.4 W/m2, as climate_targets counts the heat beyond the sunlight. Pairs are [low, high]. The resort is the author's 301 K, read from climate_targets' resort_band. TW of heat on the Moon count 0.0264 W/m2 each, at the ring radius 5e-5. Values marked estimate rest on the design guesses named in run.py; ranking pairs each lever's points as the README's table gives them.",
+ "basis": {
+  "absorbed_sunlight_w_m2": 225.36537190998925,
+  "incoming_w_m2": 312.1938560849066,
+  "moon_w_m2_per_tw": 0.0264,
+  "ring_w_m2_per_tw": 4.97e-05,
+  "resort_k": 301.0,
+  "resort_share_of_the_way": 0.51971728713964,
+  "targets_dimming_in_all_percent": {
+   "hot world": [
+    3.698175762463992,
+    5.3036547539443735
+   ],
+   "resort, 301 K": [
+    8.182359610053576,
+    10.876043505960693
+   ],
+   "lock, 295 K": [
+    12.583059037610749,
+    16.6181048486882
+   ]
+  }
+ },
+ "gases": {
+  "held_pair_allsky_w_m2": 3.57749843829207,
+  "held_pair_points": 1.5874215315212312,
+  "forcing_at_the_hot_worlds_ground_factor": 0.9434423452300069,
+  "column_temperatures_k": [
+   290.0,
+   295.0,
+   300.0
+  ],
+  "held_pair_clear_sky_toa_w_m2": [
+   5.941720313088183,
+   5.831707380895921,
+   5.655497993214055
+  ],
+  "options": {
+   "low pair, 0.3 and 0.03 ppm": {
+    "allsky_w_m2": 1.7535158101732282,
+    "clear_sky_saving_by_column_w_m2": [
+     2.9851844644088317,
+     2.9732879380667896,
+     2.927601876475279
+    ],
+    "saving_at_the_hot_worlds_ground_factor": 0.977682896384816,
+    "saved_w_m2": [
+     1.783276618814818,
+     1.8239826281188418
+    ],
+    "points": [
+     0.7912824422409744,
+     0.8093446711269108
+    ]
+   },
+   "methane low, 0.3 and 0.1 ppm": {
+    "allsky_w_m2": 2.4901466052767485,
+    "clear_sky_saving_by_column_w_m2": [
+     1.7678765080935648,
+     1.7725004831178808,
+     1.7598823871499292
+    ],
+    "saving_at_the_hot_worlds_ground_factor": 0.9948028174502475,
+    "saved_w_m2": [
+     1.081700667043333,
+     1.0873518330153216
+    ],
+    "points": [
+     0.47997643021899716,
+     0.4824839875797818
+    ]
+   },
+   "N2O low, 1.87 and 0.03 ppm": {
+    "allsky_w_m2": 2.963853750130321,
+    "clear_sky_saving_by_column_w_m2": [
+     0.9990854701672447,
+     1.000306867753352,
+     0.9884860488633933
+    ],
+    "saving_at_the_hot_worlds_ground_factor": 0.9877895259893598,
+    "saved_w_m2": [
+     0.6061517956451827,
+     0.6136446881617492
+    ],
+    "points": [
+     0.2689640340519036,
+     0.27228880948348994
+    ]
+   },
+   "lowest grid pair, 0.1 and 0.01 ppm": {
+    "allsky_w_m2": 0.9662959698252835,
+    "clear_sky_saving_by_column_w_m2": [
+     4.295689768707234,
+     4.256540979970708,
+     4.168493669351847
+    ],
+    "saving_at_the_hot_worlds_ground_factor": 0.9655649598493181,
+    "saved_w_m2": [
+     2.5212856066235734,
+     2.6112024684667867
+    ],
+    "points": [
+     1.118754662819527,
+     1.1586529227345979
+    ]
+   }
+  },
+  "costs": {
+   "held": {
+    "methane cut 0.9, N2O cut 0.95": {
+     "methane_air_share_per_year": [
+      0.00026,
+      0.000919
+     ],
+     "methane_fan_tw": [
+      0.00181,
+      0.0064
+     ],
+     "n2o_air_share_per_year": [
+      0.000178,
+      0.000274
+     ],
+     "n2o_decomposition_tw": [
+      0.288,
+      0.442
+     ],
+     "removal_heat_w_m2": [
+      0.007650983999999999,
+      0.011837760000000001
+     ],
+     "removal_points": [
+      0.003394924399945434,
+      0.005252696942602164
+     ],
+     "methane_years_to_reach": [
+      1200.0,
+      621.0
+     ],
+     "n2o_years_to_reach": [
+      5610.0,
+      3650.0
+     ]
+    },
+    "methane cut 0.5, N2O cut 0.5": {
+     "methane_air_share_per_year": [
+      0.00795,
+      0.0113
+     ],
+     "methane_fan_tw": [
+      0.0554,
+      0.0784
+     ],
+     "n2o_air_share_per_year": [
+      0.00178,
+      0.00274
+     ],
+     "n2o_decomposition_tw": [
+      2.88,
+      4.42
+     ],
+     "removal_heat_w_m2": [
+      0.07749456,
+      0.11875776
+     ],
+     "removal_points": [
+      0.03438618779062085,
+      0.05269565550089557
+     ],
+     "methane_years_to_reach": [
+      114.0,
+      82.9
+     ],
+     "n2o_years_to_reach": [
+      561.0,
+      365.0
+     ]
+    }
+   },
+   "low_pair": {
+    "methane cut 0.9, N2O cut 0.95": {
+     "methane_air_share_per_year": [
+      0.0103,
+      0.0144
+     ],
+     "methane_fan_tw": [
+      0.0718,
+      0.1
+     ],
+     "n2o_air_share_per_year": [
+      0.000594,
+      0.000912
+     ],
+     "n2o_decomposition_tw": [
+      0.959,
+      1.47
+     ],
+     "removal_heat_w_m2": [
+      0.027213119999999997,
+      0.041448
+     ],
+     "removal_points": [
+      0.012075111526392304,
+      0.01839146788556065
+     ],
+     "methane_years_to_reach": [
+      90.0,
+      65.7
+     ],
+     "n2o_years_to_reach": [
+      1680.0,
+      1100.0
+     ]
+    },
+    "methane cut 0.5, N2O cut 0.5": {
+     "methane_air_share_per_year": [
+      0.0582,
+      0.0787
+     ],
+     "methane_fan_tw": [
+      0.405,
+      0.548
+     ],
+     "n2o_air_share_per_year": [
+      0.00594,
+      0.00912
+     ],
+     "n2o_decomposition_tw": [
+      9.59,
+      14.7
+     ],
+     "removal_heat_w_m2": [
+      0.263868,
+      0.4025472
+     ],
+     "removal_points": [
+      0.11708453599756606,
+      0.17861981039428587
+     ],
+     "methane_years_to_reach": [
+      16.9,
+      12.6
+     ],
+     "n2o_years_to_reach": [
+      168.0,
+      110.0
+     ]
+    }
+   }
+  },
+  "low_pair_methane_contactor_air_kg_s": [
+   1025296589.392983,
+   1433424357.9863062
+  ],
+  "warm_waters": {
+   "sea_median_c": {
+    "lock": 24.124910118458846,
+    "resort": 29.492167089685793,
+    "hot": 34.45217285156252
+   },
+   "deep_oligotrophic_deepest_tenth_mg_l": {
+    "lock": [
+     0.551,
+     1.541
+    ],
+    "resort": [
+     0.13308638012750867,
+     0.7044247022935843
+    ],
+    "hot": [
+     0.001,
+     0.055
+    ]
+   },
+   "oxygen_source": {
+    "path": "research/studies/lake_oxygen/results/lake_oxygen.json",
+    "branch": "domain/ecology",
+    "commit": "bd0097c7c8544da17988e4164deb681209ba6753",
+    "sha256": "3025a7b7c8db090b9c1b1c40add90ff3c31f902263253e3fe6327286a08d6f99"
+   },
+   "activation_ev": 0.96,
+   "wild_sources_left_tg_yr": [
+    5.89,
+    5.890000000000001
+   ],
+   "sources_left_tg_yr": [
+    6.3,
+    8.46
+   ],
+   "lock": {
+    "removal_tg_yr": [
+     0.851,
+     3.01
+    ],
+    "air_share_per_year": [
+     0.00026,
+     0.000919
+    ],
+    "soils_alone_steady_ppm": [
+     2.16,
+     2.9
+    ]
+   },
+   "resort": {
+    "source_factor_from_the_lock": 1.9437209157320388,
+    "wild_added_tg_yr": [
+     5.558516193661708,
+     5.558516193661709
+    ],
+    "removal_tg_yr": [
+     6.409516193661708,
+     8.568516193661708
+    ],
+    "air_share_per_year": [
+     0.0019582540662186182,
+     0.002616101788031598
+    ],
+    "soils_alone_steady_ppm": [
+     4.0657769806840145,
+     4.80540153210626
+    ]
+   },
+   "hot": {
+    "source_factor_from_the_lock": 3.5189410924250124,
+    "wild_added_tg_yr": [
+     14.836563034383323,
+     14.836563034383325
+    ],
+    "removal_tg_yr": [
+     15.687563034383324,
+     17.846563034383323
+    ],
+    "air_share_per_year": [
+     0.004792909975252249,
+     0.005448834361660556
+    ],
+    "soils_alone_steady_ppm": [
+     7.246821611788568,
+     7.985819479871351
+    ]
+   },
+   "basis": "an indicator: the wild lakes' and wetlands' methane the biology leaves at its 90% cut, scaled by the seasonal temperature dependence of methane emissions from the lock's sea median to the resort's at 301 K and the hot world's; the farms' and herds' methane and the soils' uptake held; substrate and oxygen also set the lakes' methane"
+  }
+ },
+ "co2": {
+  "column_ground_k": 290.0,
+  "per_doubling_clear_w_m2": 3.9794022185675497,
+  "all_sky_ratio": 0.9513349202288767,
+  "sunlight_change_280_w_m2": 0.04200000000000159,
+  "levels": {
+   "280 ppm": {
+    "partial_pressure_pa": 34.04669260700389,
+    "clear_sky_infrared_w_m2": 1.9939999999999998,
+    "clear_sky_sunlight_w_m2": 0.04200000000000159,
+    "clear_sky_w_m2": 2.0360000000000014,
+    "saved_w_m2": [
+     1.9369178975859942,
+     2.0360000000000014
+    ],
+    "points": [
+     0.859456748466041,
+     0.9034218446004998
+    ],
+    "leaf_rate_over_400_ppm": {
+     "25C": 0.7108906971171378,
+     "30C": 0.6682748366238154,
+     "35C": 0.620482572969181
+    },
+    "water_use_efficiency_over_400_ppm": 0.7,
+    "growth_lost_per_point_percent": [
+     33.207078375735136,
+     44.15782733781334
+    ]
+   },
+   "350 ppm": {
+    "partial_pressure_pa": 42.55836575875486,
+    "clear_sky_infrared_w_m2": 0.7666122505600885,
+    "clear_sky_sunlight_w_m2": 0.015723892540075723,
+    "clear_sky_w_m2": 0.7823361431001643,
+    "saved_w_m2": [
+     0.7442636922883619,
+     0.7823361431001643
+    ],
+    "points": [
+     0.33024758239505414,
+     0.3471412384563804
+    ],
+    "leaf_rate_over_400_ppm": {
+     "25C": 0.886045154770215,
+     "30C": 0.8670606061833782,
+     "35C": 0.8461233179255568
+    },
+    "water_use_efficiency_over_400_ppm": 0.875,
+    "growth_lost_per_point_percent": [
+     36.00839835561822,
+     46.59434020939184
+    ]
+   }
+  },
+  "basis": "clear-sky change in the 1.2 atm column at 290 K, the only ground temperature its CO2 sweep covers: the infrared it lets out and the sunlight it no longer absorbs, both taking heat off, the sunlight carried to 350 ppm by the log of the CO2 ratio; all-sky by the AR6 effective forcing of doubled CO2 over the Earth control's own per-doubling change; growth by the CO2 study's light-saturated C3 leaf model at 25-35 C and by water-use efficiency at a fixed internal ratio"
+ },
+ "pressure": {
+  "by_target": {
+   "lock": {
+    "ground_k": 295.0,
+    "sunlight_change_w_m2": 5.360000000000014,
+    "infrared_change_w_m2": 6.144999999999982,
+    "column_net_change_w_m2": -0.7849999999999682,
+    "with_the_plants_co2_kept_w_m2": -0.25131165313567716,
+    "points": -0.11151298489461409,
+    "gcm_cover": 0.198,
+    "with_earths_cloud_masking_w_m2": [
+     -0.4697150803064316,
+     -0.28032640723344804
+    ],
+    "with_earths_cloud_masking_points": [
+     -0.20842380367736152,
+     -0.12438752451526146
+    ]
+   },
+   "resort": {
+    "ground_k": 301.0,
+    "sunlight_change_w_m2": 5.329000000000002,
+    "infrared_change_w_m2": 7.165999999999985,
+    "column_net_change_w_m2": -1.8369999999999829,
+    "with_the_plants_co2_kept_w_m2": 0.8006883468643375,
+    "points": 0.3552845497417997,
+    "gcm_cover": 0.2941476981208334,
+    "with_earths_cloud_masking_w_m2": [
+     0.22201094709083835,
+     0.5749248085465849
+    ],
+    "with_earths_cloud_masking_points": [
+     0.09851156156302014,
+     0.2551078737935877
+    ]
+   },
+   "hot world": {
+    "ground_k": 306.5234791232695,
+    "sunlight_change_w_m2": 5.26824172964403,
+    "infrared_change_w_m2": 8.359071490626182,
+    "column_net_change_w_m2": -3.0908297609821513,
+    "with_the_plants_co2_kept_w_m2": 2.054518107846506,
+    "points": 0.9116387714910694,
+    "gcm_cover": 0.383,
+    "with_earths_cloud_masking_w_m2": [
+     1.0464469543119903,
+     1.4998655504078182
+    ],
+    "with_earths_cloud_masking_points": [
+     0.46433351558993735,
+     0.6655261798635432
+    ]
+   },
+   "hot world settled": {
+    "ground_k": 307.11382429735096,
+    "sunlight_change_w_m2": 5.261747932729133,
+    "infrared_change_w_m2": 8.486586048227773,
+    "column_net_change_w_m2": -3.22483811549864,
+    "with_the_plants_co2_kept_w_m2": 2.1885264623629945,
+    "points": 0.9711014801497944,
+    "gcm_cover": 0.383,
+    "with_earths_cloud_masking_w_m2": [
+     1.134562036733791,
+     1.6076393926671941
+    ],
+    "with_earths_cloud_masking_points": [
+     0.5034322829271811,
+     0.7133480086325258
+    ]
+   }
+  },
+  "co2_kept_w_m2": 1.0363116531356453,
+  "n2_saved_share": 0.20201494581633184,
+  "n2_saved_kg": 5.108291485616205e+17,
+  "cloud_masking": {
+   "earths_cover": 0.6575342465753424,
+   "co2_all_sky_ratio": 0.9513349202288767
+  },
+  "basis": "titania-stack sunlight and Manabe-Wetherald humidity, clear sky, the 1.0 atm column less the 1.2 atm column at the same ground temperature; CO2 raised to 480 ppm at 1.0 atm to keep 48.6 Pa. The clear sky is the upper end; with clouds, the column's net change takes the masking Earth's clouds give the surface's reflection, at Earth's cover and at the GCM's (the resort's interpolated by its share of the way), and the CO2 kept its all-sky ratio"
+ },
+ "cirrus": {
+  "hot_world_cloud_net_w_m2": 5.974120003520142,
+  "design_case_cloud_net_w_m2": 0.3291321543460697,
+  "refit_high_cloud_net_w_m2": 5.644987849174072,
+  "earth_share_thinning_could_remove": [
+   0.2,
+   0.4
+  ],
+  "thinning_w_m2": [
+   0.0,
+   2.257995139669629
+  ],
+  "points": [
+   0.0,
+   1.001926392033054
+  ],
+  "overseeding_on_earth_w_m2": 4.9,
+  "seeding": {
+   "layer_km": [
+    63.0,
+    107.0
+   ],
+   "particles_per_litre": [
+    1.0,
+    20.0
+   ],
+   "aloft_kg": [
+    328127.27574941673,
+    6562545.514988335
+   ],
+   "per_year_kg": [
+    11984848.746747445,
+    239696974.93494892
+   ],
+   "basis": "estimate: 0.5 um feldspar particles through the layer, renewed every 10 days"
+  }
+ },
+ "beams": {
+  "all_beams_w_m2": [
+   0.869970330150629,
+   4.1381588704164916
+  ],
+  "all_beams_points": [
+   0.3860266210276947,
+   1.836199960688401
+  ],
+  "all_beams_tw": [
+   33.0,
+   156.97
+  ],
+  "by_component_tw": {
+   "residents": [
+    11.0,
+    32.9
+   ],
+   "food": [
+    10.2,
+    77.5
+   ],
+   "sky_control": [
+    0.381,
+    3.81
+   ],
+   "sky_hydrogen_remade": [
+    2.35,
+    24.5
+   ],
+   "sky_trips_and_food_lift": [
+    0.108,
+    0.108
+   ],
+   "water": [
+    0.00104,
+    0.038
+   ]
+  },
+  "food_tw": [
+   11.058947368421052,
+   83.96724137931034
+  ],
+  "food_w_m2": [
+   0.29195621052631576,
+   2.216735172413793
+  ],
+  "food_points": [
+   0.12954794609835749,
+   0.9836183587686024
+  ],
+  "food_in_orbit_w_m2": [
+   0.0005496296842105263,
+   0.004173171896551724
+  ],
+  "food_carbon": {
+   "blend_weights": {
+    "power_heavy": 0.4,
+    "power_made": 0.5,
+    "fully_lamp_lit": 0.1
+   },
+   "power_heavy_powered_share": [
+    0.1231044,
+    0.12397920000000001
+   ],
+   "moved_diet_share": [
+    0.64924176,
+    0.64959168
+   ],
+   "people": 8000000000.0,
+   "whole_diet_eaten_gt_c_yr": 0.7305,
+   "loss_factor": [
+    1.3,
+    1.5
+   ],
+   "arriving_gt_c_yr": [
+    0.47427110568,
+    0.71179008336
+   ],
+   "managed_import_gt_c_yr_at_10000": [
+    0.1151,
+    0.3258
+   ],
+   "times_the_managed_import": [
+    1.4557124176795582,
+    6.18410150616855
+   ]
+  },
+  "basis": "the domain synthesis's array case by component, scaled to the power screen's heat with the air's share; food made at the ring radius puts 5e-5 W/m2 a TW on the Moon. Its carbon: the blend's power-made and fully lamp-lit mixes and power-heavy's lamp-lit vegetables and fruit and microbial protein, as shares of the diet's energy, at 0.25 kg C a person a day (estimate), from the food eaten to the food made at the food study's high loss factor, against the carbon cycle's managed import at year 10,000, methane held, both routes and every corner"
+ },
+ "top_up": {
+  "first_millennium_w_m2": [
+   1.5348181207487208,
+   9.467434903926396
+  ],
+  "first_millennium_points": [
+   0.6810354704189986,
+   4.200927065098396
+  ],
+  "flow_kg_s": [
+   47720675.8435369,
+   131066367.53111772
+  ],
+  "fall_power_tw": [
+   58.21922452911502,
+   359.1218470352626
+  ],
+  "exobase_fall_mj_per_kg": [
+   1.22,
+   1.72
+  ],
+  "far_terminal_fall_mj_per_kg": 2.74,
+  "exobase_radius_moon_radii": [
+   1.7615871064140922,
+   2.560914871469546
+  ],
+  "first_screen_exobase_radius": [
+   1.77,
+   2.56
+  ],
+  "exobase_floor_w_m2": {
+   "low_flow": 1.5348181207487208,
+   "high_flow": [
+    4.215427219996425,
+    5.9430613265523355
+   ]
+  },
+  "above_the_exobase_w_m2": [
+   0.0,
+   5.252007683929971
+  ],
+  "above_the_exobase_at_the_high_end_w_m2": [
+   3.5243735773740603,
+   5.252007683929971
+  ],
+  "above_points": [
+   0.0,
+   2.330441291587431
+  ],
+  "above_the_exobase_at_the_high_end_points": [
+   1.563848761459987,
+   2.330441291587431
+  ],
+  "orbital_energy_to_shed_tw": [
+   48.67508936040763,
+   199.22087864729895
+  ],
+  "arrival_speed_m_s": [
+   1428.28568570857,
+   1743.5595774162693
+  ],
+  "momentum_to_shed_n": [
+   68158758219.6625,
+   228522020386.04108
+  ],
+  "momentum_at_the_low_exobase_n": [
+   83203841407.77597,
+   228522020386.04108
+  ],
+  "reflecting_sail_lunar_discs": [
+   791.5981024051066,
+   2654.0624040181783
+  ],
+  "elevator_shortfall": [
+   2578681506.849315,
+   7082431506.849316
+  ],
+  "basis": "the top-up's first millennium (climate_targets) from the exobase down at the low end and from the far cislunar terminal at the high; the exobase at the first screen's 1.77-2.56 lunar radii; braking to rest at the exobase removes the speed of the fall from the far terminal"
+ },
+ "glow": {
+  "efficacy": [
+   0.64513773825524,
+   0.710631
+  ],
+  "efficacy_sources": {
+   "held_branch_13_october": 0.710631,
+   "corrected_radiation_17_october": 0.64513773825524
+  },
+  "as_built_w_m2": [
+   9.162261935982432,
+   10.040486625089999
+  ],
+  "recommended_w_m2": [
+   3.886938792519358,
+   4.23694395234
+  ],
+  "the_roll_took_w_m2": [
+   5.2753231434630745,
+   5.803542672749999
+  ],
+  "the_roll_took_points": [
+   2.340786918040822,
+   2.5751705435331607
+  ],
+  "recommended_points": [
+   1.7247276099150664,
+   1.8800332617347408
+  ],
+  "the_lower_efficacy_takes_points": 0.15530565181967448,
+  "set_aside_on_13_october": {
+   "annulus absorber, 250 nm edge": {
+    "w_m2": [
+     2.4893130563207406,
+     2.7029540409300004
+    ],
+    "saved_w_m2": [
+     1.3976257361986173,
+     1.5339899114099995
+    ],
+    "points": [
+     0.6201599315607492,
+     0.6806679741476317
+    ]
+   },
+   "ultraviolet mirror, outer faces": {
+    "w_m2": [
+     2.185737027387559,
+     2.3630391412110003
+    ],
+    "saved_w_m2": [
+     1.701201765131799,
+     1.8739048111289995
+    ],
+    "points": [
+     0.7548638687097224,
+     0.8314963364812921
+    ]
+   }
+  },
+  "light_tw_per_point_of_design_sunlight": 111.26
+ },
+ "albedo": {
+  "clear_sky_kernel": 0.34427480916030556,
+  "kernels_by_column": [
+   {
+    "lat_deg": 2.7689,
+    "kernel": 0.34427480916030556,
+    "column": "site land"
+   },
+   {
+    "lat_deg": 8.3067,
+    "kernel": 0.33835863561033724,
+    "column": "land, water vapour at its 95th percentile"
+   },
+   {
+    "lat_deg": 35.9951,
+    "kernel": 0.31373739419971114,
+    "column": "land, water vapour at its 75th percentile"
+   },
+   {
+    "lat_deg": 35.9951,
+    "kernel": 0.3213709819859707,
+    "column": "land, water vapour at its 50th percentile"
+   },
+   {
+    "lat_deg": 58.143,
+    "kernel": 0.28192278719483915,
+    "column": "land, water vapour at its 5th percentile"
+   },
+   {
+    "lat_deg": 58.143,
+    "kernel": 0.29489988643148024,
+    "column": "land, water vapour at its 25th percentile"
+   }
+  ],
+  "cloud_factor": {
+   "hot": 0.8042322633408301,
+   "lock": 0.8987937027192803
+  },
+  "all_sky_kernel": [
+   0.2768769089822249,
+   0.30943203047816464
+  ],
+  "kernel_columns": [
+   "site land",
+   "sea near 0 degrees"
+  ],
+  "lock_deserts_cloud_cover": 0.10572213884393998,
+  "cloud_factor_at_the_lock_deserts_cover": 0.945960877712155,
+  "settled_share_of_moon": [
+   0.006959762641205032,
+   0.019402974636086756
+  ],
+  "cities_w_m2": [
+   0.036095808072974196,
+   0.2811571899990582
+  ],
+  "cities_points": [
+   0.016016572451685626,
+   0.12475616267762385
+  ],
+  "parks_share_of_moon": 0.12337761045772556,
+  "parks_w_m2": [
+   0.12797604680418123,
+   0.5959310005414821
+  ],
+  "parks_points": [
+   0.05678602960143086,
+   0.26442882306670273
+  ],
+  "deserts": {
+   "hot world": {
+    "desert_share_of_moon": {
+     "every_cell": 0.11698607343555913,
+     "model_land": 0.1113878738263735
+    },
+    "sunlit_desert_share": {
+     "every_cell": 0.06021700652676589,
+     "model_land": 0.055643486497669294
+    },
+    "kernel_over_the_equators": {
+     "every_cell": [
+      0.808532498510123,
+      0.870019711256971
+     ],
+     "model_land": [
+      0.8041534190728709,
+      0.8681207756256247
+     ]
+    },
+    "w_m2": [
+     0.3867802918705365,
+     1.5183053708976717
+    ],
+    "points": [
+     0.17162365655049092,
+     0.6737083687835067
+    ],
+    "with_the_equators_kernel_w_m2": [
+     0.48097823462152955,
+     1.7451390482913112
+    ],
+    "with_the_equators_kernel_points": [
+     0.21342153434895572,
+     0.7743598910077092
+    ]
+   },
+   "lock": {
+    "desert_share_of_moon": {
+     "every_cell": 0.23589564207258942,
+     "model_land": 0.24270231248105092
+    },
+    "sunlit_desert_share": {
+     "every_cell": 0.16233630710046212,
+     "model_land": 0.16895488592931976
+    },
+    "kernel_over_the_equators": {
+     "every_cell": [
+      0.8489489620340103,
+      0.8900244146308001
+     ],
+     "model_land": [
+      0.8508685684969525,
+      0.8912690615466278
+     ]
+    },
+    "w_m2": [
+     1.1912648672682187,
+     4.364057463565181
+    ],
+    "points": [
+     0.5285926835929385,
+     1.9364365636918621
+    ],
+    "with_the_equators_kernel_w_m2": [
+     1.4032231860135012,
+     4.896453441334752
+    ],
+    "with_the_equators_kernel_points": [
+     0.6226436537792271,
+     2.17267337916066
+    ]
+   }
+  },
+  "basis": "the change in reflected sunlight per unit surface albedo between the land and sea columns of the GCM radiation check (line-by-line, clear sky), the equatorial pair for the cities and parks and each desert row's latitude for the deserts; Earth's cloud masking from Lenton & Vaughan scaled by the GCM's cover; the deserts by band as the extract counts them on every cell's land and on the model's own land cells, on the model's land mask, the ends the least and the most of the two counts and the kernel's two ends; the design guesses in run.py"
+ },
+ "shield": {
+  "light_tw_per_point": 111.26,
+  "absorbing_dimmer_glow_return": {
+   "rolled": 0.1,
+   "night_roll": 0.14,
+   "as_built": 0.25
+  },
+  "reflecting_dimmer_window_coefficient": {
+   "at": 0.276,
+   "after_two_points": 0.32
+  },
+  "growth_through_light_percent_per_point": [
+   0.07,
+   0.295
+  ],
+  "land_rain_percent_per_point": [
+   0.550057,
+   1.38
+  ],
+  "basis": "glow.md: a dimmer absorbing in the window films returns 25% of its dimming as glow as built, 14% with the night roll, 10% with both halves rolled; one reflecting from the window tiles adds 2dR to their light pressure, 0.276 to about 0.32 for two points; climate_targets' costs"
+ },
+ "ranking": {
+  "levers": [
+   {
+    "rank": 1,
+    "lever": "the glow's set-aside answers",
+    "points": [
+     0.6201599315607492,
+     0.8314963364812921
+    ]
+   },
+   {
+    "rank": 2,
+    "lever": "food made in orbit",
+    "points": [
+     0.12954794609835749,
+     0.9836183587686024
+    ]
+   },
+   {
+    "rank": 3,
+    "lever": "methane and N2O at the low pair",
+    "points": [
+     0.7912824422409744,
+     0.8093446711269108
+    ]
+   },
+   {
+    "rank": 4,
+    "lever": "white roofs and silver foliage",
+    "points": [
+     0.07280260205311648,
+     0.3891849857443266
+    ]
+   },
+   {
+    "rank": 5,
+    "lever": "night-side cirrus thinning",
+    "points": [
+     0.0,
+     1.001926392033054
+    ]
+   },
+   {
+    "rank": 6,
+    "lever": "the top-up's fall",
+    "points": [
+     0.0,
+     2.330441291587431
+    ]
+   },
+   {
+    "rank": 7,
+    "lever": "1.0 atm in the hot world",
+    "points": [
+     0.46433351558993735,
+     0.9711014801497944
+    ]
+   },
+   {
+    "rank": 8,
+    "lever": "brighter deserts",
+    "points": [
+     0.17162365655049092,
+     1.9364365636918621
+    ]
+   },
+   {
+    "rank": 9,
+    "lever": "CO2 below 400 ppm",
+    "points": [
+     0.33024758239505414,
+     0.9034218446004998
+    ]
+   }
+  ],
+  "first_four_points": [
+   1.6137929219531977,
+   3.0136443521211316
+  ],
+  "first_four_share_of_dimming_in_all": {
+   "hot world": [
+    0.3042794067153421,
+    0.8149002496607203
+   ],
+   "resort, 301 K": [
+    0.14838051365542507,
+    0.36830993695489744
+   ],
+   "lock, 295 K": [
+    0.09711052714176292,
+    0.23950013610469062
+   ]
+  },
+  "details": {
+   "top_up_high_end_across_the_exobase_points": [
+    1.563848761459987,
+    2.330441291587431
+   ],
+   "pressure_hot_world_clear_sky_points": [
+    0.9116387714910694,
+    0.9711014801497944
+   ],
+   "pressure_hot_world_masked_points": [
+    0.46433351558993735,
+    0.7133480086325258
+   ],
+   "pressure_lock_points": [
+    -0.11151298489461409,
+    -0.20842380367736152
+   ]
+  }
+ }
+}
