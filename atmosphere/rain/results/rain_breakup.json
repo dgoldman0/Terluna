@@ -1,0 +1,705 @@
+{
+ "schema": "terluna.atmosphere.rain-breakup/1",
+ "evidence": "A runnable calculation: the single-drop solver's terminal speeds, which reproduce Earth's measured fall speeds to 0.20 m/s, in each world's air, with the collision outcome taken to follow the Weber number alone, as Straub et al. (2010) found for raindrop pairs, the liquid's viscosity and the gas film between the drops left out. The weights are Morrison's exponential spectra on Earth. The lunar values are Earth's breakup carried by that similarity; no laboratory has measured lunar collisions, and no CM1 run has tested the values.",
+ "reading_rule": "Sizes in mm. scale gives, for each target and height (surface: 2 m; cloud_base: the parcel cloud base of each world's column), the size factor s that carries Morrison's spectrum at the cutoff (0.30 mm) and at the equilibrium (0.60 mm) from Earth to the Moon: the breakup-weighted geometric mean over drop pairs of the ratio of the sizes at which each world's pairs of one size ratio reach one Weber number, with its 10, 50 and 90% points and the share of the breakup in Earth pairs the Moon cannot match below its stability screen (taken at the Moon's largest Weber number for that ratio, a lower bound on s). low_list_weights is the same mean with Low and List's energetic breakup as the weights; low_list_literal reads their fit with its dimensional constants on both worlds for the pairs within its measured sizes, with the share of the breakup it covers. capillary is the ratio of capillary lengths. alpha = ln(s / capillary) / ln(density ratio). general repeats the scale at other gravities and pressures. lunar_limits gives the values adopted at the resort's 2 m air as the rain-limits patch of climate/crm realizes them at the design pressure, and its namelist settings.",
+ "assumptions": [
+  "Drops collide at their terminal speeds in still air, with the geometric kernel pi/4 (D_L + D_s)^2 |V_L - V_s| (collision efficiency 1), between 0.1 mm and the stability screen.",
+  "Each pair's outcome is set by its Weber number and size ratio; the impact parameter averages alike on both worlds. The Ohnesorge number of a 1 mm drop, 0.004 on Earth and 0.0025 at the lunar size, and the 20% denser gas film are left out.",
+  "Morrison's exponential spectra stand for the rain whose breakup the scheme's law was fitted to; the law's two lengths, the cutoff and its e-folding length, scale together by the equilibrium's s.",
+  "The Moon's air is the design air at 1.2 atm and Earth's is at 1 atm, at each target's 2 m temperature and humidity (rain_drops.json's airs)."
+ ],
+ "earth_limits": {
+  "breakup_cutoff_mm": 0.3,
+  "breakup_rate_per_m": 2300.0,
+  "equilibrium_mm": 0.6013683393738892,
+  "mean_diameter_cap_mm": 2.8,
+  "fall_speed_cap_m_s": 9.1
+ },
+ "scale": {
+  "hot_world": {
+   "surface": {
+    "density_kg_m3": {
+     "world": 1.361776033365802,
+     "earth": 1.1378651782417468
+    },
+    "density_ratio": 1.196781533880883,
+    "capillary": 2.4574621153109453,
+    "stability_screen_mm": {
+     "world": 16.177939607429085,
+     "earth": 6.583189830937465
+    },
+    "cutoff": {
+     "scale": 2.5632664076834755,
+     "p10": 2.4696269224633784,
+     "p50": 2.5260448369095996,
+     "p90": 2.693973061287137,
+     "unreached_share": 0.016632590248025037,
+     "breaking_large_mm": 1.4098241718157742,
+     "breaking_small_mm": 0.4722964598153412,
+     "low_list_weights": 2.7342564313158615,
+     "low_list_literal": {
+      "scale": 1.7824689187624034,
+      "breakup_share_covered": 0.867428312474419
+     },
+     "over_capillary": 1.043054292358498,
+     "alpha": 0.23465926934012588
+    },
+    "equilibrium": {
+     "scale": 2.772050783679912,
+     "p10": 2.5024376396863808,
+     "p50": 2.695648935651896,
+     "p90": 3.282964322587394,
+     "unreached_share": 0.296370746885757,
+     "breaking_large_mm": 2.3919007324658157,
+     "breaking_small_mm": 0.7580285994707715,
+     "low_list_weights": 2.859393887443225,
+     "low_list_literal": {
+      "scale": 1.736766673596649,
+      "breakup_share_covered": 0.6670483238896815
+     },
+     "over_capillary": 1.1280136391153122,
+     "alpha": 0.6705688862609197
+    }
+   },
+   "cloud_base": {
+    "density_kg_m3": {
+     "world": 1.234506392467637,
+     "earth": 1.0313266319349303
+    },
+    "density_ratio": 1.1970081584643164,
+    "capillary": 2.4574280516073332,
+    "stability_screen_mm": {
+     "world": 16.385151354286524,
+     "earth": 6.667601659210111
+    },
+    "cutoff": {
+     "scale": 2.5585228840196574,
+     "p10": 2.468523854818049,
+     "p50": 2.5233673542408797,
+     "p90": 2.6824195244788016,
+     "unreached_share": 0.014554639535006181,
+     "breaking_large_mm": 1.4079691185791048,
+     "breaking_small_mm": 0.4706137356716533,
+     "low_list_weights": 2.722342085997583,
+     "low_list_literal": {
+      "scale": 1.7864858165182547,
+      "breakup_share_covered": 0.8588118932220845
+     },
+     "over_capillary": 1.0411384709091283,
+     "alpha": 0.22418875944342534
+    },
+    "equilibrium": {
+     "scale": 2.7677672290625877,
+     "p10": 2.502711415476086,
+     "p50": 2.6874711022075934,
+     "p90": 3.2715453665967664,
+     "unreached_share": 0.2814110828015322,
+     "breaking_large_mm": 2.391932420821395,
+     "breaking_small_mm": 0.7543591704664377,
+     "low_list_weights": 2.873504860407663,
+     "low_list_literal": {
+      "scale": 1.7408129888864896,
+      "breakup_share_covered": 0.6419882770122268
+     },
+     "over_capillary": 1.1262861703121971,
+     "alpha": 0.6613401077625028
+    },
+    "heights_m": {
+     "moon": 7395.861741539809,
+     "earth": 1223.427076845421
+    }
+   }
+  },
+  "resort": {
+   "surface": {
+    "density_kg_m3": {
+     "world": 1.3938769667041175,
+     "earth": 1.1653000089382177
+    },
+    "density_ratio": 1.1961528842466684,
+    "capillary": 2.4574678746543683,
+    "stability_screen_mm": {
+     "world": 16.291601399784245,
+     "earth": 6.629425990797777
+    },
+    "cutoff": {
+     "scale": 2.567135399424826,
+     "p10": 2.4704310072449034,
+     "p50": 2.5282750453047247,
+     "p90": 2.7034147601262273,
+     "unreached_share": 0.01762889460521125,
+     "breaking_large_mm": 1.411003481362374,
+     "breaking_small_mm": 0.4730875128554705,
+     "low_list_weights": 2.742562223277982,
+     "low_list_literal": {
+      "scale": 1.7814368356426058,
+      "breakup_share_covered": 0.8671622059411292
+     },
+     "over_capillary": 1.0446262292587982,
+     "alpha": 0.2437554006742065
+    },
+    "equilibrium": {
+     "scale": 2.779363090474592,
+     "p10": 2.5031337933145696,
+     "p50": 2.7031492062253273,
+     "p90": 3.3037413996567833,
+     "unreached_share": 0.3032824703528363,
+     "breaking_large_mm": 2.393897092259954,
+     "breaking_small_mm": 0.7599421584492404,
+     "low_list_weights": 2.8628531732667715,
+     "low_list_literal": {
+      "scale": 1.736868204269285,
+      "breakup_share_covered": 0.6692046117377619
+     },
+     "over_capillary": 1.1309865407154087,
+     "alpha": 0.6872311368220949
+    }
+   },
+   "cloud_base": {
+    "density_kg_m3": {
+     "world": 1.2789209060074906,
+     "earth": 1.0690480171962995
+    },
+    "density_ratio": 1.1963175511625819,
+    "capillary": 2.4574390151588954,
+    "stability_screen_mm": {
+     "world": 16.465631276566462,
+     "earth": 6.7003214220157625
+    },
+    "cutoff": {
+     "scale": 2.56280465514662,
+     "p10": 2.469392418358494,
+     "p50": 2.5256695219538345,
+     "p90": 2.692661845652819,
+     "unreached_share": 0.01568814506356348,
+     "breaking_large_mm": 1.4093488046723726,
+     "breaking_small_mm": 0.4716086131891593,
+     "low_list_weights": 2.73216265126929,
+     "low_list_literal": {
+      "scale": 1.7851961785449946,
+      "breakup_share_covered": 0.85956810379777
+     },
+     "over_capillary": 1.0428761972678746,
+     "alpha": 0.23421427036495857
+    },
+    "equilibrium": {
+     "scale": 2.775284118070918,
+     "p10": 2.503376687840855,
+     "p50": 2.6969377357342963,
+     "p90": 3.2974358009455003,
+     "unreached_share": 0.2897501980359565,
+     "breaking_large_mm": 2.3937733634040375,
+     "breaking_small_mm": 0.7567109205774208,
+     "low_list_weights": 2.8756124931321656,
+     "low_list_literal": {
+      "scale": 1.7408258284286338,
+      "breakup_share_covered": 0.6467967033159322
+     },
+     "over_capillary": 1.1293399758656761,
+     "alpha": 0.6785753862251994
+    },
+    "heights_m": {
+     "moon": 6355.977374410279,
+     "earth": 1050.5936739173605
+    }
+   }
+  },
+  "lock": {
+   "surface": {
+    "density_kg_m3": {
+     "world": 1.4291233293387593,
+     "earth": 1.195257906244351
+    },
+    "density_ratio": 1.1956610551351572,
+    "capillary": 2.457474402280068,
+    "stability_screen_mm": {
+     "world": 16.410867022368386,
+     "earth": 6.677940167817101
+    },
+    "cutoff": {
+     "scale": 2.571934385645435,
+     "p10": 2.4715384314268483,
+     "p50": 2.5308553525449793,
+     "p90": 2.7149448701253327,
+     "unreached_share": 0.01895779845753475,
+     "breaking_large_mm": 1.4120817021304564,
+     "breaking_small_mm": 0.47385810994267746,
+     "low_list_weights": 2.7525136579783682,
+     "low_list_literal": {
+      "scale": 1.7803826902738367,
+      "breakup_share_covered": 0.8668985380911348
+     },
+     "over_capillary": 1.0465762667798981,
+     "alpha": 0.25475286941724057
+    },
+    "equilibrium": {
+     "scale": 2.7878951576491207,
+     "p10": 2.5042813444298164,
+     "p50": 2.712561584553215,
+     "p90": 3.31105851901406,
+     "unreached_share": 0.3118133925192637,
+     "breaking_large_mm": 2.3955870706278746,
+     "breaking_small_mm": 0.7618137523427413,
+     "low_list_weights": 2.86653071638936,
+     "low_list_literal": {
+      "scale": 1.7368859423102165,
+      "breakup_share_covered": 0.6736425591174697
+     },
+     "over_capillary": 1.1344554210056004,
+     "alpha": 0.7059501036188792
+    }
+   },
+   "cloud_base": {
+    "density_kg_m3": {
+     "world": 1.3316811267851416,
+     "earth": 1.1136560542388303
+    },
+    "density_ratio": 1.1957741546112535,
+    "capillary": 2.4574511444546054,
+    "stability_screen_mm": {
+     "world": 16.54702105408362,
+     "earth": 6.73340794238088
+    },
+    "cutoff": {
+     "scale": 2.568242517245567,
+     "p10": 2.4706642869247215,
+     "p50": 2.528809014743615,
+     "p90": 2.7064838761773973,
+     "unreached_share": 0.017276672650622785,
+     "breaking_large_mm": 1.4107095375080014,
+     "breaking_small_mm": 0.4726466187276134,
+     "low_list_weights": 2.744144983830732,
+     "low_list_literal": {
+      "scale": 1.783645383680965,
+      "breakup_share_covered": 0.8699876637009722
+     },
+     "over_capillary": 1.0450838557018598,
+     "alpha": 0.24663677353893096
+    },
+    "equilibrium": {
+     "scale": 2.7845388881074316,
+     "p10": 2.504411144861337,
+     "p50": 2.707625704930763,
+     "p90": 3.312382790829836,
+     "unreached_share": 0.3008153625974342,
+     "breaking_large_mm": 2.395379102330612,
+     "breaking_small_mm": 0.7591646283930374,
+     "low_list_weights": 2.8778459127519462,
+     "low_list_literal": {
+      "scale": 1.7401121813271212,
+      "breakup_share_covered": 0.6583812877414006
+     },
+     "over_capillary": 1.1331004054306106,
+     "alpha": 0.6988922131698699
+    },
+    "heights_m": {
+     "moon": 5103.373091610717,
+     "earth": 843.0353719559687
+    }
+   }
+  }
+ },
+ "general": [
+  {
+   "gravity_m_s2": 9.80665,
+   "pressure_atm": 1.2,
+   "density_kg_m3": {
+    "world": 1.3938769667041175,
+    "earth": 1.1653000089382177
+   },
+   "density_ratio": 1.1961528842466684,
+   "capillary": 1.000114648099705,
+   "stability_screen_mm": {
+    "world": 6.630186041889756,
+    "earth": 6.629425990797777
+   },
+   "cutoff": {
+    "scale": 1.0816497557888254,
+    "p10": 1.0640451642770075,
+    "p50": 1.0752822683725407,
+    "p90": 1.104276302425327,
+    "unreached_share": 0.00407648097796801,
+    "breaking_large_mm": 1.411003481362374,
+    "breaking_small_mm": 0.4730875128554705,
+    "low_list_weights": 1.1140670767462981,
+    "low_list_literal": {
+     "scale": 1.0621458920503972,
+     "breakup_share_covered": 0.8616644012867255
+    },
+    "over_capillary": 1.0815257609155544,
+    "alpha": 0.43756673008895625
+   },
+   "equilibrium": {
+    "scale": 1.1356970500776624,
+    "p10": 1.0728482650581994,
+    "p50": 1.1101772573819528,
+    "p90": 1.2609080444993035,
+    "unreached_share": 0.16735836667889306,
+    "breaking_large_mm": 2.393897092259954,
+    "breaking_small_mm": 0.7599421584492404,
+    "low_list_weights": 1.1775941118529374,
+    "low_list_literal": {
+     "scale": 1.0786218772209935,
+     "breakup_share_covered": 0.6561297288946365
+    },
+    "over_capillary": 1.1355668594951334,
+    "alpha": 0.7097963450670449
+   }
+  },
+  {
+   "gravity_m_s2": 9.80665,
+   "pressure_atm": 1.5,
+   "density_kg_m3": {
+    "world": 1.7366844473195686,
+    "earth": 1.1653000089382177
+   },
+   "density_ratio": 1.4903324757561593,
+   "capillary": 1.0002866651201339,
+   "stability_screen_mm": {
+    "world": 6.631326415995848,
+    "earth": 6.629425990797777
+   },
+   "cutoff": {
+    "scale": 1.203989277021805,
+    "p10": 1.15117043856971,
+    "p50": 1.1822306423236515,
+    "p90": 1.2813907237279831,
+    "unreached_share": 0.026127880650737692,
+    "breaking_large_mm": 1.411003481362374,
+    "breaking_small_mm": 0.4730875128554705,
+    "low_list_weights": 1.2954743165730676,
+    "low_list_literal": {
+     "scale": 1.151949696728497,
+     "breakup_share_covered": 0.8497663702370339
+    },
+    "over_capillary": 1.2036442342028089,
+    "alpha": 0.4645467992825906
+   },
+   "equilibrium": {
+    "scale": 1.299795392182915,
+    "p10": 1.1620304080847825,
+    "p50": 1.2687577162203856,
+    "p90": 1.5511788608976174,
+    "unreached_share": 0.35698604762420794,
+    "breaking_large_mm": 2.393897092259954,
+    "breaking_small_mm": 0.7599421584492404,
+    "low_list_weights": 1.3172070781406862,
+    "low_list_literal": {
+     "scale": 1.1986258188761145,
+     "breakup_share_covered": 0.6370205393849976
+    },
+    "over_capillary": 1.299422892963199,
+    "alpha": 0.6564429594005289
+   }
+  },
+  {
+   "gravity_m_s2": 1.6242188765608128,
+   "pressure_atm": 1.0,
+   "density_kg_m3": {
+    "world": 1.1652991243087933,
+    "earth": 1.1653000089382177
+   },
+   "density_ratio": 0.9999992408569316,
+   "capillary": 2.457186161840085,
+   "stability_screen_mm": {
+    "world": 16.28973380553129,
+    "earth": 6.629425990797777
+   },
+   "cutoff": {
+    "scale": 2.3506182810819802,
+    "p10": 2.315752963685789,
+    "p50": 2.3389728492009842,
+    "p90": 2.3954040117529196,
+    "unreached_share": 0.0030437117146118993,
+    "breaking_large_mm": 1.411003481362374,
+    "breaking_small_mm": 0.4730875128554705,
+    "low_list_weights": 2.4138462070978615,
+    "low_list_literal": {
+     "scale": 1.6944219788025146,
+     "breakup_share_covered": 0.8671622059411292
+    },
+    "over_capillary": 0.9566301152053125,
+    "alpha": null
+   },
+   "equilibrium": {
+    "scale": 2.462348292731352,
+    "p10": 2.3356822238883312,
+    "p50": 2.4092166448865373,
+    "p90": 2.7081613364236325,
+    "unreached_share": 0.14414342458396256,
+    "breaking_large_mm": 2.393897092259954,
+    "breaking_small_mm": 0.7599421584492404,
+    "low_list_weights": 2.5578465814989455,
+    "low_list_literal": {
+     "scale": 1.6462095131118335,
+     "breakup_share_covered": 0.6692046117377619
+    },
+    "over_capillary": 1.0021008301981489,
+    "alpha": null
+   }
+  },
+  {
+   "gravity_m_s2": 1.6242188765608128,
+   "pressure_atm": 1.2,
+   "density_kg_m3": {
+    "world": 1.3938769667041175,
+    "earth": 1.1653000089382177
+   },
+   "density_ratio": 1.1961528842466684,
+   "capillary": 2.4574678746543683,
+   "stability_screen_mm": {
+    "world": 16.291601399784245,
+    "earth": 6.629425990797777
+   },
+   "cutoff": {
+    "scale": 2.567135399424826,
+    "p10": 2.4704310072449034,
+    "p50": 2.5282750453047247,
+    "p90": 2.7034147601262273,
+    "unreached_share": 0.01762889460521125,
+    "breaking_large_mm": 1.411003481362374,
+    "breaking_small_mm": 0.4730875128554705,
+    "low_list_weights": 2.742562223277982,
+    "low_list_literal": {
+     "scale": 1.7814368356426058,
+     "breakup_share_covered": 0.8671622059411292
+    },
+    "over_capillary": 1.0446262292587982,
+    "alpha": 0.2437554006742065
+   },
+   "equilibrium": {
+    "scale": 2.779363090474592,
+    "p10": 2.5031337933145696,
+    "p50": 2.7031492062253273,
+    "p90": 3.3037413996567833,
+    "unreached_share": 0.3032824703528363,
+    "breaking_large_mm": 2.393897092259954,
+    "breaking_small_mm": 0.7599421584492404,
+    "low_list_weights": 2.8628531732667715,
+    "low_list_literal": {
+     "scale": 1.736868204269285,
+     "breakup_share_covered": 0.6692046117377619
+    },
+    "over_capillary": 1.1309865407154087,
+    "alpha": 0.6872311368220949
+   }
+  },
+  {
+   "gravity_m_s2": 1.6242188765608128,
+   "pressure_atm": 1.5,
+   "density_kg_m3": {
+    "world": 1.7366844473195686,
+    "earth": 1.1653000089382177
+   },
+   "density_ratio": 1.4903324757561593,
+   "capillary": 2.457890552496755,
+   "stability_screen_mm": {
+    "world": 16.294403511258295,
+    "earth": 6.629425990797777
+   },
+   "cutoff": {
+    "scale": 2.898162640015635,
+    "p10": 2.68112897169813,
+    "p50": 2.8069907369383382,
+    "p90": 3.3003018539087825,
+    "unreached_share": 0.0654780903417956,
+    "breaking_large_mm": 1.411003481362374,
+    "breaking_small_mm": 0.4730875128554705,
+    "low_list_weights": 3.2081096329011034,
+    "low_list_literal": {
+     "scale": 1.9004630924249533,
+     "breakup_share_covered": 0.8671622059411292
+    },
+    "over_capillary": 1.179125993658117,
+    "alpha": 0.4129669107175137
+   },
+   "equilibrium": {
+    "scale": 3.137608880921487,
+    "p10": 2.6712867920892527,
+    "p50": 3.09441219096259,
+    "p90": 3.9044753382525927,
+    "unreached_share": 0.49607029716580636,
+    "breaking_large_mm": 2.393897092259954,
+    "breaking_small_mm": 0.7599421584492404,
+    "low_list_weights": 3.0527242504205323,
+    "low_list_literal": {
+     "scale": 1.8623702586931323,
+     "breakup_share_covered": 0.6692046117377619
+    },
+    "over_capillary": 1.2765454009879593,
+    "alpha": 0.6119247947163308
+   }
+  },
+  {
+   "gravity_m_s2": 3.7,
+   "pressure_atm": 1.0,
+   "density_kg_m3": {
+    "world": 1.1652991243087933,
+    "earth": 1.1653000089382177
+   },
+   "density_ratio": 0.9999992408569316,
+   "capillary": 1.6280190243342705,
+   "stability_screen_mm": {
+    "world": 10.79283163343485,
+    "earth": 6.629425990797777
+   },
+   "cutoff": {
+    "scale": 1.586303535193947,
+    "p10": 1.5753745485650006,
+    "p50": 1.583216166023594,
+    "p90": 1.5997178200616,
+    "unreached_share": 0.0009191144562809547,
+    "breaking_large_mm": 1.411003481362374,
+    "breaking_small_mm": 0.4730875128554705,
+    "low_list_weights": 1.605006586226822,
+    "low_list_literal": {
+     "scale": 1.3313067253298827,
+     "breakup_share_covered": 0.8671622059411292
+    },
+    "over_capillary": 0.974376534600152,
+    "alpha": null
+   },
+   "equilibrium": {
+    "scale": 1.6262644595363287,
+    "p10": 1.5827145400754312,
+    "p50": 1.6049460609833428,
+    "p90": 1.7027280158171998,
+    "unreached_share": 0.08315458989105001,
+    "breaking_large_mm": 2.393897092259954,
+    "breaking_small_mm": 0.7599421584492404,
+    "low_list_weights": 1.6669456938687888,
+    "low_list_literal": {
+     "scale": 1.312027059800476,
+     "breakup_share_covered": 0.6692046117377619
+    },
+    "over_capillary": 0.9989222700891599,
+    "alpha": null
+   }
+  },
+  {
+   "gravity_m_s2": 3.7,
+   "pressure_atm": 1.2,
+   "density_kg_m3": {
+    "world": 1.3938769667041175,
+    "earth": 1.1653000089382177
+   },
+   "density_ratio": 1.1961528842466684,
+   "capillary": 1.6282056743440152,
+   "stability_screen_mm": {
+    "world": 10.794069015860636,
+    "earth": 6.629425990797777
+   },
+   "cutoff": {
+    "scale": 1.7236416823188796,
+    "p10": 1.678708996863381,
+    "p50": 1.7064463318082586,
+    "p90": 1.7835205597075054,
+    "unreached_share": 0.009278072648861165,
+    "breaking_large_mm": 1.411003481362374,
+    "breaking_small_mm": 0.4730875128554705,
+    "low_list_weights": 1.8069937188560874,
+    "low_list_literal": {
+     "scale": 1.4056230064886177,
+     "breakup_share_covered": 0.8671622059411292
+    },
+    "over_capillary": 1.058614221457811,
+    "alpha": 0.31802000374061207
+   },
+   "equilibrium": {
+    "scale": 1.8411177637952958,
+    "p10": 1.6975283228110585,
+    "p50": 1.7919512198440917,
+    "p90": 2.122242090386551,
+    "unreached_share": 0.2353162327162548,
+    "breaking_large_mm": 2.393897092259954,
+    "breaking_small_mm": 0.7599421584492404,
+    "low_list_weights": 1.9095346641267263,
+    "low_list_literal": {
+     "scale": 1.395599647827945,
+     "breakup_share_covered": 0.6692046117377619
+    },
+    "over_capillary": 1.130764861470625,
+    "alpha": 0.6861367038425359
+   }
+  }
+ ],
+ "lunar_limits": {
+  "scale_capillary": 2.4576058205491975,
+  "scale_collisional": 2.785542204529544,
+  "alpha": 0.6872311368220949,
+  "derived_scale_collisional": 2.779363090474592,
+  "earth": {
+   "breakup_cutoff_mm": 0.3,
+   "breakup_rate_per_m": 2300.0,
+   "equilibrium_mm": 0.6013683393738892,
+   "mean_diameter_cap_mm": 2.8,
+   "fall_speed_cap_m_s": 9.1,
+   "terluna_fall_speed_cap_m_s": 3.093333322709817
+  },
+  "moon": {
+   "breakup_cutoff_mm": 0.8356626613588631,
+   "breakup_rate_per_m": 825.6920308943772,
+   "equilibrium_mm": 1.6751368897938144,
+   "mean_diameter_cap_mm": 6.881296297537753,
+   "fall_speed_cap_m_s": 5.804773506060524
+  },
+  "namelist": {
+   "brkup_gscale": 1,
+   "brkup_rhoexp": 0.687,
+   "brkup_rhor": "the case's surface pressure over 1013.25 hPa, CM1's ratio of its air's density to Earth's at the same temperature (1.2 at the design pressure)",
+   "brkup_db": 0.0003
+  },
+  "fall_speed": {
+   "largest_drop_speed_m_s": {
+    "moon": 5.329992138213767,
+    "moon_air_earth_gravity": 8.478341782791027,
+    "earth": 9.280446177534397
+   },
+   "gravity_ratio_in_the_same_air": 0.628659739694896,
+   "similarity_quarter_power": 0.6378871984681895,
+   "at_2m_air": {
+    "density_kg_m3": 1.3938769667041175,
+    "terluna_cap_m_s": 2.7007611844466037,
+    "similarity_cap_m_s": 5.068094942946102,
+    "lunar_equilibrium_mm": 1.6751368897938144,
+    "morrison_mass_weighted_speed_m_s": 4.468759228262068,
+    "solver_mass_weighted_speed_m_s": 4.208875129423873
+   }
+  }
+ },
+ "producer": {
+  "domain": "atmosphere",
+  "files": {
+   "atmosphere/rain/breakup.py": "39a2d73b11182e1186860191823255daa7d8cb7eda5b06d1ce06106db87187ea",
+   "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
+   "atmosphere/rain/product.py": "7ee26847fd22860df2dbf8818ecdc4731825ce4b18a1b866b0eefd2b2b4381db",
+   "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",
+   "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+  },
+  "inputs": {
+   "research/studies/climate_targets/results/climate_targets.json": "fee8c739e97519527faba8f64abf40446c30ec8747ca82090aed9801fad279af"
+  },
+  "constants": {
+   "AVOGADRO": 6.02214076e+23,
+   "BOLTZMANN": 1.380649e-23,
+   "CM1_DRY_AIR_GAS_CONSTANT": 287.04,
+   "CM1_GRAVITY": 9.81,
+   "CM1_RAIN_BREAKUP_CUTOFF": 0.0003,
+   "CM1_RAIN_BREAKUP_RATE": 2300.0,
+   "CM1_RAIN_DENSITY_EXPONENT": 0.54,
+   "CM1_RAIN_DENSITY_REFERENCE_PRESSURE": 85000.0,
+   "CM1_RAIN_DENSITY_REFERENCE_TEMPERATURE": 273.15,
+   "CM1_RAIN_FALL_CAP": 9.1,
+   "CM1_RAIN_FALL_COEFFICIENT": 841.99667,
+   "CM1_RAIN_FALL_EXPONENT": 0.8,
+   "CM1_RAIN_MEAN_DIAMETER_CAP": 0.0028,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "GAS_CONSTANT": 8.31446261815324,
+   "MOON_GM": 4902800118000.0,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665
+  }
+ }
+}
