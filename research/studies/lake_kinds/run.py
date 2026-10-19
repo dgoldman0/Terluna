@@ -2,6 +2,7 @@
 
     python -m research.studies.lake_kinds.ladder      # the lake runs at 301 K (about 2.5 hours on two cores)
     python -m research.studies.lake_kinds.run         # the census and the product (a few minutes)
+    python -m research.studies.lake_kinds.run --cache-only   # the same, stopping unless the index is current
 
 It reads the lake runs ladder.py saved in research/runs/lake_kinds (their index ladder.json holds the sha256 of every
 saved file, which this checks), the waters' oxygen study's product, the anoxic depths study's gas physics and remedies
@@ -808,10 +809,36 @@ def overturn_events(runs, lad, layers):
 
 # --- the product ------------------------------------------------------------------------------------------------
 
+def stale_entries(runs, st):
+    """The runs ladder.py's index does not hold under the key the current code and setting give them: every case of
+    the ladder, the giants, the checks and the lakes held meromictic, and the pans; empty when the index is the one
+    ladder.py would write from its cache."""
+    from research.studies.lake_kinds import meromictic as M
+    want = {n: C.key(st, c) for n, (c, _) in LD.cases().items()}
+    want.update({n: M.key(st, c) for n, (c, _) in LD.meromictic_cases().items()})
+    held = runs.index['cases']
+    out = sorted(set(want) ^ set(held)) + sorted(n for n in set(want) & set(held) if held[n]['key'] != want[n])
+    for i, band in enumerate(BANDS):
+        k = C.key(st, dict(kind='shallow', target='resort', site_i=i))
+        if runs.index['pans'][band]['summary'] != f'lake_oxygen_shallow_{band}_{k}.json':
+            out.append(f'pan {band}')
+    return out
+
+
 def main(argv=None) -> int:
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--cache-only', action='store_true',
+                    help='stop unless ladder.json holds every run under its current key (the product computes none)')
+    args = ap.parse_args(argv)
     tic = time.time()
     runs = Runs()
     st = S.Setting301()
+    if args.cache_only or R.cache_only():
+        stale = stale_entries(runs, st)
+        if stale:
+            raise SystemExit(f'cache only: ladder.json does not hold {len(stale)} runs under their current keys '
+                             f'({", ".join(stale[:4])}); run ladder.py --cache-only first')
     gas = Gases()
     print('runs and settings', f'{time.time() - tic:.0f} s', flush=True)
     lad, layers = ladder(runs, gas)

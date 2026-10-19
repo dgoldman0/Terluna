@@ -316,6 +316,10 @@ for the weeks to months after a warming, a transient beside these bounds.
   never turn over still lose gas upward by diffusion, as Tanganyika and Kivu do.
 - The seas' basins, the remedies run in the model and the biology of methanotrophs designed for sudden overturns are
   outside this study.
+- The climate targets are the ones the lakes ran on, domain/ecology's at e9c12eb (schema /2), which lake_oxygen keeps
+  byte for byte as climate_targets_as_run.json until the lakes rerun on the resort's 301 K design case. The merged
+  targets' lapse rates over the GCM's own land mask would cool these lakes' air by 0.026 K at most and 0.015 K
+  typically, and their lock's share of 0 for −0.002 is the design case the lakes' lock already is.
 
 ## The checks
 
@@ -337,6 +341,8 @@ demand the supply fixes, the warm transient beside them; and the three shares st
 ```sh
 python -m research.studies.lake_anoxia.profiles      # fifteen minutes on two cores; needs lake_oxygen's cached runs
 python -m research.studies.lake_anoxia.run           # about five minutes; reads LOLA through lake_oxygen's lakes
+python -m research.studies.lake_anoxia.run --cache-only   # the same, stopping unless the saved columns start from
+                                                          # the runs lake_oxygen's cache holds under its current keys
 python -m pytest research/studies/lake_anoxia
 ```
 

@@ -16,7 +16,8 @@ oxygen, the bottom water's age and its solute each steady from one pass to the n
 a column cut off from the surface keeps ageing and does not pass. A pan (the shelves and bays) spins up over the
 record's first year in hour steps, as lake_oxygen's productive shallows do. Then the record is run once more step by
 step and saved with the column about every day in research/studies/lake_kinds/columns.py's arrays (its capture(),
-with the labile pool), to research/runs/sea_oxygen/cases.
+with the labile pool), to research/runs/sea_oxygen/cases. A cache-only run (lake_oxygen's cache_only()) computes no
+column and stops at the first one not saved.
 """
 from __future__ import annotations
 
@@ -96,12 +97,13 @@ def fingerprint():
 
 def key(st: T.SeaSetting, case: dict) -> str:
     """The cache key: this study's column code and the lake model whole, the fingerprint of what the columns use
-    from lake_oxygen and the lake kinds study, the study's inputs, the target and the case."""
+    from lake_oxygen and the lake kinds study, what they read from the study's inputs (the setting's
+    values_fingerprint()), the target and the case."""
     h = hashlib.sha256()
     for p in (Path(__file__), Path(T.__file__), Path(L.__file__)):
         h.update(KC.sha256(p).encode())
     h.update(fingerprint().encode())
-    h.update(json.dumps(st.inputs, sort_keys=True).encode())
+    h.update(st.values_fingerprint().encode())
     h.update(json.dumps(dict(ground_k=st.ground_k, **case), sort_keys=True).encode())
     return h.hexdigest()[:20]
 
@@ -201,6 +203,8 @@ def run(st: T.SeaSetting, name: str, case: dict, start=None):
     final = CASES / f'{name}_{k}.json'
     if final.exists():
         return json.loads(final.read_text())
+    if R.cache_only():
+        R.uncached(final)
     tic = time.time()
     site = st.site(case['cell'], case['basin'])
     spm = case['steps_per_mean']
@@ -308,6 +312,8 @@ def slab(st: T.SeaSetting, i: int, run_name: str):
     path = CASES / f'slab_{run_name}_{i}_{k}.json'
     if path.exists():
         return json.loads(path.read_text())
+    if R.cache_only():
+        R.uncached(path)
     site = st.site(i)
     w = R.windows(st, run_name, site, at_lake=False)
     bsn = L.Basin.pan(50.0, 50.0, 1.0)

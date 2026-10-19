@@ -192,21 +192,28 @@ def wind_dissipation_series(forcing, basin, physics, air, mixed_depth, open_wate
 
 
 def cached_transfer(key, build):
-    """The transfer series cached in research/runs/lake_methane/transfer under a key of the saved file and the code."""
+    """The transfer series cached in research/runs/lake_methane/transfer under a key of the saved file and the code;
+    a cache-only run (lake_oxygen's cache_only()) builds none and stops at the first one not cached."""
     folder = RUNS / 'transfer'
     folder.mkdir(parents=True, exist_ok=True)
     path = folder / f'{key}.npy'
     if path.exists():
         return np.load(path)
+    if R.cache_only():
+        R.uncached(path)
     k = build()
     np.save(path, k)
     return k
 
 
-def code_key(*parts):
+def code_key(st, *parts):
+    """The transfer series' key: this module's, the lake model's and lake_oxygen's runner's code whole, what the
+    series reads from the setting's inputs (its values_fingerprint()) and the parts, which give the saved files by their
+    contents, so that a producer renaming its files (a re-key by hard links) leaves the key standing."""
     h = hashlib.sha256()
     for p in (Path(__file__), Path(L.__file__), Path(R.__file__)):
         h.update(sha256(p).encode())
+    h.update(st.values_fingerprint().encode())
     h.update(json.dumps(parts, sort_keys=True, default=str).encode())
     return h.hexdigest()[:24]
 
@@ -241,7 +248,7 @@ def anoxia_column(st, name, meta, traced=None, folder=ANOXIA_RUNS):
     if passes > 1:
         forcing = tile(forcing, passes)
     surface_t = z['surface_t'].astype(float)
-    key = code_key('anoxia', name, digest, version)
+    key = code_key(st, 'anoxia', name, digest, version)
     k, u_rebuilt = cached_transfer(key, lambda: transfer_velocity_series(forcing, surface_t, basin, physics, st.air,
                                                                          paired=version == 'current'))
     t = z['t']
@@ -364,7 +371,7 @@ def saved_column(st, name, entry, folder, site, version, names_all, physics, tar
     _, forcing, _ = R.forcing_for(st, target, site, 'lock', None, case['steps_per_mean'])
     if len(files) > 1:
         forcing = tile(forcing, len(files))
-    key = code_key('saved', name, sorted(digests.items()), version)
+    key = code_key(st, 'saved', name, [digests[f] for f in files], version)      # the contents in their passes' order
     k, u_rebuilt = cached_transfer(key, lambda: transfer_velocity_series(forcing, joined['surface_t'], basin, physics,
                                                                          st.air, paired=version == 'current'))
     open_water = joined['ice'] <= 0.0

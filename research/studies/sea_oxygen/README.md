@@ -412,6 +412,11 @@ cell's weather, and the seas' own deep water lies wherever the sideways circulat
 - **Pressure on the water.** The lake model's density is Kell's at one atmosphere, so the deep water's compressibility
   and the shift of its temperature of greatest density at 50–110 atm, the pressure 3–7 km down at lunar gravity, are
   left out; the deep water lies more than 20 K above that temperature.
+- **The targets as run.** The 301 K weather is built on the climate targets the lakes ran on, domain/ecology's at
+  e9c12eb (schema /2), which lake_oxygen keeps byte for byte as climate_targets_as_run.json until the lakes rerun on
+  the resort's 301 K design case. The merged targets leave the seas' forcing as it is (the columns' cells lie at the
+  seas' level, and the 301 K share is unchanged) and would cool the lakes' pans beside them by 0.024 K at most; their
+  seas' median at 301 K, 29.49 °C for the copy's 29.61, would raise the saturation there by 0.016 mg/L.
 
 ## The checks
 
@@ -454,6 +459,7 @@ python -m research.studies.sea_oxygen.seas                    # about a minute: 
 /home/kir/Documents/Projects/terluna/climate/gcm/.venv/bin/python -m research.studies.sea_oxygen.extract  # netCDF4
 python -m research.studies.sea_oxygen.run                     # the product from the cached columns; runs no column
 python -m research.studies.sea_oxygen.run --columns           # the columns, on two cores (hours; resumable)
+python -m research.studies.sea_oxygen.run --columns --cache-only   # the index and the product from the cache
 python -m pytest research/studies/sea_oxygen
 ```
 
@@ -462,6 +468,8 @@ recording the sha256 of every file it read. The columns are cached in `research/
 saved after every pass, and `research/runs/sea_oxygen/columns.json` indexes them with their sha256s for the studies that
 read them, the lake methane study's tracer first; each case's `diffusivity` names the form of its deep mixing. The cache
 key holds this study's column code and lake.py whole, the source of what the columns use from lake_oxygen, the lake
-kinds study and mixing_forms.py (so that an edit elsewhere in those files leaves the columns standing), and each input's
-sha256 (so that an input written again, even with the same figures, re-keys them). The 90 columns take about four and a
-half hours on two cores.
+kinds study and mixing_forms.py (so that an edit elsewhere in those files leaves the columns standing), and what the
+columns read from the inputs (lake_oxygen's `Setting.values_fingerprint()`: this study's extract by its sha256, the
+other studies' products by the values taken from them, so that a product written again with the same figures leaves
+them standing). The 90 columns take about four and a half hours on two cores; with `--cache-only` the run computes no
+column, slab or pan, and stops at the first one not cached or at an index that does not hold every current case.

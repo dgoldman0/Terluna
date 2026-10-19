@@ -4,6 +4,7 @@
     climate/gcm/.venv/bin/python -m research.studies.sea_oxygen.extract           # the GCM's weather (two minutes)
     python -m research.studies.sea_oxygen.run --columns                           # the columns (hours, two cores)
     python -m research.studies.sea_oxygen.run                                     # the product (columns cached)
+    python -m research.studies.sea_oxygen.run --columns --cache-only              # the index and product from cache
 
 First it proves the 301 K construction at 300 K: the lake kinds study's Setting301 gives climate_targets' own share
 and lapse rate there, this study's extract holds lake_oxygen's waters and Sun exactly, and lake_oxygen's saturation
@@ -25,6 +26,8 @@ and scenarios() (columns.py):
 - the slab check against the GCM's own water at the typical cells of the four largest basins and the two polar ones.
 Each column is saved daily in the lake kinds study's format. It writes research/runs/sea_oxygen/columns.json, the
 index of every saved column with its sha256s, and results/sea_oxygen.json (schema terluna.research.sea-oxygen/1).
+With --cache-only it computes no column, slab or pan and stops at the first one not cached, or at an index that does
+not hold every current case.
 """
 from __future__ import annotations
 
@@ -34,6 +37,7 @@ import dataclasses
 import hashlib
 import inspect
 import json
+import os
 import re
 import sys
 import time
@@ -305,7 +309,10 @@ def main(argv=None) -> int:
     ap.add_argument('--jobs', type=int, default=2, help='worker processes, at most 2 on the shared machine')
     ap.add_argument('--columns', action='store_true',
                     help='run the columns (hours on two cores; cached, resumable) and write their index')
+    ap.add_argument('--cache-only', action='store_true', help='the index and product from the cache; stop at a miss')
     args = ap.parse_args(argv)
+    if args.cache_only:
+        os.environ[R.CACHE_ONLY] = '1'
     jobs = max(1, min(args.jobs, 2))
     tic = time.time()
     repro = reproduction()
@@ -322,8 +329,12 @@ def main(argv=None) -> int:
     elif INDEX.exists():
         index = json.loads(INDEX.read_text())
         if not index_complete(st, index):
+            if R.cache_only():
+                raise SystemExit(f'cache only: {INDEX} does not hold every current case; run --columns --cache-only')
             print(f'{INDEX} does not hold every current case; the product takes the setting alone', flush=True)
             index = None
+    elif R.cache_only():
+        raise SystemExit(f'cache only: {INDEX} is missing; run --columns --cache-only')
     product = analyse(st, index, repro) if index else setting_only(st, repro)
     product['seconds'] = round(time.time() - tic, 1)
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -405,6 +416,8 @@ def lakes_pans(st):
             continue
         mine = C.CASES / f'lakes_pan_{band}_{C.key(st, dict(lakes_pan=band, **case))}.json'
         if not mine.exists():
+            if R.cache_only():
+                R.uncached(theirs)
             mine.write_text(json.dumps(R.run_case(st301, 'shallow', 'resort', i)) + '\n')
         found[band] = json.loads(mine.read_text())
         files[str(mine.relative_to(ROOT))] = sha256(mine)

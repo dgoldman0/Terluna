@@ -2,21 +2,21 @@
  "schema": "terluna.research.lake-oxygen-mixing-forms/1",
  "producer": {
   "files": {
-   "research/studies/lake_oxygen/mixing_forms.py": "9ba0a0bb8c8964d824b761f008458a47283105fdcbd15ba89a3d42a4853ae2c3",
+   "research/studies/lake_oxygen/mixing_forms.py": "c39eb21cede33dad2e7f1ad7fbe5d3ed7257da1ee5d3c362bac661f63556095a",
    "biosphere/ecology/lake.py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa",
-   "research/studies/lake_oxygen/run.py": "1786841b50b52074c3d1c2fc3b84954ef6110256840943bd6601820b40d60a15",
-   "research/studies/lake_kinds/columns.py": "720f44a63877b81033cc1c64c5be9755d9744aa6eabd431819e54a247950c627",
+   "research/studies/lake_oxygen/run.py": "f0b657cb7aa67181647817a2c2f02d0fa0f446dc19f093d4ab26c00e17da83ed",
+   "research/studies/lake_kinds/columns.py": "464cac8ac1e34241e20f0bd896db26ed15e6bfc834ddc750e830722ac644fa3a",
    "research/studies/lake_kinds/setting.py": "a72b08166f7ba3eeca5ab465a133c3235735278f4c557a141a38579e49d80b68"
   },
   "inputs": {
    "research/studies/lake_oxygen/results/lakes.json": "056679f12a6dfb5f19da1994616dbe3fd80c6c4906ab7aff70f4a445796ef2aa",
    "research/runs/lake_oxygen/forcing.npz": "66eef43a5731e51ab5e59154f31f1c65ba62cbfd6a3fec7b0b9c5e86aca28d69",
    "research/runs/lake_oxygen/forcing.json": "0c232d5532b027abf78d2205c317783f5de61d7ff8084f152b5ba9fddbf10c6a",
-   "research/studies/climate_targets/results/climate_targets.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "264150903ecf3924ac5dc0a83810ec0a65192671391c21db1bd3873bf73bde03",
+   "research/studies/lake_oxygen/climate_targets_as_run.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "13bb43c7491da470ad0627758814a338e6d830911bbc33c371b9acc04e699166",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
-   "research/studies/lake_oxygen/results/lake_oxygen.json": "02ede3205399a767f5a2d63f87976d584c1b0b07cae285cb0db66f22cd5b7194",
-   "research/runs/lake_oxygen/mixing_forms/mixing_forms_index.json": "0990c73918e735692bb5f0b911c3461fe4813cb524f65f7df181b06a601a5b11"
+   "research/studies/lake_oxygen/results/lake_oxygen.json": "c6ba6c78b91ab2fb29c02f471975591a6f60fac711d6393e015f46828d4028a3",
+   "research/runs/lake_oxygen/mixing_forms/mixing_forms_index.json": "61ffe9e890e2d91361425961e390159395c26c6021e7105e243fac50f7cb598b"
   }
  },
  "evidence": "A sensitivity study on one lake model (biosphere/ecology/lake.py) through one GCM's climate at T21: the same runs as lake_oxygen's and the lake kinds' ladder, with the diffusivity below the mixed layer from Shih et al.'s (2005) three regimes of the buoyancy Reynolds number in place of Osborn's rule at every one, as Bouffard & Boegman (2013) carry them to lakes; the pans' share of the wind's energy at half its central value and under the first round's fixed dissipation; and Osborn's rule with the dissipation bounded near the floor. lake.py's file is unchanged: its diffusivity() and wind_dissipation() are replaced inside this process. The methane is lake_anoxia's arithmetic on the 0-15 lakes, standing for every lake. No lunar lake has been measured.",
@@ -47661,5 +47661,5 @@
   }
  },
  "index": "research/runs/lake_oxygen/mixing_forms/mixing_forms_index.json",
- "seconds": 3396.0
+ "seconds": 64.5
 }

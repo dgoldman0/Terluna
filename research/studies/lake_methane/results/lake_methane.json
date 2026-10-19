@@ -2,33 +2,33 @@
  "schema": "terluna.research.lake-methane/1",
  "producer": {
   "files": {
-   "research/studies/lake_methane/run.py": "5d39ca2aab7c0eda8ccd56e67435c7516d70791720d1fc76a2589e9f8215ab7b",
-   "research/studies/lake_methane/cases.py": "78ad5d0852b3ef20c0d95c8a0a7c77cdf68271997638fe6cc5194d42a4c2ec63",
+   "research/studies/lake_methane/run.py": "f7c54b99f3d29326d2b0b0d082b7233003b59092eb1c1ab7a13271ba24740f62",
+   "research/studies/lake_methane/cases.py": "681db14be9a038cfa50d9f5f5379680cfba06d829300fc3205215bec0cad5ccb",
    "research/studies/lake_methane/tracer.py": "0b2339ebd60f74506022e745616f3788f9b0152442284e732bbe1eb11fb64cff",
-   "research/studies/lake_methane/columns.py": "3a5b73f9d1c637fe5719dfb9737a82b1258432e123e2022c3017c7d2f1057bfa",
+   "research/studies/lake_methane/columns.py": "958d0ac125cf8752a36a4a4b1d7359832294e540659989d8b916c1cddc8fbb89",
    "research/studies/lake_methane/biology.py": "bb1b1c0280ceeded2018d61224eb3c939defa4cb1765f19c334a36a97d3fb036",
    "biosphere/ecology/lake.py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa",
    "research/studies/lake_anoxia/gases.py": "80494948a28fb3fe8d6c4bee1b8c109f2ff17cd1698ebf19c8181cf6a1dd30eb",
-   "research/studies/lake_anoxia/run.py": "3012502524495054d8baff6b2f3eb04f48e45f1f92326dd9aa374c57a167265f",
-   "research/studies/lake_oxygen/run.py": "1786841b50b52074c3d1c2fc3b84954ef6110256840943bd6601820b40d60a15",
-   "research/studies/lake_oxygen/mixing_forms.py": "9ba0a0bb8c8964d824b761f008458a47283105fdcbd15ba89a3d42a4853ae2c3",
+   "research/studies/lake_anoxia/run.py": "fce117fd3ebed47c3721ac5223aae4e97f472965967a741a95f22c122bb3c462",
+   "research/studies/lake_oxygen/run.py": "f0b657cb7aa67181647817a2c2f02d0fa0f446dc19f093d4ab26c00e17da83ed",
+   "research/studies/lake_oxygen/mixing_forms.py": "c39eb21cede33dad2e7f1ad7fbe5d3ed7257da1ee5d3c362bac661f63556095a",
    "research/studies/lake_kinds/setting.py": "a72b08166f7ba3eeca5ab465a133c3235735278f4c557a141a38579e49d80b68",
    "research/studies/sea_oxygen/setting.py": "b555b3ce1c90a6fcc0902ba9c071d1eda0a76b8a40dbf835be504ab83de077d6",
-   "research/studies/sea_oxygen/columns.py": "e5e087617c0cd4fcfd18aec86f73fe267ddbdf46ea7b0c25eecc73d712e4732a"
+   "research/studies/sea_oxygen/columns.py": "dd24081565230f372febad5bdfc01236d45e748f5aafcb5c7bb7482620417879"
   },
   "inputs": {
-   "research/studies/lake_anoxia/results/lake_anoxia.json": "23b8cd7d034aba372cf8103603a3fb57287f3be8b42c8b4e7b37c0f106e0d914",
+   "research/studies/lake_anoxia/results/lake_anoxia.json": "71bc145b4cac0fa344a5a24f4ba719540163fb5817feb27692b33ce463553d7e",
    "research/runs/lake_anoxia/profiles.json": "faf917047ba467f5ce07b802dc2cf6ca9b292a6d8ea0ec7989f79c242b6e7efb",
-   "research/runs/lake_kinds/ladder.json": "26067e8a73c6eec6d91e9780e54f2d83d734b67bcaf4aabc5c1961971e00a891",
-   "research/runs/sea_oxygen/columns.json": "45560bdd458feba4cf25b3606fdc877682c90d7b13dae331334237c6a5a6d5ea",
+   "research/runs/lake_kinds/ladder.json": "bc4856c2a6fb85bdedd52a3319a83a28d154b996dea4fd4e365484b15c2da7e5",
+   "research/runs/sea_oxygen/columns.json": "2d56e99280f4e021bc1e53bd18bc3c798f1d72e3b2cd3d7b23fc067ec615e910",
    "research/studies/lake_oxygen/results/lakes.json": "056679f12a6dfb5f19da1994616dbe3fd80c6c4906ab7aff70f4a445796ef2aa",
    "research/studies/sea_oxygen/results/seas.json": "76073ddab08f9683b7876af482c2a6cb0d27dcc8a193aeff828df9044bd3d4cd",
-   "research/studies/sea_oxygen/results/sea_oxygen.json": "7aa475edf0bda71d506eaea918f0734de9e3aed97cb900cdadbe6d2d8bbdaf64",
-   "research/studies/lake_kinds/results/lake_kinds.json": "ef8116c2d2aebfe2317bcd413d2f1e574f657c0005e606af18920dd0c5adc29e",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "264150903ecf3924ac5dc0a83810ec0a65192671391c21db1bd3873bf73bde03",
-   "research/studies/domain_synthesis/results/ledgers.json": "692ded39d5d38cb5f2305ae5a5d00f14aae022475633b2e08378db3cf6c199e2",
+   "research/studies/sea_oxygen/results/sea_oxygen.json": "9091ad407461f5c437f53125eb60ce2a23dfb5ef15a9830f74aa7152a92a1c6b",
+   "research/studies/lake_kinds/results/lake_kinds.json": "f6a9c8a19802eaf60e7834f14a5008683deeb933dff1eee22b23d8279f155f06",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "13bb43c7491da470ad0627758814a338e6d830911bbc33c371b9acc04e699166",
+   "research/studies/domain_synthesis/results/ledgers.json": "fb85533ce86055632203cc2706c083ab392a223ff4b8799b385e55ddeccab207",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
-   "research/studies/climate_targets/results/climate_targets.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
+   "research/studies/lake_oxygen/climate_targets_as_run.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
    "research/studies/lake_methane/sources.json": "cdeb859a46a84a8a3538606c89fc359248301ae237e5a3772633ab4abf2efce5"
   },
   "constants": {
@@ -56354,7 +56354,7 @@
  },
  "kinds": {
   "index": "research/runs/lake_kinds/ladder.json",
-  "index_sha256": "26067e8a73c6eec6d91e9780e54f2d83d734b67bcaf4aabc5c1961971e00a891",
+  "index_sha256": "bc4856c2a6fb85bdedd52a3319a83a28d154b996dea4fd4e365484b15c2da7e5",
   "ladder": {
    "352": {
     "oligotrophic": {
@@ -83918,7 +83918,7 @@
  },
  "seas": {
   "index": "research/runs/sea_oxygen/columns.json",
-  "index_sha256": "45560bdd458feba4cf25b3606fdc877682c90d7b13dae331334237c6a5a6d5ea",
+  "index_sha256": "2d56e99280f4e021bc1e53bd18bc3c798f1d72e3b2cd3d7b23fc067ec615e910",
   "lake_py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa",
   "complete": true,
   "acceptors": {
@@ -83992,7 +83992,7 @@
     "files": {
      "procellarum_typical_2c3c65d348d107ef3fe3_pass00.npz": "cd22e47422fa3ef9385025545b78ba5bcbf7c73aed5c6866985a0ea12976c903"
     },
-    "summary": "procellarum_typical_2c3c65d348d107ef3fe3.json",
+    "summary": "procellarum_typical_86f23adfbe23780a2f5d.json",
     "summary_sha256": "d2526be9365b7b04aaf32802fc31f225c585fb0d5da0dc6f17a5035188cc763e",
     "case": {
      "name": "procellarum_typical",
@@ -85282,7 +85282,7 @@
     "files": {
      "procellarum_coldest_59fc74e81df63f43e97e_pass00.npz": "fa92f0bf697fcd6a125e09701ebdafb60dc557360676802bcb21a239b1edd2d1"
     },
-    "summary": "procellarum_coldest_59fc74e81df63f43e97e.json",
+    "summary": "procellarum_coldest_064ca258c412a8a44c7f.json",
     "summary_sha256": "2f4707190e9c401c7b4f24497a16a251266d23691e862c38ffe50da541c97921",
     "case": {
      "name": "procellarum_coldest",
@@ -86548,7 +86548,7 @@
     "files": {
      "ingenii_typical_047360696a5375743350_pass00.npz": "2774a2d58a3ab6a2548b10991851c94521fa1b361bb73b1a9fe6704ba886eb10"
     },
-    "summary": "ingenii_typical_047360696a5375743350.json",
+    "summary": "ingenii_typical_d7841d87a7a0c0965369.json",
     "summary_sha256": "693d55fcbc2c934d9cadd5b40deb0b6c086c67f799f8c8264c60a7ffaed4c03b",
     "case": {
      "name": "ingenii_typical",
@@ -87778,7 +87778,7 @@
     "files": {
      "ingenii_coldest_4903ad0242242e67b631_pass00.npz": "c77eac234d28d9d9f3e25535d77ed9bc6d63ded09b1bf83a70e8eb82c75f9884"
     },
-    "summary": "ingenii_coldest_4903ad0242242e67b631.json",
+    "summary": "ingenii_coldest_ff6864a87fd49fa84cd5.json",
     "summary_sha256": "56dec3514e9af62e807a96f84d4d46f7d75db368931c57b58460d4ff76e9f7a3",
     "case": {
      "name": "ingenii_coldest",
@@ -88996,7 +88996,7 @@
     "files": {
      "nubium_typical_5118e0fda6c73450193a_pass00.npz": "29f1d4a2a4ce4b0b5482769c4698e74a95ad9b49b89f048c10eba3c89da61796"
     },
-    "summary": "nubium_typical_5118e0fda6c73450193a.json",
+    "summary": "nubium_typical_9303a7f222141d0f6455.json",
     "summary_sha256": "5a76c965a5f2e0fbf08444bc568266ea07d050e907e7b606954a2240fa76c029",
     "case": {
      "name": "nubium_typical",
@@ -90310,7 +90310,7 @@
     "files": {
      "nubium_coldest_dd91fedd8b56db931e05_pass00.npz": "6c4596c3b1ab686f4c8554687d7e43d7cf81433b946c1c8b734f71b5640fcad7"
     },
-    "summary": "nubium_coldest_dd91fedd8b56db931e05.json",
+    "summary": "nubium_coldest_775bca4eef0ee58e3de0.json",
     "summary_sha256": "9a2df525dd14c82fab37faea0132fc88bca26b9ff7b7f16f8396ddd2cc73a40f",
     "case": {
      "name": "nubium_coldest",
@@ -91606,7 +91606,7 @@
     "files": {
      "humboldtianum_typical_22aeb3c3a0e695d016d0_pass00.npz": "d349603c264c7a177ea697c62bb143d273f00b6582e23fbbef4104064cee2008"
     },
-    "summary": "humboldtianum_typical_22aeb3c3a0e695d016d0.json",
+    "summary": "humboldtianum_typical_894503fc56f37fecd5b7.json",
     "summary_sha256": "5774a3922514909025e24883eb7230184a6a0b88ec1172babdc1807996745c19",
     "case": {
      "name": "humboldtianum_typical",
@@ -92908,7 +92908,7 @@
     "files": {
      "humboldtianum_coldest_51aab1a2780bdda26a88_pass00.npz": "495acc836711ddd8ad32cf235d8e87ec1943cbc34767f8947ac2657fea0a2420"
     },
-    "summary": "humboldtianum_coldest_51aab1a2780bdda26a88.json",
+    "summary": "humboldtianum_coldest_df7a14b16e913f9ba184.json",
     "summary_sha256": "5ce7662b008b3fdce0caeca8b81f885bc310ef21e25be9ad0f303224001d2739",
     "case": {
      "name": "humboldtianum_coldest",
@@ -94150,7 +94150,7 @@
     "files": {
      "crisium_typical_353738f2f0c198a2ed13_pass00.npz": "5558338799c698a199ec61df9adcf7983966baf56c2e8089cf38fa0e43ddabd8"
     },
-    "summary": "crisium_typical_353738f2f0c198a2ed13.json",
+    "summary": "crisium_typical_16c6676328d5ae3b2100.json",
     "summary_sha256": "2dc5145458071ff1d7867b2e8534df307fb8374335bb31fae1f103df5752cfe6",
     "case": {
      "name": "crisium_typical",
@@ -95386,7 +95386,7 @@
     "files": {
      "crisium_coldest_63d0d48b81949e16e91e_pass00.npz": "a82909954cd6c03522990327d5ee8177ac2dbadbc9dd45d942250d186cedddd8"
     },
-    "summary": "crisium_coldest_63d0d48b81949e16e91e.json",
+    "summary": "crisium_coldest_e17fc2b31f59b5c4a012.json",
     "summary_sha256": "f468ef6aa294ef5e98c4efb675ed064acc24f049453a35e355b4d51a5c1236b3",
     "case": {
      "name": "crisium_coldest",
@@ -96628,7 +96628,7 @@
     "files": {
      "fecunditatis_typical_95e78a273a615d4feb60_pass00.npz": "93dc53a8805cbefdd396730fe63f3ccc290811bf91e8d8e467a086e0b538f210"
     },
-    "summary": "fecunditatis_typical_95e78a273a615d4feb60.json",
+    "summary": "fecunditatis_typical_3d66dedcdb26a30854eb.json",
     "summary_sha256": "c43618d2bab50c9419e43c3082ae1e4ec39141318a22c7ad6f633a993ffb2ba7",
     "case": {
      "name": "fecunditatis_typical",
@@ -97918,7 +97918,7 @@
     "files": {
      "fecunditatis_coldest_53f193c759708e71f372_pass00.npz": "45ff7ca4578a04659b51505c3c7fb2ef7e37aa3e6d73303d6abca006609a398f"
     },
-    "summary": "fecunditatis_coldest_53f193c759708e71f372.json",
+    "summary": "fecunditatis_coldest_70fe802f04370c16e903.json",
     "summary_sha256": "5c7f816dfa83838c30973bd3adfe48879a8af933ac9ad005c213fce7f5e6990c",
     "case": {
      "name": "fecunditatis_coldest",
@@ -99202,7 +99202,7 @@
     "files": {
      "smythii_typical_232326ca9b77c8f5d525_pass00.npz": "3b65354015c88a0bbde9266114b940d9155a652e09c8e6e2a056725217644419"
     },
-    "summary": "smythii_typical_232326ca9b77c8f5d525.json",
+    "summary": "smythii_typical_44e3756c88a972847b19.json",
     "summary_sha256": "76738f94166aa0b44315ec35091aa75fc57acbc8ac8ffb94a3cc314827425801",
     "case": {
      "name": "smythii_typical",
@@ -100432,7 +100432,7 @@
     "files": {
      "smythii_coldest_dfe4ab0a43a0601deef9_pass00.npz": "558acf09207f71bb837e47b59e6a24f6ba5037a7db50a0b04f4098db64eaffb8"
     },
-    "summary": "smythii_coldest_dfe4ab0a43a0601deef9.json",
+    "summary": "smythii_coldest_a1b6dba4907ce4ffea29.json",
     "summary_sha256": "20ecc5f3f64f235bdc0fbf61da7f6dd13579f8b22bffb52c780f51c505d171d4",
     "case": {
      "name": "smythii_coldest",
@@ -101662,7 +101662,7 @@
     "files": {
      "schrodinger_typical_c9965462750b977ff5a1_pass00.npz": "b4fd947eb71acf20c245d09c234b279ac471daac88206c744341b56eb0843169"
     },
-    "summary": "schrodinger_typical_c9965462750b977ff5a1.json",
+    "summary": "schrodinger_typical_f165304775a8b556fed3.json",
     "summary_sha256": "4e1f3eb3746b6aa4a5183c416e831cc9738279c80838cdd291ad5c62d9a27c1d",
     "case": {
      "name": "schrodinger_typical",
@@ -102910,7 +102910,7 @@
     "files": {
      "schrodinger_coldest_72a0868767db5792e1e2_pass00.npz": "84f8e1b9239e82dcdb55737c59854386453743f08d412e4cbb6549664bc86289"
     },
-    "summary": "schrodinger_coldest_72a0868767db5792e1e2.json",
+    "summary": "schrodinger_coldest_4939bb9f764b886c368f.json",
     "summary_sha256": "9d1440ba42cf1802de667bce88e2b9d11028bbf95a4aa651ee00a6d21eee6095",
     "case": {
      "name": "schrodinger_coldest",
@@ -104164,7 +104164,7 @@
     "files": {
      "7n_302e_typical_485f1ee220949ced78a3_pass00.npz": "8eba17480d97f0714d3185f65108f478b7b9817805089a61375818da806899b6"
     },
-    "summary": "7n_302e_typical_485f1ee220949ced78a3.json",
+    "summary": "7n_302e_typical_d26c3ca66b833a3c1852.json",
     "summary_sha256": "c16867754d1951b3a1c06e95d3f30e8181ec7565a4f06773949876534bfb9e72",
     "case": {
      "name": "7n_302e_typical",
@@ -105558,7 +105558,7 @@
     "files": {
      "drygalski_typical_8ff4fa36eb1361e2d199_pass00.npz": "889de1b883fb0c0cdc7ca600720865fb383f45c76b7a490aceab3b39dc85b479"
     },
-    "summary": "drygalski_typical_8ff4fa36eb1361e2d199.json",
+    "summary": "drygalski_typical_cb72496a153e99897603.json",
     "summary_sha256": "6672ed424827fe6dbcb3c5eafc55d92f233afbe16f8bdc58e8203aa97c435ff8",
     "case": {
      "name": "drygalski_typical",
@@ -106776,7 +106776,7 @@
     "files": {
      "rozhdestvenskiy_typical_75dc57c0af103fae0a12_pass00.npz": "64dae0ba75083b7561c1d199343d49104bc788061d1242c130c0de653e109525"
     },
-    "summary": "rozhdestvenskiy_typical_75dc57c0af103fae0a12.json",
+    "summary": "rozhdestvenskiy_typical_ba13d1f08aa7523fca6f.json",
     "summary_sha256": "cf0cfae0b7f6213b9b0a8955025f7c05c40c02918c6ecdcee673759492a940c6",
     "case": {
      "name": "rozhdestvenskiy_typical",
@@ -108030,7 +108030,7 @@
     "files": {
      "jules_typical_20b3559efc399571012c_pass00.npz": "ca28b6c97b56b009efb1e3335557457ae7372dbfa2781dc324a1547ad5e46b51"
     },
-    "summary": "jules_typical_20b3559efc399571012c.json",
+    "summary": "jules_typical_ae245533efd19bb4789d.json",
     "summary_sha256": "568b1e1d3aea467eef1669ee4296f96046da538e701b5b0e1fecc8541cfd3e94",
     "case": {
      "name": "jules_typical",
@@ -109290,7 +109290,7 @@
     "files": {
      "procellarum_typical_pan3m_29052846dc32080b5cca_pass00.npz": "131e4841ed5c2a2777d73536094c7e880572ea6691d7121ca36f53c07acd486a"
     },
-    "summary": "procellarum_typical_pan3m_29052846dc32080b5cca.json",
+    "summary": "procellarum_typical_pan3m_a44ed1b31925d1d5594b.json",
     "summary_sha256": "4db545cf6d62b3efc0fc33499d8712026b2d48c7db94cd2a7e40dee77ad30cdf",
     "case": {
      "name": "procellarum_typical_pan3m",
@@ -110118,7 +110118,7 @@
     "files": {
      "procellarum_typical_pan10m_0e10de71bcc42e5aeb16_pass00.npz": "f27c1e46baab7382726850e21eaf59eeb211218afbdb78417a6918d1e4674741"
     },
-    "summary": "procellarum_typical_pan10m_0e10de71bcc42e5aeb16.json",
+    "summary": "procellarum_typical_pan10m_0a6fb0dd1779eac482ab.json",
     "summary_sha256": "d8f1d54eca251fa4b417286a86851bfc7aac3303ef2b0ddf4dc545805d198a46",
     "case": {
      "name": "procellarum_typical_pan10m",
@@ -111408,7 +111408,7 @@
     "files": {
      "procellarum_coldest_pan3m_f6747b5f696ac9d05c35_pass00.npz": "c187dd5fa8fc10536480026671923de844e70dd1fa84c1df77302fd89ed16dcc"
     },
-    "summary": "procellarum_coldest_pan3m_f6747b5f696ac9d05c35.json",
+    "summary": "procellarum_coldest_pan3m_f0c857e907c2d913123f.json",
     "summary_sha256": "c2408f427e3b182222b67219b10df7af01a86194829a6ef22fbf3e8e4224d724",
     "case": {
      "name": "procellarum_coldest_pan3m",
@@ -112248,7 +112248,7 @@
     "files": {
      "ingenii_typical_pan3m_572390d0d6e6c7fa78d8_pass00.npz": "0bd5478655a3b27cfdd7d42523121a62a0ea673228197efc68e603b4f9458726"
     },
-    "summary": "ingenii_typical_pan3m_572390d0d6e6c7fa78d8.json",
+    "summary": "ingenii_typical_pan3m_dfcae246695c8c86d88f.json",
     "summary_sha256": "214781b4ba99fe484ebd96b1df485a7e2564321c315b3e79248f78069137511c",
     "case": {
      "name": "ingenii_typical_pan3m",
@@ -113076,7 +113076,7 @@
     "files": {
      "ingenii_typical_pan10m_9d9aa3feb8d2e84b27a2_pass00.npz": "a1a8c3689b408e32b88bea22a572c5607abc6ede572ac672334a207bf80ee5d0"
     },
-    "summary": "ingenii_typical_pan10m_9d9aa3feb8d2e84b27a2.json",
+    "summary": "ingenii_typical_pan10m_ca3968ee092a8a5570e2.json",
     "summary_sha256": "b872453018caf9777a8c76b0db4e578287a49284667f6b088b11c934ccd8b178",
     "case": {
      "name": "ingenii_typical_pan10m",
@@ -114246,7 +114246,7 @@
     "files": {
      "ingenii_coldest_pan3m_15abaa3b3d76b3498a0f_pass00.npz": "5e7434224fe6ebc7ae59c2d009df2211e5943885e53604d0937db517df035e87"
     },
-    "summary": "ingenii_coldest_pan3m_15abaa3b3d76b3498a0f.json",
+    "summary": "ingenii_coldest_pan3m_bfe2274bfc4dec2ef592.json",
     "summary_sha256": "46f0cf12519b1eb10b3f880f0d88c6916e8c0f1d904584f8ba527533281595ab",
     "case": {
      "name": "ingenii_coldest_pan3m",
@@ -115074,7 +115074,7 @@
     "files": {
      "nubium_typical_pan3m_d4d5e1fafc7d9b1fe118_pass00.npz": "ab8172c01cd4c9f32818ae07747ac24d858c30d22f117d95eac070d3c2c8029c"
     },
-    "summary": "nubium_typical_pan3m_d4d5e1fafc7d9b1fe118.json",
+    "summary": "nubium_typical_pan3m_59a436c780ef81d6dbf2.json",
     "summary_sha256": "ef1396215ec2580d63c02420bd76a875535c8ac37bc022536bddb1d0598b2ad6",
     "case": {
      "name": "nubium_typical_pan3m",
@@ -115902,7 +115902,7 @@
     "files": {
      "nubium_typical_pan10m_37e78dd136139da28b83_pass00.npz": "9985412bf5f5bfdfbb7e435aeba710e479d6f732925b666442282ef8fc41244f"
     },
-    "summary": "nubium_typical_pan10m_37e78dd136139da28b83.json",
+    "summary": "nubium_typical_pan10m_e950347fde0fc7f2f901.json",
     "summary_sha256": "d9f0038bd243d8b19b746b6ec0e6f6c299f6ea4063ebb48472114752ec3557ad",
     "case": {
      "name": "nubium_typical_pan10m",
@@ -117294,7 +117294,7 @@
     "files": {
      "nubium_coldest_pan3m_7b2898988b71dda832a0_pass00.npz": "8f8a2ee663c29bc3cd6d270ad2344c7ff729d5725a14b2ef52c6a7ea1003d694"
     },
-    "summary": "nubium_coldest_pan3m_7b2898988b71dda832a0.json",
+    "summary": "nubium_coldest_pan3m_8dbc78d50f6a7acbd9d7.json",
     "summary_sha256": "7f6f60452d0269b620288bcb4b48b69f8d47aeecb195708f71dab696a9646329",
     "case": {
      "name": "nubium_coldest_pan3m",
@@ -118122,7 +118122,7 @@
     "files": {
      "humboldtianum_typical_pan3m_4951e7d284bceedc150f_pass00.npz": "2d009efb08df54661bfc32833958a1c0bcb350f3035c0504a8d64b091551e99c"
     },
-    "summary": "humboldtianum_typical_pan3m_4951e7d284bceedc150f.json",
+    "summary": "humboldtianum_typical_pan3m_ea8d3ffd23693aeb522a.json",
     "summary_sha256": "b98ca457dad1ac281aadf61646bb1de77cd0daee88c3424e5b9a261ccef8402a",
     "case": {
      "name": "humboldtianum_typical_pan3m",
@@ -118950,7 +118950,7 @@
     "files": {
      "humboldtianum_typical_pan10m_1a5eedfc2b972e0f3e9e_pass00.npz": "8caf72c2b1fcd77eeccf406f00c5e7e326ab08a52b7885a6673b3fb5500d5d49"
     },
-    "summary": "humboldtianum_typical_pan10m_1a5eedfc2b972e0f3e9e.json",
+    "summary": "humboldtianum_typical_pan10m_16919ddc6cd7781e8a02.json",
     "summary_sha256": "ab57f7e879cb41644486f2fba8cbbb08ab9b795ad5f167fa28847ee764cde309",
     "case": {
      "name": "humboldtianum_typical_pan10m",
@@ -120018,7 +120018,7 @@
     "files": {
      "humboldtianum_coldest_pan3m_784aa411b85717986cd8_pass00.npz": "f25ec0728271a4c770e72635e2e35dd07c5cf4e68156e587cb9d42f14d997900"
     },
-    "summary": "humboldtianum_coldest_pan3m_784aa411b85717986cd8.json",
+    "summary": "humboldtianum_coldest_pan3m_ebf49b4a600b39f7f5cd.json",
     "summary_sha256": "92cdea5a4121110ca291182de8212054fdc8850dd645bb9f8165013889d6620a",
     "case": {
      "name": "humboldtianum_coldest_pan3m",
@@ -120846,7 +120846,7 @@
     "files": {
      "crisium_typical_pan3m_d2313da19e902672d939_pass00.npz": "88ac193c8b9dcb11c78ce0e16a8cbfe61d5fd80362366ea79436d681336fd537"
     },
-    "summary": "crisium_typical_pan3m_d2313da19e902672d939.json",
+    "summary": "crisium_typical_pan3m_ef9e0e660949c8cb1499.json",
     "summary_sha256": "13aece8a00d9349eb466f593d1de95709a43cfa8a996c64b4c9ddd3baedd5f4d",
     "case": {
      "name": "crisium_typical_pan3m",
@@ -121674,7 +121674,7 @@
     "files": {
      "crisium_typical_pan10m_5f3b5fcb9bb9495d8dac_pass00.npz": "77631591c6064a70d233af778fcddfbcccf531600b84cab6d707856e7b7b5a82"
     },
-    "summary": "crisium_typical_pan10m_5f3b5fcb9bb9495d8dac.json",
+    "summary": "crisium_typical_pan10m_397a4a46bcdc372f3352.json",
     "summary_sha256": "478b426f330e4258ef20d278f11b42e5427a097b9c0660569d2d5fcb4214dd78",
     "case": {
      "name": "crisium_typical_pan10m",
@@ -123174,7 +123174,7 @@
     "files": {
      "crisium_coldest_pan3m_1afa23ddeb8288527e46_pass00.npz": "a5a939c38180a9f048c340430befa4dbc30185b9bf10ef003779bd6dd5124b2a"
     },
-    "summary": "crisium_coldest_pan3m_1afa23ddeb8288527e46.json",
+    "summary": "crisium_coldest_pan3m_e506f02eceabdd5d54c0.json",
     "summary_sha256": "b2607dba8ac890966a1465d2f8a84f1e2acbbaa180ae8f6672cf36c02765ce81",
     "case": {
      "name": "crisium_coldest_pan3m",
@@ -124002,7 +124002,7 @@
     "files": {
      "fecunditatis_typical_pan3m_52a35d914a0543c02d9e_pass00.npz": "9651cf5dbbaf1ea35e5b68393665b6f435289c9b91479e630c0f53aa0b6913ed"
     },
-    "summary": "fecunditatis_typical_pan3m_52a35d914a0543c02d9e.json",
+    "summary": "fecunditatis_typical_pan3m_eb521718da16fdf88196.json",
     "summary_sha256": "52295af20740a214dc4be2c5b419ebf242f61deccbae5fd0d8a286a300b8e0ae",
     "case": {
      "name": "fecunditatis_typical_pan3m",
@@ -124830,7 +124830,7 @@
     "files": {
      "fecunditatis_typical_pan10m_fdc429ab68d81507b2f5_pass00.npz": "1b05f36b568c1de96cebc7d5382e41c173111e4cdaef9264a7b9ea43654a9d35"
     },
-    "summary": "fecunditatis_typical_pan10m_fdc429ab68d81507b2f5.json",
+    "summary": "fecunditatis_typical_pan10m_e233faacbd68c1431f37.json",
     "summary_sha256": "8edef2333dfc008d40a62fbe23bd9cb159a46902602644e92cdbafec68118a1b",
     "case": {
      "name": "fecunditatis_typical_pan10m",
@@ -126372,7 +126372,7 @@
     "files": {
      "fecunditatis_coldest_pan3m_cb644c05233b83507516_pass00.npz": "464c5b1d2ab18ebae03069cf232a1f35da2299ff283c8fac7023ea565909b724"
     },
-    "summary": "fecunditatis_coldest_pan3m_cb644c05233b83507516.json",
+    "summary": "fecunditatis_coldest_pan3m_3c6a8843056b8adfea51.json",
     "summary_sha256": "152c2da7b4b52b2fc47b6d641f5d75568871b3c107c17ec941738597c10c9763",
     "case": {
      "name": "fecunditatis_coldest_pan3m",
@@ -127200,7 +127200,7 @@
     "files": {
      "smythii_typical_pan3m_948fa9a56b36892a5918_pass00.npz": "501cac3a1fc0f05b39082cbc6b9a01168b1308d87e271853636ff72a8539fcf2"
     },
-    "summary": "smythii_typical_pan3m_948fa9a56b36892a5918.json",
+    "summary": "smythii_typical_pan3m_9c6709c24f6165a8e405.json",
     "summary_sha256": "970613c0a9d6f80ac60c9604a379f23cc7e21b6cd41d1bb387c958e21150ded4",
     "case": {
      "name": "smythii_typical_pan3m",
@@ -128040,7 +128040,7 @@
     "files": {
      "smythii_typical_pan10m_b5fc8ab5163aa9354367_pass00.npz": "41458c28b165c5110aa75b41974151d18229f818e457a6cab145b0c8eadb3b08"
     },
-    "summary": "smythii_typical_pan10m_b5fc8ab5163aa9354367.json",
+    "summary": "smythii_typical_pan10m_f6fab5986cce41035baf.json",
     "summary_sha256": "345731e3bafec55af80a2e9dd40d94a33b6f4f0b0fd41da23dc2f7c1269af920",
     "case": {
      "name": "smythii_typical_pan10m",
@@ -129582,7 +129582,7 @@
     "files": {
      "smythii_coldest_pan3m_936f0de01bca239bf8e0_pass00.npz": "80df27d14d2a6b2e8eb1bbf9a0a1c33d97f9b1c914f790fd0ce7ad249035da06"
     },
-    "summary": "smythii_coldest_pan3m_936f0de01bca239bf8e0.json",
+    "summary": "smythii_coldest_pan3m_c72712449d9c13a103d9.json",
     "summary_sha256": "0f5c416c770cff899a7b425d02e14ccaa961cb08b6671001d34c5d0f49d1b3d4",
     "case": {
      "name": "smythii_coldest_pan3m",
@@ -130470,7 +130470,7 @@
     "files": {
      "schrodinger_typical_pan3m_54ebeb5e8897abf70776_pass00.npz": "c23283801b70e4526e4655ac8c16767c3ed46a2ed7a137d4c9327bd19623b1e9"
     },
-    "summary": "schrodinger_typical_pan3m_54ebeb5e8897abf70776.json",
+    "summary": "schrodinger_typical_pan3m_e7870324dfc76beb28ff.json",
     "summary_sha256": "84da02c009adf44ca4c0e60d81cd5c94430ec907f87e49ce24767deb8d255ef6",
     "case": {
      "name": "schrodinger_typical_pan3m",
@@ -131298,7 +131298,7 @@
     "files": {
      "schrodinger_typical_pan10m_118dbb2df143942b6ca4_pass00.npz": "eaf070f2d638348ee7c7108332c202280353c283b18d5ff654a69fc01d3911c4"
     },
-    "summary": "schrodinger_typical_pan10m_118dbb2df143942b6ca4.json",
+    "summary": "schrodinger_typical_pan10m_e59055b53a56521b0cb0.json",
     "summary_sha256": "ebe7b5ab8116c14aca64069fe55e488621b29d854cf600365bb3c9617cadb708",
     "case": {
      "name": "schrodinger_typical_pan10m",
@@ -132192,7 +132192,7 @@
     "files": {
      "schrodinger_coldest_pan3m_bb6f0f9b3c77711a84e8_pass00.npz": "6c643c3ae29141ccca5ac2e08a8c977ffe12822bad8584af59beb6e8e5c1fda1"
     },
-    "summary": "schrodinger_coldest_pan3m_bb6f0f9b3c77711a84e8.json",
+    "summary": "schrodinger_coldest_pan3m_b95c067e7dca3c577416.json",
     "summary_sha256": "df06756cba1e17bca135ea0e28de21e44127aee8dffdab06aee5e3d6c23c8d55",
     "case": {
      "name": "schrodinger_coldest_pan3m",
@@ -133020,7 +133020,7 @@
     "files": {
      "7n_302e_typical_pan3m_a0941a22682103f6d998_pass00.npz": "26fc6345bd5b63920dde842c6d4932c6737b05340566a1108965190205913ead"
     },
-    "summary": "7n_302e_typical_pan3m_a0941a22682103f6d998.json",
+    "summary": "7n_302e_typical_pan3m_f94db21fdca2ab1ad72e.json",
     "summary_sha256": "3989b6677154fd9f55b837a3476af7a5ed3ac21bdac3cda3303054ab6f12248c",
     "case": {
      "name": "7n_302e_typical_pan3m",
@@ -133848,7 +133848,7 @@
     "files": {
      "7n_302e_typical_pan10m_bf18635f64cd4c55d6a9_pass00.npz": "26e57501fdceda8111dabd03aae9678f061168899f201b14fe4d7b7e089879c1"
     },
-    "summary": "7n_302e_typical_pan10m_bf18635f64cd4c55d6a9.json",
+    "summary": "7n_302e_typical_pan10m_c4516ce7601e1c37e358.json",
     "summary_sha256": "bc817b97d7d9d6340ddf53c400f5d863bbb1db7d33657f6f4a48f3af7a32fa09",
     "case": {
      "name": "7n_302e_typical_pan10m",
@@ -135378,7 +135378,7 @@
     "files": {
      "drygalski_typical_pan3m_677dc59b332a9a6de86b_pass00.npz": "42c780baa4255fc81febf04fd41b9e4f97c8ba20ca1d73c4d34f6b33badfe210"
     },
-    "summary": "drygalski_typical_pan3m_677dc59b332a9a6de86b.json",
+    "summary": "drygalski_typical_pan3m_460ba3d810d1049d4119.json",
     "summary_sha256": "e7f4925daf97ad6ca07d963494f711d57f001da9c2ffcbcba1705946e5351be0",
     "case": {
      "name": "drygalski_typical_pan3m",
@@ -136218,7 +136218,7 @@
     "files": {
      "drygalski_typical_pan10m_1ca0fe26cb4b4ed1eed0_pass00.npz": "8f8e9984c95e99a6307b08685bcc51019cb141dfbaab2dc13c003b4bd82bc340"
     },
-    "summary": "drygalski_typical_pan10m_1ca0fe26cb4b4ed1eed0.json",
+    "summary": "drygalski_typical_pan10m_0d5a41f9ec2550781152.json",
     "summary_sha256": "82bf91b32b30456f16d46a221d054252b974bffab432bf7617e53409f34726cb",
     "case": {
      "name": "drygalski_typical_pan10m",
@@ -137580,7 +137580,7 @@
     "files": {
      "rozhdestvenskiy_typical_pan3m_3a831e2b4412edaf5c1a_pass00.npz": "ced3d1da6d089595b874e43eb5122dd97d580cdffa64234ef792969946aebdb5"
     },
-    "summary": "rozhdestvenskiy_typical_pan3m_3a831e2b4412edaf5c1a.json",
+    "summary": "rozhdestvenskiy_typical_pan3m_d476bd0f92d68665a7f7.json",
     "summary_sha256": "2b8c00305e1c5d8019ccb9fa2da4d67b11cadc344caf9c69a9b20fc648e02f4d",
     "case": {
      "name": "rozhdestvenskiy_typical_pan3m",
@@ -138408,7 +138408,7 @@
     "files": {
      "rozhdestvenskiy_typical_pan10m_1ea621221d54b012839e_pass00.npz": "228a486ed88bb45809dc2acce1c4cbb0158ca12089b59022f285c5d5b7c1b5fd"
     },
-    "summary": "rozhdestvenskiy_typical_pan10m_1ea621221d54b012839e.json",
+    "summary": "rozhdestvenskiy_typical_pan10m_2b0e33f253fe76c609c2.json",
     "summary_sha256": "fef001dd43aed8ef0f98a76f61d086eddf5141e975e51c9bc3a542e9942f1b22",
     "case": {
      "name": "rozhdestvenskiy_typical_pan10m",
@@ -139374,7 +139374,7 @@
     "files": {
      "jules_typical_pan3m_c10ab8a8516576c7d95b_pass00.npz": "42110863039238ac0f3af8a806e0731d7ac99eb0be0a051828348c8ff761576e"
     },
-    "summary": "jules_typical_pan3m_c10ab8a8516576c7d95b.json",
+    "summary": "jules_typical_pan3m_c4408c282e9b9ce04701.json",
     "summary_sha256": "4d3f5716055b20d689df2e265246cb935a66caf191a94c43a6d05bddb5b41e56",
     "case": {
      "name": "jules_typical_pan3m",
@@ -140202,7 +140202,7 @@
     "files": {
      "jules_typical_pan10m_32be3b07410b8d2db8f4_pass00.npz": "859aec8e3a58b1e9749e75175927d97e0f760535a00aeb9d78e08a4b6e64249b"
     },
-    "summary": "jules_typical_pan10m_32be3b07410b8d2db8f4.json",
+    "summary": "jules_typical_pan10m_b71bcea7c6054db7b4aa.json",
     "summary_sha256": "e1022cb38fc0a975e69b99b4977e8095bc3eafd61bacc586ac0883400048b46a",
     "case": {
      "name": "jules_typical_pan10m",
@@ -146160,7 +146160,7 @@
   },
   "variants": {
    "index": "research/runs/sea_oxygen/columns.json",
-   "index_sha256": "45560bdd458feba4cf25b3606fdc877682c90d7b13dae331334237c6a5a6d5ea",
+   "index_sha256": "2d56e99280f4e021bc1e53bd18bc3c798f1d72e3b2cd3d7b23fc067ec615e910",
    "lake_py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa",
    "complete": true,
    "acceptors": {
@@ -146234,7 +146234,7 @@
      "files": {
       "procellarum_typical_wind_share_low_49d16896c2b85bf3c6a4_pass00.npz": "5098fc4a4f6061a57e48a35f13e92f8c3b3fbbc8a5ee32884a07b875ebcf6f9c"
      },
-     "summary": "procellarum_typical_wind_share_low_49d16896c2b85bf3c6a4.json",
+     "summary": "procellarum_typical_wind_share_low_465abd888692f6bd1870.json",
      "summary_sha256": "56a98495a6ada4ab9821dcb1dcbfe398712f4cc9b76c88b494dc31554a17874b",
      "case": {
       "name": "procellarum_typical_wind_share_low",
@@ -146748,7 +146748,7 @@
      "files": {
       "procellarum_typical_wind_share_high_37e8fb820bef463c521e_pass00.npz": "32ede304b3fe5e138ca01a97aba93b64349136d3daeb10a621372b07e8c6118c"
      },
-     "summary": "procellarum_typical_wind_share_high_37e8fb820bef463c521e.json",
+     "summary": "procellarum_typical_wind_share_high_cfa42f34e3eaceb24291.json",
      "summary_sha256": "7cca8c7fdbd7424f8b4edeb97282ab19cf4016586499f59a770d35d1c490ac44",
      "case": {
       "name": "procellarum_typical_wind_share_high",
@@ -147290,7 +147290,7 @@
      "files": {
       "ingenii_typical_wind_share_low_ba872954e292f0e3c3d5_pass00.npz": "53926992c86660d86a4024e7fa7a0634b42f6662f35a066ac5b782329a5d206e"
      },
-     "summary": "ingenii_typical_wind_share_low_ba872954e292f0e3c3d5.json",
+     "summary": "ingenii_typical_wind_share_low_c38132fbd210d0ef291d.json",
      "summary_sha256": "1597a74b9f47d8f8a1b38a80647bc2048f1ae4b79e3932e7e4b6ff9b813d563a",
      "case": {
       "name": "ingenii_typical_wind_share_low",
@@ -147768,7 +147768,7 @@
      "files": {
       "ingenii_typical_wind_share_high_294bd293078042c7a7c4_pass00.npz": "400ba291c7351838b06234a83047e41ad155428fd9eece3f40d9fa7b9430d117"
      },
-     "summary": "ingenii_typical_wind_share_high_294bd293078042c7a7c4.json",
+     "summary": "ingenii_typical_wind_share_high_72c9d4557cba873a584f.json",
      "summary_sha256": "c7afbf708fc4a900990ea3ded8aa1e2102bed0a1d560f63a0ad4c54b7036afe8",
      "case": {
       "name": "ingenii_typical_wind_share_high",
@@ -148246,7 +148246,7 @@
      "files": {
       "nubium_typical_wind_share_low_bd68f414e418b623bcf7_pass00.npz": "a276e38c1a36ecab5019b8c87deb324df036211cf3ccedc907a5a178ace82598"
      },
-     "summary": "nubium_typical_wind_share_low_bd68f414e418b623bcf7.json",
+     "summary": "nubium_typical_wind_share_low_ad3823cb7a6023e0496b.json",
      "summary_sha256": "cab53304d6b83d5818d2addccd32ec334fec60d7c3121661e714d0ed7443beb8",
      "case": {
       "name": "nubium_typical_wind_share_low",
@@ -148776,7 +148776,7 @@
      "files": {
       "nubium_typical_wind_share_high_ebe591a7d0bb64acb87d_pass00.npz": "dfab6fc75d1bbcaf7d36ecea4c665d94f93799f33424a8c4c4283140a57a5fe7"
      },
-     "summary": "nubium_typical_wind_share_high_ebe591a7d0bb64acb87d.json",
+     "summary": "nubium_typical_wind_share_high_3c3cb4e3358731a6712d.json",
      "summary_sha256": "9fcb0cbfd10470a7896ec303d636e87447e560e181f0234c005ae9a7758e8b49",
      "case": {
       "name": "nubium_typical_wind_share_high",
@@ -149342,7 +149342,7 @@
      "files": {
       "humboldtianum_typical_wind_share_low_97790381df48d7f73dc7_pass00.npz": "daf282f30dc3ad014c93379a6b495b3edc7711c7a8528a5b48679043958e89f3"
      },
-     "summary": "humboldtianum_typical_wind_share_low_97790381df48d7f73dc7.json",
+     "summary": "humboldtianum_typical_wind_share_low_28b81dd2baeb74c928b4.json",
      "summary_sha256": "2a63baa9cb4b99a3f604ccede969e67f8fb5451b64e3b114103d9e32eba4c5d0",
      "case": {
       "name": "humboldtianum_typical_wind_share_low",
@@ -149860,7 +149860,7 @@
      "files": {
       "humboldtianum_typical_wind_share_high_5fb6c735c386d5b35a41_pass00.npz": "68a859ae2c115b57a3579be6fdedc3bc31d0a5806b8fb7097472a178bb743e5e"
      },
-     "summary": "humboldtianum_typical_wind_share_high_5fb6c735c386d5b35a41.json",
+     "summary": "humboldtianum_typical_wind_share_high_c5e6f400ba2d8cb4ad85.json",
      "summary_sha256": "b17ef0eb5dc1ab810b2d51864dd30f94e3801f9b83e209c1904a76d8b8921e0e",
      "case": {
       "name": "humboldtianum_typical_wind_share_high",
@@ -150408,7 +150408,7 @@
      "files": {
       "crisium_typical_wind_share_low_d42d6bc30669e9de59b5_pass00.npz": "23fbf8477150f4a6783c97e994f832b2bb6b1e387aa77fad64b3a845c230e14a"
      },
-     "summary": "crisium_typical_wind_share_low_d42d6bc30669e9de59b5.json",
+     "summary": "crisium_typical_wind_share_low_9d1010be01fe656fd858.json",
      "summary_sha256": "72ffa36c0cb4e156419b6cb76d803cb499a7aa21a7fd78608d2b2936559688d3",
      "case": {
       "name": "crisium_typical_wind_share_low",
@@ -150880,7 +150880,7 @@
      "files": {
       "crisium_typical_wind_share_high_8a5c2a46f474f741cc1f_pass00.npz": "9b0c5bba43756c9a651dbe37d5f662860a02395da1f579fd20d3ebb4a1839021"
      },
-     "summary": "crisium_typical_wind_share_high_8a5c2a46f474f741cc1f.json",
+     "summary": "crisium_typical_wind_share_high_43940ea0175a29402d54.json",
      "summary_sha256": "6e1dd76854fd564a8f649bc7bb1cc1c9966d26dc1ae88ff07bb823b18ffd2b5c",
      "case": {
       "name": "crisium_typical_wind_share_high",
@@ -151376,7 +151376,7 @@
      "files": {
       "fecunditatis_typical_wind_share_low_43e75e216d2b928d0ed1_pass00.npz": "79de03da1d6b8e87418543cf1257b174f348ee6b16fbc26cc0008f22a05ba8fe"
      },
-     "summary": "fecunditatis_typical_wind_share_low_43e75e216d2b928d0ed1.json",
+     "summary": "fecunditatis_typical_wind_share_low_fa985efd7b43a2709b85.json",
      "summary_sha256": "980fb6fbe97f6ce4c95236c7836d1fd301446830e21910775ea5cc4efe518229",
      "case": {
       "name": "fecunditatis_typical_wind_share_low",
@@ -151914,7 +151914,7 @@
      "files": {
       "fecunditatis_typical_wind_share_high_cd110ce333b6c94746ca_pass00.npz": "a4e3c887c31229d10ecc41bd4fa35ecca215b8da69c22e3fccb7dc413e7181c2"
      },
-     "summary": "fecunditatis_typical_wind_share_high_cd110ce333b6c94746ca.json",
+     "summary": "fecunditatis_typical_wind_share_high_1a1eb55f58bdc31c7fc0.json",
      "summary_sha256": "beeb5a077b2f3e8d501eaf2e4d8cb639a0bc33d8aa72058c6e263db61eca7e1b",
      "case": {
       "name": "fecunditatis_typical_wind_share_high",
@@ -152468,7 +152468,7 @@
      "files": {
       "smythii_typical_wind_share_low_7146334ac479b943e409_pass00.npz": "d80dacb3eac5c1c24bc1d38299988308fa3c1cf43c305e0598f6ec947ad6ced3"
      },
-     "summary": "smythii_typical_wind_share_low_7146334ac479b943e409.json",
+     "summary": "smythii_typical_wind_share_low_5d367651d59731d0d8b4.json",
      "summary_sha256": "3ffd3332e054b657b45ff7d0b8b98db50a2859fe49bfba65dab69576e3f22deb",
      "case": {
       "name": "smythii_typical_wind_share_low",
@@ -152940,7 +152940,7 @@
      "files": {
       "smythii_typical_wind_share_high_614ad197f6fed89002e9_pass00.npz": "f29302e5db3e1732ff7697242d66505265f897a27b1168c48229d1999d9dcce9"
      },
-     "summary": "smythii_typical_wind_share_high_614ad197f6fed89002e9.json",
+     "summary": "smythii_typical_wind_share_high_df4e3000d856bdb36c5c.json",
      "summary_sha256": "d5e5e56d512d46bc05712bf92ab4052c79003c3c367f2f0befbce90d16c4731f",
      "case": {
       "name": "smythii_typical_wind_share_high",
@@ -153418,7 +153418,7 @@
      "files": {
       "schrodinger_typical_wind_share_low_5076238b3412b56fea7d_pass00.npz": "d1fc590ce415e266ddf52a527eb28f31427fd0751c915946636f21f03afa47a8"
      },
-     "summary": "schrodinger_typical_wind_share_low_5076238b3412b56fea7d.json",
+     "summary": "schrodinger_typical_wind_share_low_ada3557b56c31888d91d.json",
      "summary_sha256": "cd6323ca7ef400a607c85ff49d40ce8b3e98ea15baa8ef9e4a71111e475f627d",
      "case": {
       "name": "schrodinger_typical_wind_share_low",
@@ -153908,7 +153908,7 @@
      "files": {
       "schrodinger_typical_wind_share_high_6a87f732b7625bed21c8_pass00.npz": "6cf9b59e74115f051d9e84b1bbb50f324f6fb569859a165ba736aeed417273b5"
      },
-     "summary": "schrodinger_typical_wind_share_high_6a87f732b7625bed21c8.json",
+     "summary": "schrodinger_typical_wind_share_high_d737d52d30eedf31e07d.json",
      "summary_sha256": "af79f0f216d158d9253e0ad34f6a05e123bf706eb21f5364888b54dcbaf1dd07",
      "case": {
       "name": "schrodinger_typical_wind_share_high",
@@ -154404,7 +154404,7 @@
      "files": {
       "7n_302e_typical_wind_share_low_eaa8d829b67413464a3b_pass00.npz": "bb0f71bec9bd1ce5d6c2e0fa19acd473326a1203eacc8398755b2405ab9891b7"
      },
-     "summary": "7n_302e_typical_wind_share_low_eaa8d829b67413464a3b.json",
+     "summary": "7n_302e_typical_wind_share_low_026410c034f9671770d1.json",
      "summary_sha256": "735e7d74acc579793ad088c8b268472b703cf80ec85e6eae1e3b5a62e0a444a1",
      "case": {
       "name": "7n_302e_typical_wind_share_low",
@@ -154982,7 +154982,7 @@
      "files": {
       "7n_302e_typical_wind_share_high_4b03cd220054b636b960_pass00.npz": "e3f6e02913f37ae3eed41e7c60478fcdf48701a307518a610e3db4a4db29b7f4"
      },
-     "summary": "7n_302e_typical_wind_share_high_4b03cd220054b636b960.json",
+     "summary": "7n_302e_typical_wind_share_high_9fa4df8b47ccd14d0ae0.json",
      "summary_sha256": "ea2c3926a3a08394f46ea3e66b3a66d02e3d512777e1968728b6ea7611af5ffa",
      "case": {
       "name": "7n_302e_typical_wind_share_high",
@@ -155728,7 +155728,7 @@
      "files": {
       "drygalski_typical_wind_share_low_c0ff456e7d16a662f134_pass00.npz": "9d3ac93c065d130378009c12d81f9c08b454b11541b8bbdd1702885b2a8caff0"
      },
-     "summary": "drygalski_typical_wind_share_low_c0ff456e7d16a662f134.json",
+     "summary": "drygalski_typical_wind_share_low_ed6417d00ca354612592.json",
      "summary_sha256": "ce5c1b4e715cb8afc8ba1f4cb48ac50e7d77b9c5c67b73e8c1bfaa1fff9b97aa",
      "case": {
       "name": "drygalski_typical_wind_share_low",
@@ -156188,7 +156188,7 @@
      "files": {
       "drygalski_typical_wind_share_high_19492ecea8cdf2de59f8_pass00.npz": "439a5f7554f0fc87489be26052f0594f3f0ae36c7e53c2227202e12402a550bd"
      },
-     "summary": "drygalski_typical_wind_share_high_19492ecea8cdf2de59f8.json",
+     "summary": "drygalski_typical_wind_share_high_8fc3868b24e48f121c7c.json",
      "summary_sha256": "1aa676abe0b085a48fdd6fa7aedf593238ab90e2a3a32630d4bfc2a55fcc3d87",
      "case": {
       "name": "drygalski_typical_wind_share_high",
@@ -156654,7 +156654,7 @@
      "files": {
       "rozhdestvenskiy_typical_wind_share_low_cd9ce9c08b8e3354dff7_pass00.npz": "a62478b295dc03a697b019be51714719be5ff4334ec09b6fd88597c6d32d777d"
      },
-     "summary": "rozhdestvenskiy_typical_wind_share_low_cd9ce9c08b8e3354dff7.json",
+     "summary": "rozhdestvenskiy_typical_wind_share_low_d1607a8ba8b6beab2aee.json",
      "summary_sha256": "6f708cf9010e6036724a0461a3beb9b4ed7e14b6d1956371a0c03761135c167b",
      "case": {
       "name": "rozhdestvenskiy_typical_wind_share_low",
@@ -157150,7 +157150,7 @@
      "files": {
       "rozhdestvenskiy_typical_wind_share_high_3c9c7f128737923b8acc_pass00.npz": "82c3032dd228caa9ad6a072c451b84288f22c5246f6e06d63ae4c9af7ffe7d68"
      },
-     "summary": "rozhdestvenskiy_typical_wind_share_high_3c9c7f128737923b8acc.json",
+     "summary": "rozhdestvenskiy_typical_wind_share_high_10d81275da8a3f9c5d19.json",
      "summary_sha256": "f5c1fabab1fd9fd9c7507ca6399e777bea8f53243d6ed70b7892bed37761de75",
      "case": {
       "name": "rozhdestvenskiy_typical_wind_share_high",
@@ -157670,7 +157670,7 @@
      "files": {
       "jules_typical_wind_share_low_28a6eb2ef3d18c26085c_pass00.npz": "608bbfa99ec894cc4a563f2826403dc5cc1563b609bc4c016416080da5457e20"
      },
-     "summary": "jules_typical_wind_share_low_28a6eb2ef3d18c26085c.json",
+     "summary": "jules_typical_wind_share_low_322dc5bcfdf7085a5e76.json",
      "summary_sha256": "da4e637ecde2330db4b67b5a03260a54ab165a88ec160fe68d2db8d9cff5bb88",
      "case": {
       "name": "jules_typical_wind_share_low",
@@ -158166,7 +158166,7 @@
      "files": {
       "jules_typical_wind_share_high_28062d843e235fe9f016_pass00.npz": "db891e556301c054aa2121f408216c37b4f471e47f2a820b2894d86a13b893a9"
      },
-     "summary": "jules_typical_wind_share_high_28062d843e235fe9f016.json",
+     "summary": "jules_typical_wind_share_high_6e1c0bdfb41da37806bd.json",
      "summary_sha256": "181099aaf97a56d277ba0ab118ff880b920427d80def06fa1554dbdd4a6da7c1",
      "case": {
       "name": "jules_typical_wind_share_high",
@@ -158704,7 +158704,7 @@
      "files": {
       "procellarum_typical_lake_number_d955a2025b2ba735ddd5_pass00.npz": "919c5b5cbf5c59fe2109411c950ceba5c92680d1ef4e77683e85b9fd2a31b832"
      },
-     "summary": "procellarum_typical_lake_number_d955a2025b2ba735ddd5.json",
+     "summary": "procellarum_typical_lake_number_0f833b35a2baf3f29b5d.json",
      "summary_sha256": "dc755174124eb3af7a6be786a33d6ae2599b9b63a014b52758588b5ff0e22517",
      "case": {
       "name": "procellarum_typical_lake_number",
@@ -159117,7 +159117,7 @@
      "files": {
       "procellarum_typical_fixed_dissipation_4056c0824748f09b8aa0_pass00.npz": "f08090b59a233d215bc07a48bc69635cb6b978b80ddb84ecfd348e71a65e04ab"
      },
-     "summary": "procellarum_typical_fixed_dissipation_4056c0824748f09b8aa0.json",
+     "summary": "procellarum_typical_fixed_dissipation_266bbeae3c0b276c1dc9.json",
      "summary_sha256": "0753b5a8a8a95090e066e66ded4187ad16c1a58d541a604994c06f6e66393cbe",
      "case": {
       "name": "procellarum_typical_fixed_dissipation",
@@ -159530,7 +159530,7 @@
      "files": {
       "ingenii_typical_lake_number_b5da41da08e7f0d5a702_pass00.npz": "2cead8e586a00b07ec2536d4d51f1fe758578d1c7cb1e4d4892a95c2df7858e1"
      },
-     "summary": "ingenii_typical_lake_number_b5da41da08e7f0d5a702.json",
+     "summary": "ingenii_typical_lake_number_e97e619c78134759818f.json",
      "summary_sha256": "46afb868ed2c73e0deec382206a9817feeb83963c5f095b36d0e841acca665ab",
      "case": {
       "name": "ingenii_typical_lake_number",
@@ -159943,7 +159943,7 @@
      "files": {
       "ingenii_typical_fixed_dissipation_61f21f6cee98b252fe30_pass00.npz": "cbca48a7763e57633ca57cf0f440c99b70dba82aa87707323cd3b1d2ceee1ea8"
      },
-     "summary": "ingenii_typical_fixed_dissipation_61f21f6cee98b252fe30.json",
+     "summary": "ingenii_typical_fixed_dissipation_2f439cb7ec50ce5a81bd.json",
      "summary_sha256": "b1a0a1029222ab0a97243956b75f3f586f626d2a6876f4b4a3169fa1e37fbf5d",
      "case": {
       "name": "ingenii_typical_fixed_dissipation",
@@ -160356,7 +160356,7 @@
      "files": {
       "ingenii_typical_solute_none_87d96810af1f4f451bc4_pass00.npz": "49f31d26af9801ab784699950fe4f142c8b5262d5baee71fc27c269901c8f499"
      },
-     "summary": "ingenii_typical_solute_none_87d96810af1f4f451bc4.json",
+     "summary": "ingenii_typical_solute_none_91c4a7cf2dd45870fd1f.json",
      "summary_sha256": "39700c609d3628f077adaa9c98092e6a61cb92e0f27a8378a0318a5c93afb8e1",
      "case": {
       "name": "ingenii_typical_solute_none",
@@ -160834,7 +160834,7 @@
      "files": {
       "procellarum_typical_oligotrophic_physics_b3a02fe072ebdd7b44e1_pass00.npz": "c21c9c00e36fd72c033edbd7faeddab6b47191795660b8b121107d94c5f4757e"
      },
-     "summary": "procellarum_typical_oligotrophic_physics_b3a02fe072ebdd7b44e1.json",
+     "summary": "procellarum_typical_oligotrophic_physics_39dd1e890aea13c02419.json",
      "summary_sha256": "7ef43795960a3a3e5e6d1f117b9a0bf313de524a885f3d7d839146bde34a51f8",
      "case": {
       "name": "procellarum_typical_oligotrophic_physics",
@@ -161358,7 +161358,7 @@
      "files": {
       "procellarum_typical_shih_bouffard_8d47c594d128c418780c_pass00.npz": "7f25bc8c649fd97e89bc01cc200f4d7cadfacc30461b52c663ac6bca4cc8b40c"
      },
-     "summary": "procellarum_typical_shih_bouffard_8d47c594d128c418780c.json",
+     "summary": "procellarum_typical_shih_bouffard_a7154260105a0528f628.json",
      "summary_sha256": "22d19a1112204501d24a39c76479230c0034aec34024a88a1ab6f5185af205c0",
      "case": {
       "name": "procellarum_typical_shih_bouffard",
@@ -162200,7 +162200,7 @@
      "files": {
       "ingenii_typical_shih_bouffard_b61eabe60908e7c298e5_pass00.npz": "5eae5723e373353d0ea177def65a1dd35c46c7aed089bc367ca33f6a21f665d0"
      },
-     "summary": "ingenii_typical_shih_bouffard_b61eabe60908e7c298e5.json",
+     "summary": "ingenii_typical_shih_bouffard_0e458470a0190c37bf0a.json",
      "summary_sha256": "a06f87e45706b95f79303ae1b940fb4a45fab2c30b9d896085380370de5eeeeb",
      "case": {
       "name": "ingenii_typical_shih_bouffard",
@@ -163036,7 +163036,7 @@
      "files": {
       "procellarum_typical_pan3m_fixed_dissipation_298caec5223cbdaf7eeb_pass00.npz": "ec8b25e362282c2f967c83e9a3955d2965a63e1597ebd259bb4fa1511d14f00a"
      },
-     "summary": "procellarum_typical_pan3m_fixed_dissipation_298caec5223cbdaf7eeb.json",
+     "summary": "procellarum_typical_pan3m_fixed_dissipation_81e8382c500aae53aeb2.json",
      "summary_sha256": "e7114a7b2089982f833b9011348d85b879b7dd56d78206ac24bc077d513c9d9e",
      "case": {
       "name": "procellarum_typical_pan3m_fixed_dissipation",
@@ -163500,7 +163500,7 @@
      "files": {
       "procellarum_typical_pan10m_fixed_dissipation_d3920f989181dcc75996_pass00.npz": "c18601937b9d8ef06b7fa41d6eaba16b6af10ffcf2c1d5cb7c4b00bb55adb7ac"
      },
-     "summary": "procellarum_typical_pan10m_fixed_dissipation_d3920f989181dcc75996.json",
+     "summary": "procellarum_typical_pan10m_fixed_dissipation_037860e9c01de09b21c7.json",
      "summary_sha256": "5b9f4a6d775697c8335c4325acf962fe29e3e3b1b090f72a3267d119ed40f042",
      "case": {
       "name": "procellarum_typical_pan10m_fixed_dissipation",
@@ -164642,7 +164642,7 @@
      "files": {
       "ingenii_typical_pan3m_fixed_dissipation_d35a188d010903f5f661_pass00.npz": "900dc7171e3908f90e1ed937de2ee879f04409c7f66340dbfd9a809009466a6d"
      },
-     "summary": "ingenii_typical_pan3m_fixed_dissipation_d35a188d010903f5f661.json",
+     "summary": "ingenii_typical_pan3m_fixed_dissipation_d6a762fc45f4501469bd.json",
      "summary_sha256": "b5dd68d5120e40fa9574334317078cd2357c97de61006b47d8b471716712687e",
      "case": {
       "name": "ingenii_typical_pan3m_fixed_dissipation",
@@ -165148,7 +165148,7 @@
      "files": {
       "ingenii_typical_pan10m_fixed_dissipation_13d461ef64270cf4804d_pass00.npz": "8f8006f2dd9a6ab8eb364527ebea784c5447b6fd82fd44df9457e7734768c3af"
      },
-     "summary": "ingenii_typical_pan10m_fixed_dissipation_13d461ef64270cf4804d.json",
+     "summary": "ingenii_typical_pan10m_fixed_dissipation_d5addaff344b41e6c849.json",
      "summary_sha256": "45b1e73bcb054925f7e454fd19ce77cca09806c49298a12857beca53e7130672",
      "case": {
       "name": "ingenii_typical_pan10m_fixed_dissipation",
@@ -166242,7 +166242,7 @@
      "files": {
       "7n_302e_typical_pan3m_fixed_dissipation_2df37d6b419f153ebe53_pass00.npz": "8261b20d6905837c7cbbe38adeecad676b97f5d34a0ae2853d82d590c83e6e4c"
      },
-     "summary": "7n_302e_typical_pan3m_fixed_dissipation_2df37d6b419f153ebe53.json",
+     "summary": "7n_302e_typical_pan3m_fixed_dissipation_3091c8a4e36f9604c0c1.json",
      "summary_sha256": "c302e1f02987b2f0f6de508f31f925eeec15d5a9b07cefac4376d218d4047db0",
      "case": {
       "name": "7n_302e_typical_pan3m_fixed_dissipation",
@@ -166796,7 +166796,7 @@
      "files": {
       "drygalski_typical_pan3m_fixed_dissipation_000984b9ddbb3894dcea_pass00.npz": "6b508b16c47abed1c8ddf633a21b5e0e2109fabe410532f069ae30136ffb5688"
      },
-     "summary": "drygalski_typical_pan3m_fixed_dissipation_000984b9ddbb3894dcea.json",
+     "summary": "drygalski_typical_pan3m_fixed_dissipation_d401bea53e0fee3696c0.json",
      "summary_sha256": "a1d71b3e41a3d0811a277366906d20c9bfdc159e3e14cd895be101962a3a7914",
      "case": {
       "name": "drygalski_typical_pan3m_fixed_dissipation",
@@ -172637,7 +172637,7 @@
     "methane_is": "a lower value"
    }
   },
-  "seas_product_sha256": "7aa475edf0bda71d506eaea918f0734de9e3aed97cb900cdadbe6d2d8bbdaf64",
+  "seas_product_sha256": "9091ad407461f5c437f53125eb60ce2a23dfb5ef15a9830f74aa7152a92a1c6b",
   "variant_totals": {
    "wind_share_low": {
     "replaced": [
@@ -172843,7 +172843,7 @@
  },
  "forms": {
   "index": "research/runs/lake_oxygen/mixing_forms/mixing_forms_index.json",
-  "index_sha256": "0990c73918e735692bb5f0b911c3461fe4813cb524f65f7df181b06a601a5b11",
+  "index_sha256": "61ffe9e890e2d91361425961e390159395c26c6021e7105e243fac50f7cb598b",
   "cases": {
    "shih_301k_352m_0-15_oligotrophic": {
     "case": {
@@ -186027,5 +186027,5 @@
    }
   }
  },
- "seconds": 259.1
+ "seconds": 291.0
 }

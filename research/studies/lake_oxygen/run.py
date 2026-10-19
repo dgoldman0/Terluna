@@ -5,19 +5,24 @@ through the lunar month for stratification, mixing and dissolved oxygen in deep 
     climate/gcm/.venv/bin/python -m research.studies.lake_oxygen.extract           # the GCM's forcing (a minute)
     python -m research.studies.lake_oxygen.run                                    # the runs (about an hour)
     python -m research.studies.lake_oxygen.run --quick                            # two years, to research/runs
+    python -m research.studies.lake_oxygen.run --cache-only                       # the product from the cached runs
 
-It reads results/lakes.json, research/runs/lake_oxygen/forcing.npz with forcing.json, and the committed products of
-climate_targets (the targets, their seas' temperatures and the share of the way between the two runs), sea_chemistry
-(the held fresh seas' salinity) and geography's groundwater uptake (the heat flow through the floor), and writes
-results/lake_oxygen.json. Each lake run is cached in research/runs/lake_oxygen/cases under a hash of the code, the
-inputs and the case, so a run stopped part way resumes where it stopped.
+It reads results/lakes.json, research/runs/lake_oxygen/forcing.npz with forcing.json, the climate targets as the lake
+studies ran on them (climate_targets_as_run.json: the targets, their seas' temperatures and the share of the way
+between the two runs) and the committed products of sea_chemistry (the held fresh seas' salinity) and geography's
+groundwater uptake (the heat flow through the floor), and writes results/lake_oxygen.json. Each lake run is cached in
+research/runs/lake_oxygen/cases under a hash of the code, the values the runs read from those inputs and the case, so
+a run stopped part way resumes where it stopped, and a product written again with the same values leaves the cache
+standing; --cache-only builds the product from the cache and stops at the first run it would have to compute.
 """
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import hashlib
 import json
 import math
+import os
 import re
 import sys
 import time
@@ -35,11 +40,21 @@ RUNS = ROOT / 'research' / 'runs' / 'lake_oxygen'
 FORCING = RUNS / 'forcing.npz'
 FORCING_META = RUNS / 'forcing.json'
 LAKES = HERE / 'results' / 'lakes.json'
-TARGETS = ROOT / 'research' / 'studies' / 'climate_targets' / 'results' / 'climate_targets.json'
+# The climate targets as the lake studies ran on them: domain/ecology's climate_targets product at e9c12eb (schema
+# terluna.research.climate-targets/2), copied byte for byte, which every lake study reads (lake_oxygen and its mixing
+# forms, lake_anoxia, the lake kinds, the seas' oxygen, the lake methane). The merged targets of the fourth joint
+# integration take the GCM's own land mask for the lapse rates over land, 1.2-1.8% lower, which would cool the lakes'
+# air by 0.026 K at most, and set the lock's share of the way to 0 for -0.002, the design case the lakes' lock already
+# is. The lakes' rerun on the resort's 301 K design case replaces this copy.
+TARGETS = HERE / 'climate_targets_as_run.json'
+TARGETS_SHA256 = '2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9'
 SEA_CHEMISTRY = ROOT / 'research' / 'studies' / 'sea_chemistry' / 'results' / 'sea_chemistry.json'
 UPTAKE = ROOT / 'geography' / 'results' / 'groundwater_uptake.json'
 OUT = HERE / 'results' / 'lake_oxygen.json'
 SCHEMA = 'terluna.research.lake-oxygen/2'
+# With this environment variable at 1 (each lake product step's --cache-only sets it), the lake studies compute no run
+# and stop where one is not cached.
+CACHE_ONLY = 'TERLUNA_LAKES_CACHE_ONLY'
 
 DESIGN_PRESSURE_PA = 121590.0          # decisions register: 1.2 atm at the water level
 DESIGN_CO2_PPM = 400.0
@@ -143,6 +158,17 @@ def sha256(path) -> str:
     return h.hexdigest()
 
 
+def cache_only() -> bool:
+    """Whether this process builds products from the lake studies' caches alone (--cache-only, or CACHE_ONLY set in
+    its environment, which the worker processes inherit)."""
+    return os.environ.get(CACHE_ONLY) == '1'
+
+
+def uncached(path):
+    """Stop a cache-only run where it would have to compute: nothing is cached at path."""
+    raise SystemExit(f'cache only: {path} is not cached; the run computes no case')
+
+
 def kd(secchi_m):
     return 1.7 / secchi_m
 
@@ -189,6 +215,8 @@ class Setting:
         if self.meta['producer']['read']['research/studies/lake_oxygen/results/lakes.json'] != sha256(LAKES):
             raise SystemExit('the forcing was extracted for another lakes.json; run the extract again')
         self.f = dict(np.load(FORCING))
+        if sha256(TARGETS) != TARGETS_SHA256:
+            raise SystemExit(f'{TARGETS.name} is not the climate targets the lakes ran on')
         self.targets = json.loads(TARGETS.read_text())
         if self.targets['schema'] != 'terluna.research.climate-targets/2':
             raise SystemExit(f"climate_targets is {self.targets['schema']}")
@@ -211,6 +239,20 @@ class Setting:
         self.eddy_factor = self._eddy_factor()
         self.inputs = {str(p.relative_to(ROOT)): sha256(p) for p in (LAKES, FORCING, FORCING_META, TARGETS,
                                                                        SEA_CHEMISTRY, UPTAKE)}
+
+    def values_fingerprint(self):
+        """sha256 of what the runs read from the setting's inputs, for the cache keys: this study's own extracts by
+        their sha256, and from the other studies' products the values themselves (the targets' shares of the way and
+        lapse rates as the setting holds them, the held fresh seas' salinity and pH, the floor's heat flow), with the
+        gravity, the step and the air the runs take. A product written again with the same values, as the settle
+        cascade after an edit of the register writes them with new producer hashes, leaves the keys standing; a
+        changed value re-keys every run."""
+        upstream = {str(p.relative_to(ROOT)) for p in (TARGETS, SEA_CHEMISTRY, UPTAKE)}
+        values = dict(files={k: v for k, v in self.inputs.items() if k not in upstream}, share=self.share,
+                      lapse=self.lapse, salinity=self.salinity, held_ph=self.held_ph, heat_flow=self.heat_flow,
+                      gravity=self.gravity, step_s=self.dt, o2_fraction=self.o2_fraction,
+                      air=dataclasses.asdict(self.air))
+        return hashlib.sha256(json.dumps(values, sort_keys=True).encode()).hexdigest()
 
     def _lapse(self, name):
         """K per m by which the air warms going down, from the target's own column over land (0.9 to 5 km)."""
@@ -888,10 +930,12 @@ def saturation(st: Setting):
 # --- the whole ------------------------------------------------------------------------------------------------------
 
 def cache_key(st: Setting, name, **case):
+    """A run's cache key: this module's and the lake model's code whole, what the runs read from the setting's inputs
+    (Setting.values_fingerprint()) and the case."""
     h = hashlib.sha256()
     for p in (Path(__file__), Path(L.__file__)):
         h.update(sha256(p).encode())
-    h.update(json.dumps(st.inputs, sort_keys=True).encode())
+    h.update(st.values_fingerprint().encode())
     h.update(json.dumps(dict(name=name, quick=st.quick, **case), sort_keys=True).encode())
     return h.hexdigest()[:24]
 
@@ -902,6 +946,8 @@ def cached(st: Setting, name, fn, **case):
     path = folder / f'{name}_{cache_key(st, name, **case)}.json'
     if path.exists():
         return json.loads(path.read_text())
+    if cache_only():
+        uncached(path)
     tic = time.time()
     res = fn(st, **case)
     path.write_text(json.dumps(res) + '\n')
@@ -982,7 +1028,10 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--quick', action='store_true', help='two years of forcing; writes to research/runs')
     ap.add_argument('--jobs', type=int, default=2, help='worker processes, at most 2 on the shared machine')
+    ap.add_argument('--cache-only', action='store_true', help='the product from the cached runs; stop at a miss')
     args = ap.parse_args(argv)
+    if args.cache_only:
+        os.environ[CACHE_ONLY] = '1'
     st = _setting(args.quick)
     years = 2 if args.quick else None
     jobs = max(1, min(args.jobs, 2))

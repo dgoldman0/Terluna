@@ -356,6 +356,10 @@ they achieve, each set beside Earth's community at its central rates on the same
 - **Open in the literature.** A culture's maximum growth rate for the designed end (sources give "a few hours"), the
   uptake's activation energy (an abstract's summary), freshwater iron-dependent rates (Lake Matano's and Kinneret's
   arithmetic stand in), and the methanotrophs' loss rate, a design guess.
+- **The targets as run.** The columns ran, and their transfer velocities are rebuilt, on the climate targets the lakes
+  ran on, domain/ecology's at e9c12eb (schema /2), which lake_oxygen keeps byte for byte as
+  climate_targets_as_run.json until the lakes rerun on the resort's 301 K design case. The merged targets would cool
+  the lakes' air by 0.026 K at most and 0.015 K typically and leave the seas' as it is.
 
 ## The checks
 
@@ -387,11 +391,15 @@ python -m research.studies.lake_methane.run --seas      # the seas' columns
 python -m research.studies.lake_methane.run --targets   # lake_anoxia's regenerated columns, the three targets
 python -m research.studies.lake_methane.run --work      # one of up to four processes tracing into the cache
 python -m research.studies.lake_methane.run             # everything, then results/lake_methane.json
+python -m research.studies.lake_methane.run --cache-only   # the product from the cache, tracing no case
 python -m pytest research/studies/lake_methane
 ```
 
 Each traced case is cached in research/runs/lake_methane/cases (ignored, on the research drive) under a hash of the code
 that traces it, the saved files' contents (their sha256, so a producer's renaming leaves it standing), the column's
-diffusivity form, its lanes and its options, so a stopped run resumes at the case it stopped in. The --work processes
-claim each case by a file in research/runs/lake_methane/claims before tracing it, so that up to four can share the work;
-the folder is cleared before they are started again.
+diffusivity form, its lanes and its options, so a stopped run resumes at the case it stopped in. The transfer series
+rebuilt from each run's forcing are cached in research/runs/lake_methane/transfer under a hash of the readers' code,
+what the series read from the setting's inputs (lake_oxygen's `Setting.values_fingerprint()`) and the saved files'
+contents; with `--cache-only` the run traces no case and builds no series, and stops at the first one not cached. The
+--work processes claim each case by a file in research/runs/lake_methane/claims before tracing it, so that up to four
+can share the work; the folder is cleared before they are started again.

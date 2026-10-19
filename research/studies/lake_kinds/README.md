@@ -287,6 +287,10 @@ network.
   energy and rates are Earth's, at the Moon's gravity, and the circulation's air is Earth's guideline with no plume
   computed; the moorings and the reservoirs' rule are proposed
   designs; one throughflow, the lake set's 1.78 m a year, serves every kind's phosphorus rule.
+- **The targets as run.** The 301 K resort is built on the climate targets the lakes ran on, domain/ecology's at e9c12eb
+  (schema /2), which lake_oxygen keeps byte for byte as climate_targets_as_run.json until the lakes rerun on the
+  resort's 301 K design case. The merged targets' lapse rates over the GCM's own land mask, 1.2–1.8% lower, would cool
+  these lakes' air at 301 K by 0.024 K at most and 0.015 K typically, the 301 K share unchanged.
 
 ## The checks
 
@@ -309,7 +313,9 @@ retention cancelled as anoxic floors cancel it; that the moorings add up; and th
 ```sh
 python -m research.studies.lake_kinds.census      # a few seconds: LOLA, the drainage, groundwater stage 2 re-solved
 python -m research.studies.lake_kinds.ladder      # about 2.5 hours on two cores; a stopped run resumes where it stopped
+python -m research.studies.lake_kinds.ladder --cache-only    # the index and the 300 K proof from the cache, seconds
 python -m research.studies.lake_kinds.run         # a few minutes: the saved columns, the census and the needs
+python -m research.studies.lake_kinds.run --cache-only       # the same, stopping unless ladder.json is current
 python -m pytest research/studies/lake_kinds
 ```
 
@@ -317,5 +323,8 @@ ladder.py writes its cases to `research/runs/lake_kinds/cases` (ignored, on the 
 lake_oxygen's form and its passes' columns, saved about daily in lake_anoxia's arrays (temperature, the 24 oxygen
 columns and their debt, the water's age, the solutes and the labile pool) with the step-by-step series.
 `research/runs/lake_kinds/ladder.json` indexes them with the sha256 of every file and the lake model's, and run.py
-checks each against it. [setting.py](setting.py)'s `Setting301` is the one 301 K construction the other lake studies
-import.
+checks each against it. A case's key holds the code that runs it, the case and what the runs read from their inputs
+(lake_oxygen's `Setting.values_fingerprint()`), so a product written again with the same values leaves the cache
+standing; with `--cache-only` ladder.py computes no run, and run.py stops unless the index holds every case under the
+key the current code and setting give it. [setting.py](setting.py)'s `Setting301` is the one 301 K construction the
+other lake studies import.

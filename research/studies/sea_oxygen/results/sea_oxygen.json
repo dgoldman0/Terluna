@@ -3,28 +3,28 @@
  "status": "the columns run on the lake model as its sha256 in producer.files gives it",
  "producer": {
   "files": {
-   "research/studies/sea_oxygen/run.py": "3cea8a2be78f79f3e69dc60cf116bb348679e47971af5d5e94a476c6371e2151",
+   "research/studies/sea_oxygen/run.py": "d5406c5008fe41bbac855e1892fd83e4ade629accf6a576719057fdfdd940a94",
    "research/studies/sea_oxygen/analysis.py": "f68bcbcb8587fe9c87c069bbb25f42b3301581c97388a568d6d9b3cff5583f63",
-   "research/studies/sea_oxygen/columns.py": "e5e087617c0cd4fcfd18aec86f73fe267ddbdf46ea7b0c25eecc73d712e4732a",
+   "research/studies/sea_oxygen/columns.py": "dd24081565230f372febad5bdfc01236d45e748f5aafcb5c7bb7482620417879",
    "research/studies/sea_oxygen/setting.py": "b555b3ce1c90a6fcc0902ba9c071d1eda0a76b8a40dbf835be504ab83de077d6",
    "research/studies/sea_oxygen/seas.py": "a7861db0e5d76c92fdc19c73d3332e7eb97abe330d8aa6fc3e2d3b2c287f46a3",
    "research/studies/sea_oxygen/extract.py": "844009ef530c9790c835a1c785f14441821edba42fc549f76617cf0b63f19411",
    "research/studies/lake_kinds/setting.py": "a72b08166f7ba3eeca5ab465a133c3235735278f4c557a141a38579e49d80b68",
-   "research/studies/lake_kinds/columns.py": "720f44a63877b81033cc1c64c5be9755d9744aa6eabd431819e54a247950c627",
-   "research/studies/lake_oxygen/run.py": "1786841b50b52074c3d1c2fc3b84954ef6110256840943bd6601820b40d60a15",
+   "research/studies/lake_kinds/columns.py": "464cac8ac1e34241e20f0bd896db26ed15e6bfc834ddc750e830722ac644fa3a",
+   "research/studies/lake_oxygen/run.py": "f0b657cb7aa67181647817a2c2f02d0fa0f446dc19f093d4ab26c00e17da83ed",
    "research/studies/lake_oxygen/extract.py": "f75021292ea9ea48428d0b4410755afac1460a065630babbb60215e22f86caa3",
-   "research/studies/lake_oxygen/mixing_forms.py": "9ba0a0bb8c8964d824b761f008458a47283105fdcbd15ba89a3d42a4853ae2c3",
+   "research/studies/lake_oxygen/mixing_forms.py": "c39eb21cede33dad2e7f1ad7fbe5d3ed7257da1ee5d3c362bac661f63556095a",
    "biosphere/ecology/lake.py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa"
   },
   "inputs": {
    "research/studies/sea_oxygen/results/seas.json": "76073ddab08f9683b7876af482c2a6cb0d27dcc8a193aeff828df9044bd3d4cd",
    "research/runs/sea_oxygen/forcing.npz": "0bdbbdafc92b1368191c79c779d0859b8a804fe5017b79b590635ae95f289531",
    "research/runs/sea_oxygen/forcing.json": "e1f51700611576cc81a69128ba1f3212b6d149c74aa88cbad4fe95fc353d4d44",
-   "research/studies/climate_targets/results/climate_targets.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "264150903ecf3924ac5dc0a83810ec0a65192671391c21db1bd3873bf73bde03",
+   "research/studies/lake_oxygen/climate_targets_as_run.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "13bb43c7491da470ad0627758814a338e6d830911bbc33c371b9acc04e699166",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
-   "research/studies/lake_oxygen/results/lake_oxygen.json": "02ede3205399a767f5a2d63f87976d584c1b0b07cae285cb0db66f22cd5b7194",
-   "research/runs/sea_oxygen/columns.json": "45560bdd458feba4cf25b3606fdc877682c90d7b13dae331334237c6a5a6d5ea"
+   "research/studies/lake_oxygen/results/lake_oxygen.json": "c6ba6c78b91ab2fb29c02f471975591a6f60fac711d6393e015f46828d4028a3",
+   "research/runs/sea_oxygen/columns.json": "2d56e99280f4e021bc1e53bd18bc3c798f1d72e3b2cd3d7b23fc067ec615e910"
   },
   "constants": {
    "MOON_SURFACE_GRAVITY": 1.6242188765608128,
@@ -32781,9 +32781,9 @@
   "source": "the lake kinds study's cache",
   "ground_k": 301.0,
   "files": {
-   "research/runs/lake_kinds/cases/lake_oxygen_shallow_0-15_2a928ce838d39a0a0359.json": "6dec5ec4e42782d247c662072bfca82213a4ed17e1792cacd7939b5cc5270905",
-   "research/runs/lake_kinds/cases/lake_oxygen_shallow_15-30_cd3472c980bb591c50ed.json": "854f3c047eca62fb364a2f4171c5ff74475406ed28705f3e84d14d71d6b4b3a0",
-   "research/runs/lake_kinds/cases/lake_oxygen_shallow_30-45_b8cd06b6fa9c82230b76.json": "c946d4d441c7c3c60129d29b09cd47afa8901fdc633c8565817ce845b845ec99"
+   "research/runs/lake_kinds/cases/lake_oxygen_shallow_0-15_27b68f08d5a3d20e897b.json": "6dec5ec4e42782d247c662072bfca82213a4ed17e1792cacd7939b5cc5270905",
+   "research/runs/lake_kinds/cases/lake_oxygen_shallow_15-30_9a9838d3777fc90f748c.json": "854f3c047eca62fb364a2f4171c5ff74475406ed28705f3e84d14d71d6b4b3a0",
+   "research/runs/lake_kinds/cases/lake_oxygen_shallow_30-45_9589f0f2b1abb2ed3da1.json": "c946d4d441c7c3c60129d29b09cd47afa8901fdc633c8565817ce845b845ec99"
   },
   "bands": {
    "0-15": {
@@ -33482,8 +33482,8 @@
  },
  "index": {
   "path": "research/runs/sea_oxygen/columns.json",
-  "sha256": "45560bdd458feba4cf25b3606fdc877682c90d7b13dae331334237c6a5a6d5ea",
+  "sha256": "2d56e99280f4e021bc1e53bd18bc3c798f1d72e3b2cd3d7b23fc067ec615e910",
   "cases": 90
  },
- "seconds": 44.0
+ "seconds": 55.3
 }

@@ -31,10 +31,11 @@ def code_files():
 
 
 def key(st: S.Setting301, case: dict) -> str:
+    """columns.py's key with this module's code beside it."""
     h = hashlib.sha256()
     for p in code_files():
         h.update(C.sha256(p).encode())
-    h.update(json.dumps(st.inputs, sort_keys=True).encode())
+    h.update(st.values_fingerprint().encode())
     h.update(json.dumps(dict(ground_k=st.ground_k, **case), sort_keys=True).encode())
     return h.hexdigest()[:20]
 
@@ -47,6 +48,8 @@ def run(st: S.Setting301, name: str, case: dict, start):
     final = C.CASES / f'{name}_{k}.json'
     if final.exists():
         return json.loads(final.read_text())
+    if R.cache_only():
+        R.uncached(final)
     tic = time.time()
     site = R.site_info(st, case['band'])
     w, forcing, mu = R.forcing_for(st, 'resort', site, 'lock', None, case['steps_per_mean'])

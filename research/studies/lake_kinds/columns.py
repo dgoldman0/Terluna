@@ -11,7 +11,7 @@ analysis step until the settle test passes there too (lake_oxygen's FINE_PASSES)
 that step's own settled column. Each recorded pass is saved, with the column about every day
 (lake_anoxia's profiles.py's spacing and arrays, with the solutes and the labile pool added) and the step-by-step
 series lake_oxygen's summarise() reads, to research/runs/lake_kinds/cases; a stopped run resumes at its last saved
-pass.
+pass. A cache-only run (lake_oxygen's cache_only()) computes no column and stops at the first one not saved.
 """
 from __future__ import annotations
 
@@ -51,11 +51,12 @@ def code_files():
 
 
 def key(st: S.Setting301, case: dict) -> str:
-    """The cache key: the code that runs a column, lake_oxygen's inputs, the target and the case."""
+    """The cache key: the code that runs a column, what the runs read from lake_oxygen's inputs (the setting's
+    values_fingerprint()), the target and the case."""
     h = hashlib.sha256()
     for p in code_files():
         h.update(sha256(p).encode())
-    h.update(json.dumps(st.inputs, sort_keys=True).encode())
+    h.update(st.values_fingerprint().encode())
     h.update(json.dumps(dict(ground_k=st.ground_k, **case), sort_keys=True).encode())
     return h.hexdigest()[:20]
 
@@ -139,6 +140,8 @@ def run(st: S.Setting301, name: str, case: dict, start=None):
     final = CASES / f'{name}_{k}.json'
     if final.exists():
         return json.loads(final.read_text())
+    if R.cache_only():
+        R.uncached(final)
     tic = time.time()
     site = R.site_info(st, case['band'])
     spm = case['steps_per_mean']

@@ -511,6 +511,11 @@ over it for up to 300 years (thirty passes) and then for up to 100 at the analys
   the design case's wind factor raising every target's wind; the resort mixes two physics.
 - **Biology.** Production and demand from Earth's lakes stand for engineered communities that have not been designed;
   the labile pool's e-folding is a design bracket; the 2 and 0.5 mg/L lines are the usual hypoxic and anoxic marks.
+- **The targets as run.** The lake studies read the climate targets they ran on, domain/ecology's product at e9c12eb
+  (schema /2), copied byte for byte to [climate_targets_as_run.json](climate_targets_as_run.json); the lakes' rerun on
+  the resort's 301 K design case replaces it. The merged targets of the fourth joint integration take the lapse rates
+  over the GCM's own land mask, 1.2–1.8% lower, which would cool these lakes' air by 0.026 K at most and 0.015 K
+  typically, and set the lock's share of the way to 0 for −0.002, the design case the lakes' lock already is.
 
 ## Running it
 
@@ -518,13 +523,19 @@ over it for up to 300 years (thirty passes) and then for up to 100 at the analys
 python -m research.studies.lake_oxygen.lakes                             # a few seconds: LOLA and the drainage product
 climate/gcm/.venv/bin/python -m research.studies.lake_oxygen.extract      # about a minute; needs netCDF4
 python -m research.studies.lake_oxygen.run                               # about 75 minutes on two cores
+python -m research.studies.lake_oxygen.run --cache-only                  # the product from the cached runs, seconds
 python -m research.studies.lake_oxygen.mixing_forms                      # about an hour on one core, after run
+python -m research.studies.lake_oxygen.mixing_forms --cache-only         # its product from its cache, a minute
 python -m pytest research/studies/lake_oxygen biosphere/tests/test_lake.py
 ```
 
 The extract reads the GCM's output in `climate/gcm/runs` and writes `research/runs/lake_oxygen/forcing.npz` with
 `forcing.json` (ignored, on the research drive), recording the sha256 of every file it read; the run caches each lake in
 `research/runs/lake_oxygen/cases`, so a run stopped part way resumes, and `--quick` runs two years to
-`research/runs/lake_oxygen/lake_oxygen_quick.json`. mixing_forms.py saves its deep columns daily in the lake kinds'
-format to `research/runs/lake_oxygen/mixing_forms`, indexed with each file's sha256 in `mixing_forms_index.json`, and
-resumes pass by pass.
+`research/runs/lake_oxygen/lake_oxygen_quick.json`. The cache key holds run.py and lake.py whole, the case and what the
+runs read from their inputs (`Setting.values_fingerprint()`: this study's extracts by their sha256, and the targets'
+shares and lapse rates, the held seas' salinity and pH and the floor's heat flow by their values), so a product
+written again with the same values, as the settle cascade writes them, leaves the cache standing; `--cache-only`
+builds the product from the cache and stops at the first run it would have to compute, here and in every lake study.
+mixing_forms.py saves its deep columns daily in the lake kinds' format to `research/runs/lake_oxygen/mixing_forms`,
+indexed with each file's sha256 in `mixing_forms_index.json`, and resumes pass by pass.

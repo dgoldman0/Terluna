@@ -2,27 +2,27 @@
  "schema": "terluna.research.lake-kinds/1",
  "producer": {
   "files": {
-   "research/studies/lake_kinds/run.py": "b97227586da418dc534db162fe2c48d6c45b6f246a101861ed8ab67dd0896e39",
+   "research/studies/lake_kinds/run.py": "ea8190857e1c5cca42181f048c2787493d4dba1f646bd970c61219410e331b7f",
    "research/studies/lake_kinds/analysis.py": "ca5ceda34adc8abc33ff614df9bee75bf31a50314b0825342eb8201bcb7daef5",
    "research/studies/lake_kinds/census.py": "ef9e9ef984607398722f2875c4f0981de66bba93f71a624ef5474acb931c69b4",
-   "research/studies/lake_kinds/columns.py": "720f44a63877b81033cc1c64c5be9755d9744aa6eabd431819e54a247950c627",
-   "research/studies/lake_kinds/ladder.py": "7d71b86cc9bacc539377fabb1ef7b7b1859a98ef74c23a9dbbd1c91c1890050d",
-   "research/studies/lake_kinds/meromictic.py": "a9a4e41df64eed0e4ffe65ecf408070c8507eca00ee0f139bbe9671d9014b842",
+   "research/studies/lake_kinds/columns.py": "464cac8ac1e34241e20f0bd896db26ed15e6bfc834ddc750e830722ac644fa3a",
+   "research/studies/lake_kinds/ladder.py": "388df783a2144c8b2cff1fe47da67eddff302e369926d3656cd3d5b9600a1e6a",
+   "research/studies/lake_kinds/meromictic.py": "70a9eb331058f228e4b668d7ed08ca04934b7fc444d02bae0783983b73b2445d",
    "research/studies/lake_kinds/setting.py": "a72b08166f7ba3eeca5ab465a133c3235735278f4c557a141a38579e49d80b68",
    "biosphere/ecology/lake.py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa",
-   "research/studies/lake_oxygen/run.py": "1786841b50b52074c3d1c2fc3b84954ef6110256840943bd6601820b40d60a15",
-   "research/studies/lake_anoxia/run.py": "3012502524495054d8baff6b2f3eb04f48e45f1f92326dd9aa374c57a167265f",
+   "research/studies/lake_oxygen/run.py": "f0b657cb7aa67181647817a2c2f02d0fa0f446dc19f093d4ab26c00e17da83ed",
+   "research/studies/lake_anoxia/run.py": "fce117fd3ebed47c3721ac5223aae4e97f472965967a741a95f22c122bb3c462",
    "research/studies/lake_anoxia/gases.py": "80494948a28fb3fe8d6c4bee1b8c109f2ff17cd1698ebf19c8181cf6a1dd30eb",
    "research/studies/lake_oxygen/lakes.py": "cd7207f544d71a19dcbf2fa9a2b5905d3804dc5ab049c2b000c964c41dbaf79f"
   },
   "inputs": {
-   "research/studies/lake_oxygen/results/lake_oxygen.json": "02ede3205399a767f5a2d63f87976d584c1b0b07cae285cb0db66f22cd5b7194",
+   "research/studies/lake_oxygen/results/lake_oxygen.json": "c6ba6c78b91ab2fb29c02f471975591a6f60fac711d6393e015f46828d4028a3",
    "research/studies/lake_oxygen/results/lakes.json": "056679f12a6dfb5f19da1994616dbe3fd80c6c4906ab7aff70f4a445796ef2aa",
-   "research/studies/lake_anoxia/results/lake_anoxia.json": "23b8cd7d034aba372cf8103603a3fb57287f3be8b42c8b4e7b37c0f106e0d914",
-   "research/studies/climate_targets/results/climate_targets.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "264150903ecf3924ac5dc0a83810ec0a65192671391c21db1bd3873bf73bde03",
+   "research/studies/lake_anoxia/results/lake_anoxia.json": "71bc145b4cac0fa344a5a24f4ba719540163fb5817feb27692b33ce463553d7e",
+   "research/studies/lake_oxygen/climate_targets_as_run.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "13bb43c7491da470ad0627758814a338e6d830911bbc33c371b9acc04e699166",
    "research/studies/springs/results/springs.json": "b657370e8a10b5501e7a24924f45702bbe9617f7938a5b1e8d7db812f3dc244c",
-   "research/studies/lake_kinds/results/lake_census.json": "dc4cdfb13a9af864bbf3be4bae6e1eed57fc502ebe5331c7cff8d1aadb93de3c",
+   "research/studies/lake_kinds/results/lake_census.json": "54ce2ffd91da64c89a49861793d82253aa9c98be34bea7000323a86e2d868417",
    "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f8899bd4f5d712445f78c8882c85a1bc30bf631ac9dd14ab1c03",
    "geography/results/drainage.json": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d",
    "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
@@ -34,7 +34,7 @@
    "geography/inputs/ldem_16.img": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
    "geography/inputs/ldem_4.img": "c04632eba6449af49e3108ed7c25b3b1c450600abd3690df4fc815853a1af476",
    "geography/inputs/jggrx_0420a_sha.tab": "962355f81ae40dab0ec39753e3820d731d4505633a262fc543afd6f6c7c0e50d",
-   "research/runs/lake_kinds/ladder.json": "26067e8a73c6eec6d91e9780e54f2d83d734b67bcaf4aabc5c1961971e00a891"
+   "research/runs/lake_kinds/ladder.json": "bc4856c2a6fb85bdedd52a3319a83a28d154b996dea4fd4e365484b15c2da7e5"
   },
   "constants": {
    "MOON_SURFACE_GRAVITY": 1.624,
@@ -68,22 +68,22 @@
    },
    "runs": {
     "deep/0-15": {
-     "file": "lake_oxygen_deep_0-15_e5ff75354df14820c273.json",
+     "file": "lake_oxygen_deep_0-15_cdcb8184b4401d54bf84.json",
      "identical": true,
      "differences": []
     },
     "deep/15-30": {
-     "file": "lake_oxygen_deep_15-30_b5b19cfcc395198c57a2.json",
+     "file": "lake_oxygen_deep_15-30_1765ed938b88263866eb.json",
      "identical": true,
      "differences": []
     },
     "deep/30-45": {
-     "file": "lake_oxygen_deep_30-45_a9628d3fe227f3704725.json",
+     "file": "lake_oxygen_deep_30-45_eb977dab0679c54e0aa9.json",
      "identical": true,
      "differences": []
     },
     "shallow/0-15": {
-     "file": "lake_oxygen_shallow_0-15_c4408d906b7497317c46.json",
+     "file": "lake_oxygen_shallow_0-15_e8a4246d68965238ebc1.json",
      "identical": true,
      "differences": []
     }
@@ -23980,5 +23980,5 @@
    }
   }
  },
- "seconds": 232.8
+ "seconds": 231.3
 }

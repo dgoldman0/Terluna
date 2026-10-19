@@ -1,7 +1,8 @@
 """How the deep lakes' oxygen and methane rest on the form of the mixing below the mixed layer: a sensitivity study.
 
-    python -m research.studies.lake_oxygen.mixing_forms             # about 90 minutes on one core; resumes
-    python -m research.studies.lake_oxygen.mixing_forms --jobs 2    # two cores
+    python -m research.studies.lake_oxygen.mixing_forms                 # about 90 minutes on one core; resumes
+    python -m research.studies.lake_oxygen.mixing_forms --jobs 2        # two cores
+    python -m research.studies.lake_oxygen.mixing_forms --cache-only    # the product from the cached columns
 
 The lake model (biosphere/ecology/lake.py) turns the dissipation below the mixed layer into a diffusivity by Osborn's
 rule, K = 0.2 eps / N^2, at every buoyancy Reynolds number Re_b = eps / (nu N^2). In the near-neutral deep water the
@@ -25,7 +26,8 @@ columns, debt, age, solutes and the labile pool, with the step-by-step series) t
 mixing_forms, indexed with each file's sha256 in mixing_forms_index.json, so the methane tracer can read them;
 lake_anoxia's methane arithmetic runs on the 0-15 lakes of both forms, the lake standing for every lake.
 results/mixing_forms.json (schema terluna.research.lake-oxygen-mixing-forms/1) holds the summaries beside the Osborn
-runs they answer.
+runs they answer. Each column and pan is cached under a key of the code, what the runs read from lake_oxygen's setting
+(its values_fingerprint()) and the case; --cache-only stops at the first one it would have to compute.
 """
 from __future__ import annotations
 
@@ -33,6 +35,7 @@ import argparse
 import contextlib
 import hashlib
 import json
+import os
 import sys
 import time
 from concurrent.futures import ProcessPoolExecutor
@@ -125,10 +128,11 @@ def setting(ground_k):
 
 
 def key(st, case):
+    """The cache key: the code that runs a column whole, what the runs read from the setting's inputs and the case."""
     h = hashlib.sha256()
     for p in code_files():
         h.update(sha256(p).encode())
-    h.update(json.dumps(st.inputs, sort_keys=True).encode())
+    h.update(st.values_fingerprint().encode())
     h.update(json.dumps(dict(case, ground_k=st.ground_k), sort_keys=True).encode())
     return h.hexdigest()[:20]
 
@@ -142,6 +146,8 @@ def column(name, case, start=None):
     final = CASES / f'{name}_{k}.json'
     if final.exists():
         return json.loads(final.read_text())
+    if R.cache_only():
+        R.uncached(final)
     tic = time.time()
     site = R.site_info(st, BAND)
     w, forcing, mu = R.forcing_for(st, case['target'], site, 'lock', None, R.STEPS_PER_MEAN_DEEP)
@@ -225,6 +231,8 @@ def pan(name, case):
     path = CASES / f'{name}_{key(st, case)}.json'
     if path.exists():
         return json.loads(path.read_text())
+    if R.cache_only():
+        R.uncached(path)
     R.WIND_SHARE['pans_low'] = PANS_SHARE
     if case['bracket'] == 'share_low':
         res = R.run_case(st, 'shallow', case['target'], case['site_i'], eta='pans_low')
@@ -344,6 +352,8 @@ def compare(index):
                 path = C.CASES / f'{ladder_name}_{C.key(st, lcase[0])}.json'
                 if path.exists():
                     entry['osborn'] = json.loads(path.read_text())
+                elif R.cache_only():
+                    R.uncached(path)
             at301[f'{depth:g}/{trophic}'] = {form: dict(
                 complete_overturns=v['mixing']['complete_overturns'], cycles=v['cycles'],
                 bottom_age_years=v['mixing']['bottom_age_days']['mean'] / 365.25,
@@ -371,7 +381,10 @@ def strip(x):
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--jobs', type=int, default=1, help='worker processes, at most 2 on the shared machine')
+    ap.add_argument('--cache-only', action='store_true', help='the product from the cached columns; stop at a miss')
     args = ap.parse_args(argv)
+    if args.cache_only:
+        os.environ[R.CACHE_ONLY] = '1'
     jobs = max(1, min(args.jobs, 2))
     tic = time.time()
     all_cases = cases()

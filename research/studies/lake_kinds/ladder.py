@@ -2,6 +2,7 @@
 
     python -m research.studies.lake_kinds.ladder              # about 2.5 hours on two cores; resumes where it stopped
     python -m research.studies.lake_kinds.ladder --jobs 1     # one core
+    python -m research.studies.lake_kinds.ladder --cache-only # the index and the 300 K proof from the cached runs
 
 First it proves the 301 K construction: lake_oxygen's own run_case() at the resort built here at 300 K must give the
 waters' oxygen study's committed resort runs (its three 352 m lakes and the 0-15 pan), and this study's column runner
@@ -28,12 +29,13 @@ of the wind's energy at 0.3%, with the bracket 0.2-0.4% where named):
   0.1 kg/m3 of density, and the 30 m lake's mesotrophic and eutrophic water with one worth 1 kg/m3, fifty years each
   from an oxygenated start, saved daily.
 It writes research/runs/lake_kinds/ladder.json, the index run.py reads, with the sha256 of every saved file and of
-the lake model.
+the lake model. With --cache-only it computes no run and stops at the first one not cached.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import time
 from concurrent.futures import ProcessPoolExecutor
@@ -169,6 +171,8 @@ def lake_oxygen_case(st, kind, site_i):
     path = C.CASES / f'lake_oxygen_{kind}_{BAND_NAMES[site_i]}_{C.key(st, case)}.json'
     if path.exists():
         return json.loads(path.read_text()), path
+    if R.cache_only():
+        R.uncached(path)
     res = R.run_case(st, kind, 'resort', site_i)
     path.write_text(json.dumps(res) + '\n')
     return res, path
@@ -231,7 +235,10 @@ def reproduction():
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--jobs', type=int, default=2, help='worker processes, at most 2 on the shared machine')
+    ap.add_argument('--cache-only', action='store_true', help='the index from the cached runs; stop at a miss')
     args = ap.parse_args(argv)
+    if args.cache_only:
+        os.environ[R.CACHE_ONLY] = '1'
     jobs = max(1, min(args.jobs, 2))
     tic = time.time()
     st = setting()

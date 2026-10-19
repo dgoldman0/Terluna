@@ -5,6 +5,7 @@
     python -m research.studies.lake_methane.run --targets    # lake_anoxia's regenerated lock, resort and hot world
     python -m research.studies.lake_methane.run --work       # one of several processes filling the cache
     python -m research.studies.lake_methane.run              # all of it, then results/lake_methane.json
+    python -m research.studies.lake_methane.run --cache-only # the product from the cache, tracing no case
 
 The lake model is not run here. The tracer (tracer.py, through cases.py) carries methane through columns the model
 saved: lake_anoxia's 352 m lakes and its 1,925 m lake in the lock, the resort at 300 K and the hot world, the lake
@@ -1365,7 +1366,10 @@ def main(argv=None) -> int:
     ap.add_argument('--seas', action='store_true', help="the seas' columns")
     ap.add_argument('--targets', action='store_true', help="lake_anoxia's regenerated columns, the three targets")
     ap.add_argument('--work', action='store_true', help='one of several processes filling the cache')
+    ap.add_argument('--cache-only', action='store_true', help='the product from the cache; stop at a case not cached')
     args = ap.parse_args(argv)
+    if args.cache_only:
+        os.environ[R.CACHE_ONLY] = '1'
     tic = time.time()
     if args.work:
         work()

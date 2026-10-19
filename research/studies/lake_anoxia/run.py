@@ -2,11 +2,13 @@
 
     python -m research.studies.lake_anoxia.profiles      # the deep lakes' columns through time (about nine minutes)
     python -m research.studies.lake_anoxia.run           # the analysis (about three minutes)
+    python -m research.studies.lake_anoxia.run --cache-only   # the same, stopping unless the columns are current
 
 It reads the columns that profiles.py saved from the lake model with the wind's deep mixing at its central share and
 its bracket (research/runs/lake_anoxia), the waters'
 oxygen study's product and lakes, geography's rain-fed lakes on LOLA, the domain synthesis's methane ledger, the deep
-column's reduced-gas forcing, climate_targets, the sea chemistry's lakes and the land's phosphorus, and writes
+column's reduced-gas forcing, the climate targets as the lake studies ran on them (lake_oxygen's
+climate_targets_as_run.json), the sea chemistry's lakes and the land's phosphorus, and writes
 results/lake_anoxia.json:
 - methane: what the anoxic depths make, by trophic state and target, the bubbles that leave the sediment at the
   Moon's hydrostatic pressure and how much of them reaches the air, the lakes' flux Moon-wide, and what it does to
@@ -44,7 +46,7 @@ OXYGEN = ROOT / 'research' / 'studies' / 'lake_oxygen' / 'results' / 'lake_oxyge
 LAKES = ROOT / 'research' / 'studies' / 'lake_oxygen' / 'results' / 'lakes.json'
 LEDGERS = ROOT / 'research' / 'studies' / 'domain_synthesis' / 'results' / 'ledgers.json'
 GAS_FORCING = ROOT / 'atmosphere' / 'radiative_convective' / 'results' / 'reduced_gases.json'
-TARGETS = ROOT / 'research' / 'studies' / 'climate_targets' / 'results' / 'climate_targets.json'
+TARGETS = R.TARGETS                    # the climate targets as the lake studies ran on them (lake_oxygen's run.py)
 CHEMISTRY = ROOT / 'research' / 'studies' / 'sea_chemistry' / 'results' / 'sea_chemistry.json'
 DRAINAGE = ROOT / 'geography' / 'results' / 'drainage.json'
 OUT = HERE / 'results' / 'lake_anoxia.json'
@@ -799,9 +801,35 @@ def analyse(st, cases, classes):
                 remedies=remedies(st, deep, temps), degassing=degassing(st, deep))
 
 
+def stale_columns(st):
+    """The saved columns whose starting run the waters' oxygen study's cache does not hold under the key its current
+    code and setting give it: profiles.py started each 352 m lake from that study's cached deep run, whose file it
+    records, and each 1,925 m lake from the 0-15 lake's; empty when the cache holds every one with the same contents."""
+    lo = R.Setting()
+    out = []
+    for name, case in st.meta['cases'].items():
+        extra = {} if case['eta'] == 'central' else dict(eta=case['eta'])
+        run = dict(kind='deep', target=case['target'], site_i=R.SITE_BANDS.index(case['band']), years=None, **extra)
+        now = R.RUNS / 'cases' / f"deep_{R.cache_key(lo, 'deep', **run)}.json"
+        saved = R.RUNS / 'cases' / case['from_case'] if 'from_case' in case else None
+        if not now.exists() or (saved is not None and sha256(saved) != sha256(now)):
+            out.append(name)
+    return out
+
+
 def main(argv=None) -> int:
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--cache-only', action='store_true',
+                    help="stop unless the saved columns start from lake_oxygen's cached runs (it computes none)")
+    args = ap.parse_args(argv)
     tic = time.time()
     st = Setting()
+    if args.cache_only or R.cache_only():
+        stale = stale_columns(st)
+        if stale:
+            raise SystemExit(f"cache only: lake_oxygen's cache does not hold the runs {len(stale)} saved columns "
+                             f'start from ({", ".join(stale[:4])})')
     cells = moon_lakes()
     classes = lake_classes(cells)
     by = {e: analyse(st, {n: c for n, c in st.meta['cases'].items() if c.get('eta', 'central') == e}, classes)

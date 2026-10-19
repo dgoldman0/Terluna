@@ -2,7 +2,7 @@
  "schema": "terluna.research.lake-oxygen/2",
  "producer": {
   "files": {
-   "research/studies/lake_oxygen/run.py": "1786841b50b52074c3d1c2fc3b84954ef6110256840943bd6601820b40d60a15",
+   "research/studies/lake_oxygen/run.py": "f0b657cb7aa67181647817a2c2f02d0fa0f446dc19f093d4ab26c00e17da83ed",
    "biosphere/ecology/lake.py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa",
    "research/studies/lake_oxygen/lakes.py": "cd7207f544d71a19dcbf2fa9a2b5905d3804dc5ab049c2b000c964c41dbaf79f",
    "research/studies/lake_oxygen/extract.py": "f75021292ea9ea48428d0b4410755afac1460a065630babbb60215e22f86caa3"
@@ -11,8 +11,8 @@
    "research/studies/lake_oxygen/results/lakes.json": "056679f12a6dfb5f19da1994616dbe3fd80c6c4906ab7aff70f4a445796ef2aa",
    "research/runs/lake_oxygen/forcing.npz": "66eef43a5731e51ab5e59154f31f1c65ba62cbfd6a3fec7b0b9c5e86aca28d69",
    "research/runs/lake_oxygen/forcing.json": "0c232d5532b027abf78d2205c317783f5de61d7ff8084f152b5ba9fddbf10c6a",
-   "research/studies/climate_targets/results/climate_targets.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "264150903ecf3924ac5dc0a83810ec0a65192671391c21db1bd3873bf73bde03",
+   "research/studies/lake_oxygen/climate_targets_as_run.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "13bb43c7491da470ad0627758814a338e6d830911bbc33c371b9acc04e699166",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e"
   },
   "constants": {
@@ -86372,5 +86372,5 @@
    }
   }
  },
- "seconds": 4495.1
+ "seconds": 1.2
 }

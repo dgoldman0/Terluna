@@ -10,7 +10,8 @@ files (the seas' study re-keys its columns by hard links) leaves the key standin
 The key holds this module, the tracer, the readers, the biology, the lake model and lake_anoxia's gas physics whole,
 and of lake_oxygen's and lake_anoxia's runners only what the tracing uses, by name: the source of each function and
 the value of each constant, as this process loaded them (read once, at import). An edit elsewhere in those files leaves
-the cached cases standing; any change to what the tracing runs re-keys them. run.py's analysis is not in the key.
+the cached cases standing; any change to what the tracing runs re-keys them. run.py's analysis is not in the key. A
+cache-only run (lake_oxygen's cache_only()) traces no case and stops at the first one not cached.
 """
 from __future__ import annotations
 
@@ -123,6 +124,8 @@ def trace_case(col, lanes, name, cyclic=True, max_passes=4, ml_oxygen=True, clon
     path = CASES / f'{name}_{key}.json'
     if path.exists():
         return json.loads(path.read_text())
+    if R.cache_only():
+        R.uncached(path)
     tic = time.time()
     probe = T.Tracer(col, lanes)
     bub = None

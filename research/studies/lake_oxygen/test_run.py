@@ -314,3 +314,62 @@ def test_the_energetic_regime_mixes_the_deep_lakes_less(forms):
         b = run['budget']
         assert abs(b['heat_relative_error']) < 1e-8 and b['oxygen_relative_error'] < 1e-6, name
         assert run['deep_mixing']['share_held_by_the_cap'] < 1e-3, name
+
+
+# --- the targets as run and the cache ---------------------------------------------------------------------------
+
+LAKE_PRODUCTS = ('research/studies/lake_oxygen/results/lake_oxygen.json',
+                 'research/studies/lake_oxygen/results/mixing_forms.json',
+                 'research/studies/lake_anoxia/results/lake_anoxia.json',
+                 'research/studies/lake_kinds/results/lake_kinds.json',
+                 'research/studies/sea_oxygen/results/sea_oxygen.json',
+                 'research/studies/lake_methane/results/lake_methane.json')
+
+
+def test_every_lake_product_reads_the_targets_the_lakes_ran_on():
+    # the frozen copy is ecology's climate_targets.json at e9c12eb byte for byte (schema /2), and every lake product
+    # records it by that sha256, the live targets nowhere
+    targets = str(R.TARGETS.relative_to(R.ROOT))
+    assert targets == 'research/studies/lake_oxygen/climate_targets_as_run.json'
+    assert digest(targets) == R.TARGETS_SHA256
+    assert json.loads(R.TARGETS.read_text())['schema'] == 'terluna.research.climate-targets/2'
+    for path in LAKE_PRODUCTS:
+        recorded = json.loads((R.ROOT / path).read_text())['producer']['inputs']
+        assert recorded[targets] == digest(targets), path
+        assert 'research/studies/climate_targets/results/climate_targets.json' not in recorded, path
+
+
+@pytest.fixture(scope='module')
+def setting():
+    if not present('research/runs/lake_oxygen/forcing.npz'):
+        pytest.skip('the GCM forcing lives on the research drive')
+    return R.Setting()
+
+
+def test_the_cache_keys_hold_the_values_the_runs_read(setting):
+    # a settle cascade writes the other studies' products again with the same values and new producer hashes: the
+    # keys stand; a value the runs read re-keys them
+    import copy
+    case = dict(kind='deep', target='lock', site_i=0, years=None)
+    key = R.cache_key(setting, 'deep', **case)
+    rewritten = copy.copy(setting)
+    rewritten.inputs = dict(setting.inputs, **{str(p.relative_to(R.ROOT)): '0' * 64
+                                               for p in (R.TARGETS, R.SEA_CHEMISTRY, R.UPTAKE)})
+    assert R.cache_key(rewritten, 'deep', **case) == key
+    own = copy.copy(setting)                               # this study's own extract enters by its sha256
+    own.inputs = dict(setting.inputs, **{'research/studies/lake_oxygen/results/lakes.json': '0' * 64})
+    assert R.cache_key(own, 'deep', **case) != key
+    for name, value in (('salinity', setting.salinity * (1.0 + 1e-9)), ('heat_flow', setting.heat_flow * 1.01),
+                        ('lapse', dict(setting.lapse, lock=setting.lapse['lock'] * 0.99)),
+                        ('share', dict(setting.share, resort=setting.share['resort'] + 1e-6))):
+        moved = copy.copy(setting)
+        setattr(moved, name, value)
+        assert R.cache_key(moved, 'deep', **case) != key, name
+
+
+def test_a_cache_only_run_computes_no_case(setting, monkeypatch):
+    monkeypatch.setenv(R.CACHE_ONLY, '1')
+    ran = []
+    with pytest.raises(SystemExit, match='cache only'):
+        R.cached(setting, 'deep', lambda st, **case: ran.append(case), kind='deep', target='lock', site_i=0, years=-1)
+    assert not ran
