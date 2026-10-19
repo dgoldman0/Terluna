@@ -22,7 +22,7 @@ with `visualization/rain-audio` on `domain/atmosphere` at 2973f91 (the *rain*).
 |---|---|---|---|---|
 | Dimming in all; the target's own share of it | 3.7–5.3%; none | 8.2–10.9%; 4.5–5.6% | 12.6–16.6%; 8.9–11.3% | Calculation on the test's feedback (targets) |
 | Rain on land a day: every cell's land (the model's land cells) | 3.34 mm (2.94) | 2.82 mm (2.39 at 300 K) | 2.25 mm (1.98) | GCM output; the resort interpolated (targets) |
-| Land under 0.5 mm a day, the same two counts | 18.9% (20.1%) | 28% (31%) | 38% (42%) | The same |
+| Land under 0.5 mm a day, the same two counts | 18.9% (20.1%) | 22.5–28.1% (24.8–31.5%) | 38% (42%) | The same; the resort's range by the interpolation's form (coast water) |
 | Land wet-bulb at 2 m: median; 99th percentile | 26.9; 31.5 °C | 22.0; 26.8 °C | 16.6; 21.8 °C | The same |
 | Land's time with the 2 m wet-bulb above 28 °C | 31%, and 2.1% above 31 °C | under 1% | none | The same |
 | Seas' surface, median | 34.5 °C | 29.5 °C | 24.1 °C | The same |
@@ -36,11 +36,15 @@ The dimming in all includes the 3.7–5.3% every target shares to answer the gas
 costs each a further 0.26–1.56% of the growth through light and 2.0–7.3% of the land's rain (calculations). The resort's
 wet-bulb 99th percentile stays under 28 °C across 300–302 K, by day and in 6.5-hour means, so its land passes 28 °C less
 than 1% of the time; the product carries its rain on the model's own land cells at 300 K only. The interpolation moves
-every climate figure linearly with the ground's temperature, so a range or a distribution reads from its ends. Each
-kelvin warmer raises the freezing level over the summit about 1.2 km across 298–303 K and the ground's wet-bulb 99th
-percentile 0.84 K, takes 0.73–0.96 points off the dimming, 87–113 TW of sunlight, adds 0.1 mm of rain a day on land with
-1.6 points less desert, and costs the seas 0.12 mg/L of oxygen and the margin 1.7–2.3 W/m² (targets; the freezing level
-read from the tower's rows, the other rates as b83d542 corrected them).
+every climate figure linearly with the ground's temperature, so a range or a distribution reads from its ends. The
+resort's deserts are given as a range because they turn on how each cell's rain is carried between the two runs: by a
+fixed amount a kelvin they cover 22.5% of the land (24.8% on the model's own cells), by a fixed factor 28.1% (31.5%),
+and the interpolated shares, 27.9% (30.8%), lie at the factor's end ([coast water](../coast_water/README.md)); a
+design case at 301 K would settle it. Each kelvin warmer raises the freezing level over the summit about 1.2 km across
+298–303 K and the ground's wet-bulb 99th percentile 0.84 K, takes 0.73–0.96 points off the dimming, 87–113 TW of
+sunlight, adds 0.1 mm of rain a day on land with 0.9–1.8 points less desert by the interpolation's form, and costs the
+seas 0.12 mg/L of oxygen and the margin 1.7–2.3 W/m² (targets; the freezing level read from the tower's rows, the
+other rates as b83d542 corrected them).
 
 ## Each target's case
 
@@ -94,8 +98,9 @@ Through light, each point of dimming costs 0.07–0.30% of the living Moon's gro
 dimming, 0.62–3.3% for the lock's, and 0.26–1.56% in every target for the shared 3.7–5.3%. Through rain the drying costs
 more. Rain-fed land grows 57–87% of the living Moon's growth by the water it transpires (the light study), and cooling
 dries it: the land's rain falls from 3.34 mm a day in the hot world to 2.82 in the resort and 2.25 in the lock, and its
-desert grows from 19% to 28% and 38%. The dimming's own cut at a held temperature takes a further 0.55% of the rain a
-point in the GCM and 1.38% in Earth's models, bringing the resort's land to 2.60–2.75 mm and the lock's to 1.90–2.14.
+desert grows from 19% to 22.5–28% and 38%. The dimming's own cut at a held temperature takes a further 0.55% of the
+rain a point in the GCM and 1.38% in Earth's models, bringing the resort's land to 2.60–2.75 mm and the lock's to
+1.90–2.14.
 The parts that follow the light grow 10–40% of the whole, and heavy dimming falls hardest on them: the aerophytes'
 growth follows their light at 0.30–0.67 of each share taken, the lakes' and the river-fed coasts' at 0.38–1.0, the wet
 margins' at 0.60–0.71, and the deep canopy loses 0.97% of its twilight photosynthesis for each 1% of light, against
