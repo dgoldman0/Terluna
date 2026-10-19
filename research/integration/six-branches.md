@@ -147,11 +147,21 @@ after provisioning, 2,535 after Jura Island, 2,549 after resources, 2,632 after 
 with 20 skipped, and 2,761 at the synthesis commit; on their own branches before merging, resources passed 2,444,
 atmosphere 2,517 and ecology 2,557, each with 19 skipped.
 
+## Afterwards
+
+Main's checkout moved up to the reviewed head, `0e6a35e`, by fast-forward on 19 October, as the author asked once the
+integration was checked complete and clean, and the seven branches, the five domains, `research/jura-island` and
+`research/array-industry`, moved up to it the same way, each clean and an ancestor of main. Every checkout's
+`research/runs` now links the research drive's `climate-targets-runs-climate`, the extract the merged targets bind,
+with `coast-water` and the five lake folders, and holds the sound lab's three recordings, copied and hash-checked;
+atmosphere's local copy of the old extract, identical to the drive's ecology extract, moved to the drive
+(`session-tools/integration4/`). Main's checkout and every worktree then passed `make check`, 2,762 Python tests
+with 20 skipped (`make_check_after_integration4_*.log`). The review's confirmation found every high and medium fault
+fixed and one new error, two tables the reflow had flattened, restored in `0e6a35e`, whose check passed 2,762. The
+integration's worktree and its local branch, which equals main, stay until the author says.
+
 ## Still to do from the integration
 
-- **The fast-forward and the branches:** main moved up to the reviewed head; each worktree's run folders relinked
-  (`research/runs/climate_targets` to `climate-targets-runs-climate`, the five lake folders and coast water where
-  missing, the sound lab's recordings copied); every branch brought to main and each worktree's `make check`.
 - **The design case at 301 K**, at the author's word, then the glow pair and the lakes' rerun on its weather.
 - **The author's choices:** the waters' trophic design, the deserts' watering, food in orbit's carbon, the sea
   chemistry's floor ordering and the summit site product's rebuild.
