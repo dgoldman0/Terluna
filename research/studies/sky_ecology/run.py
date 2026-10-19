@@ -76,8 +76,8 @@ CROSS_BRANCH = {
         blob='c8ead8b6f8217ba3032806902c79f91b7ef45592',
         sha256='de35ebdcfab234b9fc8f110672018a4d279da7bc84ceb0e0cab5ac9b22b3822f'),
     'research/studies/ways_of_living/results/ways_of_living.json': dict(branch='main', commit=WAYS_COMMIT,
-        blob='25dca65203a75e3e4110a2e8680b73eb7603d7a1',
-        sha256='947d5b7232be81bc6df64f19ba445629381f9366e7cc92418e09997cc068e3b7',
+        blob='e6f8e14280fb8207f86941851fefca025e3542a9',
+        sha256='5d8693aaf3e44bab15633c11159501926e0124148b95f1fa1204618011d3ce28',
         schema='terluna.research.ways-of-living/1'),
 }
 # The atlas grid is an ignored input on the research drive; land and sea under the routes need it.

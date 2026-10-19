@@ -3,7 +3,7 @@
  "producer": {
   "study": "ways_of_living",
   "files": {
-   "research/studies/ways_of_living/run.py": "8f4645a7902af44f"
+   "research/studies/ways_of_living/run.py": "1889e98b470d5ec4"
   },
   "constants": {
    "JULIAN_DAY": 86400.0,
@@ -2684,7 +2684,7 @@
    "group": "On the land",
    "name": "Coastal and lake towns",
    "kind": "lunar_surface",
-   "character": "Harbour towns on the seas and great lakes: the near-side sea's long coasts, the far side's South Pole-Aitken sea, islands such as Caucasus and Jura, and the shores of the highland lakes such as Korolev and Hertzsprung. The monthly tide lays out flats for days, and the seas are gentle and fresh for their first thousands of years.",
+   "character": "Harbour towns on the seas and great lakes: the near-side sea's long coasts, the far side's South Pole-Aitken sea, islands such as Caucasus and Jura, and the shores of the highland lakes such as Korolev and Hertzsprung. The monthly tide lays out flats for days, and the seas are gentle and held fresh.",
    "third_dimension": "Sky ferries and harbours for regional ships; gliders along the shore; from a 100 m headland the sea is in view for 18.6 km.",
    "home_classes": ["big_water_shore"],
    "home_dry_land_km2": 3949000.0,

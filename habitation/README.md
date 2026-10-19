@@ -132,6 +132,24 @@ Butchart Gardens keeps 50 gardeners all year and 20 more in summer on 22 ha
 million km² of parks would need 50 million to 1.5 billion gardeners. Much of the machines' work can run through the long
 night by infrared and lidar, so the living light keeps the dark.
 
+## Building at a sixth of Earth's gravity
+
+The [low-gravity design note](low_gravity/README.md), 17 October 2026, sets out guards, stairs, handholds, ramps and
+halls for moving under the author's rule that the architecture show the Moon's gravity and the added spring in a step
+([register](../research/decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)).
+At a sixth of the weight the same take-off speed lifts a body 6.04 times as high, falls land like a sixth of the drop,
+grip stops and turns a sixth as hard and a hand holds six times its grip, while a body meeting a guard keeps Earth's
+energy and lifting it over the top costs a sixth. Its design choices, which await the author's review:
+- no guard on drops up to 2.3 m; on drops of 2.3–4.7 m, Earth's 1.1 m or 2.2 m; above 4.7 m, the 2.2 m of the summit
+  drawings, which costs at least Earth's lift to climb over for adults from 1.6 m tall, with guards of 2.8–3.9 m or
+  play kept back where young children play beside long drops;
+- the lunar guard's face carries no foothold and its handhold is a recessed grip slot; its height counts from any
+  foothold within a hop's reach of it, and its top gives no grip;
+- design turns, landings and ramps at half the grip: everyday stairs of 150 mm rise and 400 mm going with 3 m landings
+  and bounding stairs of 300 and 600 mm with 4.5 m landings, in flights rising up to 12 m with 2.5 m of headroom and
+  handrails on both sides; Earth's ramp gradients in runs rising up to 0.9 m between 3 m landings; and halls for moving,
+  provisionally 6.0 m clear, with banked turns, apart from calm rooms at human scale.
+
 ## Community settings from the atlas
 
 The [conservation study](../research/studies/conservation/README.md) lists candidate settings for communities on the 28% [atlas](../geography/README.md#atlas-at-the-selected-water-share):

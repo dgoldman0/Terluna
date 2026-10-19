@@ -588,7 +588,7 @@ SETTINGS = [
          character=('Harbour towns on the seas and great lakes: the near-side sea\'s long coasts, the far side\'s '
                     'South Pole-Aitken sea, islands such as Caucasus and Jura, and the shores of the highland lakes '
                     'such as Korolev and Hertzsprung. The monthly tide lays out flats for days, and the seas are '
-                    'gentle and fresh for their first thousands of years.'),
+                    'gentle and held fresh.'),
          third_dimension=('Sky ferries and harbours for regional ships; gliders along the shore; from a 100 m '
                           'headland the sea is in view for 18.6 km.')),
     dict(id='wetland_edge_towns', group='On the land', kind='lunar_surface', home=[3], footprint='town',

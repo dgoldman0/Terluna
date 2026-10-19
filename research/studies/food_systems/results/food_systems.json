@@ -3,7 +3,7 @@
  "producer": {
   "study": "food_systems",
   "files": {
-   "research/studies/food_systems/run.py": "f722ea1fa3c0c61a",
+   "research/studies/food_systems/run.py": "1622d4ed5ebe0e21",
    "research/studies/food_systems/zones.py": "59f9cc439fcb8997",
    "research/studies/food_systems/parameters.py": "380459175e577004",
    "research/studies/food_systems/systems.py": "c049b3435c3e2763",
@@ -17,7 +17,7 @@
    "SYNODIC_MONTH_DAYS": 29.53059
   },
   "inputs": {
-   "research/studies/ways_of_living/results/ways_of_living.json": "947d5b7232be81bc",
+   "research/studies/ways_of_living/results/ways_of_living.json": "5d8693aaf3e44bab",
    "provisioning/results/population.json": "c3fa7a2a492ef753",
    "research/studies/daily_life/results/daily_life.json": "47dec4b1fb14bf63",
    "biosphere/canopy/results/canopy.json": "bedb8ce2502316d4",
@@ -106,8 +106,8 @@
     "path_at_integration": "resources/results/sea_phosphorus.json",
     "branch": "main",
     "commit": null,
-    "blob": "596fb7b9539e079ef4e79bf4ef25afa970657abe",
-    "sha256": "2250ef06b2f9bdc2d2dfc95be3fbf8d254f62acf6df963a65e3208ff309c02b8",
+    "blob": "3fc2184cdc99f1334a1f10dd0f6f24d4b432dfc7",
+    "sha256": "3d0c88f82eba488f0d0885e8705736166ae29be922912ad5fd5aa4b1726498d8",
     "worktree": "terluna",
     "read_from": "in-tree",
     "note": "The land's phosphorus through the rain-fed lakes to the seas: the dissolved input the common-level waters receive, and what the waters' life can spare to seaweed, fish and sorption."
