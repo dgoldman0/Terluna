@@ -128,6 +128,11 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
     **How:** cross-shore water tables at tens of metres along the atlas's coasts, the sea a fixed head with its
     monthly tide, the plants' draw from the climate's demand, the capillary reach at lunar gravity and the load's
     balance; by latitude, shore slope and ground, with Jura Island as the worked case. Minutes on one core.
+
+    **Part answered 18 October** by [the coast-water study](../research/studies/coast_water/README.md): the belts
+    Moon-wide at 16 px/deg by shore class, latitude and island, with a 100 m check on four non-desert coasts that
+    converges on one. The tide, the load's balance, desert coasts at tens of metres and Jura Island's worked case
+    remain.
 17. **The delivered water's own chlorine.** The sea chemistry delivers pure water. Ice like comet 67P's carries about
     1% of seawater's chloride, which has no sink: delivered as it comes it would hold the seas near 0.28 g/kg of
     chloride, about 0.5–0.6 g/kg in all with the cations that balance it, at the line between fresh and brackish

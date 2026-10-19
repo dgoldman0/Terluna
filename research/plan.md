@@ -32,7 +32,10 @@ and a [synthesis](studies/domain_synthesis/README.md) fitted them together at th
 three, with `research/array-industry` and `research/jura-island`, were merged in a third
 ([integration/five-branches.md](integration/five-branches.md)), and
 [what each target climate takes](studies/climate_targets/README.md) set the author's open question of the target
-climate across the domains. The author's decisions in that work are in the register. The key points so far:
+climate across the domains. The author's decisions in that work are in the register. After it two more domains opened
+off `domain/ecology`: `domain/climate`, for the target climate's comparison and what follows the choice (the design
+case, the glow pair, the high cloud and the climate's readers), and `domain/atmosphere`, for the rain's physics and
+sound, brought in from the author's earlier work, and the air's other physics. The key points so far:
 
 - **The planned climate** (provisioning). The investigated climate is the planned climate: what the shield and the
   array add to the Moon's heat is answered so that the Moon keeps it. Since 17 October the author weighs a warmer,
@@ -271,10 +274,13 @@ one harbour town, and its 3-D CM1 box found a dry island with calm air, hot afte
 ([Jura Island](studies/jura_island/README.md)); its rerun waits on the GCM's longwave and the fresh shores.
 
 At the joint integration of 17 October, [what each target climate takes](studies/climate_targets/README.md) set three
-targets side by side. Keeping the warm Moon still takes the 3.9–5.3% of dimming that answers the gases, the glow and
-the beamed power; 300 K takes 5.2–6.5% more, and the design temperature 8.9–11.3% more. The water the author keeps
-delivering to balance the crust brings 1.5–9.5 W/m² of heat in its fall through the first thousand years unless it is
-lowered with energy recovery.
+targets side by side: the hot world, the resort between and the lock. Keeping the hot world still takes 3.7–5.3% of
+dimming to answer the gases, the glow (at an efficacy of 0.645–0.71) and the beamed power; the resort at 300 K takes
+5.2–6.5% more, and the lock at the design temperature 8.9–11.3% more, about 0.73–0.96% of the sunlight a kelvin. The
+hot world's land rains 3.34 mm a day with 18.9% of it desert, counting every cell's land, and 2.94 mm with 20.1% on
+the model's own land cells, the dry bound; the lock's, 2.25 mm with 37.6% and 1.98 mm with 42.3%. The water the
+author keeps delivering to balance the crust brings 1.5–9.5 W/m² of heat in its fall through the first thousand years
+unless it is lowered with energy recovery.
 
 Waiting on the author: the target climate, with new runs held until it is chosen (register, 17 October); the
 constraints review's recommendations for the fleet; the build's delivery heat, which the water top-up extends for
@@ -291,10 +297,16 @@ fleet's glow, its roll and the tile, support and flexible work; the curved air's
 design case; the 45° rings and the Jura Island box; the GCM's longwave refit and ice optics. What follows ranks what
 the integration found next.
 
-1. **The target climate**, the author's choice among the warm Moon near 307 K, 300 K and the design temperature of
-   295 K, set out across the domains in [what each target climate takes](studies/climate_targets/README.md). Then the
-   design case for the chosen target, a 20-year GCM run of about 1.5 hours on four ranks; the glow pair from it, two
-   more; and geography's lakes, the atlas globe and the studies that read the design climate, regenerated once.
+1. **The target climate**, the author's choice among the hot world near 307 K, the resort between (300 K in the study)
+   and the lock, the design temperature of 295 K, set out across the domains in
+   [what each target climate takes](studies/climate_targets/README.md), whose heat figures are weighted by area and
+   read at 2 m since 17 October. The author leans towards the resort and lets it vary a little near 300 K, and wants
+   winter within at least the tallest sky tower: the summit tower keeps a winter at its top, with 2 km of margin, up to
+   about 302 K, and the author set the resort at 301 K on 18 October, as the study proposed. Then the design
+   case for the chosen target, a 20-year GCM run of about 1.5 hours on four ranks, which also settles the tower's air
+   with one physics; the glow pair from it, two more, at which the glow study and the domain synthesis take the
+   efficacy it gives; and geography's lakes, the atlas globe and the studies that read the design climate, the
+   metropolis brief's winter parks among them, regenerated once.
 2. **The heat beyond the sunlight:** the water top-up's fall recovered on the way down, as resources' first screen
    asks of the build's deliveries (resources); and the power screen's heat carried into the ledgers, which needs the
    deep air's absorption upstream of provisioning's population screen.
@@ -306,7 +318,12 @@ the integration found next.
    fleet light on the layout's radii, whose sunward crossings it puts 11–16% too far out, with the films' specular
    light on the night; and the coupled design search at the later date the author set.
 5. **The shores and the waters:** groundwater by the fresh seas (resources, question 16), the delivered water's
-   chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores.
+   chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores. The
+   [coast-water study](studies/coast_water/README.md) (18 October) takes the shores' belts Moon-wide at 16 px/deg: at
+   301 K they put 0.4–1.5% of the desert land within plants' reach (0.40–1.07% at the central crust, taking the 100 m
+   check's ratios from four non-desert coasts to carry over to the deserts) and up to 394–575 small islands green
+   throughout, and the night's dew and fog add almost nothing. The deserts at 301 K are 22.5–28% of the land as the
+   interpolation's form leaves them. The 2-D CM1 slice waits on the design case at 301 K and the coasts' design.
 6. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
    round once these details are worked out.
 7. **The wet Moon's methane and nitrogen:** the lakes' methane by depth, with its oxidation in their waters and

@@ -1,0 +1,69 @@
+{
+  "source_admission": "Published values used in dew.py, run.py and README.md, each with how far it was read for this study on 2026-10-18. The groundwater's permeability, recharge and transmissivity come from geography's products and groundwater_sources.json; the reach of 15-25 m, the sandy ground's tenfold transmissivity and the flat-shore screen from geography's shore screen (geography/README.md, Shores by the fresh seas); the fog's liquid water and fog nets from the food study's sources.json; saturation over water (Bolton 1980) from climate_targets. No outside dataset or full paper is committed.",
+  "sources": [
+    {
+      "key": "allen1998_fao56",
+      "citation": "Allen RG, Pereira LS, Raes D, Smith M 1998, Crop evapotranspiration: guidelines for computing crop water requirements, FAO Irrigation and Drainage Paper 56, chapters 2 and 3",
+      "doi_or_url": "https://www.fao.org/4/x0490e/x0490e06.htm and https://www.fao.org/4/x0490e/x0490e07.htm",
+      "use": "dew.demand: the general Penman-Monteith equation (equation 3) for the reference surface; RA_REFERENCE 208/u2 s/m, REFERENCE_ALBEDO 0.23 and the reference crop's 70 s/m (equation 6's surface); U2_FLOOR, u2 limited to about 0.5 m/s or more; CP and the psychrometric constant (equation 8, cp 1.013e-3 MJ/kg/C, epsilon 0.622, lambda 2.45 MJ/kg); G_DAY and G_NIGHT, the hourly soil heat flux 0.1 Rn by day and 0.5 Rn at night (equations 45 and 46); run.TEN_TO_TWO_M, a wind at height z carried to 2 m by 4.87/ln(67.8 z - 5.42) (equation 47); the canopy's aerodynamic resistance in dew.canopy_dew",
+      "values_used": {"ra_times_u2_s": 208.0, "albedo": 0.23, "rs_daily_s_m": 70.0, "u2_floor_m_s": 0.5, "cp_j_kg_k": 1013.0, "latent_heat_j_kg": 2.45e6, "g_day_share": 0.1, "g_night_share": 0.5, "wind_to_2m": "4.87/ln(67.8 z - 5.42)"},
+      "access": "chapter 2 and chapter 3 pages fetched 2026-10-18; the equations and values returned as quotes by the fetch tool's summaries (\"A hypothetical reference crop with an assumed crop height of 0.12 m, a fixed surface resistance of 70 s m-1 and an albedo of 0.23\"; \"In general, wind speed at 2 m, u2, should be limited to about u2 >= 0.5 m/s when used in the ETo equation\"; \"Ghr = 0.1 Rn\", \"Ghr = 0.5 Rn\"); the food study had fetched chapter 3 for the latent heat on 2026-10-11"
+    },
+    {
+      "key": "asce_ewri2005_standardized",
+      "citation": "ASCE-EWRI 2005, The ASCE Standardized Reference Evapotranspiration Equation, Task Committee on Standardization of Reference Evapotranspiration, Allen RG, Walter IA, Elliott RL et al. (eds), American Society of Civil Engineers",
+      "doi_or_url": "https://doi.org/10.1061/9780784408056",
+      "use": "dew.RS_DAY and RS_NIGHT: the short reference surface's hourly surface resistance, 50 s/m by day and 200 s/m at night (70 s/m daily)",
+      "values_used": {"rs_day_s_m": 50.0, "rs_night_s_m": 200.0},
+      "access": "search summaries of the report read 2026-10-18; the report itself not read"
+    },
+    {
+      "key": "campbell_norman1998_biophysics",
+      "citation": "Campbell GS, Norman JM 1998, An Introduction to Environmental Biophysics, 2nd edition, Springer, chapters 3 and 7",
+      "doi_or_url": "https://doi.org/10.1007/978-1-4612-1626-1",
+      "use": "dew.leaf_conductances and canopy_dew: a leaf's boundary-layer conductance for heat in forced convection outdoors, 0.189 (u/d)^0.5 mol m-2 s-1, which is a laminar flat plate's 0.135 (u/d)^0.5 times 1.4 (OUTDOOR_FACTOR), with d 0.72 times the leaf's width (CHARACTERISTIC); the vapour diffusivity of 21.2 mm2/s at 0 C and 101.3 kPa going as T^1.75/p; leaves' longwave emissivity near 0.97 (LEAF_EMISSIVITY)",
+      "values_used": {"heat_conductance_mol_m2_s": "0.189 (u/d)^0.5", "outdoor_factor": 1.4, "characteristic_dimension_over_width": 0.72, "vapour_diffusivity_mm2_s_at_0c": 21.2, "leaf_emissivity": 0.97},
+      "access": "the heat conductance and the characteristic dimension as the medfate model's documentation gives them from the book (emf-creaf.github.io/medfatebook, chapter 11, fetched 2026-10-18); the factor 1.4 follows from 0.189 over the laminar 0.135, which this study's own flat-plate correlation reproduces at sea level; the vapour diffusivity and the leaf emissivity recalled from the book; the book not reread"
+    },
+    {
+      "key": "ritter2019_dew_frequency",
+      "citation": "Ritter F, Berkelhammer M, Beysens D 2019, Dew frequency across the US from a network of in situ radiometers, Hydrology and Earth System Sciences 23, 1179-1197",
+      "doi_or_url": "https://doi.org/10.5194/hess-23-1179-2019",
+      "use": "the Earth check of the canopy's dew balance (run.earth_check, test_run): grassland dew of 0.14 +/- 0.12 mm a night across nine US sites; a typical dew yield of 0.13 +/- 0.10 mm a night over 25 earlier studies; lysimeters in two temperate grasslands measured at most 0.5-0.6 mm a night; dew lasts longest, about 6-15 hours, near 96% humidity and 0.5 m/s",
+      "values_used": {"grassland_mm_night": [0.14, 0.12], "typical_mm_night": [0.13, 0.10], "lysimeter_max_mm_night": [0.5, 0.6]},
+      "access": "full text (open access) through the fetch tool's summary with quotes, 2026-10-18"
+    },
+    {
+      "key": "katata2014_fog_deposition",
+      "citation": "Katata G 2014, Fogwater deposition modeling for terrestrial ecosystems: a review of developments and measurements, Journal of Geophysical Research: Atmospheres 119, 8137-8159",
+      "doi_or_url": "https://doi.org/10.1002/2014JD021669",
+      "use": "run.FOG_DEPOSITION_M_S's high end and run.FOG_DEPOSITION_HIGH_M_S: fog droplets reach short vegetation at deposition velocities of 2.1-8.0 cm/s with winds of 1.1-9 m/s; the least is the fog water's bound for the Moon's calm nights and the most its sensitivity; a 10 um droplet settles at about 0.3 cm/s on Earth, a sixth of which at lunar gravity is the low end (the desert note's 0.50 mm/s)",
+      "values_used": {"short_vegetation_cm_s": [2.1, 8.0], "winds_m_s": [1.1, 9.0], "settling_10um_earth_cm_s": 0.3},
+      "access": "search summaries only, 2026-10-18; the publisher's page refused the fetch; the DOI as recalled"
+    },
+    {
+      "key": "food_systems_fog",
+      "citation": "Mazoyer M, Burnet F, Denjean C 2022, Atmospheric Chemistry and Physics 22, 11305-11321; Zak JA 1994, NASA Contractor Report 4585; Montecinos S, Cereceda P, Rivera D 2018, Atmosfera 31(2), 143-153",
+      "doi_or_url": "research/studies/food_systems/sources.json (keys mazoyer2022, zak1994_nasa_cr4585, montecinos2018)",
+      "use": "run.FOG_LWC_KG_M3: radiation fog holds 0.01-0.5 g/m3 of liquid water, 0.11 g/m3 typical; README: fog nets stop collecting near 1 m/s",
+      "values_used": {"fog_lwc_g_m3": [0.01, 0.5], "radiation_typical_g_m3": 0.11, "collection_stops_m_s": 1.0},
+      "access": "through the food study's records, as read there on 2026-10-11; not reread"
+    },
+    {
+      "key": "transport_properties",
+      "citation": "Sutherland's law for the viscosity of air (1.458e-6 T^1.5/(T + 110.4) Pa s); the thermal conductivity of air in the US Standard Atmosphere 1976 (2.64638e-3 T^1.5/(T + 245.4 x 10^(-12/T)) W/m/K); laminar flat-plate forced convection, Nu = 0.664 Re^1/2 Pr^1/3; laminar free convection from a plate, Nu = 0.54 (Gr Pr)^1/4",
+      "doi_or_url": "NOAA, NASA, USAF 1976, U.S. Standard Atmosphere 1976, NOAA-S/T 76-1562, section 1.3",
+      "use": "dew.air_properties and dew.leaf_conductances",
+      "values_used": {"sutherland_constant_k": 110.4, "flat_plate_forced": 0.664, "free_convection": 0.54},
+      "access": "standard forms, recalled and not reread; the free-convection term matters only in near-still air and 0.54 is its unstable plate's coefficient, an upper value for a cooled leaf's upper face"
+    },
+    {
+      "key": "exoplasim_fluxmod",
+      "citation": "ExoPlaSim 3.4.2 (Paradise et al. 2022), plasim/src/fluxmod.f90 subroutine mkevap and radmod.f90",
+      "doi_or_url": "climate/gcm/.venv (the installed package, exoplasim-3.4.2)",
+      "use": "README and run.EVIDENCE: the lowest level's new humidity is AMAX1 of its old value and the implicit surface exchange (fluxmod.f90 line 664), so the surface only evaporates and the GCM forms no dew; run.LAND_EMISSIVITY and WATER_EMISSIVITY, the surface emissivity zeps = dls + 0.98 (1 - dls) (radmod.f90 line 2289)",
+      "values_used": {"land_emissivity": 1.0, "water_emissivity": 0.98},
+      "access": "the installed source read 2026-10-18"
+    }
+  ]
+}
