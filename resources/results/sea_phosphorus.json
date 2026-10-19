@@ -2,7 +2,7 @@
   "schema": "terluna.resources.sea-phosphorus/1",
   "producer": {
     "files": {
-      "resources/sea_phosphorus.py": "23d537eb27c7e40160086b2ea88b0953d5e08facf55f730f013e87ae42f81b54",
+      "resources/sea_phosphorus.py": "842d9a0cb0d625afc66a706b47ee63701686520b3702656d73039c24963d870a",
       "resources/phosphorus.py": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43"
     },
     "inputs": {
@@ -55,14 +55,14 @@
         "path_at_integration": "research/decisions.md",
         "branch": "main",
         "commit": null,
-        "sha256": "a48c4bb05ed3da083de72eb14ff8d75c22a7f682954a21050b41708022ba70ce",
+        "sha256": "17951cc7f1648da4277648954052cae13f287040b06607d06153991306fe6adc",
         "read_from": "in-tree"
       }
     },
     "pending_bindings": {
       "provisioning_food_systems": {
-        "branch": "domain/provisioning",
-        "status": "being built",
+        "path": "research/studies/food_systems/results/food_systems.json",
+        "status": "held: the food study reads this product, so binding it back would close a loop",
         "replaces": [
           "people.systems.*.efficiency",
           "people.food_loss_share",
@@ -3675,8 +3675,8 @@
       0.176
     ],
     "pending_binding": {
-      "branch": "domain/provisioning",
-      "status": "being built",
+      "path": "research/studies/food_systems/results/food_systems.json",
+      "status": "held: the food study reads this product, so binding it back would close a loop",
       "replaces": [
         "people.systems.*.efficiency",
         "people.food_loss_share",

@@ -41,18 +41,17 @@ at 300 K, falls 5.7%.
   ([the waters' oxygen](#sources), which the targets bind), keeps the deep crater lakes' oligotrophic deepest tenth at
   6.8–7.4 mg/L in the lock, 5.6–6.2 in the resort at 301 K and 4.2–4.9 in the hot world by Osborn's rule, and leaves
   richer and warmer deep water low or anoxic by the energetic regime and in the giants. Anoxic water and sediment make
-  methane, and in the synthesis's
-  ledger the wild's lakes and wetlands make most of it (12.8–218 Tg a year, 58.9 central). Methane emissions rise with
-  warmth at about 0.96 eV across scales (Yvon-Durocher et al. 2014): 1.9 times from the lock's sea median, 24.1 °C, to
-  the resort's 29.5 °C and 3.5 times to the hot world's 34.5 °C. As an indicator, the wild sources the biology leaves,
-  5.9 Tg a year, scaled so, with the farms' and herds' methane and the soils' uptake held, would raise the held pair's
-  removal from 0.85–3.0 Tg a year to 6.4–8.6 Tg in the resort and 16–18 Tg in the hot world (0.20–0.26% and 0.48–0.54%
-  of the air a year through the contactors), or leave the soils alone holding methane near 4.1–4.8 and 7.2–8.0 ppm,
-  against the 2.2–2.9 ppm they hold on the unscaled sources. Ecology's tracer through the lake model's columns ([the
-  waters' methane](#sources)) sizes the waters themselves at 301 K: with Earth's methanotrophs at their central rates,
-  nutrient-poor lakes and seas send 0.57 Tg a year and hold the air at 1.01–1.75 ppm, under the held 1.87, and
-  mesotrophic waters send 7.8 Tg and put it at 3.5–4.2 ppm. Lakes kept oligotrophic and oxygenated, by the piped oxygen
-  or driven mixing the lake study names, are part of biology's cut.
+  methane, and in the synthesis's ledger the wild's lakes and wetlands make most of it (12.8–218 Tg a year, 58.9
+  central). Methane emissions rise with warmth at about 0.96 eV across scales (Yvon-Durocher et al. 2014): 1.9 times
+  from the lock's sea median, 24.1 °C, to the resort's 29.5 °C and 3.5 times to the hot world's 34.5 °C. As an
+  indicator, the wild sources the biology leaves, 5.9 Tg a year, scaled so, with the farms' and herds' methane and the
+  soils' uptake held, would raise the held pair's removal from 0.85–3.0 Tg a year to 6.4–8.6 Tg in the resort and 16–18
+  Tg in the hot world (0.20–0.26% and 0.48–0.54% of the air a year through the contactors), or leave the soils alone
+  holding methane near 4.1–4.8 and 7.2–8.0 ppm, against the 2.2–2.9 ppm they hold on the unscaled sources. Ecology's
+  tracer through the lake model's columns ([the waters' methane](#sources)) sizes the waters themselves at 301 K: with
+  Earth's methanotrophs at their central rates, nutrient-poor lakes and seas send 0.57 Tg a year and hold the air at
+  1.01–1.75 ppm, under the held 1.87, and mesotrophic waters send 7.8 Tg and put it at 3.5–4.2 ppm. Lakes kept
+  oligotrophic and oxygenated, by the piped oxygen or driven mixing the lake study names, are part of biology's cut.
 - **Side effects.** None on health or growth at these levels. The low pair reaches its methane level within a century
   and keeps the contactors running from then; N2O's decomposition heats the air it treats by 400 K with 96% recovered
   (the synthesis's design guess).
@@ -207,7 +206,7 @@ more fleet mass. A glow pair at the chosen target measures the efficacy again.
 
 The deep air halves what the surface can do. In the GCM radiation check's clear-sky columns at the equator the Moon
 reflects 0.34 more of the arriving sunlight for each unit of surface albedo, against Earth's 0.73 (Lenton & Vaughan
-2009), and 0.28–0.31 under the GCM's cloud. The kernel falls toward the poles, where the Sun's slanting path crosses
+2009), and 0.28–0.31 under the GCM's cloud. The kernel falls towards the poles, where the Sun's slanting path crosses
 more air: against the sea's reflection at the same latitude, the land columns give 0.31–0.32 at 36° and 0.28–0.29 at
 58°. The deserts take the kernel at each row's latitude, poleward of 58° held there at the high end and carried on
 along its fall at the low; the equator's kernel would read the hot world's deserts 15–24% high and the lock's 12–18%.
@@ -260,9 +259,11 @@ the window tiles.
 | 8 | Brighter deserts | 0.17–1.94 | Covering wild land | Takes the land's rain four times as fast as dimming | Kernel arithmetic, Earth's models |
 | 9 | CO2 below 400 ppm | 0.33–0.90 | 33–44% of the growth a point at 280 ppm | Warmer upper air | Column and leaf model |
 
-The first four together save 1.6–3.0 points: 30–81% of the hot world's dimming in all, 15–37% of the resort's and
-10–24% of the lock's. The levers can answer much of the plan's added heat; bringing the Moon down to the resort or the
-lock stays mostly dimming. The gas pairs carry their own overlap, and the others act on separate terms.
+The first four together save 1.6–3.0 points. Each taken with the shared dimming's case it belongs to, the glow's answers
+at the glow's efficacy and food made in orbit at the beams' end, they save 43–57% of the hot world's dimming in all,
+17–31% of the resort's and 11–21% of the lock's, and leave 1.6–2.8%, 6.1–8.3% and 10.5–14.1%. The levers can answer much
+of the plan's added heat; bringing the Moon down to the resort or the lock stays mostly dimming. The gas pairs carry
+their own overlap, and the others act on separate terms.
 
 Questions for the author: whether the glow's set-aside answers come back if the resort or the lock is chosen; whether
 food for the beams may be made in orbit, with a return path for the carbon it brings beyond the import; and whether the

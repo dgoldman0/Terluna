@@ -294,10 +294,10 @@ held 1.87 ppm ([the lakes by kind](studies/lake_kinds/README.md), [the seas' oxy
 [the waters' methane](studies/lake_methane/README.md)). The rain falls from cloud bases 5.1–7.4 km up, only drops of
 1.6–2.4 mm at the cloud base surviving the fall ([atmosphere/rain](../atmosphere/rain/README.md)); the levers that ease
 the shield save 1.6–3.0 points together ([heat levers](studies/heat_levers/README.md)); and
-[the resort at 301 K across the domains](studies/resort_301k/README.md) works out where they meet: the waters'
-trophic state sets the air's methane more than the gas pair does, people's dissolved phosphorus decides whether the
-deep lakes stay nutrient-poor, the seas get almost none of it, and watering the deserts takes 35–44 km³ a year and
-1.6–3.9 GW for each 1% of them.
+[the resort at 301 K across the domains](studies/resort_301k/README.md) works out where they meet: the waters' trophic
+state sets the air's methane more than the gas pair does, people's dissolved phosphorus decides whether the deep lakes
+stay nutrient-poor, the seas get almost none of it, and watering the deserts takes 35–44 km³ a year and 2.3–3.8 GW for
+each 1% of them.
 
 Waiting on the author: whether the resort's setting at 301 K starts its design case, with new runs held until then
 (register, 17–18 October); the waters' trophic design and how much of the deserts to water
@@ -319,16 +319,17 @@ ranks what the integration found next.
 
 1. **The design case at 301 K**, once the author says the resort's setting starts it: a 20-year GCM run of about 1.5
    hours on four ranks, which also settles the tower's air with one physics; the glow pair from it, two more, at which
-   the glow study and the domain synthesis take the efficacy it gives; the lake studies rerun on its weather in place of
-   the climate targets they ran on (six to nine hours on two to four workers); and geography's lakes, the atlas globe,
-   the rain and the studies that read the design climate, the metropolis brief's winter parks among them, regenerated
-   once.
+   the glow study and the domain synthesis take the efficacy it gives; the lake studies rerun on its weather, which
+   retires the climate targets they ran on (six to nine hours on two to four workers); and geography's lakes, the atlas
+   globe, the rain and the studies that read the design climate, the metropolis brief's winter parks among them,
+   regenerated once.
 2. **The waters' design**, the author's to set: the trophic state the lakes and seas are held at, which sets the air's
-   methane more than the gas pair does; people's dissolved phosphorus kept from the deep lakes, 15–57 g a person a year
-   at the middle settling for 8 and 4 billion, the glass houses' bleed with it; whether the held seas are made richer in
-   life, at what cost in methane and deep oxygen; and the giants' deep remedies
+   methane more than the gas pair does; people's dissolved phosphorus within the lakes' room, 57–71 g a person a year
+   with 8 billion at the middle settling while the giants' floors stay oxic and 5–10 g if their depths go anoxic, the
+   glass houses' bleed with it; the seas' production for the biodiverse communities the register asks of them, with the
+   dredged deltas' phosphorus as its lever; and the giants' deep remedies
    ([the resort at 301 K across the domains](studies/resort_301k/README.md)).
-3. **The deserts' watering**, the author's choice on the synthesis's scale: 35–44 km³ a year and 1.6–3.9 GW for each 1%
+3. **The deserts' watering**, the author's choice on the synthesis's scale: 35–44 km³ a year and 2.3–3.8 GW for each 1%
    of the resort's 4.9–6.2 million km² of desert, most of it poleward of 45°, its albedo the larger cost. The 2-D CM1
    slice from sea to dry land waits on the design case at 301 K and the coasts' design.
 4. **The heat beyond the sunlight:** the water top-up's fall recovered on the way down, as resources' first screen

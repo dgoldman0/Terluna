@@ -31,7 +31,7 @@ main's). Each branch brought its own work up on its own branch, with its own `ma
   until the branches met, carry the resort at 301 K, and take all nine fixes of the screen's review of 17 October
   (an agent's work, reviewed; two contrasts restated).
 - **Atmosphere (`a90c23b`).** The rain's drops, rates and arrivals read the corrected targets the same way and take the
-  resort from its 301 K row; the rain column's dry adiabat takes the repository's heat capacity, as the author decided
+  resort from its 301 K row; the rain column's dry adiabat takes the repository's heat capacity, as the author inclined
   for this rebuild; the rates carry each target's own dimming cut; the sound lab's renders of 19 October follow on the
   research drive. The agent doing it was stopped near the end by auto mode's safety check, which blocked its last
   edits and then its shell, citing content in its own conversation; the author chose that the coordinator review its
@@ -79,12 +79,16 @@ entries.
 The settle tool on the research drive (`session-tools/settle.py`, its earlier copy `settle.py.2026-10-19.bak`) now
 rebuilds the heat levers after coast water; the lake studies' eight product steps after the resources chain and before
 the climate targets, which read the waters' oxygen, always from their caches alone; and the three rain products after
-the heat levers, the rates with the climate interpreter that has netCDF4.
+the heat levers, the rates with the climate interpreter that has netCDF4; and the synthesis last. A cascade after an
+edit of the register takes about 22–25 minutes and recomputes nothing. The lake products' `seconds` now record each
+cache-only product step (lake_oxygen 1.2 s), and their runs' own times stay in the caches and the READMEs. The lake
+kinds' `setting.py` keeps its docstring's note of the register "on domain/climate": the file's hash keys the lake
+kinds' caches, so even a docstring edit would miss them.
 
 ## Into the merged tree
 
 - **Reads in-tree.** The heat levers and the rain read the climate targets in the tree, their values unchanged; the
-  climate targets read the corrected waters' oxygen in-tree in place of the pinned earlier product (`bd0097c`), which
+  climate targets read the corrected waters' oxygen in-tree, which retires the pinned earlier product (`bd0097c`) and
   moves the resort band's oxygen to the corrected lake model.
 - **Pointers to other branches' files** became links: the comparison's sources, the targets' README, the heat levers'
   sources and lakes, and the lake studies' notes on the resort's register row.
@@ -94,12 +98,37 @@ the heat levers, the rates with the climate interpreter that has netCDF4.
 
 ## The synthesis
 
-[The resort at 301 K across the domains](../studies/resort_301k/README.md) works out where the branches' pieces meet:
-the waters' trophic state sets the air's methane more than the gas pair does; the deep lakes stay nutrient-poor only
-while people send them little dissolved phosphorus, 15–57 g a person a year at the middle settling against a design
-loss of 44–180 g; the seas get almost none and stay poorer than Earth's open ocean, against the author's condition that
-they be rich in life; the levers' first four leave the resort 5.2–9.3% of dimming in all; and watering the deserts, most
-of them poleward of 45°, takes 35–44 km³ a year and 1.6–3.9 GW for each 1%, its albedo the larger cost.
+[The resort at 301 K across the domains](../studies/resort_301k/README.md) works out where the branches' pieces meet.
+The waters' trophic state sets the air's methane more than the gas pair does: nutrient-poor lakes and seas hold the held
+pair with no removal at the methane share's centre and with up to 2.6 Tg a year across its brackets, mesotrophic ones
+need 4.7–6.9 Tg. The lakes stay nutrient-poor while people's dissolved phosphorus stays within their room, which turns
+on the giants' floors: with 8 billion people at the middle settling, 57–71 g a person a year while those floors stay
+oxic and 5–10 g if their depths go anoxic, against a design loss of 44–180 g. On the rivers the seas get almost none and
+run ultra-oligotrophic, a question of production for the biodiverse communities the register asks of them, with the
+dredged deltas' phosphorus as its lever. The levers' first four, each with the case it belongs to, leave the resort
+6.1–8.3% of dimming in all. Watering the deserts, most of them poleward of 45°, takes 35–44 km³ a year and 2.3–3.8 GW
+for each 1%, its albedo the larger cost, twice as much of it for each km² at 30–45° as at 60–75°.
+
+## The review
+
+An independent review of the synthesis commit (`a0713f8`) rebuilt the synthesis byte for byte, confirmed the register's
+rows and order, the merges' exact heads, the frozen copy, the cache keys, the products' identity across the branches and
+the rain work, and found faults, corrected in the commit after it:
+- **The levers' pairing.** The resort's dimming with the first four set the dimming's low end against the levers' high
+  end, which needs the beams' high end; each case now takes its own glow efficacy and beams' end, in the heat levers
+  and the synthesis: the resort is left 6.1–8.3% (5.2–9.3% before), and the four save 43–57%, 17–31% and 11–21% of the
+  three targets' dimming (30–81%, 15–37% and 10–24% before).
+- **The phosphorus room** took the 352 m lakes' line for every lake; it now takes each kind's line from the lake kinds,
+  with the giants' floors oxic and anoxic: 57–71 g a person a year and 5–10 g with 8 billion at the middle settling
+  (15–29 g before).
+- **The seas.** The author's condition is biodiversity, as the register states it, with the deltas' phosphorus for
+  production if needed; the synthesis had read it as a call for nutrient-rich seas. The dust, which can lift the mixed
+  seas to 18–28 mg/m³ at the inherited envelope's top, is now given.
+- **The methane brackets**, the share's 0.8 and Shih and Bouffard's form, are carried beside the centre; the
+  comparison's overturns under the energetic regime take one convention, under which the resort's lakes turn over least;
+  the comparison's CO2 growth cost, shallows and food carbon are corrected; the watering pairs each band's lift with its
+  own sunlight; the targets' reading rule describes the in-tree oxygen; and the records, the register's status of this
+  integration among them, follow.
 
 ## Outside Git
 
@@ -114,12 +143,15 @@ of them poleward of 45°, takes 35–44 km³ a year and 1.6–3.9 GW for each 1%
 ## Checks
 
 `make check` ran before every commit. Python tests passed at each merge: 2,500 with 20 skipped after climate, 2,518
-after provisioning, 2,535 after Jura Island, 2,549 after resources, 2,632 after atmosphere and 2,755 after
-ecology, each with 20 skipped; on their own branches before merging, resources passed 2,444, atmosphere 2,517 and
-ecology 2,557, each with 19 skipped.
+after provisioning, 2,535 after Jura Island, 2,549 after resources, 2,632 after atmosphere and 2,755 after ecology, each
+with 20 skipped, and 2,761 at the synthesis commit; on their own branches before merging, resources passed 2,444,
+atmosphere 2,517 and ecology 2,557, each with 19 skipped.
 
 ## Still to do from the integration
 
+- **The fast-forward and the branches:** main moved up to the reviewed head; each worktree's run folders relinked
+  (`research/runs/climate_targets` to `climate-targets-runs-climate`, the five lake folders and coast water where
+  missing, the sound lab's recordings copied); every branch brought to main and each worktree's `make check`.
 - **The design case at 301 K**, at the author's word, then the glow pair and the lakes' rerun on its weather.
 - **The author's choices:** the waters' trophic design, the deserts' watering, food in orbit's carbon, the sea
-  chemistry's ordering fix and the summit site product's rebuild.
+  chemistry's floor ordering and the summit site product's rebuild.

@@ -140,8 +140,10 @@ READING_RULE = ('W/m2 are means over the whole Moon; absorbed sunlight is what t
                 'mean, warm and cold tenths of the air (C) at the top, 24 km up, and at the decks (decks_c, by height above '
                 'the summit), and the tower\'s length below freezing in the mean; warmest_targets are ground '
                 'temperatures (K) at which the top, or the height a margin below it, reaches 0 C. resort_band.rows are '
-                'the resort\'s candidates; their oxygen comes from the pinned lake_oxygen product, the shallows\' share '
-                'of nights below 2 mg/L as [least, most] over its three lakes.')
+                'the resort\'s candidates; their oxygen comes from ecology\'s lake_oxygen product in the tree: the '
+                'seas\' saturation at their median warmth, and the deep lakes\' oligotrophic deepest tenth (mg/L) and '
+                'the eutrophic shallows\' share of nights below 2 mg/L, each [least, most] over its three lakes, '
+                'interpolated by the ground\'s temperature.')
 
 
 def digest(path) -> str:

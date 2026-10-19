@@ -413,10 +413,10 @@ cell's weather, and the seas' own deep water lies wherever the sideways circulat
   and the shift of its temperature of greatest density at 50–110 atm, the pressure 3–7 km down at lunar gravity, are
   left out; the deep water lies more than 20 K above that temperature.
 - **The targets as run.** The 301 K weather is built on the climate targets the lakes ran on, domain/ecology's at
-  e9c12eb (schema /2), which lake_oxygen keeps byte for byte as climate_targets_as_run.json until the lakes rerun on
-  the resort's 301 K design case. The merged targets leave the seas' forcing as it is (the columns' cells lie at the
-  seas' level, and the 301 K share is unchanged) and would cool the lakes' pans beside them by 0.024 K at most; their
-  seas' median at 301 K, 29.49 °C for the copy's 29.61, would raise the saturation there by 0.016 mg/L.
+  e9c12eb (schema /2), which lake_oxygen keeps byte for byte as climate_targets_as_run.json until the lakes rerun on the
+  resort's 301 K design case. The merged targets leave the seas' forcing as it is (the columns' cells lie at the seas'
+  level, and the 301 K share is unchanged) and would cool the lakes' pans beside them by 0.024 K at most; their seas'
+  median at 301 K is 29.49 °C where the copy's is 29.61 °C, which would raise the saturation there by 0.016 mg/L.
 
 ## The checks
 

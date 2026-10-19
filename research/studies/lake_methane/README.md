@@ -357,9 +357,10 @@ they achieve, each set beside Earth's community at its central rates on the same
   uptake's activation energy (an abstract's summary), freshwater iron-dependent rates (Lake Matano's and Kinneret's
   arithmetic stand in), and the methanotrophs' loss rate, a design guess.
 - **The targets as run.** The columns ran, and their transfer velocities are rebuilt, on the climate targets the lakes
-  ran on, domain/ecology's at e9c12eb (schema /2), which lake_oxygen keeps byte for byte as
-  climate_targets_as_run.json until the lakes rerun on the resort's 301 K design case. The merged targets would cool
-  the lakes' air by 0.026 K at most and 0.015 K typically and leave the seas' as it is.
+  ran on, domain/ecology's at e9c12eb (schema /2), which lake_oxygen keeps byte for byte as climate_targets_as_run.json
+  until the lakes rerun on the resort's 301 K design case. The merged targets would cool the lakes' air by 0.026 K at
+  most and 0.015 K typically, leave the seas' as it is, and raise the saturation at the seas' lower medians by
+  0.006–0.016 mg/L.
 
 ## The checks
 

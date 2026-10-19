@@ -62,12 +62,15 @@ BOUND = {
                            sha256="5d8693aaf3e44bab15633c11159501926e0124148b95f1fa1204618011d3ce28"),
     "provisioning_decisions": dict(path="research/decisions.md", schema=None, branch="main",
                                    commit=None,
-                                   sha256="a48c4bb05ed3da083de72eb14ff8d75c22a7f682954a21050b41708022ba70ce"),
+                                   sha256="17951cc7f1648da4277648954052cae13f287040b06607d06153991306fe6adc"),
 }
-# Bound at integration when provisioning's food-systems study is committed; until then the systems below stand alone.
+# Held unbound: provisioning's food-systems study, in the tree since 12 October, reads this product, so binding its
+# per-system phosphorus back would close a loop; the systems below stand alone, on the per-person loss the food study
+# also takes.
 PENDING = {
     "provisioning_food_systems": dict(
-        branch="domain/provisioning", status="being built",
+        path="research/studies/food_systems/results/food_systems.json",
+        status="held: the food study reads this product, so binding it back would close a loop",
         replaces=["people.systems.*.efficiency", "people.food_loss_share", "people.waste_return",
                   "people.excreta_return", "the shares of each system in the diet"],
         rule="Bind the study's per-system P applied, recovered and lost per person; the ledger and routes "

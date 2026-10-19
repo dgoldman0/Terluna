@@ -441,14 +441,13 @@ over it for up to 300 years (thirty passes) and then for up to 100 at the analys
 - **Against the GCM's own water.** A 50 m mixed slab forced as the lakes are, at the water cell nearest each lake,
   against the GCM's slab ocean, mean bias in K (correlation):
 
-  | Slab against the GCM's water | Paired at the lowest level, Earth's free convection | Lowest level, lunar free convection | At 10 m, Earth's | At 10 m, lunar |
-  |---|---|---|---|---|
-  | The lock, 0–15° | +0.03 (0.985) | +1.49 (0.979) | −0.54 (0.978) | +0.58 (0.966) |
-  | The lock, 15–30° | +0.07 (0.983) | +1.51 (0.978) | −0.46 (0.974) | +0.66 (0.963) |
-  | The lock, 30–45° | +0.04 (0.991) | +0.87 (0.977) | −0.77 (0.975) | −0.10 (0.958) |
-  | The hot world, 0–15° | +0.28 (0.973) | +1.77 (0.952) | −0.12 (0.959) | +1.08 (0.927) |
-  | The hot world, 15–30° | +0.16 (0.977) | +1.45 (0.958) | −0.32 (0.962) | +0.65 (0.933) |
-  | The hot world, 30–45° | +0.03 (0.961) | +0.69 (0.936) | −0.64 (0.922) | −0.17 (0.890) |
+| Slab against the GCM's water | Paired at the lowest level, Earth's free convection | Lowest level, lunar free
+convection | At 10 m, Earth's | At 10 m, lunar | |---|---|---|---|---| | The lock, 0–15° | +0.03 (0.985) | +1.49 (0.979)
+| −0.54 (0.978) | +0.58 (0.966) | | The lock, 15–30° | +0.07 (0.983) | +1.51 (0.978) | −0.46 (0.974) | +0.66 (0.963) | |
+The lock, 30–45° | +0.04 (0.991) | +0.87 (0.977) | −0.77 (0.975) | −0.10 (0.958) | | The hot world, 0–15° | +0.28
+(0.973) | +1.77 (0.952) | −0.12 (0.959) | +1.08 (0.927) | | The hot world, 15–30° | +0.16 (0.977) | +1.45 (0.958) |
+−0.32 (0.962) | +0.65 (0.933) | | The hot world, 30–45° | +0.03 (0.961) | +0.69 (0.936) | −0.64 (0.922) | −0.17 (0.890)
+|
 
   Paired as PlaSim pairs it and with PlaSim's own Earth constant for the free convection, the slab follows the GCM's
   water to 0.03–0.28 K on average with correlations of 0.96–0.99: the lake model's exchange reproduces the GCM's own.
@@ -459,11 +458,10 @@ over it for up to 300 years (thirty passes) and then for up to 100 at the analys
   0–15° lakes from the lock's settled columns once from those means and once from their own 3-day means with the wind
   raised as the main runs raise it, both at a half-hour step, and from the 3-day means at the main runs' steps:
 
-  | The design case's years 20–21 at the 0–15° lake | 6.4-hour means, half-hour step | 3-day means, half-hour step | 3-day means, 2-hour and 1-hour steps |
-  |---|---|---|---|
-  | 352 m lake: complete overturns in 23 cycles | 13 | 14 | 13 |
-  | Its deepest tenth: oligotrophic; mesotrophic | 7.34; 6.11 mg/L | 7.22; 5.86 mg/L | 7.25; 5.91 mg/L |
-  | 3 m eutrophic shallows: median night's lowest; worst tenth | 4.53; 4.12 mg/L | 4.87; 4.25 mg/L | 4.91; 4.27 mg/L |
+| The design case's years 20–21 at the 0–15° lake | 6.4-hour means, half-hour step | 3-day means, half-hour step | 3-day
+means, 2-hour and 1-hour steps | |---|---|---|---| | 352 m lake: complete overturns in 23 cycles | 13 | 14 | 13 | | Its
+deepest tenth: oligotrophic; mesotrophic | 7.34; 6.11 mg/L | 7.22; 5.86 mg/L | 7.25; 5.91 mg/L | | 3 m eutrophic
+shallows: median night's lowest; worst tenth | 4.53; 4.12 mg/L | 4.87; 4.25 mg/L | 4.91; 4.27 mg/L |
 
   The 3-day means and the main runs' steps leave the deep lake's overturns within one and its deepest tenth within
   0.25 mg/L, and run the eutrophic shallows' nights 0.13–0.39 mg/L richer than the 6.4-hour means. Those two years
@@ -515,7 +513,9 @@ over it for up to 300 years (thirty passes) and then for up to 100 at the analys
   (schema /2), copied byte for byte to [climate_targets_as_run.json](climate_targets_as_run.json); the lakes' rerun on
   the resort's 301 K design case replaces it. The merged targets of the fourth joint integration take the lapse rates
   over the GCM's own land mask, 1.2–1.8% lower, which would cool these lakes' air by 0.026 K at most and 0.015 K
-  typically, and set the lock's share of the way to 0 for −0.002, the design case the lakes' lock already is.
+  typically; their lock's share of the way is 0 where the copy's is −0.002, the design case the lakes' lock already is;
+  and the seas' medians the saturation reads fall 0.05–0.12 K (the lock 24.17 to 24.12 °C, the resort at 300 K 28.71 to
+  28.59 °C), which would raise it by 0.006–0.013 mg/L.
 
 ## Running it
 

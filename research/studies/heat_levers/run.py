@@ -139,6 +139,13 @@ class Basis:
         self.dimming = {'hot world': named['no further dimming']['with_the_heat_beyond_sunlight_percent'],
                         'resort, 301 K': self.resort['dimming']['with_the_heat_beyond_sunlight_percent'],
                         'lock, 295 K': named['295 K']['with_the_heat_beyond_sunlight_percent']}
+        # each target's own dimming, and the shared dimming's parts at the ends of their own ranges: the glow at the
+        # efficacy's low and high ends, the beams at their low and high ends
+        self.own = {'hot world': [0.0, 0.0], 'resort, 301 K': self.resort['dimming']['own_percent'],
+                    'lock, 295 K': named['295 K']['dimming_percent']}
+        heat = t['heat_beyond_sunlight']
+        self.shared = dict(gases=heat['gases']['dimming_percent'][0], glow=heat['glow']['dimming_percent'],
+                           beams=heat['beamed_power']['dimming_percent'])
 
     def points(self, w):
         if isinstance(w, (list, tuple)):
@@ -599,6 +606,32 @@ def shield(data, b):
                       '2dR to their light pressure, 0.276 to about 0.32 for two points; climate_targets\' costs')
 
 
+def first_four_by_target(b, levers, roofs):
+    """What the first four levers save and leave in each target, each corner of the shared dimming taken with the
+    levers' own ends in it: the glow's set-aside answers at the glow's efficacy, food made in orbit at the beams' end,
+    the target's own dimming free across its range. [least, most] over the corners."""
+    answers = list(levers['glow']['set_aside_on_13_october'].values())
+    food = levers['beams']['food_points']
+    low_pair = levers['gases']['options']['low pair, 0.3 and 0.03 ppm']['points']
+    out = {}
+    for name, own in b.own.items():
+        cases = []
+        for e in (0, 1):                      # the efficacy's low and high ends
+            for m in (0, 1):                  # the beams' low and high ends
+                shared = b.shared['gases'] + b.shared['glow'][e] + b.shared['beams'][m]
+                glow = [a['points'][e] for a in answers]
+                saved = [min(glow) + food[m] + low_pair[0] + roofs[0], max(glow) + food[m] + low_pair[1] + roofs[1]]
+                cases.append(dict(efficacy_end=e, beams_end=m, in_all_percent=[own[0] + shared, own[1] + shared],
+                                  saved_points=saved))
+        out[name] = dict(
+            cases=cases,
+            left_percent=[min(c['in_all_percent'][0] - c['saved_points'][1] for c in cases),
+                          max(c['in_all_percent'][1] - c['saved_points'][0] for c in cases)],
+            share_saved=[min(c['saved_points'][0] / c['in_all_percent'][1] for c in cases),
+                         max(c['saved_points'][1] / c['in_all_percent'][0] for c in cases)])
+    return out
+
+
 def ranking(b, levers):
     """The README's ranked table in points, and what the first four save together against each target."""
     g, a, p = levers['glow']['set_aside_on_13_october'], levers['albedo'], levers['pressure']['by_target']
@@ -618,9 +651,12 @@ def ranking(b, levers):
         ('CO2 below 400 ppm', [levers['co2']['levels']['350 ppm']['points'][0],
                                levers['co2']['levels']['280 ppm']['points'][1]])]
     four = [sum(r[1][0] for r in rows[:4]), sum(r[1][1] for r in rows[:4])]
+    by_target = first_four_by_target(b, levers, roofs)
     return dict(levers=[dict(rank=i + 1, lever=n, points=v) for i, (n, v) in enumerate(rows)],
                 first_four_points=four,
-                first_four_share_of_dimming_in_all={k: [four[0] / d[1], four[1] / d[0]] for k, d in b.dimming.items()},
+                first_four_share_of_dimming_in_all={k: v['share_saved'] for k, v in by_target.items()},
+                first_four_left_percent={k: v['left_percent'] for k, v in by_target.items()},
+                first_four_by_case=by_target,
                 details=dict(top_up_high_end_across_the_exobase_points=t['above_the_exobase_at_the_high_end_points'],
                              pressure_hot_world_clear_sky_points=[p['hot world']['points'],
                                                                   p['hot world settled']['points']],

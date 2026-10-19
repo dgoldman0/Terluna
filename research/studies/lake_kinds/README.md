@@ -290,7 +290,8 @@ network.
 - **The targets as run.** The 301 K resort is built on the climate targets the lakes ran on, domain/ecology's at e9c12eb
   (schema /2), which lake_oxygen keeps byte for byte as climate_targets_as_run.json until the lakes rerun on the
   resort's 301 K design case. The merged targets' lapse rates over the GCM's own land mask, 1.2–1.8% lower, would cool
-  these lakes' air at 301 K by 0.024 K at most and 0.015 K typically, the 301 K share unchanged.
+  these lakes' air at 301 K by 0.024 K at most and 0.015 K typically, the 301 K share unchanged, and their seas' median
+  at 301 K, 0.12 K lower, would raise the saturation by 0.016 mg/L.
 
 ## The checks
 

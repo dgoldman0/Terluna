@@ -319,7 +319,8 @@ for the weeks to months after a warming, a transient beside these bounds.
 - The climate targets are the ones the lakes ran on, domain/ecology's at e9c12eb (schema /2), which lake_oxygen keeps
   byte for byte as climate_targets_as_run.json until the lakes rerun on the resort's 301 K design case. The merged
   targets' lapse rates over the GCM's own land mask would cool these lakes' air by 0.026 K at most and 0.015 K
-  typically, and their lock's share of 0 for −0.002 is the design case the lakes' lock already is.
+  typically; their lock's share of the way is 0 where the copy's is −0.002, the design case the lakes' lock already is;
+  and their lower seas' medians would raise the saturation by 0.006–0.013 mg/L.
 
 ## The checks
 

@@ -219,5 +219,9 @@ def test_the_readme_gives_the_products_figures(product):
     assert f'The first four together save {pair_text(four, 1)} points' in text
     for target, share in r['first_four_share_of_dimming_in_all'].items():
         assert f'{100 * share[0]:.0f}–{100 * share[1]:.0f}%' in text, target
+    for target, left in r['first_four_left_percent'].items():
+        assert f'{left[0]:.1f}–{left[1]:.1f}%' in text, target
+        cases = r['first_four_by_case'][target]['cases']
+        assert {(c['efficacy_end'], c['beams_end']) for c in cases} == {(0, 0), (0, 1), (1, 0), (1, 1)}
     for target, d in product['basis']['targets_dimming_in_all_percent'].items():
         assert f'{pair_text(d, 1)}%' in text, target

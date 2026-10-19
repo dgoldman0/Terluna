@@ -194,8 +194,9 @@ efficiency is the share of applied phosphorus that the harvest takes up:
 *Screen.* Each row takes every range at the end that bounds the new phosphorus. Aquaponic feed comes from another
 system, whose own losses come on top. The ecology design target holds losses to 10–30% of what is eaten, 0.044–0.18 kg a
 person and 1–12% of the land's loss per billion; at its low end, with nothing lost on farms, towns must return 92.5%.
-The provisioning study of food systems, now being built, sets each system's efficiency and its share of the diet; the
-product reserves the binding (`producer.pending_bindings`).
+The provisioning study of food systems, in the tree since 12 October, sets each system's efficiency and its share of the
+diet; the binding stays held (`producer.pending_bindings`), since the food study reads this product and binding it back
+would close a loop.
 
 ## Routes from the waters to people
 
