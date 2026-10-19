@@ -148,7 +148,11 @@ clouds' water and the convective cloud cover, puts it near 299.6 K (26.5 °C),
 with the air near the ground within about a kelvin of that from equator to pole
 and no frost anywhere. Published slow-rotator models suggest no thick day-side
 cloud deck at this sunlight, but the absolute cloud amount remains the main
-caveat.
+caveat. For the design climate at 301 K the GCM README gathers the preparation of
+19 October: a lakes surface from the current routing for a cold start, how long a
+cold start takes to settle and the run's plan, the longwave correction checked near
+301 K, the curved air's ledger rebuilt on a 301 K column with its terms in the
+clear share, and the surface stress in the output.
 
 [crm/](crm/) runs the cloud-resolving model CM1 at lunar gravity for the chosen
 design (the 5% dimmer shield): the equator as a two-dimensional ring through two
