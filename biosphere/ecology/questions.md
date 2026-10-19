@@ -134,6 +134,16 @@ on this laptop. The findings behind them are in the [README](README.md).
      limits first, and oxygenation where deep-water life is chosen; degassing does not pay. By the energetic regime
      the 352 m lake at 301 K turns over a ninth to a quarter as often and its mesotrophic and richer depths go anoxic,
      so the census leans towards more mixing.
+   - The lakes' and seas' methane at 301 K, answered on 18 October by a tracer on the corrected model's columns ([lake
+     methane](../../research/studies/lake_methane/README.md)). At the methane share's centre, with Earth's
+     methanotroph community and Osborn's form, nutrient-poor lakes and seas send 0.57 Tg a year (the seas 0.42 with
+     their shelves, the lakes 0.15) and hold the air at 1.01–1.75 ppm, under the held 1.87 with 0.35 Tg a year of room
+     at the ledger's high-cost end, which the 3,500 m giant settling anoxic could take most of. At the share's 0.8
+     they need 0.5–2.6 Tg a year of removal; by Shih and Bouffard's form, 0.77 at the high-cost end with Earth's
+     community, while a designed community fits. Mesotrophic waters send 7.8 Tg a year (3.5–4.2 ppm). In mesotrophic
+     and eutrophic lakes the giants make 79–87% of the methane and their oxyclines oxidise 88–99% of what they make.
+     Anaerobic oxidation, mostly by iron, cuts the nutrient-poor methane 37–50% at the high-erosion end of its
+     acceptors' supply and about 5% at the conservation rate.
    - Monthly plankton cycles and intertidal monthly wetlands.
    - The seas' deep basins in the lake model, answered on 18 October at 301 K ([the seas'
      oxygen](../../research/studies/sea_oxygen/README.md)). The seas cover 10.62 million km², 28% of the surface, at

@@ -1,0 +1,215 @@
+{
+ "source_admission": "Published values the study uses, with how far each was read on 2026-10-18. No outside dataset or full paper is committed; the study's other inputs are the project's committed products and the lake model's saved columns. 'read' means the pages holding the values were read in full text; 'abstract' means the abstract (from the publisher or a bibliographic record); 'summary' means a search engine's summary of the abstract, not checked against it; 'secondary' means a later paper quoting it; 'known' means a standard value used from memory and not re-read. Where a PDF's extraction turned micro into milli, the paper's own arithmetic fixed the unit, as noted. The search was held to the values the biology sizing needs (the author's scope of 18 October); what it did not find is marked open in the README.",
+ "sources": [
+  {
+   "key": "mayr2020a",
+   "citation": "Mayr MJ, Zimmermann M, Dey J, Wehrli B, Burgmann H 2020, Lake mixing regime selects apparent methane oxidation kinetics of the methanotroph assemblage, Biogeosciences 17, 4247-4259",
+   "doi_or_url": "https://doi.org/10.5194/bg-17-4247-2020",
+   "use": "Half-saturation for methane of Lake Rotsee's assemblages in autumn: epilimnion 0.7-3.3 uM, hypolimnion 15.2 +- 7.1 to 6.1 +- 1.7 uM (falling to 2.7 by January); specific affinity 52-338 e-12 L h-1 cell-1 in the hypolimnion; in situ rates below half of Vmax in the epilimnion and above two thirds in the hypolimnion; epilimnion methanotrophs 0.1e5 to 2e5 cells per mL from October to December; oxygen used 1.6 mol a mole of methane at a carbon use efficiency of 0.4. Quotes Lofton et al. (2014) 4.45 +- 2.36 and 10.61 +- 2.03 uM and Liikanen et al. (2002) 5.5 and 44 uM",
+   "access": "read: pages 4247-4256, methods, results and discussion"
+  },
+  {
+   "key": "martinezcruz2015",
+   "citation": "Martinez-Cruz K et al. 2015, Biogeosciences 12, 4595-4606 (aerobic methane oxidation in Alaskan lakes)",
+   "doi_or_url": "https://doi.org/10.5194/bg-12-4595-2015",
+   "use": "Lakes' mean half-saturations from the literature, 0.110 +- 0.053 mg/L of methane (6.9 uM) and 0.624 +- 0.064 mg/L of oxygen (19.5 uM); the highest reported for methane 0.704 mg/L (44 uM, Liikanen et al. 2002)",
+   "access": "read: methods section 2 and discussion"
+  },
+  {
+   "key": "remsen1989",
+   "citation": "Remsen CC, Minnich EC, Stephens RS, Buchholz L, Lidstrom ME 1989, Methane oxidation in Lake Superior sediments, Journal of Great Lakes Research 15, 141-146",
+   "doi_or_url": "https://hero.epa.gov/reference/6148910/",
+   "use": "Apparent half-saturation for methane about 4.6 uM and Vmax 0.7 umol/L/h in the deep oligotrophic lake's sediments",
+   "access": "abstract"
+  },
+  {
+   "key": "lidstrom1984",
+   "citation": "Lidstrom ME, Somers L 1984, Seasonal study of methane consumption in Lake Washington, Applied and Environmental Microbiology 47, 1255-1260",
+   "doi_or_url": "https://doi.org/10.1128/aem.47.6.1255-1260.1984",
+   "use": "Apparent half-saturations of the top centimetre of sediment, about 10 uM for methane and 20 uM for oxygen",
+   "access": "abstract"
+  },
+  {
+   "key": "ren1997",
+   "citation": "Ren T, Amaral JA, Knowles R 1997, The response of methane consumption by pure cultures of methanotrophic bacteria to oxygen, Canadian Journal of Microbiology 43, 925-928",
+   "doi_or_url": "https://doi.org/10.1139/m97-133",
+   "use": "Methylosinus trichosporium and Methylobacter luteus limited by oxygen below a critical dissolved 5.7 uM: a high affinity for oxygen",
+   "access": "abstract"
+  },
+  {
+   "key": "blees2014",
+   "citation": "Blees J et al. 2014, Micro-aerobic bacterial methane oxidation in the chemocline and anoxic water column of deep south-Alpine Lake Lugano (Switzerland), Limnology and Oceanography 59, 311-324",
+   "doi_or_url": "https://doi.org/10.4319/lo.2014.59.2.0311",
+   "use": "Aerobic methanotrophs working below 1 uM of oxygen at the redoxcline, their potential first-order constants 0.07-0.71 per day and rates 1.1-4.6 umol/L/d, half-saturation in oxygen possibly sub-micromolar; methane oxidation more than a third of the oxygen used at the redoxcline; CH4:O2 1:1.8",
+   "access": "read: pages 311-321 (Eawag repository); micro restored from the paper's arithmetic"
+  },
+  {
+   "key": "oswald2015",
+   "citation": "Oswald K et al. 2015, Light-dependent aerobic methane oxidation reduces methane emissions from seasonally stratified lakes, PLoS ONE 10, e0132574",
+   "doi_or_url": "https://doi.org/10.1371/journal.pone.0132574",
+   "use": "Lake Rotsee: methanotrophs doubling in 1.8-1.9 days at the oxycline; dark rates 15.4 nM/d at 8 m and 145.8 at 9 m, up to 1.47 uM/d in light; oxygen below 20 nM",
+   "access": "read: full text"
+  },
+  {
+   "key": "oswald2016",
+   "citation": "Oswald K et al. 2016, Aerobic gammaproteobacterial methanotrophs mitigate methane emissions from oxic and anoxic lake waters, Limnology and Oceanography 61, S101-S118",
+   "doi_or_url": "https://doi.org/10.1002/lno.10312",
+   "use": "Lake Zug: oxidation potentials 0.18-0.64 uM/d around the oxycline and 0.1-0.29 uM/d in anoxic water; methanotrophs doubling in 2.7-3.2 days",
+   "access": "read: results and discussion, pages S106-S111"
+  },
+  {
+   "key": "thottathil2019",
+   "citation": "Thottathil SD, Reis PCJ, Prairie YT 2019, Methane oxidation kinetics in northern freshwater lakes, Biogeochemistry 143, 105-116",
+   "doi_or_url": "https://doi.org/10.1007/s10533-019-00552-x",
+   "use": "Methane oxidation's temperature dependence, activation energy 0.49 +- 0.06 eV, with an oxygen optimum near 15 uM; first-order constants 0.002-0.063 per hour (as Hudspeth et al. 2025 quote them)",
+   "access": "summary of the abstract (publisher closed); the constants secondary through Hudspeth et al. (2025)"
+  },
+  {
+   "key": "hudspeth2025",
+   "citation": "Hudspeth ZW, Morningstar JL, Mendlovitz HP, Baily JA, Lloyd KG, Martens CS 2025, In situ aerobic methane oxidation rates in a stratified lake, Limnology and Oceanography 70(S1)",
+   "doi_or_url": "https://doi.org/10.1002/lno.12583",
+   "use": "First-order constants 0.018-0.462 per hour (table mean 0.147) in oxic water at 3.5 m in a 4 m reservoir, 17-30 C, methane 55-1833 nM, oxygen 28-366 uM, inversely correlated with oxygen; a compilation of lake rates (its table 3)",
+   "access": "read: full text pages 1-14 including tables 1-3 (NSF public access copy)"
+  },
+  {
+   "key": "zimmermann2021",
+   "citation": "Zimmermann M, Mayr MJ, Burgmann H, Eugster W, Steinsberger T, Wehrli B, Brand A, Bouffard D 2021, Microbial methane oxidation efficiency and robustness during lake overturn, Limnology and Oceanography Letters 6, 320-328",
+   "doi_or_url": "https://doi.org/10.1002/lol2.10209",
+   "use": "Rotsee's overturn: 9% of the stored methane reaching the surface emitted, 91% oxidised (98% modelled, 95-98% over the 1990-2016 weather); emission negligible under winds to 5.6 m/s, under 20% for 12 h at 20 m/s and 60% for three days; methanotrophs 2e4 to 3e5 cells per mL, biomass 14-fold; fitted half-saturation 1.7 uM; carbon conversion efficiency 0.16 in the field (0.13 fitted; 0.19-0.7 in cultures, Leak & Dalton 1986); 0.42 pg C a cell (0.26-0.57); growth at 26 +- 19% of the maximum; modelled maximum growth 0.16 per day",
+   "access": "read: pages 320-326"
+  },
+  {
+   "key": "mayr2020b",
+   "citation": "Mayr MJ, Zimmermann M, Guggenheim C, Brand A, Burgmann H 2020, Growth and rapid succession of methanotrophs effectively limit methane release during lake overturn, Communications Biology 3, 108",
+   "doi_or_url": "https://doi.org/10.1038/s42003-020-0838-z",
+   "use": "Rotsee's mixed layer's oxidation capacity doubling every 12.7 days through the overturn and its methanotrophs every 9 days net, to 28% of the bacterial 16S sequences; mixed-layer methane 0.1-1.4 uM; about 98% of the stored methane oxidised; the literature's 46% emitted (Encinas Fernandez et al. 2014) against 75-94% oxidised",
+   "access": "read: full text (PMC7060174)"
+  },
+  {
+   "key": "utsumi1998",
+   "citation": "Utsumi M et al. 1998, Dynamics of dissolved methane and methane oxidation in dimictic Lake Nojiri during winter, Limnology and Oceanography 43, 10-17",
+   "doi_or_url": "https://doi.org/10.4319/lo.1998.43.1.0010",
+   "use": "At overturn the specific methane oxidation rate peaked at 0.27, 0.24 and 1.01 per day at 0.5, 20 and 36 m; oxidation removed about 94% of the methane",
+   "access": "abstract"
+  },
+  {
+   "key": "kankaala2007",
+   "citation": "Kankaala P, Taipale S, Nykanen H, Jones RI 2007, Oxidation, efflux, and isotopic fractionation of methane during autumnal turnover in a polyhumic, boreal lake, Journal of Geophysical Research 112, G02003",
+   "doi_or_url": "https://doi.org/10.1029/2006JG000336",
+   "use": "83-88% of the hypolimnion's methane oxidised at overturn, 12-17% emitted",
+   "access": "abstract"
+  },
+  {
+   "key": "schubert2012",
+   "citation": "Schubert CJ, Diem T, Eugster W 2012, Environmental Science and Technology 46, 4515-4522 (Rotsee's methane emissions)",
+   "doi_or_url": "https://doi.org/10.1021/es203465x",
+   "use": "Rotsee's overturn fluxes about 4 mmol m-2 d-1, with 75% of the methane oxidised",
+   "access": "abstract"
+  },
+  {
+   "key": "encinasfernandez2014",
+   "citation": "Encinas Fernandez J, Peeters F, Hofmann H 2014, Importance of the autumn overturn and anoxic conditions in the hypolimnion for the annual methane emissions from a temperate lake, Environmental Science and Technology 48, 7297-7304",
+   "doi_or_url": "Environmental Science and Technology 48, 7297-7304",
+   "use": "About 46% of the stored methane emitted during the autumn overturn",
+   "access": "abstract"
+  },
+  {
+   "key": "morana2015",
+   "citation": "Morana C et al. 2015, Methanotrophy within the water column of a large meromictic tropical lake (Lake Kivu, East Africa), Biogeosciences 12, 2077-2088",
+   "doi_or_url": "https://doi.org/10.5194/bg-12-2077-2015",
+   "use": "Methanotrophs' growth efficiency in Kivu 2-50%, falling with the CH4:O2 ratio",
+   "access": "abstract"
+  },
+  {
+   "key": "pasche2011",
+   "citation": "Pasche N, Schmid M, Vazquez F, Schubert CJ, Wuest A, Kessler JD, Pack MA, Reeburgh WS, Burgmann H 2011, Methane sources and sinks in Lake Kivu, Journal of Geophysical Research 116, G03006",
+   "doi_or_url": "https://doi.org/10.1029/2011JG001690",
+   "use": "Kivu's lasting oxycline: upward flux 35 +- 5 g C m-2 a-1, aerobic oxidation 33 +- 5, sulphate-coupled anaerobic oxidation at most 3% (1 +- 0.5) with up to 150 uM sulphate, loss to the air 1 +- 0.5 (Borges et al. 2011: 0.16); bottle rates 618 nM/d at 40 m",
+   "access": "read: table 2 and sections 4.3-5.3; micro restored from the paper's arithmetic"
+  },
+  {
+   "key": "borges2011",
+   "citation": "Borges AV et al. 2011, Diffusive methane emissions to the atmosphere from Lake Kivu (Eastern Africa), Journal of Geophysical Research 116, G03032",
+   "doi_or_url": "https://doi.org/10.1029/2011JG001673",
+   "use": "Kivu's emission two orders of magnitude below its upward methane flux",
+   "access": "abstract"
+  },
+  {
+   "key": "durischkaiser2011",
+   "citation": "Durisch-Kaiser E, Schmid M, Peeters F, Kipfer R, Dinkel C, Diem T, Schubert CJ, Wehrli B 2011, What prevents outgassing of methane to the atmosphere in Lake Tanganyika?, Journal of Geophysical Research 116, G02022",
+   "doi_or_url": "https://doi.org/10.1029/2010JG001323",
+   "use": "Tanganyika: aerobic oxidation 0.02 per uM of O2 a year (three months' residence at 200 uM); anaerobic oxidation 0.003 and 0.0004 per uM of sulphate a year in the thermocline and deep water; anaerobic and aerobic oxidation each removing about half of the methane its deep water releases, 0.5 mol m-2 a-1, and only a few per cent emitted",
+   "access": "read: table 1 and pages 9-12; micro restored from the paper's arithmetic"
+  },
+  {
+   "key": "crowe2011",
+   "citation": "Crowe SA, Katsev S, Leslie K et al. 2011, The methane cycle in ferruginous Lake Matano, Geobiology 9, 61-78",
+   "doi_or_url": "https://doi.org/10.1111/j.1472-4669.2010.00257.x",
+   "use": "Over half the organic matter degraded through methanogenesis; methane to 1.4 mmol/L in the anoxic deep water; upward flux 1.6 mmol m-2 d-1 at the persistent pycnocline (100-120 m), oxidised there; anaerobic oxidation near 122 m at 0.5 uM/d, ten times the aerobic potential there; iron burial 8.5 mmol m-2 d-1, five times the methane flux, so iron could carry at most 66% of the oxidation by the 8 Fe(OH)3 a methane stoichiometry, each iron atom recycled eighty times within the pycnocline; sulphate under 20 uM, nitrate under 100 nM; catchment laterites to 25 wt% ascorbate-extractable iron; iron reduction under a tenth of the carbon degraded",
+   "access": "read: pages 61-78 (eScholarship copy)"
+  },
+  {
+   "key": "deutzmann2014",
+   "citation": "Deutzmann JS, Stief P, Brandes J, Schink B 2014, Anaerobic methane oxidation coupled to denitrification is the dominant methane sink in a deep lake, Proceedings of the National Academy of Sciences 111, 18273-18278",
+   "doi_or_url": "https://doi.org/10.1073/pnas.1411617111",
+   "use": "Lake Constance's sediments: nitrite-dependent oxidation (Methylomirabilis) at actual rates of 31-437 umol CH4 m-2 d-1 and potential 660-4,890; the major methane sink where nitrate reaches anoxic sediment, and nitrate added to anoxic cores stopping the methane's release",
+   "access": "abstract (EPA HERO record)"
+  },
+  {
+   "key": "sivan2011",
+   "citation": "Sivan O et al. 2011, Geochemical evidence for iron-mediated anaerobic oxidation of methane, Limnology and Oceanography 56, 1536-1544; Bar-Or I et al. 2017, Iron-coupled anaerobic oxidation of methane performed by a mixed bacterial-archaeal community based on poorly reactive minerals, Environmental Science and Technology 51, 12293-12301",
+   "doi_or_url": "https://doi.org/10.4319/lo.2011.56.4.1536",
+   "use": "Lake Kinneret's iron-coupled oxidation, below 20 cm of sediment, taking 10-15% of the methane made in the methanogenic zone",
+   "access": "summary (as later work on Lake Kinneret states it)"
+  },
+  {
+   "key": "beal2009",
+   "citation": "Beal EJ, House CH, Orphan VJ 2009, Manganese- and iron-dependent marine methane oxidation, Science 325, 184-187",
+   "doi_or_url": "https://doi.org/10.1126/science.1169984",
+   "use": "Manganese- and iron-dependent methane oxidation in marine sediment incubations, at rates above Lake Matano's",
+   "access": "secondary: Crowe et al. (2011)"
+  },
+  {
+   "key": "ettwig2016",
+   "citation": "Ettwig KF, Zhu B, Speth D, Keltjens JT, Jetten MSM, Kartal B 2016, Archaea catalyze iron-dependent anaerobic oxidation of methane, Proceedings of the National Academy of Sciences 113, 12792-12796",
+   "doi_or_url": "https://doi.org/10.1073/pnas.1609534113",
+   "use": "The pathway's organisms: Methanoperedens archaea oxidising methane with ferric iron; its rates not used",
+   "access": "bibliographic record only (full text blocked)"
+  },
+  {
+   "key": "nitrite_nitrate_pathways",
+   "citation": "Raghoebarsing AA et al. 2006, A microbial consortium couples anaerobic methane oxidation to denitrification, Nature 440, 918-921; Ettwig KF et al. 2010, Nitrite-driven anaerobic methane oxidation by oxygenic bacteria, Nature 464, 543-548; Haroon MF et al. 2013, Anaerobic oxidation of methane coupled to nitrate reduction in a novel archaeal lineage, Nature 500, 567-570",
+   "doi_or_url": "https://doi.org/10.1038/nature04617",
+   "use": "The nitrite- and nitrate-coupled pathways and their stoichiometry (3 CH4 + 8 NO2- + 8 H+ to 3 CO2 + 4 N2 + 10 H2O; CH4 + 4 NO3- to CO2 + 4 NO2- + 2 H2O, so 1.6 nitrate a methane through to N2); their rates not used, the field's (Deutzmann et al. 2014) taken instead",
+   "access": "known; not re-read"
+  },
+  {
+   "key": "poulton2002",
+   "citation": "Poulton SW, Raiswell R 2002, The low-temperature geochemical cycle of iron: from continental fluxes to marine sediment deposition, American Journal of Science 302, 774-805",
+   "doi_or_url": "https://eprints.whiterose.ac.uk/id/eprint/334/",
+   "use": "The global river particulate flux: total iron 4.49 +- 0.18 wt%, highly reactive (dithionite) iron 1.94 +- 0.08 wt%, a reactive share of 0.43 +- 0.03",
+   "access": "read: pages 785-786 (White Rose eprint)"
+  },
+  {
+   "key": "sterner2007",
+   "citation": "Sterner RW et al. 2007, Increasing stoichiometric imbalance in North America's largest lake: nitrification in Lake Superior, Geophysical Research Letters",
+   "doi_or_url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2006GL028861",
+   "use": "Lake Superior's nitrate, about 26 uM today against about 5 uM a century ago, made mostly in the lake",
+   "access": "summary"
+  },
+  {
+   "key": "lunar_sourcebook_soils",
+   "citation": "Heiken GH, Vaniman DT, French BM (eds) 1991, Lunar Sourcebook, Cambridge University Press, table 7.15",
+   "doi_or_url": "book",
+   "use": "Average soils' FeO, 5.1 wt% in the Apollo 16 highland soil and 15.3 in the Apollo 11 high-titanium mare soil (as resources' literature transcribes them), and their MnO, about 0.07 and 0.21 wt%",
+   "access": "FeO secondary through resources/literature.md; MnO known, not re-read"
+  },
+  {
+   "key": "langenegger2019",
+   "citation": "Langenegger T, Vachon D, Donis D, McGinnis DF 2019, What the bubble knows: lake methane dynamics revealed by sediment gas bubble composition, Limnology and Oceanography 64, 1526-1544",
+   "doi_or_url": "https://doi.org/10.1002/lno.11133",
+   "use": "The steady porewater balance behind lake_anoxia's ebullition share, and Lake Soppen's 10-17% of the production as bubbles at 10 m, which the tests check",
+   "access": "secondary: through lake_anoxia's sources.json (read there, pages 1-11)"
+  }
+ ]
+}

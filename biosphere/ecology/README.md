@@ -372,7 +372,12 @@ which.
     their deep water within years by Osborn's rule; by the energetic regime their two largest basins, half their
     area, go decades without overturning, mesotrophic or even nutrient-poor depths anoxic, and the basins are many
     Rossby radii across, beyond what one column can hold. *Lake-model columns at 301 K on a first-estimate lake set
-    and the GCM's sea cells; Osborn's form, the energetic regime at a few columns.*
+    and the GCM's sea cells; Osborn's form, the energetic regime at a few columns.* Traced through those columns
+    ([lake methane](../../research/studies/lake_methane/README.md)), nutrient-poor lakes and seas send 0.57 Tg of
+    methane a year at 301 K and hold the air at 1.01–1.75 ppm, under the held 1.87 with a thin margin at the methane
+    share's centre; at its high end, or by the energetic regime, they need a removal of up to a few Tg a year or a
+    designed methanotroph community. Richer waters send 7.8 Tg a year mesotrophic and more, most of it from the
+    giants. *An offline tracer on saved columns with Earth's methanotroph rates.*
 18. **The monthly tide makes flats exposed for days.** Ranges of 2.5–3.7 m on shores sloping 1:50–1:100 expose about
     20,000–30,000 km² for days each month, the most productive kind of coast on Earth and a methane and N2O source.
     Low water drifts through the lunar day on the tidal lines' beat of about a year (digest arithmetic). *Rough.*
