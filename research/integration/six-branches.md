@@ -157,8 +157,12 @@ with `coast-water` and the five lake folders, and holds the sound lab's three re
 atmosphere's local copy of the old extract, identical to the drive's ecology extract, moved to the drive
 (`session-tools/integration4/`). Main's checkout and every worktree then passed `make check`, 2,762 Python tests
 with 20 skipped (`make_check_after_integration4_*.log`). The review's confirmation found every high and medium fault
-fixed and one new error, two tables the reflow had flattened, restored in `0e6a35e`, whose check passed 2,762. The
-integration's worktree and its local branch, which equals main, stay until the author says.
+fixed and one new error, two tables the reflow had flattened, restored in `0e6a35e`, whose check passed 2,762. At the
+author's word the same day, the integration's worktree was removed and its branch deleted locally, once every file it
+held outside Git was found to match main's checkout or to be a link into it or onto the research drive; only the two
+reports every check rewrites, the immersion test's and `research/check.py`'s, differed, in their timings and
+timestamps. GitHub keeps the branch for the author, and the seven branches moved up with main to each record of the
+cleanup.
 
 ## Still to do from the integration
 
