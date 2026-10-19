@@ -274,7 +274,7 @@ which.
 9. **"No oxidant" holds for the bare column.** Soils emitting NO at Earth's natural rate would put 15 to several
    thousand times lightning's NO into the air. NO2 still splits at a third of Earth's rate, because 350–420 nm
    passes, which can make some ozone, and ozone with alkenes or nitrous acid in light can make some OH. A living,
-   peopled column needs its own chemistry run, with biological and urban emissions and their sinks (plan item 3).
+   peopled column needs its own chemistry run, with biological and urban emissions and their sinks (plan item 14).
    *The ratio is solid; the chemistry is open.*
 
 ### A world of long reach

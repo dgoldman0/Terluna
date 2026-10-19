@@ -1,19 +1,19 @@
 # The held fresh seas' oxygen and mixing in their basins at 301 K
 
-18 October 2026. The author set the resort's ground at 301 K on 18 October (the register on domain/climate) and asked
-for this study after [the deep lakes' anoxia](../lake_anoxia/README.md), to run the seas' own basins, which the lake
-studies left. On the lake model as corrected that day, [the waters' oxygen](../lake_oxygen/README.md) finds the wind's
-energy below the night's mixing turning its 352 m crater lakes over every second to fourth lunar month by Osborn's rule
-and about once a year by Shih and Bouffard's energetic regime, their deep water keeping its oxygen in nutrient-poor
-water and, in richer water, resting on the mixing's form and the warmth. The seas are the common-level waters, 28% of
-the surface, held fresh at 0.14 g/kg ([the seas' make-up](../sea_chemistry/README.md)); they are far larger and deeper
-than the lakes and span latitudes, on a Moon whose equator lies 1.5° from the ecliptic, so that the lunar night of about
-354 hours is their only regular cooling. [seas.py](seas.py) labels the seas' basins on LOLA and writes
-[results/seas.json](results/seas.json) (schema `terluna.research.sea-oxygen-seas/1`); [extract.py](extract.py) reads the
-GCM's weather at their water cells; [run.py](run.py), with [setting.py](setting.py), [columns.py](columns.py) and
-[analysis.py](analysis.py), writes [results/sea_oxygen.json](results/sea_oxygen.json) (schema
-`terluna.research.sea-oxygen/1`); [sources.json](sources.json) records the sources beyond those it shares with the
-waters' oxygen study.
+18 October 2026. The author set the resort's ground at 301 K on 18 October
+([the register](../../decisions.md#the-target-climate-17-october-2026)) and asked for this study after
+[the deep lakes' anoxia](../lake_anoxia/README.md), to run the seas' own basins, which the lake studies left. On the
+lake model as corrected that day, [the waters' oxygen](../lake_oxygen/README.md) finds the wind's energy below the
+night's mixing turning its 352 m crater lakes over every second to fourth lunar month by Osborn's rule and about once a
+year by Shih and Bouffard's energetic regime, their deep water keeping its oxygen in nutrient-poor water and, in richer
+water, resting on the mixing's form and the warmth. The seas are the common-level waters, 28% of the surface, held fresh
+at 0.14 g/kg ([the seas' make-up](../sea_chemistry/README.md)); they are far larger and deeper than the lakes and span
+latitudes, on a Moon whose equator lies 1.5° from the ecliptic, so that the lunar night of about 354 hours is their only
+regular cooling. [seas.py](seas.py) labels the seas' basins on LOLA and writes [results/seas.json](results/seas.json)
+(schema `terluna.research.sea-oxygen-seas/1`); [extract.py](extract.py) reads the GCM's weather at their water cells;
+[run.py](run.py), with [setting.py](setting.py), [columns.py](columns.py) and [analysis.py](analysis.py), writes
+[results/sea_oxygen.json](results/sea_oxygen.json) (schema `terluna.research.sea-oxygen/1`);
+[sources.json](sources.json) records the sources beyond those it shares with the waters' oxygen study.
 
 **The model.** The columns run on the lake model as the independent review of lake.py, lake_oxygen and lake_anoxia on
 18 October left it (biosphere/ecology/lake.py, sha256 9a34ba69…), with the surface exchange paired at the GCM's lowest

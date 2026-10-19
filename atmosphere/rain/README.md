@@ -20,7 +20,7 @@ arriving at the ground by the audio lab [visualization/rain-audio](../../visuali
 | [product.py](product.py) | The product [results/rain_drops.json](results/rain_drops.json), schema `terluna.atmosphere.rain-drops/2` |
 | [arrivals.py](arrivals.py) | The product [results/rain_arrivals.json](results/rain_arrivals.json), schema `terluna.atmosphere.rain-arrivals/1`: the drops arriving at the ground |
 | [rates.py](rates.py) | The product [results/rain_rates.json](results/rain_rates.json), schema `terluna.atmosphere.rain-rates/1`: the GCM's rain rates on each target's land |
-| [targets.py](targets.py) | The three target climates as the products read them from the climate targets' product: the hot world, the resort at 301 K and the lock, and that product's binding, by commit on `domain/climate` until the branches meet |
+| [targets.py](targets.py) | The three target climates as the products read them from the climate targets' product: the hot world, the resort at 301 K and the lock, and that product's binding in the tree |
 | [sources.json](sources.json) | The equations' and data's sources, with how far each was read |
 | [vendor/rainprops/](vendor/rainprops/) | Loftus's rainprops at commit `e2df9c2` (MIT licence): the code the solver adapts, with the Gunn–Kinzer fall speeds, unmodified, each file pinned in its `PROVENANCE.json` |
 
@@ -70,19 +70,18 @@ ventilation law: both are runnable calculations.
 ## Results
 
 The air at 2 m is each target's median over the model's own land in the
-[climate targets](../../research/studies/climate_targets/README.md), `domain/climate`'s corrected product of
-19 October (schema `/5`), which [targets.py](targets.py) reads from Git at its commit, checking its SHA-256, until the
-branches meet. The hot world and the lock are its targets; the resort is its resort band's candidate at 301 K, where
-the author set it on 18 October, 52% of the way from the design case to the test. Their 2 m state is the GCM's lowest
-level, 0.88–0.91 km up, carried down to the ground: their 2 m temperature is that level's on the dry adiabat,
-1.42–1.47 K warmer in the medians, and their extractor computes the 2 m wet-bulb temperature from that level's specific
-humidity, capped at saturation, each 3-day mean's humidity the mean of the records at its start and its end. Each
-target here pairs the two medians, and the humidity inverts the extractor's wet-bulb relation at 1.2 atm, where the
-extractor used each cell's own surface pressure; at the land's mean pressure the vapour pressure would stand 0.6–0.7%
-higher. Started from the lowest level itself, the parcel's cloud base comes 12–20 m lower (`column_sensitivity`).
-The Moon's air is the design air at 1.2 atm, with Earth's oxygen partial pressure (21,227 Pa) and 400 ppm of CO2
-(`earthlike_air` in [thermodynamics.py](../radiative_convective/thermodynamics.py)). Earth's air is at 1 atm, with the
-same temperature and relative humidity.
+[climate targets](../../research/studies/climate_targets/README.md), the corrected product (schema `/5`), which
+[targets.py](targets.py) reads in the tree and binds by its SHA-256. The hot world and the lock are its targets; the
+resort is its resort band's candidate at 301 K, where the author set it on 18 October, 52% of the way from the design
+case to the test. Their 2 m state is the GCM's lowest level, 0.88–0.91 km up, carried down to the ground: their 2 m
+temperature is that level's on the dry adiabat, 1.42–1.47 K warmer in the medians, and their extractor computes the 2 m
+wet-bulb temperature from that level's specific humidity, capped at saturation, each 3-day mean's humidity the mean of
+the records at its start and its end. Each target here pairs the two medians, and the humidity inverts the extractor's
+wet-bulb relation at 1.2 atm, where the extractor used each cell's own surface pressure; at the land's mean pressure the
+vapour pressure would stand 0.6–0.7% higher. Started from the lowest level itself, the parcel's cloud base comes 12–20 m
+lower (`column_sensitivity`). The Moon's air is the design air at 1.2 atm, with Earth's oxygen partial pressure (21,227
+Pa) and 400 ppm of CO2 (`earthlike_air` in [thermodynamics.py](../radiative_convective/thermodynamics.py)). Earth's air
+is at 1 atm, with the same temperature and relative humidity.
 
 | | Hot world | Resort, 301 K | Lock |
 |---|---|---|---|

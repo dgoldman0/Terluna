@@ -303,17 +303,20 @@ dimming from the dimming curve and the climate interpolated as above:
 | Sunlight its own dimming takes | 792–1,000 TW | 705–887 TW | 618–773 TW | 531–660 TW | 444–547 TW | 357–433 TW |
 | Rain on land, a day; land under 0.5 mm | 2.53 mm; 33% | 2.63 mm; 31% | 2.72 mm; 29% | 2.82 mm; 28% | 2.91 mm; 26% | 3.01 mm; 25% |
 | Seas' oxygen at saturation | 8.05 mg/L | 7.92 mg/L | 7.79 mg/L | 7.68 mg/L | 7.57 mg/L | 7.46 mg/L |
-| Eutrophic shallows' nights below 2 mg/L | 42–87% | 50–90% | 57–93% | 61–94% | 65–95% | 68–96% |
+| Deep lakes' oligotrophic deepest tenth | 6.2–6.8 mg/L | 6.0–6.6 mg/L | 5.9–6.5 mg/L | 5.6–6.2 mg/L | 5.3–6.0 mg/L | 5.1–5.7 mg/L |
 | Under a saturated column, the added heat answered | 17.1–21.8 W/m² | 15.4–19.5 W/m² | 13.6–17.3 W/m² | 11.9–15.0 W/m² | 10.2–12.7 W/m² | 8.4–10.5 W/m² |
 
 The rain and deserts count every cell's land, before the dimming's own cut. The oxygen comes from ecology's waters'
-oxygen in the three targets ([lake_oxygen](../lake_oxygen/README.md), on `domain/ecology` at bd0097c, bound by its
-hash until the branches meet): saturation interpolated by the seas' median warmth, and the eutrophic shallows' nights,
-across its three lakes, interpolated by the ground's temperature between its lock, resort and hot world, a guide to a
-model run at three points only. Each kelvin warmer raises the freezing level over the summit 1.1 km and the ground's
-wet-bulb 99th percentile 0.84 K, takes 0.73–0.96% of the sunlight off the dimming, 87–113 TW, and adds 0.1 mm of
-rain a day on land with 1.6 points less desert, and costs the seas 0.12 mg/L of oxygen and the margin under a
-saturated column 1.7–2.3 W/m².
+oxygen in the three targets on the corrected lake model with the wind's deep mixing
+([lake_oxygen](../lake_oxygen/README.md)): saturation interpolated by the seas' median warmth, and the deep lakes'
+oligotrophic deepest tenth, across its three lakes by Osborn's rule, interpolated by the ground's temperature between
+its lock, resort and hot world, a guide to a model run at three points only; the lake kinds' own run at 301 K gives
+5.7–6.3 mg/L ([the lakes by kind](../lake_kinds/README.md)). The eutrophic shallows, mixed through the lunar day by the
+wind, fall below 2 mg/L on under half a percent of nights across the band. Each kelvin warmer raises the freezing level
+over the summit about 1.2 km and the ground's wet-bulb 99th percentile 0.84 K, takes 0.73–0.96% of the sunlight off the
+dimming, 87–113 TW, and adds 0.1 mm of rain a day on land with 0.9–1.8 points less desert by the interpolation's form,
+and costs the seas 0.12 mg/L of oxygen at saturation, the deep lakes' oligotrophic water 0.18–0.26 mg/L, and the margin
+under a saturated column 1.7–2.3 W/m².
 
 **The recommendation is 301 K, within 300–302 K.** Only the tower's winter sets a line: with its 2 km margin it holds to
 about 302 K, which makes 302 K the band's warm edge. The array's dimming, the rain and the deserts favour the warm end,
@@ -383,7 +386,8 @@ Island box.
   below the summit, interpolated linearly across layers 8–10 km thick; the structure, its people and the summit's own
   ground warm the air beside it. The winter margin is a judgement: a winter park's depth under the top, the warmest
   6.5-hour mean below freezing and about 0.4 K for the interpolation.
-- **The waters' oxygen** between ecology's three targets is interpolated; its lake model ran at those three alone.
+- **The waters' oxygen** between ecology's three targets is interpolated; its lake model ran at those three and, in
+  the lake kinds, at 301 K, whose oligotrophic deepest tenth of 5.7–6.3 mg/L sits within 0.1 mg/L of the band's.
 - **The deserts between the runs depend on the form.** The interpolated shares give 27.9% (30.8%) at 301 K; each
   cell's rain moved linearly gives 22.5% (24.8%) and by a constant factor a kelvin 28.1% (31.5%), the difference lying
   at 30–45° and 45–60° ([coast water](../coast_water/README.md#what-it-finds)). Over 301–302 K the linear form falls
@@ -401,4 +405,4 @@ The extract reads the two runs' output in `climate/gcm/runs`, the glow pair's ye
 6.5-hour years, and the summit's cells in the test's twenty years and the earlier design case's years 20–29, about
 3 GB at most, and writes `research/runs/climate_targets/extract.json` (ignored, on the research drive), with the
 sha256 and size of every file it read; [test_run.py](test_run.py) checks the binding and the arithmetic. The run
-reads ecology's waters' oxygen from Git at its pinned commit until the branches meet.
+reads ecology's waters' oxygen in the tree.

@@ -282,86 +282,99 @@ the model's own land cells, the dry bound; the lock's, 2.25 mm with 37.6% and 1.
 author keeps delivering to balance the crust brings 1.5–9.5 W/m² of heat in its fall through the first thousand years
 unless it is lowered with energy recovery.
 
-Waiting on the author: the target climate, with new runs held until it is chosen (register, 17 October); the
-constraints review's recommendations for the fleet; the build's delivery heat, which the water top-up extends for
-millennia; the desert note (research drive, deserts/desert_analysis.md) for review; and the taxonomy, on hold for
-later, with its open choices and the aerophytes' scientific name.
+Between 17 and 19 October six branches carried the target climate's pieces, merged on 19 October
+([integration/six-branches.md](integration/six-branches.md)). The author set the resort at 301 K on 18 October, the
+target climates study's recommendation within the 300–302 K the summit tower's winter allows. At 301 K the shores'
+groundwater greens 0.4–1.5% of the desert land and the night's dew adds almost nothing
+([coast water](studies/coast_water/README.md)). The lake model, corrected after its review and mixed below the night's
+mixed layer by the wind's energy, turns the 352 m crater lakes over every second to fourth lunar month and keeps
+nutrient-poor depths oxic in the cooler targets; at 301 K the giants hold 70% of the lake area and go anoxic at depth
+when mesotrophic or richer, and nutrient-poor lakes and seas send 0.57 Tg of methane a year, holding the air under the
+held 1.87 ppm ([the lakes by kind](studies/lake_kinds/README.md), [the seas' oxygen](studies/sea_oxygen/README.md),
+[the waters' methane](studies/lake_methane/README.md)). The rain falls from cloud bases 5.1–7.4 km up, only drops of
+1.6–2.4 mm at the cloud base surviving the fall ([atmosphere/rain](../atmosphere/rain/README.md)); the levers that ease
+the shield save 1.6–3.0 points together ([heat levers](studies/heat_levers/README.md)); and
+[the resort at 301 K across the domains](studies/resort_301k/README.md) works out where they meet: the waters'
+trophic state sets the air's methane more than the gas pair does, people's dissolved phosphorus decides whether the
+deep lakes stay nutrient-poor, the seas get almost none of it, and watering the deserts takes 35–44 km³ a year and
+1.6–3.9 GW for each 1% of them.
+
+Waiting on the author: whether the resort's setting at 301 K starts its design case, with new runs held until then
+(register, 17–18 October); the waters' trophic design and how much of the deserts to water
+([the resort at 301 K across the domains](studies/resort_301k/README.md)); food made in orbit and its carbon's return
+([heat levers](studies/heat_levers/README.md)); the constraints review's recommendations for the fleet; the build's
+delivery heat, which the water top-up extends for millennia; the sea chemistry's floor ordering and the summit site
+product's rebuild, each a review's fix awaiting a yes; the desert note (research drive, deserts/desert_analysis.md) for
+review; and the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 
-Done since 12 October and merged on 17 October ([integration/five-branches.md](integration/five-branches.md)): the
-gases' warming in the deep column and the pair the author chose; where light limits growth; the GCM with the gases, the
-glow and the dimming; C′ placed with the blend; the power screen; the carbon cycle; the seas' chemistry, the terrain,
-the deltas and the three groundwater stages carried into the carbon cycle; the fresh shores and the soda lakes; the
-fleet's glow, its roll and the tile, support and flexible work; the curved air's light and the corrected radiation's
-design case; the 45° rings and the Jura Island box; the GCM's longwave refit and ice optics. What follows ranks what
-the integration found next.
+Done since 17 October and merged on 19 October ([integration/six-branches.md](integration/six-branches.md)): the three
+target climates compared and the resort set at 301 K; the coasts' and islands' water; the corrected lake model with the
+wind's deep mixing, the waters' oxygen and anoxia, the lakes by kind, the seas' basins and the waters' methane at 301 K;
+the rain's drop physics, its rates and its sound at 301 K, the rain column at the repository's heat capacity; the heat
+levers on the corrected targets; the low-gravity design note; the Jura Island flyover; and
+[the resort at 301 K across the domains](studies/resort_301k/README.md), which works out where they meet. What follows
+ranks what the integration found next.
 
-1. **The target climate**, the author's choice among the hot world near 307 K, the resort between (300 K in the study)
-   and the lock, the design temperature of 295 K, set out across the domains in
-   [what each target climate takes](studies/climate_targets/README.md), whose heat figures are weighted by area and
-   read at 2 m since 17 October. The author leans towards the resort and lets it vary a little near 300 K, and wants
-   winter within at least the tallest sky tower: the summit tower keeps a winter at its top, with 2 km of margin, up to
-   about 302 K, and the author set the resort at 301 K on 18 October, as the study proposed. Then the design
-   case for the chosen target, a 20-year GCM run of about 1.5 hours on four ranks, which also settles the tower's air
-   with one physics; the glow pair from it, two more, at which the glow study and the domain synthesis take the
-   efficacy it gives; and geography's lakes, the atlas globe and the studies that read the design climate, the
-   metropolis brief's winter parks among them, regenerated once.
-2. **The heat beyond the sunlight:** the water top-up's fall recovered on the way down, as resources' first screen
+1. **The design case at 301 K**, once the author says the resort's setting starts it: a 20-year GCM run of about 1.5
+   hours on four ranks, which also settles the tower's air with one physics; the glow pair from it, two more, at which
+   the glow study and the domain synthesis take the efficacy it gives; the lake studies rerun on its weather in place of
+   the climate targets they ran on (six to nine hours on two to four workers); and geography's lakes, the atlas globe,
+   the rain and the studies that read the design climate, the metropolis brief's winter parks among them, regenerated
+   once.
+2. **The waters' design**, the author's to set: the trophic state the lakes and seas are held at, which sets the air's
+   methane more than the gas pair does; people's dissolved phosphorus kept from the deep lakes, 15–57 g a person a year
+   at the middle settling for 8 and 4 billion, the glass houses' bleed with it; whether the held seas are made richer in
+   life, at what cost in methane and deep oxygen; and the giants' deep remedies
+   ([the resort at 301 K across the domains](studies/resort_301k/README.md)).
+3. **The deserts' watering**, the author's choice on the synthesis's scale: 35–44 km³ a year and 1.6–3.9 GW for each 1%
+   of the resort's 4.9–6.2 million km² of desert, most of it poleward of 45°, its albedo the larger cost. The 2-D CM1
+   slice from sea to dry land waits on the design case at 301 K and the coasts' design.
+4. **The heat beyond the sunlight:** the water top-up's fall recovered on the way down, as resources' first screen
    asks of the build's deliveries (resources); and the power screen's heat carried into the ledgers, which needs the
-   deep air's absorption upstream of provisioning's population screen.
-3. **The GCM's open checks at the chosen target:** the high cloud's range from its water and its crystals' size,
+   deep air's absorption upstream of provisioning's population screen; and food made in orbit, whose
+   carbon, 0.47–0.71 Gt a year, needs its own return path (heat levers).
+5. **The GCM's open checks at the chosen target:** the high cloud's range from its water and its crystals' size,
    offline in minutes, and the longwave refit checked at the settled state, whose layers stray 5–7 W/m² at 302 K. A
    CM1 ring that makes its own upper vapour comes later.
-4. **The fleet:** the rolled law's own out-of-plane forces in the flights; the constraints review's recommendations,
+6. **The lakes' open follow-ons:** a basin-scale model of one crater lake to settle the deep mixing's form (Osborn's
+   rule against Shih and Bouffard's energetic regime) and the wind's share, which move the deep lakes' oxygen and
+   methane two- to sevenfold (studies/lake_oxygen, mixing_forms); a three-dimensional model of the seas' basins on
+   their LOLA bathymetry under the 301 K weather, with the Moon's rotation, the cold ends, sills and slopes
+   (studies/sea_oxygen); giants as new reservoirs and eutrophic giants at 1,000 and 3,500 m; a meromictic step strong
+   enough to hold; longer seas tracing; Shih and Bouffard's form at more depths and basins, with the ventilated depth
+   under it; a rung of the lake ladder near 200 m.
+7. **The fleet:** the rolled law's own out-of-plane forces in the flights; the constraints review's recommendations,
    for the author; the tile inventory matched to the eccentric rings' length, about 11% fewer tiles; illumination's
    fleet light on the layout's radii, whose sunward crossings it puts 11–16% too far out, with the films' specular
    light on the night; and the coupled design search at the later date the author set.
-5. **The shores and the waters:** groundwater by the fresh seas (resources, question 16), the delivered water's
-   chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores. The
-   [coast-water study](studies/coast_water/README.md) (18 October) takes the shores' belts Moon-wide at 16 px/deg: at
-   301 K they put 0.4–1.5% of the desert land within plants' reach (0.40–1.07% at the central crust, taking the 100 m
-   check's ratios from four non-desert coasts to carry over to the deserts) and up to 394–575 small islands green
-   throughout, and the night's dew and fog add almost nothing. The deserts at 301 K are 22.5–28% of the land as the
-   interpolation's form leaves them. The 2-D CM1 slice waits on the design case at 301 K and the coasts' design.
-6. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
+8. **The shores and the waters:** groundwater by the fresh seas (resources, question 16), the delivered water's
+   chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores.
+9. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
    round once these details are worked out.
-7. **The wet Moon's methane and nitrogen:** the lakes' methane by depth, with its oxidation in their waters and
-   sediments, and the biomes' nitrogen ending in N2. The lake model was corrected after the review of 18 October and
-   its deep mixing is now driven by the wind (studies/lake_oxygen and lake_anoxia); the methane tracer on its columns
-   counts the giants' own anoxic methane and what their rare overturns release. Done for 301 K on 18 October
-   (studies/lake_methane): nutrient-poor waters fit the held 1.87 ppm with a thin margin at the methane share's centre
-   and need a removal or a designed community beyond it. Follow-ons: giants as new reservoirs and eutrophic giants at
-   1,000 and 3,500 m; a meromictic step strong enough to hold; longer seas tracing; Shih and Bouffard's form at more
-   depths and basins, with the ventilated depth under it.
-8. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
-   a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
-   storm needs CM1's field solver over terrain, which waits for the author.
-9. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
-   atmosphere, then the biomes' and cities' emissions in an air with no OH; about an hour of runs once added. The
-   author holds N2O and methane by biology, with technologies making up the difference.
-10. **The biomes' nitrogen and the dark night** as biological requirements: biological fixation, and the light that
-   dark-night organisms tolerate (biosphere, lunar-cycle ecology).
-11. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
-12. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
-13. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
-14. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
-15. **A district wind study for the summit metropolis**, the largest megacity, round the central sky tower: layouts
+10. **A district wind study for the summit metropolis**, the largest megacity, round the central sky tower: layouts
    denser than the sparse pilot, the author's direction of 15 and 17 October
    ([register](decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)), by the method recovered from
    ChatGPT's follow-up: empty domains as matched controls, gaps from 645 m down to 50 m, podium and infill layouts, a
-   diagonal wind, neutral and stable air and grid checks, forced by the chosen target's climate.
-16. **CM1's next run** takes the size-dependent lunar rain law from atmosphere/rain, the solver's slowing by gravity
+   diagonal wind, neutral and stable air and grid checks, forced by the design case's climate.
+11. **CM1's next run** takes the size-dependent lunar rain law from atmosphere/rain, the solver's slowing by gravity
    from 5.3 at 0.1 mm to 1.9 at 6 mm, so that its drizzle falls more slowly and its large drops faster than under
    its present single factor of 2.94.
-17. **A basin-scale model of one crater lake**, to settle the deep mixing's form (Osborn's rule against Shih and
-   Bouffard's energetic regime) and the wind's share, which move the deep lakes' oxygen and methane two- to
-   sevenfold (studies/lake_oxygen, mixing_forms).
-18. **A three-dimensional model of the seas' basins** on their LOLA bathymetry under the GCM's 301 K weather, with
-   the Moon's rotation, the cold ends, sills and slopes, to place the deep water's renewal and oxygen between the
-   columns' bounds (studies/sea_oxygen).
+12. **The biomes' nitrogen and the dark night** as biological requirements: the biomes' nitrogen ending in N2,
+   biological fixation, and the light that dark-night organisms tolerate (biosphere, lunar-cycle ecology).
+13. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
+   a protection concept for its triggered flashes and the hydrogen berths beside it. A terrain-aware electrified
+   storm needs CM1's field solver over terrain, which waits for the author.
+14. **The air's chemistry under the shield.** NO's deposition and the lunar night's chemistry in the middle
+   atmosphere, then the biomes' and cities' emissions in an air with no OH; about an hour of runs once added. The
+   author holds N2O and methane by biology, with technologies making up the difference.
+15. **The chosen port form's programme**, so the crown's traffic and berths follow the building the author chose.
+16. **The regional magnets' design and turn**, weighed with the heritage register's written evaluations.
+17. **Atmospheric electricity's stage 3**, the global circuit and the conducting upper air, at the author's go-ahead.
+18. **Sea appearance's open items**: the full renderings of the four coasts on a quieter machine.
 
-New runs wait on the author's choice of the target climate, and no rented compute is commissioned.
+New runs wait on the author's word on the design case at 301 K, and no rented compute is commissioned.
 
 ## Conservation through the transformation
 

@@ -14,7 +14,7 @@ on this laptop. The findings behind them are in the [README](README.md).
    - whether the air smells of the sea;
    - whether biogenic NOx brings some ozone and OH back.
 
-   **How:** the middle-atmosphere photochemistry (plan item 3) with deposition velocities for soils and waters, NO
+   **How:** the middle-atmosphere photochemistry (plan item 14) with deposition velocities for soils and waters, NO
    and VOC chemistry, emissions by biome and city, and the lunar night. That is about an hour of runs once the
    chemistry is added; the joint synthesis's air-chemistry runner restarts and runs cases in parallel.
 2. **What lives aloft.** The author asked for the aerial biomes to come almost first. The sky holds 9.2×10⁸ km³ of

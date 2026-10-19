@@ -2,16 +2,16 @@
  "schema": "terluna.research.heat-levers/2",
  "producer": {
   "files": {
-   "research/studies/heat_levers/run.py": "a1d27158d5de0d9cc0a1386451e49bb5cad1ab34d13d7e1a1efda07aa90ebaa4"
+   "research/studies/heat_levers/run.py": "ba367ea8aa6e7d63ea1d16cd02e2af95577d22729d3a479769ce684355d8c438"
   },
   "inputs": {
-   "research/studies/climate_targets/results/climate_targets.json": "76209a801a2e93a61784d42f412deedf626d9cc7e4b0d1ca7708327756df4de5",
+   "research/studies/climate_targets/results/climate_targets.json": "6bcab9a6e3749a2c9ab538a6ddc53ae1e5291ec1bc596051e895f04327970a67",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
    "atmosphere/radiative_convective/results/summary.json": "8fb31329ebcbca52ea9ac1c0af06ed5e357c02267dce8b47250334ae91c39171",
-   "research/studies/domain_synthesis/results/ledgers.json": "c1c5c0d6da933f977848ad7377e9f0e7c8199f83c3cdfc4110754be7c49d0f24",
-   "research/studies/food_systems/results/food_systems.json": "2e6c4b0bae9391384b254891ed68424867d19a273c7dc204072e3b018ea76cd5",
-   "research/studies/carbon_cycle/results/carbon_cycle.json": "839ea6a92d545c9b3cea7c124e22c4ce227e0134c93c7a9ceb5ee0a4ac5ba654",
-   "provisioning/results/power.json": "8fbd00cbc2ed7b29bf5ee60a793323afe00de2634a4512520b53ee1ac3269e7f",
+   "research/studies/domain_synthesis/results/ledgers.json": "0a2a461ba16561667a24ed6f718a2ea2bd6f1a1bb0a7a122a38f107e0f537a75",
+   "research/studies/food_systems/results/food_systems.json": "7e785672cd4edc5aa52c5d4c1d80e0b310ba4feee781f52024144c061f211ff7",
+   "research/studies/carbon_cycle/results/carbon_cycle.json": "48d85aec93dae00c3ddd15823d75f07f4a15cf824872ec30679e7bce0e8b21bf",
+   "provisioning/results/power.json": "92d865d7262f4eb0e0e2b41da93efe2f93165a2cc381459eda9dbc34824a6dda",
    "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
    "research/studies/atmospheric_co2/results/atmospheric_co2.json": "80db612918d3fc44d313b6aa93259ecfbad0bf869ea39de903a3fb09ace0d451",
    "climate/results/gcm/radiation_check_A28_dim5_moon.json": "82f2d3baff7cb2c3260818bcab20b9f0b940f84e36c4edb9a294fd477d373ae5",
@@ -293,23 +293,21 @@
    },
    "deep_oligotrophic_deepest_tenth_mg_l": {
     "lock": [
-     0.551,
-     1.541
+     6.758,
+     7.372
     ],
     "resort": [
-     0.13308638012750867,
-     0.7044247022935843
+     5.6055489544549975,
+     6.209257829878725
     ],
     "hot": [
-     0.001,
-     0.055
+     4.178,
+     4.874
     ]
    },
    "oxygen_source": {
     "path": "research/studies/lake_oxygen/results/lake_oxygen.json",
-    "branch": "domain/ecology",
-    "commit": "bd0097c7c8544da17988e4164deb681209ba6753",
-    "sha256": "3025a7b7c8db090b9c1b1c40add90ff3c31f902263253e3fe6327286a08d6f99"
+    "sha256": "574060b20e7bd0e8bf7d464182e19d853f8ba1a465ca5aebb7dc041ffa05ff96"
    },
    "activation_ev": 0.96,
    "wild_sources_left_tg_yr": [

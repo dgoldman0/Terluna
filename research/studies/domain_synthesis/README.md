@@ -320,7 +320,7 @@ Machine time is for this laptop, one core, alongside the author's other work.
 4. **The power screen** (provisioning, question 3): done on 12 October ([power](../../../provisioning/power.md)), the
    figures in the power section above. Carrying its heat of 1.47–1.49 W a watt into the ledgers needs the deep air's
    absorption upstream of provisioning's population screen, which the power screen itself reads.
-5. **The fleet's night and its glow** (plan, item 4): screened on research/array-industry from 12 October
+5. **The fleet's night and its glow** (plan, item 7): screened on research/array-industry from 12 October
    ([glow](../solar_shield_array/glow.md)). Rolling both halves 80° keeps the deep night dark and leaves 6.0 W/m²,
    2.0% of the design sunlight at the GCM's efficacy; heat mirrors make it worse. The roll's own out-of-plane forces
    in the flights come next.

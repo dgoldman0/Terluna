@@ -3,7 +3,7 @@
 products' inputs and its schema checked.
 
 The hot world and the lock are the product's targets 'no further dimming' and '295 K', each with its own climate. The
-resort stands at 301 K, as the author set it on 18 October (domain/climate's register), and is one of the resort
+resort stands at 301 K, as the author set it on 18 October (the register), and is one of the resort
 band's candidates (resort_band.rows), whose row gives its 2 m air, wet bulb, land rain and share of the way between
 the two runs. Its sky ladder and its air at the lowest level are the two runs' climates interpolated at that share,
 the targets' own rule, which must reproduce the row's figures.

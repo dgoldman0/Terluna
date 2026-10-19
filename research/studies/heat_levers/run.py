@@ -241,7 +241,7 @@ def warm_waters(data, b):
     deep = t['resort_band']['oxygen_source']['deep']
     oxygen = dict(lock=deep['lock'], resort=b.resort['oxygen']['deep_oligotrophic_deepest_tenth_mg_l'], hot=deep['hot'])
     out = dict(sea_median_c=seas, deep_oligotrophic_deepest_tenth_mg_l=oxygen,
-               oxygen_source={k: t['resort_band']['oxygen_source'][k] for k in ('path', 'branch', 'commit', 'sha256')},
+               oxygen_source={k: t['resort_band']['oxygen_source'][k] for k in ('path', 'sha256')},
                activation_ev=METHANOGENESIS_EV, wild_sources_left_tg_yr=wild,
                sources_left_tg_yr=left,
                lock=dict(removal_tg_yr=removal, air_share_per_year=held['atmosphere_share_per_year'],

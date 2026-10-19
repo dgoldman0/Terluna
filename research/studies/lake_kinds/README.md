@@ -1,18 +1,18 @@
 # The lakes by kind at the resort's 301 K, and what each kind needs
 
 18 October 2026. The author set the resort at 301 K on 18 October, the climate-targets study's recommendation within
-300–302 K ([register](../../decisions.md), on domain/climate), and, after [the anoxic depths](../lake_anoxia/README.md)
-found the deep lakes' water going anoxic, asked for the lakes to be sorted by what they need, out of a concern that
-lakes scattered over the whole Moon would each need tending. The same day the author chose to drive the lake model's
-mixing below the mixed layer by the wind's own energy. This study runs the
+300–302 K ([register](../../decisions.md#the-target-climate-17-october-2026)), and, after
+[the anoxic depths](../lake_anoxia/README.md) found the deep lakes' water going anoxic, asked for the lakes to be sorted
+by what they need, out of a concern that lakes scattered over the whole Moon would each need tending. The same day the
+author chose to drive the lake model's mixing below the mixed layer by the wind's own energy. This study runs the
 [lake model](../../../biosphere/ecology/lake.py), as corrected after the independent review of 18 October and with that
 wind-driven deep mixing, at 301 K on lakes whose floors lie at a ladder of depths from 5 m to 3,500 m, in each trophic
-state; sorts every one of geography's 27,865 rain-fed lakes by kind from what the ladder shows; and sizes what each
-kind needs. [census.py](census.py) writes the lake set's geometry, outlets, soda and groundwater, which no lake model
-sets, to [results/lake_census.json](results/lake_census.json) (schema `terluna.research.lake-kinds-census/1`);
-[run.py](run.py) writes [results/lake_kinds.json](results/lake_kinds.json) (schema `terluna.research.lake-kinds/1`)
-from the runs of [ladder.py](ladder.py); [sources.json](sources.json) records each published value and how far it was
-read. The ladder turns the wind's dissipation into mixing by Osborn's rule; the waters' oxygen study's
+state; sorts every one of geography's 27,865 rain-fed lakes by kind from what the ladder shows; and sizes what each kind
+needs. [census.py](census.py) writes the lake set's geometry, outlets, soda and groundwater, which no lake model sets,
+to [results/lake_census.json](results/lake_census.json) (schema `terluna.research.lake-kinds-census/1`);
+[run.py](run.py) writes [results/lake_kinds.json](results/lake_kinds.json) (schema `terluna.research.lake-kinds/1`) from
+the runs of [ladder.py](ladder.py); [sources.json](sources.json) records each published value and how far it was read.
+The ladder turns the wind's dissipation into mixing by Osborn's rule; the waters' oxygen study's
 [mixing_forms.py](../lake_oxygen/mixing_forms.py) runs its 352 m lake and its 1,925 m giant at 301 K by Shih and
 Bouffard's energetic regime, the other end of that range, which this study's figures stand beside.
 

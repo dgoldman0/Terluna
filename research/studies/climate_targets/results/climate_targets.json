@@ -2,30 +2,23 @@
  "schema": "terluna.research.climate-targets/5",
  "producer": {
   "files": {
-   "research/studies/climate_targets/run.py": "1630ce4e193df9946267ff39344596867c71d3bf40ef1f9afece531126fbd8e6",
+   "research/studies/climate_targets/run.py": "05d637b3ede0d2a37c5327939e841ab58eb7d54311550c76e24a3d1e1d9d21ef",
    "research/studies/climate_targets/extract.py": "09b05b8231143c2fb41b72b8e186def9a9c0ded363d6de2a8aa9c8c21b8ed7cb"
   },
   "inputs": {
    "research/runs/climate_targets/extract.json": "a019e00f6f2ac4e2519fd3632203d1261c6dcc882ae91f4238f5765a608594d4",
-   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "d59b7a3d0539cf8aa78618be969f85b863835fe92408b5611fdd3fdd0697f549",
+   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "ffc75accda803ffe2baa85d7161878681314771b3dff1b399790b74272e5d2c4",
    "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
    "atmosphere/radiative_convective/results/summary.json": "8fb31329ebcbca52ea9ac1c0af06ed5e357c02267dce8b47250334ae91c39171",
-   "research/studies/light_limitation/results/light_limitation.json": "75a3fa170bf80f98efbbdc649d7b5f0443752ad1d8d211de30d50a6eb2eb2abb",
-   "provisioning/results/power.json": "8fbd00cbc2ed7b29bf5ee60a793323afe00de2634a4512520b53ee1ac3269e7f",
+   "research/studies/light_limitation/results/light_limitation.json": "c1ef10971e9023645ca581dc8067465a99db3e6556052526fd051f7bb3873e73",
+   "provisioning/results/power.json": "92d865d7262f4eb0e0e2b41da93efe2f93165a2cc381459eda9dbc34824a6dda",
    "resources/results/first_screen.json": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
    "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539f56257acad8d1727de612c7a477178f61e228abc906668bb",
    "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d42be3598a6f4896cc72c4c5aa0432ad9b468dbc08191f684",
-   "climate/results/gcm/site_winds_A28_dim5_moon_summit.json": "45aeeebcf685564b1e3db9a9430f24b99b0264ed61d1c74e8015c78b7949b2b8"
-  },
-  "pinned_inputs": {
-   "research/studies/lake_oxygen/results/lake_oxygen.json": {
-    "branch": "domain/ecology",
-    "commit": "bd0097c7c8544da17988e4164deb681209ba6753",
-    "sha256": "3025a7b7c8db090b9c1b1c40add90ff3c31f902263253e3fe6327286a08d6f99",
-    "bind": "Read in-tree once the branches meet; until then from Git at the commit."
-   }
+   "climate/results/gcm/site_winds_A28_dim5_moon_summit.json": "45aeeebcf685564b1e3db9a9430f24b99b0264ed61d1c74e8015c78b7949b2b8",
+   "research/studies/lake_oxygen/results/lake_oxygen.json": "574060b20e7bd0e8bf7d464182e19d853f8ba1a465ca5aebb7dc041ffa05ff96"
   },
   "constants": {
    "MOON_RADIUS": 1737400.0,
@@ -5068,12 +5061,12 @@
     "oxygen": {
      "saturation_mg_l": 8.050714467276272,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.315328455234189,
-      1.1109293383588372
+      6.223252890810571,
+      6.821102810331696
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.42430667331771355,
-      0.8662930873886412
+      0.0,
+      0.0
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5136,12 +5129,12 @@
     "oxygen": {
      "saturation_mg_l": 7.986431343571058,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.27574634142564175,
-      1.0386970037691279
+      6.133439668107928,
+      6.728577107748771
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.4619800049882851,
-      0.8829698155414809
+      0.0,
+      0.0
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5204,12 +5197,12 @@
     "oxygen": {
      "saturation_mg_l": 7.922148219865844,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.2361642276170945,
-      0.9664646691794185
+      6.043626445405286,
+      6.636051405165848
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.49965333665885675,
-      0.8996465436943206
+      0.0,
+      0.0
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5272,12 +5265,12 @@
     "oxygen": {
      "saturation_mg_l": 7.857865096160629,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.1965821138085473,
-      0.8942323345897093
+      5.953813222702642,
+      6.543525702582924
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.5373266683294284,
-      0.9163232718471603
+      0.0,
+      0.0
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5340,12 +5333,12 @@
     "oxygen": {
      "saturation_mg_l": 7.793581972455415,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.157,
-      0.822
+      5.864,
+      6.451
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.575,
-      0.933
+      0.0,
+      0.0
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5408,12 +5401,12 @@
     "oxygen": {
      "saturation_mg_l": 7.736297501065028,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.14504319006375435,
-      0.7632123511467921
+      5.734774477227499,
+      6.330128914939363
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.5930118611219085,
-      0.9375221268348621
+      0.0,
+      0.0006131697403202902
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5476,12 +5469,12 @@
     "oxygen": {
      "saturation_mg_l": 7.681445915608605,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.13308638012750867,
-      0.7044247022935843
+      5.6055489544549975,
+      6.209257829878725
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.6110237222438171,
-      0.9420442536697243
+      0.0,
+      0.0012263394806405804
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5544,12 +5537,12 @@
     "oxygen": {
      "saturation_mg_l": 7.626594330152183,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.12112957019126303,
-      0.6456370534403765
+      5.476323431682497,
+      6.088386744818088
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.6290355833657255,
-      0.9465663805045864
+      0.0,
+      0.0018395092209608707
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5612,12 +5605,12 @@
     "oxygen": {
      "saturation_mg_l": 7.57174274469576,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.10917276025501736,
-      0.5868494045871687
+      5.347097908909995,
+      5.967515659757451
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.6470474444876341,
-      0.9510885073394486
+      0.0,
+      0.002452678961281161
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5680,12 +5673,12 @@
     "oxygen": {
      "saturation_mg_l": 7.516891159239337,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.0972159503187717,
-      0.5280617557339609
+      5.217872386137494,
+      5.846644574696814
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.6650593056095426,
-      0.9556106341743107
+      0.0,
+      0.003065848701601451
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5748,12 +5741,12 @@
     "oxygen": {
      "saturation_mg_l": 7.4620395737829135,
      "deep_oligotrophic_deepest_tenth_mg_l": [
-      0.08525914038252605,
-      0.46927410688075305
+      5.088646863364993,
+      5.725773489636176
      ],
      "shallow_eutrophic_hypoxic_nights": [
-      0.6830711667314512,
-      0.9601327610091729
+      0.0,
+      0.0036790184419217414
      ]
     },
     "gap_with_the_added_heat_answered_w_m2": [
@@ -5764,10 +5757,7 @@
   ],
   "oxygen_source": {
    "path": "research/studies/lake_oxygen/results/lake_oxygen.json",
-   "branch": "domain/ecology",
-   "commit": "bd0097c7c8544da17988e4164deb681209ba6753",
-   "sha256": "3025a7b7c8db090b9c1b1c40add90ff3c31f902263253e3fe6327286a08d6f99",
-   "read_from": "git object at the pinned commit",
+   "sha256": "574060b20e7bd0e8bf7d464182e19d853f8ba1a465ca5aebb7dc041ffa05ff96",
    "targets_ground_k": {
     "lock": 295.0230045582492,
     "resort": 300.0,
@@ -5775,30 +5765,30 @@
    },
    "deep": {
     "lock": [
-     0.551,
-     1.541
+     6.758,
+     7.372
     ],
     "resort": [
-     0.157,
-     0.822
+     5.864,
+     6.451
     ],
     "hot": [
-     0.001,
-     0.055
+     4.178,
+     4.874
     ]
    },
    "shallow": {
     "lock": [
-     0.2,
-     0.767
+     0.0,
+     0.0
     ],
     "resort": [
-     0.575,
-     0.933
+     0.0,
+     0.0
     ],
     "hot": [
-     0.81,
-     0.992
+     0.0,
+     0.008
     ]
    },
    "saturation": {

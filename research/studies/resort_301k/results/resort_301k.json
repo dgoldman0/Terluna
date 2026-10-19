@@ -1,0 +1,1084 @@
+{
+ "schema": "terluna.research.resort-301k/1",
+ "evidence": "Arithmetic on committed products, no model run: the waters' methane traced at 301 K and the domain synthesis's gas ledger; the lakes' anoxia study's phosphorus lines and the sea phosphorus screen's loads; the targets' resort band and the heat levers' ranking; the coast water study's deserts, demand and water table with the power screen's heat and the levers' albedo kernels. Its own design guesses are named in design_guesses.",
+ "reading_rule": "Pairs are [low, high]. methane gives, for each trophic state and methanotroph community, the waters' Tg a year, the sources with the ledger's others cut 90%, the air the soils alone leave, and at each pair the removal and the share of the air its contactors pass a year. phosphorus gives the oligotrophic line by settling and the room under it for people's dissolved phosphorus, in kg a year and g a person a year at 4 and 8 billion, with the share of the design loss that may arrive dissolved [least, most]. dimming gives the resort's at 301 K with the levers' first four taken off. watering gives, for each share of the deserts watered and each interpolation form, the land, the water a year, the lift, the power, its heat in points and the points the greener ground costs.",
+ "design_guesses": {
+  "greening_albedo_drop": {
+   "range": [
+    0.1,
+    0.2
+   ],
+   "basis": "a watered garden or park against bare desert ground"
+  },
+  "lift_efficiency": {
+   "value": 0.7,
+   "basis": "pumps"
+  },
+  "conveyance_kwh_m3": {
+   "range": [
+    0.1,
+    0.3
+   ],
+   "basis": "pipes and channels to the gardens, beyond the lift"
+  }
+ },
+ "target_k": 301.0,
+ "methane": {
+  "soil_sink_tg_yr_per_ppm": 2.92,
+  "tg_per_ppm": 1760.0,
+  "other_sources_after_cut_tg_yr": [
+   2.378,
+   4.537999999999999
+  ],
+  "pairs_ppm": {
+   "held": 1.87,
+   "low": 0.3,
+   "grid_lowest": 0.1
+  },
+  "waters": {
+   "oligotrophic": {
+    "earth": {
+     "waters_tg_yr": 0.5713,
+     "sources_tg_yr": [
+      2.9493,
+      5.109299999999999
+     ],
+     "steady_ppm_by_soils": [
+      1.0100342465753425,
+      1.7497602739726026
+     ],
+     "held": {
+      "removal_tg_yr": [
+       0.0,
+       0.0
+      ],
+      "air_passed_per_year_share": [
+       0.0,
+       0.0
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       2.0733,
+       4.233299999999999
+      ],
+      "air_passed_per_year_share": [
+       0.003926704545454546,
+       0.008017613636363635
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       2.6573,
+       4.8172999999999995
+      ],
+      "air_passed_per_year_share": [
+       0.015098295454545456,
+       0.027371022727272723
+      ]
+     }
+    },
+    "designed": {
+     "waters_tg_yr": 0.5702,
+     "sources_tg_yr": [
+      2.9482,
+      5.108199999999999
+     ],
+     "steady_ppm_by_soils": [
+      1.0096575342465754,
+      1.7493835616438353
+     ],
+     "held": {
+      "removal_tg_yr": [
+       0.0,
+       0.0
+      ],
+      "air_passed_per_year_share": [
+       0.0,
+       0.0
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       2.0722,
+       4.232199999999999
+      ],
+      "air_passed_per_year_share": [
+       0.003924621212121213,
+       0.0080155303030303
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       2.6562,
+       4.816199999999999
+      ],
+      "air_passed_per_year_share": [
+       0.015092045454545455,
+       0.027364772727272724
+      ]
+     }
+    },
+    "poor": {
+     "waters_tg_yr": 0.6937,
+     "sources_tg_yr": [
+      3.0717,
+      5.231699999999999
+     ],
+     "steady_ppm_by_soils": [
+      1.0519520547945205,
+      1.7916780821917806
+     ],
+     "held": {
+      "removal_tg_yr": [
+       0.0,
+       0.0
+      ],
+      "air_passed_per_year_share": [
+       0.0,
+       0.0
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       2.1957,
+       4.355699999999999
+      ],
+      "air_passed_per_year_share": [
+       0.004158522727272727,
+       0.008249431818181815
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       2.7797,
+       4.939699999999999
+      ],
+      "air_passed_per_year_share": [
+       0.01579375,
+       0.028066477272727267
+      ]
+     }
+    }
+   },
+   "mesotrophic": {
+    "earth": {
+     "waters_tg_yr": 7.801,
+     "sources_tg_yr": [
+      10.179,
+      12.338999999999999
+     ],
+     "steady_ppm_by_soils": [
+      3.485958904109589,
+      4.225684931506849
+     ],
+     "held": {
+      "removal_tg_yr": [
+       4.7186,
+       6.878599999999999
+      ],
+      "air_passed_per_year_share": [
+       0.0014337019931939718,
+       0.0020899975692756437
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       9.303,
+       11.463
+      ],
+      "air_passed_per_year_share": [
+       0.017619318181818184,
+       0.02171022727272727
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       9.887,
+       12.046999999999999
+      ],
+      "air_passed_per_year_share": [
+       0.056176136363636366,
+       0.06844886363636363
+      ]
+     }
+    },
+    "designed": {
+     "waters_tg_yr": 4.935,
+     "sources_tg_yr": [
+      7.313,
+      9.472999999999999
+     ],
+     "steady_ppm_by_soils": [
+      2.5044520547945206,
+      3.2441780821917807
+     ],
+     "held": {
+      "removal_tg_yr": [
+       1.8525999999999998,
+       4.012599999999999
+      ],
+      "air_passed_per_year_share": [
+       0.0005628949927078268,
+       0.0012191905687894988
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       6.436999999999999,
+       8.597
+      ],
+      "air_passed_per_year_share": [
+       0.012191287878787878,
+       0.016282196969696967
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       7.021,
+       9.181
+      ],
+      "air_passed_per_year_share": [
+       0.03989204545454545,
+       0.05216477272727272
+      ]
+     }
+    },
+    "poor": {
+     "waters_tg_yr": 33.49,
+     "sources_tg_yr": [
+      35.868,
+      38.028
+     ],
+     "steady_ppm_by_soils": [
+      12.283561643835618,
+      13.023287671232877
+     ],
+     "held": {
+      "removal_tg_yr": [
+       30.407600000000002,
+       32.5676
+      ],
+      "air_passed_per_year_share": [
+       0.009239061740398638,
+       0.00989535731648031
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       34.992000000000004,
+       37.152
+      ],
+      "air_passed_per_year_share": [
+       0.06627272727272727,
+       0.07036363636363636
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       35.576,
+       37.736
+      ],
+      "air_passed_per_year_share": [
+       0.20213636363636364,
+       0.21440909090909088
+      ]
+     }
+    }
+   },
+   "eutrophic": {
+    "earth": {
+     "waters_tg_yr": 34.04,
+     "sources_tg_yr": [
+      36.418,
+      38.577999999999996
+     ],
+     "steady_ppm_by_soils": [
+      12.471917808219178,
+      13.211643835616437
+     ],
+     "held": {
+      "removal_tg_yr": [
+       30.9576,
+       33.117599999999996
+      ],
+      "air_passed_per_year_share": [
+       0.009406174039863878,
+       0.010062469615945549
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       35.542,
+       37.702
+      ],
+      "air_passed_per_year_share": [
+       0.06731439393939394,
+       0.07140530303030303
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       36.126,
+       38.285999999999994
+      ],
+      "air_passed_per_year_share": [
+       0.20526136363636363,
+       0.21753409090909087
+      ]
+     }
+    },
+    "designed": {
+     "waters_tg_yr": 19.06,
+     "sources_tg_yr": [
+      21.438,
+      23.598
+     ],
+     "steady_ppm_by_soils": [
+      7.341780821917808,
+      8.081506849315069
+     ],
+     "held": {
+      "removal_tg_yr": [
+       15.977599999999999,
+       18.1376
+      ],
+      "air_passed_per_year_share": [
+       0.004854642683519688,
+       0.00551093825960136
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       20.561999999999998,
+       22.721999999999998
+      ],
+      "air_passed_per_year_share": [
+       0.038943181818181814,
+       0.043034090909090904
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       21.145999999999997,
+       23.305999999999997
+      ],
+      "air_passed_per_year_share": [
+       0.12014772727272725,
+       0.13242045454545454
+      ]
+     }
+    },
+    "poor": {
+     "waters_tg_yr": 106.2,
+     "sources_tg_yr": [
+      108.578,
+      110.738
+     ],
+     "steady_ppm_by_soils": [
+      37.18424657534247,
+      37.923972602739724
+     ],
+     "held": {
+      "removal_tg_yr": [
+       103.11760000000001,
+       105.2776
+      ],
+      "air_passed_per_year_share": [
+       0.03133130772970345,
+       0.03198760330578512
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       107.702,
+       109.862
+      ],
+      "air_passed_per_year_share": [
+       0.2039810606060606,
+       0.2080719696969697
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       108.286,
+       110.446
+      ],
+      "air_passed_per_year_share": [
+       0.6152613636363636,
+       0.6275340909090908
+      ]
+     }
+    }
+   },
+   "new_reservoir": {
+    "earth": {
+     "waters_tg_yr": 57.22,
+     "sources_tg_yr": [
+      59.598,
+      61.757999999999996
+     ],
+     "steady_ppm_by_soils": [
+      20.41027397260274,
+      21.15
+     ],
+     "held": {
+      "removal_tg_yr": [
+       54.1376,
+       56.297599999999996
+      ],
+      "air_passed_per_year_share": [
+       0.016449197860962564,
+       0.017105493437044237
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       58.722,
+       60.882
+      ],
+      "air_passed_per_year_share": [
+       0.11121590909090909,
+       0.11530681818181818
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       59.306,
+       61.465999999999994
+      ],
+      "air_passed_per_year_share": [
+       0.33696590909090907,
+       0.34923863636363633
+      ]
+     }
+    },
+    "designed": {
+     "waters_tg_yr": 36.26,
+     "sources_tg_yr": [
+      38.638,
+      40.797999999999995
+     ],
+     "steady_ppm_by_soils": [
+      13.232191780821918,
+      13.971917808219176
+     ],
+     "held": {
+      "removal_tg_yr": [
+       33.1776,
+       35.337599999999995
+      ],
+      "air_passed_per_year_share": [
+       0.010080700048614485,
+       0.010736995624696157
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       37.762,
+       39.922
+      ],
+      "air_passed_per_year_share": [
+       0.0715189393939394,
+       0.07560984848484847
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       38.346,
+       40.50599999999999
+      ],
+      "air_passed_per_year_share": [
+       0.21787499999999999,
+       0.23014772727272723
+      ]
+     }
+    },
+    "poor": {
+     "waters_tg_yr": 244.1,
+     "sources_tg_yr": [
+      246.478,
+      248.638
+     ],
+     "steady_ppm_by_soils": [
+      84.41027397260274,
+      85.15
+     ],
+     "held": {
+      "removal_tg_yr": [
+       241.01760000000002,
+       243.1776
+      ],
+      "air_passed_per_year_share": [
+       0.07323091881380651,
+       0.07388721438988818
+      ]
+     },
+     "low": {
+      "removal_tg_yr": [
+       245.602,
+       247.762
+      ],
+      "air_passed_per_year_share": [
+       0.46515530303030306,
+       0.46924621212121215
+      ]
+     },
+     "grid_lowest": {
+      "removal_tg_yr": [
+       246.186,
+       248.346
+      ],
+      "air_passed_per_year_share": [
+       1.398784090909091,
+       1.4110568181818182
+      ]
+     }
+    }
+   }
+  }
+ },
+ "phosphorus": {
+  "lake_area_m2": 3922202725475.94,
+  "land_bioavailable_g_m2_yr": [
+   0.016730398528010924,
+   0.04461439607469579
+  ],
+  "people": [
+   4000000000.0,
+   8000000000.0
+  ],
+  "lost_kg_per_person": [
+   0.044,
+   0.18
+  ],
+  "glass_discharge_kg_per_person": [
+   0.0,
+   0.09
+  ],
+  "room": {
+   "earth": {
+    "oligotrophic_line_g_m2_yr": 0.1582,
+    "room_kg_yr": [
+     554872456.4654306,
+     445505765.29065883
+    ],
+    "per_person_g_yr": {
+     "4_billion": [
+      138.71811411635764,
+      111.3764413226647
+     ],
+     "8_billion": [
+      69.35905705817882,
+      55.68822066133235
+     ]
+    },
+    "dissolved_share_of_the_loss_allowed": {
+     "4_billion": [
+      0.6187580073481372,
+      3.152684411735401
+     ],
+     "8_billion": [
+      0.3093790036740686,
+      1.5763422058677006
+     ]
+    }
+   },
+   "aggregates": {
+    "oligotrophic_line_g_m2_yr": 0.07493,
+    "room_kg_yr": [
+     228270635.51504907,
+     118903944.34027725
+    ],
+    "per_person_g_yr": {
+     "4_billion": [
+      57.067658878762266,
+      29.725986085069312
+     ],
+     "8_billion": [
+      28.533829439381133,
+      14.862993042534656
+     ]
+    },
+    "dissolved_share_of_the_loss_allowed": {
+     "4_billion": [
+      0.16514436713927397,
+      1.296992247244597
+     ],
+     "8_billion": [
+      0.08257218356963698,
+      0.6484961236222985
+     ]
+    }
+   },
+   "stokes": {
+    "oligotrophic_line_g_m2_yr": 0.04106,
+    "room_kg_yr": [
+     95425629.20317899,
+     -13941061.97159282
+    ],
+    "per_person_g_yr": {
+     "4_billion": [
+      23.856407300794746,
+      -3.485265492898205
+     ],
+     "8_billion": [
+      11.928203650397373,
+      -1.7426327464491025
+     ]
+    },
+    "dissolved_share_of_the_loss_allowed": {
+     "4_billion": [
+      -0.019362586071656692,
+      0.5421910750180624
+     ],
+     "8_billion": [
+      -0.009681293035828346,
+      0.2710955375090312
+     ]
+    }
+   }
+  },
+  "earth_practice_lost_kg_per_person": [
+   1.76,
+   2.4
+  ],
+  "seas_at_1000_years_mg_m3": {
+   "dissolved_after_lakes": [
+    0.27039154349031463,
+    1.1126275203452713
+   ],
+   "dissolved_after_lakes_and_dust": [
+    0.7093208622715722,
+    1.789929822303065
+   ],
+   "dissolved_after_lakes_and_dust_top": [
+    17.827564294740593,
+    28.204719598656997
+   ],
+   "with_particle_release": [
+    0.32616768195203855,
+    4.912850697313395
+   ],
+   "lakes_pass_dissolved": [
+    4.14444264115322,
+    17.053865218993757
+   ]
+  },
+  "earth_ocean_mean_mg_m3": 69.74031822275593
+ },
+ "dimming": {
+  "resort_own_percent": [
+   4.484183847589584,
+   5.572388752016319
+  ],
+  "resort_in_all_percent": [
+   8.182359610053576,
+   10.876043505960693
+  ],
+  "levers_first_four_points": [
+   1.6137929219531977,
+   3.0136443521211316
+  ],
+  "levers": [
+   {
+    "rank": 1,
+    "lever": "the glow's set-aside answers",
+    "points": [
+     0.6201599315607492,
+     0.8314963364812921
+    ]
+   },
+   {
+    "rank": 2,
+    "lever": "food made in orbit",
+    "points": [
+     0.12954794609835749,
+     0.9836183587686024
+    ]
+   },
+   {
+    "rank": 3,
+    "lever": "methane and N2O at the low pair",
+    "points": [
+     0.7912824422409744,
+     0.8093446711269108
+    ]
+   },
+   {
+    "rank": 4,
+    "lever": "white roofs and silver foliage",
+    "points": [
+     0.07280260205311648,
+     0.3891849857443266
+    ]
+   },
+   {
+    "rank": 5,
+    "lever": "night-side cirrus thinning",
+    "points": [
+     0.0,
+     1.001926392033054
+    ]
+   },
+   {
+    "rank": 6,
+    "lever": "the top-up's fall",
+    "points": [
+     0.0,
+     2.330441291587431
+    ]
+   },
+   {
+    "rank": 7,
+    "lever": "1.0 atm in the hot world",
+    "points": [
+     0.46433351558993735,
+     0.9711014801497944
+    ]
+   },
+   {
+    "rank": 8,
+    "lever": "brighter deserts",
+    "points": [
+     0.17162365655049092,
+     1.9364365636918621
+    ]
+   },
+   {
+    "rank": 9,
+    "lever": "CO2 below 400 ppm",
+    "points": [
+     0.33024758239505414,
+     0.9034218446004998
+    ]
+   }
+  ],
+  "resort_in_all_with_the_first_four_percent": [
+   5.168715257932444,
+   9.262250584007495
+  ],
+  "low_pair_points": [
+   0.7912824422409744,
+   0.8093446711269108
+  ],
+  "methane_fan_tw_per_share_of_air_a_year": [
+   6.961538461538462,
+   6.9640914036996735
+  ]
+ },
+ "watering": {
+  "demand_mm_day": 1.94344,
+  "deserts": {
+   "additive": {
+    "land_km2": 4922400.0,
+    "median_depth_m": 773.989,
+    "bands": {
+     "30-45": {
+      "land_km2": 197130.0,
+      "median_depth_m": 467.499
+     },
+     "45-60": {
+      "land_km2": 1234120.0,
+      "median_depth_m": 644.557
+     },
+     "60-75": {
+      "land_km2": 2607620.0,
+      "median_depth_m": 805.562
+     },
+     "75-90": {
+      "land_km2": 883534.0,
+      "median_depth_m": 808.116
+     }
+    }
+   },
+   "log_linear": {
+    "land_km2": 6189370.0,
+    "median_depth_m": 754.287,
+    "bands": {
+     "30-45": {
+      "land_km2": 568130.0,
+      "median_depth_m": 550.386
+     },
+     "45-60": {
+      "land_km2": 2087760.0,
+      "median_depth_m": 633.233
+     },
+     "60-75": {
+      "land_km2": 2649950.0,
+      "median_depth_m": 807.841
+     },
+     "75-90": {
+      "land_km2": 883534.0,
+      "median_depth_m": 808.116
+     }
+    }
+   }
+  },
+  "heat_per_w": 1.501,
+  "albedo_w_m2_per_unit_albedo_per_unit_sunlit_share": [
+   64.23107261212267,
+   89.60939466783353
+  ],
+  "sunlit_over_area": [
+   0.51473653878926,
+   0.6881700131217696
+  ],
+  "rivers_km3_yr": 7240.0,
+  "rows": [
+   {
+    "share_of_deserts": 0.01,
+    "additive": {
+     "land_km2": 49224.0,
+     "water_km3_yr": 34.94123602704,
+     "lift_m": [
+      467.499,
+      773.989
+     ],
+     "kwh_per_m3": [
+      0.40146264880952376,
+      0.7991000496031746
+     ],
+     "power_gw": [
+      1.600228287485083,
+      3.185209153822028
+     ],
+     "heat_points": [
+      2.8093071556307165e-05,
+      5.591846449656075e-05
+     ],
+     "albedo_w_m2": [
+      0.004290397946604213,
+      0.016004668654045557
+     ],
+     "albedo_points": [
+      0.0019034596036398461,
+      0.00710056284562802
+     ]
+    },
+    "log_linear": {
+     "land_km2": 61893.700000000004,
+     "water_km3_yr": 43.93471437280201,
+     "lift_m": [
+      550.386,
+      754.287
+     ],
+     "kwh_per_m3": [
+      0.45491160714285717,
+      0.786395386904762
+     ],
+     "power_gw": [
+      2.279992188534537,
+      3.9413708313654845
+     ],
+     "heat_points": [
+      4.0026778804783006e-05,
+      6.919338550720663e-05
+     ],
+     "albedo_w_m2": [
+      0.005394697777257785,
+      0.02012408906779009
+     ],
+     "albedo_points": [
+      0.002393388543592629,
+      0.008928167288283093
+     ]
+    }
+   },
+   {
+    "share_of_deserts": 0.05,
+    "additive": {
+     "land_km2": 246120.0,
+     "water_km3_yr": 174.70618013520001,
+     "lift_m": [
+      467.499,
+      773.989
+     ],
+     "kwh_per_m3": [
+      0.40146264880952376,
+      0.7991000496031746
+     ],
+     "power_gw": [
+      8.001141437425416,
+      15.926045769110141
+     ],
+     "heat_points": [
+      0.0001404653577815358,
+      0.0002795923224828038
+     ],
+     "albedo_w_m2": [
+      0.021451989733021072,
+      0.08002334327022778
+     ],
+     "albedo_points": [
+      0.009517298018199234,
+      0.0355028142281401
+     ]
+    },
+    "log_linear": {
+     "land_km2": 309468.5,
+     "water_km3_yr": 219.67357186401,
+     "lift_m": [
+      550.386,
+      754.287
+     ],
+     "kwh_per_m3": [
+      0.45491160714285717,
+      0.786395386904762
+     ],
+     "power_gw": [
+      11.39996094267268,
+      19.706854156827422
+     ],
+     "heat_points": [
+      0.00020013389402391492,
+      0.00034596692753603313
+     ],
+     "albedo_w_m2": [
+      0.026973488886288928,
+      0.10062044533895047
+     ],
+     "albedo_points": [
+      0.011966942717963145,
+      0.04464083644141547
+     ]
+    }
+   },
+   {
+    "share_of_deserts": 0.1,
+    "additive": {
+     "land_km2": 492240.0,
+     "water_km3_yr": 349.41236027040003,
+     "lift_m": [
+      467.499,
+      773.989
+     ],
+     "kwh_per_m3": [
+      0.40146264880952376,
+      0.7991000496031746
+     ],
+     "power_gw": [
+      16.00228287485083,
+      31.852091538220282
+     ],
+     "heat_points": [
+      0.0002809307155630716,
+      0.0005591846449656076
+     ],
+     "albedo_w_m2": [
+      0.042903979466042144,
+      0.16004668654045556
+     ],
+     "albedo_points": [
+      0.01903459603639847,
+      0.0710056284562802
+     ]
+    },
+    "log_linear": {
+     "land_km2": 618937.0,
+     "water_km3_yr": 439.34714372802,
+     "lift_m": [
+      550.386,
+      754.287
+     ],
+     "kwh_per_m3": [
+      0.45491160714285717,
+      0.786395386904762
+     ],
+     "power_gw": [
+      22.79992188534536,
+      39.413708313654844
+     ],
+     "heat_points": [
+      0.00040026778804782984,
+      0.0006919338550720663
+     ],
+     "albedo_w_m2": [
+      0.053946977772577856,
+      0.20124089067790094
+     ],
+     "albedo_points": [
+      0.02393388543592629,
+      0.08928167288283094
+     ]
+    }
+   },
+   {
+    "share_of_deserts": 0.25,
+    "additive": {
+     "land_km2": 1230600.0,
+     "water_km3_yr": 873.530900676,
+     "lift_m": [
+      467.499,
+      773.989
+     ],
+     "kwh_per_m3": [
+      0.40146264880952376,
+      0.7991000496031746
+     ],
+     "power_gw": [
+      40.00570718712708,
+      79.6302288455507
+     ],
+     "heat_points": [
+      0.0007023267889076793,
+      0.0013979616124140189
+     ],
+     "albedo_w_m2": [
+      0.10725994866510533,
+      0.40011671635113893
+     ],
+     "albedo_points": [
+      0.04758649009099615,
+      0.1775140711407005
+     ]
+    },
+    "log_linear": {
+     "land_km2": 1547342.5,
+     "water_km3_yr": 1098.36785932005,
+     "lift_m": [
+      550.386,
+      754.287
+     ],
+     "kwh_per_m3": [
+      0.45491160714285717,
+      0.786395386904762
+     ],
+     "power_gw": [
+      56.99980471336341,
+      98.53427078413712
+     ],
+     "heat_points": [
+      0.0010006694701195748,
+      0.0017298346376801658
+     ],
+     "albedo_w_m2": [
+      0.13486744443144463,
+      0.5031022266947524
+     ],
+     "albedo_points": [
+      0.05983471358981572,
+      0.22320418220707736
+     ]
+    }
+   }
+  ]
+ },
+ "producer": {
+  "files": {
+   "research/studies/resort_301k/run.py": "9c5576975833744966612373cf48e238fcf50f80ec78914bf6c6d3b6224241b5"
+  },
+  "inputs": {
+   "research/studies/lake_methane/results/lake_methane.json": "c52da55ec7f730a1a70f326ab9a3420c5c7e6125f5548c8fbfe579c3658b38ca",
+   "research/studies/lake_anoxia/results/lake_anoxia.json": "c43fe1516127fe46377309bd36e89a607e1d06d9ff9b71113eeb43fa3e25bb41",
+   "research/studies/domain_synthesis/results/ledgers.json": "0a2a461ba16561667a24ed6f718a2ea2bd6f1a1bb0a7a122a38f107e0f537a75",
+   "resources/results/sea_phosphorus.json": "52225aa3a92c3657be6ae826936d10cb570af2bfb1316516658ae4bb6f5b9d06",
+   "research/studies/food_systems/results/food_systems.json": "7e785672cd4edc5aa52c5d4c1d80e0b310ba4feee781f52024144c061f211ff7",
+   "research/studies/heat_levers/results/heat_levers.json": "a6ac11a72c955e636c8d184cb66c17fec9b29339173db5e8c671b523dbf17a5f",
+   "research/studies/climate_targets/results/climate_targets.json": "6bcab9a6e3749a2c9ab538a6ddc53ae1e5291ec1bc596051e895f04327970a67",
+   "research/studies/coast_water/results/coast_water.json": "da1776a60d61b905f9b417e8d00f365ede93d88984da18c53ac9ff55e0ba5a26",
+   "provisioning/results/power.json": "92d865d7262f4eb0e0e2b41da93efe2f93165a2cc381459eda9dbc34824a6dda",
+   "research/studies/sea_oxygen/results/sea_oxygen.json": "9d729a7b0a97ba347c7ed4294cd976a22e1ebb37efab8415995f0d80b89749d8"
+  }
+ }
+}

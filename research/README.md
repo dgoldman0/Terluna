@@ -91,6 +91,7 @@ the explorable experience, which reads them as baked products, is in
 | [lake_kinds](studies/lake_kinds/README.md) | Ecology's lake model at the resort's 301 K, geography's rain-fed lakes on LOLA, groundwater stage 2, the sea chemistry's soda path, the springs and the anoxic depths' remedies: every lake sorted by kind with what each kind needs | Lake-model columns at 301 K on a first-estimate lake set, Osborn's form, with the energetic regime's 352 m lake and giant beside them; the ventilated depth interpolated between the 100 m and 352 m rungs |
 | [sea_oxygen](studies/sea_oxygen/README.md) | Geography (LOLA's seas and the atlas), climate (the GCM's weather at the seas' cells moved to 301 K by the lake kinds' construction), resources (the held fresh seas) and ecology (lake_oxygen's model and trophic states): the seas' basins, sills and hypsography, and the deep water's mixing, renewal and oxygen at each basin's typical and coldest cells, with the shelves' and bays' nights | One-dimensional columns on one GCM's 3-day means at T21 bounding a basin's circulation; Osborn's rule throughout, Shih and Bouffard's form at the two largest basins |
 | [lake_methane](studies/lake_methane/README.md) | The corrected lake model's saved columns (lake_anoxia's targets, the lake kinds' 301 K ladder and giants, mixing_forms, the seas' basins), lake_anoxia's air and the sea chemistry's acceptors: the lakes' and seas' methane at 301 K by depth and kind, the air it holds, and what aerobic, overturn and anaerobic methanotrophy can cut | An offline methane tracer on saved columns, reproducing lake_anoxia's methane within 4%; Earth's methanotroph rates as design variables; Osborn's form with Shih and Bouffard's beside it |
+| [resort_301k](studies/resort_301k/README.md) | The waters' methane at 301 K and the gas ledger, the lakes' phosphorus lines, the sea phosphorus and food systems, the heat levers, the targets' resort band, the coast water and the power screen: where the branches' work meets at the resort, as the fourth integration's synthesis (methane against the gas pairs, people's phosphorus against the deep lakes, the resort's dimming with the levers, a scale for watering the deserts) | Arithmetic on committed products; no model runs |
 
 The forest-patch folder also holds a [reviewed checkpoint](studies/forest_patch/reviewed/README.md)
 from a separate lineage (57 tests, 90-m spacing, 20-m/s reservoir flow), whose
@@ -136,6 +137,9 @@ python -m research.studies.lake_anoxia.profiles                            # the
 python -m research.studies.lake_kinds.ladder                               # then lake_kinds.run; about 2.3 h on two cores
 python -m research.studies.sea_oxygen.run --columns                        # after sea_oxygen.seas and its extract
 python -m research.studies.lake_methane.run --work                         # after the lake and sea columns; then run
+python -m research.studies.resort_301k.run                                 # after the lake, levers and targets products
+# each lake product step (lake_oxygen.run, lake_anoxia.run, lake_kinds.run, sea_oxygen.run, lake_methane.run,
+# mixing_forms) takes --cache-only to build from its cached runs alone, as the settle tool runs them
 ```
 
 For the environment screens, supply `--protection-archive /path/to/Lunar_Protection_Model.zip`

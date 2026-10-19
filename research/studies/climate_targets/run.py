@@ -15,14 +15,13 @@ in the night's; and how much the 3-day means smooth the heat's extremes, from th
 6.5 hours, carried to the targets as a sensitivity. For the summit tower it gives the air over the summit at every
 target, the warmest target at which the tower's top keeps a winter, bare and with margins, the check against the
 metropolis brief and against the test's own warming; and for the resort it sets the candidates from 298 to 303 K
-against the tower's winter, comfort at the ground, the dimming, rain and deserts, ecology's waters' oxygen (bound by
-commit on domain/ecology until the branches meet) and the margin under a saturated column.
+against the tower's winter, comfort at the ground, the dimming, rain and deserts, ecology's waters' oxygen (read in
+the tree) and the margin under a saturated column.
 """
 from __future__ import annotations
 import hashlib
 import json
 import math
-import subprocess
 import sys
 from pathlib import Path
 
@@ -54,12 +53,11 @@ INPUTS = {EXTRACT: 'terluna.research.climate-targets-extract/5', GASES_GLOW: 'te
           RESOURCES: 'terluna.resources.first-screen/1', GROUNDWATER: 'terluna.geography.groundwater-uptake/1',
           SUMMIT_TOWER: 'terluna.research.summit-tower/1', FORM: 'terluna.research.summit-tower-form/1',
           SITE_WINDS: 'terluna.climate.gcm-site-winds/1'}
-# Ecology's waters' oxygen in the three targets, on domain/ecology: bound by commit until the branches meet, then read
-# in-tree.
-LAKE_OXYGEN = dict(path='research/studies/lake_oxygen/results/lake_oxygen.json', branch='domain/ecology',
-                   commit='bd0097c7c8544da17988e4164deb681209ba6753', blob='6d35334271a96b189fa6ac9e6935cc088aa943c6',
-                   sha256='3025a7b7c8db090b9c1b1c40add90ff3c31f902263253e3fe6327286a08d6f99',
-                   schema='terluna.research.lake-oxygen/1')
+# Ecology's waters' oxygen in the three targets, on the corrected lake model with the wind's deep mixing (read in-tree
+# since the fourth joint integration; the lake studies keep the climate targets they ran on, so the two do not bind
+# each other).
+LAKE_OXYGEN = dict(path='research/studies/lake_oxygen/results/lake_oxygen.json',
+                   schema='terluna.research.lake-oxygen/2')
 OLD_DESIGN = 'A28_dim5_moon'
 BAND_K = tuple(298.0 + 0.5 * i for i in range(11))       # the resort's candidates, 298 to 303 K
 MARGINS_M = (1500.0, 2000.0)     # winter's depth below the top: the design's winter parks span 13.5-15 km
@@ -412,20 +410,12 @@ def at_6_5_hours(state, smooth):
 
 
 def lake_oxygen():
-    """Ecology's waters' oxygen: the in-tree file when its hash matches, else the Git object at the pinned commit."""
-    local = ROOT / LAKE_OXYGEN['path']
-    raw = local.read_bytes() if local.exists() else b''
-    source = 'in-tree'
-    if hashlib.sha256(raw).hexdigest() != LAKE_OXYGEN['sha256']:
-        raw = subprocess.run(['git', '-C', str(ROOT), 'show', f"{LAKE_OXYGEN['commit']}:{LAKE_OXYGEN['path']}"],
-                             check=True, capture_output=True).stdout
-        source = 'git object at the pinned commit'
-    if hashlib.sha256(raw).hexdigest() != LAKE_OXYGEN['sha256']:
-        raise ValueError('the waters\' oxygen product does not match its pin')
+    """Ecology's waters' oxygen, in the tree, and its sha256."""
+    raw = (ROOT / LAKE_OXYGEN['path']).read_bytes()
     data = json.loads(raw)
     if data.get('schema') != LAKE_OXYGEN['schema']:
         raise ValueError('the waters\' oxygen product has another schema')
-    return data, source
+    return data, hashlib.sha256(raw).hexdigest()
 
 
 def crossing_m(ladder, values, celsius):
@@ -567,7 +557,7 @@ def resort_band(data, ex, fits, absorbed, incoming, area, clear, saturated, heat
     """The resort's candidates from 298 to 303 K against winter on the tower, comfort at the ground, the dimming, rain
     and deserts, the waters' oxygen and the margin under a saturated column. The oxygen interpolates ecology's three
     targets: saturation by the seas' median warmth, the lakes by the ground's temperature."""
-    lakes, source = lake_oxygen()
+    lakes, lakes_sha256 = lake_oxygen()
     sat = lakes['saturation']['targets']
     gd, gt = ex['runs'][DESIGN]['ground_k'], ex['runs'][TEST]['ground_k']
     points = dict(lock=gd, resort=300.0, hot=gt)
@@ -623,8 +613,7 @@ def resort_band(data, ex, fits, absorbed, incoming, area, clear, saturated, heat
                         shallow_eutrophic_hypoxic_nights=by_ground(shallow, target)),
             gap_with_the_added_heat_answered_w_m2=[saturated - max(answered), saturated - min(answered)]))
     return dict(candidates_k=list(BAND_K), rows=rows,
-                oxygen_source=dict(path=LAKE_OXYGEN['path'], branch=LAKE_OXYGEN['branch'], commit=LAKE_OXYGEN['commit'],
-                                   sha256=LAKE_OXYGEN['sha256'], read_from=source,
+                oxygen_source=dict(path=LAKE_OXYGEN['path'], sha256=lakes_sha256,
                                    targets_ground_k=points, deep=deep, shallow=shallow,
                                    saturation={n: dict(sea_median_c=sat[n]['sea_median_c'], mg_l=sat[n]['mg_l'])
                                                for n in points}))
@@ -701,11 +690,8 @@ def results():
                        a, b, smooth, towers)
     return dict(
         schema=SCHEMA,
-        producer=dict(files={c: digest(c) for c in CODE}, inputs={p: digest(p) for p in INPUTS},
-                      pinned_inputs={LAKE_OXYGEN['path']: dict(branch=LAKE_OXYGEN['branch'], commit=LAKE_OXYGEN['commit'],
-                                                               sha256=LAKE_OXYGEN['sha256'],
-                                                               bind='Read in-tree once the branches meet; until then '
-                                                                    'from Git at the commit.')},
+        producer=dict(files={c: digest(c) for c in CODE},
+                      inputs={**{p: digest(p) for p in INPUTS}, LAKE_OXYGEN['path']: digest(LAKE_OXYGEN['path'])},
                       constants=dict(MOON_RADIUS=K.MOON_RADIUS, JULIAN_YEAR_DAYS=K.JULIAN_YEAR_DAYS,
                                      JULIAN_DAY=K.JULIAN_DAY)),
         evidence=EVIDENCE, reading_rule=READING_RULE,

@@ -21,9 +21,9 @@
    "research/runs/sea_oxygen/forcing.npz": "0bdbbdafc92b1368191c79c779d0859b8a804fe5017b79b590635ae95f289531",
    "research/runs/sea_oxygen/forcing.json": "e1f51700611576cc81a69128ba1f3212b6d149c74aa88cbad4fe95fc353d4d44",
    "research/studies/lake_oxygen/climate_targets_as_run.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "fb040b35b875fcc90000fd38fa43eb98c574b2c126b2a55f8287d2adf92c21ac",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "8ceea1ab802f6dc6f885bdf510a3f4052a2ea50a46a648f7a0a58d0b4a982de3",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
-   "research/studies/lake_oxygen/results/lake_oxygen.json": "dd6c9519957da7a8f7e4dc6fe8a494bfa1cc91f9ebec0cffb9b96d2a46357864",
+   "research/studies/lake_oxygen/results/lake_oxygen.json": "574060b20e7bd0e8bf7d464182e19d853f8ba1a465ca5aebb7dc041ffa05ff96",
    "research/runs/sea_oxygen/columns.json": "2d56e99280f4e021bc1e53bd18bc3c798f1d72e3b2cd3d7b23fc067ec615e910"
   },
   "constants": {
@@ -33485,5 +33485,5 @@
   "sha256": "2d56e99280f4e021bc1e53bd18bc3c798f1d72e3b2cd3d7b23fc067ec615e910",
   "cases": 90
  },
- "seconds": 41.1
+ "seconds": 37.6
 }

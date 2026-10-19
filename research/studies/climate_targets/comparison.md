@@ -9,12 +9,16 @@ Through every correction of the day, from the heat weighted by area and read at 
 (4916121) and each mean's humidity (2191b43), their order has held: the hot world is the hottest, wettest and least
 dimmed, the lock the coolest, driest and most dimmed, and the resort lies between them in every figure.
 
-Each figure is read at its commit. On this branch at b83d542: [what each target climate takes](README.md) and its
-product, [results/climate_targets.json](results/climate_targets.json), with winter on the tower and the resort's best
-value from 6448ae7 (the *targets*); [where light limits growth](../light_limitation/README.md) (the *light study*); and
-the [register](../../decisions.md). On other branches: `research/studies/lake_oxygen` on `domain/ecology` at bd0097c
-(the *lakes*); `research/studies/heat_levers` on `domain/resources` at f52ec40 (the *levers*); and `atmosphere/rain`
-with `visualization/rain-audio` on `domain/atmosphere` at 2973f91 (the *rain*).
+Each figure comes from the studies in this tree since the fourth joint integration of 19 October:
+[what each target climate takes](README.md) and its product,
+[results/climate_targets.json](results/climate_targets.json), with winter on the tower and the resort's best value (the
+*targets*); [where light limits growth](../light_limitation/README.md) (the *light study*);
+[the waters' oxygen](../lake_oxygen/README.md) on the corrected lake model, with
+[the lakes by kind](../lake_kinds/README.md), [the seas' oxygen](../sea_oxygen/README.md) and
+[the waters' methane](../lake_methane/README.md) at 301 K (the *lakes*); [the heat levers](../heat_levers/README.md)
+(the *levers*); [atmosphere/rain](../../../atmosphere/rain/README.md) with
+[the sound lab](../../../visualization/rain-audio/README.md) (the *rain*); and the [register](../../decisions.md).
+[The resort at 301 K across the domains](../resort_301k/README.md) works out where they meet.
 
 ## The key figures
 
@@ -27,7 +31,8 @@ with `visualization/rain-audio` on `domain/atmosphere` at 2973f91 (the *rain*).
 | Land's time with the 2 m wet-bulb above 28 °C | 31%, and 2.1% above 31 °C | under 1% | none | The same |
 | Seas' surface, median | 34.5 °C | 29.5 °C | 24.1 °C | The same |
 | Oxygen at saturation, at the seas' median warmth | 7.06 mg/L | 7.68 mg/L | 8.43 mg/L | Calculation (lakes); the resort interpolated (targets) |
-| Deep crater lakes' deepest tenth, oligotrophic water: mean oxygen | 0.0–0.06 mg/L | 0.13–0.70 mg/L | 0.6–1.5 mg/L | Lake model on the GCM's weather (lakes); the resort interpolated (targets) |
+| Deep crater lakes, 352 m: overturns in ten years (120 lunar cycles), Osborn's rule; Shih and Bouffard's | 29–30; 12 | 54–68; 5–14 | 62–74; 11 | Lake model on the GCM's weather with the wind's mixing (lakes); the resort run at 301 K |
+| Their deepest tenth, oligotrophic water: mean oxygen, Osborn's rule; Shih and Bouffard's | 4.2–4.9; 1.6 mg/L | 5.7–6.3; 3.5 mg/L | 6.8–7.4; 4.8 mg/L | The same |
 | Winter on the tower: its length in sub-freezing mean air; the top's mean air; the open winter disk, 13.8 km up | none; 2.9 °C; 10.6 °C | 3.5 km; −3.0 °C; 5.6 °C | 9.9 km; −9.3 °C; 0.2 °C | GCM output over the summit; the resort interpolated (targets) |
 | Growth lost through light to the target's own dimming | none | 0.31–1.64% | 0.62–3.3% | Calculation (targets, light study) |
 | Margin under a saturated column, the added heat answered | 1.3–1.8 W/m² | 11.9–15.0 W/m² | 22.3–28.6 W/m² | Calculation against the column model's ceiling (targets) |
@@ -58,8 +63,9 @@ up at 0.92–1.00 atm. The ground is hot and humid at every latitude: the air at
 percentile of 39.3 °C, and the wet-bulb temperature passes 28 °C for 49% of the land's time within 15° of the equator,
 and 31 °C, near where young, healthy adults can no longer keep up light activity (Vecellio et al. 2022), for 2.1%. Its
 hottest days lie far above the register's pleasantly warm ones (25 September), and with the tower's top above freezing
-it misses the register's wish for winter on the tallest sky tower (17 October). Its deep lakes go anoxic even in
-oligotrophic water, and its eutrophic shallows run hypoxic on 81–99% of nights. Its balance rests on unsaturated air,
+it misses the register's wish for winter on the tallest sky tower (17 October). Its deep lakes turn over half as often
+as the cooler targets' and keep 4.2–4.9 mg/L in their oligotrophic deepest tenth by Osborn's rule, 1.6 mg/L and a third
+of the time anoxic by the energetic regime, with richer deep water low or anoxic. Its balance rests on unsaturated air,
 1.3–1.8 W/m² under a saturated column's ceiling, and it still needs the shared 3.7–5.3% of dimming, without which the
 added heat would warm it 4–7 K more.
 
@@ -71,25 +77,26 @@ the register names, with a fifth of the land kept as megaparks and gardens. Agai
 the dimming and adds 3.5% to the land's rain. It still takes 8.2–10.9% of the sunlight in all, 531–660 TW for its own
 share, from a fleet whose tiles and photon authority already bind any dimmer. The open winter parks at 13.5–15 km lose
 their winter above about 296 K; at 301 K winter holds the highest disk, 21.4 km up, and the crown, both sealed in the
-present design, so open winter decks would move up to them. Its deep lakes hold 0.13–0.70 mg/L in the oligotrophic
-deepest tenth, and its eutrophic shallows fall below 2 mg/L on 61–94% of nights. Mixing two physics, its figures are the
-least certain of the three until a design case at the target settles them.
+present design, so open winter decks would move up to them. Its 352 m lakes turn over in 54–68 of 120 lunar cycles and
+keep 5.7–6.3 mg/L in their oligotrophic deepest tenth, 3.5 mg/L by the energetic regime; its giants, 70% of the lake
+area, go anoxic at depth when mesotrophic or richer. Mixing two physics, its figures are the least certain of the three
+until a design case at the target settles them.
 
 **The lock** is the design case, one physics and the GCM's own output, around which the plan's designs and experiences
 have been built since 9 October. It is the mildest at the ground: the land's wet-bulb at 2 m has a median of 16.6 °C and
 a 99th percentile of 21.8 °C and never passes 28 °C, and the air's 99th percentile is 27.8 °C, so its hottest days are
 pleasantly warm. It keeps the tower's designed winter, 9.9 km of sub-freezing air with the open winter parks near
-freezing, 0.2 °C at 13.8 km. Its waters hold the most oxygen, with eutrophic shallows hypoxic on 20–77% of nights, and
-its margin under a saturated column is the widest. It is also the costliest and the driest: 12.6–16.6% of the sunlight
-in all and 1,052–1,340 TW for its own share, the dimmer growing from 3% of the titania stack's light to 15–19%; 2.25 mm
-of rain a day on land with 38% of it desert; and 0.62–3.3% of the growth lost through light, most of it from the
-light-sensitive life.
+freezing, 0.2 °C at 13.8 km. Its waters hold the most oxygen, its oligotrophic and mesotrophic deep water staying oxic
+under either mixing form, and its margin under a saturated column is the widest. It is also the costliest and the
+driest: 12.6–16.6% of the sunlight in all and 1,052–1,340 TW for its own share, the dimmer growing from 3% of the
+titania stack's light to 15–19%; 2.25 mm of rain a day on land with 38% of it desert; and 0.62–3.3% of the growth lost
+through light, most of it from the light-sensitive life.
 
-At the ground the rain falls from cloud bases 7.4, 6.1 and 5.0 km up in the hot world, the resort at 300 K and the lock,
-and only drops that leave the cloud at 2.4, 1.9 and 1.5 mm or more survive the fall (rain, a calculation on independent
-drops). In the sound lab the Moon's heavy rain is 16–19 dB quieter than Earth's and darker in every target, its drops
-striking at about a third of Earth's speed, and the hot world's is the loudest (a rendering of an assumed transfer, not
-yet heard).
+At the ground the rain falls from cloud bases 7.4, 6.4 and 5.1 km up in the hot world, the resort at 301 K and the lock,
+and only drops that leave the cloud at 2.4, 2.0 and 1.6 mm or more survive the fall (rain, a calculation on independent
+drops, its column at the repository's heat capacity). In the sound lab the Moon's heavy rain is 16–19 dB quieter than
+Earth's and darker in every target, its drops striking at about a third of Earth's speed, and the hot world's is the
+loudest (a rendering of an assumed transfer, not yet heard).
 
 ## Plant growth
 
@@ -108,46 +115,60 @@ margins' at 0.60–0.71, and the deep canopy loses 0.97% of its twilight photosy
 
 ## The lakes
 
-In every target the deep crater lakes, 352 m deep at the median, overturn only in the rarest cold, three to six times in
-ten years, and their deep water goes 2.5–3.8 years on average without meeting the air (lakes; the lake model on each
-target's GCM weather, the resort at 300 K built from the lock's weather moved 0.433 of the way). Their deepest tenth is
-anoxic in mesotrophic and richer water in all three. In oligotrophic water it holds 0.6–1.5 mg/L in the lock, under 0.5
-mg/L for 34–69% of the time; 0.2–0.8 mg/L in the resort (61–88%); and 0.0–0.06 mg/L in the hot world (95–100%). An
-overturn leaves a whole oligotrophic lake at 2.4–4.9, 1.3–3.8 and 0.1–0.9 mg/L in the three, as overturns in Earth's
-deep tropical lakes kill fish, and its surface recovers within half a day to three days. The lakes deeper than 1,925 m,
-half the lake area, take 11–25 years in the lock and the resort to draw their deep water from saturation to 2 mg/L.
-Eutrophic shallows fall below 2 mg/L on 20–77%, 57–93% and 81–99% of nights, and productive ponds' floors are anoxic
-most of the month in every target. The mixing below the thermocline carries the most: at ten times the central
-dissipation, oligotrophic deep water keeps 2.7–3.6 mg/L.
+The deep crater lakes, 352 m deep at the median, turn over far more often than first found: by the wind's energy below
+the night's mixed layer, the share Earth's lakes pass to their stratified water (0.3%, 0.2–0.4%), the whole column turns
+over in 62–74 of the 120 lunar cycles of ten years in the lock, 54–68 in the resort at 301 K and 29–30 in the hot world,
+its deep water a mean 0.1–0.3 years from the air in the cooler targets and 0.4–1.4 in the hot world (lakes). That rests
+on Osborn's rule for turning dissipation into mixing; Shih and Bouffard's energetic regime, the other end of the form,
+turns them over 11, 5–14 and 12 times. Their deepest tenth keeps its oxygen in nutrient-poor water: 6.8–7.4, 5.7–6.3 and
+4.2–4.9 mg/L in the three by Osborn's rule, 4.8, 3.5 and 1.6 by the energetic regime, the hot world's anoxic a third of
+the time. Mesotrophic deep water stays oxic in the cooler targets by Osborn's rule (5.0–6.1 mg/L in the lock, 3.8–4.8 in
+the resort) and runs low or anoxic in the resort and the hot world by the energetic regime; eutrophic deep water keeps
+1.9–4.2 mg/L in the cooler targets and runs anoxic half the time in the hot world, and new reservoirs run low in every
+target. Productive shallows, mixed through the day by the same share, fall below 2 mg/L on at most 1% of nights, and on
+up to 12%, 38% and 70% of the three targets' nights at the bracket's fixed dissipation.
 
-The lakes' remedies serve every target, and the need for them grows with the warmth: deep water renewed by piped oxygen
-or driven mixing, or deep communities built for little oxygen, and shallows kept clear and nutrient-poor or aerated.
-Their sizing, with the methane the anoxic water makes and the gas that builds up in the depths, is pending: ecology's
-follow-up is still running and uncommitted. The levers add that methane emissions rise with warmth, about 1.8 times from
-the lock to the resort and 3.8 times to the hot world on the earlier product's sea medians, so warm lakes push against a
-lower gas pair.
+At 301 K the lakes by kind put a tenth of the lake area in lakes the nights ventilate to their floors (403,700 km², from
+226,500 to 629,700 by the bracket), a fifth in deep lakes to 1,000 m, whose floors stay oxic in nutrient-poor and
+mesotrophic water, and seven tenths in 1,367 giants deeper than 1,000 m, which turn over once in years, keep 2.5–4.5
+mg/L at depth to 1,925 m in oligotrophic water and go anoxic at depth when mesotrophic or richer; the 3,500 m giant goes
+anoxic within thirteen years even oligotrophic. The held fresh seas renew within years by Osborn's rule, their
+area-weighted deepest tenth at 4.1 mg/L nutrient-poor, 2.1 mesotrophic and 1.5 eutrophic, and the great basins of
+Procellarum and Ingenii renew far less by the energetic regime (the seas' oxygen). Chemoclines do not hold under the
+wind, and degassing does not pay.
+
+The methane follows the water's richness more than its warmth. At 301 K nutrient-poor lakes and seas send 0.57 Tg a year
+and, with the ledger's other sources cut by biology's 90%, hold the air at 1.01–1.75 ppm, under the held 1.87 ppm with
+thin room; mesotrophic waters send 7.8 Tg and need 4.7–6.9 Tg a year of removal at the held pair, and the giants carry
+most of the richer waters' methane (the waters' methane). With the lakes alone scaled from their 352 m lakes,
+nutrient-poor lakes send 0.37, 0.34 and 0.29 Tg a year in the lock, the resort at 300 K and the hot world
+([lake anoxia](../lake_anoxia/README.md)). The deep lakes stay nutrient-poor while people's dissolved phosphorus stays
+small, 15–57 g a person a year at the middle settling
+([the resort at 301 K across the domains](../resort_301k/README.md)), and their remedies serve every target: oxygen
+piped to the giants' depths or driven mixing, deep communities built for little oxygen, and shallows kept clear and
+nutrient-poor or aerated.
 
 ## The levers that ease the shield
 
 The levers give each saving in points, a point being 1% of the hot world's absorbed sunlight, 225.4 W/m², the unit of
-the targets' dimming; they take the glow's efficacy as 0.71. Ranked:
+the targets' dimming, on the corrected targets with the resort at 301 K and the glow's efficacy at 0.645–0.71. Ranked:
 
 | Rank | Lever | Points saved | What it takes | Evidence |
 |---|---|---|---|---|
-| 1 | The glow's set-aside answers: the annulus absorber or the ultraviolet mirror | 0.68–0.83 | A film change and a check above the limb, or 60% more fleet mass | Screen on the fleet's products |
-| 2 | Food made in orbit with the beams' power | 0.13–0.98 | Food plants in the array's industry; the food's carbon becomes the import | Arithmetic on the synthesis's ledgers |
-| 3 | Methane and N2O at the low pair | 0.76–0.81 | Contactors through 1.0–1.4% of the air a year, 1.0–1.6 TW; warm lakes push the other way | Column forcing; design-guess costs |
-| 4 | White roofs and silver foliage | 0.08–0.38 | Little beyond adopted designs; cooler cities | Kernel arithmetic |
+| 1 | The glow's set-aside answers: the annulus absorber or the ultraviolet mirror | 0.62–0.83 | A film change and a check above the limb, or 60% more fleet mass | Screen on the fleet's products |
+| 2 | Food made in orbit with the beams' power | 0.13–0.98 | Food plants in the array's industry; the food's carbon, 0.47–0.71 Gt a year, needs a return path | Arithmetic on the synthesis's ledgers and the food study |
+| 3 | Methane and N2O at the low pair | 0.79–0.81 | With nutrient-poor waters, contactors through 0.4–0.8% of the air a year; N2O decomposition 0.96–1.47 TW | Column forcing; design-guess costs; the waters traced at 301 K |
+| 4 | White roofs and silver foliage | 0.07–0.39 | Little beyond adopted designs; cooler cities | Kernel arithmetic by latitude |
 | 5 | Night-side cirrus thinning | 0 to 1.0, sign open | 12–240 kt of feldspar a year from high platforms; adds rain | Earth's models |
-| 6 | The water top-up's fall | 0 to 2.3, first millennia only | Momentum binds any braking above the air | Energy and momentum accounting |
-| 7 | 1.0 atm | 0.91–0.97 in the hot world, none in the lock | Reopens 1.2 atm; 17% less lift | Clear-sky columns |
-| 8 | Brighter deserts | 0.23–2.09 | Covers wild land; takes rain four times as fast as dimming | Kernel arithmetic, Earth's models |
-| 9 | CO2 below 400 ppm | 0.32–0.88 | 34–46% of the growth a point at 280 ppm | Column and leaf model |
+| 6 | The water top-up's fall | 0 to 1.6–2.3, first millennia only | Momentum binds any braking above the air | Energy and momentum accounting |
+| 7 | 1.0 atm | 0.91–0.97 clear sky in the hot world, 0.46–0.71 with cloud masking; −0.11 in the lock | Reopens 1.2 atm; 17% less lift | Clear-sky columns, Earth's cloud masking |
+| 8 | Brighter deserts | 0.17–1.94 | Covers wild land; takes rain four times as fast as dimming | Kernel arithmetic by latitude, Earth's models |
+| 9 | CO2 below 400 ppm | 0.33–0.90 | 34–46% of the growth a point at 280 ppm | Column and leaf model |
 
-The first four together save 1.7–3.0 points, against dimming in all of 3.7–5.3% for the hot world, 8.2–10.9% for the
-resort and 12.6–16.6% for the lock. They can answer much of the plan's added heat, and bringing the Moon down to the
-resort or the lock stays mostly dimming. The gas pairs carry their own overlap, the other levers act on separate terms,
-and no lever has yet run in a climate model.
+The first four together save 1.6–3.0 points, against dimming in all of 3.7–5.3% for the hot world, 8.2–10.9% for the
+resort and 12.6–16.6% for the lock, 15–37% of the resort's. They can answer much of the plan's added heat, and bringing
+the Moon down to the resort or the lock stays mostly dimming. The gas pairs carry their own overlap, the other levers
+act on separate terms, and no lever has yet run in a climate model.
 
 ## What stays open
 
@@ -158,15 +179,16 @@ and no lever has yet run in a climate model.
 - **The GCM's high-cloud check.** The refit's high cloud carries about 5.6 W/m² of the hot world's net cloud warming
   (levers, arithmetic on the GCM's output). Its range from its water and its crystals' size, offline in minutes, may
   move every target's dimming more than seeding could, and the longwave refit's check at the settled state goes with it
-  ([plan](../../plan.md), item 3).
+  ([plan](../../plan.md), item 5).
 - **Convection over water at lunar gravity.** PlaSim carries Miller et al.'s free convection over water at Earth's
   gravity, which at lunar gravity falls to 0.55 of that. In the lakes' slab check, a calculation, the Earth constant
   leaves the GCM's water 0.5–1.2 K cooler, so the seas' figures, their oxygen with them, may sit up to about a kelvin
   cool.
 - **Runs at the chosen target.** A design case at the target, a 20-year GCM run of about 1.5 hours on four ranks,
   settles its climate and the tower's air with one physics; the glow pair from it, two more runs, fixes the glow's
-  efficacy, now 0.645–0.71; geography's lakes, the atlas globe and the studies that read the design climate then
-  regenerate once. A range carried by its ends takes a design case at each end.
+  efficacy, now 0.645–0.71; the lake studies, which keep the targets they ran on until then, geography's lakes, the
+  atlas globe and the studies that read the design climate then regenerate once. A range carried by its ends takes a
+  design case at each end.
 - **The author's choices.** The target, or the range or distribution to carry (the resort set at 301 K on 18 October);
   and the levers' questions: whether the glow's set-aside answers return if a cooler target is chosen, whether the
   beams' food may be made in orbit with its carbon taken as the import, and whether the high cloud's range runs before

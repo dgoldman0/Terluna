@@ -37,10 +37,11 @@ at 300 K, falls 5.7%.
   1.0–1.4×10⁹ kg of air a second, the scale of the build's whole delivery stream.
 - **The removal's own heat is small.** At the low pair it is 0.03–0.04 W/m² (0.26–0.40 with half cuts), against the
   1.78–1.82 W/m² it saves.
-- **The lakes tie the methane to the target.** Ecology's lake model ([the waters' oxygen](#sources), which the targets
-  bind) finds the deep crater lakes' deepest tenth anoxic in mesotrophic and richer water in every target, and in
-  oligotrophic water at 0.6–1.5 mg/L in the lock, 0.1–0.7 in the resort at 301 K and under 0.1 in the hot world, with
-  productive shallows' floors anoxic most of the month. Anoxic water and sediment make methane, and in the synthesis's
+- **The lakes tie the methane to the target.** Ecology's corrected lake model, with the wind's deep mixing
+  ([the waters' oxygen](#sources), which the targets bind), keeps the deep crater lakes' oligotrophic deepest tenth at
+  6.8–7.4 mg/L in the lock, 5.6–6.2 in the resort at 301 K and 4.2–4.9 in the hot world by Osborn's rule, and leaves
+  richer and warmer deep water low or anoxic by the energetic regime and in the giants. Anoxic water and sediment make
+  methane, and in the synthesis's
   ledger the wild's lakes and wetlands make most of it (12.8–218 Tg a year, 58.9 central). Methane emissions rise with
   warmth at about 0.96 eV across scales (Yvon-Durocher et al. 2014): 1.9 times from the lock's sea median, 24.1 °C, to
   the resort's 29.5 °C and 3.5 times to the hot world's 34.5 °C. As an indicator, the wild sources the biology leaves,
@@ -142,7 +143,7 @@ On Earth cirrus warm the planet by about 5 W/m² on net, and AR6 puts the most t
   (Kristjánsson et al. 2015).
 - **The GCM's high cloud is itself the open check.** PlaSim makes cloud from relative humidity at Earth's thresholds, in
   coarse top layers, with crystal sizes carried past their tables; it has no ice nucleation, so it cannot represent
-  seeding. The plan's item 3 gives the high cloud a range from its water and crystal size, offline in minutes. That
+  seeding. The plan's item 5 gives the high cloud a range from its water and crystal size, offline in minutes. That
   range may move the hot world itself by more than seeding could, and comes first.
 - *Evidence: a concept on Earth's literature, beyond what the project's models compute.*
 
@@ -299,6 +300,7 @@ python -m pytest research/studies/heat_levers
 ## Sources
 
 Published values are in [sources.json](sources.json), with how far each was read. Ecology's waters' oxygen,
-`research/studies/lake_oxygen` on `domain/ecology` at bd0097c, comes through the climate targets, which bind it, and the
-product carries the deep lakes' figures. Ecology's waters' methane, `research/studies/lake_methane` on `domain/ecology`
-at 4e4f710, was read with `git show`; the README quotes its numbers, and the product binds none of them.
+[the waters' oxygen](../lake_oxygen/README.md), comes through the climate targets, which bind it, and the product
+carries the deep lakes' figures. The README quotes [the waters' methane](../lake_methane/README.md), whose numbers the
+product binds none of; [the resort at 301 K across the domains](../resort_301k/README.md) sets them against the gas
+pairs.

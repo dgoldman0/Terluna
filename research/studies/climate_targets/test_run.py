@@ -84,7 +84,7 @@ def test_product_binds_its_code_and_inputs(product):
     assert product['schema'] == R.SCHEMA
     for path, h in product['producer']['files'].items():
         assert hashlib.sha256((R.ROOT / path).read_bytes()).hexdigest() == h, path
-    assert set(product['producer']['inputs']) == set(R.INPUTS)
+    assert set(product['producer']['inputs']) == set(R.INPUTS) | {R.LAKE_OXYGEN['path']}
     for path, h in product['producer']['inputs'].items():
         if path == R.EXTRACT and not extract_present():
             continue
@@ -909,7 +909,8 @@ def test_the_resort_band_matches_the_targets(product):
     assert r['gap_with_the_added_heat_answered_w_m2'] == pytest.approx(t['gap_with_the_added_heat_answered_w_m2'])
     assert r['comfort']['wet_bulb_2m_p99_c'] == pytest.approx(t['climate']['wet_bulb_2m_p99_c'])
     o = product['resort_band']['oxygen_source']
-    assert o['sha256'] == R.LAKE_OXYGEN['sha256'] and o['saturation']['resort']['mg_l'] == 7.777
+    assert o['sha256'] == product['producer']['inputs'][R.LAKE_OXYGEN['path']]
+    assert o['saturation']['resort']['mg_l'] == 7.777
     temps = sorted(band)
     for lo, hi in zip(temps, temps[1:]):
         assert band[hi]['oxygen']['saturation_mg_l'] < band[lo]['oxygen']['saturation_mg_l']
@@ -917,9 +918,9 @@ def test_the_resort_band_matches_the_targets(product):
         assert band[hi]['tower']['tower_below_freezing_km'] < band[lo]['tower']['tower_below_freezing_km']
 
 
-def test_the_lake_oxygen_pin_reads():
-    data, source = R.lake_oxygen()
-    assert data['schema'] == R.LAKE_OXYGEN['schema'] and source in ('in-tree', 'git object at the pinned commit')
+def test_the_lake_oxygen_reads_in_tree():
+    data, digest = R.lake_oxygen()
+    assert data['schema'] == R.LAKE_OXYGEN['schema'] and len(digest) == 64
 
 
 def test_the_study_readme_states_the_tower(product):
@@ -988,7 +989,7 @@ def test_the_study_readme_states_the_resort_band(product):
         agree(numbers(cell), [band[k]['rain']['land_rain_mm_day'], 100 * band[k]['rain']['land_desert']], k)
     for cell, k in zip(rows["Seas' oxygen at saturation"], keys):
         agree(numbers(cell), [band[k]['oxygen']['saturation_mg_l']], k)
-    for cell, k in zip(rows["Eutrophic shallows' nights below 2 mg/L"], keys):
-        agree(numbers(cell), [100 * v for v in band[k]['oxygen']['shallow_eutrophic_hypoxic_nights']], k)
+    for cell, k in zip(rows["Deep lakes' oligotrophic deepest tenth"], keys):
+        agree(numbers(cell), band[k]['oxygen']['deep_oligotrophic_deepest_tenth_mg_l'], k)
     for cell, k in zip(rows['Under a saturated column, the added heat answered'], keys):
         agree(numbers(cell), band[k]['gap_with_the_added_heat_answered_w_m2'], k)

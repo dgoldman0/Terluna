@@ -1,12 +1,12 @@
 # The lakes' and seas' methane at the resort's 301 K, and the biology that eats it
 
 18 October 2026. The author set the resort at 301 K on 18 October, climate_targets' recommendation within the 300–302 K
-band the summit tower's winter allows ([the register](../../decisions.md) on domain/climate), and approved this study
-after [the lakes' anoxic depths](../lake_anoxia/README.md) reckoned the air's methane with every lake at the flux of its
-352 m lakes, while lakes over 1,000 m deep hold 70% of the lake area, and left the biology of methanotrophs designed for
-sudden overturns undone. Here methane is a tracer of its own: [tracer.py](tracer.py) carries it through the columns the
-lake model (`biosphere/ecology/lake.py`) saved, with [columns.py](columns.py) reading them and [biology.py](biology.py)
-holding the methane-eating biology's ranges; [run.py](run.py) writes
+band the summit tower's winter allows ([the register](../../decisions.md#the-target-climate-17-october-2026)), and
+approved this study after [the lakes' anoxic depths](../lake_anoxia/README.md) reckoned the air's methane with every
+lake at the flux of its 352 m lakes, while lakes over 1,000 m deep hold 70% of the lake area, and left the biology of
+methanotrophs designed for sudden overturns undone. Here methane is a tracer of its own: [tracer.py](tracer.py) carries
+it through the columns the lake model (`biosphere/ecology/lake.py`) saved, with [columns.py](columns.py) reading them
+and [biology.py](biology.py) holding the methane-eating biology's ranges; [run.py](run.py) writes
 [results/lake_methane.json](results/lake_methane.json) (schema `terluna.research.lake-methane/1`); the published values
 and how far each was read are in [sources.json](sources.json).
 
