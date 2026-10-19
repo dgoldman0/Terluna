@@ -878,7 +878,7 @@
     },
     {
       "topic": "domain_synthesis",
-      "condition": "three_domains_merged_2026_10_12; four_refreshes_of_main_studies; former_cross_branch_inputs_read_in_tree; five_joint_ledgers_at_the_authors_choices; authors_decisions_2026_10_12; beamed_power_chosen_2026_10_12_crowns_and_receivers_at_loads_2_45_ghz; gases_warming_in_the_deep_column_computed; gases_held_at_1_9_and_0_1_ppm_by_the_authors_choice; five_branches_merged_2026_10_17; glow_dimming_at_the_gcms_efficacy_0_71; climate_targets_three_targets_and_the_heat_beyond_sunlight; target_climate_open_2026_10_17; six_branches_merged_2026_10_19; resort_set_at_301k_2026_10_18; resort_301k_synthesis; lake_studies_on_the_targets_they_ran_on_until_the_301k_design_case",
+      "condition": "three_domains_merged_2026_10_12; four_refreshes_of_main_studies; former_cross_branch_inputs_read_in_tree; five_joint_ledgers_at_the_authors_choices; authors_decisions_2026_10_12; beamed_power_chosen_2026_10_12_crowns_and_receivers_at_loads_2_45_ghz; gases_warming_in_the_deep_column_computed; gases_held_at_1_9_and_0_1_ppm_by_the_authors_choice; five_branches_merged_2026_10_17; glow_dimming_at_the_gcms_efficacy_0_71; climate_targets_three_targets_and_the_heat_beyond_sunlight; target_climate_open_2026_10_17; six_branches_merged_2026_10_19; resort_set_at_301k_2026_10_18; resort_301k_synthesis; lake_studies_on_the_targets_they_ran_on_until_the_301k_design_case; resort_301k_made_the_design_climate_2026_10_19",
       "material": [
         "studies/domain_synthesis/README.md",
         "integration/domains.md",
@@ -901,6 +901,21 @@
         "Food made in orbit takes 0.13-0.98 points off the dimming, and its carbon, 0.47-0.71 Gt a year, needs its own return path (studies/heat_levers)."
       ],
       "next_session_task": "The author's word on the 301 K design case; then the design case, the glow pair and the lakes' rerun on its weather. Meanwhile the waters' design and the deserts' watering are the author's to weigh on the synthesis (studies/resort_301k)."
+    },
+    {
+      "topic": "aquatic_programme",
+      "condition": "plan_agreed_and_locked_in_on_main_2026_10_19; open_water_nutrient_poor_and_rich_in_species; living_sinks_for_minerals_and_methane_as_direction; work_waits_for_the_authors_word",
+      "material": [
+        "studies/aquatic_biogeochemistry/plan.md",
+        "decisions.md"
+      ],
+      "unresolved": [
+        "the seas' magnesium: the managed route leaves none, and a floor of 0.05–0.5 mmol/kg is studied on resources",
+        "the deep mixing's form, Osborn's rule against Shih and Bouffard's energetic regime, checked first in turbulence columns on climate",
+        "the floors' methane share, a bracket of 0.3–0.8 around 0.5, tied to the floors' make-up on ecology",
+        "the photosynthetic calcifiers' 354-hour night at about 30 °C"
+      ],
+      "next_session_task": "Nothing starts before the author's word; then the plan's order (studies/aquatic_biogeochemistry/plan.md): the seas' chemistry with magnesium kept on resources, the calcifiers and the floors on ecology, the mixing form's check on climate, then the harvests and the coupled study."
     }
   ]
 }

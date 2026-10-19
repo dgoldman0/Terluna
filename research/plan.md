@@ -299,13 +299,18 @@ state sets the air's methane more than the gas pair does, people's dissolved pho
 stay nutrient-poor, the seas get almost none of it, and watering the deserts takes 35–44 km³ a year and 2.3–3.8 GW for
 each 1% of them.
 
-Waiting on the author: whether the resort's setting at 301 K starts its design case, with new runs held until then
-(register, 17–18 October); the waters' trophic design and how much of the deserts to water
-([the resort at 301 K across the domains](studies/resort_301k/README.md)); food made in orbit and its carbon's return
-([heat levers](studies/heat_levers/README.md)); the constraints review's recommendations for the fleet; the build's
-delivery heat, which the water top-up extends for millennia; the sea chemistry's floor ordering and the summit site
-product's rebuild, each a review's fix awaiting a yes; the desert note (research drive, deserts/desert_analysis.md) for
-review; and the taxonomy, on hold for later, with its open choices and the aerophytes' scientific name.
+On 19 October the author made the resort at 301 K the design climate, held the waters' open water nutrient-poor and
+rich in species with productive habitats where nutrients gather, and agreed the aquatic programme, whose plan is locked
+in on main and whose work runs on the domain branches at the author's word
+([register](decisions.md#the-design-climate-and-the-waters-19-october-2026),
+[the plan](studies/aquatic_biogeochemistry/plan.md)).
+
+Waiting on the author: the go-ahead for the design case at 301 K and for the aquatic programme's work; how much of the
+deserts to water ([the resort at 301 K across the domains](studies/resort_301k/README.md)); food made in orbit and its
+carbon's return ([heat levers](studies/heat_levers/README.md)); the constraints review's recommendations for the fleet;
+the build's delivery heat, which the water top-up extends for millennia; the summit site product's rebuild, a review's
+fix awaiting a yes; the desert note (research drive, deserts/desert_analysis.md) for review; and the taxonomy, on hold
+for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 
@@ -317,18 +322,21 @@ levers on the corrected targets; the low-gravity design note; the Jura Island fl
 [the resort at 301 K across the domains](studies/resort_301k/README.md), which works out where they meet. What follows
 ranks what the integration found next.
 
-1. **The design case at 301 K**, once the author says the resort's setting starts it: a 20-year GCM run of about 1.5
-   hours on four ranks, which also settles the tower's air with one physics; the glow pair from it, two more, at which
-   the glow study and the domain synthesis take the efficacy it gives; the lake studies rerun on its weather, which
-   retires the climate targets they ran on (six to nine hours on two to four workers); and geography's lakes, the atlas
-   globe, the rain and the studies that read the design climate, the metropolis brief's winter parks among them,
+1. **The design case at 301 K**, the design climate since 19 October, at the author's go-ahead: a 20-year GCM run of
+   about 1.5 hours on four ranks, which also settles the tower's air with one physics; the glow pair from it, two more,
+   at which the glow study and the domain synthesis take the efficacy it gives; the lake studies rerun on its weather,
+   which retires the climate targets they ran on (six to nine hours on two to four workers); and geography's lakes, the
+   atlas globe, the rain and the studies that read the design climate, the metropolis brief's winter parks among them,
    regenerated once.
-2. **The waters' design**, the author's to set: the trophic state the lakes and seas are held at, which sets the air's
-   methane more than the gas pair does; people's dissolved phosphorus within the lakes' room, 57–71 g a person a year
-   with 8 billion at the middle settling while the giants' floors stay oxic and 5–10 g if their depths go anoxic, the
-   glass houses' bleed with it; the seas' production for the biodiverse communities the register asks of them, with the
-   dredged deltas' phosphorus as its lever; and the giants' deep remedies
-   ([the resort at 301 K across the domains](studies/resort_301k/README.md)).
+2. **The aquatic programme** ([its plan](studies/aquatic_biogeochemistry/plan.md)), at the author's word: the open
+   water held nutrient-poor and rich in species, with productive habitats where nutrients gather, and living things
+   taking on much of the waters' mineral and methane work (register, 19 October). In order: the seas' chemistry with
+   magnesium kept (resources); the calcifiers' habitat and night, the floors' make-up and the methane share, and the
+   methanotrophs by habitat (ecology); the mixing form's check in turbulence columns before any basin model (climate);
+   then the harvests and the coupled study. With it go people's dissolved phosphorus within the lakes' room, 57–71 g a
+   person a year with 8 billion at the middle settling while the giants' floors stay oxic and 5–10 g if their depths go
+   anoxic, the glass houses' bleed with it; the seas' production, with the dredged deltas' phosphorus as its lever; and
+   the giants' deep remedies ([the resort at 301 K across the domains](studies/resort_301k/README.md)).
 3. **The deserts' watering**, the author's choice on the synthesis's scale: 35–44 km³ a year and 2.3–3.8 GW for each 1%
    of the resort's 4.9–6.2 million km² of desert, most of it poleward of 45°, its albedo the larger cost. The 2-D CM1
    slice from sea to dry land waits on the design case at 301 K and the coasts' design.
@@ -339,9 +347,10 @@ ranks what the integration found next.
 5. **The GCM's open checks at the chosen target:** the high cloud's range from its water and its crystals' size,
    offline in minutes, and the longwave refit checked at the settled state, whose layers stray 5–7 W/m² at 302 K. A
    CM1 ring that makes its own upper vapour comes later.
-6. **The lakes' open follow-ons:** a basin-scale model of one crater lake to settle the deep mixing's form (Osborn's
-   rule against Shih and Bouffard's energetic regime) and the wind's share, which move the deep lakes' oxygen and
-   methane two- to sevenfold (studies/lake_oxygen, mixing_forms); a three-dimensional model of the seas' basins on
+6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
+   and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
+   mixing_forms), now the aquatic programme's turbulence columns first, with a basin-scale model of one crater lake
+   where they leave the forms apart; a three-dimensional model of the seas' basins on
    their LOLA bathymetry under the 301 K weather, with the Moon's rotation, the cold ends, sills and slopes
    (studies/sea_oxygen); giants as new reservoirs and eutrophic giants at 1,000 and 3,500 m; a meromictic step strong
    enough to hold; longer seas tracing; Shih and Bouffard's form at more depths and basins, with the ventilated depth

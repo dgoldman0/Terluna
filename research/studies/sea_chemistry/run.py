@@ -179,7 +179,7 @@ def floors(data):
     stage1 = data[cc.STAGE1]
     areas = {b['band']: b for b in stage1['setting']['bands']}
     out = {}
-    for case in set(cc.CRUST_CASES.values()):
+    for case in sorted(set(cc.CRUST_CASES.values())):
         rows, start = [], 0.0
         for end in FLOOR_SPANS:
             row = dict(start=start, end=float(end), seas_kg_yr=0.0, lakes_kg_yr=0.0)

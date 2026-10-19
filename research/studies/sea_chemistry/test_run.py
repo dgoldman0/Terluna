@@ -36,6 +36,11 @@ def test_a_fresh_run_matches_the_product(product):
     assert json.loads(S.dumps(S.results())) == product
 
 
+def test_the_floors_keep_one_order(product):
+    """The crust cases come out sorted, so a rerun with nothing changed writes the same bytes."""
+    assert list(product['setting']['floors']) == sorted(product['setting']['floors'])
+
+
 def test_charge_balances_and_chloride_has_no_sink(product):
     """Every operation keeps the alkalinity equal to the conservative ions' charge, less the delivered seawater's own
     offset (its minor ions and borate), and chloride stays as delivered while the seas are open."""
