@@ -38,3 +38,35 @@ def test_the_sea_takes_the_sea_correction():
     _, _, bare = pl.lwr(SIGMA, 121590.0, T, Q, 0.0, 1.6242, 1008.3)
     _, _, bare_land = pl.lwr(SIGMA, 121590.0, T, Q, 1.0, 1.6242, 1008.3)
     assert np.isclose(land['olr'], bare_land['olr']) and np.isclose(sea['olr'] - bare['olr'], 11.0)
+
+
+def test_the_error_summary_reads_the_layers_from_the_ground():
+    errs = np.array([[-2.0, 1.0, 0.5, 3.0], [-4.0, 1.0, -0.5, 1.0]])      # three layers, then the outgoing longwave
+    out = pl.error_summary(errs, np.array([True, True]))
+    assert out['columns'] == 2 and list(out['mean']) == ['layer_1', 'layer_2', 'layer_3', 'olr']
+    assert out['mean']['layer_1'] == -3.0 and out['rms']['layer_3'] == 0.5
+    assert out['largest_layer_mean'] == 3.0                            # the layers only, not the outgoing longwave
+
+
+def test_the_check_near_301_k_binds_the_corrections_it_checks():
+    import hashlib
+    import json
+    import pytest
+    if not pl.CHECK.exists():
+        pytest.skip('the longwave check has not been run')
+    out = json.loads(pl.CHECK.read_text())
+    assert out['schema'] == pl.CHECK_SCHEMA and out['holds_w_m2'] == pl.HOLDS_W_M2
+    assert set(out['corrections']) == set(pl.CORRECTIONS)
+    for name, path in pl.CORRECTIONS.items():
+        assert out['corrections'][name]['sha256'] == hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+    near = [c for c in out['cases'] if abs(c['global_ground_k'] - 301.0) < 0.75]
+    assert [f"{c['run']} year {c['year']}" for c in near] == out['near_301k']['cases'] and near
+    for name in pl.CORRECTIONS:
+        worst = max(s[name][g]['largest_layer_mean'] for c in near for s in c['samples'].values()
+                    if name in s for g in ('land', 'sea') if g in s[name])
+        assert worst == out['near_301k'][name]['largest_layer_mean_w_m2']
+        assert out['near_301k'][name]['holds'] == (worst <= pl.HOLDS_W_M2)
+    # Each correction is marked on the sample it was fitted on, and only there.
+    marked = [(c['run'], c['year'], k) for c in out['cases'] for k, s in c['samples'].items()
+              for name in pl.CORRECTIONS if name in s and s[name]['fitted_on_these_columns']]
+    assert ('A28_corrected_970_lw_ice', 2, 'cloud_free') in marked and len(marked) <= len(pl.CORRECTIONS)

@@ -4,6 +4,7 @@ height against the atmosphere domain's correlated-k model, which follows the lin
 
     climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave validate A28_corrected_970_heating --year 0
     climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave fit A28_corrected_970_heating --year 0
+    climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check    # the correction near 301 K (CHECK_CASES)
 
 PlaSim's longwave (plasim/src/radmod.f90, lwr) follows Sasamori (1968): broadband absorptivities of water vapour, its
 continuum (1 - exp(-TH2OC u)), carbon dioxide with the water overlap of Boer et al. (1984), and ozone, each on the
@@ -30,6 +31,22 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 RESULTS = HERE.parent / 'results' / 'gcm'
 SCHEMA = 'terluna.climate.gcm-longwave/1'
+CHECK_SCHEMA = 'terluna.climate.gcm-longwave-check/1'
+CORRECTION = RESULTS / 'longwave_A28_corrected_970_heating.json'     # fitted near 295 K, as the runs of 17 October took it
+REFIT = RESULTS / 'longwave_A28_corrected_970_lw_ice.json'         # its refit on the 301 K columns (year 2 of that run)
+CORRECTIONS = dict(fit_295k=CORRECTION, refit_301k=REFIT)
+CHECK = RESULTS / 'longwave_check_301k.json'
+CHECK_CACHE = Path('/media/projectspace/terluna-research/gcm-runs/longwave_check')
+# The states the check takes, each a year of a run's 3-day means: the fit's own year at 295 K, and the 20-year test with
+# the correction and ice optics as it passes 299.6, 301.2 and 302.5 K (its years 1-3, warming about 1.5 K a year) and
+# where it settles near 306.6 K (its year 15). No run has settled at 301 K, and that test's years carry the correction's
+# own upper air, high cloud and humidity, which an interpolation between the two settled runs would not.
+CHECK_CASES = (('A28_corrected_970_heating', 0), ('A28_corrected_970_lw_ice', 1), ('A28_corrected_970_lw_ice', 2),
+               ('A28_corrected_970_lw_ice', 3), ('A28_corrected_970_lw_ice', 15))
+CHECK_COLUMNS = 1500                        # the most cloud-free columns a sample takes (the fit's took about 2,100)
+CHECK_EVERY = dict(cloud_free=None, all=193)   # cloud-free: every n-th, n set by CHECK_COLUMNS; every 193rd of all (a
+                                               # prime, against aliasing with the grid and the times)
+HOLDS_W_M2 = 2.5                 # the largest layer error the correction left in any band of latitude at 295 K
 SBK = 5.67e-8
 ADV = 1850.0 / 1004.64 - 1.0           # the vapour's heat capacity over the dry air's, less one
 E_REF_PA = 1000.0                      # the vapour pressure over which TH2OE's path is weighted
@@ -160,22 +177,25 @@ def twilight_terms(run):
     return np.array(lines[-2].split(), float), np.array(lines[-1].split(), float)
 
 
-def cloud_free_columns(run, year, every=1, max_cloud=0.01):
-    """The run's cloud-free 3-day mean columns at every latitude: profiles on the full levels from the top, the
-    ground's temperature, land, and PlaSim's own longwave heating (K/s)."""
+def cloud_free_columns(run, year, every=1, max_cloud=0.01, cloud_free=True):
+    """The run's cloud-free 3-day mean columns at every latitude (every column with cloud_free False): profiles on the
+    full levels from the top, the ground's temperature, land, and PlaSim's own longwave heating (K/s) where the run
+    wrote it."""
     import netCDF4
     path = HERE / 'runs' / run / 'model' / f'MOST.{year:05d}.nc'
     with netCDF4.Dataset(path) as d:
         sigma = np.asarray(d['lev'][:], float)
         lat = np.asarray(d['lat'][:], float)
         cl = np.asarray(d['cl'][:], float).max(axis=1)             # (time, lat, lon)
-        pick = np.argwhere(cl < max_cloud)[::every]
-        ta, hus, lw = (np.asarray(d[k][:], float) for k in ('ta', 'hus', 'dt_lw'))
+        pick = np.argwhere(cl < max_cloud if cloud_free else np.ones_like(cl, bool))[::every]
+        ta, hus = (np.asarray(d[k][:], float) for k in ('ta', 'hus'))
+        lw = np.asarray(d['dt_lw'][:], float) if 'dt_lw' in d.variables else None
         ps = np.asarray(d['ps'][:], float) * 100.0
         ts = np.asarray(d['ts'][:], float)
         lsm = np.asarray(d['lsm'][0], float)
     columns = [dict(lat=float(lat[j]), land=float(lsm[j, i]), ps=float(ps[k, j, i]),
-                    t=np.append(ta[k, :, j, i], ts[k, j, i]), q=hus[k, :, j, i], plasim_k_s=lw[k, :, j, i])
+                    t=np.append(ta[k, :, j, i], ts[k, j, i]), q=hus[k, :, j, i],
+                    plasim_k_s=None if lw is None else lw[k, :, j, i])
                for k, j, i in pick]
     return sigma, columns
 
@@ -211,15 +231,16 @@ def validate(run, year, every=20):
                 rms_k_day=np.sqrt(((ours - theirs) ** 2).mean(axis=0)).tolist())
 
 
-def targets(run, year, every):
-    """The correlated-k model on the run's cloud-free columns (plane-parallel, the design air): heating of the GCM's
-    lowest nine layers (K/day, the ground first), outgoing longwave and the longwave reaching the ground."""
+def targets(run, year, every, cloud_free=True):
+    """The correlated-k model on the run's cloud-free columns (every column with cloud_free False; plane-parallel, the
+    design air): heating of the GCM's lowest nine layers (K/day, the ground first), outgoing longwave and the longwave
+    reaching the ground."""
     from climate.crm.gcm_heating import gcm_column_levels
     from climate.crm.ring_radiation import mole_fraction
     from atmosphere.radiative_convective import ck
     from atmosphere.radiative_convective import thermodynamics as td
     s = run_settings(run)
-    sigma, columns = cloud_free_columns(run, year, every)
+    sigma, columns = cloud_free_columns(run, year, every, cloud_free=cloud_free)
     model = ck.CKLongwave()
     air = td.earthlike_air(s['pressure_pa'], s['co2'])
     out = []
@@ -333,13 +354,135 @@ def fit(run, year, every):
                               'layer first and the ground last, as the GCM reads it after the curved air\'s.'))
 
 
+def digest(path, n=None):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()[:n]
+
+
+def checked_columns(run, year, every, cloud_free):
+    """targets() for one year's sample, kept on the drive by the run's output file, the sample and the correlated-k
+    model's code, so a check that stops loses only the sample in hand."""
+    import inspect
+    import netCDF4
+    from atmosphere.radiative_convective import ck
+    source = HERE / 'runs' / run / 'model' / f'MOST.{year:05d}.nc'
+    if every is None:                                      # cloud-free: no more than CHECK_COLUMNS of them
+        with netCDF4.Dataset(source) as d:
+            clear = int((np.asarray(d['cl'][:], float).max(axis=1) < 0.01).sum())
+        every = max(1, -(-clear // CHECK_COLUMNS))
+    code = hashlib.sha256(''.join(inspect.getsource(f) for f in (targets, cloud_free_columns, run_settings)).encode())
+    key = hashlib.sha256(json.dumps([digest(source), every, cloud_free, digest(ck.__file__),
+                                     code.hexdigest()]).encode()).hexdigest()[:16]
+    path = CHECK_CACHE / f'{run}_{year:05d}_{"cloud_free" if cloud_free else "all"}_{every}_{key}.npz'
+    if path.exists():
+        with np.load(path, allow_pickle=False) as z:
+            columns = [dict(lat=float(z['lat'][i]), land=float(z['land'][i]), ps=float(z['ps'][i]), t=z['t'][i],
+                            q=z['q'][i], ck_k_day=z['ck_k_day'][i], ck_olr=float(z['ck_olr'][i]),
+                            ck_ground_down=float(z['ck_ground_down'][i])) for i in range(z['lat'].size)]
+            return z['sigma'], columns, dict(every=every, path=str(path),
+                                             source=str(source.relative_to(HERE.parents[1])),
+                                             source_sha256=digest(source))
+    sigma, columns = targets(run, year, every, cloud_free)
+    CHECK_CACHE.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix('.tmp.npz')
+    np.savez(tmp, sigma=sigma, **{k: np.array([c[k] for c in columns]) for k in
+                                  ('lat', 'land', 'ps', 't', 'q', 'ck_k_day', 'ck_olr', 'ck_ground_down')})
+    tmp.replace(path)
+    return sigma, columns, dict(every=every, path=str(path), source=str(source.relative_to(HERE.parents[1])),
+                                source_sha256=digest(source))
+
+
+def error_summary(errs, sel):
+    """Mean and rms of each of the lowest nine layers' errors (the ground first, W/m2) and of the outgoing longwave."""
+    names = [f'layer_{k + 1}' for k in range(errs.shape[1] - 1)] + ['olr']
+    e = errs[sel]
+    return dict(columns=int(sel.sum()), mean=dict(zip(names, e.mean(axis=0).round(2).tolist())),
+                rms=dict(zip(names, np.sqrt((e ** 2).mean(axis=0)).round(2).tolist())),
+                largest_layer_mean=round(float(np.abs(e[:, :-1].mean(axis=0)).max()), 2))
+
+
+def check(cases=CHECK_CASES, every=CHECK_EVERY, corrections=None):
+    """Each correction (CORRECTIONS: the one fitted at 295 K and its refit at 301 K, each scaled with every layer's
+    temperature to the fourth power) against the correlated-k model on states from 295 to 306.6 K: each layer's mean and
+    rms error over land and over sea and by band of latitude, with PlaSim's own errors beside them, on the columns clear
+    of cloud (as the fits took them) and on a sample of every column's profile (both radiation codes clear-sky)."""
+    corrections = corrections or CORRECTIONS
+    fitted = {name: json.loads(path.read_text()) for name, path in corrections.items()}
+    out = []
+    for run, year in cases:
+        s = run_settings(run)
+        progress = json.loads((HERE / 'runs' / run / 'progress.json').read_text())['years'][year]
+        case = dict(run=run, year=year, global_ground_k=progress['surface_k'], samples={})
+        for sample, n in every.items():
+            sigma, columns, files = checked_columns(run, year, n, sample == 'cloud_free')
+            if not columns:
+                case['samples'][sample] = dict(columns=0, **files)
+                continue
+            plasim, temps = layer_errors(sigma, columns, s)
+            land = np.array([c['land'] > 0.5 for c in columns])
+            lat = np.abs(np.array([c['lat'] for c in columns]))
+            groups = dict(land=land, sea=~land, tropics=lat < 30, mid_latitudes=(lat >= 30) & (lat < 60),
+                          high_latitudes=lat >= 60)
+            row = dict(columns=len(columns), ground_k=round(float(temps[:, -1].mean()), 2),
+                       lowest_layer_k=round(float(temps[:, -2].mean()), 2), **files,
+                       plasim={g: error_summary(plasim, m) for g, m in groups.items() if m.any()})
+            for name, product in fitted.items():
+                corrected, _ = layer_errors(sigma, columns, s, product['correction'])
+                row[name] = {g: error_summary(corrected, m) for g, m in groups.items() if m.any()}
+                own = product['run'] == run and product['year'] == year and sample == 'cloud_free'
+                row[name]['fitted_on_these_columns'] = bool(own)
+            case['samples'][sample] = row
+        out.append(case)
+    near = [c for c in out if abs(c['global_ground_k'] - 301.0) < 0.75]
+    verdicts = {}
+    for name in fitted:
+        worst = max(c['samples'][k][name][g]['largest_layer_mean'] for c in near for k in c['samples']
+                    if name in c['samples'][k] for g in ('land', 'sea') if g in c['samples'][k][name])
+        verdicts[name] = dict(largest_layer_mean_w_m2=worst, holds=bool(worst <= HOLDS_W_M2))
+    return dict(
+        schema=CHECK_SCHEMA,
+        corrections={name: dict(product=str(path.relative_to(HERE.parents[1])), sha256=digest(path, 16),
+                                fitted_on=f"{fitted[name]['run']} year {fitted[name]['year']}",
+                                tref=fitted[name]['correction']['tref'])
+                     for name, path in corrections.items()},
+        holds_w_m2=HOLDS_W_M2, near_301k=dict(cases=[f"{c['run']} year {c['year']}" for c in near], **verdicts),
+        cases=out,
+        evidence=('PlaSim\'s clear-sky longwave as a copy of its arithmetic (which reproduces its own heating within '
+                  '0.01 K a day on cloud-free 3-day means) with and without each correction the runner can add, '
+                  'against the atmosphere domain\'s correlated-k model on the same columns; both plane-parallel, without '
+                  'the curved air\'s escape. The states are GCM years, those near 301 K from a run still warming 1.5 K '
+                  'a year; correlated-k is the target, not line-by-line.'),
+        reading_rule=('Errors are PlaSim (copy) less correlated-k in W/m2 by layer from the ground (negative cools too '
+                      'much) and in the outgoing longwave, means and rms over the columns of each group: plasim '
+                      'without a correction, and under each correction\'s name with it, scaled by (T / tref)^4 as the '
+                      'GCM scales it; fitted_on_these_columns marks the sample a correction was fitted on. cloud_free '
+                      'samples the columns clear of cloud at every level, as the corrections were fitted; all samples '
+                      'every n-th column of the year whatever its cloud, both codes taken clear-sky. near_301k gathers '
+                      'the cases whose global ground lies within 0.75 K of 301 K and, for each correction, the largest '
+                      'layer mean over land or sea among them; it holds when that is within holds_w_m2, the largest '
+                      'layer error the 295 K fit left in any band of latitude on its own columns.'),
+        producer=dict(domain='climate', files={f'gcm/{Path(__file__).name}': digest(Path(__file__), 16)}))
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('action', choices=('validate', 'fit'))
-    parser.add_argument('run')
+    parser.add_argument('action', choices=('validate', 'fit', 'check'))
+    parser.add_argument('run', nargs='?')
     parser.add_argument('--year', type=int, default=0)
     parser.add_argument('--every', type=int, default=20)
     args = parser.parse_args(argv)
+    if args.action == 'check':
+        out = check()
+        CHECK.write_text(json.dumps(out, indent=1) + '\n')
+        print('near 301 K:', out['near_301k'])
+        for case in out['cases']:
+            for sample, r in case['samples'].items():
+                for name in [k for k in out['corrections'] if k in r]:
+                    means = {g: list(r[name][g]['mean'].values()) if g in r[name] else '-' for g in ('land', 'sea')}
+                    print(f"{case['run']} year {case['year']} ({case['global_ground_k']} K) {sample} {name}: "
+                          f"{r['columns']} columns; land {means['land']}; sea {means['sea']}")
+        return 0
+    if args.run is None:
+        parser.error('validate and fit take a run')
     if args.action == 'fit':
         out = fit(args.run, args.year, args.every)
         out['producer'] = dict(domain='climate', files={f'gcm/{Path(__file__).name}':
