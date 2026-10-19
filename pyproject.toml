@@ -5,8 +5,9 @@
 [tool.pytest.ini_options]
 # Each domain owns its tests in <domain>/tests/; cross-domain studies keep their
 # scope tests beside their runners in research/studies/<study>/. The Jura Island
-# flyover's tests need no OpenGL and run here too.
-testpaths = ["shared", "atmosphere", "climate", "biosphere", "geography", "illumination", "protection", "engineering", "habitation", "provisioning", "resources", "research/studies", "visualization/jura-island/tests"]
+# flyover's tests need no OpenGL and run here too, and the rain audio lab's join them;
+# the lane's other Python viewers run their own.
+testpaths = ["shared", "atmosphere", "climate", "biosphere", "geography", "illumination", "protection", "engineering", "habitation", "provisioning", "resources", "research/studies", "visualization/jura-island/tests", "visualization/rain-audio/tests"]
 python_files = ["test_*.py"]
 pythonpath = ["."]
 addopts = "--import-mode=importlib"

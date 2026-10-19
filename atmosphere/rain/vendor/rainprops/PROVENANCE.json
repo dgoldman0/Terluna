@@ -1,0 +1,80 @@
+{
+  "repository": "https://github.com/kaitlyn-loftus/rainprops",
+  "commit": "e2df9c2102112526f05109051dfffeeb5c318967",
+  "license": "MIT",
+  "retrieved_date": "2026-10-11",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1071,
+      "sha256": "ff9be83eeebc75391eccabec6f701a22c7fff9509dd45b33ddc5b5c438f61526",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/LICENSE"
+    },
+    {
+      "path": "data/Best1950.csv",
+      "bytes": 163,
+      "sha256": "2c38311de0e30a4d942797375bc1d7b06032e8ed9ffc57b81e7a9aa75d0ecbcd",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/data/Best1950.csv"
+    },
+    {
+      "path": "data/condensible_properties.csv",
+      "bytes": 338,
+      "sha256": "2a34f840c336c0b82716b5b72791594570376ad90570071808873d58145cdc5f",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/data/condensible_properties.csv"
+    },
+    {
+      "path": "data/gas_properties.csv",
+      "bytes": 533,
+      "sha256": "c8aab3b0fdf2901ed4ab6b51a67549943147c9775a709b29a553a769bea1ec2a",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/data/gas_properties.csv"
+    },
+    {
+      "path": "data/gunn1949_r_m_v_mpers.csv",
+      "bytes": 441,
+      "sha256": "00a3c9c22f57225759a7b2d9e64ddf5c690bcf6846f7908ff11e471ba8439f94",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/data/gunn1949_r_m_v_mpers.csv"
+    },
+    {
+      "path": "src/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/src/__init__.py"
+    },
+    {
+      "path": "src/condensible.py",
+      "bytes": 9341,
+      "sha256": "ef6d50616ce1f8a8cf25b1e10d5fc257895b6c752e72114372669b28031d1cd2",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/src/condensible.py"
+    },
+    {
+      "path": "src/drop_prop.py",
+      "bytes": 26537,
+      "sha256": "ef960b10a2e25617f08f3b7327f0c4d6f8c2d6f9eb11546c39af50a96b2fb00a",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/src/drop_prop.py"
+    },
+    {
+      "path": "src/fall.py",
+      "bytes": 34810,
+      "sha256": "e6862a68c9929397fde5d316681d3a51b789d8c26ff3eb4a5b3164df76a9b641",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/src/fall.py"
+    },
+    {
+      "path": "src/huygens.py",
+      "bytes": 3371,
+      "sha256": "6b9405577d70902bcb34f9659982dad92291d909e2a7261e2c50f67495ef0858",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/src/huygens.py"
+    },
+    {
+      "path": "src/planet.py",
+      "bytes": 22042,
+      "sha256": "2c2b5608e16bd75d327cc6887b5974d9a7d95b8dd2594ca3e193ff31d807dec8",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/src/planet.py"
+    },
+    {
+      "path": "val_Earth_v.py",
+      "bytes": 2424,
+      "sha256": "9b6d3523c53806aa32b49f6a8c068c699394803ce5f4034407b189bf72358ba4",
+      "url": "https://raw.githubusercontent.com/kaitlyn-loftus/rainprops/e2df9c2102112526f05109051dfffeeb5c318967/val_Earth_v.py"
+    }
+  ]
+}

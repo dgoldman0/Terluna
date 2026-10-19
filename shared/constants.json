@@ -69,6 +69,17 @@
       "water_vapour_gas_constant_J_kg_K": 461.5,
       "source": "CM1 r22.0 src/constants.F, default branch lines 114 and 126; source SHA256 2e02843339a72a428a61bcbd32c27bfbb973766fef842d53200bafaf0ebd3771",
       "note": "These solver closure constants apply to CM1 thermodynamics. Other Terluna compositions use their own gas constants."
+    },
+    "cm1_r22_morrison_rain": {
+      "fall_speed_coefficient_si": 841.99667,
+      "fall_speed_exponent": 0.8,
+      "density_reference_pressure_pa": 85000.0,
+      "density_reference_temperature_k": 273.15,
+      "density_exponent": 0.54,
+      "mean_fall_speed_cap_m_s": 9.1,
+      "gravity_reference_m_s2": 9.81,
+      "source": "CM1 r22.0 src/morrison.F: AR = 841.99667 and BR = 0.8 (lines 402 and 406); RHOSU = 85000/(R*TMELT) with R = 287.04 and TMELT = 273.15 (lines 417, 435 and 437); the density factor (RHOSU/RHO)**0.54 (line 1836); the 9.1 m/s cap on the rain's mean fall speeds in its sedimentation (lines 4610-4611, with the density factor at line 4603); source SHA256 2e199a4f2cb66f0590b455fe54b762c5ca4bfdfcd49bd7aa5317b757655034f7. CM1's own gravity, 9.81 m/s2, is src/constants.F line 113. The Terluna builds scale AR and the cap by (G/9.81)**((BR+1)/3) (climate/crm/cm1_run.py, MORRISON_BLOCK).",
+      "note": "Morrison's raindrops fall at V = AR (RHOSU/RHO)^0.54 D^BR, with D in metres. atmosphere/rain checks this law at lunar gravity against its single-drop solver."
     }
   },
   "legacy": {

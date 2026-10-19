@@ -345,6 +345,9 @@ the integration found next.
    ([register](decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)), by the method recovered from
    ChatGPT's follow-up: empty domains as matched controls, gaps from 645 m down to 50 m, podium and infill layouts, a
    diagonal wind, neutral and stable air and grid checks, forced by the chosen target's climate.
+16. **CM1's next run** takes the size-dependent lunar rain law from atmosphere/rain, the solver's slowing by gravity
+   from 5.3 at 0.1 mm to 1.9 at 6 mm, so that its drizzle falls more slowly and its large drops faster than under
+   its present single factor of 2.94.
 
 New runs wait on the author's choice of the target climate, and no rented compute is commissioned.
 

@@ -1,0 +1,44 @@
+{
+ "schema": "terluna.external-inputs/1",
+ "status": "external inputs; restored and hash-checked by fetch_inputs.py; ignored by Git",
+ "input_directory": "inputs",
+ "retrieved": "2026-10-11",
+ "publication_note": "The three field recordings the texture models were fitted to, each released under CC0 1.0 on its source page (checked again on 17 October 2026). They are needed only to refit or compare the models; rendering reads the models alone. BigSoundBank serves its WAV files through a download form, so they are restored from the rain work's archive or a copy of it on the research drive; the Freesound file is its public high-quality MP3 preview, whose original FLAC needs a login. A size or hash mismatch stops the restore.",
+ "archive": {
+  "name": "open-moon-rain-generator.zip",
+  "sha256": "f44c3edf172bc1833eef62b582aefd50d20c8d52198057f753a9df1d8d3986a1",
+  "location": "/media/projectspace/terluna-research/other/open-moon-rain-generator.zip"
+ },
+ "files": [
+  {
+   "name": "bsb1289.wav",
+   "url": "https://bigsoundbank.com/rain-on-concrete-s1289.html",
+   "archive_member": "rain_research/samples/bsb1289.wav",
+   "sha256": "e4876e37514c40728637c6caaed6068209c00f77b80557752f237bb02c7bdbef",
+   "bytes": 11632858,
+   "licence": "CC0 1.0",
+   "credit": "Joseph Sardin / BigSoundBank (LaSonotheque), Rain on concrete, 80.8 s, SoundDevices MixPre-3 and Sennheiser ME66",
+   "use": "the concrete texture model, fitted to seconds 2-38"
+  },
+  {
+   "name": "bsb1290.wav",
+   "url": "https://bigsoundbank.com/rain-on-puddle-s1290.html",
+   "archive_member": "rain_research/samples/bsb1290.wav",
+   "sha256": "412c59465f8b2c1e0d6f5d44b5a38d3b916347d2de2f38f4c2c360cf6788c06c",
+   "bytes": 11227960,
+   "licence": "CC0 1.0",
+   "credit": "Joseph Sardin / BigSoundBank (LaSonotheque), Rain on Puddle, 78.0 s, SoundDevices MixPre-3 and Sennheiser ME66",
+   "use": "the puddle texture model, fitted to seconds 2-38"
+  },
+  {
+   "name": "fs584268.mp3",
+   "url": "https://cdn.freesound.org/previews/584/584268_5487341-hq.mp3",
+   "archive_member": "rain_research/samples/fs584268.mp3",
+   "sha256": "b79f9077fe56b5ff84d1cf8de61da53a8f1469f76fdc27045805484a0a4c65f8",
+   "bytes": 4229448,
+   "licence": "CC0 1.0",
+   "credit": "SamsterBirdies (Freesound 584268), Rain on grass and leaves, 170.0 s, Tascam DR-100mkIII internal unidirectional microphones; https://freesound.org/people/SamsterBirdies/sounds/584268/",
+   "use": "the grass and leaves texture model, fitted to seconds 44-80 of its first channel, and the stereo spacing, chosen against its coherence between channels"
+  }
+ ]
+}
