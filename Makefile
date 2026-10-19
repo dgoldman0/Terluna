@@ -10,7 +10,7 @@ check: check-layers test-python test-js test-calendar check-provenance check-ens
 check-layers:
 	$(PYTHON) shared/check_layers.py
 
-# Domain, study and shared tests (the sky solver tests run when numba is installed).
+# Domain, study and shared tests, and the Jura Island flyover's (the sky solver tests run when numba is installed).
 test-python:
 	$(PYTHON) -m pytest
 

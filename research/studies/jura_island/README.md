@@ -55,6 +55,13 @@ day no cloud and no rain formed over the island at any height or hour, and the a
 14 °C ([the CRM's account](../../../climate/crm/README.md#jura-island)). The island's green comes from the sea beneath
 it and from people's watering, and its heights stay dry land.
 
+## The island in view
+
+[visualization/jura-island](../../../visualization/jura-island/README.md) draws the island from this product and the
+atlas it was measured against: a 44-second flyover and a map of its topography and water depth at the common water
+level, the island regenerated from the LOLA and GRAIL bytes this study measured, with illustrative lighting. It ports
+the flyover made in ChatGPT on 15 October, whose film, map and source are catalogued on the research drive.
+
 ## What follows
 
 Open; the author has not chosen these. The recommendation is to take them in this order:
