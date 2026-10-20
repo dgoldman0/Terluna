@@ -61,8 +61,8 @@ CROSS_BRANCH = {
         sha256='47dec4b1fb14bf6353628cc11183bddace1041fd0ee1cfcc22565628565042f0',
         schema='terluna.research.daily-life/1'),
     'research/studies/ways_of_living/results/ways_of_living.json': dict(
-        branch='main', commit=PROVISIONING_COMMIT, blob='e6f8e14280fb8207f86941851fefca025e3542a9',
-        sha256='5d8693aaf3e44bab15633c11159501926e0124148b95f1fa1204618011d3ce28',
+        branch='main', commit=PROVISIONING_COMMIT, blob='879dd4194f60547ba40ba5cecf2659dc978de2f8',
+        sha256='9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148',
         schema='terluna.research.ways-of-living/1'),
 }
 

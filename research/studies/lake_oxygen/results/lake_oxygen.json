@@ -12,7 +12,7 @@
    "research/runs/lake_oxygen/forcing.npz": "66eef43a5731e51ab5e59154f31f1c65ba62cbfd6a3fec7b0b9c5e86aca28d69",
    "research/runs/lake_oxygen/forcing.json": "0c232d5532b027abf78d2205c317783f5de61d7ff8084f152b5ba9fddbf10c6a",
    "research/studies/lake_oxygen/climate_targets_as_run.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "4e8080c6c077936a02e013f8a7923d89ed5eb83da8eb5fbca411c77b5b8ee05c",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "927bb32a219c6adc0c33dab579eac2527d2bcce82e453a915e07d9b08ad9856a",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e"
   },
   "constants": {
@@ -86372,5 +86372,5 @@
    }
   }
  },
- "seconds": 1.1
+ "seconds": 2.5
 }

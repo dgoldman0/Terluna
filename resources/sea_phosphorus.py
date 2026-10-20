@@ -50,7 +50,7 @@ BOUND = {
                            sha256="758a8dcf68c6eb58082e5749e22c35e2da7ffd530f7483622e6c1b3011779ee8"),
     "sky_ecology": dict(path="research/studies/sky_ecology/results/sky_ecology.json",
                         schema="terluna.research.sky-ecology/1", branch="main", commit=None,
-                        sha256="51df4eae02040393b997a01f56de7f1fe29bd6232c0571bef5e67dadfebbefef"),
+                        sha256="16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af"),
     "sky_phosphorus_note": dict(path="research/studies/sky_ecology/phosphorus.md", schema=None,
                                 branch="main", commit=None,
                                 sha256="65ec921e7a5dea769a120406c54a22e5bfc47d3077fb06439408b0b9d05f84a2"),
@@ -59,10 +59,10 @@ BOUND = {
                          sha256="cda0594b8b59acfb469a39b007f977d616db60307d325e80af759242d2baecd1"),
     "ways_of_living": dict(path="research/studies/ways_of_living/results/ways_of_living.json",
                            schema="terluna.research.ways-of-living/1", branch="main", commit=None,
-                           sha256="5d8693aaf3e44bab15633c11159501926e0124148b95f1fa1204618011d3ce28"),
+                           sha256="9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148"),
     "provisioning_decisions": dict(path="research/decisions.md", schema=None, branch="main",
                                    commit=None,
-                                   sha256="fead8868ff1ae03abadce006329201cdfed235d54758c6773649e90964499b07"),
+                                   sha256="91de82a0684485e5cce652c2006fbc4c427cc0be3b802de92f9b7c9cfb6d4384"),
 }
 # Held unbound: provisioning's food-systems study, in the tree since 12 October, reads this product, so binding its
 # per-system phosphorus back would close a loop; the systems below stand alone, on the per-person loss the food study

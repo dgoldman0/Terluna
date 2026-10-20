@@ -305,12 +305,12 @@ in on main and whose work runs on the domain branches at the author's word
 ([register](decisions.md#the-design-climate-and-the-waters-19-october-2026),
 [the plan](studies/aquatic_biogeochemistry/plan.md)).
 
-Waiting on the author: the go-ahead for the design case at 301 K and for the aquatic programme's work; how much of the
-deserts to water ([the resort at 301 K across the domains](studies/resort_301k/README.md)); food made in orbit and its
-carbon's return ([heat levers](studies/heat_levers/README.md)); the constraints review's recommendations for the fleet;
-the build's delivery heat, which the water top-up extends for millennia; the summit site product's rebuild, a review's
-fix awaiting a yes; the desert note (research drive, deserts/desert_analysis.md) for review; and the taxonomy, on hold
-for later, with its open choices and the aerophytes' scientific name.
+Waiting on the author: the design years' start once the machine is free, and the aquatic programme's work; how much
+of the deserts to water ([the resort at 301 K across the domains](studies/resort_301k/README.md)); food made in orbit
+and its carbon's return ([heat levers](studies/heat_levers/README.md)); the constraints review's recommendations for the
+fleet; the build's delivery heat, which the water top-up extends for millennia; the summit site product's rebuild, a
+review's fix awaiting a yes; the desert note (research drive, deserts/desert_analysis.md) for review; and the taxonomy,
+on hold for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 
@@ -322,8 +322,10 @@ levers on the corrected targets; the low-gravity design note; the Jura Island fl
 [the resort at 301 K across the domains](studies/resort_301k/README.md), which works out where they meet. What follows
 ranks what the integration found next.
 
-1. **The design case at 301 K**, the design climate since 19 October, at the author's go-ahead: a 20-year GCM run of
-   about 1.5 hours on four ranks, which also settles the tower's air with one physics; the glow pair from it, two more,
+1. **The design case at 301 K**, under way since 19 October on the rebuilt lakes: at sunlight 0.925 it settles near
+   305 K and its branch at 0.894 at 300.3–300.9 K, so its ten design years run at 0.897 (about 7.5% dimming against the
+   design sunlight, 2–3 points above the target study's, which rested on the 295 K longwave fit) once the machine is
+   free, about 1.6 hours on four ranks; it also settles the tower's air with one physics. Then the glow pair from it,
    at which the glow study and the domain synthesis take the efficacy it gives; the lake studies rerun on its weather,
    which retires the climate targets they ran on (six to nine hours on two to four workers); and geography's lakes, the
    atlas globe, the rain and the studies that read the design climate, the metropolis brief's winter parks among them,
@@ -345,8 +347,9 @@ ranks what the integration found next.
    deep air's absorption upstream of provisioning's population screen; and food made in orbit, whose
    carbon, 0.47–0.71 Gt a year, needs its own return path (heat levers).
 5. **The GCM's open checks at the chosen target:** the high cloud's range from its water and its crystals' size,
-   offline in minutes, and the longwave refit checked at the settled state, whose layers stray 5–7 W/m² at 302 K. A
-   CM1 ring that makes its own upper vapour comes later.
+   offline in minutes, and the longwave refit checked at the design case's own settled years (refitted at 301 K on
+   19 October, where the 295 K fit strays 4.2–7.6 W/m² in the worst layers at 302.5 K). A CM1 ring that makes its own
+   upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
    mixing_forms), now the aquatic programme's turbulence columns first, with a basin-scale model of one crater lake
@@ -370,7 +373,11 @@ ranks what the integration found next.
    diagonal wind, neutral and stable air and grid checks, forced by the design case's climate.
 11. **CM1's next run** takes the size-dependent lunar rain law from atmosphere/rain, the solver's slowing by gravity
    from 5.3 at 0.1 mm to 1.9 at 6 mm, so that its drizzle falls more slowly and its large drops faster than under
-   its present single factor of 2.94.
+   its present single factor of 2.94, with self-collection's lunar rate beside it. The lunar rain limits are in
+   (domain/atmosphere, 19 October); their test's budgets and the noise between identical runs stay to read, and
+   autoconversion and accretion remain Earth fits. CM1's written longwave heating cools 0.08–0.14 K a day more than
+   the same RRTMG offline on the same columns (domain/atmosphere 6f7d7b0), a cause in its radiation call to trace with
+   the offline driver before the slice.
 12. **The biomes' nitrogen and the dark night** as biological requirements: the biomes' nitrogen ending in N2,
    biological fixation, and the light that dark-night organisms tolerate (biosphere, lunar-cycle ecology).
 13. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
