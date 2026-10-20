@@ -1493,6 +1493,14 @@ for _tag, _kind in (('rain_control', 'earth'), ('lunar_rain', 'lunar')):
         purpose='box_0e_small\'s inputs as written, on the rain-limits build with ' + (
             'CM1\'s own rain limits written out' if _kind == 'earth' else
             'the lunar rain limits of atmosphere/rain/results/rain_breakup.json') + ', writing the heat and vapour budgets')
+# The rain-limits test in its cheaper form, which the author chose to run on the night of 19 October: both arms run the
+# small box's second lunar day again from its day-29.5 restart, on the one rain-limits executable, differing in their
+# rain limits alone. The drops' sizes settle within an hour of a change, so the lunar day is ample.
+for _tag in ('rain_control', 'lunar_rain'):
+    CASES[f'box_0e_small_{_tag}_day29'] = dict(
+        CASES[f'box_0e_small_{_tag}'], inputs_from=None, restart_from=dict(case='box_0e_small', day=29.5), days=59.0,
+        purpose=CASES[f'box_0e_small_{_tag}']['purpose'] + "; the second lunar day again from box_0e_small's day-29.5 "
+                'restart')
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
