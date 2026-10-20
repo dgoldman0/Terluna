@@ -1,8 +1,8 @@
 {
   "schema": "terluna.shared.water-scenario/1",
-  "about": "The Open Moon's standing-water cover: the share of the surface under seas and lakes. Domains read the share here; the water to deliver follows from each domain's hydrology.",
+  "about": "The Open Moon's seas: the share of the surface under the water at one common level. Domains read the share here; the water to deliver follows from each domain's hydrology. The rain-fed lakes in the basins above that level add about a tenth of the surface more (10.3% on the drainage of 29 September), moving with the climate, so standing water is about 38% in all.",
   "surface_water_share": 0.28,
-  "status": "Selected 2026-09-25 within the author's 25-35% range, at the author's request, as the basis of the atlas and the conservation study.",
+  "status": "Selected 2026-09-25 within the author's 25-35% range, at the author's request, as the basis of the atlas and the conservation study; kept on 2026-10-19 for the seas, with the rain-fed lakes counted on top (research/decisions.md, the design case and the models' Earth limits).",
   "basis": [
     "One connected near-side sea: the near-side maria join at about -1.70 km above the geoid, and the 28% level (-1.654 km) sits about 50 m above that sill.",
     "The face seen from Earth: water covers 37% of the near-side hemisphere, close to the 31% covered by maria today.",

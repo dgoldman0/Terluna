@@ -2,7 +2,7 @@
   "schema": "terluna.resources.sea-phosphorus/1",
   "producer": {
     "files": {
-      "resources/sea_phosphorus.py": "618c9dcb18d7d09497782fd599935c6c68990895245dfa7498f66c7fad27add4",
+      "resources/sea_phosphorus.py": "a6ec3e6b9792d61a23987b71ac3b4d9437aab839df16c3154343b73d60a00308",
       "resources/phosphorus.py": "48f3ef951dc6d781f42de706df7652cbd53d945a67fbd8a6e857c253c9e81e43"
     },
     "inputs": {
@@ -27,7 +27,7 @@
         "path_at_integration": "research/studies/sky_ecology/results/sky_ecology.json",
         "branch": "main",
         "commit": null,
-        "sha256": "51df4eae02040393b997a01f56de7f1fe29bd6232c0571bef5e67dadfebbefef",
+        "sha256": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af",
         "read_from": "in-tree"
       },
       "sky_phosphorus_note": {
@@ -48,14 +48,14 @@
         "path_at_integration": "research/studies/ways_of_living/results/ways_of_living.json",
         "branch": "main",
         "commit": null,
-        "sha256": "5d8693aaf3e44bab15633c11159501926e0124148b95f1fa1204618011d3ce28",
+        "sha256": "9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148",
         "read_from": "in-tree"
       },
       "provisioning_decisions": {
         "path_at_integration": "research/decisions.md",
         "branch": "main",
         "commit": null,
-        "sha256": "fead8868ff1ae03abadce006329201cdfed235d54758c6773649e90964499b07",
+        "sha256": "91de82a0684485e5cce652c2006fbc4c427cc0be3b802de92f9b7c9cfb6d4384",
         "read_from": "in-tree"
       }
     },
