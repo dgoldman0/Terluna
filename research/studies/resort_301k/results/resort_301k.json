@@ -2675,17 +2675,17 @@
    "research/studies/resort_301k/run.py": "c726bb1ce597ab1460fa78e2b02cc3e71d7eecf539336ea560ea6377b22be2fa"
   },
   "inputs": {
-   "research/studies/lake_methane/results/lake_methane.json": "6c3c58fe9f864b79d71be5142f779e57594beb18bb1224c9b483851655134259",
-   "research/studies/lake_anoxia/results/lake_anoxia.json": "206a6d1683b5fb02e53ccd9a6134c1853d3a6fc1c8d22a997f650472e9aff8d3",
-   "research/studies/lake_kinds/results/lake_kinds.json": "a57525ca45f3ac097a85b6ae9b1f6beebde7b3fbb0dae68597d49b41fe3f408d",
-   "research/studies/sea_oxygen/results/sea_oxygen.json": "176a3bd7c28f47bd1b52ea60905df106cff4da0a0aca2c611e524d761506d98b",
-   "research/studies/domain_synthesis/results/ledgers.json": "fe649747f1e4a5d27ebba93be3da7cdc91a00f4f36c85d652ce01b943eab8a4c",
-   "resources/results/sea_phosphorus.json": "9a042105ca673510d3c1fcef18f2730541a01f00e5d763ca7c65d9b65bba1722",
-   "research/studies/food_systems/results/food_systems.json": "57ef8d88d0cd409bca36ab5f8ad54722d410cf9193183cebde404f5df5192349",
-   "research/studies/heat_levers/results/heat_levers.json": "a4adfff78a9f016188ef3263258f5410c45d1787339bc742a6c0168807eff8d0",
-   "research/studies/climate_targets/results/climate_targets.json": "0b56ac1f8106bf91d0b8a2653d3a6424d306bea8cb8b0adc01c1d696709e705c",
-   "research/studies/coast_water/results/coast_water.json": "fc627b0f9da5aacac88ae863f7e9f8767ac0afdea579cc9c861cb6f3000fbdac",
-   "provisioning/results/power.json": "f6dcb08937c82a730ae6fd2b98fcbfcb06fc51109294796fdc53c136dca207c1"
+   "research/studies/lake_methane/results/lake_methane.json": "33ef4125600f7fbdc85ce0369d026102fd44abeb52bd3c1e3244a045feb8a44c",
+   "research/studies/lake_anoxia/results/lake_anoxia.json": "139212a7c872c15cd62d0c946ede4db6a3ae7f0740d9f4a4aaccb6c77e6f4b48",
+   "research/studies/lake_kinds/results/lake_kinds.json": "62232c55d8b39140a956030512b0f5ff8947269315ae8ffd40b9b8005c89b09e",
+   "research/studies/sea_oxygen/results/sea_oxygen.json": "986afd2c0a771be7774cd3897d3cbfc1450b0d46724040c781e86345ab174ebb",
+   "research/studies/domain_synthesis/results/ledgers.json": "e0746362d16e448bdfd6a5708771e53a7b6ba8cb33a8f5f2ea198e7b13182f3c",
+   "resources/results/sea_phosphorus.json": "56eb87433507b48ef64cf6c804671f991e97612f401c0a0875a29e4bc286cede",
+   "research/studies/food_systems/results/food_systems.json": "7bb6397125e22274cf442a2ee4b8fbc37f54db5df9d271b1cd0e076ba66839fb",
+   "research/studies/heat_levers/results/heat_levers.json": "349a17b0e1f545e355df48eab148e1f199728f3597542825c7c4ecc362a50458",
+   "research/studies/climate_targets/results/climate_targets.json": "ebfa214f6c6cf10512a9b8a66666b7a4f684ddc133bef31a2433a5209775778f",
+   "research/studies/coast_water/results/coast_water.json": "a76bdfcd6cc7664b8d50a4e73545e3004ff9bab6b28c2e3b68d9c57c43646727",
+   "provisioning/results/power.json": "5997c43a475c0478f59553d40e38ec1a12c0c4298ce46dae53d12654afce858e"
   },
   "constants": {
    "MOON_RADIUS": 1737400.0,
