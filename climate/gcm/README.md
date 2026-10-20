@@ -1455,17 +1455,24 @@ a copy, the 294.9 K ledger's open channel ends at order 104 and adds 5.8 × 10�
 as every run from 14 to 19 October read it (`gcm-runs/twilight/analysis/leftover_orders.py` and its two
 `leftover_*.json`).
 
-#### The surface stress in the output
+#### The surface stress and the 10 m wind in the output
 
 The lake studies take their 10 m wind from a neutral log profile from the lowest model level, about 0.9 km up. To let
 the next study bracket it with the model's own surface layer, the runner's output now holds the surface stress, `tauu`
 and `tauv` (PlaSim's codes 180 and 181, means over each 3-day output interval). ExoPlaSim's postprocessor also names the
 10 m wind, `uas` and `vas` (codes 165 and 166, `pyburn.py`), but PlaSim 3.4.2 never writes them: its output routine
 (`outmod.f90`) has no 10 m wind, and the postprocessor then leaves a requested name out of the file without an error.
-They are not asked for. A 10 m wind of PlaSim's own would need a patch that carries the lowest level's wind down
-PlaSim's surface layer (its drag and stability functions); whether to add one is the author's to decide. The stress
-gives the friction velocity, u* = (|τ|/ρ)^½, and with a roughness the wind's neutral profile, the end of the bracket the
-model's own surface layer sets. A test checks every output name against the codes PlaSim's output routine writes.
+The author asked for a 10 m wind of PlaSim's own, and since 19 October `--wind10` gives one (`WIND10_PATCHES`, in the
+runner's copy of ExoPlaSim only). PlaSim's surface layer takes it on Geleyn's (1988) profile through the lowest layer,
+u(z) = u_L (ln(1 + z/z0) − (z/z_L)(B_N − B_D))/B_D, from the drag it uses itself: B_N = ln(1 + z_L/z0) = k/√C_DN,
+and B_D = k/√(C_DN f_m) with f_m the stability factor of its momentum transfer. Neutral air gives the log profile,
+stable air brings less of the wind down and unstable air more; over the sea at the lowest level's 885 m the neutral
+factor is 0.72, and f_m of 0.5 and 1.5 give 0.51 and 0.88. The output writes its mean over the steps since the last
+output as codes 165 and 166, which the runner then asks for as `uas` and `vas`; the mean counts its own steps, since
+PlaSim reads its restart before this namelist. Without the switch the model is as it was. A test compiles the surface
+layer's lines and checks them against the formula, and another checks every output name against the codes PlaSim's
+output routine writes.
+The stress also gives the friction velocity, u* = (|τ|/ρ)^½, as a check on the profile's.
 
 #### The ice optics' weights
 
@@ -1478,7 +1485,10 @@ patch 11 (github.com/dgoldman0/world-crafting, branch `lab`, commit 79ea224,
 `ZICEW`, its default the constants, so that a runner can write the shield's. Its patches 01–10 give this copy's
 `radmod.f90` and `rainmod.f90` byte for byte from ExoPlaSim 3.4.2's own sources (`a49791572fa8f5b2` and
 `44c0668de3e8f7db`; the sources recovered both by undoing Terluna's edits and from an unpatched install agree), and
-patch 11 applies after them, giving `radmod.f90` `50e3df63c3d9872e`. Its port into this runner waits for the author.
+patch 11 applies after them, giving `radmod.f90` `50e3df63c3d9872e`. At the author's word it is ported unchanged in
+substance as `ICE_WEIGHTS_EDITS`, after the clear share's patch, in the runner's copy of ExoPlaSim only; runs with ice
+optics now write the shield's weights as `ZICEW` (`plasim_ice_optics.SHIELD_NIR_WEIGHTS`, tested against
+`shielded_nir_weights()`), and `--ice-weights stock` writes nothing and keeps the earlier runs' constants.
 
 ### Cloud amount: what published models say
 

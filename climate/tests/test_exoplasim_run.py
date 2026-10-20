@@ -146,13 +146,16 @@ class RunnerTests(unittest.TestCase):
 
     def test_the_twilight_clear_share_follows_the_patches_it_extends(self):
         # It extends the module, namelist and broadcast lines and the subroutines the twilight, longwave and ice patches
-        # wrote, keeps PlaSim's lines short, and comes last.
-        written = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:-1] for _, new in edits)
+        # wrote, keeps PlaSim's lines short, and comes last of the radiation's own patches; the ice weights follow it.
+        at = [edits for _, _, edits in er.TWILIGHT_PATCHES].index(er.TWILIGHT_CLEAR_EDITS)
+        written = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:at] for _, new in edits)
         for old, _ in er.TWILIGHT_CLEAR_EDITS:
             self.assertIn(old, written)
         for _, new in er.TWILIGHT_CLEAR_EDITS:
             self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
-        self.assertIs(er.TWILIGHT_PATCHES[-1][2], er.TWILIGHT_CLEAR_EDITS)
+        self.assertIs(er.TWILIGHT_PATCHES[at][2], er.TWILIGHT_CLEAR_EDITS)
+        self.assertEqual([name for name, _, _ in er.TWILIGHT_PATCHES[at + 1:]],
+                         ['radmod.f90', 'plasimmod.f90', 'fluxmod.f90', 'outmod.f90'])
         self.assertIn('ntwlclear', ''.join(new for _, new in er.TWILIGHT_CLEAR_EDITS))
 
     def test_the_twilight_clear_share_patch_leaves_the_model_as_it_was_when_off(self):
@@ -241,11 +244,12 @@ class RunnerTests(unittest.TestCase):
             self.assertTrue(np.allclose(on[j][3], on[j][2]))                  # dlwfl takes the same upward change
 
     def test_the_output_asks_only_for_what_plasim_writes(self):
-        # The surface stress joins the output; the 10 m wind, which PlaSim 3.4.2 never writes, stays out, since the
-        # postprocessor would leave it out of the file without an error.
+        # The surface stress joins the output. PlaSim 3.4.2 never writes the 10 m wind, so it joins only runs with the
+        # 10 m wind's patch on (--wind10), which writes codes 165 and 166; the postprocessor would otherwise leave it
+        # out of the file without an error.
         self.assertTrue({'tauu', 'tauv'} <= set(er.OUTPUT))
         self.assertFalse({'uas', 'vas'} & set(er.OUTPUT))
-        self.assertTrue({180, 181} <= set(er.PLASIM_CODES) and not {165, 166} & set(er.PLASIM_CODES))
+        self.assertTrue({180, 181, 165, 166} <= set(er.PLASIM_CODES))
         import re
         source = er.TWILIGHT_PACKAGE / 'exoplasim'
         if not (source / 'pyburn.py').exists():
@@ -257,6 +261,10 @@ class RunnerTests(unittest.TestCase):
             self.assertTrue(name in er.DERIVED or names[name] in er.PLASIM_CODES, name)
         # The codes are those PlaSim's output routine writes on its raw output unit, 40.
         text, codes = (source / 'plasim' / 'src' / 'outmod.f90').read_text(), set()
+        for name, marker, edits in er.WIND10_PATCHES:                  # as the runner leaves it once patched
+            if name == 'outmod.f90' and marker not in text:
+                for old, new in edits:
+                    text = text.replace(old, new)
         for m in re.finditer(r'call\s+write(?:gp|sp)\(', text):
             depth, i, args, cur = 1, m.end(), [], ''
             while depth:
@@ -272,6 +280,62 @@ class RunnerTests(unittest.TestCase):
             if args[0] == '40' and args[2].isdigit():
                 codes.add(int(args[2]))
         self.assertEqual(codes, set(er.PLASIM_CODES))
+
+    def test_the_ice_weights_come_from_the_namelist_with_the_stock_default(self):
+        # World-crafting's patch 11 on what the ice and clear-share patches wrote: ZICEW, read and broadcast, with the
+        # ice patch's constants as its default and the parameter it replaces gone; new runs write the shield's shares.
+        at = [edits for _, _, edits in er.TWILIGHT_PATCHES].index(er.ICE_WEIGHTS_EDITS)
+        text = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:at] for _, new in edits)
+        for old, new in er.ICE_WEIGHTS_EDITS:
+            self.assertEqual(text.count(old), 1, old)
+            text = text.replace(old, new)
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        self.assertNotIn('zew(', text)
+        self.assertEqual(text.count('zicew(jb-1)'), 4)
+        self.assertIn('(/0.6164, 0.2283, 0.0811, 0.0742/)', text)
+        self.assertIn(',ntwlclear,zicew', text)
+        self.assertIn('call mpbcrn(zicew,4)', text)
+        from climate.gcm import plasim_ice_optics as pio
+        self.assertEqual(pio.NIR_WEIGHTS, (0.6164, 0.2283, 0.0811, 0.0742))
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertEqual(inspect.signature(f).parameters['ice_weights'].default, 'shield')
+            self.assertIs(inspect.signature(f).parameters['wind10'].default, False)
+
+    def test_the_10_m_wind_follows_geleyns_profile(self):
+        # The surface layer's lines, compiled on a stand-in: neutral air gives the log profile, stable air brings less
+        # of the wind down and unstable air more, as the profile through the lowest layer gives them.
+        import math
+        import shutil
+        import subprocess
+        import tempfile
+        if shutil.which('gfortran') is None:
+            self.skipTest('no gfortran')
+        block = er.WIND10_FLUX_EDITS[-1][1].split('\n', 1)[1]
+        body = block[block.index('       if (nwind10 == 1)'):]
+        cases = [(1e-4, 885.0, 1.0), (1e-4, 885.0, 0.5), (1e-4, 885.0, 1.5), (0.5, 885.0, 1.0)]
+        program = ('      program wind10\n      integer, parameter :: NHOR = 4, NLEV = 1\n'
+                   '      integer :: jhor, nwind10 = 1\n'
+                   '      real :: zbz0(NHOR), dz0(NHOR), znl(NHOR), zrifm(NHOR), du(NHOR,NLEV), dv(NHOR,NLEV)\n'
+                   '      real :: du10(NHOR), dv10(NHOR), zbn, zbd, zf10\n'
+                   + ''.join(f'      dz0({i}) = {z0}\n      znl({i}) = {zl}\n      zrifm({i}) = {fm}\n'
+                             for i, (z0, zl, fm) in enumerate(cases, 1))
+                   + '      zbz0 = znl/dz0\n      du = 10.\n      dv = -5.\n      do jhor = 1, NHOR\n' + body
+                   + '      enddo\n      print *, du10\n      print *, dv10\n      end program wind10\n')
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / 'wind10.f90').write_text(program)
+            subprocess.run(['gfortran', '-fdefault-real-8', '-O0', '-o', 'wind10', 'wind10.f90'], cwd=tmp, check=True)
+            out = subprocess.run(['./wind10'], cwd=tmp, check=True, capture_output=True, text=True).stdout.split()
+        u10, v10 = [float(x) for x in out[:4]], [float(x) for x in out[4:8]]
+        for (z0, zl, fm), u, v in zip(cases, u10, v10):
+            bn = math.log(zl / z0 + 1.0)
+            bd = bn / math.sqrt(fm)
+            f = min(1.0, max(0.0, (math.log(1.0 + 10.0 / z0) - 10.0 / zl * (bn - bd)) / bd))
+            self.assertAlmostEqual(u, 10.0 * f, places=9)
+            self.assertAlmostEqual(v, -5.0 * f, places=9)
+        self.assertAlmostEqual(u10[0], 10.0 * math.log(1.0 + 1e5) / math.log(885.0 / 1e-4 + 1.0), places=9)
+        self.assertLess(u10[1], u10[0])
+        self.assertLess(u10[0], u10[2])
 
     def test_new_runs_take_the_301_k_ledger_in_the_clear_share(self):
         import inspect

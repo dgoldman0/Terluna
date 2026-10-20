@@ -181,9 +181,9 @@ OUTPUT = ['ta', 'ua', 'va', 'hus', 'cl',
 # postprocessor derives from them (pyburn.dataset): a name outside both comes out of the postprocessor as nothing.
 # The diagnostics' own codes (the heating's 21-29 among them) come on top when their switches are on.
 PLASIM_CODES = (101, 102, 103, 104, 105, 106, 107, 110, 129, 130, 133, 138, 139, 140, 141, 142, 143, 144, 146, 147, 152,
-                155, 159, 160, 161, 162, 164, 167, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183,
-                184, 201, 202, 203, 204, 205, 207, 208, 209, 210, 211, 218, 221, 229, 230, 232, 265, 266, 267, 268, 269,
-                298, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 410, 411)
+                155, 159, 160, 161, 162, 164, 165, 166, 167, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180,
+                181, 182, 183, 184, 201, 202, 203, 204, 205, 207, 208, 209, 210, 211, 218, 221, 229, 230, 232, 265,
+                266, 267, 268, 269, 298, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 410, 411)
 DERIVED = ('ua', 'va', 'spd', 'ps', 'psl', 'pr', 'ntr', 'nbr', 'hfns', 'wfn', 'zg', 'hur', 'wap', 'wa', 'stf', 'psi')
 # PlaSim's clear-sky fluxes, written when the diagnostic is on but unknown to ExoPlaSim's postprocessor,
 # which the runner teaches them. Unlike the other fluxes they are snapshots at each output time, not
@@ -807,14 +807,89 @@ TWILIGHT_CLEAR_EDITS = [
      "       if (niceopt == 1 .and. clgray <= 0.) call ice_cloud_lw(jlev,ztaucc0(:,jlev)) ! Terluna: ice\n"
      "       if (ntwlclear == 1) twltau(:,jlev) = ztaucc0(:,jlev) ! Terluna: for the twilight's clear share\n"),
 ]
+# The ice optics' weights from the namelist (2026-10-19): world-crafting's patch 11 (its lab branch at 79ea224), which
+# turns the four near-infrared weights of the ice patch into ZICEW with the ice patch's constants as its default, so a
+# run that writes nothing is the model as it was. Runs with ice optics write the shares of the design shield's
+# sunlight (plasim_ice_optics.SHIELD_NIR_WEIGHTS) unless --ice-weights stock keeps the unfiltered Sun's.
+ICE_WEIGHTS_EDITS = [
+    (f"      real :: ticeopt = {pio.ICE_BELOW_K:.2f}   ! Terluna: the temperature below which cloud is ice\n",
+     f"      real :: ticeopt = {pio.ICE_BELOW_K:.2f}   ! Terluna: the temperature below which cloud is ice\n"
+     f"      real :: zicew(4) = (/{_fortran_list(pio.NIR_WEIGHTS, '{:.4f}')}/) "
+     "! world-crafting: ice bands 2-5 in band 2, patch 10's\n"),
+    ("     &               ,ntwlclear\n", "     &               ,ntwlclear,zicew\n"),
+    ("      call mpbci(ntwlclear)\n", "      call mpbci(ntwlclear)\n      call mpbcrn(zicew,4)\n"),
+    (f"      real, parameter :: zew(4) = (/{_fortran_list(pio.NIR_WEIGHTS, '{:.4f}')}/)   ! bands 2-5 in band 2\n", ""),
+    ("        zr = zr+zew(jb-1)*zrd\n", "        zr = zr+zicew(jb-1)*zrd\n"),
+    ("        zt = zt+zew(jb-1)*ztd\n", "        zt = zt+zicew(jb-1)*ztd\n"),
+    ("        zrs = zrs+zew(jb-1)*zrf\n", "        zrs = zrs+zicew(jb-1)*zrf\n"),
+    ("        zts = zts+zew(jb-1)*ztf\n", "        zts = zts+zicew(jb-1)*ztf\n"),
+]
+# The 10 m wind (2026-10-19). PlaSim 3.4.2 writes no wind below its lowest level, about 0.9 km up in the lunar air, and
+# the lake model brought that wind down on a neutral log profile. NWIND10 1 has the surface layer (surflx) take the
+# 10 m wind on Geleyn's (1988) profile through the lowest layer, u(z) = u_L (ln(1 + z/z0) - (z/z_L)(B_N - B_D)) / B_D,
+# from the drag the model itself uses: B_N = ln(1 + z_L/z0) = k/sqrt(C_DN) and B_D = k/sqrt(C_DN f_m), f_m the
+# stability factor of PlaSim's momentum transfer (zrifm). The neutral limit is the log profile; stable air brings less
+# of the wind down, unstable air more. The output writes its mean over the steps since the last output, codes 165 and
+# 166 (uas, vas), counting its own steps, since PlaSim reads its restart before this namelist. 0, the default, leaves
+# the model as it was.
+WIND10_MOD_EDITS = [
+    ("      real :: atsa(NHOR)  = 0. ! accumulated surface air temperature\n",
+     "      real :: atsa(NHOR)  = 0. ! accumulated surface air temperature\n"
+     "      integer :: nwind10 = 0      ! Terluna: 1 writes the 10 m wind (codes 165 and 166)\n"
+     "      integer :: nu10acc = 0      ! Terluna: the 10 m wind's steps since its last output\n"
+     "      real :: du10(NHOR)  = 0.    ! Terluna: the 10 m wind (m/s)\n"
+     "      real :: dv10(NHOR)  = 0.\n"
+     "      real :: au10(NHOR)  = 0.    ! Terluna: its sum since its last output\n"
+     "      real :: av10(NHOR)  = 0.\n"),
+]
+WIND10_FLUX_EDITS = [
+    ("      namelist/fluxmod_nl/nvdiff,nshfl,nevap,nstress,ntsa",
+     "      namelist/fluxmod_nl/nvdiff,nshfl,nevap,nstress,ntsa,nwind10"),
+    ("      call mpbci(ntsa)\n", "      call mpbci(ntsa)\n      call mpbci(nwind10)\n"),
+    ("      real znl(NHOR)       ! z of lowermost level (m)\n",
+     "      real znl(NHOR)       ! z of lowermost level (m)\n"
+     "      real zbn,zbd,zf10    ! Terluna: the 10 m wind, Geleyn's profile\n"),
+    ("       dtransm(jhor)=ztrans*zrifm(jhor)\n",
+     "       dtransm(jhor)=ztrans*zrifm(jhor)\n"
+     "       if (nwind10 == 1) then   ! Terluna: the 10 m wind from the lowest layer's drag\n"
+     "        zbn=LOG(zbz0(jhor)+1.)\n"
+     "        zbd=zbn/SQRT(zrifm(jhor))\n"
+     "        zf10=(LOG(1.+10./dz0(jhor))-10./znl(jhor)*(zbn-zbd))/zbd\n"
+     "        zf10=MAX(0.,MIN(1.,zf10))\n"
+     "        du10(jhor)=zf10*du(jhor,NLEV)\n"
+     "        dv10(jhor)=zf10*dv(jhor,NLEV)\n"
+     "       endif\n"),
+]
+WIND10_OUT_EDITS = [
+    ("      call writegp(40,atsa,167,0)\n",
+     "      call writegp(40,atsa,167,0)\n"
+     "      if (nwind10 == 1) then   ! Terluna: the 10 m wind's mean since its last output\n"
+     "       au10(:)=au10(:)/real(max(nu10acc,1))\n"
+     "       call writegp(40,au10,165,0)\n"
+     "       av10(:)=av10(:)/real(max(nu10acc,1))\n"
+     "       call writegp(40,av10,166,0)\n"
+     "      endif\n"),
+    ("      atsa(:)=atsa(:)+dtsa(:)\n",
+     "      atsa(:)=atsa(:)+dtsa(:)\n"
+     "      if (nwind10 == 1) then\n"
+     "       au10(:)=au10(:)+du10(:)\n"
+     "       av10(:)=av10(:)+dv10(:)\n"
+     "       nu10acc=nu10acc+1\n"
+     "      endif\n"),
+    ("      atsa(:)=0.\n", "      atsa(:)=0.\n      au10(:)=0.\n      av10(:)=0.\n      nu10acc=0\n"),
+]
+WIND10_PATCHES = [('plasimmod.f90', 'Terluna: 1 writes the 10 m wind', WIND10_MOD_EDITS),
+                  ('fluxmod.f90', "Terluna: the 10 m wind, Geleyn's profile", WIND10_FLUX_EDITS),
+                  ('outmod.f90', "Terluna: the 10 m wind's mean since its last output", WIND10_OUT_EDITS)]
 # The twilight, gas, longwave and ice patches go only into a copy of ExoPlaSim of its own, which every run imports
 # first since the corrected radiation became the standard (2026-10-14); the shared installation stays as the earlier
-# runs had it. The twilight's clear share follows them, from 2026-10-19.
+# runs had it. The twilight's clear share follows them, from 2026-10-19, and the ice weights and the 10 m wind after it.
 TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS),
                     ('radmod.f90', 'Terluna: CO2 and O2 in the sunlight', GAS_EDITS),
                     ('radmod.f90', 'Terluna: the longwave by height', LW_CORRECTION_EDITS),
                     ('radmod.f90', 'Terluna: ice optics for cold cloud', ICE_OPTICS_EDITS),
-                    ('radmod.f90', "Terluna: 1 puts the twilight's terms in the clear share", TWILIGHT_CLEAR_EDITS)]
+                    ('radmod.f90', "Terluna: 1 puts the twilight's terms in the clear share", TWILIGHT_CLEAR_EDITS),
+                    ('radmod.f90', 'world-crafting: ice bands 2-5 in band 2', ICE_WEIGHTS_EDITS)] + WIND10_PATCHES
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
 # The curved air's ledgers (twilight.py): on the design climate's 301 K column, the standard since 2026-10-19, and on
 # the 294.9 K column every run from 14 to 19 October took. The Moon's slant factors (ZMLUNAR, ZMAIRLUNAR) stay the 294.9 K
@@ -885,7 +960,7 @@ def _atomic_write(path: Path, text: str):
 
 def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
                   heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
-                  twilight_clear_share=True, longwave_fit='301k'):
+                  twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield'):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
@@ -893,7 +968,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     twilight_clear_share (TWILIGHT_CLEAR_EDITS), and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating
     writes each process's temperature tendency (HEATING), longwave_correction the longwave by height
     (LW_CORRECTION_EDITS) from the fit longwave_fit names (LONGWAVE_FITS), and ice_optics ice optics for cloud colder
-    than -38 °C (ICE_OPTICS_EDITS). Each is recorded when given, and left out the configuration is the one every
+    than -38 °C (ICE_OPTICS_EDITS) with the near-infrared weights ice_weights names (ICE_WEIGHTS_EDITS), and wind10 the
+    10 m wind (WIND10_PATCHES). Each is recorded when given, and left out the configuration is the one every
     earlier run had; the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October
     did, and the 295 K fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
@@ -947,6 +1023,15 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['ice_optics'] = dict(below_k=pio.ICE_BELOW_K, near_ir_weights=list(pio.NIR_WEIGHTS),
                                  radius='Kristjansson and Mitchell, as CAM3 and RRTMG carry it; its trend below 180 K',
                                  optics='Ebert and Curry (1992), as RRTMG carries them (iceflag 1 and 0)')
+        if ice_weights == 'shield':
+            cfg['ice_optics'].update(near_ir_weights=list(pio.SHIELD_NIR_WEIGHTS),
+                                     weights_source="the design shield's sunlight, written as ZICEW (world-crafting's "
+                                                    'patch 11, lab branch 79ea224)')
+    if wind10:
+        cfg['wind10'] = dict(codes=[165, 166],
+                             profile="Geleyn's (1988) profile through the lowest layer, from the drag PlaSim uses with "
+                                     'its stability factor (WIND10_PATCHES)')
+        cfg['output'] = cfg['output'] + ['uas', 'vas']
     if heating:
         cfg['heating_diagnostics'] = True
         cfg['output'] = cfg['output'] + [name for name, _ in HEATING.values()]
@@ -1169,6 +1254,11 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     if 'ice_optics' in cfg:
         model._edit_namelist('radmod_namelist', 'NICEOPT', '1')
         model._edit_namelist('radmod_namelist', 'TICEOPT', str(cfg['ice_optics']['below_k']))
+        if cfg['ice_optics'].get('weights_source'):
+            for i, w in enumerate(cfg['ice_optics']['near_ir_weights'], 1):
+                model._edit_namelist('radmod_namelist', f'ZICEW({i})', repr(float(w)))
+    if 'wind10' in cfg:
+        model._edit_namelist('fluxmod_namelist', 'NWIND10', '1')
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
@@ -1357,10 +1447,12 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         overrides: dict | None = None, start_from: str | None = None, co2_ppm: float | None = None,
         top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True,
         heating: bool = False, longwave_correction: bool = False, ice_optics: bool = False,
-        twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k') -> int:
+        twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k',
+        wind10: bool = False, ice_weights: str = 'shield') -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
-                        ice_optics, twilight_ledger, twilight_clear_share, longwave_fit)
+                        ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
+                        ice_weights=ice_weights)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -1482,6 +1574,13 @@ def main(argv=None) -> int:
                              '2026-10-19) or the fit near 295 K the runs of 17 October took (part of the run key)')
     parser.add_argument('--ice-optics', action='store_true',
                         help='ice optics for cloud colder than -38 C (plasim_ice_optics.py; part of the run key)')
+    parser.add_argument('--ice-weights', choices=('shield', 'stock'), default='shield',
+                        help="the ice optics' near-infrared weights: the shares of the design shield's sunlight "
+                             "(ZICEW, the standard since 2026-10-19) or the unfiltered Sun's the earlier runs took "
+                             '(part of the run key)')
+    parser.add_argument('--wind10', action='store_true',
+                        help="the 10 m wind on Geleyn's profile from the lowest layer's drag, codes 165 and 166 "
+                             '(WIND10_PATCHES; part of the run key)')
     parser.add_argument('--heating-diagnostics', action='store_true',
                         help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
                              'the run key)')
@@ -1514,7 +1613,7 @@ def main(argv=None) -> int:
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
-               args.longwave_fit)
+               args.longwave_fit, args.wind10, args.ice_weights)
 
 
 if __name__ == '__main__':

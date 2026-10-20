@@ -104,3 +104,14 @@ def test_the_fortran_patch_matches_its_python_copy(tmp_path):
     assert np.all(out[3] == -1.0)                           # too warm: PlaSim's own optics stay
     assert np.all(out[4, :6] == -1.0)                       # unlit: the sunlight is left alone
     assert out[4, 6] != -1.0                                # the infrared is not
+
+
+def test_the_shield_weights_are_the_design_shields_sunlight():
+    from atmosphere.radiative_convective import fetch_inputs
+    try:
+        fetch_inputs.path('TSIS1_HSRS_stride100.csv')
+    except Exception:
+        pytest.skip('TSIS-1 spectrum not fetched')
+    weights = pio.shielded_nir_weights()
+    assert np.isclose(sum(weights), 1.0)
+    assert tuple(round(w, 4) for w in weights) == pio.SHIELD_NIR_WEIGHTS
