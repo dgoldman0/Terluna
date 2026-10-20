@@ -17,16 +17,16 @@
    "research/studies/sea_oxygen/columns.py": "dd24081565230f372febad5bdfc01236d45e748f5aafcb5c7bb7482620417879"
   },
   "inputs": {
-   "research/studies/lake_anoxia/results/lake_anoxia.json": "206a6d1683b5fb02e53ccd9a6134c1853d3a6fc1c8d22a997f650472e9aff8d3",
+   "research/studies/lake_anoxia/results/lake_anoxia.json": "139212a7c872c15cd62d0c946ede4db6a3ae7f0740d9f4a4aaccb6c77e6f4b48",
    "research/runs/lake_anoxia/profiles.json": "faf917047ba467f5ce07b802dc2cf6ca9b292a6d8ea0ec7989f79c242b6e7efb",
    "research/runs/lake_kinds/ladder.json": "bc4856c2a6fb85bdedd52a3319a83a28d154b996dea4fd4e365484b15c2da7e5",
    "research/runs/sea_oxygen/columns.json": "2d56e99280f4e021bc1e53bd18bc3c798f1d72e3b2cd3d7b23fc067ec615e910",
    "research/studies/lake_oxygen/results/lakes.json": "056679f12a6dfb5f19da1994616dbe3fd80c6c4906ab7aff70f4a445796ef2aa",
    "research/studies/sea_oxygen/results/seas.json": "76073ddab08f9683b7876af482c2a6cb0d27dcc8a193aeff828df9044bd3d4cd",
-   "research/studies/sea_oxygen/results/sea_oxygen.json": "176a3bd7c28f47bd1b52ea60905df106cff4da0a0aca2c611e524d761506d98b",
-   "research/studies/lake_kinds/results/lake_kinds.json": "a57525ca45f3ac097a85b6ae9b1f6beebde7b3fbb0dae68597d49b41fe3f408d",
-   "research/studies/sea_chemistry/results/sea_chemistry.json": "927bb32a219c6adc0c33dab579eac2527d2bcce82e453a915e07d9b08ad9856a",
-   "research/studies/domain_synthesis/results/ledgers.json": "fe649747f1e4a5d27ebba93be3da7cdc91a00f4f36c85d652ce01b943eab8a4c",
+   "research/studies/sea_oxygen/results/sea_oxygen.json": "986afd2c0a771be7774cd3897d3cbfc1450b0d46724040c781e86345ab174ebb",
+   "research/studies/lake_kinds/results/lake_kinds.json": "62232c55d8b39140a956030512b0f5ff8947269315ae8ffd40b9b8005c89b09e",
+   "research/studies/sea_chemistry/results/sea_chemistry.json": "657a707fa621ee2f71deb8d4757c94e19bf8cf14c2aafdb2b89a22b39b6a1231",
+   "research/studies/domain_synthesis/results/ledgers.json": "e0746362d16e448bdfd6a5708771e53a7b6ba8cb33a8f5f2ea198e7b13182f3c",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
    "research/studies/lake_oxygen/climate_targets_as_run.json": "2084576eee45fe468c138dc7bd98a9eb12a0d581cfbc8c0766873eef134007f9",
    "research/studies/lake_methane/sources.json": "cdeb859a46a84a8a3538606c89fc359248301ae237e5a3772633ab4abf2efce5"
@@ -172637,7 +172637,7 @@
     "methane_is": "a lower value"
    }
   },
-  "seas_product_sha256": "176a3bd7c28f47bd1b52ea60905df106cff4da0a0aca2c611e524d761506d98b",
+  "seas_product_sha256": "986afd2c0a771be7774cd3897d3cbfc1450b0d46724040c781e86345ab174ebb",
   "variant_totals": {
    "wind_share_low": {
     "replaced": [
@@ -172843,7 +172843,7 @@
  },
  "forms": {
   "index": "research/runs/lake_oxygen/mixing_forms/mixing_forms_index.json",
-  "index_sha256": "78dd66a4e3b3f90032eefabd30f3775262edfe4313275c2c514a66e33dbf5450",
+  "index_sha256": "2495403f90d7b4aa914c8700a2a38c3b7e3b4ef6bfae63e9c4b559aa3469bf72",
   "cases": {
    "shih_301k_352m_0-15_oligotrophic": {
     "case": {
@@ -186027,5 +186027,5 @@
    }
   }
  },
- "seconds": 418.4
+ "seconds": 275.5
 }
