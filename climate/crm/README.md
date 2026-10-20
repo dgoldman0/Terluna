@@ -1372,6 +1372,77 @@ climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_lunar_rain
     --reference box_0e_small_rain_control
 ```
 
+**The test as run** (cases `box_0e_small_rain_control_day29` and `box_0e_small_lunar_rain_day29`, the cheaper pair, on
+19–20 October). Both restarted from the small box's day-29.5 restart on the rain-limits build and ran its second lunar
+day, about an hour each on 4 threads, writing the budgets of potential temperature and vapour as domain means every
+three hours. The spread between two realizations of the same physics is the control against the small box itself
+over the same days: the same state at day 29.5, compiled differently. Box means over days 29.6–59.0
+([box_analysis.py](box_analysis.py),
+[box_box_0e_small_lunar_rain_day29.json](../results/crm/box_box_0e_small_lunar_rain_day29.json),
+[box_box_0e_small_rain_control_day29.json](../results/crm/box_box_0e_small_rain_control_day29.json);
+[rain_sizes.py](rain_sizes.py); [box_budget.py](box_budget.py)), with the 90% ranges of the moving-block bootstrap:
+
+| | Lunar limits | CM1's limits | Lunar against CM1's | Control against the small box |
+|---|---|---|---|---|
+| Air at 2 m | 27.2 °C | 25.7 °C | +1.47 K (+1.24 to +1.71) | −0.13 K |
+| Dewpoint at 2 m | 24.1 °C | 23.2 °C | +0.92 K (+0.68 to +1.14) | −0.17 K |
+| Air as the GCM measures it | 27.9 °C | 25.8 °C | +2.06 K (+1.75 to +2.36) | −0.10 K |
+| Rain reaching the ground, per lunar day | 63 mm | 33 mm | +90% | −2% |
+| Water condensed | 174 mm | 307 mm | −43% | +1% |
+| Falling water evaporated on the way down | 48% | 86% | | 85.7% against 85.3% |
+| Rain held aloft | 0.17 kg/m² | 0.41 kg/m² | | |
+| Rain's mass-weighted mean diameter | 1.31 mm | 0.59 mm | | |
+| Cloud cover | 36% | 47% | −11 points (−18 to −5) | −2 points |
+| Fog, cloud below 200 m | 30% | 31% | −1 point (−10 to +7) | −4 points |
+| Cloud fraction of the lowest level, about 100 m | 28% | 17% | +10 points | −3 points |
+| Wind at 10 m | 0.53 m/s | 0.62 m/s | −0.09 m/s | 0.00 m/s |
+
+The lunar limits move every measure by several times the spread. Their rain grows larger, 82% of its mass beyond the
+lunar cutoff of 0.84 mm, and evaporates less on the way down, so twice as much reaches the ground from 43% less
+condensation: less of the air's water cycles back through falling rain.
+
+**Why the air near the ground warms**
+([box_budget_box_0e_small_lunar_rain_day29.json](../results/crm/box_budget_box_0e_small_lunar_rain_day29.json); the
+spread's in
+[box_budget_box_0e_small_rain_control_day29.json](../results/crm/box_budget_box_0e_small_rain_control_day29.json)).
+CM1's own budget closes within 6 W/m² in each of the GCM's lowest four layers once the box's prescribed day-night
+heating is reckoned from its table, and its microphysics matches CM1's running water totals within 4%. The lunar arm
+against the control, W/m², positive warming:
+
+| Layer | Microphysics | Of it: rain's evaporation; condensation | Turbulence | Circulation | Radiation | Storage |
+|---|---|---|---|---|---|---|
+| 0–1.8 km | +8.2 | +8.2; −6.1 | −12.7 | +8.8 | −1.4 | +2.1 |
+| 1.8–6.5 km | +13.9 | +25.1; −14.7 | +2.5 | −11.7 | −1.9 | +6.1 |
+| 6.5–13.7 km | −1.8 | +40.3; −45.4 | +7.3 | +0.4 | −0.4 | +5.2 |
+| 13.7–23 km | +15.3 | +48.4; −30.1 | +0.4 | −1.6 | +0.2 | +1.2 |
+| Whole column | +29.8 | +135.0; −124.4 | −1.9 | −10.8 | −3.4 | +19.1 |
+
+The spread's differences stay within 3 W/m² in every term and layer.
+
+- **Over the whole column** the rain's evaporation cools 135 W/m² less and condensation heats 124 W/m² less; the net,
+  about 30 W/m², is the heat of the extra rain that reaches the ground.
+- **In the lowest 1.8 km** the rain's evaporation cools the air 8.2 W/m² less. The warmer air takes 6.6 W/m² less
+  sensible heat from the ground, which evaporates 8.2 W/m² more, and its turbulence brings it 12.7 W/m² less in all;
+  its own circulation brings 8.8 more.
+- **So the air at 2 m runs 1.5 K warmer and 0.9 g/kg moister**, most by night (+1.6 K, the dewpoint +1.5 K), and the
+  low cloud reaches the ground more often while the fog below 200 m holds at 30%.
+- **Against the GCM** at 0° E, which forced this box before its corrections: the box's air as the GCM measures it,
+  25.8 °C with CM1's limits against the GCM's 22.0 °C, becomes 27.9 °C with the lunar ones, and its rain at the ground,
+  33 mm a lunar day against the GCM's 180 on its land cells, becomes 63. The GCM's own falling rain evaporates by one
+  Earth-tuned constant on each layer's dryness (PlaSim's `gamma`, `rainmod.f90`), with no drop sizes or fall speeds,
+  so how much of its rain evaporates on the way down is the question this test puts to the GCM.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_lunar_rain_day29 --from-day 29.5 \
+    --reference box_0e_small_rain_control_day29                               # about a minute each
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_rain_control_day29 --from-day 29.5 \
+    --reference box_0e_small
+climate/gcm/.venv/bin/python -m climate.crm.rain_sizes box_0e_small_lunar_rain_day29 --from-day 29.5
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_0e_small_lunar_rain_day29 \
+    --reference box_0e_small_rain_control_day29                               # seconds
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_0e_small_rain_control_day29 --reference box_0e_small
+```
+
 **Other Earth-tuned constants in Morrison's rain**, changed only where the physics gives the value:
 
 - The self-collection rate, 5.78 m³ kg⁻¹ s⁻¹ (Seifert and Beheng 2001), carries Earth's collision kernel, the volume
@@ -1390,10 +1461,9 @@ climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_lunar_rain
   6 mm (`xvrmx0` with `imaxdiaopt = 3`), its active breakup off for two moments. Carried as Morrison's are, the
   collisional lengths would scale by about 2.8 and the cap by 2.46; it is not patched, since no NSSL run is planned.
 
-**Open.** Whether the lunar limits change the answers is the test's to show, and the author decides whether it runs
-and whether the limits join CM1's next run with the size-dependent fall law. The similarity carries Earth's collision
-outcomes to the Moon by the Weber number; no lunar collision has been measured. The reading of the budgets for the
-column's heating is to be written with the test.
+**Open.** The lunar limits change the answers by several times the spread between realizations (above), and the author
+decides whether they join CM1's next run with the size-dependent fall law. The similarity carries Earth's collision
+outcomes to the Moon by the Weber number; no lunar collision has been measured.
 
 ## A box over the highlands
 
