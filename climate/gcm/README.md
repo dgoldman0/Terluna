@@ -1490,6 +1490,63 @@ substance as `ICE_WEIGHTS_EDITS`, after the clear share's patch, in the runner's
 optics now write the shield's weights as `ZICEW` (`plasim_ice_optics.SHIELD_NIR_WEIGHTS`, tested against
 `shielded_nir_weights()`), and `--ice-weights stock` writes nothing and keeps the earlier runs' constants.
 
+#### The design years (20 October)
+
+The cold start (`A28R_301k`, sunlight 0.925, on the rebuilt lakes) ran 25 years heading near 305 K, about 4 K warmer
+than the target study's runs, so a branch from its year-24 restart (`A28R_301k_s0894`) ran 15 years at 0.894. A twin of
+that branch without the clear share (`A28R_301k_s0894_noclear`) measured the clear share: it cools the climate by
+about 1 K (their year 14 at 301.05 and 301.93 K, settling near 300.3 and 301.5 K by `compare --settle`). The
+design years (`A28R_301k_s0897`) ran on from the branch's year-14 restart at 0.897, 15 years on 4 ranks
+(`run_A28R_301k_design.sh` on the research drive).
+
+- **They settled near 301.3 K.** Years 5–14 average 301.25 K at the ground, every year within 0.13 K of the others,
+  with the top of the air in balance (+0.02 W/m²) and a drift of +0.015 K a year; years 10–14 average 301.29 K. On
+  20 October the author took years 5–14 as the design years, at sunlight 0.897, 7.5% dimmer than the 0.970 of the
+  295 K design case.
+- **`compare --settle` misread them.** Its fit ends a run where the run's imbalance reaches the leftover +0.62 W/m²
+  of the 20-year test (`A28_corrected_970_lw_ice`, years 10–19), and these runs keep none: it read 299.4 K for the
+  design years, already settled at 301.3, and 300.3 K for the branch at 0.894, whose own years point to about
+  300.8 K.
+- **The longwave refit holds on them, at its edge**
+  ([longwave_check_A28R_301k_s0897.json](../results/gcm/longwave_check_A28R_301k_s0897.json), `plasim_longwave check`
+  with `--case`). On years 5, 9 and 14 its largest layer mean over land or sea is 1.9–2.65 W/m², against 6.2–6.9 for
+  the 295 K fit and about 20 for PlaSim alone. One sample of six, year 14's cloud-free columns, passes the 2.5 W/m²
+  the rule allows, by 0.15. A refit would need a new design run, so it waits for the next change to the GCM's physics.
+- **The high cloud's water and crystals are worth several kelvin** ([high_cloud.py](high_cloud.py),
+  [high_cloud_A28R_301k_s0897.json](../results/gcm/high_cloud_A28R_301k_s0897.json)). The top three layers over the
+  design years, with the ice optics the GCM runs with:
+
+  | Layer | Cover | In-cloud water | Temperature | Crystal radius | Reflection; emissivity |
+  |---|---|---|---|---|---|
+  | Above 107 km | 9.5% | 1.16 g/m² | 162 K | 2.2 µm | 19.0%; 0.58 |
+  | 81–107 km | 33.6% | 2.03 g/m² | 192 K | 11.5 µm | 8.3%; 0.27 |
+  | 63–81 km | 11.5% | 6.31 g/m² | 222 K | 35.2 µm | 8.1%; 0.30 |
+
+  Scaling every layer's water or crystal radius, first order (the cloud's amount, the vapour and the circulation
+  held, the layers counted apart, the sunlight averaged over day and night), at the top of the air and at the ground
+  through the branches' feedback of 1.20–1.56 W/m² a kelvin:
+
+  | Change | At the top of the air | At the ground |
+  |---|---|---|
+  | Water halved | −8.6 W/m² | −5.5 to −7.1 K |
+  | Water 1.5 times | +6.5 W/m² | +4.2 to +5.4 K |
+  | Water 2.5 times | +15.2 W/m² | +9.8 to +12.7 K |
+  | Water 3.5 times | +20.3 W/m² | +13.0 to +16.9 K |
+  | Crystals half the size | +10.6 W/m² | +6.8 to +8.8 K |
+  | Crystals twice the size | −7.8 W/m² | −5.0 to −6.5 K |
+
+  Most of each change is the infrared: more water or smaller crystals trap more of it than they reflect sunlight. A
+  factor of two in either moves the design climate by 5–7 K, more than any other uncertainty measured in it so far,
+  and the ice CM1 made of its own at these heights, 1.5–3.5 times PlaSim's water, would be worth +4 to +17 K. The
+  coldest layer's crystals rest on the table's trend below 180 K. It is a scale for the high cloud, not a run: a GCM
+  answer needs the cloud's water and crystals from a lunar treatment of the cold cloud.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_s0897:5 --case A28R_301k_s0897:9 \
+    --case A28R_301k_s0897:14 --output climate/results/gcm/longwave_check_A28R_301k_s0897.json      # minutes, cached
+climate/gcm/.venv/bin/python -m climate.gcm.high_cloud A28R_301k_s0897 --years 5-14                 # seconds
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

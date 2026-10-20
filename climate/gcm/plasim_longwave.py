@@ -469,10 +469,16 @@ def main(argv=None) -> int:
     parser.add_argument('run', nargs='?')
     parser.add_argument('--year', type=int, default=0)
     parser.add_argument('--every', type=int, default=20)
+    parser.add_argument('--case', action='append', metavar='RUN:YEAR',
+                        help='check: a run year to check in place of the 20-year test\'s (repeatable)')
+    parser.add_argument('--output', type=Path, help='check: where to write, with --case')
     args = parser.parse_args(argv)
     if args.action == 'check':
-        out = check()
-        CHECK.write_text(json.dumps(out, indent=1) + '\n')
+        cases = tuple((c.rsplit(':', 1)[0], int(c.rsplit(':', 1)[1])) for c in args.case) if args.case else CHECK_CASES
+        if args.case and args.output is None:
+            parser.error('check with --case takes --output')
+        out = check(cases)
+        (args.output or CHECK).write_text(json.dumps(out, indent=1) + '\n')
         print('near 301 K:', out['near_301k'])
         for case in out['cases']:
             for sample, r in case['samples'].items():
