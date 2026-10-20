@@ -1205,6 +1205,21 @@ means over the second lunar day): the sideways transport takes about a third of 
   free; fitting that, as its sunlight was fitted by height on 14 October, would move the design case's lower air.
   The rest of the gap, a degree or two, lies in how the two models carry the ground's heat upward: by day CM1's
   resolved dry convection where the GCM's stable layer leaves part of it to its resolved circulation.
+- **RRTMG's own gas optics match the correlated-k model, beyond its table's edge too** (19 October;
+  [rrtmg_edge.py](rrtmg_edge.py),
+  [rrtmg_edge_ring_45n_corrected_sideways.json](../results/crm/rrtmg_edge_ring_45n_corrected_sideways.json)). RRTMG's
+  tables start at 1,053.63 hPa, and the ring's ground stands at 1,214 hPa, so its lowest 7.5 km are extrapolated in
+  ln p. CM1's own RRTMG longwave, compiled from the lunar build's objects into an offline driver
+  ([rrtmg_offline/lw_columns.f90](rrtmg_offline/lw_columns.f90)), took the same 990 cloud-free columns on the
+  correlated-k model's layers, with the build's gravity, CO2 and O2. It comes within 0.02 K a day of the correlated-k
+  model at every height (−0.017, −0.006, −0.013 and −0.007 K a day over the GCM's lowest four layers), the same
+  within 0.01 K a day on twins scaled so that every layer lies inside the tables, and holding the absorption at the
+  edge's values below it moves the lowest layers by 0.002–0.003 K a day. The edge needs no patch. The
+  excess the comparison above found lies between CM1's written heating and the same RRTMG on the same columns: CM1
+  cools 0.14, 0.11, 0.09 and 0.08 K a day more over the four layers. Its gases, gravity and the ground's emissivity
+  (0.98 over water, land-use 16) match the driver's within what would move it; what CM1 adds is its own layers above
+  the top on Earth's standard temperature profile, the ice aloft, its 30-minute radiation step and its heating as
+  written. Which of these it is stays to be traced with the driver.
 - **The ring's ice high up came from its start.** Every column holds ice above 107 km, 1.1 g/m², which is why the
   radiation check took columns cloud-free below 25 km. Above the GCM's top level (130 km) the starting sounding and
   the nudging reference kept the top's vapour while the temperature kept falling, so 140–150 km began 6–15 times
