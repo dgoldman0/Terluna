@@ -3,7 +3,7 @@
  "producer": {
   "study": "living_light",
   "files": {
-   "research/studies/living_light/run.py": "7c62fb4fedd7614779448e0aed1320d07e56cdd86d36da58f736775cbb2d3369"
+   "research/studies/living_light/run.py": "cceed80e5188c175e5317c60b49c4535b72047cbfea25c6918ca7b6497ca7a37"
   },
   "imported_code": {
    "illumination/calendar/geometry.py": "462b9f7174efa4aec4b96b37b7e2a5ba3f1bdaed5e2db53ce7c14b311e8a26dd",
@@ -40,8 +40,8 @@
    "research/studies/ways_of_living/results/ways_of_living.json": {
     "branch": "main",
     "commit": null,
-    "blob": "e6f8e14280fb8207f86941851fefca025e3542a9",
-    "sha256": "5d8693aaf3e44bab15633c11159501926e0124148b95f1fa1204618011d3ce28",
+    "blob": "879dd4194f60547ba40ba5cecf2659dc978de2f8",
+    "sha256": "9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    }

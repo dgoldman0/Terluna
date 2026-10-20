@@ -3,7 +3,7 @@
  "producer": {
   "study": "sky_ecology",
   "files": {
-   "research/studies/sky_ecology/run.py": "ead37ecb87fbfc14ed50e04d94e28ca4dbf35223e538ada8270e2d855b4a0705",
+   "research/studies/sky_ecology/run.py": "b9475255a53b4f6dff92bf95635cd5c4cb2f1693df518a2ef0f38e69c9e8b7cb",
    "research/studies/sky_ecology/food_web.py": "bbba895cdab7384c309269bf832d1a8d1890db75aa0fa7fcbd441cad4dccd87c",
    "research/studies/sky_ecology/tenants.py": "94d1281e51b3bad08dc002bd1dd2f27c5140f942b3c061786dc778fadbe59a9e",
    "research/studies/sky_ecology/phosphorus.py": "03362cdb663f2640fc38ff2f74466c2f86153b8ae247ce01d08b6ab535fb424e",
@@ -35,7 +35,7 @@
    "illumination/surface_light/results/surface_light.json": "e2406dbceb34193eaef5bd8a1dd6ea20940be72934301ef618221fdc79ad5572",
    "research/studies/sky_ships/results/sky_ships.json": "5a5e2a31a7720327a13d9a01db7bb711fb5177a5d2b0227c7085826ad8a85a65",
    "research/studies/sky_fleet/results/sky_fleet.json": "4826a86d183fb13d004b89c9bd70002aac06426b075411bdcba8d221175edfc8",
-   "shared/scenarios/water.json": "a9d4d60ef3bf20b52454fdc07f2e05de107ebdd896b03288e9117af0c87e46a0",
+   "shared/scenarios/water.json": "876ac34f925302e2b8e73555ece37dfc0560e0551674a4a6a810abd8909b5f6f",
    "research/studies/sky_ecology/sources.json": "39f59e82b8c88def4842215832a19c32ea756d6c736c13c15cec53a86489e868",
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b18972bdaa506f48d8c25050c04b168090e3b4cd1ba07afea4",
    "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32712fd94a00ea03f1b212a39bed21b7a54b3a4a61707a72c8",
@@ -93,8 +93,8 @@
    "research/studies/ways_of_living/results/ways_of_living.json": {
     "branch": "main",
     "commit": null,
-    "blob": "e6f8e14280fb8207f86941851fefca025e3542a9",
-    "sha256": "5d8693aaf3e44bab15633c11159501926e0124148b95f1fa1204618011d3ce28",
+    "blob": "879dd4194f60547ba40ba5cecf2659dc978de2f8",
+    "sha256": "9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148",
     "read_from": "in-tree",
     "bind": "Read in-tree once the branches are integrated; until then from Git at the commit."
    }
