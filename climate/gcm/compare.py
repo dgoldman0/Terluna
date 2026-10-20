@@ -1,6 +1,7 @@
 """Compare ExoPlaSim runs over chosen years: the numbers behind the README's run tables.
 
     climate/gcm/.venv/bin/python -m climate.gcm.compare A:30-39 A_earth_path_clouds:10-19
+    python -m climate.gcm.compare --settle A28R_301k_s0894:5-14
     python -m climate.gcm.compare --settle A_earth_path_clouds:1-14 --baseline A:30-39
 
 Each argument is a run folder under climate/gcm/runs and an inclusive range of model years. Values are
@@ -19,9 +20,15 @@ change from the first: whether a change reaches the ground alone or the whole co
 
 --settle estimates where a branch that has not finished warming or cooling would settle. It fits a
 line to each year's top-of-atmosphere imbalance against its global surface temperature (a Gregory
-plot) and finds where the line reaches the baseline run's settled imbalance: PlaSim does not close
-its energy budget exactly, so a settled run keeps a small imbalance of its own. It reads only the
-runs' progress.json summaries.
+plot) and finds where the line reaches the imbalance the run keeps once settled: PlaSim does not close
+its energy budget exactly, and how much it leaves depends on the configuration (the 20-year test of
+17 October about +0.3 to +0.6 W/m2, the 301 K design years about 0). The run's own drift gives it:
+each year's imbalance against its warming rate, N = N_left + C dT/dt with C the heat capacity the
+drift shows, is N_left where the warming stops (each year-to-year warming paired with the two years'
+mean imbalance), given with its standard error and the range that sets on the settled temperature. A run's
+last years drift so little that their year-to-year noise leaves it loose; its whole run pins it better. With --baseline the settled imbalance is instead the
+mean of a baseline run's years, which must share the run's configuration. It reads only the runs'
+progress.json summaries.
 """
 import sys
 import numpy as np
@@ -104,6 +111,20 @@ def settle(temperatures, imbalances, baseline):
     return (baseline - intercept) / slope, -slope
 
 
+def own_leftover(years, temperatures, imbalances):
+    """The imbalance a run keeps once settled, from its own drift: each year-to-year warming against the
+    mean imbalance of the two years, N = N_left + C dT/dt, at no warming; with the heat capacity C
+    (W yr/m2 per K) the fit gives and the leftover's standard error (nan with fewer than four steps).
+    The pairing is exact for a run relaxing toward balance."""
+    t, n, y = (np.asarray(v, dtype=float) for v in (temperatures, imbalances, years))
+    rate, mean = np.diff(t) / np.diff(y), 0.5 * (n[1:] + n[:-1])
+    if rate.size < 4:
+        capacity, leftover = np.polyfit(rate, mean, 1)
+        return float(leftover), float(capacity), float('nan')
+    (capacity, leftover), cov = np.polyfit(rate, mean, 1, cov=True)
+    return float(leftover), float(capacity), float(np.sqrt(cov[1, 1]))
+
+
 def _years(item):
     import json
     from climate.gcm.exoplasim_run import RUNS
@@ -179,11 +200,19 @@ def main(argv=None) -> int:
     if args and args[0] == '--levels':
         return levels(args[1:])
     if args and args[0] == '--settle':
-        years, base = _years(args[1]), _years(args[3])
-        baseline = float(np.mean([y['toa_net_w_m2'] for y in base]))
-        t, feedback = settle([y['surface_k'] for y in years], [y['toa_net_w_m2'] for y in years], baseline)
-        print(f'{args[1]}: settles near {t:.1f} K, where its imbalance reaches {args[3]}\'s {baseline:+.2f} W/m2; '
-              f'feedback {feedback:.2f} W/m2 per K; last year {years[-1]["surface_k"]:.2f} K at {years[-1]["toa_net_w_m2"]:+.2f} W/m2')
+        years = _years(args[1])
+        temps, nets = [y['surface_k'] for y in years], [y['toa_net_w_m2'] for y in years]
+        if len(args) > 3 and args[2] == '--baseline':
+            baseline = float(np.mean([y['toa_net_w_m2'] for y in _years(args[3])]))
+            where = f"{args[3]}'s {baseline:+.2f} W/m2"
+        else:
+            baseline, capacity, spread = own_leftover([y['year'] for y in years], temps, nets)
+            where = (f'its own {baseline:+.2f} ± {spread:.2f} W/m2 (from its drift; heat capacity {capacity:.1f} '
+                     f'W yr/m2 per K)')
+        t, feedback = settle(temps, nets, baseline)
+        span = f' (±{abs(spread / feedback):.1f} K)' if len(args) <= 3 and np.isfinite(spread) else ''
+        print(f'{args[1]}: settles near {t:.1f} K{span}, where its imbalance reaches {where}; feedback {feedback:.2f} '
+              f'W/m2 per K; last year {years[-1]["surface_k"]:.2f} K at {years[-1]["toa_net_w_m2"]:+.2f} W/m2')
         return 0
     runs = {}
     for item in args:

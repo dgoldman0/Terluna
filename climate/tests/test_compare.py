@@ -76,6 +76,21 @@ class CompareTests(unittest.TestCase):
         self.assertAlmostEqual(t, 297.25)
         self.assertAlmostEqual(feedback, 1.2)
 
+    def test_a_run_gives_its_own_settled_imbalance(self):
+        # A run relaxing to 301 K over 4 years with heat capacity 7 W yr/m2 per K and a leftover of +0.2 W/m2:
+        # its drift gives the leftover, and the line reaches it at 301 K.
+        years = np.arange(15.0)
+        temps = 301.0 + 3.0 * np.exp(-years / 4.0)
+        rate = -3.0 / 4.0 * np.exp(-years / 4.0)
+        nets = 0.2 + 7.0 * rate
+        leftover, capacity, spread = compare.own_leftover(years, temps, nets)
+        self.assertAlmostEqual(leftover, 0.2, places=9)
+        self.assertLess(spread, 1e-9)
+        self.assertAlmostEqual(capacity, 7.0, delta=0.6)                # the yearly steps' own heat capacity
+        t, feedback = compare.settle(temps, nets, leftover)
+        self.assertAlmostEqual(t, 301.0, places=6)
+        self.assertAlmostEqual(feedback, 1.75, delta=0.01)
+
 
 if __name__ == '__main__':
     unittest.main()

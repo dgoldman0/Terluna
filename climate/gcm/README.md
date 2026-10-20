@@ -1495,7 +1495,7 @@ optics now write the shield's weights as `ZICEW` (`plasim_ice_optics.SHIELD_NIR_
 The cold start (`A28R_301k`, sunlight 0.925, on the rebuilt lakes) ran 25 years heading near 305 K, about 4 K warmer
 than the target study's runs, so a branch from its year-24 restart (`A28R_301k_s0894`) ran 15 years at 0.894. A twin of
 that branch without the clear share (`A28R_301k_s0894_noclear`) measured the clear share: it cools the climate by
-about 1 K (their year 14 at 301.05 and 301.93 K, settling near 300.3 and 301.5 K by `compare --settle`). The
+about 1 K (their year 14 at 301.05 and 301.93 K, settling near 301.0 and 301.9 K by `compare --settle`). The
 design years (`A28R_301k_s0897`) ran on from the branch's year-14 restart at 0.897, 15 years on 4 ranks
 (`run_A28R_301k_design.sh` on the research drive).
 
@@ -1503,10 +1503,13 @@ design years (`A28R_301k_s0897`) ran on from the branch's year-14 restart at 0.8
   with the top of the air in balance (+0.02 W/m²) and a drift of +0.015 K a year; years 10–14 average 301.29 K. On
   20 October the author took years 5–14 as the design years, at sunlight 0.897, 7.5% dimmer than the 0.970 of the
   295 K design case.
-- **`compare --settle` misread them.** Its fit ends a run where the run's imbalance reaches the leftover +0.62 W/m²
-  of the 20-year test (`A28_corrected_970_lw_ice`, years 10–19), and these runs keep none: it read 299.4 K for the
-  design years, already settled at 301.3, and 300.3 K for the branch at 0.894, whose own years point to about
-  300.8 K.
+- **`compare --settle` read them low until fixed.** It ended a run where its imbalance reached the leftover
+  +0.62 W/m² of the 20-year test (`A28_corrected_970_lw_ice`, years 10–19), which these runs do not keep, so it read
+  299.4 K for the design years and 300.3 K for the branch at 0.894. It now takes each run's own leftover from its
+  drift: each year-to-year warming against the two years' mean imbalance, N = N_left + C dT/dt, at no warming, with
+  its standard error ([compare.py](compare.py)). The design years read 301.2–301.3 K, the branch at 0.894 301.0 K and
+  its twin 301.9–302.0 K, each within 0.1 K. So the branch at 0.894 was on target already, and the design years at
+  0.897 sit 0.2–0.3 K above it.
 - **The longwave refit holds on them, at its edge**
   ([longwave_check_A28R_301k_s0897.json](../results/gcm/longwave_check_A28R_301k_s0897.json), `plasim_longwave check`
   with `--case`). On years 5, 9 and 14 its largest layer mean over land or sea is 1.9–2.65 W/m², against 6.2–6.9 for
