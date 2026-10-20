@@ -2,7 +2,8 @@
 temperature drifts from the GCM's profile it starts from, and the heat the GCM's circulation carries sideways at the
 ring's latitude, which the ring does not get; python -m climate.crm.ring_heat_budget ring_45n_corrected.
 
-From the ring's snapshots, as ring means: radiation (swten + lwten, temperature tendencies), the imposed large-scale
+From the ring's snapshots, as ring means: radiation (swten + lwten, which CM1 stores at constant volume, as the
+temperature tendency at constant pressure its potential temperature takes; cm1_output.py), the imposed large-scale
 sinking (-w dtheta/dz on each column's potential temperature, with the vertical wind of terluna_wls.txt, as CM1's
 wsub applies it), the nudging of the mean potential temperature toward the GCM's reference (lsnudge_0001.dat) over
 lsnudge_tau, weighted from var14 to var15 m, and the storage; the rest is CM1's own transport, turbulence and
@@ -22,10 +23,12 @@ from pathlib import Path
 
 import numpy as np
 
+from climate.crm import cm1_output as co
+
 HERE = Path(__file__).resolve().parent
 RESULTS = HERE.parent / 'results' / 'crm'
-SCHEMA = 'terluna.climate.crm-heat-budget/1'
-RD, CP = 287.04, 1005.7
+SCHEMA = 'terluna.climate.crm-heat-budget/2'
+RD, CP = co.RD, co.CP
 KAPPA = RD / CP
 DAY = 86400.0
 
@@ -84,6 +87,7 @@ def ring_budget(name, from_day):
     zh, zw = geo['zh'], geo['zw']
     tap = geo['record']['configuration']['output_s']
     text = (case / 'namelist.input').read_text()
+    equation_set = co.eqtset(case)
     tau = namelist_number(text, 'lsnudge_tau')
     weight = nudge_weight(zh, namelist_number(text, 'var14'), namelist_number(text, 'var15'))
     zr, thr = read_reference(case / 'lsnudge_0001.dat')
@@ -110,7 +114,7 @@ def ring_budget(name, from_day):
         mean_th = d['th'].mean(axis=1)
         span['t'].append(mean_t)
         span['theta'].append(mean_th)
-        span['radiation'].append((d['swten'] + d['lwten']).mean(axis=1) * DAY)
+        span['radiation'].append(co.applied_rate(d['swten'] + d['lwten'], equation_set).mean(axis=1) * DAY)
         span['sinking'].append((-w_ls[:, None] * dthdz * exner).mean(axis=1) * DAY)
         span['nudging'].append(-weight * (mean_th - th_ref) / tau * exner.mean(axis=1) * DAY)
         span['rho'].append(rho.mean(axis=1))
@@ -122,7 +126,7 @@ def ring_budget(name, from_day):
     prof['storage'] = storage
     prof['rest'] = storage - prof['radiation'] - prof['sinking'] - prof['nudging']
     return dict(zh=zh, zw=zw, profiles=prof, surface_heat_w_m2=float(np.mean(surface)), times_day=np.array(times),
-                drift_t=np.array(drift), snapshots=len(span_days), w_ls=w_ls, tau_s=tau,
+                drift_t=np.array(drift), snapshots=len(span_days), w_ls=w_ls, tau_s=tau, eqtset=equation_set,
                 nudge_m=(namelist_number(text, 'var14'), namelist_number(text, 'var15')))
 
 
@@ -223,7 +227,7 @@ def analyse(name, from_day):
         late = t >= from_day
         drift.append(dict(layer=m + 1, start_c=float(series[0]), at_from_day_c=float(np.interp(from_day, t, series)),
                           end_c=float(series[-1]), span_trend_k_day=float(np.polyfit(t[late], series[late], 1)[0])))
-    return dict(schema=SCHEMA, case=name, from_day=from_day, snapshots=ring['snapshots'],
+    return dict(schema=SCHEMA, case=name, from_day=from_day, snapshots=ring['snapshots'], eqtset=ring['eqtset'],
                 gcm=dict(run=run, years=years),
                 nudging=dict(tau_days=ring['tau_s'] / DAY, from_m=ring['nudge_m'][0], full_m=ring['nudge_m'][1]),
                 surface_heat_w_m2=ring['surface_heat_w_m2'], layers=layers, below_8_km=below, drift=drift,
@@ -233,9 +237,11 @@ def analyse(name, from_day):
                           'convection. The '
                           'GCM\'s sideways terms come from 3-day means, which miss its faster eddies, so they bound '
                           'the transport from below.'),
-                reading_rule=('Heating rates in K/day of temperature, layer means by mass; W/m2 are rho cp times them '
-                              'integrated over each layer. Storage is the trend of the ring mean over the span. The '
-                              'GCM\'s sideways terms are at the level of each layer, at the ring\'s row.'))
+                reading_rule=('Heating rates in K/day of temperature at constant pressure, layer means by mass; W/m2 '
+                              'are rho cp times them integrated over each layer. Radiation is what CM1\'s potential '
+                              'temperature takes, pi times its tendency: under eqtset 2, cv/cp times the swten and '
+                              'lwten it stores. Storage is the trend of the ring mean over the span. The GCM\'s '
+                              'sideways terms are at the level of each layer, at the ring\'s row.'))
 
 
 def main(argv=None) -> int:
@@ -245,7 +251,8 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     out = analyse(args.case, args.from_day)
     out['producer'] = dict(domain='climate', files={f'crm/{p.name}': hashlib.sha256(p.read_bytes()).hexdigest()[:16]
-                                                    for p in (Path(__file__), HERE / 'gcm_profiles.py')})
+                                                    for p in (Path(__file__), HERE / 'gcm_profiles.py',
+                                                              HERE / 'cm1_output.py')})
     RESULTS.mkdir(parents=True, exist_ok=True)
     (RESULTS / f'heat_budget_{args.case}.json').write_text(json.dumps(out, indent=1) + '\n')
     print(f'surface heat {out["surface_heat_w_m2"]:.1f} W/m2; nudging {out["nudging"]}')

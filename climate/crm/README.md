@@ -1112,22 +1112,25 @@ So CM1's warm offset belongs to its whole free lower air, over the sea as over t
 **The heat budget of the ring's lower air** (the author's go-ahead of 16 October;
 [ring_heat_budget.py](ring_heat_budget.py),
 [heat_budget_ring_45n_corrected.json](../results/crm/heat_budget_ring_45n_corrected.json)) finds why. From the
-ring's snapshots, as ring means over the second lunar day: its radiation, the imposed sinking on each column's own
-air, the nudging toward the GCM's reference above 8 km and the storage, with CM1's own transport, turbulence and
-convection as the rest. From the GCM's 3-day means at 47° N and the rows either side: the heat its
-circulation carries sideways, which a ring cannot have.
+ring's snapshots, as ring means over the second lunar day: its radiation, as its potential temperature takes it
+(CM1 stores its radiative tendencies at constant volume; [cm1_output.py](cm1_output.py)), the imposed sinking on each
+column's own air, the nudging toward the GCM's reference above 8 km and the storage, with CM1's own transport,
+turbulence, convection and condensation as the rest. From the GCM's 3-day means at 47° N and the rows either side:
+the heat its circulation carries sideways, which a ring cannot have.
 
 | Layer | Ring against GCM | Radiation | Imposed sinking | Nudging | Rest | Storage | GCM's sideways transport |
 |---|---|---|---|---|---|---|---|
-| 0–1.8 km | 25.6 against 19.8 °C | −0.32 | +0.07 | 0 | +0.30 | +0.055 | −0.29 (eddies −0.22) |
-| 1.8–6.5 km | 24.1 against 18.3 °C | −0.32 | +0.07 | 0 | +0.27 | +0.017 | −0.08 |
-| 6.5–13.7 km | 16.5 against 13.7 °C | −0.22 | +0.03 | −0.12 | +0.33 | +0.016 | −0.06 |
-| 13.7–23 km | 6.5 against 5.9 °C | −0.16 | +0.06 | −0.01 | +0.12 | +0.009 | −0.06 |
+| 0–1.8 km | 25.6 against 19.8 °C | −0.23 | +0.07 | 0 | +0.21 | +0.055 | −0.29 (eddies −0.22) |
+| 1.8–6.5 km | 24.1 against 18.3 °C | −0.23 | +0.07 | 0 | +0.18 | +0.017 | −0.08 |
+| 6.5–13.7 km | 16.5 against 13.7 °C | −0.15 | +0.03 | −0.12 | +0.26 | +0.016 | −0.06 |
+| 13.7–23 km | 6.5 against 5.9 °C | −0.11 | +0.06 | −0.01 | +0.08 | +0.009 | −0.06 |
 
-K a day of temperature. Below 8 km the ring's air takes 33.7 W/m² from the ground through its turbulence and
-convection, the ground's whole 33.2, and 7.5 W/m² from the imposed sinking, and radiates 38.0 away; the 3.1 W/m² left
-over still warms it. The GCM's circulation carries about 15 W/m² of heat sideways out of the same air, 8.5 W/m² of it
-from the lowest 1.8 km and mostly by its eddies, and dries the lowest layer by 0.2 g/kg a day.
+K a day of temperature. Below 8 km the ring's air radiates 27.2 W/m² away and takes 7.5 W/m² from the imposed
+sinking and 22.8 from its own turbulence, convection and condensation; the 3.1 W/m² left over still warms it. The
+ground gives the air 33.2 W/m² of sensible heat, and the 10.4 W/m² between the two is the heat the convection carries
+above 8 km, less what condensation adds below it net of the rain's evaporation. The GCM's circulation carries about
+15 W/m² of heat sideways out of the same air, 8.5 W/m² of it from the lowest 1.8 km and mostly by its eddies, and
+dries the lowest layer by 0.2 g/kg a day.
 
 - **The ring drifts from the GCM's state.** It starts from the GCM's profile, the reference it is held to aloft, and
   without the sideways loss its lower air warms until radiation balances: the lowest 1.8 km from 20.0 to 26.0 °C over
@@ -1168,10 +1171,11 @@ means over the second lunar day): the sideways transport takes about a third of 
 
 - **Part of the drift.** Its lowest 1.8 km warm from 20.0 to 24.2 °C over the first lunar day and to 24.6 °C by day
   59, against the control's 26.0 and 26.7, and still warm 0.050 K a day near the ground against 0.055. About 2 K
-  cooler, that layer radiates 4.1 W/m² less and takes about 4.3 W/m² more from the ground, which together balance
-  the 8.5 W/m² the transport takes from it.
-- **What is left.** About 4 K below 6.5 km. Each kelvin the lowest layer cools gives back about 4 W/m², so the 3.7 K
-  left there would need about 15 W/m² more taken from it, nearly twice what the GCM's 3-day means carry sideways.
+  cooler, that layer radiates 2.9 W/m² less and takes 5.5 W/m² more from its own turbulence, convection and
+  condensation, 3.1 of it the ground's added sensible heat, which together balance the 8.5 W/m² the transport takes
+  from it.
+- **What is left.** About 4 K below 6.5 km. Each kelvin the lowest layer cools gives back about 3.9 W/m², so the
+  3.7 K left there would need about 14 W/m² more taken from it, 1.7 times what the GCM's 3-day means carry sideways.
 - **The faster eddies are not it.** On 17 October the design case ran two more years writing a mean every 6.5 hours
   (`A28_corrected_970_eddies`; [gcm_eddies.py](gcm_eddies.py),
   [gcm_eddies_A28_corrected_970_eddies.json](../results/crm/gcm_eddies_A28_corrected_970_eddies.json)). Its eddies
@@ -1181,14 +1185,18 @@ means over the second lunar day): the sideways transport takes about a third of 
 - **So the rest lies in the models' physics:** how each sheds the heat the ground gives it, by radiation, convection
   and turbulence. By day CM1 mixes its lower air dry to 14–19 km where the GCM's stays stable. The land test waits
   behind this, since over land the ground heats the air alike in the two models.
-- **CM1's radiation errs toward cooling.** On 17 October 990 of the ring's own columns, cloud-free below 25 km over
-  the second lunar day, went through the atmosphere domain's correlated-k model, which follows the line-by-line model
-  ([ring_radiation.py](ring_radiation.py),
-  [radiation_ring_45n_corrected_sideways.json](../results/crm/radiation_ring_45n_corrected_sideways.json)). CM1's
-  RRTMG cools them more: by 0.15 K a day in the lowest 1.8 km (4.5 W/m²), 0.12 at 1.8–6.5 km (8.5 W/m²) and 0.11 at
-  6.5–13.7 km (10.2 W/m²). Its sunlight came within 2.5 points of line-by-line at the crossing, with 8 W/m² less
-  absorbed in the air ([radiation, above](#what-else-divides-cm1-and-the-gcm-at-the-crossing)). Both push its air
-  cooler, so the warmth comes from elsewhere, and part of the gap may lie on the GCM's side.
+- **CM1's longwave matches the correlated-k model.** On 17 October 990 of the ring's own columns, cloud-free below
+  25 km over the second lunar day, went through the atmosphere domain's correlated-k model, which follows the
+  line-by-line model ([ring_radiation.py](ring_radiation.py),
+  [radiation_ring_45n_corrected_sideways.json](../results/crm/radiation_ring_45n_corrected_sideways.json)). CM1
+  stores its radiative tendencies at constant volume, cp/cvm or about 1.38 times RRTMG's own rate in this air
+  ([cm1_output.py](cm1_output.py)), and hands RRTMG the ground's temperature as the air's at the ground. Read back to
+  RRTMG's rate, on columns built as CM1 builds them, its longwave comes within 0.013 K a day of the correlated-k
+  model in every layer: 0.008 K a day more cooling in the lowest 1.8 km (0.2 W/m²), 0.010 at 1.8–6.5 km (0.7 W/m²),
+  0.013 at 6.5–13.7 km (1.3 W/m²) and 0.005 at 13.7–23 km (0.6 W/m²). Its sunlight came within 2.5 points of
+  line-by-line at the crossing, with 8 W/m² less absorbed in the air
+  ([radiation, above](#what-else-divides-cm1-and-the-gcm-at-the-crossing)). CM1's radiation is sound on both counts,
+  so the gap lies in the GCM or in how the two models carry the ground's heat.
 - **The GCM's side.** The same morning a year of the design case wrote PlaSim's heating by process at every level
   (`A28_corrected_970_heating`, with the runner's new `--heating-diagnostics`; [gcm_heating.py](gcm_heating.py),
   [gcm_heating_A28_corrected_970_heating.json](../results/crm/gcm_heating_A28_corrected_970_heating.json)). At 47° N
@@ -1197,29 +1205,34 @@ means over the second lunar day): the sideways transport takes about a third of 
   circulation, about 8.3 sideways and the rest in its vertical motions. The processes' own sum matches the total its
   diabatic step hands the dynamics within 0.02 K a day. On 151 cloud-free 3-day mean columns there, PlaSim's
   longwave cools the lowest layer by 0.44 K a day where the correlated-k model gives 0.07, 10.6 W/m² more, and the
-  next layer 11.4 W/m² more; RRTMG's excess on CM1's columns is 4.5 and 8.5 W/m².
-- **So part of the gap is the GCM running cool.** PlaSim sheds about 6 W/m² more by longwave from its lowest layer
-  than CM1 does, worth about 1.5 K of the 3.7 at the ring's 4 W/m² a kelvin. Against the line-by-line model both
-  over-cool their lower air, PlaSim by about 2.5 K's worth near the ground and RRTMG by about 1 K's. PlaSim's water
-  continuum was fitted to the line-by-line model's outgoing longwave at the top, which leaves its cooling by height
-  free; fitting that, as its sunlight was fitted by height on 14 October, would move the design case's lower air.
-  The rest of the gap, a degree or two, lies in how the two models carry the ground's heat upward: by day CM1's
-  resolved dry convection where the GCM's stable layer leaves part of it to its resolved circulation.
-- **RRTMG's own gas optics match the correlated-k model, beyond its table's edge too** (19 October;
+  next layer 11.4 W/m² more; CM1's own longwave comes within 0.2 and 0.7 W/m² of the correlated-k model in the same
+  two layers.
+- **So most of the gap is the GCM running cool.** PlaSim sheds about 10 W/m² more by longwave from its lowest layer
+  than CM1 does, worth about 2.7 K of the 3.7 at the ring's 3.9 W/m² a kelvin. PlaSim over-cools its lower air
+  against the line-by-line model, and CM1's RRTMG matches that model. PlaSim's water continuum was fitted to the
+  line-by-line model's outgoing longwave at the top, which leaves its cooling by height free; since 17 October the
+  GCM's longwave correction fits it by height ([the GCM's account](../gcm/README.md#the-longwave-by-height)). The
+  rest of the gap, about a degree, lies in how the two models carry the ground's heat upward: by day CM1's resolved
+  dry convection where the GCM's stable layer leaves part of it to its resolved circulation.
+- **RRTMG's own gas optics match the correlated-k model, beyond its table's edge too, and so does CM1's call**
+  (19 and 20 October;
   [rrtmg_edge.py](rrtmg_edge.py),
   [rrtmg_edge_ring_45n_corrected_sideways.json](../results/crm/rrtmg_edge_ring_45n_corrected_sideways.json)). RRTMG's
   tables start at 1,053.63 hPa, and the ring's ground stands at 1,214 hPa, so its lowest 7.5 km are extrapolated in
   ln p. CM1's own RRTMG longwave, compiled from the lunar build's objects into an offline driver
   ([rrtmg_offline/lw_columns.f90](rrtmg_offline/lw_columns.f90)), took the same 990 cloud-free columns on the
-  correlated-k model's layers, with the build's gravity, CO2 and O2. It comes within 0.02 K a day of the correlated-k
-  model at every height (−0.017, −0.006, −0.013 and −0.007 K a day over the GCM's lowest four layers), the same
-  within 0.01 K a day on twins scaled so that every layer lies inside the tables, and holding the absorption at the
-  edge's values below it moves the lowest layers by 0.002–0.003 K a day. The edge needs no patch. The
-  excess the comparison above found lies between CM1's written heating and the same RRTMG on the same columns: CM1
-  cools 0.14, 0.11, 0.09 and 0.08 K a day more over the four layers. Its gases, gravity and the ground's emissivity
-  (0.98 over water, land-use 16) match the driver's within what would move it; what CM1 adds is its own layers above
-  the top on Earth's standard temperature profile, the ice aloft, its 30-minute radiation step and its heating as
-  written. Which of these it is stays to be traced with the driver.
+  correlated-k model's layers, with the build's gravity, cp, CO2 and O2 and the air at the ground at the ground's
+  temperature. It comes within 0.02 K a day of the correlated-k model at every height (−0.016, −0.006, −0.013 and
+  −0.007 K a day over the GCM's lowest four layers), the same within 0.01 K a day on twins scaled so that every layer
+  lies inside the tables, and holding the absorption at the edge's values below it moves the lowest layers by
+  0.003 K a day. The edge needs no patch. CM1's own call, its stored lwten read back to RRTMG's rate, comes within
+  0.008 K a day of the same RRTMG on the same columns in every layer (+0.008, −0.003, 0.000 and +0.002). Read as
+  stored, its lwten had seemed to cool 0.14, 0.11, 0.09 and 0.08 K a day more: the constant-volume convention accounts
+  for 0.07–0.11 K a day of that in every layer, and in the lowest 1.8 km the air at the ground, which the earlier
+  columns carried down from the layers above, for another 0.07. Its gases, gravity and the ground's emissivity (0.98
+  over water, land-use 16) match the driver's within what would move it, and its own layers above the top on Earth's
+  standard temperature profile, the ice aloft and its 30-minute radiation step leave less than 0.01 K a day between
+  them in these layers.
 - **The ring's ice high up came from its start.** Every column holds ice above 107 km, 1.1 g/m², which is why the
   radiation check took columns cloud-free below 25 km. Above the GCM's top level (130 km) the starting sounding and
   the nudging reference kept the top's vapour while the temperature kept falling, so 140–150 km began 6–15 times
@@ -1231,8 +1244,9 @@ means over the second lunar day): the sideways transport takes about a third of 
   temperature (`held_share_above`); cases set up before keep their inputs. The GCM's side of the high cloud is in
   [its account](../gcm/README.md#the-high-cloud-and-its-ice).
 - **For the cases that follow.** The sideways transport is part of the GCM's forcing that a slice of it lacks, so
-  forced rings and boxes are better driven with it; their warmth near the ground still runs about 4 K high at 45° N
-  until the rest is found.
+  forced rings and boxes are better driven with it. Their warmth near the ground ran 3.7 K above the GCM's at 45° N,
+  most of it the GCM's longwave over-cooling, which its correction since 17 October answers; a ring on the design case
+  will show what is left.
 
 **The land test on dry ground** (case `ring_45n_corrected_gcm_land`) is `ring_45n_corrected` with the GCM's roughness
 (2 m) and soil thermal inertia (THERIN 4.97), keeping the GCM's own wetness as the control does. A circle of latitude's

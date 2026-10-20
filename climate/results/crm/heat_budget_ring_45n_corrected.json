@@ -1,8 +1,9 @@
 {
- "schema": "terluna.climate.crm-heat-budget/1",
+ "schema": "terluna.climate.crm-heat-budget/2",
  "case": "ring_45n_corrected",
  "from_day": 29.5,
  "snapshots": 237,
+ "eqtset": 2,
  "gcm": {
   "run": "A28_corrected_970",
   "years": [
@@ -24,17 +25,17 @@
     1.77
    ],
    "ring_k_day": {
-    "radiation": -0.31639926797101775,
+    "radiation": -0.2260947604081882,
     "sinking": 0.0678995365599583,
     "nudging": 0.0,
-    "rest": 0.303962700638751,
+    "rest": 0.21365819307592143,
     "storage": 0.055462969227691554
    },
    "ring_w_m2": {
-    "radiation": -9.1534512741114,
+    "radiation": -6.54093591312645,
     "sinking": 1.9643379466219912,
     "nudging": 0.0,
-    "rest": 8.79366042057071,
+    "rest": 6.18114522615496,
     "storage": 1.6045472562257679
    },
    "gcm_sideways_k_day": {
@@ -55,17 +56,17 @@
     6.53
    ],
    "ring_k_day": {
-    "radiation": -0.3175546484756523,
+    "radiation": -0.22692039350276896,
     "sinking": 0.06729952539892567,
     "nudging": 0.0,
-    "rest": 0.2671288678211826,
+    "rest": 0.1764946128482992,
     "storage": 0.016873744744455934
    },
    "ring_w_m2": {
-    "radiation": -22.582888849977873,
+    "radiation": -16.137436828399313,
     "sinking": 4.786003566229129,
     "nudging": 0.0,
-    "rest": 18.99686077214652,
+    "rest": 12.551408669007847,
     "storage": 1.199975810288482
    },
    "gcm_sideways_k_day": {
@@ -86,17 +87,17 @@
     13.74
    ],
    "ring_k_day": {
-    "radiation": -0.21643702908125503,
+    "radiation": -0.15466304994334287,
     "sinking": 0.028721677205760077,
     "nudging": -0.1225575335692385,
-    "rest": 0.32651385334484134,
+    "rest": 0.2647398742069292,
     "storage": 0.016240967900107886
    },
    "ring_w_m2": {
-    "radiation": -20.65665356158325,
+    "radiation": -14.7609726424769,
     "sinking": 2.741184043343612,
     "nudging": -11.696836260807604,
-    "rest": 31.16233631857745,
+    "rest": 25.266655342372957,
     "storage": 1.550030721997783
    },
    "gcm_sideways_k_day": {
@@ -117,17 +118,17 @@
     23.06
    ],
    "ring_k_day": {
-    "radiation": -0.15637155621611645,
+    "radiation": -0.11174107994160537,
     "sinking": 0.05527275538261926,
     "nudging": -0.012220214944801662,
-    "rest": 0.12208109654692582,
+    "rest": 0.07745062027241481,
     "storage": 0.008762080768627029
    },
    "ring_w_m2": {
-    "radiation": -18.76790025950934,
+    "radiation": -13.411297427193379,
     "sinking": 6.63390194595105,
     "nudging": -1.4666847552845512,
-    "rest": 14.652318639449582,
+    "rest": 9.29571570991112,
     "storage": 1.0516353718789515
    },
    "gcm_sideways_k_day": {
@@ -148,10 +149,10 @@
    8.0
   ],
   "ring_w_m2": {
-   "radiation": -38.03777761025307,
+   "radiation": -27.18129595955345,
    "sinking": 7.4667125373078385,
    "nudging": 0.0,
-   "rest": 33.69596847060215,
+   "rest": 22.83948677688532,
    "storage": 3.124903885091944
   }
  },
@@ -291,12 +292,13 @@
   ]
  },
  "evidence": "Ring means of CM1's own tendencies and of the imposed forcing, from its 3-hourly snapshots; the rest closes the budget and holds the model's transport, turbulence and convection. The GCM's sideways terms come from 3-day means, which miss its faster eddies, so they bound the transport from below.",
- "reading_rule": "Heating rates in K/day of temperature, layer means by mass; W/m2 are rho cp times them integrated over each layer. Storage is the trend of the ring mean over the span. The GCM's sideways terms are at the level of each layer, at the ring's row.",
+ "reading_rule": "Heating rates in K/day of temperature at constant pressure, layer means by mass; W/m2 are rho cp times them integrated over each layer. Radiation is what CM1's potential temperature takes, pi times its tendency: under eqtset 2, cv/cp times the swten and lwten it stores. Storage is the trend of the ring mean over the span. The GCM's sideways terms are at the level of each layer, at the ring's row.",
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/ring_heat_budget.py": "51c0bc659e92447c",
-   "crm/gcm_profiles.py": "96da5f8346bba627"
+   "crm/ring_heat_budget.py": "267c9079401df779",
+   "crm/gcm_profiles.py": "96da5f8346bba627",
+   "crm/cm1_output.py": "2ce1d689ddb33f9d"
   }
  }
 }
