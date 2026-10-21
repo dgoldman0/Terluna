@@ -351,17 +351,22 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    carbon, 0.47–0.71 Gt a year, needs its own return path (heat levers).
 5. **The GCM's open questions at the design climate.** The high cloud at lunar gravity is worked out (domain/climate
    f999492 and 79dd316; register, 20 October): slabs of rising air give the cold cloud 37–42 times PlaSim's Earth water
-   path at 63–107 km, with crystals 1.6–1.7 times the size. With the cover held that warms by 17.8 W/m² at first
-   order; in a 20-year run from the design years at their sunlight the thicker ice warms its own layer, PlaSim's cover
-   at 81–107 km falls from a third of the sky to a seventh and the ground absorbs 14 W/m² less sunlight, so the Moon
+   path at 63–107 km, with crystals 1.6–1.7 times the size. With the cover held that warms by 17.8 W/m² at first order;
+   in a 20-year run from the design years at their sunlight the thicker ice warms its own layer, PlaSim's cover at
+   81–107 km falls from a third of the sky to a seventh and the ground absorbs 14 W/m² less sunlight, so the Moon
    settles near 298.5 K, 2.8 K cooler, with 19% less rain. The cover's response is PlaSim's diagnosis from humidity and
-   the run's least certain part: a lunar ice cloud whose crystals stay would need cover drawn from its ice. The
-   longwave refit holds on the run near 301 K and not at its end (3.6 W/m² against the rule's 2.5), so a design case
-   with the factors takes a refit of its own. The sky's winter snow is done (atmosphere/snow, merged on 20 October):
-   flakes a centimetre or two across in light snow to tens of centimetres in heavy snow, falling at up to 0.64 m/s and
-   melting 1–3 km below the freezing level at 29.2 km. Next, at the author's word: whether the design case takes the
-   factors, and the GCM's own rain evaporation, one Earth-tuned constant that CM1's rain test puts in question, against
-   the drop solver. A CM1 ring that makes its own upper vapour comes later.
+   the run's least certain part: a lunar ice cloud whose crystals stay would need cover drawn from its ice. The longwave
+   refit holds on the run near 301 K and not at its end (3.6 W/m² against the rule's 2.5), so a design case with the
+   factors takes a refit of its own. After every change to the GCM's physics the exobase is checked again from the run's
+   upper state (register, 21 October): the first check (domain/atmosphere c4469bd) finds the ground and the cold cloud
+   leave it as it was, and the design air's methane, at the bound of its water, 1.2–2.0 K warmer, still 50–100 K under
+   its target; its hydrogen escapes at 0.0085 kg/s, negligible for the water. Where in the middle atmosphere methane is
+   broken, which the column's chemistry leaves out, decides how much water it leaves above the tropopause, up to 6.1
+   W/m² at the top, about 3.8 K. The sky's winter snow is done (atmosphere/snow, merged on 20 October): flakes a
+   centimetre or two across in light snow to tens of centimetres in heavy snow, falling at up to 0.64 m/s and melting
+   1–3 km below the freezing level at 29.2 km. Next, at the author's word: whether the design case takes the factors,
+   and the GCM's own rain evaporation, one Earth-tuned constant that CM1's rain test puts in question, against the drop
+   solver. A CM1 ring that makes its own upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
    mixing_forms), now the aquatic programme's turbulence columns first, with a basin-scale model of one crater lake
