@@ -61,3 +61,55 @@ def test_flakes_melt_deeper_below_the_freezing_level_in_drier_air():
     column = sf.Column('test', STANDARD_GRAVITY, DryAir(101325.0), 1500.0, 85000.0, 6.5e-3)
     moist, dry = sf.melt(column, 5.0, 0.9), sf.melt(column, 5.0, 0.7)
     assert 0 < moist['half_melted_below_m'] < moist['melted_below_m'] < dry['melted_below_m'] < 1500.0
+
+
+def test_the_aggregation_models_laws_match_the_single_flake_laws():
+    import numpy as np
+    from atmosphere.snow import aggregation as ag
+    column = sf.Column('test', MOON_SURFACE_GRAVITY, DryAir(101325.0), 29000.0, 66000.0, 0.92e-3)
+    s = column.state(35000.0)
+    d = np.array([3e-4, 2e-3, 1e-2])
+    m = sf.flake_mass(d)
+    u, re = ag.speeds(d, m, MOON_SURFACE_GRAVITY, s)
+    for i in range(d.size):
+        one, one_re = sf.fall_speed(d[i], m[i], MOON_SURFACE_GRAVITY, s)
+        assert u[i] == pytest.approx(one, rel=1e-12) and re[i] == pytest.approx(one_re, rel=1e-12)
+        single = sf.deposition_rate(d[i], re[i], s)
+        assert ag.deposition(d[i:i + 1], re[i:i + 1], s)[0] == pytest.approx(single, rel=1e-12)
+
+
+def test_the_breakup_law_follows_phillips_yano_and_khain_for_snow():
+    import numpy as np
+    from atmosphere.snow import aggregation as ag
+    d = 1e-3
+    small = sf.flake_mass(d)
+    energy = 1e-9
+    scale = 1.58e7 * (1.0 + 1.33e-4 / d ** 1.5) * math.pi * d * d
+    expected = scale * (1.0 - math.exp(-(7.08e6 * 3.5e-3 * energy / scale) ** 0.5))
+    assert ag.fragments(np.array([small]), np.array([energy]))[0] == pytest.approx(min(expected, 100.0), rel=1e-6)
+    assert ag.fragments(np.array([small]), np.array([0.0]))[0] == 0.0
+    assert ag.fragments(np.array([small]), np.array([1.0]))[0] == 100.0
+
+
+def test_meetings_keep_the_snows_mass_whether_they_stick_or_break():
+    import numpy as np
+    from atmosphere.snow import aggregation as ag
+    rng = np.random.default_rng(1)
+    d = np.exp(rng.uniform(math.log(2e-4), math.log(5e-3), 400))
+    m = sf.flake_mass(d)
+    xi = np.round(rng.uniform(1e3, 1e5, 400))
+    u = 0.1 + 0.5 * (d / d.max()) ** 0.5
+    m_frag = sf.flake_mass(1e-4)
+    for temperature, breakup in ((273.15, False), (253.15, True)):
+        mm, xx = m.copy(), xi.copy()
+        before = float(np.sum(mm * xx))
+        made = ag.collide(mm, xx, u, d, np.arange(d.size), 100.0, temperature, 30.0, rng, breakup, m_frag)
+        assert float(np.sum(mm * xx)) + made * m_frag == pytest.approx(before, rel=1e-9)
+        assert (mm > 0).all() and (xx >= 0).all()
+
+
+def test_a_short_column_brings_snow_to_the_freezing_level():
+    from atmosphere.snow import aggregation as ag
+    column = sf.Column('test', STANDARD_GRAVITY, DryAir(101325.0), 1500.0, 85000.0, 6.5e-3)
+    out = ag.summary(ag.column(column, -5.0, 1e4, 1.0, bins=6, inject=4, fill=1.0, gather=0.5))
+    assert out['snowfall_mm_h'] > 0.0 and out['median_by_mass_mm'] >= 0.1

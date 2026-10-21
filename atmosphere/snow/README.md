@@ -9,9 +9,12 @@ of the work on the high cloud's crystals ([register](../../research/decisions.md
 |---|---|
 | [flakes.py](flakes.py) | The snowflake's mass, area and fall law, its growth from the vapour, its melting, the winter columns and the product |
 | [results/snow.json](results/snow.json) | Fall speeds by size, growth across the winter cloud, crossing times and melting depths, Moon and Earth |
+| [aggregation.py](aggregation.py) | A column of falling snow: super-particles that grow, stick together and break, and the snow they bring to the freezing level |
+| [results/aggregation.json](results/aggregation.json) | The arriving snow's sizes by snowfall and crystal numbers, with the breakup law and without it, Moon and Earth |
 
 ```sh
 python -m atmosphere.snow.flakes        # seconds: results/snow.json
+python -m atmosphere.snow.aggregation   # about 20 minutes: results/aggregation.json
 ```
 
 ## The physics
@@ -64,10 +67,8 @@ air. From each cloud top down to the freezing level:
 **So snow grows far more.** A 0.2 mm crystal crossing the cloud gains from the vapour alone 2.2, 12.5 and 43 mg on the
 Moon from the three tops, against 0.010, 0.025 and 0.049 mg on Earth: 200–900 times the mass, as a growing crystal
 grows faster the larger it is. With five times the air in the cloud, a flake also has about five times the cloud's
-small crystals to sweep up at one mixing ratio. Followed through, sweeping alone grows lunar flakes without bound, so
-their size is set by what breaks them apart, which this estimate leaves out. Earth's largest flakes reach a few
-centimetres; lunar flakes meet at about two-fifths of Earth's speeds, with about a sixth of the energy for the same
-flakes, so larger ones are plausible. How large waits on a breakup law.
+small crystals to sweep up at one mixing ratio. A single flake sweeping a cloud that never runs out grows without
+bound; how large flakes grow in a whole population, with a breakup law, follows below.
 
 **Snow lasts far below the freezing level.** Below it the air warms only 0.92 K for each km a flake falls, so flakes
 melt slowly. Where all of a flake's ice has melted, metres below the freezing level:
@@ -82,6 +83,47 @@ melt slowly. Where all of a flake's ice has melted, metres below the freezing le
 In drier air a flake's own evaporation keeps its surface below freezing for longer. The sky winter's snowfall is a
 band kilometres deep: snow forming in a cloud above the freezing level reaches decks 1–3 km below it.
 
+## How large flakes grow
+
+On 20 October the author asked for a breakup law, to say how large the flakes grow. [aggregation.py](aggregation.py)
+follows a column of falling snow. Crystals of 0.1–0.4 mm enter at a −15 °C cloud top, 10 or 100 a litre, and fall at
+their own speeds to the freezing level, as super-particles each standing for many real ones (Shima and co-authors
+2009). They grow from the vapour as far as the cloud condenses it for a set snowfall, spread through the cloud's
+depth. They meet the others at their height, sweeping the area of their projected areas (Mitchell 1988) at their
+difference in speed, and a meeting sticks with Lin, Farley and Orville's efficiency. One that does not stick breaks
+fragments off the smaller particle by Phillips, Yano and Khain's (2017) law for snow, which Sotiropoulou and
+co-authors set out (Atmospheric Chemistry and Physics Discussions, acp-2020-786, appendix B): up to 100 fragments of
+0.1 mm a collision, more the harder it is. The snow arriving at the freezing level, its sizes by mass and the largest
+flake landing at least once an hour on each square metre:
+
+| Snowfall | Crystals | Moon: median; 99% below; largest hourly | Earth: median; 99% below; largest hourly |
+|---|---|---|---|
+| 0.3 mm/h | 10 a litre | 10; 34; 50 mm | 0.7; 1.2; 1.5 mm |
+| 0.3 mm/h | 100 a litre | 18; 63; 86 mm | 0.5; 1.4; 2.0 mm |
+| 1 mm/h | 10 a litre | 51; 152; 197 mm | 0.9; 1.8; 2.3 mm |
+| 1 mm/h | 100 a litre | 61; 179; 225 mm | 0.9; 2.5; 5.4 mm |
+| 3 mm/h | 10 a litre | 141; 387; 518 mm | 0.9; 1.8; 2.2 mm |
+| 3 mm/h | 100 a litre | 147; 468; 600 mm | 1.7; 9.2; 20 mm |
+
+The snowfall is in millimetres of water an hour. On Earth 10 crystals a litre take up only 0.54 mm/h of the cloud's
+vapour in the two heavier cases, the rest left unused; the arriving snow also counts the crystals' own mass entering
+the top, about 0.4 mm/h at 100 a litre on Earth.
+
+- **The breakup law does not cap the flakes.** With it and without it the sizes agree within 10–25%, and not always
+  smaller with it. Phillips's law chips small fragments off the smaller particle when a meeting does not stick, which
+  feeds the cloud more small crystals but splits no large flake. On both worlds the flakes' size is set by the
+  snowfall's water and the time the snow takes to fall.
+- **Lunar flakes grow 15–90 times the size of Earth's at the same settings:** a centimetre or two in light
+  snow, 5–15 cm in moderate snow and tens of centimetres in heavy snow. The smallest crystals take 1–1.5 days to fall
+  through the Moon's 16 km of cloud against about an hour on Earth, and the flakes meet each other gently enough to
+  keep sticking.
+- **How far to trust the sizes.** The model's Earth flakes run small against Earth's real snow, where flakes of
+  several millimetres to a couple of centimetres are common, so it aggregates too little, most likely for the spread of
+  fall speeds among like flakes, which it leaves out; that does not inflate the lunar sizes. On the other side it leaves
+  out large, tenuous flakes breaking in turbulence, the cloud having to last the day or more its snow takes to fall,
+  and Brown and Francis's mass law carried far past the sizes it was measured at. By that law a 20 cm lunar flake
+  weighs about 0.9 g, a fifth of a kilogram of ice to each cubic metre it spans: a loose lace of crystals.
+
 ## Assumptions and limits
 
 - The laws for mass, area, fall, capacitance and ventilation were fitted on Earth; they are carried to the Moon through
@@ -95,6 +137,6 @@ band kilometres deep: snow forming in a cloud above the freezing level reaches d
 
 ## Next
 
-A breakup law for how large flakes grow, from the energy of their collisions at lunar fall speeds. The same fall and
-growth physics then gives the high cloud's crystals at lunar gravity for the GCM ([plan](../../research/plan.md),
-item 5).
+The same fall and growth physics gives the high cloud's crystals at lunar gravity for the GCM
+([plan](../../research/plan.md), item 5). For the snow itself: the spread of fall speeds among like flakes, which
+Earth's flakes need, and a turbulence limit on very large flakes.
