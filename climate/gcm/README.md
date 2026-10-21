@@ -1699,8 +1699,13 @@ GCM's forcing to 16 km only. Its nudging supplied the upper air's heat in place 
 rain that falls a fraction of the GCM's way ([the CRM's account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e)).
 The small box's 48% carries the same doubt: its nudging supplied 50 of the 90 W/m² its radiation removed. CM1's
 boundary layer also put its density times the surface's heat and water into the air. The pair runs again with the
-forcing through the column, the air held only above the GCM's convection, and that fixed. Until it has run, the 0.024
-fitted to the small box tests nothing about the GCM's rain, and the design run's constant waits.
+forcing through the column, the air held only above the GCM's convection, and that fixed (domain/climate 13e7123).
+- **The sea box** now convects to about 70 km. It rains 31% of the GCM's rain and evaporates 61% of its falling water,
+  gamma about 0.027 by the pooled shares. That figure is provisional: the box's upper air was still cooling, and its
+  rain falls at other hours than PlaSim's (below).
+- **The land box** runs as its twin.
+
+The design run's constant waits for both, and for PlaSim's convection (below).
 
 The runner's `--rain-evaporation GAMMA` writes the constant into PlaSim's rain namelist, recorded in the run's
 configuration only when given.
@@ -1709,6 +1714,66 @@ configuration only when given.
 climate/gcm/.venv/bin/python -m climate.gcm.rain_evaporation A28R_301k_cold:12-19 A28R_301k_cold_moist:0-5 \
     A28R_301k_cold_g02:0-4 A28R_301k_cold_g04:0-4                                          # a minute
 ```
+
+#### PlaSim's convection at the Moon's long day (21 October)
+
+**What the sea box showed.** With the forcing through the column, CM1's sea box convects as deep as PlaSim's
+convection forms its rain, up to about 70 km
+([the CRM's account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e)). Over its second lunar
+day it rained 31% of the GCM's rain, but unevenly through the day:
+- **Noon to midnight.** It rained 34–58% of the GCM's rain.
+- **Midnight to noon.** It rained almost nothing. At those hours the GCM's own circulation sinks over the site, warming
+  the upper air by about 95 W/m² and drying the column by 2–4.6 mm/day, while PlaSim rains 2.9 mm/day after midnight
+  and 0.9 mm/day in the morning.
+
+**Why PlaSim rains through the night.** Its deep convection is a Kuo scheme (`rainmod.f90`, `nprc` 1). Wherever a
+parcel lifted undiluted from the surface is buoyant, it turns the column's moisture supply into rain, the surface's
+evaporation included, so the sinking air's warming and drying do not stop it. After midnight the site's sea evaporates
+3.4 mm/day and the scheme rains 2.9 of it.
+
+**Why PlaSim still carries it.** The leading forecast and climate models dropped Kuo schemes decades ago; ECMWF moved
+to Tiedtke's mass-flux scheme in 1989. The closure has been criticized for reversing the causality between convection
+and the convergence it largely makes (Emanuel, Neelin and Bretherton 1994, *QJRMS* 120; Arakawa 2004, *J. Climate* 17).
+PlaSim, built for speed and portability as a model of intermediate complexity, kept the Kuo scheme with Tiedtke's
+1983 shallow convection. ExoPlaSim kept PlaSim's physics (Paradise and others 2022, *MNRAS* 511), and its namelist only
+switches the scheme on or off.
+
+**The replacement** (the author's direction of 21 October; the climate stays on ExoPlaSim). A simplified Betts–Miller
+scheme (Frierson 2007, *J. Atmos. Sci.* 64) is written in Fortran as a Terluna patch to `rainmod.f90`, behind PlaSim's
+own switch: `nprc` 1 keeps Kuo exactly, and 2 selects the new scheme.
+- **How it works.** It relaxes an unstable column's temperature toward a moist adiabat lifted from the lowest level, and
+  its vapour toward a fixed relative humidity of that profile, over a relaxation time. It rains the vapour removed, with
+  Frierson's correction keeping the column's moist energy. So it rains only while the column is both unstable and
+  moister than its reference, and the night's sinking air shuts it off as it shuts off CM1's convection.
+- **Its parameters.** Earth's values are 2 hours and 70%; both are to be fitted to CM1.
+- **What it costs.** Per column it does what Kuo does, one parcel lifted through the 10 levels with PlaSim's own
+  saturation formula and a few column sums, so it should run at about Kuo's speed.
+- **The grid.** Each of PlaSim's 10 layers is 5–30 km thick on the Moon, too coarse for a plume scheme's mixing to
+  show, so a relaxation scheme fits the grid.
+- **Two lunar options, off by default.** One is a reference lifted with some mixing of surrounding air, since the sea
+  box's air at 40–60 km drifted 8–11 K below the GCM's, which Kuo heats toward an undiluted parcel. The other is an
+  inhibition limit: the box did not rain in the mornings at 55 J/kg.
+- **Shallow convection.** PlaSim's shallow scheme stays for columns that are unstable but too dry to rain.
+- **What it leaves out.** It has no plumes, downdrafts, cold pools or organization, and its rain follows the
+  instability after a fixed delay.
+
+**Its tests** (planned):
+1. Unit tests against a Python copy of the scheme:
+   - a stable column does nothing;
+   - a moist, unstable column rains its excess humidity over the relaxation time;
+   - the column's energy is kept;
+   - with no dilution it reproduces Frierson's scheme;
+   - the inhibition limit works;
+   - `nprc` 1 matches the unpatched model bit for bit.
+2. Speed: one model year with each scheme, about 4 minutes each now.
+3. Branches of the design climate from its year-19 restart, with a few values of the two parameters, 3–5 years each.
+4. CM1 boxes at the Near-side Sea and 0° E forced by the new GCM's own budget, compared on rain by time of day, total
+   rain and the heights where it forms; the parameters are chosen by the match.
+5. The design climate's global checks, with the energy diagnostics and the exobase check that follows every change to
+   the GCM's physics.
+
+Its adoption for the design climate is the author's call once these are in. It would change the convective rain maps
+the electricity study reads ([convection.py](convection.py)).
 
 ### Cloud amount: what published models say
 

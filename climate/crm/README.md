@@ -1680,6 +1680,61 @@ the analyses read present and finite and the 22 fields of their heat, vapour and
 
 The pair runs one box after the other on four threads, with half an hour's rest between.
 
+**The sea box with the three changes** (21 October; its second lunar day, days 29.5–59.0;
+[box_budget_box_near_side_sea.json](../results/crm/box_budget_box_near_side_sea.json),
+[box_box_near_side_sea.json](../results/crm/box_box_near_side_sea.json)). It ran its 59 days in 2.0 hours on four
+threads. Its water budget closes to 0.06 mm/day, and its boundary layer passes on 0.998 times the sea's evaporation.
+- **Rain.** The box rained 0.85 mm/day over the second lunar day, 31% of the GCM's 2.72, against 0.06 with the
+  nudging. Its first lunar day barely rained, 0.02 mm/day: its upper air had first to cool enough for deep convection to
+  start.
+- **Convection.** Cloud water and ice now reach about 70 km and peak at 52 km, the heights where the GCM forms its rain.
+  The column's radiation cools it by 50 W/m², against 107 in the nudged run, under the deep cloud.
+- **Evaporation.** The sea evaporates 2.69 mm/day, against the GCM's 3.51.
+- **Drift.** Without the nudging the upper air cools. At 40 km it went from 262 to 254 K over the two lunar days and at
+  60 km from 238 to 226.5 K, still falling 0.1–0.2 K a day at the end, so the second lunar day is not yet the box's own
+  equilibrium.
+- **The share.** 61% of the water falling from its clouds evaporates on the way down: 39.2 mm, against 25.2 mm reaching
+  the sea, from 80.7 mm condensed. On PlaSim's pooled shares for this sea (49.7% at gamma 0.02, 75.8% at 0.04) that is
+  gamma about 0.027, provisional on the drift and on the timing below; `rain_evaporation.py`'s fit follows with the land
+  box.
+
+**The gap follows the time of day.** The box takes the GCM's own circulation as prescribed forcing, and at this site
+that circulation lifts the air by day and lets it sink by night. The box's rain follows it. Over the second lunar day,
+by quarter:
+
+| Second lunar day | Prescribed heating above 16 km | Prescribed water | Inhibition | Box rain | GCM rain |
+|---|---|---|---|---|---|
+| Sunrise to noon | −37 W/m² | −4.6 mm/day | 55 J/kg | 0.00 mm/day | 0.92 mm/day |
+| Noon to sunset | −119 W/m² | +3.3 mm/day | 54 J/kg | 1.19 mm/day | 3.50 mm/day |
+| Sunset to midnight | +97 W/m² | −2.1 mm/day | 3 J/kg | 2.04 mm/day | 3.54 mm/day |
+| Midnight to sunrise | +93 W/m² | −4.5 mm/day | 3 J/kg | 0.17 mm/day | 2.93 mm/day |
+
+- **Afternoon.** The rising air cools the upper air and moistens the column, and the box builds deep storms.
+- **Evening.** They peak after sunset, spending what the afternoon built.
+- **Night.** After midnight the sinking air warms the upper air by about 95 W/m² and dries the column, and the storms
+  die.
+- **Morning.** Through the morning the column dries further, the inhibition stands at 55 J/kg, the condensation level
+  sits at 6.2 km, and nothing rains.
+
+PlaSim's convection is a Kuo scheme (`rainmod.f90`). Wherever a parcel lifted undiluted from the surface is buoyant, it
+turns the column's whole moisture supply into rain, the surface's evaporation included. So after midnight the GCM's
+sea evaporates 3.4 mm/day and its scheme rains 2.9 of it while the circulation dries the column. That is the closure's
+known behaviour:
+- Kuo assumed that all the moisture supply makes cloud wherever the air is conditionally unstable (as reviewed by
+  Villalba-Pradas and Tapiador 2022, *GMD* 15).
+- Its moisture-convergence closure has been criticized for reversing the causality between convection and convergence
+  (Emanuel, Neelin and Bretherton 1994, *QJRMS* 120; Arakawa 2004, *J. Climate* 17).
+- Most single-column convection schemes start rain quickly where cloud-resolving models develop it through the day
+  (Guichard and others 2004, *QJRMS* 130).
+- ECMWF replaced its Kuo scheme with Tiedtke's mass-flux scheme in 1989.
+
+So at least part of the gap is PlaSim's rain in the hours when resolved convection cannot run. The box's 61% is the
+share of its own afternoon and evening storms. A third of the GCM's rain falls in the night and morning, when the box
+makes almost none, so gamma fitted to the box measures how fast those storms' rain evaporates. It cannot settle whether
+PlaSim should rain at those hours. The land box runs with the same changes as the Kuo-forced twin; over land the ground
+heats and cools with the Sun, where the sea box's water is held at one temperature. PlaSim's replacement scheme is
+planned in [the GCM's account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october).
+
 ```sh
 /media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
 climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about ten seconds
