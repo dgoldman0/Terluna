@@ -139,7 +139,7 @@ ratio falling to the aggregates' 0.35 at 1 mm.
 
 Two worlds rising at the same pressure velocity cool their air alike and condense the same vapour per kilogram. On the
 Moon a crystal falls more slowly, in proportion to gravity while it is small, and a pascal of the slab is six times
-deeper, so a crystal stays ten to fifteen times longer. [cold_cloud.py](../../climate/gcm/cold_cloud.py) runs the slabs
+deeper, so its crystals, though they grow larger, stay ten to fifteen times longer. [cold_cloud.py](../../climate/gcm/cold_cloud.py) runs the slabs
 through the GCM's top three layers in the design years, at the ascent at which Earth's slab holds the GCM's own Earth
 water path (0.053–0.058 Pa/s, about 2 cm/s on Earth):
 
@@ -150,7 +150,7 @@ water path (0.053–0.058 Pa/s, about 2 cm/s on Earth):
 | 63–81 km | 234 to 205 K | 6.1 g/m²; 51 µm; 98% | 258 g/m²; 82 µm; 92% |
 
 - **Earth's cirrus loses nearly all its ice; the Moon's keeps much of it.** Below 107 km Earth's crystals fall out of
-  the slab within an hour or two of forming, so it holds only a few per cent of the ice it has condensed. The Moon's
+  the slab within hours of forming, so it holds only a few per cent of the ice it has condensed. The Moon's
   stay, so per kilogram of air its cloud holds six to seven times the ice and, with six times the air in each pascal,
   37–42 times the path.
 - **Fewer, larger crystals.** Crystals that stay keep the supersaturation down, so the haze freezes less often: 37

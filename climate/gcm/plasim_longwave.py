@@ -432,19 +432,24 @@ def check(cases=CHECK_CASES, every=CHECK_EVERY, corrections=None):
                 row[name]['fitted_on_these_columns'] = bool(own)
             case['samples'][sample] = row
         out.append(case)
+    def verdicts(judged):
+        found = {}
+        for name in fitted:
+            worst = max(c['samples'][k][name][g]['largest_layer_mean'] for c in judged for k in c['samples']
+                        if name in c['samples'][k] for g in ('land', 'sea') if g in c['samples'][k][name])
+            found[name] = dict(largest_layer_mean_w_m2=worst, holds=bool(worst <= HOLDS_W_M2))
+        return found
+
     near = [c for c in out if abs(c['global_ground_k'] - 301.0) < 0.75]
-    verdicts = {}
-    for name in fitted:
-        worst = max(c['samples'][k][name][g]['largest_layer_mean'] for c in near for k in c['samples']
-                    if name in c['samples'][k] for g in ('land', 'sea') if g in c['samples'][k][name])
-        verdicts[name] = dict(largest_layer_mean_w_m2=worst, holds=bool(worst <= HOLDS_W_M2))
     return dict(
         schema=CHECK_SCHEMA,
         corrections={name: dict(product=str(path.relative_to(HERE.parents[1])), sha256=digest(path, 16),
                                 fitted_on=f"{fitted[name]['run']} year {fitted[name]['year']}",
                                 tref=fitted[name]['correction']['tref'])
                      for name, path in corrections.items()},
-        holds_w_m2=HOLDS_W_M2, near_301k=dict(cases=[f"{c['run']} year {c['year']}" for c in near], **verdicts),
+        holds_w_m2=HOLDS_W_M2,
+        near_301k=dict(cases=[f"{c['run']} year {c['year']}" for c in near], **(verdicts(near) if near else {})),
+        all_cases=dict(cases=[f"{c['run']} year {c['year']}" for c in out], **verdicts(out)),
         cases=out,
         evidence=('PlaSim\'s clear-sky longwave as a copy of its arithmetic (which reproduces its own heating within '
                   '0.01 K a day on cloud-free 3-day means) with and without each correction the runner can add, '
@@ -459,7 +464,8 @@ def check(cases=CHECK_CASES, every=CHECK_EVERY, corrections=None):
                       'every n-th column of the year whatever its cloud, both codes taken clear-sky. near_301k gathers '
                       'the cases whose global ground lies within 0.75 K of 301 K and, for each correction, the largest '
                       'layer mean over land or sea among them; it holds when that is within holds_w_m2, the largest '
-                      'layer error the 295 K fit left in any band of latitude on its own columns.'),
+                      'layer error the 295 K fit left in any band of latitude on its own columns. all_cases does the '
+                      'same over every case checked, for runs away from 301 K.'),
         producer=dict(domain='climate', files={f'gcm/{Path(__file__).name}': digest(Path(__file__), 16)}))
 
 
@@ -480,6 +486,7 @@ def main(argv=None) -> int:
         out = check(cases)
         (args.output or CHECK).write_text(json.dumps(out, indent=1) + '\n')
         print('near 301 K:', out['near_301k'])
+        print('all cases:', out['all_cases'])
         for case in out['cases']:
             for sample, r in case['samples'].items():
                 for name in [k for k in out['corrections'] if k in r]:

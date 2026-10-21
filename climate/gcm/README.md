@@ -1591,8 +1591,44 @@ that formed it, so a run gives the thicker cloud on PlaSim's cover and no more c
 PlaSim's cap of 1,000 g/m² on a layer's water path, above the means (258 g/m² at 63–81 km).
 
 At their defaults of 1 the patched model repeats the design run's year 14 from its year-13 restart in every one of its
-56 output variables (`A28R_301k_cold_regression`). The run `A28R_301k_cold` carries the factors from the design
-years' end for 20 years at the same sunlight, 0.897 (`run_A28R_301k_cold.sh` on the research drive).
+56 output variables (`A28R_301k_cold_regression`). The run `A28R_301k_cold` carried the factors from the design years'
+end for 20 years at the same sunlight, 0.897 (`run_A28R_301k_cold.sh` on the research drive), and settles near
+298.5 K (±0.1 K by `compare --settle` over its years 5–19), 2.8 K below the design years. Its years 10–19 against them:
+
+| | Design years (5–14) | With the lunar cold cloud (10–19) |
+|---|---|---|
+| Ground; sea surface | 301.25; 302.6 K | 298.66; 300.1 K |
+| Planetary albedo | 0.298 | 0.370 |
+| Cloud cover: all; 81–107 km | 49.6%; 33.6% | 34.8%; 14.5% |
+| Cloud effect: sunlight; infrared; net | −18.2; +29.2; +11.1 W/m² | −37.5; +48.6; +11.1 W/m² |
+| Sunlight absorbed at the ground | 107.7 W/m² | 93.8 W/m² |
+| Evaporation's heat; precipitation; water vapour | 78.1 W/m²; 2.70 mm/day; 248 kg/m² | 63.5 W/m²; 2.20 mm/day; 223 kg/m² |
+| Warmest; coldest 3-day mean anywhere | 309.3; 292.3 K | 306.5; 289.8 K |
+
+- **The cover retreats where the ice thickens.** From the first year the thick ice warms its own layer at 81–107 km,
+  absorbing more sunlight in the near infrared (0.08 against 0.04 K a day) and more of the infrared from below, and
+  the layer's relative humidity falls; PlaSim's cover there, drawn from the humidity, falls from a third of the sky to
+  a seventh and stays there.
+- **The ground loses sunlight.** The cover that remains reflects about half the sunlight it receives: the planetary
+  albedo rises from 0.30 to 0.37, and the ground absorbs 14 W/m² less. The infrared the thicker cloud traps warms the
+  air above it, the top two levels by 2–4 K, while every level below cools by 2–3 K.
+- **The cloud's net effect at the top of the air stays +11.1 W/m²**, its sunlight and infrared terms each larger by
+  about 19 W/m²: the change moves sunlight from the ground to the upper air and to space.
+- **The water cycle slows.** The ground evaporates 15 W/m² less: 19% less rain and 10% less vapour.
+
+With the cover held, the factors gave +17.8 W/m² at first order and a warmer Moon; the run's own cover turns that
+into a cooler one. The cover is PlaSim's diagnosis from humidity over liquid water, which a lunar ice cloud whose
+crystals stay would outlast, so its retreat is the least certain part of the run. Holding 301 K with this cloud would
+take about 2% more sunlight (1.9% by the run's own feedback of 1.22 W/m² a kelvin on its 180 W/m² of absorbed
+sunlight, 2.3% at the target study's 0.845% a kelvin), a sunlight scale near 0.915–0.918 in place of 0.897; the
+design years stand until the author chooses.
+
+The longwave refit of 19 October holds on the run while it stays near 301 K and not at its end
+([longwave_check_A28R_301k_cold.json](../results/gcm/longwave_check_A28R_301k_cold.json), `plasim_longwave check`,
+which now also judges every case it is given): its largest layer mean over land or sea is 1.9 W/m² in year 5
+(299.4 K) and 3.1–3.6 W/m² in years 12 and 19 (298.8 and 298.5 K), against the rule's 2.5 and PlaSim's own 18–19,
+the excess in the lowest layer over the sea, which it cools too much. A design case that takes the cold cloud's
+factors takes its own refit with them.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.gcm.cold_cloud A28R_301k_s0897 --years 5-14                 # about 16 minutes
@@ -1600,6 +1636,8 @@ climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28R --folder A28R_301
     --start-from climate/gcm/runs/A28R_301k_s0897/model/MOST_REST.00014 --set sunlight_scale=0.897 \
     --longwave-correction --ice-optics --heating-diagnostics --wind10 \
     --cold-cloud climate/results/gcm/cold_cloud_A28R_301k_s0897.json
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_cold:5 --case A28R_301k_cold:12 \
+    --case A28R_301k_cold:19 --output climate/results/gcm/longwave_check_A28R_301k_cold.json    # about 2 minutes
 ```
 
 ### Cloud amount: what published models say

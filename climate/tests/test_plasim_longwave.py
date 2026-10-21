@@ -66,6 +66,8 @@ def test_the_check_near_301_k_binds_the_corrections_it_checks():
                     if name in s for g in ('land', 'sea') if g in s[name])
         assert worst == out['near_301k'][name]['largest_layer_mean_w_m2']
         assert out['near_301k'][name]['holds'] == (worst <= pl.HOLDS_W_M2)
+    if 'all_cases' in out:                                              # products since 2026-10-21
+        assert out['all_cases']['cases'] == [f"{c['run']} year {c['year']}" for c in out['cases']]
     # Each correction is marked on the sample it was fitted on, and only there.
     marked = [(c['run'], c['year'], k) for c in out['cases'] for k, s in c['samples'].items()
               for name in pl.CORRECTIONS if name in s and s[name]['fitted_on_these_columns']]
