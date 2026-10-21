@@ -6,14 +6,16 @@ ExoPlaSim, the first model installed (2026-09-25).
 
 | File | Holds |
 |---|---|
-| [boundary.py](boundary.py) | Builds the planet parameters and the surface files below from `shared/constants.json` and the geography product |
+| [boundary.py](boundary.py) | Builds the planet parameters and the surface files below from `shared/constants.json` and the geography product; the lakes surface is named by its drainage product's content, and its committed record is `../results/gcm/boundary_lakes_<drainage>.json` (`terluna.climate.gcm-boundary-lakes/1`) |
 | [wave_coverage.py](wave_coverage.py) | Recovers years 20–29 of the corrected design case over Smythii–Marginis: 71.5-hour means at the lowest model level, with source hashes and explicit surface-forcing requirements ([coastal-wave study](../waves/coastal.md)) |
 | [wave_snapshots.py](wave_snapshots.py) | Runs an isolated copy of the corrected year-29 restart, capturing global three-hourly winds and surface stress: 241 snapshots over 30 Earth days and 481 over 60 days. Matching controls preserve the final climate state and ordinary output exactly ([weather episode](../waves/weather.md), [full-cycle waves](../waves/cycle.md)) |
 | `products/moon_{25,35}pct_water_{grid}.nc` | Land fraction, land elevation above the water level and ocean depth on regular 4°×5° and 2°×2.5° grids and on Gaussian T21 and T42 grids (NetCDF 3). These are area-conserving averages of the LOLA/GRAIL hydrostatic filling |
+| `products/moon_28pct_water_lakes_{grid}.nc` | The 28% seas with run A's rain-fed lakes (25 September), which every A28 run read. Its drainage product was overwritten on 29 September, so it is kept as it is and never rebuilt ([the lakes for a cold start](#the-lakes-for-a-cold-start)) |
+| `products/moon_28pct_water_lakes_98842fc2a648f889_{grid}.nc` | The same seas with the lakes of the current routing, from the drainage product with that sha256 prefix; experiment `A28R` reads it |
 | `products/moon_gcm_configuration.json` | Radius, gravity, rotation (synchronous, 27.32 d) and solar day (29.53 d), obliquity 1.54°, solar constant, and pointers to the atmosphere, ozone and shield products |
 | [exoplasim_run.py](exoplasim_run.py) | Runs the ExoPlaSim experiments one simulated year at a time, resumable after any stop |
 | [cloud_water.py](cloud_water.py) | Recomputes from a year of output the cloud water PlaSim's radiation sees, layer by layer, as PlaSim has it and with the runner's corrections |
-| [plasim_longwave.py](plasim_longwave.py) | PlaSim's clear-sky longwave column by column, checked against its own heating, and the correction by height fitted to the correlated-k model that the runner's `--longwave-correction` adds (`../results/gcm/longwave_<run>.json`) |
+| [plasim_longwave.py](plasim_longwave.py) | PlaSim's clear-sky longwave column by column, checked against its own heating, and the correction by height fitted to the correlated-k model that the runner's `--longwave-correction` adds (`../results/gcm/longwave_<run>.json`); its `check` sets the correction against correlated-k on states from 295 to 306.6 K (`../results/gcm/longwave_check_301k.json`) |
 | [plasim_ice_optics.py](plasim_ice_optics.py) | The ice optics the runner's `--ice-optics` gives cloud colder than −38 °C, beside PlaSim's liquid-water optics (`../results/gcm/ice_optics.json`) |
 | [compare.py](compare.py) | The numbers behind the run tables, and where a run still warming or cooling would settle |
 | [climatology.py](climatology.py) | A run's surface climatology over chosen years, for display and other lanes: cloud in a low deck (the lowest 34 km) and a high deck, precipitation, evaporation, soil moisture, temperature, water vapour, sea ice and snow, with cloud composited against the Sun by latitude and local time, and land air temperature the same way for all land and for the near and far sides. It writes `products/climatology_<run>.npz` (`terluna.climate.gcm-climatology/1`) |
@@ -23,7 +25,7 @@ ExoPlaSim, the first model installed (2026-09-25).
 | [global_winds.py](global_winds.py) | A run's winds and air over the whole Moon at fixed heights above sea level, for other lanes: the air's density (mean and 1st–99th percentiles), pressure and temperature, the speed's percentiles, highest, yearly highest and 50-year return level, and the speed by band of latitude, all weighted by area over the ground below each height. It writes `../results/gcm/global_winds_<run>.json` (`terluna.climate.gcm-global-winds/1`), which is committed; the sky-ship study reads the flight band from it |
 | [zonal_winds.py](zonal_winds.py) | A run's wind as a vector over the whole Moon, for other lanes and for the drifting towns and organisms of [zonal_winds.md](zonal_winds.md): the eastward and northward wind by latitude and height and, in the Sun's frame, by local solar hour; how often it holds the time of day or turns the Sun back; the solar day of a body drifting with it; the shear over 2.5–15 km; and passive routes at fixed heights through the steady Sun-frame flow and through the 3-day means in sequence, with the points where the steady flow stops. It writes `../results/gcm/zonal_winds_<run>.json` (`terluna.climate.gcm-zonal-winds/1`) and a supporting `.npz` of Sun-frame percentiles, shear by hour and routes, both committed |
 | [convection.py](convection.py) | A run's convective rain over the whole Moon, for other lanes: maps of the convection scheme's rain and all rain, the means of the convective rain's 1.5 power and square for nonlinear consumers, the share of outputs raining, and the land share, with the source files' hashes. It writes `../results/gcm/convection_<run>.json` in seconds; atmosphere/electricity/occurrence.py reads it |
-| [twilight.py](twilight.py) | What the Moon's tall curved air does to sunlight and infrared against flat columns of the same air: the energy ledger by ground, GCM layer, shell and solar elevation, and the terms the GCM's and CM1's twilight patches take. It writes `../results/gcm/twilight.json` (`terluna.climate.gcm-twilight/1`), committed ([the curved air's light](#the-curved-airs-light)) |
+| [twilight.py](twilight.py) | What the Moon's tall curved air does to sunlight and infrared against flat columns of the same air: the energy ledger by ground, GCM layer, shell and solar elevation, and the terms the GCM's and CM1's twilight patches take. It writes `../results/gcm/twilight.json` on the 294.9 K column (`terluna.climate.gcm-twilight/1`) and, with `--ts 301`, `../results/gcm/twilight_301k.json` on the design climate's (`/2`), both committed ([the curved air's light](#the-curved-airs-light)) |
 
 `products/` is regenerated by `python -m climate.gcm.boundary` and, for the
 climatology, `climate/gcm/.venv/bin/python -m climate.gcm.climatology A28_corrected_970:10-19`. It
@@ -676,8 +678,9 @@ and its clear-sky split matches line-by-line on 11 columns (above,
   comparisons. The lakes cover 10.3% of the Moon instead of 11.6%: those within
   15° of the equator grow a little, and those between 30° and 60° shrink to a
   fraction. Built into the GCM's T21 coastline they would change 111 of its
-  2,048 cells and lower the water from 40.1% to 38.3%; whether to rebuild the
-  coastline, which needs a cold start, is open. The atlas's clouds then still
+  2,048 cells and lower the water from 40.1% to 38.3%. The coastline needs a cold
+  start; its surface was built for the 301 K design case on 19 October ([the lakes
+  for a cold start](#the-lakes-for-a-cold-start)). The atlas's clouds then still
   came from run A.
 
 ### Its winds as vectors: the days of a drifting town
@@ -793,7 +796,8 @@ the top layer's carrying the outgoing longwave to correlated-k's
 +12 W/m² high up to −6 W/m² in the lowest layer over land and −16 over the sea, and removes the mean error of every
 layer over land and over sea, leaving 1–5 W/m² from column to column and within 2.5 W/m² in every band of latitude.
 The runner's `--longwave-correction` writes it to `lwcorr.dat` for a patch that adds it after the curved air's escape
-(`lw_correction` in radmod.f90).
+(`lw_correction` in radmod.f90). It does not hold near 301 K, and since 19 October the runner takes its refit there
+([the longwave correction near 301 K](#the-longwave-correction-near-301-k)).
 
 In the GCM the patch reproduces the copy: a year from the design case with it (`A28_corrected_970_lwcheck`, 2 ranks)
 gives PlaSim's own longwave heating within 0.02 K a day of the copy's on its cloud-free columns, the lowest layer now
@@ -1018,6 +1022,8 @@ $PY -m climate.gcm.twilight optics      # the near infrared's line optics, cache
 $PY -m climate.gcm.twilight longwave    # the longwave line optics, cached
 $PY -m climate.gcm.twilight solve       # the sky's multiple scattering in 12 batches, 40 minutes on 6 threads
 $PY -m climate.gcm.twilight ledger      # the product, 2.5 minutes
+# each with --ts 301 for the design climate's column: twilight_301k.json, about 50 minutes on 4 threads in all
+# (gcm-runs/twilight/ledger_301k.sh on the research drive)
 ```
 
 **How the ledger is built.** The design column's line-by-line optics from 360 nm to 5 µm are grouped into 10,697
@@ -1217,6 +1223,333 @@ ledger's terms as the runner's defaults, `A28_corrected_9655` branches from the 
   that read the old design case's climatology (geography's lakes and groundwater, the surface light, the canopy models)
   still read `A28_dim5_moon`'s until they are regenerated.
 
+### The design case at 301 K: its preparation (19 October)
+
+The resort at 301 K is the design climate since 19 October
+([register](../../research/decisions.md#the-design-climate-and-the-waters-19-october-2026)). Its design case waits for
+the author's go-ahead with its machine time. On the same day the author approved, as its preparation: a T21 surface with
+today's lakes for a cold start, the cold start's spin-up sized from the runs' records, the longwave correction checked
+near 301 K, the curved air's ledger rebuilt on a 301 K column with its terms in the clear share, and the surface stress
+in the output. A check of the world-crafting lab's copy of this code (`session-tools/world_crafting_check_2026-10-19.md`
+on the research drive, items 1–4 and 7) raised these points. Nothing here runs the GCM.
+
+#### The lakes for a cold start
+
+The T21 surface every A28 run read, `moon_28pct_water_lakes_gaussian_T21.nc`, was built on 25 September from the lakes
+of run A's runoff. It records the drainage product `060219b12f480619`. That product was overwritten under its name on 29
+September by the `A28_dim5_moon` routing (`98842fc2a648f889`), and no copy survives, so the surface cannot be
+regenerated from what it records. It stays as it is, the record of the A28 runs. `python -m climate.gcm.boundary
+--lakes-only` builds the surface from today's drainage and atlas, as main's geography gives them, under a name taken
+from the drainage product's content: `moon_28pct_water_lakes_98842fc2a648f889_<grid>.nc`. A later routing writes a
+surface of its own beside it. Its attributes name the surface it supersedes and say that that surface's source is lost.
+The products are not committed, so
+[boundary_lakes_98842fc2a648f889.json](../results/gcm/boundary_lakes_98842fc2a648f889.json) records the inputs and files
+by sha256, the shares and every T21 cell that changes. Copies of the drainage product and of both surfaces, under names
+that carry their content, are on the research drive (`gcm-runs/boundary`, with `SHA256SUMS`).
+
+| | Run A's lakes (25 September) | The current routing's lakes (`A28_dim5_moon`'s runoff) |
+|---|---|---|
+| Lakes; seas | 12.02%; 28.00% | 10.34%; 28.00% |
+| Water on the T21 grid | 40.02% | 38.34% |
+| PlaSim's binary mask: land; water cells of 2,048 | 59.95%; 759 | 61.62%; 734 |
+
+The mask changes in 111 cells, 7.1% of the Moon's area: 68 turn from water to land and 43 from land to water. Within 15°
+of the equator 22 cells become water and 8 land, as the tropical lakes grow; at 15–60° 60 become land and 15 water, as
+the lakes there shrink; poleward of 60° 6 become water. The runner's experiment `A28R` reads the new surface, and a cold
+start is needed, since a restart carries PlaSim's mask and orography.
+
+#### How long a cold start takes
+
+Three runs started from ExoPlaSim's own initial state, 250 K at the ground with the seas 87% frozen: A and B for 40
+years and A28 for 30. The warm branch with the longwave correction and ice optics, `A28_corrected_970_lw_ice`, shows how
+the present physics relaxes after a step of 11.5 K. A run counts as settled when the linear trend of its global ground
+temperature over the last ten years is under 0.1 K a decade and the mean imbalance at the top of the air over the last
+five is under 0.2 W/m². Exponential fits to each run's approach, from two years after its sea ice has gone, give the
+year each criterion passes (`gcm-runs/spinup_2026-10-19/spinup.py` and its `spinup.json` on the research drive):
+
+| | A, 25% water | B, 35% water | A28, 28% seas and lakes | Present physics (`_lw_ice`, warm branch) |
+|---|---|---|---|---|
+| Sea ice gone by | year 3 | year 4 | year 4 | none at the start |
+| E-folding of the ground; of the imbalance | 6.1; 5.3 years | 7.1; 6.1 years | 6.3; 5.7 years | 4.0; 4.6 years |
+| Its sea's surface; its land's ground | 6.0; 6.2 years | 6.9; 7.2 years | 6.2; 6.4 years | 4.1; 3.9 years |
+| At the record's end: ten-year trend; five-year imbalance | 0.16 K a decade; 0.14 W/m² (year 39) | 0.47; 0.33 (39) | 1.5; 0.79 (29) | 0.75; 0.24 (19) |
+| The fit's year: trend under 0.01 K a year; imbalance within 0.2 W/m² of its settling value | 36; 26 | 43; 31 | 40; 32 | 22; 20 |
+| The imbalance's settling value | +0.11 W/m² | +0.27 W/m² | +0.30 W/m² | −0.25 W/m² |
+
+- **None of the records reaches both criteria.** Run A comes closest, its imbalance passing from year 34 and its trend
+  still 0.16 K a decade at year 39. A ten-year trend lags the rate at its middle by about five years and a five-year
+  mean by about two, so the criteria pass that much after the fit's years.
+- **The imbalance settles a few tenths away from zero**, +0.11 to +0.30 W/m² in the cold starts and −0.25 in the warm
+  branch, the model's own residual (the settled design case `A28_corrected_970` holds +0.1 W/m² with a spread of 0.2
+  from year to year). The criterion of 0.2 W/m² is therefore read against each run's own settling value as well as
+  against zero.
+- **No part of the model is slower than the whole.** The 50 m slab sea and the land's ground relax together with the
+  global mean, and so does the soil's water (6.9 years in A, 2.3 in A28). PlaSim's soil is 12.4 m deep in five layers
+  with a diffusivity of 7.5 × 10⁻⁷ m²/s (`landmod.f90`), whose slowest mode decays in about 2.6 years, and the output
+  holds no deep soil temperature to follow. The sea ice is gone within four years. What sets the pace is the heat of the
+  slab, the air and its vapour against a weak feedback.
+- **The present physics relaxes faster**, 4.0–4.6 years against 5.3–7.1, as its stronger feedback (1.65–2.2 W/m² a
+  kelvin, [where the corrected Moon settles](#where-the-corrected-moon-settles)) would make it. Taken from A28's state
+  at the end of its ice, 282 K at year 4 with an imbalance of 25 W/m², a cold start on it passes the imbalance criterion
+  near year 28 and the trend criterion near year 33 (the fits' years 26 and 29 and the criteria's lags); with the old
+  physics' time scale, near years 34 and 45.
+
+Machine time follows from the known rate, 20 years in about 1.5 hours on four ranks: 4.5 minutes a year for the 20-year
+test with the correction, the ice optics and the heating diagnostics, 3.6 for the design case without them. A cold start
+that settles by year 33 and then gives the ten years the design case's statistics take needs about 45 years: 3.4 hours
+on four ranks, or up to 4 hours if its cold first years run slower, as run A's did.
+
+#### The run's plan
+
+Proposed for the author's go-ahead; nothing has run.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.boundary --lakes-only    # the surface, in the checkout the run starts from
+climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28R --folder A28R_301k --years 15 --ncpus 4 \
+    --set sunlight_scale=0.925 --longwave-correction --ice-optics --heating-diagnostics
+# then the same with --years 30 and --years 45, each block resuming where the last stopped
+```
+
+- **A cold start on the new surface**, from ExoPlaSim's own initial state, with the physics of the 20-year test and the
+  standards of 19 October: the curved air's terms from the 301 K ledger in the clear share, the CO₂ and O₂ bands, the
+  longwave refit at 301 K and the ice optics, all of them the runner's defaults or the flags above. The runner applies
+  the clear-share patch to the twilight copy of ExoPlaSim at the run's start, and ExoPlaSim rebuilds PlaSim, a few
+  minutes.
+- **45 years on four ranks**, about 3.4–4 hours, in three blocks of 15 years (70–80 minutes each) with half-hour rests
+  between them. Every model year writes its restart and the progress record, so a crash or a stop costs at most the year
+  in progress, about 5 minutes; the runner refuses to resume if anything that sets the model has changed.
+- **The sunlight scale, 0.925.** The target-climate study puts 301 K at 0.916–0.927 for the 20-year test's physics on
+  run A's lakes and the 294.9 K terms ([the dimming at every
+  temperature](../../research/studies/climate_targets/README.md#the-dimming-at-every-temperature)). The design run
+  departs from that physics four ways: 1.7 points less water, about −0.2 K at the routings' 0.1 K a point; the 301 K
+  ledger, 1.5 W/m² more sunlight in the air and 0.4 W/m² more infrared at the test's state, about +0.5 K; the clear
+  share, −1.9 to +2.5 W/m², −0.9 to +1.2 K, its lower end for thin ice aloft; and the longwave refit, whose clear-sky
+  outgoing longwave stands about 0.7 W/m² above the 295 K fit's at the test's state, about −0.3 K before its clouds
+  answer. 0.925 lies between the study's middle and the thin-ice case; the landing is uncertain by about a kelvin.
+- **A check at years 20–25.** By then a cold start on this physics lies within about 0.1–0.5 K of where it settles, and
+  `compare --settle` gives that value. If it lies more than 0.3 K from 301 K, the remaining years branch from that
+  year's restart on the same coastline with the scale moved 0.73–0.96% for each kelvin (the target-climate study's
+  rate), which settles within about 15 years.
+- **Output**: the runner's 3-day means with the surface stress, the clear-sky fluxes and the heating by process, about
+  86 MB a year, 3.9 GB in all on the research drive. The design years are the ten after the criteria pass.
+- **Its alternatives, the author's to weigh**: a branch from the 20-year test on run A's lakes, 20 years in 1.5 hours,
+  keeping 1.7 points more water as a stated departure; or a cold start from a warmer initial state, saving perhaps ten
+  years. PlaSim's initial profile takes its ground temperature from its namelist's `TGR`, 288 K by default; how far the
+  slab sea and its ice follow it is untried here.
+
+#### The longwave correction near 301 K
+
+The correction of 17 October ([the longwave by height](#the-longwave-by-height)) was fitted on the design case's
+cloud-free columns near 295 K, and the GCM scales each layer's term with its temperature to the fourth power alone. No
+run has settled at 301 K, so `plasim_longwave.py check` takes the 20-year test with the correction and ice optics
+(`A28_corrected_970_lw_ice`) as it passes 299.6, 301.2 and 302.5 K (its years 1–3, warming about 1.5 K a year) and where
+it settles near 306.6 K (year 15), with the fit's own year at 295 K beside them. Those years carry the correction's own
+upper air, high cloud and vapour, which an interpolation between the two settled runs would not. On each it sets
+PlaSim's copy, with and without the correction, against the correlated-k model: up to 1,500 columns clear of cloud, as
+the fit took them, and every 193rd column of the year whatever its cloud, both codes clear-sky
+([longwave_check_301k.json](../results/gcm/longwave_check_301k.json), with the samples cached on the research drive
+under `gcm-runs/longwave_check`). The largest of the nine layers' mean errors, over land and over sea, W/m²:
+
+| State | PlaSim alone | The fit near 295 K | Its refit at 301.2 K |
+|---|---|---|---|
+| 295.0 K, the fit's own year: clear columns; all | 11.9–16.0; 12.7–17.8 | 0.2–0.4; 1.0–1.7 | 5.4–5.8; 4.6–6.0 |
+| 299.6 K: clear columns; all | 17.5–18.9; 18.2–18.4 | 4.8–6.3; 5.5–5.9 | 1.8–2.7; 1.8–4.2 |
+| 301.2 K: clear columns; all | 18.9–19.6; 19.0–19.6 | 5.9–6.8; 6.2–6.7 | 0.2–0.3 (fitted there); 0.6–1.4 |
+| 302.5 K: clear columns; all | 18.8–20.1; 17.9–19.6 | 6.9–7.6; 6.4–6.6 | 3.3–3.6; 3.3–4.3 |
+| 306.6 K: clear columns; all | 21.7–22.3; 20.5–21.4 | 13.7–14.9; 12.6–14.0 | 13.3–14.1; 12.4–13.9 |
+
+- **The fit near 295 K does not hold at 301 K.** Its layers stray up to 5.9 W/m² over land and 6.8 over the sea at 301.2
+  K, 2.4–2.7 times the 2.5 W/m² it left in any band of latitude on its own columns. The second layer from the ground
+  cools 5.9–6.8 W/m² too much, the fourth and the ninth 3.4–4.4 too little and the seventh 4.0 too much. At 302.5 K the
+  four layers that stray most stray 4.2–6.9 W/m² over land and 5.0–7.6 over the sea, the largest the lowest layer over
+  the sea: this is the figure `research/plan.md`'s "5–7 W/m² at 302 K" stands for, which had no product behind it before
+  this check.
+- **PlaSim's own error grows much faster than the temperature's fourth power.** Between 295 and 301.2 K its second layer
+  from the ground goes from 11.9 to 19.1 W/m² of extra cooling, its third from 6.7 to 9.3, and its outgoing longwave
+  from 3.7 to 7.3 W/m² too high, while T⁴ rises 8%. The likely cause is the vapour: the Moon's moister air carries water
+  paths beyond those Sasamori's broadband absorptivities were fitted to on Earth.
+- **Refitted on the 301.2 K columns** (`plasim_longwave fit A28_corrected_970_lw_ice --year 2 --every 1`, 1,553
+  cloud-free columns, [longwave_A28_corrected_970_lw_ice.json](../results/gcm/longwave_A28_corrected_970_lw_ice.json)),
+  the correction leaves every layer within 0.3 W/m² on those columns, within 1.4 on all of that year's columns and
+  within 2.1 in every band of latitude. Its extra escape grows at the top, 3.1 to 8.1 W/m² over land and 13.9 to 16.4
+  over the sea, and in the second layer from the ground, 12.0 to 19.0 W/m², and changes sign in the middle air. It holds
+  within 1.8–2.7 W/m² on the clear columns 1.6 K cooler and 3.3–3.6 W/m² 1.3 K warmer, and not at all at 306.6 K.
+- **The correction therefore belongs to its state.** The runner's `--longwave-correction` takes the refit since 19
+  October (`--longwave-fit 301k`; `295k` gives the fit the runs of 17 October took). A design case that settles more
+  than about a kelvin from 301.2 K, or whose own columns differ from the test's, needs its correction checked on its own
+  years, which the heating diagnostics make possible, and refitted if its layers stray more than 2.5 W/m². Correlated-k
+  is the target throughout: its own error against the line-by-line model, up to about 5 W/m² in net flux at some level
+  by the world-crafting check (item 2), is not located here.
+
+#### The curved air's light on a 301 K column
+
+The ledger of 14 October ([the curved air's light](#the-curved-airs-light)) was built on one clear column,
+illumination's design column at 294.9 K (`illumination/surface_light/model.py`, `DESIGN_TS`), with 205 kg/m² of water.
+`twilight.py --ts 301` builds the column the same way at 301 K: the moist adiabat from a 301 K ground with
+Manabe–Wetherald humidity up to the tropopause, and above it the solved upper air and trace gases of the middle
+atmosphere's two stored cases that bracket it, `moon_1.2atm_titania_stack_ts298` and `_ts308`, weighted 0.7 and 0.3, as
+the design column weights its cases at 288 and 298 K. It is the atmosphere domain's own clear column at that ground,
+self-consistent in temperature, vapour and tropopause. It holds 331 kg/m² of water against 231–241 kg/m² in the GCM's
+3-day means as the 20-year test passes 301.2 K (its clear columns, then all), as the 294.9 K column held 205 against
+158–170 in the design case: the radiative-convective humidity runs a fifth to a third wetter than PlaSim's. Its
+tropopause stands at 11.5 kPa, 111.5 km up, against 15.1 kPa and 95.8 km.
+[twilight_301k.json](../results/gcm/twilight_301k.json) (`terluna.climate.gcm-twilight/2`) records the column's source.
+Global means, W/m², each ledger at its own column's temperatures:
+
+| | 294.9 K column (`twilight.json`) | 301 K column (`twilight_301k.json`) |
+|---|---|---|
+| Sunlight the geometry adds: ground; air (cone + curved light) | +1.53; +8.79 (3.99 + 4.80) | +1.53; +10.31 (4.95 + 5.36) |
+| Sunlight in all | +10.32 | +11.85 |
+| Infrared the geometry lets out: cone + curved | 16.15 (10.52 + 5.63) | 19.85 (13.69 + 6.16) |
+| Net | −5.83 | −8.00 |
+| The same infrared scaled to the test's 3-day means at 301.2 K, as the GCM scales it | 17.61 | 17.97 |
+| Water's slant factor at the horizon; well-mixed air's | 13.54; 7.14 | 12.71; 7.04 |
+| Channels; solved by the sky's multiple scattering | 10,697; 282 | 11,559; 267 |
+
+- **More of the sunlight is taken in the air**, 1.5 W/m² more, most of it in the third to fifth layers from the top,
+  where the warmer, wetter, taller troposphere puts more vapour. The ground's twilight is unchanged.
+- **The infrared escapes from higher, warmer layers.** The column's third layer from the top is 15 K warmer, so the
+  shells' wider area lets out 3.7 W/m² more at its own temperatures. Scaled with the fourth power to the GCM's own
+  layers at 301.2 K, whose upper air the longwave correction keeps colder, the two ledgers' escapes differ by 0.36 W/m²:
+  the scaling carries most of the temperature, and the sunlight's 1.5 W/m² is the main change.
+- **The GCM keeps the calibration's slant factors.** The shortwave calibration was refitted with the 294.9 K ledger's
+  slant factors, so the runner takes the Moon's slant path from `twilight.json` and the terms from `twilight_301k.json`
+  (`SLANT_PRODUCT` and `TWILIGHT_LEDGERS`); the 301 K column's own factors, 6% lower for water at the horizon, are
+  recorded beside them.
+- **The dynamics' thin shell.** The 301 K column holds 81,028 kg/m² of air over each square metre of ground with gravity
+  falling with height and 85,876 kg/m² counting the shells' widening, against the GCM's p_s/g_s of 74,861 kg/m² (+8.2%
+  and +14.7%; at 294.9 K +7.2% and +13.4%). PlaSim's and CM1's dynamics hold one gravity and a thin shell, so their heat
+  capacity and vapour mass stay at p_s/g_s; the radiation's calibrations were fitted against the g(z) column, which
+  absorbs part of the difference. No setting changes it.
+
+**The terms in the clear share.** The twilight patch put each layer's sunlight into every column and only the ground's
+into the column's clear share, and let out the infrared in every column, while the terms are clear-sky values. A new
+patch, `TWILIGHT_CLEAR_EDITS` (`NTWLCLEAR`, the runner's default since 19 October; `--no-twilight-clear-share` gives the
+earlier behaviour), adds each layer's sunlight in the share of the column clear of cloud above it, PlaSim's own random
+overlap of cover, and lets each layer's and the ground's infrared through the clouds above it at PlaSim's own longwave
+transmissivity of each cloudy layer, ice optics included. With it off the patched subroutines repeat the originals bit
+for bit (a test compiles both on a stand-in module), and the patched `radmod.f90` compiles with PlaSim's own flags
+against the deployed build's modules. A first size from the 20-year test's 3-day means at 301.2 K, whose cover in the
+top three layers is 6%, 30% and 11% and leaves 55% of the sky clear above the ground: the clear share takes 3.7 W/m² of
+the terms' sunlight out of the layers and keeps in the column 1.9 W/m² of their infrared if the high cloud passes three
+quarters of it, as thin ice of 1.5–4.7 g/m² does (emissivity 0.24), or 6.2 W/m² if every cloud were opaque: −1.9 to +2.5
+W/m² at the top of the air, about −0.9 to +1.2 K (`gcm-runs/spinup_2026-10-19/clear_share_sizing.py` on the research
+drive). The test's own cloud is the guide; the design case's will be its own.
+
+**The optics caches' keys.** The near infrared's and the longwave's line optics are cached on the drive under keys that
+held the column's heights and the line settings alone, so new HITRAN files or a change to the line code would have kept
+an old cache. Their keys now hold the column's levels (pressure, temperature, water and heights), the line settings, the
+producing function's source and the hashes of the line model's code, the atmosphere products the column is built from
+and the restored spectroscopy files, as the sky model's own optics record them (`solved_optics.inputs`, which refuses a
+spectroscopy file whose checksum differs from its manifest). The sky batches' key adds the solver's own code
+(`illumination/sky/solver.py`) to the transport's; the 294.9 K ledger's batches keep their names, so rebuilding that
+ledger would solve its sky again.
+
+**The scattering orders.** The sky model's own rule refuses a solution whose scattering orders stopped at the solver's
+cap (`illumination/sky/solved_sky.py`, which sends it to `solved_checks.finish_orders`). Both ledgers' first batch
+(366–513 nm) left one channel above the tolerance of 2 × 10⁻⁵ at the cap of 100 orders. `solve` now completes such
+channels, and `ledger` refuses batches that are not converged. In the 301 K ledger the channel ends at order 106 and
+`orders_converged` is true; the six orders add 8.8 × 10⁻⁶ W/m² to the ground and 3 × 10⁻⁷ W/m² to the air. Completed on
+a copy, the 294.9 K ledger's open channel ends at order 104 and adds 5.8 × 10⁻⁶ and 2 × 10⁻⁷ W/m², so its
+`orders_converged: false` stands for a leftover a million times smaller than its terms; `twilight.json` itself is left
+as every run from 14 to 19 October read it (`gcm-runs/twilight/analysis/leftover_orders.py` and its two
+`leftover_*.json`).
+
+#### The surface stress and the 10 m wind in the output
+
+The lake studies take their 10 m wind from a neutral log profile from the lowest model level, about 0.9 km up. To let
+the next study bracket it with the model's own surface layer, the runner's output now holds the surface stress, `tauu`
+and `tauv` (PlaSim's codes 180 and 181, means over each 3-day output interval). ExoPlaSim's postprocessor also names the
+10 m wind, `uas` and `vas` (codes 165 and 166, `pyburn.py`), but PlaSim 3.4.2 never writes them: its output routine
+(`outmod.f90`) has no 10 m wind, and the postprocessor then leaves a requested name out of the file without an error.
+The author asked for a 10 m wind of PlaSim's own, and since 19 October `--wind10` gives one (`WIND10_PATCHES`, in the
+runner's copy of ExoPlaSim only). PlaSim's surface layer takes it on Geleyn's (1988) profile through the lowest layer,
+u(z) = u_L (ln(1 + z/z0) − (z/z_L)(B_N − B_D))/B_D, from the drag it uses itself: B_N = ln(1 + z_L/z0) = k/√C_DN,
+and B_D = k/√(C_DN f_m) with f_m the stability factor of its momentum transfer. Neutral air gives the log profile,
+stable air brings less of the wind down and unstable air more; over the sea at the lowest level's 885 m the neutral
+factor is 0.72, and f_m of 0.5 and 1.5 give 0.51 and 0.88. The output writes its mean over the steps since the last
+output as codes 165 and 166, which the runner then asks for as `uas` and `vas`; the mean counts its own steps, since
+PlaSim reads its restart before this namelist. Without the switch the model is as it was. A test compiles the surface
+layer's lines and checks them against the formula, and another checks every output name against the codes PlaSim's
+output routine writes.
+The stress also gives the friction velocity, u* = (|τ|/ρ)^½, as a check on the profile's.
+
+#### The ice optics' weights
+
+The ice optics take PlaSim's near-infrared band as four of Ebert and Curry's bands weighted by their shares of the
+unfiltered TSIS-1 Sun, 0.6164, 0.2283, 0.0811 and 0.0742 (`plasim_ice_optics.NIR_WEIGHTS`). Through the titania stack
+the same rule gives 0.6258, 0.2262, 0.0748 and 0.0733 (checked on 19 October), which lowers one ice layer's absorption
+in that band by 2–3%, a few hundredths of a W/m² over the Moon, and only with `--ice-optics`. The world-crafting lab's
+patch 11 (github.com/dgoldman0/world-crafting, branch `lab`, commit 79ea224,
+`models/exoplasim/patches/11-ice-weights.patch`, sha256 `ad31c4a23479e683`) reads the weights from the namelist as
+`ZICEW`, its default the constants, so that a runner can write the shield's. Its patches 01–10 give this copy's
+`radmod.f90` and `rainmod.f90` byte for byte from ExoPlaSim 3.4.2's own sources (`a49791572fa8f5b2` and
+`44c0668de3e8f7db`; the sources recovered both by undoing Terluna's edits and from an unpatched install agree), and
+patch 11 applies after them, giving `radmod.f90` `50e3df63c3d9872e`. At the author's word it is ported unchanged in
+substance as `ICE_WEIGHTS_EDITS`, after the clear share's patch, in the runner's copy of ExoPlaSim only; runs with ice
+optics now write the shield's weights as `ZICEW` (`plasim_ice_optics.SHIELD_NIR_WEIGHTS`, tested against
+`shielded_nir_weights()`), and `--ice-weights stock` writes nothing and keeps the earlier runs' constants.
+
+#### The design years (20 October)
+
+The cold start (`A28R_301k`, sunlight 0.925, on the rebuilt lakes) ran 25 years heading near 305 K, about 4 K warmer
+than the target study's runs, so a branch from its year-24 restart (`A28R_301k_s0894`) ran 15 years at 0.894. A twin of
+that branch without the clear share (`A28R_301k_s0894_noclear`) measured the clear share: it cools the climate by
+about 1 K (their year 14 at 301.05 and 301.93 K, settling near 301.0 and 301.9 K by `compare --settle`). The
+design years (`A28R_301k_s0897`) ran on from the branch's year-14 restart at 0.897, 15 years on 4 ranks
+(`run_A28R_301k_design.sh` on the research drive).
+
+- **They settled near 301.3 K.** Years 5–14 average 301.25 K at the ground, every year within 0.13 K of the others,
+  with the top of the air in balance (+0.02 W/m²) and a drift of +0.015 K a year; years 10–14 average 301.29 K. On
+  20 October the author took years 5–14 as the design years, at sunlight 0.897, 7.5% dimmer than the 0.970 of the
+  295 K design case.
+- **`compare --settle` read them low until fixed.** It ended a run where its imbalance reached the leftover
+  +0.62 W/m² of the 20-year test (`A28_corrected_970_lw_ice`, years 10–19), which these runs do not keep, so it read
+  299.4 K for the design years and 300.3 K for the branch at 0.894. It now takes each run's own leftover from its
+  drift: each year-to-year warming against the two years' mean imbalance, N = N_left + C dT/dt, at no warming, with
+  its standard error ([compare.py](compare.py)). The design years read 301.2–301.3 K, the branch at 0.894 301.0 K and
+  its twin 301.9–302.0 K, each within 0.1 K. So the branch at 0.894 was on target already, and the design years at
+  0.897 sit 0.2–0.3 K above it.
+- **The longwave refit holds on them, at its edge**
+  ([longwave_check_A28R_301k_s0897.json](../results/gcm/longwave_check_A28R_301k_s0897.json), `plasim_longwave check`
+  with `--case`). On years 5, 9 and 14 its largest layer mean over land or sea is 1.9–2.65 W/m², against 6.2–6.9 for
+  the 295 K fit and about 20 for PlaSim alone. One sample of six, year 14's cloud-free columns, passes the 2.5 W/m²
+  the rule allows, by 0.15. A refit would need a new design run, so it waits for the next change to the GCM's physics.
+- **The high cloud's water and crystals are worth several kelvin** ([high_cloud.py](high_cloud.py),
+  [high_cloud_A28R_301k_s0897.json](../results/gcm/high_cloud_A28R_301k_s0897.json)). The top three layers over the
+  design years, with the ice optics the GCM runs with:
+
+  | Layer | Cover | In-cloud water | Temperature | Crystal radius | Reflection; emissivity |
+  |---|---|---|---|---|---|
+  | Above 107 km | 9.5% | 1.16 g/m² | 162 K | 2.2 µm | 19.0%; 0.58 |
+  | 81–107 km | 33.6% | 2.03 g/m² | 192 K | 11.5 µm | 8.3%; 0.27 |
+  | 63–81 km | 11.5% | 6.31 g/m² | 222 K | 35.2 µm | 8.1%; 0.30 |
+
+  Scaling every layer's water or crystal radius, first order (the cloud's amount, the vapour and the circulation
+  held, the layers counted apart, the sunlight averaged over day and night), at the top of the air and at the ground
+  through the branches' feedback of 1.20–1.56 W/m² a kelvin:
+
+  | Change | At the top of the air | At the ground |
+  |---|---|---|
+  | Water halved | −8.6 W/m² | −5.5 to −7.1 K |
+  | Water 1.5 times | +6.5 W/m² | +4.2 to +5.4 K |
+  | Water 2.5 times | +15.2 W/m² | +9.8 to +12.7 K |
+  | Water 3.5 times | +20.3 W/m² | +13.0 to +16.9 K |
+  | Crystals half the size | +10.6 W/m² | +6.8 to +8.8 K |
+  | Crystals twice the size | −7.8 W/m² | −5.0 to −6.5 K |
+
+  Most of each change is the infrared: more water or smaller crystals trap more of it than they reflect sunlight. A
+  factor of two in either moves the design climate by 5–7 K, more than any other uncertainty measured in it so far,
+  and the ice CM1 made of its own at these heights, 1.5–3.5 times PlaSim's water, would be worth +4 to +17 K. The
+  coldest layer's crystals rest on the table's trend below 180 K. It is a scale for the high cloud, not a run: a GCM
+  answer needs the cloud's water and crystals from a lunar treatment of the cold cloud.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_s0897:5 --case A28R_301k_s0897:9 \
+    --case A28R_301k_s0897:14 --output climate/results/gcm/longwave_check_A28R_301k_s0897.json      # minutes, cached
+climate/gcm/.venv/bin/python -m climate.gcm.high_cloud A28R_301k_s0897 --years 5-14                 # seconds
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked
@@ -1264,6 +1597,7 @@ against the papers:
 | The longwave by height, a year (`A28_corrected_970_lwcheck`) | Done (1 year from `A28_corrected_970`'s year 19 on 2 ranks, 2026-10-17): `--longwave-correction`, the patch reproducing its Python copy; the high cloud forms (above) |
 | Ice optics, a year (`A28_corrected_970_icecheck`, `A28_corrected_970_lwcheck_rebuilt`) | Done (1 year each from `A28_corrected_970`'s year 19, 2026-10-17): the correction with `--ice-optics` on 4 ranks, and the longwave year again on the rebuilt model without them on 2 ranks, which repeats it exactly (above) |
 | The 20-year test of both (`A28_corrected_970_lw_ice`) | Done (20 years from `A28_corrected_970`'s year 19 at 0.970 with `--longwave-correction --ice-optics` and the heating diagnostics, on 4 ranks, 2026-10-17): 306.5 K over years 10–19, settling at 306.8–307.1 K ([above](#where-the-corrected-moon-settles)) |
+| The design case at 301 K (`A28R`) | Not run: prepared on 19 October, a cold start on the current lakes for about 45 years on 4 ranks, waiting for the author's go-ahead ([its plan](#the-runs-plan)) |
 | D, E | D needs ExoPlaSim's ozone profile from the 1-D results; E's trace gases now enter as their CO2 equivalent (`--co2-ppm`, above) |
 
 ## First experiments

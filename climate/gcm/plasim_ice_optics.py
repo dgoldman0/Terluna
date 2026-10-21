@@ -59,6 +59,9 @@ EC_F = np.array([5.851e-04, 5.665e-04, 7.204e-04, 7.463e-04, 1.076e-04])
 NIR_EDGES_CM = (1e4 / 0.75, 7700.0, 5300.0, 4000.0)      # PlaSim's band 2 from 0.75 µm, then Ebert and Curry's
 # Their four near-infrared bands' shares of the TSIS-1 sunlight beyond 0.75 µm (nir_weights), as the patch has them.
 NIR_WEIGHTS = (0.6164, 0.2283, 0.0811, 0.0742)
+# The same shares of the sunlight the design shield lets through (nir_weights with surface_light's design shield), which
+# runs with ice optics write into the namelist (ZICEW, world-crafting's patch 11) since 2026-10-19.
+SHIELD_NIR_WEIGHTS = (0.6258, 0.2262, 0.0748, 0.0733)
 
 
 def ice_radius(t):
@@ -71,12 +74,13 @@ def ice_radius(t):
     return np.where(t < 180.0, below, inside)
 
 
-def nir_weights():
+def nir_weights(shield=None):
     """Ebert and Curry's near-infrared bands' shares of the TSIS-1 sunlight in PlaSim's band 2 (beyond 0.75 µm); the
-    last takes the sunlight beyond 5 µm as well."""
+    last takes the sunlight beyond 5 µm as well. shield, a transmission by wavelength in nm, filters the sunlight first
+    (shielded_nir_weights)."""
     from atmosphere.radiative_convective import shortwave as sw
     nu = np.linspace(2000.0, NIR_EDGES_CM[0], 200001)
-    spec, beyond = sw.solar_spectrum(nu)
+    spec, beyond = sw.solar_spectrum(nu, shield=shield)
     edges = NIR_EDGES_CM + (2000.0,)
     parts = []
     for hi, lo in zip(edges[:-1], edges[1:]):
@@ -84,6 +88,13 @@ def nir_weights():
         parts.append(float(np.trapezoid(spec[m], nu[m])))
     parts[-1] += float(beyond)
     return tuple(p / sum(parts) for p in parts)
+
+
+def shielded_nir_weights():
+    """The bands' shares of the sunlight through the design shield, as the surface light model gives it."""
+    from illumination.surface_light import model as surface
+    shield, _ = surface.sunlight('design')
+    return nir_weights(shield)
 
 
 def band_optics(r):

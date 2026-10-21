@@ -4,8 +4,15 @@
     $PY -m climate.gcm.twilight longwave    # the longwave line optics, cached
     $PY -m climate.gcm.twilight solve       # the spherical sky's multiple scattering, in batches on the drive
     $PY -m climate.gcm.twilight ledger      # ../results/gcm/twilight.json
+    $PY -m climate.gcm.twilight ledger --ts 301   # the same on a 301 K column: ../results/gcm/twilight_301k.json
 
-$PY is a Python with numba, which the sky model's solver needs (terluna-research/venvs/optics).
+$PY is a Python with numba, which the sky model's solver needs (terluna-research/venvs/optics). Each task takes --ts,
+the column's ground temperature: without it the column is illumination's design column at 294.9 K, the sky model's
+own, whose ledger is twilight.json; with it the column is built the same way between the middle atmosphere's stored
+cases that bracket that temperature (design_column), and its ledger is twilight_<ts>k.json. The solve task completes
+the scattering orders of any channel the solver's cap left unconverged, as the sky model's own rule requires
+(illumination/sky/solved_sky.py refuses such a solution; solved_checks.finish_orders completes it), and the ledger
+refuses batches that are not converged.
 
 ExoPlaSim's radiation (plasim/src/radmod.f90) lights a column only while its Sun stands above the horizon, gmu0 > 0,
 and stretches the low Sun's absorber paths with Earth's horizon magnification, 35 / sqrt(1 + 1224 mu0^2); CM1's RRTMG
@@ -29,7 +36,9 @@ escape, on both sides.
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import hashlib
+import inspect
 import json
 import math
 import sys
@@ -45,8 +54,13 @@ RESULTS = HERE.parent / 'results' / 'gcm'
 OUT = RESULTS / 'twilight.json'
 RUNS = Path('/media/projectspace/terluna-research/gcm-runs/twilight')
 SKY_RUNS = RUNS / 'sky'
-SCHEMA = 'terluna.climate.gcm-twilight/1'
+# /2 (2026-10-19) adds the column's source, the solver's completed orders and the clear share in the GCM term's reading
+# rule; twilight.json, the 294.9 K ledger every run from 14 to 19 October took, stays at /1.
+SCHEMA = 'terluna.climate.gcm-twilight/2'
 WORLD = 'moon_1.2atm'
+# The middle atmosphere's stored cases of the design air behind the titania stack, by their ground temperature
+# (atmosphere/middle_atmosphere/results/cases); 288 K is the case without a suffix.
+STORED_TS = (268.0, 278.0, 288.0, 298.0, 308.0)
 NIR_NU = (2000.0, 1e7 / 830.0)            # cm^-1: 5 um to 830 nm, inside the shortwave line grid
 PROCESSES = 4
 GCM_LEVELS = 10
@@ -81,25 +95,83 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()[:16]
 
 
-def near_infrared_cache(col, cfg):
+def stored_case(ts_k):
+    """The name of the middle atmosphere's stored case of the design air behind the titania stack at a ground
+    temperature in STORED_TS."""
+    return 'moon_1.2atm_titania_stack' + ('' if ts_k == 288.0 else f'_ts{ts_k:g}')
+
+
+def design_column(ts_k=None):
+    """The clear column the ledger is built on. Without ts_k (or at 294.9 K) it is illumination's design column, the
+    sky model's own (illumination/surface_light/model.py, COLUMNS['moon_1.2atm']). At another ground temperature it is
+    built the same way: the moist adiabat from that ground with Manabe-Wetherald humidity up to the tropopause, and
+    above it the solved upper air and trace gases of the middle atmosphere's two stored cases that bracket it,
+    weighted linearly by the ground's temperature, as the design column weights its cases at 288 and 298 K."""
+    from illumination.surface_light import model as surface
+    base = surface.COLUMNS[WORLD]
+    if ts_k is None or abs(float(ts_k) - base.surface_temperature_k) < 1e-9:
+        return base
+    ts_k = float(ts_k)
+    below, above = [t for t in STORED_TS if t <= ts_k], [t for t in STORED_TS if t > ts_k]
+    if not below or not above:
+        raise ValueError(f'no stored cases bracket {ts_k} K (they span {STORED_TS[0]:g}-{STORED_TS[-1]:g} K)')
+    lo, hi = below[-1], above[0]
+    w = (ts_k - lo) / (hi - lo)
+    return replace(base, name=f'{WORLD}_ts{ts_k:g}', surface_temperature_k=ts_k,
+                   stored=((stored_case(lo), 1.0 - w), (stored_case(hi), w)))
+
+
+def registered(column):
+    """The column's name in illumination's register of columns, which the sky model's fine optics read by name; a
+    column built here joins it under its own name, which carries its ground temperature."""
+    from illumination.surface_light import model as surface
+    known = surface.COLUMNS.setdefault(column.name, column)
+    if known != column:
+        raise ValueError(f'another column is registered as {column.name}')
+    return column.name
+
+
+def product_path(column):
+    """twilight.json for the design column at 294.9 K, twilight_<ts>k.json for a column built at another ground."""
+    return OUT if column.name == WORLD else RESULTS / f'twilight_{column.surface_temperature_k:g}k.json'
+
+
+def optics_key(kind, column, col, cfg, producer, extra=()):
+    """A cache key that changes with whatever sets the optics: the column's levels (pressure, temperature, water and
+    heights), the line configuration (all but its worker count), the producing function's own source, and the hashes
+    of the line model's code, the atmosphere products the column is built from and the restored spectroscopy files,
+    as the sky model's own optics record them (illumination/sky/solved_optics.inputs, which refuses a spectroscopy
+    file whose checksum differs from its manifest)."""
+    from illumination.sky import solved_optics
+    provenance = solved_optics.inputs(column)
+    levels = hashlib.sha256(b''.join(np.ascontiguousarray(col[k], dtype=float).tobytes()
+                                     for k in ('p_pa', 't_k', 'x_h2o', 'z_m'))).hexdigest()
+    line = {k: v for k, v in dataclasses.asdict(cfg).items() if k != 'processes'}
+    code = hashlib.sha256(inspect.getsource(producer).encode()).hexdigest()
+    return hashlib.sha256(json.dumps([kind, column.name, line, list(extra), levels, code, provenance['files'],
+                                      provenance['external_inputs']], sort_keys=True).encode()).hexdigest()[:16]
+
+
+def near_infrared_cache(column, col, cfg):
     """The drive file holding the near infrared's optics for a column and line configuration."""
-    key = hashlib.sha256(json.dumps([WORLD, cfg.nu_min, cfg.nu_max, cfg.step, cfg.molecules,
-                                     [list(map(float, col['z_m']))]], sort_keys=True).encode()).hexdigest()[:16]
-    return RUNS / f'{WORLD}_near_infrared_{key}.npz'
+    key = optics_key('near_infrared', column, col, cfg, near_infrared_optics, NIR_NU)
+    return RUNS / f'{column.name}_near_infrared_{key}.npz'
 
 
-def near_infrared_optics():
-    """Absorption and Rayleigh optical depths of the design column (100 layers) from 830 nm to 5 um on the
-    radiative-convective model's shortwave line grid, with the shielded sunlight's energy, cached on the drive."""
+def near_infrared_optics(column=None):
+    """Absorption and Rayleigh optical depths of the column (100 layers; the design column without one) from 830 nm
+    to 5 um on the radiative-convective model's shortwave line grid, with the shielded sunlight's energy, cached on the
+    drive."""
     from atmosphere.radiative_convective import optics, shortwave as sw
     from illumination.surface_light import model as surface
-    col, _, _, _ = surface.build(surface.COLUMNS[WORLD])
+    column = column or design_column()
+    col, _, _, _ = surface.build(column)
     cfg = replace(optics.SHORTWAVE, processes=PROCESSES)
-    path = near_infrared_cache(col, cfg)
+    path = near_infrared_cache(column, col, cfg)
     if path.exists():
         with np.load(path, allow_pickle=False) as data:
             return {k: data[k].copy() for k in data.files}
-    log(f'line absorption on {len(col["z_m"]) - 1} layers, {cfg.nu_min:g}-{cfg.nu_max:g} cm-1')
+    log(f'{column.name}: line absorption on {len(col["z_m"]) - 1} layers, {cfg.nu_min:g}-{cfg.nu_max:g} cm-1')
     nu, tau_abs = optics.optical_depth(col, cfg)
     keep = (nu >= NIR_NU[0]) & (nu < NIR_NU[1])
     nu, tau_abs = nu[keep], tau_abs[:, keep]
@@ -117,20 +189,24 @@ def near_infrared_optics():
     return out
 
 
-def longwave_optics():
-    """Absorption optical depths of the design column (100 layers) on the radiative-convective model's longwave line
-    grid, cached on the drive."""
+def longwave_cache(column, col, cfg):
+    """The drive file holding the longwave line optics for a column and line configuration."""
+    return RUNS / f'{column.name}_longwave_{optics_key("longwave", column, col, cfg, longwave_optics)}.npz'
+
+
+def longwave_optics(column=None):
+    """Absorption optical depths of the column (100 layers; the design column without one) on the radiative-convective
+    model's longwave line grid, cached on the drive."""
     from atmosphere.radiative_convective import optics
     from illumination.surface_light import model as surface
-    col, _, _, _ = surface.build(surface.COLUMNS[WORLD])
+    column = column or design_column()
+    col, _, _, _ = surface.build(column)
     cfg = replace(optics.LONGWAVE, processes=PROCESSES)
-    key = hashlib.sha256(json.dumps(['longwave', WORLD, cfg.nu_min, cfg.nu_max, cfg.step, cfg.molecules,
-                                     [list(map(float, col['z_m']))]], sort_keys=True).encode()).hexdigest()[:16]
-    path = RUNS / f'{WORLD}_longwave_{key}.npz'
+    path = longwave_cache(column, col, cfg)
     if path.exists():
         with np.load(path, allow_pickle=False) as data:
             return {k: data[k].copy() for k in data.files}
-    log(f'longwave line absorption on {len(col["z_m"]) - 1} layers, {cfg.nu_min:g}-{cfg.nu_max:g} cm-1')
+    log(f'{column.name}: longwave line absorption on {len(col["z_m"]) - 1} layers, {cfg.nu_min:g}-{cfg.nu_max:g} cm-1')
     nu, tau = optics.optical_depth(col, cfg)
     out = dict(nu=nu, absorption=tau.astype(np.float32), height=np.asarray(col['z_m'], float))
     RUNS.mkdir(parents=True, exist_ok=True)
@@ -207,19 +283,22 @@ def outgoing_infrared(nu, tau, edges, t_layers, t_surface):
                 layers=dict(flat=flat, sphere=sphere, sphere_shallow=shallow))
 
 
-def fine_inputs():
-    """Line-by-line optics of the design column's 100 layers from 360 nm to 5 um, by rising wavelength: the sky
-    model's fine visible grid (illumination/sky/solved_optics, with its trace gases and colour weights) and the near
-    infrared's; with the files they come from."""
+def fine_inputs(column=None):
+    """Line-by-line optics of the column's 100 layers (the design column without one) from 360 nm to 5 um, by rising
+    wavelength: the sky model's fine visible grid (illumination/sky/solved_optics, with its trace gases and colour
+    weights) and the near infrared's; with the files they come from. The design column's fine optics are the sky
+    model's own cache beside its product; another column's are kept with the ledger's other optics."""
     from atmosphere.radiative_convective import optics
     from illumination.sky import solved_optics
     from illumination.surface_light import model as surface
-    fine, meta = solved_optics.fine_optics(WORLD, STANDARD.parent, step_cm1=FINE_STEP)
-    nir = near_infrared_optics()
+    column = column or design_column()
+    folder = STANDARD.parent if column.name == WORLD else RUNS
+    fine, meta = solved_optics.fine_optics(registered(column), folder, step_cm1=FINE_STEP, processes=PROCESSES)
+    nir = near_infrared_optics(column)
     order = np.argsort(1e7 / nir['nu'])
-    col, _, _, _ = surface.build(surface.COLUMNS[WORLD])
-    files = (STANDARD.parent / f'{WORLD}_fine_{meta["key"][:16]}.npz',
-             near_infrared_cache(col, replace(optics.SHORTWAVE, processes=PROCESSES)))
+    col, _, _, _ = surface.build(column)
+    files = (folder / f'{column.name}_fine_{meta["key"][:16]}.npz',
+             near_infrared_cache(column, col, replace(optics.SHORTWAVE, processes=PROCESSES)))
     sources = {str(f): digest(f) for f in files}
     return dict(height=fine['height'], wavelength=np.r_[fine['wavelength'], (1e7 / nir['nu'])[order]],
                 energy=np.r_[fine['energy'], nir['energy'][order]],
@@ -301,15 +380,31 @@ def channels(fine):
     return ch
 
 
-def sky_batches(ch, solve=False):
+def sky_key(ch, pick):
+    """The sky batches' key: the solved channels' optics, the solver's quality and ground, and the code of the sky
+    model's transport and of the solver it builds on. The ledger of 14 October keyed its batches without solver.py."""
+    from illumination.sky import solved_transport as st, solver
+    return hashlib.sha256(b''.join(np.ascontiguousarray(ch[k][..., pick]).tobytes()
+                                   for k in ('absorption', 'scattering', 'energy'))
+                          + json.dumps([SKY_QUALITY, SKY_ALBEDO, digest(st.__file__), digest(solver.__file__)]).encode()
+                          ).hexdigest()[:16]
+
+
+def batch_meta(path):
+    with np.load(path, allow_pickle=False) as z:
+        return json.loads(str(z['meta']))
+
+
+def sky_batches(ch, solve=False, column=None):
     """The solved channels' multiple scattering by the spherical sky model's solver (its standard quality and
-    ground), in batches kept on the drive so an interruption loses one; with solve, the missing ones are solved."""
+    ground), in batches kept on the drive so an interruption loses one; with solve, the missing ones are solved and
+    the scattering orders of any channel left above the solver's tolerance at its cap of 100 orders are completed, as
+    illumination/sky/solved_checks.finish_orders completes them for the sky product. Without solve, a batch that is
+    missing or not converged stops the ledger."""
     from illumination.sky import solved_transport as st
-    from illumination.surface_light import model as surface
+    column = column or design_column()
     pick = np.flatnonzero(ch['solved'])
-    key = hashlib.sha256(b''.join(np.ascontiguousarray(ch[k][..., pick]).tobytes()
-                                  for k in ('absorption', 'scattering', 'energy'))
-                         + json.dumps([SKY_QUALITY, SKY_ALBEDO, digest(st.__file__)]).encode()).hexdigest()[:16]
+    key = sky_key(ch, pick)
     starts = range(0, pick.size, SKY_BATCH)
     paths = [SKY_RUNS / f'sky_{key}_{b:02d}.npz' for b in range(len(starts))]
     for b, (start, path) in enumerate(zip(starts, paths)):
@@ -321,10 +416,19 @@ def sky_batches(ch, solve=False):
         sub = dict(height=ch['height'], absorption=ch['absorption'][:, sel], scattering=ch['scattering'][:, sel],
                    energy=ch['energy'][sel], xyz=ch['xyz'][sel], wavelength=ch['wavelength'][sel], band=ch['band'][sel])
         SKY_RUNS.mkdir(parents=True, exist_ok=True)
-        st.solve(sub, surface.COLUMNS[WORLD].planet.radius_m, SKY_QUALITY, albedo=SKY_ALBEDO, path=path)
+        st.solve(sub, column.planet.radius_m, SKY_QUALITY, albedo=SKY_ALBEDO, path=path)
     missing = [p.name for p in paths if not p.exists()]
     if missing and not solve:
         raise SystemExit(f'{len(missing)} of {len(paths)} sky batches are not solved yet (task solve): {missing[0]}...')
+    open_orders = [p for p in paths if p.exists() and not batch_meta(p)['order_converged']]
+    if open_orders and solve:
+        from illumination.sky.solved_checks import finish_orders
+        for path in open_orders:
+            log(f'{path.name}: completing the scattering orders the cap left open')
+            finish_orders(path)
+    elif open_orders:
+        raise SystemExit(f'{len(open_orders)} sky batches stopped at the order cap; the solve task completes them '
+                         f'(illumination/sky/solved_checks.finish_orders): {open_orders[0].name}')
     return pick, paths
 
 
@@ -581,12 +685,13 @@ def rounded(x, digits=6):
     return x
 
 
-def reduction_check(fine, ch, edges, p_edges):
-    """The channels' pseudo-spherical two-stream absorption against the fine grid's, and the sky product's own
-    production channels' (360-830 nm), with the Sun at CHECK_MU: W/m2 at the beam, the air by GCM layer."""
-    with np.load(STANDARD, allow_pickle=False) as z:
-        dz = np.diff(z['edges'])
-        production = (z['absorption'] * dz[:, None], z['scattering'] * dz[:, None], z['energy'], z['wavelength'])
+def reduction_check(fine, ch, edges, p_edges, production=True):
+    """The channels' pseudo-spherical two-stream absorption against the fine grid's, and, on the sky product's own
+    column, its production channels' (360-830 nm), with the Sun at CHECK_MU: W/m2 at the beam, the air by GCM layer."""
+    if production:
+        with np.load(STANDARD, allow_pickle=False) as z:
+            dz = np.diff(z['edges'])
+            production = (z['absorption'] * dz[:, None], z['scattering'] * dz[:, None], z['energy'], z['wavelength'])
     rows = []
     for lo, hi in ((360.0, 830.0), (830.0, 5000.1)):
         f = (fine['wavelength'] >= lo) & (fine['wavelength'] < hi)
@@ -598,26 +703,27 @@ def reduction_check(fine, ch, edges, p_edges):
                 air, ground = column_absorption(ta, ts, e, SKY_ALBEDO, mu, edges)
                 row[name] = dict(air=float(air.sum()) / mu, ground=float(ground) / mu,
                                  air_by_layer=list(onto_gcm_layers(air[:, None], p_edges)[:, 0] / mu))
-            if hi < 1000.0:
+            if hi < 1000.0 and production:
                 air, ground = column_absorption(*production[:3], SKY_ALBEDO, mu, edges)
                 row['production'] = dict(air=float(air.sum()) / mu, ground=float(ground) / mu)
             rows.append(row)
     return rows
 
 
-def ledger() -> dict:
+def ledger(column=None) -> dict:
     """The energy the curved air takes by solar elevation, ground and height, against flat columns of the same air
-    and PlaSim's clear sky on the design run's column, integrated over the sphere."""
+    and PlaSim's clear sky on the design run's column, integrated over the sphere; on the design column without one."""
     from atmosphere.radiative_convective import optics, shortwave as sw
-    from illumination.sky import solved_optics, solved_transport
+    from illumination.sky import solved_optics, solved_transport, solver
     from illumination.surface_light import model as surface
     from climate.gcm import exoplasim_run as er, plasim_shortwave as ps
-    col, air_spec, _, _ = surface.build(surface.COLUMNS[WORLD])
-    R = surface.COLUMNS[WORLD].planet.radius_m
-    fine, sources = fine_inputs()
+    column = column or design_column()
+    col, air_spec, _, built_from = surface.build(column)
+    R = column.planet.radius_m
+    fine, sources = fine_inputs(column)
     ch = channels(fine)
     edges, p_edges, albedo = R + ch['height'], col['p_pa'], SKY_ALBEDO
-    pick, paths = sky_batches(ch)
+    pick, paths = sky_batches(ch, column=column)
     sky_a, meta = None, []
     for path in paths:
         with np.load(path, allow_pickle=False) as z:
@@ -677,8 +783,8 @@ def ledger() -> dict:
     shell_means = {k: sphere_share(sums[k]['all'][1].T, grid) / 4.0
                    for k in ('sphere', 'sphere_shallow', 'pseudo_spherical')}
     log('PlaSim on the design run\'s column')
-    column = plasim_column(col, air_spec.molar_mass, albedo)
-    p_layers, p_ground, p_reflected = plasim(column, grid)
+    plasim_col = plasim_column(col, air_spec.molar_mass, albedo)
+    p_layers, p_ground, p_reflected = plasim(plasim_col, grid)
     tables['plasim'] = (covered * p_ground, covered * p_layers)
     whole = {k: global_means(g, a, grid) for k, (g, a) in tables.items()}
 
@@ -689,7 +795,7 @@ def ledger() -> dict:
         out['air_by_layer'] = list(np.subtract(whole[x]['air_by_layer'], whole[y]['air_by_layer']))
         return out
     log('the reduction against the fine grid')
-    check = reduction_check(fine, ch, edges, p_edges)
+    check = reduction_check(fine, ch, edges, p_edges, production=column.name == WORLD)
     # Column masses per square metre of ground and the low Sun's slant paths.
     mass = col['layer_mass_kg_m2']
     water = mass * water_fraction(col['layer_x_h2o'], air_spec.molar_mass)
@@ -706,16 +812,18 @@ def ledger() -> dict:
     lunar = magnification(edges, water / dz)
     lunar_air = magnification(edges, mass / dz)
     log('the outgoing infrared through flat layers and spherical shells')
-    lwo = longwave_optics()
+    lwo = longwave_optics(column)
     lw = outgoing_infrared(lwo['nu'], lwo['absorption'].astype(float), edges, col['layer_t_k'], float(col['t_k'][0]))
     lw_cone = lw['layers']['sphere'] - lw['layers']['sphere_shallow']
     lw_curved = lw['layers']['sphere_shallow'] - lw['layers']['flat']
     weights = onto_gcm_layers(np.diag(mass), p_edges)                 # each shell's mass in each GCM layer
     layer_t = (weights @ col['layer_t_k']) / weights.sum(1)
     out = dict(
-        schema=SCHEMA, world=WORLD,
+        schema=SCHEMA, world=WORLD, column_name=column.name,
         evidence=(f'A runnable calculation of clear, cloudless, aerosol-free air over ground of albedo {albedo}, without '
-                  'refraction and without empirical check. The design column\'s line-by-line optics from 360 nm to 5 um '
+                  'refraction and without empirical check, on one global-mean column '
+                  f'({column.surface_temperature_k:g} K at the ground; column.source). The column\'s line-by-line optics '
+                  'from 360 nm to 5 um '
                   f'(the sky model\'s {FINE_STEP} cm-1 visible grid, the radiative-convective model\'s near infrared) '
                   f'are grouped into {e.size} channels that keep the absorbed energy within {TOLERANCE:.0%} on slant '
                   f'columns, those above {SOLVED_NM:.0f} nm also above the bottom of every layer (reduction_check). The '
@@ -743,20 +851,33 @@ def ledger() -> dict:
         channels=dict(count=int(e.size), solved=int(pick.size), tolerance=TOLERANCE, opaque_column_depth=OPAQUE,
                       solved_below_nm=SOLVED_NM, sky_quality=SKY_QUALITY, batches=len(paths),
                       orders_converged=all(m['order_converged'] for m in meta),
-                      solve_seconds=float(sum(m['seconds'] for m in meta))),
+                      order_cap=max(m['order_cap'] for m in meta), increment_tolerance=meta[0]['increment_tolerance'],
+                      continued_orders=[dict(batch=b, **c) for b, m in enumerate(meta)
+                                        for c in m.get('continued_orders', [])],
+                      solve_seconds=float(sum(m['seconds'] + m.get('continuation_seconds', 0.0) for m in meta))),
         reduction_check=check,
         column=dict(
+            source=dict(
+                surface_temperature_k=column.surface_temperature_k, dry_pressure_pa=column.dry_pressure_pa,
+                stored_cases={name: float(w) for name, w in column.stored}, stored_case_tables=built_from,
+                construction=('illumination/surface_light/model.py build(): the moist adiabat from the ground with '
+                              'Manabe-Wetherald humidity up to the tropopause, and above it the middle atmosphere\'s '
+                              'solved temperatures and trace gases of the stored cases, weighted as given, with the '
+                              'tropopause pressure weighted in its logarithm')),
+            temperature_k=dict(ground=float(col['t_k'][0]), tropopause=float(np.interp(
+                -math.log(col['tropopause_pa']), -np.log(col['p_pa']), col['t_k']))),
+            tropopause_pa=float(col['tropopause_pa']),
             mass_kg_m2=dict(sphere=float(mass @ (mid / R) ** 2), flat=float(mass.sum()),
-                            gcm=float(column['ps'] / column['gravity'])),
+                            gcm=float(plasim_col['ps'] / plasim_col['gravity'])),
             mass_mean_height_km=float(mass @ (mid - R) / mass.sum() / 1e3),
             water_kg_m2=float(water.sum()), surface_pressure_pa=float(col['surface_pressure_pa']),
-            gcm_surface_pressure_pa=float(column['ps']), surface_albedo=albedo,
+            gcm_surface_pressure_pa=float(plasim_col['ps']), surface_albedo=albedo,
             slant=dict(elevation_deg=list(np.degrees(elev)),
                        air=list(air_mass(edges, mass / dz, elev)), water=list(air_mass(edges, water / dz, elev)),
                        plasim=list(35.0 / np.sqrt(1.0 + 1224.0 * mu * mu)), flat=list(1.0 / np.maximum(mu, 1e-300)))),
         gcm=dict(run=DESIGN_RUN, sigma=list(plasim_sigma()), half_level_height_km=list(heights / 1e3),
                  rayleigh_scale=DESIGN_RAYLEIGH, sw_water_absorption=DESIGN_WATER,
-                 rcoeff=column['rcoeff'], gravity_m_s2=column['gravity']),
+                 rcoeff=plasim_col['rcoeff'], gravity_m_s2=plasim_col['gravity']),
         global_mean_w_m2=dict(by_band=by_band, whole_spectrum=whole),
         sphere_minus_pseudo_spherical_w_m2=difference('sphere', 'pseudo_spherical'),
         cone_w_m2=difference('sphere', 'sphere_shallow'),
@@ -771,7 +892,9 @@ def ledger() -> dict:
                           'Added to the GCM\'s own shortwave it keeps PlaSim\'s calibrated column and supplies the '
                           'twilight, the low Sun\'s side light and the curved scattered light. The cone (cone_w_m2), the '
                           'more sunlight the widening shells above each square metre take, is left out: those shells '
-                          'emit their infrared from the same wider area, which a flat model\'s longwave leaves out too.'),
+                          'emit their infrared from the same wider area, which a flat model\'s longwave leaves out too. '
+                          'The terms are clear sky: a model with cloud adds each layer\'s in the clear share above that '
+                          'layer and the ground\'s in the whole column\'s (the GCM runner\'s NTWLCLEAR).'),
             elevation_deg=list(np.degrees(grid[term])), ground=term_g, layers=term_q,
             global_mean_w_m2=dict(ground=covered / 4.0 * float(sphere_share(term_g, grid[term])),
                                   air=covered / 4.0 * float(sphere_share(term_q.sum(0), grid[term])))),
@@ -801,7 +924,8 @@ def ledger() -> dict:
                           'shells, which take in more sunlight (the cone and the curved light) and lose more infrared '
                           'by the same geometry: the shells\' widening (cone) and the escape below the horizontal past '
                           'the Moon\'s limb (curved). By GCM layer (top first) and by shell (bottom-up) each with its '
-                          'design temperature, so a model may scale them with its own; the ground\'s share apart.'),
+                          'design temperature, so a model may scale them with its own; the ground\'s share apart. Clear '
+                          'sky: a model with cloud lets each layer\'s escape through the clouds above it.'),
             olr_w_m2=dict(flat=lw['flat'], sphere=lw['sphere'], sphere_shallow=lw['sphere_shallow']),
             cone_w_m2=float(lw_cone.sum()), curved_w_m2=float(lw['sphere_shallow'] - lw['flat']),
             ground_curved_w_m2=lw['ground']['sphere'] - lw['ground']['flat'], ground_temperature_k=float(col['t_k'][0]),
@@ -818,9 +942,10 @@ def ledger() -> dict:
         by_elevation=dict(elevation_deg=list(np.degrees(grid)),
                           **{k: dict(ground=g / covered, layers=a / covered) for k, (g, a) in tables.items()},
                           plasim_reflected=p_reflected),
-        inputs={**sources, str(STANDARD.relative_to(ROOT)): digest(STANDARD), **{str(p): digest(p) for p in paths},
+        inputs={**sources, **({str(STANDARD.relative_to(ROOT)): digest(STANDARD)} if column.name == WORLD else {}),
+                **{str(p): digest(p) for p in paths},
                 **{str(Path(m.__file__).resolve().relative_to(ROOT)): digest(m.__file__)
-                   for m in (solved_optics, solved_transport, surface, sw, optics)}},
+                   for m in (solved_optics, solved_transport, solver, surface, sw, optics)}},
         producer=dict(domain='climate', files={f'gcm/{Path(m.__file__).name}': digest(m.__file__)
                                                for m in (sys.modules[__name__], ps, er)}))
     return rounded(out)
@@ -829,26 +954,29 @@ def ledger() -> dict:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('task', choices=('optics', 'longwave', 'solve', 'ledger'))
+    ap.add_argument('--ts', type=float, help='the column\'s ground temperature, K (default: the design column, 294.9 K)')
     args = ap.parse_args(argv)
+    column = design_column(args.ts)
     if args.task == 'optics':
-        near_infrared_optics()
+        near_infrared_optics(column)
         return 0
     if args.task == 'longwave':
-        longwave_optics()
+        longwave_optics(column)
         return 0
     if args.task == 'solve':
-        fine, _ = fine_inputs()
+        fine, _ = fine_inputs(column)
         ch = channels(fine)
         del fine
         log(f'{ch["energy"].size} channels, {int(ch["solved"].sum())} to solve')
-        sky_batches(ch, solve=True)
+        sky_batches(ch, solve=True, column=column)
         return 0
-    out = ledger()
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    tmp = OUT.with_suffix('.tmp')
+    out = ledger(column)
+    path = product_path(column)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix('.tmp')
     tmp.write_text(json.dumps(out, indent=1) + '\n')
-    tmp.replace(OUT)
-    log(f'wrote {OUT.relative_to(ROOT)}')
+    tmp.replace(path)
+    log(f'wrote {path.relative_to(ROOT)}')
     return 0
 
 

@@ -1,6 +1,13 @@
 """Boundary conditions and planet parameters for a three-dimensional climate model of the Open Moon.
 
     python -m climate.gcm.boundary      # writes climate/gcm/products/*.nc and moon_gcm_configuration.json
+    python -m climate.gcm.boundary --lakes-only   # the lakes surface alone, and its record in ../results/gcm
+
+The lakes surface is named by its drainage product's content (moon_28pct_water_lakes_<drainage sha256[:16]>_<grid>.nc),
+so a later routing writes a surface of its own beside it. The surface of 25 September,
+moon_28pct_water_lakes_<grid>.nc, which every A28 run read, is kept as it is and never written again: it holds run A's
+lakes, and the drainage product it records (060219b12f480619) was overwritten under its name on 29 September by the
+A28_dim5_moon routing (98842fc2a648f889), so it cannot be regenerated from what it records (SUPERSEDED).
 
 Nothing here runs a general circulation model. This prepares what any of them
 needs, from the repository's own sources:
@@ -40,8 +47,23 @@ from shared import constants as c
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 GEOGRAPHY = ROOT / 'geography' / 'products'
+RESULTS = HERE.parent / 'results' / 'gcm'
 SCHEMA = 'terluna.climate.gcm-boundary/1'
+LAKES_SCHEMA = 'terluna.climate.gcm-boundary-lakes/1'          # the lakes surface's committed record
 LAKES = ('atlas_28pct_4ppd.npz', 'drainage_28pct_16ppd.npz')          # the scenario's seas, and its rain-fed lakes
+# The lakes surface of 2026-09-25, kept as it is: what it records, and why it cannot be rebuilt.
+SUPERSEDED = dict(
+    files='moon_28pct_water_lakes_<grid>.nc', built='2026-09-25', source_sha256='dc283827f349fdc1+060219b12f480619',
+    lakes='the rain-fed lakes of run A\'s runoff',
+    note=('The drainage product this surface records, 060219b12f480619, was overwritten under its name '
+          '(geography/products/drainage_28pct_16ppd.npz) on 2026-09-29 by the A28_dim5_moon routing, 98842fc2a648f889, '
+          'and no copy of it survives: the surface every A28 run read until 2026-10-19 cannot be regenerated from what '
+          'it records. It is kept unchanged as the record of those runs.'))
+
+
+def lakes_name(drainage_sha, grid):
+    """The lakes surface built from the drainage product with this content hash (sha256, 16 hex digits)."""
+    return f'moon_28pct_water_lakes_{drainage_sha}_{grid}.nc'
 
 
 def gaussian_latitudes(n):
@@ -101,9 +123,16 @@ def lakes_product(atlas_name, drainage_name):
     fine = drainage['meta']['grid']
     wet, depth, surface = combine_lakes(height, atlas['water_label'] > 0, drainage['lake_cell'], drainage['lake_level_m'],
                                         fine['cols'], fine['pixels_per_degree'] * 180 // height.shape[0], level)
+    sea = atlas['water_label'] > 0
+    weights = np.cos(np.radians(atlas['lat_deg']))[:, None] * np.ones(height.shape[1])
+    routing = [Path(k).stem.removeprefix('climatology_') for k in drainage['meta'].get('sources', {})
+               if Path(k).name.startswith('climatology_')]
     return dict(lat_deg=atlas['lat_deg'], lon_deg=atlas['lon_deg'], water_fraction=wet, mean_height_m=height,
                 mean_water_depth_m=depth, water_surface_m=surface, meta=dict(level_m=level),
-                sha256=f"{atlas['sha256']}+{drainage['sha256']}")
+                sha256=f"{atlas['sha256']}+{drainage['sha256']}", drainage_sha256=drainage['sha256'],
+                routing_run=routing[0] if routing else None,
+                lake_share=float((np.where(sea, 0.0, wet) * weights).sum() / weights.sum()),
+                sea_share=float((sea * weights).sum() / weights.sum()))
 
 
 def regrid(product, grid):
@@ -190,13 +219,78 @@ def write_netcdf(path, fields, attrs):
             setattr(f, k, v)
 
 
+def read_t21(path):
+    """A T21 surface's land fraction, cell areas and water surface, and PlaSim's binary mask from it as the runner
+    makes it (exoplasim_run.land_mask at the surface's own water share)."""
+    from climate.gcm.exoplasim_run import land_mask
+    with netcdf_file(path, 'r', mmap=False) as f:
+        land = np.asarray(f.variables['land_fraction'][:], float)
+        area = np.asarray(f.variables['cell_area_fraction'][:], float)
+        lat, lon = np.asarray(f.variables['lat'][:], float), np.asarray(f.variables['lon'][:], float)
+    water = 1.0 - float((land * area).sum() / area.sum())
+    mask = land_mask(land, area, water)
+    return dict(land=land, area=area, lat=lat, lon=lon, water_share=water, mask=mask,
+                mask_land_share=float((mask * area).sum() / area.sum()))
+
+
+def lakes_record(prod, written, out):
+    """The committed record of a lakes surface (the NetCDF files are not committed): its inputs and files by sha256,
+    the shares of seas, lakes and water, PlaSim's binary mask from its T21 file, and every T21 cell whose mask differs
+    from the superseded surface's, when that surface is at hand."""
+    new = read_t21(out / lakes_name(prod['drainage_sha256'], 'gaussian_T21'))
+    t21 = dict(water_share=new['water_share'], lake_share=new['water_share'] - prod['sea_share'],
+               mask_land_share=new['mask_land_share'], mask_water_cells=int((new['mask'] == 0).sum()),
+               cells=int(new['mask'].size))
+    code = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16]
+    record = dict(
+        schema=LAKES_SCHEMA, producer=dict(domain='climate', files={'gcm/boundary.py': code}),
+        inputs={f'geography/products/{name}': hashlib.sha256((GEOGRAPHY / name).read_bytes()).hexdigest()
+                for name in LAKES},
+        routing_run=prod['routing_run'],
+        files={path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in written},
+        shares=dict(seas=prod['sea_share'], lakes=prod['lake_share'], water=prod['sea_share'] + prod['lake_share']),
+        t21=t21, superseded=dict(SUPERSEDED))
+    old = out / 'moon_28pct_water_lakes_gaussian_T21.nc'
+    if old.is_file():
+        was = read_t21(old)
+        flip = np.argwhere(was['mask'] != new['mask'])
+        to_water = int(((was['mask'] == 1) & (new['mask'] == 0)).sum())
+        record['superseded'].update(
+            t21_sha256=hashlib.sha256(old.read_bytes()).hexdigest(), water_share=was['water_share'],
+            lake_share=was['water_share'] - prod['sea_share'], mask_land_share=was['mask_land_share'])
+        changed = was['mask'] != new['mask']
+        record['changed_cells'] = dict(
+            count=int(flip.shape[0]), area_share=float(was['area'][changed].sum() / was['area'].sum()),
+            land_to_water=to_water, water_to_land=int(flip.shape[0]) - to_water,
+            cells=[dict(lat=round(float(new['lat'][j]), 3), lon=round(float(new['lon'][i]), 3),
+                        land_fraction_was=round(float(was['land'][j, i]), 4),
+                        land_fraction=round(float(new['land'][j, i]), 4), land=bool(new['mask'][j, i]))
+                   for j, i in flip])
+    record.update(
+        evidence=('Area-conserving averages of the atlas\'s seas and the drainage estimate\'s rain-fed lakes onto the GCM '
+                  'grids, and PlaSim\'s binary mask from the T21 grid as the runner makes it; the geography domain\'s '
+                  'first estimate of the lakes, from one climate run\'s runoff, not predicted shorelines.'),
+        reading_rule=('shares are of the Moon\'s surface on the atlas\'s 4 pixel/degree grid; t21 gives the T21 file\'s '
+                      'water share and the binary mask PlaSim runs, cells counted on the 32 x 64 Gaussian grid; '
+                      'changed_cells lists the cells whose mask differs from the superseded surface\'s, with their land '
+                      'fractions on both, and land the new mask.'))
+    folder = RESULTS if Path(out).resolve() == (HERE / 'products').resolve() else Path(out)   # a trial keeps its own
+    path = folder / f'boundary_lakes_{prod["drainage_sha256"]}.json'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(record, indent=1) + '\n')
+    return path, record
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('--out', type=Path, default=HERE / 'products')
+    parser.add_argument('--lakes-only', action='store_true',
+                        help='write the lakes surface alone and its record in ../results/gcm, leaving the other '
+                             'surfaces and moon_gcm_configuration.json as they are')
     args = parser.parse_args(argv)
     args.out.mkdir(parents=True, exist_ok=True)
     products = {}
-    for pct in (25, 35):
+    for pct in () if args.lakes_only else (25, 35):
         name = f'land_sea_{pct}pct_1deg.npz'
         if not (GEOGRAPHY / name).is_file():
             print(f'BLOCKED: {name} missing; run python -m geography.water_inventory --masks 0.25 0.35', file=sys.stderr)
@@ -205,28 +299,52 @@ def main(argv=None) -> int:
     sources = {pct: f'geography/products/land_sea_{pct}pct_1deg.npz' for pct in products}
     evidence = {pct: 'Area-conserving averages of hydrostatic LOLA/GRAIL water filling; storage geometry, not '
                      'predicted shorelines.' for pct in products}
+    code = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16]
     if all((GEOGRAPHY / name).is_file() for name in LAKES):
         products['28_lakes'] = lakes_product(*LAKES)
         sources['28_lakes'] = ' and '.join(f'geography/products/{name}' for name in LAKES)
         evidence['28_lakes'] = ('Area-conserving averages of the atlas\'s seas at the scenario share and the drainage '
-                                'estimate\'s rain-fed lakes (runoff from climate run A); lake beds at the atlas\'s '
-                                '4 pixel/degree heights. A first estimate, not predicted shorelines.')
+                                'estimate\'s rain-fed lakes (the routing of climate run '
+                                f'{products["28_lakes"]["routing_run"]}\'s runoff); lake beds at the atlas\'s 4 pixel/degree '
+                                'heights. A first estimate, not predicted shorelines.')
     else:
-        print(f'no lakes product: {" or ".join(LAKES)} missing (python -m geography.atlas; python -m geography.drainage)',
-              file=sys.stderr)
-    files = {}
+        print(f'BLOCKED: no lakes product: {" or ".join(LAKES)} missing (python -m geography.atlas; '
+              'python -m geography.drainage)', file=sys.stderr)
+        if args.lakes_only:
+            return 1
+    files, written = {}, []
     for pct, prod in products.items():
         for grid in GRIDS:
             fields = regrid(prod, grid)
-            path = args.out / (f'moon_{pct}pct_water_{grid}.nc' if isinstance(pct, int) else f'moon_28pct_water_lakes_{grid}.nc')
+            lakes = not isinstance(pct, int)
+            path = args.out / (lakes_name(prod['drainage_sha256'], grid) if lakes else f'moon_{pct}pct_water_{grid}.nc')
             attrs = dict(schema=SCHEMA, source_product=sources[pct], source_sha256=prod['sha256'],
                          water_level_m_above_geoid=prod['meta']['level_m'], evidence=evidence[pct])
+            if lakes:
+                attrs.update(producer=f'climate/gcm/boundary.py {code}',
+                             reading_rule=('land_fraction is each cell\'s dry share, land_elevation_m the mean height '
+                                           'of its dry part and water_surface_m of its wet part above the water level, '
+                                           'ocean_depth_m the mean depth of the wet part, cell_area_fraction its share '
+                                           'of the sphere; the GCM runner makes PlaSim\'s binary mask from '
+                                           'land_fraction at the file\'s own water share'),
+                             supersedes=SUPERSEDED['files'], superseded_source_sha256=SUPERSEDED['source_sha256'],
+                             superseded_source_lost=SUPERSEDED['note'])
             write_netcdf(path, fields, attrs)
-            files[path.name] = dict(grid=grid, water_percent=pct if isinstance(pct, int) else 28, lakes=pct == '28_lakes',
+            written += [path] if lakes else []
+            files[path.name] = dict(grid=grid, water_percent=28 if lakes else pct, lakes=lakes,
                                     land_fraction_mean=float(
                 np.sum(fields['land_fraction'] * fields['cell_area_fraction'])))
-            print(path.name, f"land {files[path.name]['land_fraction_mean']:.3f}")
-    code = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()[:16]
+            print(path.name, f"land {files[path.name]['land_fraction_mean']:.4f}")
+    if '28_lakes' in products:
+        path, record = lakes_record(products['28_lakes'], written, args.out)
+        print(f'{path}: lakes {record["shares"]["lakes"]:.4f}, water on T21 '
+              f'{record["t21"]["water_share"]:.4f}, mask land {record["t21"]["mask_land_share"]:.4f}'
+              + (f', {record["changed_cells"]["count"]} cells changed' if 'changed_cells' in record else ''))
+    if args.lakes_only:
+        return 0
+    files.update({SUPERSEDED['files'].replace('<grid>', grid): dict(grid=grid, water_percent=28, lakes=True,
+                                                                     superseded=SUPERSEDED['note'])
+                  for grid in GRIDS if (args.out / SUPERSEDED['files'].replace('<grid>', grid)).is_file()})
     config = dict(
         schema='terluna.climate.gcm-configuration/1',
         producer=dict(domain='climate', files={'gcm/boundary.py': code}),

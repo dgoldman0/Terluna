@@ -141,18 +141,231 @@ class RunnerTests(unittest.TestCase):
         sw, lw = er.ICE_OPTICS_EDITS[3][1], er.ICE_OPTICS_EDITS[4][1]
         self.assertLess(sw.index('endwhere'), sw.index('if (niceopt == 1) call ice_cloud_sw'))
         self.assertLess(lw.index('endif'), lw.index('if (niceopt == 1 .and. clgray <= 0.) call ice_cloud_lw'))
-        self.assertEqual(er.TWILIGHT_PATCHES[-1][1], 'Terluna: ice optics for cold cloud')
+        markers = [marker for _, marker, _ in er.TWILIGHT_PATCHES]
+        self.assertEqual(markers[3], 'Terluna: ice optics for cold cloud')
+
+    def test_the_twilight_clear_share_follows_the_patches_it_extends(self):
+        # It extends the module, namelist and broadcast lines and the subroutines the twilight, longwave and ice patches
+        # wrote, keeps PlaSim's lines short, and comes last of the radiation's own patches; the ice weights follow it.
+        at = [edits for _, _, edits in er.TWILIGHT_PATCHES].index(er.TWILIGHT_CLEAR_EDITS)
+        written = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:at] for _, new in edits)
+        for old, _ in er.TWILIGHT_CLEAR_EDITS:
+            self.assertIn(old, written)
+        for _, new in er.TWILIGHT_CLEAR_EDITS:
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        self.assertIs(er.TWILIGHT_PATCHES[at][2], er.TWILIGHT_CLEAR_EDITS)
+        self.assertEqual([name for name, _, _ in er.TWILIGHT_PATCHES[at + 1:]],
+                         ['radmod.f90', 'plasimmod.f90', 'fluxmod.f90', 'outmod.f90'])
+        self.assertIn('ntwlclear', ''.join(new for _, new in er.TWILIGHT_CLEAR_EDITS))
+
+    def test_the_twilight_clear_share_patch_leaves_the_model_as_it_was_when_off(self):
+        # The patched twilight subroutines, compiled beside the originals on a stand-in module: with NTWLCLEAR 0 they give
+        # the originals' fluxes bit for bit; with 1 each layer's sunlight comes in the cover clear above it and each
+        # layer's infrared leaves through the longwave transmissivity of the clouds above it.
+        import shutil
+        import subprocess
+        if shutil.which('gfortran') is None:
+            self.skipTest('no gfortran')
+        sw_new, lw_new = er.TWILIGHT_EDITS[-2][1], er.TWILIGHT_EDITS[-1][1]
+        cut = lambda text, name: text[text.index(f'      subroutine {name}\n'):text.index(f'      end subroutine {name}\n')
+                                      + len(f'      end subroutine {name}\n')]
+        original = cut(sw_new, 'twilight_term') + cut(lw_new, 'twilight_lw')
+        patched = original
+        for old, new in er.TWILIGHT_CLEAR_EDITS:
+            if old in patched:
+                patched = patched.replace(old, new)
+        self.assertNotEqual(patched, original)
+        renamed = patched.replace('twilight_term', 'clear_term').replace('twilight_lw', 'clear_lw')
+        module = '''
+      module radmod
+      implicit none
+      integer, parameter :: NHOR = 3, NLEV = 3, NLEP = 4, NTWLMAX = 2
+      real, parameter :: PI = 3.14159265358979323846
+      real :: gsol0 = 1200.0, gdist2 = 1.0
+      integer :: nclouds = 1, ntwl = 2, ntwlclear = 0
+      real :: twlel(NTWLMAX) = (/-10.0, 10.0/), twlg(NTWLMAX) = (/0.01, 0.03/)
+      real :: twlq(NLEV,NTWLMAX) = reshape((/0.002, 0.004, 0.006, 0.003, 0.005, 0.007/), (/NLEV, NTWLMAX/))
+      real :: twlw(NLEV+1) = (/4.0, 2.0, 1.0, 0.5/), twlt(NLEV+1) = (/200.0, 250.0, 290.0, 300.0/)
+      real :: gmuz(NHOR), dcc(NHOR,NLEV), dt(NHOR,NLEP), twltau(NHOR,NLEV)
+      real :: dswfl(NHOR,NLEP), dfd(NHOR,NLEP), dftu(NHOR,NLEP), dlwfl(NHOR,NLEP)
+      end module radmod
+'''
+        driver = '''
+      program drive
+      use radmod
+      implicit none
+      integer :: j, k
+      gmuz(:) = (/0.05, -0.02, 0.1/)
+      dcc(1,:) = (/0.0, 0.0, 0.0/)
+      dcc(2,:) = (/0.5, 0.0, 0.2/)
+      dcc(3,:) = (/0.3, 0.6, 0.1/)
+      twltau(1,:) = (/1.0, 1.0, 1.0/)
+      twltau(2,:) = (/0.8, 1.0, 0.9/)
+      twltau(3,:) = (/0.85, 0.5, 0.95/)
+      do j = 1, NHOR
+       dt(j,:) = (/205.0, 252.0, 288.0, 301.0/) + 2.0 * j
+      enddo
+      do k = 0, 2
+       dswfl(:,:) = 0.
+       dfd(:,:) = 0.
+       dftu(:,:) = 0.
+       dlwfl(:,:) = 0.
+       if (k == 0) then
+        call twilight_term
+        call twilight_lw
+       else
+        ntwlclear = k - 1
+        call clear_term
+        call clear_lw
+       endif
+       do j = 1, NHOR
+        print '(16es26.17)', dswfl(j,:), dfd(j,:), dftu(j,:), dlwfl(j,:)
+       enddo
+      enddo
+      end program drive
+'''
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / 'clear.f90').write_text(module + original + renamed + driver)
+            subprocess.run(['gfortran', '-fdefault-real-8', '-O0', '-o', 'clear', 'clear.f90'], cwd=tmp, check=True)
+            out = np.loadtxt(subprocess.run(['./clear'], cwd=tmp, check=True, capture_output=True,
+                                            text=True).stdout.split('\n')).reshape(3, 3, 4, 4)
+        before, off, on = out
+        self.assertTrue(np.array_equal(before, off))                          # NTWLCLEAR 0: the model as it was
+        self.assertTrue(np.array_equal(on[0], before[0]))                     # a cloud-free column is unchanged
+        dcc = np.array([[0.0, 0.0, 0.0], [0.5, 0.0, 0.2], [0.3, 0.6, 0.1]])
+        tau = np.array([[1.0, 1.0, 1.0], [0.8, 1.0, 0.9], [0.85, 0.5, 0.95]])
+        for j in (1, 2):
+            above = np.r_[1.0, np.cumprod(1.0 - dcc[j])[:-1]]                  # the cover clear above each layer
+            self.assertTrue(np.allclose(np.diff(on[j][0]), np.diff(before[j][0]) * above, rtol=1e-12, atol=1e-14))
+            self.assertEqual(on[j][0][-1], before[j][0][-1])                  # the ground's kept the column's clear share
+            escape = lambda f: np.r_[np.diff(f), -f[-1]]                       # each layer's, top first, then the ground's
+            lw_above = np.r_[1.0, np.cumprod(tau[j])]
+            self.assertTrue(np.allclose(escape(on[j][2]), escape(before[j][2]) * lw_above, rtol=1e-12, atol=1e-14))
+            self.assertTrue(np.allclose(on[j][3], on[j][2]))                  # dlwfl takes the same upward change
+
+    def test_the_output_asks_only_for_what_plasim_writes(self):
+        # The surface stress joins the output. PlaSim 3.4.2 never writes the 10 m wind, so it joins only runs with the
+        # 10 m wind's patch on (--wind10), which writes codes 165 and 166; the postprocessor would otherwise leave it
+        # out of the file without an error.
+        self.assertTrue({'tauu', 'tauv'} <= set(er.OUTPUT))
+        self.assertFalse({'uas', 'vas'} & set(er.OUTPUT))
+        self.assertTrue({180, 181, 165, 166} <= set(er.PLASIM_CODES))
+        import re
+        source = er.TWILIGHT_PACKAGE / 'exoplasim'
+        if not (source / 'pyburn.py').exists():
+            self.skipTest('the twilight copy of ExoPlaSim is not at hand')
+        names = {m.group(2): int(m.group(1))
+                 for m in re.finditer(r'"(\d+)":\["(\w+)"', (source / 'pyburn.py').read_text().replace(' ', ''))}
+        self.assertEqual((names['tauu'], names['tauv'], names['uas'], names['vas']), (180, 181, 165, 166))
+        for name in er.OUTPUT:
+            self.assertTrue(name in er.DERIVED or names[name] in er.PLASIM_CODES, name)
+        # The codes are those PlaSim's output routine writes on its raw output unit, 40.
+        text, codes = (source / 'plasim' / 'src' / 'outmod.f90').read_text(), set()
+        for name, marker, edits in er.WIND10_PATCHES:                  # as the runner leaves it once patched
+            if name == 'outmod.f90' and marker not in text:
+                for old, new in edits:
+                    text = text.replace(old, new)
+        for m in re.finditer(r'call\s+write(?:gp|sp)\(', text):
+            depth, i, args, cur = 1, m.end(), [], ''
+            while depth:
+                c = text[i]
+                depth += (c == '(') - (c == ')')
+                if depth == 1 and c == ',':
+                    args.append(cur.strip())
+                    cur = ''
+                elif depth:
+                    cur += c
+                i += 1
+            args.append(cur.strip())
+            if args[0] == '40' and args[2].isdigit():
+                codes.add(int(args[2]))
+        self.assertEqual(codes, set(er.PLASIM_CODES))
+
+    def test_the_ice_weights_come_from_the_namelist_with_the_stock_default(self):
+        # World-crafting's patch 11 on what the ice and clear-share patches wrote: ZICEW, read and broadcast, with the
+        # ice patch's constants as its default and the parameter it replaces gone; new runs write the shield's shares.
+        at = [edits for _, _, edits in er.TWILIGHT_PATCHES].index(er.ICE_WEIGHTS_EDITS)
+        text = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:at] for _, new in edits)
+        for old, new in er.ICE_WEIGHTS_EDITS:
+            self.assertEqual(text.count(old), 1, old)
+            text = text.replace(old, new)
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        self.assertNotIn('zew(', text)
+        self.assertEqual(text.count('zicew(jb-1)'), 4)
+        self.assertIn('(/0.6164, 0.2283, 0.0811, 0.0742/)', text)
+        self.assertIn(',ntwlclear,zicew', text)
+        self.assertIn('call mpbcrn(zicew,4)', text)
+        from climate.gcm import plasim_ice_optics as pio
+        self.assertEqual(pio.NIR_WEIGHTS, (0.6164, 0.2283, 0.0811, 0.0742))
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertEqual(inspect.signature(f).parameters['ice_weights'].default, 'shield')
+            self.assertIs(inspect.signature(f).parameters['wind10'].default, False)
+
+    def test_the_10_m_wind_follows_geleyns_profile(self):
+        # The surface layer's lines, compiled on a stand-in: neutral air gives the log profile, stable air brings less
+        # of the wind down and unstable air more, as the profile through the lowest layer gives them.
+        import math
+        import shutil
+        import subprocess
+        import tempfile
+        if shutil.which('gfortran') is None:
+            self.skipTest('no gfortran')
+        block = er.WIND10_FLUX_EDITS[-1][1].split('\n', 1)[1]
+        body = block[block.index('       if (nwind10 == 1)'):]
+        cases = [(1e-4, 885.0, 1.0), (1e-4, 885.0, 0.5), (1e-4, 885.0, 1.5), (0.5, 885.0, 1.0)]
+        program = ('      program wind10\n      integer, parameter :: NHOR = 4, NLEV = 1\n'
+                   '      integer :: jhor, nwind10 = 1\n'
+                   '      real :: zbz0(NHOR), dz0(NHOR), znl(NHOR), zrifm(NHOR), du(NHOR,NLEV), dv(NHOR,NLEV)\n'
+                   '      real :: du10(NHOR), dv10(NHOR), zbn, zbd, zf10\n'
+                   + ''.join(f'      dz0({i}) = {z0}\n      znl({i}) = {zl}\n      zrifm({i}) = {fm}\n'
+                             for i, (z0, zl, fm) in enumerate(cases, 1))
+                   + '      zbz0 = znl/dz0\n      du = 10.\n      dv = -5.\n      do jhor = 1, NHOR\n' + body
+                   + '      enddo\n      print *, du10\n      print *, dv10\n      end program wind10\n')
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / 'wind10.f90').write_text(program)
+            subprocess.run(['gfortran', '-fdefault-real-8', '-O0', '-o', 'wind10', 'wind10.f90'], cwd=tmp, check=True)
+            out = subprocess.run(['./wind10'], cwd=tmp, check=True, capture_output=True, text=True).stdout.split()
+        u10, v10 = [float(x) for x in out[:4]], [float(x) for x in out[4:8]]
+        for (z0, zl, fm), u, v in zip(cases, u10, v10):
+            bn = math.log(zl / z0 + 1.0)
+            bd = bn / math.sqrt(fm)
+            f = min(1.0, max(0.0, (math.log(1.0 + 10.0 / z0) - 10.0 / zl * (bn - bd)) / bd))
+            self.assertAlmostEqual(u, 10.0 * f, places=9)
+            self.assertAlmostEqual(v, -5.0 * f, places=9)
+        self.assertAlmostEqual(u10[0], 10.0 * math.log(1.0 + 1e5) / math.log(885.0 / 1e-4 + 1.0), places=9)
+        self.assertLess(u10[1], u10[0])
+        self.assertLess(u10[0], u10[2])
+
+    def test_new_runs_take_the_301_k_ledger_in_the_clear_share(self):
+        import inspect
+        for f in (er.run, er.configuration):
+            params = inspect.signature(f).parameters
+            self.assertEqual((params['twilight_ledger'].default, params['twilight_clear_share'].default), ('301k', True))
+            self.assertEqual(params['longwave_fit'].default, '301k')
+        self.assertEqual(er.TWILIGHT_PRODUCT, er.TWILIGHT_LEDGERS['301k'])
+        self.assertEqual(er.LONGWAVE_PRODUCT, er.LONGWAVE_FITS['301k'])
+        from climate.gcm import plasim_longwave as pl
+        self.assertEqual(er.LONGWAVE_FITS['301k'], pl.REFIT)
+        self.assertEqual(er.LONGWAVE_FITS['295k'], pl.CORRECTION)
+        self.assertEqual(er.SLANT_PRODUCT.name, 'twilight.json')               # the calibration's slant factors
 
     def test_the_twilight_table_reads_as_the_patch_expects(self):
-        if not er.TWILIGHT_PRODUCT.exists():
-            self.skipTest('twilight.json not built')
+        ledgers = [path for path in er.TWILIGHT_LEDGERS.values() if path.exists()]
+        if not ledgers:
+            self.skipTest('no twilight ledger built')
+        for ledger in ledgers:
+            with self.subTest(ledger=ledger.name):
+                self._twilight_table(ledger)
+
+    def _twilight_table(self, ledger):
         import json
-        product = json.loads(er.TWILIGHT_PRODUCT.read_text())
+        product = json.loads(ledger.read_text())
         term, cone, lw = product['gcm_term'], product['gcm_term_cone'], product['longwave']
         tables = {}
         for mode in ('curved', 'full'):
             with tempfile.TemporaryDirectory() as d:
-                rows = er.twilight_table(Path(d) / 'twilight.dat', mode).read_text().strip().split('\n')
+                rows = er.twilight_table(Path(d) / 'twilight.dat', mode, ledger).read_text().strip().split('\n')
             n = int(rows[0])
             self.assertEqual((n, len(rows)), (len(term['elevation_deg']), n + 3))
             table = np.array([[float(x) for x in r.split()] for r in rows[1:n + 1]])
