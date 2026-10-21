@@ -6,12 +6,12 @@
     },
     "inputs": {
       "biosphere/canopy/results/light_response.json": "a3a33b1e4d6d4c731c5b89564ed227ad9f69620d191ff1795c38a7a5aad55405",
-      "research/studies/food_systems/results/food_systems.json": "62b7ddfe6d66dcfd86c49ef181887a63d6faf8b4ecb4e616b62c98b7b8af8273",
-      "research/studies/food_systems/results/food_blend.json": "89d0c0de548af72d15e79f82e0009cba7ec04f99e5a2f793a58595298ed5ea06",
+      "research/studies/food_systems/results/food_systems.json": "5320aef9443c810a27b5b808074ac421c5b24440a0d1a72e8e837216145030ad",
+      "research/studies/food_systems/results/food_blend.json": "05c0d328a00cb7969a1bd04d3138421dde2875603c620e0e4c78f9a14bd4b21e",
       "biosphere/ecology/results/first_screen.json": "d2a42b6e51f60250f671ca7cf57aa948d1291e2d26d31f84064f038c3829969d",
       "biosphere/living_water/waters.json": "cda0594b8b59acfb469a39b007f977d616db60307d325e80af759242d2baecd1",
       "research/studies/sky_ecology/results/sky_ecology.json": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af",
-      "research/studies/domain_synthesis/results/ledgers.json": "c32e6f63305339ec736095af27498021dc3398cb3bb2ae2c33c396f2488e1687"
+      "research/studies/domain_synthesis/results/ledgers.json": "5771953cc5026a549894beb1d1433943794c6cb040239cfbbfaf7b4c9ee60cb0"
     },
     "ignored_inputs": {
       "climate/gcm/products/climatology_A28_dim5_moon.npz": "3fb185c8087ea9b5bffdfbfb191cfed5cc3f4397a9a7d0eb52269f925ee6f05c"
