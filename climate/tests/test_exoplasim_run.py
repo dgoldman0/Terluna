@@ -146,7 +146,8 @@ class RunnerTests(unittest.TestCase):
 
     def test_the_twilight_clear_share_follows_the_patches_it_extends(self):
         # It extends the module, namelist and broadcast lines and the subroutines the twilight, longwave and ice patches
-        # wrote, keeps PlaSim's lines short, and comes last of the radiation's own patches; the ice weights follow it.
+        # wrote, keeps PlaSim's lines short, and comes last of the radiation's own patches; the ice weights follow it,
+        # then the 10 m wind and the cold cloud's factors.
         at = [edits for _, _, edits in er.TWILIGHT_PATCHES].index(er.TWILIGHT_CLEAR_EDITS)
         written = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:at] for _, new in edits)
         for old, _ in er.TWILIGHT_CLEAR_EDITS:
@@ -155,7 +156,7 @@ class RunnerTests(unittest.TestCase):
             self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
         self.assertIs(er.TWILIGHT_PATCHES[at][2], er.TWILIGHT_CLEAR_EDITS)
         self.assertEqual([name for name, _, _ in er.TWILIGHT_PATCHES[at + 1:]],
-                         ['radmod.f90', 'plasimmod.f90', 'fluxmod.f90', 'outmod.f90'])
+                         ['radmod.f90', 'plasimmod.f90', 'fluxmod.f90', 'outmod.f90', 'radmod.f90'])
         self.assertIn('ntwlclear', ''.join(new for _, new in er.TWILIGHT_CLEAR_EDITS))
 
     def test_the_twilight_clear_share_patch_leaves_the_model_as_it_was_when_off(self):
@@ -301,6 +302,42 @@ class RunnerTests(unittest.TestCase):
         for f in (er.run, er.configuration):
             self.assertEqual(inspect.signature(f).parameters['ice_weights'].default, 'shield')
             self.assertIs(inspect.signature(f).parameters['wind10'].default, False)
+
+    def test_the_cold_cloud_factors_scale_the_ice_optics_by_level_from_a_default_of_one(self):
+        # On what the ice, clear-share and weights patches wrote: ZICEWF and ZICERF, read and broadcast, default 1,
+        # scaling the water path and the radius in both the sunlight's and the infrared's ice routines.
+        self.assertEqual(er.TWILIGHT_PATCHES[-1][2], er.ICE_FACTOR_EDITS)
+        text = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:-1] for _, new in edits)
+        for old, new in er.ICE_FACTOR_EDITS:
+            self.assertEqual(text.count(old), 1, old)
+            text = text.replace(old, new)
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        self.assertIn('real :: zicewf(NLEV) = 1.0', text)
+        self.assertIn('real :: zicerf(NLEV) = 1.0', text)
+        self.assertIn(',ntwlclear,zicew,zicewf,zicerf', text)
+        self.assertIn('call mpbcrn(zicewf,NLEV)', text)
+        self.assertIn('call mpbcrn(zicerf,NLEV)', text)
+        self.assertEqual(text.count('*zicewf(jlev)'), 2)               # the water path, in sunlight and infrared
+        self.assertEqual(text.count('*zicerf(jlev)'), 2)               # the radius, likewise
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIsNone(inspect.signature(f).parameters['cold_cloud'].default)
+
+    def test_the_cold_cloud_factors_come_from_a_product_top_layer_first(self):
+        import json
+        import tempfile
+        layers = [dict(layer=2, factors=dict(water=30.0, radius=1.6)), dict(layer=1, factors=dict(water=7.0, radius=0.6))]
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / 'cold_cloud_test.json'
+            path.write_text(json.dumps(dict(schema='terluna.climate.gcm-cold-cloud-factors/1', run='X', layers=layers)))
+            got = er.cold_cloud_factors(path)
+            self.assertEqual((got['water_factors'], got['radius_factors'], got['run']), ([7.0, 30.0], [0.6, 1.6], 'X'))
+            path.write_text(json.dumps(dict(schema='terluna.climate.gcm-cold-cloud-factors/1', run='X', layers=layers[:1])))
+            with self.assertRaises(ValueError):                         # a product must start at the top layer
+                er.cold_cloud_factors(path)
+            path.write_text(json.dumps(dict(schema='other', run='X', layers=layers)))
+            with self.assertRaises(ValueError):
+                er.cold_cloud_factors(path)
 
     def test_the_10_m_wind_follows_geleyns_profile(self):
         # The surface layer's lines, compiled on a stand-in: neutral air gives the log profile, stable air brings less

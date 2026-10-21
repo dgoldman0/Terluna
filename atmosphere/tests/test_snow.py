@@ -113,3 +113,60 @@ def test_a_short_column_brings_snow_to_the_freezing_level():
     column = sf.Column('test', STANDARD_GRAVITY, DryAir(101325.0), 1500.0, 85000.0, 6.5e-3)
     out = ag.summary(ag.column(column, -5.0, 1e4, 1.0, bins=6, inject=4, fill=1.0, gather=0.5))
     assert out['snowfall_mm_h'] > 0.0 and out['median_by_mass_mm'] >= 0.1
+
+
+def test_homogeneous_freezing_follows_koop_and_starts_near_the_water_activity_threshold():
+    from atmosphere.snow import cirrus as ci
+    assert float(ci.koop_rate(0.25)) == 0.0                             # below the fit's range
+    # Koop and co-authors' threshold: J = 1e10 cm-3 s-1 near da_w = 0.305
+    assert 1e14 < float(ci.koop_rate(0.300)) < 1e16 < float(ci.koop_rate(0.310))
+
+
+def test_the_crystals_laws_join_at_the_sphere_limit():
+    import numpy as np
+    from atmosphere.snow import cirrus as ci
+    d = ci.SPHERE_LIMIT_M
+    assert 95e-6 < d < 99e-6
+    lo, hi = ci.crystal_mass(np.array([d * (1 - 1e-9), d * (1 + 1e-9)]))
+    assert lo == pytest.approx(hi, rel=1e-6)
+    assert float(ci.crystal_size(ci.crystal_mass(3e-4))) == pytest.approx(3e-4, rel=1e-9)
+    assert float(ci.area_ratio(1e-5)) == 1.0 and float(ci.area_ratio(2e-3)) == pytest.approx(sf.AREA_RATIO)
+    assert float(ci.capacitance(1e-5)) == pytest.approx(0.5e-5) and float(ci.capacitance(2e-3)) == pytest.approx(0.5e-3)
+
+
+def test_small_crystals_fall_near_stokes_and_in_proportion_to_gravity():
+    import numpy as np
+    from atmosphere.radiative_convective.thermodynamics import DryAir
+    from atmosphere.snow import cirrus as ci
+    s = ci.Air(STANDARD_GRAVITY, DryAir(101325.0)).state(220.0, 20000.0, 1.0)
+    d = np.array([5e-6])
+    u, _ = ci.fall_speed(d, ci.crystal_mass(d), STANDARD_GRAVITY, s)
+    stokes = ci.RHO_ICE * STANDARD_GRAVITY * d[0] ** 2 / (18.0 * s['eta'])
+    assert float(u[0]) == pytest.approx(stokes, rel=0.1)
+    u_moon, _ = ci.fall_speed(d, ci.crystal_mass(d), MOON_SURFACE_GRAVITY, s)
+    assert float(u_moon[0] / u[0]) == pytest.approx(MOON_SURFACE_GRAVITY / STANDARD_GRAVITY, rel=0.01)
+
+
+def test_the_gas_kinetic_limit_slows_only_small_crystals():
+    import numpy as np
+    from atmosphere.radiative_convective.thermodynamics import DryAir
+    from atmosphere.snow import cirrus as ci
+    s = ci.Air(STANDARD_GRAVITY, DryAir(101325.0)).state(200.0, 12000.0, 0.01)
+    d = np.array([1e-6, 2e-4])
+    slow, fast = ci.growth_coefficient(d, np.zeros(2), s, 0.1), ci.growth_coefficient(d, np.zeros(2), s, 1.0)
+    assert slow[0] < 0.5 * fast[0]                                     # a 1 um crystal: limited by the vapour's arrival
+    assert slow[1] == pytest.approx(fast[1], rel=0.05)                 # a 200 um crystal: by diffusion
+
+
+def test_the_cold_slab_keeps_its_water_and_the_moon_holds_more_of_its_ice():
+    from atmosphere.radiative_convective.thermodynamics import DryAir, earthlike_air
+    from atmosphere.snow import cirrus as ci
+    moon = ci.Air(MOON_SURFACE_GRAVITY, earthlike_air(121590.0, 400.0))
+    earth = ci.Air(STANDARD_GRAVITY, DryAir(101325.0))
+    runs = [ci.slab(w, 225.0, 22000.0, 17000.0, 0.1, 4000.0) for w in (earth, moon)]
+    for r in runs:
+        total = r['vapour_end_kg_kg'] + r['ice_end_kg_kg'] + r['fallen_kg_kg']
+        assert total == pytest.approx(r['vapour_start_kg_kg'], rel=1e-4)
+        assert r['frozen_per_kg'] > 0 and r['effective_radius_um'] > 1.0
+    e, m = runs
+    assert m['fallen_share'] < e['fallen_share'] and m['ice_kg_kg'] > e['ice_kg_kg']

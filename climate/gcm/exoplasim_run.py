@@ -824,6 +824,27 @@ ICE_WEIGHTS_EDITS = [
     ("        zrs = zrs+zew(jb-1)*zrf\n", "        zrs = zrs+zicew(jb-1)*zrf\n"),
     ("        zts = zts+zew(jb-1)*ztf\n", "        zts = zts+zicew(jb-1)*ztf\n"),
 ]
+# The cold cloud's lunar factors (2026-10-20): ZICEWF and ZICERF scale, level by level, the water path and the crystal
+# radius the ice optics give cloud colder than TICEOPT, in sunlight and in the infrared alike (cold_cloud.py: the
+# factors that carry PlaSim's Earth water and Kristjansson and Mitchell's Earth crystals to lunar gravity). Their
+# defaults of 1 leave the model as it was; the factors touch only how the radiation sees the cloud.
+ICE_FACTOR_EDITS = [
+    ("      real :: zicew(4) = (/" + _fortran_list(pio.NIR_WEIGHTS, '{:.4f}') + "/) "
+     "! world-crafting: ice bands 2-5 in band 2, patch 10's\n",
+     "      real :: zicew(4) = (/" + _fortran_list(pio.NIR_WEIGHTS, '{:.4f}') + "/) "
+     "! world-crafting: ice bands 2-5 in band 2, patch 10's\n"
+     "      real :: zicewf(NLEV) = 1.0 ! Terluna: the cold cloud's water factor by level\n"
+     "      real :: zicerf(NLEV) = 1.0 ! Terluna: the cold cloud's crystal radius factor by level\n"),
+    ("     &               ,ntwlclear,zicew\n", "     &               ,ntwlclear,zicew,zicewf,zicerf\n"),
+    ("      call mpbcrn(zicew,4)\n", "      call mpbcrn(zicew,4)\n      call mpbcrn(zicewf,NLEV)\n      call mpbcrn(zicerf,NLEV)\n"),
+    ("       zre = ice_radius(dt(jhor,jlev))\n", "       zre = ice_radius(dt(jhor,jlev))*zicerf(jlev)\n"),
+    ("       zwp = min(1000.,1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev))\n",
+     "       zwp = min(1000.,1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev)*zicewf(jlev))\n"),
+    ("       zwp = 1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev)\n"
+     "       ztaucc(jhor) = 1.-dcc(jhor,jlev)*(1.-exp(-1.66*(0.005+1./ice_radius(dt(jhor,jlev)))*zwp))\n",
+     "       zwp = 1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev)*zicewf(jlev)\n"
+     "       ztaucc(jhor) = 1.-dcc(jhor,jlev)*(1.-exp(-1.66*(0.005+1./(ice_radius(dt(jhor,jlev))*zicerf(jlev)))*zwp))\n"),
+]
 # The 10 m wind (2026-10-19). PlaSim 3.4.2 writes no wind below its lowest level, about 0.9 km up in the lunar air, and
 # the lake model brought that wind down on a neutral log profile. NWIND10 1 has the surface layer (surflx) take the
 # 10 m wind on Geleyn's (1988) profile through the lowest layer, u(z) = u_L (ln(1 + z/z0) - (z/z_L)(B_N - B_D)) / B_D,
@@ -883,13 +904,15 @@ WIND10_PATCHES = [('plasimmod.f90', 'Terluna: 1 writes the 10 m wind', WIND10_MO
                   ('outmod.f90', "Terluna: the 10 m wind's mean since its last output", WIND10_OUT_EDITS)]
 # The twilight, gas, longwave and ice patches go only into a copy of ExoPlaSim of its own, which every run imports
 # first since the corrected radiation became the standard (2026-10-14); the shared installation stays as the earlier
-# runs had it. The twilight's clear share follows them, from 2026-10-19, and the ice weights and the 10 m wind after it.
+# runs had it. The twilight's clear share follows them, from 2026-10-19, and the ice weights and the 10 m wind after it,
+# and the cold cloud's lunar factors from 2026-10-20.
 TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS),
                     ('radmod.f90', 'Terluna: CO2 and O2 in the sunlight', GAS_EDITS),
                     ('radmod.f90', 'Terluna: the longwave by height', LW_CORRECTION_EDITS),
                     ('radmod.f90', 'Terluna: ice optics for cold cloud', ICE_OPTICS_EDITS),
                     ('radmod.f90', "Terluna: 1 puts the twilight's terms in the clear share", TWILIGHT_CLEAR_EDITS),
                     ('radmod.f90', 'world-crafting: ice bands 2-5 in band 2', ICE_WEIGHTS_EDITS)] + WIND10_PATCHES
+TWILIGHT_PATCHES += [('radmod.f90', "Terluna: the cold cloud's water factor by level", ICE_FACTOR_EDITS)]
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
 # The curved air's ledgers (twilight.py): on the design climate's 301 K column, the standard since 2026-10-19, and on
 # the 294.9 K column every run from 14 to 19 October took. The Moon's slant factors (ZMLUNAR, ZMAIRLUNAR) stay the 294.9 K
@@ -958,9 +981,29 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
+def cold_cloud_factors(path) -> dict:
+    """The central factors of a cold_cloud.py product, its top layer first, as the configuration records them: the
+    ice optics' water and crystal radius on PlaSim's top levels (ZICEWF, ZICERF), the levels below left at 1."""
+    path = Path(path)
+    product = json.loads(path.read_text())
+    if product.get('schema') != 'terluna.climate.gcm-cold-cloud-factors/1':
+        raise ValueError(f'{path} is not a cold_cloud.py product')
+    layers = sorted(product['layers'], key=lambda r: r['layer'])
+    if [r['layer'] for r in layers] != list(range(1, len(layers) + 1)):
+        raise ValueError(f'{path} does not hold the top layers from the first')
+    factors = [(float(r['factors']['water']), float(r['factors']['radius'])) for r in layers]
+    if not all(0.0 < w < 1e3 and 0.0 < r < 1e2 for w, r in factors):
+        raise ValueError(f'{path} holds factors outside 0-1000 for the water or 0-100 for the radius')
+    resolved = path.resolve()
+    return dict(product=str(resolved.relative_to(ROOT)) if resolved.is_relative_to(ROOT) else str(resolved),
+                sha256=hashlib.sha256(path.read_bytes()).hexdigest()[:16], run=product['run'],
+                water_factors=[round(w, 6) for w, _ in factors], radius_factors=[round(r, 6) for _, r in factors])
+
+
 def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
                   heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
-                  twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield'):
+                  twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
+                  cold_cloud=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
@@ -969,7 +1012,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     writes each process's temperature tendency (HEATING), longwave_correction the longwave by height
     (LW_CORRECTION_EDITS) from the fit longwave_fit names (LONGWAVE_FITS), and ice_optics ice optics for cloud colder
     than -38 °C (ICE_OPTICS_EDITS) with the near-infrared weights ice_weights names (ICE_WEIGHTS_EDITS), and wind10 the
-    10 m wind (WIND10_PATCHES). Each is recorded when given, and left out the configuration is the one every
+    10 m wind (WIND10_PATCHES); cold_cloud, a cold_cloud.py product, scales the ice optics' water and radius on its
+    layers by its central factors (ICE_FACTOR_EDITS). Each is recorded when given, and left out the configuration is the one every
     earlier run had; the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October
     did, and the 295 K fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
@@ -1027,6 +1071,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
             cfg['ice_optics'].update(near_ir_weights=list(pio.SHIELD_NIR_WEIGHTS),
                                      weights_source="the design shield's sunlight, written as ZICEW (world-crafting's "
                                                     'patch 11, lab branch 79ea224)')
+    if cold_cloud is not None:
+        if not ice_optics:
+            raise ValueError("the cold cloud's factors act on the ice optics, which need --ice-optics")
+        cfg['ice_optics']['cold_cloud'] = cold_cloud_factors(cold_cloud)
     if wind10:
         cfg['wind10'] = dict(codes=[165, 166],
                              profile="Geleyn's (1988) profile through the lowest layer, from the drag PlaSim uses with "
@@ -1257,6 +1305,11 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         if cfg['ice_optics'].get('weights_source'):
             for i, w in enumerate(cfg['ice_optics']['near_ir_weights'], 1):
                 model._edit_namelist('radmod_namelist', f'ZICEW({i})', repr(float(w)))
+        factors = cfg['ice_optics'].get('cold_cloud')
+        if factors:
+            for i, (w, r) in enumerate(zip(factors['water_factors'], factors['radius_factors']), 1):
+                model._edit_namelist('radmod_namelist', f'ZICEWF({i})', repr(float(w)))
+                model._edit_namelist('radmod_namelist', f'ZICERF({i})', repr(float(r)))
     if 'wind10' in cfg:
         model._edit_namelist('fluxmod_namelist', 'NWIND10', '1')
     if cfg.get('twilight', {}).get('magnification'):
@@ -1448,11 +1501,11 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True,
         heating: bool = False, longwave_correction: bool = False, ice_optics: bool = False,
         twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k',
-        wind10: bool = False, ice_weights: str = 'shield') -> int:
+        wind10: bool = False, ice_weights: str = 'shield', cold_cloud: str | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
-                        ice_weights=ice_weights)
+                        ice_weights=ice_weights, cold_cloud=cold_cloud)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -1578,6 +1631,10 @@ def main(argv=None) -> int:
                         help="the ice optics' near-infrared weights: the shares of the design shield's sunlight "
                              "(ZICEW, the standard since 2026-10-19) or the unfiltered Sun's the earlier runs took "
                              '(part of the run key)')
+    parser.add_argument('--cold-cloud', metavar='PRODUCT',
+                        help="a cold_cloud.py product whose central factors scale the ice optics' water and crystal "
+                             'radius on its layers, carrying them to lunar gravity (ICE_FACTOR_EDITS; needs '
+                             '--ice-optics; part of the run key)')
     parser.add_argument('--wind10', action='store_true',
                         help="the 10 m wind on Geleyn's profile from the lowest layer's drag, codes 165 and 166 "
                              '(WIND10_PATCHES; part of the run key)')
@@ -1613,7 +1670,7 @@ def main(argv=None) -> int:
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
-               args.longwave_fit, args.wind10, args.ice_weights)
+               args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud)
 
 
 if __name__ == '__main__':

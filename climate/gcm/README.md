@@ -17,6 +17,8 @@ ExoPlaSim, the first model installed (2026-09-25).
 | [cloud_water.py](cloud_water.py) | Recomputes from a year of output the cloud water PlaSim's radiation sees, layer by layer, as PlaSim has it and with the runner's corrections |
 | [plasim_longwave.py](plasim_longwave.py) | PlaSim's clear-sky longwave column by column, checked against its own heating, and the correction by height fitted to the correlated-k model that the runner's `--longwave-correction` adds (`../results/gcm/longwave_<run>.json`); its `check` sets the correction against correlated-k on states from 295 to 306.6 K (`../results/gcm/longwave_check_301k.json`) |
 | [plasim_ice_optics.py](plasim_ice_optics.py) | The ice optics the runner's `--ice-optics` gives cloud colder than −38 °C, beside PlaSim's liquid-water optics (`../results/gcm/ice_optics.json`) |
+| [high_cloud.py](high_cloud.py) | How far the top three layers' water and crystal radius could move a run's climate: first-order changes at the top of the air and the ground (`../results/gcm/high_cloud_<run>.json`) |
+| [cold_cloud.py](cold_cloud.py) | The cold cloud at lunar gravity: factors on the top layers' water and crystal radius from slabs of rising air on both worlds ([atmosphere/snow/cirrus.py](../../atmosphere/snow/cirrus.py)), for the runner's `--cold-cloud` (`../results/gcm/cold_cloud_<run>.json`) |
 | [compare.py](compare.py) | The numbers behind the run tables, and where a run still warming or cooling would settle |
 | [climatology.py](climatology.py) | A run's surface climatology over chosen years, for display and other lanes: cloud in a low deck (the lowest 34 km) and a high deck, precipitation, evaporation, soil moisture, temperature, water vapour, sea ice and snow, with cloud composited against the Sun by latitude and local time, and land air temperature the same way for all land and for the near and far sides. It writes `products/climatology_<run>.npz` (`terluna.climate.gcm-climatology/1`) |
 | [sun_check.py](sun_check.py) | Where a run's Sun shines: its sunlight along the equator against PlaSim's solar-position arithmetic, and by latitude against the orbit the run asked for and the one PlaSim's log reports. It writes `../results/gcm/sun_check_<run>.json` in seconds |
@@ -1551,6 +1553,53 @@ design years (`A28R_301k_s0897`) ran on from the branch's year-14 restart at 0.8
 climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_s0897:5 --case A28R_301k_s0897:9 \
     --case A28R_301k_s0897:14 --output climate/results/gcm/longwave_check_A28R_301k_s0897.json      # minutes, cached
 climate/gcm/.venv/bin/python -m climate.gcm.high_cloud A28R_301k_s0897 --years 5-14                 # seconds
+```
+
+#### The cold cloud at lunar gravity (20 October)
+
+On 20 October the author asked for the high cloud's water and crystals at lunar gravity, as factors on the GCM's Earth
+values for cloud colder than −38 °C ([register](../../research/decisions.md), 20 October). [cold_cloud.py](cold_cloud.py)
+runs slabs of rising air on both worlds through the design years' top three layers, with homogeneous freezing,
+kinetically limited growth and fall-out ([the snow's account](../../atmosphere/snow/README.md#the-high-clouds-crystals)),
+at the same pressure velocity: the one at which Earth's slab holds PlaSim's own water path there, 0.053–0.058 Pa/s.
+Where the design years condense vapour in those layers (a quarter of the 3-day means at 81–107 km, 7% at 63–81 km),
+their large-scale condensation against the humidity of the layer below gives an ascent of 0.03–0.15 Pa/s between
+quartiles, 0.07 at the median, about the same
+([cold_cloud_A28R_301k_s0897.json](../results/gcm/cold_cloud_A28R_301k_s0897.json)):
+
+| Layer | PlaSim's water; radius | Factors: water; radius | Their range |
+|---|---|---|---|
+| Above 107 km | 1.16 g/m²; 2.2 µm | 6.1; 1.00 | 6.1–6.5; 1.00 |
+| 81–107 km | 2.03 g/m²; 11.5 µm | 36.6; 1.68 | 12.8–52.8; 0.98–3.05 |
+| 63–81 km | 6.31 g/m²; 35.2 µm | 42.1; 1.60 | 36.2–55.3; 1.44–1.79 |
+
+The range takes every slab of 2–8 kPa at ascents within a factor of three of the central one, and the deposition
+coefficient and the haze's number at it. At first order (high_cloud.effect, the run's own cloud and cover held) the
+factors make each top layer nearly black in the infrared, its emissivity 0.995–1.000 against 0.27–0.58, and let it
+reflect 53–57% of the sunlight a fully cloudy layer receives against 8–19%: +17.8 W/m² at the top of the air, nearly
+all from the 81–107 km layer (+15.2), whose third of the sky now radiates to space at 192 K; at 63–81 km the added
+reflection and trapping cancel (−0.3). Through the 301 K branches' feedback that is +11.4 to +14.8 K at the ground.
+Across the corners of the ranges it runs from +9.0 W/m² (the most water on the smallest crystals) to +22.0 (the least
+on the largest), +5.8 to +18.3 K: the infrared saturates at nearly every corner, the reflection does not, and more
+water on smaller crystals sends back more sunlight.
+
+The runner's `--cold-cloud PRODUCT` writes the central factors into the namelist level by level (ZICEWF and ZICERF,
+`ICE_FACTOR_EDITS`), which scale the ice optics' water path and radius in sunlight and in the infrared; the run's
+configuration records them with the product's hash. PlaSim's cover stays its own: it draws high cloud where the air
+passes 136–149% of ice saturation, while a lunar ice cloud, whose crystals stay, would outlast the supersaturation
+that formed it, so a run gives the thicker cloud on PlaSim's cover and no more cover. In sunlight the patch keeps
+PlaSim's cap of 1,000 g/m² on a layer's water path, above the means (258 g/m² at 63–81 km).
+
+At their defaults of 1 the patched model repeats the design run's year 14 from its year-13 restart in every one of its
+56 output variables (`A28R_301k_cold_regression`). The run `A28R_301k_cold` carries the factors from the design
+years' end for 20 years at the same sunlight, 0.897 (`run_A28R_301k_cold.sh` on the research drive).
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.cold_cloud A28R_301k_s0897 --years 5-14                 # about 16 minutes
+climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28R --folder A28R_301k_cold --years 20 --ncpus 4 \
+    --start-from climate/gcm/runs/A28R_301k_s0897/model/MOST_REST.00014 --set sunlight_scale=0.897 \
+    --longwave-correction --ice-optics --heating-diagnostics --wind10 \
+    --cold-cloud climate/results/gcm/cold_cloud_A28R_301k_s0897.json
 ```
 
 ### Cloud amount: what published models say

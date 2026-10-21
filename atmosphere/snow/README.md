@@ -11,11 +11,14 @@ of the work on the high cloud's crystals ([register](../../research/decisions.md
 | [results/snow.json](results/snow.json) | Fall speeds by size, growth across the winter cloud, crossing times and melting depths, Moon and Earth |
 | [aggregation.py](aggregation.py) | A column of falling snow: super-particles that grow, stick together and break, and the snow they bring to the freezing level |
 | [results/aggregation.json](results/aggregation.json) | The arriving snow's sizes by snowfall and crystal numbers, with the breakup law and without it, Moon and Earth |
+| [cirrus.py](cirrus.py) | A slab of cold air rising through a layer of the upper air: its haze freezing into crystals that grow and fall out, the Moon against Earth, for the GCM's cold cloud ([cold_cloud.py](../../climate/gcm/cold_cloud.py)) |
 
 ```sh
 python -m atmosphere.snow.flakes        # seconds: results/snow.json
 python -m atmosphere.snow.aggregation   # about 20 minutes: results/aggregation.json
 ```
+
+cirrus.py has no product of its own; [cold_cloud.py](../../climate/gcm/cold_cloud.py) runs it on the GCM's layers.
 
 ## The physics
 
@@ -124,6 +127,44 @@ the top, about 0.4 mm/h at 100 a litre on Earth.
   and Brown and Francis's mass law carried far past the sizes it was measured at. By that law a 20 cm lunar flake
   weighs about 0.9 g, a fifth of a kilogram of ice to each cubic metre it spans: a loose lace of crystals.
 
+## The high cloud's crystals
+
+[cirrus.py](cirrus.py) follows a slab of cold air rising through a layer of the upper air, for the GCM's cold cloud
+([plan](../../research/plan.md), item 5). The slab starts at ice saturation at the layer's bottom and rises at a steady
+pressure velocity, cooling on its dry adiabat. Its haze of sulphate droplets freezes at Koop and co-authors' (2000)
+homogeneous rate; the crystals grow from the vapour with the gas-kinetic limit of small crystals, at a deposition
+coefficient of 0.5, fall at Heymsfield and Westbrook's speed and leave through the slab's base. A crystal is a solid
+ice sphere up to 97 µm, where Brown and Francis's mass law meets the sphere's, and takes that law beyond, its area
+ratio falling to the aggregates' 0.35 at 1 mm.
+
+Two worlds rising at the same pressure velocity cool their air alike and condense the same vapour per kilogram. On the
+Moon a crystal falls more slowly, in proportion to gravity while it is small, and a pascal of the slab is six times
+deeper, so a crystal stays ten to fifteen times longer. [cold_cloud.py](../../climate/gcm/cold_cloud.py) runs the slabs
+through the GCM's top three layers in the design years, at the ascent at which Earth's slab holds the GCM's own Earth
+water path (0.053–0.058 Pa/s, about 2 cm/s on Earth):
+
+| Layer of the GCM | Slab's temperatures | Earth: ice path; radius; ice fallen out | Moon: ice path; radius; fallen out |
+|---|---|---|---|
+| Above 107 km | 180 to 148 K | 0.32 g/m²; 1.4 µm; 1% | 2.0 g/m²; 1.4 µm; 0% |
+| 81–107 km | 208 to 169 K | 2.1 g/m²; 18 µm; 97% | 77 g/m²; 31 µm; 30% |
+| 63–81 km | 234 to 205 K | 6.1 g/m²; 51 µm; 98% | 258 g/m²; 82 µm; 92% |
+
+- **Earth's cirrus loses nearly all its ice; the Moon's keeps much of it.** Below 107 km Earth's crystals fall out of
+  the slab within an hour or two of forming, so it holds only a few per cent of the ice it has condensed. The Moon's
+  stay, so per kilogram of air its cloud holds six to seven times the ice and, with six times the air in each pascal,
+  37–42 times the path.
+- **Fewer, larger crystals.** Crystals that stay keep the supersaturation down, so the haze freezes less often: 37
+  crystals a litre at 81–107 km against Earth's 255, and radii 1.6–1.7 times Earth's.
+- **The top layer freezes its haze at once on both worlds.** Its air cools to 148 K, nearly every droplet freezes,
+  and crystals of 1.4 µm hardly fall on either world: the same ice per kilogram, and six times the path on the Moon.
+
+The factors move little with the deposition coefficient (0.1 to 1) or the haze's number (a fifth to five times):
+water 30–42 times, radius 1.6–2.3 times. At the same ascent Earth's slab gives radii 1.45–1.6 times Kristjánsson and
+Mitchell's, the GCM's Earth crystals; the GCM takes their radii times the factors, so that bias largely cancels. Left
+out: aggregation, which on the Moon brings crystals together more slowly but for longer, so that a crystal's chance of
+joining another over its life should change little (an estimate, not run); heterogeneous ice nuclei; gravity waves in
+the cooling, which raise the number of crystals on Earth; and ice falling in from above.
+
 ## Assumptions and limits
 
 - The laws for mass, area, fall, capacitance and ventilation were fitted on Earth; they are carried to the Moon through
@@ -137,6 +178,7 @@ the top, about 0.4 mm/h at 100 a litre on Earth.
 
 ## Next
 
-The same fall and growth physics gives the high cloud's crystals at lunar gravity for the GCM
-([plan](../../research/plan.md), item 5). For the snow itself: the spread of fall speeds among like flakes, which
-Earth's flakes need, and a turbulence limit on very large flakes.
+The same fall and growth physics gives the high cloud's crystals at lunar gravity (above), and the GCM carries them
+([cold_cloud.py](../../climate/gcm/cold_cloud.py)). For the snow itself: the spread of fall speeds among like flakes,
+which Earth's flakes need, and a turbulence limit on very large flakes. For the cold cloud: aggregation, heterogeneous
+ice nuclei and the cooling of gravity waves.
