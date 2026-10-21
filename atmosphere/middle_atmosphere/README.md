@@ -16,6 +16,7 @@ exobase. Equations, data and limits are in [METHODS.md](METHODS.md).
 | [escape.py](escape.py) | Exobase temperature and molecular loss with each case's upper temperature as the thermal column's base; heating by ultraviolet leaking through a filter; bounds on atomic-oxygen loss |
 | [lbl_check.py](lbl_check.py) | Re-solves a finished case's upper air with line-by-line CO2 cooling, to measure the correlated-k error there |
 | [curved_light.py](curved_light.py) | The design cases again with the Moon's curved air's heating of the upper air (the twilight ledger's ratio of curved to flat sunlight per unit mass), the thermal column from the new base, and the ground the GCM's sharing of its sunlight would give; writes `results/curved_light.json` |
+| [methane_water.py](methane_water.py) | The design cases with the design air's N2O and the curved light at the two bounds of the water methane's oxidation can leave above the tropopause, and the exobase with each (`results/methane_water.json`) |
 | [benchmarks.py](benchmarks.py) | Line-by-line thermal and solar fluxes on the equilibrium profiles, for checking a 3-D model's radiation; writes `results/radiation_benchmarks.json` |
 | [limb_heat.py](limb_heat.py) | Short-wave sunlight that passes the solar shield's window, annulus films and gaps, traced through the air along slant paths above the limb: where it heats, the state the heated air settles to, its loss, and the gap transmission each budget allows; writes `results/limb_heat.json` |
 | [inputs.json](inputs.json), [fetch_inputs.py](fetch_inputs.py) | Ultraviolet cross-sections and quantum yields (JPL recommendations via the MPI-Mainz atlas), hash-checked, not redistributed |
@@ -34,6 +35,7 @@ python -m atmosphere.middle_atmosphere.balance
 python -m atmosphere.middle_atmosphere.lbl_check moon_1.2atm_edge_200nm moon_1.2atm_titania_stack
 python -m atmosphere.middle_atmosphere.escape
 python -m atmosphere.middle_atmosphere.benchmarks
+OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.methane_water   # after curved_light, about 25 minutes on four cores
 python -m atmosphere.middle_atmosphere.fetch_limb_inputs --download
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.middle_atmosphere.limb_heat   # after atmosphere.loss_response.tides
 ```
@@ -433,3 +435,35 @@ writes [results/curved_light.json](results/curved_light.json).
   the line-by-line water's strongest lines go dark higher up; a pressure exponent
   on PlaSim's water path does not move it ([the GCM's
   account](../../climate/gcm/README.md#the-curved-airs-light)).
+
+### The design air's methane (2026-10-21)
+
+The design air holds 1.9 ppm of methane and 0.1 ppm of N2O (register, 13 October), and the cases above carry Earth's
+330 ppb of N2O and no methane, whose chemistry the column leaves out. Methane passes the cold trap that holds the water
+entering the upper air to 0.02–0.07 ppm behind the titania stack, and each molecule broken above it leaves two of
+water. [methane_water.py](methane_water.py) solves the three design cases behind the exobase table with the design
+air's N2O and the curved light (the 301 K twilight ledger) at the two bounds of methane's water: unbroken below the
+base, the water above the tropopause the cold trap's alone; broken entirely as soon as it passes the tropopause,
+3.8 ppm at every level above it ([results/methane_water.json](results/methane_water.json)):
+
+| Titania stack | Base at 0.3 Pa: 14 October; unbroken; broken | Exobase, film alone, quiet Sun / maximum: unbroken; broken | 0.1% leak at maximum: unbroken; broken |
+|---|---|---|---|
+| LTE | 168.4; 168.4; 170.3 K | 168.4 / 168.7; 170.3 / 170.6 K | 234.5; 236.6 K |
+| All heats | 197.1; 197.2; 199.2 K | 197.2 / 197.5; 199.2 / 199.5 K | 264.1; 265.8 K |
+| Collisional | 145.7; 145.7; 146.9 K | 145.7 / 146.0; 146.9 / 147.2 K | 210.5; 211.8 K |
+
+- **The design air without methane's water leaves the exobase as it was.** Its N2O and the 301 K ledger move the
+  base by 0.1 K at most, and the ground hardly reaches it: across grounds of 268–308 K the stack's air at 1 Pa stays
+  within 0.4 K of 169 K, so a design climate at 298.5 or 301 K gives the same exobase.
+- **Methane's water at its bound warms the base 1.2–2.0 K, and the exobase follows.** Behind the film alone the
+  exobase stays at 147–200 K, 50–100 K under the 250 K target, and the molecular loss at about 0.001 kg/s at most.
+  The 0.1% leak at solar maximum, which already passed 250 K in the warmest treatment, passes it by 1.7 K more.
+- **The same water would warm the climate.** At the fixed 288 K ground the column takes in 6.1 W/m² more at the top
+  with 3.8 ppm of water above the tropopause, about 3.8 K of ground at the column's 1.62 W/m² a kelvin. That is an
+  upper bound: behind the shield methane meets little OH or O(1D), and the sky's Lyman-alpha glow breaks it mostly
+  above the base, with a lifetime of 3.4 years there ([the loss response](../loss_response/README.md)), where its
+  water hardly touches the greenhouse. Where in the middle atmosphere methane is broken decides both, and needs
+  methane in the column's chemistry.
+
+Methane's own infrared bands stay out of the column, as its chemistry does.
+

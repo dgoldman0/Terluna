@@ -1,0 +1,643 @@
+{
+ "schema": "terluna.atmosphere.hydrogen-escape/1",
+ "air_molar_mass_amu": 28.831461087186188,
+ "homopause_temperatures_k": {
+  "lte": 168.36738302634012,
+  "all_heats": 197.1485331097822,
+  "collisional": 145.67985461583248
+ },
+ "water_past_the_tropopause": {
+  "ts288": 2.4000150644099826e-08,
+  "ts298": 4.327495620019956e-08,
+  "ts308": 7.259677903066552e-08
+ },
+ "base_radius_R": 1.2952179090476585,
+ "treatments": {
+  "lte": {
+   "temperature_k": 168.36738302634012,
+   "methane": {
+    "scale_height_km": 50.14950173346246,
+    "methane_diffusivity_at_base_cm2_s": 27460.981811191872,
+    "homopause_pa": 2.288415150932656e-05,
+    "height_to_homopause_km": 475.4720976870319,
+    "glow_rate_s": 9.249999999999998e-09,
+    "glow_lifetime_days": 1251.2512512512515,
+    "decay_length_km": 1972.7878476642875,
+    "share": 0.21417041392371727
+   },
+   "grounds": {
+    "ts288": {
+     "water_share": 2.4000150644099826e-08,
+     "h2": 0.002551423006347029,
+     "water": 1.5124284041388576e-05,
+     "methane_unbroken": 0.002537461642580432,
+     "methane_broken": 0.018293221554940956,
+     "methane": 0.005911879264693397,
+     "without_methane": 0.0025665472903884175,
+     "total": 0.008478426555081815,
+     "total_unbroken": 0.00510400893296885,
+     "total_broken": 0.020859768845329373,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3168477.112548747,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2780649.6599734966,
+      "water_equivalent_kg_s": 0.07576332062986056,
+      "water_km3_per_year": 2.390908567108888e-06,
+      "waters_years": 5771864382370.384,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.831484310021678e-10,
+        1.5939390447392586e-09
+       ],
+       "to_10000_years": 1.4064168041816987e-09,
+       "to_100000_years": 9.962119029620367e-09,
+       "by_a_million_years": 2.390908567108888e-07
+      }
+     }
+    },
+    "ts288_cold_cloud": {
+     "water_share": 6.000037661024957e-08,
+     "h2": 0.002551423006347029,
+     "water": 3.781071010347144e-05,
+     "methane_unbroken": 0.002537461642580432,
+     "methane_broken": 0.018293221554940956,
+     "methane": 0.005911879264693397,
+     "without_methane": 0.0025892337164505003,
+     "total": 0.008501112981143897,
+     "total_unbroken": 0.005126695359030932,
+     "total_broken": 0.020882455271391456,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3160021.5818549804,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2773229.101858875,
+      "water_equivalent_kg_s": 0.07596604680322783,
+      "water_km3_per_year": 2.3973061185975422e-06,
+      "waters_years": 5756461343398.729,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.847088094140347e-10,
+        1.5982040790650281e-09
+       ],
+       "to_10000_years": 1.4101800697632602e-09,
+       "to_100000_years": 9.988775494156426e-09,
+       "by_a_million_years": 2.397306118597542e-07
+      }
+     }
+    },
+    "ts298": {
+     "water_share": 4.327495620019956e-08,
+     "h2": 0.002551423006347029,
+     "water": 2.7270775886207623e-05,
+     "methane_unbroken": 0.002537461642580432,
+     "methane_broken": 0.018293221554940956,
+     "methane": 0.005911879264693397,
+     "without_methane": 0.0025786937822332365,
+     "total": 0.008490573046926634,
+     "total_unbroken": 0.0051161554248136685,
+     "total_broken": 0.020871915337174193,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3163944.334702615,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2776671.7025103783,
+      "water_equivalent_kg_s": 0.07587186182558697,
+      "water_km3_per_year": 2.394333866747143e-06,
+      "waters_years": 5763607236090.341,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.839838699383275e-10,
+        1.5962225778314288e-09
+       ],
+       "to_10000_years": 1.408431686321849e-09,
+       "to_100000_years": 9.97639111144643e-09,
+       "by_a_million_years": 2.3943338667471433e-07
+      }
+     }
+    },
+    "ts298_cold_cloud": {
+     "water_share": 1.081873905004989e-07,
+     "h2": 0.002551423006347029,
+     "water": 6.817693971551907e-05,
+     "methane_unbroken": 0.002537461642580432,
+     "methane_broken": 0.018293221554940956,
+     "methane": 0.005911879264693397,
+     "without_methane": 0.002619599946062548,
+     "total": 0.008531479210755945,
+     "total_unbroken": 0.00515706158864298,
+     "total_broken": 0.020912821501003504,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3148774.066791865,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2763358.3034201125,
+      "water_equivalent_kg_s": 0.07623739979254382,
+      "water_km3_per_year": 2.4058693676931805e-06,
+      "waters_years": 5735972279006.924,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.867974067544343e-10,
+        1.6039129117954537e-09
+       ],
+       "to_10000_years": 1.4152172751136355e-09,
+       "to_100000_years": 1.0024455698721585e-08,
+       "by_a_million_years": 2.4058693676931806e-07
+      }
+     }
+    },
+    "ts308": {
+     "water_share": 7.259677903066552e-08,
+     "h2": 0.002551423006347029,
+     "water": 4.574864228277802e-05,
+     "methane_unbroken": 0.002537461642580432,
+     "methane_broken": 0.018293221554940956,
+     "methane": 0.005911879264693397,
+     "without_methane": 0.002597171648629807,
+     "total": 0.008509050913323204,
+     "total_unbroken": 0.0051346332912102395,
+     "total_broken": 0.020890393203570765,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3157073.657667262,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2770642.0090382444,
+      "water_equivalent_kg_s": 0.07603698025968132,
+      "water_km3_per_year": 2.3995446082429194e-06,
+      "waters_years": 5751091249812.243,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.85254782498273e-10,
+        1.5996964054952795e-09
+       ],
+       "to_10000_years": 1.4114968283781878e-09,
+       "to_100000_years": 9.998102534345498e-09,
+       "by_a_million_years": 2.399544608242919e-07
+      }
+     }
+    },
+    "ts308_cold_cloud": {
+     "water_share": 1.814919475766638e-07,
+     "h2": 0.002551423006347029,
+     "water": 0.00011437160570694506,
+     "methane_unbroken": 0.002537461642580432,
+     "methane_broken": 0.018293221554940956,
+     "methane": 0.005911879264693397,
+     "without_methane": 0.002665794612053974,
+     "total": 0.00857767387674737,
+     "total_unbroken": 0.005203256254634405,
+     "total_broken": 0.02095901616699493,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3131816.4896692117,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2748476.3650676683,
+      "water_equivalent_kg_s": 0.0766501958777797,
+      "water_km3_per_year": 2.418896221432621e-06,
+      "waters_years": 5705081465556.543,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.899746881542977e-10,
+        1.6125974809550805e-09
+       ],
+       "to_10000_years": 1.4228801302544829e-09,
+       "to_100000_years": 1.0078734255969254e-08,
+       "by_a_million_years": 2.418896221432621e-07
+      }
+     }
+    }
+   }
+  },
+  "all_heats": {
+   "temperature_k": 197.1485331097822,
+   "methane": {
+    "scale_height_km": 58.722185528012,
+    "methane_diffusivity_at_base_cm2_s": 36539.74191508464,
+    "homopause_pa": 3.0449784929237194e-05,
+    "height_to_homopause_km": 539.9774389951259,
+    "glow_rate_s": 9.249999999999998e-09,
+    "glow_lifetime_days": 1251.2512512512515,
+    "decay_length_km": 1972.7878476642875,
+    "share": 0.2394495851473255
+   },
+   "grounds": {
+    "ts288": {
+     "water_share": 2.4000150644099826e-08,
+     "h2": 0.0024492422914907473,
+     "water": 1.467753292349011e-05,
+     "methane_unbroken": 0.0024625084201769726,
+     "methane_broken": 0.017560605108801586,
+     "methane": 0.006077741408782345,
+     "without_methane": 0.0024639198244142376,
+     "total": 0.008541661233196583,
+     "total_unbroken": 0.00492642824459121,
+     "total_broken": 0.020024524933215822,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3145020.5945651783,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2760064.263128794,
+      "water_equivalent_kg_s": 0.07632838646628791,
+      "water_km3_per_year": 2.4087406887485274e-06,
+      "waters_years": 5729134756788.559,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.874977289630555e-10,
+        1.6058271258323517e-09
+       ],
+       "to_10000_years": 1.4169062874991338e-09,
+       "to_100000_years": 1.0036419536452198e-08,
+       "by_a_million_years": 2.4087406887485274e-07
+      }
+     }
+    },
+    "ts288_cold_cloud": {
+     "water_share": 6.000037661024957e-08,
+     "h2": 0.0024492422914907473,
+     "water": 3.669383230872527e-05,
+     "methane_unbroken": 0.0024625084201769726,
+     "methane_broken": 0.017560605108801586,
+     "methane": 0.006077741408782345,
+     "without_methane": 0.0024859361237994726,
+     "total": 0.008563677532581818,
+     "total_unbroken": 0.004948444543976445,
+     "total_broken": 0.020046541232601058,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3136935.082853739,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2752968.4329894246,
+      "water_equivalent_kg_s": 0.07652512437969318,
+      "water_km3_per_year": 2.4149492651246056e-06,
+      "waters_years": 5714405763836.183,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.890120158840501e-10,
+        1.609966176749737e-09
+       ],
+       "to_10000_years": 1.420558391249768e-09,
+       "to_100000_years": 1.0062288604685856e-08,
+       "by_a_million_years": 2.4149492651246055e-07
+      }
+     }
+    },
+    "ts298": {
+     "water_share": 4.327495620019956e-08,
+     "h2": 0.0024492422914907473,
+     "water": 2.6465233648321744e-05,
+     "methane_unbroken": 0.0024625084201769726,
+     "methane_broken": 0.017560605108801586,
+     "methane": 0.006077741408782345,
+     "without_methane": 0.002475707525139069,
+     "total": 0.008553448933921414,
+     "total_unbroken": 0.004938215945316042,
+     "total_broken": 0.020036312633940654,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3140686.3708118633,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2756260.5563706886,
+      "water_equivalent_kg_s": 0.07643372150029479,
+      "water_km3_per_year": 2.412064809617703e-06,
+      "waters_years": 5721239307076.17,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.883084901506593e-10,
+        1.608043206411802e-09
+       ],
+       "to_10000_years": 1.4188616527162958e-09,
+       "to_100000_years": 1.0050270040073761e-08,
+       "by_a_million_years": 2.412064809617703e-07
+      }
+     }
+    },
+    "ts298_cold_cloud": {
+     "water_share": 1.081873905004989e-07,
+     "h2": 0.0024492422914907473,
+     "water": 6.616308412080438e-05,
+     "methane_unbroken": 0.0024625084201769726,
+     "methane_broken": 0.017560605108801586,
+     "methane": 0.006077741408782345,
+     "without_methane": 0.0025154053756115515,
+     "total": 0.008593146784393896,
+     "total_unbroken": 0.004977913795788524,
+     "total_broken": 0.020076010484413136,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3126177.3089911244,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2743527.430523389,
+      "water_equivalent_kg_s": 0.07678846196471034,
+      "water_km3_per_year": 2.423259567297543e-06,
+      "waters_years": 5694808837746.58,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.910389188530593e-10,
+        1.6155063781983619e-09
+       ],
+       "to_10000_years": 1.4254468042926723e-09,
+       "to_100000_years": 1.0096914863739762e-08,
+       "by_a_million_years": 2.4232595672975427e-07
+      }
+     }
+    },
+    "ts308": {
+     "water_share": 7.259677903066552e-08,
+     "h2": 0.0024492422914907473,
+     "water": 4.4397288590514796e-05,
+     "methane_unbroken": 0.0024625084201769726,
+     "methane_broken": 0.017560605108801586,
+     "methane": 0.006077741408782345,
+     "without_methane": 0.002493639580081262,
+     "total": 0.008571380988863607,
+     "total_unbroken": 0.004956148000258235,
+     "total_broken": 0.02005424468888285,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3134115.788938211,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2750494.2258580145,
+      "water_equivalent_kg_s": 0.07659396255673506,
+      "water_km3_per_year": 2.4171216327804225e-06,
+      "waters_years": 5709269989911.852,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.895418616537615e-10,
+        1.611414421853615e-09
+       ],
+       "to_10000_years": 1.4218362545767192e-09,
+       "to_100000_years": 1.0071340136585094e-08,
+       "by_a_million_years": 2.4171216327804224e-07
+      }
+     }
+    },
+    "ts308_cold_cloud": {
+     "water_share": 1.814919475766638e-07,
+     "h2": 0.0024492422914907473,
+     "water": 0.00011099322147628699,
+     "methane_unbroken": 0.0024625084201769726,
+     "methane_broken": 0.017560605108801586,
+     "methane": 0.006077741408782345,
+     "without_methane": 0.0025602355129670344,
+     "total": 0.00863797692174938,
+     "total_unbroken": 0.005022743933144007,
+     "total_broken": 0.02012084062176862,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3109952.7972299512,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2729288.8289777865,
+      "water_equivalent_kg_s": 0.07718906460581106,
+      "water_km3_per_year": 2.435901625204343e-06,
+      "waters_years": 5665253414674.472,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.941223476108154e-10,
+        1.6239344168028953e-09
+       ],
+       "to_10000_years": 1.4328833089437313e-09,
+       "to_100000_years": 1.0149590105018096e-08,
+       "by_a_million_years": 2.435901625204343e-07
+      }
+     }
+    }
+   }
+  },
+  "collisional": {
+   "temperature_k": 145.67985461583248,
+   "methane": {
+    "scale_height_km": 43.39184936101491,
+    "methane_diffusivity_at_base_cm2_s": 21132.07988876035,
+    "homopause_pa": 1.7610066573966953e-05,
+    "height_to_homopause_km": 422.7696977770968,
+    "glow_rate_s": 9.249999999999998e-09,
+    "glow_lifetime_days": 1251.2512512512515,
+    "decay_length_km": 1972.7878476642875,
+    "share": 0.19289429948383996
+   },
+   "grounds": {
+    "ts288": {
+     "water_share": 2.4000150644099826e-08,
+     "h2": 0.0026488832004495744,
+     "water": 1.554597385044109e-05,
+     "methane_unbroken": 0.0026082102289339826,
+     "methane_broken": 0.01899199275794035,
+     "methane": 0.005768548482762242,
+     "without_methane": 0.0026644291743000152,
+     "total": 0.008432977657062257,
+     "total_unbroken": 0.005272639403233997,
+     "total_broken": 0.021656421932240363,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3185553.3813379733,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2795635.7619132325,
+      "water_equivalent_kg_s": 0.07535718873609948,
+      "water_km3_per_year": 2.378092019258333e-06,
+      "waters_years": 5802971410796.741,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.800224437215446e-10,
+        1.5853946795055553e-09
+       ],
+       "to_10000_years": 1.3988776583872546e-09,
+       "to_100000_years": 9.90871674690972e-09,
+       "by_a_million_years": 2.378092019258333e-07
+      }
+     }
+    },
+    "ts288_cold_cloud": {
+     "water_share": 6.000037661024957e-08,
+     "h2": 0.0026488832004495744,
+     "water": 3.886493462610273e-05,
+     "methane_unbroken": 0.0026082102289339826,
+     "methane_broken": 0.01899199275794035,
+     "methane": 0.005768548482762242,
+     "without_methane": 0.002687748135075677,
+     "total": 0.008456296617837918,
+     "total_unbroken": 0.005295958364009659,
+     "total_broken": 0.021679740893016025,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3176768.945584915,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2787926.5573262535,
+      "water_equivalent_kg_s": 0.07556556724719747,
+      "water_km3_per_year": 2.384667944960159e-06,
+      "waters_years": 5786969221088.163,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.816263280390632e-10,
+        1.5897786299734392e-09
+       ],
+       "to_10000_years": 1.402745849976564e-09,
+       "to_100000_years": 9.936116437333996e-09,
+       "by_a_million_years": 2.384667944960159e-07
+      }
+     }
+    },
+    "ts298": {
+     "water_share": 4.327495620019956e-08,
+     "h2": 0.0026488832004495744,
+     "water": 2.8031129780957204e-05,
+     "methane_unbroken": 0.0026082102289339826,
+     "methane_broken": 0.01899199275794035,
+     "methane": 0.005768548482762242,
+     "without_methane": 0.0026769143302305316,
+     "total": 0.008445462812992773,
+     "total_unbroken": 0.005285124559164514,
+     "total_broken": 0.02166890708817088,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3180844.0916789384,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2791502.89800923,
+      "water_equivalent_kg_s": 0.07546875623812738,
+      "water_km3_per_year": 2.3816128218603284e-06,
+      "waters_years": 5794392721324.252,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.808811760634948e-10,
+        1.587741881240219e-09
+       ],
+       "to_10000_years": 1.4009487187413697e-09,
+       "to_100000_years": 9.923386757751368e-09,
+       "by_a_million_years": 2.3816128218603284e-07
+      }
+     }
+    },
+    "ts298_cold_cloud": {
+     "water_share": 1.081873905004989e-07,
+     "h2": 0.0026488832004495744,
+     "water": 7.007782445239302e-05,
+     "methane_unbroken": 0.0026082102289339826,
+     "methane_broken": 0.01899199275794035,
+     "methane": 0.005768548482762242,
+     "without_methane": 0.0027189610249019674,
+     "total": 0.00848750950766421,
+     "total_unbroken": 0.00532717125383595,
+     "total_broken": 0.021710953782842317,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3165086.3502355264,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2777673.933232102,
+      "water_equivalent_kg_s": 0.07584448600226724,
+      "water_km3_per_year": 2.393469951465149e-06,
+      "waters_years": 5765687591587.439,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.837731588939388e-10,
+        1.5956466343100993e-09
+       ],
+       "to_10000_years": 1.4079235008618524e-09,
+       "to_100000_years": 9.972791464438122e-09,
+       "by_a_million_years": 2.393469951465149e-07
+      }
+     }
+    },
+    "ts308": {
+     "water_share": 7.259677903066552e-08,
+     "h2": 0.0026488832004495744,
+     "water": 4.702418935501254e-05,
+     "methane_unbroken": 0.0026082102289339826,
+     "methane_broken": 0.01899199275794035,
+     "methane": 0.005768548482762242,
+     "without_methane": 0.002695907389804587,
+     "total": 0.008464455872566829,
+     "total_unbroken": 0.00530411761873857,
+     "total_broken": 0.021687900147744937,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3173706.720743514,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2785239.15446313,
+      "water_equivalent_kg_s": 0.075638478444589,
+      "water_km3_per_year": 2.3869688473629616e-06,
+      "waters_years": 5781390911425.488,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.821875237470638e-10,
+        1.5913125649086411e-09
+       ],
+       "to_10000_years": 1.4040993219782128e-09,
+       "to_100000_years": 9.945703530679007e-09,
+       "by_a_million_years": 2.3869688473629616e-07
+      }
+     }
+    },
+    "ts308_cold_cloud": {
+     "water_share": 1.814919475766638e-07,
+     "h2": 0.0026488832004495744,
+     "water": 0.00011756047338753136,
+     "methane_unbroken": 0.0026082102289339826,
+     "methane_broken": 0.01899199275794035,
+     "methane": 0.005768548482762242,
+     "without_methane": 0.002766443673837106,
+     "total": 0.008534992156599348,
+     "total_unbroken": 0.005374653902771089,
+     "total_broken": 0.021758436431777453,
+     "cycles": {
+      "air_hydrogen_kg": 847753914589.6064,
+      "air_hydrogen_years": 3147478.052388243,
+      "methane_kg": 2960264821193.272,
+      "methane_hydrogen_years": 2762220.9235739782,
+      "water_equivalent_kg_s": 0.07626879151842127,
+      "water_km3_per_year": 2.406860015221731e-06,
+      "waters_years": 5733611391075.722,
+      "share_of_delivery": {
+       "first_thousand_years": [
+        5.870390281028612e-10,
+        1.604573343481154e-09
+       ],
+       "to_10000_years": 1.4158000089539592e-09,
+       "to_100000_years": 1.0028583396757212e-08,
+       "by_a_million_years": 2.4068600152217307e-07
+      }
+     }
+    }
+   }
+  }
+ },
+ "check": {
+  "oxygen_step_kg_s": [
+   0.00243627520322295,
+   0.00263327005683755
+  ],
+  "limiting_kg_s": 0.0025665472903884175,
+  "ratio": [
+   0.9492422806104803,
+   1.0259970921630805
+  ]
+ },
+ "evidence": "The diffusion-limited escape of hydrogen in each form through the homopause (Hunten 1973), with measured binary diffusion and a steady tracer for the glow's breaking of methane above the base; screening estimates from the middle atmosphere's design cases and the oxygen step, without methane's chemistry below the base or what its hydrogen does to the air's H2.",
+ "reading_rule": "treatments: for each design treatment's homopause temperature, methane's share broken below its homopause and, for each ground's water past the tropopause (and the cold cloud's 2.5 times it), the hydrogen escape in kg/s by carrier: total takes methane at that share, total_unbroken and total_broken its bounds; cycles gives years for the total to take the air's hydrogen in H2 and methane, methane's hydrogen and the Moon's waters, and the water a year against the delivery. check sets the limiting flux of H2 and water beside the oxygen step's transport.",
+ "producer": {
+  "domain": "atmosphere",
+  "files": {
+   "loss_response/hydrogen.py": "5f1d7007b34eb516"
+  },
+  "inputs": {
+   "atmosphere/middle_atmosphere/results/curved_light.json": {
+    "path": "atmosphere/middle_atmosphere/results/curved_light.json",
+    "sha256": "00942ac63239d191"
+   },
+   "atmosphere/loss_response/results/oxygen_escape.json": {
+    "path": "atmosphere/loss_response/results/oxygen_escape.json",
+    "sha256": "94421fe229a148da"
+   },
+   "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack.json": {
+    "path": "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack.json",
+    "sha256": "3045438e2bc6df54"
+   },
+   "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack_ts298.json": {
+    "path": "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack_ts298.json",
+    "sha256": "eda1499f9ba2c3a5"
+   },
+   "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack_ts308.json": {
+    "path": "atmosphere/middle_atmosphere/results/cases/moon_1.2atm_titania_stack_ts308.json",
+    "sha256": "d1f848e752b8eec4"
+   }
+  }
+ }
+}
