@@ -1448,7 +1448,8 @@ climate/gcm/.venv/bin/python -m climate.crm.box_budget box_0e_small_rain_control
 - The self-collection rate, 5.78 m³ kg⁻¹ s⁻¹ (Seifert and Beheng 2001), carries Earth's collision kernel, the volume
   drops sweep at their difference in fall speed with collision efficiency near one. At the scheme's own lunar speeds it
   would be 2.94 times smaller, by the solver's 2.5–3.4 times for drops of 0.5–3 mm. It sets how fast the rain reaches
-  the breakup equilibrium, whose size is the breakup law's; it stays for the size-dependent fall law of the plan.
+  the breakup equilibrium, whose size is the breakup law's. The rain law below takes its lunar rate from the collision
+  kernels, 1.98 times smaller at the lunar equilibrium, since Earth's large drops approach one speed.
 - Autoconversion and accretion (Khairoutdinov and Kogan 2000: 1,350 q_c^2.47 N_c^−1.79 and 67 (q_c q_r)^1.15) are fits
   to Earth's bin model. At lunar gravity droplets settle 6 times slower and collide less efficiently, so rain forms
   more slowly by a factor that needs a lunar collision calculation; they stay.
@@ -1461,9 +1462,118 @@ climate/gcm/.venv/bin/python -m climate.crm.box_budget box_0e_small_rain_control
   6 mm (`xvrmx0` with `imaxdiaopt = 3`), its active breakup off for two moments. Carried as Morrison's are, the
   collisional lengths would scale by about 2.8 and the cap by 2.46; it is not patched, since no NSSL run is planned.
 
-**Open.** The lunar limits change the answers by several times the spread between realizations (above), and the author
-decides whether they join CM1's next run with the size-dependent fall law. The similarity carries Earth's collision
-outcomes to the Moon by the Weber number; no lunar collision has been measured.
+**Since.** The lunar limits change the answers by several times the spread between realizations (above). On 21 October
+the author chose for CM1's next runs, the pair of boxes on the design climate, the lunar limits with the size-dependent
+fall law below. The similarity carries Earth's collision outcomes to the Moon by the Weber number; no lunar collision
+has been measured.
+
+## The rain law at lunar gravity
+
+Morrison's scheme reads rain's fall law only through three moments of its exponential spectrum, and no single power law
+follows the single-drop solver through drizzle and large drops alike: refitted to the solver, the closest power law
+stands as far from it as the lunar builds' present one
+([atmosphere/rain](../../atmosphere/rain/README.md#the-fall-law-for-cm1)). The patch therefore takes the moments from
+a table of the solver's, and gives rain's self-collection its lunar rate beside them. The author approved building it
+on 21 October, before the pair of boxes over the Near-side Sea and at 0° E.
+
+**The patch** (`RAIN_LAW_PATCHES` in [cm1_run.py](cm1_run.py); build `moon_omp_rain_law`, which carries the rain
+limits and the twilight hook with it). Two entries join `&param3`: `rain_fall_law`, 0 to keep the build's power law or
+1 to read `terluna_rain_law.txt` from the run directory, and `rain_selfcoll`, rain's self-collection rate, CM1's
+5.78 m³/kg/s when 0. With the table, three things come from it, read linearly in the log of the spectrum's slope:
+rain's mass-weighted and number-weighted mean fall speeds, in its sedimentation and in its collection of snow and
+graupel, times the scheme's density factor; and the ventilation integral of its evaporation, times that factor's
+square root. Rain's collection of cloud ice keeps the power law, and the rain limits' cap on the mean fall speeds
+stays. For a case with `rain_law='lunar'`, which requires `rain_limits='lunar'`, the runner writes the table and the
+lunar rate, 2.92 m³/kg/s, from atmosphere/rain's product. The patch's header in `morrison.F` states what it changes,
+its default and its source.
+
+**The build and the smoke test** (21 October; `crm-runs/smoke_rain_law/` on the research drive). `moon_omp_rain_law`
+built at `-O3 -march=native` in three minutes on two jobs (executable `721fba67fa38d856`). From the small box's
+day-42.0 restart, with 2.4 kg/m² of rain aloft, each arm ran two model hours on one thread. With the law written out
+at its default, the build parted from the rain-limits build in the last digits: after two hours the rain at the ground
+differed in its sixth digit. Built both strictly (`-ffp-contract=off -nostdinc`, without fused multiply-adds or vector
+maths; `strict.py`), the two matched bit for bit in every output, statistic and restart file. So the patch at its
+default leaves the scheme as it was, and at `-O3` the compiler parts them: the patch's branches change which of
+Morrison's loops it vectorises, and so where it calls glibc's vector exp and log. With the lunar law the build logged
+its 301 table rows and the rate, and its reading of the table at a slope of 1,000/m matched the product's mirror to
+seven digits. Over the two hours it held slightly more rain aloft (2.37 against 2.33 kg/m²) at a smaller mass-median
+mean diameter (1.51 against 1.60 mm), and 8% less rain reached the ground (2.85 against 3.09 mm). This is the
+transient of a law switched on in mid-storm, in one realization; the boxes below measure the law settled.
+
+```sh
+python -m atmosphere.rain.fall_law                                          # about a second: rain_fall_law.json
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law --jobs 2       # three minutes
+python3 /media/projectspace/terluna-research/crm-runs/smoke_rain_law/smoke.py setup|run|compare
+python3 /media/projectspace/terluna-research/crm-runs/smoke_rain_law/strict.py build|setup|run|compare
+```
+
+## Boxes on the design climate: the Near-side Sea and 0° E
+
+The small box's 48% of falling rain evaporated, against PlaSim's evaporation constant gamma, rests on one box over
+land, forced by the GCM before its corrections and without the heat and vapour its circulation carries sideways. The
+GCM evaporates a larger share of its rain over the Near-side Sea than at that box's place, and the gap widens with
+gamma ([the GCM's account](../gcm/README.md#the-evaporation-of-falling-rain-21-october)). So, at the author's word of
+21 October, a pair of boxes on the design climate puts gamma to the test where the land and the sea differ: one over
+the Near-side Sea at 5° S, 45° W in the southern Procellarum region, the author's site, open water 120 km from the
+nearest land; its twin over the land at 0° E. Both take the lunar rain limits and the rain law above.
+
+**Forcing from the GCM alone** ([gcm_site.py](gcm_site.py)). No ring passes either site on the design climate, so each
+box takes its forcing from the GCM's column there: the cells within 5.6° of latitude and 8.5° of longitude of the site
+that have its surface, six sea cells at sea level and four land cells 0.7–1.3 km up. It takes the GCM's mean air
+there as the reference, held from 8 km as the rings' is, and the GCM's mean vertical wind, which CM1 applies to its
+own air up to 16 km. It also takes the heat and vapour the GCM's circulation brings by local time, prescribed through
+the table the rings' day-night forcing used (`var11`), up to 16 km. These come from the GCM's own budget, the storage
+less the physics, and not from differences of its winds and humidity. The Moon's column at 301 K holds about 220 kg/m²
+of vapour, so its circulation moves water through a column about a hundred times as fast as the column keeps it, and
+the net at a site is a residual of about a millimetre a day. At the Near-side Sea, centred and spectral differences of
+the 3-day means brought the column +0.1 to +2.5 mm/day, where the GCM's rain less its evaporation takes 0.7 away.
+
+- **The GCM's budget.** A branch of the cold-cloud run, `A28R_301k_cold_moist`, six years from its year-19 restart
+  with its settings, writes PlaSim's physics heating and moistening of each layer as the model applies them
+  (`--moisture-diagnostics` with `--heating-diagnostics`). The heating comes at each grid point (code 21) and is
+  projected here onto the T21 harmonics, as the spectral step takes it; the moistening comes as that step applies it
+  (code 40, whose slot is filled in the diabatic spectral step), and code 41 holds the horizontal diffusion after it.
+- **The snapshots and the exact means.** The diagnostics are single time steps at the end of each 3-day mean, at ten
+  times of day. So the vapour over the column is held to the GCM's exact means: the change in its precipitable water
+  less the evaporation, plus the rain. The difference is spread over the levels in proportion to the vapour each
+  holds. Over the six years it was 0.24 mm/day at the sea, where the snapshots gave −1.02 and the means −0.78, and
+  0.48 at the land, −0.33 against +0.15.
+- **The vertical wind.** PlaSim's postprocessor writes omega (`wap`) about a hundred times too weak at the equator
+  against the meridional mass flux of the same winds. The wind here is the GCM's own continuity: the divergence and
+  the surface pressure's gradient from the written winds and pressure projected onto the harmonics, summed down each
+  column over its layers as PlaSim sums them. Over the equatorial band it gives ascent of 1–3 mm/s, as the band's
+  meridional mass flux does. At the sea it rises 3.5 and 4.0 mm/s at 0.9 and 4.2 km and sinks 3.4 mm/s at 10 km; at
+  the land it sinks 4.3, 1.0 and 2.3 mm/s at the same heights.
+- **Local time.** The means cover 36° of hour angle each, centred on the site's hour angle from the subsolar
+  longitude of the mean solar height; the snapshots fall 18° later. Each level's series is fitted with the day's mean
+  and first four harmonics, the means' harmonics divided by the damping a 36° mean gives them.
+
+CM1 applies the mean vertical wind to its own air, so the table holds the circulation's heating and moistening with
+the mean wind's advection of the GCM's own air added back. In the GCM's state, the two together give the GCM's budget.
+Over the day the GCM's circulation cools and dries the lowest kilometre at both sites, by 0.12 K and 0.43 g/kg a day
+over the sea and 0.24 K and 0.52 g/kg a day over the land: it carries the evaporation and the ground's heat away.
+
+**The boxes** (cases `box_near_side_sea` and `box_0e_design`, on the build `moon_omp_rain_law`). They have the small
+box's size and spacing, 32 × 32 columns 6.0 km apart. The sea is held at the GCM's 302.0 K. The land is the
+placeholder land at the GCM's wetness, 0.83 (the 0.90 class, as box_0e's), at the ground's own height, with heights
+above it. Both start at local sunrise and run two lunar days, the second analysed. They carry the curved air's
+twilight from the 301 K ledger and write the heat and vapour budgets.
+
+**The trials** (21 October; `crm-runs/trial_site_boxes/` on the research drive). Each case, copied, ran three model
+hours on two threads beside the GCM's runs, in about half a minute. Both ran normally and wrote their four outputs, with
+every field the analyses read present and finite and the 22 fields of their heat, vapour and radiation budgets. Their
+logs show the rain limits, the rain law's 301 rows and rate, the 36-bin table, the vertical wind falling to zero above
+16 km and the twilight's 167 elevations. The pair runs one box after the other on four threads, with half an hour's rest
+between.
+
+```sh
+/media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
+climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about a minute
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_design
+python3 /media/projectspace/terluna-research/crm-runs/trial_site_boxes/trial.py run|check
+/media/projectspace/terluna-research/session-tools/run_site_boxes.sh             # the pair; rerun to resume
+```
 
 ## A box over the highlands
 

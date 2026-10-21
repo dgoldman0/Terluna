@@ -37,6 +37,12 @@ EVIDENCE = ('CM1 r22.0 in three dimensions at lunar gravity: a box 385 km square
             'resolves storms in three dimensions. It cannot make the planet-wide circulation, which it takes from the '
             'rings, and has no land and water around it. The boxes built on it (size, land, fall speeds) say how they '
             'depart from it in their purpose, given with the results.')
+GCM_SITE_EVIDENCE = ('A box forced by the GCM alone (gcm_site.py): 32 x 32 columns 6.0 km wide on 111 levels to '
+                     '150 km at its site, sea held at the GCM\'s temperature or the placeholder land at the GCM\'s '
+                     'wetness; its upper air above 8-16 km held to the GCM\'s mean there, the GCM\'s mean vertical '
+                     'wind below 16 km on its own air, and the GCM\'s own heating and moistening by local time '
+                     'prescribed, from the GCM run in gcm_run. The lunar rain limits and rain law, the curved air\'s '
+                     'twilight. It extends no ring.')
 READING_RULE = ('The box takes all its columns; each ring, its land columns within 100 km of the site along the ring. '
                 'Values are means over those columns of snapshots every 3 model hours, composited by the local hour angle '
                 'at the site (0 = noon, negative = morning) in 36-degree bins; day is when the Sun is up. Differences are '
@@ -113,9 +119,11 @@ def surface_energy(case: Path, columns, times, start_deg: float, lon_deg: float,
                       mean=float(total.sum() / count.sum())) for key, total in sums.items()}
 
 
-def gcm_surface_energy(lat_deg: float, lon_deg: float, radius_m=rc.GCM_RADIUS_M, run=rc.GCM_RUN, years=rc.GCM_YEARS) -> dict:
-    """The GCM's energy at the ground on its land cells near a site, by local time in the same bins (W/m2, 3-day
-    means): net sunlight and net infrared (positive down), and the heat carried into the air and of evaporation."""
+def gcm_surface_energy(lat_deg: float, lon_deg: float, radius_m=rc.GCM_RADIUS_M, run=rc.GCM_RUN, years=rc.GCM_YEARS,
+                       surface: str = 'land') -> dict:
+    """The GCM's energy at the ground on its land cells near a site, or its sea-level sea, by local time in the same
+    bins (W/m2, 3-day means): net sunlight and net infrared (positive down), and the heat carried into the air and of
+    evaporation."""
     import netCDF4
     from climate.gcm.climatology import subsolar_longitudes
     from climate.crm.cm1_run import planet
@@ -131,12 +139,17 @@ def gcm_surface_energy(lat_deg: float, lon_deg: float, radius_m=rc.GCM_RADIUS_M,
     la, lo = np.radians(lat_deg), np.radians(lon_deg)
     lat2, lon2 = np.radians(np.meshgrid(lat, lon, indexing='ij'))
     near = np.arccos(np.clip(np.sin(lat2) * np.sin(la) + np.cos(lat2) * np.cos(la) * np.cos(lon2 - lo), -1.0, 1.0))
-    cells = (near * planet()['radius_m'] <= radius_m) & lsm
+    if surface == 'land':
+        cells = (near * planet()['radius_m'] <= radius_m) & lsm
+    else:
+        height = (np.loadtxt(folder.parent / 'inputs' / 'moon_topography.sra', skiprows=1).ravel().reshape(lsm.shape)
+                  / planet()['gravity_m_s2'])
+        cells = (near * planet()['radius_m'] <= radius_m) & ~lsm & (height < 1.0)
     hour = (lon[None, :] - subsolar_longitudes(f['czen'], lat, lon)[:, None] + 180.0) % 360.0 - 180.0
     k = np.clip(((hour + 180.0) / (360.0 / rc.BINS)).astype(int), 0, rc.BINS - 1)
     sel = np.broadcast_to(cells, f['rss'].shape)
     kk = np.broadcast_to(k[:, None, :], f['rss'].shape)
-    out = dict(cells=int(cells.sum()))
+    out = dict(cells=int(cells.sum()), surface=surface)
     for key, v in (('net_sunlight', f['rss']), ('net_infrared', f['rls']), ('sensible', -f['hfss']), ('latent', -f['hfls'])):
         out[key] = dict(by_local_time=[float(v[sel & (kk == b)].mean()) for b in range(rc.BINS)], mean=float(v[sel].mean()))
     return out
@@ -162,11 +175,15 @@ def microphysics_budget(case: Path, from_day: float) -> dict:
 
 
 def analyse(name: str, from_day: float, reference: str | None = None) -> dict:
-    """The box against the rings it extends, the GCM and, if given, a reference box at the same site."""
+    """The box against the rings it extends, the GCM and, if given, a reference box at the same site. A box forced
+    by the GCM alone (its site 'gcm') extends no ring and is set beside the GCM run that forced it."""
     from climate.crm.cm1_run import CASES, solar_day_s
     cfg = CASES[name]
     site = cfg['site']
-    rings = list(cfg['day_night']['rings']) if cfg.get('day_night') else [site['ring']]
+    if site.get('gcm'):
+        rings = []
+    else:
+        rings = list(cfg['day_night']['rings']) if cfg.get('day_night') else [site['ring']]
     sigma = rc.gcm_lowest_sigma()
     day_s = solar_day_s()
     case = RUNS / name
@@ -188,21 +205,27 @@ def analyse(name: str, from_day: float, reference: str | None = None) -> dict:
         series[ring] = rc.patch_series(RUNS / ring, [{'land': columns[ring]}], from_day, None, sigma, fields, KEYS)
     times = sorted(set.intersection(*(set(s['time_s']) for s in series.values())))
     if not times:
-        raise RuntimeError(f'no output common to {name} and {", ".join(rings)} after day {from_day}')
+        raise RuntimeError(f'no output common to {name} and {", ".join(rings) or "itself"} after day {from_day}')
+    gcm_run, gcm_years = (record['gcm']['run'], tuple(record['gcm']['years'])) if site.get('gcm') else (rc.GCM_RUN,
+                                                                                                          rc.GCM_YEARS)
     pick = lambda s: {key: np.asarray(s['patches'][0]['land'][key])[[s['time_s'].index(t) for t in times]] for key in KEYS}
     aligned = {k: pick(s) for k, s in series.items()}
     hour = [rc.local_hour_angle(start, site['lon_deg'], t, day_s) for t in times]
     others = [*rings, *([reference] if reference else [])]
     against = {k: rc.compare(hour, {name: aligned[name], k: aligned[k]}, day_s / 3600.0, KEYS) for k in others}
     return dict(schema=SCHEMA, case=name, purpose=cfg.get('purpose'), build=record['build']['label'],
+                **({'evidence_of_this_box': GCM_SITE_EVIDENCE} if site.get('gcm') else {}),
                 site=dict(site, land_columns={k: int(v.size) for k, v in columns.items()}),
                 rings=rings, evidence=EVIDENCE, reading_rule=READING_RULE, gcm_lowest_sigma=sigma,
                 span_days=[times[0] / 86400.0, times[-1] / 86400.0], snapshots=len(times), against=against,
-                gcm=rc.gcm_near([dict(lat_deg=site['lat_deg'], lon_deg=site['lon_deg'])])[0],
+                gcm=rc.gcm_near([dict(lat_deg=site['lat_deg'], lon_deg=site['lon_deg'])], run=gcm_run, years=gcm_years)[0],
+                gcm_run=dict(run=gcm_run, years=list(gcm_years)),
                 cloud_profiles={k: cloud_profiles(RUNS / k, columns[k], times, start, site['lon_deg'], day_s)
                                 for k in (name, *others)},
                 surface_energy=dict({k: surface_energy(RUNS / k, columns[k], times, start, site['lon_deg'], day_s)
-                                     for k in (name, *others)}, gcm=gcm_surface_energy(site['lat_deg'], site['lon_deg'])),
+                                     for k in (name, *others)},
+                                    gcm=gcm_surface_energy(site['lat_deg'], site['lon_deg'], run=gcm_run, years=gcm_years,
+                                                           surface=site.get('surface', 'land'))),
                 microphysics={k: microphysics_budget(RUNS / k, from_day) for k in (name, *([reference] if reference else []))
                               if (RUNS / k / 'cm1out_stats.dat').exists()},
                 **({'reference': reference} if reference else {}))

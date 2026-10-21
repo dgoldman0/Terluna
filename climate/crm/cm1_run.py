@@ -880,6 +880,7 @@ def design_air(run=None):
 # fourth power, and the ground's taken from the infrared reaching it. Shells above the model's top are left out with
 # the air they stand for.
 TWILIGHT_TABLE = 'terluna_twilight.txt'
+TWILIGHT_PRODUCT = 'twilight.json'                 # the twilight ledger a case's table comes from, unless it names one
 TWILIGHT_MODES = ('curved', 'full')          # as climate/gcm/exoplasim_run.py: 'full' adds the shells' widening
 TWILIGHT_PATCH = ('radiation_driver.F', "Terluna: the curved air's twilight", [
     ('  public :: radiation_driver\n',
@@ -1171,6 +1172,192 @@ def apply_rain_limits(case: Path, cfg: dict, gravity: float):
     path = case / 'namelist.template'
     path.write_text(with_rain_limits(path.read_text(), settings))
     return dict(kind=cfg['rain_limits'], namelist=settings, limits=rain_limits(gravity, settings), product=product)
+
+
+# The rain law (plan item 11, the author's go-ahead of 2026-10-21). Morrison's rain falls by one power law, which the
+# lunar builds slow at every size by one factor; the single-drop solver slows each size by its own, and no power law
+# follows it through both regimes. The scheme reads its law only through three moments of rain's exponential spectrum,
+# so the patch takes them from a table of the solver's (atmosphere/rain/fall_law.py), with rain's self-collection at
+# its lunar rate beside it. It applies after the rain-limits patch, whose limits it needs, and keeps CM1's own law and
+# rate at its default.
+RAIN_LAW_MARKER = 'Terluna rain law'
+RAIN_LAW_TABLE = 'terluna_rain_law.txt'
+RAIN_LAW_HEADER = """! --------------------------------------------------------------------------------------------------------------
+! Terluna rain-law patch: Terluna (github.com/dgoldman0/Terluna), climate/crm/cm1_run.py RAIN_LAW_PATCHES, 2026-10-21.
+! The derivation is atmosphere/rain/fall_law.py, its product atmosphere/rain/results/rain_fall_law.json.
+! What it changes. Morrison's rain falls at V = AR (RHOSU/RHO)**0.54 D**BR, which the scheme reads only through three
+!   moments of rain's exponential spectrum of slope lambda: the mass-weighted and number-weighted mean fall speeds UMR
+!   and UNR (its sedimentation, and its collection of snow and graupel) and the ventilation integral in its
+!   evaporation EPSR. With rain_fall_law = 1 (namelist param3) all three come from the table terluna_rain_law.txt in
+!   the run directory: on a uniform grid in ln(lambda), the natural logs of the two speeds (m/s) and of the integral
+!   of D**1.5 V**0.5 exp(-lambda D) dD (m3 s**-0.5) in the reference air, interpolated linearly in ln(lambda) and held
+!   at the table's ends; the density factor multiplies the speeds and its square root the integral. Rain's
+!   self-collection rate, 5.78 m3/kg/s (Seifert and Beheng 2001), becomes rain_selfcoll where that is positive.
+! Default. rain_fall_law = 0 and rain_selfcoll = 0 leave the scheme as it is: the build's power law and 5.78. The cap
+!   on rain's mean fall speeds (VCAPR) stays, and rain's collection of cloud ice keeps the power law.
+! Source. The table integrates a single-drop solver's terminal speeds (Loftus and Wordsworth 2021) in the Moon's air
+!   over Morrison's spectra; the self-collection rate carries Earth's by the ratio of geometric collision kernels.
+! --------------------------------------------------------------------------------------------------------------
+"""
+RAIN_LAW_FUNCTION = """!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      REAL FUNCTION TERLUNA_RAIN(LAM,M)
+      ! Terluna rain law: rain's mass-weighted (M = 1) or number-weighted (M = 2) mean fall speed (m/s), or the
+      ! ventilation integral of its evaporation (M = 3, m3 s**-0.5), in the reference air, for an exponential
+      ! spectrum of slope LAM (1/m): the table of terluna_rain_law.txt, linear in ln(LAM), held at its ends
+      IMPLICIT NONE
+      REAL, INTENT(IN) :: LAM
+      INTEGER, INTENT(IN) :: M
+      REAL :: X,W
+      INTEGER :: I
+      X = (LOG(LAM)-TERLUNA_RX0)/TERLUNA_RDX
+      I = MIN(MAX(INT(X),0),TERLUNA_RN-2)
+      W = MIN(MAX(X-REAL(I),0.),1.)
+      TERLUNA_RAIN = EXP((1.-W)*TERLUNA_RT(M,I+1)+W*TERLUNA_RT(M,I+2))
+      END FUNCTION TERLUNA_RAIN
+
+"""
+RAIN_LAW_BLOCK = """         ! Terluna rain law (the header of this file): CM1's own unless rain_fall_law = 1 or rain_selfcoll > 0
+         KSC_r = 5.78
+         IF (rain_selfcoll.GT.0.) KSC_r = rain_selfcoll
+         IF (rain_fall_law.EQ.1 .AND. .NOT. TERLUNA_RLAW) THEN
+           open(unit=95,file='terluna_rain_law.txt',status='old',action='read')
+           read(95,*) TERLUNA_RN,TERLUNA_RX0,TERLUNA_RDX
+           allocate( TERLUNA_RT(3,TERLUNA_RN) )
+           do i=1,TERLUNA_RN
+             read(95,*) TERLUNA_RT(1,i),TERLUNA_RT(2,i),TERLUNA_RT(3,i)
+           enddo
+           close(unit=95)
+           TERLUNA_RLAW = .TRUE.
+         ELSE IF (rain_fall_law.NE.0 .AND. rain_fall_law.NE.1) THEN
+           STOP 'Terluna rain law: rain_fall_law must be 0 or 1'
+         END IF
+         if(dowr) write(outfile,*) '  Terluna rain law: rain_fall_law',rain_fall_law,' table rows',TERLUNA_RN,  &
+                                   ' self-collection',KSC_r
+         IF (TERLUNA_RLAW .and. dowr) write(outfile,*) '  Terluna rain law at lambda 1000/m: UMR',TERLUNA_RAIN(1000.,1), &
+                                   ' UNR',TERLUNA_RAIN(1000.,2),' ventilation',TERLUNA_RAIN(1000.,3)
+"""
+RAIN_LAW_EPSR = ("        EPSR = 2.*PI*N0RR(K)*RHO(K)*DV(K)*                           &\n"
+                 "                   (F1R/(LAMR(K)*LAMR(K))+                       &\n"
+                 "                    F2R*(ARN(K)*RHO(K)/MU(K))**0.5*                      &\n"
+                 "                    SC(K)**(1./3.)*CONS9/                   &\n"
+                 "                (LAMR(K)**CONS34))\n")
+RAIN_LAW_SEDIMENT = '      UNR = ARN(K)*CONS6/DLAMR**BR\n      UMR = ARN(K)*CONS4/(DLAMR**BR)\n'
+RAIN_LAW_PATCHES = [
+    ('input.F', RAIN_LAW_MARKER, [
+        ("      real :: brkup_rhor,brkup_rhoexp    ! Terluna rain limits: surface air density over Earth's, its exponent\n",
+         "      real :: brkup_rhor,brkup_rhoexp    ! Terluna rain limits: surface air density over Earth's, its exponent\n"
+         '      integer :: rain_fall_law           ! Terluna rain law: 0 keeps the power law, 1 reads terluna_rain_law.txt\n'
+         "      real :: rain_selfcoll              ! Terluna rain law: rain's self-collection rate (m3/kg/s), 5.78 when 0\n",
+         1),
+        ('brkup_rhor,brkup_rhoexp,ndcnst,nt_c, &', 'brkup_rhor,brkup_rhoexp,rain_fall_law,rain_selfcoll,ndcnst,nt_c, &', 1)]),
+    ('cm1.F', RAIN_LAW_MARKER, [
+        ('      brkup_rhoexp = 0.0\n',
+         '      brkup_rhoexp = 0.0\n'
+         '      rain_fall_law = 0    ! Terluna rain law: the power law unless the namelist sets 1\n'
+         '      rain_selfcoll = 0.0\n', 1)]),
+    ('param.F', RAIN_LAW_MARKER, [
+        ('      call MPI_BCAST(brkup_rhoexp,1,MPI_REAL,0,MPI_COMM_WORLD,ierr)\n',
+         '      call MPI_BCAST(brkup_rhoexp,1,MPI_REAL,0,MPI_COMM_WORLD,ierr)\n'
+         '      call MPI_BCAST(rain_fall_law,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)   ! Terluna rain law\n'
+         '      call MPI_BCAST(rain_selfcoll,1,MPI_REAL,0,MPI_COMM_WORLD,ierr)\n', 1),
+        ("      if(dowr) write(outfile,*) 'brkup_rhoexp =',brkup_rhoexp\n",
+         "      if(dowr) write(outfile,*) 'brkup_rhoexp =',brkup_rhoexp\n"
+         "      if(dowr) write(outfile,*) 'rain_fall_law =',rain_fall_law   ! Terluna rain law\n"
+         "      if(dowr) write(outfile,*) 'rain_selfcoll =',rain_selfcoll\n", 1)]),
+    ('morrison.F', RAIN_LAW_MARKER, [
+        ('', RAIN_LAW_HEADER, 1),
+        ("     REAL, PRIVATE ::      KB_r    ! Terluna rain limits: the breakup law's rate (1/m), CM1's 2300 by default\n",
+         "     REAL, PRIVATE ::      KB_r    ! Terluna rain limits: the breakup law's rate (1/m), CM1's 2300 by default\n"
+         "     REAL, PRIVATE ::      KSC_r   ! Terluna rain law: rain's self-collection rate (m3/kg/s), CM1's 5.78 by default\n"
+         "     LOGICAL, PRIVATE ::   TERLUNA_RLAW = .FALSE.   ! Terluna rain law: rain's moments from terluna_rain_law.txt\n"
+         '     INTEGER, PRIVATE ::   TERLUNA_RN = 0\n'
+         '     REAL, PRIVATE ::      TERLUNA_RX0,TERLUNA_RDX\n'
+         '     REAL, ALLOCATABLE, PRIVATE :: TERLUNA_RT(:,:)\n', 1),
+        ('SUBROUTINE GRAUPEL_INIT(cm1hail,cm1inum,cm1ndcnst,cm1db)\n',
+         RAIN_LAW_FUNCTION + 'SUBROUTINE GRAUPEL_INIT(cm1hail,cm1inum,cm1ndcnst,cm1db)\n'
+         '      use input, only : rain_fall_law,rain_selfcoll   ! Terluna rain law\n', 1),
+        ("                                   ' cap on 1/lambda',1./LAMMINR,' VCAPR',VCAPR\n",
+         "                                   ' cap on 1/lambda',1./LAMMINR,' VCAPR',VCAPR\n" + RAIN_LAW_BLOCK, 1),
+        ('            UMR = ARN(K)*CONS4/(LAMR(K)**BR)\n',
+         '            IF (TERLUNA_RLAW) THEN   ! Terluna rain law: the table\'s moments\n'
+         '            UMR = ARN(K)/AR*TERLUNA_RAIN(LAMR(K),1)\n            ELSE\n'
+         '            UMR = ARN(K)*CONS4/(LAMR(K)**BR)\n            END IF\n', 4),
+        ('            UNR = ARN(K)*CONS6/LAMR(K)**BR\n',
+         '            IF (TERLUNA_RLAW) THEN   ! Terluna rain law: the table\'s moments\n'
+         '            UNR = ARN(K)/AR*TERLUNA_RAIN(LAMR(K),2)\n            ELSE\n'
+         '            UNR = ARN(K)*CONS6/LAMR(K)**BR\n            END IF\n', 4),
+        (RAIN_LAW_SEDIMENT,
+         '      IF (TERLUNA_RLAW) THEN   ! Terluna rain law: the table\'s moments\n'
+         '      UNR = ARN(K)/AR*TERLUNA_RAIN(DLAMR,2)\n      UMR = ARN(K)/AR*TERLUNA_RAIN(DLAMR,1)\n      ELSE\n'
+         + RAIN_LAW_SEDIMENT + '      END IF\n', 1),
+        (RAIN_LAW_EPSR,
+         "        IF (TERLUNA_RLAW) THEN   ! Terluna rain law: the table's ventilation integral\n"
+         "        EPSR = 2.*PI*N0RR(K)*RHO(K)*DV(K)*                           &\n"
+         "                   (F1R/(LAMR(K)*LAMR(K))+                       &\n"
+         "                    F2R*(ARN(K)/AR*RHO(K)/MU(K))**0.5*                      &\n"
+         "                    SC(K)**(1./3.)*TERLUNA_RAIN(LAMR(K),3))\n"
+         "        ELSE\n" + RAIN_LAW_EPSR + "        END IF\n", 2),
+        ('nragg(k) = -5.78*dum*qr3d(k)*nr3d(k)*rho(k)',
+         'nragg(k) = -KSC_r*dum*qr3d(k)*nr3d(k)*rho(k)   ! Terluna rain law: the self-collection rate, 5.78 by default', 2)]),
+]
+BUILDS['moon_omp_rain_law'] = BUILDS['moon_omp']
+BUILD_PATCHES['moon_omp_rain_law'] = RAIN_LIMITS_PATCHES + RAIN_LAW_PATCHES + [TWILIGHT_PATCH]
+RAIN_LAW_PRODUCT = 'atmosphere/rain/results/rain_fall_law.json'
+RAIN_LAW_SCHEMA = 'terluna.atmosphere.rain-fall-law/1'
+RAIN_LAW_KEYS = ('rain_fall_law', 'rain_selfcoll')
+
+
+def rain_law_settings(kind: str) -> tuple:
+    """The &param3 entries of a case's rain law, the text of the table it reads and the product they come from:
+    'earth' writes CM1's own out (the power law and 5.78, no table), 'lunar' the fall-law product's."""
+    earth = dict(rain_fall_law=0, rain_selfcoll=0.0)
+    if kind == 'earth':
+        return earth, None, None
+    if kind != 'lunar':
+        raise ValueError(f'rain_law is earth or lunar, not {kind!r}')
+    raw = (HERE.parents[1] / RAIN_LAW_PRODUCT).read_bytes()
+    product = json.loads(raw)
+    if product.get('schema') != RAIN_LAW_SCHEMA:
+        raise ValueError(f'{RAIN_LAW_PRODUCT}: expected {RAIN_LAW_SCHEMA}, found {product.get("schema")}')
+    t = product['table']
+    rows = zip(t['ln_mass_weighted'], t['ln_number_weighted'], t['ln_ventilation'])
+    text = (f"{t['points']} {t['ln_lambda_first']:.9e} {t['ln_lambda_step']:.9e}\n"
+            + ''.join(f'{a:.9e} {b:.9e} {c:.9e}\n' for a, b, c in rows))
+    settings = dict(rain_fall_law=int(product['namelist']['rain_fall_law']),
+                    rain_selfcoll=float(product['namelist']['rain_selfcoll']))
+    return settings, text, {RAIN_LAW_PRODUCT: hashlib.sha256(raw).hexdigest()}
+
+
+def with_rain_law(text: str, settings: dict) -> str:
+    """A namelist with the rain-law entries set in &param3, added after brkup_rhoexp where the namelist lacks them."""
+    import re
+    start = text.index('&param3\n')
+    end = text.index('\n /', start)
+    block = text[start:end]
+    for key in reversed(RAIN_LAW_KEYS):
+        if not re.search(rf'^\s*{key}\s*=', block, re.M):
+            line = re.search(r'^(\s*)brkup_rhoexp\s*=.*$', block, re.M)
+            block = block[:line.end()] + f'\n{line.group(1)}{key} = 0,' + block[line.end():]
+    text = text[:start] + block + text[end:]
+    for key, value in settings.items():
+        text = set_namelist(text, 'param3', key, value)
+    return text
+
+
+def apply_rain_law(case: Path, cfg: dict):
+    """Write a case's rain law into its namelist template and its table beside it; returns the record for case.json,
+    or None for a case that does not set it. The lunar law needs the lunar rain limits, whose cap and breakup it
+    assumes."""
+    if not cfg.get('rain_law'):
+        return None
+    if cfg['rain_law'] == 'lunar' and cfg.get('rain_limits') != 'lunar':
+        raise ValueError('the lunar rain law needs the lunar rain limits')
+    settings, table, product = rain_law_settings(cfg['rain_law'])
+    path = case / 'namelist.template'
+    path.write_text(with_rain_law(path.read_text(), settings))
+    if table:
+        (case / RAIN_LAW_TABLE).write_text(table)
+    return dict(kind=cfg['rain_law'], namelist=settings, table=RAIN_LAW_TABLE if table else None, product=product)
 
 # Electrified storms (stage 2 of the atmospheric-electricity study): WRF-ELEC's NSSL microphysics with the field,
 # lightning and leakage of climate/crm/cm1_elec.py, at the Moon's gravity and at Earth's for the benchmark storm.
@@ -1501,6 +1688,30 @@ for _tag in ('rain_control', 'lunar_rain'):
         CASES[f'box_0e_small_{_tag}'], inputs_from=None, restart_from=dict(case='box_0e_small', day=29.5), days=59.0,
         purpose=CASES[f'box_0e_small_{_tag}']['purpose'] + "; the second lunar day again from box_0e_small's day-29.5 "
                 'restart')
+# The pair of boxes on the design climate (the author's go-ahead of 2026-10-21): CM1's next runs, with the lunar rain
+# limits and the rain law, where the GCM's rain evaporation is put to the test. One stands over the Near-side Sea at
+# 5 S, 45 W in the southern Procellarum region, open water 120 km from the nearest land; its twin over the land at 0 E,
+# where the small box stood. No ring passes either on the design climate, so each takes its forcing from the GCM's
+# column at its site (gcm_site.py): the GCM's mean air there as the reference held from 8 km, its mean vertical wind,
+# and its own budget of heat and vapour by local time, from the cold-cloud run's branch that writes PlaSim's
+# moistening by process. The sea is held at the GCM's temperature there; the land is the placeholder land at the GCM's
+# wetness, standing at the GCM's ground there, 0.7-1.3 km up, with heights above it. Both have the small box's size
+# and spacing, start at local sunrise and run two lunar days, the second analysed, with the curved air's twilight from
+# the design climate's ledger, and write the heat and vapour budgets for the share of falling rain that evaporates.
+GCM_SITE_RUN, GCM_SITE_YEARS = 'A28R_301k_cold_moist', (0, 5)
+SITE_BOX = dict(CASES['ring'], kind='box', nx=32, ny=32, build='moon_omp_rain_law', gcm=(GCM_SITE_RUN, GCM_SITE_YEARS),
+                large_scale_w='gcm', day_night='gcm', land_moisture='gcm', land=None, surface_output=True,
+                rain_limits='lunar', rain_law='lunar', twilight='full', twilight_product='twilight_301k.json',
+                namelist=RAIN_TEST_OUTPUT)
+for _name, _site, _where in (('box_near_side_sea', dict(lat_deg=-5.0, lon_deg=-45.0, surface='sea'),
+                              'over the Near-side Sea at 5 S, 45 W'),
+                             ('box_0e_design', dict(lat_deg=0.0, lon_deg=0.0, surface='land'), 'over the land at 0 N, 0 E')):
+    CASES[_name] = dict(
+        SITE_BOX, site=dict(gcm=True, half_lat_deg=5.6, half_lon_deg=8.5, **_site),
+        start_hour_angle_deg=-90.0 - _site['lon_deg'],
+        purpose=f'a 3-D box 192 km square {_where} on the design climate (the cold-cloud run at 298.5 K), forced by the '
+                "GCM's column there: its mean air held from 8 km, its mean vertical wind and its own heating and "
+                'moistening by local time; the lunar rain limits and rain law, the twilight, two lunar days from sunrise')
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -2046,9 +2257,11 @@ def box_site(cfg: dict, zw, nx_ring: int, run=GCM_RUN, years=GCM_YEARS) -> dict:
     """What a box takes from the ring it extends: the ring's GCM reference (upper air and wind along the ring), and
     over the ring's columns within the site's radius of it, the mean land wetness and ground temperature of the land
     columns and the mean GCM vertical wind on the w levels zw. A ring along a circle of latitude gives its row's
-    reference (parallel_box_site)."""
+    reference (parallel_box_site), and a box no ring passes takes everything from the GCM (gcm_box_site)."""
     import numpy as np
     site = cfg['site']
+    if site.get('gcm'):
+        return gcm_box_site(cfg, zw, run, years)
     ring = CASES[site['ring']]
     if ring.get('kind') != 'tilted':
         return parallel_box_site(cfg, zw, nx_ring, ring, run, years)
@@ -2072,6 +2285,31 @@ def box_site(cfg: dict, zw, nx_ring: int, run=GCM_RUN, years=GCM_YEARS) -> dict:
                 wetness=float(ref['wetness'][cols][land].mean()), ground_k=float(ref['land_k'][cols][land].mean()),
                 w_m_s=[float(v) for v in np.asarray(ref['w_columns'])[cols].mean(axis=0)],
                 heading_deg=float(heading % 360.0), lapse_k_m=float(np.asarray(ref['lapse_k_m'])[cols].mean()))
+
+
+def gcm_box_site(cfg: dict, zw, run, years) -> dict:
+    """box_site for a box no ring passes: from the GCM's column at the site (gcm_site.py), its mean air as the
+    reference, its surface, its mean vertical wind on the w levels zw and the table of its own heating and moistening
+    by local time; the box's x axis runs east, and it stands at the site's own surface, its heights above it."""
+    from climate.crm import gcm_site
+    site = cfg['site']
+    f = gcm_site.site_forcing(run, years, {k: site[k] for k in ('lat_deg', 'lon_deg', 'half_lat_deg', 'half_lon_deg',
+                                                                 'surface')})
+    cm1 = gcm_site.to_cm1(f, zw)
+    s, prof = f['surface'], f['profile']
+    ref = dict(profile={k: prof[k] for k in ('z_m', 'theta_k', 'qv_kg_kg', 'u_m_s', 'v_m_s')},
+               sea_surface_k=s['ground_k'], land_ground_k=s['ground_k'], land_wetness=s['wetness'],
+               air_over_sea_k=s['air_2m_k'], surface_pa_sea=s['pressure_pa'], lapse_k_m=0.0,
+               rows_deg=sorted({c[0] for c in f['cells']}), cells=f['cells'], run=run, years=list(years))
+    return dict(ref=ref, columns=f['cells'], land_share=0.0 if site['surface'] == 'sea' else 1.0, surface_product=None,
+                wetness=s['wetness'], ground_k=s['ground_k'], sea_k=s['ground_k'], w_m_s=cm1['w_m_s'],
+                heading_deg=90.0, lapse_k_m=0.0, day_night=cm1['day_night'], forcing=f)
+
+
+def gcm_site_record(f: dict) -> dict:
+    """What case.json keeps of a box's GCM site: its cells and outputs, and the budgets behind its table."""
+    return {k: f[k] for k in ('run', 'years', 'site', 'cells', 'cell_heights_m', 'outputs', 'phases', 'harmonics',
+                              'window_deg', 'surface', 'budget')}
 
 
 def parallel_box_site(cfg: dict, zw, nx_ring: int, ring: dict, run=GCM_RUN, years=GCM_YEARS) -> dict:
@@ -2569,14 +2807,14 @@ def setup_sample(name: str, cfg: dict) -> Path:
     return case
 
 
-def write_twilight(path: Path, mode: str) -> dict:
+def write_twilight(path: Path, mode: str, product: str = None) -> dict:
     """terluna_twilight.txt from the twilight product's shells: the elevation and shell counts, the shells' height
     edges (m), then for each solar elevation (degrees) what the curved air adds to the ground and to each shell, per
     unit sunlight at the beam; then the extra infrared each shell and the ground lose to space (W/m2) and the
     temperatures it is given at. 'full' adds the shells' widening to both; with the product's identity."""
     if mode not in TWILIGHT_MODES:
         raise ValueError(f'twilight must be one of {TWILIGHT_MODES}')
-    product = HERE.parent / 'results' / 'gcm' / 'twilight.json'
+    product = HERE.parent / 'results' / 'gcm' / (product or TWILIGHT_PRODUCT)
     data = json.loads(product.read_text())
     term, cone, lw = data['cm1_term'], data['cm1_term_cone'], data['longwave']
     full = mode == 'full'
@@ -2651,7 +2889,7 @@ def setup(name: str) -> Path:
         nx, dx = cfg['nx'], cfg['dx_moon_m'] * s
         length = nx * dx
     elif box:                                                             # the spacing of the ring it extends
-        host = CASES[cfg['site']['ring']]                              # a tilted ring's spacing is the equator's
+        host = {} if cfg['site'].get('gcm') else CASES[cfg['site']['ring']]   # a tilted ring's, or none: the equator's
         nx_ring, dx, _ = ring_grid(0.0 if host.get('kind') == 'tilted' else host.get('latitude_deg', 0.0),
                                    cfg['dx_target_m'], cfg['ranks'])
         nx, length = cfg['nx'], cfg['nx'] * dx
@@ -2669,6 +2907,7 @@ def setup(name: str) -> Path:
     th = np.array(prof['theta_k'][::-1])
     qv = np.array(prof['qv_kg_kg'][::-1])
     uu = np.array(prof['u_m_s'][::-1]) * (0.0 if pair else 1.0)
+    vv = np.array(prof.get('v_m_s', [0.0] * len(prof['u_m_s']))[::-1]) * (0.0 if pair else 1.0)
     top_slope = (th[-1] - th[-2]) / (zg[-1] - zg[-2])
     theta_at = lambda z: np.where(z <= zg[-1], np.interp(z, zg, th), th[-1] + top_slope * (z - zg[-1]))
     qv_below = lambda z: np.exp(np.interp(z, zg, np.log(np.maximum(qv, 1e-9))))
@@ -2677,6 +2916,7 @@ def setup(name: str) -> Path:
     # ice that formed there at once stayed at 1.1 g/m2 for the whole run (2026-10-17).
     qv_at = held_share_above(zg, theta_at, qv_below, ref['surface_pa_sea'], gravity, zw[-1])
     u_at = lambda z: np.interp(z, zg, uu)
+    v_at = lambda z: np.interp(z, zg, vv)
     kappa = 287.04 / 1005.7
     theta_sfc = ref['air_over_sea_k'] * (1e5 / ref['surface_pa_sea']) ** kappa
     lines = [f"{ref['surface_pa_sea'] / 100:12.4f} {theta_sfc:12.4f} {qv[0] * 1000:12.5f}"]
@@ -2690,14 +2930,16 @@ def setup(name: str) -> Path:
         lines = [f"{float(start['surface_pa']) / 100:12.4f} {theta_2m:12.4f} {float(start['qv_2m_kg_kg']) * 1000:12.5f}"]
         initial = dict(source='the ring over its seas', case=start['case'], span_days=start['span_days'])
     # the sounding ends at the model top, above the highest scalar level, so rounding cannot leave it short
-    lines += [f'{z:12.3f} {float(start_theta(z)):12.4f} {float(start_qv(z)) * 1000:12.5f} {float(u_at(z)):8.3f} {0.0:8.3f}'
+    lines += [f'{z:12.3f} {float(start_theta(z)):12.4f} {float(start_qv(z)) * 1000:12.5f} {float(u_at(z)):8.3f} '
+              f'{float(v_at(z)):8.3f}'
               for z in [*zh, zw[-1]]]
     (case / 'input_sounding').write_text('\n'.join(lines) + '\n')
     (case / 'input_grid_z').write_text(''.join(f'{z:.3f}\n' for z in zw))
     nudge = [' *  Header:   lsnudge_time1 (s)   lsnudge_time2 (s)', '                     0.0                1.0e30 ',
              ' *  Profile.   Note: values will be ignored if nudging for that variable is off.',
              ' *    z (m)   theta (K)    qv (g/kg)  u (m/s, grnd-reltv) v (m/s, grnd-reltv)']
-    nudge += [f'  {z:12.4f} {float(theta_at(z)):12.4f} {float(qv_at(z)) * 1000:12.6f} {float(u_at(z)):10.4f} {0.0:10.4f}'
+    nudge += [f'  {z:12.4f} {float(theta_at(z)):12.4f} {float(qv_at(z)) * 1000:12.6f} {float(u_at(z)):10.4f} '
+              f'{float(v_at(z)):10.4f}'
               for z in [0.0, *zh, zw[-1]]]
     (case / 'lsnudge_0001.dat').write_text('\n'.join(nudge) + '\n')
     if pair:
@@ -2705,6 +2947,8 @@ def setup(name: str) -> Path:
     elif box:
         segments = [(-1e9, 1e9, 1, wetness_class(site['wetness']), site['ground_k'], site['ground_k'])]
         water_share, surface_sha = 0.0, site['surface_product']
+        if cfg['site'].get('surface') == 'sea':                              # all of it sea, held at the GCM's
+            segments, water_share = [(-1e9, 1e9, 2, 16, site['sea_k'], site['sea_k'])], 1.0
         if cfg.get('terrain'):                    # the ground at its heights: all of it land, or with the atlas's sea
             t = cfg['terrain']
             blat, blon = box_columns(cfg['site']['lat_deg'], cfg['site']['lon_deg'], site['heading_deg'], nx, cfg['ny'], dx)
@@ -2751,7 +2995,7 @@ def setup(name: str) -> Path:
     (case / 'LANDUSE.TBL').write_text(''.join(table))
     vertical_wind = None
     if box and cfg.get('large_scale_w') == 'gcm':
-        vertical_wind = dict(z_m=[float(z) for z in zw], w_m_s=site['w_m_s'], ring=cfg['site']['ring'],
+        vertical_wind = dict(z_m=[float(z) for z in zw], w_m_s=site['w_m_s'], ring=cfg['site'].get('ring'),
                              ring_columns=site['columns'], rows_deg=ref['rows_deg'])
         write_vertical_wind(case / 'terluna_wls.txt', vertical_wind, zw[-1])
     elif tilted and cfg.get('large_scale_w') == 'gcm':
@@ -2771,7 +3015,18 @@ def setup(name: str) -> Path:
             theta_k_day=float(forcing['theta_k_s'][0, low].mean() * 86400.0),
             qv_g_kg_day=float(forcing['qv_kg_kg_s'][0, low].mean() * 8.64e7)))
     day_night = None
-    if box and cfg.get('day_night'):                                      # the rings' day-night circulation there
+    if box and cfg.get('day_night') == 'gcm':                            # the GCM's own budget at the site
+        forcing = site['day_night']
+        write_day_night(case / 'terluna_lsadv.txt', forcing)
+        low = forcing['z_m'] < 3000.0
+        spread = lambda a, scale: dict(mean=float(a[:, low].mean() * scale), min=float(a[:, low].mean(axis=1).min() * scale),
+                                       max=float(a[:, low].mean(axis=1).max() * scale))
+        f = site['forcing']
+        day_night = dict(source="the GCM's own budget at the site (gcm_site.py)", run=f['run'], years=f['years'],
+                         harmonics=f['harmonics'], top_m=f['day_night']['top_m'],
+                         lowest_3_km=dict(theta_k_day=spread(forcing['theta_k_s'], 86400.0),
+                                          qv_g_kg_day=spread(forcing['qv_kg_kg_s'], 8.64e7)))
+    elif box and cfg.get('day_night'):                                    # the rings' day-night circulation there
         from climate.crm.ring_crossings import day_night_advection
         dn = cfg['day_night']
         forcing = day_night_advection(dn['rings'], cfg['site']['lat_deg'], cfg['site']['lon_deg'], dn['from_day'],
@@ -2795,13 +3050,18 @@ def setup(name: str) -> Path:
     for section, entries in settings.items():
         for key, value in entries.items():
             text = set_namelist(text, section, key, value)
+    for section, entries in (cfg.get('namelist') or {}).items():          # a case's own output switches
+        for key, value in entries.items():
+            text = set_namelist(text, section, key, value)
     electricity = None
     if cfg.get('elec') is not None:
         text, electricity = cm1_elec.run_files(case, cfg['elec'], text)
         electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=electricity)
     (case / 'namelist.template').write_text(text)
     rain = apply_rain_limits(case, cfg, gravity)
-    twilight = write_twilight(case / TWILIGHT_TABLE, cfg['twilight']) if cfg.get('twilight') else None
+    rain_law = apply_rain_law(case, cfg)
+    twilight = (write_twilight(case / TWILIGHT_TABLE, cfg['twilight'], cfg.get('twilight_product', TWILIGHT_PRODUCT))
+                if cfg.get('twilight') else None)
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     if tilted or box:                                                     # per-column arrays as rounded lists
         ref = {k: ([round(float(x), 6 if k == 'lapse_k_m' else 4) for x in v] if isinstance(v, np.ndarray) else v)
@@ -2822,12 +3082,14 @@ def setup(name: str) -> Path:
                   terrain=terrain if cfg.get('terrain') else None,
                   electricity=electricity,
                   twilight=twilight,
-                  rain_limits=rain,
+                  rain_limits=rain, rain_law=rain_law,
+                  gcm_site=gcm_site_record(site['forcing']) if box and site.get('forcing') else None,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
                                                          'terluna_wls.txt', 'terluna_wls2d.txt', 'terluna_lsadv.txt',
-                                                         'perts.dat', 'terluna_surface2d.txt', TWILIGHT_TABLE)
+                                                         'perts.dat', 'terluna_surface2d.txt', TWILIGHT_TABLE,
+                                                         RAIN_LAW_TABLE)
                           if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case

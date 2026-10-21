@@ -352,6 +352,25 @@ class RunnerTests(unittest.TestCase):
         src = Path(er.__file__).read_text()
         self.assertIn("'rainmod_namelist', 'GAMMA'", src)
 
+    def test_the_moisture_diagnostics_come_with_the_heating_and_name_plasims_slots(self):
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIs(inspect.signature(f).parameters['moisture'].default, False)
+        # PlaSim's 3-D gridpoint diagnostics write slot j as code 20 + j (outdiag.f90): the heating's slots 1-9, and
+        # the moistening's 11 (the physics), 12 (the negative-humidity fix), 20 and 21 (the two stages of the spectral
+        # step: the physics' tendency as it applies it, then the horizontal diffusion).
+        self.assertEqual(sorted(er.HEATING), list(range(21, 30)))
+        self.assertEqual({c - 20 for c in er.MOISTENING}, {11, 12, 20, 21})
+        names = [name for name, _ in er.MOISTENING.values()]
+        self.assertEqual(len(set(names)), 4)
+        self.assertFalse(set(names) & {name for name, _ in er.HEATING.values()})
+        src = Path(er.__file__).read_text()
+        self.assertIn("the moisture diagnostics come with the heating diagnostics", src)
+        self.assertIn("[name for name, _ in MOISTENING.values()] + ['wap']", src)
+        source = er.TWILIGHT_PACKAGE / 'exoplasim' / 'plasim' / 'src' / 'outdiag.f90'
+        if source.exists():
+            self.assertIn('jcode=20+jdiag', source.read_text().replace(' ', ''))
+
     def test_the_10_m_wind_follows_geleyns_profile(self):
         # The surface layer's lines, compiled on a stand-in: neutral air gives the log profile, stable air brings less
         # of the wind down and unstable air more, as the profile through the lowest layer gives them.

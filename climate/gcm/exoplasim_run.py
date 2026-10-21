@@ -206,6 +206,17 @@ HEATING = {21: ('dt_diab', 'temperature_tendency_summed_over_the_physics'),
            27: ('dt_lsp', 'temperature_tendency_due_to_large_scale_condensation'),
            28: ('dt_conv', 'temperature_tendency_due_to_convection'),
            29: ('dt_dca', 'temperature_tendency_due_to_dry_convective_adjustment')}
+# With the same diagnostics PlaSim also writes the water vapour each layer gains, as a water flux (m/s: the specific
+# humidity tendency times the layer's mass over the density of water): code 31 the sum over the physics, code 32 the
+# fix that fills negative humidity (miscmod), and codes 40 and 41 the dynamics' own tendency in the two steps of its
+# spectral time step (spectrald, mkdqtgp): the transport first, then the horizontal diffusion, which sums to nothing
+# over the globe. With them the runner writes omega (wap), which the postprocessor derives from the spectral fields. A
+# column model forced by the GCM takes these as the GCM's own budget, which closes by construction
+# (climate/crm/gcm_site.py).
+MOISTENING = {31: ('dq_diab', 'water_vapour_gained_in_the_layer_summed_over_the_physics'),
+              32: ('dq_fill', 'water_vapour_gained_in_the_layer_by_the_negative_humidity_fix'),
+              40: ('dq_dyn', 'water_vapour_gained_in_the_layer_by_the_dynamics_transport'),
+              41: ('dq_dyn_late', 'water_vapour_gained_in_the_layer_by_the_dynamics_horizontal_diffusion')}
 
 
 def output_variables(model: dict) -> list:
@@ -1016,7 +1027,7 @@ def cold_cloud_factors(path) -> dict:
 def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
                   heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
-                  cold_cloud=None, rain_evaporation=None):
+                  cold_cloud=None, rain_evaporation=None, moisture=False):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
@@ -1099,6 +1110,11 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if heating:
         cfg['heating_diagnostics'] = True
         cfg['output'] = cfg['output'] + [name for name, _ in HEATING.values()]
+    if moisture:
+        if not heating:
+            raise ValueError('the moisture diagnostics come with the heating diagnostics, which need --heating-diagnostics')
+        cfg['moisture_diagnostics'] = True
+        cfg['output'] = cfg['output'] + [name for name, _ in MOISTENING.values()] + ['wap']
     if twilight is not None:
         ledger = TWILIGHT_LEDGERS[twilight_ledger]
         lunar = json.loads(SLANT_PRODUCT.read_text())['magnification']
@@ -1352,6 +1368,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         for code, (name, long_name) in HEATING.items():
             pyburn.ilibrary[str(code)] = [name, long_name, 'K s-1']
             pyburn.slibrary[name] = [code, long_name, 'K s-1']
+    if cfg.get('moisture_diagnostics'):
+        for code, (name, long_name) in MOISTENING.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, 'm s-1']
+            pyburn.slibrary[name] = [code, long_name, 'm s-1']
     model.cfgpostprocessor(ftype='regular', extension='.nc', variables=cfg['output'],
                            times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
@@ -1520,11 +1540,12 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         heating: bool = False, longwave_correction: bool = False, ice_optics: bool = False,
         twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k',
         wind10: bool = False, ice_weights: str = 'shield', cold_cloud: str | None = None,
-        rain_evaporation: float | None = None) -> int:
+        rain_evaporation: float | None = None, moisture: bool = False) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
-                        ice_weights=ice_weights, cold_cloud=cold_cloud, rain_evaporation=rain_evaporation)
+                        ice_weights=ice_weights, cold_cloud=cold_cloud, rain_evaporation=rain_evaporation,
+                        moisture=moisture)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -1663,6 +1684,10 @@ def main(argv=None) -> int:
     parser.add_argument('--heating-diagnostics', action='store_true',
                         help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
                              'the run key)')
+    parser.add_argument('--moisture-diagnostics', action='store_true',
+                        help="with --heating-diagnostics, the water vapour each layer gains from the physics, the "
+                             "negative-humidity fix and the dynamics, codes 31, 32, 40 and 41, and omega (part of the "
+                             'run key)')
     parser.add_argument('--twilight', choices=TWILIGHT_MODES + ('none',), default='full',
                         help="the curved air's sunlight and infrared from the twilight ledger: the curved "
                              "parts, all of it (full, the standard since 2026-10-14), the Moon's slant path alone, or "
@@ -1692,7 +1717,8 @@ def main(argv=None) -> int:
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
-               args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation)
+               args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation,
+               args.moisture_diagnostics)
 
 
 if __name__ == '__main__':
