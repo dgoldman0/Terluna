@@ -370,10 +370,24 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    limits 48%, matched at gamma 0.026, which grows the low cloud and cools the Moon. Before the design run takes a
    constant, the author chose to test it: a pair of CM1 boxes on the design climate, over the Near-side Sea at 5° S,
    45° W and over the land at 0° E, each forced by the GCM's own column (domain/climate 5a44e5e). Over that sea PlaSim
-   evaporates more of its rain than at the land box, about 60% at 0.026 against the box's 48%. Then one design run with
-   the cold cloud's factors, which the author adopted, and the rain evaporation the pair supports, followed by the
-   longwave refit and the settling and exobase checks. The cover question stays on hold. A CM1 ring that makes its own
-   upper vapour comes later.
+   evaporates more of its rain than at the land box, 49.7% against 43.9% at gamma 0.02. The pair's forcing held at the
+   third attempt (register, 21 October; domain/climate 13e7123). Its three changes are CM1's simple boundary layer per
+   unit mass, the forcing through the column, and the air held only above the GCM's convection. The sea box then
+   convects to about 70 km and rains 31% of the GCM's rain, nearly all of it between noon and midnight. From midnight to noon
+   the GCM's circulation sinks over the site and only PlaSim's Kuo scheme rains, from the sea's evaporation. 61% of the
+   box's falling water evaporates, gamma about 0.027, provisional while its upper air still cools; the land box runs.
+   PlaSim's convection is therefore in line too. A simplified Betts–Miller scheme, written in Fortran, is to be patched
+   behind PlaSim's own switch with Kuo kept as the default, and tested on speed, on design-climate branches and against
+   CM1 at both sites (register, 21 October; the GCM README's account on domain/climate). Open, with recommendations:
+   - **A third lunar day of the sea box**, to see whether its rain keeps rising as its upper air cools (recommended;
+     about an hour).
+   - **A corrected rerun of one reference ring or box**, to size the boundary layer's bias in every earlier CM1 run
+     (recommended).
+   - **Reporting the bug to CM1's developers** (the author's call).
+
+   Then one design run with the cold cloud's factors, which the author adopted, the rain evaporation the pair supports
+   and the convection scheme as the author chooses, followed by the longwave refit and the settling and exobase checks.
+   The cover question stays on hold. A CM1 ring that makes its own upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
    mixing_forms), now the aquatic programme's turbulence columns first, with a basin-scale model of one crater lake
@@ -397,7 +411,9 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    diagonal wind, neutral and stable air and grid checks, forced by the design case's climate.
 11. **CM1's rain law** is built (domain/climate 5a44e5e): Morrison's rain falls by the single-drop solver's own moments,
    which no single power law follows through drizzle and large drops, with self-collection's lunar rate, 2.92 m³/kg/s,
-   from the collision kernels; the pair of boxes in item 5 is its first run. The lunar rain limits are in and tested
+   from the collision kernels; the pair of boxes in item 5 is its first run. CM1's simple boundary layer applied its
+   tendencies weighted by the air's density in every earlier run, and the build `moon_omp_rain_law_pbl` divides the
+   density out (register, 21 October). The lunar rain limits are in and tested
    (domain/atmosphere 21529d2): over the small box's second lunar day they warm its air at 2 m by 1.5 K against a spread
    of 0.13 K between realizations, nearly double the rain reaching the ground and cut the share of falling water that
    evaporates from 86% to 48%. Autoconversion and accretion remain Earth fits. CM1's radiation call is sound: it stores
