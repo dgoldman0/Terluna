@@ -24,7 +24,9 @@ estimates how strongly breaking gravity waves mix the upper air, on Earth and on
 the Moon, which decides how much of that oxygen reaches the exobase.
 [infrared.py](infrared.py) gives the thermal column what it radiates with in the
 infrared: CO2 above the base with its band's escape from HITRAN's lines, and the
-base's atomic oxygen and NO. All ten are screening models; their methods and
+base's atomic oxygen and NO. [hydrogen.py](hydrogen.py) gives the hydrogen's
+escape with the design air's methane, as diffusion through the homopause limits
+it. All eleven are screening models; their methods and
 limits are in their docstrings.
 
 ```sh
@@ -37,7 +39,8 @@ OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.exosphere   # then the
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.fate    # where the escaping air goes, about 15 s
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.oxygen  # atomic oxygen and hydrogen, about 40 minutes in three processes
 OPENBLAS_NUM_THREADS=1 python -m atmosphere.loss_response.gravity_waves   # the waves' mixing, a minute
-python -m pytest atmosphere/tests/test_tides.py atmosphere/tests/test_loss_response.py atmosphere/tests/test_absorption.py atmosphere/tests/test_exosphere.py atmosphere/tests/test_fate.py atmosphere/tests/test_cycle.py atmosphere/tests/test_oxygen.py atmosphere/tests/test_gravity_waves.py atmosphere/tests/test_infrared.py
+python -m atmosphere.loss_response.hydrogen     # then the hydrogen with methane, seconds
+python -m pytest atmosphere/tests/test_hydrogen.py atmosphere/tests/test_tides.py atmosphere/tests/test_loss_response.py atmosphere/tests/test_absorption.py atmosphere/tests/test_exosphere.py atmosphere/tests/test_fate.py atmosphere/tests/test_cycle.py atmosphere/tests/test_oxygen.py atmosphere/tests/test_gravity_waves.py atmosphere/tests/test_infrared.py
 ```
 
 It needs the middle atmosphere's stored results, its limb tracing
@@ -405,6 +408,27 @@ mixing, unscaled, puts the homopause at 0.7–1.2×10⁻³ Pa: the atoms are the
 magnets). Behind the 200-nm edge, whose middle atmosphere already holds atomic
 oxygen under about 300 DU of ozone, the atoms add 0.6–6 kg/s. Hydrogen from water
 and H2 escapes at about 0.0025 kg/s.
+
+**Methane carries most of the hydrogen that escapes, and the escape is negligible
+for the water.** The design air's 1.9 ppm of methane, which the middle
+atmosphere's chemistry leaves out, holds seven times the hydrogen of its 0.53 ppm
+of H2 and the water the cold trap lets past ([hydrogen.py](hydrogen.py)). At the
+Moon's exobase hydrogen leaves freely, its Jeans parameter below 2, so the escape
+is the most that diffusion carries up through the homopause, the same wherever
+the homopause lies; for H2 and water that limit, 0.0026 kg/s, matches the oxygen
+step's full transport within 5%. Methane unbroken at its homopause diffuses as
+methane, slowly and with 0.56 of the air's mass, and adds 0.0025 kg/s; broken
+below it into H2 and H, 0.018 kg/s. The sky's glow breaks it above the base with
+a lifetime of 3.4 years, while eddy mixing carries it to its homopause 420–540 km
+up and lets it fall off over 2,000 km, so 19–24% arrives broken: 0.0085 kg/s of
+hydrogen in all, 0.005–0.021 kg/s at the bounds, 3.3 times the escape without
+methane. As water that is 0.076 kg/s, about 2,400 m³ a year, a billionth of the
+delivery the crust's uptake takes in the first thousand years; the Moon's 13.8
+million km³ of waters would last 6×10¹² years against it. Without resupply it
+would take the air's hydrogen in H2 and methane in about 3 million years. The cold
+cloud at lunar gravity, which lets 2.5 times the water past the GCM's coldest
+level, adds under 1%. Left out: methane's chemistry below the base and what the
+hydrogen the glow frees does to the air's H2.
 
 **Breaking gravity waves mix the upper air about as strongly as the Moon-scaled
 profile.** How strongly the air above the base mixes decides the atoms
