@@ -1702,7 +1702,7 @@ GCM_SITE_RUN, GCM_SITE_YEARS = 'A28R_301k_cold_moist', (0, 5)
 SITE_BOX = dict(CASES['ring'], kind='box', nx=32, ny=32, build='moon_omp_rain_law', gcm=(GCM_SITE_RUN, GCM_SITE_YEARS),
                 large_scale_w='gcm', day_night='gcm', land_moisture='gcm', land=None, surface_output=True,
                 rain_limits='lunar', rain_law='lunar', twilight='full', twilight_product='twilight_301k.json',
-                namelist=RAIN_TEST_OUTPUT)
+                namelist=RAIN_TEST_OUTPUT, wind_by_local_time=True, nudge=dict(CASES['ring']['nudge'], ramp_s=0.0))
 for _name, _site, _where in (('box_near_side_sea', dict(lat_deg=-5.0, lon_deg=-45.0, surface='sea'),
                               'over the Near-side Sea at 5 S, 45 W'),
                              ('box_0e_design', dict(lat_deg=0.0, lon_deg=0.0, surface='land'), 'over the land at 0 N, 0 E')):
@@ -2941,7 +2941,28 @@ def setup(name: str) -> Path:
     nudge += [f'  {z:12.4f} {float(theta_at(z)):12.4f} {float(qv_at(z)) * 1000:12.6f} {float(u_at(z)):10.4f} '
               f'{float(v_at(z)):10.4f}'
               for z in [0.0, *zh, zw[-1]]]
-    (case / 'lsnudge_0001.dat').write_text('\n'.join(nudge) + '\n')
+    nudging_wind = None
+    if box and cfg['site'].get('gcm') and cfg.get('wind_by_local_time'):   # the GCM's day-night wind, window by window
+        from climate.crm import gcm_site
+        heights = np.array([0.0, *zh, zw[-1]])
+        windows = gcm_site.wind_windows(site['forcing'], heights, cfg['start_hour_angle_deg'] + cfg['site']['lon_deg'],
+                                        solar_day_s(), case_length_s(cfg, s))
+        if len(windows) > 100:
+            raise ValueError(f'{len(windows)} nudging windows; CM1 reads at most 100')
+        for i, window in enumerate(windows, 1):
+            t1, t2 = window['time_s']
+            rows = nudge[:1] + [f'  {t1:22.1f} {1.0e30 if i == len(windows) else t2:22.6e}'] + nudge[2:4]
+            rows += [f'  {z:12.4f} {float(theta_at(z)):12.4f} {float(qv_at(z)) * 1000:12.6f} {u:10.4f} {v:10.4f}'
+                     for z, u, v in zip(heights, window['u_m_s'], window['v_m_s'])]
+            (case / f'lsnudge_{i:04d}.dat').write_text('\n'.join(rows) + '\n')
+        nudging_wind = dict(windows=len(windows), window_s=windows[0]['time_s'][1] - windows[0]['time_s'][0],
+                            source="the GCM's wind by local time at the site (gcm_site.wind_windows)",
+                            lowest_level_speed_m_s=dict(min=float(min(np.hypot(w['u_m_s'][1], w['v_m_s'][1])
+                                                                      for w in windows)),
+                                                        max=float(max(np.hypot(w['u_m_s'][1], w['v_m_s'][1])
+                                                                      for w in windows))))
+    else:
+        (case / 'lsnudge_0001.dat').write_text('\n'.join(nudge) + '\n')
     if pair:
         segments, water_share, surface_sha = [(-1e9, 1e9, 2, 16, ref['sea_surface_k'], ref['sea_surface_k'])], 1.0, None
     elif box:
@@ -3016,7 +3037,8 @@ def setup(name: str) -> Path:
             qv_g_kg_day=float(forcing['qv_kg_kg_s'][0, low].mean() * 8.64e7)))
     day_night = None
     if box and cfg.get('day_night') == 'gcm':                            # the GCM's own budget at the site
-        forcing = site['day_night']
+        from climate.crm import gcm_site
+        forcing = gcm_site.to_cm1(site['forcing'], zw, theta_at, qv_at)['day_night']
         write_day_night(case / 'terluna_lsadv.txt', forcing)
         low = forcing['z_m'] < 3000.0
         spread = lambda a, scale: dict(mean=float(a[:, low].mean() * scale), min=float(a[:, low].mean(axis=1).min() * scale),
@@ -3082,14 +3104,14 @@ def setup(name: str) -> Path:
                   terrain=terrain if cfg.get('terrain') else None,
                   electricity=electricity,
                   twilight=twilight,
-                  rain_limits=rain, rain_law=rain_law,
+                  rain_limits=rain, rain_law=rain_law, nudging_wind=nudging_wind,
                   gcm_site=gcm_site_record(site['forcing']) if box and site.get('forcing') else None,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',
                                                          'terluna_wls.txt', 'terluna_wls2d.txt', 'terluna_lsadv.txt',
                                                          'perts.dat', 'terluna_surface2d.txt', TWILIGHT_TABLE,
-                                                         RAIN_LAW_TABLE)
+                                                         RAIN_LAW_TABLE, *sorted(q.name for q in case.glob('lsnudge_0*.dat'))[1:])
                           if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     return case

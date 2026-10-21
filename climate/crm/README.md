@@ -1549,9 +1549,25 @@ the 3-day means brought the column +0.1 to +2.5 mm/day, where the GCM's rain les
   and first four harmonics, the means' harmonics divided by the damping a 36° mean gives them.
 
 CM1 applies the mean vertical wind to its own air, so the table holds the circulation's heating and moistening with
-the mean wind's advection of the GCM's own air added back. In the GCM's state, the two together give the GCM's budget.
-Over the day the GCM's circulation cools and dries the lowest kilometre at both sites, by 0.12 K and 0.43 g/kg a day
-over the sea and 0.24 K and 0.52 g/kg a day over the land: it carries the evaporation and the ground's heat away.
+the mean wind's advection of the box's starting air added back, on CM1's own levels; at the start the two cancel
+exactly, and the box's own advection follows its air as it changes. Over the day the GCM's circulation cools and
+dries the lowest kilometre at both sites, by 0.12 K and 0.43 g/kg a day over the sea and 0.24 K and 0.52 g/kg a day
+over the land: it carries the evaporation and the ground's heat away. The box cannot make the planet's day-night
+circulation, whose wind turns with the Sun: over the sea the GCM's wind 0.9 km up blows 3.7 m/s toward the east
+around noon and 3.8 m/s toward the west in the evening, while its mean over the day is 0.5 m/s. So the box's mean
+wind is nudged toward the GCM's by local time, in 72 windows each a 36th of the lunar day (0.82 Earth days), the
+lowest level's speed 1.4–4.3 m/s through the day.
+
+**The first attempt** (kept as `crm-runs/box_near_side_sea_split`). It took the table on the GCM's levels, the mean
+wind's advection added back along the GCM's coarse gradient between its levels, and held the box's wind to the GCM's
+mean. Over the sea, CM1's own advection by the mean wind, acting on the box's well-mixed boundary layer and its own
+lapse, took back less than the table added: between 1.8 and 6.5 km the large-scale terms warmed the box by 8.5 W/m²
+where the GCM's circulation cools that layer by about 11. With its wind near the mean, the sea evaporated 32–61 W/m²
+against the GCM's 102. Over its first 13.6 days the box's air there warmed 0.3 K a day, its air at 2 m rose above the
+sea's temperature, the sea's evaporation fell to 25 W/m², its CAPE to nothing, its condensation level to 8–11 km, and
+it did not rain. It was stopped at day 15 and the pair began again with the table on CM1's levels and the wind by
+local time. With them the sea evaporated 78 W/m² by day 7; on the Moon, where the dry adiabat cools 1.6 K a
+kilometre, the morning air at 73% relative humidity still condenses 4–5 km up.
 
 **The boxes** (cases `box_near_side_sea` and `box_0e_design`, on the build `moon_omp_rain_law`). They have the small
 box's size and spacing, 32 × 32 columns 6.0 km apart. The sea is held at the GCM's 302.0 K. The land is the
@@ -1562,9 +1578,9 @@ twilight from the 301 K ledger and write the heat and vapour budgets.
 **The trials** (21 October; `crm-runs/trial_site_boxes/` on the research drive). Each case, copied, ran three model
 hours on two threads beside the GCM's runs, in about half a minute. Both ran normally and wrote their four outputs, with
 every field the analyses read present and finite and the 22 fields of their heat, vapour and radiation budgets. Their
-logs show the rain limits, the rain law's 301 rows and rate, the 36-bin table, the vertical wind falling to zero above
-16 km and the twilight's 167 elevations. The pair runs one box after the other on four threads, with half an hour's rest
-between.
+logs show the rain limits, the rain law's 301 rows and rate, the table, the vertical wind falling to zero above 16 km
+and the twilight's 167 elevations; with the fixes the land box's showed the table's 111 levels and all 72 nudging
+windows read. The pair runs one box after the other on four threads, with half an hour's rest between.
 
 ```sh
 /media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years

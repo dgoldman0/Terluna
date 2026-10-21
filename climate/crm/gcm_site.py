@@ -33,7 +33,11 @@ The means (ta, hus, ua, va, ps, czen, pr, evap, prw) cover a tenth of the lunar 
 centred on the site's hour angle from the subsolar longitude of the mean solar height; the snapshots fall at each
 mean's end, 18 degrees later. Each level's series is fitted by least squares with the day's mean and first four
 harmonics, those of the means divided by the damping a 36-degree mean gives them. The table reaches 16 km, as the
-rings' day-night forcing did; above, the box holds its air to the GCM's.
+rings' day-night forcing did; above, the box holds its air to the GCM's. The table stands on CM1's own levels, the
+mean wind's advection added back on the box's starting air, so that the two cancel exactly at the start. A box cannot
+make the planet's day-night circulation, whose wind turns with the Sun (over the Near-side Sea the wind 0.9 km up
+swings between about 3.7 m/s toward the east around noon and 3.8 m/s toward the west in the evening), so its mean
+wind is nudged toward the GCM's by local time, a window of the day at a time.
 """
 from __future__ import annotations
 
@@ -249,6 +253,7 @@ def site_forcing(run, years, site, window_deg=36.0):
     fit_mean = lambda k: undamped(harmonic_coefficients(centre, s[k]), window_deg)
     fit_snap = lambda k: harmonic_coefficients(end, s[k])
     theta_c, q_c, water_c, rain_c, evap_c = (fit_mean(k) for k in ('theta', 'q', 'water', 'rain', 'evaporation'))
+    u_c, v_c = fit_mean('u'), fit_mean('v')
     heat_c, moist_c = fit_snap('heat'), fit_snap('moist')
     z, rho = tm('z'), tm('rho')
     w_gcm = -tm('omega') / (rho * gravity)
@@ -268,6 +273,7 @@ def site_forcing(run, years, site, window_deg=36.0):
     table_th = heating + w_mean[None, :] * dz(theta_h)                       # the mean wind's own part added back
     table_q = moistening + w_mean[None, :] * dz(q_h)
     table_th, table_q = np.where(below, table_th, 0.0), np.where(below, table_q, 0.0)
+    circ_th, circ_q = np.where(below, heating, 0.0), np.where(below, moistening, 0.0)
     per_day = 86400.0
     phase = np.round(((centre + 180.0) % 360.0) / window_deg - 0.5).astype(int) % int(round(360.0 / window_deg))
     return dict(
@@ -283,6 +289,10 @@ def site_forcing(run, years, site, window_deg=36.0):
         vertical_wind_m_s=w_mean.tolist(), gcm_vertical_wind_m_s=w_gcm.tolist(),
         day_night=dict(hour_angle_deg=hours.tolist(), z_m=z.tolist(), theta_k_s=table_th.tolist(),
                        qv_kg_kg_s=table_q.tolist(), top_m=TOP_M),
+        circulation=dict(hour_angle_deg=hours.tolist(), z_m=z.tolist(), theta_k_s=circ_th.tolist(),
+                         qv_kg_kg_s=circ_q.tolist(), top_m=TOP_M),
+        wind_by_hour=dict(hour_angle_deg=hours.tolist(), z_m=z.tolist(), u_m_s=evaluate(u_c, hours).tolist(),
+                          v_m_s=evaluate(v_c, hours).tolist()),
         budget=dict(
             circulation_heating_theta_k_day=(heating.mean(axis=0) * per_day).tolist(),
             circulation_moistening_g_kg_day=(moistening.mean(axis=0) * per_day * 1e3).tolist(),
@@ -301,20 +311,56 @@ def site_forcing(run, years, site, window_deg=36.0):
             rain_mm_day=float(tm('rain') * per_day), evaporation_mm_day=float(tm('evaporation') * per_day)))
 
 
-def to_cm1(forcing, zw):
+def to_cm1(forcing, zw, theta_at=None, qv_at=None):
     """The forcing as CM1's box reads it: the mean vertical wind on its w levels zw (zero at the ground, falling to
-    zero at the top past the GCM's top level), and the table on the GCM's levels from the ground up, with a level at
-    the ground holding the lowest level's values, in potential temperature (K/s) and vapour (kg/kg/s)."""
+    zero at the top past the GCM's top level), and the table of prescribed heating (potential temperature, K/s) and
+    moistening (kg/kg/s) by local time. Given the box's starting air (theta_at and qv_at, functions of height), the
+    table stands on CM1's own scalar levels: the circulation's heating and moistening interpolated from the GCM's
+    levels, the lowest level's held down to the ground, with the mean wind's advection of that starting air added
+    back, so that at the start CM1's own advection by the mean wind takes it away again exactly; above 16 km it is
+    nil. Without them it stands on the GCM's levels with the mean wind's advection of the GCM's air added back."""
     z = np.asarray(forcing['profile']['z_m'], float)[::-1]                # the ground up
     w = np.asarray(forcing['vertical_wind_m_s'], float)[::-1]
     zw = np.asarray(zw, float)
     zz, ww = np.r_[0.0, z, zw[-1]], np.r_[0.0, w, 0.0]
-    dn = forcing['day_night']
-    th = np.asarray(dn['theta_k_s'], float)[:, ::-1]
-    qv = np.asarray(dn['qv_kg_kg_s'], float)[:, ::-1]
-    return dict(w_m_s=[float(x) for x in np.interp(zw, zz, ww)],
-                day_night=dict(z_m=np.r_[0.0, z], theta_k_s=np.c_[th[:, :1], th], qv_kg_kg_s=np.c_[qv[:, :1], qv],
-                               hour_angle_deg=np.asarray(dn['hour_angle_deg'], float)))
+    w_zw = np.interp(zw, zz, ww)
+    hours = np.asarray(forcing['day_night']['hour_angle_deg'], float)
+    if theta_at is None:
+        dn = forcing['day_night']
+        th = np.asarray(dn['theta_k_s'], float)[:, ::-1]
+        qv = np.asarray(dn['qv_kg_kg_s'], float)[:, ::-1]
+        return dict(w_m_s=[float(x) for x in w_zw],
+                    day_night=dict(z_m=np.r_[0.0, z], theta_k_s=np.c_[th[:, :1], th], qv_kg_kg_s=np.c_[qv[:, :1], qv],
+                                   hour_angle_deg=hours))
+    zh = 0.5 * (zw[1:] + zw[:-1])
+    w_zh = 0.5 * (w_zw[1:] + w_zw[:-1])
+    circ = forcing['circulation']
+    levels = np.r_[0.0, z]
+    on_box = lambda a: np.array([np.interp(zh, levels, np.r_[row[0], row]) for row in np.asarray(a, float)[:, ::-1]])
+    th0, q0 = np.asarray(theta_at(zh), float), np.asarray(qv_at(zh), float)
+    below = zh <= TOP_M
+    th = np.where(below, on_box(circ['theta_k_s']) + (w_zh * np.gradient(th0, zh))[None, :], 0.0)
+    qv = np.where(below, on_box(circ['qv_kg_kg_s']) + (w_zh * np.gradient(q0, zh))[None, :], 0.0)
+    return dict(w_m_s=[float(x) for x in w_zw], day_night=dict(z_m=zh, theta_k_s=th, qv_kg_kg_s=qv, hour_angle_deg=hours))
+
+
+def wind_windows(forcing, zh, start_hour_deg, day_s, length_s, bins=BINS):
+    """The GCM's wind by local time as a series of windows for CM1's nudging: each window a bin of the day, from the
+    box's start through its length, with the wind (m/s) on the box's scalar levels zh at the bin's middle hour angle,
+    held at the GCM's lowest level down to the ground and at its top level above."""
+    wind = forcing['wind_by_hour']
+    z = np.asarray(wind['z_m'], float)[::-1]
+    hours = np.asarray(wind['hour_angle_deg'], float)
+    u, v = (np.asarray(wind[k], float)[:, ::-1] for k in ('u_m_s', 'v_m_s'))
+    step = day_s / bins
+    out, t = [], 0.0
+    while t < length_s:
+        middle = (start_hour_deg + 360.0 * (t + 0.5 * step) / day_s + 180.0) % 360.0 - 180.0
+        b = int(np.argmin(np.abs((hours - middle + 180.0) % 360.0 - 180.0)))
+        out.append(dict(time_s=(t, t + step), hour_angle_deg=float(middle),
+                        u_m_s=np.interp(zh, z, u[b]), v_m_s=np.interp(zh, z, v[b])))
+        t += step
+    return out
 
 
 def main(argv=None) -> int:

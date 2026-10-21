@@ -1672,12 +1672,31 @@ constants from the cold cloud's run's year-19 restart (`run_rain_gamma.sh` on th
 - **The match rests on one box.** CM1's small box over one lunar day, which rains a third as much as the GCM at its
   place, is the only lunar measure of the share.
 
+**More years, and the Near-side Sea** (21 October). At the author's word the constant is tested before the design run
+takes it, by a pair of CM1 boxes on the design climate over the Near-side Sea at 5° S, 45° W and over the land at 0° E
+([the CRM's account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e)). The measure now pools
+the runs at each constant (`run_column_budget.sh` on the research drive carried the two branches to five years each,
+and the cold-cloud run's branch `A28R_301k_cold_moist` adds six years at 0.01), and sets each box beside the GCM at its
+own place, the equatorial land about 0° E or the sea at sea level within 11° of latitude and 20° of longitude of the
+sea box's site:
+
+| gamma | Years | Evaporated: global | Land about 0° E | The Near-side Sea |
+|---|---|---|---|---|
+| 0.01, PlaSim's own | 14 | 28.6% | 29.8% | 34.5% |
+| 0.02 | 5 | 44.3% | 43.9% | 49.7% |
+| 0.04 | 5 | 60.2% | 58.2% | 75.8% |
+
+Over the Near-side Sea PlaSim evaporates more of its rain than at the land box, and the gap widens with gamma: its
+rain there is lighter, and at 0.04 a quarter of it reaches the ground. With the pooled years the small box's 48% comes
+at gamma 0.024 at its place; at that constant the Near-side Sea would evaporate about 57%. At 0.02 the ground settles
+near 298.0 K over the branch's five years, and at 0.04 it is still falling, 295.5 K at year 4.
+
 The runner's `--rain-evaporation GAMMA` writes the constant into PlaSim's rain namelist, recorded in the run's
 configuration only when given.
 
 ```sh
-climate/gcm/.venv/bin/python -m climate.gcm.rain_evaporation A28R_301k_cold:18-19 A28R_301k_cold_g02:1 \
-    A28R_301k_cold_g04:1                                                                   # seconds
+climate/gcm/.venv/bin/python -m climate.gcm.rain_evaporation A28R_301k_cold:12-19 A28R_301k_cold_moist:0-5 \
+    A28R_301k_cold_g02:0-4 A28R_301k_cold_g04:0-4                                          # a minute
 ```
 
 ### Cloud amount: what published models say

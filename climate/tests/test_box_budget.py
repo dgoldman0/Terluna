@@ -28,6 +28,17 @@ def test_layer_sums_weigh_each_level_by_its_density_and_depth():
     assert out['column'] == pytest.approx(sum(r * p * co.CP * d for r, p, d in zip(rate, rho, np.diff(zw))) / bb.DAY)
 
 
+def test_layer_means_weigh_each_level_by_its_mass():
+    zw = np.array([0.0, 1000.0, 3000.0, 14000.0, 30000.0])
+    rho = np.array([1.4, 1.3, 1.0, 0.5])
+    t = np.array([300.0, 290.0, 280.0, 250.0])
+    out = bb.layer_means(t, rho, zw)
+    assert out['0-1.77 km'] == pytest.approx(300.0) and out['1.77-6.53 km'] == pytest.approx(290.0)
+    assert out['6.53-13.74 km'] == pytest.approx(280.0) and out['13.74-23.06 km'] == pytest.approx(250.0)
+    two = bb.layer_means(t, rho, zw, layers=((0.0, 3.0),))               # the lowest two levels together, by mass
+    assert two['0-3 km'] == pytest.approx((300.0 * 1400.0 + 290.0 * 2600.0) / 4000.0)
+
+
 def test_a_diagnostic_output_reads_by_its_descriptor(tmp_path):
     (tmp_path / 'cm1out_diag_s.ctl').write_text('dset ^cm1out_diag_00%y4_s.dat\nxdef 1 linear 0 1\nydef 1 linear 0 1\n'
                                                 'zdef 3 levels\n0.05\n0.15\n0.25\nvars 2\nmtime 0 99 time\n'

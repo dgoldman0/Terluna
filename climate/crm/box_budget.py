@@ -103,6 +103,43 @@ def layer_sums(rate_k_day, rho, zw, layers=LAYERS_KM):
     return out
 
 
+def layer_means(values, rho, zw, layers=LAYERS_KM):
+    """The mass-weighted mean of a profile over each of the GCM's lowest four layers."""
+    mass = np.asarray(rho, float) * np.diff(np.asarray(zw, float))
+    zh = 0.5 * (np.asarray(zw[1:], float) + np.asarray(zw[:-1], float))
+    out = {}
+    for z0, z1 in layers:
+        m = (zh >= z0 * 1000.0) & (zh < z1 * 1000.0)
+        out[f'{z0:g}-{z1:g} km'] = float((np.asarray(values, float)[m] * mass[m]).sum() / mass[m].sum())
+    return out
+
+
+def drift(name: str, from_day: float) -> dict:
+    """How the box's air moved from its start: the domain-mean temperature (C) and vapour (g/kg) of each of the GCM's
+    lowest four layers at every diagnostic output, with their values at the start, at from_day and at the end, and
+    their trend per day over the span after from_day."""
+    case = ra.RUNS / name
+    geo = ra.case_geometry(case)
+    layout = ra.grads_layout(case / 'cm1out_diag_s.ctl')[1]
+    times, series = [], {}
+    for path in sorted(case.glob('cm1out_diag_*_s.dat')):
+        d = read_diag(case, path, layout)
+        times.append(d['mtime'] / DAY)
+        for quantity, values in (('temperature_c', d['t'] - 273.15), ('vapour_g_kg', d['qv'] * 1000.0)):
+            for layer, v in layer_means(values, d['rho'], geo['zw']).items():
+                series.setdefault(layer, {}).setdefault(quantity, []).append(v)
+    times = np.array(times)
+    late = times >= from_day
+    out = dict(times_day=[round(float(x), 4) for x in times], layers={})
+    for layer, quantities in series.items():
+        out['layers'][layer] = {q: dict(series=[round(float(x), 4) for x in v], start=float(v[0]),
+                                        at_from_day=float(np.interp(from_day, times, v)), end=float(v[-1]),
+                                        trend_per_day=float(np.polyfit(times[late], np.array(v)[late], 1)[0])
+                                        if late.sum() > 1 else None)
+                                for q, v in quantities.items()}
+    return out
+
+
 def budget(name: str, from_day: float) -> dict:
     """A box's heat budget over the span after from_day, as profiles (K/day of temperature) and layer sums (W/m2)."""
     case = ra.RUNS / name
@@ -170,7 +207,7 @@ def difference(a: dict, b: dict) -> dict:
 
 
 def analyse(name: str, reference: str | None, from_day: float) -> dict:
-    out = dict(schema=SCHEMA, case=name, from_day=from_day, budget=budget(name, from_day))
+    out = dict(schema=SCHEMA, case=name, from_day=from_day, budget=budget(name, from_day), drift=drift(name, from_day))
     if reference:
         out['reference'] = reference
         out['reference_budget'] = budget(reference, from_day)

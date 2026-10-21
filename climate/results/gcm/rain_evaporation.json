@@ -1,115 +1,362 @@
 {
- "schema": "terluna.climate.gcm-rain-evaporation/1",
- "cm1": {
-  "lunar_limits": 0.48,
-  "cm1_limits": 0.857
+ "schema": "terluna.climate.gcm-rain-evaporation/2",
+ "regions": {
+  "cm1_box": {
+   "lat_deg": 0.0,
+   "lon_deg": 0.0,
+   "half_lat_deg": 10.0,
+   "half_lon_deg": 20.0,
+   "surface": "land"
+  },
+  "near_side_sea": {
+   "lat_deg": -5.0,
+   "lon_deg": -45.0,
+   "half_lat_deg": 11.0,
+   "half_lon_deg": 20.0,
+   "surface": "sea"
+  }
  },
+ "cm1": {
+  "box_0e_small_lunar_rain_day29": {
+   "region": "cm1_box",
+   "about": "the small box at 0 E, the lunar rain limits, forced by the GCM before its corrections",
+   "share_of_falling_water_evaporated": 0.48,
+   "gamma": 0.02443955947907845
+  },
+  "box_0e_design": {
+   "region": "cm1_box",
+   "about": "the land at 0 E on the design climate, forced by the GCM alone, the lunar rain limits and rain law",
+   "share_of_falling_water_evaporated": null,
+   "gamma": null
+  },
+  "box_near_side_sea": {
+   "region": "near_side_sea",
+   "about": "the Near-side Sea at 5 S, 45 W on the design climate, forced by the GCM alone, the lunar rain limits and rain law",
+   "share_of_falling_water_evaporated": null,
+   "gamma": null
+  }
+ },
+ "cm1_limits_control": 0.857,
  "measured": [
   {
    "run": "A28R_301k_cold",
    "years": [
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
     18,
     19
    ],
    "gamma": 0.01,
    "shares": {
     "global": {
-     "formed_mm_day": 3.045216953013709,
-     "ground_mm_day": 2.174499033974443,
-     "evaporated_share": 0.2859296833276712,
-     "evaporated_share_by_residual": 0.2969114223135251
+     "formed_mm_day": 3.0600234019706747,
+     "ground_mm_day": 2.1901648973722914,
+     "evaporated_share": 0.2842653111862443,
+     "evaporated_share_by_residual": 0.29536449248498947
     },
     "land": {
-     "formed_mm_day": 2.9717388829305706,
-     "ground_mm_day": 2.095981809616845,
-     "evaporated_share": 0.2946951626012648
+     "formed_mm_day": 2.9916179892484567,
+     "ground_mm_day": 2.115059412728714,
+     "evaporated_share": 0.2930048487707979
     },
     "sea": {
-     "formed_mm_day": 3.1632171232009183,
-     "ground_mm_day": 2.3005917011653576,
-     "evaporated_share": 0.27270509371884477
+     "formed_mm_day": 3.1698772717554293,
+     "ground_mm_day": 2.3107785710834734,
+     "evaporated_share": 0.2710195465063542
     },
     "cm1_box": {
-     "formed_mm_day": 4.926137017542705,
-     "ground_mm_day": 3.3608099835234997,
-     "evaporated_share": 0.31775954027361464
+     "formed_mm_day": 4.931197730713899,
+     "ground_mm_day": 3.449190551025619,
+     "evaporated_share": 0.30053696092079574
+    },
+    "near_side_sea": {
+     "formed_mm_day": 3.4849701168432774,
+     "ground_mm_day": 2.31425224291948,
+     "evaporated_share": 0.3359334039237749
+    }
+   }
+  },
+  {
+   "run": "A28R_301k_cold_moist",
+   "years": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "gamma": 0.01,
+   "shares": {
+    "global": {
+     "formed_mm_day": 3.056888162381764,
+     "ground_mm_day": 2.1744756945087853,
+     "evaporated_share": 0.28866364125845223,
+     "evaporated_share_by_residual": 0.29491630036196126
+    },
+    "land": {
+     "formed_mm_day": 2.9831793082763576,
+     "ground_mm_day": 2.1020509122790845,
+     "evaporated_share": 0.29536554961772576
+    },
+    "sea": {
+     "formed_mm_day": 3.1752589540873846,
+     "ground_mm_day": 2.2907843648264268,
+     "evaporated_share": 0.2785519549901304
+    },
+    "cm1_box": {
+     "formed_mm_day": 5.01942408056564,
+     "ground_mm_day": 3.5413876448884687,
+     "evaporated_share": 0.29446335116410627
+    },
+    "near_side_sea": {
+     "formed_mm_day": 3.5937498535879415,
+     "ground_mm_day": 2.3129535002614827,
+     "evaporated_share": 0.3563955215323995
     }
    }
   },
   {
    "run": "A28R_301k_cold_g02",
    "years": [
-    1
+    0,
+    1,
+    2,
+    3,
+    4
    ],
    "gamma": 0.02,
    "shares": {
     "global": {
-     "formed_mm_day": 3.7269590613906254,
-     "ground_mm_day": 2.068562174644882,
-     "evaporated_share": 0.44497319649305533,
-     "evaporated_share_by_residual": 0.43929527132066865
+     "formed_mm_day": 3.6889995333258834,
+     "ground_mm_day": 2.0543332696279224,
+     "evaporated_share": 0.44311912997836533,
+     "evaporated_share_by_residual": 0.44104476696037737
     },
     "land": {
-     "formed_mm_day": 3.7934743422275985,
-     "ground_mm_day": 2.060483003972324,
-     "evaporated_share": 0.45683486480038504
+     "formed_mm_day": 3.703733069332532,
+     "ground_mm_day": 2.0272586379855007,
+     "evaporated_share": 0.4526445075722363
     },
     "sea": {
-     "formed_mm_day": 3.6201405990938844,
-     "ground_mm_day": 2.081536705865621,
-     "evaporated_share": 0.42501219251356537
+     "formed_mm_day": 3.665338599467974,
+     "ground_mm_day": 2.097813060781213,
+     "evaporated_share": 0.4276618642856864
     },
     "cm1_box": {
-     "formed_mm_day": 5.9219830257419614,
-     "ground_mm_day": 3.493564550733893,
-     "evaporated_share": 0.41006846261667795
+     "formed_mm_day": 6.058769562295342,
+     "ground_mm_day": 3.401574139544951,
+     "evaporated_share": 0.43857014125219884
+    },
+    "near_side_sea": {
+     "formed_mm_day": 3.9731723912506527,
+     "ground_mm_day": 1.9983040204237168,
+     "evaporated_share": 0.4970507635600724
     }
    }
   },
   {
    "run": "A28R_301k_cold_g04",
    "years": [
-    1
+    0,
+    1,
+    2,
+    3,
+    4
    ],
    "gamma": 0.04,
    "shares": {
     "global": {
-     "formed_mm_day": 4.500977726385938,
-     "ground_mm_day": 1.7956845739772884,
-     "evaporated_share": 0.6010456653783234,
-     "evaporated_share_by_residual": 0.6011238595643421
+     "formed_mm_day": 4.33240266211829,
+     "ground_mm_day": 1.7227452053187196,
+     "evaporated_share": 0.6023580124760615,
+     "evaporated_share_by_residual": 0.60188765484756
     },
     "land": {
-     "formed_mm_day": 4.620960588783587,
-     "ground_mm_day": 1.85929957789972,
-     "evaporated_share": 0.5976378629125771
+     "formed_mm_day": 4.406604111316953,
+     "ground_mm_day": 1.7535505398574962,
+     "evaporated_share": 0.6020630636289603
     },
     "sea": {
-     "formed_mm_day": 4.3082944105822945,
-     "ground_mm_day": 1.6935237349566983,
-     "evaporated_share": 0.6069155044750512
+     "formed_mm_day": 4.213240800304652,
+     "ground_mm_day": 1.6732741901690733,
+     "evaporated_share": 0.6028534162946295
     },
     "cm1_box": {
-     "formed_mm_day": 7.709004398955003,
-     "ground_mm_day": 3.126543499901673,
-     "evaporated_share": 0.594429664571797
+     "formed_mm_day": 7.145177904810137,
+     "ground_mm_day": 2.987985792272422,
+     "evaporated_share": 0.5818178592500953
+    },
+    "near_side_sea": {
+     "formed_mm_day": 4.244599637119644,
+     "ground_mm_day": 1.02818439690118,
+     "evaporated_share": 0.7577664597834959
     }
    }
   }
  ],
- "gamma_for_cm1_lunar_limits": 0.026014537909243875,
- "evidence": "Means over GCM output of the rain its schemes form and the rain at the ground, and of mkrain's residual cooling; CM1's share from one small box over one lunar day with the lunar rain limits. The fit matches the box's place, which sits at the global mean in the design years.",
- "reading_rule": "measured holds each run's gamma and its evaporated shares (1 less the rain at the ground over the rain formed) globally, over land and sea and at the CM1 box's place; gamma_for_cm1_lunar_limits is the gamma interpolated in log between the runs at which the box's place evaporates CM1's share with the lunar limits, or null outside them.",
+ "pooled": [
+  {
+   "gamma": 0.01,
+   "runs": [
+    {
+     "run": "A28R_301k_cold",
+     "years": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+     ]
+    },
+    {
+     "run": "A28R_301k_cold_moist",
+     "years": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    }
+   ],
+   "years": 14,
+   "shares": {
+    "global": {
+     "formed_mm_day": 3.0586797278611413,
+     "ground_mm_day": 2.1834409532879313,
+     "evaporated_share": 0.2861492056853049,
+     "evaporated_share_by_residual": 0.29517252265525096
+    },
+    "land": {
+     "formed_mm_day": 2.9880014116889853,
+     "ground_mm_day": 2.109484341107444,
+     "evaporated_share": 0.29401494495444513
+    },
+    "sea": {
+     "formed_mm_day": 3.1721837070405527,
+     "ground_mm_day": 2.3022096255447395,
+     "evaporated_share": 0.2742508510982311
+    },
+    "cm1_box": {
+     "formed_mm_day": 4.969009023507502,
+     "ground_mm_day": 3.4887035912525546,
+     "evaporated_share": 0.29790757578661753
+    },
+    "near_side_sea": {
+     "formed_mm_day": 3.531590004019562,
+     "ground_mm_day": 2.3136956389231953,
+     "evaporated_share": 0.3448572353274846
+    }
+   }
+  },
+  {
+   "gamma": 0.02,
+   "runs": [
+    {
+     "run": "A28R_301k_cold_g02",
+     "years": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ]
+    }
+   ],
+   "years": 5,
+   "shares": {
+    "global": {
+     "formed_mm_day": 3.6889995333258834,
+     "ground_mm_day": 2.0543332696279224,
+     "evaporated_share": 0.44311912997836533,
+     "evaporated_share_by_residual": 0.44104476696037737
+    },
+    "land": {
+     "formed_mm_day": 3.703733069332532,
+     "ground_mm_day": 2.0272586379855007,
+     "evaporated_share": 0.4526445075722363
+    },
+    "sea": {
+     "formed_mm_day": 3.665338599467974,
+     "ground_mm_day": 2.097813060781213,
+     "evaporated_share": 0.4276618642856864
+    },
+    "cm1_box": {
+     "formed_mm_day": 6.058769562295342,
+     "ground_mm_day": 3.401574139544951,
+     "evaporated_share": 0.43857014125219884
+    },
+    "near_side_sea": {
+     "formed_mm_day": 3.9731723912506527,
+     "ground_mm_day": 1.9983040204237168,
+     "evaporated_share": 0.4970507635600724
+    }
+   }
+  },
+  {
+   "gamma": 0.04,
+   "runs": [
+    {
+     "run": "A28R_301k_cold_g04",
+     "years": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ]
+    }
+   ],
+   "years": 5,
+   "shares": {
+    "global": {
+     "formed_mm_day": 4.33240266211829,
+     "ground_mm_day": 1.7227452053187196,
+     "evaporated_share": 0.6023580124760615,
+     "evaporated_share_by_residual": 0.60188765484756
+    },
+    "land": {
+     "formed_mm_day": 4.406604111316953,
+     "ground_mm_day": 1.7535505398574962,
+     "evaporated_share": 0.6020630636289603
+    },
+    "sea": {
+     "formed_mm_day": 4.213240800304652,
+     "ground_mm_day": 1.6732741901690733,
+     "evaporated_share": 0.6028534162946295
+    },
+    "cm1_box": {
+     "formed_mm_day": 7.145177904810137,
+     "ground_mm_day": 2.987985792272422,
+     "evaporated_share": 0.5818178592500953
+    },
+    "near_side_sea": {
+     "formed_mm_day": 4.244599637119644,
+     "ground_mm_day": 1.02818439690118,
+     "evaporated_share": 0.7577664597834959
+    }
+   }
+  }
+ ],
+ "evidence": "Means over GCM output of the rain its schemes form and the rain at the ground, and of mkrain's residual cooling, pooled over the runs at each gamma; each CM1 share from one box over one lunar day with the lunar rain limits, one realization each.",
+ "reading_rule": "pooled holds, for each gamma, the evaporated shares (1 less the rain at the ground over the rain formed) globally, over land and sea and at each region; cm1 holds each box's share, the region it is set against and the gamma interpolated in log between the pooled runs at which that region evaporates the box's share, null outside them or before the box has run.",
  "producer": {
   "domain": "climate",
   "files": {
-   "gcm/rain_evaporation.py": "b7fa4dd65e1f4c88"
+   "gcm/rain_evaporation.py": "8de5cc1339734496"
   },
   "inputs": {
-   "climate/results/crm/box_box_0e_small_lunar_rain_day29.json": {
-    "path": "climate/results/crm/box_box_0e_small_lunar_rain_day29.json",
-    "sha256": "5da1c0c28ed1339f"
-   }
+   "climate/results/crm/box_box_0e_small_lunar_rain_day29.json": "5da1c0c28ed1339f",
+   "climate/results/crm/box_box_0e_small_rain_control_day29.json": "a8befc2578ad0fb1"
   }
  }
 }

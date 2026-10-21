@@ -116,3 +116,41 @@ def test_the_site_budget_holds_on_the_gcm():
     assert np.all(np.asarray(f['day_night']['theta_k_s'])[:, above] == 0.0)
     # The sea evaporates more than it rains, and the circulation carries the difference away.
     assert b['evaporation_mm_day'] > b['rain_mm_day'] and column['exact'] < 0.0
+
+
+def test_on_the_boxs_levels_the_table_gives_back_the_mean_winds_advection_of_its_starting_air():
+    hours = [-90.0, 90.0]
+    forcing = dict(profile=dict(z_m=[30000.0, 9000.0, 800.0]), vertical_wind_m_s=[0.0, 0.003, 0.002],
+                   day_night=dict(hour_angle_deg=hours),
+                   circulation=dict(theta_k_s=[[0.0, 1e-5, 2e-5], [0.0, -1e-5, -2e-5]],
+                                    qv_kg_kg_s=[[0.0, 0.0, 1e-8], [0.0, 0.0, -1e-8]]))
+    zw = np.linspace(0.0, 60000.0, 121)
+    theta_at = lambda z: 280.0 + 0.004 * np.asarray(z)
+    qv_at = lambda z: 0.012 * np.exp(-np.asarray(z) / 3000.0)
+    out = gs.to_cm1(forcing, zw, theta_at, qv_at)
+    zh = 0.5 * (zw[1:] + zw[:-1])
+    w = 0.5 * (np.asarray(out['w_m_s'])[1:] + np.asarray(out['w_m_s'])[:-1])
+    table = out['day_night']
+    assert np.allclose(table['z_m'], zh)
+    below = zh <= gs.TOP_M
+    # Less CM1's own advection of its starting air by the mean wind, what is left is the circulation's.
+    left = np.asarray(table['theta_k_s']) - (w * 0.004)[None, :]
+    circ = np.array([np.interp(zh, [0.0, 800.0, 9000.0, 30000.0], [r[2], r[2], r[1], r[0]])
+                     for r in forcing['circulation']['theta_k_s']])
+    assert np.allclose(left[:, below], circ[:, below], atol=1e-12)
+    assert np.all(np.asarray(table['theta_k_s'])[:, ~below] == 0.0)
+    assert np.all(np.asarray(table['qv_kg_kg_s'])[:, ~below] == 0.0)
+
+
+def test_the_wind_windows_follow_the_day():
+    hours = (np.arange(36) + 0.5) * 10.0 - 180.0
+    wind = dict(hour_angle_deg=hours.tolist(), z_m=[20000.0, 800.0],
+                u_m_s=[[0.0, float(np.cos(np.radians(h)))] for h in hours], v_m_s=[[0.0, 0.0] for _ in hours])
+    day = 36.0 * 1000.0
+    windows = gs.wind_windows(dict(wind_by_hour=wind), np.array([0.0, 800.0, 20000.0]), -90.0, day, 2.5 * day)
+    assert len(windows) == 90 and windows[0]['time_s'] == (0.0, 1000.0)
+    assert [w['hour_angle_deg'] for w in windows[:3]] == pytest.approx([-85.0, -75.0, -65.0])
+    for w in windows[:40]:
+        assert w['u_m_s'][0] == pytest.approx(np.cos(np.radians(w['hour_angle_deg'])))    # held down to the ground
+        assert w['u_m_s'][1] == pytest.approx(np.cos(np.radians(w['hour_angle_deg'])))
+    assert windows[36]['hour_angle_deg'] == pytest.approx(windows[0]['hour_angle_deg'])  # a day later, the same
