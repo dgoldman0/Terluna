@@ -1,0 +1,255 @@
+{
+  "schema": "terluna.snow.checks/1",
+  "checked_at_utc": "2026-10-21T14:17:47.030669+00:00",
+  "branch": "domain/atmosphere",
+  "base_commit": "c4469bd6a12d56299c828ead08fe01280b8539bc",
+  "scope": "Implementation, numerical controls, source/product identity and scientific interpretation review. No empirical validation; heavy population distribution has demonstrated numerical failure.",
+  "tests": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest atmosphere/tests/test_snow*.py -q -p no:cacheprovider",
+    "passed": 65,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 2.8
+  },
+  "layers": {
+    "method": "shared/check_layers.py parsers and allowed-lane map applied to tracked_sources plus untracked Python/JavaScript sources",
+    "files_checked": 1157,
+    "new_source_files": 15,
+    "violations": []
+  },
+  "research_check": {
+    "command": "python research/check.py --output /tmp/terluna-snow-research-checks.json",
+    "report": {
+      "checked_at_utc": "2026-10-21T13:51:18.675750+00:00",
+      "scope": "artifact integrity and numerical implementation only",
+      "scientific_validation": false,
+      "manuscript_clearance": false,
+      "retained_files": 110,
+      "integrity": "PASS",
+      "python": "3.13.7",
+      "dependencies": {
+        "numpy": "2.3.3",
+        "scipy": "1.16.2",
+        "matplotlib": "3.10.6"
+      },
+      "runner_sha256": "e7f2c4f0e92f497500f7d99bc80f4cb920e444b640e5953ca62eebb78a76da74",
+      "checks": {
+        "illumination": {
+          "status": "PASS",
+          "scope": "angular arithmetic only",
+          "output": {
+            "period_days": 29.53,
+            "angular_rate_deg_per_hour": 0.5079580088046055,
+            "interval_degrees": 6.0,
+            "angular_interval_hours": 11.812,
+            "solar_diameter_arcmin": 32.0,
+            "solar_disk_crossing_hours": 1.0499555555555555
+          }
+        },
+        "feasibility": {
+          "status": "PASS",
+          "model_sha256": "3a6c76f3437f0dab224472f8d3fd20cd90a7d82dffa8d46ec6a562702eae00c2",
+          "reference_sha256": "5878ad8ff00e42bffef193f1af39a17f0d7cf92f4b95319c486c369e2630c01d",
+          "tables_checked": {
+            "atmosphere_sensitivity.csv": 63,
+            "diffusive_sensitivity.csv": 20,
+            "energy_limited_sensitivity.csv": 12,
+            "thermal_response.csv": 18,
+            "growth.csv": 9,
+            "logistics.csv": 15,
+            "maintenance.csv": 6,
+            "transfer_routes.csv": 5,
+            "legacy_shield_geometry.csv": 18
+          },
+          "numerical_tests": {
+            "mass_grid_relative_difference": 7.283183522943659e-08,
+            "loss_grid_relative_difference": 3.6285393578694425e-08,
+            "independent_mass_integral_relative_difference": 3.717528063162945e-08,
+            "isothermal_analytic_relative_error": 2.6689761511988763e-13,
+            "zero_transfer_dv_check": true,
+            "tests_passed": true
+          },
+          "baseline": {
+            "status": "hydrostatic_proxy",
+            "tc": 180.0,
+            "te": 250.0,
+            "ph": 0.1,
+            "sigma": 5.5e-19,
+            "mass_kg": 3.1413494805269903e+18,
+            "column_kg_m2": 78658.47219584549,
+            "exo_R": 2.8125414066644705,
+            "exo_T": 249.60624715863094,
+            "exo_p_Pa": 1.7798236326780365e-08,
+            "lambda_N2": 13.543210621500839,
+            "loss_N2_kg_s": 0.12331192534276174,
+            "loss_O2_kg_s": 0.004611864727686949,
+            "loss_kg_s": 0.12792379007044868,
+            "lifetime_yr": 778145786164.3573,
+            "atomic_N_loss_fixed_profile": {
+              "1e-06": 4.928983847681393e-05,
+              "0.0001": 0.0049289838476813935,
+              "0.01": 0.4928983847681393,
+              "0.1": 4.928983847681392
+            },
+            "absorption_R": {
+              "1e-22": 1.672161967986732,
+              "1e-21": 1.8707035509455345,
+              "1e-20": 2.1295104398703026
+            }
+          },
+          "generated_plots": "four historical plots generated in a temporary directory; no visual review"
+        },
+        "protection": {
+          "status": "PASS",
+          "verifier_executed": true,
+          "model_sha256": "018cfbf6ac5e8ea6935480e09c4c2b69bf54b08c873d953d4b5e31c952d06647",
+          "verifier_sha256": "6b114a73e6847bc1216934fb26f8a1b3d50a0fd95fe66b9ec7969e33c841b534",
+          "reference_sha256": "121b68a0c309c5a0df926f770bc3112b61f9ec185cf6a24070525ce7e1713631",
+          "output": {
+            "scope": "Numerical and data consistency only; no physical validation of future systems.",
+            "analytic_single_slab_T_max_error": 1.3322676295501878e-15,
+            "holding_peak_relative_grid_error_2048_vs8192": 8.857541651252632e-07,
+            "maximum_component_mass_closure_relative_error": 2.220446049250313e-16,
+            "verified_input_hashes": 5
+          },
+          "full_optical_optimization_rerun": false
+        }
+      },
+      "not_executed": [
+        "April simulator",
+        "regional climate or hydrology",
+        "biological or habitation simulations",
+        "global plasma or dose transport",
+        "full ephemeris optimization"
+      ],
+      "result": "PASS"
+    }
+  },
+  "default_solver_parity": {
+    "baseline_sha256": "c956a62b33dd9842c25e037a7bd7180caed7f2dd2317b0164645bc00cac974cc",
+    "current_sha256": "b1be75f1dc08b92c320fd288d458940821a43a9ae346221cc2d0dbd7a1adf628",
+    "cases": [
+      {
+        "world": "earth",
+        "settings": {
+          "top_c": -2.0,
+          "number_per_m3": 10000.0,
+          "snowfall_mm_h": 1.0,
+          "bins": 8,
+          "inject": 4,
+          "fill": 1.0,
+          "gather": 0.5,
+          "seed": 19
+        },
+        "bitwise_equal": true,
+        "arriving_superparticles": 89
+      },
+      {
+        "world": "moon",
+        "settings": {
+          "top_c": -2.0,
+          "number_per_m3": 10000.0,
+          "snowfall_mm_h": 1.0,
+          "bins": 8,
+          "inject": 4,
+          "fill": 1.0,
+          "gather": 0.5,
+          "seed": 19
+        },
+        "bitwise_equal": true,
+        "arriving_superparticles": 1184
+      }
+    ]
+  },
+  "stored_baseline_summary_controls": [
+    {
+      "id": "moon_1_100_legacy_bf95_s0",
+      "summary_fields": [
+        "median_by_mass_mm",
+        "d90_by_mass_mm",
+        "d99_by_mass_mm",
+        "largest_hourly_mm",
+        "snowfall_mm_h",
+        "flakes_per_m2_hour",
+        "crossing_hours",
+        "fragments_per_m2_s"
+      ],
+      "exact_match": true
+    },
+    {
+      "id": "moon_3_100_legacy_bf95_s0",
+      "summary_fields": [
+        "median_by_mass_mm",
+        "d90_by_mass_mm",
+        "d99_by_mass_mm",
+        "largest_hourly_mm",
+        "snowfall_mm_h",
+        "flakes_per_m2_hour",
+        "crossing_hours",
+        "fragments_per_m2_s"
+      ],
+      "exact_match": true
+    }
+  ],
+  "figure": {
+    "command": "OPENBLAS_NUM_THREADS=1 python visualization/snow/plot.py",
+    "manifest": "visualization/snow/generated/manifest.json",
+    "manifest_sha256": "0c1608a5e8b2ba3ab0721bebb317324a000b87d1362d501566ed54fd6992853b",
+    "output_sha256": {
+      "overview.png": "6fa6b02e7f7e4747af058a523c351d90dcb747c165190ecf67dc6133407b9cd5",
+      "overview.svg": "b439acc01dc30d9efdae03f90a5d387eeecb5e6741d5042e84d9b3dcc0beae32"
+    },
+    "numeric_checks": [
+      "Expected product schemas",
+      "Optics binds the plotted population hash",
+      "CDF moments reproduce stored totals",
+      "Optical area total reproduces extinction",
+      "Finite CDFs monotonic; finite and overflow fractions sum to one",
+      "Both weather boxes span at least 29 days"
+    ],
+    "visual_review": "Final PNG inspected by producer and primary reviewer; labels, log-axis ticks, tail annotations, captions and source qualifications are legible with no observed overlap or clipping. SVG XML and embedded identities checked; no separate SVG raster review."
+  },
+  "source_sha256": {
+    "atmosphere/snow/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "atmosphere/snow/aggregation.py": "b1be75f1dc08b92c320fd288d458940821a43a9ae346221cc2d0dbd7a1adf628",
+    "atmosphere/snow/assessment.py": "0b8963147b368e2c70268fec70f7ca95e71d2f3af23a5692426e9f5b352ccc2f",
+    "atmosphere/snow/flakes.py": "ce3a82113fc62480130c4db99a95de44d7f3f1432f6444cdb8fcb86ced8012a5",
+    "atmosphere/snow/growth_depth.py": "fba837d064213c5dae225f6cb6d26985f533b88cc949e7e9ee6ffeb0489398f0",
+    "atmosphere/snow/habits.py": "e2cd9e9693b70c03de051f98635416f7f29b7cf87a1d7bda9154ccedfe26e8d1",
+    "atmosphere/snow/numerical_audit.py": "2bf7c6e391e6bfd5f7d47013da80d1aaba2cf558aba762f1034a76284b6db440",
+    "atmosphere/snow/optics.py": "2cfe2d58eef7e1dfef6ad05f0e34bcdca954bff04fbbb3df07d125ff2ad21d81",
+    "atmosphere/snow/population.py": "af0d7e54cc653c7c52342404760842714279bf4673c6d986c8f853558d53e3e8",
+    "atmosphere/snow/turbulence.py": "d5909aaacab7cf11a64dea7fa992b8494ec44bc7ff0ead6648d1a067d95924b5",
+    "atmosphere/tests/test_snow.py": "a1c3e26f13cdcee2288394422c4b887f6f7d4beb4d8d4c41ed15151b792a4357",
+    "atmosphere/tests/test_snow_assessment.py": "3463dddaa87ee0e571624ea15ee021b19d775adae462376c9291575a1d081856",
+    "atmosphere/tests/test_snow_growth_depth.py": "13333a8b4738fbb50ced055bf59a619a0a6242ce5343f396383cfe680942d363",
+    "atmosphere/tests/test_snow_habits.py": "1cb57b8779c10ae02d18125a70f2ea7c01c9a5890828e08075dc13c41eac1347",
+    "atmosphere/tests/test_snow_numerical_audit.py": "a5e7b289a0d9c3e988c7cd1551f4126076ff57b84cbd802315a99e9701900b47",
+    "atmosphere/tests/test_snow_optics.py": "5d0b2f214029ccf795138145fd49b75c806d4925269ad23eea70388d156fd62c",
+    "atmosphere/tests/test_snow_population.py": "92955826062260e5e192f5ca750b57caed979103af152eb5f9fae9d2319998a3",
+    "atmosphere/tests/test_snow_turbulence.py": "4dcf28296891fcf924d3d456c5cd3c7177a0142837f49c90da8df9ceb4014661",
+    "visualization/snow/plot.py": "cffbf147edf6bb3c9509250b2dea244379989c19f646db32835ff8921d50b19c"
+  },
+  "product_sha256": {
+    "atmosphere/snow/results/population.json": "65d899e2509a76d79589569972d104dcb84de862eb7ed1eb7cc15db8eabbf66b",
+    "atmosphere/snow/results/growth_depth.json": "f00c970af68064c878b8ca0081155f5b0b2423ab969edeae0b7dabefbf41277a",
+    "atmosphere/snow/results/numerical_audit.json": "55bbb91401ab7fedaf49f8233384e177ee94d901aa023fd67654d1bc7a168787",
+    "atmosphere/snow/results/turbulence.json": "43d83ee9be86e5c0d3de0f5fc7a967e5cee8ae2e5aa18adda798d5e03dd5fbf5",
+    "atmosphere/snow/results/optics.json": "22c05864f9412c4b69a96b810060e9879613d019820098756f76ba5f663023cc"
+  },
+  "scientific_adequacy": {
+    "population_distribution": "exploratory_numerically_unresolved",
+    "astronomical_tail": "physically impossible",
+    "mass_conservation": "does not establish distribution accuracy",
+    "decimetre_aggregate_survival": "not established or disproven by this audit",
+    "empirical_validation": false
+  },
+  "not_performed": [
+    "full make check suite",
+    "new GCM or cloud-resolving production climate run",
+    "corrected collision solver with numerical convergence",
+    "aggregate contact-strength/fracture validation",
+    "joint finite-storm optical rendering",
+    "commit or push"
+  ]
+}

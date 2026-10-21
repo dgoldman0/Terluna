@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19",
+  "updated": "2026-10-21",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -11,7 +11,7 @@
   "topics": [
     {
       "topic": "atmosphere",
-      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules; escaped_air_cloud_in_earth_moon_space; exosphere_losses_ions_fragments_charge_exchange_with_and_without_a_lunar_magnetosphere; slant_path_tracing_of_light_passing_the_shield_with_fism2_x_ray_cycle; infrared_cooling_in_the_thermal_column_2026_10_08; no_oxidant_under_the_titania_stack_joint_synthesis_2026_10_08; ch4_n2o_line_by_line_forcing_in_the_deep_column",
+      "condition": "solved_molecular_thermal_limit; clear_sky_line_by_line_radiation_for_prescribed_columns; shield_filtered_sunlight; correlated_k_thermal_scheme_validated_to_5_30_pa; global_mean_radiative_photochemical_equilibrium_per_shield; balance_temperatures_solved_for_every_case; two_level_non_lte_co2_cooling_with_nir_thermalisation_bounds; idealised_filter_and_titania_film_leakage_heating_and_atomic_oxygen_escape_bounds; line_by_line_radiation_benchmarks_for_gcm; fluorinated_trace_gas_forcing_from_measured_bands; exobase_coupling_conditional; exobase_co2_sensitivity_150_280ppm; loss_response_screening_uv_leak_glow_and_solar_wind; shield_radius_for_thermospheric_heating; exospheric_ion_production_upper_bound; earth_tide_in_escape_from_three_body_test_molecules; escaped_air_cloud_in_earth_moon_space; exosphere_losses_ions_fragments_charge_exchange_with_and_without_a_lunar_magnetosphere; slant_path_tracing_of_light_passing_the_shield_with_fism2_x_ray_cycle; infrared_cooling_in_the_thermal_column_2026_10_08; no_oxidant_under_the_titania_stack_joint_synthesis_2026_10_08; ch4_n2o_line_by_line_forcing_in_the_deep_column; aerial_snow_growth_environments_diagnosed_from_archived_cm1_2026_10_21; snow_geometry_corrections_population_and_optical_sensitivities; snow_conservative_sectional_reference_and_targeted_geometry_contact_literature_2026_10_21",
       "material": [
         "../atmosphere/sim/sim1.py",
         "baselines/feasibility/model.py",
@@ -24,7 +24,18 @@
         "../atmosphere/radiative_convective/ck.py",
         "../atmosphere/loss_response/",
         "studies/atmospheric_electricity/README.md",
-        "../atmosphere/electricity/"
+        "../atmosphere/electricity/",
+        "../atmosphere/snow/analysis.md",
+        "../atmosphere/snow/habits.md",
+        "../atmosphere/snow/turbulence.md",
+        "../atmosphere/snow/optics.md",
+        "../atmosphere/snow/numerical_audit.md",
+        "../atmosphere/snow/repair.md",
+        "../atmosphere/snow/sectional.py",
+        "../atmosphere/snow/geometry_literature.md",
+        "../atmosphere/snow/strength_literature.md",
+        "../atmosphere/snow/results/kernel_diagnostics.json",
+        "../atmosphere/snow/results/repair.json"
       ],
       "unresolved": [
         "upper-air temperature above ~1 Pa bounded by how near-infrared heating thermalises, not solved; the thermal column radiates CO2's 15-um band and the base's atomic oxygen and NO since 2026-10-08 (loss_response/infrared.py), with the oxygen atoms made above the base left out",
@@ -39,7 +50,9 @@
         "the exosphere step's ion fates are bounds and a comparison of timescales: the share of the solar wind's straight-path charge exchange that happens (0.1-1), the open-field share, convection and draining speeds, cusp entry and the extra escape a weak field can drive, to check against plasma simulations; the O2 share at the exobase (well mixed or diffusively separated) and the charge-exchange cross-section, not re-read for the step",
         "escape during the Moon's monthly passage through Earth's magnetotail (July 2026 bundle, archive/july_2026_knowledge_bundle/)",
         "the conducting upper atmosphere above 150 km, the global electric circuit and transient luminous events (research/studies/atmospheric_electricity; the troposphere's ionization and conductivity are computed in atmosphere/electricity)",
-        "the air under the titania stack holds essentially no OH, ozone or HO2 (the design column: OH near 1e-27, HO2 near 1e-21 as mole fractions), so gases released into it (hydrogen, methane, carbon monoxide, organic compounds, lightning's NO) leave only through soils, rain and escape; the middle-atmosphere model lacks NO's deposition and the lunar night's chemistry, so lightning's NO grows there without bound (research/studies/joint_synthesis, air_chemistry); NO at the 0.3 Pa base up to 100 ppb leaves the loss screen unchanged"
+        "the air under the titania stack holds essentially no OH, ozone or HO2 (the design column: OH near 1e-27, HO2 near 1e-21 as mole fractions), so gases released into it (hydrogen, methane, carbon monoxide, organic compounds, lightning's NO) leave only through soils, rain and escape; the middle-atmosphere model lacks NO's deposition and the lunar night's chemistry, so lightning's NO grows there without bound (research/studies/joint_synthesis, air_chemistry); NO at the 0.3 Pa base up to 100 ppb leaves the loss screen unchanged",
+        "Aerial snow: the earlier 15–60 cm aggregates are conditional population results, with no large-aggregate mechanical fracture law. The source review corrects the Brown–Francis diameter convention and the aggregate area normalization; the earlier tables remain a baseline. Snow-conditioned archived cloud motions distinguish subsaturated falling snow from active mixed-phase growth. The populations require a prescribed moist path and water supply; crystal-habit frequencies, riming, evolving trajectories, mechanical contact strengths and physically bounded extreme tails remain unresolved. The inherited algorithm mixes fractional particle weights with integer splitting and an absolute fragment threshold, violating arbitrary-area invariance; its distribution results remain exploratory until consistent bookkeeping and collision-batch convergence are established. A separate conservative sectional reference removes those packet operations and passes analytical coagulation controls; the three completed heavy-snow controls (96 and 144 mass pivots, and a larger domain at the 144-grid spacing) all fail the finite size-domain check. Six further controls are deferred; full mass-grid, timestep, spatial and domain convergence remains unestablished. The targeted literature supports near-quadratic fractal geometry and contact aging, but no transferable decimetre strength law; evolving geometry and hydrodynamic interception require isolated physical tests.",
+        "Snow optics: geometric-area extinction and height-resolved incident lunar light are calculated with explicit phase and cloud-water sensitivities. The 294.9 K optical column differs from the 301 K snow column. Direction-dependent aggregate area, calibrated phase matrices, the Earthlight spectrum and joint transport through a finite evolving snow/liquid cloud remain unresolved."
       ],
       "next_session_task": "Couple the middle atmosphere and exobase to the 3-D circulation the author chooses."
     },

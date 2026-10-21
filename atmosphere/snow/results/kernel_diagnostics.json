@@ -1,0 +1,858 @@
+{
+  "schema": "terluna.atmosphere.snow-kernel-diagnostics/1",
+  "rows": [
+    {
+      "temperature_c": -15.0,
+      "geometry": {
+        "id": "bf95_dmax_dendrites_area",
+        "mass_coefficient": 0.0121,
+        "mass_exponent": 1.9,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Fixed representative area sensitivity: q(1024)*phi(1024) from synthetic dendrites aggregates. Holding this ratio at all sizes and combining it with Brown\u2013Francis is a modelling scenario, not a habit-specific mass fit. Earth cloud aggregate relation; not validated for 0.15\u20130.60 m snow. No riming, crystal habit fractions or geometric scatter represented.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.0002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.5422296765073629,
+        0.6130984084663506,
+        0.6471018941321447,
+        0.6508205284072968,
+        0.6506380432063205,
+        0.6442236181986084,
+        0.6366273152221142,
+        0.5865114731616787,
+        0.5285641723914513,
+        0.47283834096533117
+      ],
+      "partner_speed_m_s": 0.10232426627407396,
+      "encounter_kernel_m3_s": [
+        9.353053722907452e-06,
+        9.519991730778902e-05,
+        0.0011177598083296917,
+        0.002528758291487035,
+        0.010098208095922635,
+        0.039893707208658515,
+        0.10923332034024183,
+        9.895197439625228,
+        871.0631206024407,
+        75717.91839078999
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.1331666682624573,
+        1.0924888029182285,
+        1.0633304202798521,
+        1.05633798356442,
+        1.046869093263377,
+        1.0398650825667737,
+        1.0359057023524687,
+        1.025788388267033,
+        1.0217297186376162,
+        1.0196455518922023
+      ]
+    },
+    {
+      "temperature_c": -15.0,
+      "geometry": {
+        "id": "bf95_dmax_dendrites_area",
+        "mass_coefficient": 0.0121,
+        "mass_exponent": 1.9,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Fixed representative area sensitivity: q(1024)*phi(1024) from synthetic dendrites aggregates. Holding this ratio at all sizes and combining it with Brown\u2013Francis is a modelling scenario, not a habit-specific mass fit. Earth cloud aggregate relation; not validated for 0.15\u20130.60 m snow. No riming, crystal habit fractions or geometric scatter represented.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.5422296765073629,
+        0.6130984084663506,
+        0.6471018941321447,
+        0.6508205284072968,
+        0.6506380432063205,
+        0.6442236181986084,
+        0.6366273152221142,
+        0.5865114731616787,
+        0.5285641723914513,
+        0.47283834096533117
+      ],
+      "partner_speed_m_s": 0.36345603259339065,
+      "encounter_kernel_m3_s": [
+        5.260896606676067e-06,
+        5.224106787839886e-05,
+        0.0006030739607965791,
+        0.0013567944786459607,
+        0.005352601356304312,
+        0.02079379375382754,
+        0.056048535200092196,
+        4.560162335064465,
+        337.42685038977186,
+        22353.349252785167
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.1261524799014955,
+        1.0826538905349257,
+        1.0565755698618833,
+        1.0485309529010252,
+        1.0359972119553305,
+        1.0251713013106643,
+        1.0182276183690848,
+        0.9941981871187084,
+        0.9728403306243513,
+        0.9408955976095842
+      ]
+    },
+    {
+      "temperature_c": -15.0,
+      "geometry": {
+        "id": "mass_exponent_2_matched_at_1_cm",
+        "mass_coefficient": 0.019177207628779478,
+        "mass_exponent": 2.0,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Diagnostic constant exponent 2 matched to baseline mass at 1 cm; not an observed lunar geometry or accepted physical repair.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.0002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.5422296765073629,
+        0.6523212208445022,
+        0.7321122012355246,
+        0.7511874111741303,
+        0.7768161691915004,
+        0.7954758351212134,
+        0.8058204409076881,
+        0.830665767733876,
+        0.8386817110093104,
+        0.8412326647929613
+      ],
+      "partner_speed_m_s": 0.07151961755410895,
+      "encounter_kernel_m3_s": [
+        1.0008007100817333e-05,
+        0.000108251886769676,
+        0.001355385761017565,
+        0.003133504614760481,
+        0.012989335025683836,
+        0.053296423538686924,
+        0.15012101694236277,
+        15.514455844150238,
+        1567.7711015377529,
+        157297.85634654306
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.105260103553478,
+        1.0647953930068748,
+        1.036823539852586,
+        1.0303034552632888,
+        1.0216440055123257,
+        1.0154115170322975,
+        1.011982416666792,
+        1.0038220683048786,
+        1.001211902466341,
+        1.000383562026249
+      ]
+    },
+    {
+      "temperature_c": -15.0,
+      "geometry": {
+        "id": "mass_exponent_2_matched_at_1_cm",
+        "mass_coefficient": 0.019177207628779478,
+        "mass_exponent": 2.0,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Diagnostic constant exponent 2 matched to baseline mass at 1 cm; not an observed lunar geometry or accepted physical repair.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.5422296765073629,
+        0.6523212208445022,
+        0.7321122012355246,
+        0.7511874111741303,
+        0.7768161691915004,
+        0.7954758351212134,
+        0.8058204409076881,
+        0.830665767733876,
+        0.8386817110093104,
+        0.8412326647929613
+      ],
+      "partner_speed_m_s": 0.32374947791385295,
+      "encounter_kernel_m3_s": [
+        6.429369062699275e-06,
+        6.875811314221311e-05,
+        0.0008682408537860167,
+        0.0020181526815579573,
+        0.00844441955487813,
+        0.0349362999253285,
+        0.09890999917083255,
+        10.363435054435232,
+        1052.3524872249393,
+        105752.77282884964
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.1023581645904839,
+        1.0637422507963563,
+        1.0431890380081636,
+        1.0371448461715569,
+        1.0281081913019325,
+        1.0208411180623078,
+        1.016560449275787,
+        1.0055538323183495,
+        1.0017885101294561,
+        1.0005688139852904
+      ]
+    },
+    {
+      "temperature_c": -10.0,
+      "geometry": {
+        "id": "bf95_dmax_dendrites_area",
+        "mass_coefficient": 0.0121,
+        "mass_exponent": 1.9,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Fixed representative area sensitivity: q(1024)*phi(1024) from synthetic dendrites aggregates. Holding this ratio at all sizes and combining it with Brown\u2013Francis is a modelling scenario, not a habit-specific mass fit. Earth cloud aggregate relation; not validated for 0.15\u20130.60 m snow. No riming, crystal habit fractions or geometric scatter represented.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.0002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.5203123062033547,
+        0.5865590706636619,
+        0.6178782018389755,
+        0.6211498335214884,
+        0.6206063846725413,
+        0.6142245746695788,
+        0.6068380579142332,
+        0.5587459894359544,
+        0.5034449364728624,
+        0.450338335558904
+      ],
+      "partner_speed_m_s": 0.10027591801955692,
+      "encounter_kernel_m3_s": [
+        8.930608291849961e-06,
+        9.063519880076997e-05,
+        0.0010620021821155497,
+        0.0024014096787498326,
+        0.009582843896989369,
+        0.0378360246342104,
+        0.1035619478651611,
+        9.369623592466029,
+        823.9154952503444,
+        71538.43638737316
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.1314464659457952,
+        1.091373552007941,
+        1.062629886634409,
+        1.055732363076695,
+        1.0463876010038509,
+        1.0394706464336734,
+        1.0355576500550565,
+        1.0255365903386382,
+        1.0214837243243746,
+        1.0193693051080222
+      ]
+    },
+    {
+      "temperature_c": -10.0,
+      "geometry": {
+        "id": "bf95_dmax_dendrites_area",
+        "mass_coefficient": 0.0121,
+        "mass_exponent": 1.9,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Fixed representative area sensitivity: q(1024)*phi(1024) from synthetic dendrites aggregates. Holding this ratio at all sizes and combining it with Brown\u2013Francis is a modelling scenario, not a habit-specific mass fit. Earth cloud aggregate relation; not validated for 0.15\u20130.60 m snow. No riming, crystal habit fractions or geometric scatter represented.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.5203123062033547,
+        0.5865590706636619,
+        0.6178782018389755,
+        0.6211498335214884,
+        0.6206063846725413,
+        0.6142245746695788,
+        0.6068380579142332,
+        0.5587459894359544,
+        0.5034449364728624,
+        0.450338335558904
+      ],
+      "partner_speed_m_s": 0.3513686037587565,
+      "encounter_kernel_m3_s": [
+        4.97162406857789e-06,
+        4.921680905722509e-05,
+        0.0005666396753776803,
+        0.0012737749037077765,
+        0.005018150364682361,
+        0.019467250232251012,
+        0.052416522542168505,
+        4.239638992440439,
+        310.79411365974653,
+        20225.43694050153
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.1244623483607357,
+        1.081359043027983,
+        1.0554905633508833,
+        1.0474741152932794,
+        1.0349486725785964,
+        1.0240873982091891,
+        1.017092537437924,
+        0.9925660169261833,
+        0.9700401426695322,
+        0.9349793792171608
+      ]
+    },
+    {
+      "temperature_c": -10.0,
+      "geometry": {
+        "id": "mass_exponent_2_matched_at_1_cm",
+        "mass_coefficient": 0.019177207628779478,
+        "mass_exponent": 2.0,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Diagnostic constant exponent 2 matched to baseline mass at 1 cm; not an observed lunar geometry or accepted physical repair.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.0002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.5203123062033547,
+        0.6240086039560291,
+        0.6989492024690657,
+        0.716841618871942,
+        0.7408681990578191,
+        0.758352335000415,
+        0.7680420801504609,
+        0.7913056573026673,
+        0.7988086546891481,
+        0.8011961087217948
+      ],
+      "partner_speed_m_s": 0.0701501629308213,
+      "encounter_kernel_m3_s": [
+        9.571127365345037e-06,
+        0.00010323012351312802,
+        0.0012901526383812382,
+        0.002981472243556933,
+        0.012352507975257212,
+        0.050664271613173294,
+        0.14267755257359932,
+        14.738051522159367,
+        1489.0852089989226,
+        149395.88275949765
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.1036078294959308,
+        1.0637955921665903,
+        1.0362666556419524,
+        1.029847662412613,
+        1.0213209311941895,
+        1.015182792346349,
+        1.0118051614546348,
+        1.0037659786070763,
+        1.0011941641872832,
+        1.0003779526554812
+      ]
+    },
+    {
+      "temperature_c": -10.0,
+      "geometry": {
+        "id": "mass_exponent_2_matched_at_1_cm",
+        "mass_coefficient": 0.019177207628779478,
+        "mass_exponent": 2.0,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Diagnostic constant exponent 2 matched to baseline mass at 1 cm; not an observed lunar geometry or accepted physical repair.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.5203123062033547,
+        0.6240086039560291,
+        0.6989492024690657,
+        0.716841618871942,
+        0.7408681990578191,
+        0.758352335000415,
+        0.7680420801504609,
+        0.7913056573026673,
+        0.7988086546891481,
+        0.8011961087217948
+      ],
+      "partner_speed_m_s": 0.3131379880389476,
+      "encounter_kernel_m3_s": [
+        6.096663040252395e-06,
+        6.505391118288495e-05,
+        0.0008202929383276757,
+        0.001906090923905387,
+        0.007972189144945217,
+        0.03297280662582912,
+        0.09333597504841526,
+        9.77569607657435,
+        992.551448855963,
+        99739.47148915989
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.1010645452883694,
+        1.062959473876147,
+        1.0427530350232779,
+        1.0367879909369007,
+        1.02785524577459,
+        1.0206620419675527,
+        1.0164216703286257,
+        1.005509917846835,
+        1.001774622248085,
+        1.0005644222268628
+      ]
+    },
+    {
+      "temperature_c": -2.0,
+      "geometry": {
+        "id": "bf95_dmax_dendrites_area",
+        "mass_coefficient": 0.0121,
+        "mass_exponent": 1.9,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Fixed representative area sensitivity: q(1024)*phi(1024) from synthetic dendrites aggregates. Holding this ratio at all sizes and combining it with Brown\u2013Francis is a modelling scenario, not a habit-specific mass fit. Earth cloud aggregate relation; not validated for 0.15\u20130.60 m snow. No riming, crystal habit fractions or geometric scatter represented.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.0002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.4878350566204922,
+        0.547422872850767,
+        0.5749190504684137,
+        0.5775648610460816,
+        0.5765329307297341,
+        0.5702289309719767,
+        0.5631664793104951,
+        0.5180782081964614,
+        0.4666642333028887,
+        0.41739616764705356
+      ],
+      "partner_speed_m_s": 0.09716421774748571,
+      "encounter_kernel_m3_s": [
+        8.306252341872298e-06,
+        8.392082369121313e-05,
+        0.0009802442738890405,
+        0.0022148138352891204,
+        0.008828457759082559,
+        0.034826218361586135,
+        0.09526985559376727,
+        8.602100553970185,
+        755.1095802928105,
+        65442.30922623888
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.1287983679752358,
+        1.0896549628668792,
+        1.0615451276956642,
+        1.054792269768837,
+        1.0456363601156948,
+        1.0388514613656021,
+        1.035008562449067,
+        1.025130533461085,
+        1.0210814895154487,
+        1.0189143688874236
+      ]
+    },
+    {
+      "temperature_c": -2.0,
+      "geometry": {
+        "id": "bf95_dmax_dendrites_area",
+        "mass_coefficient": 0.0121,
+        "mass_exponent": 1.9,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Fixed representative area sensitivity: q(1024)*phi(1024) from synthetic dendrites aggregates. Holding this ratio at all sizes and combining it with Brown\u2013Francis is a modelling scenario, not a habit-specific mass fit. Earth cloud aggregate relation; not validated for 0.15\u20130.60 m snow. No riming, crystal habit fractions or geometric scatter represented.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.4878350566204922,
+        0.547422872850767,
+        0.5749190504684137,
+        0.5775648610460816,
+        0.5765329307297341,
+        0.5702289309719767,
+        0.5631664793104951,
+        0.5180782081964614,
+        0.4666642333028887,
+        0.41739616764705356
+      ],
+      "partner_speed_m_s": 0.3332452167685063,
+      "encounter_kernel_m3_s": [
+        4.5492229508689135e-06,
+        4.481959214778356e-05,
+        0.0005138350875970167,
+        0.0011535577609950445,
+        0.004534483705792445,
+        0.017551137413318967,
+        0.047174614596473236,
+        3.7787396874949177,
+        272.6646825914172,
+        17197.073484185825
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.1218372942515433,
+        1.0793302015530388,
+        1.053766062673875,
+        1.0457857003975601,
+        1.0332590849962595,
+        1.0223269043768648,
+        1.0152389605660699,
+        0.9898418249912194,
+        0.9652393187545619,
+        0.9243212324525578
+      ]
+    },
+    {
+      "temperature_c": -2.0,
+      "geometry": {
+        "id": "mass_exponent_2_matched_at_1_cm",
+        "mass_coefficient": 0.019177207628779478,
+        "mass_exponent": 2.0,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Diagnostic constant exponent 2 matched to baseline mass at 1 cm; not an observed lunar geometry or accepted physical repair.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.0002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.4878350566204922,
+        0.582265581587201,
+        0.650210392520006,
+        0.6664002818243296,
+        0.6881225997818174,
+        0.7039174226228057,
+        0.7126665614218335,
+        0.7336595304743242,
+        0.7404265827190103,
+        0.742579495867039
+      ],
+      "partner_speed_m_s": 0.06807031853076406,
+      "encounter_kernel_m3_s": [
+        8.924832600384111e-06,
+        9.58375580896229e-05,
+        0.001194419051460701,
+        0.002758508963833633,
+        0.011419404782160691,
+        0.04680998069112631,
+        0.13178174451458888,
+        13.602459074047657,
+        1374.0260760078465,
+        137842.08032028124
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.101072349895085,
+        1.0622644190188442,
+        1.0354144206903353,
+        1.0291502074287928,
+        1.0208266145876852,
+        1.014832852987804,
+        1.011533974016437,
+        1.0036801679555833,
+        1.0011670267781885,
+        1.0003693709952841
+      ]
+    },
+    {
+      "temperature_c": -2.0,
+      "geometry": {
+        "id": "mass_exponent_2_matched_at_1_cm",
+        "mass_coefficient": 0.019177207628779478,
+        "mass_exponent": 2.0,
+        "area_ratio": 0.26019796807371026,
+        "capacitance_ratio": 0.25,
+        "evidence": "Diagnostic constant exponent 2 matched to baseline mass at 1 cm; not an observed lunar geometry or accepted physical repair.",
+        "source_ids": [
+          "hogan_2012",
+          "seifert_2026",
+          "westbrook_2008"
+        ]
+      },
+      "partner_diameter_m": 0.002,
+      "diameter_m": [
+        0.01,
+        0.03,
+        0.1,
+        0.15,
+        0.3,
+        0.6,
+        1.0,
+        10.0,
+        100.0,
+        1000.0
+      ],
+      "collector_speed_m_s": [
+        0.4878350566204922,
+        0.582265581587201,
+        0.650210392520006,
+        0.6664002818243296,
+        0.6881225997818174,
+        0.7039174226228057,
+        0.7126665614218335,
+        0.7336595304743242,
+        0.7404265827190103,
+        0.742579495867039
+      ],
+      "partner_speed_m_s": 0.29721569758384847,
+      "encounter_kernel_m3_s": [
+        5.609488720860989e-06,
+        5.9650571289735184e-05,
+        0.0007505200592755449,
+        0.0017431088836495352,
+        0.007285863102733501,
+        0.03012054176965075,
+        0.08524106978470358,
+        8.92269080300242,
+        905.7775904478893,
+        91014.46729135714
+      ],
+      "local_dlog_kernel_dlog_mass": [
+        1.09908435614106,
+        1.0617636392645955,
+        1.0420874458485947,
+        1.0362432837546398,
+        1.0274691881488336,
+        1.0203887419049986,
+        1.0162098749330868,
+        1.0054429003587575,
+        1.0017534281306362,
+        1.0005577200104834
+      ]
+    }
+  ],
+  "chipping_cap": {
+    "fragment_diameter_m": 0.0001,
+    "maximum_fragments": 100.0,
+    "fragment_mass_kg": 3.0393825821265945e-10,
+    "examples": [
+      {
+        "diameter_m": 0.01,
+        "mass_kg": 1.917720762877948e-06,
+        "maximum_chipped_mass_kg": 3.039382582126595e-08,
+        "maximum_chipped_fraction": 0.015848931924611145
+      },
+      {
+        "diameter_m": 0.15,
+        "mass_kg": 0.0003291234012743193,
+        "maximum_chipped_mass_kg": 3.039382582126595e-08,
+        "maximum_chipped_fraction": 9.234781150044436e-05
+      },
+      {
+        "diameter_m": 0.6,
+        "mass_kg": 0.004584296997972719,
+        "maximum_chipped_mass_kg": 3.039382582126595e-08,
+        "maximum_chipped_fraction": 6.629986197383545e-06
+      }
+    ],
+    "interpretation": "Upper bound per nonsticking encounter when the stated aggregate is the smaller parent. The larger parent loses no mass in this closure. This is a code-law diagnostic, not a measured mechanical survival threshold."
+  },
+  "checks": {
+    "log_derivative_step_halving_max_absolute_difference": 6.47035758305492e-11,
+    "anchor_mass_difference_kg": 0.0
+  },
+  "evidence": "Calculation of the inherited fixed-geometry kernel. Local slopes above one identify superlinear sweepout against a specified partner; they neither prove gelation in the finite, settling, fragmenting column nor isolate the cause of the old stochastic runaway. Large dimensions are diagnostic extrapolations.",
+  "reading_rule": "K is encounter volume per time, before temperature-only sticking efficiency. Temperature is fixed within each row. dlogK/dlogm holds the partner fixed. The exponent-2 scenario holds partner diameter fixed, which also changes its mass and speed. Its finite-size encounter rates need not decrease. It is separate from numerical repair.",
+  "theory": {
+    "source": "https://doi.org/10.1103/PhysRevE.70.021403",
+    "scope": "Westbrook et al. 2004 section IV: morphology feedback in an ideal irreversible aggregation model; conditional guidance for kernel diagnosis."
+  },
+  "producer": {
+    "files": {
+      "atmosphere/snow/kernel_diagnostics.py": "1cc7e0cec66163b2e80f996919127178f552165395f44035a6221388b55384cc",
+      "atmosphere/snow/aggregation.py": "b1be75f1dc08b92c320fd288d458940821a43a9ae346221cc2d0dbd7a1adf628",
+      "atmosphere/snow/habits.py": "e2cd9e9693b70c03de051f98635416f7f29b7cf87a1d7bda9154ccedfe26e8d1",
+      "atmosphere/snow/flakes.py": "ce3a82113fc62480130c4db99a95de44d7f3f1432f6444cdb8fcb86ced8012a5",
+      "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
+      "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",
+      "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+    },
+    "inputs": {
+      "research/studies/climate_targets/results/climate_targets.json": "80a85def114b039cef9c9acd97b18d3bd47413f51f6693d1cc6f5e850ebdbea8"
+    },
+    "constants": {
+      "AVOGADRO": 6.02214076e+23,
+      "BOLTZMANN": 1.380649e-23,
+      "EARTH_GM": 398600441800000.0,
+      "EARTH_RADIUS": 6371000.0,
+      "GAS_CONSTANT": 8.31446261815324,
+      "MOON_GM": 4902800118000.0,
+      "MOON_RADIUS": 1737400.0,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "STANDARD_GRAVITY": 9.80665
+    }
+  }
+}

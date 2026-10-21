@@ -1,0 +1,43 @@
+{
+  "schema": "terluna.atmosphere.snow-checkpoint-checks/1",
+  "checked_at_utc": "2026-10-21T18:10:42.592759+00:00",
+  "branch": "domain/atmosphere",
+  "parent_commit": "c4469bd6a12d56299c828ead08fe01280b8539bc",
+  "command": "PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS=\"-p no:cacheprovider\" OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+  "exit_code": 0,
+  "result": "PASS",
+  "python": {
+    "passed": 2898,
+    "skipped": 20,
+    "seconds": 589.89
+  },
+  "javascript": [
+    {
+      "suite": "immersion",
+      "passed": 129,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "atmosphere column, illumination references and atmospheric-column viewer",
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "calendar and light-calendar viewer after build",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "layer_check": {
+    "files": 1162,
+    "violations": 0
+  },
+  "provenance": "PASS; 110 retained files and five protection input hashes verified",
+  "ensemble": "PASS; planning snapshot and workspace integrity only, five paper workspaces",
+  "log_sha256": "3f945dcbf238da3fff6b72a23a163771babfaace19f672793795360c2d34b3e2",
+  "working_tree_after_checks": "No unstaged tracked changes; main checkout clean",
+  "reading_rule": "This later pre-commit check supplements the earlier focused checks and repair_checks records. Passing repository checks does not validate the failed snow size-domain calculations. No new scientific claims are admitted by this commit check."
+}

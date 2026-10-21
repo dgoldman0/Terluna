@@ -1,0 +1,127 @@
+{
+  "schema": "terluna.atmosphere.snow-repair-checks/1",
+  "checked_at_utc": "2026-10-21T15:34:15.099134+00:00",
+  "scope": "Targeted primary-literature review, independent numerical reference and three full-column diagnostic controls. No empirical lunar validation or usable revised flake-size/optical forecast.",
+  "branch": "domain/atmosphere",
+  "head": "c4469bd6a12d56299c828ead08fe01280b8539bc",
+  "committed": false,
+  "prior_analysis_checks": "atmosphere/snow/results/checks.json",
+  "pytest": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest atmosphere/tests/test_snow*.py -q -p no:cacheprovider",
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 3.53,
+    "product_cases_at_full_suite": 1,
+    "final_three_case_product_recheck": {
+      "command": "python -m pytest atmosphere/tests/test_snow_repair.py -q -p no:cacheprovider",
+      "passed": 2,
+      "seconds": 0.28
+    }
+  },
+  "layer_check": {
+    "tracked_and_untracked_sources": 1162,
+    "violations": 0,
+    "method": "shared.check_layers Python/JS import and lane functions applied to git ls-files --cached --others --exclude-standard sources"
+  },
+  "research_integrity": {
+    "command": "python research/check.py --output /tmp/terluna-snow-repair-integrity.json",
+    "result": "PASS",
+    "retained_files": 110,
+    "verified_protection_input_hashes": 5,
+    "checked_at_utc": "2026-10-21T15:11:19.965196+00:00",
+    "visual_review_of_historical_temporary_plots": false
+  },
+  "kernel_diagnostic": {
+    "exact_recalculation_after_json_normalization": true,
+    "source_input_constants_identity": true,
+    "checks": {
+      "log_derivative_step_halving_max_absolute_difference": 6.47035758305492e-11,
+      "anchor_mass_difference_kg": 0.0
+    },
+    "verification_note": "Initial raw Python comparison differed only because source_ids tuples serialize as JSON lists; normalized comparison passes."
+  },
+  "completed_controls": [
+    {
+      "id": "moon_heavy_m96",
+      "size_domain_passed": false,
+      "mass_fraction_exited": 0.5969128354058482,
+      "relative_mass_residual": 2.5885425963936164e-13,
+      "numerical_status": "finite_domain_inadequate"
+    },
+    {
+      "id": "moon_heavy_m144",
+      "size_domain_passed": false,
+      "mass_fraction_exited": 0.577700745992338,
+      "relative_mass_residual": 9.071395572190662e-13,
+      "numerical_status": "finite_domain_inadequate"
+    },
+    {
+      "id": "moon_heavy_m144_domain_extended",
+      "size_domain_passed": false,
+      "mass_fraction_exited": 0.8025707683129752,
+      "relative_mass_residual": -6.545251922324215e-13,
+      "numerical_status": "finite_domain_inadequate"
+    }
+  ],
+  "unperformed_cases": [
+    "moon_moderate_m144",
+    "moon_heavy_m216",
+    "moon_heavy_m144_dt15",
+    "moon_heavy_m144_cfl015",
+    "moon_heavy_m144_z60",
+    "earth_moderate_m144"
+  ],
+  "deferred_reason": "All three initial controls fail the finite size-domain check. No full-column convergence claim; wider forecast/refinement matrix deferred at this failure.",
+  "literature": {
+    "selected_primary_studies": 18,
+    "systematic_review": false,
+    "reading_extent_and_retrieval_gaps": [
+      "geometry_sources.json",
+      "strength_sources.json"
+    ],
+    "paper_figure_review": false,
+    "full_papers_or_external_datasets_added": false,
+    "substantive_reading": "Geometry and strength notes and ledgers read for applicability and evidence scope; independent source-note review; final repair report read in full after inserting results."
+  },
+  "independent_review": {
+    "solver_reaction_conservation": "Irregular grids spanning twenty mass decades; relative mass residual at most 1.65e-16, number stoichiometry residual at most 2.22e-16. Reported by geometry-review agent.",
+    "report_and_tests": "Reviewed independently; strengthened exported mass-budget/domain gate check and qualified shared-pivot/CDF wording."
+  },
+  "limitations": [
+    "Raw maximum step-CDF differences can include whole-bin jumps from roundoff-separated shared pivots (up to 1.11e-14 relative). This metric is excluded from interpretation.",
+    "Fixed-pivot and upwind mass/height transport introduce resolution error; two mass grids do not establish convergence or uniquely isolate diffusion.",
+    "Numerical-domain exits are explicitly excluded from snowfall; their large mass fractions invalidate use of the surviving size/optical outputs as lunar forecasts.",
+    "Geometry evolution, interception efficiency, whole-aggregate failure and finite humidity trajectories remain proposed physical extensions."
+  ],
+  "not_performed": [
+    "Full repository make check",
+    "The six listed additional full-column controls",
+    "Physical closure changes or an empirical mechanical calibration",
+    "New snowstorm rendering or reissue of original optical products",
+    "Commit or push"
+  ],
+  "artifact_sha256": {
+    "atmosphere/snow/sectional.py": "f18d56b2d48647bc7812b62477b7934308526b338736321d6c2a83e56a6995ff",
+    "atmosphere/snow/repair.py": "3a93bc0618e00b7748aaafbac844f67097ca5ad809ffc4b4839538ec780bb4a0",
+    "atmosphere/snow/kernel_diagnostics.py": "1cc7e0cec66163b2e80f996919127178f552165395f44035a6221388b55384cc",
+    "atmosphere/tests/test_snow_sectional.py": "cf102ef3ce33663a761efde5886211bd1dc91402ad0c1a729b9a57bfaa8bc364",
+    "atmosphere/tests/test_snow_repair.py": "6d391abd9f3675ca772fe731a7f60737116c4d2fa6fa6f3c09759c8b3d8b9907",
+    "atmosphere/snow/repair.md": "a0e8245ce5146d060f3ae44fcfc706f4b8fde3cea1a4590e046736fbcf350928",
+    "atmosphere/snow/geometry_literature.md": "7987b921bd3d08c42c804e1f8f4c7b1fb160702e9f52109814c111e169295374",
+    "atmosphere/snow/strength_literature.md": "4ffaee7a5f61b67376ddfae18711be7189448c3a712ecf39321765904598e55f",
+    "atmosphere/snow/geometry_sources.json": "38a25d459648aaf5db1e244e0cb836580cb7bd1c339d0b9e10d39f2436cc8620",
+    "atmosphere/snow/strength_sources.json": "6a61128537fb9afcd6d999fc912584cd0ad421e1ef9f894682330254a40dc354",
+    "atmosphere/snow/results/repair.json": "84cc7b42a8233ef9e6da1b7a54c0f689207406356e09e117f8774e194cd63da3",
+    "atmosphere/snow/results/kernel_diagnostics.json": "ce23102e26762420e4a4d5337b34130a4e6ec4952953b232b7ac559936349be1",
+    "atmosphere/snow/analysis.md": "73dc0447cd25dc6f93dc5e31e92ae3da9fb29849be3253e93be71178d7b082a9",
+    "atmosphere/snow/README.md": "b39bd96cb6171881e3e270d33962d4dfeabc730b2302b2de4d68bf35c8a0c075",
+    "atmosphere/README.md": "080c6399ff539aa2d727af093e6616c32758e4f1d7591bf23dbb54abc517c8ef",
+    "research/README.md": "76ae2aa6165f75c541db6dbf009ebb2069dc32cad5d12e9c92f686a2755e42af",
+    "research/status.json": "653371e0977fafad81b8088b1e51a40ee499194fe9cf7a9a5aad5ca1ce7f936b"
+  },
+  "report_local_links": {
+    "checked": 20,
+    "missing": []
+  }
+}

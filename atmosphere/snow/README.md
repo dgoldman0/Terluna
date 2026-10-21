@@ -1,5 +1,9 @@
 # Snow
 
+The current [repair and literature review](repair.md) preserves these earlier tables while testing an independent conservative solver and physical constraints on geometry and breakup.
+
+The [21 October analysis](analysis.md) extends this work to snow-conditioned cloud motion, corrected aggregate geometry, full size distributions and lunar snowstorm optics. The tables below retain the 20 October baseline; the source-definition corrections and current limitations are recorded in the new analysis. The inherited fractional-particle bookkeeping fails an arbitrary-area invariance requirement; read the [numerical audit](numerical_audit.md) before interpreting either set of size estimates.
+
 Snow in the Open Moon's sky winter: how snowflakes fall, grow and melt at a sixth of Earth's gravity, in the air about
 the freezing level, beside the raindrop solver ([../rain](../rain/README.md)). The Moon's winter weather is built up in
 the sky, and on 20 October the author asked how large snowflakes can grow there and how they fall, as the second half
@@ -10,7 +14,17 @@ of the work on the high cloud's crystals ([register](../../research/decisions.md
 | [flakes.py](flakes.py) | The snowflake's mass, area and fall law, its growth from the vapour, its melting, the winter columns and the product |
 | [results/snow.json](results/snow.json) | Fall speeds by size, growth across the winter cloud, crossing times and melting depths, Moon and Earth |
 | [aggregation.py](aggregation.py) | A column of falling snow: super-particles that grow, stick together and break, and the snow they bring to the freezing level |
-| [results/aggregation.json](results/aggregation.json) | The arriving snow's sizes by snowfall and crystal numbers, with the breakup law and without it, Moon and Earth |
+| [results/aggregation.json](results/aggregation.json) | The earlier arriving-snow sizes by supply and crystal numbers, retained as a baseline |
+| [population.py](population.py), [results/population.json](results/population.json) | Geometry controls and number, mass, area and flux distributions, including cloud startup |
+| [growth_depth.py](growth_depth.py), [results/growth_depth.json](results/growth_depth.json) | Shorter and warmer continuously saturated growth columns |
+| [numerical_audit.py](numerical_audit.py), [numerical_audit.md](numerical_audit.md) | Fractional-weight bookkeeping, arbitrary-area controls and collision-batch diagnostics |
+| [sectional.py](sectional.py), [repair.py](repair.py), [results/repair.json](results/repair.json) | Conservative independent solver and completed domain/refinement diagnostics, with explicit adequacy flags |
+| [kernel_diagnostics.py](kernel_diagnostics.py), [results/kernel_diagnostics.json](results/kernel_diagnostics.json) | Fixed-geometry encounter scaling and the installed chipping rule's mass limits |
+| [geometry_literature.md](geometry_literature.md), [strength_literature.md](strength_literature.md) | Targeted primary evidence for evolving geometry, interception, ice contacts and aggregate failure |
+| [turbulence.py](turbulence.py), [turbulence.md](turbulence.md) | Archived cloud motions conditioned on snow and growth environments; separate flake-scale loading scenarios |
+| [habits.py](habits.py), [habits.md](habits.md) | Crystal-form context, source-definition corrections and representative aggregate geometries |
+| [assessment.py](assessment.py) | Audit-linked evidence metadata on the unchanged numerical products, with separate provenance |
+| [optics.py](optics.py), [optics.md](optics.md) | Snow extinction, height-resolved lunar illumination, thin-path radiance and multiple-scattering controls |
 
 ```sh
 python -m atmosphere.snow.flakes        # seconds: results/snow.json
@@ -19,9 +33,7 @@ python -m atmosphere.snow.aggregation   # about 20 minutes: results/aggregation.
 
 ## The physics
 
-A snowflake is an aggregate of ice crystals. Its mass follows Brown and Francis (1995), m = 0.0185 D^1.9 kg for a
-maximum dimension D in metres, and its projected area is 0.35 of the circle across D, the area ratio that large
-aggregates of dendrites and plates approach (0.33–0.41; Leinonen and co-authors 2026). It falls by Heymsfield and
+The baseline treats a snowflake as an aggregate of ice crystals, with m = 0.0185 D^1.9 kg and projected area 0.35 of the circle across D. The [source review](habits.md) found that the mass coefficient uses a mean image dimension rather than Dmax, and that the cited area fits use an ellipse rather than that circle. The 2026 source is Seifert and co-authors, using Leinonen's aggregation method. These baseline closures are preserved for comparison; the new population analysis uses the corrected dimension convention and explicit area sensitivities. It falls by Heymsfield and
 Westbrook's (2010) law, in which gravity enters through the modified Best number alone,
 X* = 8 m g ρ / (π Ar^½ η²), with Re = (δ0²/4)((1 + 4 X*^½ / (δ0² C0^½))^½ − 1)², δ0 = 8.0, C0 = 0.35 and the speed
 η Re / (ρ D).
@@ -115,12 +127,11 @@ the top, about 0.4 mm/h at 100 a litre on Earth.
   snowfall's water and the time the snow takes to fall.
 - **Lunar flakes grow 15–90 times the size of Earth's at the same settings:** a centimetre or two in light
   snow, 5–15 cm in moderate snow and tens of centimetres in heavy snow. The smallest crystals take 1–1.5 days to fall
-  through the Moon's 16 km of cloud against about an hour on Earth, and the flakes meet each other gently enough to
-  keep sticking.
+  through the Moon's 16 km of cloud against about an hour on Earth, in a model whose sticking probability depends on temperature and whose encounters use differential settling alone.
 - **How far to trust the sizes.** The model's Earth flakes run small against Earth's real snow, where flakes of
   several millimetres to a couple of centimetres are common, so it aggregates too little, most likely for the spread of
-  fall speeds among like flakes, which it leaves out; that does not inflate the lunar sizes. On the other side it leaves
-  out large, tenuous flakes breaking in turbulence, the cloud having to last the day or more its snow takes to fall,
+  fall speeds among like flakes, which it leaves out; that alone does not determine the sign of the lunar size bias. On the other side it leaves
+  out large, tenuous flakes breaking in turbulence and finite cloud lifetimes,
   and Brown and Francis's mass law carried far past the sizes it was measured at. By that law a 20 cm lunar flake
   weighs about 0.9 g, a fifth of a kilogram of ice to each cubic metre it spans: a loose lace of crystals.
 
@@ -128,15 +139,13 @@ the top, about 0.4 mm/h at 100 a litre on Earth.
 
 - The laws for mass, area, fall, capacitance and ventilation were fitted on Earth; they are carried to the Moon through
   the quantities they depend on (gravity, the air's density, viscosity and diffusivity), not refitted.
-- Growth from the vapour takes the aggregate's mass law, which gives a single crystal too large a size for its mass,
-  so the masses are the robust figures.
+- Single-crystal seeds use the aggregate mass–dimension law. A habit-specific seed mass and capacitance could change both their dimensions and their subsequent mass gain.
 - The columns are straight profiles and the clouds idealised: liquid saturation from top to freezing level, no
-  updraughts. Breakup, riming, the melting flake's collapse and sublimation below the freezing level are left out.
+  updraughts. The population calculation includes collision chipping; large-aggregate fracture, riming, the melting flake's collapse and sublimation are left out.
 - The Moon's ladder is the target study's runs interpolated at 301 K; the design years' own profile may set the
   freezing level a few hundred metres apart.
 
 ## Next
 
 The same fall and growth physics gives the high cloud's crystals at lunar gravity for the GCM
-([plan](../../research/plan.md), item 5). For the snow itself: the spread of fall speeds among like flakes, which
-Earth's flakes need, and a turbulence limit on very large flakes.
+([plan](../../research/plan.md), item 5). The [new analysis](analysis.md) measures the archived cloud environments and calculates flake-scale load scenarios. The independent [sectional reference](repair.md) now provides consistent particle accounting, but its first three full-column controls fail the finite size-domain check. Numerical convergence, a coupled moist trajectory, a spread of fall speeds among like flakes and a measured mechanical failure law remain needed to predict a survival-limited size distribution.
