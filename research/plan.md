@@ -364,9 +364,11 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    broken, which the column's chemistry leaves out, decides how much water it leaves above the tropopause, up to 6.1
    W/m² at the top, about 3.8 K. The sky's winter snow is done (atmosphere/snow, merged on 20 October): flakes a
    centimetre or two across in light snow to tens of centimetres in heavy snow, falling at up to 0.64 m/s and melting
-   1–3 km below the freezing level at 29.2 km. Next, at the author's word: whether the design case takes the factors,
-   and the GCM's own rain evaporation, one Earth-tuned constant that CM1's rain test puts in question, against the drop
-   solver. A CM1 ring that makes its own upper vapour comes later.
+   1–3 km below the freezing level at 29.2 km. Next (register, 21 October), on domain/climate: the GCM's own rain
+   evaporation, one Earth-tuned constant that CM1's rain test puts in question, against the drop solver, and methane's
+   chemistry in the middle atmosphere's column; then one design run with the cold cloud's factors, which the author
+   adopted, and the new rain evaporation together, followed by the longwave refit and the settling and exobase checks.
+   The cover question stays on hold. A CM1 ring that makes its own upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
    mixing_forms), now the aquatic programme's turbulence columns first, with a basin-scale model of one crater lake

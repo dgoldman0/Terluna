@@ -42,15 +42,15 @@ FRAGMENT_M = 1.0e-4                        # the fragments' size
 BREAKUP = dict(a_scale=1.58e7, a_size=1.33e-4, c=7.08e6 * 3.5e-3, gamma=0.5, size_m=(5e-4, 5e-3), most=100.0)
 
 
-def speeds(d, m, gravity, s):
+def speeds(d, m, gravity, s, area_ratio=sf.AREA_RATIO):
     """Fall speeds (m/s) and Reynolds numbers of particles of sizes d and masses m (arrays), Heymsfield and
     Westbrook (2010) as flakes.fall_speed."""
-    x = 8.0 * m * gravity * s['rho'] / (math.pi * math.sqrt(sf.AREA_RATIO) * s['eta'] ** 2)
+    x = 8.0 * m * gravity * s['rho'] / (math.pi * math.sqrt(area_ratio) * s['eta'] ** 2)
     re = sf.DELTA0 ** 2 / 4.0 * (np.sqrt(1.0 + 4.0 * np.sqrt(x) / (sf.DELTA0 ** 2 * math.sqrt(sf.C0))) - 1.0) ** 2
     return s['eta'] * re / (s['rho'] * d), re
 
 
-def deposition(d, re, s):
+def deposition(d, re, s, capacitance_ratio=sf.CAPACITANCE):
     """kg/s each particle gains from the vapour, flakes.deposition_rate over arrays."""
     t = s['t']
     ls = drops.latent_heat(sf.T0) + sf.LATENT_FUSION
@@ -58,18 +58,19 @@ def deposition(d, re, s):
     resistance = (ls / (sf.R_VAPOUR * t) - 1.0) * ls / (s['ka'] * t) + sf.R_VAPOUR * t / (s['dv'] * esi)
     x = (s['eta'] / (s['rho'] * s['dv'])) ** (1.0 / 3.0) * np.sqrt(re)
     vent = np.where(x < 1.0, 1.0 + 0.14 * x * x, 0.86 + 0.28 * x)
-    return 4.0 * math.pi * sf.CAPACITANCE * d * vent * (s['e'] / esi - 1.0) / resistance
+    return 4.0 * math.pi * capacitance_ratio * d * vent * (s['e'] / esi - 1.0) / resistance
 
 
-def fragments(smaller_m, energy):
+def fragments(smaller_m, energy, mass_to_size=sf.flake_size):
     """Fragments a non-sticking collision breaks off the smaller particle (Phillips, Yano and Khain 2017, snow)."""
-    d = np.clip(sf.flake_size(smaller_m), *BREAKUP['size_m'])
+    d = np.clip(mass_to_size(smaller_m), *BREAKUP['size_m'])
     a_area = math.pi * d * d
     scale = BREAKUP['a_scale'] * (1.0 + BREAKUP['a_size'] / d ** 1.5) * a_area
     return np.minimum(scale * (1.0 - np.exp(-(BREAKUP['c'] * energy / scale) ** BREAKUP['gamma'])), BREAKUP['most'])
 
 
-def collide(m, xi, u, d, idx, volume, temperature, dt, rng, breakup, m_frag):
+def collide(m, xi, u, d, idx, volume, temperature, dt, rng, breakup, m_frag,
+            area_ratio=sf.AREA_RATIO, mass_to_size=sf.flake_size):
     """One step of collisions among the particles idx sharing one height (volume, m3): masses and multiplicities are
     updated in place; returns the fragments made (real particles)."""
     n = idx.size
@@ -78,7 +79,7 @@ def collide(m, xi, u, d, idx, volume, temperature, dt, rng, breakup, m_frag):
     order = rng.permutation(idx)
     j, k = order[: n // 2], order[n // 2: 2 * (n // 2)]
     du = np.abs(u[j] - u[k])
-    kernel = sf.AREA_RATIO * math.pi / 4.0 * (d[j] + d[k]) ** 2 * du
+    kernel = area_ratio * math.pi / 4.0 * (d[j] + d[k]) ** 2 * du
     p = np.maximum(xi[j], xi[k]) * kernel * dt / volume * (n * (n - 1) / 2) / (n // 2)
     gamma = np.floor(p) + (rng.random(p.size) < p - np.floor(p))
     hit = gamma > 0
@@ -107,7 +108,8 @@ def collide(m, xi, u, d, idx, volume, temperature, dt, rng, breakup, m_frag):
     ba, bb, bg, bu = a[~stick], b[~stick], gt[~stick], du[~stick]
     if ba.size == 0:
         return 0.0
-    count = fragments(np.minimum(m[ba], m[bb]), m[ba] * m[bb] / (m[ba] + m[bb]) * bu ** 2)
+    count = fragments(np.minimum(m[ba], m[bb]), m[ba] * m[bb] / (m[ba] + m[bb]) * bu ** 2,
+                      mass_to_size=mass_to_size)
     b_small = m[bb] <= m[ba]                                           # each b particle met bg of a's
     lost_b = np.minimum(bg * count * m_frag, 0.5 * m[bb])
     lost_a = np.minimum(bg * xi[bb] * count * m_frag / xi[ba], 0.5 * m[ba])   # bg * xi[b] of a's met one each
@@ -116,10 +118,17 @@ def collide(m, xi, u, d, idx, volume, temperature, dt, rng, breakup, m_frag):
     return float(np.sum(lost_b[b_small] * xi[bb[b_small]]) + np.sum(lost_a[~b_small] * xi[ba[~b_small]])) / m_frag
 
 
-def column(world, top_c, number_per_m3, snowfall_mm_h, bins=30, inject=8, breakup=True, seed=0, fill=1.5, gather=1.5):
+def column(world, top_c, number_per_m3, snowfall_mm_h, bins=30, inject=8, breakup=True, seed=0, fill=1.5, gather=1.5,
+           geometry=None, observer=None, max_step_s=30.0, arrival_observer=None):
     """Snow falling from the cloud top (top_c, °C) to the freezing level: the masses and numbers of the particles
     arriving there over the gathering time once the column has filled, per square metre, and the time they cover."""
     rng = np.random.default_rng(seed)
+    # Optional geometry and observation are used by the subsequent population study.
+    # Omitting them preserves the original run's equations and random sequence.
+    mass_of = sf.flake_mass if geometry is None else geometry.mass
+    size_of = sf.flake_size if geometry is None else geometry.size
+    area_ratio = sf.AREA_RATIO if geometry is None else geometry.area_ratio
+    capacitance = sf.CAPACITANCE if geometry is None else geometry.capacitance_ratio
     g = world.gravity
     z_top, z_f = world.height_of(sf.T0 + top_c), world.z_freeze
     depth = z_top - z_f
@@ -127,24 +136,26 @@ def column(world, top_c, number_per_m3, snowfall_mm_h, bins=30, inject=8, breaku
     dz = depth / bins
     states = [world.state(0.5 * (lo + hi)) for lo, hi in zip(edges[:-1], edges[1:])]
     production = snowfall_mm_h / 3600.0 / depth                         # kg/m3/s the cloud condenses
-    m_frag = sf.flake_mass(FRAGMENT_M)
+    m_frag = mass_of(FRAGMENT_M)
     s_top = states[-1]
     d_in = math.sqrt(START_M[0] * START_M[1])
-    u_in = speeds(np.array([d_in]), np.array([sf.flake_mass(d_in)]), g, s_top)[0][0]
-    dt = min(30.0, 0.5 * dz / max(1.5, 3.0 * u_in))
+    u_in = speeds(np.array([d_in]), np.array([mass_of(d_in)]), g, s_top, area_ratio)[0][0]
+    dt = min(max_step_s, 0.5 * dz / max(1.5, 3.0 * u_in))
     crossing = depth / u_in
     m = np.empty(0)
     xi = np.empty(0)
     z = np.empty(0)
     arrived_m, arrived_xi = [], []
     t, made_total = 0.0, 0.0
+    injected_mass = deposited_mass = exited_mass = discarded_fragment_mass = 0.0
     while t < (fill + gather) * crossing:
         d_new = np.exp(rng.uniform(math.log(START_M[0]), math.log(START_M[1]), inject))
-        m = np.append(m, sf.flake_mass(d_new))
+        m = np.append(m, mass_of(d_new))
         xi = np.append(xi, np.full(inject, number_per_m3 * u_in * dt / inject))
+        injected_mass += float(np.sum(m[-inject:] * xi[-inject:]))
         z = np.append(z, z_top - rng.uniform(0.0, u_in * dt, inject))
         layer = np.clip(((z - z_f) / dz).astype(int), 0, bins - 1)
-        d = sf.flake_size(m)
+        d = size_of(m)
         u = np.empty_like(m)
         broken = []
         for b in range(bins):
@@ -152,14 +163,19 @@ def column(world, top_c, number_per_m3, snowfall_mm_h, bins=30, inject=8, breaku
             if not here.any():
                 continue
             s = states[b]
-            u[here], re = speeds(d[here], m[here], g, s)
-            demand = np.maximum(deposition(d[here], re, s), 0.0) * dt
+            u[here], re = speeds(d[here], m[here], g, s, area_ratio)
+            demand = np.maximum(deposition(d[here], re, s, capacitance), 0.0) * dt
             total = float(np.sum(demand * xi[here]))
             supply = production * dz * dt
-            m[here] += demand * (min(1.0, supply / total) if total > 0 else 0.0)
-            made = collide(m, xi, u, d, np.flatnonzero(here), dz, s['t'], dt, rng, breakup, m_frag)
+            addition = demand * (min(1.0, supply / total) if total > 0 else 0.0)
+            deposited_mass += float(np.sum(addition * xi[here]))
+            m[here] += addition
+            made = collide(m, xi, u, d, np.flatnonzero(here), dz, s['t'], dt, rng, breakup, m_frag,
+                           area_ratio=area_ratio, mass_to_size=size_of)
             if made >= 1.0:
                 broken.append((made, edges[b] + 0.5 * dz))
+            else:
+                discarded_fragment_mass += made * m_frag
         for count, height in broken:
             made_total += count
             m = np.append(m, m_frag)
@@ -168,18 +184,27 @@ def column(world, top_c, number_per_m3, snowfall_mm_h, bins=30, inject=8, breaku
             u = np.append(u, 0.0)
         z = z - u * dt
         out = z < z_f
+        exited_mass += float(np.sum(m[out] * xi[out]))
+        if arrival_observer is not None and out.any():
+            arrival_observer(m[out], xi[out], t, dt)
         if t >= fill * crossing and out.any():
             arrived_m.append(m[out])
             arrived_xi.append(xi[out])
         keep = (~out) & (xi > 0) & (m > 0)
         m, xi, z = m[keep], xi[keep], z[keep]
+        if observer is not None and t >= fill * crossing:
+            observer(m, xi, z, t, dt)
         t += dt
     return dict(masses=np.concatenate(arrived_m) if arrived_m else np.empty(0),
                 numbers=np.concatenate(arrived_xi) if arrived_xi else np.empty(0),
-                seconds=gather * crossing, crossing_hours=crossing / 3600.0, fragments=made_total / t)
+                seconds=gather * crossing, crossing_hours=crossing / 3600.0, fragments=made_total / t,
+                mass_ledger_kg_m2=dict(injected=injected_mass, deposited=deposited_mass, exited=exited_mass,
+                                     remaining=float(np.sum(m * xi)), discarded_fragment=discarded_fragment_mass,
+                                     residual=injected_mass + deposited_mass - exited_mass
+                                              - float(np.sum(m * xi)) - discarded_fragment_mass))
 
 
-def summary(result):
+def summary(result, mass_to_size=sf.flake_size):
     """The snow arriving at the freezing level: its sizes by mass (the median and the sizes below which 90% and 99% of
     it lies), the largest flake arriving at least once an hour on each square metre, the snowfall it makes (mm of
     water an hour), the flakes arriving each hour on a square metre and the crystals' crossing time."""
@@ -187,7 +212,7 @@ def summary(result):
     if m.size == 0:
         return dict(median_by_mass_mm=None, d90_by_mass_mm=None, d99_by_mass_mm=None, largest_hourly_mm=None,
                     snowfall_mm_h=0.0, flakes_per_m2_hour=0.0, crossing_hours=result['crossing_hours'])
-    d = sf.flake_size(m)
+    d = mass_to_size(m)
     order = np.argsort(d)
     d, m, n = d[order], m[order], n[order]
     cum = np.cumsum(m * n) / np.sum(m * n)
