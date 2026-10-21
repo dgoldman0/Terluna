@@ -473,13 +473,213 @@ TWILIGHT_EDITS = [
      "      return\n"
      "      end subroutine twilight_lw\n"),
 ]
+# A simplified Betts-Miller convection scheme (rainmod.f90, mksbm; the author's direction of 2026-10-21, the climate
+# staying on ExoPlaSim), chosen by PlaSim's own switch: nprc 1 keeps Kuo's scheme exactly, 2 calls mksbm in its place.
+# Kuo's turns the column's moisture supply into rain wherever an undiluted surface parcel is buoyant, so over the
+# Near-side Sea it rains 2.9 mm/day after midnight while the GCM's circulation sinks there and CM1's resolved
+# convection makes almost none (climate/crm/README.md). mksbm follows Frierson (2007): a parcel from the lowest level
+# gives the reference temperature up to the top of its buoyancy, and the reference vapour is rh_bm of saturation there;
+# where the parcel is buoyant the temperature and vapour relax toward them over tau_bm, the rain is the vapour removed,
+# and the heating is shifted by one amount through the convecting layers to release the rain's latent heat, keeping
+# the column's moist enthalpy. Two lunar options, off by default: eps_bm mixes surrounding air into the rising parcel,
+# a share 1 - exp(-eps_bm ln(p_below/p)) per layer, and cin_bm (J/kg) holds back deep convection below a parcel whose
+# inhibition exceeds it. A buoyant column too dry to rain, held back, or topped below pdeep takes PlaSim's shallow
+# scheme, as under Kuo. The rain formed at each level follows the vapour removed there, for mkrain's evaporation.
+SBM_MARKER = 'Terluna: the simplified Betts-Miller scheme'
+SBM_CODE = """
+!     ================
+!     SUBROUTINE MKSBM
+!     ================
+
+      subroutine mksbm
+      use rainmod
+!
+!     Terluna: the simplified Betts-Miller scheme (Frierson 2007, J. Atmos. Sci. 64, 1959-1976), in place of Kuo's
+!     with nprc = 2. A parcel lifted from the lowest level, dry and then moist adiabatically with PlaSim's saturation,
+!     and mixing in a share 1 - exp(-eps_bm*ln(p_below/p)) of the surrounding air per layer, gives the reference
+!     temperature from the lowest level to the top of its buoyancy; the reference vapour is rh_bm of saturation there.
+!     Where the parcel is buoyant (and its inhibition below cin_bm J/kg, when that is set) the temperature and vapour
+!     relax toward the references over tau_bm s; the rain is the vapour removed, and the heating is shifted by one
+!     amount through the convecting layers so that it releases the rain's latent heat, keeping the moist enthalpy.
+!
+      integer :: ishallow(NHOR), ilift(NHOR), itop(NHOR)
+      integer :: jhor, jlev, jtop, jlfc
+      real :: zte(NHOR,NLEV), zqe(NHOR,NLEV), zdtdts(NHOR,NLEV), zdqdts(NHOR,NLEV), zdtc(NHOR,NLEV)
+      real :: ztp(NLEV), zdtr(NLEV), zdqr(NLEV), zm(NLEV), zcp(NLEV), zp(NLEV)
+      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau
+!
+      ztau=max(tau_bm,deltsec2)
+      ishallow(:)=0
+      ilift(:)=-1
+      itop(:)=-1
+      icctot(:)=0
+      icclev(:,:)=0
+      dprcl(:,:)=0.
+      dprscl(:,:)=0.
+      zdtdts(:,:)=0.
+      zdqdts(:,:)=0.
+      zdtc(:,:)=0.
+      if(ndiaggp==1) then
+       do jlev=1,NLEV
+        dgp3d(:,jlev,16)=-dqdt(:,jlev)*dp(:)*dsigma(jlev)/ga/1000.
+        dgp3d(:,jlev,18)=dqt(:,jlev)*dp(:)*dsigma(jlev)/ga/1000.
+       enddo
+      end if
+      zte(:,:)=dt(:,1:NLEV)+dtdt(:,1:NLEV)*deltsec2
+      zqe(:,:)=dq(:,1:NLEV)+dqdt(:,1:NLEV)*deltsec2
+!
+      do jhor=1,NHOR
+       zp(:)=dp(jhor)*sigma(:)
+       zm(:)=dp(jhor)*dsigma(:)/ga
+       zcp(:)=acpd*(1.+ADV*zqe(jhor,:))
+!      the parcel, from the lowest level up
+       ztnew=zte(jhor,NLEV)
+       zqnew=zqe(jhor,NLEV)
+       call sbmsat(ztnew,zqnew,zp(NLEV))
+       ztp(NLEV)=ztnew
+       do jlev=NLEM,1,-1
+        ztnew=ztnew*(sigma(jlev)/sigma(jlev+1))**akap
+        if(eps_bm > 0.) then
+         zmix=1.-exp(-eps_bm*log(sigma(jlev+1)/sigma(jlev)))
+         ztnew=(1.-zmix)*ztnew+zmix*zte(jhor,jlev)
+         zqnew=(1.-zmix)*zqnew+zmix*zqe(jhor,jlev)
+        endif
+        call sbmsat(ztnew,zqnew,zp(jlev))
+        ztp(jlev)=ztnew
+       enddo
+!      its level of free convection, the lowest above the start where it is buoyant, and its top, the last level
+!      above that it stays buoyant without a break
+       jlfc=0
+       do jlev=NLEM,1,-1
+        if(ztp(jlev) > zte(jhor,jlev)) then
+         jlfc=jlev
+         exit
+        endif
+       enddo
+       if(jlfc == 0) cycle
+       jtop=jlfc
+       do jlev=jlfc-1,1,-1
+        if(ztp(jlev) <= zte(jhor,jlev)) exit
+        jtop=jlev
+       enddo
+       zcin=0.
+       do jlev=jlfc+1,NLEV
+        zcin=zcin+gascon*max(0.,zte(jhor,jlev)-ztp(jlev))*dsigma(jlev)/sigma(jlev)
+       enddo
+!      the relaxation toward the references, from the lowest level to the top
+       zpq=0.
+       zpt=0.
+       zcpm=0.
+       do jlev=jtop,NLEV
+        zdtr(jlev)=(ztp(jlev)-zte(jhor,jlev))/ztau
+        zdqr(jlev)=(rh_bm*sbmqs(ztp(jlev),zp(jlev))-zqe(jhor,jlev))/ztau
+        zpq=zpq-zdqr(jlev)*zm(jlev)
+        zpt=zpt+zcp(jlev)*zdtr(jlev)*zm(jlev)
+        zcpm=zcpm+zcp(jlev)*zm(jlev)
+       enddo
+       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm)) then
+        if(nshallow == 1) then
+         ishallow(jhor)=1
+         ilift(jhor)=NLEP
+         itop(jhor)=jtop
+        endif
+        cycle
+       endif
+!      deep convection: the heating shifted to release the rain's latent heat, the rain where the vapour is removed
+       zcorr=(ALV*zpq-zpt)/zcpm
+       zcond=0.
+       do jlev=jtop,NLEV
+        zdtr(jlev)=zdtr(jlev)+zcorr
+        zcond=zcond+max(0.,-zdqr(jlev))*zm(jlev)
+       enddo
+       do jlev=jtop,NLEV
+        dtdt(jhor,jlev)=dtdt(jhor,jlev)+zdtr(jlev)
+        dqdt(jhor,jlev)=dqdt(jhor,jlev)+zdqr(jlev)
+        zdtc(jhor,jlev)=zdtr(jlev)
+        if(zdqr(jlev) < 0.) then
+         dprcl(jhor,jlev)=-zdqr(jlev)*zpq/zcond*dsigma(jlev)
+         icclev(jhor,jlev)=1
+         icctot(jhor)=icctot(jhor)+1
+         if(sigma(jlev) < 0.4 .and. jlev == jtop) icclev(jhor,jlev)=2
+        endif
+       enddo
+      enddo
+!
+      if(nshallow == 1) then
+       call mkshallow(zte,zqe,ishallow,ilift,itop,zdtdts,zdqdts)
+       dtdt(:,1:NLEV)=dtdt(:,1:NLEV)+zdtdts(:,1:NLEV)
+       dqdt(:,1:NLEV)=dqdt(:,1:NLEV)+zdqdts(:,1:NLEV)
+      endif
+      if(ndiaggp==1) then
+       do jlev=1,NLEV
+        dgp3d(:,jlev,8)=zdtc(:,jlev)+zdtdts(:,jlev)
+       enddo
+      end if
+      return
+!
+      contains
+!
+      real function sbmqs(pt,pp)
+!     saturation specific humidity, as Kuo's parcel takes it
+      real, intent(in) :: pt,pp
+      real :: zqs
+      zqs=rdbrv*ra1*exp(ra2*(pt-TMELT)/(pt-ra4))/pp
+      zqs=min(zqs,rdbrv)
+      sbmqs=zqs/(1.-(1./rdbrv-1.)*zqs)
+      end function sbmqs
+!
+      subroutine sbmsat(pt,pq,pp)
+!     a supersaturated parcel condensed to saturation in two steps, as Kuo's, the ice's latent heat below freezing
+      real, intent(inout) :: pt,pq
+      real, intent(in) :: pp
+      real :: zqs,zcor,zlcp,zdqsdt,zrain
+      integer :: jit
+      do jit=1,2
+       zqs=rdbrv*ra1*exp(ra2*(pt-TMELT)/(pt-ra4))/pp
+       zqs=min(zqs,rdbrv)
+       zcor=1./(1.-(1./rdbrv-1.)*zqs)
+       zqs=zqs*zcor
+       if(zqs >= pq) return
+       if(pt < TMELT) then
+        zlcp=ALS/(acpd*(1.+ADV*pq))
+       else
+        zlcp=ALV/(acpd*(1.+ADV*pq))
+       endif
+       zdqsdt=ra2*(TMELT-ra4)*zqs*zcor/((pt-ra4)*(pt-ra4))
+       zrain=(pq-zqs)/(1.+zlcp*zdqsdt)
+       pt=pt+zlcp*zrain
+       pq=pq-zrain
+      enddo
+      end subroutine sbmsat
+!
+      end subroutine mksbm
+"""
+SBM_EDITS = [
+    ("      real :: gamma   = 0.01  ! tuning parameter for evaporation of precip.\n",
+     "      real :: gamma   = 0.01  ! tuning parameter for evaporation of precip.\n"
+     "      real :: tau_bm  = 7200. ! Terluna: the simplified Betts-Miller scheme's relaxation time (s), nprc = 2\n"
+     "      real :: rh_bm   = 0.7   ! its reference relative humidity\n"
+     "      real :: eps_bm  = 0.    ! its parcel's mixing per e-folding of pressure (0: undiluted)\n"
+     "      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n"),
+    ("      namelist/rainmod_nl/kbeta,nprl,nprc,ndca,ncsurf,nmoment,nshallow  &\n",
+     "      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n"
+     "      namelist/rainmod_nl/kbeta,nprl,nprc,ndca,ncsurf,nmoment,nshallow  &\n"),
+    ("      call mpbcr(gamma)\n",
+     "      call mpbcr(gamma)\n      call mpbcr(tau_bm)\n      call mpbcr(rh_bm)\n      call mpbcr(eps_bm)\n"
+     "      call mpbcr(cin_bm)\n"),
+    ("      if(nprc == 1) call mkdqtgp\n", "      if(nprc >= 1) call mkdqtgp\n"),
+    ("      if(nprc == 1) call kuo\n",
+     "      if(nprc == 1) call kuo\n      if(nprc == 2) call mksbm   ! Terluna: the simplified Betts-Miller scheme\n"),
+    ("      end subroutine kuo\n", "      end subroutine kuo\n" + SBM_CODE),
+]
 # (file, marker, edits) in the order applied; a marker appears only in the text its patch adds.
 PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
            ('rainmod.f90', 'Terluna: gravity for the heights below', RAINMOD_EDITS),
            ('rainmod.f90', 'Terluna: seconds per day in the convective cloud formula', CONVECTIVE_EDITS),
            ('radmod.f90', "Terluna: the Sun's clock", SUN_EDITS),
            ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS),
-           ('radmod.f90', 'Terluna: infrared from space at the top of the air', TOP_INFRARED_EDITS)]
+           ('radmod.f90', 'Terluna: infrared from space at the top of the air', TOP_INFRARED_EDITS),
+           ('rainmod.f90', SBM_MARKER, SBM_EDITS)]
 # CO2 and O2 in PlaSim's sunlight (radmod.f90, swr; climate/gcm/plasim_shortwave.py, GAS_BANDS). PlaSim's two bands hold
 # no CO2 or O2, whose strongest lines the Moon's deep column takes high up, so it puts that sunlight where its water
 # is. NGASBANDS 1 adds CO2 and O2 in the near-infrared band and O2 in the visible, each an absorptivity of its own
@@ -1005,6 +1205,25 @@ def rain_evaporation_setting(gamma) -> dict:
     return dict(gamma=gamma, plasim_default=PLASIM_RAIN_GAMMA)
 
 
+SBM_DEFAULTS = dict(tau_s=7200.0, rh=0.7, eps=0.0, cin_j_kg=0.0)   # Frierson's 2 h and 70%; the lunar options off
+
+
+def convection_setting(scheme='sbm', **values) -> dict:
+    """PlaSim's deep convection as the configuration records it: 'sbm' for the simplified Betts-Miller scheme of the
+    Terluna patch (SBM_EDITS, rainmod's nprc 2) with its relaxation time tau_s, reference relative humidity rh, the
+    parcel's mixing per e-folding of pressure eps and its inhibition limit cin_j_kg (0: none), each defaulting to
+    SBM_DEFAULTS; left out, the configuration keeps Kuo's scheme (nprc 1)."""
+    if scheme != 'sbm':
+        raise ValueError(f"the convection scheme is 'sbm' (Kuo's is the default, left out), not {scheme!r}")
+    unknown = set(values) - set(SBM_DEFAULTS)
+    if unknown:
+        raise ValueError(f'unknown settings of the simplified Betts-Miller scheme: {sorted(unknown)}')
+    s = {k: float(values.get(k, v) if values.get(k) is not None else v) for k, v in SBM_DEFAULTS.items()}
+    if s['tau_s'] <= 0.0 or not 0.0 < s['rh'] <= 1.0 or s['eps'] < 0.0 or s['cin_j_kg'] < 0.0:
+        raise ValueError(f'the simplified Betts-Miller settings are out of range: {s}')
+    return dict(scheme='sbm', nprc=2, **s)
+
+
 def cold_cloud_factors(path) -> dict:
     """The central factors of a cold_cloud.py product, its top layer first, as the configuration records them: the
     ice optics' water and crystal radius on PlaSim's top levels (ZICEWF, ZICERF), the levels below left at 1."""
@@ -1027,7 +1246,7 @@ def cold_cloud_factors(path) -> dict:
 def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
                   heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
-                  cold_cloud=None, rain_evaporation=None, moisture=False):
+                  cold_cloud=None, rain_evaporation=None, moisture=False, convection=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
@@ -1098,6 +1317,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                                     'patch 11, lab branch 79ea224)')
     if rain_evaporation is not None:
         cfg['rain_evaporation'] = rain_evaporation_setting(rain_evaporation)
+    if convection is not None:                               # the simplified Betts-Miller scheme in Kuo's place
+        cfg['convection'] = convection_setting(**convection)
     if cold_cloud is not None:
         if not ice_optics:
             raise ValueError("the cold cloud's factors act on the ice optics, which need --ice-optics")
@@ -1318,6 +1539,11 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('rainmod_namelist', 'CONVDAY', str(float(m['convective_day_s'])))
     if 'rain_evaporation' in cfg:
         model._edit_namelist('rainmod_namelist', 'GAMMA', repr(float(cfg['rain_evaporation']['gamma'])))
+    if 'convection' in cfg:
+        c = cfg['convection']
+        model._edit_namelist('rainmod_namelist', 'NPRC', str(c['nprc']))
+        for key, name in (('tau_s', 'TAU_BM'), ('rh', 'RH_BM'), ('eps', 'EPS_BM'), ('cin_j_kg', 'CIN_BM')):
+            model._edit_namelist('rainmod_namelist', name, repr(float(c[key])))
     if m['surface_cloud_rcrit'] > 0.0:                                 # the lowest layer is the last of RCRIT
         model._edit_namelist('rainmod_namelist', f"RCRIT({m['layers']})", str(float(m['surface_cloud_rcrit'])))
     if 'top_infrared_w_m2' in cfg:
@@ -1540,12 +1766,12 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         heating: bool = False, longwave_correction: bool = False, ice_optics: bool = False,
         twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k',
         wind10: bool = False, ice_weights: str = 'shield', cold_cloud: str | None = None,
-        rain_evaporation: float | None = None, moisture: bool = False) -> int:
+        rain_evaporation: float | None = None, moisture: bool = False, convection: dict | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
                         ice_weights=ice_weights, cold_cloud=cold_cloud, rain_evaporation=rain_evaporation,
-                        moisture=moisture)
+                        moisture=moisture, convection=convection)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -1675,6 +1901,13 @@ def main(argv=None) -> int:
                         help="a cold_cloud.py product whose central factors scale the ice optics' water and crystal "
                              'radius on its layers, carrying them to lunar gravity (ICE_FACTOR_EDITS; needs '
                              '--ice-optics; part of the run key)')
+    parser.add_argument('--convection', choices=('kuo', 'sbm'), default='kuo',
+                        help="PlaSim's deep convection: Kuo's scheme, its own, or the simplified Betts-Miller scheme of "
+                             'the Terluna patch (SBM_EDITS; part of the run key)')
+    parser.add_argument('--sbm-tau', type=float, metavar='SECONDS', help='its relaxation time (7200)')
+    parser.add_argument('--sbm-rh', type=float, metavar='SHARE', help='its reference relative humidity (0.7)')
+    parser.add_argument('--sbm-eps', type=float, help="its parcel's mixing per e-folding of pressure (0)")
+    parser.add_argument('--sbm-cin', type=float, metavar='J_KG', help="its limit on the parcel's inhibition (0: none)")
     parser.add_argument('--rain-evaporation', type=float, metavar='GAMMA',
                         help="PlaSim's constant for the evaporation of falling rain and snow (rainmod's gamma, "
                              f'{PLASIM_RAIN_GAMMA} its own; part of the run key)')
@@ -1718,7 +1951,9 @@ def main(argv=None) -> int:
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
                args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation,
-               args.moisture_diagnostics)
+               args.moisture_diagnostics,
+               dict(tau_s=args.sbm_tau, rh=args.sbm_rh, eps=args.sbm_eps, cin_j_kg=args.sbm_cin)
+               if args.convection == 'sbm' else None)
 
 
 if __name__ == '__main__':

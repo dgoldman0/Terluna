@@ -1757,14 +1757,17 @@ own switch: `nprc` 1 keeps Kuo exactly, and 2 selects the new scheme.
 - **What it leaves out.** It has no plumes, downdrafts, cold pools or organization, and its rain follows the
   instability after a fixed delay.
 
-**Its tests** (planned):
-1. Unit tests against a Python copy of the scheme:
-   - a stable column does nothing;
-   - a moist, unstable column rains its excess humidity over the relaxation time;
-   - the column's energy is kept;
-   - with no dilution it reproduces Frierson's scheme;
-   - the inhibition limit works;
-   - `nprc` 1 matches the unpatched model bit for bit.
+**Its tests.** The scheme is written (`SBM_CODE` and `SBM_EDITS` in [exoplasim_run.py](exoplasim_run.py), the
+last of `PATCHES`; `--convection sbm` with `--sbm-tau`, `--sbm-rh`, `--sbm-eps` and `--sbm-cin` selects it), with a
+Python copy ([sbm.py](sbm.py)). The first test is done (21 October,
+[test_sbm.py](../tests/test_sbm.py)): the Fortran routine, compiled alone against a stub of PlaSim's module, gives
+the Python copy's tendencies to 10⁻¹⁰ on five columns, and the copy keeps the column's moist enthalpy, rains the
+vapour it removes in proportion to the relaxation rate, leaves dry and stable columns alone, sends a buoyant column
+too dry to rain to the shallow scheme, and with mixing cools the parcel through its convecting layers. The patch
+applies once to ExoPlaSim's own `rainmod.f90` with Kuo's path kept. On the Near-side Sea's mean column from the
+GCM the scheme rains only with a reference humidity of 60% or less, so the reference humidity is the first thing
+the branches have to fit. Still to come:
+1. In the GCM: `nprc` 1 matching the unpatched model bit for bit, and the patched model compiling and running.
 2. Speed: one model year with each scheme, about 4 minutes each now.
 3. Branches of the design climate from its year-19 restart, with a few values of the two parameters, 3–5 years each.
 4. CM1 boxes at the Near-side Sea and 0° E forced by the new GCM's own budget, compared on rain by time of day, total
