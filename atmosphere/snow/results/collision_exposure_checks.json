@@ -1,0 +1,262 @@
+{
+  "schema": "terluna.atmosphere.snow-collision-exposure-checks/1",
+  "checked_at_utc": "2026-10-21T20:24:31.564699+00:00",
+  "branch": "domain/atmosphere",
+  "checkpoint_commit": "16cde54288ddb6dc558e71042cf28469258910e7",
+  "working_state": "New analyses remain uncommitted in the atmosphere worktree; main checkout clean.",
+  "final_snow_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest -p no:cacheprovider atmosphere/tests/test_snow*.py -q",
+    "passed": 241,
+    "skipped": 0,
+    "seconds": 5.83,
+    "log": "/tmp/terluna-snow-collision-exposure-tests.log",
+    "log_sha256": "cc758e31aa57a4867f4a79da4b8d2369823ab2ec5827d33b94cd2303bc99eca4",
+    "exit_code": 0
+  },
+  "full_repository_check": {
+    "rerun_for_this_extension": false,
+    "prior_record": "atmosphere/snow/results/growth_repair_checks.json",
+    "scope": "The prior make check passed before the later growth, Earth and present collision/exposure extensions. New work has focused tests, expanded layer checks and research integrity/numerical checks; no new commit."
+  },
+  "retained_snow_baseline": {
+    "unchanged_files": 50,
+    "snapshot_sha256": "9d7e22d62e35c6296800d58fd7a4661d2d49cfc9ae510a987b9dda97f82d8eb8",
+    "files": {
+      "atmosphere/snow/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "atmosphere/snow/aggregation.py": "b1be75f1dc08b92c320fd288d458940821a43a9ae346221cc2d0dbd7a1adf628",
+      "atmosphere/snow/assessment.py": "0b8963147b368e2c70268fec70f7ca95e71d2f3af23a5692426e9f5b352ccc2f",
+      "atmosphere/snow/boehm.py": "655f93cbc192849c45ffd295fe362fb001bdc9f0b46f7de4341bfabe52e5f22a",
+      "atmosphere/snow/collision_projection.py": "c715e32faba0326c905fb48125e60af7fbfc3e4f48afc160f715ca95cc6d9b53",
+      "atmosphere/snow/column_experiments.py": "644b1ab74e02af59d6b1e1cdd2aaf06b64128a7c57f71f8e4994655d3d186af0",
+      "atmosphere/snow/flakes.py": "ce3a82113fc62480130c4db99a95de44d7f3f1432f6444cdb8fcb86ced8012a5",
+      "atmosphere/snow/geometry_continuation.py": "d7fbd666bd6be98452d08023ae079bbeb15a5e4972146abd6c4f433c5540e751",
+      "atmosphere/snow/growth_depth.py": "fba837d064213c5dae225f6cb6d26985f533b88cc949e7e9ee6ffeb0489398f0",
+      "atmosphere/snow/growth_products.py": "d3ebbac14c7822ef005c2eabf6c8128da47c8104f3bed5eb4a2336139747f41a",
+      "atmosphere/snow/growth_repair.py": "28e0be42b96c0a636d43ac5725707bff4a60110733e0f8e949dbb298d6fcb05a",
+      "atmosphere/snow/growth_transport.py": "af8ea91072d678f8b8897864ef135ca4667042e9c462f2b5d06d48c4470bf7b8",
+      "atmosphere/snow/habits.py": "e2cd9e9693b70c03de051f98635416f7f29b7cf87a1d7bda9154ccedfe26e8d1",
+      "atmosphere/snow/kernel_diagnostics.py": "1cc7e0cec66163b2e80f996919127178f552165395f44035a6221388b55384cc",
+      "atmosphere/snow/limited_growth.py": "bbdc5d91714cbe3d4430b36e4573610438fb91b93ad67b258ca25dd782d17b7b",
+      "atmosphere/snow/limited_growth_batch.py": "0da23f64ab2ba00dfabc893ec9e8a88d95e6dd08b4f32fdcc7f3a6aed42fd8d8",
+      "atmosphere/snow/numerical_audit.py": "2bf7c6e391e6bfd5f7d47013da80d1aaba2cf558aba762f1034a76284b6db440",
+      "atmosphere/snow/optics.py": "2cfe2d58eef7e1dfef6ad05f0e34bcdca954bff04fbbb3df07d125ff2ad21d81",
+      "atmosphere/snow/population.py": "af0d7e54cc653c7c52342404760842714279bf4673c6d986c8f853558d53e3e8",
+      "atmosphere/snow/repair.py": "3a93bc0618e00b7748aaafbac844f67097ca5ad809ffc4b4839538ec780bb4a0",
+      "atmosphere/snow/results/aggregation.json": "d2a5c263ed8dfe18c84825ae8e804e322a99af13ad9d197a914da79cf0dfbec7",
+      "atmosphere/snow/results/boehm_reference.json": "215d6e3515793529bb25075338036da52c4c3f95bc68639bedf8a39cb0106e85",
+      "atmosphere/snow/results/checkpoint_checks.json": "e5a2ccd7ada24049617d28ff53855ea774c0399fd22f0034502cbf5555833171",
+      "atmosphere/snow/results/checks.json": "724a7f333975b1b3418d1446472357988d58797ee3971592d1bd0bfbd378dcd2",
+      "atmosphere/snow/results/collision_projection.json": "45db420dcb8efa8a11b04b0e4db44507cfe52be9fd6bd1f0a989132e71782975",
+      "atmosphere/snow/results/geometry_continuation.json": "717058ffc1a72b16b8b58994acd7db6eb1425ded44f85c76457ffcfd656b4f0e",
+      "atmosphere/snow/results/growth_depth.json": "f00c970af68064c878b8ca0081155f5b0b2423ab969edeae0b7dabefbf41277a",
+      "atmosphere/snow/results/growth_repair.json": "62a420c45f13f3a59c651c416db726faf189d768522b1985e881fc013eb58de3",
+      "atmosphere/snow/results/growth_repair_checks.json": "6f7efb6a940fd4ac97aab85d842618a094e99ee39b45dc9f38a7e9b31f3a0277",
+      "atmosphere/snow/results/growth_transport.json": "e163d37f004cae23f842e85c259cac2d2db363fded71c90507c7e95d4701d042",
+      "atmosphere/snow/results/kernel_diagnostics.json": "ce23102e26762420e4a4d5337b34130a4e6ec4952953b232b7ac559936349be1",
+      "atmosphere/snow/results/limited_growth.json": "9da67c0a3f50d7ca171570694ab333b9f05874b7059412c73bb20d9c3e4041e0",
+      "atmosphere/snow/results/numerical_audit.json": "55bbb91401ab7fedaf49f8233384e177ee94d901aa023fd67654d1bc7a168787",
+      "atmosphere/snow/results/optics.json": "22c05864f9412c4b69a96b810060e9879613d019820098756f76ba5f663023cc",
+      "atmosphere/snow/results/population.json": "65d899e2509a76d79589569972d104dcb84de862eb7ed1eb7cc15db8eabbf66b",
+      "atmosphere/snow/results/repair.json": "84cc7b42a8233ef9e6da1b7a54c0f689207406356e09e117f8774e194cd63da3",
+      "atmosphere/snow/results/repair_checks.json": "20c300a381f179aca492955d8ea9aea225a181113fa7e8a411223841b98d84d6",
+      "atmosphere/snow/results/snow.json": "d9c35f332dada7e766381d13aa98f80cd681c8f65655a1f5d3226a768da4648a",
+      "atmosphere/snow/results/turbulence.json": "43d83ee9be86e5c0d3de0f5fc7a967e5cee8ae2e5aa18adda798d5e03dd5fbf5",
+      "atmosphere/snow/results/welss_archive_comparison.json": "1e255e5450d255b6fabfb2a7774c4be79329ff0833785b9653f660bd69939274",
+      "atmosphere/snow/results/welss_capacitance_startup.json": "b68c37498cc9ad363af8d3b75cdb4017db086114184c4187ccba1279b5645b5e",
+      "atmosphere/snow/results/welss_column.json": "1b56f80f00d9e68a49f20b15dde0da65142323c9d115ef4c2e1ec7599c6dbacf",
+      "atmosphere/snow/results/welss_compact_capacitance.json": "eb689c998d92665fac4ec80899c75c27bfcb96e47d4cd86ca142cf0e7fc667ce",
+      "atmosphere/snow/sectional.py": "f18d56b2d48647bc7812b62477b7934308526b338736321d6c2a83e56a6995ff",
+      "atmosphere/snow/turbulence.py": "d5909aaacab7cf11a64dea7fa992b8494ec44bc7ff0ead6648d1a067d95924b5",
+      "atmosphere/snow/welss_archive_comparison.py": "7ae7a75b8a60323e1f2b692371a9a27ce50434cde23fb24d6b99295391deca13",
+      "atmosphere/snow/welss_capacitance_startup.py": "5419e034a574778348d5a219d8c68e1655705143fd38e17f0df01ddd8b700fb1",
+      "atmosphere/snow/welss_column.py": "5ee9c77c68f36429e7c872b9f845650d0d9e6d5a0b6a001b50840972b3885908",
+      "atmosphere/snow/welss_compact_capacitance.py": "f873ca8e548d85b01f7f98950b07bbaecec0c9b517c4ca6a642fd08fb6c6dd1d",
+      "atmosphere/snow/welss_comparison.py": "808bf4803c3872a80322e47915e767f55fffc957c3319e9d3cc308aaa5405171"
+    }
+  },
+  "layers": {
+    "result": "PASS",
+    "output": "check_layers: 1204 files checked, 0 violations",
+    "source_files": 1204,
+    "violations": 0,
+    "scope": "git ls-files --cached --others --exclude-standard; standard layer checker and source exclusions"
+  },
+  "research_check": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python research/check.py --require-inputs --output /tmp/terluna-snow-collision-exposure-integrity.json",
+    "result": "PASS",
+    "retained_files": 110,
+    "record_sha256": "6c2edbd5f925fbb7f6653a75fd639e0ed74fe26e99f4a33c2c3d11e27919d7ae",
+    "scope": "Retained bytes, illumination arithmetic, historical feasibility reproduction and protection verifier with required input hashes."
+  },
+  "products_sha256": {
+    "atmosphere/snow/results/collision_reference.json": "ccfe6c2fc8ceaceefdda4814f3c122b9dd12f7954007e843d0392507239b74c9",
+    "atmosphere/snow/results/moist_history.json": "fbdc5f51f256c2c60b323d30149d02a2346d96bb602b777709c4702f60e9d8d8",
+    "atmosphere/snow/results/welss_author_growth.json": "49dbc8c1287c91da4e2878aafd17bdcc1e35fc0dbeeacc843ebc7e6873bf61a4",
+    "atmosphere/snow/results/welss_author_aggregation.json": "daa5b7b323c79444a682b36cc77fad979fa13a15d7ba2731c4c375688414f39a",
+    "atmosphere/snow/references/welss_aggregation_reference.json": "0c0a465385657aae8a36755b7cc96d5a76f8a8ef2119041b5de3fbb94d46aed4"
+  },
+  "author_build_review": {
+    "compiled_source_files_checked": 39,
+    "recorded_source_files": 57,
+    "all_compiled_sources_bound": true,
+    "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "build_record_sha256": "386d9fd97a9807550a619da5533abdb065e80a6b1c638a40a3d39cdfa37dfc49"
+  },
+  "independent_component_check": {
+    "compiled_fortran_cases": 182,
+    "scope": "Selected author geometry, capacitance, deposition, drag, interception, sticking and composed collision kernel. Source parity, not independent population or empirical validation."
+  },
+  "collision_figure": {
+    "byte_identical_regeneration": true,
+    "output_hashes": {
+      "visualization/snow/generated/collision_comparison.png": "2a95316c5686dc2383ac43f2c165244bad16e4dc4cc7db150385556dc633037d",
+      "visualization/snow/generated/collision_comparison.svg": "f9c6e1d2fcd7e2dd65b84d978d7eee20d38bc8eb88052f55dc0c105d316d9234",
+      "visualization/snow/generated/collision_manifest.json": "3a4763b43dd01564bd524112ab561c744d09d68f58651bc7dbabe9b83d5764d6"
+    },
+    "invalid_curve_rejection_cases": 3,
+    "svg_xml_parsed": true,
+    "png_visual_inspection": "Viewed at delivered resolution; labels, CDF steps, axes, legend, confidence band and imposed-collector qualification legible. No separate SVG rendering inspection."
+  },
+  "completed_numerical_work": [
+    "Exact-event finite-volume coagulation ensembles and nested fixed-pivot controls under the unchanged lunar kernel",
+    "Independent repeated-capture histories and exact fixed-pivot bath generator, with sampling and event-cap controls",
+    "1416 kinematic histories with integration-step and field-cadence controls through the selected older archived storm",
+    "Pinned author-source ten-hour Earth aggregation and growth-only runs, each with one deterministic RNG seed"
+  ],
+  "substantive_review": [
+    "Independent review of collision implementation, sampling limits and report",
+    "Independent review of moist-path interpolation, exposure/censor accounting and report",
+    "Independent review of Earth component parity, author configuration, source build and profile normalization",
+    "Current synthesis numerical tables checked against native saved results",
+    "Final synthesis and Earth report read in context; both delivered PNG figures inspected by the primary agent."
+  ],
+  "remaining": [
+    "No adopted collision-distribution repair in the lunar column; twelve-hour finite-volume convergence fails and rare tails remain unresolved.",
+    "Earlier full lunar columns and geometry sensitivity still fail their finite mass-domain checks.",
+    "Saved storm fields do not resolve complete cloud histories; no changing particle properties, sublimation or statistical lunar climatology.",
+    "Declared-source Earth aggregation differs from archived total profiles by 12.5–16.5%, and aggregate number density by 70.1%; averaging variants preserve the discrepancy and its cause is unresolved.",
+    "Author reruns use an identified 2024 public source and one seed; the archived 2023 executable is unidentified and stochastic/time-step refinement is unperformed.",
+    "Independent coupled Earth aggregation and breakup population validation remains unperformed.",
+    "Full external data-archive checksum remains unverified; selected member hashes are retained.",
+    "Evolving aggregate geometry, contact-network failure, physically constrained fragmentation and calibrated lunar size/optical distributions remain unresolved."
+  ],
+  "reading_rule": "Numerical checks, author-source reproduction, conditional climate diagnostics and empirical validation are separate evidence states. No lunar snow-size or optical forecast is admitted by these checks.",
+  "earth_figure": {
+    "schema": "terluna.snow-earth-figure-checks/1",
+    "renderer": {
+      "visualization/snow/earth.py": "604a83896426485f516aff403bcc51b33c3d3664e0d7a2740f202da8b743252f"
+    },
+    "products_and_archives": {
+      "atmosphere/snow/results/welss_author_growth.json": "49dbc8c1287c91da4e2878aafd17bdcc1e35fc0dbeeacc843ebc7e6873bf61a4",
+      "external_archive/ob_hp0.nc": "119871a2d269a90321a7fba21658b6f217aa2f8641dbda37f6cd9ae6ec41a304",
+      "atmosphere/snow/results/welss_author_aggregation.json": "daa5b7b323c79444a682b36cc77fad979fa13a15d7ba2731c4c375688414f39a",
+      "external_archive/ob_agg0.nc": "3766649cc9106aba999a78c603637dedf03b75e21f8bf21366fb652081bb3515"
+    },
+    "verified_producer_files": {
+      "atmosphere/snow/welss_aggregation.py": "5e8c2bccf2d7ea28cd0e39b60a2fb43dc5213846fec2b1c0c2a12c226e8960e3",
+      "atmosphere/snow/welss_aggregation_build.py": "f61af9a42ab82418bdaf4e8ddb8e38f36f81a5ce181295bb9dfd92444a163bfd",
+      "atmosphere/snow/welss_aggregation_sources.json": "8e2618ec738dd45a3959628f426c235ee304e60d218cf3d0d8a482d868745c3e"
+    },
+    "checks": {
+      "final_source_ast_parse": true,
+      "no_domain_imports": true,
+      "embedded_run_build_identity": true,
+      "archive_identity": true,
+      "all_four_total_profiles_three_regions_each_reconstructed": true,
+      "aggregate_only_Nd_and_Fm_three_regions_reconstructed": true,
+      "deliberate_metric_mismatch_rejected": true,
+      "deliberate_archive_mutation_rejected": true,
+      "independent_rebuild_png_svg_manifest_byte_identical": true,
+      "installed_artifacts_byte_identical": true
+    },
+    "metric_tolerance": {
+      "relative": 2e-12,
+      "absolute": 1e-14
+    },
+    "numerical_scope": "Reconstruct stored comparison metrics and display unit conversions only; no new physical model or simulation.",
+    "visual_review": {
+      "png_sha256": "45bcecea4c70590b94222ebd2ffd867fe844625251ec62bef01ed4335b57cd6d",
+      "status": "inspected final PNG at displayed 1976x1280 scale from original 2556x1655 image",
+      "findings": "Both cases, four total moments, distinct archive/rerun profiles, 20 m bins, common axes, source layer, units and L1 annotations are legible. Caption overlap corrected and annotations clear of curves. Visible aggregation discrepancy retained. Totals-only title and caption disclose larger aggregate-only Nd/Fm differences.",
+      "limits": "PNG visually inspected; SVG byte determinism verified but not separately rasterized."
+    },
+    "relative_L1": {
+      "growth": {
+        "Nd": 0.020757579466815015,
+        "Md": 0.00827898906641359,
+        "Fn": 0.00817352100464778,
+        "Fm": 0.008618444060116161
+      },
+      "aggregation": {
+        "Nd": 0.12520605125312387,
+        "Md": 0.1648201361603646,
+        "Fn": 0.1465101590800558,
+        "Fm": 0.15250548066215203
+      }
+    },
+    "aggregate_only_comparison": {
+      "Nd_unr": {
+        "all_populated": {
+          "count": 149,
+          "relative_L1": 0.7010573588931024,
+          "relative_bias": 0.700099989596573,
+          "maximum_absolute_relative_difference": 1.1898292892289377,
+          "maximum_difference_height_m": 2760.0
+        },
+        "below_nucleation": {
+          "count": 135,
+          "relative_L1": 0.6993137602582425,
+          "relative_bias": 0.6993137602582425,
+          "maximum_absolute_relative_difference": 1.1732842279459705,
+          "maximum_difference_height_m": 2680.0
+        },
+        "nucleation_belt": {
+          "count": 14,
+          "relative_L1": 0.9368928574609504,
+          "relative_bias": 0.8064437227738599,
+          "maximum_absolute_relative_difference": 1.1898292892289377,
+          "maximum_difference_height_m": 2760.0
+        }
+      },
+      "Fm_unr": {
+        "all_populated": {
+          "count": 149,
+          "relative_L1": 0.6764155694793249,
+          "relative_bias": 0.6764138127162439,
+          "maximum_absolute_relative_difference": 1.2109785299987328,
+          "maximum_difference_height_m": 2760.0
+        },
+        "below_nucleation": {
+          "count": 135,
+          "relative_L1": 0.6763998643052095,
+          "relative_bias": 0.6763998643052095,
+          "maximum_absolute_relative_difference": 1.1558842243705274,
+          "maximum_difference_height_m": 2680.0
+        },
+        "nucleation_belt": {
+          "count": 14,
+          "relative_L1": 0.9330268660254779,
+          "relative_bias": 0.9043208587634716,
+          "maximum_absolute_relative_difference": 1.2109785299987328,
+          "maximum_difference_height_m": 2760.0
+        }
+      }
+    },
+    "artifacts": {
+      "earth_comparison.png": "45bcecea4c70590b94222ebd2ffd867fe844625251ec62bef01ed4335b57cd6d",
+      "earth_comparison.svg": "576556c45423e57a64a29b63573e5461f18ad2cdc7c9f4da55b1c5b8683a8d94",
+      "earth_manifest.json": "833470b1d231a2a1edcd4237f7f5908039bd3e747a4f860faeb56c155e9f5fdf"
+    },
+    "environment": {
+      "python": "3.13.7",
+      "matplotlib": "3.10.6",
+      "numpy": "2.3.3",
+      "scipy": "1.16.2"
+    }
+  },
+  "document_links": {
+    "local_links_checked": 52,
+    "missing": 0,
+    "scope": "New collision/exposure/Earth reports, current growth synthesis, Earth benchmark specification and visualization README."
+  }
+}

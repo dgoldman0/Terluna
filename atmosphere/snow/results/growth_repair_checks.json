@@ -1,0 +1,123 @@
+{
+  "schema": "terluna.atmosphere.snow-growth-repair-checks/1",
+  "checked_at_utc": "2026-10-21T19:28:59.841788+00:00",
+  "branch": "domain/atmosphere",
+  "checkpoint_commit": "16cde54288ddb6dc558e71042cf28469258910e7",
+  "working_state": "Repair additions remain uncommitted in the atmosphere worktree; main checkout is clean. Frozen checkpoint snow producers and JSON products are unchanged.",
+  "repository_checks": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTEST_ADDOPTS=\"-p no:cacheprovider\" OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+    "exit_code": 0,
+    "python": {
+      "passed": 2943,
+      "skipped": 20,
+      "seconds": 548.73
+    },
+    "javascript": {
+      "passed": 191,
+      "failed": 0,
+      "suites": [
+        129,
+        48,
+        14
+      ]
+    },
+    "ensemble": {
+      "result": "PASS",
+      "snapshot_files": 14,
+      "paper_workspaces": 5
+    },
+    "scope": "Full run preceded later geometry, collision, export and Earth additions; these additions are covered by the final focused tests below.",
+    "log": {
+      "path": "/tmp/terluna-snow-growth-repair-make-check.log",
+      "sha256": "f4805dfd48b7c32024eeb136b74f42b470c552ba9f0111ec7f88c2d32ec132de"
+    }
+  },
+  "final_snow_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest -p no:cacheprovider atmosphere/tests/test_snow*.py -q",
+    "exit_code": 0,
+    "passed": 207,
+    "seconds": 4.34,
+    "log": {
+      "path": "/tmp/terluna-snow-growth-repair-focused-final.log",
+      "sha256": "a45613b3772ca918a1c439178243f5e6771a0e703b515b6883667ddf535d6dbc"
+    }
+  },
+  "layers": {
+    "result": "PASS",
+    "source_files": 1192,
+    "violations": 0,
+    "scope": "git ls-files --cached --others --exclude-standard; normal source extensions and exclusions",
+    "log": {
+      "path": "/tmp/terluna-snow-growth-repair-layers-final.log",
+      "sha256": "a24f9e61d7a505ab3e8fd014c61a62a174a7f26a06f77c65a4d8f677295c650c"
+    }
+  },
+  "integrity": {
+    "result": "PASS",
+    "retained_files": 110,
+    "protection_input_hashes": 5,
+    "record": {
+      "path": "/tmp/terluna-snow-growth-repair-integrity-final.json",
+      "sha256": "32ad34681dac378921f134188a1f862f907942d4005ce9d6912a0318df6b4163"
+    }
+  },
+  "saved_products_sha256": {
+    "atmosphere/snow/results/growth_transport.json": "e163d37f004cae23f842e85c259cac2d2db363fded71c90507c7e95d4701d042",
+    "atmosphere/snow/results/limited_growth.json": "9da67c0a3f50d7ca171570694ab333b9f05874b7059412c73bb20d9c3e4041e0",
+    "atmosphere/snow/results/growth_repair.json": "62a420c45f13f3a59c651c416db726faf189d768522b1985e881fc013eb58de3",
+    "atmosphere/snow/results/geometry_continuation.json": "717058ffc1a72b16b8b58994acd7db6eb1425ded44f85c76457ffcfd656b4f0e",
+    "atmosphere/snow/results/collision_projection.json": "45db420dcb8efa8a11b04b0e4db44507cfe52be9fd6bd1f0a989132e71782975",
+    "atmosphere/snow/results/boehm_reference.json": "215d6e3515793529bb25075338036da52c4c3f95bc68639bedf8a39cb0106e85",
+    "atmosphere/snow/results/welss_column.json": "1b56f80f00d9e68a49f20b15dde0da65142323c9d115ef4c2e1ec7599c6dbacf",
+    "atmosphere/snow/results/welss_archive_comparison.json": "1e255e5450d255b6fabfb2a7774c4be79329ff0833785b9653f660bd69939274",
+    "atmosphere/snow/results/welss_capacitance_startup.json": "b68c37498cc9ad363af8d3b75cdb4017db086114184c4187ccba1279b5645b5e",
+    "atmosphere/snow/results/welss_compact_capacitance.json": "eb689c998d92665fac4ec80899c75c27bfcb96e47d4cd86ca142cf0e7fc667ce"
+  },
+  "completed_numerical_runs": [
+    "Independent growth characteristics and first-order/limited mass-grid controls",
+    "Generic internal Earth column with limited growth",
+    "Full heavy lunar limited-growth columns at 96 and 144 mass pivots",
+    "Quadratic geometry continuation on the same 96 mass pivots",
+    "Welss deposition/settling baseline and four independent numerical refinements",
+    "One compact-sphere capacitance sensitivity with baseline quadratures and tighter ODE tolerance"
+  ],
+  "independent_component_comparisons": {
+    "boehm_compiled_fortran_cases": 122,
+    "conditional_archived_earth_surface_fall_speed_cases": 5,
+    "welss_compiled_fortran_cases": 44,
+    "ncl_filter_cases": 4,
+    "scope": "Author-source parity or conditional reproduction of calculations, not empirical validation."
+  },
+  "compact_sensitivity": {
+    "invalid_rk_stages_in_admitted_run": 0,
+    "saved_profile_values_finite": 3765,
+    "failed_startup_attempts": "Both are retained by log identity in results/welss_capacitance_startup.json; neither supplied an admitted physical result.",
+    "numerical_limit": "The RHS wrapper can induce rejection of invalid stages used in DOP853 error estimation. Extra dense-output stages occur after acceptance, so the wrapper is not a general guarantee. The admitted run encountered no invalid stages. A one-height first-step sensitivity checks endpoints only; full quadrature convergence of this physical sensitivity is unperformed."
+  },
+  "visualization": {
+    "path": "visualization/snow/generated/growth_comparison.png",
+    "sha256": "95826144d124590ea752e6442b6cfe3e729e2139029edeceaa258caaf4c910e5",
+    "manifest_sha256": "efc083c7b723e2add9768537d46c4cc1a156f2b67a3b858b794301c43fb34949",
+    "activities": [
+      "Visual inspection of the four-panel growth comparison",
+      "Byte-identical regeneration of PNG, SVG and manifest",
+      "Input binding, moments, settings and CDF normalization checks"
+    ],
+    "scope": "Closed condensation stress calculation; no storm image or residence-time forecast."
+  },
+  "substantive_review": [
+    "Growth report numerical claims checked against saved growth, collision and column products",
+    "Earth raw-profile metrics, preprocessing interpretation and synthesis checked against corrected products",
+    "Compact intervention, restoration, trial-stage limits and source identities reviewed"
+  ],
+  "remaining": [
+    "Heavy lunar finite mass-domain checks fail at both limited-growth resolutions; geometry sensitivity also fails.",
+    "Full lunar collision-grid, time, height and domain convergence remain unestablished.",
+    "Published Earth aggregation/breakup population comparison remains unperformed.",
+    "Earth source-region discrepancy persists; exact archived executable and averaging times remain unidentified.",
+    "Full external data archive checksum remains unverified, although selected member identities are recorded.",
+    "Aggregate contact-network failure, largest-remnant breakup, evolving geometry and climate-supported growth histories need physical constraints.",
+    "No empirical validation of giant lunar flakes or calibrated predictive storm optics."
+  ],
+  "reading_rule": "Software and artifact checks passed within their stated scope. Passing them does not clear failed numerical-domain checks or establish empirical physical validity."
+}

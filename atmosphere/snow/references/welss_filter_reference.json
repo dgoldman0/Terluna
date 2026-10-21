@@ -1,0 +1,184 @@
+{
+  "schema": "terluna.atmosphere.welss-filter-reference/1",
+  "evidence": "Independently compiled source parity fixture using synthetic arrays; not an archived population run or empirical validation.",
+  "source_version": "NCL 6.6.2",
+  "source_credit": "NCAR Command Language (NCL), UCAR/NCAR. Official source files are retrieved separately and are not redistributed here.",
+  "external_source_files": {
+    "filtrx.f": {
+      "sha256": "f4215266fdc27778f6297fb30b4ec7cf1b2a868c12ef797a182b1e9bbba171bf",
+      "url": "https://raw.githubusercontent.com/NCAR/ncl/6.6.2/ni/src/lib/nfpfort/filtrx.f"
+    },
+    "wrunave_dp.f": {
+      "sha256": "c21c13343dfe1060d5b25d4df7913fd375c73c8c92d929ad2e70b1285a264e02",
+      "url": "https://raw.githubusercontent.com/NCAR/ncl/6.6.2/ni/src/lib/nfpfort/wrunave_dp.f"
+    }
+  },
+  "generation_script_sha256": "e9ae2e31e475f049e6ea60070940b6416be1eb6d53b28706513abed87095490d",
+  "driver_sha256": "491d69cc40d83b0086c957edf3695485c65bc135d71cac6aca394a22d2b0a304",
+  "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "compiler_flags": [
+    "-O0",
+    "-fno-fast-math",
+    "-ffixed-line-length-none"
+  ],
+  "settings": {
+    "nwt": 5,
+    "fca": 0.20000000298023224,
+    "fcb": -999.0,
+    "nsigma": 1.0,
+    "ihp": 0,
+    "kopt": 0,
+    "npts": 13,
+    "missing_sentinel": -9999999.0
+  },
+  "precision": "DFILTRQ receives float32(.2) promoted to double; resulting double weights are rounded to default REAL (binary32) then promoted for DWGTRUNAVE. Synthetic inputs and arithmetic in DWGTRUNAVE are double; float32_ramp inputs are rounded explicitly. Output is serialized from double; missing values become null.",
+  "scope": "One official weight-generation and running-average pass, including conditional normalization, missing-input propagation, and two masked endpoints on each side. The archive producer and NCL runtime version remain unverified.",
+  "weights_double": [
+    4.642821110974743e-18,
+    0.24536847030209377,
+    0.5092630593958125,
+    0.24536847030209377,
+    4.642821110974743e-18
+  ],
+  "weights_float32_promoted": [
+    4.6428212624238664e-18,
+    0.24536846578121185,
+    0.5092630386352539,
+    0.24536846578121185,
+    4.6428212624238664e-18
+  ],
+  "cases": [
+    {
+      "name": "constant",
+      "input": [
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0
+      ],
+      "expected": [
+        null,
+        null,
+        6.999999791383743,
+        6.999999791383743,
+        6.999999791383743,
+        6.999999791383743,
+        6.999999791383743,
+        6.999999791383743,
+        6.999999791383743,
+        6.999999791383743,
+        6.999999791383743,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "impulse",
+      "input": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected": [
+        null,
+        null,
+        0.0,
+        0.0,
+        4.6428212624238664e-18,
+        0.24536846578121185,
+        0.5092630386352539,
+        0.24536846578121185,
+        4.6428212624238664e-18,
+        0.0,
+        0.0,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "missing_center",
+      "input": [
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        null,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0
+      ],
+      "expected": [
+        null,
+        null,
+        6.999999791383743,
+        6.999999791383743,
+        null,
+        null,
+        null,
+        null,
+        null,
+        6.999999791383743,
+        6.999999791383743,
+        null,
+        null
+      ]
+    },
+    {
+      "name": "float32_ramp",
+      "input": [
+        -0.5714285969734192,
+        -0.4285714328289032,
+        -0.2857142984867096,
+        -0.1428571492433548,
+        0.0,
+        0.1428571492433548,
+        0.2857142984867096,
+        0.4285714328289032,
+        0.5714285969734192,
+        0.7142857313156128,
+        0.8571428656578064,
+        1.0,
+        1.1428571939468384
+      ],
+      "expected": [
+        null,
+        null,
+        -0.2857142863154849,
+        -0.14285714498587998,
+        1.3265204199926144e-18,
+        0.14285714498587998,
+        0.2857142863154849,
+        0.4285714273690293,
+        0.5714285726309698,
+        0.7142857100282392,
+        0.8571428401129584,
+        null,
+        null
+      ]
+    }
+  ]
+}

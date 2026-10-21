@@ -1,0 +1,420 @@
+{
+  "revision": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+  "files": [
+    {
+      "path": "AUTHORS.txt",
+      "git_blob_sha1": "429b688638315f41e6722f8f5b2fee8b8f0914cb",
+      "sha256": "a6c0333debe79060ae49382d875b7bce178e04df91abe9a51031d4866554be14",
+      "bytes": 277,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/AUTHORS.txt/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "git_blob_sha1": "3d3a80c960566997c04e26c3c64dac008aa949c7",
+      "sha256": "778acd1b4ff80124b17034f55dc1ac33bbea2ffdf79926d7260d5e5163450979",
+      "bytes": 2637,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/CMakeLists.txt/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "LICENSES/BSD-3-Clause.txt",
+      "git_blob_sha1": "51f75bfec4bbe085d35f29a824640b844284f7b9",
+      "sha256": "de6425dce48e08b5cac2d5711c982ee7878cfdd135a4afc62ad9c4a3de88c07a",
+      "bytes": 1493,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/LICENSES%2FBSD-3-Clause.txt/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "Makefile",
+      "git_blob_sha1": "0ccc5868d3b0c156e0fe8b2ad0e3754608d90912",
+      "sha256": "df1f854b8a6b6d442eaa5a5fa46e884344860a49677c719eef7a0a6822d02133",
+      "bytes": 2223,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/Makefile/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "README.md",
+      "git_blob_sha1": "23e94250041bf0109df0fc1ee77e71136ff68b1a",
+      "sha256": "f90eb9c78027727eab108626c78aa1bc485443ac5cbf8678eccd53109ef4147b",
+      "bytes": 3519,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/README.md/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "cmake/modules/FindNETCDF.cmake",
+      "git_blob_sha1": "70093e92a60228bc126f9e231c8e54340982828e",
+      "sha256": "41b49a41df294a7360ca833e48da100c5144509307a943dd4fb93478c0fba064",
+      "bytes": 3208,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/cmake%2Fmodules%2FFindNETCDF.cmake/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "cmake/modules/FindOpenMP_Fortran.cmake",
+      "git_blob_sha1": "2e54949f16a6e7ea96006455be31d11c05d1a9b2",
+      "sha256": "df45c825e9244a48ff3f2fc5f701697e0d9e9ee7d2c3e535937e143a5022cbda",
+      "bytes": 4241,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/cmake%2Fmodules%2FFindOpenMP_Fortran.cmake/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "cmake/modules/MacroOutOfSourceBuild.cmake",
+      "git_blob_sha1": "af2267dd35760b5a7c13cc6a751ded608b8c020b",
+      "sha256": "a4476fb0abbb75aa8e42ef98642a4b95d9a0a14ae9ae328e7a8883b98b0c5ae8",
+      "bytes": 819,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/cmake%2Fmodules%2FMacroOutOfSourceBuild.cmake/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "input/IGF_new_poly.txt",
+      "git_blob_sha1": "e4003a62481fc1c16f4e0f8d79ed0bdd187a74ea",
+      "sha256": "be7ff078d9f607262ae0ce656422b64474e2a47df7c09f12aa7be354820b60a4",
+      "bytes": 5474,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/input%2FIGF_new_poly.txt/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "input/colleff_HallBeheng.dat",
+      "git_blob_sha1": "c758b7de97299b2fd2563d279b890e98b8ab0879",
+      "sha256": "25562642e2168188a57e3026c1576923f054e776e685898c2e85c8a9d941987b",
+      "bytes": 2100,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/input%2Fcolleff_HallBeheng.dat/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "input/curve_inherent.txt",
+      "git_blob_sha1": "8d002f9628a5b46c1e672d27d940a651fa130040",
+      "sha256": "035128971ad442e3e4f86c016f6e6011973be48bd090d096eea18024bf81346c",
+      "bytes": 1942,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/input%2Fcurve_inherent.txt/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "input/dmin_wetgrowth_lookup.dat",
+      "git_blob_sha1": "11cbdc26730aec2cf056835f4c6cab6521d83fa6",
+      "sha256": "1cb54d5bcba7f1edbba70be1b7f6a050afbf2d57b95cc595f6bb7739da2581c4",
+      "bytes": 5512834,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/input%2Fdmin_wetgrowth_lookup.dat/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "input/ecmwf_profile.txt",
+      "git_blob_sha1": "d2df94ed2dcbb729018538e57b7725269817039b",
+      "sha256": "9de734f5908cc668aca57043dcf940060a07c97f6083ddac2df65d6856cbddda",
+      "bytes": 7331,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/input%2Fecmwf_profile.txt/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "run/1d_obl",
+      "git_blob_sha1": "8e62fa438e7797f021c7f8b64711a190ce7af89d",
+      "sha256": "98cfb3536aaf1d574d3a9a72fc24558e1d07cca28f46c9a9126af3a756ad617b",
+      "bytes": 5446,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/run%2F1d_obl/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/CMakeLists.txt",
+      "git_blob_sha1": "b83762232312930014c061f33373fed5d0630034",
+      "sha256": "6b9f0e74920cea02e021e78edb0f353b4fde64ba8135e9efa9a406c64a00456b",
+      "bytes": 816,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2FCMakeLists.txt/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/grplcoeffs.incf",
+      "git_blob_sha1": "c3cfa368ae34c75e646af194c29437d084ceff03",
+      "sha256": "5326e80243cfdf291f80e0943f8146385972f735e563b270ecf262d502b6241b",
+      "bytes": 1325,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fgrplcoeffs.incf/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/hailcoeffs.incf",
+      "git_blob_sha1": "4a596ef2bf5468cb8ca1f828c0b01e198e0a8559",
+      "sha256": "6c640124402f2b20b6f9ae308338020f32e08fab4d40602161f49866e00f9308",
+      "bytes": 1324,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fhailcoeffs.incf/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/main.f90",
+      "git_blob_sha1": "0d3df913bc2d8145f36e2b06fe41160c93739a39",
+      "sha256": "d3f4bf1197b6cc4982c369420296c1d6b2b272271cd576934f9c5cb2c1d88024",
+      "bytes": 4072,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmain.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/misc/mo_distr.f90",
+      "git_blob_sha1": "8535737d2bfd8263ec9569b162c71f3b1a1ef9e2",
+      "sha256": "f920c2a45ef79a9e474e7a4dcc33718385e95e3b931c15b49546b17ed7906b89",
+      "bytes": 3128,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmisc%2Fmo_distr.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_2mom_mcrph_driver.f90",
+      "git_blob_sha1": "012424e3a16d42919a88a51a18a3248fb2163277",
+      "sha256": "686f179b37658eadff6c8e20c7f1685f11f87a3a200f5e1f7279e6f7e026ba61",
+      "bytes": 56172,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_2mom_mcrph_driver.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_2mom_mcrph_main.f90",
+      "git_blob_sha1": "dfaa0c3b599a802b3f6466459bf12a854204cc94",
+      "sha256": "85e9b10e5f551e11214f20d4d640645b336a30353f124fb10764d241027872c8",
+      "bytes": 86414,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_2mom_mcrph_main.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_2mom_mcrph_prepare.f90",
+      "git_blob_sha1": "5d41db22702064706f9356851587ce33447d4e41",
+      "sha256": "d8ff3535f072dda0406552da36198fc34e1fef546e8779c547954cf08790c27a",
+      "bytes": 3355,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_2mom_mcrph_prepare.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_2mom_mcrph_processes.f90",
+      "git_blob_sha1": "784a5c1be2b44ff8799b456877cdfbf4d40c272f",
+      "sha256": "9c60bbd75ec9cdc31d32faccaaa02b44b5f77a801d66f4cebf5bf51e11ad2912",
+      "bytes": 212673,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_2mom_mcrph_processes.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_2mom_mcrph_types.f90",
+      "git_blob_sha1": "ec0dd35bc9787a1e0f9ef622c7dfdbb5d1dc17b7",
+      "sha256": "643a4742f5d706b72dc775bbcbcaa0d7fad1ceab60e36dd7b728b557cf08cc9d",
+      "bytes": 7692,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_2mom_mcrph_types.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_2mom_mcrph_util.f90",
+      "git_blob_sha1": "b47bfaea35d4924454344b5cac5934b4b4fbc282",
+      "sha256": "b06e8d82403a887c245a0d6619d5bd15f3dd920ae30770024590f76c6b908a21",
+      "bytes": 37663,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_2mom_mcrph_util.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_atmo.f90",
+      "git_blob_sha1": "61f333035bbb0f51352918ddc672c8d933c0d7e0",
+      "sha256": "4851b9bbbecdc20cb68b8e1db51d6f0dd0e5790cd2c732cdd1e3d6b6b45ea4d8",
+      "bytes": 27125,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_atmo_nml.f90",
+      "git_blob_sha1": "0212bab510c4128b4dfe86e351fe543dbb8c6c77",
+      "sha256": "ab60123619fbc2462865dc7637f46784a14cced1bb3170e32b2d4da37ba33789",
+      "bytes": 3941,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo_nml.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_atmo_types.f90",
+      "git_blob_sha1": "31112d5c565430ffadbd5ca2f5cec8788d38f84a",
+      "sha256": "e303838efdeaa2bb1d02ef86b44de8ebf326badb4e3cc1bdcdb55fda3fdb8173",
+      "bytes": 2767,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo_types.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_bnd_cond.f90",
+      "git_blob_sha1": "e808600e92a9520b317fbed08a5a0816329637d6",
+      "sha256": "3340d0ace224e276d1fe5219636f0e73072b4c0464ed1db673bb9c8b568ff32b",
+      "bytes": 13216,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_bnd_cond.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_breakup.f90",
+      "git_blob_sha1": "f7ca7321e79b62976ade2f709b13e1aa606f3a6f",
+      "sha256": "b85211c824c0e6104e697bdc144b54e6ad272d33ebf800650d19d17be2f2eca0",
+      "bytes": 34251,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_breakup.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_check.f90",
+      "git_blob_sha1": "81d6abec7c732ae591a348b179e649311aad85ee",
+      "sha256": "e71a7f6403f4206c255344ecd6c4cc837e86dbf905a91805d8f9955a923a615f",
+      "bytes": 72038,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_check.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_coll.f90",
+      "git_blob_sha1": "5b117b0ae15f4b8e1e4c8500fd1ccc9c81d71ea0",
+      "sha256": "341dbe24cbb072f3cc1e708acd7185d5641d12e8aab6406bc091aefc0fbdfe72",
+      "bytes": 23902,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_coll.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_coll_utils.f90",
+      "git_blob_sha1": "9c2c5b7f9ccfc13bc3ec80ebc866494732321662",
+      "sha256": "7b1eccd2dac7f38c72de274701d5ef179f9f6c15b7764ca11fa401325e9fb6e4",
+      "bytes": 6275,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_coll_utils.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_colleffi.f90",
+      "git_blob_sha1": "7e7621e4894e8a03a4013701a3f7a007fb08f8f2",
+      "sha256": "db14ccced491814aebc8eb6995fcec8c0a978261ac160823659b5d61fef8f1e8",
+      "bytes": 21869,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_colleffi.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_cond.f90",
+      "git_blob_sha1": "b248006c01d8eedc331b181e208381649d087463",
+      "sha256": "a31f34c3145e30a8aaaa4ae5e5f7b7fef9493e25bbbf98260ac0e8dd30d422bb",
+      "bytes": 2301,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_cond.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_constant.f90",
+      "git_blob_sha1": "64aa0c86bac828d0f3fc74cdc6befb765cd82a66",
+      "sha256": "5a48136d0ba6b7b3921544a6fbc7dc4e854bf90f6c346ae627cc5a69e1882c32",
+      "bytes": 1303,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_constant.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_depo.f90",
+      "git_blob_sha1": "0d98691c1e0664d46eea2bd848d65ba184563232",
+      "sha256": "a0904ce5e1061b559d9fe3d9c5c14329803dc823c9179fe43a3048f87f402232",
+      "bytes": 25047,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_depo.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_exception.f90",
+      "git_blob_sha1": "a4a5835652543d9b3f8720ee61532b80bbbafaec",
+      "sha256": "c2a1a934000b8f1f4c922dffe25e892a7435159e26c87ff024c6e74c0cef8397",
+      "bytes": 1743,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_exception.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_grid.f90",
+      "git_blob_sha1": "148614661807a4adf2dbf97ea15f932bb573bdad",
+      "sha256": "a85e8391b4462c708a4edc8817c2601ead84ab5c89121f549e1db2d961af452c",
+      "bytes": 1837,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_grid.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_grid_nml.f90",
+      "git_blob_sha1": "98d0c92d779bbe43332a6e78e81d1359a4361e11",
+      "sha256": "9b6d8a5c226a8c7aeca40458cf5cca0cc68c52409df372558c7edee115f772c6",
+      "bytes": 1088,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_grid_nml.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_ice_multiplication.f90",
+      "git_blob_sha1": "835eaa1ff6dcc8025ed4fab5334af40437e754ea",
+      "sha256": "9f3b3f8c889d37b164f31f1bc4bcc0487c98d540a5b0fd9c3dc6ed428ebbf24e",
+      "bytes": 4833,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_ice_multiplication.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_loop_array.f90",
+      "git_blob_sha1": "fc70f8c7560a838bc81f827e735b013d95edb1d0",
+      "sha256": "c3b92c4ad5f06f59253c753bc0f83c28642bd3bea797235333245207c1ec5571",
+      "bytes": 22413,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_loop_array.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_loop_list.f90",
+      "git_blob_sha1": "9587439f774a92835312a6b6245d9f421c2035ad",
+      "sha256": "c800b9c33cbd25759a84caf8e83696fead1098151a847eb4ec6898f7a1a0f296",
+      "bytes": 19983,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_loop_list.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_mass2diam.f90",
+      "git_blob_sha1": "6b46baa1b4ebea7550cb5237ea89373975f258c6",
+      "sha256": "1640c7670b810510996426c552da04280a140faf2a50b3049fb5a938fc332160",
+      "bytes": 20707,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_mass2diam.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_melt.f90",
+      "git_blob_sha1": "1478c79a757387b6087a37ff6d1bc8d915cb3e8e",
+      "sha256": "49ca4a557032d965eb1a3bbfa333a280f2aeeae48af6a003a50128febd22b7b7",
+      "bytes": 8573,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_melt.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_nucleation.f90",
+      "git_blob_sha1": "79fe1a6ccd86943df0beb06da3ac14667fc8fb84",
+      "sha256": "2afce55229cd0467b64d24a31b5e5cb4797aa5bf6f08db22d3ae3b6f0b3a0445",
+      "bytes": 5536,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_nucleation.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_output.f90",
+      "git_blob_sha1": "f44174a4784819bbb1af9ef71fee9e11dc8d752d",
+      "sha256": "a32f8e242fecf0e4ced65d00c64fdef9b51c792f9a50ccc3e94b16d883914717",
+      "bytes": 38257,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_output.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_outputArray.f90",
+      "git_blob_sha1": "2075541eeca81daca1e9d4ffdc6dda93915ccae5",
+      "sha256": "3f1ae14705db1cbc8315bcdfd3a79e6f10c249cccb90d1d61b59c9ebc14c924c",
+      "bytes": 37386,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_outputArray.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_rime_cont.f90",
+      "git_blob_sha1": "99690c84a60ca6011b0104eb6a3fd4af121bab8f",
+      "sha256": "4dab0fa0ef1bc6083fe97ebefa031055b8506e0a58ccf6a4d4454bdd9eb63312",
+      "bytes": 3903,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_rime_cont.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_rime_stoc.f90",
+      "git_blob_sha1": "b5c5adb59600547617828fa7f0cde25b435fe9bc",
+      "sha256": "5ec96fb55a3d089e734f56c30e0a30fdd43b8c98b2652708212089298f89ccc6",
+      "bytes": 14102,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_rime_stoc.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_sedi.f90",
+      "git_blob_sha1": "1083baecee2ba3f8b60a2bff59550aab349f65c1",
+      "sha256": "e97e2f99413144a52e9c6967375e360082cd9636341e18533cdb5e4488b4bca3",
+      "bytes": 3310,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_sedi.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_sp_array.f90",
+      "git_blob_sha1": "20429cfbe68fd0aff8bc501eb1e9e4f66e447aab",
+      "sha256": "c083d7e98e14a36f799a2e8fa6220569873f9b2785bfc298d6815267c472fa8d",
+      "bytes": 31121,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_sp_array.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_sp_list.f90",
+      "git_blob_sha1": "56025bf4ab4dafa9551a864ba07af5ca3ddd57ac",
+      "sha256": "d7eb0950e86eaf297ba79154b40f056e413361fcb72fd22e2647d2bcea9a4f22",
+      "bytes": 11256,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_sp_list.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_sp_nml.f90",
+      "git_blob_sha1": "5562886b90f58433f418224feecc88e83b1d3ed6",
+      "sha256": "62743aa0a924a54bcabfcd9cbc38e195be9275d65be7d3fdaff3a58ea7dfa4fa",
+      "bytes": 11527,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_sp_nml.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_sp_types.f90",
+      "git_blob_sha1": "adbb750988c272c281c8fafed05e2b385fb702e1",
+      "sha256": "24f11d47b13b7709f65137e2131ec9073e6198577ea3f5fd8dccc532ddf112ad",
+      "bytes": 5711,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_sp_types.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_velocity.f90",
+      "git_blob_sha1": "6d44574d6513025a4ea12a91dc615afe8e22852d",
+      "sha256": "b2171d1a7b0726c35b4b9b179078886a5531f7a838f7aecfb6a04d39af9fd3e5",
+      "bytes": 14396,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_velocity.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/phillips_nucleation_2010.incf",
+      "git_blob_sha1": "0a287a5a1fcda314b82a310de6dd0b3f1e72477d",
+      "sha256": "b7e0e9fb360bbf9f7c634f1474708fed3b575f7eda27cce7290f84e625f2e4ec",
+      "bytes": 70641,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fphillips_nucleation_2010.incf/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    }
+  ],
+  "schema": "terluna.atmosphere.welss-aggregation-sources/1",
+  "source_license": "BSD-3-Clause; external source files remain outside Git",
+  "purpose": "Declared-source full author-model rerun, not an independent aggregation solver or empirical validation",
+  "archive": {
+    "doi": "10.5281/zenodo.10077724",
+    "url": "https://zenodo.org/api/records/10077724/files/McSnow_paper_plot_data.zip/content",
+    "license": "CC-BY-4.0",
+    "credit": "Welss, Siewert and Seifert (2023)",
+    "full_archive_checksum_verified": false,
+    "members": {
+      "ob_hp0.nc": "119871a2d269a90321a7fba21658b6f217aa2f8641dbda37f6cd9ae6ec41a304",
+      "ob_agg0.nc": "3766649cc9106aba999a78c603637dedf03b75e21f8bf21366fb652081bb3515"
+    },
+    "retrieval": "Both40036-byte NetCDF members checked by compressed-member CRC and SHA256 in prior work; external bytes stay outside Git."
+  },
+  "identity_limit": "Pinned source revision September2024; archived outputs processed February2023. Exact archived executable, compiler, RNG and processing window unidentified."
+}

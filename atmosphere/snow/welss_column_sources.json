@@ -1,0 +1,110 @@
+{
+  "schema": "terluna.atmosphere.welss-column-sources/1",
+  "source_revision": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+  "source_constants_policy": "Author-model closure constants are retained as benchmark reference inputs, not adopted as Terluna constants.",
+  "license": "BSD-3-Clause",
+  "license_file": "references/mcsnow_bsd_3_clause.txt",
+  "paper": {
+    "doi": "10.1029/2023MS003805",
+    "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2023MS003805",
+    "reading_extent": "Sections 4.2.1 and 5.1\u20135.3; diagnostic-geometry growth/sedimentation setup and Figures 17/19; no empirical validation inferred."
+  },
+  "original_sources": [
+    {
+      "path": "src/mo_constant.f90",
+      "sha256": "5a48136d0ba6b7b3921544a6fbc7dc4e854bf90f6c346ae627cc5a69e1882c32",
+      "bytes": 1303,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_constant.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_atmo_types.f90",
+      "sha256": "e303838efdeaa2bb1d02ef86b44de8ebf326badb4e3cc1bdcdb55fda3fdb8173",
+      "bytes": 2767,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo_types.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_mass2diam.f90",
+      "sha256": "1640c7670b810510996426c552da04280a140faf2a50b3049fb5a938fc332160",
+      "bytes": 20707,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_mass2diam.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_atmo.f90",
+      "sha256": "4851b9bbbecdc20cb68b8e1db51d6f0dd0e5790cd2c732cdd1e3d6b6b45ea4d8",
+      "bytes": 27125,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_depo.f90",
+      "sha256": "a0904ce5e1061b559d9fe3d9c5c14329803dc823c9179fe43a3048f87f402232",
+      "bytes": 25047,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_depo.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_nucleation.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_nucleation.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 5536,
+      "sha256": "2afce55229cd0467b64d24a31b5e5cb4797aa5bf6f08db22d3ae3b6f0b3a0445"
+    },
+    {
+      "path": "src/mo_output.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_output.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 38257,
+      "sha256": "a32f8e242fecf0e4ced65d00c64fdef9b51c792f9a50ccc3e94b16d883914717"
+    },
+    {
+      "path": "run/1d_obl",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/run%2F1d_obl/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 5446,
+      "sha256": "98cfb3536aaf1d574d3a9a72fc24558e1d07cca28f46c9a9126af3a756ad617b"
+    },
+    {
+      "path": "postprocessing/NCL/hprofiles.ncl",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/postprocessing%2FNCL%2Fhprofiles.ncl/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 23835,
+      "sha256": "47788342cd5eeadc9dc4a06b15dfa09eddd80bbb88cccea4b575fb66c66533c4"
+    },
+    {
+      "path": "src/mo_outputArray.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_outputArray.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 37386,
+      "sha256": "3f1ae14705db1cbc8315bcdfd3a79e6f10c249cccb90d1d61b59c9ebc14c924c"
+    }
+  ],
+  "archive_reference": {
+    "archive_url": "https://zenodo.org/api/records/10077724/files/McSnow_paper_plot_data.zip/content",
+    "member": "ob_hp0.nc",
+    "bytes": 40036,
+    "sha256": "119871a2d269a90321a7fba21658b6f217aa2f8641dbda37f6cd9ae6ec41a304",
+    "crc32_verified": true,
+    "whole_archive_hash_verified": false
+  },
+  "archive_license": "CC-BY-4.0; Welss, Siewert and Seifert (2023), DOI 10.5281/zenodo.10077724",
+  "source_vs_archive": "Archive profile processed February 2023; public source imported March 2024 and atmosphere interpolation changed July 2024. Archive exact source and averaging window unknown. Current public source is a declared comparison configuration.",
+  "source_reading_extent": "Read source nucleation rate, gamma distribution, current atmosphere initialization/interpolation, pure-ice geometry, monomer capacitance, material coefficients, deposition, terminal velocity, output bins and preprocessing.",
+  "continuous_reference": "Independent characteristic solution of the noninteracting continuous-time equations, using continuous injection at the prescribed rate rather than replaying 5 s stochastic births or finite-step operator splitting.",
+  "output_definition": "write_hprofiles: [z,z+20 m) bins; N, Nm, Nv and Nmv divided by area and 20 m. Continuous and four-snapshot averaging weights reported separately.",
+  "filter": {
+    "description": "Five-point Lanczos low-pass, fc=.2 float32, nsigma=1; normalized float32 weights; opt=0 missing endpoints; one preprocessing pass. Figure 19 applies another pass to both profiles, excluded from direct archived-file comparison.",
+    "docs": [
+      "https://www.ncl.ucar.edu/Document/Functions/Built-in/filwgts_lanczos.shtml",
+      "https://www.ncl.ucar.edu/Document/Functions/Built-in/wgt_runave.shtml"
+    ],
+    "sources": [
+      {
+        "url": "https://raw.githubusercontent.com/NCAR/ncl/6.6.2/ni/src/lib/nfpfort/filtrx.f",
+        "sha256": "f4215266fdc27778f6297fb30b4ec7cf1b2a868c12ef797a182b1e9bbba171bf",
+        "reading_extent": "Read filter-weight formula, float output convention, weight-sum normalization and missing-value propagation; source retained only in /tmp."
+      },
+      {
+        "url": "https://raw.githubusercontent.com/NCAR/ncl/6.6.2/ni/src/lib/nfpfort/wrunave_dp.f",
+        "sha256": "c21c13343dfe1060d5b25d4df7913fd375c73c8c92d929ad2e70b1285a264e02",
+        "reading_extent": "Read filter-weight formula, float output convention, weight-sum normalization and missing-value propagation; source retained only in /tmp."
+      }
+    ],
+    "independent_reference": "references/welss_filter_reference.json",
+    "scope": "Independent compiled NCL 6.6.2 source fixture confirms one mathematical filter pass and missing-value handling. Archive runtime version and full ASCII/float32 processing pipeline remain unidentified."
+  },
+  "independent_component_reference": "references/welss_microphysics_reference.json",
+  "checks": "Component parity against independently compiled source; gamma/source normalization and analytic constant-rate characteristic/bin controls. Full column agreement and convergence reported by actual runs only."
+}

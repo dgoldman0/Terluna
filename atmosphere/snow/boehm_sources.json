@@ -1,0 +1,177 @@
+{
+  "schema": "terluna.atmosphere.snow-boehm-sources/1",
+  "review_date": "2026-10-21",
+  "scope": "Restricted alpha=1 rough-ice source translation, independent implementation fixtures, conditional archived Earth graupel drag check and local diagnostic use. No independent collision-trajectory or snowfall validation.",
+  "source_revision": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+  "source_commit_date": "2024-09-05T18:16:42+00:00",
+  "source_authors": [
+    "Slavko Brdar",
+    "Axel Seifert",
+    "Christoph Siewert",
+    "Markus Karrer",
+    "Jan-Niklas Welss"
+  ],
+  "source_copyright": "Copyright (c)2004\u20132024 DWD,MPI-M,DKRZ,KIT,ETH,MeteoSwiss",
+  "license_path": "references/mcsnow_bsd_3_clause.txt",
+  "license_sha256": "de6425dce48e08b5cac2d5711c982ee7878cfdd135a4afc62ad9c4a3de88c07a",
+  "original_source_files": [
+    {
+      "id": "mo_velocity.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_velocity.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 14396,
+      "sha256": "b2171d1a7b0726c35b4b9b179078886a5531f7a838f7aecfb6a04d39af9fd3e5",
+      "reading_extent": "Read boehmVel, Reynolds_Boehm, hydrodynamicValuesBoehm and collision state type; retained exact slices. Other drag implementations not reviewed.",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "id": "mo_colleffi.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_colleffi.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 21869,
+      "sha256": "db14ccced491814aebc8eb6995fcec8c0a978261ac160823659b5d61fef8f1e8",
+      "reading_extent": "Read Ecbohm and its sticking wrapper; retained exact Ecbohm slice. Other collection and breakup functions not reviewed.",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "id": "mo_coll_utils.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_coll_utils.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 6275,
+      "sha256": "7b1eccd2dac7f38c72de274701d5ef179f9f6c15b7764ca11fa401325e9fb6e4",
+      "reading_extent": "Read hydrodynamic_kernel, especially geometric area and external speed difference.",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "id": "mo_check.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_check.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 72038,
+      "sha256": "e71a7f6403f4206c255344ecd6c4cc837e86dbf905a91805d8f9955a923a615f",
+      "reading_extent": "Read height-dependent drag/efficiency test drivers and initial WJ geometry construction. Other diagnostic routines not reviewed.",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "id": "mo_atmo.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 27125,
+      "sha256": "4851b9bbbecdc20cb68b8e1db51d6f0dd0e5790cd2c732cdd1e3d6b6b45ea4d8",
+      "reading_extent": "Read source viscosity, saturation-pressure functions, idealized atmosphere, and density definitions. Other atmospheric profiles not reviewed.",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "id": "mo_atmo_types.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo_types.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 2767,
+      "sha256": "e303838efdeaa2bb1d02ef86b44de8ebf326badb4e3cc1bdcdb55fda3fdb8173",
+      "reading_extent": "Read air-state definition and physical constants.",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "id": "mo_atmo_nml.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo_nml.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 3941,
+      "sha256": "ab60123619fbc2462865dc7637f46784a14cced1bb3170e32b2d4da37ba33789",
+      "reading_extent": "Read default h1,h2,ssat and atmosphere type; original archived run namelist not obtained.",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "id": "mo_constant.f90",
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_constant.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+      "bytes": 1303,
+      "sha256": "5a48136d0ba6b7b3921544a6fbc7dc4e854bf90f6c346ae627cc5a69e1882c32",
+      "reading_extent": "Read precision and pi definitions.",
+      "license": "BSD-3-Clause"
+    }
+  ],
+  "retained_source_slices": {
+    "references/mcsnow_types.inc": {
+      "source": "mo_velocity.f90",
+      "line_ranges_1_based": [
+        [
+          1,
+          6
+        ],
+        [
+          38,
+          52
+        ]
+      ],
+      "sha256": "d1da56c189e607321e7d3d04364390b39007f3434fa4faed5368b3a1e0a87089"
+    },
+    "references/mcsnow_functions.inc": {
+      "sources": [
+        {
+          "source": "mo_velocity.f90",
+          "line_ranges_1_based": [
+            [
+              1,
+              6
+            ],
+            [
+              268,
+              427
+            ]
+          ]
+        },
+        {
+          "source": "mo_colleffi.f90",
+          "line_ranges_1_based": [
+            [
+              1,
+              6
+            ],
+            [
+              176,
+              341
+            ]
+          ]
+        }
+      ],
+      "sha256": "c921dce41f782384a6c5ca083a1bd7324e9f20f0f8fd824dc03e7ebc41c2d80b",
+      "construction": "Exact source ranges concatenated with blank-line separators; original functions unchanged."
+    }
+  },
+  "paper": {
+    "doi": "10.1029/2023MS003805",
+    "title": "Explicit Habit-Prediction in the Lagrangian Super-Particle Ice Microphysics Model McSnow",
+    "authors": "Welss, Siewert and Seifert",
+    "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2023MS003805",
+    "reading_extent": "Geometry, drag/efficiency sections2.1\u20133.3 and AppendixA read; displayed formulas compared with primary code. Other microphysics sections not fully reviewed.",
+    "original_boehm_papers": "Their equations are referenced through the retained McSnow implementation and Welss2024; full1992/1994/1999 source reconciliation remains unperformed."
+  },
+  "archive": {
+    "doi": "10.5281/zenodo.10077724",
+    "authors": "Welss, Siewert and Seifert",
+    "title": "Dataset for McSnow2.0: Explicit habit-prediction in a Lagrangian super-particle ice microphysics model",
+    "url": "https://zenodo.org/api/records/10077724",
+    "license": "CC-BY-4.0",
+    "archive_member": "boehm_height_dep_grau.dat",
+    "archive_member_sha256": "e8fcad8b7c95fad07010dfc6d96711bf97edb02a9da5ede9808367ca60fdca0c",
+    "whole_archive_url": "https://zenodo.org/api/records/10077724/files/McSnow_paper_plot_data.zip/content",
+    "retrieval": "Selected ZIP member retrieved with HTTP ranges; decompressed length and ZIP CRC32 verified; complete archive MD5 not verified.",
+    "repository_retention": "Five selected ground records only in references/mcsnow_ground_graupel.json, with credit and unchanged archived numerical values; full dataset remains outside repository.",
+    "retained_rows_sha256": "400b726c87ff75f3898059c19a7bc064bf53fc72976de6a44349771bd4760de3",
+    "state_limit": "Source-default saturated ground (h1=0) matches outputs within1e-6 relative; original run namelist and full-height humidity identity unavailable. This is not a claim of exact archival configuration identity."
+  },
+  "independent_reference": {
+    "generator": "references/build_boehm_reference.py",
+    "product": "results/boehm_reference.json",
+    "cases": 122,
+    "construction": "98 specified synthetic pairs plus24 local lunar-column pairs; expected values generated by unmodified Fortran functions, never by the adapter.",
+    "lunar_inputs": "references/boehm_lunar_cases.json",
+    "lunar_inputs_sha256": "f8504a509949a9d6b61fef87d57f807822ab379913af4af8139616a028665688",
+    "compiler_and_hashes": "Recorded in the reference product."
+  },
+  "verification": {
+    "focused_pytest": "16 passed",
+    "maximum_efficiency_relative_difference": 3.3550324214107186e-10,
+    "maximum_efficiency_absolute_difference": 4.095491021871567e-06,
+    "earth_ground_max_speed_relative_difference": 4.0539755996604754e-07,
+    "earth_ground_max_Re_relative_difference": 6.50653952605218e-07,
+    "evidence_limit": "These establish source and archived-model agreement; independent Earth trajectory and population validation unperformed."
+  },
+  "retrieval_failures_and_unresolved": [
+    "Web-tool GitLab retrieval failed; ordinary shell DNS unavailable; scoped network retrieval through GitLab API succeeded.",
+    "GitLab raw endpoint temporarily returned429; exact-revision API succeeded.",
+    "Original archived simulation namelist was not located; no substitution is claimed.",
+    "WJ plate/cylinder/branched comparisons require geometry outside alpha1scope; pinned diagnostic source also has oblate/oblates string mismatch.",
+    "Ec>1 and deterministic near-equal-speed discontinuity are retained and disclosed. No universal efficiency clamp or full-column adoption justified."
+  ]
+}

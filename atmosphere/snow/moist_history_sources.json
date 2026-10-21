@@ -1,0 +1,131 @@
+{
+  "schema": "terluna.atmosphere.snow-moist-history-sources/1",
+  "purpose": "Assess available temporal fields and calculate conditional resolved-flow exposure without a new climate run.",
+  "cm1": {
+    "version": "cm1r22.0",
+    "source_url": "https://www2.mmm.ucar.edu/people/bryan/cm1/",
+    "provenance": "Every selected case retains case/build identity, control-file SHA256 and selected-field byte hashes in the result. Archives remain external under climate/crm/runs.",
+    "inspection": "Read scalar GrADS layout, metadata times, grid interfaces, stationary periodic boundary flags, case forcing and restart identity. Reused the field reader and CM1 Exner conversion from turbulence.py; humidity uses the Murphy\u2013Koop ice-saturation equation already present in flakes.py.",
+    "limitation": "The selected second active window uses A28_dim5 forcing, not the separate301 K resort column. It is selected storm activity, not an occurrence sample. Explicit mixing and external nudging/advection tendencies mean kinematic tracers do not label conserved material parcels."
+  },
+  "gcm": {
+    "records": [
+      {
+        "path": "climate/gcm/runs/A28_dim5/model/MOST.00024.nc",
+        "sha256": "85bfd9e48d1600bfdfdd880d3763bc381d4109077038fe756eae471293c9473f",
+        "bytes": 50070580
+      },
+      {
+        "path": "research/runs/waves/weather/atmosphere.npz",
+        "sha256": "601d0b08522f8399c0563a25c8422798973b395b30dcbd2ee0b168efbad27f14",
+        "bytes": 27022839,
+        "schema": "terluna.climate.gcm-wave-snapshots/1",
+        "reading_rule": "Global native T21 grid, sampled every 3 Earth hours. Winds are at the lowest sigma level. Surface stress is the model's downward momentum transfer; its density closure uses surface temperature and the configured dry-gas constant. Wave forcing requires an explicit surface coupling rule.",
+        "sample_count": 241,
+        "sample_interval_s": 10800.0,
+        "fields": [
+          "time_s",
+          "restart_elapsed_s",
+          "longitude_deg",
+          "latitude_deg",
+          "eastward_lowest_m_s",
+          "northward_lowest_m_s",
+          "temperature_lowest_K",
+          "specific_humidity_lowest",
+          "surface_pressure_Pa",
+          "surface_temperature_K",
+          "friction_velocity_cubed_m3_s3",
+          "land_fraction",
+          "roughness_m",
+          "stress_eastward_Pa",
+          "stress_northward_Pa",
+          "sea_ice_fraction",
+          "stress_closure_density_kg_m3",
+          "metadata"
+        ]
+      },
+      {
+        "path": "research/runs/waves/cycle/atmosphere.npz",
+        "sha256": "4a6bf0fe4832ac4f5a5a62c2dceec813f7de3e37aaf7652e224ddca6f16de9c1",
+        "bytes": 53925349,
+        "schema": "terluna.climate.gcm-wave-snapshots/1",
+        "reading_rule": "Global native T21 grid, sampled every 3 Earth hours. Winds are at the lowest sigma level. Surface stress is the model's downward momentum transfer; its density closure uses surface temperature and the configured dry-gas constant. Wave forcing requires an explicit surface coupling rule.",
+        "sample_count": 481,
+        "sample_interval_s": 10800.0,
+        "fields": [
+          "time_s",
+          "restart_elapsed_s",
+          "longitude_deg",
+          "latitude_deg",
+          "eastward_lowest_m_s",
+          "northward_lowest_m_s",
+          "temperature_lowest_K",
+          "specific_humidity_lowest",
+          "surface_pressure_Pa",
+          "surface_temperature_K",
+          "friction_velocity_cubed_m3_s3",
+          "land_fraction",
+          "roughness_m",
+          "stress_eastward_Pa",
+          "stress_northward_Pa",
+          "sea_ice_fraction",
+          "stress_closure_density_kg_m3",
+          "metadata"
+        ]
+      },
+      {
+        "path": "climate/crm/gcm_profiles.py",
+        "sha256": "96da5f8346bba627cde87416c12539edcd57654191b135a8861b731a5729fe2d",
+        "bytes": 12229
+      },
+      {
+        "path": "climate/gcm/wave_snapshots.py",
+        "sha256": "f5a199bed749db65e24a91f9ec7a2cc6d516d083172981fe732a571d215260ee",
+        "bytes": 14801
+      },
+      {
+        "path": "atmosphere/snow/turbulence_sources.json",
+        "sha256": "e31e74982a411dc1a95fe9625a4230152cc0c4975c05cdd56d9ea10b954d0cae",
+        "bytes": 4025
+      }
+    ],
+    "header_inspection": {
+      "path": "climate/gcm/runs/A28_dim5/model/MOST.00024.nc",
+      "dimensions": {
+        "time": 120,
+        "lev": 10,
+        "lat": 32,
+        "lon": 64
+      },
+      "time_first3": [
+        142.0,
+        285.0,
+        428.0
+      ],
+      "time_units": "timesteps",
+      "available_relevant_fields": [
+        "ta",
+        "ua",
+        "va",
+        "hus",
+        "cl"
+      ],
+      "absent_explicit_fields": [
+        "wa",
+        "wap",
+        "clw",
+        "cli"
+      ]
+    },
+    "reading": "The source gcm_profiles.py identifies ordinary outputs as approximately3-day means. They are appropriate for forcing/climatology and cannot recover convective particle histories. The inspected instantaneous wave products have3-hour sampling and lowest-level fields; they do not export upper-air vertical velocity and cloud water. Their raw spectral archives were not decoded again.",
+    "access": "NetCDF4 header read with the already installed climate environment from the main checkout, read-only. No main-checkout file was modified; scipy could not read this HDF5-backed member. Existing .npz product metadata read directly."
+  },
+  "prior_snow_controls": {
+    "paths": [
+      "atmosphere/snow/assessment.py",
+      "atmosphere/snow/growth_depth.py"
+    ],
+    "reading": "Read evidence assessment and prescribed depth controls. Their persistent saturated column and total simulation duration do not supply observed particle histories; no old producer/result is changed."
+  },
+  "rights": "Only derived diagnostics, source identities and synthetic test arrays are committed. Full climate field arrays remain external; no outside paper bytes are copied."
+}

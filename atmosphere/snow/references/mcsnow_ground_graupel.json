@@ -1,0 +1,67 @@
+{
+  "status": "Archived ground graupel drag comparison using source default saturated-surface state; full run namelist not available; no empirical validation",
+  "source": "Zenodo10077724/boehm_height_dep_grau.dat",
+  "state_identity": "At z=0 and source default h1=0: T273.15K,p101325Pa,pv610.78Pa; constants/viscosity as pinned source. Original run namelist not archived in retrieved material.",
+  "rows": [
+    {
+      "D_m": 2e-05,
+      "m_kg": 3.351032e-12,
+      "T_K": 273.15,
+      "p_Pa": 101325.0,
+      "pv_Pa": 610.78,
+      "rho_kg_m3": 1.2891074683323824,
+      "eta_Pa_s": 1.7160793094127957e-05,
+      "v_author_m_s": 0.01012688,
+      "Re_author": 0.0152145
+    },
+    {
+      "D_m": 5e-05,
+      "m_kg": 5.235987e-11,
+      "T_K": 273.15,
+      "p_Pa": 101325.0,
+      "pv_Pa": 610.78,
+      "rho_kg_m3": 1.2891074683323824,
+      "eta_Pa_s": 1.7160793094127957e-05,
+      "v_author_m_s": 0.06098833,
+      "Re_author": 0.2290702
+    },
+    {
+      "D_m": 0.0001,
+      "m_kg": 4.18879e-10,
+      "T_K": 273.15,
+      "p_Pa": 101325.0,
+      "pv_Pa": 610.78,
+      "rho_kg_m3": 1.2891074683323824,
+      "eta_Pa_s": 1.7160793094127957e-05,
+      "v_author_m_s": 0.2114566,
+      "Re_author": 1.588449
+    },
+    {
+      "D_m": 0.0002,
+      "m_kg": 3.351032e-09,
+      "T_K": 273.15,
+      "p_Pa": 101325.0,
+      "pv_Pa": 610.78,
+      "rho_kg_m3": 1.2891074683323824,
+      "eta_Pa_s": 1.7160793094127957e-05,
+      "v_author_m_s": 0.5951844,
+      "Re_author": 8.941976
+    },
+    {
+      "D_m": 0.0005,
+      "m_kg": 5.235989e-08,
+      "T_K": 273.15,
+      "p_Pa": 101325.0,
+      "pv_Pa": 610.78,
+      "rho_kg_m3": 1.2891074683323824,
+      "eta_Pa_s": 1.7160793094127957e-05,
+      "v_author_m_s": 1.764577,
+      "Re_author": 66.27697
+    }
+  ],
+  "archive_url": "https://zenodo.org/api/records/10077724/files/McSnow_paper_plot_data.zip/content",
+  "archive_member": "boehm_height_dep_grau.dat",
+  "archive_member_sha256": "e8fcad8b7c95fad07010dfc6d96711bf97edb02a9da5ede9808367ca60fdca0c",
+  "license": "CC-BY-4.0",
+  "credit": "Welss, Siewert and Seifert; Zenodo10077724, dataset accompanying JAMES2024 doi10.1029/2023MS003805; five ground rows selected without changes to archived numerical values."
+}
