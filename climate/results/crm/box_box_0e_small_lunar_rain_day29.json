@@ -1,0 +1,3945 @@
+{
+ "schema": "terluna.climate.crm-box/1",
+ "case": "box_0e_small_lunar_rain_day29",
+ "purpose": "box_0e_small's inputs as written, on the rain-limits build with the lunar rain limits of atmosphere/rain/results/rain_breakup.json, writing the heat and vapour budgets; the second lunar day again from box_0e_small's day-29.5 restart",
+ "build": "moon_omp_rain_limits",
+ "site": {
+  "ring": "ring_a",
+  "lat_deg": 0.0,
+  "lon_deg": 0.0,
+  "radius_m": 100000.0,
+  "land_columns": {
+   "box_0e_small_lunar_rain_day29": 1024,
+   "box_0e_small_rain_control_day29": 1024,
+   "ring_a": 34,
+   "ring_a_prime": 25
+  }
+ },
+ "rings": [
+  "ring_a",
+  "ring_a_prime"
+ ],
+ "evidence": "CM1 r22.0 in three dimensions at lunar gravity: a box 385 km square of 64 x 64 columns 6.0 km wide on 111 levels to 150 km, wrapping round on all sides, at 0 N 0 E, all land (the placeholder surface at wetness 0.90), with the Morrison microphysics given lunar fall speeds, RRTMG radiation for the design air and the Sun of the site, the same across the box; the upper air above 8-16 km held to ring A's reference; the GCM design case's mean vertical wind there imposed as large-scale vertical advection; and the heating and moistening of the rings' own day-night circulation there prescribed by local time and height. It resolves storms in three dimensions. It cannot make the planet-wide circulation, which it takes from the rings, and has no land and water around it. The boxes built on it (size, land, fall speeds) say how they depart from it in their purpose, given with the results.",
+ "reading_rule": "The box takes all its columns; each ring, its land columns within 100 km of the site along the ring. Values are means over those columns of snapshots every 3 model hours, composited by the local hour angle at the site (0 = noon, negative = morning) in 36-degree bins; day is when the Sun is up. Differences are the box minus the ring, snapshot by snapshot at the same local time; p5 and p95 bound 90% of the means of series rebuilt from one-day blocks drawn at random (a moving-block bootstrap, 2,000 draws). air_gcm_layer_c is the mass-weighted mean temperature of the GCM's lowest layer (the bottom 3.3% of the air's mass, about 1.8 km deep) carried to the ground along a dry adiabat, as the GCM's own air near the ground is; raining is the share of columns with rain of at least 1 mm/h. Comfortable means air at 2 m of 18-26 C with a dewpoint of at most 15 C (strict), or 17-27 C and 16 C (loose). The GCM values are its cells whose centres lie within 150 km, as in ring_crossings. Cloud profiles are the share of columns with condensate of at least 0.01 g/kg at each height, by day and by night. Surface energy terms are in W/m2: net sunlight and net infrared at the ground positive downward, written only by the boxes that write the radiation at the ground; the heat carried into the air and the heat of evaporation positive upward; the GCM's are 3-day means on its land cells within 150 km.",
+ "gcm_lowest_sigma": 0.983,
+ "span_days": [
+  29.625,
+  59.0
+ ],
+ "snapshots": 236,
+ "against": {
+  "ring_a": {
+   "hour_angle_deg": [
+    -162.0,
+    -126.0,
+    -90.0,
+    -54.0,
+    -18.0,
+    18.0,
+    54.0,
+    90.0,
+    126.0,
+    162.0
+   ],
+   "air_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      23.64,
+      23.14,
+      22.733,
+      28.232,
+      32.373,
+      33.413,
+      31.523,
+      27.191,
+      25.112,
+      24.387
+     ],
+     "ring_a": [
+      20.628,
+      20.041,
+      19.439,
+      25.951,
+      30.332,
+      30.412,
+      26.952,
+      22.597,
+      21.125,
+      20.832
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 27.169,
+      "day": 30.193,
+      "night": 24.145
+     },
+     "ring_a": {
+      "all": 23.822,
+      "day": 27.073,
+      "night": 20.57
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 3.348,
+      "p5": 3.06,
+      "p95": 3.635
+     },
+     "day": {
+      "mean": 3.12,
+      "p5": 2.63,
+      "p95": 3.621
+     },
+     "night": {
+      "mean": 3.575,
+      "p5": 3.351,
+      "p95": 3.84
+     },
+     "rms_by_local_time": 3.441
+    }
+   },
+   "dewpoint_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      23.623,
+      23.129,
+      22.328,
+      23.04,
+      24.227,
+      25.014,
+      25.282,
+      25.365,
+      24.923,
+      24.379
+     ],
+     "ring_a": [
+      20.584,
+      20.007,
+      18.886,
+      20.843,
+      22.831,
+      23.212,
+      22.978,
+      21.323,
+      20.756,
+      20.666
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 24.133,
+      "day": 24.245,
+      "night": 24.021
+     },
+     "ring_a": {
+      "all": 21.209,
+      "day": 22.039,
+      "night": 20.378
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 2.924,
+      "p5": 2.616,
+      "p95": 3.219
+     },
+     "day": {
+      "mean": 2.206,
+      "p5": 1.887,
+      "p95": 2.563
+     },
+     "night": {
+      "mean": 3.643,
+      "p5": 3.414,
+      "p95": 3.902
+     },
+     "rms_by_local_time": 3.06
+    }
+   },
+   "dewpoint_gcm_layer_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      22.878,
+      22.381,
+      21.265,
+      20.654,
+      19.472,
+      19.823,
+      21.429,
+      22.568,
+      22.319,
+      22.8
+     ],
+     "ring_a": [
+      20.37,
+      19.469,
+      17.671,
+      17.681,
+      17.458,
+      18.116,
+      19.535,
+      19.812,
+      19.7,
+      20.181
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 21.563,
+      "day": 20.603,
+      "night": 22.524
+     },
+     "ring_a": {
+      "all": 19.004,
+      "day": 18.285,
+      "night": 19.722
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 2.56,
+      "p5": 2.323,
+      "p95": 2.775
+     },
+     "day": {
+      "mean": 2.317,
+      "p5": 1.906,
+      "p95": 2.712
+     },
+     "night": {
+      "mean": 2.802,
+      "p5": 2.665,
+      "p95": 2.958
+     },
+     "rms_by_local_time": 2.615
+    }
+   },
+   "humidity": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.999,
+      0.999,
+      0.976,
+      0.737,
+      0.623,
+      0.616,
+      0.698,
+      0.901,
+      0.989,
+      0.999
+     ],
+     "ring_a": [
+      0.997,
+      0.998,
+      0.967,
+      0.737,
+      0.643,
+      0.659,
+      0.796,
+      0.926,
+      0.978,
+      0.99
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.854,
+      "day": 0.715,
+      "night": 0.993
+     },
+     "ring_a": {
+      "all": 0.87,
+      "day": 0.751,
+      "night": 0.988
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.015,
+      "p5": -0.029,
+      "p95": -0.004
+     },
+     "day": {
+      "mean": -0.035,
+      "p5": -0.057,
+      "p95": -0.015
+     },
+     "night": {
+      "mean": 0.004,
+      "p5": 0.002,
+      "p95": 0.007
+     },
+     "rms_by_local_time": 0.036
+    }
+   },
+   "rain_mm_h": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.002,
+      0.002,
+      0.001,
+      0.02,
+      0.181,
+      0.232,
+      0.325,
+      0.132,
+      0.006,
+      0.001
+     ],
+     "ring_a": [
+      0.0,
+      0.001,
+      0.0,
+      0.0,
+      0.004,
+      0.015,
+      0.083,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.09,
+      "day": 0.172,
+      "night": 0.009
+     },
+     "ring_a": {
+      "all": 0.01,
+      "day": 0.021,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.08,
+      "p5": 0.051,
+      "p95": 0.113
+     },
+     "day": {
+      "mean": 0.152,
+      "p5": 0.108,
+      "p95": 0.191
+     },
+     "night": {
+      "mean": 0.008,
+      "p5": 0.001,
+      "p95": 0.018
+     },
+     "rms_by_local_time": 0.124
+    }
+   },
+   "cloud_cover": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.995,
+      1.0,
+      0.754,
+      0.057,
+      0.074,
+      0.072,
+      0.07,
+      0.049,
+      0.019,
+      0.511
+     ],
+     "ring_a": [
+      0.701,
+      0.629,
+      0.37,
+      0.009,
+      0.15,
+      0.079,
+      0.227,
+      0.02,
+      0.026,
+      0.017
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.361,
+      "day": 0.112,
+      "night": 0.61
+     },
+     "ring_a": {
+      "all": 0.223,
+      "day": 0.115,
+      "night": 0.332
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.138,
+      "p5": 0.059,
+      "p95": 0.217
+     },
+     "day": {
+      "mean": -0.002,
+      "p5": -0.062,
+      "p95": 0.067
+     },
+     "night": {
+      "mean": 0.279,
+      "p5": 0.163,
+      "p95": 0.405
+     },
+     "rms_by_local_time": 0.255
+    }
+   },
+   "fog": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.995,
+      1.0,
+      0.525,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.015,
+      0.511
+     ],
+     "ring_a": [
+      0.249,
+      0.366,
+      0.214,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.305,
+      "day": 0.005,
+      "night": 0.606
+     },
+     "ring_a": {
+      "all": 0.083,
+      "day": 0.01,
+      "night": 0.155
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.223,
+      "p5": 0.126,
+      "p95": 0.322
+     },
+     "day": {
+      "mean": -0.005,
+      "p5": -0.014,
+      "p95": 0.0
+     },
+     "night": {
+      "mean": 0.45,
+      "p5": 0.303,
+      "p95": 0.593
+     },
+     "rms_by_local_time": 0.363
+    }
+   },
+   "cloud_in_flight_band": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.001,
+      0.003,
+      0.002,
+      0.0,
+      0.0
+     ],
+     "ring_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.012,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.001,
+      "day": 0.001,
+      "night": 0.0
+     },
+     "ring_a": {
+      "all": 0.001,
+      "day": 0.002,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.001,
+      "p5": -0.003,
+      "p95": 0.001
+     },
+     "day": {
+      "mean": -0.001,
+      "p5": -0.005,
+      "p95": 0.001
+     },
+     "night": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.003
+    }
+   },
+   "wind_10m_m_s": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.001,
+      0.018,
+      0.521,
+      1.275,
+      1.485,
+      1.38,
+      0.587,
+      0.063,
+      0.001
+     ],
+     "ring_a": [
+      0.016,
+      0.044,
+      0.301,
+      1.59,
+      2.695,
+      2.4,
+      2.807,
+      2.018,
+      0.607,
+      0.347
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.533,
+      "day": 1.016,
+      "night": 0.051
+     },
+     "ring_a": {
+      "all": 1.285,
+      "day": 2.143,
+      "night": 0.426
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.751,
+      "p5": -0.963,
+      "p95": -0.537
+     },
+     "day": {
+      "mean": -1.127,
+      "p5": -1.391,
+      "p95": -0.864
+     },
+     "night": {
+      "mean": -0.375,
+      "p5": -0.615,
+      "p95": -0.186
+     },
+     "rms_by_local_time": 0.926
+    }
+   },
+   "wind_40_km_m_s": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      4.046,
+      4.047,
+      4.044,
+      4.037,
+      4.021,
+      3.998,
+      3.942,
+      4.011,
+      4.032,
+      4.04
+     ],
+     "ring_a": [
+      3.497,
+      4.397,
+      5.292,
+      4.613,
+      5.007,
+      4.687,
+      4.187,
+      3.249,
+      3.744,
+      4.179
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 4.022,
+      "day": 4.005,
+      "night": 4.039
+     },
+     "ring_a": {
+      "all": 4.284,
+      "day": 4.497,
+      "night": 4.071
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.262,
+      "p5": -0.499,
+      "p95": -0.008
+     },
+     "day": {
+      "mean": -0.493,
+      "p5": -0.823,
+      "p95": -0.179
+     },
+     "night": {
+      "mean": -0.032,
+      "p5": -0.365,
+      "p95": 0.277
+     },
+     "rms_by_local_time": 0.671
+    }
+   },
+   "comfortable_strict": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "ring_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     },
+     "ring_a": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "day": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "night": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.0
+    }
+   },
+   "comfortable_loose": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "ring_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     },
+     "ring_a": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "day": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "night": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.0
+    }
+   },
+   "air_gcm_layer_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      25.754,
+      25.178,
+      23.94,
+      27.022,
+      30.762,
+      32.038,
+      30.994,
+      28.773,
+      27.426,
+      26.693
+     ],
+     "ring_a": [
+      22.204,
+      21.641,
+      20.985,
+      24.474,
+      28.764,
+      28.456,
+      26.121,
+      23.18,
+      22.652,
+      22.406
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 27.857,
+      "day": 29.401,
+      "night": 26.313
+     },
+     "ring_a": {
+      "all": 24.085,
+      "day": 26.042,
+      "night": 22.127
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 3.772,
+      "p5": 3.406,
+      "p95": 4.15
+     },
+     "day": {
+      "mean": 3.359,
+      "p5": 2.743,
+      "p95": 3.978
+     },
+     "night": {
+      "mean": 4.186,
+      "p5": 3.902,
+      "p95": 4.516
+     },
+     "rms_by_local_time": 3.916
+    }
+   },
+   "raining": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.004,
+      0.038,
+      0.049,
+      0.057,
+      0.018,
+      0.001,
+      0.0
+     ],
+     "ring_a": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.004,
+      0.017,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.017,
+      "day": 0.032,
+      "night": 0.001
+     },
+     "ring_a": {
+      "all": 0.002,
+      "day": 0.004,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.015,
+      "p5": 0.009,
+      "p95": 0.021
+     },
+     "day": {
+      "mean": 0.028,
+      "p5": 0.02,
+      "p95": 0.036
+     },
+     "night": {
+      "mean": 0.001,
+      "p5": 0.0,
+      "p95": 0.003
+     },
+     "rms_by_local_time": 0.023
+    }
+   },
+   "comfortable_hours_per_lunar_day": {
+    "strict": {
+     "box_0e_small_lunar_rain_day29": 0.0,
+     "ring_a": 0.0
+    },
+    "loose": {
+     "box_0e_small_lunar_rain_day29": 0.0,
+     "ring_a": 0.0
+    }
+   },
+   "rain_mm_per_lunar_day": {
+    "box_0e_small_lunar_rain_day29": 64.123,
+    "ring_a": 7.4
+   }
+  },
+  "ring_a_prime": {
+   "hour_angle_deg": [
+    -162.0,
+    -126.0,
+    -90.0,
+    -54.0,
+    -18.0,
+    18.0,
+    54.0,
+    90.0,
+    126.0,
+    162.0
+   ],
+   "air_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      23.64,
+      23.14,
+      22.733,
+      28.232,
+      32.373,
+      33.413,
+      31.523,
+      27.191,
+      25.112,
+      24.387
+     ],
+     "ring_a_prime": [
+      20.534,
+      20.069,
+      19.717,
+      25.227,
+      30.041,
+      28.843,
+      26.01,
+      22.907,
+      21.28,
+      21.05
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 27.169,
+      "day": 30.193,
+      "night": 24.145
+     },
+     "ring_a_prime": {
+      "all": 23.563,
+      "day": 26.395,
+      "night": 20.732
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 3.606,
+      "p5": 3.27,
+      "p95": 3.98
+     },
+     "day": {
+      "mean": 3.798,
+      "p5": 3.124,
+      "p95": 4.469
+     },
+     "night": {
+      "mean": 3.414,
+      "p5": 3.243,
+      "p95": 3.61
+     },
+     "rms_by_local_time": 3.716
+    }
+   },
+   "dewpoint_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      23.623,
+      23.129,
+      22.328,
+      23.04,
+      24.227,
+      25.014,
+      25.282,
+      25.365,
+      24.923,
+      24.379
+     ],
+     "ring_a_prime": [
+      20.513,
+      20.05,
+      19.275,
+      19.713,
+      22.203,
+      23.804,
+      22.662,
+      21.661,
+      21.092,
+      21.032
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 24.133,
+      "day": 24.245,
+      "night": 24.021
+     },
+     "ring_a_prime": {
+      "all": 21.201,
+      "day": 21.76,
+      "night": 20.642
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 2.932,
+      "p5": 2.681,
+      "p95": 3.158
+     },
+     "day": {
+      "mean": 2.484,
+      "p5": 2.118,
+      "p95": 2.845
+     },
+     "night": {
+      "mean": 3.379,
+      "p5": 3.233,
+      "p95": 3.534
+     },
+     "rms_by_local_time": 3.026
+    }
+   },
+   "dewpoint_gcm_layer_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      22.878,
+      22.381,
+      21.265,
+      20.654,
+      19.472,
+      19.823,
+      21.429,
+      22.568,
+      22.319,
+      22.8
+     ],
+     "ring_a_prime": [
+      20.053,
+      19.361,
+      18.935,
+      16.044,
+      16.748,
+      19.555,
+      20.202,
+      20.056,
+      20.191,
+      21.081
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 21.563,
+      "day": 20.603,
+      "night": 22.524
+     },
+     "ring_a_prime": {
+      "all": 19.23,
+      "day": 18.346,
+      "night": 20.114
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 2.333,
+      "p5": 1.993,
+      "p95": 2.672
+     },
+     "day": {
+      "mean": 2.257,
+      "p5": 1.604,
+      "p95": 2.909
+     },
+     "night": {
+      "mean": 2.41,
+      "p5": 2.148,
+      "p95": 2.649
+     },
+     "rms_by_local_time": 2.58
+    }
+   },
+   "humidity": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.999,
+      0.999,
+      0.976,
+      0.737,
+      0.623,
+      0.616,
+      0.698,
+      0.901,
+      0.989,
+      0.999
+     ],
+     "ring_a_prime": [
+      0.999,
+      0.999,
+      0.974,
+      0.718,
+      0.634,
+      0.747,
+      0.823,
+      0.93,
+      0.989,
+      0.999
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.854,
+      "day": 0.715,
+      "night": 0.993
+     },
+     "ring_a_prime": {
+      "all": 0.881,
+      "day": 0.768,
+      "night": 0.995
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.027,
+      "p5": -0.047,
+      "p95": -0.01
+     },
+     "day": {
+      "mean": -0.052,
+      "p5": -0.086,
+      "p95": -0.02
+     },
+     "night": {
+      "mean": -0.002,
+      "p5": -0.005,
+      "p95": 0.001
+     },
+     "rms_by_local_time": 0.058
+    }
+   },
+   "rain_mm_h": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.002,
+      0.002,
+      0.001,
+      0.02,
+      0.181,
+      0.232,
+      0.325,
+      0.132,
+      0.006,
+      0.001
+     ],
+     "ring_a_prime": [
+      0.002,
+      0.0,
+      0.0,
+      0.0,
+      0.094,
+      0.141,
+      0.307,
+      0.429,
+      0.0,
+      0.004
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.09,
+      "day": 0.172,
+      "night": 0.009
+     },
+     "ring_a_prime": {
+      "all": 0.099,
+      "day": 0.166,
+      "night": 0.032
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.008,
+      "p5": -0.078,
+      "p95": 0.052
+     },
+     "day": {
+      "mean": 0.007,
+      "p5": -0.109,
+      "p95": 0.103
+     },
+     "night": {
+      "mean": -0.023,
+      "p5": -0.07,
+      "p95": 0.007
+     },
+     "rms_by_local_time": 0.102
+    }
+   },
+   "cloud_cover": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.995,
+      1.0,
+      0.754,
+      0.057,
+      0.074,
+      0.072,
+      0.07,
+      0.049,
+      0.019,
+      0.511
+     ],
+     "ring_a_prime": [
+      0.413,
+      0.656,
+      0.695,
+      0.0,
+      0.115,
+      0.219,
+      0.345,
+      0.28,
+      0.003,
+      0.5
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.361,
+      "day": 0.112,
+      "night": 0.61
+     },
+     "ring_a_prime": {
+      "all": 0.324,
+      "day": 0.229,
+      "night": 0.42
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.037,
+      "p5": -0.047,
+      "p95": 0.124
+     },
+     "day": {
+      "mean": -0.117,
+      "p5": -0.199,
+      "p95": -0.043
+     },
+     "night": {
+      "mean": 0.191,
+      "p5": 0.077,
+      "p95": 0.308
+     },
+     "rms_by_local_time": 0.248
+    }
+   },
+   "fog": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.995,
+      1.0,
+      0.525,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.015,
+      0.511
+     ],
+     "ring_a_prime": [
+      0.378,
+      0.275,
+      0.415,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.295
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.305,
+      "day": 0.005,
+      "night": 0.606
+     },
+     "ring_a_prime": {
+      "all": 0.137,
+      "day": 0.027,
+      "night": 0.247
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.168,
+      "p5": 0.087,
+      "p95": 0.254
+     },
+     "day": {
+      "mean": -0.022,
+      "p5": -0.062,
+      "p95": 0.0
+     },
+     "night": {
+      "mean": 0.358,
+      "p5": 0.233,
+      "p95": 0.486
+     },
+     "rms_by_local_time": 0.311
+    }
+   },
+   "cloud_in_flight_band": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.001,
+      0.003,
+      0.002,
+      0.0,
+      0.0
+     ],
+     "ring_a_prime": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.002,
+      0.009,
+      0.0,
+      0.002,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.001,
+      "day": 0.001,
+      "night": 0.0
+     },
+     "ring_a_prime": {
+      "all": 0.001,
+      "day": 0.002,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.001,
+      "p5": -0.002,
+      "p95": 0.001
+     },
+     "day": {
+      "mean": -0.001,
+      "p5": -0.004,
+      "p95": 0.001
+     },
+     "night": {
+      "mean": -0.0,
+      "p5": -0.001,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.003
+    }
+   },
+   "wind_10m_m_s": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.001,
+      0.018,
+      0.521,
+      1.275,
+      1.485,
+      1.38,
+      0.587,
+      0.063,
+      0.001
+     ],
+     "ring_a_prime": [
+      0.06,
+      0.056,
+      0.415,
+      1.858,
+      2.159,
+      2.922,
+      2.401,
+      1.339,
+      0.078,
+      0.076
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.533,
+      "day": 1.016,
+      "night": 0.051
+     },
+     "ring_a_prime": {
+      "all": 1.135,
+      "day": 2.121,
+      "night": 0.149
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.601,
+      "p5": -0.808,
+      "p95": -0.411
+     },
+     "day": {
+      "mean": -1.105,
+      "p5": -1.341,
+      "p95": -0.855
+     },
+     "night": {
+      "mean": -0.098,
+      "p5": -0.172,
+      "p95": -0.045
+     },
+     "rms_by_local_time": 0.801
+    }
+   },
+   "wind_40_km_m_s": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      4.046,
+      4.047,
+      4.044,
+      4.037,
+      4.021,
+      3.998,
+      3.942,
+      4.011,
+      4.032,
+      4.04
+     ],
+     "ring_a_prime": [
+      3.665,
+      4.42,
+      4.406,
+      4.473,
+      5.116,
+      3.647,
+      5.095,
+      2.917,
+      3.744,
+      3.681
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 4.022,
+      "day": 4.005,
+      "night": 4.039
+     },
+     "ring_a_prime": {
+      "all": 4.117,
+      "day": 4.462,
+      "night": 3.772
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.095,
+      "p5": -0.344,
+      "p95": 0.164
+     },
+     "day": {
+      "mean": -0.457,
+      "p5": -0.834,
+      "p95": -0.087
+     },
+     "night": {
+      "mean": 0.266,
+      "p5": 0.047,
+      "p95": 0.509
+     },
+     "rms_by_local_time": 0.683
+    }
+   },
+   "comfortable_strict": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "ring_a_prime": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     },
+     "ring_a_prime": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "day": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "night": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.0
+    }
+   },
+   "comfortable_loose": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "ring_a_prime": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     },
+     "ring_a_prime": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "day": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "night": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.0
+    }
+   },
+   "air_gcm_layer_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      25.754,
+      25.178,
+      23.94,
+      27.022,
+      30.762,
+      32.038,
+      30.994,
+      28.773,
+      27.426,
+      26.693
+     ],
+     "ring_a_prime": [
+      22.503,
+      21.938,
+      21.055,
+      23.679,
+      28.174,
+      27.101,
+      24.892,
+      23.516,
+      23.031,
+      22.77
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 27.857,
+      "day": 29.401,
+      "night": 26.313
+     },
+     "ring_a_prime": {
+      "all": 23.865,
+      "day": 25.263,
+      "night": 22.467
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 3.992,
+      "p5": 3.617,
+      "p95": 4.391
+     },
+     "day": {
+      "mean": 4.139,
+      "p5": 3.434,
+      "p95": 4.845
+     },
+     "night": {
+      "mean": 3.846,
+      "p5": 3.578,
+      "p95": 4.161
+     },
+     "rms_by_local_time": 4.138
+    }
+   },
+   "raining": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.004,
+      0.038,
+      0.049,
+      0.057,
+      0.018,
+      0.001,
+      0.0
+     ],
+     "ring_a_prime": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.02,
+      0.045,
+      0.08,
+      0.112,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.017,
+      "day": 0.032,
+      "night": 0.001
+     },
+     "ring_a_prime": {
+      "all": 0.026,
+      "day": 0.042,
+      "night": 0.01
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.009,
+      "p5": -0.028,
+      "p95": 0.006
+     },
+     "day": {
+      "mean": -0.01,
+      "p5": -0.037,
+      "p95": 0.013
+     },
+     "night": {
+      "mean": -0.009,
+      "p5": -0.025,
+      "p95": 0.001
+     },
+     "rms_by_local_time": 0.031
+    }
+   },
+   "comfortable_hours_per_lunar_day": {
+    "strict": {
+     "box_0e_small_lunar_rain_day29": 0.0,
+     "ring_a_prime": 0.0
+    },
+    "loose": {
+     "box_0e_small_lunar_rain_day29": 0.0,
+     "ring_a_prime": 0.0
+    }
+   },
+   "rain_mm_per_lunar_day": {
+    "box_0e_small_lunar_rain_day29": 64.123,
+    "ring_a_prime": 69.988
+   }
+  },
+  "box_0e_small_rain_control_day29": {
+   "hour_angle_deg": [
+    -162.0,
+    -126.0,
+    -90.0,
+    -54.0,
+    -18.0,
+    18.0,
+    54.0,
+    90.0,
+    126.0,
+    162.0
+   ],
+   "air_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      23.64,
+      23.14,
+      22.733,
+      28.232,
+      32.373,
+      33.413,
+      31.523,
+      27.191,
+      25.112,
+      24.387
+     ],
+     "box_0e_small_rain_control_day29": [
+      22.312,
+      21.881,
+      22.091,
+      28.222,
+      31.286,
+      31.675,
+      28.978,
+      24.669,
+      23.223,
+      22.718
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 27.169,
+      "day": 30.193,
+      "night": 24.145
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 25.696,
+      "day": 28.833,
+      "night": 22.56
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 1.473,
+      "p5": 1.236,
+      "p95": 1.712
+     },
+     "day": {
+      "mean": 1.36,
+      "p5": 0.927,
+      "p95": 1.777
+     },
+     "night": {
+      "mean": 1.586,
+      "p5": 1.457,
+      "p95": 1.729
+     },
+     "rms_by_local_time": 1.648
+    }
+   },
+   "dewpoint_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      23.623,
+      23.129,
+      22.328,
+      23.04,
+      24.227,
+      25.014,
+      25.282,
+      25.365,
+      24.923,
+      24.379
+     ],
+     "box_0e_small_rain_control_day29": [
+      22.276,
+      21.858,
+      21.679,
+      23.009,
+      24.195,
+      24.97,
+      24.779,
+      23.507,
+      23.151,
+      22.677
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 24.133,
+      "day": 24.245,
+      "night": 24.021
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 23.209,
+      "day": 23.945,
+      "night": 22.474
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.923,
+      "p5": 0.684,
+      "p95": 1.137
+     },
+     "day": {
+      "mean": 0.3,
+      "p5": 0.097,
+      "p95": 0.53
+     },
+     "night": {
+      "mean": 1.547,
+      "p5": 1.446,
+      "p95": 1.658
+     },
+     "rms_by_local_time": 1.166
+    }
+   },
+   "dewpoint_gcm_layer_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      22.878,
+      22.381,
+      21.265,
+      20.654,
+      19.472,
+      19.823,
+      21.429,
+      22.568,
+      22.319,
+      22.8
+     ],
+     "box_0e_small_rain_control_day29": [
+      21.81,
+      21.252,
+      20.678,
+      20.61,
+      19.713,
+      20.614,
+      21.805,
+      21.984,
+      21.604,
+      21.845
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 21.563,
+      "day": 20.603,
+      "night": 22.524
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 21.194,
+      "day": 20.817,
+      "night": 21.572
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.369,
+      "p5": 0.152,
+      "p95": 0.569
+     },
+     "day": {
+      "mean": -0.214,
+      "p5": -0.422,
+      "p95": -0.005
+     },
+     "night": {
+      "mean": 0.952,
+      "p5": 0.864,
+      "p95": 1.028
+     },
+     "rms_by_local_time": 0.731
+    }
+   },
+   "humidity": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.999,
+      0.999,
+      0.976,
+      0.737,
+      0.623,
+      0.616,
+      0.698,
+      0.901,
+      0.989,
+      0.999
+     ],
+     "box_0e_small_rain_control_day29": [
+      0.998,
+      0.999,
+      0.976,
+      0.736,
+      0.662,
+      0.679,
+      0.784,
+      0.934,
+      0.996,
+      0.998
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.854,
+      "day": 0.715,
+      "night": 0.993
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 0.876,
+      "day": 0.758,
+      "night": 0.995
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.022,
+      "p5": -0.033,
+      "p95": -0.013
+     },
+     "day": {
+      "mean": -0.042,
+      "p5": -0.057,
+      "p95": -0.028
+     },
+     "night": {
+      "mean": -0.002,
+      "p5": -0.005,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.037
+    }
+   },
+   "rain_mm_h": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.002,
+      0.002,
+      0.001,
+      0.02,
+      0.181,
+      0.232,
+      0.325,
+      0.132,
+      0.006,
+      0.001
+     ],
+     "box_0e_small_rain_control_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.004,
+      0.058,
+      0.09,
+      0.213,
+      0.114,
+      0.001,
+      0.002
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.09,
+      "day": 0.172,
+      "night": 0.009
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 0.049,
+      "day": 0.095,
+      "night": 0.002
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.042,
+      "p5": 0.025,
+      "p95": 0.061
+     },
+     "day": {
+      "mean": 0.078,
+      "p5": 0.049,
+      "p95": 0.105
+     },
+     "night": {
+      "mean": 0.006,
+      "p5": 0.0,
+      "p95": 0.015
+     },
+     "rms_by_local_time": 0.07
+    }
+   },
+   "cloud_cover": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.995,
+      1.0,
+      0.754,
+      0.057,
+      0.074,
+      0.072,
+      0.07,
+      0.049,
+      0.019,
+      0.511
+     ],
+     "box_0e_small_rain_control_day29": [
+      0.997,
+      0.993,
+      0.748,
+      0.057,
+      0.074,
+      0.089,
+      0.138,
+      0.146,
+      0.5,
+      0.958
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.361,
+      "day": 0.112,
+      "night": 0.61
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 0.471,
+      "day": 0.144,
+      "night": 0.798
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.11,
+      "p5": -0.176,
+      "p95": -0.052
+     },
+     "day": {
+      "mean": -0.032,
+      "p5": -0.054,
+      "p95": -0.012
+     },
+     "night": {
+      "mean": -0.187,
+      "p5": -0.304,
+      "p95": -0.082
+     },
+     "rms_by_local_time": 0.211
+    }
+   },
+   "fog": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.995,
+      1.0,
+      0.525,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.015,
+      0.511
+     ],
+     "box_0e_small_rain_control_day29": [
+      0.691,
+      0.684,
+      0.356,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.001,
+      0.453,
+      0.957
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.305,
+      "day": 0.005,
+      "night": 0.606
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 0.315,
+      "day": 0.005,
+      "night": 0.624
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.009,
+      "p5": -0.095,
+      "p95": 0.07
+     },
+     "day": {
+      "mean": -0.0,
+      "p5": -0.0,
+      "p95": 0.0
+     },
+     "night": {
+      "mean": -0.018,
+      "p5": -0.193,
+      "p95": 0.146
+     },
+     "rms_by_local_time": 0.248
+    }
+   },
+   "cloud_in_flight_band": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.001,
+      0.003,
+      0.002,
+      0.0,
+      0.0
+     ],
+     "box_0e_small_rain_control_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.001,
+      0.003,
+      0.009,
+      0.002,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.001,
+      "day": 0.001,
+      "night": 0.0
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 0.001,
+      "day": 0.003,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.001,
+      "p5": -0.002,
+      "p95": -0.0
+     },
+     "day": {
+      "mean": -0.002,
+      "p5": -0.003,
+      "p95": -0.001
+     },
+     "night": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.002
+    }
+   },
+   "wind_10m_m_s": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.001,
+      0.018,
+      0.521,
+      1.275,
+      1.485,
+      1.38,
+      0.587,
+      0.063,
+      0.001
+     ],
+     "box_0e_small_rain_control_day29": [
+      0.002,
+      0.003,
+      0.019,
+      0.546,
+      1.681,
+      1.756,
+      1.655,
+      0.557,
+      0.002,
+      0.002
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.533,
+      "day": 1.016,
+      "night": 0.051
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 0.623,
+      "day": 1.23,
+      "night": 0.016
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.09,
+      "p5": -0.147,
+      "p95": -0.036
+     },
+     "day": {
+      "mean": -0.214,
+      "p5": -0.283,
+      "p95": -0.14
+     },
+     "night": {
+      "mean": 0.035,
+      "p5": 0.003,
+      "p95": 0.073
+     },
+     "rms_by_local_time": 0.179
+    }
+   },
+   "wind_40_km_m_s": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      4.046,
+      4.047,
+      4.044,
+      4.037,
+      4.021,
+      3.998,
+      3.942,
+      4.011,
+      4.032,
+      4.04
+     ],
+     "box_0e_small_rain_control_day29": [
+      4.046,
+      4.047,
+      4.044,
+      4.037,
+      4.0,
+      4.002,
+      4.075,
+      4.052,
+      4.044,
+      4.045
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 4.022,
+      "day": 4.005,
+      "night": 4.039
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 4.039,
+      "day": 4.033,
+      "night": 4.046
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": -0.018,
+      "p5": -0.032,
+      "p95": -0.006
+     },
+     "day": {
+      "mean": -0.028,
+      "p5": -0.054,
+      "p95": -0.005
+     },
+     "night": {
+      "mean": -0.007,
+      "p5": -0.012,
+      "p95": -0.003
+     },
+     "rms_by_local_time": 0.045
+    }
+   },
+   "comfortable_strict": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "box_0e_small_rain_control_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "day": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "night": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.0
+    }
+   },
+   "comfortable_loose": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "box_0e_small_rain_control_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 0.0,
+      "day": 0.0,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "day": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "night": {
+      "mean": 0.0,
+      "p5": 0.0,
+      "p95": 0.0
+     },
+     "rms_by_local_time": 0.0
+    }
+   },
+   "air_gcm_layer_c": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      25.754,
+      25.178,
+      23.94,
+      27.022,
+      30.762,
+      32.038,
+      30.994,
+      28.773,
+      27.426,
+      26.693
+     ],
+     "box_0e_small_rain_control_day29": [
+      23.446,
+      22.947,
+      22.87,
+      27.022,
+      29.529,
+      29.926,
+      28.047,
+      25.434,
+      24.632,
+      24.228
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 27.857,
+      "day": 29.401,
+      "night": 26.313
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 25.803,
+      "day": 27.791,
+      "night": 23.814
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 2.055,
+      "p5": 1.754,
+      "p95": 2.362
+     },
+     "day": {
+      "mean": 1.61,
+      "p5": 1.092,
+      "p95": 2.105
+     },
+     "night": {
+      "mean": 2.499,
+      "p5": 2.377,
+      "p95": 2.646
+     },
+     "rms_by_local_time": 2.262
+    }
+   },
+   "raining": {
+    "by_local_time": {
+     "box_0e_small_lunar_rain_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.004,
+      0.038,
+      0.049,
+      0.057,
+      0.018,
+      0.001,
+      0.0
+     ],
+     "box_0e_small_rain_control_day29": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.013,
+      0.023,
+      0.051,
+      0.026,
+      0.0,
+      0.0
+     ]
+    },
+    "mean": {
+     "box_0e_small_lunar_rain_day29": {
+      "all": 0.017,
+      "day": 0.032,
+      "night": 0.001
+     },
+     "box_0e_small_rain_control_day29": {
+      "all": 0.011,
+      "day": 0.022,
+      "night": 0.0
+     }
+    },
+    "difference": {
+     "all": {
+      "mean": 0.005,
+      "p5": 0.002,
+      "p95": 0.009
+     },
+     "day": {
+      "mean": 0.01,
+      "p5": 0.003,
+      "p95": 0.017
+     },
+     "night": {
+      "mean": 0.001,
+      "p5": -0.0,
+      "p95": 0.002
+     },
+     "rms_by_local_time": 0.012
+    }
+   },
+   "comfortable_hours_per_lunar_day": {
+    "strict": {
+     "box_0e_small_lunar_rain_day29": 0.0,
+     "box_0e_small_rain_control_day29": 0.0
+    },
+    "loose": {
+     "box_0e_small_lunar_rain_day29": 0.0,
+     "box_0e_small_rain_control_day29": 0.0
+    }
+   },
+   "rain_mm_per_lunar_day": {
+    "box_0e_small_lunar_rain_day29": 64.123,
+    "box_0e_small_rain_control_day29": 34.39
+   }
+  }
+ },
+ "gcm": {
+  "run": "A28_dim5_moon",
+  "years": [
+   20,
+   29
+  ],
+  "radius_km": 150.0,
+  "land": {
+   "cells": [
+    [
+     2.769,
+     0.0
+    ],
+    [
+     -2.769,
+     0.0
+    ]
+   ],
+   "air_c": {
+    "by_local_time": [
+     21.066,
+     20.495,
+     20.058,
+     20.95,
+     23.131,
+     24.303,
+     24.382,
+     22.513,
+     21.87,
+     21.584
+    ],
+    "mean": {
+     "all": 22.031,
+     "day": 22.814,
+     "night": 21.196
+    }
+   },
+   "dewpoint_c": {
+    "by_local_time": [
+     16.59,
+     16.129,
+     15.154,
+     15.979,
+     19.057,
+     20.227,
+     20.979,
+     19.992,
+     17.358,
+     17.165
+    ],
+    "mean": {
+     "all": 17.869,
+     "day": 18.769,
+     "night": 16.91
+    }
+   },
+   "rain_mm_h": {
+    "by_local_time": [
+     0.031,
+     0.026,
+     0.026,
+     0.136,
+     0.33,
+     0.681,
+     0.939,
+     0.325,
+     0.017,
+     0.025
+    ],
+    "mean": {
+     "all": 0.254,
+     "day": 0.466,
+     "night": 0.029
+    }
+   },
+   "cloud_cover": {
+    "by_local_time": [
+     0.173,
+     0.144,
+     0.163,
+     0.239,
+     0.399,
+     0.478,
+     0.567,
+     0.394,
+     0.235,
+     0.212
+    ],
+    "mean": {
+     "all": 0.3,
+     "day": 0.393,
+     "night": 0.201
+    }
+   },
+   "comfortable_hours_per_lunar_day": {
+    "strict": 104.538,
+    "loose": 163.599
+   },
+   "rain_mm_per_lunar_day": 180.11
+  },
+  "water": null
+ },
+ "cloud_profiles": {
+  "box_0e_small_lunar_rain_day29": {
+   "height_km": [
+    0.05,
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.65,
+    0.75,
+    0.85,
+    0.95,
+    1.05,
+    1.17,
+    1.29,
+    1.42,
+    1.56,
+    1.71,
+    1.88,
+    2.06,
+    2.25,
+    2.46,
+    2.68,
+    2.92,
+    3.19,
+    3.47,
+    3.77,
+    4.1,
+    4.46,
+    4.84,
+    5.26,
+    5.71,
+    6.19,
+    6.72,
+    7.28,
+    7.89,
+    8.55,
+    9.27,
+    10.03,
+    10.87,
+    11.76,
+    12.73,
+    13.78,
+    14.91,
+    16.13,
+    17.45,
+    18.87,
+    20.41,
+    22.07,
+    23.86,
+    25.79,
+    27.79,
+    29.79,
+    31.79,
+    33.79,
+    35.79,
+    37.79,
+    39.79,
+    41.79,
+    43.79,
+    45.79,
+    47.79,
+    49.79,
+    51.79,
+    53.79,
+    55.79,
+    57.79,
+    59.79,
+    61.79,
+    63.79,
+    65.79,
+    67.79,
+    69.79,
+    71.79,
+    73.79,
+    75.79,
+    77.79,
+    79.79,
+    81.79,
+    83.79,
+    85.79,
+    87.79,
+    89.79
+   ],
+   "day": [
+    0.003,
+    0.003,
+    0.005,
+    0.013,
+    0.026,
+    0.039,
+    0.025,
+    0.005,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.002,
+    0.003,
+    0.004,
+    0.005,
+    0.007,
+    0.008,
+    0.01,
+    0.013,
+    0.02,
+    0.024,
+    0.02,
+    0.016,
+    0.013,
+    0.01,
+    0.009,
+    0.007,
+    0.006,
+    0.005,
+    0.004,
+    0.003,
+    0.002,
+    0.002,
+    0.002,
+    0.002,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "night": [
+    0.537,
+    0.412,
+    0.244,
+    0.102,
+    0.03,
+    0.004,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.002,
+    0.002,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ring_a": {
+   "height_km": [
+    0.05,
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.65,
+    0.75,
+    0.85,
+    0.95,
+    1.05,
+    1.17,
+    1.29,
+    1.42,
+    1.56,
+    1.71,
+    1.88,
+    2.06,
+    2.25,
+    2.46,
+    2.68,
+    2.92,
+    3.19,
+    3.47,
+    3.77,
+    4.1,
+    4.46,
+    4.84,
+    5.26,
+    5.71,
+    6.19,
+    6.72,
+    7.28,
+    7.89,
+    8.55,
+    9.27,
+    10.03,
+    10.87,
+    11.76,
+    12.73,
+    13.78,
+    14.91,
+    16.13,
+    17.45,
+    18.87,
+    20.41,
+    22.07,
+    23.86,
+    25.79,
+    27.79,
+    29.79,
+    31.79,
+    33.79,
+    35.79,
+    37.79,
+    39.79,
+    41.79,
+    43.79,
+    45.79,
+    47.79,
+    49.79,
+    51.79,
+    53.79,
+    55.79,
+    57.79,
+    59.79,
+    61.79,
+    63.79,
+    65.79,
+    67.79,
+    69.79,
+    71.79,
+    73.79,
+    75.79,
+    77.79,
+    79.79,
+    81.79,
+    83.79,
+    85.79,
+    87.79,
+    89.79
+   ],
+   "day": [
+    0.006,
+    0.008,
+    0.011,
+    0.007,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.0,
+    0.001,
+    0.001,
+    0.002,
+    0.001,
+    0.002,
+    0.002,
+    0.003,
+    0.003,
+    0.004,
+    0.007,
+    0.008,
+    0.013,
+    0.021,
+    0.027,
+    0.024,
+    0.028,
+    0.023,
+    0.02,
+    0.016,
+    0.013,
+    0.011,
+    0.004,
+    0.003,
+    0.004,
+    0.004,
+    0.003,
+    0.0,
+    0.0,
+    0.001,
+    0.002,
+    0.003,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.002,
+    0.0,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "night": [
+    0.142,
+    0.087,
+    0.079,
+    0.077,
+    0.083,
+    0.083,
+    0.066,
+    0.056,
+    0.066,
+    0.05,
+    0.02,
+    0.006,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.001,
+    0.0,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.002,
+    0.003,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ring_a_prime": {
+   "height_km": [
+    0.05,
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.65,
+    0.75,
+    0.85,
+    0.95,
+    1.05,
+    1.17,
+    1.29,
+    1.42,
+    1.56,
+    1.71,
+    1.88,
+    2.06,
+    2.25,
+    2.46,
+    2.68,
+    2.92,
+    3.19,
+    3.47,
+    3.77,
+    4.1,
+    4.46,
+    4.84,
+    5.26,
+    5.71,
+    6.19,
+    6.72,
+    7.28,
+    7.89,
+    8.55,
+    9.27,
+    10.03,
+    10.87,
+    11.76,
+    12.73,
+    13.78,
+    14.91,
+    16.13,
+    17.45,
+    18.87,
+    20.41,
+    22.07,
+    23.86,
+    25.79,
+    27.79,
+    29.79,
+    31.79,
+    33.79,
+    35.79,
+    37.79,
+    39.79,
+    41.79,
+    43.79,
+    45.79,
+    47.79,
+    49.79,
+    51.79,
+    53.79,
+    55.79,
+    57.79,
+    59.79,
+    61.79,
+    63.79,
+    65.79,
+    67.79,
+    69.79,
+    71.79,
+    73.79,
+    75.79,
+    77.79,
+    79.79,
+    81.79,
+    83.79,
+    85.79,
+    87.79,
+    89.79
+   ],
+   "day": [
+    0.002,
+    0.028,
+    0.034,
+    0.035,
+    0.024,
+    0.019,
+    0.006,
+    0.0,
+    0.002,
+    0.003,
+    0.004,
+    0.004,
+    0.01,
+    0.009,
+    0.005,
+    0.004,
+    0.003,
+    0.004,
+    0.005,
+    0.005,
+    0.006,
+    0.008,
+    0.009,
+    0.011,
+    0.013,
+    0.014,
+    0.016,
+    0.016,
+    0.017,
+    0.019,
+    0.018,
+    0.019,
+    0.026,
+    0.038,
+    0.056,
+    0.059,
+    0.067,
+    0.068,
+    0.061,
+    0.045,
+    0.038,
+    0.029,
+    0.026,
+    0.022,
+    0.02,
+    0.018,
+    0.02,
+    0.019,
+    0.017,
+    0.011,
+    0.004,
+    0.004,
+    0.001,
+    0.002,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "night": [
+    0.162,
+    0.145,
+    0.179,
+    0.156,
+    0.096,
+    0.049,
+    0.021,
+    0.007,
+    0.0,
+    0.0,
+    0.001,
+    0.002,
+    0.002,
+    0.002,
+    0.002,
+    0.005,
+    0.007,
+    0.009,
+    0.009,
+    0.007,
+    0.007,
+    0.006,
+    0.006,
+    0.007,
+    0.005,
+    0.007,
+    0.004,
+    0.009,
+    0.006,
+    0.004,
+    0.004,
+    0.004,
+    0.003,
+    0.004,
+    0.004,
+    0.005,
+    0.004,
+    0.004,
+    0.005,
+    0.007,
+    0.009,
+    0.01,
+    0.009,
+    0.01,
+    0.009,
+    0.009,
+    0.006,
+    0.005,
+    0.004,
+    0.003,
+    0.002,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "box_0e_small_rain_control_day29": {
+   "height_km": [
+    0.05,
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.65,
+    0.75,
+    0.85,
+    0.95,
+    1.05,
+    1.17,
+    1.29,
+    1.42,
+    1.56,
+    1.71,
+    1.88,
+    2.06,
+    2.25,
+    2.46,
+    2.68,
+    2.92,
+    3.19,
+    3.47,
+    3.77,
+    4.1,
+    4.46,
+    4.84,
+    5.26,
+    5.71,
+    6.19,
+    6.72,
+    7.28,
+    7.89,
+    8.55,
+    9.27,
+    10.03,
+    10.87,
+    11.76,
+    12.73,
+    13.78,
+    14.91,
+    16.13,
+    17.45,
+    18.87,
+    20.41,
+    22.07,
+    23.86,
+    25.79,
+    27.79,
+    29.79,
+    31.79,
+    33.79,
+    35.79,
+    37.79,
+    39.79,
+    41.79,
+    43.79,
+    45.79,
+    47.79,
+    49.79,
+    51.79,
+    53.79,
+    55.79,
+    57.79,
+    59.79,
+    61.79,
+    63.79,
+    65.79,
+    67.79,
+    69.79,
+    71.79,
+    73.79,
+    75.79,
+    77.79,
+    79.79,
+    81.79,
+    83.79,
+    85.79,
+    87.79,
+    89.79
+   ],
+   "day": [
+    0.003,
+    0.003,
+    0.005,
+    0.013,
+    0.026,
+    0.039,
+    0.025,
+    0.004,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.001,
+    0.001,
+    0.002,
+    0.002,
+    0.003,
+    0.004,
+    0.004,
+    0.005,
+    0.007,
+    0.009,
+    0.012,
+    0.015,
+    0.019,
+    0.022,
+    0.026,
+    0.03,
+    0.034,
+    0.034,
+    0.029,
+    0.023,
+    0.018,
+    0.015,
+    0.013,
+    0.011,
+    0.01,
+    0.009,
+    0.007,
+    0.006,
+    0.006,
+    0.006,
+    0.005,
+    0.005,
+    0.004,
+    0.004,
+    0.004,
+    0.003,
+    0.003,
+    0.002,
+    0.002,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "night": [
+    0.307,
+    0.425,
+    0.396,
+    0.331,
+    0.291,
+    0.261,
+    0.222,
+    0.16,
+    0.102,
+    0.064,
+    0.04,
+    0.024,
+    0.012,
+    0.003,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.002,
+    0.002,
+    0.002,
+    0.002,
+    0.002,
+    0.002,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "surface_energy": {
+  "box_0e_small_lunar_rain_day29": {
+   "sensible": {
+    "by_local_time": [
+     -0.192,
+     -0.328,
+     4.256,
+     45.786,
+     67.845,
+     57.363,
+     23.583,
+     -2.657,
+     -1.034,
+     -0.481
+    ],
+    "mean": 19.312
+   },
+   "latent": {
+    "by_local_time": [
+     0.06,
+     -0.147,
+     9.119,
+     156.249,
+     347.848,
+     369.095,
+     206.282,
+     32.348,
+     1.859,
+     -0.333
+    ],
+    "mean": 111.907
+   },
+   "net_sunlight": {
+    "by_local_time": [
+     0.0,
+     0.0,
+     24.291,
+     249.341,
+     450.442,
+     448.009,
+     237.573,
+     21.438,
+     0.0,
+     0.0
+    ],
+    "mean": 142.58
+   },
+   "net_infrared": {
+    "by_local_time": [
+     -0.297,
+     -0.262,
+     -4.232,
+     -20.765,
+     -24.783,
+     -22.311,
+     -13.963,
+     -2.253,
+     -1.421,
+     -1.057
+    ],
+    "mean": -9.1
+   }
+  },
+  "ring_a": {
+   "sensible": {
+    "by_local_time": [
+     -0.867,
+     -1.04,
+     2.959,
+     51.467,
+     63.125,
+     84.296,
+     44.272,
+     1.304,
+     -1.934,
+     -1.475
+    ],
+    "mean": 24.058
+   },
+   "latent": {
+    "by_local_time": [
+     -0.115,
+     -0.343,
+     8.623,
+     162.435,
+     345.701,
+     340.636,
+     167.673,
+     26.988,
+     3.093,
+     0.84
+    ],
+    "mean": 105.199
+   }
+  },
+  "ring_a_prime": {
+   "sensible": {
+    "by_local_time": [
+     -1.156,
+     -1.073,
+     4.036,
+     54.229,
+     82.063,
+     91.187,
+     46.274,
+     1.629,
+     -1.103,
+     -1.056
+    ],
+    "mean": 27.362
+   },
+   "latent": {
+    "by_local_time": [
+     -0.567,
+     -0.499,
+     9.135,
+     166.673,
+     320.966,
+     271.741,
+     124.402,
+     24.754,
+     1.309,
+     -0.53
+    ],
+    "mean": 91.432
+   }
+  },
+  "box_0e_small_rain_control_day29": {
+   "sensible": {
+    "by_local_time": [
+     -0.298,
+     -0.35,
+     4.296,
+     45.416,
+     78.869,
+     81.334,
+     47.909,
+     2.893,
+     -0.044,
+     -0.021
+    ],
+    "mean": 25.906
+   },
+   "latent": {
+    "by_local_time": [
+     0.213,
+     0.003,
+     9.252,
+     157.286,
+     337.788,
+     338.713,
+     171.713,
+     23.365,
+     0.966,
+     0.538
+    ],
+    "mean": 103.64
+   },
+   "net_sunlight": {
+    "by_local_time": [
+     0.0,
+     0.0,
+     24.302,
+     248.887,
+     449.28,
+     441.055,
+     225.571,
+     18.984,
+     0.0,
+     0.0
+    ],
+    "mean": 140.271
+   },
+   "net_infrared": {
+    "by_local_time": [
+     -0.774,
+     -1.132,
+     -4.777,
+     -20.687,
+     -24.778,
+     -23.704,
+     -16.158,
+     -4.977,
+     -2.441,
+     -0.789
+    ],
+    "mean": -9.988
+   }
+  },
+  "gcm": {
+   "cells": 2,
+   "net_sunlight": {
+    "by_local_time": [
+     0.0,
+     0.0,
+     43.222,
+     255.97,
+     408.905,
+     389.794,
+     209.024,
+     33.299,
+     0.0,
+     0.0
+    ],
+    "mean": 132.831
+   },
+   "net_infrared": {
+    "by_local_time": [
+     -7.477,
+     -8.037,
+     -11.492,
+     -20.982,
+     -21.398,
+     -16.128,
+     -11.008,
+     -7.89,
+     -6.784,
+     -6.463
+    ],
+    "mean": -11.698
+   },
+   "sensible": {
+    "by_local_time": [
+     -1.68,
+     -1.041,
+     -1.838,
+     14.175,
+     37.023,
+     23.005,
+     0.019,
+     -6.246,
+     -3.872,
+     -3.219
+    ],
+    "mean": 5.482
+   },
+   "latent": {
+    "by_local_time": [
+     1.772,
+     1.219,
+     31.48,
+     203.562,
+     333.102,
+     340.244,
+     197.156,
+     46.276,
+     5.707,
+     3.945
+    ],
+    "mean": 115.642
+   }
+  }
+ },
+ "microphysics": {
+  "box_0e_small_lunar_rain_day29": {
+   "span_days": [
+    29.5,
+    59.0
+   ],
+   "condensed_mm": 173.629,
+   "evaporated_from_cloud_mm": 42.143,
+   "evaporated_on_the_way_down_mm": 58.345,
+   "reached_the_ground_mm": 63.154,
+   "share_of_falling_water_evaporated": 0.48
+  },
+  "box_0e_small_rain_control_day29": {
+   "span_days": [
+    29.5,
+    59.0
+   ],
+   "condensed_mm": 307.151,
+   "evaporated_from_cloud_mm": 52.594,
+   "evaporated_on_the_way_down_mm": 199.999,
+   "reached_the_ground_mm": 33.25,
+   "share_of_falling_water_evaporated": 0.857
+  }
+ },
+ "reference": "box_0e_small_rain_control_day29",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/box_analysis.py": "922aa907ae9006f1",
+   "crm/ring_crossings.py": "6478b488e7a29f38"
+  }
+ }
+}

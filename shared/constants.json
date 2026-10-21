@@ -80,6 +80,15 @@
       "gravity_reference_m_s2": 9.81,
       "source": "CM1 r22.0 src/morrison.F: AR = 841.99667 and BR = 0.8 (lines 402 and 406); RHOSU = 85000/(R*TMELT) with R = 287.04 and TMELT = 273.15 (lines 417, 435 and 437); the density factor (RHOSU/RHO)**0.54 (line 1836); the 9.1 m/s cap on the rain's mean fall speeds in its sedimentation (lines 4610-4611, with the density factor at line 4603); source SHA256 2e199a4f2cb66f0590b455fe54b762c5ca4bfdfcd49bd7aa5317b757655034f7. CM1's own gravity, 9.81 m/s2, is src/constants.F line 113. The Terluna builds scale AR and the cap by (G/9.81)**((BR+1)/3) (climate/crm/cm1_run.py, MORRISON_BLOCK).",
       "note": "Morrison's raindrops fall at V = AR (RHOSU/RHO)^0.54 D^BR, with D in metres. atmosphere/rain checks this law at lunar gravity against its single-drop solver."
+    },
+    "cm1_r22_morrison_rain_limits": {
+      "breakup_cutoff_m": 300.0e-6,
+      "breakup_rate_per_m": 2300.0,
+      "mean_diameter_cap_m": 2800.0e-6,
+      "mean_diameter_floor_m": 20.0e-6,
+      "self_collection_m3_kg_s": 5.78,
+      "source": "CM1 r22.0 src/morrison.F: rain's exponential spectrum has its slope LAMR held between LAMMINR = 1/2800E-6 and LAMMAXR = 1/20E-6 (lines 492 and 489), so its mean diameter 1/LAMR lies between 20 um and 2.8 mm; the breakup cutoff D_b defaults to 300E-6 when the namelist's brkup_db is essentially 0 (lines 494-498; src/cm1.F line 404 sets brkup_db = 0.0, and the cpm_RadConvEquil namelist Terluna's cases start from sets it to 300.0e-6); rain's self-collection is NRAGG = -5.78*DUM*QR*NR*RHO with DUM = 2 - EXP(2300*(1/LAMR - D_b)) above D_b and 1 below (lines 2269-2275 and 3598-3604; the morrison.F header credits the breakup to Verlinde and Cotton 1993); source SHA256 2e199a4f2cb66f0590b455fe54b762c5ca4bfdfcd49bd7aa5317b757655034f7.",
+      "note": "Earth's limits on rain's size in Morrison's scheme. The breakup factor falls through zero at a mean diameter of D_b + ln 2 / 2300 m = 0.60 mm, where self-collection and breakup balance. atmosphere/rain/breakup.py carries them to lunar gravity, and climate/crm/cm1_run.py's rain-limits patch scales them from the namelist."
     }
   },
   "legacy": {

@@ -1,0 +1,274 @@
+{
+ "schema": "terluna.atmosphere.snow/1",
+ "columns": {
+  "moon": {
+   "gravity_m_s2": 1.6242188765608128,
+   "freezing_height_m": 29245.11370855616,
+   "freezing_pressure_pa": 65925.26459686145,
+   "lapse_k_per_km": 0.921346439230548,
+   "air_density_at_freezing_kg_m3": 0.8340075278933692
+  },
+  "earth": {
+   "gravity_m_s2": 9.80665,
+   "freezing_height_m": 1500.0,
+   "freezing_pressure_pa": 85000.0,
+   "lapse_k_per_km": 6.5,
+   "air_density_at_freezing_kg_m3": 1.0811496755397625
+  }
+ },
+ "fall_speeds_m_s": {
+  "moon": {
+   "0.2 mm": 0.12353724547264418,
+   "0.5 mm": 0.21911825257266748,
+   "1 mm": 0.3079492885310467,
+   "2 mm": 0.39917964296854497,
+   "5 mm": 0.5053211271168815,
+   "10 mm": 0.5667429249743762,
+   "20 mm": 0.6103961501635542,
+   "50 mm": 0.6439007959988495
+  },
+  "earth": {
+   "0.2 mm": 0.5438741565933793,
+   "0.5 mm": 0.8173247056434808,
+   "1 mm": 1.0169119109616147,
+   "2 mm": 1.1867974173412335,
+   "5 mm": 1.3505791307612418,
+   "10 mm": 1.429043515604318,
+   "20 mm": 1.4743622200656885,
+   "50 mm": 1.4950997889835471
+  }
+ },
+ "vapour_growth": {
+  "moon": [
+   {
+    "cloud_top_c": -10.0,
+    "cloud_depth_m": 10853.680628918893,
+    "cloud_air_kg_m2": 8274.952957989775,
+    "size_mm": 8.52757058938031,
+    "mass_mg": 2.1664059623914373,
+    "speed_m_s": 0.5542204580598693,
+    "hours": 6.440261875011309
+   },
+   {
+    "cloud_top_c": -15.0,
+    "cloud_depth_m": 16280.520943378342,
+    "cloud_air_kg_m2": 11850.595590317014,
+    "size_mm": 21.437226098986827,
+    "mass_mg": 12.485100613253778,
+    "speed_m_s": 0.6138392747982034,
+    "hours": 8.268522447673302
+   },
+   {
+    "cloud_top_c": -20.0,
+    "cloud_depth_m": 21707.36125783779,
+    "cloud_air_kg_m2": 15089.13709263203,
+    "size_mm": 41.12129606014226,
+    "mass_mg": 43.04261391706264,
+    "speed_m_s": 0.6387857700142006,
+    "hours": 10.146788426914016
+   }
+  ],
+  "earth": [
+   {
+    "cloud_top_c": -10.0,
+    "cloud_depth_m": 1538.4615384615386,
+    "cloud_air_kg_m2": 1542.962876668948,
+    "size_mm": 0.5109315656363255,
+    "mass_mg": 0.010305306756559557,
+    "speed_m_s": 0.8238218338028529,
+    "hours": 0.5703391010335127
+   },
+   {
+    "cloud_top_c": -15.0,
+    "cloud_depth_m": 2307.6923076923076,
+    "cloud_air_kg_m2": 2226.299282556583,
+    "size_mm": 0.8154655872585882,
+    "mass_mg": 0.02505200222068209,
+    "speed_m_s": 0.9605329100417644,
+    "hours": 0.7484503336238667
+   },
+   {
+    "cloud_top_c": -20.0,
+    "cloud_depth_m": 3076.923076923077,
+    "cloud_air_kg_m2": 2855.5689351590945,
+    "size_mm": 1.162568841269097,
+    "mass_mg": 0.049143628407046426,
+    "speed_m_s": 1.0568625659709596,
+    "hours": 0.9122765343701967
+   }
+  ]
+ },
+ "crossing_hours": {
+  "moon": {
+   "-10 C": {
+    "2 mm": 7.3046217733087975,
+    "5 mm": 5.74578718719543,
+    "10 mm": 5.1107865449206935,
+    "20 mm": 4.736765951356802
+   },
+   "-15 C": {
+    "2 mm": 10.77394523635429,
+    "5 mm": 8.456594256388668,
+    "10 mm": 7.512904629688593,
+    "20 mm": 6.956787763097152
+   },
+   "-20 C": {
+    "2 mm": 14.124141580969084,
+    "5 mm": 11.062353599613324,
+    "10 mm": 9.815927805350261,
+    "20 mm": 9.081066526901779
+   }
+  },
+  "earth": {
+   "-10 C": {
+    "2 mm": 0.348573072654151,
+    "5 mm": 0.3056376920219543,
+    "10 mm": 0.28852194900646433,
+    "20 mm": 0.27941731972166073
+   },
+   "-15 C": {
+    "2 mm": 0.5143406572991438,
+    "5 mm": 0.45049382503075613,
+    "10 mm": 0.4250183571927624,
+    "20 mm": 0.41143145149172067
+   },
+   "-20 C": {
+    "2 mm": 0.6745371333763829,
+    "5 mm": 0.5901556098624273,
+    "10 mm": 0.5564563619608919,
+    "20 mm": 0.5384376444585062
+   }
+  }
+ },
+ "melting": {
+  "moon": [
+   {
+    "size_mm": 2.0,
+    "relative_humidity": 0.9,
+    "half_melted_below_m": 975.7294374836165,
+    "melted_below_m": 1045.2840698077089,
+    "hours_to_melt": 0.7299064606805165
+   },
+   {
+    "size_mm": 2.0,
+    "relative_humidity": 0.7,
+    "half_melted_below_m": 2777.5126933719366,
+    "melted_below_m": 2848.6680322237407,
+    "hours_to_melt": 2.0012955851548586
+   },
+   {
+    "size_mm": 5.0,
+    "relative_humidity": 0.9,
+    "half_melted_below_m": 1040.417244376502,
+    "melted_below_m": 1136.6271974109077,
+    "hours_to_melt": 0.6274133177393466
+   },
+   {
+    "size_mm": 5.0,
+    "relative_humidity": 0.7,
+    "half_melted_below_m": 2843.495118600502,
+    "melted_below_m": 2941.84216095231,
+    "hours_to_melt": 1.634835077651787
+   },
+   {
+    "size_mm": 10.0,
+    "relative_humidity": 0.9,
+    "half_melted_below_m": 1094.081173057315,
+    "melted_below_m": 1212.3788017618608,
+    "hours_to_melt": 0.5970048034831135
+   },
+   {
+    "size_mm": 10.0,
+    "relative_humidity": 0.7,
+    "half_melted_below_m": 2898.228103407604,
+    "melted_below_m": 3019.1059640889434,
+    "hours_to_melt": 1.4972588271692724
+   },
+   {
+    "size_mm": 20.0,
+    "relative_humidity": 0.9,
+    "half_melted_below_m": 1152.1412284429352,
+    "melted_below_m": 1294.311234219418,
+    "hours_to_melt": 0.592066405599543
+   },
+   {
+    "size_mm": 20.0,
+    "relative_humidity": 0.7,
+    "half_melted_below_m": 2957.4505783359346,
+    "melted_below_m": 3102.6826267199176,
+    "hours_to_melt": 1.4297788314406168
+   }
+  ],
+  "earth": [
+   {
+    "size_mm": 2.0,
+    "relative_humidity": 0.9,
+    "half_melted_below_m": 190.41099856431174,
+    "melted_below_m": 227.78644095513982,
+    "hours_to_melt": 0.053579759261390573
+   },
+   {
+    "size_mm": 2.0,
+    "relative_humidity": 0.7,
+    "half_melted_below_m": 412.183476335392,
+    "melted_below_m": 450.3898799554893,
+    "hours_to_melt": 0.10647594973015781
+   },
+   {
+    "size_mm": 5.0,
+    "relative_humidity": 0.9,
+    "half_melted_below_m": 217.4431343915619,
+    "melted_below_m": 265.86210365543275,
+    "hours_to_melt": 0.05501585440943512
+   },
+   {
+    "size_mm": 5.0,
+    "relative_humidity": 0.7,
+    "half_melted_below_m": 439.77831790470987,
+    "melted_below_m": 489.26303411326717,
+    "hours_to_melt": 0.10178734802610467
+   },
+   {
+    "size_mm": 10.0,
+    "relative_humidity": 0.9,
+    "half_melted_below_m": 239.88221348183447,
+    "melted_below_m": 297.44120094239247,
+    "hours_to_melt": 0.05822461559861234
+   },
+   {
+    "size_mm": 10.0,
+    "relative_humidity": 0.7,
+    "half_melted_below_m": 462.68810030148666,
+    "melted_below_m": 521.509411156352,
+    "hours_to_melt": 0.10265016180061982
+   },
+   {
+    "size_mm": 20.0,
+    "relative_humidity": 0.9,
+    "half_melted_below_m": 264.39139874168313,
+    "melted_below_m": 331.90603627340647,
+    "hours_to_melt": 0.06303524507851427
+   },
+   {
+    "size_mm": 20.0,
+    "relative_humidity": 0.7,
+    "half_melted_below_m": 487.7154329839901,
+    "melted_below_m": 556.70900108388,
+    "hours_to_melt": 0.10632707498805179
+   }
+  ]
+ },
+ "producer": {
+  "domain": "atmosphere",
+  "files": {
+   "atmosphere/snow/flakes.py": "ce3a82113fc62480",
+   "atmosphere/rain/drops.py": "5d6908bf03eb88af",
+   "atmosphere/rain/targets.py": "faed41667f2187fd"
+  },
+  "inputs": {
+   "research/studies/climate_targets/results/climate_targets.json": "ebfa214f6c6cf10512a9b8a66666b7a4f684ddc133bef31a2433a5209775778f"
+  }
+ },
+ "evidence": "Single-particle physics with published laws fitted on Earth (mass, area, fall law, capacitance, ventilation, sticking), carried to lunar gravity and air through the quantities they depend on; idealised columns and clouds. A first estimate of the sky winter's snow, not a cloud model.",
+ "reading_rule": "Sizes are maximum dimensions. vapour_growth starts a 0.2 mm crystal at each cloud top and grows it from the vapour alone to the freezing level, with the cloud's depth and the air's mass in it, which at one mixing ratio of cloud ice sets the ice a falling flake can sweep up; crossing_hours are the hours a flake of a set size takes from the cloud top to the freezing level; melting gives, for flakes of set sizes falling from the freezing level through air at a set relative humidity, the depths below it where half and all of the ice has melted. The Moon's column is the resort's sky ladder at 301 K; Earth's a winter column with its freezing level at 850 hPa."
+}

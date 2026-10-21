@@ -836,9 +836,12 @@ humidity thresholds, how coarse its top levels are, and CM1 as a check that may 
   its start, and below it the ring's air is held to the GCM's vapour
   ([the CRM's account](../crm/README.md#what-else-divides-cm1-and-the-gcm-at-the-crossing)). Where it makes ice of
   its own, at 63–107 km in 10–33% of columns, it holds 1.5–3.5 times the water PlaSim gives its clouds there.
-- **The correction's upper part stands.** On the ring's cloud-free columns RRTMG and the correlated-k model agree on
-  the clear-sky cooling at 81–107 km, 0.18 and 0.17 K a day; on the GCM's own PlaSim cools that layer 0.04 K a day where
-  correlated-k cools it 0.19. Its sunlight there was fitted by layer on 14 October (above).
+- **The correction's upper part stands.** On the ring's cloud-free columns RRTMG run offline cools 81–107 km by
+  0.15 K a day in clear sky where the correlated-k model cools it 0.17, and CM1's own RRTMG, which also carries the
+  ring's ice above and its own layers above the top, by 0.13 (its stored tendency read back to RRTMG's rate;
+  [the CRM's account](../crm/README.md#what-else-divides-cm1-and-the-gcm-at-the-crossing)). On the GCM's own columns
+  PlaSim cools that layer 0.04 K a day where correlated-k cools it 0.19. Its sunlight there was fitted by layer on
+  14 October (above).
 - **The cloud's optics were liquid water's.** PlaSim gives every cloud Stephens' (1978) fit of reflection to water
   path and 0.1 m²/g of infrared absorption. Ice with the same water reflects more sunlight and, from crystals of about
   15 µm up, traps less infrared.

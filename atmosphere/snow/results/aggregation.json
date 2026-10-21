@@ -1,0 +1,352 @@
+{
+ "schema": "terluna.atmosphere.snow-aggregation/1",
+ "cloud_top_c": -15.0,
+ "runs": {
+  "moon": [
+   {
+    "snowfall_set_mm_h": 0.3,
+    "crystals_per_litre": 10.0,
+    "breakup": true,
+    "median_by_mass_mm": 10.276380820607766,
+    "d90_by_mass_mm": 21.685837366303925,
+    "d99_by_mass_mm": 34.40828629624202,
+    "largest_hourly_mm": 50.02372812844071,
+    "snowfall_mm_h": 0.30166269383495914,
+    "flakes_per_m2_hour": 249943.69144281987,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 35.64146182030513
+   },
+   {
+    "snowfall_set_mm_h": 0.3,
+    "crystals_per_litre": 10.0,
+    "breakup": false,
+    "median_by_mass_mm": 10.044664478715935,
+    "d90_by_mass_mm": 21.568570354129687,
+    "d99_by_mass_mm": 32.437291152081436,
+    "largest_hourly_mm": 41.99910163812973,
+    "snowfall_mm_h": 0.30182166585392073,
+    "flakes_per_m2_hour": 253712.01609624416,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 0.3,
+    "crystals_per_litre": 100.0,
+    "breakup": true,
+    "median_by_mass_mm": 17.574142157947563,
+    "d90_by_mass_mm": 38.463817049838234,
+    "d99_by_mass_mm": 62.58519497049926,
+    "largest_hourly_mm": 86.06507873707292,
+    "snowfall_mm_h": 0.39780795588513196,
+    "flakes_per_m2_hour": 110919.41230221232,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 294.139566193077
+   },
+   {
+    "snowfall_set_mm_h": 0.3,
+    "crystals_per_litre": 100.0,
+    "breakup": false,
+    "median_by_mass_mm": 16.776809226400715,
+    "d90_by_mass_mm": 34.28661269663781,
+    "d99_by_mass_mm": 59.56645841189884,
+    "largest_hourly_mm": 88.92146068086677,
+    "snowfall_mm_h": 0.39806394443203563,
+    "flakes_per_m2_hour": 117276.02646834112,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 1.0,
+    "crystals_per_litre": 10.0,
+    "breakup": true,
+    "median_by_mass_mm": 50.87882704535893,
+    "d90_by_mass_mm": 102.57167973170311,
+    "d99_by_mass_mm": 152.1568836755153,
+    "largest_hourly_mm": 197.14642052579285,
+    "snowfall_mm_h": 0.9323855463599601,
+    "flakes_per_m2_hour": 31659.155561205396,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 148.66590012896444
+   },
+   {
+    "snowfall_set_mm_h": 1.0,
+    "crystals_per_litre": 10.0,
+    "breakup": false,
+    "median_by_mass_mm": 48.3292571073483,
+    "d90_by_mass_mm": 96.71348929822598,
+    "d99_by_mass_mm": 140.6863946232101,
+    "largest_hourly_mm": 187.94759065070872,
+    "snowfall_mm_h": 0.9333161177492767,
+    "flakes_per_m2_hour": 32966.04587556974,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 1.0,
+    "crystals_per_litre": 100.0,
+    "breakup": true,
+    "median_by_mass_mm": 61.039902593797464,
+    "d90_by_mass_mm": 121.05239138404684,
+    "d99_by_mass_mm": 179.04235394769165,
+    "largest_hourly_mm": 224.6268954426348,
+    "snowfall_mm_h": 1.0298384093278445,
+    "flakes_per_m2_hour": 25181.668437259646,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 529.7635797918098
+   },
+   {
+    "snowfall_set_mm_h": 1.0,
+    "crystals_per_litre": 100.0,
+    "breakup": false,
+    "median_by_mass_mm": 55.61719351639487,
+    "d90_by_mass_mm": 115.66913476627927,
+    "d99_by_mass_mm": 184.68071366249777,
+    "largest_hourly_mm": 256.0081816969302,
+    "snowfall_mm_h": 1.032569642189993,
+    "flakes_per_m2_hour": 28840.310119288373,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 3.0,
+    "crystals_per_litre": 10.0,
+    "breakup": true,
+    "median_by_mass_mm": 141.31218614322762,
+    "d90_by_mass_mm": 232.66043107206943,
+    "d99_by_mass_mm": 387.0331841123793,
+    "largest_hourly_mm": 518.1609393225272,
+    "snowfall_mm_h": 2.5665971464069335,
+    "flakes_per_m2_hour": 9684.950308812262,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 400.4575902468688
+   },
+   {
+    "snowfall_set_mm_h": 3.0,
+    "crystals_per_litre": 10.0,
+    "breakup": false,
+    "median_by_mass_mm": 136.41502365490237,
+    "d90_by_mass_mm": 220.2457278078763,
+    "d99_by_mass_mm": 323.2041892659426,
+    "largest_hourly_mm": 418.10327091704846,
+    "snowfall_mm_h": 2.572285225387441,
+    "flakes_per_m2_hour": 10259.266373180764,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 3.0,
+    "crystals_per_litre": 100.0,
+    "breakup": true,
+    "median_by_mass_mm": 146.73670905237168,
+    "d90_by_mass_mm": 242.9704988185789,
+    "d99_by_mass_mm": 468.32308852409614,
+    "largest_hourly_mm": 599.7420021711279,
+    "snowfall_mm_h": 2.6654087004125118,
+    "flakes_per_m2_hour": 9260.083678704672,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 1054.675837643832
+   },
+   {
+    "snowfall_set_mm_h": 3.0,
+    "crystals_per_litre": 100.0,
+    "breakup": false,
+    "median_by_mass_mm": 142.6182023416315,
+    "d90_by_mass_mm": 237.83092579007342,
+    "d99_by_mass_mm": 416.8138717629005,
+    "largest_hourly_mm": 534.9465476234437,
+    "snowfall_mm_h": 2.6766700096336757,
+    "flakes_per_m2_hour": 10152.09659027537,
+    "crossing_hours": 34.45974716171317,
+    "fragments_per_m2_s": 0.0
+   }
+  ],
+  "earth": [
+   {
+    "snowfall_set_mm_h": 0.3,
+    "crystals_per_litre": 10.0,
+    "breakup": true,
+    "median_by_mass_mm": 0.672818270112592,
+    "d90_by_mass_mm": 0.9045680828580336,
+    "d99_by_mass_mm": 1.197712368271079,
+    "largest_hourly_mm": 1.503111718296662,
+    "snowfall_mm_h": 0.3195913325671692,
+    "flakes_per_m2_hour": 19000021.602749664,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 4.9485467672860715
+   },
+   {
+    "snowfall_set_mm_h": 0.3,
+    "crystals_per_litre": 10.0,
+    "breakup": false,
+    "median_by_mass_mm": 0.6826789833734563,
+    "d90_by_mass_mm": 0.9217072024062216,
+    "d99_by_mass_mm": 1.2295638002634708,
+    "largest_hourly_mm": 1.552214894990795,
+    "snowfall_mm_h": 0.3204593409632197,
+    "flakes_per_m2_hour": 18742829.15533676,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 0.3,
+    "crystals_per_litre": 100.0,
+    "breakup": true,
+    "median_by_mass_mm": 0.5316360944211468,
+    "d90_by_mass_mm": 0.9897326616386587,
+    "d99_by_mass_mm": 1.4266842733197485,
+    "largest_hourly_mm": 2.019169441109099,
+    "snowfall_mm_h": 0.7591205906170482,
+    "flakes_per_m2_hour": 89370360.2503643,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 419.8086353953706
+   },
+   {
+    "snowfall_set_mm_h": 0.3,
+    "crystals_per_litre": 100.0,
+    "breakup": false,
+    "median_by_mass_mm": 0.5549035952220417,
+    "d90_by_mass_mm": 1.0210130377139532,
+    "d99_by_mass_mm": 1.3966769294098431,
+    "largest_hourly_mm": 1.5899722250618396,
+    "snowfall_mm_h": 0.7721750577969955,
+    "flakes_per_m2_hour": 87322384.50909966,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 1.0,
+    "crystals_per_litre": 10.0,
+    "breakup": true,
+    "median_by_mass_mm": 0.884636396616952,
+    "d90_by_mass_mm": 1.2648851869936655,
+    "d99_by_mass_mm": 1.8113641066077388,
+    "largest_hourly_mm": 2.2650117441206876,
+    "snowfall_mm_h": 0.5432667911126356,
+    "flakes_per_m2_hour": 18399837.4474671,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 6.7153999321255196
+   },
+   {
+    "snowfall_set_mm_h": 1.0,
+    "crystals_per_litre": 10.0,
+    "breakup": false,
+    "median_by_mass_mm": 0.879506847452616,
+    "d90_by_mass_mm": 1.2326587747365512,
+    "d99_by_mass_mm": 2.004401427326384,
+    "largest_hourly_mm": 2.767968989972007,
+    "snowfall_mm_h": 0.543048794416738,
+    "flakes_per_m2_hour": 18592155.098880786,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 1.0,
+    "crystals_per_litre": 100.0,
+    "breakup": true,
+    "median_by_mass_mm": 0.8553061548755345,
+    "d90_by_mass_mm": 1.7381493199827969,
+    "d99_by_mass_mm": 2.4808363872023964,
+    "largest_hourly_mm": 5.4419221713038635,
+    "snowfall_mm_h": 1.437071446227833,
+    "flakes_per_m2_hour": 74620127.31241423,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 503.19663341716796
+   },
+   {
+    "snowfall_set_mm_h": 1.0,
+    "crystals_per_litre": 100.0,
+    "breakup": false,
+    "median_by_mass_mm": 0.7965707311173464,
+    "d90_by_mass_mm": 1.4758153195563457,
+    "d99_by_mass_mm": 2.631828889615089,
+    "largest_hourly_mm": 2.7124705425762197,
+    "snowfall_mm_h": 1.4038503759185548,
+    "flakes_per_m2_hour": 80177156.33641064,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 3.0,
+    "crystals_per_litre": 10.0,
+    "breakup": true,
+    "median_by_mass_mm": 0.8844999185795691,
+    "d90_by_mass_mm": 1.2282777798741291,
+    "d99_by_mass_mm": 1.8036935767083355,
+    "largest_hourly_mm": 2.1592574098389448,
+    "snowfall_mm_h": 0.5489890973950706,
+    "flakes_per_m2_hour": 18841777.26234297,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 6.237459306312427
+   },
+   {
+    "snowfall_set_mm_h": 3.0,
+    "crystals_per_litre": 10.0,
+    "breakup": false,
+    "median_by_mass_mm": 0.8795948816085113,
+    "d90_by_mass_mm": 1.2329698573845724,
+    "d99_by_mass_mm": 2.004401427326384,
+    "largest_hourly_mm": 2.767968989972007,
+    "snowfall_mm_h": 0.5444050838875657,
+    "flakes_per_m2_hour": 18614030.96065511,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 0.0
+   },
+   {
+    "snowfall_set_mm_h": 3.0,
+    "crystals_per_litre": 100.0,
+    "breakup": true,
+    "median_by_mass_mm": 1.7201022050977166,
+    "d90_by_mass_mm": 3.5670262948389193,
+    "d99_by_mass_mm": 9.170319537000582,
+    "largest_hourly_mm": 19.804111512072186,
+    "snowfall_mm_h": 3.0102116624224355,
+    "flakes_per_m2_hour": 51150353.79657024,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 794.8773182866993
+   },
+   {
+    "snowfall_set_mm_h": 3.0,
+    "crystals_per_litre": 100.0,
+    "breakup": false,
+    "median_by_mass_mm": 1.8187821586297725,
+    "d90_by_mass_mm": 3.5482792995240464,
+    "d99_by_mass_mm": 5.622911578761231,
+    "largest_hourly_mm": 6.120296842466085,
+    "snowfall_mm_h": 3.009337837368346,
+    "flakes_per_m2_hour": 48029719.05265025,
+    "crossing_hours": 1.0989953371201047,
+    "fragments_per_m2_s": 0.0
+   }
+  ]
+ },
+ "breakup_law": {
+  "a_scale": 15800000.0,
+  "a_size": 0.000133,
+  "c": 24780.0,
+  "gamma": 0.5,
+  "size_m": [
+   0.0005,
+   0.005
+  ],
+  "most": 100.0,
+  "fragment_m": 0.0001
+ },
+ "start_size_m": [
+  0.0001,
+  0.0004
+ ],
+ "producer": {
+  "domain": "atmosphere",
+  "files": {
+   "atmosphere/snow/aggregation.py": "c956a62b33dd9842",
+   "atmosphere/snow/flakes.py": "ce3a82113fc62480",
+   "atmosphere/rain/drops.py": "5d6908bf03eb88af",
+   "atmosphere/rain/targets.py": "faed41667f2187fd"
+  },
+  "inputs": {
+   "research/studies/climate_targets/results/climate_targets.json": "ebfa214f6c6cf10512a9b8a66666b7a4f684ddc133bef31a2433a5209775778f"
+  }
+ },
+ "evidence": "A one-dimensional super-particle model of snow in a cloud, with Earth-fitted laws for growth, fall, sticking and fragmentation carried to lunar gravity and air through the fall speeds; one seed a case; a still cloud whose condensation feeds a set snowfall. Sizes for comparing the two worlds, not a forecast of single flakes.",
+ "reading_rule": "Sizes are maximum dimensions of the snow arriving at the freezing level once the column has filled: the median, 90th and 99th percentiles by mass and the largest flake arriving at least once an hour on a square metre. snowfall_set_mm_h is the condensation the cloud is given, snowfall_mm_h what arrives; crystals_per_litre is the number entering at the cloud top; breakup false lets meetings that do not stick bounce whole."
+}

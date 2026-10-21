@@ -46,6 +46,8 @@ import time
 import urllib.request
 
 from climate.crm import cm1_elec
+from shared.constants import (CM1_GRAVITY, CM1_RAIN_BREAKUP_CUTOFF, CM1_RAIN_BREAKUP_RATE, CM1_RAIN_FALL_CAP,
+                              CM1_RAIN_FALL_EXPONENT, CM1_RAIN_MEAN_DIAMETER_CAP)
 
 HERE = Path(__file__).resolve().parent
 RUNS = HERE / 'runs'
@@ -1014,6 +1016,162 @@ BUILD_PATCHES['moon_omp_terrain_sea'] = TERRAIN_PATCHES + [SEA_COLUMNS_PATCH]
 BUILDS['moon_omp_terrain_sea_twilight'] = BUILDS['moon_omp_terrain']
 BUILD_PATCHES['moon_omp_terrain_sea_twilight'] = TERRAIN_PATCHES + [SEA_COLUMNS_PATCH, TWILIGHT_PATCH]
 
+# The rain limits (the author's go-ahead of 2026-10-19). Morrison's limits on rain's size and speed are Earth's, and in
+# the lunar runs the rain's mean diameter sits at Earth's breakup equilibrium (rain_sizes.py). The patch scales them
+# from the namelist and keeps CM1's own at its default; its header in morrison.F says what it changes, its default and
+# its source. It applies after the core patches above, which give the build's gravity G and the fall-speed cap VCAPR.
+RAIN_LIMITS_MARKER = 'Terluna rain limits'
+RAIN_LIMITS_HEADER = """! --------------------------------------------------------------------------------------------------------------
+! Terluna rain-limits patch: Terluna (github.com/dgoldman0/Terluna), climate/crm/cm1_run.py RAIN_LIMITS_PATCHES,
+! 2026-10-19. The derivation is atmosphere/rain/breakup.py, its product atmosphere/rain/results/rain_breakup.json.
+! What it changes. Morrison's scheme limits rain's exponential spectrum, of mean diameter Dm = 1/lambda, with Earth's
+!   values. Self-collection is offset by breakup above Dm = D_b (namelist brkup_db, 300 um when 0) by the factor
+!   2 - exp(2300/m (Dm - D_b)) (Verlinde and Cotton 1993), which balances at D_b + ln2/2300 m = 0.60 mm; Dm is capped
+!   at 2.8 mm (LAMMINR); rain's mean fall speeds are capped at VCAPR (9.1 m/s in the reference air on Earth, scaled to
+!   the build's gravity by Terluna's core patch).
+! Default. brkup_gscale = 0 (namelist param3) leaves all of them as they are: D_b from brkup_db, the rate 2300/m, the
+!   2.8 mm cap and the build's VCAPR.
+! With brkup_gscale = 1 they follow gravity g, the build's, through the capillary length sqrt(sigma/(rho_w g)), which
+!   sets the largest drop that holds together and, at equal air density, the sizes at which colliding drops reach a
+!   given Weber number. With s = sqrt(9.81/g), the breakup's two lengths, D_b and 1/2300 m, scale by
+!   s*brkup_rhor**brkup_rhoexp. brkup_rhor is the surface air's density over Earth's sea-level air at the same
+!   temperature, which in CM1, whose air has Earth's gas constant, is the surface pressure over 1013.25 hPa, and
+!   brkup_rhoexp says how much denser air, slowing the drops, softens their collisions (1.0 and 0.0 by default). The
+!   cap on Dm scales by s, as the largest stable drop does, and VCAPR becomes 9.1*(g/9.81)**0.25 m/s, as that drop's
+!   terminal speed does.
+! Source. Colliding raindrops coalesce or break by their Weber number (Straub et al. 2010). With a single-drop solver's
+!   terminal speeds (Loftus and Wordsworth 2021), the breakup-weighted sizes at which pairs reach equal Weber numbers
+!   follow s to within 0.2% at Earth's air density for g from the Moon's to Earth's, and grow as
+!   (rho_air/rho_air,Earth)**0.69 at 1.2 times Earth's density.
+! --------------------------------------------------------------------------------------------------------------
+"""
+RAIN_LIMITS_BLOCK = """         D_b = cm1db  ! cutoff diameter for breakup
+         ! Terluna rain limits (the header of this file): CM1's own unless brkup_gscale = 1
+         KB_r = 2300.
+         IF (brkup_gscale.EQ.1) THEN
+           IF (brkup_rhor.LE.0.) STOP 'Terluna rain limits: brkup_rhor must be positive'
+           terluna_scap = SQRT(9.81/G)
+           terluna_scol = terluna_scap*brkup_rhor**brkup_rhoexp
+           D_b = D_b*terluna_scol
+           KB_r = KB_r/terluna_scol
+           LAMMINR = LAMMINR/terluna_scap
+           VCAPR = 9.1*(G/9.81)**0.25
+         END IF
+         if(dowr) write(outfile,*) '  Terluna rain limits: brkup_gscale',brkup_gscale,' D_b',D_b,' rate',KB_r,  &
+                                   ' cap on 1/lambda',1./LAMMINR,' VCAPR',VCAPR
+"""
+RAIN_LIMITS_PATCHES = [
+    ('input.F', RAIN_LIMITS_MARKER, [
+        ('!  Begin namelists:\n',
+         '      integer :: brkup_gscale            ! Terluna rain limits: 0 keeps CM1\'s own, 1 scales them with gravity\n'
+         '      real :: brkup_rhor,brkup_rhoexp    ! Terluna rain limits: surface air density over Earth\'s, its exponent\n'
+         '!  Begin namelists:\n', 1),
+        ('l_inf,brkup_db,ndcnst,nt_c, &', 'l_inf,brkup_db,brkup_gscale,brkup_rhor,brkup_rhoexp,ndcnst,nt_c, &', 1)]),
+    ('cm1.F', RAIN_LIMITS_MARKER, [
+        ('      brkup_db = 0.0\n',
+         '      brkup_db = 0.0\n'
+         '      brkup_gscale = 0     ! Terluna rain limits: CM1\'s own unless the namelist sets 1\n'
+         '      brkup_rhor = 1.0\n      brkup_rhoexp = 0.0\n', 1)]),
+    ('param.F', RAIN_LIMITS_MARKER, [
+        ('      call MPI_BCAST(brkup_db,1,MPI_REAL,0,MPI_COMM_WORLD,ierr)\n',
+         '      call MPI_BCAST(brkup_db,1,MPI_REAL,0,MPI_COMM_WORLD,ierr)\n'
+         '      call MPI_BCAST(brkup_gscale,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)   ! Terluna rain limits\n'
+         '      call MPI_BCAST(brkup_rhor,1,MPI_REAL,0,MPI_COMM_WORLD,ierr)\n'
+         '      call MPI_BCAST(brkup_rhoexp,1,MPI_REAL,0,MPI_COMM_WORLD,ierr)\n', 1),
+        ("      if(dowr) write(outfile,*) 'brkup_db  =',brkup_db\n",
+         "      if(dowr) write(outfile,*) 'brkup_db  =',brkup_db\n"
+         "      if(dowr) write(outfile,*) 'brkup_gscale =',brkup_gscale   ! Terluna rain limits\n"
+         "      if(dowr) write(outfile,*) 'brkup_rhor =',brkup_rhor\n"
+         "      if(dowr) write(outfile,*) 'brkup_rhoexp =',brkup_rhoexp\n", 1)]),
+    ('morrison.F', RAIN_LIMITS_MARKER, [
+        ('', RAIN_LIMITS_HEADER, 1),
+        ('     REAL, PRIVATE ::      D_b     ! cutoff diameter for breakup\n',
+         '     REAL, PRIVATE ::      D_b     ! cutoff diameter for breakup\n'
+         '     REAL, PRIVATE ::      KB_r    ! Terluna rain limits: the breakup law\'s rate (1/m), CM1\'s 2300 by default\n',
+         1),
+        ('SUBROUTINE GRAUPEL_INIT(cm1hail,cm1inum,cm1ndcnst,cm1db)\n',
+         'SUBROUTINE GRAUPEL_INIT(cm1hail,cm1inum,cm1ndcnst,cm1db)\n'
+         '      use input, only : brkup_gscale,brkup_rhor,brkup_rhoexp,dowr,outfile   ! Terluna rain limits\n', 1),
+        ('      real,    intent(inout) :: cm1db\n',
+         '      real,    intent(inout) :: cm1db\n      real :: terluna_scap,terluna_scol   ! Terluna rain limits\n', 1),
+        ('         D_b = cm1db  ! cutoff diameter for breakup\n', RAIN_LIMITS_BLOCK, 1),
+        ('dum=2.-exp(2300.*(1./lamr(k)-dum1))',
+         'dum=2.-exp(KB_r*(1./lamr(k)-dum1))   ! Terluna rain limits: the rate, 2300/m by default', 2)]),
+]
+BUILDS['moon_omp_rain_limits'] = BUILDS['moon_omp']
+BUILD_PATCHES['moon_omp_rain_limits'] = RAIN_LIMITS_PATCHES
+# Terluna's own settings: a case's rain_limits is 'earth' (CM1's own limits, written out) or 'lunar' (the values of
+# atmosphere/rain's breakup product, brkup_rhor from the case's own surface pressure).
+RAIN_LIMITS_PRODUCT = 'atmosphere/rain/results/rain_breakup.json'
+RAIN_LIMITS_SCHEMA = 'terluna.atmosphere.rain-breakup/1'
+RAIN_LIMITS_KEYS = ('brkup_gscale', 'brkup_rhor', 'brkup_rhoexp')
+SEA_LEVEL_PA = 101325.0                    # Earth's sea-level air, the reference of brkup_rhor
+
+
+def rain_limits(gravity: float, settings: dict) -> dict:
+    """The rain limits the rain-limits patch sets at a build's gravity from its namelist entries, as RAIN_LIMITS_BLOCK
+    computes them, beside the fall-speed cap the core patch sets: the breakup cutoff (m), the breakup law's rate (1/m)
+    and the mean diameter where it balances (m), the cap on the mean diameter (m) and the cap on the mean fall speeds in
+    the reference air (m/s)."""
+    cutoff = settings.get('brkup_db') or CM1_RAIN_BREAKUP_CUTOFF
+    rate, cap = CM1_RAIN_BREAKUP_RATE, CM1_RAIN_MEAN_DIAMETER_CAP
+    fall = CM1_RAIN_FALL_CAP * (gravity / CM1_GRAVITY)**((CM1_RAIN_FALL_EXPONENT + 1.0) / 3.0)
+    if settings.get('brkup_gscale', 0) == 1:
+        if not settings['brkup_rhor'] > 0:
+            raise ValueError('brkup_rhor must be positive')
+        capillary = math.sqrt(CM1_GRAVITY / gravity)
+        collisional = capillary * settings['brkup_rhor']**settings['brkup_rhoexp']
+        cutoff, rate, cap = cutoff * collisional, rate / collisional, cap * capillary
+        fall = CM1_RAIN_FALL_CAP * (gravity / CM1_GRAVITY)**0.25
+    return dict(breakup_cutoff_m=cutoff, breakup_rate_per_m=rate, equilibrium_m=cutoff + math.log(2.0) / rate,
+                mean_diameter_cap_m=cap, fall_speed_cap_m_s=fall)
+
+
+def rain_limit_settings(kind: str, surface_pa: float) -> tuple:
+    """The &param3 entries of a case's rain limits, and the product they come from: 'earth' writes CM1's own values
+    out, 'lunar' the breakup product's exponent with brkup_rhor the case's surface pressure over 1013.25 hPa."""
+    earth = dict(brkup_db=CM1_RAIN_BREAKUP_CUTOFF, brkup_gscale=0, brkup_rhor=1.0, brkup_rhoexp=0.0)
+    if kind == 'earth':
+        return earth, None
+    if kind != 'lunar':
+        raise ValueError(f'rain_limits is earth or lunar, not {kind!r}')
+    raw = (HERE.parents[1] / RAIN_LIMITS_PRODUCT).read_bytes()
+    product = json.loads(raw)
+    if product.get('schema') != RAIN_LIMITS_SCHEMA:
+        raise ValueError(f'{RAIN_LIMITS_PRODUCT}: expected {RAIN_LIMITS_SCHEMA}, found {product.get("schema")}')
+    namelist = product['lunar_limits']['namelist']
+    settings = dict(earth, brkup_gscale=namelist['brkup_gscale'], brkup_rhoexp=namelist['brkup_rhoexp'],
+                    brkup_rhor=round(surface_pa / SEA_LEVEL_PA, 4))
+    return settings, {RAIN_LIMITS_PRODUCT: hashlib.sha256(raw).hexdigest()}
+
+
+def with_rain_limits(text: str, settings: dict) -> str:
+    """A namelist with the rain-limits entries set in &param3, added after brkup_db where the namelist lacks them."""
+    import re
+    start = text.index('&param3\n')
+    end = text.index('\n /', start)
+    block = text[start:end]
+    for key in reversed(RAIN_LIMITS_KEYS):
+        if not re.search(rf'^\s*{key}\s*=', block, re.M):
+            line = re.search(r'^(\s*)brkup_db\s*=.*$', block, re.M)
+            block = block[:line.end()] + f'\n{line.group(1)}{key} = 0,' + block[line.end():]
+    text = text[:start] + block + text[end:]
+    for key, value in settings.items():
+        text = set_namelist(text, 'param3', key, value)
+    return text
+
+
+def apply_rain_limits(case: Path, cfg: dict, gravity: float):
+    """Write a case's rain limits into its namelist template, from the surface pressure of its sounding; returns the
+    record for case.json, or None for a case that does not set them."""
+    if not cfg.get('rain_limits'):
+        return None
+    surface_pa = float((case / 'input_sounding').read_text().split()[0]) * 100.0
+    settings, product = rain_limit_settings(cfg['rain_limits'], surface_pa)
+    path = case / 'namelist.template'
+    path.write_text(with_rain_limits(path.read_text(), settings))
+    return dict(kind=cfg['rain_limits'], namelist=settings, limits=rain_limits(gravity, settings), product=product)
+
 # Electrified storms (stage 2 of the atmospheric-electricity study): WRF-ELEC's NSSL microphysics with the field,
 # lightning and leakage of climate/crm/cm1_elec.py, at the Moon's gravity and at Earth's for the benchmark storm.
 BUILD_FILES = {}                                                     # whole source files put in before patching, by build
@@ -1322,6 +1480,27 @@ CASES['ring_45n_corrected_sideways'] = dict(
 CASES['box_0e_small_earth_fall'] = dict(
     CASES['box_0e_small'], build='moon_omp_earth_fall', inputs_from='box_0e_small',
     purpose='box_0e_small\'s inputs as written, with rain, snow, graupel, ice and cloud droplets falling at Earth\'s speeds')
+# The rain-limits test (proposed on 2026-10-19, after the author's go-ahead to patch and test the limits that day; not
+# set up or run): box_0e_small's inputs as they were written, on the rain-limits build, once with CM1's own rain limits
+# written out and once with the lunar ones, so the pair shares one executable and differs in its namelist's rain limits
+# alone. Both write the budgets of potential temperature and vapour and the radiative heating, for the column's heating
+# by process.
+RAIN_TEST_OUTPUT = dict(param9=dict(output_thbudget=1, output_qvbudget=1, output_radten=1))
+for _tag, _kind in (('rain_control', 'earth'), ('lunar_rain', 'lunar')):
+    CASES[f'box_0e_small_{_tag}'] = dict(
+        CASES['box_0e_small'], build='moon_omp_rain_limits', inputs_from='box_0e_small', rain_limits=_kind,
+        namelist=RAIN_TEST_OUTPUT,
+        purpose='box_0e_small\'s inputs as written, on the rain-limits build with ' + (
+            'CM1\'s own rain limits written out' if _kind == 'earth' else
+            'the lunar rain limits of atmosphere/rain/results/rain_breakup.json') + ', writing the heat and vapour budgets')
+# The rain-limits test in its cheaper form, which the author chose to run on the night of 19 October: both arms run the
+# small box's second lunar day again from its day-29.5 restart, on the one rain-limits executable, differing in their
+# rain limits alone. The drops' sizes settle within an hour of a change, so the lunar day is ample.
+for _tag in ('rain_control', 'lunar_rain'):
+    CASES[f'box_0e_small_{_tag}_day29'] = dict(
+        CASES[f'box_0e_small_{_tag}'], inputs_from=None, restart_from=dict(case='box_0e_small', day=29.5), days=59.0,
+        purpose=CASES[f'box_0e_small_{_tag}']['purpose'] + "; the second lunar day again from box_0e_small's day-29.5 "
+                'restart')
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -2122,9 +2301,19 @@ def setup_from(name: str, cfg: dict) -> Path:
         (case / 'cm1.exe').unlink()
     (case / 'cm1.exe').symlink_to(exe)
     record = json.loads((source / 'case.json').read_text())
-    record.update(case=name, purpose=cfg['purpose'], build=json.loads((exe.parent / 'build.json').read_text()),
+    build_record = json.loads((exe.parent / 'build.json').read_text())
+    record.update(case=name, purpose=cfg['purpose'], build=build_record,
                   inputs_from=dict(case=cfg['inputs_from'], build=record['build']['label'],
                                    executable_sha256=record['build']['executable_sha256']))
+    if cfg.get('namelist') or cfg.get('rain_limits'):  # output switches, and the rain limits, on the inputs as written
+        text = (case / 'namelist.template').read_text()
+        for section, entries in cfg.get('namelist', {}).items():
+            for key, value in entries.items():
+                text = set_namelist(text, section, key, value)
+        (case / 'namelist.template').write_text(text)
+        record.update(configuration=cfg, rain_limits=apply_rain_limits(case, cfg, build_record.get('gravity_m_s2')))
+        record.setdefault('inputs', {})['namelist.template'] = hashlib.sha256(
+            (case / 'namelist.template').read_bytes()).hexdigest()[:16]
     if cfg.get('elec') is not None:
         text = (case / 'namelist.template').read_text()
         settings = cm1_elec.namelist_settings(cfg['elec'])
@@ -2307,6 +2496,8 @@ def setup_restart(name: str, cfg: dict) -> Path:
         text, efiles = cm1_elec.run_files(case, cfg['elec'], text)
         electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=efiles)
     (case / 'namelist.template').write_text(text)
+    build_record = json.loads((exe.parent / 'build.json').read_text())
+    rain = apply_rain_limits(case, cfg, build_record.get('gravity_m_s2'))
     tree = fetch()
     for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
                          ('RRTMG_SW_DATA', tree / 'run' / 'RRTMG_SW_DATA')):
@@ -2317,7 +2508,7 @@ def setup_restart(name: str, cfg: dict) -> Path:
     made = next((s for s in _progress(source)['segments'] if s['model_s'] >= n * restart_s - 1.0), {})
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     record = dict(src, case=name, purpose=cfg['purpose'], inputs_from=None, configuration=dict(cfg),
-                  build=json.loads((exe.parent / 'build.json').read_text()), electricity=electricity,
+                  build=build_record, electricity=electricity, rain_limits=rain,
                   restart_from=dict(case=fr['case'], day=fr['day'], restart=n, model_s=n * restart_s,
                                     made_by=made.get('executable')),
                   runner=digest(__file__),
@@ -2609,6 +2800,7 @@ def setup(name: str) -> Path:
         text, electricity = cm1_elec.run_files(case, cfg['elec'], text)
         electricity = dict(cm1_elec.SETTINGS, **cfg['elec'], files=electricity)
     (case / 'namelist.template').write_text(text)
+    rain = apply_rain_limits(case, cfg, gravity)
     twilight = write_twilight(case / TWILIGHT_TABLE, cfg['twilight']) if cfg.get('twilight') else None
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     if tilted or box:                                                     # per-column arrays as rounded lists
@@ -2630,6 +2822,7 @@ def setup(name: str) -> Path:
                   terrain=terrain if cfg.get('terrain') else None,
                   electricity=electricity,
                   twilight=twilight,
+                  rain_limits=rain,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',
                                                          'terluna_surface.txt', 'LANDUSE.TBL', 'namelist.template',

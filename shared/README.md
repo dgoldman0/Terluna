@@ -33,7 +33,9 @@ export. These values apply to CM1's thermodynamic closure; the other atmospheric
 models use gas constants for their specified compositions. It also records the
 rain fall-speed law of CM1's Morrison microphysics, which
 [atmosphere/rain](../atmosphere/rain/README.md) checks against its single-drop
-solver.
+solver, and the scheme's Earth limits on rain's size, which
+[atmosphere/rain/breakup.py](../atmosphere/rain/breakup.py) carries to lunar
+gravity.
 
 ## Scenarios
 

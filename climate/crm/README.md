@@ -41,6 +41,10 @@ its source for every build and compiles it outside the repository
   drops too slowly, and per metre of fall the drizzle loses about a third less
   water than it would and the millimetre drops about a tenth more. CM1 was not
   rerun.
+- **Rain's size limits are Earth's in every build but one.** Morrison's breakup
+  holds rain's mean diameter near 0.60 mm and caps it at 2.8 mm, and the lunar
+  runs' rain sits at that equilibrium; the `moon_omp_rain_limits` build scales the
+  limits from the namelist ([Rain limits at lunar gravity](#rain-limits-at-lunar-gravity)).
 - **The Sun keeps the lunar day**, 29.53 Earth days, at the chosen 5% dimmer
   shield's 1,173.5 W/m² above the air (the GCM run `A28_dim5`). On a domain that wraps the Moon the hour angle
   grows eastward along x, so the terminator crosses the domain once a lunar day.
@@ -1108,22 +1112,25 @@ So CM1's warm offset belongs to its whole free lower air, over the sea as over t
 **The heat budget of the ring's lower air** (the author's go-ahead of 16 October;
 [ring_heat_budget.py](ring_heat_budget.py),
 [heat_budget_ring_45n_corrected.json](../results/crm/heat_budget_ring_45n_corrected.json)) finds why. From the
-ring's snapshots, as ring means over the second lunar day: its radiation, the imposed sinking on each column's own
-air, the nudging toward the GCM's reference above 8 km and the storage, with CM1's own transport, turbulence and
-convection as the rest. From the GCM's 3-day means at 47° N and the rows either side: the heat its
-circulation carries sideways, which a ring cannot have.
+ring's snapshots, as ring means over the second lunar day: its radiation, as its potential temperature takes it
+(CM1 stores its radiative tendencies at constant volume; [cm1_output.py](cm1_output.py)), the imposed sinking on each
+column's own air, the nudging toward the GCM's reference above 8 km and the storage, with CM1's own transport,
+turbulence, convection and condensation as the rest. From the GCM's 3-day means at 47° N and the rows either side:
+the heat its circulation carries sideways, which a ring cannot have.
 
 | Layer | Ring against GCM | Radiation | Imposed sinking | Nudging | Rest | Storage | GCM's sideways transport |
 |---|---|---|---|---|---|---|---|
-| 0–1.8 km | 25.6 against 19.8 °C | −0.32 | +0.07 | 0 | +0.30 | +0.055 | −0.29 (eddies −0.22) |
-| 1.8–6.5 km | 24.1 against 18.3 °C | −0.32 | +0.07 | 0 | +0.27 | +0.017 | −0.08 |
-| 6.5–13.7 km | 16.5 against 13.7 °C | −0.22 | +0.03 | −0.12 | +0.33 | +0.016 | −0.06 |
-| 13.7–23 km | 6.5 against 5.9 °C | −0.16 | +0.06 | −0.01 | +0.12 | +0.009 | −0.06 |
+| 0–1.8 km | 25.6 against 19.8 °C | −0.23 | +0.07 | 0 | +0.21 | +0.055 | −0.29 (eddies −0.22) |
+| 1.8–6.5 km | 24.1 against 18.3 °C | −0.23 | +0.07 | 0 | +0.18 | +0.017 | −0.08 |
+| 6.5–13.7 km | 16.5 against 13.7 °C | −0.15 | +0.03 | −0.12 | +0.26 | +0.016 | −0.06 |
+| 13.7–23 km | 6.5 against 5.9 °C | −0.11 | +0.06 | −0.01 | +0.08 | +0.009 | −0.06 |
 
-K a day of temperature. Below 8 km the ring's air takes 33.7 W/m² from the ground through its turbulence and
-convection, the ground's whole 33.2, and 7.5 W/m² from the imposed sinking, and radiates 38.0 away; the 3.1 W/m² left
-over still warms it. The GCM's circulation carries about 15 W/m² of heat sideways out of the same air, 8.5 W/m² of it
-from the lowest 1.8 km and mostly by its eddies, and dries the lowest layer by 0.2 g/kg a day.
+K a day of temperature. Below 8 km the ring's air radiates 27.2 W/m² away and takes 7.5 W/m² from the imposed
+sinking and 22.8 from its own turbulence, convection and condensation; the 3.1 W/m² left over still warms it. The
+ground gives the air 33.2 W/m² of sensible heat, and the 10.4 W/m² between the two is the heat the convection carries
+above 8 km, less what condensation adds below it net of the rain's evaporation. The GCM's circulation carries about
+15 W/m² of heat sideways out of the same air, 8.5 W/m² of it from the lowest 1.8 km and mostly by its eddies, and
+dries the lowest layer by 0.2 g/kg a day.
 
 - **The ring drifts from the GCM's state.** It starts from the GCM's profile, the reference it is held to aloft, and
   without the sideways loss its lower air warms until radiation balances: the lowest 1.8 km from 20.0 to 26.0 °C over
@@ -1164,10 +1171,11 @@ means over the second lunar day): the sideways transport takes about a third of 
 
 - **Part of the drift.** Its lowest 1.8 km warm from 20.0 to 24.2 °C over the first lunar day and to 24.6 °C by day
   59, against the control's 26.0 and 26.7, and still warm 0.050 K a day near the ground against 0.055. About 2 K
-  cooler, that layer radiates 4.1 W/m² less and takes about 4.3 W/m² more from the ground, which together balance
-  the 8.5 W/m² the transport takes from it.
-- **What is left.** About 4 K below 6.5 km. Each kelvin the lowest layer cools gives back about 4 W/m², so the 3.7 K
-  left there would need about 15 W/m² more taken from it, nearly twice what the GCM's 3-day means carry sideways.
+  cooler, that layer radiates 2.9 W/m² less and takes 5.5 W/m² more from its own turbulence, convection and
+  condensation, 3.1 of it the ground's added sensible heat, which together balance the 8.5 W/m² the transport takes
+  from it.
+- **What is left.** About 4 K below 6.5 km. Each kelvin the lowest layer cools gives back about 3.9 W/m², so the
+  3.7 K left there would need about 14 W/m² more taken from it, 1.7 times what the GCM's 3-day means carry sideways.
 - **The faster eddies are not it.** On 17 October the design case ran two more years writing a mean every 6.5 hours
   (`A28_corrected_970_eddies`; [gcm_eddies.py](gcm_eddies.py),
   [gcm_eddies_A28_corrected_970_eddies.json](../results/crm/gcm_eddies_A28_corrected_970_eddies.json)). Its eddies
@@ -1177,14 +1185,18 @@ means over the second lunar day): the sideways transport takes about a third of 
 - **So the rest lies in the models' physics:** how each sheds the heat the ground gives it, by radiation, convection
   and turbulence. By day CM1 mixes its lower air dry to 14–19 km where the GCM's stays stable. The land test waits
   behind this, since over land the ground heats the air alike in the two models.
-- **CM1's radiation errs toward cooling.** On 17 October 990 of the ring's own columns, cloud-free below 25 km over
-  the second lunar day, went through the atmosphere domain's correlated-k model, which follows the line-by-line model
-  ([ring_radiation.py](ring_radiation.py),
-  [radiation_ring_45n_corrected_sideways.json](../results/crm/radiation_ring_45n_corrected_sideways.json)). CM1's
-  RRTMG cools them more: by 0.15 K a day in the lowest 1.8 km (4.5 W/m²), 0.12 at 1.8–6.5 km (8.5 W/m²) and 0.11 at
-  6.5–13.7 km (10.2 W/m²). Its sunlight came within 2.5 points of line-by-line at the crossing, with 8 W/m² less
-  absorbed in the air ([radiation, above](#what-else-divides-cm1-and-the-gcm-at-the-crossing)). Both push its air
-  cooler, so the warmth comes from elsewhere, and part of the gap may lie on the GCM's side.
+- **CM1's longwave matches the correlated-k model.** On 17 October 990 of the ring's own columns, cloud-free below
+  25 km over the second lunar day, went through the atmosphere domain's correlated-k model, which follows the
+  line-by-line model ([ring_radiation.py](ring_radiation.py),
+  [radiation_ring_45n_corrected_sideways.json](../results/crm/radiation_ring_45n_corrected_sideways.json)). CM1
+  stores its radiative tendencies at constant volume, cp/cvm or about 1.38 times RRTMG's own rate in this air
+  ([cm1_output.py](cm1_output.py)), and hands RRTMG the ground's temperature as the air's at the ground. Read back to
+  RRTMG's rate, on columns built as CM1 builds them, its longwave comes within 0.013 K a day of the correlated-k
+  model in every layer: 0.008 K a day more cooling in the lowest 1.8 km (0.2 W/m²), 0.010 at 1.8–6.5 km (0.7 W/m²),
+  0.013 at 6.5–13.7 km (1.3 W/m²) and 0.005 at 13.7–23 km (0.6 W/m²). Its sunlight came within 2.5 points of
+  line-by-line at the crossing, with 8 W/m² less absorbed in the air
+  ([radiation, above](#what-else-divides-cm1-and-the-gcm-at-the-crossing)). CM1's radiation is sound on both counts,
+  so the gap lies in the GCM or in how the two models carry the ground's heat.
 - **The GCM's side.** The same morning a year of the design case wrote PlaSim's heating by process at every level
   (`A28_corrected_970_heating`, with the runner's new `--heating-diagnostics`; [gcm_heating.py](gcm_heating.py),
   [gcm_heating_A28_corrected_970_heating.json](../results/crm/gcm_heating_A28_corrected_970_heating.json)). At 47° N
@@ -1193,14 +1205,34 @@ means over the second lunar day): the sideways transport takes about a third of 
   circulation, about 8.3 sideways and the rest in its vertical motions. The processes' own sum matches the total its
   diabatic step hands the dynamics within 0.02 K a day. On 151 cloud-free 3-day mean columns there, PlaSim's
   longwave cools the lowest layer by 0.44 K a day where the correlated-k model gives 0.07, 10.6 W/m² more, and the
-  next layer 11.4 W/m² more; RRTMG's excess on CM1's columns is 4.5 and 8.5 W/m².
-- **So part of the gap is the GCM running cool.** PlaSim sheds about 6 W/m² more by longwave from its lowest layer
-  than CM1 does, worth about 1.5 K of the 3.7 at the ring's 4 W/m² a kelvin. Against the line-by-line model both
-  over-cool their lower air, PlaSim by about 2.5 K's worth near the ground and RRTMG by about 1 K's. PlaSim's water
-  continuum was fitted to the line-by-line model's outgoing longwave at the top, which leaves its cooling by height
-  free; fitting that, as its sunlight was fitted by height on 14 October, would move the design case's lower air.
-  The rest of the gap, a degree or two, lies in how the two models carry the ground's heat upward: by day CM1's
-  resolved dry convection where the GCM's stable layer leaves part of it to its resolved circulation.
+  next layer 11.4 W/m² more; CM1's own longwave comes within 0.2 and 0.7 W/m² of the correlated-k model in the same
+  two layers.
+- **So most of the gap is the GCM running cool.** PlaSim sheds about 10 W/m² more by longwave from its lowest layer
+  than CM1 does, worth about 2.7 K of the 3.7 at the ring's 3.9 W/m² a kelvin. PlaSim over-cools its lower air
+  against the line-by-line model, and CM1's RRTMG matches that model. PlaSim's water continuum was fitted to the
+  line-by-line model's outgoing longwave at the top, which leaves its cooling by height free; since 17 October the
+  GCM's longwave correction fits it by height ([the GCM's account](../gcm/README.md#the-longwave-by-height)). The
+  rest of the gap, about a degree, lies in how the two models carry the ground's heat upward: by day CM1's resolved
+  dry convection where the GCM's stable layer leaves part of it to its resolved circulation.
+- **RRTMG's own gas optics match the correlated-k model, beyond its table's edge too, and so does CM1's call**
+  (19 and 20 October;
+  [rrtmg_edge.py](rrtmg_edge.py),
+  [rrtmg_edge_ring_45n_corrected_sideways.json](../results/crm/rrtmg_edge_ring_45n_corrected_sideways.json)). RRTMG's
+  tables start at 1,053.63 hPa, and the ring's ground stands at 1,214 hPa, so its lowest 7.5 km are extrapolated in
+  ln p. CM1's own RRTMG longwave, compiled from the lunar build's objects into an offline driver
+  ([rrtmg_offline/lw_columns.f90](rrtmg_offline/lw_columns.f90)), took the same 990 cloud-free columns on the
+  correlated-k model's layers, with the build's gravity, cp, CO2 and O2 and the air at the ground at the ground's
+  temperature. It comes within 0.02 K a day of the correlated-k model at every height (−0.016, −0.006, −0.013 and
+  −0.007 K a day over the GCM's lowest four layers), the same within 0.01 K a day on twins scaled so that every layer
+  lies inside the tables, and holding the absorption at the edge's values below it moves the lowest layers by
+  0.003 K a day. The edge needs no patch. CM1's own call, its stored lwten read back to RRTMG's rate, comes within
+  0.008 K a day of the same RRTMG on the same columns in every layer (+0.008, −0.003, 0.000 and +0.002). Read as
+  stored, its lwten had seemed to cool 0.14, 0.11, 0.09 and 0.08 K a day more: the constant-volume convention accounts
+  for 0.07–0.11 K a day of that in every layer, and in the lowest 1.8 km the air at the ground, which the earlier
+  columns carried down from the layers above, for another 0.07. Its gases, gravity and the ground's emissivity (0.98
+  over water, land-use 16) match the driver's within what would move it, and its own layers above the top on Earth's
+  standard temperature profile, the ice aloft and its 30-minute radiation step leave less than 0.01 K a day between
+  them in these layers.
 - **The ring's ice high up came from its start.** Every column holds ice above 107 km, 1.1 g/m², which is why the
   radiation check took columns cloud-free below 25 km. Above the GCM's top level (130 km) the starting sounding and
   the nudging reference kept the top's vapour while the temperature kept falling, so 140–150 km began 6–15 times
@@ -1212,8 +1244,9 @@ means over the second lunar day): the sideways transport takes about a third of 
   temperature (`held_share_above`); cases set up before keep their inputs. The GCM's side of the high cloud is in
   [its account](../gcm/README.md#the-high-cloud-and-its-ice).
 - **For the cases that follow.** The sideways transport is part of the GCM's forcing that a slice of it lacks, so
-  forced rings and boxes are better driven with it; their warmth near the ground still runs about 4 K high at 45° N
-  until the rest is found.
+  forced rings and boxes are better driven with it. Their warmth near the ground ran 3.7 K above the GCM's at 45° N,
+  most of it the GCM's longwave over-cooling, which its correction since 17 October answers; a ring on the design case
+  will show what is left.
 
 **The land test on dry ground** (case `ring_45n_corrected_gcm_land`) is `ring_45n_corrected` with the GCM's roughness
 (2 m) and soil thermal inertia (THERIN 4.97), keeping the GCM's own wetness as the control does. A circle of latitude's
@@ -1226,6 +1259,211 @@ climate/gcm/.venv/bin/python -m climate.crm.gcm_profiles ring_45n_corrected --fr
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup ring_45n_corrected_gcm_land
 /media/projectspace/terluna-research/session-tools/gcm_land_ring.sh               # 6 threads; rerun to resume
 ```
+
+## Rain limits at lunar gravity
+
+Morrison's scheme limits its rain with Earth's values. Self-collection is offset by breakup above a mean diameter of
+0.30 mm, CM1's `brkup_db`, by the factor 2 − exp(2300 m⁻¹ (D_m − 0.30 mm)) (Verlinde and Cotton 1993), so the mean
+diameter D_m = 1/λ of rain's exponential spectrum settles at 0.60 mm; that mean diameter is capped at 2.8 mm, and the
+rain's mean fall speeds at 9.1 m/s in the scheme's reference air, which the Terluna builds carry to the Moon by the
+single factor 2.94 as 3.09 m/s. No runner sets `brkup_db`; the namelist every case starts from writes CM1's 300 µm.
+The world-crafting team's check of 19 October raised the same point (their B28). The author approved patching and
+testing the limits on 19 October.
+
+**Where the rain sits** ([rain_sizes.py](rain_sizes.py), `rain_sizes_<case>.json`). Over the second lunar day of four
+runs, the breakup equilibrium sets the size of nearly all the rain:
+
+| | Small box | Its Earth-fall twin | 45° S ring | Equatorial ring |
+|---|---|---|---|---|
+| Rain's mass at mean diameters of 0.45–0.80 mm | 95% | 85% | 77% | 91% |
+| Beyond the breakup cutoff, 0.30 mm | 98% | 95% | 92% | 97% |
+| Held at the 2.8 mm cap | 0.05% | 0.0005% | 0.003% | 1.0% |
+| Rain in the cells held at the cap, median; in all rain cells | 0.04; 0.66 mg/m³ | 0.06; 0.71 mg/m³ | 0.06; 1.4 mg/m³ | 0.04; 2.5 mg/m³ |
+| Rain aloft, mean | 0.40 kg/m² | 0.14 kg/m² | 0.013 kg/m² | 0.54 kg/m² |
+
+The 45° N ring on the corrected design case holds 0.07 g/m² of rain aloft, about 6,000 times less than the small box,
+too little to test the limits on.
+
+**The lunar limits** ([atmosphere/rain](../../atmosphere/rain/README.md#breakup-at-lunar-gravity),
+`rain_breakup.json`). Colliding drops coalesce or break by their Weber number, and with the single-drop solver's
+terminal speeds a lunar pair of drops collides as an Earth pair of the same size ratio when it is s times as large. At
+equal air density s is the ratio of capillary lengths, 2.46; the Moon's air, 1.2 times as dense, raises it to 2.78
+for Morrison's spectrum at the equilibrium. The cap follows the largest drop that holds together, which grows with the
+capillary length alone, and the fall-speed cap that drop's terminal speed, (g/9.81)^¼ of Earth's:
+
+| | CM1 (Earth) | Lunar, at the design air |
+|---|---|---|
+| Breakup cutoff | 0.30 mm | 0.84 mm |
+| Breakup rate | 2,300 /m | 826 /m |
+| Mean diameter where breakup balances | 0.60 mm | 1.68 mm |
+| Cap on the mean diameter | 2.8 mm | 6.88 mm |
+| Cap on the mean fall speeds, in the reference air | 9.1 m/s (the Terluna builds: 3.09 m/s) | 5.80 m/s |
+
+At the lunar equilibrium Morrison's mass-weighted fall speed in the Moon's air at 2 m is 4.47 m/s by its power law
+(4.21 m/s by the solver for the same spectrum); the builds' cap holds it at 2.70 m/s there, and the scaled cap, 5.07
+m/s, leaves it free.
+
+**The cap stays, rescaled.** It holds thin rain sorted by its fall, a tenth to a sixtieth of the median rain cell's,
+1.2–1.6 km up. In rain that thin, breakup at the cap restores the size over about four hours, 1/(5.78 × 312 × W) s at
+W = 0.04 mg/m³, while falling rain sorts its sizes across a 100 m layer in about a minute, and below 1e-8 kg/kg the
+scheme leaves self-collection and breakup out. Without the cap that rain's mean diameter would have no bound. Where the
+rain is thick breakup holds it: at the cap with 1 g/m³ it restores the size in half a second.
+
+**The patch** (`RAIN_LIMITS_PATCHES` in [cm1_run.py](cm1_run.py); build `moon_omp_rain_limits`). It adds three entries
+to the namelist's `&param3` beside CM1's `brkup_db`: `brkup_gscale`, 0 to keep CM1's limits or 1 to scale them with
+gravity; `brkup_rhor`, the surface air's density over Earth's sea-level air at the same temperature, which in CM1,
+whose air takes Earth's gas constant, is the surface pressure over 1013.25 hPa; and `brkup_rhoexp`, the exponent of
+that ratio in the scale of the collisions. With `brkup_gscale = 1` and the build's gravity g, the breakup's two
+lengths scale by √(9.81/g) · `brkup_rhor`^`brkup_rhoexp`, the cap by √(9.81/g), and the fall-speed cap becomes
+9.1 (g/9.81)^¼ m/s. At its default it keeps CM1's own limits. Its header in `morrison.F` states what it changes, its
+default and its source, so other CM1 series can take it; it applies after Terluna's core patch, which gives the
+build's gravity and the fall-speed cap. Terluna's runner writes the lunar values for a case with `rain_limits='lunar'`
+(`brkup_gscale = 1`, `brkup_rhoexp = 0.687` from the breakup product, `brkup_rhor` from the case's sounding: 1.1965 at
+the small box's 1,212 hPa) and CM1's own for `rain_limits='earth'`. No other build takes the patch, so every existing
+executable and run stays as it was.
+
+**The build and the smoke test** (19 October). `moon_omp_rain_limits` built cleanly at `-O3 -march=native` in four
+minutes on two jobs (executable `1dc13187bb93677a`); every source it leaves alone matches `moon_omp_o3`'s byte for byte.
+From the small box's day-42.0 restart, with 2.4 kg/m² of rain aloft, each ran two model hours on one thread. At its
+default the new build repeated `moon_omp_o3` bit for bit in every output, statistic and restart file. With the lunar
+limits it ran normally and logged the limits above. After the first hour the rain's mass-median mean diameter stood at
+1.57 mm against 0.60 mm at the default; after two the rain aloft stood at 2.3 kg/m² against 2.8, and 3.1 mm of rain had
+reached the ground against 0.93 mm. That is the transient of limits switched on in mid-storm, in one realization; the
+test below measures them settled. The script and its record are `crm-runs/smoke_rain_limits/` on the research drive.
+
+**The proposed test** (cases `box_0e_small_rain_control` and `box_0e_small_lunar_rain`, defined and not set up or run).
+The small box's inputs as written run two lunar days on the rain-limits build, once with CM1's limits written out and
+once with the lunar ones, so the pair shares one executable and differs in its namelist's rain limits alone; both write
+the budgets of potential temperature and vapour and the radiative heating. Of the four runs measured above, the box
+holds the most rain aloft after the equatorial ring and resolves it in three dimensions, and its rain test of 30
+September frames the comparison: 85% of its falling water evaporated. Its forcing is the GCM's before the correction, so
+it shows how far the limits move CM1's answers in a known rainy box; the design climate at 301 K has no CM1 case yet.
+Over the second lunar day, against the spread between the control and `box_0e_small` itself (the same physics built at
+`-O2`, another realization):
+
+- the rain reaching the ground per lunar day, and how often and how hard it rains (the share of ground under 1 mm/h
+  or more);
+- the rain's sizes: its mass by mean diameter, beyond the cutoff and the equilibrium and at the cap (`rain_sizes.py`),
+  and the spectrum by height;
+- the microphysics' water budget: water condensed, evaporated back from cloud, evaporated from rain on the way down
+  and reaching the ground, and the share of the falling water that evaporates;
+- cloud by day and by night, fog and cloud by height;
+- the air at 2 m and at the GCM's lowest layer, its dewpoint and comfort;
+- the column's heating: the microphysics', the radiation's and the boundary layer's heating and moistening by height
+  from the budgets, and the energy at the ground.
+
+Each run takes about 2.3–2.8 wall hours on 4 threads (the rain test's twin took 2.32 hours), so the pair takes about
+5–6 hours one after the other with a half-hour rest between, or about 3 hours side by side on 8 threads; each writes
+about 12 GB with the budgets, where the small box wrote 5.7 GB. The analysis takes minutes: `box_analysis` with the
+control as reference and `rain_sizes` for each arm, and a short reading of the budgets that is still to be written. A
+cheaper pair would start both from the small box's day-29.5 restart, in about half the time, with a first lunar day
+built under Earth's limits.
+
+```sh
+python -m atmosphere.rain.breakup                                           # about a minute: rain_breakup.json
+python -m climate.crm.rain_sizes box_0e_small --from-day 29.5               # about a minute
+python -m climate.crm.cm1_run build moon_omp_rain_limits --jobs 2           # four minutes
+# the test, once approved:
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_small_rain_control
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_small_lunar_rain
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_small_rain_control --hours 4 --threads 4
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_0e_small_lunar_rain --hours 4 --threads 4
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_lunar_rain --from-day 29.5 \
+    --reference box_0e_small_rain_control
+```
+
+**The test as run** (cases `box_0e_small_rain_control_day29` and `box_0e_small_lunar_rain_day29`, the cheaper pair, on
+19–20 October). Both restarted from the small box's day-29.5 restart on the rain-limits build and ran its second lunar
+day, about an hour each on 4 threads, writing the budgets of potential temperature and vapour as domain means every
+three hours. The spread between two realizations of the same physics is the control against the small box itself
+over the same days: the same state at day 29.5, compiled differently. Box means over days 29.6–59.0
+([box_analysis.py](box_analysis.py),
+[box_box_0e_small_lunar_rain_day29.json](../results/crm/box_box_0e_small_lunar_rain_day29.json),
+[box_box_0e_small_rain_control_day29.json](../results/crm/box_box_0e_small_rain_control_day29.json);
+[rain_sizes.py](rain_sizes.py); [box_budget.py](box_budget.py)), with the 90% ranges of the moving-block bootstrap:
+
+| | Lunar limits | CM1's limits | Lunar against CM1's | Control against the small box |
+|---|---|---|---|---|
+| Air at 2 m | 27.2 °C | 25.7 °C | +1.47 K (+1.24 to +1.71) | −0.13 K |
+| Dewpoint at 2 m | 24.1 °C | 23.2 °C | +0.92 K (+0.68 to +1.14) | −0.17 K |
+| Air as the GCM measures it | 27.9 °C | 25.8 °C | +2.06 K (+1.75 to +2.36) | −0.10 K |
+| Rain reaching the ground, per lunar day | 63 mm | 33 mm | +90% | −2% |
+| Water condensed | 174 mm | 307 mm | −43% | +1% |
+| Falling water evaporated on the way down | 48% | 86% | | 85.7% against 85.3% |
+| Rain held aloft | 0.17 kg/m² | 0.41 kg/m² | | |
+| Rain's mass-weighted mean diameter | 1.31 mm | 0.59 mm | | |
+| Cloud cover | 36% | 47% | −11 points (−18 to −5) | −2 points |
+| Fog, cloud below 200 m | 30% | 31% | −1 point (−10 to +7) | −4 points |
+| Cloud fraction of the lowest level, about 100 m | 28% | 17% | +10 points | −3 points |
+| Wind at 10 m | 0.53 m/s | 0.62 m/s | −0.09 m/s | 0.00 m/s |
+
+The lunar limits move every measure by several times the spread. Their rain grows larger, 82% of its mass beyond the
+lunar cutoff of 0.84 mm, and evaporates less on the way down, so twice as much reaches the ground from 43% less
+condensation: less of the air's water cycles back through falling rain.
+
+**Why the air near the ground warms**
+([box_budget_box_0e_small_lunar_rain_day29.json](../results/crm/box_budget_box_0e_small_lunar_rain_day29.json); the
+spread's in
+[box_budget_box_0e_small_rain_control_day29.json](../results/crm/box_budget_box_0e_small_rain_control_day29.json)).
+CM1's own budget closes within 6 W/m² in each of the GCM's lowest four layers once the box's prescribed day-night
+heating is reckoned from its table, and its microphysics matches CM1's running water totals within 4%. The lunar arm
+against the control, W/m², positive warming:
+
+| Layer | Microphysics | Of it: rain's evaporation; condensation | Turbulence | Circulation | Radiation | Storage |
+|---|---|---|---|---|---|---|
+| 0–1.8 km | +8.2 | +8.2; −6.1 | −12.7 | +8.8 | −1.4 | +2.1 |
+| 1.8–6.5 km | +13.9 | +25.1; −14.7 | +2.5 | −11.7 | −1.9 | +6.1 |
+| 6.5–13.7 km | −1.8 | +40.3; −45.4 | +7.3 | +0.4 | −0.4 | +5.2 |
+| 13.7–23 km | +15.3 | +48.4; −30.1 | +0.4 | −1.6 | +0.2 | +1.2 |
+| Whole column | +29.8 | +135.0; −124.4 | −1.9 | −10.8 | −3.4 | +19.1 |
+
+The spread's differences stay within 3 W/m² in every term and layer.
+
+- **Over the whole column** the rain's evaporation cools 135 W/m² less and condensation heats 124 W/m² less; the net,
+  about 30 W/m², is the heat of the extra rain that reaches the ground.
+- **In the lowest 1.8 km** the rain's evaporation cools the air 8.2 W/m² less. The warmer air takes 6.6 W/m² less
+  sensible heat from the ground, which evaporates 8.2 W/m² more, and its turbulence brings it 12.7 W/m² less in all;
+  its own circulation brings 8.8 more.
+- **So the air at 2 m runs 1.5 K warmer and 0.9 g/kg moister**, most by night (+1.6 K, the dewpoint +1.5 K), and the
+  low cloud reaches the ground more often while the fog below 200 m holds at 30%.
+- **Against the GCM** at 0° E, which forced this box before its corrections: the box's air as the GCM measures it,
+  25.8 °C with CM1's limits against the GCM's 22.0 °C, becomes 27.9 °C with the lunar ones, and its rain at the ground,
+  33 mm a lunar day against the GCM's 180 on its land cells, becomes 63. The GCM's own falling rain evaporates by one
+  Earth-tuned constant on each layer's dryness (PlaSim's `gamma`, `rainmod.f90`), with no drop sizes or fall speeds,
+  so how much of its rain evaporates on the way down is the question this test puts to the GCM.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_lunar_rain_day29 --from-day 29.5 \
+    --reference box_0e_small_rain_control_day29                               # about a minute each
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_0e_small_rain_control_day29 --from-day 29.5 \
+    --reference box_0e_small
+climate/gcm/.venv/bin/python -m climate.crm.rain_sizes box_0e_small_lunar_rain_day29 --from-day 29.5
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_0e_small_lunar_rain_day29 \
+    --reference box_0e_small_rain_control_day29                               # seconds
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_0e_small_rain_control_day29 --reference box_0e_small
+```
+
+**Other Earth-tuned constants in Morrison's rain**, changed only where the physics gives the value:
+
+- The self-collection rate, 5.78 m³ kg⁻¹ s⁻¹ (Seifert and Beheng 2001), carries Earth's collision kernel, the volume
+  drops sweep at their difference in fall speed with collision efficiency near one. At the scheme's own lunar speeds it
+  would be 2.94 times smaller, by the solver's 2.5–3.4 times for drops of 0.5–3 mm. It sets how fast the rain reaches
+  the breakup equilibrium, whose size is the breakup law's; it stays for the size-dependent fall law of the plan.
+- Autoconversion and accretion (Khairoutdinov and Kogan 2000: 1,350 q_c^2.47 N_c^−1.79 and 67 (q_c q_r)^1.15) are fits
+  to Earth's bin model. At lunar gravity droplets settle 6 times slower and collide less efficiently, so rain forms
+  more slowly by a factor that needs a lunar collision calculation; they stay.
+- The floor on the mean diameter, 20 µm (`LAMMAXR`), bounds drizzle at the cloud's edge and has no scaling with
+  gravity of its own; it stays.
+- For the ice, drops shed by wet graupel are taken as 1 mm (`PRACG/5.2E-7`), snow's and graupel's mean diameters are
+  capped at 2 mm (`LAMMINS`, `LAMMING`), and their fall-speed caps follow the single factor; listed.
+- The NSSL scheme of the electrified runs carries Earth limits of its own: self-collection reduced above a mean volume
+  diameter of 0.6 mm by exp(−2500 m⁻¹ (D − 0.6 mm)) and stopped above 2.0 mm, and the mass-weighted diameter capped at
+  6 mm (`xvrmx0` with `imaxdiaopt = 3`), its active breakup off for two moments. Carried as Morrison's are, the
+  collisional lengths would scale by about 2.8 and the cap by 2.46; it is not patched, since no NSSL run is planned.
+
+**Open.** The lunar limits change the answers by several times the spread between realizations (above), and the author
+decides whether they join CM1's next run with the size-dependent fall law. The similarity carries Earth's collision
+outcomes to the Moon by the Weber number; no lunar collision has been measured.
 
 ## A box over the highlands
 

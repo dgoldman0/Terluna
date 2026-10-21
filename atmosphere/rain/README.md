@@ -2,8 +2,8 @@
 
 Single raindrops in the Open Moon's air: how fast each size falls, with its drag and its shape, how it evaporates on
 the way down, and which sizes reach the ground from a cloud base, with tools for weighing drop-size spectra. The
-product gives these in the Moon's air at 2 m in the three target climates beside Earth's air, and checks the fall
-speeds CM1 gives its rain.
+products give these in the Moon's air at 2 m in the three target climates beside Earth's air, check the fall speeds
+CM1 gives its rain, and carry CM1's limits on its rain's size to lunar gravity by the drops' collisions.
 
 The model comes from the author's rain work of 11–13 October 2026, done in ChatGPT and recovered on 17 October (the
 assessment of that day on the research drive, `integration-history-review-2026-10-17/assessment.md`, finding F02). Its
@@ -20,6 +20,7 @@ arriving at the ground by the audio lab [visualization/rain-audio](../../visuali
 | [product.py](product.py) | The product [results/rain_drops.json](results/rain_drops.json), schema `terluna.atmosphere.rain-drops/2` |
 | [arrivals.py](arrivals.py) | The product [results/rain_arrivals.json](results/rain_arrivals.json), schema `terluna.atmosphere.rain-arrivals/1`: the drops arriving at the ground |
 | [rates.py](rates.py) | The product [results/rain_rates.json](results/rain_rates.json), schema `terluna.atmosphere.rain-rates/1`: the GCM's rain rates on each target's land |
+| [breakup.py](breakup.py) | The product [results/rain_breakup.json](results/rain_breakup.json), schema `terluna.atmosphere.rain-breakup/1`: the size scale of raindrop breakup at lunar gravity and the lunar values of CM1's rain limits |
 | [targets.py](targets.py) | The three target climates as the products read them from the climate targets' product: the hot world, the resort at 301 K and the lock, and that product's binding in the tree |
 | [sources.json](sources.json) | The equations' and data's sources, with how far each was read |
 | [vendor/rainprops/](vendor/rainprops/) | Loftus's rainprops at commit `e2df9c2` (MIT licence): the code the solver adapts, with the Gunn–Kinzer fall speeds, unmodified, each file pinned in its `PROVENANCE.json` |
@@ -28,6 +29,7 @@ arriving at the ground by the audio lab [visualization/rain-audio](../../visuali
 python -m atmosphere.rain.product                 # about three and a half minutes on one thread
 python -m atmosphere.rain.arrivals                # about two minutes
 climate/gcm/.venv/bin/python -m atmosphere.rain.rates   # about ten seconds; reads the GCM's output with netCDF4
+python -m atmosphere.rain.breakup                 # about a minute
 python -m pytest atmosphere/tests/test_rain_*.py
 ```
 
@@ -230,6 +232,59 @@ drizzle survives longer falls than it would; its 1–3 mm drops lose 9–13% mor
 rain evaporates somewhat too fast. How the two offset in CM1's 85% loss depends on how its rain divides between
 drizzle and millimetre drops; a CM1 run with a size-dependent law would measure it. CM1 was not rerun.
 
+### Breakup at lunar gravity
+
+CM1's Morrison scheme limits its rain by Earth's breakup (`model_closures` in
+[shared/constants.json](../../shared/constants.json)). Rain's self-collection is offset by collisional breakup above a
+mean diameter of 0.30 mm by the factor 2 − exp(2300 m⁻¹ (D_m − 0.30 mm)) (Verlinde and Cotton 1993), so the mean
+diameter of its exponential spectrum settles at 0.60 mm; that diameter is capped at 2.8 mm, and the rain's mean fall
+speeds at 9.1 m/s in the scheme's reference air. In CM1's lunar runs 77–95% of the rain's mass sits at mean diameters
+of 0.45–0.80 mm, at Earth's equilibrium ([climate/crm](../../climate/crm/README.md#rain-limits-at-lunar-gravity)).
+
+Two colliding drops coalesce or come apart by the collision's Weber number, its kinetic energy over the surface energy
+of the coalesced drop, coalescing with efficiency exp(−1.15 We) (Straub et al. 2010). `breakup.py` takes every pair of
+drops in Morrison's spectra on Earth, from 0.1 mm to the stability screen, and finds the size factor at which a pair of
+the same size ratio in the other world's air collides at the same Weber number, with the solver's terminal speeds; the
+factors, weighted by the breakup each Earth pair carries, give the scale of the breakup law. At Earth's air density
+the scale is the ratio of capillary lengths √(σ/(ρ_w g)), 2.457 at lunar gravity: within 0.2% for the spectrum at the
+equilibrium and 4% for the one at the cutoff, at lunar gravity and at 3.7 m/s². Denser air slows the drops and
+softens their collisions, and the scale grows as the density ratio to the power α:
+
+| Scale over the capillary ratio | Cutoff, 0.30 mm | Equilibrium, 0.60 mm | α at the equilibrium |
+|---|---|---|---|
+| Moon's gravity, Earth's density | 0.957 | 1.002 | |
+| Moon's gravity, 1.2 times Earth's density (the Moon's air) | 1.045 | 1.131 | 0.687 |
+| Moon's gravity, 1.5 times | 1.179 | 1.277 | 0.61 |
+| 3.7 m/s², Earth's density; 1.2 times | 0.974; 1.059 | 0.999; 1.131 | 0.69 |
+| Earth's gravity, 1.2 times | 1.082 | 1.136 | 0.71 |
+
+In the Moon's air the scale is 2.78 at the equilibrium (2.50–3.30 across the breaking pairs, 10th to 90th
+percentile) and 2.57 at the cutoff, within 1% for the three targets and from 2 m to the cloud base. For 30% of the
+breakup at the equilibrium Earth's collisions are harder than any the Moon's drops make below their stability screen;
+those pairs count at the Moon's hardest, so 2.78 is a lower bound. Weighted by Low and List's (1982) energetic breakup
+in place of Straub's law, the scale is 2.86. Read with its dimensional constants at lunar sizes and speeds, Low and
+List's fit would make lunar drops break at 1.74 times Earth's sizes: its exponent carries an absolute length of about
+5 mm, which on Earth's terminal speeds stands in for the Weber number, and it was measured on drops of 0.4–4.6 mm.
+
+The lunar limits take the equilibrium's scale for both of the breakup law's lengths, keeping its shape, as
+√(9.81/g) (ρ_air/ρ_air,Earth)^0.687 at 1.2 times Earth's density; the cap follows the largest drop that holds
+together, the stability screen, which grows with the capillary length alone; the fall-speed cap follows that drop's
+terminal speed, which under the same similarity scales as (g/9.81)^¼, 0.638, where the solver gives 0.629 in the same
+air:
+
+| | CM1 (Earth) | Moon, design air |
+|---|---|---|
+| Breakup cutoff | 0.30 mm | 0.84 mm |
+| Breakup rate | 2,300 /m | 826 /m |
+| Mean diameter where breakup balances | 0.60 mm | 1.68 mm |
+| Cap on the mean diameter | 2.8 mm | 6.88 mm |
+| Cap on the mean fall speeds, reference air | 9.1 m/s (CM1's lunar builds: 3.09 m/s) | 5.80 m/s |
+
+At 1.68 mm Morrison's mass-weighted fall speed in the Moon's air at 2 m is 4.47 m/s, and the solver's for the same
+spectrum 4.21 m/s; the cap the lunar builds carried, 2.70 m/s there, would hold it below both. These values are a
+runnable calculation of the similarity: no laboratory has measured lunar collisions, and CM1 has not run with them
+beyond a smoke test ([climate/crm](../../climate/crm/README.md#rain-limits-at-lunar-gravity)).
+
 ## Assumptions and limits
 
 - **The drops.** Pure liquid water in the equilibrium shape, held during acceleration, with near-ambient liquid
@@ -237,7 +292,8 @@ drizzle and millimetre drops; a CM1 run with a size-dependent law would measure 
   the air, takes nitrogen's transport properties. The ventilation law was measured below a Reynolds number of 2,600,
   which lunar drops stay under to about 7 mm and Earth's to about 4.5 mm.
 - **Independent drops.** Each drop falls alone; the encounter diagnostic shows that on the Moon collisions,
-  coalescence and breakup would reshape the spectrum. The stability screen is a size scale for breakup.
+  coalescence and breakup would reshape the spectrum. The stability screen is a size scale for breakup, and
+  `breakup.py` carries Earth's collision outcomes to the Moon by their Weber number, which no lunar measurement checks.
 - **The canopy and the impacts.** The recovered work's impact descriptors and canopy water ledger
   (`physical_event_interface.py`) wait for `biosphere/canopy`, whose interception, storage and drip release they need;
   until then the rain's sound takes an assumed share of the water as drips (rain_arrivals.json gives their falls).

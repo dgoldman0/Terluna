@@ -1,0 +1,107 @@
+{
+ "schema": "terluna.climate.crm-rain-sizes/1",
+ "case": "box_0e_small_lunar_rain_day29",
+ "purpose": "box_0e_small's inputs as written, on the rain-limits build with the lunar rain limits of atmosphere/rain/results/rain_breakup.json, writing the heat and vapour budgets; the second lunar day again from box_0e_small's day-29.5 restart",
+ "build": "moon_omp_rain_limits",
+ "executable_sha256": "1dc13187bb93677a",
+ "evidence": "CM1's own state: rain mass and number in every 3-D output of the span, read as Morrison's exponential spectrum. It says where the scheme puts the rain's sizes under its limits; it measures no drop.",
+ "reading_rule": "Diameters in mm. mass_share gives the share of the rain's mass (grid cells with rain above 1e-8 kg/kg, weighted by rain mass per square metre) whose mean diameter 1/lambda lies in each bin of edges_mm. limits are the case's own (cm1_run.rain_limits). at_cap is the share within 0.5% of the cap on the mean diameter; held_cells describes those cells and all rain cells by rain content (g/m3) and height (km above the model's ground).",
+ "span_days": [
+  29.75,
+  59.125
+ ],
+ "snapshots": 236,
+ "stride": 1,
+ "limits": {
+  "breakup_cutoff_m": 0.8339874370030491,
+  "breakup_rate_per_m": 827350.5923296986,
+  "equilibrium_m": 1.6717788001640326,
+  "mean_diameter_cap_m": 6.881296297537753,
+  "fall_speed_cap_m_s": 5.804773506060524
+ },
+ "edges_mm": [
+  0.0,
+  0.02,
+  0.05,
+  0.1,
+  0.2,
+  0.3,
+  0.45,
+  0.6,
+  0.8,
+  1.0,
+  1.25,
+  1.5,
+  1.75,
+  2.0,
+  2.5,
+  3.0,
+  4.0,
+  5.0,
+  6.0,
+  8.0
+ ],
+ "mass_share": [
+  2.185390006617339e-05,
+  0.0002510156429128609,
+  0.001592627963244382,
+  0.008656963086988729,
+  0.013313357320557986,
+  0.027420338415588497,
+  0.04231398725636025,
+  0.07298284707153133,
+  0.07994087394040676,
+  0.11385585888559513,
+  0.1634677287644561,
+  0.4329412729893343,
+  0.028140874698786175,
+  0.009711079664931212,
+  0.0029264645650508153,
+  0.0016298206964427367,
+  0.00031863129198015896,
+  6.882827555169359e-05,
+  0.0004455755702159459,
+  0.0
+ ],
+ "mass_weighted_mean_diameter_mm": 1.314671287884663,
+ "mass_median_mean_diameter_mm": 1.472672913223505,
+ "beyond_cutoff": 0.8202759637521433,
+ "beyond_equilibrium": 0.16684721888544052,
+ "at_cap": 0.0004254987844123835,
+ "rain_water_path_kg_m2": 0.17252229145313078,
+ "held_cells": {
+  "count": 4798,
+  "share_of_rain_cells": 0.0023095421927076614,
+  "rain_g_m3": {
+   "median": 5.5719145166222006e-05,
+   "p10": 1.7149979612440802e-05,
+   "p90": 0.00036603768239729106
+  },
+  "height_km": {
+   "median": 1.1663200000000002,
+   "p10": 0.15,
+   "p90": 6.193984
+  }
+ },
+ "rain_cells": {
+  "count": 2077468,
+  "rain_g_m3": {
+   "median": 0.0005348389968276024,
+   "p10": 2.831148412951734e-05,
+   "p90": 0.04882771521806717
+  },
+  "height_km": {
+   "median": 2.9236215000000003,
+   "p10": 0.25,
+   "p90": 14.908207999999998
+  }
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/rain_sizes.py": "f869b4742034aa51",
+   "crm/ring_analysis.py": "cee51ef7e823cee3",
+   "crm/cm1_run.py": "39018b1596cf01de"
+  }
+ }
+}

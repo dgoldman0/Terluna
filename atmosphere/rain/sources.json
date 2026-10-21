@@ -95,7 +95,7 @@
    "key": "cm1_morrison",
    "citation": "Bryan GH, CM1 release 22.0, src/morrison.F: the Morrison double-moment microphysics (Morrison H, Thompson G, Tatarskii V 2009, Monthly Weather Review 137, 991-1007)",
    "doi_or_url": "https://www2.mmm.ucar.edu/people/bryan/cm1/",
-   "use": "the rain's fall-speed law V = 841.99667 (rhosu/rho)^0.54 D^0.8 and its 9.1 m/s cap on mean fall speeds, which the CM1 check compares, recorded in shared/constants.json (model_closures.cm1_r22_morrison_rain) with the lines and the file's SHA-256",
+   "use": "the rain's fall-speed law V = 841.99667 (rhosu/rho)^0.54 D^0.8 and its 9.1 m/s cap on mean fall speeds, which the CM1 check compares, recorded in shared/constants.json (model_closures.cm1_r22_morrison_rain) with the lines and the file's SHA-256; and the rain's size limits that breakup.py carries to lunar gravity: the breakup cutoff, its law 2 - exp(2300 (1/lambda - D_b)) on self-collection and the 2.8 mm cap on 1/lambda (model_closures.cm1_r22_morrison_rain_limits); the code credits the breakup law to Verlinde and Cotton 1993",
    "access": "read in the pinned CM1 source on the research drive; the paper not read"
   },
   {
@@ -109,8 +109,8 @@
    "key": "low_list1982",
    "citation": "Low TB, List R 1982, Collision, coalescence and breakup of raindrops. Part I, Journal of the Atmospheric Sciences 39, 1591-1606",
    "doi_or_url": "https://doi.org/10.1175/1520-0469(1982)039<1591:CCABOR>2.0.CO;2",
-   "use": "the distinction between collision, coalescence and breakup that the encounter diagnostic leaves unresolved",
-   "access": "abstract, in the rain work of 11 October 2026"
+   "use": "the distinction between collision, coalescence and breakup that the encounter diagnostic leaves unresolved; breakup.py: their coalescence efficiency a (1 + p)^-2 exp(-b sigma E_T^2 / S_c) with a = 0.778, b = 2.61e6 J^-2 m^2 and none above E_T = 5 uJ, fitted to pairs of 0.395-4.6 mm and 0.395-1.8 mm, as weights beside Straub et al.'s and in its literal reading at lunar sizes",
+   "access": "abstract, in the rain work of 11 October 2026; the formula and its coefficients as the bin-model literature reproduces them, not checked against the paper in the breakup work of 19 October 2026"
   },
   {
    "key": "hu_srivastava1995",
@@ -118,6 +118,20 @@
    "doi_or_url": "https://doi.org/10.1175/1520-0469(1995)052<1761:EORSDB>2.0.CO;2",
    "use": "heavy rain approaching a collisional equilibrium of sizes, the process the independent drops leave out",
    "access": "abstract, in the rain work of 11 October 2026"
+  },
+  {
+   "key": "straub2010",
+   "citation": "Straub W, Beheng KD, Seifert A, Schlottke J, Weigand B 2010, Numerical investigation of collision-induced breakup of raindrops. Part II: Parameterizations of coalescence efficiencies and fragment size distributions, Journal of the Atmospheric Sciences 67, 576-588",
+   "doi_or_url": "",
+   "use": "breakup.py: raindrop pairs coalesce with efficiency exp(-1.15 We), We the collision kinetic energy over the coalesced drop's surface energy, the law that carries Earth's breakup to lunar gravity by the Weber number",
+   "access": "the abstract's statement of the law, found by a web search in the breakup work of 19 October 2026; the paper not read, and the Weber number's definition as CKE / S_c taken from the literature that cites it; its DOI not checked (part I is journals.ametsoc.org/view/journals/atsc/67/3/2009jas3174.1.xml)"
+  },
+  {
+   "key": "verlinde_cotton1993",
+   "citation": "Verlinde J, Cotton WR 1993, Fitting microphysical observations of nonsteady convective clouds to a numerical model: an application of the adjoint technique of data assimilation to a kinematic model, Monthly Weather Review 121, 2776-2793",
+   "doi_or_url": "",
+   "use": "the breakup law in Morrison's self-collection, as CM1's morrison.F credits it",
+   "access": "through the CM1 source; the paper not read; its DOI not checked"
   }
  ]
 }
