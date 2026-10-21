@@ -367,10 +367,13 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    1–3 km below the freezing level at 29.2 km. Methane's chemistry in the middle atmosphere's column is answered without
    building it (register, 21 October): behind the titania stack nothing breaks methane below the base. The GCM's rain
    evaporation is measured (domain/climate 05b1384): PlaSim evaporates 29% of its falling rain, CM1's box with the lunar
-   limits 48%, matched at gamma 0.026, which grows the low cloud and cools the Moon. Next: one design run with the cold
-   cloud's factors, which the author adopted, and the rain evaporation the author chooses, followed by the longwave
-   refit and the settling and exobase checks. The cover question stays on hold. A CM1 ring that makes its own upper
-   vapour comes later.
+   limits 48%, matched at gamma 0.026, which grows the low cloud and cools the Moon. Before the design run takes a
+   constant, the author chose to test it: a pair of CM1 boxes on the design climate, over the Near-side Sea at 5° S,
+   45° W and over the land at 0° E, each forced by the GCM's own column (domain/climate 5a44e5e). Over that sea PlaSim
+   evaporates more of its rain than at the land box, about 60% at 0.026 against the box's 48%. Then one design run with
+   the cold cloud's factors, which the author adopted, and the rain evaporation the pair supports, followed by the
+   longwave refit and the settling and exobase checks. The cover question stays on hold. A CM1 ring that makes its own
+   upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
    mixing_forms), now the aquatic programme's turbulence columns first, with a basin-scale model of one crater lake
@@ -392,13 +395,13 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    ([register](decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)), by the method recovered from
    ChatGPT's follow-up: empty domains as matched controls, gaps from 645 m down to 50 m, podium and infill layouts, a
    diagonal wind, neutral and stable air and grid checks, forced by the design case's climate.
-11. **CM1's next run** takes the size-dependent lunar rain law from atmosphere/rain, the solver's slowing by gravity
-   from 5.3 at 0.1 mm to 1.9 at 6 mm, so that its drizzle falls more slowly and its large drops faster than under
-   its present single factor of 2.94, with self-collection's lunar rate beside it. The lunar rain limits are in and
-   tested (domain/atmosphere 21529d2): over the small box's second lunar day they warm its air at 2 m by 1.5 K against
-   a spread of 0.13 K between realizations, nearly double the rain reaching the ground and cut the share of falling
-   water that evaporates from 86% to 48%. Autoconversion and accretion remain Earth fits. CM1's radiation call is
-   sound: it stores its radiative tendencies at constant volume, as the analyses now read them (fe49ad9).
+11. **CM1's rain law** is built (domain/climate 5a44e5e): Morrison's rain falls by the single-drop solver's own moments,
+   which no single power law follows through drizzle and large drops, with self-collection's lunar rate, 2.92 m³/kg/s,
+   from the collision kernels; the pair of boxes in item 5 is its first run. The lunar rain limits are in and tested
+   (domain/atmosphere 21529d2): over the small box's second lunar day they warm its air at 2 m by 1.5 K against a spread
+   of 0.13 K between realizations, nearly double the rain reaching the ground and cut the share of falling water that
+   evaporates from 86% to 48%. Autoconversion and accretion remain Earth fits. CM1's radiation call is sound: it stores
+   its radiative tendencies at constant volume, as the analyses now read them (fe49ad9).
 12. **The biomes' nitrogen and the dark night** as biological requirements: the biomes' nitrogen ending in N2,
    biological fixation, and the light that dark-night organisms tolerate (biosphere, lunar-cycle ecology).
 13. **The crown as a lightning conductor.** The tower's induced charge and upward leaders in the saved storm fields,
