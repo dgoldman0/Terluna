@@ -120,6 +120,30 @@ A case's executable changes only when its build is rebuilt (`build moon_omp`
 replaces the one every such case links to), so the runner records the executable
 and thread count of every segment.
 
+**CM1's simple boundary layer gave the air its density times the surface's fluxes** (found 2026-10-21 in the Near-side
+Sea box's water budget; fixed with the author's go-ahead of that day). Every ring and box here runs CM1's simple
+boundary-layer scheme (`ipbl` 2, the Louis-type scheme of Bryan and Rotunno 2009), 51 of the 59 runs on the research
+drive. Its driver (`turb.F`, block `dobr09`) takes its tendencies from the routines that return the change of the
+density-weighted field, rho times the change per second. CM1's ordinary turbulence path divides that density out
+(`turbtend.F`), but this driver hands the tendencies to `solve1.F`, which adds them as changes of potential
+temperature, the mixing ratios and the wind. So the air took rho times what the surface passed it:
+- in the sea box, 1.35 times the sea's evaporation;
+- in the earlier land box, 1.32 times the evaporation and 1.46–1.51 times the sensible heat.
+
+The air at the ground weighs 1.38 kg/m³ in the Moon's 1.2 atm, and the surface drag was inflated by the same factor.
+The water budget closes only with the inflated term, to 0.01 mm/day. The same code stands in the cm1r22.0 release and
+in NCAR's current main branch (read on 21 October).
+
+The build `moon_omp_rain_law_pbl` divides the density out where the driver's block ends (`PBL_DENSITY_PATCH` in
+[cm1_run.py](cm1_run.py)). In its trials the boundary layer's water came to 0.995–1.000 times the evaporation. CM1's
+averaging of the scheme's wind tendencies from scalar points, which this scheme fills at u and v points, is left as
+CM1 has it. Every earlier ring and box put 30–50% more of its surface's heat and water into its air than its surface
+fluxes say, and dragged its low wind harder. Their near-surface air carries that bias in its temperature, humidity,
+fog and wind at 10 m, and so do the products read from them, among them the wave study's winds
+([wave_coverage.py](wave_coverage.py)), the comfort tables ([ring_comfort.py](ring_comfort.py)) and the storms the
+electricity study reads. A fixed rerun of a reference case has yet to size the effect.
+[box_budget.py](box_budget.py) now reports the boundary layer's water and heat over the surface's for every box.
+
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_o3 moon_omp_o3_strict
 climate/gcm/.venv/bin/python -m climate.crm.build_check ring_equator moon_omp_o3 moon_omp_o3_strict --threads 1    # about 25 minutes
@@ -1411,19 +1435,23 @@ against the control, W/m², positive warming:
 
 | Layer | Microphysics | Of it: rain's evaporation; condensation | Turbulence | Circulation | Radiation | Storage |
 |---|---|---|---|---|---|---|
-| 0–1.8 km | +8.2 | +8.2; −6.1 | −12.7 | +8.8 | −1.4 | +2.1 |
-| 1.8–6.5 km | +13.9 | +25.1; −14.7 | +2.5 | −11.7 | −1.9 | +6.1 |
-| 6.5–13.7 km | −1.8 | +40.3; −45.4 | +7.3 | +0.4 | −0.4 | +5.2 |
-| 13.7–23 km | +15.3 | +48.4; −30.1 | +0.4 | −1.6 | +0.2 | +1.2 |
-| Whole column | +29.8 | +135.0; −124.4 | −1.9 | −10.8 | −3.4 | +19.1 |
+| 0–1.8 km | +8.2 | +8.2; −6.1 | −12.3 | +8.3 | −1.4 | +2.1 |
+| 1.8–6.5 km | +13.9 | +25.1; −14.7 | −0.2 | −9.0 | −1.9 | +6.1 |
+| 6.5–13.7 km | −1.8 | +40.3; −45.4 | +1.8 | +5.9 | −0.4 | +5.2 |
+| 13.7–23 km | +15.3 | +48.4; −30.1 | +0.2 | −1.4 | +0.2 | +1.2 |
+| Whole column | +29.8 | +135.0; −124.4 | −10.3 | −2.4 | −3.4 | +19.1 |
 
-The spread's differences stay within 3 W/m² in every term and layer.
+The spread's differences stay within 3.3 W/m² in every term and layer. Turbulence is the boundary layer and
+dissipation, and circulation the box's own transport with its advection's implicit diffusion. Until 21 October the
+tool put the implicit diffusion with the turbulence. CM1's slot for it also carries the imposed sinking's heating, and
+its vertical advection has that heating taken out (`adv.F`), so the two columns differed from these by up to
+11 W/m² (box_budget schema 2).
 
 - **Over the whole column** the rain's evaporation cools 135 W/m² less and condensation heats 124 W/m² less; the net,
   about 30 W/m², is the heat of the extra rain that reaches the ground.
 - **In the lowest 1.8 km** the rain's evaporation cools the air 8.2 W/m² less. The warmer air takes 6.6 W/m² less
-  sensible heat from the ground, which evaporates 8.2 W/m² more, and its turbulence brings it 12.7 W/m² less in all;
-  its own circulation brings 8.8 more.
+  sensible heat from the ground, which evaporates 8.2 W/m² more, and its turbulence brings it 12.3 W/m² less in all;
+  its own circulation brings 8.3 more.
 - **So the air at 2 m runs 1.5 K warmer and 0.9 g/kg moister**, most by night (+1.6 K, the dewpoint +1.5 K), and the
   low cloud reaches the ground more often while the fog below 200 m holds at 30%.
 - **Against the GCM** at 0° E, which forced this box before its corrections: the box's air as the GCM measures it,
@@ -1520,9 +1548,10 @@ nearest land; its twin over the land at 0° E. Both take the lunar rain limits a
 **Forcing from the GCM alone** ([gcm_site.py](gcm_site.py)). No ring passes either site on the design climate, so each
 box takes its forcing from the GCM's column there: the cells within 5.6° of latitude and 8.5° of longitude of the site
 that have its surface, six sea cells at sea level and four land cells 0.7–1.3 km up. It takes the GCM's mean air
-there as the reference, held from 8 km as the rings' is, and the GCM's mean vertical wind, which CM1 applies to its
-own air up to 16 km. It also takes the heat and vapour the GCM's circulation brings by local time, prescribed through
-the table the rings' day-night forcing used (`var11`), up to 16 km. These come from the GCM's own budget, the storage
+there as the reference and the GCM's mean vertical wind, which CM1 applies to its own air through the column. It also
+takes the heat and vapour the GCM's circulation brings by local time, prescribed through the table the rings'
+day-night forcing used (`var11`), through the column. The box's air is held to the GCM's only above the top of the
+GCM's convection, and the first two attempts differed here (below). These come from the GCM's own budget, the storage
 less the physics, and not from differences of its winds and humidity. The Moon's column at 301 K holds about 220 kg/m²
 of vapour, so its circulation moves water through a column about a hundred times as fast as the column keeps it, and
 the net at a site is a residual of about a millimetre a day. At the Near-side Sea, centred and spectral differences of
@@ -1549,8 +1578,12 @@ the 3-day means brought the column +0.1 to +2.5 mm/day, where the GCM's rain les
   and first four harmonics, the means' harmonics divided by the damping a 36° mean gives them.
 
 CM1 applies the mean vertical wind to its own air, so the table holds the circulation's heating and moistening with
-the mean wind's advection of the box's starting air added back, on CM1's own levels; at the start the two cancel
-exactly, and the box's own advection follows its air as it changes. Over the day the GCM's circulation cools and
+the mean wind's advection of the box's starting air added back, on CM1's own levels. At the start the two cancel to
+the accuracy of their differences (centred in the table, third-order upstream in CM1), and the box's own advection
+follows its air as it changes. The GCM holds its tendencies as layer values between half levels, so each layer's is
+laid on CM1's levels by pressure, linear within the layer about its value, its slope the monotonized-central limit of
+its neighbours' (flat in the top and bottom layers). Every layer keeps its total; the 2% of the column's mass above
+CM1's 150 km top is left out. Over the day the GCM's circulation cools and
 dries the lowest kilometre at both sites, by 0.12 K and 0.43 g/kg a day over the sea and 0.24 K and 0.52 g/kg a day
 over the land: it carries the evaporation and the ground's heat away. The box cannot make the planet's day-night
 circulation, whose wind turns with the Sun: over the sea the GCM's wind 0.9 km up blows 3.7 m/s toward the east
@@ -1569,26 +1602,93 @@ it did not rain. It was stopped at day 15 and the pair began again with the tabl
 local time. With them the sea evaporated 78 W/m² by day 7; on the Moon, where the dry adiabat cools 1.6 K a
 kilometre, the morning air at 73% relative humidity still condenses 4–5 km up.
 
-**The boxes** (cases `box_near_side_sea` and `box_0e_design`, on the build `moon_omp_rain_law`). They have the small
-box's size and spacing, 32 × 32 columns 6.0 km apart. The sea is held at the GCM's 302.0 K. The land is the
+**The second attempt: the nudging stood in for the convection** (kept as `crm-runs/box_near_side_sea_nudged`, its 59
+days complete; [box_budget_box_near_side_sea_nudged.json](../results/crm/box_budget_box_near_side_sea_nudged.json)).
+It took the table and the mean wind to 16 km, as the rings' day-night forcing does, with the layers' values
+interpolated in height and the lowest held to the ground, and held its air to the GCM's from 8 km, fully from 16 km.
+Over its second lunar day the sea box rained 0.06 mm/day against the GCM's 2.72 at the site. Its water and heat
+budgets, set against the GCM's own budget at the site, account for the gap. CM1's vapour budget closes to
+0.01 mm/day. In mm/day:
+
+| Over the second lunar day | Box | GCM at the site |
+|---|---|---|
+| Water into the air from the surface | 2.99 (the surface flux 2.23, the boundary layer's density above) | 3.51 |
+| Removed by the forcing: the table; the mean ascent | 2.13; 0.49 | 0.78, the circulation's net |
+| Removed by the nudging, all of it at 8–16 km | 0.35 | none |
+| Change in the column's water | −0.04 | 0 |
+| Rain at the ground | 0.06 | 2.72 |
+
+- **Above 16 km the nudging did the convection's work.** The air there holds 76% of the column's mass. Radiation cooled
+  it by 85 W/m², the nudging put back 83.5 W/m², and the box's clouds added nothing. Over the whole column the nudging
+  supplied 89 of the 107 W/m² radiation removed, so the box needed about 2 W/m² of latent heat, which is the 0.06
+  mm/day it rained. In the GCM the latent heat of its rain does that work, 79 W/m². Its convection scheme forms 3.5 of
+  the 4.0 mm/day formed at the site, 3.2 of it between 18 and 72 km. Its circulation takes 35.5 W/m² from the air above
+  16 km, which the box's forcing left out.
+- **The box's convection stayed shallow.** Its clouds stayed below 10 km, its condensate peaking at 7 km under 1%
+  cover. At lunar gravity that is the trade-cumulus regime, and it formed 0.41 mm/day of condensate where the GCM forms
+  4.0.
+- **Below 16 km the water left through the forcing.** The mean ascent moistened the starting air by 0.80 mm/day but
+  dried the box's own air by 0.49. The box's shallow clouds and boundary layer had carried water from below 5 km up to
+  6–10 km, where the GCM's mean flow sinks. Interpolating the GCM's layer values in height left the table's column
+  0.55 mm/day drier than the GCM's.
+- **The earlier land box shows the same shape more mildly.** It was forced by the GCM before its corrections. Its
+  nudging supplied 50 of the 90 W/m² its radiation removed and took 5.3 mm/day of water back from the 4.2 the mean
+  ascent brought ([box_budget_box_0e_small_lunar_rain_day29.json](../results/crm/box_budget_box_0e_small_lunar_rain_day29.json)).
+  It rained 63 mm a lunar day against 180 in the GCM that forced it.
+- **Two published results frame it.** Randall and Cripe (1999, *JGR* 104, D20) set out the ways to force a column
+  model: prescribe the whole advective tendency; prescribe the sideways tendencies and let the observed vertical
+  motion act on the model's own profiles; or relax the model toward observed soundings. These boxes combine all three,
+  and the second, the mean ascent, turned against them. In the EUROCS study (Derbyshire and others 2004, *QJRMS* 130),
+  two cloud-resolving models gave deep, raining convection in moister free tropospheres and only shallow convection in
+  the driest. The study names mixing between cloud and surrounding air as the mechanism behind many differences among
+  convection schemes. PlaSim's Kuo scheme lifts an undiluted parcel from the surface and rains a share of the column's
+  moisture supply wherever that parcel is buoyant (`rainmod.f90`).
+
+So the second attempt's 53% of falling water evaporated over that day (2.3 mm on the way down, 2.0 mm reaching the
+sea, from 12.1 mm condensed; [box_box_near_side_sea_nudged.json](../results/crm/box_box_near_side_sea_nudged.json))
+came from clouds below 10 km. Its rain fell a fraction of the way the GCM's falls, so the share tests nothing about
+gamma. The small box's 48% stands with the same doubt.
+
+**The pair as it runs now** (the author's go-ahead of 21 October). Three changes:
+1. **The build** `moon_omp_rain_law_pbl` divides the density out of the boundary layer's tendencies.
+2. **The forcing** reaches CM1's top, each GCM layer's total kept (above).
+3. **The box's temperature and vapour** are held to the GCM's only above the top of the GCM's convection.
+
+The convection top is the GCM's lowest level above which its convection forms less than 1% of its convective rain:
+72 km at both sites, the sea's convection forming 99.7% of that rain at or below it. The air is held from the GCM's
+next level up, 93 km, fully from its top level at 129 km, where CM1's own damping begins at 115.5 km. The GCM resolves
+no tropopause to hold from: its temperature falls through its top level, to 166 K at 129 km at both sites, and its
+lapse never falls below 0.8 K/km. The convection's top stands in for the tropopause. The wind is still nudged by
+local time throughout. The mean ascent now acts above 16 km too: 3.6 mm/s at 40 km over the sea and 6.7 mm/s over the
+land.
+
+**The boxes** (cases `box_near_side_sea` and `box_0e_design`, on the build `moon_omp_rain_law_pbl`). They have the
+small box's size and spacing, 32 × 32 columns 6.0 km apart. The sea is held at the GCM's 302.0 K. The land is the
 placeholder land at the GCM's wetness, 0.83 (the 0.90 class, as box_0e's), at the ground's own height, with heights
 above it. Both start at local sunrise and run two lunar days, the second analysed. They carry the curved air's
 twilight from the 301 K ledger and write the heat and vapour budgets.
 
 **The trials** (21 October; `crm-runs/trial_site_boxes/` on the research drive). Each case, copied, ran three model
-hours on two threads beside the GCM's runs, in about half a minute. Both ran normally and wrote their four outputs, with
-every field the analyses read present and finite and the 22 fields of their heat, vapour and radiation budgets. Their
-logs show the rain limits, the rain law's 301 rows and rate, the table, the vertical wind falling to zero above 16 km
-and the twilight's 167 elevations; with the fixes the land box's showed the table's 111 levels and all 72 nudging
-windows read. The pair runs one box after the other on four threads, with half an hour's rest between.
+hours on two threads, in about half a minute. Every trial ran normally and wrote its four outputs, with every field
+the analyses read present and finite and the 22 fields of their heat, vapour and radiation budgets.
+- **The first trials' logs** show the rain limits, the rain law's 301 rows and rate, the table, the vertical wind
+  falling to zero above 16 km and the twilight's 167 elevations. With the split's fixes, the land box's showed the
+  table's 111 levels and all 72 nudging windows read.
+- **The second trials**, with the three changes, ran in 29 and 26 s. The boundary layer's water came to 0.995–1.000
+  times the evaporation, against 1.32–1.35 before. Its heat came to 0.90–1.19 times the sensible heat, which is only
+  3–4 W/m² at sunrise. The namelists hold the air from 93.1 and 92.8 km, and the vertical wind reads through to the top.
+
+The pair runs one box after the other on four threads, with half an hour's rest between.
 
 ```sh
 /media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
-climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about a minute
+climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about ten seconds
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law_pbl                 # three minutes
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_design
 python3 /media/projectspace/terluna-research/crm-runs/trial_site_boxes/trial.py run|check
 /media/projectspace/terluna-research/session-tools/run_site_boxes.sh             # the pair; rerun to resume
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_nudged --from-day 29.5   # the second attempt
 ```
 
 ## A box over the highlands

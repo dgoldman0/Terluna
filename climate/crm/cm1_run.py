@@ -1302,6 +1302,50 @@ RAIN_LAW_PATCHES = [
 ]
 BUILDS['moon_omp_rain_law'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_rain_law'] = RAIN_LIMITS_PATCHES + RAIN_LAW_PATCHES + [TWILIGHT_PATCH]
+# CM1's simple boundary layer (ipbl = 2, Bryan and Rotunno 2009), found 2026-10-21 in the Near-side Sea box's water
+# budget and fixed with the author's go-ahead of that day. Its driver (turb.F, block dobr09) takes its tendencies from
+# turbsz, turbuz and turbvz, which return the tendency of the density-weighted field (rho times the change per
+# second); the ordinary turbulence path divides the density out (turbtend.F: times rr, or 1/rho at u and v points),
+# but this one hands them to solve1.F, which adds thpten, qvpten, qcpten, qipten, upten and vpten as tendencies of
+# theta, the mixing ratios and the wind. Every run with ipbl = 2 therefore gave its air rho times the heat, water and
+# drag its surface passed: 1.32-1.35 times the evaporation and 1.46-1.51 times the sensible heat in the boxes, where the
+# air at the ground weighs 1.38 kg/m3. The same code stands in the cm1r22.0 release and NCAR's main branch. The patch
+# divides the density out where the driver's block ends; solve1.F's averaging of upten and vpten from scalar points,
+# which this scheme fills at u and v points, is left as CM1 has it.
+PBL_DENSITY_MARKER = 'Terluna: the simple PBL tendencies per unit mass'
+PBL_DENSITY_PATCH = ('turb.F', PBL_DENSITY_MARKER, [
+    ('      ENDIF\n\n      endif  dobr09\n', """      ENDIF
+
+      ! Terluna: the simple PBL tendencies per unit mass. turbsz, turbuz and turbvz return rho times the change per
+      ! second, as turbtend.F's own path expects before it divides by the density; solve1.F adds these as tendencies
+      ! of theta, the mixing ratios and the wind, so the density is divided out here (at u and v points for the wind).
+      !$omp parallel do default(shared)   &
+      !$omp private(i,j,k)
+      do k=1,nk
+        do j=1,nj
+        do i=1,ni
+          thpten(i,j,k) = thpten(i,j,k)*rr(i,j,k)
+          qvpten(i,j,k) = qvpten(i,j,k)*rr(i,j,k)
+          qcpten(i,j,k) = qcpten(i,j,k)*rr(i,j,k)
+          qipten(i,j,k) = qipten(i,j,k)*rr(i,j,k)
+        enddo
+        enddo
+        do j=1,nj
+        do i=1,ni+1
+          upten(i,j,k) = upten(i,j,k)/(0.5*(rho(i-1,j,k)+rho(i,j,k)))
+        enddo
+        enddo
+        do j=1,nj+1
+        do i=1,ni
+          vpten(i,j,k) = vpten(i,j,k)/(0.5*(rho(i,j-1,k)+rho(i,j,k)))
+        enddo
+        enddo
+      enddo
+
+      endif  dobr09
+""", 1)])
+BUILDS['moon_omp_rain_law_pbl'] = BUILDS['moon_omp']
+BUILD_PATCHES['moon_omp_rain_law_pbl'] = RAIN_LIMITS_PATCHES + RAIN_LAW_PATCHES + [TWILIGHT_PATCH, PBL_DENSITY_PATCH]
 RAIN_LAW_PRODUCT = 'atmosphere/rain/results/rain_fall_law.json'
 RAIN_LAW_SCHEMA = 'terluna.atmosphere.rain-fall-law/1'
 RAIN_LAW_KEYS = ('rain_fall_law', 'rain_selfcoll')
@@ -1692,17 +1736,23 @@ for _tag in ('rain_control', 'lunar_rain'):
 # limits and the rain law, where the GCM's rain evaporation is put to the test. One stands over the Near-side Sea at
 # 5 S, 45 W in the southern Procellarum region, open water 120 km from the nearest land; its twin over the land at 0 E,
 # where the small box stood. No ring passes either on the design climate, so each takes its forcing from the GCM's
-# column at its site (gcm_site.py): the GCM's mean air there as the reference held from 8 km, its mean vertical wind,
-# and its own budget of heat and vapour by local time, from the cold-cloud run's branch that writes PlaSim's
-# moistening by process. The sea is held at the GCM's temperature there; the land is the placeholder land at the GCM's
-# wetness, standing at the GCM's ground there, 0.7-1.3 km up, with heights above it. Both have the small box's size
-# and spacing, start at local sunrise and run two lunar days, the second analysed, with the curved air's twilight from
-# the design climate's ledger, and write the heat and vapour budgets for the share of falling rain that evaporates.
+# column at its site (gcm_site.py): the GCM's mean air there as the reference, its mean vertical wind, and its own
+# budget of heat and vapour by local time, from the cold-cloud run's branch that writes PlaSim's moistening by process.
+# The sea is held at the GCM's temperature there; the land is the placeholder land at the GCM's wetness, standing at
+# the GCM's ground there, 0.7-1.3 km up, with heights above it. Both have the small box's size and spacing, start at
+# local sunrise and run two lunar days, the second analysed, with the curved air's twilight from the design climate's
+# ledger, and write the heat and vapour budgets for the share of falling rain that evaporates. The first pair took the
+# forcing to 16 km and held the air to the GCM's from 8 km, fully from 16 km; over the sea the nudging stood in for the
+# GCM's deep convection and the box barely rained (gcm_site.py). With the author's go-ahead of 2026-10-21 the forcing
+# reaches the top, the air is held only above the top of the GCM's convection (nudge held_from 'convection_top': from
+# the GCM's first level above it, fully from the next), the wind still nudged throughout, and the build divides the
+# density out of CM1's simple boundary layer's tendencies (PBL_DENSITY_PATCH).
 GCM_SITE_RUN, GCM_SITE_YEARS = 'A28R_301k_cold_moist', (0, 5)
-SITE_BOX = dict(CASES['ring'], kind='box', nx=32, ny=32, build='moon_omp_rain_law', gcm=(GCM_SITE_RUN, GCM_SITE_YEARS),
+SITE_BOX = dict(CASES['ring'], kind='box', nx=32, ny=32, build='moon_omp_rain_law_pbl', gcm=(GCM_SITE_RUN, GCM_SITE_YEARS),
                 large_scale_w='gcm', day_night='gcm', land_moisture='gcm', land=None, surface_output=True,
                 rain_limits='lunar', rain_law='lunar', twilight='full', twilight_product='twilight_301k.json',
-                namelist=RAIN_TEST_OUTPUT, wind_by_local_time=True, nudge=dict(CASES['ring']['nudge'], ramp_s=0.0))
+                namelist=RAIN_TEST_OUTPUT, wind_by_local_time=True,
+                nudge=dict(CASES['ring']['nudge'], ramp_s=0.0, held_from='convection_top'))
 for _name, _site, _where in (('box_near_side_sea', dict(lat_deg=-5.0, lon_deg=-45.0, surface='sea'),
                               'over the Near-side Sea at 5 S, 45 W'),
                              ('box_0e_design', dict(lat_deg=0.0, lon_deg=0.0, surface='land'), 'over the land at 0 N, 0 E')):
@@ -1710,8 +1760,9 @@ for _name, _site, _where in (('box_near_side_sea', dict(lat_deg=-5.0, lon_deg=-4
         SITE_BOX, site=dict(gcm=True, half_lat_deg=5.6, half_lon_deg=8.5, **_site),
         start_hour_angle_deg=-90.0 - _site['lon_deg'],
         purpose=f'a 3-D box 192 km square {_where} on the design climate (the cold-cloud run at 298.5 K), forced by the '
-                "GCM's column there: its mean air held from 8 km, its mean vertical wind and its own heating and "
-                'moistening by local time; the lunar rain limits and rain law, the twilight, two lunar days from sunrise')
+                "GCM's column there through its whole depth: its mean air held only above the top of the GCM's "
+                'convection, its mean vertical wind and its own heating and moistening by local time; the lunar rain '
+                "limits and rain law, CM1's boundary layer per unit mass, the twilight, two lunar days from sunrise")
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -2306,10 +2357,22 @@ def gcm_box_site(cfg: dict, zw, run, years) -> dict:
                 heading_deg=90.0, lapse_k_m=0.0, day_night=cm1['day_night'], forcing=f)
 
 
+def held_heights(nudge: dict, convection: dict, ztop: float, scale: float) -> dict:
+    """A GCM-fed box's nudging with its air held to the GCM's only above the GCM's convection (gcm_site's
+    convection_top): from the GCM's first level above the convection's top, fully from the next or from the model's
+    top, the heights divided by the case's scale as the namelist multiplies them back."""
+    if convection['held_from_m'] is None:
+        raise ValueError("the GCM's convection reaches its top level; there is no air above it to hold")
+    full = convection['held_fully_from_m'] if convection['held_fully_from_m'] is not None else ztop
+    return dict(nudge, z_start_m=convection['held_from_m'] / scale, z_full_m=full / scale)
+
+
 def gcm_site_record(f: dict) -> dict:
-    """What case.json keeps of a box's GCM site: its cells and outputs, and the budgets behind its table."""
-    return {k: f[k] for k in ('run', 'years', 'site', 'cells', 'cell_heights_m', 'outputs', 'phases', 'harmonics',
-                              'window_deg', 'surface', 'budget')}
+    """What case.json keeps of a box's GCM site: its cells and outputs, the budgets behind its table, its top and where
+    the GCM forms its rain."""
+    return dict({k: f[k] for k in ('run', 'years', 'site', 'cells', 'cell_heights_m', 'outputs', 'phases', 'harmonics',
+                                   'window_deg', 'surface', 'budget', 'convection')},
+                top_m=f['day_night']['top_m'])
 
 
 def parallel_box_site(cfg: dict, zw, nx_ring: int, ring: dict, run=GCM_RUN, years=GCM_YEARS) -> dict:
@@ -2899,6 +2962,8 @@ def setup(name: str) -> Path:
     nz = len(zw) - 1
     track = tilted_path(nx, cfg['tilt_deg'], cfg['node_deg']) if tilted else None
     site = box_site(cfg, zw, nx_ring, run, years) if box else None
+    if box and cfg['nudge'].get('held_from') == 'convection_top':        # the air held above the GCM's convection only
+        cfg = dict(cfg, nudge=held_heights(cfg['nudge'], site['forcing']['convection'], zw[-1], s))
     ref = (gcm_path_reference(track['lat'], track['lon'], cfg['tilt_deg'], zw, run, years) if tilted else site['ref']
            if box else gcm_equator_profile(run, years, band=cfg.get('band_deg', EQUATOR_BAND_DEG), latitude=latitude))
     zh = 0.5 * (np.array(zw[1:]) + np.array(zw[:-1]))

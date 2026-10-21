@@ -50,3 +50,38 @@ def test_a_diagnostic_output_reads_by_its_descriptor(tmp_path):
     np.array([10800.0, 300.0, 301.0], dtype='<f4').tofile(path)
     with pytest.raises(ValueError):
         bb.read_diag(tmp_path, path)
+
+
+def test_the_water_budget_closes_and_reads_the_boundary_layer_against_the_evaporation(tmp_path, monkeypatch):
+    """Two levels of 1000 kg/m2 each a day apart: the boundary layer brings 3 mm/day at the ground, the imposed
+    ascent and the nudging take 0.5 each, 1 mm/day condenses and rains out, and the column keeps the other 1."""
+    import json
+    monkeypatch.setattr(bb.ra, 'RUNS', tmp_path)
+    case = tmp_path / 'box'
+    case.mkdir()
+    (case / 'case.json').write_text(json.dumps(dict(grid=dict(nx=1, dx_m=1000.0, length_m=1000.0),
+                                                    configuration=dict(start_hour_angle_deg=0.0))))
+    (case / 'input_grid_z').write_text('0\n1000\n3000\n')
+    (case / 'terluna_surface.txt').write_text('1\n0 1000 2 16 300 300\n')
+    (case / 'namelist.input').write_text(' var11 = 0.0,\n var18 = 0.0,\n var19 = 1.0,\n')
+    names = ('qv', 'qc', 'rho', 'qvb_pbl', 'qvb_mp', 'qvb_lsw', 'qvb_nudge', 'qvb_hadv', 'qvb_vadv')
+    (case / 'cm1out_diag_s.ctl').write_text('xdef 1 linear 0 1\nydef 1 linear 0 1\nzdef 2 levels\n500\n2000\n'
+                                            f'vars {3 + len(names)}\nmtime 0 99 t\nqfx 0 99 e\nprate 0 99 p\n'
+                                            + ''.join(f'{n} 2 99 x\n' for n in names) + 'endvars\n')
+    per = 1.0 / (bb.DAY * 1000.0)                                         # 1 mm/day in one level's 1000 kg/m2
+    for n, (day, qv) in enumerate(((29.5, (0.010, 0.005)), (30.5, (0.0105, 0.0055))), 1):
+        fields = dict(qv=qv, qc=(0.0, 0.0), rho=(1.0, 0.5), qvb_pbl=(3 * per, 0.0), qvb_mp=(0.0, -per),
+                      qvb_lsw=(-0.5 * per, 0.0), qvb_nudge=(0.0, -0.5 * per), qvb_hadv=(0.2 * per, -0.2 * per),
+                      qvb_vadv=(0.0, 0.0))
+        values = [day * bb.DAY, 3.0 / bb.DAY, 1.0 / bb.DAY] + [v for name in names for v in fields[name]]
+        np.array(values, dtype='<f4').tofile(case / f'cm1out_diag_{n:06d}_s.dat')
+    w = bb.water('box', 29.5)
+    assert w['outputs'] == 2 and w['span_days'] == pytest.approx([29.5, 30.5])
+    c = w['column_mm_day']
+    assert c['boundary_layer'] == pytest.approx(3.0, rel=1e-5) and c['microphysics'] == pytest.approx(-1.0, rel=1e-5)
+    assert c['imposed_ascent'] == pytest.approx(-0.5, rel=1e-5) and c['nudging'] == pytest.approx(-0.5, rel=1e-5)
+    assert c['own_transport'] == pytest.approx(0.0, abs=1e-6)
+    assert w['bands_mm_day']['nudging']['0-16 km'] == pytest.approx(-0.5, rel=1e-5)
+    assert w['evaporation_mm_day'] == pytest.approx(3.0, rel=1e-5) and w['rain_mm_day'] == pytest.approx(1.0, rel=1e-5)
+    assert w['storage_mm_day'] == pytest.approx(1.0, rel=1e-4) and w['rest_mm_day'] == pytest.approx(0.0, abs=1e-4)
+    assert w['boundary_layer_over_evaporation'] == pytest.approx(1.0, rel=1e-5)

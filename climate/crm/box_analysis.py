@@ -176,9 +176,12 @@ def microphysics_budget(case: Path, from_day: float) -> dict:
 
 def analyse(name: str, from_day: float, reference: str | None = None) -> dict:
     """The box against the rings it extends, the GCM and, if given, a reference box at the same site. A box forced
-    by the GCM alone (its site 'gcm') extends no ring and is set beside the GCM run that forced it."""
+    by the GCM alone (its site 'gcm') extends no ring and is set beside the GCM run that forced it. A run kept under
+    another name than its case's (an earlier attempt moved aside) is read with the configuration it ran with."""
     from climate.crm.cm1_run import CASES, solar_day_s
-    cfg = CASES[name]
+    case = RUNS / name
+    record = json.loads((case / 'case.json').read_text())
+    cfg = CASES[name] if name in CASES else record['configuration']
     site = cfg['site']
     if site.get('gcm'):
         rings = []
@@ -186,8 +189,6 @@ def analyse(name: str, from_day: float, reference: str | None = None) -> dict:
         rings = list(cfg['day_night']['rings']) if cfg.get('day_night') else [site['ring']]
     sigma = rc.gcm_lowest_sigma()
     day_s = solar_day_s()
-    case = RUNS / name
-    record = json.loads((case / 'case.json').read_text())
     start = record['configuration']['start_hour_angle_deg']
     everything = np.arange(record['grid']['nx'] * record['grid'].get('ny', 1))
     series = {name: rc.patch_series(case, [{'land': everything}], from_day, None, sigma, fields, KEYS)}

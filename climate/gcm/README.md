@@ -1691,6 +1691,17 @@ rain there is lighter, and at 0.04 a quarter of it reaches the ground. With the 
 at gamma 0.024 at its place; at that constant the Near-side Sea would evaporate about 57%. At 0.02 the ground settles
 near 298.0 K over the branch's five years, and at 0.04 it is still falling, 295.5 K at year 4.
 
+**Where the GCM forms its rain, and why the boxes' shares do not yet test gamma** (21 October). At the Near-side Sea
+PlaSim's convection scheme forms 3.5 of the 4.0 mm/day of rain formed. It forms 3.2 of it between 18 and 72 km, and
+the rain falls that far through the air below. The first sea box held its air to the GCM's above 8–16 km and took the
+GCM's forcing to 16 km only. Its nudging supplied the upper air's heat in place of convection, its clouds stayed below
+10 km, and it rained 0.06 mm/day against the GCM's 2.72. Its share, 53% of the water leaving its cloud, comes from
+rain that falls a fraction of the GCM's way ([the CRM's account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e)).
+The small box's 48% carries the same doubt: its nudging supplied 50 of the 90 W/m² its radiation removed. CM1's
+boundary layer also put its density times the surface's heat and water into the air. The pair runs again with the
+forcing through the column, the air held only above the GCM's convection, and that fixed. Until it has run, the 0.024
+fitted to the small box tests nothing about the GCM's rain, and the design run's constant waits.
+
 The runner's `--rain-evaporation GAMMA` writes the constant into PlaSim's rain namelist, recorded in the run's
 configuration only when given.
 

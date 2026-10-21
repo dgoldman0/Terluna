@@ -22,22 +22,35 @@ weather's noise and the rain's bursts; the vapour over the column is therefore h
 precipitable water's change less the evaporation less the rain, the difference spread over the levels in proportion
 to the vapour each holds.
 
-CM1 applies the GCM's mean vertical wind to its own air up to 16 km. PlaSim's postprocessor writes omega (wap) about
-a hundred times too weak at the equator against the meridional mass flux of the same winds, so the wind here is the
-GCM's continuity on its own spectral fields: the divergence and the surface pressure's gradient from the written winds
-and pressure projected onto the harmonics, integrated down each column. The table CM1 takes as prescribed (its var11
-forcing) holds the circulation's heating and moistening with the mean wind's own advection of the GCM's air added
-back, so that in the GCM's state the two give the GCM's budget.
+CM1 applies the GCM's mean vertical wind to its own air through the column. PlaSim's postprocessor writes omega (wap)
+about a hundred times too weak at the equator against the meridional mass flux of the same winds, so the wind here is
+the GCM's continuity on its own spectral fields: the divergence and the surface pressure's gradient from the written
+winds and pressure projected onto the harmonics, integrated down each column. The table CM1 takes as prescribed (its
+var11 forcing) holds the circulation's heating and moistening with the mean wind's own advection of the GCM's air
+added back, so that in the GCM's state the two give the GCM's budget.
 
 The means (ta, hus, ua, va, ps, czen, pr, evap, prw) cover a tenth of the lunar day each, 36 degrees of hour angle,
 centred on the site's hour angle from the subsolar longitude of the mean solar height; the snapshots fall at each
 mean's end, 18 degrees later. Each level's series is fitted by least squares with the day's mean and first four
-harmonics, those of the means divided by the damping a 36-degree mean gives them. The table reaches 16 km, as the
-rings' day-night forcing did; above, the box holds its air to the GCM's. The table stands on CM1's own levels, the
-mean wind's advection added back on the box's starting air, so that the two cancel exactly at the start. A box cannot
-make the planet's day-night circulation, whose wind turns with the Sun (over the Near-side Sea the wind 0.9 km up
-swings between about 3.7 m/s toward the east around noon and 3.8 m/s toward the west in the evening), so its mean
-wind is nudged toward the GCM's by local time, a window of the day at a time.
+harmonics, those of the means divided by the damping a 36-degree mean gives them.
+
+The table stands on CM1's own levels, the mean wind's advection added back on the box's starting air, so that the two
+cancel at the start to the accuracy of the two differences (centred here, CM1's third-order upstream). The GCM holds
+its tendencies as layer values between half levels, so each layer's is laid on CM1's levels by pressure, linear
+within the layer about its value, its slope the monotonized-central limit of its neighbours' (flat in the top and
+bottom layers), which keeps every layer's total; the part of the top layer above CM1's top, about 2% of the column's
+mass, is left out. The first boxes (2026-10-21) took the table and the mean wind to 16 km only, as the rings'
+day-night forcing did, interpolated the layers' values in height with the lowest held to the ground, and nudged their
+air to the GCM's from 8 km, fully from 16 km. Over the Near-side Sea that left out the 35.5 W/m2 the circulation takes
+from the 76% of the column's mass above 16 km, where the GCM's convection forms most of its rain; the nudging put back
+83.5 W/m2 of heat there in its place, the box's convection stayed below 10 km and it rained 0.06 mm/day against the
+GCM's 2.7; the interpolation made the column 0.55 mm/day drier than the GCM's. The forcing now reaches the top, and the
+box holds its air to the GCM's only above the top of the GCM's convection (convection_top, the lowest level above
+which its convection forms less than 1% of its convective rain): from the GCM's first level above that top, fully
+from the next. The GCM's temperature falls to its top level at both sites (to 166 K at 129 km), so it resolves no
+tropopause to hold from. A box cannot make the planet's day-night circulation, whose wind turns with the Sun (over the
+Near-side Sea the wind 0.9 km up swings between about 3.7 m/s toward the east around noon and 3.8 m/s toward the west
+in the evening), so its mean wind is nudged toward the GCM's by local time, a window of the day at a time.
 """
 from __future__ import annotations
 
@@ -55,9 +68,11 @@ WATER_DENSITY = 1000.0                     # PlaSim's, in its diagnostics' water
 TRUNCATION = 21                            # the GCM's triangular truncation
 HARMONICS = 4
 BINS = 36                                  # the table CM1 reads: bin centres from -175 degrees, 10 degrees apart
-TOP_M = 16000.0                            # no prescribed heating or moistening above, as the rings' day-night forcing
+TOP_M = None                               # the table's top: the whole column (the first boxes stopped at 16 km)
+CONVECTION_TOP_SHARE = 0.01                # the levels above the GCM's convection form less than this of its rain
 MEANS = ('ta', 'hus', 'ua', 'va', 'ps', 'ts', 'tas', 'czen', 'pr', 'evap', 'prw', 'mrso')
 SNAPSHOTS = ('dt_diab', 'dq_dyn')          # code 40, written under that name: the physics' moistening as applied
+SCHEMES = ('dt_conv', 'dt_lsp')            # the convective and large-scale heating: where the GCM forms its rain
 
 
 class Spectral:
@@ -189,7 +204,56 @@ def rate(coef, hour_deg, day_s, harmonics=HARMONICS):
     return np.tensordot(d, coef, axes=(1, 0)) * 2.0 * math.pi / day_s
 
 
-def site_forcing(run, years, site, window_deg=36.0):
+def remap(values, edges_pa, targets_pa):
+    """A field the GCM holds as layer values (..., layer) between the pressures edges_pa (top first, increasing) as
+    means over the target layers between targets_pa (in either order): linear in pressure within each source layer
+    about its value, its slope the monotonized-central limit of the neighbouring layers' (flat in the top and bottom
+    layers), integrated over the part of each target layer the source layer covers. Each source layer's integral in
+    pressure is kept wherever the targets cover it."""
+    v = np.asarray(values, float)
+    e = np.asarray(edges_pa, float)
+    mid = 0.5 * (e[1:] + e[:-1])
+    slope = np.zeros_like(v)
+    if mid.size > 2:
+        up = (v[..., 1:-1] - v[..., :-2]) / (mid[1:-1] - mid[:-2])
+        down = (v[..., 2:] - v[..., 1:-1]) / (mid[2:] - mid[1:-1])
+        centre = (v[..., 2:] - v[..., :-2]) / (mid[2:] - mid[:-2])
+        limit = 2.0 * np.minimum(np.abs(up), np.abs(down))
+        slope[..., 1:-1] = np.where(up * down > 0.0, np.sign(centre) * np.minimum(np.abs(centre), limit), 0.0)
+    t = np.asarray(targets_pa, float)
+    lo, hi = np.minimum(t[1:], t[:-1]), np.maximum(t[1:], t[:-1])
+    out = np.zeros(v.shape[:-1] + lo.shape)
+    for k in range(mid.size):
+        a, b = np.clip(lo, e[k], e[k + 1]), np.clip(hi, e[k], e[k + 1])
+        out += v[..., k, None] * (b - a) + slope[..., k, None] * 0.5 * ((b - mid[k])**2 - (a - mid[k])**2)
+    return out / (hi - lo)
+
+
+def column_pressures(zw, theta_at, qv_at, surface_pa, gravity, steps=20):
+    """Pressure (Pa) at the heights zw (the ground up) in hydrostatic balance with air of potential temperature
+    theta_at(z) and vapour qv_at(z), from the surface pressure: the Exner function falls by g / (cp theta_v) per metre,
+    integrated by the trapezoid rule on steps sub-layers of each layer."""
+    zw = np.asarray(zw, float)
+    z = np.concatenate([np.linspace(a, b, steps, endpoint=False) for a, b in zip(zw[:-1], zw[1:])] + [zw[-1:]])
+    inv = 1.0 / (np.asarray(theta_at(z), float) * (1.0 + 0.608 * np.asarray(qv_at(z), float)))
+    exner = (surface_pa / 1e5)**KAPPA - gravity / CP * np.r_[0.0, np.cumsum(0.5 * (inv[1:] + inv[:-1]) * np.diff(z))]
+    return 1e5 * exner[::steps]**(1.0 / KAPPA)
+
+
+def convection_top(formed, z, share=CONVECTION_TOP_SHARE):
+    """The top of the GCM's convection from the rain it forms in each layer (top first) at heights z (m): the lowest
+    level above which less than share of it forms; and the heights from which a box holds its air to the GCM's, the
+    next level up and, fully, the one above that (None past the GCM's top)."""
+    formed = np.maximum(np.asarray(formed, float), 0.0)
+    if formed.sum() <= 0.0:
+        raise ValueError('the GCM forms no convective rain here')
+    above = np.r_[0.0, np.cumsum(formed)[:-1]] / formed.sum()            # formed above each level
+    k = int(np.flatnonzero(above < share).max())
+    level = lambda i: float(z[i]) if i >= 0 else None
+    return dict(level=k, top_m=float(z[k]), share=share, held_from_m=level(k - 1), held_fully_from_m=level(k - 2))
+
+
+def site_forcing(run, years, site, window_deg=36.0, top_m=TOP_M):
     """The GCM's column at a site over the years: its mean air and surface, its mean vertical wind, the table CM1
     prescribes by local time, and the budgets behind it. Arrays by level run top first, as PlaSim writes them."""
     import netCDF4
@@ -198,14 +262,14 @@ def site_forcing(run, years, site, window_deg=36.0):
     gravity, radius = p['gravity_m_s2'], p['radius_m']
     folder = HERE.parent / 'gcm' / 'runs' / run / 'model'
     keep = {k: [] for k in ('hour', 'theta', 'q', 'u', 'v', 'z', 'rho', 'omega', 'heat', 'moist', 'ps', 'ts', 'tas',
-                            'rain', 'evaporation', 'water', 'wetness')}
+                            'rain', 'evaporation', 'water', 'wetness', 'conv', 'lsp')}
     for year in range(years[0], years[1] + 1):
         with netCDF4.Dataset(folder / f'MOST.{year:05d}.nc') as d:
-            missing = [k for k in MEANS + SNAPSHOTS if k not in d.variables]
+            missing = [k for k in MEANS + SNAPSHOTS + SCHEMES if k not in d.variables]
             if missing:
                 raise ValueError(f'{run} year {year} lacks {missing}: run it with --heating-diagnostics '
                                  '--moisture-diagnostics')
-            f = {k: np.asarray(d[k][:], float) for k in MEANS + SNAPSHOTS}
+            f = {k: np.asarray(d[k][:], float) for k in MEANS + SNAPSHOTS + SCHEMES}
             lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
             sigma = np.asarray(d['lev'][:], float)
             lsm = np.asarray(d['lsm'][:], float)[0] > 0.5
@@ -237,6 +301,9 @@ def site_forcing(run, years, site, window_deg=36.0):
         keep['omega'].append(mean(at(omega(f['ua'], f['va'], grid_ps, sigma, radius, sp, wind))))
         keep['heat'].append(mean(at(sp.project(f['dt_diab'])) / exner))     # the physics' heating, as theta, at T21
         keep['moist'].append(mean(at(f['dq_dyn']) * water))                 # the physics' moistening as applied
+        formed = CP * ps[:, None, :] * thick[None, :, None] / (gravity * LV)   # K/s of latent heating to kg/m2/s
+        keep['conv'].append(mean(at(f['dt_conv']) * formed))
+        keep['lsp'].append(mean(at(f['dt_lsp']) * formed))
         keep['ps'].append(mean(ps))
         keep['ts'].append(mean(at(f['ts'])))
         keep['tas'].append(mean(at(f['tas'])))
@@ -257,8 +324,8 @@ def site_forcing(run, years, site, window_deg=36.0):
     heat_c, moist_c = fit_snap('heat'), fit_snap('moist')
     z, rho = tm('z'), tm('rho')
     w_gcm = -tm('omega') / (rho * gravity)
-    below = z <= TOP_M
-    w_mean = np.where(below, w_gcm, 0.0)                                     # the box holds its air above by nudging
+    below = z <= (np.inf if top_m is None else top_m)
+    w_mean = np.where(below, w_gcm, 0.0)                                     # none above a top, where one is set
     mass = tm('ps') * thick / gravity                                        # kg/m2 in each layer
     dz = lambda a: np.gradient(a, z, axis=-1)
     theta_h, q_h = evaluate(theta_c, hours), evaluate(q_c, hours)            # (bins, lev)
@@ -288,9 +355,12 @@ def site_forcing(run, years, site, window_deg=36.0):
                      height_m=float(np.mean([height[j, i] for j, i in zip(jj, ii)]))),
         vertical_wind_m_s=w_mean.tolist(), gcm_vertical_wind_m_s=w_gcm.tolist(),
         day_night=dict(hour_angle_deg=hours.tolist(), z_m=z.tolist(), theta_k_s=table_th.tolist(),
-                       qv_kg_kg_s=table_q.tolist(), top_m=TOP_M),
+                       qv_kg_kg_s=table_q.tolist(), top_m=top_m),
         circulation=dict(hour_angle_deg=hours.tolist(), z_m=z.tolist(), theta_k_s=circ_th.tolist(),
-                         qv_kg_kg_s=circ_q.tolist(), top_m=TOP_M),
+                         qv_kg_kg_s=circ_q.tolist(), top_m=top_m),
+        convection=dict(convective_rain_formed_mm_day=(tm('conv') * per_day).tolist(),
+                        large_scale_rain_formed_mm_day=(tm('lsp') * per_day).tolist(),
+                        **convection_top(tm('conv'), z)),
         wind_by_hour=dict(hour_angle_deg=hours.tolist(), z_m=z.tolist(), u_m_s=evaluate(u_c, hours).tolist(),
                           v_m_s=evaluate(v_c, hours).tolist()),
         budget=dict(
@@ -311,14 +381,15 @@ def site_forcing(run, years, site, window_deg=36.0):
             rain_mm_day=float(tm('rain') * per_day), evaporation_mm_day=float(tm('evaporation') * per_day)))
 
 
-def to_cm1(forcing, zw, theta_at=None, qv_at=None):
+def to_cm1(forcing, zw, theta_at=None, qv_at=None, gravity=None):
     """The forcing as CM1's box reads it: the mean vertical wind on its w levels zw (zero at the ground, falling to
     zero at the top past the GCM's top level), and the table of prescribed heating (potential temperature, K/s) and
     moistening (kg/kg/s) by local time. Given the box's starting air (theta_at and qv_at, functions of height), the
-    table stands on CM1's own scalar levels: the circulation's heating and moistening interpolated from the GCM's
-    levels, the lowest level's held down to the ground, with the mean wind's advection of that starting air added
-    back, so that at the start CM1's own advection by the mean wind takes it away again exactly; above 16 km it is
-    nil. Without them it stands on the GCM's levels with the mean wind's advection of the GCM's air added back."""
+    table stands on CM1's own scalar levels: each GCM layer's heating and moistening by the circulation laid on them
+    by pressure (remap), the levels' pressures those of the starting air in balance from the GCM's surface pressure,
+    with the mean wind's advection of that starting air added back, so that at the start CM1's own advection by the
+    mean wind takes it away again; nil above the forcing's top, where it has one. Without them it stands on the GCM's
+    levels with the mean wind's advection of the GCM's air added back."""
     z = np.asarray(forcing['profile']['z_m'], float)[::-1]                # the ground up
     w = np.asarray(forcing['vertical_wind_m_s'], float)[::-1]
     zw = np.asarray(zw, float)
@@ -332,16 +403,23 @@ def to_cm1(forcing, zw, theta_at=None, qv_at=None):
         return dict(w_m_s=[float(x) for x in w_zw],
                     day_night=dict(z_m=np.r_[0.0, z], theta_k_s=np.c_[th[:, :1], th], qv_kg_kg_s=np.c_[qv[:, :1], qv],
                                    hour_angle_deg=hours))
+    if gravity is None:
+        from climate.crm.cm1_run import planet
+        gravity = planet()['gravity_m_s2']
     zh = 0.5 * (zw[1:] + zw[:-1])
     w_zh = 0.5 * (w_zw[1:] + w_zw[:-1])
     circ = forcing['circulation']
-    levels = np.r_[0.0, z]
-    on_box = lambda a: np.array([np.interp(zh, levels, np.r_[row[0], row]) for row in np.asarray(a, float)[:, ::-1]])
+    ps = forcing['surface']['pressure_pa']
+    edges = plasim_edges(forcing['sigma']) * ps                            # the GCM's half levels, top first
+    p_w = column_pressures(zw, theta_at, qv_at, ps, gravity)
+    on_box = lambda a: remap(a, edges, p_w)                                # (bins, CM1's levels from the ground)
     th0, q0 = np.asarray(theta_at(zh), float), np.asarray(qv_at(zh), float)
-    below = zh <= TOP_M
+    top = circ.get('top_m')
+    below = zh <= (np.inf if top is None else top)
     th = np.where(below, on_box(circ['theta_k_s']) + (w_zh * np.gradient(th0, zh))[None, :], 0.0)
     qv = np.where(below, on_box(circ['qv_kg_kg_s']) + (w_zh * np.gradient(q0, zh))[None, :], 0.0)
-    return dict(w_m_s=[float(x) for x in w_zw], day_night=dict(z_m=zh, theta_k_s=th, qv_kg_kg_s=qv, hour_angle_deg=hours))
+    return dict(w_m_s=[float(x) for x in w_zw], pressure_pa=p_w,
+                day_night=dict(z_m=zh, theta_k_s=th, qv_kg_kg_s=qv, hour_angle_deg=hours))
 
 
 def wind_windows(forcing, zh, start_hour_deg, day_s, length_s, bins=BINS):

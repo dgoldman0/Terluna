@@ -109,37 +109,93 @@ def test_the_site_budget_holds_on_the_gcm():
     # Over the day the circulation's heating balances the physics' exactly, the storage's mean being nil.
     b = f['budget']
     assert np.allclose(b['circulation_heating_theta_k_day'], -np.asarray(b['physics_heating_theta_k_day']), atol=1e-9)
-    z = np.asarray(f['profile']['z_m'])
-    above = z > gs.TOP_M
-    assert np.all(np.asarray(f['vertical_wind_m_s'])[above] == 0.0)
-    assert np.allclose(np.asarray(f['vertical_wind_m_s'])[~above], np.asarray(f['gcm_vertical_wind_m_s'])[~above])
-    assert np.all(np.asarray(f['day_night']['theta_k_s'])[:, above] == 0.0)
+    # The forcing reaches the top: the box's vertical wind is the GCM's at every level.
+    assert f['day_night']['top_m'] is None
+    assert np.allclose(f['vertical_wind_m_s'], f['gcm_vertical_wind_m_s'])
     # The sea evaporates more than it rains, and the circulation carries the difference away.
     assert b['evaporation_mm_day'] > b['rain_mm_day'] and column['exact'] < 0.0
+    # The GCM's convection forms most of the rain, and tops out at its third level from the top, near 72 km.
+    cv = f['convection']
+    assert sum(cv['convective_rain_formed_mm_day']) > 3.0 * sum(cv['large_scale_rain_formed_mm_day'])
+    assert cv['level'] == 2 and 70e3 < cv['top_m'] < 75e3 and 90e3 < cv['held_from_m'] < 96e3
+    # A box with a top keeps the first boxes' forcing: nothing above it.
+    capped = gs.site_forcing('A28R_301k_cold_moist', (0, 0), SEA, top_m=16000.0)
+    above = np.asarray(capped['profile']['z_m']) > 16000.0
+    assert np.all(np.asarray(capped['vertical_wind_m_s'])[above] == 0.0)
+    assert np.all(np.asarray(capped['day_night']['theta_k_s'])[:, above] == 0.0)
 
 
-def test_on_the_boxs_levels_the_table_gives_back_the_mean_winds_advection_of_its_starting_air():
-    hours = [-90.0, 90.0]
-    forcing = dict(profile=dict(z_m=[30000.0, 9000.0, 800.0]), vertical_wind_m_s=[0.0, 0.003, 0.002],
-                   day_night=dict(hour_angle_deg=hours),
-                   circulation=dict(theta_k_s=[[0.0, 1e-5, 2e-5], [0.0, -1e-5, -2e-5]],
-                                    qv_kg_kg_s=[[0.0, 0.0, 1e-8], [0.0, 0.0, -1e-8]]))
-    zw = np.linspace(0.0, 60000.0, 121)
+def box_forcing(top_m=None):
+    """A three-level GCM column and its circulation by two hours of the day, the top level's moistening nil."""
+    return dict(profile=dict(z_m=[60000.0, 20000.0, 4000.0]), vertical_wind_m_s=[0.001, 0.003, 0.002],
+                sigma=[0.2, 0.6, 0.9], surface=dict(pressure_pa=1.2e5), day_night=dict(hour_angle_deg=[-90.0, 90.0]),
+                circulation=dict(theta_k_s=[[1e-6, 1e-5, 2e-5], [-1e-6, -1e-5, -2e-5]],
+                                 qv_kg_kg_s=[[0.0, 1e-9, 1e-8], [0.0, -1e-9, -1e-8]], top_m=top_m))
+
+
+def test_on_the_boxs_levels_each_gcm_layer_keeps_its_total_and_the_mean_winds_advection_is_added_back():
+    zw = np.linspace(0.0, 150000.0, 301)
     theta_at = lambda z: 280.0 + 0.004 * np.asarray(z)
     qv_at = lambda z: 0.012 * np.exp(-np.asarray(z) / 3000.0)
-    out = gs.to_cm1(forcing, zw, theta_at, qv_at)
+    forcing = box_forcing()
+    out = gs.to_cm1(forcing, zw, theta_at, qv_at, gravity=1.62)
     zh = 0.5 * (zw[1:] + zw[:-1])
     w = 0.5 * (np.asarray(out['w_m_s'])[1:] + np.asarray(out['w_m_s'])[:-1])
     table = out['day_night']
     assert np.allclose(table['z_m'], zh)
-    below = zh <= gs.TOP_M
-    # Less CM1's own advection of its starting air by the mean wind, what is left is the circulation's.
-    left = np.asarray(table['theta_k_s']) - (w * 0.004)[None, :]
-    circ = np.array([np.interp(zh, [0.0, 800.0, 9000.0, 30000.0], [r[2], r[2], r[1], r[0]])
-                     for r in forcing['circulation']['theta_k_s']])
-    assert np.allclose(left[:, below], circ[:, below], atol=1e-12)
-    assert np.all(np.asarray(table['theta_k_s'])[:, ~below] == 0.0)
-    assert np.all(np.asarray(table['qv_kg_kg_s'])[:, ~below] == 0.0)
+    p = out['pressure_pa']
+    assert p[0] == pytest.approx(1.2e5) and np.all(np.diff(p) < 0.0)
+    # Less CM1's own advection of its starting air by the mean wind, what is left is each GCM layer's by pressure.
+    edges = gs.plasim_edges(forcing['sigma']) * 1.2e5
+    left_th = np.asarray(table['theta_k_s']) - (w * 0.004)[None, :]
+    left_q = np.asarray(table['qv_kg_kg_s']) - w[None, :] * np.gradient(qv_at(zh), zh)[None, :]
+    assert np.allclose(left_th, gs.remap(forcing['circulation']['theta_k_s'], edges, p), rtol=1e-9, atol=1e-15)
+    # The column's moistening is the GCM's: its top layer, above CM1's top in part, moistens nothing.
+    gcm = (np.asarray(forcing['circulation']['qv_kg_kg_s']) * np.diff(edges)).sum(axis=1)
+    assert np.allclose((left_q * -np.diff(p)).sum(axis=1), gcm, rtol=1e-6)
+    # With a top, as the first boxes had, nothing above it.
+    capped = gs.to_cm1(box_forcing(top_m=16000.0), zw, theta_at, qv_at, gravity=1.62)['day_night']
+    assert np.all(np.asarray(capped['theta_k_s'])[:, zh > 16000.0] == 0.0)
+    assert np.all(np.asarray(capped['qv_kg_kg_s'])[:, zh > 16000.0] == 0.0)
+
+
+def test_the_remap_keeps_each_layers_total_a_straight_line_and_no_new_extremes():
+    edges = np.array([0.0, 2e4, 5e4, 8e4, 1e5, 1.2e5])
+    targets = np.linspace(1.2e5, 0.0, 241)                                   # the ground up, 500 Pa layers
+    width = -np.diff(targets)
+    values = np.array([[3.0, -1.0, 2.0, 5.0, 4.0]])
+    out = gs.remap(values, edges, targets)
+    for k in range(5):
+        inside = (targets[1:] >= edges[k]) & (targets[:-1] <= edges[k + 1])
+        assert (out[0, inside] * width[inside]).sum() == pytest.approx(values[0, k] * (edges[k + 1] - edges[k]))
+    assert out.min() >= values.min() - 1e-12 and out.max() <= values.max() + 1e-12
+    # A field linear in pressure comes back as the line in the inner layers, flat in the top and bottom ones.
+    mid = 0.5 * (edges[1:] + edges[:-1])
+    line = gs.remap(2.0 + 1e-4 * mid, edges, targets)
+    centres = 0.5 * (targets[1:] + targets[:-1])
+    inner = (centres > edges[1]) & (centres < edges[-2])
+    assert np.allclose(line[inner], 2.0 + 1e-4 * centres[inner])
+    assert np.allclose(line[centres > edges[-2]], 2.0 + 1e-4 * mid[-1])
+
+
+def test_the_columns_pressure_falls_as_an_adiabat_does():
+    zw = np.linspace(0.0, 30000.0, 31)
+    flat = lambda value: (lambda z: np.full(np.shape(z), value))
+    p = gs.column_pressures(zw, flat(300.0), flat(0.0), 1.2e5, 1.62)
+    exner = (1.2e5 / 1e5)**gs.KAPPA - 1.62 * zw / (gs.CP * 300.0)
+    assert np.allclose(p, 1e5 * exner**(1.0 / gs.KAPPA), rtol=1e-10)
+
+
+def test_the_convection_top_is_the_lowest_level_with_under_one_percent_above_it():
+    z = [129e3, 93e3, 72e3, 55e3, 41e3]
+    out = gs.convection_top([0.0, 0.012, 0.194, 0.69, 2.6], z)
+    assert (out['level'], out['top_m'], out['held_from_m'], out['held_fully_from_m']) == (2, 72e3, 93e3, 129e3)
+    out = gs.convection_top([0.0, 0.5, 0.3, 0.2, 0.0], z)
+    assert (out['level'], out['held_from_m'], out['held_fully_from_m']) == (1, 129e3, None)
+    out = gs.convection_top([0.5, 0.2, 0.3, 0.0, 0.0], z)                 # to the top level: nothing above to hold
+    assert (out['level'], out['held_from_m'], out['held_fully_from_m']) == (0, None, None)
+    with pytest.raises(ValueError):
+        gs.convection_top([0.0] * 5, z)
 
 
 def test_the_wind_windows_follow_the_day():

@@ -1,4 +1,5 @@
-"""The heat of a box's air by process, from CM1's domain diagnostics, against a reference box at the same site.
+"""The heat and water of a box's air by process, from CM1's domain diagnostics, against a reference box at the same
+site.
 
     climate/gcm/.venv/bin/python -m climate.crm.box_budget box_0e_small_lunar_rain_day29 \\
         --reference box_0e_small_rain_control_day29 --from-day 29.5
@@ -7,11 +8,21 @@ CM1 writes the domain means of its potential-temperature budget by process at ev
 with dodomaindiag), the microphysics' share split into condensation, evaporation from cloud and from rain,
 deposition, sublimation, melting and freezing. Each term is taken as the temperature tendency at constant pressure,
 pi times its potential-temperature tendency, and over the span as its mean by height and its sum over the GCM's lowest
-four layers in W/m2 (rho cp times it, level by level). The box's prescribed day-night heating (terluna_lsadv.txt, var11)
-is added to the potential temperature outside CM1's budget, so it is reckoned from its table by local time as the
-patch applies it; the storage is the trend of the domain-mean temperature, and what is left closes the budget. At the
-ground: the heat carried into the air, the evaporation, the radiation, the air at 2 m, the rain and the cloud fraction
-of the lowest level, about the lowest 100 m. Writes results/crm/box_budget_<case>.json.
+four layers and over three bands of the column (0-16, 16-60 and 60 km to the top) in W/m2 (rho cp times it, level by
+level). The box's prescribed day-night heating (terluna_lsadv.txt, var11) is added to the potential temperature
+outside CM1's budget, so it is reckoned from its table by local time as the patch applies it; the storage is the
+trend of the domain-mean temperature, and what is left closes the budget. At the ground: the heat carried into the
+air, the evaporation, the radiation, the air at 2 m, the rain and the cloud fraction of the lowest level, about the
+lowest 100 m.
+
+The water: the column's vapour by CM1's own budget terms (rho times each, level by level, in mm/day), the table's
+prescribed moistening reckoned as for the heat, against the evaporation, the rain and the change of the column's
+vapour and condensate from the span's first output to its last; what is left closes it. CM1 splits its vertical
+advection from its implicit diffusion with the imposed sinking taken out twice (adv.F: the slot for the diffusion
+holds the sinking too), so only their sum with the horizontal advection, the box's own transport, stands; over a
+doubly periodic box it is near nil. The boundary layer's column over the evaporation, and its heating over the
+sensible heat, should be one: they stood at 1.32-1.51 in CM1's simple boundary layer before its density was divided
+out (cm1_run.PBL_DENSITY_PATCH). Writes results/crm/box_budget_<case>.json.
 """
 from __future__ import annotations
 
@@ -28,15 +39,24 @@ from climate.crm import ring_analysis as ra
 
 HERE = Path(__file__).resolve().parent
 RESULTS = HERE.parent / 'results' / 'crm'
-SCHEMA = 'terluna.climate.crm-box-budget/1'
+SCHEMA = 'terluna.climate.crm-box-budget/2'
 DAY = 86400.0
 XLV = 2501000.0                   # J/kg, CM1's latent heat of vaporization (constants.F)
 LAYERS_KM = ((0.0, 1.77), (1.77, 6.53), (6.53, 13.74), (13.74, 23.06))   # the GCM's lowest four, as elsewhere
+BANDS_KM = ((0.0, 16.0), (16.0, 60.0), (60.0, 1000.0))                  # the first boxes' forcing top, and above
+WATER = {                         # CM1's vapour budget terms (domain diagnostics) by process
+    'boundary_layer': ('qvb_pbl', 'qvb_vturb', 'qvb_hturb'),
+    'microphysics': ('qvb_mp',),
+    'own_transport': ('qvb_hadv', 'qvb_vadv', 'qvb_hidiff', 'qvb_vidiff', 'qvb_hediff', 'qvb_vediff'),
+    'imposed_ascent': ('qvb_lsw',),
+    'nudging': ('qvb_nudge',),
+}
+CONDENSATE = ('qc', 'qr', 'qi', 'qs', 'qg')  # the condensate's mixing ratios, kg/kg by level
 GROUPS = {                        # CM1's potential-temperature budget terms (domain diagnostics) by process
     'radiation': ('ptb_rad',),
     'microphysics': ('ptb_mp',),
-    'turbulence': ('ptb_pbl', 'ptb_hidiff', 'ptb_vidiff', 'ptb_diss'),
-    'resolved_transport': ('ptb_hadv', 'ptb_vadv', 'ptb_div'),
+    'turbulence': ('ptb_pbl', 'ptb_diss'),
+    'resolved_transport': ('ptb_hadv', 'ptb_vadv', 'ptb_div', 'ptb_hidiff', 'ptb_vidiff'),
     'imposed_sinking': ('ptb_lsw',),
     'nudging': ('ptb_nudge',),
     'damping': ('ptb_rdamp',),
@@ -66,12 +86,14 @@ def namelist_value(text: str, key: str) -> float:
     return float(m.group(1).replace('d', 'e').replace('D', 'e'))
 
 
-def read_day_night(path: Path):
-    """terluna_lsadv.txt: the level heights (m) and, by local-time bin, the potential-temperature tendency (K/s)."""
+def read_day_night(path: Path, field: str = 'theta'):
+    """terluna_lsadv.txt: the level heights (m) and, by local-time bin, the potential-temperature tendency (K/s), or
+    with field 'qv' the vapour's (kg/kg/s)."""
     rows = path.read_text().split('\n')
     nb, nl = (int(v) for v in rows[0].split())
     z = np.array([float(v) for v in rows[1].split()])
-    th = np.array([[float(v) for v in rows[2 + 2 * m].split()] for m in range(nb)])
+    offset = {'theta': 2, 'qv': 3}[field]
+    th = np.array([[float(v) for v in rows[offset + 2 * m].split()] for m in range(nb)])
     if z.size != nl or th.shape != (nb, nl):
         raise ValueError(f'{path.name}: expected {nb} bins of {nl} levels')
     return z, th
@@ -151,11 +173,12 @@ def budget(name: str, from_day: float) -> dict:
         table = read_day_night(case / 'terluna_lsadv.txt')
         var18, var19 = namelist_value(text, 'var18'), namelist_value(text, 'var19')
     layout = ra.grads_layout(case / 'cm1out_diag_s.ctl')[1]
-    times, t_mean, rho, day_night = [], [], [], []
+    times, t_mean, rho, day_night, pbl = [], [], [], [], []
     terms = {k: [] for k in GROUPS}
     parts = {k: [] for k in MICROPHYSICS}
     surface = {k: [] for k in ('t2_k', 'q2_g_kg', 'sensible_w_m2', 'latent_w_m2', 'net_sunlight_w_m2',
                                'net_infrared_w_m2', 'rain_mm_day', 'cloud_fraction_lowest_level')}
+    dz = np.diff(zw)
     for path in sorted(case.glob('cm1out_diag_*_s.dat')):
         d = read_diag(case, path, layout)
         if d['mtime'] < from_day * DAY:
@@ -164,6 +187,7 @@ def budget(name: str, from_day: float) -> dict:
         times.append(d['mtime'] / DAY)
         t_mean.append(d['th'] * exner)
         rho.append(d['rho'])
+        pbl.append(float((d['ptb_pbl'] * exner * d['rho'] * dz).sum() * co.CP))
         for k, names in GROUPS.items():
             terms[k].append(sum(d[n] for n in names) * exner * DAY)
         for k, n in MICROPHYSICS.items():
@@ -189,13 +213,67 @@ def budget(name: str, from_day: float) -> dict:
     prof['rest'] = prof['storage'] - sum(v for k, v in prof.items() if k != 'storage')
     micro = {k: np.mean(v, axis=0) for k, v in parts.items()}
     top = zh < 23060.0
+    sensible = float(np.mean(surface['sensible_w_m2']))
     return dict(case=name, span_days=[float(times[0]), float(times[-1])], outputs=int(times.size),
                 z_m=zh[top].tolist(),
                 profiles_k_day={k: v[top].tolist() for k, v in prof.items()},
                 microphysics_k_day={k: v[top].tolist() for k, v in micro.items()},
                 layers_w_m2={k: layer_sums(v, rho, zw) for k, v in prof.items()},
+                bands_w_m2={k: layer_sums(v, rho, zw, BANDS_KM) for k, v in prof.items()},
                 microphysics_layers_w_m2={k: layer_sums(v, rho, zw) for k, v in micro.items()},
+                boundary_layer_heating_over_sensible=float(np.mean(pbl)) / sensible if abs(sensible) > 1.0 else None,
                 surface={k: float(np.mean(v)) for k, v in surface.items()})
+
+
+def water(name: str, from_day: float) -> dict:
+    """A box's vapour budget over the span after from_day: each process's column and band sums (mm/day of water),
+    the evaporation, the rain, the storage from the first output to the last and what closes it, and the boundary
+    layer's column over the evaporation."""
+    case = ra.RUNS / name
+    geo = ra.case_geometry(case)
+    zh, zw = geo['zh'], geo['zw']
+    dz = np.diff(zw)
+    text = (case / 'namelist.input').read_text()
+    prescribed = namelist_value(text, 'var11') > 0.5
+    if prescribed:
+        z_table, qv_table = read_day_night(case / 'terluna_lsadv.txt', 'qv')
+        var18, var19 = namelist_value(text, 'var18'), namelist_value(text, 'var19')
+    layout = ra.grads_layout(case / 'cm1out_diag_s.ctl')[1]
+    present = {name for name, _ in layout}
+    groups = {k: [n for n in names if n in present] for k, names in WATER.items()}
+    times, evaporation, rain, held = [], [], [], []
+    columns = {k: [] for k in list(groups) + (['day_night_prescribed'] if prescribed else [])}
+    bands = {k: [] for k in columns}
+    for path in sorted(case.glob('cm1out_diag_*_s.dat')):
+        d = read_diag(case, path, layout)
+        if d['mtime'] < from_day * DAY:
+            continue
+        mass = d['rho'] * dz
+        times.append(d['mtime'] / DAY)
+        evaporation.append(d['qfx'] * DAY)
+        rain.append(d['prate'] * DAY)
+        held.append(float(((d['qv'] + sum(d[n] for n in CONDENSATE if n in present)) * mass).sum()))
+        rates = {k: sum((d[n] for n in names), np.zeros_like(zh)) for k, names in groups.items()}
+        if prescribed:
+            rates['day_night_prescribed'] = day_night_heating(z_table, qv_table, zh, d['mtime'], var18, var19)
+        for k, r in rates.items():
+            columns[k].append(float((r * mass).sum()) * DAY)
+            bands[k].append([float((r * mass)[(zh >= a * 1000.0) & (zh < b * 1000.0)].sum()) * DAY
+                             for a, b in BANDS_KM])
+    if len(times) < 2:
+        raise RuntimeError(f'{name}: fewer than two diagnostic outputs after day {from_day}')
+    column = {k: float(np.mean(v)) for k, v in columns.items()}
+    storage = (held[-1] - held[0]) / (times[-1] - times[0])
+    e, p = float(np.mean(evaporation)), float(np.mean(rain))
+    rest = storage - (sum(v for k, v in column.items() if k != 'microphysics') - p)
+    return dict(case=name, span_days=[float(times[0]), float(times[-1])], outputs=len(times),
+                column_mm_day=column,
+                bands_mm_day={k: dict(zip((f'{a:g}-{b:g} km' for a, b in BANDS_KM), np.mean(v, axis=0).tolist()))
+                              for k, v in bands.items()},
+                evaporation_mm_day=e, rain_mm_day=p, storage_mm_day=storage,
+                column_water_kg_m2=dict(start=held[0], end=held[-1]),
+                microphysics_less_rain_mm_day=column['microphysics'] + p, rest_mm_day=rest,
+                boundary_layer_over_evaporation=column['boundary_layer'] / e if e > 0.0 else None)
 
 
 def difference(a: dict, b: dict) -> dict:
@@ -207,20 +285,27 @@ def difference(a: dict, b: dict) -> dict:
 
 
 def analyse(name: str, reference: str | None, from_day: float) -> dict:
-    out = dict(schema=SCHEMA, case=name, from_day=from_day, budget=budget(name, from_day), drift=drift(name, from_day))
+    out = dict(schema=SCHEMA, case=name, from_day=from_day, budget=budget(name, from_day), water=water(name, from_day),
+               drift=drift(name, from_day))
     if reference:
         out['reference'] = reference
         out['reference_budget'] = budget(reference, from_day)
+        out['reference_water'] = water(reference, from_day)
         out['difference'] = difference(out['budget'], out['reference_budget'])
     out['evidence'] = ('Domain means of CM1\'s own budget terms, written every diagnostic output, and the patch\'s '
-                       'prescribed day-night heating reckoned from its table; means over the span. One realization '
-                       'of each run.')
-    out['reading_rule'] = ('K/day of temperature at constant pressure (pi times the potential-temperature tendencies) by '
-                           'height, and W/m2 summed over the GCM\'s lowest four layers; positive warms. Turbulence '
-                           'holds the boundary layer scheme and the advection\'s implicit diffusion; resolved transport '
-                           'the box\'s own circulation; rest closes the budget against the storage and holds what CM1 '
-                           'does not budget. At the ground the heat into the air and the evaporation are positive '
-                           'upward, the radiation positive downward; the difference is the case minus the reference.')
+                       'prescribed day-night heating and moistening reckoned from its table; means over the span. One '
+                       'realization of each run.')
+    out['reading_rule'] = ('Heat: K/day of temperature at constant pressure (pi times the potential-temperature '
+                           'tendencies) by height, and W/m2 summed over the GCM\'s lowest four layers and over the '
+                           'bands 0-16, 16-60 and 60 km to the top; positive warms. Turbulence holds the boundary layer '
+                           'scheme and the dissipation; resolved transport the box\'s own circulation with its '
+                           'advection\'s implicit diffusion, near nil over the column; rest closes the budget against '
+                           'the storage and holds what CM1 does not budget. Water: mm/day of the column\'s vapour by '
+                           'process and band, positive moistening; rest closes the vapour and condensate against their '
+                           'storage and the rain. At the ground the heat into the air and the evaporation are positive '
+                           'upward, the radiation positive downward; the difference is the case minus the reference. '
+                           'Products before schema 2 counted the imposed sinking\'s heating in turbulence and took it '
+                           'from resolved transport.')
     return out
 
 
@@ -236,12 +321,21 @@ def main(argv=None) -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
     path = RESULTS / f'box_budget_{args.case}.json'
     path.write_text(json.dumps(out, indent=1) + '\n')
-    for label, b in (('case', out['budget']), ('reference', out.get('reference_budget'))):
+    for label, b, w in (('case', out['budget'], out['water']),
+                        ('reference', out.get('reference_budget'), out.get('reference_water'))):
         if b is None:
             continue
         print(label, b['case'], 'surface', {k: round(v, 2) for k, v in b['surface'].items()})
         for layer in b['layers_w_m2']['radiation']:
             print(f'  {layer}', {k: round(v[layer], 1) for k, v in b['layers_w_m2'].items()})
+        for band in b['bands_w_m2']['radiation']:
+            print(f'  {band}', {k: round(v[band], 1) for k, v in b['bands_w_m2'].items()})
+        print(f"  water (mm/day): evaporation {w['evaporation_mm_day']:.3f}, rain {w['rain_mm_day']:.3f}, storage "
+              f"{w['storage_mm_day']:.3f}, rest {w['rest_mm_day']:.3f};",
+              {k: round(v, 3) for k, v in w['column_mm_day'].items()})
+        ratio = lambda x: 'n/a' if x is None else f'{x:.3f}'
+        print(f"  boundary layer over the surface: water {ratio(w['boundary_layer_over_evaporation'])}, heat "
+              f"{ratio(b['boundary_layer_heating_over_sensible'])}")
     if 'difference' in out:
         print('difference surface', {k: round(v, 2) for k, v in out['difference']['surface'].items()})
         for layer in out['difference']['layers_w_m2']['radiation']:
