@@ -339,6 +339,19 @@ class RunnerTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 er.cold_cloud_factors(path)
 
+    def test_the_rain_evaporation_constant_is_recorded_only_when_given(self):
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIsNone(inspect.signature(f).parameters['rain_evaporation'].default)
+        got = er.rain_evaporation_setting(0.02)
+        self.assertEqual((got['gamma'], got['plasim_default']), (0.02, 0.01))
+        for bad in (0.0, -0.01, 1.5):
+            with self.assertRaises(ValueError):
+                er.rain_evaporation_setting(bad)
+        # PlaSim reads gamma from its rain namelist, after its own resolution defaults
+        src = Path(er.__file__).read_text()
+        self.assertIn("'rainmod_namelist', 'GAMMA'", src)
+
     def test_the_10_m_wind_follows_geleyns_profile(self):
         # The surface layer's lines, compiled on a stand-in: neutral air gives the log profile, stable air brings less
         # of the wind down and unstable air more, as the profile through the lowest layer gives them.

@@ -1,0 +1,115 @@
+{
+ "schema": "terluna.climate.gcm-rain-evaporation/1",
+ "cm1": {
+  "lunar_limits": 0.48,
+  "cm1_limits": 0.857
+ },
+ "measured": [
+  {
+   "run": "A28R_301k_cold",
+   "years": [
+    18,
+    19
+   ],
+   "gamma": 0.01,
+   "shares": {
+    "global": {
+     "formed_mm_day": 3.045216953013709,
+     "ground_mm_day": 2.174499033974443,
+     "evaporated_share": 0.2859296833276712,
+     "evaporated_share_by_residual": 0.2969114223135251
+    },
+    "land": {
+     "formed_mm_day": 2.9717388829305706,
+     "ground_mm_day": 2.095981809616845,
+     "evaporated_share": 0.2946951626012648
+    },
+    "sea": {
+     "formed_mm_day": 3.1632171232009183,
+     "ground_mm_day": 2.3005917011653576,
+     "evaporated_share": 0.27270509371884477
+    },
+    "cm1_box": {
+     "formed_mm_day": 4.926137017542705,
+     "ground_mm_day": 3.3608099835234997,
+     "evaporated_share": 0.31775954027361464
+    }
+   }
+  },
+  {
+   "run": "A28R_301k_cold_g02",
+   "years": [
+    1
+   ],
+   "gamma": 0.02,
+   "shares": {
+    "global": {
+     "formed_mm_day": 3.7269590613906254,
+     "ground_mm_day": 2.068562174644882,
+     "evaporated_share": 0.44497319649305533,
+     "evaporated_share_by_residual": 0.43929527132066865
+    },
+    "land": {
+     "formed_mm_day": 3.7934743422275985,
+     "ground_mm_day": 2.060483003972324,
+     "evaporated_share": 0.45683486480038504
+    },
+    "sea": {
+     "formed_mm_day": 3.6201405990938844,
+     "ground_mm_day": 2.081536705865621,
+     "evaporated_share": 0.42501219251356537
+    },
+    "cm1_box": {
+     "formed_mm_day": 5.9219830257419614,
+     "ground_mm_day": 3.493564550733893,
+     "evaporated_share": 0.41006846261667795
+    }
+   }
+  },
+  {
+   "run": "A28R_301k_cold_g04",
+   "years": [
+    1
+   ],
+   "gamma": 0.04,
+   "shares": {
+    "global": {
+     "formed_mm_day": 4.500977726385938,
+     "ground_mm_day": 1.7956845739772884,
+     "evaporated_share": 0.6010456653783234,
+     "evaporated_share_by_residual": 0.6011238595643421
+    },
+    "land": {
+     "formed_mm_day": 4.620960588783587,
+     "ground_mm_day": 1.85929957789972,
+     "evaporated_share": 0.5976378629125771
+    },
+    "sea": {
+     "formed_mm_day": 4.3082944105822945,
+     "ground_mm_day": 1.6935237349566983,
+     "evaporated_share": 0.6069155044750512
+    },
+    "cm1_box": {
+     "formed_mm_day": 7.709004398955003,
+     "ground_mm_day": 3.126543499901673,
+     "evaporated_share": 0.594429664571797
+    }
+   }
+  }
+ ],
+ "gamma_for_cm1_lunar_limits": 0.026014537909243875,
+ "evidence": "Means over GCM output of the rain its schemes form and the rain at the ground, and of mkrain's residual cooling; CM1's share from one small box over one lunar day with the lunar rain limits. The fit matches the box's place, which sits at the global mean in the design years.",
+ "reading_rule": "measured holds each run's gamma and its evaporated shares (1 less the rain at the ground over the rain formed) globally, over land and sea and at the CM1 box's place; gamma_for_cm1_lunar_limits is the gamma interpolated in log between the runs at which the box's place evaporates CM1's share with the lunar limits, or null outside them.",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/rain_evaporation.py": "b7fa4dd65e1f4c88"
+  },
+  "inputs": {
+   "climate/results/crm/box_box_0e_small_lunar_rain_day29.json": {
+    "path": "climate/results/crm/box_box_0e_small_lunar_rain_day29.json",
+    "sha256": "5da1c0c28ed1339f"
+   }
+  }
+ }
+}

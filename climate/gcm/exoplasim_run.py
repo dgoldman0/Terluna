@@ -981,6 +981,19 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
+PLASIM_RAIN_GAMMA = 0.01   # rainmod's gamma at T21: the share of a layer's saturation deficit its rain evaporates a step
+
+
+def rain_evaporation_setting(gamma) -> dict:
+    """PlaSim's evaporation of falling rain and snow as the configuration records it: rainmod's gamma, the share of
+    each unsaturated layer's saturation deficit the precipitation passing through it evaporates in a time step (with
+    the latent cooling's correction, at most the precipitation there), in place of PlaSim's own 0.01."""
+    gamma = float(gamma)
+    if not 0.0 < gamma <= 1.0:
+        raise ValueError('the rain evaporation constant must lie above 0 and at most 1')
+    return dict(gamma=gamma, plasim_default=PLASIM_RAIN_GAMMA)
+
+
 def cold_cloud_factors(path) -> dict:
     """The central factors of a cold_cloud.py product, its top layer first, as the configuration records them: the
     ice optics' water and crystal radius on PlaSim's top levels (ZICEWF, ZICERF), the levels below left at 1."""
@@ -1003,7 +1016,7 @@ def cold_cloud_factors(path) -> dict:
 def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
                   heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
-                  cold_cloud=None):
+                  cold_cloud=None, rain_evaporation=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
@@ -1013,7 +1026,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     (LW_CORRECTION_EDITS) from the fit longwave_fit names (LONGWAVE_FITS), and ice_optics ice optics for cloud colder
     than -38 °C (ICE_OPTICS_EDITS) with the near-infrared weights ice_weights names (ICE_WEIGHTS_EDITS), and wind10 the
     10 m wind (WIND10_PATCHES); cold_cloud, a cold_cloud.py product, scales the ice optics' water and radius on its
-    layers by its central factors (ICE_FACTOR_EDITS). Each is recorded when given, and left out the configuration is the one every
+    layers by its central factors (ICE_FACTOR_EDITS); rain_evaporation replaces PlaSim's constant for the evaporation of
+    falling rain and snow (rainmod's gamma). Each is recorded when given, and left out the configuration is the one every
     earlier run had; the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October
     did, and the 295 K fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
@@ -1071,6 +1085,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
             cfg['ice_optics'].update(near_ir_weights=list(pio.SHIELD_NIR_WEIGHTS),
                                      weights_source="the design shield's sunlight, written as ZICEW (world-crafting's "
                                                     'patch 11, lab branch 79ea224)')
+    if rain_evaporation is not None:
+        cfg['rain_evaporation'] = rain_evaporation_setting(rain_evaporation)
     if cold_cloud is not None:
         if not ice_optics:
             raise ValueError("the cold cloud's factors act on the ice optics, which need --ice-optics")
@@ -1284,6 +1300,8 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('rainmod_namelist', 'CWSCALE', str(scale))
     model._edit_namelist('plasim_namelist', 'NDIAGCF', str(m['clear_sky']))
     model._edit_namelist('rainmod_namelist', 'CONVDAY', str(float(m['convective_day_s'])))
+    if 'rain_evaporation' in cfg:
+        model._edit_namelist('rainmod_namelist', 'GAMMA', repr(float(cfg['rain_evaporation']['gamma'])))
     if m['surface_cloud_rcrit'] > 0.0:                                 # the lowest layer is the last of RCRIT
         model._edit_namelist('rainmod_namelist', f"RCRIT({m['layers']})", str(float(m['surface_cloud_rcrit'])))
     if 'top_infrared_w_m2' in cfg:
@@ -1501,11 +1519,12 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True,
         heating: bool = False, longwave_correction: bool = False, ice_optics: bool = False,
         twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k',
-        wind10: bool = False, ice_weights: str = 'shield', cold_cloud: str | None = None) -> int:
+        wind10: bool = False, ice_weights: str = 'shield', cold_cloud: str | None = None,
+        rain_evaporation: float | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
-                        ice_weights=ice_weights, cold_cloud=cold_cloud)
+                        ice_weights=ice_weights, cold_cloud=cold_cloud, rain_evaporation=rain_evaporation)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -1635,6 +1654,9 @@ def main(argv=None) -> int:
                         help="a cold_cloud.py product whose central factors scale the ice optics' water and crystal "
                              'radius on its layers, carrying them to lunar gravity (ICE_FACTOR_EDITS; needs '
                              '--ice-optics; part of the run key)')
+    parser.add_argument('--rain-evaporation', type=float, metavar='GAMMA',
+                        help="PlaSim's constant for the evaporation of falling rain and snow (rainmod's gamma, "
+                             f'{PLASIM_RAIN_GAMMA} its own; part of the run key)')
     parser.add_argument('--wind10', action='store_true',
                         help="the 10 m wind on Geleyn's profile from the lowest layer's drag, codes 165 and 166 "
                              '(WIND10_PATCHES; part of the run key)')
@@ -1670,7 +1692,7 @@ def main(argv=None) -> int:
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
-               args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud)
+               args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation)
 
 
 if __name__ == '__main__':

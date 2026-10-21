@@ -49,3 +49,9 @@ def test_the_product_checks_the_oxygen_steps_hydrogen_and_counts_methane():
         for row in tr['grounds'].values():
             assert row['methane'] > row['without_methane']               # methane carries most of the hydrogen
             assert row['cycles']['waters_years'] > 1e9
+
+
+def test_nothing_breaks_methane_below_the_base_behind_the_stack():
+    levels = hy.oxidant_lifetime()
+    assert levels and all(r['p_pa'] >= hy.BASE_PA for r in levels)
+    assert min(r['lifetime_years'] for r in levels) > 1e9                # against OH and O(1D) behind the titania stack

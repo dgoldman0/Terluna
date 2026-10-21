@@ -18,6 +18,7 @@ ExoPlaSim, the first model installed (2026-09-25).
 | [plasim_longwave.py](plasim_longwave.py) | PlaSim's clear-sky longwave column by column, checked against its own heating, and the correction by height fitted to the correlated-k model that the runner's `--longwave-correction` adds (`../results/gcm/longwave_<run>.json`); its `check` sets the correction against correlated-k on states from 295 to 306.6 K (`../results/gcm/longwave_check_301k.json`) |
 | [plasim_ice_optics.py](plasim_ice_optics.py) | The ice optics the runner's `--ice-optics` gives cloud colder than −38 °C, beside PlaSim's liquid-water optics (`../results/gcm/ice_optics.json`) |
 | [high_cloud.py](high_cloud.py) | How far the top three layers' water and crystal radius could move a run's climate: first-order changes at the top of the air and the ground (`../results/gcm/high_cloud_<run>.json`) |
+| [rain_evaporation.py](rain_evaporation.py) | How much of its falling rain a run evaporates, measured from the rain its schemes form against the rain at the ground, against CM1's lunar rain, and the constant that matches it (`../results/gcm/rain_evaporation.json`) |
 | [cold_cloud.py](cold_cloud.py) | The cold cloud at lunar gravity: factors on the top layers' water and crystal radius from slabs of rising air on both worlds ([atmosphere/snow/cirrus.py](../../atmosphere/snow/cirrus.py)), for the runner's `--cold-cloud` (`../results/gcm/cold_cloud_<run>.json`) |
 | [compare.py](compare.py) | The numbers behind the run tables, and where a run still warming or cooling would settle |
 | [climatology.py](climatology.py) | A run's surface climatology over chosen years, for display and other lanes: cloud in a low deck (the lowest 34 km) and a high deck, precipitation, evaporation, soil moisture, temperature, water vapour, sea ice and snow, with cloud composited against the Sun by latitude and local time, and land air temperature the same way for all land and for the near and far sides. It writes `products/climatology_<run>.npz` (`terluna.climate.gcm-climatology/1`) |
@@ -1638,6 +1639,45 @@ climate/gcm/.venv/bin/python -m climate.gcm.exoplasim_run A28R --folder A28R_301
     --cold-cloud climate/results/gcm/cold_cloud_A28R_301k_s0897.json
 climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_cold:5 --case A28R_301k_cold:12 \
     --case A28R_301k_cold:19 --output climate/results/gcm/longwave_check_A28R_301k_cold.json    # about 2 minutes
+```
+
+#### The evaporation of falling rain (21 October)
+
+PlaSim rains out what its large-scale and convective schemes condense at once, and each unsaturated layer the rain
+falls through then evaporates a share gamma of its saturation deficit each time step (rainmod's mkrain), corrected for
+the latent cooling and at most the rain there: one constant, 0.01 at T21, set for Earth, which knows nothing of the
+drops' size or fall. [rain_evaporation.py](rain_evaporation.py) measures a run's evaporated share two ways from its
+output, the rain the schemes form (their heating, written before mkrain) against the rain at the ground, and mkrain's
+cooling left in the summed physics tendency; the two agree within 1.1 points
+([rain_evaporation.json](../results/gcm/rain_evaporation.json)). The heating diagnostics are snapshots and the rain a
+mean, so only long means compare.
+
+The cold cloud's run evaporates 29% of its falling rain, the same over land and sea, and 32% on the equatorial land
+about 0° E where CM1's small box stands. On Earth that would be an ordinary share. CM1's box, with Morrison's rain
+limits carried to lunar gravity, evaporates 48% of the water leaving its cloud, and 86% with CM1's own limits: lunar
+drops of a size lose far more water falling slowly through six times the air, and the lunar limits let them grow
+large enough to bring the loss back to 48% ([the CRM's account](../crm/README.md)). Two years at each of two
+constants from the cold cloud's run's year-19 restart (`run_rain_gamma.sh` on the research drive):
+
+| gamma | Evaporated: global; at the box | Rain formed; at the ground | Cloud; albedo | Ground after two years |
+|---|---|---|---|---|
+| 0.01, PlaSim's own (years 18–19) | 28.6%; 31.8% | 3.05; 2.17 mm/day | 34.8%; 0.370 | 298.50 K |
+| 0.02 | 44.5%; 41.0% | 3.73; 2.07 mm/day | 40.1%; 0.394 | 298.11 K, top −0.3 W/m² |
+| 0.04 | 60.1%; 59.4% | 4.50; 1.80 mm/day | 53.2%; 0.437 | 296.73 K, top −4.9 W/m² |
+
+- **CM1's 48% at the box comes at gamma 0.026**, 2.6 times PlaSim's own, interpolated in log gamma.
+- **More evaporation moistens the lower air, and PlaSim's low cloud grows.** The cloud's effect on the sunlight
+  strengthens by 7 W/m² at 0.02 and 20 W/m² at 0.04, and the Moon cools; at 0.026 a settled run would likely sit
+  1–2 K below the cold cloud's 298.5 K. Less of the rain formed reaches the ground.
+- **The match rests on one box.** CM1's small box over one lunar day, which rains a third as much as the GCM at its
+  place, is the only lunar measure of the share.
+
+The runner's `--rain-evaporation GAMMA` writes the constant into PlaSim's rain namelist, recorded in the run's
+configuration only when given.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.rain_evaporation A28R_301k_cold:18-19 A28R_301k_cold_g02:1 \
+    A28R_301k_cold_g04:1                                                                   # seconds
 ```
 
 ### Cloud amount: what published models say

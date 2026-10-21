@@ -22,6 +22,11 @@ broken at the glow's rate J falls off as exp(-z / sqrt(K / J)), so the share bro
 1 - exp(-dz / sqrt(K / J)), dz the height from the base to methane's homopause, where K equals its molecular
 diffusivity. K above the base is the middle atmosphere's mixing for the Moon at its cap.
 
+Below the base nothing breaks methane: behind the stack no ultraviolet below about 340 nm reaches the middle
+atmosphere, ozone makes no O(1D) and so nothing makes OH, and methane's chemical lifetime against the design case's
+own OH and O(1D) (JPL 19-5 rates) runs to 10^12 years and more at every level (oxidant_lifetime). It reaches the base
+unbroken, and its water stays out of the air below it.
+
 Diffusion parameters: Banks and Kockarts (1973) for H2, as the oxygen step takes them; Massman (1998) for methane and
 water in air. The temperature at the homopause is the 0.3 Pa base's in the three design treatments with the curved
 light (curved_light.json): behind the film alone the thermal column above it stays within 0.4 K of it. The oxygen
@@ -127,6 +132,24 @@ def broken_share(t, base_radius_m, m_air_amu=None):
                 share=1.0 - math.exp(-dz_m / decay_m))
 
 
+def oxidant_lifetime(case='moon_1.2atm_titania_stack', base_pa=BASE_PA):
+    """Methane's chemical lifetime (years) at each level of a stored middle-atmosphere case below the base, against its
+    OH and O(1D): CH4 + OH at 2.45e-12 exp(-1775/T) and CH4 + O(1D) at 1.75e-10 cm^3/s (JPL 19-5)."""
+    import csv
+    rows = list(csv.DictReader((ROOT / 'atmosphere' / 'middle_atmosphere' / 'results' / 'profiles' /
+                                f'{case}.csv').open()))
+    out = []
+    for r in rows:
+        p, t = float(r['p_pa']), float(r['t_k'])
+        if p < base_pa:
+            continue
+        n = p / (BOLTZMANN * t) * 1e-6                                   # cm^-3
+        rate = 2.45e-12 * math.exp(-1775.0 / t) * float(r['OH']) * n + 1.75e-10 * float(r['O1D']) * n
+        out.append(dict(p_pa=p, t_k=t, oh_cm3=float(r['OH']) * n, o1d_cm3=float(r['O1D']) * n,
+                        lifetime_years=1.0 / rate / YEAR_S if rate > 0 else float('inf')))
+    return out
+
+
 def escape_rates(t, water_share, broken):
     """Hydrogen escape (kg/s) by carrier with methane broken in the given share below the homopause."""
     m_air = air_mass_amu()
@@ -179,6 +202,9 @@ def analyse():
     lte = out['treatments']['lte']['grounds']['ts288']
     out['check'] = dict(oxygen_step_kg_s=list(oxygen), limiting_kg_s=lte['without_methane'],
                         ratio=[x / lte['without_methane'] for x in oxygen])
+    levels = oxidant_lifetime()
+    out['methane_below_the_base'] = dict(case='moon_1.2atm_titania_stack', shortest_lifetime_years=min(
+        r['lifetime_years'] for r in levels), most_oh_cm3=max(r['oh_cm3'] for r in levels), levels=levels)
     return out
 
 
@@ -201,6 +227,9 @@ def main(argv=None) -> int:
                                    for p in [CURVED, OXYGEN] + [CASES / f'{c}.json' for c in GROUNDS.values()]})
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, indent=1) + '\n')
+    m = out['methane_below_the_base']
+    print(f"methane below the base: shortest chemical lifetime {m['shortest_lifetime_years']:.1e} years "
+          f"(OH at most {m['most_oh_cm3']:.1e} cm^-3)")
     print(f"limiting flux of H2 and water {out['check']['limiting_kg_s']:.5f} kg/s against the oxygen step's "
           f"{out['check']['oxygen_step_kg_s']}")
     for name, tr in out['treatments'].items():

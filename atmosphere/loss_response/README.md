@@ -418,7 +418,9 @@ is the most that diffusion carries up through the homopause, the same wherever
 the homopause lies; for H2 and water that limit, 0.0026 kg/s, matches the oxygen
 step's full transport within 5%. Methane unbroken at its homopause diffuses as
 methane, slowly and with 0.56 of the air's mass, and adds 0.0025 kg/s; broken
-below it into H2 and H, 0.018 kg/s. The sky's glow breaks it above the base with
+below it into H2 and H, 0.018 kg/s. Below the base nothing breaks it: behind the
+stack the middle atmosphere holds OH below 10⁻⁶ per cubic centimetre, a chemical
+lifetime of 6×10¹² years and more. The sky's glow breaks it above the base with
 a lifetime of 3.4 years, while eddy mixing carries it to its homopause 420–540 km
 up and lets it fall off over 2,000 km, so 19–24% arrives broken: 0.0085 kg/s of
 hydrogen in all, 0.005–0.021 kg/s at the bounds, 3.3 times the escape without

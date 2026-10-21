@@ -458,12 +458,14 @@ base, the water above the tropopause the cold trap's alone; broken entirely as s
 - **Methane's water at its bound warms the base 1.2–2.0 K, and the exobase follows.** Behind the film alone the
   exobase stays at 147–200 K, 50–100 K under the 250 K target, and the molecular loss at about 0.001 kg/s at most.
   The 0.1% leak at solar maximum, which already passed 250 K in the warmest treatment, passes it by 1.7 K more.
-- **The same water would warm the climate.** At the fixed 288 K ground the column takes in 6.1 W/m² more at the top
-  with 3.8 ppm of water above the tropopause, about 3.8 K of ground at the column's 1.62 W/m² a kelvin. That is an
-  upper bound: behind the shield methane meets little OH or O(1D), and the sky's Lyman-alpha glow breaks it mostly
-  above the base, with a lifetime of 3.4 years there ([the loss response](../loss_response/README.md)), where its
-  water hardly touches the greenhouse. Where in the middle atmosphere methane is broken decides both, and needs
-  methane in the column's chemistry.
+- **Below the base nothing breaks methane, so the unbroken bound holds.** Behind the stack no ultraviolet below about
+  340 nm reaches the middle atmosphere, ozone makes no O(1D), and the design case's own OH stays below 10⁻⁶ per cubic
+  centimetre, where Earth's air holds about 10⁶: methane's chemical lifetime is 6×10¹² years and more at every level
+  below the base ([hydrogen.py](../loss_response/hydrogen.py), `oxidant_lifetime`). Only the sky's Lyman-alpha glow
+  breaks it, above the base, with a lifetime of 3.4 years there ([the loss response](../loss_response/README.md)). So
+  the exobase is the unbroken case's, the 14 October check's, and the air below the base keeps the cold trap's water.
+  The broken bound's 6.1 W/m² at the top of the column, about 3.8 K at the column's 1.62 W/m² a kelvin, belongs to a
+  shield that lets ultraviolet through.
 
 Methane's own infrared bands stay out of the column, as its chemistry does.
 
