@@ -1785,14 +1785,70 @@ bit for bit, in 237 s against 233 s. One year of the new scheme at a reference h
 | Longwave cloud warming | 52.0 W/m² | 48.7 W/m² |
 | Imbalance at the top of the air | +3.76 W/m² | +0.07 W/m² |
 
-So it is still warming after its first year, and its settled climate needs longer runs. Two 15-year branches from the
-same restart run at the author's go-ahead of 22 October (`run_sbm_branches.sh`): `A28R_301k_cold_sbm_rh07` at
-Frierson's settings and `A28R_301k_cold_sbm_rh06` at a reference humidity of 0.6. Then come the settling, longwave and
-exobase checks on them, before CM1 boxes forced by the new GCM's own budget are compared on rain by time of day, total
-rain and the heights where it forms.
+So it is still warming after its first year, and its settled climate needs longer runs.
 
-Its adoption for the design climate is the author's call once these are in. It would change the convective rain maps
-the electricity study reads ([convection.py](convection.py)).
+**The new scheme settled** (the author's go-ahead of 22 October; `run_sbm_branches.sh` and `sbm_settled_analysis.py`
+on the research drive). Two 15-year branches from the same restart, at the design climate's sunlight (0.897) with
+every design flag, each at about Kuo's speed (240–306 s a year on a shared machine): `A28R_301k_cold_sbm_rh07` at
+Frierson's settings (a reference humidity of 0.7, 2 hours) and `A28R_301k_cold_sbm_rh06` at 0.6. Both reach balance at
+the top of the air by years 8–10. `compare --settle` puts them at 299.6 and 300.1 K, each within 0.1 K, against Kuo's
+298.4 K, with leftover imbalances of −0.03 ± 0.08 and +0.12 ± 0.09 W/m² against Kuo's −0.18 ± 0.12. Over their last
+five years against Kuo's settled years:
+
+| Settled | Kuo, `A28R_301k_cold` 12–19 | New scheme, rh 0.7 (10–14) | New scheme, rh 0.6 (10–14) |
+|---|---|---|---|
+| Ground | 298.61 K | 299.56 K | 300.13 K |
+| Sea surface | 300.1 K | 300.5 K | 300.9 K |
+| Air over land | 298.2 K | 299.7 K | 300.5 K |
+| Air poleward of 70° | 297.6 K | 299.6 K | 300.3 K |
+| Equatorial land by day; by night | 299.1; 297.5 K | 300.2; 298.9 K | 301.1; 299.6 K |
+| Coldest; warmest 3-day mean anywhere | 289.8; 306.5 K | 290.9; 308.0 K | 291.5; 308.7 K |
+| Rain | 2.19 mm/day | 2.32 mm/day | 2.45 mm/day |
+| Water vapour | 222 kg/m² | 245 kg/m² | 236 kg/m² |
+| Cloud cover; planetary albedo | 34.8%; 0.370 | 35.2%; 0.378 | 34.9%; 0.370 |
+| Cloud effect: sunlight; infrared | −37.5; 48.6 W/m² | −40.0; 50.1 W/m² | −37.6; 51.0 W/m² |
+| Land under 0.5 mm/day of rain | 28.0% | 26.8% | 26.8% |
+
+At the same sunlight the new scheme warms the Moon by 1.0–1.5 K at the ground, 1.5–2.3 K in the air over land and
+2.0–2.7 K poleward of 70°. The column holds 6–10% more water and rains 6–12% more. Rain at the two CM1 box sites by
+local time (mm/day, the GCM's years as in the table; the CM1 boxes' second lunar day, forced by Kuo's GCM):
+
+| Near-side Sea | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise | Mean |
+|---|---|---|---|---|---|
+| Kuo | 0.92 | 3.50 | 3.54 | 2.93 | 2.72 |
+| New scheme, rh 0.7 | 0.31 | 2.88 | 3.33 | 1.45 | 1.99 |
+| New scheme, rh 0.6 | 0.74 | 2.93 | 3.38 | 2.68 | 2.43 |
+| CM1 box | 0.00 | 1.19 | 2.04 | 0.17 | 0.85 |
+
+| Land at 0° E | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise | Mean |
+|---|---|---|---|---|---|
+| Kuo | 1.91 | 11.06 | 0.96 | 0.21 | 3.57 |
+| New scheme, rh 0.7 | 1.05 | 15.10 | 0.47 | 0.08 | 4.20 |
+| New scheme, rh 0.6 | 3.27 | 12.67 | 0.47 | 0.11 | 4.15 |
+| CM1 box | 2.87 | 8.59 | 1.53 | 0.07 | 3.28 |
+
+- **Over the sea at rh 0.7** the rain after midnight halves and the morning's falls by two-thirds, toward CM1's
+  pattern. The nights still rain about eight times CM1's. At rh 0.6 the nights keep nearly Kuo's rain.
+- **Over land** both settings rain more and sharpen the afternoon peak, 15.1 and 12.7 mm/day against Kuo's 11.1 and
+  CM1's 8.6, while the evening's rain halves, away from CM1's spread through the evening.
+- **Against CM1 near the ground.** The corrected CM1 boxes ran 0.23 K warmer than Kuo's GCM at 2 m over the sea and
+  1.15 K over land ([the CRM's account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e)), so
+  the new scheme's warming has the right sign and runs larger. Those boxes were forced by Kuo's GCM, and CM1 boxes
+  forced by the new GCM's own budget are the comparison that tests it.
+
+**The checks.**
+- **The longwave.** The 301 K refit, on each branch's last year, leaves a largest layer error of 3.38 W/m², against
+  the rule's 2.5 ([longwave_check_sbm.json](../results/gcm/longwave_check_sbm.json); `plasim_longwave check
+  --case`). The new scheme's climate therefore takes a refit of its own, as the cold cloud's design case already does.
+- **The exobase.** It stays as the 14 October check left it. The middle atmosphere's exobase moves by under 0.4 K
+  across grounds of 268–308 K, and the water at PlaSim's top level falls from Kuo's 0.034 to 0.020–0.022 ppmv, with the
+  air there 1.2–1.6 K cooler.
+- **The energy.** The leftover imbalances above are no larger than Kuo's.
+
+The new scheme's climate lands 1.0–1.5 K nearer the design climate's 301 K than Kuo's at the same sunlight, so a
+design case with it would need less of the 2% more sunlight the cold cloud's factors called for. Its adoption for the
+design climate, and its reference humidity, are the author's call; the CM1 boxes forced by it come next, at the
+author's word. It would change the convective rain maps the electricity study reads ([convection.py](convection.py)).
 
 ### Cloud amount: what published models say
 
