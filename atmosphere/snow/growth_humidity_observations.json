@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "evidence_state": "Observed values from printed numerical labels in additional 2018 experiments; same apparatus/author as 1991; not blind validation",
+  "source": {
+    "path": "research/runs/snow_scale/growth_environment_sources/takahashi2018_ams.pdf",
+    "url": "https://ams.confex.com/ams/15CLOUD15ATRAD/webprogram/Manuscript/Paper347181/105TAKAHASHI.pdf",
+    "bytes": 608258,
+    "sha256": "06a87318db2cc1831add739d305e2923fd4f361896ba1b5d8ade49a943d14f49",
+    "rights": "Numerical facts transcribed with source attribution; source paper retained only in ignored research cache. No open redistribution license established for the full paper."
+  },
+  "source_title": "Supercooled cloud tunnel studies on the growth of branched planar snow crystals below water saturation",
+  "source_author": "Tsuneya Takahashi",
+  "source_year": 2018,
+  "source_location": "Figure 1, PDF page 2; methods PDF pages 1 and 3",
+  "verification": "Read source text and visually inspected complete Figure 1 labels at 160 dpi; source file hash retained. These numbers are printed labels, not digitized curve coordinates.",
+  "pressure_Pa": 101000,
+  "pressure_status": "Site annual mean; individual run pressure not reported",
+  "growth_age_s": 600,
+  "initial_dimension_m_range": [
+    5e-06,
+    2e-05
+  ],
+  "initial_dimension_m_approx_mean": 1e-05,
+  "initial_shape_set": [
+    "plate",
+    "thick_plate",
+    "column"
+  ],
+  "initial_particle_mass_kg": null,
+  "initial_aspect_ratio": null,
+  "vapor_density_excess_temporal_std_g_m3_mean": 0.008,
+  "vapor_density_excess_temporal_std_g_m3_max": 0.018,
+  "max_accepted_temperature_fluctuation_K": 0.3,
+  "temperature_status": "Values are the nominal group headings in Figure 1, not exact per-crystal mean temperatures. Figure 2 plots per-crystal temperatures, visibly offset from group headings; use a temperature sensitivity envelope or digitize Figure 2 before claiming exact matched forcing.",
+  "humidity_conversion": "e = e_si(T) + delta_rho_kg_m3 * R_v * T_K. State saturation convention explicitly; do not mistake delta_rho for fractional ice supersaturation.",
+  "limitations": [
+    "Mass, thickness, fall speed and individual initial shape/mass are not reported for these 13 examples.",
+    "Figures select 13 of the 62 accepted experiments; they are not an unbiased population distribution.",
+    "The 0.008/0.018 g m-3 figures describe temporal variability of excess vapor density, not pointwise measurement uncertainty or per-case confidence intervals.",
+    "Maximum size alone cannot validate mass or geometry.",
+    "Do not calibrate to these cases and then label them independent validation."
+  ],
+  "cases": [
+    {
+      "id": "A",
+      "nominal_temperature_C": -13.0,
+      "vapor_density_excess_g_m3": 0.06,
+      "observed_diameter_mm": 0.31,
+      "habit": "sector",
+      "source_habit_code": "P2a"
+    },
+    {
+      "id": "B",
+      "nominal_temperature_C": -13.0,
+      "vapor_density_excess_g_m3": 0.11,
+      "observed_diameter_mm": 0.95,
+      "habit": "broad_branch",
+      "source_habit_code": "P2b"
+    },
+    {
+      "id": "C",
+      "nominal_temperature_C": -14.3,
+      "vapor_density_excess_g_m3": 0.03,
+      "observed_diameter_mm": 0.26,
+      "habit": "sector",
+      "source_habit_code": "P2a"
+    },
+    {
+      "id": "D",
+      "nominal_temperature_C": -14.3,
+      "vapor_density_excess_g_m3": 0.09,
+      "observed_diameter_mm": 0.99,
+      "habit": "broad_branch",
+      "source_habit_code": "P2b"
+    },
+    {
+      "id": "E",
+      "nominal_temperature_C": -14.3,
+      "vapor_density_excess_g_m3": 0.11,
+      "observed_diameter_mm": 1.12,
+      "habit": "stellar",
+      "source_habit_code": "P3a"
+    },
+    {
+      "id": "F",
+      "nominal_temperature_C": -14.3,
+      "vapor_density_excess_g_m3": 0.15,
+      "observed_diameter_mm": 1.35,
+      "habit": "dendrite",
+      "source_habit_code": "P3b"
+    },
+    {
+      "id": "G",
+      "nominal_temperature_C": -14.3,
+      "vapor_density_excess_g_m3": 0.17,
+      "observed_diameter_mm": 1.46,
+      "habit": "fern",
+      "source_habit_code": "P3c"
+    },
+    {
+      "id": "H",
+      "nominal_temperature_C": -15.0,
+      "vapor_density_excess_g_m3": 0.02,
+      "observed_diameter_mm": 0.19,
+      "habit": "plate",
+      "source_habit_code": "P1a"
+    },
+    {
+      "id": "I",
+      "nominal_temperature_C": -15.0,
+      "vapor_density_excess_g_m3": 0.05,
+      "observed_diameter_mm": 0.27,
+      "habit": "sector",
+      "source_habit_code": "P2a"
+    },
+    {
+      "id": "J",
+      "nominal_temperature_C": -15.0,
+      "vapor_density_excess_g_m3": 0.12,
+      "observed_diameter_mm": 1.07,
+      "habit": "broad_branch",
+      "source_habit_code": "P2b"
+    },
+    {
+      "id": "K",
+      "nominal_temperature_C": -15.0,
+      "vapor_density_excess_g_m3": 0.15,
+      "observed_diameter_mm": 1.34,
+      "habit": "stellar",
+      "source_habit_code": "P3a"
+    },
+    {
+      "id": "L",
+      "nominal_temperature_C": -16.0,
+      "vapor_density_excess_g_m3": 0.05,
+      "observed_diameter_mm": 0.17,
+      "habit": "plate",
+      "source_habit_code": "P1a"
+    },
+    {
+      "id": "M",
+      "nominal_temperature_C": -16.0,
+      "vapor_density_excess_g_m3": 0.09,
+      "observed_diameter_mm": 0.33,
+      "habit": "sector",
+      "source_habit_code": "P2a"
+    }
+  ]
+}

@@ -1,0 +1,867 @@
+{
+  "schema": "terluna.atmosphere.snow-growth-transfer-observations/1",
+  "evidence": "Primary-source numerical transcriptions and a natural-cloud data reanalysis; not matched model validation.",
+  "datasets": [
+    {
+      "dataset": "bailey2006",
+      "record": {
+        "schema_version": 1,
+        "evidence_state": "Manual transcription of printed empirical effective-capacitance table plus explicitly separated geometric calculation",
+        "source": {
+          "url": "https://ams.confex.com/ams/pdfpapers/113510.pdf",
+          "title": "Measured ice crystal capacitances: the failure of the electrostatic analogy",
+          "authors": [
+            "Matthew Bailey",
+            "John Hallett"
+          ],
+          "year": 2006,
+          "venue": "AMS 12th Conference on Cloud Physics, extended abstract P1.59",
+          "sha256": "660894ab1b8aea9d5f51b79c2e623f2ab9dc7e7db6b2e302eda305c7168012b2",
+          "path": "research/runs/snow_scale/growth_physics_sources/bailey2006.pdf"
+        },
+        "source_location": "Table 1, PDF page 3, measured \u221220 \u00b0C, 550 mb columns",
+        "temperature_C": -20,
+        "pressure_Pa": 55000,
+        "gas": "air",
+        "ambient_flow": "static diffusion chamber, crystal attached to glass filament",
+        "growth_supersaturation_ice_max_fraction": 0.13,
+        "per_row_supersaturation": null,
+        "per_row_diameter": null,
+        "measured_range_meaning": "Range in measured effective capacitances; source describes aspect ratio groups typically spanning +/-10%; singleton values preserved, not confidence limits.",
+        "quantity_definition": "C inferred by inverting capacitance growth equation using experimentally measured volume growth, bulk ice density 0.92 g/cm3 and thermodynamic transport resistance. Includes effects of attachment/irregular structure and source measurement/systematic uncertainties; not a direct measurement of purely geometric electrostatic capacitance.",
+        "geometric_calculation": "For oblate spheroid phi=t/D, C/D = sqrt(1-phi^2)/(2*acos(phi)); this is an independent analytic calculation at the listed mean aspect ratio, not the source theoretical-table row.",
+        "cases": [
+          {
+            "thickness_to_diameter": 0.84,
+            "observed_effective_C_over_D_range": [
+              0.27,
+              0.27
+            ],
+            "calculated_oblate_geometric_C_over_D": 0.47303748987201893,
+            "calculated_geometric_to_effective_ratio_range": [
+              1.7519907032296997,
+              1.7519907032296997
+            ]
+          },
+          {
+            "thickness_to_diameter": 0.63,
+            "observed_effective_C_over_D_range": [
+              0.15,
+              0.15
+            ],
+            "calculated_oblate_geometric_C_over_D": 0.4366607507620336,
+            "calculated_geometric_to_effective_ratio_range": [
+              2.9110716717468907,
+              2.9110716717468907
+            ]
+          },
+          {
+            "thickness_to_diameter": 0.2,
+            "observed_effective_C_over_D_range": [
+              0.1,
+              0.1
+            ],
+            "calculated_oblate_geometric_C_over_D": 0.3577363877108922,
+            "calculated_geometric_to_effective_ratio_range": [
+              3.577363877108922,
+              3.577363877108922
+            ]
+          },
+          {
+            "thickness_to_diameter": 0.13,
+            "observed_effective_C_over_D_range": [
+              0.02,
+              0.02
+            ],
+            "calculated_oblate_geometric_C_over_D": 0.3441735523321236,
+            "calculated_geometric_to_effective_ratio_range": [
+              17.20867761660618,
+              17.20867761660618
+            ]
+          },
+          {
+            "thickness_to_diameter": 0.12,
+            "observed_effective_C_over_D_range": [
+              0.08,
+              0.08
+            ],
+            "calculated_oblate_geometric_C_over_D": 0.34221629814607746,
+            "calculated_geometric_to_effective_ratio_range": [
+              4.277703726825968,
+              4.277703726825968
+            ]
+          },
+          {
+            "thickness_to_diameter": 0.08,
+            "observed_effective_C_over_D_range": [
+              0.07,
+              0.07
+            ],
+            "calculated_oblate_geometric_C_over_D": 0.33433543888907863,
+            "calculated_geometric_to_effective_ratio_range": [
+              4.7762205555582655,
+              4.7762205555582655
+            ]
+          },
+          {
+            "thickness_to_diameter": 0.06,
+            "observed_effective_C_over_D_range": [
+              0.03,
+              0.13
+            ],
+            "calculated_oblate_geometric_C_over_D": 0.3303629298405737,
+            "calculated_geometric_to_effective_ratio_range": [
+              2.5412533064659515,
+              11.012097661352456
+            ]
+          },
+          {
+            "thickness_to_diameter": 0.04,
+            "observed_effective_C_over_D_range": [
+              0.02,
+              0.04
+            ],
+            "calculated_oblate_geometric_C_over_D": 0.3263682535012247,
+            "calculated_geometric_to_effective_ratio_range": [
+              8.159206337530618,
+              16.318412675061236
+            ]
+          }
+        ],
+        "limitations": [
+          "Conference extended abstract, not a new independent experimental dataset beyond the authors 2002/2004 chamber work.",
+          "Individual sizes, supersaturations and complete growth trajectories are not tabulated here.",
+          "Some apparent capacitance error can represent omitted attachment kinetics, irregular geometry, or measurement/model assumptions; the title does not establish which effect dominates.",
+          "Do not replace the model capacitance with these values for \u221215 \u00b0C ventilated dendrites or extrapolate universally.",
+          "No numerical assay of crystal attachment coefficients has been performed."
+        ],
+        "verification": "Source PDF retrieved and hashed; full paper text examined; Table 1 image inspected at 170 dpi; all eight numerical rows manually transcribed."
+      }
+    },
+    {
+      "dataset": "matsuo1987",
+      "record": {
+        "schema_version": 1,
+        "evidence_state": "manual transcription of observed endpoint characteristics; humidity forcing partly unmeasured",
+        "source": {
+          "doi": "10.2467/mripapers.38.247",
+          "url": "https://www.jstage.jst.go.jp/article/mripapers/38/4/38_4_247/_article/-char/en",
+          "path": "research/runs/snow_scale/growth_environment_sources/matsuo_fukuta1987.pdf",
+          "sha256": "1ca34b39478a7abc55227db00eb98e59bdb5de2617cef4a5776be280ca6efb4c"
+        },
+        "source_location": "Table 1, printed page 257 / PDF page 11",
+        "pressure_Pa": 85000,
+        "pressure_status": "University of Utah ambient pressure stated in Appendix; individual run pressure not tabulated",
+        "temperature_fluctuation_bound_K": 1,
+        "humidity_codes": {
+          "WS": "water saturated, fog visually confirmed",
+          "IS": "below water saturation and above ice saturation; not a specified numerical supersaturation"
+        },
+        "humidity_warning": "The dewpoint hygrometer was rejected for these \u221210 to \u221220 \u00b0C measurements; IS level was inferred from steam supply and some figure supersaturations deduced from mass growth. Do not calibrate humidity dependence with those inferred values.",
+        "case_notes": "Each row is an individual endpoint, not a shared trajectory; star and double-star flags are retained. Only row20 is an explicitly unrimed, non-combination WS case.",
+        "initial_particle_size": null,
+        "cases": [
+          {
+            "id": 1,
+            "temperature_C": -10.9,
+            "humidity_code": "WS",
+            "age_min": 11,
+            "habit_code": "obscure",
+            "maximum_dimension_mm": 0.25,
+            "mass_micrograms": 2.1,
+            "fall_speed_cm_s": 36,
+            "rimed": true,
+            "combination": false
+          },
+          {
+            "id": 2,
+            "temperature_C": -12.3,
+            "humidity_code": "WS",
+            "age_min": 21,
+            "habit_code": "C1h",
+            "maximum_dimension_mm": 0.3,
+            "mass_micrograms": 4.2,
+            "fall_speed_cm_s": 48,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 3,
+            "temperature_C": -10.3,
+            "humidity_code": "WS",
+            "age_min": 30,
+            "habit_code": "N2b",
+            "maximum_dimension_mm": 0.55,
+            "mass_micrograms": 7.2,
+            "fall_speed_cm_s": 46,
+            "rimed": true,
+            "combination": false
+          },
+          {
+            "id": 4,
+            "temperature_C": -10.5,
+            "humidity_code": "IS",
+            "age_min": 11,
+            "habit_code": "C1f",
+            "maximum_dimension_mm": 0.2,
+            "mass_micrograms": 0.1,
+            "fall_speed_cm_s": 11,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 5,
+            "temperature_C": -10.5,
+            "humidity_code": "IS",
+            "age_min": 12,
+            "habit_code": "N2b",
+            "maximum_dimension_mm": 0.23,
+            "mass_micrograms": 0.3,
+            "fall_speed_cm_s": 14,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 6,
+            "temperature_C": -10.3,
+            "humidity_code": "IS",
+            "age_min": 20,
+            "habit_code": "C1e",
+            "maximum_dimension_mm": 0.12,
+            "mass_micrograms": 0.5,
+            "fall_speed_cm_s": 18,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 7,
+            "temperature_C": -10.5,
+            "humidity_code": "IS",
+            "age_min": 31,
+            "habit_code": "C1e",
+            "maximum_dimension_mm": 0.12,
+            "mass_micrograms": 0.5,
+            "fall_speed_cm_s": 21,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 8,
+            "temperature_C": -16.3,
+            "humidity_code": "WS",
+            "age_min": 10,
+            "habit_code": "P1a",
+            "maximum_dimension_mm": 0.4,
+            "mass_micrograms": 1.4,
+            "fall_speed_cm_s": 27,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 9,
+            "temperature_C": -15.5,
+            "humidity_code": "WS",
+            "age_min": 20,
+            "habit_code": "P1a",
+            "maximum_dimension_mm": 0.45,
+            "mass_micrograms": 4.2,
+            "fall_speed_cm_s": 32,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 10,
+            "temperature_C": -14.5,
+            "humidity_code": "WS",
+            "age_min": 38,
+            "habit_code": "obscure",
+            "maximum_dimension_mm": 0.4,
+            "mass_micrograms": 5.6,
+            "fall_speed_cm_s": 54,
+            "rimed": true,
+            "combination": false
+          },
+          {
+            "id": 11,
+            "temperature_C": -17.1,
+            "humidity_code": "WS",
+            "age_min": 40,
+            "habit_code": "P1a",
+            "maximum_dimension_mm": 0.52,
+            "mass_micrograms": 8.2,
+            "fall_speed_cm_s": 54,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 12,
+            "temperature_C": -16.4,
+            "humidity_code": "IS",
+            "age_min": 11,
+            "habit_code": "P1g",
+            "maximum_dimension_mm": 0.25,
+            "mass_micrograms": 0.5,
+            "fall_speed_cm_s": 17,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 13,
+            "temperature_C": -13.9,
+            "humidity_code": "IS",
+            "age_min": 20,
+            "habit_code": "C2b",
+            "maximum_dimension_mm": 0.12,
+            "mass_micrograms": 0.2,
+            "fall_speed_cm_s": 18,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 14,
+            "temperature_C": -15.2,
+            "humidity_code": "IS",
+            "age_min": 21,
+            "habit_code": "C2b",
+            "maximum_dimension_mm": 0.14,
+            "mass_micrograms": 0.4,
+            "fall_speed_cm_s": 12,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 15,
+            "temperature_C": -14.2,
+            "humidity_code": "IS",
+            "age_min": 31,
+            "habit_code": "C2b",
+            "maximum_dimension_mm": 0.17,
+            "mass_micrograms": 1.2,
+            "fall_speed_cm_s": 30,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 16,
+            "temperature_C": -14.6,
+            "humidity_code": "IS",
+            "age_min": 30,
+            "habit_code": "C2b",
+            "maximum_dimension_mm": 0.2,
+            "mass_micrograms": 2.6,
+            "fall_speed_cm_s": 43,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 17,
+            "temperature_C": -16.2,
+            "humidity_code": "IS",
+            "age_min": 31,
+            "habit_code": "C1g",
+            "maximum_dimension_mm": 0.28,
+            "mass_micrograms": 3.1,
+            "fall_speed_cm_s": 42,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 18,
+            "temperature_C": -22.3,
+            "humidity_code": "WS",
+            "age_min": 11,
+            "habit_code": "C1f",
+            "maximum_dimension_mm": 0.26,
+            "mass_micrograms": 0.9,
+            "fall_speed_cm_s": 23,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 19,
+            "temperature_C": -17.8,
+            "humidity_code": "WS",
+            "age_min": 21,
+            "habit_code": "P1c",
+            "maximum_dimension_mm": 0.24,
+            "mass_micrograms": 4.8,
+            "fall_speed_cm_s": 37,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 20,
+            "temperature_C": -22.9,
+            "humidity_code": "WS",
+            "age_min": 21,
+            "habit_code": "C1h",
+            "maximum_dimension_mm": 0.18,
+            "mass_micrograms": 2.6,
+            "fall_speed_cm_s": 47,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 21,
+            "temperature_C": -21.4,
+            "humidity_code": "WS",
+            "age_min": 31,
+            "habit_code": "C1f",
+            "maximum_dimension_mm": 0.36,
+            "mass_micrograms": 4.2,
+            "fall_speed_cm_s": 54,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 22,
+            "temperature_C": -18.9,
+            "humidity_code": "IS",
+            "age_min": 12,
+            "habit_code": "C1g",
+            "maximum_dimension_mm": 0.23,
+            "mass_micrograms": 0.9,
+            "fall_speed_cm_s": 15,
+            "rimed": false,
+            "combination": true
+          },
+          {
+            "id": 23,
+            "temperature_C": -18.8,
+            "humidity_code": "IS",
+            "age_min": 21,
+            "habit_code": "P1a",
+            "maximum_dimension_mm": 0.11,
+            "mass_micrograms": 0.5,
+            "fall_speed_cm_s": 17,
+            "rimed": false,
+            "combination": false
+          },
+          {
+            "id": 24,
+            "temperature_C": -19.8,
+            "humidity_code": "IS",
+            "age_min": 26,
+            "habit_code": "C1g",
+            "maximum_dimension_mm": 0.14,
+            "mass_micrograms": 0.3,
+            "fall_speed_cm_s": 15,
+            "rimed": false,
+            "combination": true
+          }
+        ],
+        "verification": "Table 1 rendered and visually read at 160 dpi; corresponding Figure 10 printed-label endpoints inspected for rows13\u201324."
+      }
+    },
+    {
+      "dataset": "fuchs2025",
+      "record": {
+        "schema_version": 1,
+        "evidence_state": "observational summary recomputed from archived particle data; not a matched model replay",
+        "source_doi": "10.5281/zenodo.15804055",
+        "paper_doi": "10.5194/acp-25-12177-2025",
+        "rights": "CC-BY-4.0; Fuchs et al.",
+        "source_files": [
+          {
+            "path": "research/runs/snow_scale/growth_environment_sources/fuchs2025_SM060.nc",
+            "sha256": "c20d00dbc9337ea1ab97f9b23f3b83244745a682127fd5b8046c04d81284489f"
+          },
+          {
+            "path": "research/runs/snow_scale/growth_environment_sources/ice_times_drone_dist_grt_python.csv",
+            "sha256": "386632fa6db809d8577bb957bf8103d15e209304e18c438dc4be4238fe2642ad"
+          },
+          {
+            "path": "research/runs/snow_scale/growth_environment_sources/fuchs2025_f08.py",
+            "sha256": "fb02485967792eec477718af09dbe21178344b6520c249a232c33e4b47760c76"
+          }
+        ],
+        "experiment": "SM060",
+        "temperature_C": -5.4,
+        "growth_age_s": 519.06563408244,
+        "pressure_Pa": null,
+        "pressure_status": "Not supplied in this retrieved particle archive/auxiliary CSV; do not silently assume standard atmosphere.",
+        "RH_history": null,
+        "filter_method": "Exact time window and pristine classification from author f08.py; CDNC >= 100 cm-3 and ice concentration <=0.1 cm-3 (=100 L-1); lucky filter retains grrmaj >= experiment 80th percentile.",
+        "growth_rate_units": "m/s in source, converted to micrometres/s",
+        "growth_rate_meaning": "Time-average size/growth age, not instantaneous derivative along a tracked crystal.",
+        "raw_records": 1058,
+        "summaries": {
+          "unfiltered_pristine": {
+            "majsiz": {
+              "n": 499,
+              "mean": 290.2557332106419,
+              "std_population": 79.23719461055153,
+              "quantiles_05_25_50_75_95": [
+                150.41223620470808,
+                240.6783184076961,
+                298.11286109699404,
+                343.0070914278655,
+                403.5800268524846
+              ],
+              "minimum": 25.995614826028337,
+              "maximum": 546.3384376785123
+            },
+            "minsiz": {
+              "n": 499,
+              "mean": 77.34978082463812,
+              "std_population": 15.643001296296669,
+              "quantiles_05_25_50_75_95": [
+                55.67609780947352,
+                66.99135117738251,
+                76.36559978686809,
+                87.05718083939688,
+                100.52470332967383
+              ],
+              "minimum": 11.514784642898512,
+              "maximum": 170.6610663865495
+            },
+            "grrmaj": {
+              "n": 499,
+              "mean": 0.5591888850891298,
+              "std_population": 0.15265351702703317,
+              "quantiles_05_25_50_75_95": [
+                0.2897749847581298,
+                0.463676079872147,
+                0.5743259455501664,
+                0.66081641493027,
+                0.7775125154758105
+              ],
+              "minimum": 0.050081556395042734,
+              "maximum": 1.0525421099092465
+            },
+            "grrmin": {
+              "n": 499,
+              "mean": 0.14901734144155093,
+              "std_population": 0.030136846420104522,
+              "quantiles_05_25_50_75_95": [
+                0.1072621536732883,
+                0.12906142649147656,
+                0.14712127864496496,
+                0.16771902264978328,
+                0.1936647250927579
+              ],
+              "minimum": 0.022183677529053463,
+              "maximum": 0.3287851384887569
+            },
+            "Water_content": {
+              "n": 499,
+              "mean": 0.10255663711589079,
+              "std_population": 0.07367188217558024,
+              "quantiles_05_25_50_75_95": [
+                0.02327125910800162,
+                0.04472662862091181,
+                0.07446690233605623,
+                0.15416575939489435,
+                0.2386443999689542
+              ],
+              "minimum": 0.013044361032802975,
+              "maximum": 0.2871947391314406
+            },
+            "Water_concentration": {
+              "n": 499,
+              "mean": 173.84356013614527,
+              "std_population": 128.92624614109408,
+              "quantiles_05_25_50_75_95": [
+                38.222222222222214,
+                72.76190476190476,
+                122.15873015873015,
+                262.05291005291,
+                433.31216931216926
+              ],
+              "minimum": 24.296296296296294,
+              "maximum": 557.2910052910053
+            },
+            "Ice_concentration_1s": {
+              "n": 499,
+              "mean": 0.2525054139521169,
+              "std_population": 0.15135370252211736,
+              "quantiles_05_25_50_75_95": [
+                0.01693121693121693,
+                0.08818342151675485,
+                0.27936507936507937,
+                0.3880070546737213,
+                0.45714285714285713
+              ],
+              "minimum": 0.007054673721340388,
+              "maximum": 0.4656084656084656
+            }
+          },
+          "microphysical_thresholds": {
+            "majsiz": {
+              "n": 131,
+              "mean": 316.0146105977866,
+              "std_population": 85.1284281134282,
+              "quantiles_05_25_50_75_95": [
+                163.88761923090925,
+                267.97489738920996,
+                327.0250683050244,
+                370.7250698184633,
+                434.74229643264505
+              ],
+              "minimum": 25.995614826028337,
+              "maximum": 546.3384376785123
+            },
+            "minsiz": {
+              "n": 131,
+              "mean": 87.59484270309825,
+              "std_population": 15.491310094951588,
+              "quantiles_05_25_50_75_95": [
+                69.7891670771624,
+                78.61231093799294,
+                88.82869961093319,
+                95.14432564891509,
+                107.17898108542093
+              ],
+              "minimum": 11.514784642898512,
+              "maximum": 156.71839128833986
+            },
+            "grrmaj": {
+              "n": 131,
+              "mean": 0.6088143576609732,
+              "std_population": 0.16400320599900814,
+              "quantiles_05_25_50_75_95": [
+                0.3157358308272822,
+                0.516263993980093,
+                0.6300264298620182,
+                0.7142161712820758,
+                0.8375478318867042
+              ],
+              "minimum": 0.050081556395042734,
+              "maximum": 1.0525421099092465
+            },
+            "grrmin": {
+              "n": 131,
+              "mean": 0.16875484900467536,
+              "std_population": 0.029844607459586118,
+              "quantiles_05_25_50_75_95": [
+                0.13445152692593443,
+                0.15144965448725398,
+                0.1711319220120534,
+                0.18329921960081813,
+                0.20648444830080648
+              ],
+              "minimum": 0.022183677529053463,
+              "maximum": 0.3019240361873952
+            },
+            "Water_content": {
+              "n": 131,
+              "mean": 0.20791003158440158,
+              "std_population": 0.04259537970836839,
+              "quantiles_05_25_50_75_95": [
+                0.11222616422976882,
+                0.18393778302101085,
+                0.2159169137306723,
+                0.23686747494032717,
+                0.26394552567055096
+              ],
+              "minimum": 0.09338829814155232,
+              "maximum": 0.2871947391314406
+            },
+            "Water_concentration": {
+              "n": 131,
+              "mean": 354.8359788359788,
+              "std_population": 83.6841121762666,
+              "quantiles_05_25_50_75_95": [
+                179.1957671957672,
+                311.2380952380952,
+                365.6296296296296,
+                413.6296296296296,
+                473.79894179894177
+              ],
+              "minimum": 150.85714285714283,
+              "maximum": 557.2910052910053
+            },
+            "Ice_concentration_1s": {
+              "n": 131,
+              "mean": 0.043492794347029164,
+              "std_population": 0.02595601610484418,
+              "quantiles_05_25_50_75_95": [
+                0.008465608465608464,
+                0.021164021164021163,
+                0.03527336860670194,
+                0.06772486772486772,
+                0.08465608465608465
+              ],
+              "minimum": 0.007054673721340388,
+              "maximum": 0.09171075837742504
+            }
+          },
+          "fastest_quintile": {
+            "majsiz": {
+              "n": 100,
+              "mean": 393.69548699435865,
+              "std_population": 35.46035275625555,
+              "quantiles_05_25_50_75_95": [
+                357.52769751722707,
+                369.26940339127935,
+                384.69569919924663,
+                403.5878958693193,
+                458.91227879780706
+              ],
+              "minimum": 355.0310155849152,
+              "maximum": 546.3384376785123
+            },
+            "minsiz": {
+              "n": 100,
+              "mean": 86.94704499597557,
+              "std_population": 11.075211676400546,
+              "quantiles_05_25_50_75_95": [
+                68.83969034662543,
+                80.90364228083166,
+                86.79123340724195,
+                93.39614552985505,
+                103.04016088430156
+              ],
+              "minimum": 62.147979839907926,
+              "maximum": 121.92230365387397
+            },
+            "grrmaj": {
+              "n": 100,
+              "mean": 0.7584695675149061,
+              "std_population": 0.06831573972131548,
+              "quantiles_05_25_50_75_95": [
+                0.6887909236164981,
+                0.7114117736652751,
+                0.7411311285889286,
+                0.7775276754407899,
+                0.8841122368061084
+              ],
+              "minimum": 0.6839809694057453,
+              "maximum": 1.0525421099092465
+            },
+            "grrmin": {
+              "n": 100,
+              "mean": 0.16750684169194352,
+              "std_population": 0.02133682322463586,
+              "quantiles_05_25_50_75_95": [
+                0.1326223233181568,
+                0.15586399285293895,
+                0.1672066646459153,
+                0.17993128305431505,
+                0.19851085126536488
+              ],
+              "minimum": 0.11973048446901677,
+              "maximum": 0.2348880288894444
+            },
+            "Water_content": {
+              "n": 100,
+              "mean": 0.1315305973757447,
+              "std_population": 0.07980943974879848,
+              "quantiles_05_25_50_75_95": [
+                0.02395258665231444,
+                0.05057074490788695,
+                0.14804568404811863,
+                0.2078826641626221,
+                0.2380023042094409
+              ],
+              "minimum": 0.016398492566669146,
+              "maximum": 0.26312941498853587
+            },
+            "Water_concentration": {
+              "n": 100,
+              "mean": 218.22391534391537,
+              "std_population": 138.31192790415977,
+              "quantiles_05_25_50_75_95": [
+                42.64550264550264,
+                82.32804232804233,
+                249.26984126984127,
+                340.40211640211635,
+                435.34179894179886
+              ],
+              "minimum": 29.333333333333332,
+              "maximum": 470.6878306878306
+            },
+            "Ice_concentration_1s": {
+              "n": 100,
+              "mean": 0.1811907281431091,
+              "std_population": 0.14360915101920005,
+              "quantiles_05_25_50_75_95": [
+                0.01400856638951877,
+                0.04081632653061224,
+                0.164021164021164,
+                0.30335097001763667,
+                0.42497354497354484
+              ],
+              "minimum": 0.007054673721340388,
+              "maximum": 0.4656084656084656
+            }
+          }
+        },
+        "summary_units": {
+          "majsiz": "micrometres",
+          "minsiz": "micrometres",
+          "grrmaj": "micrometres/s",
+          "grrmin": "micrometres/s",
+          "Water_content": "g/m3",
+          "Water_concentration": "cm-3",
+          "Ice_concentration_1s": "cm-3"
+        },
+        "limitations": [
+          "Particle snapshots are different crystals, not a tracked time series.",
+          "No per-crystal humidity/temperature history, initial dimensions or mass are available.",
+          "Instantaneous cloud observations do not establish saturated forcing over the complete growth age.",
+          "Threshold filtering reduces some environmental effects but does not yield exact unperturbed growth histories."
+        ],
+        "checks": {
+          "all_growth_rates_equal_size_divided_by_fixed_age_max_relative": 0.0,
+          "finite_selected": true
+        }
+      }
+    }
+  ],
+  "limits": [
+    "Bailey2006 reuses2002/2004 observations and is not an independent duplicate experiment.",
+    "Matsuo subsaturated forcing partly inferred from growth is unsuitable for independent humidity calibration.",
+    "Fuchs major/minor growth rates are dimensions divided by inferred residence time, not instantaneous derivatives."
+  ],
+  "reference_lunar_conditions": {
+    "evidence": "Calculation from the existing301 K reference winter column, not measurements or a new climate simulation.",
+    "producer": {
+      "atmosphere/snow/flakes.py": "ce3a82113fc62480130c4db99a95de44d7f3f1432f6444cdb8fcb86ced8012a5",
+      "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",
+      "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1"
+    },
+    "constants": {
+      "GAS_CONSTANT": 8.31446261815324,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "STANDARD_GRAVITY": 9.80665
+    },
+    "climate_binding": {
+      "inputs": {
+        "research/studies/climate_targets/results/climate_targets.json": "80a85def114b039cef9c9acd97b18d3bd47413f51f6693d1cc6f5e850ebdbea8"
+      }
+    },
+    "rows": [
+      {
+        "temperature_C": 0.0,
+        "height_m": 29245.11370855616,
+        "pressure_Pa": 65925.26459686145,
+        "air_density_kg_m3": 0.8340075278933692
+      },
+      {
+        "temperature_C": -5.0,
+        "height_m": 34671.954023015605,
+        "pressure_Pa": 58885.02364086558,
+        "air_density_kg_m3": 0.7594356792133294
+      },
+      {
+        "temperature_C": -10.0,
+        "height_m": 40098.794337475054,
+        "pressure_Pa": 52484.929799841724,
+        "air_density_kg_m3": 0.6901978133034626
+      },
+      {
+        "temperature_C": -15.0,
+        "height_m": 45525.6346519345,
+        "pressure_Pa": 46677.30354058023,
+        "air_density_kg_m3": 0.6260338521296086
+      },
+      {
+        "temperature_C": -20.0,
+        "height_m": 50952.47496639395,
+        "pressure_Pa": 41417.203299994566,
+        "air_density_kg_m3": 0.5666844780209584
+      }
+    ]
+  }
+}

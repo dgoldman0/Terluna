@@ -1,0 +1,97 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-growth-checks/1",
+  "checked_at_utc": "2026-10-22T20:45:47.890355+00:00",
+  "branch": "domain/atmosphere",
+  "checkpoint_commit": "6b5f3e65a9515dbfce5455e358de9abc08d83ca8",
+  "evidence": "Native Earth process comparisons, numerical sensitivity and source/input checks; physical growth failure remains, and no lunar closure is adopted.",
+  "full_repository_check": {
+    "scope": "Preceding committed five-temperature SCALE, ventilation, data and review checkpoint",
+    "record": "growth_benchmark_checks.json",
+    "python_passed": 3271,
+    "python_skipped": 20,
+    "javascript_passed": 191,
+    "exit_code": 0,
+    "repeated_after_mcsnow_work": false
+  },
+  "focused_tests": {
+    "passed": 51,
+    "exit_code": 0,
+    "scope": "Unit and evidence-handling tests; separate from native physical comparisons."
+  },
+  "layers": {
+    "files": 1262,
+    "violations": 0,
+    "includes_untracked_sources": true
+  },
+  "provenance": {
+    "result": "PASS",
+    "require_inputs": true,
+    "exit_code": 0
+  },
+  "native_comparisons": {
+    "main_executions": 80,
+    "supplemental_executions": 5,
+    "complete": 75,
+    "native_failures": 10,
+    "failure_returncodes": [
+      -8
+    ],
+    "raw_snapshot_values_checked": 24795,
+    "maximum_relative_deposition_accounting_residual": 2.2165699159650633e-16,
+    "inputs_regenerated": true,
+    "source_executable_output_hashes_verified": true,
+    "raw_snapshots_reparsed": true,
+    "geometry_checked": true,
+    "finite_air_water_budget": false,
+    "physics_source_patches": []
+  },
+  "review": {
+    "native_source_and_driver": "Independent selected-source review found no missing field or call on the selected pure-primary path; identified two source-version density changes and shared ventilation expressions.",
+    "numerical_product": "Independent reviewer verified all 80 main run-record hashes and compared masses and both axes; supplemental raw files independently reread by the verifier.",
+    "methods": "Distinguishes fitted restarts, sphere histories, current native source and unresolved published-figure reproduction.",
+    "full_scholarly_source_review": false,
+    "final_report": "Independent substantive review checked the report and current synthesis against all main and supplemental numerical products, refinement percentages, failure classifications, branching times and test logs; no critical issues found."
+  },
+  "scope": {
+    "correct_worktree": "/home/kir/Documents/Projects/terluna-atmosphere",
+    "maximum_numerical_build_workers": 2,
+    "threads_per_worker": 1,
+    "other_status_topics_unchanged": true,
+    "continuation_committed": false
+  },
+  "unperformed": [
+    "Exact archived paper-figure reproduction",
+    "Separate causal ventilation interventions",
+    "Empirical calibration of a replacement growth treatment",
+    "Low-pressure and changing-humidity growth replay",
+    "New lunar column, aggregate fracture calibration or storm optics"
+  ],
+  "logs": {
+    "research/runs/snow_scale/mcsnow_growth/matrix.log": "d8dc4e5bb19def2527b414f3fd793e8ceecfe121f72fb69f294f3e1b19a59f45",
+    "research/runs/snow_scale/mcsnow_growth/refinements.log": "c608c7a08f09b76fd07f04a27e7421f28b9bd67a7b1e389b121edc60ba9c362e",
+    "research/runs/snow_scale/mcsnow_growth/focused_tests.log": "c709ca6deb706405b0fd6324da0cdcb95b0ec0c06cea077020422e48beb1f174",
+    "research/runs/snow_scale/mcsnow_growth/layers.log": "0e21bd75274b3b87a9b3bf69bf74d7158bb9368ab5da48dcde6db908137ee35f",
+    "research/runs/snow_scale/mcsnow_growth/provenance_check.json": "87ffa03dfdd6128c666d3acea001f4b3c35a610ca4367122e906d37796ba6b6d"
+  },
+  "files": {
+    "atmosphere/README.md": "19f7345230e06ba0b27648df123fd1b6b401ecb6a59b887ab3cbe74c9dd82703",
+    "atmosphere/snow/README.md": "a23aef2bc08ddad0a7e6656c1e3fa07d872b9ecff40577693c9bf993e7547626",
+    "atmosphere/snow/analysis.md": "3cffe3b0196329f41a2d0fd1a0e4681887ebfe6df05f1433baf8eb17fbb7bbe0",
+    "atmosphere/snow/growth_options.md": "8b530f9173d5c569c50c9aa4606f753bfbf393f08bb54dc914517a9e8f457b0c",
+    "research/status.json": "faaf3c113eed0ccdc3b8dabb15c0f6e01f56d2c8446b4d0d43a720327dab5883",
+    "atmosphere/snow/mcsnow_crystal_driver.f90": "350e994b246a6e7fa3329fcabe296aa3c0574cf1a0adceb995bed953ebf838fa",
+    "atmosphere/snow/mcsnow_crystal_growth.py": "dac5f78a38ed207c3d124c060d26537e7fc4b5a6193bdce4a827b1b9b1597978",
+    "atmosphere/snow/mcsnow_growth_benchmarks.py": "4208db00dc01804ff37daed36064b938853d2e4a6d87470f7bddf5130916a283",
+    "atmosphere/snow/mcsnow_growth.md": "29aaa499bbb80f2fee0558a381cca3fe8a12fd066800bf180bbb92a4f7c74a16",
+    "atmosphere/tests/test_snow_mcsnow_growth.py": "761fa5308a5402602f65b9d99f45e579b5959584cad5c16cc65d713c18d39950",
+    "atmosphere/snow/results/mcsnow_growth_benchmarks.json": "a22af49ceec01f7fca169d6568eaa2e637784d15b88f7f56416544a8dea46ed1",
+    "atmosphere/snow/results/mcsnow_growth_refinements.json": "1015215d31b687c0ce807d665088b459e07198a2685e88d72f37adc39d13187b",
+    "atmosphere/snow/results/mcsnow_growth_source_audit.json": "e3569d43f776f82ccda09b013f32912d26f2863927c8616888385a91c783815e"
+  },
+  "artifact_checks": {
+    "recorded_file_hashes_verified": true,
+    "report_relative_links_verified": true,
+    "changed_and_new_source_whitespace_checked": true,
+    "git_diff_check_exit_code": 0
+  }
+}

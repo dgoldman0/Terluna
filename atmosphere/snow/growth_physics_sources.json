@@ -1,0 +1,155 @@
+[
+  {
+    "name": "westbrook_heymsfield2011.pdf",
+    "url": "https://www.met.reading.ac.uk/~sws04cdw/vapourgrowth.pdf",
+    "error": "<urlopen error [Errno -3] Temporary failure in name resolution>",
+    "status": "failed"
+  },
+  {
+    "name": "westbrook2008.pdf",
+    "url": "https://arxiv.org/pdf/physics/0610038",
+    "error": "<urlopen error [Errno -3] Temporary failure in name resolution>",
+    "status": "failed"
+  },
+  {
+    "name": "westbrook_heymsfield2011.pdf",
+    "url": "https://www.met.reading.ac.uk/~sws04cdw/vapourgrowth.pdf",
+    "bytes": 786341,
+    "sha256": "3f0462e1bf5d390cb5ac1e6526fcbe97c55f7af939e7133da2d7da33540dd10f",
+    "status": "retrieved"
+  },
+  {
+    "name": "westbrook2008.pdf",
+    "url": "https://arxiv.org/pdf/physics/0610038",
+    "bytes": 895497,
+    "sha256": "a5c84e131f9d25729f729977f58361d62b5c938277f60f6bf66b9b0c45e8dea2",
+    "status": "retrieved"
+  },
+  {
+    "name": "ji_wang1999.pdf",
+    "url": "https://windy.aos.wisc.edu/pao/wang-ji-1999.pdf",
+    "bytes": 132884,
+    "sha256": "7d8b17a3da67e0f6a4f0cedf20286e263dd7aa9deb2fe63f68b2d1ac94e2ed89",
+    "status": "retrieved"
+  },
+  {
+    "name": "wang_ji1997.pdf",
+    "url": "https://windy.aos.wisc.edu/pao/wang-ji-1997.pdf",
+    "bytes": 554362,
+    "sha256": "5adb2c79e3f70db7ca9f7d9987055c9d499c587e42de85e50e3e15f16c83e064",
+    "status": "retrieved"
+  },
+  {
+    "name": "harrington2019.pdf",
+    "url": "https://journals.ametsoc.org/downloadpdf/journals/atsc/76/6/jas-d-18-0319.1.pdf",
+    "error": "HTTP Error 403: Forbidden",
+    "status": "failed"
+  },
+  {
+    "name": "ictg_alpha.png",
+    "url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/0f94000a-56d7-4911-8513-4d188f5fcea5/jame21581-math-0002.png",
+    "bytes": 2407,
+    "sha256": "54379efa18aecdb295ce2e9a20549f0d20ceb2da5ddc460e9520f29b5985f119",
+    "status": "retrieved"
+  },
+  {
+    "name": "ictg_diffusivity.png",
+    "url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/6c8b589e-0fbe-4be3-96eb-175efe368737/jame21581-math-0006.png",
+    "bytes": 2547,
+    "sha256": "f313db5e1caa2cce52a24aa7a73fc107a66c6bd6bb24776e8f15e38383776f02",
+    "status": "retrieved"
+  },
+  {
+    "name": "ictg_axis_ratio.png",
+    "url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/5360811e-0123-4d72-ba11-890c07faba04/jame21581-math-0010.png",
+    "bytes": 1418,
+    "sha256": "26d799be8a24cba782af054e82b316817ae913e71f6c88fbd6eab4b178b2d11a",
+    "status": "retrieved"
+  },
+  {
+    "name": "ictg_density.png",
+    "url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/3f9896a4-1876-4bcb-ba61-a375cebeaa25/jame21581-math-0011.png",
+    "bytes": 2276,
+    "sha256": "6532b137f9fe7be072df6023c2149fe99eceec8e138eea48357a62b93248f3fc",
+    "status": "retrieved"
+  },
+  {
+    "name": "isocloud_tree.json",
+    "url": "https://api.github.com/repos/kdlamb/isocloud/git/trees/master?recursive=1",
+    "error": "HTTP Error 404: Not Found",
+    "status": "failed"
+  },
+  {
+    "name": "harrington2021_semianalytic.pdf",
+    "url": "https://www.arm.gov/publications/other/P012333.pdf",
+    "bytes": 2138534,
+    "sha256": "18bff2fe4bbf27323d61a092db7bf36efa1e19424ea63ab098f193ffb325a1d8",
+    "status": "retrieved"
+  },
+  {
+    "name": "karcher2020.pdf",
+    "url": "https://elib.dlr.de/136619/1/JGR125_2019JD031847_2020.pdf",
+    "bytes": 2286494,
+    "sha256": "d6c76ff514f733f0b18058343e29a08aa6fbcedcd492917d11b34af4f2eeaa69",
+    "status": "retrieved"
+  },
+  {
+    "name": "isocloud_tree.json",
+    "url": "https://api.github.com/repos/kdlamb/isocloud/git/trees/main?recursive=1",
+    "error": "HTTP Error 404: Not Found",
+    "status": "failed"
+  },
+  {
+    "name": "harrington2021_code_page.html",
+    "url": "https://doi.org/10.26208/s7de-et44",
+    "final_url": "https://www.datacommons.psu.edu/commonswizard/MetadataDisplay.aspx?Dataset=6284",
+    "bytes": 9426,
+    "sha256": "852a44ceb704b1a91c2fd487a76381440b383d820d5518e8cf8602c95dab84de",
+    "status": "retrieved"
+  },
+  {
+    "name": "harrington2021_data_page.html",
+    "url": "https://doi.org/10.26208/f6q0-8p03",
+    "final_url": "https://www.datacommons.psu.edu/commonswizard/MetadataDisplay.aspx?Dataset=6271",
+    "bytes": 9953,
+    "sha256": "ed22e018596d7e6f5f3acbb08a4ae6c181735562a1de027f14257c70a4863812",
+    "status": "retrieved"
+  },
+  {
+    "name": "Harrington_CodeCalculateDepositionCoefficients2021.zip",
+    "url": "https://www.datacommons.psu.edu/download/meteorology/harrington/Harrington_CodeCalculateDepositionCoefficients2021.zip",
+    "final_url": "https://www.datacommons.psu.edu/download/meteorology/harrington/Harrington_CodeCalculateDepositionCoefficients2021.zip",
+    "bytes": 9022,
+    "sha256": "34cbab3aea0bde80794c4edd9c994d1d406484b265f047cb486e93c86d7e8259",
+    "status": "retrieved"
+  },
+  {
+    "name": "harrington2021_code_metadata.html",
+    "url": "https://www.datacommons.psu.edu/commonswizard/FullMetadataDisplay.aspx?file=Harrington_CodeCalculateDepositionCoefficients2021.xml",
+    "final_url": "https://www.datacommons.psu.edu/commonswizard/FullMetadataDisplay.aspx?file=Harrington_CodeCalculateDepositionCoefficients2021.xml",
+    "bytes": 17257,
+    "sha256": "9c66f6bd6d93f3f6307b6bac68ea801cb3cedd6d7a2885087af930a6a6c6eab3",
+    "status": "retrieved"
+  },
+  {
+    "name": "harrington2021_code/Harrington_CodeCalculateDepositionCoefficients2021.xml",
+    "bytes": 8069,
+    "sha256": "2207c397e1096f73f405cc1989bb43f8866069245046a18f0a9ca3dc13549ba5",
+    "status": "extracted_from_pinned_archive"
+  },
+  {
+    "name": "harrington2021_code/depcoeffparamdescription.txt",
+    "bytes": 1870,
+    "sha256": "59cbd10192642d00fd038e5fb6bb5013d9b04b821f32307f5119cc9530dee23a",
+    "status": "extracted_from_pinned_archive"
+  },
+  {
+    "name": "harrington2021_code/depcoeffparamsubs.f90",
+    "bytes": 15850,
+    "sha256": "f6a05f4ca899a2e08851b8cc3c65f449ab819104c9f79b868be75fa779637ef1",
+    "status": "extracted_from_pinned_archive"
+  },
+  {
+    "reading_scope": "Primary PDFs: Westbrook2008 sections3a/3d, WH2011 sections2\u20135, JW1999 sections2\u20134, WangJi1997 equation1 and geometry definitions; 2021 kinetics manuscript selected methods and availability. Publisher-indexed sections read for Welss2024, Sulia2011, Harrington2019, ICTG2022/2026. No full scholarly review or model validation."
+  }
+]

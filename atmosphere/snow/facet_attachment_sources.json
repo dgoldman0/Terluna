@@ -1,0 +1,133 @@
+{
+  "schema": "terluna.atmosphere.facet-attachment-sources/1",
+  "sources": [
+    {
+      "name": "ictg_diffusivity.png",
+      "url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/6c8b589e-0fbe-4be3-96eb-175efe368737/jame21581-math-0006.png",
+      "bytes": 2547,
+      "sha256": "f313db5e1caa2cce52a24aa7a73fc107a66c6bd6bb24776e8f15e38383776f02",
+      "status": "retrieved",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/ictg_diffusivity.png"
+    },
+    {
+      "name": "ictg_axis_ratio.png",
+      "url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/5360811e-0123-4d72-ba11-890c07faba04/jame21581-math-0010.png",
+      "bytes": 1418,
+      "sha256": "26d799be8a24cba782af054e82b316817ae913e71f6c88fbd6eab4b178b2d11a",
+      "status": "retrieved",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/ictg_axis_ratio.png"
+    },
+    {
+      "name": "ictg_density.png",
+      "url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/3f9896a4-1876-4bcb-ba61-a375cebeaa25/jame21581-math-0011.png",
+      "bytes": 2276,
+      "sha256": "6532b137f9fe7be072df6023c2149fe99eceec8e138eea48357a62b93248f3fc",
+      "status": "retrieved",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/ictg_density.png"
+    },
+    {
+      "name": "harrington2021_semianalytic.pdf",
+      "url": "https://www.arm.gov/publications/other/P012333.pdf",
+      "bytes": 2138534,
+      "sha256": "18bff2fe4bbf27323d61a092db7bf36efa1e19424ea63ab098f193ffb325a1d8",
+      "status": "retrieved",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/harrington2021_semianalytic.pdf"
+    },
+    {
+      "name": "Harrington_CodeCalculateDepositionCoefficients2021.zip",
+      "url": "https://www.datacommons.psu.edu/download/meteorology/harrington/Harrington_CodeCalculateDepositionCoefficients2021.zip",
+      "final_url": "https://www.datacommons.psu.edu/download/meteorology/harrington/Harrington_CodeCalculateDepositionCoefficients2021.zip",
+      "bytes": 9022,
+      "sha256": "34cbab3aea0bde80794c4edd9c994d1d406484b265f047cb486e93c86d7e8259",
+      "status": "retrieved",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/Harrington_CodeCalculateDepositionCoefficients2021.zip"
+    },
+    {
+      "url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/84ccff17-a888-4390-b659-78f1a3350b4f/jame21581-math-0003.png",
+      "final_url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/84ccff17-a888-4390-b659-78f1a3350b4f/jame21581-math-0003.png",
+      "bytes": 3403,
+      "sha256": "43d66f792148f446c02a46c346b558e2cf9a6454d2ba97c07232e2a6ce89e6d4",
+      "name": "ictg_mass.png",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/ictg_mass.png",
+      "status": "retrieved"
+    },
+    {
+      "url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/dd01cb06-0c3d-4915-b4fb-761e93980006/jame21581-math-0007.png",
+      "final_url": "https://agupubs.onlinelibrary.wiley.com/cms/asset/dd01cb06-0c3d-4915-b4fb-761e93980006/jame21581-math-0007.png",
+      "bytes": 2797,
+      "sha256": "7eddbf329f68c9e9e21ff64cfde4dbe2bd84d9831b1d6ee754c20bb05bd9cd28",
+      "name": "ictg_thermal.png",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/ictg_thermal.png",
+      "status": "retrieved"
+    },
+    {
+      "name": "Harrington_CodeCalculateDepositionCoefficients2021.xml",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/harrington2021_code/Harrington_CodeCalculateDepositionCoefficients2021.xml",
+      "bytes": 8069,
+      "sha256": "2207c397e1096f73f405cc1989bb43f8866069245046a18f0a9ca3dc13549ba5",
+      "status": "extracted",
+      "source": "https://doi.org/10.26208/s7de-et44",
+      "archive_sha256": "34cbab3aea0bde80794c4edd9c994d1d406484b265f047cb486e93c86d7e8259"
+    },
+    {
+      "name": "depcoeffparamdescription.txt",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/harrington2021_code/depcoeffparamdescription.txt",
+      "bytes": 1870,
+      "sha256": "59cbd10192642d00fd038e5fb6bb5013d9b04b821f32307f5119cc9530dee23a",
+      "status": "extracted",
+      "source": "https://doi.org/10.26208/s7de-et44",
+      "archive_sha256": "34cbab3aea0bde80794c4edd9c994d1d406484b265f047cb486e93c86d7e8259"
+    },
+    {
+      "name": "depcoeffparamsubs.f90",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/harrington2021_code/depcoeffparamsubs.f90",
+      "bytes": 15850,
+      "sha256": "f6a05f4ca899a2e08851b8cc3c65f449ab819104c9f79b868be75fa779637ef1",
+      "status": "extracted",
+      "source": "https://doi.org/10.26208/s7de-et44",
+      "archive_sha256": "34cbab3aea0bde80794c4edd9c994d1d406484b265f047cb486e93c86d7e8259"
+    }
+  ],
+  "reading_scope": "2021 manuscript equations and source routines; 2022 ICTG mass, diffusivity, conductivity, shape and density equation images visually read.",
+  "unresolved_retrievals": [
+    {
+      "url": "https://journals.ametsoc.org/view/journals/atsc/71/1/jas-d-13-0103.1.xml",
+      "error": "HTTP 403; full2014 primary source was not retrieved. Coupling transcription uses accessible2022 ICTG equations and2021 Eq2 instead."
+    }
+  ],
+  "equation_audit": [
+    {
+      "source": "2021 manuscript Eq3",
+      "finding": "Printed log-volume denominator Gamma/phi-2 conflicts with V=4pi*a^2*c/3 and dc/da=Gamma; algebra gives Gamma/phi+2. Use direct axis rates."
+    },
+    {
+      "source": "2022 ICTG Eq2 image",
+      "finding": "Printed numerator omits rho_eq. Units then give volume/time rather than mass/time. Retain rho_eq from2021 Eq2 and standard diffusion theory."
+    },
+    {
+      "source": "2022 ICTG Eqs3-4",
+      "finding": "Axis-weighted kinetic resistances transcribed with2/3 a-axis and1/3 c-axis weights. Native2021 alpha_T=.96; ICTG used1."
+    },
+    {
+      "source": "2022 ICTG Eq6",
+      "finding": "Gamma(T) density notation is ambiguous relative to state-dependent alpha ratio in Eq5. Compact prototype uses explicitly constant density; no branched-density transcription adopted."
+    }
+  ],
+  "source_software_conditions": "Original archive metadata permits local translation and value adding with annual notification of customization. Original source retained only in ignored cache; no external messages sent and no redistribution permission inferred.",
+  "evidence": "Source provenance and equation audit; neither empirical growth validation nor adoption of a lunar closure.",
+  "numerical_component_audit": {
+    "native_source_issues": [
+      "Two unused assignments read uninitialized variables; exact removal is recorded in each build source.patch.",
+      "Original spheroid capacitance loses accuracy near equal semiaxes, including a valid double-precision Runge-Kutta trial."
+    ],
+    "declared_arithmetic_variant": "Stable spheroid capacitance uses one factored eccentricity variable per branch: a*x/asin(x) for oblates and a*y/asinh(y) for prolates; sphere C=a. No physical cap or changed growth law.",
+    "reference_builds": [
+      "research/runs/snow_scale/facet_attachment/single_native_final",
+      "research/runs/snow_scale/facet_attachment/double_native_final"
+    ],
+    "stable_build": "research/runs/snow_scale/facet_attachment/double_stable_final",
+    "stable_build_record_sha256": "86ea6034328396ad42393c434fd02373ecb6e3116d9709f350359f07fdb00a64",
+    "checks": "991 native demonstration rows per precision/variant;40 focused component and compact-growth tests passed.",
+    "claim_limit": "Source parity, arithmetic repair and physical limits; empirical prediction remains separately assessed."
+  }
+}

@@ -1,5 +1,9 @@
 # Snow growth: reusable models and environmental evidence
 
+The [Earth growth assessment](earth_growth_assessment.md) isolates the late dendritic runaway and narrows the remaining transfer problem. A 240-case ventilation matrix reduces the revised spherical-start crystal from 195.39 to 4.68 mm against a fitted 4.17 mm, but fitted restarts and other habits retain errors. Another 288 humidity and seed-history executions show strong sensitivity to unreported early shape. Prescribing measured dimensions and fall speeds brings conditional mass uptake much closer to the Earth fits; this tests transport while leaving autonomous shape, branching and density evolution unresolved. The reference lunar snow zone overlaps terrestrial reduced-pressure conditions. No absolute lunar size distribution or storm optical forecast is adopted.
+
+The subsequent [native growth comparison](mcsnow_growth.md) has now executed both McSnow source versions and growth packages. It finds regime-specific improvements and substantial remaining growth failures; the review below records the earlier source and environmental assessment.
+
 This 22 October 2026 review supports the [multi-temperature and ventilation controls](growth_benchmarks.md). It identifies reusable alternatives and additional measurements; no alternative model was newly executed or adopted. The [model source register](growth_model_sources.json) and [environmental source register](growth_environment_sources.json) preserve retrieval extent, exact versions, checksums and unresolved access failures.
 
 ## Reusable model improvements

@@ -1,0 +1,93 @@
+# Earth crystal growth and transfer to the Open Moon
+
+The large late-growth error now has a demonstrated cause: McSnow's extra mean ventilation term for thin plates. Removing it reduces the revised spherical-seed crystal at −14.4 °C from 195.39 to 5.88 mm at thirty minutes. Removing the additional directional correction gives 4.68 mm, against the laboratory fit of 4.17 mm. The closer result does **not** establish a universal repair. Other starting shapes and temperatures retain substantial errors, and the independent humidity experiment is highly sensitive to unreported seed geometry.
+
+The new conditional transport calculation makes the remaining problem more specific. With observed dimensions and fall speeds supplied, standard vapor and heat transport gives much closer masses. Predicting those dimensions, branching and deposition density remains a major difficulty; transport coefficients and published-reference comparisons also need reconciliation. We can reject a singular ventilation extrapolation and identify a workable transport component without yet claiming a validated autonomous crystal-growth model or a physical lunar snow distribution.
+
+## What the ventilation controls establish
+
+The [240-case product](results/ventilation_benchmarks.json) compares six combinations of mean and directional ventilation, both native growth packages, five temperatures, two initial histories and two timesteps for each history. A [separate patched build](mcsnow_ventilation_controls.py) records actual pre-step source terms. Unchanged settings reproduce every available matching frozen baseline: 33 executions and 128 physical output files, including four matched failures. The frozen native sources and [85-execution comparison](mcsnow_growth.md) remain intact.
+
+The refined revised-package comparison at −14.4 °C is:
+
+| Initial state and intervention | Width at 30 min, mm | Mass/fitted mass | Thickness/fitted thickness |
+|---|---:|---:|---:|
+| Laboratory fit | 4.175 | 1 | 1 |
+| Spherical seed, native | 195.389 | 1776.95 | 0.979 |
+| Spherical seed, extra plate term removed | 5.878 | 1.371 | 0.829 |
+| Spherical seed, plate term removed and unit directional ratio | 4.676 | 1.168 | 1.113 |
+| Fitted three-minute state, same combined intervention | 7.989 | 2.120 | 0.698 |
+
+The native final vapor enhancement is about 1097; removing the extra plate term reduces it to 1.883. This is a directly measured change in the source routine. Directional suppression by itself leaves a 13.05 mm spherical-start crystal and a severely oversized, timestep-sensitive fitted restart. All controls removing the extra plate term complete. Across these controls, the largest endpoint timestep changes are 1.27% in mass and 1.16% in maximum dimension, much smaller than the principal empirical discrepancies. These are refinement measurements, not a proof of asymptotic convergence.
+
+There is a physical reason for the failure. At fixed basal span and relative airflow, the extra term is proportional to thickness/span raised to −3/4. It therefore diverges as a plate becomes thinner, whereas transport to a finite-span thin plate has a finite limit. This deduction concerns the extrapolation of the [published mean-ventilation expression](https://doi.org/10.1029/2023MS003805), not a claim that the authors validated decimetre crystals. Removing the term exposes a further deficiency: the remaining equivalent-volume-sphere enhancement tends to one in that same limit and loses real plate ventilation. A bounded habit-specific transport treatment is preferable to either an arbitrary size cap or adopting the deletion without further testing.
+
+The directional correction has its own uncertainty. [Sulia and Harrington (2011), section 2.5](https://doi.org/10.1029/2011JD016298), note that ventilation may already influence some observations used for the inherent growth ratios. Unit directional ventilation is therefore a defensible sensitivity. It does not establish that all such ratios already contain the correction. Changing the native volume^(1/3) denominator to a physical equivalent-volume radius also increases the runaway in the initial diagnostic; that source/paper discrepancy is not its cure.
+
+The five-temperature results prevent selecting a switch on the dendrite alone. At −5.3 °C, removing both shape additions and the directional correction from the revised spherical case reduces mass but makes the column only 1.040 mm long against 1.861 mm fitted. A fitted restart reaches 0.573 mm. Growth package and prior shape still determine how mass is distributed between axes. At ten minutes, differentiating the separate −14.4 °C fitted axis histories implies a logarithmic polar-to-equatorial growth ratio of 0.510. The revised intrinsic growth ratio is 0.279 before directional ventilation further reduces it. This is a mismatch with the fitted shape evolution, not an independently measured facet coefficient; it explains why fixing mean uptake alone leaves a habit problem.
+
+## Humidity evidence and unknown initial shape
+
+The [2018 observation transcription](growth_humidity_observations.json) adds thirteen ten-minute crystal diameters with printed vapor-density excesses. These measurements were not used to choose the interventions. The [240 executions](results/growth_humidity_validation.json) compare the four plate/directional combinations with 5, 10 and 20 µm initial full spans, selected timestep refinements and temperature perturbations. The experiments report seed sizes but not their initial mass or aspect ratio. The initial spheres are declared assumptions, not reconstructed experimental states. [Takahashi's 2018 conference paper](https://ams.confex.com/ams/15CLOUD15ATRAD/webprogram/Manuscript/Paper347181/105TAKAHASHI.pdf).
+
+For the nominal −14.3 °C, 0.17 g/m³ vapor-density-excess datum, the observed diameter is 1.46 mm. The native revised package from a 10 µm sphere gives 0.337 mm; removing both ventilation contributions gives about 0.326 mm. The timestep refinement changes dimensions by much less than this discrepancy. Selected ±0.3 °C probes also do not explain it.
+
+An additional 48 [seed-shape and package executions](results/growth_humidity_history.json) show why that mismatch cannot yet be attributed uniquely to the growth law. At the same initial 10 µm basal span and bulk density, the combined intervention gives about 1.604 mm from an initial thickness/span of 0.3, but 4.688 mm from 0.1. Those seeds have different initial masses, explicitly derived from their geometry. The moderately flattened seed crosses the revised package's 400 µm full-span branching threshold after approximately 267 s; the spherical seed never crosses it in ten minutes. Two thin-seed native cases fail at both timesteps, giving four explicit failed executions; their partial trajectories are retained.
+
+Neither the sphere's failure nor the flattened seed's agreement selects the physical initialization. The result diagnoses strong history dependence involving shape, the empirical growth package and the branching threshold. A humidity-dependent law needs either measured early states or demonstrably credible early shape evolution before this experiment can provide an exact trajectory validation. Its diameter alone also cannot validate mass or thickness.
+
+## Conditional transport closes much of the mass discrepancy
+
+The [transport replay](crystal_transport_replay.py) follows the separation used by [Westbrook and Heymsfield (2011)](https://doi.org/10.1175/JAS-D-11-017.1): prescribe the observed dimension and fall-speed histories, integrate mass uptake from the fitted three-minute mass, and compare the later mass. This avoids assuming an unobserved nucleation shape. The calculation uses the project's air transport and Murphy–Koop saturation functions; it is a new implementation of the method, not an exact reproduction of that paper's curves.
+
+The [product](results/crystal_transport_replay.json) evaluates 61 geometry/ventilation combinations at ten temperatures, with 52 complete and nine explicitly outside a selected source correlation's range. The six compact or thick-plate cases give endpoint mass/fit ratios of 0.931–1.170 in the diffusion-only comparison. The −5.3 °C column with the published Ji–Wang column enhancement gives 1.146. The −14.4 °C dendrite scenarios give 1.115–1.459 using branched capacitance and the broad-branch ventilation correlation. Their arm widths are unmeasured geometric scenarios, not confidence bounds or fitted parameters.
+
+The calculation carries full basal span and polar length consistently. Hexagonal-prism capacitance uses the source's sampled aspect-ratio range. Branched capacitance retains its fixed thickness/span assumption and a declared arm-width range. Ji–Wang Reynolds number uses basal width even for columns, and correlations are rejected outside their published Reynolds intervals; the source idealizations still limit applicability inside those intervals. [Westbrook et al. (2008)](https://doi.org/10.1175/2007JAS2315.1), [Ji and Wang (1999)](https://doi.org/10.1175/1520-0469(1999)056%3C0829:VCFFIC%3E2.0.CO;2), [Wang and Ji (1997)](https://doi.org/10.1175/1520-0469(1997)054%3C2261:NSOTDU%3E2.0.CO;2).
+
+The transport comparison changes more than geometry. The in-house mixture diffusivity is about 15% below McSnow's native value at the five shared temperatures, while conductivity differs by roughly 1–1.5%. The Ji–Wang calculations used Schmidt number 0.63; applying their polynomial to the calculated mixture values near 0.74 is a similarity assumption. Repeating the ventilation evaluation at 0.63 reduces the column ratio to 1.122 and the two dendrite ratios to 1.043–1.366. Replacing only the in-house vapor diffusivity and conductivity with their native McSnow values raises endpoint mass by 6.7–13.7% in the tested valid cases. The dendrite range becomes 1.189–1.557 and the column ratio becomes 1.248. These are transport sensitivities, not new fits.
+
+The comparison with the published reference also remains to be reconciled. Westbrook and Heymsfield report appreciably larger excess growth at −3.7 and −10.6 °C than the present fitted-mass ratios of 1.170 and 1.016. Different fitted inputs, starting observations and transport conventions may contribute. The present closer ratios therefore do not establish improved accuracy over their calculation.
+
+The comparison supports continuing with the ordinary transport framework under the tested conditions. It leaves shape prediction untested because shape is supplied as input. It also does not establish a universally correct capacitance, drag law or ventilation correlation for evolving branches and aggregates.
+
+## Correcting the observation-to-model geometry
+
+Four of the five rejected three-minute fitted states are admissible under the original laboratory geometry. Takahashi's enclosing hexagonal-prism volume is 1.24049 times the spheroid volume at the same full axes. The previously rejected −8.6, −12.2, −18.2 and −22.0 °C states then have densities of approximately 822, 884, 847 and 870 kg/m³. The −16.5 °C fit remains inconsistent at about 1021 kg/m³. Separate fitted curves need not define an exact simultaneous physical state. [Takahashi et al. (1991)](https://doi.org/10.2151/jmsj1965.69.1_15).
+
+The [geometry audit](results/crystal_transport_replay.json) preserves both conventions. No measurements were clipped or silently corrected. A native spheroid cannot simply use the hexagonal volume while keeping its old axis reconstruction. Future comparisons need an explicit observation-to-model mapping or a geometry-aware state. Thin planar thickness was inferred from mass and basal area, so these quantities are not three independent measurements.
+
+## What can transfer to the lunar winter
+
+The reference Open Moon column has local pressures of approximately 659, 589, 525, 467 and 414 hPa at 0, −5, −10, −15 and −20 °C. Its great geometric altitude does not itself require different microscopic growth physics. Temperature, pressure, composition and relative flow control transport; gravity changes settling, ventilation, residence and collisions. These pressures overlap terrestrial lower-pressure experiments.
+
+The [additional evidence register](growth_transfer_observations.json) preserves eight −20 °C, 550 hPa effective-uptake measurements, twenty-four older size/mass/speed endpoints and a reanalysis of a natural-cloud sample. The low-pressure effective capacitances include attachment and geometry effects; they cannot be substituted for geometric capacitance. Some older humidity inputs were inferred from growth. The natural-cloud rates divide observed sizes by estimated residence time and lack a matched forcing history. Each restriction is retained beside the data. [Bailey and Hallett (2006)](https://ams.confex.com/ams/pdfpapers/113510.pdf), [Matsuo and Fukuta (1987)](https://doi.org/10.2467/mripapers.38.247), [Fuchs et al. (2025)](https://acp.copernicus.org/articles/25/12177/2025/).
+
+A transferable autonomous model still needs humidity-dependent facet attachment coupled consistently to pressure-dependent transport, mass/axis evolution, and a branching-density treatment checked against early and late Earth states. The retrieved [Harrington et al. coefficient component](https://doi.org/10.26208/s7de-et44) provides a concrete reusable part. Its coefficients must be paired with the facet relation dc/da = alpha_c/alpha_a, rather than inserted into the old aspect-ratio growth relation unchanged. Source identities and numerical-domain issues are retained in the [physics source register](growth_physics_sources.json).
+
+## A tested facet-growth component, with explicit boundaries
+
+The [local attachment interface](facet_attachment.py) compiles the original published Fortran coefficient routines, retaining the original bytes in the ignored cache. It removes two unused assignments that read uninitialized variables and adds guarded inputs. Both single- and double-precision wrappers are compared with their respective source demonstrations. This establishes interface behavior and numerical identity, not empirical growth accuracy. The source demonstration covers spherical crystals. Additional tests find cancellation near spheres in its capacitance evaluation, including a valid double-precision integration state. A separate build uses algebraically equivalent, stable spheroid formulas; checks establish radius bounds, scale dependence, boundary monotonicity and agreement with the native formula away from the singular numerical limit. The [component audit](results/facet_attachment_checks.json) preserves source/demo comparisons. Original-source redistribution terms remain separate from the project's own wrapper.
+
+The [compact facet prototype](facet_growth.py) couples these coefficients to axis-specific vapor and thermal resistance and the facet growth relation. It uses constant dense ice and zero ventilation, so it avoids inventing an unsupported branching-density function. It also retains the equilibrium vapor density required by the dimensionally consistent mass equation; a printed omission in the ICTG equation image is documented in the product. The axis update conserves deposited volume directly. The coefficient approximation uses bulk thermal resistance internally, so coupling it to the small-particle thermal-jump correction remains an approximation rather than exact implicit DiSKICE parity.
+
+The [first prototype comparison](results/facet_growth.json) runs the four 2018 observations with vapor-density excess at or below 0.05 g/m³. Twenty-four shape/mechanism combinations are each integrated at two tolerances. All complete. Refining integration tolerances changes diameter by less than 3×10⁻⁷ relative and closes the independent mass/volume ledger to 8.3×10⁻⁹, but the physical sensitivities remain substantial. For the 0.26 mm observation at nominal −14.3 °C, the ledge-nucleation control gives 0.071, 0.147 and 0.291 mm from seed thickness/span values 1, 0.3 and 0.1. The dislocation-growth control gives 0.058–0.083 mm. Selecting the favorable seed or mechanism would be calibration.
+
+These observations involved suspended falling crystals; stagnant flow, dense growth and unknown initial geometry therefore remain explicit approximations. The component supplies a usable alternative to temperature-only habit ratios, but this restricted experiment does not select a complete replacement. Branching, hollowing and ventilated surface-supersaturation coupling still require a consistent treatment.
+
+Even successful local deposition checks would not validate many-hour moist trajectories or aggregate size distributions. Finite water supply, collision/contact geometry, fracture and observed cloud exposure remain required for lunar populations and optics. The current evidence supports repairing the transport and shape treatments in separate steps; it does not support promoting the historical 15–60 cm tail to a prediction.
+
+## Reproduction and verification
+
+All work is on `domain/atmosphere` in the atmosphere worktree. External full papers, original coefficient code, native builds and raw runs remain in ignored research caches. Compact observation transcriptions, source identities and numerical products are separate from the preserved baselines.
+
+The ventilation matrix rereads 72,360 snapshot and 115,776 actual-source trace values, verifies physical-input and executable/source/output identities, and checks mass/axes/volume mappings. Its deposition accounting closes within 2.22×10⁻¹⁶ relative error under prescribed air; this is not finite-reservoir conservation. Humidity and geometry-history controls retain raw run identities and failed executions. The conditional integrals are split at every published fit join and repeated at tighter quadrature tolerances.
+
+```sh
+python -B -m atmosphere.snow.ventilation_benchmarks --help
+python -B -m atmosphere.snow.growth_humidity_validation --help
+python -B -m atmosphere.snow.growth_humidity_history --help
+python -B -m atmosphere.snow.crystal_transport_replay
+python -B -m atmosphere.snow.facet_growth
+```
+
+The final `make check` passes: 1,276 source files with zero layer violations; 3,447 Python tests passed and 20 skipped; 191 JavaScript tests passed; historical provenance and five-workspace ensemble integrity passed. A separate `research/check.py --require-inputs` also passes. The full log is `research/runs/snow_scale/earth_growth_make_check.log`. Source/table reading and numerical controls are recorded above; these software checks do not constitute empirical validation of the proposed growth treatments.
