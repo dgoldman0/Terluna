@@ -1,0 +1,69 @@
+{
+  "schema": "terluna.atmosphere.uniform-face-sources/1",
+  "retrieved": [
+    {
+      "url": "https://www.redmondphysicalsciences.com/nelson-baker1996TheoFram.pdf",
+      "cache_path": "research/runs/snow_scale/facet_repair/nelson_baker1996.pdf",
+      "bytes": 1441726,
+      "sha256": "dee100af051b8c6dacb3a8a0f0cc17f4dca26c29bc8f6c50963311dd3ce2fcbc"
+    },
+    {
+      "url": "https://www.redmondphysicalsciences.com/nelson2001GrowMech.pdf",
+      "bytes": 2363073,
+      "sha256": "2eb1761e65eefd004a69e7dc4ca0868a86ef3f5ee26d7fed3ba02fb218687c7d",
+      "cache_path": "research/runs/snow_scale/facet_repair/nelson2001.pdf"
+    }
+  ],
+  "references": [
+    {
+      "authors": "Nelson and Baker",
+      "year": 1996,
+      "url": "https://www.redmondphysicalsciences.com/nelson-baker1996TheoFram.pdf",
+      "doi": "10.1029/95JD03162",
+      "read_sections": "Sections 4.2, 5.1-5.2 and Appendices B-C; equations 25-26 and B1/C1 visually inspected on original pages.",
+      "use": "Coupled uniform-face diffusion, common-corner source condition, necessary hollowing condition, thin-ring C1.",
+      "convention": "Implement ambient-equilibrium supersaturation and later-source density linearization explicitly; not a bitwise reproduction of the 1996 equations."
+    },
+    {
+      "authors": "Nelson",
+      "year": 2001,
+      "url": "https://www.redmondphysicalsciences.com/nelson2001GrowMech.pdf",
+      "doi": "10.1080/01418610108217152",
+      "read_sections": "Sections 3.1-3.3, particularly source positions, growth kinetics and the lacuna criterion.",
+      "use": "Supports separation of local growth steps from uniform face flux and hollowing; no 2001 kinetic-law coefficients fitted here."
+    },
+    {
+      "authors": "Harrington et al.",
+      "year": 2021,
+      "doi": "10.1175/JAS-D-20-0307.1",
+      "source_record": "atmosphere/snow/facet_attachment_sources.json",
+      "use": "Existing source air properties, temperature-dependent critical supersaturations and mechanism convention.",
+      "restriction": "Source getscrit explicitly sets equal basal and prism characteristics below -30 C; no independent dislocation calibration from switching m."
+    },
+    {
+      "authors": "Harrington and Pokrifka",
+      "year": 2026,
+      "doi": "10.1175/JAS-D-26-0016.1",
+      "source_record": "atmosphere/snow/hollow_growth_sources.json",
+      "use": "Pinned cylinder shape functions and laboratory series.",
+      "restriction": "Complete 2026 growth equations remain unretrieved; this diagnostic is not that full model."
+    }
+  ],
+  "rights": "Original papers and archive bytes remain in the ignored local cache. Only own implementation, bibliographic metadata and derived diagnostics are tracked. No external notification sent.",
+  "model_limits": [
+    "Continuum cylinder approximation, stationary diffusion formally; optional common conductance multipliers are sensitivities.",
+    "Local latent-heat geometry, no internal crystal conduction or substrate heat sink; no molecular-jump corrections.",
+    "The declared width/a <= 0.1 thin-rim range is a conservative analysis choice for the source narrow-ring asymptote, not a measured physical boundary.",
+    "No off-edge hollow field, cavity-depth state, rim evolution, finite vapor reservoir, aggregation or fracture in this component."
+  ],
+  "equation_audit": [
+    {
+      "source": "Nelson and Baker 1996, printed B1 versus Table B1 and pinned 2026 implementation",
+      "finding": "Printed h_a fit labels log10; the later archived implementation uses natural log. The latter agrees with the selected original numerical table to within 5.46%; no change to the pinned 2026 source was made. This records the source discrepancy without claiming a verified author correction."
+    },
+    {
+      "source": "Nelson and Baker 1996, C1",
+      "finding": "The basal contribution subtracts h_c(phi/x) with the same c normalization. No additional factor x multiplies that contribution. Visually checked against the original page; applicability remains asymptotic for x near one."
+    }
+  ]
+}

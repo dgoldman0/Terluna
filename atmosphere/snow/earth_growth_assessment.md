@@ -2,7 +2,7 @@
 
 The large late-growth error now has a demonstrated cause: McSnow's extra mean ventilation term for thin plates. Removing it reduces the revised spherical-seed crystal at −14.4 °C from 195.39 to 5.88 mm at thirty minutes. Removing the additional directional correction gives 4.68 mm, against the laboratory fit of 4.17 mm. The closer result does **not** establish a universal repair. Other starting shapes and temperatures retain substantial errors, and the independent humidity experiment is highly sensitive to unreported seed geometry.
 
-The conditional transport and facet calculations make the remaining problem more specific. With observed dimensions and fall speeds supplied, standard vapor and heat transport gives much closer masses, while the warm column still grows too little along its long axis relative to its width. Published hollow-crystal geometry and time series now provide a concrete next test. Predicting dimensions, branching and deposition density remains a major difficulty; transport coefficients and published-reference comparisons also need reconciliation. We can reject a singular ventilation extrapolation and identify a workable transport component without yet claiming a validated autonomous crystal-growth model or a physical lunar snow distribution.
+The conditional transport and facet calculations make the remaining problem more specific. With observed dimensions and fall speeds supplied, standard vapor and heat transport gives much closer masses, while the warm column still grows too little along its long axis relative to its width. Explicit face-transport tests now show that uniform solid faces with common-corner step sources fail during warm-column growth, while inherited equal-face parameters fail two resolved cold-chamber windows under a common-corner hypothesis. Prescribed thin rims change the rates substantially but do not jointly repair mass and both axes. Predicting dimensions, branching and deposition density remains a major difficulty; transport coefficients and published-reference comparisons also need reconciliation. We can reject a singular ventilation extrapolation and identify a workable transport component without yet claiming a validated autonomous crystal-growth model or a physical lunar snow distribution.
 
 ## What the ventilation controls establish
 
@@ -134,6 +134,48 @@ The warm-crystal files add 69 size comparisons within the existing selected fit 
 
 The repair now has a more discriminating target: preserve realistic uptake and predict both axes together with the measured response of hollow rims to humidity. Geometry routines are ready for use, and the substrate series supply constraints absent from the older size endpoints. A complete step-source/thermal/rim model still needs source reconciliation and trajectory tests before transfer to lower-pressure Earth cases and then lunar conditions. The earlier mass–shape separation remains established; a validated autonomous growth law remains open.
 
+## Explicit face transport rejects two tempting shortcuts
+
+The new [face-growth diagnostic](uniform_face_growth.py) implements the coupled cylindrical-face equations from Nelson and Baker (1996), using the already reproduced geometry functions and the inherited attachment inputs. It computes the vapour consumed by both faces at each candidate step source and includes local latent heating. Sources may be at the common edge or the face centres. This is an explicit continuum approximation; internal crystal conduction, substrate heat transfer and molecular jump corrections remain outside it. The complete 2026 model is still unretrieved. [Original theory, equations 23–26 and Appendix C](https://www.redmondphysicalsciences.com/nelson-baker1996TheoFram.pdf), [subsequent mechanism analysis](https://www.redmondphysicalsciences.com/nelson2001GrowMech.pdf), [source record](uniform_face_sources.json).
+
+For each face, the solver uses the local supersaturation at its step source. In dimensionless form its two balances are
+
+$$s_i+\sum_j L_{ij}\alpha_j(s_j)s_j=S_\infty.$$
+
+Here S∞ is the prescribed ambient ice supersaturation, and the index i identifies a step-source position. The matrix includes the effects of prism and basal vapour uptake and their local latent heating. At a common corner, the two local supersaturations must coincide. A necessary condition for a uniformly advancing face is that its prescribed flux can also be supplied at its centre and edge with an attachment efficiency no greater than one. Negative surface supersaturation under a positive deposition flux, or a required efficiency above one, rejects that uniform-face state. Passing the sampled checks does not establish feasibility everywhere on the face.
+
+The [assessment](results/uniform_face_assessment.json) requests 738 measured-shape comparisons across source locations, mechanism sensitivities and supplied ventilation. Of these, 534 calculate successfully at two solver tolerances; 180 requests lack a supported ventilation habit and 24 exceed the geometry fit's aspect-ratio range. The maximum refined balance residual is 1.31×10⁻¹³, and rate changes under refinement are below 5.34×10⁻⁹. Among 516 completed solid-face cases, 387 fail a necessary uniform-growth condition. This is a designed hypothesis screen, not an estimate of the frequency of hollow crystals. The largest mean-free-path/semiaxis ratio is 0.0131; the continuum approximation is recorded separately from numerical convergence. The published analytic geometry fits differ from eleven original numerical-table points by up to 5.46%, much more than their machine reproduction error. The older printed prism fit labels its logarithm as base ten, whereas the pinned 2026 implementation uses the natural logarithm and gives the stated table agreement. The implementation is retained unchanged; the source discrepancy is recorded without assuming an author-confirmed correction.
+
+For the −5.3 °C column, simply replacing the earlier separate-axis approximation by common-corner solid-face growth reverses the directional error. Under supplied Ji–Wang ventilation, the calculated polar/equatorial rate ratio is 7.82–22.06 times the fitted ratio across the three tested ages. The basal centre becomes undersaturated while the rim grows. The equations therefore reject their own uniformly advancing basal-face assumption. The preceding model's low directional ratio cannot be repaired by adopting this solid-face solution as a physical trajectory.
+
+A second test applies the original narrow-ring approximation to prescribed basal rim widths of 1%, 3% and 10% of the radius. It reduces the active end-face area and the end face's diffusion resistance together. At eight minutes, with the same prescribed ventilation:
+
+| Basal rim width/radius | Width-growth rate / fit | Length-growth rate / fit | Mass-growth rate / fit |
+|---|---:|---:|---:|
+| 0.01 | 1.141 | 2.787 | 1.708 |
+| 0.03 | 0.892 | 2.719 | 1.598 |
+| 0.10 | 0.236 | 2.245 | 1.282 |
+
+Hollowing changes the predicted rates substantially, but none of these uncalibrated cases jointly repairs width, length and mass. The approximation supplies the common-edge field only; it supplies neither the off-edge field nor cavity depth and rim evolution. No autonomous hollow-crystal trajectory follows from these calculations. The declared 10% upper rim fraction restricts this sensitivity to narrow rings; it is an analysis choice, not a measured morphological boundary.
+
+The mass budget independently cautions against identifying maximum measured dimensions with an entirely advancing surface. In the laboratory's hexagonal-envelope convention, growing a solid envelope at the fitted warm-column axis rates would consume 2.59–4.03 times the fitted mass uptake. At 4.5 and 8 minutes, growth of the full side faces alone would consume 1.09 and 1.15 times that uptake, before any end-face growth. Those modest excesses depend on derivatives of separate fits without derivative-error bounds; they cannot establish that a particular observed crystal violates conservation. They do show why an exact fit of all three central curves cannot use a full growing side wall plus hollow tips alone. Growth localized along the crystal, its changing profile, and uncertainty in the fitted histories require explicit treatment. A bulk deposition-density multiplier conceals this geometric question.
+
+## The cold control exposes an inherited symmetry assumption
+
+The 2021 source routine explicitly sets the prism and basal characteristic supersaturations equal below −30 °C. At −50 °C both are 0.1731575. If the same mechanism operates at their common corner, their attachment efficiencies and normal growth rates are identical: **da/dt = dc/dt** in the cylindrical convention used here. Changing crystal size, humidity, a common ventilation factor or the prescribed basal rim does not remove that equality. This statement concerns the inherited parameters in the common-corner hypothesis; the earlier spheroidal approximation uses separate local humidities and need not have that invariant. [Source publication](https://doi.org/10.1175/JAS-D-20-0307.1).
+
+The two archived −50 °C experiments provide a direct test without reconstructing instantaneous derivatives. Equal axis speeds require c−a to remain constant. Fitting that difference over each selected window and propagating the supplied total axis-error bounds gives:
+
+| Experiment and window | Fitted rate of c−a, µm/s | Conservative measurement-error interval, µm/s |
+|---|---:|---:|
+| November 2023, entire recorded series | 0.01969 | 0.01514–0.02425 |
+| August 2024, 150–230 min | 0.006954 | 0.000880–0.01303 |
+| August 2024, 270–336 min | 0.001579 | −0.004486–0.007645 |
+
+The first two intervals exclude equal axis speeds even after these measurement perturbations. For a regular hexagon measured across opposite corners, equal normal speeds instead imply dc/da = cos(30°), about 0.866; the first two positive-denominator ratio bounds also exclude that conversion. The last does not resolve the difference. This excludes the equal-face/common-corner hypothesis for the first two windows under the reported error limits; it does not identify a unique alternative mechanism or bound unreported systematic and forcing errors. Substrate effects remain relevant. None of the 94 measured rim fractions falls within the declared narrow-ring approximation, so applying that approximation to these chamber histories would extend it beyond this assessment's stated regime.
+
+The repair now needs a spatially meaningful hollow or branched geometry **and** separately constrained facet kinetics and step sources. A revised scalar uptake, a solver-tolerance change or a single fitted rim width cannot establish that combination. The next useful comparison should follow both measured axes and rim evolution through the humidity change, test the warm histories jointly with mass, and retain the low-pressure Earth controls before lunar transfer. These results improve the diagnosis without adopting an autonomous Earth growth law or an absolute lunar flake distribution.
+
 ## Reproduction and verification
 
 The hollow-geometry build command requires the pinned archive in the ignored cache and a new output directory; existing builds are never overwritten.
@@ -152,6 +194,7 @@ python -B -m atmosphere.snow.facet_coupling_audit
 python -B -m atmosphere.snow.facet_growth_controls
 python -B -m atmosphere.snow.hollow_shape --build research/runs/snow_scale/hollow_growth/native_build
 python -B -m atmosphere.snow.hollow_growth_assessment
+python -B -m atmosphere.snow.uniform_face_assessment
 ```
 
 The final `make check` passes: 1,276 source files with zero layer violations; 3,447 Python tests passed and 20 skipped; 191 JavaScript tests passed; historical provenance and five-workspace ensemble integrity passed. A separate `research/check.py --require-inputs` also passes. The full log is `research/runs/snow_scale/earth_growth_make_check.log`. Source/table reading and numerical controls are recorded above; these software checks do not constitute empirical validation of the proposed growth treatments.
@@ -161,3 +204,5 @@ The implicit-coupling checkpoint also passes `make check`: 3,469 Python tests pa
 The trajectory-control checkpoint passes `make check`: 1,281 tracked source files with zero layer violations; 3,474 Python tests passed and 20 skipped; all 191 JavaScript tests passed; provenance and ensemble integrity passed. Its log is `research/runs/snow_scale/facet_coupling/growth_make_check.log`. The independent trajectory balances, frozen-output replay and measured-shape comparisons above establish distinct numerical and physical evidence.
 
 The hollow-geometry checkpoint passes `make check`: 1,284 tracked source files with zero layer violations; 3,497 Python tests passed and 20 skipped; all 191 JavaScript tests passed; provenance and ensemble integrity passed. Its full log is `research/runs/snow_scale/hollow_growth/make_check.log`; the separate `research/check.py --require-inputs` also passes. The 23 new tests include archived-source reproduction, coordinate conversion and range checks, and independent extrema checks of the measurement-error calculation. The report's mechanisms, source limits and measured-versus-calculated claims were read in context; full scholarly review and complete 2026 equation reproduction remain outstanding.
+
+The explicit-face checkpoint passes `make check`: 1,287 tracked source files with zero layer violations; 3,526 Python tests passed and 20 skipped; all 191 JavaScript tests passed; historical provenance and ensemble integrity passed. The separate `research/check.py --require-inputs` also passes. Logs are `research/runs/snow_scale/facet_repair/make_check.log` and `required_inputs_check.json` in the same directory. The 29 new tests include independent analytic limits, an original numerical-table comparison, mass–volume accounting, the equal-face invariant and measured-error exclusions. Original equations 25–26 and B1/C1 were inspected visually; the new report sections were read in context. These activities establish the stated source and numerical checks, while full scholarly review, complete 2026 reproduction and autonomous growth validation remain outstanding.
