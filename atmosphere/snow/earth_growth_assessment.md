@@ -2,7 +2,7 @@
 
 The large late-growth error now has a demonstrated cause: McSnow's extra mean ventilation term for thin plates. Removing it reduces the revised spherical-seed crystal at −14.4 °C from 195.39 to 5.88 mm at thirty minutes. Removing the additional directional correction gives 4.68 mm, against the laboratory fit of 4.17 mm. The closer result does **not** establish a universal repair. Other starting shapes and temperatures retain substantial errors, and the independent humidity experiment is highly sensitive to unreported seed geometry.
 
-The new conditional transport calculation makes the remaining problem more specific. With observed dimensions and fall speeds supplied, standard vapor and heat transport gives much closer masses. Predicting those dimensions, branching and deposition density remains a major difficulty; transport coefficients and published-reference comparisons also need reconciliation. We can reject a singular ventilation extrapolation and identify a workable transport component without yet claiming a validated autonomous crystal-growth model or a physical lunar snow distribution.
+The conditional transport and facet calculations make the remaining problem more specific. With observed dimensions and fall speeds supplied, standard vapor and heat transport gives much closer masses, while the warm column still grows too little along its long axis relative to its width. Published hollow-crystal geometry and time series now provide a concrete next test. Predicting dimensions, branching and deposition density remains a major difficulty; transport coefficients and published-reference comparisons also need reconciliation. We can reject a singular ventilation extrapolation and identify a workable transport component without yet claiming a validated autonomous crystal-growth model or a physical lunar snow distribution.
 
 ## What the ventilation controls establish
 
@@ -78,7 +78,7 @@ Even successful local deposition checks would not validate many-hour moist traje
 
 ## Implicit attachment, heat and ventilation coupling
 
-The [implicit component](facet_coupling.py) solves the surface-humidity equations from Zhang and Harrington (2014) together with the same latent-heat balance used for mass uptake. Its two surface humidities determine the attachment coefficients, and the resulting uptake determines the thermal reduction of the vapour driving force. Bracketed scalar roots close both dependencies. The later published facet relation distributes the deposited volume between the axes. The original semianalytic helper remains available as a comparison and supplies its declared air properties and characteristic supersaturations. [Source equations and retrieval record](facet_coupling_sources.json).
+The [implicit component](facet_coupling.py) solves the surface-humidity equations from Zhang and Harrington (2014) together with the same latent-heat balance used for mass uptake. Its two surface humidities determine the attachment coefficients, and the resulting uptake determines the thermal reduction of the vapour driving force. Bracketed scalar roots close both dependencies. The later published facet relation distributes the deposited volume between the axes under its assumption that steps originate near crystal edges. That shape approximation is separate from solving the two surface balances. The original semianalytic helper remains available as a comparison and supplies its declared air properties and characteristic supersaturations. [Source equations and retrieval record](facet_coupling_sources.json).
 
 Ventilation changes the continuum conductance for vapour and heat while leaving the molecular attachment resistance intact. This permits independent, finite ventilation factors without multiplying a surface-limited growth rate indiscriminately. It does not choose a drag law or a correlation for an evolving habit. The [432-state audit](results/facet_coupling_audit.json) spans four temperatures, two pressures, three sizes, three shapes, two attachment mechanisms and three supersaturations; each state also has a factor-two conductance control. The largest normalized surface or heat balance residual is 7.88×10⁻¹². Twenty-two focused tests check molecular flux matching, mass and volume consistency, spherical symmetry, equilibrium, the independent spherical dislocation solution and attachment-limited ventilation. A root-bracket rounding error exposed by the grid was corrected algebraically and retained as a regression test.
 
@@ -110,7 +110,33 @@ The newer morphology evidence further narrows the applicable compact regime. Har
 
 The next repair should therefore be evaluated against mass and both axes at observed intermediate states, with hollowing and branching represented explicitly enough to test those quantities. The local transport component is better constrained, but no autonomous Earth growth treatment or lunar snow distribution is adopted by this checkpoint.
 
+## Published hollow-crystal geometry and new time-series constraints
+
+Harrington and Pokrifka's July 2026 study explicitly considers where growth steps originate on a face and how hollow rims affect growth. Its [public archive](https://www.datacommons.psu.edu/commonswizard/MetadataDisplay.aspx?Dataset=6511) supplies geometry routines and laboratory series. The [local assessment](results/hollow_growth_assessment.json) makes those components usable without representing them as a complete growth solver. The accessible abstract describes corner and centre step sources; the complete equations remain unavailable after a publisher retrieval failure and an author preview limited to the first page. [Study](https://doi.org/10.1175/JAS-D-26-0016.1), [source and rights record](hollow_growth_sources.json).
+
+The [geometry interface](hollow_shape.py) compiles the archived Fortran functions unchanged. Two native demonstrations reproduce 17,000 archived numbers within 2.48×10⁻⁶ relative difference. Across 1,992 accepted states, the interface agrees with its native demonstration within 6.22×10⁻⁷. Source clipping is exposed as a domain restriction: eight hexagonal requests in the converted demonstration exceed the original fitted aspect-ratio interval and are rejected by the interface. The source's approximate coordinate factor and its capacitance convention are retained explicitly. These comparisons verify a numerical component; they do not verify attachment or hollow-rim evolution.
+
+The archive includes 94 observations from two substrate experiments near −50 °C and 970–972 hPa, with axis and rim measurements and reported errors. The companion methods define a and c as semidimensions. The archive does not restate that factor of two, so the interpretation is recorded rather than silently inferred. Substrate attachment and the lack of measured mass limit comparison with free-falling snow. [Pokrifka, Moyle and Harrington (2025), methods and limitations](https://doi.org/10.1175/JAS-D-25-0030.1).
+
+The longer experiment changes ice supersaturation from 48% to 20% at 230 minutes. Selected windows before the change and after a forty-minute transition interval give:
+
+| Calculated summary | 150–230 min, 48% | 270–336 min, 20% |
+|---|---:|---:|
+| Measurements in window | 16 | 14 |
+| Median rim width, µm | 7.92 | 28.38 |
+| Median rim width/a | 0.167 | 0.507 |
+| Fitted a-semiaxis growth, µm/s | 0.001740 | 0.000474 |
+| Fitted c-semiaxis growth, µm/s | 0.008694 | 0.002053 |
+
+The median rim widens by a factor of 3.58; propagating the supplied total measurement errors gives a conservative interval of 2.65–4.57. This interval is a deterministic bound under those error limits, not a statistical confidence interval. The central linear fits suggest substantially slower axis growth, but the conservative post-change slope intervals include zero. Their ratio therefore has no resolved positive-denominator interval. The derivative uncertainty matters: a candidate model should be checked against the measured dimensions and rims over time, rather than tuned to an apparently precise ratio of noisy slopes.
+
+The warm-crystal files add 69 size comparisons within the existing selected fit intervals. The −5.3 °C digitizations lie at 0.878–1.078 times the fitted width and 0.776–1.227 times the fitted length. The separate early-column files repeat eleven points already present in the larger files; they are not additional experiments. These data check the broad size history behind the current warm-column diagnosis, while neither new independence nor exact facet-rate derivatives can be inferred from them.
+
+The repair now has a more discriminating target: preserve realistic uptake and predict both axes together with the measured response of hollow rims to humidity. Geometry routines are ready for use, and the substrate series supply constraints absent from the older size endpoints. A complete step-source/thermal/rim model still needs source reconciliation and trajectory tests before transfer to lower-pressure Earth cases and then lunar conditions. The earlier mass–shape separation remains established; a validated autonomous growth law remains open.
+
 ## Reproduction and verification
+
+The hollow-geometry build command requires the pinned archive in the ignored cache and a new output directory; existing builds are never overwritten.
 
 All work is on `domain/atmosphere` in the atmosphere worktree. External full papers, original coefficient code, native builds and raw runs remain in ignored research caches. Compact observation transcriptions, source identities and numerical products are separate from the preserved baselines.
 
@@ -124,6 +150,8 @@ python -B -m atmosphere.snow.crystal_transport_replay
 python -B -m atmosphere.snow.facet_growth
 python -B -m atmosphere.snow.facet_coupling_audit
 python -B -m atmosphere.snow.facet_growth_controls
+python -B -m atmosphere.snow.hollow_shape --build research/runs/snow_scale/hollow_growth/native_build
+python -B -m atmosphere.snow.hollow_growth_assessment
 ```
 
 The final `make check` passes: 1,276 source files with zero layer violations; 3,447 Python tests passed and 20 skipped; 191 JavaScript tests passed; historical provenance and five-workspace ensemble integrity passed. A separate `research/check.py --require-inputs` also passes. The full log is `research/runs/snow_scale/earth_growth_make_check.log`. Source/table reading and numerical controls are recorded above; these software checks do not constitute empirical validation of the proposed growth treatments.
@@ -131,3 +159,5 @@ The final `make check` passes: 1,276 source files with zero layer violations; 3,
 The implicit-coupling checkpoint also passes `make check`: 3,469 Python tests passed and 20 skipped, all 191 JavaScript tests passed, and provenance and ensemble integrity passed. Its log is `research/runs/snow_scale/facet_coupling/make_check.log`; the separate required-input provenance check is recorded alongside it. The layer check is repeated after staging the new source files so that its tracked-file scan includes them.
 
 The trajectory-control checkpoint passes `make check`: 1,281 tracked source files with zero layer violations; 3,474 Python tests passed and 20 skipped; all 191 JavaScript tests passed; provenance and ensemble integrity passed. Its log is `research/runs/snow_scale/facet_coupling/growth_make_check.log`. The independent trajectory balances, frozen-output replay and measured-shape comparisons above establish distinct numerical and physical evidence.
+
+The hollow-geometry checkpoint passes `make check`: 1,284 tracked source files with zero layer violations; 3,497 Python tests passed and 20 skipped; all 191 JavaScript tests passed; provenance and ensemble integrity passed. Its full log is `research/runs/snow_scale/hollow_growth/make_check.log`; the separate `research/check.py --require-inputs` also passes. The 23 new tests include archived-source reproduction, coordinate conversion and range checks, and independent extrema checks of the measurement-error calculation. The report's mechanisms, source limits and measured-versus-calculated claims were read in context; full scholarly review and complete 2026 equation reproduction remain outstanding.
