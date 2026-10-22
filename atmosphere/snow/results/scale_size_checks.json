@@ -1,0 +1,551 @@
+{
+  "schema": "terluna.atmosphere.scale-size-checks/1",
+  "date": "2026-10-22",
+  "evidence": "Numerical forcing, implementation and source checks; model-attribution evidence, not empirical snow validation.",
+  "new_native_runs": 13,
+  "retained_native_references": 2,
+  "source_identity_count": 8,
+  "focused_tests": {
+    "command": "python -B -m pytest atmosphere/tests/test_snow_scale_column.py atmosphere/tests/test_snow_scale_aggregation.py atmosphere/tests/test_snow_scale_lunar.py atmosphere/tests/test_snow_scale_size_diagnosis.py -q",
+    "passed": 45,
+    "log_sha256": "1a2b751493460a797becea8871256429d71102034b8a0aed954d4409eb139c6f"
+  },
+  "layer_check": {
+    "live_tracked_and_untracked_sources": 1248,
+    "violations": 0,
+    "log_sha256": "45ff398cdd0ad527a6d3aa1f52a831c4f2a3440ad763084a9fd2838000b6324a"
+  },
+  "research_provenance_check": {
+    "result": "PASS",
+    "retained_files": 110,
+    "protection_inputs": "PASS",
+    "log_sha256": "4183a0c1b76e67cdf7c45aff88ccf5be1d5bd9a212fbdc4d68bf00602cd70bb0"
+  },
+  "independent_native_verification": [
+    {
+      "case": "size_moon_baseline",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 5.3800789601154975e-08,
+      "maximum_relative_precipitation_difference": 1.563934725691592e-10,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-j5bgqmah/runs/size_moon_baseline",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "de300f3204385bb32baadd9d0c6665ee2311a0d32161ee4a6140d16293aa086f"
+    },
+    {
+      "case": "size_earth_g_deep",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 2.9509294563467847e-08,
+      "maximum_relative_precipitation_difference": 8.212257925575018e-11,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-_yt3maq7/runs/size_earth_g_deep",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "bb9f924128a4f5eacf64f439b38d04fbadff2011a16607a5db38814367f20360"
+    },
+    {
+      "case": "size_moon_g_shallow",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 6.105875627326895e-08,
+      "maximum_relative_precipitation_difference": 1.8645716934438495e-10,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-spr75i1g/runs/size_moon_g_shallow",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "4a1c3a921af3d7f1d3a7da3dc98e67145888d98a98b127fe87ec210831aeaa7b"
+    },
+    {
+      "case": "size_earth_g_shallow",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 1.3928598718848662e-08,
+      "maximum_relative_precipitation_difference": 6.162406753348743e-11,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-tn0k1q8n/runs/size_earth_g_shallow",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "189339cecdbcc839b942b189c11bd7d038f9823ea1dd14d4ee6269f04312a7d2"
+    },
+    {
+      "case": "size_earth_g_shallow_dt15",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 4.275125320418738e-08,
+      "maximum_relative_precipitation_difference": 1.850500401869342e-10,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-tybv3itt/runs/size_earth_g_shallow_dt15",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "6702e73c98a2a68b5506d5a5b9d1234adcd418a4acaa87b983d8949aa65ea19e"
+    },
+    {
+      "case": "size_moon_no_aggregation",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 5.6039340279312455e-08,
+      "maximum_relative_precipitation_difference": 1.5323062296772191e-10,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-zm725t6s/runs/size_moon_no_aggregation",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "012418e229794c1204b5513b06bef55986c38d2317dfedbc951dd9f449805eb1"
+    },
+    {
+      "case": "size_earth_no_aggregation",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 3.579322083169245e-08,
+      "maximum_relative_precipitation_difference": 1.515714233173606e-10,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-vwm42lff/runs/size_earth_no_aggregation",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "040bb92e6a2aa737036637901850a2221491d98087763dca585f492c0e4cecdd"
+    },
+    {
+      "case": "size_moon_seeds_tenth",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 3.718685093190288e-08,
+      "maximum_relative_precipitation_difference": 1.178564423754963e-10,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-viz2adlk/runs/size_moon_seeds_tenth",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "ae9feb758f0db8024803cb937a4a127dd76720cdb7bfd947f8c5072140baceb4"
+    },
+    {
+      "case": "size_moon_water_ten",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 1.7672778085398022e-07,
+      "maximum_relative_precipitation_difference": 1.219251297734242e-10,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-urh3dh59/runs/size_moon_water_ten",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "7343d0e4960da56183857eaceaab97e0fc0f8f82726a0eb185fbde0029f076cb"
+    },
+    {
+      "case": "size_moon_water_ten_dt15",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 1.7363117876811884e-07,
+      "maximum_relative_precipitation_difference": 1.199782036836458e-10,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-3i33g4pp/runs/size_moon_water_ten_dt15",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "75bb7170cf02cf76e2dbaacb01aebd458444c37dec510c39a232fb8066a56167"
+    },
+    {
+      "case": "size_earth_shallow_dt15_p3",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 2.461177928125835e-08,
+      "maximum_relative_precipitation_difference": 1.0289637385559969e-10,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-ef_ghd71/runs/size_earth_shallow_dt15_p3",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "bdb0c5b831bd214f04b9a6c8ba6ec1c68db92d6169066a126cc5a055ce6534a1"
+    },
+    {
+      "case": "size_earth_shallow_dt15_p6",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 1.6000711866581696e-08,
+      "maximum_relative_precipitation_difference": 6.63287773209271e-11,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-s3ysrhqw/runs/size_earth_shallow_dt15_p6",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "1dde70de5b03ac363b8ba163ba752707ffae1889d93acbe8dc95679af0e482f2"
+    },
+    {
+      "case": "size_earth_shallow_dt5_p1",
+      "native_history_samples": 133,
+      "input_hash_count": 6,
+      "maximum_precipitation_difference_kg_m2": 1.6394395174756937e-08,
+      "maximum_relative_precipitation_difference": 6.815828903837887e-11,
+      "reproduced_physics_inputs": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "generation": {
+        "path": "/tmp/terluna-size-reproduce-7y_wwk5l/runs/size_earth_shallow_dt5_p1",
+        "python": "/home/kir/miniconda3/bin/python",
+        "numpy": "2.3.3"
+      },
+      "history_sha256": "3fd981dc27237fbfe369069d3718429b96d9fdbbd23ff2af58a55d0aef497574"
+    }
+  ],
+  "maximum_relative_water_residual": 5.903649950495421e-13,
+  "stationarity": {
+    "lunar_prescribed_p4": {
+      "block_range_over_mean": {
+        "snow_flux": 0.0014034889378391631,
+        "d50": 0.012753138365943616,
+        "d99": 0.03203865131190229
+      },
+      "monomer_throughput_ratio": 0.9994538463024247
+    },
+    "lunar_sticking_dt15": {
+      "block_range_over_mean": {
+        "snow_flux": 0.0044059053339527395,
+        "d50": 0.01219101114573108,
+        "d99": 0.14220331457221783
+      },
+      "monomer_throughput_ratio": 1.0005373032893365
+    },
+    "size_moon_baseline": {
+      "block_range_over_mean": {
+        "snow_flux": 0.004461558472535923,
+        "d50": 0.007812927830215881,
+        "d99": 0.05319520505348717
+      },
+      "monomer_throughput_ratio": 0.9991007771334472
+    },
+    "size_earth_g_deep": {
+      "block_range_over_mean": {
+        "snow_flux": 0.0016822178147878617,
+        "d50": 0.004121882217122683,
+        "d99": 0.02421338467446326
+      },
+      "monomer_throughput_ratio": 1.0003175228016128
+    },
+    "size_moon_g_shallow": {
+      "block_range_over_mean": {
+        "snow_flux": 0.0026268532972093445,
+        "d50": 0.000814832701140985,
+        "d99": 0.006702912439758002
+      },
+      "monomer_throughput_ratio": 0.9999865737786214
+    },
+    "size_earth_g_shallow": {
+      "block_range_over_mean": {
+        "snow_flux": 0.0030096975066714383,
+        "d50": 0.0010002283695379982,
+        "d99": 0.01745889769093839
+      },
+      "monomer_throughput_ratio": 1.00028904393199
+    },
+    "size_earth_g_shallow_dt15": {
+      "block_range_over_mean": {
+        "snow_flux": 0.002039629151397585,
+        "d50": 0.0013530489964898684,
+        "d99": 0.011292428528527885
+      },
+      "monomer_throughput_ratio": 1.000031749646717
+    },
+    "size_moon_no_aggregation": {
+      "block_range_over_mean": {
+        "snow_flux": 0.002480191919645955,
+        "d50": 0.0012383987173057642,
+        "d99": 0.001911630482329878
+      },
+      "monomer_throughput_ratio": 0.9998922991028495
+    },
+    "size_earth_no_aggregation": {
+      "block_range_over_mean": {
+        "snow_flux": 0.001057978208037828,
+        "d50": 0.0007942324852265476,
+        "d99": 0.0035616527353957623
+      },
+      "monomer_throughput_ratio": 1.000253690538283
+    },
+    "size_moon_seeds_tenth": {
+      "block_range_over_mean": {
+        "snow_flux": 0.002326079438572357,
+        "d50": 0.005191683669522769,
+        "d99": 0.02578493854813403
+      },
+      "monomer_throughput_ratio": 0.9989790420853555
+    },
+    "size_moon_water_ten": {
+      "block_range_over_mean": {
+        "snow_flux": 0.008356291992331708,
+        "d50": 0.015280006701599201,
+        "d99": 0.020855717911075215
+      },
+      "monomer_throughput_ratio": 1.0004736883102088
+    },
+    "size_moon_water_ten_dt15": {
+      "block_range_over_mean": {
+        "snow_flux": 0.005514374452892023,
+        "d50": 0.008270965688352108,
+        "d99": 0.06942807228506885
+      },
+      "monomer_throughput_ratio": 0.9999840841469848
+    },
+    "size_earth_shallow_dt15_p3": {
+      "block_range_over_mean": {
+        "snow_flux": 0.0017161335954469102,
+        "d50": 0.0002178939515818027,
+        "d99": 0.007181567989984439
+      },
+      "monomer_throughput_ratio": 0.9999715178517142
+    },
+    "size_earth_shallow_dt15_p6": {
+      "block_range_over_mean": {
+        "snow_flux": 0.0005827209434091723,
+        "d50": 0.0001293206911184015,
+        "d99": 0.005221295234502778
+      },
+      "monomer_throughput_ratio": 1.0000350230882438
+    },
+    "size_earth_shallow_dt5_p1": {
+      "block_range_over_mean": {
+        "snow_flux": 0.0018241374855056075,
+        "d50": 0.00014983527215446096,
+        "d99": 0.0034527958672613238
+      },
+      "monomer_throughput_ratio": 1.0000887085120522
+    }
+  },
+  "declared_refinement_results": [
+    {
+      "label": "inactive capacity and random-stream control",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": -9.177495665646518e-07,
+        "mass_d50_m": -0.0017949212507974988,
+        "mass_d90_m": 0.00949516748082968,
+        "mass_d99_m": 0.004138225522333672
+      },
+      "maximum_mass_cdf_difference": 0.008194810142498565,
+      "passed": true,
+      "screen": "At most 5% flux/d50/d90/d99 change and 0.05 exact empirical mass-CDF distance; equal weighting of eight column-normalized distributions. Earlier sparse-query distance retained separately.",
+      "left": "lunar_prescribed_p4",
+      "right": "size_moon_baseline",
+      "query_grid_mass_cdf_difference": 0.00804686968127677,
+      "cdf_distance_method": "exact_equal_column_empirical",
+      "exact_mass_cdf_difference": 0.008194810142498565,
+      "exact_mass_cdf_difference_at_m": 0.00209231288895985,
+      "query_grid_screen_passed": true
+    },
+    {
+      "label": "Earth shallow timestep refinement",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 0.022206959806058357,
+        "mass_d50_m": 0.023245373767196265,
+        "mass_d90_m": 0.030185546833952026,
+        "mass_d99_m": 0.016848810785832447
+      },
+      "maximum_mass_cdf_difference": 0.15206135493749867,
+      "passed": false,
+      "screen": "At most 5% flux/d50/d90/d99 change and 0.05 exact empirical mass-CDF distance; equal weighting of eight column-normalized distributions. Earlier sparse-query distance retained separately.",
+      "left": "size_earth_g_shallow",
+      "right": "size_earth_g_shallow_dt15",
+      "query_grid_mass_cdf_difference": 0.13382964897410293,
+      "cdf_distance_method": "exact_equal_column_empirical",
+      "exact_mass_cdf_difference": 0.15206135493749867,
+      "exact_mass_cdf_difference_at_m": 0.0007298124572272612,
+      "query_grid_screen_passed": false
+    },
+    {
+      "label": "Earth shallow injection sampling refinement",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 0.03471223001749735,
+        "mass_d50_m": 0.015512991994550474,
+        "mass_d90_m": 0.019401991761485382,
+        "mass_d99_m": 0.016902208151435616
+      },
+      "maximum_mass_cdf_difference": 0.11085466924950158,
+      "passed": false,
+      "screen": "At most 5% flux/d50/d90/d99 change and 0.05 exact empirical mass-CDF distance; equal weighting of eight column-normalized distributions. Earlier sparse-query distance retained separately.",
+      "left": "size_earth_g_shallow_dt15",
+      "right": "size_earth_shallow_dt15_p3",
+      "query_grid_mass_cdf_difference": 0.06575024905601068,
+      "cdf_distance_method": "exact_equal_column_empirical",
+      "exact_mass_cdf_difference": 0.11085466924950158,
+      "exact_mass_cdf_difference_at_m": 0.0006849341447906033,
+      "query_grid_screen_passed": false
+    },
+    {
+      "label": "Earth shallow 12 to 24 packets per minute",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 0.00848877039363316,
+        "mass_d50_m": 0.003213589511454895,
+        "mass_d90_m": 0.005127073255221548,
+        "mass_d99_m": 0.0032393963365053846
+      },
+      "maximum_mass_cdf_difference": 0.041314180836633296,
+      "passed": true,
+      "screen": "At most 5% flux/d50/d90/d99 change and 0.05 exact empirical mass-CDF distance; equal weighting of eight column-normalized distributions. Earlier sparse-query distance retained separately.",
+      "left": "size_earth_shallow_dt15_p3",
+      "right": "size_earth_shallow_dt15_p6",
+      "query_grid_mass_cdf_difference": 0.020326878377035035,
+      "cdf_distance_method": "exact_equal_column_empirical",
+      "exact_mass_cdf_difference": 0.041314180836633296,
+      "exact_mass_cdf_difference_at_m": 0.000686164933954518,
+      "query_grid_screen_passed": true
+    },
+    {
+      "label": "Earth shallow 15 to 5 s at fixed 12 packets per minute",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 0.005718082222635701,
+        "mass_d50_m": 0.0056064393537877955,
+        "mass_d90_m": 0.006248275286478089,
+        "mass_d99_m": 0.007843177709230487
+      },
+      "maximum_mass_cdf_difference": 0.07193414279435972,
+      "passed": false,
+      "screen": "At most 5% flux/d50/d90/d99 change and 0.05 exact empirical mass-CDF distance; equal weighting of eight column-normalized distributions. Earlier sparse-query distance retained separately.",
+      "left": "size_earth_shallow_dt15_p3",
+      "right": "size_earth_shallow_dt5_p1",
+      "query_grid_mass_cdf_difference": 0.049969824960645726,
+      "cdf_distance_method": "exact_equal_column_empirical",
+      "exact_mass_cdf_difference": 0.07193414279435972,
+      "exact_mass_cdf_difference_at_m": 0.0007473295862492271,
+      "query_grid_screen_passed": true
+    },
+    {
+      "label": "higher-water timestep and collision-cap control",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": -0.0027304263476758406,
+        "mass_d50_m": 0.008828863772400775,
+        "mass_d90_m": 0.006750135468692076,
+        "mass_d99_m": 0.04395883167939263
+      },
+      "maximum_mass_cdf_difference": 0.01345440269618281,
+      "passed": true,
+      "screen": "At most 5% flux/d50/d90/d99 change and 0.05 exact empirical mass-CDF distance; equal weighting of eight column-normalized distributions. Earlier sparse-query distance retained separately.",
+      "left": "size_moon_water_ten",
+      "right": "size_moon_water_ten_dt15",
+      "query_grid_mass_cdf_difference": 0.012324701904002255,
+      "cdf_distance_method": "exact_equal_column_empirical",
+      "exact_mass_cdf_difference": 0.01345440269618281,
+      "exact_mass_cdf_difference_at_m": 0.004930533124036612,
+      "query_grid_screen_passed": true
+    }
+  ],
+  "source_and_report_review": "Independent read-only reviews of source mechanisms, forcing transformations and units, population accounting and report interpretation. Root applied corrections distinguishing scenario inputs, direct gravity effects and empirical evidence. Report read with adjacent synthesis.",
+  "check_attempt_notes": [
+    "First status-scope assertion compared the existing updated date to HEAD and stopped before layer scan. Inspection identified only the prior date update plus atmosphere changes; the corrected scope check preserves that date and all other topic contents and next-session tasks."
+  ],
+  "not_performed": [
+    "Observed Earth large-snowfall reproduction",
+    "Gravity-dependent compaction or branch-contact fracture validation",
+    "Native geometry-law replacement",
+    "Weather-derived water/crystal supply",
+    "New storm optics",
+    "Full make check not rerun for this addition; no commit requested"
+  ],
+  "files": {
+    "atmosphere/snow/scale_size_diagnosis.py": "71d1d6219169128519e94ef8d1ad2105d48620755da7e53757a6c55a5bc78b09",
+    "atmosphere/snow/scale_size_verify.py": "ddbf779ea17d09bea639a815ecc107daa19d79dbed5464d83768d1857c103975",
+    "atmosphere/snow/scale_size_results.md": "0df1d75e2aed2244000261be4fec8a344f68b86e6630a859014e39010d2737e3",
+    "atmosphere/snow/scale_size_sources.json": "044f7ae6c2a367cd05b4eb772c26eddbfd8905288253c2373f2b17105b7ba108",
+    "atmosphere/snow/results/scale_size_diagnosis.json": "f4fdd9a5accda96b2dc53dc6b94c63d49520f32ada4e257f42409933dd394d08",
+    "atmosphere/tests/test_snow_scale_size_diagnosis.py": "26a1becb58ae200b7ae519e6de8721947611bdaf557aaee733720a306215a4d9"
+  }
+}

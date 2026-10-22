@@ -1,0 +1,104 @@
+{
+  "schema": "terluna.atmosphere.scale-column-checks/1",
+  "checked_at_utc": "2026-10-22T13:13:41.632053+00:00",
+  "branch": "domain/atmosphere",
+  "base_commit": "52100f52018552926a43cbc67a339609f29da3f4",
+  "checked_file_sha256": {
+    "atmosphere/snow/scale_build.py": "c745f0259a271905dc1fdfc6ac99605aa0d7fbe98be95717f03b212296e00c7b",
+    "atmosphere/snow/scale_column.py": "26c618a0c2757fd84611a52b8acd8f037e23903463e02ce78650f39fb343a23f",
+    "atmosphere/tests/test_snow_scale_column.py": "bd0ed00e32bf394ea41759a1607ec0f249f9ad02ccf21e230ab8e3bf1cb35abe",
+    "atmosphere/snow/results/scale_column.json": "6c080fbf743543ff5befc84d07ce7f87f0fa654766c827223b52ae41b34cb0b3",
+    "atmosphere/snow/analysis.md": "8bc3a65888b3d6a5bbfa1fb05b3241ba769cbfeddbccdbcf5818b6600d4210bb",
+    "atmosphere/snow/README.md": "f60decc0d5622f5473161b0dcc8770e2ee1c0e1855be883adfccbe2f91dedb24",
+    "atmosphere/README.md": "c989a1848cb9495b5026fdb3f2e3803c0e935a0f684d83d48c36c4128c144476",
+    "research/status.json": "9e3fb6c15e3e68843fb847412acb6ab137f1b6c5e5d32e28ec103305410bbb48",
+    "atmosphere/snow/solver_reuse_sources.json": "e4dd3675c94938ee04d546a82be254a5f42ccf0e7cd9bf9035215ce4ea6827b6",
+    "atmosphere/snow/references/scale_bsd_2_clause.txt": "cff7d9ebfd6aa80f1bda00e1b8ba0d4dc8025db47af4c3a25364845c0c7349c0"
+  },
+  "focused_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest atmosphere/tests/test_snow_scale_column.py -q -p no:cacheprovider",
+    "result": "PASS",
+    "passed": 13,
+    "skipped": 0
+  },
+  "layer_check": {
+    "command": "shared.check_layers.main() with tracked_sources supplied by git ls-files --cached --others --exclude-standard for Python and JavaScript sources",
+    "files_checked": 1238,
+    "violations": 0,
+    "result": "PASS"
+  },
+  "research_check": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python research/check.py --output /tmp/terluna-scale-feasibility/research_check.json",
+    "result": "PASS",
+    "retained_report": "research/runs/snow_scale/research_check.json",
+    "report_sha256": "97735517574d552bd608ab01277b993dbb5e9f7cbea2023ad57194ad2ded637c",
+    "scope": "artifact integrity and numerical implementation only",
+    "scientific_validation": false
+  },
+  "diff_check": {
+    "command": "git diff --check",
+    "result": "PASS"
+  },
+  "numerical_controls": {
+    "complete_cases": 12,
+    "maximum_relative_water_residual": 8.791117162549611e-12,
+    "gravity_control": {
+      "earth_field_max_absolute_difference": {
+        "DENS": 0.0,
+        "QV": 0.0,
+        "T": 0.0,
+        "QHYD_sd": 0.0,
+        "QI_sd": 0.0,
+        "QS_sd": 0.0,
+        "PREC_sd": 0.0
+      },
+      "identical_initial_particle_arrays_except_velocity": true,
+      "1": {
+        "samples": 6416,
+        "fall_speed_ratio_range": [
+          0.16562423218538566,
+          0.16562423218538586
+        ]
+      },
+      "10": {
+        "samples": 1223,
+        "fall_speed_ratio_range": [
+          0.16562425029888891,
+          0.1656386783093582
+        ]
+      }
+    },
+    "all_256_saved_particle_snapshots_have_no_ice_aggregates": true,
+    "snapshot_limitation": "This is a scan of 60 s outputs, not a counter of every collision event.",
+    "repository_adapter_reproduction": {
+      "all_compared_arrays_equal": true,
+      "compared_variable_counts": {
+        "history.pe000000.nc": 81,
+        "SD_output_NetCDF_00000000000.000.pe000000": 14,
+        "SD_output_NetCDF_00000000060.000.pe000000": 14
+      }
+    },
+    "input_and_patch_byte_reproduction": {
+      "init.conf": true,
+      "run.conf": true,
+      "env.txt": true,
+      "settings.json": true,
+      "contrib/SDM/scale_atmos_phy_mp_sdm.F90": true,
+      "contrib/SDM/sdm_motion.f90": true
+    }
+  },
+  "cache_copy": {
+    "verified_regular_files": 3404,
+    "mismatches": [],
+    "symlink_handling": "Ubuntu development-package links preserved, including two links whose targets belong to system runtime packages."
+  },
+  "review": "Read the new synthesis in its existing assessment and historical-results context, inspected adapter code and native variable units, compared tabulated and quoted quantities with the computed product. No independent peer review or empirical validation is claimed.",
+  "not_performed": [
+    "Full make check after this trial; the complete checkpoint check is results/numerical_checkpoint_checks.json. No new commit was made.",
+    "Published Earth snow-population or atmospheric benchmark reproduction with SCALE.",
+    "Full energy-conservation ledger.",
+    "Aggregation-heavy long-duration columns, vertical/domain convergence and multi-seed convergence ensembles.",
+    "Resolved air motion, weather-forced lunar column and calibrated giant-aggregate fracture or storm optics."
+  ],
+  "result": "PASS within the stated feasibility and verification scope"
+}

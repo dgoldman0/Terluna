@@ -1,0 +1,76 @@
+{
+  "schema": "terluna.atmosphere.scale-aggregation-sources/1",
+  "date": "2026-10-22",
+  "source_revision": "4eaf4f74aa03d091d9778eff373b816f178a962f",
+  "sources": [
+    {
+      "authors": "Shima, Kusano, Kawano, Sugiyama and Kawahara",
+      "year": 2009,
+      "doi": "10.1002/qj.441",
+      "url": "https://doi.org/10.1002/qj.441",
+      "read_url": "https://arxiv.org/html/physics/0701103",
+      "read_version": "physics/0701103v2, 30 July 2022; author manuscript identifies the 2009 peer-reviewed article",
+      "reading": "Sections 5.1.3 and 5.1.4, equations 23 and collision algorithm, Figure 2 caption and discussion of sampling the right tail. Other sections not fully reviewed this turn.",
+      "reference_inputs": {
+        "kernel": "K = 1500 * (water_volume_1 + water_volume_2), m3/s",
+        "initial_number_m3": 8388608,
+        "initial_distribution": "Exponential particle water volume",
+        "initial_water_kg_m3": 0.001,
+        "published_mean_volume_radius_m": 0.000030531,
+        "published_collision_volume_m3": 1000000,
+        "published_dt_s": 1
+      },
+      "adapter_differences": "32 noncommunicating cells of 1953125 m3 each; exact 0.001 kg/m3 rather than rounding via the published radius; midpoint exponential quantiles with exact sampled mass normalization; tested 512, 2048 and 8192 samples per cell. Analytic reference moments and CDF apply at the same concentrations."
+    },
+    {
+      "authors": "Hashino and Tripoli",
+      "year": 2011,
+      "doi": "10.1175/2011JAS3667.1",
+      "url": "https://journals.ametsoc.org/view/journals/atsc/68/6/2011jas3667.1.xml",
+      "reading": "Publisher-indexed full-text passages for box setup, X2M04, constant-density sphere, Figure 3 caption and conclusions. Direct HTML/PDF retrieval returned 403 or tool retrieval errors; numerical table images and curves were not obtained.",
+      "borrowed_inputs": {
+        "distribution": "Exponential mass distribution",
+        "water_kg_m3": 0.0001,
+        "radius_at_mean_mass_m": 0.0002,
+        "reference_sphere_density_kg_m3": 300,
+        "pressure_Pa": 100000,
+        "temperature_K": 268.15,
+        "one_hour_comparison_s": 3600
+      },
+      "physics_differences": "Published collection efficiency 0.4 and its sphere reference retains constant density. Native SCALE uses efficiency 0.1, its projected-area and Bohm drag closures, and evolving porous spheroids after aggregation. No fitting to published output was attempted; this is a protocol-inspired native-physics control, not a reproduced SHIPS result.",
+      "extensions": "A four-hour Earth stress control and lunar-gravity-only box are additional numerical experiments. They are not published benchmark results."
+    },
+    {
+      "authors": "Shima et al.",
+      "year": 2020,
+      "doi": "10.5194/gmd-13-4107-2020",
+      "url": "https://gmd.copernicus.org/articles/13/4107/2020/",
+      "reading": "Model scope, aggregation formulation, numerical methodology and published 2-D convective setup checked alongside the pinned local source. Full cumulonimbus experiment not reproduced.",
+      "source_audit": {
+        "file": "contrib/SDM/sdm_coalescence_cold.f90",
+        "sha256": "d6b9eed09771d1139e1533221d3c586dc10d9ac70f8c418a40429bf6c1d94ad1",
+        "ice_collection": "c_rate=0.1, times (sqrt(A1)+sqrt(A2))^2 times abs(v1-v2)",
+        "outcome": "sdm_outcome_aggregation_shima5_multi",
+        "multiplicity_cap": "sd_ncol = min(sd_ncol, int(sd_n1/sd_n2,kind=RP))",
+        "mechanical_fracture": "Absent"
+      }
+    },
+    {
+      "authors": "Ware, Bartman-Szwarc, Igel and Arabas",
+      "year": 2026,
+      "published": "2026-07-18",
+      "doi": "10.1029/2026MS005773",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2026MS005773",
+      "reading": "Abstract, introduction, Sections 2.1-2.3 and 3.1-3.2, equations 1-6 and Figure 1 discussion. Remaining flow-case results not fully reviewed.",
+      "claim_used": "Capping sampled collision events at donor multiplicity can omit collisions. The authors evaluate adaptive substeps in PySDM and distinguish this deficit from sampling effects. Their analytic test and definition motivated a passive counter in SCALE; their adaptive algorithm has not been ported here.",
+      "local_test": "Count requested and accepted physical collisions immediately around the native cap, without changing random draws or state updates. Compare all native saved arrays against the original executable before interpreting the counts. A zero deficit does not establish distribution convergence."
+    }
+  ],
+  "local_evidence": {
+    "initialization": "Native big-endian sequential particle restart; all phases and geometries verified against the first output. Uniform dry air is imposed in the atmospheric restart with dynamics, deposition and particle motion disabled. Dry vapor is irrelevant to these collision-only controls.",
+    "analytic_reference": "Safranov-Golovin continuous exponential mass CDF integrated using scaled modified Bessel I1; independent integration checks its number and second moment, normalization and quadrature refinement. Moment evolution is also compared using each actual initial moment.",
+    "observer": "Separate source/build cache, read-only counters, exact saved-array parity on three paired runs. The last native call follows the final particle snapshot and is excluded from matching count totals.",
+    "empirical_validation": false,
+    "redistribution": "No external article or dataset is added to Git. The local Fortran observer patch carries the existing SCALE BSD attribution through its source tree and references/scale_bsd_2_clause.txt."
+  }
+}

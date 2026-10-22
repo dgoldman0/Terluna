@@ -1,0 +1,925 @@
+{
+  "schema": "terluna.atmosphere.snow-solver-reuse-assessment/1",
+  "assessed_at_utc": "2026-10-22T12:34:42.898703+00:00",
+  "numerical_checkpoint_commit": "52100f52018552926a43cbc67a339609f29da3f4",
+  "purpose": "Assess existing software before further custom lunar population-solver development. Source inspection, prior runs and any new executable smoke check are distinct evidence.",
+  "audits": [
+    {
+      "audit_file": "terluna-existing-snow-sources.json",
+      "audit_sha256": "11e115211295705748b62830bfa0e1b965e37d24bae33dada1f01975342f8285",
+      "record": {
+        "schema": "terluna.snow.software-source-audit/1",
+        "recorded_utc": "2026-10-22T12:27:51.548991+00:00",
+        "purpose": "Read-only candidate assessment supporting an established solver adoption decision; no new numerical validation.",
+        "candidates": [
+          {
+            "name": "McSnow",
+            "revision": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+            "license": "BSD-3-Clause",
+            "repository": "https://gitlab.dkrz.de/mcsnow/mcsnow",
+            "checked_source_files": 57,
+            "sources": [
+              {
+                "path": "LICENSES/BSD-3-Clause.txt",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/LICENSES%2FBSD-3-Clause.txt/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "de6425dce48e08b5cac2d5711c982ee7878cfdd135a4afc62ad9c4a3de88c07a",
+                "bytes": 1493,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "README.md",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/README.md/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "f90eb9c78027727eab108626c78aa1bc485443ac5cbf8678eccd53109ef4147b",
+                "bytes": 3519,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_atmo.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "4851b9bbbecdc20cb68b8e1db51d6f0dd0e5790cd2c732cdd1e3d6b6b45ea4d8",
+                "bytes": 27125,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_atmo_types.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo_types.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "e303838efdeaa2bb1d02ef86b44de8ebf326badb4e3cc1bdcdb55fda3fdb8173",
+                "bytes": 2767,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_breakup.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_breakup.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "b85211c824c0e6104e697bdc144b54e6ad272d33ebf800650d19d17be2f2eca0",
+                "bytes": 34251,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_coll.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_coll.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "341dbe24cbb072f3cc1e708acd7185d5641d12e8aab6406bc091aefc0fbdfe72",
+                "bytes": 23902,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_depo.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_depo.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "a0904ce5e1061b559d9fe3d9c5c14329803dc823c9179fe43a3048f87f402232",
+                "bytes": 25047,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_ice_multiplication.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_ice_multiplication.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "9f3b3f8c889d37b164f31f1bc4bcc0487c98d540a5b0fd9c3dc6ed428ebbf24e",
+                "bytes": 4833,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_loop_array.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_loop_array.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "c3b92c4ad5f06f59253c753bc0f83c28642bd3bea797235333245207c1ec5571",
+                "bytes": 22413,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_loop_list.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_loop_list.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "c800b9c33cbd25759a84caf8e83696fead1098151a847eb4ec6898f7a1a0f296",
+                "bytes": 19983,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_mass2diam.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_mass2diam.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "1640c7670b810510996426c552da04280a140faf2a50b3049fb5a938fc332160",
+                "bytes": 20707,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_sedi.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_sedi.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "e97e2f99413144a52e9c6967375e360082cd9636341e18533cdb5e4488b4bca3",
+                "bytes": 3310,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              },
+              {
+                "path": "src/mo_velocity.f90",
+                "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_velocity.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+                "sha256": "b2171d1a7b0726c35b4b9b179078886a5531f7a838f7aecfb6a04d39af9fd3e5",
+                "bytes": 14396,
+                "inspection": "Relevant implementation and process gates read; not a complete source audit."
+              }
+            ],
+            "readiness": "Pinned author source already built/run in project; growth-only comparison within0.8\u20132.1%, aggregation12.5\u201316.5% total-profile discrepancy and approximately70% aggregate-category discrepancy unresolved.",
+            "limitations": [
+              "Standalone prescribed atmosphere does not feed deposition/heat diagnostics into vapor/temperature.",
+              "grav=9.81 compile-time parameter in mo_atmo_types; separate fixed Earth gravity/air state in liquid vterm_beard.",
+              "sp_sedi transports only by terminal speed; no updraft transport in standalone routine.",
+              "Breakup gates exclude particles containing ice; mo_breakup handles liquid drops.",
+              "Published morphology options exist, but project comparison uses habit0 diagnostic geometry.",
+              "Exact archived executable/compiler/seed unidentified and full archive ZIP checksum remains unverified."
+            ]
+          },
+          {
+            "name": "SCALE-SDM general morphology",
+            "repository": "https://github.com/Shima-Lab/SCALE-SDM_mixed-phase_Shima2019",
+            "revision": "4eaf4f74aa03d091d9778eff373b816f178a962f",
+            "tag": "SCALE-SDM_0.2.5-2.2.2",
+            "archive": "https://doi.org/10.5281/zenodo.3841674",
+            "license": "BSD-2-Clause; root LICENSE inspected",
+            "sources": [
+              {
+                "path": "README.md",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_mixed-phase_Shima2019/4eaf4f74aa03d091d9778eff373b816f178a962f/README.md",
+                "sha256": "ba54277f7d344b220153a35cc3f58d338ff2a50e1e8f6b0424e6bbe16f669cdc",
+                "bytes": 6051,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "LICENSE",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_mixed-phase_Shima2019/4eaf4f74aa03d091d9778eff373b816f178a962f/LICENSE",
+                "sha256": "cff7d9ebfd6aa80f1bda00e1b8ba0d4dc8025db47af4c3a25364845c0c7349c0",
+                "bytes": 1286,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "scalelib/src/common/scale_const.F90",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_mixed-phase_Shima2019/4eaf4f74aa03d091d9778eff373b816f178a962f/scalelib/src/common/scale_const.F90",
+                "sha256": "256841aff9d6358cb073a199d05424dc67f2c52a2cfe21666419b8a0ec26a8c2",
+                "bytes": 14827,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "contrib/SDM/sdm_subldep.f90",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_mixed-phase_Shima2019/4eaf4f74aa03d091d9778eff373b816f178a962f/contrib/SDM/sdm_subldep.f90",
+                "sha256": "37afcfdb871cdc3da53488810ada6e8541128eccd3a0e774faf6e359408cb444",
+                "bytes": 19405,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "contrib/SDM/sdm_motion.f90",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_mixed-phase_Shima2019/4eaf4f74aa03d091d9778eff373b816f178a962f/contrib/SDM/sdm_motion.f90",
+                "sha256": "7e4161af4c5bce443ae33fbb3243e9696f8401118d80cf694abb7dcfcf86bbbd",
+                "bytes": 61002,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "scale-les/test/case/warmbubble/2D_Khain04_sdm/run.conf",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_mixed-phase_Shima2019/4eaf4f74aa03d091d9778eff373b816f178a962f/scale-les/test/case/warmbubble/2D_Khain04_sdm/run.conf",
+                "sha256": "a97a271ba45c3e968e717885de75874a3afd69b694211a29d6f51c75831d4190",
+                "bytes": 5536,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              }
+            ],
+            "evidence": [
+              "General release source retains evolving density and shape: sdm_subldep.f90:292,333; vapor/latent-heat exchange:387\u2013455.",
+              "PARAM_CONST exposes CONST_GRAV:scale_const.F90:123; ice drag consumes it:sdm_motion.f90:1603.",
+              "Liquid fall routine hardcodes980.665cm/s\u00b2:sdm_motion.f90:475.",
+              "Supplied warmbubble case enables cold microphysics and collisions; 80 MPI ranks,5400s duration,0.1s dynamics step.",
+              "2020 paper omits all spontaneous/collisional breakup; porous-spheroid aggregate geometry remains approximate."
+            ],
+            "readiness": "Source inspected; not built or run locally. Fortran/C and MPI present; NetCDF C/HDF5 C shared libs found, but netcdff/HDF5 Fortran libs and nf-config/nc-config/h5fc were not found in standard lookup. No supplied small cold box/column found in inspected release tree."
+          },
+          {
+            "name": "SCALE-SDM chamber benchmark",
+            "repository": "https://github.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025",
+            "revision": "2e098a89fe26b2e27bfcb2b74fa288691f7b38de",
+            "tag": "v1.0",
+            "archive": "https://doi.org/10.5281/zenodo.17791338",
+            "license": "BSD-2-Clause; root LICENSE inspected",
+            "sources": [
+              {
+                "path": "README.md",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/README.md",
+                "sha256": "b03f097b7d3a1f91ad50a263b7679ff517e3d2d19dc6afca84fbd97606478e6d",
+                "bytes": 4870,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "LICENSE",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/LICENSE",
+                "sha256": "0f6f904c1aefbc8ff3110791439c0272743340986410aba8832080c572401bd8",
+                "bytes": 1286,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "scalelib/src/common/scale_const.F90",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/scalelib/src/common/scale_const.F90",
+                "sha256": "43a9eb11603f71d690d48967d7d3eec3ee8c224388d6997f723ec05019355bbc",
+                "bytes": 13969,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "contrib/SDM/sdm_common.f90",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/contrib/SDM/sdm_common.f90",
+                "sha256": "c25ed4912432dfd6dc2529f702bab3fe7e2aac27887d012f0ba84c6acee7e7f8",
+                "bytes": 38121,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "contrib/SDM/sdm_subldep.f90",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/contrib/SDM/sdm_subldep.f90",
+                "sha256": "6fc49d4d7a6710ad10edcf94df19d44e156e8337babbcb2e6d4a9725bc286ff2",
+                "bytes": 19542,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "contrib/SDM/sdm_motion.f90",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/contrib/SDM/sdm_motion.f90",
+                "sha256": "7e4161af4c5bce443ae33fbb3243e9696f8401118d80cf694abb7dcfcf86bbbd",
+                "bytes": 61002,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "contrib/SDM/sdm_coalescence_cold.f90",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/contrib/SDM/sdm_coalescence_cold.f90",
+                "sha256": "55b4dcee9a61aafcb1ba577439810e169e1362bbe93289d297d942fad388bff1",
+                "bytes": 100748,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "contrib/SDM/scale_atmos_phy_mp_sdm.F90",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/contrib/SDM/scale_atmos_phy_mp_sdm.F90",
+                "sha256": "28089504af59bf00f5788a585204f6c01c7daf69bc78dccabced7ec6a20ea08f",
+                "bytes": 196891,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "scale-rm/test/case/dns/ICMW2024-PI/run.conf",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/scale-rm/test/case/dns/ICMW2024-PI/run.conf",
+                "sha256": "85f62d760546cbe60a148f92dc7b969bfbcb6352deb0e0fff7fbf53c9fc1d751",
+                "bytes": 7098,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              },
+              {
+                "path": "scale-rm/test/case/dns/ICMW2024-PI/init.conf",
+                "url": "https://raw.githubusercontent.com/Shima-Lab/SCALE-SDM_ICMW2024-Pi-Mixed-Phase_Wang2025/2e098a89fe26b2e27bfcb2b74fa288691f7b38de/scale-rm/test/case/dns/ICMW2024-PI/init.conf",
+                "sha256": "d4ef018d67c3c21bc681e4229283797d15fce673f386b0359319ba21088c7e82",
+                "bytes": 1276,
+                "inspection": "Relevant source sections and configuration read; full bytes fetched for identity, not a complete line-by-line audit."
+              }
+            ],
+            "evidence": [
+              "Do not treat chamber fork as general habit solver: sdm_subldep.f90:305 forces solid deposition density and:334 forces shape growth ratio1.",
+              "run.conf:93 disables autoconversion/collisions; 2026 paper explicitly excludes aggregation/riming/habit evolution in this benchmark.",
+              "Cold/general geometry routines remain in source but are not all exercised by chamber benchmark.",
+              "Published benchmark128MPI decomposition,5400s duration,1e-4s dynamics step; aerosols start1800s,ice3600s; a brief unmodified smoke run cannot test ice physics."
+            ],
+            "readiness": "Source inspected; not built or run locally. Fortran/C and MPI present; NetCDF C/HDF5 C shared libs found, but netcdff/HDF5 Fortran libs and nf-config/nc-config/h5fc were not found in standard lookup. No supplied small cold box/column found in inspected release tree."
+          }
+        ],
+        "papers": [
+          {
+            "url": "https://doi.org/10.1029/2023MS003805",
+            "reading": "Primary article search excerpts; local previously completed author reconstruction report and source code inspected."
+          },
+          {
+            "url": "https://gmd.copernicus.org/articles/13/4107/2020/",
+            "reading": "Abstract, coupled mathematical/numerical formulation, geometry and breakup limitations, conclusions, code availability."
+          },
+          {
+            "url": "https://doi.org/10.1029/2025MS005648",
+            "reading": "Abstract,setup and spherical/collision exclusions, model comparison excerpts, availability statement and SCALE release reference."
+          }
+        ],
+        "recommendation": "Assess SCALE-SDM general morphology release as candidate for coupled vapor/heat/ice target; McSnow remains the cheaper running snow population/geometry comparator. Compare costs of adapting a small SCALE column versus adding prognostic atmosphere/transport to standalone McSnow before choosing. Preserve all pinned baselines and resolve/characterize Earth reproduction discrepancy. Neither candidate supplies validated lunar giant-aggregate fracture.",
+        "retrieval_limits": [
+          "Zenodo record direct opens intermittently failed; published paper references and GitHub tagged sources obtained. No source archive downloaded or archive checksum verified.",
+          "GitHub API verified tag-to-commit identities. Source-file SHA256 values identify fetched raw bytes, not a build or validation."
+        ],
+        "other_candidate_screen": {
+          "name": "PySDM",
+          "repository": "https://github.com/open-atmos/PySDM",
+          "license": "GPL-3.0 from repository",
+          "reading": "Current README and ice-roadmap discussion only. Freezing/deposition and generic collision machinery exist, but full prognostic snow geometry/riming readiness not established; not shortlisted as ready snow solver."
+        }
+      }
+    },
+    {
+      "audit_file": "terluna-existing-planet-cloud-sources.json",
+      "audit_sha256": "e8e1da2183b886952560d953d131bec8b4efbf057ad5654821d3ba236ed5a82d",
+      "record": {
+        "audit_date": "2026-10-22",
+        "scope": "Read-only assessment of existing planetary cloud codes for a low-gravity water-snow column; no installation or simulation performed by this agent.",
+        "candidates": [
+          {
+            "name": "CARMA standalone and CARMA_base",
+            "license": "Apache-2.0; visible in both official GitHub repositories",
+            "standalone_repository": "https://github.com/ESCOMP/CARMA",
+            "verified_tags": {
+              "v4.11": "755e2371766db0bc6d517f97c045391a15a20cfc",
+              "v4.12": "26b30b2738566de5d3979c1b2ccf191dd78c1207"
+            },
+            "base_repository": "https://github.com/ESCOMP/CARMA_base",
+            "base_commit_in_both_tags": "7b12e0cce0f83de0c55682d20c64222cc339dfce",
+            "base_tag": "carma4_10",
+            "base_archive": {
+              "url": "https://codeload.github.com/ESCOMP/CARMA_base/tar.gz/7b12e0cce0f83de0c55682d20c64222cc339dfce",
+              "retrieval": "Retrieved fully in memory and inspected; not saved to repository or disk",
+              "size_bytes": 205886,
+              "sha256": "0108864877af86f9c0ac2a88896aa968600c4d37ec30f27fd4f81b475e8b6e36"
+            },
+            "verified_source_details": [
+              {
+                "file": "carma_constants_mod.F90",
+                "lines": [
+                  29,
+                  30,
+                  44,
+                  45,
+                  71,
+                  72
+                ],
+                "finding": "Gravity is compile-time GRAV=980.6 cm/s2; dry-air molecular weight and heat capacity are also compile-time constants. Lunar gravity requires an explicit, audited change."
+              },
+              {
+                "file": "setupvf_heymsfield2010.F90",
+                "lines": [
+                  10,
+                  13,
+                  72
+                ],
+                "finding": "Heymsfield-Westbrook ice fall-speed implementation uses particle mass, area ratio and GRAV."
+              },
+              {
+                "file": "carmagroup_mod.F90",
+                "lines": [
+                  37,
+                  46,
+                  48,
+                  65,
+                  81,
+                  82,
+                  83,
+                  244,
+                  247
+                ],
+                "finding": "Groups accept particle shape, aspect ratio, a maximum prognostic bin, and optional dry fractal aggregates made of identical spherical monomers with supplied fractal dimension and packing coefficient. This is not an evolving snow habit or contact-breakup model."
+              },
+              {
+                "file": "carma_mod.F90",
+                "lines": [
+                  344,
+                  370,
+                  371,
+                  1166
+                ],
+                "finding": "Core exposes thermo/particle heating switches and cross-group coagulation pathways."
+              },
+              {
+                "file": "gasexchange.F90",
+                "lines": [
+                  7,
+                  49,
+                  80,
+                  123
+                ],
+                "finding": "Updates gas exchange and latent heating from nucleation/condensation."
+              },
+              {
+                "file": "tsolve.F90",
+                "lines": [
+                  5,
+                  6,
+                  65,
+                  66,
+                  73,
+                  94
+                ],
+                "finding": "Updates atmospheric temperature from microphysical/radiative forcing, with optional particle heating and substep temperature controls."
+              },
+              {
+                "file": "setupcoag.F90",
+                "lines": [
+                  220,
+                  221,
+                  330,
+                  331,
+                  332
+                ],
+                "finding": "Coagulation products above the largest mass bin remain in that bin with mass-scaled number. Finite upper-size convergence is still needed; numerical mass conservation does not establish tail accuracy."
+              },
+              {
+                "file": "setupvf_std.F90",
+                "lines": [
+                  31,
+                  32
+                ],
+                "finding": "Explicitly ignores liquid-droplet hydrodynamic deformation and Rayleigh-Taylor breakup in this routine."
+              },
+              {
+                "file": "all base .F90 files",
+                "finding": "Text inspection for breakup, fragment, riming, graupel, multiplication, Hallett and rime found only the explicit ignored-breakup comment. This is an implementation search result, not proof that no external CARMA configuration adds these mechanisms."
+              }
+            ],
+            "small_existing_test": {
+              "url": "https://github.com/ESCOMP/CARMA/blob/755e2371766db0bc6d517f97c045391a15a20cfc/tests/carma_growtest.F90",
+              "finding": "Ice group, CARMA_AddGrowth, do_thermo=true, SetGas and GetState with updated temperature/latent heat provide a small established vapor-and-heat test. Also carma_pheattest.F90 exists.",
+              "build_notes": "Pinned v4.11 README uses make-carma.csh and requires LAPACK. CMakeLists.txt absent at this tag; do not substitute current-main build instructions without checking."
+            },
+            "paper_archive_identity": {
+              "doi": "https://doi.org/10.25810/SNMH-NW73",
+              "title": "Community Aerosol and Radiation Model for Atmospheres (CARMA) standalone 4.11 code",
+              "landing_url": "https://scholar.colorado.edu/concern/datasets/c534fr04g",
+              "datacite_metadata_url": "https://api.datacite.org/dois/10.25810/SNMH-NW73",
+              "retrieval_state": "DataCite identity retrieved. DOI and university landing page returned HTTP403. Archive bytes not retrieved; equivalence to public GitHub v4.11 is unverified.",
+              "evidence": "Authors supplied archive DOI in April1 2026 discussion response at https://egusphere.copernicus.org/preprints/2026/egusphere-2026-1185/"
+            },
+            "paper_test_output": {
+              "doi": "https://doi.org/10.5281/zenodo.19373048",
+              "metadata_url": "https://zenodo.org/api/records/19373048",
+              "retrieval_state": "Record metadata and file list retrieved; output data not downloaded.",
+              "source_gap": "Output archive includes cloudgrowtest, raincoagfalltest and icefalltest results. These named tests were not found in the public v4.11 source tree. Exact new-paper cloud configuration remains unverified."
+            },
+            "assessment": "Strong reusable sectional vapor/heat/transport core and reference implementation. More suitable water physics than CARMApy defaults. Requires an atmospheric driver, audited lunar constants and aggregate physics/optics; exact 2026 mixed-phase configuration not yet recovered."
+          },
+          {
+            "name": "CARMApy / ExoCARMA",
+            "repository": "https://github.com/wcukier/carmapy",
+            "release": "1.0.3",
+            "release_date": "2026-10-08",
+            "pypi_url": "https://pypi.org/project/carmapy/1.0.3/",
+            "license": "Apache-2.0",
+            "python_requirement": ">=3.10",
+            "publisher_attested_commit": "c459614afb47c60831f7848c98ff16dbc8f9f343",
+            "linux_wheel": {
+              "filename": "carmapy-1.0.3-py3-none-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl",
+              "publisher_sha256": "07fa040ab5b57f2957b7b1ce6d6e25589358b4daa10b13172caf87aff80613dd",
+              "retrieval_state": "Metadata seen on PyPI; wheel bytes not retrieved by this agent. Hash is publisher-supplied, not independently checked."
+            },
+            "docs": [
+              "https://carmapy.readthedocs.io/en/latest/installation.html",
+              "https://carmapy.readthedocs.io/en/latest/_autosummary/carmapy.Carma.html",
+              "https://carmapy.readthedocs.io/en/latest/_autosummary/carmapy.Group.html",
+              "https://carmapy.readthedocs.io/en/latest/notebooks/4_custom_condensates.html"
+            ],
+            "api_capabilities": "Configurable gravity, mean molecular weight, pressure-temperature-altitude profiles, atmospheric viscosity/thermal conductivity/cp, winds, diffusivity and vapor/cloud boundary conditions. Default atmospheric coefficients only Pure H2. Group material properties configurable, default condensates are minerals/salts rather than water snow.",
+            "smoke_test_proposal": "import carmapy.example; carma=carmapy.example.example_carma('/tmp/isolated-name'); carma.set_stepping(n_tstep=1, output_gap=1); carma.run(nthreads=1)",
+            "smoke_test_state": "Not run. Example constructor and run documented; set_stepping is documented API. One-step adjustment is our proposed bounded smoke test.",
+            "paper": "https://arxiv.org/pdf/2606.30438",
+            "paper_status": "June29 2026 preprint, submitted to AAS",
+            "paper_limits": "Future development explicitly includes fractal cloud/haze aggregates, multiple condensates from the same limiting gas, and radiatively active clouds. The paper's 10 default condensates omit water. Do not treat its convenient package as an established mixed-phase snow solver.",
+            "assessment": "Easy executable availability; useful prognostic vapor/transport comparator, but less direct fit for snow habits, riming, breakup and storm optics."
+          },
+          {
+            "name": "Yang2024 CARMA terrestrial-exoplanet water-cloud configuration",
+            "paper": "https://arxiv.org/pdf/2405.03570",
+            "code_record": "https://zenodo.org/records/10601557",
+            "record_title": "1D CARMA template for Exoplanets",
+            "record_file": "MieeYang/CARMA-1Dexoplanet-v0.zip",
+            "publisher_md5": "8fadb5f0b10112f8dcf84b40c4b98312",
+            "retrieval_state": "Indexed primary Zenodo description read; code bytes not obtained and independent license not checked.",
+            "build_description": "Author record describes Fortran with ifort and Intel MPI.",
+            "physical_scope": "Prognostic water/cloud distribution; study used 50 size bins with radius10nm to800um, lowest gravity0.71Earth, spherical ice, immediate freezing/melting and no supercooled liquid. Fixed environmental thermal profile in gravity experiment.",
+            "assessment": "Closest published parameter comparison; useful boundary-condition/reference study, not a snow-aggregate tail solution."
+          }
+        ],
+        "new_carma_cloud_paper": {
+          "discussion": "https://egusphere.copernicus.org/preprints/2026/egusphere-2026-1185/",
+          "pdf": "https://d197for5662m48.cloudfront.net/documents/publicationstatus/307604/preprint_pdf/af2835f8685fe1828dddfe9ef04b7985.pdf",
+          "status": "2026 preprint and public discussion, not asserted peer-reviewed publication",
+          "paper_claims": "Four cloud groups represent liquid, in-situ ice, detrained ice and graupel; vapor interactive; cross-group ice/liquid collection; shape-dependent ice settling; freezing/melting; radius resolution configurable.",
+          "limits": "Ice/drop collection efficiencies are liquid-liquid efficiencies at equal mass-equivalent radius (p42). Ice/graupel radiation uses existing MG optical parameters (p7). Immersion/contact nucleation and ice multiplication under development (p5), mixed-phase treatment still discussed as needing improvement (p49). Paper capabilities cannot all be attributed to public base without recovering its exact configuration."
+        },
+        "recommendation": "Keep CARMA4 as the strongest planetary/sectional comparator and inspect/reproduce its small gas-plus-ice-plus-heat reference. Compare against McSnow for evolving snow geometry. CARMApy may get a quick executable smoke test but should not be selected merely because a wheel exists. No evidence that lunar conditions require replacing all existing numerical machinery; custom lunar geometry/breakup and a physically defined atmospheric driver remain necessary."
+      }
+    },
+    {
+      "audit_file": "terluna-existing-pysdm-sources.json",
+      "audit_sha256": "c76bce10b8d104990580b6ec138166dcfe9278e57f00e2b0e5eb770e3997fbc0",
+      "record": {
+        "schema": "terluna.atmosphere.snow-existing-pysdm-source-audit/1",
+        "retrieved_at_utc": "2026-10-22T12:27:55.053785+00:00",
+        "package": "PySDM",
+        "version": "3.0.1",
+        "commit": "923394cbd1177c3260868cc635007c864dcc84aa",
+        "release_published_at_utc": "2026-10-22T11:05:53Z",
+        "release_url": "https://github.com/open-atmos/PySDM/releases/tag/v3.0.1",
+        "official_comparison_url": "https://github.com/open-atmos/PySDM/compare/v3.0.0...v3.0.1",
+        "pypi_url": "https://pypi.org/project/PySDM/3.0.1/",
+        "license": "GPL-3.0-only",
+        "distribution_metadata": [
+          {
+            "filename": "pysdm-3.0.1-py3-none-any.whl",
+            "url": "https://files.pythonhosted.org/packages/01/73/0ee9d9f37f9d2dfc22558c88604c5e0cff1b6aef36645541c42699218992/pysdm-3.0.1-py3-none-any.whl",
+            "sha256": "abb56659bfeb5ae58de257d3815c81f8320f9d303c4615ee64973e6a758bf41f",
+            "bytes": 367884,
+            "upload_time": "2026-10-22T11:09:55.269418Z",
+            "retrieval": "Metadata only; distribution bytes not downloaded or verified."
+          },
+          {
+            "filename": "pysdm-3.0.1.tar.gz",
+            "url": "https://files.pythonhosted.org/packages/d9/7d/0fee335f146560de0955205676c9568cdf5e8f3b27b73fb0d2782e86051d/pysdm-3.0.1.tar.gz",
+            "sha256": "353513ae0b75a7adcbb27a16f396ce79e60c4b5f89279e891f0fda5ccac4c682",
+            "bytes": 9275833,
+            "upload_time": "2026-10-22T11:09:58.413012Z",
+            "retrieval": "Metadata only; distribution bytes not downloaded or verified."
+          }
+        ],
+        "sources": [
+          {
+            "path": "pyproject.toml",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/pyproject.toml",
+            "sha256": "ff76f8b667322fdd1182bf636e5f8b3a6a1165ffd2341d4869769ac8996e15f3",
+            "bytes": 2350,
+            "reading_extent": "Read complete metadata: runtime/build dependencies, Python declaration and GPL-3.0-only license.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "PySDM/dynamics/vapour_deposition_on_ice.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/PySDM/dynamics/vapour_deposition_on_ice.py",
+            "sha256": "24ad441cd60ecfd8ab6876a886c305b7ee3495ab79f54f868a26321fb2c80ced",
+            "bytes": 728,
+            "reading_extent": "Read complete dynamic wrapper and mixed-phase assertion.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "PySDM/backends/impl_numba/methods/deposition_methods.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/PySDM/backends/impl_numba/methods/deposition_methods.py",
+            "sha256": "493e394b89abf16507ef0afd69a58825bc2badbb374168c671f132a6a17ab187",
+            "bytes": 14228,
+            "reading_extent": "Read complete deposition backend: water/heat coupling, one-cell implementation, fixed ventilation, explicit/adaptive stepping.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "PySDM/dynamics/freezing.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/PySDM/dynamics/freezing.py",
+            "sha256": "dda2f9b17377299142fc5b58fe0dba5ec10c1751b894ff33f2563233e0aed7e5",
+            "bytes": 3613,
+            "reading_extent": "Read complete freezing dynamic, supported modes and Coalescence incompatibility.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "PySDM/dynamics/collisions/collision.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/PySDM/dynamics/collisions/collision.py",
+            "sha256": "001c5e4d1721bd28fb932d6c5a73f18a8a922077c27ce0e114aa7d872715bf87",
+            "bytes": 13415,
+            "reading_extent": "Read complete generic collision orchestration; breakup/coalescence extensibility.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "PySDM/physics/particle_shape_and_density/porous_spheroids.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/PySDM/physics/particle_shape_and_density/porous_spheroids.py",
+            "sha256": "57815c97b9a921d90e0e2bb8628e26539abd648b8f88b2d0b8ea76217f3f52ff",
+            "bytes": 861,
+            "reading_extent": "Read complete geometry helpers; no morphology evolution in this module.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "PySDM/physics/particle_shape_and_density/columnar_ice.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/PySDM/physics/particle_shape_and_density/columnar_ice.py",
+            "sha256": "af3e5a89d6bcdcdeb07e147d9c61c95fa040a218d9c6f65029e6c081bb82a757",
+            "bytes": 1498,
+            "reading_extent": "Read complete empirical columnar mass-shape parameterization.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "PySDM/physics/terminal_velocity_ice/columnar_ice_crystal.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/PySDM/physics/terminal_velocity_ice/columnar_ice_crystal.py",
+            "sha256": "057cc50c580ea5f7032474f514c50a0e004adaa5e737129c2bc6793cc8dc82ca",
+            "bytes": 1617,
+            "reading_extent": "Read complete empirical columnar settling law; pressure/temperature correction, no explicit gravity factor.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "PySDM/physics/terminal_velocity_ice/spheres_ice.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/PySDM/physics/terminal_velocity_ice/spheres_ice.py",
+            "sha256": "7c120b0f3fdf58691a5c2b1cfe06f9a4bf8a3a02b8c0141a01c19c87d6dda79a",
+            "bytes": 582,
+            "reading_extent": "Read complete sphere settling formula; gravity in Stokes regime, general-flow function unimplemented.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "PySDM/formulae.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/PySDM/formulae.py",
+            "sha256": "0eedb0964761089e291ee09bcc6f7e43ff45bd168bfd604eb3a6c79c97924ddd",
+            "bytes": 15875,
+            "reading_extent": "Read selected constant override, derived-constant construction and formula selection sections.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          },
+          {
+            "path": "tests/unit_tests/dynamics/test_vapour_deposition_on_ice.py",
+            "url": "https://raw.githubusercontent.com/open-atmos/PySDM/923394cbd1177c3260868cc635007c864dcc84aa/tests/unit_tests/dynamics/test_vapour_deposition_on_ice.py",
+            "sha256": "b51701ddb704fc0279445cf2c2051f8ee9162c62154e0672353a8da711658f8e",
+            "bytes": 12611,
+            "reading_extent": "Inspected named tests, setup and assertions; box tests of direction, benchmark growth rates and mass conservation. Not run.",
+            "baseline_reading": "Scientific source first read at v3.0.0; official release comparison shows these scientific files unchanged in v3.0.1. Latest metadata/tests also inspected directly."
+          }
+        ],
+        "supporting_primary_pages": [
+          {
+            "url": "https://open-atmos.github.io/PySDM/",
+            "extent": "Read overview/install documentation and bibliography; landing page still says development towards v3, so live release metadata takes precedence."
+          },
+          {
+            "url": "https://github.com/open-atmos/PySDM/discussions/1234",
+            "extent": "Read 2024 ice roadmap; capability findings use current released source instead."
+          },
+          {
+            "url": "https://api.github.com/repos/open-atmos/PySDM/issues/1524",
+            "extent": "Read live title/state: open deposition/condensation coupling refactor."
+          },
+          {
+            "url": "https://api.github.com/repos/open-atmos/PySDM/issues/594",
+            "extent": "Read live title/state: open MaximumAttribute/freezing-temperature collision issue."
+          },
+          {
+            "url": "https://api.github.com/repos/open-atmos/PySDM/git/trees/v3.0.0?recursive=1",
+            "extent": "Inspected full path listing (1272 entries) for ice, collisions, geometry, riming; no dedicated riming module or rime/monomer attributes found."
+          }
+        ],
+        "fit_assessment": {
+          "implemented": "Immersion/homogeneous freezing and thaw; basic ice deposition with vapor depletion and sublimation latent heat; generic SDM coalescence and droplet breakup; columnar/spherical ice approximations.",
+          "full_column_blocker": "Released deposition backend uses cell_id[0] and explicitly leaves multicell support TODO; ventilation is 1. Freezing rejects simultaneous Coalescence.",
+          "snow_geometry_gap": "Porous-spheroid helper does not implement evolving aggregate/monomer/rime morphology. No released dedicated ice aggregation/riming/contact-fracture model identified.",
+          "gravity": "Formulae allows constant overrides; Stokes ice-sphere law uses g_std. Empirical columnar ice law has no explicit g and requires replacement/rederivation for lunar transfer; sphere general-flow law is TODO.",
+          "installability": "A py3-none-any wheel exists. Python metadata says >=3.8; actual dependency compatibility must be resolved. Runtime dependencies include Numba, NumPy, SciPy>=1.15, JAX>=0.8, ThrustRTC/CURandRTC, Pint, chempy, pyevtk and pyparsing. CPU backend exists; no requirement to operate a GPU for CPU use. Installation and runtime not tested.",
+          "recommendation": "Useful modular SDM and parcel benchmark option; not presently a ready full mixed-phase lunar snow-column replacement."
+        },
+        "work_performed": "Read-only primary-source and package-metadata inspection. No install, model run, tests or repository edits. Source hashes are hashes of bytes actually retrieved; wheel hashes are separately labeled publisher metadata."
+      }
+    }
+  ],
+  "mcsnow_public_head_check": {
+    "checked_date": "2026-10-22",
+    "default_branch": "master",
+    "head": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+    "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/branches/master",
+    "result": "Examined pin equals current public default HEAD. Separate coupled ICON implementation described in README is outside this public standalone source."
+  },
+  "recommendation_status": "Assessment and proposed adoption tests; no main solver replacement or lunar physical closure adopted.",
+  "proposed_priority": [
+    "Compare general SCALE-SDM small-column feasibility with a prognostic-atmosphere adapter for the already running McSnow.",
+    "Use CARMA4 gas/ice/heat test as an independent component reference; retain exact-paper configuration retrieval issue.",
+    "Retain present direct event solver for small matched-law controls; avoid another independent production collision solver during this assessment."
+  ],
+  "unchanged_science": "No historical snow producers or numerical products changed; giant-aggregate survival and calibrated storm optics remain unresolved.",
+  "carma_executable_check": {
+    "audit_date": "2026-10-22",
+    "purpose": "Bounded feasibility check of public CARMA4 ice-vapor-heat example",
+    "workspace": "/tmp/terluna-carma4-feasibility",
+    "repository_edits": false,
+    "global_installs": false,
+    "sources": [
+      {
+        "repository": "ESCOMP/CARMA",
+        "revision": "755e2371766db0bc6d517f97c045391a15a20cfc",
+        "url": "https://codeload.github.com/ESCOMP/CARMA/tar.gz/755e2371766db0bc6d517f97c045391a15a20cfc",
+        "archive": "/tmp/terluna-carma4-feasibility/standalone.tar.gz",
+        "bytes": 6016936,
+        "sha256": "faf635b600549b5a138810238fdc4efcd86a07ae89483ffcd2c7187ccadaea03"
+      },
+      {
+        "repository": "ESCOMP/CARMA_base",
+        "revision": "7b12e0cce0f83de0c55682d20c64222cc339dfce",
+        "url": "https://codeload.github.com/ESCOMP/CARMA_base/tar.gz/7b12e0cce0f83de0c55682d20c64222cc339dfce",
+        "archive": "/tmp/terluna-carma4-feasibility/base.tar.gz",
+        "bytes": 205886,
+        "sha256": "0108864877af86f9c0ac2a88896aa968600c4d37ec30f27fd4f81b475e8b6e36"
+      }
+    ],
+    "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "build": {
+      "command": [
+        "make",
+        "-j1",
+        "FORTRAN=gfortran",
+        "GROWTEST.exe"
+      ],
+      "cwd": "/tmp/terluna-carma4-feasibility/CARMA-755e2371766db0bc6d517f97c045391a15a20cfc/build/smoke",
+      "exit_code": 2,
+      "seconds": 6.928102882928215
+    },
+    "original_build_failure": "GNU ld undefined reference zgesv_: Makefile places -llapack before object files.",
+    "relink": {
+      "command": [
+        "gfortran",
+        "-ffree-line-length-none",
+        "-g",
+        "-fbounds-check",
+        "-ffpe-trap=zero,invalid,overflow",
+        "-fbacktrace",
+        "-fopenmp",
+        "-o",
+        "GROWTEST.exe",
+        "carma_growtest.o",
+        "carma_testutils.o",
+        "atmosphere_mod.o",
+        "carma_constants_mod.o",
+        "carma_precision_mod.o",
+        "carma_types_mod.o",
+        "carmagroup_mod.o",
+        "carmagas_mod.o",
+        "carmaelement_mod.o",
+        "carmasolute_mod.o",
+        "carmastate_mod.o",
+        "carma_mod.o",
+        "coagl.o",
+        "coagp.o",
+        "csolve.o",
+        "setupbins.o",
+        "setupatm.o",
+        "setupvf.o",
+        "microslow.o",
+        "newstate.o",
+        "prestep.o",
+        "setupckern.o",
+        "setupcoag.o",
+        "smallconc.o",
+        "step.o",
+        "supersat.o",
+        "vaporp.o",
+        "vertadv.o",
+        "vertdif.o",
+        "vertical.o",
+        "versol.o",
+        "rhopart.o",
+        "psolve.o",
+        "zeromicro.o",
+        "nsubsteps.o",
+        "setupgrow.o",
+        "setupgkern.o",
+        "setupnuc.o",
+        "growevapl.o",
+        "microfast.o",
+        "gsolve.o",
+        "actdropl.o",
+        "freezglaerl_murray2010.o",
+        "growp.o",
+        "downgxfer.o",
+        "gasexchange.o",
+        "melticel.o",
+        "upgxfer.o",
+        "freezdropl.o",
+        "downgevapply.o",
+        "evapp.o",
+        "evap_poly.o",
+        "evap_mono.o",
+        "evap_ingrp.o",
+        "tsolve.o",
+        "miess.o",
+        "vaporp_h2o_buck1981.o",
+        "wetr.o",
+        "vaporp_h2o_murphy2005.o",
+        "maxconc.o",
+        "setupbdif.o",
+        "setupvf_std.o",
+        "setupvf_std_shape.o",
+        "totalcondensate.o",
+        "versub.o",
+        "freezaerl_tabazadeh2000.o",
+        "freezaerl_koop2000.o",
+        "rhoice_heymsfield2010.o",
+        "setupvf_heymsfield2010.o",
+        "freezaerl_mohler2010.o",
+        "setupvdry.o",
+        "calcrs.o",
+        "vaporp_h2o_goff1946.o",
+        "pheat.o",
+        "planck.o",
+        "bhmie.o",
+        "mie.o",
+        "vaporp_h2so4_ayers1980.o",
+        "sulfate_utils.o",
+        "sulfnuc.o",
+        "sulfnucrate.o",
+        "hetnucl.o",
+        "newstate_calc.o",
+        "fractal_meanfield_mod.o",
+        "adgaquad_types_mod.o",
+        "adgaquad_mod.o",
+        "sulfhetnucrate.o",
+        "coremasscheck.o",
+        "hygroscopicity.o",
+        "fixcorecol.o",
+        "-llapack"
+      ],
+      "cwd": "/tmp/terluna-carma4-feasibility/CARMA-755e2371766db0bc6d517f97c045391a15a20cfc/build/smoke",
+      "exit_code": 0,
+      "seconds": 0.09189954597968608,
+      "build_only_change": "Moved -llapack from before object files to after object files; source and Makefiles unmodified."
+    },
+    "run": {
+      "command": [
+        "./GROWTEST.exe"
+      ],
+      "cwd": "/tmp/terluna-carma4-feasibility/CARMA-755e2371766db0bc6d517f97c045391a15a20cfc/build/smoke",
+      "exit_code": 0,
+      "seconds": 0.01116562308743596,
+      "single_worker_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1"
+      }
+    },
+    "output_checks": {
+      "records": 51,
+      "last_time_seconds": 5000.0,
+      "all_finite": true,
+      "all_mass_nonnegative": true,
+      "max_relative_total_water_variation_from_rounded_text": 0.0015428249520974546,
+      "initial": {
+        "time": 0.0,
+        "delta_temperature": 0.0,
+        "latent_heat_output": 0.0,
+        "ice_mmr": 2.36e-09,
+        "vapor_mmr": 3.5e-06,
+        "saturation_ice": 0.0
+      },
+      "final": {
+        "time": 5000.0,
+        "delta_temperature": 0.003488,
+        "latent_heat_output": 2.4071e-08,
+        "ice_mmr": 1.2577635283992283e-06,
+        "vapor_mmr": 2.25e-06,
+        "saturation_ice": 1.0
+      },
+      "output_sha256": "cc0f6209493d15c4dd65a1355b6f39e6015f3642cec9da069c50bee115029d18",
+      "benchmark_sha256": "dff3a340092d2904b1f12219c56ca60eedacefd384c4a0d4f4b1a68dfa11217a",
+      "benchmark_bytes_equal": false,
+      "benchmark_records": 51,
+      "benchmark_max_abs_delta_temperature_difference_K": 0.00067245,
+      "benchmark_max_abs_vapor_difference_kg_kg": 2.4000000000000024e-07,
+      "benchmark_max_abs_bin_difference_kg_kg": 2.116e-07,
+      "limits": "Original test checks routine return codes but has no conservation assertion. The added output inspection uses rounded text (three significant digits for mass values), not full internal state. No timestep/bin convergence, lunar adaptation, or empirical validation performed."
+    },
+    "source_byte_checks": [
+      {
+        "archive": "standalone",
+        "original_files_checked": 115,
+        "changed_original_files": []
+      },
+      {
+        "archive": "base",
+        "original_files_checked": 93,
+        "changed_original_files": []
+      },
+      {
+        "archive": "base copied into compiled standalone source/base",
+        "original_files_checked": 93,
+        "changed_original_files": []
+      }
+    ],
+    "build_preparation": [
+      "Extract pinned source archives into /tmp.",
+      "Copy pinned base into standalone source/base (archive of standalone does not include submodule files).",
+      "Create build/smoke and copy original Makefile there byte-for-byte.",
+      "Invoke make -j1 FORTRAN=gfortran GROWTEST.exe directly, avoiding unavailable tcsh wrapper.",
+      "After original linker failure, repeat emitted gfortran link command with -llapack moved from before objects to the end."
+    ],
+    "physical_configuration": "Original one-box test:24 mass bins, spherical ice, 190K and90hPa, Earth gravity,100s timestep,5000s duration. No physical parameter changes.",
+    "result": "Executable smoke test succeeds with one link-order adjustment. Archived benchmark agreement does not pass by inspection; do not label numerical validation or a converged lunar result.",
+    "outstanding": [
+      "Explain differences from retained upstream benchmark before using it as a reproduction claim.",
+      "Full-precision water-budget assertion and timestep/bin controls remain unperformed.",
+      "Exact 2026 paper cloud configuration remains distinct from this public tag.",
+      "No lunar full-column, aggregation, breakup, habit or optical validation performed."
+    ],
+    "logs": {
+      "build": "/tmp/terluna-carma4-feasibility/build.log",
+      "relink": "/tmp/terluna-carma4-feasibility/relink.log",
+      "run": "/tmp/terluna-carma4-feasibility/run.log",
+      "output": "/tmp/terluna-carma4-feasibility/CARMA-755e2371766db0bc6d517f97c045391a15a20cfc/build/smoke/carma_growtest.txt"
+    }
+  },
+  "assessment_verification": {
+    "checked_at_utc": "2026-10-22T12:35:40.189020+00:00",
+    "json_and_audit_hashes": "All three embedded source audits match their recorded SHA256 and parsed scratch originals.",
+    "carma_identity": "Both downloaded source archives and the generated growth-test output match the recorded SHA256 values.",
+    "retained_science": "All 122 files in the preceding diagnosis retention set remain byte-identical.",
+    "links_and_scope": "Relative links in the updated snow README and analysis resolve; unrelated research topics and top-level status fields remain semantically unchanged.",
+    "editorial_review": "Read the inserted assessment with adjacent synthesis; independent review checked candidate claims and distinguished the general SCALE model, simplified chamber configuration, public CARMA test and unretrieved paper configuration.",
+    "diff_check": "git diff --check passed.",
+    "check_boundary": "The checkpoint full make check precedes this documentation/source-register assessment. It was not repeated for the assessment; no model implementation or earlier numerical product changed.",
+    "worktree_state": "Assessment follows committed numerical checkpoint and remains uncommitted on domain/atmosphere."
+  },
+  "followup_feasibility": {
+    "date": "2026-10-22",
+    "candidate": "General SCALE-SDM 0.2.5-2.2.2",
+    "result": "Twelve finite-water controls executed; numerical feasibility, not adopted storm physics or empirical validation.",
+    "product": "results/scale_column.json",
+    "checks": "results/scale_column_checks.json",
+    "analysis": "analysis.md#scale-sdm-finite-water-column-trial",
+    "historical_audit_policy": "Earlier assessment and review statements above describe the source-inspection stage and are retained. The linked execution product records the later build, patches and controls."
+  },
+  "aggregation_followup": {
+    "date": "2026-10-22",
+    "candidate": "General SCALE-SDM 0.2.5-2.2.2",
+    "product": "results/scale_aggregation.json",
+    "sources": "scale_aggregation_sources.json",
+    "result": "Nineteen native collision controls completed. Ice aggregation and mass accounting exercised; analytic distribution errors reduced but remain measurable; passive cap counters preserve all 789 compared arrays. Coupled lunar population and physical giant-aggregate limit remain unresolved."
+  },
+  "full_column_followup": {
+    "date": "2026-10-22",
+    "methods": "atmosphere/snow/scale_lunar_methods.md",
+    "results": "atmosphere/snow/scale_lunar_results.md",
+    "product": "atmosphere/snow/results/scale_lunar_comparison.json",
+    "verification": "atmosphere/snow/results/scale_lunar_checks.json",
+    "completed_scale_cases": 10,
+    "completed_custom_cases": 4,
+    "source": "Same pinned general SCALE release; scenario/ledger hook, 1e-12 uniform-grid roundoff tolerance, passive collision observer and separately labelled sticking-efficiency variant. Original native physical closures otherwise retained.",
+    "finding": "Under the original deep/full-duration source, default SCALE gives stable millimetre aggregates. The stronger inherited sticking efficiency increases sizes but does not reproduce decimetre mass quantiles in the tested refinement. Physical closure and numerical-representation differences remain inseparable in the overall comparison.",
+    "adoption": "Full-column alternative tested; empirical lunar distribution, unique root cause of old volume dependence and new optics not adopted."
+  }
+}

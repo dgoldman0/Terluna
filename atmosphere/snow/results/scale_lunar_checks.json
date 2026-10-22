@@ -1,0 +1,362 @@
+{
+  "schema": "terluna.atmosphere.scale-lunar-checks/1",
+  "checked_at_utc": "2026-10-22T14:57:02.092563+00:00",
+  "branch": "domain/atmosphere",
+  "base_commit": "52100f52018552926a43cbc67a339609f29da3f4",
+  "checked_file_sha256": {
+    "atmosphere/snow/scale_lunar.py": "83488e1d1ef1b1ff45c96c54f422f51777ee473a9cdf80498256aa527618362f",
+    "atmosphere/snow/scale_lunar_hook.f90": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11",
+    "atmosphere/snow/scale_lunar_comparison.py": "a7c0627a5ba9e279c7106f2d5dc6e0a3286c0c04bcb7c8f9f41a8353f8f11b09",
+    "atmosphere/snow/scale_build.py": "c745f0259a271905dc1fdfc6ac99605aa0d7fbe98be95717f03b212296e00c7b",
+    "atmosphere/snow/scale_collision_observer.py": "c5447c31b77ba867939a5d4dfbd59ae7d3f70566169cf662977eb74ce5e1c60b",
+    "atmosphere/snow/scale_column.py": "26c618a0c2757fd84611a52b8acd8f037e23903463e02ce78650f39fb343a23f",
+    "atmosphere/snow/scale_aggregation.py": "067253038b9864caebf6bc35b85e5d560f6ea31ffacfa4eb6d3060027f14c274",
+    "atmosphere/snow/scale_lunar_verify.py": "3bb2fcedf9384f2119f2742899b292206c94fd6d28e1484e1e65d90d1242a0c3",
+    "atmosphere/tests/test_snow_scale_lunar.py": "398231d70179b36ada616baa1a5ae27a12d0015b70785bba08a2696ac57d5ab4",
+    "atmosphere/snow/scale_lunar_methods.md": "18ffff124c61c2439fdae9e9a8f83768fed3b97f09aeb01549a6d55a2e548d2e",
+    "atmosphere/snow/scale_lunar_results.md": "18eb20132eba23ae29bdc6f6296cc717721229bc4d4b1b8bd30db19d674b091b",
+    "atmosphere/snow/results/scale_lunar_comparison.json": "ce47db9f3d7d44c9344582bee14e34e698be52523ce1f72e98ebdf4b2e71734d",
+    "atmosphere/snow/analysis.md": "4882c26c5d5b088987e7c278b2ea8f4e16beb81eab4501ad22f94eefcd929899",
+    "atmosphere/snow/README.md": "240cf1b8b160632071c7c5c66cec0bb8f04f821dc31195b43e044dc0d0be44aa",
+    "atmosphere/README.md": "e9a401f2518da5de7cf37e0c4bd7cf4c480767911f5691fd45753d064722ecf1",
+    "research/README.md": "34dcdeec485570d5f942c6649d07d368847303c081fe038921819b4a07a6a0b2",
+    "research/status.json": "563e529a420117670a59012b15c7a75a6a763455c092ddf50ecf1a92bb0a3f42",
+    "atmosphere/snow/solver_reuse_sources.json": "e8dbf9d77957a5278c4bd8fa94de803799eb4958cfa9735883018cdc094f916f"
+  },
+  "full_repository_check": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=1 make check",
+    "exit_code": 0,
+    "python_passed": 3226,
+    "python_skipped": 20,
+    "javascript_passed": 191,
+    "layer_check": "PASS for tracked sources",
+    "research_check": "PASS",
+    "ensemble_validator": "PASS",
+    "log": "research/runs/snow_scale/lunar_make_check.log",
+    "sha256": "4494e6aae30c148edf92def904264cb3d4a002c5969dd520cbae51960e5e77e4",
+    "scope": "Software, artifact integrity and numerical implementation; no empirical or manuscript clearance. Final synthesis edits and assembled numerical records were checked separately afterwards."
+  },
+  "all_sources_layer_check": {
+    "result": "PASS",
+    "output": "check_layers: 1245 files checked, 0 violations",
+    "scope": "Tracked and untracked live source files, with the official SKIP_PREFIXES exclusions."
+  },
+  "full_column_controls": {
+    "completed_scale_cases": 10,
+    "completed_additional_custom_cases": 4,
+    "physical_duration_s": 477321.407800899,
+    "max_relative_water_residual": 1.925000709150304e-11,
+    "refinement_screens": [
+      {
+        "label": "particle sampling, 2 to 4 packets/minute",
+        "status": "complete",
+        "relative_changes": {
+          "snowfall_mm_h": 0.004139370755915861,
+          "mass_d50_m": 0.008138189693140063,
+          "mass_d90_m": -0.0005189258996536328,
+          "mass_d99_m": -0.01030971544323167
+        },
+        "maximum_mass_cdf_difference": 0.010016183027270864,
+        "passed": true,
+        "screen": "At most 5% flux/d50/d90/d99 change and 0.05 mass-CDF distance; descriptive practical screen, not confidence or physical validity.",
+        "left": "lunar_prescribed_p2",
+        "right": "lunar_prescribed_p4"
+      },
+      {
+        "label": "particle sampling, 4 to 8 packets/minute",
+        "status": "complete",
+        "relative_changes": {
+          "snowfall_mm_h": 0.0027091642900163304,
+          "mass_d50_m": -0.0012430299444939896,
+          "mass_d90_m": 0.006378935071904346,
+          "mass_d99_m": 0.004670562011872104
+        },
+        "maximum_mass_cdf_difference": 0.00436464368432965,
+        "passed": true,
+        "screen": "At most 5% flux/d50/d90/d99 change and 0.05 mass-CDF distance; descriptive practical screen, not confidence or physical validity.",
+        "left": "lunar_prescribed_p4",
+        "right": "lunar_prescribed_p8"
+      },
+      {
+        "label": "60 to 30 s at fixed 8 packets/minute",
+        "status": "complete",
+        "relative_changes": {
+          "snowfall_mm_h": -0.0010184632446319508,
+          "mass_d50_m": 0.0013644871856732799,
+          "mass_d90_m": 0.0035976530782169114,
+          "mass_d99_m": 0.006665480008045677
+        },
+        "maximum_mass_cdf_difference": 0.0038991549401156123,
+        "passed": true,
+        "screen": "At most 5% flux/d50/d90/d99 change and 0.05 mass-CDF distance; descriptive practical screen, not confidence or physical validity.",
+        "left": "lunar_prescribed_p8",
+        "right": "lunar_prescribed_dt30"
+      },
+      {
+        "label": "30 to 60 layers at fixed column depth and injection sampling",
+        "status": "complete",
+        "relative_changes": {
+          "snowfall_mm_h": -0.005335818996216157,
+          "mass_d50_m": -0.0021738117207652508,
+          "mass_d90_m": 0.009584591407203025,
+          "mass_d99_m": 0.00307026231025076
+        },
+        "maximum_mass_cdf_difference": 0.006634873190549118,
+        "passed": true,
+        "screen": "At most 5% flux/d50/d90/d99 change and 0.05 mass-CDF distance; descriptive practical screen, not confidence or physical validity.",
+        "left": "lunar_prescribed_p4",
+        "right": "lunar_prescribed_z60"
+      },
+      {
+        "label": "sticking sensitivity, 60 to 15 s at fixed 4 packets/minute",
+        "status": "complete",
+        "relative_changes": {
+          "snowfall_mm_h": -0.0038402115047193597,
+          "mass_d50_m": -0.0015319166319691657,
+          "mass_d90_m": -8.344931148707158e-05,
+          "mass_d99_m": -0.00729073480674769
+        },
+        "maximum_mass_cdf_difference": 0.007887168465796845,
+        "passed": true,
+        "screen": "At most 5% flux/d50/d90/d99 change and 0.05 mass-CDF distance; descriptive practical screen, not confidence or physical validity.",
+        "left": "lunar_sticking_p4",
+        "right": "lunar_sticking_dt15"
+      }
+    ],
+    "native_history_verification": [
+      {
+        "case": "lunar_prescribed_p2",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 7.310140404115373e-08,
+        "maximum_relative_precipitation_difference": 2.1392052639746778e-10,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-t8v7yvit/runs/lunar_prescribed_p2",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "973d99858700354025e10cd9b0bac4d39325c3f3a49273f28cff5f217758f1d9"
+      },
+      {
+        "case": "lunar_prescribed_p4",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 4.6997229219414294e-08,
+        "maximum_relative_precipitation_difference": 1.3663362236762683e-10,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-2iuvbath/runs/lunar_prescribed_p4",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "43a2fd4739abaa39969ef2a174ac3384a69a46ff64ebeccbb8c9b0ff2c850a09"
+      },
+      {
+        "case": "lunar_prescribed_p8",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 5.378348078011186e-08,
+        "maximum_relative_precipitation_difference": 1.5585573675422852e-10,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-8i7zr321/runs/lunar_prescribed_p8",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "e882b03ddaa3175b7254f15ab85d0535a9e84fc0c10ad866d5baf95aa47930d7"
+      },
+      {
+        "case": "lunar_prescribed_dt30",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 2.669835907909146e-08,
+        "maximum_relative_precipitation_difference": 7.742642442030049e-11,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-rhetvhmz/runs/lunar_prescribed_dt30",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "64c14e4374bf46b8a3191c73a1596cf0e88deadd7d5942a027e0506b223bc7ed"
+      },
+      {
+        "case": "lunar_prescribed_seed2",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 5.705189209948003e-08,
+        "maximum_relative_precipitation_difference": 1.657851202439507e-10,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-r8c3heav/runs/lunar_prescribed_seed2",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "ea3229b559cef8afe1af6b64f5b4195d8b1fa2115d2af535b9e86a9604175025"
+      },
+      {
+        "case": "lunar_prescribed_z60",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 5.4424901918537216e-08,
+        "maximum_relative_precipitation_difference": 1.5960636092138363e-10,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-d3z3mbjq/runs/lunar_prescribed_z60",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "b58846b3fa5e6e3595fba300234d61c1cd2b25314ccd95dc27d77fe51f81a3d6"
+      },
+      {
+        "case": "lunar_reservoir_p2",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 4.5973820306244306e-08,
+        "maximum_relative_precipitation_difference": 1.3026487513959252e-10,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-_2ce942l/runs/lunar_reservoir_p2",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "1f2f9ae41842d85f50be3aa670cd201d540b5c9a3ab49c5e2f54275eef3e9c4d"
+      },
+      {
+        "case": "lunar_thermal_p2",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 9.260365807506332e-09,
+        "maximum_relative_precipitation_difference": 2.983397304867369e-10,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-27fkhsam/runs/lunar_thermal_p2",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "d9d71ddf9f296c7d61870836e35a9974e1b30bd519135bb0360c7f5ed123c4d7"
+      },
+      {
+        "case": "lunar_sticking_p4",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 6.660297913185786e-08,
+        "maximum_relative_precipitation_difference": 2.409231386672909e-10,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-d1hv2ril/runs/lunar_sticking_p4",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "7bf56ffba50756b172901e0eff4bf5bfbb440a0a62c5dfd48f33bbd4bce4ce9b"
+      },
+      {
+        "case": "lunar_sticking_dt15",
+        "input_hashes_checked": 6,
+        "native_history_samples": 133,
+        "maximum_precipitation_difference_kg_m2": 5.785934575897045e-08,
+        "maximum_relative_precipitation_difference": 2.100965319904256e-10,
+        "reproduced_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "input_reproduction_environment": {
+          "path": "/tmp/terluna-lunar-reproduce-rnq5t_f6/runs/lunar_sticking_dt15",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "4a00eea73a82ac5a597590c3fa5d5ec053477fe88a434503e2de76c2e7235bef"
+      }
+    ],
+    "independent_native_precipitation_relative_tolerance": 1e-09,
+    "zero_collision_omissions_in_native_cases": true,
+    "stronger_sticking_coarse": {
+      "calls": 7956,
+      "attempted": 37587090355.0,
+      "omitted": 3255435.0,
+      "capped_pairs": 238,
+      "max_probability": 12.56694186046444
+    },
+    "stronger_sticking_refined": {
+      "calls": 31822,
+      "attempted": 37607144168.0,
+      "omitted": 0.0,
+      "capped_pairs": 0,
+      "max_probability": 3.062927971458349
+    },
+    "input_reproduction": "50 native files reproduced byte for byte; original NumPy 2.3.3 generator and recorded int/float CLI types used. Actual input bytes were never replaced."
+  },
+  "resolved_setup_and_check_issues": [
+    "First hook build lacked the local QA import; corrected before numerical runs. Failed build log retained.",
+    "First full-depth smoke aborted because upstream uniform-grid validation compared exact floating point equality (ratio 1.0000000000000007); source-bound 1e-12 tolerance added. No stretched grid enabled.",
+    "Early per-column and time-block flux summaries used the whole area/time denominator; corrected and checked with independent synthetic weighted arrivals. All summaries regenerated from unchanged native output.",
+    "Initial exact-input reproduction used NetCDF reader environment NumPy 2.5.3 instead of original generator 2.3.3 and then differed in CLI int/float namelist formatting. Inspection isolated these differences; using the original environment and recorded types reproduces every native input byte.",
+    "Supplementary untracked-source layer harness initially included archival files excluded by the official checker; applying its SKIP_PREFIXES resolves the harness failure without changing archive files."
+  ],
+  "review": "Read the full report with its methods and the adjacent synthesis. Checked table quantities, units, quantum/pooled distinction, physical forcing differences and claims against the complete numerical product. Reviewed source changes, independent native-precipitation accounting and byte-identical regenerated inputs. Only the atmosphere topic changed in status.json; its separate next-session task and other topics were preserved. No independent reviewer or new full scholarly source reading is claimed.",
+  "not_performed": [
+    "Matched published Earth snow-population reproduction using this SCALE driver.",
+    "A comparison holding every collision, geometry, drag and growth law identical between numerical frameworks.",
+    "Complete energy conservation and radiation/dynamics sufficient to maintain the cold cloud.",
+    "Mechanical contact fracture, empirical lunar validation or new storm optics."
+  ],
+  "commit": "No new commit; completed work remains on domain/atmosphere.",
+  "result": "PASS for the stated implementation and refinement checks; physical limitations retained."
+}

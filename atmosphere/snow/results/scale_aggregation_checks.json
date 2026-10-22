@@ -1,0 +1,178 @@
+{
+  "schema": "terluna.atmosphere.scale-aggregation-checks/1",
+  "checked_at_utc": "2026-10-22T13:49:42.216004+00:00",
+  "branch": "domain/atmosphere",
+  "base_commit": "52100f52018552926a43cbc67a339609f29da3f4",
+  "checked_file_sha256": {
+    "atmosphere/snow/scale_aggregation.py": "067253038b9864caebf6bc35b85e5d560f6ea31ffacfa4eb6d3060027f14c274",
+    "atmosphere/snow/scale_collision_observer.py": "c5447c31b77ba867939a5d4dfbd59ae7d3f70566169cf662977eb74ce5e1c60b",
+    "atmosphere/tests/test_snow_scale_aggregation.py": "d2205116575c4421d85ea943b770302c7a89fa1d2b883b36518c2c96c8f3aae5",
+    "atmosphere/snow/scale_aggregation_sources.json": "ece2c5a4724ef9288af253691f73c9e523a10c1149dc1b43b97945a72edcc071",
+    "atmosphere/snow/results/scale_aggregation.json": "4af65d2628f7d664c167720e1188d9d96e92a2267f42dbb01be81530424a868f",
+    "atmosphere/snow/analysis.md": "1310c198f3e970c700561b49f3c1353780684acbdeb432be57efb10fa5f767c3",
+    "atmosphere/snow/README.md": "e88cc9909ddf12d7d01f879068deb5f1153dd07d433d8da77fe956ee3f6311b3",
+    "atmosphere/README.md": "05b46374de317f7208a689f0a8c2e8a453968050467972f9622526da3bd3744b",
+    "atmosphere/snow/solver_reuse_sources.json": "90eed1fda3cb0fed732b1adf1fa3f12062f51d2a7a5043c4464e50056b5eade6",
+    "research/status.json": "dcd93e71a448126a44dddea29de720d8462376d859c0baadd2832b3f0c7a21f6"
+  },
+  "focused_tests": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -B -m pytest -q -p no:cacheprovider atmosphere/tests/test_snow_scale_aggregation.py atmosphere/tests/test_snow_scale_column.py",
+    "result": "PASS",
+    "passed": 26,
+    "skipped": 0,
+    "scope": "Restart record layout, initial mass accounting, analytic distribution normalization/moments/quadrature, input rejection, source identity and insertion-only observer patch; no MPI inside pytest."
+  },
+  "layer_check": {
+    "command": "shared.check_layers.main with git ls-files --cached --others --exclude-standard source list",
+    "result": "PASS",
+    "files_checked": 1241,
+    "violations": 0
+  },
+  "research_check": {
+    "command": "python -B research/check.py --output /tmp/terluna-scale-aggregation-research-check.json",
+    "result": "PASS",
+    "report": "research/runs/snow_scale/aggregation_research_check.json",
+    "sha256": "6bcb62c31e22cea8b9694234d11cecfcb83eee7f6996b085ccaeae554770eb12",
+    "scope": "artifact integrity and numerical implementation only"
+  },
+  "diff_check": {
+    "command": "git diff --check",
+    "result": "PASS"
+  },
+  "numerical_controls": {
+    "completed_declared_cases": 19,
+    "successful_smoke_case": "aggregation_smoke_03",
+    "maximum_cell_mass_relative_error": 4.2299497238218464e-13,
+    "maximum_ice_cell_mass_relative_error": 3.552713678800501e-15,
+    "maximum_ice_monomer_count_relative_error": 0.0,
+    "observer_parity": {
+      "sha256": "84be24d8b30971aefe7ada323c4540136a836dbdbfcc4505388eb5cc6bcf8b1c",
+      "content": [
+        {
+          "original": "ice_2048",
+          "observer": "ice_observer",
+          "arrays_compared": 263,
+          "differences": [],
+          "counters": {
+            "sha256": "cff9b8c0804f28fb2696dcc3e410d8e65721a139efcdfe7e985267d8426093d6",
+            "calls_through_final_particle_snapshot": 720,
+            "excluded_final_call": [
+              721.0,
+              5.0,
+              158896764.0,
+              158896764.0,
+              0.0,
+              0.0,
+              0.0060826054551663174,
+              0.0034617498278610437
+            ],
+            "attempted_physical_collisions": 94773619440.0,
+            "accepted_physical_collisions": 94773619440.0,
+            "omitted_physical_collisions": 0.0,
+            "omitted_fraction": 0.0,
+            "capped_pair_count": 0,
+            "max_probability": 0.007994775498904356,
+            "max_probability_over_capacity": 0.004069832417955562,
+            "number_loss_accounting_absolute_error": -6.103515625e-05
+          }
+        },
+        {
+          "original": "golovin_2048_dt5",
+          "observer": "golovin_observer_dt5",
+          "arrays_compared": 263,
+          "differences": [],
+          "counters": {
+            "sha256": "6de259c13fb1d3a47027bfc9a60c68bc76e08eff113529a116975560921023a4",
+            "calls_through_final_particle_snapshot": 720,
+            "excluded_final_call": [
+              721.0,
+              5.0,
+              16830810510.0,
+              16830810510.0,
+              0.0,
+              0.0,
+              87.02166027186082,
+              0.7901157530585675
+            ],
+            "attempted_physical_collisions": 521967357909826.0,
+            "accepted_physical_collisions": 521967356933263.0,
+            "omitted_physical_collisions": 976563.0,
+            "omitted_fraction": 1.8709273390400573e-09,
+            "capped_pair_count": 1,
+            "max_probability": 201.9088728397919,
+            "max_probability_over_capacity": 1.2639704145196937,
+            "number_loss_accounting_absolute_error": 0.0
+          }
+        },
+        {
+          "original": "golovin_2048_dt1",
+          "observer": "golovin_observer_dt1",
+          "arrays_compared": 263,
+          "differences": [],
+          "counters": {
+            "sha256": "803de5524ff4a5beaee5dbcb7546916932670309a912e39a4e409c5fc757a367",
+            "calls_through_final_particle_snapshot": 3600,
+            "excluded_final_call": [
+              3601.0,
+              1.0,
+              3470214896.0,
+              3470214896.0,
+              0.0,
+              0.0,
+              21.63025386790528,
+              0.1619323486210515
+            ],
+            "attempted_physical_collisions": 521929856933952.0,
+            "accepted_physical_collisions": 521929856933952.0,
+            "omitted_physical_collisions": 0.0,
+            "omitted_fraction": 0.0,
+            "capped_pair_count": 0,
+            "max_probability": 60.70011867158025,
+            "max_probability_over_capacity": 0.2697354962900177,
+            "number_loss_accounting_absolute_error": 0.0
+          }
+        }
+      ]
+    },
+    "native_input_reproduction": [
+      {
+        "case": "ice_2048",
+        "byte_identical_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true
+        }
+      },
+      {
+        "case": "golovin_8192_half",
+        "byte_identical_native_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true
+        }
+      }
+    ],
+    "bounds_and_floating_point_traps_enabled": true
+  },
+  "earlier_failed_checks": [
+    "Analysis environment Python has NetCDF4 but no pytest; focused tests ran in the existing default NumPy/SciPy/pytest environment.",
+    "Initial EOF test expected generic EOFError; corrected to SciPy FortranEOFError. Subsequent full focused run passed."
+  ],
+  "preserved_attempts": [
+    "aggregation_smoke: vertical buffer exceeded small domain",
+    "aggregation_smoke_02: restart count mismatched native empty-top-cell restriction",
+    "aggregation_smoke_03: native run succeeded; initial analysis glob omitted extensionless particle outputs, corrected without rerunning",
+    "ice_512 and ice_512_seed1: threaded NetCDF initialization crashed the Python driver; separate-process retries retained these directories"
+  ],
+  "review": "Read the new synthesis with the adjacent feasibility/adoption discussion; checked its numbers against the complete product, inspected restart units/precision and observer source insertions, and verified unrelated research topics and next-session task are unchanged. No independent reviewer, empirical validation or full scholarly source reading is claimed.",
+  "not_performed": [
+    "Full make check after this continuation; required before a future commit.",
+    "Published SHIPS output or matched Welss column reproduction with SCALE.",
+    "Coupled aggregate deposition/settling convergence, full energy accounting and weather-forced lunar column.",
+    "Adaptive time-stepping repair, mechanical breakup, large-aggregate validity and new storm optics."
+  ],
+  "result": "PASS for the stated implementation checks; distribution errors and outstanding science remain explicitly reported.",
+  "commit": "No new commit made; work remains on domain/atmosphere."
+}
