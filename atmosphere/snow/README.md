@@ -2,6 +2,12 @@
 
 The current [repair and literature review](repair.md) preserves these earlier tables while testing an independent conservative solver and physical constraints on geometry and breakup.
 
+The [volume-dependence diagnosis](column_diagnosis_results.md) completes 48 full lunar columns. It measures reduced vapour uptake from a sparse population whose demand fluctuates across the local supply cap: deposition rises from 2.199 to 2.498 mm/h across the three statistical volumes under the same 3 mm/h allowance. Removing all collisions passes the tested volume screen. Removing growth, chipping, or both leaves failed upper-tail checks; the sticking-only 99th percentile changes by 22.5%, with appreciable four-realization uncertainty. This identifies a water-allocation contribution and a separate tail concern, while the coupled distribution and physical lunar sizes remain unresolved.
+
+The [full-column event study](event_column_results.md) now completes 512 independent closed-box runs and 28 coupled Earth/lunar controls. The event solver passes the reference comparison and closes the water and number ledgers, while the lunar distribution fails volume convergence: mean mass medians are 12.3, 18.5, 23.5 cm and mean 99th percentiles are 19.8, 36.3, 74.1 cm across successive fourfold volume increases. These are numerical diagnostics under the inherited growth, geometry and chipping laws. They leave the physical 15–60 cm tail and predictive storm optics unresolved.
+
+The earlier [finite-time capture controls](collision_jump_results.md) pass six analytic and six prescribed-bath comparisons. The full column instead extends the independent event reference with donor depletion, continuous growth and the matched upwind settling generator; it is a separate numerical study. [The method note](event_column_methods.md) records its volume, splitting and fractional-fragment approximations.
+
 The [21 October analysis](analysis.md) extends this work to snow-conditioned cloud motion, corrected aggregate geometry, full size distributions and lunar snowstorm optics. The tables below retain the 20 October baseline; the source-definition corrections and current limitations are recorded in the new analysis. The inherited fractional-particle bookkeeping fails an arbitrary-area invariance requirement; read the [numerical audit](numerical_audit.md) before interpreting either set of size estimates.
 
 Snow in the Open Moon's sky winter: how snowflakes fall, grow and melt at a sixth of Earth's gravity, in the air about
@@ -19,6 +25,9 @@ of the work on the high cloud's crystals ([register](../../research/decisions.md
 | [growth_depth.py](growth_depth.py), [results/growth_depth.json](results/growth_depth.json) | Shorter and warmer continuously saturated growth columns |
 | [numerical_audit.py](numerical_audit.py), [numerical_audit.md](numerical_audit.md) | Fractional-weight bookkeeping, arbitrary-area controls and collision-batch diagnostics |
 | [sectional.py](sectional.py), [repair.py](repair.py), [results/repair.json](results/repair.json) | Conservative independent solver and completed domain/refinement diagnostics, with explicit adequacy flags |
+| [column_diagnosis_methods.md](column_diagnosis_methods.md), [column_diagnosis_results.md](column_diagnosis_results.md) | Passive water and occupancy accounting; 48 complete process-removal and refinement controls |
+| [event_column.py](event_column.py), [event_column.cpp](event_column.cpp), [event_column_benchmarks.py](event_column_benchmarks.py) | Continuous-mass collision events, donor depletion, complete prescribed columns and independent numerical controls |
+| [event_column_results.md](event_column_results.md), [results/event_column.json](results/event_column.json) | All 28 full-column results, whole-realization uncertainties and failed lunar volume refinement |
 | [kernel_diagnostics.py](kernel_diagnostics.py), [results/kernel_diagnostics.json](results/kernel_diagnostics.json) | Fixed-geometry encounter scaling and the installed chipping rule's mass limits |
 | [geometry_literature.md](geometry_literature.md), [strength_literature.md](strength_literature.md) | Targeted primary evidence for evolving geometry, interception, ice contacts and aggregate failure |
 | [turbulence.py](turbulence.py), [turbulence.md](turbulence.md) | Archived cloud motions conditioned on snow and growth environments; separate flake-scale loading scenarios |

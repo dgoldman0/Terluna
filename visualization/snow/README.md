@@ -128,3 +128,127 @@ declared settings; it supplies no independent population or empirical
 validation. `Fn` and `Fm` are cell-average velocity moments, not measured
 boundary crossings. Generated `earth_comparison.png`, `earth_comparison.svg`
 and `earth_manifest.json` remain ignored under `generated/`.
+
+## Within-cell collision candidates
+
+`moments.py` compares the candidate collision distributions with an analytic
+boundary test and the frozen exact-event bath reference:
+
+```sh
+OPENBLAS_NUM_THREADS=1 python visualization/snow/moments.py \
+  --entropy-bath atmosphere/snow/results/collision_entropy_bath.json \
+  --entropy-boundary atmosphere/snow/results/collision_entropy_boundary.json
+```
+
+Omitting both optional paths reproduces the frozen Beta-only diagnostic.
+
+The upper panels show the constant-rate Poisson control when the expected mass
+reaches the 191-cell reference face, then its distribution errors before and
+after that crossing. Observation times remain fixed relative to this reference
+face. The Beta reconstruction retains accurate first two mass moments while
+its number CDF differs by 18.4 percentage points near the face. The discrepancy
+is a difference in cumulative collector number, not an error of 18.4% in mass or
+diameter. Its later agreement does not clear this failed distribution test.
+The entropy reconstruction reduces the reference-face CDF error to about
+0.185 percentage points in its completed boundary control.
+
+The lower panels show the separate physical snow-kernel bath at 4.54 minutes.
+A close-up spans six reference standard deviations on each side of the empirical
+mean; the horizontal coordinate is departure from that mean as a percentage of
+initial collector mass. The reference spread is about 0.0629% of initial mass.
+The broad view retains the much larger spreading of the old fixed-pivot grids.
+Every curve keeps the original collector normalization, including tails outside
+the displayed windows. Grid, quadrature-order and timestep labels identify the
+saved controls.
+
+Each entropy product contains one completed control out of five requested.
+The 191-cell bath refinement and the boundary control with half the maximum timestep each reached
+the 600 s wall-time limit; the remaining three controls in each matrix were not
+reached. Both full-matrix acceptance flags remain false. The figure displays
+these incomplete-matrix counts and plots only completed saved distributions;
+it supplies no uncomputed refinement curves.
+
+The renderer imports no domain model. It verifies product schemas and pinned
+producer/input identities, matches physical conditions, reconstructs native
+moments and stable variance, checks number and mass ledgers, and independently
+reproduces saved CDF differences. The reference's unbiased sample variance
+(`ddof=1`) remains distinct from the candidate's population variance. Candidate
+CDF values and the analytic Poisson reference come directly from the domain
+products; connecting continuous-CDF query values is display interpolation. The
+manifest retains plotted arrays, excluded tails, source and output identities,
+upstream evidence statements, acceptance decisions and incomplete controls.
+
+The shaded 95% DKW band belongs only to the empirical reference at the displayed
+physical-bath endpoint. It describes sampling uncertainty; the analytic Poisson
+control has no Monte Carlo band. These imposed-collector tests omit deposition,
+settling and breakup. Endpoint compatibility supplies neither empirical ice
+validation nor a lunar size distribution, and does not complete the full-column
+collision repair. Generated `moment_comparison.png`, `moment_comparison.svg` and
+`moment_manifest.json` remain ignored under `generated/`.
+
+## Finite-time capture controls
+
+`capture.py` reads the new Poisson-mixture and size-dependent birth-process
+products, together with the frozen exact-event reference:
+
+```sh
+OPENBLAS_NUM_THREADS=1 python visualization/snow/capture.py
+```
+
+Four panels show analytic CDF errors around each grid's own first cell face,
+the final physical-bath CDFs, their discrepancies from the independent event
+histories at both nonzero observation times, and each physical control's recorded
+runtime. Six variations in each matrix test timestep, quadrature and mass-grid
+choices; shifted faces belong to the analytic matrix and ladder capacity to the
+physical matrix. Analytic curves use a declared 0.005 CDF threshold. The separate
+physical reference has a 95% DKW band at each time, uniform in mass but without
+a joint guarantee across times or controls. It describes sampling uncertainty,
+not a numerical convergence bound. The physical curves retain the original
+collector normalization, with display exclusions recorded in the manifest.
+
+The renderer verifies schemas and producer/input hashes, checks physical
+settings and times, reconstructs native moments and stable variance, and checks
+number and donor-water ledgers. It independently reproduces physical CDF
+differences from the saved event histories and analytic differences from the
+stored exact Poisson CDF. Independent gamma-function checks of the latter belong
+to the domain tests. The renderer requires both complete, accepted matrices;
+failed or missing controls cannot become unlabelled curves. It imports no domain
+model and calculates no new snow physics.
+
+The tests start with an imposed 15.86 cm collector and replenish every captured
+donor. They establish neither collector formation nor a closed storm water
+budget. Aggregate survival and predictive optics remain outside the calculation.
+Recorded runtimes describe the initial two-worker execution and its single-worker
+continuation; they are not universal performance bounds. The initial incomplete
+matrix remains a separately bound product, and the final product identifies
+every retained or repeated control. Generated `capture_comparison.png`,
+`capture_comparison.svg` and `capture_manifest.json` remain ignored under
+`generated/`. Their metadata and manifest bind renderer, inputs and outputs,
+plotted arrays, display limits, sampling conventions and upstream evidence.
+
+
+## Full prescribed snow column
+
+`event_column.py` reads the completed [column control matrix](../../atmosphere/snow/results/event_column.json). Its four panels show lunar volume dependence, mass quantiles, the separate timestep/height controls and the generic Earth transfer control. Bands and bars show one standard error across whole independent realizations. The figure labels the failed numerical refinement and the absence of physical validation.
+
+```sh
+python -m visualization.snow.event_column
+python -m pytest -q visualization/snow/tests/test_event_column.py
+```
+
+The generated `event_column_comparison.png`, `event_column_comparison.svg` and `event_column_manifest.json` live under ignored `generated/`. The reader verifies producer and input identities, recomputes ledger residuals, arrival-block totals, fluxes, CDF means and standard errors, checks quantiles against their native CDF brackets, and independently reconstructs each refinement decision. It rejects incomplete matrices and altered scientific quantities. Failed numerical refinements are displayed rather than admitted as forecasts. The [full-column report](../../atmosphere/snow/event_column_results.md) and [verification record](../../atmosphere/snow/results/event_column_checks.json) document the actual runs and artifact inspection.
+
+## Volume-dependence diagnosis
+
+`column_diagnosis.py` reads the primary 40-run diagnostic matrix and the separate eight-run sticking-only follow-up:
+
+```sh
+python -m visualization.snow.column_diagnosis
+python -m pytest -q visualization/snow/tests/test_column_diagnosis.py
+```
+
+Its panels show lower-cloud empty-time fractions, the allocation of the prescribed 3 mm/h vapour supply, upper mass quantiles under process removals, and changes in the mean mass CDF when the statistical volume increases fourfold. The first two panels retain all three complete-model volumes; the process comparisons use the first two. Occupancy and water accounting describe growth-stage observations during gathering. Bands and quantile error bars show one standard error across four whole realizations. The CDF panel's five-percentage-point line tests that metric alone; overall acceptance additionally requires flux and all three reported quantiles to change by at most 5%.
+
+The reader requires both complete matrices and verifies the follow-up's binding to the primary product. It checks producer and input hashes, reconstructs the water allocation and its deposition ledger, empty-time profiles, quantile means and standard errors, mean mass CDFs and comparison decisions. Its corruption tests reject altered scientific fields. Removing a process changes subsequent particle histories, so these comparisons do not partition independent physical contributions. They establish no calibrated giant-flake geometry or snowstorm optics.
+
+Generated `column_diagnosis.png`, `column_diagnosis.svg` and `column_diagnosis_manifest.json` remain ignored under `generated/`. The manifest binds both input products, the renderer, verified upstream files and both image outputs. The [diagnosis report](../../atmosphere/snow/column_diagnosis_results.md) records the numerical findings and actual inspection; [methods](../../atmosphere/snow/column_diagnosis_methods.md) distinguish the observations from continuous residence times and from the separate offline averaging calculation.

@@ -1,0 +1,460 @@
+{
+  "schema": "terluna.atmosphere.snow-collision-repair-checks/1",
+  "checked_at_utc": "2026-10-21T22:28:54.352981+00:00",
+  "branch": "domain/atmosphere",
+  "committed_checkpoint": "802c321e658c1fe3f27ce274b69ae7721dcf1f52",
+  "continuation_commit_status": "Uncommitted work after the requested diagnostic checkpoint; no push performed.",
+  "verification_sources": {
+    "atmosphere/snow/README.md": "da48ae0400657f022c2583d9d52faba7e0f1a61d52d210c18ec0333a9dc6e335",
+    "atmosphere/snow/analysis.md": "f155ec099cb57465d9b2ae00d24b6c181098d27249a91eb185727ba5e025bead",
+    "atmosphere/snow/collision_and_exposure.md": "b6893ae514222d221282674047daae0506ef9d4d9087ace3855bd577cbccfe9a",
+    "atmosphere/snow/collision_entropy.py": "653b93a4e45010e2b957ce533ff94087631f97f8360ab441f953a17e5d471fd2",
+    "atmosphere/snow/collision_entropy_benchmarks.py": "dbf00eaa3da86938e34d30a7912e55bb1752be1ccec4ba9e5e5f3fcd8b87859d",
+    "atmosphere/snow/collision_entropy_methods.md": "e4c0dfe12d028c71c438575609ad133dc8d6eabd25dc8304834228034ee5d1c2",
+    "atmosphere/snow/collision_entropy_sources.json": "0a14dbc424d495465e7921bd420a120b8eeb2b7a7b9399d6545d01439f1ab92d",
+    "atmosphere/snow/collision_moment_benchmarks.py": "4d525748d595e5ed81ce54075d14849b3e5f7d6039dfb4e60ccfdcd5318e7f28",
+    "atmosphere/snow/collision_moments.py": "dc4851aaa8399cdb2d54e51eb950318fa7ce609bd0583d32895cf61b8b858b7e",
+    "atmosphere/snow/collision_moments_methods.md": "b6a290f85a53ed75ca7d629440591187d0d7fcc6fc539a7cde7659dd137f1308",
+    "atmosphere/snow/collision_moments_sources.json": "fccb44aad2ec31b1b4c878fa92e62bbfff710847e1d278255a4f63ee68313817",
+    "atmosphere/snow/collision_repair.md": "455d2eac9b2bf072ab603a9a10cba12c69a1d561462409cb3d08462e2123571e",
+    "atmosphere/snow/collision_time_integration.md": "6ce0344a2311df8b426a554018c82da97b69a372d846cafd846df5e624af7b87",
+    "atmosphere/snow/collision_time_integration_sources.json": "47e7b5454800f438e435980f7a9b540d2a5d78bbe26aebca2b5e43106a8fea7d",
+    "atmosphere/snow/results/collision_entropy_bath.json": "a8687829a3484a6f262a2503a59ae1d967265cf0218fc03f9ec69f7d3a19f0f2",
+    "atmosphere/snow/results/collision_entropy_boundary.json": "437e8cf6aefce30587e7bd61d0b523d6adf97688bc4d478e913da6245bdaf8b0",
+    "atmosphere/snow/results/collision_moment_bath.json": "11dd714b8636e236afb9185b9ff91ca49c49edf248d3a9fd91128905beb9c348",
+    "atmosphere/snow/results/collision_moment_boundary.json": "8830f09942e05e380f68cb9f90ba08a6651a6f972aaf3e5d33736542cad8ffc2",
+    "atmosphere/tests/test_snow_collision_entropy.py": "038849967d28355eb5a16036a16a5abc71c60e28f73f1ed69c1f099df8c298c0",
+    "atmosphere/tests/test_snow_collision_entropy_benchmarks.py": "02b733db0d9bac74e0a7c9929dc2a995471c4b46075ad635f08d47ed235028a7",
+    "atmosphere/tests/test_snow_collision_moment_benchmarks.py": "7b5187734180f04c740d1e023e92d2afe987990e1425228712d123067375f464",
+    "atmosphere/tests/test_snow_collision_moments.py": "c2c8e5039365a084d605918fa8a3301c2c0b061b53d31a508fdad7d77a02a216",
+    "research/status.json": "0f718b2b78c22e11a0d7ea7ddba5de589f6d1e05dcfe01d1a402060c34cd86ab",
+    "visualization/snow/README.md": "368a51271a5adad039755f5164e4d88edb72f21711739e39de0ca6e24ae2a280",
+    "visualization/snow/moments.py": "29080d066664b306e8e9628ffa8f32cac8421bac06578ee064cc9287dfe21aed"
+  },
+  "snow_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m pytest -q -p no:cacheprovider atmosphere/tests/test_snow*.py",
+    "exit_code": 0,
+    "passed": 290,
+    "elapsed_seconds": 8.79,
+    "log": {
+      "path": "/tmp/terluna-collision-repair-final-snow-tests.log",
+      "sha256": "b152f2227bd763ec7eb086adb97e22c8d9edacca94bea119450f7e846604feb2"
+    }
+  },
+  "checkpoint_full_repository_check": {
+    "scope": "Full make check passed for committed checkpoint 802c321; not rerun for this subsequent continuation.",
+    "record": "atmosphere/snow/results/diagnostic_checkpoint_checks.json",
+    "python_passed": 3059,
+    "python_skipped": 20,
+    "javascript_passed": 191
+  },
+  "baseline_provenance": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python research/check.py --require-inputs --output /tmp/terluna-collision-repair-provenance.json",
+    "exit_code": 0,
+    "result": "PASS",
+    "log": {
+      "path": "/tmp/terluna-collision-repair-provenance.log",
+      "sha256": "1c40ad9a3ef3d1a40dd0047dfa926651cae983868cf90c89e6e3109f578529f6"
+    },
+    "output": {
+      "path": "/tmp/terluna-collision-repair-provenance.json",
+      "sha256": "1c40ad9a3ef3d1a40dd0047dfa926651cae983868cf90c89e6e3109f578529f6"
+    }
+  },
+  "layer_check": {
+    "checker": "shared/check_layers.py",
+    "source_selection": "git ls-files --cached --others --exclude-standard -z -- *.py *.js *.mjs *.cjs; deduplicate and apply checker SKIP_PREFIXES",
+    "files_checked": 1213,
+    "violations": 0,
+    "exit_code": 0,
+    "scope": "Includes the new untracked modules."
+  },
+  "retained_checkpoint_files": {
+    "count": 86,
+    "mismatches": []
+  },
+  "producer_and_input_identity": {
+    "independent_hash_checks": 52,
+    "mismatches": [],
+    "scope": "Actual file bytes rehashed after both production matrices, including climate inputs."
+  },
+  "scientific_controls": {
+    "collision_moment_bath": {
+      "path": "atmosphere/snow/results/collision_moment_bath.json",
+      "sha256": "11dd714b8636e236afb9185b9ff91ca49c49edf248d3a9fd91128905beb9c348",
+      "completed_runs": 2,
+      "requested_controls": null,
+      "reported_acceptance": {
+        "gates": {
+          "description": "Predeclared comparison gates for high-count bath endpoints; not empirical validation.",
+          "mean_maximum_reference_standard_errors": 5.0,
+          "variance_ratio_tolerance": 0.05,
+          "number_cdf_maximum_distance": 0.015005043614373761
+        },
+        "runs": [
+          {
+            "cells": 96,
+            "order": 2,
+            "dt": 1.0,
+            "checks": [
+              {
+                "time_s": 81.78800517244,
+                "mean": true,
+                "variance": true,
+                "cdf": true
+              },
+              {
+                "time_s": 272.6266839081334,
+                "mean": true,
+                "variance": true,
+                "cdf": true
+              }
+            ],
+            "passed": true
+          },
+          {
+            "cells": 191,
+            "order": 2,
+            "dt": 1.0,
+            "checks": [
+              {
+                "time_s": 81.78800517244,
+                "mean": true,
+                "variance": true,
+                "cdf": true
+              },
+              {
+                "time_s": 272.6266839081334,
+                "mean": true,
+                "variance": true,
+                "cdf": true
+              }
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "execution_failure": null
+    },
+    "collision_moment_boundary": {
+      "path": "atmosphere/snow/results/collision_moment_boundary.json",
+      "sha256": "8830f09942e05e380f68cb9f90ba08a6651a6f972aaf3e5d33736542cad8ffc2",
+      "completed_runs": 1,
+      "requested_controls": null,
+      "reported_acceptance": {
+        "gates": {
+          "maximum_number_cdf_supremum": 0.005,
+          "maximum_relative_variance_error": 0.0001,
+          "maximum_absolute_mean_error": 1e-10
+        },
+        "decisions": [
+          {
+            "time_s": 204.5154168519756,
+            "cdf": false,
+            "variance": true,
+            "mean": true
+          },
+          {
+            "time_s": 207.39566451154622,
+            "cdf": false,
+            "variance": true,
+            "mean": true
+          },
+          {
+            "time_s": 210.2759121711168,
+            "cdf": false,
+            "variance": true,
+            "mean": true
+          },
+          {
+            "time_s": 311.0934967673193,
+            "cdf": true,
+            "variance": true,
+            "mean": true
+          }
+        ],
+        "passed": false
+      },
+      "execution_failure": null
+    },
+    "collision_entropy_bath": {
+      "path": "atmosphere/snow/results/collision_entropy_bath.json",
+      "sha256": "a8687829a3484a6f262a2503a59ae1d967265cf0218fc03f9ec69f7d3a19f0f2",
+      "completed_runs": 1,
+      "requested_controls": 5,
+      "reported_acceptance": {
+        "gates": {
+          "mean_maximum_reference_standard_errors": 5.0,
+          "variance_ratio_tolerance": 0.05,
+          "number_cdf_maximum_distance": 0.015005043614373761
+        },
+        "runs": [
+          {
+            "cells": 96,
+            "order": 2,
+            "dt": 1.0,
+            "checks": [
+              {
+                "time_s": 81.78800517244,
+                "mean": true,
+                "variance": true,
+                "cdf": true
+              },
+              {
+                "time_s": 272.6266839081334,
+                "mean": true,
+                "variance": true,
+                "cdf": true
+              }
+            ],
+            "passed": true
+          }
+        ],
+        "passed": false,
+        "accounting_and_cdf_checks": [
+          {
+            "checks": [
+              {
+                "time_s": 0.0,
+                "number": true,
+                "mass": true,
+                "cdf_valid": true,
+                "omitted_poisson_probability": true
+              },
+              {
+                "time_s": 81.78800517244,
+                "number": true,
+                "mass": true,
+                "cdf_valid": true,
+                "omitted_poisson_probability": true
+              },
+              {
+                "time_s": 272.6266839081334,
+                "number": true,
+                "mass": true,
+                "cdf_valid": true,
+                "omitted_poisson_probability": true
+              }
+            ],
+            "passed": true
+          }
+        ],
+        "all_requested_controls_completed": false
+      },
+      "execution_failure": {
+        "exception": "RuntimeError",
+        "message": "Wall time limit reached at model time 204.46647020889117s after 20317 steps",
+        "wall_seconds": 600.0084552400513,
+        "grid_factor": 2,
+        "quadrature_order": 2,
+        "max_step_s": 1.0
+      }
+    },
+    "collision_entropy_boundary": {
+      "path": "atmosphere/snow/results/collision_entropy_boundary.json",
+      "sha256": "437e8cf6aefce30587e7bd61d0b523d6adf97688bc4d478e913da6245bdaf8b0",
+      "completed_runs": 1,
+      "requested_controls": 5,
+      "reported_acceptance": {
+        "gates": {
+          "maximum_number_cdf_supremum": 0.005,
+          "maximum_relative_variance_error": 0.0001,
+          "maximum_absolute_mean_error": 1e-10
+        },
+        "runs": [
+          {
+            "cells": 191,
+            "order": 2,
+            "dt": 0.5,
+            "checks": [
+              {
+                "time_s": 204.5154168519756,
+                "cdf": true,
+                "variance": true,
+                "mean": true
+              },
+              {
+                "time_s": 207.39566451154622,
+                "cdf": true,
+                "variance": true,
+                "mean": true
+              },
+              {
+                "time_s": 210.2759121711168,
+                "cdf": true,
+                "variance": true,
+                "mean": true
+              },
+              {
+                "time_s": 311.0934967673193,
+                "cdf": true,
+                "variance": true,
+                "mean": true
+              }
+            ],
+            "passed": true
+          }
+        ],
+        "passed": false,
+        "accounting_and_cdf_checks": [
+          {
+            "checks": [
+              {
+                "time_s": 0.0,
+                "number": true,
+                "mass": true,
+                "cdf_valid": true,
+                "omitted_poisson_probability": true
+              },
+              {
+                "time_s": 204.5154168519756,
+                "number": true,
+                "mass": true,
+                "cdf_valid": true,
+                "omitted_poisson_probability": true
+              },
+              {
+                "time_s": 207.39566451154622,
+                "number": true,
+                "mass": true,
+                "cdf_valid": true,
+                "omitted_poisson_probability": true
+              },
+              {
+                "time_s": 210.2759121711168,
+                "number": true,
+                "mass": true,
+                "cdf_valid": true,
+                "omitted_poisson_probability": true
+              },
+              {
+                "time_s": 311.0934967673193,
+                "number": true,
+                "mass": true,
+                "cdf_valid": true,
+                "omitted_poisson_probability": true
+              }
+            ],
+            "passed": true
+          }
+        ],
+        "all_requested_controls_completed": false
+      },
+      "execution_failure": {
+        "exception": "RuntimeError",
+        "message": "Wall time limit reached at model time 290.17180219797831s after 12349 steps",
+        "wall_seconds": 600.0094187590294,
+        "grid_factor": 2,
+        "quadrature_order": 2,
+        "max_step_s": 0.25
+      }
+    }
+  },
+  "production_execution": {
+    "boundary": {
+      "command": "python -u -m atmosphere.snow.collision_entropy_benchmarks --case boundary --output /tmp/terluna-entropy-boundary-production.json",
+      "exit_code": 1,
+      "log": {
+        "path": "/tmp/terluna-entropy-boundary-production.log",
+        "sha256": "23d39b6e5f0dd6081bb008eeb430b3e8cfeec3592666200b1dd757448a7cac07"
+      }
+    },
+    "bath": {
+      "command": "python -u -m atmosphere.snow.collision_entropy_benchmarks --case bath --output /tmp/terluna-entropy-bath-production.json",
+      "exit_code": 1,
+      "log": {
+        "path": "/tmp/terluna-entropy-bath-production.log",
+        "sha256": "ce605f7810525f89268910da4ea1952b902a6366c591e98fe343f756f5314ae4"
+      }
+    },
+    "environment": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1"
+  },
+  "visualization": {
+    "renderer": {
+      "path": "visualization/snow/moments.py",
+      "sha256": "29080d066664b306e8e9628ffa8f32cac8421bac06578ee064cc9287dfe21aed"
+    },
+    "inputs": {
+      "atmosphere/snow/results/collision_reference.json": "ccfe6c2fc8ceaceefdda4814f3c122b9dd12f7954007e843d0392507239b74c9",
+      "atmosphere/snow/results/collision_moment_bath.json": "11dd714b8636e236afb9185b9ff91ca49c49edf248d3a9fd91128905beb9c348",
+      "atmosphere/snow/results/collision_entropy_bath.json": "a8687829a3484a6f262a2503a59ae1d967265cf0218fc03f9ec69f7d3a19f0f2",
+      "atmosphere/snow/results/collision_moment_boundary.json": "8830f09942e05e380f68cb9f90ba08a6651a6f972aaf3e5d33736542cad8ffc2",
+      "atmosphere/snow/results/collision_entropy_boundary.json": "437e8cf6aefce30587e7bd61d0b523d6adf97688bc4d478e913da6245bdaf8b0"
+    },
+    "output_hashes": {
+      "moment_comparison.png": "87f32696e9b505ca9700fc4fffbb5b0351029008134a2748a4c000ea734fceba",
+      "moment_comparison.svg": "6a9500a6bb07ad5d303dc6b742a595ecc307f73e7e585d5c4037e963990c73e2",
+      "moment_manifest.json": "4ec8a7d25c542f68c0c75b1d20debc2b5ea59bc39866829ea7ab5dd3098d5009"
+    },
+    "commands": [
+      [
+        "/home/kir/miniconda3/bin/python",
+        "/home/kir/Documents/Projects/terluna-atmosphere/visualization/snow/moments.py",
+        "--output",
+        "/tmp/terluna-snow-moment-final-a",
+        "--entropy-bath",
+        "atmosphere/snow/results/collision_entropy_bath.json",
+        "--entropy-boundary",
+        "atmosphere/snow/results/collision_entropy_boundary.json"
+      ],
+      [
+        "/home/kir/miniconda3/bin/python",
+        "/home/kir/Documents/Projects/terluna-atmosphere/visualization/snow/moments.py",
+        "--output",
+        "/tmp/terluna-snow-moment-final-b",
+        "--entropy-bath",
+        "atmosphere/snow/results/collision_entropy_bath.json",
+        "--entropy-boundary",
+        "atmosphere/snow/results/collision_entropy_boundary.json"
+      ]
+    ],
+    "checks": {
+      "native_moments_and_variance": "passed in both builds",
+      "number_and_mass_ledgers": "passed in both builds",
+      "stored_cdf_distances": "independently reconstructed in both builds",
+      "source_and_product_identity": "verified before rendering and after both builds",
+      "original_collector_normalization": "retained; common-window exclusions recorded",
+      "deterministic_rebuild": "PNG, SVG and manifest byte-identical",
+      "embedded_png_svg_identity": "matched manifest identity",
+      "import_boundary": "AST inspected; no domain-model imports",
+      "rejection_controls": {
+        "atmosphere/snow/results/collision_moment_bath.json": "candidate empirical CDF distance: reconstructed 0.00695041082663872 differs from stored 0.016950410826638722",
+        "atmosphere/snow/results/collision_entropy_bath.json": "candidate empirical CDF distance: reconstructed 0.0074155811397860205 differs from stored 0.017415581139786022",
+        "atmosphere/snow/results/collision_moment_boundary.json": "boundary CDF supremum: reconstructed 0.06769218003996053 differs from stored 0.07769218003996052",
+        "atmosphere/snow/results/collision_entropy_boundary.json": "boundary CDF supremum: reconstructed 0.0018600402496075086 differs from stored 0.011860040249607509"
+      }
+    },
+    "png_dimensions": [
+      2556,
+      1908
+    ],
+    "visual_inspection": {
+      "status": "passed",
+      "path": "/home/kir/Documents/Projects/terluna-atmosphere/visualization/snow/generated/moment_comparison.png",
+      "scope": "Final PNG inspected at display scale. Four panels, subtitle, legend, distinct endpoint annotations, both 1/5 completion counts and evidence limits are readable. SVG identity and byte-determinism checked; SVG was not separately rasterized."
+    },
+    "scope": "Rendering and data fidelity checks only. No new physical calculation, empirical validation, or full-column repair acceptance.",
+    "generated_location_pending": false,
+    "generated_directory": "/home/kir/Documents/Projects/terluna-atmosphere/visualization/snow/generated",
+    "generated_artifacts_ignored_by_git": true,
+    "worktree_branch": "domain/atmosphere",
+    "readme": {
+      "path": "visualization/snow/README.md",
+      "sha256": "368a51271a5adad039755f5164e4d88edb72f21711739e39de0ca6e24ae2a280",
+      "reading": "Substantive read completed; exact invocation, numerical evidence scope and both incomplete refinement matrices are documented."
+    }
+  },
+  "substantive_review": {
+    "report": "collision_repair.md read against all four saved candidate products; moment agreement, distribution agreement, sampling and runtime limits kept separate.",
+    "correction_applied": "The Euler mu<=1 bound is qualified to point or sufficiently concentrated populations; broad populations can admit larger stages.",
+    "source_notes": "All 13 source records retain exact reading extents and retrieval limits. Published method lineage is distinguished from this local implementation.",
+    "final_visual_inspection": "Primary agent also inspected the final PNG at display scale: labels, comparison, uncertainty band and both 1/5 completion disclosures are readable."
+  },
+  "outstanding_work": [
+    "Complete timestep, quadrature and grid controls; both entropy matrices remain incomplete.",
+    "Implement and test the finite-time bath proposal before treating it as a repair or speed improvement.",
+    "Complete ordinary closed-box aggregation comparisons and then coupled lunar column controls.",
+    "Resolve aggregate geometry, whole-aggregate fracture, moisture histories and optical-distribution calibration."
+  ],
+  "reading_rule": "Passing software, artifact and provenance checks does not change either incomplete entropy acceptance flag. The completed analytic control and coarse physical-bath endpoints are isolated numerical evidence. No full-column replacement or empirical giant-flake/optical validation is admitted."
+}

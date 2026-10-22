@@ -1,0 +1,63 @@
+{
+  "schema": "terluna.atmosphere.snow-collision-entropy-sources/1",
+  "review_date": "2026-10-21",
+  "scope": "Targeted primary-source basis for a bounded three-moment maximum-entropy reconstruction, with emphasis on realizability, conditioning and atomic limits. Three studies; not a general survey.",
+  "destination_branch": "domain/atmosphere",
+  "evidence_state": "Published mathematical/numerical method lineage plus explicit local specialization. The proposed sectional snow-collision adaptation has separate implementation and numerical controls; no physical snow validation is claimed.",
+  "external_bytes": "No full papers or external datasets added to the repository. Web/PDF text extraction was inspected without retaining local byte hashes.",
+  "sources": [
+    {
+      "id": "mead_papanicolaou_1984",
+      "authors": "Lawrence R. Mead and N. Papanicolaou",
+      "title": "Maximum entropy in the problem of moments",
+      "publication": "Journal of Mathematical Physics 25, 2404\u20132417 (1984)",
+      "doi": "10.1063/1.526446",
+      "url": "https://doi.org/10.1063/1.526446",
+      "access_url": "https://bayes.wustl.edu/Manual/MeadPapanicolaou.pdf",
+      "reading_extent": "Published PDF: abstract, introduction, \u00a7II exponential-polynomial construction, equations 2.1\u20132.14, convexity/Hessian discussion and bounded Hausdorff existence passages through Theorem 1. Later physical applications not substantively read; figures not inspected.",
+      "retrieval_limits": "PDF text retrieved successfully from Washington University repository; no byte identity retained.",
+      "evidence": "Primary mathematical development of entropy reconstruction from moments.",
+      "use": "Exponential family, normalized dual and covariance Hessian; bounded-support lineage.",
+      "limit": "Finite moment constraints do not determine the physical distribution. No snow-collision or proposed sectional discretization test."
+    },
+    {
+      "id": "massot_2010",
+      "authors": "Marc Massot, Fr\u00e9d\u00e9rique Laurent, Damien Kah and St\u00e9phane de Chaisemartin",
+      "title": "A Robust Moment Method for Evaluation of the Disappearance Rate of Evaporating Sprays",
+      "publication": "SIAM Journal on Applied Mathematics 70, 3203\u20133234 (2010)",
+      "doi": "10.1137/080740027",
+      "url": "https://epubs.siam.org/doi/abs/10.1137/080740027",
+      "access_url": "https://www.researchgate.net/publication/40534668_A_Robust_Moment_Method_for_Evaluation_of_the_Disappearance_Rate_of_Evaporating_Sprays",
+      "version_read": "ResearchGate text identifies HAL hal-00332423 version 1, 20 October 2008; publisher metadata/abstract identify the 2010 journal article. Version equivalence is not asserted.",
+      "reading_extent": "Publisher abstract and author-preprint extraction: \u00a72 moment-space/reconstruction discussion, \u00a72.2.2 entropy density and Newton/Hessian equations, conditioning warning, selected \u00a73.2 integral formulation/realizability passages and sectional algorithm description. No complete results or figure review.",
+      "retrieval_limits": "Publisher full text requires access; author-preprint text was available. No direct HAL PDF or byte identity retained.",
+      "evidence": "Primary sectional population-method development for evaporation.",
+      "use": "Related precedent for per-section maximum-entropy reconstruction and the need for realizable dynamics.",
+      "limit": "Published mechanism is evaporation; its flux algorithm and reported numerical behaviour do not validate binary snow aggregation."
+    },
+    {
+      "id": "alldredge_2014",
+      "authors": "Graham W. Alldredge, Cory D. Hauck, Dianne P. O'Leary and Andr\u00e9 L. Tits",
+      "title": "Adaptive change of basis in entropy-based moment closures for linear kinetic equations",
+      "publication": "Journal of Computational Physics 258, 489\u2013508 (2014)",
+      "doi": "10.1016/j.jcp.2013.10.049",
+      "url": "https://doi.org/10.1016/j.jcp.2013.10.049",
+      "access_url": "https://arxiv.org/pdf/1306.2881",
+      "metadata_url": "https://impact.ornl.gov/en/publications/adaptive-change-of-basis-in-entropy-based-moment-closures-for-lin/",
+      "version_read": "Author preprint marked arXiv 1306.2881v1, 12 June 2013; displayed PDF submission header says 18 September 2018. Journal identity verified separately through ORNL metadata; exact equivalence to published bytes not claimed.",
+      "reading_extent": "Author PDF: abstract/introduction, \u00a72 bounded entropy/realizability formulation, \u00a73 optimization opening, \u00a74 quadrature-realizability proposition and regularization discussion, selected \u00a75 manufactured-solution regularization findings, relevant conclusion. No independent benchmark reproduction or figure inspection.",
+      "retrieval_limits": "PDF text and ORNL metadata retrieved successfully; no source-byte hash retained.",
+      "evidence": "Primary numerical study of entropy inversion for bounded linear-transport moments.",
+      "use": "Atomic boundaries, Hessian conditioning, basis adaptation, quadrature-dependent realizability and regularization errors.",
+      "limit": "Its transport-specific quadrature and regularization procedures are not adopted wholesale; no aggregation validation."
+    }
+  ],
+  "local_derivations": [
+    "Normalized exp(A*x+B*x*x) specialization for number, mean and variance in a bounded mass cell.",
+    "Positive B is admissible on compact support; -2B < A < 0 yields an interior minimum on [0,1].",
+    "At symmetric mean 1/2, A = -B; uniform density has variance 1/12 and larger variance requires positive B.",
+    "Zero-variance and maximal-variance atomic limits, covariance Hessian, and preservation of the entropy reference under affine coordinate changes.",
+    "Numerical controls separate inversion, quadrature, time integration and distribution-shape closure."
+  ],
+  "method_status": "Candidate local adaptation. Keep beta candidate files/results intact; numerical outcome and adoption decisions are recorded separately."
+}

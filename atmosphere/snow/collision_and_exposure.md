@@ -1,8 +1,12 @@
 # Collision spreading and moist growth histories
 
-The next repair has a concrete numerical target. Under the same physical collision law, the fixed-pivot solver turns repeated capture of small particles into an excessively broad collector distribution. An independent calculation reproduces the mean growth while keeping the distribution much narrower. Separately, paths through the archived storm show brief moist exposure for many selected tracers. Together these results strengthen the case for revising both collision transport and the prescribed growth environment before interpreting the earlier 15–60 cm tail.
+The collision diagnosis identifies a concrete numerical error. Under the same physical collision law, the fixed-pivot solver turns repeated capture of small particles into an excessively broad collector distribution. An independent calculation reproduces the mean growth while keeping the distribution much narrower. Separately, paths through the archived storm show brief moist exposure for many selected tracers. Together these results strengthen the case for revising both collision transport and the prescribed growth environment before interpreting the earlier 15–60 cm tail.
 
 This work extends the [growth-transport repair](growth_repair.md). It preserves all earlier snow producers and saved products. Numerical controls, conditional weather histories and the published Earth comparison supply different kinds of evidence; none establishes a calibrated lunar flake-size distribution.
+
+The [volume-dependence diagnosis](column_diagnosis_results.md) completes 48 full lunar columns. It measures reduced vapour uptake from a sparse population whose demand fluctuates across the local supply cap: deposition rises from 2.199 to 2.498 mm/h across the three statistical volumes under the same 3 mm/h allowance. Removing all collisions passes the tested volume screen. Removing growth, chipping, or both leaves failed upper-tail checks; the sticking-only 99th percentile changes by 22.5%, with appreciable four-realization uncertainty. This identifies a water-allocation contribution and a separate tail concern, while the coupled distribution and physical lunar sizes remain unresolved.
+
+The [full-column event study](event_column_results.md) now completes 512 independent closed-box runs and 28 coupled Earth/lunar controls. The event solver passes the reference comparison and closes the water and number ledgers, while the lunar distribution fails volume convergence: mean mass medians are 12.3, 18.5, 23.5 cm and mean 99th percentiles are 19.8, 36.3, 74.1 cm across successive fourfold volume increases. These are numerical diagnostics under the inherited growth, geometry and chipping laws. They leave the physical 15–60 cm tail and predictive storm optics unresolved.
 
 ## The collision error is now measured independently
 
@@ -55,7 +59,7 @@ This is an author-solver rerun under declared settings. The public source is fro
 
 ## What a repair must demonstrate
 
-The collision operator must represent many small captures without creating the rare large jumps measured above. A candidate continuous-mass or mixed transport/collision method can be checked first against the independent bath distribution, including its physical capture variance, then against the ordinary closed-box controls. Number changes, water conservation and agreement of means remain necessary, while distribution agreement supplies the additional test this diagnosis shows is essential. No replacement collision scheme has yet been adopted in the lunar column.
+The collision operator must represent many small captures without creating the rare large jumps measured above. A candidate continuous-mass or mixed transport/collision method can be checked first against the independent bath distribution, including its physical capture variance, then against the ordinary closed-box controls. Number changes, water conservation and agreement of means remain necessary, while distribution agreement supplies the additional test this diagnosis shows is essential. The subsequent [reconstruction controls](collision_repair.md) retain a failed beta candidate: its mean and variance are accurate at a cell crossing, while its number CDF differs from the exact analytic distribution by 18.4 percentage points. The entropy alternative reduces that crossing discrepancy to 0.185 percentage points in one completed control. Its original time-stepping refinements reach their runtime limits, but the subsequent [finite-time capture method](collision_jump_results.md) completes six analytic and six snow-kernel bath controls, with distribution and accounting criteria satisfied. It remains a replenished-bath component. The separate [event study](event_column_results.md) now passes the matched closed-box comparisons and completes the coupled column; its failed volume refinement prevents adoption of a predictive distribution.
 
 Growth histories need a separate treatment. The archived paths provide conditional temperature, humidity and liquid-water histories with explicit censoring; their cadence and coarse spatial resolution prevent treating them as resolved cloud microphysics. Adding aggregate geometry and contact-network failure to a numerically spreading population would leave two explanations entangled. The present controls make the numerical part testable before selecting those physical laws.
 
@@ -66,7 +70,7 @@ check covered 1,204 tracked and untracked source files without violations, and
 `research/check.py --require-inputs` passed its retained-byte and numerical
 checks. The 50 snow producers and JSON products present at the start of this
 extension remain byte-identical. Work is confined to `domain/atmosphere`; the
-main checkout remains clean.
+main checkout was clean at that verification.
 
 The [check record](results/collision_exposure_checks.json) binds the new products,
 compiled component reference, source reviews and figure checks. The subsequent [checkpoint check](results/diagnostic_checkpoint_checks.json) records a full

@@ -1,0 +1,111 @@
+{
+  "schema": "terluna.atmosphere.snow-collision-moments-sources/1",
+  "review_date": "2026-10-21",
+  "scope": "Targeted primary-source reading for a proposed sectional beta moment collision repair and continuous-mass stochastic alternatives. Seven selected studies; not an exhaustive survey.",
+  "destination_branch": "domain/atmosphere",
+  "evidence_state": "Published numerical method lineage and source-scoped findings, followed by an explicitly proposed sectional adaptation. No new calculation, convergence result or empirical validation is established by this ledger.",
+  "external_bytes": "No full papers or external datasets added to the repository. Web/PDF extraction was read without retaining local byte identities; no source-file hashes are claimed.",
+  "sources": [
+    {
+      "id": "yuan_laurent_fox_2012",
+      "authors": "C. Yuan, F. Laurent and R. O. Fox",
+      "title": "An extended quadrature method of moments for population balance equations",
+      "publication": "Journal of Aerosol Science 51, 1–23 (2012)",
+      "doi": "10.1016/j.jaerosci.2012.04.003",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0021850212000699",
+      "repository_url": "https://hal.science/hal-00726736",
+      "reading_extent": "Publisher-indexed abstract, introduction and method passages on positive kernel mixtures, source-term quadrature and beta/gamma lineage. Full paper not read.",
+      "retrieval_limits": "Direct ScienceDirect retrieval failed; HAL document and record returned Anubis access denial. The indexed publisher excerpts are the admitted evidence, not a substitute full-paper reading.",
+      "evidence": "Primary numerical-method paper.",
+      "use": "EQMOM lineage for population balances and independent secondary-quadrature refinement.",
+      "limit": "Does not establish the proposed per-cell single-beta aggregation discretization or its narrow-tail accuracy."
+    },
+    {
+      "id": "pigou_2018",
+      "authors": "Maxime Pigou, Jérôme Morchain, Pascal Fede, Marie-Isabelle Penet and Geoffrey Laronze",
+      "title": "New developments of the Extended Quadrature Method of Moments to solve Population Balance Equations",
+      "publication": "Journal of Computational Physics 365, 243–268 (2018)",
+      "doi": "10.1016/j.jcp.2018.03.027",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0021999118301876",
+      "reading_extent": "Publisher-indexed abstract and Appendix B.6 passages on beta kernels, moment relations and secondary Gauss–Legendre/Gauss–Jacobi quadratures. Full paper and figures not read.",
+      "retrieval_limits": "Direct publisher requests returned errors/403; method claims are restricted to retrieved indexed passages.",
+      "evidence": "Primary numerical-method paper.",
+      "use": "Beta-EQMOM reconstruction and moment-preserving secondary quadrature.",
+      "limit": "No source-specific implementation or published convergence dataset was reproduced."
+    },
+    {
+      "id": "vikas_2013",
+      "authors": "V. Vikas, C. D. Hauck, Z. J. Wang and R. O. Fox",
+      "title": "Radiation transport modeling using extended quadrature method of moments",
+      "publication": "Journal of Computational Physics 246, 221–241 (2013)",
+      "doi": "10.1016/j.jcp.2013.03.028",
+      "url": "https://cfd.ku.edu/papers/2013-jcp-radiation.pdf",
+      "reading_extent": "Author-hosted published PDF text: abstract, introduction, §§3.1–3.2.4 and opening of §4. Read beta parameterization, atomic limits, inversion failure discussion and secondary quadrature. Numerical benchmark sections and figure images not substantively reviewed.",
+      "retrieval_limits": "PDF text retrieved successfully; no local source-byte hash retained.",
+      "evidence": "Primary numerical-method implementation in radiation transport.",
+      "use": "Positive beta reconstruction, degeneration to atomic measures and moment-preserving Gauss–Jacobi quadrature.",
+      "limit": "Radiation-transport tests do not validate snow collisions. General multi-component inversion can fail to reproduce its highest moment; that fallback is not admitted for the proposed width-preserving repair."
+    },
+    {
+      "id": "shima_2009",
+      "authors": "S. Shima, K. Kusano, A. Kawano, T. Sugiyama and S. Kawahara",
+      "title": "The super-droplet method for the numerical simulation of clouds and precipitation: a particle-based and probabilistic microphysics model coupled with a non-hydrostatic model",
+      "publication": "Quarterly Journal of the Royal Meteorological Society 135, 1307–1320 (2009)",
+      "doi": "10.1002/qj.441",
+      "url": "https://arxiv.org/html/physics/0701103",
+      "version": "Author-deposited peer-reviewed text, arXiv physics/0701103 v2 (2022-07-30).",
+      "reading_extent": "Full HTML available; inspected §§4.1.1–4.1.4, 5.1.3 and opening of 5.1.4, including multiplicity updates, expectation/variance derivation, random-pair sampling and multiple-collision shortcut. Remaining sections not fully read.",
+      "retrieval_limits": "Author HTML retrieved successfully; no source-byte hash retained.",
+      "evidence": "Primary formulation of the superdroplet method.",
+      "use": "Distinguish unbiased expected counts from packet-amplified count variance; require small-probability controls.",
+      "limit": "Neither equal packet weights nor the high-probability multiple-collision shortcut establishes physical collector variance."
+    },
+    {
+      "id": "li_2022",
+      "authors": "X.-Y. Li, B. Mehlig, G. Svensson, A. Brandenburg and N. E. L. Haugen",
+      "title": "Collision Fluctuations of Lucky Droplets with Superdroplets",
+      "publication": "Journal of the Atmospheric Sciences 79, 1821–1835 (2022)",
+      "doi": "10.1175/JAS-D-20-0371.1",
+      "url": "https://journals.ametsoc.org/view/journals/atsc/79/7/JAS-D-20-0371.1.xml",
+      "access_url": "https://www.pvv.ntnu.no/~nilshau/Own_Papers/2022_Li_etal.pdf",
+      "reading_extent": "Author-hosted published PDF text: abstract, introduction, §2 algorithm, §3 approaches and inspected §4 comparisons, multiplicity/depletion tests and collector-interaction discussion. Appendix B result encountered through its main-text description; appendix and figure images not independently reviewed.",
+      "retrieval_limits": "Direct publisher request returned 403; full PDF text retrieved from coauthor site.",
+      "evidence": "Primary simulation comparison of lucky-droplet growth-time distributions.",
+      "use": "Separate tagged-collector variability from global population-count variability; recognize successful weighted tests under declared conditions.",
+      "limit": "Warm liquid droplets, idealized efficiencies, all-pair evaluation and small collision probabilities; not direct validation of random-pair lunar snow calculations."
+    },
+    {
+      "id": "dziekan_pawlowska_2017",
+      "authors": "P. Dziekan and H. Pawlowska",
+      "title": "Stochastic coalescence in Lagrangian cloud microphysics",
+      "publication": "Atmospheric Chemistry and Physics 17, 13509–13520 (2017)",
+      "doi": "10.5194/acp-17-13509-2017",
+      "url": "https://acp.copernicus.org/articles/17/13509/2017/",
+      "access_url": "https://acp.copernicus.org/articles/17/13509/2017/acp-17-13509-2017.pdf",
+      "reading_extent": "Publisher PDF text: abstract, introduction, algorithm discussion, §§3–4, selected §5 finite-volume discussion and relevant conclusions. Figure captions and reported fluctuation scaling read; plots not visually inspected or digitized.",
+      "retrieval_limits": "Publisher PDF retrieved successfully; XML request failed. No source-byte hash retained.",
+      "evidence": "Primary superdroplet comparisons with master-equation/SSA and published direct-simulation results.",
+      "use": "Multiplicity-dependent fluctuation floors and sensitivity to finite volume and mixing assumptions.",
+      "limit": "Reported multiplicity and mixing-volume thresholds belong to the tested warm-cloud conditions and are not universal lunar criteria."
+    },
+    {
+      "id": "lin_lee_matsoukas_2002",
+      "authors": "Yulan Lin, Kangtaek Lee and Themis Matsoukas",
+      "title": "Solution of the population balance equation using constant-number Monte Carlo",
+      "publication": "Chemical Engineering Science 57, 2241–2252 (2002)",
+      "doi": "10.1016/S0009-2509(02)00114-8",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0009250902001148",
+      "reading_extent": "Publisher-indexed abstract and introduction, including sample restoration, variable represented volume, concentration tracking and explicit finite-volume fluctuation distinction; discussion excerpt only. Full method/results not read.",
+      "retrieval_limits": "Direct publisher page returned 403; indexed publisher text retrieved.",
+      "evidence": "Primary constant-number Monte Carlo formulation.",
+      "use": "Scope of cloning/removal and the difference between a mean-field particle sample and physical finite-volume fluctuations.",
+      "limit": "Does not certify the tiny collector variance under resampling or establish a coupled lunar-column implementation."
+    }
+  ],
+  "local_derivations": [
+    "Single beta parameters from cell number, mean and variance; bounded-support realizability and atomic boundary cases.",
+    "Binary-coagulation moment increment (-1, 0, 2*m*m_prime) and destination-cell weak form.",
+    "Variance of floor(p)+Bernoulli(frac(p)) differs from Poisson p; consequence derived directly from Shima's stated rule."
+  ],
+  "method_status": "Candidate sectional adaptation; implementation and numerical evidence are recorded separately. No artificial width or diffusion term is justified by these sources."
+}
