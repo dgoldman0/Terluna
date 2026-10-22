@@ -1,0 +1,728 @@
+{
+  "schema": "terluna.atmosphere.scale-limitations-checks/1",
+  "checked_at_utc": "2026-10-22T19:20:16.904821+00:00",
+  "branch": "domain/atmosphere",
+  "checkpoint_commit": "938064d3406574e3e8055814c6b975e37099799b",
+  "evidence": "Numerical and source checks for experimental contact geometry and one-temperature empirical growth comparison. The growth comparison fails physically; Earth column distribution refinement also fails. No closure adoption or lunar size forecast.",
+  "full_repository_check": {
+    "scope": "Current experimental checkpoint before commit",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 NUMBA_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 make check",
+    "python_passed": 3251,
+    "python_skipped": 20,
+    "javascript_passed": 191,
+    "layer_files": 1253,
+    "layer_violations": 0,
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS",
+    "exit_code": 0,
+    "repeated_after_experiments": true,
+    "log": "research/runs/snow_scale/limitations_precommit_make_check.log",
+    "log_sha256": "52eba1ce04c7b8e0364a736e2bf4fbe6c0c8d84048c97207325b8d3dbfa6e756",
+    "checked_at_utc": "2026-10-22T19:53:46.590712+00:00"
+  },
+  "focused_tests": {
+    "command": "python -B -m pytest atmosphere/tests/test_snow_scale_column.py atmosphere/tests/test_snow_scale_aggregation.py atmosphere/tests/test_snow_scale_lunar.py atmosphere/tests/test_snow_scale_size_diagnosis.py atmosphere/tests/test_snow_scale_separation.py atmosphere/tests/test_snow_scale_crystal_growth.py -q -p no:cacheprovider",
+    "passed": 60,
+    "skipped": 0,
+    "exit_code": 0,
+    "compiled_geometry_checks": "160 thin oblate pairs at four separation values; mass tolerance 3e-15, exact zero-setting equality; six columnar/mixed cases preserve native outputs; five-event sequential/batched parity.",
+    "growth_checks": "Full-axis/radius and g/kg conversion against the rendered source table, fixed mass/span for the shape control, and rejection of extrapolation outside 3-30 min."
+  },
+  "layers": {
+    "sources": 1253,
+    "violations": 0,
+    "scope": "Official layer checker with tracked_sources extended to git ls-files --others --exclude-standard; new files included without staging."
+  },
+  "provenance": {
+    "result": "PASS",
+    "source_record_sha256": "4c8be0cacc7bae8d7d91b3adc2b560cdbdc178cc3ea0956eef823d063815d050"
+  },
+  "native_runs": {
+    "columns": 5,
+    "isolated_growth": 5,
+    "maximum_workers": 2,
+    "threads_per_worker": 1,
+    "physics_inputs_reproduced": 50
+  },
+  "independent_verification": {
+    "schema": "terluna.atmosphere.scale-limitations-verification/1",
+    "verifier_sha256": "33ce7f802c991a071e718cf2f3977d8215d269e894f8e009c9e97a2946b705cc",
+    "columns": [
+      {
+        "case": "separation_zero_moon",
+        "native_history_samples": 133,
+        "input_hash_count": 6,
+        "maximum_precipitation_difference_kg_m2": 5.3800789601154975e-08,
+        "maximum_relative_precipitation_difference": 1.563934725691592e-10,
+        "reproduced_physics_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "generation": {
+          "path": "/tmp/terluna-size-reproduce-40bumujk/runs/separation_zero_moon",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "bb4d6067a0c3c011e3ebc539cec977deaf1c1ab787ecb831e1508a7544d28162",
+        "execution_identity_checked": true
+      },
+      {
+        "case": "separation_half_moon",
+        "native_history_samples": 133,
+        "input_hash_count": 6,
+        "maximum_precipitation_difference_kg_m2": 3.704673190441099e-08,
+        "maximum_relative_precipitation_difference": 1.0312163268223732e-10,
+        "reproduced_physics_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "generation": {
+          "path": "/tmp/terluna-size-reproduce-e5vjqpm9/runs/separation_half_moon",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "3ca72a706f01b041933e83e3e222bb196c9662f853dc0a95dfc818951c6d4f85",
+        "execution_identity_checked": true
+      },
+      {
+        "case": "separation_half_moon_dt15",
+        "native_history_samples": 133,
+        "input_hash_count": 6,
+        "maximum_precipitation_difference_kg_m2": 7.16195245331619e-08,
+        "maximum_relative_precipitation_difference": 1.9942400639131404e-10,
+        "reproduced_physics_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "generation": {
+          "path": "/tmp/terluna-size-reproduce-qd4c3prt/runs/separation_half_moon_dt15",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "3259532ba2e317add178742f8838bef4cbc52862a0871ebcc95b99a9f6ae1366",
+        "execution_identity_checked": true
+      },
+      {
+        "case": "separation_half_earth_dt15",
+        "native_history_samples": 133,
+        "input_hash_count": 6,
+        "maximum_precipitation_difference_kg_m2": 1.480299260947504e-08,
+        "maximum_relative_precipitation_difference": 6.035162746498705e-11,
+        "reproduced_physics_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "generation": {
+          "path": "/tmp/terluna-size-reproduce-4000qvgv/runs/separation_half_earth_dt15",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "b8d43fdaa260d3254a84363c795e2fd6c48c17d3e232342f03086d86aac508e3",
+        "execution_identity_checked": true
+      },
+      {
+        "case": "separation_half_earth_dt5",
+        "native_history_samples": 133,
+        "input_hash_count": 6,
+        "maximum_precipitation_difference_kg_m2": 9.481269103162049e-09,
+        "maximum_relative_precipitation_difference": 3.842160068736629e-11,
+        "reproduced_physics_inputs": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "generation": {
+          "path": "/tmp/terluna-size-reproduce-fl75pcli/runs/separation_half_earth_dt5",
+          "python": "/home/kir/miniconda3/bin/python",
+          "numpy": "2.3.3"
+        },
+        "history_sha256": "eed0604fee20f863639e4ae8d29206b61d26e855ee05d0500588499c60e90cfe",
+        "execution_identity_checked": true
+      }
+    ],
+    "crystals": [
+      {
+        "case": "growth_earth_observed_dt10",
+        "physics_input_matches": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "execution_identity_checked": true,
+        "snapshot_count": 28,
+        "water": {
+          "raw_residual_range_kg_m2": [
+            3.836007086415712e-10,
+            3.8360161585417116e-10
+          ],
+          "initial_water_kg_m2": 3.8360796779208944e-10,
+          "corrected_maximum_absolute_residual_kg_m2": 7.259150518265434e-15,
+          "corrected_relative_residual": 5.38912007972718e-09,
+          "ice_deposition_relative_residual": 1.1004502444628231e-15,
+          "maximum_used_fraction_of_growth_ceiling": 4.751441935831364e-07
+        },
+        "air_ranges_after_first_step": {
+          "T": [
+            258.74999999999994,
+            258.74999999999994
+          ],
+          "PRES": [
+            100999.99999999999,
+            100999.99999999999
+          ],
+          "RH": [
+            100.04753069636831,
+            100.04753069636831
+          ]
+        },
+        "simulated_integrated_axis_growth_ratio": 0.11359301933744866,
+        "observed_integrated_axis_growth_ratio": 0.5091979737538789,
+        "history_sha256": "fcb24e6914f2ae2e75fe541f1f37931a360d190dd8d785333f0ff4a00059325c",
+        "analysis_sha256": "391b9a88d9ccf0e8c67fa21aa468677eaabb9a7a7e150e4b9af556004632a0a9"
+      },
+      {
+        "case": "growth_earth_observed_dt5",
+        "physics_input_matches": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "execution_identity_checked": true,
+        "snapshot_count": 28,
+        "water": {
+          "raw_residual_range_kg_m2": [
+            3.8359999332939406e-10,
+            3.836026311935444e-10
+          ],
+          "initial_water_kg_m2": 3.8360796779208944e-10,
+          "corrected_maximum_absolute_residual_kg_m2": 7.974462695381198e-15,
+          "corrected_relative_residual": 5.813709269927198e-09,
+          "ice_deposition_relative_residual": 4.013890672728194e-15,
+          "maximum_used_fraction_of_growth_ceiling": 6.007223939503909e-07
+        },
+        "air_ranges_after_first_step": {
+          "T": [
+            258.74999999999994,
+            258.74999999999994
+          ],
+          "PRES": [
+            100999.99999999999,
+            100999.99999999999
+          ],
+          "RH": [
+            100.04753069636831,
+            100.04753069636831
+          ]
+        },
+        "simulated_integrated_axis_growth_ratio": 0.11289774508941654,
+        "observed_integrated_axis_growth_ratio": 0.5091979737538789,
+        "history_sha256": "f163f2bbc496ce42d79e675b050560318ede52236e20e6bb86201fc05c15215f",
+        "analysis_sha256": "fa4d7fa0d7fcf477d2b4ee7d4a5a519b1a1f52dd2da040d594adaadead076958"
+      },
+      {
+        "case": "growth_earth_observed_dt1",
+        "physics_input_matches": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "execution_identity_checked": true,
+        "snapshot_count": 28,
+        "water": {
+          "raw_residual_range_kg_m2": [
+            3.835992208461988e-10,
+            3.836025020214435e-10
+          ],
+          "initial_water_kg_m2": 3.8360796779208944e-10,
+          "corrected_maximum_absolute_residual_kg_m2": 8.746945890667483e-15,
+          "corrected_relative_residual": 6.284355811333017e-09,
+          "ice_deposition_relative_residual": 4.9445639643145044e-15,
+          "maximum_used_fraction_of_growth_ceiling": 6.353383137802622e-07
+        },
+        "air_ranges_after_first_step": {
+          "T": [
+            258.74999999999994,
+            258.74999999999994
+          ],
+          "PRES": [
+            100999.99999999999,
+            100999.99999999999
+          ],
+          "RH": [
+            100.04753069636831,
+            100.04753069636831
+          ]
+        },
+        "simulated_integrated_axis_growth_ratio": 0.11232696709600141,
+        "observed_integrated_axis_growth_ratio": 0.5091979737538789,
+        "history_sha256": "a4163c25735d4d6ef0ed0444c4e319c3c0f0b8642d6f056ec29f47cb0c1b536a",
+        "analysis_sha256": "562c00507dd1f6db5a29ff27ed85a7dbbfc1638e00f6f622dae0a860731a2c82"
+      },
+      {
+        "case": "growth_earth_sphere_dt5",
+        "physics_input_matches": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "execution_identity_checked": true,
+        "snapshot_count": 28,
+        "water": {
+          "raw_residual_range_kg_m2": [
+            3.8359986781548284e-10,
+            3.836025144141162e-10
+          ],
+          "initial_water_kg_m2": 3.8360796779208944e-10,
+          "corrected_maximum_absolute_residual_kg_m2": 8.099976606605602e-15,
+          "corrected_relative_residual": 1.4183202690434757e-07,
+          "ice_deposition_relative_residual": 5.793631690180423e-15,
+          "maximum_used_fraction_of_growth_ceiling": 1.3962497037818953e-08
+        },
+        "air_ranges_after_first_step": {
+          "T": [
+            258.74999999999994,
+            258.74999999999994
+          ],
+          "PRES": [
+            100999.99999999999,
+            100999.99999999999
+          ],
+          "RH": [
+            100.04753069636831,
+            100.04753069636831
+          ]
+        },
+        "simulated_integrated_axis_growth_ratio": 0.2554806595044876,
+        "observed_integrated_axis_growth_ratio": 0.5091979737538789,
+        "history_sha256": "d1c13524798e3e0e8ee80306e634ecfbb4608460dd7058a7e77c9b7ac56ecb93",
+        "analysis_sha256": "4a97f0811f4d5d0d082ad810144e7c65766d7597f4f8d6f3a01c0d469214a62b"
+      },
+      {
+        "case": "growth_moon_observed_dt5",
+        "physics_input_matches": {
+          "init.conf": true,
+          "run.conf": true,
+          "env.txt": true,
+          "particles.pe000000": true,
+          "lunar_forcing.txt": true
+        },
+        "execution_identity_checked": true,
+        "snapshot_count": 28,
+        "water": {
+          "raw_residual_range_kg_m2": [
+            3.8359963420431215e-10,
+            3.836022477219298e-10
+          ],
+          "initial_water_kg_m2": 3.8360796779208944e-10,
+          "corrected_maximum_absolute_residual_kg_m2": 8.333587777297636e-15,
+          "corrected_relative_residual": 2.0858693431707375e-08,
+          "ice_deposition_relative_residual": 7.950357507542036e-16,
+          "maximum_used_fraction_of_growth_ceiling": 1.5319951543598698e-07
+        },
+        "air_ranges_after_first_step": {
+          "T": [
+            258.74999999999994,
+            258.74999999999994
+          ],
+          "PRES": [
+            100999.99999999999,
+            100999.99999999999
+          ],
+          "RH": [
+            100.04753069636831,
+            100.04753069636831
+          ]
+        },
+        "simulated_integrated_axis_growth_ratio": 0.16974664161762587,
+        "observed_integrated_axis_growth_ratio": 0.5091979737538789,
+        "history_sha256": "f2bcd060c12ffd0607600934aec18b71dfb82076dad88cc07584bd0d57dc9eee",
+        "analysis_sha256": "289d238f3f158f0a2499c13648e898ba4d621f4e3b4d22350a9ed98346fe10b0"
+      }
+    ],
+    "zero_separation_parity": {
+      "files": {
+        "lunar_arrivals.bin": {
+          "sha256": "7baa64e05a42efce812191c5de4267c5d0d0d65188bf792af6d7226c51344b60",
+          "identical": true
+        },
+        "lunar_ledger.txt": {
+          "sha256": "253e5ec648fbb616c96b4b34f126ce0fe5fb0879a93034c13774d26a69c92f5a",
+          "identical": true
+        },
+        "collision_observer.txt": {
+          "sha256": "b6dad063d28467cc6c13977f533cb1c09fe186b511bec44e177d0744c2ddce7b",
+          "identical": true
+        }
+      },
+      "numerical_history_arrays": {
+        "x": true,
+        "y": true,
+        "z": true,
+        "xh": true,
+        "yh": true,
+        "zh": true,
+        "lz": true,
+        "lzh": true,
+        "uz": true,
+        "uzh": true,
+        "CZ": true,
+        "CX": true,
+        "CY": true,
+        "FZ": true,
+        "FX": true,
+        "FY": true,
+        "CDZ": true,
+        "CDX": true,
+        "CDY": true,
+        "FDZ": true,
+        "FDX": true,
+        "FDY": true,
+        "LCZ": true,
+        "LFZ": true,
+        "LCDZ": true,
+        "UCZ": true,
+        "UFZ": true,
+        "UCDZ": true,
+        "CBFZ": true,
+        "CBFX": true,
+        "CBFY": true,
+        "FBFZ": true,
+        "FBFX": true,
+        "FBFY": true,
+        "CXG": true,
+        "CYG": true,
+        "FXG": true,
+        "FYG": true,
+        "CBFXG": true,
+        "CBFYG": true,
+        "FBFXG": true,
+        "FBFYG": true,
+        "height": true,
+        "height_xyw": true,
+        "height_uyz": true,
+        "height_xvz": true,
+        "height_uvz": true,
+        "height_uyw": true,
+        "height_xvw": true,
+        "height_uvw": true,
+        "lon": true,
+        "lon_uy": true,
+        "lon_xv": true,
+        "lon_uv": true,
+        "lat": true,
+        "lat_uy": true,
+        "lat_xv": true,
+        "lat_uv": true,
+        "topo": true,
+        "lsmask": true,
+        "time": true,
+        "time_bnds": true,
+        "DENS": true,
+        "QV": true,
+        "W": true,
+        "U": true,
+        "V": true,
+        "PT": true,
+        "PRES": true,
+        "T": true,
+        "RH": true,
+        "RHI": true,
+        "RAIN_sd": true,
+        "QC_sd": true,
+        "QR_sd": true,
+        "SNOW_sd": true,
+        "QI_sd": true,
+        "QS_sd": true,
+        "QG_sd": true,
+        "PREC_sd": true,
+        "QHYD_sd": true
+      },
+      "note": "NetCDF global build metadata differ after the progress commit; numerical arrays, arrivals and ledgers match exactly."
+    },
+    "growth_refinements": [
+      {
+        "left": "growth_earth_observed_dt10",
+        "right": "growth_earth_observed_dt5",
+        "endpoint_relative_change": {
+          "mass_kg": 0.01831040144208429,
+          "diameter_m": 0.010028988379239268,
+          "thickness_m": -0.0018089022343890093
+        },
+        "maximum_relative_change_over_sampled_trajectory": {
+          "mass_kg": 0.028490211989143477,
+          "diameter_m": 0.0146086216054373,
+          "thickness_m": 0.0018089022343890093
+        },
+        "evidence": "Measured numerical sensitivity; no asymptotic convergence or observational acceptance inferred."
+      },
+      {
+        "left": "growth_earth_observed_dt5",
+        "right": "growth_earth_observed_dt1",
+        "endpoint_relative_change": {
+          "mass_kg": 0.014723113528541942,
+          "diameter_m": 0.008097109629038535,
+          "thickness_m": -0.0015099158822337033
+        },
+        "maximum_relative_change_over_sampled_trajectory": {
+          "mass_kg": 0.022884517625413103,
+          "diameter_m": 0.011790345539149483,
+          "thickness_m": 0.0015099158822337033
+        },
+        "evidence": "Measured numerical sensitivity; no asymptotic convergence or observational acceptance inferred."
+      }
+    ]
+  },
+  "geometry_refinement_screens": [
+    {
+      "label": "zero-separation full-column parity",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 0.0,
+        "mass_d50_m": 0.0,
+        "mass_d90_m": 0.0,
+        "mass_d99_m": 0.0
+      },
+      "maximum_mass_cdf_difference": 0.0,
+      "passed": true,
+      "screen": "At most 5% flux/d50/d90/d99 change and 0.05 exact equal-column mass-CDF distance.",
+      "left": "size_moon_baseline",
+      "right": "separation_zero_moon",
+      "query_grid_mass_cdf_difference": 0.0,
+      "exact_mass_cdf_difference": 0.0,
+      "exact_mass_cdf_difference_at_m": 0.0007744296491638565
+    },
+    {
+      "label": "lunar geometry sensitivity",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 0.06082436051130857,
+        "mass_d50_m": 0.6893992072873396,
+        "mass_d90_m": 1.3239868583781687,
+        "mass_d99_m": 1.4877653275686287
+      },
+      "maximum_mass_cdf_difference": 0.4674260460487921,
+      "passed": null,
+      "screen": "Physical sensitivity or seed variation; no pass/fail criterion.",
+      "left": "size_moon_baseline",
+      "right": "separation_half_moon",
+      "query_grid_mass_cdf_difference": 0.4658885549510837,
+      "exact_mass_cdf_difference": 0.4674260460487921,
+      "exact_mass_cdf_difference_at_m": 0.0025292085087747366
+    },
+    {
+      "label": "lunar timestep refinement",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 5.37420413651013e-05,
+        "mass_d50_m": 0.020512685297700006,
+        "mass_d90_m": 0.015827391172861027,
+        "mass_d99_m": 0.00911979571027599
+      },
+      "maximum_mass_cdf_difference": 0.012505794378271595,
+      "passed": true,
+      "screen": "At most 5% flux/d50/d90/d99 change and 0.05 exact equal-column mass-CDF distance.",
+      "left": "separation_half_moon",
+      "right": "separation_half_moon_dt15",
+      "query_grid_mass_cdf_difference": 0.011908744150532113,
+      "exact_mass_cdf_difference": 0.012505794378271595,
+      "exact_mass_cdf_difference_at_m": 0.003867072929035093
+    },
+    {
+      "label": "Earth geometry sensitivity at 15 s",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 0.025758615947807595,
+        "mass_d50_m": 0.004914606252612641,
+        "mass_d90_m": 0.27708686768722135,
+        "mass_d99_m": 0.3928226869135565
+      },
+      "maximum_mass_cdf_difference": 0.17879563338663873,
+      "passed": null,
+      "screen": "Physical sensitivity or seed variation; no pass/fail criterion.",
+      "left": "size_earth_shallow_dt15_p3",
+      "right": "separation_half_earth_dt15",
+      "query_grid_mass_cdf_difference": 0.17789871361148468,
+      "exact_mass_cdf_difference": 0.17879563338663873,
+      "exact_mass_cdf_difference_at_m": 0.0009642431290311469
+    },
+    {
+      "label": "Earth geometry sensitivity at 5 s",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 0.025902577475477084,
+        "mass_d50_m": 0.004605045743174108,
+        "mass_d90_m": 0.27504800330857626,
+        "mass_d99_m": 0.3939938272098842
+      },
+      "maximum_mass_cdf_difference": 0.17739227829447335,
+      "passed": null,
+      "screen": "Physical sensitivity or seed variation; no pass/fail criterion.",
+      "left": "size_earth_shallow_dt5_p1",
+      "right": "separation_half_earth_dt5",
+      "query_grid_mass_cdf_difference": 0.1765801918967569,
+      "exact_mass_cdf_difference": 0.17739227829447335,
+      "exact_mass_cdf_difference_at_m": 0.000969467449252089
+    },
+    {
+      "label": "Earth timestep refinement",
+      "status": "complete",
+      "relative_changes": {
+        "snowfall_mm_h": 0.0058592311335690095,
+        "mass_d50_m": 0.005296665727527294,
+        "mass_d90_m": 0.004641803701447955,
+        "mass_d99_m": 0.008690612037292489
+      },
+      "maximum_mass_cdf_difference": 0.06424247577896247,
+      "passed": false,
+      "screen": "At most 5% flux/d50/d90/d99 change and 0.05 exact equal-column mass-CDF distance.",
+      "left": "separation_half_earth_dt15",
+      "right": "separation_half_earth_dt5",
+      "query_grid_mass_cdf_difference": 0.043514353877412204,
+      "exact_mass_cdf_difference": 0.06424247577896247,
+      "exact_mass_cdf_difference_at_m": 0.0007472782257090671
+    }
+  ],
+  "gathering_diagnostics": {
+    "separation_zero_moon": {
+      "gathering_block_count": 4,
+      "relative_peak_to_peak": {
+        "d50": 0.007812927830215881,
+        "d99": 0.05319520505348717,
+        "snowfall": 0.004461558472535923
+      },
+      "arriving_monomer_flux_to_injected": 0.9991007771334472,
+      "note": "Descriptive gathering-window variation and stationary flux check; not an exact full-run suspended-monomer ledger or statistical convergence test."
+    },
+    "separation_half_moon": {
+      "gathering_block_count": 4,
+      "relative_peak_to_peak": {
+        "d50": 0.031644357240740155,
+        "d99": 0.01678834550025412,
+        "snowfall": 0.003562493867253233
+      },
+      "arriving_monomer_flux_to_injected": 1.0001632664252105,
+      "note": "Descriptive gathering-window variation and stationary flux check; not an exact full-run suspended-monomer ledger or statistical convergence test."
+    },
+    "separation_half_moon_dt15": {
+      "gathering_block_count": 4,
+      "relative_peak_to_peak": {
+        "d50": 0.013252818764270497,
+        "d99": 0.02616042755932244,
+        "snowfall": 0.005355475461429069
+      },
+      "arriving_monomer_flux_to_injected": 1.0008094983058275,
+      "note": "Descriptive gathering-window variation and stationary flux check; not an exact full-run suspended-monomer ledger or statistical convergence test."
+    },
+    "separation_half_earth_dt15": {
+      "gathering_block_count": 4,
+      "relative_peak_to_peak": {
+        "d50": 0.00038453326174863503,
+        "d99": 0.004011302100639799,
+        "snowfall": 0.0015510291057614337
+      },
+      "arriving_monomer_flux_to_injected": 1.000101801868672,
+      "note": "Descriptive gathering-window variation and stationary flux check; not an exact full-run suspended-monomer ledger or statistical convergence test."
+    },
+    "separation_half_earth_dt5": {
+      "gathering_block_count": 4,
+      "relative_peak_to_peak": {
+        "d50": 9.939151067804384e-05,
+        "d99": 0.007967172034370374,
+        "snowfall": 0.0007315832900788799
+      },
+      "arriving_monomer_flux_to_injected": 0.9999813382274804,
+      "note": "Descriptive gathering-window variation and stationary flux check; not an exact full-run suspended-monomer ledger or statistical convergence test."
+    }
+  },
+  "producer_versions": {
+    "initial_growth_configurator": {
+      "path": "research/runs/snow_scale/crystal_growth_initial_producer.py",
+      "sha256": "1b5459f89ef9bee8fbfbf8782d95f1a3a7309d994a010e7ee58e7862f6d81189",
+      "cases": [
+        "growth_earth_observed_dt10",
+        "growth_earth_observed_dt5",
+        "growth_earth_sphere_dt5",
+        "growth_moon_observed_dt5"
+      ]
+    },
+    "refined_growth_configurator": {
+      "path": "atmosphere/snow/scale_crystal_growth.py",
+      "sha256": "8bb22919f805f10a836bdd1984539f872a44de439924d7f61883e390e015b905",
+      "note": "Adds 1 s support. Regenerates all five original physics input files exactly for each earlier case."
+    }
+  },
+  "source_and_editorial_review": [
+    "Inspected active native growth, aggregation and forcing branches; source pins retained in scale_size_sources.json.",
+    "Read relevant primary sections with retrieval and reading extent recorded in scale_limitations_sources.json; visually inspected original Takahashi Table 2.",
+    "Read the completed report and its new current-synthesis paragraphs; checked values against the saved products."
+  ],
+  "failed_attempts": [
+    {
+      "action": "research/check.py with default output under read-only sandbox",
+      "result": "Permission error writing research/runs/checks.json after computation; no scientific result recorded from this attempt.",
+      "resolution": "Reran with authorized atmosphere-worktree output access; PASS recorded."
+    }
+  ],
+  "unperformed": [
+    "Full make check after the post-commit experiments.",
+    "Additional particle-count, height and random-seed controls for offset geometry.",
+    "An asymptotic convergence study of the isolated growth equation.",
+    "Earth growth comparison at other temperatures and habits, or a calibrated replacement growth closure.",
+    "Observed Earth aggregate-population reproduction, lunar habit validation, mechanical breakup and storm optics."
+  ],
+  "logs": {
+    "limitations_tests.log": "ea30db0704bbc47a0cf2280ba44605366d05a2fdef58ee6495a275c2ab66531c",
+    "limitations_layers.log": "6d2bb0bb9a3ab0432f8cf98cadb1faf96b3b0a4f201b4a9444f05a8fe6389e2a",
+    "limitations_research_check.json": "4c8be0cacc7bae8d7d91b3adc2b560cdbdc178cc3ea0956eef823d063815d050",
+    "limitations_verification.log": "13cb1b1a70ac49be5c83e333b6272b52b3b0d0fa782664c5e520ac785fd41f00",
+    "separation_column_driver.log": "5f814dc99d3a6b882652223ff4f5cbc28448719422f8d4791d823f8cf0825b60",
+    "crystal_growth_driver.log": "02dcb516769ff5c4bbd59b70054bee7f9d9f947e4d5ebf53d58ae4023f7515e8",
+    "crystal_growth_refinement_driver.log": "6e908fa19ea594b06330b7b6970ab3d042fe7c044dc2bfe2c0f293033aeb9054"
+  },
+  "files": {
+    "atmosphere/README.md": "1fa1c034e686e7cc79655aeef1a3d7cd4f2fdc0260c6b2e82bf00587fc590524",
+    "atmosphere/snow/README.md": "7aba9c9869fb3e841dbefdcc951e32c9f052bf4e235e226b3f7e239377a66ca8",
+    "atmosphere/snow/analysis.md": "6547bd828aaf0c803555f688370fd863c55daa4393cce31206682eb106adb448",
+    "research/status.json": "ce5ca4411616548407d569d0fe7be4f127afc2f5f8a930fc9ad594f0823f132f",
+    "atmosphere/snow/scale_separation.py": "306828b8858a6c1700d55ae0d1062c80d3ac5b6e03f2a591b786369ea38a8ae7",
+    "atmosphere/snow/scale_crystal_growth.py": "8bb22919f805f10a836bdd1984539f872a44de439924d7f61883e390e015b905",
+    "atmosphere/snow/scale_limitations_verify.py": "33ce7f802c991a071e718cf2f3977d8215d269e894f8e009c9e97a2946b705cc",
+    "atmosphere/snow/scale_limitations.md": "8b6d2c2a77dac17460d934cf919184a994692541bf7596d277193b7e366eb780",
+    "atmosphere/snow/scale_limitations_sources.json": "ae8dc1bb340252a54d1bef0a1b466372542489d0dc8205fa0df135ca955cc4c1",
+    "atmosphere/snow/results/scale_separation.json": "04f6c8f1c9ce80d96d42949706e4de9e1f7371f3aa4f1d475a729f5b6694ed85",
+    "atmosphere/snow/results/scale_crystal_growth.json": "92bff3b488374afc0c2b0763214bf9f66d6a8aadd46cb5dc688f5f2350bd8d3e",
+    "atmosphere/tests/test_snow_scale_separation.py": "d379d9127f7708aba3121a9315cbdfdcf30556f290cc605c3ebbb34fbf4fa343",
+    "atmosphere/tests/test_snow_scale_crystal_growth.py": "9c882b8f44d5cb407f1967e060c5db12ef8f2eca192a672ffddf6563ab0d28b8"
+  },
+  "full_repository_check_previous_checkpoint": {
+    "scope": "Preceding checkpoint only",
+    "record": "scale_progress_checks.json",
+    "python_passed": 3236,
+    "python_skipped": 20,
+    "javascript_passed": 191,
+    "exit_code": 0,
+    "repeated_after_experiments": false
+  }
+}
