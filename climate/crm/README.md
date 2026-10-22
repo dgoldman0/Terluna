@@ -1735,6 +1735,43 @@ PlaSim should rain at those hours. The land box runs with the same changes as th
 heats and cools with the Sun, where the sea box's water is held at one temperature. PlaSim's replacement scheme is
 planned in [the GCM's account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october).
 
+**The land box with the three changes** (21 October; its second lunar day;
+[box_budget_box_0e_design.json](../results/crm/box_budget_box_0e_design.json),
+[box_box_0e_design.json](../results/crm/box_box_0e_design.json)). It ran its 59 days in 2.3 hours.
+- **Closure.** Its water budget closes to 0.04 mm/day, and its boundary layer passes on 0.997 times the ground's
+  evaporation.
+- **Rain.** It rained 3.28 mm/day over the second lunar day, 92% of the GCM's 3.58 on the same four land cells, and
+  1.84 mm/day over its first.
+- **Its water.** The ground evaporates 2.86 mm/day, against the GCM's 3.42, and the prescribed day-night forcing brings
+  it 1.37 mm/day. Its column was still gaining 0.60 mm/day.
+- **The share.** 61% of the water falling from its clouds evaporates on the way down.
+
+Over land the two models rain at the same hours (mm/day):
+
+| Second lunar day | Land box | GCM |
+|---|---|---|
+| Sunrise to noon | 2.87 | 1.91 |
+| Noon to sunset | 8.59 | 11.06 |
+| Sunset to midnight | 1.53 | 0.96 |
+| Midnight to sunrise | 0.07 | 0.21 |
+
+Both rain mostly through the afternoon and barely after midnight, because over land the ground's evaporation follows
+the Sun and leaves Kuo's scheme little to rain at night. The sea box's gap is the sea's own: there the evaporation
+goes on through the night, Kuo's scheme rains it, and the sinking air keeps CM1's convection down.
+
+**What the pair says of gamma** ([rain_evaporation.json](../results/gcm/rain_evaporation.json)). Both boxes evaporate
+61% of their falling water. PlaSim at one gamma evaporates far more over the sea than on land: 75.8% against 58.2% at
+0.04. So the sea box's 61% comes at gamma 0.027, while the land box's lies beyond PlaSim's land share at 0.04, about
+0.046 if the shares are extended in log gamma. No single constant fits both places, which points at the form of
+PlaSim's evaporation of falling rain rather than its constant alone. Both shares are provisional: each box drifts
+still, the sea box's upper air cooling and the land box's column gaining water.
+
+**The near-ground gap, with the boundary layer fixed.** The rings of September ran 2.4–4.7 °C warmer than the GCM
+near the ground over land and 1.8–2.4 °C over the seas, which made the GCM look cool. The corrected boxes' air at
+2 m runs 1.15 K warmer than the GCM's over land and 0.23 K over the sea, at the same cells over the second lunar
+day. So most of that gap was CM1's boundary layer passing on its density times the surface's heat and water. A
+corrected rerun of a reference ring would show how much of it the rings carried.
+
 ```sh
 /media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
 climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about ten seconds

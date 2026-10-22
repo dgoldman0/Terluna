@@ -26,14 +26,14 @@
   "box_0e_design": {
    "region": "cm1_box",
    "about": "the land at 0 E on the design climate, forced by the GCM alone, the lunar rain limits and rain law",
-   "share_of_falling_water_evaporated": null,
+   "share_of_falling_water_evaporated": 0.609,
    "gamma": null
   },
   "box_near_side_sea": {
    "region": "near_side_sea",
    "about": "the Near-side Sea at 5 S, 45 W on the design climate, forced by the GCM alone, the lunar rain limits and rain law",
-   "share_of_falling_water_evaporated": null,
-   "gamma": null
+   "share_of_falling_water_evaporated": 0.608,
+   "gamma": 0.026861808011359515
   }
  },
  "cm1_limits_control": 0.857,
@@ -356,6 +356,8 @@
   },
   "inputs": {
    "climate/results/crm/box_box_0e_small_lunar_rain_day29.json": "5da1c0c28ed1339f",
+   "climate/results/crm/box_box_0e_design.json": "4d7ea0ec731a4ca3",
+   "climate/results/crm/box_box_near_side_sea.json": "3045068bd8eac732",
    "climate/results/crm/box_box_0e_small_rain_control_day29.json": "a8befc2578ad0fb1"
   }
  }

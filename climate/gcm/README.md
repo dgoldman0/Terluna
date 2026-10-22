@@ -1703,9 +1703,12 @@ forcing through the column, the air held only above the GCM's convection, and th
 - **The sea box** now convects to about 70 km. It rains 31% of the GCM's rain and evaporates 61% of its falling water,
   gamma about 0.027 by the pooled shares. That figure is provisional: the box's upper air was still cooling, and its
   rain falls at other hours than PlaSim's (below).
-- **The land box** runs as its twin.
+- **The land box** rains 92% of the GCM's rain at the same hours of the day, and also evaporates 61% of its falling
+  water. Over that land PlaSim evaporates only 58.2% even at 0.04, so the land wants about 0.046, beyond the runs.
 
-The design run's constant waits for both, and for PlaSim's convection (below).
+No single constant fits both places. At one gamma PlaSim evaporates far more of its rain over the sea than on land,
+75.8% against 58.2% at 0.04, while CM1 evaporates about the same at both. The design run's constant waits on that,
+and on PlaSim's convection (below).
 
 The runner's `--rain-evaporation GAMMA` writes the constant into PlaSim's rain namelist, recorded in the run's
 configuration only when given.
@@ -1766,14 +1769,27 @@ vapour it removes in proportion to the relaxation rate, leaves dry and stable co
 too dry to rain to the shallow scheme, and with mixing cools the parcel through its convecting layers. The patch
 applies once to ExoPlaSim's own `rainmod.f90` with Kuo's path kept. On the Near-side Sea's mean column from the
 GCM the scheme rains only with a reference humidity of 60% or less, so the reference humidity is the first thing
-the branches have to fit. Still to come:
-1. In the GCM: `nprc` 1 matching the unpatched model bit for bit, and the patched model compiling and running.
-2. Speed: one model year with each scheme, about 4 minutes each now.
-3. Branches of the design climate from its year-19 restart, with a few values of the two parameters, 3–5 years each.
-4. CM1 boxes at the Near-side Sea and 0° E forced by the new GCM's own budget, compared on rain by time of day, total
-   rain and the heights where it forms; the parameters are chosen by the match.
-5. The design climate's global checks, with the energy diagnostics and the exobase check that follows every change to
-   the GCM's physics.
+the branches have to fit.
+
+**In the GCM** (21 October; `run_after_pair.sh` on the research drive). One year through the patched model with Kuo's
+scheme from the design climate's year-19 restart, `A28R_301k_cold_kuo_check`, matches `A28R_301k_cold_moist`'s year 0
+bit for bit, in 237 s against 233 s. One year of the new scheme at a reference humidity of 0.6,
+`A28R_301k_cold_sbm_smoke`, ran without fault in 236.5 s, Kuo's speed. Against Kuo's year it ends:
+
+| After one year | New scheme, rh 0.6 | Kuo |
+|---|---|---|
+| Ground | 298.66 K | 298.41 K |
+| Air at 2 m | 299.03 K | 298.22 K |
+| Rain | 2.39 mm/day | 2.19 mm/day |
+| Cloud cover | 36% | 35% |
+| Longwave cloud warming | 52.0 W/m² | 48.7 W/m² |
+| Imbalance at the top of the air | +3.76 W/m² | +0.07 W/m² |
+
+So it is still warming after its first year, and its settled climate needs longer runs. Two 15-year branches from the
+same restart run at the author's go-ahead of 22 October (`run_sbm_branches.sh`): `A28R_301k_cold_sbm_rh07` at
+Frierson's settings and `A28R_301k_cold_sbm_rh06` at a reference humidity of 0.6. Then come the settling, longwave and
+exobase checks on them, before CM1 boxes forced by the new GCM's own budget are compared on rain by time of day, total
+rain and the heights where it forms.
 
 Its adoption for the design climate is the author's call once these are in. It would change the convective rain maps
 the electricity study reads ([convection.py](convection.py)).
