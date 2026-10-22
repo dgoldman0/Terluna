@@ -1,0 +1,576 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-22T19:50:59.116111+00:00",
+  "scope": "Primary-data acquisition and light analogue review; no model calibration",
+  "dataset": {
+    "doi": "10.5281/zenodo.15804055",
+    "version": "v1",
+    "publication_date": "2025-07-04",
+    "rights": [
+      {
+        "description": {
+          "en": "The Creative Commons Attribution license allows re-distribution and re-use of a licensed work on the condition that the creator is appropriately credited."
+        },
+        "icon": "cc-by-icon",
+        "id": "cc-by-4.0",
+        "props": {
+          "scheme": "spdx",
+          "url": "https://creativecommons.org/licenses/by/4.0/legalcode"
+        },
+        "title": {
+          "en": "Creative Commons Attribution 4.0 International"
+        }
+      }
+    ],
+    "laboratory_attribution": "Takahashi et al.1991 doi10.2151/jmsj1965.69.1_15, with permission of Tsuneya Takahashi according to source Readme",
+    "code_doi": "10.5281/zenodo.15804067",
+    "code_license": "BSD-3-Clause in downloaded f07.py and f08.py headers"
+  },
+  "retrieval_attempts": [
+    {
+      "key": "matsuo_fukuta1987",
+      "url": "https://www.jstage.jst.go.jp/article/mripapers/38/4/38_4_247/_pdf/-char/en",
+      "retrieved_utc": "2026-10-22T19:45:29.594425+00:00",
+      "status": "failed",
+      "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+    },
+    {
+      "key": "kobayashi1958",
+      "url": "https://www.jstage.jst.go.jp/article/jmsj1923/36/5/36_5_193/_pdf",
+      "retrieved_utc": "2026-10-22T19:45:29.601947+00:00",
+      "status": "failed",
+      "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+    },
+    {
+      "key": "gonda1976",
+      "url": "https://www.jstage.jst.go.jp/article/jmsj1965/54/4/54_4_233/_pdf",
+      "retrieved_utc": "2026-10-22T19:45:29.602097+00:00",
+      "status": "failed",
+      "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+    },
+    {
+      "key": "connolly2012",
+      "url": "https://acp.copernicus.org/articles/12/2055/2012/acp-12-2055-2012.pdf",
+      "retrieved_utc": "2026-10-22T19:45:29.602203+00:00",
+      "status": "failed",
+      "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+    },
+    {
+      "key": "barrett2019",
+      "url": "https://acp.copernicus.org/articles/19/5753/2019/acp-19-5753-2019.pdf",
+      "retrieved_utc": "2026-10-22T19:45:29.602276+00:00",
+      "status": "failed",
+      "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+    },
+    {
+      "key": "bailey_hallett2004",
+      "url": "https://journals.ametsoc.org/downloadpdf/journals/atsc/61/5/1520-0469_2004_061_0514_grahoi_2.0.co_2.pdf",
+      "retrieved_utc": "2026-10-22T19:45:29.602351+00:00",
+      "status": "failed",
+      "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+    },
+    {
+      "key": "furukawa2014",
+      "url": "https://www.jstage.jst.go.jp/article/ijmsa/31/3/31_93/_pdf",
+      "retrieved_utc": "2026-10-22T19:45:29.602416+00:00",
+      "status": "failed",
+      "error": "<urlopen error [Errno -3] Temporary failure in name resolution>"
+    },
+    {
+      "key": "matsuo_fukuta1987",
+      "url": "https://www.jstage.jst.go.jp/article/mripapers/38/4/38_4_247/_pdf/-char/en",
+      "retrieved_utc": "2026-10-22T19:45:36.742314+00:00",
+      "network": "escalated",
+      "final_url": "https://www.jstage.jst.go.jp/article/mripapers/38/4/38_4_247/_pdf/-char/en",
+      "content_type": "application/pdf;charset=UTF-8",
+      "path": "/tmp/terluna-growth-environments/matsuo_fukuta1987.pdf",
+      "bytes": 2921202,
+      "sha256": "1ca34b39478a7abc55227db00eb98e59bdb5de2617cef4a5776be280ca6efb4c",
+      "status": "retrieved"
+    },
+    {
+      "key": "kobayashi1958",
+      "url": "https://www.jstage.jst.go.jp/article/jmsj1923/36/5/36_5_193/_pdf",
+      "retrieved_utc": "2026-10-22T19:45:48.972807+00:00",
+      "network": "escalated",
+      "status": "failed",
+      "error": "[Errno 104] Connection reset by peer"
+    },
+    {
+      "key": "gonda1976",
+      "url": "https://www.jstage.jst.go.jp/article/jmsj1965/54/4/54_4_233/_pdf",
+      "retrieved_utc": "2026-10-22T19:46:11.147824+00:00",
+      "network": "escalated",
+      "final_url": "https://www.jstage.jst.go.jp/article/jmsj1965/54/4/54_4_233/_pdf",
+      "content_type": "application/pdf;charset=UTF-8",
+      "path": "/tmp/terluna-growth-environments/gonda1976.pdf",
+      "bytes": 1469961,
+      "sha256": "08c32270d74949c84ec9111a0deedb7c6395e6ceec4a445da2271bb07a05ad4c",
+      "status": "retrieved"
+    },
+    {
+      "key": "connolly2012",
+      "url": "https://acp.copernicus.org/articles/12/2055/2012/acp-12-2055-2012.pdf",
+      "retrieved_utc": "2026-10-22T19:46:19.050792+00:00",
+      "network": "escalated",
+      "final_url": "https://acp.copernicus.org/articles/12/2055/2012/acp-12-2055-2012.pdf",
+      "content_type": "application/pdf",
+      "path": "/tmp/terluna-growth-environments/connolly2012.pdf",
+      "bytes": 5086978,
+      "sha256": "7a980302e5067ec5ed1e9531a3bb4c9143ac8936eb1830ec22be5ee578e0c59e",
+      "status": "retrieved"
+    },
+    {
+      "key": "barrett2019",
+      "url": "https://acp.copernicus.org/articles/19/5753/2019/acp-19-5753-2019.pdf",
+      "retrieved_utc": "2026-10-22T19:46:25.895160+00:00",
+      "network": "escalated",
+      "final_url": "https://acp.copernicus.org/articles/19/5753/2019/acp-19-5753-2019.pdf",
+      "content_type": "application/pdf",
+      "path": "/tmp/terluna-growth-environments/barrett2019.pdf",
+      "bytes": 5592866,
+      "sha256": "86f6c77a670982d18d16d5acd5ec96bfc05da13a7377e51e52f2744b596f0611",
+      "status": "retrieved"
+    },
+    {
+      "key": "bailey_hallett2004",
+      "url": "https://journals.ametsoc.org/downloadpdf/journals/atsc/61/5/1520-0469_2004_061_0514_grahoi_2.0.co_2.pdf",
+      "retrieved_utc": "2026-10-22T19:46:32.341600+00:00",
+      "network": "escalated",
+      "status": "failed",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "key": "furukawa2014",
+      "url": "https://www.jstage.jst.go.jp/article/ijmsa/31/3/31_93/_pdf",
+      "retrieved_utc": "2026-10-22T19:46:32.604331+00:00",
+      "network": "escalated",
+      "final_url": "https://www.jstage.jst.go.jp/article/ijmsa/31/3/31_93/_pdf",
+      "content_type": "application/pdf;charset=UTF-8",
+      "path": "/tmp/terluna-growth-environments/furukawa2014.pdf",
+      "bytes": 1149406,
+      "sha256": "8f73067c8bec5f65bd5356dd62f2ad20db6cb472293c9a8de0b21aa80c3cf68e",
+      "status": "retrieved"
+    },
+    {
+      "filename": "fuchs2025_data_metadata.json",
+      "url": "https://zenodo.org/api/records/15804055",
+      "retrieved_utc": "2026-10-22T19:46:57.128922+00:00",
+      "status": "failed",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "filename": "1991_takahashi.xlsx",
+      "url": "https://zenodo.org/records/15804055/files/1991_takahashi.xlsx?download=1",
+      "retrieved_utc": "2026-10-22T19:46:57.129511+00:00",
+      "status": "failed",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "filename": "fuchs2025_Readme.txt",
+      "url": "https://zenodo.org/records/15804055/files/Readme.txt?download=1",
+      "retrieved_utc": "2026-10-22T19:46:57.507319+00:00",
+      "status": "failed",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "filename": "ice_times_drone_dist_grt_python.csv",
+      "url": "https://zenodo.org/records/15804055/files/ice_times_drone_dist_grt_python.csv?download=1",
+      "retrieved_utc": "2026-10-22T19:46:57.508201+00:00",
+      "status": "failed",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "filename": "fuchs2025_f07.py",
+      "url": "https://zenodo.org/records/15804067/files/f07.py?download=1",
+      "retrieved_utc": "2026-10-22T19:46:57.846384+00:00",
+      "status": "failed",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "filename": "bailey_hallett2002_ams.pdf",
+      "url": "https://ams.confex.com/ams/pdfpapers/42237.pdf",
+      "retrieved_utc": "2026-10-22T19:46:57.865437+00:00",
+      "final_url": "https://ams.confex.com/ams/pdfpapers/42237.pdf",
+      "content_type": "application/pdf",
+      "path": "/tmp/terluna-growth-environments/bailey_hallett2002_ams.pdf",
+      "bytes": 738469,
+      "sha256": "7c2450c14aca3408b7ead8db243d0721979be1698cdad5c4479e3c8ffa3db38e",
+      "md5": "32e2d2e34107e41352f828ec5f098a8b",
+      "status": "retrieved"
+    },
+    {
+      "filename": "takahashi2018_ams.pdf",
+      "url": "https://ams.confex.com/ams/15CLOUD15ATRAD/webprogram/Manuscript/Paper347181/105TAKAHASHI.pdf",
+      "retrieved_utc": "2026-10-22T19:46:58.301124+00:00",
+      "final_url": "https://ams.confex.com/ams/15CLOUD15ATRAD/webprogram/Manuscript/Paper347181/105TAKAHASHI.pdf",
+      "content_type": "application/pdf",
+      "path": "/tmp/terluna-growth-environments/takahashi2018_ams.pdf",
+      "bytes": 608258,
+      "sha256": "06a87318db2cc1831add739d305e2923fd4f361896ba1b5d8ade49a943d14f49",
+      "md5": "e4f224b2df4b4ad3ba25772ef91a2270",
+      "status": "retrieved"
+    },
+    {
+      "filename": "1991_takahashi.xlsx",
+      "url": "https://zenodo.org/records/15804055/files/1991_takahashi.xlsx",
+      "retrieved_utc": "2026-10-22T19:47:19.695985+00:00",
+      "content_type": "application/octet-stream",
+      "path": "/tmp/terluna-growth-environments/1991_takahashi.xlsx",
+      "bytes": 16622,
+      "sha256": "bfb05429b98aa4c5857f07a42f9594ddc8d1c7b9969baa025a1c34e448d72a63",
+      "md5": "ecb41c07eab7982cadeff694c4f45418",
+      "status": "retrieved"
+    },
+    {
+      "filename": "fuchs2025_Readme.txt",
+      "url": "https://zenodo.org/record/15804055/files/Readme.txt",
+      "retrieved_utc": "2026-10-22T19:47:20.240541+00:00",
+      "content_type": "text/plain; charset=utf-8",
+      "path": "/tmp/terluna-growth-environments/fuchs2025_Readme.txt",
+      "bytes": 1304,
+      "sha256": "0dda80f863fb08067d0ac37365b99118d849250ba9b019f6eed77889af10e5e3",
+      "md5": "681bfe4d6889cc40879b32e5641ccafc",
+      "status": "retrieved"
+    },
+    {
+      "filename": "fuchs2025_code.json",
+      "url": "https://zenodo.org/records/15804067/export/json",
+      "retrieved_utc": "2026-10-22T19:47:20.982984+00:00",
+      "content_type": "application/json",
+      "path": "/tmp/terluna-growth-environments/fuchs2025_code.json",
+      "bytes": 22232,
+      "sha256": "1e17709f397b06a71ad44b9257363267c4855882dec91a2ac0b543ca7e2ea26b",
+      "md5": "f3005bdd0e6f5341180ee6dcd3cd8c72",
+      "status": "retrieved"
+    },
+    {
+      "filename": "fuchs2025_data.json",
+      "url": "https://zenodo.org/records/15804055/export/json",
+      "retrieved_utc": "2026-10-22T19:47:21.623189+00:00",
+      "content_type": "application/json",
+      "path": "/tmp/terluna-growth-environments/fuchs2025_data.json",
+      "bytes": 30414,
+      "sha256": "a3054f537acf8cc49f37c4eba8671e4179bb110d1cc922fb9404f71dd0f69baf",
+      "md5": "7abe014a84830ec34cf9a9c13494c0c8",
+      "status": "retrieved"
+    },
+    {
+      "filename": "fuchs2025_f07.py",
+      "url": "https://zenodo.org/records/15804067/files/f07.py",
+      "retrieved_utc": "2026-10-22T19:47:22.412665+00:00",
+      "content_type": "application/octet-stream",
+      "path": "/tmp/terluna-growth-environments/fuchs2025_f07.py",
+      "bytes": 23726,
+      "sha256": "b80d760fed4a76c627fbd40d99526a5240fc6db95bc2193b3b7a6f695850c267",
+      "md5": "004dc2fae3caac7c1bcd76d283cb46e7",
+      "status": "retrieved"
+    },
+    {
+      "filename": "ice_times_drone_dist_grt_python.csv",
+      "url": "https://zenodo.org/records/15804055/files/ice_times_drone_dist_grt_python.csv",
+      "retrieved_utc": "2026-10-22T19:47:23.038695+00:00",
+      "content_type": "text/plain; charset=utf-8",
+      "path": "/tmp/terluna-growth-environments/ice_times_drone_dist_grt_python.csv",
+      "bytes": 22894,
+      "sha256": "386632fa6db809d8577bb957bf8103d15e209304e18c438dc4be4238fe2642ad",
+      "md5": "c40820f3c09a04da57f2d3a4e57a8f34",
+      "status": "retrieved"
+    },
+    {
+      "filename": "fuchs2025_f08.py",
+      "url": "https://zenodo.org/records/15804067/files/f08.py",
+      "retrieved_utc": "2026-10-22T19:47:49.528180+00:00",
+      "content_type": "application/octet-stream",
+      "path": "/tmp/terluna-growth-environments/fuchs2025_f08.py",
+      "bytes": 16170,
+      "sha256": "fb02485967792eec477718af09dbe21178344b6520c249a232c33e4b47760c76",
+      "md5": "d61efbdf00b8078a0cd8cccd1450c1b7",
+      "status": "retrieved"
+    },
+    {
+      "filename": "fuchs2025.pdf",
+      "url": "https://acp.copernicus.org/articles/25/12177/2025/acp-25-12177-2025.pdf",
+      "retrieved_utc": "2026-10-22T19:47:50.071036+00:00",
+      "content_type": "application/pdf",
+      "path": "/tmp/terluna-growth-environments/fuchs2025.pdf",
+      "bytes": 7110597,
+      "sha256": "5b3d8f99ebfc602d7dbfdc8042198b6c368616f5f2d281f8a55e0389d557a7f6",
+      "md5": "b5966dbaf2cacbf4a329697d0126ed79",
+      "status": "retrieved"
+    },
+    {
+      "filename": "fuchs2025_SM060.nc",
+      "url": "https://zenodo.org/records/15804055/files/2023-01-25_pdata_only_ice_with_water_ice_myphys_SM060.nc",
+      "retrieved_utc": "2026-10-22T19:47:58.967334+00:00",
+      "content_type": "application/octet-stream",
+      "path": "/tmp/terluna-growth-environments/fuchs2025_SM060.nc",
+      "bytes": 678042,
+      "sha256": "c20d00dbc9337ea1ab97f9b23f3b83244745a682127fd5b8046c04d81284489f",
+      "md5": "4a3f8212f2ba9973ddae0ce5314c9548",
+      "status": "retrieved"
+    }
+  ],
+  "files": [
+    {
+      "name": "1991_takahashi.xlsx",
+      "bytes": 16622,
+      "sha256": "bfb05429b98aa4c5857f07a42f9594ddc8d1c7b9969baa025a1c34e448d72a63",
+      "md5": "ecb41c07eab7982cadeff694c4f45418"
+    },
+    {
+      "name": "1991_takahashi_cells.json",
+      "bytes": 20517,
+      "sha256": "2d3a0862c51ab4ea26339e462fc1fb57435f78b329699da4b1e50664b89cc6b4",
+      "md5": "1cc858b02fe7acb71ab14c0719fa1338"
+    },
+    {
+      "name": "bailey_hallett2002_ams.pdf",
+      "bytes": 738469,
+      "sha256": "7c2450c14aca3408b7ead8db243d0721979be1698cdad5c4479e3c8ffa3db38e",
+      "md5": "32e2d2e34107e41352f828ec5f098a8b"
+    },
+    {
+      "name": "bailey_hallett2002_ams.txt",
+      "bytes": 34065,
+      "sha256": "8147a6183e6f78739ea643dece5720e519d1f4aa8bd4f555b6e925cdec8d3a76",
+      "md5": "1839148d08a9f0a0995603f0642fbc04"
+    },
+    {
+      "name": "barrett2019.pdf",
+      "bytes": 5592866,
+      "sha256": "86f6c77a670982d18d16d5acd5ec96bfc05da13a7377e51e52f2744b596f0611",
+      "md5": "69ac0b7f6557976d0d701dd6d2b2eece"
+    },
+    {
+      "name": "barrett2019.txt",
+      "bytes": 82554,
+      "sha256": "90baa27d1873784cfba633335d73d784f5123fa4adafb1c23201f7575e6f2aa6",
+      "md5": "2ad0f78a7fb4f1d4f381d0cb2bd6ed08"
+    },
+    {
+      "name": "connolly2012.pdf",
+      "bytes": 5086978,
+      "sha256": "7a980302e5067ec5ed1e9531a3bb4c9143ac8936eb1830ec22be5ee578e0c59e",
+      "md5": "4c945ccc5e61d493d1960e06990a53b5"
+    },
+    {
+      "name": "connolly2012.txt",
+      "bytes": 171610,
+      "sha256": "6d0880d8ad53a57be772504025f9d662d5f04fa3a6fccdaa1bdc9d4ca091fe58",
+      "md5": "4b4cb47dca795066c33294c623aa3e91"
+    },
+    {
+      "name": "data_quality.md",
+      "bytes": 2317,
+      "sha256": "8193778b7ba2a953d5478754524e998a277ed62b1a7813b757afad3c0441d02c",
+      "md5": "ec7461783fee7ab3408740b4635f342f"
+    },
+    {
+      "name": "fuchs2025.pdf",
+      "bytes": 7110597,
+      "sha256": "5b3d8f99ebfc602d7dbfdc8042198b6c368616f5f2d281f8a55e0389d557a7f6",
+      "md5": "b5966dbaf2cacbf4a329697d0126ed79"
+    },
+    {
+      "name": "fuchs2025_Readme.txt",
+      "bytes": 1304,
+      "sha256": "0dda80f863fb08067d0ac37365b99118d849250ba9b019f6eed77889af10e5e3",
+      "md5": "681bfe4d6889cc40879b32e5641ccafc"
+    },
+    {
+      "name": "fuchs2025_SM060.nc",
+      "bytes": 678042,
+      "sha256": "c20d00dbc9337ea1ab97f9b23f3b83244745a682127fd5b8046c04d81284489f",
+      "md5": "4a3f8212f2ba9973ddae0ce5314c9548"
+    },
+    {
+      "name": "fuchs2025_code.json",
+      "bytes": 22232,
+      "sha256": "1e17709f397b06a71ad44b9257363267c4855882dec91a2ac0b543ca7e2ea26b",
+      "md5": "f3005bdd0e6f5341180ee6dcd3cd8c72"
+    },
+    {
+      "name": "fuchs2025_data.json",
+      "bytes": 30414,
+      "sha256": "a3054f537acf8cc49f37c4eba8671e4179bb110d1cc922fb9404f71dd0f69baf",
+      "md5": "7abe014a84830ec34cf9a9c13494c0c8"
+    },
+    {
+      "name": "fuchs2025_f07.py",
+      "bytes": 23726,
+      "sha256": "b80d760fed4a76c627fbd40d99526a5240fc6db95bc2193b3b7a6f695850c267",
+      "md5": "004dc2fae3caac7c1bcd76d283cb46e7"
+    },
+    {
+      "name": "fuchs2025_f08.py",
+      "bytes": 16170,
+      "sha256": "fb02485967792eec477718af09dbe21178344b6520c249a232c33e4b47760c76",
+      "md5": "d61efbdf00b8078a0cd8cccd1450c1b7"
+    },
+    {
+      "name": "fuchs_additional_retrieval.json",
+      "bytes": 1427,
+      "sha256": "4512f0fd954d5264089ba1531edba0830e656557441c727be31152fc8d961d56",
+      "md5": "81bd1d1c2e34773c34955f88422eb4e0"
+    },
+    {
+      "name": "furukawa2014.pdf",
+      "bytes": 1149406,
+      "sha256": "8f73067c8bec5f65bd5356dd62f2ad20db6cb472293c9a8de0b21aa80c3cf68e",
+      "md5": "4275fa411e5e9509f697dbaef89325e0"
+    },
+    {
+      "name": "furukawa2014.txt",
+      "bytes": 38754,
+      "sha256": "66d37ac3bae5cba479293ad0e6fc2615d230c863ed36b9f898064d1c88c27e3e",
+      "md5": "99f71aac403ba3dd91cc0a700d8bf510"
+    },
+    {
+      "name": "gonda1976.pdf",
+      "bytes": 1469961,
+      "sha256": "08c32270d74949c84ec9111a0deedb7c6395e6ceec4a445da2271bb07a05ad4c",
+      "md5": "253ff3ef0b34cf53844fb074813a6b07"
+    },
+    {
+      "name": "gonda1976.txt",
+      "bytes": 41239,
+      "sha256": "a92175730a18951bb8799c3f22c683dd98539e3bb7132a658a5df0fa1c6d31ab",
+      "md5": "1c63ed6e57ecd81b60b1f1d9598d192b"
+    },
+    {
+      "name": "ice_times_drone_dist_grt_python.csv",
+      "bytes": 22894,
+      "sha256": "386632fa6db809d8577bb957bf8103d15e209304e18c438dc4be4238fe2642ad",
+      "md5": "c40820f3c09a04da57f2d3a4e57a8f34"
+    },
+    {
+      "name": "matsuo_fukuta1987.pdf",
+      "bytes": 2921202,
+      "sha256": "1ca34b39478a7abc55227db00eb98e59bdb5de2617cef4a5776be280ca6efb4c",
+      "md5": "a7a2bf54f259948c50ae9956d6ae24f3"
+    },
+    {
+      "name": "matsuo_fukuta1987.txt",
+      "bytes": 172615,
+      "sha256": "b2f95a41e6545d336752bbc00bcb2aca5ec5ccfab1f4b21c41d7c33607902f56",
+      "md5": "c83d1c3af0640332b45de9a1194a410e"
+    },
+    {
+      "name": "new_data_retrieval.json",
+      "bytes": 2414,
+      "sha256": "8bbc80769adc8828bbbbc584ae880843cdb303f274654493bd585dc8e1e24a99",
+      "md5": "06c6192cbe421e1c987a9b0d765f070e"
+    },
+    {
+      "name": "read_takahashi_workbook.py",
+      "bytes": 8084,
+      "sha256": "9842fa66c3805dc4b99b5ce270f17b2226acd8824196c6310a136ecc01148b83",
+      "md5": "f2fc4dd8b7fdfa718c1e13031132ffa4"
+    },
+    {
+      "name": "retrieval.json",
+      "bytes": 5243,
+      "sha256": "dd8a128913637bfed31b2a8f4747d9816100a96f183a58009cd922d14ff6c237",
+      "md5": "18612553cadc456d9f1975cd0c6637ea"
+    },
+    {
+      "name": "takahashi1991_figure7.png",
+      "bytes": 374424,
+      "sha256": "84fd3ce187aef3c9c5df94de5175369506686a6947a28072c9d26f2427791895",
+      "md5": "0e0a1e9d2b29144a09c012370982535e"
+    },
+    {
+      "name": "takahashi2018_ams.pdf",
+      "bytes": 608258,
+      "sha256": "06a87318db2cc1831add739d305e2923fd4f361896ba1b5d8ade49a943d14f49",
+      "md5": "e4f224b2df4b4ad3ba25772ef91a2270"
+    },
+    {
+      "name": "takahashi2018_ams.txt",
+      "bytes": 10700,
+      "sha256": "17d7afd227a8068515e2372142d253165c2819ff9bde1ae735ca4908a80f1fb9",
+      "md5": "711bcb2ece7e80c196b7eb64236a86d0"
+    },
+    {
+      "name": "takahashi_measurements.json",
+      "bytes": 123330,
+      "sha256": "5ecacaa2cfc5a1ee37d6810f28329711cab1fbffff9959b35f0489bbb2ce75b0",
+      "md5": "ca34a106fd0f9e2c1e70626c121181a9"
+    },
+    {
+      "name": "zenodo_retry.json",
+      "bytes": 2813,
+      "sha256": "562a4eb3a6a4451424d27be1285f3f4aa14802530968111232a36c54257fa199",
+      "md5": "3793c715f3a6c95d515eaa71c3504434"
+    }
+  ],
+  "archive_checksum_verifications": [
+    {
+      "public_name": "1991_takahashi.xlsx",
+      "local_name": "1991_takahashi.xlsx",
+      "expected": "md5:ecb41c07eab7982cadeff694c4f45418",
+      "actual": "md5:ecb41c07eab7982cadeff694c4f45418",
+      "match": true
+    },
+    {
+      "public_name": "ice_times_drone_dist_grt_python.csv",
+      "local_name": "ice_times_drone_dist_grt_python.csv",
+      "expected": "md5:c40820f3c09a04da57f2d3a4e57a8f34",
+      "actual": "md5:c40820f3c09a04da57f2d3a4e57a8f34",
+      "match": true
+    },
+    {
+      "public_name": "Readme.txt",
+      "local_name": "fuchs2025_Readme.txt",
+      "expected": "md5:681bfe4d6889cc40879b32e5641ccafc",
+      "actual": "md5:681bfe4d6889cc40879b32e5641ccafc",
+      "match": true
+    },
+    {
+      "public_name": "2023-01-25_pdata_only_ice_with_water_ice_myphys_SM060.nc",
+      "local_name": "fuchs2025_SM060.nc",
+      "expected": "md5:4a3f8212f2ba9973ddae0ce5314c9548",
+      "actual": "md5:4a3f8212f2ba9973ddae0ce5314c9548",
+      "match": true
+    }
+  ],
+  "reading_scope": {
+    "takahashi1991_data": "All 169 workbook rows parsed, all text/numeric mass pairs matched; author plotting code and original experimental methods inspected. D72 checked directly in XML and against original Figure 7; unresolved anomaly preserved and flagged.",
+    "fuchs2025": "Methods, growth and data-availability sections read; one particle NetCDF inspected. Full archive not analyzed.",
+    "bailey_hallett2004": "Publisher-indexed article text read; direct original page/PDF returned 403. Table 1 not transcribed.",
+    "bailey_hallett2002_ams": "Separate conference paper retrieved; methods/growth/habit sections read. Figures not digitized.",
+    "gonda1976": "Original methods and habits inspected; tables/figures not digitized.",
+    "matsuo_fukuta1987": "Original PDF retrieved; abstract, methods and table locations inspected. Poor extraction; tables not transcribed.",
+    "connolly2012": "Original methods, geometry sensitivity and conclusions read.",
+    "barrett2019": "Original PDF retrieved; relevant growth, retrieval and data-availability sections read.",
+    "furukawa2014": "Abstract and methods inspected; liquid growth excluded from vapor calibration.",
+    "takahashi2018_ams": "Original conference methods/results read; figures not digitized."
+  },
+  "unresolved": [
+    "Bailey-Hallett2004 originalPDF/Table1 retrieval",
+    "No directlymatched sustainedlunarg vapourgrowth experiment acquired",
+    "No newfieldrun replay or aggregatecalibration performed",
+    "No mass/axesmeasurement confidence intervals inferred"
+  ],
+  "artifact_policy": "External papers and original data are retained in the ignored cache. The attributed transformed measurement product is released under its source CC-BY-4.0 terms; no full papers are redistributed.",
+  "data_quality_followup": {
+    "created_utc": "2026-10-22T19:58:00.857489+00:00",
+    "note": "data_quality.md",
+    "source_data_changes": "None",
+    "rawxml_D72": "0.89229999999999998",
+    "row72_calibration_excluded": [
+      "c_full_mm",
+      "maximum_dimension_mm",
+      "spheroid_density_kg_m3",
+      "c_to_a_axis_ratio"
+    ],
+    "counts": {
+      "c_axis_missing_in_source": 79,
+      "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping": 32,
+      "source_c_axis_decimal_anomaly_unresolved": 1
+    },
+    "original_paper_visual_check": "Original pinnedTakahashi1991PDFpage8printedp22Figure7 renderedtoPNG and visually inspected; not digitized."
+  },
+  "local_cache": "research/runs/snow_scale/growth_environment_sources"
+}

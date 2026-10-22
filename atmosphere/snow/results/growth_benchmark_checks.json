@@ -1,0 +1,134 @@
+{
+  "schema": "terluna.atmosphere.growth-benchmark-checks/1",
+  "checked_at_utc": "2026-10-22T20:38:57.145263+00:00",
+  "branch": "domain/atmosphere",
+  "checkpoint_commit": "002d7b65265ab4dd182622f3425a8a8c043499e4",
+  "evidence": "Numerical/input/source checks and an empirical discrepancy study; not a calibrated snow closure or lunar forecast.",
+  "full_repository_check": {
+    "scope": "Completed five-temperature growth tests, directional controls, recovered data and review before this checkpoint commit",
+    "log": "research/runs/snow_scale/growth_precommit_make_check.log",
+    "python_passed": 3271,
+    "python_skipped": 20,
+    "javascript_passed": 191,
+    "layer_files": 1259,
+    "layer_violations": 0,
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS",
+    "exit_code": 0,
+    "repeated_after_new_work": true
+  },
+  "focused_tests": {
+    "passed": 80,
+    "skipped": 0,
+    "log": "research/runs/snow_scale/growth_focused_tests.log",
+    "exit_code": 0
+  },
+  "layers": {
+    "files": 1259,
+    "violations": 0,
+    "includes_untracked_sources": true
+  },
+  "provenance": {
+    "result": "PASS",
+    "require_inputs": true,
+    "log": "research/runs/snow_scale/growth_provenance_check.json"
+  },
+  "native_verification": {
+    "executions": 14,
+    "step_traces": 4,
+    "source": "scale_growth_verification.json",
+    "source_sha256": "3d01b69be1de2e126fdf0fafba9d26f1f09149ccf3a9662fe33672298b0a63d6",
+    "legacy_and_mode_zero_array_comparisons": 4,
+    "arrays_per_comparison": 473,
+    "ledgers_byte_identical": true,
+    "physics_inputs_regenerated": true
+  },
+  "source_checks": {
+    "environment_files_sha256_verified": 32,
+    "published_dataset_md5_checks": 4,
+    "measurement_rows": 169,
+    "missing_polar_axes": 79,
+    "unresolved_decimal_entries": 1,
+    "unmodified_source_value_preserved": true,
+    "mcsnow_2026_archive_md5_verified": true,
+    "selected_mcsnow_archive_sources_sha256_verified": 8,
+    "full_papers_redistributed": false
+  },
+  "review": {
+    "original_table2_and_table4_visually_checked": true,
+    "original_figure7_reviewed_for_row72": true,
+    "independent_reading": "Draft driver review identified and corrected ledger-cadence and finite-value/parity gaps before interpretation. Final read-only review checked numerical tables, limits and recovered-data flags against outputs.",
+    "prose": "Reports read with current synthesis; observations, fits, numerical controls and proposed replacements remain distinct.",
+    "full_scholarly_source_review": false
+  },
+  "scope": {
+    "other_status_topics_unchanged": true,
+    "correct_worktree": "/home/kir/Documents/Projects/terluna-atmosphere",
+    "maximum_numerical_build_workers": 2,
+    "threads_per_worker": 1,
+    "followup_work_committed": true
+  },
+  "unperformed": [
+    "Matched McSnow habit-growth execution",
+    "New model adoption or calibration",
+    "Sustained lunar-gravity empirical growth comparison",
+    "Physical repair of rejected spheroid initializations",
+    "Correction of unresolved workbook D72",
+    "Bailey-Hallett 2004 original Table 1 retrieval",
+    "Aggregation-fracture calibration",
+    "New lunar snow size or optical forecast"
+  ],
+  "logs": {
+    "research/runs/snow_scale/growth_benchmarks_run.log": "51a4c5305868baa591942cfd86d397a157f34964283b510a5a63a44325a20054",
+    "research/runs/snow_scale/growth_controls_run.log": "f2a070538cf3f9c7029a05d62b4e2e57520bc4e7b82c99d6043a9a1391823cc4",
+    "research/runs/snow_scale/growth_controls_build.log": "43c634dee1174fe9547ae169526f9af7b6fb780c0b379ebd553fc42f18600bf3",
+    "research/runs/snow_scale/growth_verification.log": "13de9f6078fe5fb8b277034d12642dfb03f523f4b172056ed5b24daacbbaae67",
+    "research/runs/snow_scale/growth_focused_tests.log": "bed1ee2ff6e4d63b8fec96c5691860a0c6f63e65fa363f987ae0d598f6ebf241",
+    "research/runs/snow_scale/growth_layer_check.log": "807fb417c02580b06140563dddc285d1d6cb9b6ad9c3a0424db11b6400ddf363",
+    "research/runs/snow_scale/growth_provenance_check.log": "beb98c8e965bbda1492aef13ca0592babc989bdc26fd8b72670299c194eca96d",
+    "research/runs/snow_scale/growth_precommit_make_check.log": "4871fbc1a7fb05f9cf71267e9f7238e4490d90dacaad84f9c9d9332193227f46"
+  },
+  "relative_report_links_checked": [
+    "atmosphere/snow/growth_options.md",
+    "atmosphere/snow/scale_growth_benchmarks.py",
+    "atmosphere/snow/results/scale_growth_benchmarks.json",
+    "atmosphere/snow/results/takahashi_measurements.json",
+    "atmosphere/snow/scale_growth_controls.py",
+    "atmosphere/snow/results/scale_growth_verification.json",
+    "atmosphere/snow/results/growth_benchmark_checks.json",
+    "atmosphere/snow/growth_benchmarks.md",
+    "atmosphere/snow/growth_model_sources.json",
+    "atmosphere/snow/growth_environment_sources.json",
+    "atmosphere/snow/takahashi_measurements.py",
+    "atmosphere/snow/results/takahashi_measurements.json"
+  ],
+  "files": {
+    "atmosphere/README.md": "aa08b9979fd83d9af4e5a4963df7b42d499209cc359561cefa6b354355e1d666",
+    "atmosphere/snow/README.md": "17bb8d319b2dae1ad56cda4848cb2737734133c67d4c01cfde6171acda2511cf",
+    "atmosphere/snow/analysis.md": "157917d32020ac05b8736de1edd2227e35bc2a5087f59e64a68ddbde17866028",
+    "research/status.json": "7bbb4779f90f0077aa3f35c694fe812bede6848ab70e3e727385852cff6d7601",
+    "atmosphere/snow/growth_benchmarks.md": "2c60ee7eadda893a6f588cc73d9bdac904b6f1dbf39e601c120a478d5ba60c9a",
+    "atmosphere/snow/growth_environment_sources.json": "f7740a318fa108c513b94d2ac75df9adb4dad1f623bb2317f7e6d5a88ab4f7e3",
+    "atmosphere/snow/growth_model_sources.json": "a11a665946d2ce3c0b6cf1235cefb87fde2eca3ea537bf0447b34e21f29c6bfe",
+    "atmosphere/snow/growth_options.md": "f7a6f43ccee18e935a7728837c4b9533b4a4a47d89424d9cfe8baec421d4fbed",
+    "atmosphere/snow/results/scale_growth_benchmarks.json": "9e13c9bdfaeff88b2152e4b6c9f92a02264160ef6b557389927f005e19ea6913",
+    "atmosphere/snow/results/scale_growth_controls.json": "dd8f5dd997570b7cc755cb3b596423dff5dacc469fab7e6a986d5b8923f67620",
+    "atmosphere/snow/results/scale_growth_verification.json": "3d01b69be1de2e126fdf0fafba9d26f1f09149ccf3a9662fe33672298b0a63d6",
+    "atmosphere/snow/results/takahashi_measurements.json": "ac2bcfbb70cbfa8f7cea93165b94fb5641cf61814b3e42dea16c8574fb78d206",
+    "atmosphere/snow/scale_growth_benchmarks.py": "98b2996a0ec56e1e54ab151eec13ff12738d0fb877d6d69693ce19eefc9e4607",
+    "atmosphere/snow/scale_growth_controls.py": "e1fe9d0b310cd61a74c5036e0e5ea00779141fc709a0b072985d121bd3c6649d",
+    "atmosphere/snow/scale_growth_verify.py": "ad340ffc2114e4190c8b78ed4f24c4536867c67d963d0b7bfbe869803ed86d95",
+    "atmosphere/snow/takahashi_growth.py": "cb49d30ce7878bd441ac6821f5128e53f06075a37dbd94aa4e9cd0fd91784bed",
+    "atmosphere/snow/takahashi_measurements.py": "c56887e418e04b6f856baf6a9134bcb58c6cd88a9cf880584b9d2823fcfb48c5",
+    "atmosphere/tests/test_snow_growth_benchmarks.py": "f95077af730eff3198f67ae0ce66d46194118b065558987676db9b76f59c21ff"
+  },
+  "prior_checkpoint_full_repository_check": {
+    "scope": "Checkpoint 002d7b6 before the new growth experiments",
+    "record": "scale_limitations_checks.json",
+    "python_passed": 3251,
+    "python_skipped": 20,
+    "javascript_passed": 191,
+    "exit_code": 0,
+    "repeated_after_new_work": false
+  }
+}

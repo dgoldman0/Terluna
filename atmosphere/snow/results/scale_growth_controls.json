@@ -1,0 +1,4460 @@
+{
+  "schema": "terluna.atmosphere.scale-growth-benchmarks/1",
+  "evidence": "Empirical fit comparison and numerical/representation diagnostics; no calibrated growth repair or lunar forecast.",
+  "producer_sha256": "98b2996a0ec56e1e54ab151eec13ff12738d0fb877d6d69693ce19eefc9e4607",
+  "lab_producer_sha256": "cb49d30ce7878bd441ac6821f5128e53f06075a37dbd94aa4e9cd0fd91784bed",
+  "source_pdf_sha256": "2e5c6b492fcab7d1b3958be5a4c859fcd31174a1ac4865588ca48820bd4cd8eb",
+  "initial_spheroid_rejections": {
+    "-8.6": "Fitted mass/axes require 1019.933255 kg/m3 in a spheroid, above bulk ice 916.8",
+    "-12.2": "Fitted mass/axes require 1097.166743 kg/m3 in a spheroid, above bulk ice 916.8",
+    "-16.5": "Fitted mass/axes require 1266.914911 kg/m3 in a spheroid, above bulk ice 916.8",
+    "-18.2": "Fitted mass/axes require 1051.119617 kg/m3 in a spheroid, above bulk ice 916.8",
+    "-22.0": "Fitted mass/axes require 1078.879550 kg/m3 in a spheroid, above bulk ice 916.8"
+  },
+  "baseline_ledger_parity": {
+    "5": {
+      "ledger_bytes_identical": true,
+      "identical_native_array_counts": {
+        "SD_output_NetCDF_00000000000.000.pe000000": 14,
+        "SD_output_NetCDF_00000000060.000.pe000000": 14,
+        "SD_output_NetCDF_00000000120.000.pe000000": 14,
+        "SD_output_NetCDF_00000000180.000.pe000000": 14,
+        "SD_output_NetCDF_00000000240.000.pe000000": 14,
+        "SD_output_NetCDF_00000000300.000.pe000000": 14,
+        "SD_output_NetCDF_00000000360.000.pe000000": 14,
+        "SD_output_NetCDF_00000000420.000.pe000000": 14,
+        "SD_output_NetCDF_00000000480.000.pe000000": 14,
+        "SD_output_NetCDF_00000000540.000.pe000000": 14,
+        "SD_output_NetCDF_00000000600.000.pe000000": 14,
+        "SD_output_NetCDF_00000000660.000.pe000000": 14,
+        "SD_output_NetCDF_00000000720.000.pe000000": 14,
+        "SD_output_NetCDF_00000000780.000.pe000000": 14,
+        "SD_output_NetCDF_00000000840.000.pe000000": 14,
+        "SD_output_NetCDF_00000000900.000.pe000000": 14,
+        "SD_output_NetCDF_00000000960.000.pe000000": 14,
+        "SD_output_NetCDF_00000001020.000.pe000000": 14,
+        "SD_output_NetCDF_00000001080.000.pe000000": 14,
+        "SD_output_NetCDF_00000001140.000.pe000000": 14,
+        "SD_output_NetCDF_00000001200.000.pe000000": 14,
+        "SD_output_NetCDF_00000001260.000.pe000000": 14,
+        "SD_output_NetCDF_00000001320.000.pe000000": 14,
+        "SD_output_NetCDF_00000001380.000.pe000000": 14,
+        "SD_output_NetCDF_00000001440.000.pe000000": 14,
+        "SD_output_NetCDF_00000001500.000.pe000000": 14,
+        "SD_output_NetCDF_00000001560.000.pe000000": 14,
+        "SD_output_NetCDF_00000001620.000.pe000000": 14,
+        "history.pe000000.nc": 81
+      }
+    },
+    "1": {
+      "ledger_bytes_identical": true,
+      "identical_native_array_counts": {
+        "SD_output_NetCDF_00000000000.000.pe000000": 14,
+        "SD_output_NetCDF_00000000060.000.pe000000": 14,
+        "SD_output_NetCDF_00000000120.000.pe000000": 14,
+        "SD_output_NetCDF_00000000180.000.pe000000": 14,
+        "SD_output_NetCDF_00000000240.000.pe000000": 14,
+        "SD_output_NetCDF_00000000300.000.pe000000": 14,
+        "SD_output_NetCDF_00000000360.000.pe000000": 14,
+        "SD_output_NetCDF_00000000420.000.pe000000": 14,
+        "SD_output_NetCDF_00000000480.000.pe000000": 14,
+        "SD_output_NetCDF_00000000540.000.pe000000": 14,
+        "SD_output_NetCDF_00000000600.000.pe000000": 14,
+        "SD_output_NetCDF_00000000660.000.pe000000": 14,
+        "SD_output_NetCDF_00000000720.000.pe000000": 14,
+        "SD_output_NetCDF_00000000780.000.pe000000": 14,
+        "SD_output_NetCDF_00000000840.000.pe000000": 14,
+        "SD_output_NetCDF_00000000900.000.pe000000": 14,
+        "SD_output_NetCDF_00000000960.000.pe000000": 14,
+        "SD_output_NetCDF_00000001020.000.pe000000": 14,
+        "SD_output_NetCDF_00000001080.000.pe000000": 14,
+        "SD_output_NetCDF_00000001140.000.pe000000": 14,
+        "SD_output_NetCDF_00000001200.000.pe000000": 14,
+        "SD_output_NetCDF_00000001260.000.pe000000": 14,
+        "SD_output_NetCDF_00000001320.000.pe000000": 14,
+        "SD_output_NetCDF_00000001380.000.pe000000": 14,
+        "SD_output_NetCDF_00000001440.000.pe000000": 14,
+        "SD_output_NetCDF_00000001500.000.pe000000": 14,
+        "SD_output_NetCDF_00000001560.000.pe000000": 14,
+        "SD_output_NetCDF_00000001620.000.pe000000": 14,
+        "history.pe000000.nc": 81
+      }
+    }
+  },
+  "refinements": [
+    {
+      "temperature_C": -14.4,
+      "control": 0,
+      "endpoint_relative_change": {
+        "mass_kg": 0.014723113528541942,
+        "equatorial_dimension_m": 0.008097109629038535,
+        "polar_dimension_m": -0.0015099158822337033,
+        "diameter_m": 0.008097109629038535
+      },
+      "maximum_trajectory_relative_change": {
+        "mass_kg": 0.022884517625413103,
+        "equatorial_dimension_m": 0.011790345539149483,
+        "polar_dimension_m": 0.0015099158822337033,
+        "diameter_m": 0.011790345539149483
+      }
+    },
+    {
+      "temperature_C": -14.4,
+      "control": 1,
+      "endpoint_relative_change": {
+        "mass_kg": 0.008934390712986184,
+        "equatorial_dimension_m": 0.003906666254204216,
+        "polar_dimension_m": 0.0010995070621184766,
+        "diameter_m": 0.003906666254204216
+      },
+      "maximum_trajectory_relative_change": {
+        "mass_kg": 0.019503279814177432,
+        "equatorial_dimension_m": 0.009209395331269077,
+        "polar_dimension_m": 0.002587022010798634,
+        "diameter_m": 0.009209395331269077
+      }
+    }
+  ],
+  "cases": {
+    "growth_sweep_14p4_dt5_control0": {
+      "settings": {
+        "name": "growth_sweep_14p4_dt5_control0",
+        "mode": "prescribed",
+        "packets_per_step_per_horizontal_cell": 2,
+        "dt_s": 5.0,
+        "seed": 1,
+        "layers": 4,
+        "duration_s": 1620.0,
+        "gather_start_s": 0.0,
+        "depth_m": 16280.520943378342,
+        "dx_m": 1.0,
+        "horizontal_cells": 8,
+        "capacity": 128,
+        "collisions": false,
+        "original_settings": {
+          "top_c": -15.0,
+          "number_per_m3": 100000.0,
+          "snowfall_mm_h": 3.0,
+          "layers": 30,
+          "area_m2": 0.0004,
+          "layer_volume_m3": 0.2170736125783779,
+          "max_step_s": 60.0,
+          "fill": 1.5,
+          "gather": 1.5,
+          "breakup": true,
+          "seed": 20261021,
+          "wall_limit_s": 1800.0,
+          "collisions": true,
+          "growth": true,
+          "settling": true,
+          "settling_scheme": "upwind",
+          "geometry": "bf95_dmax_dendrites_area",
+          "injection_reference_velocity_m_s": 0.10232426627407396,
+          "injected_number_flux_m2_s": 10232.426627407396,
+          "total_time_s": 477321.407800899,
+          "gathering_time_s": 238660.7039004495,
+          "depth_m": 16280.520943378342
+        },
+        "profile": [
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          }
+        ],
+        "forcing": "Stationary isolated crystals with native terminal-speed ventilation in fixed water-saturated air; no liquid, collisions, injection or transport.",
+        "unmatched": "Empirical Table 2 fits at Earth gravity and 1010 hPa. Planar thickness is inferred, fits lack pointwise errors, piecewise fits may have discontinuous joins. No aggregate or lunar validation.",
+        "build": {
+          "build": {
+            "command": [
+              "make",
+              "-j1",
+              "build",
+              "ENABLE_SDM=T",
+              "SCALE_SYS=Linux64-gnu-ompi",
+              "GNUCPPOPT=-cpp",
+              "MODDIROPT=-J",
+              "FFLAGS_FAST=-O2 -g -cpp -m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch -ffree-line-length-none -fimplicit-none -fmodule-private -fbacktrace -fcheck=bounds -ffpe-trap=invalid,zero,overflow",
+              "FFLAGS_CORE=-m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch",
+              "NETCDF_INCLUDE=-I/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/include",
+              "NETCDF_LIBS=/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu/libnetcdff.so.7 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19 -Wl,-rpath,/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu -lm -lz"
+            ],
+            "cwd": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/growth_controls/work/scale-les/test/case/warmbubble/2D_Khain04_sdm",
+            "exit_code": 0,
+            "elapsed_s": 45.86596357100643,
+            "log_sha256": "e686bfe97d57d96996eaecf48ff1999f55f958335473045a70e947b534c0ae1e",
+            "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+            "environment": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "executable_sha256": {
+              "scale-les_init": "478c82442f24eb1a5c15e5266b5ae7582e28f43c824acc1fbc29bfac1608deec",
+              "scale-les": "0224a5d22094f0c0a030d926dab623507dd2297ac94c7099dc565538df1b4138"
+            }
+          },
+          "original_manifest": {
+            "build": {
+              "command": [
+                "make",
+                "-j1",
+                "build",
+                "ENABLE_SDM=T",
+                "SCALE_SYS=Linux64-gnu-ompi",
+                "GNUCPPOPT=-cpp",
+                "MODDIROPT=-J",
+                "FFLAGS_FAST=-O2 -g -cpp -m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch -ffree-line-length-none -fimplicit-none -fmodule-private -fbacktrace -fcheck=bounds -ffpe-trap=invalid,zero,overflow",
+                "FFLAGS_CORE=-m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch",
+                "NETCDF_INCLUDE=-I/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/include",
+                "NETCDF_LIBS=/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu/libnetcdff.so.7 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19 -Wl,-rpath,/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu -lm -lz"
+              ],
+              "cwd": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/lunar/work/scale-les/test/case/warmbubble/2D_Khain04_sdm",
+              "exit_code": 0,
+              "elapsed_s": 44.23016245395411,
+              "log_sha256": "075824baf3aabf6977f18ad0222ace22204916980064f8a14a2800a3d8a1d512",
+              "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+              "environment": {
+                "OMP_NUM_THREADS": "1",
+                "OPENBLAS_NUM_THREADS": "1"
+              },
+              "executable_sha256": {
+                "scale-les_init": "1e942b2ac3d702af45798ad2683b5fe995908777d3684203ce2e0f62705eff99",
+                "scale-les": "56c98cf48343f37c402606e08d1dfa45986df03c687ce731b20b627a5429a9cb"
+              }
+            },
+            "hook_sha256": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11",
+            "adapter_sha256": "ff62b444f75bd32980ddd1520e68e893b29b14df4c5e9e669544a3f483049adb",
+            "patches": [
+              {
+                "source": "contrib/SDM/scale_atmos_phy_mp_sdm.F90",
+                "original_sha256": "7dd8d44b34cbccba201ed75021f39435bba07045fdb91ce13db2003f73fc1605",
+                "patched_sha256": "0855ed87d04f51478f374b150166f2ca02554e14f8eb82328fc678e5c0b3670c",
+                "patch_sha256": "6258a867067e19f823a30944801eaab46573f3d75dcdc5815ee337d29f7a5101"
+              },
+              {
+                "source": "contrib/SDM/sdm_coalescence_cold.f90",
+                "original_sha256": "d6b9eed09771d1139e1533221d3c586dc10d9ac70f8c418a40429bf6c1d94ad1",
+                "patched_sha256": "22573a3b9241c3fd446ca2853c67674bc05671704b7da08c6079f1372120b487",
+                "patch_sha256": "13fe397120a8b4fab07e21fb4d2f462f6f86b2510953cc5689a8e9334e77641f"
+              }
+            ]
+          },
+          "hook_sha256": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11",
+          "producer_sha256": "e1fe9d0b310cd61a74c5036e0e5ea00779141fc709a0b072985d121bd3c6649d",
+          "source": "contrib/SDM/sdm_subldep.f90",
+          "original_sha256": "37afcfdb871cdc3da53488810ada6e8541128eccd3a0e774faf6e359408cb444",
+          "patched_sha256": "8fe48cdc857a161a165062b9f3929cd23f45d0880ceaa4601d4359ef2d4de111",
+          "patch_sha256": "f3937147590e3118ae9c1db05e8be5a8a71f94dfe1e9867ce2eaa0feb31ab50d",
+          "modes": {
+            "0": "native anisotropic ventilation",
+            "1": "unit polar/equatorial ventilation ratio; native mean ventilation"
+          },
+          "trace_fields": [
+            "call",
+            "mode",
+            "particle_index",
+            "elapsed_before_s",
+            "elapsed_after_s",
+            "dt_s",
+            "temperature_K",
+            "pressure_Pa",
+            "air_density_kg_m3",
+            "ice_supersaturation",
+            "intrinsic_growth_ratio",
+            "capacitance_m",
+            "mean_ventilation",
+            "native_axis_ventilation_ratio",
+            "axis_ventilation_ratio",
+            "effective_growth_ratio",
+            "deposition_density_kg_m3",
+            "equatorial_radius_m",
+            "polar_radius_m",
+            "mass_kg",
+            "density_kg_m3",
+            "terminal_speed_m_s",
+            "reynolds",
+            "schmidt",
+            "ventilation_x",
+            "diffusive_resistance",
+            "thermal_resistance",
+            "new_equatorial_radius_m",
+            "new_polar_radius_m",
+            "new_mass_kg",
+            "new_density_kg_m3",
+            "mass_increment_kg",
+            "volume_increment_m3"
+          ],
+          "evidence": "Controlled anisotropic-ventilation sensitivity. Mode 0 is checked against the preserved native executable; neither mode is an empirical repair."
+        },
+        "build_directory": "growth_controls",
+        "collection": "native",
+        "producer": {
+          "files": {
+            "atmosphere/snow/event_column.py": "7c59ee26fa6c66cac524f45f3f0a3eb25c822caea19d092de19816f2222c9ea7",
+            "atmosphere/snow/event_column.cpp": "18d8ccc02b35a86072f360fe0afdb98637b235a148509e1e5b99e7203e04514b",
+            "atmosphere/snow/aggregation.py": "b1be75f1dc08b92c320fd288d458940821a43a9ae346221cc2d0dbd7a1adf628",
+            "atmosphere/snow/flakes.py": "ce3a82113fc62480130c4db99a95de44d7f3f1432f6444cdb8fcb86ced8012a5",
+            "atmosphere/snow/habits.py": "e2cd9e9693b70c03de051f98635416f7f29b7cf87a1d7bda9154ccedfe26e8d1",
+            "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
+            "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",
+            "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+          },
+          "inputs": {
+            "research/studies/climate_targets/results/climate_targets.json": "80a85def114b039cef9c9acd97b18d3bd47413f51f6693d1cc6f5e850ebdbea8"
+          },
+          "constants": {
+            "AVOGADRO": 6.02214076e+23,
+            "BOLTZMANN": 1.380649e-23,
+            "EARTH_GM": 398600441800000.0,
+            "EARTH_RADIUS": 6371000.0,
+            "GAS_CONSTANT": 8.31446261815324,
+            "MOON_GM": 4902800118000.0,
+            "MOON_RADIUS": 1737400.0,
+            "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+            "STANDARD_GRAVITY": 9.80665
+          }
+        },
+        "constants": {
+          "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+          "STANDARD_GRAVITY": 9.80665
+        },
+        "adapter_sha256": "83488e1d1ef1b1ff45c96c54f422f51777ee473a9cdf80498256aa527618362f",
+        "gravity_m_s2": 9.80665,
+        "initial": {
+          "age_min": 3.0,
+          "mass_kg": 3.8360796779208944e-10,
+          "equatorial_dimension_m": 0.0003975513455088669,
+          "polar_dimension_m": 7.790327741144696e-06,
+          "diameter_m": 0.0003975513455088669,
+          "habit": "broad branch to dendrite",
+          "equatorial_radius_m": 0.00019877567275443345,
+          "polar_radius_m": 3.895163870572348e-06,
+          "density_kg_m3": 595.0408927601331
+        },
+        "temperature_C": -14.4,
+        "temperature_K": 258.75,
+        "pressure_Pa": 101000.0,
+        "vapor_pressure_Pa": 200.9907628063601,
+        "source_pdf_sha256": "2e5c6b492fcab7d1b3958be5a4c859fcd31174a1ac4865588ca48820bd4cd8eb",
+        "laboratory_start_age_min": 3.0,
+        "movement": false,
+        "initial_crystals": 8,
+        "deposition_ceiling_kg_m3_s": 1e-06,
+        "initial_water_kg_m2": 3.8360796779208944e-10,
+        "ledger_convention": "Add known initial ice inventory to native empty-column source ledger.",
+        "producer_sha256": "98b2996a0ec56e1e54ab151eec13ff12738d0fb877d6d69693ce19eefc9e4607",
+        "lab_producer_sha256": "cb49d30ce7878bd441ac6821f5128e53f06075a37dbd94aa4e9cd0fd91784bed",
+        "native_constants_sha256": "256841aff9d6358cb073a199d05424dc67f2c52a2cfe21666419b8a0ec26a8c2",
+        "growth_control": 0
+      },
+      "execution": [
+        {
+          "executable": "scale-les_init",
+          "exit_code": 0,
+          "elapsed_s": 0.7654167100554332,
+          "sha256": "478c82442f24eb1a5c15e5266b5ae7582e28f43c824acc1fbc29bfac1608deec"
+        },
+        {
+          "executable": "scale-les",
+          "exit_code": 0,
+          "elapsed_s": 0.9156117310049012,
+          "sha256": "0224a5d22094f0c0a030d926dab623507dd2297ac94c7099dc565538df1b4138"
+        }
+      ],
+      "snapshots": [
+        {
+          "age_min": 3.0,
+          "elapsed_s": 0.0,
+          "mass_kg": 3.8360796779208944e-10,
+          "equatorial_dimension_m": 0.0003975513455088669,
+          "polar_dimension_m": 7.790327741144696e-06,
+          "diameter_m": 0.0003975513455088669,
+          "density_kg_m3": 595.0408927601331,
+          "terminal_speed_m_s": 0.06845904682388176,
+          "sha256": "29e9ba8998766b6a1cbf84346a92eb6ae53278345d12a405c40f799dc4947193",
+          "observed_fit": {
+            "age_min": 3.0,
+            "mass_kg": 3.8360796779208944e-10,
+            "equatorial_dimension_m": 0.0003975513455088669,
+            "polar_dimension_m": 7.790327741144696e-06,
+            "diameter_m": 0.0003975513455088669,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.061756878252930074,
+          "fall_speed_ratio_to_fit": null,
+          "ratio_to_fit": {
+            "mass_kg": 1.0,
+            "equatorial_dimension_m": 1.0,
+            "polar_dimension_m": 1.0,
+            "diameter_m": 1.0
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 4.0,
+          "elapsed_s": 60.0,
+          "mass_kg": 1.1637752649978479e-09,
+          "equatorial_dimension_m": 0.0008559433902038702,
+          "polar_dimension_m": 9.026564433812846e-06,
+          "diameter_m": 0.0008559433902038702,
+          "density_kg_m3": 336.0918090943153,
+          "terminal_speed_m_s": 0.07947993013246323,
+          "sha256": "dee92ee6bee82c4c250ac04212a7a6b7ce889f9cc5f8f3e4ec1de0fb7b41fe6a",
+          "observed_fit": {
+            "age_min": 4.0,
+            "mass_kg": 6.1462470869928e-10,
+            "equatorial_dimension_m": 0.0005346191898611546,
+            "polar_dimension_m": 9.047401674573387e-06,
+            "diameter_m": 0.0005346191898611546,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.07596984233706962,
+          "fall_speed_ratio_to_fit": 1.0462036998815891,
+          "ratio_to_fit": {
+            "mass_kg": 1.8934729576048546,
+            "equatorial_dimension_m": 1.6010337945896898,
+            "polar_dimension_m": 0.9976968812140726,
+            "diameter_m": 1.6010337945896898
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 5.0,
+          "elapsed_s": 120.0,
+          "mass_kg": 2.7596595222475944e-09,
+          "equatorial_dimension_m": 0.0013467607418536545,
+          "polar_dimension_m": 9.715927174845209e-06,
+          "diameter_m": 0.0013467607418536545,
+          "density_kg_m3": 299.0830039035123,
+          "terminal_speed_m_s": 0.09797005694092649,
+          "sha256": "39b0f68853d270f41a5ea9d7426c0b13ddd0614b9b1ef4621f03cd99f52a48cd",
+          "observed_fit": {
+            "age_min": 5.0,
+            "mass_kg": 1.0430058547897073e-09,
+            "equatorial_dimension_m": 0.000671263072932688,
+            "polar_dimension_m": 1.0160546757225714e-05,
+            "diameter_m": 0.000671263072932688,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.08921059469386831,
+          "fall_speed_ratio_to_fit": 1.098188587096822,
+          "ratio_to_fit": {
+            "mass_kg": 2.645871554387393,
+            "equatorial_dimension_m": 2.00630840002829,
+            "polar_dimension_m": 0.9562405849799064,
+            "diameter_m": 2.00630840002829
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 6.0,
+          "elapsed_s": 180.0,
+          "mass_kg": 5.412644347627308e-09,
+          "equatorial_dimension_m": 0.0018781043578331616,
+          "polar_dimension_m": 1.0184626982389988e-05,
+          "diameter_m": 0.0018781043578331616,
+          "density_kg_m3": 287.7572676661826,
+          "terminal_speed_m_s": 0.11346360722602823,
+          "sha256": "f7db281032bc05ea98ae9b2a00e13fdc3a1be116bb679cd2647ddefb3ee27a1f",
+          "observed_fit": {
+            "age_min": 6.0,
+            "mass_kg": 1.606742566787186e-09,
+            "equatorial_dimension_m": 0.0008084583067713316,
+            "polar_dimension_m": 1.1170981348177721e-05,
+            "diameter_m": 0.0008084583067713316,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1002,
+          "fall_speed_ratio_to_fit": 1.1323713296010802,
+          "ratio_to_fit": {
+            "mass_kg": 3.368706636340839,
+            "equatorial_dimension_m": 2.323068910422333,
+            "polar_dimension_m": 0.9117038749734702,
+            "diameter_m": 2.323068910422333
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 7.0,
+          "elapsed_s": 240.0,
+          "mass_kg": 9.384239628087763e-09,
+          "equatorial_dimension_m": 0.0024518531755002176,
+          "polar_dimension_m": 1.0533329669286962e-05,
+          "diameter_m": 0.0024518531755002176,
+          "density_kg_m3": 283.0387323026534,
+          "terminal_speed_m_s": 0.12651255428523892,
+          "sha256": "05de7af0e510a869a40da354a51404f03384b37d9b458ffa3ea031de940c4fa8",
+          "observed_fit": {
+            "age_min": 7.0,
+            "mass_kg": 2.315315562186333e-09,
+            "equatorial_dimension_m": 0.000946113747672357,
+            "polar_dimension_m": 1.2103296075395204e-05,
+            "diameter_m": 0.000946113747672357,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1084,
+          "fall_speed_ratio_to_fit": 1.1670899841811708,
+          "ratio_to_fit": {
+            "mass_kg": 4.053114737943671,
+            "equatorial_dimension_m": 2.591499364143374,
+            "polar_dimension_m": 0.8702860446998543,
+            "diameter_m": 2.591499364143374
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 8.0,
+          "elapsed_s": 300.0,
+          "mass_kg": 1.4956106147430712e-08,
+          "equatorial_dimension_m": 0.0030685788668300615,
+          "polar_dimension_m": 1.0806876647281456e-05,
+          "diameter_m": 0.0030685788668300615,
+          "density_kg_m3": 280.7017645135366,
+          "terminal_speed_m_s": 0.13776221581815523,
+          "sha256": "9152160f921dee38f81c74ac1c4987d736ec7595b7bf06b3c9b135f387fe0d70",
+          "observed_fit": {
+            "age_min": 8.0,
+            "mass_kg": 3.177247928269035e-09,
+            "equatorial_dimension_m": 0.0010841643912747664,
+            "polar_dimension_m": 1.2973569112161691e-05,
+            "diameter_m": 0.0010841643912747664,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.11660000000000001,
+          "fall_speed_ratio_to_fit": 1.181494132231177,
+          "ratio_to_fit": {
+            "mass_kg": 4.707251837151658,
+            "equatorial_dimension_m": 2.830363081028708,
+            "polar_dimension_m": 0.8329917969258642,
+            "diameter_m": 2.830363081028708
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 9.0,
+          "elapsed_s": 360.0,
+          "mass_kg": 2.2430834949609766e-08,
+          "equatorial_dimension_m": 0.003728489344702482,
+          "polar_dimension_m": 1.1029192848174694e-05,
+          "diameter_m": 0.003728489344702482,
+          "density_kg_m3": 279.4069948479162,
+          "terminal_speed_m_s": 0.14764620628117528,
+          "sha256": "72ff18746f286034708a70e3502ab2a79e168054d966fd8875ca9e55fe305472",
+          "observed_fit": {
+            "age_min": 9.0,
+            "mass_kg": 4.200321984108511e-09,
+            "equatorial_dimension_m": 0.0012225614908385825,
+            "polar_dimension_m": 1.3793001435101957e-05,
+            "diameter_m": 0.0012225614908385825,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.12480000000000001,
+          "fall_speed_ratio_to_fit": 1.1830625503299301,
+          "ratio_to_fit": {
+            "mass_kg": 5.340265587846488,
+            "equatorial_dimension_m": 3.0497356350926994,
+            "polar_dimension_m": 0.7996223954640056,
+            "diameter_m": 3.0497356350926994
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 10.0,
+          "elapsed_s": 420.0,
+          "mass_kg": 3.2132189324118656e-08,
+          "equatorial_dimension_m": 0.004431653246601546,
+          "polar_dimension_m": 1.1214537441773385e-05,
+          "diameter_m": 0.004431653246601546,
+          "density_kg_m3": 278.63058450943174,
+          "terminal_speed_m_s": 0.15644603001675828,
+          "sha256": "a24743c65b965a172cd54bcf7ad0afb5169ae8dc208aefea3df203e88b957da6",
+          "observed_fit": {
+            "age_min": 10.0,
+            "mass_kg": 5.391726275235823e-09,
+            "equatorial_dimension_m": 0.0013612671124661696,
+            "polar_dimension_m": 1.456976934523401e-05,
+            "diameter_m": 0.0013612671124661696,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.13299999999999998,
+          "fall_speed_ratio_to_fit": 1.1762859399756262,
+          "ratio_to_fit": {
+            "mass_kg": 5.959536460836611,
+            "equatorial_dimension_m": 3.2555353802479248,
+            "polar_dimension_m": 0.7697127645635535,
+            "diameter_m": 3.2555353802479248
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 11.0,
+          "elapsed_s": 480.0,
+          "mass_kg": 4.440501141077722e-08,
+          "equatorial_dimension_m": 0.005178066653008368,
+          "polar_dimension_m": 1.1372077619132586e-05,
+          "diameter_m": 0.005178066653008368,
+          "density_kg_m3": 278.13668586494384,
+          "terminal_speed_m_s": 0.1643528567953655,
+          "sha256": "c6aaf48579d54543d9721cc1f9e4d6f0b173d697d521b301093ec711b44688db",
+          "observed_fit": {
+            "age_min": 11.0,
+            "mass_kg": 6.758160471879313e-09,
+            "equatorial_dimension_m": 0.0015002508834079176,
+            "polar_dimension_m": 1.53100592974255e-05,
+            "diameter_m": 0.0015002508834079176,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1412,
+          "fall_speed_ratio_to_fit": 1.1639720736215686,
+          "ratio_to_fit": {
+            "mass_kg": 6.570576652558983,
+            "equatorial_dimension_m": 3.4514671581102836,
+            "polar_dimension_m": 0.7427846880413379,
+            "diameter_m": 3.4514671581102836
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 12.0,
+          "elapsed_s": 540.0,
+          "mass_kg": 5.961499041795043e-08,
+          "equatorial_dimension_m": 0.005967679944797077,
+          "polar_dimension_m": 1.1508042731047073e-05,
+          "diameter_m": 0.005967679944797077,
+          "density_kg_m3": 277.8077415334132,
+          "terminal_speed_m_s": 0.1715046849042936,
+          "sha256": "169c8736e758f9e35c8577fdf82af5ad1011f45f23f2a47a048ce45a98d2a5ea",
+          "observed_fit": {
+            "age_min": 12.0,
+            "mass_kg": 8.30591321717268e-09,
+            "equatorial_dimension_m": 0.0016394879283315742,
+            "polar_dimension_m": 1.6018687329706366e-05,
+            "diameter_m": 0.0016394879283315742,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1494,
+          "fall_speed_ratio_to_fit": 1.147956391595004,
+          "ratio_to_fit": {
+            "mass_kg": 7.1774155182232064,
+            "equatorial_dimension_m": 3.6399657732582944,
+            "polar_dimension_m": 0.7184135937097428,
+            "diameter_m": 3.6399657732582944
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 13.0,
+          "elapsed_s": 600.0,
+          "mass_kg": 7.814839706772045e-08,
+          "equatorial_dimension_m": 0.006800412747844898,
+          "polar_dimension_m": 1.1626849150102776e-05,
+          "diameter_m": 0.006800412747844898,
+          "density_kg_m3": 277.5804456596083,
+          "terminal_speed_m_s": 0.1780068488049348,
+          "sha256": "d68dacf1cd7dfef13a91531c7932979b7f2095c465c088b4c68348089344e92f",
+          "observed_fit": {
+            "age_min": 13.0,
+            "mass_kg": 1.0040921712973327e-08,
+            "equatorial_dimension_m": 0.0017789574955732886,
+            "polar_dimension_m": 1.6699490447045075e-05,
+            "diameter_m": 0.0017789574955732886,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1576,
+          "fall_speed_ratio_to_fit": 1.1294850812495865,
+          "ratio_to_fit": {
+            "mass_kg": 7.782990376944097,
+            "equatorial_dimension_m": 3.822695463363721,
+            "polar_dimension_m": 0.6962397557561472,
+            "diameter_m": 3.822695463363721
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 14.0,
+          "elapsed_s": 660.0,
+          "mass_kg": 1.004118305678541e-07,
+          "equatorial_dimension_m": 0.007676164129872079,
+          "polar_dimension_m": 1.1731734726023504e-05,
+          "diameter_m": 0.007676164129872079,
+          "density_kg_m3": 277.418566771229,
+          "terminal_speed_m_s": 0.18394330953221405,
+          "sha256": "dafbb1b431417f8e486e7f5dbf44bd4fe6aeb1a2a652b4ed6f5d16610416f2fe",
+          "observed_fit": {
+            "age_min": 14.0,
+            "mass_kg": 1.1968818482442176e-08,
+            "equatorial_dimension_m": 0.001918642006824116,
+            "polar_dimension_m": 1.735558492560232e-05,
+            "diameter_m": 0.001918642006824116,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.16579999999999998,
+          "fall_speed_ratio_to_fit": 1.109428887407805,
+          "ratio_to_fit": {
+            "mass_kg": 8.38945220158152,
+            "equatorial_dimension_m": 4.000831891811989,
+            "polar_dimension_m": 0.675963084869429,
+            "diameter_m": 4.000831891811989
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 15.0,
+          "elapsed_s": 720.0,
+          "mass_kg": 1.2683199424134675e-07,
+          "equatorial_dimension_m": 0.008594820086779063,
+          "polar_dimension_m": 1.1825138785566072e-05,
+          "diameter_m": 0.008594820086779063,
+          "density_kg_m3": 277.3003208058943,
+          "terminal_speed_m_s": 0.18938306568581378,
+          "sha256": "e3d9d97cb939a8167ee52a1f201b22cfb555bb6b7d01fc0166e99291506ed9c4",
+          "observed_fit": {
+            "age_min": 15.0,
+            "mass_kg": 1.4094968835893253e-08,
+            "equatorial_dimension_m": 0.0020585263785494043,
+            "polar_dimension_m": 1.7989543015457557e-05,
+            "diameter_m": 0.0020585263785494043,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.174,
+          "fall_speed_ratio_to_fit": 1.0884084234816884,
+          "ratio_to_fit": {
+            "mass_kg": 8.998387702593947,
+            "equatorial_dimension_m": 4.175229511916982,
+            "polar_dimension_m": 0.6573340287413245,
+            "diameter_m": 4.175229511916982
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 16.0,
+          "elapsed_s": 780.0,
+          "mass_kg": 1.578555015338076e-07,
+          "equatorial_dimension_m": 0.009556259063959821,
+          "polar_dimension_m": 1.1908940976567864e-05,
+          "diameter_m": 0.009556259063959821,
+          "density_kg_m3": 277.21206495869905,
+          "terminal_speed_m_s": 0.19438398247171249,
+          "sha256": "42f1356fe5b0235e6d17a422547c180c5423e5dd3eadce42bb67d957901d2353",
+          "observed_fit": {
+            "age_min": 16.0,
+            "mass_kg": 1.6424501414942382e-08,
+            "equatorial_dimension_m": 0.0021985975243676713,
+            "polar_dimension_m": 1.86035175138803e-05,
+            "diameter_m": 0.0021985975243676713,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1822,
+          "fall_speed_ratio_to_fit": 1.0668714735000686,
+          "ratio_to_fit": {
+            "mass_kg": 9.61097676853659,
+            "equatorial_dimension_m": 4.346524981514411,
+            "polar_dimension_m": 0.6401445838230575,
+            "diameter_m": 4.346524981514411
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 17.0,
+          "elapsed_s": 840.0,
+          "mass_kg": 1.9394870773363954e-07,
+          "equatorial_dimension_m": 0.010560355926187674,
+          "polar_dimension_m": 1.198461746197941e-05,
+          "diameter_m": 0.010560355926187674,
+          "density_kg_m3": 277.1449566034106,
+          "terminal_speed_m_s": 0.19899522641776554,
+          "sha256": "7abe071d558a1f80d98f40b2e2fc29052633ca6b4fe1237acd827da19399bf0a",
+          "observed_fit": {
+            "age_min": 17.0,
+            "mass_kg": 1.8962333466094363e-08,
+            "equatorial_dimension_m": 0.002338843981761323,
+            "polar_dimension_m": 1.9199331866979786e-05,
+            "diameter_m": 0.002338843981761323,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.19039999999999999,
+          "fall_speed_ratio_to_fit": 1.0451429958916258,
+          "ratio_to_fit": {
+            "mass_kg": 10.228103417779774,
+            "equatorial_dimension_m": 4.515203240805717,
+            "polar_dimension_m": 0.6242205481426834,
+            "diameter_m": 4.515203240805717
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 18.0,
+          "elapsed_s": 900.0,
+          "mass_kg": 2.3559756022295163e-07,
+          "equatorial_dimension_m": 0.011606984687251142,
+          "polar_dimension_m": 1.2053346510964055e-05,
+          "diameter_m": 0.011606984687251142,
+          "density_kg_m3": 277.09309371743217,
+          "terminal_speed_m_s": 0.20325891963766,
+          "sha256": "c30756a2395fa192dd6de7be343e36d378e8d691c81c6a6fa229c8a6de14538e",
+          "observed_fit": {
+            "age_min": 18.0,
+            "mass_kg": 2.171319202300609e-08,
+            "equatorial_dimension_m": 0.0024792556265240237,
+            "polar_dimension_m": 1.977854679375429e-05,
+            "diameter_m": 0.0024792556265240237,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1986,
+          "fall_speed_ratio_to_fit": 1.023458809857301,
+          "ratio_to_fit": {
+            "mass_kg": 10.85043414958637,
+            "equatorial_dimension_m": 4.681640958308287,
+            "polar_dimension_m": 0.6094151727451627,
+            "diameter_m": 4.681640958308287
+          },
+          "ledger_mass_error_kg": 5.293955920339377e-23
+        },
+        {
+          "age_min": 19.0,
+          "elapsed_s": 960.0,
+          "mass_kg": 2.833074592855651e-07,
+          "equatorial_dimension_m": 0.012696020255661833,
+          "polar_dimension_m": 1.2116081922165624e-05,
+          "diameter_m": 0.012696020255661833,
+          "density_kg_m3": 277.0524357174587,
+          "terminal_speed_m_s": 0.20721133472626144,
+          "sha256": "9f246dc182c478a8238322d17a89b6e891bd09c209d020e13f30c80e81b7946c",
+          "observed_fit": {
+            "age_min": 19.0,
+            "mass_kg": 2.4681631859373748e-08,
+            "equatorial_dimension_m": 0.002619823450568232,
+            "polar_dimension_m": 2.034251050694647e-05,
+            "diameter_m": 0.002619823450568232,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2068,
+          "fall_speed_ratio_to_fit": 1.001989046065094,
+          "ratio_to_fit": {
+            "mass_kg": 11.478473583097738,
+            "equatorial_dimension_m": 4.846135816101693,
+            "polar_dimension_m": 0.5956040636197916,
+            "diameter_m": 4.846135816101693
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 20.0,
+          "elapsed_s": 1020.0,
+          "mass_kg": 3.3760312134985166e-07,
+          "equatorial_dimension_m": 0.013827339405729892,
+          "polar_dimension_m": 1.2173605331956605e-05,
+          "diameter_m": 0.013827339405729892,
+          "density_kg_m3": 277.0201542961891,
+          "terminal_speed_m_s": 0.21088380184580308,
+          "sha256": "dea20b344da752139901143c9e6d43bb0b73c9e61c12f4c63360df4c504c3af2",
+          "observed_fit": {
+            "age_min": 20.0,
+            "mass_kg": 2.7872050855294237e-08,
+            "equatorial_dimension_m": 0.002760539386422945,
+            "polar_dimension_m": 2.0892397214978434e-05,
+            "diameter_m": 0.002760539386422945,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.215,
+          "fall_speed_ratio_to_fit": 0.9808548923060608,
+          "ratio_to_fit": {
+            "mass_kg": 12.112604239372814,
+            "equatorial_dimension_m": 5.008926687927861,
+            "polar_dimension_m": 0.5826811163263235,
+            "diameter_m": 5.008926687927861
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 21.0,
+          "elapsed_s": 1080.0,
+          "mass_kg": 3.9902843650508875e-07,
+          "equatorial_dimension_m": 0.015000821139033328,
+          "polar_dimension_m": 1.2226564273615861e-05,
+          "diameter_m": 0.015000821139033328,
+          "density_kg_m3": 276.994230546396,
+          "terminal_speed_m_s": 0.21430342266512178,
+          "sha256": "de3ea9350cb2ea9ce391cbf795186fcac417aee4b6d66f17996430a38c24d0b2",
+          "observed_fit": {
+            "age_min": 21.0,
+            "mass_kg": 3.1288703265097984e-08,
+            "equatorial_dimension_m": 0.002901396166756042,
+            "polar_dimension_m": 2.1429237085327042e-05,
+            "diameter_m": 0.002901396166756042,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2232,
+          "fall_speed_ratio_to_fit": 0.9601407825498287,
+          "ratio_to_fit": {
+            "mass_kg": 12.75311517784114,
+            "equatorial_dimension_m": 5.170207816123665,
+            "polar_dimension_m": 0.5705552757166327,
+            "diameter_m": 5.170207816123665
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 22.0,
+          "elapsed_s": 1140.0,
+          "mass_kg": 4.6814631195032743e-07,
+          "equatorial_dimension_m": 0.01621634656128528,
+          "polar_dimension_m": 1.227550038569452e-05,
+          "diameter_m": 0.01621634656128528,
+          "density_kg_m3": 276.9731979913793,
+          "terminal_speed_m_s": 0.21749364580681688,
+          "sha256": "eb4b1afc84c38506ff7bbf6336c639ca76a7867052c41cab5efb2fb5e6eab16f",
+          "observed_fit": {
+            "age_min": 22.0,
+            "mass_kg": 3.493571126294257e-08,
+            "equatorial_dimension_m": 0.0030423872105896474,
+            "polar_dimension_m": 2.195393987697681e-05,
+            "diameter_m": 0.0030423872105896474,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.23140000000000002,
+          "fall_speed_ratio_to_fit": 0.9399033958807989,
+          "ratio_to_fit": {
+            "mass_kg": 13.400222724158624,
+            "equatorial_dimension_m": 5.330138946430287,
+            "polar_dimension_m": 0.5591479458576768,
+            "diameter_m": 5.330138946430287
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 23.0,
+          "elapsed_s": 1200.0,
+          "mass_kg": 5.455384926098335e-07,
+          "equatorial_dimension_m": 0.01747379836528653,
+          "polar_dimension_m": 1.2320870663918463e-05,
+          "diameter_m": 0.01747379836528653,
+          "density_kg_m3": 276.9559746583391,
+          "terminal_speed_m_s": 0.22047473728737227,
+          "sha256": "e0c7b20192d1b496007f2bc469a1458819ce3b3ed644bf14dfcb173f43677e33",
+          "observed_fit": {
+            "age_min": 23.0,
+            "mass_kg": 3.881707506039571e-08,
+            "equatorial_dimension_m": 0.0031835065301490874,
+            "polar_dimension_m": 2.2467313804892275e-05,
+            "diameter_m": 0.0031835065301490874,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2396,
+          "fall_speed_ratio_to_fit": 0.920178369312906,
+          "ratio_to_fit": {
+            "mass_kg": 14.054085521926293,
+            "equatorial_dimension_m": 5.4888526848626285,
+            "polar_dimension_m": 0.5483909100533231,
+            "diameter_m": 5.4888526848626285
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 24.0,
+          "elapsed_s": 1260.0,
+          "mass_kg": 6.318053494499896e-07,
+          "equatorial_dimension_m": 0.018773059982499906,
+          "polar_dimension_m": 1.236306370710442e-05,
+          "diameter_m": 0.018773059982499906,
+          "density_kg_m3": 276.94175094188785,
+          "terminal_speed_m_s": 0.22326416795862528,
+          "sha256": "cba9e2d7a05418d2adbb900efa28ff937b235b61af8312bd8a2f0dcdf397894b",
+          "observed_fit": {
+            "age_min": 24.0,
+            "mass_kg": 4.2936681828969894e-08,
+            "equatorial_dimension_m": 0.0033247486538662313,
+            "polar_dimension_m": 2.2970080762757087e-05,
+            "diameter_m": 0.0033247486538662313,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.24780000000000002,
+          "fall_speed_ratio_to_fit": 0.900985342851595,
+          "ratio_to_fit": {
+            "mass_kg": 14.71481545701799,
+            "equatorial_dimension_m": 5.646459909283484,
+            "polar_dimension_m": 0.5382246512232327,
+            "diameter_m": 5.646459909283484
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 25.0,
+          "elapsed_s": 1320.0,
+          "mass_kg": 7.27565625070282e-07,
+          "equatorial_dimension_m": 0.020114014443528623,
+          "polar_dimension_m": 1.2402412299568377e-05,
+          "diameter_m": 0.020114014443528623,
+          "density_kg_m3": 276.92991325475754,
+          "terminal_speed_m_s": 0.22587693352730334,
+          "sha256": "e6241f4df92af9b363f2eb83e6d35f05aacfbb0aff3f2f82f48c59111eec2db8",
+          "observed_fit": {
+            "age_min": 25.0,
+            "mass_kg": 4.729831361415687e-08,
+            "equatorial_dimension_m": 0.0034661085621771944,
+            "polar_dimension_m": 2.3462888728584083e-05,
+            "diameter_m": 0.0034661085621771944,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.256,
+          "fall_speed_ratio_to_fit": 0.8823317715910287,
+          "ratio_to_fit": {
+            "mass_kg": 15.382485536493084,
+            "equatorial_dimension_m": 5.803053794395363,
+            "polar_dimension_m": 0.5285969874825736,
+            "diameter_m": 5.803053794395363
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 26.0,
+          "elapsed_s": 1380.0,
+          "mass_kg": 8.334561249526824e-07,
+          "equatorial_dimension_m": 0.021496542970833917,
+          "polar_dimension_m": 1.2439203271669808e-05,
+          "diameter_m": 0.021496542970833917,
+          "density_kg_m3": 276.91999112505005,
+          "terminal_speed_m_s": 0.2283258189732338,
+          "sha256": "d7af2901632f9cee50251981b0886c19e7e1833e74d8a9ab7faa4228a39bcc1b",
+          "observed_fit": {
+            "age_min": 26.0,
+            "mass_kg": 5.1905654391882146e-08,
+            "equatorial_dimension_m": 0.0036075816335601296,
+            "polar_dimension_m": 2.394632196573046e-05,
+            "diameter_m": 0.0036075816335601296,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.26420000000000005,
+          "fall_speed_ratio_to_fit": 0.8642158174611422,
+          "ratio_to_fit": {
+            "mass_kg": 16.057135483933557,
+            "equatorial_dimension_m": 5.958712831570807,
+            "polar_dimension_m": 0.519461957016678,
+            "diameter_m": 5.958712831570807
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 27.0,
+          "elapsed_s": 1440.0,
+          "mass_kg": 9.501313413957557e-07,
+          "equatorial_dimension_m": 0.02292052331473154,
+          "polar_dimension_m": 1.247368531031827e-05,
+          "diameter_m": 0.02292052331473154,
+          "density_kg_m3": 276.91161995131654,
+          "terminal_speed_m_s": 0.23062161689616492,
+          "sha256": "0ccc205edb2e4c5c2942f0d3a6e63317d62270c0ae3b966c2025bd77e6fc9ba7",
+          "observed_fit": {
+            "age_min": 27.0,
+            "mass_kg": 5.67622963906214e-08,
+            "equatorial_dimension_m": 0.003749163598847738,
+            "polar_dimension_m": 2.4420909480346218e-05,
+            "diameter_m": 0.003749163598847738,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2724,
+          "fall_speed_ratio_to_fit": 0.8466285495453926,
+          "ratio_to_fit": {
+            "mass_kg": 16.738775592467785,
+            "equatorial_dimension_m": 6.113503108206827,
+            "polar_dimension_m": 0.5107789011853554,
+            "diameter_m": 6.113503108206827
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 28.0,
+          "elapsed_s": 1500.0,
+          "mass_kg": 1.0782629957116784e-06,
+          "equatorial_dimension_m": 0.02438582783552283,
+          "polar_dimension_m": 1.2506075206203419e-05,
+          "diameter_m": 0.02438582783552283,
+          "density_kg_m3": 276.9045143973556,
+          "terminal_speed_m_s": 0.23277330787707343,
+          "sha256": "0743040e65cdc38d6c6620126f50c1a8e422e258a6582c0c81b5cd7bf5671a64",
+          "observed_fit": {
+            "age_min": 28.0,
+            "mass_kg": 6.187174578068195e-08,
+            "equatorial_dimension_m": 0.003890850502285357,
+            "polar_dimension_m": 2.488713208645183e-05,
+            "diameter_m": 0.003890850502285357,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.28059999999999996,
+          "fall_speed_ratio_to_fit": 0.8295556232254935,
+          "ratio_to_fit": {
+            "mass_kg": 17.427389224377464,
+            "equatorial_dimension_m": 6.267480033272777,
+            "polar_dimension_m": 0.5025117061604512,
+            "diameter_m": 6.267480033272777
+          },
+          "ledger_mass_error_kg": 2.117582368135751e-22
+        },
+        {
+          "age_min": 29.0,
+          "elapsed_s": 1560.0,
+          "mass_kg": 1.2185394828315466e-06,
+          "equatorial_dimension_m": 0.025892321330162976,
+          "polar_dimension_m": 1.253656289539479e-05,
+          "diameter_m": 0.025892321330162976,
+          "density_kg_m3": 276.89844913248146,
+          "terminal_speed_m_s": 0.2347882100242117,
+          "sha256": "df2263049c35b844d99cc5307fad8a5f3e2a4730e706c873b51ec20cbdb56b3b",
+          "observed_fit": {
+            "age_min": 29.0,
+            "mass_kg": 6.723742781490735e-08,
+            "equatorial_dimension_m": 0.004032638668132747,
+            "polar_dimension_m": 2.534542834914594e-05,
+            "diameter_m": 0.004032638668132747,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.28879999999999995,
+          "fall_speed_ratio_to_fit": 0.8129785665658302,
+          "ratio_to_fit": {
+            "mass_kg": 18.122934241118926,
+            "equatorial_dimension_m": 6.420689642930997,
+            "polar_dimension_m": 0.49462817209862747,
+            "diameter_m": 6.420689642930997
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 30.0,
+          "elapsed_s": 1620.0,
+          "mass_kg": 1.3716652011876504e-06,
+          "equatorial_dimension_m": 0.02743985860096861,
+          "polar_dimension_m": 1.2565315561471065e-05,
+          "diameter_m": 0.02743985860096861,
+          "density_kg_m3": 276.8932447173143,
+          "terminal_speed_m_s": 0.23667210432022723,
+          "sha256": "ae5d48ea085785b3c43d6d50b1048b01c49d326f0bd698b28c7cc1fa12611925",
+          "observed_fit": {
+            "age_min": 30.0,
+            "mass_kg": 7.286269149125554e-08,
+            "equatorial_dimension_m": 0.004174524671856013,
+            "polar_dimension_m": 2.579619961642184e-05,
+            "diameter_m": 0.004174524671856013,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.297,
+          "fall_speed_ratio_to_fit": 0.7968757721219772,
+          "ratio_to_fit": {
+            "mass_kg": 18.825343575899442,
+            "equatorial_dimension_m": 6.5731695840639786,
+            "polar_dimension_m": 0.48709948551770377,
+            "diameter_m": 6.5731695840639786
+          },
+          "ledger_mass_error_kg": 0.0
+        }
+      ],
+      "water": {
+        "ice_deposition_relative_residual": 4.013890672728194e-15,
+        "corrected_maximum_absolute_residual_kg_m2": 7.974462695381198e-15,
+        "maximum_used_fraction_of_growth_ceiling": 6.007223939503909e-07
+      },
+      "input_sha256": {
+        "init.conf": "78612154e4ef7d008fb79355ddd82eb746e36e7cc4e6d7f4f47dbaeda0bc25bc",
+        "run.conf": "4219bbfef462530a1979fead3e080e84d11f131e460fb620aab2da1c1256d8f9",
+        "env.txt": "79521ed6f4cca88a86bc1458e0f444d2672e8264a079eaf9328b926cf1b8dcb4",
+        "particles.pe000000": "60f764b4d8611571f6b539933db98f24ff9148f1b15c93df4b56f426183be851",
+        "lunar_forcing.txt": "2597b258a926ca1b74dc5a5e517f117fbdfb7e6e67e22c776ac590ce352d287b",
+        "settings.json": "04829ec86c42ebcc2d0be6377cbc68051393f0a6f9db983a4ab012d9443156ce",
+        "growth_control.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "exactly_matched_snapshot_ledger_times": 7,
+      "air_ranges": {
+        "T": [
+          258.74999999999994,
+          258.74999999999994
+        ],
+        "PRES": [
+          100999.99999999999,
+          100999.99999999999
+        ],
+        "RH": [
+          100.04753069636831,
+          100.04753069636831
+        ]
+      },
+      "ledger_sha256": "34082664804e7e0d128a6699e4be453d90fe692073922ccdda45ff3519dce08d",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true,
+        "growth_control.txt": true
+      }
+    },
+    "growth_sweep_14p4_dt1_control0": {
+      "settings": {
+        "name": "growth_sweep_14p4_dt1_control0",
+        "mode": "prescribed",
+        "packets_per_step_per_horizontal_cell": 2,
+        "dt_s": 1.0,
+        "seed": 1,
+        "layers": 4,
+        "duration_s": 1620.0,
+        "gather_start_s": 0.0,
+        "depth_m": 16280.520943378342,
+        "dx_m": 1.0,
+        "horizontal_cells": 8,
+        "capacity": 128,
+        "collisions": false,
+        "original_settings": {
+          "top_c": -15.0,
+          "number_per_m3": 100000.0,
+          "snowfall_mm_h": 3.0,
+          "layers": 30,
+          "area_m2": 0.0004,
+          "layer_volume_m3": 0.2170736125783779,
+          "max_step_s": 60.0,
+          "fill": 1.5,
+          "gather": 1.5,
+          "breakup": true,
+          "seed": 20261021,
+          "wall_limit_s": 1800.0,
+          "collisions": true,
+          "growth": true,
+          "settling": true,
+          "settling_scheme": "upwind",
+          "geometry": "bf95_dmax_dendrites_area",
+          "injection_reference_velocity_m_s": 0.10232426627407396,
+          "injected_number_flux_m2_s": 10232.426627407396,
+          "total_time_s": 477321.407800899,
+          "gathering_time_s": 238660.7039004495,
+          "depth_m": 16280.520943378342
+        },
+        "profile": [
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          }
+        ],
+        "forcing": "Stationary isolated crystals with native terminal-speed ventilation in fixed water-saturated air; no liquid, collisions, injection or transport.",
+        "unmatched": "Empirical Table 2 fits at Earth gravity and 1010 hPa. Planar thickness is inferred, fits lack pointwise errors, piecewise fits may have discontinuous joins. No aggregate or lunar validation.",
+        "build": {
+          "build": {
+            "command": [
+              "make",
+              "-j1",
+              "build",
+              "ENABLE_SDM=T",
+              "SCALE_SYS=Linux64-gnu-ompi",
+              "GNUCPPOPT=-cpp",
+              "MODDIROPT=-J",
+              "FFLAGS_FAST=-O2 -g -cpp -m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch -ffree-line-length-none -fimplicit-none -fmodule-private -fbacktrace -fcheck=bounds -ffpe-trap=invalid,zero,overflow",
+              "FFLAGS_CORE=-m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch",
+              "NETCDF_INCLUDE=-I/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/include",
+              "NETCDF_LIBS=/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu/libnetcdff.so.7 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19 -Wl,-rpath,/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu -lm -lz"
+            ],
+            "cwd": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/growth_controls/work/scale-les/test/case/warmbubble/2D_Khain04_sdm",
+            "exit_code": 0,
+            "elapsed_s": 45.86596357100643,
+            "log_sha256": "e686bfe97d57d96996eaecf48ff1999f55f958335473045a70e947b534c0ae1e",
+            "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+            "environment": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "executable_sha256": {
+              "scale-les_init": "478c82442f24eb1a5c15e5266b5ae7582e28f43c824acc1fbc29bfac1608deec",
+              "scale-les": "0224a5d22094f0c0a030d926dab623507dd2297ac94c7099dc565538df1b4138"
+            }
+          },
+          "original_manifest": {
+            "build": {
+              "command": [
+                "make",
+                "-j1",
+                "build",
+                "ENABLE_SDM=T",
+                "SCALE_SYS=Linux64-gnu-ompi",
+                "GNUCPPOPT=-cpp",
+                "MODDIROPT=-J",
+                "FFLAGS_FAST=-O2 -g -cpp -m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch -ffree-line-length-none -fimplicit-none -fmodule-private -fbacktrace -fcheck=bounds -ffpe-trap=invalid,zero,overflow",
+                "FFLAGS_CORE=-m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch",
+                "NETCDF_INCLUDE=-I/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/include",
+                "NETCDF_LIBS=/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu/libnetcdff.so.7 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19 -Wl,-rpath,/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu -lm -lz"
+              ],
+              "cwd": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/lunar/work/scale-les/test/case/warmbubble/2D_Khain04_sdm",
+              "exit_code": 0,
+              "elapsed_s": 44.23016245395411,
+              "log_sha256": "075824baf3aabf6977f18ad0222ace22204916980064f8a14a2800a3d8a1d512",
+              "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+              "environment": {
+                "OMP_NUM_THREADS": "1",
+                "OPENBLAS_NUM_THREADS": "1"
+              },
+              "executable_sha256": {
+                "scale-les_init": "1e942b2ac3d702af45798ad2683b5fe995908777d3684203ce2e0f62705eff99",
+                "scale-les": "56c98cf48343f37c402606e08d1dfa45986df03c687ce731b20b627a5429a9cb"
+              }
+            },
+            "hook_sha256": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11",
+            "adapter_sha256": "ff62b444f75bd32980ddd1520e68e893b29b14df4c5e9e669544a3f483049adb",
+            "patches": [
+              {
+                "source": "contrib/SDM/scale_atmos_phy_mp_sdm.F90",
+                "original_sha256": "7dd8d44b34cbccba201ed75021f39435bba07045fdb91ce13db2003f73fc1605",
+                "patched_sha256": "0855ed87d04f51478f374b150166f2ca02554e14f8eb82328fc678e5c0b3670c",
+                "patch_sha256": "6258a867067e19f823a30944801eaab46573f3d75dcdc5815ee337d29f7a5101"
+              },
+              {
+                "source": "contrib/SDM/sdm_coalescence_cold.f90",
+                "original_sha256": "d6b9eed09771d1139e1533221d3c586dc10d9ac70f8c418a40429bf6c1d94ad1",
+                "patched_sha256": "22573a3b9241c3fd446ca2853c67674bc05671704b7da08c6079f1372120b487",
+                "patch_sha256": "13fe397120a8b4fab07e21fb4d2f462f6f86b2510953cc5689a8e9334e77641f"
+              }
+            ]
+          },
+          "hook_sha256": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11",
+          "producer_sha256": "e1fe9d0b310cd61a74c5036e0e5ea00779141fc709a0b072985d121bd3c6649d",
+          "source": "contrib/SDM/sdm_subldep.f90",
+          "original_sha256": "37afcfdb871cdc3da53488810ada6e8541128eccd3a0e774faf6e359408cb444",
+          "patched_sha256": "8fe48cdc857a161a165062b9f3929cd23f45d0880ceaa4601d4359ef2d4de111",
+          "patch_sha256": "f3937147590e3118ae9c1db05e8be5a8a71f94dfe1e9867ce2eaa0feb31ab50d",
+          "modes": {
+            "0": "native anisotropic ventilation",
+            "1": "unit polar/equatorial ventilation ratio; native mean ventilation"
+          },
+          "trace_fields": [
+            "call",
+            "mode",
+            "particle_index",
+            "elapsed_before_s",
+            "elapsed_after_s",
+            "dt_s",
+            "temperature_K",
+            "pressure_Pa",
+            "air_density_kg_m3",
+            "ice_supersaturation",
+            "intrinsic_growth_ratio",
+            "capacitance_m",
+            "mean_ventilation",
+            "native_axis_ventilation_ratio",
+            "axis_ventilation_ratio",
+            "effective_growth_ratio",
+            "deposition_density_kg_m3",
+            "equatorial_radius_m",
+            "polar_radius_m",
+            "mass_kg",
+            "density_kg_m3",
+            "terminal_speed_m_s",
+            "reynolds",
+            "schmidt",
+            "ventilation_x",
+            "diffusive_resistance",
+            "thermal_resistance",
+            "new_equatorial_radius_m",
+            "new_polar_radius_m",
+            "new_mass_kg",
+            "new_density_kg_m3",
+            "mass_increment_kg",
+            "volume_increment_m3"
+          ],
+          "evidence": "Controlled anisotropic-ventilation sensitivity. Mode 0 is checked against the preserved native executable; neither mode is an empirical repair."
+        },
+        "build_directory": "growth_controls",
+        "collection": "native",
+        "producer": {
+          "files": {
+            "atmosphere/snow/event_column.py": "7c59ee26fa6c66cac524f45f3f0a3eb25c822caea19d092de19816f2222c9ea7",
+            "atmosphere/snow/event_column.cpp": "18d8ccc02b35a86072f360fe0afdb98637b235a148509e1e5b99e7203e04514b",
+            "atmosphere/snow/aggregation.py": "b1be75f1dc08b92c320fd288d458940821a43a9ae346221cc2d0dbd7a1adf628",
+            "atmosphere/snow/flakes.py": "ce3a82113fc62480130c4db99a95de44d7f3f1432f6444cdb8fcb86ced8012a5",
+            "atmosphere/snow/habits.py": "e2cd9e9693b70c03de051f98635416f7f29b7cf87a1d7bda9154ccedfe26e8d1",
+            "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
+            "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",
+            "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+          },
+          "inputs": {
+            "research/studies/climate_targets/results/climate_targets.json": "80a85def114b039cef9c9acd97b18d3bd47413f51f6693d1cc6f5e850ebdbea8"
+          },
+          "constants": {
+            "AVOGADRO": 6.02214076e+23,
+            "BOLTZMANN": 1.380649e-23,
+            "EARTH_GM": 398600441800000.0,
+            "EARTH_RADIUS": 6371000.0,
+            "GAS_CONSTANT": 8.31446261815324,
+            "MOON_GM": 4902800118000.0,
+            "MOON_RADIUS": 1737400.0,
+            "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+            "STANDARD_GRAVITY": 9.80665
+          }
+        },
+        "constants": {
+          "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+          "STANDARD_GRAVITY": 9.80665
+        },
+        "adapter_sha256": "83488e1d1ef1b1ff45c96c54f422f51777ee473a9cdf80498256aa527618362f",
+        "gravity_m_s2": 9.80665,
+        "initial": {
+          "age_min": 3.0,
+          "mass_kg": 3.8360796779208944e-10,
+          "equatorial_dimension_m": 0.0003975513455088669,
+          "polar_dimension_m": 7.790327741144696e-06,
+          "diameter_m": 0.0003975513455088669,
+          "habit": "broad branch to dendrite",
+          "equatorial_radius_m": 0.00019877567275443345,
+          "polar_radius_m": 3.895163870572348e-06,
+          "density_kg_m3": 595.0408927601331
+        },
+        "temperature_C": -14.4,
+        "temperature_K": 258.75,
+        "pressure_Pa": 101000.0,
+        "vapor_pressure_Pa": 200.9907628063601,
+        "source_pdf_sha256": "2e5c6b492fcab7d1b3958be5a4c859fcd31174a1ac4865588ca48820bd4cd8eb",
+        "laboratory_start_age_min": 3.0,
+        "movement": false,
+        "initial_crystals": 8,
+        "deposition_ceiling_kg_m3_s": 1e-06,
+        "initial_water_kg_m2": 3.8360796779208944e-10,
+        "ledger_convention": "Add known initial ice inventory to native empty-column source ledger.",
+        "producer_sha256": "98b2996a0ec56e1e54ab151eec13ff12738d0fb877d6d69693ce19eefc9e4607",
+        "lab_producer_sha256": "cb49d30ce7878bd441ac6821f5128e53f06075a37dbd94aa4e9cd0fd91784bed",
+        "native_constants_sha256": "256841aff9d6358cb073a199d05424dc67f2c52a2cfe21666419b8a0ec26a8c2",
+        "growth_control": 0
+      },
+      "execution": [
+        {
+          "executable": "scale-les_init",
+          "exit_code": 0,
+          "elapsed_s": 0.7655946629820392,
+          "sha256": "478c82442f24eb1a5c15e5266b5ae7582e28f43c824acc1fbc29bfac1608deec"
+        },
+        {
+          "executable": "scale-les",
+          "exit_code": 0,
+          "elapsed_s": 1.1162761700106785,
+          "sha256": "0224a5d22094f0c0a030d926dab623507dd2297ac94c7099dc565538df1b4138"
+        }
+      ],
+      "snapshots": [
+        {
+          "age_min": 3.0,
+          "elapsed_s": 0.0,
+          "mass_kg": 3.8360796779208944e-10,
+          "equatorial_dimension_m": 0.0003975513455088669,
+          "polar_dimension_m": 7.790327741144696e-06,
+          "diameter_m": 0.0003975513455088669,
+          "density_kg_m3": 595.0408927601331,
+          "terminal_speed_m_s": 0.06845904682388176,
+          "sha256": "29e9ba8998766b6a1cbf84346a92eb6ae53278345d12a405c40f799dc4947193",
+          "observed_fit": {
+            "age_min": 3.0,
+            "mass_kg": 3.8360796779208944e-10,
+            "equatorial_dimension_m": 0.0003975513455088669,
+            "polar_dimension_m": 7.790327741144696e-06,
+            "diameter_m": 0.0003975513455088669,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.061756878252930074,
+          "fall_speed_ratio_to_fit": null,
+          "ratio_to_fit": {
+            "mass_kg": 1.0,
+            "equatorial_dimension_m": 1.0,
+            "polar_dimension_m": 1.0,
+            "diameter_m": 1.0
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 4.0,
+          "elapsed_s": 60.0,
+          "mass_kg": 1.1857882280943027e-09,
+          "equatorial_dimension_m": 0.0008652710374239893,
+          "polar_dimension_m": 9.035828250795401e-06,
+          "diameter_m": 0.0008652710374239893,
+          "density_kg_m3": 334.7620437057518,
+          "terminal_speed_m_s": 0.07982377569834234,
+          "sha256": "f564a6fc4693b97e91cf51f26a0aa5c93f48b968ea80726b7cc0b97983f51eab",
+          "observed_fit": {
+            "age_min": 4.0,
+            "mass_kg": 6.1462470869928e-10,
+            "equatorial_dimension_m": 0.0005346191898611546,
+            "polar_dimension_m": 9.047401674573387e-06,
+            "diameter_m": 0.0005346191898611546,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.07596984233706962,
+          "fall_speed_ratio_to_fit": 1.0507297796429964,
+          "ratio_to_fit": {
+            "mass_kg": 1.9292882490906793,
+            "equatorial_dimension_m": 1.6184810680827,
+            "polar_dimension_m": 0.9987208013754367,
+            "diameter_m": 1.6184810680827
+          },
+          "ledger_mass_error_kg": 2.0679515313825692e-25
+        },
+        {
+          "age_min": 5.0,
+          "elapsed_s": 120.0,
+          "mass_kg": 2.821698050632046e-09,
+          "equatorial_dimension_m": 0.0013626395163586704,
+          "polar_dimension_m": 9.721298772729758e-06,
+          "diameter_m": 0.0013626395163586704,
+          "density_kg_m3": 298.55590576384105,
+          "terminal_speed_m_s": 0.0984153218274795,
+          "sha256": "1ea64a5dc51ac0aecbfff83074922cfda6cdab282b89bf718c401199ec0b88f8",
+          "observed_fit": {
+            "age_min": 5.0,
+            "mass_kg": 1.0430058547897073e-09,
+            "equatorial_dimension_m": 0.000671263072932688,
+            "polar_dimension_m": 1.0160546757225714e-05,
+            "diameter_m": 0.000671263072932688,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.08921059469386831,
+          "fall_speed_ratio_to_fit": 1.1031797530909617,
+          "ratio_to_fit": {
+            "mass_kg": 2.705352072257506,
+            "equatorial_dimension_m": 2.0299634693227215,
+            "polar_dimension_m": 0.9567692571087689,
+            "diameter_m": 2.0299634693227215
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 6.0,
+          "elapsed_s": 180.0,
+          "mass_kg": 5.536510102600678e-09,
+          "equatorial_dimension_m": 0.0019001572750523162,
+          "polar_dimension_m": 1.0186257236727379e-05,
+          "diameter_m": 0.0019001572750523162,
+          "density_kg_m3": 287.5038981618688,
+          "terminal_speed_m_s": 0.11392017323030397,
+          "sha256": "41af14190e1fc03f78a934289b8cb59cec13fdcb1ef42567a4d10d0774e07c8c",
+          "observed_fit": {
+            "age_min": 6.0,
+            "mass_kg": 1.606742566787186e-09,
+            "equatorial_dimension_m": 0.0008084583067713316,
+            "polar_dimension_m": 1.1170981348177721e-05,
+            "diameter_m": 0.0008084583067713316,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1002,
+          "fall_speed_ratio_to_fit": 1.1369278765499398,
+          "ratio_to_fit": {
+            "mass_kg": 3.445797862735027,
+            "equatorial_dimension_m": 2.3503466525575156,
+            "polar_dimension_m": 0.9118498115108772,
+            "diameter_m": 2.3503466525575156
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 7.0,
+          "elapsed_s": 240.0,
+          "mass_kg": 9.595660664150468e-09,
+          "equatorial_dimension_m": 0.0024800939200326656,
+          "polar_dimension_m": 1.0531928881528072e-05,
+          "diameter_m": 0.0024800939200326656,
+          "density_kg_m3": 282.8994388125632,
+          "terminal_speed_m_s": 0.12695695386995617,
+          "sha256": "6ebb4d59075585a4a0b1bc470e72d6692a44f2de6419b1f19efc4df322550126",
+          "observed_fit": {
+            "age_min": 7.0,
+            "mass_kg": 2.315315562186333e-09,
+            "equatorial_dimension_m": 0.000946113747672357,
+            "polar_dimension_m": 1.2103296075395204e-05,
+            "diameter_m": 0.000946113747672357,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1084,
+          "fall_speed_ratio_to_fit": 1.1711896113464593,
+          "ratio_to_fit": {
+            "mass_kg": 4.144428872187672,
+            "equatorial_dimension_m": 2.621348570543689,
+            "polar_dimension_m": 0.8701703086433153,
+            "diameter_m": 2.621348570543689
+          },
+          "ledger_mass_error_kg": 3.308722450212111e-24
+        },
+        {
+          "age_min": 8.0,
+          "elapsed_s": 300.0,
+          "mass_kg": 1.5284907405516753e-08,
+          "equatorial_dimension_m": 0.0031031422405596557,
+          "polar_dimension_m": 1.0803029870799547e-05,
+          "diameter_m": 0.0031031422405596557,
+          "density_kg_m3": 280.6178202261854,
+          "terminal_speed_m_s": 0.1381876025479425,
+          "sha256": "22293a237d844fdbed61f217ca87b2e885f777e2b2feb6019a6681b9e2c60a38",
+          "observed_fit": {
+            "age_min": 8.0,
+            "mass_kg": 3.177247928269035e-09,
+            "equatorial_dimension_m": 0.0010841643912747664,
+            "polar_dimension_m": 1.2973569112161691e-05,
+            "diameter_m": 0.0010841643912747664,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.11660000000000001,
+          "fall_speed_ratio_to_fit": 1.1851423889188892,
+          "ratio_to_fit": {
+            "mass_kg": 4.8107380193789195,
+            "equatorial_dimension_m": 2.862243277434121,
+            "polar_dimension_m": 0.8326952881973368,
+            "diameter_m": 2.862243277434121
+          },
+          "ledger_mass_error_kg": 3.308722450212111e-24
+        },
+        {
+          "age_min": 9.0,
+          "elapsed_s": 360.0,
+          "mass_kg": 2.29111033963636e-08,
+          "equatorial_dimension_m": 0.003769558006243754,
+          "polar_dimension_m": 1.102334148050788e-05,
+          "diameter_m": 0.003769558006243754,
+          "density_kg_m3": 279.3529490688029,
+          "terminal_speed_m_s": 0.1480499778679171,
+          "sha256": "196411931caa53017330d7428366087cd9b949e1cdb68e034d60168ca08a3174",
+          "observed_fit": {
+            "age_min": 9.0,
+            "mass_kg": 4.200321984108511e-09,
+            "equatorial_dimension_m": 0.0012225614908385825,
+            "polar_dimension_m": 1.3793001435101957e-05,
+            "diameter_m": 0.0012225614908385825,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.12480000000000001,
+          "fall_speed_ratio_to_fit": 1.186297899582669,
+          "ratio_to_fit": {
+            "mass_kg": 5.45460645232566,
+            "equatorial_dimension_m": 3.083327942595451,
+            "polar_dimension_m": 0.7991981681705955,
+            "diameter_m": 3.083327942595451
+          },
+          "ledger_mass_error_kg": 3.308722450212111e-24
+        },
+        {
+          "age_min": 10.0,
+          "elapsed_s": 420.0,
+          "mass_kg": 3.280241217499303e-08,
+          "equatorial_dimension_m": 0.004479429517038301,
+          "polar_dimension_m": 1.1207015336632534e-05,
+          "diameter_m": 0.004479429517038301,
+          "density_kg_m3": 278.5940122043832,
+          "terminal_speed_m_s": 0.1568268738323963,
+          "sha256": "ac883202e4189b054f0f221253e290a531b2e18d23afc83983e73890ece39be5",
+          "observed_fit": {
+            "age_min": 10.0,
+            "mass_kg": 5.391726275235823e-09,
+            "equatorial_dimension_m": 0.0013612671124661696,
+            "polar_dimension_m": 1.456976934523401e-05,
+            "diameter_m": 0.0013612671124661696,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.13299999999999998,
+          "fall_speed_ratio_to_fit": 1.1791494273112506,
+          "ratio_to_fit": {
+            "mass_kg": 6.083842261365228,
+            "equatorial_dimension_m": 3.2906322910593526,
+            "polar_dimension_m": 0.7691964828735273,
+            "diameter_m": 3.2906322910593526
+          },
+          "ledger_mass_error_kg": 6.617444900424222e-24
+        },
+        {
+          "age_min": 11.0,
+          "elapsed_s": 480.0,
+          "mass_kg": 4.5308193871610326e-08,
+          "equatorial_dimension_m": 0.005232759799770805,
+          "polar_dimension_m": 1.1363141873036544e-05,
+          "diameter_m": 0.005232759799770805,
+          "density_kg_m3": 278.1109569322157,
+          "terminal_speed_m_s": 0.1647100735913271,
+          "sha256": "a4b6083ecfdbae17525a81ec6d88c1dfed7c3743f5e1aac69381283fc2814f9a",
+          "observed_fit": {
+            "age_min": 11.0,
+            "mass_kg": 6.758160471879313e-09,
+            "equatorial_dimension_m": 0.0015002508834079176,
+            "polar_dimension_m": 1.53100592974255e-05,
+            "diameter_m": 0.0015002508834079176,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1412,
+          "fall_speed_ratio_to_fit": 1.1665019376156311,
+          "ratio_to_fit": {
+            "mass_kg": 6.704219892400838,
+            "equatorial_dimension_m": 3.4879231584815003,
+            "polar_dimension_m": 0.7422010360826845,
+            "diameter_m": 3.4879231584815003
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 12.0,
+          "elapsed_s": 540.0,
+          "mass_kg": 6.079876120747966e-08,
+          "equatorial_dimension_m": 0.006029500083905229,
+          "polar_dimension_m": 1.1497895266266825e-05,
+          "diameter_m": 0.006029500083905229,
+          "density_kg_m3": 277.7890667514381,
+          "terminal_speed_m_s": 0.17183802377511906,
+          "sha256": "02188c9d91dbd028e39a2911083a2aa732387ecbc5e246395e6fce8bc863585e",
+          "observed_fit": {
+            "age_min": 12.0,
+            "mass_kg": 8.30591321717268e-09,
+            "equatorial_dimension_m": 0.0016394879283315742,
+            "polar_dimension_m": 1.6018687329706366e-05,
+            "diameter_m": 0.0016394879283315742,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1494,
+          "fall_speed_ratio_to_fit": 1.1501875754693378,
+          "ratio_to_fit": {
+            "mass_kg": 7.319936967530159,
+            "equatorial_dimension_m": 3.677672753614693,
+            "polar_dimension_m": 0.7177801170351946,
+            "diameter_m": 3.677672753614693
+          },
+          "ledger_mass_error_kg": 1.3234889800848443e-23
+        },
+        {
+          "age_min": 13.0,
+          "elapsed_s": 600.0,
+          "mass_kg": 7.966510742855176e-08,
+          "equatorial_dimension_m": 0.006869567913079789,
+          "polar_dimension_m": 1.1615651463766592e-05,
+          "diameter_m": 0.006869567913079789,
+          "density_kg_m3": 277.56653816027267,
+          "terminal_speed_m_s": 0.17831643112976164,
+          "sha256": "23a9734ccc3c657f84985e588d57f19c95bbdb85c1b3afdee1a396819f4313f6",
+          "observed_fit": {
+            "age_min": 13.0,
+            "mass_kg": 1.0040921712973327e-08,
+            "equatorial_dimension_m": 0.0017789574955732886,
+            "polar_dimension_m": 1.6699490447045075e-05,
+            "diameter_m": 0.0017789574955732886,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1576,
+          "fall_speed_ratio_to_fit": 1.1314494361025487,
+          "ratio_to_fit": {
+            "mass_kg": 7.934043278678373,
+            "equatorial_dimension_m": 3.861569447372319,
+            "polar_dimension_m": 0.6955692151566186,
+            "diameter_m": 3.861569447372319
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 14.0,
+          "elapsed_s": 660.0,
+          "mass_kg": 1.0231865007045585e-07,
+          "equatorial_dimension_m": 0.007752858940365318,
+          "polar_dimension_m": 1.1719618071909746e-05,
+          "diameter_m": 0.007752858940365318,
+          "density_kg_m3": 277.40798391207807,
+          "terminal_speed_m_s": 0.18422955688188655,
+          "sha256": "8a4fe835f38c8b6c3aaa51e8e35daecc7b18994fa03345bd09e4289d4defda7f",
+          "observed_fit": {
+            "age_min": 14.0,
+            "mass_kg": 1.1968818482442176e-08,
+            "equatorial_dimension_m": 0.001918642006824116,
+            "polar_dimension_m": 1.735558492560232e-05,
+            "diameter_m": 0.001918642006824116,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.16579999999999998,
+          "fall_speed_ratio_to_fit": 1.1111553491066741,
+          "ratio_to_fit": {
+            "mass_kg": 8.548767801980922,
+            "equatorial_dimension_m": 4.040805378382415,
+            "polar_dimension_m": 0.6752649433682524,
+            "diameter_m": 4.040805378382415
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 15.0,
+          "elapsed_s": 720.0,
+          "mass_kg": 1.291910050368072e-07,
+          "equatorial_dimension_m": 0.008679255234818236,
+          "polar_dimension_m": 1.1812211340686523e-05,
+          "diameter_m": 0.008679255234818236,
+          "density_kg_m3": 277.2921185112587,
+          "terminal_speed_m_s": 0.18964662524193673,
+          "sha256": "3b928a96d2510ce3a41c00e20a6c346b98cc19329c048b59473c49486051ac29",
+          "observed_fit": {
+            "age_min": 15.0,
+            "mass_kg": 1.4094968835893253e-08,
+            "equatorial_dimension_m": 0.0020585263785494043,
+            "polar_dimension_m": 1.7989543015457557e-05,
+            "diameter_m": 0.0020585263785494043,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.174,
+          "fall_speed_ratio_to_fit": 1.0899231335743491,
+          "ratio_to_fit": {
+            "mass_kg": 9.165753152133158,
+            "equatorial_dimension_m": 4.216246789576875,
+            "polar_dimension_m": 0.6566154198879234,
+            "diameter_m": 4.216246789576875
+          },
+          "ledger_mass_error_kg": 2.6469779601696886e-23
+        },
+        {
+          "age_min": 16.0,
+          "elapsed_s": 780.0,
+          "mass_kg": 1.6073379167797742e-07,
+          "equatorial_dimension_m": 0.009648631217418132,
+          "polar_dimension_m": 1.1895292992992243e-05,
+          "diameter_m": 0.009648631217418132,
+          "density_kg_m3": 277.20560603085727,
+          "terminal_speed_m_s": 0.19462565659052097,
+          "sha256": "ab63c13281c2443c14db7541305a667aa4a1662ae31dbdc70a4d4d5f764d9847",
+          "observed_fit": {
+            "age_min": 16.0,
+            "mass_kg": 1.6424501414942382e-08,
+            "equatorial_dimension_m": 0.0021985975243676713,
+            "polar_dimension_m": 1.86035175138803e-05,
+            "diameter_m": 0.0021985975243676713,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1822,
+          "fall_speed_ratio_to_fit": 1.0681978956669647,
+          "ratio_to_fit": {
+            "mass_kg": 9.786220453045106,
+            "equatorial_dimension_m": 4.388539107535442,
+            "polar_dimension_m": 0.6394109600035062,
+            "diameter_m": 4.388539107535442
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 17.0,
+          "elapsed_s": 840.0,
+          "mass_kg": 1.9741846357632427e-07,
+          "equatorial_dimension_m": 0.010660857828594389,
+          "polar_dimension_m": 1.197032504620664e-05,
+          "diameter_m": 0.010660857828594389,
+          "density_kg_m3": 277.13979946516633,
+          "terminal_speed_m_s": 0.19921591146186407,
+          "sha256": "f1450c4fbb3965e6423cafeecd5100cec292d4a47de7750227b5989e302a06a3",
+          "observed_fit": {
+            "age_min": 17.0,
+            "mass_kg": 1.8962333466094363e-08,
+            "equatorial_dimension_m": 0.002338843981761323,
+            "polar_dimension_m": 1.9199331866979786e-05,
+            "diameter_m": 0.002338843981761323,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.19039999999999999,
+          "fall_speed_ratio_to_fit": 1.0463020559971854,
+          "ratio_to_fit": {
+            "mass_kg": 10.41108489782224,
+            "equatorial_dimension_m": 4.558174000373454,
+            "polar_dimension_m": 0.6234761255829925,
+            "diameter_m": 4.558174000373454
+          },
+          "ledger_mass_error_kg": 2.6469779601696886e-23
+        },
+        {
+          "age_min": 18.0,
+          "elapsed_s": 900.0,
+          "mass_kg": 2.39736157466746e-07,
+          "equatorial_dimension_m": 0.011715805338122701,
+          "polar_dimension_m": 1.2038474448730638e-05,
+          "diameter_m": 0.011715805338122701,
+          "density_kg_m3": 277.0889252890669,
+          "terminal_speed_m_s": 0.20345955598073912,
+          "sha256": "308def1e682216669e9c22580d39806fff3fead7fe53fcae2854856bbfb297ab",
+          "observed_fit": {
+            "age_min": 18.0,
+            "mass_kg": 2.171319202300609e-08,
+            "equatorial_dimension_m": 0.0024792556265240237,
+            "polar_dimension_m": 1.977854679375429e-05,
+            "diameter_m": 0.0024792556265240237,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1986,
+          "fall_speed_ratio_to_fit": 1.0244690633471254,
+          "ratio_to_fit": {
+            "mass_kg": 11.04103704387337,
+            "equatorial_dimension_m": 4.725533427365271,
+            "polar_dimension_m": 0.6086632437794759,
+            "diameter_m": 4.725533427365271
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 19.0,
+          "elapsed_s": 960.0,
+          "mass_kg": 2.8819755205876314e-07,
+          "equatorial_dimension_m": 0.012813345107540184,
+          "polar_dimension_m": 1.2100685825763968e-05,
+          "diameter_m": 0.012813345107540184,
+          "density_kg_m3": 277.04902954961364,
+          "terminal_speed_m_s": 0.20739286760092768,
+          "sha256": "52248aa7076d91c77cc5d9536111100102fd99c48a710b9156b0d90283f48476",
+          "observed_fit": {
+            "age_min": 19.0,
+            "mass_kg": 2.4681631859373748e-08,
+            "equatorial_dimension_m": 0.002619823450568232,
+            "polar_dimension_m": 2.034251050694647e-05,
+            "diameter_m": 0.002619823450568232,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2068,
+          "fall_speed_ratio_to_fit": 1.0028668646079675,
+          "ratio_to_fit": {
+            "mass_kg": 11.676600384480235,
+            "equatorial_dimension_m": 4.890919311666215,
+            "polar_dimension_m": 0.5948472201418739,
+            "diameter_m": 4.890919311666215
+          },
+          "ledger_mass_error_kg": 5.293955920339377e-23
+        },
+        {
+          "age_min": 20.0,
+          "elapsed_s": 1020.0,
+          "mass_kg": 3.4333272843530885e-07,
+          "equatorial_dimension_m": 0.013953350543696183,
+          "polar_dimension_m": 1.2157733297526995e-05,
+          "diameter_m": 0.013953350543696183,
+          "density_kg_m3": 277.0173436890355,
+          "terminal_speed_m_s": 0.21104715157883247,
+          "sha256": "99742d2b0d3bc530413dd8cfc98f859ac29c732684726716a8508b7beea43e42",
+          "observed_fit": {
+            "age_min": 20.0,
+            "mass_kg": 2.7872050855294237e-08,
+            "equatorial_dimension_m": 0.002760539386422945,
+            "polar_dimension_m": 2.0892397214978434e-05,
+            "diameter_m": 0.002760539386422945,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.215,
+          "fall_speed_ratio_to_fit": 0.9816146585061976,
+          "ratio_to_fit": {
+            "mass_kg": 12.31817243079167,
+            "equatorial_dimension_m": 5.05457397649257,
+            "polar_dimension_m": 0.5819214124844766,
+            "diameter_m": 5.05457397649257
+          },
+          "ledger_mass_error_kg": 5.293955920339377e-23
+        },
+        {
+          "age_min": 21.0,
+          "elapsed_s": 1080.0,
+          "mass_kg": 4.0569102367726206e-07,
+          "equatorial_dimension_m": 0.015135697424332179,
+          "polar_dimension_m": 1.221025817779231e-05,
+          "diameter_m": 0.015135697424332179,
+          "density_kg_m3": 276.9918908469363,
+          "terminal_speed_m_s": 0.21444946246612645,
+          "sha256": "bfb964f6a53c90595904c54d1e6a9036486ad86ad3bc873eec838b128a496a78",
+          "observed_fit": {
+            "age_min": 21.0,
+            "mass_kg": 3.1288703265097984e-08,
+            "equatorial_dimension_m": 0.002901396166756042,
+            "polar_dimension_m": 2.1429237085327042e-05,
+            "diameter_m": 0.002901396166756042,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2232,
+          "fall_speed_ratio_to_fit": 0.9607950827335414,
+          "ratio_to_fit": {
+            "mass_kg": 12.966054241365876,
+            "equatorial_dimension_m": 5.2166944996190985,
+            "polar_dimension_m": 0.5697943482156385,
+            "diameter_m": 5.2166944996190985
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 22.0,
+          "elapsed_s": 1140.0,
+          "mass_kg": 4.758408691685374e-07,
+          "equatorial_dimension_m": 0.016360263729070547,
+          "polar_dimension_m": 1.2258796912592124e-05,
+          "diameter_m": 0.016360263729070547,
+          "density_kg_m3": 276.9712346702665,
+          "terminal_speed_m_s": 0.21762318531095057,
+          "sha256": "b31a9617ffe751bbe5702e567710edfc102f1cff3dcd17c2e6ba8ea0c6a54681",
+          "observed_fit": {
+            "age_min": 22.0,
+            "mass_kg": 3.493571126294257e-08,
+            "equatorial_dimension_m": 0.0030423872105896474,
+            "polar_dimension_m": 2.195393987697681e-05,
+            "diameter_m": 0.0030423872105896474,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.23140000000000002,
+          "fall_speed_ratio_to_fit": 0.9404632035909704,
+          "ratio_to_fit": {
+            "mass_kg": 13.620471774200775,
+            "equatorial_dimension_m": 5.377442973769191,
+            "polar_dimension_m": 0.5583871041501748,
+            "diameter_m": 5.377442973769191
+          },
+          "ledger_mass_error_kg": 1.0587911840678754e-22
+        },
+        {
+          "age_min": 23.0,
+          "elapsed_s": 1200.0,
+          "mass_kg": 5.543696045808009e-07,
+          "equatorial_dimension_m": 0.01762692907068989,
+          "polar_dimension_m": 1.2303802127577366e-05,
+          "diameter_m": 0.01762692907068989,
+          "density_kg_m3": 276.95431511692993,
+          "terminal_speed_m_s": 0.2205885102788518,
+          "sha256": "e21ff3e1ea0f008ec5717c71061e15f7aa7e7dc3639e6d210fc4e4973ba87f77",
+          "observed_fit": {
+            "age_min": 23.0,
+            "mass_kg": 3.881707506039571e-08,
+            "equatorial_dimension_m": 0.0031835065301490874,
+            "polar_dimension_m": 2.2467313804892275e-05,
+            "diameter_m": 0.0031835065301490874,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2396,
+          "fall_speed_ratio_to_fit": 0.9206532148533046,
+          "ratio_to_fit": {
+            "mass_kg": 14.28159138003711,
+            "equatorial_dimension_m": 5.536953954312888,
+            "polar_dimension_m": 0.5476312047993118,
+            "diameter_m": 5.536953954312888
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 24.0,
+          "elapsed_s": 1260.0,
+          "mass_kg": 6.418832577979799e-07,
+          "equatorial_dimension_m": 0.018935573791096654,
+          "polar_dimension_m": 1.2345658716745998e-05,
+          "diameter_m": 0.018935573791096654,
+          "density_kg_m3": 276.94033878045036,
+          "terminal_speed_m_s": 0.22336282299321247,
+          "sha256": "13094c8cd2ba7f11692f955a3d879cb5c94c5bdb494f4b4c2b5b9e64950da549",
+          "observed_fit": {
+            "age_min": 24.0,
+            "mass_kg": 4.2936681828969894e-08,
+            "equatorial_dimension_m": 0.0033247486538662313,
+            "polar_dimension_m": 2.2970080762757087e-05,
+            "diameter_m": 0.0033247486538662313,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.24780000000000002,
+          "fall_speed_ratio_to_fit": 0.9013834664778549,
+          "ratio_to_fit": {
+            "mass_kg": 14.94953104095933,
+            "equatorial_dimension_m": 5.695339937675334,
+            "polar_dimension_m": 0.5374669268365322,
+            "diameter_m": 5.695339937675334
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 25.0,
+          "elapsed_s": 1320.0,
+          "mass_kg": 7.390062800355855e-07,
+          "equatorial_dimension_m": 0.02028607776291021,
+          "polar_dimension_m": 1.2384696302615594e-05,
+          "diameter_m": 0.02028607776291021,
+          "density_kg_m3": 276.9287041969446,
+          "terminal_speed_m_s": 0.22596102646485816,
+          "sha256": "f08ccfed7864b87e181e2a977f60226a14d14a1a0ad9daab3d174383a7c97355",
+          "observed_fit": {
+            "age_min": 25.0,
+            "mass_kg": 4.729831361415687e-08,
+            "equatorial_dimension_m": 0.0034661085621771944,
+            "polar_dimension_m": 2.3462888728584083e-05,
+            "diameter_m": 0.0034661085621771944,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.256,
+          "fall_speed_ratio_to_fit": 0.8826602596283522,
+          "ratio_to_fit": {
+            "mass_kg": 15.624368472502862,
+            "equatorial_dimension_m": 5.852695436108255,
+            "polar_dimension_m": 0.5278419228714885,
+            "diameter_m": 5.852695436108255
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 26.0,
+          "elapsed_s": 1380.0,
+          "mass_kg": 8.463812241799008e-07,
+          "equatorial_dimension_m": 0.02167831892002452,
+          "polar_dimension_m": 1.2421199000680709e-05,
+          "diameter_m": 0.02167831892002452,
+          "density_kg_m3": 276.9189500770699,
+          "terminal_speed_m_s": 0.2283958066993344,
+          "sha256": "d732a00a4bf73a3c8bacc8f9eabaa174b9b05240a4226c19b724d314581b46b1",
+          "observed_fit": {
+            "age_min": 26.0,
+            "mass_kg": 5.1905654391882146e-08,
+            "equatorial_dimension_m": 0.0036075816335601296,
+            "polar_dimension_m": 2.394632196573046e-05,
+            "diameter_m": 0.0036075816335601296,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.26420000000000005,
+          "fall_speed_ratio_to_fit": 0.8644807217991459,
+          "ratio_to_fit": {
+            "mass_kg": 16.306146875440835,
+            "equatorial_dimension_m": 6.0091000348705474,
+            "polar_dimension_m": 0.5187100974611744,
+            "diameter_m": 6.0091000348705474
+          },
+          "ledger_mass_error_kg": 1.0587911840678754e-22
+        },
+        {
+          "age_min": 27.0,
+          "elapsed_s": 1440.0,
+          "mass_kg": 9.64668352979239e-07,
+          "equatorial_dimension_m": 0.023112171527999693,
+          "polar_dimension_m": 1.2455413153639247e-05,
+          "diameter_m": 0.023112171527999693,
+          "density_kg_m3": 276.9107188511995,
+          "terminal_speed_m_s": 0.2306778517479274,
+          "sha256": "0b9c50e17efd8a2dd31f378c364c692fc4732926853e341d23e3c78f871b89e8",
+          "observed_fit": {
+            "age_min": 27.0,
+            "mass_kg": 5.67622963906214e-08,
+            "equatorial_dimension_m": 0.003749163598847738,
+            "polar_dimension_m": 2.4420909480346218e-05,
+            "diameter_m": 0.003749163598847738,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2724,
+          "fall_speed_ratio_to_fit": 0.8468349917324796,
+          "ratio_to_fit": {
+            "mass_kg": 16.994878895326497,
+            "equatorial_dimension_m": 6.16462069969498,
+            "polar_dimension_m": 0.5100306834871682,
+            "diameter_m": 6.16462069969498
+          },
+          "ledger_mass_error_kg": 2.117582368135751e-22
+        },
+        {
+          "age_min": 28.0,
+          "elapsed_s": 1500.0,
+          "mass_kg": 1.0945451622485925e-06,
+          "equatorial_dimension_m": 0.024587504196990184,
+          "polar_dimension_m": 1.2487553517517046e-05,
+          "diameter_m": 0.024587504196990184,
+          "density_kg_m3": 276.9037306225733,
+          "terminal_speed_m_s": 0.2328160324958524,
+          "sha256": "8af959c83b411a5ae86ecadf8e1f2aeca6b6d2d8ca0700b83c67fff85d8c006d",
+          "observed_fit": {
+            "age_min": 28.0,
+            "mass_kg": 6.187174578068195e-08,
+            "equatorial_dimension_m": 0.003890850502285357,
+            "polar_dimension_m": 2.488713208645183e-05,
+            "diameter_m": 0.003890850502285357,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.28059999999999996,
+          "fall_speed_ratio_to_fit": 0.8297078848747413,
+          "ratio_to_fit": {
+            "mass_kg": 17.69054919071541,
+            "equatorial_dimension_m": 6.319313523495261,
+            "polar_dimension_m": 0.5017674786366838,
+            "diameter_m": 6.319313523495261
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 29.0,
+          "elapsed_s": 1560.0,
+          "mass_kg": 1.2367058028134356e-06,
+          "equatorial_dimension_m": 0.026104177635691072,
+          "polar_dimension_m": 1.2517808253910045e-05,
+          "diameter_m": 0.026104177635691072,
+          "density_kg_m3": 276.89776430754563,
+          "terminal_speed_m_s": 0.23481755254400855,
+          "sha256": "9f5c7758e7883196a762c35190f3bad3b2444667c280929efc901e2fab020f24",
+          "observed_fit": {
+            "age_min": 29.0,
+            "mass_kg": 6.723742781490735e-08,
+            "equatorial_dimension_m": 0.004032638668132747,
+            "polar_dimension_m": 2.534542834914594e-05,
+            "diameter_m": 0.004032638668132747,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.28879999999999995,
+          "fall_speed_ratio_to_fit": 0.8130801680886725,
+          "ratio_to_fit": {
+            "mass_kg": 18.393115902914463,
+            "equatorial_dimension_m": 6.473225047901011,
+            "polar_dimension_m": 0.4938882105865792,
+            "diameter_m": 6.473225047901011
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 30.0,
+          "elapsed_s": 1620.0,
+          "mass_kg": 1.3918603836678865e-06,
+          "equatorial_dimension_m": 0.027662042144265965,
+          "polar_dimension_m": 1.2546342991939522e-05,
+          "diameter_m": 0.027662042144265965,
+          "density_kg_m3": 276.892643811504,
+          "terminal_speed_m_s": 0.23668807397324795,
+          "sha256": "3c8bdc0f498ca01e2d8b2c47fa393b5297c36aad6729466906920aba3c9eaac2",
+          "observed_fit": {
+            "age_min": 30.0,
+            "mass_kg": 7.286269149125554e-08,
+            "equatorial_dimension_m": 0.004174524671856013,
+            "polar_dimension_m": 2.579619961642184e-05,
+            "diameter_m": 0.004174524671856013,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.297,
+          "fall_speed_ratio_to_fit": 0.7969295419974679,
+          "ratio_to_fit": {
+            "mass_kg": 19.102511246581216,
+            "equatorial_dimension_m": 6.626393258796406,
+            "polar_dimension_m": 0.48636400626829274,
+            "diameter_m": 6.626393258796406
+          },
+          "ledger_mass_error_kg": 2.117582368135751e-22
+        }
+      ],
+      "water": {
+        "ice_deposition_relative_residual": 4.9445639643145044e-15,
+        "corrected_maximum_absolute_residual_kg_m2": 8.746945890667483e-15,
+        "maximum_used_fraction_of_growth_ceiling": 6.353383137802622e-07
+      },
+      "input_sha256": {
+        "init.conf": "78612154e4ef7d008fb79355ddd82eb746e36e7cc4e6d7f4f47dbaeda0bc25bc",
+        "run.conf": "5a7dfeb895e79b1617b9ab199b93b3d8ae0d486d854bcfb3ae4db03c52feadc6",
+        "env.txt": "79521ed6f4cca88a86bc1458e0f444d2672e8264a079eaf9328b926cf1b8dcb4",
+        "particles.pe000000": "60f764b4d8611571f6b539933db98f24ff9148f1b15c93df4b56f426183be851",
+        "lunar_forcing.txt": "2597b258a926ca1b74dc5a5e517f117fbdfb7e6e67e22c776ac590ce352d287b",
+        "settings.json": "b629821c8aa6eeb65795282738f78b6a57ed7f0359d5361b9627d4d4b4d8998b",
+        "growth_control.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "exactly_matched_snapshot_ledger_times": 28,
+      "air_ranges": {
+        "T": [
+          258.74999999999994,
+          258.74999999999994
+        ],
+        "PRES": [
+          100999.99999999999,
+          100999.99999999999
+        ],
+        "RH": [
+          100.04753069636831,
+          100.04753069636831
+        ]
+      },
+      "ledger_sha256": "a963b1c6b3d05b8532cbb22d8c015e2111d09765698c310cd566d21b267a9d0a",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true,
+        "growth_control.txt": true
+      }
+    },
+    "growth_sweep_14p4_dt5_control1": {
+      "settings": {
+        "name": "growth_sweep_14p4_dt5_control1",
+        "mode": "prescribed",
+        "packets_per_step_per_horizontal_cell": 2,
+        "dt_s": 5.0,
+        "seed": 1,
+        "layers": 4,
+        "duration_s": 1620.0,
+        "gather_start_s": 0.0,
+        "depth_m": 16280.520943378342,
+        "dx_m": 1.0,
+        "horizontal_cells": 8,
+        "capacity": 128,
+        "collisions": false,
+        "original_settings": {
+          "top_c": -15.0,
+          "number_per_m3": 100000.0,
+          "snowfall_mm_h": 3.0,
+          "layers": 30,
+          "area_m2": 0.0004,
+          "layer_volume_m3": 0.2170736125783779,
+          "max_step_s": 60.0,
+          "fill": 1.5,
+          "gather": 1.5,
+          "breakup": true,
+          "seed": 20261021,
+          "wall_limit_s": 1800.0,
+          "collisions": true,
+          "growth": true,
+          "settling": true,
+          "settling_scheme": "upwind",
+          "geometry": "bf95_dmax_dendrites_area",
+          "injection_reference_velocity_m_s": 0.10232426627407396,
+          "injected_number_flux_m2_s": 10232.426627407396,
+          "total_time_s": 477321.407800899,
+          "gathering_time_s": 238660.7039004495,
+          "depth_m": 16280.520943378342
+        },
+        "profile": [
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          }
+        ],
+        "forcing": "Stationary isolated crystals with native terminal-speed ventilation in fixed water-saturated air; no liquid, collisions, injection or transport.",
+        "unmatched": "Empirical Table 2 fits at Earth gravity and 1010 hPa. Planar thickness is inferred, fits lack pointwise errors, piecewise fits may have discontinuous joins. No aggregate or lunar validation.",
+        "build": {
+          "build": {
+            "command": [
+              "make",
+              "-j1",
+              "build",
+              "ENABLE_SDM=T",
+              "SCALE_SYS=Linux64-gnu-ompi",
+              "GNUCPPOPT=-cpp",
+              "MODDIROPT=-J",
+              "FFLAGS_FAST=-O2 -g -cpp -m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch -ffree-line-length-none -fimplicit-none -fmodule-private -fbacktrace -fcheck=bounds -ffpe-trap=invalid,zero,overflow",
+              "FFLAGS_CORE=-m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch",
+              "NETCDF_INCLUDE=-I/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/include",
+              "NETCDF_LIBS=/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu/libnetcdff.so.7 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19 -Wl,-rpath,/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu -lm -lz"
+            ],
+            "cwd": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/growth_controls/work/scale-les/test/case/warmbubble/2D_Khain04_sdm",
+            "exit_code": 0,
+            "elapsed_s": 45.86596357100643,
+            "log_sha256": "e686bfe97d57d96996eaecf48ff1999f55f958335473045a70e947b534c0ae1e",
+            "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+            "environment": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "executable_sha256": {
+              "scale-les_init": "478c82442f24eb1a5c15e5266b5ae7582e28f43c824acc1fbc29bfac1608deec",
+              "scale-les": "0224a5d22094f0c0a030d926dab623507dd2297ac94c7099dc565538df1b4138"
+            }
+          },
+          "original_manifest": {
+            "build": {
+              "command": [
+                "make",
+                "-j1",
+                "build",
+                "ENABLE_SDM=T",
+                "SCALE_SYS=Linux64-gnu-ompi",
+                "GNUCPPOPT=-cpp",
+                "MODDIROPT=-J",
+                "FFLAGS_FAST=-O2 -g -cpp -m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch -ffree-line-length-none -fimplicit-none -fmodule-private -fbacktrace -fcheck=bounds -ffpe-trap=invalid,zero,overflow",
+                "FFLAGS_CORE=-m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch",
+                "NETCDF_INCLUDE=-I/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/include",
+                "NETCDF_LIBS=/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu/libnetcdff.so.7 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19 -Wl,-rpath,/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu -lm -lz"
+              ],
+              "cwd": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/lunar/work/scale-les/test/case/warmbubble/2D_Khain04_sdm",
+              "exit_code": 0,
+              "elapsed_s": 44.23016245395411,
+              "log_sha256": "075824baf3aabf6977f18ad0222ace22204916980064f8a14a2800a3d8a1d512",
+              "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+              "environment": {
+                "OMP_NUM_THREADS": "1",
+                "OPENBLAS_NUM_THREADS": "1"
+              },
+              "executable_sha256": {
+                "scale-les_init": "1e942b2ac3d702af45798ad2683b5fe995908777d3684203ce2e0f62705eff99",
+                "scale-les": "56c98cf48343f37c402606e08d1dfa45986df03c687ce731b20b627a5429a9cb"
+              }
+            },
+            "hook_sha256": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11",
+            "adapter_sha256": "ff62b444f75bd32980ddd1520e68e893b29b14df4c5e9e669544a3f483049adb",
+            "patches": [
+              {
+                "source": "contrib/SDM/scale_atmos_phy_mp_sdm.F90",
+                "original_sha256": "7dd8d44b34cbccba201ed75021f39435bba07045fdb91ce13db2003f73fc1605",
+                "patched_sha256": "0855ed87d04f51478f374b150166f2ca02554e14f8eb82328fc678e5c0b3670c",
+                "patch_sha256": "6258a867067e19f823a30944801eaab46573f3d75dcdc5815ee337d29f7a5101"
+              },
+              {
+                "source": "contrib/SDM/sdm_coalescence_cold.f90",
+                "original_sha256": "d6b9eed09771d1139e1533221d3c586dc10d9ac70f8c418a40429bf6c1d94ad1",
+                "patched_sha256": "22573a3b9241c3fd446ca2853c67674bc05671704b7da08c6079f1372120b487",
+                "patch_sha256": "13fe397120a8b4fab07e21fb4d2f462f6f86b2510953cc5689a8e9334e77641f"
+              }
+            ]
+          },
+          "hook_sha256": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11",
+          "producer_sha256": "e1fe9d0b310cd61a74c5036e0e5ea00779141fc709a0b072985d121bd3c6649d",
+          "source": "contrib/SDM/sdm_subldep.f90",
+          "original_sha256": "37afcfdb871cdc3da53488810ada6e8541128eccd3a0e774faf6e359408cb444",
+          "patched_sha256": "8fe48cdc857a161a165062b9f3929cd23f45d0880ceaa4601d4359ef2d4de111",
+          "patch_sha256": "f3937147590e3118ae9c1db05e8be5a8a71f94dfe1e9867ce2eaa0feb31ab50d",
+          "modes": {
+            "0": "native anisotropic ventilation",
+            "1": "unit polar/equatorial ventilation ratio; native mean ventilation"
+          },
+          "trace_fields": [
+            "call",
+            "mode",
+            "particle_index",
+            "elapsed_before_s",
+            "elapsed_after_s",
+            "dt_s",
+            "temperature_K",
+            "pressure_Pa",
+            "air_density_kg_m3",
+            "ice_supersaturation",
+            "intrinsic_growth_ratio",
+            "capacitance_m",
+            "mean_ventilation",
+            "native_axis_ventilation_ratio",
+            "axis_ventilation_ratio",
+            "effective_growth_ratio",
+            "deposition_density_kg_m3",
+            "equatorial_radius_m",
+            "polar_radius_m",
+            "mass_kg",
+            "density_kg_m3",
+            "terminal_speed_m_s",
+            "reynolds",
+            "schmidt",
+            "ventilation_x",
+            "diffusive_resistance",
+            "thermal_resistance",
+            "new_equatorial_radius_m",
+            "new_polar_radius_m",
+            "new_mass_kg",
+            "new_density_kg_m3",
+            "mass_increment_kg",
+            "volume_increment_m3"
+          ],
+          "evidence": "Controlled anisotropic-ventilation sensitivity. Mode 0 is checked against the preserved native executable; neither mode is an empirical repair."
+        },
+        "build_directory": "growth_controls",
+        "collection": "native",
+        "producer": {
+          "files": {
+            "atmosphere/snow/event_column.py": "7c59ee26fa6c66cac524f45f3f0a3eb25c822caea19d092de19816f2222c9ea7",
+            "atmosphere/snow/event_column.cpp": "18d8ccc02b35a86072f360fe0afdb98637b235a148509e1e5b99e7203e04514b",
+            "atmosphere/snow/aggregation.py": "b1be75f1dc08b92c320fd288d458940821a43a9ae346221cc2d0dbd7a1adf628",
+            "atmosphere/snow/flakes.py": "ce3a82113fc62480130c4db99a95de44d7f3f1432f6444cdb8fcb86ced8012a5",
+            "atmosphere/snow/habits.py": "e2cd9e9693b70c03de051f98635416f7f29b7cf87a1d7bda9154ccedfe26e8d1",
+            "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
+            "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",
+            "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+          },
+          "inputs": {
+            "research/studies/climate_targets/results/climate_targets.json": "80a85def114b039cef9c9acd97b18d3bd47413f51f6693d1cc6f5e850ebdbea8"
+          },
+          "constants": {
+            "AVOGADRO": 6.02214076e+23,
+            "BOLTZMANN": 1.380649e-23,
+            "EARTH_GM": 398600441800000.0,
+            "EARTH_RADIUS": 6371000.0,
+            "GAS_CONSTANT": 8.31446261815324,
+            "MOON_GM": 4902800118000.0,
+            "MOON_RADIUS": 1737400.0,
+            "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+            "STANDARD_GRAVITY": 9.80665
+          }
+        },
+        "constants": {
+          "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+          "STANDARD_GRAVITY": 9.80665
+        },
+        "adapter_sha256": "83488e1d1ef1b1ff45c96c54f422f51777ee473a9cdf80498256aa527618362f",
+        "gravity_m_s2": 9.80665,
+        "initial": {
+          "age_min": 3.0,
+          "mass_kg": 3.8360796779208944e-10,
+          "equatorial_dimension_m": 0.0003975513455088669,
+          "polar_dimension_m": 7.790327741144696e-06,
+          "diameter_m": 0.0003975513455088669,
+          "habit": "broad branch to dendrite",
+          "equatorial_radius_m": 0.00019877567275443345,
+          "polar_radius_m": 3.895163870572348e-06,
+          "density_kg_m3": 595.0408927601331
+        },
+        "temperature_C": -14.4,
+        "temperature_K": 258.75,
+        "pressure_Pa": 101000.0,
+        "vapor_pressure_Pa": 200.9907628063601,
+        "source_pdf_sha256": "2e5c6b492fcab7d1b3958be5a4c859fcd31174a1ac4865588ca48820bd4cd8eb",
+        "laboratory_start_age_min": 3.0,
+        "movement": false,
+        "initial_crystals": 8,
+        "deposition_ceiling_kg_m3_s": 1e-06,
+        "initial_water_kg_m2": 3.8360796779208944e-10,
+        "ledger_convention": "Add known initial ice inventory to native empty-column source ledger.",
+        "producer_sha256": "98b2996a0ec56e1e54ab151eec13ff12738d0fb877d6d69693ce19eefc9e4607",
+        "lab_producer_sha256": "cb49d30ce7878bd441ac6821f5128e53f06075a37dbd94aa4e9cd0fd91784bed",
+        "native_constants_sha256": "256841aff9d6358cb073a199d05424dc67f2c52a2cfe21666419b8a0ec26a8c2",
+        "growth_control": 1
+      },
+      "execution": [
+        {
+          "executable": "scale-les_init",
+          "exit_code": 0,
+          "elapsed_s": 0.7655855239136145,
+          "sha256": "478c82442f24eb1a5c15e5266b5ae7582e28f43c824acc1fbc29bfac1608deec"
+        },
+        {
+          "executable": "scale-les",
+          "exit_code": 0,
+          "elapsed_s": 0.9160501830046996,
+          "sha256": "0224a5d22094f0c0a030d926dab623507dd2297ac94c7099dc565538df1b4138"
+        }
+      ],
+      "snapshots": [
+        {
+          "age_min": 3.0,
+          "elapsed_s": 0.0,
+          "mass_kg": 3.8360796779208944e-10,
+          "equatorial_dimension_m": 0.0003975513455088669,
+          "polar_dimension_m": 7.790327741144696e-06,
+          "diameter_m": 0.0003975513455088669,
+          "density_kg_m3": 595.0408927601331,
+          "terminal_speed_m_s": 0.06845904682388176,
+          "sha256": "29e9ba8998766b6a1cbf84346a92eb6ae53278345d12a405c40f799dc4947193",
+          "observed_fit": {
+            "age_min": 3.0,
+            "mass_kg": 3.8360796779208944e-10,
+            "equatorial_dimension_m": 0.0003975513455088669,
+            "polar_dimension_m": 7.790327741144696e-06,
+            "diameter_m": 0.0003975513455088669,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.061756878252930074,
+          "fall_speed_ratio_to_fit": null,
+          "ratio_to_fit": {
+            "mass_kg": 1.0,
+            "equatorial_dimension_m": 1.0,
+            "polar_dimension_m": 1.0,
+            "diameter_m": 1.0
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 4.0,
+          "elapsed_s": 60.0,
+          "mass_kg": 1.1479892146759092e-09,
+          "equatorial_dimension_m": 0.0008244823640225188,
+          "polar_dimension_m": 9.56838762131547e-06,
+          "diameter_m": 0.0008244823640225188,
+          "density_kg_m3": 337.08364722999136,
+          "terminal_speed_m_s": 0.0815889212919446,
+          "sha256": "06d3ffa95d7298fcdff35351ae669d3f2ceee2d2420b31e704cd2eb633fb8ede",
+          "observed_fit": {
+            "age_min": 4.0,
+            "mass_kg": 6.1462470869928e-10,
+            "equatorial_dimension_m": 0.0005346191898611546,
+            "polar_dimension_m": 9.047401674573387e-06,
+            "diameter_m": 0.0005346191898611546,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.07596984233706962,
+          "fall_speed_ratio_to_fit": 1.0739645993991112,
+          "ratio_to_fit": {
+            "mass_kg": 1.8677889099274574,
+            "equatorial_dimension_m": 1.5421862508089996,
+            "polar_dimension_m": 1.0575840407535182,
+            "diameter_m": 1.5421862508089996
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 5.0,
+          "elapsed_s": 120.0,
+          "mass_kg": 2.6517051398735257e-09,
+          "equatorial_dimension_m": 0.0012521685899880813,
+          "polar_dimension_m": 1.0764334370476977e-05,
+          "diameter_m": 0.0012521685899880813,
+          "density_kg_m3": 300.0639468117145,
+          "terminal_speed_m_s": 0.10230694999421773,
+          "sha256": "2e2f27eae343de39a1bdbc7cb5dd3299ff00d3f1316fc1781b461cba6e27abe3",
+          "observed_fit": {
+            "age_min": 5.0,
+            "mass_kg": 1.0430058547897073e-09,
+            "equatorial_dimension_m": 0.000671263072932688,
+            "polar_dimension_m": 1.0160546757225714e-05,
+            "diameter_m": 0.000671263072932688,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.08921059469386831,
+          "fall_speed_ratio_to_fit": 1.1468026902554609,
+          "ratio_to_fit": {
+            "mass_kg": 2.542368413078724,
+            "equatorial_dimension_m": 1.8653917375753584,
+            "polar_dimension_m": 1.0594247167675181,
+            "diameter_m": 1.8653917375753584
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 6.0,
+          "elapsed_s": 180.0,
+          "mass_kg": 5.057154189752658e-09,
+          "equatorial_dimension_m": 0.0016903656496855416,
+          "polar_dimension_m": 1.1714283813915395e-05,
+          "diameter_m": 0.0016903656496855416,
+          "density_kg_m3": 288.55626870978585,
+          "terminal_speed_m_s": 0.12021590399477763,
+          "sha256": "9c0ffbf567465d89189483a1b0eb7310610e8a4300d07def35f9408f4ee5fe55",
+          "observed_fit": {
+            "age_min": 6.0,
+            "mass_kg": 1.606742566787186e-09,
+            "equatorial_dimension_m": 0.0008084583067713316,
+            "polar_dimension_m": 1.1170981348177721e-05,
+            "diameter_m": 0.0008084583067713316,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1002,
+          "fall_speed_ratio_to_fit": 1.1997595209059644,
+          "ratio_to_fit": {
+            "mass_kg": 3.147457653944436,
+            "equatorial_dimension_m": 2.090850740882613,
+            "polar_dimension_m": 1.0486351600458361,
+            "diameter_m": 2.090850740882613
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 7.0,
+          "elapsed_s": 240.0,
+          "mass_kg": 8.528511227522115e-09,
+          "equatorial_dimension_m": 0.0021413845947553106,
+          "polar_dimension_m": 1.2521734333459247e-05,
+          "diameter_m": 0.0021413845947553106,
+          "density_kg_m3": 283.6748081556424,
+          "terminal_speed_m_s": 0.13578518855776103,
+          "sha256": "f76cfd7318f72d6c61394c22b01f7d8e9b7a0b0fb1e26381641f220bd2c84b98",
+          "observed_fit": {
+            "age_min": 7.0,
+            "mass_kg": 2.315315562186333e-09,
+            "equatorial_dimension_m": 0.000946113747672357,
+            "polar_dimension_m": 1.2103296075395204e-05,
+            "diameter_m": 0.000946113747672357,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1084,
+          "fall_speed_ratio_to_fit": 1.2526308907542532,
+          "ratio_to_fit": {
+            "mass_kg": 3.6835200206872507,
+            "equatorial_dimension_m": 2.263347932554174,
+            "polar_dimension_m": 1.0345722566363296,
+            "diameter_m": 2.263347932554174
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 8.0,
+          "elapsed_s": 300.0,
+          "mass_kg": 1.323168572799651e-08,
+          "equatorial_dimension_m": 0.002605829644175093,
+          "polar_dimension_m": 1.3234013699931867e-05,
+          "diameter_m": 0.002605829644175093,
+          "density_kg_m3": 281.21140762110804,
+          "terminal_speed_m_s": 0.14960744002547552,
+          "sha256": "4d5799a10cf84b172023b42307acf73e8dd2348c6aefc29a73c0664886792f2c",
+          "observed_fit": {
+            "age_min": 8.0,
+            "mass_kg": 3.177247928269035e-09,
+            "equatorial_dimension_m": 0.0010841643912747664,
+            "polar_dimension_m": 1.2973569112161691e-05,
+            "diameter_m": 0.0010841643912747664,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.11660000000000001,
+          "fall_speed_ratio_to_fit": 1.2830826760332377,
+          "ratio_to_fit": {
+            "mass_kg": 4.164511560545775,
+            "equatorial_dimension_m": 2.4035373833954687,
+            "polar_dimension_m": 1.0200750144789401,
+            "diameter_m": 2.4035373833954687
+          },
+          "ledger_mass_error_kg": 1.6543612251060553e-24
+        },
+        {
+          "age_min": 9.0,
+          "elapsed_s": 360.0,
+          "mass_kg": 1.9334954927150332e-08,
+          "equatorial_dimension_m": 0.0030837604967614987,
+          "polar_dimension_m": 1.3877259738486462e-05,
+          "diameter_m": 0.0030837604967614987,
+          "density_kg_m3": 279.8205095668849,
+          "terminal_speed_m_s": 0.1620905499127642,
+          "sha256": "44557d98393fbcd585dd9d7e07ba6ca470fabf8aebc3b7c7101054112297f0b8",
+          "observed_fit": {
+            "age_min": 9.0,
+            "mass_kg": 4.200321984108511e-09,
+            "equatorial_dimension_m": 0.0012225614908385825,
+            "polar_dimension_m": 1.3793001435101957e-05,
+            "diameter_m": 0.0012225614908385825,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.12480000000000001,
+          "fall_speed_ratio_to_fit": 1.298802483275354,
+          "ratio_to_fit": {
+            "mass_kg": 4.603207801759522,
+            "equatorial_dimension_m": 2.52237660017107,
+            "polar_dimension_m": 1.0061087721755815,
+            "diameter_m": 2.52237660017107
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 10.0,
+          "elapsed_s": 420.0,
+          "mass_kg": 2.7009139776834723e-08,
+          "equatorial_dimension_m": 0.003575018860025831,
+          "polar_dimension_m": 1.4467619779152303e-05,
+          "diameter_m": 0.003575018860025831,
+          "density_kg_m3": 278.9705566102263,
+          "terminal_speed_m_s": 0.17350314509103987,
+          "sha256": "9e085c3da1e88197216c9439fe4ac4a2ad34f0b0473d16a437d88408891d1a53",
+          "observed_fit": {
+            "age_min": 10.0,
+            "mass_kg": 5.391726275235823e-09,
+            "equatorial_dimension_m": 0.0013612671124661696,
+            "polar_dimension_m": 1.456976934523401e-05,
+            "diameter_m": 0.0013612671124661696,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.13299999999999998,
+          "fall_speed_ratio_to_fit": 1.3045349254965406,
+          "ratio_to_fit": {
+            "mass_kg": 5.00936776054222,
+            "equatorial_dimension_m": 2.6262434663165184,
+            "polar_dimension_m": 0.9929889373221189,
+            "diameter_m": 2.6262434663165184
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 11.0,
+          "elapsed_s": 480.0,
+          "mass_kg": 3.642752993479494e-08,
+          "equatorial_dimension_m": 0.004079347078968388,
+          "polar_dimension_m": 1.5015849041016481e-05,
+          "diameter_m": 0.004079347078968388,
+          "density_kg_m3": 278.419656194386,
+          "terminal_speed_m_s": 0.1840285432026436,
+          "sha256": "0c570b5c1045a640d1110e887d8c6ce22929d72aa6d67710f2b7e2f2373395d5",
+          "observed_fit": {
+            "age_min": 11.0,
+            "mass_kg": 6.758160471879313e-09,
+            "equatorial_dimension_m": 0.0015002508834079176,
+            "polar_dimension_m": 1.53100592974255e-05,
+            "diameter_m": 0.0015002508834079176,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1412,
+          "fall_speed_ratio_to_fit": 1.3033182946362862,
+          "ratio_to_fit": {
+            "mass_kg": 5.390154626598435,
+            "equatorial_dimension_m": 2.719109932934607,
+            "polar_dimension_m": 0.980783205950189,
+            "diameter_m": 2.719109932934607
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 12.0,
+          "elapsed_s": 540.0,
+          "mass_kg": 4.776571927438265e-08,
+          "equatorial_dimension_m": 0.0045964408448739575,
+          "polar_dimension_m": 1.5529513816354613e-05,
+          "diameter_m": 0.0045964408448739575,
+          "density_kg_m3": 278.0458963163315,
+          "terminal_speed_m_s": 0.1937986297068579,
+          "sha256": "4e175ea2b363a96446958beba085b5f974fb6834a665aa29f252f9ebb0aba590",
+          "observed_fit": {
+            "age_min": 12.0,
+            "mass_kg": 8.30591321717268e-09,
+            "equatorial_dimension_m": 0.0016394879283315742,
+            "polar_dimension_m": 1.6018687329706366e-05,
+            "diameter_m": 0.0016394879283315742,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1494,
+          "fall_speed_ratio_to_fit": 1.2971795830445643,
+          "ratio_to_fit": {
+            "mass_kg": 5.750808854543032,
+            "equatorial_dimension_m": 2.803583219762727,
+            "polar_dimension_m": 0.9694623221439257,
+            "diameter_m": 2.803583219762727
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 13.0,
+          "elapsed_s": 600.0,
+          "mass_kg": 6.120142717412981e-08,
+          "equatorial_dimension_m": 0.005125976168996842,
+          "polar_dimension_m": 1.6014164528131275e-05,
+          "diameter_m": 0.005125976168996842,
+          "density_kg_m3": 277.7828796404574,
+          "terminal_speed_m_s": 0.20291325393070442,
+          "sha256": "87a04572e50b0ed643604e46e296409efd7434c503e98fc94554eb7313b0729b",
+          "observed_fit": {
+            "age_min": 13.0,
+            "mass_kg": 1.0040921712973327e-08,
+            "equatorial_dimension_m": 0.0017789574955732886,
+            "polar_dimension_m": 1.6699490447045075e-05,
+            "diameter_m": 0.0017789574955732886,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1576,
+          "fall_speed_ratio_to_fit": 1.287520646768429,
+          "ratio_to_fit": {
+            "mass_kg": 6.0952001144531165,
+            "equatorial_dimension_m": 2.8814494903628596,
+            "polar_dimension_m": 0.9589612676454409,
+            "diameter_m": 2.8814494903628596
+          },
+          "ledger_mass_error_kg": 1.3234889800848443e-23
+        },
+        {
+          "age_min": 14.0,
+          "elapsed_s": 660.0,
+          "mass_kg": 7.691433467955097e-08,
+          "equatorial_dimension_m": 0.005667624401424727,
+          "polar_dimension_m": 1.6474010369011685e-05,
+          "diameter_m": 0.005667624401424727,
+          "density_kg_m3": 277.59216719403645,
+          "terminal_speed_m_s": 0.21145128598434657,
+          "sha256": "c716e662e695c32b2f66ad9ec563566fb02d8d14cfc9b09f0cdcee059c2342a2",
+          "observed_fit": {
+            "age_min": 14.0,
+            "mass_kg": 1.1968818482442176e-08,
+            "equatorial_dimension_m": 0.001918642006824116,
+            "polar_dimension_m": 1.735558492560232e-05,
+            "diameter_m": 0.001918642006824116,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.16579999999999998,
+          "fall_speed_ratio_to_fit": 1.2753394812083632,
+          "ratio_to_fit": {
+            "mass_kg": 6.426226180335303,
+            "equatorial_dimension_m": 2.9539770219073933,
+            "polar_dimension_m": 0.949205137114672,
+            "diameter_m": 2.9539770219073933
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 15.0,
+          "elapsed_s": 720.0,
+          "mass_kg": 9.508594375007389e-08,
+          "equatorial_dimension_m": 0.0062210609187821975,
+          "polar_dimension_m": 1.6912330959373934e-05,
+          "diameter_m": 0.0062210609187821975,
+          "density_kg_m3": 277.45037871528126,
+          "terminal_speed_m_s": 0.21947708257274084,
+          "sha256": "b14674cbae05fe51cd3c0232c40855dd7f79bb9c4adc3637511aecdacd1d6354",
+          "observed_fit": {
+            "age_min": 15.0,
+            "mass_kg": 1.4094968835893253e-08,
+            "equatorial_dimension_m": 0.0020585263785494043,
+            "polar_dimension_m": 1.7989543015457557e-05,
+            "diameter_m": 0.0020585263785494043,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.174,
+          "fall_speed_ratio_to_fit": 1.2613625435214992,
+          "ratio_to_fit": {
+            "mass_kg": 6.746091095138483,
+            "equatorial_dimension_m": 3.022094340693382,
+            "polar_dimension_m": 0.9401200989286929,
+            "diameter_m": 3.022094340693382
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 16.0,
+          "elapsed_s": 780.0,
+          "mass_kg": 1.1589945922075761e-07,
+          "equatorial_dimension_m": 0.006785970151089691,
+          "polar_dimension_m": 1.7331739683639416e-05,
+          "diameter_m": 0.006785970151089691,
+          "density_kg_m3": 277.3427003612364,
+          "terminal_speed_m_s": 0.22704442147724616,
+          "sha256": "07e199ac3e3334d7cee43624631733c5e8212ecb57ec80a08b92b5926bc0d0d4",
+          "observed_fit": {
+            "age_min": 16.0,
+            "mass_kg": 1.6424501414942382e-08,
+            "equatorial_dimension_m": 0.0021985975243676713,
+            "polar_dimension_m": 1.86035175138803e-05,
+            "diameter_m": 0.0021985975243676713,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1822,
+          "fall_speed_ratio_to_fit": 1.2461274504788482,
+          "ratio_to_fit": {
+            "mass_kg": 7.056497868198101,
+            "equatorial_dimension_m": 3.086499496100985,
+            "polar_dimension_m": 0.9316377760661663,
+            "diameter_m": 3.086499496100985
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 17.0,
+          "elapsed_s": 840.0,
+          "mass_kg": 1.3953969007238747e-07,
+          "equatorial_dimension_m": 0.007362048376707053,
+          "polar_dimension_m": 1.7734358807475203e-05,
+          "diameter_m": 0.007362048376707053,
+          "density_kg_m3": 277.2594177691593,
+          "terminal_speed_m_s": 0.23419901230352586,
+          "sha256": "ea2ad80e10ac3bb759261bd3e8553d3782cad2a1fcf7061b85fb943c7a128638",
+          "observed_fit": {
+            "age_min": 17.0,
+            "mass_kg": 1.8962333466094363e-08,
+            "equatorial_dimension_m": 0.002338843981761323,
+            "polar_dimension_m": 1.9199331866979786e-05,
+            "diameter_m": 0.002338843981761323,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.19039999999999999,
+          "fall_speed_ratio_to_fit": 1.2300368293252408,
+          "ratio_to_fit": {
+            "mass_kg": 7.3587826267211085,
+            "equatorial_dimension_m": 3.1477295767128872,
+            "polar_dimension_m": 0.9236966645686179,
+            "diameter_m": 3.1477295767128872
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 18.0,
+          "elapsed_s": 900.0,
+          "mass_kg": 1.6619296593802527e-07,
+          "equatorial_dimension_m": 0.007949005117784552,
+          "polar_dimension_m": 1.8121939786537244e-05,
+          "diameter_m": 0.007949005117784552,
+          "density_kg_m3": 277.19397089240664,
+          "terminal_speed_m_s": 0.24098018195558665,
+          "sha256": "4e84784899ef237fd54183d4cb1baa7845c42d6d2f6c7b4cfaf0679e408d316f",
+          "observed_fit": {
+            "age_min": 18.0,
+            "mass_kg": 2.171319202300609e-08,
+            "equatorial_dimension_m": 0.0024792556265240237,
+            "polar_dimension_m": 1.977854679375429e-05,
+            "diameter_m": 0.0024792556265240237,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1986,
+          "fall_speed_ratio_to_fit": 1.2133946724853306,
+          "ratio_to_fit": {
+            "mass_kg": 7.654008943592285,
+            "equatorial_dimension_m": 3.2062063438489594,
+            "polar_dimension_m": 0.9162422282844273,
+            "diameter_m": 3.2062063438489594
+          },
+          "ledger_mass_error_kg": 2.6469779601696886e-23
+        },
+        {
+          "age_min": 19.0,
+          "elapsed_s": 960.0,
+          "mass_kg": 1.9604706503509856e-07,
+          "equatorial_dimension_m": 0.00854656364882732,
+          "polar_dimension_m": 1.8495948255730527e-05,
+          "diameter_m": 0.00854656364882732,
+          "density_kg_m3": 277.14181595095016,
+          "terminal_speed_m_s": 0.24742206347798976,
+          "sha256": "6d46f53f47ee687244052226c922111995003a472f471ac77187bfdab30facd2",
+          "observed_fit": {
+            "age_min": 19.0,
+            "mass_kg": 2.4681631859373748e-08,
+            "equatorial_dimension_m": 0.002619823450568232,
+            "polar_dimension_m": 2.034251050694647e-05,
+            "diameter_m": 0.002619823450568232,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2068,
+          "fall_speed_ratio_to_fit": 1.1964316415763527,
+          "ratio_to_fit": {
+            "mass_kg": 7.943034972407732,
+            "equatorial_dimension_m": 3.2622670229833983,
+            "polar_dimension_m": 0.9092264324707914,
+            "diameter_m": 3.2622670229833983
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 20.0,
+          "elapsed_s": 1020.0,
+          "mass_kg": 2.2929115026207784e-07,
+          "equatorial_dimension_m": 0.009154460944943304,
+          "polar_dimension_m": 1.8857625535275524e-05,
+          "diameter_m": 0.009154460944943304,
+          "density_kg_m3": 277.09973519281857,
+          "terminal_speed_m_s": 0.25355447289607774,
+          "sha256": "d4ebb832179bfadbe25a4286c49a152dcb1d9e8dcb2bcdb9ad3021079f1dfcf9",
+          "observed_fit": {
+            "age_min": 20.0,
+            "mass_kg": 2.7872050855294237e-08,
+            "equatorial_dimension_m": 0.002760539386422945,
+            "polar_dimension_m": 2.0892397214978434e-05,
+            "diameter_m": 0.002760539386422945,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.215,
+          "fall_speed_ratio_to_fit": 1.1793231297491988,
+          "ratio_to_fit": {
+            "mass_kg": 8.226561850525774,
+            "equatorial_dimension_m": 3.316185594006497,
+            "polar_dimension_m": 0.9026070747762676,
+            "diameter_m": 3.316185594006497
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 21.0,
+          "elapsed_s": 1080.0,
+          "mass_kg": 2.661157107704198e-07,
+          "equatorial_dimension_m": 0.009772447281858176,
+          "polar_dimension_m": 1.92080340939736e-05,
+          "diameter_m": 0.009772447281858176,
+          "density_kg_m3": 277.0654049547821,
+          "terminal_speed_m_s": 0.25940358072376424,
+          "sha256": "b4410bde2d26b527b782e70eb113a51cc9ae9021a1ffb31366615c327671ccba",
+          "observed_fit": {
+            "age_min": 21.0,
+            "mass_kg": 3.1288703265097984e-08,
+            "equatorial_dimension_m": 0.002901396166756042,
+            "polar_dimension_m": 2.1429237085327042e-05,
+            "diameter_m": 0.002901396166756042,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2232,
+          "fall_speed_ratio_to_fit": 1.16220242259751,
+          "ratio_to_fit": {
+            "mass_kg": 8.505169054649425,
+            "equatorial_dimension_m": 3.3681878379209538,
+            "polar_dimension_m": 0.8963470802759311,
+            "diameter_m": 3.3681878379209538
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 22.0,
+          "elapsed_s": 1140.0,
+          "mass_kg": 3.067125068160038e-07,
+          "equatorial_dimension_m": 0.01040028562666379,
+          "polar_dimension_m": 1.9548091788412998e-05,
+          "diameter_m": 0.01040028562666379,
+          "density_kg_m3": 277.0371178395763,
+          "terminal_speed_m_s": 0.2649924418343193,
+          "sha256": "642b89c3b8092d4f5f5819830e295b8e7879de918ec6895bf820e44058de3c36",
+          "observed_fit": {
+            "age_min": 22.0,
+            "mass_kg": 3.493571126294257e-08,
+            "equatorial_dimension_m": 0.0030423872105896474,
+            "polar_dimension_m": 2.195393987697681e-05,
+            "diameter_m": 0.0030423872105896474,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.23140000000000002,
+          "fall_speed_ratio_to_fit": 1.1451704487222094,
+          "ratio_to_fit": {
+            "mass_kg": 8.77934055807656,
+            "equatorial_dimension_m": 3.4184621834010747,
+            "polar_dimension_m": 0.8904138345078172,
+            "diameter_m": 3.4184621834010747
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 23.0,
+          "elapsed_s": 1200.0,
+          "mass_kg": 3.512745160837221e-07,
+          "equatorial_dimension_m": 0.01103775091045327,
+          "polar_dimension_m": 1.987859808175248e-05,
+          "diameter_m": 0.01103775091045327,
+          "density_kg_m3": 277.0135996263603,
+          "terminal_speed_m_s": 0.2703414231923185,
+          "sha256": "e5446bd6c9e728e7d0eef9b0fa6e27a3cd39e531b9cf5c8688b9fccdad1275b1",
+          "observed_fit": {
+            "age_min": 23.0,
+            "mass_kg": 3.881707506039571e-08,
+            "equatorial_dimension_m": 0.0031835065301490874,
+            "polar_dimension_m": 2.2467313804892275e-05,
+            "diameter_m": 0.0031835065301490874,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2396,
+          "fall_speed_ratio_to_fit": 1.1283031018043344,
+          "ratio_to_fit": {
+            "mass_kg": 9.049484422439662,
+            "equatorial_dimension_m": 3.4671676674513874,
+            "polar_dimension_m": 0.884778583429226,
+            "diameter_m": 3.4671676674513874
+          },
+          "ledger_mass_error_kg": 1.0587911840678754e-22
+        },
+        {
+          "age_min": 24.0,
+          "elapsed_s": 1260.0,
+          "mass_kg": 3.999958799685518e-07,
+          "equatorial_dimension_m": 0.011684629242272818,
+          "polar_dimension_m": 2.0200254421999103e-05,
+          "diameter_m": 0.011684629242272818,
+          "density_kg_m3": 276.99388596980197,
+          "terminal_speed_m_s": 0.2754685549815735,
+          "sha256": "99790872d07c2ae31fcfd223a85f0cde2f1f1fa8bb0f04ef974c5c0577000fd1",
+          "observed_fit": {
+            "age_min": 24.0,
+            "mass_kg": 4.2936681828969894e-08,
+            "equatorial_dimension_m": 0.0033247486538662313,
+            "polar_dimension_m": 2.2970080762757087e-05,
+            "diameter_m": 0.0033247486538662313,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.24780000000000002,
+          "fall_speed_ratio_to_fit": 1.111656799764219,
+          "ratio_to_fit": {
+            "mass_kg": 9.3159476449964,
+            "equatorial_dimension_m": 3.514439874630878,
+            "polar_dimension_m": 0.8794159076162724,
+            "diameter_m": 3.514439874630878
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 25.0,
+          "elapsed_s": 1320.0,
+          "mass_kg": 4.530718485014902e-07,
+          "equatorial_dimension_m": 0.012340717102601432,
+          "polar_dimension_m": 2.051368029426174e-05,
+          "diameter_m": 0.012340717102601432,
+          "density_kg_m3": 276.9772377334867,
+          "terminal_speed_m_s": 0.28038982237467813,
+          "sha256": "ed1301719932f6f40f82c62eb12c01714c7c9f4e1bf933e84ffd233488869c05",
+          "observed_fit": {
+            "age_min": 25.0,
+            "mass_kg": 4.729831361415687e-08,
+            "equatorial_dimension_m": 0.0034661085621771944,
+            "polar_dimension_m": 2.3462888728584083e-05,
+            "diameter_m": 0.0034661085621771944,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.256,
+          "fall_speed_ratio_to_fit": 1.0952727436510865,
+          "ratio_to_fit": {
+            "mass_kg": 9.579027535685356,
+            "equatorial_dimension_m": 3.560395435176375,
+            "polar_dimension_m": 0.8743032680912212,
+            "diameter_m": 3.560395435176375
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 26.0,
+          "elapsed_s": 1380.0,
+          "mass_kg": 5.106987227463733e-07,
+          "equatorial_dimension_m": 0.013005820540330993,
+          "polar_dimension_m": 2.0819426019060115e-05,
+          "diameter_m": 0.013005820540330993,
+          "density_kg_m3": 276.96308182280325,
+          "terminal_speed_m_s": 0.28511941010723535,
+          "sha256": "318a5a698801e2dd6e46963fa4df6c7062175bfa418172ff950efdcf903d8bbc",
+          "observed_fit": {
+            "age_min": 26.0,
+            "mass_kg": 5.1905654391882146e-08,
+            "equatorial_dimension_m": 0.0036075816335601296,
+            "polar_dimension_m": 2.394632196573046e-05,
+            "diameter_m": 0.0036075816335601296,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.26420000000000005,
+          "fall_speed_ratio_to_fit": 1.0791802047965,
+          "ratio_to_fit": {
+            "mass_kg": 9.838980525910578,
+            "equatorial_dimension_m": 3.6051354789430623,
+            "polar_dimension_m": 0.8694206170306554,
+            "diameter_m": 3.6051354789430623
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 27.0,
+          "elapsed_s": 1440.0,
+          "mass_kg": 5.730737935799886e-07,
+          "equatorial_dimension_m": 0.013679754387676192,
+          "polar_dimension_m": 2.111798306861489e-05,
+          "diameter_m": 0.013679754387676192,
+          "density_kg_m3": 276.9509691735637,
+          "terminal_speed_m_s": 0.28966990878923504,
+          "sha256": "a0dd2d931d2252ff2873b32c093c9578f9950ac6201d576211ab57877338536e",
+          "observed_fit": {
+            "age_min": 27.0,
+            "mass_kg": 5.67622963906214e-08,
+            "equatorial_dimension_m": 0.003749163598847738,
+            "polar_dimension_m": 2.4420909480346218e-05,
+            "diameter_m": 0.003749163598847738,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2724,
+          "fall_speed_ratio_to_fit": 1.0633990777872067,
+          "ratio_to_fit": {
+            "mass_kg": 10.096029054854716,
+            "equatorial_dimension_m": 3.648748321327057,
+            "polar_dimension_m": 0.8647500653327633,
+            "diameter_m": 3.648748321327057
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 28.0,
+          "elapsed_s": 1500.0,
+          "mass_kg": 6.40395275816701e-07,
+          "equatorial_dimension_m": 0.014362341501084681,
+          "polar_dimension_m": 2.1409792465613395e-05,
+          "diameter_m": 0.014362341501084681,
+          "density_kg_m3": 276.9405444854765,
+          "terminal_speed_m_s": 0.2940524897522811,
+          "sha256": "b062cc48f09b4bd4f184925a171784b2c25d2e926637cfac0a1b1c3af382e8e8",
+          "observed_fit": {
+            "age_min": 28.0,
+            "mass_kg": 6.187174578068195e-08,
+            "equatorial_dimension_m": 0.003890850502285357,
+            "polar_dimension_m": 2.488713208645183e-05,
+            "diameter_m": 0.003890850502285357,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.28059999999999996,
+          "fall_speed_ratio_to_fit": 1.0479418736717077,
+          "ratio_to_fit": {
+            "mass_kg": 10.35036700090415,
+            "equatorial_dimension_m": 3.6913115763889457,
+            "polar_dimension_m": 0.8602755991024195,
+            "diameter_m": 3.6913115763889457
+          },
+          "ledger_mass_error_kg": 2.117582368135751e-22
+        },
+        {
+          "age_min": 29.0,
+          "elapsed_s": 1560.0,
+          "mass_kg": 7.12862236661583e-07,
+          "equatorial_dimension_m": 0.015053412032031473,
+          "polar_dimension_m": 2.1695251683165308e-05,
+          "diameter_m": 0.015053412032031473,
+          "density_kg_m3": 276.93152412497386,
+          "terminal_speed_m_s": 0.2982770537665629,
+          "sha256": "7c7becec39fd05fae33149462094d600eed0909e10410c718c213ebe73386cfa",
+          "observed_fit": {
+            "age_min": 29.0,
+            "mass_kg": 6.723742781490735e-08,
+            "equatorial_dimension_m": 0.004032638668132747,
+            "polar_dimension_m": 2.534542834914594e-05,
+            "diameter_m": 0.004032638668132747,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.28879999999999995,
+          "fall_speed_ratio_to_fit": 1.032815283125218,
+          "ratio_to_fit": {
+            "mass_kg": 10.602164000442814,
+            "equatorial_dimension_m": 3.7328938372258706,
+            "polar_dimension_m": 0.8559828377844863,
+            "diameter_m": 3.7328938372258706
+          },
+          "ledger_mass_error_kg": null
+        },
+        {
+          "age_min": 30.0,
+          "elapsed_s": 1620.0,
+          "mass_kg": 7.906745174822421e-07,
+          "equatorial_dimension_m": 0.01575280272888342,
+          "polar_dimension_m": 2.197472036061964e-05,
+          "diameter_m": 0.01575280272888342,
+          "density_kg_m3": 276.92367979378156,
+          "terminal_speed_m_s": 0.3023523579186735,
+          "sha256": "cd5cf27bf8eb856e61237f06ef701610fee90072369ef6c300849f482867f698",
+          "observed_fit": {
+            "age_min": 30.0,
+            "mass_kg": 7.286269149125554e-08,
+            "equatorial_dimension_m": 0.004174524671856013,
+            "polar_dimension_m": 2.579619961642184e-05,
+            "diameter_m": 0.004174524671856013,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.297,
+          "fall_speed_ratio_to_fit": 1.018021407133581,
+          "ratio_to_fit": {
+            "mass_kg": 10.851568907211357,
+            "equatorial_dimension_m": 3.773556025452749,
+            "polar_dimension_m": 0.8518588275549919,
+            "diameter_m": 3.773556025452749
+          },
+          "ledger_mass_error_kg": 2.117582368135751e-22
+        }
+      ],
+      "water": {
+        "ice_deposition_relative_residual": 9.373690595310714e-16,
+        "corrected_maximum_absolute_residual_kg_m2": 8.6406633926719e-15,
+        "maximum_used_fraction_of_growth_ceiling": 3.076872093306951e-07
+      },
+      "input_sha256": {
+        "init.conf": "78612154e4ef7d008fb79355ddd82eb746e36e7cc4e6d7f4f47dbaeda0bc25bc",
+        "run.conf": "4219bbfef462530a1979fead3e080e84d11f131e460fb620aab2da1c1256d8f9",
+        "env.txt": "79521ed6f4cca88a86bc1458e0f444d2672e8264a079eaf9328b926cf1b8dcb4",
+        "particles.pe000000": "60f764b4d8611571f6b539933db98f24ff9148f1b15c93df4b56f426183be851",
+        "lunar_forcing.txt": "2597b258a926ca1b74dc5a5e517f117fbdfb7e6e67e22c776ac590ce352d287b",
+        "settings.json": "77571ffedcbc6566424530b87e97080f915581b1fa68d9ac7a708f51020a10c6",
+        "growth_control.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "exactly_matched_snapshot_ledger_times": 7,
+      "air_ranges": {
+        "T": [
+          258.74999999999994,
+          258.74999999999994
+        ],
+        "PRES": [
+          100999.99999999999,
+          100999.99999999999
+        ],
+        "RH": [
+          100.04753069636831,
+          100.04753069636831
+        ]
+      },
+      "ledger_sha256": "ef92755c065ae375723eceefd130550c5436c502944b7da04c1fcb3cd0c98851",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true,
+        "growth_control.txt": true
+      }
+    },
+    "growth_sweep_14p4_dt1_control1": {
+      "settings": {
+        "name": "growth_sweep_14p4_dt1_control1",
+        "mode": "prescribed",
+        "packets_per_step_per_horizontal_cell": 2,
+        "dt_s": 1.0,
+        "seed": 1,
+        "layers": 4,
+        "duration_s": 1620.0,
+        "gather_start_s": 0.0,
+        "depth_m": 16280.520943378342,
+        "dx_m": 1.0,
+        "horizontal_cells": 8,
+        "capacity": 128,
+        "collisions": false,
+        "original_settings": {
+          "top_c": -15.0,
+          "number_per_m3": 100000.0,
+          "snowfall_mm_h": 3.0,
+          "layers": 30,
+          "area_m2": 0.0004,
+          "layer_volume_m3": 0.2170736125783779,
+          "max_step_s": 60.0,
+          "fill": 1.5,
+          "gather": 1.5,
+          "breakup": true,
+          "seed": 20261021,
+          "wall_limit_s": 1800.0,
+          "collisions": true,
+          "growth": true,
+          "settling": true,
+          "settling_scheme": "upwind",
+          "geometry": "bf95_dmax_dendrites_area",
+          "injection_reference_velocity_m_s": 0.10232426627407396,
+          "injected_number_flux_m2_s": 10232.426627407396,
+          "total_time_s": 477321.407800899,
+          "gathering_time_s": 238660.7039004495,
+          "depth_m": 16280.520943378342
+        },
+        "profile": [
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          },
+          {
+            "t": 258.75,
+            "p": 101000.0,
+            "e": 200.9907628063601
+          }
+        ],
+        "forcing": "Stationary isolated crystals with native terminal-speed ventilation in fixed water-saturated air; no liquid, collisions, injection or transport.",
+        "unmatched": "Empirical Table 2 fits at Earth gravity and 1010 hPa. Planar thickness is inferred, fits lack pointwise errors, piecewise fits may have discontinuous joins. No aggregate or lunar validation.",
+        "build": {
+          "build": {
+            "command": [
+              "make",
+              "-j1",
+              "build",
+              "ENABLE_SDM=T",
+              "SCALE_SYS=Linux64-gnu-ompi",
+              "GNUCPPOPT=-cpp",
+              "MODDIROPT=-J",
+              "FFLAGS_FAST=-O2 -g -cpp -m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch -ffree-line-length-none -fimplicit-none -fmodule-private -fbacktrace -fcheck=bounds -ffpe-trap=invalid,zero,overflow",
+              "FFLAGS_CORE=-m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch",
+              "NETCDF_INCLUDE=-I/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/include",
+              "NETCDF_LIBS=/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu/libnetcdff.so.7 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19 -Wl,-rpath,/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu -lm -lz"
+            ],
+            "cwd": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/growth_controls/work/scale-les/test/case/warmbubble/2D_Khain04_sdm",
+            "exit_code": 0,
+            "elapsed_s": 45.86596357100643,
+            "log_sha256": "e686bfe97d57d96996eaecf48ff1999f55f958335473045a70e947b534c0ae1e",
+            "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+            "environment": {
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "executable_sha256": {
+              "scale-les_init": "478c82442f24eb1a5c15e5266b5ae7582e28f43c824acc1fbc29bfac1608deec",
+              "scale-les": "0224a5d22094f0c0a030d926dab623507dd2297ac94c7099dc565538df1b4138"
+            }
+          },
+          "original_manifest": {
+            "build": {
+              "command": [
+                "make",
+                "-j1",
+                "build",
+                "ENABLE_SDM=T",
+                "SCALE_SYS=Linux64-gnu-ompi",
+                "GNUCPPOPT=-cpp",
+                "MODDIROPT=-J",
+                "FFLAGS_FAST=-O2 -g -cpp -m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch -ffree-line-length-none -fimplicit-none -fmodule-private -fbacktrace -fcheck=bounds -ffpe-trap=invalid,zero,overflow",
+                "FFLAGS_CORE=-m64 -fconvert=big-endian -frecord-marker=4 -fallow-argument-mismatch",
+                "NETCDF_INCLUDE=-I/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/include",
+                "NETCDF_LIBS=/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu/libnetcdff.so.7 /usr/lib/x86_64-linux-gnu/libnetcdf.so.19 -Wl,-rpath,/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/deps/usr/lib/x86_64-linux-gnu -lm -lz"
+              ],
+              "cwd": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/lunar/work/scale-les/test/case/warmbubble/2D_Khain04_sdm",
+              "exit_code": 0,
+              "elapsed_s": 44.23016245395411,
+              "log_sha256": "075824baf3aabf6977f18ad0222ace22204916980064f8a14a2800a3d8a1d512",
+              "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+              "environment": {
+                "OMP_NUM_THREADS": "1",
+                "OPENBLAS_NUM_THREADS": "1"
+              },
+              "executable_sha256": {
+                "scale-les_init": "1e942b2ac3d702af45798ad2683b5fe995908777d3684203ce2e0f62705eff99",
+                "scale-les": "56c98cf48343f37c402606e08d1dfa45986df03c687ce731b20b627a5429a9cb"
+              }
+            },
+            "hook_sha256": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11",
+            "adapter_sha256": "ff62b444f75bd32980ddd1520e68e893b29b14df4c5e9e669544a3f483049adb",
+            "patches": [
+              {
+                "source": "contrib/SDM/scale_atmos_phy_mp_sdm.F90",
+                "original_sha256": "7dd8d44b34cbccba201ed75021f39435bba07045fdb91ce13db2003f73fc1605",
+                "patched_sha256": "0855ed87d04f51478f374b150166f2ca02554e14f8eb82328fc678e5c0b3670c",
+                "patch_sha256": "6258a867067e19f823a30944801eaab46573f3d75dcdc5815ee337d29f7a5101"
+              },
+              {
+                "source": "contrib/SDM/sdm_coalescence_cold.f90",
+                "original_sha256": "d6b9eed09771d1139e1533221d3c586dc10d9ac70f8c418a40429bf6c1d94ad1",
+                "patched_sha256": "22573a3b9241c3fd446ca2853c67674bc05671704b7da08c6079f1372120b487",
+                "patch_sha256": "13fe397120a8b4fab07e21fb4d2f462f6f86b2510953cc5689a8e9334e77641f"
+              }
+            ]
+          },
+          "hook_sha256": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11",
+          "producer_sha256": "e1fe9d0b310cd61a74c5036e0e5ea00779141fc709a0b072985d121bd3c6649d",
+          "source": "contrib/SDM/sdm_subldep.f90",
+          "original_sha256": "37afcfdb871cdc3da53488810ada6e8541128eccd3a0e774faf6e359408cb444",
+          "patched_sha256": "8fe48cdc857a161a165062b9f3929cd23f45d0880ceaa4601d4359ef2d4de111",
+          "patch_sha256": "f3937147590e3118ae9c1db05e8be5a8a71f94dfe1e9867ce2eaa0feb31ab50d",
+          "modes": {
+            "0": "native anisotropic ventilation",
+            "1": "unit polar/equatorial ventilation ratio; native mean ventilation"
+          },
+          "trace_fields": [
+            "call",
+            "mode",
+            "particle_index",
+            "elapsed_before_s",
+            "elapsed_after_s",
+            "dt_s",
+            "temperature_K",
+            "pressure_Pa",
+            "air_density_kg_m3",
+            "ice_supersaturation",
+            "intrinsic_growth_ratio",
+            "capacitance_m",
+            "mean_ventilation",
+            "native_axis_ventilation_ratio",
+            "axis_ventilation_ratio",
+            "effective_growth_ratio",
+            "deposition_density_kg_m3",
+            "equatorial_radius_m",
+            "polar_radius_m",
+            "mass_kg",
+            "density_kg_m3",
+            "terminal_speed_m_s",
+            "reynolds",
+            "schmidt",
+            "ventilation_x",
+            "diffusive_resistance",
+            "thermal_resistance",
+            "new_equatorial_radius_m",
+            "new_polar_radius_m",
+            "new_mass_kg",
+            "new_density_kg_m3",
+            "mass_increment_kg",
+            "volume_increment_m3"
+          ],
+          "evidence": "Controlled anisotropic-ventilation sensitivity. Mode 0 is checked against the preserved native executable; neither mode is an empirical repair."
+        },
+        "build_directory": "growth_controls",
+        "collection": "native",
+        "producer": {
+          "files": {
+            "atmosphere/snow/event_column.py": "7c59ee26fa6c66cac524f45f3f0a3eb25c822caea19d092de19816f2222c9ea7",
+            "atmosphere/snow/event_column.cpp": "18d8ccc02b35a86072f360fe0afdb98637b235a148509e1e5b99e7203e04514b",
+            "atmosphere/snow/aggregation.py": "b1be75f1dc08b92c320fd288d458940821a43a9ae346221cc2d0dbd7a1adf628",
+            "atmosphere/snow/flakes.py": "ce3a82113fc62480130c4db99a95de44d7f3f1432f6444cdb8fcb86ced8012a5",
+            "atmosphere/snow/habits.py": "e2cd9e9693b70c03de051f98635416f7f29b7cf87a1d7bda9154ccedfe26e8d1",
+            "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
+            "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",
+            "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+          },
+          "inputs": {
+            "research/studies/climate_targets/results/climate_targets.json": "80a85def114b039cef9c9acd97b18d3bd47413f51f6693d1cc6f5e850ebdbea8"
+          },
+          "constants": {
+            "AVOGADRO": 6.02214076e+23,
+            "BOLTZMANN": 1.380649e-23,
+            "EARTH_GM": 398600441800000.0,
+            "EARTH_RADIUS": 6371000.0,
+            "GAS_CONSTANT": 8.31446261815324,
+            "MOON_GM": 4902800118000.0,
+            "MOON_RADIUS": 1737400.0,
+            "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+            "STANDARD_GRAVITY": 9.80665
+          }
+        },
+        "constants": {
+          "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+          "STANDARD_GRAVITY": 9.80665
+        },
+        "adapter_sha256": "83488e1d1ef1b1ff45c96c54f422f51777ee473a9cdf80498256aa527618362f",
+        "gravity_m_s2": 9.80665,
+        "initial": {
+          "age_min": 3.0,
+          "mass_kg": 3.8360796779208944e-10,
+          "equatorial_dimension_m": 0.0003975513455088669,
+          "polar_dimension_m": 7.790327741144696e-06,
+          "diameter_m": 0.0003975513455088669,
+          "habit": "broad branch to dendrite",
+          "equatorial_radius_m": 0.00019877567275443345,
+          "polar_radius_m": 3.895163870572348e-06,
+          "density_kg_m3": 595.0408927601331
+        },
+        "temperature_C": -14.4,
+        "temperature_K": 258.75,
+        "pressure_Pa": 101000.0,
+        "vapor_pressure_Pa": 200.9907628063601,
+        "source_pdf_sha256": "2e5c6b492fcab7d1b3958be5a4c859fcd31174a1ac4865588ca48820bd4cd8eb",
+        "laboratory_start_age_min": 3.0,
+        "movement": false,
+        "initial_crystals": 8,
+        "deposition_ceiling_kg_m3_s": 1e-06,
+        "initial_water_kg_m2": 3.8360796779208944e-10,
+        "ledger_convention": "Add known initial ice inventory to native empty-column source ledger.",
+        "producer_sha256": "98b2996a0ec56e1e54ab151eec13ff12738d0fb877d6d69693ce19eefc9e4607",
+        "lab_producer_sha256": "cb49d30ce7878bd441ac6821f5128e53f06075a37dbd94aa4e9cd0fd91784bed",
+        "native_constants_sha256": "256841aff9d6358cb073a199d05424dc67f2c52a2cfe21666419b8a0ec26a8c2",
+        "growth_control": 1
+      },
+      "execution": [
+        {
+          "executable": "scale-les_init",
+          "exit_code": 0,
+          "elapsed_s": 0.7155669019557536,
+          "sha256": "478c82442f24eb1a5c15e5266b5ae7582e28f43c824acc1fbc29bfac1608deec"
+        },
+        {
+          "executable": "scale-les",
+          "exit_code": 0,
+          "elapsed_s": 1.0663762129843235,
+          "sha256": "0224a5d22094f0c0a030d926dab623507dd2297ac94c7099dc565538df1b4138"
+        }
+      ],
+      "snapshots": [
+        {
+          "age_min": 3.0,
+          "elapsed_s": 0.0,
+          "mass_kg": 3.8360796779208944e-10,
+          "equatorial_dimension_m": 0.0003975513455088669,
+          "polar_dimension_m": 7.790327741144696e-06,
+          "diameter_m": 0.0003975513455088669,
+          "density_kg_m3": 595.0408927601331,
+          "terminal_speed_m_s": 0.06845904682388176,
+          "sha256": "29e9ba8998766b6a1cbf84346a92eb6ae53278345d12a405c40f799dc4947193",
+          "observed_fit": {
+            "age_min": 3.0,
+            "mass_kg": 3.8360796779208944e-10,
+            "equatorial_dimension_m": 0.0003975513455088669,
+            "polar_dimension_m": 7.790327741144696e-06,
+            "diameter_m": 0.0003975513455088669,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.061756878252930074,
+          "fall_speed_ratio_to_fit": null,
+          "ratio_to_fit": {
+            "mass_kg": 1.0,
+            "equatorial_dimension_m": 1.0,
+            "polar_dimension_m": 1.0,
+            "diameter_m": 1.0
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 4.0,
+          "elapsed_s": 60.0,
+          "mass_kg": 1.1676326290008915e-09,
+          "equatorial_dimension_m": 0.000831966547929447,
+          "polar_dimension_m": 9.592787703021861e-06,
+          "diameter_m": 0.000831966547929447,
+          "density_kg_m3": 335.85439697632614,
+          "terminal_speed_m_s": 0.08197420981778716,
+          "sha256": "6b6c5aa38a57d7838c8ba8bc02c2f10e4496572d962cd2cb25d74c787b8f7726",
+          "observed_fit": {
+            "age_min": 4.0,
+            "mass_kg": 6.1462470869928e-10,
+            "equatorial_dimension_m": 0.0005346191898611546,
+            "polar_dimension_m": 9.047401674573387e-06,
+            "diameter_m": 0.0005346191898611546,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.07596984233706962,
+          "fall_speed_ratio_to_fit": 1.0790361977332643,
+          "ratio_to_fit": {
+            "mass_kg": 1.8997489239766052,
+            "equatorial_dimension_m": 1.5561853440867248,
+            "polar_dimension_m": 1.0602809566840847,
+            "diameter_m": 1.5561853440867248
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 5.0,
+          "elapsed_s": 120.0,
+          "mass_kg": 2.7034220872011717e-09,
+          "equatorial_dimension_m": 0.0012637003055546792,
+          "polar_dimension_m": 1.0792181940424999e-05,
+          "diameter_m": 0.0012637003055546792,
+          "density_kg_m3": 299.5834350254375,
+          "terminal_speed_m_s": 0.1028206204633794,
+          "sha256": "ae90ef74039c51202cdebaaf63da8ed08fcb25cf6be072f04b7b1c713b386a86",
+          "observed_fit": {
+            "age_min": 5.0,
+            "mass_kg": 1.0430058547897073e-09,
+            "equatorial_dimension_m": 0.000671263072932688,
+            "polar_dimension_m": 1.0160546757225714e-05,
+            "diameter_m": 0.000671263072932688,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.08921059469386831,
+          "fall_speed_ratio_to_fit": 1.1525606439035043,
+          "ratio_to_fit": {
+            "mass_kg": 2.5919529356297244,
+            "equatorial_dimension_m": 1.8825708675343726,
+            "polar_dimension_m": 1.06216547182858,
+            "diameter_m": 1.8825708675343726
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 6.0,
+          "elapsed_s": 180.0,
+          "mass_kg": 5.154290272356753e-09,
+          "equatorial_dimension_m": 0.0017051135293621935,
+          "polar_dimension_m": 1.1742998808521785e-05,
+          "diameter_m": 0.0017051135293621935,
+          "density_kg_m3": 288.32654844896484,
+          "terminal_speed_m_s": 0.12076607375767334,
+          "sha256": "82baa5db6f045e691e1012b105053c9dac15c58eeeab56973dfdbf95fd540d12",
+          "observed_fit": {
+            "age_min": 6.0,
+            "mass_kg": 1.606742566787186e-09,
+            "equatorial_dimension_m": 0.0008084583067713316,
+            "polar_dimension_m": 1.1170981348177721e-05,
+            "diameter_m": 0.0008084583067713316,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1002,
+          "fall_speed_ratio_to_fit": 1.2052502371025284,
+          "ratio_to_fit": {
+            "mass_kg": 3.207912940691663,
+            "equatorial_dimension_m": 2.1090927201574,
+            "polar_dimension_m": 1.0512056588866632,
+            "diameter_m": 2.1090927201574
+          },
+          "ledger_mass_error_kg": 8.271806125530277e-25
+        },
+        {
+          "age_min": 7.0,
+          "elapsed_s": 240.0,
+          "mass_kg": 8.685309167780616e-09,
+          "equatorial_dimension_m": 0.002158970657517516,
+          "polar_dimension_m": 1.2550631938266086e-05,
+          "diameter_m": 0.002158970657517516,
+          "density_kg_m3": 283.54865188580516,
+          "terminal_speed_m_s": 0.13634507529011325,
+          "sha256": "5f1546c85d0b32a70c4c04d2b091607c13c69f0711ec3a320ba69976532ffb95",
+          "observed_fit": {
+            "age_min": 7.0,
+            "mass_kg": 2.315315562186333e-09,
+            "equatorial_dimension_m": 0.000946113747672357,
+            "polar_dimension_m": 1.2103296075395204e-05,
+            "diameter_m": 0.000946113747672357,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1084,
+          "fall_speed_ratio_to_fit": 1.2577958975102699,
+          "ratio_to_fit": {
+            "mass_kg": 3.7512420810488365,
+            "equatorial_dimension_m": 2.281935615911985,
+            "polar_dimension_m": 1.0369598380543852,
+            "diameter_m": 2.281935615911985
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 8.0,
+          "elapsed_s": 300.0,
+          "mass_kg": 1.3463267731535423e-08,
+          "equatorial_dimension_m": 0.0026260310796102954,
+          "polar_dimension_m": 1.326284886927522e-05,
+          "diameter_m": 0.0026260310796102954,
+          "density_kg_m3": 281.13525830019,
+          "terminal_speed_m_s": 0.15016743935525861,
+          "sha256": "0853527c9b60bec65092986bff4ecf136aea5325026242723631a2218ef01124",
+          "observed_fit": {
+            "age_min": 8.0,
+            "mass_kg": 3.177247928269035e-09,
+            "equatorial_dimension_m": 0.0010841643912747664,
+            "polar_dimension_m": 1.2973569112161691e-05,
+            "diameter_m": 0.0010841643912747664,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.11660000000000001,
+          "fall_speed_ratio_to_fit": 1.2878854147106227,
+          "ratio_to_fit": {
+            "mass_kg": 4.237399169182939,
+            "equatorial_dimension_m": 2.422170568176099,
+            "polar_dimension_m": 1.0222976233149559,
+            "diameter_m": 2.422170568176099
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 9.0,
+          "elapsed_s": 360.0,
+          "mass_kg": 1.9657298529489068e-08,
+          "equatorial_dimension_m": 0.003106425791796638,
+          "polar_dimension_m": 1.39059306545971e-05,
+          "diameter_m": 0.003106425791796638,
+          "density_kg_m3": 279.77131542117485,
+          "terminal_speed_m_s": 0.162646118201132,
+          "sha256": "ec5ac5b6391f3a563ba0dfabfdb1c34cbcb438126acf68537789a3196c9fce05",
+          "observed_fit": {
+            "age_min": 9.0,
+            "mass_kg": 4.200321984108511e-09,
+            "equatorial_dimension_m": 0.0012225614908385825,
+            "polar_dimension_m": 1.3793001435101957e-05,
+            "diameter_m": 0.0012225614908385825,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.12480000000000001,
+          "fall_speed_ratio_to_fit": 1.3032541522526602,
+          "ratio_to_fit": {
+            "mass_kg": 4.67995039519838,
+            "equatorial_dimension_m": 2.5409157863019805,
+            "polar_dimension_m": 1.008187428967255,
+            "diameter_m": 2.5409157863019805
+          },
+          "ledger_mass_error_kg": 3.308722450212111e-24
+        },
+        {
+          "age_min": 10.0,
+          "elapsed_s": 420.0,
+          "mass_kg": 2.7439040203250457e-08,
+          "equatorial_dimension_m": 0.0036000348053661035,
+          "polar_dimension_m": 1.4496080601363603e-05,
+          "diameter_m": 0.0036000348053661035,
+          "density_kg_m3": 278.9371115861259,
+          "terminal_speed_m_s": 0.17405157406404675,
+          "sha256": "db12b331108dd6b2cfd05cf75eefa422213063a635a2aea5c2fde46b8288401c",
+          "observed_fit": {
+            "age_min": 10.0,
+            "mass_kg": 5.391726275235823e-09,
+            "equatorial_dimension_m": 0.0013612671124661696,
+            "polar_dimension_m": 1.456976934523401e-05,
+            "diameter_m": 0.0013612671124661696,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.13299999999999998,
+          "fall_speed_ratio_to_fit": 1.3086584516093742,
+          "ratio_to_fit": {
+            "mass_kg": 5.089101115773969,
+            "equatorial_dimension_m": 2.644620421956732,
+            "polar_dimension_m": 0.9949423534357795,
+            "diameter_m": 2.644620421956732
+          },
+          "ledger_mass_error_kg": 3.308722450212111e-24
+        },
+        {
+          "age_min": 11.0,
+          "elapsed_s": 480.0,
+          "mass_kg": 3.698255670681759e-08,
+          "equatorial_dimension_m": 0.004106623296815776,
+          "polar_dimension_m": 1.5044078555064358e-05,
+          "diameter_m": 0.004106623296815776,
+          "density_kg_m3": 278.39599542892455,
+          "terminal_speed_m_s": 0.18456802539507772,
+          "sha256": "a1200ebab07caafc6d3915e46c37d19c45b10ab4b405944a77c523d9f0b2b3f2",
+          "observed_fit": {
+            "age_min": 11.0,
+            "mass_kg": 6.758160471879313e-09,
+            "equatorial_dimension_m": 0.0015002508834079176,
+            "polar_dimension_m": 1.53100592974255e-05,
+            "diameter_m": 0.0015002508834079176,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1412,
+          "fall_speed_ratio_to_fit": 1.3071389900501256,
+          "ratio_to_fit": {
+            "mass_kg": 5.47228152700752,
+            "equatorial_dimension_m": 2.7372910372745882,
+            "polar_dimension_m": 0.9826270599483655,
+            "diameter_m": 2.7372910372745882
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 12.0,
+          "elapsed_s": 540.0,
+          "mass_kg": 4.84641728053887e-08,
+          "equatorial_dimension_m": 0.004625901717346326,
+          "polar_dimension_m": 1.5557502647878784e-05,
+          "diameter_m": 0.004625901717346326,
+          "density_kg_m3": 278.0286146739552,
+          "terminal_speed_m_s": 0.1943279381254113,
+          "sha256": "41a82a97a4359819cd6d95b49f825bf1f7af392ca45ecaebbc60c0c725418d45",
+          "observed_fit": {
+            "age_min": 12.0,
+            "mass_kg": 8.30591321717268e-09,
+            "equatorial_dimension_m": 0.0016394879283315742,
+            "polar_dimension_m": 1.6018687329706366e-05,
+            "diameter_m": 0.0016394879283315742,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1494,
+          "fall_speed_ratio_to_fit": 1.3007224774123916,
+          "ratio_to_fit": {
+            "mass_kg": 5.83489997285161,
+            "equatorial_dimension_m": 2.8215527771856657,
+            "polar_dimension_m": 0.971209583386254,
+            "diameter_m": 2.8215527771856657
+          },
+          "ledger_mass_error_kg": 6.617444900424222e-24
+        },
+        {
+          "age_min": 13.0,
+          "elapsed_s": 600.0,
+          "mass_kg": 6.206229818865676e-08,
+          "equatorial_dimension_m": 0.005157556295469268,
+          "polar_dimension_m": 1.6041909426623903e-05,
+          "diameter_m": 0.005157556295469268,
+          "density_kg_m3": 277.7699222360839,
+          "terminal_speed_m_s": 0.2034315919139869,
+          "sha256": "6d034e58c59a480b634f83a4756b27e61758de4722ecf07bd1b51bed6203bc7a",
+          "observed_fit": {
+            "age_min": 13.0,
+            "mass_kg": 1.0040921712973327e-08,
+            "equatorial_dimension_m": 0.0017789574955732886,
+            "polar_dimension_m": 1.6699490447045075e-05,
+            "diameter_m": 0.0017789574955732886,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1576,
+          "fall_speed_ratio_to_fit": 1.2908095933628612,
+          "ratio_to_fit": {
+            "mass_kg": 6.180936368467991,
+            "equatorial_dimension_m": 2.8992015314043176,
+            "polar_dimension_m": 0.9606226895062221,
+            "diameter_m": 2.8992015314043176
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 14.0,
+          "elapsed_s": 660.0,
+          "mass_kg": 7.795726748887048e-08,
+          "equatorial_dimension_m": 0.0057012658787969515,
+          "polar_dimension_m": 1.65015114546704e-05,
+          "diameter_m": 0.0057012658787969515,
+          "density_kg_m3": 277.58223672069107,
+          "terminal_speed_m_s": 0.21195818883574125,
+          "sha256": "e3e2b14c8ee52805c72200c6ffd6637633d2eabe5805d6c9698cef9505cd7f50",
+          "observed_fit": {
+            "age_min": 14.0,
+            "mass_kg": 1.1968818482442176e-08,
+            "equatorial_dimension_m": 0.001918642006824116,
+            "polar_dimension_m": 1.735558492560232e-05,
+            "diameter_m": 0.001918642006824116,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.16579999999999998,
+          "fall_speed_ratio_to_fit": 1.2783967963554963,
+          "ratio_to_fit": {
+            "mass_kg": 6.513363671044972,
+            "equatorial_dimension_m": 2.971511026298296,
+            "polar_dimension_m": 0.9507897040293916,
+            "diameter_m": 2.971511026298296
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 15.0,
+          "elapsed_s": 720.0,
+          "mass_kg": 9.633120348963602e-08,
+          "equatorial_dimension_m": 0.006256711620600678,
+          "polar_dimension_m": 1.693959030585867e-05,
+          "diameter_m": 0.006256711620600678,
+          "density_kg_m3": 277.442624929758,
+          "terminal_speed_m_s": 0.21997234043795008,
+          "sha256": "be9d381469255c7f332e2608c048c8cacd98a9a14b1e91cae3bc1e1172bd8c7a",
+          "observed_fit": {
+            "age_min": 15.0,
+            "mass_kg": 1.4094968835893253e-08,
+            "equatorial_dimension_m": 0.0020585263785494043,
+            "polar_dimension_m": 1.7989543015457557e-05,
+            "diameter_m": 0.0020585263785494043,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.174,
+          "fall_speed_ratio_to_fit": 1.2642088530916673,
+          "ratio_to_fit": {
+            "mass_kg": 6.8344389130060215,
+            "equatorial_dimension_m": 3.0394128954566217,
+            "polar_dimension_m": 0.9416353873638306,
+            "diameter_m": 3.0394128954566217
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 16.0,
+          "elapsed_s": 780.0,
+          "mass_kg": 1.1736790273419041e-07,
+          "equatorial_dimension_m": 0.006823582580899143,
+          "polar_dimension_m": 1.73587605412155e-05,
+          "diameter_m": 0.006823582580899143,
+          "density_kg_m3": 277.3365481820728,
+          "terminal_speed_m_s": 0.22752801597301825,
+          "sha256": "67fdd8ac18edea252ee0b8e705574ccf8e0f226c7c3e759ebfb4135c971a7355",
+          "observed_fit": {
+            "age_min": 16.0,
+            "mass_kg": 1.6424501414942382e-08,
+            "equatorial_dimension_m": 0.0021985975243676713,
+            "polar_dimension_m": 1.86035175138803e-05,
+            "diameter_m": 0.0021985975243676713,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1822,
+          "fall_speed_ratio_to_fit": 1.2487816463941726,
+          "ratio_to_fit": {
+            "mass_kg": 7.145903535763563,
+            "equatorial_dimension_m": 3.103606960924621,
+            "polar_dimension_m": 0.9330902356645151,
+            "diameter_m": 3.103606960924621
+          },
+          "ledger_mass_error_kg": 1.3234889800848443e-23
+        },
+        {
+          "age_min": 17.0,
+          "elapsed_s": 840.0,
+          "mass_kg": 1.412527399697943e-07,
+          "equatorial_dimension_m": 0.007401578865832269,
+          "polar_dimension_m": 1.7761145150693326e-05,
+          "diameter_m": 0.007401578865832269,
+          "density_kg_m3": 277.2544676132731,
+          "terminal_speed_m_s": 0.23467106474085844,
+          "sha256": "089d481d8e441e362ce20c5709ef9d83efd575f771b4648a6093684ae0e64aa1",
+          "observed_fit": {
+            "age_min": 17.0,
+            "mass_kg": 1.8962333466094363e-08,
+            "equatorial_dimension_m": 0.002338843981761323,
+            "polar_dimension_m": 1.9199331866979786e-05,
+            "diameter_m": 0.002338843981761323,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.19039999999999999,
+          "fall_speed_ratio_to_fit": 1.2325160963280382,
+          "ratio_to_fit": {
+            "mass_kg": 7.449122241329715,
+            "equatorial_dimension_m": 3.1646312980048936,
+            "polar_dimension_m": 0.9250918351612045,
+            "diameter_m": 3.1646312980048936
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 18.0,
+          "elapsed_s": 900.0,
+          "mass_kg": 1.6817258732778406e-07,
+          "equatorial_dimension_m": 0.007990413238093212,
+          "polar_dimension_m": 1.8148496035468573e-05,
+          "diameter_m": 0.007990413238093212,
+          "density_kg_m3": 277.1899385799918,
+          "terminal_speed_m_s": 0.24144091183103564,
+          "sha256": "cf5dadc52ce4bf2da2e328bc7604c25d66c6c46d8431312fd239ab302b9a340f",
+          "observed_fit": {
+            "age_min": 18.0,
+            "mass_kg": 2.171319202300609e-08,
+            "equatorial_dimension_m": 0.0024792556265240237,
+            "polar_dimension_m": 1.977854679375429e-05,
+            "diameter_m": 0.0024792556265240237,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.1986,
+          "fall_speed_ratio_to_fit": 1.2157145610827575,
+          "ratio_to_fit": {
+            "mass_kg": 7.745180310181835,
+            "equatorial_dimension_m": 3.222908179620011,
+            "polar_dimension_m": 0.917584907764788,
+            "diameter_m": 3.222908179620011
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 19.0,
+          "elapsed_s": 960.0,
+          "mass_kg": 1.9831574445663952e-07,
+          "equatorial_dimension_m": 0.008589811764950335,
+          "polar_dimension_m": 1.8522279095141068e-05,
+          "diameter_m": 0.008589811764950335,
+          "density_kg_m3": 277.1384952241865,
+          "terminal_speed_m_s": 0.24787175584327814,
+          "sha256": "a9bd4524cdf3a793242c9ffe9271e4088283e5e4175b58d016beaf6016d920c6",
+          "observed_fit": {
+            "age_min": 19.0,
+            "mass_kg": 2.4681631859373748e-08,
+            "equatorial_dimension_m": 0.002619823450568232,
+            "polar_dimension_m": 2.034251050694647e-05,
+            "diameter_m": 0.002619823450568232,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2068,
+          "fall_speed_ratio_to_fit": 1.1986061694549233,
+          "ratio_to_fit": {
+            "mass_kg": 8.034952696262744,
+            "equatorial_dimension_m": 3.278775049932174,
+            "polar_dimension_m": 0.9105208075874491,
+            "diameter_m": 3.278775049932174
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 20.0,
+          "elapsed_s": 1020.0,
+          "mass_kg": 2.318718763958749e-07,
+          "equatorial_dimension_m": 0.009199513860431677,
+          "polar_dimension_m": 1.8883735792119665e-05,
+          "diameter_m": 0.009199513860431677,
+          "density_kg_m3": 277.09697364173707,
+          "terminal_speed_m_s": 0.2539934531431752,
+          "sha256": "6c7377dee2b3a8cb7a5e28263ceb3a2934821d2f4ca91cfcb95b5e0d33c0fdfd",
+          "observed_fit": {
+            "age_min": 20.0,
+            "mass_kg": 2.7872050855294237e-08,
+            "equatorial_dimension_m": 0.002760539386422945,
+            "polar_dimension_m": 2.0892397214978434e-05,
+            "diameter_m": 0.002760539386422945,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.215,
+          "fall_speed_ratio_to_fit": 1.1813648983403497,
+          "ratio_to_fit": {
+            "mass_kg": 8.319153750102725,
+            "equatorial_dimension_m": 3.332505924630995,
+            "polar_dimension_m": 0.9038568239829035,
+            "diameter_m": 3.332505924630995
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 21.0,
+          "elapsed_s": 1080.0,
+          "mass_kg": 2.690319565530424e-07,
+          "equatorial_dimension_m": 0.00981927195095291,
+          "polar_dimension_m": 1.923392865147283e-05,
+          "diameter_m": 0.00981927195095291,
+          "density_kg_m3": 277.0630881504915,
+          "terminal_speed_m_s": 0.2598321953783759,
+          "sha256": "157690a30ff0c22c994b91d965a1916e1e0d6a9f2a6baab0f90f25180bfcb753",
+          "observed_fit": {
+            "age_min": 21.0,
+            "mass_kg": 3.1288703265097984e-08,
+            "equatorial_dimension_m": 0.002901396166756042,
+            "polar_dimension_m": 2.1429237085327042e-05,
+            "diameter_m": 0.002901396166756042,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2232,
+          "fall_speed_ratio_to_fit": 1.1641227391504294,
+          "ratio_to_fit": {
+            "mass_kg": 8.598373485587782,
+            "equatorial_dimension_m": 3.3843265057910115,
+            "polar_dimension_m": 0.8975554554222848,
+            "diameter_m": 3.3843265057910115
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 22.0,
+          "elapsed_s": 1140.0,
+          "mass_kg": 3.099882126347742e-07,
+          "equatorial_dimension_m": 0.01044885091348325,
+          "polar_dimension_m": 1.95737755242171e-05,
+          "diameter_m": 0.01044885091348325,
+          "density_kg_m3": 277.03515863533016,
+          "terminal_speed_m_s": 0.2654110441003069,
+          "sha256": "918d26e4f17f97010b00d2a73340a0b9c4d1a29bf4dff32e3cc8824fab07dd35",
+          "observed_fit": {
+            "age_min": 22.0,
+            "mass_kg": 3.493571126294257e-08,
+            "equatorial_dimension_m": 0.0030423872105896474,
+            "polar_dimension_m": 2.195393987697681e-05,
+            "diameter_m": 0.0030423872105896474,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.23140000000000002,
+          "fall_speed_ratio_to_fit": 1.146979447278768,
+          "ratio_to_fit": {
+            "mass_kg": 8.873104380261713,
+            "equatorial_dimension_m": 3.434425071573368,
+            "polar_dimension_m": 0.8915837263790726,
+            "diameter_m": 3.434425071573368
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 23.0,
+          "elapsed_s": 1200.0,
+          "mass_kg": 3.549340737643526e-07,
+          "equatorial_dimension_m": 0.011088027383520474,
+          "polar_dimension_m": 1.9904075822628684e-05,
+          "diameter_m": 0.011088027383520474,
+          "density_kg_m3": 277.0119307949657,
+          "terminal_speed_m_s": 0.2707503621798642,
+          "sha256": "3cae3744e9ea5a5d9d0278c69668ec71c9e9f6824fe04efdefcb982c77e32d67",
+          "observed_fit": {
+            "age_min": 23.0,
+            "mass_kg": 3.881707506039571e-08,
+            "equatorial_dimension_m": 0.0031835065301490874,
+            "polar_dimension_m": 2.2467313804892275e-05,
+            "diameter_m": 0.0031835065301490874,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2396,
+          "fall_speed_ratio_to_fit": 1.1300098588475134,
+          "ratio_to_fit": {
+            "mass_kg": 9.143761430043574,
+            "equatorial_dimension_m": 3.482960464667622,
+            "polar_dimension_m": 0.8859125748399239,
+            "diameter_m": 3.482960464667622
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 24.0,
+          "elapsed_s": 1260.0,
+          "mass_kg": 4.0406411729973657e-07,
+          "equatorial_dimension_m": 0.011736588996095598,
+          "polar_dimension_m": 2.0225530910257835e-05,
+          "diameter_m": 0.011736588996095598,
+          "density_kg_m3": 276.99245504359493,
+          "terminal_speed_m_s": 0.27586816774570366,
+          "sha256": "b5f996d3013c421fdf8d20b96e44eabb94f1ffbe4dd1126e64c3f23120f0415d",
+          "observed_fit": {
+            "age_min": 24.0,
+            "mass_kg": 4.2936681828969894e-08,
+            "equatorial_dimension_m": 0.0033247486538662313,
+            "polar_dimension_m": 2.2970080762757087e-05,
+            "diameter_m": 0.0033247486538662313,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.24780000000000002,
+          "fall_speed_ratio_to_fit": 1.1132694420730576,
+          "ratio_to_fit": {
+            "mass_kg": 9.410697335887509,
+            "equatorial_dimension_m": 3.5300680496396435,
+            "polar_dimension_m": 0.8805163168189999,
+            "diameter_m": 3.5300680496396435
+          },
+          "ledger_mass_error_kg": 5.293955920339377e-23
+        },
+        {
+          "age_min": 25.0,
+          "elapsed_s": 1320.0,
+          "mass_kg": 4.575740140633793e-07,
+          "equatorial_dimension_m": 0.012394333600427783,
+          "polar_dimension_m": 2.0538760162735407e-05,
+          "diameter_m": 0.012394333600427783,
+          "density_kg_m3": 276.97600332786106,
+          "terminal_speed_m_s": 0.28078042806792947,
+          "sha256": "a84b6506f7f4eb6c3dd0b52293493387e391061e295e577c61e506ec54103b66",
+          "observed_fit": {
+            "age_min": 25.0,
+            "mass_kg": 4.729831361415687e-08,
+            "equatorial_dimension_m": 0.0034661085621771944,
+            "polar_dimension_m": 2.3462888728584083e-05,
+            "diameter_m": 0.0034661085621771944,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.256,
+          "fall_speed_ratio_to_fit": 1.0967985471403494,
+          "ratio_to_fit": {
+            "mass_kg": 9.674214133639273,
+            "equatorial_dimension_m": 3.5758642229724136,
+            "polar_dimension_m": 0.8753721845730656,
+            "diameter_m": 3.5758642229724136
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 26.0,
+          "elapsed_s": 1380.0,
+          "mass_kg": 5.156604708263035e-07,
+          "equatorial_dimension_m": 0.013061068473775155,
+          "polar_dimension_m": 2.0844313772431932e-05,
+          "diameter_m": 0.013061068473775155,
+          "density_kg_m3": 276.9620109772876,
+          "terminal_speed_m_s": 0.2855013057025248,
+          "sha256": "9bcc93a7091bce2747d1a8545ae9e7480df5a8f4fbda6523d7af12ea316d1ebf",
+          "observed_fit": {
+            "age_min": 26.0,
+            "mass_kg": 5.1905654391882146e-08,
+            "equatorial_dimension_m": 0.0036075816335601296,
+            "polar_dimension_m": 2.394632196573046e-05,
+            "diameter_m": 0.0036075816335601296,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.26420000000000005,
+          "fall_speed_ratio_to_fit": 1.0806256839611081,
+          "ratio_to_fit": {
+            "mass_kg": 9.934572193871634,
+            "equatorial_dimension_m": 3.6204498748614276,
+            "polar_dimension_m": 0.8704599312688684,
+            "diameter_m": 3.6204498748614276
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 27.0,
+          "elapsed_s": 1440.0,
+          "mass_kg": 5.785211689699439e-07,
+          "equatorial_dimension_m": 0.013736609549968137,
+          "polar_dimension_m": 2.1142683069518908e-05,
+          "diameter_m": 0.013736609549968137,
+          "density_kg_m3": 276.95003540241186,
+          "terminal_speed_m_s": 0.2900433659549211,
+          "sha256": "d8ab18fb6e186ba0402945c7a2f8a31509697ec61af7096f075533634c7f7bc2",
+          "observed_fit": {
+            "age_min": 27.0,
+            "mass_kg": 5.67622963906214e-08,
+            "equatorial_dimension_m": 0.003749163598847738,
+            "polar_dimension_m": 2.4420909480346218e-05,
+            "diameter_m": 0.003749163598847738,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.2724,
+          "fall_speed_ratio_to_fit": 1.0647700659138073,
+          "ratio_to_fit": {
+            "mass_kg": 10.191997254457988,
+            "equatorial_dimension_m": 3.663913080290741,
+            "polar_dimension_m": 0.8657614937123613,
+            "diameter_m": 3.663913080290741
+          },
+          "ledger_mass_error_kg": 1.0587911840678754e-22
+        },
+        {
+          "age_min": 28.0,
+          "elapsed_s": 1500.0,
+          "mass_kg": 6.463546982939476e-07,
+          "equatorial_dimension_m": 0.014420780671427687,
+          "polar_dimension_m": 2.143430892434433e-05,
+          "diameter_m": 0.014420780671427687,
+          "density_kg_m3": 276.93972633048656,
+          "terminal_speed_m_s": 0.29441775256303404,
+          "sha256": "0f889d5132e40508dd8f64e0ddca575e4b600709ac627fa7304d285cb7f54933",
+          "observed_fit": {
+            "age_min": 28.0,
+            "mass_kg": 6.187174578068195e-08,
+            "equatorial_dimension_m": 0.003890850502285357,
+            "polar_dimension_m": 2.488713208645183e-05,
+            "diameter_m": 0.003890850502285357,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.28059999999999996,
+          "fall_speed_ratio_to_fit": 1.049243594308746,
+          "ratio_to_fit": {
+            "mass_kg": 10.44668596527233,
+            "equatorial_dimension_m": 3.7063312154906485,
+            "polar_dimension_m": 0.8612607049252106,
+            "diameter_m": 3.7063312154906485
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 29.0,
+          "elapsed_s": 1560.0,
+          "mass_kg": 7.193604849577907e-07,
+          "equatorial_dimension_m": 0.01511341286907607,
+          "polar_dimension_m": 2.171958865012617e-05,
+          "diameter_m": 0.01511341286907607,
+          "density_kg_m3": 276.93080406873895,
+          "terminal_speed_m_s": 0.29863433701438763,
+          "sha256": "4b8ba1ad9249ac34e706d0ca5ca642d853e89156b7e9a506ee248b5c5f889dde",
+          "observed_fit": {
+            "age_min": 29.0,
+            "mass_kg": 6.723742781490735e-08,
+            "equatorial_dimension_m": 0.004032638668132747,
+            "polar_dimension_m": 2.534542834914594e-05,
+            "diameter_m": 0.004032638668132747,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.28879999999999995,
+          "fall_speed_ratio_to_fit": 1.034052413484722,
+          "ratio_to_fit": {
+            "mass_kg": 10.698810295629718,
+            "equatorial_dimension_m": 3.7477726404072076,
+            "polar_dimension_m": 0.8569430490946133,
+            "diameter_m": 3.7477726404072076
+          },
+          "ledger_mass_error_kg": 0.0
+        },
+        {
+          "age_min": 30.0,
+          "elapsed_s": 1620.0,
+          "mass_kg": 7.977387125482304e-07,
+          "equatorial_dimension_m": 0.015814343671713485,
+          "polar_dimension_m": 2.199888172084422e-05,
+          "diameter_m": 0.015814343671713485,
+          "density_kg_m3": 276.92304343491315,
+          "terminal_speed_m_s": 0.3027018458519965,
+          "sha256": "c1a1b56e7e4f698cd68cf595b8d46a105c2834f54b8255f4ddce59a8eb8f346c",
+          "observed_fit": {
+            "age_min": 30.0,
+            "mass_kg": 7.286269149125554e-08,
+            "equatorial_dimension_m": 0.004174524671856013,
+            "polar_dimension_m": 2.579619961642184e-05,
+            "diameter_m": 0.004174524671856013,
+            "habit": "broad branch to dendrite"
+          },
+          "observed_fall_speed_m_s": 0.297,
+          "fall_speed_ratio_to_fit": 1.0191981341818064,
+          "ratio_to_fit": {
+            "mass_kg": 10.948521063677276,
+            "equatorial_dimension_m": 3.7882980494357343,
+            "polar_dimension_m": 0.8527954523518165,
+            "diameter_m": 3.7882980494357343
+          },
+          "ledger_mass_error_kg": 1.0587911840678754e-22
+        }
+      ],
+      "water": {
+        "ice_deposition_relative_residual": 2.9199292554183233e-15,
+        "corrected_maximum_absolute_residual_kg_m2": 8.409467356310384e-15,
+        "maximum_used_fraction_of_growth_ceiling": 3.209488929051308e-07
+      },
+      "input_sha256": {
+        "init.conf": "78612154e4ef7d008fb79355ddd82eb746e36e7cc4e6d7f4f47dbaeda0bc25bc",
+        "run.conf": "5a7dfeb895e79b1617b9ab199b93b3d8ae0d486d854bcfb3ae4db03c52feadc6",
+        "env.txt": "79521ed6f4cca88a86bc1458e0f444d2672e8264a079eaf9328b926cf1b8dcb4",
+        "particles.pe000000": "60f764b4d8611571f6b539933db98f24ff9148f1b15c93df4b56f426183be851",
+        "lunar_forcing.txt": "2597b258a926ca1b74dc5a5e517f117fbdfb7e6e67e22c776ac590ce352d287b",
+        "settings.json": "e31c972b3019032a596855fa1c6991562ff477e80d190a62c84222eb33de56b8",
+        "growth_control.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "exactly_matched_snapshot_ledger_times": 28,
+      "air_ranges": {
+        "T": [
+          258.74999999999994,
+          258.74999999999994
+        ],
+        "PRES": [
+          100999.99999999999,
+          100999.99999999999
+        ],
+        "RH": [
+          100.04753069636831,
+          100.04753069636831
+        ]
+      },
+      "ledger_sha256": "5d95e491d20094211d31ae77130135f3a3fcc424f0000e3070e2314a4cdf581a",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true,
+        "growth_control.txt": true
+      }
+    }
+  }
+}

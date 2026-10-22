@@ -1,0 +1,4334 @@
+{
+  "schema": "terluna.atmosphere.takahashi-measurements/1",
+  "evidence": "Measured crystal data transcribed from the identified public workbook; geometric conversions and temperature windows are our diagnostics, not confidence intervals.",
+  "attribution": "Takahashi et al. (1991), doi:10.2151/jmsj1965.69.1_15; workbook supplied with Tsuneya Takahashi's permission in Fuchs et al. (2025b), doi:10.5281/zenodo.15804055.",
+  "source_license": "CC-BY-4.0, https://creativecommons.org/licenses/by/4.0/; source dataset metadata checked. This product converts units, adds row identifiers, derived spheroid densities and diagnostic groupings.",
+  "parser_sha256": "c56887e418e04b6f856baf6a9134bcb58c6cd88a9cf880584b9d2823fcfb48c5",
+  "source": "https://zenodo.org/records/15804055",
+  "source_file": "1991_takahashi.xlsx",
+  "source_sha256": "bfb05429b98aa4c5857f07a42f9594ddc8d1c7b9969baa025a1c34e448d72a63",
+  "source_md5": "ecb41c07eab7982cadeff694c4f45418",
+  "units": {
+    "age": "min",
+    "full_axes": "mm",
+    "mass": "g"
+  },
+  "unit_evidence": "Fuchs2025 f08.py lines304-314 converts axes*1e3/(minutes*60) to micrometers/s; mass strings agree with numeric grams and original1991 paper.",
+  "geometry_caution": "Derived spheroid density is a representation diagnostic, not measured bulk density. Missing planar thickness remains absent.",
+  "data_quality": {
+    "flag_counts": {
+      "c_axis_missing_in_source": 79,
+      "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping": 32,
+      "source_c_axis_decimal_anomaly_unresolved": 1
+    },
+    "row72": {
+      "source_cell": "xl/worksheets/sheet1.xml:D72",
+      "source_value_mm": 0.8923,
+      "source_comparison": "The original paper's Figure 7 (printed p.22) places the corresponding polar-axis series near 0.09 mm at 12 minutes. Table 2 predicts 0.08584 mm at nominal -10.6 C; row 72 is at -10.3 C. A decimal anomaly is suspected, not corrected.",
+      "author_plot": "Fuchs f08.py includes this age/temperature selection and has no explicit row exclusion.",
+      "handling": "Preserve the source entry and exclude its polar dimension and dependent size/shape quantities from calibration pending source verification. Raw window ranges retain the flag."
+    },
+    "geometry_caution": "Exceeding bulk ice density after spheroid mapping indicates representation incompatibility, not necessarily bad measurements."
+  },
+  "row_count": 169,
+  "rows": [
+    {
+      "excel_row": 2,
+      "temperature_C": -2.8,
+      "age_min": 10.0,
+      "a_full_mm": 0.0951,
+      "c_full_mm": 0.0671,
+      "mass_g": 2.45e-07,
+      "mass_kg": 2.45e-10,
+      "maximum_dimension_mm": 0.0951,
+      "spheroid_density_kg_m3": 771.0524261154677,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 3,
+      "temperature_C": -3.7,
+      "age_min": 3.0,
+      "a_full_mm": 0.05428,
+      "c_full_mm": 0.05266,
+      "mass_g": 6.107e-08,
+      "mass_kg": 6.107e-11,
+      "maximum_dimension_mm": 0.05428,
+      "spheroid_density_kg_m3": 751.7419132491099,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 4,
+      "temperature_C": -3.8,
+      "age_min": 3.0,
+      "a_full_mm": 0.051,
+      "c_full_mm": 0.059,
+      "mass_g": 6.159e-08,
+      "mass_kg": 6.159e-11,
+      "maximum_dimension_mm": 0.059,
+      "spheroid_density_kg_m3": 766.5124583136736,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 5,
+      "temperature_C": -3.6,
+      "age_min": 4.0,
+      "a_full_mm": 0.06681,
+      "c_full_mm": 0.05734,
+      "mass_g": 9.038e-08,
+      "mass_kg": 9.038e-11,
+      "maximum_dimension_mm": 0.06681,
+      "spheroid_density_kg_m3": 674.4241023458853,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 6,
+      "temperature_C": -3.9,
+      "age_min": 5.0,
+      "a_full_mm": 0.06152,
+      "c_full_mm": 0.05157,
+      "mass_g": 1.026e-07,
+      "mass_kg": 1.0260000000000001e-10,
+      "maximum_dimension_mm": 0.06152,
+      "spheroid_density_kg_m3": 1003.9658800115415,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 7,
+      "temperature_C": -3.9,
+      "age_min": 5.0,
+      "a_full_mm": 0.0559,
+      "c_full_mm": 0.0765,
+      "mass_g": 1.208e-07,
+      "mass_kg": 1.2079999999999999e-10,
+      "maximum_dimension_mm": 0.0765,
+      "spheroid_density_kg_m3": 965.1243235055839,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 8,
+      "temperature_C": -3.7,
+      "age_min": 7.0,
+      "a_full_mm": 0.07516,
+      "c_full_mm": 0.0682,
+      "mass_g": 1.895e-07,
+      "mass_kg": 1.895e-10,
+      "maximum_dimension_mm": 0.07516,
+      "spheroid_density_kg_m3": 939.4045827167939,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 9,
+      "temperature_C": -3.4,
+      "age_min": 10.0,
+      "a_full_mm": 0.08804,
+      "c_full_mm": 0.08537,
+      "mass_g": 3.198e-07,
+      "mass_kg": 3.198e-10,
+      "maximum_dimension_mm": 0.08804,
+      "spheroid_density_kg_m3": 923.0271761978734,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 10,
+      "temperature_C": -3.7,
+      "age_min": 10.0,
+      "a_full_mm": 0.0927,
+      "c_full_mm": 0.0875,
+      "mass_g": 3.17e-07,
+      "mass_kg": 3.17e-10,
+      "maximum_dimension_mm": 0.0927,
+      "spheroid_density_kg_m3": 805.1802591112299,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 11,
+      "temperature_C": -3.9,
+      "age_min": 10.0,
+      "a_full_mm": 0.1027,
+      "c_full_mm": 0.0892,
+      "mass_g": 4.585e-07,
+      "mass_kg": 4.5849999999999997e-10,
+      "maximum_dimension_mm": 0.1027,
+      "spheroid_density_kg_m3": 930.7541388977454,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 12,
+      "temperature_C": -3.9,
+      "age_min": 12.0,
+      "a_full_mm": 0.0824,
+      "c_full_mm": 0.0821,
+      "mass_g": 3.43e-07,
+      "mass_kg": 3.43e-10,
+      "maximum_dimension_mm": 0.0824,
+      "spheroid_density_kg_m3": 1175.1624804115734,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 13,
+      "temperature_C": -3.4,
+      "age_min": 15.0,
+      "a_full_mm": 0.11382,
+      "c_full_mm": null,
+      "mass_g": 6.21e-07,
+      "mass_kg": 6.21e-10,
+      "maximum_dimension_mm": 0.11382,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 14,
+      "temperature_C": -3.3,
+      "age_min": 17.0,
+      "a_full_mm": 0.1156,
+      "c_full_mm": 0.1292,
+      "mass_g": 6.956000000000001e-07,
+      "mass_kg": 6.956000000000001e-10,
+      "maximum_dimension_mm": 0.1292,
+      "spheroid_density_kg_m3": 769.4541905039308,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 15,
+      "temperature_C": -3.6,
+      "age_min": 20.0,
+      "a_full_mm": 0.12794,
+      "c_full_mm": 0.11563,
+      "mass_g": 7.648e-07,
+      "mass_kg": 7.648e-10,
+      "maximum_dimension_mm": 0.12794,
+      "spheroid_density_kg_m3": 771.7311645235113,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 16,
+      "temperature_C": -4.2,
+      "age_min": 10.0,
+      "a_full_mm": 0.06937,
+      "c_full_mm": 0.14994,
+      "mass_g": 3.06e-07,
+      "mass_kg": 3.0600000000000003e-10,
+      "maximum_dimension_mm": 0.14994,
+      "spheroid_density_kg_m3": 809.956898421984,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 17,
+      "temperature_C": -4.6,
+      "age_min": 10.0,
+      "a_full_mm": 0.07363,
+      "c_full_mm": 0.4023,
+      "mass_g": 5.99e-07,
+      "mass_kg": 5.99e-10,
+      "maximum_dimension_mm": 0.4023,
+      "spheroid_density_kg_m3": 524.5278673754788,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 18,
+      "temperature_C": -4.8,
+      "age_min": 10.0,
+      "a_full_mm": 0.07897,
+      "c_full_mm": 0.58377,
+      "mass_g": 6.397e-07,
+      "mass_kg": 6.397e-10,
+      "maximum_dimension_mm": 0.58377,
+      "spheroid_density_kg_m3": 335.59206199566376,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 19,
+      "temperature_C": -4.9,
+      "age_min": 10.0,
+      "a_full_mm": 0.08858,
+      "c_full_mm": 0.54749,
+      "mass_g": 7.553e-07,
+      "mass_kg": 7.553e-10,
+      "maximum_dimension_mm": 0.54749,
+      "spheroid_density_kg_m3": 335.79429962347433,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 20,
+      "temperature_C": -5.0,
+      "age_min": 3.0,
+      "a_full_mm": 0.057,
+      "c_full_mm": 0.0838,
+      "mass_g": 6.38e-08,
+      "mass_kg": 6.38e-11,
+      "maximum_dimension_mm": 0.0838,
+      "spheroid_density_kg_m3": 447.53636121984687,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 21,
+      "temperature_C": -5.2,
+      "age_min": 4.0,
+      "a_full_mm": 0.0726,
+      "c_full_mm": 0.1391,
+      "mass_g": 1.66e-07,
+      "mass_kg": 1.66e-10,
+      "maximum_dimension_mm": 0.1391,
+      "spheroid_density_kg_m3": 432.4233075690875,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 22,
+      "temperature_C": -5.5,
+      "age_min": 5.0,
+      "a_full_mm": 0.067,
+      "c_full_mm": 0.2274,
+      "mass_g": 1.66e-07,
+      "mass_kg": 1.66e-10,
+      "maximum_dimension_mm": 0.2274,
+      "spheroid_density_kg_m3": 310.5770782199893,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 23,
+      "temperature_C": -5.3,
+      "age_min": 5.0,
+      "a_full_mm": 0.0777,
+      "c_full_mm": 0.2241,
+      "mass_g": 2.15e-07,
+      "mass_kg": 2.15e-10,
+      "maximum_dimension_mm": 0.2241,
+      "spheroid_density_kg_m3": 303.4980768531386,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 24,
+      "temperature_C": -5.1,
+      "age_min": 7.0,
+      "a_full_mm": 0.0849,
+      "c_full_mm": 0.4084,
+      "mass_g": 4.03e-07,
+      "mass_kg": 4.03e-10,
+      "maximum_dimension_mm": 0.4084,
+      "spheroid_density_kg_m3": 261.46003195846276,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 25,
+      "temperature_C": -5.7,
+      "age_min": 7.0,
+      "a_full_mm": 0.0798,
+      "c_full_mm": 0.3507,
+      "mass_g": 4.42e-07,
+      "mass_kg": 4.42e-10,
+      "maximum_dimension_mm": 0.3507,
+      "spheroid_density_kg_m3": 377.99155623330785,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 26,
+      "temperature_C": -5.4,
+      "age_min": 10.0,
+      "a_full_mm": 0.0927,
+      "c_full_mm": 0.4033,
+      "mass_g": 8.949999999999999e-07,
+      "mass_kg": 8.949999999999999e-10,
+      "maximum_dimension_mm": 0.4033,
+      "spheroid_density_kg_m3": 493.21550709523547,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 27,
+      "temperature_C": -5.1,
+      "age_min": 10.0,
+      "a_full_mm": 0.0835,
+      "c_full_mm": 0.4856,
+      "mass_g": 8.97e-07,
+      "mass_kg": 8.970000000000001e-10,
+      "maximum_dimension_mm": 0.4856,
+      "spheroid_density_kg_m3": 505.9903004045756,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 28,
+      "temperature_C": -5.3,
+      "age_min": 12.0,
+      "a_full_mm": 0.1003,
+      "c_full_mm": 0.6145,
+      "mass_g": 1.25e-06,
+      "mass_kg": 1.25e-09,
+      "maximum_dimension_mm": 0.6145,
+      "spheroid_density_kg_m3": 386.1780964010581,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 29,
+      "temperature_C": -5.3,
+      "age_min": 15.0,
+      "a_full_mm": 0.1025,
+      "c_full_mm": 0.9972,
+      "mass_g": 2e-06,
+      "mass_kg": 2e-09,
+      "maximum_dimension_mm": 0.9972,
+      "spheroid_density_kg_m3": 364.5871625995251,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 30,
+      "temperature_C": -5.5,
+      "age_min": 20.0,
+      "a_full_mm": 0.108,
+      "c_full_mm": 1.058,
+      "mass_g": 2.8e-06,
+      "mass_kg": 2.8e-09,
+      "maximum_dimension_mm": 1.058,
+      "spheroid_density_kg_m3": 433.33745697809644,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 31,
+      "temperature_C": -5.4,
+      "age_min": 25.0,
+      "a_full_mm": 0.134,
+      "c_full_mm": 1.58,
+      "mass_g": 5.79e-06,
+      "mass_kg": 5.79e-09,
+      "maximum_dimension_mm": 1.58,
+      "spheroid_density_kg_m3": 389.7743515804064,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 32,
+      "temperature_C": -5.0,
+      "age_min": 30.0,
+      "a_full_mm": 0.1476,
+      "c_full_mm": 1.866,
+      "mass_g": 6.709999999999999e-06,
+      "mass_kg": 6.709999999999999e-09,
+      "maximum_dimension_mm": 1.866,
+      "spheroid_density_kg_m3": 315.23871132773377,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 33,
+      "temperature_C": -5.8,
+      "age_min": 5.0,
+      "a_full_mm": 0.0548,
+      "c_full_mm": 0.2629,
+      "mass_g": 3.63e-07,
+      "mass_kg": 3.6300000000000004e-10,
+      "maximum_dimension_mm": 0.2629,
+      "spheroid_density_kg_m3": 878.1249152099172,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 34,
+      "temperature_C": -5.8,
+      "age_min": 5.0,
+      "a_full_mm": 0.074,
+      "c_full_mm": 0.1622,
+      "mass_g": 3.1e-07,
+      "mass_kg": 3.1e-10,
+      "maximum_dimension_mm": 0.1622,
+      "spheroid_density_kg_m3": 666.5746329255727,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 35,
+      "temperature_C": -5.9,
+      "age_min": 10.0,
+      "a_full_mm": 0.072,
+      "c_full_mm": 0.5675,
+      "mass_g": 1.26e-06,
+      "mass_kg": 1.26e-09,
+      "maximum_dimension_mm": 0.5675,
+      "spheroid_density_kg_m3": 817.9769468746457,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 36,
+      "temperature_C": -6.0,
+      "age_min": 3.0,
+      "a_full_mm": 0.0606,
+      "c_full_mm": 0.1109,
+      "mass_g": 9.37e-08,
+      "mass_kg": 9.37e-11,
+      "maximum_dimension_mm": 0.1109,
+      "spheroid_density_kg_m3": 439.40416998288094,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 37,
+      "temperature_C": -6.0,
+      "age_min": 5.0,
+      "a_full_mm": 0.0604,
+      "c_full_mm": 0.1811,
+      "mass_g": 3.72e-07,
+      "mass_kg": 3.72e-10,
+      "maximum_dimension_mm": 0.1811,
+      "spheroid_density_kg_m3": 1075.3553250153834,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 38,
+      "temperature_C": -6.8,
+      "age_min": 5.0,
+      "a_full_mm": 0.0714,
+      "c_full_mm": 0.1129,
+      "mass_g": 2.77e-07,
+      "mass_kg": 2.77e-10,
+      "maximum_dimension_mm": 0.1129,
+      "spheroid_density_kg_m3": 919.1592905896796,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 39,
+      "temperature_C": -6.0,
+      "age_min": 5.0,
+      "a_full_mm": 0.0739,
+      "c_full_mm": 0.1593,
+      "mass_g": 2.68e-07,
+      "mass_kg": 2.68e-10,
+      "maximum_dimension_mm": 0.1593,
+      "spheroid_density_kg_m3": 588.3442578023489,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 40,
+      "temperature_C": -6.3,
+      "age_min": 7.0,
+      "a_full_mm": 0.0676,
+      "c_full_mm": 0.2284,
+      "mass_g": 5.37e-07,
+      "mass_kg": 5.37e-10,
+      "maximum_dimension_mm": 0.2284,
+      "spheroid_density_kg_m3": 982.6212953713791,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 41,
+      "temperature_C": -6.6,
+      "age_min": 7.0,
+      "a_full_mm": 0.08,
+      "c_full_mm": 0.1993,
+      "mass_g": 6.03e-07,
+      "mass_kg": 6.03e-10,
+      "maximum_dimension_mm": 0.1993,
+      "spheroid_density_kg_m3": 902.8828777384554,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 42,
+      "temperature_C": -6.2,
+      "age_min": 7.0,
+      "a_full_mm": 0.0715,
+      "c_full_mm": 0.2406,
+      "mass_g": 3.7e-07,
+      "mass_kg": 3.7e-10,
+      "maximum_dimension_mm": 0.2406,
+      "spheroid_density_kg_m3": 574.5070932527481,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 43,
+      "temperature_C": -6.2,
+      "age_min": 10.0,
+      "a_full_mm": 0.0759,
+      "c_full_mm": 0.494,
+      "mass_g": 1.04e-06,
+      "mass_kg": 1.04e-09,
+      "maximum_dimension_mm": 0.494,
+      "spheroid_density_kg_m3": 697.9498468198758,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 44,
+      "temperature_C": -6.8,
+      "age_min": 10.0,
+      "a_full_mm": 0.0783,
+      "c_full_mm": 0.2976,
+      "mass_g": 1.03e-06,
+      "mass_kg": 1.0300000000000002e-09,
+      "maximum_dimension_mm": 0.2976,
+      "spheroid_density_kg_m3": 1078.1573586764694,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 45,
+      "temperature_C": -6.7,
+      "age_min": 10.0,
+      "a_full_mm": 0.1014,
+      "c_full_mm": 0.1264,
+      "mass_g": 6.764999999999999e-07,
+      "mass_kg": 6.764999999999999e-10,
+      "maximum_dimension_mm": 0.1264,
+      "spheroid_density_kg_m3": 994.1369013873476,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 46,
+      "temperature_C": -6.1,
+      "age_min": 15.0,
+      "a_full_mm": 0.1116,
+      "c_full_mm": 0.7786,
+      "mass_g": 1.98e-06,
+      "mass_kg": 1.98e-09,
+      "maximum_dimension_mm": 0.7786,
+      "spheroid_density_kg_m3": 389.96333814974815,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 47,
+      "temperature_C": -7.2,
+      "age_min": 5.0,
+      "a_full_mm": 0.0771,
+      "c_full_mm": 0.1274,
+      "mass_g": 2.03e-07,
+      "mass_kg": 2.03e-10,
+      "maximum_dimension_mm": 0.1274,
+      "spheroid_density_kg_m3": 511.9401973199234,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 48,
+      "temperature_C": -7.7,
+      "age_min": 10.0,
+      "a_full_mm": 0.0963,
+      "c_full_mm": 0.1522,
+      "mass_g": 7.289999999999999e-07,
+      "mass_kg": 7.29e-10,
+      "maximum_dimension_mm": 0.1522,
+      "spheroid_density_kg_m3": 986.419568856681,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 49,
+      "temperature_C": -7.2,
+      "age_min": 10.0,
+      "a_full_mm": 0.0976,
+      "c_full_mm": 0.1414,
+      "mass_g": 5.874e-07,
+      "mass_kg": 5.874e-10,
+      "maximum_dimension_mm": 0.1414,
+      "spheroid_density_kg_m3": 832.8873673895483,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 50,
+      "temperature_C": -8.3,
+      "age_min": 3.0,
+      "a_full_mm": 0.0593,
+      "c_full_mm": 0.0745,
+      "mass_g": 1.43e-07,
+      "mass_kg": 1.43e-10,
+      "maximum_dimension_mm": 0.0745,
+      "spheroid_density_kg_m3": 1042.489659011118,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 51,
+      "temperature_C": -8.7,
+      "age_min": 3.0,
+      "a_full_mm": 0.0694,
+      "c_full_mm": 0.0557,
+      "mass_g": 1.246e-07,
+      "mass_kg": 1.246e-10,
+      "maximum_dimension_mm": 0.0694,
+      "spheroid_density_kg_m3": 887.0442477041927,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 52,
+      "temperature_C": -9.1,
+      "age_min": 4.0,
+      "a_full_mm": 0.07854,
+      "c_full_mm": 0.06026,
+      "mass_g": 2.006e-07,
+      "mass_kg": 2.006e-10,
+      "maximum_dimension_mm": 0.07854,
+      "spheroid_density_kg_m3": 1030.6741532809797,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 53,
+      "temperature_C": -8.4,
+      "age_min": 5.0,
+      "a_full_mm": 0.086,
+      "c_full_mm": 0.083,
+      "mass_g": 2.8e-07,
+      "mass_kg": 2.8e-10,
+      "maximum_dimension_mm": 0.086,
+      "spheroid_density_kg_m3": 871.1328963046917,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 54,
+      "temperature_C": -8.7,
+      "age_min": 7.0,
+      "a_full_mm": 0.112,
+      "c_full_mm": 0.0934,
+      "mass_g": 5.79e-07,
+      "mass_kg": 5.79e-10,
+      "maximum_dimension_mm": 0.112,
+      "spheroid_density_kg_m3": 943.8370465746345,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 55,
+      "temperature_C": -8.5,
+      "age_min": 7.0,
+      "a_full_mm": 0.0927,
+      "c_full_mm": 0.0903,
+      "mass_g": 4.09e-07,
+      "mass_kg": 4.0900000000000004e-10,
+      "maximum_dimension_mm": 0.0927,
+      "spheroid_density_kg_m3": 1006.6476107661856,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 56,
+      "temperature_C": -8.4,
+      "age_min": 10.0,
+      "a_full_mm": 0.1339,
+      "c_full_mm": 0.1248,
+      "mass_g": 1.03e-06,
+      "mass_kg": 1.0300000000000002e-09,
+      "maximum_dimension_mm": 0.1339,
+      "spheroid_density_kg_m3": 879.1497623187366,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 57,
+      "temperature_C": -8.2,
+      "age_min": 12.0,
+      "a_full_mm": 0.1555,
+      "c_full_mm": 0.1272,
+      "mass_g": 1.06e-06,
+      "mass_kg": 1.06e-09,
+      "maximum_dimension_mm": 0.1555,
+      "spheroid_density_kg_m3": 658.2022232685573,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 58,
+      "temperature_C": -8.5,
+      "age_min": 15.0,
+      "a_full_mm": 0.1496,
+      "c_full_mm": 0.1339,
+      "mass_g": 1.27e-06,
+      "mass_kg": 1.27e-09,
+      "maximum_dimension_mm": 0.1496,
+      "spheroid_density_kg_m3": 809.3965232912168,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 59,
+      "temperature_C": -9.1,
+      "age_min": 5.0,
+      "a_full_mm": 0.0906,
+      "c_full_mm": 0.05645,
+      "mass_g": 2.309e-07,
+      "mass_kg": 2.3090000000000002e-10,
+      "maximum_dimension_mm": 0.0906,
+      "spheroid_density_kg_m3": 951.7107370748164,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 60,
+      "temperature_C": -9.7,
+      "age_min": 5.0,
+      "a_full_mm": 0.1025,
+      "c_full_mm": 0.0821,
+      "mass_g": 3.49e-07,
+      "mass_kg": 3.4900000000000004e-10,
+      "maximum_dimension_mm": 0.1025,
+      "spheroid_density_kg_m3": 772.7444894758952,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 61,
+      "temperature_C": -10.1,
+      "age_min": 10.0,
+      "a_full_mm": 0.1346,
+      "c_full_mm": 0.1111,
+      "mass_g": 9.578e-07,
+      "mass_kg": 9.578e-10,
+      "maximum_dimension_mm": 0.1346,
+      "spheroid_density_kg_m3": 908.8077704710762,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 62,
+      "temperature_C": -10.4,
+      "age_min": 2.0,
+      "a_full_mm": 0.0936,
+      "c_full_mm": 0.0299,
+      "mass_g": 1.18e-07,
+      "mass_kg": 1.18e-10,
+      "maximum_dimension_mm": 0.0936,
+      "spheroid_density_kg_m3": 860.3209509840517,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 63,
+      "temperature_C": -10.2,
+      "age_min": 3.0,
+      "a_full_mm": 0.108,
+      "c_full_mm": 0.0396,
+      "mass_g": 1.93e-07,
+      "mass_kg": 1.93e-10,
+      "maximum_dimension_mm": 0.108,
+      "spheroid_density_kg_m3": 798.024068273678,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 64,
+      "temperature_C": -10.6,
+      "age_min": 4.0,
+      "a_full_mm": 0.0895,
+      "c_full_mm": 0.0565,
+      "mass_g": 2.38e-07,
+      "mass_kg": 2.38e-10,
+      "maximum_dimension_mm": 0.0895,
+      "spheroid_density_kg_m3": 1004.3470685274162,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 65,
+      "temperature_C": -10.6,
+      "age_min": 4.0,
+      "a_full_mm": 0.1264,
+      "c_full_mm": null,
+      "mass_g": 2.22e-07,
+      "mass_kg": 2.22e-10,
+      "maximum_dimension_mm": 0.1264,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 66,
+      "temperature_C": -10.8,
+      "age_min": 5.0,
+      "a_full_mm": 0.11,
+      "c_full_mm": 0.0614,
+      "mass_g": 2.99e-07,
+      "mass_kg": 2.99e-10,
+      "maximum_dimension_mm": 0.11,
+      "spheroid_density_kg_m3": 768.6326430313625,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 67,
+      "temperature_C": -10.9,
+      "age_min": 5.0,
+      "a_full_mm": 0.161,
+      "c_full_mm": null,
+      "mass_g": 3.69e-07,
+      "mass_kg": 3.6899999999999997e-10,
+      "maximum_dimension_mm": 0.161,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 68,
+      "temperature_C": -10.5,
+      "age_min": 5.0,
+      "a_full_mm": 0.137,
+      "c_full_mm": null,
+      "mass_g": 3.71e-07,
+      "mass_kg": 3.7099999999999996e-10,
+      "maximum_dimension_mm": 0.137,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 69,
+      "temperature_C": -10.8,
+      "age_min": 7.0,
+      "a_full_mm": 0.1478,
+      "c_full_mm": 0.05244,
+      "mass_g": 5.18e-07,
+      "mass_kg": 5.18e-10,
+      "maximum_dimension_mm": 0.1478,
+      "spheroid_density_kg_m3": 863.6138255159332,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 70,
+      "temperature_C": -10.3,
+      "age_min": 10.0,
+      "a_full_mm": 0.1962,
+      "c_full_mm": 0.0781,
+      "mass_g": 1.23e-06,
+      "mass_kg": 1.23e-09,
+      "maximum_dimension_mm": 0.1962,
+      "spheroid_density_kg_m3": 781.3712887504588,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 71,
+      "temperature_C": -10.7,
+      "age_min": 10.0,
+      "a_full_mm": 0.1942,
+      "c_full_mm": 0.07309,
+      "mass_g": 1.17e-06,
+      "mass_kg": 1.17e-09,
+      "maximum_dimension_mm": 0.1942,
+      "spheroid_density_kg_m3": 810.6452203664879,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 72,
+      "temperature_C": -10.3,
+      "age_min": 12.0,
+      "a_full_mm": 0.20157,
+      "c_full_mm": 0.8923,
+      "mass_g": 1.557e-06,
+      "mass_kg": 1.557e-09,
+      "maximum_dimension_mm": 0.8923,
+      "spheroid_density_kg_m3": 82.0214241343647,
+      "quality_flags": [
+        "source_c_axis_decimal_anomaly_unresolved"
+      ],
+      "calibration_excluded_observables": [
+        "c_full_mm",
+        "maximum_dimension_mm",
+        "spheroid_density_kg_m3",
+        "c_to_a_axis_ratio"
+      ],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 73,
+      "temperature_C": -11.9,
+      "age_min": 3.0,
+      "a_full_mm": 0.1903,
+      "c_full_mm": null,
+      "mass_g": 2.92e-07,
+      "mass_kg": 2.92e-10,
+      "maximum_dimension_mm": 0.1903,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 74,
+      "temperature_C": -11.7,
+      "age_min": 4.0,
+      "a_full_mm": 0.1902,
+      "c_full_mm": null,
+      "mass_g": 3.436e-07,
+      "mass_kg": 3.436e-10,
+      "maximum_dimension_mm": 0.1902,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 75,
+      "temperature_C": -11.9,
+      "age_min": 5.0,
+      "a_full_mm": 0.2275,
+      "c_full_mm": null,
+      "mass_g": 4.5e-07,
+      "mass_kg": 4.5e-10,
+      "maximum_dimension_mm": 0.2275,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 76,
+      "temperature_C": -11.9,
+      "age_min": 5.0,
+      "a_full_mm": 0.1761,
+      "c_full_mm": null,
+      "mass_g": 4.093e-07,
+      "mass_kg": 4.093e-10,
+      "maximum_dimension_mm": 0.1761,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 77,
+      "temperature_C": -12.1,
+      "age_min": 7.0,
+      "a_full_mm": 0.2668,
+      "c_full_mm": null,
+      "mass_g": 8.194e-07,
+      "mass_kg": 8.194000000000001e-10,
+      "maximum_dimension_mm": 0.2668,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 78,
+      "temperature_C": -11.9,
+      "age_min": 10.0,
+      "a_full_mm": 0.2779,
+      "c_full_mm": null,
+      "mass_g": 1.293e-06,
+      "mass_kg": 1.293e-09,
+      "maximum_dimension_mm": 0.2779,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 79,
+      "temperature_C": -12.2,
+      "age_min": 10.0,
+      "a_full_mm": 0.3123,
+      "c_full_mm": null,
+      "mass_g": 1.26e-06,
+      "mass_kg": 1.26e-09,
+      "maximum_dimension_mm": 0.3123,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 80,
+      "temperature_C": -12.3,
+      "age_min": 10.0,
+      "a_full_mm": 0.3421,
+      "c_full_mm": null,
+      "mass_g": 1.65e-06,
+      "mass_kg": 1.65e-09,
+      "maximum_dimension_mm": 0.3421,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 81,
+      "temperature_C": -12.6,
+      "age_min": 12.0,
+      "a_full_mm": 0.464,
+      "c_full_mm": null,
+      "mass_g": 2.603e-06,
+      "mass_kg": 2.603e-09,
+      "maximum_dimension_mm": 0.464,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 82,
+      "temperature_C": -12.6,
+      "age_min": 12.0,
+      "a_full_mm": 0.3757,
+      "c_full_mm": null,
+      "mass_g": 1.83e-06,
+      "mass_kg": 1.83e-09,
+      "maximum_dimension_mm": 0.3757,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 83,
+      "temperature_C": -12.6,
+      "age_min": 15.0,
+      "a_full_mm": 0.595,
+      "c_full_mm": null,
+      "mass_g": 4.589e-06,
+      "mass_kg": 4.589e-09,
+      "maximum_dimension_mm": 0.595,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 84,
+      "temperature_C": -12.1,
+      "age_min": 15.0,
+      "a_full_mm": 0.4539,
+      "c_full_mm": null,
+      "mass_g": 3.54e-06,
+      "mass_kg": 3.54e-09,
+      "maximum_dimension_mm": 0.4539,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 85,
+      "temperature_C": -12.0,
+      "age_min": 15.0,
+      "a_full_mm": 0.355,
+      "c_full_mm": null,
+      "mass_g": 2.499e-06,
+      "mass_kg": 2.499e-09,
+      "maximum_dimension_mm": 0.355,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 86,
+      "temperature_C": -12.2,
+      "age_min": 17.0,
+      "a_full_mm": 0.5449,
+      "c_full_mm": null,
+      "mass_g": 4.769999999999999e-06,
+      "mass_kg": 4.769999999999999e-09,
+      "maximum_dimension_mm": 0.5449,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 87,
+      "temperature_C": -12.2,
+      "age_min": 20.0,
+      "a_full_mm": 0.6091,
+      "c_full_mm": null,
+      "mass_g": 6.65e-06,
+      "mass_kg": 6.65e-09,
+      "maximum_dimension_mm": 0.6091,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 88,
+      "temperature_C": -12.9,
+      "age_min": 15.0,
+      "a_full_mm": 0.582,
+      "c_full_mm": 0.0788,
+      "mass_g": 4.48e-06,
+      "mass_kg": 4.48e-09,
+      "maximum_dimension_mm": 0.582,
+      "spheroid_density_kg_m3": 320.558431855526,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 89,
+      "temperature_C": -13.7,
+      "age_min": 5.0,
+      "a_full_mm": 0.583,
+      "c_full_mm": null,
+      "mass_g": 1.034e-06,
+      "mass_kg": 1.034e-09,
+      "maximum_dimension_mm": 0.583,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 90,
+      "temperature_C": -13.6,
+      "age_min": 5.0,
+      "a_full_mm": 0.431,
+      "c_full_mm": null,
+      "mass_g": 7.16e-07,
+      "mass_kg": 7.16e-10,
+      "maximum_dimension_mm": 0.431,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 91,
+      "temperature_C": -13.1,
+      "age_min": 10.0,
+      "a_full_mm": 0.465,
+      "c_full_mm": null,
+      "mass_g": 1.9e-06,
+      "mass_kg": 1.9e-09,
+      "maximum_dimension_mm": 0.465,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 92,
+      "temperature_C": -13.4,
+      "age_min": 10.0,
+      "a_full_mm": 0.5997,
+      "c_full_mm": null,
+      "mass_g": 2.209e-06,
+      "mass_kg": 2.209e-09,
+      "maximum_dimension_mm": 0.5997,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 93,
+      "temperature_C": -13.2,
+      "age_min": 15.0,
+      "a_full_mm": 0.6484,
+      "c_full_mm": null,
+      "mass_g": 4.524e-06,
+      "mass_kg": 4.5240000000000005e-09,
+      "maximum_dimension_mm": 0.6484,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 94,
+      "temperature_C": -13.9,
+      "age_min": 10.0,
+      "a_full_mm": 0.69,
+      "c_full_mm": null,
+      "mass_g": 2.87e-06,
+      "mass_kg": 2.8700000000000002e-09,
+      "maximum_dimension_mm": 0.69,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 95,
+      "temperature_C": -14.0,
+      "age_min": 30.0,
+      "a_full_mm": 2.41,
+      "c_full_mm": null,
+      "mass_g": 4.03e-05,
+      "mass_kg": 4.03e-08,
+      "maximum_dimension_mm": 2.41,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 96,
+      "temperature_C": -14.4,
+      "age_min": 2.0,
+      "a_full_mm": 0.2744,
+      "c_full_mm": null,
+      "mass_g": 1.82e-07,
+      "mass_kg": 1.82e-10,
+      "maximum_dimension_mm": 0.2744,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 97,
+      "temperature_C": -14.8,
+      "age_min": 3.0,
+      "a_full_mm": 0.393,
+      "c_full_mm": null,
+      "mass_g": 4.57e-07,
+      "mass_kg": 4.5699999999999997e-10,
+      "maximum_dimension_mm": 0.393,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 98,
+      "temperature_C": -14.9,
+      "age_min": 4.0,
+      "a_full_mm": 0.5454,
+      "c_full_mm": null,
+      "mass_g": 6.049e-07,
+      "mass_kg": 6.049e-10,
+      "maximum_dimension_mm": 0.5454,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 99,
+      "temperature_C": -14.5,
+      "age_min": 4.0,
+      "a_full_mm": 0.5111,
+      "c_full_mm": null,
+      "mass_g": 5.448000000000001e-07,
+      "mass_kg": 5.448e-10,
+      "maximum_dimension_mm": 0.5111,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 100,
+      "temperature_C": -14.1,
+      "age_min": 5.0,
+      "a_full_mm": 0.6358,
+      "c_full_mm": null,
+      "mass_g": 1.04e-06,
+      "mass_kg": 1.04e-09,
+      "maximum_dimension_mm": 0.6358,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 101,
+      "temperature_C": -14.4,
+      "age_min": 5.0,
+      "a_full_mm": 0.5478,
+      "c_full_mm": null,
+      "mass_g": 1.06e-06,
+      "mass_kg": 1.06e-09,
+      "maximum_dimension_mm": 0.5478,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 102,
+      "temperature_C": -14.4,
+      "age_min": 7.0,
+      "a_full_mm": 1.11,
+      "c_full_mm": null,
+      "mass_g": 2.58e-06,
+      "mass_kg": 2.5799999999999998e-09,
+      "maximum_dimension_mm": 1.11,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 103,
+      "temperature_C": -14.4,
+      "age_min": 7.0,
+      "a_full_mm": 0.9768,
+      "c_full_mm": null,
+      "mass_g": 1.98e-06,
+      "mass_kg": 1.98e-09,
+      "maximum_dimension_mm": 0.9768,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 104,
+      "temperature_C": -14.6,
+      "age_min": 10.0,
+      "a_full_mm": 1.66,
+      "c_full_mm": null,
+      "mass_g": 6.94e-06,
+      "mass_kg": 6.94e-09,
+      "maximum_dimension_mm": 1.66,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 105,
+      "temperature_C": -14.3,
+      "age_min": 10.0,
+      "a_full_mm": 1.19,
+      "c_full_mm": null,
+      "mass_g": 3.62e-06,
+      "mass_kg": 3.6200000000000003e-09,
+      "maximum_dimension_mm": 1.19,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 106,
+      "temperature_C": -14.5,
+      "age_min": 10.0,
+      "a_full_mm": 1.41,
+      "c_full_mm": null,
+      "mass_g": 5.102e-06,
+      "mass_kg": 5.102e-09,
+      "maximum_dimension_mm": 1.41,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 107,
+      "temperature_C": -14.3,
+      "age_min": 12.0,
+      "a_full_mm": 1.97,
+      "c_full_mm": null,
+      "mass_g": 1.05e-05,
+      "mass_kg": 1.05e-08,
+      "maximum_dimension_mm": 1.97,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 108,
+      "temperature_C": -14.1,
+      "age_min": 15.0,
+      "a_full_mm": 2.04,
+      "c_full_mm": null,
+      "mass_g": 1.36e-05,
+      "mass_kg": 1.3600000000000001e-08,
+      "maximum_dimension_mm": 2.04,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 109,
+      "temperature_C": -14.1,
+      "age_min": 15.0,
+      "a_full_mm": 2.2,
+      "c_full_mm": null,
+      "mass_g": 1.69e-05,
+      "mass_kg": 1.6900000000000002e-08,
+      "maximum_dimension_mm": 2.2,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 110,
+      "temperature_C": -14.4,
+      "age_min": 15.0,
+      "a_full_mm": 2.11,
+      "c_full_mm": null,
+      "mass_g": 1.29e-05,
+      "mass_kg": 1.29e-08,
+      "maximum_dimension_mm": 2.11,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 111,
+      "temperature_C": -14.1,
+      "age_min": 17.5,
+      "a_full_mm": 2.09,
+      "c_full_mm": null,
+      "mass_g": 1.49e-05,
+      "mass_kg": 1.49e-08,
+      "maximum_dimension_mm": 2.09,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 112,
+      "temperature_C": -14.2,
+      "age_min": 20.0,
+      "a_full_mm": 2.9,
+      "c_full_mm": null,
+      "mass_g": 3.180000000000001e-05,
+      "mass_kg": 3.180000000000001e-08,
+      "maximum_dimension_mm": 2.9,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 113,
+      "temperature_C": -14.7,
+      "age_min": 25.0,
+      "a_full_mm": 3.44,
+      "c_full_mm": null,
+      "mass_g": 5.2e-05,
+      "mass_kg": 5.1999999999999996e-08,
+      "maximum_dimension_mm": 3.44,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 114,
+      "temperature_C": -14.6,
+      "age_min": 30.0,
+      "a_full_mm": 3.77,
+      "c_full_mm": null,
+      "mass_g": 6.620000000000001e-05,
+      "mass_kg": 6.620000000000001e-08,
+      "maximum_dimension_mm": 3.77,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 115,
+      "temperature_C": -15.3,
+      "age_min": 5.0,
+      "a_full_mm": 0.7113,
+      "c_full_mm": null,
+      "mass_g": 1.34e-06,
+      "mass_kg": 1.3400000000000001e-09,
+      "maximum_dimension_mm": 0.7113,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 116,
+      "temperature_C": -15.7,
+      "age_min": 10.0,
+      "a_full_mm": 0.8706,
+      "c_full_mm": null,
+      "mass_g": 4.293e-06,
+      "mass_kg": 4.293e-09,
+      "maximum_dimension_mm": 0.8706,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 117,
+      "temperature_C": -16.0,
+      "age_min": 10.0,
+      "a_full_mm": 0.7181,
+      "c_full_mm": null,
+      "mass_g": 2.646e-06,
+      "mass_kg": 2.646e-09,
+      "maximum_dimension_mm": 0.7181,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 118,
+      "temperature_C": -16.0,
+      "age_min": 10.0,
+      "a_full_mm": 0.6369,
+      "c_full_mm": null,
+      "mass_g": 2.525e-06,
+      "mass_kg": 2.525e-09,
+      "maximum_dimension_mm": 0.6369,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 119,
+      "temperature_C": -15.8,
+      "age_min": 20.0,
+      "a_full_mm": 2.5,
+      "c_full_mm": null,
+      "mass_g": 1.93e-05,
+      "mass_kg": 1.93e-08,
+      "maximum_dimension_mm": 2.5,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 120,
+      "temperature_C": -16.5,
+      "age_min": 3.0,
+      "a_full_mm": 0.2336,
+      "c_full_mm": null,
+      "mass_g": 3.416e-07,
+      "mass_kg": 3.416e-10,
+      "maximum_dimension_mm": 0.2336,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 121,
+      "temperature_C": -16.7,
+      "age_min": 3.0,
+      "a_full_mm": 0.2215,
+      "c_full_mm": null,
+      "mass_g": 3.19e-07,
+      "mass_kg": 3.19e-10,
+      "maximum_dimension_mm": 0.2215,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 122,
+      "temperature_C": -16.3,
+      "age_min": 3.0,
+      "a_full_mm": 0.2619,
+      "c_full_mm": null,
+      "mass_g": 4.356e-07,
+      "mass_kg": 4.3560000000000003e-10,
+      "maximum_dimension_mm": 0.2619,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 123,
+      "temperature_C": -16.4,
+      "age_min": 4.0,
+      "a_full_mm": 0.2875,
+      "c_full_mm": null,
+      "mass_g": 4.9e-07,
+      "mass_kg": 4.9e-10,
+      "maximum_dimension_mm": 0.2875,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 124,
+      "temperature_C": -16.3,
+      "age_min": 4.0,
+      "a_full_mm": 0.2702,
+      "c_full_mm": null,
+      "mass_g": 5.852999999999999e-07,
+      "mass_kg": 5.852999999999999e-10,
+      "maximum_dimension_mm": 0.2702,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 125,
+      "temperature_C": -16.1,
+      "age_min": 5.0,
+      "a_full_mm": 0.3743,
+      "c_full_mm": null,
+      "mass_g": 8.688e-07,
+      "mass_kg": 8.688e-10,
+      "maximum_dimension_mm": 0.3743,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 126,
+      "temperature_C": -16.7,
+      "age_min": 5.0,
+      "a_full_mm": 0.3358,
+      "c_full_mm": null,
+      "mass_g": 8.567e-07,
+      "mass_kg": 8.567e-10,
+      "maximum_dimension_mm": 0.3358,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 127,
+      "temperature_C": -16.7,
+      "age_min": 5.0,
+      "a_full_mm": 0.3369,
+      "c_full_mm": null,
+      "mass_g": 6.675e-07,
+      "mass_kg": 6.675e-10,
+      "maximum_dimension_mm": 0.3369,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 128,
+      "temperature_C": -16.8,
+      "age_min": 5.0,
+      "a_full_mm": 0.2959,
+      "c_full_mm": null,
+      "mass_g": 6.455e-07,
+      "mass_kg": 6.455e-10,
+      "maximum_dimension_mm": 0.2959,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 129,
+      "temperature_C": -16.1,
+      "age_min": 7.0,
+      "a_full_mm": 0.4709,
+      "c_full_mm": null,
+      "mass_g": 1.353e-06,
+      "mass_kg": 1.353e-09,
+      "maximum_dimension_mm": 0.4709,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 130,
+      "temperature_C": -16.7,
+      "age_min": 10.0,
+      "a_full_mm": 0.5758,
+      "c_full_mm": null,
+      "mass_g": 3.25e-06,
+      "mass_kg": 3.2499999999999997e-09,
+      "maximum_dimension_mm": 0.5758,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 131,
+      "temperature_C": -16.8,
+      "age_min": 10.0,
+      "a_full_mm": 0.5762,
+      "c_full_mm": null,
+      "mass_g": 2.881e-06,
+      "mass_kg": 2.8810000000000003e-09,
+      "maximum_dimension_mm": 0.5762,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 132,
+      "temperature_C": -16.8,
+      "age_min": 10.0,
+      "a_full_mm": 0.5477,
+      "c_full_mm": null,
+      "mass_g": 2.865e-06,
+      "mass_kg": 2.8650000000000003e-09,
+      "maximum_dimension_mm": 0.5477,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 133,
+      "temperature_C": -16.6,
+      "age_min": 12.0,
+      "a_full_mm": 0.6223,
+      "c_full_mm": null,
+      "mass_g": 4.054e-06,
+      "mass_kg": 4.0539999999999994e-09,
+      "maximum_dimension_mm": 0.6223,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 134,
+      "temperature_C": -16.6,
+      "age_min": 15.0,
+      "a_full_mm": 0.6964,
+      "c_full_mm": null,
+      "mass_g": 5.88e-06,
+      "mass_kg": 5.8799999999999995e-09,
+      "maximum_dimension_mm": 0.6964,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 135,
+      "temperature_C": -16.5,
+      "age_min": 17.0,
+      "a_full_mm": 0.8802,
+      "c_full_mm": null,
+      "mass_g": 8.749e-06,
+      "mass_kg": 8.749000000000001e-09,
+      "maximum_dimension_mm": 0.8802,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 136,
+      "temperature_C": -16.5,
+      "age_min": 20.0,
+      "a_full_mm": 0.9738,
+      "c_full_mm": null,
+      "mass_g": 9.536e-06,
+      "mass_kg": 9.536e-09,
+      "maximum_dimension_mm": 0.9738,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 137,
+      "temperature_C": -17.6,
+      "age_min": 5.0,
+      "a_full_mm": 0.193,
+      "c_full_mm": null,
+      "mass_g": 5.699999999999999e-07,
+      "mass_kg": 5.7e-10,
+      "maximum_dimension_mm": 0.193,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 138,
+      "temperature_C": -17.0,
+      "age_min": 7.0,
+      "a_full_mm": 0.3693,
+      "c_full_mm": null,
+      "mass_g": 1.004e-06,
+      "mass_kg": 1.004e-09,
+      "maximum_dimension_mm": 0.3693,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 139,
+      "temperature_C": -17.5,
+      "age_min": 10.0,
+      "a_full_mm": 0.3085,
+      "c_full_mm": null,
+      "mass_g": 1.205e-06,
+      "mass_kg": 1.2049999999999999e-09,
+      "maximum_dimension_mm": 0.3085,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 140,
+      "temperature_C": -18.5,
+      "age_min": 3.0,
+      "a_full_mm": 0.1304,
+      "c_full_mm": null,
+      "mass_g": 2.244e-07,
+      "mass_kg": 2.244e-10,
+      "maximum_dimension_mm": 0.1304,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 141,
+      "temperature_C": -18.0,
+      "age_min": 3.0,
+      "a_full_mm": 0.1403,
+      "c_full_mm": null,
+      "mass_g": 2.183e-07,
+      "mass_kg": 2.1829999999999999e-10,
+      "maximum_dimension_mm": 0.1403,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 142,
+      "temperature_C": -18.7,
+      "age_min": 4.0,
+      "a_full_mm": 0.1625,
+      "c_full_mm": null,
+      "mass_g": 3.261e-07,
+      "mass_kg": 3.261e-10,
+      "maximum_dimension_mm": 0.1625,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 143,
+      "temperature_C": -18.2,
+      "age_min": 5.0,
+      "a_full_mm": 0.1675,
+      "c_full_mm": null,
+      "mass_g": 4.508e-07,
+      "mass_kg": 4.508e-10,
+      "maximum_dimension_mm": 0.1675,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 144,
+      "temperature_C": -18.3,
+      "age_min": 7.0,
+      "a_full_mm": 0.253,
+      "c_full_mm": null,
+      "mass_g": 7.727e-07,
+      "mass_kg": 7.727e-10,
+      "maximum_dimension_mm": 0.253,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 145,
+      "temperature_C": -17.9,
+      "age_min": 10.0,
+      "a_full_mm": 0.2781,
+      "c_full_mm": null,
+      "mass_g": 1.155e-06,
+      "mass_kg": 1.155e-09,
+      "maximum_dimension_mm": 0.2781,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 146,
+      "temperature_C": -17.8,
+      "age_min": 10.0,
+      "a_full_mm": 0.3088,
+      "c_full_mm": null,
+      "mass_g": 1.453e-06,
+      "mass_kg": 1.4529999999999998e-09,
+      "maximum_dimension_mm": 0.3088,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 147,
+      "temperature_C": -18.1,
+      "age_min": 12.0,
+      "a_full_mm": 0.3344,
+      "c_full_mm": null,
+      "mass_g": 2.087e-06,
+      "mass_kg": 2.0870000000000003e-09,
+      "maximum_dimension_mm": 0.3344,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 148,
+      "temperature_C": -18.4,
+      "age_min": 15.0,
+      "a_full_mm": 0.3531,
+      "c_full_mm": null,
+      "mass_g": 2.144e-06,
+      "mass_kg": 2.144e-09,
+      "maximum_dimension_mm": 0.3531,
+      "spheroid_density_kg_m3": null,
+      "quality_flags": [
+        "c_axis_missing_in_source"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 149,
+      "temperature_C": -18.8,
+      "age_min": 10.0,
+      "a_full_mm": 0.1673,
+      "c_full_mm": 0.07136,
+      "mass_g": 7.875e-07,
+      "mass_kg": 7.875e-10,
+      "maximum_dimension_mm": 0.1673,
+      "spheroid_density_kg_m3": 753.0177559384329,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 150,
+      "temperature_C": -20.4,
+      "age_min": 3.0,
+      "a_full_mm": 0.09084,
+      "c_full_mm": 0.04071,
+      "mass_g": 1.716e-07,
+      "mass_kg": 1.716e-10,
+      "maximum_dimension_mm": 0.09084,
+      "spheroid_density_kg_m3": 975.5809419039762,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 151,
+      "temperature_C": -20.0,
+      "age_min": 3.0,
+      "a_full_mm": 0.10155,
+      "c_full_mm": 0.0422,
+      "mass_g": 1.908e-07,
+      "mass_kg": 1.908e-10,
+      "maximum_dimension_mm": 0.10155,
+      "spheroid_density_kg_m3": 837.3508039249433,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 152,
+      "temperature_C": -20.2,
+      "age_min": 4.0,
+      "a_full_mm": 0.1112,
+      "c_full_mm": 0.0579,
+      "mass_g": 2.971e-07,
+      "mass_kg": 2.971e-10,
+      "maximum_dimension_mm": 0.1112,
+      "spheroid_density_kg_m3": 792.5303294350002,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 153,
+      "temperature_C": -20.0,
+      "age_min": 5.0,
+      "a_full_mm": 0.1307,
+      "c_full_mm": 0.0476,
+      "mass_g": 3.864e-07,
+      "mass_kg": 3.8640000000000003e-10,
+      "maximum_dimension_mm": 0.1307,
+      "spheroid_density_kg_m3": 907.5704928406693,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 154,
+      "temperature_C": -20.1,
+      "age_min": 7.0,
+      "a_full_mm": 0.1661,
+      "c_full_mm": 0.06148,
+      "mass_g": 6.612e-07,
+      "mass_kg": 6.612000000000001e-10,
+      "maximum_dimension_mm": 0.1661,
+      "spheroid_density_kg_m3": 744.4938231003423,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 155,
+      "temperature_C": -20.0,
+      "age_min": 10.0,
+      "a_full_mm": 0.1742,
+      "c_full_mm": 0.07413,
+      "mass_g": 1.009e-06,
+      "mass_kg": 1.009e-09,
+      "maximum_dimension_mm": 0.1742,
+      "spheroid_density_kg_m3": 856.6476788346899,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 156,
+      "temperature_C": -19.7,
+      "age_min": 12.0,
+      "a_full_mm": 0.1745,
+      "c_full_mm": 0.06764,
+      "mass_g": 1.141e-06,
+      "mass_kg": 1.1409999999999999e-09,
+      "maximum_dimension_mm": 0.1745,
+      "spheroid_density_kg_m3": 1058.0167921500165,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 157,
+      "temperature_C": -20.6,
+      "age_min": 10.0,
+      "a_full_mm": 0.1428,
+      "c_full_mm": 0.0806,
+      "mass_g": 7.3e-07,
+      "mass_kg": 7.300000000000001e-10,
+      "maximum_dimension_mm": 0.1428,
+      "spheroid_density_kg_m3": 848.267408387115,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 158,
+      "temperature_C": -21.2,
+      "age_min": 5.0,
+      "a_full_mm": 0.0979,
+      "c_full_mm": 0.0714,
+      "mass_g": 3.33e-07,
+      "mass_kg": 3.33e-10,
+      "maximum_dimension_mm": 0.0979,
+      "spheroid_density_kg_m3": 929.3558045993291,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 159,
+      "temperature_C": -22.1,
+      "age_min": 3.0,
+      "a_full_mm": 0.0633,
+      "c_full_mm": 0.0654,
+      "mass_g": 1.377e-07,
+      "mass_kg": 1.377e-10,
+      "maximum_dimension_mm": 0.0654,
+      "spheroid_density_kg_m3": 1003.5757290523032,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 160,
+      "temperature_C": -22.2,
+      "age_min": 3.0,
+      "a_full_mm": 0.0644,
+      "c_full_mm": 0.0584,
+      "mass_g": 1.402e-07,
+      "mass_kg": 1.402e-10,
+      "maximum_dimension_mm": 0.0644,
+      "spheroid_density_kg_m3": 1105.5154324356984,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 161,
+      "temperature_C": -21.9,
+      "age_min": 4.0,
+      "a_full_mm": 0.0908,
+      "c_full_mm": 0.0621,
+      "mass_g": 2.64e-07,
+      "mass_kg": 2.6399999999999997e-10,
+      "maximum_dimension_mm": 0.0908,
+      "spheroid_density_kg_m3": 984.7863206962102,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 162,
+      "temperature_C": -22.1,
+      "age_min": 4.0,
+      "a_full_mm": 0.0811,
+      "c_full_mm": 0.0687,
+      "mass_g": 2.689e-07,
+      "mass_kg": 2.6889999999999997e-10,
+      "maximum_dimension_mm": 0.0811,
+      "spheroid_density_kg_m3": 1136.5635774224374,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 163,
+      "temperature_C": -22.1,
+      "age_min": 5.0,
+      "a_full_mm": 0.0891,
+      "c_full_mm": 0.091,
+      "mass_g": 3.801e-07,
+      "mass_kg": 3.801e-10,
+      "maximum_dimension_mm": 0.091,
+      "spheroid_density_kg_m3": 1004.8527997625591,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 164,
+      "temperature_C": -22.0,
+      "age_min": 5.0,
+      "a_full_mm": 0.0939,
+      "c_full_mm": 0.0762,
+      "mass_g": 3.528e-07,
+      "mass_kg": 3.528e-10,
+      "maximum_dimension_mm": 0.0939,
+      "spheroid_density_kg_m3": 1002.8680563990548,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 165,
+      "temperature_C": -21.4,
+      "age_min": 10.0,
+      "a_full_mm": 0.1168,
+      "c_full_mm": 0.0977,
+      "mass_g": 7.815000000000001e-07,
+      "mass_kg": 7.815e-10,
+      "maximum_dimension_mm": 0.1168,
+      "spheroid_density_kg_m3": 1119.8248760204103,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 166,
+      "temperature_C": -22.3,
+      "age_min": 12.0,
+      "a_full_mm": 0.1352,
+      "c_full_mm": 0.126,
+      "mass_g": 1.13e-06,
+      "mass_kg": 1.13e-09,
+      "maximum_dimension_mm": 0.1352,
+      "spheroid_density_kg_m3": 937.0351724933862,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 167,
+      "temperature_C": -22.5,
+      "age_min": 5.0,
+      "a_full_mm": 0.0976,
+      "c_full_mm": 0.0853,
+      "mass_g": 3.947e-07,
+      "mass_kg": 3.947e-10,
+      "maximum_dimension_mm": 0.0976,
+      "spheroid_density_kg_m3": 927.7262338870837,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 168,
+      "temperature_C": -22.6,
+      "age_min": 5.0,
+      "a_full_mm": 0.0906,
+      "c_full_mm": 0.0739,
+      "mass_g": 3.124e-07,
+      "mass_kg": 3.1240000000000003e-10,
+      "maximum_dimension_mm": 0.0906,
+      "spheroid_density_kg_m3": 983.584257523783,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 169,
+      "temperature_C": -23.0,
+      "age_min": 7.0,
+      "a_full_mm": 0.1066,
+      "c_full_mm": 0.1152,
+      "mass_g": 6.34e-07,
+      "mass_kg": 6.34e-10,
+      "maximum_dimension_mm": 0.1152,
+      "spheroid_density_kg_m3": 924.9616933449778,
+      "quality_flags": [
+        "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+      ],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    },
+    {
+      "excel_row": 170,
+      "temperature_C": -22.6,
+      "age_min": 10.0,
+      "a_full_mm": 0.1257,
+      "c_full_mm": 0.127,
+      "mass_g": 8.904e-07,
+      "mass_kg": 8.904e-10,
+      "maximum_dimension_mm": 0.127,
+      "spheroid_density_kg_m3": 847.4464264712267,
+      "quality_flags": [],
+      "calibration_excluded_observables": [],
+      "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+    }
+  ],
+  "diagnostic_windows": {
+    "-3.7": {
+      "selection": "abs(measured_temperature_C-target_C)<=0.5",
+      "by_age": {
+        "3.0": {
+          "rows": [
+            3,
+            4
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -3.8,
+            -3.7
+          ],
+          "a_full_mm_range": [
+            0.051,
+            0.05428
+          ],
+          "c_full_mm_range": [
+            0.05266,
+            0.059
+          ],
+          "mass_g_range": [
+            6.107e-08,
+            6.159e-08
+          ],
+          "maximum_dimension_mm_range": [
+            0.05428,
+            0.059
+          ]
+        },
+        "4.0": {
+          "rows": [
+            5
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -3.6,
+            -3.6
+          ],
+          "a_full_mm_range": [
+            0.06681,
+            0.06681
+          ],
+          "c_full_mm_range": [
+            0.05734,
+            0.05734
+          ],
+          "mass_g_range": [
+            9.038e-08,
+            9.038e-08
+          ],
+          "maximum_dimension_mm_range": [
+            0.06681,
+            0.06681
+          ]
+        },
+        "5.0": {
+          "rows": [
+            6,
+            7
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -3.9,
+            -3.9
+          ],
+          "a_full_mm_range": [
+            0.0559,
+            0.06152
+          ],
+          "c_full_mm_range": [
+            0.05157,
+            0.0765
+          ],
+          "mass_g_range": [
+            1.026e-07,
+            1.208e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.06152,
+            0.0765
+          ]
+        },
+        "7.0": {
+          "rows": [
+            8
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -3.7,
+            -3.7
+          ],
+          "a_full_mm_range": [
+            0.07516,
+            0.07516
+          ],
+          "c_full_mm_range": [
+            0.0682,
+            0.0682
+          ],
+          "mass_g_range": [
+            1.895e-07,
+            1.895e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.07516,
+            0.07516
+          ]
+        },
+        "10.0": {
+          "rows": [
+            9,
+            10,
+            11,
+            16
+          ],
+          "n": 4,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -4.2,
+            -3.4
+          ],
+          "a_full_mm_range": [
+            0.06937,
+            0.1027
+          ],
+          "c_full_mm_range": [
+            0.08537,
+            0.14994
+          ],
+          "mass_g_range": [
+            3.06e-07,
+            4.585e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.08804,
+            0.14994
+          ]
+        },
+        "12.0": {
+          "rows": [
+            12
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -3.9,
+            -3.9
+          ],
+          "a_full_mm_range": [
+            0.0824,
+            0.0824
+          ],
+          "c_full_mm_range": [
+            0.0821,
+            0.0821
+          ],
+          "mass_g_range": [
+            3.43e-07,
+            3.43e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.0824,
+            0.0824
+          ]
+        },
+        "15.0": {
+          "rows": [
+            13
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -3.4,
+            -3.4
+          ],
+          "a_full_mm_range": [
+            0.11382,
+            0.11382
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            6.21e-07,
+            6.21e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.11382,
+            0.11382
+          ]
+        },
+        "17.0": {
+          "rows": [
+            14
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -3.3,
+            -3.3
+          ],
+          "a_full_mm_range": [
+            0.1156,
+            0.1156
+          ],
+          "c_full_mm_range": [
+            0.1292,
+            0.1292
+          ],
+          "mass_g_range": [
+            6.956000000000001e-07,
+            6.956000000000001e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.1292,
+            0.1292
+          ]
+        },
+        "20.0": {
+          "rows": [
+            15
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -3.6,
+            -3.6
+          ],
+          "a_full_mm_range": [
+            0.12794,
+            0.12794
+          ],
+          "c_full_mm_range": [
+            0.11563,
+            0.11563
+          ],
+          "mass_g_range": [
+            7.648e-07,
+            7.648e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.12794,
+            0.12794
+          ]
+        }
+      },
+      "three_minute_rows": [
+        {
+          "excel_row": 3,
+          "temperature_C": -3.7,
+          "age_min": 3.0,
+          "a_full_mm": 0.05428,
+          "c_full_mm": 0.05266,
+          "mass_g": 6.107e-08,
+          "mass_kg": 6.107e-11,
+          "maximum_dimension_mm": 0.05428,
+          "spheroid_density_kg_m3": 751.7419132491099,
+          "quality_flags": [],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        },
+        {
+          "excel_row": 4,
+          "temperature_C": -3.8,
+          "age_min": 3.0,
+          "a_full_mm": 0.051,
+          "c_full_mm": 0.059,
+          "mass_g": 6.159e-08,
+          "mass_kg": 6.159e-11,
+          "maximum_dimension_mm": 0.059,
+          "spheroid_density_kg_m3": 766.5124583136736,
+          "quality_flags": [],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        }
+      ]
+    },
+    "-5.3": {
+      "selection": "abs(measured_temperature_C-target_C)<=0.5",
+      "by_age": {
+        "3.0": {
+          "rows": [
+            20
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.0,
+            -5.0
+          ],
+          "a_full_mm_range": [
+            0.057,
+            0.057
+          ],
+          "c_full_mm_range": [
+            0.0838,
+            0.0838
+          ],
+          "mass_g_range": [
+            6.38e-08,
+            6.38e-08
+          ],
+          "maximum_dimension_mm_range": [
+            0.0838,
+            0.0838
+          ]
+        },
+        "4.0": {
+          "rows": [
+            21
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.2,
+            -5.2
+          ],
+          "a_full_mm_range": [
+            0.0726,
+            0.0726
+          ],
+          "c_full_mm_range": [
+            0.1391,
+            0.1391
+          ],
+          "mass_g_range": [
+            1.66e-07,
+            1.66e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.1391,
+            0.1391
+          ]
+        },
+        "5.0": {
+          "rows": [
+            22,
+            23,
+            33,
+            34
+          ],
+          "n": 4,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.8,
+            -5.3
+          ],
+          "a_full_mm_range": [
+            0.0548,
+            0.0777
+          ],
+          "c_full_mm_range": [
+            0.1622,
+            0.2629
+          ],
+          "mass_g_range": [
+            1.66e-07,
+            3.63e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.1622,
+            0.2629
+          ]
+        },
+        "7.0": {
+          "rows": [
+            24,
+            25
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.7,
+            -5.1
+          ],
+          "a_full_mm_range": [
+            0.0798,
+            0.0849
+          ],
+          "c_full_mm_range": [
+            0.3507,
+            0.4084
+          ],
+          "mass_g_range": [
+            4.03e-07,
+            4.42e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.3507,
+            0.4084
+          ]
+        },
+        "10.0": {
+          "rows": [
+            18,
+            19,
+            26,
+            27
+          ],
+          "n": 4,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.4,
+            -4.8
+          ],
+          "a_full_mm_range": [
+            0.07897,
+            0.0927
+          ],
+          "c_full_mm_range": [
+            0.4033,
+            0.58377
+          ],
+          "mass_g_range": [
+            6.397e-07,
+            8.97e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.4033,
+            0.58377
+          ]
+        },
+        "12.0": {
+          "rows": [
+            28
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.3,
+            -5.3
+          ],
+          "a_full_mm_range": [
+            0.1003,
+            0.1003
+          ],
+          "c_full_mm_range": [
+            0.6145,
+            0.6145
+          ],
+          "mass_g_range": [
+            1.25e-06,
+            1.25e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.6145,
+            0.6145
+          ]
+        },
+        "15.0": {
+          "rows": [
+            29
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.3,
+            -5.3
+          ],
+          "a_full_mm_range": [
+            0.1025,
+            0.1025
+          ],
+          "c_full_mm_range": [
+            0.9972,
+            0.9972
+          ],
+          "mass_g_range": [
+            2e-06,
+            2e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.9972,
+            0.9972
+          ]
+        },
+        "20.0": {
+          "rows": [
+            30
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.5,
+            -5.5
+          ],
+          "a_full_mm_range": [
+            0.108,
+            0.108
+          ],
+          "c_full_mm_range": [
+            1.058,
+            1.058
+          ],
+          "mass_g_range": [
+            2.8e-06,
+            2.8e-06
+          ],
+          "maximum_dimension_mm_range": [
+            1.058,
+            1.058
+          ]
+        },
+        "25.0": {
+          "rows": [
+            31
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.4,
+            -5.4
+          ],
+          "a_full_mm_range": [
+            0.134,
+            0.134
+          ],
+          "c_full_mm_range": [
+            1.58,
+            1.58
+          ],
+          "mass_g_range": [
+            5.79e-06,
+            5.79e-06
+          ],
+          "maximum_dimension_mm_range": [
+            1.58,
+            1.58
+          ]
+        },
+        "30.0": {
+          "rows": [
+            32
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -5.0,
+            -5.0
+          ],
+          "a_full_mm_range": [
+            0.1476,
+            0.1476
+          ],
+          "c_full_mm_range": [
+            1.866,
+            1.866
+          ],
+          "mass_g_range": [
+            6.709999999999999e-06,
+            6.709999999999999e-06
+          ],
+          "maximum_dimension_mm_range": [
+            1.866,
+            1.866
+          ]
+        }
+      },
+      "three_minute_rows": [
+        {
+          "excel_row": 20,
+          "temperature_C": -5.0,
+          "age_min": 3.0,
+          "a_full_mm": 0.057,
+          "c_full_mm": 0.0838,
+          "mass_g": 6.38e-08,
+          "mass_kg": 6.38e-11,
+          "maximum_dimension_mm": 0.0838,
+          "spheroid_density_kg_m3": 447.53636121984687,
+          "quality_flags": [],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        }
+      ]
+    },
+    "-8.6": {
+      "selection": "abs(measured_temperature_C-target_C)<=0.5",
+      "by_age": {
+        "3.0": {
+          "rows": [
+            50,
+            51
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -8.7,
+            -8.3
+          ],
+          "a_full_mm_range": [
+            0.0593,
+            0.0694
+          ],
+          "c_full_mm_range": [
+            0.0557,
+            0.0745
+          ],
+          "mass_g_range": [
+            1.246e-07,
+            1.43e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.0694,
+            0.0745
+          ]
+        },
+        "4.0": {
+          "rows": [
+            52
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -9.1,
+            -9.1
+          ],
+          "a_full_mm_range": [
+            0.07854,
+            0.07854
+          ],
+          "c_full_mm_range": [
+            0.06026,
+            0.06026
+          ],
+          "mass_g_range": [
+            2.006e-07,
+            2.006e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.07854,
+            0.07854
+          ]
+        },
+        "5.0": {
+          "rows": [
+            53,
+            59
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -9.1,
+            -8.4
+          ],
+          "a_full_mm_range": [
+            0.086,
+            0.0906
+          ],
+          "c_full_mm_range": [
+            0.05645,
+            0.083
+          ],
+          "mass_g_range": [
+            2.309e-07,
+            2.8e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.086,
+            0.0906
+          ]
+        },
+        "7.0": {
+          "rows": [
+            54,
+            55
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -8.7,
+            -8.5
+          ],
+          "a_full_mm_range": [
+            0.0927,
+            0.112
+          ],
+          "c_full_mm_range": [
+            0.0903,
+            0.0934
+          ],
+          "mass_g_range": [
+            4.09e-07,
+            5.79e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.0927,
+            0.112
+          ]
+        },
+        "10.0": {
+          "rows": [
+            56
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -8.4,
+            -8.4
+          ],
+          "a_full_mm_range": [
+            0.1339,
+            0.1339
+          ],
+          "c_full_mm_range": [
+            0.1248,
+            0.1248
+          ],
+          "mass_g_range": [
+            1.03e-06,
+            1.03e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.1339,
+            0.1339
+          ]
+        },
+        "12.0": {
+          "rows": [
+            57
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -8.2,
+            -8.2
+          ],
+          "a_full_mm_range": [
+            0.1555,
+            0.1555
+          ],
+          "c_full_mm_range": [
+            0.1272,
+            0.1272
+          ],
+          "mass_g_range": [
+            1.06e-06,
+            1.06e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.1555,
+            0.1555
+          ]
+        },
+        "15.0": {
+          "rows": [
+            58
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -8.5,
+            -8.5
+          ],
+          "a_full_mm_range": [
+            0.1496,
+            0.1496
+          ],
+          "c_full_mm_range": [
+            0.1339,
+            0.1339
+          ],
+          "mass_g_range": [
+            1.27e-06,
+            1.27e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.1496,
+            0.1496
+          ]
+        }
+      },
+      "three_minute_rows": [
+        {
+          "excel_row": 50,
+          "temperature_C": -8.3,
+          "age_min": 3.0,
+          "a_full_mm": 0.0593,
+          "c_full_mm": 0.0745,
+          "mass_g": 1.43e-07,
+          "mass_kg": 1.43e-10,
+          "maximum_dimension_mm": 0.0745,
+          "spheroid_density_kg_m3": 1042.489659011118,
+          "quality_flags": [
+            "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+          ],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        },
+        {
+          "excel_row": 51,
+          "temperature_C": -8.7,
+          "age_min": 3.0,
+          "a_full_mm": 0.0694,
+          "c_full_mm": 0.0557,
+          "mass_g": 1.246e-07,
+          "mass_kg": 1.246e-10,
+          "maximum_dimension_mm": 0.0694,
+          "spheroid_density_kg_m3": 887.0442477041927,
+          "quality_flags": [],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        }
+      ]
+    },
+    "-10.6": {
+      "selection": "abs(measured_temperature_C-target_C)<=0.5",
+      "by_age": {
+        "2.0": {
+          "rows": [
+            62
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -10.4,
+            -10.4
+          ],
+          "a_full_mm_range": [
+            0.0936,
+            0.0936
+          ],
+          "c_full_mm_range": [
+            0.0299,
+            0.0299
+          ],
+          "mass_g_range": [
+            1.18e-07,
+            1.18e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.0936,
+            0.0936
+          ]
+        },
+        "3.0": {
+          "rows": [
+            63
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -10.2,
+            -10.2
+          ],
+          "a_full_mm_range": [
+            0.108,
+            0.108
+          ],
+          "c_full_mm_range": [
+            0.0396,
+            0.0396
+          ],
+          "mass_g_range": [
+            1.93e-07,
+            1.93e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.108,
+            0.108
+          ]
+        },
+        "4.0": {
+          "rows": [
+            64,
+            65
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -10.6,
+            -10.6
+          ],
+          "a_full_mm_range": [
+            0.0895,
+            0.1264
+          ],
+          "c_full_mm_range": [
+            0.0565,
+            0.0565
+          ],
+          "mass_g_range": [
+            2.22e-07,
+            2.38e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.0895,
+            0.1264
+          ]
+        },
+        "5.0": {
+          "rows": [
+            66,
+            67,
+            68
+          ],
+          "n": 3,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -10.9,
+            -10.5
+          ],
+          "a_full_mm_range": [
+            0.11,
+            0.161
+          ],
+          "c_full_mm_range": [
+            0.0614,
+            0.0614
+          ],
+          "mass_g_range": [
+            2.99e-07,
+            3.71e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.11,
+            0.161
+          ]
+        },
+        "7.0": {
+          "rows": [
+            69
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -10.8,
+            -10.8
+          ],
+          "a_full_mm_range": [
+            0.1478,
+            0.1478
+          ],
+          "c_full_mm_range": [
+            0.05244,
+            0.05244
+          ],
+          "mass_g_range": [
+            5.18e-07,
+            5.18e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.1478,
+            0.1478
+          ]
+        },
+        "10.0": {
+          "rows": [
+            61,
+            70,
+            71
+          ],
+          "n": 3,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -10.7,
+            -10.1
+          ],
+          "a_full_mm_range": [
+            0.1346,
+            0.1962
+          ],
+          "c_full_mm_range": [
+            0.07309,
+            0.1111
+          ],
+          "mass_g_range": [
+            9.578e-07,
+            1.23e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.1346,
+            0.1962
+          ]
+        },
+        "12.0": {
+          "rows": [
+            72
+          ],
+          "n": 1,
+          "calibration_exclusions": {
+            "72": [
+              "c_full_mm",
+              "maximum_dimension_mm",
+              "spheroid_density_kg_m3",
+              "c_to_a_axis_ratio"
+            ]
+          },
+          "temperature_C_range": [
+            -10.3,
+            -10.3
+          ],
+          "a_full_mm_range": [
+            0.20157,
+            0.20157
+          ],
+          "c_full_mm_range": [
+            0.8923,
+            0.8923
+          ],
+          "mass_g_range": [
+            1.557e-06,
+            1.557e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.8923,
+            0.8923
+          ]
+        }
+      },
+      "three_minute_rows": [
+        {
+          "excel_row": 63,
+          "temperature_C": -10.2,
+          "age_min": 3.0,
+          "a_full_mm": 0.108,
+          "c_full_mm": 0.0396,
+          "mass_g": 1.93e-07,
+          "mass_kg": 1.93e-10,
+          "maximum_dimension_mm": 0.108,
+          "spheroid_density_kg_m3": 798.024068273678,
+          "quality_flags": [],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        }
+      ]
+    },
+    "-14.4": {
+      "selection": "abs(measured_temperature_C-target_C)<=0.5",
+      "by_age": {
+        "2.0": {
+          "rows": [
+            96
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.4,
+            -14.4
+          ],
+          "a_full_mm_range": [
+            0.2744,
+            0.2744
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            1.82e-07,
+            1.82e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.2744,
+            0.2744
+          ]
+        },
+        "3.0": {
+          "rows": [
+            97
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.8,
+            -14.8
+          ],
+          "a_full_mm_range": [
+            0.393,
+            0.393
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            4.57e-07,
+            4.57e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.393,
+            0.393
+          ]
+        },
+        "4.0": {
+          "rows": [
+            98,
+            99
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.9,
+            -14.5
+          ],
+          "a_full_mm_range": [
+            0.5111,
+            0.5454
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            5.448000000000001e-07,
+            6.049e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.5111,
+            0.5454
+          ]
+        },
+        "5.0": {
+          "rows": [
+            100,
+            101
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.4,
+            -14.1
+          ],
+          "a_full_mm_range": [
+            0.5478,
+            0.6358
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            1.04e-06,
+            1.06e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.5478,
+            0.6358
+          ]
+        },
+        "7.0": {
+          "rows": [
+            102,
+            103
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.4,
+            -14.4
+          ],
+          "a_full_mm_range": [
+            0.9768,
+            1.11
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            1.98e-06,
+            2.58e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.9768,
+            1.11
+          ]
+        },
+        "10.0": {
+          "rows": [
+            94,
+            104,
+            105,
+            106
+          ],
+          "n": 4,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.6,
+            -13.9
+          ],
+          "a_full_mm_range": [
+            0.69,
+            1.66
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            2.87e-06,
+            6.94e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.69,
+            1.66
+          ]
+        },
+        "12.0": {
+          "rows": [
+            107
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.3,
+            -14.3
+          ],
+          "a_full_mm_range": [
+            1.97,
+            1.97
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            1.05e-05,
+            1.05e-05
+          ],
+          "maximum_dimension_mm_range": [
+            1.97,
+            1.97
+          ]
+        },
+        "15.0": {
+          "rows": [
+            108,
+            109,
+            110
+          ],
+          "n": 3,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.4,
+            -14.1
+          ],
+          "a_full_mm_range": [
+            2.04,
+            2.2
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            1.29e-05,
+            1.69e-05
+          ],
+          "maximum_dimension_mm_range": [
+            2.04,
+            2.2
+          ]
+        },
+        "17.5": {
+          "rows": [
+            111
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.1,
+            -14.1
+          ],
+          "a_full_mm_range": [
+            2.09,
+            2.09
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            1.49e-05,
+            1.49e-05
+          ],
+          "maximum_dimension_mm_range": [
+            2.09,
+            2.09
+          ]
+        },
+        "20.0": {
+          "rows": [
+            112
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.2,
+            -14.2
+          ],
+          "a_full_mm_range": [
+            2.9,
+            2.9
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            3.180000000000001e-05,
+            3.180000000000001e-05
+          ],
+          "maximum_dimension_mm_range": [
+            2.9,
+            2.9
+          ]
+        },
+        "25.0": {
+          "rows": [
+            113
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.7,
+            -14.7
+          ],
+          "a_full_mm_range": [
+            3.44,
+            3.44
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            5.2e-05,
+            5.2e-05
+          ],
+          "maximum_dimension_mm_range": [
+            3.44,
+            3.44
+          ]
+        },
+        "30.0": {
+          "rows": [
+            95,
+            114
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -14.6,
+            -14.0
+          ],
+          "a_full_mm_range": [
+            2.41,
+            3.77
+          ],
+          "c_full_mm_range": null,
+          "mass_g_range": [
+            4.03e-05,
+            6.620000000000001e-05
+          ],
+          "maximum_dimension_mm_range": [
+            2.41,
+            3.77
+          ]
+        }
+      },
+      "three_minute_rows": [
+        {
+          "excel_row": 97,
+          "temperature_C": -14.8,
+          "age_min": 3.0,
+          "a_full_mm": 0.393,
+          "c_full_mm": null,
+          "mass_g": 4.57e-07,
+          "mass_kg": 4.5699999999999997e-10,
+          "maximum_dimension_mm": 0.393,
+          "spheroid_density_kg_m3": null,
+          "quality_flags": [
+            "c_axis_missing_in_source"
+          ],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        }
+      ]
+    },
+    "-20.1": {
+      "selection": "abs(measured_temperature_C-target_C)<=0.5",
+      "by_age": {
+        "3.0": {
+          "rows": [
+            150,
+            151
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -20.4,
+            -20.0
+          ],
+          "a_full_mm_range": [
+            0.09084,
+            0.10155
+          ],
+          "c_full_mm_range": [
+            0.04071,
+            0.0422
+          ],
+          "mass_g_range": [
+            1.716e-07,
+            1.908e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.09084,
+            0.10155
+          ]
+        },
+        "4.0": {
+          "rows": [
+            152
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -20.2,
+            -20.2
+          ],
+          "a_full_mm_range": [
+            0.1112,
+            0.1112
+          ],
+          "c_full_mm_range": [
+            0.0579,
+            0.0579
+          ],
+          "mass_g_range": [
+            2.971e-07,
+            2.971e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.1112,
+            0.1112
+          ]
+        },
+        "5.0": {
+          "rows": [
+            153
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -20.0,
+            -20.0
+          ],
+          "a_full_mm_range": [
+            0.1307,
+            0.1307
+          ],
+          "c_full_mm_range": [
+            0.0476,
+            0.0476
+          ],
+          "mass_g_range": [
+            3.864e-07,
+            3.864e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.1307,
+            0.1307
+          ]
+        },
+        "7.0": {
+          "rows": [
+            154
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -20.1,
+            -20.1
+          ],
+          "a_full_mm_range": [
+            0.1661,
+            0.1661
+          ],
+          "c_full_mm_range": [
+            0.06148,
+            0.06148
+          ],
+          "mass_g_range": [
+            6.612e-07,
+            6.612e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.1661,
+            0.1661
+          ]
+        },
+        "10.0": {
+          "rows": [
+            155,
+            157
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -20.6,
+            -20.0
+          ],
+          "a_full_mm_range": [
+            0.1428,
+            0.1742
+          ],
+          "c_full_mm_range": [
+            0.07413,
+            0.0806
+          ],
+          "mass_g_range": [
+            7.3e-07,
+            1.009e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.1428,
+            0.1742
+          ]
+        },
+        "12.0": {
+          "rows": [
+            156
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -19.7,
+            -19.7
+          ],
+          "a_full_mm_range": [
+            0.1745,
+            0.1745
+          ],
+          "c_full_mm_range": [
+            0.06764,
+            0.06764
+          ],
+          "mass_g_range": [
+            1.141e-06,
+            1.141e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.1745,
+            0.1745
+          ]
+        }
+      },
+      "three_minute_rows": [
+        {
+          "excel_row": 150,
+          "temperature_C": -20.4,
+          "age_min": 3.0,
+          "a_full_mm": 0.09084,
+          "c_full_mm": 0.04071,
+          "mass_g": 1.716e-07,
+          "mass_kg": 1.716e-10,
+          "maximum_dimension_mm": 0.09084,
+          "spheroid_density_kg_m3": 975.5809419039762,
+          "quality_flags": [
+            "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+          ],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        },
+        {
+          "excel_row": 151,
+          "temperature_C": -20.0,
+          "age_min": 3.0,
+          "a_full_mm": 0.10155,
+          "c_full_mm": 0.0422,
+          "mass_g": 1.908e-07,
+          "mass_kg": 1.908e-10,
+          "maximum_dimension_mm": 0.10155,
+          "spheroid_density_kg_m3": 837.3508039249433,
+          "quality_flags": [],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        }
+      ]
+    },
+    "-22.0": {
+      "selection": "abs(measured_temperature_C-target_C)<=0.5",
+      "by_age": {
+        "3.0": {
+          "rows": [
+            159,
+            160
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -22.2,
+            -22.1
+          ],
+          "a_full_mm_range": [
+            0.0633,
+            0.0644
+          ],
+          "c_full_mm_range": [
+            0.0584,
+            0.0654
+          ],
+          "mass_g_range": [
+            1.377e-07,
+            1.402e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.0644,
+            0.0654
+          ]
+        },
+        "4.0": {
+          "rows": [
+            161,
+            162
+          ],
+          "n": 2,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -22.1,
+            -21.9
+          ],
+          "a_full_mm_range": [
+            0.0811,
+            0.0908
+          ],
+          "c_full_mm_range": [
+            0.0621,
+            0.0687
+          ],
+          "mass_g_range": [
+            2.64e-07,
+            2.689e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.0811,
+            0.0908
+          ]
+        },
+        "5.0": {
+          "rows": [
+            163,
+            164,
+            167
+          ],
+          "n": 3,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -22.5,
+            -22.0
+          ],
+          "a_full_mm_range": [
+            0.0891,
+            0.0976
+          ],
+          "c_full_mm_range": [
+            0.0762,
+            0.091
+          ],
+          "mass_g_range": [
+            3.528e-07,
+            3.947e-07
+          ],
+          "maximum_dimension_mm_range": [
+            0.091,
+            0.0976
+          ]
+        },
+        "12.0": {
+          "rows": [
+            166
+          ],
+          "n": 1,
+          "calibration_exclusions": {},
+          "temperature_C_range": [
+            -22.3,
+            -22.3
+          ],
+          "a_full_mm_range": [
+            0.1352,
+            0.1352
+          ],
+          "c_full_mm_range": [
+            0.126,
+            0.126
+          ],
+          "mass_g_range": [
+            1.13e-06,
+            1.13e-06
+          ],
+          "maximum_dimension_mm_range": [
+            0.1352,
+            0.1352
+          ]
+        }
+      },
+      "three_minute_rows": [
+        {
+          "excel_row": 159,
+          "temperature_C": -22.1,
+          "age_min": 3.0,
+          "a_full_mm": 0.0633,
+          "c_full_mm": 0.0654,
+          "mass_g": 1.377e-07,
+          "mass_kg": 1.377e-10,
+          "maximum_dimension_mm": 0.0654,
+          "spheroid_density_kg_m3": 1003.5757290523032,
+          "quality_flags": [
+            "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+          ],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        },
+        {
+          "excel_row": 160,
+          "temperature_C": -22.2,
+          "age_min": 3.0,
+          "a_full_mm": 0.0644,
+          "c_full_mm": 0.0584,
+          "mass_g": 1.402e-07,
+          "mass_kg": 1.402e-10,
+          "maximum_dimension_mm": 0.0644,
+          "spheroid_density_kg_m3": 1105.5154324356984,
+          "quality_flags": [
+            "mass_and_axes_exceed_native_ice_density_under_spheroid_mapping"
+          ],
+          "calibration_excluded_observables": [],
+          "maximum_dimension_basis": "Maximum of reported axes; missing polar dimensions are not reconstructed."
+        }
+      ]
+    }
+  }
+}
