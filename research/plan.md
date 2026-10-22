@@ -375,10 +375,19 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    unit mass, the forcing through the column, and the air held only above the GCM's convection. The sea box then
    convects to about 70 km and rains 31% of the GCM's rain, nearly all of it between noon and midnight. From midnight to noon
    the GCM's circulation sinks over the site and only PlaSim's Kuo scheme rains, from the sea's evaporation. 61% of the
-   box's falling water evaporates, gamma about 0.027, provisional while its upper air still cools; the land box runs.
-   PlaSim's convection is therefore in line too. A simplified Betts–Miller scheme, written in Fortran, is to be patched
-   behind PlaSim's own switch with Kuo kept as the default, and tested on speed, on design-climate branches and against
-   CM1 at both sites (register, 21 October; the GCM README's account on domain/climate). Open, with recommendations:
+   box's falling water evaporates, gamma about 0.027, provisional while its upper air still cools. The land box
+   (domain/climate 30e7f83) rains 92% of the GCM's rain at the same hours, so the night-time gap is the sea's own. It
+   also evaporates 61%, which PlaSim's land reaches only beyond gamma 0.04, so no single constant fits both places.
+   PlaSim's convection was therefore taken up too. A simplified Betts–Miller scheme is written in Fortran and patched
+   behind PlaSim's own switch, with Kuo kept as the default (domain/climate 2542b57); with Kuo's scheme the patched
+   model is bit for bit, and the new scheme runs at Kuo's speed (register, 21 and 22 October). Settled at the design
+   climate's sunlight (domain/climate 5578b55), it gives 299.6 K at a reference humidity of 0.7 and 300.1 K at 0.6,
+   against Kuo's 298.4 K. It rains 6–12% more, halves the sea's rain after midnight at 0.7 and sharpens the land's
+   afternoon peak. Its climate takes a longwave refit of its own (3.38 W/m² against the rule's 2.5), and the exobase
+   stays. Next, at the author's word: CM1 boxes at the two sites forced by the new GCM's own budget. Open, with
+   recommendations:
+   - **The scheme's adoption and its reference humidity** (the author's call): 0.7 brings the sea's nights nearer
+     CM1's.
    - **A third lunar day of the sea box**, to see whether its rain keeps rising as its upper air cools (recommended;
      about an hour).
    - **A corrected rerun of one reference ring or box**, to size the boundary layer's bias in every earlier CM1 run
@@ -386,8 +395,10 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    - **Reporting the bug to CM1's developers** (the author's call).
 
    Then one design run with the cold cloud's factors, which the author adopted, the rain evaporation the pair supports
-   and the convection scheme as the author chooses, followed by the longwave refit and the settling and exobase checks.
-   The cover question stays on hold. A CM1 ring that makes its own upper vapour comes later.
+   and the convection scheme as the author chooses, with its own longwave refit, followed by the settling and exobase
+   checks. The new scheme's climate lands 1.0–1.5 K nearer 301 K at the same sunlight, so it would need less of the
+   2% more sunlight the cold cloud's factors called for. The cover question stays on hold. A CM1 ring that makes its
+   own upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
    mixing_forms), now the aquatic programme's turbulence columns first, with a basin-scale model of one crater lake
