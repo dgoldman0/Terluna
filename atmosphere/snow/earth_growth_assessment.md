@@ -86,6 +86,30 @@ For the 342 states where the native minimum attachment coefficient is inactive, 
 
 The retrieved original 2020 numerical archive also requires a version qualification. Its surface-humidity files correspond to the later manuscript's Figure 2, whose caption specifies a mechanism exponent of 10. Applying the attachment equation to those archived curves yields nearly constant inferred resistance with exponent 15 instead. The archive, caption and generating implementation therefore cannot yet be treated as an exactly matched reference. Original bytes are preserved; neither the exponent nor the curve has been silently relabeled. The archive is numerical evidence, separate from the Earth measurements.
 
+## Earth trajectories identify a remaining shape failure
+
+The [trajectory and measured-shape controls](results/facet_growth_controls.json) complete 204 integrations: 30 selected archived numerical cases and 72 laboratory-humidity scenarios, each at two tolerances. All 102 refined trajectories complete. The largest relative change in an endpoint axis or mass is 3.41×10⁻⁷, and the largest sampled mass–volume residual is 9.99×10⁻⁹. The semianalytic controls reproduce the preceding compact prototype's 24 mass and diameter endpoints exactly. These checks separate integration error from differences between growth equations.
+
+The archived numerical comparison uses five logarithmically spaced low-supersaturation points, three attachment mechanisms and two coefficient methods. The source helper reproduces the archived axes within 1.44%; the implicit method differs by up to 7.01%. The exact archived executable and its thermal/attachment details remain unidentified, so neither comparison establishes full source reproduction. Numerical balances are more explicit in the new component, but agreement with an archived result is assessed separately from agreement with Earth measurements.
+
+The humidity experiment still cannot select an initial shape. For datum C at nominal −14.3 °C and 0.03 g/m³ excess vapour, the measured ten-minute diameter is 0.260 mm. With mechanism exponent 10 and stagnant flow, the implicit model predicts 0.0729, 0.1567 and 0.3298 mm from initial thickness/span ratios of 1, 0.3 and 0.1. The corresponding preceding-model diameters are 0.0709, 0.1473 and 0.2911 mm. Doubling the imposed continuum conductance raises the intermediate-shape result to 0.2694 mm, but that favourable agreement cannot identify the unmeasured seed shape or airflow. No parameter was selected from it.
+
+A stronger diagnostic supplies the measured fitted shape, age and falling speed, removing the assumed nucleation history. At each of thirty temperature–age points the new model calculates instantaneous mass uptake and the ratio of polar to equatorial axis growth. Fifteen additional cases use the published Ji–Wang ventilation within its stated Reynolds interval; fifteen further requests have no supported habit and are explicitly rejected. The −5.3 °C column gives:
+
+| Crystal age, min | Model/fitted mass-growth rate | Model/fitted polar-to-equatorial growth ratio |
+|---|---:|---:|
+| 4.5 | 1.049 | 0.294 |
+| 8 | 1.046 | 0.466 |
+| 27 | 1.084 | 0.424 |
+
+These are derivatives of separate laboratory fits under supplied geometry, with the source Schmidt number and a common heat/vapour ventilation factor. They are not direct measurements of facet rates. Nevertheless, the comparison identifies a particular failure: **near-correct total uptake can coexist with too little relative growth along the column's long axis**. At the supplied shape, changing one common uptake or deposition-density multiplier cannot correct that ratio. Surface-attachment parameters, hollow-crystal geometry and the axis-evolution approximation therefore require assessment alongside branching density. Unknown seed shape does not explain this conditional comparison.
+
+Other habits prevent generalizing from the column. At −14.4 °C the ventilated polar-to-equatorial growth ratio is 86–94% of the fitted ratio across the same three ages, while the mass-rate ratio rises from about 1.21 to 1.92. The latter calculation retains an enclosing spheroid capacitance; the earlier branched-capacitance controls remain relevant. Shape-dependent uptake and hollow/branched geometry must be checked jointly rather than tuning one scalar to a single size endpoint.
+
+The newer morphology evidence further narrows the applicable compact regime. Harrington and Pokrifka's 2024 empirical screen places substantial hollowing/branching near an excess vapour density of 0.27 times the liquid-to-ice equilibrium difference, with a broad 0.2–0.4 range. Eight of the thirteen humidity observations lie above that range, three within it and two below it. Two of the four low-excess-vapour trajectory controls fall within the transition range, so even their dense-ice assumption is a diagnostic approximation. The −14.3 °C, 0.17 g/m³ datum has a relative excess of 0.771, well above the proposed range. This supports testing a humidity-sensitive morphological transition instead of relying on a fixed 400 µm size threshold alone; it supplies neither a deposition-density amplitude nor a universal transition law. The [source record](facet_growth_controls_sources.json) preserves the experimental and retrieval limits. [Harrington and Pokrifka (2024)](https://doi.org/10.1175/JAS-D-23-0131.1).
+
+The next repair should therefore be evaluated against mass and both axes at observed intermediate states, with hollowing and branching represented explicitly enough to test those quantities. The local transport component is better constrained, but no autonomous Earth growth treatment or lunar snow distribution is adopted by this checkpoint.
+
 ## Reproduction and verification
 
 All work is on `domain/atmosphere` in the atmosphere worktree. External full papers, original coefficient code, native builds and raw runs remain in ignored research caches. Compact observation transcriptions, source identities and numerical products are separate from the preserved baselines.
@@ -99,8 +123,11 @@ python -B -m atmosphere.snow.growth_humidity_history --help
 python -B -m atmosphere.snow.crystal_transport_replay
 python -B -m atmosphere.snow.facet_growth
 python -B -m atmosphere.snow.facet_coupling_audit
+python -B -m atmosphere.snow.facet_growth_controls
 ```
 
 The final `make check` passes: 1,276 source files with zero layer violations; 3,447 Python tests passed and 20 skipped; 191 JavaScript tests passed; historical provenance and five-workspace ensemble integrity passed. A separate `research/check.py --require-inputs` also passes. The full log is `research/runs/snow_scale/earth_growth_make_check.log`. Source/table reading and numerical controls are recorded above; these software checks do not constitute empirical validation of the proposed growth treatments.
 
 The implicit-coupling checkpoint also passes `make check`: 3,469 Python tests passed and 20 skipped, all 191 JavaScript tests passed, and provenance and ensemble integrity passed. Its log is `research/runs/snow_scale/facet_coupling/make_check.log`; the separate required-input provenance check is recorded alongside it. The layer check is repeated after staging the new source files so that its tracked-file scan includes them.
+
+The trajectory-control checkpoint passes `make check`: 1,281 tracked source files with zero layer violations; 3,474 Python tests passed and 20 skipped; all 191 JavaScript tests passed; provenance and ensemble integrity passed. Its log is `research/runs/snow_scale/facet_coupling/growth_make_check.log`. The independent trajectory balances, frozen-output replay and measured-shape comparisons above establish distinct numerical and physical evidence.
