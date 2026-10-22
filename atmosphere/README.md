@@ -34,3 +34,5 @@ python -m research.studies.environment_screens.run
 ```
 
 Next: acquire defensible EUV material response and resolved irradiance; replace assumed absorption/heating fractions with species-resolved absorption, chemistry and cooling; then test atomic transport and kinetic boundaries. Reconcile a calibrated lower-atmospheric profile with this upper model before inferring integrated habitability.
+
+The snow investigation now has a [numerically checked implicit attachment component](snow/earth_growth_assessment.md#implicit-attachment-heat-and-ventilation-coupling), coupling surface humidity, latent heat and prescribed ventilation. Earth habit prediction and branching still require validation before lunar size distributions can be adopted.

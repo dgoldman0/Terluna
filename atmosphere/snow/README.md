@@ -176,3 +176,5 @@ the top, about 0.4 mm/h at 100 a litre on Earth.
 
 The same fall and growth physics gives the high cloud's crystals at lunar gravity for the GCM
 ([plan](../../research/plan.md), item 5). The [new analysis](analysis.md) measures the archived cloud environments and calculates flake-scale load scenarios. The independent [sectional reference](repair.md) now provides consistent particle accounting, but its first three full-column controls fail the finite size-domain check. Numerical convergence, a coupled moist trajectory, a spread of fall speeds among like flakes and a measured mechanical failure law remain needed to predict a survival-limited size distribution.
+
+The [implicit facet component](facet_coupling.py) and [432-state audit](results/facet_coupling_audit.json) now solve attachment, surface humidity and latent heating together under explicit ventilation controls. Numerical balances close; autonomous habit and branching remain under assessment in the [Earth growth assessment](earth_growth_assessment.md).

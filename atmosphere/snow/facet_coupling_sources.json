@@ -1,0 +1,50 @@
+{
+  "schema": "terluna.atmosphere.facet-coupling-sources/1",
+  "retrieved": [
+    {
+      "name": "000-readme-zip-file-content.txt",
+      "url": "https://www.datacommons.psu.edu/download/meteorology/harrington-et-al-ice-crystal-vapor-growth-mycrophysical-models-2020/000-readme-zip-file-content.txt",
+      "bytes": 9430,
+      "sha256": "16206fef6bf77f9060809d7274c13512f888905de1293f85bace44f74a1419f9",
+      "cache_path": "research/runs/snow_scale/facet_coupling/000-readme-zip-file-content.txt"
+    },
+    {
+      "name": "harrington-et-al-ice-crystal-vapor-growth-mycrophysical-models-2020.zip",
+      "url": "https://www.datacommons.psu.edu/download/meteorology/harrington-et-al-ice-crystal-vapor-growth-mycrophysical-models-2020/harrington-et-al-ice-crystal-vapor-growth-mycrophysical-models-2020.zip",
+      "bytes": 2130468,
+      "sha256": "f718122288131504833c870d40428ee0ed9b95ac77847be75d3d283c9da149f1",
+      "cache_path": "research/runs/snow_scale/facet_coupling/harrington-et-al-ice-crystal-vapor-growth-mycrophysical-models-2020.zip"
+    },
+    {
+      "name": "zhang2014_author_copy_excerpt.json",
+      "cache_path": "research/runs/snow_scale/facet_coupling/zhang2014_author_copy_excerpt.json",
+      "bytes": 22804,
+      "sha256": "6376e29ab496b48870b7e4f6c5aec786e81e9ff7fd30d8a8f909ca507ec7f7e3",
+      "url": "https://www.researchgate.net/publication/265816362_Including_Surface_Kinetic_Effects_in_Simple_Models_of_Ice_Vapor_Diffusion",
+      "evidence": "Web tool indexed author-uploaded full text, equation section. This is a retrieval record, not original PDF bytes."
+    },
+    {
+      "name": "harrington2021_semianalytic.pdf",
+      "cache_path": "research/runs/snow_scale/growth_physics_sources/harrington2021_semianalytic.pdf",
+      "bytes": 2138534,
+      "sha256": "18bff2fe4bbf27323d61a092db7bf36efa1e19424ea63ab098f193ffb325a1d8",
+      "url": "https://www.arm.gov/publications/other/P012333.pdf"
+    }
+  ],
+  "reading_scope": "2014 author-uploaded full text equations9,11,13-16; 2021 manuscript facet relation and figure captions; original2020 numerical archive description and selected arrays.",
+  "equations": [
+    "For each facet s_x=drive/(1+alpha_x v A_x/(4 Dv f_v C_delta)); A_a=ac,A_c=a^2.",
+    "drive=s_i/[1+H Dstar/Kstar], H=rho_eq L/T (L/(Rv T)-1). The same Dstar and Kstar appear in the mass law.",
+    "D_x=Dv/[C/(f_v C_delta)+4 Dv C/(alpha_x v A_x)]; heat transport analogous with the native thermal jump.",
+    "Mass=4pi C rho_eq Dstar drive; axes use the2021 dc/da=alpha_c/alpha_a relation."
+  ],
+  "extensions": [
+    "Ventilation multiplies only continuum conductance; the supplied f_v and f_T are explicit external controls. This algebra does not supply a habit-specific flow correlation."
+  ],
+  "unresolved": [
+    "Publisher2014fulltext and directauthorcopy download returned403. OriginalPDF bytes are not acquired; selectedequations were read from the indexed author-uploaded fulltext and stored as a tool retrieval record.",
+    "2020archiveFigure1 matches the later manuscriptFigure2 criticalsupersaturations but its inferred sharpness is consistent withM15 instead of the captionM10. No exact archivedgrowthexecutable is supplied."
+  ],
+  "rights": "Original archive, papers and fulltext retrieval stay in ignored cache. Tracked output contains our calculations, source identities and summaries; no external messages or original-source redistribution.",
+  "claim": "Source/equation and numerical audit, not empirical validation."
+}
