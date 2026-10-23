@@ -1,0 +1,67 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-lunar-checks/1",
+  "date": "2026-10-23",
+  "scientific_product_sha256": "e127233907e57d875c7d956646a47c08fed3c2501d8abb5a23aac3b5464feaf7",
+  "focused_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest atmosphere/tests/test_snow_mcsnow_lunar_growth.py atmosphere/tests/test_snow_mcsnow_growth_trace.py -q -p no:cacheprovider",
+    "passed": 35,
+    "reported_elapsed_s": 0.35
+  },
+  "repository_check": {
+    "status": "passed",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+    "log": "research/runs/snow_scale/mcsnow_lunar_growth/make_check.log",
+    "returncode": 0,
+    "log_sha256": "c1be37128779e2dffb94e3207e9c41d7be10a775f3a12ad95158c2684eefd286",
+    "layers": {
+      "files": 1314,
+      "violations": 0
+    },
+    "python": {
+      "passed": 3677,
+      "skipped": 20,
+      "reported_elapsed_s": 522.59
+    },
+    "javascript": {
+      "passed": 191,
+      "failed": 0
+    },
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS"
+  },
+  "raw_audit": {
+    "executions": 68,
+    "fixed_saved_comparison_points": 94,
+    "fall_snapshots": 2844,
+    "step_evaluations": 3856,
+    "raw_snapshots": 3856,
+    "maximum_mass_balance_relative": 2.2172991619057868e-16,
+    "maximum_source_discrepancy_in_mass_ulps": 0.5,
+    "terminations": {
+      "duration_reached": 32,
+      "reached_freezing_level": 30,
+      "diameter_censored": 6
+    },
+    "source_and_raw_identity": "Verified all original source/build/table/compiler records, actual candidate patches, executables, namelists and raw CSV hashes; analyzed all retained outputs again.",
+    "saved_product_reassembly": "Exact equality after independent assembly and JSON serialization from the retained source and raw records. A Python-only tuple/list mismatch in compared_fields disappears under the declared JSON representation; no scientific field differs.",
+    "earth_parity": "Both 10-minute native and plate-base controls exactly reproduce preceding saved physical states.",
+    "constant_settling": "Both no-growth controls match H/v to relative 1e-12 and preserve mass exactly.",
+    "mass_water_and_source": "Checked axes/volume, recomputed deposition balance, height-integrated Q/F allowance and local Q*v/(H*F) rate gate.",
+    "roundoff_control": "Two near-freezing final steps exposed subtractive cancellation in a relative-only mass-rate check. The differences are below half a mass ulp divided by step length. Validation includes this explicit resolution and rejects larger perturbations; original outputs remain intact."
+  },
+  "refinement": {
+    "pairs": 32,
+    "all_same_termination": true,
+    "maximum_relative_change": 0.0033231293540050277,
+    "improved_control_maximum_relative_change": 0.0005303431386638469,
+    "scope": "Fixed-age timesteps 1/32 and 1/128 s; descent maximum timesteps 2 and 0.5 s with mass-fraction limits 0.01 and 0.005. Endpoint differences are measured numerical changes, not empirical error bounds."
+  },
+  "source_reading": "Read the pinned 2024 deposition, habit-coupling, native heat accumulator and gravity parameter, inherited lunar forcing and prior Earth trace. No new full-paper review or new external dataset.",
+  "editorial_reading": "Read the completed report and synthesis against the product, including units, input identity, conditional steady fluxes, native censors, imposed heat removal, seed histories and numerical versus physical evidence.",
+  "storage": {
+    "cache": "research/runs/snow_scale/mcsnow_lunar_growth",
+    "resolved_cache": "/media/projectspace/terluna-research/atmosphere-snow/snow_scale/mcsnow_lunar_growth",
+    "approximate_new_cache_MiB": 19
+  },
+  "remaining": "Earth mass/axis errors and the original archive configuration remain unresolved. These are monodisperse conditional paths under imposed temperature and deposition supply; incoming populations, vapor and energy feedback, collisions, aggregate strength and storm optics are not solved."
+}
