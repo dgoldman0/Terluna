@@ -1,0 +1,144 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-reproduction-sources/1",
+  "date": "2026-10-23",
+  "scope": "Figure 10 habit-ventilation and Figure 13 IGF2+ numerical outputs; prescribed-air reconstruction and laboratory duration controls.",
+  "paper": {
+    "doi": "10.1029/2023MS003805",
+    "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2023MS003805",
+    "reading": "Sections 2.1, 4.1, 4.2; Table 1; Equation 4; Figure 10 and 13 captions. No claim of a fresh complete-paper review.",
+    "author_settings": "Constant water saturation; initial spherical radius 2 micrometres; ten-minute endpoint comparison.",
+    "equation_control": "Equation 4 uses L^2 Dv es/(Ka Rv^2 T^3); pinned source uses (L/(Rv T)-1)*L Dv es/(Ka Rv T^2). Leading-term controls retain all other source choices, including unequal vapour/heat ventilation when enabled."
+  },
+  "author_data": {
+    "url": "https://zenodo.org/api/records/10077724/files/McSnow_paper_plot_data.zip/content",
+    "doi": "10.5281/zenodo.10077724",
+    "bytes": 69250479,
+    "md5": "dda30125b9ef8607b290d03649ee1d55",
+    "sha256": "1f5d687304e5195dad321ccfe119331915cc1e7e4eccb86e967e39db3c5c629c",
+    "license": "CC-BY-4.0",
+    "credit": "Welss, J.-N., Siewert, C., and Seifert, A.; McSnow paper data and plot scripts.",
+    "cached_archive": "research/runs/snow_scale/mcsnow_reproduction/McSnow_paper_plot_data.zip",
+    "external_bytes_policy": "Full external archive remains ignored; derived target values retain attribution in the result.",
+    "columns": [
+      "elapsed_s",
+      "temperature_K",
+      "equatorial_semiaxis_m",
+      "polar_semiaxis_m",
+      "aspect_ratio",
+      "mass_kg",
+      "volume_m3",
+      "fall_speed_m_s",
+      "maximum_dimension_m"
+    ],
+    "rows_per_selected_member": 121,
+    "temperature_grid_K": {
+      "first": 273.15,
+      "last": 243.15,
+      "step": -0.25
+    },
+    "encoding": "Nine comma-separated fixed-decimal values. Eight plotting names cause pandas to use the first elapsed-time field as index.",
+    "pressure": {
+      "value_Pa": 101000,
+      "basis": "Filename p1010.0 interpreted as hPa; original driver not recovered."
+    },
+    "seed_radius": {
+      "value_m": 2e-06,
+      "basis": "Paper and filename r_start2e-06."
+    },
+    "timestep": {
+      "value_s": 1,
+      "basis": "Filename dt1.0; original integrator configuration not recovered."
+    },
+    "durations_s": [
+      180,
+      600
+    ],
+    "axis_mapping": "a and c are semiaxes, verified by D=2 max(a,c), phi=c/a and V=4*pi*a^2*c/3 within printed rounding. Both axes doubled for the project full-axis convention.",
+    "plot_mapping": "fig10.py and fig13.py display native a,c in micrometres, mass in micrograms, and apparent density clipped at 919 kg/m3. Raw and clipped density retained separately.",
+    "averaging": "Each selected row is an endpoint; no ensemble/output averaging is specified or applied."
+  },
+  "plot_scripts": {
+    "archive": "research/runs/snow_scale/mcsnow_reproduction/McSnow_paper_plotscripts.zip",
+    "url": "https://zenodo.org/api/records/10077724/files/McSnow_paper_plotscripts.zip/content",
+    "sha256": "789e5a505f8680358fb427bdb53f5f814a139e3edc6ed55e15cc16cd7188dfb2",
+    "md5": "a678b10d131f6a4059e7802a500a706b",
+    "reading": "Data-file selection, implicit-index convention, axis/mass conversion and density clipping; scripts read, not executed.",
+    "members": [
+      {
+        "name": "fig10.py",
+        "sha256": "828c0415374d91877dce4eb74c0b3d6995d4cd0bf066d8bbf3ec2faa9ccce51e",
+        "bytes": 7582,
+        "path": "research/runs/snow_scale/mcsnow_reproduction/fig10.py"
+      },
+      {
+        "name": "fig13.py",
+        "sha256": "df83596494f72ac061f086c0cfe125891c9d2322bde861b98783a5e597d50614",
+        "bytes": 8473,
+        "path": "research/runs/snow_scale/mcsnow_reproduction/fig13.py"
+      }
+    ]
+  },
+  "native_source": {
+    "repository": "https://gitlab.com/mcsnow/mcsnow",
+    "revision": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+    "deposition_sha256": "a0904ce5e1061b559d9fe3d9c5c14329803dc823c9179fe43a3048f87f402232",
+    "baseline_build": "research/runs/snow_scale/mcsnow_growth/build_2024",
+    "baseline_build_record_sha256": "ba622de83b331e8a05ad6c14918066744fa5efd2f4664aeaeb9e397a89108f78",
+    "prior_source_audit": "atmosphere/snow/results/mcsnow_growth_source_audit.json",
+    "reconstruction": "Native 2024 code and tables, existing custom caller with optional native saturation. Four separately identified candidate builds; no baseline source edits.",
+    "historical_hint": {
+      "source": "src/mo_depo.f90:393-394",
+      "text": "for old bugged version (reproduce paper) comment these two lines",
+      "interpretation": "Disable the two local Dv/Ka multiplications only. The source comment does not identify an exact figure/version."
+    },
+    "public_history": {
+      "tree_entries": 255,
+      "tree_sha256": "fb55b0ecc8a0f6bd43d9e071671da6e1053198073bc1b69d5aac0e7a356c957f",
+      "history_sha256": "7404b5c0bba32b019e14002b3701b73f73910396dd0349f29cbb5cf88a537e74",
+      "deposition_commits": [
+        "1afcc5b51b7d172a9b67deee5879e5f6605a264f"
+      ],
+      "examined": "Pinned public tree, deposition-file commit history, mo_check.f90, archived plot scripts and numerical member inventory.",
+      "missing": "Original generating single-crystal driver, complete namelist, exact revision-to-figure mapping and executable were not found in these artifacts."
+    }
+  },
+  "declared_caller_choices": {
+    "initial_density_kg_m3": 919,
+    "native_gravity_m_s2": 9.81,
+    "pressure_Pa": 101000,
+    "initial_full_dimensions_m": [
+      4e-06,
+      4e-06
+    ],
+    "seed_mass": "Native ice density times spherical volume.",
+    "habit_mode": 1,
+    "fall_speed_selector": 3,
+    "snow_geometry": 2,
+    "aggregation_geometry": 1,
+    "prolate_interpolation": true,
+    "air_density": "Native Rd/Rv with ideal moist-air mixture in the custom caller.",
+    "saturation": "Native psat_water(T) imposed exactly; separate inherited Murphy-Koop controls.",
+    "growth_variants": "IGF1 and revised IGF2plus mapped to native growth_mode 1 and 2; mapping remains a reconstruction pending archive agreement.",
+    "initial_state_probe": "Use author-rounded mass,V,phi; reconstruct full axes from V and phi. Compare time zero speed, before any growth.",
+    "rounding_probe": "Eight corners of independent printed half-rounding box in mass,V,phi for each selected thin-plate state; a sampled sensitivity, not a proved continuous bound."
+  },
+  "laboratory": {
+    "doi": "10.2151/jmsj1965.69.1_15",
+    "transcription": "atmosphere/snow/takahashi_growth.py",
+    "transcription_sha256": "cb49d30ce7878bd441ac6821f5128e53f06075a37dbd94aa4e9cd0fd91784bed",
+    "scope": "Published Table 2 mass/full-axis and Table 4 speed fits at ten temperatures, restricted to recorded 3-minute-to-end-age windows.",
+    "limits": "Fits summarize different crystals; pointwise uncertainty absent; thin-planar thickness inferred from mass/area. No early observed sphere history and no independent empirical density curve reconstructed here."
+  },
+  "comparison_policy": {
+    "author_match": "Every compared field inside its printed decimal half-rounding interval.",
+    "numerical": "Report last-pair refinement changes separately; compare residual with rounding plus last change as a diagnostic only.",
+    "held_source": "Native source and historical two-operation sensitivity remain separate; leading-thermal-term changes are separately named.",
+    "population_boundary": "Prescribed-air isolated crystal calculation; no finite-water, storm or lunar validation inferred."
+  },
+  "storage": {
+    "lexical_cache": "research/runs/snow_scale/mcsnow_reproduction",
+    "physical_cache": "/media/projectspace/terluna-research/atmosphere-snow/snow_scale/mcsnow_reproduction",
+    "relocation_record": "/media/projectspace/terluna-research/atmosphere-snow/relocation-2026-10-23.json",
+    "rule": "Use lexical checkout paths for runners; original snow cache paths remain symlinks. External source bytes, build and raw execution files stay ignored."
+  }
+}
