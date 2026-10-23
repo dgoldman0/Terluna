@@ -1,0 +1,50 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-growth-checks/1",
+  "date": "2026-10-23",
+  "scientific_product_sha256": "0140b7eed34b399ecd06664f419eacf1359aaf345e82b1d7a9e5b93bcfc31dff",
+  "focused_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest atmosphere/tests/test_snow_mcsnow_growth_trace.py atmosphere/tests/test_snow_mcsnow_reproduction.py atmosphere/tests/test_snow_mcsnow_drag_trace.py -q -p no:cacheprovider",
+    "passed": 40
+  },
+  "repository_check": {
+    "status": "passed",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/make_check.log",
+    "returncode": 0,
+    "log_sha256": "5d1570872cbb7ab0c4cc7ffe369ac6879774d3a59d28cff31602d90bb10df35c",
+    "layers": {
+      "files": 1310,
+      "violations": 0
+    },
+    "python": {
+      "passed": 3655,
+      "skipped": 20,
+      "reported_elapsed_s": 499.94
+    },
+    "javascript": {
+      "passed": 191,
+      "failed": 0
+    },
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS"
+  },
+  "raw_audit": {
+    "completed_executions": 60,
+    "source_evaluations": 85283,
+    "traced_snapshots": 85268,
+    "exact_preceding_trajectory_parity": 16,
+    "identity_and_mapping": "Verified source/build/executable/table/namelist/raw hashes and replayed saved analysis. Checked pre-step source terms against post-step mass, volume and habit. Original source and previous products preserved.",
+    "saved_product_reassembly": "Exact equality after independent assembly from retained raw CSV files and identified author archives.",
+    "interpolation_control": "0.25 versus 0.0625 s outputs; exact equality at common times; matched-state differences below 3.13e-7 relative and time differences below 0.000036 s."
+  },
+  "source_reading": "Pinned 2024 sp_depo, vapourDiffusion, habit_predict, capacitance and ventilation functions; reconstruction callers and author archive members; paper directional-ventilation and branching descriptions. No fresh full-paper review.",
+  "editorial_reading": "Read the completed report and current synthesis for rate/shape inference, original versus revised growth settings, numerical versus laboratory references, and conditional branch-mass assumptions.",
+  "remaining": "Original generating configuration is unidentified. Archive and joint laboratory mass/axis agreement remain unresolved; no adopted repair, finite-water storm validation or accepted lunar growth distribution.",
+  "staged_layer_check": {
+    "command": "python -B shared/check_layers.py",
+    "status": "passed",
+    "files": 1312,
+    "violations": 0,
+    "reason": "The full suite began before new files were staged; this follow-up includes both new Python files in the tracked-file layer scan."
+  }
+}
