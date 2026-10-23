@@ -1,5 +1,7 @@
 # Snow
 
+The [radius and parameter audit](earth_growth_assessment.md#radius-conventions-and-incompatible-step-energy-inferences) rules out a radius-convention change as a complete warm-growth repair in 84 conditional calculations. It also finds that the microscopy-inferred step energy and the broad-facet nucleation barrier cannot be used as one equilibrium parameter without further reconciliation; neither source is silently rescaled.
+
 The [surface-transfer comparison](earth_growth_assessment.md#surface-transport-changes-where-the-incoming-water-becomes-ice) conserves incoming water while testing whether adjoining prism faces can feed a thin tip. Assumed micrometre migration changes length growth substantially with little change in uptake; nanometre migration barely helps. The unmeasured prism transport, later sheath geometry and incomplete growth-history match prevent adoption. Direct step measurements and new nitrogen-pressure evidence sharpen the remaining tests.
 
 The [new facet-law tests](earth_growth_assessment.md#new-facet-laws-do-not-yet-close-the-earth-growth-test) compare published 2023 kinetics with all recorded chamber shapes and rims. They remove the inherited cold symmetry but reject an apparent two-axis match because its prescribed uptake fails local supply conditions. Source location, evolving profiles and surface transport remain unresolved.
