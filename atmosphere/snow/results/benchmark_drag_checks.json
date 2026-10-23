@@ -1,0 +1,44 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-drag-checks/1",
+  "date": "2026-10-23",
+  "scientific_product_sha256": "880b25a3bc82f6352dac191c470f8a37284252a3fe7e79546b9dcbe75f4a25a1",
+  "focused_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest atmosphere/tests/test_snow_mcsnow_drag_trace.py atmosphere/tests/test_snow_mcsnow_reproduction.py -q -p no:cacheprovider",
+    "passed": 27
+  },
+  "repository_check": {
+    "status": "passed",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+    "log": "research/runs/snow_scale/mcsnow_reproduction/drag_trace/make_check.log",
+    "returncode": 0,
+    "log_sha256": "7c4a04f928500d916b5bd00ef6af9790e9b94db3475773d1260e7ff8888a8c0d",
+    "layers": {
+      "files": 1310,
+      "violations": 0
+    },
+    "python": {
+      "passed": 3642,
+      "skipped": 20,
+      "reported_elapsed_s": 504.71
+    },
+    "javascript": {
+      "passed": 191,
+      "failed": 0
+    },
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS"
+  },
+  "raw_audit": {
+    "states": 14,
+    "controls_per_state": 4,
+    "native_evaluations": 56,
+    "source_patches": 0,
+    "growth_trajectories": 0,
+    "identity_and_mapping": "Build/source/executable/input/raw hashes verified; geometry mapping and three native call paths checked during assembly.",
+    "saved_product_reassembly": "Exact equality after independent reassembly from the retained raw CSV and author archives."
+  },
+  "source_reading": "Native geometry, viscosity, drag and deposition call sequence; full utility_functions.py; Figure 10/13 data and plotting use; Figure 16/18/20 surface-air constants. No fresh full-paper review.",
+  "editorial_reading": "Report and current synthesis read for causal interpretation, state identities, quantities and numerical-versus-empirical evidence limits.",
+  "remaining": "Original generating driver/configuration and projected area are unidentified in inspected artifacts. This is numerical implementation agreement, not empirical validation or an adopted growth/drag repair.",
+  "reading_scope": "Expert research record for the author and future atmosphere maintainers; numerical observations, diagnostic sensitivities and unresolved provenance distinguished. Common and scholarly writing profiles applied."
+}

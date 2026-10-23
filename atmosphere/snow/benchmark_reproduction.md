@@ -1,5 +1,7 @@
 # Earth benchmark reconstruction and duration controls
 
+The subsequent [archived-crystal drag trace](benchmark_drag_trace.md) verifies the native speed calculation against the authors' Python helper and separates its unresolved archive discrepancy from the plotted growth quantities. Excluding the unplotted speed leaves the mass-and-axis mismatch intact. The results below retain the original checkpoint's comparison policy.
+
 The archived ten-minute McSnow results remain unreproduced with the identified public source and custom caller. The new [709-execution product](results/benchmark_reproduction.json) separates that source/configuration problem from saturation, timestep and late-growth effects. At exact native water saturation, the refined revised −14.4 °C thirty-minute width is 113.52 mm, still far above the fitted 4.17 mm. The earlier Murphy–Koop-saturation comparison gave 195.39 mm. Disabling the two mean-ventilation operations identified by a source comment gives 3.84 mm, but only 56.6% of fitted mass. Neither candidate is adopted as a repair.
 
 This is the first execution checkpoint of the [handoff plan](benchmark_reproduction_plan.md), dated 23 October 2026. It preserves the earlier native builds and results. Its numerical archive comparison, laboratory-fit comparison and software checks establish different kinds of evidence; none establishes a complete Earth storm or an absolute lunar size distribution.
