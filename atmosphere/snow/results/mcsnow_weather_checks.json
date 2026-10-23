@@ -1,0 +1,603 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-weather-checks/1",
+  "date": "2026-10-23",
+  "scientific_product_sha256": "f893fa5155167d2d75510687ca09f6e12cc75bffa4467be289a655b3130a1f01",
+  "repository_check": {
+    "status": "passed",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+    "log": "research/runs/snow_scale/mcsnow_weather/make_check.log",
+    "returncode": 0,
+    "log_sha256": "04bb938a73be97c0d4b4da84a403eb05d1b74e781fea6bf04fa63002ed70d338",
+    "layers": {
+      "files": 1317,
+      "violations": 0
+    },
+    "python": {
+      "passed": 3697,
+      "skipped": 20,
+      "reported_elapsed_s": 552.48
+    },
+    "javascript": {
+      "passed": 191,
+      "failed": 0
+    },
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS"
+  },
+  "focused_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest atmosphere/tests/test_snow_mcsnow_weather.py -q -p no:cacheprovider",
+    "passed": 20,
+    "reported_elapsed_s": 0.78,
+    "log_sha256": "960902798c8ae0926f32c40256e305b071ea1b616b5bfb0bc671d0df29830d2d"
+  },
+  "raw_audit": {
+    "executions": 20,
+    "conditional_histories": 7080,
+    "snapshots": 130542,
+    "maximum_mass_balance_relative": 2.8768087627895097e-15,
+    "maximum_geometry_relative": 3.1086244689504383e-15,
+    "maximum_native_mass_balance_relative": 1.201763539801053e-14,
+    "source_and_data": "Verified executed producers, requests, raw arrays, baseline/native sources, build/table identities and cached weather bytes; checked archive controls and frame size/mtime against the pinned cache identity.",
+    "physical": "Recomputed particle mass ledgers and axes/volume/density/aspect ratios; checked all release cells, ages, retained peaks, terminal states and cutoffs.",
+    "product_reassembly": "Exact JSON equality after a second full assembly from retained data.",
+    "mass_balance_normalization": "Initial mass plus integrated positive deposition plus integrated sublimation; final residual mass is not used as the denominator.",
+    "extreme_path_sensitivity": "Trajectory refinement changes one small-seed peak from 322.837 to 231.397 mm (39.5% relative to the finer value); native growth refinement changes another from 696.818 to 726.375 mm (4.24%). Both later reach the tiny residual."
+  },
+  "parity": [
+    {
+      "world": "earth",
+      "baseline": "parity_plate_base",
+      "snapshots": 10,
+      "max_relative_difference": 0.0
+    },
+    {
+      "world": "moon",
+      "baseline": "fixed_-14.4_moon_lunar_plate_base_dt0.0078125",
+      "snapshots": 30,
+      "max_relative_difference": 0.0
+    }
+  ],
+  "numerical_controls": {
+    "trajectory_step": {
+      "actual_small": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 2.5679948023604737e-07,
+          "p10": 6.596964022002053e-05,
+          "p50": 0.0007286622768487017,
+          "p90": 0.008058067300971604,
+          "p99": 0.0561428494961748,
+          "max": 0.3951646078680302
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 1.6960908602614046e-08,
+          "p10": 6.041514844765839e-06,
+          "p50": 0.0005729140968596278,
+          "p90": 0.017387891723207906,
+          "p99": 6.47300484331377,
+          "max": 91.43999731217298
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": -0.00023187618552389377,
+          "0.5": 0.0035697448433948953,
+          "0.9": 0.0018116496662881065,
+          "0.99": -0.00789997746492399
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.010550117492675782,
+          "p50": 0.1017913818359375,
+          "p90": 3.044178581237789,
+          "p99": 38.96802909080386,
+          "max": 643.3069417476654
+        }
+      },
+      "saturated_small": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 3.884140296506189e-06,
+          "p10": 9.220496039377136e-05,
+          "p50": 0.0008882496725457489,
+          "p90": 0.007301096274506542,
+          "p99": 0.02841398112756179,
+          "max": 0.08082631505472992
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 1.5383982694672487e-05,
+          "p10": 0.00042718282809957385,
+          "p50": 0.006202315802793495,
+          "p90": 0.16924981062428457,
+          "p99": 2.820873870753508,
+          "max": 42.50313710550674
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": 0.0010366397827790141,
+          "0.5": -0.0002014035323787411,
+          "0.9": -8.880702174351995e-05,
+          "0.99": 5.898227692413549e-05
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.0,
+          "p50": 0.5640304778096379,
+          "p90": 19.177291391742607,
+          "p99": 91.69394366331446,
+          "max": 314.3984943795367
+        }
+      },
+      "capped_small": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 2.5679948023604737e-07,
+          "p10": 6.142411123962745e-05,
+          "p50": 0.0006891626998307698,
+          "p90": 0.005863739626160199,
+          "p99": 0.02455098378676606,
+          "max": 0.07623260068276272
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 1.6960908602614046e-08,
+          "p10": 6.2724737954864176e-06,
+          "p50": 0.00044336499442285127,
+          "p90": 0.00853309450584228,
+          "p99": 0.03369186677293586,
+          "max": 1.9161345614005232
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": -0.00023187618552389377,
+          "0.5": -0.00040318029497798946,
+          "0.9": -0.0002411900796751576,
+          "0.99": 0.0010006531547666064
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.011008834838867188,
+          "p50": 0.09465599060058594,
+          "p90": 1.8503129959106432,
+          "p99": 25.044101600646897,
+          "max": 36.7060546875
+        }
+      },
+      "actual_large": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 5.805980518580611e-08,
+          "p10": 1.0329618513327254e-06,
+          "p50": 8.581387851813727e-06,
+          "p90": 4.0256203288779875e-05,
+          "p99": 0.00014408672632158,
+          "max": 0.0006103981284664162
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 1.1646493367151525e-08,
+          "p10": 2.771332846773735e-07,
+          "p50": 3.3854729548725947e-06,
+          "p90": 2.4829442443427014e-05,
+          "p99": 0.0001036147216693481,
+          "max": 0.0004755058450598478
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": -2.130488387153129e-06,
+          "0.5": 2.8300771633071875e-05,
+          "0.9": 1.542893311357041e-05,
+          "0.99": -1.0016226758557956e-05
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.0023721577712422005,
+          "p50": 0.0326385498046875,
+          "p90": 0.15805358886718743,
+          "p99": 0.8356971931457493,
+          "max": 2.1049786008079536
+        }
+      },
+      "saturated_large": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 4.582581203393943e-08,
+          "p10": 6.971000877542543e-07,
+          "p50": 4.547166849167006e-06,
+          "p90": 1.984970581434542e-05,
+          "p99": 5.128352006789928e-05,
+          "max": 0.00016285172767949163
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 2.8628348172979323e-08,
+          "p10": 7.914747173843122e-07,
+          "p50": 6.250874841828499e-06,
+          "p90": 3.348654693871838e-05,
+          "p99": 0.00017468460363365102,
+          "max": 0.00028562461283198476
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": -6.6926689105129e-06,
+          "0.5": 2.2484879589335094e-06,
+          "0.9": 7.942918838210744e-07,
+          "0.99": 5.825624968869292e-06
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.0,
+          "p50": 0.015687048848121776,
+          "p90": 0.1150860079920676,
+          "p99": 0.4991750388110443,
+          "max": 1.4186756779563439
+        }
+      },
+      "capped_large": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 2.496579765143281e-08,
+          "p10": 8.909369202059205e-07,
+          "p50": 7.32811599479799e-06,
+          "p90": 2.6786922396626613e-05,
+          "p99": 6.780247239095524e-05,
+          "max": 0.0002528360851282718
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 1.1646493367151525e-08,
+          "p10": 2.350277502618462e-07,
+          "p50": 2.764303117124326e-06,
+          "p90": 1.4107934906963007e-05,
+          "p99": 4.3189453152446986e-05,
+          "max": 0.00017210715703736435
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": -2.130488387153129e-06,
+          "0.5": 6.393477465893582e-06,
+          "0.9": 2.3929120293697537e-05,
+          "0.99": -1.1431147760809779e-05
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.004070663452148438,
+          "p50": 0.03814697265625,
+          "p90": 0.15320892333984373,
+          "p99": 0.8809023857116699,
+          "max": 2.0399246215820312
+        }
+      }
+    },
+    "native_growth_step": {
+      "small": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 1.2754670503767329e-05,
+          "p10": 7.964866398517678e-05,
+          "p50": 0.00016725386423899202,
+          "p90": 0.0005524223374012481,
+          "p99": 0.008188599849509525,
+          "max": 0.042417206817025654
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 2.3900971240210203e-07,
+          "p10": 5.855897350396333e-06,
+          "p50": 8.883256799374411e-05,
+          "p90": 0.0021935052563731416,
+          "p99": 2.3614930250978605,
+          "max": 29.55706276590442
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": 0.00019476039615429208,
+          "0.5": 0.00017347229367126182,
+          "0.9": 0.0004037642253820195,
+          "0.99": 0.018524550135704754
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.003531687378142579,
+          "p50": 0.1579294204711914,
+          "p90": 0.941590834281851,
+          "p99": 9.791602200269484,
+          "max": 62.945703864097595
+        }
+      },
+      "large": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 1.0585015086661542e-09,
+          "p10": 1.7873318920447191e-07,
+          "p50": 2.0612663465313652e-05,
+          "p90": 0.00011198819134616843,
+          "p99": 0.00031014041776155504,
+          "max": 0.0006294989755510905
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 2.1179818966363118e-10,
+          "p10": 3.596420046535556e-08,
+          "p50": 7.796029042976809e-06,
+          "p90": 0.00011246044136109823,
+          "p99": 0.0002892578585496631,
+          "max": 0.0004903855833989943
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": 4.7413274106844483e-07,
+          "0.5": 2.8202940382415775e-05,
+          "0.9": 5.9093191062231654e-05,
+          "0.99": 4.867780624850937e-05
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.002076192119898224,
+          "p50": 0.1761016845703125,
+          "p90": 0.3717807769775389,
+          "p99": 1.1228687226314282,
+          "max": 2.006387710571289
+        }
+      }
+    },
+    "field_cadence": {
+      "small_20min": {
+        "status_agreement_count": 345,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 2.6521005796142916e-05,
+          "p10": 0.009048010224151283,
+          "p50": 0.06846065936350315,
+          "p90": 0.2421785080633707,
+          "p99": 0.6702457487430293,
+          "max": 0.7716989979849591
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 8.451486153855478e-06,
+          "p10": 0.002064065006743386,
+          "p50": 0.02746974624318128,
+          "p90": 0.6234233203605094,
+          "p99": 183.72170266194362,
+          "max": 771.443606139304
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": -0.14291804056687873,
+          "0.5": -0.035512440984113436,
+          "0.9": -0.03431730649068343,
+          "0.99": -0.2942653416892428
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 8.861454296112067,
+          "p50": 187.40038457580357,
+          "p90": 1375.4282818794243,
+          "p99": 18914.393905115285,
+          "max": 58100.840200784376
+        }
+      },
+      "small_30min": {
+        "status_agreement_count": 333,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 0.00016880164321664282,
+          "p10": 0.015423014404422912,
+          "p50": 0.13020541213278874,
+          "p90": 0.4851427788123155,
+          "p99": 0.9246981353161762,
+          "max": 1.4495246020973944
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 2.5054314753114842e-05,
+          "p10": 0.0034755250642851177,
+          "p50": 0.05436856566803201,
+          "p90": 1.1111294075110245,
+          "p99": 213.5842907187028,
+          "max": 948.2534545400651
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": -0.17081835164813275,
+          "0.5": -0.16432637084634827,
+          "0.9": -0.14810168870366203,
+          "0.99": -0.731010584183013
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 27.894838714599626,
+          "p50": 502.5634520703185,
+          "p90": 4462.974902343749,
+          "p99": 40136.65413216282,
+          "max": 57722.86054224356
+        }
+      },
+      "large_20min": {
+        "status_agreement_count": 349,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 1.125844336646864e-06,
+          "p10": 0.0010496375418251659,
+          "p50": 0.0195546475100008,
+          "p90": 0.10574452244583037,
+          "p99": 0.23750397826385908,
+          "max": 0.3566619822297564
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 2.2518602512734166e-07,
+          "p10": 0.0002685292814571926,
+          "p50": 0.007449500316081915,
+          "p90": 0.07488087515783738,
+          "p99": 0.25828578978284,
+          "max": 0.4515587802928407
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": -0.0018864886250304913,
+          "0.5": -0.010048281011995175,
+          "0.9": -0.04025999550827486,
+          "0.99": -0.013922268558341555
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 17.623079519663772,
+          "p50": 150.8749304590972,
+          "p90": 754.1516925811765,
+          "p99": 4633.45216268536,
+          "max": 23699.580758777494
+        }
+      },
+      "large_30min": {
+        "status_agreement_count": 340,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 3.3432584511938757e-06,
+          "p10": 0.0024397366791795274,
+          "p50": 0.039458932797163726,
+          "p90": 0.2018993353070304,
+          "p99": 0.5204452551717091,
+          "max": 0.6741670662221328
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 6.687026413013716e-07,
+          "p10": 0.0005123052237143103,
+          "p50": 0.014992129284904121,
+          "p90": 0.1592237577472557,
+          "p99": 0.5676432356247554,
+          "max": 0.8425935103040206
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": -0.0031470921003023955,
+          "0.5": -0.03617564233946424,
+          "0.9": -0.1030928229175736,
+          "0.99": 0.027570996609388665
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 30.648685836791998,
+          "p50": 414.5459427250448,
+          "p90": 2421.6804843902587,
+          "p99": 18454.26938235742,
+          "max": 23790.580584848853
+        }
+      }
+    },
+    "residual_cutoff": {
+      "small": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p99": 0.0,
+          "max": 0.0
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p99": 0.0,
+          "max": 0.0
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": 0.0,
+          "0.5": 0.0,
+          "0.9": 0.0,
+          "0.99": 0.0
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.0,
+          "p50": 0.0006065952593417023,
+          "p90": 0.007668304443359367,
+          "p99": 0.0231452941894531,
+          "max": 0.05908203125
+        }
+      },
+      "large": {
+        "status_agreement_count": 354,
+        "paths": 354,
+        "peak_relative_difference": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p99": 0.0,
+          "max": 0.0
+        },
+        "peak_mm_absolute_difference": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.0,
+          "p50": 0.0,
+          "p90": 0.0,
+          "p99": 0.0,
+          "max": 0.0
+        },
+        "peak_quantile_relative_difference": {
+          "0.1": 0.0,
+          "0.5": 0.0,
+          "0.9": 0.0,
+          "0.99": 0.0
+        },
+        "age_absolute_difference_s": {
+          "count": 354,
+          "min": 0.0,
+          "p10": 0.0,
+          "p50": 0.0006457224935729755,
+          "p90": 0.0017807006835937498,
+          "p99": 0.004955406188964827,
+          "max": 0.0163726806640625
+        }
+      }
+    }
+  },
+  "source_reading": "Read the pinned native deposition, geometry and initial-history use, CM1 field conversion, prior moist-history sampling and selected forcing inventory. No new external dataset or full-paper reading.",
+  "editorial_reading": "Read the complete report and current synthesis against the product. Checked initial versus final versus peak dimensions, stock versus supply rate, selected cells versus a particle population, older climate identity, numerical normalization, extreme-path sensitivity and prescribed versus coupled water/heat. No manuscript or visual-rendering review is claimed.",
+  "development_record": "The early ceiling-control release humidity tag used water saturation even when archived vapour was lower. It is unused by the selected native growth law. Development runs remain under development_before_release_record_fix; the final matrix reran all cases with the tag corrected, and added two native growth refinements. Interrupted development output is not counted among the twenty completed executions.",
+  "storage": {
+    "cache": "research/runs/snow_scale/mcsnow_weather",
+    "resolved_cache": "/media/projectspace/terluna-research/atmosphere-snow/snow_scale/mcsnow_weather",
+    "approximate_cache_MiB": 651
+  },
+  "remaining": "Unweighted crystals sample imposed older A28_dim5 weather. Population vapour depletion and latent heating, incoming numbers/habits, aggregation/riming/breakup/melting, newer high-cadence design weather and a physically validated extreme tail remain open. Individual extreme paths remain numerically sensitive despite stable median and 90th-percentile peaks.",
+  "required_inputs_check": {
+    "command": "python -B research/check.py --require-inputs",
+    "result": "PASS",
+    "log": "research/runs/snow_scale/mcsnow_weather/required_inputs_check.json",
+    "sha256": "4aa43314377d39bab414fa277e6788fd1adab1494264be347e0b5a4e212b1639"
+  }
+}
