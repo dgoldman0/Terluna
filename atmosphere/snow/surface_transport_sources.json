@@ -1,0 +1,143 @@
+{
+  "schema": "terluna.atmosphere.surface-transport-sources/1",
+  "retrieved_date_UTC": "2026-10-23",
+  "base_source_record": {
+    "path": "atmosphere/snow/spatial_growth_sources.json",
+    "sha256": "c57e0a0a37acbd701793a7289ea06f2896c6b984d0f17470a8ac6761b88fd948"
+  },
+  "retrieved": [
+    {
+      "name": "nelson_swanson2019",
+      "url": "https://acp.copernicus.org/articles/19/15285/2019/acp-19-15285-2019.pdf",
+      "resolved_url": "https://acp.copernicus.org/articles/19/15285/2019/acp-19-15285-2019.pdf",
+      "cache_path": "research/runs/snow_scale/spatial_growth/nelson_swanson2019.pdf",
+      "sha256": "84bdc4f49db156160b52c6887e55080f547850e21c172b5794f47eeb34deac1f",
+      "bytes": 15146764,
+      "state": "retrieved"
+    },
+    {
+      "name": "kelly_boyer2014",
+      "url": "https://arxiv.org/pdf/1308.4910",
+      "resolved_url": "https://arxiv.org/pdf/1308.4910",
+      "cache_path": "research/runs/snow_scale/spatial_growth/kelly_boyer2014.pdf",
+      "sha256": "f948a06dcfa46c01bdfa2d6ebb4bd3f41766eea4f07e4a8760f28ff7d97ba6f2",
+      "bytes": 6016174,
+      "state": "retrieved"
+    },
+    {
+      "name": "tan2021_lbm",
+      "url": "https://arxiv.org/pdf/2101.07163",
+      "resolved_url": "https://arxiv.org/pdf/2101.07163",
+      "cache_path": "research/runs/snow_scale/spatial_growth/tan2021_lbm.pdf",
+      "sha256": "51c2f6e5ce4729a2eb90de2191c698ed0697eec3cb11703e720e07eb1a5bb123",
+      "bytes": 3212649,
+      "state": "retrieved"
+    },
+    {
+      "name": "miyamoto2022",
+      "url": "https://eprints.lib.hokudai.ac.jp/repo/huscap/all/90510/16%20Manuscript_Miyamoto_Sazaki.pdf",
+      "cache_path": "research/runs/snow_scale/spatial_growth/miyamoto2022.pdf",
+      "sha256": "74d728e18fcf41f8b0abe9e5bdf6fceaf14a0566b11482bd890b0805e6bf3c42",
+      "bytes": 3244225,
+      "state": "retrieved"
+    },
+    {
+      "name": "miyamoto2022_cg2c00851_si_001",
+      "url": "https://ndownloader.figshare.com/files/37752830",
+      "cache_path": "research/runs/snow_scale/spatial_growth/miyamoto2022_cg2c00851_si_001.pdf",
+      "sha256": "567db4784dde58268f56927b3fac9eaee0e1d03acaaf101dd11a1bc0df2e00db",
+      "bytes": 1001788,
+      "state": "retrieved"
+    },
+    {
+      "name": "zhao2026_pressure",
+      "url": "https://pubs.acs.org/doi/pdf/10.1021/acs.cgd.5c01481",
+      "state": "failed",
+      "error": "403 Client Error: Forbidden for url: https://pubs.acs.org/doi/pdf/10.1021/acs.cgd.5c01481"
+    },
+    {
+      "name": "zhao2026_cg5c01481_si_001",
+      "url": "https://ndownloader.figshare.com/files/61061080",
+      "resolved_url": "https://s3-eu-west-1.amazonaws.com/pstorage-acs-6854636/61061080/cg5c01481_si_001.pdf",
+      "cache_path": "research/runs/snow_scale/spatial_growth/zhao2026_cg5c01481_si_001.pdf",
+      "sha256": "5db8b3d38bf9da22b954d2964e33cce8344f5a52752ce8d612e168ed1052cb61",
+      "bytes": 969600,
+      "state": "retrieved"
+    },
+    {
+      "name": "zhao2026_figshare_31079161",
+      "url": "https://api.figshare.com/v2/articles/31079161",
+      "cache_path": "research/runs/snow_scale/spatial_growth/zhao2026_figshare_31079161.json",
+      "sha256": "4f755a9a19350872d5fe6171a557929c4485befe3ccf2a38e903d7269e78deea",
+      "bytes": 8514,
+      "state": "retrieved"
+    },
+    {
+      "name": "miyamoto2022_figshare_21284189",
+      "url": "https://api.figshare.com/v2/articles/21284189",
+      "cache_path": "research/runs/snow_scale/spatial_growth/miyamoto2022_figshare_21284189.json",
+      "sha256": "aba1a5d9e25956c9af805e29e5d665f052279d5cb2659bdd47e1f62c96786896",
+      "bytes": 8073,
+      "state": "retrieved"
+    }
+  ],
+  "reading_scope": {
+    "libbrecht2013": "Sections 4.3-4.4 and 5; Figure 5 forcing and capillary comparison. Independent event/FV implementation, not original source code.",
+    "libbrecht2015_surface": "Sections 2-3: accessible-kink exponential rule, n_SD=x_s/a in pixels, top-terrace exclusion, neighbor weight g=1/sqrt(N), and grid limitations.",
+    "nelson_swanson2019": "Introduction, section 4.3, Appendix A and Appendix B6 read; Appendix A equations visually checked. Remaining morphology catalogue read selectively, not a complete independent review.",
+    "miyamoto2022": "Methods, results 3.1-3.3 and conclusions read; equations for beta and kappa and their units visually checked on manuscript PDF pages 13 and 17. Supporting information read, including Figure S5 discussion and Table S1.",
+    "zhao2026": "Publisher-hosted Figshare abstract/metadata and entire four-page supporting PDF read. Main-paper PDF retrieval returned HTTP 403; detailed methods and the pressure-dependence data remain unexamined.",
+    "kelly_boyer2014": "Algorithm and concluding discussion inspected, including constant-alpha supersaturation scaling. No calibrated mass-plus-axes Earth comparison or original executable implementation identified in this targeted inspection.",
+    "tan2021_lbm": "Introduction, section 3.2 and conclusions inspected. Flow/phase/species numerical controls and qualitative crystal photographs do not establish joint mass/axis validation for the present warm-column case."
+  },
+  "source_claims": {
+    "adjoining_transport": {
+      "source": "10.5194/acp-19-15285-2019",
+      "mechanism": "Molecules migrate over an adjoining facet edge to a thin growing front; distinct from intrafacet terrace completion.",
+      "simple_flux_ratio": "F_AST/F_direct = n*x_s/t before bulk-diffusion feedback, for an absorbing rough front and no edge barrier.",
+      "uncertainty": "The Figure 6 fit uses an unmeasured front-height profile. Historical basal migration estimates of micrometres and the later nanometre-scale reinterpretation disagree; prism migration length is not measured here."
+    },
+    "prism_steps": {
+      "source": "10.1021/acs.cgd.2c00851",
+      "temperature_C": [
+        -25.0,
+        -2.6
+      ],
+      "ambient": "pure nitrogen, approximately one atmosphere; substrate-supported prism faces",
+      "step_coefficient": "beta = a*nu*exp(-DeltaG/(R*T)); V_step=beta*s_surface",
+      "lattice_length_m": 4e-10,
+      "attempt_frequency_s_1": 40000000000000.0,
+      "activation_energy_J_mol": 44000.0,
+      "activation_error_J_mol": 1000.0,
+      "step_height_m": 3.9e-10,
+      "molecular_area_m2": 8.3e-20,
+      "spacing": "L=19*molecular_area*kappa/(k_B*T*log(1+s_surface))",
+      "reported_whole_temperature_ledge_energy_J_m": [
+        1.5e-10,
+        8.5e-10
+      ],
+      "normal_growth": "R_normal=V_step*step_height/L",
+      "limits": "Low-supersaturation spiral steps. The authors report that inferred normal rates do not explain the temperature habit changes; basal spacing is often inconsistent with the simple BCF picture. The full kappa range is not an error bar or a temperature fit."
+    },
+    "nitrogen_pressure": {
+      "source": "10.1021/acs.cgd.5c01481",
+      "pressure_atm": [
+        0.2,
+        1.0
+      ],
+      "reported_beta_high_to_low_approx": 0.25,
+      "supporting_video_condition": {
+        "temperature_C": -20.0,
+        "ice_supersaturation": 0.0072,
+        "nitrogen_pressure_atm": 1.0
+      },
+      "limits": "Abstract-level pressure result with supporting-video context; no universal whole-crystal multiplier, temperature law or lunar attachment law is inferred."
+    }
+  },
+  "model_status": "Conditional diagnostic hypotheses only. No external full papers or videos are redistributed; bytes remain in ignored research/runs.",
+  "unresolved": [
+    "Zhao et al. 2026 main paper returned HTTP 403; the supporting PDF does not resolve the missing main methods.",
+    "No validated autonomous warm-crystal mass and axis trajectory has been established.",
+    "No original complete executable Libbrecht cellular-automaton implementation was found in the inspected papers and targeted searches."
+  ]
+}

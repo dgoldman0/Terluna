@@ -1,5 +1,7 @@
 # Snow
 
+The [surface-transfer comparison](earth_growth_assessment.md#surface-transport-changes-where-the-incoming-water-becomes-ice) conserves incoming water while testing whether adjoining prism faces can feed a thin tip. Assumed micrometre migration changes length growth substantially with little change in uptake; nanometre migration barely helps. The unmeasured prism transport, later sheath geometry and incomplete growth-history match prevent adoption. Direct step measurements and new nitrogen-pressure evidence sharpen the remaining tests.
+
 The [new facet-law tests](earth_growth_assessment.md#new-facet-laws-do-not-yet-close-the-earth-growth-test) compare published 2023 kinetics with all recorded chamber shapes and rims. They remove the inherited cold symmetry but reject an apparent two-axis match because its prescribed uptake fails local supply conditions. Source location, evolving profiles and surface transport remain unresolved.
 
 The [spatial diffusion control](earth_growth_assessment.md#spatial-diffusion-resolves-finite-rims-and-local-growth) now resolves prescribed cavities and local attachment, with analytic sphere, published cylinder and independent conservation checks. It exposes a substantial thin-ring approximation error; evolving morphology and Earth validation remain open.

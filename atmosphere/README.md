@@ -46,3 +46,5 @@ The snow investigation now has a [numerically checked implicit attachment compon
 [Spatial snow-crystal diffusion](snow/earth_growth_assessment.md#spatial-diffusion-resolves-finite-rims-and-local-growth) now resolves finite rims and cavities with local attachment and isothermal latent heat. Independent geometry controls pass; autonomous morphology and Earth growth remain unvalidated.
 
 The [spatial facet assessment](snow/earth_growth_assessment.md#new-facet-laws-do-not-yet-close-the-earth-growth-test) adds 2023 attachment laws and conditional integration along all measured chamber shapes. A near-match in both dimensions fails local uptake conditions after mesh refinement; no autonomous Earth growth law or lunar snow distribution is adopted.
+
+A [conservative surface-transfer diagnostic](snow/earth_growth_assessment.md#surface-transport-changes-where-the-incoming-water-becomes-ice) now separates tip growth from total uptake. Its 158 conditional calculations constrain migration length and geometry without establishing an autonomous Earth growth law; direct microscopy and nitrogen-pressure measurements retain their experimental scope.
