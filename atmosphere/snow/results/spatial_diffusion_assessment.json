@@ -1,0 +1,1048 @@
+{
+  "schema": "terluna.atmosphere.spatial-diffusion-assessment/1",
+  "evidence": "numerical analytic and source-geometry controls; no empirical growth validation",
+  "inputs": [
+    {
+      "path": "atmosphere/snow/spatial_diffusion.py",
+      "sha256": "5d3cb02781ec37c7437eb9e063fe5bc872e0993b1bec5296681d396d4fdfabba",
+      "bytes": 15015
+    },
+    {
+      "path": "atmosphere/snow/spatial_diffusion_assessment.py",
+      "sha256": "892d26143ef6b7e9e7b716d3c6cb50cf9787008d19f2ae779a037f9f2a99065b",
+      "bytes": 6335
+    },
+    {
+      "path": "atmosphere/snow/spatial_growth_sources.json",
+      "sha256": "4dbb2fc10ad47232cd1686d75fb39d3f9bbe5a313b1d4389da4075cf33a6da9c",
+      "bytes": 5526
+    }
+  ],
+  "sphere_controls": [
+    {
+      "resolution": 16,
+      "extent": 20.0,
+      "lambda_": 0.1,
+      "normalized_flux": 0.09129966527708844,
+      "analytic_outer_sphere_bounds": [
+        0.09120222596563458,
+        0.09132420091324202
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.610300030763538,
+        "capacity_over_radius": 1.0520619252165249,
+        "relative_mass_residual": 7.470571669289707e-14,
+        "cells": 1478
+      },
+      "relative_mass_residual": 4.6569537303612e-14,
+      "residual": 1.3895261292863452e-14
+    },
+    {
+      "resolution": 16,
+      "extent": 20.0,
+      "lambda_": 10.0,
+      "normalized_flux": 0.9503982811819459,
+      "analytic_outer_sphere_bounds": [
+        0.9392805286943762,
+        0.9523809523809523
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.610300030763538,
+        "capacity_over_radius": 1.0520619252165249,
+        "relative_mass_residual": 7.470571669289707e-14,
+        "cells": 1478
+      },
+      "relative_mass_residual": 4.685168988848872e-14,
+      "residual": 9.969928056627808e-15
+    },
+    {
+      "resolution": 16,
+      "extent": 20.0,
+      "lambda_": 1000.0,
+      "normalized_flux": 1.0508799427841482,
+      "analytic_outer_sphere_bounds": [
+        1.0355776202665075,
+        1.0515247108307046
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.610300030763538,
+        "capacity_over_radius": 1.0520619252165249,
+        "relative_mass_residual": 7.470571669289707e-14,
+        "cells": 1478
+      },
+      "relative_mass_residual": 7.213309229918748e-14,
+      "residual": 1.209048990242063e-14
+    },
+    {
+      "resolution": 32,
+      "extent": 20.0,
+      "lambda_": 0.1,
+      "normalized_flux": 0.0912785154917257,
+      "analytic_outer_sphere_bounds": [
+        0.09120222596563458,
+        0.09132420091324202
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.587900113137843,
+        "capacity_over_radius": 1.0484968676015443,
+        "relative_mass_residual": 1.6717637206305212e-13,
+        "cells": 2914
+      },
+      "relative_mass_residual": 2.074941872397821e-13,
+      "residual": 2.022765855927176e-14
+    },
+    {
+      "resolution": 32,
+      "extent": 20.0,
+      "lambda_": 10.0,
+      "normalized_flux": 0.9477545160368032,
+      "analytic_outer_sphere_bounds": [
+        0.9392805286943762,
+        0.9523809523809523
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.587900113137843,
+        "capacity_over_radius": 1.0484968676015443,
+        "relative_mass_residual": 1.6717637206305212e-13,
+        "cells": 2914
+      },
+      "relative_mass_residual": 1.8270926672190487e-13,
+      "residual": 2.0815514434970844e-14
+    },
+    {
+      "resolution": 32,
+      "extent": 20.0,
+      "lambda_": 1000.0,
+      "normalized_flux": 1.0473021679736687,
+      "analytic_outer_sphere_bounds": [
+        1.0355776202665075,
+        1.0515247108307046
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.587900113137843,
+        "capacity_over_radius": 1.0484968676015443,
+        "relative_mass_residual": 1.6717637206305212e-13,
+        "cells": 2914
+      },
+      "relative_mass_residual": 9.195066218734719e-14,
+      "residual": 1.815023822132699e-14
+    },
+    {
+      "resolution": 64,
+      "extent": 20.0,
+      "lambda_": 0.1,
+      "normalized_flux": 0.09127461510964827,
+      "analytic_outer_sphere_bounds": [
+        0.09120222596563458,
+        0.09132420091324202
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.578352052923534,
+        "capacity_over_radius": 1.046977246621498,
+        "relative_mass_residual": 2.6803244712406154e-12,
+        "cells": 6186
+      },
+      "relative_mass_residual": 2.798326899137499e-12,
+      "residual": 6.442217400071003e-14
+    },
+    {
+      "resolution": 64,
+      "extent": 20.0,
+      "lambda_": 10.0,
+      "normalized_flux": 0.947100104166785,
+      "analytic_outer_sphere_bounds": [
+        0.9392805286943762,
+        0.9523809523809523
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.578352052923534,
+        "capacity_over_radius": 1.046977246621498,
+        "relative_mass_residual": 2.6803244712406154e-12,
+        "cells": 6186
+      },
+      "relative_mass_residual": 2.743652084213152e-12,
+      "residual": 4.788864932514005e-14
+    },
+    {
+      "resolution": 64,
+      "extent": 20.0,
+      "lambda_": 1000.0,
+      "normalized_flux": 1.045794644532808,
+      "analytic_outer_sphere_bounds": [
+        1.0355776202665075,
+        1.0515247108307046
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.578352052923534,
+        "capacity_over_radius": 1.046977246621498,
+        "relative_mass_residual": 2.6803244712406154e-12,
+        "cells": 6186
+      },
+      "relative_mass_residual": 2.1098037488132736e-12,
+      "residual": 4.375668474551734e-14
+    },
+    {
+      "resolution": 16,
+      "extent": 80.0,
+      "lambda_": 0.1,
+      "normalized_flux": 0.09100982916194683,
+      "analytic_outer_sphere_bounds": [
+        0.09098219787395902,
+        0.09101251422070535
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.376305680783403,
+        "capacity_over_radius": 1.0148205677616116,
+        "relative_mass_residual": 1.0385729023691525e-12,
+        "cells": 2198
+      },
+      "relative_mass_residual": 1.0446595708114462e-12,
+      "residual": 3.561192935584488e-14
+    },
+    {
+      "resolution": 16,
+      "extent": 80.0,
+      "lambda_": 10.0,
+      "normalized_flux": 0.9199023197443609,
+      "analytic_outer_sphere_bounds": [
+        0.9164549031439172,
+        0.9195402298850573
+      ],
+      "lies_within_continuum_bounds": false,
+      "capacity": {
+        "half_conductance": 6.376305680783403,
+        "capacity_over_radius": 1.0148205677616116,
+        "relative_mass_residual": 1.0385729023691525e-12,
+        "cells": 2198
+      },
+      "relative_mass_residual": 9.869218117939156e-13,
+      "residual": 3.491181285653396e-14
+    },
+    {
+      "resolution": 16,
+      "extent": 80.0,
+      "lambda_": 1000.0,
+      "normalized_flux": 1.0137207411556814,
+      "analytic_outer_sphere_bounds": [
+        1.0079007675763785,
+        1.0116337885685383
+      ],
+      "lies_within_continuum_bounds": false,
+      "capacity": {
+        "half_conductance": 6.376305680783403,
+        "capacity_over_radius": 1.0148205677616116,
+        "relative_mass_residual": 1.0385729023691525e-12,
+        "cells": 2198
+      },
+      "relative_mass_residual": 1.0385144121291552e-12,
+      "residual": 3.6495292890154727e-14
+    },
+    {
+      "resolution": 32,
+      "extent": 80.0,
+      "lambda_": 0.1,
+      "normalized_flux": 0.09098875783439704,
+      "analytic_outer_sphere_bounds": [
+        0.09098219787395902,
+        0.09101251422070535
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.355417858623381,
+        "capacity_over_radius": 1.0114961676144196,
+        "relative_mass_residual": 1.9987242445932064e-12,
+        "cells": 3954
+      },
+      "relative_mass_residual": 2.0556971329508493e-12,
+      "residual": 7.623182386677954e-14
+    },
+    {
+      "resolution": 32,
+      "extent": 80.0,
+      "lambda_": 10.0,
+      "normalized_flux": 0.9174196213395786,
+      "analytic_outer_sphere_bounds": [
+        0.9164549031439172,
+        0.9195402298850573
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.355417858623381,
+        "capacity_over_radius": 1.0114961676144196,
+        "relative_mass_residual": 1.9987242445932064e-12,
+        "cells": 3954
+      },
+      "relative_mass_residual": 2.0325361343660788e-12,
+      "residual": 7.76113584958572e-14
+    },
+    {
+      "resolution": 32,
+      "extent": 80.0,
+      "lambda_": 1000.0,
+      "normalized_flux": 1.0103842556044698,
+      "analytic_outer_sphere_bounds": [
+        1.0079007675763785,
+        1.0116337885685383
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.355417858623381,
+        "capacity_over_radius": 1.0114961676144196,
+        "relative_mass_residual": 1.9987242445932064e-12,
+        "cells": 3954
+      },
+      "relative_mass_residual": 1.576031793534567e-12,
+      "residual": 7.913796325117094e-14
+    },
+    {
+      "resolution": 64,
+      "extent": 80.0,
+      "lambda_": 0.1,
+      "normalized_flux": 0.0909849046487145,
+      "analytic_outer_sphere_bounds": [
+        0.09098219787395902,
+        0.09101251422070535
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.3465487338368956,
+        "capacity_over_radius": 1.0100846025637515,
+        "relative_mass_residual": 1.2333500838155494e-12,
+        "cells": 8013
+      },
+      "relative_mass_residual": 1.3656272028534582e-12,
+      "residual": 1.7096393697147207e-13
+    },
+    {
+      "resolution": 64,
+      "extent": 80.0,
+      "lambda_": 10.0,
+      "normalized_flux": 0.9168087001450418,
+      "analytic_outer_sphere_bounds": [
+        0.9164549031439172,
+        0.9195402298850573
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.3465487338368956,
+        "capacity_over_radius": 1.0100846025637515,
+        "relative_mass_residual": 1.2333500838155494e-12,
+        "cells": 8013
+      },
+      "relative_mass_residual": 1.243307854909898e-12,
+      "residual": 2.0085829109443422e-13
+    },
+    {
+      "resolution": 64,
+      "extent": 80.0,
+      "lambda_": 1000.0,
+      "normalized_flux": 1.0089838318274966,
+      "analytic_outer_sphere_bounds": [
+        1.0079007675763785,
+        1.0116337885685383
+      ],
+      "lies_within_continuum_bounds": true,
+      "capacity": {
+        "half_conductance": 6.3465487338368956,
+        "capacity_over_radius": 1.0100846025637515,
+        "relative_mass_residual": 1.2333500838155494e-12,
+        "cells": 8013
+      },
+      "relative_mass_residual": 1.2565161061417005e-12,
+      "residual": 1.6386921701162483e-13
+    }
+  ],
+  "cylinder_controls": [
+    {
+      "aspect": 0.25,
+      "outer_extent": 80.0,
+      "levels": [
+        {
+          "resolution": 32,
+          "cells": 2918,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 0.34402390895370605,
+              "middle_samples": {
+                "prism_middle": 0.4324021857389779,
+                "basal_middle": 0.18600205544918588
+              },
+              "relative_mass_residual": 7.917460787056514e-13
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.5741639500813115,
+              "middle_samples": {
+                "prism_middle": 0.4091611106708751,
+                "basal_middle": 0.9497541368106015
+              },
+              "relative_mass_residual": 7.880707710737381e-13
+            }
+          ]
+        },
+        {
+          "resolution": 64,
+          "cells": 5124,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 0.327473925202589,
+              "middle_samples": {
+                "prism_middle": 0.4311177062843315,
+                "basal_middle": 0.18651190260895156
+              },
+              "relative_mass_residual": 1.347141605082103e-13
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.5518647447861607,
+              "middle_samples": {
+                "prism_middle": 0.4103420748041333,
+                "basal_middle": 0.9487049462798418
+              },
+              "relative_mass_residual": 1.156308324194292e-13
+            }
+          ]
+        },
+        {
+          "resolution": 128,
+          "cells": 9476,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 0.3167981639141938,
+              "middle_samples": {
+                "prism_middle": 0.4305534895713883,
+                "basal_middle": 0.18672009000706663
+              },
+              "relative_mass_residual": 3.005694852975945e-12
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.537756754012122,
+              "middle_samples": {
+                "prism_middle": 0.4108367654366233,
+                "basal_middle": 0.9482391845011519
+              },
+              "relative_mass_residual": 3.0346732400737235e-12
+            }
+          ]
+        }
+      ],
+      "corner_extrapolations": [
+        [
+          0.2992989948110563,
+          0.5139022569417261
+        ],
+        [
+          0.2986235943375409,
+          0.5137391075901976
+        ]
+      ],
+      "published_fitted_edge_lengths": [
+        0.2999987304210663,
+        0.5139037370681763
+      ],
+      "relative_extrapolated_difference": [
+        -0.0045838063434312515,
+        -0.00032035080911829716
+      ],
+      "published_middle_lengths": [
+        [
+          0.43337228894233704,
+          0.18760310113430023
+        ],
+        [
+          0.4129672050476074,
+          0.9436664581298828
+        ]
+      ]
+    },
+    {
+      "aspect": 1.0,
+      "outer_extent": 80.0,
+      "levels": [
+        {
+          "resolution": 32,
+          "cells": 3737,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 0.7435365185328984,
+              "middle_samples": {
+                "prism_middle": 1.0762169068902483,
+                "basal_middle": 0.4990971172024729
+              },
+              "relative_mass_residual": 1.9255784831509346e-12
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.5066317117083403,
+              "middle_samples": {
+                "prism_middle": 0.23949948643168623,
+                "basal_middle": 0.8996969727744264
+              },
+              "relative_mass_residual": 1.9055056491612537e-12
+            }
+          ]
+        },
+        {
+          "resolution": 64,
+          "cells": 7140,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 0.7219203446444481,
+              "middle_samples": {
+                "prism_middle": 1.0755154101339504,
+                "basal_middle": 0.4998737382420588
+              },
+              "relative_mass_residual": 1.145141043312709e-12
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.4826202875767064,
+              "middle_samples": {
+                "prism_middle": 0.23981410066757317,
+                "basal_middle": 0.8984765826120402
+              },
+              "relative_mass_residual": 1.2946977923344156e-12
+            }
+          ]
+        },
+        {
+          "resolution": 128,
+          "cells": 13892,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 0.7080741437962678,
+              "middle_samples": {
+                "prism_middle": 1.0751974185157793,
+                "basal_middle": 0.5001925141927682
+              },
+              "relative_mass_residual": 1.1773282566891196e-11
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.4674430238963442,
+              "middle_samples": {
+                "prism_middle": 0.23994402865573425,
+                "basal_middle": 0.8979393941845476
+              },
+              "relative_mass_residual": 1.186262081394386e-11
+            }
+          ]
+        }
+      ],
+      "corner_extrapolations": [
+        [
+          0.6851206592914493,
+          0.44174289375662534
+        ],
+        [
+          0.6845021723096899,
+          0.44160503189835926
+        ]
+      ],
+      "published_fitted_edge_lengths": [
+        0.692352831363678,
+        0.4412952959537506
+      ],
+      "relative_extrapolated_difference": [
+        -0.011339101536604113,
+        0.0007018790987545209
+      ],
+      "published_middle_lengths": [
+        [
+          1.0873013734817505,
+          0.5083975791931152
+        ],
+        [
+          0.24121202528476715,
+          0.8924973607063293
+        ]
+      ]
+    },
+    {
+      "aspect": 2.5,
+      "outer_extent": 80.0,
+      "levels": [
+        {
+          "resolution": 32,
+          "cells": 6665,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 1.1206476000567158,
+              "middle_samples": {
+                "prism_middle": 1.7500897677885683,
+                "basal_middle": 0.8341581678513676
+              },
+              "relative_mass_residual": 1.2446966455820921e-11
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.4746338025889043,
+              "middle_samples": {
+                "prism_middle": 0.1389462371575417,
+                "basal_middle": 0.8728675560414705
+              },
+              "relative_mass_residual": 1.2365007095629254e-11
+            }
+          ]
+        },
+        {
+          "resolution": 64,
+          "cells": 12737,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 1.0968514397601399,
+              "middle_samples": {
+                "prism_middle": 1.74957294359888,
+                "basal_middle": 0.8350533464838967
+              },
+              "relative_mass_residual": 2.736645371361583e-11
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.4502079369733689,
+              "middle_samples": {
+                "prism_middle": 0.1390425785414762,
+                "basal_middle": 0.8716009404910897
+              },
+              "relative_mass_residual": 2.667962353200272e-11
+            }
+          ]
+        },
+        {
+          "resolution": 128,
+          "cells": 25449,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 1.081643967838176,
+              "middle_samples": {
+                "prism_middle": 1.7493380878815878,
+                "basal_middle": 0.83542745221654
+              },
+              "relative_mass_residual": 6.39521621775119e-11
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.4347760661616558,
+              "middle_samples": {
+                "prism_middle": 0.1390831321334305,
+                "basal_middle": 0.871046031125877
+              },
+              "relative_mass_residual": 6.369011274335648e-11
+            }
+          ]
+        }
+      ],
+      "corner_extrapolations": [
+        [
+          1.0563405141891993,
+          0.4086249920098013
+        ],
+        [
+          1.0557545488951754,
+          0.40850462732101084
+        ]
+      ],
+      "published_fitted_edge_lengths": [
+        1.0588111877441406,
+        0.4075780138373375
+      ],
+      "relative_extrapolated_difference": [
+        -0.002886859228865557,
+        0.0022734628763443343
+      ],
+      "published_middle_lengths": [
+        [
+          1.7573522329330444,
+          0.8429305553436279
+        ],
+        [
+          0.1392630022019148,
+          0.8699536323547363
+        ]
+      ]
+    },
+    {
+      "aspect": 10.0,
+      "outer_extent": 80.0,
+      "levels": [
+        {
+          "resolution": 32,
+          "cells": 20553,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 1.776891276577082,
+              "middle_samples": {
+                "prism_middle": 3.0168238708158572,
+                "basal_middle": 1.4590891453720256
+              },
+              "relative_mass_residual": 5.880921939338397e-11
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.44852407188039867,
+              "middle_samples": {
+                "prism_middle": 0.04536749354112964,
+                "basal_middle": 0.8487531730301703
+              },
+              "relative_mass_residual": 6.015969704693198e-11
+            }
+          ]
+        },
+        {
+          "resolution": 64,
+          "cells": 42560,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 1.7515561971020723,
+              "middle_samples": {
+                "prism_middle": 3.0163752466291727,
+                "basal_middle": 1.4600557433771237
+              },
+              "relative_mass_residual": 3.6642658769232424e-10
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.42395196216651443,
+              "middle_samples": {
+                "prism_middle": 0.045377250656476104,
+                "basal_middle": 0.8474685089773579
+              },
+              "relative_mass_residual": 3.6129984453337394e-10
+            }
+          ]
+        },
+        {
+          "resolution": 128,
+          "cells": 88080,
+          "faces": [
+            {
+              "face": 0,
+              "corner_sample": 1.7353782874197359,
+              "middle_samples": {
+                "prism_middle": 3.0161615396107706,
+                "basal_middle": 1.4604530984054147
+              },
+              "relative_mass_residual": 2.8757879948502773e-10
+            },
+            {
+              "face": 1,
+              "corner_sample": 0.4084293034045766,
+              "middle_samples": {
+                "prism_middle": 0.04538109042424086,
+                "basal_middle": 0.8469051841812707
+              },
+              "relative_mass_residual": 2.9823170692772587e-10
+            }
+          ]
+        }
+      ],
+      "corner_extrapolations": [
+        [
+          1.7084253933860771,
+          0.3821200491463544
+        ],
+        [
+          1.707836781274779,
+          0.3820033058515825
+        ]
+      ],
+      "published_fitted_edge_lengths": [
+        1.7050917148590088,
+        0.3808794170618057
+      ],
+      "relative_extrapolated_difference": [
+        0.0016099230275112841,
+        0.0029507732353895033
+      ],
+      "published_middle_lengths": [
+        [
+          3.012794256210327,
+          1.465808391571045
+        ],
+        [
+          0.046316017396748066,
+          0.8565731346607208
+        ]
+      ]
+    }
+  ],
+  "ring_controls": [
+    {
+      "rim_fraction": 0.0625,
+      "levels": [
+        {
+          "resolution": 32,
+          "corner_sample": 0.10562467485415691,
+          "full_area_over_radius_squared": 0.7608544707912781,
+          "relative_mass_residual": 1.908022733296261e-12
+        },
+        {
+          "resolution": 64,
+          "corner_sample": 0.09574389691000193,
+          "full_area_over_radius_squared": 0.7608544707912781,
+          "relative_mass_residual": 1.256207380769923e-12
+        },
+        {
+          "resolution": 128,
+          "corner_sample": 0.08929852016004769,
+          "full_area_over_radius_squared": 0.7608544707912781,
+          "relative_mass_residual": 1.1859624936630999e-11
+        }
+      ],
+      "extrapolated_edge_length": 0.07832581807114647,
+      "original_thin_ring_length": 0.030252128839492798,
+      "thin_ring_to_spatial": 0.3862344445865038,
+      "within_previous_declared_thin_ring_regime": true,
+      "geometry": "flat masked end face; cavity depth is zero, not a growing hollow profile"
+    },
+    {
+      "rim_fraction": 0.125,
+      "levels": [
+        {
+          "resolution": 32,
+          "corner_sample": 0.17159495760036364,
+          "full_area_over_radius_squared": 1.4726215563702156,
+          "relative_mass_residual": 1.907842767860522e-12
+        },
+        {
+          "resolution": 64,
+          "corner_sample": 0.15852483987297628,
+          "full_area_over_radius_squared": 1.4726215563702156,
+          "relative_mass_residual": 1.2629487887141177e-12
+        },
+        {
+          "resolution": 128,
+          "corner_sample": 0.15004422882558152,
+          "full_area_over_radius_squared": 1.4726215563702154,
+          "relative_mass_residual": 1.1863666863039099e-11
+        }
+      ],
+      "extrapolated_edge_length": 0.13560671459407164,
+      "original_thin_ring_length": 0.06025290489196777,
+      "thin_ring_to_spatial": 0.444320954698521,
+      "within_previous_declared_thin_ring_regime": false,
+      "geometry": "flat masked end face; cavity depth is zero, not a growing hollow profile"
+    },
+    {
+      "rim_fraction": 0.25,
+      "levels": [
+        {
+          "resolution": 32,
+          "corner_sample": 0.2730134391060831,
+          "full_area_over_radius_squared": 2.748893571891069,
+          "relative_mass_residual": 1.907282720983278e-12
+        },
+        {
+          "resolution": 64,
+          "corner_sample": 0.255967069144845,
+          "full_area_over_radius_squared": 2.748893571891069,
+          "relative_mass_residual": 1.2728680805206881e-12
+        },
+        {
+          "resolution": 128,
+          "corner_sample": 0.24505099520373863,
+          "full_area_over_radius_squared": 2.7488935718910694,
+          "relative_mass_residual": 1.1866800971525215e-11
+        }
+      ],
+      "extrapolated_edge_length": 0.2264673139104723,
+      "original_thin_ring_length": 0.11944228410720825,
+      "thin_ring_to_spatial": 0.5274151136637162,
+      "within_previous_declared_thin_ring_regime": false,
+      "geometry": "flat masked end face; cavity depth is zero, not a growing hollow profile"
+    },
+    {
+      "rim_fraction": 0.5,
+      "levels": [
+        {
+          "resolution": 32,
+          "corner_sample": 0.40850651985202646,
+          "full_area_over_radius_squared": 4.71238898038469,
+          "relative_mass_residual": 1.9058826037901677e-12
+        },
+        {
+          "resolution": 64,
+          "corner_sample": 0.3871759259817684,
+          "full_area_over_radius_squared": 4.71238898038469,
+          "relative_mass_residual": 1.286546148484146e-12
+        },
+        {
+          "resolution": 128,
+          "corner_sample": 0.37364057349835866,
+          "full_area_over_radius_squared": 4.71238898038469,
+          "relative_mass_residual": 1.186558933164656e-11
+        }
+      ],
+      "extrapolated_edge_length": 0.35059779473918384,
+      "original_thin_ring_length": 0.23407167196273804,
+      "thin_ring_to_spatial": 0.6676358935368326,
+      "within_previous_declared_thin_ring_regime": false,
+      "geometry": "flat masked end face; cavity depth is zero, not a growing hollow profile"
+    }
+  ],
+  "cavity_controls": [
+    {
+      "rim_fraction": 0.1,
+      "aspect": 2.0,
+      "cavity_depth_over_radius": 1.0,
+      "lambda_": 1000.0,
+      "supersaturation": 0.05,
+      "heat_parameter": 0.5,
+      "levels": [
+        {
+          "half_flux": 0.3216953913513688,
+          "effective_far_supersaturation": 0.03367255067596948,
+          "thermal_supersaturation_shift": 0.016327449324030525,
+          "thermal_balance_residual": 1.4259426972529354e-14,
+          "nonlinear_relative_residual": 2.90221184347329e-14,
+          "relative_mass_residual": 1.1043719538151799e-14,
+          "iterations": 7,
+          "cells": 2404,
+          "outer_extent": 40.0,
+          "resolution": 12
+        },
+        {
+          "half_flux": 0.3226006212904132,
+          "effective_far_supersaturation": 0.033675470764408,
+          "thermal_supersaturation_shift": 0.016324529235592,
+          "thermal_balance_residual": 1.494637746901617e-14,
+          "nonlinear_relative_residual": 5.121417051073914e-14,
+          "relative_mass_residual": 1.4421514645824317e-12,
+          "iterations": 8,
+          "cells": 4488,
+          "outer_extent": 40.0,
+          "resolution": 24
+        },
+        {
+          "half_flux": 0.32296675011050735,
+          "effective_far_supersaturation": 0.03367703327471159,
+          "thermal_supersaturation_shift": 0.016322966725288414,
+          "thermal_balance_residual": 1.387084891391055e-14,
+          "nonlinear_relative_residual": 6.716610266422365e-13,
+          "relative_mass_residual": 1.075136536695971e-11,
+          "iterations": 8,
+          "cells": 9512,
+          "outer_extent": 40.0,
+          "resolution": 48
+        }
+      ],
+      "fine_to_medium_flux_change": 0.0011349290606743612
+    },
+    {
+      "rim_fraction": 0.3,
+      "aspect": 2.0,
+      "cavity_depth_over_radius": 1.0,
+      "lambda_": 1000.0,
+      "supersaturation": 0.05,
+      "heat_parameter": 0.5,
+      "levels": [
+        {
+          "half_flux": 0.3242459806452265,
+          "effective_far_supersaturation": 0.03368472551101016,
+          "thermal_supersaturation_shift": 0.01631527448898984,
+          "thermal_balance_residual": 1.6341095143701523e-14,
+          "nonlinear_relative_residual": 3.778433624300668e-13,
+          "relative_mass_residual": 2.0083558593326004e-12,
+          "iterations": 7,
+          "cells": 2316,
+          "outer_extent": 40.0,
+          "resolution": 12
+        },
+        {
+          "half_flux": 0.3250143580747352,
+          "effective_far_supersaturation": 0.033686877792600274,
+          "thermal_supersaturation_shift": 0.01631312220739973,
+          "thermal_balance_residual": 1.73749903353837e-14,
+          "nonlinear_relative_residual": 4.6400135081784294e-14,
+          "relative_mass_residual": 1.9021550153189245e-12,
+          "iterations": 8,
+          "cells": 4332,
+          "outer_extent": 40.0,
+          "resolution": 24
+        },
+        {
+          "half_flux": 0.32532824539198035,
+          "effective_far_supersaturation": 0.03368817653553894,
+          "thermal_supersaturation_shift": 0.016311823464461063,
+          "thermal_balance_residual": 1.8471335572201042e-14,
+          "nonlinear_relative_residual": 8.795238894804181e-14,
+          "relative_mass_residual": 1.8201230866701253e-12,
+          "iterations": 9,
+          "cells": 9032,
+          "outer_extent": 40.0,
+          "resolution": 48
+        }
+      ],
+      "fine_to_medium_flux_change": 0.0009657644637746099
+    },
+    {
+      "rim_fraction": 1.0,
+      "aspect": 2.0,
+      "cavity_depth_over_radius": 0.0,
+      "lambda_": 1000.0,
+      "supersaturation": 0.05,
+      "heat_parameter": 0.5,
+      "levels": [
+        {
+          "half_flux": 0.3257865378514543,
+          "effective_far_supersaturation": 0.0336972594501411,
+          "thermal_supersaturation_shift": 0.016302740549858905,
+          "thermal_balance_residual": 1.8117451983101773e-14,
+          "nonlinear_relative_residual": 2.1905915533632682e-14,
+          "relative_mass_residual": 4.021231747933739e-14,
+          "iterations": 5,
+          "cells": 2176,
+          "outer_extent": 40.0,
+          "resolution": 12
+        },
+        {
+          "half_flux": 0.32646163238789283,
+          "effective_far_supersaturation": 0.03369891364923245,
+          "thermal_supersaturation_shift": 0.016301086350767553,
+          "thermal_balance_residual": 1.9172163856495672e-14,
+          "nonlinear_relative_residual": 4.6463107970735426e-14,
+          "relative_mass_residual": 1.5941139514204743e-12,
+          "iterations": 5,
+          "cells": 3888,
+          "outer_extent": 40.0,
+          "resolution": 24
+        },
+        {
+          "half_flux": 0.32674131688275937,
+          "effective_far_supersaturation": 0.03369998453706719,
+          "thermal_supersaturation_shift": 0.01630001546293281,
+          "thermal_balance_residual": 1.885297473691594e-14,
+          "nonlinear_relative_residual": 1.12368471546019e-13,
+          "relative_mass_residual": 3.396166495561419e-13,
+          "iterations": 6,
+          "cells": 7360,
+          "outer_extent": 40.0,
+          "resolution": 48
+        }
+      ],
+      "fine_to_medium_flux_change": 0.0008567147472149372
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "terluna.atmosphere.spatial-growth-sources/1",
+  "retrieved": [
+    {
+      "name": "libbrecht2013",
+      "url": "https://pdfs.semanticscholar.org/9e5c/efa80b0cda9469b45184ce07da76bf970714.pdf",
+      "resolved_url": "https://pdfs.semanticscholar.org/9e5c/efa80b0cda9469b45184ce07da76bf970714.pdf",
+      "cache_path": "research/runs/snow_scale/spatial_growth/libbrecht2013.pdf",
+      "sha256": "dec8b181606ee3271392ba0f375d014550816e08468e873eaac1df52895bf542",
+      "bytes": 2114760,
+      "state": "retrieved"
+    },
+    {
+      "name": "libbrecht2015_surface",
+      "url": "https://arxiv.org/pdf/1509.08543",
+      "resolved_url": "https://arxiv.org/pdf/1509.08543",
+      "cache_path": "research/runs/snow_scale/spatial_growth/libbrecht2015_surface.pdf",
+      "sha256": "b142fdd5a9420ee59b54a45fb8b82a9486de85e1e94bc7453d5821a20fb88fec",
+      "bytes": 594562,
+      "state": "retrieved"
+    },
+    {
+      "name": "libbrecht2015_plate",
+      "url": "https://arxiv.org/pdf/1512.03389v2",
+      "resolved_url": "https://arxiv.org/pdf/1512.03389v2",
+      "cache_path": "research/runs/snow_scale/spatial_growth/libbrecht2015_plate.pdf",
+      "sha256": "29648518cd2e9dc5e38e60d97122d9e3fb4c60798b80039430b189b698c8547b",
+      "bytes": 1068964,
+      "state": "retrieved"
+    },
+    {
+      "name": "libbrecht2019_model",
+      "url": "https://arxiv.org/pdf/1910.09067",
+      "resolved_url": "https://arxiv.org/pdf/1910.09067",
+      "cache_path": "research/runs/snow_scale/spatial_growth/libbrecht2019_model.pdf",
+      "sha256": "89ef4d1e3ed1c9b41379fdb26482fee7c932078d23e608541f2a16b5a37a76d5",
+      "bytes": 1698568,
+      "state": "retrieved"
+    },
+    {
+      "name": "libbrecht2019_column",
+      "url": "https://arxiv.org/pdf/1912.03230",
+      "resolved_url": "https://arxiv.org/pdf/1912.03230",
+      "cache_path": "research/runs/snow_scale/spatial_growth/libbrecht2019_column.pdf",
+      "sha256": "79abfe821a8437601f1b8ded23d533c2ec1be1589d871f1644e61dace90d7477",
+      "bytes": 2282494,
+      "state": "retrieved"
+    },
+    {
+      "name": "libbrecht2023_faceting",
+      "url": "https://arxiv.org/pdf/2306.04042",
+      "resolved_url": "https://arxiv.org/pdf/2306.04042",
+      "cache_path": "research/runs/snow_scale/spatial_growth/libbrecht2023_faceting.pdf",
+      "sha256": "1ff2c1f9699c2aefd26e5373f29c4fdd7a110620c136bd349d813947dacbcd1f",
+      "bytes": 1400163,
+      "state": "retrieved"
+    }
+  ],
+  "rights": "Full papers remain in ignored research cache. Tracked material contains own implementation, source identities and derived calculations; no external source code was found or redistributed.",
+  "references": [
+    {
+      "key": "libbrecht2013",
+      "doi": "10.1155/2013/174806",
+      "read_sections": "Sections 1-3 and analytic sphere equations 26-31; numerical-boundary compensation in 3.5.",
+      "use": "Quasistatic diffusion and kinetic boundary problem; analytic spherical control.",
+      "restriction": "Own finite-volume implementation, not a reproduction of the cellular automaton; no humidity compensation is used."
+    },
+    {
+      "key": "libbrecht2015_surface",
+      "arxiv": "1509.08543v1",
+      "read_sections": "Sections 3.1-3.3 and targeted surface-diffusion passages; page 7 boundary equations visually inspected.",
+      "use": "Spatially local attachment and separated diffusion solve; surface diffusion and moving terraces are still absent from our fixed-geometry control."
+    },
+    {
+      "key": "libbrecht2019_column",
+      "arxiv": "1912.03230",
+      "read_sections": "Pages 1-5 model and limits.",
+      "use": "Broad and narrow basal parameters near -5 C, prism parameters, and the explicitly unresolved width-dependence of attachment kinetics."
+    },
+    {
+      "key": "libbrecht2015_plate",
+      "arxiv": "1512.03389v2",
+      "read_sections": "Abstract only at this checkpoint; full text retrieved.",
+      "use": "Candidate Earth plate/needle comparison; no claimed reproduction."
+    },
+    {
+      "key": "libbrecht2019_model",
+      "arxiv": "1910.09067",
+      "read_sections": "Abstract only at this checkpoint; full text retrieved.",
+      "use": "Candidate morphology-dependent attachment model; no full implementation claim."
+    },
+    {
+      "key": "libbrecht2023_faceting",
+      "arxiv": "2306.04042",
+      "read_sections": "Introduction and basic analytic model, pages 1-4.",
+      "use": "Recent low-supersaturation faceting context; not an exoplanet population solver."
+    },
+    {
+      "key": "nelson_baker1996",
+      "source_record": "atmosphere/snow/uniform_face_sources.json",
+      "use": "Independent uniform-flux cylinder geometry comparison."
+    },
+    {
+      "key": "harrington_pokrifka2026",
+      "source_record": "atmosphere/snow/hollow_growth_sources.json",
+      "use": "Published fitted cylinder fields, unchanged native interface."
+    }
+  ],
+  "limitations": [
+    "Prescribed axisymmetric geometry; no motion, rim evolution, sixfold branching, surface diffusion, nucleation stochasticity, aggregation or fracture.",
+    "Outer Dirichlet boundary stays finite and is refined separately from the grid.",
+    "Molecular jumps and ventilation absent. Isothermal-crystal latent heating is optional and omits a substrate heat sink.",
+    "Sharp-corner sample values require mesh refinement; corner extrapolation is numerical evidence, not a measured tip radius.",
+    "Published broad/narrow attachment parameter limits do not define an autonomous interpolation in rim width."
+  ]
+}
