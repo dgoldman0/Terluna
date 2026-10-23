@@ -7,10 +7,28 @@ finite outer boundary, no flow solver, stochastic nucleation or breakup.
 from __future__ import annotations
 import math
 import numpy as np
+from scipy.ndimage import label
 from scipy.sparse import coo_matrix,diags
 from scipy.sparse.linalg import spsolve
 from atmosphere.snow.spatial_diffusion import Attachment,surface_flux,Domain
 from atmosphere.snow.facet_growth import ICE_DENSITY
+
+
+def exterior_air_masks(solid, reflect_top=False):
+    """Face-connected exterior gas and sealed cells of the filled-cell grid.
+
+    A sealed component has no ambient supply in the quasistatic problem.
+    Excluding it from that solve does not turn its air or partial ice into ice.
+    The moving solver separately bounds its finite trapped-vapour inventory.
+    """
+    gas = ~np.asarray(solid, bool)
+    components, _ = label(gas)
+    outer = components[-1, :]
+    if not reflect_top:
+        outer = np.r_[outer, components[:, -1]]
+    connected = np.unique(outer[outer > 0])
+    exterior = gas & np.isin(components, connected)
+    return exterior, gas & ~exterior
 
 
 class MaskDomain(Domain):
@@ -20,7 +38,8 @@ class MaskDomain(Domain):
         self.solid=np.asarray(solid,bool);self.shape='voxel';self._capacity=None
         self.aspect=float(max(self.z[np.any(solid,axis=0)])/max(self.r[np.any(solid,axis=1)]))
         self.resolution=1;self.extent=max(self.rf[-1],self.zf[-1]);self.mesh='voxel'
-        index=np.full(solid.shape,-1,int);index[~solid]=np.arange(np.sum(~solid));self.index=index;self.cells=int(np.sum(~solid))
+        self.exterior_air,self.closed_air=exterior_air_masks(self.solid,reflect_top)
+        index=np.full(solid.shape,-1,int);index[self.exterior_air]=np.arange(np.sum(self.exterior_air));self.index=index;self.cells=int(np.sum(self.exterior_air))
         n=self.cells;diag=np.zeros(n);outer=np.zeros(n);rows=[];cols=[];vals=[];ice=[]
         # Interior face conductances, including the exact cylindrical areas.
         for axis in (0,1):
@@ -70,7 +89,7 @@ class MaskDomain(Domain):
         kink=np.bincount(p,minlength=self.cells)>=2
         enhance=np.where(kink[p],1.,0.)
         if n_surface_diffusion==0:return enhance
-        ir,iz=np.where(~self.solid);cellr=self.r[ir];cellz=self.z[iz]
+        ir,iz=np.where(self.exterior_air);cellr=self.r[ir];cellz=self.z[iz]
         for direction in (0,1):
             chosen=np.where(orient==direction)[0]
             coordinate=self.ice[:,4+direction]
@@ -122,7 +141,7 @@ class MaskDomain(Domain):
         C=self.dirichlet()['half_conductance'] if heat_parameter else 1.
         h=0.;u=np.zeros(self.cells)
         if guess is not None:
-            full,h0=guess;u=full[~self.solid].copy();h=float(h0)
+            full,h0=guess;u=full[self.exterior_air].copy();h=float(h0)
             if si==0:u[:]=0.;h=0.
             elif np.any(u<0) or np.max(u)+h>=si:
                 factor=.99*si/max(np.max(u)+h,si)
@@ -135,7 +154,7 @@ class MaskDomain(Domain):
             residual=self.matrix@u-source;rh=h-heat_parameter*Q/C
             scale=max(Q,1e-30);error=max(np.max(np.abs(residual))/scale,abs(rh)/max(si,1e-30))
             if error<tolerance:
-                full=np.zeros(self.solid.shape);full[~self.solid]=u
+                full=np.zeros(self.solid.shape);full[self.exterior_air]=u
                 mass_residual=abs(Q-np.dot(self.outer,u))/scale
                 if mass_residual>2e-7:raise ArithmeticError('Water ledger failed')
                 return dict(face_flux=q,surface=ss,half_flux=Q,heat_shift=h,guess=(full,h),iterations=it,
@@ -275,18 +294,25 @@ class GrowingCrystal:
         L=air['latent_sublimation_J_kg'];beta=(L/(air['vapor_gas_constant_J_kg_K']*T)-1)/T
         h=beta*L*rhoeq*D/K if heating else 0.
         ans=d.coupled(si,self.dx*vth/D,combined,h,guess=self.last,tolerance=tolerance)
-        if ans['half_flux']<=0:self.time=until;return dict(no_growth=True)
+        active=d.exterior_air
+        # Growth-only stationary exterior: sealed air has no replenishment.
+        # Freeze its partial ice and report an upper bound on ALL vapour there,
+        # rather than supplying it from ambient humidity or filling it with ice.
+        closed_volume=float(2*self.dx**3*np.sum(self.volume[d.closed_air]*(1-self.fraction[d.closed_air])))
+        pocket=dict(closed_air_cells=int(np.sum(d.closed_air)),closed_gas_volume_m3=closed_volume,
+            trapped_vapor_upper_bound_kg=rhoeq*(1+si)*closed_volume)
+        if ans['half_flux']<=0:self.time=until;return dict(no_growth=True,**pocket)
         p=d.ice[:,0].astype(int)
         supply=np.bincount(p,weights=d.ice[:,1]*ans['face_flux'],minlength=d.cells)
-        rate=rhoeq*D/(ICE_DENSITY*self.dx**2)*supply/self.volume[~self.solid]
-        live=rate>0;remaining=1-self.fraction[~self.solid]
+        rate=rhoeq*D/(ICE_DENSITY*self.dx**2)*supply/self.volume[active]
+        live=rate>0;remaining=1-self.fraction[active]
         # Compare inverse filling times, avoiding overflow for vanishingly
         # small attachment rates without imposing a physical coefficient floor.
         inverse_event=float(np.max(rate[live]/remaining[live]));dt=until-self.time
         if inverse_event*dt>1:dt=1/inverse_event
-        updated=self.fraction[~self.solid]+dt*rate
+        updated=self.fraction[active]+dt*rate
         if np.max(updated)>1+1e-8:raise ArithmeticError('Growth event overfilled a cell')
-        self.fraction[~self.solid]=np.minimum(updated,1.)
+        self.fraction[active]=np.minimum(updated,1.)
         self.deposited+=2*rhoeq*D*self.dx*ans['half_flux']*dt;self.time+=dt
         newly=(self.fraction>=1-1e-10)&~self.solid
         if np.any(newly):
@@ -296,4 +322,4 @@ class GrowingCrystal:
         self.last=ans['guess']
         return dict(dt=dt,iterations=ans['iterations'],mass_residual=ans['relative_mass_residual'],
             nonlinear_residual=ans['relative_nonlinear_residual'],heat_shift=ans['heat_shift'],
-            enhanced_faces=int(np.sum(enhance>0)),faces=len(enhance),cells=d.cells)
+            enhanced_faces=int(np.sum(enhance>0)),faces=len(enhance),cells=d.cells,**pocket)

@@ -6,6 +6,8 @@ mass with unmeasured cavity shape is not a measured initial crystal profile.
 """
 from __future__ import annotations
 import argparse
+import hashlib
+import subprocess
 import json
 import math
 from pathlib import Path
@@ -20,11 +22,26 @@ from atmosphere.snow.spatial_facet_growth import libbrecht_laws
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-RESULT = HERE / 'results/spatial_crystal_assessment.json'
+RESULT = HERE / 'results/spatial_crystal_repair_assessment.json'
+BASELINE_REVISION = 'fd5fa37904382a39d7ef82806421027719afd608'
 
 
 def file_id(path):
     return dict(path=str(path.relative_to(ROOT)), sha256=facet_growth.sha(path))
+
+
+def historical_baseline():
+    """Resolve the preserved failed assessment against its actual Git sources."""
+    path = 'atmosphere/snow/results/spatial_crystal_assessment.json'
+    raw = subprocess.check_output(['git', 'show', f'{BASELINE_REVISION}:{path}'], cwd=ROOT)
+    record = json.loads(raw)
+    for item in record['inputs']:
+        source = subprocess.check_output(['git', 'show', f"{BASELINE_REVISION}:{item['path']}"], cwd=ROOT)
+        if hashlib.sha256(source).hexdigest() != item['sha256']:
+            raise ValueError(f"Historical source mismatch: {item['path']}")
+    return dict(revision=BASELINE_REVISION, path=path, sha256=hashlib.sha256(raw).hexdigest(),
+        all_historical_input_hashes_verified=True,
+        scope='Previous completed controls and explicit failed fine-terrace case; sources are resolved at this revision, not current files.')
 
 
 def profile(crystal):
@@ -46,6 +63,8 @@ def evolve(crystal, forcing, end, interval, wall_limit):
     trace = [crystal.state()]
     residual = 0.
     max_nonlinear = 0.
+    max_trapped = 0.
+    max_closed_cells = 0
     error = None
     try:
         while crystal.time < end:
@@ -53,6 +72,8 @@ def evolve(crystal, forcing, end, interval, wall_limit):
             out = crystal.advance(until=target, **forcing(crystal.time))
             residual = max(residual, out.get('mass_residual', 0.))
             max_nonlinear = max(max_nonlinear, out.get('nonlinear_residual', 0.))
+            max_trapped = max(max_trapped, out.get('trapped_vapor_upper_bound_kg', 0.))
+            max_closed_cells = max(max_closed_cells, out.get('closed_air_cells', 0))
             if abs(crystal.time/interval-round(crystal.time/interval)) < 1e-9:
                 trace.append(crystal.state())
             if time.monotonic()-start > wall_limit:
@@ -62,7 +83,8 @@ def evolve(crystal, forcing, end, interval, wall_limit):
     return dict(complete=crystal.time >= end and error is None, error=error,
         target_elapsed_s=end, trace=trace, final=crystal.state(),
         final_profile=profile(crystal), wall_elapsed_s=time.monotonic()-start,
-        max_water_residual=residual, max_nonlinear_residual=max_nonlinear)
+        max_water_residual=residual, max_nonlinear_residual=max_nonlinear,
+        max_trapped_vapor_upper_bound_kg=max_trapped, max_closed_air_cells=max_closed_cells)
 
 
 def cylinder_controls():
@@ -131,7 +153,7 @@ def capillary_controls(library, wall_limit):
             'Grid spacing resolves the approximate 0.15 micrometre kinetic length at the two finest levels.'])
 
 
-def warm_restarts(library, wall_limit):
+def warm_restarts(library, wall_limit, *, selection="all", tip_rim=2e-6):
     tc = -5.3
     T = flakes.T0+tc
     initial = lab.observed(tc, 3.)
@@ -143,8 +165,12 @@ def warm_restarts(library, wall_limit):
     rows = []
     for dx in (1e-6, .5e-6):
         for label, sd in (('local', 0.), ('terraces', 14e-9)):
+            if selection == 'fine_terraces' and (dx != .5e-6 or label != 'terraces'):
+                continue
+            if selection == 'coarse_local' and (dx != 1e-6 or label != 'local'):
+                continue
             g = GrowingCrystal(dx, a, c, math.ceil(150e-6/dx), math.ceil(1000e-6/dx), extent=80.)
-            seed = g.measured_seed(a, c, initial['mass_kg'], 2e-6)
+            seed = g.measured_seed(a, c, initial['mass_kg'], tip_rim)
             def forcing(seconds):
                 age = 3.+seconds/60
                 fv = replay.jw_ventilation(lab.fall_speed(tc, age)*lab.observed(tc, age)['equatorial_dimension_m']/nu,
@@ -165,32 +191,34 @@ def warm_restarts(library, wall_limit):
                 complete=row['complete'], error=row['error'], final=row['final'],
                 ratios=row['final_to_observed_ratios_a_c_mass'])), flush=True)
     return dict(temperature_K=T, pressure_Pa=101000., ice_supersaturation=si,
-        air=air, ventilation_air=flow_air, observed_initial=initial, cases=rows,
+        air=air, ventilation_air=flow_air, observed_initial=initial, seed_tip_rim_m=tip_rim, cases=rows,
         limits=[
-            'The observed initial mass and dimensions constrain an unmeasured hollow profile; the two-micrometre rim is supplied.',
+            'The observed initial mass and dimensions constrain an unmeasured hollow profile; the declared initial rim is supplied.',
             'Fit ages 3 to 8 minutes; ventilation uses prescribed observed size and fall speed, not predicted drag.',
             '0.5 and 1 micrometre grids do not resolve the roughly 0.15 micrometre kinetic/tip length; these are coarse diagnostics.',
             'The 2015 terrace rule uses n_SD=x_s/molecular_step pixels; its physical collection distance changes with grid spacing.',
             'Local case disables rough-kink promotion; terrace case includes both rough kinks and terrace-distance enhancement.',
             'No adjoining-facet surface transfer, stochastic step sources, substrate, three-dimensional branching, riming or aggregation.',
+            'Sealed voxel air has no exterior supply; its partial ice is frozen and the entire trapped-vapour inventory is bounded separately. Internal transient deposition and sublimation are absent.',
             'Whole-fit dimensions and mass have no supplied joint uncertainty. No trajectory is adopted as an Earth or lunar growth law.'])
 
 
-def run(section, wall_limit):
+def run(section, wall_limit, warm_case="all", tip_rim=2e-6):
     library = facet_attachment.AttachmentLibrary(facet_growth.BUILD)
     result = dict(schema='terluna.atmosphere.spatial-crystal-assessment/1',
         evidence='numerical moving-interface controls and conditional coarse Earth restart; no morphology validation',
+        selected_section=section, selected_warm_case=warm_case, historical_checkpoint=historical_baseline(),
         numpy_version=np.__version__, scipy_version=scipy.__version__,
-        per_case_wall_limit_s=wall_limit, inputs=[file_id(p) for p in [
+        per_case_wall_limit_s=wall_limit, native_build_identity=library.identity, inputs=[file_id(p) for p in [
             Path(__file__).resolve(), HERE/'spatial_crystal_growth.py', HERE/'spatial_diffusion.py',
             HERE/'spatial_facet_growth.py', HERE/'facet_attachment.py', HERE/'facet_growth.py',
             HERE/'takahashi_growth.py', HERE/'crystal_transport_replay.py',
-            HERE/'spatial_growth_sources.json', ROOT/'shared/constants.json']])
+            HERE/'spatial_growth_sources.json', HERE/'crystal_morphology_sources.json', ROOT/'shared/constants.json']])
     if section in ('all', 'controls'):
         result['cylinder_controls'] = cylinder_controls()
         result['capillary_controls'] = capillary_controls(library, wall_limit)
     if section in ('all', 'earth'):
-        result['warm_restarts'] = warm_restarts(library, wall_limit)
+        result['warm_restarts'] = warm_restarts(library, wall_limit, selection=warm_case, tip_rim=tip_rim)
     return result
 
 
@@ -199,8 +227,12 @@ if __name__ == '__main__':
     parser.add_argument('--section', choices=['all', 'controls', 'earth'], default='all')
     parser.add_argument('--wall-limit', type=float, default=1200.)
     parser.add_argument('--output', type=Path, default=RESULT)
+    parser.add_argument('--warm-case', choices=['all', 'fine_terraces', 'coarse_local'], default='all')
+    parser.add_argument('--tip-rim-m', type=float, default=2e-6)
     args = parser.parse_args()
     if not math.isfinite(args.wall_limit) or args.wall_limit <= 0:
         parser.error('Positive finite wall limit required')
-    result = run(args.section, args.wall_limit)
+    if not math.isfinite(args.tip_rim_m) or args.tip_rim_m <= 0:
+        parser.error('Positive finite initial rim required')
+    result = run(args.section, args.wall_limit, args.warm_case, args.tip_rim_m)
     args.output.write_text(json.dumps(result, indent=2, allow_nan=False)+'\n')

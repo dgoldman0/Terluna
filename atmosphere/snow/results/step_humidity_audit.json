@@ -1,0 +1,387 @@
+{
+  "schema": "terluna.atmosphere.step-humidity-audit/1",
+  "evidence": "conditional inverse-problem consistency; no measured chamber correction or adopted kinetic law",
+  "inputs": [
+    {
+      "path": "atmosphere/snow/step_humidity_audit.py",
+      "sha256": "9c9ca4c11eb3dc289f83b95389949de92b98fcfc6914ee4c4ba5987af57608c8"
+    },
+    {
+      "path": "atmosphere/snow/crystal_morphology_sources.json",
+      "sha256": "6bfa6e5e79d8b1b8aaa19ceb80d8eadcb766ab1bd8a71fe968579f032711be1e"
+    },
+    {
+      "path": "atmosphere/snow/crystal_parameter_audit.py",
+      "sha256": "e8d08c09e58811ad5b30f407e58a9b8ca563b1d7c2a2360e93ef2c9f45d2a0ec"
+    },
+    {
+      "path": "atmosphere/snow/spatial_facet_growth.py",
+      "sha256": "ece3fe4d2f30aebe493e9f12f4f11c67b999f25c3f4824d06b1d211c36341996"
+    },
+    {
+      "path": "atmosphere/snow/surface_transfer.py",
+      "sha256": "9b047b307c4e4196d2a5f9fe3d2fe0aa30f01e15d958ac60fabf32a88a5c4054"
+    },
+    {
+      "path": "atmosphere/snow/facet_attachment.py",
+      "sha256": "baca6d3f663c9d40b157d805b0be797c88d491dc84e180e9a9ee5bd2d5db7506"
+    },
+    {
+      "path": "atmosphere/snow/facet_growth.py",
+      "sha256": "99c0eab83ccb6daa35829b54c3428d237b49c7a7fc38489b416527ecca7eacd5"
+    },
+    {
+      "path": "shared/constants.json",
+      "sha256": "dc8713f43c948069cd20a94484126c3465f3c3349cddf8a3497e4dfdd2a1c455"
+    }
+  ],
+  "native_build_identity": {
+    "schema": "terluna.atmosphere.facet-attachment-build/1",
+    "producer": {
+      "facet_attachment.py": "baca6d3f663c9d40b157d805b0be797c88d491dc84e180e9a9ee5bd2d5db7506",
+      "facet_attachment_driver.f90": "a94c7501db2fc925f8ac0f26ae29fd222acb102d845bef172c9a7600bb400949"
+    },
+    "source_path": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/growth_physics_sources/harrington2021_code/depcoeffparamsubs.f90",
+    "source_sha256": "f6a05f4ca899a2e08851b8cc3c65f449ab819104c9f79b868be75fa779637ef1",
+    "source_doi": "https://doi.org/10.26208/s7de-et44",
+    "source_url": "https://www.datacommons.psu.edu/download/meteorology/harrington/Harrington_CodeCalculateDepositionCoefficients2021.zip",
+    "archive_sha256": "34cbab3aea0bde80794c4edd9c994d1d406484b265f047cb486e93c86d7e8259",
+    "precision": "double",
+    "stable_capacitance": true,
+    "flags": [
+      "-O0",
+      "-std=legacy",
+      "-fno-fast-math",
+      "-fcheck=all",
+      "-finit-real=snan",
+      "-ffpe-trap=invalid,zero,overflow",
+      "-ffree-line-length-none",
+      "-fdefault-real-8",
+      "-fdefault-double-8"
+    ],
+    "commands": [
+      [
+        "/usr/bin/x86_64-linux-gnu-gfortran-13",
+        "-O0",
+        "-std=legacy",
+        "-fno-fast-math",
+        "-fcheck=all",
+        "-finit-real=snan",
+        "-ffpe-trap=invalid,zero,overflow",
+        "-ffree-line-length-none",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "native_demo.f90",
+        "-o",
+        "native_demo"
+      ],
+      [
+        "/usr/bin/x86_64-linux-gnu-gfortran-13",
+        "-O0",
+        "-std=legacy",
+        "-fno-fast-math",
+        "-fcheck=all",
+        "-finit-real=snan",
+        "-ffpe-trap=invalid,zero,overflow",
+        "-ffree-line-length-none",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "-fPIC",
+        "-shared",
+        "native_routines.f90",
+        "facet_attachment_driver.f90",
+        "-o",
+        "libfacet_attachment.so"
+      ]
+    ],
+    "compiler_path": "/usr/bin/x86_64-linux-gnu-gfortran-13",
+    "compiler_sha256": "142861efc95f49e33705852027dae8c2e5382fd1155fcec6116ef973f25d8f84",
+    "compiler_version": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "files": {
+      "native_demo.f90": "4da96cadbbc0418faf0848e669a2fbdc9247507303cefce684785039621e4b59",
+      "native_routines.f90": "937ee57b4c891fb76f6a7628be9627df70209c49bd32ef7d9df27d2f1f32d508",
+      "source.patch": "6ea549706c61f2271bc69f95c1251d0f22308768ac1bb8bf1a7712b3e4abb3bf",
+      "facet_attachment_driver.f90": "a94c7501db2fc925f8ac0f26ae29fd222acb102d845bef172c9a7600bb400949",
+      "native_demo": "bd29d994bc0ccecb3946049ff2a01e8e70e772a3f3ae4d5a04ad488ef266beb8",
+      "libfacet_attachment.so": "23cd9d31a06aa6aa27b7e98436804cf2fd0ef0374095ed121187add287ff0fa3",
+      "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native_demo.stdout": "8cf687e5e13d331f0ef42fc3c50f053a5c7ce957acec1a8ab39992c6e33f5804",
+      "depcoeffparamtest.dat": "0d2231e6dfcd668368d6035d86e0a679dcfb2c08c2fa193c1d8bca739922f8e1"
+    },
+    "patches": [
+      "Remove exactly two unused scratio_a/c assignments reading uninitialized scrat_low/hi.",
+      "Extract routines after the published main program for the shared library.",
+      "Replace only spheroid capacitance arithmetic with equivalent factored eccentricity/asin and asinh forms."
+    ],
+    "wrapper": "C-double interface converts inputs to native REAL; original coefficient operations unchanged.",
+    "source_limits": [
+      "Positive ice supersaturation; no sublimation.",
+      "Characteristic-supersaturation fits guarded to -70 through -1 C; m in [1,15].",
+      "Native coefficients have an existing floor of 1e-6.",
+      "No ventilation input; assumes source air transport properties.",
+      "Source metadata requires annual notification of customization; no notification sent."
+    ],
+    "evidence": "Compiled published component; native demo is a numerical reference, not empirical validation."
+  },
+  "temperature_K": 257.84999999999997,
+  "air": {
+    "alpha_a": 0.009007104092661243,
+    "alpha_c": 0.0002252489769221409,
+    "alpha_t": 0.96,
+    "capacitance_m": 2e-05,
+    "boundary_capacitance_m": 2.0058233587762156e-05,
+    "diffusivity_m2_s": 1.892829953210744e-05,
+    "conductivity_W_m_K": 0.0227339919,
+    "ice_saturation_pressure_Pa": 160.96540013741395,
+    "latent_sublimation_J_kg": 2838976.405455783,
+    "vapor_molecular_speed_m_s": 550.4038020072895,
+    "dry_air_density_kg_m3": 1.3648104568804351,
+    "vapor_mean_free_path_m": 6.250361051755916e-08,
+    "boundary_offset_m": 5.8233587762153325e-08,
+    "thermal_jump_length_m": 1.592442091268182e-07,
+    "characteristic_supersaturation_a": 0.005999887831000041,
+    "characteristic_supersaturation_c": 0.02252439143580627,
+    "vapor_gas_constant_J_kg_K": 461.5,
+    "dry_air_gas_constant_J_kg_K": 287.0,
+    "dry_air_heat_capacity_J_kg_K": 1004.0,
+    "decimal_precision": 15.0
+  },
+  "kinetic_speed_m_s": 0.0002025347810908033,
+  "kinetic_length_m": 1.3755936614592466e-07,
+  "matched_energy_comparison": {
+    "temperature_C": -15.3,
+    "broad_prism_sigma0": 0.03614114911875973,
+    "broad_implied_ledge_energy_J_m": 2.2956096500944645e-12,
+    "microscopy_ledge_energy_J_m": 8.5e-10,
+    "microscopy_energy_to_broad_ratio": 370.2720102980149,
+    "equivalent_polynuclear_sigma0": 4955.000754336827,
+    "equivalent_barrier_to_broad_ratio": 137101.3616101333,
+    "temperature_matched_reported_peak": true
+  },
+  "required_low_sigma_humidity_fraction": 0.0027007172354052526,
+  "cases": [
+    {
+      "apparent_sigma": 0.001,
+      "apparent": {
+        "step_coefficient_m_s": 1.953793319082024e-05,
+        "lateral_step_velocity_m_s": 1.9537933190820242e-08,
+        "spacing_m": 0.0003767187682557346,
+        "normal_rate_m_s": 2.0226743625492045e-14
+      },
+      "actual_surface_sigma": 2.7007172354052525e-06,
+      "inferred_beta_m_s": 0.007234349799633319,
+      "inferred_energy_J_m": 2.296754162273918e-12,
+      "reconstituted_spacing_m": 0.00037671876825573464,
+      "reconstituted_step_velocity_m_s": 1.953793319082024e-08,
+      "inferred_energy_to_broad_ratio": 1.000498565677055,
+      "effective_one_terrace_collection_length_m": 1.3930429167087432e-08,
+      "spiral_mean_attachment": 3.6978325321001255e-05,
+      "all_spiral_plane_path_needed_m": 1.3736918378825838,
+      "spacing_relative_residual": 2.220446049250313e-16,
+      "velocity_relative_residual": 2.220446049250313e-16
+    },
+    {
+      "apparent_sigma": 0.005,
+      "apparent": {
+        "step_coefficient_m_s": 1.953793319082024e-05,
+        "lateral_step_velocity_m_s": 9.76896659541012e-08,
+        "spacing_m": 7.549421564051925e-05,
+        "normal_rate_m_s": 5.046607796220482e-13
+      },
+      "actual_surface_sigma": 1.3503586177026263e-05,
+      "inferred_beta_m_s": 0.007234349799633319,
+      "inferred_energy_J_m": 2.3013283655601855e-12,
+      "reconstituted_spacing_m": 7.549421564051924e-05,
+      "reconstituted_step_velocity_m_s": 9.76896659541012e-08,
+      "inferred_energy_to_broad_ratio": 1.0024911532609586,
+      "effective_one_terrace_collection_length_m": 1.3930429167087432e-08,
+      "spiral_mean_attachment": 0.00018452313265191,
+      "all_spiral_plane_path_needed_m": 0.2752870219684106,
+      "spacing_relative_residual": 2.220446049250313e-16,
+      "velocity_relative_residual": 0.0
+    },
+    {
+      "apparent_sigma": 0.01,
+      "apparent": {
+        "step_coefficient_m_s": 1.953793319082024e-05,
+        "lateral_step_velocity_m_s": 1.953793319082024e-07,
+        "spacing_m": 3.7841006485783494e-05,
+        "normal_rate_m_s": 2.0136340578791366e-12
+      },
+      "actual_surface_sigma": 2.7007172354052526e-05,
+      "inferred_beta_m_s": 0.007234349799633319,
+      "inferred_energy_J_m": 2.3070375101738e-12,
+      "reconstituted_spacing_m": 3.78410064857835e-05,
+      "reconstituted_step_velocity_m_s": 1.953793319082024e-07,
+      "inferred_energy_to_broad_ratio": 1.0049781373235058,
+      "effective_one_terrace_collection_length_m": 1.3930429167087432e-08,
+      "spiral_mean_attachment": 0.0003681305139788225,
+      "all_spiral_plane_path_needed_m": 0.13798590919020773,
+      "spacing_relative_residual": 2.220446049250313e-16,
+      "velocity_relative_residual": 0.0
+    },
+    {
+      "apparent_sigma": 0.02,
+      "apparent": {
+        "step_coefficient_m_s": 1.953793319082024e-05,
+        "lateral_step_velocity_m_s": 3.907586638164048e-07,
+        "spacing_m": 1.9014170630937678e-05,
+        "normal_rate_m_s": 8.01485806803673e-12
+      },
+      "actual_surface_sigma": 5.401434470810505e-05,
+      "inferred_beta_m_s": 0.007234349799633319,
+      "inferred_energy_J_m": 2.3184273683161904e-12,
+      "reconstituted_spacing_m": 1.9014170630937678e-05,
+      "reconstituted_step_velocity_m_s": 3.907586638164048e-07,
+      "inferred_energy_to_broad_ratio": 1.00993972046632,
+      "effective_one_terrace_collection_length_m": 1.3930429167087432e-08,
+      "spiral_mean_attachment": 0.0007326340673740161,
+      "all_spiral_plane_path_needed_m": 0.06933450945585645,
+      "spacing_relative_residual": 0.0,
+      "velocity_relative_residual": 0.0
+    },
+    {
+      "apparent_sigma": 0.05,
+      "apparent": {
+        "step_coefficient_m_s": 1.953793319082024e-05,
+        "lateral_step_velocity_m_s": 9.768966595410122e-07,
+        "spacing_m": 7.717345099370026e-06,
+        "normal_rate_m_s": 4.9367974648703387e-11
+      },
+      "actual_surface_sigma": 0.00013503586177026264,
+      "inferred_beta_m_s": 0.007234349799633319,
+      "inferred_energy_J_m": 2.3523744061008336e-12,
+      "reconstituted_spacing_m": 7.717345099370024e-06,
+      "reconstituted_step_velocity_m_s": 9.76896659541012e-07,
+      "inferred_energy_to_broad_ratio": 1.0247275297888878,
+      "effective_one_terrace_collection_length_m": 1.3930429167087432e-08,
+      "spiral_mean_attachment": 0.0018050805021307896,
+      "all_spiral_plane_path_needed_m": 0.028141029506475575,
+      "spacing_relative_residual": 2.220446049250313e-16,
+      "velocity_relative_residual": 2.220446049250313e-16
+    }
+  ],
+  "planar_chamber_sensitivity": [
+    {
+      "supplied_chamber_length_m": 0.0002,
+      "mean_attachment": 0.25398411836013146,
+      "compatible_with_alpha_at_most_one": true,
+      "spiral_and_unit_attachment_mixtures": [
+        {
+          "apparent_sigma": 0.001,
+          "spiral_mean_attachment": 3.6978325321001255e-05,
+          "unit_attachment_area_fraction": 0.2539565309220283,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.005,
+          "spiral_mean_attachment": 0.00018452313265191,
+          "unit_attachment_area_fraction": 0.25384643576701976,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.01,
+          "spiral_mean_attachment": 0.0003681305139788225,
+          "unit_attachment_area_fraction": 0.2537093860128268,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.02,
+          "spiral_mean_attachment": 0.0007326340673740161,
+          "unit_attachment_area_fraction": 0.2534371609908379,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.05,
+          "spiral_mean_attachment": 0.0018050805021307896,
+          "unit_attachment_area_fraction": 0.2526350644870608,
+          "mixture_feasible": true
+        }
+      ]
+    },
+    {
+      "supplied_chamber_length_m": 0.002,
+      "mean_attachment": 0.025398411836013147,
+      "compatible_with_alpha_at_most_one": true,
+      "spiral_and_unit_attachment_mixtures": [
+        {
+          "apparent_sigma": 0.001,
+          "spiral_mean_attachment": 3.6978325321001255e-05,
+          "unit_attachment_area_fraction": 0.025362371368711528,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.005,
+          "spiral_mean_attachment": 0.00018452313265191,
+          "unit_attachment_area_fraction": 0.025218542107751873,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.01,
+          "spiral_mean_attachment": 0.0003681305139788225,
+          "unit_attachment_area_fraction": 0.025039499125717245,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.02,
+          "spiral_mean_attachment": 0.0007326340673740161,
+          "unit_attachment_area_fraction": 0.024683862006859715,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.05,
+          "spiral_mean_attachment": 0.0018050805021307896,
+          "unit_attachment_area_fraction": 0.023635996209789085,
+          "mixture_feasible": true
+        }
+      ]
+    },
+    {
+      "supplied_chamber_length_m": 0.016,
+      "mean_attachment": 0.0031748014795016434,
+      "compatible_with_alpha_at_most_one": true,
+      "spiral_and_unit_attachment_mixtures": [
+        {
+          "apparent_sigma": 0.001,
+          "spiral_mean_attachment": 3.6978325321001255e-05,
+          "unit_attachment_area_fraction": 0.0031379391899168446,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.005,
+          "spiral_mean_attachment": 0.00018452313265191,
+          "unit_attachment_area_fraction": 0.002990830224211935,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.01,
+          "spiral_mean_attachment": 0.0003681305139788225,
+          "unit_attachment_area_fraction": 0.0028077045672482625,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.02,
+          "spiral_mean_attachment": 0.0007326340673740161,
+          "unit_attachment_area_fraction": 0.002443957938972948,
+          "mixture_feasible": true
+        },
+        {
+          "apparent_sigma": 0.05,
+          "spiral_mean_attachment": 0.0018050805021307896,
+          "unit_attachment_area_fraction": 0.0013721979050543322,
+          "mixture_feasible": true
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "The humidity ratio is chosen to reconcile two energy inferences, not independently measured or calibrated against a chamber field.",
+    "At nonzero supersaturation, exactly preserving the measured spacing requires the logarithmic correction shown. A single low-sigma energy differs slightly from that exact reconstruction.",
+    "Measured lateral velocity and spacing, and hence normal growth at that measurement, are unchanged by the inversion.",
+    "The effective migration length assumes one collecting terrace and unit attachment near a step. It is not a measurement of prism surface diffusion.",
+    "The required path and two-surface mixture test whether the measured spiral face alone could sustain the hypothesized depletion. Unit-attachment patches are a supplied upper-efficiency sink, not observed rough-area measurements.",
+    "The ideal planar chamber lengths are supplied alternatives; the 2022 chamber geometry, active ice area and local humidity remain unresolved.",
+    "The 2015 reanalysis concerns basal data and estimates its own migration length only within roughly a factor of three. It motivates a test, not a correction transferred to the 2022 prism experiment.",
+    "No corrected parameters are inserted into the Earth or lunar growth calculations."
+  ]
+}

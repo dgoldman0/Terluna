@@ -1,0 +1,1267 @@
+{
+  "schema": "terluna.atmosphere.spatial-crystal-assessment/1",
+  "evidence": "numerical moving-interface controls and conditional coarse Earth restart; no morphology validation",
+  "selected_section": "earth",
+  "selected_warm_case": "fine_terraces",
+  "historical_checkpoint": {
+    "revision": "fd5fa37904382a39d7ef82806421027719afd608",
+    "path": "atmosphere/snow/results/spatial_crystal_assessment.json",
+    "sha256": "3de7aad5d9d8c58e8ab1509c9a7feff051ea0ffc0a3d606e016dd7e19537bb4a",
+    "all_historical_input_hashes_verified": true,
+    "scope": "Previous completed controls and explicit failed fine-terrace case; sources are resolved at this revision, not current files."
+  },
+  "numpy_version": "2.3.3",
+  "scipy_version": "1.16.2",
+  "per_case_wall_limit_s": 1200.0,
+  "native_build_identity": {
+    "schema": "terluna.atmosphere.facet-attachment-build/1",
+    "producer": {
+      "facet_attachment.py": "baca6d3f663c9d40b157d805b0be797c88d491dc84e180e9a9ee5bd2d5db7506",
+      "facet_attachment_driver.f90": "a94c7501db2fc925f8ac0f26ae29fd222acb102d845bef172c9a7600bb400949"
+    },
+    "source_path": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/growth_physics_sources/harrington2021_code/depcoeffparamsubs.f90",
+    "source_sha256": "f6a05f4ca899a2e08851b8cc3c65f449ab819104c9f79b868be75fa779637ef1",
+    "source_doi": "https://doi.org/10.26208/s7de-et44",
+    "source_url": "https://www.datacommons.psu.edu/download/meteorology/harrington/Harrington_CodeCalculateDepositionCoefficients2021.zip",
+    "archive_sha256": "34cbab3aea0bde80794c4edd9c994d1d406484b265f047cb486e93c86d7e8259",
+    "precision": "double",
+    "stable_capacitance": true,
+    "flags": [
+      "-O0",
+      "-std=legacy",
+      "-fno-fast-math",
+      "-fcheck=all",
+      "-finit-real=snan",
+      "-ffpe-trap=invalid,zero,overflow",
+      "-ffree-line-length-none",
+      "-fdefault-real-8",
+      "-fdefault-double-8"
+    ],
+    "commands": [
+      [
+        "/usr/bin/x86_64-linux-gnu-gfortran-13",
+        "-O0",
+        "-std=legacy",
+        "-fno-fast-math",
+        "-fcheck=all",
+        "-finit-real=snan",
+        "-ffpe-trap=invalid,zero,overflow",
+        "-ffree-line-length-none",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "native_demo.f90",
+        "-o",
+        "native_demo"
+      ],
+      [
+        "/usr/bin/x86_64-linux-gnu-gfortran-13",
+        "-O0",
+        "-std=legacy",
+        "-fno-fast-math",
+        "-fcheck=all",
+        "-finit-real=snan",
+        "-ffpe-trap=invalid,zero,overflow",
+        "-ffree-line-length-none",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "-fPIC",
+        "-shared",
+        "native_routines.f90",
+        "facet_attachment_driver.f90",
+        "-o",
+        "libfacet_attachment.so"
+      ]
+    ],
+    "compiler_path": "/usr/bin/x86_64-linux-gnu-gfortran-13",
+    "compiler_sha256": "142861efc95f49e33705852027dae8c2e5382fd1155fcec6116ef973f25d8f84",
+    "compiler_version": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "files": {
+      "native_demo.f90": "4da96cadbbc0418faf0848e669a2fbdc9247507303cefce684785039621e4b59",
+      "native_routines.f90": "937ee57b4c891fb76f6a7628be9627df70209c49bd32ef7d9df27d2f1f32d508",
+      "source.patch": "6ea549706c61f2271bc69f95c1251d0f22308768ac1bb8bf1a7712b3e4abb3bf",
+      "facet_attachment_driver.f90": "a94c7501db2fc925f8ac0f26ae29fd222acb102d845bef172c9a7600bb400949",
+      "native_demo": "bd29d994bc0ccecb3946049ff2a01e8e70e772a3f3ae4d5a04ad488ef266beb8",
+      "libfacet_attachment.so": "23cd9d31a06aa6aa27b7e98436804cf2fd0ef0374095ed121187add287ff0fa3",
+      "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native_demo.stdout": "8cf687e5e13d331f0ef42fc3c50f053a5c7ce957acec1a8ab39992c6e33f5804",
+      "depcoeffparamtest.dat": "0d2231e6dfcd668368d6035d86e0a679dcfb2c08c2fa193c1d8bca739922f8e1"
+    },
+    "patches": [
+      "Remove exactly two unused scratio_a/c assignments reading uninitialized scrat_low/hi.",
+      "Extract routines after the published main program for the shared library.",
+      "Replace only spheroid capacitance arithmetic with equivalent factored eccentricity/asin and asinh forms."
+    ],
+    "wrapper": "C-double interface converts inputs to native REAL; original coefficient operations unchanged.",
+    "source_limits": [
+      "Positive ice supersaturation; no sublimation.",
+      "Characteristic-supersaturation fits guarded to -70 through -1 C; m in [1,15].",
+      "Native coefficients have an existing floor of 1e-6.",
+      "No ventilation input; assumes source air transport properties.",
+      "Source metadata requires annual notification of customization; no notification sent."
+    ],
+    "evidence": "Compiled published component; native demo is a numerical reference, not empirical validation."
+  },
+  "inputs": [
+    {
+      "path": "atmosphere/snow/spatial_crystal_assessment.py",
+      "sha256": "0fc2ab46b0e8df7211f241c9f8acf07dc4c0219bda3b4fd83988348de0eb1a47"
+    },
+    {
+      "path": "atmosphere/snow/spatial_crystal_growth.py",
+      "sha256": "fc1759191167d69c81b07d83d4929fcc64268380d8b9ba620e9b0a35d54c3f5b"
+    },
+    {
+      "path": "atmosphere/snow/spatial_diffusion.py",
+      "sha256": "f4e9eddfc3d8127a0f96c494e1c5ed02898a83d80130c128744081291497ad9c"
+    },
+    {
+      "path": "atmosphere/snow/spatial_facet_growth.py",
+      "sha256": "ece3fe4d2f30aebe493e9f12f4f11c67b999f25c3f4824d06b1d211c36341996"
+    },
+    {
+      "path": "atmosphere/snow/facet_attachment.py",
+      "sha256": "baca6d3f663c9d40b157d805b0be797c88d491dc84e180e9a9ee5bd2d5db7506"
+    },
+    {
+      "path": "atmosphere/snow/facet_growth.py",
+      "sha256": "99c0eab83ccb6daa35829b54c3428d237b49c7a7fc38489b416527ecca7eacd5"
+    },
+    {
+      "path": "atmosphere/snow/takahashi_growth.py",
+      "sha256": "cb49d30ce7878bd441ac6821f5128e53f06075a37dbd94aa4e9cd0fd91784bed"
+    },
+    {
+      "path": "atmosphere/snow/crystal_transport_replay.py",
+      "sha256": "ed8b583430cd9abc191e22ddd185997988d28682c54dcfd9f337a61e9e91042f"
+    },
+    {
+      "path": "atmosphere/snow/spatial_growth_sources.json",
+      "sha256": "c57e0a0a37acbd701793a7289ea06f2896c6b984d0f17470a8ac6761b88fd948"
+    },
+    {
+      "path": "atmosphere/snow/crystal_morphology_sources.json",
+      "sha256": "6bfa6e5e79d8b1b8aaa19ceb80d8eadcb766ab1bd8a71fe968579f032711be1e"
+    },
+    {
+      "path": "shared/constants.json",
+      "sha256": "dc8713f43c948069cd20a94484126c3465f3c3349cddf8a3497e4dfdd2a1c455"
+    }
+  ],
+  "warm_restarts": {
+    "temperature_K": 267.84999999999997,
+    "pressure_Pa": 101000.0,
+    "ice_supersaturation": 0.05183485345190064,
+    "air": {
+      "alpha_a": 0.07582658163292082,
+      "alpha_c": 0.17388288402270677,
+      "alpha_t": 0.96,
+      "capacitance_m": 3.348149070240388e-05,
+      "boundary_capacitance_m": 3.354215549314181e-05,
+      "diffusivity_m2_s": 2.037835665733673e-05,
+      "conductivity_W_m_K": 0.0234457619,
+      "ice_saturation_pressure_Pa": 391.95468958088713,
+      "latent_sublimation_J_kg": 2836475.436746154,
+      "vapor_molecular_speed_m_s": 560.9752266211232,
+      "dry_air_density_kg_m3": 1.3138561743760322,
+      "vapor_mean_free_path_m": 6.492764039995431e-08,
+      "boundary_offset_m": 6.049201660691397e-08,
+      "thermal_jump_length_m": 1.6738423628545944e-07,
+      "characteristic_supersaturation_a": 0.004036860788000002,
+      "characteristic_supersaturation_c": 0.0022697434617755703,
+      "vapor_gas_constant_J_kg_K": 461.5,
+      "dry_air_gas_constant_J_kg_K": 287.0,
+      "dry_air_heat_capacity_J_kg_K": 1004.0,
+      "decimal_precision": 15.0
+    },
+    "ventilation_air": {
+      "temperature_K": 267.84999999999997,
+      "pressure_Pa": 101000.0,
+      "vapor_pressure_Pa": 412.27160347509766,
+      "ice_saturation_pressure_Pa": 391.57308295975565,
+      "density_kg_m3": 1.3116239481125576,
+      "viscosity_Pa_s": 1.6797883922602768e-05,
+      "diffusivity_m2_s": 1.733447718472268e-05,
+      "conductivity_W_m_K": 0.02309068994295443
+    },
+    "observed_initial": {
+      "age_min": 3.0,
+      "mass_kg": 7.56e-11,
+      "equatorial_dimension_m": 5.940508792684347e-05,
+      "polar_dimension_m": 8.263388681648591e-05,
+      "diameter_m": 8.263388681648591e-05,
+      "habit": "hollow column to sheaths/needle"
+    },
+    "seed_tip_rim_m": 2e-06,
+    "cases": [
+      {
+        "dx_m": 5e-07,
+        "label": "terraces",
+        "surface_diffusion_length_m": 1.4e-08,
+        "capillary_length_m": 1e-09,
+        "seed": {
+          "profile": "inner_radius_squared_power_law",
+          "power": 0.35742322258214454,
+          "tip_rim_m": 2e-06,
+          "mass_fraction_of_cylinder": 0.3591789989577731
+        },
+        "complete": true,
+        "error": null,
+        "target_elapsed_s": 300.0,
+        "trace": [
+          {
+            "a_occupied_m": 2.9999999999999997e-05,
+            "c_occupied_m": 4.15e-05,
+            "time_s": 0.0,
+            "events": 0,
+            "a_m": 2.95e-05,
+            "c_m": 4.1e-05,
+            "mass_kg": 7.560000000000002e-11,
+            "mass_ledger_relative_residual": 0.0
+          },
+          {
+            "a_occupied_m": 3.45e-05,
+            "c_occupied_m": 4.8e-05,
+            "time_s": 60.0,
+            "events": 747,
+            "a_m": 3.4e-05,
+            "c_m": 4.7499999999999996e-05,
+            "mass_kg": 1.4201359816920006e-10,
+            "mass_ledger_relative_residual": 2.730308344643612e-16
+          },
+          {
+            "a_occupied_m": 3.85e-05,
+            "c_occupied_m": 5.35e-05,
+            "time_s": 120.0,
+            "events": 1538,
+            "a_m": 3.7999999999999995e-05,
+            "c_m": 5.3e-05,
+            "mass_kg": 2.1787449200111297e-10,
+            "mass_ledger_relative_residual": 4.745740339745705e-16
+          },
+          {
+            "a_occupied_m": 4.2e-05,
+            "c_occupied_m": 5.85e-05,
+            "time_s": 180.0,
+            "events": 2335,
+            "a_m": 4.15e-05,
+            "c_m": 5.8e-05,
+            "mass_kg": 3.0262564595387326e-10,
+            "mass_ledger_relative_residual": 7.687535752207833e-16
+          },
+          {
+            "a_occupied_m": 4.5499999999999995e-05,
+            "c_occupied_m": 6.35e-05,
+            "time_s": 240.0,
+            "events": 3176,
+            "a_m": 4.4999999999999996e-05,
+            "c_m": 6.3e-05,
+            "mass_kg": 3.960531234406482e-10,
+            "mass_ledger_relative_residual": 1.5664198126384443e-15
+          },
+          {
+            "a_occupied_m": 4.9e-05,
+            "c_occupied_m": 6.8e-05,
+            "time_s": 300.0,
+            "events": 4006,
+            "a_m": 4.85e-05,
+            "c_m": 6.75e-05,
+            "mass_kg": 4.978215802895037e-10,
+            "mass_ledger_relative_residual": 4.1540013797312094e-16
+          }
+        ],
+        "final": {
+          "a_occupied_m": 4.9e-05,
+          "c_occupied_m": 6.8e-05,
+          "time_s": 300.0,
+          "events": 4006,
+          "a_m": 4.85e-05,
+          "c_m": 6.75e-05,
+          "mass_kg": 4.978215802895037e-10,
+          "mass_ledger_relative_residual": 4.1540013797312094e-16
+        },
+        "final_profile": [
+          {
+            "z_lower_m": 0.0,
+            "z_upper_m": 5e-07,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 4.680490994990011e-09
+          },
+          {
+            "z_lower_m": 5e-07,
+            "z_upper_m": 1e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 4.519407680483469e-09
+          },
+          {
+            "z_lower_m": 1e-06,
+            "z_upper_m": 1.5e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 4.402403007267822e-09
+          },
+          {
+            "z_lower_m": 1.5e-06,
+            "z_upper_m": 2e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 4.293100742441079e-09
+          },
+          {
+            "z_lower_m": 2e-06,
+            "z_upper_m": 2.4999999999999998e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 4.215636707714394e-09
+          },
+          {
+            "z_lower_m": 2.4999999999999998e-06,
+            "z_upper_m": 3e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 4.150260175106538e-09
+          },
+          {
+            "z_lower_m": 3e-06,
+            "z_upper_m": 3.5e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 4.090636680802723e-09
+          },
+          {
+            "z_lower_m": 3.5e-06,
+            "z_upper_m": 4e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 4.038690292864831e-09
+          },
+          {
+            "z_lower_m": 4e-06,
+            "z_upper_m": 4.5e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.99283080066765e-09
+          },
+          {
+            "z_lower_m": 4.5e-06,
+            "z_upper_m": 4.9999999999999996e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.950887933328839e-09
+          },
+          {
+            "z_lower_m": 4.9999999999999996e-06,
+            "z_upper_m": 5.5e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.908622497097914e-09
+          },
+          {
+            "z_lower_m": 5.5e-06,
+            "z_upper_m": 6e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.869489541409318e-09
+          },
+          {
+            "z_lower_m": 6e-06,
+            "z_upper_m": 6.5e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.835786652235294e-09
+          },
+          {
+            "z_lower_m": 6.5e-06,
+            "z_upper_m": 7e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.8003747192900384e-09
+          },
+          {
+            "z_lower_m": 7e-06,
+            "z_upper_m": 7.499999999999999e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.768603567883125e-09
+          },
+          {
+            "z_lower_m": 7.499999999999999e-06,
+            "z_upper_m": 8e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.737283335975081e-09
+          },
+          {
+            "z_lower_m": 8e-06,
+            "z_upper_m": 8.5e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.7077641603329335e-09
+          },
+          {
+            "z_lower_m": 8.5e-06,
+            "z_upper_m": 9e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.679167804389397e-09
+          },
+          {
+            "z_lower_m": 9e-06,
+            "z_upper_m": 9.499999999999999e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.6516774233032197e-09
+          },
+          {
+            "z_lower_m": 9.499999999999999e-06,
+            "z_upper_m": 9.999999999999999e-06,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.623406898208157e-09
+          },
+          {
+            "z_lower_m": 9.999999999999999e-06,
+            "z_upper_m": 1.05e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.600433951871214e-09
+          },
+          {
+            "z_lower_m": 1.05e-05,
+            "z_upper_m": 1.1e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.5731471548542856e-09
+          },
+          {
+            "z_lower_m": 1.1e-05,
+            "z_upper_m": 1.15e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.5501273966975476e-09
+          },
+          {
+            "z_lower_m": 1.15e-05,
+            "z_upper_m": 1.2e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.5280696588950033e-09
+          },
+          {
+            "z_lower_m": 1.2e-05,
+            "z_upper_m": 1.2499999999999999e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.50178939788176e-09
+          },
+          {
+            "z_lower_m": 1.2499999999999999e-05,
+            "z_upper_m": 1.3e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.481592079458757e-09
+          },
+          {
+            "z_lower_m": 1.3e-05,
+            "z_upper_m": 1.35e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.4623919651425133e-09
+          },
+          {
+            "z_lower_m": 1.35e-05,
+            "z_upper_m": 1.4e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.437116964383715e-09
+          },
+          {
+            "z_lower_m": 1.4e-05,
+            "z_upper_m": 1.45e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.4161690963204652e-09
+          },
+          {
+            "z_lower_m": 1.45e-05,
+            "z_upper_m": 1.4999999999999999e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.4011111460900285e-09
+          },
+          {
+            "z_lower_m": 1.4999999999999999e-05,
+            "z_upper_m": 1.55e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.380207224332635e-09
+          },
+          {
+            "z_lower_m": 1.55e-05,
+            "z_upper_m": 1.6e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.3569753102154844e-09
+          },
+          {
+            "z_lower_m": 1.6e-05,
+            "z_upper_m": 1.6499999999999998e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.3411879243179568e-09
+          },
+          {
+            "z_lower_m": 1.6499999999999998e-05,
+            "z_upper_m": 1.7e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.3277711031568297e-09
+          },
+          {
+            "z_lower_m": 1.7e-05,
+            "z_upper_m": 1.75e-05,
+            "filled_outer_radius_m": 3.9999999999999996e-05,
+            "occupied_outer_radius_m": 4.0499999999999995e-05,
+            "ice_area_m2": 3.3086916798085934e-09
+          },
+          {
+            "z_lower_m": 1.75e-05,
+            "z_upper_m": 1.8e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.285629012902391e-09
+          },
+          {
+            "z_lower_m": 1.8e-05,
+            "z_upper_m": 1.85e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.265861511121418e-09
+          },
+          {
+            "z_lower_m": 1.85e-05,
+            "z_upper_m": 1.8999999999999998e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.251480723555644e-09
+          },
+          {
+            "z_lower_m": 1.8999999999999998e-05,
+            "z_upper_m": 1.95e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.232035576948665e-09
+          },
+          {
+            "z_lower_m": 1.95e-05,
+            "z_upper_m": 1.9999999999999998e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.209196426076138e-09
+          },
+          {
+            "z_lower_m": 1.9999999999999998e-05,
+            "z_upper_m": 2.05e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.1880371661239728e-09
+          },
+          {
+            "z_lower_m": 2.05e-05,
+            "z_upper_m": 2.1e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.1726936705638507e-09
+          },
+          {
+            "z_lower_m": 2.1e-05,
+            "z_upper_m": 2.1499999999999997e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.158104561194598e-09
+          },
+          {
+            "z_lower_m": 2.1499999999999997e-05,
+            "z_upper_m": 2.2e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.1385400739443254e-09
+          },
+          {
+            "z_lower_m": 2.2e-05,
+            "z_upper_m": 2.2499999999999998e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.1183100007604835e-09
+          },
+          {
+            "z_lower_m": 2.2499999999999998e-05,
+            "z_upper_m": 2.3e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.0997408928471093e-09
+          },
+          {
+            "z_lower_m": 2.3e-05,
+            "z_upper_m": 2.35e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.083132321208883e-09
+          },
+          {
+            "z_lower_m": 2.35e-05,
+            "z_upper_m": 2.4e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.06692601407348e-09
+          },
+          {
+            "z_lower_m": 2.4e-05,
+            "z_upper_m": 2.45e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.049188405930836e-09
+          },
+          {
+            "z_lower_m": 2.45e-05,
+            "z_upper_m": 2.4999999999999998e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.0308627242108607e-09
+          },
+          {
+            "z_lower_m": 2.4999999999999998e-05,
+            "z_upper_m": 2.55e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.014198805961558e-09
+          },
+          {
+            "z_lower_m": 2.55e-05,
+            "z_upper_m": 2.6e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 3.0006379348468737e-09
+          },
+          {
+            "z_lower_m": 2.6e-05,
+            "z_upper_m": 2.65e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 2.9884596683807115e-09
+          },
+          {
+            "z_lower_m": 2.65e-05,
+            "z_upper_m": 2.7e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 2.973018467393742e-09
+          },
+          {
+            "z_lower_m": 2.7e-05,
+            "z_upper_m": 2.7499999999999998e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 2.955576289486369e-09
+          },
+          {
+            "z_lower_m": 2.7499999999999998e-05,
+            "z_upper_m": 2.8e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 2.9426444896653778e-09
+          },
+          {
+            "z_lower_m": 2.8e-05,
+            "z_upper_m": 2.8499999999999998e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 2.9348542568049413e-09
+          },
+          {
+            "z_lower_m": 2.8499999999999998e-05,
+            "z_upper_m": 2.9e-05,
+            "filled_outer_radius_m": 3.95e-05,
+            "occupied_outer_radius_m": 3.9999999999999996e-05,
+            "ice_area_m2": 2.930029392575149e-09
+          },
+          {
+            "z_lower_m": 2.9e-05,
+            "z_upper_m": 2.95e-05,
+            "filled_outer_radius_m": 3.9e-05,
+            "occupied_outer_radius_m": 3.95e-05,
+            "ice_area_m2": 2.897962478876559e-09
+          },
+          {
+            "z_lower_m": 2.95e-05,
+            "z_upper_m": 2.9999999999999997e-05,
+            "filled_outer_radius_m": 3.9e-05,
+            "occupied_outer_radius_m": 3.95e-05,
+            "ice_area_m2": 2.8700670540447338e-09
+          },
+          {
+            "z_lower_m": 2.9999999999999997e-05,
+            "z_upper_m": 3.05e-05,
+            "filled_outer_radius_m": 3.9e-05,
+            "occupied_outer_radius_m": 3.95e-05,
+            "ice_area_m2": 2.844130720532866e-09
+          },
+          {
+            "z_lower_m": 3.05e-05,
+            "z_upper_m": 3.1e-05,
+            "filled_outer_radius_m": 3.9e-05,
+            "occupied_outer_radius_m": 4.45e-05,
+            "ice_area_m2": 3.087438147347507e-09
+          },
+          {
+            "z_lower_m": 3.1e-05,
+            "z_upper_m": 3.15e-05,
+            "filled_outer_radius_m": 4.45e-05,
+            "occupied_outer_radius_m": 4.4999999999999996e-05,
+            "ice_area_m2": 3.6143668593932645e-09
+          },
+          {
+            "z_lower_m": 3.15e-05,
+            "z_upper_m": 3.2e-05,
+            "filled_outer_radius_m": 4.45e-05,
+            "occupied_outer_radius_m": 4.4999999999999996e-05,
+            "ice_area_m2": 3.864709003352023e-09
+          },
+          {
+            "z_lower_m": 3.2e-05,
+            "z_upper_m": 3.25e-05,
+            "filled_outer_radius_m": 4.45e-05,
+            "occupied_outer_radius_m": 4.4999999999999996e-05,
+            "ice_area_m2": 4.022443548776483e-09
+          },
+          {
+            "z_lower_m": 3.25e-05,
+            "z_upper_m": 3.2999999999999996e-05,
+            "filled_outer_radius_m": 4.45e-05,
+            "occupied_outer_radius_m": 4.4999999999999996e-05,
+            "ice_area_m2": 4.170738327946489e-09
+          },
+          {
+            "z_lower_m": 3.2999999999999996e-05,
+            "z_upper_m": 3.35e-05,
+            "filled_outer_radius_m": 4.45e-05,
+            "occupied_outer_radius_m": 4.4999999999999996e-05,
+            "ice_area_m2": 4.202279137205568e-09
+          },
+          {
+            "z_lower_m": 3.35e-05,
+            "z_upper_m": 3.4e-05,
+            "filled_outer_radius_m": 4.45e-05,
+            "occupied_outer_radius_m": 4.4999999999999996e-05,
+            "ice_area_m2": 4.19324442714014e-09
+          },
+          {
+            "z_lower_m": 3.4e-05,
+            "z_upper_m": 3.45e-05,
+            "filled_outer_radius_m": 4.45e-05,
+            "occupied_outer_radius_m": 4.4999999999999996e-05,
+            "ice_area_m2": 4.185168418428564e-09
+          },
+          {
+            "z_lower_m": 3.45e-05,
+            "z_upper_m": 3.5e-05,
+            "filled_outer_radius_m": 4.45e-05,
+            "occupied_outer_radius_m": 4.4999999999999996e-05,
+            "ice_area_m2": 4.182824020835e-09
+          },
+          {
+            "z_lower_m": 3.5e-05,
+            "z_upper_m": 3.5499999999999996e-05,
+            "filled_outer_radius_m": 4.4e-05,
+            "occupied_outer_radius_m": 4.45e-05,
+            "ice_area_m2": 4.186649967872891e-09
+          },
+          {
+            "z_lower_m": 3.5499999999999996e-05,
+            "z_upper_m": 3.6e-05,
+            "filled_outer_radius_m": 4.4e-05,
+            "occupied_outer_radius_m": 4.45e-05,
+            "ice_area_m2": 4.193245002390667e-09
+          },
+          {
+            "z_lower_m": 3.6e-05,
+            "z_upper_m": 3.65e-05,
+            "filled_outer_radius_m": 4.4e-05,
+            "occupied_outer_radius_m": 4.45e-05,
+            "ice_area_m2": 4.2023827077158255e-09
+          },
+          {
+            "z_lower_m": 3.65e-05,
+            "z_upper_m": 3.7e-05,
+            "filled_outer_radius_m": 4.4e-05,
+            "occupied_outer_radius_m": 4.45e-05,
+            "ice_area_m2": 4.2144150325345095e-09
+          },
+          {
+            "z_lower_m": 3.7e-05,
+            "z_upper_m": 3.75e-05,
+            "filled_outer_radius_m": 4.4e-05,
+            "occupied_outer_radius_m": 4.45e-05,
+            "ice_area_m2": 4.2324375320621475e-09
+          },
+          {
+            "z_lower_m": 3.75e-05,
+            "z_upper_m": 3.7999999999999995e-05,
+            "filled_outer_radius_m": 4.4e-05,
+            "occupied_outer_radius_m": 4.45e-05,
+            "ice_area_m2": 4.239318213611174e-09
+          },
+          {
+            "z_lower_m": 3.7999999999999995e-05,
+            "z_upper_m": 3.85e-05,
+            "filled_outer_radius_m": 4.4e-05,
+            "occupied_outer_radius_m": 4.45e-05,
+            "ice_area_m2": 4.245055006730954e-09
+          },
+          {
+            "z_lower_m": 3.85e-05,
+            "z_upper_m": 3.9e-05,
+            "filled_outer_radius_m": 4.4e-05,
+            "occupied_outer_radius_m": 4.45e-05,
+            "ice_area_m2": 4.249387717470969e-09
+          },
+          {
+            "z_lower_m": 3.9e-05,
+            "z_upper_m": 3.95e-05,
+            "filled_outer_radius_m": 4.4e-05,
+            "occupied_outer_radius_m": 4.6e-05,
+            "ice_area_m2": 4.554156501562168e-09
+          },
+          {
+            "z_lower_m": 3.95e-05,
+            "z_upper_m": 3.9999999999999996e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.65e-05,
+            "ice_area_m2": 4.839181074219658e-09
+          },
+          {
+            "z_lower_m": 3.9999999999999996e-05,
+            "z_upper_m": 4.0499999999999995e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.65e-05,
+            "ice_area_m2": 4.855955449433802e-09
+          },
+          {
+            "z_lower_m": 4.0499999999999995e-05,
+            "z_upper_m": 4.1e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.65e-05,
+            "ice_area_m2": 4.858148754123905e-09
+          },
+          {
+            "z_lower_m": 4.1e-05,
+            "z_upper_m": 4.15e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.65e-05,
+            "ice_area_m2": 4.871835830922906e-09
+          },
+          {
+            "z_lower_m": 4.15e-05,
+            "z_upper_m": 4.2e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.65e-05,
+            "ice_area_m2": 4.89269711919167e-09
+          },
+          {
+            "z_lower_m": 4.2e-05,
+            "z_upper_m": 4.2499999999999996e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.65e-05,
+            "ice_area_m2": 4.90027021005937e-09
+          },
+          {
+            "z_lower_m": 4.2499999999999996e-05,
+            "z_upper_m": 4.2999999999999995e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.65e-05,
+            "ice_area_m2": 4.9930906569082266e-09
+          },
+          {
+            "z_lower_m": 4.2999999999999995e-05,
+            "z_upper_m": 4.35e-05,
+            "filled_outer_radius_m": 4.65e-05,
+            "occupied_outer_radius_m": 4.7e-05,
+            "ice_area_m2": 5.04172235943034e-09
+          },
+          {
+            "z_lower_m": 4.35e-05,
+            "z_upper_m": 4.4e-05,
+            "filled_outer_radius_m": 4.65e-05,
+            "occupied_outer_radius_m": 4.7e-05,
+            "ice_area_m2": 5.0572599682030966e-09
+          },
+          {
+            "z_lower_m": 4.4e-05,
+            "z_upper_m": 4.45e-05,
+            "filled_outer_radius_m": 4.65e-05,
+            "occupied_outer_radius_m": 4.7e-05,
+            "ice_area_m2": 5.065373375166472e-09
+          },
+          {
+            "z_lower_m": 4.45e-05,
+            "z_upper_m": 4.4999999999999996e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.65e-05,
+            "ice_area_m2": 5.070235096434156e-09
+          },
+          {
+            "z_lower_m": 4.4999999999999996e-05,
+            "z_upper_m": 4.5499999999999995e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.65e-05,
+            "ice_area_m2": 5.0513624479737654e-09
+          },
+          {
+            "z_lower_m": 4.5499999999999995e-05,
+            "z_upper_m": 4.6e-05,
+            "filled_outer_radius_m": 4.6e-05,
+            "occupied_outer_radius_m": 4.7e-05,
+            "ice_area_m2": 5.1110607715380376e-09
+          },
+          {
+            "z_lower_m": 4.6e-05,
+            "z_upper_m": 4.65e-05,
+            "filled_outer_radius_m": 4.7e-05,
+            "occupied_outer_radius_m": 4.7499999999999996e-05,
+            "ice_area_m2": 5.293130059874272e-09
+          },
+          {
+            "z_lower_m": 4.65e-05,
+            "z_upper_m": 4.7e-05,
+            "filled_outer_radius_m": 4.7e-05,
+            "occupied_outer_radius_m": 4.7499999999999996e-05,
+            "ice_area_m2": 5.358739146744934e-09
+          },
+          {
+            "z_lower_m": 4.7e-05,
+            "z_upper_m": 4.7499999999999996e-05,
+            "filled_outer_radius_m": 4.7e-05,
+            "occupied_outer_radius_m": 4.7499999999999996e-05,
+            "ice_area_m2": 5.346899367896459e-09
+          },
+          {
+            "z_lower_m": 4.7499999999999996e-05,
+            "z_upper_m": 4.8e-05,
+            "filled_outer_radius_m": 4.7e-05,
+            "occupied_outer_radius_m": 4.7499999999999996e-05,
+            "ice_area_m2": 5.3411278376832094e-09
+          },
+          {
+            "z_lower_m": 4.8e-05,
+            "z_upper_m": 4.85e-05,
+            "filled_outer_radius_m": 4.7e-05,
+            "occupied_outer_radius_m": 4.7499999999999996e-05,
+            "ice_area_m2": 5.311965459879304e-09
+          },
+          {
+            "z_lower_m": 4.85e-05,
+            "z_upper_m": 4.9e-05,
+            "filled_outer_radius_m": 4.7e-05,
+            "occupied_outer_radius_m": 4.7499999999999996e-05,
+            "ice_area_m2": 5.261588571905138e-09
+          },
+          {
+            "z_lower_m": 4.9e-05,
+            "z_upper_m": 4.95e-05,
+            "filled_outer_radius_m": 4.7e-05,
+            "occupied_outer_radius_m": 4.7499999999999996e-05,
+            "ice_area_m2": 5.259510866169302e-09
+          },
+          {
+            "z_lower_m": 4.95e-05,
+            "z_upper_m": 4.9999999999999996e-05,
+            "filled_outer_radius_m": 4.7499999999999996e-05,
+            "occupied_outer_radius_m": 4.8e-05,
+            "ice_area_m2": 5.275993225043138e-09
+          },
+          {
+            "z_lower_m": 4.9999999999999996e-05,
+            "z_upper_m": 5.05e-05,
+            "filled_outer_radius_m": 4.7499999999999996e-05,
+            "occupied_outer_radius_m": 4.8e-05,
+            "ice_area_m2": 5.285474834994941e-09
+          },
+          {
+            "z_lower_m": 5.05e-05,
+            "z_upper_m": 5.1e-05,
+            "filled_outer_radius_m": 4.7499999999999996e-05,
+            "occupied_outer_radius_m": 4.8e-05,
+            "ice_area_m2": 5.279636016806349e-09
+          },
+          {
+            "z_lower_m": 5.1e-05,
+            "z_upper_m": 5.15e-05,
+            "filled_outer_radius_m": 4.7499999999999996e-05,
+            "occupied_outer_radius_m": 4.8e-05,
+            "ice_area_m2": 5.277991553874193e-09
+          },
+          {
+            "z_lower_m": 5.15e-05,
+            "z_upper_m": 5.2e-05,
+            "filled_outer_radius_m": 4.7499999999999996e-05,
+            "occupied_outer_radius_m": 4.8e-05,
+            "ice_area_m2": 5.281255196968369e-09
+          },
+          {
+            "z_lower_m": 5.2e-05,
+            "z_upper_m": 5.2499999999999995e-05,
+            "filled_outer_radius_m": 4.7499999999999996e-05,
+            "occupied_outer_radius_m": 4.8e-05,
+            "ice_area_m2": 5.287551449034834e-09
+          },
+          {
+            "z_lower_m": 5.2499999999999995e-05,
+            "z_upper_m": 5.3e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 5.265138931949874e-09
+          },
+          {
+            "z_lower_m": 5.3e-05,
+            "z_upper_m": 5.35e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 5.220360663584995e-09
+          },
+          {
+            "z_lower_m": 5.35e-05,
+            "z_upper_m": 5.4e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 5.2341138079661685e-09
+          },
+          {
+            "z_lower_m": 5.4e-05,
+            "z_upper_m": 5.4499999999999997e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 5.226909117289126e-09
+          },
+          {
+            "z_lower_m": 5.4499999999999997e-05,
+            "z_upper_m": 5.4999999999999995e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 5.1952303595338324e-09
+          },
+          {
+            "z_lower_m": 5.4999999999999995e-05,
+            "z_upper_m": 5.55e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 5.15887603402976e-09
+          },
+          {
+            "z_lower_m": 5.55e-05,
+            "z_upper_m": 5.6e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 5.100825011243492e-09
+          },
+          {
+            "z_lower_m": 5.6e-05,
+            "z_upper_m": 5.65e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 5.0565518774374565e-09
+          },
+          {
+            "z_lower_m": 5.65e-05,
+            "z_upper_m": 5.6999999999999996e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 5.018737125643692e-09
+          },
+          {
+            "z_lower_m": 5.6999999999999996e-05,
+            "z_upper_m": 5.7499999999999995e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 4.986143141835354e-09
+          },
+          {
+            "z_lower_m": 5.7499999999999995e-05,
+            "z_upper_m": 5.8e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 4.948202637639675e-09
+          },
+          {
+            "z_lower_m": 5.8e-05,
+            "z_upper_m": 5.85e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 4.907830784645033e-09
+          },
+          {
+            "z_lower_m": 5.85e-05,
+            "z_upper_m": 5.9e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 4.870256932025371e-09
+          },
+          {
+            "z_lower_m": 5.9e-05,
+            "z_upper_m": 5.9499999999999996e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 4.7981280501596935e-09
+          },
+          {
+            "z_lower_m": 5.9499999999999996e-05,
+            "z_upper_m": 5.9999999999999995e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 4.65603564779959e-09
+          },
+          {
+            "z_lower_m": 5.9999999999999995e-05,
+            "z_upper_m": 6.05e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 4.457362118401419e-09
+          },
+          {
+            "z_lower_m": 6.05e-05,
+            "z_upper_m": 6.1e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 4.377266729389469e-09
+          },
+          {
+            "z_lower_m": 6.1e-05,
+            "z_upper_m": 6.149999999999999e-05,
+            "filled_outer_radius_m": 4.8e-05,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 4.207542325640712e-09
+          },
+          {
+            "z_lower_m": 6.149999999999999e-05,
+            "z_upper_m": 6.2e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 3.8071054628875015e-09
+          },
+          {
+            "z_lower_m": 6.2e-05,
+            "z_upper_m": 6.25e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 3.4817182731083597e-09
+          },
+          {
+            "z_lower_m": 6.25e-05,
+            "z_upper_m": 6.3e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 3.39103383588625e-09
+          },
+          {
+            "z_lower_m": 6.3e-05,
+            "z_upper_m": 6.35e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 3.3269231210382756e-09
+          },
+          {
+            "z_lower_m": 6.35e-05,
+            "z_upper_m": 6.4e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 3.2358899985408646e-09
+          },
+          {
+            "z_lower_m": 6.4e-05,
+            "z_upper_m": 6.45e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 3.085757048704074e-09
+          },
+          {
+            "z_lower_m": 6.45e-05,
+            "z_upper_m": 6.5e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 2.7991960170264173e-09
+          },
+          {
+            "z_lower_m": 6.5e-05,
+            "z_upper_m": 6.549999999999999e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 2.7134694480778374e-09
+          },
+          {
+            "z_lower_m": 6.549999999999999e-05,
+            "z_upper_m": 6.599999999999999e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 2.550202253676734e-09
+          },
+          {
+            "z_lower_m": 6.599999999999999e-05,
+            "z_upper_m": 6.65e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 2.2548849269615954e-09
+          },
+          {
+            "z_lower_m": 6.65e-05,
+            "z_upper_m": 6.7e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 1.981676338431371e-09
+          },
+          {
+            "z_lower_m": 6.7e-05,
+            "z_upper_m": 6.75e-05,
+            "filled_outer_radius_m": 4.85e-05,
+            "occupied_outer_radius_m": 4.9e-05,
+            "ice_area_m2": 1.4851518716493459e-09
+          },
+          {
+            "z_lower_m": 6.75e-05,
+            "z_upper_m": 6.8e-05,
+            "filled_outer_radius_m": 0.0,
+            "occupied_outer_radius_m": 4.85e-05,
+            "ice_area_m2": 3.067583804276399e-10
+          }
+        ],
+        "wall_elapsed_s": 759.0535966729512,
+        "max_water_residual": 2.5871552224077844e-09,
+        "max_nonlinear_residual": 9.990992659602168e-10,
+        "max_trapped_vapor_upper_bound_kg": 8.468862471041278e-22,
+        "max_closed_air_cells": 1,
+        "observed_fit_at_actual_final_age": {
+          "age_min": 8.0,
+          "mass_kg": 5.376000000000001e-10,
+          "equatorial_dimension_m": 8.456144324491043e-05,
+          "polar_dimension_m": 0.00040168617590891667,
+          "diameter_m": 0.00040168617590891667,
+          "habit": "hollow column to sheaths/needle"
+        },
+        "final_to_observed_ratios_a_c_mass": [
+          1.1470948966547851,
+          0.33608326125370963,
+          0.9260074038123206
+        ]
+      }
+    ],
+    "limits": [
+      "The observed initial mass and dimensions constrain an unmeasured hollow profile; the declared initial rim is supplied.",
+      "Fit ages 3 to 8 minutes; ventilation uses prescribed observed size and fall speed, not predicted drag.",
+      "0.5 and 1 micrometre grids do not resolve the roughly 0.15 micrometre kinetic/tip length; these are coarse diagnostics.",
+      "The 2015 terrace rule uses n_SD=x_s/molecular_step pixels; its physical collection distance changes with grid spacing.",
+      "Local case disables rough-kink promotion; terrace case includes both rough kinks and terrace-distance enhancement.",
+      "No adjoining-facet surface transfer, stochastic step sources, substrate, three-dimensional branching, riming or aggregation.",
+      "Sealed voxel air has no exterior supply; its partial ice is frozen and the entire trapped-vapour inventory is bounded separately. Internal transient deposition and sublimation are absent.",
+      "Whole-fit dimensions and mass have no supplied joint uncertainty. No trajectory is adopted as an Earth or lunar growth law."
+    ]
+  }
+}

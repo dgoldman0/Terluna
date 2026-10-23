@@ -1,0 +1,567 @@
+{
+  "schema": "terluna.atmosphere.spatial-seed-resolution/1",
+  "evidence": "local stationary flux and seed-discretization control; no trajectory or morphology validation",
+  "inputs": [
+    {
+      "path": "atmosphere/snow/spatial_seed_resolution.py",
+      "sha256": "b00578c7d9f37e3b628473c39d86265b98db3cbd39b1a35a49bf6c57246bb7ba"
+    },
+    {
+      "path": "atmosphere/snow/spatial_crystal_growth.py",
+      "sha256": "fc1759191167d69c81b07d83d4929fcc64268380d8b9ba620e9b0a35d54c3f5b"
+    },
+    {
+      "path": "atmosphere/snow/spatial_crystal_assessment.py",
+      "sha256": "0fc2ab46b0e8df7211f241c9f8acf07dc4c0219bda3b4fd83988348de0eb1a47"
+    },
+    {
+      "path": "atmosphere/snow/spatial_diffusion.py",
+      "sha256": "f4e9eddfc3d8127a0f96c494e1c5ed02898a83d80130c128744081291497ad9c"
+    },
+    {
+      "path": "atmosphere/snow/spatial_facet_growth.py",
+      "sha256": "ece3fe4d2f30aebe493e9f12f4f11c67b999f25c3f4824d06b1d211c36341996"
+    },
+    {
+      "path": "atmosphere/snow/facet_attachment.py",
+      "sha256": "baca6d3f663c9d40b157d805b0be797c88d491dc84e180e9a9ee5bd2d5db7506"
+    },
+    {
+      "path": "atmosphere/snow/facet_growth.py",
+      "sha256": "99c0eab83ccb6daa35829b54c3428d237b49c7a7fc38489b416527ecca7eacd5"
+    },
+    {
+      "path": "atmosphere/snow/takahashi_growth.py",
+      "sha256": "cb49d30ce7878bd441ac6821f5128e53f06075a37dbd94aa4e9cd0fd91784bed"
+    },
+    {
+      "path": "atmosphere/snow/crystal_transport_replay.py",
+      "sha256": "ed8b583430cd9abc191e22ddd185997988d28682c54dcfd9f337a61e9e91042f"
+    },
+    {
+      "path": "shared/constants.json",
+      "sha256": "dc8713f43c948069cd20a94484126c3465f3c3349cddf8a3497e4dfdd2a1c455"
+    }
+  ],
+  "native_build_identity": {
+    "schema": "terluna.atmosphere.facet-attachment-build/1",
+    "producer": {
+      "facet_attachment.py": "baca6d3f663c9d40b157d805b0be797c88d491dc84e180e9a9ee5bd2d5db7506",
+      "facet_attachment_driver.f90": "a94c7501db2fc925f8ac0f26ae29fd222acb102d845bef172c9a7600bb400949"
+    },
+    "source_path": "/home/kir/Documents/Projects/terluna-atmosphere/research/runs/snow_scale/growth_physics_sources/harrington2021_code/depcoeffparamsubs.f90",
+    "source_sha256": "f6a05f4ca899a2e08851b8cc3c65f449ab819104c9f79b868be75fa779637ef1",
+    "source_doi": "https://doi.org/10.26208/s7de-et44",
+    "source_url": "https://www.datacommons.psu.edu/download/meteorology/harrington/Harrington_CodeCalculateDepositionCoefficients2021.zip",
+    "archive_sha256": "34cbab3aea0bde80794c4edd9c994d1d406484b265f047cb486e93c86d7e8259",
+    "precision": "double",
+    "stable_capacitance": true,
+    "flags": [
+      "-O0",
+      "-std=legacy",
+      "-fno-fast-math",
+      "-fcheck=all",
+      "-finit-real=snan",
+      "-ffpe-trap=invalid,zero,overflow",
+      "-ffree-line-length-none",
+      "-fdefault-real-8",
+      "-fdefault-double-8"
+    ],
+    "commands": [
+      [
+        "/usr/bin/x86_64-linux-gnu-gfortran-13",
+        "-O0",
+        "-std=legacy",
+        "-fno-fast-math",
+        "-fcheck=all",
+        "-finit-real=snan",
+        "-ffpe-trap=invalid,zero,overflow",
+        "-ffree-line-length-none",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "native_demo.f90",
+        "-o",
+        "native_demo"
+      ],
+      [
+        "/usr/bin/x86_64-linux-gnu-gfortran-13",
+        "-O0",
+        "-std=legacy",
+        "-fno-fast-math",
+        "-fcheck=all",
+        "-finit-real=snan",
+        "-ffpe-trap=invalid,zero,overflow",
+        "-ffree-line-length-none",
+        "-fdefault-real-8",
+        "-fdefault-double-8",
+        "-fPIC",
+        "-shared",
+        "native_routines.f90",
+        "facet_attachment_driver.f90",
+        "-o",
+        "libfacet_attachment.so"
+      ]
+    ],
+    "compiler_path": "/usr/bin/x86_64-linux-gnu-gfortran-13",
+    "compiler_sha256": "142861efc95f49e33705852027dae8c2e5382fd1155fcec6116ef973f25d8f84",
+    "compiler_version": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "files": {
+      "native_demo.f90": "4da96cadbbc0418faf0848e669a2fbdc9247507303cefce684785039621e4b59",
+      "native_routines.f90": "937ee57b4c891fb76f6a7628be9627df70209c49bd32ef7d9df27d2f1f32d508",
+      "source.patch": "6ea549706c61f2271bc69f95c1251d0f22308768ac1bb8bf1a7712b3e4abb3bf",
+      "facet_attachment_driver.f90": "a94c7501db2fc925f8ac0f26ae29fd222acb102d845bef172c9a7600bb400949",
+      "native_demo": "bd29d994bc0ccecb3946049ff2a01e8e70e772a3f3ae4d5a04ad488ef266beb8",
+      "libfacet_attachment.so": "23cd9d31a06aa6aa27b7e98436804cf2fd0ef0374095ed121187add287ff0fa3",
+      "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native_demo.stdout": "8cf687e5e13d331f0ef42fc3c50f053a5c7ce957acec1a8ab39992c6e33f5804",
+      "depcoeffparamtest.dat": "0d2231e6dfcd668368d6035d86e0a679dcfb2c08c2fa193c1d8bca739922f8e1"
+    },
+    "patches": [
+      "Remove exactly two unused scratio_a/c assignments reading uninitialized scrat_low/hi.",
+      "Extract routines after the published main program for the shared library.",
+      "Replace only spheroid capacitance arithmetic with equivalent factored eccentricity/asin and asinh forms."
+    ],
+    "wrapper": "C-double interface converts inputs to native REAL; original coefficient operations unchanged.",
+    "source_limits": [
+      "Positive ice supersaturation; no sublimation.",
+      "Characteristic-supersaturation fits guarded to -70 through -1 C; m in [1,15].",
+      "Native coefficients have an existing floor of 1e-6.",
+      "No ventilation input; assumes source air transport properties.",
+      "Source metadata requires annual notification of customization; no notification sent."
+    ],
+    "evidence": "Compiled published component; native demo is a numerical reference, not empirical validation."
+  },
+  "temperature_K": 267.84999999999997,
+  "pressure_Pa": 101000.0,
+  "ice_supersaturation": 0.05183485345190064,
+  "observed": {
+    "age_min": 3.0,
+    "mass_kg": 7.56e-11,
+    "equatorial_dimension_m": 5.940508792684347e-05,
+    "polar_dimension_m": 8.263388681648591e-05,
+    "diameter_m": 8.263388681648591e-05,
+    "habit": "hollow column to sheaths/needle"
+  },
+  "air": {
+    "alpha_a": 0.07582658163292082,
+    "alpha_c": 0.17388288402270677,
+    "alpha_t": 0.96,
+    "capacitance_m": 3.348149070240388e-05,
+    "boundary_capacitance_m": 3.354215549314181e-05,
+    "diffusivity_m2_s": 2.037835665733673e-05,
+    "conductivity_W_m_K": 0.0234457619,
+    "ice_saturation_pressure_Pa": 391.95468958088713,
+    "latent_sublimation_J_kg": 2836475.436746154,
+    "vapor_molecular_speed_m_s": 560.9752266211232,
+    "dry_air_density_kg_m3": 1.3138561743760322,
+    "vapor_mean_free_path_m": 6.492764039995431e-08,
+    "boundary_offset_m": 6.049201660691397e-08,
+    "thermal_jump_length_m": 1.6738423628545944e-07,
+    "characteristic_supersaturation_a": 0.004036860788000002,
+    "characteristic_supersaturation_c": 0.0022697434617755703,
+    "vapor_gas_constant_J_kg_K": 461.5,
+    "dry_air_gas_constant_J_kg_K": 287.0,
+    "dry_air_heat_capacity_J_kg_K": 1004.0,
+    "decimal_precision": 15.0
+  },
+  "ventilation": 1.0260604484486349,
+  "fitted_rates_a_c_mass": [
+    5.940508792684347e-08,
+    4.476002202559653e-07,
+    8.400000000000001e-13
+  ],
+  "cases": [
+    {
+      "dx_m": 1e-06,
+      "kinetics": "M1",
+      "seed": {
+        "profile": "inner_radius_squared_power_law",
+        "power": 0.35742322258214454,
+        "tip_rim_m": 2e-06,
+        "mass_fraction_of_cylinder": 0.3591789989577731
+      },
+      "filled_initial": {
+        "a_occupied_m": 2.9999999999999997e-05,
+        "c_occupied_m": 4.2e-05,
+        "time_s": 0.0,
+        "events": 0,
+        "a_m": 2.9e-05,
+        "c_m": 4.1e-05,
+        "mass_kg": 7.560000000000002e-11,
+        "mass_ledger_relative_residual": 0.0
+      },
+      "cells": 6009,
+      "probe_elapsed_s": 1e-05,
+      "probe_filled_cell_events": 0,
+      "rates_a_c_mass": [
+        5.617602325640353e-08,
+        1.3517229152535796e-07,
+        9.83376668707905e-13
+      ],
+      "ratios_to_fitted_rates": [
+        0.9456432978532666,
+        0.30199335346184175,
+        1.1706865103665534
+      ],
+      "surface_to_integrated_mass_relative_residual": 2.220446049250313e-16,
+      "step": {
+        "dt": 1e-05,
+        "iterations": 7,
+        "mass_residual": 8.296625018069641e-12,
+        "nonlinear_residual": 2.922951224939922e-12,
+        "heat_shift": 0.019530002240991568,
+        "enhanced_faces": 0,
+        "faces": 96,
+        "cells": 6009,
+        "closed_air_cells": 0,
+        "closed_gas_volume_m3": 0.0,
+        "trapped_vapor_upper_bound_kg": 0.0
+      },
+      "wall_elapsed_s": 0.14114786207210273
+    },
+    {
+      "dx_m": 5e-07,
+      "kinetics": "M1",
+      "seed": {
+        "profile": "inner_radius_squared_power_law",
+        "power": 0.35742322258214454,
+        "tip_rim_m": 2e-06,
+        "mass_fraction_of_cylinder": 0.3591789989577731
+      },
+      "filled_initial": {
+        "a_occupied_m": 2.9999999999999997e-05,
+        "c_occupied_m": 4.15e-05,
+        "time_s": 0.0,
+        "events": 0,
+        "a_m": 2.95e-05,
+        "c_m": 4.1e-05,
+        "mass_kg": 7.560000000000002e-11,
+        "mass_ledger_relative_residual": 0.0
+      },
+      "cells": 12981,
+      "probe_elapsed_s": 1e-05,
+      "probe_filled_cell_events": 0,
+      "rates_a_c_mass": [
+        5.4770965401406995e-08,
+        1.4799767179428847e-07,
+        9.981814446273518e-13
+      ],
+      "ratios_to_fitted_rates": [
+        0.9219911511427551,
+        0.33064700394842145,
+        1.1883112436039902
+      ],
+      "surface_to_integrated_mass_relative_residual": 4.440892098500626e-16,
+      "step": {
+        "dt": 1e-05,
+        "iterations": 8,
+        "mass_residual": 2.6799639770599327e-12,
+        "nonlinear_residual": 2.2753866104219433e-13,
+        "heat_shift": 0.019548668131370416,
+        "enhanced_faces": 0,
+        "faces": 197,
+        "cells": 12981,
+        "closed_air_cells": 0,
+        "closed_gas_volume_m3": 0.0,
+        "trapped_vapor_upper_bound_kg": 0.0
+      },
+      "wall_elapsed_s": 0.31298343709204346
+    },
+    {
+      "dx_m": 2.5e-07,
+      "kinetics": "M1",
+      "seed": {
+        "profile": "inner_radius_squared_power_law",
+        "power": 0.35742322258214454,
+        "tip_rim_m": 2e-06,
+        "mass_fraction_of_cylinder": 0.3591789989577731
+      },
+      "filled_initial": {
+        "a_occupied_m": 2.9749999999999998e-05,
+        "c_occupied_m": 4.15e-05,
+        "time_s": 0.0,
+        "events": 0,
+        "a_m": 2.95e-05,
+        "c_m": 4.125e-05,
+        "mass_kg": 7.560000000000002e-11,
+        "mass_ledger_relative_residual": 0.0
+      },
+      "cells": 33052,
+      "probe_elapsed_s": 5.739425663818716e-06,
+      "probe_filled_cell_events": 1,
+      "rates_a_c_mass": [
+        5.433117773828819e-08,
+        1.5196324745837105e-07,
+        1.002076190226139e-12
+      ],
+      "ratios_to_fitted_rates": [
+        0.9145879525537657,
+        0.3395066413762467,
+        1.1929478455073084
+      ],
+      "surface_to_integrated_mass_relative_residual": 2.220446049250313e-16,
+      "step": {
+        "dt": 5.739425663818716e-06,
+        "iterations": 8,
+        "mass_residual": 5.732993225892423e-11,
+        "nonlinear_residual": 4.852184405484403e-13,
+        "heat_shift": 0.019553865258132314,
+        "enhanced_faces": 0,
+        "faces": 403,
+        "cells": 33052,
+        "closed_air_cells": 0,
+        "closed_gas_volume_m3": 0.0,
+        "trapped_vapor_upper_bound_kg": 0.0
+      },
+      "wall_elapsed_s": 0.8396303410409018
+    },
+    {
+      "dx_m": 1.25e-07,
+      "kinetics": "M1",
+      "seed": {
+        "profile": "inner_radius_squared_power_law",
+        "power": 0.35742322258214454,
+        "tip_rim_m": 2e-06,
+        "mass_fraction_of_cylinder": 0.3591789989577731
+      },
+      "filled_initial": {
+        "a_occupied_m": 2.9749999999999998e-05,
+        "c_occupied_m": 4.1374999999999996e-05,
+        "time_s": 0.0,
+        "events": 0,
+        "a_m": 2.9625e-05,
+        "c_m": 4.125e-05,
+        "mass_kg": 7.560000000000004e-11,
+        "mass_ledger_relative_residual": 0.0
+      },
+      "cells": 97842,
+      "probe_elapsed_s": 1e-05,
+      "probe_filled_cell_events": 0,
+      "rates_a_c_mass": [
+        5.399735399555466e-08,
+        1.4995366909974005e-07,
+        1.0055456881937335e-12
+      ],
+      "ratios_to_fitted_rates": [
+        0.9089685055605279,
+        0.3350169689683962,
+        1.197078200230635
+      ],
+      "surface_to_integrated_mass_relative_residual": 2.220446049250313e-16,
+      "step": {
+        "dt": 1e-05,
+        "iterations": 8,
+        "mass_residual": 1.3949387718057902e-10,
+        "nonlinear_residual": 1.2911586514673936e-11,
+        "heat_shift": 0.01955912905597564,
+        "enhanced_faces": 0,
+        "faces": 818,
+        "cells": 97842,
+        "closed_air_cells": 0,
+        "closed_gas_volume_m3": 0.0,
+        "trapped_vapor_upper_bound_kg": 0.0
+      },
+      "wall_elapsed_s": 3.0088410390308127
+    },
+    {
+      "dx_m": 6.25e-08,
+      "kinetics": "M1",
+      "seed": {
+        "profile": "inner_radius_squared_power_law",
+        "power": 0.35742322258214454,
+        "tip_rim_m": 2e-06,
+        "mass_fraction_of_cylinder": 0.3591789989577731
+      },
+      "filled_initial": {
+        "a_occupied_m": 2.9749999999999998e-05,
+        "c_occupied_m": 4.1374999999999996e-05,
+        "time_s": 0.0,
+        "events": 0,
+        "a_m": 2.96875e-05,
+        "c_m": 4.13125e-05,
+        "mass_kg": 7.559999999999999e-11,
+        "mass_ledger_relative_residual": 0.0
+      },
+      "cells": 322077,
+      "probe_elapsed_s": 1e-05,
+      "probe_filled_cell_events": 0,
+      "rates_a_c_mass": [
+        5.379065286643131e-08,
+        1.4754871870334977e-07,
+        1.0079304102899905e-12
+      ],
+      "ratios_to_fitted_rates": [
+        0.9054889866112772,
+        0.3296439814506176,
+        1.1999171551071315
+      ],
+      "surface_to_integrated_mass_relative_residual": 0.0,
+      "step": {
+        "dt": 1e-05,
+        "iterations": 8,
+        "mass_residual": 1.305547354345698e-10,
+        "nonlinear_residual": 1.0578499831871649e-10,
+        "heat_shift": 0.01956225616364263,
+        "enhanced_faces": 0,
+        "faces": 1658,
+        "cells": 322077,
+        "closed_air_cells": 0,
+        "closed_gas_volume_m3": 0.0,
+        "trapped_vapor_upper_bound_kg": 0.0
+      },
+      "wall_elapsed_s": 15.30019605497364
+    },
+    {
+      "dx_m": 1.25e-07,
+      "kinetics": "fast_basal",
+      "seed": {
+        "profile": "inner_radius_squared_power_law",
+        "power": 0.35742322258214454,
+        "tip_rim_m": 2e-06,
+        "mass_fraction_of_cylinder": 0.3591789989577731
+      },
+      "filled_initial": {
+        "a_occupied_m": 2.9749999999999998e-05,
+        "c_occupied_m": 4.1374999999999996e-05,
+        "time_s": 0.0,
+        "events": 0,
+        "a_m": 2.9625e-05,
+        "c_m": 4.125e-05,
+        "mass_kg": 7.560000000000004e-11,
+        "mass_ledger_relative_residual": 0.0
+      },
+      "cells": 97842,
+      "probe_elapsed_s": 1e-05,
+      "probe_filled_cell_events": 0,
+      "rates_a_c_mass": [
+        5.2868091587513216e-08,
+        1.8614563091104324e-07,
+        1.008107186658203e-12
+      ],
+      "ratios_to_fitted_rates": [
+        0.8899589821770743,
+        0.41587475270810575,
+        1.2001276031645274
+      ],
+      "surface_to_integrated_mass_relative_residual": 2.220446049250313e-16,
+      "step": {
+        "dt": 1e-05,
+        "iterations": 7,
+        "mass_residual": 1.3143361905032935e-10,
+        "nonlinear_residual": 1.2117563835913635e-11,
+        "heat_shift": 0.01960895342464888,
+        "enhanced_faces": 0,
+        "faces": 818,
+        "cells": 97842,
+        "closed_air_cells": 0,
+        "closed_gas_volume_m3": 0.0,
+        "trapped_vapor_upper_bound_kg": 0.0
+      },
+      "wall_elapsed_s": 2.6008515070425346
+    },
+    {
+      "dx_m": 1.25e-07,
+      "kinetics": "inactive_prism_fast_basal",
+      "seed": {
+        "profile": "inner_radius_squared_power_law",
+        "power": 0.35742322258214454,
+        "tip_rim_m": 2e-06,
+        "mass_fraction_of_cylinder": 0.3591789989577731
+      },
+      "filled_initial": {
+        "a_occupied_m": 2.9749999999999998e-05,
+        "c_occupied_m": 4.1374999999999996e-05,
+        "time_s": 0.0,
+        "events": 0,
+        "a_m": 2.9625e-05,
+        "c_m": 4.125e-05,
+        "mass_kg": 7.560000000000004e-11,
+        "mass_ledger_relative_residual": 0.0
+      },
+      "cells": 97842,
+      "probe_elapsed_s": 5.893224197342626e-06,
+      "probe_filled_cell_events": 1,
+      "rates_a_c_mass": [
+        1.1832232163362207e-17,
+        6.684187478205631e-07,
+        6.7284340135616e-13
+      ],
+      "ratios_to_fitted_rates": [
+        1.991787669422093e-10,
+        1.4933387374973144,
+        0.8010040492335238
+      ],
+      "surface_to_integrated_mass_relative_residual": 1.1102230246251565e-16,
+      "step": {
+        "dt": 5.893224197342626e-06,
+        "iterations": 2,
+        "mass_residual": 1.0316143669659242e-10,
+        "nonlinear_residual": 8.930649744082178e-13,
+        "heat_shift": 0.013087650891007238,
+        "enhanced_faces": 0,
+        "faces": 818,
+        "cells": 97842,
+        "closed_air_cells": 0,
+        "closed_gas_volume_m3": 0.0,
+        "trapped_vapor_upper_bound_kg": 0.0
+      },
+      "wall_elapsed_s": 1.0259147160686553
+    },
+    {
+      "dx_m": 1.25e-07,
+      "kinetics": "fast_all",
+      "seed": {
+        "profile": "inner_radius_squared_power_law",
+        "power": 0.35742322258214454,
+        "tip_rim_m": 2e-06,
+        "mass_fraction_of_cylinder": 0.3591789989577731
+      },
+      "filled_initial": {
+        "a_occupied_m": 2.9749999999999998e-05,
+        "c_occupied_m": 4.1374999999999996e-05,
+        "time_s": 0.0,
+        "events": 0,
+        "a_m": 2.9625e-05,
+        "c_m": 4.125e-05,
+        "mass_kg": 7.560000000000004e-11,
+        "mass_ledger_relative_residual": 0.0
+      },
+      "cells": 97842,
+      "probe_elapsed_s": 1e-05,
+      "probe_filled_cell_events": 0,
+      "rates_a_c_mass": [
+        5.744128256966852e-08,
+        9.96833631856502e-08,
+        1.0345952502826742e-12
+      ],
+      "ratios_to_fitted_rates": [
+        0.966942135333705,
+        0.22270624247826584,
+        1.2316610122412788
+      ],
+      "surface_to_integrated_mass_relative_residual": 2.220446049250313e-16,
+      "step": {
+        "dt": 1e-05,
+        "iterations": 3,
+        "mass_residual": 1.0398154704812411e-10,
+        "nonlinear_residual": 8.359883583942503e-13,
+        "heat_shift": 0.02012417959647382,
+        "enhanced_faces": 0,
+        "faces": 818,
+        "cells": 97842,
+        "closed_air_cells": 0,
+        "closed_gas_volume_m3": 0.0,
+        "trapped_vapor_upper_bound_kg": 0.0
+      },
+      "wall_elapsed_s": 1.347036835970357
+    }
+  ],
+  "limits": [
+    "Prescribed 2 micrometre seed rim and exact fitted initial mass; partial boundary cells change the gas-interface envelope with resolution.",
+    "Local M1 kinetics with the diagonal-area weight and supplied curvature proxy; no terrace completion or adjoining-facet transfer.",
+    "The added controls set basal attachment to one, optionally prism attachment to one or an explicit near-inactive 1e-12. These are limiting hypotheses, not measured parameters or a coefficient floor.",
+    "A fully absorbing local face does not bound adjoining-facet redistribution or a different three-dimensional shape.",
+    "Reported side and top rates are area means on the outermost filled-cell terraces, not maximum-axis trajectory predictions.",
+    "One frozen initial geometry cannot establish convergence of an evolving history or validate the unmeasured seed."
+  ]
+}

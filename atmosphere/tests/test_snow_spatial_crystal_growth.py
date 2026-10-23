@@ -91,3 +91,59 @@ def test_tilted_surface_kinetic_uptake_converges_to_cone_area():
   errors.append(abs(inferred_area/(math.sqrt(2)*math.pi)-1))
  assert errors[-1]<.04
  assert errors[2]<errors[1]<errors[0]
+
+
+def test_sealed_air_is_excluded_from_ambient_supply_without_becoming_ice():
+ edges=np.arange(11.)
+ solid=np.zeros((10,10),bool);solid[:5,:5]=True;solid[2,2]=False
+ closed=MaskDomain(edges,edges,solid)
+ filled=solid.copy();filled[2,2]=True
+ reference=MaskDomain(edges,edges,filled)
+ assert closed.closed_air.sum()==1
+ assert not closed.solid[2,2]
+ assert closed.index[2,2]==-1
+ assert (closed.matrix-reference.matrix).count_nonzero()==0
+ laws=[Attachment('nucleation',1.,.006),Attachment('nucleation',1.,.002)]
+ got=closed.coupled(.05,100.,laws,.5)
+ expected=reference.coupled(.05,100.,laws,.5)
+ assert got['half_flux']==pytest.approx(expected['half_flux'],rel=1e-13)
+ assert got['relative_mass_residual']<1e-8
+
+
+def test_one_cell_open_channel_retains_its_gas_supply():
+ edges=np.arange(11.)
+ solid=np.zeros((10,10),bool);solid[:5,:5]=True;solid[2,2:6]=False
+ d=MaskDomain(edges,edges,solid)
+ assert not np.any(d.closed_air)
+ assert d.exterior_air[2,2]
+ assert d.index[2,2]>=0
+ result=d.coupled(.05,100.,[Attachment('constant',.2)]*2)
+ assert result['half_flux']>0
+ assert result['relative_mass_residual']<1e-8
+
+
+def test_reflecting_top_is_not_an_external_humidity_reservoir():
+ from atmosphere.snow.spatial_crystal_growth import exterior_air_masks
+ solid=np.zeros((8,8),bool);solid[2:6,2:8]=True;solid[3,3:8]=False
+ open_air,open_closed=exterior_air_masks(solid,reflect_top=False)
+ reflected_air,reflected_closed=exterior_air_masks(solid,reflect_top=True)
+ assert open_air[3,3] and not open_closed[3,3]
+ assert reflected_closed[3,3] and not reflected_air[3,3]
+
+
+def test_growth_freezes_sealed_partial_ice_and_bounds_its_finite_vapour():
+ air=dict(ice_saturation_pressure_Pa=400.,vapor_gas_constant_J_kg_K=460.,
+          vapor_molecular_speed_m_s=560.,latent_sublimation_J_kg=2.8e6,
+          diffusivity_m2_s=2e-5,conductivity_W_m_K=.024)
+ g=GrowingCrystal(1e-6,5e-6,5e-6,10,10,extent=4.,adaptive=False)
+ g.solid[2,2]=False;g.fraction[2,2]=.3;g.initial_mass=g.mass()
+ initial=g.mass()
+ result=g.advance(air,268.,.05,[Attachment('constant',.2)]*2,1.,kinks=False)
+ assert g.fraction[2,2]==.3
+ assert not g.solid[2,2]
+ assert g.mass()>initial
+ assert g.state()['mass_ledger_relative_residual']<1e-10
+ volume=2*math.pi*(3**2-2**2)*g.dx**3*.7
+ assert result['closed_gas_volume_m3']==pytest.approx(volume)
+ assert result['trapped_vapor_upper_bound_kg']==pytest.approx(400/(460*268)*1.05*volume)
+ assert result['closed_air_cells']==1
