@@ -179,7 +179,10 @@
         "../atmosphere/snow/results/uniform_face_assessment.json",
         "../atmosphere/snow/spatial_diffusion.py",
         "../atmosphere/snow/results/spatial_diffusion_assessment.json",
-        "../atmosphere/snow/spatial_growth_sources.json"
+        "../atmosphere/snow/spatial_growth_sources.json",
+        "../atmosphere/snow/spatial_facet_growth.py",
+        "../atmosphere/snow/spatial_facet_assessment.py",
+        "../atmosphere/snow/results/spatial_facet_assessment.json"
       ],
       "unresolved": [
         "upper-air temperature above ~1 Pa bounded by how near-infrared heating thermalises, not solved; the thermal column radiates CO2's 15-um band and the base's atomic oxygen and NO since 2026-10-08 (loss_response/infrared.py), with the oxygen atoms made above the base left out",
@@ -207,7 +210,7 @@
         "Hollow-crystal repair: 2026 published geometry routines reproduce 17000 archived numbers within 2.48e-6 relative error; a guarded local interface rejects eight converted hexagonal states beyond the source fit interval. Two substrate series provide 94 axis/rim measurements; a -50 C humidity step from 48% to 20% ice supersaturation widens the median rim by 3.58 times (2.65-4.57 under reported measurement-error bounds). Post-step derivative ratios remain unresolved under conservative errors. Sixty-nine warm size comparisons reuse the 1991 experiment, and eleven separate early points are duplicates. Full 2026 growth equations were not obtained (publisher 403, first-page author preview); the archive is a geometry component, not a complete growth solver. Joint mass/axes/rim evolution, lower-pressure validation and lunar aggregates remain open. See atmosphere/snow/earth_growth_assessment.md and results/hollow_growth_assessment.json.",
         "Explicit face-transport repair: 534 of 738 requested measured-shape comparisons calculate at two tolerances, with 180 unsupported-ventilation and 24 out-of-fit-geometry requests rejected. Of 516 solid-face hypotheses, 387 fail sampled necessary uniform-growth conditions. Warm-column common-corner growth produces basal-centre undersaturation; 18 prescribed narrow-rim sensitivities do not jointly repair mass and both axes. The inherited 2021 routine sets equal facet characteristics below -30 C; in the cylindrical common-corner model this forces equal axis speeds, excluded in two cold-chamber windows under reported measurement-error bounds. The third window remains unresolved, and all 94 measured rims exceed the declared narrow-ring regime. Full spatial hollow/branched geometry, independent facet kinetics and source locations remain necessary; complete 2026 equations remain unretrieved. See atmosphere/snow/earth_growth_assessment.md and results/uniform_face_assessment.json."
       ],
-      "next_session_task": "Snow: test the independently checked spatial diffusion component with separately constrained broad/narrow facet kinetics against warm mass and both axes and cold chamber rims. The old thin-ring resistance is inadequate in the tested masked-end control. Moving profiles, surface diffusion, substrate heat and low-pressure Earth validation remain required before lunar transfer."
+      "next_session_task": "Test evolving crystal profiles and physically constrained surface transport against Earth mass, both axes and rim histories. Published 2023 facet laws remove the inherited cold symmetry, but a near-match fails uniform local uptake conditions; retain measured forcing, source identities, mesh limits and low-pressure Earth controls before lunar transfer."
     },
     {
       "topic": "climate",

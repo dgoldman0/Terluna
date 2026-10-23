@@ -4,8 +4,8 @@
   "inputs": [
     {
       "path": "atmosphere/snow/spatial_diffusion.py",
-      "sha256": "5d3cb02781ec37c7437eb9e063fe5bc872e0993b1bec5296681d396d4fdfabba",
-      "bytes": 15015
+      "sha256": "f4e9eddfc3d8127a0f96c494e1c5ed02898a83d80130c128744081291497ad9c",
+      "bytes": 15916
     },
     {
       "path": "atmosphere/snow/spatial_diffusion_assessment.py",
@@ -14,8 +14,8 @@
     },
     {
       "path": "atmosphere/snow/spatial_growth_sources.json",
-      "sha256": "4dbb2fc10ad47232cd1686d75fb39d3f9bbe5a313b1d4389da4075cf33a6da9c",
-      "bytes": 5526
+      "sha256": "c57e0a0a37acbd701793a7289ea06f2896c6b984d0f17470a8ac6761b88fd948",
+      "bytes": 7966
     }
   ],
   "sphere_controls": [

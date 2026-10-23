@@ -85,14 +85,23 @@ def surface_flux(center, distance, kinetic_length_ratio, law):
     return kinetic_length_ratio*p, kinetic_length_ratio*dp/(1+k*dp), s
 
 
-def _axis(length, cells_per_radius, extent, breaks=()):
-    # Include prescribed cavity boundaries exactly. The maximum inner-cell
-    # width is 1/n; narrow rims receive at least four cells.
+def _axis(length, cells_per_radius, extent, breaks=(), mesh='uniform'):
+    # Include prescribed cavity boundaries exactly. The uniform option has
+    # maximum inner width 1/n; the edge option clusters points near interfaces.
     cuts = sorted(set([0., float(length), *[float(x) for x in breaks if 0 < x < length]]))
-    parts = [np.linspace(a, b, max(4, int(math.ceil((b-a)*cells_per_radius)))+1)[:-1]
-             for a, b in zip(cuts[:-1], cuts[1:])]
+    parts = []
+    for a, b in zip(cuts[:-1], cuts[1:]):
+        if mesh == 'edge':
+            # Resolve both sides of each rim and the singular exterior corner.
+            # The narrowest prescribed feature refines with n as well.
+            count = max(4, int(math.ceil(cells_per_radius/4)),
+                        int(math.ceil((b-a)*cells_per_radius/min(1.,length))))
+            part = a+(b-a)*.5*(1-np.cos(math.pi*np.linspace(0.,1.,count+1)))
+        else:
+            part = np.linspace(a,b,max(4,int(math.ceil((b-a)*cells_per_radius)))+1)
+        parts.append(part[:-1])
     values = list(np.concatenate(parts))+[float(length)]
-    step = 1/cells_per_radius
+    step = values[-1]-values[-2] if mesh == 'edge' else 1/cells_per_radius
     while values[-1] < extent:
         values.append(min(extent, values[-1]+step)); step *= 1.18
     return np.asarray(values)
@@ -105,7 +114,7 @@ class Domain:
     at the finite cylindrical domain boundary; refine extent separately from
     mesh. No far-field humidity tuning or nominal-infinity substitution occurs.
     """
-    def __init__(self, aspect=1., resolution=16, extent=12., *, cavity_radius=0., cavity_depth=0., shape='cylinder'):
+    def __init__(self, aspect=1., resolution=16, extent=12., *, cavity_radius=0., cavity_depth=0., shape='cylinder', mesh='uniform'):
         if not math.isfinite(aspect) or aspect <= 0 or int(resolution) != resolution or resolution < 4:
             raise ValueError('Positive aspect and integer resolution >= 4 required')
         if not math.isfinite(extent) or extent <= 2:
@@ -116,11 +125,16 @@ class Domain:
             raise ValueError('Cavity must lie inside cylinder envelope')
         if bool(cavity_radius) != bool(cavity_depth) or (shape == 'sphere' and cavity_radius):
             raise ValueError('Specify both cavity radius and depth for a cylinder')
+        if mesh not in ('uniform','edge'):
+            raise ValueError('Mesh must be uniform or edge')
+        self.mesh = mesh
         self.aspect = aspect; self.resolution = resolution; self.extent = extent
         self.cavity_radius = cavity_radius; self.cavity_depth = cavity_depth; self.shape = shape
         far = extent*max(1., aspect)
-        self.rf = _axis(1., resolution, far, (cavity_radius,))
-        self.zf = _axis(aspect, resolution, far, (aspect-cavity_depth,))
+        radial_breaks = (cavity_radius, 1-min(aspect,1.)) if mesh == 'edge' else (cavity_radius,)
+        vertical_breaks = (aspect-cavity_depth, aspect-min(1-cavity_radius,aspect)) if mesh == 'edge' else (aspect-cavity_depth,)
+        self.rf = _axis(1., resolution, far, radial_breaks, mesh)
+        self.zf = _axis(aspect, resolution, far, vertical_breaks, mesh)
         self.r = (self.rf[1:]+self.rf[:-1])/2; self.z = (self.zf[1:]+self.zf[:-1])/2
         rr, zz = np.meshgrid(self.r, self.z, indexing='ij')
         if shape == 'sphere':

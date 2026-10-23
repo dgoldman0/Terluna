@@ -1,5 +1,7 @@
 # Snow
 
+The [new facet-law tests](earth_growth_assessment.md#new-facet-laws-do-not-yet-close-the-earth-growth-test) compare published 2023 kinetics with all recorded chamber shapes and rims. They remove the inherited cold symmetry but reject an apparent two-axis match because its prescribed uptake fails local supply conditions. Source location, evolving profiles and surface transport remain unresolved.
+
 The [spatial diffusion control](earth_growth_assessment.md#spatial-diffusion-resolves-finite-rims-and-local-growth) now resolves prescribed cavities and local attachment, with analytic sphere, published cylinder and independent conservation checks. It exposes a substantial thin-ring approximation error; evolving morphology and Earth validation remain open.
 
 The [Earth growth assessment](earth_growth_assessment.md) isolates the late dendritic runaway and narrows the remaining transfer problem. A 240-case ventilation matrix reduces the revised spherical-start crystal from 195.39 to 4.68 mm against a fitted 4.17 mm, but fitted restarts and other habits retain errors. Another 288 humidity and seed-history executions show strong sensitivity to unreported early shape. Prescribing measured dimensions and fall speeds brings conditional mass uptake much closer to the Earth fits; this tests transport while leaving autonomous shape, branching and density evolution unresolved. The reference lunar snow zone overlaps terrestrial reduced-pressure conditions. No absolute lunar size distribution or storm optical forecast is adopted.
