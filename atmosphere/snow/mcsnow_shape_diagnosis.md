@@ -67,3 +67,5 @@ python -B -m atmosphere.snow.mcsnow_shape_controls assemble
 ```
 
 The next physical change must account jointly for effective axis growth and deposition density, and face the fitted restarts as well as the spherical seed. Humidity response, initial shape and independent mass/axis evidence must constrain that change before it is transferred to changing lunar weather. The checked pair interface can support this work with prescribed properties; evolving aggregate geometry, population water and heat feedback, breakup and the matched full Earth–Moon comparison remain open.
+
+The subsequent [automatic tuning study](mcsnow_tuning.md) searches the coupled uptake, directional-growth, density and branching controls. Its separate-history successes and failed transfers quantify the remaining initialization dependence; fixed-control refits show why a fitted coefficient alone does not identify the missing physics.

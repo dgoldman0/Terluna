@@ -1,0 +1,148 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-tuning-checks/1",
+  "product_sha256": "ac2ededf7891bc84398d1e8db0343ad0bc2f5f042e96cf3ffe7a93c355c150d4",
+  "raw_reassembly_exact": true,
+  "focused_tests": {
+    "command": "python -B -m pytest atmosphere/tests/test_snow_mcsnow_tuning.py -q",
+    "passed": 12,
+    "failed": 0
+  },
+  "numerical_checks": [
+    {
+      "name": "unchanged_adapter_parity",
+      "maximum_relative_difference": 1.5543122344752192e-15,
+      "passed": true
+    },
+    {
+      "name": "unit_directional_control_parity",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "timestep_shared_20261023",
+      "maximum_relative_difference": 0.0016382802698717835,
+      "passed": true
+    },
+    {
+      "name": "timestep_shared_20261024",
+      "maximum_relative_difference": 0.0015845826059993628,
+      "passed": true
+    },
+    {
+      "name": "timestep_temperature_m14p4",
+      "maximum_relative_difference": 0.0015792252321074063,
+      "passed": true
+    },
+    {
+      "name": "timestep_history_m14p4_sphere",
+      "maximum_relative_difference": 0.0014770558351530072,
+      "passed": true
+    },
+    {
+      "name": "cross_history_timestep_history_m14p4_sphere",
+      "maximum_relative_difference": 0.00024754861709685994,
+      "passed": true
+    },
+    {
+      "name": "timestep_history_m14p4_axes",
+      "maximum_relative_difference": 0.00017359194777943898,
+      "passed": true
+    },
+    {
+      "name": "cross_history_timestep_history_m14p4_axes",
+      "maximum_relative_difference": 0.00011109643261952851,
+      "passed": true
+    },
+    {
+      "name": "timestep_temperature_m5p3",
+      "maximum_relative_difference": 0.0008453002560158129,
+      "passed": true
+    },
+    {
+      "name": "timestep_history_m5p3_sphere",
+      "maximum_relative_difference": 0.0007970402834703849,
+      "passed": true
+    },
+    {
+      "name": "cross_history_timestep_history_m5p3_sphere",
+      "maximum_relative_difference": 0.00011377827314573707,
+      "passed": true
+    },
+    {
+      "name": "timestep_history_m5p3_axes",
+      "maximum_relative_difference": 0.00010251947129114036,
+      "passed": true
+    },
+    {
+      "name": "cross_history_timestep_history_m5p3_axes",
+      "maximum_relative_difference": 0.0002904042453601985,
+      "passed": true
+    },
+    {
+      "name": "timestep_lock_transport",
+      "maximum_relative_difference": 0.0012364451094031281,
+      "passed": true
+    },
+    {
+      "name": "timestep_lock_axis_ratio",
+      "maximum_relative_difference": 0.0017950049961624748,
+      "passed": true
+    },
+    {
+      "name": "timestep_lock_directional",
+      "maximum_relative_difference": 0.0018363972464598977,
+      "passed": true
+    },
+    {
+      "name": "timestep_lock_density",
+      "maximum_relative_difference": 0.001669893927899957,
+      "passed": true
+    },
+    {
+      "name": "timestep_lock_branch_radius",
+      "maximum_relative_difference": 0.0010750759432179846,
+      "passed": true
+    },
+    {
+      "name": "timestep_lock_ventilation",
+      "maximum_relative_difference": 0.0018221064192168734,
+      "passed": true
+    }
+  ],
+  "failed_evaluation_reasons": {
+    "Native worker terminated during trajectory": 680
+  },
+  "repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+    "status": "passed",
+    "returncode": 0,
+    "python_passed": 3733,
+    "python_skipped": 20,
+    "python_elapsed_s": 451.75,
+    "javascript_passed": 191,
+    "javascript_failed": 0,
+    "javascript_groups": [
+      129,
+      48,
+      14
+    ],
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS",
+    "ensemble_scientific_clearance": false,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/tuning/make_check.log",
+    "log_sha256": "e61d7fabccbf4b67dbb71ff5f2eb92104f3d9d8f7369e8265fcfc2c966bd9568"
+  },
+  "evidence": "Numerical, interface and repository checks; not empirical validation or adoption of a calibrated growth law.",
+  "staged_layer_check": {
+    "command": "python shared/check_layers.py",
+    "files": 1323,
+    "violations": 0,
+    "passed": true
+  },
+  "report_review": {
+    "report_read_in_context": true,
+    "numerical_values_checked": true,
+    "local_link_targets_exist": true,
+    "producer_identities_match": true
+  }
+}
