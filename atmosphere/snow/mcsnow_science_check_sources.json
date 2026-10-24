@@ -1,0 +1,76 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-science-check-sources/1",
+  "review_date": "2026-10-24",
+  "scope": "Bounded check of the frozen two-temperature component against recent experimental findings and mechanism proposals. No complete new benchmark validation or model fit.",
+  "sources": [
+    {
+      "id": "harrington_pokrifka_2024",
+      "doi": "10.1175/JAS-D-23-0131.1",
+      "url": "https://journals.ametsoc.org/view/journals/atsc/81/2/JAS-D-23-0131.1.xml",
+      "reading_scope": "Publisher-indexed introduction, sections 3a-3b and conclusions read. The existing identified author-copy excerpt supplies the recorded source bytes; it is not an original PDF.",
+      "cached_source": {
+        "path": "research/runs/snow_scale/facet_coupling/harrington2024_morphology_excerpt.json",
+        "sha256": "59d511b3bc824bf01dd55d6bfe0f0381eab082621a3cb23eee4deb27487ed382"
+      },
+      "finding": "Low relative excess favors compact high-density growth; substantial hollowing and branching increase with relative excess. The approximate transition range 0.2-0.4 spans heterogeneous experiments and is not a universal sharp threshold.",
+      "application": "Test whether the frozen component contains a humidity response in its morphology and deposition-density closures. Do not impose the empirical range as an exact new numerical acceptance target."
+    },
+    {
+      "id": "takahashi_2014",
+      "doi": "10.1175/JAS-D-14-0043.1",
+      "url": "https://journals.ametsoc.org/view/journals/atsc/71/11/jas-d-14-0043.1.xml",
+      "reading_scope": "Publisher-indexed experimental methods and sections on mass, basal area and comparison with the 1991 study read. Direct publisher page returned 403; no original PDF or numeric table was acquired.",
+      "finding": "At maintained water saturation, crystal mass increases with liquid-water content while diameter is largely insensitive. The author also questions water saturation in part of the older warmer planar-crystal experiments.",
+      "application": "The present deposition-only component has no cloud-droplet-content response. This identifies an omitted experimental dependence, without assigning a quantitative error or changing the historical reference curves."
+    },
+    {
+      "id": "libbrecht_2023_observations",
+      "url": "https://arxiv.org/abs/2306.13087",
+      "version": "v1, experimental preprint",
+      "cached_source": {
+        "path": "research/runs/snow_scale/spatial_growth/libbrecht2023_observations.pdf",
+        "sha256": "20f579e01777d51b81b527751b32c3e44b1d8ebe9f1d09a7f15554c2445381af"
+      },
+      "reading_scope": "Abstract, model scope and attachment-kinetics discussion. Individual image panels were not digitized or used as numerical targets.",
+      "finding": "206 observations vary temperature and supersaturation with a controlled needle-tip start.",
+      "application": "Independent morphology evidence remains useful; its seed geometry and observables differ from the tuned freely falling spheroid. No pointwise pass or fail is assigned here."
+    },
+    {
+      "id": "pokrifka_moyle_harrington_2025",
+      "doi": "10.1175/JAS-D-25-0030.1",
+      "url": "https://journals.ametsoc.org/abstract/journals/atsc/82/10/JAS-D-25-0030.1.xml",
+      "cached_source": {
+        "path": "research/runs/snow_scale/hollow_growth/pokrifka2025_dimension_excerpt.json",
+        "sha256": "9a722267fa83efe63890040b75f431613e25acccf1b41000b4c2c73aa097c92e"
+      },
+      "reading_scope": "Published abstract and previously identified indexed methods/limitations; no complete new experimental reconstruction.",
+      "application": "Measurements at -67 to -46 C lie outside the two fitted temperatures and involve substrate growth. They cannot directly validate or falsify the warm-column and -14.4 C settings."
+    },
+    {
+      "id": "fuchs_2025",
+      "doi": "10.5194/acp-25-12177-2025",
+      "url": "https://acp.copernicus.org/articles/25/12177/2025/",
+      "reading_scope": "Experimental methods, section 3.4 and conclusions read in the published HTML.",
+      "application": "Field growth depends on moisture supply and particle competition. A prescribed-air single-crystal calculation is not the same experiment; population moisture feedback must be evaluated in a coupled calculation. No unsupported direct error is assigned."
+    },
+    {
+      "id": "harrington_pokrifka_2026",
+      "doi": "10.1175/JAS-D-26-0016.1",
+      "url": "https://doi.org/10.1175/JAS-D-26-0016.1",
+      "cached_source": {
+        "path": "research/runs/snow_scale/hollow_growth/harrington2026_abstract_search.json",
+        "sha256": "a69a724a84def9b0c849c8a49677d7e61601e9a0eb3942127af3f6b9d01b592b"
+      },
+      "reading_scope": "Published abstract and archived data description; complete paper equations remain unavailable. This source was already recorded in the earlier hollow-growth investigation.",
+      "application": "Rim width and step-source location are unresolved in the tuned model. Their omission is a limitation, not by itself proof that an effective bulk law fails every measured history. The warm time-series comparison reuses 1991 observations."
+    },
+    {
+      "id": "lamb_2026",
+      "doi": "10.1126/sciadv.aee6174",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/42789692/",
+      "preprint_url": "https://arxiv.org/html/2510.17935v1",
+      "reading_scope": "Published abstract and figures description; 2025 preprint data, methods and results sections. The final publisher full text returned 403.",
+      "application": "Learning mass-dependent growth functions from 290 mass histories does not itself contradict this model, which already depends on size and volume. The study does not jointly establish warm-column dimensions and fall speed. No training or coefficient substitution was performed."
+    }
+  ]
+}
