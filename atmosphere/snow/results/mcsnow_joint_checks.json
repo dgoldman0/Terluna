@@ -1,0 +1,224 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-joint-checks/1",
+  "scientific_acceptance": false,
+  "baseline_sha256": "304b90e52f4c0269cc0959d8157c91c9d0c2aee2def1d8f950bb0a9bce4db251",
+  "accepted_candidates": [],
+  "selected_model": null,
+  "numerical_checks": [
+    {
+      "name": "acceptance_exact_reassembly",
+      "passed": true,
+      "product_sha256": "7bc3b97603f00fbee092ff772f95efb30aff3a2b26ea9088c0976c49bc032744"
+    },
+    {
+      "name": "drag_exact_reassembly",
+      "passed": true,
+      "product_sha256": "4fd73d365e5b7da2655f57b48f00a37c06cd69cb8418750eba34f6d1a14e69ed"
+    },
+    {
+      "name": "growth_exact_reassembly",
+      "passed": true,
+      "product_sha256": "11b2f53dbbc32f849cff5eee5a1b9d2551b3b113313e7ba44fdd13b6549f4bc8"
+    },
+    {
+      "name": "neutral_full_contract_parity",
+      "points": 1320,
+      "maximum_relative_difference": 1.1102230246251565e-15,
+      "tolerance": 1e-12,
+      "passed": true
+    },
+    {
+      "name": "independent_python_prism_drag_m5p3",
+      "maximum_relative_difference": 4.440892098500626e-16,
+      "tolerance": 1e-11,
+      "passed": true
+    },
+    {
+      "name": "independent_python_prism_drag_m14p4",
+      "maximum_relative_difference": 0.0,
+      "tolerance": 1e-11,
+      "passed": true
+    },
+    {
+      "label": "prism_drag",
+      "temperature_C": -5.3,
+      "timesteps_s": [
+        0.0078125,
+        0.00390625
+      ],
+      "maximum_relative_change": 0.001908589316676812,
+      "tolerance": 0.01,
+      "passed": true,
+      "evidence": "Numerical refinement; not a physical acceptance decision."
+    },
+    {
+      "label": "prism_drag",
+      "temperature_C": -14.4,
+      "timesteps_s": [
+        0.0078125,
+        0.00390625
+      ],
+      "maximum_relative_change": 0.00013177609503101095,
+      "tolerance": 0.01,
+      "passed": true,
+      "evidence": "Numerical refinement; not a physical acceptance decision."
+    },
+    {
+      "label": "normal_compact",
+      "temperature_C": -5.3,
+      "timesteps_s": [
+        0.0078125,
+        0.00390625
+      ],
+      "maximum_relative_change": 0.00025704349308219854,
+      "tolerance": 0.01,
+      "passed": true,
+      "evidence": "Numerical refinement; not a physical acceptance decision."
+    },
+    {
+      "label": "normal_compact",
+      "temperature_C": -14.4,
+      "timesteps_s": [
+        0.0078125,
+        0.00390625
+      ],
+      "maximum_relative_change": 0.00013177609503101095,
+      "tolerance": 0.01,
+      "passed": true,
+      "evidence": "Numerical refinement; not a physical acceptance decision."
+    },
+    {
+      "label": "state_probe_fit",
+      "temperature_C": -5.3,
+      "timesteps_s": [
+        0.0078125,
+        0.00390625
+      ],
+      "maximum_relative_change": 0.00021096502182782473,
+      "tolerance": 0.01,
+      "passed": true,
+      "evidence": "Numerical refinement; not a physical acceptance decision."
+    },
+    {
+      "label": "state_probe_fit",
+      "temperature_C": -14.4,
+      "timesteps_s": [
+        0.0078125,
+        0.00390625
+      ],
+      "maximum_relative_change": 7.389948962410742e-05,
+      "tolerance": 0.01,
+      "passed": true,
+      "evidence": "Numerical refinement; not a physical acceptance decision."
+    },
+    {
+      "label": "joint_preserved_density_m5p3",
+      "temperature_C": -5.3,
+      "timesteps_s": [
+        0.0078125,
+        0.00390625
+      ],
+      "maximum_relative_change": 0.00024738257829648447,
+      "tolerance": 0.01,
+      "passed": true,
+      "evidence": "Numerical refinement; not a physical acceptance decision."
+    },
+    {
+      "label": "joint_state_m14p4",
+      "temperature_C": -14.4,
+      "timesteps_s": [
+        0.0078125,
+        0.00390625
+      ],
+      "maximum_relative_change": 9.134005336930429e-05,
+      "tolerance": 0.01,
+      "passed": true,
+      "evidence": "Numerical refinement; not a physical acceptance decision."
+    },
+    {
+      "label": "joint_state_m5p3",
+      "temperature_C": -5.3,
+      "timesteps_s": [
+        0.0078125,
+        0.00390625
+      ],
+      "maximum_relative_change": 0.00026183557775749655,
+      "tolerance": 0.01,
+      "passed": true,
+      "evidence": "Numerical refinement; not a physical acceptance decision."
+    },
+    {
+      "name": "baseline_fixed_state_speed_reconstruction",
+      "maximum_relative_difference": 9.992007221626409e-16,
+      "tolerance": 1e-11,
+      "passed": true
+    },
+    {
+      "name": "native_python_drag_translation",
+      "maximum_relative_difference": 1.1102230246251565e-15,
+      "tolerance": 1e-11,
+      "passed": true
+    }
+  ],
+  "numerical_checks_passed": true,
+  "full_repository_check": {
+    "command": [
+      "make",
+      "check"
+    ],
+    "returncode": 0,
+    "elapsed_s": 518.5298604599666,
+    "log_sha256": "92fa04c202e5f5f5a2d7ea6adab4c9627878479172f585b1c443d1189a8f617c",
+    "thread_limits": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "python_passed": 3801,
+    "python_skipped": 20,
+    "javascript_passed": 191,
+    "provenance_integrity": "PASS",
+    "ensemble_integrity": "PASS",
+    "scientific_clearance": false
+  },
+  "subsequent_verification": {
+    "changes_after_full_suite": "Corrected archived-helper scope, named the saved physical controls, and extended timestep refinement to all changed candidates and temperatures.",
+    "focused_command": [
+      "python",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "atmosphere/tests/test_snow_mcsnow_joint.py",
+      "atmosphere/tests/test_snow_mcsnow_column_density.py"
+    ],
+    "focused_passed": 44,
+    "focused_elapsed_s": 1.13,
+    "refinement_cases": 9,
+    "staged_layer_check": "check_layers: 1337 files checked, 0 violations",
+    "staged_layer_log_sha256": "5b8ff762c11181cb30edf3ce934553ad2801396ad982e74db3524f0de9f47ea8"
+  },
+  "software": {
+    "python": "3.13.7",
+    "numpy": "2.3.3",
+    "scipy": "1.16.2"
+  },
+  "checkpoint": {
+    "path": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/joint_acceptance/checkpoints/11b2f53dbbc32f849cff5eee5a1b9d2551b3b113313e7ba44fdd13b6549f4bc8",
+    "index_sha256": "09ade91f656000a6b7f80e6f02c0daa8948536724dea8578971dd25a8b66a1a3",
+    "file_count": 678,
+    "total_bytes": 35220133,
+    "all_copies_hash_verified": true
+  },
+  "products": {
+    "atmosphere/snow/results/mcsnow_joint_acceptance.json": "7bc3b97603f00fbee092ff772f95efb30aff3a2b26ea9088c0976c49bc032744",
+    "atmosphere/snow/results/mcsnow_joint_drag.json": "4fd73d365e5b7da2655f57b48f00a37c06cd69cb8418750eba34f6d1a14e69ed",
+    "atmosphere/snow/results/mcsnow_joint_growth.json": "11b2f53dbbc32f849cff5eee5a1b9d2551b3b113313e7ba44fdd13b6549f4bc8"
+  },
+  "boundaries": [
+    "Numerical tests and implementation agreement do not establish empirical validation.",
+    "No candidate satisfies every physical 10% and baseline non-regression limit.",
+    "Derived rates, geometry sensitivities and unobserved seeds are explicitly distinguished from measurements.",
+    "The original Boehm expression was identified from pinned source comments; no newly completed original-paper transcription is claimed."
+  ]
+}
