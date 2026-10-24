@@ -1,0 +1,288 @@
+{
+  "failed_evaluation_reasons": {
+    "Native worker terminated during trajectory": 470
+  },
+  "schema": "terluna.atmosphere.mcsnow-growth-limits-checks/1",
+  "product_sha256": "b6014ac0cd984803220fcabc65e87e9ed69a87908d9ad7422d2d96e46f97118a",
+  "raw_reassembly_exact": true,
+  "raw_reassembly": {
+    "command": "/home/kir/miniconda3/bin/python -B -m atmosphere.snow.mcsnow_growth_limits analyze",
+    "returncode": 0,
+    "elapsed_s": 23.149289469933137,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/growth_limits/checkpoints/b6014ac0cd984803220fcabc65e87e9ed69a87908d9ad7422d2d96e46f97118a/checks/reassembly.log",
+    "log_sha256": "bb456894b219d007875b33055a98499873634ee701e9a6ac153ad1328ce40e86"
+  },
+  "focused_tests": {
+    "command": "/home/kir/miniconda3/bin/python -B -m pytest atmosphere/tests/test_snow_mcsnow_tuning.py atmosphere/tests/test_snow_mcsnow_state_growth.py atmosphere/tests/test_snow_mcsnow_growth_limits.py -q",
+    "returncode": 0,
+    "elapsed_s": 0.5804147799499333,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/growth_limits/checkpoints/b6014ac0cd984803220fcabc65e87e9ed69a87908d9ad7422d2d96e46f97118a/checks/focused_tests.log",
+    "log_sha256": "9f035ff6096b1b08599cdcc514703054d83a886840320fe186943d7817475f3f",
+    "passed": 35
+  },
+  "numerical_checks": [
+    {
+      "name": "neutral_parity_original",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "neutral_parity_constant",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "parent_state_parity_axis",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "parent_state_parity_axis_density",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m14p4_seed0_20261026_early0.0625to4_vent2",
+      "maximum_relative_difference": 0.0011589016245033834,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m14p4_seed0_20261026_early0.0625to4_vent2",
+      "maximum_relative_difference": 0.000518609688221372,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m14p4_seed0_20261026_early0.0625to4_vent2",
+      "maximum_relative_difference": 7.424911028697245e-05,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m14p4_seed0_20261024",
+      "maximum_relative_difference": 0.0013309170548437832,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m14p4_seed0_20261025",
+      "maximum_relative_difference": 0.0013537841445533383,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m14p4_seed0_20261025",
+      "maximum_relative_difference": 0.0006456153710023838,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m14p4_seed0_20261025",
+      "maximum_relative_difference": 7.481350619942262e-05,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m14p4_seed0_20261027_axis_only",
+      "maximum_relative_difference": 0.0010758023208483625,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m14p4_seed0_20261027_axis_only",
+      "maximum_relative_difference": 0.000460973856782676,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m14p4_seed0_20261027_axis_only",
+      "maximum_relative_difference": 0.00015187635964009072,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m14p4_seed0_20261027_axis_density_branch",
+      "maximum_relative_difference": 0.001141063705061729,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m14p4_seed0_20261027_axis_density_branch",
+      "maximum_relative_difference": 0.000488968062028361,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m14p4_seed0_20261027_axis_density_branch",
+      "maximum_relative_difference": 8.389365718275421e-05,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m14p4_seed0_20261027_native_transport_mean",
+      "maximum_relative_difference": 0.00113036728554472,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m14p4_seed0_20261027_native_transport_mean_nested",
+      "maximum_relative_difference": 0.001141063705061729,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m14p4_seed0_20261027_native_transport_mean_nested",
+      "maximum_relative_difference": 0.000488968062028361,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m14p4_seed0_20261027_native_transport_mean_nested",
+      "maximum_relative_difference": 8.389365718275421e-05,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m14p4_seed0_20261026_early0.25to4_vent4",
+      "maximum_relative_difference": 0.0014374974620456893,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m14p4_seed0_20261026_early0.25to4_vent4",
+      "maximum_relative_difference": 0.000712617945817895,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m14p4_seed0_20261026_early0.25to4_vent4",
+      "maximum_relative_difference": 6.880849947044076e-05,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m5p3_seed40_20261024",
+      "maximum_relative_difference": 0.0008963957971515057,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m5p3_seed40_20261025",
+      "maximum_relative_difference": 0.000896380806192365,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m5p3_seed40_20261025",
+      "maximum_relative_difference": 0.00043403975349365354,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m5p3_seed40_20261025",
+      "maximum_relative_difference": 8.113971336498604e-05,
+      "passed": true
+    },
+    {
+      "name": "inactive_column_branch_axis_m5p3_seed40_20261025",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m5p3_seed40_20261027_axis_only",
+      "maximum_relative_difference": 0.0008169815073679754,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m5p3_seed40_20261027_axis_only",
+      "maximum_relative_difference": 0.0003329213582341506,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m5p3_seed40_20261027_axis_only",
+      "maximum_relative_difference": 4.002215131415632e-05,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m5p3_seed40_20261027_axis_density_branch",
+      "maximum_relative_difference": 0.0008604500514240998,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m5p3_seed40_20261027_axis_density_branch",
+      "maximum_relative_difference": 0.00034762878775085326,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m5p3_seed40_20261027_axis_density_branch",
+      "maximum_relative_difference": 4.747488871736927e-05,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_m5p3_seed40_20261027_native_transport_mean",
+      "maximum_relative_difference": 0.0008355834220675762,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_axis_m5p3_seed40_20261027_native_transport_mean",
+      "maximum_relative_difference": 0.0003410153676166594,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_refinement_axis_m5p3_seed40_20261027_native_transport_mean",
+      "maximum_relative_difference": 5.115739584782286e-05,
+      "passed": true
+    },
+    {
+      "name": "mass_ledger",
+      "maximum_relative_difference": 2.2204300183385423e-16,
+      "passed": true
+    },
+    {
+      "name": "spheroid_volume",
+      "maximum_relative_difference": 2.220446049250313e-15,
+      "passed": true
+    }
+  ],
+  "repository_check": {
+    "command": "make check",
+    "returncode": 0,
+    "elapsed_s": 518.320393312024,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/growth_limits/checkpoints/b6014ac0cd984803220fcabc65e87e9ed69a87908d9ad7422d2d96e46f97118a/checks/make_check.log",
+    "log_sha256": "8d71e82d29b54008f6a977681cdde3dacea760b628846cb180b1f699e352ea60",
+    "python_passed": 3756,
+    "python_skipped": 20,
+    "python_elapsed_s": 488.55,
+    "javascript_groups": [
+      129,
+      48,
+      14
+    ],
+    "javascript_passed": 191,
+    "javascript_failed": 0,
+    "status": "passed",
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS",
+    "ensemble_scientific_clearance": false
+  },
+  "evidence": "Numerical, interface and repository checks; not empirical validation or adoption of a calibrated growth law.",
+  "staged_layer_check": {
+    "command": "python3 shared/check_layers.py",
+    "files": 1329,
+    "violations": 0,
+    "passed": true
+  },
+  "independent_objective_recalculation": {
+    "selected_groups": 10,
+    "states_per_group": 6,
+    "quantities_per_state": 3,
+    "maximum_absolute_loss_difference": 1.3877787807814457e-17,
+    "passed": true
+  },
+  "report_review": {
+    "read_in_context": true,
+    "numerical_values_checked": true,
+    "local_link_targets_exist": true,
+    "report_sha256": "8eb45db85e01e92581d5051189854662d04320ffa8c52589ecee0ea2cf04f078",
+    "producer_and_input_identities_match": true,
+    "source_reading": "Uses the preceding source record; renewed publisher retrieval of the 2021 method returned 403. No complete article reading or mechanistic facet-spreading implementation claimed."
+  },
+  "figure_review": {
+    "manifest": "visualization/snow/generated/growth_limits_manifest.json",
+    "manifest_sha256": "f94b8e394b7b27b51bb50a2f778a681b0765071a66144813dc358ee5ffd97c03",
+    "plotted_curves": 54,
+    "plot_age_and_unit_roundtrips_passed": true,
+    "png_visually_inspected": true,
+    "pdf_rasterization_visually_inspected": true,
+    "inspection": "All twelve panels, labels, legend, curve identities and separate fitted segments inspected; no clipping or missing series observed.",
+    "outputs": {
+      "growth_limits.png": "5607ffc28f363ae543be8530f2adba4c2a5341006d373f0fa5fb43878b0602e5",
+      "growth_limits.pdf": "05573d51719c53f04d5f28da169d9ca574a73846f5c0362f3dd2a0cc8345f17f"
+    }
+  },
+  "raw_snapshot": {
+    "directory": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/growth_limits/checkpoints/b6014ac0cd984803220fcabc65e87e9ed69a87908d9ad7422d2d96e46f97118a",
+    "index_sha256": "c9bae6b2090ef69a313fac70d3ff32f78dca9bbe032a7fec25b39985fa3e8746",
+    "verified_files": 663,
+    "copied_bytes": 36856693,
+    "restoration": "Use the corresponding Git revision and a working growth_limits cache containing exactly the snapshot evaluations/ and fits/ directories. Preserve newer working directories separately when restoring. The native build remains at its recorded path."
+  }
+}
