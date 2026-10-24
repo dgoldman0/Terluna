@@ -1,0 +1,647 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-column-density-checks/1",
+  "product_sha256": "304b90e52f4c0269cc0959d8157c91c9d0c2aee2def1d8f950bb0a9bce4db251",
+  "evidence": "Numerical and interface checks; separate from empirical validation or a transferable lunar growth law.",
+  "raw_reassembly_exact": true,
+  "raw_reassembly": {
+    "command": "/home/kir/miniconda3/bin/python -B -m atmosphere.snow.mcsnow_column_density analyze",
+    "returncode": 0,
+    "elapsed_s": 70.56610446097329,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/column_density/checkpoints/304b90e52f4c0269cc0959d8157c91c9d0c2aee2def1d8f950bb0a9bce4db251/checks/reassembly.log",
+    "log_sha256": "0ee31ccd3be71f33a00f2ed89373cb374b16754481e3b5a5dabc62b3ad59d8d6"
+  },
+  "focused_tests": {
+    "command": "/home/kir/miniconda3/bin/python -B -m pytest -q atmosphere/tests/test_snow_mcsnow_tuning.py atmosphere/tests/test_snow_mcsnow_state_growth.py atmosphere/tests/test_snow_mcsnow_growth_limits.py atmosphere/tests/test_snow_mcsnow_column_density.py",
+    "returncode": 0,
+    "elapsed_s": 1.0476371460827067,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/column_density/checkpoints/304b90e52f4c0269cc0959d8157c91c9d0c2aee2def1d8f950bb0a9bce4db251/checks/focused_tests.log",
+    "log_sha256": "06f2eea4866cc06d5ae0ec3f43eeb8791286cf0d4c52bc391c3ea24097b65b42",
+    "passed": 55
+  },
+  "repository_check": {
+    "command": "make check",
+    "returncode": 0,
+    "elapsed_s": 507.9212812660262,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/column_density/checkpoints/304b90e52f4c0269cc0959d8157c91c9d0c2aee2def1d8f950bb0a9bce4db251/checks/make_check.log",
+    "log_sha256": "e033cf82412ba87f99a13dc9d93c1a69cf889c3a5d042ff2af4d2d6a61066683",
+    "python_passed": 3776,
+    "python_skipped": 20,
+    "python_elapsed_s": 475.67,
+    "javascript_groups": [
+      129,
+      48,
+      14
+    ],
+    "javascript_passed": 191,
+    "javascript_failed": 0,
+    "status": "passed",
+    "layer_files": 1332,
+    "layer_violations": 0,
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS",
+    "ensemble_scientific_clearance": false
+  },
+  "failed_evaluation_reasons": {
+    "Native worker terminated during trajectory": 254
+  },
+  "numerical_checks": [
+    {
+      "name": "axis_m14p4_seed0_20261025",
+      "states": 18,
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "axis_m5p3_seed40_20261025",
+      "states": 18,
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_global_20261024",
+      "maximum_relative_difference": 0.0012753505785660924,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_global_20261025",
+      "maximum_relative_difference": 0.0012753505785660924,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_local_20261024",
+      "maximum_relative_difference": 0.001275346541333322,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_global_20261024",
+      "maximum_relative_difference": 0.0004854255639354932,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_global_20261024",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_global_20261024",
+      "maximum_relative_difference": 0.00010921341149128239,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_global_20261024",
+      "maximum_relative_difference": 0.0028278384342484975,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_global_20261024",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_compact_density_lower_bound",
+      "maximum_relative_difference": 0.0027064502710976157,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_compact_density_lower_bound",
+      "maximum_relative_difference": 0.0015076718215811802,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_compact_density_lower_bound",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_compact_density_lower_bound",
+      "maximum_relative_difference": 0.00015826973477484074,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_compact_density_lower_bound",
+      "maximum_relative_difference": 0.0030843422671432696,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_compact_density_lower_bound",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_joint_early_constraints",
+      "maximum_relative_difference": 0.002064448107653827,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_joint_early_constraints",
+      "maximum_relative_difference": 0.0005424768205646302,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_joint_early_constraints",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_joint_early_constraints",
+      "maximum_relative_difference": 9.671617194040305e-05,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_joint_early_constraints",
+      "maximum_relative_difference": 0.0030830959957345305,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_joint_early_constraints",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_joint_early_constraints",
+      "maximum_relative_difference": 0.00023701085793892407,
+      "passed": true
+    },
+    {
+      "name": "interval_timestep_joint_early_constraints",
+      "maximum_relative_difference": 0.0005424768205646302,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_joint_column_late_limit",
+      "maximum_relative_difference": 0.002066415760723528,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_joint_column_late_limit",
+      "maximum_relative_difference": 0.0005429912794122638,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_joint_column_late_limit",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_joint_column_late_limit",
+      "maximum_relative_difference": 9.630567085927577e-05,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_joint_column_late_limit",
+      "maximum_relative_difference": 0.0030852257283975337,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_joint_column_late_limit",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_joint_column_late_limit",
+      "maximum_relative_difference": 0.00023710409720612002,
+      "passed": true
+    },
+    {
+      "name": "interval_timestep_joint_column_late_limit",
+      "maximum_relative_difference": 0.0005429912794122638,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_joint_join_constraint",
+      "maximum_relative_difference": 0.00205883603518342,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_joint_join_constraint",
+      "maximum_relative_difference": 0.000541640998658055,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_joint_join_constraint",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_joint_join_constraint",
+      "maximum_relative_difference": 9.469381214599615e-05,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_joint_join_constraint",
+      "maximum_relative_difference": 0.003085348057699111,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_joint_join_constraint",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_joint_join_constraint",
+      "maximum_relative_difference": 0.00023885031834547377,
+      "passed": true
+    },
+    {
+      "name": "interval_timestep_joint_join_constraint",
+      "maximum_relative_difference": 0.000541640998658055,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_joint_join_balanced",
+      "maximum_relative_difference": 0.0015946033201853504,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_joint_join_balanced",
+      "maximum_relative_difference": 0.0005460120186537853,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_joint_join_balanced",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_joint_join_balanced",
+      "maximum_relative_difference": 9.468358398501131e-05,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_joint_join_balanced",
+      "maximum_relative_difference": 0.003085103112609122,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_joint_join_balanced",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_joint_join_balanced",
+      "maximum_relative_difference": 0.00023949057627514758,
+      "passed": true
+    },
+    {
+      "name": "interval_timestep_joint_join_balanced",
+      "maximum_relative_difference": 0.0005460120186537853,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_joint_join_weighted",
+      "maximum_relative_difference": 0.0019697435797066953,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_joint_join_weighted",
+      "maximum_relative_difference": 0.00042874884154098236,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_joint_join_weighted",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_joint_join_weighted",
+      "maximum_relative_difference": 9.474163477429798e-05,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_joint_join_weighted",
+      "maximum_relative_difference": 0.0030847888298237702,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_joint_join_weighted",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_joint_join_weighted",
+      "maximum_relative_difference": 0.00021181603438436003,
+      "passed": true
+    },
+    {
+      "name": "interval_timestep_joint_join_weighted",
+      "maximum_relative_difference": 0.00042874884154098236,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_seed_state_native_late_axis",
+      "maximum_relative_difference": 0.002551085702990563,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_seed_state_native_late_axis",
+      "maximum_relative_difference": 0.0006350628063218622,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_seed_state_native_late_axis",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_seed_state_native_late_axis",
+      "maximum_relative_difference": 0.00014250321553677114,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_seed_state_native_late_axis",
+      "maximum_relative_difference": 0.0030612158184254445,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_seed_state_native_late_axis",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_seed_state_native_late_axis",
+      "maximum_relative_difference": 0.00030511054774795543,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_seed_state_declining",
+      "maximum_relative_difference": 0.001990766979225622,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_seed_state_local",
+      "maximum_relative_difference": 0.0015874125326295063,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_seed_state_local",
+      "maximum_relative_difference": 0.0009546246971473549,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_seed_state_local",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_seed_state_local",
+      "maximum_relative_difference": 0.00014250361376733078,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_seed_state_local",
+      "maximum_relative_difference": 0.0030614498864230955,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_seed_state_local",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_seed_state_local",
+      "maximum_relative_difference": 0.000369671183717335,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_compact_local_20261024",
+      "maximum_relative_difference": 0.0037535863975155515,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_compact_local_declining",
+      "maximum_relative_difference": 0.0014369199453388992,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_compact_local_20261024",
+      "maximum_relative_difference": 0.001115941810736265,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_compact_local_20261024",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_compact_local_20261024",
+      "maximum_relative_difference": 0.00013975249708730875,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_compact_local_20261024",
+      "maximum_relative_difference": 0.0030947159277833203,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_compact_local_20261024",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_early_interval_density_profile",
+      "maximum_relative_difference": 0.0019722939311798138,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_early_interval_density_profile",
+      "maximum_relative_difference": 0.0007633732544629623,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_early_interval_density_profile",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_early_interval_density_profile",
+      "maximum_relative_difference": 0.00012246785427594276,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_early_interval_density_profile",
+      "maximum_relative_difference": 0.003058752620573202,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_early_interval_density_profile",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_early_interval_density_profile",
+      "maximum_relative_difference": 0.0003456153025516162,
+      "passed": true
+    },
+    {
+      "name": "interval_timestep_early_interval_density_profile",
+      "maximum_relative_difference": 0.0007633732544629623,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_seed_state_early_interval",
+      "maximum_relative_difference": 0.0015338205218742296,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_seed_state_early_interval",
+      "maximum_relative_difference": 0.0009479473963096563,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_seed_state_early_interval",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_seed_state_early_interval",
+      "maximum_relative_difference": 0.00010517230984574688,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_seed_state_early_interval",
+      "maximum_relative_difference": 0.003078305212481647,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_seed_state_early_interval",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_seed_state_early_interval",
+      "maximum_relative_difference": 0.0005155916877722655,
+      "passed": true
+    },
+    {
+      "name": "interval_timestep_seed_state_early_interval",
+      "maximum_relative_difference": 0.0009479473963096563,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_seed_state_density_floor",
+      "maximum_relative_difference": 0.00160089150065168,
+      "passed": true
+    },
+    {
+      "name": "all_start_timestep_seed_state_density_floor",
+      "maximum_relative_difference": 0.0005456944834717481,
+      "passed": true
+    },
+    {
+      "name": "cold_unchanged_seed_state_density_floor",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "supplied_state_refinement_seed_state_density_floor",
+      "maximum_relative_difference": 0.0001054115432806979,
+      "passed": true
+    },
+    {
+      "name": "early_timestep_seed_state_density_floor",
+      "maximum_relative_difference": 0.003085076946465315,
+      "passed": true
+    },
+    {
+      "name": "early_endpoint_parity_seed_state_density_floor",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "additional_age_timestep_seed_state_density_floor",
+      "maximum_relative_difference": 0.00030907907575739024,
+      "passed": true
+    },
+    {
+      "name": "interval_timestep_seed_state_density_floor",
+      "maximum_relative_difference": 0.0005456944834717481,
+      "passed": true
+    },
+    {
+      "name": "mass_ledger",
+      "maximum_relative_difference": 2.2203881380786686e-16,
+      "passed": true
+    },
+    {
+      "name": "spheroid_volume",
+      "maximum_relative_difference": 2.3314683517128287e-15,
+      "passed": true
+    }
+  ],
+  "status": "completed_numerical_repository_and_figure_checks",
+  "cached_cli_specifications": {
+    "actions": [
+      "local",
+      "global",
+      "compact",
+      "density_bounds",
+      "seed_state",
+      "late_control",
+      "density_floor",
+      "early_interval",
+      "interval_profile",
+      "joint_early",
+      "joint_late",
+      "joint_join",
+      "join_weights"
+    ],
+    "searches": 17,
+    "passed": true,
+    "native_worker_launched": false,
+    "method": "Invoke each fitting action with build() patched out; existing result retrieval still enforces exact saved specification equality. The actual native build is separately verified by product reassembly."
+  },
+  "independent_objective_recalculation": {
+    "searches": 17,
+    "states": 137,
+    "maximum_absolute_loss_difference": 4.336808689942018e-19,
+    "passed": true
+  },
+  "target_assessment": {
+    "preferred_search": "joint_join_balanced",
+    "maximum_checked_relative_error": 0.09730509888549022,
+    "cold_maximum_change": 0.0,
+    "attained": true
+  },
+  "report_review": {
+    "read_in_context": true,
+    "numerical_values_checked": true,
+    "local_link_targets_exist": true,
+    "report_sha256": "38532b0802ab429d1f37e7d00ee2b2c5a3cda696834013990ab19d3a67750216",
+    "producer_and_input_identities_match": true,
+    "scope": "Adaptive early-age calibration and weighting explicitly disclosed; speed, alternate seed shapes, local rates and volume mapping failures retained. Uses preceding source records; no new full-paper reading claimed."
+  },
+  "figure_review": {
+    "manifest": "visualization/snow/generated/column_density_manifest.json",
+    "manifest_sha256": "1d194ecab6d7d698c9fd537604ed30ee36ff046f50b0b14f0c2e3fdc398eb62e",
+    "plotted_curves": 30,
+    "plot_age_and_unit_roundtrips_passed": true,
+    "png_visually_inspected": true,
+    "pdf_rasterization_visually_inspected": true,
+    "inspection": "Six panels, both starting histories, five labeled comparisons, ten-percent band and reference-fit join inspected; no clipped labels or missing series observed.",
+    "outputs": {
+      "column_density.png": "f336cd360dfd0163a1d58ed54aaa6c133c9606504ba7f5ae19b44370b66f953c",
+      "column_density.pdf": "effc5e8d4cf7593ce7f8cb1793341090af436eb8a7d4b98b5909a74a17712cce"
+    }
+  },
+  "prior_checkpoints_verified_after_extension": [
+    {
+      "directory": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/growth_limits/checkpoints/47964a7376c114dee0a8339d4555d2e6bc3f8ef550db8cb1ff628fdf3d6f4555",
+      "index_sha256": "ee3a0423b669dae51e0fd8f4c3e852c52637d11f164af3b0b044d2e0ead81efe",
+      "product_sha256": "47964a7376c114dee0a8339d4555d2e6bc3f8ef550db8cb1ff628fdf3d6f4555",
+      "verified_files": 779
+    },
+    {
+      "directory": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/growth_limits/checkpoints/b6014ac0cd984803220fcabc65e87e9ed69a87908d9ad7422d2d96e46f97118a",
+      "index_sha256": "c9bae6b2090ef69a313fac70d3ff32f78dca9bbe032a7fec25b39985fa3e8746",
+      "product_sha256": "b6014ac0cd984803220fcabc65e87e9ed69a87908d9ad7422d2d96e46f97118a",
+      "verified_files": 663
+    }
+  ],
+  "raw_snapshot": {
+    "directory": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/column_density/checkpoints/304b90e52f4c0269cc0959d8157c91c9d0c2aee2def1d8f950bb0a9bce4db251",
+    "index_sha256": "d00f3a559abc080c27ed069669351fba21d7655611fe827f709188e6f0eb4b75",
+    "verified_files": 1331,
+    "copied_bytes": 22376191,
+    "restoration": "Use this Git revision with a working column_density cache containing exactly the snapshot evaluations/ and fits/ directories. Preserve newer work separately before restoration. The native build remains at its recorded path."
+  }
+}
