@@ -252,3 +252,25 @@ Its panels show lower-cloud empty-time fractions, the allocation of the prescrib
 The reader requires both complete matrices and verifies the follow-up's binding to the primary product. It checks producer and input hashes, reconstructs the water allocation and its deposition ledger, empty-time profiles, quantile means and standard errors, mean mass CDFs and comparison decisions. Its corruption tests reject altered scientific fields. Removing a process changes subsequent particle histories, so these comparisons do not partition independent physical contributions. They establish no calibrated giant-flake geometry or snowstorm optics.
 
 Generated `column_diagnosis.png`, `column_diagnosis.svg` and `column_diagnosis_manifest.json` remain ignored under `generated/`. The manifest binds both input products, the renderer, verified upstream files and both image outputs. The [diagnosis report](../../atmosphere/snow/column_diagnosis_results.md) records the numerical findings and actual inspection; [methods](../../atmosphere/snow/column_diagnosis_methods.md) distinguish the observations from continuous residence times and from the separate offline averaging calculation.
+
+## Crystal growth through an early shape transition
+
+`state_growth.py` reads `atmosphere/snow/results/mcsnow_state_growth.json` and
+compares the original improved component, its constant adjustment, the shared
+size-dependent adjustment and the temperature-specific variants selected by
+the domain's training score. Four rows separate the two temperatures and the
+spherical versus three-minute starts; three columns show mass and both outer
+dimensions. Laboratory curves are fitted histories, with each segment drawn
+separately at a fitted join. They are not independently measured trajectories.
+
+```sh
+OPENBLAS_NUM_THREADS=1 python visualization/snow/state_growth.py
+```
+
+The renderer checks the schema, source/input hashes and predecessor-product
+identity, and verifies each plotted unit conversion against the stored values.
+It imports no domain model. The ignored `generated/state_growth.png`,
+`generated/state_growth.pdf` and `generated/state_growth_manifest.json` contain
+the figures, their identities and all plotted values. The physical boundaries
+and remaining growth errors belong to the domain's
+[assessment](../../atmosphere/snow/mcsnow_state_growth.md).

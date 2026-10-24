@@ -154,13 +154,17 @@ def cases():
 
 class Batch:
     """One native worker, persistent only within this context; deterministic cache."""
-    def __init__(self, entries, dt=SEARCH_DT):
+    def __init__(self, entries, dt=SEARCH_DT, *, cache=CACHE, decoder=physical, experiment=None):
+        if decoder is not physical and experiment is None:
+            raise ValueError('A custom decoder requires an explicit experiment identity')
+        self.root = cache; self.decode = decoder
         self.entries = entries; self.dt = dt; self.proc = None; self.stderr = None
-        self.rows = [(i, age) for i, e in enumerate(entries) for age in diagnosis.sample_ages(e['temperature_C'])
+        self.rows = [(i, age) for i, e in enumerate(entries) for age in e.get('sample_ages_min', diagnosis.sample_ages(e['temperature_C']))
                      if age >= e['initial_age_min']]
-        config = dict(entries=entries, dt=dt, build_sha256=native.sha(CACHE/'build/build.json'))
+        config = dict(entries=entries, dt=dt, build_sha256=native.sha(self.root/'build/build.json'))
+        if experiment is not None: config['experiment'] = experiment
         encoded = json.dumps(config, sort_keys=True).encode()
-        self.path = CACHE/'evaluations'/hashlib.sha256(encoded).hexdigest()[:20]
+        self.path = self.root/'evaluations'/hashlib.sha256(encoded).hexdigest()[:20]
         self.path.mkdir(parents=True, exist_ok=True)
         if (self.path/'configuration.json').exists():
             if json.loads((self.path/'configuration.json').read_text()) != config:
@@ -169,7 +173,7 @@ class Batch:
         lines = [str(len(entries))]
         for e in entries:
             c = e['configuration']
-            ages = [a for a in diagnosis.sample_ages(e['temperature_C']) if a >= e['initial_age_min']]
+            ages = [a for a in e.get('sample_ages_min', diagnosis.sample_ages(e['temperature_C'])) if a >= e['initial_age_min']]
             values = [c['temperature_K'], c['pressure_Pa'], 1., c['initial_mass_kg'],
                       c['initial_equatorial_m'], c['initial_polar_m'], dt, len(ages)]
             lines.extend([' '.join(map(str, values)), ' '.join(str((a-e['initial_age_min'])*60) for a in ages)])
@@ -185,8 +189,8 @@ class Batch:
 
     def start(self):
         self.stderr = (self.path/'stderr.log').open('a')
-        self.proc = subprocess.Popen([str(CACHE/'build/tuner'), str(self.path/'cases.txt')],
-            cwd=CACHE/'build', env=native.ENV, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+        self.proc = subprocess.Popen([str(self.root/'build/tuner'), str(self.path/'cases.txt')],
+            cwd=self.root/'build', env=native.ENV, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
             stderr=self.stderr, text=True, bufsize=1)
         while True:
             line = self.proc.stdout.readline()
@@ -205,7 +209,7 @@ class Batch:
     def __exit__(self, *_): self.close()
 
     def evaluate(self, x):
-        values = physical(x); key = tuple(float(v) for v in x)
+        values = self.decode(x); key = tuple(float(v) for v in x)
         if key in self.cache: return self.cache[key]
         started = time.monotonic(); output = []; error = None
         try:

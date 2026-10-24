@@ -1,0 +1,154 @@
+{
+  "failed_evaluation_reasons": {
+    "Native worker terminated during trajectory": 1124
+  },
+  "schema": "terluna.atmosphere.mcsnow-state-growth-checks/1",
+  "product_sha256": "5346cb192fe810b5241a19701ad95c5f592a2c5f7e0259fbbb025026f903f888",
+  "raw_reassembly_exact": true,
+  "raw_reassembly": {
+    "command": "/home/kir/miniconda3/bin/python -B -m atmosphere.snow.mcsnow_state_growth analyze",
+    "returncode": 0,
+    "elapsed_s": 11.603000420029275,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/state_growth/reassembly.log",
+    "log_sha256": "4b0a13ee98f04e33b1d4a68e3a21cf6b1e35a5bb02169058591897421c335243"
+  },
+  "focused_tests": {
+    "command": "/home/kir/miniconda3/bin/python -B -m pytest atmosphere/tests/test_snow_mcsnow_tuning.py atmosphere/tests/test_snow_mcsnow_state_growth.py -q",
+    "returncode": 0,
+    "elapsed_s": 0.5128196169389412,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/state_growth/focused_tests.log",
+    "log_sha256": "e1d28d58122041c4c456c741b3d5d29b5e63402867a2696ca19c6f6aa75a4a7c",
+    "passed": 24
+  },
+  "numerical_checks": [
+    {
+      "name": "neutral_parity_original",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "neutral_parity_constant",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "all_case_timestep_axis",
+      "maximum_relative_difference": 0.0007362686237265548,
+      "passed": true
+    },
+    {
+      "name": "all_case_timestep_axis_density",
+      "maximum_relative_difference": 0.0005436942981296156,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_20261024",
+      "maximum_relative_difference": 0.0014616277855438176,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_20261025",
+      "maximum_relative_difference": 0.001719877071187259,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_density_20261024",
+      "maximum_relative_difference": 0.0013095660249029528,
+      "passed": true
+    },
+    {
+      "name": "search_timestep_axis_density_20261025",
+      "maximum_relative_difference": 0.0012707658618793527,
+      "passed": true
+    },
+    {
+      "name": "temperature_timestep_axis_m14p4_20261024",
+      "maximum_relative_difference": 0.0006989882342930409,
+      "passed": true
+    },
+    {
+      "name": "temperature_timestep_axis_m5p3_20261024",
+      "maximum_relative_difference": 0.0003411698049385903,
+      "passed": true
+    },
+    {
+      "name": "temperature_timestep_axis_m5p3_seed20_20261024",
+      "maximum_relative_difference": 0.0003740318524784181,
+      "passed": true
+    },
+    {
+      "name": "temperature_timestep_axis_m5p3_seed40_20261024",
+      "maximum_relative_difference": 0.0004006266775514744,
+      "passed": true
+    },
+    {
+      "name": "warm_branch_radius_inactive",
+      "maximum_relative_difference": 0.0,
+      "passed": true
+    },
+    {
+      "name": "fixed_state_duration_and_timestep",
+      "maximum_relative_difference": 0.00013691963650375172,
+      "passed": true
+    },
+    {
+      "name": "mass_ledger",
+      "maximum_relative_difference": 2.2204043624876558e-16,
+      "passed": true
+    },
+    {
+      "name": "spheroid_volume",
+      "maximum_relative_difference": 2.3314683517128287e-15,
+      "passed": true
+    }
+  ],
+  "repository_check": {
+    "command": "make check",
+    "returncode": 0,
+    "elapsed_s": 529.0647223159904,
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/state_growth/make_check.log",
+    "log_sha256": "86249ebe5ad18495c3d4e3838a304dc511199fad0bb55e87d80cd7d1ffa8205d",
+    "python_passed": 3745,
+    "python_skipped": 20,
+    "python_elapsed_s": 496.06,
+    "javascript_groups": [
+      129,
+      48,
+      14
+    ],
+    "javascript_passed": 191,
+    "javascript_failed": 0,
+    "status": "passed",
+    "provenance": "PASS",
+    "ensemble_integrity": "PASS",
+    "ensemble_scientific_clearance": false
+  },
+  "evidence": "Numerical, interface and repository checks; not empirical validation or adoption of a calibrated growth law.",
+  "staged_layer_check": {
+    "command": "python -B shared/check_layers.py",
+    "files": 1326,
+    "violations": 0,
+    "passed": true
+  },
+  "report_review": {
+    "read_in_context": true,
+    "numerical_values_checked": true,
+    "local_link_targets_exist": true,
+    "report_sha256": "68dc479c32bf196cdb34a0428fd3fdd4ffadf80c6a9c9a38abf8207ee6db1868",
+    "producer_identities_match": true,
+    "source_reading": "Limited to the reading and retrieval states recorded in mcsnow_state_sources.json; complete 2021 publisher article retrieval remains unresolved."
+  },
+  "figure_review": {
+    "manifest": "visualization/snow/generated/state_growth_manifest.json",
+    "manifest_sha256": "35c6c09bd79b84d6ec5444a91455aa87f35a9a9d51f08739830069351cf2f58d",
+    "plotted_curves": 66,
+    "plot_age_and_unit_roundtrips_passed": true,
+    "png_visually_inspected": true,
+    "pdf_rasterization_visually_inspected": true,
+    "inspection": "All twelve panels, labels, legend, curve identities and separate fitted segments inspected; no clipping or missing series observed.",
+    "outputs": {
+      "state_growth.png": "6aca1c11340058b38339331548fff99a7f800a73c2ab3ac9bff8445468784d85",
+      "state_growth.pdf": "9d6ce184157d836da6f9cc885675b0d3677d873ec1d624ad1e3d94cd9b346be1"
+    }
+  }
+}
