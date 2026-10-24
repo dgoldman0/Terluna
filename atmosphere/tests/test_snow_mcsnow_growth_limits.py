@@ -73,3 +73,17 @@ def test_extended_bounds_preserve_physical_settings_under_coordinate_change():
     extended=base.copy();extended[5]*=.5
     extended[7]=limits.early_coordinate(.25,(.0625,4.))
     assert limits.decode(extended,early_bounds=(.0625,4.),ventilation_max=4.)==pytest.approx(limits.decode(base))
+
+
+def test_early_model_samples_preserve_the_assumed_seed_and_comparison_endpoint():
+    p=json.loads(limits.PRODUCT.read_text())
+    for fit in p['searches']:
+        if 'early_model_history' not in fit:continue
+        history=fit['early_model_history'];rows=history['rows']
+        assert history['evidence'].startswith('Unobserved early model history')
+        assert rows[0]['age_min']==0.
+        assert rows[0]['aspect_ratio']==pytest.approx(1.)
+        assert rows[0]['values'][1:3]==pytest.approx([4e-6,4e-6])
+        assert all(r['age_min']<=3. for r in rows)
+        end=next(r for r in fit['assessment']['rows'] if r['initialization']=='sphere' and r['age_min']==3.)
+        assert rows[-1]['values']==pytest.approx(end['values'],rel=1e-12,abs=0.)

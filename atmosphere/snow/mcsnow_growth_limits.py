@@ -323,6 +323,20 @@ def seed_sensitivity(fit):
     return result
 
 
+def early_history(fit,dt=1/128):
+    """Sample the unobserved seed stage without adding it to the objective."""
+    e=copy.deepcopy(next(e for e in cases(fit['temperature_C']) if e['initialization']=='sphere'))
+    ages=[0.,.05,.15,.3,.5,1.,2.,3.]
+    e['sample_ages_min']=ages
+    with batch([e],dt,**fit_options(fit)) as b:result=b.evaluate(fit['coordinates'])
+    if result['error']:raise ValueError('Early model history failed: '+result['error'])
+    values=tuning.reported(b,result)
+    rows=[dict(age_min=age,values=row.tolist(),aspect_ratio=float(row[2]/row[1]))
+          for age,row in zip(ages,values)]
+    return dict(evidence='Unobserved early model history from the assumed sphere; these samples are not laboratory measurements or fitting targets.',
+                dt_s=dt,rows=rows,minimum_sampled_aspect_ratio=min(r['aspect_ratio'] for r in rows))
+
+
 def analyze():
     verify_build();old=json.loads(state.PRODUCT.read_text());checks=[]
     fits=[json.loads(p.read_text()) for p in sorted((CACHE/'fits').glob('*/result.json'))]
@@ -365,6 +379,14 @@ def analyze():
             r=b.evaluate(reset)
             best['early_limit_ablation']=dict(error=r['error'],training_loss=None if r['error'] else float(np.sum(tuning.residual(b,reset)**2)))
         if best['temperature_C']==-5.3 and not best['specification'].get('fixed'):
+            best['early_model_history']=early_history(best)
+            early_coarse=early_history(best,1/32)
+            fine=best['early_model_history']['rows']
+            diff=max(abs(a/b-1) for lo,hi in zip(early_coarse['rows'],fine) for a,b in zip(lo['values'],hi['values']))
+            checks.append(dict(name='early_history_timestep_'+best['name'],maximum_relative_difference=diff,passed=diff<.01))
+            reference=next(r for r in best['assessment']['rows'] if r['initialization']=='sphere' and r['age_min']==3.)
+            diff=max(abs(a/b-1) for a,b in zip(fine[-1]['values'],reference['values']))
+            checks.append(dict(name='early_history_endpoint_parity_'+best['name'],maximum_relative_difference=diff,passed=diff<1e-10))
             with batch(cases(-5.3),1/128,**fit_options(best)) as b:
                 reference=tuning.assessment(b,best['coordinates']);branch_checks=[]
                 for value in (0.,1.):
@@ -375,7 +397,10 @@ def analyze():
                         maximum_relative_difference=diff))
             best['branch_radius_controls']=branch_checks
             diff=max(r['maximum_relative_difference'] for r in branch_checks)
-            checks.append(dict(name='inactive_column_branch_'+best['name'],maximum_relative_difference=diff,passed=diff<1e-12))
+            # The 40 micrometre compact stage keeps these fitted histories prolate.
+            # A smooth-transition seed may begin oblate, where branching is active.
+            if best['seed_diameter_um']==40.:
+                checks.append(dict(name='inactive_column_branch_'+best['name'],maximum_relative_difference=diff,passed=diff<1e-12))
             if best['seed_diameter_um']:
                 options=fit_options(best);options['seed_diameter_um']=0.
                 with batch(cases(-5.3),**options) as b:

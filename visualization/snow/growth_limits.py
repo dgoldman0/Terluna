@@ -67,6 +67,16 @@ def render():
             raise ValueError('Ambiguous constrained comparison')
         if constrained:
             curves.append((constrained[0], 'Original transport and mean ventilation', '#8553a3'))
+        if temperature == -5.3:
+            smooth = [f for f in selected if f['temperature_C'] == temperature
+                      and f['family'] == 'axis' and f['seed_diameter_um'] == 0.
+                      and f['specification']['early_axis_multiplier_bounds'] == data['default_early_bounds']
+                      and f['specification'].get('ventilation_max', 2.) == 2.
+                      and not f['specification'].get('fixed')]
+            if len(smooth) > 1:
+                raise ValueError('Ambiguous warm comparison without compact cutoff')
+            if smooth:
+                curves.append((smooth[0], 'Warm refit without compact cutoff', '#b53d59'))
         for j, scale in enumerate((1e6, 1e3, 1e3)):
             ax = axes[i, j]
             for fit, label, color in curves:
@@ -85,8 +95,16 @@ def render():
                 ax.set_ylabel(f'{temperature:g} °C\n'+('4 µm seed' if initialization == 'sphere' else '3-minute restart'))
             if i == 3:
                 ax.set_xlabel('Age (minutes)')
-    handles, legend_labels = axes[0, 0].get_legend_handles_labels()
-    fig.legend(handles, legend_labels, loc='upper center', ncol=2, frameon=False, bbox_to_anchor=(.5, .969))
+    legend = {}
+    for ax in (axes[0, 0], axes[2, 0]):
+        handles, labels = ax.get_legend_handles_labels()
+        legend.update(zip(labels, handles))
+    legend_order = ['Previous early limit fixed', 'Independent early and later limits',
+                    'Warm refit without compact cutoff', 'Original transport and mean ventilation',
+                    'Laboratory fitted history']
+    legend_labels = [name for name in legend_order if name in legend]
+    fig.legend([legend[name] for name in legend_labels], legend_labels,
+               loc='upper center', ncol=2, frameon=False, bbox_to_anchor=(.5, .969))
     fig.suptitle('Independent early and later growth: Earth diagnostic comparisons', y=.995)
     fig.text(.5, .012, 'Fit ages: 5, 10, 20 min. Other measurements excluded from the score. Separate fits at each temperature.',
              ha='center', fontsize=9)
