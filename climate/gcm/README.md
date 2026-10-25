@@ -2010,10 +2010,86 @@ same way.
   A running model would let CAPE build until the threshold passed, fastest where the circulation destabilizes, as it
   does in the afternoon; how much of either quarter's loss would last, only a branch could show.
 
-So no branch has been run with the trigger. The diagnosis leaves open whether the box's quiet nights are physical:
-on its 6-km grid the eddies of its 6-km-deep night boundary layer go unresolved, and a finer box would settle it. If the
-nights stay quiet on a finer grid, a CAPE threshold of about 100 J/kg is the setting this test points to, and a branch
-is the only test that can judge it.
+So the screen ran no branch, and it left open whether the box's quiet nights belonged to its 6 km grid. Boxes at 3 and
+2 km then kept the sea's nights quiet
+([the CRM's account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e)), and the threshold of
+about 100 J/kg that the screen pointed to went to a two-year branch, set aside below.
+
+**The trigger's branch, set aside** (25 October; `A28R_301k_cold_sbm_rh07_cape100`, two years from the design climate's
+year-19 restart with the trigger at 100 J/kg and no mixing; `sbm_cape_test_analysis.txt` in `session-tools` on the
+research drive). Over years 0–1, against the rh 0.7 branch at the same stage, it halved the sea's rain after midnight,
+from 2.06 to 1.04 mm/day, where CM1 rains 0.14. It raised the sea's afternoon to 4.51 mm/day against 3.14 (CM1 2.23),
+and it left the land's afternoon near 14 mm/day (14.23 against 14.55; CM1 8.6). In year 1 its ground ran 0.6 K cooler,
+298.4 against 299.0 K in the global mean. The trigger stays off by default and is not adopted, because nothing
+explained why the GCM would need it.
+
+**Why the scheme rains after midnight** (25 October, at the author's go-ahead; no new runs;
+[box_entrainment.py](../crm/box_entrainment.py),
+[box_entrainment_near_side_sea.json](../results/crm/box_entrainment_near_side_sea.json)). The CM1 box's nights stay
+shallow because its cloud mixes in its surroundings at 0.2–1.3 × 10⁻³ m⁻¹ and loses the little buoyancy a parcel has
+between 6 and 10 km, beneath the deep layer that holds nearly all its CAPE
+([the CRM's account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e)). The rh 0.7 branch's six
+sea cells over years 10–14 show the scheme's side in two records: the convection's heating at the last step of each
+3-day mean (one step every 71.5 hours in each cell, 900 after midnight), and the means themselves, on which
+[sbm.py](sbm.py) traces the decision at once.
+- **The running scheme rains mostly from convection topped at 4–10 km.** After midnight 36 of the 900 steps rain,
+  forming 1.67 mm/day on average against the branch's 1.44 at the ground. Their heating shows the top the scheme chose:
+  24 of them heat only the two lowest layers, topped at σ 0.924 (about 4.2 km up), and 4 more reach σ 0.823 (10.2 km).
+  So 64% of the rain formed after midnight (45–89% over 300 resamplings of the steps) comes from convection topped at or
+  below 10 km, against 62% (49–76%) in the evening and 22% (9–38%) in the afternoon.
+- **Its split between deep and shallow weighs moisture alone.** The scheme convects deep wherever its undiluted
+  parcel from the lowest level is buoyant at some level above it and the layers from the parcel's top down hold, in
+  sum, more vapour than 70% of the parcel's saturation. It has no test of depth: PlaSim's `pdeep`, which sends
+  convection topped below a set pressure to the shallow scheme, stands at 999999 Pa, off. When the parcel finds
+  buoyancy only at σ 0.924, just above the moist lowest layer, the scheme relaxes the lowest 6.6 km toward 70% of the
+  parcel's saturation and rains the vapour above it, 27 mm/day on average while it lasts.
+- **The means smooth the steps at which it fires.** Run at once on the 888 cell means after midnight, the scheme finds
+  its parcel buoyant on 358, mostly at σ 0.21–0.32 (56–73 km) above a median inhibition of 83 J/kg, and the vapour
+  above its reference on only 30, which it rains on. On those 30 the vapour above the reference sums to a median of
+  5.5 kg/m². The excess lies at σ 0.924, 12.7 kg/m² there on average, against deficits higher up and in the lowest
+  layer.
+- **Against CM1's night**, on PlaSim's levels (CM1's domain mean interpolated in log pressure), the GCM is warmer at
+  every level: by 1.9 K at σ 0.983, 3.7–3.8 K at σ 0.92–0.82 and 5.5–11.1 K at σ 0.70–0.32, 19–56 km up. Its relative
+  humidity is 0.60–0.66 below 30 km against CM1's 0.67–0.95, 0.86 at σ 0.924, where CM1's 6 km boundary layer and its
+  cloud stand. The Kuo GCM that forced the box ran 1.2–2.5 K cooler than this branch at every level to σ 0.32. So the
+  box holds a cooler boundary layer, moister near its top, under an upper troposphere 8–11 K colder than the GCM's,
+  and its undiluted parcel has 1,415 J/kg of CAPE with nil inhibition.
+- **A plume at CM1's rates finds no buoyancy on the GCM's columns.** Lifted from PlaSim's lowest level through each mean
+  column laid on CM1's levels, dropping its condensate as the scheme's parcel does, a plume mixing at any of CM1's
+  measured rates (0.18–1.34 × 10⁻³ m⁻¹, 9–64 per e-folding of pressure as `eps_bm` counts it) is buoyant nowhere on the
+  30 night means where the scheme rains at once, nor on 99–100% of the afternoon's 27 and the evening's 74. Undiluted,
+  that plume, which leaves out the ice's heat that the scheme's parcel takes, is buoyant nowhere on 80% of the night's
+  30 and 41% of the afternoon's 27. The scheme keeps its troposphere near its undiluted parcel's temperature, and in
+  such a column CM1's entrainment would stop convection below the scheme's top at every hour, the afternoon's included.
+
+So the scheme rains after midnight in two ways, and the box shows the physics each leaves out. Most of its night rain
+comes from convection topped at 4–10 km, which it rains out because the warm sea keeps the boundary layer above 70% of
+the parcel's saturation; CM1's boundary layer holds such vapour too, 9.9 kg/m² above the reference on its night columns,
+and spreads it into a cloud layer 33–45 hPa deep that barely rains (0.14 mm/day). The rest comes from steps whose
+undiluted parcel runs to 19–56 km; in the box's night air a cloud mixing at the measured rates ends at 7–8 km. The
+evidence is thin where it counts most: 36 raining steps after midnight in five years, single steps whose columns the
+output does not hold, and the means' columns in their place.
+
+**What it points to** (proposals; nothing is built).
+- **Decide deep or shallow by the cloud's depth.** The IFS (documentation Cy36r1, 2010, Part IV, section 6.4, read)
+  calls a column deep when its test parcel's cloud, from condensation to where its updraught stops, is thicker than
+  200 hPa, and shallow below that. If lunar convection is Earth's stretched by the ratio of the gravities, depths in
+  pressure carry over, and the threshold falls between CM1's night cloud (33–45 hPa) and its afternoon cloud (215–270
+  hPa from its base to its median top). On the running scheme's steps a 200 hPa test would class those topped at
+  σ 0.924 as shallow, about 70 hPa above the lowest level and 43% of the rain formed after midnight, and would set the
+  four at σ 0.823, about 195 hPa and 21% more, at its edge. PlaSim's `pdeep` already makes that split by the top's
+  pressure.
+- **Lift the scheme's parcel as CM1's cloud mixes.** In CM1's night air a parcel mixing at the measured rates stops
+  by 8.3 km, where the box's cloud ends. On the GCM's present columns it finds no buoyancy at any hour, so the
+  scheme would at first stop everywhere, and its troposphere would cool toward the box's until diluted parcels rose
+  again. On PlaSim's ten levels a parcel mixing at these rates exchanges 42–98% of its air within the lowest step
+  alone, so it would have to be integrated within each layer, as the plume here is on CM1's levels.
+- **A mass-flux scheme with entraining plumes** (Tiedtke 1989's family) is the larger change: its shallow branch would
+  carry the boundary layer's vapour into a cloud layer and detrain it there, as CM1's night does, and its deep branch
+  could start from the afternoon's measured 0.16–0.33 × 10⁻³ m⁻¹.
+
+Each of these changes the column a running model builds, so the first response measured here does not show where the
+rain would then fall; a branch would.
 
 ### Cloud amount: what published models say
 

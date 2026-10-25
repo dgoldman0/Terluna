@@ -1956,6 +1956,118 @@ default), for a branch at the author's word. The test is one realization of each
 hour's mean air with that hour's forcing held. CM1's boundary-layer scheme stays on at every spacing, as in every lunar
 case, so the test measures the grid within that set-up. The 2 km box is 128 km wide against the others' 192.
 
+**What ends the night's cloud: its entrainment under the night's sounding** (25 October, at the author's go-ahead;
+[box_entrainment.py](box_entrainment.py),
+[box_entrainment_near_side_sea.json](../results/crm/box_entrainment_near_side_sea.json), 22 seconds, no new runs). With
+the grid ruled out, the box's own clouds show what stops them. Every 3-D output of the sea box's third lunar day is
+sampled level by level, as Siebesma and Cuijpers (1995, *J. Atmos. Sci.* 52) sampled large-eddy trade cumulus: 59
+snapshots 3 hours apart in each quarter of the lunar day, each of 1,024 columns, and the held-night boxes' 7 snapshots
+from hour 12 (1,024 columns at 6 km, 4,096 at 3 and 2 km).
+- **The samples.** Cloud is air holding at least 0.01 g/kg of cloud water and ice. The cloudy updraft is cloud that
+  rises, and the core is cloudy updraft lighter than its level's mean, counting the weight of every water species.
+  Each sample's environment is the rest of its level.
+- **The entrainment.** Total water qt and moist static energy h, which condensation leaves unchanged, give a bulk
+  plume's fractional entrainment ε = −(dφ_c/dz)/(φ_c − φ_e) from each quarter's pooled profiles; the detrainment is ε
+  less the mass flux's fractional growth with height. Rain that forms takes qt away and freezing adds to h, so the
+  night's warm cloud, which barely rains, keeps both, while in the afternoon's deep cells neither is kept exactly. The
+  bulk rate is the mass-flux-weighted mean of ε below 16 km, with the 5–95% range of 300 resamplings of the snapshots.
+- **The plume.** A plume with the mean air of the lowest 0.5 km (box_onset's parcel) rises undiluted to its
+  condensation level, then mixes in a share 1 − exp(−ε Δz) of the surrounding air's h and water between levels of
+  each quarter's mean sounding, dropping its condensate as it forms (with its condensate kept as weight, in brackets
+  below). Its cap is the first height above its level of free convection (LFC) where its buoyancy vanishes.
+- **The tops.** Each column's cloud top is the top of its lowest unbroken cloud below 40 km, which leaves out the ice
+  that forms in place near 50 km.
+
+| | Night | Morning | Afternoon | Evening |
+|---|---|---|---|---|
+| Rain | 0.14 mm/day | 0.00 | 2.23 | 2.97 |
+| Cloudy columns; their tops' median and 90th percentile | 22%; 7.3, 7.9 km | 0.9%; 6.7, 7.3 | 10%; 22.1, 27.8 | 10%; 7.3, 25.8 |
+| Cloudy updraft's entrainment by qt (5–95%); by h | 1.34 (1.20–1.53); 1.10 × 10⁻³ m⁻¹ | 0.50; 0.32 | 0.33 (0.30–0.35); 0.22 | 0.31 (0.29–0.34); 0.24 |
+| Core's entrainment by qt (5–95%); by h | 0.57 (0.55–0.61); 0.18 × 10⁻³ m⁻¹ | too few cores | 0.29 (0.25–0.31); 0.16 | 0.27 (0.25–0.29); 0.18 |
+| Undiluted parcel's CAPE below 10 km; at 10–16 km; above | 5; 32; 1,378 J/kg | 0.6; 12; 1,632 | 0.1; 54; 1,944 | 19; 84; 1,733 |
+| Plume at the quarter's core rate by h: inhibition; LFC; cap | 0.5 J/kg; 6.2; 8.3 (6.9) km | no cores | 39; 10.0; 26.8 (24.0) | 1.5; 5.3; 7.2 (6.6) |
+| Plume at 1 × 10⁻⁴ m⁻¹: inhibition; LFC; cap | 0.5 J/kg; 6.2; 8.8 (7.2) km | 54; 17.4; 31.4 (28.6) | 38; 10.0; 32.9 (28.3) | 1.5; 5.3; 27.8 (23.9) |
+
+**At night the boundary layer's air meets a layer of almost no buoyancy, and mixing ends its cloud there.** Nearly all
+of the night's 1,415 J/kg of undiluted CAPE lies above 10 km. Between its LFC at 6.2 km and 10 km the parcel gains 5
+J/kg, at most 0.0013 m/s² of buoyancy (0.2 K), and carrying its condensate it loses even that at 8.0 km. The cloudy
+updrafts mix in their surroundings at 1.1–1.3 × 10⁻³ m⁻¹ and their buoyant cores at 0.18–0.57 × 10⁻³ m⁻¹. At these rates
+the plume stops between 6.9 and 8.3 km or never becomes buoyant, where the columns' clouds end: half by 7.3 km, 90% by
+7.9 km. The cloud itself shows the same end. Its rising air is 0.05–0.10 K heavier than its level, and its mass flux
+falls fivefold from 6.2 to 7.9 km, 0.019 to 0.004 kg/m²/s, as it detrains 1.0–2.4 × 10⁻³ m⁻¹ into a layer that cloud
+covers 6–10% of. Above 10 km the parcel's buoyancy grows to 0.012 m/s² by 16 km in air that warms 0.51 K/km in potential
+temperature, less stable than the parcel's own moist adiabat, and that deep layer holds the CAPE the night's diluted
+cloud never reaches.
+
+**In the afternoon the same mixing carries cloud deep once the ascent has lifted it through the inhibition below
+10 km.** There the parcel is 0.9–1.4 K colder than its surroundings at 4–8 km, and the plume crosses 38–41 J/kg of
+inhibition. The cloudy updrafts cross that layer as forced cloud, 0.06–0.24 K heavier than their levels, rising at
+0.6–0.7 m/s under the prescribed ascent. Above 10 km the parcel's buoyancy grows to 0.017 m/s² by 16 km (54 J/kg
+between 10 and 16 km, against the night's 32). The updrafts' mass flux grows more than tenfold from 6.7 to 12 km, and a
+plume at the afternoon's core rate by h (0.16 × 10⁻³ m⁻¹) stops at 26.8 km, or 24.0 km with its condensate, beside the
+columns' tops: half by 22.1 km, 90% by 27.8 km. At the core rate by qt (0.29 × 10⁻³ m⁻¹) it stops at 12.6 km, or never
+becomes buoyant with its condensate, so the two rates bracket the afternoon's tops.
+
+**At a common rate the two soundings diverge.** At 1 × 10⁻⁴ m⁻¹, below every measured rate, the plume
+stops at 8.8 km at night and at 32.9 km in the afternoon; at 2 × 10⁻⁴ m⁻¹ at 8.3 and 24.3 km. The night's core rate
+by h carries a plume to 25.3 km through the afternoon's air, and the afternoon's to 8.4 km through the night's. So the
+sounding sets the difference, and the night's mixing deepens it: its cloudy updrafts mix four to five times as fast
+per metre as the afternoon's, its cores up to twice as fast.
+
+**The night's air above the boundary layer, and what the sinking does to it.** Between 6 and 10 km the potential
+temperature rises 0.74–0.95 K/km at night against 0.13–0.17 K/km in the afternoon. At 10–14 km the relative humidity
+is 0.73–0.77 against 0.82–0.89, and at 10–12 km the saturation deficit h* − h is 5.9–6.2 kJ/kg against 2.8–3.4. The
+stable layer stands on a cooler boundary layer: at 1 km the night's potential temperature is 283.6 K against the
+afternoon's 285.5, while at 10 km the two match, 287.3 and 287.4 K. The prescribed sinking keeps that shape. After
+midnight it cools the lowest 6 km by 18.7 W/m² and dries them by 2.9 mm/day against the sea's evaporation, and it warms
+6–10 km by 11.6 W/m² and 10–16 km by 25.4 W/m², where radiation cools them by 13.4 and 21.6 W/m². So the sinking's
+warming holds the air above the cloud at the afternoon's temperature while the boundary layer beneath cools. In the
+afternoon the forcing cools 6–16 km by 15.2 W/m² and moistens it by 2.2 mm/day, and radiation adds 1.5 W/m² at 6–10 km
+and takes 1.8 at 10–16 km.
+
+**Against BOMEX, the trade-wind case.** BOMEX's cumulus grow under subsidence reaching 0.65 cm/s at 1.5 km, radiative
+cooling of 2 K/day and drying near the sea, below an inversion at 1.48–2.0 km. Its LES clouds mix in 1–3 × 10⁻³ m⁻¹,
+0.8–1.7 × 10⁻³ m⁻¹ by the bulk-plume method this diagnosis uses. The night box has the regime's parts: sinking that
+warms the air above the cloud and dries the boundary layer against the sea's evaporation, a cloud layer spreading
+beneath a stable layer, little rain, and entrainment and detrainment near 10⁻³ m⁻¹. Its lid is a layer where the
+parcel's buoyancy almost vanishes, beneath a deep layer holding nearly all of its CAPE, where BOMEX's is an inversion.
+If lunar convection is Earth's stretched by the ratio of the gravities, as the gravity pair tests, a BOMEX-like cloud
+would mix 0.13–0.28 × 10⁻³ m⁻¹ by the bulk method on the Moon; this inference from scaling alone puts the night's
+cloudy updrafts at four to ten times that and its cores at 0.6–4 times.
+
+**The grid.** On the held-night boxes the rate stays put as the spacing shrinks. Their cloudy updrafts mix at 2.18,
+2.03 and 2.12 × 10⁻³ m⁻¹ by qt (1.52, 1.36 and 1.58 by h) at 6, 3 and 2 km, and at 2.21, 2.15 and 2.22 by qt over the
+second days alone, while half their columns' cloud tops lie by 7.9 km on every grid. Their buoyant cloud occupies only
+the cloud's topmost level, too thin for a core profile on any grid. They mix faster than the source's night (1.34 ×
+10⁻³ m⁻¹), their cloud a single thin deck at 6.2–7.9 km under the held forcing. All keep the same 111 levels,
+0.5–0.6 km apart in the cloud layer, so the night's cloud spans four or five of them, and CM1's boundary-layer scheme;
+a finer vertical grid stays untested.
+
+**The evidence.** The rates are measurements of the model, the bulk mixing of the cloud that the 6, 3 and 2 km boxes
+resolve, from one realization each; the resampling ranges treat 3-hourly snapshots as independent and so understate
+the spread. Romps (2010) found that the bulk-plume method gives at most half the entrainment measured directly in LES,
+and the night's core rates by qt and h differ threefold, since a core chosen for its buoyancy keeps its h. The caps
+are a calculation on mean soundings. The mechanism, a layer of almost no buoyancy between the boundary layer and the
+CAPE, is an inference from the caps, the cloud's own buoyancy and mass flux, and the soundings, and BOMEX is an
+analogy from the literature. The evening marks a limit of the bulk plume: a fresh plume in the evening's mean air stops
+at 5.8–7.9 km at the measured rates, or never becomes buoyant, yet the evening rains 2.97 mm/day from storms the
+afternoon set going. Their cores mix 0.07–0.23 × 10⁻³ m⁻¹ by qt between 6.7 and 17 km while rising at 0.7–4.7 m/s,
+more slowly than the evening's bulk rate, which the cloud near its base sets.
+[The GCM's account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october) traces why its scheme rains
+after midnight all the same.
+
+**The sources and how they were read.** A helper agent retrieved the literature on 25 October, within a bounded search;
+the publishers' pages for the AMS and Wiley papers refused it.
+- Romps (2010, *J. Atmos. Sci.* 67, 1908–1927), read in full from the author's copy (davidromps.com): BOMEX's
+  bulk-plume and direct entrainment, and the factor of two.
+- Siebesma and others (2003, *J. Atmos. Sci.* 60, 1201–1219), not read. BOMEX's forcing comes from MicroHH's
+  implementation of the case (`cases/bomex/bomex_input.py` on GitHub), and its LES entrainment of 1–3 × 10⁻³ m⁻¹ from
+  Siebesma's 2005 GCSS presentation (atmos.washington.edu, `~breth/GCSS/Arrowhead-200506`), both read.
+- Siebesma and Cuijpers (1995), not read. Its method is taken as Romps (2010) and Villalba-Pradas and Tapiador (2022,
+  *Geosci. Model Dev.* 15, 3447, read) describe it, cores entraining 1.5–2 × 10⁻³ m⁻¹ and the updraft about
+  3 × 10⁻³ m⁻¹ in BOMEX, five to ten times Tiedtke's (1989) 3 × 10⁻⁴ m⁻¹ for shallow convection.
+- De Rooy and others (2013, *QJRMS* 139) and Derbyshire and others (2004, *QJRMS* 130), not read.
+
 ```sh
 /media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
 climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about ten seconds
@@ -1977,6 +2089,7 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_nigh
 climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/agents/climate-resolution/trial_night.py run|check box_near_side_sea_night_6km
 /media/projectspace/terluna-research/session-tools/agents/climate-resolution/run_night.sh 6km   # 4 min; 3km 34, 2km 49
 climate/gcm/.venv/bin/python -m climate.crm.box_resolution          # the three grids beside the source's two nights
+climate/gcm/.venv/bin/python -m climate.crm.box_entrainment         # the clouds' entrainment and the scheme's nights
 ```
 
 ## A box over the highlands
