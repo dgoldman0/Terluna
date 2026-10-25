@@ -362,9 +362,13 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    leave it as it was, and the design air's methane, at the bound of its water, 1.2–2.0 K warmer, still 50–100 K under
    its target; its hydrogen escapes at 0.0085 kg/s, negligible for the water. Where in the middle atmosphere methane is
    broken, which the column's chemistry leaves out, decides how much water it leaves above the tropopause, up to 6.1
-   W/m² at the top, about 3.8 K. The sky's winter snow is done (atmosphere/snow, merged on 20 October): flakes a
-   centimetre or two across in light snow to tens of centimetres in heavy snow, falling at up to 0.64 m/s and melting
-   1–3 km below the freezing level at 29.2 km. Methane's chemistry in the middle atmosphere's column is answered without
+   W/m² at the top, about 3.8 K. The sky's winter snow (atmosphere/snow, merged on 20 October: flakes a centimetre or
+   two across in light snow to tens of centimetres in heavy snow, falling at up to 0.64 m/s and melting 1–3 km below
+   the freezing level at 29.2 km) is being reworked on domain/atmosphere (register, 24 October). There the sectional
+   solver lost much of its water, the event solver's medians kept growing with its volume, and across solvers and
+   moisture the lunar medians run from 0.7 mm to 23.5 cm. The work now gives flake sizes as a range over the moisture
+   supply and the number of crystals, with the crystal model frozen and its Earth errors carried through, then checks
+   the flakes' joining against Earth's snowflakes and estimates their survival in turbulence. Methane's chemistry in the middle atmosphere's column is answered without
    building it (register, 21 October): behind the titania stack nothing breaks methane below the base. The GCM's rain
    evaporation is measured (domain/climate 05b1384): PlaSim evaporates 29% of its falling rain, CM1's box with the lunar
    limits 48%, matched at gamma 0.026, which grows the low cloud and cools the Moon. Before the design run takes a
@@ -384,12 +388,14 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    climate's sunlight (domain/climate 5578b55), it gives 299.6 K at a reference humidity of 0.7 and 300.1 K at 0.6,
    against Kuo's 298.4 K. It rains 6–12% more, halves the sea's rain after midnight at 0.7 and sharpens the land's
    afternoon peak. Its climate takes a longwave refit of its own (3.38 W/m² against the rule's 2.5), and the exobase
-   stays. Next, at the author's word: CM1 boxes at the two sites forced by the new GCM's own budget. Open, with
-   recommendations:
-   - **The scheme's adoption and its reference humidity** (the author's call): 0.7 brings the sea's nights nearer
-     CM1's.
-   - **A third lunar day of the sea box**, to see whether its rain keeps rising as its upper air cools (recommended;
-     about an hour).
+   stays. Kuo's forcing does not explain CM1's quiet nights over the sea: after midnight the new GCM's circulation
+   there warms the air above 16 km by 131 W/m² against Kuo's 57 and dries the column by 5.2 against 3.3 mm/day, so a
+   box forced by it would meet harsher nights. Next (register, 24 October): the scheme is tested on CM1's own columns,
+   without mixing and with its mixing option, and a third lunar day of the sea box shows whether its rain keeps rising
+   as its upper air cools. A setting that passes gets a 15-year branch with the settling, longwave and exobase checks,
+   then the CM1 pair forced by that branch. Open, with recommendations:
+   - **The scheme's adoption and its reference humidity** (the author's call, after the test): 0.7 brings the sea's
+     nights nearer CM1's.
    - **A corrected rerun of one reference ring or box**, to size the boundary layer's bias in every earlier CM1 run
      (recommended).
    - **Reporting the bug to CM1's developers** (the author's call).
