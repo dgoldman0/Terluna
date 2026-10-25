@@ -1955,6 +1955,66 @@ cool its upper air toward the diluted parcel until convection resumed, and its r
 only such a branch shows where that rain falls. Among the settings tried, the screen on the GCM's own columns points to
 eps 1 at rh 0.7; on CM1's air that setting fails the test with the rest.
 
+**A CAPE trigger, tested on the GCM's own columns** (24 October, at the author's request for one more attempt;
+`cape_limit` and `eps_trigger` in [sbm.py](sbm.py), `SBM_TRIGGER_PATCHES` in [exoplasim_run.py](exoplasim_run.py),
+`trigger_test` in [sbm_offline.json](../results/gcm/sbm_offline.json)). The diagnosis of why the CM1 sea box stays
+quiet after midnight ([the CRM's account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e))
+weighed the three trigger families against the boxes:
+- **Boundary-layer air reaching its LFC.** This would favour the sea's nights: the box's 6-km boundary layer then holds
+  the LFC in 59% of its columns, against an inhibition of 0.4 J/kg.
+- **The forcing's dCAPE** (Xie and Zhang 2000). It treats the rainy evening and the quiet night alike, at −0.7 to
+  −2.4 J/kg/h through both.
+- **A CAPE threshold.** This follows the box: its storms start once the afternoon's circulation raises the CAPE above
+  about 1,800 J/kg, and they stop as they spend it.
+
+So the trigger is the CAPE family, with a mixing of its own for the dilute form (Neale and others 2008). With
+`cape_bm` above 0, a column convects deep only where a second parcel, lifted as the reference's but mixing `epst_bm` per
+e-folding of pressure, has at least `cape_bm` J/kg of CAPE. That CAPE is counted as the scheme counts its inhibition,
+from the parcel's own LFC up through the layers it stays buoyant, and a column held back takes the shallow scheme.
+Off by default, it is a patch of its own on the scheme's text, applied only for a run that sets it (`--sbm-cape`,
+`--sbm-trigger-eps`), so runs without it keep their source. The checks ([test_sbm.py](../tests/test_sbm.py)):
+- **Fortran against Python.** The patched Fortran routine gives the Python copy's tendencies on four columns with the
+  trigger on, to 10⁻¹⁰.
+- **With the trigger off,** the routine prints exactly what the scheme printed before on five columns. The refactored
+  Python copy matches its earlier self bit for bit on 2,880 of the GCM's columns.
+- **The patch** applies once to both ExoPlaSim's own source and the twilight copy's patched one. That was checked in
+  memory; neither source was changed.
+
+Five settings, on the rh 0.7 branch's cell columns of years 10–14, beside the scheme without the trigger and with its
+reference mixed at eps 1. The offline rain of each quarter is turned into the branch's own rain (pr) times the
+setting's offline rain over the scheme's without the trigger; mm/day:
+
+| | Sea, sunrise–noon | Sea, noon–sunset | Sea, sunset–midnight | Sea, midnight–sunrise | Land, noon–sunset | Land, sunset–midnight |
+|---|---|---|---|---|---|---|
+| CM1 | 0.00 | 2.23 | 2.97 | 0.14 | 8.59 | 1.53 |
+| The branch, without the trigger | 0.31 | 2.88 | 3.33 | 1.45 | 15.10 | 0.47 |
+| The reference mixed at eps 1 | 1.39 | 11.19 | 2.79 | 0.28 | 26.87 | 0.11 |
+| CAPE above 50 J/kg | 0.00 | 0.70 | 1.69 | 0.54 | 9.04 | 0.04 |
+| CAPE above 100 J/kg | 0.00 | 0.68 | 1.49 | 0.21 | 8.23 | 0.04 |
+| CAPE above 200 J/kg | 0.00 | 0.27 | 0.87 | 0.09 | 6.43 | 0.00 |
+| CAPE above 5 J/kg, mixing 1 | 0.00 | 0.06 | 0.13 | 0.00 | 4.05 | 0.04 |
+| CAPE above 5 J/kg, mixing 4 | 0.00 | 0.00 | 0.06 | 0.00 | 3.64 | 0.00 |
+
+No setting passes. The test asks for the sea's rain after midnight at most half the branch's and within 0.5 mm/day of
+CM1's, with the afternoon and evening at both sites within a factor of two of CM1's. The offline rain itself fails the
+same way.
+- **The undiluted thresholds cut the nights most.** At 100 J/kg the sea's night falls to 0.21 mm/day and the land's
+  afternoon to 8.23, next to CM1's 0.14 and 8.59. But the sea's afternoon falls to 0.68, and the land's evening, already
+  a third of CM1's, to 0.04. The branch's afternoon convection fires on columns holding little CAPE, a median of
+  32 J/kg on the sea's raining columns against 75 in the evening, because its circulation's ascent destabilizes them
+  continuously and the scheme rains what it supplies.
+- **The dilute forms find no CAPE.** On every quarter's raining columns the median CAPE of a parcel mixing at 1 is nil:
+  the branch's convection relaxes its troposphere toward the undiluted parcel's profile, against which a mixed parcel
+  stays cooler. So a dilute threshold stops convection at almost every hour.
+- **What the test cannot show.** It takes the scheme's first response to columns a branch built without the trigger.
+  A running model would let CAPE build until the threshold passed, fastest where the circulation destabilizes, as it
+  does in the afternoon; how much of either quarter's loss would last, only a branch could show.
+
+So no branch has been run with the trigger. The diagnosis leaves open whether the box's quiet nights are physical:
+on its 6-km grid the eddies of its 6-km-deep night boundary layer go unresolved, and a finer box would settle it. If the
+nights stay quiet on a finer grid, a CAPE threshold of about 100 J/kg is the setting this test points to, and a branch
+is the only test that can judge it.
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

@@ -5,11 +5,12 @@ The scheme follows Frierson (2007, J. Atmos. Sci. 64, 1959-1976). A parcel lifte
 moist adiabatically with PlaSim's saturation (the ice's latent heat below freezing, as Kuo's parcel), and mixing in a
 share 1 - exp(-eps ln(p_below/p)) of the surrounding air in each layer it rises through, gives the reference
 temperature from the lowest level to the top of its buoyancy; the reference vapour is rh of saturation there. Where the
-parcel is buoyant somewhere above its start, with its inhibition below cin when that is set, the temperature and vapour
-relax toward the references over tau. The rain is the vapour removed; the heating is shifted by one amount through the
-convecting layers so that it releases the rain's latent heat, keeping the column's moist enthalpy. A buoyant column
-whose vapour lies below its reference, or whose inhibition holds it back, is left to PlaSim's shallow scheme. Arrays
-run top first, as PlaSim's levels do.
+parcel is buoyant somewhere above its start, with its inhibition below cin when that is set and, with the CAPE trigger
+set, the CAPE of a second parcel mixing eps_trigger per e-folding of pressure at least cape_limit, the temperature and
+vapour relax toward the references over tau. The rain is the vapour removed; the heating is shifted by one amount
+through the convecting layers so that it releases the rain's latent heat, keeping the column's moist enthalpy. A
+buoyant column whose vapour lies below its reference, or whose inhibition or trigger holds it back, is left to PlaSim's
+shallow scheme. Arrays run top first, as PlaSim's levels do.
 """
 from __future__ import annotations
 
@@ -45,12 +46,42 @@ def condense(t, q, p, c=PLASIM):
     return t, q
 
 
+def parcel(t, q, sigma, p, eps, akap, c=PLASIM):
+    """The scheme's parcel lifted from the lowest level, dry and then moist adiabatically, mixing in a share
+    1 - exp(-eps ln(p_below/p)) of the surrounding air in each layer it rises through: its temperature by level."""
+    tp = np.zeros(t.size)
+    tn, qn = condense(t[-1], q[-1], p[-1], c)
+    tp[-1] = tn
+    for k in range(t.size - 2, -1, -1):
+        tn *= (sigma[k] / sigma[k + 1]) ** akap
+        if eps > 0.0:
+            mix = 1.0 - math.exp(-eps * math.log(sigma[k + 1] / sigma[k]))
+            tn, qn = (1.0 - mix) * tn + mix * t[k], (1.0 - mix) * qn + mix * q[k]
+        tn, qn = condense(tn, qn, p[k], c)
+        tp[k] = tn
+    return tp
+
+
+def trigger_cape(t, tp, sigma, dsigma, c=PLASIM):
+    """A parcel's CAPE (J/kg) as the scheme counts its inhibition: the gas constant times (tp - t) dsigma/sigma, summed
+    from its level of free convection, the lowest above its start where it is buoyant, up through the layers it stays
+    buoyant; nil for a parcel buoyant nowhere above its start."""
+    lfc = next((k for k in range(t.size - 2, -1, -1) if tp[k] > t[k]), None)
+    cape = 0.0
+    if lfc is not None:
+        for k in range(lfc, -1, -1):
+            if tp[k] <= t[k]:
+                break
+            cape += c['gascon'] * (tp[k] - t[k]) * dsigma[k] / sigma[k]
+    return cape
+
+
 def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, step=1800.0, akap=0.2857,
-           c=PLASIM):
+           c=PLASIM, cape_limit=0.0, eps_trigger=0.0):
     """One column's tendencies by the scheme: temperature (K/s) and vapour (kg/kg/s) by level, the rain formed at each
     level (kg/m2/s), the convection's top level (index, or None), the parcel's inhibition (J/kg), whether the
-    column is left to the shallow scheme and the parcel's temperature, the reference. step is PlaSim's deltsec2,
-    the shortest relaxation time."""
+    column is left to the shallow scheme and the parcel's temperature, the reference; with the CAPE trigger set
+    (cape_limit > 0), the trigger parcel's CAPE too. step is PlaSim's deltsec2, the shortest relaxation time."""
     t, q = np.asarray(t, float), np.asarray(q, float)
     sigma, dsigma = np.asarray(sigma, float), np.asarray(dsigma, float)
     n = t.size
@@ -58,16 +89,7 @@ def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, 
     cp = c['acpd'] * (1.0 + c['ADV'] * q)
     out = dict(dtdt=np.zeros(n), dqdt=np.zeros(n), rain=np.zeros(n), top=None, cin=0.0, shallow=False,
                reference_t=None)
-    tp = np.zeros(n)
-    tn, qn = condense(t[-1], q[-1], p[-1], c)
-    tp[-1] = tn
-    for k in range(n - 2, -1, -1):
-        tn *= (sigma[k] / sigma[k + 1]) ** akap
-        if eps > 0.0:
-            mix = 1.0 - math.exp(-eps * math.log(sigma[k + 1] / sigma[k]))
-            tn, qn = (1.0 - mix) * tn + mix * t[k], (1.0 - mix) * qn + mix * q[k]
-        tn, qn = condense(tn, qn, p[k], c)
-        tp[k] = tn
+    tp = parcel(t, q, sigma, p, eps, akap, c)
     out['reference_t'] = tp.copy()
     buoyant = [k for k in range(n - 2, -1, -1) if tp[k] > t[k]]
     if not buoyant:
@@ -80,6 +102,8 @@ def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, 
         top = k
     cin = sum(c['gascon'] * max(0.0, t[k] - tp[k]) * dsigma[k] / sigma[k] for k in range(lfc + 1, n))
     out.update(top=top, cin=cin)
+    if cape_limit > 0.0:
+        out['trigger_cape'] = trigger_cape(t, parcel(t, q, sigma, p, eps_trigger, akap, c), sigma, dsigma, c)
     tau = max(tau, step)
     layers = range(top, n)
     dtr = {k: (tp[k] - t[k]) / tau for k in layers}
@@ -87,7 +111,7 @@ def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, 
     pq = -sum(dqr[k] * m[k] for k in layers)
     pt = sum(cp[k] * dtr[k] * m[k] for k in layers)
     cpm = sum(cp[k] * m[k] for k in layers)
-    if pq <= 0.0 or (cin_limit > 0.0 and cin > cin_limit):
+    if pq <= 0.0 or (cin_limit > 0.0 and cin > cin_limit) or (cape_limit > 0.0 and out['trigger_cape'] < cape_limit):
         out['shallow'] = True
         return out
     corr = (c['ALV'] * pq - pt) / cpm

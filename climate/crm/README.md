@@ -1691,8 +1691,9 @@ threads. Its water budget closes to 0.06 mm/day, and its boundary layer passes o
   The column's radiation cools it by 50 W/m², against 107 in the nudged run, under the deep cloud.
 - **Evaporation.** The sea evaporates 2.69 mm/day, against the GCM's 3.51.
 - **Drift.** Without the nudging the upper air cools. At 40 km it went from 262 to 254 K over the two lunar days and at
-  60 km from 238 to 226.5 K, still falling 0.1–0.2 K a day at the end, so the second lunar day is not yet the box's own
-  equilibrium.
+  60 km from 238 to 224.2 K, still falling 0.1–0.2 K a day at the end, so the second lunar day is not yet the box's own
+  equilibrium. (Corrected on 24 October: this entry first gave 226.5 K at 60 km; the domain diagnostics and the 3-D
+  output at day 59.0 both give 224.2 K.)
 - **The share.** 61% of the water falling from its clouds evaporates on the way down: 39.2 mm, against 25.2 mm reaching
   the sea, from 80.7 mm condensed. On PlaSim's pooled shares for this sea (49.7% at gamma 0.02, 75.8% at 0.04) that is
   gamma about 0.027, provisional on the drift and on the timing below; `rain_evaporation.py`'s fit follows with the land
@@ -1821,6 +1822,58 @@ convection spends the vapour its columns gather, so the scheme's rate at once me
 reference, most of it after the box's convection has stopped. Only the GCM can show when the scheme would rain in a
 model running it.
 
+**Why the sea box's nights stay quiet** (24 October; [box_onset.py](box_onset.py),
+[box_onset_box_near_side_sea_day3.json](../results/crm/box_onset_box_near_side_sea_day3.json),
+[box_onset_box_0e_design.json](../results/crm/box_onset_box_0e_design.json)). The diagnosis covers the sea box's third
+lunar day and, for contrast, the land box's second. At every 3-hourly output, parcels rise through the domain-mean
+sounding:
+- **The parcels.** They start from the lowest level and from the lowest 0.5 and 1 km mixed, keep their moist static
+  energy and drop their condensate. They rise undiluted or mixing in surrounding air at 1–8 per e-folding of pressure,
+  as the scheme's `eps_bm` counts it. The lunar column's scale height near the ground is about 48 km, so 8 is
+  0.17/km. If lunar convection is Earth's stretched by the ratio of the gravities, as the gravity pair tests, 8 is
+  Earth's 1/km (Neale and others 2008 used 1e-3/m).
+- **The forcing's dCAPE** (Xie and Zhang 2000). This is the CAPE's change over an hour under the day-night table and
+  the mean ascent alone, applied above 1 km.
+- **The 3-D output.** The strongest updrafts, the cloud tops, and CM1's own CAPE, inhibition and boundary-layer depth
+  in each column.
+
+By quarter, for the parcel from the lowest 0.5 km (undiluted unless marked):
+
+| | Rain, mm/day | Boundary layer | CAPE | CAPE at eps 8 | Inhibition | LCL; LFC | LFC inside the boundary layer | Free-troposphere dCAPE | Strongest updraft, mean of outputs |
+|---|---|---|---|---|---|---|---|---|---|
+| Sea, sunrise–noon | 0.00 | 3.7 km | 1,646 J/kg | 10 | 39.5 J/kg | 6.4; 12.7 km | 6% of columns | +1.2 J/kg/h | 1.8 m/s |
+| Sea, noon–sunset | 2.23 | 2.3 km | 2,008 | 37 | 38.1 | 7.5; 9.6 | 1% | +3.7 | 10.1 |
+| Sea, sunset–midnight | 2.97 | 4.9 km | 1,876 | 16 | 1.4 | 4.7; 5.1 | 58% | −1.6 | 6.8 |
+| Sea, midnight–sunrise | 0.14 | 6.1 km | 1,415 | 10 | 0.4 | 5.9; 6.2 | 59% | −1.6 | 1.5 |
+| Land, sunrise–noon | 2.91 | 3.8 km | 1,900 | 46 | 99.7 | 5.9; 11.8 | 20% | +4.6 | 5.8 |
+| Land, noon–sunset | 8.59 | 4.0 km | 4,593 | 35 | 9.0 | 4.3; 5.6 | 37% | +14.9 | 16.5 |
+| Land, sunset–midnight | 1.53 | 0.2 km | 2,195 | 78 | 73.1 | 2.7; 9.0 | 0% | −4.3 | 2.2 |
+| Land, midnight–sunrise | 0.08 | 0.1 km | 473 | 1 | 148.4 | 3.3; 15.2 | 0% | −4.1 | 2.3 |
+
+- **Over land the quiet nights belong to the boundary layer.** After sunset it collapses to about 100 m, and the parcel
+  meets 136–157 J/kg of inhibition with its LFC at 14–16 km. Convection starts each morning once the deepening layer,
+  6.9 km, holds the LFC in 56% of the columns and the inhibition falls to 10–12 J/kg. Then the box resolves
+  low-level updrafts of 2.6–3.0 m/s (the 99.9th percentile below 16 km).
+- **After midnight the sea box meets those conditions and does not convect.** Its boundary layer is 6.1 km deep and
+  holds the LFC in 59% of the columns; the parcel's inhibition is 0.4 J/kg and its CAPE 1,415 J/kg. Its resolved
+  low-level updrafts reach 1.0–1.25 m/s, and its cloud stays shallow, with tops below 16 km in 14–25% of the columns.
+- **The sea box convects on the CAPE the afternoon's circulation builds.** Its storms start at 1,822 J/kg against
+  65 J/kg of inhibition, as the free-troposphere dCAPE runs at +3.9 to +4.2 J/kg/h. They peak at 2,609 J/kg and spend
+  it, to 1,173 J/kg by midnight. Through the night the CAPE stays at 1,350–1,460 J/kg, and in the morning it rises
+  to 1,630–1,680 J/kg under growing inhibition.
+- **The forcing alone does not separate evening from night.** Its free-troposphere dCAPE is −0.7 to −2.4 J/kg/h
+  through both the rainy evening and the quiet night. CAPE at eps 8 is 18–63 J/kg as the storms start and peak, 5–16
+  at night and in the morning, and 0–1 through the evening's decay.
+
+So over the sea a trigger on whether boundary-layer air reaches its LFC would favour the nights, and the dCAPE treats
+the evening and the night alike. The CAPE the circulation builds marks the box's convection, carried into the evening
+by the storms the afternoon starts. The box's own grid is a candidate cause of the quiet nights. Its night boundary
+layer is as deep as its 6-km spacing is wide, so the boundary-layer scheme carries the layer's eddies, which the grid
+cannot resolve. Petch and others (2002, *QJRMS* 128) found deep convection's onset delayed on grids too coarse for such
+eddies. A finer box would show whether the sea's nights convect.
+[The GCM's account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october) tests a CAPE trigger on the
+GCM's own columns.
+
 ```sh
 /media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
 climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about ten seconds
@@ -1836,6 +1889,8 @@ climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_day3 --
 climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_near_side_sea_day3 --from-day 59
 climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea box_near_side_sea_day3     # its lunar days
 climate/gcm/.venv/bin/python -m climate.gcm.sbm_offline           # the new scheme on the boxes' air, 15 seconds
+climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_day3 59 88.5    # why the nights stay quiet
+climate/gcm/.venv/bin/python -m climate.crm.box_onset box_0e_design 29.5 59               # the land, for contrast
 ```
 
 ## A box over the highlands

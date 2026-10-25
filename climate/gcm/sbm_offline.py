@@ -162,7 +162,7 @@ def gcm_columns(run: str, years, box: str) -> dict:
     cells = [tuple(c) for c in record['gcm_site']['cells']]
     lon_site = record['configuration']['site']['lon_deg']
     c = run_constants(run)
-    out = dict(t=[], q=[], ps=[], weight=[], hour=[], year=[], prc=[], formed=[])
+    out = dict(t=[], q=[], ps=[], weight=[], hour=[], year=[], prc=[], pr=[], formed=[])
     for year in range(years[0], years[1] + 1):
         with netCDF4.Dataset(HERE / 'runs' / run / 'model' / f'MOST.{year:05d}.nc') as d:
             lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
@@ -170,7 +170,7 @@ def gcm_columns(run: str, years, box: str) -> dict:
             edges = gs.plasim_edges(sigma)
             idx = [(int(np.argmin(abs(lat - a))), int(np.argmin(abs(lon - b)))) for a, b in cells]
             w = np.cos(np.radians([lat[j] for j, _ in idx]))
-            f = {k: np.asarray(d[k][:], float) for k in ('ta', 'hus', 'ps', 'prc', 'dt_conv')}
+            f = {k: np.asarray(d[k][:], float) for k in ('ta', 'hus', 'ps', 'prc', 'pr', 'dt_conv')}
             hour = (lon_site - gs.subsolar_longitude(np.asarray(d['czen'][:], float), lat, lon) + 180.0) % 360.0 - 180.0
         for n in range(f['ta'].shape[0]):
             for wk, (j, i) in zip(w, idx):
@@ -184,15 +184,17 @@ def gcm_columns(run: str, years, box: str) -> dict:
                 out['hour'].append(hour[n])
                 out['year'].append(year)
                 out['prc'].append(f['prc'][n, j, i] * 1000.0 * DAY)
+                out['pr'].append(f['pr'][n, j, i] * 1000.0 * DAY)
                 out['formed'].append(float((c['acpd'] * (1.0 + c['ADV'] * q) * f['dt_conv'][n, :, j, i] * m).sum())
                                      / c['ALV'] * DAY)
     return dict({k: np.asarray(v) for k, v in out.items()}, sigma=sigma, edges=edges, cells=cells)
 
 
-def scheme(t, q, sigma, dsigma, ps, rh, eps, cin_limit, c, akap=KAPPA) -> dict:
+def scheme(t, q, sigma, dsigma, ps, rh, eps, cin_limit, c, akap=KAPPA, cape_limit=0.0, eps_trigger=0.0) -> dict:
     """The scheme on one column: its rain at once (mm/day), whether it convects deep and rains, whether its parcel is
-    buoyant anywhere, and the parcel's inhibition (J/kg)."""
-    o = sbm.column(t, q, sigma, dsigma, ps, tau=TAU_S, rh=rh, eps=eps, cin_limit=cin_limit, step=STEP_S, akap=akap, c=c)
+    buoyant anywhere, and the parcel's inhibition (J/kg); with the CAPE trigger set, held back below cape_limit."""
+    o = sbm.column(t, q, sigma, dsigma, ps, tau=TAU_S, rh=rh, eps=eps, cin_limit=cin_limit, step=STEP_S, akap=akap, c=c,
+                   cape_limit=cape_limit, eps_trigger=eps_trigger)
     return dict(rain=float(o['rain'].sum()) * DAY, deep=o['top'] is not None and not o['shallow'],
                 buoyant=o['top'] is not None, cin=float(o['cin']))
 
@@ -214,7 +216,8 @@ def summarise(results, quarter, weights=None) -> dict:
         cin_q.append(float(np.sum(cin[m] * w[m]) / np.sum(w[m])) if m.any() else None)
     rain_q = by_quarter(rain, quarter, weights)
     return dict(rain_mm_day=rain_q, vapour_above_reference_kg_m2=[r * TAU_S / DAY for r in rain_q],
-                convecting_share=by_quarter(deep, quarter, weights), buoyant_share=by_quarter(buoyant, quarter, weights),
+                convecting_share=by_quarter(deep, quarter, weights),
+                buoyant_share=by_quarter(buoyant, quarter, weights),
                 parcel_inhibition_j_kg=cin_q)
 
 
@@ -258,6 +261,78 @@ def on_gcm_branch(run: str, rh: float, years, c: dict) -> dict:
                                                     for j in range(len(QUARTERS))]
         out['settings'].append(row)
     return out
+
+
+# The CAPE trigger on the rh 0.7 branch's own columns (24 October): at most five settings (the CAPE in J/kg a parcel
+# mixing eps_trigger per e-folding of pressure must have), beside the scheme without it and with the reference itself
+# mixed at eps 1, as Stage A's screen took it. CM1's rain by quarter, the sea box's third lunar day and the land box's
+# second, is the target; a setting passes if the sea's rain after midnight falls to at most half the branch's and
+# within 0.5 mm/day of CM1's, while the afternoon and evening at both sites stay within a factor of two of CM1's. Each
+# setting is judged on the offline rain itself and on the branch's own rain scaled quarter by quarter by the
+# setting's offline rain over the scheme's without it.
+TRIGGERS = ((50.0, 0.0), (100.0, 0.0), (200.0, 0.0), (5.0, 1.0), (5.0, 4.0))
+TRIGGER_BRANCH = ('A28R_301k_cold_sbm_rh07', 0.7)
+CM1_TARGET = dict(sea=[0.00, 2.23, 2.97, 0.14], land=[2.91, 8.59, 1.53, 0.08])
+
+
+def trigger_passes(rain: dict, branch_night: float) -> dict:
+    """The trigger test's rule on one set of rain by quarter at both sites."""
+    names = [q[0] for q in QUARTERS]
+    night = rain['sea'][names.index('midnight-sunrise')]
+    rows = [dict(site='sea', quarter='midnight-sunrise', rain=night, cm1=CM1_TARGET['sea'][3],
+                 near=bool(night <= 0.5 * branch_night and night <= CM1_TARGET['sea'][3] + 0.5))]
+    for site in ('sea', 'land'):
+        for quarter in ('noon-sunset', 'sunset-midnight'):
+            r, b = rain[site][names.index(quarter)], CM1_TARGET[site][names.index(quarter)]
+            rows.append(dict(site=site, quarter=quarter, rain=r, cm1=b, near=bool(0.5 * b <= r <= 2.0 * b)))
+    return dict(passes=all(r['near'] for r in rows), quarters=rows)
+
+
+def trigger_test(years=GCM_YEARS) -> dict:
+    run, rh = TRIGGER_BRANCH
+    c = run_constants(run)
+    gcm = {site: gcm_columns(run, years, case) for site, case in BOXES}
+    settings = [dict(label='without the trigger', eps=0.0, cape_limit=0.0, eps_trigger=0.0),
+                dict(label='the reference mixed at eps 1', eps=1.0, cape_limit=0.0, eps_trigger=0.0)]
+    settings += [dict(label=f'CAPE above {cape:g} J/kg, trigger mixing {mix:g}', eps=0.0, cape_limit=cape,
+                      eps_trigger=mix) for cape, mix in TRIGGERS]
+    branch = {site: by_quarter(g['pr'], quarter_of(g['hour']), g['weight']) for site, g in gcm.items()}
+    held = {}                       # the CAPE the trigger parcel finds on the columns where the scheme rains without it
+    for site, g in gcm.items():
+        quarter = quarter_of(g['hour'])
+        raining = np.array([scheme(t, q, g['sigma'], np.diff(g['edges']), ps, rh, 0.0, 0.0, c)['rain'] > 0.0
+                            for t, q, ps in zip(g['t'], g['q'], g['ps'])])
+        held[site] = {}
+        for mix in (0.0, 1.0):
+            cape = np.array([sbm.trigger_cape(t, sbm.parcel(t, q, g['sigma'], ps * g['sigma'], mix, KAPPA, c),
+                                              g['sigma'], np.diff(g['edges']), c)
+                             for t, q, ps in zip(g['t'], g['q'], g['ps'])])
+            held[site][f'trigger mixing {mix:g}'] = [float(np.median(cape[raining & (quarter == k)]))
+                                                     if (raining & (quarter == k)).any() else None
+                                                     for k in range(len(QUARTERS))]
+    rows = []
+    for st in settings:
+        row = dict(st)
+        for site, g in gcm.items():
+            quarter = quarter_of(g['hour'])
+            res = [scheme(t, q, g['sigma'], np.diff(g['edges']), ps, rh, st['eps'], 0.0, c,
+                          cape_limit=st['cape_limit'], eps_trigger=st['eps_trigger'])
+                   for t, q, ps in zip(g['t'], g['q'], g['ps'])]
+            row[site] = summarise(res, quarter, g['weight'])
+        rows.append(row)
+    base = rows[0]
+    for row in rows:
+        row['branch_scaled_mm_day'] = {
+            site: [b * (r / s0) if s0 > 0.0 else 0.0
+                   for b, r, s0 in zip(branch[site], row[site]['rain_mm_day'], base[site]['rain_mm_day'])]
+            for site in ('sea', 'land')}
+        row['test'] = dict(offline=trigger_passes({s: row[s]['rain_mm_day'] for s in ('sea', 'land')},
+                                                  branch['sea'][3]),
+                           branch_scaled=trigger_passes(row['branch_scaled_mm_day'], branch['sea'][3]))
+    return dict(run=run, rh=rh, years=list(years), branch_rain_mm_day=branch, cm1_target_mm_day=CM1_TARGET,
+                raining_columns_cape_median_j_kg=held, settings=rows,
+                passing=[r['label'] for r in rows[2:] if r['test']['offline']['passes'] or
+                         r['test']['branch_scaled']['passes']])
 
 
 def analyse(span=SPAN_DAYS, branches=GCM_BRANCHES, years=GCM_YEARS) -> dict:
@@ -307,7 +382,7 @@ def analyse(span=SPAN_DAYS, branches=GCM_BRANCHES, years=GCM_YEARS) -> dict:
     return dict(schema=SCHEMA, quarters=[q[0] for q in QUARTERS], constants=dict(
                     gascon=c['gascon'], ga=c['ga'], kappa=KAPPA, acpd=c['acpd'], rdbrv=c['rdbrv'], ADV=c['ADV'],
                     tau_s=TAU_S, step_s=STEP_S),
-                sigma=sigma.tolist(), cm1=cm1, on_boxes=on_boxes, on_gcm=on_gcm,
+                sigma=sigma.tolist(), cm1=cm1, on_boxes=on_boxes, on_gcm=on_gcm, trigger_test=trigger_test(years),
                 pass_rule=dict(quarters=[list(q) for q in PASS_QUARTERS], within_mm_day=PASS_MM_DAY,
                                within_share_of_cm1=PASS_SHARE, mapping='level'),
                 passing_settings=[dict(rh=r['rh'], eps=r['eps'], cin_limit_j_kg=r['cin_limit_j_kg'])
@@ -315,22 +390,33 @@ def analyse(span=SPAN_DAYS, branches=GCM_BRANCHES, years=GCM_YEARS) -> dict:
                 evidence=('Offline diagnosis: the tested Python copy of the scheme applied at once to columns, with no '
                           'model integrating it. The boxes\' columns are CM1 domain means over one lunar day of one '
                           'run each, standing for a GCM cell, forced by Kuo\'s GCM; the GCM\'s are 3-day means of five '
-                          'years of each of two branches, in which the scheme ran without mixing at rh 0.7 and 0.6. The scheme\'s '
+                          'years of each of two branches, in which the scheme ran without mixing at rh 0.7 and 0.6. '
+                          'The scheme\'s '
                           'instantaneous rate is set against CM1\'s realised rain and the GCM\'s rain.'),
                 reading_rule=('Rain in mm/day by quarter of the lunar day at the site (sunrise-noon, noon-sunset, '
                               'sunset-midnight, midnight-sunrise); on the scheme\'s side the rain formed, before '
-                              'PlaSim\'s evaporation of falling rain; vapour_above_reference_kg_m2 is that rain times the '
+                              'PlaSim\'s evaporation of falling rain; vapour_above_reference_kg_m2 is that rain '
+                              'times the '
                               'relaxation time, the vapour above the reference in the convecting layers, nil where the '
                               'scheme does not rain. convecting_share is the share of columns on which '
                               'the scheme convects deep and rains, buoyant_share the share on which its parcel is '
                               'buoyant somewhere, parcel_inhibition_j_kg the parcel\'s mean inhibition where buoyant. '
                               'on_boxes holds each setting on CM1\'s columns by mapping (level: interpolation to '
                               'PlaSim\'s full levels, the pass test\'s; layer: layer means by mass; cm1: CM1\'s own '
-                              'levels; level_test_constants: the level mapping with test_sbm.py\'s constants in place of '
-                              'the runs\'); on_gcm, for each branch, the scheme at the branch\'s own rh on its own cell columns, '
+                              'levels; level_test_constants: the level mapping with test_sbm.py\'s constants in '
+                              'place of the runs\'); on_gcm, for each branch, the scheme at the branch\'s own rh on '
+                              'its own cell columns, '
                               'cell-weighted by cos latitude, '
                               'with the range of the five yearly values and the count of convecting cell-outputs. '
-                              'formed_snapshot is the GCM\'s own scheme at the end of each mean, one step.'))
+                              'formed_snapshot is the GCM\'s own scheme at the end of each mean, one step. '
+                              'trigger_test: the CAPE trigger (sbm.column\'s cape_limit and eps_trigger) on the rh 0.7 '
+                              'branch\'s cell columns beside the scheme without it and with its reference mixed at eps '
+                              '1; branch_scaled multiplies the branch\'s own rain (pr) in each quarter by the '
+                              'setting\'s '
+                              'offline rain over the scheme\'s without the trigger; test applies the rule of '
+                              'TRIGGERS\' comment to both; raining_columns_cape_median_j_kg is the median CAPE the '
+                              'trigger parcel finds, undiluted or mixing at 1, on the columns where the scheme without '
+                              'the trigger rains.'))
 
 
 def main(argv=None) -> int:
@@ -343,9 +429,11 @@ def main(argv=None) -> int:
     OUT.write_text(json.dumps(out, indent=1) + '\n')
     fmt = lambda v: ' '.join(f'{x:7.2f}' for x in v)
     for site in ('sea', 'land'):
-        print(f"{site}: CM1 {fmt(out['cm1'][site]['rain_mm_day'])}   inhibition {fmt(out['cm1'][site]['inhibition_j_kg'])}")
+        print(f"{site}: CM1 {fmt(out['cm1'][site]['rain_mm_day'])}   "
+              f"inhibition {fmt(out['cm1'][site]['inhibition_j_kg'])}")
         for r in out['on_boxes']['level']:
-            print(f"  rh {r['rh']:.1f} eps {r['eps']:4.1f} cin {r['cin_limit_j_kg']:4.0f}: {fmt(r[site]['rain_mm_day'])}"
+            print(f"  rh {r['rh']:.1f} eps {r['eps']:4.1f} cin {r['cin_limit_j_kg']:4.0f}: "
+                  f"{fmt(r[site]['rain_mm_day'])}"
                   f"   convecting {fmt(r[site]['convecting_share'])}")
         for b in out['on_gcm']:
             g = b['sites'][site]
@@ -354,6 +442,14 @@ def main(argv=None) -> int:
                 print(f"    its columns rh {r['rh']:.1f} eps {r['eps']:4.1f}: {fmt(r[site]['rain_mm_day'])}"
                       f"   convecting {fmt(r[site]['convecting_share'])}   buoyant {fmt(r[site]['buoyant_share'])}")
     print('passing settings:', out['passing_settings'] or 'none')
+    t = out['trigger_test']
+    print('the CAPE trigger on', t['run'], 'years', t['years'], '; the branch\'s rain', t['branch_rain_mm_day'])
+    for r in t['settings']:
+        print(f"  {r['label']:42s} sea {fmt(r['sea']['rain_mm_day'])}  land {fmt(r['land']['rain_mm_day'])}  "
+              f"branch scaled: sea {fmt(r['branch_scaled_mm_day']['sea'])}  "
+              f"land {fmt(r['branch_scaled_mm_day']['land'])}"
+              f"  passes {r['test']['offline']['passes']}/{r['test']['branch_scaled']['passes']}")
+    print('passing triggers:', t['passing'] or 'none')
     print(f'wrote {OUT.relative_to(HERE.parents[1])}')
     return 0
 

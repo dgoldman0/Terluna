@@ -5966,6 +5966,1237 @@
    ]
   }
  ],
+ "trigger_test": {
+  "run": "A28R_301k_cold_sbm_rh07",
+  "rh": 0.7,
+  "years": [
+   10,
+   14
+  ],
+  "branch_rain_mm_day": {
+   "sea": [
+    0.30752071288322397,
+    2.8803952699142448,
+    3.3301320627080067,
+    1.4481420750894474
+   ],
+   "land": [
+    1.0510379228842737,
+    15.097885467179337,
+    0.4668952365125896,
+    0.07977308391462308
+   ]
+  },
+  "cm1_target_mm_day": {
+   "sea": [
+    0.0,
+    2.23,
+    2.97,
+    0.14
+   ],
+   "land": [
+    2.91,
+    8.59,
+    1.53,
+    0.08
+   ]
+  },
+  "raining_columns_cape_median_j_kg": {
+   "sea": {
+    "trigger mixing 0": [
+     29.28435776526651,
+     32.00623306614843,
+     75.26734169791013,
+     23.772184996692438
+    ],
+    "trigger mixing 1": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "land": {
+    "trigger mixing 0": [
+     11.373336114278803,
+     131.7454037765007,
+     10.7640041628915,
+     1.659031177525136
+    ],
+    "trigger mixing 1": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "settings": [
+   {
+    "label": "without the trigger",
+    "eps": 0.0,
+    "cape_limit": 0.0,
+    "eps_trigger": 0.0,
+    "sea": {
+     "rain_mm_day": [
+      0.014805540675031958,
+      1.987734759244112,
+      6.686150775673093,
+      3.1519429454463124
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.001233795056252663,
+      0.16564456327034266,
+      0.5571792313060911,
+      0.26266191212052603
+     ],
+     "convecting_share": [
+      0.0011016328273361707,
+      0.030238058131671266,
+      0.08168805549344502,
+      0.033783783783783786
+     ],
+     "buoyant_share": [
+      0.3434536927499987,
+      0.6218609959033926,
+      0.606131061337207,
+      0.4035016702061022
+     ],
+     "parcel_inhibition_j_kg": [
+      129.46360861258935,
+      91.90745013003418,
+      66.85358592183329,
+      86.13502840426102
+     ]
+    },
+    "land": {
+     "rain_mm_day": [
+      0.13961808193915592,
+      15.165023143141104,
+      1.5008457204457213,
+      0.3163391790736091
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.011634840161596327,
+      1.263751928595092,
+      0.1250704767038101,
+      0.026361598256134093
+     ],
+     "convecting_share": [
+      0.004999999999999999,
+      0.10927152317880794,
+      0.021381578947368418,
+      0.003401360544217687
+     ],
+     "buoyant_share": [
+      0.34333333333333327,
+      0.6125827814569536,
+      0.1299342105263158,
+      0.03571428571428571
+     ],
+     "parcel_inhibition_j_kg": [
+      69.89010475309513,
+      43.80384010005848,
+      94.55371416601497,
+      92.24854805368533
+     ]
+    },
+    "branch_scaled_mm_day": {
+     "sea": [
+      0.30752071288322397,
+      2.8803952699142448,
+      3.3301320627080067,
+      1.4481420750894474
+     ],
+     "land": [
+      1.0510379228842737,
+      15.097885467179337,
+      0.4668952365125896,
+      0.07977308391462308
+     ]
+    },
+    "test": {
+     "offline": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 3.1519429454463124,
+        "cm1": 0.14,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 1.987734759244112,
+        "cm1": 2.23,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 6.686150775673093,
+        "cm1": 2.97,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 15.165023143141104,
+        "cm1": 8.59,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 1.5008457204457213,
+        "cm1": 1.53,
+        "near": true
+       }
+      ]
+     },
+     "branch_scaled": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 1.4481420750894474,
+        "cm1": 0.14,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 2.8803952699142448,
+        "cm1": 2.23,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 3.3301320627080067,
+        "cm1": 2.97,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 15.097885467179337,
+        "cm1": 8.59,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.4668952365125896,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     }
+    }
+   },
+   {
+    "label": "the reference mixed at eps 1",
+    "eps": 1.0,
+    "cape_limit": 0.0,
+    "eps_trigger": 0.0,
+    "sea": {
+     "rain_mm_day": [
+      0.06670537394677203,
+      7.723518480948377,
+      5.59242127913747,
+      0.604974073386928
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0055587811622310026,
+      0.6436265400790314,
+      0.4660351065947892,
+      0.05041450611557733
+     ],
+     "convecting_share": [
+      0.002192982456140351,
+      0.06933024993946046,
+      0.04301012806874823,
+      0.006756756756756757
+     ],
+     "buoyant_share": [
+      0.04498184834720717,
+      0.2761762059181853,
+      0.13131034881930012,
+      0.04509785065912824
+     ],
+     "parcel_inhibition_j_kg": [
+      107.2144342787652,
+      75.26280374540089,
+      45.20732420881944,
+      54.82810489534473
+     ]
+    },
+    "land": {
+     "rain_mm_day": [
+      0.09246618936260677,
+      26.99214804119034,
+      0.35835711267689946,
+      0.0
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.007705515780217231,
+      2.249345670099195,
+      0.02986309272307495,
+      0.0
+     ],
+     "convecting_share": [
+      0.003333333333333333,
+      0.1291390728476821,
+      0.004934210526315789,
+      0.0
+     ],
+     "buoyant_share": [
+      0.16666666666666666,
+      0.423841059602649,
+      0.008223684210526315,
+      0.0
+     ],
+     "parcel_inhibition_j_kg": [
+      49.92321581712582,
+      30.98171267169243,
+      74.13206158416092,
+      null
+     ]
+    },
+    "branch_scaled_mm_day": {
+     "sea": [
+      1.385514017995097,
+      11.192029518102746,
+      2.785384600895631,
+      0.277951861811321
+     ],
+     "land": [
+      0.6960808389206388,
+      26.872650031091943,
+      0.1114806316198579,
+      0.0
+     ]
+    },
+    "test": {
+     "offline": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.604974073386928,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 7.723518480948377,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 5.59242127913747,
+        "cm1": 2.97,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 26.99214804119034,
+        "cm1": 8.59,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.35835711267689946,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     },
+     "branch_scaled": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.277951861811321,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 11.192029518102746,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 2.785384600895631,
+        "cm1": 2.97,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 26.872650031091943,
+        "cm1": 8.59,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.1114806316198579,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     }
+    }
+   },
+   {
+    "label": "CAPE above 50 J/kg, trigger mixing 0",
+    "eps": 0.0,
+    "cape_limit": 50.0,
+    "eps_trigger": 0.0,
+    "sea": {
+     "rain_mm_day": [
+      0.0,
+      0.4803611432683093,
+      3.396674506944262,
+      1.1806130266412018
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.04003009527235911,
+      0.2830562089120218,
+      0.09838441888676681
+     ],
+     "convecting_share": [
+      0.0,
+      0.012330476166278453,
+      0.04416046167446047,
+      0.013534635759146792
+     ],
+     "buoyant_share": [
+      0.3434536927499987,
+      0.6218609959033926,
+      0.606131061337207,
+      0.4035016702061022
+     ],
+     "parcel_inhibition_j_kg": [
+      129.46360861258935,
+      91.90745013003418,
+      66.85358592183329,
+      86.13502840426102
+     ]
+    },
+    "land": {
+     "rain_mm_day": [
+      0.0,
+      9.081340651882007,
+      0.1294290815564111,
+      0.0
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.7567783876568339,
+      0.010785756796367592,
+      0.0
+     ],
+     "convecting_share": [
+      0.0,
+      0.06291390728476821,
+      0.0016447368421052633,
+      0.0
+     ],
+     "buoyant_share": [
+      0.34333333333333327,
+      0.6125827814569536,
+      0.1299342105263158,
+      0.03571428571428571
+     ],
+     "parcel_inhibition_j_kg": [
+      69.89010475309513,
+      43.80384010005848,
+      94.55371416601497,
+      92.24854805368533
+     ]
+    },
+    "branch_scaled_mm_day": {
+     "sea": [
+      0.0,
+      0.6960838001579237,
+      1.6917618315329246,
+      0.54242587123852
+     ],
+     "land": [
+      0.0,
+      9.041136288180772,
+      0.04026384645781004,
+      0.0
+     ]
+    },
+    "test": {
+     "offline": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 1.1806130266412018,
+        "cm1": 0.14,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.4803611432683093,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 3.396674506944262,
+        "cm1": 2.97,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 9.081340651882007,
+        "cm1": 8.59,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.1294290815564111,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     },
+     "branch_scaled": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.54242587123852,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.6960838001579237,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 1.6917618315329246,
+        "cm1": 2.97,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 9.041136288180772,
+        "cm1": 8.59,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.04026384645781004,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     }
+    }
+   },
+   {
+    "label": "CAPE above 100 J/kg, trigger mixing 0",
+    "eps": 0.0,
+    "cape_limit": 100.0,
+    "eps_trigger": 0.0,
+    "sea": {
+     "rain_mm_day": [
+      0.0,
+      0.47045762393067586,
+      2.9991897761330737,
+      0.4483126059047382
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.039204801994222986,
+      0.2499324813444228,
+      0.03735938382539485
+     ],
+     "convecting_share": [
+      0.0,
+      0.011206662812217393,
+      0.03864687352714323,
+      0.006777879002390034
+     ],
+     "buoyant_share": [
+      0.3434536927499987,
+      0.6218609959033926,
+      0.606131061337207,
+      0.4035016702061022
+     ],
+     "parcel_inhibition_j_kg": [
+      129.46360861258935,
+      91.90745013003418,
+      66.85358592183329,
+      86.13502840426102
+     ]
+    },
+    "land": {
+     "rain_mm_day": [
+      0.0,
+      8.26486417745305,
+      0.1294290815564111,
+      0.0
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.688738681454421,
+      0.010785756796367592,
+      0.0
+     ],
+     "convecting_share": [
+      0.0,
+      0.05629139072847681,
+      0.0016447368421052633,
+      0.0
+     ],
+     "buoyant_share": [
+      0.34333333333333327,
+      0.6125827814569536,
+      0.1299342105263158,
+      0.03571428571428571
+     ],
+     "parcel_inhibition_j_kg": [
+      69.89010475309513,
+      43.80384010005848,
+      94.55371416601497,
+      92.24854805368533
+     ]
+    },
+    "branch_scaled_mm_day": {
+     "sea": [
+      0.0,
+      0.6817327655830333,
+      1.4937889333854184,
+      0.20597465075996677
+     ],
+     "land": [
+      0.0,
+      8.228274469163365,
+      0.04026384645781004,
+      0.0
+     ]
+    },
+    "test": {
+     "offline": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.4483126059047382,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.47045762393067586,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 2.9991897761330737,
+        "cm1": 2.97,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 8.26486417745305,
+        "cm1": 8.59,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.1294290815564111,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     },
+     "branch_scaled": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.20597465075996677,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.6817327655830333,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 1.4937889333854184,
+        "cm1": 2.97,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 8.228274469163365,
+        "cm1": 8.59,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.04026384645781004,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     }
+    }
+   },
+   {
+    "label": "CAPE above 200 J/kg, trigger mixing 0",
+    "eps": 0.0,
+    "cape_limit": 200.0,
+    "eps_trigger": 0.0,
+    "sea": {
+     "rain_mm_day": [
+      0.0,
+      0.18740715876647823,
+      1.7565715366554802,
+      0.19661552684831396
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.015617263230539854,
+      0.14638096138795667,
+      0.0163846272373595
+     ],
+     "convecting_share": [
+      0.0,
+      0.00784571299283195,
+      0.022054352589268935,
+      0.003383658939786698
+     ],
+     "buoyant_share": [
+      0.3434536927499987,
+      0.6218609959033926,
+      0.606131061337207,
+      0.4035016702061022
+     ],
+     "parcel_inhibition_j_kg": [
+      129.46360861258935,
+      91.90745013003418,
+      66.85358592183329,
+      86.13502840426102
+     ]
+    },
+    "land": {
+     "rain_mm_day": [
+      0.0,
+      6.455737489751219,
+      0.0,
+      0.0
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.5379781241459349,
+      0.0,
+      0.0
+     ],
+     "convecting_share": [
+      0.0,
+      0.04801324503311258,
+      0.0,
+      0.0
+     ],
+     "buoyant_share": [
+      0.34333333333333327,
+      0.6125827814569536,
+      0.1299342105263158,
+      0.03571428571428571
+     ],
+     "parcel_inhibition_j_kg": [
+      69.89010475309513,
+      43.80384010005848,
+      94.55371416601497,
+      92.24854805368533
+     ]
+    },
+    "branch_scaled_mm_day": {
+     "sea": [
+      0.0,
+      0.2715687750332984,
+      0.8748853250423159,
+      0.09033387404942547
+     ],
+     "land": [
+      0.0,
+      6.427157038037422,
+      0.0,
+      0.0
+     ]
+    },
+    "test": {
+     "offline": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.19661552684831396,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.18740715876647823,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 1.7565715366554802,
+        "cm1": 2.97,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 6.455737489751219,
+        "cm1": 8.59,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.0,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     },
+     "branch_scaled": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.09033387404942547,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.2715687750332984,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 0.8748853250423159,
+        "cm1": 2.97,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 6.427157038037422,
+        "cm1": 8.59,
+        "near": true
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.0,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     }
+    }
+   },
+   {
+    "label": "CAPE above 5 J/kg, trigger mixing 1",
+    "eps": 0.0,
+    "cape_limit": 5.0,
+    "eps_trigger": 1.0,
+    "sea": {
+     "rain_mm_day": [
+      0.0,
+      0.04274972642665819,
+      0.25707382375554855,
+      0.0
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.0035624772022215157,
+      0.02142281864629571,
+      0.0
+     ],
+     "convecting_share": [
+      0.0,
+      0.0011238133540610597,
+      0.004404659738343075,
+      0.0
+     ],
+     "buoyant_share": [
+      0.3434536927499987,
+      0.6218609959033926,
+      0.606131061337207,
+      0.4035016702061022
+     ],
+     "parcel_inhibition_j_kg": [
+      129.46360861258935,
+      91.90745013003418,
+      66.85358592183329,
+      86.13502840426102
+     ]
+    },
+    "land": {
+     "rain_mm_day": [
+      0.0,
+      4.067452241580234,
+      0.1294290815564111,
+      0.0
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.3389543534650195,
+      0.010785756796367592,
+      0.0
+     ],
+     "convecting_share": [
+      0.0,
+      0.028145695364238412,
+      0.0016447368421052633,
+      0.0
+     ],
+     "buoyant_share": [
+      0.34333333333333327,
+      0.6125827814569536,
+      0.1299342105263158,
+      0.03571428571428571
+     ],
+     "parcel_inhibition_j_kg": [
+      69.89010475309513,
+      43.80384010005848,
+      94.55371416601497,
+      92.24854805368533
+     ]
+    },
+    "branch_scaled_mm_day": {
+     "sea": [
+      0.0,
+      0.06194795820560081,
+      0.128039257817233,
+      0.0
+     ],
+     "land": [
+      0.0,
+      4.0494450622961935,
+      0.04026384645781004,
+      0.0
+     ]
+    },
+    "test": {
+     "offline": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.0,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.04274972642665819,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 0.25707382375554855,
+        "cm1": 2.97,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 4.067452241580234,
+        "cm1": 8.59,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.1294290815564111,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     },
+     "branch_scaled": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.0,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.06194795820560081,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 0.128039257817233,
+        "cm1": 2.97,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 4.0494450622961935,
+        "cm1": 8.59,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.04026384645781004,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     }
+    }
+   },
+   {
+    "label": "CAPE above 5 J/kg, trigger mixing 4",
+    "eps": 0.0,
+    "cape_limit": 5.0,
+    "eps_trigger": 4.0,
+    "sea": {
+     "rain_mm_day": [
+      0.0,
+      0.0,
+      0.12543255099727155,
+      0.0
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.0,
+      0.010452712583105962,
+      0.0
+     ],
+     "convecting_share": [
+      0.0,
+      0.0,
+      0.0021971542195792777,
+      0.0
+     ],
+     "buoyant_share": [
+      0.3434536927499987,
+      0.6218609959033926,
+      0.606131061337207,
+      0.4035016702061022
+     ],
+     "parcel_inhibition_j_kg": [
+      129.46360861258935,
+      91.90745013003418,
+      66.85358592183329,
+      86.13502840426102
+     ]
+    },
+    "land": {
+     "rain_mm_day": [
+      0.0,
+      3.658006517290076,
+      0.0,
+      0.0
+     ],
+     "vapour_above_reference_kg_m2": [
+      0.0,
+      0.3048338764408397,
+      0.0,
+      0.0
+     ],
+     "convecting_share": [
+      0.0,
+      0.014900662251655629,
+      0.0,
+      0.0
+     ],
+     "buoyant_share": [
+      0.34333333333333327,
+      0.6125827814569536,
+      0.1299342105263158,
+      0.03571428571428571
+     ],
+     "parcel_inhibition_j_kg": [
+      69.89010475309513,
+      43.80384010005848,
+      94.55371416601497,
+      92.24854805368533
+     ]
+    },
+    "branch_scaled_mm_day": {
+     "sea": [
+      0.0,
+      0.0,
+      0.06247345801758721,
+      0.0
+     ],
+     "land": [
+      0.0,
+      3.6418120114257753,
+      0.0,
+      0.0
+     ]
+    },
+    "test": {
+     "offline": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.0,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.0,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 0.12543255099727155,
+        "cm1": 2.97,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 3.658006517290076,
+        "cm1": 8.59,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.0,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     },
+     "branch_scaled": {
+      "passes": false,
+      "quarters": [
+       {
+        "site": "sea",
+        "quarter": "midnight-sunrise",
+        "rain": 0.0,
+        "cm1": 0.14,
+        "near": true
+       },
+       {
+        "site": "sea",
+        "quarter": "noon-sunset",
+        "rain": 0.0,
+        "cm1": 2.23,
+        "near": false
+       },
+       {
+        "site": "sea",
+        "quarter": "sunset-midnight",
+        "rain": 0.06247345801758721,
+        "cm1": 2.97,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "noon-sunset",
+        "rain": 3.6418120114257753,
+        "cm1": 8.59,
+        "near": false
+       },
+       {
+        "site": "land",
+        "quarter": "sunset-midnight",
+        "rain": 0.0,
+        "cm1": 1.53,
+        "near": false
+       }
+      ]
+     }
+    }
+   }
+  ],
+  "passing": []
+ },
  "pass_rule": {
   "quarters": [
    [
@@ -5999,12 +7230,12 @@
  },
  "passing_settings": [],
  "evidence": "Offline diagnosis: the tested Python copy of the scheme applied at once to columns, with no model integrating it. The boxes' columns are CM1 domain means over one lunar day of one run each, standing for a GCM cell, forced by Kuo's GCM; the GCM's are 3-day means of five years of each of two branches, in which the scheme ran without mixing at rh 0.7 and 0.6. The scheme's instantaneous rate is set against CM1's realised rain and the GCM's rain.",
- "reading_rule": "Rain in mm/day by quarter of the lunar day at the site (sunrise-noon, noon-sunset, sunset-midnight, midnight-sunrise); on the scheme's side the rain formed, before PlaSim's evaporation of falling rain; vapour_above_reference_kg_m2 is that rain times the relaxation time, the vapour above the reference in the convecting layers, nil where the scheme does not rain. convecting_share is the share of columns on which the scheme convects deep and rains, buoyant_share the share on which its parcel is buoyant somewhere, parcel_inhibition_j_kg the parcel's mean inhibition where buoyant. on_boxes holds each setting on CM1's columns by mapping (level: interpolation to PlaSim's full levels, the pass test's; layer: layer means by mass; cm1: CM1's own levels; level_test_constants: the level mapping with test_sbm.py's constants in place of the runs'); on_gcm, for each branch, the scheme at the branch's own rh on its own cell columns, cell-weighted by cos latitude, with the range of the five yearly values and the count of convecting cell-outputs. formed_snapshot is the GCM's own scheme at the end of each mean, one step.",
+ "reading_rule": "Rain in mm/day by quarter of the lunar day at the site (sunrise-noon, noon-sunset, sunset-midnight, midnight-sunrise); on the scheme's side the rain formed, before PlaSim's evaporation of falling rain; vapour_above_reference_kg_m2 is that rain times the relaxation time, the vapour above the reference in the convecting layers, nil where the scheme does not rain. convecting_share is the share of columns on which the scheme convects deep and rains, buoyant_share the share on which its parcel is buoyant somewhere, parcel_inhibition_j_kg the parcel's mean inhibition where buoyant. on_boxes holds each setting on CM1's columns by mapping (level: interpolation to PlaSim's full levels, the pass test's; layer: layer means by mass; cm1: CM1's own levels; level_test_constants: the level mapping with test_sbm.py's constants in place of the runs'); on_gcm, for each branch, the scheme at the branch's own rh on its own cell columns, cell-weighted by cos latitude, with the range of the five yearly values and the count of convecting cell-outputs. formed_snapshot is the GCM's own scheme at the end of each mean, one step. trigger_test: the CAPE trigger (sbm.column's cape_limit and eps_trigger) on the rh 0.7 branch's cell columns beside the scheme without it and with its reference mixed at eps 1; branch_scaled multiplies the branch's own rain (pr) in each quarter by the setting's offline rain over the scheme's without the trigger; test applies the rule of TRIGGERS' comment to both; raining_columns_cape_median_j_kg is the median CAPE the trigger parcel finds, undiluted or mixing at 1, on the columns where the scheme without the trigger rains.",
  "producer": {
   "domain": "climate",
   "files": {
-   "gcm/sbm_offline.py": "46185df23cef26f6",
-   "gcm/sbm.py": "2184f97a71f9388d"
+   "gcm/sbm_offline.py": "49f764fd4d16325c",
+   "gcm/sbm.py": "8b231602a1742089"
   }
  }
 }

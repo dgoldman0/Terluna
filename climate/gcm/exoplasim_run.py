@@ -680,6 +680,62 @@ PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
            ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS),
            ('radmod.f90', 'Terluna: infrared from space at the top of the air', TOP_INFRARED_EDITS),
            ('rainmod.f90', SBM_MARKER, SBM_EDITS)]
+# A CAPE trigger for the simplified Betts-Miller scheme (24 October), off by default: with cape_bm > 0 a column convects
+# deep only where a second parcel, lifted as the reference's but mixing epst_bm per e-folding of pressure, has at least
+# cape_bm J/kg of CAPE from its own level of free convection up through the layers it stays buoyant, counted as the
+# scheme counts its inhibition; a column held back takes the shallow scheme. It is a patch of its own on the scheme's
+# text, applied only for a run that sets it, so a source the scheme's patch has already reached takes it in place and
+# runs without it keep their source; with cape_bm 0 the scheme's arithmetic is the same.
+SBM_TRIGGER_MARKER = 'Terluna: the CAPE trigger'
+SBM_TRIGGER_BLOCK = """\
+!      Terluna: the CAPE trigger: deep convection only where a parcel mixing epst_bm per e-folding of pressure has
+!      at least cape_bm J/kg of CAPE, from its own level of free convection up through the layers it stays buoyant
+       zcapet=0.
+       if(cape_bm > 0.) then
+        ztnew=zte(jhor,NLEV)
+        zqnew=zqe(jhor,NLEV)
+        call sbmsat(ztnew,zqnew,zp(NLEV))
+        ztt(NLEV)=ztnew
+        do jlev=NLEM,1,-1
+         ztnew=ztnew*(sigma(jlev)/sigma(jlev+1))**akap
+         if(epst_bm > 0.) then
+          zmix=1.-exp(-epst_bm*log(sigma(jlev+1)/sigma(jlev)))
+          ztnew=(1.-zmix)*ztnew+zmix*zte(jhor,jlev)
+          zqnew=(1.-zmix)*zqnew+zmix*zqe(jhor,jlev)
+         endif
+         call sbmsat(ztnew,zqnew,zp(jlev))
+         ztt(jlev)=ztnew
+        enddo
+        jlfct=0
+        do jlev=NLEM,1,-1
+         if(ztt(jlev) > zte(jhor,jlev)) then
+          jlfct=jlev
+          exit
+         endif
+        enddo
+        do jlev=jlfct,1,-1
+         if(ztt(jlev) <= zte(jhor,jlev)) exit
+         zcapet=zcapet+gascon*(ztt(jlev)-zte(jhor,jlev))*dsigma(jlev)/sigma(jlev)
+        enddo
+       endif
+"""
+SBM_TRIGGER_EDITS = [
+    ("      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n",
+     "      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n"
+     "      real :: cape_bm = 0.    ! Terluna: the CAPE trigger: deep only above this CAPE (J/kg; 0: none)\n"
+     "      real :: epst_bm = 0.    ! its parcel's mixing per e-folding of pressure\n"),
+    ("      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n",
+     "      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n"
+     "      namelist/rainmod_nl/cape_bm,epst_bm   ! Terluna: the CAPE trigger\n"),
+    ("      call mpbcr(cin_bm)\n", "      call mpbcr(cin_bm)\n      call mpbcr(cape_bm)\n      call mpbcr(epst_bm)\n"),
+    ("      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau\n",
+     "      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau\n"
+     "      real :: ztt(NLEV), zcapet   ! Terluna: the CAPE trigger\n      integer :: jlfct\n"),
+    ("       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm)) then\n",
+     SBM_TRIGGER_BLOCK + "       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm) .or. "
+     "(cape_bm > 0. .and. zcapet < cape_bm)) then\n"),
+]
+SBM_TRIGGER_PATCHES = [('rainmod.f90', SBM_TRIGGER_MARKER, SBM_TRIGGER_EDITS)]
 # CO2 and O2 in PlaSim's sunlight (radmod.f90, swr; climate/gcm/plasim_shortwave.py, GAS_BANDS). PlaSim's two bands hold
 # no CO2 or O2, whose strongest lines the Moon's deep column takes high up, so it puts that sunlight where its water
 # is. NGASBANDS 1 adds CO2 and O2 in the near-infrared band and O2 in the visible, each an absorptivity of its own
@@ -1162,16 +1218,17 @@ def use_twilight_package():
     sys.path.insert(0, str(TWILIGHT_PACKAGE))
 
 
-def ensure_patched(twilight: bool = False) -> dict:
+def ensure_patched(twilight: bool = False, trigger: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
-    so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and return each patched file's
-    hash for the run key."""
+    so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy and the scheme's CAPE trigger for a run
+    that sets it (SBM_TRIGGER_PATCHES), and return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
         raise RuntimeError(f'the twilight patch belongs only in {TWILIGHT_PACKAGE}, not in {src}')
     hashes = {}
-    for name, marker, edits in PATCHES + (TWILIGHT_PATCHES if twilight else []):
+    for name, marker, edits in (PATCHES + (TWILIGHT_PATCHES if twilight else [])
+                                + (SBM_TRIGGER_PATCHES if trigger else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1206,21 +1263,31 @@ def rain_evaporation_setting(gamma) -> dict:
 
 
 SBM_DEFAULTS = dict(tau_s=7200.0, rh=0.7, eps=0.0, cin_j_kg=0.0)   # Frierson's 2 h and 70%; the lunar options off
+SBM_TRIGGER_SETTINGS = ('cape_j_kg', 'trigger_eps')                   # the CAPE trigger, recorded only when set
 
 
 def convection_setting(scheme='sbm', **values) -> dict:
     """PlaSim's deep convection as the configuration records it: 'sbm' for the simplified Betts-Miller scheme of the
     Terluna patch (SBM_EDITS, rainmod's nprc 2) with its relaxation time tau_s, reference relative humidity rh, the
     parcel's mixing per e-folding of pressure eps and its inhibition limit cin_j_kg (0: none), each defaulting to
-    SBM_DEFAULTS; left out, the configuration keeps Kuo's scheme (nprc 1)."""
+    SBM_DEFAULTS; left out, the configuration keeps Kuo's scheme (nprc 1). The CAPE trigger (SBM_TRIGGER_PATCHES)
+    joins the record only when cape_j_kg is set above 0: the CAPE a parcel mixing trigger_eps per e-folding of
+    pressure (default 0) must have for the column to convect deep."""
     if scheme != 'sbm':
         raise ValueError(f"the convection scheme is 'sbm' (Kuo's is the default, left out), not {scheme!r}")
-    unknown = set(values) - set(SBM_DEFAULTS)
+    unknown = set(values) - set(SBM_DEFAULTS) - set(SBM_TRIGGER_SETTINGS)
     if unknown:
         raise ValueError(f'unknown settings of the simplified Betts-Miller scheme: {sorted(unknown)}')
     s = {k: float(values.get(k, v) if values.get(k) is not None else v) for k, v in SBM_DEFAULTS.items()}
     if s['tau_s'] <= 0.0 or not 0.0 < s['rh'] <= 1.0 or s['eps'] < 0.0 or s['cin_j_kg'] < 0.0:
         raise ValueError(f'the simplified Betts-Miller settings are out of range: {s}')
+    cape, mix = values.get('cape_j_kg'), values.get('trigger_eps')
+    if cape is not None and float(cape) > 0.0:
+        s.update(cape_j_kg=float(cape), trigger_eps=float(mix or 0.0))
+        if s['trigger_eps'] < 0.0:
+            raise ValueError(f"the CAPE trigger's mixing must not be negative: {s['trigger_eps']}")
+    elif (cape is not None and float(cape) < 0.0) or (mix is not None and float(mix) != 0.0):
+        raise ValueError('the CAPE trigger takes a positive cape_j_kg, and its mixing only with it')
     return dict(scheme='sbm', nprc=2, **s)
 
 
@@ -1291,7 +1358,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if longwave_fit not in LONGWAVE_FITS:
         raise ValueError(f'longwave_fit must be one of {tuple(LONGWAVE_FITS)}')
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
-               exoplasim=version('exoplasim'), source=ensure_patched(True),
+               exoplasim=version('exoplasim'),
+               source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0)),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -1542,8 +1610,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     if 'convection' in cfg:
         c = cfg['convection']
         model._edit_namelist('rainmod_namelist', 'NPRC', str(c['nprc']))
-        for key, name in (('tau_s', 'TAU_BM'), ('rh', 'RH_BM'), ('eps', 'EPS_BM'), ('cin_j_kg', 'CIN_BM')):
-            model._edit_namelist('rainmod_namelist', name, repr(float(c[key])))
+        for key, name in (('tau_s', 'TAU_BM'), ('rh', 'RH_BM'), ('eps', 'EPS_BM'), ('cin_j_kg', 'CIN_BM'),
+                          ('cape_j_kg', 'CAPE_BM'), ('trigger_eps', 'EPST_BM')):
+            if key in c:                                              # the CAPE trigger only when set
+                model._edit_namelist('rainmod_namelist', name, repr(float(c[key])))
     if m['surface_cloud_rcrit'] > 0.0:                                 # the lowest layer is the last of RCRIT
         model._edit_namelist('rainmod_namelist', f"RCRIT({m['layers']})", str(float(m['surface_cloud_rcrit'])))
     if 'top_infrared_w_m2' in cfg:
@@ -1908,6 +1978,11 @@ def main(argv=None) -> int:
     parser.add_argument('--sbm-rh', type=float, metavar='SHARE', help='its reference relative humidity (0.7)')
     parser.add_argument('--sbm-eps', type=float, help="its parcel's mixing per e-folding of pressure (0)")
     parser.add_argument('--sbm-cin', type=float, metavar='J_KG', help="its limit on the parcel's inhibition (0: none)")
+    parser.add_argument('--sbm-cape', type=float, metavar='J_KG',
+                        help='its CAPE trigger: deep convection only where a parcel has this CAPE (0: none; '
+                             'SBM_TRIGGER_PATCHES)')
+    parser.add_argument('--sbm-trigger-eps', type=float, metavar='EPS',
+                        help="the CAPE trigger's parcel mixing per e-folding of pressure (0)")
     parser.add_argument('--rain-evaporation', type=float, metavar='GAMMA',
                         help="PlaSim's constant for the evaporation of falling rain and snow (rainmod's gamma, "
                              f'{PLASIM_RAIN_GAMMA} its own; part of the run key)')
@@ -1952,7 +2027,8 @@ def main(argv=None) -> int:
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
                args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation,
                args.moisture_diagnostics,
-               dict(tau_s=args.sbm_tau, rh=args.sbm_rh, eps=args.sbm_eps, cin_j_kg=args.sbm_cin)
+               dict(tau_s=args.sbm_tau, rh=args.sbm_rh, eps=args.sbm_eps, cin_j_kg=args.sbm_cin,
+                    cape_j_kg=args.sbm_cape, trigger_eps=args.sbm_trigger_eps)
                if args.convection == 'sbm' else None)
 
 
