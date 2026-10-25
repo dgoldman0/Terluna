@@ -1,0 +1,224 @@
+{
+ "schema": "terluna.atmosphere.snow-breakup-sources/1",
+ "review_date": "2026-10-25",
+ "scope": "Time-boxed search (about 45 minutes, 14:40-15:20) for an Earth-supported law of whole snow-aggregate breakup in collisions and under drag or turbulence.",
+ "destination_branch": "domain/atmosphere",
+ "finding": "No usable law found; the load analogy (turbulence_survival.md) remains, with its limits stated in breakup_literature.md.",
+ "external_bytes": "No papers or datasets added to the repository; one retrieved PDF hash recorded.",
+ "model_changes": "None to the breakup treatment.",
+ "sources": [
+  {
+   "id": "sato_2006",
+   "authors": "Takeshi Sato, Kenji Kosugi, Shigeto Mochizuki and Masaki Nemoto",
+   "title": "Fracture and accumulation conditions of snowflakes on the snow surface",
+   "publication": "Proceedings of the International Snow Science Workshop 2006, Telluride, Colorado, pp. 203-210",
+   "url": "https://arc.lib.montana.edu/snow-science/objects/issw-2006-203-210.pdf",
+   "obtained": "Full PDF fetched 25 October 2026 and read through pdftotext; the PDF was not retained in the repository.",
+   "retrieved_pdf_sha256": "7faa28a85e3a6fc65d3e6ece552f4af9456b3b7a87cb4b80101e7bedbb911134",
+   "reading_extent": "Abstract, methods, analysis and results sections 1-4.2, Tables 1-2, Figs. 3-7 captions and text.",
+   "evidence": "Cold wind-tunnel experiment (-7 C) with artificial aggregates of dendrites (sieve sizes 7 and 20 mm) falling onto soft (about 150 kg/m3) and hard snow surfaces; field video of natural flakes up to about 10 mm at -0.1 to -1.4 C, Shinjo, February 2004.",
+   "quantities": {
+    "vertical_impact_m_s": [
+     0.8,
+     1.0
+    ],
+    "horizontal_impact": "Vih = 0.8 Uset; U1 = 0.8 Uset for the fracture parameterization, so Vih equals U1",
+    "no_shear_fracture_below_U1_m_s": 2.0,
+    "complete_decomposition_above_U1_m_s": 5.0,
+    "partial_fracture_U1_m_s": [
+     2.0,
+     5.0
+    ],
+    "compressive_fracture": "Observed at the normal impact and deliberately not scored by the authors"
+   },
+   "use": "Impact speed at which loose dendritic aggregates fail in shear against a rigid surface; compared with closing speeds from differential settling aloft.",
+   "limit": "Surface impacts, not collisions between falling aggregates; one temperature in the laboratory; fracture judged by eye in five levels."
+  },
+  {
+   "id": "grzegorczyk_2023",
+   "authors": "Pierre Grzegorczyk and co-authors",
+   "title": "Fragmentation of ice particles: laboratory experiments on graupel-graupel and graupel-snowflake collisions",
+   "publication": "Atmospheric Chemistry and Physics 23, 13505-13521 (2023); corrigendum 2024",
+   "doi": "10.5194/acp-23-13505-2023",
+   "url": "https://acp.copernicus.org/articles/23/13505/2023/",
+   "obtained": "Publisher article page fetched 25 October 2026 (abstract and results text as rendered); corrigendum already recorded in strength_sources.json on 21 October.",
+   "quantities": {
+    "snowflake_diameter_mm": "10 +/- 2",
+    "graupel_diameter_mm": 4,
+    "collision_kinetic_energy_J": [
+     1e-07,
+     1e-05
+    ],
+    "fragments_per_collision": "about 50 to more than 400; 70-500 in the abstract",
+    "fragment_size_mode_um": 400,
+    "fit_as_printed": {
+     "A_m_minus2": 20000000.0,
+     "C_per_J": 590000000.0,
+     "gamma": 0.78
+    },
+    "central_collisions": "snowflake completely broken; edge collisions rotate it with partial breakage"
+   },
+   "use": "Lowest measured energy at which a dense impactor destroys a centimetre flake; fragment sizes.",
+   "limit": "Dense graupel impactor; artificial dendrites grown near 120% ice saturation; the 2024 corrigendum reduced the fitted asperity density fourfold, and whether the page values include it was not checked.",
+   "reading_extent": "Article page as rendered: abstract, results text and fitted parameters; figures not inspected."
+  },
+  {
+   "id": "gautam_2024",
+   "authors": "Martanda Gautam and co-authors",
+   "title": "Fragmentation in Collisions of Snow with Graupel/Hail: New Formulation from Field Observations",
+   "publication": "Journal of the Atmospheric Sciences 81, 2149-2164 (2024)",
+   "doi": "10.1175/JAS-D-23-0122.1",
+   "obtained": "Search-engine summary of the abstract, 25 October 2026; the publisher page refused access (HTTP 403). Fuller reading recorded in strength_sources.json on 21 October.",
+   "quantities": {
+    "fragments_per_collision_dendritic": [
+     5,
+     40
+    ],
+    "dendritic_snow_mm": [
+     3,
+     12
+    ],
+    "fragments_per_collision_nondendritic": [
+     1,
+     10
+    ],
+    "nondendritic_snow_mm": [
+     1,
+     3
+    ]
+   },
+   "use": "Fragment numbers from natural snow on ice spheres.",
+   "limit": "Chipping counts from snow on dense ice; no whole-aggregate failure.",
+   "reading_extent": "Abstract only (publisher page HTTP 403 on 25 October); fuller passages read on 21 October are recorded in strength_sources.json."
+  },
+  {
+   "id": "jungfraujoch_2025_preprint",
+   "title": "Improved Formulation of Fragmentation of Snow during Collision with Graupel/Hail based on Observations at Jungfraujoch: Cold Non-Dendritic Regime of Temperature",
+   "publication": "EGUsphere preprint egusphere-2024-3800 (2025)",
+   "url": "https://egusphere.copernicus.org/preprints/2025/egusphere-2024-3800/",
+   "obtained": "Title and search-engine summary only, 25 October 2026.",
+   "use": "Confirms the fragmentation literature continues to address snow on graupel/hail.",
+   "limit": "Not read.",
+   "reading_extent": "Title and summary only."
+  },
+  {
+   "id": "phillips_2017",
+   "authors": "Vaughan T. J. Phillips, Jun-Ichi Yano and Alexander Khain",
+   "title": "Ice Multiplication by Breakup in Ice-Ice Collisions. Part I: Theoretical Formulation",
+   "publication": "Journal of the Atmospheric Sciences 74, 1705-1719 (2017)",
+   "doi": "10.1175/JAS-D-16-0224.1",
+   "obtained": "Search-engine summary of the formulation, 25 October 2026; the form matches the implementation in aggregation.py (20 October).",
+   "quantities": {
+    "formula": "N = alpha*A*(1 - exp(-(C*K/(alpha*A))**gamma))"
+   },
+   "use": "Fragment counts from branch chipping; tested on 20 October in aggregation.py, where it changed lunar flake sizes by 10-25% without capping them.",
+   "limit": "Chips small fragments; no whole-aggregate failure.",
+   "reading_extent": "Formulation only, from search summaries and the 20 October implementation; the publisher page was not read (AMS pages refused access)."
+  },
+  {
+   "id": "lo_passarelli_1982",
+   "authors": "K. Kenneth Lo and Richard E. Passarelli Jr.",
+   "title": "The Growth of Snow in Winter Storms: An Airborne Observational Study",
+   "publication": "Journal of the Atmospheric Sciences 39, 697-706 (1982)",
+   "doi": "10.1175/1520-0469(1982)039<0697:TGOSIW>2.0.CO;2",
+   "obtained": "Abstract through search-engine summaries and the CrossRef record, 25 October 2026; the publisher page refused access (HTTP 403).",
+   "quantities": {
+    "stages": [
+     "deposition",
+     "aggregation",
+     "breakup"
+    ],
+    "breakup": "limits the number of large particles and, with aggregation, produces a limiting value of the size-spectrum slope"
+   },
+   "use": "Observational support that breakup acts in natural snow.",
+   "limit": "No rate law, strength or limiting-slope values obtained.",
+   "reading_extent": "Abstract only (publisher page HTTP 403)."
+  },
+  {
+   "id": "kotsche_2026",
+   "authors": "Anton Kötsche, Maximilian Maahn, Veronika Ettrichrätz and Heike Kalesse-Los",
+   "title": "Snow microphysical processes in orographic turbulence revealed by cloud radar and in situ snowfall camera observations",
+   "publication": "Atmospheric Chemistry and Physics 26, 3277 (2026)",
+   "url": "https://acp.copernicus.org/articles/26/3277/2026/",
+   "obtained": "Publisher article page fetched 25 October 2026 (abstract and summary).",
+   "quantities": {
+    "turbulence_threshold_m2_s3": 0.001,
+    "aggregation_temperature_C": [
+     -15,
+     -12
+    ]
+   },
+   "use": "Fragmentation inferred from polarimetric radar in turbulent layers.",
+   "limit": "Inferred small-ice mode; no measured change in large aggregates.",
+   "reading_extent": "Abstract and landing-page summary."
+  },
+  {
+   "id": "von_terzi_2026_preprint",
+   "authors": "Leonie von Terzi, Axel Seifert, Christoph Siewert, Fabian Jakub and Stefan Kneifel",
+   "title": "Investigating ice microphysical processes in the dendritic growth zone by combining Monte-Carlo Lagrangian particle modelling with multi-frequency polarimetric radar observations",
+   "publication": "EGUsphere preprint egusphere-2026-3865",
+   "url": "https://egusphere.copernicus.org/preprints/2026/egusphere-2026-3865/",
+   "obtained": "Preprint landing page fetched 25 October 2026; parameterization details not shown there.",
+   "use": "A McSnow fragmentation parameterization needed for radar signatures.",
+   "limit": "Secondary small ice; formulation not obtained.",
+   "reading_extent": "Abstract and landing-page summary."
+  },
+  {
+   "id": "binmod1d_2026",
+   "title": "BinMod1D v1.0.10: a Python package for explicitly simulating 1D collisional coalescence/breakup processes with corresponding polarimetric radar signatures",
+   "publication": "Geoscientific Model Development 19, 7503 (2026)",
+   "url": "https://gmd.copernicus.org/articles/19/7503/2026/",
+   "obtained": "Publisher article page fetched 25 October 2026.",
+   "quantities": {
+    "snow_fragment_distribution": "lognormal with mode 0.2 mm in the example; Straub et al. (2010) rain fragments available"
+   },
+   "use": "A code that can carry a snow breakup kernel.",
+   "limit": "No observational calibration of snow breakup.",
+   "reading_extent": "Abstract and landing-page summary."
+  },
+  {
+   "id": "guala_hong_2015",
+   "authors": "Michele Guala and Jiarong Hong",
+   "title": "Particle growth in turbulent flow under dynamically critical Stokes conditions",
+   "publication": "arXiv:1510.04510 (2015)",
+   "url": "https://arxiv.org/abs/1510.04510",
+   "obtained": "arXiv abstract page fetched 25 October 2026.",
+   "use": "A proposed turbulence limit on aggregate growth.",
+   "limit": "Growth limit by clustering; no breakup law.",
+   "reading_extent": "Abstract and landing-page summary."
+  }
+ ],
+ "screened_but_not_admitted": [
+  {
+   "id": "colloid_marine_breakup",
+   "what": "Turbulent breakup of colloidal, clay and marine-snow aggregates (for example arXiv:1405.3704, arXiv:1201.5031, PLOS ONE 2018 clay flocs)",
+   "reason": "Strength laws calibrated on those materials; none measured for ice aggregates.",
+   "obtained": "Search-engine results only."
+  },
+  {
+   "id": "dem_snow_particles_2025_2026",
+   "what": "Discrete-element simulations of compact spherical snow particles in saltation and mid-air collisions (JGR Atmospheres 2025; Granular Matter 2026)",
+   "reason": "Compact blowing-snow grains at several m/s; not falling aggregates.",
+   "obtained": "Search-engine results only."
+  },
+  {
+   "id": "comola_2017",
+   "what": "Comola and co-authors (2017), Fragmentation of wind-blown snow crystals, GRL 44",
+   "reason": "Crystals impacting the surface in saltation.",
+   "obtained": "Search-engine results only."
+  },
+  {
+   "id": "kraus_1968_thesis",
+   "what": "M. J. Kraus (1968), Snowflake aggregation: a numerical model, MIT MS thesis",
+   "reason": "Located; not read.",
+   "obtained": "MIT DSpace record found by search."
+  },
+  {
+   "id": "lo_thesis",
+   "what": "K. Lo, Growth processes of snow, MIT thesis",
+   "reason": "Download refused (HTTP 429, rate limit); not read.",
+   "obtained": "MIT DSpace link found by search."
+  }
+ ],
+ "access_note": "American Meteorological Society pages refused access (HTTP 403); sources read only through abstracts are marked so in reading_extent."
+}

@@ -3,14 +3,18 @@
 The snow work asks four things of the Open Moon's sky winter: how large snowflakes grow, how they fall, whether the
 largest survive the cloud's turbulence, and how a snowstorm looks under lunar light. The author opened these questions
 on 20 and 21 October, as the second half of the work on the high cloud's crystals
-([register](../../research/decisions.md), 20 and 21 October). How flakes fall, how deep the snow zone stands and how
-far below the freezing level snow lasts are calculated in the sections below. The size of lunar snowflakes now has a
-first answer, built through the five steps of the plan below: the flakes outgrow any survivable span high in the snow
-zone, so breakup sets their size, and a comparison of loads with Earth's largest observed flakes places that size at
-several centimetres to about 15 cm. The answer joins an Earth-checked aggregation calculation to a load analogy, and a
-breakup law would replace the analogy. Before 24 October the calculations put typical flakes anywhere from below a
-millimetre to tens of centimetres across, a spread carried by the water a storm supplies to growing ice, the number of
-crystals that share it, and the population solver that follows their collisions.
+([register](../../research/decisions.md), 20 and 21 October). How flakes fall, how deep the snow zone stands and how far
+below the freezing level snow lasts are calculated in the sections below. The size of lunar snowflakes now stands
+between two bounds. Without any breakup, crystals that grow and aggregate together carry the 90th percentile of flake
+span at the lunar freezing level to 4.2–4.5 cm in light snow of 0.3 mm/h and to 10.5–10.9 cm at 3 mm/h with a hundredth
+of the crystals, in runs that converge ([growth and aggregation](mcsnow_growth_aggregation.md)). A comparison of loads
+with Earth's largest observed flakes caps the flakes that break at about 5 cm for ordinary flakes and 8–15 cm for the
+largest ([survival](turbulence_survival.md)). The two meet in moderate snow, and light snow stays below the cap without
+breaking. In heavy snow with plentiful crystals the runs without breakup grow metre-scale aggregates that do not
+converge, and there only a breakup law, which no Earth measurement yet supports, would set the size. Before 24 October
+the calculations put typical flakes anywhere from below a millimetre to tens of centimetres across, a spread carried by
+the water a storm supplies to growing ice, the number of crystals that share it, and the population solver that follows
+their collisions.
 
 On 24 October the author made three decisions about the course of the work. The crystal-growth model is frozen as it
 stood that day, and its errors against Earth's laboratory crystals enter every lunar result as a stated uncertainty. A
@@ -31,17 +35,33 @@ decades of crystal number, the crystal arriving at the freezing level follows th
 up to 41% ([size range](lunar_size_range.md)). Above a centimetre those single crystals extrapolate far past any
 measured crystal, and aggregation and breakup, the next two steps, decide what falls.
 
-Steps 4 and 5 give the flakes. McSnow's aggregation, fed with crystals of measured size and run with Connolly and
-co-authors' (2012) sticking law, reproduces the median size of Earth's snowflakes within 16% of two observed relations
-from 0.3 to 9 mm/h, while its largest flakes outgrow the observed ones in the heaviest snow, where breakup takes over
-([aggregation](mcsnow_aggregation.md)). In the lunar column the same aggregation carries the 90th percentile of flake
-span past 10–14 cm within 1.5 km of the cloud top at 3 mm/h, within 4.5 km at 1 mm/h and in the lower half of the column
-at 0.3 mm/h; the crystal model's fall-speed band moves those depths by about a kilometre. Under the same turbulence a
-lunar flake carries no more load at its junctions than an Earth flake until it is 2.2–2.6 times larger, so Earth's
-ordinary 2 cm flakes and its 4–6 cm storm aggregates correspond to lunar flakes of about 5 cm and 8–15 cm
-([survival](turbulence_survival.md)). Joining the two, the flakes reaching the lunar freezing level would be those that
-survive, several centimetres to about 15 cm across; a breakup law, crystals growing and aggregating together, and a
-water supply coupled to the storm are the work that would test this.
+Steps 4 and 5 gave the first flakes. McSnow's aggregation, fed with crystals of measured size and run with Connolly
+and co-authors' (2012) sticking law, reproduces the median size of Earth's snowflakes within 16% of two observed
+relations from 0.3 to 9 mm/h, while its largest flakes outgrow the observed ones tenfold in the heaviest snow
+([aggregation](mcsnow_aggregation.md)). Fed with full-size lunar crystals at the cloud top, the same aggregation
+carried the 90th percentile of flake span past 10–14 cm within 1.5 km of the top at 3 mm/h, within 4.5 km at 1 mm/h
+and in the lower half of the column at 0.3 mm/h. Under the same turbulence a lunar flake carries no more load at its
+junctions than an Earth flake until it is 2.2–2.6 times larger, so Earth's ordinary 2 cm flakes and its 4–6 cm storm
+aggregates correspond to lunar flakes of about 5 cm and 8–15 cm ([survival](turbulence_survival.md)). That analogy
+assumes that breakup limited Earth's largest flakes.
+
+On 25 October the author approved three further steps, and all three are done. No law for whole-flake breakup has Earth
+support ([breakup literature](breakup_literature.md)). The measurements count the fragments chipped from centimetre
+flakes struck by dense graupel at 10⁻⁷–10⁻⁵ J, or record the speed, about 2 m/s, at which flakes blown against a snow
+surface begin to fracture. Collisions in free fall are gentler than any of these: lunar flakes close on crystals and on
+one another at 0.5 m/s or less, with energies near 10⁻⁸ J and about 3 × 10⁻⁸ J in strong turbulence. That finding stands
+beside the analogy's premise and questions whether anything breaks lunar flakes aloft, so the sizes reached without
+breakup form the second bound. Grown from 4 µm seeds while they aggregate, the flakes reach the analogy's span far lower
+than full-size crystals did: at 3 mm/h the 90th percentile passes 10 cm about 8 km below the −15 °C top and 14 cm about
+10 km down, against 1.5 km for both, and the crystal model's Earth error band moves those depths by up to 4 km. With a
+hundredth of the crystals it passes 10 cm only 14.5 km down and arrives at 10.5–10.9 cm, and light snow arrives at
+4.2–4.5 cm, both converged under four times the superparticles. As crystals gather into flakes they take up less of a
+steady supply, 40% of it at 3 mm/h, and a cloud would hold the rest as supercooled water. Along the archived storm's
+paths most crystals sublimate before the freezing level, and only the paths held at saturation with dilute crystals give
+a converged size, about 11–12 cm on the median path. The design-climate storm boxes hold half their snow within 18–20 km
+of the freezing level and nine-tenths within 30–35 km ([snow zone](snow_zone_depth.md)). Light snow from the reference
+column's −15 °C top therefore melts before it reaches the size limit; light snow forming higher in that snow zone, near
+−30 °C, has not yet been followed to the freezing level.
 
 ## The plan, in order
 
@@ -61,9 +81,22 @@ water supply coupled to the storm are the work that would test this.
    grows them ([register](../../research/decisions.md), 21 October). Done 24 October as a load analogy
    ([results](turbulence_survival.md)).
 
-Steps 4 and 5 start from the crystals of step 3 and carry the uncertainty measured in step 2. Beyond the plan, a
-whole-aggregate breakup law, crystals that grow and aggregate together, and a water supply coupled to the storm would
-replace its two weakest links: the load analogy and the full-size crystals entering at the cloud top.
+Steps 4 and 5 start from the crystals of step 3 and carry the uncertainty measured in step 2. The 25 October stage
+followed:
+
+6. **A breakup law in place of the load analogy.** No law with Earth support exists for whole flakes breaking in
+   collisions or under drag and turbulence; the analogy stays as the cap, with its limits stated. Done 25 October
+   ([results](breakup_literature.md)).
+7. **Growth and aggregation together**, through the reference column's water supply and along the archived storm
+   paths, at the crystal-number cases and the error band's edges. Done 25 October
+   ([results](mcsnow_growth_aggregation.md)).
+8. **Light snow and melting**: how deep the storm boxes' snow zone stands above the freezing level, and whether light
+   snow reaches the size limit before it melts. Done 25 October ([results](snow_zone_depth.md)).
+
+Before the optics, four things remain open: the heavy-snow tail, which no run converges and which the Earth check
+overgrows tenfold at 9 mm/h; a storm whose vapour responds to its crystals; riming of the vapour that flakes leave
+unused; and measurements of whole flakes breaking, flake on flake or under sustained load, which would show whether
+lunar flakes break at all.
 
 ## The frozen crystal model
 
@@ -127,6 +160,9 @@ hash, and lists the 52 transient paths the copy does not hold. New work keeps no
 | [lunar_size_range.md](lunar_size_range.md), [lunar_size_range.py](lunar_size_range.py), [results/lunar_size_range.json](results/lunar_size_range.json) | Single-crystal sizes at the freezing level over water supply and crystal number, with the band's edges |
 | [mcsnow_aggregation.md](mcsnow_aggregation.md), [mcsnow_aggregation.py](mcsnow_aggregation.py), [results/mcsnow_aggregation.json](results/mcsnow_aggregation.json) | McSnow aggregation from measured crystals checked against observed Earth snowflake sizes, and the lunar column's depths of outgrowth |
 | [turbulence_survival.md](turbulence_survival.md), [turbulence_survival.py](turbulence_survival.py), [results/turbulence_survival.json](results/turbulence_survival.json) | Lunar flake spans with the same junction load as Earth's largest observed flakes, over turbulence and mass laws |
+| [mcsnow_growth_aggregation.md](mcsnow_growth_aggregation.md), [mcsnow_growth_aggregation.py](mcsnow_growth_aggregation.py), [results/mcsnow_growth_aggregation.json](results/mcsnow_growth_aggregation.json) | Crystals that grow and aggregate together in the reference column and along the storm paths: depths of outgrowth, arriving sizes, convergence, the band's edges and the water the snow takes |
+| [snow_zone_depth.md](snow_zone_depth.md), [snow_zone_depth.py](snow_zone_depth.py), [results/snow_zone_depth.json](results/snow_zone_depth.json) | How far above the freezing level the design-climate storm boxes hold their snow, and light snow against the size limit |
+| [breakup_literature.md](breakup_literature.md), [breakup_sources.json](breakup_sources.json) | The 25 October search for an Earth-supported breakup law: the measurements found, their quantities and access, and the collision energies aloft |
 | [tmp_relocation.py](tmp_relocation.py), [results/tmp_relocation.json](results/tmp_relocation.json) | Each /tmp path the committed records name, mapped to its hash-checked copy on the project-space drive |
 | [scale_size_results.md](scale_size_results.md), [scale_size_diagnosis.py](scale_size_diagnosis.py), [scale_size_sources.json](scale_size_sources.json) | Gravity/depth attribution, water-per-crystal and aggregation controls, active-source audit and limits of physical interpretation |
 | [scale_lunar_results.md](scale_lunar_results.md), [scale_lunar_methods.md](scale_lunar_methods.md), [scale_lunar_comparison.py](scale_lunar_comparison.py) | Complete SCALE/custom lunar comparison, numerical refinements, sticking and atmospheric-feedback contrasts |
@@ -279,11 +315,21 @@ the top, about 0.4 mm/h at 100 a litre on Earth.
   freezing level a few hundred metres apart.
 
 
-## History, 21–24 October 2026
+## History, 21–25 October 2026
 
 Each step of the investigation was recorded here as it happened, newest first. These paragraphs are the record of what
 each step computed and the limits it found; where their conclusions differ from the standing at the top of this page,
 the standing holds.
+
+The 25 October stage searched for a breakup law and found none with Earth support ([breakup
+literature](breakup_literature.md)); it grew crystals and aggregated them together in the reference column and along the
+storm paths with five new declared, default-off changes to McSnow, each build reproducing the 24 October runs byte for
+byte ([growth and aggregation](mcsnow_growth_aggregation.md)); and it measured the design-climate boxes' snow zone
+([snow zone](snow_zone_depth.md)). Two kinds of numerical trouble arose and were removed before any result: crystals
+sublimating under a 1% substep limit needed tens of thousands of substeps until a residual at the storm probes' own 0.2
+µm mass ended them, and a runaway needle overflowed past 10¹⁴² m until the probes' 1 m censor removed it. Superparticle
+refinement settles the light-snow and dilute-crystal columns; the heavy-snow tail and the storm paths' sizes stay
+unconverged.
 
 The [recent-science check](mcsnow_science_check.md) confirms that the frozen tuned component lacks the observed humidity-dependent transition between compact and complex growth. In 60 short response probes, a 60 µm warm crystal retains an added-volume density near 248 kg/m³ when ice supersaturation falls from 5.24% to 0.26%, although its mass uptake falls about twentyfold. All 24 sampled baseline states reproduce exactly, and the maximum timestep refinement change is 0.0567%. This is a qualitative failure of moisture-dependent morphology, with no new pointwise laboratory error assigned. The author's condition for continuing to freeze and aggregation is unmet; the fit and earlier evidence remain preserved.
 
