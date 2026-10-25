@@ -35,6 +35,8 @@ python -m research.studies.environment_screens.run
 
 Next: acquire defensible EUV material response and resolved irradiance; replace assumed absorption/heating fractions with species-resolved absorption, chemistry and cooling; then test atomic transport and kinetic boundaries. Reconcile a calibrated lower-atmospheric profile with this upper model before inferring integrated habitability.
 
+The snow work's standing and plan open [its README](snow/README.md). On 24 October the author froze the crystal model, replaced the 1,320-point accuracy rule with a rule sized to the laboratory data, and moved the work to the lunar answer: flake sizes as a range over moisture supply and crystal number, flakes joining checked against Earth's snowflakes, and their survival in turbulence. The paragraphs below record the investigation of 21–24 October.
+
 The snow investigation now has a [numerically checked implicit attachment component](snow/earth_growth_assessment.md#implicit-attachment-heat-and-ventilation-coupling), coupling surface humidity, latent heat and prescribed ventilation. Earth habit prediction and branching still require validation before lunar size distributions can be adopted.
 
 [Earth trajectory and measured-shape tests](snow/earth_growth_assessment.md#earth-trajectories-identify-a-remaining-shape-failure) now distinguish a remaining axis-growth error from total vapour uptake. The column comparison needs revised attachment/geometry treatment even with the measured shape supplied; branching and hollowing also require humidity-sensitive validation.
