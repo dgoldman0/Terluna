@@ -70,14 +70,14 @@ For `habit0/agggeo1`, mass fixes diagnostic diameter and projected area, and asp
 
 ## Reproduction
 
-Run from the atmosphere worktree with GNU Fortran, Python, NumPy and SciPy available. The build fetches only missing manifest files and rejects mismatches. Use new scratch directories; both build and run commands reject existing destinations.
+Run from the atmosphere worktree with GNU Fortran, Python, NumPy and SciPy available. The build checks every manifest file and rejects mismatches; the copy of the source on the project-space drive is complete, so it downloads nothing (`--fetch` would retrieve only missing files). Use new destination directories; both build and run commands reject existing ones. The paths below use the ignored links `research/runs/snow_scale` and `research/runs/snow_tmp_copy` to the project-space drive ([relocation record](results/tmp_relocation.json)).
 
 ```sh
-python -m atmosphere.snow.welss_aggregation_build --source /tmp/welss-reproduction/source --output /tmp/welss-reproduction/build --fetch
-python -m atmosphere.snow.welss_aggregation run --build /tmp/welss-reproduction/build --output /tmp/welss-reproduction/aggregation --aggregation --seed 20261021
-python -m atmosphere.snow.welss_aggregation run --build /tmp/welss-reproduction/build --output /tmp/welss-reproduction/growth --seed 20261021
-python -m atmosphere.snow.welss_aggregation compare --run /tmp/welss-reproduction/aggregation --archive /tmp/lunar_snow_earth_population/ob_agg0.nc --output /tmp/welss-reproduction/aggregation.json
-python -m atmosphere.snow.welss_aggregation compare --run /tmp/welss-reproduction/growth --archive /tmp/lunar_snow_earth_population/ob_hp0.nc --output /tmp/welss-reproduction/growth.json
+python -m atmosphere.snow.welss_aggregation_build --source research/runs/snow_tmp_copy/lunar_snow_earth_population/mcsnow_source --output research/runs/snow_scale/welss-reproduction/build
+python -m atmosphere.snow.welss_aggregation run --build research/runs/snow_scale/welss-reproduction/build --output research/runs/snow_scale/welss-reproduction/aggregation --aggregation --seed 20261021
+python -m atmosphere.snow.welss_aggregation run --build research/runs/snow_scale/welss-reproduction/build --output research/runs/snow_scale/welss-reproduction/growth --seed 20261021
+python -m atmosphere.snow.welss_aggregation compare --run research/runs/snow_scale/welss-reproduction/aggregation --archive research/runs/snow_tmp_copy/lunar_snow_earth_population/ob_agg0.nc --output research/runs/snow_scale/welss-reproduction/aggregation.json
+python -m atmosphere.snow.welss_aggregation compare --run research/runs/snow_scale/welss-reproduction/growth --archive research/runs/snow_tmp_copy/lunar_snow_earth_population/ob_hp0.nc --output research/runs/snow_scale/welss-reproduction/growth.json
 ```
 
 The comparison requires separately recovered archive members with the pinned hashes; the build does not substitute data or download the complete 69 MB archive.

@@ -36,7 +36,8 @@ def main():
         raise RuntimeError('startup probe identity changed')
     failures=[]
     for filename in ['welss_compact_capacitance_initial_failure.log','welss_compact_capacitance_bound_failure.log']:
-        path=Path('/tmp/lunar_snow_earth_population')/filename
+        # The /tmp originals were copied to the project-space drive on 24 October (results/tmp_relocation.json).
+        path=HERE.parents[1]/'research/runs/snow_tmp_copy/lunar_snow_earth_population'/filename
         if path.exists():
             failures.append(dict(file=filename,sha256=archive.sha(path),status='Rejected attempt; invalid internal trial mass; no output product admitted'))
     product=dict(schema='terluna.atmosphere.welss-capacitance-startup/1',producer=identity,frozen_source=source,

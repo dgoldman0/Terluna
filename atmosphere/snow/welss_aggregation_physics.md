@@ -16,7 +16,7 @@ Diameter, capacitance and sticking agree exactly in these cases. Maximum relativ
 
 ```sh
 PYTHONDONTWRITEBYTECODE=1 python atmosphere/snow/references/build_welss_aggregation_reference.py \
-  --output /tmp/welss_aggregation_reference.json
+  --output research/runs/snow_scale/welss_aggregation_reference.json
 PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 python -m pytest -p no:cacheprovider \
   atmosphere/tests/test_snow_welss_aggregation_physics.py -q
 ```

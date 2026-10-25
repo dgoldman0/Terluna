@@ -79,7 +79,8 @@ def test_wrong_archive_does_not_extract_or_build(tmp_path):
 
 def test_reviewed_patches_reproduce_actual_pinned_source_when_cache_available():
     # No network, compile or numerical run in the routine test suite.
-    archive=Path('/tmp/terluna-scale-feasibility/source.tar.gz')
+    # The /tmp original was copied to the project-space drive on 24 October (snow/results/tmp_relocation.json).
+    archive=Path(__file__).resolve().parents[2]/'research/runs/snow_tmp_copy/terluna-scale-feasibility/source.tar.gz'
     if not archive.exists():
         pytest.skip('Optional pinned upstream archive is not cached')
     assert scale_build.sha256(archive)==scale_build.ARCHIVE_SHA256

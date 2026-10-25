@@ -4,14 +4,18 @@ The snow work asks four things of the Open Moon's sky winter: how large snowflak
 largest survive the cloud's turbulence, and how a snowstorm looks under lunar light. The author opened these questions
 on 20 and 21 October, as the second half of the work on the high cloud's crystals
 ([register](../../research/decisions.md), 20 and 21 October). How flakes fall, how deep the snow zone stands and how
-far below the freezing level snow lasts are calculated in the sections below. The size of lunar snowflakes is open.
-The calculations made between 20 and 24 October put typical flakes anywhere from below a millimetre to tens of
-centimetres across, and the spread follows from three inputs: the water a storm supplies to growing ice, the number of
+far below the freezing level snow lasts are calculated in the sections below. The size of lunar snowflakes now has a
+first answer, built through the five steps of the plan below: the flakes outgrow any survivable span high in the snow
+zone, so breakup sets their size, and a comparison of loads with Earth's largest observed flakes places that size at
+several centimetres to about 15 cm. The answer joins an Earth-checked aggregation calculation to a load analogy, and a
+breakup law would replace the analogy. Before 24 October the calculations put typical flakes anywhere from below a
+millimetre to tens of centimetres across, a spread carried by the water a storm supplies to growing ice, the number of
 crystals that share it, and the population solver that follows their collisions.
 
 On 24 October the author made three decisions about the course of the work. The crystal-growth model is frozen as it
-stood that day, and its errors against Earth's laboratory crystals enter every lunar result as a stated uncertainty. A rule sized to the laboratory data replaces the 1,320-point accuracy rule. The work then moves to the
-lunar answer, in the order of the plan below.
+stood that day, and its errors against Earth's laboratory crystals enter every lunar result as a stated uncertainty. A
+rule sized to the laboratory data replaces the 1,320-point accuracy rule. The work then moves to the lunar answer, in
+the order of the plan below.
 
 The first three steps of the plan are done. Judged crystal by crystal against the scatter between repeat crystals, the
 two-temperature calibration passes on mass and axes, with 5 of its 93 comparisons outside where chance gives about 4,
@@ -27,6 +31,18 @@ decades of crystal number, the crystal arriving at the freezing level follows th
 up to 41% ([size range](lunar_size_range.md)). Above a centimetre those single crystals extrapolate far past any
 measured crystal, and aggregation and breakup, the next two steps, decide what falls.
 
+Steps 4 and 5 give the flakes. McSnow's aggregation, fed with crystals of measured size and run with Connolly and
+co-authors' (2012) sticking law, reproduces the median size of Earth's snowflakes within 16% of two observed relations
+from 0.3 to 9 mm/h, while its largest flakes outgrow the observed ones in the heaviest snow, where breakup takes over
+([aggregation](mcsnow_aggregation.md)). In the lunar column the same aggregation carries the 90th percentile of flake
+span past 10–14 cm within 1.5 km of the cloud top at 3 mm/h, within 4.5 km at 1 mm/h and in the lower half of the column
+at 0.3 mm/h; the crystal model's fall-speed band moves those depths by about a kilometre. Under the same turbulence a
+lunar flake carries no more load at its junctions than an Earth flake until it is 2.2–2.6 times larger, so Earth's
+ordinary 2 cm flakes and its 4–6 cm storm aggregates correspond to lunar flakes of about 5 cm and 8–15 cm
+([survival](turbulence_survival.md)). Joining the two, the flakes reaching the lunar freezing level would be those that
+survive, several centimetres to about 15 cm across; a breakup law, crystals growing and aggregating together, and a
+water supply coupled to the storm are the work that would test this.
+
 ## The plan, in order
 
 1. **Check the frozen model by the data-sized rule** (below), naming every measured crystal that falls outside it.
@@ -40,11 +56,14 @@ measured crystal, and aggregation and breakup, the next two steps, decide what f
    24 October ([results](lunar_size_range.md)); flakes follow from step 4.
 4. **Join the flakes, checked first on Earth.** With measured crystals as input and established aggregation
    efficiencies, the aggregation calculation is compared with the sizes of observed Earth snowflakes, then run through
-   the lunar column.
+   the lunar column. Done 24 October ([results](mcsnow_aggregation.md)).
 5. **Estimate survival in turbulence**: whether the largest aggregates hold together in the motions of the cloud that
-   grows them ([register](../../research/decisions.md), 21 October).
+   grows them ([register](../../research/decisions.md), 21 October). Done 24 October as a load analogy
+   ([results](turbulence_survival.md)).
 
-Steps 4 and 5 start from the crystals of step 3 and carry the uncertainty measured in step 2.
+Steps 4 and 5 start from the crystals of step 3 and carry the uncertainty measured in step 2. Beyond the plan, a
+whole-aggregate breakup law, crystals that grow and aggregate together, and a water supply coupled to the storm would
+replace its two weakest links: the load analogy and the full-size crystals entering at the cloud top.
 
 ## The frozen crystal model
 
@@ -69,10 +88,10 @@ two, so the band it sets is the wider.
 Before the freeze, the component's −14.4 °C dendrite carried 26% too much mass at 30 minutes against Takahashi and
 co-authors' (1991) fitted laboratory history, with a span 35% too wide and a thickness 17.5% too thin; its −5.3 °C
 column grew too short, 31% below the fitted length at the fitted mass ([shape diagnosis](mcsnow_shape_diagnosis.md)).
-The calibration brings the warm column within 9.73% of the fitted mass and dimensions from 3 to 30 minutes, and the
-cold dendrite within 4.75% at 30 minutes with its 3-minute mass about 17% low; the warm column's fall speed stays 21–23%
-high at 30 minutes. These agreements are fits to the same histories ([joint audit](mcsnow_joint_acceptance.md)). Both
-parts share three recorded limits. Crystals started from elongated seeds run away. The shape and density rules ignore humidity
+The calibration brings the warm column within 9.73% of the fitted mass and dimensions from 3 to 30 minutes, and the cold
+dendrite within 4.75% at 30 minutes with its 3-minute mass about 17% low; the warm column's fall speed stays 21–23% high
+at 30 minutes. These agreements are fits to the same histories ([joint audit](mcsnow_joint_acceptance.md)). Both parts
+share three recorded limits. Crystals started from elongated seeds run away. The shape and density rules ignore humidity
 ([recent-science check](mcsnow_science_check.md)). And the laboratory crystals grew for at most 30 minutes, against the
 18–54 hours a lunar crystal spends in the cloud.
 
@@ -96,13 +115,19 @@ component has 83 of 332 comparisons outside and misses the speed accuracy at 55 
 ## Files and commands
 
 The snow solver sits beside the raindrop solver ([../rain](../rain/README.md)). The table lists the principal files;
-the history below links the rest.
+the history below links the rest. Material the work kept in the laptop's /tmp until 24 October is copied to the
+project-space drive and reached through the ignored link `research/runs/snow_tmp_copy`;
+[results/tmp_relocation.json](results/tmp_relocation.json) maps each /tmp path a committed record names to its copy and
+hash, and lists the 52 transient paths the copy does not hold. New work keeps nothing it needs in /tmp.
 
 | File | What it holds |
 |---|---|
 | [data_sized_check.md](data_sized_check.md), [data_sized_check.py](data_sized_check.py), [results/data_sized_check.json](results/data_sized_check.json) | The frozen model against each measured crystal: repeat-crystal scatter, every verdict, the crystals outside |
 | [earth_error_band.md](earth_error_band.md), [earth_error_band.py](earth_error_band.py), [results/earth_error_band.json](results/earth_error_band.json) | The component's Earth errors as three multipliers, their sizing, parity with the frozen component, and lunar sizes at the band's edges |
 | [lunar_size_range.md](lunar_size_range.md), [lunar_size_range.py](lunar_size_range.py), [results/lunar_size_range.json](results/lunar_size_range.json) | Single-crystal sizes at the freezing level over water supply and crystal number, with the band's edges |
+| [mcsnow_aggregation.md](mcsnow_aggregation.md), [mcsnow_aggregation.py](mcsnow_aggregation.py), [results/mcsnow_aggregation.json](results/mcsnow_aggregation.json) | McSnow aggregation from measured crystals checked against observed Earth snowflake sizes, and the lunar column's depths of outgrowth |
+| [turbulence_survival.md](turbulence_survival.md), [turbulence_survival.py](turbulence_survival.py), [results/turbulence_survival.json](results/turbulence_survival.json) | Lunar flake spans with the same junction load as Earth's largest observed flakes, over turbulence and mass laws |
+| [tmp_relocation.py](tmp_relocation.py), [results/tmp_relocation.json](results/tmp_relocation.json) | Each /tmp path the committed records name, mapped to its hash-checked copy on the project-space drive |
 | [scale_size_results.md](scale_size_results.md), [scale_size_diagnosis.py](scale_size_diagnosis.py), [scale_size_sources.json](scale_size_sources.json) | Gravity/depth attribution, water-per-crystal and aggregation controls, active-source audit and limits of physical interpretation |
 | [scale_lunar_results.md](scale_lunar_results.md), [scale_lunar_methods.md](scale_lunar_methods.md), [scale_lunar_comparison.py](scale_lunar_comparison.py) | Complete SCALE/custom lunar comparison, numerical refinements, sticking and atmospheric-feedback contrasts |
 | [flakes.py](flakes.py) | The snowflake's mass, area and fall law, its growth from the vapour, its melting, the winter columns and the product |

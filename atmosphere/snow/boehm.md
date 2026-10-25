@@ -38,7 +38,7 @@ Independent collision-trajectory validation remains unperformed. The retrieved W
 The focused test suite contains 16 passing cases, including the parameterized input checks. It verifies source and fixture identities, scalar and broadcast results, pair-matrix symmetry, equality behavior, retention of efficiencies above one and the archived Earth drag comparison. To regenerate the independent fixture without writing production products:
 
 ```
-python atmosphere/snow/references/build_boehm_reference.py --output /tmp/boehm_reference.json
+python atmosphere/snow/references/build_boehm_reference.py --output research/runs/snow_scale/boehm_reference.json
 PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 python -m pytest atmosphere/tests/test_snow_boehm.py -q -p no:cacheprovider
 ```
 

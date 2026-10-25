@@ -72,7 +72,7 @@ The raw source, dependency packages, build logs, native outputs and input files 
 
 ```sh
 python -m atmosphere.snow.scale_column lunar_repeat --lunar --move --duration 1800
-python -m atmosphere.snow.scale_column suite --summarize-to /tmp/scale_column.json
+python -m atmosphere.snow.scale_column suite --summarize-to research/runs/snow_scale/scale_column_summary.json
 python -m atmosphere.snow.scale_build --help
 ```
 
@@ -112,7 +112,7 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m atmosphere.snow.scale_aggrega
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m atmosphere.snow.scale_aggregation golovin_repeat --kind golovin --sd 8192 --dt 1
 python -m atmosphere.snow.scale_collision_observer --cache research/runs/snow_scale
 python -m atmosphere.snow.scale_aggregation observed_repeat --sd 2048 --observer
-python -m atmosphere.snow.scale_aggregation suite --summarize-to /tmp/scale_aggregation.json
+python -m atmosphere.snow.scale_aggregation suite --summarize-to research/runs/snow_scale/scale_aggregation_summary.json
 ```
 
 The observer builder requires a fresh `observer/` directory. The summary reads the two retained case declarations and checks inputs before reading outputs. Run separate processes, at most two with one numerical thread each: the local NetCDF library crashed when two Python threads initialized atmospheric files concurrently. Both incomplete directories are retained. The [check record](results/scale_aggregation_checks.json) separates the completed numerical and repository checks from empirical validation, full scholarly review and the full repository test suite.
