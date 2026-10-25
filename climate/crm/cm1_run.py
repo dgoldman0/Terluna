@@ -1763,6 +1763,12 @@ for _name, _site, _where in (('box_near_side_sea', dict(lat_deg=-5.0, lon_deg=-4
                 "GCM's column there through its whole depth: its mean air held only above the top of the GCM's "
                 'convection, its mean vertical wind and its own heating and moistening by local time; the lunar rain '
                 "limits and rain law, CM1's boundary layer per unit mass, the twilight, two lunar days from sunrise")
+# The sea box's third lunar day (the plan of 2026-10-24): box_near_side_sea run on from its day-59 restart through days
+# 59-88.5 on the same build, inputs and settings, its wind nudged by local time as before (setup_restart carries the
+# windows on by whole lunar days), to see whether its upper air settles and its rain by time of day holds.
+CASES['box_near_side_sea_day3'] = dict(
+    CASES['box_near_side_sea'], restart_from=dict(case='box_near_side_sea', day=59.0), days=88.5,
+    purpose=CASES['box_near_side_sea']['purpose'] + '; its third lunar day, days 59-88.5, from its day-59 restart')
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -2753,12 +2759,40 @@ def setup_fine(name: str, cfg: dict) -> Path:
 
 RESTART_INPUTS = ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat', 'terluna_wls.txt', 'terluna_lsadv.txt', TWILIGHT_TABLE,
                   'terluna_surface.txt', 'LANDUSE.TBL', 'cm1out_s.ctl', 'cm1out_stats.ctl', 'cm1out_metadata.ctl',
-                  'cm1out_metadata.dat')
+                  'cm1out_metadata.dat', RAIN_LAW_TABLE)
+
+
+def restart_windows(source: Path, case: Path, start_s: float, end_s: float, bins: int = 36):
+    """The wind-nudging windows of a case run on from the restart of a source that nudged its wind by local time
+    (lsnudge_0001.dat onward, each window a bins-th of the solar day from the source's start, as setup writes them):
+    the windows from the one holding start_s to the last starting before end_s, numbered from 1 as CM1 reads them,
+    each with its own times and the profile of the source's window at the same phase of the day, the last
+    open-ended. The source's windows at one phase must hold the same profile. Returns the record for case.json, or
+    None when the source nudged toward one profile."""
+    found = sorted(source.glob('lsnudge_0*.dat'))
+    if len(found) < 2:
+        return None
+    step = solar_day_s() / bins
+    rows = [p.read_text().splitlines() for p in found]
+    for j, r in enumerate(rows):                                          # every source window at one phase alike
+        if r[:1] + r[2:] != rows[j % bins][:1] + rows[j % bins][2:]:
+            raise RuntimeError(f'{found[j].name} differs from {found[j % bins].name}, a lunar day earlier')
+    first = int(math.floor(start_s / step + 1e-9))                        # 0-based index of the window holding start_s
+    last = int(math.ceil(end_s / step - 1e-9)) - 1
+    if last - first + 1 > 100:
+        raise ValueError(f'{last - first + 1} nudging windows; CM1 reads at most 100')
+    for k, i in enumerate(range(first, last + 1), 1):
+        t1, t2 = i * step, (1.0e30 if i == last else (i + 1) * step)
+        r = rows[i % bins]
+        (case / f'lsnudge_{k:04d}.dat').write_text('\n'.join(r[:1] + [f'  {t1:22.1f} {t2:22.6e}'] + r[2:]) + '\n')
+    return dict(windows=last - first + 1, window_s=step, first_window_of_source=first + 1,
+                source=f"{source.name}'s windows by local time, carried on by whole lunar days (restart_windows)")
 
 
 def setup_restart(name: str, cfg: dict) -> Path:
     """Set up a case that runs on from another case's restart (cfg['restart_from']: the case and the day), so that a
-    window of a run can run again under other settings: the other case's inputs, restart files and kept vertical field,
+    window of a run can run again under other settings, or run on: the other case's inputs, restart files and kept
+    vertical field, its rain law's table and its wind-nudging windows carried over the case's span (restart_windows),
     and its namelist with this case's electricity. Its progress starts at the restart, and the runner takes up from
     there; output and restarts keep the other case's numbering."""
     fr = cfg['restart_from']
@@ -2786,6 +2820,9 @@ def setup_restart(name: str, cfg: dict) -> Path:
             shutil.copy2(source / item, case / item)
     for f in files + ([ez] if ez.exists() else []):
         shutil.copy2(f, case / f.name)
+    windows = restart_windows(source, case, n * restart_s, case_length_s(cfg, scale))
+    if windows and abs(windows['window_s'] - src['nudging_wind']['window_s']) > 1e-3:
+        raise RuntimeError(f"{fr['case']}'s windows are {src['nudging_wind']['window_s']} s long, not {windows['window_s']}")
     text = (source / 'namelist.template').read_text()
     if abs(cfg['output_s'] - src['configuration']['output_s']) > 0.5:   # a window may write output more often;
         text = set_namelist(text, 'param1', 'tapfrq', cfg['output_s'] * scale)   # CM1 resets its schedule on restart
@@ -2808,12 +2845,15 @@ def setup_restart(name: str, cfg: dict) -> Path:
         path.symlink_to(target)
     made = next((s for s in _progress(source)['segments'] if s['model_s'] >= n * restart_s - 1.0), {})
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
+    windows_written = tuple(f'lsnudge_{k:04d}.dat' for k in range(2, windows['windows'] + 1)) if windows else ()
     record = dict(src, case=name, purpose=cfg['purpose'], inputs_from=None, configuration=dict(cfg),
                   build=build_record, electricity=electricity, rain_limits=rain,
                   restart_from=dict(case=fr['case'], day=fr['day'], restart=n, model_s=n * restart_s,
                                     made_by=made.get('executable')),
+                  **({'nudging_wind': dict(src.get('nudging_wind') or {}, **windows)} if windows else {}),
                   runner=digest(__file__),
-                  inputs={p: digest(case / p) for p in RESTART_INPUTS + ('namelist.template',) if (case / p).exists()})
+                  inputs={p: digest(case / p) for p in RESTART_INPUTS + ('namelist.template',) + windows_written
+                          if (case / p).exists()})
     (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
     _save_progress(case, dict(segments=[], case=name, start_s=n * restart_s,
                               start=f"{fr['case']}'s restart {n} (day {fr['day']})"))

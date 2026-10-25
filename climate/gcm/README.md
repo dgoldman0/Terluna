@@ -1850,6 +1850,111 @@ design case with it would need less of the 2% more sunlight the cold cloud's fac
 design climate, and its reference humidity, are the author's call; the CM1 boxes forced by it come next, at the
 author's word. It would change the convective rain maps the electricity study reads ([convection.py](convection.py)).
 
+**The scheme on the boxes' air and on its own** (24 October; [sbm_offline.py](sbm_offline.py),
+[sbm_offline.json](../results/gcm/sbm_offline.json), 15 seconds). With the new scheme at rh 0.7 the GCM still rains
+1.45 mm/day over the Near-side Sea after midnight, where the CM1 sea box rains 0.17. Run on through a third lunar day
+as its upper air settles, the box rains 0.14 mm/day after midnight and 2.23 and 2.97 mm/day in the afternoon and
+evening ([the CRM's account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e)). The boxes
+were forced by Kuo's GCM, and the new GCM's nights are harsher: after midnight the rh 0.7 branch's circulation warms the column above 16 km
+by 131 W/m², against Kuo's 57, and dries it by 5.2 mm/day, against 3.3 (`sbm_forcing_compare.py` on the research
+drive). The scheme's parcel rises undiluted, and cloud-resolving models respond far more to dry air aloft than schemes
+with unmixed parcels (Derbyshire and others 2004, *QJRMS* 130). So before a branch with the parcel's mixing
+(`eps_bm`), the scheme ran offline at the two box sites on two sets of columns, at its 2-hour relaxation time:
+- **The settings.** A reference humidity of 0.6, 0.7 or 0.8 with mixing of 0, 0.5, 1, 2, 4, 8 or 16 per e-folding of
+  pressure, and at rh 0.7 inhibition limits of 10 and 30 J/kg.
+- **The constants.** The runs' own: the gas constant 288.38 J/kg/K from the planet namelist and ExoPlaSim's kappa of
+  0.286.
+- **The rain.** The scheme's rate at once, the rain formed before mkrain evaporates any of it.
+- **CM1's columns.** Each box's domain mean every 3 hours over its second lunar day, laid on PlaSim's ten levels at
+  the box's surface pressure. The 192-km domain stands for a GCM cell, the boxes' air was shaped by Kuo's forcing,
+  and the scheme's instantaneous rate is set against CM1's realised rain.
+- **The GCM's own columns.** The 3-day means in each site cell, six over the sea and four on land, over years 10–14
+  of each settled branch, with the scheme at that branch's reference humidity.
+
+**On CM1's air the scheme rains against CM1's hours.** In mm/day, with the share of the columns on which the scheme
+convects and rains:
+
+| Near-side Sea, CM1's columns | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise |
+|---|---|---|---|---|
+| CM1's own rain | 0.00 | 1.19 | 2.04 | 0.17 |
+| rh 0.7, no mixing | 20 (39%) | 34 (81%) | 31 (47%) | 119 (100%) |
+| rh 0.7, eps 1 | 138 (100%) | 154 (100%) | 226 (100%) | 287 (100%) |
+| rh 0.7, eps 4 | 273 (100%) | 284 (100%) | 479 (100%) | 484 (100%) |
+| rh 0.7, eps 8 | 0 (0%) | 148 (46%) | 140 (27%) | 537 (98%) |
+| rh 0.7, eps 16 | 0 | 0 | 0 | 0 |
+| rh 0.6, no mixing | 446 (100%) | 493 (100%) | 478 (100%) | 571 (100%) |
+| rh 0.8, no mixing | 0 | 0 | 0 | 0 |
+| rh 0.7, no mixing, inhibition limit 10 J/kg | 0 (0%) | 0 (0%) | 30 (41%) | 57 (52%) |
+
+| Land at 0° E, CM1's columns | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise |
+|---|---|---|---|---|
+| CM1's own rain | 2.91 | 8.59 | 1.53 | 0.08 |
+| rh 0.7, no mixing | 294 (56%) | 0 (0%) | 305 (76%) | 449 (100%) |
+| rh 0.7, eps 1 | 379 (100%) | 97 (100%) | 505 (100%) | 600 (100%) |
+| rh 0.7, eps 8 | 489 (75%) | 196 (27%) | 582 (73%) | 12 (2%) |
+| rh 0.7, eps 16 | 0 | 0 | 151 (24%) | 0 |
+| rh 0.8, no mixing | 101 (37%) | 0 (0%) | 7 (34%) | 7 (22%) |
+
+- **The rain at once** is the vapour above the scheme's reference over the relaxation time. At rh 0.7 without mixing
+  the vapour CM1's sea columns hold above 70% of the parcel's saturation, averaged with nil where they hold less, comes
+  to 2.6–2.8 kg/m² in the afternoon and evening and 9.9 kg/m² after midnight, when CM1's own convection has stopped
+  spending what the sea evaporates. Then the scheme's parcel from the lowest level is buoyant up to σ 0.32, about
+  55 km up, against an inhibition of 14 J/kg, and CM1's own columns hold 1,420 J/kg of CAPE against 3 J/kg of
+  inhibition.
+- **Mixing** cools the reference, and the cooler reference holds less vapour, so the rain rises with the mixing until
+  the diluted parcel loses its buoyancy. At eps 8 that happens in the sea's mornings and in half its afternoons, while
+  98% of its post-midnight columns still convect; at 16 the scheme stops at every hour at both sites.
+- **The other options** act in the wrong order. A reference humidity of 0.8 holds all the sea's vapour, and the scheme
+  never rains there. An inhibition limit holds back the mornings and afternoons first, where the parcel meets
+  70–88 J/kg, against 10–14 J/kg after sunset.
+- **The mapping and the constants.** On layer means by mass, or on CM1's own 111 levels, the numbers move, but the
+  scheme still convects after 78–100% of the sea's midnights at every mixing up to 16, at 46–577 mm/day. The
+  constants of [test_sbm.py](../tests/test_sbm.py) in place of the runs' change the rain by up to 11%.
+
+No setting passes the test, which asks for CM1's rain within half a millimetre a day or half its value at the sea in
+every quarter and over land in the afternoon and evening. The settings that bring the sea's nights and mornings near
+CM1's do it by stopping the scheme at the sea at every hour (rh 0.8 with mixing up to 2, or a mixing of 16); every
+other rains at least 24 mm/day there after midnight, 140 times CM1's rain. Over land the scheme without mixing
+convects on none of CM1's afternoons and on all its nights, yet in the GCM it rains at CM1's hours, 15.1 mm/day in the
+afternoon and 0.08 after midnight. A model running the scheme keeps its column near the reference, and its rain
+follows what the circulation, the sea and the Sun supply, so the scheme's rate on a cloud-resolving model's air does
+not show when it would rain in the GCM.
+
+**On its own columns, mixing moves the sea's rain out of the night** (mm/day; the rh 0.7 branch, the scheme at rh 0.7):
+
+| Near-side Sea, the GCM's columns | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise |
+|---|---|---|---|---|
+| The branch's convective rain at the ground | 0.31 | 2.80 | 3.30 | 1.44 |
+| The rain its scheme formed (snapshots) | 0.49 | 2.74 | 5.49 | 1.67 |
+| Offline, no mixing | 0.01 | 1.99 | 6.69 | 3.15 |
+| Offline, eps 0.5 | 0.23 | 5.12 | 5.77 | 2.01 |
+| Offline, eps 1 | 0.07 | 7.72 | 5.59 | 0.60 |
+| Offline, eps 2 | 0.00 | 6.89 | 3.56 | 0.24 |
+
+| Land at 0° E, the GCM's columns | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise |
+|---|---|---|---|---|
+| The branch's convective rain at the ground | 0.92 | 13.28 | 0.46 | 0.08 |
+| Offline, no mixing | 0.14 | 15.17 | 1.50 | 0.32 |
+| Offline, eps 1 | 0.09 | 26.99 | 0.36 | 0.00 |
+| Offline, eps 2 | 0.68 | 52.39 | 0.00 | 0.00 |
+
+- **Without mixing** the offline scheme gives the branch's own pattern at the sea, the evening wettest and the morning
+  nearly dry, from noon to sunrise within a factor of two of the rain the branch's scheme formed. It convects on 3–8% of
+  the sea's cell means then, and the branch's own scheme formed rain in 4–11% of its snapshots there.
+- **Mixing** takes the parcel's buoyancy first where the branch's air sinks. At eps 1 the parcel is buoyant in 5% of
+  the sea's cell means after midnight and 28% in the afternoon, against 40% and 62% without mixing. The sea's rain after
+  midnight falls to a fifth and its afternoon's rises fourfold; over land the afternoon nearly doubles and the evening
+  falls to a quarter, 0.36 mm/day where CM1 rains 1.53.
+- **The rh 0.6 branch** answers differently. On its columns a mixing of 0.5 cuts the sea's rain at every hour, after
+  midnight from 1.41 to 0.44 mm/day and in the afternoon from 2.42 to 0.38, and the land's afternoon from 19.4 to 8.3.
+- **The evidence is thin.** At eps 1 only 6 of the 900 sea cell means after midnight convect, and the five years give
+  0.0–2.6 mm/day there.
+
+These numbers are the scheme's first response to columns its branch built without mixing. A branch with mixing would
+cool its upper air toward the diluted parcel until convection resumed, and its rain would again follow the supply, so
+only such a branch shows where that rain falls. Among the settings tried, the screen on the GCM's own columns points to
+eps 1 at rh 0.7; on CM1's air that setting fails the test with the rest.
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

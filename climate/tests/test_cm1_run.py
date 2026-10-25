@@ -193,6 +193,31 @@ def test_latest_restart_needs_a_complete_set(tmp_path):
     assert c.latest_restart(empty) == 0
 
 
+def test_a_run_on_from_a_restart_carries_the_wind_windows_on_by_whole_lunar_days(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'solar_day_s', lambda: 3600.0)               # 36 windows of 100 s a day
+    source, case = tmp_path / 'source', tmp_path / 'case'
+    source.mkdir()
+    case.mkdir()
+    for i in range(72):                                                   # two days, each phase's profile repeating
+        t2 = 1.0e30 if i == 71 else (i + 1) * 100.0
+        (source / f'lsnudge_{i + 1:04d}.dat').write_text(
+            f' *  Header\n  {i * 100.0:22.1f} {t2:22.6e}\n *  Profile\n *  z\n  0.0 300.0 10.0 {i % 36:.1f} 0.0\n')
+    record = c.restart_windows(source, case, 7150.0, 10650.0)            # from inside the 72nd window
+    files = sorted(case.glob('lsnudge_*.dat'))
+    assert record['windows'] == len(files) == 36 and record['first_window_of_source'] == 72
+    first, second, last = (f.read_text().splitlines() for f in (files[0], files[1], files[-1]))
+    assert first[1].split() == ['7100.0', '7.200000e+03'] and first[4].split()[3] == '35.0'
+    assert second[1].split()[0] == '7200.0' and second[4].split()[3] == '0.0'      # the next day's first phase
+    assert last[1].split()[1] == '1.000000e+30' and last[4].split()[3] == '34.0'
+    (source / 'lsnudge_0040.dat').write_text(' *  Header\n  3900.0 4.0e+03\n *  Profile\n *  z\n  0.0 300.0 10.0 9.0 0.0\n')
+    with pytest.raises(RuntimeError):                                     # a day's windows that disagree
+        c.restart_windows(source, case, 7150.0, 10650.0)
+    single = tmp_path / 'single'
+    single.mkdir()
+    (single / 'lsnudge_0001.dat').write_text(' *  Header\n  0.0 1.0e+30\n')
+    assert c.restart_windows(single, case, 0.0, 100.0) is None
+
+
 def test_storms_wrap_around_the_ring():
     from climate.crm import ring_analysis as ra
     rain = np.zeros(20)

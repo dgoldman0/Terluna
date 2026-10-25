@@ -1,0 +1,538 @@
+{
+ "schema": "terluna.climate.crm-box/1",
+ "case": "box_near_side_sea_day3",
+ "purpose": "a 3-D box 192 km square over the Near-side Sea at 5 S, 45 W on the design climate (the cold-cloud run at 298.5 K), forced by the GCM's column there through its whole depth: its mean air held only above the top of the GCM's convection, its mean vertical wind and its own heating and moistening by local time; the lunar rain limits and rain law, CM1's boundary layer per unit mass, the twilight, two lunar days from sunrise; its third lunar day, days 59-88.5, from its day-59 restart",
+ "build": "moon_omp_rain_law_pbl",
+ "evidence_of_this_box": "A box forced by the GCM alone (gcm_site.py): 32 x 32 columns 6.0 km wide on 111 levels to 150 km at its site, sea held at the GCM's temperature or the placeholder land at the GCM's wetness; its upper air above 8-16 km held to the GCM's mean there, the GCM's mean vertical wind below 16 km on its own air, and the GCM's own heating and moistening by local time prescribed, from the GCM run in gcm_run. The lunar rain limits and rain law, the curved air's twilight. It extends no ring.",
+ "site": {
+  "gcm": true,
+  "half_lat_deg": 5.6,
+  "half_lon_deg": 8.5,
+  "lat_deg": -5.0,
+  "lon_deg": -45.0,
+  "surface": "sea",
+  "land_columns": {
+   "box_near_side_sea_day3": 1024
+  }
+ },
+ "rings": [],
+ "evidence": "CM1 r22.0 in three dimensions at lunar gravity: a box 385 km square of 64 x 64 columns 6.0 km wide on 111 levels to 150 km, wrapping round on all sides, at 0 N 0 E, all land (the placeholder surface at wetness 0.90), with the Morrison microphysics given lunar fall speeds, RRTMG radiation for the design air and the Sun of the site, the same across the box; the upper air above 8-16 km held to ring A's reference; the GCM design case's mean vertical wind there imposed as large-scale vertical advection; and the heating and moistening of the rings' own day-night circulation there prescribed by local time and height. It resolves storms in three dimensions. It cannot make the planet-wide circulation, which it takes from the rings, and has no land and water around it. The boxes built on it (size, land, fall speeds) say how they depart from it in their purpose, given with the results.",
+ "reading_rule": "The box takes all its columns; each ring, its land columns within 100 km of the site along the ring. Values are means over those columns of snapshots every 3 model hours, composited by the local hour angle at the site (0 = noon, negative = morning) in 36-degree bins; day is when the Sun is up. Differences are the box minus the ring, snapshot by snapshot at the same local time; p5 and p95 bound 90% of the means of series rebuilt from one-day blocks drawn at random (a moving-block bootstrap, 2,000 draws). air_gcm_layer_c is the mass-weighted mean temperature of the GCM's lowest layer (the bottom 3.3% of the air's mass, about 1.8 km deep) carried to the ground along a dry adiabat, as the GCM's own air near the ground is; raining is the share of columns with rain of at least 1 mm/h. Comfortable means air at 2 m of 18-26 C with a dewpoint of at most 15 C (strict), or 17-27 C and 16 C (loose). The GCM values are its cells whose centres lie within 150 km, as in ring_crossings. Cloud profiles are the share of columns with condensate of at least 0.01 g/kg at each height, by day and by night. Surface energy terms are in W/m2: net sunlight and net infrared at the ground positive downward, written only by the boxes that write the radiation at the ground; the heat carried into the air and the heat of evaporation positive upward; the GCM's are 3-day means on its land cells within 150 km.",
+ "gcm_lowest_sigma": 0.983,
+ "span_days": [
+  59.125,
+  88.5
+ ],
+ "snapshots": 236,
+ "against": {},
+ "gcm": {
+  "run": "A28R_301k_cold_moist",
+  "years": [
+   0,
+   5
+  ],
+  "radius_km": 150.0,
+  "land": null,
+  "water": {
+   "cells": [
+    [
+     -2.769,
+     315.0
+    ],
+    [
+     -8.307,
+     315.0
+    ]
+   ],
+   "air_c": {
+    "by_local_time": [
+     27.489,
+     27.183,
+     26.88,
+     26.581,
+     26.591,
+     27.629,
+     28.724,
+     28.728,
+     28.215,
+     27.926
+    ],
+    "mean": {
+     "all": 27.599,
+     "day": 27.493,
+     "night": 27.712
+    }
+   },
+   "dewpoint_c": {
+    "by_local_time": [
+     21.782,
+     21.468,
+     20.448,
+     20.218,
+     21.334,
+     20.482,
+     20.765,
+     21.345,
+     22.438,
+     22.35
+    ],
+    "mean": {
+     "all": 21.243,
+     "day": 20.531,
+     "night": 22.004
+    }
+   },
+   "rain_mm_h": {
+    "by_local_time": [
+     0.163,
+     0.13,
+     0.055,
+     0.046,
+     0.029,
+     0.053,
+     0.158,
+     0.202,
+     0.133,
+     0.159
+    ],
+    "mean": {
+     "all": 0.113,
+     "day": 0.088,
+     "night": 0.139
+    }
+   },
+   "cloud_cover": {
+    "by_local_time": [
+     0.445,
+     0.434,
+     0.396,
+     0.436,
+     0.503,
+     0.533,
+     0.52,
+     0.529,
+     0.471,
+     0.457
+    ],
+    "mean": {
+     "all": 0.473,
+     "day": 0.494,
+     "night": 0.45
+    }
+   },
+   "comfortable_hours_per_lunar_day": {
+    "strict": 0.0,
+    "loose": 2.953
+   },
+   "rain_mm_per_lunar_day": 79.875
+  }
+ },
+ "gcm_run": {
+  "run": "A28R_301k_cold_moist",
+  "years": [
+   0,
+   5
+  ]
+ },
+ "cloud_profiles": {
+  "box_near_side_sea_day3": {
+   "height_km": [
+    0.05,
+    0.15,
+    0.25,
+    0.35,
+    0.45,
+    0.55,
+    0.65,
+    0.75,
+    0.85,
+    0.95,
+    1.05,
+    1.17,
+    1.29,
+    1.42,
+    1.56,
+    1.71,
+    1.88,
+    2.06,
+    2.25,
+    2.46,
+    2.68,
+    2.92,
+    3.19,
+    3.47,
+    3.77,
+    4.1,
+    4.46,
+    4.84,
+    5.26,
+    5.71,
+    6.19,
+    6.72,
+    7.28,
+    7.89,
+    8.55,
+    9.27,
+    10.03,
+    10.87,
+    11.76,
+    12.73,
+    13.78,
+    14.91,
+    16.13,
+    17.45,
+    18.87,
+    20.41,
+    22.07,
+    23.86,
+    25.79,
+    27.79,
+    29.79,
+    31.79,
+    33.79,
+    35.79,
+    37.79,
+    39.79,
+    41.79,
+    43.79,
+    45.79,
+    47.79,
+    49.79,
+    51.79,
+    53.79,
+    55.79,
+    57.79,
+    59.79,
+    61.79,
+    63.79,
+    65.79,
+    67.79,
+    69.79,
+    71.79,
+    73.79,
+    75.79,
+    77.79,
+    79.79,
+    81.79,
+    83.79,
+    85.79,
+    87.79,
+    89.79
+   ],
+   "day": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.002,
+    0.004,
+    0.002,
+    0.001,
+    0.002,
+    0.002,
+    0.005,
+    0.013,
+    0.012,
+    0.007,
+    0.004,
+    0.003,
+    0.003,
+    0.003,
+    0.004,
+    0.01,
+    0.017,
+    0.016,
+    0.014,
+    0.008,
+    0.004,
+    0.003,
+    0.003,
+    0.002,
+    0.002,
+    0.002,
+    0.002,
+    0.001,
+    0.002,
+    0.004,
+    0.005,
+    0.007,
+    0.011,
+    0.016,
+    0.027,
+    0.04,
+    0.025,
+    0.01,
+    0.005,
+    0.005,
+    0.006,
+    0.007,
+    0.006,
+    0.004,
+    0.002,
+    0.001,
+    0.001,
+    0.001,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "night": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.002,
+    0.003,
+    0.005,
+    0.008,
+    0.01,
+    0.02,
+    0.05,
+    0.066,
+    0.059,
+    0.043,
+    0.006,
+    0.003,
+    0.002,
+    0.002,
+    0.002,
+    0.001,
+    0.001,
+    0.001,
+    0.002,
+    0.002,
+    0.003,
+    0.009,
+    0.009,
+    0.008,
+    0.008,
+    0.004,
+    0.003,
+    0.002,
+    0.002,
+    0.002,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.001,
+    0.002,
+    0.002,
+    0.003,
+    0.004,
+    0.002,
+    0.002,
+    0.003,
+    0.043,
+    0.157,
+    0.238,
+    0.279,
+    0.287,
+    0.277,
+    0.221,
+    0.07,
+    0.002,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "surface_energy": {
+  "box_near_side_sea_day3": {
+   "sensible": {
+    "by_local_time": [
+     8.17,
+     8.366,
+     8.318,
+     7.724,
+     6.196,
+     1.638,
+     0.682,
+     6.653,
+     10.794,
+     8.308
+    ],
+    "mean": 6.692
+   },
+   "latent": {
+    "by_local_time": [
+     90.271,
+     89.401,
+     88.162,
+     87.356,
+     96.513,
+     88.373,
+     74.922,
+     78.415,
+     86.207,
+     92.498
+    ],
+    "mean": 87.232
+   },
+   "net_sunlight": {
+    "by_local_time": [
+     0.0,
+     0.0,
+     24.82,
+     261.234,
+     457.734,
+     378.894,
+     158.12,
+     12.857,
+     0.0,
+     0.0
+    ],
+    "mean": 129.782
+   },
+   "net_infrared": {
+    "by_local_time": [
+     -18.824,
+     -19.479,
+     -20.13,
+     -19.866,
+     -18.004,
+     -13.504,
+     -11.86,
+     -15.344,
+     -18.428,
+     -18.709
+    ],
+    "mean": -17.414
+   }
+  },
+  "gcm": {
+   "cells": 2,
+   "surface": "sea",
+   "net_sunlight": {
+    "by_local_time": [
+     0.0,
+     1.007,
+     40.809,
+     217.345,
+     378.718,
+     370.397,
+     197.771,
+     34.9,
+     1.04,
+     0.0
+    ],
+    "mean": 123.882
+   },
+   "net_infrared": {
+    "by_local_time": [
+     -12.908,
+     -13.737,
+     -14.716,
+     -16.243,
+     -17.49,
+     -13.445,
+     -8.601,
+     -8.247,
+     -10.423,
+     -11.211
+    ],
+    "mean": -12.683
+   },
+   "sensible": {
+    "by_local_time": [
+     7.878,
+     8.892,
+     10.089,
+     12.266,
+     14.274,
+     9.968,
+     3.434,
+     3.982,
+     5.909,
+     6.075
+    ],
+    "mean": 8.266
+   },
+   "latent": {
+    "by_local_time": [
+     96.783,
+     99.66,
+     103.521,
+     107.093,
+     117.271,
+     116.576,
+     93.032,
+     97.17,
+     97.923,
+     93.909
+    ],
+    "mean": 102.412
+   }
+  }
+ },
+ "microphysics": {
+  "box_near_side_sea_day3": {
+   "span_days": [
+    59.0,
+    88.5
+   ],
+   "condensed_mm": 133.46,
+   "evaporated_from_cloud_mm": 28.51,
+   "evaporated_on_the_way_down_mm": 60.67,
+   "reached_the_ground_mm": 39.707,
+   "share_of_falling_water_evaporated": 0.604
+  }
+ },
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/box_analysis.py": "70b5fea9c3e33518",
+   "crm/ring_crossings.py": "6478b488e7a29f38"
+  }
+ }
+}

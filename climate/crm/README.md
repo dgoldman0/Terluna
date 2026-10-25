@@ -1772,6 +1772,55 @@ near the ground over land and 1.8–2.4 °C over the seas, which made the GCM lo
 day. So most of that gap was CM1's boundary layer passing on its density times the surface's heat and water. A
 corrected rerun of a reference ring would show how much of it the rings carried.
 
+**The sea box's third lunar day** (24 October; case `box_near_side_sea_day3`, days 59–88.5;
+[box_days_box_near_side_sea.json](../results/crm/box_days_box_near_side_sea.json),
+[box_budget_box_near_side_sea_day3.json](../results/crm/box_budget_box_near_side_sea_day3.json),
+[box_box_near_side_sea_day3.json](../results/crm/box_box_near_side_sea_day3.json)). The sea box ran on from its
+day-59 restart on the same build, inputs and settings, in 1.3 hours on three threads, its outputs numbered on from
+474. The runner's restart setup now copies the rain law's table and carries the wind's windows by local time on by
+whole lunar days: CM1 reads at most 100, so the run takes the 37 that span its days, each with the profile of the
+first two lunar days' window at the same hour (`restart_windows`; the case records runner `0fd2316a921208a1`). A
+3-hour trial from the restart read the 37 windows, the rain law's 301 rows and the restart's running totals, and
+wrote every field the analyses read (`trial_sea_day3.py` in `session-tools/agents/climate` on the research drive).
+
+| The sea box | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise | Mean |
+|---|---|---|---|---|---|
+| Rain, second lunar day | 0.00 | 1.19 | 2.04 | 0.17 | 0.85 mm/day |
+| Rain, third lunar day | 0.00 | 2.23 | 2.97 | 0.14 | 1.33 mm/day |
+| CM1's inhibition, third lunar day | 37 | 35 | 3 | 2 J/kg | |
+
+- **Rain.** The afternoon's rain rises by 87% and the evening's by 46%, and the box rains 49% of the forcing GCM's
+  2.72 mm/day at the site, against 31% over the second day. The nights and mornings stay quiet, 0.14 and
+  0.00 mm/day, under CAPE of 1,270–1,490 J/kg.
+- **Closure.** The water budget closes to 0.04 mm/day, the boundary layer passing on 0.998 times the sea's
+  evaporation of 2.98 mm/day, and the column loses 0.37 mm/day. The heat budget, with the storage taken between the
+  day's sunrises, closes to 4 W/m² of the 43 W/m² the radiation removes; with box_budget's storage, a linear trend
+  over the day that the day's own cycle tilts, it leaves 22 W/m² (`heat_storage_check.py` beside the trial).
+- **Drift.** The upper air has nearly settled. Between the third day's sunrises the domain-mean air at 40 km went
+  from 253.5 to 253.0 K and at 60 km from 224.2 to 224.5 K, and the 16–60 km band's mean by mass fell 0.5 K, against
+  2.2 K over the second day. The lunar day's mean fell 1.5 K at 40 km and 1.4 K at 60 km from the second day, against
+  4.0 and 6.1 K from the first to the second; the box started from the GCM's 261.9 and 237.7 K. Below 16 km the air
+  cooled 0.5 K.
+- **The share.** 60.4% of the water falling from the box's clouds evaporates on the way down (60.7 mm, against
+  39.7 mm reaching the sea, from 133.5 mm condensed): gamma 0.027 on PlaSim's pooled shares, as over the second day.
+
+So the second lunar day's pattern holds as the upper air settles: the sea box rains in the afternoon and evening and
+barely after midnight, where the GCM with the new scheme rains 1.45 mm/day.
+
+**The new scheme on the boxes' own air** (24 October; [sbm_offline.json](../results/gcm/sbm_offline.json), the
+account in [the GCM's README](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october)). PlaSim's
+simplified Betts–Miller scheme was run at once on each box's domain-mean column every 3 hours of its second lunar day,
+laid on PlaSim's ten levels, at reference humidities of 0.6–0.8, parcel mixing of 0–16 per e-folding of pressure and
+inhibition limits of 10 and 30 J/kg. Wherever it convects it rains tens to hundreds of mm/day, and on the sea box's
+air it convects most after midnight: at rh 0.7 without mixing on every column, while the box rains 0.17 mm/day
+there with 1,420 J/kg of CAPE and 3 J/kg of inhibition. Mixing raises its rain until the diluted parcel loses its
+buoyancy, which on PlaSim's levels comes at every hour together at a mixing of 16, and no setting brings the sea's
+nights near the box's while keeping its afternoons and evenings. On the land box's air the scheme convects on none of
+the afternoons and on every night, although in the GCM it rains over that land at the box's hours. The box's
+convection spends the vapour its columns gather, so the scheme's rate at once measures the vapour left above its
+reference, most of it after the box's convection has stopped. Only the GCM can show when the scheme would rain in a
+model running it.
+
 ```sh
 /media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
 climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about ten seconds
@@ -1781,6 +1830,12 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_design
 python3 /media/projectspace/terluna-research/crm-runs/trial_site_boxes/trial.py run|check
 /media/projectspace/terluna-research/session-tools/run_site_boxes.sh             # the pair; rerun to resume
 climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_nudged --from-day 29.5   # the second attempt
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_day3    # the third lunar day, from day 59
+/media/projectspace/terluna-research/session-tools/agents/climate/run_sea_day3.sh    # 1.3 hours; rerun to resume
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_day3 --from-day 59
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_near_side_sea_day3 --from-day 59
+climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea box_near_side_sea_day3     # its lunar days
+climate/gcm/.venv/bin/python -m climate.gcm.sbm_offline           # the new scheme on the boxes' air, 15 seconds
 ```
 
 ## A box over the highlands
