@@ -13,14 +13,31 @@ On 24 October the author made three decisions about the course of the work. The 
 stood that day, and its errors against Earth's laboratory crystals enter every lunar result as a stated uncertainty. A rule sized to the laboratory data replaces the 1,320-point accuracy rule. The work then moves to the
 lunar answer, in the order of the plan below.
 
+The first three steps of the plan are done. Judged crystal by crystal against the scatter between repeat crystals, the
+two-temperature calibration passes on mass and axes, with 5 of its 93 comparisons outside where chance gives about 4,
+and fails on the warm column's fall speed ([data-sized check](data_sized_check.md)). The improved component, which every
+lunar run uses, fails the check: 83 of its 332 mass and axis comparisons fall outside, and it falls 1.1–2.0 times faster
+than the laboratory crystals at most temperatures. The band carried through the lunar column is that component's
+measured error. At the band's edges the component moves single-crystal size by a factor of 1.4–1.6 wherever water limits
+growth, against a factor of 9.3 from a hundredfold change in crystal number and 8.2 between archived storm humidity and
+continuous saturation ([Earth error band](earth_error_band.md)). Only under unlimited saturation, which would need about
+2,800 times the water the column allows, do the errors compound to a factor of 5.4. Across light to heavy snow and three
+decades of crystal number, the crystal arriving at the freezing level follows the water each crystal receives, from
+0.4 mm to 14 cm, with the crystal model's errors moving sizes above 2 mm by 15–31% and the sub-millimetre crystals by
+up to 41% ([size range](lunar_size_range.md)). Above a centimetre those single crystals extrapolate far past any
+measured crystal, and aggregation and breakup, the next two steps, decide what falls.
+
 ## The plan, in order
 
 1. **Check the frozen model by the data-sized rule** (below), naming every measured crystal that falls outside it.
+   Done 24 October ([results](data_sized_check.md)).
 2. **Carry the Earth errors through the lunar column.** Run the frozen model at the edges of its Earth error band in
    mass growth, axis growth and fall speed, through the archived lunar storm's humidity and the representative
    moisture cases, and set the change in lunar flake size beside the spread from moisture supply and crystal number.
-   This step tests whether the crystal model's Earth errors matter for the Moon.
-3. **Give lunar flake sizes as a range** over moisture supply and crystal number.
+   This step tests whether the crystal model's Earth errors matter for the Moon. Done 24 October
+   ([results](earth_error_band.md)).
+3. **Give lunar flake sizes as a range** over moisture supply and crystal number. Done for single crystals on
+   24 October ([results](lunar_size_range.md)); flakes follow from step 4.
 4. **Join the flakes, checked first on Earth.** With measured crystals as input and established aggregation
    efficiencies, the aggregation calculation is compared with the sizes of observed Earth snowflakes, then run through
    the lunar column.
@@ -45,6 +62,10 @@ grow, and separately at −14.4 °C, where dendrites grow ([column density](mcsn
 closely the component can be brought to the laboratory, and it cannot run through a lunar column, which spans every
 temperature from the cloud top to the freezing level.
 
+The calibration is the Earth benchmark result. The lunar runs, and the uncertainty carried with them, come from the
+improved component, the only part of the model that runs through a lunar column; its Earth errors are the larger of the
+two, so the band it sets is the wider.
+
 Before the freeze, the component's −14.4 °C dendrite carried 26% too much mass at 30 minutes against Takahashi and
 co-authors' (1991) fitted laboratory history, with a span 35% too wide and a thickness 17.5% too thin; its −5.3 °C
 column grew too short, 31% below the fitted length at the fitted mass ([shape diagnosis](mcsnow_shape_diagnosis.md)).
@@ -66,6 +87,12 @@ with the paper's fall-speed relation (its Table 4, each line the average of abou
 paper's stated measurement accuracy of ±3 cm/s. The rule replaces the [1,320-point rule](mcsnow_joint_acceptance.md),
 which remains as the record of that audit and the candidates it tested.
 
+Repeat crystals scatter by 0.193 in ln mass and by 0.159 and 0.183 in the ln equatorial and polar axes, so the rule's
+two-sigma bands span about 1.4–1.5 times either way. Under it the calibration has 5 of 93 mass and axis comparisons
+outside, close to the 4 that chance gives, and its −5.3 °C fall speed fails from 12 minutes, up to 6.1 cm/s fast. The
+component has 83 of 332 comparisons outside and misses the speed accuracy at 55 of 78 ages, mostly by falling too fast
+([data-sized check](data_sized_check.md)).
+
 ## Files and commands
 
 The snow solver sits beside the raindrop solver ([../rain](../rain/README.md)). The table lists the principal files;
@@ -73,6 +100,9 @@ the history below links the rest.
 
 | File | What it holds |
 |---|---|
+| [data_sized_check.md](data_sized_check.md), [data_sized_check.py](data_sized_check.py), [results/data_sized_check.json](results/data_sized_check.json) | The frozen model against each measured crystal: repeat-crystal scatter, every verdict, the crystals outside |
+| [earth_error_band.md](earth_error_band.md), [earth_error_band.py](earth_error_band.py), [results/earth_error_band.json](results/earth_error_band.json) | The component's Earth errors as three multipliers, their sizing, parity with the frozen component, and lunar sizes at the band's edges |
+| [lunar_size_range.md](lunar_size_range.md), [lunar_size_range.py](lunar_size_range.py), [results/lunar_size_range.json](results/lunar_size_range.json) | Single-crystal sizes at the freezing level over water supply and crystal number, with the band's edges |
 | [scale_size_results.md](scale_size_results.md), [scale_size_diagnosis.py](scale_size_diagnosis.py), [scale_size_sources.json](scale_size_sources.json) | Gravity/depth attribution, water-per-crystal and aggregation controls, active-source audit and limits of physical interpretation |
 | [scale_lunar_results.md](scale_lunar_results.md), [scale_lunar_methods.md](scale_lunar_methods.md), [scale_lunar_comparison.py](scale_lunar_comparison.py) | Complete SCALE/custom lunar comparison, numerical refinements, sticking and atmospheric-feedback contrasts |
 | [flakes.py](flakes.py) | The snowflake's mass, area and fall law, its growth from the vapour, its melting, the winter columns and the product |
