@@ -362,13 +362,15 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    leave it as it was, and the design air's methane, at the bound of its water, 1.2–2.0 K warmer, still 50–100 K under
    its target; its hydrogen escapes at 0.0085 kg/s, negligible for the water. Where in the middle atmosphere methane is
    broken, which the column's chemistry leaves out, decides how much water it leaves above the tropopause, up to 6.1
-   W/m² at the top, about 3.8 K. The sky's winter snow (atmosphere/snow, merged on 20 October: flakes a centimetre or
-   two across in light snow to tens of centimetres in heavy snow, falling at up to 0.64 m/s and melting 1–3 km below
-   the freezing level at 29.2 km) is being reworked on domain/atmosphere (register, 24 October). There the sectional
-   solver lost much of its water, the event solver's medians kept growing with its volume, and across solvers and
-   moisture the lunar medians run from 0.7 mm to 23.5 cm. The work now gives flake sizes as a range over the moisture
-   supply and the number of crystals, with the crystal model frozen and its Earth errors carried through, then checks
-   the flakes' joining against Earth's snowflakes and estimates their survival in turbulence. Methane's chemistry in the middle atmosphere's column is answered without
+   W/m² at the top, about 3.8 K. The sky's winter snow has a first answer (register, 24 October; domain/atmosphere
+   c54aede): high in the snow zone the flakes outgrow any span they can survive, so breakup sets their size, about 5 cm
+   for ordinary flakes and 8–15 cm for the largest, scaled from Earth's 2 cm and 4–6 cm flakes by the load their
+   junctions bear at lunar gravity. That joins an aggregation calculation checked against Earth's snow to a load
+   analogy that a breakup law would replace. It supersedes the 20 October sizes (a centimetre or two in light snow to
+   tens of centimetres in heavy snow), whose solvers did not converge. The crystal model's Earth errors move lunar
+   sizes by tens of percent, against ninefold for a hundredfold change in the number of crystals. Next, at the
+   author's word: a breakup law, growth and aggregation together, a storm-coupled water supply and the storms' optics.
+   Methane's chemistry in the middle atmosphere's column is answered without
    building it (register, 21 October): behind the titania stack nothing breaks methane below the base. The GCM's rain
    evaporation is measured (domain/climate 05b1384): PlaSim evaporates 29% of its falling rain, CM1's box with the lunar
    limits 48%, matched at gamma 0.026, which grows the low cloud and cools the Moon. Before the design run takes a
@@ -389,11 +391,15 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    against Kuo's 298.4 K. It rains 6–12% more, halves the sea's rain after midnight at 0.7 and sharpens the land's
    afternoon peak. Its climate takes a longwave refit of its own (3.38 W/m² against the rule's 2.5), and the exobase
    stays. Kuo's forcing does not explain CM1's quiet nights over the sea: after midnight the new GCM's circulation
-   there warms the air above 16 km by 131 W/m² against Kuo's 57 and dries the column by 5.2 against 3.3 mm/day, so a
-   box forced by it would meet harsher nights. Next (register, 24 October): the scheme is tested on CM1's own columns,
-   without mixing and with its mixing option, and a third lunar day of the sea box shows whether its rain keeps rising
-   as its upper air cools. A setting that passes gets a 15-year branch with the settling, longwave and exobase checks,
-   then the CM1 pair forced by that branch. Open, with recommendations:
+   there warms the air above 16 km by 131 W/m² against Kuo's 57 and dries the column by 5.2 against 3.3 mm/day. The
+   tests of 24 October (register; domain/climate ac0ee15, d01c18f) found no setting of the scheme, and no trigger added
+   to it, that reproduces CM1's timing at both sites: mixing raises its afternoon rain as it cuts the night's, an
+   inhibition limit holds back the mornings first, and a CAPE threshold near 100 J/kg quiets the sea's nights but in
+   its first response also takes the sea's afternoon and the land's evening. The sea box's third lunar day has settled
+   at 1.33 mm/day, 67% of the new GCM's rain, with the gap after midnight. There it holds a 6.1 km boundary layer that
+   reaches the free-convection level, 1,415 J/kg of CAPE and almost no inhibition, yet its resolved updrafts stay near
+   1 m/s. Its 6 km grid is as wide as that boundary layer is deep, so whether its quiet nights are physical is open,
+   and a finer box decides it (recommended next). Open, with recommendations:
    - **The scheme's adoption and its reference humidity** (the author's call, after the test): 0.7 brings the sea's
      nights nearer CM1's.
    - **A corrected rerun of one reference ring or box**, to size the boundary layer's bias in every earlier CM1 run
