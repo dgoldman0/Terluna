@@ -2068,6 +2068,48 @@ the publishers' pages for the AMS and Wiley papers refused it.
   3 × 10⁻³ m⁻¹ in BOMEX, five to ten times Tiedtke's (1989) 3 × 10⁻⁴ m⁻¹ for shallow convection.
 - De Rooy and others (2013, *QJRMS* 139) and Derbyshire and others (2004, *QJRMS* 130), not read.
 
+**Why the settled box runs colder aloft** (25 October, at the author's go-ahead; [box_upper_air.py](box_upper_air.py),
+[box_upper_air_near_side_sea.json](../results/crm/box_upper_air_near_side_sea.json), 8 seconds, no new runs). Over its
+third lunar day the box is 7.7 K colder than Kuo's GCM, the run that forced it, at 42 km and 10.0 K at 56 km. Its
+convection holds the upper air on a diluted moist adiabat, which sets most of that gap; the GCM's moister air near the
+ground sets most of the rest, and the radiation codes add little.
+- **Against each model's own moist adiabat.** Kuo's air at 19–56 km sits 0.3–1.3 K below the undiluted
+  pseudo-adiabat of its own lowest level, and the rh 0.7 branch's 1.0–1.6 K above its own. The box's sits 3.0–6.3 K
+  below the adiabat of its lowest 0.5 km. A plume held at zero buoyancy while it entrains air of the box's own
+  humidity matches the box's air between 0.5 and 1 × 10⁻⁴ m⁻¹ (a calculation on its mean sounding, after the
+  zero-buoyancy plume of Singh and O'Gorman 2013, not read): at 1 × 10⁻⁴ its column stays within 1.7 K of the box's
+  at 19–56 km, and at 0.5 × 10⁻⁴ the box runs 1.7–2.6 K colder than it. That is 2.4–4.8 per e-folding of pressure,
+  below the afternoon cores' bulk rates under 16 km.
+- **The air near the ground.** The GCM's lowest level holds 13.5 g/kg of vapour against 11.8 in the box's lowest
+  0.5 km, 4.6 kJ/kg more moist static energy, which sets its adiabat 3.1 K warmer at 42 km and 4.0 K at 56 km.
+- **Radiation on one column.** On the GCM's air, CM1's clear-sky longwave (its RRTMG through rrtmg_edge's driver) cools
+  35–48 km as PlaSim's does, 27.6 against 27.2 W/m² (29.7 and 29.8 with each code's curved-air escape), and 48–63 km 3.8
+  W/m² more (2.7 with the escapes). The box absorbs 3.4 W/m² less sunlight at 48–63 km and 3.8 more at 35–48 km.
+  PlaSim's water-vapour copy shifts by −3.9 and +4.9 W/m² between the two columns, so that difference follows the box's
+  drier air at 48–63 km (0.22 against 0.48 g/kg). On the box's own colder, drier air RRTMG cools 35–63 km 17–18 W/m²
+  more than PlaSim, whose fitted correction holds on the GCM's columns; RRTMG agreed within 2% with the correlated-k
+  model aloft on the 45° N ring's columns.
+
+| Lunar-day means, W/m² (48–63 km; 35–48 km) | Box | Kuo GCM | rh 0.7 GCM |
+|---|---|---|---|
+| Temperature | 233.9; 252.9 K | 243.8; 260.8 | 245.1; 262.7 |
+| Longwave, sunlight | −24.8, 11.5; −30.5, 18.1 | −24.1, 14.9; −22.9, 14.3 | −27.0, 16.7; −25.0, 16.2 |
+| Convection (box: microphysics, resolved transport, turbulence) | 19.1; 10.5 | 20.0; 17.5 | 9.3; 11.2 |
+| Forcing or circulation | −6.9; −2.4 | −10.8; −8.9 | 1.0; −2.4 |
+| Storage | −1.2; −1.8 | 0; 0 | 0; 0 |
+
+**How the budgets settle.** At 48–63 km the box's convection heats as much as Kuo's, while its radiation cools
+4.1 W/m² more and its forcing 3.9 less. On the box's start air its forcing cools that layer by 11.3 W/m², as the GCM's
+circulation does (10.8), so the drift weakened it: the mean ascent there cools the box's less stable air less. The
+rh 0.7 branch heats the layer by 9.3 W/m² and still sits 1.3 K warmer than Kuo. The convective heating's size follows
+the radiation and the circulation, and the temperature follows the parcel to which the convection holds the air. So
+the explanation through mixing fits, at 5.3–6.3 K of the gap at 42–56 km, with radiation adding a few W/m² at
+48–63 km. The GCM's moister boundary layer gives 3–4 K, which a mixing setting in the scheme would leave in place.
+The evidence is one realization of the box, the GCM's single-step heating averaged over the lunar day, and radiation
+on lunar-day mean columns: RRTMG on the box's mean column cools 56 km 18% less than the mean of the box's own
+clear-sky heating. The sunlight copy leaves out the gas bands and the curved air's twilight and serves for the
+difference between columns only.
+
 ```sh
 /media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
 climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about ten seconds
@@ -2090,6 +2132,7 @@ climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/
 /media/projectspace/terluna-research/session-tools/agents/climate-resolution/run_night.sh 6km   # 4 min; 3km 34, 2km 49
 climate/gcm/.venv/bin/python -m climate.crm.box_resolution          # the three grids beside the source's two nights
 climate/gcm/.venv/bin/python -m climate.crm.box_entrainment         # the clouds' entrainment and the scheme's nights
+climate/gcm/.venv/bin/python -m climate.crm.box_upper_air           # why the box runs colder aloft than the GCM
 ```
 
 ## A box over the highlands
