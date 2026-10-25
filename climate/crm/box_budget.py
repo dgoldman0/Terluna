@@ -225,10 +225,10 @@ def budget(name: str, from_day: float) -> dict:
                 surface={k: float(np.mean(v)) for k, v in surface.items()})
 
 
-def water(name: str, from_day: float) -> dict:
-    """A box's vapour budget over the span after from_day: each process's column and band sums (mm/day of water),
-    the evaporation, the rain, the storage from the first output to the last and what closes it, and the boundary
-    layer's column over the evaporation."""
+def water(name: str, from_day: float, to_day: float | None = None) -> dict:
+    """A box's vapour budget over the span after from_day, to the case's end or to to_day: each process's column and
+    band sums (mm/day of water), the evaporation, the rain, the storage from the first output to the last and what
+    closes it, and the boundary layer's column over the evaporation."""
     case = ra.RUNS / name
     geo = ra.case_geometry(case)
     zh, zw = geo['zh'], geo['zw']
@@ -246,7 +246,7 @@ def water(name: str, from_day: float) -> dict:
     bands = {k: [] for k in columns}
     for path in sorted(case.glob('cm1out_diag_*_s.dat')):
         d = read_diag(case, path, layout)
-        if d['mtime'] < from_day * DAY:
+        if d['mtime'] < from_day * DAY or (to_day is not None and d['mtime'] > to_day * DAY + 1.0):
             continue
         mass = d['rho'] * dz
         times.append(d['mtime'] / DAY)

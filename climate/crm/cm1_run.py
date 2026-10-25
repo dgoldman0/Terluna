@@ -1769,6 +1769,29 @@ for _name, _site, _where in (('box_near_side_sea', dict(lat_deg=-5.0, lon_deg=-4
 CASES['box_near_side_sea_day3'] = dict(
     CASES['box_near_side_sea'], restart_from=dict(case='box_near_side_sea', day=59.0), days=88.5,
     purpose=CASES['box_near_side_sea']['purpose'] + '; its third lunar day, days 59-88.5, from its day-59 restart')
+# The resolution test of the sea box's quiet nights (the author's go-ahead of 25 October 2026). After midnight the sea
+# box barely rains where the GCM with its new convection rains 1.45 mm/day, and its night boundary layer, 6.1 km deep,
+# is as deep as its columns are wide, so its eddies go unresolved; coarse grids delay convection's onset (Petch and
+# others 2002). Three boxes start from the settled box's own night: box_near_side_sea_day3's air at day 84.5 (its
+# output 677, 40 degrees of hour angle past midnight on its third lunar day and 14 minutes into a window of its wind by
+# local time) averaged over its columns, with CM1's random perturbations of 0.25 K. Each runs two Earth days under that
+# hour's forcing held fixed (setup_night): the clock that times the Sun and the day-night table (var19) stopped at that
+# hour, the wind nudged toward that window's for the whole run, and the source's hold on the air above the GCM's
+# convection, mean vertical wind, sea, twilight, rain law and limits, build and physics. They differ in their grid
+# alone: 6 km on 32 x 32 columns as the box (192 km, the control), 3 km on 64 x 64 (192 km) and 2 km on 64 x 64
+# (128 km), the first time step divided as the spacing. To write little, the 3-D output comes every 6 hours without the
+# budget fields (the domain diagnostics keep their means; CM1 writes the radiation's whenever it runs radiation), the
+# domain diagnostics every half hour, the statistics every 15 minutes and restarts every 12 hours.
+NIGHT_SOURCE = dict(case='box_near_side_sea_day3', day=84.5)
+NIGHT_OUTPUT = dict(param9=dict(output_thbudget=0, output_qvbudget=0))
+STOPPED_CLOCK_S = 1.0e15            # var19 for a held hour: the Sun and the table move 6e-8 degrees in two days
+for _tag, _refine, _columns in (('6km', 1, 32), ('3km', 2, 64), ('2km', 3, 64)):
+    CASES[f'box_near_side_sea_night_{_tag}'] = dict(
+        CASES['box_near_side_sea'], night_from=dict(NIGHT_SOURCE, refine=_refine), nx=_columns, ny=_columns, days=2.0,
+        output_s=21600.0, diag_s=1800.0, stat_s=900.0, restart_s=43200.0, segment_s=86400.0, namelist=NIGHT_OUTPUT,
+        purpose=f"the sea box's settled night at {6 // _refine} km spacing on {_columns} x {_columns} columns: "
+                "box_near_side_sea_day3's air at day 84.5, 40 degrees past midnight, averaged over its columns, and "
+                "the forcing of that hour held for two Earth days")
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -2860,6 +2883,115 @@ def setup_restart(name: str, cfg: dict) -> Path:
     return case
 
 
+NIGHT_INPUTS = ('input_grid_z', 'terluna_wls.txt', 'terluna_lsadv.txt', 'terluna_surface.txt', 'LANDUSE.TBL',
+                TWILIGHT_TABLE, RAIN_LAW_TABLE)
+
+
+def hour_angle_at(h0_deg: float, t_s: float, day_s: float) -> float:
+    """The hour angle (degrees, -180 to 180, 0 = noon) at model time t_s of a run that starts at h0_deg."""
+    return (h0_deg + 360.0 * t_s / day_s + 180.0) % 360.0 - 180.0
+
+
+def sun_elevation_deg(latitude_deg: float, hour_angle_deg: float) -> float:
+    """The Sun's elevation as the Terluna Sun puts it, at the equinox: sin(elevation) = cos(latitude) cos(hour angle)."""
+    return math.degrees(math.asin(math.cos(math.radians(latitude_deg)) * math.cos(math.radians(hour_angle_deg))))
+
+
+def held_wind_window(source: Path, t_s: float) -> tuple:
+    """The source's wind-nudging window that holds model time t_s, as CM1 steps through them (on to the next once the
+    time passes a window's end): its file and its lines."""
+    for path in sorted(source.glob('lsnudge_0*.dat')):
+        rows = path.read_text().splitlines()
+        t1, t2 = (float(v) for v in rows[1].split())
+        if t1 <= t_s <= t2:
+            return path, rows
+    raise RuntimeError(f'{source.name} has no wind-nudging window holding model time {t_s:.0f} s')
+
+
+def setup_night(name: str, cfg: dict) -> Path:
+    """Set up a box that starts from another box's settled air at one hour and holds that hour's forcing
+    (cfg['night_from']: the case, the day of its run and the factor its spacing is divided by). The air is the
+    source's output at that day averaged over its columns, by level (fine_start), with CM1's random perturbations; the
+    clock that times the Sun and the day-night table (var19) stops at that hour (var18), so both hold their values;
+    the wind is nudged toward the source's window at that hour for the whole run; and every other input is the
+    source's as written: the hold on the air above the GCM's convection, the mean vertical wind, the surface, the
+    twilight, the rain law and limits. The box takes the case's columns, the source's spacing and first time step
+    divided by refine, and the case's length, output, diagnostics, statistics and restarts."""
+    import numpy as np
+    from climate.crm import ring_analysis as ra
+    night = cfg['night_from']
+    source = RUNS / night['case']
+    src = json.loads((source / 'case.json').read_text())
+    if src['configuration'].get('terrain'):
+        raise RuntimeError(f"{night['case']} has terrain, which a box started from its mean air does not carry")
+    exe = CM1_HOME / 'build' / cfg['build'] / 'cm1.exe'
+    if not exe.exists():
+        raise RuntimeError(f'build {cfg["build"]} first')
+    case = RUNS / name
+    if (case / 'progress.json').exists():
+        raise RuntimeError(f'{case} has started; remove it to set up afresh')
+    output_s = src['configuration']['output_s']
+    n = round(night['day'] * 86400.0 / output_s) + 1
+    t_s = (n - 1) * output_s
+    if abs(t_s - night['day'] * 86400.0) > 1.0 or not (source / f'cm1out_t{n:06d}_s.dat').exists():
+        raise RuntimeError(f"{night['case']} has no output at day {night['day']}")
+    window, rows = held_wind_window(source, t_s)
+    case.mkdir(parents=True, exist_ok=True)
+    start = fine_start(ra.read_snapshot(source, n))
+    (case / 'input_sounding').write_text(fine_sounding(start, np.loadtxt(source / 'input_grid_z')))
+    for item in NIGHT_INPUTS:
+        if (source / item).exists():
+            shutil.copy2(source / item, case / item)
+    segments = np.loadtxt(source / 'terluna_surface.txt', skiprows=1, ndmin=2)
+    if (segments[:, 2] == 1).any():                                       # land takes the mean skin, as a finer box's
+        (case / 'terluna_surface.txt').write_text(f'{len(segments)}\n' + ''.join(
+            f'{x0:.1f} {x1:.1f} {xl:.1f} {int(lu):d} {start["skin_k"] if xl == 1 else tsk:.3f} {tmn:.3f}\n'
+            for x0, x1, xl, lu, tsk, tmn in segments))
+    (case / 'lsnudge_0001.dat').write_text('\n'.join(rows[:1] + [f'  {0.0:22.1f} {1.0e30:22.6e}'] + rows[2:]) + '\n')
+    source_text = (source / 'namelist.template').read_text()
+    text, grid = fine_namelist(source_text, night['refine'], night['day'], cfg)
+    for section, key, value in (('param0', 'nx', cfg['nx']), ('param0', 'ny', cfg['ny']),
+                                ('param1', 'statfrq', float(cfg['stat_s'])), ('param14', 'diagfrq', float(cfg['diag_s'])),
+                                ('param8', 'var19', STOPPED_CLOCK_S)):
+        text = set_namelist(text, section, key, value)
+    for section, entries in (cfg.get('namelist') or {}).items():          # the case's output switches
+        for key, value in entries.items():
+            text = set_namelist(text, section, key, value)
+    (case / 'namelist.template').write_text(text)
+    tree = fetch()
+    for link, target in (('cm1.exe', exe), ('RRTMG_LW_DATA', tree / 'run' / 'RRTMG_LW_DATA'),
+                         ('RRTMG_SW_DATA', tree / 'run' / 'RRTMG_SW_DATA')):
+        path = case / link
+        if path.is_symlink() or path.exists():
+            path.unlink()
+        path.symlink_to(target)
+    digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
+    site = src['configuration']['site']
+    hour = grid['hour_angle_deg']
+    h0, day_s = float(namelist_value(source_text, 'param8', 'var18')), float(namelist_value(source_text, 'param8', 'var19'))
+    t1, t2 = (float(v) for v in rows[1].split())
+    record = dict(src, case=name, purpose=cfg['purpose'], inputs_from=None, restart_from=None,
+                  configuration=dict(cfg, start_hour_angle_deg=round(hour - site['lon_deg'], 4)),
+                  grid=dict(src['grid'], nx=cfg['nx'], ny=cfg['ny'], dx_m=grid['dx_m'], length_m=cfg['nx'] * grid['dx_m']),
+                  build=json.loads((exe.parent / 'build.json').read_text()),
+                  initial=dict(source=f"{night['case']}'s output {n} (day {night['day']}), averaged over its columns, "
+                                      "with CM1's random potential-temperature perturbations of up to 0.25 K (irandp 1)",
+                               case=night['case'], day=night['day'], snapshot=n,
+                               **{k: round(start[k], 4) for k in ('surface_pa', 'theta_2m_k', 'skin_k')},
+                               qv_2m_kg_kg=round(start['qv_2m_kg_kg'], 7)),
+                  held=dict(hour_angle_deg=round(hour, 4), sun_elevation_deg=round(sun_elevation_deg(site['lat_deg'], hour), 2),
+                            clock_s=STOPPED_CLOCK_S, day_night_table=f"{night['case']}'s, at that hour",
+                            wind_window=dict(source_file=window.name, source_time_s=[t1, t2],
+                                             hour_angle_deg=[round(hour_angle_at(h0, t1, day_s), 3),
+                                                             round(hour_angle_at(h0, t2, day_s), 3)])),
+                  nudging_wind=dict(windows=1, source=f"{night['case']}'s {window.name}, held for the whole run"),
+                  runner=digest(__file__),
+                  inputs={p: digest(case / p) for p in ('input_sounding', 'lsnudge_0001.dat', 'namelist.template',
+                                                         *NIGHT_INPUTS) if (case / p).exists()})
+    (case / 'case.json').write_text(json.dumps(record, indent=1) + '\n')
+    return case
+
+
 def namelist_value(text: str, section: str, key: str) -> str:
     """One entry of a Fortran namelist held as text, as written."""
     import re
@@ -2959,6 +3091,8 @@ def setup(name: str) -> Path:
     surface segments, land-use table and links to the executable and radiation tables."""
     import numpy as np
     cfg = CASES[name]
+    if cfg.get('night_from'):
+        return setup_night(name, cfg)
     if cfg.get('restart_from'):
         return setup_restart(name, cfg)
     if cfg.get('fine_from'):

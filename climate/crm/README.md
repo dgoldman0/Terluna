@@ -1874,6 +1874,88 @@ eddies. A finer box would show whether the sea's nights convect.
 [The GCM's account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october) tests a CAPE trigger on the
 GCM's own columns.
 
+**The sea box's night on finer grids** (25 October; cases `box_near_side_sea_night_6km`, `_3km` and `_2km`;
+[box_resolution.py](box_resolution.py),
+[box_resolution_near_side_sea_night.json](../results/crm/box_resolution_near_side_sea_night.json)). Three boxes put
+that candidate to the test, at the author's go-ahead of 25 October. Each starts from the settled box's own night, and
+they differ from one another in their grid alone.
+- **The start.** Each takes box_near_side_sea_day3's air at day 84.5 (its output 677), averaged over its columns, and
+  CM1 adds its random perturbations of up to 0.25 K at every point. That hour lies 40° of hour angle past midnight on
+  the third lunar day, 14 minutes into a window of the wind by local time. There the source box rained 0.16 mm/day
+  under 1,305 J/kg of CM1's CAPE and 0.6 J/kg of inhibition, its boundary layer 6.0 km deep and holding the LFC in
+  61% of its columns.
+- **The forcing, held at that hour for two Earth days** (`setup_night`). The clock that times the Sun and the day-night
+  table (`var19`) is stopped. The table keeps its values at the hour angle −139.9°, warming the air above 16 km by
+  87 W/m² and drying the column by 4.7 mm/day. The Sun stays 49.6° below the horizon, beneath the twilight table's
+  lowest elevation (−40°), while the twilight's infrared acts as at every hour. The wind is nudged toward that window's
+  for the whole run. The hold on the air above the GCM's convection, the mean vertical wind, the sea at 302.0 K, the
+  rain law and limits, the build `moon_omp_rain_law_pbl` and its physics are the source's. The cases record runner
+  `a0e3d9887788dbea`.
+- **The grids.** The control is the box's own grid, 6 km on 32 × 32 columns (192 km). The finer boxes keep domains
+  wide enough for deep cells: 3 km on 64 × 64 columns (192 km) and 2 km on 64 × 64 (128 km). All keep the 111 levels
+  to 150 km and CM1's boundary-layer scheme. Their first time steps are divided as the spacing, and CM1's adaptive
+  step settles near 75, 39 and 26 s. They ran in 4, 34 and 49 minutes on four threads.
+- **What they write.** The 3-D output comes every 6 hours without the budgets' fields (the domain diagnostics keep
+  their means), the domain diagnostics every half hour, CM1's statistics every 15 minutes and restarts every
+  12 hours. The three runs wrote 1.33 GB and their smoke tests 0.34 GB; the box's third lunar day wrote 5.6 GB.
+- **The smoke tests** (`trial_night.py` in `session-tools/agents/climate-resolution` on the research drive). Each
+  case, copied, ran half a model hour on four threads in 3–28 s and wrote its 3-D output, diagnostics, statistics and
+  a restart, with every field the analysis reads present and finite. Their logs show the one wind window, the
+  table's 36 bins, the twilight's 167 elevations, the rain law's 301 rows and the stopped clock.
+
+**The rule, set before the runs** (`CONTROL` and `READING`). Over its second day the control must reproduce the
+source's quiet night: rain under 0.3 mm/day, the strongest updraft below 60 km averaging under 3 m/s, the 99.9th
+percentile of w below 16 km under 2 m/s in every snapshot, and cloud tops above 40 km in under 5% of the columns on
+average over its snapshots. Otherwise the method fails and the finer grids go unread. A grid convects when it rains
+at least 0.5 mm/day, a third of the GCM's 1.45 after midnight, with its strongest updraft averaging 5 m/s or deep
+tops in 5% of its columns.
+
+**The control reproduces the quiet night, and the finer grids stay as quiet.** Over each box's second day, beside the
+source box over the same hours of its own run (48 diagnostics and 4 snapshots in each box, 8 of each in the source):
+
+| Second day | Source box, days 85.5–86.5 | 6 km, the control | 3 km | 2 km |
+|---|---|---|---|---|
+| Rain | 0.03 mm/day | 0.07 | 0.05 | 0.04 |
+| Strongest updraft below 60 km: mean; highest | 1.28; 1.51 m/s | 1.45; 1.81 | 1.88; 2.18 | 1.96; 2.36 |
+| w's 99.9th percentile below 16 km; at 16–60 km | 1.02; 0.10 m/s | 1.11; 0.13 | 1.35; 0.17 | 1.45; 0.21 |
+| Columns with cloud tops below 16 km | 36% | 48% | 47% | 43% |
+| Highest top of the cloud below 40 km: mean; highest | 10.5; 25.8 km | 8.6; 8.6 | 8.9; 9.3 | 8.7; 9.3 |
+| Columns with ice standing apart at 50–52 km | 0.3% | 0.8% | 1.6% | 3.0% |
+| CM1's CAPE; inhibition | 1,292; 1.6 J/kg | 1,343; 0.8 | 1,320; 0.7 | 1,313; 0.6 |
+| The 0.5 km parcel of the mean sounding: CAPE; inhibition; CAPE at eps 8 | 1,440; 0.5; 13 J/kg | 1,500; 0.5; 13 | 1,476; 0.6; 13 | 1,468; 0.7; 13 |
+| Boundary layer | 6.1 km | 6.1 | 6.0 | 6.0 |
+
+- **The finer grids resolve stronger eddies, and their cloud stays shallow.** The 99.9th percentile of w below 16 km
+  rises from 1.11 m/s at 6 km to 1.35 at 3 km and 1.45 at 2 km, and the strongest updraft from 1.45 to 1.96 m/s, while
+  the boundary layer stays 6.0–6.1 km deep. The cloud rising from below tops out at 8.6–9.3 km on every grid, no column
+  holds cloud at 16–40 km, and the rain falls slightly as the grid refines. The two halves of the second day differ by
+  under 0.1 m/s in the strongest updraft on every grid, so none was building toward an onset when the runs ended.
+- **The cloud above 40 km stands apart.** A thin layer of ice, up to 0.03 g/kg at 50–52 km, comes and goes over
+  0–11% of the columns with no cloud beneath it at 16–40 km. The source box carries it at night too, so it forms in
+  place. The rule's share of cloud tops above 40 km counts it, and averaged over the second day it stays under 5% on
+  every grid.
+- **CAPE stays high and inhibition nil on every grid.** The mean sounding's parcel reaches its LFC at 6.2–6.5 km,
+  and in 47–57% of the columns CM1's own LFC lies inside the boundary layer. Mixing at eps 8 leaves the parcel 13 J/kg
+  on every grid, as in the source's quiet hours; the source's storms start and peak with 18–63 J/kg.
+- **Drift.** From the homogeneous start each box's boundary layer reaches 6.1 km within its first hour, and its
+  shallow cloud covers 29–34% of the columns by hour 12. Over the two days the air at 60 km cools 1.37 K on every
+  grid, against 1.33 K in the source over the same hours. The lowest 1.77 km cools 0.03–0.06 K and dries
+  0.23–0.25 g/kg, against 0.10 K and 0.32 g/kg in the source, whose forcing grows drier toward morning (5.3 mm/day by
+  the end of its two days).
+- **Water.** The boundary layer passes on 0.998–1.003 times the sea's evaporation of 3.05–3.08 mm/day. The vapour
+  budget's rest over the second day, 0.13–0.17 mm/day, matches the vapour CM1's microphysics puts back above 55 km,
+  0.160 mm/day, where the held table dries air that holds none; the source's at those hours are 0.157 and 0.135. Less
+  that refill, the budgets close to 0.03 mm/day.
+
+So under the rule set before the runs none of the three convect, and the quiet sea nights hold up across the grids.
+The rings' and boxes' 6 km grid passes this test at the sea box's night: at 3 and 2 km the boxes resolve stronger
+eddies under the same CAPE and the same nil inhibition, and their cloud stays below 10 km. The GCM's next candidate is
+the CAPE threshold near 100 J/kg that
+[its account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october) points to (`--sbm-cape`, off by
+default), for a branch at the author's word. The test is one realization of each grid over two Earth days, from one
+hour's mean air with that hour's forcing held. CM1's boundary-layer scheme stays on at every spacing, as in every lunar
+case, so the test measures the grid within that set-up. The 2 km box is 128 km wide against the others' 192.
+
 ```sh
 /media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
 climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about ten seconds
@@ -1891,6 +1973,10 @@ climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea box_near_
 climate/gcm/.venv/bin/python -m climate.gcm.sbm_offline           # the new scheme on the boxes' air, 15 seconds
 climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_day3 59 88.5    # why the nights stay quiet
 climate/gcm/.venv/bin/python -m climate.crm.box_onset box_0e_design 29.5 59               # the land, for contrast
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_night_6km     # and _3km, _2km
+climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/agents/climate-resolution/trial_night.py run|check box_near_side_sea_night_6km
+/media/projectspace/terluna-research/session-tools/agents/climate-resolution/run_night.sh 6km   # 4 min; 3km 34, 2km 49
+climate/gcm/.venv/bin/python -m climate.crm.box_resolution          # the three grids beside the source's two nights
 ```
 
 ## A box over the highlands

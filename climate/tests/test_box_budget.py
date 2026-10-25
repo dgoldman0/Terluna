@@ -85,3 +85,6 @@ def test_the_water_budget_closes_and_reads_the_boundary_layer_against_the_evapor
     assert w['evaporation_mm_day'] == pytest.approx(3.0, rel=1e-5) and w['rain_mm_day'] == pytest.approx(1.0, rel=1e-5)
     assert w['storage_mm_day'] == pytest.approx(1.0, rel=1e-4) and w['rest_mm_day'] == pytest.approx(0.0, abs=1e-4)
     assert w['boundary_layer_over_evaporation'] == pytest.approx(1.0, rel=1e-5)
+    assert bb.water('box', 29.5, to_day=30.5)['storage_mm_day'] == pytest.approx(1.0, rel=1e-4)   # the span's end
+    with pytest.raises(RuntimeError, match='fewer than two'):
+        bb.water('box', 29.5, to_day=30.0)
