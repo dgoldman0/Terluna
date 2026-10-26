@@ -66,6 +66,21 @@ snow zone, falls twice as far and arrives with a median span of 5.2–5.5 cm, a 
 of 16–25 cm, from runs at two superparticle numbers that agree on the median within 4% and on the 90th percentile
 within 27%. It reaches the size limit, so whether light snow does depends on where in the snow zone it forms.
 
+Below the freezing level the flakes sublimate, then melt, and then fall as rain for 15–25 km, which the author asked to
+follow on 25 October with sublimation carried all the way down ([melting](snow_melting.md)). In the design-climate storm
+boxes the freezing level stands 22–26 km up, and the air under falling snow is 93–97% humid there and warms about 1 K
+for each kilometre below it, so melting begins 0.3–0.55 km down. Flakes of 2 cm finish melting about 1.6 km below the
+freezing level and flakes of 10–20 cm 3.7–5.2 km below it, three to four times as deep as the flakes of 20 October.
+Their 9–15 mm drops hold together under lunar gravity and bring 81–93% of their water to the surface, while the drops
+of flakes up to 2 cm evaporate on the way. Light snow of 0.3 mm/h therefore sends 11–13% of its water to the surface,
+and snow whose flakes reach about 10 cm 55–60%, against the 39–40% CM1's own storms deliver of their falling water; no
+snow reaches the ground, even at the highest summit. Sublimation takes 2–8% of the snow over land and 10–23% over the
+sea, and at 2.83 MJ/kg against 0.33 for melting it draws about as much heat from the air over the sea as the melting
+does in the heavier snow, and more than twice as much in light snow. On Earth the same code begins and ends the melting
+of ordinary flakes where Matsuo and Sasyo (1981) computed and where observed melting layers lie. The flakes are those
+of the growth-and-aggregation runs, whose lunar builds diffused vapour at 0.651 of McSnow's fit (the frozen crystal
+model, below).
+
 ## The plan, in order
 
 1. **Check the frozen model by the data-sized rule** (below), naming every measured crystal that falls outside it.
@@ -95,6 +110,9 @@ followed:
    ([results](mcsnow_growth_aggregation.md)).
 8. **Light snow and melting**: how deep the storm boxes' snow zone stands above the freezing level, and whether light
    snow reaches the size limit before it melts. Done 25 October ([results](snow_zone_depth.md)).
+9. **Below the freezing level**: how far the flakes fall before they melt and their water evaporates, with sublimation
+   carried from the cloud to the ground, the snow's water and latent heat by layer, and the rain each ground height
+   receives. Done 25 October ([results](snow_melting.md)).
 
 Before the optics, five things remain open: the heavy-snow tail, which no run converges and which the Earth check
 overgrows tenfold at 9 mm/h; the 90th and 99th percentiles of light snow from −30 °C, which halving the superparticles
@@ -189,6 +207,8 @@ The flake product of 20 October and the aggregation baseline were rebuilt with t
 | [turbulence_survival.md](turbulence_survival.md), [turbulence_survival.py](turbulence_survival.py), [results/turbulence_survival.json](results/turbulence_survival.json) | Lunar flake spans with the same junction load as Earth's largest observed flakes, over turbulence and mass laws |
 | [mcsnow_growth_aggregation.md](mcsnow_growth_aggregation.md), [mcsnow_growth_aggregation.py](mcsnow_growth_aggregation.py), [results/mcsnow_growth_aggregation.json](results/mcsnow_growth_aggregation.json) | Crystals that grow and aggregate together in the reference column and along the storm paths: depths of outgrowth, arriving sizes, convergence, the band's edges and the water the snow takes |
 | [snow_zone_depth.md](snow_zone_depth.md), [snow_zone_depth.py](snow_zone_depth.py), [results/snow_zone_depth.json](results/snow_zone_depth.json) | How far above the freezing level the design-climate storm boxes hold their snow, and light snow against the size limit |
+| [snow_melting.md](snow_melting.md), [melting.py](melting.py), [melting_environment.py](melting_environment.py), [results/snow_melting.json](results/snow_melting.json) | How far below the freezing level flakes melt and their drops evaporate in the storm boxes' air; sublimation, melting and evaporation by layer with their latent heat; the Earth check; the storm paths' losses above the freezing level |
+| [melting_sources.json](melting_sources.json) | The 25 October melting sources: the quantities taken from each and how each was read |
 | [breakup_literature.md](breakup_literature.md), [breakup_sources.json](breakup_sources.json) | The 25 October search for an Earth-supported breakup law: the measurements found, their quantities and access, and the collision energies aloft |
 | [tmp_relocation.py](tmp_relocation.py), [results/tmp_relocation.json](results/tmp_relocation.json) | Each /tmp path the committed records name, mapped to its hash-checked copy on the project-space drive |
 | [scale_size_results.md](scale_size_results.md), [scale_size_diagnosis.py](scale_size_diagnosis.py), [scale_size_sources.json](scale_size_sources.json) | Gravity/depth attribution, water-per-crystal and aggregation controls, active-source audit and limits of physical interpretation |
@@ -279,7 +299,9 @@ melt slowly. Where all of a flake's ice has melted, metres below the freezing le
 | 2 cm | 1,364 | 3,370 | 340 | 592 |
 
 In drier air a flake's own evaporation keeps its surface below freezing for longer. The sky winter's snowfall is a
-band kilometres deep: snow forming in a cloud above the freezing level reaches decks 1.1–3.4 km below it.
+band kilometres deep: snow forming in a cloud above the freezing level reaches decks 1.1–3.4 km below it. The [melting
+record](snow_melting.md) of 25 October replaces these depths: it carries the flake's sublimation before and while it
+melts, Mitra's melting flake, the large flakes and the storm boxes' air.
 
 ## How large flakes grow (20 October, superseded)
 
@@ -348,6 +370,16 @@ top, about 0.4 mm/h at 100 a litre on Earth.
 Each step of the investigation was recorded here as it happened, newest first. These paragraphs are the record of what
 each step computed and the limits it found; where their conclusions differ from the standing at the top of this page,
 the standing holds.
+
+The evening of 25 October followed the snow below the freezing level ([melting](snow_melting.md)). Light snow forming
+near −30 °C, run at two superparticle numbers, arrives two to three times the size of light snow from −15 °C
+([snow zone](snow_zone_depth.md)). The rain solver's vapour diffusivity stood 17.6% below Massman's (1998) measured fit;
+as the author decided, the solver now takes that fit, and the rain products and the flake model of 20 October were
+rebuilt from it ([rain](../rain/README.md)). A melting model built on Mitra and co-authors' wind-tunnel flakes, as Frick
+and co-authors give it, with sublimation before and while the flakes melt, was checked on Earth against Matsuo and
+Sasyo's computed onset depths and Heymsfield and co-authors' observations, and then run through every column the two
+design-climate boxes saved with snow at its freezing level. The storm paths' losses to sublimation above the freezing
+level were measured from their own runs.
 
 The 25 October stage searched for a breakup law and found none with Earth support ([breakup
 literature](breakup_literature.md)); it grew crystals and aggregated them together in the reference column and along the

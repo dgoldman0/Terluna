@@ -8,7 +8,8 @@ Through the reference column, which spans its lowest 16.3 km from −15 °C, the
 4.2–4.5 cm, a 99th of 5.8–6.6 cm and the largest at 8–8.5 cm, converged under four times the superparticles. Formed
 near −30 °C and falling twice as far, they arrive with a median of 5.2–5.5 cm, a 90th percentile of 9.7–12.7 cm and a
 99th of 16–25 cm, from runs at two superparticle numbers that agree on the median within 4%. Below the freezing level
-the flakes melt within 1–3 km while they fall, and these runs follow no aggregation there.
+light snow from −15 °C melts within 2.3–2.4 km and the larger flakes within 3.4–4.1 km
+([melting](snow_melting.md)); these runs follow no aggregation there.
 
 ## The storm boxes
 
@@ -50,8 +51,8 @@ tenth of the crystals gives 23, 48, 70 and 104 mm ([growth and aggregation](mcsn
 percentile grows steadily down the column, 7 mm at 4.5 km below the top, 13 mm at 8.5 km and 34 mm at 14.5 km, so the
 flakes that reach the freezing level are still growing. The load analogy places breakup near 10–14 cm, two to three
 times the 90th percentile and above the largest flakes, so light snow from the reference column melts before it reaches
-the size limit. Below the freezing level the flakes melt within 1–3 km while they fall, and they would aggregate further
-there as wet, sticky flakes, which these runs do not follow.
+the size limit. Below the freezing level its flakes melt within 2.3–2.4 km while they fall ([melting](snow_melting.md)),
+and they would aggregate further there as wet, sticky flakes, which these runs do not follow.
 
 The boxes' snow reaches higher than the reference column's top: half of it lies above 18–20 km over the freezing level
 and the −15 °C level stands 15–16 km up in their air. Light snow that forms near −30 °C falls through twice the
@@ -74,8 +75,8 @@ the flake sizes come from McSnow's separate calculation in idealised columns ([g
 aggregation](mcsnow_growth_aggregation.md)). The columns follow the ladder's lapse rate of 0.92 K/km, which puts −15 °C
 16.3 km and −30 °C 32.6 km above the freezing level; in the boxes' mean air −15 °C stands 15–16 km and −30 °C 26.5–27.6
 km above it, at 1.1 K/km. The crystal model's habit table ends at −30 °C, and no column starts colder. Melting is
-followed only as the single-flake melting depths of the flake model (README, "Snow lasts far below the freezing level");
-flakes that aggregate while they melt, wet and sticky, are outside these runs.
+followed in the melting record ([melting](snow_melting.md)), flake by flake; flakes that aggregate while they melt, wet
+and sticky, are outside these runs.
 
 ## Reproduction
 

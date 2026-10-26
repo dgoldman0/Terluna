@@ -1,0 +1,129 @@
+{
+ "schema": "terluna.atmosphere.snow-melting-sources/1",
+ "review_date": "2026-10-25",
+ "scope": "Time-boxed search (about 20 minutes, 19:08-19:28 on 25 October) for established snowflake melting physics with Earth support and for observed Earth melting-layer depths, for the melting of lunar snowflakes below the freezing level (melting.py).",
+ "destination_branch": "domain/atmosphere",
+ "finding": "Mitra and co-authors' (1990) single-flake melting model, which Frick, Seifert and Wernli (2013) give in full, supplies the melting rate, the melting flake's capacitance, density and fall speed; the onset of melting follows the ice-bulb criterion of Heymsfield and co-authors (2021); observed Earth melting depths and temperatures, and Matsuo and Sasyo's (1981) computed onset depths, serve as the Earth check.",
+ "external_bytes": "No papers or datasets added to the repository. Retrieved PDFs are kept, with these hashes, in the agent's folder on the research drive (atmosphere-snow/claude-agent-3/literature).",
+ "model_changes": "The vapour diffusivity is Massman's (1998) fit, which the rain solver (atmosphere/rain/drops.py) takes since 25 October in place of its Chapman-Enskog value, 17.6% lower.",
+ "sources": [
+  {
+   "id": "frick_2013",
+   "authors": "Claudia Frick, Axel Seifert and Heini Wernli",
+   "title": "A bulk parametrization of melting snowflakes with explicit liquid water fraction for the COSMO model",
+   "publication": "Geoscientific Model Development 6, 1925-1939 (2013), doi:10.5194/gmd-6-1925-2013, CC BY 3.0",
+   "url": "https://gmd.copernicus.org/articles/6/1925/2013/gmd-6-1925-2013.pdf",
+   "obtained": "Full PDF fetched 25 October 2026 and read through pdftotext.",
+   "retrieved_pdf_sha256": "81bab8d1da2a839396f3a04884c3f55e79146b400e40944b93c39b41737a4ee6",
+   "reading_extent": "Abstract, introduction, section 2.1-2.2 (the single-flake model, eqs. 1-17 and Fig. 1), the melting-layer statistics of section 3.",
+   "quantities": {
+    "melting_rate": "dm_w/dt = (4 pi C F_v / L_F) [k (T - T0) + (L_v D_v / R_v)(e/T - e_sw(T0)/T0)] (eqs. 1, 7)",
+    "axis_ratio": "a(l) = 0.3 + 0.7 l (eq. 8)",
+    "capacitance": "C_m = alpha_cap(l) D_m/2 sqrt(1 - a^2) / arcsin sqrt(1 - a^2), alpha_cap = 0.8 + 0.2 l (eqs. 9, 13)",
+    "density_and_span": "rho_m = rho_s + (rho_w - rho_s) l, rho_s capped at 500 kg/m3; D_m = (6 m / (pi a rho_m))^(1/3) (eqs. 10-12)",
+    "fall_speed": "v_m = v_s + (v_r - v_s) Psi(l), Psi = 0.246 l + 0.754 l^7, fitted to Mitra's Fig. 2 (eqs. 14, 15)",
+    "ventilation": "Hall and Pruppacher (1976), Reynolds number interpolated linearly in l between the dry flake and the drop, maximum dimension as length (eqs. 16, 17)",
+    "cosmo_case": "Snow reaches up to 70 hPa below the top of the melting layer with the new scheme, against 30 hPa with the standard one (model result)"
+   },
+   "use": "The melting stage of melting.py, equation by equation.",
+   "limit": "A model paper: its single-flake parametrization rests on Mitra's laboratory flakes, which were centimetre-sized; the lunar flakes reach 10-20 cm and Reynolds numbers of several thousand."
+  },
+  {
+   "id": "mitra_1990",
+   "authors": "S. K. Mitra, O. Vohl, M. Ahr and H. R. Pruppacher",
+   "title": "A wind tunnel and theoretical study of the melting behavior of atmospheric ice particles. IV: Experiment and theory for snow flakes",
+   "publication": "Journal of the Atmospheric Sciences 47, 584-591 (1990)",
+   "obtained": "Not obtained: the publisher's site refused automated access. Read through Frick and co-authors (2013), who give its model and its fall-speed data, through Heymsfield and co-authors (2021), and through its abstract (search result text).",
+   "reading_extent": "Secondary only.",
+   "quantities": {
+    "experiment": "Natural and laboratory aggregates melted in free fall in the Mainz vertical wind tunnel in air warmed at the rate a falling flake meets, at 90% relative humidity (Heymsfield and co-authors 2021); melting began when the flake's surface reached 0 C",
+    "theory": "An oblate spheroid with the meltwater soaking into the flake; computed melting distances agreed with radar observations (abstract)"
+   },
+   "use": "The origin of the model melting.py follows.",
+   "limit": "Unread directly; its tables of melting distance are not checked here."
+  },
+  {
+   "id": "heymsfield_2021",
+   "authors": "Andrew J. Heymsfield, Aaron Bansemer, Alexander Theis and Carl Schmitt",
+   "title": "Survival of snow in the melting layer: relative humidity influence",
+   "publication": "Journal of the Atmospheric Sciences 78, 1823-1845 (2021), doi:10.1175/JAS-D-20-0353.1",
+   "url": "https://www.osti.gov/servlets/purl/1852196",
+   "obtained": "Full PDF (the publisher's version deposited at OSTI) fetched 25 October 2026 and read through pdftotext.",
+   "retrieved_pdf_sha256": "3135b8973f49b8eee2d0dd6bd2f107b73506ea7d606b26622d6fba17fb6f02e2",
+   "reading_extent": "Abstract, introduction, section 3a (the ice-bulb criterion and the spiral descents), section 4 (discussion and the fitted relations).",
+   "quantities": {
+    "onset": "Melting begins where the ice-bulb temperature reaches 0 C; RH_IB(1000 hPa) = 100 - 12.67 T, RH_IB(500 hPa) = 100 - 9.3 T (eqs. 2a, 2b)",
+    "completion": "Melting completes 1-2 C warmer than the onset, by particle type and largest size",
+    "kwajex_spirals": "In moist spirals melting was first seen at +1 C and was complete by +3 C",
+    "willis_heymsfield_1989": "Melting nearly complete by +3 C, some large aggregates reaching +5 C and warmer as ice (cited)",
+    "wolfensberger_2016": "Median melting-layer depths from radar of 350, 300, 350 and 325 m at Davos, Payerne, Ardeche and Iowa (cited)",
+    "warmest_snow": "Snow observed as warm as +7 C in dry air"
+   },
+   "use": "The onset criterion and the Earth check's observed targets.",
+   "limit": "Aircraft spirals and surface reports at Earth's pressures and lapse rates; Wolfensberger's and Willis and Heymsfield's values are taken as this paper cites them."
+  },
+  {
+   "id": "matsuo_sasyo_1981",
+   "authors": "Takayo Matsuo and Yoshio Sasyo",
+   "title": "Melting of snowflakes below freezing level in the atmosphere",
+   "publication": "Journal of the Meteorological Society of Japan 59, 10-25 (1981)",
+   "url": "https://www.jstage.jst.go.jp/article/jmsj1965/59/1/59_1_10/_pdf",
+   "obtained": "Full PDF fetched 25 October 2026 and read through pdftotext.",
+   "retrieved_pdf_sha256": "2e23a134255ec3627c0d5981a7e2fe202a4a0d9bfa831623b6c0e9a82a34c87a",
+   "reading_extent": "Abstract, the model's assumptions (section 3), the results on temperature, water content and fall speed by distance below the freezing level (section 4).",
+   "quantities": {
+    "lapse": "6 K/km, relative humidity constant below the freezing level",
+    "onset_depths_m": {
+     "0.9": 120,
+     "0.8": 250,
+     "0.7": 390,
+     "0.5": 700
+    },
+    "saturated": "Flakes of melted diameter 1-5 mm complete melting within several hundred metres; the melting layer deepens with flake size and density",
+    "fall_speed": "Nearly constant before melting in subsaturated air, rising rapidly once melting proceeds"
+   },
+   "use": "Computed onset depths the Earth check compares with.",
+   "limit": "A model with an empirical melting-rate formula, not observations."
+  },
+  {
+   "id": "leinonen_von_lerber_2018",
+   "authors": "Jussi Leinonen and Annakaisa von Lerber",
+   "title": "Snowflake melting simulation using smoothed particle hydrodynamics",
+   "publication": "Journal of Geophysical Research: Atmospheres 123, 1811-1825 (2018), doi:10.1002/2017JD027909",
+   "obtained": "Not obtained: the publisher's site refused automated access. Abstract as search results give it.",
+   "reading_extent": "Abstract only.",
+   "quantities": {
+    "meltwater": "Meltwater gathers first in the concave parts of the surface, the pools merge and form a shell round an ice core, and the flake becomes a drop; unrimed flakes show surface water early"
+   },
+   "use": "Supports splitting the melting flake's vapour exchange between exposed ice and water.",
+   "limit": "Abstract only; simulations, not measurements."
+  },
+  {
+   "id": "massman_1998",
+   "authors": "W. J. Massman",
+   "title": "A review of the molecular diffusivities of H2O, CO2, CH4, CO, O3, SO2, NH3, N2O, NO, and NO2 in air, O2 and N2 near STP",
+   "publication": "Atmospheric Environment 32, 1111-1127 (1998)",
+   "obtained": "The paper itself not retrieved. Its fit, 0.2178 cm2/s at 273.15 K and 1 atm with the temperature exponent constrained at 1.81 and an absolute uncertainty of 7%, confirmed on 25 October 2026 as quoted by a later review (Comparison of approaches for measuring the mass accommodation coefficient for the condensation of water, J. Phys. Chem. A, 2013; PMC3600786), search-result text.",
+   "reading_extent": "Secondary only.",
+   "use": "Vapour diffusivity in the rain solver, and through it in melting.py.",
+   "limit": "Secondary only; the 7% uncertainty is far smaller than the 17.6% by which the rain solver's kinetic theory falls below it.",
+   "quantities": {
+    "fit": "D = 0.2178 cm2/s (T / 273.15 K)^1.81 (1 atm / p)",
+    "data_range": "273.15-373.15 K, corrected to 1 atm by the inverse pressure law",
+    "uncertainty": "7%, the largest difference between the data and the fit"
+   }
+  }
+ ],
+ "screened_but_not_admitted": [
+  {
+   "id": "szyrmer_zawadzki_1999",
+   "citation": "W. Szyrmer and I. Zawadzki, Modeling of the melting layer. Part I: Dynamics and microphysics, Journal of the Atmospheric Sciences 56, 3573-3592 (1999)",
+   "status": "Not read; known here only as the bulk scheme Frick and co-authors (2013) follow."
+  },
+  {
+   "id": "mcsnow_melting",
+   "citation": "McSnow at the pinned revision, mo_melt.f90 and mo_mass2diam.f90: meltwater filling the flake's pores, then a torus (Rasmussen, Levizzani and Pruppacher 1984) and shedding (Rasmussen and Heymsfield 1987)",
+   "status": "Read as code; not used, because its geometry and fall speed for melting aggregates carry no wind-tunnel fit of their own, where Mitra's model does."
+  }
+ ]
+}
