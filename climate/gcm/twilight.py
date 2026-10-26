@@ -5,6 +5,7 @@
     $PY -m climate.gcm.twilight solve       # the spherical sky's multiple scattering, in batches on the drive
     $PY -m climate.gcm.twilight ledger      # ../results/gcm/twilight.json
     $PY -m climate.gcm.twilight ledger --ts 301   # the same on a 301 K column: ../results/gcm/twilight_301k.json
+    $PY -m climate.gcm.twilight levels --ts 301 --levels l14   # its GCM terms on 14 levels: twilight_301k_l14.json
 
 $PY is a Python with numba, which the sky model's solver needs (terluna-research/venvs/optics). Each task takes --ts,
 the column's ground temperature: without it the column is illumination's design column at 294.9 K, the sky model's
@@ -597,12 +598,13 @@ def plasim(column, elevation):
     return layers, ground, reflected
 
 
-def onto_gcm_layers(air, p_edges):
+def onto_gcm_layers(air, p_edges, half=None):
     """Absorption in the shells (bottom-up, first axis) shared among the GCM's layers (top first) by their overlap
-    in sigma, each level's share of the column's surface pressure."""
+    in sigma, each level's share of the column's surface pressure; the layers PlaSim's own ten unless half gives
+    another set's half levels (levels.py, the top layer's bottom first)."""
     from climate.gcm import plasim_shortwave as ps
     s = np.asarray(p_edges, float) / p_edges[0]
-    half = np.r_[0.0, ps.half_levels(plasim_sigma())]
+    half = np.r_[0.0, ps.half_levels(plasim_sigma()) if half is None else np.asarray(half, float)]
     lo, hi = s[1:], s[:-1]
     out = np.zeros((half.size - 1,) + air.shape[1:])
     for l in range(half.size - 1):
@@ -951,12 +953,99 @@ def ledger(column=None) -> dict:
     return rounded(out)
 
 
+LEVELS_SCHEMA = 'terluna.climate.gcm-twilight-levels/1'
+
+
+def terms_on_levels(product: dict, half) -> dict:
+    """A ledger's GCM terms on another set of PlaSim's half levels (levels.py; the top layer's bottom first), from the
+    terms it keeps by shell: the curved light (cm1_term) and the cone (cm1_term_cone) shared among the layers by their
+    overlap in sigma as onto_gcm_layers shares them for the ledger's own, and the infrared's escape by shell
+    (longwave.shells) likewise, each layer's temperature the mean of its shells' weighted by their mass in it, the
+    shells' pressure over the Moon's gravity at their heights, as the ledger's column weights them. The ground's terms
+    are the ledger's."""
+    from shared.constants import MOON_RADIUS
+    p_edges = np.asarray(product['shells_w_m2']['pressure_edges_pa'], float)
+    z = 0.5 * np.diff(np.asarray(product['shells_w_m2']['height_edges_km'], float)) * 1e3
+    z += np.asarray(product['shells_w_m2']['height_edges_km'][:-1], float) * 1e3
+    on = lambda shells: onto_gcm_layers(np.asarray(shells, float), p_edges, half)
+    lw = product['longwave']
+    weights = on(np.diag(-np.diff(p_edges) * ((MOON_RADIUS + z) / MOON_RADIUS) ** 2))   # each shell's mass in each layer
+    return dict(
+        gcm_term=dict(reading_rule=product['gcm_term']['reading_rule'], elevation_deg=product['gcm_term']['elevation_deg'],
+                      ground=product['gcm_term']['ground'], layers=on(product['cm1_term']['shells'])),
+        gcm_term_cone=dict(reading_rule=product['gcm_term_cone']['reading_rule'],
+                           layers=on(product['cm1_term_cone']['shells'])),
+        longwave=dict(reading_rule=lw['reading_rule'], ground_curved_w_m2=lw['ground_curved_w_m2'],
+                      ground_temperature_k=lw['ground_temperature_k'],
+                      gcm_layers=dict(temperature_k=(weights @ np.asarray(lw['shells']['temperature_k'], float))
+                                      / weights.sum(1),
+                                      cone=on(np.asarray(lw['shells']['cone'], float)[:, None])[:, 0],
+                                      curved=on(np.asarray(lw['shells']['curved'], float)[:, None])[:, 0])))
+
+
+def levels_ledger(ledger_path: Path, level_set: str) -> dict:
+    """The product the GCM runner reads for a level set's twilight (exoplasim_run.levels_product): the ledger's GCM
+    terms on the set's layers (terms_on_levels), with checks. The same arithmetic on PlaSim's own ten levels gives the
+    ledger's own terms back within its six-figure rounding; on the set, each term summed over the layers the two grids
+    do not share equals the ledger's over the same sigma range, and the shared layers keep the ledger's values."""
+    from climate.gcm import levels as lv
+    product = json.loads(ledger_path.read_text())
+    half, ten = lv.half_levels(level_set), lv.half_levels(lv.DEFAULT)
+    terms, again = terms_on_levels(product, half), terms_on_levels(product, ten)
+    pairs = dict(curved_light=('gcm_term', 'layers'), cone=('gcm_term_cone', 'layers'))
+    check = {}
+    for name, (block, key) in pairs.items():
+        ledger_ten = np.asarray(product[block][key], float)
+        check[f'{name}_ten_levels_largest_difference'] = float(np.abs(np.asarray(again[block][key]) - ledger_ten).max())
+        check[f'{name}_ledger_largest'] = float(np.abs(ledger_ten).max())
+    for key in ('cone', 'curved', 'temperature_k'):
+        ledger_ten = np.asarray(product['longwave']['gcm_layers'][key], float)
+        check[f'longwave_{key}_ten_levels_largest_difference'] = float(
+            np.abs(np.asarray(again['longwave']['gcm_layers'][key]) - ledger_ten).max())
+    shared = lv.shared_layers(ten, half)
+    split_new = [k for k in range(half.size) if k not in shared]
+    split_old = [j for j in range(ten.size) if j not in shared.values()]
+    for name, (block, key) in pairs.items():
+        new, old = np.asarray(terms[block][key]), np.asarray(product[block][key], float)
+        check[f'{name}_split_layers_sum_difference'] = float(np.abs(new[split_new].sum(0) - old[split_old].sum(0)).max())
+        check[f'{name}_shared_layers_largest_difference'] = float(max(np.abs(new[k] - old[j]).max()
+                                                                     for k, j in shared.items()))
+    for key in ('cone', 'curved'):
+        new, old = (np.asarray(x[key], float) for x in (terms['longwave']['gcm_layers'],
+                                                         product['longwave']['gcm_layers']))
+        check[f'longwave_{key}_split_layers_sum_difference'] = float(abs(new[split_new].sum() - old[split_old].sum()))
+    out = dict(schema=LEVELS_SCHEMA, ledger=str(ledger_path.relative_to(ROOT)), ledger_sha256=digest(ledger_path),
+               levels=dict(name=level_set, half_levels=list(half), full_levels=list(lv.full_levels(half))),
+               **terms, check=check,
+               evidence=('The ledger\'s own terms by shell (six significant figures) shared among the level set\'s '
+                         'layers by their overlap in sigma, as the ledger shares them among PlaSim\'s ten; a '
+                         'regridding of the calculation the ledger records, not a new one.'),
+               reading_rule=('gcm_term, gcm_term_cone and longwave read as in the ledger, on the level set\'s layers (top '
+                             'first) in place of PlaSim\'s ten. check: the same arithmetic on the ten levels against the '
+                             'ledger\'s own terms (largest absolute difference, per unit sunlight at the beam or W/m2, '
+                             'beside the largest term), and on the set the sums over the layers the grids do not share '
+                             'against the ledger\'s over the same range, and the shared layers against the ledger\'s.'),
+               producer=dict(domain='climate', files={f'gcm/{Path(m.__file__).name}': digest(m.__file__)
+                                                      for m in (sys.modules[__name__], lv)}))
+    return rounded(out)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument('task', choices=('optics', 'longwave', 'solve', 'ledger'))
+    ap.add_argument('task', choices=('optics', 'longwave', 'solve', 'ledger', 'levels'))
     ap.add_argument('--ts', type=float, help='the column\'s ground temperature, K (default: the design column, 294.9 K)')
+    ap.add_argument('--levels', default='l14', help='levels: the level set (climate/gcm/levels.py) to put the terms on')
     args = ap.parse_args(argv)
     column = design_column(args.ts)
+    if args.task == 'levels':
+        ledger_path = product_path(column)
+        out = levels_ledger(ledger_path, args.levels)
+        path = ledger_path.with_name(f'{ledger_path.stem}_{args.levels}.json')
+        path.write_text(json.dumps(out, indent=1) + '\n')
+        for k, v in out['check'].items():
+            print(f'  {k}: {v:.3g}')
+        log(f'wrote {path.relative_to(ROOT)}')
+        return 0
     if args.task == 'optics':
         near_infrared_optics(column)
         return 0

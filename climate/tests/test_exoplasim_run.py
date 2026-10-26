@@ -451,6 +451,71 @@ class RunnerTests(unittest.TestCase):
         np.testing.assert_allclose(tables['full'][1][:-1] - tables['curved'][1][:-1], lw['gcm_layers']['cone'],
                                    rtol=1e-5, atol=1e-8)
 
+    def test_a_level_set_sets_the_layer_count_and_refuses_a_count_of_its_own(self):
+        from climate.gcm import levels as lv
+        model = dict(er.MODEL)
+        self.assertEqual(er.level_settings(model, None, None)[0], lv.DEFAULT)
+        self.assertEqual(model['layers'], 10)
+        name, half = er.level_settings(model, {}, 'l14')
+        self.assertEqual((name, model['layers'], half.size), ('l14', 14, 14))
+        with self.assertRaises(ValueError):                              # 14 layers on PlaSim's own formula
+            er.level_settings({**er.MODEL, 'layers': 14}, {'layers': 14}, None)
+        with self.assertRaises(ValueError):
+            er.level_settings({**er.MODEL, 'layers': 12}, {'layers': 12}, 'l14')
+        with self.assertRaises(ValueError):
+            er.level_settings(dict(er.MODEL), None, 'l15')
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIsNone(inspect.signature(f).parameters['levels'].default)
+
+    def test_the_14_level_inputs_are_the_10_level_products_on_those_levels(self):
+        import json
+        from climate.gcm import levels as lv
+        half = lv.half_levels('l14')
+        shared = lv.shared_layers(lv.half_levels(lv.DEFAULT), half)
+        for parent in (er.TWILIGHT_LEDGERS['301k'], er.LONGWAVE_FITS['301k']):
+            path = er.levels_product(parent, 'l14')
+            self.assertEqual(path.name, parent.stem + '_l14.json')
+            with self.assertRaises(FileNotFoundError):
+                er.levels_product(parent, 'l99')
+        # the twilight table on 14 levels: 2 + 14 columns, 15 escapes; the regridding kept the ledger's sums
+        ledger = er.levels_product(er.TWILIGHT_LEDGERS['301k'], 'l14')
+        product, parent = (json.loads(x.read_text()) for x in (ledger, er.TWILIGHT_LEDGERS['301k']))
+        with tempfile.TemporaryDirectory() as d:
+            rows = er.twilight_table(Path(d) / 'twilight.dat', 'full', ledger).read_text().strip().split('\n')
+        n = int(rows[0])
+        self.assertEqual(len(rows[1].split()), 2 + 14)
+        self.assertEqual([len(r.split()) for r in rows[n + 1:]], [15, 15])
+        for key in ('gcm_term', 'gcm_term_cone'):
+            new, old = np.array(product[key]['layers']), np.array(parent[key]['layers'])
+            np.testing.assert_allclose(new.sum(0), old.sum(0), rtol=1e-4, atol=1e-8)
+            for k, j in shared.items():
+                np.testing.assert_allclose(new[k], old[j], rtol=1e-4, atol=1e-9)
+        lw, lw0 = product['longwave']['gcm_layers'], parent['longwave']['gcm_layers']
+        for k, j in shared.items():
+            self.assertAlmostEqual(lw['temperature_k'][k], lw0['temperature_k'][j], delta=0.01)
+        # the longwave correction on 14 levels: 15 values a surface, the shared layers' own, the split ones' sum kept
+        corr = json.loads(er.levels_product(er.LONGWAVE_FITS['301k'], 'l14').read_text())['correction']
+        corr0 = json.loads(er.LONGWAVE_FITS['301k'].read_text())['correction']
+        for key in ('land', 'sea', 'tref'):
+            self.assertEqual(len(corr[key]), 15)
+            for k, j in list(shared.items()) + [(14, 10)]:
+                self.assertAlmostEqual(corr[key][k], corr0[key][j], places=3)
+        for key in ('land', 'sea'):
+            self.assertAlmostEqual(sum(corr[key]), sum(corr0[key]), places=2)
+
+    def test_the_cold_cloud_factors_refuse_levels_whose_top_layers_differ(self):
+        from climate.gcm import levels as lv
+        product = er.ROOT / 'climate' / 'results' / 'gcm' / 'cold_cloud_A28R_301k_s0897.json'
+        if not product.exists():
+            self.skipTest('no cold cloud product')
+        same = er.cold_cloud_factors(product)
+        for name in (lv.DEFAULT, 'l14'):
+            self.assertEqual(er.cold_cloud_factors(product, half=lv.half_levels(name)), same)
+        other = lv.plasim_half(20)
+        with self.assertRaises(ValueError):
+            er.cold_cloud_factors(product, half=other)
+
     def test_spectrum_tail_follows_the_sun(self):
         # A blackbody "measurement" that stops at 2.73 um must continue as the same blackbody, not as a
         # constant: a constant tail would move most of the energy into ExoPlaSim's near-infrared band.

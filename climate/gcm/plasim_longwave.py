@@ -5,6 +5,7 @@ height against the atmosphere domain's correlated-k model, which follows the lin
     climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave validate A28_corrected_970_heating --year 0
     climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave fit A28_corrected_970_heating --year 0
     climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check    # the correction near 301 K (CHECK_CASES)
+    climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave levels --levels l14   # the refit on 14 levels
 
 PlaSim's longwave (plasim/src/radmod.f90, lwr) follows Sasamori (1968): broadband absorptivities of water vapour, its
 continuum (1 - exp(-TH2OC u)), carbon dioxide with the water overlap of Boer et al. (1984), and ozone, each on the
@@ -469,21 +470,92 @@ def check(cases=CHECK_CASES, every=CHECK_EVERY, corrections=None):
         producer=dict(domain='climate', files={f'gcm/{Path(__file__).name}': digest(Path(__file__), 16)}))
 
 
+LEVELS_SCHEMA = 'terluna.climate.gcm-longwave-levels/1'
+
+
+def correction_on_levels(correction: dict, half_from, half_to) -> dict:
+    """A correction (land, sea and tref by layer, the top first, then the ground) carried onto another set of
+    PlaSim's half levels (levels.py) by its conservative remap: each layer's escape per unit of its mass remapped and
+    multiplied by the new layer's mass, so the escape over any range the grids share is kept and the layers they share
+    keep theirs; the reference temperatures remapped as a profile; the ground's terms kept."""
+    from climate.gcm import levels as lv
+    half_from, half_to = np.asarray(half_from, float), np.asarray(half_to, float)
+    d_from, d_to = np.diff(np.r_[0.0, half_from]), np.diff(np.r_[0.0, half_to])
+    n = half_from.size
+    out = {}
+    for key in ('land', 'sea'):
+        c = np.asarray(correction[key], float)
+        out[key] = [float(x) for x in np.r_[lv.remap(c[:n] / d_from, half_from, half_to) * d_to, c[n]].round(4)]
+    tref = np.asarray(correction['tref'], float)
+    out['tref'] = [float(x) for x in np.r_[lv.remap(tref[:n], half_from, half_to), tref[n]].round(3)]
+    return out
+
+
+def levels_product(path: Path, level_set: str) -> dict:
+    """A correction product carried onto a level set, as the GCM runner reads it (exoplasim_run.levels_product)."""
+    from climate.gcm import levels as lv
+    parent = json.loads(path.read_text())
+    half, ten = lv.half_levels(level_set), lv.half_levels(lv.DEFAULT)
+    corr = correction_on_levels(parent['correction'], ten, half)
+    shared = lv.shared_layers(ten, half)
+    split_new = [k for k in range(half.size) if k not in shared]
+    split_old = [j for j in range(ten.size) if j not in shared.values()]
+    check = {key: dict(ten_levels=[float(x) for x in np.asarray(parent['correction'][key])[split_old]],
+                       split_layers=[float(x) for x in np.asarray(corr[key])[split_new]],
+                       sums=[float(np.sum(np.asarray(parent['correction'][key])[split_old])),
+                             float(np.sum(np.asarray(corr[key])[split_new]))]) for key in ('land', 'sea')}
+    return dict(schema=LEVELS_SCHEMA, run=parent['run'], year=parent['year'],
+                parent=dict(product=str(path.relative_to(HERE.parents[1])), sha256=digest(path, 16)),
+                levels=dict(name=level_set, half_levels=[float(x) for x in half],
+                            full_levels=[float(x) for x in lv.full_levels(half)]),
+                correction=corr, check=check,
+                evidence=('The parent\'s correction, fitted on PlaSim\'s ten levels, carried onto the level set by the '
+                          'conservative remap: no fit on the set\'s own columns, which `check` with this product tests.'),
+                reading_rule=('correction reads as the parent\'s (W/m2 at tref by layer, the top first and the ground '
+                              'last, scaled by (T / tref)^4) on the level set\'s layers. check gives, over land and over '
+                              'sea, the parent\'s values on the layers the grids do not share, the set\'s on its layers '
+                              'there, and the two sums, which the remap keeps equal.'),
+                producer=dict(domain='climate', files={f'gcm/{Path(__file__).name}': digest(Path(__file__), 16),
+                                                       'gcm/levels.py': digest(Path(lv.__file__), 16)}))
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('action', choices=('validate', 'fit', 'check'))
+    parser.add_argument('action', choices=('validate', 'fit', 'check', 'levels'))
     parser.add_argument('run', nargs='?')
     parser.add_argument('--year', type=int, default=0)
     parser.add_argument('--every', type=int, default=20)
     parser.add_argument('--case', action='append', metavar='RUN:YEAR',
                         help='check: a run year to check in place of the 20-year test\'s (repeatable)')
     parser.add_argument('--output', type=Path, help='check: where to write, with --case')
+    parser.add_argument('--correction', action='append', metavar='NAME=PRODUCT',
+                        help='check: a correction product to check in place of CORRECTIONS (repeatable); one on '
+                             'another level set for a run on that set')
+    parser.add_argument('--fit', choices=tuple(CORRECTIONS), default='refit_301k',
+                        help='levels: the correction to carry onto the level set')
+    parser.add_argument('--levels', default='l14', help='levels: the level set (climate/gcm/levels.py)')
     args = parser.parse_args(argv)
+    if args.action == 'levels':
+        path = CORRECTIONS[args.fit]
+        out = levels_product(path, args.levels)
+        target = path.with_name(f'{path.stem}_{args.levels}.json')
+        target.write_text(json.dumps(out, indent=1) + '\n')
+        for key in ('land', 'sea'):
+            print(f"{key}: {out['correction'][key]}  (split layers: {out['check'][key]['sums']})")
+        print('tref', out['correction']['tref'])
+        print(f'wrote {target.relative_to(HERE.parents[1])}')
+        return 0
     if args.action == 'check':
         cases = tuple((c.rsplit(':', 1)[0], int(c.rsplit(':', 1)[1])) for c in args.case) if args.case else CHECK_CASES
         if args.case and args.output is None:
             parser.error('check with --case takes --output')
-        out = check(cases)
+        chosen = None
+        if args.correction:
+            chosen = {}
+            for item in args.correction:
+                name, _, product = item.partition('=')
+                chosen[name] = (HERE.parents[1] / product) if not Path(product).is_absolute() else Path(product)
+        out = check(cases, corrections=chosen)
         (args.output or CHECK).write_text(json.dumps(out, indent=1) + '\n')
         print('near 301 K:', out['near_301k'])
         print('all cases:', out['all_cases'])

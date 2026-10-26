@@ -19,6 +19,9 @@ Two options of the cloud-depth patch (exoplasim_run.SBM_DEPTH_PATCHES), off by d
 - the mixing within layers (steps > 1, with eps > 0): the parcel crosses each layer in that many equal steps of log
   pressure, each lifting it dry adiabatically, mixing in its step's share of the surrounding air interpolated there in
   log pressure, and condensing the mixture, the last step ending at the level itself. One step is the scheme as before.
+With the depth test set, the shallow cap (shallow_cap, exoplasim_run.SBM_CAP_PATCHES, off by default) hands a deep
+column the scheme leaves to the shallow scheme a top no higher than deep_pa above its cloud's base: the highest level
+at or below the parcel's top whose pressure is within deep_pa of the condensation level.
 """
 from __future__ import annotations
 
@@ -125,13 +128,14 @@ def trigger_cape(t, tp, sigma, dsigma, c=PLASIM):
 
 
 def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, step=1800.0, akap=0.2857,
-           c=PLASIM, cape_limit=0.0, eps_trigger=0.0, deep_pa=0.0, steps=1):
+           c=PLASIM, cape_limit=0.0, eps_trigger=0.0, deep_pa=0.0, steps=1, shallow_cap=False):
     """One column's tendencies by the scheme: temperature (K/s) and vapour (kg/kg/s) by level, the rain formed at each
     level (kg/m2/s), the convection's top level (index, or None), the parcel's inhibition (J/kg), whether the
     column is left to the shallow scheme and the parcel's temperature, the reference; with the CAPE trigger set
     (cape_limit > 0), the trigger parcel's CAPE too, and with the depth test set (deep_pa > 0, Pa), the cloud's base
     and depth (Pa). steps > 1 integrates the parcel's mixing within each layer. step is PlaSim's deltsec2, the shortest
-    relaxation time."""
+    relaxation time. With shallow_cap and the depth test, a deep column left to the shallow scheme hands it the top the
+    cap allows, its parcel's own top kept as parcel_top."""
     t, q = np.asarray(t, float), np.asarray(q, float)
     sigma, dsigma = np.asarray(sigma, float), np.asarray(dsigma, float)
     n = t.size
@@ -169,6 +173,8 @@ def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, 
     cpm = sum(cp[k] * m[k] for k in layers)
     if pq <= 0.0 or (cin_limit > 0.0 and cin > cin_limit) or (cape_limit > 0.0 and out['trigger_cape'] < cape_limit):
         out['shallow'] = True
+        if shallow_cap and deep_pa > 0.0:                   # the shallow cap: the top within deep_pa of the base
+            out.update(parcel_top=top, top=next(k for k in range(top, n) if p[k] >= out['base'] - deep_pa))
         return out
     corr = (c['ALV'] * pq - pt) / cpm
     cond = sum(max(0.0, -dqr[k]) * m[k] for k in layers)
