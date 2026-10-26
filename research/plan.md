@@ -405,16 +405,20 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    quarter and changes little else. Mixing the scheme's reference cools the upper air by only 2–2.5 K and warms the
    ground 1.7–2.4 K with weaker sea convection, and a CAPE threshold was tried and set aside. Open, with
    recommendations:
-   - **Vertical levels and a mass-flux scheme** (register, 26 October; under way). PlaSim goes onto 14 levels, the new
-     ones near 2.4, 6, 8 and 13.5 km, where CM1's 6 km boundary layer and its night clouds' cap at 7–8 km lie inside
-     one layer of today's 10. The shallow scheme's 700 hPa top, an Earth value, becomes a cap tied to the depth test.
-     A mass-flux scheme on Tiedtke's model and the IFS's later forms is built offline from CM1's measured mixing,
-     cloud depths and heating and tested on CM1's and the GCM's columns before it goes into PlaSim. A 15-year run with
-     the settling and exobase checks and its own longwave refit follows on the configuration that holds; the depth
+   - **Vertical levels and a mass-flux scheme** (register, 26 October). PlaSim now runs 15 levels, new ones near 2.4,
+     6, 8 and 13.5 km and a thin bottom layer near 0.3 km, at about 1.55 times the 10-level cost; a provisional
+     longwave refit on them leaves 3.0 W/m² but cools the climate (−3.7 W/m² at the top). The shallow scheme's 700 hPa
+     top, an Earth value, has a cap tied to the depth test. The mass-flux scheme, built from CM1's measurements and
+     written in Fortran behind its own switch, cools the upper air 2.3–2.6 K toward CM1 over two years but triggers
+     too seldom, so convection's share of the rain falls to 42% and large-scale condensation moistens the lowest
+     layer. Next, proposed: PlaSim's boundary-layer mixing at lunar gravity, which keeps Earth's 160 m mixing length
+     and may mix several times too slowly, leaving a stable layer below cloud base that CM1 does not have; then
+     two-year runs with both schemes, a longwave refit on the chosen configuration and a 15-year run. The depth
      test's 15-year run is held.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
-     12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. The
-     GCM's larger evaporation at the sea site, about 4.0 against 2.7 mm/day, stays open.
+     12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. A lunar
+     free-convection constant over the sea, in place of Earth's, removes a quarter of the GCM's extra evaporation at
+     the sea site (3.82 to 3.62 mm/day against CM1's 2.98).
    - **The scheme's adoption and its reference humidity** (the author's call, after the test): 0.7 brings the sea's
      nights nearer CM1's.
    - **A corrected rerun of one reference ring or box**, to size the boundary layer's bias in every earlier CM1 run
