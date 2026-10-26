@@ -78,3 +78,11 @@ python -m atmosphere.snow.column_diagnosis_analysis
 python -m visualization.snow.column_diagnosis
 python -m pytest -q atmosphere/tests/test_snow_column_diagnosis.py atmosphere/tests/test_snow_column_diagnosis_runs.py atmosphere/tests/test_snow_column_diagnosis_analysis.py visualization/snow/tests/test_column_diagnosis.py
 ```
+
+**Provenance, 25 October 2026.** [results/column_diagnosis.json](results/column_diagnosis.json),
+[results/column_diagnosis_aggregation_only.json](results/column_diagnosis_aggregation_only.json) and
+[results/column_diagnosis_checks.json](results/column_diagnosis_checks.json) were built with the rain solver as it stood
+before 25 October, whose Chapman–Enskog vapour diffusivity stood 17.6% below Massman's (1998) measured value. They keep
+their values; their record names `atmosphere/rain/drops.py` at that solver's hash, kept byte for byte as
+[atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and their identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).

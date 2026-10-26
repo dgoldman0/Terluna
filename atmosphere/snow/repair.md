@@ -75,3 +75,10 @@ The literature supports several distinct experiments after the numerical errors 
 4. **Whole-aggregate failure alongside chipping.** Resolve or parameterize the contact network's response to impact and unequal aerodynamic loading, reporting largest-remnant mass as well as fragment number. Where strengths and connectivity remain unmeasured, use declared sensitivity cases. A fitted maximum diameter would conceal that uncertainty.
 
 These are proposed physical extensions, not changes already made to the snow equations. The completed implementation addresses numerical particle accounting and provides an independent reference; calibrated lunar snow sizes and storm optics remain unresolved.
+
+**Provenance, 25 October 2026.** [results/repair.json](results/repair.json) and
+[results/kernel_diagnostics.json](results/kernel_diagnostics.json) were built with the rain solver as it stood before 25
+October, whose Chapman–Enskog vapour diffusivity stood 17.6% below Massman's (1998) measured value. They keep their
+values; their record names `atmosphere/rain/drops.py` at that solver's hash, kept byte for byte as
+[atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and their identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).

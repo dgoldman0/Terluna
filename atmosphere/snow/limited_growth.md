@@ -50,3 +50,9 @@ OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest atmosphere/tes
 ```
 
 This result repairs a demonstrated deposition-transport deficiency to a useful degree and supplies a tested alternative for the column. Collision discretization, the fixed aggregate geometry, whole-aggregate failure, hydrodynamic interception and realistic moist trajectories retain their separate uncertainties. Their effects cannot be inferred from a condensation-only box, and a reduced coupled tail would still require independent numerical and physical assessment.
+
+**Provenance, 25 October 2026.** [results/limited_growth.json](results/limited_growth.json) was built with the rain
+solver as it stood before 25 October, whose Chapman–Enskog vapour diffusivity stood 17.6% below Massman's (1998)
+measured value. It keeps its values; its record names `atmosphere/rain/drops.py` at that solver's hash, kept byte for
+byte as [atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and its identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).

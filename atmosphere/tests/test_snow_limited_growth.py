@@ -6,6 +6,7 @@ import pytest
 
 from atmosphere.snow import limited_growth as lg
 from shared.provenance import constants_changed
+from shared.baselines import recorded_file
 
 
 def _primitive(x):
@@ -91,7 +92,7 @@ def test_limited_product_meets_transport_gates_and_binds_inputs():
     assert product['schema']==lg.SCHEMA
     for kind in ('files','inputs'):
         for path,expected in product['producer'][kind].items():
-            assert lg.gt.sha(lg.ROOT/path)==expected,path
+            assert lg.gt.sha(recorded_file(path,expected))==expected,path
     assert not constants_changed(product['producer']['constants'])
     assert all(product['acceptance'].values())
     for run in product['runs']:

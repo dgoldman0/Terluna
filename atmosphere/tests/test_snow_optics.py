@@ -7,6 +7,7 @@ import pytest
 
 from atmosphere.snow import optics
 from shared.provenance import constants_changed
+from shared.baselines import recorded_file
 
 
 def test_extinction_keeps_area_under_population_rebinning():
@@ -141,10 +142,10 @@ def test_committed_optics_product_records_conserved_inputs_and_light_height():
     product = json.loads(optics.OUT.read_text())
     assert product['schema'] == optics.SCHEMA
     for path, expected in product['producer']['files'].items():
-        assert optics.digest(optics.ROOT/path) == expected
+        assert optics.digest(recorded_file(path, expected)) == expected
     assert not constants_changed(product['producer']['constants'])
     for path, expected in product['inputs'].items():
-        assert optics.digest(optics.ROOT/path) == expected
+        assert optics.digest(recorded_file(path, expected)) == expected
     population = json.loads(optics.POPULATION.read_text())
     growth_depth = json.loads(optics.GROWTH_DEPTH.read_text())
     audit = json.loads(optics.NUMERICAL_AUDIT.read_text())

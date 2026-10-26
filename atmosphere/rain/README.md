@@ -16,6 +16,8 @@ arriving at the ground by the audio lab [visualization/rain-audio](../../visuali
 | File | Holds |
 |---|---|
 | [drops.py](drops.py) | The single-drop solver: the air column, equilibrium shape, drag, terminal speed, stability screen, ventilated evaporation and the fall from cloud base to ground |
+| [recovered.py](recovered.py) | The recovered solver's Chapman–Enskog vapour diffusivity, kept for the reproduction checks |
+| [baseline/drops_2026-10-24.py](baseline/drops_2026-10-24.py) | The solver as it stood on 24 October, byte for byte (`research/provenance.json`): the snow products built before the diffusivity fix are checked against it ([shared/baselines.py](../../shared/baselines.py)) |
 | [distributions.py](distributions.py) | Cloud-base gamma spectra, the ledger of what reaches the ground, the collision-encounter diagnostic and arrival fluxes |
 | [product.py](product.py) | The product [results/rain_drops.json](results/rain_drops.json), schema `terluna.atmosphere.rain-drops/2` |
 | [arrivals.py](arrivals.py) | The product [results/rain_arrivals.json](results/rain_arrivals.json), schema `terluna.atmosphere.rain-arrivals/1`: the drops arriving at the ground |
@@ -40,11 +42,15 @@ pressure of the air it falls through and depends on gravity through the capillar
 buoyancy against the drag of a sphere (Clift and Gauvin 1970) raised for the spheroid's surface (Loth 2008), and
 trades vapour and heat with the air by diffusion, ventilated by its fall (Pruppacher and Klett 2010). The solver
 follows a drop's height, its speed over the ground, its mass and its temperature, with the air-relative speed setting
-drag and ventilation. The air's viscosity, conductivity and vapour diffusivity come from kinetic theory for each gas,
-mixed by Wilke's rule (Reid, Prausnitz and Sherwood 1977), so the Moon's air, with less oxygen in a denser column,
-takes its own values. These are the equations of Loftus and Wordsworth (2021) as their code implements them.
+drag and ventilation. The air's viscosity and conductivity come from kinetic theory for each gas, mixed by Wilke's
+rule (Reid, Prausnitz and Sherwood 1977), so the Moon's air, with less oxygen in a denser column, takes its own values.
+These are the equations of Loftus and Wordsworth (2021) as their code implements them. The vapour's diffusivity through
+the air is Massman's (1998) measured fit, 0.2178 cm²/s at 0 °C and 1 atm, rising as the 1.81 power of temperature and
+falling inversely with pressure. It rests on measurements from 0 to 100 °C corrected to 1 atm by that inverse law and
+is stated to 7% (as Miles and co-authors 2012 give it); the drops' air, 0–40 °C at 0.6–1.2 atm, lies within its
+temperatures, and the Moon's nitrogen-richer air moves the kinetic theory's value by 0.06%.
 
-The port changes four things from the recovered solver, each named in its code. The saturation pressure is the
+The port changes five things from the recovered solver, each named in its code. The saturation pressure is the
 repository's (Wagner and Pruss 2002), where the recovered copy dropped a digit from one coefficient. The surface
 tension takes the IAPWS coefficient of 235.8 mN/m and critical temperature, where rainprops carries 235 mN/m, which
 read 0.3% low at 20 °C. The gas constant and gravities come from [shared/constants.json](../../shared/constants.json).
@@ -52,14 +58,18 @@ Together these three move fall speeds by at most 0.08% (at 6 mm on Earth) and fa
 as the author decided on 17 October, gives the column's dry adiabat the repository's heat capacity of the moist air
 ([thermodynamics.py](../radiative_convective/thermodynamics.py)). The recovered solver took the gas-transport model's,
 which carries argon, 1% of the air, as nitrogen and stands 0.8% higher, so its cloud bases sit about 1% higher
-(`drops.transport_adiabat` gives its column).
+(`drops.transport_adiabat` gives its column). The fifth, as the author decided on 25 October, takes the vapour's
+diffusivity from Massman's fit. Rainprops' Chapman–Enskog value, with Lennard-Jones parameters for water and the
+vapour's own self-diffusion counted in Blanc's law, stood 17.6% below it at every temperature and pressure the columns
+reach; Miles and co-authors found Chapman–Enskog theory the lowest of the eleven parametrizations they compared.
 
 ## Checks
 
 | Check | Result | Evidence state |
 |---|---|---|
 | Earth's fall speeds: 34 Gunn–Kinzer measurements, 0.1–5.8 mm, in air at 20 °C and 50% humidity | 0.200 m/s root mean square and 7.43% at most (at 0.1 mm); the solver runs 2.6–6.4% slow from 0.6 to 2.4 mm, most at 1 mm | Empirical validation on Earth |
-| The recovered solver's saved speeds, drops and drips, on its own inputs and column | Within 0.08% in speed and 0.03% in fall time | Reproduction of the original |
+| The recovered solver's saved speeds, drops and drips, on its own inputs and column, with its Chapman–Enskog vapour diffusivity ([recovered.py](recovered.py)) | Within 0.08% in speed and 0.03% in fall time | Reproduction of the original |
+| Vapour diffusivity against Massman's (1998) measured fit for air | Equal by construction, in Earth's air and the Moon's; the Chapman–Enskog value it replaced stood 17.6% lower | Measured fit, stated to 7% |
 | Stokes limit: drops of 2–10 µm | Within 0.5% of (ρw − ρa) g D² / 18μ, falling as g and as D² | Physical limit |
 | Inertial regime: rigid 6 mm spheres | Slowed by lunar gravity 2.47–2.49 times, against √(9.81/1.62) = 2.46 | Physical limit |
 | The stability screen | Grows 2.46 times at lunar gravity, as g^(−1/2) (Loftus and Wordsworth 2021) | Physical scaling |
@@ -129,13 +139,13 @@ the cloud bases would sit 51–78 m (1.0–1.1%) higher and the smallest survivi
 | | Hot world | Resort, 301 K | Lock |
 |---|---|---|---|
 | Cloud base: Moon; Earth | 7.40 km; 1.22 km | 6.36 km; 1.05 km | 5.10 km; 0.84 km |
-| Smallest drop reaching the ground: Moon; Earth | 2.43 mm; 0.75 mm | 2.03 mm; 0.64 mm | 1.58 mm; 0.51 mm |
-| Water reaching the ground, mean drop 0.75 mm: Moon; Earth | 0–0.03%; 20–26% | 0.01–0.2%; 33–37% | 0.2–1.4%; 51–53% |
-| The same, mean drop 1.5 mm | 1.7–4.6%; 65–66% | 5.3–9.9%; 74–75% | 16–22%; 83–85% |
-| The same, mean drop 2.5 mm | 18–22%; 83–85% | 31–33%; 88–90% | 50%; 93–94% |
-| Encounters on the way down, central spectrum: Moon; Earth | 34; 1.4 | 29; 1.1 | 21; 0.9 |
+| Smallest drop reaching the ground: Moon; Earth | 2.47 mm; 0.76 mm | 2.07 mm; 0.65 mm | 1.62 mm; 0.52 mm |
+| Water reaching the ground, mean drop 0.75 mm: Moon; Earth | 0–0.03%; 19–25% | 0.01–0.2%; 31–36% | 0.2–1.2%; 49–52% |
+| The same, mean drop 1.5 mm | 1.5–4.2%; 64–65% | 4.7–9.1%; 73–74% | 15–21%; 82–84% |
+| The same, mean drop 2.5 mm | 17–21%; 83–85% | 29–32%; 88–89% | 48–49%; 92–94% |
+| Encounters on the way down, central spectrum: Moon; Earth | 34; 1.4 | 27; 1.2 | 21; 0.9 |
 
-A 1 mm drop leaves the cloud base at 1.2 m/s and evaporates after 56–62 minutes, 2.8–3.1 km below it. The spectra are
+A 1 mm drop leaves the cloud base at 1.2 m/s and evaporates after 55–60 minutes, 2.7–3.0 km below it. The spectra are
 the rain work's bounded set: gamma concentrations at the cloud base with mass-weighted mean diameters of 0.75, 1.5 and
 2.5 mm, each range spanning shape parameters 0 and 3, on 64 classes from 0.1 to 6 mm; on twice as many classes the
 resort's shares move by at most 0.015 percentage points (`grid_check`). With independent drops the share reaching the
@@ -154,10 +164,10 @@ ground. For the central spectrum (1.5 mm, shape 3), at 1 mm/h on the ground:
 
 | | Hot world | Resort, 301 K | Lock |
 |---|---|---|---|
-| Drops arriving per m² per second: Moon; Earth | 154; 295 | 191; 305 | 225; 307 |
-| Their median size and speed: Moon | 1.22 mm, 1.39 m/s | 1.10 mm, 1.26 m/s | 1.02 mm, 1.17 m/s |
-| The same: Earth | 0.93 mm, 3.61 m/s | 0.92 mm, 3.53 m/s | 0.92 mm, 3.52 m/s |
-| Rain leaving the cloud base per mm/h on the ground: Moon; Earth | 59; 1.5 mm/h | 19; 1.3 mm/h | 6.1; 1.2 mm/h |
+| Drops arriving per m² per second: Moon; Earth | 174; 299 | 215; 309 | 187; 302 |
+| Their median size and speed: Moon | 1.12 mm, 1.28 m/s | 1.01 mm, 1.16 m/s | 1.14 mm, 1.30 m/s |
+| The same: Earth | 0.92 mm, 3.58 m/s | 0.91 mm, 3.51 m/s | 0.93 mm, 3.55 m/s |
+| Rain leaving the cloud base per mm/h on the ground: Moon; Earth | 67; 1.5 mm/h | 21; 1.3 mm/h | 6.7; 1.2 mm/h |
 
 The Moon's drops arrive shrunk to sizes near Earth's, at about a third of the speed, and fewer of them carry the same
 water. Its rain rate at the ground asks a heavy rain of the cloud base in this column, where coalescence and the rain's
@@ -287,6 +297,9 @@ beyond a smoke test ([climate/crm](../../climate/crm/README.md#rain-limits-at-lu
 
 ## Assumptions and limits
 
+- **The air's transport.** Against Lemmon and Jacobsen's (2004) correlations for air at 100 kPa, as Huber and Harvey
+  tabulate them, the kinetic theory's viscosity stands within 1.1% at 200 and 300 K and its conductivity within 0.2% at
+  200 K and 4.9% low at 300 K; the drops' heat balance carries that shortfall in the warm air near the ground.
 - **The drops.** Pure liquid water in the equilibrium shape, held during acceleration, with near-ambient liquid
   properties; the warm-water domain runs from 0 to 40 °C at the ground with the cloud base above freezing. Argon, 1% of
   the air, takes nitrogen's transport properties. The ventilation law was measured below a Reynolds number of 2,600,

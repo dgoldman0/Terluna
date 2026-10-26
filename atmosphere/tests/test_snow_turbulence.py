@@ -7,6 +7,7 @@ import pytest
 
 from atmosphere.snow import turbulence as st
 from shared.provenance import constants_changed
+from shared.baselines import recorded_file
 
 
 def test_snow_masks_do_not_call_clear_cold_air_snow_or_warm_snow_a_growth_cloud():
@@ -98,7 +99,7 @@ def test_checked_product_provenance_and_inference_boundaries():
         assert st.sha256(st.ROOT / name) == expected, name
     assert product['source_register_sha256'] == st.sha256(st.HERE / 'turbulence_sources.json')
     for name, expected in product['producer']['files'].items():
-        assert st.sha256(st.ROOT / name) == expected, name
+        assert st.sha256(recorded_file(name, expected)) == expected, name
     assert 'Uncalibrated' in product['scenarios']['evidence']
     assert 'not dissipation estimates' in product['reading_rule']
     for case in product['cases']:

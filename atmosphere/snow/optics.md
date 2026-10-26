@@ -215,3 +215,10 @@ quadrature from 32 to 128 strips changes direct light by at most 0.029% in four 
 cases at winter heights. These checks establish implementation behaviour and consistency with the saved
 optical field. The remaining physical work includes jointly evolving liquid and frozen cloud populations,
 breakup-limited aggregate geometry, applicable ice phase matrices, and transport through a finite storm.
+
+**Provenance, 25 October 2026.** [results/optics.json](results/optics.json) and
+[results/population.json](results/population.json) were built with the rain solver as it stood before 25 October, whose
+Chapman–Enskog vapour diffusivity stood 17.6% below Massman's (1998) measured value. They keep their values; their
+record names `atmosphere/rain/drops.py` at that solver's hash, kept byte for byte as
+[atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and their identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).

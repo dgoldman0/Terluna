@@ -3076,6 +3076,13 @@
       "bytes": 3741,
       "preservation": "verbatim",
       "nature": "reconstruction written 2026-09-26 by the recovery pass from conversation records; not an original file"
+    },
+    {
+      "path": "atmosphere/rain/baseline/drops_2026-10-24.py",
+      "sha256": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
+      "bytes": 23466,
+      "preservation": "verbatim",
+      "source": "atmosphere/rain/drops.py as last changed in commit a90c23b (19 October 2026) and committed unchanged up to bff6981"
     }
   ],
   "updates": [
@@ -3178,6 +3185,48 @@
       "retained_added": [
         "protection/reference/historical/EL1_SH_CONVERSATION_RECOVERY.md",
         "protection/reference/historical/Lunashield_L1_System_Design_Dossier_CONVERSATION_RECOVERY.md"
+      ]
+    },
+    {
+      "date": "2026-10-25",
+      "summary": "Kept the rain solver as it stood before its vapour diffusivity took Massman's (1998) measured fit, byte for byte, at atmosphere/rain/baseline/drops_2026-10-24.py. Its Chapman-Enskog diffusivity stood 17.6% below Massman's value. The 33 snow products of 21-24 October built with it record it under its live path; the current standing rests on none of them, so they keep their values and their identity checks read the baseline (shared/baselines.py). The rain products, the flake product of 20 October and the aggregation baseline were rebuilt with the corrected solver.",
+      "retained_added": [
+        "atmosphere/rain/baseline/drops_2026-10-24.py"
+      ],
+      "products_built_with_baseline": [
+        "atmosphere/snow/results/collision_entropy_bath.json",
+        "atmosphere/snow/results/collision_entropy_boundary.json",
+        "atmosphere/snow/results/collision_jump_bath.json",
+        "atmosphere/snow/results/collision_jump_bath_attempt.json",
+        "atmosphere/snow/results/collision_jump_boundary.json",
+        "atmosphere/snow/results/collision_jump_checks.json",
+        "atmosphere/snow/results/collision_moment_bath.json",
+        "atmosphere/snow/results/collision_moment_boundary.json",
+        "atmosphere/snow/results/collision_reference.json",
+        "atmosphere/snow/results/column_diagnosis.json",
+        "atmosphere/snow/results/column_diagnosis_aggregation_only.json",
+        "atmosphere/snow/results/column_diagnosis_checks.json",
+        "atmosphere/snow/results/crystal_transport_replay.json",
+        "atmosphere/snow/results/event_closed_boxes.json",
+        "atmosphere/snow/results/event_column.json",
+        "atmosphere/snow/results/event_column_checks.json",
+        "atmosphere/snow/results/geometry_continuation.json",
+        "atmosphere/snow/results/growth_depth.json",
+        "atmosphere/snow/results/growth_repair.json",
+        "atmosphere/snow/results/growth_transport.json",
+        "atmosphere/snow/results/kernel_diagnostics.json",
+        "atmosphere/snow/results/limited_growth.json",
+        "atmosphere/snow/results/numerical_audit.json",
+        "atmosphere/snow/results/optics.json",
+        "atmosphere/snow/results/population.json",
+        "atmosphere/snow/results/repair.json",
+        "atmosphere/snow/results/scale_crystal_growth.json",
+        "atmosphere/snow/results/scale_growth_benchmarks.json",
+        "atmosphere/snow/results/scale_growth_controls.json",
+        "atmosphere/snow/results/scale_lunar_comparison.json",
+        "atmosphere/snow/results/scale_separation.json",
+        "atmosphere/snow/results/scale_size_diagnosis.json",
+        "atmosphere/snow/results/turbulence.json"
       ]
     }
   ]

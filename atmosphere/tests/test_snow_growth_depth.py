@@ -6,6 +6,7 @@ import pytest
 from atmosphere.snow import flakes as sf, growth_depth as gd, population as pop
 from atmosphere.snow.habits import GEOMETRIES
 from shared.provenance import constants_changed
+from shared.baselines import recorded_file
 
 
 def test_depth_cases_isolate_cloud_top_without_changing_water_supply_or_geometry():
@@ -48,9 +49,9 @@ def test_committed_depth_product_keeps_full_provenance_and_case_identity():
     assert not constants_changed(product['producer']['constants'])
     assert {r['id'] for r in product['runs']} == {r['id'] for r in gd.cases()}
     for path, expected in product['producer']['files'].items():
-        assert pop.sha(gd.ROOT/path) == expected, path
+        assert pop.sha(recorded_file(path, expected)) == expected, path
     for path, expected in product['producer']['inputs'].items():
-        assert pop.sha(gd.ROOT/path) == expected, path
+        assert pop.sha(recorded_file(path, expected)) == expected, path
     for row in product['runs']:
         assert row['cloud_depth_m'] > 0
         assert abs(row['mass_ledger_kg_m2']['relative_residual']) < 1e-10

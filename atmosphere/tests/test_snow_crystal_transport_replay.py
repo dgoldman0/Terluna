@@ -10,6 +10,7 @@ import math
 from pathlib import Path
 
 import pytest
+from atmosphere.rain import recovered
 from atmosphere.snow import crystal_transport_replay as replay
 
 
@@ -199,7 +200,11 @@ def test_product_identity_includes_thermodynamics_and_shared_constant_inputs(mon
     assert result['source_verification']=={'fixture':'verified'}
 
 
-def test_fixed_source_schmidt_changes_only_jw_ventilation_and_not_physical_air():
+def test_fixed_source_schmidt_changes_only_jw_ventilation_and_not_physical_air(monkeypatch):
+    # The replay is a 22 October diagnosis built with the rain solver of that time, whose Chapman-Enskog diffusivity
+    # put the air's Schmidt number near 0.73 at -5.3 C; with Massman's measured fit it is near 0.61, below the fixed
+    # 0.63. The test checks the product's own physics, the solver it was built with (shared/baselines.py).
+    monkeypatch.setattr(replay,'drops',recovered.baseline())
     state=replay.air_state(-5.3)
     nominal=replay.diagnostics(-5.3,10.,'hexagonal_prism','JW',state)
     fixed=replay.diagnostics(-5.3,10.,'hexagonal_prism','JW',state,jw_schmidt=.63)
@@ -216,7 +221,8 @@ def test_schmidt_override_cannot_be_silently_applied_to_another_control():
         replay.diagnostics(-5.3,10.,'hexagonal_prism','diffusion',replay.air_state(-5.3),jw_schmidt=.63)
 
 
-def test_fixed_schmidt_replay_keeps_initial_mass_geometry_and_air():
+def test_fixed_schmidt_replay_keeps_initial_mass_geometry_and_air(monkeypatch):
+    monkeypatch.setattr(replay,'drops',recovered.baseline())   # the solver the replay was built with (above)
     nominal=replay.replay(-5.3,'hexagonal_prism','JW',1e-9)
     fixed=replay.replay(-5.3,'hexagonal_prism','JW',1e-9,jw_schmidt=.63)
     assert nominal['complete'] and fixed['complete']

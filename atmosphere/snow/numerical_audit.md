@@ -58,3 +58,9 @@ python -m pytest -q atmosphere/tests/test_snow_numerical_audit.py
 ```
 
 `--skip-heavy` runs only the short controls. The focused checks cover deterministic arithmetic counterexamples, collision-free area normalization of outputs and observers, unchanged random sequencing, product identities and extensive moments, and exact heavy-case replay. No aggregation, population or geometry implementation was modified for this audit.
+
+**Provenance, 25 October 2026.** [results/numerical_audit.json](results/numerical_audit.json) was built with the rain
+solver as it stood before 25 October, whose Chapman–Enskog vapour diffusivity stood 17.6% below Massman's (1998)
+measured value. It keeps its values; its record names `atmosphere/rain/drops.py` at that solver's hash, kept byte for
+byte as [atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and its identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).

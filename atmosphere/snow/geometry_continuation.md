@@ -19,3 +19,9 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m atmosphere.snow.geometry_cont
 The supplied ice totals differ because the same maximum vapour supply does not force every layer to consume all of it. The continued geometry deposits 253.41 kg/m² over the full run, versus 306.33 kg/m² for the baseline; injected ice remains 7.2866 kg/m². Upper-domain exit falls from 189.34 to 37.07 kg/m², while freezing-level exit rises from 114.21 to 214.31 kg/m². Its relative water-ledger residual is 7.74 × 10⁻¹². These are full-run budgets; the reported snowfall flux uses the separate gathering interval.
 
 This response follows several coupled consequences of the mass–size change. At fixed mass and area ratio, the inherited drag calculation keeps Reynolds number unchanged while a smaller diameter raises fall speed. Diffusional capacitance and encounter area decrease, and collision speeds and chipping energies change. The control therefore isolates the chosen geometry assumption, with all those consequences retained. It does not isolate aggregation alone. The surviving distribution’s 99th percentile lies on the upper resolved pivot, so its apparently large quantiles cannot be interpreted as evidence that this geometry produces larger real flakes. Independent convergence and physical calibration remain outstanding.
+
+**Provenance, 25 October 2026.** [results/geometry_continuation.json](results/geometry_continuation.json) was built with
+the rain solver as it stood before 25 October, whose Chapman–Enskog vapour diffusivity stood 17.6% below Massman's
+(1998) measured value. It keeps its values; its record names `atmosphere/rain/drops.py` at that solver's hash, kept byte
+for byte as [atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and its identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).

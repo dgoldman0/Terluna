@@ -7,6 +7,7 @@ import pytest
 
 from atmosphere.snow import repair
 from shared.provenance import constants_changed
+from shared.baselines import recorded_file
 
 
 def test_changed_column_input_is_rejected_before_running():
@@ -26,7 +27,7 @@ def test_published_repair_preserves_model_identity_and_arriving_moments():
     for row in product['runs']:
         for key in ('files','inputs'):
             for path,expected in row['producer'][key].items():
-                assert repair.sha(repair.ROOT/path)==expected,path
+                assert repair.sha(recorded_file(path,expected))==expected,path
         assert not constants_changed(row['producer']['constants'])
         mass=np.asarray(row['arriving_mass_pivots_kg'])
         number=np.asarray(row['arriving_numbers_m2'])

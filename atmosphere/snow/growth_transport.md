@@ -56,3 +56,9 @@ OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest atmosphere/tes
 Mass conservation alone permits a badly broadened growth distribution. Repeatedly moving fixed pivots a short distance and immediately projecting them back would recover the same first-order spreading as the timestep tends to zero. A useful transport repair must reduce that spatial error and pass this characteristic comparison, alongside positivity and the vapour ledger, before its full-column populations are interpreted.
 
 The retained collision law remains a separate issue. Fixed mass–size and area assumptions give superlinear large–small collection in their unbounded asymptote, and the installed chipping law does not erode a larger collector during encounters with smaller particles. This box measures neither that amplification nor its competition with settling and fragmentation. It establishes a significant numerical growth-transport deficiency that should be controlled before attributing the coupled runaway to physical closure alone.
+
+**Provenance, 25 October 2026.** [results/growth_transport.json](results/growth_transport.json) was built with the rain
+solver as it stood before 25 October, whose Chapman–Enskog vapour diffusivity stood 17.6% below Massman's (1998)
+measured value. It keeps its values; its record names `atmosphere/rain/drops.py` at that solver's hash, kept byte for
+byte as [atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and its identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).

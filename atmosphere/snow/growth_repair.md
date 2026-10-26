@@ -54,3 +54,9 @@ The subsequent [collision and moist-exposure analysis](collision_and_exposure.md
 ## Verification
 
 The [check record](results/growth_repair_checks.json) distinguishes software checks from scientific evidence. The full repository `make check` passed during this repair, with 2,943 Python tests passed, 20 skipped and 191 JavaScript tests passed. That run preceded the later geometry, collision, export and Earth additions. After those additions, all 207 snow tests passed; the expanded layer check covered 1,192 tracked and untracked source files with no violations. The retained-file check verified 110 files and five protection-input hashes. Saved-product tests check numerical ledgers, native arrays and source identities without rerunning the long columns. The growth comparison figure was visually inspected and reproduced byte for byte. These activities establish numerical and artifact integrity within their stated scope; the failed lunar domain controls and remaining Earth discrepancies retain their scientific limits.
+
+**Provenance, 25 October 2026.** [results/growth_repair.json](results/growth_repair.json) was built with the rain solver
+as it stood before 25 October, whose Chapman–Enskog vapour diffusivity stood 17.6% below Massman's (1998) measured
+value. It keeps its values; its record names `atmosphere/rain/drops.py` at that solver's hash, kept byte for byte as
+[atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and its identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).

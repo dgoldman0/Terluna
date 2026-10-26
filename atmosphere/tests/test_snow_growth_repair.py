@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import numpy as np
 import pytest
+from shared.baselines import recorded_file
 
 ROOT=Path(__file__).resolve().parents[2]
 
@@ -15,7 +16,7 @@ def test_saved_growth_repair_controls_keep_identity_and_water_budgets():
     for row in product['cases']+product['references']:
         for group in ('files','inputs'):
             for path,expected in row['producer'][group].items():
-                assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==expected
+                assert hashlib.sha256(recorded_file(path,expected).read_bytes()).hexdigest()==expected
         ledger=row['mass_ledger_kg_m2']
         source=ledger['injected']+ledger['deposited']
         exits=ledger['lower_domain_exit']+ledger['upper_domain_exit']

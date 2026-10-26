@@ -5,6 +5,7 @@ import pytest
 from atmosphere.snow import aggregation as ag, flakes as sf
 from atmosphere.snow.habits import GEOMETRIES
 from atmosphere.snow.population import histogram, distribution, arriving_distribution, CloudSamples, ArrivalHistory
+from shared.baselines import recorded_file
 
 
 def test_binning_preserves_number_mass_area_and_flux_without_median_shortcut():
@@ -73,9 +74,9 @@ def test_committed_population_preserves_input_identity_and_extensive_moments():
     assert product['schema'] == pop.SCHEMA
     assert not constants_changed(product['producer']['constants'])
     for path, expected in product['producer']['files'].items():
-        assert pop.sha(pop.ROOT/path) == expected, path
+        assert pop.sha(recorded_file(path, expected)) == expected, path
     for path, expected in product['producer']['inputs'].items():
-        assert pop.sha(pop.ROOT/path) == expected, path
+        assert pop.sha(recorded_file(path, expected)) == expected, path
     assert {r['id'] for r in product['runs']} == {r['id'] for r in pop.cases()}
     for run in product['runs']:
         assert abs(run['mass_ledger_kg_m2']['relative_residual']) < 1e-10

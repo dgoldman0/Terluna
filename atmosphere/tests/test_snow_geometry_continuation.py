@@ -7,6 +7,7 @@ import pytest
 from atmosphere.snow import flakes as sf, geometry_continuation as gc
 from atmosphere.snow.column_experiments import solve_column
 from atmosphere.snow.sectional import seed_distribution
+from shared.baselines import rebased
 
 
 def test_control_preserves_baseline_mass_pivots_and_seed_distribution():
@@ -72,7 +73,7 @@ def test_completed_product_is_bound_and_native_arrays_close_budget():
         pytest.skip('The full geometry sensitivity has not completed')
     result = json.loads(gc.OUT.read_text())
     _, binding = sf.moon_column()
-    assert result['producer'] == gc.identity(binding)
+    assert result['producer'] == rebased(gc.identity(binding), result['producer'])
     assert result['specification'] == gc.SPECIFICATION
     native = result['native_arrays']
     masses = np.asarray(native['masses_kg'])

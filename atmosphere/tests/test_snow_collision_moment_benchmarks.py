@@ -4,6 +4,7 @@ import json
 import numpy as np
 import pytest
 from atmosphere.snow import collision_moment_benchmarks as b
+from shared.baselines import recorded_file
 
 
 def test_empirical_distance_checks_both_sides_of_atoms():
@@ -40,7 +41,7 @@ def test_saved_candidate_sources_and_closed_bath_ledgers():
         product=json.loads((b.ROOT/f'atmosphere/snow/results/collision_moment_{case}.json').read_text())
         for kind in ('files','inputs'):
             for path,sha in product['producer'][kind].items():
-                assert hashlib.sha256((b.ROOT/path).read_bytes()).hexdigest()==sha
+                assert hashlib.sha256(recorded_file(path,sha).read_bytes()).hexdigest()==sha
         for run in product['runs']:
             for row in run['snapshots']:
                 if case=='bath':

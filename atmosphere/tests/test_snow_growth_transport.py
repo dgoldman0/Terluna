@@ -8,6 +8,7 @@ import pytest
 from atmosphere.snow import growth_transport as gt
 from atmosphere.snow.habits import GEOMETRIES
 from shared.provenance import constants_changed
+from shared.baselines import recorded_file
 
 
 def test_constant_growth_characteristics_and_grid_poisson_distribution():
@@ -88,7 +89,7 @@ def test_growth_product_binds_inputs_and_quantifies_time_reference_controls():
     assert product['schema'] == gt.SCHEMA
     for category in ('files', 'inputs'):
         for path, expected in product['producer'][category].items():
-            assert gt.sha(gt.ROOT/path) == expected, path
+            assert gt.sha(recorded_file(path, expected)) == expected, path
     assert not constants_changed(product['producer']['constants'])
     assert all(row['passed'] for row in product['controls']['reference'])
     assert all(row['passed'] for row in product['controls']['time'].values())

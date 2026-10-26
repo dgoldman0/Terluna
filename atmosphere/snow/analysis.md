@@ -248,3 +248,9 @@ The population caches case outputs in ignored `research/runs/snow_population`, b
 The [four-panel overview](../../visualization/snow/generated/overview.png) compares the raw distributions, optical-area weighting, conditioned winds and incident light. Its [renderer and provenance rules](../../visualization/snow/README.md) preserve the off-scale tail in the normalization and identify the separate input calculations. The PNG was visually inspected for labels, scaling, clipping and qualification placement; the SVG was checked as XML with embedded provenance, without a separate SVG rendering review.
 
 The final focused suite passed **65 tests**. Layer checks covered tracked and new source files with no violations, the research integrity and numerical checks passed, and the legacy moderate and heavy summaries reproduced the stored baseline exactly. [The check record](results/checks.json) gives commands, hashes and scope. These checks establish implementation and provenance evidence; they do not resolve the demonstrated failure of the heavy size distribution. The full `make check` suite was not run, and no commit was made.
+
+**Provenance, 25 October 2026.** [results/growth_depth.json](results/growth_depth.json) was built with the rain solver
+as it stood before 25 October, whose Chapman–Enskog vapour diffusivity stood 17.6% below Massman's (1998) measured
+value. It keeps its values; its record names `atmosphere/rain/drops.py` at that solver's hash, kept byte for byte as
+[atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and its identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).

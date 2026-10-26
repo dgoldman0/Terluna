@@ -5,6 +5,7 @@ import json
 import pytest
 
 from atmosphere.snow import assessment as a
+from shared.baselines import recorded_file
 
 
 def fixture():
@@ -56,16 +57,26 @@ def test_reassessment_rejects_changed_original_metadata_even_when_runs_are_uncha
         a.assess(json.dumps(changed).encode(),audit,{}, {})
 
 
+def current(product):
+    """assessment.verify_current, reading a baselined file's kept copy where the product recorded it
+    (shared/baselines.py): the audited products were built with the rain solver of 24 October."""
+    from shared.provenance import constants_changed
+    for group in ('files','inputs'):
+        for path,expected in product['producer'][group].items():
+            assert a.digest(recorded_file(path,expected).read_bytes())==expected,path
+    assert not constants_changed(product['producer']['constants'])
+
+
 def test_published_assessments_bind_current_audit_and_unchanged_payloads():
     for relative in a.TARGETS:
         path=a.ROOT/relative
         if not path.exists() or 'numerical_assessment' not in json.loads(path.read_bytes()):
             pytest.skip('Both final population assessments have not been produced')
     audit_raw=(a.ROOT/a.AUDIT).read_bytes();audit=json.loads(audit_raw)
-    a.verify_current(audit)
+    current(audit)
     for relative in a.TARGETS:
         raw=(a.ROOT/relative).read_bytes();product=json.loads(raw)
-        a.verify_current(product)
+        current(product)
         review=product['numerical_assessment']
         assert review['audit']==dict(path=a.AUDIT,sha256=a.digest(audit_raw))
         assert review['assessor']==dict(path=a.SELF,sha256=a.digest((a.ROOT/a.SELF).read_bytes()))

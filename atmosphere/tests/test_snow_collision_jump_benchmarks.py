@@ -6,6 +6,7 @@ import pytest
 from scipy.special import gammaincc
 from atmosphere.snow import collision_jump_benchmarks as b
 from shared.provenance import constants_changed
+from shared.baselines import recorded_file
 
 
 def product(case):
@@ -18,7 +19,7 @@ def test_saved_controls_bind_current_sources_and_complete_requested_variations(c
     assert p['schema']==b.SCHEMA
     for group in ('files','inputs'):
         for name,digest in p['producer'][group].items():
-            assert hashlib.sha256((b.ROOT/name).read_bytes()).hexdigest()==digest
+            assert hashlib.sha256(recorded_file(name,digest).read_bytes()).hexdigest()==digest
     assert not constants_changed(p['producer']['constants'])
     assert p['requested_controls']==b.controls(case)
     assert [r['settings'] for r in p['runs']]==p['requested_controls']

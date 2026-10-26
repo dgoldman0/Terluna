@@ -5,6 +5,7 @@ import numpy as np
 import pytest
 
 from atmosphere.snow import collision_reference as c, flakes as sf
+from shared.baselines import recorded_file
 
 
 def test_two_particles_have_exact_waiting_time_and_mass_sum():
@@ -111,7 +112,7 @@ def test_saved_product_identities_populations_and_ledgers():
     assert product['schema'] == c.SCHEMA
     for key in ('files', 'inputs'):
         for path, expected in product['producer'][key].items():
-            assert hashlib.sha256((c.ROOT/path).read_bytes()).hexdigest() == expected
+            assert hashlib.sha256(recorded_file(path, expected).read_bytes()).hexdigest() == expected
     for grid in product['capture']['fixed_pivot']:
         mass = np.array(grid['mass_pivots_kg'])
         for row in grid['snapshots']:

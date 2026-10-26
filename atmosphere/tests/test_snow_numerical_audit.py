@@ -6,6 +6,7 @@ import pytest
 
 from atmosphere.snow import aggregation as ag, flakes as sf, numerical_audit as audit
 from atmosphere.snow.habits import GEOMETRIES
+from shared.baselines import recorded_file
 
 
 def test_exhausted_pair_demonstrates_nonhomogeneity_without_losing_mass():
@@ -77,7 +78,7 @@ def test_audit_product_identity_moments_and_nonempty_controls():
     assert not constants_changed(product['producer']['constants'])
     for key in ('files','inputs'):
         for path,digest in product['producer'][key].items():
-            assert audit.sha(audit.ROOT/path)==digest,path
+            assert audit.sha(recorded_file(path,digest))==digest,path
     assert len(product['runs'])==6
     for run in product['runs']:
         assert run['arriving_packet_count']>0

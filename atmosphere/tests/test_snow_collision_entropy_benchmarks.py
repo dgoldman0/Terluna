@@ -4,6 +4,7 @@ import json
 import numpy as np
 import pytest
 from atmosphere.snow import collision_entropy_benchmarks as b
+from shared.baselines import recorded_file
 
 
 def test_physical_bath_control_starts_from_exact_imposed_collector():
@@ -32,7 +33,7 @@ def test_saved_entropy_control_identity_and_accounting(case):
     assert product['schema']==b.SCHEMA
     for kind in ('files','inputs'):
         for source,digest in product['producer'][kind].items():
-            assert hashlib.sha256((b.ROOT/source).read_bytes()).hexdigest()==digest
+            assert hashlib.sha256(recorded_file(source,digest).read_bytes()).hexdigest()==digest
     assert not constants_changed(product['producer']['constants'])
     complete=product['execution_failure'] is None and len(product['runs'])==len(product['requested_controls'])
     assert product['acceptance']['all_requested_controls_completed']==complete

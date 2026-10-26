@@ -122,6 +122,15 @@ The calibration is the Earth benchmark result. The lunar runs, and the uncertain
 improved component, the only part of the model that runs through a lunar column; its Earth errors are the larger of the
 two, so the band it sets is the wider.
 
+The component diffuses vapour by Pruppacher and Klett's fit, 0.211 cm²/s at 0 °C and 1 atm, rising as the 1.94 power of
+temperature and falling inversely with pressure (McSnow's `diffusivity_vapour`). It stands 3.4% below Massman's (1998)
+measured fit at −5 °C and 4.6% below it at −30 °C, where Massman's fit is extended below its 0–100 °C data, and that gap
+belongs to the component's stated uncertainty. In the lunar builds the patch that sets McSnow's surface pressure to the
+freezing level's, 659 hPa, also sets that fit's 1 atm reference, so every lunar McSnow run before 25 October diffused
+vapour at 0.651 of the fit at every height. Where diffusion limits growth, lunar crystals then grew at 0.68–0.79 of the
+fit's rate, slowest in the coldest air; the Earth builds keep the 1 atm reference, so the calibration and the data-sized
+check are unaffected.
+
 Before the freeze, the component's −14.4 °C dendrite carried 26% too much mass at 30 minutes against Takahashi and
 co-authors' (1991) fitted laboratory history, with a span 35% too wide and a thickness 17.5% too thin; its −5.3 °C
 column grew too short, 31% below the fitted length at the fitted mass ([shape diagnosis](mcsnow_shape_diagnosis.md)).
@@ -156,6 +165,20 @@ the history below links the rest. Material the work kept in the laptop's /tmp un
 project-space drive and reached through the ignored link `research/runs/snow_tmp_copy`;
 [results/tmp_relocation.json](results/tmp_relocation.json) maps each /tmp path a committed record names to its copy and
 hash, and lists the 52 transient paths the copy does not hold. New work keeps nothing it needs in /tmp.
+
+Thirty-three products of 21–24 October were built with the rain solver as it stood before 25 October, whose
+Chapman–Enskog vapour diffusivity stood 17.6% below Massman's (1998) measured value, which the solver has taken since:
+the collision benchmarks and their checks (`collision_entropy_*`, `collision_jump_*`, `collision_moment_*`,
+`collision_reference`), the column diagnoses (`column_diagnosis*`), the event column (`event_column*`,
+`event_closed_boxes`), the SCALE comparisons (`scale_crystal_growth`, `scale_growth_benchmarks`,
+`scale_growth_controls`, `scale_lunar_comparison`, `scale_separation`, `scale_size_diagnosis`),
+`crystal_transport_replay`, `geometry_continuation`, `growth_depth`, `growth_repair`, `growth_transport`,
+`kernel_diagnostics`, `limited_growth`, `numerical_audit`, `optics`, `population`, `repair` and `turbulence`. The
+current standing rests on none of them. They keep their values; their records name `atmosphere/rain/drops.py` at that
+solver's hash, kept byte for byte as
+[atmosphere/rain/baseline/drops_2026-10-24.py](../rain/baseline/drops_2026-10-24.py) and listed in
+`research/provenance.json`, and their identity checks read that copy ([shared/baselines.py](../../shared/baselines.py)).
+The flake product of 20 October and the aggregation baseline were rebuilt with the corrected solver.
 
 | File | What it holds |
 |---|---|
@@ -204,7 +227,8 @@ It grows from the vapour by diffusion to a capacitance of 0.25 D (Westbrook, Hog
 Hall and Pruppacher (1976) give it for ice, against Murphy and Koop's (2005) saturation over ice and supercooled water.
 Below the freezing level it melts by the heat it takes from the air less what its wet surface's evaporation carries
 away (Pruppacher and Klett 2010, chapter 16), at the same capacitance and ventilation. The air's viscosity,
-conductivity and vapour diffusivity are the raindrop solver's (`drops.transport`) for each world's air.
+conductivity and vapour diffusivity are the raindrop solver's (`drops.transport`) for each world's air, the
+diffusivity Massman's (1998) measured fit since 25 October.
 
 A winter column is a straight temperature profile through the freezing level, its pressure hydrostatic:
 
@@ -238,8 +262,8 @@ air. From each cloud top down to the freezing level:
 | −15 °C | 16.3 km; 11,851 kg/m² | 8.5 hours | 2.3 km; 2,226 kg/m² | 0.45 hours |
 | −20 °C | 21.7 km; 15,089 kg/m² | 11.1 hours | 3.1 km; 2,856 kg/m² | 0.59 hours |
 
-**So snow grows far more.** A 0.2 mm crystal crossing the cloud gains from the vapour alone 2.2, 12.5 and 43 mg on the
-Moon from the three tops, against 0.010, 0.025 and 0.049 mg on Earth: 200–900 times the mass, as a growing crystal
+**So snow grows far more.** A 0.2 mm crystal crossing the cloud gains from the vapour alone 2.5, 14.8 and 53 mg on the
+Moon from the three tops, against 0.011, 0.029 and 0.058 mg on Earth: 200–900 times the mass, as a growing crystal
 grows faster the larger it is. With five times the air in the cloud, a flake also has about five times the cloud's
 small crystals to sweep up at one mixing ratio. A single flake sweeping a cloud that never runs out grows without
 bound; how large flakes grow in a whole population, with a breakup law, follows below.
@@ -249,13 +273,13 @@ melt slowly. Where all of a flake's ice has melted, metres below the freezing le
 
 | Flake | Moon, air at 90% | Moon, at 70% | Earth, at 90% | Earth, at 70% |
 |---|---|---|---|---|
-| 2 mm | 1,045 | 2,849 | 228 | 450 |
-| 5 mm | 1,137 | 2,942 | 266 | 489 |
-| 1 cm | 1,212 | 3,019 | 297 | 522 |
-| 2 cm | 1,294 | 3,103 | 332 | 557 |
+| 2 mm | 1,119 | 3,119 | 237 | 487 |
+| 5 mm | 1,209 | 3,211 | 274 | 525 |
+| 1 cm | 1,284 | 3,287 | 306 | 557 |
+| 2 cm | 1,364 | 3,370 | 340 | 592 |
 
 In drier air a flake's own evaporation keeps its surface below freezing for longer. The sky winter's snowfall is a
-band kilometres deep: snow forming in a cloud above the freezing level reaches decks 1–3 km below it.
+band kilometres deep: snow forming in a cloud above the freezing level reaches decks 1.1–3.4 km below it.
 
 ## How large flakes grow (20 October, superseded)
 
@@ -283,21 +307,21 @@ flake landing at least once an hour on each square metre:
 
 | Snowfall | Crystals | Moon: median; 99% below; largest hourly | Earth: median; 99% below; largest hourly |
 |---|---|---|---|
-| 0.3 mm/h | 10 a litre | 10; 34; 50 mm | 0.7; 1.2; 1.5 mm |
-| 0.3 mm/h | 100 a litre | 18; 63; 86 mm | 0.5; 1.4; 2.0 mm |
-| 1 mm/h | 10 a litre | 51; 152; 197 mm | 0.9; 1.8; 2.3 mm |
-| 1 mm/h | 100 a litre | 61; 179; 225 mm | 0.9; 2.5; 5.4 mm |
-| 3 mm/h | 10 a litre | 141; 387; 518 mm | 0.9; 1.8; 2.2 mm |
-| 3 mm/h | 100 a litre | 147; 468; 600 mm | 1.7; 9.2; 20 mm |
+| 0.3 mm/h | 10 a litre | 10; 34; 52 mm | 0.7; 1.3; 1.4 mm |
+| 0.3 mm/h | 100 a litre | 18; 64; 96 mm | 0.6; 1.5; 2.2 mm |
+| 1 mm/h | 10 a litre | 51; 151; 195 mm | 0.9; 1.9; 2.4 mm |
+| 1 mm/h | 100 a litre | 61; 184; 233 mm | 0.8; 3.1; 4.5 mm |
+| 3 mm/h | 10 a litre | 142; 436; 572 mm | 0.9; 1.9; 2.4 mm |
+| 3 mm/h | 100 a litre | 145; 526; 662 mm | 1.8; 7.2; 18 mm |
 
-The snowfall is in millimetres of water an hour. On Earth 10 crystals a litre take up only 0.54 mm/h of the cloud's
-vapour in the two heavier cases, the rest left unused; the arriving snow also counts the crystals' own mass entering
-the top, about 0.4 mm/h at 100 a litre on Earth.
+The snowfall is in millimetres of water an hour. On Earth 10 crystals a litre take up only 0.61–0.62 mm/h of the cloud's
+vapour in the two heavier cases, the rest left unused; the arriving snow also counts the crystals' own mass entering the
+top, about 0.4 mm/h at 100 a litre on Earth.
 
-- **The breakup law does not cap the flakes.** With it and without it the sizes agree within 10–25%, and not always
-  smaller with it. Phillips's law chips small fragments off the smaller particle when a meeting does not stick, which
-  feeds the cloud more small crystals but splits no large flake. On both worlds the flakes' size is set by the
-  snowfall's water and the time the snow takes to fall.
+- **The breakup law does not cap the flakes.** With it and without it the medians agree within 11% and the upper sizes
+  within 40%, and not always smaller with it. Phillips's law chips small fragments off the smaller particle when a
+  meeting does not stick, which feeds the cloud more small crystals but splits no large flake. On both worlds the
+  flakes' size is set by the snowfall's water and the time the snow takes to fall.
 - **Lunar flakes grow 15–90 times the size of Earth's at the same settings:** a centimetre or two in light
   snow, 5–15 cm in moderate snow and tens of centimetres in heavy snow. The smallest crystals take 1–1.5 days to fall
   through the Moon's 16 km of cloud against about an hour on Earth, in a model whose sticking probability depends on temperature and whose encounters use differential settling alone.
