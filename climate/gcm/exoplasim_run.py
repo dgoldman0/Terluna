@@ -59,7 +59,9 @@ reads the lakes surface built from the geography domain's current routing (bound
 start. Since 2026-10-26 --levels l14 runs PlaSim on fourteen levels with more of them near the ground (levels.py), its
 restart carried there by levels.py's conservative remap and its twilight terms, longwave correction and cold cloud's
 factors on those levels, and --sbm-shallow-cap holds a shallow cloud's top within the depth test's threshold of its own
-base in place of PlaSim's 700 hPa (SBM_CAP_PATCHES); without either a run is as before.
+base in place of PlaSim's 700 hPa (SBM_CAP_PATCHES); without either a run is as before. --levels l15 adds a thin bottom
+layer, the ground to 0.6 km, to the fourteen, and --longwave-fit l15_provisional gives a run on it the longwave
+correction refitted on its own levels' columns.
 """
 from __future__ import annotations
 import argparse
@@ -1356,9 +1358,13 @@ TWILIGHT_PRODUCT = TWILIGHT_LEDGERS['301k']
 SLANT_PRODUCT = TWILIGHT_LEDGERS['294.9k']
 # The longwave by height (plasim_longwave.py): fitted on the design case's columns near 295 K, and refitted on 19 October
 # on the columns of the 20-year test with the correction as it passed 301.2 K (its year 2), since the first does not hold
-# there (longwave_check_301k.json); new runs with --longwave-correction take the refit.
+# there (longwave_check_301k.json); new runs with --longwave-correction take the refit. 'l15_provisional' (2026-10-26) is
+# the correction refitted on the 15-level month trial's own cloud-free columns (plasim_longwave.py refit), for tests on
+# those levels until the configuration chosen for a long run is refitted; a run on another set refuses it.
 LONGWAVE_FITS = {'301k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_lw_ice.json',
-                 '295k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json'}
+                 '295k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json',
+                 'l15_provisional': ROOT / 'climate' / 'results' / 'gcm'
+                 / 'longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json'}
 LONGWAVE_PRODUCT = LONGWAVE_FITS['301k']
 GASES_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_gases.json'
 GAS_ORDER = ('co2_nir', 'o2_nir', 'o2_vis')                     # PlaSim's ZGASQ columns
@@ -1606,8 +1612,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if top_infrared is not None:
         cfg['top_infrared_w_m2'] = dict(day=float(top_infrared[0]), night=float(top_infrared[1]))
     if longwave_correction:
-        fit = LONGWAVE_FITS[longwave_fit]
-        fit = fit if level_set == lv.DEFAULT else levels_product(fit, level_set)
+        fit = longwave_product(longwave_fit, level_set, half.size)
         product = json.loads(fit.read_text())
         cfg['longwave_correction'] = dict(product=str(fit.relative_to(ROOT)),
                                           sha256=hashlib.sha256(fit.read_bytes()).hexdigest()[:16],
@@ -1689,6 +1694,22 @@ def levels_product(product: Path, level_set: str) -> Path:
     if not path.exists():
         raise FileNotFoundError(f'{path.relative_to(ROOT)} is missing: the script that wrote {product.name} writes it for '
                                 f'level set {level_set} (twilight.py levels, plasim_longwave.py levels)')
+    return path
+
+
+def longwave_product(longwave_fit: str, level_set: str, layers: int) -> Path:
+    """The longwave correction a run on level_set reads (LONGWAVE_FITS): a fit made on that set's own columns as it
+    is, a fit on PlaSim's ten levels carried onto the set (levels_product); a fit made on another set is refused, and
+    so is a correction without a value for each of the run's layers and the ground."""
+    fit = LONGWAVE_FITS[longwave_fit]
+    product = json.loads(fit.read_text())
+    own = product.get('levels', {}).get('name', lv.DEFAULT)                  # the set the fit was made on
+    if own != level_set and own != lv.DEFAULT:
+        raise ValueError(f'{fit.name} was fitted on level set {own}, and the run takes level set {level_set}')
+    path = fit if own == level_set else levels_product(fit, level_set)
+    correction = json.loads(path.read_text())['correction']
+    if any(len(correction[k]) != layers + 1 for k in ('land', 'sea', 'tref')):
+        raise ValueError(f'{path.name} does not hold a value for each of {layers} layers and the ground')
     return path
 
 
@@ -2224,7 +2245,8 @@ def main(argv=None) -> int:
                              'run key)')
     parser.add_argument('--longwave-fit', choices=tuple(LONGWAVE_FITS), default='301k',
                         help='which fit --longwave-correction adds: the refit on the 301 K columns (the standard since '
-                             '2026-10-19) or the fit near 295 K the runs of 17 October took (part of the run key)')
+                             '2026-10-19), the fit near 295 K the runs of 17 October took, or l15_provisional, refitted '
+                             'on the 15-level month trial for runs on l15 (part of the run key)')
     parser.add_argument('--ice-optics', action='store_true',
                         help='ice optics for cloud colder than -38 C (plasim_ice_optics.py; part of the run key)')
     parser.add_argument('--ice-weights', choices=('shield', 'stock'), default='shield',
@@ -2258,8 +2280,8 @@ def main(argv=None) -> int:
                              "in place of PlaSim's 700 hPa (SBM_CAP_PATCHES; part of the run key)")
     parser.add_argument('--levels', choices=tuple(lv.LEVEL_SETS), default=lv.DEFAULT,
                         help="PlaSim's levels: its own ten, or a set of levels.py (l14: fourteen, more of them near "
-                             'the ground), which needs a restart on the same levels (levels.py restart; part of the '
-                             'run key)')
+                             'the ground; l15: those and a bottom layer 0.6 km thick), which needs a restart on the '
+                             'same levels (levels.py restart; part of the run key)')
     parser.add_argument('--rain-evaporation', type=float, metavar='GAMMA',
                         help="PlaSim's constant for the evaporation of falling rain and snow (rainmod's gamma, "
                              f'{PLASIM_RAIN_GAMMA} its own; part of the run key)')

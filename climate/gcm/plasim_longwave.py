@@ -6,6 +6,7 @@ height against the atmosphere domain's correlated-k model, which follows the lin
     climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave fit A28_corrected_970_heating --year 0
     climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check    # the correction near 301 K (CHECK_CASES)
     climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave levels --levels l14   # the refit on 14 levels
+    climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave refit RUN --year 0    # refitted on a run's own levels
 
 PlaSim's longwave (plasim/src/radmod.f90, lwr) follows Sasamori (1968): broadband absorptivities of water vapour, its
 continuum (1 - exp(-TH2OC u)), carbon dioxide with the water overlap of Boer et al. (1984), and ozone, each on the
@@ -519,9 +520,58 @@ def levels_product(path: Path, level_set: str) -> dict:
                                                        'gcm/levels.py': digest(Path(lv.__file__), 16)}))
 
 
+REFIT_SCHEMA = 'terluna.climate.gcm-longwave-refit/1'
+
+
+def refit(run, year) -> dict:
+    """The correction alone (fit_correction) refitted on one year of a run's own cloud-free columns, for a run on a
+    level set whose layers the ten-level fits do not describe: the columns as `check` samples and caches them
+    (checked_columns), and each layer's mean error over land and over sea that PlaSim leaves alone, with the run's own
+    correction and with the refit, on those columns and on a sample of every column."""
+    from climate.gcm import levels as lv
+    s = run_settings(run)
+    cfg = json.loads((HERE / 'runs' / run / 'progress.json').read_text())['configuration']
+    level_set = cfg.get('levels', {}).get('name', lv.DEFAULT)
+    half = lv.half_levels(level_set)
+    sigma, clear, clear_files = checked_columns(run, year, None, True)
+    if sigma.size != half.size or not np.allclose(sigma, lv.full_levels(half), atol=5e-6):
+        raise ValueError(f'{run} year {year} is not on its recorded level set {level_set}')
+    _, every, every_files = checked_columns(run, year, CHECK_EVERY['all'], False)
+    correction = fit_correction(sigma, clear, s)
+    residuals = {}
+    for sample, columns in (('cloud_free', clear), ('all', every)):
+        land = np.array([c['land'] > 0.5 for c in columns])
+        row = dict(columns=len(columns))
+        for name, corr in (('plasim', None), ('run_correction', s['correction']), ('refit', correction)):
+            if name == 'run_correction' and corr is None:
+                continue
+            errs, _ = layer_errors(sigma, columns, s, corr)
+            row[name] = {g: error_summary(errs, m) for g, m in (('land', land), ('sea', ~land)) if m.any()}
+        residuals[sample] = row
+    return dict(
+        schema=REFIT_SCHEMA, run=run, year=year, columns=len(clear),
+        levels=dict(name=level_set, half_levels=[float(x) for x in half], full_levels=[float(x) for x in sigma]),
+        correction=correction, residuals=residuals, samples=dict(cloud_free=clear_files, all=every_files),
+        run_correction=None if s['correction'] is None else s['correction'].get('product'),
+        evidence=('The correction refitted on one year of one run, its cloud-free 3-day means on its own levels, with '
+                  'PlaSim\'s clear-sky longwave as a copy of its arithmetic against the atmosphere domain\'s '
+                  'correlated-k model on the same columns, both plane-parallel and without the curved air\'s escape. '
+                  'A refit on a short trial is provisional: the correction of a long run belongs to the configuration '
+                  'chosen for it, refitted on that configuration\'s columns. The cloud-free residuals are in sample; '
+                  'the sample of every column is not.'),
+        reading_rule=('correction reads as the fits\' (W/m2 at tref by layer, the top first and the ground last, scaled '
+                      'by (T / tref)^4) on the level set\'s layers, as the GCM runner reads it. residuals: for the '
+                      'cloud-free columns the refit was made on and for every 193rd column of the year, each layer\'s '
+                      'mean and rms error from the ground (negative cools too much) and the outgoing longwave\'s, over '
+                      'land and over sea, for PlaSim alone, with the correction the run carried and with the refit; '
+                      'largest_layer_mean is the largest of the layers\' means.'),
+        producer=dict(domain='climate', files={f'gcm/{Path(__file__).name}': digest(Path(__file__), 16),
+                                               'gcm/levels.py': digest(Path(lv.__file__), 16)}))
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('action', choices=('validate', 'fit', 'check', 'levels'))
+    parser.add_argument('action', choices=('validate', 'fit', 'check', 'levels', 'refit'))
     parser.add_argument('run', nargs='?')
     parser.add_argument('--year', type=int, default=0)
     parser.add_argument('--every', type=int, default=20)
@@ -543,6 +593,21 @@ def main(argv=None) -> int:
         for key in ('land', 'sea'):
             print(f"{key}: {out['correction'][key]}  (split layers: {out['check'][key]['sums']})")
         print('tref', out['correction']['tref'])
+        print(f'wrote {target.relative_to(HERE.parents[1])}')
+        return 0
+    if args.action == 'refit':
+        if args.run is None:
+            parser.error('refit takes a run')
+        out = refit(args.run, args.year)
+        target = RESULTS / f'longwave_{args.run}_refit.json'
+        target.write_text(json.dumps(out, indent=1) + '\n')
+        for sample, row in out['residuals'].items():
+            for name in ('plasim', 'run_correction', 'refit'):
+                if name in row:
+                    print(f"{sample} ({row['columns']} columns) {name}: largest layer mean "
+                          + ', '.join(f"{g} {row[name][g]['largest_layer_mean']:.2f}" for g in row[name]) + ' W/m2')
+        print('land', out['correction']['land'])
+        print('sea ', out['correction']['sea'])
         print(f'wrote {target.relative_to(HERE.parents[1])}')
         return 0
     if args.action == 'check':

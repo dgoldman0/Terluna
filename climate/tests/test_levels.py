@@ -124,3 +124,42 @@ def test_a_restart_is_carried_onto_the_set_with_its_other_records_untouched(tmp_
         lv.carry_restart(tmp_path / 'odd', tmp_path / 'odd14', a, b)
     with pytest.raises(ValueError):
         lv.carry_restart(dst, tmp_path / 'again', a, b)
+
+
+def test_the_15_level_inputs_split_the_lowest_layers_terms_and_keep_their_sums():
+    import json
+    from climate.gcm import exoplasim_run as er
+    # the twilight terms: the thirteen upper layers as on 14 levels, the two lowest summing to its lowest layer's
+    t14, t15 = (json.loads(er.levels_product(er.TWILIGHT_LEDGERS['301k'], name).read_text()) for name in ('l14', 'l15'))
+    assert np.allclose(t15['levels']['half_levels'], lv.half_levels('l15'), rtol=1e-6, atol=0)   # six figures kept
+    for key in ('gcm_term', 'gcm_term_cone'):
+        a, b = np.array(t15[key]['layers']), np.array(t14[key]['layers'])
+        assert a.shape == (15, b.shape[1])
+        np.testing.assert_allclose(a[:13], b[:13], rtol=0, atol=1e-12)
+        np.testing.assert_allclose(a[13] + a[14], b[13], rtol=1e-4, atol=1e-8)
+    for key in ('curved', 'cone'):
+        a, b = t15['longwave']['gcm_layers'][key], t14['longwave']['gcm_layers'][key]
+        assert len(a) == 15 and abs(sum(a) - sum(b)) < 1e-4 and abs(a[13] + a[14] - b[13]) < 1e-4
+    # the 301 K refit carried from ten levels: a value for each layer and the ground, the split layers' sum kept
+    carried = json.loads(er.levels_product(er.LONGWAVE_FITS['301k'], 'l15').read_text())
+    for key in ('land', 'sea'):
+        assert len(carried['correction'][key]) == 16
+        assert abs(carried['check'][key]['sums'][0] - carried['check'][key]['sums'][1]) < 1e-3
+
+
+def test_the_runner_reads_the_provisional_refit_as_it_is_on_15_levels_and_refuses_it_elsewhere():
+    import json
+    from climate.gcm import exoplasim_run as er
+    path = er.longwave_product('l15_provisional', 'l15', 15)
+    assert path == er.LONGWAVE_FITS['l15_provisional']
+    refit = json.loads(path.read_text())
+    assert refit['levels']['name'] == 'l15' and refit['levels']['half_levels'] == list(lv.half_levels('l15'))
+    assert all(len(refit['correction'][k]) == 16 for k in ('land', 'sea', 'tref'))
+    assert refit['correction']['land'][-1] == 0.0 and refit['correction']['sea'][-1] == 0.0   # the ground's
+    assert er.longwave_product('301k', 'l15', 15).name == 'longwave_A28_corrected_970_lw_ice_l15.json'
+    assert er.longwave_product('301k', lv.DEFAULT, 10) == er.LONGWAVE_FITS['301k']
+    for name, layers in (('l14', 14), (lv.DEFAULT, 10)):
+        with pytest.raises(ValueError):
+            er.longwave_product('l15_provisional', name, layers)
+    with pytest.raises(ValueError):
+        er.longwave_product('301k', 'l15', 14)                     # a layer count other than the correction's
