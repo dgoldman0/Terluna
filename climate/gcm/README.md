@@ -2070,7 +2070,7 @@ undiluted parcel runs to 19–56 km; in the box's night air a cloud mixing at th
 evidence is thin where it counts most: 36 raining steps after midnight in five years, single steps whose columns the
 output does not hold, and the means' columns in their place.
 
-**What it points to** (proposals; nothing is built).
+**What it points to** (proposals of 25 October; the next part builds the first two and tests them).
 - **Decide deep or shallow by the cloud's depth.** The IFS (documentation Cy36r1, 2010, Part IV, section 6.4, read)
   calls a column deep when its test parcel's cloud, from condensation to where its updraught stops, is thicker than
   200 hPa, and shallow below that. If lunar convection is Earth's stretched by the ratio of the gravities, depths in
@@ -2090,6 +2090,170 @@ output does not hold, and the means' columns in their place.
 
 Each of these changes the column a running model builds, so the first response measured here does not show where the
 rain would then fall; a branch would.
+
+**The cloud-depth test and the mixing within layers** (25 October, at the author's approval; `SBM_DEPTH_PATCHES` in
+[exoplasim_run.py](exoplasim_run.py), `deep_pa` and `steps` in [sbm.py](sbm.py),
+[sbm_depth_mixing.json](../results/gcm/sbm_depth_mixing.json); `run_depth_tests.sh` and `sbm_depth_test_analysis.py`
+in `session-tools/agents/climate-scheme` on the research drive). The first two proposals are built as two options of
+the scheme, each off by default and recorded in a run's configuration only when set:
+- **The cloud-depth test** (`--sbm-deep-hpa`; `dpdeep_bm` in Pa). A column convects deep only where the parcel's cloud,
+  from its base to the scheme's top level, is thicker than the threshold; a thinner cloud goes to PlaSim's shallow
+  scheme, which mixes temperature and vapour through the layers it spans and forms no rain. The base is the lifting
+  condensation level, the IFS's cloud base: the pressure at which the lowest level's air, lifted dry adiabatically
+  with its vapour kept, reaches PlaSim's saturation, found by bisection in log pressure. The top is the scheme's own,
+  the last level at which its parcel stays buoyant. The IFS takes the level where its updraught's speed vanishes, at
+  or above the end of the buoyancy, and its test parcel mixes and may start above the lowest level. PlaSim's `pdeep`
+  tests the top's pressure alone, so over high ground, deep basins or a high cloud base one level would mark clouds of
+  different depths; the test is a parameter of its own and `pdeep` stays off.
+- **The mixing within layers** (`--sbm-mixing-steps`; `nsub_bm`, with `--sbm-eps`). The parcel crosses each layer in
+  equal steps of log pressure; each step lifts it dry adiabatically, mixes in its share of the surrounding air,
+  interpolated linearly in log pressure, and condenses the mixture. Over a layer the parcel still exchanges a share
+  1 − exp(−ε ln(p_below/p)) of its air, one step a layer is the scheme as before, and a mixing of 0 never takes the
+  steps.
+
+**The checks** ([test_sbm.py](../tests/test_sbm.py)).
+- **Fortran against Python.** Compiled with ExoPlaSim's own options (`-O3 -fcheck=all -ffpe-trap=invalid,zero,overflow
+  -fdefault-real-8`), the routine gives the Python copy's tendencies and rain to 10⁻¹⁰ on 16 columns with the options
+  on, alone, together and with the CAPE trigger, with the two patches applied in either order, and hands the same
+  columns to the shallow scheme at the same top.
+- **Both options off.** The routine prints every digit the scheme printed before on 25 columns, the CAPE trigger's
+  cases among them, with or without the trigger in the source; 17 significant digits fix every bit.
+- **The patch** applies once to both installed sources, the twilight copy's, which carries the trigger, and
+  ExoPlaSim's own, which has neither patch, with the trigger before it, after it or absent. It goes into a source only
+  for a run that sets either option, as the trigger's does; the first test put it into the twilight copy.
+- **In the GCM.** One year with neither option, `A28R_301k_cold_sbm_rh07_offcheck`, compiled from the twilight copy
+  with the scheme, the trigger and this patch in its source, reproduces the rh 0.7 branch's year 0, whose source held
+  the scheme alone: all 61 output variables and the year's restart file match bit for bit. Runs that set neither
+  option compute as before. The source's hash in their run key is new (`rainmod` aa2a624377cd8b58), so a run begun
+  before the patch cannot resume, as after the trigger's.
+
+**The steps converge at first order.** Against 1,024 steps a layer, the reference's largest error below σ 0.2 halves
+with each doubling of the steps:
+
+| Largest error below σ 0.2 (K), steps a layer | 1 | 2 | 4 | 8 | 16 | 32 | 64 |
+|---|---|---|---|---|---|---|---|
+| The rh 0.7 branch's sea column (years 10–14), mixing 2.4 | 0.98 | 0.55 | 0.30 | 0.15 | 0.08 | 0.04 | 0.02 |
+| The same, mixing 4.8 | 0.77 | 0.48 | 0.27 | 0.14 | 0.07 | 0.04 | 0.02 |
+| CM1's sea box, day 3, on PlaSim's levels, mixing 2.4 | 2.04 | 1.14 | 0.60 | 0.31 | 0.15 | 0.08 | 0.04 |
+| The same, mixing 4.8 | 2.25 | 1.37 | 0.75 | 0.39 | 0.20 | 0.10 | 0.05 |
+
+The tests take 16 steps a layer, which hold the reference within 0.08 K of the limit on the GCM's column and 0.2 K on
+the box's colder one; the top two levels, above the convecting troposphere, keep errors of 0.7 K. In the GCM the 16
+steps cost a quarter more time a year (below).
+
+**On CM1's mean column the integrated reference reproduces the box's air** (the sea box's third lunar day, laid on
+PlaSim's levels at its surface pressure, at box_upper_air's heights; the reference minus the box's air, K):
+
+| At | 18.9 km | 29.8 km | 41.8 km | 55.8 km |
+|---|---|---|---|---|
+| The box's air | 277.18 | 265.39 | 251.49 | 231.76 |
+| Undiluted reference | +3.24 | +5.13 | +5.90 | +6.78 |
+| Mixing 2.4, 16 steps | +1.30 | +1.32 | +0.50 | +0.39 |
+| Mixing 4.8, 16 steps | +0.55 | +0.28 | −0.41 | +0.06 |
+| Mixing 2.4 and 4.8, one step | +1.21, +0.13 | +1.46, +0.16 | +0.62, −0.40 | +0.64, +0.24 |
+| Zero-buoyancy plumes at 0.5 and 1 × 10⁻⁴ m⁻¹ ([box_upper_air.py](../crm/box_upper_air.py)) | +1.72, +0.45 | +2.56, +0.58 | +2.21, −0.66 | +1.97, −1.73 |
+
+At 2.4 the reference lies within 1.3 K of the box's air at 19–56 km and at 4.8 within 0.6 K, where the plumes at the
+matching rates lie within 2.6 and 1.7 K. On this column the steps move the reference by at most 0.4 K at these
+heights; on the GCM's warmer, moister column one step errs by up to 1.0 K below σ 0.2.
+
+**Three two-year tests** (from the design climate's year-19 restart with every flag of the rh 0.7 branch and the depth
+test at 200 hPa: alone, `A28R_301k_cold_sbm_rh07_deep200`; with mixing 2.4, `…_deep200_eps24`; with mixing 4.8,
+`…_deep200_eps48`; the mixing at 16 steps a layer). Each is set beside the rh 0.7 branch over the same years from the
+same restart, and beside the settled CM1 boxes (the sea box's third lunar day, the land box's second). Rain by local
+time, mm/day, over years 0–1 and, after the semicolon, year 1:
+
+| Near-side Sea | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise | Mean |
+|---|---|---|---|---|---|
+| rh 0.7 branch | 0.51; 0.66 | 3.14; 2.68 | 2.61; 1.95 | 2.06; 2.04 | 2.06; 1.81 |
+| Depth test | 0.25; 0.19 | 3.66; 3.15 | 3.07; 2.66 | 1.55; 1.46 | 2.11; 1.85 |
+| Depth test, mixing 2.4 | 0.20; 0.06 | 1.96; 1.44 | 0.94; 0.52 | 0.54; 0.44 | 0.90; 0.60 |
+| Depth test, mixing 4.8 | 0.18; 0.26 | 1.05; 2.04 | 0.58; 0.73 | 0.66; 0.70 | 0.61; 0.92 |
+| CM1 box | 0.00 | 2.23 | 2.97 | 0.14 | 1.34 |
+
+| Land at 0° E | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise | Mean |
+|---|---|---|---|---|---|
+| rh 0.7 branch | 0.95; 0.99 | 14.55; 15.42 | 0.48; 0.65 | 0.14; 0.11 | 4.09; 4.42 |
+| Depth test | 0.80; 0.83 | 15.79; 17.95 | 0.45; 0.47 | 0.06; 0.05 | 4.34; 4.97 |
+| Depth test, mixing 2.4 | 0.60; 0.92 | 16.87; 17.16 | 0.71; 1.06 | 0.02; 0.02 | 4.62; 4.93 |
+| Depth test, mixing 4.8 | 0.35; 0.47 | 27.12; 19.72 | 0.05; 0.06 | 0.06; 0.06 | 7.01; 5.24 |
+| CM1 box | 2.87 | 8.59 | 1.53 | 0.07 | 3.27 |
+
+| Years 0–1 | rh 0.7 branch | Depth test | Mixing 2.4 | Mixing 4.8 | CM1 box |
+|---|---|---|---|---|---|
+| Sea site at 41.8 km; 55.8 km | 260.06; 241.91 K | 259.90; 241.68 | 258.11; 239.58 | 257.85; 239.46 | 251.49; 231.76 |
+| The same in year 1 | 260.30; 242.16 K | 260.06; 241.85 | 258.22; 239.58 | 257.80; 239.35 | |
+| Ground; air at 2 m | 298.85; 299.09 K | 298.46; 298.50 | 300.57; 300.62 | 301.26; 301.43 | |
+| Rain; its convective share | 2.23 mm/day; 94% | 2.18; 94% | 1.95; 95% | 1.87; 91% | |
+| Imbalance at the top of the air | +2.35 W/m² | +1.45 | +2.63 | +2.84 | |
+| Planetary albedo; cloud cover | 0.376; 35.8% | 0.380; 35.4% | 0.360; 33.8% | 0.346; 32.4% | |
+| Cloud effect: sunlight; infrared | −39.4; 50.7 W/m² | −40.5; 50.0 | −34.5; 49.3 | −30.2; 48.4 | |
+| Top two levels: air | 164.30, 193.46 K | 164.29, 192.85 | 163.24, 192.15 | 163.18, 192.46 | |
+| Top two levels: water | 0.021, 3.28 ppmv | 0.022, 2.97 | 0.016, 2.52 | 0.015, 2.61 | |
+
+The global numbers for year 1 alone, and every level of the sea site's column, are in the results file.
+
+**What each change does.**
+- **The depth test** hands the thin clouds to the shallow scheme. The sea's rain after midnight falls by a quarter, to
+  1.55 mm/day (1.46 in year 1), and its morning's by half; all that is left after midnight is convective, so it comes
+  from clouds deeper than 200 hPa. The vapour those clouds held back rains later in the day, about 0.5 mm/day more in
+  each of the sea's afternoon and evening, the evening reaching CM1's 2.97 and the afternoon moving away from CM1's
+  2.23. Over land the afternoon rises to 15.8 mm/day and the night falls to CM1's 0.06–0.07. The upper air moves by
+  0.2 K, the ground runs 0.4 K cooler, and the water at σ 0.119 falls by a tenth.
+- **The mixing** cools the reference aloft. Within two years the sea site's air at 42–56 km cools by 2.0–2.5 K
+  toward the box's, a quarter of the 8.6–10.2 K gap, while the air below 19 km warms by 1.0–3.8 K (σ 0.70–0.98, most
+  at 10 km), so at 18.9 km the gap to the box grows from 5.0 to 5.9 and 6.6 K. The lowest level's vapour at the site
+  rises from 12.1 g/kg to 14.1 and 14.5 (as mixing ratios), against 11.8 in the box's lowest 0.5 km. Convection weakens
+  at the sea at every hour. At 2.4 the sea rains 0.54 mm/day after midnight, 0.20 of it convective, and 0.94 in the
+  evening against CM1's 2.97; at 4.8 its convection stops after midnight and in the morning, and the night's
+  0.66 mm/day comes from large-scale condensation. Over land the afternoon storms grow, to 16.9 and 27.1 mm/day (17.2
+  and 19.7 in year 1) against CM1's 8.6. The evening rises toward CM1's 1.53 at 2.4 (0.71; 1.06 in year 1) and all but
+  stops at 4.8.
+- **The ground warms as the convective cloud thins.** PlaSim draws its convective cloud cover from the convective
+  rain (`mkclouds`: 0.245 + 0.125 ln of the rate in mm/day, spread over the convecting layers). With mixing the cloud
+  cover falls by 2.0 and 3.4 points and the cloud's shading of sunlight by 4.9 and 9.3 W/m², while the ground warms by
+  1.7 and 2.4 K; the thinner cloud as the warming's cause is an inference from these numbers.
+- **The top two levels**, for the exobase check, cool by about 1 K with mixing and hold a quarter less water, 0.015–
+  0.016 ppmv at σ 0.038 against 0.021; the depth test alone leaves σ 0.038 as it was and cools σ 0.119 by 0.6 K.
+
+No test reproduces CM1's day at both sites. The depth test removes the thin clouds' rain and leaves the upper air as it
+was; the mixing moves the upper air toward the box's but takes the sea's evening rain, sharpens the land's afternoon
+and warms the air near the ground. Each test is one realization over the first two years of a spin-up that the branch
+needed 8–10 years to settle, with the imbalance at the top still 1.5–2.8 W/m².
+
+**What the runs cost.** The depth test took 258 and 245 s a year and the run without either option 250 s, beside the
+branch's 270 and 284. At 16 steps the mixing took 326 and 316 s at 2.4 and 314 and 305 at 4.8, a quarter more. The
+machine was shared, so the times are approximate. The four runs hold 1.55 GB on the research drive.
+
+**PlaSim's cap on shallow tops.** The shallow scheme holds its tops at or below the lowest level above 700 hPa
+(`pdeepth`, PlaSim's Earth value). A cloud the depth test hands it could meet that cap only with its base above
+900 hPa. The lowest air of 1.0–1.4% of the cell means is still unsaturated at 900 hPa without the mixing, 4.6% at 2.4
+and 12.8% at 4.8; how many of those columns the depth test sends to the shallow scheme the means do not show.
+
+**What remains.**
+- **The longwave refit.** In the mixing tests the sea site's column cools by up to 2.9 K at 29–72 km and warms by up
+  to 3.8 K at 1–19 km, away from the columns the 301 K refit was fitted on, and on CM1's colder air RRTMG cools
+  35–63 km 17–18 W/m² more than PlaSim's correction. A mixing that is adopted takes a refit of the longwave
+  correction.
+- **The air near the ground.** The GCM's lowest level holds more vapour than the box's, worth 3–4 K aloft, and no
+  mixing setting reaches it; the mixing tests raise it further.
+- **The 15-year run** of any setting is the author's call after this stage.
+
+**Sources.** The IFS documentation (Cy36r1, 2010, Part IV, section 6.4) was read from the text on the research drive
+(`session-tools/agents/climate-explain/ifs_cy36r1_part4.txt`): the LCL as the cloud base, the 200 hPa depth from it to
+where the updraught's speed vanishes, the deep test parcel's mixing and departure levels. The zero-buoyancy plume
+(Singh and O'Gorman 2013) is box_upper_air's calculation and was not read here. PlaSim's own `rainmod.f90` (`kuo`,
+`mkshallow`, `mkclouds`) and ExoPlaSim's compiler options (`most_compiler`) were read in the installed copy.
+
+```sh
+python3 -m pytest climate/tests/test_sbm.py               # with gfortran: the Fortran against Python, the options off
+S=/media/projectspace/terluna-research/session-tools/agents/climate-scheme
+$S/smoke.sh deep200 150                                    # a smoke test of a variant: start, check, stop
+$S/run_depth_tests.sh deep200                              # about 8 minutes on 4 workers; rerun to resume
+$S/run_depth_tests.sh deep200_eps24                        # and deep200_eps48, about 11 minutes each
+$S/run_depth_tests.sh offcheck                             # one year without either option, for the bit check
+climate/gcm/.venv/bin/python $S/sbm_depth_test_analysis.py > $S/sbm_depth_test_analysis.txt   # the results file
+```
 
 ### Cloud amount: what published models say
 
