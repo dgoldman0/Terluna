@@ -14,9 +14,9 @@ ExoPlaSim, the first model installed (2026-09-25).
 | `products/moon_28pct_water_lakes_98842fc2a648f889_{grid}.nc` | The same seas with the lakes of the current routing, from the drainage product with that sha256 prefix; experiment `A28R` reads it |
 | `products/moon_gcm_configuration.json` | Radius, gravity, rotation (synchronous, 27.32 d) and solar day (29.53 d), obliquity 1.54°, solar constant, and pointers to the atmosphere, ozone and shield products |
 | [exoplasim_run.py](exoplasim_run.py) | Runs the ExoPlaSim experiments one simulated year at a time, resumable after any stop |
-| [levels.py](levels.py) | PlaSim's vertical levels: its own ten and the fourteen of `l14`, with more of them near the ground, the namelist a run on them writes, and the conservative remap that carries a restart onto them (`levels.py restart`) |
+| [levels.py](levels.py) | PlaSim's vertical levels: its own ten, the fourteen of `l14`, with more of them near the ground, and the fifteen of `l15`, which add a bottom layer 0.6 km thick; the namelist a run on them writes, and the conservative remap that carries a restart onto them (`levels.py restart`) |
 | [cloud_water.py](cloud_water.py) | Recomputes from a year of output the cloud water PlaSim's radiation sees, layer by layer, as PlaSim has it and with the runner's corrections |
-| [plasim_longwave.py](plasim_longwave.py) | PlaSim's clear-sky longwave column by column, checked against its own heating, and the correction by height fitted to the correlated-k model that the runner's `--longwave-correction` adds (`../results/gcm/longwave_<run>.json`); its `check` sets the correction against correlated-k on states from 295 to 306.6 K (`../results/gcm/longwave_check_301k.json`) |
+| [plasim_longwave.py](plasim_longwave.py) | PlaSim's clear-sky longwave column by column, checked against its own heating, and the correction by height fitted to the correlated-k model that the runner's `--longwave-correction` adds (`../results/gcm/longwave_<run>.json`); its `check` sets the correction against correlated-k on states from 295 to 306.6 K (`../results/gcm/longwave_check_301k.json`), its `levels` carries a ten-level fit onto another level set, and its `refit` refits the correction alone on a run's own levels (`../results/gcm/longwave_<run>_refit.json`) |
 | [plasim_ice_optics.py](plasim_ice_optics.py) | The ice optics the runner's `--ice-optics` gives cloud colder than −38 °C, beside PlaSim's liquid-water optics (`../results/gcm/ice_optics.json`) |
 | [high_cloud.py](high_cloud.py) | How far the top three layers' water and crystal radius could move a run's climate: first-order changes at the top of the air and the ground (`../results/gcm/high_cloud_<run>.json`) |
 | [rain_evaporation.py](rain_evaporation.py) | How much of its falling rain a run evaporates, measured from the rain its schemes form against the rain at the ground, against CM1's lunar rain, and the constant that matches it (`../results/gcm/rain_evaporation.json`) |
@@ -2461,6 +2461,218 @@ climate/gcm/.venv/bin/python $L/levels_test_analysis.py > $L/levels_test_analysi
 climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_cold_sbm_rh07_deep200_l14cap:1 \
     --correction refit_301k_l14=climate/results/gcm/longwave_A28_corrected_970_lw_ice_l14.json \
     --output climate/results/gcm/longwave_check_l14.json                          # about a minute
+```
+
+#### Fifteen levels: a thin bottom layer (26 October)
+
+**Why** (the author's approval of 26 October). The offline mass-flux scheme ([massflux.md](massflux.md)) lifts its
+updraughts from PlaSim's lowest layer, which spans the ground to 1.73 km on both the ten- and the fourteen-level grids.
+That layer averages away the near-ground air CM1's updraughts carry: it holds 1.4–2.3 kJ/kg less moist static energy
+than CM1's air at 50 m. A thin bottom layer hands a scheme that air directly.
+
+**The level set** ([levels.py](levels.py), `l15`). The set keeps every half level of `l14` and adds one at σ 0.9883,
+0.60 km at the 51 km scale height, splitting the lowest layer in two. PlaSim puts each full level midway in σ between
+its half levels, so the lowest level stands at σ 0.99415, 0.30 km, and the next at σ 0.97745, 1.16 km; the thirteen
+levels above them are the fourteen-level set's own.
+
+| Full levels, km at the 51 km scale height, the top first | |
+|---|---|
+| The fourteen | 166, 108, 79, 59, 42, 29, 19.2, 13.5, 10.2, 8.0, 6.0, 4.0, 2.4, 0.86 |
+| The fifteen | 166, 108, 79, 59, 42, 29, 19.2, 13.5, 10.2, 8.0, 6.0, 4.0, 2.4, 1.16, 0.30 |
+| The fifteen on CM1's sea box (its day-3 mean, at equal shares of its surface pressure) | 127, 91, 70, 54, 40, 28, 19.3, 13.7, 10.5, 8.2, 6.2, 4.2, 2.5, 1.21, 0.31 |
+
+With one half level added, 0.3 km is close to the lowest the bottom level can stand while the bottom layer keeps at
+least half the mass of the layer above it, the limit the fourteen-level set kept between neighbours: the limit falls
+at a half level of σ 0.9889 and a lowest level of 0.28 km, and this set's ratio is 0.54. The bottom layer holds about
+850 kg/m² of air, a third of the fourteen-level bottom layer's 2,420 kg/m² and two and a half times what PlaSim's
+lowest layer holds on Earth.
+
+**How PlaSim's surface layer takes the thin layer** (`fluxmod.f90` read in the twilight copy, beside the runs below;
+`surface_layer_check.py` beside the analysis).
+- **Height and drag.** Each step `surflx` works out the lowest level's height from that level's temperature and the
+  ground's pressure, z_L = −R ½(T_L + θ_v) ln σ_L / g, with the Moon's gravity and the air's gas constant: 0.31 km at
+  fifteen levels against 0.90 km on the coarser grids. The neutral transfer coefficient is the log law to that height,
+  (κ / ln(z_L/z0 + 1))², and the stability factors are ECHAM's Louis (1979) functions of the bulk Richardson number
+  g z_L Δθ_v / (θ_v |U|²) and of z_L/z0. Every term takes the level's own height and the Moon's gravity, so the
+  coefficients follow the level down: the neutral coefficient rises from 0.0043 to 0.0063 over land (on PlaSim's
+  preset z0 of 2 m) and from 0.00059 to 0.00068 over sea (on Charnock's z0), while the wind it multiplies falls. For a
+  given wind and temperature difference a level 0.3 km up on the Moon has the Richardson number of a level 50 m up on
+  Earth, near the first levels of the Earth models those functions were made for; the 0.9 km level had that of a level
+  150 m up.
+- **The time step.** The stress, heat and vapour enter the lowest layer implicitly, x′ = (x + K x_s)/(1 + K), which
+  stays stable for a layer of any mass.
+- **The fluxes.** Over the first month from the same restart the fifteen-level run gives 13.2 W/m² of sensible heat,
+  64.0 W/m² of latent heat, a stress of 0.038 Pa and a 10 m wind of 1.24 m/s, against 12.1, 62.7, 0.039 and 1.17 at
+  fourteen levels, the 10 m wind on Geleyn's profile from a level a third as high. Over two years with the same
+  longwave correction they are 15.6, 62.3, 0.043 and 1.28 against 13.4, 62.9, 0.044 and 1.19.
+- **The mixing above.** `vdiff` is ECHAM's implicit K-diffusion with Blackadar's mixing length κz λ/(λ + κz),
+  λ = 160 m and heights counted at a fixed 250 K; the new interface at 0.6 km takes its own Richardson number and a
+  mixing length of about 90 m. Over the two years the thin layer takes 15.4 W/m² of sensible heat from the ground and
+  passes 7.4 W/m² of it up by diffusion and 4.4 W/m² by the dry adjustment, where the fourteen-level bottom layer passed
+  2.1 and 3.1 W/m² of its 13.3.
+
+Nothing in the surface layer or the diffusion needs changing for the thin layer. The reading turned up these points,
+each the same on every grid:
+- **An Earth constant over the sea.** In unstable air over the sea PlaSim raises the heat and vapour transfer by the
+  free-convection term of Miller et al. (1992), whose constant, 0.0016 m s⁻¹ K^−1/3, multiplies Δθ_v^1/3. A
+  free-convection transfer scales as (g/ρ)^1/3, so at the Moon's gravity and the design air's density the constant
+  would be about 0.00085. The ground is warmer than the air in 88–96% of the sea's 3-day means, and on those means
+  PlaSim's constant multiplies the transfer by 2.2–2.5 where the lunar one would give 1.6–1.7: it may add up to about a
+  third to the sea's evaporation and sensible heat in light winds. The means understate the wind and so overstate the
+  term. Scaling it would be a one-constant patch to `surflx` (`zrifh` over the sea) and is the author's decision; this
+  work leaves it as it is.
+- **Placeholders and floors.** The land's roughness is PlaSim's preset 2 m everywhere. The wind PlaSim feeds the
+  transfer has a floor of 1 m/s, under which the lowest level's 3-day mean wind falls in 22% of the land's means at
+  0.3 km against 18% at 0.9 km. The diffusion's 160 m mixing length and 250 K height scale are Earth's.
+- **Two settings outside the surface layer that follow the grid.** PlaSim's critical humidity for large-scale cloud is
+  max(0.85, σ) at each level, so the thin layer's is 0.994, against 0.983 for the fourteen-level bottom layer, and the
+  layer above takes 0.977; the bottom layer's cloud covers 0.1% of the sky on both grids, and the runner's
+  `surface_cloud_rcrit` sets its threshold. PlaSim's air at 2 m is the lowest level's temperature taken
+  dry-adiabatically to the ground's pressure, so it now stands for the air 0.3 km up; with the same longwave correction
+  it runs 0.9 K cooler than at fourteen levels over the two years.
+
+**The inputs on fifteen levels**, each made by the script that made the fourteen-level one.
+- **The twilight** ([twilight_301k_l15.json](../results/gcm/twilight_301k_l15.json); `twilight levels`). The thirteen
+  upper layers keep their fourteen-level terms, the two bottom layers' terms sum to the fourteen-level bottom layer's,
+  and the column's totals stay as they were.
+- **The longwave correction carried from ten levels**
+  ([longwave_A28_corrected_970_lw_ice_l15.json](../results/gcm/longwave_A28_corrected_970_lw_ice_l15.json);
+  `plasim_longwave levels`) keeps each split group's escape. On the month trial's columns it leaves 6.4–7.3 W/m² in
+  its worst layer, as it did on fourteen levels.
+- **The provisional refit**
+  ([longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json](../results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json);
+  `plasim_longwave refit`, the runner's `--longwave-fit l15_provisional`). The correction alone, refitted in 18 s on the
+  month trial's 883 cloud-free columns, leaves 1.9–2.1 W/m² on a sample of 107 of the month's columns of every kind. A
+  month after the remap is a short sample, so the fit is provisional; the final refit belongs to the configuration
+  chosen for a long run. The runner reads a fit made on a run's own level set as it is and refuses it on any other set.
+- **The cold cloud's factors** scale the top three layers, which all three grids share.
+- **The restart** (`levels.py restart --to l15`; `gcm-runs/A28R_301k_cold_l15_restart/MOST_REST.00019`). The year-19
+  restart goes from ten levels to fifteen in one conservative remap. Every column keeps its integrals of water,
+  temperature times mass and momentum to within 10⁻¹³ of their size, and the six shared upper layers are copied bit for
+  bit.
+
+**The shared source.** Building the fifteen-level executable left the ten- and fourteen-level executables and every
+source file byte for byte as they were. The ten- and fourteen-level month trials, run again after the build, repeat
+the earlier ones bit for bit in all 61 output variables and their restarts (`bit_check.py`).
+
+**Cost and stability.** Run within three minutes of each other, the month trials took 31.9 s at fifteen levels, 28.7 s
+at fourteen and 20.4 s at ten, so a fifteen-level year costs about 1.1 times a fourteen-level one and 1.6 times a
+ten-level one. The two-year runs took 448–464 s a year while checks shared the machine part of the time, and wrote
+182–183 MB of output a year against 172 at fourteen levels and 130 at ten. Neither the month nor the four years shows a
+fault: every field is finite, the humidity is nowhere negative, the strongest wind at any level stays under 27 m/s, and
+the temperature falls smoothly through the new levels. All of this work holds 1.3 GB on the research drive.
+
+**Two years at fifteen levels** ([levels_l15_test.json](../results/gcm/levels_l15_test.json);
+`levels15_test_analysis.py` in `session-tools/agents/climate-levels15` on the research drive). The baseline,
+`A28R_301k_cold_sbm_rh07_deep200_l15cap`, takes every flag of the fourteen-level test and the provisional refit. A
+second run, `…_l15cap_carried`, takes the fourteen-level test's own correction carried onto the levels: beside the
+fourteen-level test it shows what the thin layer alone changes, and beside the baseline what the refit changes. Both
+start from the carried restart. Years 0–1, and after the semicolon year 1:
+
+| Near-side Sea, mm/day | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise | Mean |
+|---|---|---|---|---|---|
+| 15 levels, provisional refit | 0.12; 0.11 | 1.45; 0.90 | 2.68; 2.85 | 1.98; 1.74 | 1.55; 1.40 |
+| 15 levels, carried correction | 0.30; 0.21 | 2.69; 3.03 | 0.87; 1.16 | 1.48; 1.03 | 1.31; 1.34 |
+| 14 levels | 0.05; 0.02 | 2.87; 2.57 | 0.88; 0.52 | 0.09; 0.02 | 0.95; 0.77 |
+| 10 levels (deep200) | 0.25; 0.19 | 3.66; 3.15 | 3.07; 2.66 | 1.55; 1.46 | 2.11; 1.85 |
+| CM1 box | 0.00 | 2.23 | 2.97 | 0.14 | 1.34 |
+
+| Land at 0° E, mm/day | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise | Mean |
+|---|---|---|---|---|---|
+| 15 levels, provisional refit | 0.50; 0.03 | 17.84; 19.72 | 0.41; 0.54 | 0.03; 0.04 | 4.77; 5.24 |
+| 15 levels, carried correction | 1.19; 1.47 | 21.14; 20.04 | 0.99; 1.72 | 0.02; 0.00 | 5.92; 5.96 |
+| 14 levels | 0.01; 0.00 | 13.33; 13.05 | 0.54; 0.37 | 0.01; 0.00 | 3.52; 3.46 |
+| 10 levels (deep200) | 0.80; 0.83 | 15.79; 17.95 | 0.45; 0.47 | 0.06; 0.05 | 4.34; 4.97 |
+| CM1 box | 2.87 | 8.59 | 1.53 | 0.07 | 3.27 |
+
+| Years 0–1 | 15, provisional refit | 15, carried | 14 levels | 10 levels | CM1 box |
+|---|---|---|---|---|---|
+| Sea site at 41.8; 55.8 km | 258.53; 240.12 K | 259.33; 241.22 | 259.32; 241.20 | 259.90; 241.68 | 251.49; 231.76 |
+| Sea site's lowest level: vapour; air | 12.34 g/kg; 299.82 K | 13.43; 301.07 | 12.88; 300.70 | 12.10; 299.39 | |
+| Sea site's lowest 0.6 km: vapour; air | 12.34 g/kg; 299.82 K | 13.43; 301.07 | 13.34; 301.40 | 12.41; 300.07 | 11.8 g/kg (lowest 0.5 km) |
+| Sea site: air at 2 m; ground | 300.33; 301.39 K | 301.57; 302.29 | 302.15; 302.51 | 300.83; 301.83 | |
+| Ground; air at 2 m | 297.82; 297.60 K | 299.03; 299.08 | 299.51; 299.97 | 298.46; 298.50 | |
+| Rain; its convective share | 2.18 mm/day; 86% | 2.15; 87% | 2.17; 88% | 2.18; 94% | |
+| Imbalance at the top of the air | −3.70 W/m² | +0.63 | +1.40 | +1.45 | |
+| Planetary albedo; cloud cover | 0.378; 34.9% | 0.380; 36.4% | 0.378; 36.3% | 0.380; 35.4% | |
+| Cloud effect: sunlight; infrared | −39.6; 42.6 W/m² | −40.4; 49.6 | −39.9; 49.7 | −40.5; 50.0 | |
+| Top two levels: air | 165.82, 191.56 K | 164.07, 192.64 | 164.04, 192.66 | 164.29, 192.85 | |
+| Top two levels: water | 0.0349, 2.33 ppmv | 0.0204, 2.93 | 0.0204, 2.93 | 0.0217, 2.97 | |
+
+The lowest level stands at 0.30 km on fifteen levels and 0.86 km on the others. The lowest 0.6 km on the coarser grids
+is the mass-weighted mean over σ 0.9883–1 of the conservative remap's reconstruction of their bottom layer. The vapour
+is a mixing ratio, the sea site's numbers are lunar-day means over its cells, and year 1's global numbers and the sea
+site's column level by level are in the results file.
+
+**What the thin layer changes** (the carried-correction run against the fourteen-level test).
+- **The sea rains after midnight again**, 1.48 mm/day against 0.09 at fourteen levels and CM1's 0.14, while its evening
+  stays at 0.87 against CM1's 2.97; its mean, 1.31 mm/day, reaches CM1's 1.34 by that route. On the sea site's 3-day
+  means the scheme's parcel, now lifted from 0.3 km, meets thin cloud topping out near 1.2 km in 11–20% of the evening
+  and night means, where the fourteen-level grid found it in 2–3%, and convects deep in 3–5% of them against 0–1%
+  (`night_tops15.py`).
+- **Over land** the afternoon rises from 13.3 to 21.1 mm/day, further from CM1's 8.6, while the morning (1.19 against
+  CM1's 2.87) and the evening (0.99 against 1.53) move toward CM1.
+- **The near-ground air.** The thin layer over the sea holds 13.4 g/kg at 301.1 K, what the fourteen-level grid's own
+  profile implied for its lowest 0.6 km (13.3 g/kg), and 1.6 g/kg more than CM1's 11.8. The coarser layer averaged that
+  air faithfully; the excess over CM1 belongs to the GCM's near-ground air itself.
+- **Little else moves.** The upper air and the top two levels stay within 0.1 K and 1% of the fourteen-level run's.
+  The sea site's air below 10 km runs 0.1–0.35 K cooler, the global ground 0.5 K cooler, and the imbalance at the top of
+  the air is 0.8 W/m² smaller.
+
+**What the provisional refit changes** (the baseline against the carried-correction run).
+- **The longwave by layer comes close to correlated-k.** On the baseline's own year 1
+  ([longwave_check_l15.json](../results/gcm/longwave_check_l15.json)) the refit holds the clear-sky longwave within
+  3.0 W/m² of correlated-k by layer on 1,424 cloud-free columns and within 2.6 W/m² on a sample of 1,274 of every
+  column, its worst layer at 42 km, against 8.2 and 7.7 W/m² for the carried correction, worst at 19 km, and
+  13.3–13.6 W/m² for PlaSim alone. It meets the rule's 2.5 W/m² at every layer but the one at 42 km.
+- **The top levels and the balance at the top of the air move.** The refit's top-layer term, which carries the
+  column's outgoing longwave in the fit, is 3–4 W/m² smaller than the ten-level fit's. The top level warms 1.7 K and
+  holds 70% more water, the second cools 1.1 K and holds 20% less, and the cloud in the top two levels falls from 7.3%
+  and 13.6% of the sky to 5.5% and 10.0%. The cloud's infrared effect falls 7 W/m² and the run loses 3.3–4.1 W/m² at the
+  top of the air: its ground ends year 1 1.6 K below the carried run's, still cooling about 0.6 K a year.
+- **The sea's rain and upper air move.** The sea site's air cools 0.2–1.9 K at every level below the top (up to 2.3 K
+  in year 1), its afternoon rain moves into the evening (2.68 mm/day, near CM1's 2.97) and the night (1.98 against
+  CM1's 0.14), and its air at 41.8 and 55.8 km cools 0.8–1.1 K, about a tenth of the way to CM1's box.
+
+Each run is one realization of the first two years after the remap, so these show the direction and early size of the
+changes.
+
+**What remains before the mass-flux tests.**
+- **Their baseline.** Either fifteen-level run can serve. The baseline with the provisional refit has the clear-sky
+  longwave within about 3 W/m² by layer and a climate cooling about 0.6 K a year as its top levels' cloud adjusts; the
+  run with the carried correction keeps the fourteen-level energy balance and carries layer errors of up to 8 W/m² at
+  19 km.
+- **The final longwave refit** belongs to the configuration chosen for a long run. Its top-layer term moves the top two
+  levels the exobase check reads, so that check belongs beside the refit.
+- **The free-convection constant over the sea** is an Earth value on every grid; scaling it to the Moon is the author's
+  call.
+- **Adopting the fifteen levels** is the author's call.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.levels show l15                     # the set, its heights and layers
+climate/gcm/.venv/bin/python -m climate.gcm.levels restart \
+    /media/projectspace/terluna-research/gcm-runs/A28R_301k_cold/model/MOST_REST.00019 \
+    /media/projectspace/terluna-research/gcm-runs/A28R_301k_cold_l15_restart/MOST_REST.00019 --to l15   # seconds
+climate/gcm/.venv/bin/python -m climate.gcm.twilight levels --ts 301 --levels l15             # twilight_301k_l15.json
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave levels --levels l15    # the 301 K refit carried onto them
+L=/media/projectspace/terluna-research/session-tools/agents/climate-levels15
+$L/run_levels15_tests.sh month15                 # one model month; it builds the fifteen-level executable
+$L/run_levels15_tests.sh month14b                # and month10b: the earlier month trials again, for the bit check
+climate/gcm/.venv/bin/python $L/bit_check.py A28R_301k_cold_sbm_rh07_deep200_l14cap_month_recheck \
+    A28R_301k_cold_sbm_rh07_deep200_l14cap_month A28R_301k_cold_sbm_rh07_deep200_month_recheck \
+    A28R_301k_cold_sbm_rh07_deep200_month                                          # every variable and the restarts
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave refit A28R_301k_cold_sbm_rh07_deep200_l15cap_month  # 18 s
+$L/run_levels15_tests.sh test15                  # two years with the provisional refit, about 15 minutes on 4 workers
+$L/run_levels15_carried.sh                       # two years with the carried correction
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_cold_sbm_rh07_deep200_l15cap:1 \
+    --correction provisional_l15=climate/results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json \
+    --correction carried_301k_l15=climate/results/gcm/longwave_A28_corrected_970_lw_ice_l15.json \
+    --output climate/results/gcm/longwave_check_l15.json                          # about a minute
+climate/gcm/.venv/bin/python $L/surface_layer_check.py \
+    l15_refit_y01=A28R_301k_cold_sbm_rh07_deep200_l15cap:0-1 \
+    l15_carried_y01=A28R_301k_cold_sbm_rh07_deep200_l15cap_carried:0-1 \
+    l14_y01=A28R_301k_cold_sbm_rh07_deep200_l14cap:0-1 l10_y01=A28R_301k_cold_sbm_rh07_deep200:0-1   # and the months
+climate/gcm/.venv/bin/python $L/levels15_test_analysis.py > $L/levels15_test_analysis.txt   # the results file
 ```
 
 ### Cloud amount: what published models say
