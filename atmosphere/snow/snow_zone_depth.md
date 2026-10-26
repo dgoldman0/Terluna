@@ -68,6 +68,12 @@ three times the size of light snow from −15 °C: its median stands at the 5 cm
 its 90th percentile within the 8–15 cm it gives the largest, so light snow reaches the size limit when it forms high in
 the snow zone and stays below it when it forms at −15 °C.
 
+On the McSnow build corrected on 25 October ([diffusivity](mcsnow_diffusivity.md)), which restores the 1 atm reference
+of McSnow's vapour diffusivity that the lunar column's patch had moved, the base runs give light snow a 90th percentile
+of 4.1 cm from −15 °C and 12.4 cm from −30 °C, within 5% of the same runs on the earlier build, and from −30 °C the 90th
+percentile first passes 10 cm 23.5 km below the top. Light snow from −15 °C stays below the size limit on the corrected
+build, and light snow from −30 °C reaches it.
+
 ## Limits
 
 The boxes' snow is CM1's Morrison scheme's own, so its heights describe where these storms make and carry snow, while

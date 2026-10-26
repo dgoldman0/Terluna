@@ -1,5 +1,12 @@
 # Lunar snowflakes when crystals grow and aggregate together
 
+The lunar runs in this record diffused vapour at 0.651 of McSnow's own fit, through the surface-pressure patch of their
+build ([diffusivity](mcsnow_diffusivity.md)). Repeated on the corrected build, light snow at the reference flux moves by
+under 5% at the median and the 90th percentile, from −15 °C and from −30 °C, while at 3 mm/h the crystals take up 24–37%
+more of the supply and the flakes reach 10 cm 2–3 km higher and arrive 11–26% larger at the median and the 90th
+percentile: with a hundredth of the crystals the 90th percentile arrives at 12.6 cm against 10.5–10.9 cm. The tables
+below hold the earlier runs until the rest are repeated.
+
 Grown from 4 µm ice spheres while they settle and aggregate, lunar snowflakes reach the load analogy's survivable span
 of 10–14 cm far lower in the snow zone than the full-size crystals of 24 October did. In the reference column at 3 mm/h
 with the reference crystal flux, the 90th percentile of span passes 10 cm about 8 km below the −15 °C cloud top and 14

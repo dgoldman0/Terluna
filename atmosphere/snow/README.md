@@ -6,16 +6,17 @@ on 20 and 21 October, as the second half of the work on the high cloud's crystal
 ([register](../../research/decisions.md), 20 and 21 October). How flakes fall, how deep the snow zone stands and how far
 below the freezing level snow lasts are calculated in the sections below. The size of lunar snowflakes now stands
 between two bounds. Without any breakup, crystals that grow and aggregate together carry the 90th percentile of flake
-span at the lunar freezing level to 4.2–4.5 cm in light snow of 0.3 mm/h and to 10.5–10.9 cm at 3 mm/h with a hundredth
-of the crystals, in runs that converge ([growth and aggregation](mcsnow_growth_aggregation.md)). A comparison of loads
-with Earth's largest observed flakes caps the flakes that break at about 5 cm for ordinary flakes and 8–15 cm for the
-largest ([survival](turbulence_survival.md)). The two meet in moderate snow. Light snow stays below the cap without
-breaking when it forms at −15 °C and reaches it when it forms near −30 °C. In heavy snow with plentiful crystals the
-runs without breakup grow metre-scale aggregates that do not converge, and there only a breakup law, which no Earth
-measurement yet supports, would set the size. Before 24 October
-the calculations put typical flakes anywhere from below a millimetre to tens of centimetres across, a spread carried by
-the water a storm supplies to growing ice, the number of crystals that share it, and the population solver that follows
-their collisions.
+span at the lunar freezing level to 4.1 cm in light snow of 0.3 mm/h and to 12.6 cm at 3 mm/h with a hundredth of the
+crystals ([growth and aggregation](mcsnow_growth_aggregation.md)), in single runs on the lunar McSnow build corrected on
+25 October ([diffusivity](mcsnow_diffusivity.md)); the earlier runs, which diffused vapour at 0.651 of McSnow's fit,
+gave 4.2–4.5 and 10.5–10.9 cm in pairs that converge. A comparison of loads with Earth's largest observed flakes caps
+the flakes that break at about 5 cm for ordinary flakes and 8–15 cm for the largest
+([survival](turbulence_survival.md)). The two meet in moderate snow. Light snow stays below the cap without breaking
+when it forms at −15 °C and reaches it when it forms near −30 °C. In heavy snow with plentiful crystals the runs without
+breakup grow metre-scale aggregates that do not converge, and there only a breakup law, which no Earth measurement yet
+supports, would set the size. Before 24 October the calculations put typical flakes anywhere from below a millimetre to
+tens of centimetres across, a spread carried by the water a storm supplies to growing ice, the number of crystals that
+share it, and the population solver that follows their collisions.
 
 On 24 October the author made three decisions about the course of the work. The crystal-growth model is frozen as it
 stood that day, and its errors against Earth's laboratory crystals enter every lunar result as a stated uncertainty. A
@@ -53,33 +54,35 @@ surface begin to fracture. Collisions in free fall are gentler than any of these
 one another at 0.5 m/s or less, with energies near 10⁻⁸ J and about 3 × 10⁻⁸ J in strong turbulence. That finding stands
 beside the analogy's premise and questions whether anything breaks lunar flakes aloft, so the sizes reached without
 breakup form the second bound. Grown from 4 µm seeds while they aggregate, the flakes reach the analogy's span far lower
-than full-size crystals did: at 3 mm/h the 90th percentile passes 10 cm about 8 km below the −15 °C top and 14 cm about
-10 km down, against 1.5 km for both, and the crystal model's Earth error band moves those depths by up to 4 km. With a
-hundredth of the crystals it passes 10 cm only 14.5 km down and arrives at 10.5–10.9 cm, and light snow arrives at
-4.2–4.5 cm, both converged under four times the superparticles. As crystals gather into flakes they take up less of a
-steady supply, 40% of it at 3 mm/h, and a cloud would hold the rest as supercooled water. Along the archived storm's
-paths most crystals sublimate before the freezing level, and only the paths held at saturation with dilute crystals give
-a converged size, about 11–12 cm on the median path. The design-climate storm boxes hold half their snow within 18–20 km
-of the freezing level and nine-tenths within 30–35 km ([snow zone](snow_zone_depth.md)). Light snow from the reference
-column's −15 °C top therefore melts before it reaches the size limit. Light snow forming near −30 °C, higher in that
-snow zone, falls twice as far and arrives with a median span of 5.2–5.5 cm, a 90th percentile of 9.7–12.7 cm and a 99th
-of 16–25 cm, from runs at two superparticle numbers that agree on the median within 4% and on the 90th percentile
-within 27%. It reaches the size limit, so whether light snow does depends on where in the snow zone it forms.
+than full-size crystals did. In single runs on the corrected build, the 90th percentile at 3 mm/h passes 10 cm about 6.5
+km below the −15 °C top and 14 cm about 8.5 km down, against 1.5 km for both with full-size crystals; with a hundredth
+of the crystals it passes 10 cm 11.5 km down and arrives at 12.6 cm; and light snow arrives at 4.1 cm. On the earlier
+build these were about 8 and 10 km, 14.5 km, 10.5–10.9 cm and 4.2–4.5 cm, the sizes converged under four times the
+superparticles, and the crystal model's Earth error band moved those depths by up to 4 km. As crystals gather into
+flakes they take up less of a steady supply, 52% of it at 3 mm/h (40% on the earlier build), and a cloud would hold the
+rest as supercooled water. Along the archived storm's paths most crystals sublimate before the freezing level, and only
+the paths held at saturation with dilute crystals give a converged size, about 11–12 cm on the median path. The
+design-climate storm boxes hold half their snow within 18–20 km of the freezing level and nine-tenths within 30–35 km
+([snow zone](snow_zone_depth.md)). Light snow from the reference column's −15 °C top therefore melts before it reaches
+the size limit. Light snow forming near −30 °C, higher in that snow zone, falls twice as far and arrives with a median
+span of 5.2–5.5 cm, a 90th percentile of 9.7–12.7 cm and a 99th of 16–25 cm, from runs at two superparticle numbers that
+agree on the median within 4% and on the 90th percentile within 27%. It reaches the size limit, so whether light snow
+does depends on where in the snow zone it forms.
 
 Below the freezing level the flakes sublimate, then melt, and then fall as rain for 15–25 km, which the author asked to
 follow on 25 October with sublimation carried all the way down ([melting](snow_melting.md)). In the design-climate storm
 boxes the freezing level stands 22–26 km up, and the air under falling snow is 93–97% humid there and warms about 1 K
 for each kilometre below it, so melting begins 0.3–0.55 km down. Flakes of 2 cm finish melting about 1.6 km below the
 freezing level and flakes of 10–20 cm 3.7–5.2 km below it, three to four times as deep as the flakes of 20 October.
-Their 9–15 mm drops hold together under lunar gravity and bring 81–93% of their water to the surface, while the drops
-of flakes up to 2 cm evaporate on the way. Light snow of 0.3 mm/h therefore sends 11–13% of its water to the surface,
-and snow whose flakes reach about 10 cm 55–60%, against the 39–40% CM1's own storms deliver of their falling water; no
-snow reaches the ground, even at the highest summit. Sublimation takes 2–8% of the snow over land and 10–23% over the
-sea, and at 2.83 MJ/kg against 0.33 for melting it draws about as much heat from the air over the sea as the melting
-does in the heavier snow, and more than twice as much in light snow. On Earth the same code begins and ends the melting
-of ordinary flakes where Matsuo and Sasyo (1981) computed and where observed melting layers lie. The flakes are those
-of the growth-and-aggregation runs, whose lunar builds diffused vapour at 0.651 of McSnow's fit (the frozen crystal
-model, below).
+Their 9–15 mm drops hold together under lunar gravity and bring 81–93% of their water to the surface, while the drops of
+flakes up to 2 cm evaporate on the way. Light snow of 0.3 mm/h therefore sends about 10% of its water to the surface,
+and snow whose flakes reach 12–13 cm 61–65%, against the 39–40% CM1's own storms deliver of their falling water; no snow
+reaches the ground, even at the highest summit. Sublimation takes 2–8% of the snow over land and 10–23% over the sea,
+and at 2.83 MJ/kg against 0.33 for melting it draws about as much heat from the air over the sea as the melting does in
+the heavier snow, and more than twice as much in light snow. On Earth the same code begins and ends the melting of
+ordinary flakes where Matsuo and Sasyo (1981) computed and where observed melting layers lie. Those shares take the
+corrected runs' flakes ([diffusivity](mcsnow_diffusivity.md)); the melting record's own tables still hold the flakes of
+the earlier build, which give 11–13% and 55–60%.
 
 ## The plan, in order
 
@@ -113,8 +116,12 @@ followed:
 9. **Below the freezing level**: how far the flakes fall before they melt and their water evaporates, with sublimation
    carried from the cloud to the ground, the snow's water and latent heat by layer, and the rain each ground height
    receives. Done 25 October ([results](snow_melting.md)).
+10. **The lunar builds' vapour diffusivity**: McSnow's fit given back its 1 atm reference, which the lunar column's
+   surface-pressure patch had moved, and a minimal set of runs repeated on the corrected build. Done 25 October
+   ([results](mcsnow_diffusivity.md)); the remaining reruns are listed there.
 
-Before the optics, five things remain open: the heavy-snow tail, which no run converges and which the Earth check
+Before the optics, six things remain open: the lunar McSnow runs not yet repeated on the corrected build; the
+heavy-snow tail, which no run converges and which the Earth check
 overgrows tenfold at 9 mm/h; the 90th and 99th percentiles of light snow from −30 °C, which halving the superparticles
 moves by 27% and 41%; a storm whose vapour responds to its crystals; riming of the vapour that flakes leave
 unused; and measurements of whole flakes breaking, flake on flake or under sustained load, which would show whether
@@ -147,7 +154,10 @@ belongs to the component's stated uncertainty. In the lunar builds the patch tha
 freezing level's, 659 hPa, also sets that fit's 1 atm reference, so every lunar McSnow run before 25 October diffused
 vapour at 0.651 of the fit at every height. Where diffusion limits growth, lunar crystals then grew at 0.68–0.79 of the
 fit's rate, slowest in the coldest air; the Earth builds keep the 1 atm reference, so the calibration and the data-sized
-check are unaffected.
+check are unaffected. With the reference restored in the lunar build ([diffusivity](mcsnow_diffusivity.md)), light snow
+at the reference flux, from −15 °C or near −30 °C, moves by under 5% at the median and the 90th percentile, while at 3
+mm/h the crystals take up 24–37% more of the supply and the flakes arrive 11–26% larger at the median and the 90th
+percentile, reaching 10 cm 2–3 km higher in the column.
 
 Before the freeze, the component's −14.4 °C dendrite carried 26% too much mass at 30 minutes against Takahashi and
 co-authors' (1991) fitted laboratory history, with a span 35% too wide and a thickness 17.5% too thin; its −5.3 °C
@@ -208,6 +218,7 @@ The flake product of 20 October and the aggregation baseline were rebuilt with t
 | [mcsnow_growth_aggregation.md](mcsnow_growth_aggregation.md), [mcsnow_growth_aggregation.py](mcsnow_growth_aggregation.py), [results/mcsnow_growth_aggregation.json](results/mcsnow_growth_aggregation.json) | Crystals that grow and aggregate together in the reference column and along the storm paths: depths of outgrowth, arriving sizes, convergence, the band's edges and the water the snow takes |
 | [snow_zone_depth.md](snow_zone_depth.md), [snow_zone_depth.py](snow_zone_depth.py), [results/snow_zone_depth.json](results/snow_zone_depth.json) | How far above the freezing level the design-climate storm boxes hold their snow, and light snow against the size limit |
 | [snow_melting.md](snow_melting.md), [melting.py](melting.py), [melting_environment.py](melting_environment.py), [results/snow_melting.json](results/snow_melting.json) | How far below the freezing level flakes melt and their drops evaporate in the storm boxes' air; sublimation, melting and evaporation by layer with their latent heat; the Earth check; the storm paths' losses above the freezing level |
+| [mcsnow_diffusivity.md](mcsnow_diffusivity.md), [mcsnow_diffusivity.py](mcsnow_diffusivity.py), [results/mcsnow_diffusivity.json](results/mcsnow_diffusivity.json) | McSnow's vapour diffusivity in the lunar builds: the corrected build, its source differences, and a minimal set of runs repeated on it against the old runs |
 | [melting_sources.json](melting_sources.json) | The 25 October melting sources: the quantities taken from each and how each was read |
 | [breakup_literature.md](breakup_literature.md), [breakup_sources.json](breakup_sources.json) | The 25 October search for an Earth-supported breakup law: the measurements found, their quantities and access, and the collision energies aloft |
 | [tmp_relocation.py](tmp_relocation.py), [results/tmp_relocation.json](results/tmp_relocation.json) | Each /tmp path the committed records name, mapped to its hash-checked copy on the project-space drive |

@@ -1,12 +1,11 @@
 # How far below the freezing level lunar snow falls, and where its water and heat go
 
 Below the freezing level of the design-climate storms, lunar snowflakes first sublimate, then melt, and then fall as
-rain for 15–25 km, giving much of their water back to the air on the way. The air under falling snow is 93–97% humid
-at the freezing level and warms about 1 K for each kilometre below it, so melting begins 0.3–0.55 km down, where a
-flake's ice-bulb temperature reaches 0 °C. Flakes of 2 cm finish melting about 1.6 km below the freezing level, and
-flakes of 10–20 cm 3.7–5.2 km below it, three to four times the 1.1–1.4 km the flake model of 20 October gives at 90%
-humidity. The
-drier tenth of the columns lowers the large flakes' melting by 0.4–0.7 km, and the crystal model's Earth error band
+rain for 15–25 km, giving much of their water back to the air on the way. The air under falling snow is 93–97% humid at
+the freezing level and warms about 1 K for each kilometre below it, so melting begins 0.3–0.55 km down, where a flake's
+ice-bulb temperature reaches 0 °C. Flakes of 2 cm finish melting about 1.6 km below the freezing level, and flakes of
+10–20 cm 3.7–5.2 km below it, three to four times the 1.1–1.4 km the flake model of 20 October gives at 90% humidity.
+The drier tenth of the columns lowers the large flakes' melting by 0.4–0.7 km, and the crystal model's Earth error band
 moves it by −7% to +9%. The large flakes melt to drops of 9–15 mm, which hold together under lunar gravity, where the
 stability screen stands at 16.6 mm, and they bring 81–93% of their water to the sea or the ground; the 1–3 mm drops of
 flakes up to 2 cm evaporate before they reach any ground. No snow reaches the ground: the largest flakes of the
@@ -23,11 +22,12 @@ heavier snow. Of its water, the snow returns 40–53% to the air on the way down
 in light snow, against the 61% CM1's own storms return of their falling water.
 
 On Earth, with Earth's gravity and air, the same code begins melting within 3–5% of the depths Matsuo and Sasyo (1981)
-computed and within 0.17 K of the temperatures Heymsfield and co-authors (2021) fitted to observations, and its
-ordinary flakes finish where observed melting layers end. The lunar results are runnable calculations through archived
-model air; no measurement checks them at lunar gravity or at these sizes. The flakes come from McSnow runs whose lunar
-builds diffused vapour at 0.651 of McSnow's own fit, through a patch found on 25 October; how far that moves them is
-measured separately.
+computed and within 0.17 K of the temperatures Heymsfield and co-authors (2021) fitted to observations, and its ordinary
+flakes finish where observed melting layers end. The lunar results are runnable calculations through archived model air;
+no measurement checks them at lunar gravity or at these sizes. The flakes come from McSnow runs whose lunar builds
+diffused vapour at 0.651 of McSnow's own fit, through a patch found on 25 October. Rerun on the corrected build, light
+snow's flakes move by under 5%, while the heavier snow melts 0.2–0.6 km deeper and sends 61–65% of its water to the
+surface against 55–57% ([diffusivity](mcsnow_diffusivity.md)); the tables below hold the earlier flakes.
 
 ## How a flake is followed
 
@@ -276,8 +276,9 @@ its screen breaks into equal drops, a stand-in for a breakup spectrum.
 The flake populations at the freezing level are those of the growth-and-aggregation runs of 25 October. Their lunar
 McSnow builds took the freezing level's pressure, 659 hPa, as the reference of McSnow's vapour diffusivity, which is 1
 atm, so they diffused vapour at 0.651 of McSnow's fit; where diffusion limits growth, their crystals grew at 0.68–0.79
-of its rate. The flakes' sizes, and with them the depths and shares here, carry whatever that changes until the
-corrected runs replace them.
+of its rate. Rerun on the corrected build, the flakes of light snow move by under 5% and those of the heavier cases grow
+11–26%, which deepens their melting by 0.2–0.6 km and raises the water reaching the surface by 5–8 points
+([diffusivity](mcsnow_diffusivity.md)); the tables here hold the earlier flakes until the remaining runs are repeated.
 
 Mitra's model carries its laboratory flakes to the lunar sizes. Those flakes were centimetre-sized; lunar flakes of
 10–20 cm fall at Reynolds numbers of several thousand, beyond the range of the ventilation law, and their melting
