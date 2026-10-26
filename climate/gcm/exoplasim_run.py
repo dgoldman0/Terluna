@@ -61,7 +61,9 @@ restart carried there by levels.py's conservative remap and its twilight terms, 
 factors on those levels, and --sbm-shallow-cap holds a shallow cloud's top within the depth test's threshold of its own
 base in place of PlaSim's 700 hPa (SBM_CAP_PATCHES); without either a run is as before. --levels l15 adds a thin bottom
 layer, the ground to 0.6 km, to the fourteen, and --longwave-fit l15_provisional gives a run on it the longwave
-correction refitted on its own levels' columns.
+correction refitted on its own levels' columns. --convection massflux runs the mass-flux scheme of massflux.py in
+Kuo's place (rainmod's nprc 3; massflux_fortran.py's patch, applied only for a run that sets it); a run without it is as
+before.
 """
 from __future__ import annotations
 import argparse
@@ -78,6 +80,7 @@ import numpy as np
 from shared.constants import STANDARD_GRAVITY
 from climate.gcm import plasim_ice_optics as pio
 from climate.gcm import levels as lv
+from climate.gcm import massflux_fortran as mff
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -1389,12 +1392,13 @@ def use_twilight_package():
     sys.path.insert(0, str(TWILIGHT_PACKAGE))
 
 
-def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False) -> dict:
+def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
+                   massflux: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
-    (SBM_CAP_PATCHES, after the depth patch) for a run that sets them, and return each patched file's hash for the run
-    key."""
+    (SBM_CAP_PATCHES, after the depth patch), and the mass-flux scheme (massflux_fortran.MASSFLUX_PATCHES, over the
+    Betts-Miller patch), for a run that sets them, and return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1402,7 +1406,7 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     hashes = {}
     for name, marker, edits in (PATCHES + (TWILIGHT_PATCHES if twilight else [])
                                 + (SBM_TRIGGER_PATCHES if trigger else []) + (SBM_DEPTH_PATCHES if depth or cap else [])
-                                + (SBM_CAP_PATCHES if cap else [])):
+                                + (SBM_CAP_PATCHES if cap else []) + (mff.MASSFLUX_PATCHES if massflux else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1443,7 +1447,9 @@ SBM_CAP_SETTINGS = ('shallow_cap',)                                   # SBM_CAP_
 
 
 def convection_setting(scheme='sbm', **values) -> dict:
-    """PlaSim's deep convection as the configuration records it: 'sbm' for the simplified Betts-Miller scheme of the
+    """PlaSim's deep convection as the configuration records it: 'massflux' for the mass-flux scheme (massflux.py, as
+    massflux_fortran.py patches it in, rainmod's nprc 3) with every one of its parameters as the routine's defaults give
+    them, which takes no setting of the Betts-Miller scheme's; or 'sbm' for the simplified Betts-Miller scheme of the
     Terluna patch (SBM_EDITS, rainmod's nprc 2) with its relaxation time tau_s, reference relative humidity rh, the
     parcel's mixing per e-folding of pressure eps and its inhibition limit cin_j_kg (0: none), each defaulting to
     SBM_DEFAULTS; left out, the configuration keeps Kuo's scheme (nprc 1). The CAPE trigger (SBM_TRIGGER_PATCHES)
@@ -1452,8 +1458,14 @@ def convection_setting(scheme='sbm', **values) -> dict:
     when set: deep_hpa above 0, the depth (hPa) the parcel's cloud must exceed for deep convection, and mixing_steps
     above 1, the steps of the parcel's mixing within each layer, which need eps above 0. The shallow cap of
     SBM_CAP_PATCHES joins it only when shallow_cap is true, and it needs the depth test."""
+    if scheme == 'massflux':
+        given = sorted(k for k, v in values.items() if v not in (None, False))
+        if given:
+            raise ValueError(f'the mass-flux scheme takes none of the Betts-Miller settings: {given}')
+        return dict(scheme='massflux', nprc=3, parameters=mff.fortran_values())
     if scheme != 'sbm':
-        raise ValueError(f"the convection scheme is 'sbm' (Kuo's is the default, left out), not {scheme!r}")
+        raise ValueError(f"the convection scheme is 'sbm' or 'massflux' (Kuo's is the default, left out), "
+                         f"not {scheme!r}")
     unknown = (set(values) - set(SBM_DEFAULTS) - set(SBM_TRIGGER_SETTINGS) - set(SBM_DEPTH_SETTINGS)
                - set(SBM_CAP_SETTINGS))
     if unknown:
@@ -1490,8 +1502,11 @@ def convection_setting(scheme='sbm', **values) -> dict:
 
 def convection_namelist(c: dict) -> list:
     """The rainmod namelist entries (name, text) the scheme's record sets: its settings, the CAPE trigger's and the
-    cloud-depth patch's only when the record holds them, the depth in Pa as PlaSim reads it."""
+    cloud-depth patch's only when the record holds them, the depth in Pa as PlaSim reads it; for the mass-flux scheme
+    every parameter of its record."""
     entries = [('NPRC', str(c['nprc']))]
+    if c.get('scheme') == 'massflux':
+        return entries + [(name.upper(), mff.fortran_literal(value)) for name, value in c['parameters'].items()]
     for key, name in (('tau_s', 'TAU_BM'), ('rh', 'RH_BM'), ('eps', 'EPS_BM'), ('cin_j_kg', 'CIN_BM'),
                       ('cape_j_kg', 'CAPE_BM'), ('trigger_eps', 'EPST_BM')):
         if key in c:                                                  # the CAPE trigger only when set
@@ -1509,6 +1524,11 @@ def uses_depth_patch(convection: dict | None) -> bool:
     """Whether a run's convection settings (as given to configuration) set an option of SBM_DEPTH_PATCHES."""
     return bool(convection) and ((convection.get('deep_hpa') or 0.0) > 0.0
                                  or (convection.get('mixing_steps') or 1) > 1)
+
+
+def uses_massflux(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) choose the mass-flux scheme."""
+    return bool(convection) and convection.get('scheme') == 'massflux'
 
 
 def uses_cap_patch(convection: dict | None) -> bool:
@@ -1596,7 +1616,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'),
                source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
-                                     depth=uses_depth_patch(convection), cap=uses_cap_patch(convection)),
+                                     depth=uses_depth_patch(convection), cap=uses_cap_patch(convection),
+                                     massflux=uses_massflux(convection)),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -1627,7 +1648,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                                     'patch 11, lab branch 79ea224)')
     if rain_evaporation is not None:
         cfg['rain_evaporation'] = rain_evaporation_setting(rain_evaporation)
-    if convection is not None:                               # the simplified Betts-Miller scheme in Kuo's place
+    if convection is not None:                       # the Betts-Miller or the mass-flux scheme in Kuo's place
         cfg['convection'] = convection_setting(**convection)
     if cold_cloud is not None:
         if not ice_optics:
@@ -2257,9 +2278,10 @@ def main(argv=None) -> int:
                         help="a cold_cloud.py product whose central factors scale the ice optics' water and crystal "
                              'radius on its layers, carrying them to lunar gravity (ICE_FACTOR_EDITS; needs '
                              '--ice-optics; part of the run key)')
-    parser.add_argument('--convection', choices=('kuo', 'sbm'), default='kuo',
-                        help="PlaSim's deep convection: Kuo's scheme, its own, or the simplified Betts-Miller scheme of "
-                             'the Terluna patch (SBM_EDITS; part of the run key)')
+    parser.add_argument('--convection', choices=('kuo', 'sbm', 'massflux'), default='kuo',
+                        help="PlaSim's deep convection: Kuo's scheme, its own, the simplified Betts-Miller scheme of "
+                             'the Terluna patch (SBM_EDITS), or the mass-flux scheme (massflux_fortran.py; part of the '
+                             'run key)')
     parser.add_argument('--sbm-tau', type=float, metavar='SECONDS', help='its relaxation time (7200)')
     parser.add_argument('--sbm-rh', type=float, metavar='SHARE', help='its reference relative humidity (0.7)')
     parser.add_argument('--sbm-eps', type=float, help="its parcel's mixing per e-folding of pressure (0)")
@@ -2322,16 +2344,23 @@ def main(argv=None) -> int:
         overrides[key] = type(MODEL[key])(value)
     if args.sbm_shallow_cap and args.convection != 'sbm':
         parser.error('--sbm-shallow-cap belongs to the simplified Betts-Miller scheme (--convection sbm)')
+    sbm_given = [k for k in ('sbm_tau', 'sbm_rh', 'sbm_eps', 'sbm_cin', 'sbm_cape', 'sbm_trigger_eps', 'sbm_deep_hpa',
+                             'sbm_mixing_steps') if getattr(args, k) is not None]
+    if sbm_given and args.convection != 'sbm':
+        parser.error(f'{sbm_given} belong to the simplified Betts-Miller scheme (--convection sbm)')
+    convection = None
+    if args.convection == 'sbm':
+        convection = dict(tau_s=args.sbm_tau, rh=args.sbm_rh, eps=args.sbm_eps, cin_j_kg=args.sbm_cin,
+                          cape_j_kg=args.sbm_cape, trigger_eps=args.sbm_trigger_eps, deep_hpa=args.sbm_deep_hpa,
+                          mixing_steps=args.sbm_mixing_steps, shallow_cap=args.sbm_shallow_cap or None)
+    elif args.convection == 'massflux':
+        convection = dict(scheme='massflux')
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
                args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation,
-               args.moisture_diagnostics,
-               dict(tau_s=args.sbm_tau, rh=args.sbm_rh, eps=args.sbm_eps, cin_j_kg=args.sbm_cin,
-                    cape_j_kg=args.sbm_cape, trigger_eps=args.sbm_trigger_eps, deep_hpa=args.sbm_deep_hpa,
-                    mixing_steps=args.sbm_mixing_steps, shallow_cap=args.sbm_shallow_cap or None)
-               if args.convection == 'sbm' else None, args.levels)
+               args.moisture_diagnostics, convection, args.levels)
 
 
 if __name__ == '__main__':

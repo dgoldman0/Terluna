@@ -4,10 +4,12 @@ compiled alone gives the Python copy's tendencies, rain, snow and mass fluxes (m
 rule) to 1e-10 on lunar and Earth-like columns, and keeps the column's energy and water; deep, shallow and mid-level
 columns convect as designed; the PlaSim routine hands mkrain its water, which the patched mkrain carries to the
 ground without loss and without a negative running total, and with nprc 1 or 2 the patched mkrain is the old one bit
-for bit; the routine's defaults are the Python copy's parameters."""
+for bit; the routine's defaults are the Python copy's parameters; and the runner records the scheme with every
+parameter, writes its namelist and refuses the Betts-Miller scheme's options beside it."""
 import math
 import re
 import shutil
+import signal
 import subprocess
 
 import numpy as np
@@ -583,3 +585,32 @@ def test_the_routines_defaults_are_the_python_copys_parameters():
                        ('excess_scale', 'mixed_layer')):
         with pytest.raises(ValueError):
             mff.fortran_values(dict(mf.PARAMETERS, **{key: wrong}))
+
+
+def test_the_runner_records_and_writes_the_mass_flux_scheme_only_for_runs_that_set_it():
+    c = er.convection_setting(scheme='massflux')
+    assert c == dict(scheme='massflux', nprc=3, parameters=mff.fortran_values())
+    entries = er.convection_namelist(c)
+    assert entries[0] == ('NPRC', '3') and len(entries) == 1 + len(mff.PARAMETER_NAMES)
+    assert dict(entries)['ZSRC_MF'] == '10.0' and dict(entries)['NELEV_MF'] == '1'
+    for name, text in entries[1:]:                  # Fortran reads each back to the routine's default
+        assert float(text) == mff.fortran_values()[name.lower()]
+    assert er.convection_setting(scheme='massflux', rh=None, shallow_cap=None) == c
+    with pytest.raises(ValueError):
+        er.convection_setting(scheme='massflux', rh=0.7)
+    with pytest.raises(ValueError):
+        er.convection_setting(scheme='kuo')
+    assert er.uses_massflux(dict(scheme='massflux')) and not er.uses_massflux(None)
+    assert not er.uses_massflux(dict(rh=0.7, deep_hpa=200.0)) and not er.uses_depth_patch(dict(scheme='massflux'))
+    assert er.convection_setting() == dict(scheme='sbm', nprc=2, tau_s=7200.0, rh=0.7, eps=0.0, cin_j_kg=0.0)
+    # the command line refuses the Betts-Miller scheme's options with the mass-flux scheme (main sets the runner's
+    # signal handlers before it checks, so the test puts the process's own back)
+    saved = {sig: signal.getsignal(sig) for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGHUP)}
+    try:
+        for argv in (['A28R', '--convection', 'massflux', '--sbm-rh', '0.7'],
+                     ['A28R', '--convection', 'massflux', '--sbm-shallow-cap']):
+            with pytest.raises(SystemExit):
+                er.main(argv)
+    finally:
+        for sig, handler in saved.items():
+            signal.signal(sig, handler)

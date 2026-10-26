@@ -1,11 +1,11 @@
-# A mass-flux convection scheme for PlaSim: offline tests on the CM1 boxes and a Fortran routine (26 October 2026)
+# A mass-flux convection scheme for PlaSim: offline tests, a Fortran routine and two years in PlaSim (26 October 2026)
 
 The author approved this work on 26 October on the condition that the scheme stand a good chance of bringing PlaSim's
-lunar climate and weather nearer CM1's physics, and then approved its Fortran routine for PlaSim. This record
-describes the scheme in [massflux.py](massflux.py), its offline tests (results in
-[massflux_offline.json](../results/gcm/massflux_offline.json)), and its Fortran routine in
-[massflux_fortran.py](massflux_fortran.py), which waits outside the runner's patches until PlaSim runs on fifteen
-levels with it.
+lunar climate and weather nearer CM1's physics, and then approved its Fortran routine for PlaSim and two-year tests on
+fifteen levels. This record describes the scheme in [massflux.py](massflux.py), its offline tests (results in
+[massflux_offline.json](../results/gcm/massflux_offline.json)), its Fortran routine in
+[massflux_fortran.py](massflux_fortran.py), which the runner applies for runs that set `--convection massflux`, and
+those runs (results in [massflux_l15_test.json](../results/gcm/massflux_l15_test.json)).
 
 **What the tests show.** The scheme is the IFS's form of Tiedtke's bulk mass-flux scheme. It mixes at the bulk rates
 CM1's own clouds mix at, holds the sea box's diluted upper air in a running column, and carries the GCM's warmer column
@@ -19,6 +19,12 @@ things it still misses:
 - **The land's afternoon on CM1's own mean columns**, whose boundary layer is stable above its lowest 250 m. A
   running column, whose boundary layer mixes, rains at CM1's rate.
 - **CM1's deep cloud tops.** The bulk plume stops 10–25 km below them.
+
+**In PlaSim**, over two years on fifteen levels, the scheme convects too seldom: its test parcels meet 1.4–2.4 J/kg of
+inhibition in PlaSim's own columns and start with 0.5 J/kg. Its share of the rain falls from 86–87% to 42–45%, the
+air near the ground warms about 2 K and gains 3–4 g/kg over the sea, and the land's afternoon rains 24–25 mm/day,
+half of it large-scale. Aloft it cools the air at 42–56 km 2.3–2.6 K, a third of the way to CM1's. Of the brief's
+criteria it meets only the sea's night and evening, and only with the carried longwave correction.
 
 ## Why a mass-flux scheme
 
@@ -216,14 +222,15 @@ they cover 7% of the afternoon's columns (16% at half a kelvin), and outside the
 density potential temperature to within 0.02 K (`cold_pools`). CM1's convection rises through it by resolved ascent:
 air rising at more than 0.5 m/s below its cloud carries 0.6–2.0 kJ/kg more than the mean around it, and the lowest
 updraught bases carry the surface air. The scheme's surface parcel meets 1.5 J/kg of inhibition (median) on the
-afternoon's columns and starts with 0.5 J/kg, the IFS's 1 m/s, of which the kinetic-energy equation counts a third
-of the buoyancy (its virtual mass and turbulence factors), so it crosses at most about 1.5 J/kg and reaches its cloud
+afternoon's columns and starts with 0.5 J/kg, the IFS's 1 m/s, and its kinetic-energy equation counts a third of
+the buoyancy (its virtual mass and turbulence factors), so it crosses at most about 1.5 J/kg and reaches its cloud
 on 31% of afternoons (`trigger_on_15_levels`). PlaSim's own boundary layer stays neutral under heating: its vertical
 diffusion and its dry adjustment (`mkdca`) mix away any layer whose potential temperature falls with height. The
 running column, whose mixed layer stands in for both, rains 9.2 mm/day on land afternoons against CM1's 8.7. So the
 trigger fails on CM1's stratified mean, which the running column's boundary layer does not hold, and the explanation
-points to no change in the trigger; the two-year runs show whether PlaSim's land afternoons keep any inhibition like
-CM1's.
+pointed to no change in the trigger. The two-year runs answered otherwise: PlaSim's own columns hold 1.4–2.4 J/kg of
+inhibition against the parcel too (below), so the column's mixed layer had stood in for PlaSim's boundary layer
+better than PlaSim's own does.
 
 ## The tests
 
@@ -369,6 +376,71 @@ minutes of one core's time a year, the low end for a model as quiet as the GCM's
 convecting as often as CM1's sea box; on a run's four processes, 20 seconds to 3 minutes. This is a timing of the
 routines alone; the runs will give the model's.
 
+## Two years in PlaSim on fifteen levels
+
+**The patch in the runner.** `--convection massflux` ([exoplasim_run.py](exoplasim_run.py)) records the scheme with
+its 33 parameters, part of the run key, writes `nprc` 3 and each parameter into `rainmod`'s namelist, and applies
+massflux_fortran.py's patch to the twilight copy's source for a run that sets it, refusing the Betts–Miller scheme's
+options beside it. The patch went into the shared source on 26 October, which changed `rainmod.f90`'s hash from
+9db0dc61… to 7bf3ebea….
+
+**Runs without the scheme stay as they were.** The month trials on ten, fourteen and fifteen levels, rebuilt on the
+patched source, repeat the levels agent's earlier months bit for bit in all 61 output variables and their restarts.
+
+**A smoke month** at fifteen levels with the carried correction keeps every field finite and the humidity nowhere
+negative, its strongest wind 26.6 m/s. It rains 1.78 mm/day against the Betts–Miller month's 2.42, 36% of it
+convective against 88%, and takes 45.9 s against 31.9 s.
+
+**Two years** from the fifteen-level restart (`gcm-runs/A28R_301k_cold_l15_restart`), each beside the Betts–Miller run
+with the same longwave correction, in turn the provisional fifteen-level refit (`A28R_301k_cold_massflux_l15` beside
+`A28R_301k_cold_sbm_rh07_deep200_l15cap`) and the carried correction (`…_massflux_l15_carried` beside
+`…_l15cap_carried`). Each pair differs only in the convection and the source's hash. Years 0–1, against the brief's
+criteria:
+
+| Criterion | Refit: mass-flux; baseline | Carried: mass-flux; baseline | CM1, and the test | Met (refit, carried) |
+|---|---|---|---|---|
+| (a) Sea's air at 41.8, 55.8 km | 256.2, 237.5; 258.5, 240.1 K | 256.9, 238.6; 259.3, 241.2 K | 251.5, 231.8; half the gap closed | no (31–33%), no (28–31%) |
+| (b) Sea, midnight–sunrise | 0.68; 1.98 mm/day | 0.18; 1.48 | 0.14; at most 0.5 | no, yes |
+| (b) Sea, sunset–midnight | 1.60; 2.68 | 4.17; 0.87 | 2.97; at least 1.98 | no, yes |
+| (b) Sea, noon–sunset | 0.45; 1.45 | 0.97; 2.69 | 2.23; 1.1–3.3 | no, no |
+| (c) Land, noon–sunset | 24.3; 17.8 | 24.7; 21.1 | 8.59; nearer than the baseline | no, no |
+| (c) Land, sunrise–noon | 0.13; 0.50 | 0.04; 1.19 | 2.87; at least 1 | no, no |
+| (d) Sea's lowest 0.6 km, vapour | 15.2; 12.3 g/kg | 17.2; 13.4 | 11.8 (lowest 0.5 km); no further | no, no |
+| (e) Imbalance at the top | −0.45; −3.70 W/m² | +3.84; +0.63 | within 3 of the baseline | no (+3.25), no (+3.21) |
+| Ground, global | 299.70; 297.81 K | 300.94; 299.03 | shift reported | +1.88, +1.91 K |
+| (f) Top two levels, air | 164.2, 190.0; 165.8, 191.6 K | 162.8, 190.9; 164.1, 192.6 | reported | |
+| (f) Top two levels, water | 0.021, 1.63; 0.035, 2.33 ppmv | 0.014, 2.01; 0.020, 2.93 | reported | |
+
+The vapour is a mixing ratio and the sea's lowest layer is the fifteen-level bottom layer, compared with CM1's lowest
+0.5 km at matching heights; PlaSim's 2 m air reads from the 0.3 km level and is not compared. PlaSim's free-convection
+constant in its sea fluxes stays at its Earth value, 0.0016. Year 1 alone gives the same answers.
+
+**What happens.** The scheme convects too seldom. Its share of the global rain falls from 86–87% to 42–45% (1.97 and
+1.93 mm/day of rain against 2.18 and 2.15), and large-scale condensation carries the rest: half of the land
+afternoon's 24–25 mm/day. The sea site's air below 10 km runs 1.5–2.3 K warmer than the baseline's and its lowest layer
+holds 3–4 g/kg more vapour; the cloud cover rises from 0.35–0.36 to 0.39–0.41, and the balance at the top gains
+3.2 W/m² while the global ground warms 1.9 K. Aloft the scheme heats 8–30 km where the baseline heats 19–59 km, so the
+air at 42–56 km runs 2.3–2.6 K below the baseline's after two years, a third of the way to CM1's box, and the top two
+levels cool 1.3–1.8 K and lose a third of their water.
+
+**Why it convects so seldom** (`gcm_trigger`). On the runs' own 3-day mean site columns the surface test parcel meets
+1.4–2.4 J/kg of inhibition (medians by quarter) below its level of free convection, and the baselines' columns give
+the same. It starts with 0.5 J/kg, the IFS's 1 m/s, and its kinetic-energy equation counts a third of the
+buoyancy, so it crosses about 1.5 J/kg at most and reaches its cloud on 5–49% of the sea's columns and 0–32% of the
+land's, mostly as cloud 12–100 hPa
+thick. PlaSim's boundary layer thus holds inhibition like CM1's mean columns, and the test parcel's starting energy
+limits the scheme in PlaSim as it did on CM1's columns; what lifting energy a lunar parcel should start with, through
+a boundary layer 4–6 km deep, is the open question these runs leave. The land's site is wet in the GCM, its sensible
+heat running downward by 5–17 W/m² in the day's means under 170–260 W/m² of evaporation, so its surface excess is small.
+
+**The longwave check** (`plasim_longwave check` on year 1 of both runs,
+[longwave_check_massflux_l15.json](../results/gcm/longwave_check_massflux_l15.json)): on the mass-flux columns the
+provisional refit holds the clear-sky longwave within 3.03 W/m² of correlated-k in its worst layer, the carried
+correction within 8.76, as on the baseline's columns (3.0 and 8.2).
+
+**The cost.** The runs took 554–586 and 536–550 s a model year on four processes against their baselines' 448–464 and
+458–463 s, a fifth to a quarter more.
+
 ## Whether to implement it, and what that would take
 
 **The case for it.** The tests answer the approval's condition for the upper air. Mixing at CM1's measured rates holds
@@ -381,9 +453,10 @@ not carry it. On fifteen levels with its surface parcel the scheme also convects
   levels, against 0.16).
 - **The deep heating.** It sits 10–25 km too low, which the column's 1–2 K cooling at 42–56 km already shows.
 
-**The runs** follow: the routine among the runner's patches for runs that set it, ten-, fourteen- and fifteen-level
-runs without it unchanged bit for bit, a smoke run, and two-year tests on fifteen levels from the fifteen-level
-restart with the provisional longwave fit, judged against CM1. Any fifteen-year branch is the author's call.
+**The two-year runs** show a third cost: in PlaSim the scheme convects too seldom, its test parcels held back by the
+inhibition PlaSim's columns carry, so large-scale condensation takes half the rain, the near-ground air warms and
+moistens, and the balance at the top gains 3.2 W/m². Its cooling of the air aloft goes a third of the way to CM1's in
+two years. Any fifteen-year branch is the author's call.
 
 ## Limits
 
@@ -403,7 +476,9 @@ restart with the provisional longwave fit, judged against CM1. Any fifteen-year 
   stretched, and the free-convection form of the stability function in the lunar surface layer.
 - **The downdraught.** Its parameters are Earth's.
 - **The cost.** The Fortran timing is of the routines alone, with ExoPlaSim's flags, on columns from the boxes and the
-  GCM's site cells.
+  GCM's site cells; the runs' seconds a year include whatever else the machine ran.
+- **The two-year runs.** Each is one realization of the first two years after the remap, so they show the direction
+  and early size of the scheme's effect; the inhibition its parcels meet is measured on 3-day means.
 - **A correction.** The first round's cloud-top pressure in the depth test took the pressure of the plume's last point,
   which lies up to a quarter layer above its top; it now takes the pressure at the top's height.
 
@@ -431,4 +506,18 @@ restart with the provisional longwave fit, judged against CM1. Any fifteen-year 
 climate/gcm/.venv/bin/python -m climate.gcm.massflux        # about 6 minutes on one core: ../results/gcm/massflux_offline.json
 python3 -m pytest climate/tests/test_massflux.py              # the scheme's tests, under a second
 python3 -m pytest climate/tests/test_massflux_fortran.py      # the Fortran routine's, about half a minute with gfortran
+M=/media/projectspace/terluna-research/session-tools/agents/climate-massflux2
+$M/run_massflux_tests.sh month10                 # and month14, month15: the months without the scheme, for the bit check
+climate/gcm/.venv/bin/python $M/bit_check.py A28R_301k_cold_sbm_rh07_deep200_month_mfsource \
+    A28R_301k_cold_sbm_rh07_deep200_month_recheck …                               # every variable and the restarts
+$M/run_massflux_tests.sh smoke15                 # one model month with the scheme; then smoke_check.py
+$M/run_massflux_tests.sh test15                  # two years with the provisional refit, about 20 minutes on 4 workers
+$M/run_massflux_tests.sh carried15               # two years with the carried correction
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_cold_massflux_l15:1 \
+    --case A28R_301k_cold_massflux_l15_carried:1 \
+    --correction provisional_l15=climate/results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json \
+    --correction carried_301k_l15=climate/results/gcm/longwave_A28_corrected_970_lw_ice_l15.json \
+    --output climate/results/gcm/longwave_check_massflux_l15.json                # about a minute and a half
+climate/gcm/.venv/bin/python $M/gcm_trigger.py A28R_301k_cold_massflux_l15 …     # the parcel on the runs' columns
+climate/gcm/.venv/bin/python $M/massflux_l15_analysis.py > $M/massflux_l15_analysis.txt   # the results file
 ```
