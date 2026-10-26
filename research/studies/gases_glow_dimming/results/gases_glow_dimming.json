@@ -5,8 +5,8 @@
       "research/studies/gases_glow_dimming/run.py": "36b595e6a99f25a13344e93b232198e4b365db7c993a2c148599adac630c2ecc"
     },
     "inputs": {
-      "research/studies/light_limitation/results/light_limitation.json": "9546802ad51bb5ed2a9300502d12d5bdddc08423b7336b285926084eb9e5d6d9",
-      "research/studies/domain_synthesis/results/ledgers.json": "fcee4627600473eb4513dbd45db2bc947fde5a9d959af1bd1b0463a4fb8e4559",
+      "research/studies/light_limitation/results/light_limitation.json": "138794d5cf483dc86a0d0c65b0fbc38c5e45ad8cb937c9e640564c4b483f0a3f",
+      "research/studies/domain_synthesis/results/ledgers.json": "853237c23e920e89efeb72361515271cd1fc2f5f97ee55bf06f67f01f3e8ac38",
       "research/studies/gases_glow_dimming/results/glow_absorption.json": "e6230f2334fb8aedf97acb31ef78107f80f4bcdb1fbb4985093a83e0bc09406e"
     },
     "ignored_inputs": {
