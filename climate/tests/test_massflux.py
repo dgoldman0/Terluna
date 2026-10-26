@@ -1,9 +1,12 @@
 """The mass-flux convection scheme (massflux.py) on made-up lunar columns: its saturation is PlaSim's, its plume's
 mixing solves its equation exactly, its saturated state keeps its conserved variables, the column keeps its energy
-and water to round-off with the latent heat of what rains out, a moist boundary layer under a stable layer makes a
-shallow cloud capped below that layer while an unstable column convects deep, a dry stable column stays quiet, the
-closures scale as their equations say, PlaSim's evaporation of falling rain keeps the water it moves, and a box's
-column laid on PlaSim's layers keeps its water."""
+and water to round-off with the latent heat of what rains out (PlaSim's moist heat capacity converting the heating),
+a moist boundary layer under a stable layer makes a shallow cloud capped below that layer while an unstable column
+convects deep, a dry stable column stays quiet, the closures scale as their equations say, the surface parcel takes
+the air near the ground from surface-layer similarity in a convective surface layer only, the cloud's top pressure
+lies between the plume's points, PlaSim's mkrain (its copy) keeps the water it moves and never lets the running
+water fall below nil, the phases handed to it follow its own rule, and a box's column laid on PlaSim's layers keeps
+its water."""
 import math
 
 import numpy as np
@@ -13,6 +16,7 @@ from climate.gcm import massflux as mf
 from climate.gcm import sbm
 
 G = 1.6242
+TRAPEZOID = getattr(np, 'trapezoid', None) or getattr(np, 'trapz')
 C = dict(mf.PLASIM, ga=G, gascon=288.38, acpd=288.38 / 0.286)
 C['rdbrv'] = C['gascon'] / 461.51
 
@@ -94,24 +98,42 @@ def test_the_saturated_state_keeps_its_conserved_variables():
 
 def column_budgets(col, r):
     m = np.diff(col['p_half']) / G
-    heat = float(np.sum(C['acpd'] * r['dtdt'] * m))
+    heat = float(np.sum(C['acpd'] * (1.0 + C['ADV'] * col['q']) * r['dtdt'] * m))
     water = float(np.sum(r['dqdt'] * m))
     return heat, water
 
 
 def test_the_column_keeps_its_energy_and_water():
     col = lunar_column()
-    for melt in (True, False):
+    for melt in (True, False, 'plasim'):
         r = run(col, melt=melt)
         assert r['type'] == 'deep' and r['m_base'] > 0.0
         heat, water = column_budgets(col, r)
-        if melt:
+        if melt is True:
             rain, snow = r['rain_surface'], r['snow_surface']
-        else:                                   # what the scheme hands PlaSim's mkrain, by the phase it formed in
+        else:                                   # what the scheme hands PlaSim's mkrain, by phase
             rain, snow = float(r['net_rain'].sum()), float(r['net_snow'].sum())
         assert rain + snow > 0.0
         assert water == pytest.approx(-(rain + snow), rel=1e-9, abs=1e-15)
         assert heat == pytest.approx(C['ALV'] * rain + C['ALS'] * snow, rel=1e-9, abs=1e-9)
+
+
+def test_the_phases_handed_on_follow_mkrains_rule():
+    """mkrain adds each layer's handed rain and snow to its running totals, then turns all of them to rain above
+    freezing and to snow at or below it: with the scheme's 'plasim' phases the totals never go negative."""
+    col = lunar_column()
+    r = run(col, melt='plasim')
+    t = col['t']
+    rain_run, snow_run = 0.0, 0.0
+    for k in range(t.size):
+        rain_run += r['net_rain'][k]
+        snow_run += r['net_snow'][k]
+        if t[k] > C['TMELT'] and snow_run > 0.0:
+            rain_run, snow_run = rain_run + snow_run, 0.0
+        elif t[k] <= C['TMELT'] and rain_run > 0.0:
+            rain_run, snow_run = 0.0, rain_run + snow_run
+        assert rain_run >= -1e-18 and snow_run >= -1e-18, k
+    assert r['evap_down'].sum() > 0.0 and np.any(r['net_rain'] < 0.0)     # the downdraught takes from the rain
 
 
 def test_a_moist_layer_under_a_stable_layer_makes_a_capped_shallow_cloud():
@@ -156,15 +178,60 @@ def test_the_closures_scale_as_their_equations_say():
 
 def test_rain_evaporation_moves_water_without_loss():
     col = lunar_column()
-    r = run(col, melt=False)
+    r = run(col, melt='plasim')
     c = mf.Column(col['t'], col['q'], col['p_full'], col['p_half'], G, C, col['z_full'], col['z_half'])
+    handed = float((r['net_rain'] + r['net_snow']).sum())
     for gamma in (0.0, 0.03, 10.0):
         e = mf.evaporate(c, r['net_rain'], r['net_snow'], r['dtdt'], r['dqdt'], gamma)
-        handed = float((r['net_rain'] + r['net_snow']).sum())
         evaporated = float(np.sum(e['dqdt'] * c.mass))
         assert e['rain'] + e['snow'] + evaporated == pytest.approx(handed, rel=1e-9)
+        assert e['rain'] >= 0.0 and e['snow'] >= 0.0
         if gamma == 0.0:
             assert evaporated == 0.0
+        if gamma == 10.0:                       # the floor: the downdraught's water is never taken twice
+            assert e['rain'] + e['snow'] == pytest.approx(0.0, abs=1e-12 * handed)
+    # snow handed into a warm layer reaches the ground as rain, and the layer pays the heat of melting
+    snow = np.zeros(c.n)
+    snow[0] = 1.0e-4
+    e = mf.evaporate(c, np.zeros(c.n), snow, np.zeros(c.n), np.zeros(c.n), 0.0)
+    assert e['snow'] == 0.0 and e['rain'] == pytest.approx(1.0e-4)
+    melt_heat = float(np.sum(C['acpd'] * (1.0 + C['ADV'] * c.q) * e['dtdt'] * c.mass))
+    assert melt_heat == pytest.approx(-(C['ALS'] - C['ALV']) * 1.0e-4, rel=1e-12)
+
+
+def test_the_surface_parcel_takes_the_air_near_the_ground():
+    col = lunar_column(n=60)
+    c = mf.Column(col['t'], col['q'], col['p_full'], col['p_half'], G, C, col['z_full'], col['z_half'])
+    # the IFS's lowest level, 10 m on Earth, stretched by the ratio of the gravities
+    assert mf.source_height(c) == pytest.approx(10.0 * 9.80665 / G)
+    earth = mf.Column(col['t'], col['q'], col['p_full'], col['p_half'], 9.80665, C, col['z_full'], col['z_half'])
+    assert mf.source_height(earth) == pytest.approx(10.0)
+    # the integrated stability function is the integral of (1 - phi_h) / zeta for phi_h = (1 - 16 zeta)^(-1/3)
+    for zeta in (-0.1, -2.0, -30.0):
+        x = np.linspace(zeta, 0.0, 200001)
+        f = np.r_[(1.0 - (1.0 - 16.0 * x[:-1]) ** (-1.0 / 3.0)) / x[:-1], -16.0 / 3.0]     # its limit at 0
+        assert mf.psi_heat(zeta) == pytest.approx(-TRAPEZOID(f, x), rel=1e-5)
+    # heated, evaporating ground: the air near it is warmer and moister than the lowest level's (z_n 833 m here);
+    # cooled ground: the parcel keeps the lowest level's air
+    dt_l, dq_l = mf.surface_layer_air(c, 100.0, 200.0)
+    assert dt_l > 0.0 and dq_l > 0.0
+    assert mf.surface_layer_air(c, -30.0, 0.0) == (0.0, 0.0)
+    assert mf.surface_layer_air(c, 100.0, 200.0, dict(mf.PARAMETERS, source_height_earth=0.0)) == (0.0, 0.0)
+    # free convection: the difference hardly depends on the friction velocity
+    fast = mf.surface_layer_air(c, 100.0, 200.0, dict(mf.PARAMETERS, ustar=0.2))
+    assert fast[0] == pytest.approx(dt_l, rel=0.05)
+    # the excess: 1.5 times the flux over rho sigma_w, sigma_w taken at the source height
+    dt_s, dq_s, ws = mf.surface_excess(c, 100.0, 0.0)
+    rho = c.ph[-1] / (C['gascon'] * mf.virtual(c.t[-1], c.q[-1], C))
+    flux = 100.0 / C['acpd'] / rho
+    expect = (1.2 * 0.1 ** 3 + 1.5 * 0.4 * G / c.t[-1] * mf.source_height(c) * flux) ** (1.0 / 3.0)
+    assert ws == pytest.approx(expect, rel=1e-12) and dt_s == pytest.approx(1.5 * flux / ws, rel=1e-12)
+
+
+def test_the_cloud_top_pressure_lies_between_the_plumes_points():
+    points = [dict(z=0.0, p=1.0e5), dict(z=1000.0, p=9.0e4), dict(z=2000.0, p=8.0e4)]
+    assert mf.top_pressure(points, 1500.0) == pytest.approx(math.sqrt(9.0e4 * 8.0e4))
+    assert mf.top_pressure(points, 2000.0) == pytest.approx(8.0e4)
 
 
 def test_a_box_column_laid_on_plasims_layers_keeps_its_water():

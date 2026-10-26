@@ -18,7 +18,9 @@ large-scale mass flux at its base. The tendencies are the convergence of the upd
 of liquid-ice static energy and total water, against the compensating motion of the surrounding air taken upwind,
 with the rain's formation, evaporation and melting as the only sources, so the column keeps its energy and water
 exactly: the heat it gains is the latent heat of the rain and snow at the ground, and the water it loses is that
-precipitation. Detrained condensate evaporates where it leaves the cloud, since PlaSim carries no cloud water.
+precipitation. Detrained condensate evaporates where it leaves the cloud, since PlaSim carries no cloud water. With
+melt 'plasim' the falling water takes the phase PlaSim's mkrain gives it, and the heating goes over PlaSim's moist heat
+capacity; massflux_fortran.py holds that form as Fortran for PlaSim, tested against this copy.
 
 Lunar choices (each recorded in PARAMETERS with its source):
 - Entrainment per metre follows the bulk rates measured on the CM1 sea box's clouds (box_entrainment.py) and the
@@ -27,6 +29,9 @@ Lunar choices (each recorded in PARAMETERS with its source):
 - Depths, departure ranges and mixed layers are in pressure, which a column stretched by the ratio of the gravities
   keeps; lengths and Earth's constant rates per metre are divided by that ratio where no CM1 measurement stands for
   them, and each such value is marked as stretched.
+- The surface test parcel is the IFS's in such a stretched column: the air of the IFS's lowest model level, 10 m up on
+  Earth and 60 m on the Moon, carried down from PlaSim's lowest level by surface-layer similarity, with the IFS's
+  excess from the surface fluxes at that height (the second round, massflux.md).
 - Times follow the column: the adjustment time is the cloud's own turnover time, H over its mean updraught speed, with
   no Earth bound on it; the rain forms at Earth's rates per second, as the gravity pair's microphysics does.
 
@@ -77,6 +82,16 @@ PARAMETERS = dict(
                                    # 0 takes the lowest level's own air, as CM1's updraughts carry it, massflux.md)
     sub_factor=0.4,                # test parcels mix in sub-cloud air at this share of the deep rate at the base
                                    # (the IFS Cy40r1 deep test's 0.4, (6.21))
+    # the surface test parcel (massflux.md, the second round): the IFS's, in a column stretched by the ratio of the
+    # gravities. Its air is that of the IFS's lowest model level, 10 m above Earth's ground and 60 m above the Moon's,
+    # carried down from PlaSim's lowest level by surface-layer similarity (surface_layer_air), and its excess is the
+    # IFS's from the surface fluxes (Cy40r1 (6.19)) with sigma_w at that height ((6.20))
+    source_height_earth=10.0,      # m at Earth's gravity, stretched by g_earth / g (0: the lowest level's own air)
+    ustar=0.1,                     # m/s, the IFS's friction velocity in sigma_w (6.20), also taken for the similarity
+    excess_scale='source',         # sigma_w's height: 'source', the parcel's source height, or 'mixed_layer', the
+                                   # first round's convective velocity w* of the sub-cloud layer
+    stability='free_convection',   # the similarity's stability function in unstable air: 'free_convection',
+                                   # phi_h = (1 - 16 zeta)^(-1/3); 'dyer_hicks', the IFS's (1 - 16 zeta)^(-1/2); 'neutral'
     # microphysics (IFS (6.35)-(6.37)), at Earth's rates per second
     c0=1.4e-3, l_crit=5.0e-4, l_min=3.0e-4, w_max_precip=10.0, t_bf=268.16, t_ice=250.16,
     # downdraughts (IFS (6.13), (6.15)): eta of the cloud-base flux at the level of free sinking; their mixing
@@ -379,21 +394,78 @@ def mixed_layer_depth(col: Column) -> float:
     return float(col.zh[0])
 
 
+def source_height(col: Column, prm=PARAMETERS) -> float:
+    """The height (m) whose air the surface test parcel takes: the IFS's lowest model level, source_height_earth above
+    Earth's ground, stretched by the ratio of Earth's gravity to the column's (60 m on the Moon); nil when it is 0."""
+    return prm['source_height_earth'] * G_EARTH / col.g
+
+
 def surface_excess(col: Column, shf: float, lhf: float, prm=PARAMETERS):
-    """The surface test parcels' excess over the lowest level, temperature (K) and vapour (kg/kg), and the convective
-    velocity w* (m/s) that starts the shallow test parcel, from the surface's sensible and latent heat fluxes shf and
-    lhf (W/m2, upward): 1.5 times each flux over rho w* (IFS (6.19)), with w* the mixed layer's convective velocity
-    (g / T z_i times the surface buoyancy flux)^(1/3), z_i the depth of the sub-cloud layer, which keeps the
-    formula's scaling in a lunar boundary layer 4-6 km deep (massflux.md)."""
+    """The surface test parcels' excess, temperature (K) and vapour (kg/kg), and the velocity scale (m/s) that starts
+    the shallow test parcel, from the surface's sensible and latent heat fluxes shf and lhf (W/m2, upward): 1.5 times
+    each flux over rho sigma_w (IFS Cy40r1 (6.19)). With excess_scale 'source', sigma_w is the IFS's (6.20), Holtslag
+    and Moeng's (1991) profile of the vertical velocity's spread in a convective boundary layer at the height z of
+    the parcel's source air (the source height, or the lowest level's if that is lower): (1.2 u*^3 + 1.5 kappa g z /
+    T (w'theta_v')_s)^(1/3), with z / z_i cancelling against w*^3's z_i. With 'mixed_layer' it is the first round's
+    reading, the sub-cloud layer's convective velocity w* = (g / T z_i (w'theta_v')_s)^(1/3), at least 0.1 m/s."""
     c = col.c
     t, q = col.t[-1], col.q[-1]
     rho = col.ph[-1] / (c['gascon'] * virtual(t, q, c))
     lv = c['ALV']
     flux = (shf / c['acpd'] + (1.0 / c['rdbrv'] - 1.0) * t * lhf / lv) / rho      # kinematic buoyancy flux, K m/s
-    zi = mixed_layer_depth(col)
-    ws = max(col.g / t * zi * max(flux, 0.0), 1.0e-6) ** (1.0 / 3.0)
-    ws = max(ws, 0.1)
+    if prm['excess_scale'] == 'source':
+        z = col.zf[-1]
+        if prm['source_height_earth'] > 0.0:
+            z = min(source_height(col, prm), z)
+        ws = (1.2 * prm['ustar'] ** 3 + 1.5 * 0.4 * col.g / t * z * max(flux, 0.0)) ** (1.0 / 3.0)
+    else:
+        zi = mixed_layer_depth(col)
+        ws = max(col.g / t * zi * max(flux, 0.0), 1.0e-6) ** (1.0 / 3.0)
+        ws = max(ws, 0.1)
     return 1.5 * max(shf, 0.0) / (rho * c['acpd'] * ws), 1.5 * max(lhf, 0.0) / (rho * lv * ws), ws
+
+
+def psi_heat(zeta: float, form: str = 'free_convection') -> float:
+    """The integrated stability function for heat and vapour in unstable air (zeta < 0), psi(zeta) = the integral from
+    0 to zeta of (1 - phi_h(x)) / x: for the free-convection form phi_h = (1 - 16 zeta)^(-1/3) (Carl and others 1973;
+    Kader and Yaglom 1990), whose exponent free convection sets, as the lunar surface layer is (zeta near -10 at 0.3 km
+    over the sea); for 'dyer_hicks' the IFS's (1 - 16 zeta)^(-1/2) (Paulson 1970's integral); nil for 'neutral'."""
+    if form == 'neutral':
+        return 0.0
+    if form == 'dyer_hicks':
+        return 2.0 * math.log((1.0 + math.sqrt(1.0 - 16.0 * zeta)) / 2.0)
+    y = (1.0 - 16.0 * zeta) ** (1.0 / 3.0)
+    return (1.5 * math.log((y * y + y + 1.0) / 3.0) - math.sqrt(3.0) * math.atan((2.0 * y + 1.0) / math.sqrt(3.0))
+            + math.pi / math.sqrt(3.0))
+
+
+def surface_layer_air(col: Column, shf: float, lhf: float, prm=PARAMETERS):
+    """The temperature and vapour (K, kg/kg) by which the air at the source height exceeds the lowest level's in a
+    convective surface layer, by Monin-Obukhov similarity from the surface fluxes (W/m2, upward) and the IFS's friction
+    velocity u*: potential temperature and vapour differ between the lowest level's height z_n and the source height
+    z_s by (w'theta')_s / u* (or (w'q')_s / u*) times (ln(z_n / z_s) - psi(z_n / L) + psi(z_s / L)) / kappa, L the
+    Obukhov length; the potential temperature's difference is carried to the lowest level's pressure. Nil when the
+    surface's virtual heat flux does not rise (no surface-rooted convection then; the excess is nil too), when the
+    source height is 0, or when it is not below the lowest level."""
+    z_s, z_n = source_height(col, prm), col.zf[-1]
+    if z_s <= 0.0 or z_s >= z_n:
+        return 0.0, 0.0
+    c = col.c
+    t, q = col.t[-1], col.q[-1]
+    rho = col.ph[-1] / (c['gascon'] * virtual(t, q, c))
+    ust = prm['ustar']
+    wt = shf / (rho * c['acpd'])
+    wq = lhf / (rho * c['ALV'])
+    exner = (col.pf[-1] / col.ps) ** (c['gascon'] / c['acpd'])
+    eps1 = 1.0 / c['rdbrv'] - 1.0
+    theta = t / exner
+    wtv = wt * (1.0 + eps1 * q) + eps1 * theta * wq                   # the surface's virtual heat flux, K m/s
+    if wtv <= 0.0:
+        return 0.0, 0.0
+    obukhov = -ust ** 3 * theta * (1.0 + eps1 * q) / (0.4 * col.g * wtv)
+    form = prm.get('stability', 'free_convection')
+    f = (math.log(z_n / z_s) - psi_heat(z_n / obukhov, form) + psi_heat(z_s / obukhov, form)) / 0.4
+    return wt / ust * f * exner, wq / ust * f
 
 
 def source_layer(col: Column, k: int, dp_mix: float):
@@ -427,6 +499,13 @@ def first_half_level(points: list, base: int):
     return None
 
 
+def top_pressure(points: list, top_z: float) -> float:
+    """The pressure at the plume's top height top_z, log pressure linear in height between the plume's points (which
+    rise along the list), the last point's beyond them."""
+    z = [x['z'] for x in points]
+    return float(np.exp(np.interp(top_z, z, [math.log(x['p']) for x in points])))
+
+
 def trial(col: Column, k: int, t0: float, q0: float, w0: float, kind: str, rain, prm=PARAMETERS) -> dict:
     """One test parcel from full level k: its points, condensation (cloud base) and top, the cloud's depth in
     pressure from its base to its top, and whether it saturates at a half level with kinetic energy to spare."""
@@ -439,7 +518,7 @@ def trial(col: Column, k: int, t0: float, q0: float, w0: float, kind: str, rain,
     jb = first_half_level(points, base)
     if jb is None or points[jb]['kin'] <= 0.0:
         return out
-    p_top = float(np.exp(np.interp(-top_z, [-x['z'] for x in points], [math.log(x['p']) for x in points])))
+    p_top = top_pressure(points, top_z)
     out.update(ok=True, base_point=jb, base_half=points[jb]['index'], p_base=points[jb]['p'], p_top=p_top,
                depth=points[jb]['p'] - p_top)
     return out
@@ -452,9 +531,11 @@ def classify(col: Column, shf: float, lhf: float, omega=None, prm=PARAMETERS) ->
     column deep; failing both, a moist level under large-scale ascent (omega < 0, Pa/s) convects from there."""
     c = col.c
     dt_s, dq_s, ws = surface_excess(col, shf, lhf, prm)
-    t0, q0 = col.t[-1] + max(prm['dt_deep'], dt_s), col.q[-1] + max(prm['dq_deep'], dq_s)
+    dt_l, dq_l = surface_layer_air(col, shf, lhf, prm)
+    t0, q0 = col.t[-1] + dt_l + max(prm['dt_deep'], dt_s), col.q[-1] + dq_l + max(prm['dq_deep'], dq_s)
     shallow = trial(col, col.n - 1, t0, q0, ws, 'shallow', rain=False, prm=prm)
     shallow['excess'] = (dt_s, dq_s, ws)
+    shallow['surface_layer'] = (dt_l, dq_l)
     deep = None
     for k in range(col.n - 1, -1, -1):
         if col.ps - col.pf[k] > prm['departure_dp']:
@@ -463,7 +544,8 @@ def classify(col: Column, shf: float, lhf: float, omega=None, prm=PARAMETERS) ->
             continue
         ts, qs_ = source_layer(col, k, prm['source_dp'])
         if k == col.n - 1:                 # the surface parcel takes the larger of the two excesses (IFS (6.19), (6.21))
-            ts, qs_, w0 = ts + max(prm['dt_deep'], dt_s), qs_ + max(prm['dq_deep'], dq_s), max(prm['w_base_deep'], ws)
+            ts, qs_ = ts + dt_l + max(prm['dt_deep'], dt_s), qs_ + dq_l + max(prm['dq_deep'], dq_s)
+            w0 = max(prm['w_base_deep'], ws)
         else:
             ts, qs_, w0 = ts + prm['dt_deep'], qs_ + prm['dq_deep'], prm['w_base_deep']
         tr = trial(col, k, ts, qs_, w0, 'deep', rain=True, prm=prm)
@@ -601,15 +683,22 @@ def downdraught(col: Column, up: dict, prm=PARAMETERS) -> dict:
 
 # --------------------------------------------------------------------------------------------- fluxes and tendencies
 
-def tendencies(col: Column, up: dict, down: dict, scale: float, prm=PARAMETERS, melt: bool = True) -> dict:
+def tendencies(col: Column, up: dict, down: dict, scale: float, prm=PARAMETERS, melt=True, t_phase=None,
+               t_ground=None) -> dict:
     """The column's tendencies (K/s, kg/kg/s) and precipitation for the updraught and downdraught scaled to a cloud
     base flux of `scale` (kg/m2/s): the convergence of their fluxes of liquid-ice static energy and total water
     against the compensating motion of the surrounding air taken upwind, the fluxes in the sub-cloud layer falling
-    linearly in pressure to nil at the ground (IFS 6.5), the rain and snow formed as sources, the downdraught's
-    evaporation, and (with melt) the snow melting in the first layer above freezing that it falls into; without
-    melt the falling water keeps the phase it formed in, for PlaSim's mkrain to convert. Returns the tendencies, the
-    half-level fluxes and mass fluxes, the precipitation flux at each half level and at the ground, and the rain and
-    snow each layer hands on net of the downdraught's evaporation."""
+    linearly in pressure to nil at the ground (IFS 6.5), the rain and snow formed as sources and the downdraught's
+    evaporation. The falling water's phase follows `melt`:
+    - True: snow melts in the first layer above freezing that it falls into, the scheme taking the heat;
+    - False: the falling water keeps the phase it formed in;
+    - 'plasim': it takes the phase PlaSim's mkrain gives it (rainmod.f90), all of it rain in a layer whose
+      temperature t_phase (PlaSim's at the step's start, the column's by default) is above freezing and snow
+      otherwise, and the downdraught evaporates that phase; mkrain itself takes the heat of melting and freezing, so
+      the rain and snow handed on stay non-negative in mkrain's running totals however they change phase.
+    The heating is converted to temperature with PlaSim's moist heat capacity cp (1 + ADV q). Returns the
+    tendencies, the half-level fluxes and mass fluxes, the precipitation flux at each half level and at the ground,
+    and the rain and snow each layer hands on net of the downdraught's evaporation."""
     c, g, n = col.c, col.g, col.n
     cp, lv, ls = c['acpd'], c['ALV'], c['ALS']
     mu, md = up['m'] * scale, down['m'] * scale
@@ -637,6 +726,7 @@ def tendencies(col: Column, up: dict, down: dict, scale: float, prm=PARAMETERS, 
             fq[i] = zf * fu_q + md[i] * (down['q'][i] - qh)
     rain, snow = up['rain'] * scale, up['snow'] * scale
     evap = down['evap'] * scale
+    t_phase = col.t if t_phase is None else np.asarray(t_phase, float)
     dsdt = np.zeros(n)
     dqdt = np.zeros(n)
     p_rain, p_snow = np.zeros(n + 1), np.zeros(n + 1)
@@ -644,19 +734,27 @@ def tendencies(col: Column, up: dict, down: dict, scale: float, prm=PARAMETERS, 
     net_rain, net_snow = np.zeros(n), np.zeros(n)
     for k in range(n):
         heat = lv * rain[k] + ls * snow[k]
-        # rain and snow falling into the layer, less what the downdraught evaporates here (snow first, as rain)
         pr, ps_ = p_rain[k] + rain[k], p_snow[k] + snow[k]
-        e = min(evap[k], pr + ps_)
-        e_snow = min(e, ps_) if col.t[k] < c['TMELT'] else 0.0
-        e_rain = e - e_snow
-        if e_rain > pr:
-            e_snow += e_rain - pr
-            e_rain = pr
+        if melt == 'plasim':
+            if t_phase[k] > c['TMELT']:
+                pr, ps_ = pr + ps_, 0.0
+            else:
+                pr, ps_ = 0.0, pr + ps_
+            e = min(evap[k], pr + ps_)
+            e_rain, e_snow = (e, 0.0) if t_phase[k] > c['TMELT'] else (0.0, e)
+        else:
+            # rain and snow falling into the layer, less what the downdraught evaporates here (snow first, as rain)
+            e = min(evap[k], pr + ps_)
+            e_snow = min(e, ps_) if col.t[k] < c['TMELT'] else 0.0
+            e_rain = e - e_snow
+            if e_rain > pr:
+                e_snow += e_rain - pr
+                e_rain = pr
         pr -= e_rain
         ps_ -= e_snow
         heat -= lv * e_rain + ls * e_snow
         net_rain[k], net_snow[k] = rain[k] - e_rain, snow[k] - e_snow
-        if melt and ps_ > 0.0 and col.t[k] > c['TMELT']:
+        if melt is True and ps_ > 0.0 and col.t[k] > c['TMELT']:
             melted[k] = ps_
             heat -= (ls - lv) * ps_
             net_rain[k] += ps_
@@ -666,9 +764,9 @@ def tendencies(col: Column, up: dict, down: dict, scale: float, prm=PARAMETERS, 
         p_rain[k + 1], p_snow[k + 1] = pr, ps_
         dsdt[k] = g * (fs[k + 1] - fs[k]) / col.dp[k] + g * heat / col.dp[k]
         dqdt[k] = g * (fq[k + 1] - fq[k]) / col.dp[k] - g * (rain[k] + snow[k] - e_rain - e_snow) / col.dp[k]
-    return dict(dtdt=dsdt / cp, dqdt=dqdt, fs=fs, fq=fq, mu=mu, md=md, p_rain=p_rain, p_snow=p_snow,
-                rain_formed=rain, snow_formed=snow, evap_down=evap, melt=melted, net_rain=net_rain, net_snow=net_snow,
-                rain_surface=float(p_rain[n]), snow_surface=float(p_snow[n]))
+    return dict(dtdt=dsdt / (cp * (1.0 + c['ADV'] * col.q)), dqdt=dqdt, fs=fs, fq=fq, mu=mu, md=md, p_rain=p_rain,
+                p_snow=p_snow, rain_formed=rain, snow_formed=snow, evap_down=evap, melt=melted, net_rain=net_rain,
+                net_snow=net_snow, rain_surface=float(p_rain[n]), snow_surface=float(p_snow[n]))
 
 
 # --------------------------------------------------------------------------------------------------------- closures
@@ -718,6 +816,21 @@ def boundary_pcape(col: Column, up: dict, bl_dtdt, bl_dqdt, tau_bl: float, prm=P
     return tau_bl / t_star * total
 
 
+def sub_cloud_wind(col: Column, up: dict, u_bl) -> float:
+    """The sub-cloud layer's wind speed (m/s): u_bl itself, or for wind speeds by level their mean by pressure from the
+    ground to the cloud base."""
+    if np.ndim(u_bl) == 0:
+        return float(u_bl)
+    total, mass = 0.0, 0.0
+    for k in range(col.n - 1, -1, -1):
+        if col.ph[k + 1] <= up['p_base']:
+            break
+        dp = col.ph[k + 1] - max(col.ph[k], up['p_base'])
+        total += u_bl[k] * dp
+        mass += dp
+    return total / mass if mass > 0.0 else float(u_bl[-1])
+
+
 def boundary_mse_supply(col: Column, up: dict, bl_dtdt, bl_dqdt) -> float:
     """The moist static energy (W/m2) that processes other than convection bring into the sub-cloud layer, from the
     ground to the cloud base."""
@@ -734,13 +847,15 @@ def boundary_mse_supply(col: Column, up: dict, bl_dtdt, bl_dqdt) -> float:
 # ----------------------------------------------------------------------------------------------------------- column
 
 def column(t, q, p_full, p_half, g: float, dt: float = 1800.0, shf: float = 0.0, lhf: float = 0.0, bl_dtdt=None,
-           bl_dqdt=None, omega=None, u_bl: float = 0.0, land: bool = False, prm=PARAMETERS, c=PLASIM, z_full=None,
-           z_half=None, melt: bool = True) -> dict:
+           bl_dqdt=None, omega=None, u_bl=0.0, land: bool = False, prm=PARAMETERS, c=PLASIM, z_full=None,
+           z_half=None, melt=True, t_phase=None) -> dict:
     """The scheme on one column (arrays top first): temperature (K), specific humidity, full and half level pressures
     (Pa; half level 0 the top, n the ground), gravity, PlaSim's time step dt (s), the surface's sensible and latent heat
     fluxes (W/m2, upward), the tendencies of temperature and vapour from processes other than convection (K/s,
     kg/kg/s by level: the boundary layer's turbulence, radiation and advection), the large-scale vertical velocity
-    (Pa/s by level, for mid-level convection), the sub-cloud wind speed (m/s) and whether the ground is land. Returns
+    (Pa/s by level, for mid-level convection), the sub-cloud wind speed (m/s; or the wind speed by level, whose mean by
+    mass from the ground to the cloud base is taken) and whether the ground is land; the falling water's phase follows
+    melt and t_phase (tendencies). Returns
     the type, the cloud's base and top, its base mass flux and closure terms, the tendencies (K/s, kg/kg/s), the
     half-level mass fluxes (kg/m2/s), the rain and snow formed and reaching the ground before PlaSim's evaporation of
     falling rain (kg/m2/s), and the test parcels' results."""
@@ -759,17 +874,16 @@ def column(t, q, p_full, p_half, g: float, dt: float = 1800.0, shf: float = 0.0,
         return out
     up = updraught(col, decision, prm)
     down = downdraught(col, up, prm)
-    unit = tendencies(col, up, down, 1.0, prm)
+    unit = tendencies(col, up, down, 1.0, prm, melt, t_phase)
     kind = decision['type']
     pc = pcape(col, up)
     out.update(z_base=up['z_base'], z_top=up['z_top'], p_base=up['p_base'], pcape=pc, up=up, down=down,
-               p_top=float(np.exp(np.interp(-up['z_top'], [-x['z'] for x in up['points']],
-                                            [math.log(x['p']) for x in up['points']]))))
+               p_top=top_pressure(up['points'], up['z_top']))
     if kind == 'deep':
         tau_c = max(up['z_top'] - up['z_base'], 1.0) / max(up['w_mean'], 0.1)
         tau = max(prm['tau_factor'] * tau_c, prm['tau_min'], dt)
         if decision['rooted']:
-            tau_bl = tau_c if land else max(up['z_base'], 1.0) / max(u_bl, prm['u_bl_min'])
+            tau_bl = tau_c if land else max(up['z_base'], 1.0) / max(sub_cloud_wind(col, up, u_bl), prm['u_bl_min'])
             pbl = boundary_pcape(col, up, bl_dtdt, bl_dqdt, tau_bl, prm)
         else:
             tau_bl, pbl = None, 0.0
@@ -795,7 +909,7 @@ def column(t, q, p_full, p_half, g: float, dt: float = 1800.0, shf: float = 0.0,
             limit = min(limit, prm['cfl'] * min(col.mass[i - 1], col.mass[i]) / dt / mnet[i])
     out['cfl_limited'] = m_base > limit
     m_base = min(m_base, limit)
-    tend = tendencies(col, up, down, m_base, prm, melt)
+    tend = tendencies(col, up, down, m_base, prm, melt, t_phase)
     out.update(m_base=m_base, dtdt=tend['dtdt'], dqdt=tend['dqdt'], mu=tend['mu'], md=tend['md'],
                rain_formed=tend['rain_formed'], snow_formed=tend['snow_formed'], evap_down=tend['evap_down'],
                rain_surface=tend['rain_surface'], snow_surface=tend['snow_surface'], fs=tend['fs'], fq=tend['fq'],
@@ -896,7 +1010,7 @@ def cm1_outputs(case: str, span) -> dict:
             lhf=float(d['qfx']) * bb.XLV,
             u_bl=float(np.mean(d['wsp'][below])), rain=float(d['prate']) * DAY, cape=float(d['cape']),
             table_dtdt=table_t[::-1], table_dqdt=table_q[::-1], w_mean=w_mean[::-1],
-            cin=float(d['cin']), rho=rho[::-1], g=g, mass=(rho * dz)[::-1]))
+            cin=float(d['cin']), rho=rho[::-1], g=g, mass=(rho * dz)[::-1], ust=float(d['ust'])))
     return dict(case=case, span=list(span), g=g, rows=rows, zh=zh, zw=zw, land=cfg['site']['surface'] == 'land',
                 inputs={'runner': record.get('runner'), 'build': record['build']['label']})
 
@@ -937,61 +1051,69 @@ def cm1_microphysics(case: str, span) -> dict:
     return res
 
 
-def evaporate(col: Column, rain, snow, dtdt, dqdt, gamma: float, step2: float = 2.0 * STEP_S) -> dict:
-    """PlaSim's evaporation of falling rain and snow (rainmod.f90, mkrain) applied to the scheme's precipitation formed
-    by layer (kg/m2/s, top first): layer by layer from the top, the falling water turns to rain where the layer is
-    above freezing and to snow below, and each unsaturated layer evaporates a share gamma of its saturation deficit a
-    step (step2, PlaSim's deltsec2), over one plus L/cp dqs/dT, at most what falls into it. The rain handed on may
-    fall in a layer where the scheme's downdraught evaporates more than forms there; the evaporation here then takes
-    only what that downdraught does not need below, so the water falling never drops below the scheme's own flux's
-    least value lower down, and the water is kept. The layer's state is the column's plus the scheme's tendencies over
-    the step. Returns the rain and snow reaching the ground (kg/m2/s) and the evaporation's heating and moistening
-    (K/s, kg/kg/s)."""
+def evaporate(col: Column, rain, snow, dtdt, dqdt, gamma: float, step2: float = 2.0 * STEP_S, t_old=None,
+              t_ground=None) -> dict:
+    """PlaSim's mkrain (rainmod.f90) on the convective rain and snow the scheme hands it by layer (kg/m2/s, top first,
+    net of its downdraught's evaporation), as the mass-flux patch leaves it for nprc 3 (massflux_fortran.py), in
+    mkrain's own arithmetic and units (each layer's water a step times its share of sigma). Layer by layer from the
+    top the handed water joins the running rain and snow; all of it turns to snow where the layer's temperature at the
+    step's start (t_old, the column's by default) is at or below freezing and to rain above, the latent heat of the
+    change going into that layer, and in the lowest layer the ground's temperature t_ground converts it again. Each
+    unsaturated layer, its state the column's plus the tendencies dtdt and dqdt over the step (step2, PlaSim's
+    deltsec2), then evaporates from the falling rain and snow a share gamma of its saturation deficit over one plus
+    L/cp dqs/dT, cp PlaSim's moist heat capacity, at most what falls; and under nprc 3 at most what the water handed on
+    below still needs, the floor: the least running total of the handed water from that layer down, less what mkrain
+    has evaporated above. So the downdraught's evaporation, already taken from the handed water, never leaves the
+    running totals negative. Returns the rain and snow reaching the ground (kg/m2/s) and mkrain's heating and
+    moistening (K/s, kg/kg/s)."""
     c = col.c
-    pr, ps_ = 0.0, 0.0
-    heat, wet = np.zeros(col.n), np.zeros(col.n)
-    flux = np.cumsum(np.asarray(rain, float) + np.asarray(snow, float))      # the scheme's flux below each layer
-    floor = np.minimum.accumulate(flux[::-1])[::-1]                          # its least value from there down
+    n = col.n
+    ps = col.ps
+    dsig = col.dp / ps
+    t_old = col.t if t_old is None else np.asarray(t_old, float)
+    to_units = col.g / ps                        # kg/m2/s to mkrain's dq/dt dsigma
+    prcl = (np.asarray(rain, float) + np.asarray(snow, float)) * to_units
+    prscl = np.asarray(snow, float) * to_units
+    running = np.cumsum(prcl)
+    floor = np.minimum.accumulate(running[::-1])[::-1]
     taken = 0.0
-    for k in range(col.n):
-        add = rain[k] + snow[k]                 # net of the downdraught's evaporation, which may take from above
-        if add >= 0.0:
-            pr += max(rain[k], 0.0) + min(snow[k], 0.0)
-            ps_ += max(snow[k], 0.0) + min(rain[k], 0.0)
-            if pr < 0.0:
-                ps_, pr = ps_ + pr, 0.0
-            if ps_ < 0.0:
-                pr, ps_ = pr + ps_, 0.0
-        else:
-            total = pr + ps_
-            keep = max(total + add, 0.0) / total if total > 0.0 else 0.0
-            pr, ps_ = pr * keep, ps_ * keep
-        t = col.t[k] + dtdt[k] * step2
-        q = col.q[k] + dqdt[k] * step2
-        lcp_f = (c['ALS'] - c['ALV']) / c['acpd']
-        if ps_ > 0.0 and t > c['TMELT']:
-            heat[k] -= ps_ * lcp_f * col.g / col.dp[k]
-            pr, ps_ = pr + ps_, 0.0
-        elif pr > 0.0 and t <= c['TMELT']:
-            heat[k] += pr * lcp_f * col.g / col.dp[k]
-            pr, ps_ = 0.0, ps_ + pr
-        qs = qsat(t, col.pf[k], c)
-        if q < qs:
-            for phase in ('rain', 'snow'):
-                avail = pr if phase == 'rain' else ps_
-                if avail <= 0.0:
-                    continue
-                lat = c['ALV'] if phase == 'rain' else c['ALS']
-                e = gamma * (qs - q) * col.mass[k] / step2 / (1.0 + lat / c['acpd'] * dqsat_dt(t, col.pf[k], c))
-                e = max(min(e, avail, floor[k] - taken), 0.0)
-                taken += e
-                if phase == 'rain':
-                    pr -= e
-                else:
-                    ps_ -= e
-                heat[k] -= lat / c['acpd'] * e * col.g / col.dp[k]
-                wet[k] += e * col.g / col.dp[k]
-    return dict(rain=pr, snow=ps_, dtdt=heat, dqdt=wet)
+    zprc, zprsc = 0.0, 0.0
+    heat, wet = np.zeros(n), np.zeros(n)
+    for k in range(n):
+        zprc += prcl[k] - prscl[k]
+        zprsc += prscl[k]
+        zlcp = (c['ALS'] - c['ALV']) / (c['acpd'] * (1.0 + c['ADV'] * col.q[k]))
+        for temp, add in ((t_old[k], False),) + (((t_ground, True),) if k == n - 1 and t_ground is not None else ()):
+            if zprsc > 0.0 and temp > c['TMELT']:
+                heat[k] = (heat[k] if add else 0.0) - zprsc / dsig[k] * zlcp
+                zprc, zprsc = zprsc + zprc, 0.0
+            elif zprc > 0.0 and temp <= c['TMELT']:
+                heat[k] = (heat[k] if add else 0.0) + zprc / dsig[k] * zlcp
+                zprsc, zprc = zprc + zprsc, 0.0
+        zq = col.q[k] + dqdt[k] * step2
+        zt = t_old[k] + dtdt[k] * step2
+        zqsat = c['rdbrv'] * c['ra1'] * math.exp(c['ra2'] * (zt - c['TMELT']) / (zt - c['ra4'])) / col.pf[k]
+        zqsat = min(zqsat, c['rdbrv'])
+        zcor = 1.0 / (1.0 - (1.0 / c['rdbrv'] - 1.0) * zqsat)
+        zqsat = max(zqsat * zcor, 0.0)
+        remaining = max(floor[k] - taken, 0.0)
+        for phase in ('rain', 'snow'):
+            avail = zprc if phase == 'rain' else zprsc
+            if not (zq < zqsat and avail > 0.0):
+                continue
+            lat = c['ALV'] if phase == 'rain' else c['ALS']
+            zlcpe = lat / (c['acpd'] * (1.0 + c['ADV'] * col.q[k]))
+            e = min(gamma * (zqsat - zq) * dsig[k] / step2 / (1.0 + zlcpe * c['ra2'] * (c['TMELT'] - c['ra4']) * zqsat
+                                                               * zcor / (zt - c['ra4']) ** 2), avail, remaining)
+            remaining -= e
+            taken += e
+            if phase == 'rain':
+                zprc -= e
+            else:
+                zprsc -= e
+            heat[k] -= e / dsig[k] * zlcpe
+            wet[k] += e / dsig[k]
+    return dict(rain=zprc / to_units, snow=zprsc / to_units, dtdt=heat, dqdt=wet)
 
 
 def cm1_samples(case: str, span) -> dict:
@@ -1030,23 +1152,26 @@ def cm1_samples(case: str, span) -> dict:
     return out
 
 
+FIFTEEN_LOWEST_KM = 0.3          # the provisional fifteen levels' lowest full level, until levels.py holds a set
+
+
 def grid_sets() -> dict:
-    """The half levels (sigma, the top layer's bottom first, ending at 1) of PlaSim's ten levels and of the
-    fourteen the levels agent defines (climate/gcm/levels.py); before that file exists, fourteen full levels near
-    0.9, 2.4, 4.0, 6.0, 8.0, 9.9, 13.5, 18.2, 29, 42, 59, 79, 108 and 166 km at a 51 km scale height, their half levels
-    midway in sigma."""
-    try:
-        from climate.gcm import levels
-        return {'10': np.asarray(levels.half_levels('10'), float), '14': np.asarray(levels.half_levels('l14'), float),
-                'source': 'climate/gcm/levels.py (sets 10 and l14)'}
-    except (ImportError, ValueError):
-        s = np.arange(1, 11) / 10.0
-        ten = 0.75 * s + 1.75 * s ** 3 - 1.5 * s ** 4
-        full = np.exp(-np.array([166.0, 108.0, 79.0, 59.0, 42.0, 29.0, 18.2, 13.5, 9.9, 8.0, 6.0, 4.0, 2.4, 0.9]) / 51.0)
-        half = [0.0]
-        for f in full:
-            half.append(2.0 * f - half[-1])
-        return {'10': ten, '14': np.clip(np.array(half[1:]), 0.0, 1.0), 'source': 'the brief\'s fourteen heights'}
+    """The half levels (sigma, the top layer's bottom first, ending at 1) of PlaSim's ten levels, the fourteen of
+    levels.py's l14, and fifteen: levels.py's fifteen-level set when it holds one, otherwise a provisional set, l14
+    with its lowest layer split by a half level (sigma to four places) that puts the lowest full level near
+    FIFTEEN_LOWEST_KM at levels.py's scale height."""
+    from climate.gcm import levels
+    out = {'10': np.asarray(levels.half_levels('10'), float), '14': np.asarray(levels.half_levels('l14'), float)}
+    fifteen = sorted(k for k, v in levels.LEVEL_SETS.items() if len(v) == 15)
+    if fifteen:
+        out['15'] = np.asarray(levels.half_levels(fifteen[0]), float)
+        out['source'] = f'climate/gcm/levels.py (sets 10, l14 and {fifteen[0]})'
+    else:
+        split = round(2.0 * math.exp(-FIFTEEN_LOWEST_KM / levels.SCALE_HEIGHT_KM) - 1.0, 4)
+        out['15'] = np.r_[out['14'][:-1], split, 1.0]
+        out['source'] = ('climate/gcm/levels.py (sets 10 and l14); fifteen provisional, l14 with a half level at '
+                         f'sigma {split}')
+    return out
 
 
 def to_grid(x: dict, half_sigma) -> dict:
@@ -1104,7 +1229,7 @@ def one_output(x: dict, land: bool, gamma: dict, prm=PARAMETERS, c=PLASIM) -> di
     the ground before evaporation and after it at each gamma, all on the column's own levels."""
     r = column(x['t'], x['q'], x['p_full'], x['p_half'], x['g'], STEP_S, x['shf'], x['lhf'], x['bl_dtdt'],
                x['bl_dqdt'], x['omega'], x['u_bl'], land, prm=prm, c=c, z_full=x['z_full'], z_half=x['z_half'],
-               melt=False)
+               melt='plasim')
     col = r['column']
     ev = {k: evaporate(col, r['net_rain'], r['net_snow'], r['dtdt'], r['dqdt'], g_) for k, g_ in gamma.items()}
     main = ev['site']
@@ -1391,7 +1516,7 @@ def scm_step(t, q, pf, ph, mass, g, gridded, times, now, land, tag, prm, c, dt):
     moist[-1] += lhf / c['ALV'] / mass[-1]
     omega = -(pf / (c['gascon'] * t)) * g * w
     r = column(t, q, pf, ph, g, dt, shf, lhf, heat, moist, omega, lerp('u_bl'), land, prm=prm, c=c, z_full=z_full,
-               z_half=z_half, melt=False)
+               z_half=z_half, melt='plasim')
     ev = evaporate(r['column'], r['net_rain'], r['net_snow'], r['dtdt'], r['dqdt'], GAMMA[tag])
     t = t + dt * (heat + r['dtdt'] + ev['dtdt'])
     q = np.maximum(q + dt * (moist + r['dqdt'] + ev['dqdt']), 1.0e-9)
@@ -1407,7 +1532,14 @@ OUT = RESULTS / 'massflux_offline.json'
 SCHEMA = 'terluna.climate.gcm-massflux-offline/1'
 SCM_HEIGHTS_M = (2000.0, 4000.0, 6000.0, 8000.0, 10000.0, 13500.0, 19000.0, 29000.0, 42000.0, 56000.0, 70000.0)
 SCM_CYCLES = 3
-VARIANTS = {'undiluted trigger': dict(sub_factor=0.0), 'no boundary-layer term': dict(t_star=1.0e12)}
+VARIANTS = {'undiluted trigger': dict(sub_factor=0.0), 'no boundary-layer term': dict(t_star=1.0e12),
+            "the first round's surface parcel": dict(source_height_earth=0.0, excess_scale='mixed_layer')}
+# On fifteen levels: the first round's surface parcel (the lowest level's air with the excess at the sub-cloud layer's
+# w*), the IFS's excess at the lowest level's height without the similarity, and the adopted parcel undiluted below
+# its condensation level.
+VARIANTS_15 = {"the first round's surface parcel": dict(source_height_earth=0.0, excess_scale='mixed_layer'),
+               "the excess at the lowest level, no similarity": dict(source_height_earth=0.0),
+               'undiluted below the condensation level': dict(sub_factor=0.0)}
 LITERATURE = (
     ('IFS Documentation Cy36r1 (2010), Part IV, chapter 6', 'read', 'session-tools/agents/climate-explain/'
      'ifs_cy36r1_part4.txt on the research drive, sections 6.1-6.11'),
@@ -1454,20 +1586,142 @@ def tau_measure(box: dict, prm=PARAMETERS, c=PLASIM) -> dict:
     return out
 
 
-def surface_layer_excess(box: dict, half_sigma) -> dict:
-    """By quarter, how much richer in moist static energy CM1's lowest level's air is (kJ/kg) than the mean by mass
-    of PlaSim's lowest layer over the same column, the air the grid's lowest level would hold."""
-    c = PLASIM
-    acc = {q[0]: [] for q in QUARTERS}
+def surface_layer_excess(box: dict, half_sigma, prm=PARAMETERS, c=PLASIM) -> dict:
+    """By quarter, how much richer in moist static energy CM1's lowest level's air (50 m) is (kJ/kg, median and 10th
+    and 90th percentiles) than the mean by mass of PlaSim's lowest layer over the same column, the air the grid's
+    lowest level would hold; and what the surface test parcel adds to that layer's air: the surface-layer similarity
+    (surface_layer_air, with the IFS's friction velocity and with CM1's own, and with CM1's in the Dyer-Hicks and
+    neutral forms), the flux excess at the source height, and CM1's 50 m air less the parcel."""
+    acc = {q[0]: dict(layer=[], similarity=[], similarity_cm1_ustar=[], dyer_hicks=[], neutral=[], excess=[], parcel=[])
+           for q in QUARTERS}
+    pct = lambda v: dict(median=float(np.median(v)), p10=float(np.percentile(v, 10)), p90=float(np.percentile(v, 90)))
     for x in box['outputs']['rows']:
         xg = to_grid(x, half_sigma)
         g = x['g']
         h0 = c['acpd'] * x['t'][-1] + g * x['z_full'][-1] + c['ALV'] * x['q'][-1]
-        zf, _ = heights(xg['t'], xg['q'], xg['p_full'], xg['p_half'], g, c)
-        hl = c['acpd'] * xg['t'][-1] + g * zf[-1] + c['ALV'] * xg['q'][-1]
-        acc[x['quarter']].append((h0 - hl) / 1e3)
-    return {k: dict(median_kj_kg=float(np.median(v)), p10=float(np.percentile(v, 10)), p90=float(np.percentile(v, 90)))
+        col = Column(xg['t'], xg['q'], xg['p_full'], xg['p_half'], g, c)
+        hl = c['acpd'] * col.t[-1] + g * col.zf[-1] + c['ALV'] * col.q[-1]
+        dt_l, dq_l = surface_layer_air(col, x['shf'], x['lhf'], prm)
+        ust = max(x.get('ust', prm['ustar']), 0.01)
+        dt_u, dq_u = surface_layer_air(col, x['shf'], x['lhf'], dict(prm, ustar=ust))
+        dt_d, dq_d = surface_layer_air(col, x['shf'], x['lhf'], dict(prm, ustar=ust, stability='dyer_hicks'))
+        dt_0, dq_0 = surface_layer_air(col, x['shf'], x['lhf'], dict(prm, ustar=ust, stability='neutral'))
+        dt_s, dq_s, _ = surface_excess(col, x['shf'], x['lhf'], prm)
+        excess = c['acpd'] * max(prm['dt_deep'], dt_s) + c['ALV'] * max(prm['dq_deep'], dq_s)
+        a = acc[x['quarter']]
+        a['layer'].append((h0 - hl) / 1e3)
+        a['similarity'].append((c['acpd'] * dt_l + c['ALV'] * dq_l) / 1e3)
+        a['similarity_cm1_ustar'].append((c['acpd'] * dt_u + c['ALV'] * dq_u) / 1e3)
+        a['dyer_hicks'].append((c['acpd'] * dt_d + c['ALV'] * dq_d) / 1e3)
+        a['neutral'].append((c['acpd'] * dt_0 + c['ALV'] * dq_0) / 1e3)
+        a['excess'].append(excess / 1e3)
+        a['parcel'].append((h0 - hl - c['acpd'] * dt_l - c['ALV'] * dq_l - excess) / 1e3)
+    return {k: dict(h50_minus_layer_kj_kg=pct(v['layer']), similarity_kj_kg=pct(v['similarity']),
+                    similarity_cm1_ustar_kj_kg=pct(v['similarity_cm1_ustar']),
+                    dyer_hicks_cm1_ustar_kj_kg=pct(v['dyer_hicks']), neutral_cm1_ustar_kj_kg=pct(v['neutral']),
+                    excess_kj_kg=pct(v['excess']),
+                    h50_minus_parcel_kj_kg=pct(v['parcel']),
+                    correlation_layer_similarity=float(np.corrcoef(v['layer'], v['similarity'])[0, 1])
+                    if np.std(v['similarity']) > 0.0 else None)
             for k, v in acc.items()}
+
+
+def trigger_record(box: dict, half_sigma, prm=PARAMETERS, c=PLASIM) -> dict:
+    """By quarter, the surface test parcel of the deep type on a box's columns laid on a grid: the share whose kinetic
+    energy lasts to the first half level above its condensation level, the inhibition it meets below its level of free
+    convection (J/kg, negative buoyancy integrated by height, median), the energy it starts with, and CM1's own CIN
+    (median) for its 50 m air."""
+    acc = {q[0]: dict(ok=[], cin=[], cm1=[]) for q in QUARTERS}
+    for x in box['outputs']['rows']:
+        xg = to_grid(x, half_sigma)
+        col = Column(xg['t'], xg['q'], xg['p_full'], xg['p_half'], x['g'], c)
+        dt_s, dq_s, ws = surface_excess(col, x['shf'], x['lhf'], prm)
+        dt_l, dq_l = surface_layer_air(col, x['shf'], x['lhf'], prm)
+        w0 = max(prm['w_base_deep'], ws)
+        tr = trial(col, col.n - 1, col.t[-1] + dt_l + max(prm['dt_deep'], dt_s),
+                   col.q[-1] + dq_l + max(prm['dq_deep'], dq_s), w0, 'deep', rain=True, prm=prm)
+        pts = tr['points']
+        cin = 0.0
+        for j in range(1, len(pts)):
+            if pts[j]['b'] > 0.0 and pts[j]['l'] > 0.0:
+                break
+            cin -= 0.5 * (min(pts[j - 1]['b'], 0.0) + min(pts[j]['b'], 0.0)) * (pts[j]['z'] - pts[j - 1]['z'])
+        a = acc[x['quarter']]
+        a['ok'].append(bool(tr['ok']))
+        a['cin'].append(cin)
+        a['cm1'].append(x['cin'])
+    return {k: dict(reaches_cloud_share=float(np.mean(v['ok'])), inhibition_median_j_kg=float(np.median(v['cin'])),
+                    starting_energy_j_kg=0.5 * prm['w_base_deep'] ** 2,
+                    buoyancy_share_in_kinetic_energy=1.0 / (prm['f_turb'] * (1.0 + prm['gamma_vm'])),
+                    cm1_cin_median_j_kg=float(np.median(v['cm1'])))
+            for k, v in acc.items()}
+
+
+COLD_POOL_K = 1.0                 # K: a column whose density potential temperature at 50 m lies this far below the
+                                  # level's mean is in a cold pool (and, as a check, half of it)
+REPORT_Z_M = (50.0, 250.0, 550.0, 1050.0, 2050.0, 3050.0, 4050.0, 5050.0, 6050.0)
+
+
+def cold_pool_record(case: str, span) -> dict:
+    """CM1's boundary layer by quarter from its 3-D output (box_entrainment's thermodynamics): the share of columns
+    in cold pools (COLD_POOL_K), the 50 m air's moist static energy in the warm sector and in the cold pools against the
+    domain's (kJ/kg), the domain's, the warm sector's and the cold pools' moist static energy and density potential
+    temperature by height against the domain's 50 m values, and the air rising without cloud (w above 0.5 m/s) by
+    height."""
+    from climate.crm import box_entrainment as be
+    from climate.crm import ring_analysis as ra
+    from climate.crm.cm1_run import solar_day_s
+    from climate.crm.ring_crossings import local_hour_angle
+    info = be.case_info(case)
+    cfg = info['record']['configuration']
+    zh = info['zh']
+    idx = [int(np.argmin(abs(zh - z))) for z in REPORT_Z_M]
+    keys = ('dom_h', 'dom_th', 'warm_h', 'warm_th', 'warm_n', 'cold_h', 'cold_th', 'cold_n', 'rise_h', 'rise_n')
+    acc = {q[0]: dict({k: np.zeros(zh.size) for k in keys}, snaps=0, cold=[], cold_half=[], h50=[]) for q in QUARTERS}
+    for n in sorted(int(f.name[8:14]) for f in info['case'].glob('cm1out_t*_s.dat')):
+        t = (n - 1) * info['tap']
+        if not span[0] * DAY + 1.0 < t <= span[1] * DAY + 1.0:
+            continue
+        x = be.thermo(ra.read_snapshot(info['case'], n), zh, info['g'])
+        a = acc[quarter_name(local_hour_angle(cfg['start_hour_angle_deg'], cfg['site']['lon_deg'], t, solar_day_s()))]
+        h, th = x['h'], x['thrho']
+        anom = th[0] - th[0].mean()
+        cold = anom < -COLD_POOL_K
+        warm = ~cold
+        a['snaps'] += 1
+        a['dom_h'] += h.mean(axis=1)
+        a['dom_th'] += th.mean(axis=1)
+        for name, m in (('warm', warm), ('cold', cold)):
+            a[f'{name}_h'] += h[:, m].sum(axis=1)
+            a[f'{name}_th'] += th[:, m].sum(axis=1)
+            a[f'{name}_n'] += m.sum()
+        rise = (x['w'] > 0.5) & (x['qcl'] < ra.CLOUD_KG_KG)
+        a['rise_h'] += (h * rise).sum(axis=1)
+        a['rise_n'] += rise.sum(axis=1)
+        a['cold'].append(cold.mean())
+        a['cold_half'].append((anom < -0.5 * COLD_POOL_K).mean())
+        a['h50'].append((h[0, warm].mean() - h[0].mean(), h[0, cold].mean() - h[0].mean() if cold.any() else np.nan))
+    out = dict(heights_m=[float(zh[i]) for i in idx], cold_pool_k=COLD_POOL_K)
+    for name, a in acc.items():
+        if not a['snaps']:
+            continue
+        dom_h, dom_th = a['dom_h'] / a['snaps'], a['dom_th'] / a['snaps']
+        per = lambda key: a[f'{key}_h'] / np.maximum(a[f'{key}_n'], 1)
+        ths = lambda key: a[f'{key}_th'] / np.maximum(a[f'{key}_n'], 1)
+        h50 = np.array(a['h50'], float)
+        out[name] = dict(
+            snapshots=a['snaps'], cold_pool_share=float(np.mean(a['cold'])),
+            cold_pool_share_half=float(np.mean(a['cold_half'])),
+            h50_warm_minus_domain_kj_kg=float(np.nanmean(h50[:, 0])) / 1e3,
+            h50_cold_minus_domain_kj_kg=float(np.nanmean(h50[:, 1])) / 1e3 if np.isfinite(h50[:, 1]).any() else None,
+            domain_h_minus_h50_kj_kg=[float(dom_h[i] - dom_h[0]) / 1e3 for i in idx],
+            warm_h_minus_h50_kj_kg=[float(per('warm')[i] - dom_h[0]) / 1e3 for i in idx],
+            cold_h_minus_h50_kj_kg=[float(per('cold')[i] - dom_h[0]) / 1e3 if a['cold_n'][i] else None for i in idx],
+            rising_h_minus_h50_kj_kg=[float(per('rise')[i] - dom_h[0]) / 1e3 if a['rise_n'][i] > 20 else None
+                                      for i in idx],
+            domain_theta_rho_minus_50m_k=[float(dom_th[i] - dom_th[0]) for i in idx],
+            warm_theta_rho_minus_domain_k=[float(ths('warm')[i] - dom_th[i]) for i in idx])
+    return out
 
 
 def cm1_targets(box: dict, samples: dict) -> dict:
@@ -1487,7 +1741,7 @@ def cm1_targets(box: dict, samples: dict) -> dict:
 
 
 def scm_record(boxes: dict, gcm: dict, grids: dict, prm=PARAMETERS, c=PLASIM) -> dict:
-    """The single column on CM1's levels and both PlaSim grids, from each box's own first output for one lunar day
+    """The single column on CM1's levels and the PlaSim grids, from each box's own first output for one lunar day
     and from the GCM's site mean for SCM_CYCLES lunar days, its temperature against CM1's mean at SCM_HEIGHTS_M."""
     from climate.gcm import levels as lv
     out = {}
@@ -1495,12 +1749,12 @@ def scm_record(boxes: dict, gcm: dict, grids: dict, prm=PARAMETERS, c=PLASIM) ->
         g = gcm[tag]
         w = g['w'] / g['w'].sum()
         t10, q10 = np.tensordot(w, g['t'], 1), np.tensordot(w, g['q'], 1)
-        for gname in ('cm1', '10', '14'):
+        for gname in ('cm1', '10', '14', '15'):
             grid = None if gname == 'cm1' else grids[gname]
             if gname == '10':
                 st = dict(t=t10, q=q10)
-            elif gname == '14':
-                st = dict(t=lv.remap(t10, grids['10'], grids['14']), q=lv.remap(q10, grids['10'], grids['14']))
+            elif gname in ('14', '15'):
+                st = dict(t=lv.remap(t10, grids['10'], grids[gname]), q=lv.remap(q10, grids['10'], grids[gname]))
             else:
                 x = box['outputs']['rows'][0]
                 lnp10 = np.log(lv.full_levels(grids['10']) * x['p_half'][-1])
@@ -1559,7 +1813,7 @@ def cost_record(boxes: dict, gcm: dict, grids: dict, c=PLASIM) -> dict:
                                                         akap=0.286, c=g['constants']), cols),
                 sbm_16_steps=count(lambda k: sbm.column(g['t'][k], g['q'][k], s, np.diff(e), g['ps'][k], rh=0.7,
                                                         eps=2.4, steps=16, akap=0.286, c=g['constants']), cols))
-            for gname in ('10', '14'):
+            for gname in ('10', '14', '15'):
                 xs = [to_grid(x, grids[gname]) for x in boxes[tag]['outputs']['rows'][::4]]
                 out[f'CM1 columns on {gname} levels, {tag}'] = dict(massflux=count(
                     lambda x: column(x['t'], x['q'], x['p_full'], x['p_half'], x['g'], STEP_S, x['shf'], x['lhf'],
@@ -1584,7 +1838,7 @@ def analyse() -> dict:
                bands=[f'{a / 1000:g}-{b / 1000:g} km' for a, b in BANDS_M], parameters=dict(PARAMETERS),
                constants={k: c[k] for k in ('gascon', 'ga', 'acpd', 'rdbrv', 'ALV', 'ALS')}, step_s=STEP_S,
                gamma=GAMMA, grids=dict(source=grids['source'], half_10=grids['10'].tolist(),
-                                       half_14=grids['14'].tolist()),
+                                       half_14=grids['14'].tolist(), half_15=grids['15'].tolist()),
                boxes={tag: dict(case=case, span_days=list(span), inputs=boxes[tag]['outputs']['inputs'])
                       for tag, case, span in BOXES},
                gcm=dict(run=GCM_RUN, years=list(GCM_YEARS)),
@@ -1599,8 +1853,17 @@ def analyse() -> dict:
                 for tag in boxes}
         for label, change in VARIANTS.items()}
     out['on_plasim_levels'] = {gname: {tag: run_box(tag, boxes[tag], grids[gname], c=c) for tag in boxes}
-                               for gname in ('10', '14')}
-    out['surface_layer_excess'] = {tag: surface_layer_excess(boxes[tag], grids['10']) for tag in boxes}
+                               for gname in ('10', '14', '15')}
+    out['variants_on_15_levels'] = {
+        label: {tag: {qn: dict(type_share=q['type_share'], precipitation_mm_day=q['precipitation_mm_day'],
+                               cloud=q['cloud'])
+                      for qn, q in run_box(tag, boxes[tag], grids['15'], prm=dict(PARAMETERS, **change), c=c).items()}
+                for tag in boxes}
+        for label, change in VARIANTS_15.items()}
+    out['surface_layer_excess'] = {gname: {tag: surface_layer_excess(boxes[tag], grids[gname], c=c) for tag in boxes}
+                                   for gname in ('10', '14', '15')}
+    out['trigger_on_15_levels'] = {tag: trigger_record(boxes[tag], grids['15'], c=c) for tag in boxes}
+    out['cold_pools'] = {tag: cold_pool_record(case, span) for tag, case, span in BOXES}
     out['on_gcm_columns'] = {tag: run_gcm(tag, gcm[tag]) for tag in ('sea', 'land')}
     out['single_column'] = scm_record(boxes, gcm, grids, c=c)
     out['cost'] = cost_record(boxes, gcm, grids, c=c)
@@ -1611,29 +1874,41 @@ def analyse() -> dict:
 
 EVIDENCE = ('Offline single-column calculations, no new CM1 or GCM runs. CM1: one realization each of the sea box\'s '
             'third lunar day and the land box\'s second, their domain means every 3 hours (59 a quarter) and their 3-D '
-            'output\'s cloud samples; the scheme meets columns CM1\'s own convection shaped, so its response at once '
-            'and CM1\'s realised convection are compared. GCM: 3-day means of five years of the rh 0.7 branch in its '
-            'site cells, built by the simplified Betts-Miller scheme; the boundary layer\'s forcing there lacks the '
-            'dynamics\' heating and takes the radiation and the dynamics\' moistening as single-step snapshots. The '
+            'output (cloud samples, cold pools); the scheme meets columns CM1\'s own convection shaped, so its response '
+            'at once and CM1\'s realised convection are compared. GCM: 3-day means of five years of the rh 0.7 branch '
+            'in its site cells, built by the simplified Betts-Miller scheme; the boundary layer\'s forcing there lacks '
+            'the dynamics\' heating and takes the radiation and the dynamics\' moistening as single-step snapshots. The '
             'single column is driven by CM1\'s radiation and surface fluxes, not its own, with a mixed boundary layer '
             'in place of PlaSim\'s vertical diffusion. The adjustment time\'s factor and the entrainment are measured '
-            'on these boxes, so their sea quarters are not independent tests of them. Costs are counts of '
-            'exponentials scaled by the Betts-Miller scheme\'s measured cost, not a Fortran timing.')
+            'on these boxes, so their sea quarters are not independent tests of them. The fifteen levels are '
+            'levels.py\'s l15. Costs are counts of exponentials; the Fortran routine\'s timing is in massflux.md.')
 READING_RULE = ('Quarters of the lunar day at each site by hour angle from noon (night -180 to -90, morning -90 to 0, '
                 'afternoon 0 to 90, evening 90 to 180). Precipitation in mm/day: formed, what the scheme forms in its '
-                'updraught; handed_on, net of its downdraught\'s evaporation, as PlaSim\'s mkrain would take it; '
-                'ground, after mkrain\'s evaporation at the site\'s CM1 constant (gamma_site, sea 0.027, land 0.046) '
-                'and at PlaSim\'s 0.01. CM1\'s falling_formed is the water falling from its clouds (evaporated on the '
-                'way down plus reaching the ground, cm1out_stats). Mass fluxes in kg/m2/s at profile_heights_m, the '
-                'scheme\'s updraught and downdraught (negative) means over all outputs, CM1\'s sampled cloudy '
-                'updraught and core over its domain. Heating (K/day) and moistening (g/kg/day) profiles and the band '
-                'sums (W/m2, mm/day): the scheme\'s convection with mkrain\'s evaporation and melting, against '
-                'CM1\'s microphysics, resolved transport and boundary-layer scheme. type_share: shares of outputs by '
-                'type (None: no convection). Cloud tops: the scheme\'s where its updraught\'s kinetic energy runs '
-                'out; CM1\'s the top of each column\'s lowest unbroken cloud with its base below 16 km. tau: CM1\'s '
-                'removal of the scheme\'s PCAPE (Pa/s) by its own convective tendencies, the updraught held. '
-                'single_column: temperature of each lunar day\'s mean minus CM1\'s mean over the span (K) at the '
-                'listed heights; rain at the ground by quarter in the last lunar day.')
+                'updraught; handed_on, net of its downdraught\'s evaporation, in the phase PlaSim\'s mkrain gives '
+                'it; ground, after mkrain\'s evaporation (its copy, massflux.evaporate, with the floor of nprc 3) at '
+                'the site\'s CM1 constant (gamma_site, sea 0.027, land 0.046) and at PlaSim\'s 0.01. CM1\'s '
+                'falling_formed is the water falling from its clouds (evaporated on the way down plus reaching the '
+                'ground, cm1out_stats). Mass fluxes in kg/m2/s at profile_heights_m, the scheme\'s updraught and '
+                'downdraught (negative) means over all outputs, CM1\'s sampled cloudy updraught and core over its '
+                'domain. Heating (K/day) and moistening (g/kg/day) profiles and the band sums (W/m2, mm/day): the '
+                'scheme\'s convection with mkrain\'s evaporation and melting, against CM1\'s microphysics, resolved '
+                'transport and boundary-layer scheme. type_share: shares of outputs by type (None: no convection). '
+                'Cloud tops: the scheme\'s where its updraught\'s kinetic energy runs out; CM1\'s the top of each '
+                'column\'s lowest unbroken cloud with its base below 16 km. tau: CM1\'s removal of the scheme\'s PCAPE '
+                '(Pa/s) by its own convective tendencies, the updraught held. surface_layer_excess (kJ/kg, median and '
+                '10th and 90th percentiles by quarter, on each grid): CM1\'s 50 m air less the grid\'s lowest layer, '
+                'what the surface parcel adds to that layer (the similarity, with the IFS\'s friction velocity and '
+                'with CM1\'s, the Dyer-Hicks and neutral forms with CM1\'s, and the excess), and CM1\'s 50 m air less '
+                'the parcel. trigger_on_15_levels: the surface '
+                'test parcel\'s share reaching its cloud with energy to spare, the inhibition it meets (J/kg, '
+                'median), the energy it starts with and the share of its buoyancy its kinetic energy takes, and '
+                'CM1\'s own CIN. cold_pools: by quarter from the 3-D output, the share of columns whose density '
+                'potential temperature at 50 m lies 1 K (and 0.5 K) below the mean, the warm sector\'s and the cold '
+                'pools\' 50 m moist static energy against the domain\'s, and by height (heights_m) the domain\'s, '
+                'the warm sector\'s, the cold pools\' and the rising clear air\'s (w above 0.5 m/s) moist static '
+                'energy against the domain\'s 50 m air, and density potential temperature. single_column: '
+                'temperature of each lunar day\'s mean minus CM1\'s mean over the span (K) at the listed heights; '
+                'rain at the ground by quarter in the last lunar day.')
 
 
 def compact(x, digits: int = 5):
