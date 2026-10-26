@@ -118,7 +118,9 @@ followed:
    receives. Done 25 October ([results](snow_melting.md)).
 10. **The lunar builds' vapour diffusivity**: McSnow's fit given back its 1 atm reference, which the lunar column's
    surface-pressure patch had moved, and a minimal set of runs repeated on the corrected build. Done 25 October
-   ([results](mcsnow_diffusivity.md)); the remaining reruns are listed there.
+   ([results](mcsnow_diffusivity.md)); the remaining reruns are listed there. They were held on 26 October so the
+   compute could go to the climate model's levels and convection scheme, and they come first when the snow work
+   resumes.
 
 Before the optics, six things remain open: the lunar McSnow runs not yet repeated on the corrected build; the
 heavy-snow tail, which no run converges and which the Earth check
