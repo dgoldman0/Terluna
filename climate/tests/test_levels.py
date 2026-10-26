@@ -1,4 +1,4 @@
-"""The 14-level set and the conservative remap that carries a restart onto it (climate/gcm/levels.py)."""
+"""The 14- and 15-level sets and the conservative remap that carries a restart onto them (climate/gcm/levels.py)."""
 import struct
 
 import numpy as np
@@ -28,15 +28,31 @@ def test_the_14_level_set_keeps_the_upper_six_levels_and_the_lowest_and_lands_th
     assert np.all(dsig[1:] / dsig[:-1] > 0.5) and np.all(dsig[1:] / dsig[:-1] < 1.35)
 
 
-def test_a_run_on_the_set_writes_its_half_levels_and_plasims_top_friction():
-    entries = dict(lv.namelist_entries('l14'))
+def test_the_15_level_set_is_the_14_with_its_lowest_layer_split_near_0_6_km():
+    l14, l15 = lv.half_levels('l14'), lv.half_levels('l15')
+    f14, f15 = lv.full_levels(l14), lv.full_levels(l15)
+    assert l15.size == 15 and l15[-1] == 1.0 and np.all(np.diff(l15) > 0)
+    assert np.array_equal(l15[:13], l14[:13]) and np.array_equal(f15[:13], f14[:13])  # every layer above 1.73 km
+    assert l15[13] == 0.9883 and f15[14] == 0.5 * (0.9883 + 1.0)                     # midway in sigma
+    z = lv.heights_km(f15)
+    assert abs(z[14] - lv.L15_LOWEST_KM) < 0.005 and abs(lv.heights_km(l15[13]) - 0.60) < 0.005
+    assert abs(z[13] - 1.16) < 0.01
+    dsig = np.diff(np.r_[0.0, l15])
+    assert np.all(dsig[1:] / dsig[:-1] > 0.5) and np.all(dsig[1:] / dsig[:-1] < 1.35)
+    assert sorted(lv.shared_layers(l14, l15)) == list(range(13))
+    assert sorted(lv.shared_layers(lv.half_levels('10'), l15)) == [0, 1, 2, 3, 4, 5]
+
+
+@pytest.mark.parametrize('name', ['l14', 'l15'])
+def test_a_run_on_the_set_writes_its_half_levels_and_plasims_top_friction(name):
+    entries = dict(lv.namelist_entries(name))
     assert entries['NEQSIG'] == '-1'
     half = [float(x) for x in entries['SIGH'].split(',')]
-    assert half == list(lv.half_levels('l14'))                       # the values round-trip exactly
+    assert half == list(lv.half_levels(name))                        # the values round-trip exactly
     friction = [float(x) for x in entries['TFRC'].split(',')]
-    assert friction[:2] == [20.0 * 86400.0, 100.0 * 86400.0] and friction[2:] == [0.0] * 12
+    assert friction[:2] == [20.0 * 86400.0, 100.0 * 86400.0] and friction[2:] == [0.0] * (len(half) - 2)
     with pytest.raises(ValueError):
-        lv.half_levels('l15')
+        lv.half_levels('l99')
 
 
 def test_the_remap_keeps_column_integrals_reproduces_linear_profiles_and_copies_shared_layers():
@@ -54,6 +70,25 @@ def test_the_remap_keeps_column_integrals_reproduces_linear_profiles_and_copies_
     assert np.allclose(lv.remap(2.0 - 3.0 * fa, a, b), 2.0 - 3.0 * fb, atol=1e-13)
     # back onto the same grid is the identity
     assert np.array_equal(lv.remap(x, a, a), x)
+
+
+@pytest.mark.parametrize('source', ['10', 'l14'])
+def test_the_remap_onto_15_levels_keeps_column_integrals_and_splits_only_what_it_must(source):
+    a, b = lv.half_levels(source), lv.half_levels('l15')
+    da, db = np.diff(np.r_[0.0, a]), np.diff(np.r_[0.0, b])
+    rng = np.random.default_rng(11)
+    x = rng.normal(size=(a.size, 9)) * 40.0 + 260.0
+    y = lv.remap(x, a, b)
+    assert y.shape == (15, 9)
+    assert np.allclose(db @ y, da @ x, rtol=0, atol=1e-11)
+    shared = lv.shared_layers(a, b)
+    for k, j in shared.items():
+        assert np.array_equal(y[k], x[j])
+    # both grids' lowest layer starts at sigma 0.9666, and its two parts on 15 levels hold its mass-weighted mean
+    assert a[-2] == b[-3]
+    assert np.allclose((db[13] * y[13] + db[14] * y[14]) / (db[13] + db[14]), x[-1], atol=1e-11)
+    fa, fb = lv.full_levels(a), lv.full_levels(b)
+    assert np.allclose(lv.remap(2.0 - 3.0 * fa, a, b), 2.0 - 3.0 * fb, atol=1e-13)
 
 
 def _restart(path, nlev, records):

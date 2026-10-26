@@ -1,7 +1,8 @@
-"""PlaSim's vertical levels: its own ten, and a set of fourteen with more levels near the ground (2026-10-26).
+"""PlaSim's vertical levels: its own ten, a set of fourteen with more levels near the ground, and a set of fifteen with a
+thin bottom layer (2026-10-26).
 
-    climate/gcm/.venv/bin/python -m climate.gcm.levels show l14                  # the set, its heights and layers
-    climate/gcm/.venv/bin/python -m climate.gcm.levels restart SRC DST --to l14  # a restart carried onto the set
+    climate/gcm/.venv/bin/python -m climate.gcm.levels show l15                  # the set, its heights and layers
+    climate/gcm/.venv/bin/python -m climate.gcm.levels restart SRC DST --to l15  # a restart carried onto the set
 
 PlaSim puts each full level midway in sigma between the half levels that bound its layer (plasim.f90, initpm), from 0
 at the top to 1 at the ground, so the half levels fix the full levels. Its own grid, ExoPlaSim's vtype 0, sets ten
@@ -20,6 +21,20 @@ cannot be kept with one at 13.5 km: with the half level at 23.3 km fixed, a full
 level at 13.7 km, and the level below it then falls near 12 km under a layer three times thicker than its own. So the
 18.2 km level moves up to 19.2 km and the 9.9 km level to 10.2 km, and the new levels land within 0.04 km of 2.4, 6, 8
 and 13.5 km. Heights here are -51 km times ln sigma; the run's own temperatures set its levels' heights.
+
+The set 'l15' keeps every half level of 'l14' and adds one at sigma 0.9883, 0.60 km, splitting the lowest layer, the
+ground to 1.73 km, in two. Its lowest full level stands midway in sigma between that half level and the ground, at
+0.99415 and 0.30 km, and the level above it midway in the layer from 0.60 to 1.73 km, at 0.97745 and 1.16 km. The
+offline mass-flux scheme (massflux.md) found that the 1.73 km layer averages away the near-ground air CM1's updraughts
+carry: it holds 1.4-2.3 kJ/kg less moist static energy than CM1's air at 50 m. The new bottom layer holds the lowest
+0.6 km, close to the lowest 0.5 km over which CM1's vapour is compared. PlaSim takes its surface fluxes and 10 m wind at
+the lowest level (fluxmod.f90, surflx), at the height its hydrostatic relation gives from that level's own temperature,
+about 0.31 km in the design climate's 300 K air, so they move down with the level. With one half level added, 0.3 km is
+near the lowest the bottom level can stand while the bottom layer keeps at least half the mass of the layer above it,
+the limit the 14-level set kept between neighbours: the limit is a half level at sigma 0.9889 with a lowest level at
+0.28 km, and the set's ratio is 0.54. The bottom layer's 0.0117 of sigma holds about 880 kg/m2 of air at the design
+surface pressure, a third of the 14-level bottom layer's mass and two and a half times that of PlaSim's lowest layer on
+Earth.
 
 PlaSim presets Rayleigh friction on the top two levels only for its ten-level grid (20 and 100 days, plasim.f90,
 readnl), so a run on another set writes the same friction for its top two levels, which are the same levels
@@ -65,13 +80,17 @@ def full_levels(half) -> np.ndarray:
 _TEN = plasim_half(10)
 # The sets of half levels a run may take, the top layer's bottom first and the ground's 1 last. 'l14' keeps PlaSim's
 # own six upper half levels and its lowest one as the formula gives them, so the layers the grids share are the same
-# numbers, and puts six new half levels at 15.5, 11.5, 9.0, 7.0, 5.0 and 3.1 km (sigma to four places).
+# numbers, and puts six new half levels at 15.5, 11.5, 9.0, 7.0, 5.0 and 3.1 km (sigma to four places). 'l15' is 'l14'
+# with one more half level, at 0.60 km (sigma 0.9883), splitting its lowest layer.
+_L14 = np.r_[_TEN[:6], 0.7379, 0.7981, 0.8382, 0.8717, 0.9066, 0.9410, _TEN[8], 1.0]
 LEVEL_SETS = {
     DEFAULT: tuple(float(x) for x in _TEN),
-    'l14': tuple(float(x) for x in np.r_[_TEN[:6], 0.7379, 0.7981, 0.8382, 0.8717, 0.9066, 0.9410, _TEN[8], 1.0]),
+    'l14': tuple(float(x) for x in _L14),
+    'l15': tuple(float(x) for x in np.r_[_L14[:-1], 0.9883, 1.0]),
 }
-# The levels near which the set was asked to put full levels (km at the 51 km scale height), for its tests.
+# The levels near which each set was asked to put full levels (km at the 51 km scale height), for its tests.
 L14_TARGETS_KM = (13.5, 8.0, 6.0, 2.4)
+L15_LOWEST_KM = 0.3
 # PlaSim's Rayleigh friction on its top two levels, which it presets only on its ten-level grid (days).
 TOP_FRICTION_DAYS = (20.0, 100.0)
 DAY_S = 86400.0

@@ -463,7 +463,7 @@ class RunnerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             er.level_settings({**er.MODEL, 'layers': 12}, {'layers': 12}, 'l14')
         with self.assertRaises(ValueError):
-            er.level_settings(dict(er.MODEL), None, 'l15')
+            er.level_settings(dict(er.MODEL), None, 'l99')
         import inspect
         for f in (er.run, er.configuration):
             self.assertIsNone(inspect.signature(f).parameters['levels'].default)
