@@ -24,6 +24,10 @@ above, so the downdraught's evaporation, already taken from the handed water, ne
 The parameters (PARAMETER_NAMES) are massflux.PARAMETERS under Fortran names ending in _mf; fortran_values gives
 their values for the source's defaults and a run's namelist. Five options exist only in the Python copy, for its
 offline variants, and must keep their defaults for the Fortran (PYTHON_ONLY).
+
+A second patch (START_PATCHES, 26 October) goes over this one for runs that set the surface parcel's starting speed from
+the boundary layer (massflux.surface_start, the runner's --massflux-start): mfstart and its two parameters
+(START_PARAMETER_NAMES), off by default.
 """
 from __future__ import annotations
 
@@ -1124,3 +1128,122 @@ MASSFLUX_EDITS = [
      "           zrem(:)=zrem(:)-zdqdt(:)\n           ztaken(:)=ztaken(:)+zdqdt(:)\n"),
 ]
 MASSFLUX_PATCHES = [('rainmod.f90', MASSFLUX_MARKER, MASSFLUX_EDITS)]
+
+# The surface deep test parcel's starting speed (2026-10-26; massflux.md, the third round): a second patch, over the
+# mass-flux patch, applied for a run that sets it and kept in the source after, as the Betts-Miller scheme's options
+# are. mfstart gives the boundary layer's convective velocity w* (massflux.boundary_layer_velocity), and with nstart_mf
+# 1 the surface deep test parcel starts at cstart_mf w* in place of the larger of w_mf and the excess's velocity scale
+# (massflux.surface_start). A parcel may then start with no kinetic energy, so the organized detrainment's ratio of
+# kinetic energies is taken only where the energy below is positive, as it always is with nstart_mf 0, the default,
+# under which mfcolumn computes as before.
+START_MARKER = "Terluna: the surface parcel's starting speed (mass-flux scheme)"
+# (Fortran name, massflux.PARAMETERS key, Fortran type, what the variable is)
+START_PARAMETER_NAMES = (
+    ('nstart_mf', 'start', 'int', "1: the surface deep test parcel starts at cstart_mf w*"),
+    ('cstart_mf', 'c_start', 'real', "its starting speed in units of the boundary layer's w*"),
+)
+START_CHOICES = {'ifs': 0, 'boundary_layer': 1}
+
+
+def start_values(prm=None) -> dict:
+    """The starting-speed parameters' Fortran values for the Python copy's parameters prm (massflux.PARAMETERS by
+    default): start 'ifs' as 0 and 'boundary_layer' as 1."""
+    prm = dict(mf.PARAMETERS) if prm is None else prm
+    if prm['start'] not in START_CHOICES:
+        raise ValueError(f"the starting speed is one of {tuple(START_CHOICES)}, not {prm['start']!r}")
+    return dict(nstart_mf=START_CHOICES[prm['start']], cstart_mf=float(prm['c_start']))
+
+
+def start_declarations(values=None) -> str:
+    """The starting-speed parameters' declarations, the source's defaults (start 'ifs') unless values are given."""
+    values = start_values() if values is None else values
+    return (f'!     {START_MARKER} (nprc = 3)\n'
+            + ''.join(f"{'      ' + ('integer' if kind == 'int' else 'real') + ' :: ' + name + ' = ' + fortran_literal(values[name]):42s}"
+                      f' ! {what}\n' for name, _, kind, what in START_PARAMETER_NAMES))
+
+
+START_CODE = """
+!     =====================
+!     SUBROUTINE MFSTART
+!     =====================
+!
+      subroutine mfstart(pdtl_,pdql_,pwst_)
+!     Terluna: the boundary layer's convective velocity w* = (g / theta_v (w'theta_v')_s z_i)^(1/3) (Deardorff 1970),
+!     z_i the depth of the dry convective layer the surface parcel's source air rises through: where the surroundings'
+!     virtual potential temperature first exceeds its own, or where it saturates lifted dry, whichever is lower, each
+!     linear in height between full levels; nil without a rising surface buoyancy flux (massflux.boundary_layer_velocity)
+      real, intent(in) :: pdtl_, pdql_
+      real, intent(out) :: pwst_
+      real :: zrho_, zfl_, zkap_, zt0_, zq0_, zthv0_, zthva_, zthvb_, zda_, zdb_, zzt_, zzl_
+      integer :: k_
+      pwst_ = 0.
+      zrho_ = pph(kn)/(gascon*mfvirt(pt(kn),pq(kn)))
+      zfl_ = (pshf/zcp+zeps1*pt(kn)*plhf/zlv)/zrho_
+      if (zfl_ <= 0.) return
+      zkap_ = gascon/zcp
+      zt0_ = pt(kn)+pdtl_
+      zq0_ = pq(kn)+pdql_
+      zthv0_ = mfvirt(zt0_,zq0_)*(zps/ppf(kn))**zkap_
+      zthvb_ = mfvirt(pt(kn),pq(kn))*(zps/ppf(kn))**zkap_
+      if (zthvb_ >= zthv0_) then
+       zzt_ = zzf(kn)
+      else
+       zzt_ = zzf(1)
+       do k_ = kn-1, 1, -1
+        zthva_ = mfvirt(pt(k_),pq(k_))*(zps/ppf(k_))**zkap_
+        if (zthva_ > zthv0_) then
+         zzt_ = zzf(k_+1)+(zthv0_-zthvb_)/(zthva_-zthvb_)*(zzf(k_)-zzf(k_+1))
+         exit
+        endif
+        zthvb_ = zthva_
+       enddo
+      endif
+      zdb_ = mfqsat(zt0_,ppf(kn))-zq0_
+      if (zdb_ <= 0.) then
+       zzl_ = zzf(kn)
+      else
+       zzl_ = zzf(1)
+       do k_ = kn-1, 1, -1
+        zda_ = mfqsat(zt0_*(ppf(k_)/ppf(kn))**zkap_,ppf(k_))-zq0_
+        if (zda_ <= 0.) then
+         zzl_ = zzf(k_+1)+zdb_/(zdb_-zda_)*(zzf(k_)-zzf(k_+1))
+         exit
+        endif
+        zdb_ = zda_
+       enddo
+      endif
+      pwst_ = (zg/zthv0_*zfl_*min(zzt_,zzl_))**(1./3.)
+      end subroutine mfstart
+!
+"""
+# Edits to mfcolumn, which the column's tests apply to COLUMN_CODE (start_column_code), and to rainmod's module.
+START_CODE_EDITS = [
+    ("      real :: zx, zub, zsum\n", "      real :: zx, zub, zsum, zwst\n"),
+    ("      call mfsurface(zdtl,zdql)\n",
+     "      call mfsurface(zdtl,zdql)\n      zwst = 0.\n      if (nstart_mf == 1) call mfstart(zdtl,zdql,zwst)\n"),
+    ("        zx = max(w_mf,zws)\n", "        zx = max(w_mf,zws)\n        if (nstart_mf == 1) zx = cstart_mf*zwst\n"),
+    ("        if (lcloudy_ .and. zbb_ < 0. .and. zkinb_ > 0.) zmb_ = min(zmb_,zm_*sqrt(min(zkinb_/zkin_,1.)))\n",
+     "        if (lcloudy_ .and. zbb_ < 0. .and. zkinb_ > 0. .and. zkin_ > 0.) "
+     "zmb_ = min(zmb_,zm_*sqrt(min(zkinb_/zkin_,1.)))\n"),
+    ("      subroutine mfpath(kstart_,lhalf_)\n", START_CODE.lstrip('\n') + "      subroutine mfpath(kstart_,lhalf_)\n"),
+]
+START_MODULE_EDITS = [
+    (declarations().splitlines(True)[-1], declarations().splitlines(True)[-1] + start_declarations()),
+    (namelist_text().splitlines(True)[-1],
+     namelist_text().splitlines(True)[-1] + '      namelist/rainmod_nl/'
+     + ','.join(name for name, _, _, _ in START_PARAMETER_NAMES) + '\n'),
+    ("      call mpbci(nsub_mf)\n", "      call mpbci(nsub_mf)\n" + ''.join(
+        f"      call {'mpbci' if kind == 'int' else 'mpbcr'}({name})\n" for name, _, kind, _ in START_PARAMETER_NAMES)),
+]
+START_EDITS = START_MODULE_EDITS + START_CODE_EDITS
+START_PATCHES = [('rainmod.f90', START_MARKER, START_EDITS)]
+
+
+def start_column_code() -> str:
+    """mfcolumn with the starting-speed edits, as the patched source holds it (for the column's tests)."""
+    text = COLUMN_CODE
+    for old, new in START_CODE_EDITS:
+        if text.count(old) != 1:
+            raise RuntimeError(f'the column code does not hold {old.strip()!r} once')
+        text = text.replace(old, new)
+    return text

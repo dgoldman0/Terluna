@@ -31,7 +31,9 @@ Lunar choices (each recorded in PARAMETERS with its source):
   them, and each such value is marked as stretched.
 - The surface test parcel is the IFS's in such a stretched column: the air of the IFS's lowest model level, 10 m up on
   Earth and 60 m on the Moon, carried down from PlaSim's lowest level by surface-layer similarity, with the IFS's
-  excess from the surface fluxes at that height (the second round, massflux.md).
+  excess from the surface fluxes at that height (the second round, massflux.md). It starts at the IFS's 1 m/s, or
+  with start 'boundary_layer' at c_start times the boundary layer's convective velocity w*, the speed of a grid cell's
+  strongest thermals (the third round).
 - Times follow the column: the adjustment time is the cloud's own turnover time, H over its mean updraught speed, with
   no Earth bound on it; the rain forms at Earth's rates per second, as the gravity pair's microphysics does.
 
@@ -92,6 +94,14 @@ PARAMETERS = dict(
                                    # first round's convective velocity w* of the sub-cloud layer
     stability='free_convection',   # the similarity's stability function in unstable air: 'free_convection',
                                    # phi_h = (1 - 16 zeta)^(-1/3); 'dyer_hicks', the IFS's (1 - 16 zeta)^(-1/2); 'neutral'
+    # the surface deep test parcel's starting speed (massflux.md, the third round): 'ifs', the larger of w_base_deep
+    # and the excess's sigma_w; 'boundary_layer', c_start times the boundary layer's convective velocity w* from the
+    # surface buoyancy flux and the depth of its dry convective layer (boundary_layer_velocity), nil without a rising
+    # surface buoyancy flux. c_start stands for the strongest thermals of a grid cell, the 99.9th percentile of the
+    # mixed layer's vertical wind: 2.0-2.3 w* between 0.3 and 0.9 z_i in CM1's 2 km box of the sea's night, whose
+    # spread peaks at Lenschow and others' (1980) 0.68 w*
+    start='ifs',
+    c_start=2.2,
     # microphysics (IFS (6.35)-(6.37)), at Earth's rates per second
     c0=1.4e-3, l_crit=5.0e-4, l_min=3.0e-4, w_max_precip=10.0, t_bf=268.16, t_ice=250.16,
     # downdraughts (IFS (6.13), (6.15)): eta of the cloud-base flux at the level of free sinking; their mixing
@@ -356,7 +366,7 @@ def ascend(col: Column, pts: list, state: dict, kind: str, rain=True, entrain_be
             else:
                 kin_b = kin + fac * bm * dz
             m_b = m * math.exp((eps - delta) * dz)
-            if cloudy and b_b < 0.0 and kin_b > 0.0:
+            if cloudy and b_b < 0.0 and kin_b > 0.0 and kin > 0.0:
                 m_b = min(m_b, m * math.sqrt(min(kin_b / kin, 1.0)))     # organized detrainment (IFS (6.12))
             if kin_b <= 0.0:
                 top_z = za + (kin / (kin - kin_b) if kin > kin_b else 0.0) * dz
@@ -468,6 +478,61 @@ def surface_layer_air(col: Column, shf: float, lhf: float, prm=PARAMETERS):
     return wt / ust * f * exner, wq / ust * f
 
 
+def boundary_layer_velocity(col: Column, shf: float, lhf: float, dt_l: float, dq_l: float):
+    """The boundary layer's convective velocity w* (m/s; Deardorff's, as Lenschow and others 1980 define it, their
+    eq. 12) and the depth z_i (m) it takes, from the surface fluxes (W/m2, upward) and the column:
+    w* = (g / theta_v (w'theta_v')_s z_i)^(1/3), with the surface's
+    kinematic virtual heat flux as surface_excess takes it and theta_v the surface parcel's source air (the lowest
+    level's with the similarity's difference dt_l, dq_l). z_i is the depth of the dry convective layer that air rises
+    through: the height where the surroundings' virtual potential temperature first exceeds its own (the parcel
+    method), or where it saturates lifted dry with its vapour kept, whichever is lower, each linear in height between
+    full levels. Nil, with no depth, without a rising surface buoyancy flux."""
+    c = col.c
+    t, q = col.t[-1], col.q[-1]
+    rho = col.ph[-1] / (c['gascon'] * virtual(t, q, c))
+    eps1 = 1.0 / c['rdbrv'] - 1.0
+    flux = (shf / c['acpd'] + eps1 * t * lhf / c['ALV']) / rho
+    if flux <= 0.0:
+        return 0.0, None
+    kap = c['gascon'] / c['acpd']
+    n = col.n
+    t0, q0 = t + dt_l, q + dq_l
+    thv0 = virtual(t0, q0, c) * (col.ps / col.pf[-1]) ** kap
+    thvb = virtual(t, q, c) * (col.ps / col.pf[-1]) ** kap
+    if thvb >= thv0:
+        z_t = col.zf[-1]
+    else:
+        z_t = col.zf[0]
+        for k in range(n - 2, -1, -1):
+            thva = virtual(col.t[k], col.q[k], c) * (col.ps / col.pf[k]) ** kap
+            if thva > thv0:
+                z_t = col.zf[k + 1] + (thv0 - thvb) / (thva - thvb) * (col.zf[k] - col.zf[k + 1])
+                break
+            thvb = thva
+    db = qsat(t0, col.pf[-1], c) - q0
+    if db <= 0.0:
+        z_l = col.zf[-1]
+    else:
+        z_l = col.zf[0]
+        for k in range(n - 2, -1, -1):
+            da = qsat(t0 * (col.pf[k] / col.pf[-1]) ** kap, col.pf[k], c) - q0
+            if da <= 0.0:
+                z_l = col.zf[k + 1] + db / (db - da) * (col.zf[k] - col.zf[k + 1])
+                break
+            db = da
+    z_i = min(z_t, z_l)
+    return (col.g / thv0 * flux * z_i) ** (1.0 / 3.0), float(z_i)
+
+
+def surface_start(col: Column, shf: float, lhf: float, ws: float, dt_l: float, dq_l: float, prm=PARAMETERS) -> float:
+    """The surface deep test parcel's starting speed (m/s): with start 'ifs' the larger of w_base_deep and the
+    excess's velocity scale ws (IFS (6.20)-(6.21)); with 'boundary_layer' c_start times the boundary layer's w*
+    (boundary_layer_velocity), with no floor."""
+    if prm.get('start', 'ifs') == 'boundary_layer':
+        return prm['c_start'] * boundary_layer_velocity(col, shf, lhf, dt_l, dq_l)[0]
+    return max(prm['w_base_deep'], ws)
+
+
 def source_layer(col: Column, k: int, dp_mix: float):
     """Temperature and vapour of a departure level's air: the level's own, or for the lowest level the mean
     potential temperature and vapour by mass of the lowest dp_mix of the column carried to the lowest level's
@@ -545,7 +610,7 @@ def classify(col: Column, shf: float, lhf: float, omega=None, prm=PARAMETERS) ->
         ts, qs_ = source_layer(col, k, prm['source_dp'])
         if k == col.n - 1:                 # the surface parcel takes the larger of the two excesses (IFS (6.19), (6.21))
             ts, qs_ = ts + dt_l + max(prm['dt_deep'], dt_s), qs_ + dq_l + max(prm['dq_deep'], dq_s)
-            w0 = max(prm['w_base_deep'], ws)
+            w0 = surface_start(col, shf, lhf, ws, dt_l, dq_l, prm)
         else:
             ts, qs_, w0 = ts + prm['dt_deep'], qs_ + prm['dq_deep'], prm['w_base_deep']
         tr = trial(col, k, ts, qs_, w0, 'deep', rain=True, prm=prm)
@@ -1629,15 +1694,16 @@ def surface_layer_excess(box: dict, half_sigma, prm=PARAMETERS, c=PLASIM) -> dic
 def trigger_record(box: dict, half_sigma, prm=PARAMETERS, c=PLASIM) -> dict:
     """By quarter, the surface test parcel of the deep type on a box's columns laid on a grid: the share whose kinetic
     energy lasts to the first half level above its condensation level, the inhibition it meets below its level of free
-    convection (J/kg, negative buoyancy integrated by height, median), the energy it starts with, and CM1's own CIN
-    (median) for its 50 m air."""
-    acc = {q[0]: dict(ok=[], cin=[], cm1=[]) for q in QUARTERS}
+    convection (J/kg, negative buoyancy integrated by height, median), the energy it starts with (median), and CM1's own
+    CIN (median) for its 50 m air."""
+    acc = {q[0]: dict(ok=[], cin=[], cm1=[], w0=[]) for q in QUARTERS}
     for x in box['outputs']['rows']:
         xg = to_grid(x, half_sigma)
         col = Column(xg['t'], xg['q'], xg['p_full'], xg['p_half'], x['g'], c)
         dt_s, dq_s, ws = surface_excess(col, x['shf'], x['lhf'], prm)
         dt_l, dq_l = surface_layer_air(col, x['shf'], x['lhf'], prm)
-        w0 = max(prm['w_base_deep'], ws)
+        w0 = surface_start(col, x['shf'], x['lhf'], ws, dt_l, dq_l, prm)
+        acc[x['quarter']]['w0'].append(w0)
         tr = trial(col, col.n - 1, col.t[-1] + dt_l + max(prm['dt_deep'], dt_s),
                    col.q[-1] + dq_l + max(prm['dq_deep'], dq_s), w0, 'deep', rain=True, prm=prm)
         pts = tr['points']
@@ -1651,7 +1717,7 @@ def trigger_record(box: dict, half_sigma, prm=PARAMETERS, c=PLASIM) -> dict:
         a['cin'].append(cin)
         a['cm1'].append(x['cin'])
     return {k: dict(reaches_cloud_share=float(np.mean(v['ok'])), inhibition_median_j_kg=float(np.median(v['cin'])),
-                    starting_energy_j_kg=0.5 * prm['w_base_deep'] ** 2,
+                    starting_energy_j_kg=float(np.median(0.5 * np.square(v['w0']))),
                     buoyancy_share_in_kinetic_energy=1.0 / (prm['f_turb'] * (1.0 + prm['gamma_vm'])),
                     cm1_cin_median_j_kg=float(np.median(v['cm1'])))
             for k, v in acc.items()}

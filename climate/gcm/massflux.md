@@ -2,10 +2,12 @@
 
 The author approved this work on 26 October on the condition that the scheme stand a good chance of bringing PlaSim's
 lunar climate and weather nearer CM1's physics, and then approved its Fortran routine for PlaSim and two-year tests on
-fifteen levels. This record describes the scheme in [massflux.py](massflux.py), its offline tests (results in
+fifteen levels, and a starting speed for its surface parcel from the boundary layer. This record describes the scheme in
+[massflux.py](massflux.py), its offline tests (results in
 [massflux_offline.json](../results/gcm/massflux_offline.json)), its Fortran routine in
-[massflux_fortran.py](massflux_fortran.py), which the runner applies for runs that set `--convection massflux`, and
-those runs (results in [massflux_l15_test.json](../results/gcm/massflux_l15_test.json)).
+[massflux_fortran.py](massflux_fortran.py), which the runner applies for runs that set `--convection massflux`, those
+runs (results in [massflux_l15_test.json](../results/gcm/massflux_l15_test.json)), and the starting speed's tests and
+run (the third round; results in [trigger_l15_test.json](../results/gcm/trigger_l15_test.json)).
 
 **What the tests show.** The scheme is the IFS's form of Tiedtke's bulk mass-flux scheme. It mixes at the bulk rates
 CM1's own clouds mix at, holds the sea box's diluted upper air in a running column, and carries the GCM's warmer column
@@ -25,6 +27,13 @@ inhibition in PlaSim's own columns and start with 0.5 J/kg. Its share of the rai
 air near the ground warms about 2 K and gains 3–4 g/kg over the sea, and the land's afternoon rains 24–25 mm/day,
 half of it large-scale. Aloft it cools the air at 42–56 km 2.3–2.6 K, a third of the way to CM1's. Of the brief's
 criteria it meets only the sea's night and evening, and only with the carried longwave correction.
+
+**The third round** started the surface parcel at the boundary layer's own convective velocity, 2.2 w*, the speed of a
+grid cell's strongest thermals as CM1's 2 km box measures it. In PlaSim that speed is 0.7–1.3 m/s over the sea and nil
+to 0.8 m/s over the wet land, where the IFS started at 1 m/s, and the share of rain from convection stays at 42%, which
+tripped the round's stop rule. The parcel's start hardly decides the trigger in PlaSim's columns: their dry convective
+layer is 0.5–4.2 km deep under a condensation level 4–6 km up, and the parcel's sub-cloud mixing spends any start across
+the stable air between.
 
 ## Why a mass-flux scheme
 
@@ -441,6 +450,147 @@ correction within 8.76, as on the baseline's columns (3.0 and 8.2).
 **The cost.** The runs took 554–586 and 536–550 s a model year on four processes against their baselines' 448–464 and
 458–463 s, a fifth to a quarter more.
 
+## The third round: the surface parcel's starting speed
+
+The two-year runs traced the scheme's rare convection to its surface parcel's start, 0.5 J/kg of kinetic energy at the
+IFS's fixed 1 m/s, against 1.4–2.4 J/kg of inhibition in PlaSim's columns. On 26 October the author approved replacing
+that speed with the boundary layer's own velocity scale, tested offline and then in one two-year run, under a stop rule:
+should convection's share of the rain stay below about 75%, the work would stop with a report. It stopped there.
+Results are in [trigger_l15_test.json](../results/gcm/trigger_l15_test.json).
+
+**The rule** (`start` 'boundary_layer' in [massflux.py](massflux.py); the runner's `--massflux-start boundary_layer`).
+The surface deep test parcel starts at c_start w*, where w* = (g/θ_v (w′θ_v′)ₛ zᵢ)^1/3 is the boundary layer's
+convective velocity (Deardorff's, as Lenschow and others 1980 define it, their eq. 12), from PlaSim's own surface
+sensible and latent heat. zᵢ is the depth of the dry convective layer the parcel's source air rises through: the height
+where the surroundings' virtual potential temperature first exceeds that air's (the parcel method), or where the air
+saturates lifted dry, whichever is lower, each linear in height between levels. Where the surface buoyancy flux does
+not rise, w* and the starting speed are nil; the rule has no floor. Elevated and mid-level departures keep the IFS's
+1 m/s, and the shallow test keeps its σ_w.
+
+**The statistic.** The test parcel decides whether any of a grid cell's thermals reach their level of free convection,
+so it stands for the strongest of them. A T21 cell on the Moon is about 170 km across and holds several hundred thermals
+if they lie about a mixed-layer depth apart, which puts its strongest near the 99.9th percentile of the mixed layer's
+vertical wind (an interpretation). Lenschow and others' fit to their aircraft data over the sea, which also fits the
+Minnesota data over land and Deardorff's simulations, σ_w²/w*² = 1.8 (z/zᵢ)^2/3 (1 − 0.8 z/zᵢ)² (their eq. 13), peaks at
+0.68 w* at 0.31 zᵢ, where a Gaussian's 99.9th percentile, 3.09 σ_w, is 2.1 w*; the convective boundary layer's upward
+skew lengthens that tail. The IFS's own boundary-layer plume takes the mean of a Gaussian's top 5%, 2.05 σ_w (Cy40r1,
+section 3.3), for the thermals whose flux it carries; the trigger asks about the strongest.
+
+**What CM1 measures** (`cm1_thermals.py` on every 3-D output; w* from CM1's surface fluxes and the parcel method's depth
+on its domain-mean column; means over each period's outputs):
+
+| CM1 box and period | w*, m/s | zᵢ; condensation level, km | Peak σ_w / w* | 99.9th percentile at 0.3–0.9 zᵢ, / w* | 99.9th percentile below 16 km: all air; clear air, m/s | 2.2 w*, m/s |
+|---|---|---|---|---|---|---|
+| Land, 30° before noon to noon | 1.15 | 6.1; 5.7 | 0.36 | 1.36 | 2.63; 1.84 | 2.52 |
+| Land, noon to 30° after | 1.17 | 5.6; 5.3 | 0.37 | 1.76 | 2.91; 1.94 | 2.57 |
+| Sea, midnight–sunrise | 0.70 | 5.9; 5.3 | 0.46 | 1.65 | 1.10; 1.10 | 1.55 |
+| Sea night, 6 km grid | 0.70 | 6.0; 5.7 | 0.48 | 1.73 | 1.11; 1.11 | 1.55 |
+| Sea night, 3 km grid | 0.70 | 5.9; 5.7 | 0.62 | 2.11 | 1.35; 1.35 | 1.54 |
+| Sea night, 2 km grid | 0.70 | 5.8; 5.7 | 0.68 | 2.28 | 1.46; 1.45 | 1.54 |
+
+At 2 km spacing CM1's sea night has Lenschow's spread, 0.68 w* at its peak, and the 99.9th percentile of its vertical
+wind in the mixed layer's upper part is 2.28 w* (2.11 at 3 km). The 6 km boxes, the land and sea boxes among them,
+resolve thermals a mixed layer wide only coarsely, and their spread peaks at 0.36–0.48 w*. c_start is therefore 2.2,
+from the 2 and 3 km boxes, within the range the Gaussian and the skew give.
+
+**The check against CM1.** On CM1's own w* the rule starts the parcel at 2.5–2.6 m/s at the land's onset by day, where
+CM1's 99.9th percentile below 16 km is 2.6–2.9 m/s in all air and 1.8–1.9 m/s in clear air, and at 1.55 m/s in the
+sea's night, where CM1 measures 1.10 m/s at 6 km spacing, 1.35 at 3 km and 1.46 at 2 km.
+
+**Offline on the GCM's columns** (`gcm_trigger_start.py`; the runs' 3-day mean site columns over years 0–1; each cell
+gives the new start's median in m/s, then the share of surface test parcels reaching their cloud under the old rule and
+the new):
+
+| Columns | Night | Morning | Afternoon | Evening |
+|---|---|---|---|---|
+| Mass-flux run, sea | 1.01; 49 → 49% | 0.89; 7 → 7% | 0.79; 7 → 7% | 0.96; 24 → 24% |
+| Mass-flux run, land | 0.00; 1 → 0% | 0.73; 17 → 17% | 0.36; 32 → 30% | 0.00; 0 → 0% |
+| Mass-flux run with the carried correction, sea | 0.80; 23 → 23% | 0.73; 6 → 6% | 0.69; 5 → 5% | 0.76; 16 → 15% |
+| Mass-flux run with the carried correction, land | 0.00; 0 → 0% | 0.66; 9 → 9% | 0.00; 18 → 18% | 0.00; 0 → 0% |
+| Baseline, sea | 1.20; 36 → 37% | 0.99; 4 → 5% | 0.95; 6 → 6% | 1.27; 17 → 17% |
+| Baseline, land | 0.00; 0 → 0% | 0.82; 9 → 8% | 0.00; 34 → 32% | 0.00; 0 → 0% |
+| Baseline with the carried correction, sea | 0.86; 18 → 18% | 0.74; 3 → 2% | 0.77; 2 → 2% | 0.85; 3 → 3% |
+| Baseline with the carried correction, land | 0.00; 0 → 0% | 0.61; 4 → 4% | 0.00; 34 → 32% | 0.00; 0 → 0% |
+
+PlaSim's w* over the sea is 0.32–0.58 m/s (medians), against CM1's 0.70, because its dry convective layer is 0.5–4.2 km
+deep under a condensation level 4–6 km up, where CM1's sea night is mixed to 5.9 km. Over the land site PlaSim's surface
+buoyancy flux rises only by day and weakly, its sensible heat running downward under 170–260 W/m² of evaporation, so w*
+is nil in about half the afternoon means. The new start ranges from nil to 1.3 m/s, and the share reaching cloud moves
+by at most two points in any quarter. The starting-speed run's own columns give the same.
+
+**Why the start matters so little** (`start_sensitivity.py`; the share of surface test parcels reaching their cloud, %,
+at fixed starting speeds with the parcel's sub-cloud mixing at its 0.4 of the base rate, and at 1 m/s with none):
+
+| Columns, quarter | 0 | 0.5 | 1 | 1.5 | 2 | 3 | 5 m/s | 1 m/s, no sub-cloud mixing |
+|---|---|---|---|---|---|---|---|---|
+| Mass-flux run, sea night | 47 | 48 | 49 | 51 | 53 | 62 | 77 | 71 |
+| Mass-flux run, sea evening | 22 | 22 | 24 | 26 | 27 | 33 | 44 | 65 |
+| Mass-flux run, sea afternoon | 6 | 6 | 7 | 7 | 8 | 10 | 13 | 37 |
+| Mass-flux run, land afternoon | 30 | 30 | 32 | 35 | 39 | 48 | 64 | 58 |
+| Mass-flux run, land morning | 17 | 17 | 17 | 19 | 21 | 25 | 30 | 51 |
+| Baseline, sea evening | 17 | 17 | 17 | 17 | 18 | 22 | 32 | 83 |
+
+Between rest and 2 m/s the share moves by at most nine points. The parcel's sub-cloud mixing, 1.12×10⁻⁴ m⁻¹, also drags
+on its kinetic energy, which then decays by a factor e every 2.3 km, so whatever start a thermal brings is mostly spent
+across the 2–5 km of stable air PlaSim holds below the condensation level, and the trigger turns on the parcel's
+buoyancy near that level. The same columns without the sub-cloud mixing reach cloud 1.4–5 times as often.
+
+**The patch.** [massflux_fortran.py](massflux_fortran.py)'s `START_PATCHES` go over the mass-flux patch for a run that
+sets the rule: `mfstart` gives w*, and `nstart_mf` and `cstart_mf` join `rainmod`'s namelist, off by default. A parcel
+may now start at rest, so the organized detrainment's ratio of kinetic energies is taken only where the energy below is
+positive, as it always is under the IFS's start. The patch went into the shared source on 26 October, changing
+`rainmod.f90`'s hash from 7bf3ebea… to 42122b3c…. Its tests
+([test_massflux_fortran.py](../tests/test_massflux_fortran.py)):
+- with the rule, the Fortran gives the Python copy's type, cloud, base mass flux, tendencies, rain, snow and mass fluxes
+  to 1e-10 on 40 columns (the earlier 16, and their 12 lunar ones again under the GCM's sea fluxes and its wet land's),
+  and keeps each column's water and moist enthalpy to 1e-9;
+- without the rule, the patched routine prints every digit the old one prints on the same columns;
+- w* and its depth follow the parcel method and stop at the condensation level, and a falling flux starts the parcel at
+  rest, with no division by its energy on a saturated lowest level.
+
+The month trials without the rule, run on the patched source, repeat the earlier months bit for bit in all 61 output
+variables and their restarts, with the Betts–Miller scheme and with the mass-flux scheme on fifteen levels. A smoke month
+with the rule keeps every field finite and the humidity nowhere negative, and rains 1.69 mm/day, 33% of it convective.
+
+**Two years with the rule** (`A28R_301k_cold_massflux_wstart_l15`, the earlier mass-flux run's flags with the rule and
+the provisional refit; years 0–1, criterion (e) against the baseline):
+
+| Criterion | Starting-speed run | Earlier mass-flux run | Baseline | CM1, and the test | Met |
+|---|---|---|---|---|---|
+| (a) Sea's air at 41.8, 55.8 km | 256.22, 237.55 K | 256.21, 237.51 | 258.53, 240.12 | 251.49, 231.76; half the gap closed | no (33%, 31%) |
+| (b) Sea, midnight–sunrise | 0.99 mm/day | 0.68 | 1.98 | 0.14; at most 0.5 | no |
+| (b) Sea, sunset–midnight | 2.99 | 1.60 | 2.68 | 2.97; at least 1.98 | yes |
+| (b) Sea, noon–sunset | 0.86 | 0.45 | 1.45 | 2.23; 1.1–3.3 | no |
+| (c) Land, noon–sunset | 24.05 | 24.29 | 17.84 | 8.59; nearer than the baseline | no |
+| (c) Land, sunrise–noon | 0.05 | 0.13 | 0.50 | 2.87; at least 1 | no |
+| (d) Sea's lowest 0.6 km, vapour | 15.09 g/kg | 15.23 | 12.34 | 11.8 (lowest 0.5 km); no further | no |
+| (e) Imbalance at the top | −0.38 W/m² | −0.45 | −3.70 | within 3 of the baseline | no (+3.32) |
+| Ground, global | 299.72 K | 299.70 | 297.81 | shift reported | +1.91 K |
+| Rain; its convective share | 1.96 mm/day; 42.4% | 1.97; 42.2% | 2.18; 86.0% | the stop rule: below 75% | tripped |
+| (f) Top two levels, air | 164.17, 190.00 K | 164.15, 189.97 | 165.82, 191.56 | reported | |
+| (f) Top two levels, water | 0.0210, 1.64 ppmv | 0.0210, 1.63 | 0.0349, 2.33 | reported | |
+
+Year 1 alone gives a convective share of 43.7%, against 43.0% in the earlier run. The run repeats the earlier mass-flux
+run's global state to within 0.1 W/m² at the top of the air, 0.02 K at the ground and 0.2 points of convective share. At
+the sea site its evening rains 2.99 mm/day, CM1's rate, against 1.60 before (2.8 and 3.2 in years 0 and 1, against 1.3
+and 1.9), and its afternoon 0.86 against 0.45; the land site's afternoon still rains 24 mm/day, three-fifths of it
+large-scale. The longwave check (`plasim_longwave check` on year 1,
+[longwave_check_trigger_l15.json](../results/gcm/longwave_check_trigger_l15.json)) holds the provisional refit within
+3.06 W/m² of correlated-k in its worst layer, as on the earlier runs (3.0–3.03). The run took 558 and 561 s a model year
+on four processes, against the earlier mass-flux run's 586 and 554 and the baseline's 464 and 448: the rule adds nothing
+measurable to the scheme's fifth to a quarter more than the baseline.
+
+**Where the trigger's limit lies.** The stop rule tripped, and this round's evidence places the scheme's rare convection
+in PlaSim's boundary layer. PlaSim keeps a dry convective layer 0.5–4.2 km deep over the sea under a condensation level
+4–6 km up, so a surface parcel must cross 2–5 km of stable air while it mixes, where CM1's sea night is mixed to 5.9 km
+and its condensation level lies within that layer; the same shallow layer holds PlaSim's w* to 0.3–0.6 m/s against CM1's
+0.70. A candidate cause, untested: PlaSim's vertical diffusion (`vdiff`) keeps Earth's asymptotic mixing length, 160 m,
+and counts heights at a fixed 250 K, while its coefficient in σ goes as g³. For the same wind shear and Richardson
+number it mixes PlaSim's interfaces 0.6 and 3.1 km up 7–36 times more slowly at the Moon's gravity than at Earth's (a
+reading of its arithmetic), and its dry adjustment mixes only where the air turns superadiabatic. A second part lies in
+the scheme: its test parcel mixes in sub-cloud air at 0.4 of the deep base rate, a rate CM1 does not measure (the
+parameter table above), and that mixing decides more of the trigger than the start does.
+
 ## Whether to implement it, and what that would take
 
 **The case for it.** The tests answer the approval's condition for the upper air. Mixing at CM1's measured rates holds
@@ -456,7 +606,8 @@ not carry it. On fifteen levels with its surface parcel the scheme also convects
 **The two-year runs** show a third cost: in PlaSim the scheme convects too seldom, its test parcels held back by the
 inhibition PlaSim's columns carry, so large-scale condensation takes half the rain, the near-ground air warms and
 moistens, and the balance at the top gains 3.2 W/m². Its cooling of the air aloft goes a third of the way to CM1's in
-two years. Any fifteen-year branch is the author's call.
+two years. The third round's starting speed leaves all of this as it was, and places the trigger's limit in PlaSim's
+shallow boundary layer and the test parcel's sub-cloud mixing. Any fifteen-year branch is the author's call.
 
 ## Limits
 
@@ -481,6 +632,10 @@ two years. Any fifteen-year branch is the author's call.
   and early size of the scheme's effect; the inhibition its parcels meet is measured on 3-day means.
 - **A correction.** The first round's cloud-top pressure in the depth test took the pressure of the plume's last point,
   which lies up to a quarter layer above its top; it now takes the pressure at the top's height.
+- **The third round.** The statistic the parcel stands for, the grid cell's strongest thermals at the 99.9th percentile,
+  is an interpretation, and c_start comes from one CM1 night at sea on 2 and 3 km grids. The depth zᵢ is read from 15
+  levels, linear between them. The offline tests take 3-day means, and the two-year run is one realization; the reading
+  of `vdiff` as the shallow boundary layer's cause is untested.
 
 ## Sources
 
@@ -501,6 +656,10 @@ two years. Any fifteen-year branch is the author's call.
   637–662.** Not read here; the free-convection form of the stability function and its −1/3 exponent as standard
   surface-layer theory gives them.
 - The PDFs and their text are in `session-tools/agents/climate-massflux/literature` on the research drive.
+- **Lenschow, Wyngaard and Pennell (1980), *J. Atmos. Sci.* 37, 1313–1326.** Read (journals.ametsoc.org, sha256
+  21660f4f70942b12…): section 3, its mixed-layer scales (eq. 12, w*) and the vertical wind's variance (eq. 13). Its PDF
+  is in `session-tools/agents/climate-trigger/literature` on the research drive.
+- **Deardorff's convective velocity scale.** Taken as Lenschow and others define it; Deardorff's own papers not read.
 
 ```sh
 climate/gcm/.venv/bin/python -m climate.gcm.massflux        # about 6 minutes on one core: ../results/gcm/massflux_offline.json
@@ -520,4 +679,16 @@ climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_30
     --output climate/results/gcm/longwave_check_massflux_l15.json                # about a minute and a half
 climate/gcm/.venv/bin/python $M/gcm_trigger.py A28R_301k_cold_massflux_l15 …     # the parcel on the runs' columns
 climate/gcm/.venv/bin/python $M/massflux_l15_analysis.py > $M/massflux_l15_analysis.txt   # the results file
+T=/media/projectspace/terluna-research/session-tools/agents/climate-trigger       # the third round
+climate/gcm/.venv/bin/python $T/cm1_thermals.py                # CM1's vertical wind against its w*, minutes on one core
+climate/gcm/.venv/bin/python $T/cm1_thermals_summary.py        # the table above
+climate/gcm/.venv/bin/python $T/gcm_trigger_start.py A28R_301k_cold_massflux_l15 …   # the offline test, about a minute
+climate/gcm/.venv/bin/python $T/start_sensitivity.py A28R_301k_cold_massflux_l15:sea:night …
+$T/run_trigger_tests.sh ws_smoke15               # one model month with the rule; it applies the patch
+$T/run_trigger_tests.sh ws_month15               # and ws_mfmonth15: the months without it, for the bit check
+climate/gcm/.venv/bin/python $T/bit_check.py A28R_301k_cold_sbm_rh07_deep200_l15cap_month_wssource \
+    A28R_301k_cold_sbm_rh07_deep200_l15cap_month_fcsource A28R_301k_cold_massflux_l15_month_wssource \
+    A28R_301k_cold_massflux_l15_month_fcsource                                     # every variable and the restarts
+$T/run_trigger_tests.sh ws15                     # two years with the rule, about 19 minutes on 4 workers
+climate/gcm/.venv/bin/python $T/trigger_analysis.py > $T/trigger_analysis.txt   # trigger_l15_test.json
 ```

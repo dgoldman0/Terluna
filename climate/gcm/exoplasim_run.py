@@ -63,7 +63,10 @@ base in place of PlaSim's 700 hPa (SBM_CAP_PATCHES); without either a run is as 
 layer, the ground to 0.6 km, to the fourteen, and --longwave-fit l15_provisional gives a run on it the longwave
 correction refitted on its own levels' columns. --convection massflux runs the mass-flux scheme of massflux.py in
 Kuo's place (rainmod's nprc 3; massflux_fortran.py's patch, applied only for a run that sets it); a run without it is as
-before.
+before. --free-convection lunar takes the free-convection constant in the heat and vapour transfer over water (Miller
+and others 1992; FREE_CONVECTION_EDITS) from Earth's 0.0016 to the Moon's gravity and surface pressure, and
+--massflux-start boundary_layer starts the mass-flux scheme's surface parcel at a multiple of the boundary layer's
+convective velocity (massflux_fortran.START_PATCHES).
 """
 from __future__ import annotations
 import argparse
@@ -77,7 +80,7 @@ import signal
 import sys
 import time
 import numpy as np
-from shared.constants import STANDARD_GRAVITY
+from shared.constants import EXOPLASIM_FREE_CONVECTION, STANDARD_ATMOSPHERE, STANDARD_GRAVITY
 from climate.gcm import plasim_ice_optics as pio
 from climate.gcm import levels as lv
 from climate.gcm import massflux_fortran as mff
@@ -1339,6 +1342,28 @@ WIND10_OUT_EDITS = [
 WIND10_PATCHES = [('plasimmod.f90', 'Terluna: 1 writes the 10 m wind', WIND10_MOD_EDITS),
                   ('fluxmod.f90', "Terluna: the 10 m wind, Geleyn's profile", WIND10_FLUX_EDITS),
                   ('outmod.f90', "Terluna: the 10 m wind's mean since its last output", WIND10_OUT_EDITS)]
+# The free-convection constant over water (2026-10-26). In unstable air over water surflx raises the transfer of heat and
+# vapour by the interpolation of Miller, Beljaars and Palmer (1992, J. Climate 5, 418-434, their eq. 9),
+# C_H = C_HN (1 + C_R^1.25)^0.8 with C_R = 0.0016 (theta_vs - theta_v1)^(1/3) / (C_HN |U|), whose still-air limit,
+# C_H |U| = 0.0016 (theta_vs - theta_v1)^(1/3), stands for the free convection of tank experiments (their eq. 8):
+# E / rho = 0.17 (g kappa^2 / (theta_v nu))^(1/3) (theta_vs - theta_v1)^(1/3) (q_s - q_1), with kappa the air's thermal
+# diffusivity and nu its kinematic viscosity. At 300 K and 1013 hPa that law's constant is 0.0017; they took 0.0016, to
+# sit near Monin-Obukhov similarity at low wind speeds. With kappa = k / (rho c_p), nu = mu / rho and rho theta_v = p / R
+# at the ground, the constant goes as (g / p_s)^(1/3) at a given temperature, the conductivity and viscosity adding
+# about T^0.3 (free_convection_setting). FREE_CONVECTION_EDITS make it fluxmod's namelist variable CFREE, PlaSim's 0.0016
+# unless a run sets it, so a run without the setting computes as before.
+FREE_CONVECTION_MARKER = 'Terluna: the free-convection constant over water'
+FREE_CONVECTION_EDITS = [
+    ('      real :: vdiff_d    = 5.    !        "\n',
+     '      real :: vdiff_d    = 5.    !        "\n'
+     f'      real :: cfree      = 0.0016 ! {FREE_CONVECTION_MARKER} (m s-1 K-1/3; Miller et al. 1992)\n'),
+    ("     &                ,zumin,vdiff_lamm,vdiff_b,vdiff_c,vdiff_d\n",
+     "     &                ,zumin,vdiff_lamm,vdiff_b,vdiff_c,vdiff_d,cfree\n"),
+    ("      call mpbcr(vdiff_d)\n", "      call mpbcr(vdiff_d)\n      call mpbcr(cfree)\n"),
+    ("         zrifh(jhor)=(1.+(0.0016*zdth**(1./3.)/SQRT(zabsu2(jhor))       &\n",
+     "         zrifh(jhor)=(1.+(cfree*zdth**(1./3.)/SQRT(zabsu2(jhor))        &\n"),
+]
+FREE_CONVECTION_PATCHES = [('fluxmod.f90', FREE_CONVECTION_MARKER, FREE_CONVECTION_EDITS)]
 # The twilight, gas, longwave and ice patches go only into a copy of ExoPlaSim of its own, which every run imports
 # first since the corrected radiation became the standard (2026-10-14); the shared installation stays as the earlier
 # runs had it. The twilight's clear share follows them, from 2026-10-19, and the ice weights and the 10 m wind after it,
@@ -1393,20 +1418,28 @@ def use_twilight_package():
 
 
 def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
-                   massflux: bool = False) -> dict:
+                   massflux: bool = False, free_convection: bool = False, massflux_start: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
-    (SBM_CAP_PATCHES, after the depth patch), and the mass-flux scheme (massflux_fortran.MASSFLUX_PATCHES, over the
-    Betts-Miller patch), for a run that sets them, and return each patched file's hash for the run key."""
+    (SBM_CAP_PATCHES, after the depth patch), the mass-flux scheme (massflux_fortran.MASSFLUX_PATCHES, over the
+    Betts-Miller patch) with its surface parcel's starting speed (massflux_fortran.START_PATCHES, over it), and the
+    free-convection constant over water (FREE_CONVECTION_PATCHES, after the 10 m wind's), for a run that sets them, and
+    return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
         raise RuntimeError(f'the twilight patch belongs only in {TWILIGHT_PACKAGE}, not in {src}')
+    if free_convection and not twilight:
+        raise RuntimeError('the free-convection constant goes into the twilight copy, after the 10 m wind patch')
+    if massflux_start and not massflux:
+        raise RuntimeError("the starting speed's patch goes over the mass-flux scheme's")
     hashes = {}
     for name, marker, edits in (PATCHES + (TWILIGHT_PATCHES if twilight else [])
                                 + (SBM_TRIGGER_PATCHES if trigger else []) + (SBM_DEPTH_PATCHES if depth or cap else [])
-                                + (SBM_CAP_PATCHES if cap else []) + (mff.MASSFLUX_PATCHES if massflux else [])):
+                                + (SBM_CAP_PATCHES if cap else []) + (mff.MASSFLUX_PATCHES if massflux else [])
+                                + (mff.START_PATCHES if massflux_start else [])
+                                + (FREE_CONVECTION_PATCHES if free_convection else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1440,6 +1473,30 @@ def rain_evaporation_setting(gamma) -> dict:
     return dict(gamma=gamma, plasim_default=PLASIM_RAIN_GAMMA)
 
 
+FREE_CONVECTION_CHOICES = ('earth', 'lunar')
+
+
+def free_convection_setting(choice: str, gravity: float, pressure_pa: float) -> dict:
+    """The free-convection constant over water (FREE_CONVECTION_EDITS) as the configuration records it. 'lunar' takes
+    PlaSim's 0.0016 m s-1 K-1/3, set at Earth's gravity and sea-level pressure, to the planet's gravity and the
+    experiment's surface pressure: the tank experiments' law behind it, 0.17 (g kappa^2 / (theta_v nu))^(1/3), goes as
+    (g / p_s)^(1/3) at a given temperature, since kappa^2 / nu = k^2 / (rho c_p^2 mu) and rho theta_v = p_s / R at the
+    ground, with the conductivity k and the viscosity mu set by the temperature alone. The sea's temperature, near 300 K on
+    both worlds, and the air's composition are taken as Earth's; their factor, about (T / T_E)^0.3, is left out.
+    'earth' is PlaSim's own constant, which the configuration leaves unrecorded."""
+    if choice not in FREE_CONVECTION_CHOICES[1:]:
+        raise ValueError(f"the free-convection constant is set only for 'lunar' (PlaSim's Earth value is the default), "
+                         f"not {choice!r}")
+    if not (gravity > 0.0 and pressure_pa > 0.0):
+        raise ValueError('the free-convection constant needs a positive gravity and surface pressure')
+    factor = (gravity / STANDARD_GRAVITY * STANDARD_ATMOSPHERE / pressure_pa) ** (1.0 / 3.0)
+    return dict(choice=choice, constant=EXOPLASIM_FREE_CONVECTION * factor, earth_constant=EXOPLASIM_FREE_CONVECTION,
+                factor=factor, gravity_m_s2=float(gravity), surface_pressure_pa=float(pressure_pa),
+                earth_reference=dict(gravity_m_s2=STANDARD_GRAVITY, surface_pressure_pa=STANDARD_ATMOSPHERE),
+                scaling='(g / p_s)^(1/3), from 0.17 (g kappa^2 / (theta_v nu))^(1/3) with rho theta_v = p_s / R',
+                source='Miller, Beljaars and Palmer (1992), J. Climate 5, 418-434, eqs. (8) and (9)')
+
+
 SBM_DEFAULTS = dict(tau_s=7200.0, rh=0.7, eps=0.0, cin_j_kg=0.0)   # Frierson's 2 h and 70%; the lunar options off
 SBM_TRIGGER_SETTINGS = ('cape_j_kg', 'trigger_eps')                   # the CAPE trigger, recorded only when set
 SBM_DEPTH_SETTINGS = ('deep_hpa', 'mixing_steps')                     # SBM_DEPTH_PATCHES' options, likewise
@@ -1459,10 +1516,15 @@ def convection_setting(scheme='sbm', **values) -> dict:
     above 1, the steps of the parcel's mixing within each layer, which need eps above 0. The shallow cap of
     SBM_CAP_PATCHES joins it only when shallow_cap is true, and it needs the depth test."""
     if scheme == 'massflux':
+        values = dict(values)
+        start = values.pop('start', None)
         given = sorted(k for k, v in values.items() if v not in (None, False))
         if given:
             raise ValueError(f'the mass-flux scheme takes none of the Betts-Miller settings: {given}')
-        return dict(scheme='massflux', nprc=3, parameters=mff.fortran_values())
+        out = dict(scheme='massflux', nprc=3, parameters=mff.fortran_values())
+        if start not in (None, 'ifs'):                    # the surface parcel's starting speed (massflux_fortran)
+            out['start'] = dict(rule=start, parameters=mff.start_values(dict(mff.mf.PARAMETERS, start=start)))
+        return out
     if scheme != 'sbm':
         raise ValueError(f"the convection scheme is 'sbm' or 'massflux' (Kuo's is the default, left out), "
                          f"not {scheme!r}")
@@ -1506,7 +1568,9 @@ def convection_namelist(c: dict) -> list:
     every parameter of its record."""
     entries = [('NPRC', str(c['nprc']))]
     if c.get('scheme') == 'massflux':
-        return entries + [(name.upper(), mff.fortran_literal(value)) for name, value in c['parameters'].items()]
+        start = c['start']['parameters'] if 'start' in c else {}
+        return entries + [(name.upper(), mff.fortran_literal(value))
+                          for name, value in list(c['parameters'].items()) + list(start.items())]
     for key, name in (('tau_s', 'TAU_BM'), ('rh', 'RH_BM'), ('eps', 'EPS_BM'), ('cin_j_kg', 'CIN_BM'),
                       ('cape_j_kg', 'CAPE_BM'), ('trigger_eps', 'EPST_BM')):
         if key in c:                                                  # the CAPE trigger only when set
@@ -1529,6 +1593,11 @@ def uses_depth_patch(convection: dict | None) -> bool:
 def uses_massflux(convection: dict | None) -> bool:
     """Whether a run's convection settings (as given to configuration) choose the mass-flux scheme."""
     return bool(convection) and convection.get('scheme') == 'massflux'
+
+
+def uses_massflux_start(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) set the mass-flux scheme's starting speed."""
+    return uses_massflux(convection) and convection.get('start') not in (None, 'ifs')
 
 
 def uses_cap_patch(convection: dict | None) -> bool:
@@ -1566,7 +1635,8 @@ def cold_cloud_factors(path, half=None) -> dict:
 def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
                   heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
-                  cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None):
+                  cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
+                  free_convection=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
@@ -1579,9 +1649,11 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     layers by its central factors (ICE_FACTOR_EDITS); rain_evaporation replaces PlaSim's constant for the evaporation of
     falling rain and snow (rainmod's gamma); levels, a set of levels.LEVEL_SETS other than PlaSim's own, runs PlaSim on
     it, with the twilight terms and the longwave correction from their products on that set (levels_product) and the
-    cold cloud's factors checked against its top layers. Each is recorded when given, and left out the configuration is
-    the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as the runs of 14 to
-    19 October did, and the 295 K fit the longwave correction as those of 17 October did."""
+    cold cloud's factors checked against its top layers; free_convection 'lunar' sets the free-convection constant over
+    water for the planet's gravity and surface pressure (free_convection_setting, FREE_CONVECTION_EDITS). Each is
+    recorded when given, and left out the configuration is the one every earlier run had; the 294.9 K ledger without the
+    clear share records the twilight as the runs of 14 to 19 October did, and the 295 K fit the longwave correction as
+    those of 17 October did."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -1617,7 +1689,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                exoplasim=version('exoplasim'),
                source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
                                      depth=uses_depth_patch(convection), cap=uses_cap_patch(convection),
-                                     massflux=uses_massflux(convection)),
+                                     massflux=uses_massflux(convection),
+                                     free_convection=free_convection is not None,
+                                     massflux_start=uses_massflux_start(convection)),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -1648,6 +1722,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                                     'patch 11, lab branch 79ea224)')
     if rain_evaporation is not None:
         cfg['rain_evaporation'] = rain_evaporation_setting(rain_evaporation)
+    if free_convection is not None:
+        cfg['free_convection'] = free_convection_setting(free_convection, planet['gravity_m_s2'], exp['pressure_pa'])
     if convection is not None:                       # the Betts-Miller or the mass-flux scheme in Kuo's place
         cfg['convection'] = convection_setting(**convection)
     if cold_cloud is not None:
@@ -1947,6 +2023,8 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
                 model._edit_namelist('radmod_namelist', f'ZICERF({i})', repr(float(r)))
     if 'wind10' in cfg:
         model._edit_namelist('fluxmod_namelist', 'NWIND10', '1')
+    if 'free_convection' in cfg:
+        model._edit_namelist('fluxmod_namelist', 'CFREE', repr(float(cfg['free_convection']['constant'])))
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
@@ -2142,12 +2220,12 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k',
         wind10: bool = False, ice_weights: str = 'shield', cold_cloud: str | None = None,
         rain_evaporation: float | None = None, moisture: bool = False, convection: dict | None = None,
-        levels: str | None = None) -> int:
+        levels: str | None = None, free_convection: str | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
                         ice_weights=ice_weights, cold_cloud=cold_cloud, rain_evaporation=rain_evaporation,
-                        moisture=moisture, convection=convection, levels=levels)
+                        moisture=moisture, convection=convection, levels=levels, free_convection=free_convection)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -2282,6 +2360,10 @@ def main(argv=None) -> int:
                         help="PlaSim's deep convection: Kuo's scheme, its own, the simplified Betts-Miller scheme of "
                              'the Terluna patch (SBM_EDITS), or the mass-flux scheme (massflux_fortran.py; part of the '
                              'run key)')
+    parser.add_argument('--massflux-start', choices=tuple(mff.START_CHOICES), default='ifs',
+                        help="the mass-flux scheme's surface parcel's starting speed: the IFS's (the larger of 1 m/s "
+                             "and the excess's velocity scale) or c_start times the boundary layer's convective velocity "
+                             "w* (massflux_fortran.START_PATCHES; part of the run key)")
     parser.add_argument('--sbm-tau', type=float, metavar='SECONDS', help='its relaxation time (7200)')
     parser.add_argument('--sbm-rh', type=float, metavar='SHARE', help='its reference relative humidity (0.7)')
     parser.add_argument('--sbm-eps', type=float, help="its parcel's mixing per e-folding of pressure (0)")
@@ -2310,6 +2392,11 @@ def main(argv=None) -> int:
     parser.add_argument('--wind10', action='store_true',
                         help="the 10 m wind on Geleyn's profile from the lowest layer's drag, codes 165 and 166 "
                              '(WIND10_PATCHES; part of the run key)')
+    parser.add_argument('--free-convection', choices=FREE_CONVECTION_CHOICES, default='earth',
+                        help="the free-convection constant in the heat and vapour transfer over water (Miller and "
+                             "others 1992): PlaSim's Earth value, 0.0016 m s-1 K-1/3, or the lunar one, scaled as "
+                             "(g / p_s)^(1/3) to the Moon's gravity and the surface pressure (FREE_CONVECTION_EDITS; "
+                             'part of the run key)')
     parser.add_argument('--heating-diagnostics', action='store_true',
                         help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
                              'the run key)')
@@ -2344,6 +2431,8 @@ def main(argv=None) -> int:
         overrides[key] = type(MODEL[key])(value)
     if args.sbm_shallow_cap and args.convection != 'sbm':
         parser.error('--sbm-shallow-cap belongs to the simplified Betts-Miller scheme (--convection sbm)')
+    if args.massflux_start != 'ifs' and args.convection != 'massflux':
+        parser.error('--massflux-start belongs to the mass-flux scheme (--convection massflux)')
     sbm_given = [k for k in ('sbm_tau', 'sbm_rh', 'sbm_eps', 'sbm_cin', 'sbm_cape', 'sbm_trigger_eps', 'sbm_deep_hpa',
                              'sbm_mixing_steps') if getattr(args, k) is not None]
     if sbm_given and args.convection != 'sbm':
@@ -2354,13 +2443,14 @@ def main(argv=None) -> int:
                           cape_j_kg=args.sbm_cape, trigger_eps=args.sbm_trigger_eps, deep_hpa=args.sbm_deep_hpa,
                           mixing_steps=args.sbm_mixing_steps, shallow_cap=args.sbm_shallow_cap or None)
     elif args.convection == 'massflux':
-        convection = dict(scheme='massflux')
+        convection = dict(scheme='massflux', start=None if args.massflux_start == 'ifs' else args.massflux_start)
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
                args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation,
-               args.moisture_diagnostics, convection, args.levels)
+               args.moisture_diagnostics, convection, args.levels,
+               None if args.free_convection == 'earth' else args.free_convection)
 
 
 if __name__ == '__main__':

@@ -8,6 +8,7 @@
     "planck_J_s": 6.62607015e-34,
     "speed_of_light_m_s": 299792458.0,
     "standard_gravity_m_s2": 9.80665,
+    "standard_atmosphere_pa": 101325.0,
     "elementary_charge_C": 1.602176634e-19,
     "proton_mass_kg": 1.67262192595e-27,
     "vacuum_permeability_N_A2": 1.25663706212e-06,
@@ -54,7 +55,9 @@
       "charnock_parameter": 0.018,
       "sea_roughness_floor_m": 1.5e-05,
       "von_karman_constant": 0.4,
-      "sea_surface_source": "ExoPlaSim 3.4.2 seamod.f90 namelist defaults charnock and dz0sea (open-sea roughness max(charnock u*^2/g, dz0sea), with the configured planetary gravity) and fluxmod.f90 parameter vonkarman"
+      "sea_surface_source": "ExoPlaSim 3.4.2 seamod.f90 namelist defaults charnock and dz0sea (open-sea roughness max(charnock u*^2/g, dz0sea), with the configured planetary gravity) and fluxmod.f90 parameter vonkarman",
+      "free_convection_constant_m_s_K13": 0.0016,
+      "free_convection_source": "ExoPlaSim 3.4.2 fluxmod.f90 surflx: the constant of Miller, Beljaars and Palmer (1992, J. Climate 5, 418-434, eq. 9) in the heat and vapour transfer over water in unstable air, an Earth value set at Earth's gravity and sea-level pressure"
     },
     "swan_41_51_wu": {
       "low_speed_drag_coefficient": 0.0012875,

@@ -614,3 +614,179 @@ def test_the_runner_records_and_writes_the_mass_flux_scheme_only_for_runs_that_s
     finally:
         for sig, handler in saved.items():
             signal.signal(sig, handler)
+
+
+# ------------------------------------------------------------------- the surface parcel's starting speed (third round)
+
+START = dict(mf.PARAMETERS, start='boundary_layer')
+
+
+def start_harness(folder, values):
+    """The column harness on mfcolumn with the starting-speed patch, its parameters at values."""
+    stub = COLUMN_STUB + mff.declarations() + mff.start_declarations(values) + '      end module rainmod\n'
+    return compile_in(folder, {'stub.f90': stub, 'mfcolumn.f90': mff.start_column_code(), 'harness.f90': COLUMN_HARNESS})
+
+
+def run_printed(exe, cases) -> str:
+    lines = [str(len(cases))]
+    for x in cases:
+        lines.append(num([x['c'][k] for k in CONSTANTS]))
+        lines.append(f"{x['t'].size} {x['land']} {x['g']!r} {x['dt']!r} {x['shf']!r} {x['lhf']!r}")
+        lines += [num(x[k]) for k in ('t', 'q', 'pf', 'ph', 'bt', 'bq', 'om', 'w', 'tph')]
+    return subprocess.run([str(exe)], input='\n'.join(lines) + '\n', capture_output=True, text=True, check=True).stdout
+
+
+def start_cases():
+    """The column cases, and each lunar one again with the surface fluxes of the GCM's sea and wet land: a weak rising
+    buoyancy flux and a falling one, so that the starting speed ranges from nil to above the IFS's 1 m/s."""
+    cases = all_cases()
+    extra = []
+    for x in cases:
+        if x['g'] < 5.0:
+            extra.append(dict(x, shf=6.0, lhf=95.0))
+            extra.append(dict(x, shf=-13.0, lhf=190.0, land=1))
+    return cases + extra
+
+
+@FORTRAN
+def test_without_the_option_the_started_column_prints_every_digit_the_old_one_prints(tmp_path):
+    cases = start_cases()
+    old = run_printed(column_harness(tmp_path / 'old'), cases)
+    new = run_printed(start_harness(tmp_path / 'new', mff.start_values()), cases)
+    assert old == new
+
+
+@FORTRAN
+def test_the_fortran_start_gives_the_python_copys_tendencies(tmp_path):
+    cases = start_cases()
+    fortran = run_columns(start_harness(tmp_path / 'start', mff.start_values(START)), cases)
+    differs = 0
+    for j, (x, f) in enumerate(zip(cases, fortran)):
+        p = mf.column(x['t'], x['q'], x['pf'], x['ph'], x['g'], x['dt'], x['shf'], x['lhf'], x['bt'], x['bq'], x['om'],
+                      x['w'], bool(x['land']), prm=START, c=x['c'], melt='plasim', t_phase=x['tph'])
+        old = python_column(x)
+        differs += (p['type'] != old['type']) or not np.allclose(p['dtdt'], old['dtdt'], rtol=1e-6, atol=1e-12)
+        assert f['kinfo'][0] == TYPES[p['type']], j
+        if p['type'] is None:
+            assert all(not np.any(f[k]) for k in OUTPUTS), j
+            continue
+        assert f['kinfo'][1] == p['up']['base_half'] and f['kinfo'][2] == p['up']['top_half'], j
+        assert f['info'][0] == pytest.approx(p['m_base'], rel=1e-10), j
+        assert f['info'][2] == pytest.approx(p['z_top'], rel=1e-10)
+        for k, pk in zip(OUTPUTS, ('dtdt', 'dqdt', 'net_rain', 'net_snow', 'mu', 'md')):
+            b = np.asarray(p[pk], float)
+            assert np.allclose(f[k], b, rtol=1e-10, atol=1e-10 * np.abs(b).max()), (j, k)
+    assert differs >= 3                             # the starting speed changes some columns' convection
+
+
+@FORTRAN
+def test_the_started_column_keeps_its_energy_and_water(tmp_path):
+    cases = start_cases()
+    fortran = run_columns(start_harness(tmp_path / 'start', mff.start_values(START)), cases)
+    rained = 0
+    for x, f in zip(cases, fortran):
+        if f['kinfo'][0] == 0:
+            continue
+        c = x['c']
+        m = np.diff(x['ph']) / x['g']
+        heat = float(np.sum(c['acpd'] * (1.0 + c['ADV'] * x['q']) * f['dtdt'] * m))
+        rain, snow = float(f['rain'].sum()), float(f['snow'].sum())
+        assert float(np.sum(f['dqdt'] * m)) == pytest.approx(-(rain + snow), rel=1e-9, abs=1e-15)
+        assert heat == pytest.approx(c['ALV'] * rain + c['ALS'] * snow, rel=1e-9, abs=1e-9)
+        rained += rain + snow > 0.0
+    assert rained >= 4
+
+
+def test_the_boundary_layers_velocity_takes_the_depth_of_its_dry_convective_layer():
+    half15 = mf.grid_sets()['15']
+    # a dry-adiabatic layer to 4 km under a stable one, dry enough to condense far above: the depth is the parcel
+    # method's, a little above 4 km for the warmer source air
+    t, q, pf, ph = sounding(G_MOON, 121500.0, t0=300.0, n=15, top_m=150000.0, lapse_bl=G_MOON / LUNAR['acpd'],
+                            lapse=1.0e-3, t_min=200.0, rh_bl=0.3, rh=0.3, levels=half15, noise=0.0)
+    col = mf.Column(t, q, pf, ph, G_MOON, LUNAR)
+    dt_l, dq_l = mf.surface_layer_air(col, 20.0, 100.0)
+    w, zi = mf.boundary_layer_velocity(col, 20.0, 100.0, dt_l, dq_l)
+    lcl = mf.mixed_layer_depth(col)
+    assert zi == pytest.approx(min(zi, lcl)) and 0.3e3 < zi
+    rho = ph[-1] / (LUNAR['gascon'] * mf.virtual(t[-1], q[-1], LUNAR))
+    eps1 = 1.0 / LUNAR['rdbrv'] - 1.0
+    flux = (20.0 / LUNAR['acpd'] + eps1 * t[-1] * 100.0 / LUNAR['ALV']) / rho
+    thv0 = mf.virtual(t[-1] + dt_l, q[-1] + dq_l, LUNAR) * (ph[-1] / pf[-1]) ** (LUNAR['gascon'] / LUNAR['acpd'])
+    assert w == pytest.approx((G_MOON / thv0 * flux * zi) ** (1.0 / 3.0), rel=1e-12)
+    # moister air condenses first: the depth stops at its condensation level
+    moist = mf.Column(t, np.full_like(q, 0.95 * mf.qsat(t[-1], pf[-1], LUNAR)), pf, ph, G_MOON, LUNAR)
+    w2, zi2 = mf.boundary_layer_velocity(moist, 20.0, 100.0, *mf.surface_layer_air(moist, 20.0, 100.0))
+    assert zi2 < zi and w2 < w
+    # a falling buoyancy flux gives no velocity, and the surface parcel then starts at rest without a floor
+    assert mf.boundary_layer_velocity(col, -20.0, 10.0, 0.0, 0.0) == (0.0, None)
+    assert mf.surface_start(col, -20.0, 10.0, 0.5, 0.0, 0.0, START) == 0.0
+    assert mf.surface_start(col, -20.0, 10.0, 0.5, 0.0, 0.0) == mf.PARAMETERS['w_base_deep']
+    assert mf.surface_start(col, 20.0, 100.0, 0.5, dt_l, dq_l, START) == pytest.approx(START['c_start'] * w)
+    # a saturated lowest level under a falling flux: the parcel starts at rest without dividing by its energy
+    fog = mf.Column(t, np.r_[q[:-1], 1.02 * mf.qsat(t[-1], pf[-1], LUNAR)], pf, ph, G_MOON, LUNAR)
+    mf.column(fog.t, fog.q, pf, ph, G_MOON, 3600.0, -20.0, 30.0, prm=START, c=LUNAR, melt='plasim')
+
+
+def test_the_start_patch_applies_once_over_the_mass_flux_patch():
+    marker = mff.START_MARKER
+    assert mff.MASSFLUX_MARKER not in marker and not any(marker in old for old, _ in mff.START_EDITS)
+    assert any(marker in new for _, new in mff.START_EDITS)
+    assert all(len(line) <= 132 for _, new in mff.START_EDITS for line in new.splitlines())
+    declared = dict(re.findall(r'(?:real|integer) :: (\w+) = (\S+)', mff.start_declarations()))
+    assert {k: float(v) for k, v in declared.items()} == dict(nstart_mf=0.0, cstart_mf=mf.PARAMETERS['c_start'])
+    assert mff.start_values(START) == dict(nstart_mf=1, cstart_mf=2.2)
+    with pytest.raises(ValueError):
+        mff.start_values(dict(mf.PARAMETERS, start='fast'))
+    sources = installed_sources()
+    if not sources:
+        pytest.skip('no ExoPlaSim source at hand')
+    for path in sources:
+        text = apply(patched(path.read_text()), mff.START_EDITS, marker)
+        assert apply(text, mff.START_EDITS, marker) == text                            # once only
+        assert text.count('      subroutine mfstart(') == 1 and text.count('call mfstart(') == 1
+        assert text.count('if (nstart_mf == 1) zx = cstart_mf*zwst') == 1
+        for name, _, _, _ in mff.START_PARAMETER_NAMES:                               # declared, read, broadcast
+            assert len(re.findall(rf'(real|integer) :: {name} = ', text)) == 1
+            assert len(re.findall(rf'namelist/rainmod_nl/.*\b{name}\b', text)) == 1
+            assert len(re.findall(rf'call mpbc[ri]\({name}\)', text)) == 1
+
+
+@FORTRAN
+def test_the_started_source_compiles_with_plasims_modules(tmp_path):
+    sources = installed_sources()
+    if not sources:
+        pytest.skip('no ExoPlaSim source at hand')
+    src = sources[0].parent
+    (tmp_path / 'resmod.f90').write_text('      module resmod\n      parameter(NLAT_ATM = 32)\n'
+                                         '      parameter(NLEV_ATM = 15)\n      parameter(NPRO_ATM = 1)\n'
+                                         '      end module resmod\n')
+    shutil.copy(src / 'plasimmod.f90', tmp_path / 'plasimmod.f90')
+    text = apply(patched(sources[0].read_text(), OPTIONAL), mff.START_EDITS, mff.START_MARKER)
+    (tmp_path / 'rainmod.f90').write_text(text)
+    for name in ('resmod.f90', 'plasimmod.f90', 'rainmod.f90'):
+        subprocess.run(['gfortran', *GCM_FLAGS, '-c', name], cwd=tmp_path, check=True, capture_output=True)
+
+
+def test_the_runner_records_the_starting_speed_only_for_runs_that_set_it():
+    base = er.convection_setting(scheme='massflux')
+    assert er.convection_setting(scheme='massflux', start=None) == base
+    assert er.convection_setting(scheme='massflux', start='ifs') == base
+    started = er.convection_setting(scheme='massflux', start='boundary_layer')
+    assert started == dict(base, start=dict(rule='boundary_layer', parameters=dict(nstart_mf=1, cstart_mf=2.2)))
+    entries = dict(er.convection_namelist(started))
+    assert entries['NSTART_MF'] == '1' and float(entries['CSTART_MF']) == 2.2
+    assert 'NSTART_MF' not in dict(er.convection_namelist(base))
+    assert er.uses_massflux_start(dict(scheme='massflux', start='boundary_layer'))
+    assert not er.uses_massflux_start(dict(scheme='massflux', start=None))
+    assert not er.uses_massflux_start(dict(scheme='massflux')) and not er.uses_massflux_start(None)
+    with pytest.raises(ValueError):
+        er.convection_setting(scheme='massflux', start='fast')
+    saved = {sig: signal.getsignal(sig) for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGHUP)}
+    try:
+        for argv in (['A28R', '--convection', 'sbm', '--massflux-start', 'boundary_layer'],
+                     ['A28R', '--massflux-start', 'boundary_layer']):
+            with pytest.raises(SystemExit):
+                er.main(argv)
+    finally:
+        for sig, handler in saved.items():
+            signal.signal(sig, handler)

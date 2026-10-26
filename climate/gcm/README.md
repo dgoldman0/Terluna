@@ -2675,6 +2675,103 @@ climate/gcm/.venv/bin/python $L/surface_layer_check.py \
 climate/gcm/.venv/bin/python $L/levels15_test_analysis.py > $L/levels15_test_analysis.txt   # the results file
 ```
 
+#### The free-convection constant over water and the mass-flux parcel's starting speed (26 October)
+
+The author approved two changes on 26 October, each tested in one two-year run on fifteen levels with the provisional
+longwave refit from the fifteen-level restart: PlaSim's free-convection constant over water at its lunar value, and a
+starting speed for the mass-flux scheme's surface parcel taken from the boundary layer, which [massflux.md](massflux.md)
+records as the third round. Both runs are in [trigger_l15_test.json](../results/gcm/trigger_l15_test.json).
+
+**The constant and its source.** In unstable air over water `surflx` raises the transfer coefficient for heat and
+vapour by the interpolation of Miller, Beljaars and Palmer (1992, *J. Climate* 5, 418–434, their eq. 9):
+C_H = C_HN (1 + C_R^1.25)^0.8 with C_R = 0.0016 (θ_vs − θ_v1)^1/3 / (C_HN |U|), C_HN the neutral coefficient. In still
+air the transfer tends to C_H |U| = 0.0016 Δθ_v^1/3, the free convection of tank experiments, which the paper gives as
+its eq. 8: E/ρ = 0.17 (g κ²/(θ_v ν))^1/3 Δθ_v^1/3 Δq, with κ the air's thermal diffusivity and ν its kinematic
+viscosity. At 300 K and 1013 hPa that law's coefficient is 0.0017 m s⁻¹ K^−1/3; the authors took 0.0016 so that the
+interpolation stays near Monin–Obukhov similarity at low wind speeds. PlaSim applies the same factor to evaporation and
+sensible heat over its water cells, the seas and lakes.
+
+**How it scales.** With κ = k/(ρ c_p) and ν = μ/ρ, where the conductivity k and the viscosity μ depend on temperature
+alone, κ²/ν = k²/(ρ c_p² μ), and at the ground ρ θ_v = p_s/R. The coefficient therefore goes as (g/p_s)^1/3 at a given
+temperature, k²/μ adding about T^0.3. The Moon's gravity alone takes 0.0016 to 0.00088; the design air's surface
+pressure, 1215.9 hPa at the water level and 1.2 times Earth's sea-level pressure, lowers κ²/ν by that factor and the
+constant by its cube root, and the lunar constant is 0.0016 × 0.517 = 0.00083 m s⁻¹ K^−1/3. The sea's temperature, near
+300 K on both worlds, and the air's composition are taken as Earth's. (The fifteen-level section above estimated about
+0.00085 from (g/ρ)^1/3.)
+
+**The option.** `--free-convection lunar` sets the constant, now fluxmod's namelist variable `cfree`, to 0.0016 (g p_E /
+(g_E p_s))^1/3 from the planet's gravity and the experiment's pressure (`FREE_CONVECTION_EDITS` and
+`free_convection_setting` in [exoplasim_run.py](exoplasim_run.py)); without it `cfree` keeps 0.0016, and the run's
+configuration records nothing new. The patch went into the shared twilight source on 26 October, changing
+`fluxmod.f90`'s hash from acdbd360… to 2f106bc4…. Month trials without the option, run on the patched source, repeat the
+earlier months bit for bit in all 61 output variables and their restarts: on ten and fifteen levels with the
+Betts–Miller scheme and on fifteen with the mass-flux scheme. Compiled with PlaSim's flags, the namelist variable at its
+default gives every transfer factor bit for bit as the literal did
+([test_exoplasim_run.py](../tests/test_exoplasim_run.py)). A smoke month with the option keeps every field finite.
+
+**Two years with the lunar constant** (`A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc`, the baseline's exact flags with
+the option; years 0–1, quarters from sunrise):
+
+| | Baseline | Lunar constant | CM1 sea box |
+|---|---|---|---|
+| Sea site's evaporation by quarter; mean, mm/day | 3.73, 4.65, 3.53, 3.39; 3.82 | 3.42, 4.74, 3.23, 3.13; 3.62 | 3.10, 2.79, 2.95, 3.08; 2.98 |
+| Sea site's latent; sensible heat, W/m² | 110.5; 6.5 | 104.7; 8.1 | 86.2; 6.7 |
+| Sea site's lowest 0.6 km: air; vapour | 299.82 K; 12.34 g/kg | 299.81; 12.00 | 299.75; 11.73 |
+| Sea site's level at 1.16 km: air; vapour | 298.54 K; 11.68 g/kg | 298.47; 11.57 | |
+| Sea site's ground | 301.39 K | 301.96 | |
+| Sea site's rain by quarter, mm/day | 0.12, 1.45, 2.68, 1.98 | 0.24, 1.52, 2.55, 1.65 | 0.00, 2.23, 2.97, 0.14 |
+| Land site's rain by quarter, mm/day | 0.50, 17.84, 0.41, 0.03 | 0.07, 16.03, 0.43, 0.02 | 2.87, 8.59, 1.53, 0.07 |
+| Global evaporation, mm/day; latent and sensible heat, W/m² | 2.172; 62.9, 16.0 | 2.101; 60.8, 15.8 | |
+| Global rain, mm/day; its convective share; cloud cover | 2.183; 86.0%; 34.9% | 2.118; 85.0%; 35.1% | |
+| Global ground; imbalance at the top of the air | 297.81 K; −3.70 W/m² | 297.91; −3.31 | |
+| Top two levels: air; water | 165.82, 191.56 K; 0.0349, 2.34 ppmv | 165.65, 191.36; 0.0335, 2.25 | |
+
+The vapour is a mixing ratio, the sea site's lowest 0.6 km is the fifteen-level bottom layer, and CM1's column is
+averaged by mass over the same 0–0.6 km (its lowest 0.5 km holds 11.77 g/kg at 299.83 K). CM1's evaporation is its
+surface vapour flux over the sea box's third lunar day, as its own water budget gives it.
+
+**What the constant changes.** It lowers the sea site's evaporation by 0.20 mm/day, 5%, which removes a quarter of the
+baseline's 0.84 mm/day excess over CM1's box; three-quarters of the excess remains. The site's lowest 0.6 km dries by
+0.34 g/kg, from 0.61 above CM1's to 0.27 above, at the same temperature, and the sea's ground warms 0.57 K as it loses
+4 W/m² less to the air in latent and sensible heat. Globally the evaporation and the
+rain fall 3%, convection's share of the rain stays at 85–86%, and the imbalance at the top of the air moves 0.4 W/m²
+toward balance. The sea's night rain falls from 1.98 to 1.65 mm/day and the land's afternoon from 17.8 to 16.0, both
+toward CM1's, while the land's morning falls from 0.50 to 0.07 (CM1 2.87). The top two levels cool 0.2 K and hold 4%
+less water. Year 1 alone gives the same evaporation change, 3.74 to 3.54 mm/day at the sea site. The term acts in
+light winds: the lowest level's wind over the site averages 3.1–3.2 m/s in both runs.
+
+**The mass-flux parcel's starting speed** ([massflux.md](massflux.md), the third round). With `--massflux-start
+boundary_layer` the scheme's surface test parcel starts at 2.2 w*, the boundary layer's convective velocity from
+PlaSim's own surface fluxes and the depth of its dry convective layer, the speed of a grid cell's strongest thermals as
+CM1's 2 km box of the sea's night measures it (the 99.9th percentile of its vertical wind, 2.1–2.3 w*, with Lenschow and
+others' 1980 spread of 0.68 w*). On CM1's own w* that rule gives 2.5–2.6 m/s at the land's onset by day, where CM1
+measures 2.6–2.9 m/s, and 1.55 m/s in the sea's night, where CM1 measures 1.1–1.5 m/s with grid spacing from 6 to 2 km.
+In PlaSim the speed is 0.7–1.3 m/s over the sea and nil to 0.8 m/s over the wet land, and on the runs' 3-day mean
+columns the share of parcels reaching their cloud moves by at most two points. Two years with it
+(`A28R_301k_cold_massflux_wstart_l15`) repeat the earlier mass-flux run's global state, convection's share of the rain
+42.4% against 86.0% in the baseline, which tripped the stop rule the author set at about 75%. Of the brief's criteria
+the run meets the sea's evening alone, 2.99 mm/day against CM1's 2.97. The starting speed hardly decides the trigger:
+PlaSim's dry convective layer over the sea is 0.5–4.2 km deep under a condensation level 4–6 km up, and the parcel's
+sub-cloud mixing spends any start across the stable air between. A candidate cause of that shallow layer, untested, is
+PlaSim's vertical diffusion, which keeps Earth's 160 m mixing length while its coefficient in σ goes as g³. The option
+stays in the runner, off by default, and runs without it are bit for bit as before.
+
+```sh
+T=/media/projectspace/terluna-research/session-tools/agents/climate-trigger
+$T/run_trigger_tests.sh fc_smoke15               # one model month with the lunar constant; it applies the patch
+$T/run_trigger_tests.sh fc_month15               # and fc_month10, fc_mfmonth15: the months without it, for the bit check
+climate/gcm/.venv/bin/python $T/bit_check.py A28R_301k_cold_sbm_rh07_deep200_l15cap_month_fcsource \
+    A28R_301k_cold_sbm_rh07_deep200_l15cap_month_mfsource A28R_301k_cold_massflux_l15_month_fcsource \
+    A28R_301k_cold_massflux_l15_month A28R_301k_cold_sbm_rh07_deep200_month_fcsource \
+    A28R_301k_cold_sbm_rh07_deep200_month_mfsource                                 # every variable and the restarts
+$T/run_trigger_tests.sh fc15                     # two years with the lunar constant, about 16 minutes on 4 workers
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_cold_massflux_wstart_l15:1 \
+    --case A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc:1 \
+    --correction provisional_l15=climate/results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json \
+    --output climate/results/gcm/longwave_check_trigger_l15.json                  # about a minute
+climate/gcm/.venv/bin/python $T/trigger_analysis.py > $T/trigger_analysis.txt   # trigger_l15_test.json
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

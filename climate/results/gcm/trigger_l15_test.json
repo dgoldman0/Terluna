@@ -1,0 +1,4478 @@
+{
+ "schema": "terluna.climate.gcm-trigger-test/1",
+ "cm1": {
+  "rain_mm_day": {
+   "sea": [
+    0.0,
+    2.23,
+    2.97,
+    0.14
+   ],
+   "land": [
+    2.87,
+    8.59,
+    1.53,
+    0.07
+   ]
+  },
+  "upper_air_k": {
+   "41.8 km": 251.49,
+   "55.8 km": 231.76
+  },
+  "lowest_half_km_vapour_g_kg": 11.8
+ },
+ "quarters": [
+  "sunrise to noon",
+  "noon to sunset",
+  "sunset to midnight",
+  "midnight to sunrise"
+ ],
+ "upper_air_heights_km": [
+  18.9,
+  29.8,
+  41.8,
+  55.8
+ ],
+ "runs": {
+  "A28R_301k_cold_sbm_rh07_deep200_l15cap": {
+   "key": "4148d1cea9e2aa57",
+   "source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "9db0dc616690cb6f",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "acdbd36078f37c84",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "convection": {
+    "scheme": "sbm",
+    "nprc": 2,
+    "tau_s": 7200.0,
+    "rh": 0.7,
+    "eps": 0.0,
+    "cin_j_kg": 0.0,
+    "deep_hpa": 200.0,
+    "shallow_cap": true
+   },
+   "free_convection": null,
+   "longwave_correction": "climate/results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json",
+   "configuration_differs_from_baseline_in": [],
+   "seconds_per_year": [
+    464.0,
+    447.5
+   ],
+   "output_mb_per_year": [
+    181.6,
+    181.8
+   ]
+  },
+  "A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc": {
+   "key": "e31aa8d82220c9fd",
+   "source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "2f106bc4e626593b",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "convection": {
+    "scheme": "sbm",
+    "nprc": 2,
+    "tau_s": 7200.0,
+    "rh": 0.7,
+    "eps": 0.0,
+    "cin_j_kg": 0.0,
+    "deep_hpa": 200.0,
+    "shallow_cap": true
+   },
+   "free_convection": {
+    "choice": "lunar",
+    "constant": 0.00082686,
+    "earth_constant": 0.0016,
+    "factor": 0.51679,
+    "gravity_m_s2": 1.6242,
+    "surface_pressure_pa": 121590.0,
+    "earth_reference": {
+     "gravity_m_s2": 9.8066,
+     "surface_pressure_pa": 101320.0
+    },
+    "scaling": "(g / p_s)^(1/3), from 0.17 (g kappa^2 / (theta_v nu))^(1/3) with rho theta_v = p_s / R",
+    "source": "Miller, Beljaars and Palmer (1992), J. Climate 5, 418-434, eqs. (8) and (9)"
+   },
+   "longwave_correction": "climate/results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json",
+   "configuration_differs_from_baseline_in": [
+    "free_convection",
+    "key",
+    "source"
+   ],
+   "seconds_per_year": [
+    486.7,
+    466.7
+   ],
+   "output_mb_per_year": [
+    181.5,
+    181.7
+   ]
+  },
+  "A28R_301k_cold_massflux_l15": {
+   "key": "d9d19e68c5dd5d22",
+   "source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "acdbd36078f37c84",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "convection": {
+    "scheme": "massflux",
+    "nprc": 3,
+    "parameters": {
+     "epsbg_mf": 8e-05,
+     "epsnb_mf": 0.0002,
+     "lnb_mf": 2000.0,
+     "shfac_mf": 2.0,
+     "gvm_mf": 0.5,
+     "fturb_mf": 2.0,
+     "betacd_mf": 0.94875,
+     "w_mf": 1.0,
+     "dt_mf": 0.2,
+     "dq_mf": 0.0001,
+     "deepdp_mf": 20000.0,
+     "departure_mf": 35000.0,
+     "subf_mf": 0.4,
+     "zsrc_mf": 10.0,
+     "ustar_mf": 0.1,
+     "c0_mf": 0.0014,
+     "lcrit_mf": 0.0005,
+     "lmin_mf": 0.0003,
+     "wmaxp_mf": 10.0,
+     "tbf_mf": 268.16,
+     "tice_mf": 250.16,
+     "etad_mf": 0.3,
+     "epsd_mf": 3.3124e-05,
+     "botdp_mf": 6000.0,
+     "tau_mf": 5.0,
+     "taumin_mf": 720.0,
+     "tstar_mf": 0.0,
+     "ublmin_mf": 2.0,
+     "midrh_mf": 0.8,
+     "midtop_mf": 0.25,
+     "cfl_mf": 1.0,
+     "nelev_mf": 1,
+     "nsub_mf": 2
+    }
+   },
+   "free_convection": null,
+   "longwave_correction": "climate/results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json",
+   "configuration_differs_from_baseline_in": [
+    "convection",
+    "key",
+    "source"
+   ],
+   "seconds_per_year": [
+    586.3,
+    554.0
+   ],
+   "output_mb_per_year": [
+    181.1,
+    181.7
+   ]
+  },
+  "A28R_301k_cold_massflux_wstart_l15": {
+   "key": "17cb93a17e2296c9",
+   "source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "42122b3cbd7ae596",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "2f106bc4e626593b",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "convection": {
+    "scheme": "massflux",
+    "nprc": 3,
+    "parameters": {
+     "epsbg_mf": 8e-05,
+     "epsnb_mf": 0.0002,
+     "lnb_mf": 2000.0,
+     "shfac_mf": 2.0,
+     "gvm_mf": 0.5,
+     "fturb_mf": 2.0,
+     "betacd_mf": 0.94875,
+     "w_mf": 1.0,
+     "dt_mf": 0.2,
+     "dq_mf": 0.0001,
+     "deepdp_mf": 20000.0,
+     "departure_mf": 35000.0,
+     "subf_mf": 0.4,
+     "zsrc_mf": 10.0,
+     "ustar_mf": 0.1,
+     "c0_mf": 0.0014,
+     "lcrit_mf": 0.0005,
+     "lmin_mf": 0.0003,
+     "wmaxp_mf": 10.0,
+     "tbf_mf": 268.16,
+     "tice_mf": 250.16,
+     "etad_mf": 0.3,
+     "epsd_mf": 3.3124e-05,
+     "botdp_mf": 6000.0,
+     "tau_mf": 5.0,
+     "taumin_mf": 720.0,
+     "tstar_mf": 0.0,
+     "ublmin_mf": 2.0,
+     "midrh_mf": 0.8,
+     "midtop_mf": 0.25,
+     "cfl_mf": 1.0,
+     "nelev_mf": 1,
+     "nsub_mf": 2
+    },
+    "start": {
+     "rule": "boundary_layer",
+     "parameters": {
+      "nstart_mf": 1,
+      "cstart_mf": 2.2
+     }
+    }
+   },
+   "free_convection": null,
+   "longwave_correction": "climate/results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json",
+   "configuration_differs_from_baseline_in": [
+    "convection",
+    "key",
+    "source"
+   ],
+   "seconds_per_year": [
+    557.6,
+    560.5
+   ],
+   "output_mb_per_year": [
+    181.3,
+    181.7
+   ]
+  }
+ },
+ "stages": {
+  "years 0-1": {
+   "A28R_301k_cold_sbm_rh07_deep200_l15cap": {
+    "sea_rain_mm_day": [
+     0.12381,
+     1.4527,
+     2.6786,
+     1.9789
+    ],
+    "sea_convective_mm_day": [
+     0.05683,
+     1.1359,
+     2.5084,
+     1.4249
+    ],
+    "sea_mean_mm_day": 1.5503,
+    "sea_convective_mean_mm_day": 1.277,
+    "sea_near_ground": {
+     "lowest_0_6_km_t_k": 299.82,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 12.336,
+     "level_1_16_km_t_k": 298.54,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 11.681,
+     "air_2m_k": 300.33,
+     "ground_k": 301.39
+    },
+    "sea_fluxes": {
+     "evap": {
+      "by_quarter": [
+       3.7307,
+       4.6487,
+       3.5285,
+       3.3921
+      ],
+      "mean": 3.8179
+     },
+     "hfls": {
+      "by_quarter": [
+       107.98,
+       134.55,
+       102.13,
+       98.181
+      ],
+      "mean": 110.51
+     },
+     "hfss": {
+      "by_quarter": [
+       8.258,
+       4.1991,
+       4.9049,
+       8.5318
+      ],
+      "mean": 6.4922
+     },
+     "wind": {
+      "by_quarter": [
+       3.4628,
+       3.4989,
+       2.6139,
+       2.9324
+      ],
+      "mean": 3.1253
+     }
+    },
+    "land_rain_mm_day": [
+     0.49955,
+     17.845,
+     0.41369,
+     0.034735
+    ],
+    "land_convective_mm_day": [
+     0.36149,
+     15.685,
+     0.39581,
+     0.034735
+    ],
+    "land_mean_mm_day": 4.7708,
+    "land_convective_mean_mm_day": 4.1831,
+    "land_near_ground": {
+     "lowest_0_6_km_t_k": 297.89,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 11.91,
+     "level_1_16_km_t_k": 296.97,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 10.926,
+     "air_2m_k": 298.36,
+     "ground_k": 297.04
+    },
+    "land_fluxes": {
+     "evap": {
+      "by_quarter": [
+       7.8993,
+       6.7725,
+       0.54347,
+       0.15885
+      ],
+      "mean": 3.8695
+     },
+     "hfls": {
+      "by_quarter": [
+       228.64,
+       196.03,
+       15.73,
+       4.5978
+      ],
+      "mean": 112.0
+     },
+     "hfss": {
+      "by_quarter": [
+       5.516,
+       -4.6613,
+       -5.6472,
+       -1.4997
+      ],
+      "mean": -1.5689
+     },
+     "wind": {
+      "by_quarter": [
+       1.8994,
+       2.3377,
+       2.2132,
+       1.2482
+      ],
+      "mean": 1.9251
+     }
+    },
+    "upper_air": {
+     "at_heights_k": [
+      280.8,
+      271.45,
+      258.53,
+      240.12
+     ],
+     "sigma": [
+      0.0383,
+      0.1191,
+      0.21085,
+      0.31685,
+      0.4368,
+      0.5668,
+      0.68575,
+      0.768,
+      0.81815,
+      0.85495,
+      0.88915,
+      0.9238,
+      0.9538,
+      0.97745,
+      0.99415
+     ],
+     "site_t_k": [
+      166.19,
+      192.39,
+      218.62,
+      242.28,
+      260.23,
+      272.84,
+      280.47,
+      285.15,
+      288.28,
+      290.65,
+      292.45,
+      294.64,
+      296.84,
+      298.54,
+      299.82
+     ],
+     "site_q_g_kg": [
+      4.5202e-05,
+      0.0018045,
+      0.042069,
+      0.43189,
+      1.5877,
+      3.3002,
+      4.8951,
+      6.0433,
+      6.7417,
+      7.2659,
+      8.5682,
+      10.409,
+      10.897,
+      11.544,
+      12.184
+     ],
+     "site_z_m": [
+      128550.0,
+      92604.0,
+      71859.0,
+      55270.0,
+      41005.0,
+      28715.0,
+      19377.0,
+      13697.0,
+      10479.0,
+      8219.2,
+      6188.5,
+      4193.8,
+      2512.7,
+      1215.3,
+      313.17
+     ],
+     "cell_means": 1440
+    },
+    "global": {
+     "surface_k": 297.81,
+     "air_2m_k": 297.6,
+     "precipitation_mm_day": 2.1835,
+     "toa_net_w_m2": -3.695,
+     "planetary_albedo": 0.37775,
+     "cloud_effect_sw_w_m2": -39.58,
+     "cloud_effect_lw_w_m2": 42.615,
+     "cloud_effect_net_w_m2": 3.03,
+     "cloud_cover": 0.3495,
+     "top_t_k": [
+      165.82,
+      191.56
+     ],
+     "top_water_ppmv": [
+      0.034918,
+      2.3349
+     ],
+     "t_by_level_k": [
+      165.82,
+      191.56,
+      216.68,
+      239.86,
+      258.0,
+      271.2,
+      279.17,
+      283.6,
+      286.5,
+      288.77,
+      290.9,
+      293.01,
+      294.8,
+      296.24,
+      297.06
+     ],
+     "rain_mm_day": 2.1826,
+     "convective_share": 0.86049,
+     "lowest_three_cloud_cover": [
+      0.0060637,
+      0.0022168,
+      0.0014657
+     ],
+     "evaporation_mm_day": 2.1722,
+     "latent_heat_w_m2": 62.874,
+     "sensible_heat_w_m2": 15.987
+    }
+   },
+   "A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc": {
+    "sea_rain_mm_day": [
+     0.237,
+     1.5213,
+     2.5477,
+     1.6469
+    ],
+    "sea_convective_mm_day": [
+     0.11959,
+     1.2832,
+     2.2895,
+     1.0954
+    ],
+    "sea_mean_mm_day": 1.4813,
+    "sea_convective_mean_mm_day": 1.1922,
+    "sea_near_ground": {
+     "lowest_0_6_km_t_k": 299.81,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 12.004,
+     "level_1_16_km_t_k": 298.47,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 11.575,
+     "air_2m_k": 300.33,
+     "ground_k": 301.96
+    },
+    "sea_fluxes": {
+     "evap": {
+      "by_quarter": [
+       3.4164,
+       4.7415,
+       3.2258,
+       3.1339
+      ],
+      "mean": 3.6187
+     },
+     "hfls": {
+      "by_quarter": [
+       98.886,
+       137.24,
+       93.369,
+       90.709
+      ],
+      "mean": 104.74
+     },
+     "hfss": {
+      "by_quarter": [
+       9.3712,
+       6.4458,
+       6.5583,
+       9.8482
+      ],
+      "mean": 8.0665
+     },
+     "wind": {
+      "by_quarter": [
+       3.3729,
+       3.7062,
+       2.7578,
+       3.0885
+      ],
+      "mean": 3.2272
+     }
+    },
+    "land_rain_mm_day": [
+     0.066154,
+     16.03,
+     0.42922,
+     0.020773
+    ],
+    "land_convective_mm_day": [
+     0.0068269,
+     13.648,
+     0.41715,
+     0.020382
+    ],
+    "land_mean_mm_day": 4.2016,
+    "land_convective_mean_mm_day": 3.5781,
+    "land_near_ground": {
+     "lowest_0_6_km_t_k": 297.8,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 11.71,
+     "level_1_16_km_t_k": 296.89,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 10.806,
+     "air_2m_k": 298.29,
+     "ground_k": 297.13
+    },
+    "land_fluxes": {
+     "evap": {
+      "by_quarter": [
+       7.3502,
+       6.4292,
+       0.48661,
+       0.16849
+      ],
+      "mean": 3.6334
+     },
+     "hfls": {
+      "by_quarter": [
+       212.75,
+       186.09,
+       14.085,
+       4.8769
+      ],
+      "mean": 105.17
+     },
+     "hfss": {
+      "by_quarter": [
+       17.166,
+       2.3577,
+       -5.1221,
+       -1.794
+      ],
+      "mean": 3.1832
+     },
+     "wind": {
+      "by_quarter": [
+       1.9597,
+       2.3425,
+       1.9643,
+       1.2674
+      ],
+      "mean": 1.885
+     }
+    },
+    "upper_air": {
+     "at_heights_k": [
+      280.6,
+      271.21,
+      258.24,
+      239.79
+     ],
+     "sigma": [
+      0.0383,
+      0.1191,
+      0.21085,
+      0.31685,
+      0.4368,
+      0.5668,
+      0.68575,
+      0.768,
+      0.81815,
+      0.85495,
+      0.88915,
+      0.9238,
+      0.9538,
+      0.97745,
+      0.99415
+     ],
+     "site_t_k": [
+      166.03,
+      192.17,
+      218.35,
+      241.94,
+      259.94,
+      272.61,
+      280.28,
+      284.94,
+      288.16,
+      290.53,
+      292.37,
+      294.52,
+      296.74,
+      298.47,
+      299.81
+     ],
+     "site_q_g_kg": [
+      4.2411e-05,
+      0.001704,
+      0.039639,
+      0.41377,
+      1.5696,
+      3.2248,
+      4.822,
+      5.9657,
+      6.669,
+      7.2589,
+      8.6141,
+      10.453,
+      10.894,
+      11.441,
+      11.86
+     ],
+     "site_z_m": [
+      128420.0,
+      92509.0,
+      71789.0,
+      55222.0,
+      40975.0,
+      28697.0,
+      19368.0,
+      13691.0,
+      10476.0,
+      8216.6,
+      6186.6,
+      4192.6,
+      2512.0,
+      1215.0,
+      313.1
+     ],
+     "cell_means": 1440
+    },
+    "global": {
+     "surface_k": 297.91,
+     "air_2m_k": 297.5,
+     "precipitation_mm_day": 2.1185,
+     "toa_net_w_m2": -3.31,
+     "planetary_albedo": 0.3775,
+     "cloud_effect_sw_w_m2": -39.49,
+     "cloud_effect_lw_w_m2": 42.65,
+     "cloud_effect_net_w_m2": 3.16,
+     "cloud_cover": 0.3515,
+     "top_t_k": [
+      165.65,
+      191.36
+     ],
+     "top_water_ppmv": [
+      0.033546,
+      2.2503
+     ],
+     "t_by_level_k": [
+      165.65,
+      191.36,
+      216.39,
+      239.55,
+      257.7,
+      270.95,
+      278.96,
+      283.42,
+      286.34,
+      288.63,
+      290.77,
+      292.9,
+      294.71,
+      296.14,
+      296.95
+     ],
+     "rain_mm_day": 2.118,
+     "convective_share": 0.84967,
+     "lowest_three_cloud_cover": [
+      0.0052274,
+      0.0018863,
+      0.0013875
+     ],
+     "evaporation_mm_day": 2.1012,
+     "latent_heat_w_m2": 60.82,
+     "sensible_heat_w_m2": 15.834
+    }
+   },
+   "A28R_301k_cold_massflux_l15": {
+    "sea_rain_mm_day": [
+     0.11725,
+     0.45035,
+     1.5986,
+     0.67923
+    ],
+    "sea_convective_mm_day": [
+     0.050436,
+     0.21705,
+     0.7005,
+     0.26858
+    ],
+    "sea_mean_mm_day": 0.71241,
+    "sea_convective_mean_mm_day": 0.30955,
+    "sea_near_ground": {
+     "lowest_0_6_km_t_k": 301.44,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 15.235,
+     "level_1_16_km_t_k": 300.43,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 13.495,
+     "air_2m_k": 301.95,
+     "ground_k": 302.99
+    },
+    "sea_fluxes": {
+     "evap": {
+      "by_quarter": [
+       3.43,
+       3.8516,
+       3.297,
+       3.0029
+      ],
+      "mean": 3.3931
+     },
+     "hfls": {
+      "by_quarter": [
+       99.28,
+       111.48,
+       95.43,
+       86.918
+      ],
+      "mean": 98.211
+     },
+     "hfss": {
+      "by_quarter": [
+       8.641,
+       5.4604,
+       4.5545,
+       7.4629
+      ],
+      "mean": 6.5441
+     },
+     "wind": {
+      "by_quarter": [
+       3.6852,
+       4.4489,
+       2.5205,
+       2.7091
+      ],
+      "mean": 3.3338
+     }
+    },
+    "land_rain_mm_day": [
+     0.127,
+     24.291,
+     0.98287,
+     0.040451
+    ],
+    "land_convective_mm_day": [
+     0.078194,
+     8.9192,
+     0.62088,
+     0.01448
+    ],
+    "land_mean_mm_day": 6.4573,
+    "land_convective_mean_mm_day": 2.4428,
+    "land_near_ground": {
+     "lowest_0_6_km_t_k": 299.6,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 13.545,
+     "level_1_16_km_t_k": 299.03,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 12.156,
+     "air_2m_k": 300.07,
+     "ground_k": 298.64
+    },
+    "land_fluxes": {
+     "evap": {
+      "by_quarter": [
+       7.5896,
+       6.4008,
+       0.63208,
+       0.29208
+      ],
+      "mean": 3.7527
+     },
+     "hfls": {
+      "by_quarter": [
+       219.68,
+       185.27,
+       18.295,
+       8.4542
+      ],
+      "mean": 108.62
+     },
+     "hfss": {
+      "by_quarter": [
+       -4.7804,
+       -4.7647,
+       -7.0409,
+       -2.34
+      ],
+      "mean": -4.722
+     },
+     "wind": {
+      "by_quarter": [
+       1.735,
+       2.2693,
+       2.5629,
+       1.5778
+      ],
+      "mean": 2.035
+     }
+    },
+    "upper_air": {
+     "at_heights_k": [
+      281.04,
+      270.2,
+      256.21,
+      237.51
+     ],
+     "sigma": [
+      0.0383,
+      0.1191,
+      0.21085,
+      0.31685,
+      0.4368,
+      0.5668,
+      0.68575,
+      0.768,
+      0.81815,
+      0.85495,
+      0.88915,
+      0.9238,
+      0.9538,
+      0.97745,
+      0.99415
+     ],
+     "site_t_k": [
+      164.56,
+      190.95,
+      216.59,
+      239.61,
+      257.94,
+      271.71,
+      280.65,
+      286.24,
+      289.83,
+      292.38,
+      294.46,
+      296.83,
+      299.09,
+      300.43,
+      301.44
+     ],
+     "site_q_g_kg": [
+      2.8039e-05,
+      0.001152,
+      0.03435,
+      0.3378,
+      1.4679,
+      3.4093,
+      5.6505,
+      6.9495,
+      7.4819,
+      8.1402,
+      9.809,
+      11.437,
+      12.179,
+      13.311,
+      15.003
+     ],
+     "site_z_m": [
+      127770.0,
+      92134.0,
+      71564.0,
+      55145.0,
+      41022.0,
+      28810.0,
+      19486.0,
+      13790.0,
+      10556.0,
+      8281.9,
+      6237.0,
+      4226.6,
+      2531.7,
+      1224.1,
+      315.4
+     ],
+     "cell_means": 1440
+    },
+    "global": {
+     "surface_k": 299.7,
+     "air_2m_k": 299.45,
+     "precipitation_mm_day": 1.967,
+     "toa_net_w_m2": -0.45,
+     "planetary_albedo": 0.3778,
+     "cloud_effect_sw_w_m2": -39.74,
+     "cloud_effect_lw_w_m2": 44.16,
+     "cloud_effect_net_w_m2": 4.415,
+     "cloud_cover": 0.389,
+     "top_t_k": [
+      164.15,
+      189.97
+     ],
+     "top_water_ppmv": [
+      0.021005,
+      1.631
+     ],
+     "t_by_level_k": [
+      164.15,
+      189.97,
+      214.77,
+      237.46,
+      255.85,
+      269.99,
+      279.14,
+      284.45,
+      287.8,
+      290.38,
+      292.77,
+      295.05,
+      296.89,
+      298.2,
+      298.88
+     ],
+     "rain_mm_day": 1.9665,
+     "convective_share": 0.42221,
+     "lowest_three_cloud_cover": [
+      0.0017875,
+      0.00065386,
+      0.00060499
+     ],
+     "evaporation_mm_day": 1.9811,
+     "latent_heat_w_m2": 57.343,
+     "sensible_heat_w_m2": 19.548
+    }
+   },
+   "A28R_301k_cold_massflux_wstart_l15": {
+    "sea_rain_mm_day": [
+     0.11553,
+     0.85636,
+     2.9887,
+     0.99088
+    ],
+    "sea_convective_mm_day": [
+     0.053999,
+     0.39107,
+     1.347,
+     0.40314
+    ],
+    "sea_mean_mm_day": 1.24,
+    "sea_convective_mean_mm_day": 0.54993,
+    "sea_near_ground": {
+     "lowest_0_6_km_t_k": 301.5,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 15.092,
+     "level_1_16_km_t_k": 300.45,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 13.429,
+     "air_2m_k": 302.01,
+     "ground_k": 303.02
+    },
+    "sea_fluxes": {
+     "evap": {
+      "by_quarter": [
+       3.4896,
+       3.7073,
+       3.5764,
+       2.8793
+      ],
+      "mean": 3.4142
+     },
+     "hfls": {
+      "by_quarter": [
+       101.0,
+       107.31,
+       103.52,
+       83.34
+      ],
+      "mean": 98.823
+     },
+     "hfss": {
+      "by_quarter": [
+       8.5907,
+       5.2993,
+       4.2809,
+       6.9919
+      ],
+      "mean": 6.3068
+     },
+     "wind": {
+      "by_quarter": [
+       3.7667,
+       4.0494,
+       2.6442,
+       2.4327
+      ],
+      "mean": 3.2218
+     }
+    },
+    "land_rain_mm_day": [
+     0.051869,
+     24.046,
+     1.2971,
+     0.099986
+    ],
+    "land_convective_mm_day": [
+     0.036449,
+     9.4665,
+     0.73179,
+     0.019664
+    ],
+    "land_mean_mm_day": 6.4684,
+    "land_convective_mean_mm_day": 2.6,
+    "land_near_ground": {
+     "lowest_0_6_km_t_k": 299.63,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 13.546,
+     "level_1_16_km_t_k": 299.06,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 12.124,
+     "air_2m_k": 300.11,
+     "ground_k": 298.64
+    },
+    "land_fluxes": {
+     "evap": {
+      "by_quarter": [
+       7.625,
+       6.5041,
+       0.62985,
+       0.30927
+      ],
+      "mean": 3.7915
+     },
+     "hfls": {
+      "by_quarter": [
+       220.7,
+       188.26,
+       18.231,
+       8.9515
+      ],
+      "mean": 109.74
+     },
+     "hfss": {
+      "by_quarter": [
+       -2.7271,
+       -3.2348,
+       -6.9869,
+       -2.742
+      ],
+      "mean": -3.9071
+     },
+     "wind": {
+      "by_quarter": [
+       1.6845,
+       2.337,
+       2.5694,
+       1.6403
+      ],
+      "mean": 2.0569
+     }
+    },
+    "upper_air": {
+     "at_heights_k": [
+      281.03,
+      270.21,
+      256.22,
+      237.55
+     ],
+     "sigma": [
+      0.0383,
+      0.1191,
+      0.21085,
+      0.31685,
+      0.4368,
+      0.5668,
+      0.68575,
+      0.768,
+      0.81815,
+      0.85495,
+      0.88915,
+      0.9238,
+      0.9538,
+      0.97745,
+      0.99415
+     ],
+     "site_t_k": [
+      164.59,
+      190.94,
+      216.59,
+      239.65,
+      257.95,
+      271.73,
+      280.64,
+      286.28,
+      289.87,
+      292.38,
+      294.48,
+      296.86,
+      299.07,
+      300.45,
+      301.5
+     ],
+     "site_q_g_kg": [
+      2.6804e-05,
+      0.0013243,
+      0.032323,
+      0.34017,
+      1.4789,
+      3.4212,
+      5.6293,
+      6.8492,
+      7.3219,
+      8.1258,
+      9.6964,
+      11.265,
+      12.042,
+      13.247,
+      14.865
+     ],
+     "site_z_m": [
+      127780.0,
+      92137.0,
+      71568.0,
+      55147.0,
+      41023.0,
+      28811.0,
+      19486.0,
+      13790.0,
+      10556.0,
+      8281.8,
+      6236.8,
+      4226.5,
+      2531.7,
+      1224.2,
+      315.43
+     ],
+     "cell_means": 1440
+    },
+    "global": {
+     "surface_k": 299.72,
+     "air_2m_k": 299.48,
+     "precipitation_mm_day": 1.965,
+     "toa_net_w_m2": -0.38,
+     "planetary_albedo": 0.37805,
+     "cloud_effect_sw_w_m2": -39.83,
+     "cloud_effect_lw_w_m2": 44.26,
+     "cloud_effect_net_w_m2": 4.435,
+     "cloud_cover": 0.3895,
+     "top_t_k": [
+      164.17,
+      190.0
+     ],
+     "top_water_ppmv": [
+      0.021039,
+      1.6424
+     ],
+     "t_by_level_k": [
+      164.17,
+      190.0,
+      214.77,
+      237.48,
+      255.85,
+      269.98,
+      279.14,
+      284.45,
+      287.8,
+      290.39,
+      292.78,
+      295.06,
+      296.9,
+      298.22,
+      298.91
+     ],
+     "rain_mm_day": 1.9645,
+     "convective_share": 0.42369,
+     "lowest_three_cloud_cover": [
+      0.0019043,
+      0.0006549,
+      0.00061683
+     ],
+     "evaporation_mm_day": 1.9832,
+     "latent_heat_w_m2": 57.404,
+     "sensible_heat_w_m2": 19.474
+    }
+   }
+  },
+  "year 1": {
+   "A28R_301k_cold_sbm_rh07_deep200_l15cap": {
+    "sea_rain_mm_day": [
+     0.10586,
+     0.90461,
+     2.8498,
+     1.7382
+    ],
+    "sea_convective_mm_day": [
+     0.034936,
+     0.72819,
+     2.683,
+     1.3629
+    ],
+    "sea_mean_mm_day": 1.4022,
+    "sea_convective_mean_mm_day": 1.2075,
+    "sea_near_ground": {
+     "lowest_0_6_km_t_k": 299.52,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 12.16,
+     "level_1_16_km_t_k": 298.24,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 11.519,
+     "air_2m_k": 300.03,
+     "ground_k": 301.1
+    },
+    "sea_fluxes": {
+     "evap": {
+      "by_quarter": [
+       3.5677,
+       4.5767,
+       3.4763,
+       3.3617
+      ],
+      "mean": 3.7381
+     },
+     "hfls": {
+      "by_quarter": [
+       103.26,
+       132.47,
+       100.62,
+       97.301
+      ],
+      "mean": 108.2
+     },
+     "hfss": {
+      "by_quarter": [
+       8.3936,
+       4.1222,
+       4.9336,
+       8.7087
+      ],
+      "mean": 6.5436
+     },
+     "wind": {
+      "by_quarter": [
+       3.3642,
+       3.5171,
+       2.6892,
+       3.0056
+      ],
+      "mean": 3.1401
+     }
+    },
+    "land_rain_mm_day": [
+     0.033714,
+     19.721,
+     0.53744,
+     0.043558
+    ],
+    "land_convective_mm_day": [
+     0.0,
+     17.57,
+     0.51142,
+     0.043558
+    ],
+    "land_mean_mm_day": 5.2438,
+    "land_convective_mean_mm_day": 4.6735,
+    "land_near_ground": {
+     "lowest_0_6_km_t_k": 297.54,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 11.817,
+     "level_1_16_km_t_k": 296.64,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 10.834,
+     "air_2m_k": 297.99,
+     "ground_k": 296.55
+    },
+    "land_fluxes": {
+     "evap": {
+      "by_quarter": [
+       8.3581,
+       7.1196,
+       0.53976,
+       0.14991
+      ],
+      "mean": 4.0967
+     },
+     "hfls": {
+      "by_quarter": [
+       241.92,
+       206.07,
+       15.623,
+       4.339
+      ],
+      "mean": 118.58
+     },
+     "hfss": {
+      "by_quarter": [
+       -5.8939,
+       -13.45,
+       -5.4886,
+       -1.3149
+      ],
+      "mean": -6.6031
+     },
+     "wind": {
+      "by_quarter": [
+       1.8643,
+       2.301,
+       2.3091,
+       1.2709
+      ],
+      "mean": 1.9363
+     }
+    },
+    "upper_air": {
+     "at_heights_k": [
+      280.55,
+      271.14,
+      258.13,
+      239.65
+     ],
+     "sigma": [
+      0.0383,
+      0.1191,
+      0.21085,
+      0.31685,
+      0.4368,
+      0.5668,
+      0.68575,
+      0.768,
+      0.81815,
+      0.85495,
+      0.88915,
+      0.9238,
+      0.9538,
+      0.97745,
+      0.99415
+     ],
+     "site_t_k": [
+      165.93,
+      191.9,
+      218.11,
+      241.81,
+      259.84,
+      272.54,
+      280.23,
+      284.87,
+      288.0,
+      290.39,
+      292.2,
+      294.37,
+      296.55,
+      298.24,
+      299.52
+     ],
+     "site_q_g_kg": [
+      4.3148e-05,
+      0.0016261,
+      0.040426,
+      0.40929,
+      1.5692,
+      3.2288,
+      4.8121,
+      5.9287,
+      6.6352,
+      7.1328,
+      8.3077,
+      10.241,
+      10.738,
+      11.386,
+      12.013
+     ],
+     "site_z_m": [
+      128320.0,
+      92447.0,
+      71753.0,
+      55199.0,
+      40959.0,
+      28685.0,
+      19358.0,
+      13683.0,
+      10469.0,
+      8210.6,
+      6182.0,
+      4189.4,
+      2510.0,
+      1214.0,
+      312.83
+     ],
+     "cell_means": 720
+    },
+    "global": {
+     "surface_k": 297.53,
+     "air_2m_k": 297.31,
+     "precipitation_mm_day": 2.173,
+     "toa_net_w_m2": -3.27,
+     "planetary_albedo": 0.3793,
+     "cloud_effect_sw_w_m2": -40.01,
+     "cloud_effect_lw_w_m2": 42.84,
+     "cloud_effect_net_w_m2": 2.82,
+     "cloud_cover": 0.352,
+     "top_t_k": [
+      165.56,
+      191.07
+     ],
+     "top_water_ppmv": [
+      0.032898,
+      2.1268
+     ],
+     "t_by_level_k": [
+      165.56,
+      191.07,
+      216.17,
+      239.4,
+      257.58,
+      270.88,
+      278.9,
+      283.34,
+      286.23,
+      288.5,
+      290.62,
+      292.72,
+      294.51,
+      295.94,
+      296.77
+     ],
+     "rain_mm_day": 2.1721,
+     "convective_share": 0.86224,
+     "lowest_three_cloud_cover": [
+      0.0063882,
+      0.0023509,
+      0.0015052
+     ],
+     "evaporation_mm_day": 2.1474,
+     "latent_heat_w_m2": 62.155,
+     "sensible_heat_w_m2": 15.972
+    }
+   },
+   "A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc": {
+    "sea_rain_mm_day": [
+     0.22252,
+     1.0609,
+     3.1808,
+     2.0463
+    ],
+    "sea_convective_mm_day": [
+     0.085278,
+     0.87371,
+     2.8298,
+     1.3961
+    ],
+    "sea_mean_mm_day": 1.6301,
+    "sea_convective_mean_mm_day": 1.3016,
+    "sea_near_ground": {
+     "lowest_0_6_km_t_k": 299.53,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 11.826,
+     "level_1_16_km_t_k": 298.18,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 11.45,
+     "air_2m_k": 300.04,
+     "ground_k": 301.77
+    },
+    "sea_fluxes": {
+     "evap": {
+      "by_quarter": [
+       3.349,
+       4.4373,
+       3.2591,
+       3.1379
+      ],
+      "mean": 3.5378
+     },
+     "hfls": {
+      "by_quarter": [
+       96.934,
+       128.44,
+       94.333,
+       90.826
+      ],
+      "mean": 102.4
+     },
+     "hfss": {
+      "by_quarter": [
+       9.8691,
+       6.3362,
+       6.9916,
+       10.537
+      ],
+      "mean": 8.4334
+     },
+     "wind": {
+      "by_quarter": [
+       3.3122,
+       3.4816,
+       2.8015,
+       3.0968
+      ],
+      "mean": 3.1691
+     }
+    },
+    "land_rain_mm_day": [
+     0.036999,
+     16.839,
+     0.446,
+     0.0081199
+    ],
+    "land_convective_mm_day": [
+     0.002507,
+     14.376,
+     0.42953,
+     0.0073384
+    ],
+    "land_mean_mm_day": 4.4691,
+    "land_convective_mean_mm_day": 3.82,
+    "land_near_ground": {
+     "lowest_0_6_km_t_k": 297.46,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 11.644,
+     "level_1_16_km_t_k": 296.56,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 10.732,
+     "air_2m_k": 297.93,
+     "ground_k": 296.61
+    },
+    "land_fluxes": {
+     "evap": {
+      "by_quarter": [
+       7.9792,
+       6.5894,
+       0.49489,
+       0.16428
+      ],
+      "mean": 3.8577
+     },
+     "hfls": {
+      "by_quarter": [
+       230.95,
+       190.73,
+       14.324,
+       4.7549
+      ],
+      "mean": 111.66
+     },
+     "hfss": {
+      "by_quarter": [
+       0.29484,
+       -5.2296,
+       -4.9352,
+       -1.5842
+      ],
+      "mean": -2.866
+     },
+     "wind": {
+      "by_quarter": [
+       1.841,
+       2.1434,
+       2.082,
+       1.2988
+      ],
+      "mean": 1.8418
+     }
+    },
+    "upper_air": {
+     "at_heights_k": [
+      280.36,
+      270.92,
+      257.86,
+      239.34
+     ],
+     "sigma": [
+      0.0383,
+      0.1191,
+      0.21085,
+      0.31685,
+      0.4368,
+      0.5668,
+      0.68575,
+      0.768,
+      0.81815,
+      0.85495,
+      0.88915,
+      0.9238,
+      0.9538,
+      0.97745,
+      0.99415
+     ],
+     "site_t_k": [
+      165.73,
+      191.67,
+      217.87,
+      241.49,
+      259.57,
+      272.32,
+      280.03,
+      284.71,
+      287.88,
+      290.23,
+      292.1,
+      294.24,
+      296.44,
+      298.18,
+      299.53
+     ],
+     "site_q_g_kg": [
+      3.9589e-05,
+      0.0015852,
+      0.035731,
+      0.39732,
+      1.5318,
+      3.1483,
+      4.7506,
+      5.9116,
+      6.6661,
+      7.264,
+      8.5492,
+      10.377,
+      10.795,
+      11.319,
+      11.687
+     ],
+     "site_z_m": [
+      128190.0,
+      92359.0,
+      71688.0,
+      55154.0,
+      40932.0,
+      28670.0,
+      19349.0,
+      13678.0,
+      10465.0,
+      8208.2,
+      6180.2,
+      4188.2,
+      2509.4,
+      1213.8,
+      312.77
+     ],
+     "cell_means": 720
+    },
+    "global": {
+     "surface_k": 297.65,
+     "air_2m_k": 297.21,
+     "precipitation_mm_day": 2.12,
+     "toa_net_w_m2": -3.15,
+     "planetary_albedo": 0.3799,
+     "cloud_effect_sw_w_m2": -40.16,
+     "cloud_effect_lw_w_m2": 42.93,
+     "cloud_effect_net_w_m2": 2.77,
+     "cloud_cover": 0.355,
+     "top_t_k": [
+      165.35,
+      190.88
+     ],
+     "top_water_ppmv": [
+      0.030995,
+      2.0493
+     ],
+     "t_by_level_k": [
+      165.35,
+      190.88,
+      215.91,
+      239.11,
+      257.31,
+      270.65,
+      278.71,
+      283.18,
+      286.09,
+      288.37,
+      290.51,
+      292.63,
+      294.43,
+      295.86,
+      296.67
+     ],
+     "rain_mm_day": 2.1198,
+     "convective_share": 0.84842,
+     "lowest_three_cloud_cover": [
+      0.0056787,
+      0.0020566,
+      0.0014257
+     ],
+     "evaporation_mm_day": 2.0937,
+     "latent_heat_w_m2": 60.6,
+     "sensible_heat_w_m2": 15.67
+    }
+   },
+   "A28R_301k_cold_massflux_l15": {
+    "sea_rain_mm_day": [
+     0.051757,
+     0.55691,
+     1.8995,
+     1.0316
+    ],
+    "sea_convective_mm_day": [
+     0.04376,
+     0.27978,
+     0.78951,
+     0.42392
+    ],
+    "sea_mean_mm_day": 0.88797,
+    "sea_convective_mean_mm_day": 0.38532,
+    "sea_near_ground": {
+     "lowest_0_6_km_t_k": 301.56,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 15.139,
+     "level_1_16_km_t_k": 300.52,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 13.465,
+     "air_2m_k": 302.07,
+     "ground_k": 303.09
+    },
+    "sea_fluxes": {
+     "evap": {
+      "by_quarter": [
+       3.5533,
+       4.1619,
+       3.398,
+       2.9495
+      ],
+      "mean": 3.5144
+     },
+     "hfls": {
+      "by_quarter": [
+       102.85,
+       120.46,
+       98.354,
+       85.373
+      ],
+      "mean": 101.72
+     },
+     "hfss": {
+      "by_quarter": [
+       8.4708,
+       5.356,
+       4.3384,
+       7.3534
+      ],
+      "mean": 6.3805
+     },
+     "wind": {
+      "by_quarter": [
+       3.7357,
+       4.6572,
+       2.4267,
+       2.5792
+      ],
+      "mean": 3.3407
+     }
+    },
+    "land_rain_mm_day": [
+     0.061928,
+     24.548,
+     1.3518,
+     0.063572
+    ],
+    "land_convective_mm_day": [
+     0.032445,
+     8.171,
+     0.81729,
+     0.028944
+    ],
+    "land_mean_mm_day": 6.6997,
+    "land_convective_mean_mm_day": 2.3237,
+    "land_near_ground": {
+     "lowest_0_6_km_t_k": 299.68,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 13.521,
+     "level_1_16_km_t_k": 299.08,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 12.205,
+     "air_2m_k": 300.15,
+     "ground_k": 298.63
+    },
+    "land_fluxes": {
+     "evap": {
+      "by_quarter": [
+       7.6869,
+       6.5499,
+       0.63,
+       0.30021
+      ],
+      "mean": 3.8411
+     },
+     "hfls": {
+      "by_quarter": [
+       222.49,
+       189.58,
+       18.235,
+       8.6893
+      ],
+      "mean": 111.18
+     },
+     "hfss": {
+      "by_quarter": [
+       -7.1472,
+       -7.56,
+       -6.5823,
+       -2.3046
+      ],
+      "mean": -5.9067
+     },
+     "wind": {
+      "by_quarter": [
+       1.6763,
+       2.2062,
+       2.4698,
+       1.5696
+      ],
+      "mean": 1.9783
+     }
+    },
+    "upper_air": {
+     "at_heights_k": [
+      280.98,
+      270.05,
+      255.99,
+      237.2
+     ],
+     "sigma": [
+      0.0383,
+      0.1191,
+      0.21085,
+      0.31685,
+      0.4368,
+      0.5668,
+      0.68575,
+      0.768,
+      0.81815,
+      0.85495,
+      0.88915,
+      0.9238,
+      0.9538,
+      0.97745,
+      0.99415
+     ],
+     "site_t_k": [
+      163.97,
+      190.41,
+      216.27,
+      239.3,
+      257.73,
+      271.57,
+      280.59,
+      286.23,
+      289.84,
+      292.36,
+      294.48,
+      296.88,
+      299.15,
+      300.52,
+      301.56
+     ],
+     "site_q_g_kg": [
+      2.3275e-05,
+      0.00095082,
+      0.032516,
+      0.32105,
+      1.4462,
+      3.416,
+      5.6449,
+      6.902,
+      7.4528,
+      8.2172,
+      9.8797,
+      11.423,
+      12.088,
+      13.281,
+      14.91
+     ],
+     "site_z_m": [
+      127570.0,
+      92041.0,
+      71515.0,
+      55118.0,
+      41011.0,
+      28807.0,
+      19487.0,
+      13791.0,
+      10557.0,
+      8283.3,
+      6238.2,
+      4227.6,
+      2532.4,
+      1224.5,
+      315.51
+     ],
+     "cell_means": 720
+    },
+    "global": {
+     "surface_k": 299.79,
+     "air_2m_k": 299.52,
+     "precipitation_mm_day": 1.998,
+     "toa_net_w_m2": -0.03,
+     "planetary_albedo": 0.3805,
+     "cloud_effect_sw_w_m2": -40.51,
+     "cloud_effect_lw_w_m2": 45.08,
+     "cloud_effect_net_w_m2": 4.57,
+     "cloud_cover": 0.393,
+     "top_t_k": [
+      163.54,
+      189.42
+     ],
+     "top_water_ppmv": [
+      0.016619,
+      1.4272
+     ],
+     "t_by_level_k": [
+      163.54,
+      189.42,
+      214.44,
+      237.19,
+      255.64,
+      269.86,
+      279.06,
+      284.41,
+      287.78,
+      290.38,
+      292.78,
+      295.09,
+      296.94,
+      298.26,
+      298.95
+     ],
+     "rain_mm_day": 1.9975,
+     "convective_share": 0.42954,
+     "lowest_three_cloud_cover": [
+      0.0016243,
+      0.00057691,
+      0.00049481
+     ],
+     "evaporation_mm_day": 1.993,
+     "latent_heat_w_m2": 57.687,
+     "sensible_heat_w_m2": 20.045
+    }
+   },
+   "A28R_301k_cold_massflux_wstart_l15": {
+    "sea_rain_mm_day": [
+     0.061128,
+     1.5048,
+     3.2247,
+     1.055
+    ],
+    "sea_convective_mm_day": [
+     0.032161,
+     0.64339,
+     1.3864,
+     0.42217
+    ],
+    "sea_mean_mm_day": 1.4675,
+    "sea_convective_mean_mm_day": 0.62398,
+    "sea_near_ground": {
+     "lowest_0_6_km_t_k": 301.58,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 15.16,
+     "level_1_16_km_t_k": 300.52,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 13.484,
+     "air_2m_k": 302.09,
+     "ground_k": 303.1
+    },
+    "sea_fluxes": {
+     "evap": {
+      "by_quarter": [
+       3.4733,
+       3.8642,
+       3.7025,
+       2.8838
+      ],
+      "mean": 3.4845
+     },
+     "hfls": {
+      "by_quarter": [
+       100.53,
+       111.85,
+       107.17,
+       83.469
+      ],
+      "mean": 100.86
+     },
+     "hfss": {
+      "by_quarter": [
+       8.6664,
+       5.6942,
+       4.1038,
+       7.0619
+      ],
+      "mean": 6.3817
+     },
+     "wind": {
+      "by_quarter": [
+       3.8515,
+       4.1855,
+       2.649,
+       2.3961
+      ],
+      "mean": 3.2699
+     }
+    },
+    "land_rain_mm_day": [
+     0.044964,
+     19.202,
+     1.6717,
+     0.093278
+    ],
+    "land_convective_mm_day": [
+     0.032334,
+     8.4432,
+     0.9057,
+     0.010796
+    ],
+    "land_mean_mm_day": 5.3992,
+    "land_convective_mean_mm_day": 2.4108,
+    "land_near_ground": {
+     "lowest_0_6_km_t_k": 299.69,
+     "lowest_0_6_km_vapour_mixing_ratio_g_kg": 13.457,
+     "level_1_16_km_t_k": 299.11,
+     "level_1_16_km_vapour_mixing_ratio_g_kg": 12.072,
+     "air_2m_k": 300.16,
+     "ground_k": 298.62
+    },
+    "land_fluxes": {
+     "evap": {
+      "by_quarter": [
+       7.5777,
+       6.6361,
+       0.60768,
+       0.32162
+      ],
+      "mean": 3.836
+     },
+     "hfls": {
+      "by_quarter": [
+       219.33,
+       192.08,
+       17.589,
+       9.3091
+      ],
+      "mean": 111.03
+     },
+     "hfss": {
+      "by_quarter": [
+       -5.3011,
+       -6.8772,
+       -6.3283,
+       -2.8469
+      ],
+      "mean": -5.343
+     },
+     "wind": {
+      "by_quarter": [
+       1.8198,
+       2.4441,
+       2.4724,
+       1.6806
+      ],
+      "mean": 2.104
+     }
+    },
+    "upper_air": {
+     "at_heights_k": [
+      280.96,
+      270.09,
+      256.02,
+      237.26
+     ],
+     "sigma": [
+      0.0383,
+      0.1191,
+      0.21085,
+      0.31685,
+      0.4368,
+      0.5668,
+      0.68575,
+      0.768,
+      0.81815,
+      0.85495,
+      0.88915,
+      0.9238,
+      0.9538,
+      0.97745,
+      0.99415
+     ],
+     "site_t_k": [
+      164.08,
+      190.44,
+      216.26,
+      239.36,
+      257.76,
+      271.61,
+      280.56,
+      286.26,
+      289.9,
+      292.41,
+      294.55,
+      296.93,
+      299.14,
+      300.52,
+      301.58
+     ],
+     "site_q_g_kg": [
+      2.3679e-05,
+      0.0012042,
+      0.029453,
+      0.33809,
+      1.4558,
+      3.3763,
+      5.6069,
+      6.8928,
+      7.2495,
+      8.1319,
+      9.7069,
+      11.249,
+      12.045,
+      13.3,
+      14.931
+     ],
+     "site_z_m": [
+      127590.0,
+      92049.0,
+      71523.0,
+      55124.0,
+      41013.0,
+      28808.0,
+      19488.0,
+      13793.0,
+      10558.0,
+      8283.8,
+      6238.5,
+      4227.7,
+      2532.4,
+      1224.6,
+      315.53
+     ],
+     "cell_means": 720
+    },
+    "global": {
+     "surface_k": 299.82,
+     "air_2m_k": 299.56,
+     "precipitation_mm_day": 1.986,
+     "toa_net_w_m2": -0.13,
+     "planetary_albedo": 0.3809,
+     "cloud_effect_sw_w_m2": -40.66,
+     "cloud_effect_lw_w_m2": 45.14,
+     "cloud_effect_net_w_m2": 4.48,
+     "cloud_cover": 0.392,
+     "top_t_k": [
+      163.65,
+      189.48
+     ],
+     "top_water_ppmv": [
+      0.017163,
+      1.4519
+     ],
+     "t_by_level_k": [
+      163.65,
+      189.48,
+      214.45,
+      237.23,
+      255.66,
+      269.87,
+      279.08,
+      284.42,
+      287.8,
+      290.4,
+      292.8,
+      295.09,
+      296.94,
+      298.28,
+      298.99
+     ],
+     "rain_mm_day": 1.9852,
+     "convective_share": 0.43698,
+     "lowest_three_cloud_cover": [
+      0.001736,
+      0.00063707,
+      0.00050948
+     ],
+     "evaporation_mm_day": 1.9901,
+     "latent_heat_w_m2": 57.602,
+     "sensible_heat_w_m2": 20.097
+    }
+   }
+  }
+ },
+ "cm1_sea": {
+  "lowest_0.5_km": {
+   "t_k": 299.83,
+   "vapour_mixing_ratio_g_kg": 11.766
+  },
+  "lowest_0.6_km": {
+   "t_k": 299.75,
+   "vapour_mixing_ratio_g_kg": 11.725
+  },
+  "evaporation_mm_day": 2.9779,
+  "evaporation_by_quarter_mm_day": [
+   3.0956,
+   2.7915,
+   2.9476,
+   3.077
+  ],
+  "latent_heat_w_m2": 86.201,
+  "sensible_heat_w_m2": 6.6766,
+  "outputs": 236
+ },
+ "free_convection": {
+  "sea_evaporation_mm_day": {
+   "baseline": 3.8179,
+   "lunar_constant": 3.6187,
+   "cm1": 2.9779,
+   "share_of_excess_over_cm1_removed": 0.23712
+  },
+  "global_evaporation_mm_day": {
+   "baseline": 2.1722,
+   "lunar_constant": 2.1012
+  }
+ },
+ "criteria": {
+  "years 0-1": {
+   "a_upper_air": {
+    "41.8 km": {
+     "run_k": 256.22,
+     "baseline_k": 258.53,
+     "cm1_k": 251.49,
+     "earlier_mass_flux_k": 256.21,
+     "share_of_gap_closed": 0.32827
+    },
+    "55.8 km": {
+     "run_k": 237.55,
+     "baseline_k": 240.12,
+     "cm1_k": 231.76,
+     "earlier_mass_flux_k": 237.51,
+     "share_of_gap_closed": 0.30822
+    },
+    "met": false
+   },
+   "b_sea": {
+    "night": 0.99088,
+    "evening": 2.9887,
+    "afternoon": 0.85636,
+    "cm1": {
+     "sunrise to noon": 0.0,
+     "noon to sunset": 2.23,
+     "sunset to midnight": 2.97,
+     "midnight to sunrise": 0.14
+    },
+    "night_met": false,
+    "evening_met": true,
+    "afternoon_met": false,
+    "baseline": {
+     "sunrise to noon": 0.12381,
+     "noon to sunset": 1.4527,
+     "sunset to midnight": 2.6786,
+     "midnight to sunrise": 1.9789
+    },
+    "earlier_mass_flux": {
+     "sunrise to noon": 0.11725,
+     "noon to sunset": 0.45035,
+     "sunset to midnight": 1.5986,
+     "midnight to sunrise": 0.67923
+    }
+   },
+   "c_land": {
+    "afternoon": 24.046,
+    "baseline_afternoon": 17.845,
+    "cm1_afternoon": 8.59,
+    "morning": 0.051869,
+    "baseline_morning": 0.49955,
+    "cm1_morning": 2.87,
+    "earlier_mass_flux": {
+     "sunrise to noon": 0.127,
+     "noon to sunset": 24.291,
+     "sunset to midnight": 0.98287,
+     "midnight to sunrise": 0.040451
+    },
+    "afternoon_met": false,
+    "morning_met": false
+   },
+   "d_lowest_vapour": {
+    "run_g_kg": 15.092,
+    "baseline_g_kg": 12.336,
+    "cm1_g_kg": 11.8,
+    "earlier_mass_flux_g_kg": 15.235,
+    "met": false
+   },
+   "e_global": {
+    "toa_net_w_m2": -0.38,
+    "baseline_toa_net_w_m2": -3.695,
+    "difference_w_m2": 3.315,
+    "met": false,
+    "ground_k": 299.72,
+    "baseline_ground_k": 297.81,
+    "ground_shift_k": 1.905,
+    "rain_mm_day": 1.9645,
+    "baseline_rain_mm_day": 2.1826,
+    "convective_share": 0.42369,
+    "baseline_convective_share": 0.86049,
+    "earlier_mass_flux_convective_share": 0.42221,
+    "cloud_cover": 0.3895,
+    "baseline_cloud_cover": 0.3495
+   },
+   "f_exobase": {
+    "top_t_k": [
+     164.17,
+     190.0
+    ],
+    "baseline_top_t_k": [
+     165.82,
+     191.56
+    ],
+    "top_water_ppmv": [
+     0.021039,
+     1.6424
+    ],
+    "baseline_top_water_ppmv": [
+     0.034918,
+     2.3349
+    ]
+   },
+   "stop_rule": {
+    "convective_share": 0.42369,
+    "threshold": 0.75,
+    "tripped": true
+   }
+  },
+  "year 1": {
+   "a_upper_air": {
+    "41.8 km": {
+     "run_k": 256.02,
+     "baseline_k": 258.13,
+     "cm1_k": 251.49,
+     "earlier_mass_flux_k": 255.99,
+     "share_of_gap_closed": 0.31843
+    },
+    "55.8 km": {
+     "run_k": 237.26,
+     "baseline_k": 239.65,
+     "cm1_k": 231.76,
+     "earlier_mass_flux_k": 237.2,
+     "share_of_gap_closed": 0.3032
+    },
+    "met": false
+   },
+   "b_sea": {
+    "night": 1.055,
+    "evening": 3.2247,
+    "afternoon": 1.5048,
+    "cm1": {
+     "sunrise to noon": 0.0,
+     "noon to sunset": 2.23,
+     "sunset to midnight": 2.97,
+     "midnight to sunrise": 0.14
+    },
+    "night_met": false,
+    "evening_met": true,
+    "afternoon_met": true,
+    "baseline": {
+     "sunrise to noon": 0.10586,
+     "noon to sunset": 0.90461,
+     "sunset to midnight": 2.8498,
+     "midnight to sunrise": 1.7382
+    },
+    "earlier_mass_flux": {
+     "sunrise to noon": 0.051757,
+     "noon to sunset": 0.55691,
+     "sunset to midnight": 1.8995,
+     "midnight to sunrise": 1.0316
+    }
+   },
+   "c_land": {
+    "afternoon": 19.202,
+    "baseline_afternoon": 19.721,
+    "cm1_afternoon": 8.59,
+    "morning": 0.044964,
+    "baseline_morning": 0.033714,
+    "cm1_morning": 2.87,
+    "earlier_mass_flux": {
+     "sunrise to noon": 0.061928,
+     "noon to sunset": 24.548,
+     "sunset to midnight": 1.3518,
+     "midnight to sunrise": 0.063572
+    },
+    "afternoon_met": true,
+    "morning_met": false
+   },
+   "d_lowest_vapour": {
+    "run_g_kg": 15.16,
+    "baseline_g_kg": 12.16,
+    "cm1_g_kg": 11.8,
+    "earlier_mass_flux_g_kg": 15.139,
+    "met": false
+   },
+   "e_global": {
+    "toa_net_w_m2": -0.13,
+    "baseline_toa_net_w_m2": -3.27,
+    "difference_w_m2": 3.14,
+    "met": false,
+    "ground_k": 299.82,
+    "baseline_ground_k": 297.53,
+    "ground_shift_k": 2.29,
+    "rain_mm_day": 1.9852,
+    "baseline_rain_mm_day": 2.1721,
+    "convective_share": 0.43698,
+    "baseline_convective_share": 0.86224,
+    "earlier_mass_flux_convective_share": 0.42954,
+    "cloud_cover": 0.392,
+    "baseline_cloud_cover": 0.352
+   },
+   "f_exobase": {
+    "top_t_k": [
+     163.65,
+     189.48
+    ],
+    "baseline_top_t_k": [
+     165.56,
+     191.07
+    ],
+    "top_water_ppmv": [
+     0.017163,
+     1.4519
+    ],
+    "baseline_top_water_ppmv": [
+     0.032898,
+     2.1268
+    ]
+   },
+   "stop_rule": {
+    "convective_share": 0.43698,
+    "threshold": 0.75,
+    "tripped": true
+   }
+  }
+ },
+ "bit_check_fluxmod": [
+  {
+   "run": "A28R_301k_cold_sbm_rh07_deep200_l15cap_month_fcsource",
+   "reference": "A28R_301k_cold_sbm_rh07_deep200_l15cap_month_mfsource",
+   "years": {
+    "0": {
+     "variables": 61,
+     "differing": [],
+     "restart_identical": true,
+     "restart_sha256": "c6dde0904adb5fee"
+    }
+   },
+   "source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "2f106bc4e626593b",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "reference_source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "acdbd36078f37c84",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "configuration_differs_in": [
+    "key",
+    "source"
+   ],
+   "seconds": [
+    34.1
+   ],
+   "reference_seconds": [
+    37.1
+   ]
+  },
+  {
+   "run": "A28R_301k_cold_massflux_l15_month_fcsource",
+   "reference": "A28R_301k_cold_massflux_l15_month",
+   "years": {
+    "0": {
+     "variables": 61,
+     "differing": [],
+     "restart_identical": true,
+     "restart_sha256": "512b9dd3e3003f39"
+    }
+   },
+   "source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "2f106bc4e626593b",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "reference_source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "acdbd36078f37c84",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "configuration_differs_in": [
+    "key",
+    "source"
+   ],
+   "seconds": [
+    42.5
+   ],
+   "reference_seconds": [
+    45.9
+   ]
+  },
+  {
+   "run": "A28R_301k_cold_sbm_rh07_deep200_month_fcsource",
+   "reference": "A28R_301k_cold_sbm_rh07_deep200_month_mfsource",
+   "years": {
+    "0": {
+     "variables": 61,
+     "differing": [],
+     "restart_identical": true,
+     "restart_sha256": "fe712a0418ac20c2"
+    }
+   },
+   "source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "2f106bc4e626593b",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "reference_source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "acdbd36078f37c84",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "configuration_differs_in": [
+    "key",
+    "source"
+   ],
+   "seconds": [
+    23.1
+   ],
+   "reference_seconds": [
+    21.6
+   ]
+  }
+ ],
+ "bit_check_start": [
+  {
+   "run": "A28R_301k_cold_sbm_rh07_deep200_l15cap_month_wssource",
+   "reference": "A28R_301k_cold_sbm_rh07_deep200_l15cap_month_fcsource",
+   "years": {
+    "0": {
+     "variables": 61,
+     "differing": [],
+     "restart_identical": true,
+     "restart_sha256": "c6dde0904adb5fee"
+    }
+   },
+   "source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "42122b3cbd7ae596",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "2f106bc4e626593b",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "reference_source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "2f106bc4e626593b",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "configuration_differs_in": [
+    "key",
+    "source"
+   ],
+   "seconds": [
+    33.3
+   ],
+   "reference_seconds": [
+    34.1
+   ]
+  },
+  {
+   "run": "A28R_301k_cold_massflux_l15_month_wssource",
+   "reference": "A28R_301k_cold_massflux_l15_month_fcsource",
+   "years": {
+    "0": {
+     "variables": 61,
+     "differing": [],
+     "restart_identical": true,
+     "restart_sha256": "512b9dd3e3003f39"
+    }
+   },
+   "source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "42122b3cbd7ae596",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "2f106bc4e626593b",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "reference_source": {
+    "radmod": "1eb3996ce8d36288",
+    "rainmod": "7bf3ebeab94db866",
+    "plasimmod": "b10589be854fc31d",
+    "fluxmod": "2f106bc4e626593b",
+    "outmod": "c27b52b3d45dfa24"
+   },
+   "configuration_differs_in": [
+    "key",
+    "source"
+   ],
+   "seconds": [
+    40.4
+   ],
+   "reference_seconds": [
+    42.5
+   ]
+  }
+ ],
+ "smoke": [
+  {
+   "run": "A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc_month",
+   "year": 0,
+   "seconds": 33.8,
+   "toa_net_w_m2": -7.9,
+   "surface_k": 298.32,
+   "nonfinite_fields": [],
+   "least_humidity": 0.0,
+   "strongest_wind_m_s": 26.133,
+   "rain_mm_day": 2.1392,
+   "convective_rain_mm_day": 1.7997,
+   "convective_share": 0.8413,
+   "evaporation_mm_day": 2.0564,
+   "sensible_heat_w_m2": 14.391,
+   "latent_heat_w_m2": 59.521,
+   "free_convection": 0.00082686,
+   "convection": "sbm"
+  },
+  {
+   "run": "A28R_301k_cold_massflux_wstart_l15_month",
+   "year": 0,
+   "seconds": 40.4,
+   "toa_net_w_m2": -6.41,
+   "surface_k": 298.76,
+   "nonfinite_fields": [],
+   "least_humidity": 0.0,
+   "strongest_wind_m_s": 26.527,
+   "rain_mm_day": 1.6902,
+   "convective_rain_mm_day": 0.55977,
+   "convective_share": 0.33118,
+   "evaporation_mm_day": 2.036,
+   "sensible_heat_w_m2": 15.776,
+   "latent_heat_w_m2": 58.93,
+   "free_convection": null,
+   "convection": "massflux"
+  }
+ ],
+ "gcm_trigger_start": {
+  "A28R_301k_cold_massflux_l15": {
+   "sea": {
+    "night": {
+     "columns": 354,
+     "buoyancy_flux_median_k_m_s": 0.0098975,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.45901,
+     "zi_median_km": 1.7923,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.49153,
+      "reaches_deep_cloud_share": 0.079096,
+      "inhibition_median_j_kg": 1.3916,
+      "type_share": {
+       "deep": 0.09322,
+       "shallow": 0.31921,
+       "mid": 0.11017,
+       "None": 0.4774
+      },
+      "rooted_deep_share": 0.079096
+     },
+     "boundary_layer": {
+      "start_median_m_s": 1.0098,
+      "start_p90_m_s": 1.2084,
+      "reaches_cloud_share": 0.49435,
+      "reaches_deep_cloud_share": 0.079096,
+      "inhibition_median_j_kg": 1.1069,
+      "type_share": {
+       "deep": 0.09322,
+       "shallow": 0.31921,
+       "mid": 0.11017,
+       "None": 0.4774
+      },
+      "rooted_deep_share": 0.079096
+     }
+    },
+    "morning": {
+     "columns": 372,
+     "buoyancy_flux_median_k_m_s": 0.010494,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.40543,
+     "zi_median_km": 1.157,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.072581,
+      "reaches_deep_cloud_share": 0.0026882,
+      "inhibition_median_j_kg": 2.0147,
+      "type_share": {
+       "deep": 0.0053763,
+       "shallow": 0.053763,
+       "mid": 0.032258,
+       "None": 0.9086
+      },
+      "rooted_deep_share": 0.0026882
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.89194,
+      "start_p90_m_s": 1.0608,
+      "reaches_cloud_share": 0.072581,
+      "reaches_deep_cloud_share": 0.0026882,
+      "inhibition_median_j_kg": 1.7581,
+      "type_share": {
+       "deep": 0.0053763,
+       "shallow": 0.053763,
+       "mid": 0.032258,
+       "None": 0.9086
+      },
+      "rooted_deep_share": 0.0026882
+     }
+    },
+    "afternoon": {
+     "columns": 348,
+     "buoyancy_flux_median_k_m_s": 0.0093765,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.36106,
+     "zi_median_km": 0.84257,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.066092,
+      "reaches_deep_cloud_share": 0.0057471,
+      "inhibition_median_j_kg": 2.1244,
+      "type_share": {
+       "deep": 0.0057471,
+       "shallow": 0.051724,
+       "mid": 0.022989,
+       "None": 0.91954
+      },
+      "rooted_deep_share": 0.0057471
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.79433,
+      "start_p90_m_s": 1.0804,
+      "reaches_cloud_share": 0.066092,
+      "reaches_deep_cloud_share": 0.0057471,
+      "inhibition_median_j_kg": 1.7178,
+      "type_share": {
+       "deep": 0.0057471,
+       "shallow": 0.051724,
+       "mid": 0.022989,
+       "None": 0.91954
+      },
+      "rooted_deep_share": 0.0057471
+     }
+    },
+    "evening": {
+     "columns": 366,
+     "buoyancy_flux_median_k_m_s": 0.0081828,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.43456,
+     "zi_median_km": 1.7431,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.24317,
+      "reaches_deep_cloud_share": 0.07377,
+      "inhibition_median_j_kg": 1.7522,
+      "type_share": {
+       "deep": 0.12842,
+       "shallow": 0.095628,
+       "mid": 0.10656,
+       "None": 0.6694
+      },
+      "rooted_deep_share": 0.07377
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.95603,
+      "start_p90_m_s": 1.1664,
+      "reaches_cloud_share": 0.2377,
+      "reaches_deep_cloud_share": 0.07377,
+      "inhibition_median_j_kg": 1.6532,
+      "type_share": {
+       "deep": 0.12842,
+       "shallow": 0.095628,
+       "mid": 0.10656,
+       "None": 0.6694
+      },
+      "rooted_deep_share": 0.07377
+     }
+    }
+   },
+   "land": {
+    "night": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": -0.0008405,
+     "rising_flux_share": 0.0,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": null,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0083333,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.8196,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0041667,
+       "mid": 0.0125,
+       "None": 0.98333
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0041667,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.35626,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0041667,
+       "mid": 0.0125,
+       "None": 0.98333
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "morning": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": 0.0049522,
+     "rising_flux_share": 0.8625,
+     "wstar_median_m_s": 0.33324,
+     "zi_median_km": 1.4956,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.17083,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 2.2045,
+      "type_share": {
+       "deep": 0.0041667,
+       "shallow": 0.1375,
+       "mid": 0.0125,
+       "None": 0.84583
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.73312,
+      "start_p90_m_s": 1.3021,
+      "reaches_cloud_share": 0.17083,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.5198,
+      "type_share": {
+       "deep": 0.0041667,
+       "shallow": 0.1375,
+       "mid": 0.0125,
+       "None": 0.84583
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "afternoon": {
+     "columns": 244,
+     "buoyancy_flux_median_k_m_s": 0.0021468,
+     "rising_flux_share": 0.54918,
+     "wstar_median_m_s": 0.16588,
+     "zi_median_km": 1.5107,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.32377,
+      "reaches_deep_cloud_share": 0.12705,
+      "inhibition_median_j_kg": 1.7098,
+      "type_share": {
+       "deep": 0.23361,
+       "shallow": 0.14344,
+       "mid": 0.12705,
+       "None": 0.4959
+      },
+      "rooted_deep_share": 0.12705
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.36494,
+      "start_p90_m_s": 1.3178,
+      "reaches_cloud_share": 0.29918,
+      "reaches_deep_cloud_share": 0.11885,
+      "inhibition_median_j_kg": 0.71539,
+      "type_share": {
+       "deep": 0.22951,
+       "shallow": 0.14344,
+       "mid": 0.12705,
+       "None": 0.5
+      },
+      "rooted_deep_share": 0.11885
+     }
+    },
+    "evening": {
+     "columns": 236,
+     "buoyancy_flux_median_k_m_s": -0.00371,
+     "rising_flux_share": 0.0,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": null,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.8642,
+      "type_share": {
+       "deep": 0.0042373,
+       "shallow": 0.0,
+       "mid": 0.088983,
+       "None": 0.90678
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.3312,
+      "type_share": {
+       "deep": 0.0042373,
+       "shallow": 0.0,
+       "mid": 0.088983,
+       "None": 0.90678
+      },
+      "rooted_deep_share": 0.0
+     }
+    }
+   }
+  },
+  "A28R_301k_cold_massflux_l15_carried": {
+   "sea": {
+    "night": {
+     "columns": 354,
+     "buoyancy_flux_median_k_m_s": 0.0097281,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.36421,
+     "zi_median_km": 0.90501,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.23446,
+      "reaches_deep_cloud_share": 0.019774,
+      "inhibition_median_j_kg": 1.6228,
+      "type_share": {
+       "deep": 0.019774,
+       "shallow": 0.15254,
+       "mid": 0.090395,
+       "None": 0.73729
+      },
+      "rooted_deep_share": 0.019774
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.80126,
+      "start_p90_m_s": 1.15,
+      "reaches_cloud_share": 0.23164,
+      "reaches_deep_cloud_share": 0.019774,
+      "inhibition_median_j_kg": 1.235,
+      "type_share": {
+       "deep": 0.019774,
+       "shallow": 0.15254,
+       "mid": 0.090395,
+       "None": 0.73729
+      },
+      "rooted_deep_share": 0.019774
+     }
+    },
+    "morning": {
+     "columns": 372,
+     "buoyancy_flux_median_k_m_s": 0.011397,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.3311,
+     "zi_median_km": 0.5145,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.05914,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.9608,
+      "type_share": {
+       "deep": 0.0026882,
+       "shallow": 0.037634,
+       "mid": 0.037634,
+       "None": 0.92204
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.72841,
+      "start_p90_m_s": 0.94766,
+      "reaches_cloud_share": 0.05914,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.3688,
+      "type_share": {
+       "deep": 0.0026882,
+       "shallow": 0.037634,
+       "mid": 0.037634,
+       "None": 0.92204
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "afternoon": {
+     "columns": 348,
+     "buoyancy_flux_median_k_m_s": 0.0098879,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.31505,
+     "zi_median_km": 0.46745,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.054598,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.9787,
+      "type_share": {
+       "deep": 0.0028736,
+       "shallow": 0.037356,
+       "mid": 0.0086207,
+       "None": 0.95115
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.69312,
+      "start_p90_m_s": 1.0219,
+      "reaches_cloud_share": 0.045977,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.4346,
+      "type_share": {
+       "deep": 0.0028736,
+       "shallow": 0.037356,
+       "mid": 0.0086207,
+       "None": 0.95115
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "evening": {
+     "columns": 366,
+     "buoyancy_flux_median_k_m_s": 0.0090501,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.34338,
+     "zi_median_km": 0.83847,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.1612,
+      "reaches_deep_cloud_share": 0.046448,
+      "inhibition_median_j_kg": 1.9129,
+      "type_share": {
+       "deep": 0.057377,
+       "shallow": 0.079235,
+       "mid": 0.19126,
+       "None": 0.67213
+      },
+      "rooted_deep_share": 0.046448
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.75544,
+      "start_p90_m_s": 1.0852,
+      "reaches_cloud_share": 0.15301,
+      "reaches_deep_cloud_share": 0.046448,
+      "inhibition_median_j_kg": 1.3728,
+      "type_share": {
+       "deep": 0.057377,
+       "shallow": 0.079235,
+       "mid": 0.19126,
+       "None": 0.67213
+      },
+      "rooted_deep_share": 0.046448
+     }
+    }
+   },
+   "land": {
+    "night": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": -0.0010389,
+     "rising_flux_share": 0.0125,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": 0.33138,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.9761,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.016667,
+       "None": 0.98333
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.29218,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.016667,
+       "None": 0.98333
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "morning": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": 0.0040951,
+     "rising_flux_share": 0.82917,
+     "wstar_median_m_s": 0.29852,
+     "zi_median_km": 1.3571,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0875,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 2.4195,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.079167,
+       "mid": 0.0,
+       "None": 0.92083
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.65675,
+      "start_p90_m_s": 1.2764,
+      "reaches_cloud_share": 0.0875,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.7779,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.079167,
+       "mid": 0.0,
+       "None": 0.92083
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "afternoon": {
+     "columns": 244,
+     "buoyancy_flux_median_k_m_s": -0.0017175,
+     "rising_flux_share": 0.42213,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": 0.98023,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.18443,
+      "reaches_deep_cloud_share": 0.036885,
+      "inhibition_median_j_kg": 1.8799,
+      "type_share": {
+       "deep": 0.10246,
+       "shallow": 0.12705,
+       "mid": 0.11885,
+       "None": 0.65164
+      },
+      "rooted_deep_share": 0.036885
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 1.1963,
+      "reaches_cloud_share": 0.17623,
+      "reaches_deep_cloud_share": 0.036885,
+      "inhibition_median_j_kg": 0.5946,
+      "type_share": {
+       "deep": 0.10246,
+       "shallow": 0.12705,
+       "mid": 0.11885,
+       "None": 0.65164
+      },
+      "rooted_deep_share": 0.036885
+     }
+    },
+    "evening": {
+     "columns": 236,
+     "buoyancy_flux_median_k_m_s": -0.0035642,
+     "rising_flux_share": 0.0,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": null,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0042373,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.9763,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0042373,
+       "mid": 0.10593,
+       "None": 0.88983
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0042373,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.27897,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0042373,
+       "mid": 0.10593,
+       "None": 0.88983
+      },
+      "rooted_deep_share": 0.0
+     }
+    }
+   }
+  },
+  "A28R_301k_cold_sbm_rh07_deep200_l15cap": {
+   "sea": {
+    "night": {
+     "columns": 354,
+     "buoyancy_flux_median_k_m_s": 0.010732,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.54486,
+     "zi_median_km": 2.7894,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.36158,
+      "reaches_deep_cloud_share": 0.0028249,
+      "inhibition_median_j_kg": 1.6712,
+      "type_share": {
+       "deep": 0.0028249,
+       "shallow": 0.31921,
+       "mid": 0.067797,
+       "None": 0.61017
+      },
+      "rooted_deep_share": 0.0028249
+     },
+     "boundary_layer": {
+      "start_median_m_s": 1.1987,
+      "start_p90_m_s": 1.3625,
+      "reaches_cloud_share": 0.36723,
+      "reaches_deep_cloud_share": 0.0028249,
+      "inhibition_median_j_kg": 1.5317,
+      "type_share": {
+       "deep": 0.0028249,
+       "shallow": 0.31921,
+       "mid": 0.067797,
+       "None": 0.61017
+      },
+      "rooted_deep_share": 0.0028249
+     }
+    },
+    "morning": {
+     "columns": 372,
+     "buoyancy_flux_median_k_m_s": 0.011664,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.45094,
+     "zi_median_km": 1.4472,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.040323,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 2.1396,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.02957,
+       "mid": 0.026882,
+       "None": 0.94355
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.99207,
+      "start_p90_m_s": 1.1708,
+      "reaches_cloud_share": 0.048387,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 2.0603,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.02957,
+       "mid": 0.026882,
+       "None": 0.94355
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "afternoon": {
+     "columns": 348,
+     "buoyancy_flux_median_k_m_s": 0.0098407,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.431,
+     "zi_median_km": 1.5738,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.060345,
+      "reaches_deep_cloud_share": 0.0028736,
+      "inhibition_median_j_kg": 2.0757,
+      "type_share": {
+       "deep": 0.0028736,
+       "shallow": 0.04023,
+       "mid": 0.022989,
+       "None": 0.93391
+      },
+      "rooted_deep_share": 0.0028736
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.94821,
+      "start_p90_m_s": 1.4535,
+      "reaches_cloud_share": 0.063218,
+      "reaches_deep_cloud_share": 0.0028736,
+      "inhibition_median_j_kg": 1.9838,
+      "type_share": {
+       "deep": 0.0028736,
+       "shallow": 0.04023,
+       "mid": 0.022989,
+       "None": 0.93391
+      },
+      "rooted_deep_share": 0.0028736
+     }
+    },
+    "evening": {
+     "columns": 366,
+     "buoyancy_flux_median_k_m_s": 0.0087672,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.57557,
+     "zi_median_km": 4.2391,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.17486,
+      "reaches_deep_cloud_share": 0.013661,
+      "inhibition_median_j_kg": 1.9501,
+      "type_share": {
+       "deep": 0.013661,
+       "shallow": 0.11475,
+       "mid": 0.04918,
+       "None": 0.8224
+      },
+      "rooted_deep_share": 0.013661
+     },
+     "boundary_layer": {
+      "start_median_m_s": 1.2663,
+      "start_p90_m_s": 1.4428,
+      "reaches_cloud_share": 0.17486,
+      "reaches_deep_cloud_share": 0.013661,
+      "inhibition_median_j_kg": 2.0068,
+      "type_share": {
+       "deep": 0.013661,
+       "shallow": 0.11475,
+       "mid": 0.04918,
+       "None": 0.8224
+      },
+      "rooted_deep_share": 0.013661
+     }
+    }
+   },
+   "land": {
+    "night": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": -0.0005135,
+     "rising_flux_share": 0.0125,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": 0.45172,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.726,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.0,
+       "None": 1.0
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.48903,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.0,
+       "None": 1.0
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "morning": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": 0.0053804,
+     "rising_flux_share": 0.925,
+     "wstar_median_m_s": 0.37497,
+     "zi_median_km": 1.6017,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.091667,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 2.4655,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.075,
+       "mid": 0.0,
+       "None": 0.925
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.82492,
+      "start_p90_m_s": 1.5777,
+      "reaches_cloud_share": 0.083333,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 2.3047,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.075,
+       "mid": 0.0,
+       "None": 0.925
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "afternoon": {
+     "columns": 244,
+     "buoyancy_flux_median_k_m_s": -0.0010829,
+     "rising_flux_share": 0.44262,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": 1.8058,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.33607,
+      "reaches_deep_cloud_share": 0.16803,
+      "inhibition_median_j_kg": 1.5001,
+      "type_share": {
+       "deep": 0.17213,
+       "shallow": 0.14344,
+       "mid": 0.11885,
+       "None": 0.56557
+      },
+      "rooted_deep_share": 0.16803
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 1.4182,
+      "reaches_cloud_share": 0.31557,
+      "reaches_deep_cloud_share": 0.14754,
+      "inhibition_median_j_kg": 0.73823,
+      "type_share": {
+       "deep": 0.15574,
+       "shallow": 0.14754,
+       "mid": 0.12705,
+       "None": 0.56967
+      },
+      "rooted_deep_share": 0.14754
+     }
+    },
+    "evening": {
+     "columns": 236,
+     "buoyancy_flux_median_k_m_s": -0.0028113,
+     "rising_flux_share": 0.0042373,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": 0.67143,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.5363,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.0,
+       "None": 1.0
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.43537,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.0,
+       "None": 1.0
+      },
+      "rooted_deep_share": 0.0
+     }
+    }
+   }
+  },
+  "A28R_301k_cold_sbm_rh07_deep200_l15cap_carried": {
+   "sea": {
+    "night": {
+     "columns": 354,
+     "buoyancy_flux_median_k_m_s": 0.0082996,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.39128,
+     "zi_median_km": 1.3157,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.17514,
+      "reaches_deep_cloud_share": 0.022599,
+      "inhibition_median_j_kg": 1.6269,
+      "type_share": {
+       "deep": 0.036723,
+       "shallow": 0.11017,
+       "mid": 0.087571,
+       "None": 0.76554
+      },
+      "rooted_deep_share": 0.022599
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.86082,
+      "start_p90_m_s": 1.172,
+      "reaches_cloud_share": 0.17514,
+      "reaches_deep_cloud_share": 0.022599,
+      "inhibition_median_j_kg": 1.3493,
+      "type_share": {
+       "deep": 0.036723,
+       "shallow": 0.11017,
+       "mid": 0.087571,
+       "None": 0.76554
+      },
+      "rooted_deep_share": 0.022599
+     }
+    },
+    "morning": {
+     "columns": 372,
+     "buoyancy_flux_median_k_m_s": 0.0093765,
+     "rising_flux_share": 0.99731,
+     "wstar_median_m_s": 0.33578,
+     "zi_median_km": 0.65542,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.02957,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.7945,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.013441,
+       "mid": 0.034946,
+       "None": 0.95161
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.73872,
+      "start_p90_m_s": 0.95353,
+      "reaches_cloud_share": 0.021505,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.4845,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.013441,
+       "mid": 0.034946,
+       "None": 0.95161
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "afternoon": {
+     "columns": 348,
+     "buoyancy_flux_median_k_m_s": 0.010847,
+     "rising_flux_share": 0.99713,
+     "wstar_median_m_s": 0.34816,
+     "zi_median_km": 0.7446,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.022989,
+      "reaches_deep_cloud_share": 0.0057471,
+      "inhibition_median_j_kg": 1.8891,
+      "type_share": {
+       "deep": 0.0057471,
+       "shallow": 0.0086207,
+       "mid": 0.020115,
+       "None": 0.96552
+      },
+      "rooted_deep_share": 0.0057471
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.76595,
+      "start_p90_m_s": 1.3618,
+      "reaches_cloud_share": 0.022989,
+      "reaches_deep_cloud_share": 0.0057471,
+      "inhibition_median_j_kg": 1.6165,
+      "type_share": {
+       "deep": 0.0057471,
+       "shallow": 0.0086207,
+       "mid": 0.020115,
+       "None": 0.96552
+      },
+      "rooted_deep_share": 0.0057471
+     }
+    },
+    "evening": {
+     "columns": 366,
+     "buoyancy_flux_median_k_m_s": 0.0073914,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.38809,
+     "zi_median_km": 1.3201,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.032787,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.7673,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.030055,
+       "mid": 0.02459,
+       "None": 0.94536
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.85379,
+      "start_p90_m_s": 1.1998,
+      "reaches_cloud_share": 0.032787,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.6156,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.030055,
+       "mid": 0.02459,
+       "None": 0.94536
+      },
+      "rooted_deep_share": 0.0
+     }
+    }
+   },
+   "land": {
+    "night": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": -0.00040412,
+     "rising_flux_share": 0.0083333,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": 0.32447,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.7229,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.0,
+       "None": 1.0
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.50813,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.0,
+       "None": 1.0
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "morning": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": 0.0035554,
+     "rising_flux_share": 0.77917,
+     "wstar_median_m_s": 0.27539,
+     "zi_median_km": 1.0663,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0375,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 2.2839,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.033333,
+       "mid": 0.0,
+       "None": 0.96667
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.60586,
+      "start_p90_m_s": 1.3459,
+      "reaches_cloud_share": 0.0375,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.9585,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.033333,
+       "mid": 0.0,
+       "None": 0.96667
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "afternoon": {
+     "columns": 244,
+     "buoyancy_flux_median_k_m_s": -0.003116,
+     "rising_flux_share": 0.30328,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": 1.2289,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.33607,
+      "reaches_deep_cloud_share": 0.20082,
+      "inhibition_median_j_kg": 1.4736,
+      "type_share": {
+       "deep": 0.2459,
+       "shallow": 0.10246,
+       "mid": 0.077869,
+       "None": 0.57377
+      },
+      "rooted_deep_share": 0.20082
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.99064,
+      "reaches_cloud_share": 0.31557,
+      "reaches_deep_cloud_share": 0.19262,
+      "inhibition_median_j_kg": 0.6241,
+      "type_share": {
+       "deep": 0.2418,
+       "shallow": 0.10246,
+       "mid": 0.077869,
+       "None": 0.57787
+      },
+      "rooted_deep_share": 0.19262
+     }
+    },
+    "evening": {
+     "columns": 236,
+     "buoyancy_flux_median_k_m_s": -0.0024147,
+     "rising_flux_share": 0.0,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": null,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.6013,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.0042373,
+       "None": 0.99576
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.48166,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.0042373,
+       "None": 0.99576
+      },
+      "rooted_deep_share": 0.0
+     }
+    }
+   }
+  },
+  "A28R_301k_cold_massflux_wstart_l15": {
+   "sea": {
+    "night": {
+     "columns": 354,
+     "buoyancy_flux_median_k_m_s": 0.0091752,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.44109,
+     "zi_median_km": 1.7556,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.4209,
+      "reaches_deep_cloud_share": 0.090395,
+      "inhibition_median_j_kg": 1.5152,
+      "type_share": {
+       "deep": 0.11864,
+       "shallow": 0.26554,
+       "mid": 0.13559,
+       "None": 0.48023
+      },
+      "rooted_deep_share": 0.090395
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.9704,
+      "start_p90_m_s": 1.1982,
+      "reaches_cloud_share": 0.4209,
+      "reaches_deep_cloud_share": 0.090395,
+      "inhibition_median_j_kg": 1.287,
+      "type_share": {
+       "deep": 0.11864,
+       "shallow": 0.26554,
+       "mid": 0.13559,
+       "None": 0.48023
+      },
+      "rooted_deep_share": 0.090395
+     }
+    },
+    "morning": {
+     "columns": 372,
+     "buoyancy_flux_median_k_m_s": 0.010728,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.41426,
+     "zi_median_km": 1.2911,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.083333,
+      "reaches_deep_cloud_share": 0.0080645,
+      "inhibition_median_j_kg": 2.0025,
+      "type_share": {
+       "deep": 0.0080645,
+       "shallow": 0.056452,
+       "mid": 0.037634,
+       "None": 0.89785
+      },
+      "rooted_deep_share": 0.0080645
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.91136,
+      "start_p90_m_s": 1.109,
+      "reaches_cloud_share": 0.080645,
+      "reaches_deep_cloud_share": 0.0080645,
+      "inhibition_median_j_kg": 1.7785,
+      "type_share": {
+       "deep": 0.0080645,
+       "shallow": 0.056452,
+       "mid": 0.037634,
+       "None": 0.89785
+      },
+      "rooted_deep_share": 0.0080645
+     }
+    },
+    "afternoon": {
+     "columns": 348,
+     "buoyancy_flux_median_k_m_s": 0.0086633,
+     "rising_flux_share": 0.99713,
+     "wstar_median_m_s": 0.35809,
+     "zi_median_km": 0.78624,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.051724,
+      "reaches_deep_cloud_share": 0.014368,
+      "inhibition_median_j_kg": 2.0546,
+      "type_share": {
+       "deep": 0.017241,
+       "shallow": 0.028736,
+       "mid": 0.028736,
+       "None": 0.92529
+      },
+      "rooted_deep_share": 0.014368
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.7878,
+      "start_p90_m_s": 1.0669,
+      "reaches_cloud_share": 0.051724,
+      "reaches_deep_cloud_share": 0.014368,
+      "inhibition_median_j_kg": 1.7473,
+      "type_share": {
+       "deep": 0.017241,
+       "shallow": 0.028736,
+       "mid": 0.028736,
+       "None": 0.92529
+      },
+      "rooted_deep_share": 0.014368
+     }
+    },
+    "evening": {
+     "columns": 366,
+     "buoyancy_flux_median_k_m_s": 0.0083791,
+     "rising_flux_share": 1.0,
+     "wstar_median_m_s": 0.4348,
+     "zi_median_km": 1.8016,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.13115,
+      "reaches_deep_cloud_share": 0.046448,
+      "inhibition_median_j_kg": 1.8636,
+      "type_share": {
+       "deep": 0.07377,
+       "shallow": 0.065574,
+       "mid": 0.12295,
+       "None": 0.7377
+      },
+      "rooted_deep_share": 0.046448
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.95656,
+      "start_p90_m_s": 1.1754,
+      "reaches_cloud_share": 0.13388,
+      "reaches_deep_cloud_share": 0.046448,
+      "inhibition_median_j_kg": 1.7722,
+      "type_share": {
+       "deep": 0.07377,
+       "shallow": 0.065574,
+       "mid": 0.12295,
+       "None": 0.7377
+      },
+      "rooted_deep_share": 0.046448
+     }
+    }
+   },
+   "land": {
+    "night": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": -0.0010251,
+     "rising_flux_share": 0.0,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": null,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.8364,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.016667,
+       "None": 0.98333
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.37238,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.0,
+       "mid": 0.016667,
+       "None": 0.98333
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "morning": {
+     "columns": 240,
+     "buoyancy_flux_median_k_m_s": 0.0059407,
+     "rising_flux_share": 0.87083,
+     "wstar_median_m_s": 0.36605,
+     "zi_median_km": 1.5925,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.15833,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 2.1665,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.10417,
+       "mid": 0.016667,
+       "None": 0.87917
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.80531,
+      "start_p90_m_s": 1.4205,
+      "reaches_cloud_share": 0.15833,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.4314,
+      "type_share": {
+       "deep": 0.0,
+       "shallow": 0.10417,
+       "mid": 0.016667,
+       "None": 0.87917
+      },
+      "rooted_deep_share": 0.0
+     }
+    },
+    "afternoon": {
+     "columns": 244,
+     "buoyancy_flux_median_k_m_s": 0.0024627,
+     "rising_flux_share": 0.59016,
+     "wstar_median_m_s": 0.18826,
+     "zi_median_km": 1.3822,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.37295,
+      "reaches_deep_cloud_share": 0.14754,
+      "inhibition_median_j_kg": 1.6191,
+      "type_share": {
+       "deep": 0.2459,
+       "shallow": 0.15164,
+       "mid": 0.14754,
+       "None": 0.45492
+      },
+      "rooted_deep_share": 0.14754
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.41418,
+      "start_p90_m_s": 1.3499,
+      "reaches_cloud_share": 0.34016,
+      "reaches_deep_cloud_share": 0.14344,
+      "inhibition_median_j_kg": 0.58687,
+      "type_share": {
+       "deep": 0.2459,
+       "shallow": 0.15164,
+       "mid": 0.14754,
+       "None": 0.45492
+      },
+      "rooted_deep_share": 0.14344
+     }
+    },
+    "evening": {
+     "columns": 236,
+     "buoyancy_flux_median_k_m_s": -0.003446,
+     "rising_flux_share": 0.0,
+     "wstar_median_m_s": 0.0,
+     "zi_median_km": null,
+     "ifs": {
+      "start_median_m_s": 1.0,
+      "start_p90_m_s": 1.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 1.879,
+      "type_share": {
+       "deep": 0.021186,
+       "shallow": 0.0,
+       "mid": 0.076271,
+       "None": 0.90254
+      },
+      "rooted_deep_share": 0.0
+     },
+     "boundary_layer": {
+      "start_median_m_s": 0.0,
+      "start_p90_m_s": 0.0,
+      "reaches_cloud_share": 0.0,
+      "reaches_deep_cloud_share": 0.0,
+      "inhibition_median_j_kg": 0.35657,
+      "type_share": {
+       "deep": 0.021186,
+       "shallow": 0.0,
+       "mid": 0.076271,
+       "None": 0.90254
+      },
+      "rooted_deep_share": 0.0
+     }
+    }
+   }
+  }
+ },
+ "start_sensitivity": {
+  "A28R_301k_cold_massflux_l15:sea:night": {
+   "sub_factor 0.4": {
+    "0 m/s": 0.46893,
+    "0.5 m/s": 0.48305,
+    "1 m/s": 0.49153,
+    "1.5 m/s": 0.5113,
+    "2 m/s": 0.5339,
+    "3 m/s": 0.61864,
+    "5 m/s": 0.76836
+   },
+   "sub_factor 0.2": {
+    "0 m/s": 0.56497,
+    "0.5 m/s": 0.5791,
+    "1 m/s": 0.59322,
+    "1.5 m/s": 0.62429,
+    "2 m/s": 0.67232,
+    "3 m/s": 0.79379,
+    "5 m/s": 0.93503
+   },
+   "sub_factor 0.0": {
+    "0 m/s": 0.66667,
+    "0.5 m/s": 0.68362,
+    "1 m/s": 0.70621,
+    "1.5 m/s": 0.75141,
+    "2 m/s": 0.80791,
+    "3 m/s": 0.91243,
+    "5 m/s": 0.98588
+   }
+  },
+  "A28R_301k_cold_massflux_l15:sea:evening": {
+   "sub_factor 0.4": {
+    "0 m/s": 0.21858,
+    "0.5 m/s": 0.21858,
+    "1 m/s": 0.24317,
+    "1.5 m/s": 0.25683,
+    "2 m/s": 0.27049,
+    "3 m/s": 0.32787,
+    "5 m/s": 0.44262
+   },
+   "sub_factor 0.2": {
+    "0 m/s": 0.38251,
+    "0.5 m/s": 0.39344,
+    "1 m/s": 0.41257,
+    "1.5 m/s": 0.44809,
+    "2 m/s": 0.51639,
+    "3 m/s": 0.59836,
+    "5 m/s": 0.80328
+   },
+   "sub_factor 0.0": {
+    "0 m/s": 0.57923,
+    "0.5 m/s": 0.58743,
+    "1 m/s": 0.65027,
+    "1.5 m/s": 0.72131,
+    "2 m/s": 0.79235,
+    "3 m/s": 0.87978,
+    "5 m/s": 0.97541
+   }
+  },
+  "A28R_301k_cold_massflux_l15:sea:afternoon": {
+   "sub_factor 0.4": {
+    "0 m/s": 0.057471,
+    "0.5 m/s": 0.063218,
+    "1 m/s": 0.066092,
+    "1.5 m/s": 0.068966,
+    "2 m/s": 0.08046,
+    "3 m/s": 0.10057,
+    "5 m/s": 0.12931
+   },
+   "sub_factor 0.2": {
+    "0 m/s": 0.17816,
+    "0.5 m/s": 0.18103,
+    "1 m/s": 0.1954,
+    "1.5 m/s": 0.22414,
+    "2 m/s": 0.25575,
+    "3 m/s": 0.34483,
+    "5 m/s": 0.53448
+   },
+   "sub_factor 0.0": {
+    "0 m/s": 0.33046,
+    "0.5 m/s": 0.3477,
+    "1 m/s": 0.37356,
+    "1.5 m/s": 0.42816,
+    "2 m/s": 0.49713,
+    "3 m/s": 0.63506,
+    "5 m/s": 0.90517
+   }
+  },
+  "A28R_301k_cold_massflux_l15:land:afternoon": {
+   "sub_factor 0.4": {
+    "0 m/s": 0.29508,
+    "0.5 m/s": 0.30328,
+    "1 m/s": 0.32377,
+    "1.5 m/s": 0.34836,
+    "2 m/s": 0.39344,
+    "3 m/s": 0.47541,
+    "5 m/s": 0.63934
+   },
+   "sub_factor 0.2": {
+    "0 m/s": 0.44672,
+    "0.5 m/s": 0.46311,
+    "1 m/s": 0.5,
+    "1.5 m/s": 0.55328,
+    "2 m/s": 0.60246,
+    "3 m/s": 0.70902,
+    "5 m/s": 0.81557
+   },
+   "sub_factor 0.0": {
+    "0 m/s": 0.53279,
+    "0.5 m/s": 0.54508,
+    "1 m/s": 0.57787,
+    "1.5 m/s": 0.63934,
+    "2 m/s": 0.70492,
+    "3 m/s": 0.81557,
+    "5 m/s": 0.92623
+   }
+  },
+  "A28R_301k_cold_massflux_l15:land:morning": {
+   "sub_factor 0.4": {
+    "0 m/s": 0.16667,
+    "0.5 m/s": 0.17083,
+    "1 m/s": 0.17083,
+    "1.5 m/s": 0.19167,
+    "2 m/s": 0.20833,
+    "3 m/s": 0.25,
+    "5 m/s": 0.29583
+   },
+   "sub_factor 0.2": {
+    "0 m/s": 0.3375,
+    "0.5 m/s": 0.3375,
+    "1 m/s": 0.35833,
+    "1.5 m/s": 0.3875,
+    "2 m/s": 0.41667,
+    "3 m/s": 0.4625,
+    "5 m/s": 0.58333
+   },
+   "sub_factor 0.0": {
+    "0 m/s": 0.48333,
+    "0.5 m/s": 0.49167,
+    "1 m/s": 0.50833,
+    "1.5 m/s": 0.5625,
+    "2 m/s": 0.59583,
+    "3 m/s": 0.65417,
+    "5 m/s": 0.79167
+   }
+  },
+  "A28R_301k_cold_sbm_rh07_deep200_l15cap:sea:evening": {
+   "sub_factor 0.4": {
+    "0 m/s": 0.1694,
+    "0.5 m/s": 0.17213,
+    "1 m/s": 0.17486,
+    "1.5 m/s": 0.17486,
+    "2 m/s": 0.18306,
+    "3 m/s": 0.21585,
+    "5 m/s": 0.3224
+   },
+   "sub_factor 0.2": {
+    "0 m/s": 0.42623,
+    "0.5 m/s": 0.43169,
+    "1 m/s": 0.44809,
+    "1.5 m/s": 0.47268,
+    "2 m/s": 0.49727,
+    "3 m/s": 0.61749,
+    "5 m/s": 0.83607
+   },
+   "sub_factor 0.0": {
+    "0 m/s": 0.77049,
+    "0.5 m/s": 0.78415,
+    "1 m/s": 0.82787,
+    "1.5 m/s": 0.86885,
+    "2 m/s": 0.9071,
+    "3 m/s": 0.96995,
+    "5 m/s": 1.0
+   }
+  }
+ },
+ "cm1_thermals_summary": {
+  "c_start": 2.2,
+  "rows": [
+   {
+    "box": "land",
+    "period": "onset, -30 to 0",
+    "outputs": 20,
+    "buoyancy_flux_k_m_s": 0.053108,
+    "zi_parcel_km": 6.1382,
+    "zi_hpbl_km": 7.3895,
+    "condensation_level_km": 5.7092,
+    "wstar_m_s": 1.1448,
+    "wstar_median_m_s": 1.2254,
+    "w_p999_below_16km_m_s": 2.6298,
+    "w_p999_below_16km_clear_m_s": 1.8347,
+    "sigma_max_over_wstar": 0.35656,
+    "p999_over_wstar_upper_layer": 1.3557,
+    "top5_over_wstar_upper_layer": 0.79612,
+    "skewness_upper_layer": 1.1028,
+    "rule_start_m_s": 2.5186
+   },
+   {
+    "box": "land",
+    "period": "onset, 0 to 30",
+    "outputs": 19,
+    "buoyancy_flux_k_m_s": 0.050484,
+    "zi_parcel_km": 5.5739,
+    "zi_hpbl_km": 6.8564,
+    "condensation_level_km": 5.2604,
+    "wstar_m_s": 1.1687,
+    "wstar_median_m_s": 1.1642,
+    "w_p999_below_16km_m_s": 2.9061,
+    "w_p999_below_16km_clear_m_s": 1.944,
+    "sigma_max_over_wstar": 0.37406,
+    "p999_over_wstar_upper_layer": 1.7573,
+    "top5_over_wstar_upper_layer": 0.99443,
+    "skewness_upper_layer": 0.87954,
+    "rule_start_m_s": 2.5711
+   },
+   {
+    "box": "land",
+    "period": "30 to 60",
+    "outputs": 20,
+    "buoyancy_flux_k_m_s": 0.024801,
+    "zi_parcel_km": 2.1131,
+    "zi_hpbl_km": 4.0324,
+    "condensation_level_km": 3.7738,
+    "wstar_m_s": 0.66582,
+    "wstar_median_m_s": 0.67538,
+    "w_p999_below_16km_m_s": 2.9931,
+    "w_p999_below_16km_clear_m_s": 1.5097,
+    "sigma_max_over_wstar": 0.46685,
+    "p999_over_wstar_upper_layer": 1.3668,
+    "top5_over_wstar_upper_layer": 0.81482,
+    "skewness_upper_layer": 0.30089,
+    "rule_start_m_s": 1.4648
+   },
+   {
+    "box": "sea",
+    "period": "night (midnight to sunrise)",
+    "outputs": 59,
+    "buoyancy_flux_k_m_s": 0.010244,
+    "zi_parcel_km": 5.9031,
+    "zi_hpbl_km": 6.0467,
+    "condensation_level_km": 5.2604,
+    "wstar_m_s": 0.70342,
+    "wstar_median_m_s": 0.69946,
+    "w_p999_below_16km_m_s": 1.1034,
+    "w_p999_below_16km_clear_m_s": 1.0953,
+    "sigma_max_over_wstar": 0.45506,
+    "p999_over_wstar_upper_layer": 1.6524,
+    "top5_over_wstar_upper_layer": 1.1061,
+    "skewness_upper_layer": 1.4432,
+    "rule_start_m_s": 1.5475
+   },
+   {
+    "box": "sea",
+    "period": "evening (sunset to midnight)",
+    "outputs": 59,
+    "buoyancy_flux_k_m_s": 0.010687,
+    "zi_parcel_km": 4.7855,
+    "zi_hpbl_km": 5.0765,
+    "condensation_level_km": 4.1037,
+    "wstar_m_s": 0.63643,
+    "wstar_median_m_s": 0.68072,
+    "w_p999_below_16km_m_s": 1.6327,
+    "w_p999_below_16km_clear_m_s": 1.0829,
+    "sigma_max_over_wstar": 0.45068,
+    "p999_over_wstar_upper_layer": 1.755,
+    "top5_over_wstar_upper_layer": 1.0309,
+    "skewness_upper_layer": 1.2982,
+    "rule_start_m_s": 1.4002
+   },
+   {
+    "box": "sea night 6 km",
+    "period": "second day",
+    "outputs": 4,
+    "buoyancy_flux_k_m_s": 0.010277,
+    "zi_parcel_km": 5.9533,
+    "zi_hpbl_km": 6.1026,
+    "condensation_level_km": 5.7092,
+    "wstar_m_s": 0.70316,
+    "wstar_median_m_s": 0.70322,
+    "w_p999_below_16km_m_s": 1.1115,
+    "w_p999_below_16km_clear_m_s": 1.1088,
+    "sigma_max_over_wstar": 0.47708,
+    "p999_over_wstar_upper_layer": 1.7296,
+    "top5_over_wstar_upper_layer": 1.1482,
+    "skewness_upper_layer": 1.4463,
+    "rule_start_m_s": 1.547
+   },
+   {
+    "box": "sea night 3 km",
+    "period": "second day",
+    "outputs": 4,
+    "buoyancy_flux_k_m_s": 0.010353,
+    "zi_parcel_km": 5.8756,
+    "zi_hpbl_km": 6.0529,
+    "condensation_level_km": 5.7092,
+    "wstar_m_s": 0.70178,
+    "wstar_median_m_s": 0.70187,
+    "w_p999_below_16km_m_s": 1.353,
+    "w_p999_below_16km_clear_m_s": 1.3536,
+    "sigma_max_over_wstar": 0.62083,
+    "p999_over_wstar_upper_layer": 2.1086,
+    "top5_over_wstar_upper_layer": 1.464,
+    "skewness_upper_layer": 1.3277,
+    "rule_start_m_s": 1.5439
+   },
+   {
+    "box": "sea night 2 km",
+    "period": "second day",
+    "outputs": 4,
+    "buoyancy_flux_k_m_s": 0.010339,
+    "zi_parcel_km": 5.8399,
+    "zi_hpbl_km": 6.037,
+    "condensation_level_km": 5.7092,
+    "wstar_m_s": 0.70003,
+    "wstar_median_m_s": 0.69975,
+    "w_p999_below_16km_m_s": 1.4546,
+    "w_p999_below_16km_clear_m_s": 1.4523,
+    "sigma_max_over_wstar": 0.67596,
+    "p999_over_wstar_upper_layer": 2.2842,
+    "top5_over_wstar_upper_layer": 1.5757,
+    "skewness_upper_layer": 1.1644,
+    "rule_start_m_s": 1.5401
+   }
+  ]
+ },
+ "longwave_check": {
+  "product": "climate/results/gcm/longwave_check_trigger_l15.json",
+  "all_cases": {
+   "cases": [
+    "A28R_301k_cold_massflux_wstart_l15 year 1",
+    "A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc year 1"
+   ],
+   "provisional_l15": {
+    "largest_layer_mean_w_m2": 3.06,
+    "holds": false
+   }
+  },
+  "near_301k": {
+   "cases": []
+  }
+ },
+ "producer": {
+  "domain": "climate",
+  "script": "/media/projectspace/terluna-research/session-tools/agents/climate-trigger/trigger_analysis.py",
+  "script_sha256": "3d2f470d28e6f921",
+  "imported": {
+   "levels15_analysis_copy": "ce9925c0e077a137"
+  },
+  "worktree_commit": "3fd43d5",
+  "files": {
+   "gcm/massflux_fortran.py": "d7d61daf09383524",
+   "gcm/massflux.py": "5493e4056f08b543",
+   "gcm/exoplasim_run.py": "2f606cb5e231fff3",
+   "crm/box_upper_air.py": "ed758c5ce66be8ad"
+  }
+ },
+ "evidence": "Two-year GCM tests at 15 levels with the provisional longwave refit, one realization each from the design climate's year-19 restart carried onto the levels: the Betts-Miller baseline's exact flags with the lunar free-convection constant over water, and the mass-flux scheme with the boundary layer's starting speed. They are the first two years of a spin-up, so they show the direction and early size of each change and not a settled climate. The CM1 numbers are the settled boxes (the sea box's third lunar day, the land box's second); CM1's surface fluxes come from its own surface layer. The bit checks compare the GCM's own outputs and restarts; the offline tests are the scheme's Python copy on the runs' 3-day mean site columns.",
+ "reading_rule": "stages[stage][run]: rain by quarter (sunrise-noon, noon-sunset, sunset-midnight, midnight-sunrise; mm/day, with the convective part) at the Near-side Sea's and the land box's cells; their evaporation (mm/day), latent and sensible heat (W/m2, upward) and the lowest level's wind (m/s), by quarter and over the lunar day; the sea site's upper air on the box's levels at upper_air_heights_km; near the ground the lowest 0.6 km (the 15-level bottom layer), the 1.16 km level, PlaSim's 2 m air (read from the 0.3 km level) and the ground, vapour as a mixing ratio; global: the yearly summaries' means, the convective share of the area-mean rain, evaporation and surface heat, and the top two levels (water in ppmv). cm1_sea: the sea box's lunar-day evaporation and its near-ground air by mass over 0-0.5 and 0-0.6 km. free_convection: the sea site's evaporation with each constant against CM1's, and the share of the baseline's excess over CM1 the lunar constant removes. criteria[stage]: the brief's (a) upper air at 41.8 and 55.8 km, the share of the baseline's gap to CM1 closed (at least half); (b) the sea's night at most 0.5 mm/day, evening at least two-thirds of CM1's, afternoon within half to one and a half times CM1's; (c) the land's afternoon nearer CM1's than the baseline's, its morning at least 1 mm/day; (d) the sea's lowest 0.6 km vapour no further from CM1's lowest 0.5 km than the baseline's; (e) the imbalance at the top of the air within 3 W/m2 of the baseline's; (f) the top two levels; and the stop rule, convection's share of the rain under 0.75. gcm_trigger_start: the surface parcel on the runs' 3-day mean site columns under the IFS's start and the boundary layer's; start_sensitivity: the share reaching cloud at fixed starting speeds and sub-cloud mixing; cm1_thermals_summary: CM1's vertical wind against its own w*."
+}

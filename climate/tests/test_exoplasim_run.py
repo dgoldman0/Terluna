@@ -406,6 +406,65 @@ class RunnerTests(unittest.TestCase):
         self.assertLess(u10[1], u10[0])
         self.assertLess(u10[0], u10[2])
 
+    def test_the_free_convection_constant_goes_as_gravity_over_surface_pressure(self):
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIsNone(inspect.signature(f).parameters['free_convection'].default)
+        self.assertEqual(er.EXOPLASIM_FREE_CONVECTION, 0.0016)                    # fluxmod.f90's own constant
+        earth = er.free_convection_setting('lunar', er.STANDARD_GRAVITY, er.STANDARD_ATMOSPHERE)
+        self.assertAlmostEqual(earth['constant'], 0.0016, places=15)              # Earth's gravity and pressure: its own
+        g, p = 1.6242188765608128, 121590.0
+        moon = er.free_convection_setting('lunar', g, p)
+        self.assertAlmostEqual(moon['factor'], (g / 9.80665 * 101325.0 / p) ** (1.0 / 3.0), places=14)
+        self.assertAlmostEqual(moon['constant'], 0.000827, places=6)
+        # g^(1/3) at a given pressure and p^(-1/3) at a given gravity: the tank law's (g kappa^2 / (theta_v nu))^(1/3)
+        # with kappa and nu inversely as the density
+        self.assertAlmostEqual(er.free_convection_setting('lunar', 8.0 * g, p)['constant'] / moon['constant'], 2.0,
+                               places=12)
+        self.assertAlmostEqual(er.free_convection_setting('lunar', g, 8.0 * p)['constant'] / moon['constant'], 0.5,
+                               places=12)
+        for choice, gravity in (('earth', g), ('mars', g), ('lunar', 0.0)):
+            with self.assertRaises(ValueError):
+                er.free_convection_setting(choice, gravity, p)
+
+    def test_the_free_convection_patch_reads_the_constant_from_the_namelist(self):
+        import shutil
+        import subprocess
+        for _, marker, edits in er.FREE_CONVECTION_PATCHES:          # the marker marks added text only
+            self.assertTrue(any(marker in new for _, new in edits))
+            self.assertFalse(any(marker in old for old, _ in edits))
+        self.assertTrue(all(len(line) <= 132 for _, new in er.FREE_CONVECTION_EDITS for line in new.splitlines()))
+        source = er.TWILIGHT_PACKAGE / 'exoplasim' / 'plasim' / 'src' / 'fluxmod.f90'
+        if source.exists():                                           # each anchor once, before or after the patch
+            text = source.read_text()
+            patched = er.FREE_CONVECTION_MARKER in text
+            for old, new in er.FREE_CONVECTION_EDITS:
+                self.assertEqual(text.count(new if patched else old), 1)
+        self.assertIn("'fluxmod_namelist', 'CFREE'", Path(er.__file__).read_text())
+        # Compiled with PlaSim's flags, the namelist variable at its default gives the transfer factor bit for bit as the
+        # literal did, over the range of temperature differences, winds and neutral coefficients the sea meets.
+        if shutil.which('gfortran') is None:
+            self.skipTest('no gfortran')
+        line = er.FREE_CONVECTION_EDITS[-1]
+        program = ('      module fc\n      real :: cfree = 0.0016\n      end module fc\n      program check\n      use fc\n'
+                   '      implicit none\n      integer :: i, j, k, nbad\n      integer, parameter :: jhor = 1\n'
+                   '      real :: zdth, zabsu2(1), zkblnz2, zrifh(1), zold\n      namelist/fc_nl/cfree\n'
+                   "      open(11,file='fc_nl')\n      read(11,fc_nl)\n      close(11)\n      nbad = 0\n"
+                   '      do i = 1, 60\n       zdth = 0.05*i\n       do j = 1, 40\n        zabsu2(1) = 1.+0.9*j*j\n'
+                   '        do k = 1, 30\n         zkblnz2 = 2.e-4*k\n'
+                   + line[0].replace('zrifh(jhor)=', 'zold=') + '     &                  /zkblnz2)**1.25)**0.8\n'
+                   + line[1] + '     &                  /zkblnz2)**1.25)**0.8\n'
+                   '         if (transfer(zold,1_8) /= transfer(zrifh(1),1_8)) nbad = nbad+1\n'
+                   '        enddo\n       enddo\n      enddo\n      print *, nbad, cfree\n      end program check\n')
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / 'check.f90').write_text(program)
+            (Path(tmp) / 'fc_nl').write_text(' &fc_nl\n /\n')
+            subprocess.run(['gfortran', '-O3', '-cpp', '-fcheck=all', '-ffpe-trap=invalid,zero,overflow',
+                            '-finit-real=zero', '-fdefault-real-8', '-o', 'check', 'check.f90'], cwd=tmp, check=True)
+            out = subprocess.run(['./check'], cwd=tmp, check=True, capture_output=True, text=True).stdout.split()
+        self.assertEqual(int(out[0]), 0)
+        self.assertEqual(float(out[1]), 0.0016)
+
     def test_new_runs_take_the_301_k_ledger_in_the_clear_share(self):
         import inspect
         for f in (er.run, er.configuration):
