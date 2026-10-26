@@ -736,6 +736,134 @@ SBM_TRIGGER_EDITS = [
      "(cape_bm > 0. .and. zcapet < cape_bm)) then\n"),
 ]
 SBM_TRIGGER_PATCHES = [('rainmod.f90', SBM_TRIGGER_MARKER, SBM_TRIGGER_EDITS)]
+# Two more options for the simplified Betts-Miller scheme (25 October), each off by default. The cloud-depth test
+# (dpdeep_bm > 0, Pa) lets a column convect deep only where the parcel's cloud, from the condensation level of the
+# lowest level's air (found by bisection in log pressure with PlaSim's saturation) up to the scheme's top level, is
+# more than dpdeep_bm thick; a thinner cloud takes PlaSim's shallow scheme, which does not rain. It is the IFS's rule
+# (documentation Cy36r1, Part IV, section 6.4: a cloud from its LCL up thicker than 200 hPa is deep), where PlaSim's
+# own pdeep tests the top's pressure alone. The mixing within layers (nsub_bm > 1, with eps_bm > 0) carries the
+# parcel across each layer in nsub_bm equal steps of log pressure, each lifting it dry adiabatically, mixing in its
+# step's share of the surrounding air interpolated there in log pressure, and condensing the mixture, so the mixing
+# acts through the thick layers rather than once at their tops; one step is the scheme as before, and eps_bm 0 never
+# takes the steps. Like the CAPE trigger it is a patch of its own on the scheme's text, applied only for a run that
+# sets either option, on a source with or without the trigger; with both off the routine's arithmetic is unchanged.
+SBM_DEPTH_MARKER = 'Terluna: the cloud-depth test and the mixing within layers'
+SBM_DEPTH_LOOP_OLD = """\
+       ztp(NLEV)=ztnew
+       do jlev=NLEM,1,-1
+        ztnew=ztnew*(sigma(jlev)/sigma(jlev+1))**akap
+        if(eps_bm > 0.) then
+         zmix=1.-exp(-eps_bm*log(sigma(jlev+1)/sigma(jlev)))
+         ztnew=(1.-zmix)*ztnew+zmix*zte(jhor,jlev)
+         zqnew=(1.-zmix)*zqnew+zmix*zqe(jhor,jlev)
+        endif
+        call sbmsat(ztnew,zqnew,zp(jlev))
+        ztp(jlev)=ztnew
+       enddo
+"""
+SBM_DEPTH_LOOP_NEW = """\
+       ztp(NLEV)=ztnew
+       do jlev=NLEM,1,-1
+        if(eps_bm > 0. .and. nsub_bm > 1) then
+!        Terluna: the mixing within layers: nsub_bm equal steps of log pressure, each lifting the parcel dry
+!        adiabatically, mixing in its share of the air interpolated there in log pressure and condensing the mixture
+         zsub=log(sigma(jlev+1)/sigma(jlev))/real(nsub_bm)
+         zmix=1.-exp(-eps_bm*zsub)
+         zstep=exp(-zsub)
+         zlift=exp(-akap*zsub)
+         zsig0=sigma(jlev+1)
+         do jsub=1,nsub_bm
+          if(jsub < nsub_bm) then
+           zsig1=zsig0*zstep
+           ztnew=ztnew*zlift
+          else
+           zsig1=sigma(jlev)
+           ztnew=ztnew*(zsig1/zsig0)**akap
+          endif
+          zw=real(jsub)/real(nsub_bm)
+          ztnew=(1.-zmix)*ztnew+zmix*((1.-zw)*zte(jhor,jlev+1)+zw*zte(jhor,jlev))
+          zqnew=(1.-zmix)*zqnew+zmix*((1.-zw)*zqe(jhor,jlev+1)+zw*zqe(jhor,jlev))
+          call sbmsat(ztnew,zqnew,dp(jhor)*zsig1)
+          zsig0=zsig1
+         enddo
+        else
+         ztnew=ztnew*(sigma(jlev)/sigma(jlev+1))**akap
+         if(eps_bm > 0.) then
+          zmix=1.-exp(-eps_bm*log(sigma(jlev+1)/sigma(jlev)))
+          ztnew=(1.-zmix)*ztnew+zmix*zte(jhor,jlev)
+          zqnew=(1.-zmix)*zqnew+zmix*zqe(jhor,jlev)
+         endif
+         call sbmsat(ztnew,zqnew,zp(jlev))
+        endif
+        ztp(jlev)=ztnew
+       enddo
+"""
+SBM_DEPTH_TEST = """\
+!      Terluna: the cloud-depth test: deep convection only where the parcel's cloud, from the condensation level of
+!      the lowest level's air up to the top, is more than dpdeep_bm thick; a thinner cloud takes the shallow scheme
+       if(dpdeep_bm > 0.) then
+        zpbase=sbmlcl(zte(jhor,NLEV),zqe(jhor,NLEV),zp(NLEV),zp(jtop))
+        if(zpbase-zp(jtop) <= dpdeep_bm) then
+         if(nshallow == 1) then
+          ishallow(jhor)=1
+          ilift(jhor)=NLEP
+          itop(jhor)=jtop
+         endif
+         cycle
+        endif
+       endif
+"""
+SBM_DEPTH_LCL = """\
+!
+      real function sbmlcl(pt,pq,pp,ptop)
+!     Terluna: the pressure at which air of temperature pt and vapour pq at pp, lifted dry adiabatically with its
+!     vapour kept, reaches saturation: pp if it is saturated there, ptop if it is still unsaturated at ptop, and
+!     otherwise found by bisection in log pressure between the two
+      real, intent(in) :: pt,pq,pp,ptop
+      real :: zlo,zhi,zmid,zpm
+      integer :: jit
+      if(pq >= sbmqs(pt,pp)) then
+       sbmlcl=pp
+       return
+      endif
+      if(pq < sbmqs(pt*(ptop/pp)**akap,ptop)) then
+       sbmlcl=ptop
+       return
+      endif
+      zlo=log(ptop)
+      zhi=log(pp)
+      do jit=1,24
+       zmid=0.5*(zlo+zhi)
+       zpm=exp(zmid)
+       if(pq >= sbmqs(pt*(zpm/pp)**akap,zpm)) then
+        zlo=zmid
+       else
+        zhi=zmid
+       endif
+      enddo
+      sbmlcl=exp(0.5*(zlo+zhi))
+      end function sbmlcl
+"""
+SBM_DEPTH_EDITS = [
+    ("      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n",
+     "      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n"
+     "      real :: dpdeep_bm = 0.  ! Terluna: the cloud-depth test: deep only above this depth (Pa; 0: no test)\n"
+     "      integer :: nsub_bm = 1  ! the parcel's mixing steps within each layer (1: one a layer)\n"),
+    ("      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n",
+     "      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n"
+     f"      namelist/rainmod_nl/dpdeep_bm,nsub_bm   ! {SBM_DEPTH_MARKER}\n"),
+    ("      call mpbcr(cin_bm)\n", "      call mpbcr(cin_bm)\n      call mpbcr(dpdeep_bm)\n      call mpbci(nsub_bm)\n"),
+    ("      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau\n",
+     "      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau\n"
+     "      real :: zsub, zstep, zlift, zsig0, zsig1, zw, zpbase   ! Terluna: the cloud-depth test and the mixing within "
+     "layers\n"
+     "      integer :: jsub\n"),
+    (SBM_DEPTH_LOOP_OLD, SBM_DEPTH_LOOP_NEW),
+    ("!      the relaxation toward the references, from the lowest level to the top\n",
+     SBM_DEPTH_TEST + "!      the relaxation toward the references, from the lowest level to the top\n"),
+    ("      end function sbmqs\n", "      end function sbmqs\n" + SBM_DEPTH_LCL),
+]
+SBM_DEPTH_PATCHES = [('rainmod.f90', SBM_DEPTH_MARKER, SBM_DEPTH_EDITS)]
 # CO2 and O2 in PlaSim's sunlight (radmod.f90, swr; climate/gcm/plasim_shortwave.py, GAS_BANDS). PlaSim's two bands hold
 # no CO2 or O2, whose strongest lines the Moon's deep column takes high up, so it puts that sunlight where its water
 # is. NGASBANDS 1 adds CO2 and O2 in the near-infrared band and O2 in the visible, each an absorptivity of its own
@@ -1218,17 +1346,18 @@ def use_twilight_package():
     sys.path.insert(0, str(TWILIGHT_PACKAGE))
 
 
-def ensure_patched(twilight: bool = False, trigger: bool = False) -> dict:
+def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
-    so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy and the scheme's CAPE trigger for a run
-    that sets it (SBM_TRIGGER_PATCHES), and return each patched file's hash for the run key."""
+    so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
+    (SBM_TRIGGER_PATCHES) and its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) for a run that sets
+    them, and return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
         raise RuntimeError(f'the twilight patch belongs only in {TWILIGHT_PACKAGE}, not in {src}')
     hashes = {}
     for name, marker, edits in (PATCHES + (TWILIGHT_PATCHES if twilight else [])
-                                + (SBM_TRIGGER_PATCHES if trigger else [])):
+                                + (SBM_TRIGGER_PATCHES if trigger else []) + (SBM_DEPTH_PATCHES if depth else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1264,6 +1393,7 @@ def rain_evaporation_setting(gamma) -> dict:
 
 SBM_DEFAULTS = dict(tau_s=7200.0, rh=0.7, eps=0.0, cin_j_kg=0.0)   # Frierson's 2 h and 70%; the lunar options off
 SBM_TRIGGER_SETTINGS = ('cape_j_kg', 'trigger_eps')                   # the CAPE trigger, recorded only when set
+SBM_DEPTH_SETTINGS = ('deep_hpa', 'mixing_steps')                     # SBM_DEPTH_PATCHES' options, likewise
 
 
 def convection_setting(scheme='sbm', **values) -> dict:
@@ -1272,10 +1402,12 @@ def convection_setting(scheme='sbm', **values) -> dict:
     parcel's mixing per e-folding of pressure eps and its inhibition limit cin_j_kg (0: none), each defaulting to
     SBM_DEFAULTS; left out, the configuration keeps Kuo's scheme (nprc 1). The CAPE trigger (SBM_TRIGGER_PATCHES)
     joins the record only when cape_j_kg is set above 0: the CAPE a parcel mixing trigger_eps per e-folding of
-    pressure (default 0) must have for the column to convect deep."""
+    pressure (default 0) must have for the column to convect deep. The options of SBM_DEPTH_PATCHES join it only
+    when set: deep_hpa above 0, the depth (hPa) the parcel's cloud must exceed for deep convection, and mixing_steps
+    above 1, the steps of the parcel's mixing within each layer, which need eps above 0."""
     if scheme != 'sbm':
         raise ValueError(f"the convection scheme is 'sbm' (Kuo's is the default, left out), not {scheme!r}")
-    unknown = set(values) - set(SBM_DEFAULTS) - set(SBM_TRIGGER_SETTINGS)
+    unknown = set(values) - set(SBM_DEFAULTS) - set(SBM_TRIGGER_SETTINGS) - set(SBM_DEPTH_SETTINGS)
     if unknown:
         raise ValueError(f'unknown settings of the simplified Betts-Miller scheme: {sorted(unknown)}')
     s = {k: float(values.get(k, v) if values.get(k) is not None else v) for k, v in SBM_DEFAULTS.items()}
@@ -1288,7 +1420,41 @@ def convection_setting(scheme='sbm', **values) -> dict:
             raise ValueError(f"the CAPE trigger's mixing must not be negative: {s['trigger_eps']}")
     elif (cape is not None and float(cape) < 0.0) or (mix is not None and float(mix) != 0.0):
         raise ValueError('the CAPE trigger takes a positive cape_j_kg, and its mixing only with it')
+    deep, steps = values.get('deep_hpa'), values.get('mixing_steps')
+    if deep is not None:
+        if not 0.0 <= float(deep) < 1000.0:
+            raise ValueError(f'the cloud-depth test takes a depth from 0 to 1000 hPa, not {deep}')
+        if float(deep) > 0.0:
+            s['deep_hpa'] = float(deep)
+    if steps is not None:
+        if int(steps) != steps or int(steps) < 1:
+            raise ValueError(f'the mixing within layers takes a whole number of steps from 1, not {steps}')
+        if int(steps) > 1:
+            if s['eps'] <= 0.0:
+                raise ValueError('the mixing within layers needs the parcel to mix (eps above 0)')
+            s['mixing_steps'] = int(steps)
     return dict(scheme='sbm', nprc=2, **s)
+
+
+def convection_namelist(c: dict) -> list:
+    """The rainmod namelist entries (name, text) the scheme's record sets: its settings, the CAPE trigger's and the
+    cloud-depth patch's only when the record holds them, the depth in Pa as PlaSim reads it."""
+    entries = [('NPRC', str(c['nprc']))]
+    for key, name in (('tau_s', 'TAU_BM'), ('rh', 'RH_BM'), ('eps', 'EPS_BM'), ('cin_j_kg', 'CIN_BM'),
+                      ('cape_j_kg', 'CAPE_BM'), ('trigger_eps', 'EPST_BM')):
+        if key in c:                                                  # the CAPE trigger only when set
+            entries.append((name, repr(float(c[key]))))
+    if 'deep_hpa' in c:
+        entries.append(('DPDEEP_BM', repr(float(c['deep_hpa']) * 100.0)))
+    if 'mixing_steps' in c:
+        entries.append(('NSUB_BM', str(int(c['mixing_steps']))))
+    return entries
+
+
+def uses_depth_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) set an option of SBM_DEPTH_PATCHES."""
+    return bool(convection) and ((convection.get('deep_hpa') or 0.0) > 0.0
+                                 or (convection.get('mixing_steps') or 1) > 1)
 
 
 def cold_cloud_factors(path) -> dict:
@@ -1359,7 +1525,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         raise ValueError(f'longwave_fit must be one of {tuple(LONGWAVE_FITS)}')
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'),
-               source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0)),
+               source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
+                                     depth=uses_depth_patch(convection)),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -1608,12 +1775,8 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     if 'rain_evaporation' in cfg:
         model._edit_namelist('rainmod_namelist', 'GAMMA', repr(float(cfg['rain_evaporation']['gamma'])))
     if 'convection' in cfg:
-        c = cfg['convection']
-        model._edit_namelist('rainmod_namelist', 'NPRC', str(c['nprc']))
-        for key, name in (('tau_s', 'TAU_BM'), ('rh', 'RH_BM'), ('eps', 'EPS_BM'), ('cin_j_kg', 'CIN_BM'),
-                          ('cape_j_kg', 'CAPE_BM'), ('trigger_eps', 'EPST_BM')):
-            if key in c:                                              # the CAPE trigger only when set
-                model._edit_namelist('rainmod_namelist', name, repr(float(c[key])))
+        for name, text in convection_namelist(cfg['convection']):
+            model._edit_namelist('rainmod_namelist', name, text)
     if m['surface_cloud_rcrit'] > 0.0:                                 # the lowest layer is the last of RCRIT
         model._edit_namelist('rainmod_namelist', f"RCRIT({m['layers']})", str(float(m['surface_cloud_rcrit'])))
     if 'top_infrared_w_m2' in cfg:
@@ -1983,6 +2146,12 @@ def main(argv=None) -> int:
                              'SBM_TRIGGER_PATCHES)')
     parser.add_argument('--sbm-trigger-eps', type=float, metavar='EPS',
                         help="the CAPE trigger's parcel mixing per e-folding of pressure (0)")
+    parser.add_argument('--sbm-deep-hpa', type=float, metavar='HPA',
+                        help="its cloud-depth test: deep convection only where the parcel's cloud, from its "
+                             'condensation level to its top, is thicker than this (0: none; SBM_DEPTH_PATCHES)')
+    parser.add_argument('--sbm-mixing-steps', type=int, metavar='N',
+                        help="the parcel's mixing within each layer in N steps of log pressure (1: one a layer; "
+                             'needs --sbm-eps; SBM_DEPTH_PATCHES)')
     parser.add_argument('--rain-evaporation', type=float, metavar='GAMMA',
                         help="PlaSim's constant for the evaporation of falling rain and snow (rainmod's gamma, "
                              f'{PLASIM_RAIN_GAMMA} its own; part of the run key)')
@@ -2028,7 +2197,8 @@ def main(argv=None) -> int:
                args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation,
                args.moisture_diagnostics,
                dict(tau_s=args.sbm_tau, rh=args.sbm_rh, eps=args.sbm_eps, cin_j_kg=args.sbm_cin,
-                    cape_j_kg=args.sbm_cape, trigger_eps=args.sbm_trigger_eps)
+                    cape_j_kg=args.sbm_cape, trigger_eps=args.sbm_trigger_eps, deep_hpa=args.sbm_deep_hpa,
+                    mixing_steps=args.sbm_mixing_steps)
                if args.convection == 'sbm' else None)
 
 
