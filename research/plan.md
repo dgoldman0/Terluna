@@ -371,7 +371,8 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    melt within 1.6 km (2 cm flakes) to 3.7–5.2 km (10–20 cm), and fall the last 15–25 km as rain. The large flakes'
    9–15 mm drops bring 81–93% of their water down, where small flakes' drops evaporate. The 24–25 October lunar runs
    carried vapour diffusivity at 0.651 of McSnow's formula, now fixed (6e91689); heavier snow then grows 11–26% larger,
-   and the remaining reruns are listed. Next, at the author's word: those reruns, a breakup law, a storm whose vapour
+   and the remaining reruns are listed; they are held while the climate work uses the compute and come first when the
+   snow work resumes (register, 26 October). Next, at the author's word: a breakup law, a storm whose vapour
    responds to its crystals, wet flakes sticking together below the freezing level and the storms' optics.
    Methane's chemistry in the middle atmosphere's column is answered without
    building it (register, 21 October): behind the titania stack nothing breaks methane below the base. The GCM's rain
@@ -404,11 +405,16 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    quarter and changes little else. Mixing the scheme's reference cools the upper air by only 2–2.5 K and warms the
    ground 1.7–2.4 K with weaker sea convection, and a CAPE threshold was tried and set aside. Open, with
    recommendations:
-   - **The scheme with the depth test** for a 15-year run with the settling and exobase checks and its own longwave
-     refit (recommended; the author's call), the remaining night rain and the warm upper air recorded as known biases.
-     PlaSim's shallow scheme caps its tops at 700 hPa, an Earth value, which binds in 1–1.4% of cells without mixing.
-   - **A mass-flux scheme with mixing updrafts**, if matching CM1's convection matters more than its cost.
-   - **Why the GCM's lowest level is moister** than CM1's, which the mixing made worse.
+   - **Vertical levels and a mass-flux scheme** (register, 26 October; under way). PlaSim goes onto 14 levels, the new
+     ones near 2.4, 6, 8 and 13.5 km, where CM1's 6 km boundary layer and its night clouds' cap at 7–8 km lie inside
+     one layer of today's 10. The shallow scheme's 700 hPa top, an Earth value, becomes a cap tied to the depth test.
+     A mass-flux scheme on Tiedtke's model and the IFS's later forms is built offline from CM1's measured mixing,
+     cloud depths and heating and tested on CM1's and the GCM's columns before it goes into PlaSim. A 15-year run with
+     the settling and exobase checks and its own longwave refit follows on the configuration that holds; the depth
+     test's 15-year run is held.
+   - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
+     12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. The
+     GCM's larger evaporation at the sea site, about 4.0 against 2.7 mm/day, stays open.
    - **The scheme's adoption and its reference humidity** (the author's call, after the test): 0.7 brings the sea's
      nights nearer CM1's.
    - **A corrected rerun of one reference ring or box**, to size the boundary layer's bias in every earlier CM1 run
