@@ -2,12 +2,13 @@
 
 The design-climate storm boxes hold their snow far above the freezing level. Weighted by the snow each column holds,
 half of it lies within 18–20 km of the freezing level and nine-tenths within 30–35 km, and the snow's top stands a
-median 29–41 km above it, at −34 °C over the Near-side Sea and −50 °C over land. Light snow of 0.3 mm/h does not reach
-the load analogy's survivable span of 10–14 cm before the freezing level. Through the reference column, which spans the
-lowest 16.3 km of that snow zone from −15 °C, its flakes arrive with a 90th percentile of 4.2–4.5 cm, a 99th of 5.8–6.6
-cm and the largest at 8–8.5 cm, converged under four times the superparticles. The light snow that forms higher, in the
-boxes' snow between −15 °C and −30 °C, has not yet been followed to the freezing level. Below the freezing level the
-flakes melt within 1–3 km while they fall, and these runs follow no aggregation there.
+median 29–41 km above it, at −34 °C over the Near-side Sea and −50 °C over land. Whether light snow of 0.3 mm/h reaches
+the load analogy's survivable span of 10–14 cm before the freezing level depends on how high in that snow zone it forms.
+Through the reference column, which spans its lowest 16.3 km from −15 °C, the flakes arrive with a 90th percentile of
+4.2–4.5 cm, a 99th of 5.8–6.6 cm and the largest at 8–8.5 cm, converged under four times the superparticles. Formed
+near −30 °C and falling twice as far, they arrive with a median of 5.2–5.5 cm, a 90th percentile of 9.7–12.7 cm and a
+99th of 16–25 cm, from runs at two superparticle numbers that agree on the median within 4%. Below the freezing level
+the flakes melt within 1–3 km while they fall, and these runs follow no aggregation there.
 
 ## The storm boxes
 
@@ -53,9 +54,18 @@ the size limit. Below the freezing level the flakes melt within 1–3 km while t
 there as wet, sticky flakes, which these runs do not follow.
 
 The boxes' snow reaches higher than the reference column's top: half of it lies above 18–20 km over the freezing level
-and the −15 °C level stands 15–16 km up in their air. Light snow that forms near −30 °C would fall through about twice
-the depth before it melts, through air where Connolly and co-authors' sticking efficiency is 0.09–0.14, against 0.64
-at −15 °C. Whether those flakes reach the limit has not yet been computed.
+and the −15 °C level stands 15–16 km up in their air. Light snow that forms near −30 °C falls through twice the
+reference column's depth, 32.6 km on the ladder's lapse rate, and through air where Connolly and co-authors' sticking
+efficiency is 0.09–0.14, against 0.64 at −15 °C. Grown from 4 µm seeds with the same supply and crystal flux (case
+`deep_q0.3_f1` of [growth and aggregation](mcsnow_growth_aggregation.md)), its flakes reach the freezing level with a
+median span of 52–55 mm, a 90th percentile of 97–127 mm, a 99th of 16–25 cm and the largest at 30–34 cm, pooled over
+the last 12 of 168 hours, from the run with half the superparticles and the base run. The median agrees within 4%, and
+the 90th percentile by depth agrees down to 10.5 km below the top. Lower down the kilometre bins scatter in both runs,
+and the arriving 90th and 99th percentiles differ by 27% and 41% between the two resolutions, which therefore bound
+them. The 90th percentile first passes 10 cm 23.5–25.5 km below the top. Light snow from −30 °C thus arrives two to
+three times the size of light snow from −15 °C: its median stands at the 5 cm the load analogy gives ordinary flakes and
+its 90th percentile within the 8–15 cm it gives the largest, so light snow reaches the size limit when it forms high in
+the snow zone and stays below it when it forms at −15 °C.
 
 ## Limits
 

@@ -6,9 +6,12 @@ with the reference crystal flux, the 90th percentile of span passes 10 cm about 
 cm about 10 km down; full-size crystals passed both within 1.5 km. With a hundredth of the crystals at 3 mm/h it passes
 10 cm only 14.5 km down and reaches the freezing level at 10.5–10.9 cm, converged; a single run at 1 mm/h gives the same
 depth and 12 cm. Light snow of 0.3 mm/h never reaches 10 cm: with the reference flux it arrives with a 90th percentile
-of 4.2–4.5 cm, converged, and a single run with a tenth of the crystals gives 4.8 cm. Nothing breaks the flakes in these
-runs, so where they converge their sizes are the uncapped bound that stands beside the analogy's cap of about 8–15 cm.
-The two meet where crystals are few, and light snow stays below the cap without breaking. In heavy snow with plentiful
+of 4.2–4.5 cm, converged, and a single run with a tenth of the crystals gives 4.8 cm. Formed near −30 °C instead and
+falling 32.6 km, the same light snow arrives with a median of 5.2–5.5 cm and a 90th percentile of 9.7–12.7 cm, from two
+superparticle numbers that agree on the median within 4%. Nothing breaks the flakes in these runs, so where they
+converge their sizes are the uncapped bound that stands beside the analogy's cap of about 8–15 cm. The two meet where
+crystals are few; light snow stays below the cap without breaking when it forms at −15 °C and reaches it when it forms
+near −30 °C. In heavy snow with plentiful
 crystals, and under continuous saturation at the reference flux, the lower column grows metre-scale aggregates whose
 size falls by half or more when the superparticles are quadrupled; those sizes are unconverged and carry no conclusion.
 
@@ -71,7 +74,7 @@ reproduce the single-crystal results of plan step 3 within 1.3% in span and 2.8%
 
 Sizes are maximum dimensions weighted by mass flux, pooled over the last 12 hours of each run, when the column is
 steady: its statistics at the final time and 12 hours before agree within the sampling scatter. Depths are below the
-column top; the column is 16.28 km deep.
+column top; the column is 16.28 km deep, and 32.56 km for light snow from −30 °C.
 
 | Case | Snow at the freezing level | 90th percentile passes 10 cm | passes 14 cm | Arriving: median | 90th | 99th | largest | Superparticle check |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
@@ -81,11 +84,12 @@ column top; the column is 16.28 km deep.
 | 1 mm/h, reference flux | 0.73 mm/h | 14.5 km | not passed | 65 mm | 119 mm | 190 mm | 31 cm | not run |
 | 0.3 mm/h, reference flux | 0.23–0.27 mm/h | not passed | not passed | 22–24 mm | 42–45 mm | 58–66 mm | 80–85 mm | ×4: agrees throughout |
 | 0.3 mm/h, a tenth of the crystals | 0.25 mm/h | not passed | not passed | 23 mm | 48 mm | 70 mm | 10 cm | not run |
+| 0.3 mm/h from −30 °C, reference flux | 0.23–0.26 mm/h | 23.5–25.5 km | 23.5–25.5 km | 52–55 mm | 97–127 mm | 16–25 cm | 30–34 cm | ×½: median within 4%, 90th percentile agrees to 10.5 km |
 | Saturated, reference flux | 1.6 mm/h | 2.5–3.5 km | 2.5–3.5 km | unconverged | | | | not run; 30–90 superparticles a kilometre below 13 km |
 | Saturated, a hundredth of the crystals | 0.6 mm/h | 13.5 km | not passed | 61 mm | 103 mm | 139 mm | 17 cm | not run |
 
-The ranges give the base run and the run with four times the superparticles. Sizes in the rows without a check are
-single runs.
+The ranges give the base run and the run with four times the superparticles, and for light snow from −30 °C the base run
+and the run with half of them. Sizes in the rows without a check are single runs.
 
 The crystal model's Earth error band, at its two combined edges, moves the 3 mm/h reference-flux depths: the edge
 with 16% less capacitance, 18% less axis growth and 44% slower fall passes 10 cm at 4.5 km and 14 cm at 6.5 km, and the
@@ -105,22 +109,26 @@ down.
 
 ## Convergence
 
-Three cases were rerun with four times the superparticles at the same sampled volume; the others are single runs,
-marked so in the table above. Agreement of the 90th percentile by depth ends at the first two successive kilometre
-bins that differ by more than 25%.
+Three cases were rerun with four times the superparticles at the same sampled volume, and light snow from −30 °C with
+half of them; the others are single runs, marked so in the table above. Agreement of the 90th percentile by depth ends
+at the first two successive kilometre bins that differ by more than 25%.
 
 | Case | Superparticles in the column | 90th percentile agrees down to | Arriving 90th percentile, base and refined |
 |---|---:|---:|---:|
 | 3 mm/h, reference flux, ×4 | 5,256 and 20,861 | 9.5 km | 3.0 m and 1.2 m |
 | 3 mm/h, a hundredth of the crystals, ×4 | 5,170 and 20,819 | the freezing level | 109 mm and 105 mm |
 | 0.3 mm/h, reference flux, ×4 | 12,963 and 52,291 | the freezing level | 42 mm and 45 mm |
+| 0.3 mm/h from −30 °C, ×½ | 30,299 and 15,188 | 10.5 km | 127 mm and 97 mm |
 
 At 3 mm/h and the reference flux the onset depths hold, 7.5–8.5 km for 10 cm and 9.5–10.5 km for 14 cm, while below
 9.5 km the metre-scale tail shrinks with more superparticles: the arriving 90th percentile falls from 3.0 to 1.2 m and
 the median from 30 to 14 cm. The same tail appeared in the 24 October runs and shrank under refinement there. With a
 hundredth of the crystals the whole column agrees within 18% at every kilometre, and in light snow every kilometre but
 one agrees within 29%, with the arriving median at 22 and 24 mm, the 99th percentile at 58 and 66 mm and the largest
-flakes at 80 and 85 mm.
+flakes at 80 and 85 mm. Light snow from −30 °C, run at half its superparticles, agrees down to 10.5 km and keeps its
+arriving median within 4%, at 52 and 55 mm. Below 10.5 km its kilometre bins scatter in both runs, and halving the
+superparticles moves the arriving 90th percentile from 127 to 97 mm and the 99th from 25 to 16 cm, so a finer run would
+settle those two.
 
 ## Along the storm paths
 

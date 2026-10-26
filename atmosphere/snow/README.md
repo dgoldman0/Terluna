@@ -9,9 +9,10 @@ between two bounds. Without any breakup, crystals that grow and aggregate togeth
 span at the lunar freezing level to 4.2–4.5 cm in light snow of 0.3 mm/h and to 10.5–10.9 cm at 3 mm/h with a hundredth
 of the crystals, in runs that converge ([growth and aggregation](mcsnow_growth_aggregation.md)). A comparison of loads
 with Earth's largest observed flakes caps the flakes that break at about 5 cm for ordinary flakes and 8–15 cm for the
-largest ([survival](turbulence_survival.md)). The two meet in moderate snow, and light snow stays below the cap without
-breaking. In heavy snow with plentiful crystals the runs without breakup grow metre-scale aggregates that do not
-converge, and there only a breakup law, which no Earth measurement yet supports, would set the size. Before 24 October
+largest ([survival](turbulence_survival.md)). The two meet in moderate snow. Light snow stays below the cap without
+breaking when it forms at −15 °C and reaches it when it forms near −30 °C. In heavy snow with plentiful crystals the
+runs without breakup grow metre-scale aggregates that do not converge, and there only a breakup law, which no Earth
+measurement yet supports, would set the size. Before 24 October
 the calculations put typical flakes anywhere from below a millimetre to tens of centimetres across, a spread carried by
 the water a storm supplies to growing ice, the number of crystals that share it, and the population solver that follows
 their collisions.
@@ -60,8 +61,10 @@ steady supply, 40% of it at 3 mm/h, and a cloud would hold the rest as supercool
 paths most crystals sublimate before the freezing level, and only the paths held at saturation with dilute crystals give
 a converged size, about 11–12 cm on the median path. The design-climate storm boxes hold half their snow within 18–20 km
 of the freezing level and nine-tenths within 30–35 km ([snow zone](snow_zone_depth.md)). Light snow from the reference
-column's −15 °C top therefore melts before it reaches the size limit; light snow forming higher in that snow zone, near
-−30 °C, has not yet been followed to the freezing level.
+column's −15 °C top therefore melts before it reaches the size limit. Light snow forming near −30 °C, higher in that
+snow zone, falls twice as far and arrives with a median span of 5.2–5.5 cm, a 90th percentile of 9.7–12.7 cm and a 99th
+of 16–25 cm, from runs at two superparticle numbers that agree on the median within 4% and on the 90th percentile
+within 27%. It reaches the size limit, so whether light snow does depends on where in the snow zone it forms.
 
 ## The plan, in order
 
@@ -93,8 +96,9 @@ followed:
 8. **Light snow and melting**: how deep the storm boxes' snow zone stands above the freezing level, and whether light
    snow reaches the size limit before it melts. Done 25 October ([results](snow_zone_depth.md)).
 
-Before the optics, four things remain open: the heavy-snow tail, which no run converges and which the Earth check
-overgrows tenfold at 9 mm/h; a storm whose vapour responds to its crystals; riming of the vapour that flakes leave
+Before the optics, five things remain open: the heavy-snow tail, which no run converges and which the Earth check
+overgrows tenfold at 9 mm/h; the 90th and 99th percentiles of light snow from −30 °C, which halving the superparticles
+moves by 27% and 41%; a storm whose vapour responds to its crystals; riming of the vapour that flakes leave
 unused; and measurements of whole flakes breaking, flake on flake or under sustained load, which would show whether
 lunar flakes break at all.
 
