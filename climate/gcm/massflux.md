@@ -591,6 +591,17 @@ reading of its arithmetic), and its dry adjustment mixes only where the air turn
 the scheme: its test parcel mixes in sub-cloud air at 0.4 of the deep base rate, a rate CM1 does not measure (the
 parameter table above), and that mixing decides more of the trigger than the start does.
 
+## The boundary layer's single columns (27 October)
+
+The single columns of the nonlocal boundary-layer test ([README](README.md), "A nonlocal boundary layer for the Moon")
+run this scheme as their convection on fifteen levels under CM1's forcing, started a quarter before the quarter compared.
+Under every boundary layer tried, PlaSim's own diffusion or the nonlocal scheme, with Earth's mixing length or the lunar
+one, the scheme convects deep on 94–96% of the sea's evening steps and on every step of its night, its tops 57–58 km up,
+where CM1's night cloud stops at 7–8 km, and it rains 0.73–1.06 mm/day at the ground through the night against CM1's
+0.16. Its heating of 4–6 km, 5–10 W/m², holds the columns' mixed layer near 3–4 km. Started from CM1's air at midnight,
+the same columns convect deep on 43–57% of the night's steps, as on CM1's own columns (test 1, 42%). Run (iii), the
+mass-flux baseline with the nonlocal boundary layer, was not made, since the boundary layer's stop rule tripped first.
+
 ## Whether to implement it, and what that would take
 
 **The case for it.** The tests answer the approval's condition for the upper air. Mixing at CM1's measured rates holds

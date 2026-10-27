@@ -57,7 +57,12 @@
       "von_karman_constant": 0.4,
       "sea_surface_source": "ExoPlaSim 3.4.2 seamod.f90 namelist defaults charnock and dz0sea (open-sea roughness max(charnock u*^2/g, dz0sea), with the configured planetary gravity) and fluxmod.f90 parameter vonkarman",
       "free_convection_constant_m_s_K13": 0.0016,
-      "free_convection_source": "ExoPlaSim 3.4.2 fluxmod.f90 surflx: the constant of Miller, Beljaars and Palmer (1992, J. Climate 5, 418-434, eq. 9) in the heat and vapour transfer over water in unstable air, an Earth value set at Earth's gravity and sea-level pressure"
+      "free_convection_source": "ExoPlaSim 3.4.2 fluxmod.f90 surflx: the constant of Miller, Beljaars and Palmer (1992, J. Climate 5, 418-434, eq. 9) in the heat and vapour transfer over water in unstable air, an Earth value set at Earth's gravity and sea-level pressure",
+      "vertical_diffusion_mixing_length_m": 160.0,
+      "vertical_diffusion_wind_floor_m_s": 1.0,
+      "vertical_diffusion_stability_constant": 5.0,
+      "vertical_diffusion_height_temperature_k": 250.0,
+      "vertical_diffusion_source": "ExoPlaSim 3.4.2 fluxmod.f90: the namelist defaults vdiff_lamm (Blackadar's asymptotic mixing length for momentum in vdiff, the length for heat and vapour sqrt(7.5) times it), zumin (the least wind-speed difference between levels in vdiff, and the least squared surface wind in surflx) and vdiff_b = vdiff_c = vdiff_d (the Louis-ECHAM stability constants), and vdiff's parameter ztscal (the temperature at which it counts its heights); the length was set for Earth"
     },
     "swan_41_51_wu": {
       "low_speed_drag_coefficient": 0.0012875,

@@ -2879,6 +2879,176 @@ climate/gcm/.venv/bin/python -m climate.gcm.pbl_mixing --run A28R_301k_cold_mass
     --output /media/projectspace/terluna-research/session-tools/agents/climate-pbl/pbl_mixing_A28R_301k_cold_massflux_l15.json
 ```
 
+#### A nonlocal boundary layer for the Moon: the single-column test (27 October)
+
+On 27 October the author approved the next step after the comparison above: an option for lunar mixing lengths, a
+nonlocal boundary-layer scheme for PlaSim with an explicit entrainment flux, a Python copy tested in a single column
+against the CM1 boxes, the scheme as Fortran in `vdiff`, and two-year runs if the column passed a stop rule set in
+advance: the new scheme had to close at least half of the column's gap to CM1 in the sea night's mixed depth and in its
+0.3–6.2 km vapour drop. It closed neither, so no GCM run was made. The scheme is in [pbl_scheme.py](pbl_scheme.py), the
+column test in [pbl_column.py](pbl_column.py) with its results in
+[pbl_column_l15.json](../results/gcm/pbl_column_l15.json), and the Fortran in [pbl_fortran.py](pbl_fortran.py).
+
+**The scheme.** It is Holtslag and Boville's nonlocal K-profile (1993) as CAM3 implements it, with the explicit
+entrainment flux of Hong, Noh and Dudhia's YSU scheme (2006):
+- **The depth h** comes from the bulk Richardson number between the lowest level and the levels above, in Vogelezang
+  and Holtslag's form with 100 u*² added to the shear. In unstable air the lowest level's virtual potential temperature
+  gains the thermals' excess 8.5 (w′θv′)₀/w_m, and h is the height where the number reaches zero, the inversion's base,
+  as YSU sets it when the entrainment flux is explicit; in stable air the critical number is CAM3's 0.3.
+- **The velocity scales** come from u* and w*: w_m = (u*³ + 0.6 w*³)^1/3 for momentum and w_m/Pr for heat and vapour,
+  the Prandtl number matched to surface-layer similarity at 0.1 h; in stable air u*/φ_h(z/L), Pr = 1.
+- **The profile** K = κ w z (1 − z/h)² holds inside h, where the diffusivity is the larger of the profile's and PlaSim's
+  local one. Above h PlaSim's local diffusion runs alone, with whichever mixing length the run takes.
+- **The countergradient flux** K γ, γ = 7.2 w* (w′c′)₀/(w_m² h), carries heat and vapour.
+- **The entrainment flux** at h is −0.15 (θv/g)(w*³ + 5u*³)/h for θv, −0.15 times the surface buoyancy flux in free
+  convection. Heat and vapour cross the inversion at the rate it sets, each in proportion to its own jump between the
+  levels bracketing h, and the flux falls as (z/h)³ below.
+- **The numerics** follow Holtslag and Boville's appendix B: the nonlocal fluxes enter as an explicit step before
+  `vdiff`'s implicit solve, so the column keeps the sums of σ-thickness times temperature, vapour and wind exactly as
+  `vdiff` keeps them. A vapour profile the explicit step would leave negative keeps its own.
+
+Two choices are the scheme's own, each an interpretation. PlaSim's lowest interface stands 0.6 km up, at or above the
+lunar surface layer's top (0.1 h) for any h below 6 km; there CAM3's surface-layer forms would be evaluated near z/L =
+−20, beyond the range the Dyer–Hicks forms were fitted on, and their heat velocity u*/φ_h grows without bound as u*
+falls. So the scheme takes the outer layer's velocity scales at every interface inside h. And the dry adjustment
+(`mkdca`) stays as it is, the brief's default; how often it still acts is reported below. Holtslag and Boville ran CCM2
+without dry adjustment below its top three layers.
+
+**Its surface fluxes.** `surflx` runs before `vdiff` in each step and leaves its fluxes in PlaSim's module: the sensible
+heat `dshfl` and the evaporation `devap` (downward) and u*³ (`dust3`, from the stress `mkstress` computes). The scheme
+divides them by the surface air's density p_s/(R T_s) and, for the sensible heat, by the moist heat capacity `mkshfl`
+uses, which recovers the kinematic fluxes PlaSim's own transfer formula gave.
+
+**The constants.** Every constant of the scheme is dimensionless:
+
+| Constant | Value | Source |
+|---|---|---|
+| Thermals' excess b | 8.5 | HB93 (3.12), (A14): b = 0.85 d, d ≈ 10 from Troen and Mahrt; CAM `fak` |
+| Countergradient a | 7.2 | HB93 (3.10), (A14): a = 0.85² d; CAM `fakn` |
+| Surface layer's share of h | 0.1 | HB93 (A13); CAM `sffrac` |
+| Unstable gradient constants | 15, 15 | Dyer (1974) via HB93 (A6), (A8); CAM `betam`, `betah` |
+| Stable gradient constant | 5 | HB93 (A3), (A5); CAM `betas` |
+| Critical bulk number, stable; unstable | 0.3; 0 | CAM3 (4.471); YSU (A12) |
+| u*² factor in the bulk number | 100 | Vogelezang and Holtslag (1996) via CAM3 (4.471); CAM `fac` |
+| Entrainment ratio; its u*³ factor | 0.15; 5 | YSU (A8), (A9), after Noh and others (2003) |
+
+The IFS and CAM's 'HBR' variant take 0.2 for the entrainment ratio. The implementations hold Earth limits that the
+scheme leaves out: CAM's floor on h of 700 u* (0.07/f with f at Earth's middle latitudes; the Moon's f is 5 × 10⁻⁶ s⁻¹
+at most), its 50 m rule for cloud in the lowest layer, its 400 hPa ceiling on h, its 30 m free-air length, its least
+diffusivity of 0.01 m²/s and least u* of 0.01 m/s; WRF's YSU (v4.0) caps K at 1000 m²/s and the entrainment zone at
+100 m, takes the inversion's jump as 0.001 K/m times h, caps the countergradient terms at 3 K and 2 g/kg, and sets its
+stable critical number over water from Earth's Coriolis parameter, 10⁻⁴ s⁻¹; Hong and Pan (1996) capped the excess at
+3 K. The one cap kept is YSU's on the entrainment velocity, at most w_m, the layer's own scale.
+
+**PlaSim's own Earth settings.** `--mixing-length lunar` sets `vdiff_lamm` to 160 m × g_E/g = 966 m (2.65 km for heat
+and vapour), the rule [cm1_run.py](../crm/cm1_run.py) applies to CM1's `l_inf`. That rule is a scaling assumption the
+CM1 boxes share, with no independent support yet, so the runs here take it as a sensitivity. The wind floor `zumin`, 1
+m/s, is a velocity, which a column stretched by the gravities keeps, and it matters: on the CM1 boxes' winds laid on
+fifteen levels the difference in wind speed between neighbouring levels from 0.6 to 7.2 km is under 1 m/s at every
+output (medians 0.03–0.41 m/s), so the floor sets the shear in `vdiff`'s diffusivity throughout the lunar boundary
+layer, and the lowest level's speed falls below it on 23% of the sea box's outputs and 67% of the land box's, where
+`surflx` holds the squared wind at 1 m²/s². It is left as it is. `vdiff` also counts its heights at a fixed 250 K.
+
+**The column test.** Each column takes a CM1 box's air on PlaSim's fifteen levels a quarter of the lunar day before the
+quarter compared and runs two quarters with the box's radiation, day-night table, mean ascent, surface fluxes,
+friction velocity and wind, in PlaSim's order: the surface fluxes and the vertical diffusion, radiation, the mass-flux
+convection scheme with PlaSim's evaporation of its rain, the dry adjustment, then the large-scale terms and a saturation
+adjustment. The control runs Python copies of PlaSim's `vdiff` and `mkdca`, which the Fortran tests below hold to the
+model's own routines. All four boundary layers start from the same air under the same forcing: Earth's or the lunar
+length, each with PlaSim's local diffusion alone or the nonlocal scheme beneath it. Means over the compared quarter
+(mixing ratio; the mixed depth by the comparison's rule above, the first height where θv has risen 0.5 K above its
+value at the lowest level):
+
+| Column (quarter compared) | Measure | CM1 | PlaSim (160 m) | 966 m | 160 m, nonlocal | 966 m, nonlocal |
+|---|---|---|---|---|---|---|
+| Sea night (from sunset) | Mixed depth, km | 6.48 | 4.87 | 4.57 | 4.46 | 4.41 |
+| | Vapour drop 0.3–6.2 km, g/kg | 0.34 | 3.34 | 3.08 | 2.37 | 2.29 |
+| | θv rise 6.2–8.2 km, K | 1.38 | 1.96 | 1.86 | 1.59 | 1.58 |
+| | Vapour carried up through 3.2, 5.1, 7.1 km, W/m² | 40, 28, 22 | 12, 2, 0 | 14, 5, 0 | 23, 6, 0 | 25, 8, 1 |
+| | Rain at the ground, mm/day | 0.16 | 1.06 | 0.97 | 0.77 | 0.73 |
+| Sea evening (from noon) | Mixed depth, km | 5.58 | 4.72 | 4.90 | 5.14 | 4.79 |
+| | Vapour drop, g/kg | 2.11 | 3.61 | 3.05 | 2.28 | 2.81 |
+| Land afternoon (from sunrise) | Mixed depth, km | 2.75 | 6.86 | 6.51 | 3.54 | 3.55 |
+| | Vapour drop, g/kg | 3.03 | 5.42 | 5.19 | 4.20 | 4.11 |
+| | Vapour carried up through 3.3, 5.2, 7.3 km, W/m² | 181, 231, 242 | 60, 32, 1 | 68, 46, 11 | 116, 75, 47 | 119, 80, 53 |
+
+The column's fluxes are those of the vertical diffusion and the dry adjustment; CM1's are its whole transport,
+resolved and parameterized. In the sea night the nonlocal scheme with the lunar length leaves the mixed layer 0.46 km
+shallower than PlaSim's own mixing, 29% further from CM1, and closes 35% of the vapour drop's gap; the lunar length
+alone leaves it 0.30 km shallower and closes 8% of the drop's gap. The stop rule tripped. The stable layer that caps
+CM1's night cloud stays in every column (P4: its rise is 1.6–2.0 K against CM1's 1.4). Over land in the afternoon the
+scheme closes 81% of the mixed depth's gap and 55% of the vapour drop's, and the dry adjustment, which acts on
+two-thirds of PlaSim's steps there, stops acting.
+
+**What the columns show.** In all four sea-night columns the convection scheme goes deep on every step, its tops 57–58
+km up, and on 94–96% of the evening's steps before them, where CM1's night cloud stops at 7–8 km. Its heating of 4–6
+km, 5–10 W/m², holds an inversion 3.1–3.2 km up, the nonlocal scheme's median h (CM1's own scheme gives 6.1 km), and
+the scheme's entrainment, 3.9 mm/s, does not lift it through the quarter. Over the night quarter the sea evaporates 3.1
+mm/day into each column, the large-scale terms remove 3.5–3.9, the column rains 0.7–1.1 and its store falls by 1.4–1.5;
+radiation cools it by 185 W/m², the large-scale terms warm it by 75, and it loses 70–81 W/m² of heat. Each budget
+balances to within 0.13 mm/day and a few W/m².
+
+Started instead from CM1's air at midnight, a sensitivity, all four columns keep CM1's night layer through the quarter
+(6.53–6.58 km; vapour drop 0.00–0.53 g/kg, the nonlocal scheme mixing it to nearly nothing against CM1's 0.34), and the
+convection goes deep on 43–57% of steps, as on CM1's own columns (42%, [massflux.md](massflux.md)). So the column loses
+CM1's night layer while it runs through the evening under deep convection, whichever boundary layer it has.
+
+The sea's night also needs mixing the scheme leaves out. CM1's night layer is topped by cloud: radiation cools its
+7–10 km by 12 W/m² after midnight, and 10–12 W/m² of heat goes down through 6–7 km, at least two-thirds of it by CM1's
+own subgrid mixing in the cloud layer and the rest resolved. That flux is two-thirds to four-fifths of the surface's
+buoyancy flux, 15 W/m² in heat units, where a layer driven from the ground entrains 0.15–0.2 of it, which points to
+entrainment driven mostly from the cloud's top (an interpretation). The IFS carries such a term: a K-profile driven by
+the radiative cooling at cloud top (Lock and others 2000) and 0.24 ΔR/(ρc_p) in its entrainment (Cy40r1, section
+3.3).
+
+**The Fortran** (`PBL_PATCHES`, over the free-convection patch): fluxmod gains the switch `nlpbl` and the scheme's
+constants in its namelist; `vdiff`, with the switch on, keeps the state it diffuses, calls `pblnl` after its local
+diffusivities and takes its tendencies against the kept state; `pblcol` is the Python copy step for step. A second
+patch (`DIAGNOSTIC_PATCHES`) completes PlaSim's gridpoint diagnostic 16, the vapour each layer gains by convection,
+which the Betts–Miller and mass-flux routines preset to minus the tendency so far and never complete; with either option
+a run would also write codes 30, 33–37 and 39, the vapour by process and the heating of falling rain's evaporation
+(`BUDGET` in [exoplasim_run.py](exoplasim_run.py)). The runner's `--mixing-length lunar` and `--boundary-layer nonlocal`
+record their settings and write fluxmod's namelist. Checks ([test_pbl_fortran.py](../tests/test_pbl_fortran.py),
+[test_pbl_scheme.py](../tests/test_pbl_scheme.py)), compiled with ExoPlaSim's flags against a stub of PlaSim's module:
+- the patched `vdiff` gives the Python copy's tendencies of temperature, vapour and wind to 1e-10 on 24 lunar and
+  Earth-like columns (unstable, calm, windy, stable, neutral and nearly dry; fifteen levels, ten, and 40 equal layers),
+  with either length and the switch on or off; they agree to 2.3e-12 of each tendency's scale;
+- it keeps each column's sums of σ-thickness times temperature, vapour and wind to 1e-12 of their content;
+- the Python dry adjustment gives PlaSim's `mkdca` tendencies to 1e-10 on 18 columns in two sets, each set's stable
+  column left as it was;
+- with the switch off it prints every digit the unpatched `vdiff` prints;
+- the patched fluxmod.f90 and rainmod.f90 compile with PlaSim's modules on fifteen levels.
+
+No run has set the options, so the shared twilight source carries neither patch and its hashes are unchanged; the
+runner-level checks of runs without the options, the smoke months and the vapour budget's closure in a run remain.
+
+**Evidence and limits.** The columns take CM1's radiation and surface fluxes as given, so neither answers the column's
+own state, and by the compared quarter they run 0.1–2.1 K colder and 0.3–2.8 g/kg moister near the ground than CM1, the
+sea night most (1.8–2.1 K and 1.3–2.1 g/kg). CM1's values come from one realization per box on a 6 km grid. The
+convection in the columns is the mass-flux scheme, whose deep nights the earlier tests found
+([massflux.md](massflux.md)); the GCM's baseline runs the Betts–Miller scheme with PlaSim's shallow scheme, which have
+no Python copy here, so the columns test the boundary layer under one convection scheme. The implicit diffusion is taken
+over the column's 1800 s step, where PlaSim takes it over twice that.
+
+**Sources.** The PDFs and code are in `session-tools/agents/climate-pbl-scheme/literature` on the research drive.
+- **Holtslag and Boville (1993), *J. Climate* 6, 1825–1842.** Read: sections 1–3 and appendices A–B, pp. 1825–1831 and
+  1840–1841 (journals.ametsoc.org, sha256 981cef3c…); the comparisons of sections 4–5 seen in part.
+- **Collins and others (2004), NCAR/TN-464+STR, the CAM 3.0 description.** Read: section 4.11, pp. 149–155
+  (opensky.ucar.edu, sha256 a836d66e…). CAM's `hb_diff.F90` and `pbl_utils.F90` (ESCOMP/CAM, cam_cesm2_2_rel) read for
+  the implementation's constants and limits.
+- **Hong, Noh and Dudhia (2006), *Mon. Wea. Rev.* 134, 2318–2341.** Read: sections 1–3 and appendices A–B
+  (journals.ametsoc.org, sha256 7d0fde5b…); section 4 in part. WRF v4.0's `module_bl_ysu.F` read for its limits.
+- **IFS Documentation Cy40r1, Part IV, section 3.3** (the K-profile, top-driven mixing and entrainment). Read, from the
+  copy the mass-flux work keeps.
+- **Not read:** Troen and Mahrt (1986), Dyer (1974), Vogelezang and Holtslag (1996), Noh and others (2003) and Lock and
+  others (2000), taken as the read sources give them; the WRF technical note; Siebesma, Soares and Teixeira (2007), kept
+  for the eddy-diffusivity mass-flux scheme the author may take up later.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.pbl_column     # three columns, four boundary layers each; 2 minutes
+python3 -m pytest climate/tests/test_pbl_scheme.py climate/tests/test_pbl_fortran.py   # with gfortran, about 20 s
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

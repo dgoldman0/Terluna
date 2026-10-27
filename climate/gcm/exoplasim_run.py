@@ -66,7 +66,11 @@ Kuo's place (rainmod's nprc 3; massflux_fortran.py's patch, applied only for a r
 before. --free-convection lunar takes the free-convection constant in the heat and vapour transfer over water (Miller
 and others 1992; FREE_CONVECTION_EDITS) from Earth's 0.0016 to the Moon's gravity and surface pressure, and
 --massflux-start boundary_layer starts the mass-flux scheme's surface parcel at a multiple of the boundary layer's
-convective velocity (massflux_fortran.START_PATCHES).
+convective velocity (massflux_fortran.START_PATCHES). --mixing-length lunar stretches PlaSim's Blackadar length in its
+vertical diffusion (fluxmod's vdiff_lamm, 160 m) by the ratio of the gravities, and --boundary-layer nonlocal runs the
+nonlocal boundary layer of pbl_scheme.py in vdiff (pbl_fortran.PBL_PATCHES, fluxmod's nlpbl); a run with either also
+writes the vapour each process gives each layer and the heating of falling precipitation's evaporation (BUDGET), with
+PlaSim's convection slot completed for the Betts-Miller and mass-flux schemes (pbl_fortran.DIAGNOSTIC_PATCHES).
 """
 from __future__ import annotations
 import argparse
@@ -84,6 +88,8 @@ from shared.constants import EXOPLASIM_FREE_CONVECTION, STANDARD_ATMOSPHERE, STA
 from climate.gcm import plasim_ice_optics as pio
 from climate.gcm import levels as lv
 from climate.gcm import massflux_fortran as mff
+from climate.gcm import pbl_fortran as pbf
+from climate.gcm import pbl_scheme as pbs
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -229,6 +235,19 @@ MOISTENING = {31: ('dq_diab', 'water_vapour_gained_in_the_layer_summed_over_the_
               32: ('dq_fill', 'water_vapour_gained_in_the_layer_by_the_negative_humidity_fix'),
               40: ('dq_dyn', 'water_vapour_gained_in_the_layer_by_the_dynamics_transport'),
               41: ('dq_dyn_late', 'water_vapour_gained_in_the_layer_by_the_dynamics_horizontal_diffusion')}
+# A run with the boundary-layer options and the moisture diagnostics also writes the vapour each process gives each layer
+# (2026-10-27), from slots PlaSim fills whenever its gridpoint diagnostics are on: the surface's evaporation into the
+# lowest layer (mkevap), vertical diffusion (vdiff), large-scale condensation (mklsp), convection (Kuo's routine, and
+# with pbl_fortran.DIAGNOSTIC_PATCHES the Betts-Miller and mass-flux schemes) and dry adjustment (mkdca), each a water
+# flux as code 31 is, and the evaporation of falling rain and snow (mkrain), whose vapour PlaSim writes as a specific
+# humidity tendency and whose heating is code 30.
+BUDGET = {30: ('dt_evap', 'temperature_tendency_due_to_evaporation_of_falling_precipitation', 'K s-1'),
+          33: ('dq_sfc', 'water_vapour_gained_in_the_lowest_layer_from_the_surface', 'm s-1'),
+          34: ('dq_vdif', 'water_vapour_gained_in_the_layer_by_vertical_diffusion', 'm s-1'),
+          35: ('dq_lsp', 'water_vapour_gained_in_the_layer_by_large_scale_condensation', 'm s-1'),
+          36: ('dq_conv', 'water_vapour_gained_in_the_layer_by_convection', 'm s-1'),
+          37: ('dq_dca', 'water_vapour_gained_in_the_layer_by_dry_convective_adjustment', 'm s-1'),
+          39: ('dq_evap', 'specific_humidity_tendency_due_to_evaporation_of_falling_precipitation', 'kg kg-1 s-1')}
 
 
 def output_variables(model: dict) -> list:
@@ -1418,14 +1437,17 @@ def use_twilight_package():
 
 
 def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
-                   massflux: bool = False, free_convection: bool = False, massflux_start: bool = False) -> dict:
+                   massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
+                   boundary_layer: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
     (SBM_CAP_PATCHES, after the depth patch), the mass-flux scheme (massflux_fortran.MASSFLUX_PATCHES, over the
     Betts-Miller patch) with its surface parcel's starting speed (massflux_fortran.START_PATCHES, over it), and the
-    free-convection constant over water (FREE_CONVECTION_PATCHES, after the 10 m wind's), for a run that sets them, and
-    return each patched file's hash for the run key."""
+    free-convection constant over water (FREE_CONVECTION_PATCHES, after the 10 m wind's), and the nonlocal boundary
+    layer with the convection's vapour diagnostic (pbl_fortran.PBL_PATCHES over the free-convection patch and
+    DIAGNOSTIC_PATCHES over the Betts-Miller and mass-flux patches), for a run that sets them, and return each patched
+    file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1434,12 +1456,16 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
         raise RuntimeError('the free-convection constant goes into the twilight copy, after the 10 m wind patch')
     if massflux_start and not massflux:
         raise RuntimeError("the starting speed's patch goes over the mass-flux scheme's")
+    if boundary_layer and not twilight:
+        raise RuntimeError('the boundary-layer patch goes into the twilight copy, over the free-convection patch')
     hashes = {}
     for name, marker, edits in (PATCHES + (TWILIGHT_PATCHES if twilight else [])
                                 + (SBM_TRIGGER_PATCHES if trigger else []) + (SBM_DEPTH_PATCHES if depth or cap else [])
-                                + (SBM_CAP_PATCHES if cap else []) + (mff.MASSFLUX_PATCHES if massflux else [])
+                                + (SBM_CAP_PATCHES if cap else [])
+                                + (mff.MASSFLUX_PATCHES if massflux or boundary_layer else [])
                                 + (mff.START_PATCHES if massflux_start else [])
-                                + (FREE_CONVECTION_PATCHES if free_convection else [])):
+                                + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer else [])
+                                + (pbf.PBL_PATCHES + pbf.DIAGNOSTIC_PATCHES if boundary_layer else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1495,6 +1521,40 @@ def free_convection_setting(choice: str, gravity: float, pressure_pa: float) -> 
                 earth_reference=dict(gravity_m_s2=STANDARD_GRAVITY, surface_pressure_pa=STANDARD_ATMOSPHERE),
                 scaling='(g / p_s)^(1/3), from 0.17 (g kappa^2 / (theta_v nu))^(1/3) with rho theta_v = p_s / R',
                 source='Miller, Beljaars and Palmer (1992), J. Climate 5, 418-434, eqs. (8) and (9)')
+
+
+MIXING_LENGTH_CHOICES = ('earth', 'lunar')
+BOUNDARY_LAYER_CHOICES = ('local', 'nonlocal')
+
+
+def mixing_length_setting(choice: str, gravity: float) -> dict:
+    """PlaSim's Blackadar length in vdiff as the configuration records it. 'lunar' stretches vdiff_lamm, 160 m for
+    momentum (sqrt(7.5) times that for heat and vapour), by the ratio of the gravities, the rule climate/crm/cm1_run.py
+    applies to CM1's asymptotic length l_inf: a column stretched by g_E / g keeps its velocities and pressures and
+    lengthens its lengths by that ratio. It is a scaling assumption the CM1 boxes share, with no independent support
+    yet, so runs take it as a sensitivity. 'earth' is PlaSim's own length, which the configuration leaves unrecorded."""
+    if choice not in MIXING_LENGTH_CHOICES[1:]:
+        raise ValueError(f"the mixing length is set only for 'lunar' (PlaSim's Earth value is the default), not {choice!r}")
+    if not gravity > 0.0:
+        raise ValueError('the lunar mixing length needs a positive gravity')
+    momentum = pbs.lunar_length(gravity)
+    return dict(choice=choice, momentum_m=momentum, heat_m=momentum * (3.0 * pbs.STABILITY * 0.5) ** 0.5,
+                earth_momentum_m=pbs.LAMBDA_EARTH_M, stretch=STANDARD_GRAVITY / gravity, gravity_m_s2=float(gravity),
+                rule="vdiff_lamm times g_E / g, as climate/crm/cm1_run.py stretches CM1's l_inf",
+                status='a scaling assumption the CM1 boxes share, taken as a sensitivity')
+
+
+def boundary_layer_setting(choice: str) -> dict:
+    """The nonlocal boundary layer in vdiff (pbl_scheme.py, pbl_fortran.PBL_PATCHES) as the configuration records it,
+    with every constant fluxmod's namelist receives; 'local' is PlaSim's own diffusion, left unrecorded."""
+    if choice not in BOUNDARY_LAYER_CHOICES[1:]:
+        raise ValueError(f"the boundary layer is set only for 'nonlocal' (PlaSim's local diffusion is the default), "
+                         f'not {choice!r}')
+    return dict(scheme=choice, parameters=pbf.fortran_values(),
+                sources=('Holtslag and Boville (1993), J. Climate 6, 1825-1842, as CAM3 implements it (Collins and '
+                         'others 2004, NCAR/TN-464+STR, section 4.11.2; hb_diff.F90); the entrainment flux of Hong, Noh '
+                         'and Dudhia (2006), Mon. Wea. Rev. 134, 2318-2341'),
+                code='climate/gcm/pbl_scheme.py (nonlocal_column), as Fortran in climate/gcm/pbl_fortran.py (pblcol)')
 
 
 SBM_DEFAULTS = dict(tau_s=7200.0, rh=0.7, eps=0.0, cin_j_kg=0.0)   # Frierson's 2 h and 70%; the lunar options off
@@ -1636,7 +1696,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                   heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
                   cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
-                  free_convection=None):
+                  free_convection=None, mixing_length=None, boundary_layer=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
     the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
     twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
@@ -1650,7 +1710,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     falling rain and snow (rainmod's gamma); levels, a set of levels.LEVEL_SETS other than PlaSim's own, runs PlaSim on
     it, with the twilight terms and the longwave correction from their products on that set (levels_product) and the
     cold cloud's factors checked against its top layers; free_convection 'lunar' sets the free-convection constant over
-    water for the planet's gravity and surface pressure (free_convection_setting, FREE_CONVECTION_EDITS). Each is
+    water for the planet's gravity and surface pressure (free_convection_setting, FREE_CONVECTION_EDITS);
+    mixing_length 'lunar' stretches vdiff's Blackadar length by the gravities (mixing_length_setting) and
+    boundary_layer 'nonlocal' runs the nonlocal boundary layer (boundary_layer_setting), either with the moisture
+    diagnostics writing the vapour by process (BUDGET). Each is
     recorded when given, and left out the configuration is the one every earlier run had; the 294.9 K ledger without the
     clear share records the twilight as the runs of 14 to 19 October did, and the 295 K fit the longwave correction as
     those of 17 October did."""
@@ -1691,7 +1754,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      depth=uses_depth_patch(convection), cap=uses_cap_patch(convection),
                                      massflux=uses_massflux(convection),
                                      free_convection=free_convection is not None,
-                                     massflux_start=uses_massflux_start(convection)),
+                                     massflux_start=uses_massflux_start(convection),
+                                     boundary_layer=mixing_length is not None or boundary_layer is not None),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -1724,6 +1788,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['rain_evaporation'] = rain_evaporation_setting(rain_evaporation)
     if free_convection is not None:
         cfg['free_convection'] = free_convection_setting(free_convection, planet['gravity_m_s2'], exp['pressure_pa'])
+    if mixing_length is not None:
+        cfg['mixing_length'] = mixing_length_setting(mixing_length, planet['gravity_m_s2'])
+    if boundary_layer is not None:
+        cfg['boundary_layer'] = boundary_layer_setting(boundary_layer)
     if convection is not None:                       # the Betts-Miller or the mass-flux scheme in Kuo's place
         cfg['convection'] = convection_setting(**convection)
     if cold_cloud is not None:
@@ -1743,6 +1811,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
             raise ValueError('the moisture diagnostics come with the heating diagnostics, which need --heating-diagnostics')
         cfg['moisture_diagnostics'] = True
         cfg['output'] = cfg['output'] + [name for name, _ in MOISTENING.values()] + ['wap']
+        if mixing_length is not None or boundary_layer is not None:
+            cfg['budget_diagnostics'] = sorted(BUDGET)
+            cfg['output'] = cfg['output'] + [name for name, _, _ in BUDGET.values()]
     if twilight is not None:
         ledger = TWILIGHT_LEDGERS[twilight_ledger]
         terms = ledger if level_set == lv.DEFAULT else levels_product(ledger, level_set)
@@ -2025,6 +2096,12 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         model._edit_namelist('fluxmod_namelist', 'NWIND10', '1')
     if 'free_convection' in cfg:
         model._edit_namelist('fluxmod_namelist', 'CFREE', repr(float(cfg['free_convection']['constant'])))
+    if 'mixing_length' in cfg:
+        model._edit_namelist('fluxmod_namelist', 'VDIFF_LAMM', repr(float(cfg['mixing_length']['momentum_m'])))
+    if 'boundary_layer' in cfg:
+        model._edit_namelist('fluxmod_namelist', 'NLPBL', '1')
+        for name, value in cfg['boundary_layer']['parameters'].items():
+            model._edit_namelist('fluxmod_namelist', name.upper(), repr(float(value)))
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
@@ -2051,6 +2128,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         for code, (name, long_name) in MOISTENING.items():
             pyburn.ilibrary[str(code)] = [name, long_name, 'm s-1']
             pyburn.slibrary[name] = [code, long_name, 'm s-1']
+    if cfg.get('budget_diagnostics'):
+        for code, (name, long_name, units) in BUDGET.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, units]
+            pyburn.slibrary[name] = [code, long_name, units]
     model.cfgpostprocessor(ftype='regular', extension='.nc', variables=cfg['output'],
                            times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
@@ -2220,12 +2301,14 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k',
         wind10: bool = False, ice_weights: str = 'shield', cold_cloud: str | None = None,
         rain_evaporation: float | None = None, moisture: bool = False, convection: dict | None = None,
-        levels: str | None = None, free_convection: str | None = None) -> int:
+        levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
+        boundary_layer: str | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
                         ice_weights=ice_weights, cold_cloud=cold_cloud, rain_evaporation=rain_evaporation,
-                        moisture=moisture, convection=convection, levels=levels, free_convection=free_convection)
+                        moisture=moisture, convection=convection, levels=levels, free_convection=free_convection,
+                        mixing_length=mixing_length, boundary_layer=boundary_layer)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -2397,6 +2480,13 @@ def main(argv=None) -> int:
                              "others 1992): PlaSim's Earth value, 0.0016 m s-1 K-1/3, or the lunar one, scaled as "
                              "(g / p_s)^(1/3) to the Moon's gravity and the surface pressure (FREE_CONVECTION_EDITS; "
                              'part of the run key)')
+    parser.add_argument('--mixing-length', choices=MIXING_LENGTH_CHOICES, default='earth',
+                        help="Blackadar's asymptotic mixing length in PlaSim's vertical diffusion: its Earth value, "
+                             '160 m for momentum, or that stretched by the ratio of the gravities, a sensitivity '
+                             '(mixing_length_setting; part of the run key)')
+    parser.add_argument('--boundary-layer', choices=BOUNDARY_LAYER_CHOICES, default='local',
+                        help="PlaSim's local vertical diffusion alone, or the nonlocal boundary layer beneath it "
+                             '(pbl_scheme.py; pbl_fortran.PBL_PATCHES; part of the run key)')
     parser.add_argument('--heating-diagnostics', action='store_true',
                         help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
                              'the run key)')
@@ -2450,7 +2540,9 @@ def main(argv=None) -> int:
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
                args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation,
                args.moisture_diagnostics, convection, args.levels,
-               None if args.free_convection == 'earth' else args.free_convection)
+               None if args.free_convection == 'earth' else args.free_convection,
+               None if args.mixing_length == 'earth' else args.mixing_length,
+               None if args.boundary_layer == 'local' else args.boundary_layer)
 
 
 if __name__ == '__main__':
