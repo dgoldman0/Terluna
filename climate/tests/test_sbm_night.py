@@ -288,6 +288,6 @@ def test_the_runner_records_the_switch_only_when_set_and_labels_it_a_diagnostic(
     # and the vapour by process for a run with it and the moisture diagnostics
     assert '(SBM_TRIGGER_PATCHES if trigger or night else [])' in text
     assert '(SBM_CAP_PATCHES if cap or night else [])' in text
-    assert '(pbf.DIAGNOSTIC_PATCHES if boundary_layer or night else [])' in text
+    assert '(pbf.DIAGNOSTIC_PATCHES if boundary_layer or night' in text      # the cloud water's too, since 27 October
     assert text.index('(pbf.DIAGNOSTIC_PATCHES if boundary_layer or night') < text.index('(SBM_NIGHT_PATCHES if night')
-    assert 'boundary_layer is not None or uses_night_switch(convection):' in text
+    assert 'boundary_layer is not None or uses_night_switch(convection)' in text

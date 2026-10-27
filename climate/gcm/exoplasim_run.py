@@ -73,7 +73,10 @@ writes the vapour each process gives each layer and the heating of falling preci
 PlaSim's convection slot completed for the Betts-Miller and mass-flux schemes (pbl_fortran.DIAGNOSTIC_PATCHES).
 --sbm-diagnostic-night, a diagnostic and never a configuration, holds the Betts-Miller scheme's deep convection off
 wherever the Sun is down (SBM_NIGHT_PATCHES); a run with it and the moisture diagnostics writes the vapour by process
-too.
+too. --large-scale-condensate cloud holds PlaSim's large-scale condensate as cloud water in its layer above freezing,
+evaporated where the air is unsaturated and turned to rain by autoconversion and accretion (condensate.py), and
+--humidity-mean writes the humidity's true 3-day mean as hus_mean (HUS_MEAN_PATCHES); without them a run is as
+before.
 """
 from __future__ import annotations
 import argparse
@@ -93,6 +96,7 @@ from climate.gcm import levels as lv
 from climate.gcm import massflux_fortran as mff
 from climate.gcm import pbl_fortran as pbf
 from climate.gcm import pbl_scheme as pbs
+from climate.gcm import condensate as cnd
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -200,11 +204,12 @@ OUTPUT = ['ta', 'ua', 'va', 'hus', 'cl',
           'rst', 'rsut', 'rlut', 'ntr', 'nbr', 'rss', 'rls', 'hfss', 'hfls', 'alb', 'czen', 'lsm', 'tauu', 'tauv']
 # The codes PlaSim 3.4.2 writes to its raw output (outmod.f90's writegp calls on unit 40), and the names ExoPlaSim's
 # postprocessor derives from them (pyburn.dataset): a name outside both comes out of the postprocessor as nothing.
-# The diagnostics' own codes (the heating's 21-29 among them) come on top when their switches are on.
+# The diagnostics' own codes (the heating's 21-29 among them) come on top when their switches are on; 233, the
+# humidity's true mean, only with nhusmean 1 (HUS_MEAN_PATCHES).
 PLASIM_CODES = (101, 102, 103, 104, 105, 106, 107, 110, 129, 130, 133, 138, 139, 140, 141, 142, 143, 144, 146, 147, 152,
                 155, 159, 160, 161, 162, 164, 165, 166, 167, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180,
-                181, 182, 183, 184, 201, 202, 203, 204, 205, 207, 208, 209, 210, 211, 218, 221, 229, 230, 232, 265,
-                266, 267, 268, 269, 298, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 410, 411)
+                181, 182, 183, 184, 201, 202, 203, 204, 205, 207, 208, 209, 210, 211, 218, 221, 229, 230, 232, 233,
+                265, 266, 267, 268, 269, 298, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 410, 411)
 DERIVED = ('ua', 'va', 'spd', 'ps', 'psl', 'pr', 'ntr', 'nbr', 'hfns', 'wfn', 'zg', 'hur', 'wap', 'wa', 'stf', 'psi')
 # PlaSim's clear-sky fluxes, written when the diagnostic is on but unknown to ExoPlaSim's postprocessor,
 # which the runner teaches them. Unlike the other fluxes they are snapshots at each output time, not
@@ -982,6 +987,81 @@ SBM_NIGHT_EDITS = [
 SBM_NIGHT_RADMOD_EDITS = [("      end subroutine solang\n", "      end subroutine solang\n" + SBM_NIGHT_GETTER)]
 SBM_NIGHT_PATCHES = [('rainmod.f90', SBM_NIGHT_MARKER, SBM_NIGHT_EDITS),
                      ('radmod.f90', SBM_NIGHT_MARKER, SBM_NIGHT_RADMOD_EDITS)]
+
+
+# Two switches in PlaSim's own namelist, read before the restart, so that the restart can see them (both 0 by default,
+# when the model and its output are as before): ncwat 1 holds large-scale condensate as cloud water
+# (condensate.CLOUD_WATER_PATCHES), the restart carrying it as dqcw and a restart without it giving none
+# (restart_has_array); nhusmean 1 writes the humidity's true 3-day mean as code 233 (HUS_MEAN_PATCHES), the gridpoint
+# humidity PlaSim adds every step (aadq), where code 133 holds the humidity at each interval's start (year_files.py).
+SWITCH_MARKER = 'Terluna: switches'
+SWITCH_PLASIMMOD_EDITS = [
+    ("      integer :: nqspec   = 1   ! 1: spectral q   0: gridpoint q (semi-Langrangian)\n",
+     "      integer :: nqspec   = 1   ! 1: spectral q   0: gridpoint q (semi-Langrangian)\n"
+     f"      integer :: ncwat    = 0   ! {SWITCH_MARKER}: 1 holds large-scale condensate as cloud water\n"
+     "      integer :: nhusmean = 0   ! 1 writes the humidity's true mean as code 233 (low-I/O mode)\n"),
+    ("      real :: dql(NHOR,NLEP)  = 0.     ! Liquid water content\n",
+     "      real :: dql(NHOR,NLEP)  = 0.     ! Liquid water content\n"
+     f"      real :: dqcw(NHOR,NLEV) = 0.     ! {SWITCH_MARKER}: the cloud water mklsp holds (kg/kg)\n"),
+]
+SWITCH_PLASIM_EDITS = [
+    ("                   , sigh    , nenergy , nener3d , nsponge , dampsp     &\n                   , l_aero\n",
+     "                   , sigh    , nenergy , nener3d , nsponge , dampsp     &\n"
+     "                   , l_aero  , ncwat   , nhusmean\n"),
+    ("      call mpbci(ndiaggp3d ) ! no of 3d gp diagnostic arrays\n",
+     "      call mpbci(ndiaggp3d ) ! no of 3d gp diagnostic arrays\n"
+     f"      call mpbci(ncwat    ) ! {SWITCH_MARKER}: cloud water\n"
+     "      call mpbci(nhusmean ) ! the humidity's true mean\n"),
+    ("      call mpputgp('dqsat'  ,dqsat  ,NHOR,NLEV)\n",
+     "      call mpputgp('dqsat'  ,dqsat  ,NHOR,NLEV)\n"
+     f"      if (ncwat == 1) call mpputgp('dqcw'   ,dqcw   ,NHOR,NLEV)   ! {SWITCH_MARKER}\n"),
+    ("      call mpgetgp('dqsat'  ,dqsat  ,NHOR,NLEV)\n",
+     "      call mpgetgp('dqsat'  ,dqsat  ,NHOR,NLEV)\n"
+     f"      if (ncwat == 1) then   ! {SWITCH_MARKER}: the cloud water, none in a restart without it\n"
+     "         icwread = 0\n"
+     "         if (mypid == NROOT) call restart_has_array('dqcw',icwread)\n"
+     "         call mpbci(icwread)\n"
+     "         if (icwread == 1) call mpgetgp('dqcw'   ,dqcw   ,NHOR,NLEV)\n"
+     "      endif\n"),
+]
+SWITCH_RESTART_EDITS = [
+    ("      end subroutine get_restart_array\n",
+     "      end subroutine get_restart_array\n"
+     f"\n!     {SWITCH_MARKER}: whether the restart holds the array yn (kfound 1) or not (0)\n"
+     "      subroutine restart_has_array(yn,kfound)\n"
+     "      use restartmod\n"
+     "      character (len=*) :: yn\n"
+     "      integer :: kfound\n"
+     "      kfound = 0\n"
+     "      do j = 1 , nresnum\n"
+     "         if (trim(yn) == trim(yresnam(j))) kfound = 1\n"
+     "      enddo\n"
+     "      return\n"
+     "      end subroutine restart_has_array\n"),
+]
+PLASIM_SWITCH_PATCHES = [('plasimmod.f90', SWITCH_MARKER, SWITCH_PLASIMMOD_EDITS),
+                         ('plasim.f90', SWITCH_MARKER, SWITCH_PLASIM_EDITS),
+                         ('restartmod.f90', SWITCH_MARKER, SWITCH_RESTART_EDITS)]
+HUS_MEAN_MARKER = "Terluna: the humidity's true mean"
+HUS_MEAN_CODE = 233
+HUS_MEAN = ('hus_mean', 'specific_humidity_mean_over_the_output_interval', '1')
+_HUS_LOWIO = ("        if (nqspec == 0) then ! Semi Langrangian advection active\n"
+              "           do jlev = 1 , NLEV\n"
+              "              aadq(:,jlev) = aadq(:,jlev)/real(naccuout)\n"
+              "              call writegp(40,aadq(1,jlev),133,jlev)\n"
+              "           enddo\n"
+              "        endif\n")
+HUS_MEAN_EDITS = [
+    (_HUS_LOWIO,
+     _HUS_LOWIO
+     + f"        if (nqspec == 1 .and. nhusmean == 1) then ! {HUS_MEAN_MARKER}, code 233\n"
+     "           do jlev = 1 , NLEV\n"
+     "              aadq(:,jlev) = aadq(:,jlev)/real(naccuout)\n"
+     "              call writegp(40,aadq(1,jlev),233,jlev)\n"
+     "           enddo\n"
+     "        endif\n"),
+]
+HUS_MEAN_PATCHES = [('outmod.f90', HUS_MEAN_MARKER, HUS_MEAN_EDITS)]
 # CO2 and O2 in PlaSim's sunlight (radmod.f90, swr; climate/gcm/plasim_shortwave.py, GAS_BANDS). PlaSim's two bands hold
 # no CO2 or O2, whose strongest lines the Moon's deep column takes high up, so it puts that sunlight where its water
 # is. NGASBANDS 1 adds CO2 and O2 in the near-infrared band and O2 in the visible, each an absorptivity of its own
@@ -1492,7 +1572,8 @@ def use_twilight_package():
 
 def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
                    massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
-                   boundary_layer: bool = False, night: bool = False) -> dict:
+                   boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
+                   cloud_water: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1502,7 +1583,9 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     layer with the convection's vapour diagnostic (pbl_fortran.PBL_PATCHES over the free-convection patch and
     DIAGNOSTIC_PATCHES over the Betts-Miller and mass-flux patches), and the night switch, a diagnostic
     (SBM_NIGHT_PATCHES, over the CAPE trigger's, the depth test's and the cap's patches, with the convection's vapour
-    diagnostic), for a run that sets them, and return each patched file's hash for the run key."""
+    diagnostic), and the switches in PlaSim's namelist (PLASIM_SWITCH_PATCHES) with the humidity's true mean
+    (HUS_MEAN_PATCHES) and the cloud water (condensate.CLOUD_WATER_PATCHES, with the convection's vapour diagnostic),
+    for a run that sets them, and return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1521,12 +1604,16 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                                 + (SBM_TRIGGER_PATCHES if trigger or night else [])
                                 + (SBM_DEPTH_PATCHES if depth or cap or night else [])
                                 + (SBM_CAP_PATCHES if cap or night else [])
-                                + (mff.MASSFLUX_PATCHES if massflux or boundary_layer or night else [])
+                                + (mff.MASSFLUX_PATCHES if massflux or boundary_layer or night or cloud_water
+                                   else [])
                                 + (mff.START_PATCHES if massflux_start else [])
                                 + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer else [])
                                 + (pbf.PBL_PATCHES if boundary_layer else [])
-                                + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night else [])
-                                + (SBM_NIGHT_PATCHES if night else [])):
+                                + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night or cloud_water else [])
+                                + (SBM_NIGHT_PATCHES if night else [])
+                                + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
+                                + (HUS_MEAN_PATCHES if humidity_mean else [])
+                                + (cnd.CLOUD_WATER_PATCHES if cloud_water else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1774,27 +1861,30 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                   heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
                   cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
-                  free_convection=None, mixing_length=None, boundary_layer=None):
-    """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
-    the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
-    twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
-    ledger twilight_ledger names (TWILIGHT_LEDGERS), its terms in the clear share above each layer with
-    twilight_clear_share (TWILIGHT_CLEAR_EDITS), and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating
-    writes each process's temperature tendency (HEATING), longwave_correction the longwave by height
-    (LW_CORRECTION_EDITS) from the fit longwave_fit names (LONGWAVE_FITS), and ice_optics ice optics for cloud colder
-    than -38 °C (ICE_OPTICS_EDITS) with the near-infrared weights ice_weights names (ICE_WEIGHTS_EDITS), and wind10 the
-    10 m wind (WIND10_PATCHES); cold_cloud, a cold_cloud.py product, scales the ice optics' water and radius on its
-    layers by its central factors (ICE_FACTOR_EDITS); rain_evaporation replaces PlaSim's constant for the evaporation of
-    falling rain and snow (rainmod's gamma); levels, a set of levels.LEVEL_SETS other than PlaSim's own, runs PlaSim on
-    it, with the twilight terms and the longwave correction from their products on that set (levels_product) and the
-    cold cloud's factors checked against its top layers; free_convection 'lunar' sets the free-convection constant over
-    water for the planet's gravity and surface pressure (free_convection_setting, FREE_CONVECTION_EDITS);
-    mixing_length 'lunar' stretches vdiff's Blackadar length by the gravities (mixing_length_setting) and
-    boundary_layer 'nonlocal' runs the nonlocal boundary layer (boundary_layer_setting); with either of them, or with
-    the Betts-Miller scheme's night switch (a diagnostic, SBM_NIGHT_PATCHES), the moisture diagnostics also write the
-    vapour by process (BUDGET). Each is recorded when given, and left out the configuration is the one every earlier
-    run had; the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October did, and
-    the 295 K fit the longwave correction as those of 17 October did."""
+                  free_convection=None, mixing_length=None, boundary_layer=None, large_scale_condensate=None,
+                  humidity_mean=False):
+    """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces the
+    air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and twilight
+    (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the ledger
+    twilight_ledger names (TWILIGHT_LEDGERS), its terms in the clear share above each layer with twilight_clear_share
+    (TWILIGHT_CLEAR_EDITS), and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating writes each process's
+    temperature tendency (HEATING), longwave_correction the longwave by height (LW_CORRECTION_EDITS) from the fit
+    longwave_fit names (LONGWAVE_FITS), and ice_optics ice optics for cloud colder than -38 °C (ICE_OPTICS_EDITS) with
+    the near-infrared weights ice_weights names (ICE_WEIGHTS_EDITS), and wind10 the 10 m wind (WIND10_PATCHES);
+    cold_cloud, a cold_cloud.py product, scales the ice optics' water and radius on its layers by its central factors
+    (ICE_FACTOR_EDITS); rain_evaporation replaces PlaSim's constant for the evaporation of falling rain and snow
+    (rainmod's gamma); levels, a set of levels.LEVEL_SETS other than PlaSim's own, runs PlaSim on it, with the twilight
+    terms and the longwave correction from their products on that set (levels_product) and the cold cloud's factors
+    checked against its top layers; free_convection 'lunar' sets the free-convection constant over water for the
+    planet's gravity and surface pressure (free_convection_setting, FREE_CONVECTION_EDITS); mixing_length 'lunar'
+    stretches vdiff's Blackadar length by the gravities (mixing_length_setting) and boundary_layer 'nonlocal' runs the
+    nonlocal boundary layer (boundary_layer_setting); with either of them, or with the Betts-Miller scheme's night
+    switch (a diagnostic, SBM_NIGHT_PATCHES), the moisture diagnostics also write the vapour by process (BUDGET);
+    large_scale_condensate 'cloud' holds large-scale condensate as cloud water (condensate.py; with the moisture
+    diagnostics its own diagnostics and the vapour by process too), and humidity_mean writes the humidity's true mean
+    (HUS_MEAN_PATCHES). Each is recorded when given, and left out the configuration is the one every earlier run had;
+    the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October did, and the 295 K
+    fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -1826,6 +1916,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         raise ValueError(f'twilight_ledger must be one of {tuple(TWILIGHT_LEDGERS)}')
     if longwave_fit not in LONGWAVE_FITS:
         raise ValueError(f'longwave_fit must be one of {tuple(LONGWAVE_FITS)}')
+    if large_scale_condensate not in (None, 'cloud'):
+        raise ValueError("large_scale_condensate is 'cloud' or None (PlaSim's own: rain at once)")
+    cloud = large_scale_condensate == 'cloud'
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'),
                source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
@@ -1834,7 +1927,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      free_convection=free_convection is not None,
                                      massflux_start=uses_massflux_start(convection),
                                      boundary_layer=mixing_length is not None or boundary_layer is not None,
-                                     night=uses_night_switch(convection)),
+                                     night=uses_night_switch(convection), humidity_mean=bool(humidity_mean),
+                                     cloud_water=cloud),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -1871,6 +1965,13 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['mixing_length'] = mixing_length_setting(mixing_length, planet['gravity_m_s2'])
     if boundary_layer is not None:
         cfg['boundary_layer'] = boundary_layer_setting(boundary_layer)
+    if cloud:
+        cfg['large_scale_condensate'] = cnd.setting()
+    if humidity_mean:
+        cfg['humidity_mean'] = dict(code=HUS_MEAN_CODE, name=HUS_MEAN[0],
+                                    field='the gridpoint humidity PlaSim adds every step (outmod aadq)',
+                                    patch='climate/gcm/exoplasim_run.py HUS_MEAN_PATCHES (pumamod nhusmean)')
+        cfg['output'] = cfg['output'] + [HUS_MEAN[0]]
     if convection is not None:                       # the Betts-Miller or the mass-flux scheme in Kuo's place
         cfg['convection'] = convection_setting(**convection)
     if cold_cloud is not None:
@@ -1890,9 +1991,12 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
             raise ValueError('the moisture diagnostics come with the heating diagnostics, which need --heating-diagnostics')
         cfg['moisture_diagnostics'] = True
         cfg['output'] = cfg['output'] + [name for name, _ in MOISTENING.values()] + ['wap']
-        if mixing_length is not None or boundary_layer is not None or uses_night_switch(convection):
+        if mixing_length is not None or boundary_layer is not None or uses_night_switch(convection) or cloud:
             cfg['budget_diagnostics'] = sorted(BUDGET)
             cfg['output'] = cfg['output'] + [name for name, _, _ in BUDGET.values()]
+        if cloud:
+            cfg['cloud_water_diagnostics'] = sorted(cnd.DIAGNOSTICS)
+            cfg['output'] = cfg['output'] + [name for name, _, _ in cnd.DIAGNOSTICS.values()]
     if twilight is not None:
         ledger = TWILIGHT_LEDGERS[twilight_ledger]
         terms = ledger if level_set == lv.DEFAULT else levels_product(ledger, level_set)
@@ -2145,6 +2249,12 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     if 'convection' in cfg:
         for name, text in convection_namelist(cfg['convection']):
             model._edit_namelist('rainmod_namelist', name, text)
+    if 'large_scale_condensate' in cfg:                               # condensate.py's cloud water
+        model._edit_namelist('plasim_namelist', 'NCWAT', '1')
+        for name, text in cnd.namelist_values(cfg['large_scale_condensate']['parameters']).items():
+            model._edit_namelist('rainmod_namelist', name, text)
+    if 'humidity_mean' in cfg:
+        model._edit_namelist('plasim_namelist', 'NHUSMEAN', '1')
     if m['surface_cloud_rcrit'] > 0.0:                                 # the lowest layer is the last of RCRIT
         model._edit_namelist('rainmod_namelist', f"RCRIT({m['layers']})", str(float(m['surface_cloud_rcrit'])))
     if 'top_infrared_w_m2' in cfg:
@@ -2211,6 +2321,14 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         for code, (name, long_name, units) in BUDGET.items():
             pyburn.ilibrary[str(code)] = [name, long_name, units]
             pyburn.slibrary[name] = [code, long_name, units]
+    if cfg.get('cloud_water_diagnostics'):                            # four slots beyond PlaSim's 21
+        model._edit_namelist('plasim_namelist', 'NDIAGGP3D', str(cnd.EXTRA_SLOTS))
+        for code, (name, long_name, units) in cnd.DIAGNOSTICS.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, units]
+            pyburn.slibrary[name] = [code, long_name, units]
+    if 'humidity_mean' in cfg:
+        pyburn.ilibrary[str(HUS_MEAN_CODE)] = list(HUS_MEAN)
+        pyburn.slibrary[HUS_MEAN[0]] = [HUS_MEAN_CODE, HUS_MEAN[1], HUS_MEAN[2]]
     model.cfgpostprocessor(ftype='regular', extension='.nc', variables=cfg['output'],
                            times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
@@ -2381,13 +2499,15 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         wind10: bool = False, ice_weights: str = 'shield', cold_cloud: str | None = None,
         rain_evaporation: float | None = None, moisture: bool = False, convection: dict | None = None,
         levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
-        boundary_layer: str | None = None) -> int:
+        boundary_layer: str | None = None, large_scale_condensate: str | None = None,
+        humidity_mean: bool = False) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
                         ice_weights=ice_weights, cold_cloud=cold_cloud, rain_evaporation=rain_evaporation,
                         moisture=moisture, convection=convection, levels=levels, free_convection=free_convection,
-                        mixing_length=mixing_length, boundary_layer=boundary_layer)
+                        mixing_length=mixing_length, boundary_layer=boundary_layer,
+                        large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -2571,6 +2691,15 @@ def main(argv=None) -> int:
     parser.add_argument('--boundary-layer', choices=BOUNDARY_LAYER_CHOICES, default='local',
                         help="PlaSim's local vertical diffusion alone, or the nonlocal boundary layer beneath it "
                              '(pbl_scheme.py; pbl_fortran.PBL_PATCHES; part of the run key)')
+    parser.add_argument('--large-scale-condensate', choices=('rain', 'cloud'), default='rain',
+                        help="what PlaSim's large-scale condensation makes of its condensate: rain at once, as "
+                             'PlaSim does, or cloud water held in its layer above freezing, evaporated where the air '
+                             'is unsaturated and turned to rain by autoconversion and accretion (condensate.py; '
+                             'CLOUD_WATER_PATCHES; part of the run key)')
+    parser.add_argument('--humidity-mean', action='store_true',
+                        help="write the humidity's true 3-day mean as hus_mean, code 233, where a year file's hus "
+                             "holds the humidity at each interval's start (HUS_MEAN_PATCHES; year_files.py; part of "
+                             'the run key)')
     parser.add_argument('--heating-diagnostics', action='store_true',
                         help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
                              'the run key)')
@@ -2630,7 +2759,8 @@ def main(argv=None) -> int:
                args.moisture_diagnostics, convection, args.levels,
                None if args.free_convection == 'earth' else args.free_convection,
                None if args.mixing_length == 'earth' else args.mixing_length,
-               None if args.boundary_layer == 'local' else args.boundary_layer)
+               None if args.boundary_layer == 'local' else args.boundary_layer,
+               None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean)
 
 
 if __name__ == '__main__':

@@ -3569,6 +3569,69 @@ climate/gcm/.venv/bin/python -m climate.gcm.night_water     # three runs and the
 python3 -m pytest climate/tests/test_night_water.py          # under a second
 ```
 
+#### Cloud water for PlaSim's large-scale condensation (27 October)
+
+The night water budget above found PlaSim raining all it condenses in the sea's night cloud layer, where CM1 holds
+most of the same water as cloud and re-evaporates it. On 27 October the author approved building cloud water into
+PlaSim, tested first with the night switch as a diagnostic against a stop rule set in advance. The scheme is in
+[condensate.py](condensate.py), with its Python copy, its Fortran and the fall speed it takes from the lunar fall law,
+and its tests in [test_condensate.py](../tests/test_condensate.py).
+
+**The scheme** (`--large-scale-condensate cloud`; PlaSim's `ncwat` 1; condensate.CLOUD_WATER_PATCHES).
+- **Held.** mklsp hands what condenses in a layer at or above freezing, by the layer's temperature after condensing,
+  to that layer's cloud water. Below freezing the condensate falls at once, as before.
+- **Evaporated.** mkcwat, after mklsp and before mkrain, goes down each column. Where the layer's air is unsaturated,
+  the cloud water evaporates toward saturation, with mklsp's correction for the latent heat, at most the water there.
+  Cloud water in a layer now below freezing goes to the precipitation.
+- **Turned to rain.** What remains turns to rain by Khairoutdinov and Kogan's (2000) autoconversion,
+  1350 qc^2.47 Nc^-1.79, and accretion, 67 (qc qr)^1.15 (kg/kg/s), as CM1's Morrison scheme takes them, with the CM1
+  boxes' 100 droplets per cm³. The rain's mixing ratio qr is the rain formed above over the air's density and its
+  fall speed. From the lunar fall law with Marshall and Palmer's intercept, which is Earth's, that speed is
+  0.99 m/s × (F / 3 mm/day)^0.20, within 1.4% from 0.3 to 30 mm/day.
+- **Left out.** The water is neither advected nor mixed, and radiation keeps PlaSim's diagnosed clouds. The restart
+  carries the water (`dqcw`); a run starting from a restart without it starts with none.
+
+**The humidity's true mean** (`--humidity-mean`; `nhusmean` 1; HUS_MEAN_PATCHES) writes as `hus_mean` (code 233) the
+gridpoint humidity PlaSim adds every step. Both switches sit in PlaSim's own namelist, read before the restart
+(PLASIM_SWITCH_PATCHES in [exoplasim_run.py](exoplasim_run.py), with a check of whether the restart holds the water).
+
+**The checks.**
+- **The routines.** mklsp and mkcwat, compiled with ExoPlaSim's flags against a stub of PlaSim's module, give the
+  Python copy's tendencies, cloud water and precipitation to 1e-10 on lunar columns. With the switch off, mklsp
+  prints every digit the unpatched routine prints. The copy keeps each layer's water and energy to round-off. The
+  patches apply once, undo exactly, and compile with PlaSim's modules.
+- **The model with the options off.** With the patches in the shared source, four months repeat their references bit
+  for bit, in every output variable and in their restarts. They are the fifteen-level Betts–Miller month, the
+  fifteen-level mass-flux month, the ten-level Betts–Miller month and the night switch's month with the vapour by
+  process, all made on the night patch's source; the configurations differ only in the source's hashes.
+- **The smoke month** (the night switch's flags with both options) keeps every field finite, ending at 298.41 K
+  against the night switch's month's 298.42 K, with 2.17 mm/day of rain against 2.19. Its `hus_mean` gives the
+  column's vapour within 0.001 kg/m² of the precipitable water, its first record included.
+  - **Cloud water worldwide.** Condensation puts 0.54 mm/day into cloud; 0.11 re-evaporates and 0.47 turns to rain.
+    The cloud holds 0.10 kg/m² on average, 13 kg/m² in the thickest column.
+  - **Cost.** The month took 37 s against 32 s.
+- **The shared source.** rainmod.f90, plasimmod.f90, plasim.f90, restartmod.f90 and outmod.f90 carry the patches from
+  this month on. Their new hashes stop any run begun on the older source from resuming; such a run continues as a new
+  one from its restart.
+
+**The stop rule, set before the two-year run.** The run takes the night switch's two years with the cloud water and
+the humidity's mean (`A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night_cloud`), from the fifteen-level restart.
+It is judged against the night switch's run without cloud water and against CM1, over the sea after midnight.
+- **Pass needs both of these.**
+  - **The rain.** The site's rain after midnight falls to at most half of 2.20 mm/day, that is 1.10 mm/day or less.
+  - **The cloud layer.** The water 5.2–11.8 km loses to the precipitation after midnight falls to at most half of
+    1.54 mm/day, that is 0.77 or less. It is counted as the water that layer's cloud hands to the precipitation,
+    plus what mklsp sends straight down.
+- **And all of these.**
+  - **The day's rain.** The sea's afternoon rain stays within half to one and a half times CM1's 2.23 mm/day. The
+    land's afternoon stays no further from CM1's 8.59 than the night switch's 15.18.
+  - **The globe.** The imbalance at the top stays within 1 W/m² of −3.41, the global rain within 5% of
+    2.19 mm/day, and the ground within 0.5 K of 297.92 K.
+  - **The cloud's size.** The sea's column after midnight holds at most 1.0 kg/m² of cloud water, about eight times
+    the condensate CM1's night column holds.
+- **Reported beside them.** The circulation's heating of 5.2–11.8 km after midnight, the night's mixed layer and its
+  lowest level's vapour, the share of the cloud's water that re-evaporates, and the cloud water worldwide.
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked
