@@ -3049,6 +3049,144 @@ climate/gcm/.venv/bin/python -m climate.gcm.pbl_column     # three columns, four
 python3 -m pytest climate/tests/test_pbl_scheme.py climate/tests/test_pbl_fortran.py   # with gfortran, about 20 s
 ```
 
+#### The single column with CM1's own convection (27 October)
+
+The column test above gave two reasons why the nonlocal scheme left the sea's night layer shallow: the mass-flux scheme
+convects deep on every night step and heats 4–6 km, which holds the boundary layer near 3 km, and CM1's night boundary
+layer is topped by cloud and mixed from above. On 27 October the author approved a test of both. The same columns run
+under two more convection setups ([pbl_column.py](pbl_column.py) `--test convection`, results in
+[pbl_column_convection_l15.json](../results/gcm/pbl_column_convection_l15.json)), and
+[box_lid.py](../crm/box_lid.py) splits what CM1 carries through the top of its night boundary layer by the way it
+carries it ([box_lid_near_side_sea_night.json](../results/crm/box_lid_near_side_sea_night.json)). No GCM run was made
+and no Fortran changed. A second test, of CM1's own boundary-layer length, is in
+[the CM1 account](../crm/README.md#the-sea-box-with-earths-boundary-layer-length-27-october).
+
+**The setups.** Every column keeps the box's radiation, day-night table, mean ascent and surface fluxes, the starts a
+quarter early and the 2×2 of boundary layers of the first test; only its convection changes.
+- **CM1's own convection.** In place of the mass-flux scheme and PlaSim's evaporation of its rain, the column takes
+  CM1's tendencies of its microphysics and of its resolved transport (box_budget's groups: the box's advection with its
+  implicit diffusion, the imposed ascent left out), for potential temperature as temperature at constant pressure and
+  for vapour. They are laid on the fifteen levels by layer means in pressure and interpolated linearly between the
+  box's 3-hourly outputs, each output's budget being one time step's mean over the box's columns. The column carries
+  no condensate, so the microphysics' tendencies stand for the condensate's formation and loss, and the column's
+  saturation adjustment rains out whatever its own air still condenses. PlaSim's mixing then stands for CM1's
+  boundary-layer scheme alone. CM1's resolved transport includes the box's resolved boundary-layer eddies, so below the
+  boundary layer's top the nonlocal scheme counts part of them a second time; the like-for-like comparison is PlaSim's
+  local mixing against CM1's subgrid scheme at the lid.
+- **The control: shallow convection at night.** The mass-flux scheme runs as in the first test, its deep and mid-level
+  branches off while the Sun is down (`SHALLOW_ONLY`, a setting of the Python column alone: the deep test parcels
+  depart from no level and the mid-level search stops at once). Its shallow branch, a cloud rooted at the ground and at
+  most 200 hPa thick, about 9 km near the lunar ground, can still convect. The land's afternoon runs by day and repeats
+  the first test.
+
+Below 16 km the groups' tendencies equal the convergence of CM1's own diagnosed resolved fluxes to within 0.6 W/m² of
+heat and 0.9 W/m² of vapour in each band and quarter of the sea box's third lunar day. Above 16 km they hold a further
+3–11 W/m² of heating in every quarter, 11 W/m² after midnight, that no flux's convergence accounts for; CM1 takes its
+advection at fixed heights, where the mean vertical motion of a column that expands and contracts through the day and
+the compressible divergence term both appear (an interpretation). The column takes the groups as they are and reckons
+the transport's flux at its lid from the ground up.
+
+**CM1's lid, split.** CM1 writes each vertical flux at its w levels in three parts (domaindiag.F, `scalar_flux`): the
+resolved part, w times the scalar's departure from its level's mean at sixth order (`thfr`, `qvfr`); the advection's
+implicit diffusion, w times its fifth-order interpolation less the sixth-order one (`thfd`, `qvfd`), which belongs to
+the resolved advection; and the subgrid part, −khv times the gradient (`thfs`, `qvfs`), which with `ipbl` 2 and no LES
+model is the boundary-layer scheme's. Over the held nights' second day, at the top of their boundary layer (upward
+positive; the scheme's part in brackets):
+
+| Held night, second day | 6 km grid | 3 km | 2 km |
+|---|---|---|---|
+| Heat through 6.45 km, W/m² | −12.3 (−10.1) | −10.9 (−8.7) | −10.5 (−8.3) |
+| Heat through 6.99 km | −10.2 (−9.1) | −8.9 (−7.6) | −8.5 (−7.0) |
+| Vapour through 6.45 km | 15.5 (11.4) | 14.5 (10.1) | 14.5 (9.8) |
+| Vapour through 6.99 km | 15.2 (11.7) | 14.2 (10.1) | 14.3 (9.7) |
+| The scheme's khv at 6.45; 6.99 km, m²/s | 10.5; 9.8 | 9.1; 8.2 | 8.7; 7.7 |
+
+The scheme carries 78–89% of the heat and 68–77% of the vapour on every grid, and with the implicit diffusion 87–96%
+and 75–83%. The first split of these runs counted the diffusion with the scheme and gave 87–95% and 74–83%. The
+resolved part carries 0.4–1.5 W/m² of the heat and 2.6–3.7 W/m² of the vapour. Over the sea box's third lunar day after
+midnight the scheme carries 10.1 of 10.7 W/m² of heat down and 14.1 of 22.6 W/m² of vapour up through 6.45–6.99 km,
+while inside the layer, at 1.8–5.5 km, resolved motion carries 90–98% of the vapour.
+
+**The columns.** Means over the compared quarter, by convection setup, for the four boundary layers in the order
+Earth's length (160 m), the lunar length (966 m), each with the nonlocal scheme:
+
+| Column (CM1: depth; drop; rise) | Convection | Mixed depth, km | Vapour drop 0.3–6.2 km, g/kg | θv rise 6.2–8.2 km, K |
+|---|---|---|---|---|
+| Sea evening (5.58; 2.11; 1.25) | Mass-flux scheme | 4.72, 4.90, 5.14, 4.79 | 3.61, 3.04, 2.28, 2.81 | 1.52, 1.23, 1.37, 1.39 |
+| | CM1's own | 3.30, 3.16, 4.59, 4.61 | 4.75, 4.83, 1.75, 1.86 | 0.94, 0.74, 1.12, 0.93 |
+| | Shallow at night | 5.01, 6.58, 7.05, 6.80 | 2.44, 1.42, 0.35, 0.63 | 1.21, 1.24, 1.04, 1.11 |
+| Sea night (6.48; 0.34; 1.38) | Mass-flux scheme | 4.87, 4.57, 4.46, 4.41 | 3.34, 3.08, 2.37, 2.29 | 1.96, 1.86, 1.59, 1.57 |
+| | CM1's own | 5.28, 5.24, 5.06, 5.15 | 1.06, 0.77, −0.65, −0.65 | 2.89, 2.80, 2.54, 2.56 |
+| | Shallow at night | 6.69, 6.47, 6.15, 6.34 | 1.76, 1.62, 0.96, 0.82 | 1.42, 1.36, 0.82, 0.85 |
+| Land afternoon (2.75; 3.03; 0.60) | Mass-flux scheme | 6.86, 6.51, 3.54, 3.55 | 5.42, 5.19, 4.20, 4.11 | 0.57, 0.53, 0.32, 0.33 |
+| | CM1's own | 1.41, 1.40, 6.18, 6.27 | 2.69, 2.72, −0.32, −0.31 | 1.20, 1.14, 0.58, 0.55 |
+
+What each column carries through its interface nearest the lid, 7.1–7.3 km, beside CM1's own through 6.45–6.99 km
+(W/m², upward; heat; vapour):
+
+| Through the lid | Sea evening | Sea night | Land afternoon |
+|---|---|---|---|
+| CM1: its boundary-layer scheme | −7.2; 19.0 | −10.1; 14.1 | −4.6; 22.5 |
+| CM1: all its parts | −9.5; 88.0 | −10.7; 22.6 | −14.4; 244.1 |
+| Column with CM1's convection: the prescribed transport | −2.2; 68.8 | 0.2; 6.8 | −5.0; 224.5 |
+| PlaSim's local mixing beneath it, 160 m; 966 m | −0.04; 0.08 and −0.52; 0.58 | −0.02; 0.04 and −0.27; 0.57 | −0.05; 0.25 and −0.58; 3.17 |
+| The nonlocal scheme beneath it, 160 m; 966 m | −0.04; 0.08 and −0.49; 0.74 | −0.03; 0.06 and −0.30; 0.72 | −10.0; 25.2 and −10.0; 24.4 |
+| Column with shallow convection at night, PlaSim's local mixing, 160 m; 966 m | −0.03; 0.03 and −0.37; 0.13 | −0.04; 0.16 and −0.49; 2.20 | −0.13; 1.05 and −1.35; 10.9, by day as the first test |
+
+By the stop rule's threshold, half of the gap to CM1 in both the mixed depth and the vapour drop, measured from the
+testbed with PlaSim's own mixing (the mass-flux scheme, 160 m):
+- **The sea night.** CM1's own convection closes 25% of the depth's gap and 76% of the drop's; with the lunar length
+  23% and 86%. The control closes 87% and 52%, and with the lunar length 99% and 57%: it alone passes, in both
+  measures. In it no convection heats the layers at 4.2 and 6.1 km, which took 16.6 W/m² from the scheme in the first
+  test. Within each setup the nonlocal scheme fails the threshold: beneath CM1's convection it mixes the vapour until it
+  rises with height (−0.65 g/kg) and leaves the layer at 5.1 km, and under the control it closes 56–66% of the drop's
+  remaining gap while the depth's remaining 0.21 km grows to 0.33 km with Earth's length and shrinks to 0.14 km with
+  the lunar one.
+- **The sea evening.** CM1's own convection widens both gaps, to a layer 3.30 km deep with a drop of 4.75 g/kg; the
+  control closes 35% and 78%.
+- **The land afternoon.** CM1's own convection closes 67% of the depth's gap and 86% of the drop's; the control repeats
+  the testbed.
+
+**What the columns show.** Over the sea at night the column's shallow layer comes mostly from the mass-flux scheme's
+deep night convection. With it off, PlaSim's own local mixing deepens the layer to 6.5–6.7 km and keeps CM1's lid,
+1.36–1.42 K against 1.38, while its vapour still drops 1.6–1.8 g/kg against CM1's 0.34. Most of that mixing is the dry
+adjustment's: with Earth's length it carries 89–93% of the heat that goes up through 0.6 and 1.8 km.
+
+The exchange through the lid belongs to CM1's boundary-layer scheme, and PlaSim's local mixing carries almost none of
+it. Like for like, beneath CM1's convection after midnight, PlaSim's diffusion and dry adjustment carry 0.02–0.27 W/m²
+of heat and 0.04–0.57 W/m² of vapour through 7.1 km, 0.2–4% of what CM1's scheme carries through 6.45–6.99 km; in the
+control with the lunar length they carry 0.49 and 2.2 W/m². With CM1's convection prescribed and the scheme's exchange
+missing, the lid doubles to 2.8–2.9 K and the layer stops at 5.2–5.3 km, while the drop closes 76–86% of its gap. In
+those columns CM1's resolved transport and microphysics heat the layer near 8.2 km, at the top of CM1's night cloud, by
+3.9 W/m² and cool the layer near 6.1 km by 1.6 W/m². In CM1 the scheme carries 10 W/m² of heat down through the lid,
+cooling the air above it and warming the air below. The reading, an interpretation, is that CM1's resolved motion keeps
+its layer's vapour nearly uniform and its scheme's exchange keeps the lid weak. In the evening the column with CM1's
+convection also lacks the scheme's 19 W/m² of vapour through the lid and the third of the vapour it carries at 0.6 km
+(36.5 of 109 W/m²), and its layer stays at 3.2–3.3 km with the vapour held low.
+
+So the column's night gap splits into two parts, and they rest on different evidence. The convection scheme's deep night
+convection accounts for most of the depth's gap, which a GCM run can test. The rest, the lid's exchange, is CM1's own
+boundary-layer scheme at a length stretched by the gravities. Run at Earth's length
+([the CM1 test](../crm/README.md#the-sea-box-with-earths-boundary-layer-length-27-october)), the sea box keeps its night
+layer inside the margins set before the run, 6.15 km deep against 6.48 with a drop of 0.53 g/kg against 0.35, while the
+scheme's exchange through the lid falls by more than 90%. CM1's night layer therefore does not rest on the stretched
+length, and the column with CM1's tendencies prescribed, which cannot adjust, overstates what the exchange does (an
+interpretation).
+
+**Evidence and limits.** The columns take CM1's radiation and surface fluxes as given, as in the first test, and CM1's
+convective tendencies are single time steps every 3 hours, interpolated, from one realization per box on a 6 km grid.
+CM1's resolved transport carries its resolved boundary-layer eddies, so beneath it the nonlocal scheme's results count
+them twice. The water budgets close to round-off once the floor on vapour is counted (0.02 mm/day with CM1's convection
+and 0.13 mm/day in the control after midnight), and the heat budgets leave at most 5.4 W/m². The rain of the columns
+with CM1's convection, 0.08–1.05 mm/day, is the saturation adjustment's alone. The first test's product regenerates
+unchanged from the extended module, apart from that module's hash.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.pbl_column --test convection   # 36 columns; a minute
+climate/gcm/.venv/bin/python -m climate.crm.box_lid                         # the held nights' lid, a second
+python3 -m pytest climate/tests/test_pbl_column.py climate/tests/test_box_lid.py
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

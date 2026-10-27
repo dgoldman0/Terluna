@@ -1,0 +1,214 @@
+{
+ "schema": "terluna.climate.crm-box-lid/1",
+ "heights_asked_m": [
+  6450.0,
+  6990.0
+ ],
+ "span_hours": [
+  24.0,
+  48.0
+ ],
+ "grids": {
+  "6 km": {
+   "case": "box_near_side_sea_night_6km",
+   "l_inf_m": 453.0,
+   "span_s": [
+    86400.0,
+    172800.0
+   ],
+   "levels": [
+    {
+     "height_m": 6446.0,
+     "outputs": 48,
+     "khv_m2_s": 10.54,
+     "heat": {
+      "resolved": -1.486,
+      "diffusion": -0.6687,
+      "subgrid": -10.11,
+      "total": -12.27,
+      "resolved_advection": -2.154,
+      "subgrid_share": 0.8244,
+      "subgrid_and_diffusion_share": 0.8789,
+      "total_spread": 0.9119,
+      "subgrid_spread": 0.853
+     },
+     "vapour": {
+      "resolved": 3.455,
+      "diffusion": 0.6269,
+      "subgrid": 11.45,
+      "total": 15.53,
+      "resolved_advection": 4.082,
+      "subgrid_share": 0.7372,
+      "subgrid_and_diffusion_share": 0.7775,
+      "total_spread": 1.359,
+      "subgrid_spread": 1.004
+     }
+    },
+    {
+     "height_m": 6989.0,
+     "outputs": 48,
+     "khv_m2_s": 9.789,
+     "heat": {
+      "resolved": -0.5118,
+      "diffusion": -0.5882,
+      "subgrid": -9.129,
+      "total": -10.23,
+      "resolved_advection": -1.1,
+      "subgrid_share": 0.8925,
+      "subgrid_and_diffusion_share": 0.95,
+      "total_spread": 0.9582,
+      "subgrid_spread": 1.124
+     },
+     "vapour": {
+      "resolved": 2.562,
+      "diffusion": 0.876,
+      "subgrid": 11.71,
+      "total": 15.15,
+      "resolved_advection": 3.438,
+      "subgrid_share": 0.7731,
+      "subgrid_and_diffusion_share": 0.8309,
+      "total_spread": 1.508,
+      "subgrid_spread": 1.455
+     }
+    }
+   ]
+  },
+  "3 km": {
+   "case": "box_near_side_sea_night_3km",
+   "l_inf_m": 453.0,
+   "span_s": [
+    86400.0,
+    172800.0
+   ],
+   "levels": [
+    {
+     "height_m": 6446.0,
+     "outputs": 48,
+     "khv_m2_s": 9.097,
+     "heat": {
+      "resolved": -1.409,
+      "diffusion": -0.7922,
+      "subgrid": -8.709,
+      "total": -10.91,
+      "resolved_advection": -2.201,
+      "subgrid_share": 0.7982,
+      "subgrid_and_diffusion_share": 0.8709,
+      "total_spread": 0.633,
+      "subgrid_spread": 0.6821
+     },
+     "vapour": {
+      "resolved": 3.614,
+      "diffusion": 0.7935,
+      "subgrid": 10.07,
+      "total": 14.48,
+      "resolved_advection": 4.408,
+      "subgrid_share": 0.6956,
+      "subgrid_and_diffusion_share": 0.7504,
+      "total_spread": 1.207,
+      "subgrid_spread": 0.8698
+     }
+    },
+    {
+     "height_m": 6989.0,
+     "outputs": 48,
+     "khv_m2_s": 8.194,
+     "heat": {
+      "resolved": -0.4292,
+      "diffusion": -0.862,
+      "subgrid": -7.595,
+      "total": -8.886,
+      "resolved_advection": -1.291,
+      "subgrid_share": 0.8547,
+      "subgrid_and_diffusion_share": 0.9517,
+      "total_spread": 0.6722,
+      "subgrid_spread": 0.8672
+     },
+     "vapour": {
+      "resolved": 2.905,
+      "diffusion": 1.191,
+      "subgrid": 10.09,
+      "total": 14.19,
+      "resolved_advection": 4.095,
+      "subgrid_share": 0.7114,
+      "subgrid_and_diffusion_share": 0.7953,
+      "total_spread": 1.206,
+      "subgrid_spread": 1.184
+     }
+    }
+   ]
+  },
+  "2 km": {
+   "case": "box_near_side_sea_night_2km",
+   "l_inf_m": 453.0,
+   "span_s": [
+    86400.0,
+    172800.0
+   ],
+   "levels": [
+    {
+     "height_m": 6446.0,
+     "outputs": 48,
+     "khv_m2_s": 8.713,
+     "heat": {
+      "resolved": -1.39,
+      "diffusion": -0.8876,
+      "subgrid": -8.268,
+      "total": -10.54,
+      "resolved_advection": -2.277,
+      "subgrid_share": 0.784,
+      "subgrid_and_diffusion_share": 0.8682,
+      "total_spread": 0.6296,
+      "subgrid_spread": 0.5548
+     },
+     "vapour": {
+      "resolved": 3.661,
+      "diffusion": 0.954,
+      "subgrid": 9.844,
+      "total": 14.46,
+      "resolved_advection": 4.615,
+      "subgrid_share": 0.6808,
+      "subgrid_and_diffusion_share": 0.7468,
+      "total_spread": 1.061,
+      "subgrid_spread": 0.7108
+     }
+    },
+    {
+     "height_m": 6989.0,
+     "outputs": 48,
+     "khv_m2_s": 7.651,
+     "heat": {
+      "resolved": -0.3688,
+      "diffusion": -1.101,
+      "subgrid": -7.026,
+      "total": -8.496,
+      "resolved_advection": -1.47,
+      "subgrid_share": 0.8269,
+      "subgrid_and_diffusion_share": 0.9566,
+      "total_spread": 0.6457,
+      "subgrid_spread": 0.7163
+     },
+     "vapour": {
+      "resolved": 3.112,
+      "diffusion": 1.429,
+      "subgrid": 9.712,
+      "total": 14.25,
+      "resolved_advection": 4.541,
+      "subgrid_share": 0.6814,
+      "subgrid_and_diffusion_share": 0.7817,
+      "total_spread": 1.125,
+      "subgrid_spread": 0.9907
+     }
+    }
+   ]
+  }
+ },
+ "evidence": "CM1's own domain diagnostics of the three held-night boxes (one realization each, 6, 3 and 2 km grids, CM1's simple boundary-layer scheme on at every spacing), each output one time step's mean over the box's columns, half-hourly; no new runs.",
+ "reading_rule": "grids: by spacing, the w levels nearest the heights asked, the parts averaged over the outputs after hour 24 up to hour 48 of each run. heat and vapour in W/m2, upward positive: resolved (thfr, qvfr), diffusion (the advection's implicit diffusion, thfd, qvfd), subgrid (the boundary-layer scheme, thfs, qvfs), total their sum, resolved_advection resolved plus diffusion; subgrid_share the subgrid part over the mean total, subgrid_and_diffusion_share the subgrid part and the diffusion together over it; total_spread and subgrid_spread the standard deviations over the outputs. khv_m2_s: the scheme's mean diffusivity at the level. heat = rho cp (p/p0)^(R/cp) times the potential temperature's flux; vapour = rho L times the vapour's, CM1's constants.",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/box_lid.py": "d2a56eb1ce0b4d0c",
+   "crm/box_budget.py": "1ec391e81bda9e69"
+  }
+ }
+}

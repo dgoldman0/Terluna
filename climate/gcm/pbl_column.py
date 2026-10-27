@@ -1,7 +1,9 @@
 """PlaSim's boundary layer in a single column on fifteen levels, against the CM1 boxes (27 October 2026; the record is
-the section "A nonlocal boundary layer for the Moon" in README.md beside this file).
+the sections "A nonlocal boundary layer for the Moon" and "The single column with CM1's own convection" in README.md
+beside this file).
 
     climate/gcm/.venv/bin/python -m climate.gcm.pbl_column     # ../results/gcm/pbl_column_l15.json, minutes on one core
+    climate/gcm/.venv/bin/python -m climate.gcm.pbl_column --test convection   # pbl_column_convection_l15.json
 
 Each column takes a CM1 box's air on PlaSim's fifteen levels (levels.py's l15) at the start of one quarter of the lunar
 day and runs two quarters with the box's own forcing, interpolated between its 3-hourly outputs: its radiation, the
@@ -26,6 +28,12 @@ full levels near 0.3 and 6.2 km and its drop between them, the virtual potential
 the half levels, the nonlocal scheme's depth and velocity scales, how often the dry adjustment acts, the convection's
 type, tops and rain, and the column's water and heat budgets, the spin-up quarter's beside the compared one's. As a
 sensitivity (one_quarter) the same columns also start from the box's air at the compared quarter's own start.
+
+The second test (--test convection) runs the same 2x2 under three convection setups: the mass-flux scheme as above; in
+its place CM1's own tendencies of its microphysics and its resolved transport (box_budget's groups), interpolated
+between the box's outputs, so that PlaSim's mixing stands for CM1's boundary-layer scheme alone; and the mass-flux
+scheme limited to shallow convection while the Sun is down (SHALLOW_ONLY). It adds the heat and vapour each column
+carries through its interface at 7.1 km, beside CM1's own at 6.45-6.99 km split by part (climate/crm/box_lid.py).
 """
 from __future__ import annotations
 
@@ -66,29 +74,45 @@ def grid() -> np.ndarray:
 
 def box_rows(case: str, span) -> dict:
     """The box's outputs as massflux.cm1_outputs gives them, each with its ground-relative domain-mean wind (u, v, top
-    first) from the same diagnostic file."""
+    first) from the same diagnostic file and CM1's own tendencies of its microphysics and of its resolved transport
+    (box_budget's groups: the box's advection with its implicit diffusion, without the imposed ascent), of temperature
+    at constant pressure (K/s) and of vapour (kg/kg/s, the mixing ratio's, taken as the specific humidity's as the
+    testbed's other CM1 terms are), top first."""
     from climate.crm import box_budget as bb
+    from climate.crm import cm1_output as co
     from climate.crm import ring_analysis as ra
     box = mf.cm1_outputs(case, span)
     folder = ra.RUNS / case
     layout = ra.grads_layout(folder / 'cm1out_diag_s.ctl')[1]
-    winds = {}
+    extra = {}
     for path in sorted(folder.glob('cm1out_diag_*_s.dat')):
         d = bb.read_diag(folder, path, layout)
         if not span[0] * DAY + 1.0 < d['mtime'] <= span[1] * DAY + 1.0:
             continue
-        winds[round(float(d['mtime']) / DAY, 6)] = ((d['u'] + d['umove'])[::-1], (d['v'] + d['vmove'])[::-1])
+        ex = (d['prs'] / co.P00) ** (co.RD / co.CP)
+        group = lambda names: sum((d[n] for n in names if n in d), np.zeros_like(d['prs']))
+        extra[round(float(d['mtime']) / DAY, 6)] = dict(
+            u=(d['u'] + d['umove'])[::-1], v=(d['v'] + d['vmove'])[::-1],
+            cm1_mp_dtdt=(group(bb.GROUPS['microphysics']) * ex)[::-1],
+            cm1_transport_dtdt=(group(bb.GROUPS['resolved_transport']) * ex)[::-1],
+            cm1_mp_dqdt=group(bb.WATER['microphysics'])[::-1],
+            cm1_transport_dqdt=group(bb.WATER['own_transport'])[::-1])
     for r in box['rows']:
-        r['u'], r['v'] = winds[round(r['day'], 6)]
+        r.update(extra[round(r['day'], 6)])
     return box
 
 
+GRIDDED = ('table_dtdt', 'table_dqdt', 'w_mean', 'u', 'v', 'cm1_mp_dtdt', 'cm1_transport_dtdt', 'cm1_mp_dqdt',
+           'cm1_transport_dqdt')
+
+
 def gridded_rows(box: dict, half) -> list:
-    """Each output laid on the grid by layer means in pressure (massflux.to_grid), with its winds, table and ascent."""
+    """Each output laid on the grid by layer means in pressure (massflux.to_grid), with its winds, table, ascent and
+    CM1's own convective tendencies."""
     out = []
     for r in box['rows']:
         gr = mf.to_grid(r, half)
-        for key in ('table_dtdt', 'table_dqdt', 'w_mean', 'u', 'v'):
+        for key in GRIDDED:
             gr[key] = mf.to_grid(dict(r, t=r[key], q=r[key]), half)['t']
         gr.update(day=r['day'], hour=r['hour'], quarter=r['quarter'], ust=r['ust'], g=r['g'])
         out.append(gr)
@@ -108,13 +132,32 @@ def interface_flux(dtdt, dqdt, mass, c):
     return heat, vapour
 
 
-def step(t, q, rows, times, now, sigma, half, pf, ph, mass, g, c, land, tag, lamm, nonlocal_):
-    """One step of the column at time now: returns the new temperature and vapour and the step's record."""
+def interface_flux_from_ground(dtdt, dqdt, mass, c):
+    """The same from the tendencies summed from the ground, where a transport by the air's own motion carries nothing:
+    for CM1's resolved transport, whose tendencies above 16 km hold a heating that is no flux's convergence."""
+    heat = -np.cumsum((c['acpd'] * mass * dtdt)[::-1])[::-1][1:]
+    vapour = -np.cumsum((c['ALV'] * mass * dqdt)[::-1])[::-1][1:]
+    return heat, vapour
+
+
+CONVECTION = ('massflux', 'massflux_shallow_night', 'cm1')
+# The mass-flux scheme limited to shallow convection: classify's deep test parcels depart from no level (departure_dp
+# below nil) and its mid-level search stops at once (midlevel_top above one), so only its shallow branch, a surface
+# cloud at most deep_dp thick, can convect. massflux_shallow_night takes it while the Sun is down (|hour| >= 90).
+SHALLOW_ONLY = dict(departure_dp=-1.0, midlevel_top=2.0)
+
+
+def step(t, q, rows, times, now, sigma, half, pf, ph, mass, g, c, land, tag, lamm, nonlocal_, convection='massflux'):
+    """One step of the column at time now: returns the new temperature and vapour and the step's record. convection
+    'massflux' runs the mass-flux scheme with PlaSim's evaporation of its rain; 'massflux_shallow_night' the same,
+    limited to shallow convection while the Sun is down (SHALLOW_ONLY); 'cm1' puts in its place CM1's own tendencies of
+    its microphysics and its resolved transport at that time, interpolated between the box's outputs."""
     akap = c['gascon'] / c['acpd']
     j = int(np.clip(np.searchsorted(times, now, side='right') - 1, 0, len(times) - 2))
     f = (now - times[j]) / (times[j + 1] - times[j])
     lerp = lambda key: (1.0 - f) * np.asarray(rows[j][key], float) + f * np.asarray(rows[j + 1][key], float)
     hour = rows[j]['hour'] + f * ((rows[j + 1]['hour'] - rows[j]['hour'] + 180.0) % 360.0 - 180.0)
+    hour = (hour + 180.0) % 360.0 - 180.0
     shf, lhf, ust = float(lerp('shf')), float(lerp('lhf')), float(lerp('ust'))
     u, v = lerp('u'), lerp('v')
     z_full, z_half = mf.heights(t, q, pf, ph, g, c)
@@ -136,39 +179,60 @@ def step(t, q, rows, times, now, sigma, half, pf, ph, mass, g, c, land, tag, lam
     dyn_t = lerp('table_dtdt') - w * np.gradient(th, z_full) * (pf / 1.0e5) ** akap
     dyn_q = lerp('table_dqdt') - w * np.gradient(q, z_full)
     omega = -(pf / (c['gascon'] * t)) * g * w
-    # convection from the state after the tendencies so far, its boundary-layer forcing those and the large-scale terms
-    bl_t = (t3 - t) / STEP_S + dyn_t
-    bl_q = (q2 - q) / STEP_S + dyn_q
-    zf3, zh3 = mf.heights(t3, q2, pf, ph, g, c)
-    cv = mf.column(t3, q2, pf, ph, g, STEP_S, shf, lhf, bl_t, bl_q, omega, np.hypot(u, v), land, c=c, z_full=zf3,
-                   z_half=zh3, melt='plasim')
-    ev = mf.evaporate(cv['column'], cv['net_rain'], cv['net_snow'], cv['dtdt'], cv['dqdt'], mf.GAMMA[tag])
-    t4 = t3 + STEP_S * (cv['dtdt'] + ev['dtdt'])
-    q4 = q2 + STEP_S * (cv['dqdt'] + ev['dqdt'])
+    # convection from the state after the tendencies so far, its boundary-layer forcing those and the large-scale terms;
+    # or CM1's own microphysics and resolved transport in its place
+    shallow_only = convection == 'massflux_shallow_night' and abs(hour) >= 90.0
+    if convection == 'cm1':
+        tr_t, tr_q = lerp('cm1_transport_dtdt'), lerp('cm1_transport_dqdt')
+        conv_dtdt = lerp('cm1_mp_dtdt') + tr_t
+        conv_dqdt = lerp('cm1_mp_dqdt') + tr_q
+        cv = dict(type=None, z_top=None, z_base=None)
+        rain_conv = 0.0
+    elif convection in ('massflux', 'massflux_shallow_night'):
+        bl_t = (t3 - t) / STEP_S + dyn_t
+        bl_q = (q2 - q) / STEP_S + dyn_q
+        zf3, zh3 = mf.heights(t3, q2, pf, ph, g, c)
+        prm = dict(mf.PARAMETERS, **SHALLOW_ONLY) if shallow_only else mf.PARAMETERS
+        cv = mf.column(t3, q2, pf, ph, g, STEP_S, shf, lhf, bl_t, bl_q, omega, np.hypot(u, v), land, prm=prm, c=c,
+                       z_full=zf3, z_half=zh3, melt='plasim')
+        ev = mf.evaporate(cv['column'], cv['net_rain'], cv['net_snow'], cv['dtdt'], cv['dqdt'], mf.GAMMA[tag])
+        conv_dtdt, conv_dqdt = cv['dtdt'] + ev['dtdt'], cv['dqdt'] + ev['dqdt']
+        rain_conv = ev['rain'] + ev['snow']
+    else:
+        raise ValueError(f'convection must be one of {CONVECTION}')
+    t4 = t3 + STEP_S * conv_dtdt
+    q4 = q2 + STEP_S * conv_dqdt
     # the dry adjustment
     dtd, dqd, passes = ps.dca(t4, q4, sigma, half, akap, STEP_S)
     t5 = t4 + STEP_S * dtd
     q5 = q4 + STEP_S * dqd
     # the large-scale terms and the condensation of what they saturate
     t6 = t5 + STEP_S * dyn_t
-    q6 = np.maximum(q5 + STEP_S * dyn_q, 1.0e-9)
+    q6_raw = q5 + STEP_S * dyn_q
+    q6 = np.maximum(q6_raw, 1.0e-9)
     t7, q7, ls_rain = mf.condense_large_scale(t6, q6, pf, mass, c)
     heat_bl, vap_bl = interface_flux(bl['dtdt_diffusion'], bl['dqdt'], mass, c)
     heat_dca, vap_dca = interface_flux(dtd, dqd, mass, c)
-    rain = ev['rain'] + ev['snow'] + float(ls_rain.sum()) / STEP_S
+    rain = rain_conv + float(ls_rain.sum()) / STEP_S
     # where the water and the heat go over the step (kg/m2/s and W/m2): the surface's evaporation and the large-scale
     # terms bring water, the rain takes it, the rest is stored; the air's dry enthalpy takes the surface's sensible heat,
-    # the radiation, the large-scale terms and the latent heat of the net condensation (the vapour lost to rain)
+    # the radiation, the large-scale terms and the latent heat of the net condensation (the vapour lost to rain). With
+    # CM1's convection its prescribed tendencies move water and heat as well, and the floor on vapour adds water
     budget = dict(evaporation=lhf / c['ALV'], large_scale_water=float(np.sum(mass * dyn_q)), rain=rain,
                   water_stored=float(np.sum(mass * (q7 - q))) / STEP_S, sensible=shf,
                   radiation=float(np.sum(mass * c['acpd'] * lerp('rad_dtdt'))),
                   large_scale_heat=float(np.sum(mass * c['acpd'] * dyn_t)),
-                  heat_stored=float(np.sum(mass * c['acpd'] * (t7 - t))) / STEP_S)
+                  heat_stored=float(np.sum(mass * c['acpd'] * (t7 - t))) / STEP_S,
+                  prescribed_water=float(np.sum(mass * conv_dqdt)) if convection == 'cm1' else 0.0,
+                  prescribed_heat=float(np.sum(mass * c['acpd'] * conv_dtdt)) if convection == 'cm1' else 0.0,
+                  floor_water=float(np.sum(mass * (q6 - q6_raw))) / STEP_S)
     rec = dict(hour=hour, quarter=mf.quarter_name(hour), heat_bl=heat_bl, vap_bl=vap_bl, heat_dca=heat_dca,
                vap_dca=vap_dca, dca_passes=passes, conv_type=cv['type'], conv_top_m=cv['z_top'],
-               conv_base_m=cv['z_base'], rain_conv=ev['rain'] + ev['snow'], rain_ls=float(ls_rain.sum()) / STEP_S,
-               conv_dqdt=cv['dqdt'] + ev['dqdt'], conv_dtdt=cv['dtdt'] + ev['dtdt'], vapour_kept=False,
+               conv_base_m=cv['z_base'], rain_conv=rain_conv, rain_ls=float(ls_rain.sum()) / STEP_S,
+               conv_dqdt=conv_dqdt, conv_dtdt=conv_dtdt, vapour_kept=False, shallow_only=shallow_only,
                budget=budget)
+    if convection == 'cm1':                  # the heat and vapour CM1's resolved transport carries up through the column
+        rec['heat_transport'], rec['vap_transport'] = interface_flux_from_ground(tr_t, tr_q, mass, c)
     p = bl['pbl']
     if p is not None:
         rec.update(h=p['h'], wstar=p['wstar'], wm=p['wm'], we=p['entrainment_velocity'], unstable=p['unstable'],
@@ -182,10 +246,11 @@ def rho_half(t, q, pf, ph, c):
     return ph[1:-1] / (c['gascon'] * 0.5 * (tv[:-1] + tv[1:]))
 
 
-def run_column(rows, start_quarter: str, compare_quarter: str, site: str, scheme: tuple, half) -> dict:
+def run_column(rows, start_quarter: str, compare_quarter: str, site: str, scheme: tuple, half,
+               convection: str = 'massflux') -> dict:
     """The column from the box's first output in start_quarter through its last in compare_quarter, under one scheme
-    (name, length 'earth' or 'lunar', nonlocal). Returns the compared quarter's means and each quarter's rain and
-    convection."""
+    (name, length 'earth' or 'lunar', nonlocal) and one convection (step's). Returns the compared quarter's means and
+    each quarter's rain and convection."""
     name, length, nonlocal_ = scheme
     first = next(i for i, r in enumerate(rows) if r['quarter'] == start_quarter)
     last = max(i for i, r in enumerate(rows) if r['quarter'] == compare_quarter)
@@ -202,14 +267,15 @@ def run_column(rows, start_quarter: str, compare_quarter: str, site: str, scheme
     acc = {}
     now = times[0]
     while now < times[-1] - 1.0:
-        t, q, rec = step(t, q, sub, times, now, sigma, sigmah, pf, ph, mass, g, c, land, site, lamm, nonlocal_)
+        t, q, rec = step(t, q, sub, times, now, sigma, sigmah, pf, ph, mass, g, c, land, site, lamm, nonlocal_,
+                         convection)
         a = acc.setdefault(rec['quarter'], dict(t=[], q=[], rec=[]))
         a['t'].append(t)
         a['q'].append(q)
         a['rec'].append(rec)
         now += STEP_S
     akap = c['gascon'] / c['acpd']
-    out = dict(scheme=name, mixing_length_m=lamm, nonlocal_=nonlocal_, quarters={})
+    out = dict(scheme=name, mixing_length_m=lamm, nonlocal_=nonlocal_, convection=convection, quarters={})
     for quarter, a in acc.items():
         recs = a['rec']
         tm, qm = np.mean(a['t'], axis=0), np.mean(a['q'], axis=0)
@@ -245,6 +311,14 @@ def run_column(rows, start_quarter: str, compare_quarter: str, site: str, scheme
                       unstable_share=float(np.mean([r['unstable'] for r in recs])),
                       excess_median_k=float(np.median([r['excess'] for r in recs])),
                       vapour_kept_steps=int(sum(r['vapour_kept'] for r in recs)))
+        if convection != 'massflux':
+            mean = lambda key: float(np.mean([r['budget'][key] for r in recs]))
+            qd['water_mm_day'].update(prescribed=mean('prescribed_water') * DAY, floor=mean('floor_water') * DAY)
+            qd['heat_w_m2']['prescribed'] = mean('prescribed_heat')
+            qd['shallow_only_share'] = float(np.mean([r['shallow_only'] for r in recs]))
+        if convection == 'cm1':
+            qd.update(heat_transport_w_m2=np.mean([r['heat_transport'] for r in recs], axis=0),
+                      vapour_transport_w_m2=np.mean([r['vap_transport'] for r in recs], axis=0))
         out['quarters'][quarter] = qd
     return out
 
@@ -386,8 +460,144 @@ READING_RULE = ('cases: each column\'s compared quarter (its second), by scheme:
                 'sensitivity, each column started from the box\'s air at its compared quarter\'s own start.')
 
 
-def producer() -> dict:
-    files = ('gcm/pbl_column.py', 'gcm/pbl_scheme.py', 'gcm/massflux.py', 'gcm/pbl_mixing.py', 'crm/box_budget.py')
+# The second test (27 October): the columns with CM1's own convection in place of the mass-flux scheme, and with the
+# scheme limited to shallow convection at night, beside the testbed as it stood. The thresholds are the stop rule's.
+CONVECTION_OUT = RESULTS / 'pbl_column_convection_l15.json'
+CONVECTION_SCHEMA = 'terluna.climate.gcm-pbl-column-convection/1'
+SETUPS = ('massflux', 'cm1', 'massflux_shallow_night')
+EXCHANGE_KM = 6.72              # the middle of CM1's lid levels, 6.45 and 6.99 km; the column's nearest interface is 7.1 km
+HALF_GAP = 0.5
+MEASURES = ('mixed_depth_km', 'vapour_drop_g_kg', 'lid_rise_k')
+
+
+def lid_exchange(qd: dict) -> dict:
+    """The heat and vapour (W/m2, upward) a column carries through its interface nearest EXCHANGE_KM over a quarter: by its
+    vertical diffusion, by its dry adjustment, their sum (PlaSim's mixing), and with CM1's convection the part CM1's
+    prescribed resolved transport carries there and the whole."""
+    k = nearest(qd['z_half_m'], EXCHANGE_KM * 1000.0)
+    out = dict(height_km=float(qd['z_half_m'][k]) / 1000.0)
+    for q, bl_key, dca_key, tr_key in (('heat', 'heat_bl_w_m2', 'heat_dca_w_m2', 'heat_transport_w_m2'),
+                                       ('vapour', 'vapour_bl_w_m2', 'vapour_dca_w_m2', 'vapour_transport_w_m2')):
+        diffusion, dca_ = float(qd[bl_key][k]), float(qd[dca_key][k])
+        entry = dict(diffusion=diffusion, dry_adjustment=dca_, mixing=diffusion + dca_)
+        if tr_key in qd:
+            entry.update(cm1_transport=float(qd[tr_key][k]), total=diffusion + dca_ + float(qd[tr_key][k]))
+        out[q] = entry
+    return out
+
+
+def cm1_lid(split_levels) -> dict:
+    """CM1's lid exchange over a quarter: box_lid's parts averaged over its lid levels (W/m2, upward)."""
+    out = dict(heights_km=[lev['height_m'] / 1000.0 for lev in split_levels],
+               khv_m2_s=float(np.mean([lev['khv_m2_s'] for lev in split_levels])))
+    for q in ('heat', 'vapour'):
+        out[q] = {k: float(np.mean([lev[q][k] for lev in split_levels]))
+                  for k in ('resolved', 'diffusion', 'subgrid', 'total')}
+    return out
+
+
+def budget_residuals(qd: dict, c: dict) -> dict:
+    """What each budget leaves over the quarter: the water (mm/day) the sources, the rain and the storage leave, and the
+    heat (W/m2) the sources, the rain's latent heat and the storage leave (the diffusion's dissipation heating aside)."""
+    w, h = qd['water_mm_day'], qd['heat_w_m2']
+    water = (w['evaporation'] + w['large_scale_water'] + w.get('prescribed', 0.0) + w.get('floor', 0.0) - w['rain']
+             - w['water_stored'])
+    heat = (h['sensible'] + h['radiation'] + h['large_scale_heat'] + h.get('prescribed', 0.0)
+            + c['ALV'] * w['rain'] / DAY - h['heat_stored'])
+    return dict(water_mm_day=water, heat_w_m2=heat)
+
+
+def analyse_convection() -> dict:
+    """The 2x2 of boundary layers under each convection setup (SETUPS) for the three columns, with CM1's lid split."""
+    from climate.crm import box_lid as bl
+    from climate.gcm import pbl_mixing as pm
+    half = grid()
+    boxes, cm1s, rains, lids = {}, {}, {}, {}
+    results = {}
+    for name, site, case, span, start_q, compare_q in CASES:
+        if case not in boxes:
+            boxes[case] = gridded_rows(box_rows(case, span), half)
+            cm1s[case] = pm.cm1_box(case)
+            rains[case] = mf.cm1_microphysics(case, span)
+            lids[case] = bl.lid_split(case, bl.LID_M, span[0] * DAY, span[1] * DAY, by_quarter=True)
+        rows = boxes[case]
+        c = constants(rows[0]['g'])
+        runs = {setup: {s[0]: run_column(rows, start_q, compare_q, site, s, half, setup)['quarters'] for s in SCHEMES}
+                for setup in SETUPS}
+        ref = runs['massflux']['earth_local'][compare_q]
+        cm1 = cm1_quarter(cm1s[case], compare_q, ref['z_full_m'], ref['z_half_m'])
+        cm = {k: cm1[k] for k in ('mixed_depth_km', 'q_low_g_kg', 'q_mid_g_kg', 'vapour_drop_g_kg', 'lid_rise_k',
+                                  'levels_km', 'hpbl_km')}
+        entry = dict(site=site, case=case, start_quarter=start_q, compared_quarter=compare_q,
+                     cm1=dict(measures=cm, rain_ground_mm_day=rains[case][compare_q]['ground_mm_day'],
+                              lid=cm1_lid(lids[case]['quarters'][PBL_QUARTERS[compare_q]]),
+                              theta_v_k=cm1['theta_v_k'], q_g_kg=cm1['q_g_kg']),
+                     setups={})
+        testbed = measures(ref['z_full_m'], ref['theta_v_k'], ref['q_g_kg'])
+        for setup in SETUPS:
+            base = runs[setup]['earth_local'][compare_q]
+            base_m = measures(base['z_full_m'], base['theta_v_k'], base['q_g_kg'])
+            out = {}
+            for sname, quarters in runs[setup].items():
+                qd, sq = quarters[compare_q], quarters[start_q]
+                m = measures(qd['z_full_m'], qd['theta_v_k'], qd['q_g_kg'])
+                out[sname] = dict(
+                    measures=m, lid=lid_exchange(qd),
+                    gap_closed_within={k: gap_closed(cm[k], base_m[k], m[k]) for k in MEASURES},
+                    gap_closed_from_testbed={k: gap_closed(cm[k], testbed[k], m[k]) for k in MEASURES},
+                    rain_mm_day=qd['rain_conv_mm_day'] + qd['rain_ls_mm_day'], rain_conv_mm_day=qd['rain_conv_mm_day'],
+                    rain_ls_mm_day=qd['rain_ls_mm_day'], dca_share=qd['dca_share'], types=qd['types'],
+                    top_median_km=qd['top_median_km'], shallow_only_share=qd.get('shallow_only_share', 0.0),
+                    water_mm_day=qd['water_mm_day'], heat_w_m2=qd['heat_w_m2'],
+                    residuals=budget_residuals(qd, c), conv_heating_w_m2=qd['conv_heating_w_m2'],
+                    conv_moistening_mm_day=qd['conv_moistening_mm_day'],
+                    **({k: qd[k] for k in ('h_median_km', 'we_median_mm_s', 'vapour_kept_steps') if k in qd}),
+                    theta_v_k=qd['theta_v_k'], q_g_kg=qd['q_g_kg'], z_full_m=qd['z_full_m'],
+                    spin_up_quarter=dict(types=sq['types'], top_median_km=sq['top_median_km'],
+                                         rain_mm_day=sq['rain_conv_mm_day'] + sq['rain_ls_mm_day'],
+                                         residuals=budget_residuals(sq, c)))
+            closes = lambda g: bool(g['mixed_depth_km'] is not None and g['vapour_drop_g_kg'] is not None
+                                    and g['mixed_depth_km'] >= HALF_GAP and g['vapour_drop_g_kg'] >= HALF_GAP)
+            entry['setups'][setup] = dict(
+                schemes=out,
+                setup_closes_half_of_testbed_gap=closes(out['earth_local']['gap_closed_from_testbed']),
+                nonlocal_closes_half_within=closes(out['lunar_nonlocal']['gap_closed_within']))
+        results[name] = entry
+    return dict(schema=CONVECTION_SCHEMA, level_set=LEVEL_SET, step_s=STEP_S, setups=list(SETUPS), cases=results,
+                thresholds=dict(half_gap=HALF_GAP, rule=('a change passes when it closes at least half of the gap to '
+                                                         'CM1 in both the mixed depth and the 0.3-6.2 km vapour drop')),
+                parameters=ps.PARAMETERS, shallow_only=SHALLOW_ONLY, evidence=CONVECTION_EVIDENCE,
+                reading_rule=CONVECTION_READING_RULE,
+                producer=producer(extra=('crm/box_lid.py',)))
+
+
+CONVECTION_EVIDENCE = (
+    'Single-column calculations on PlaSim\'s fifteen levels driven by the CM1 boxes\' own forcing, as in the first column '
+    'test (one realization each of the settled sea box and the 0 E land box on a 6 km grid). In setup cm1 CM1\'s '
+    'microphysics and resolved transport are prescribed from its domain diagnostics, each output one time step\'s '
+    'domain mean, interpolated linearly between the 3-hourly outputs; the resolved transport carries the box\'s '
+    'resolved boundary-layer eddies, so beneath it PlaSim\'s mixing stands for CM1\'s boundary-layer scheme and the '
+    'nonlocal scheme counts part of the eddies twice below its top. CM1\'s lid exchange from its own flux diagnostics '
+    '(box_lid). No GCM or CM1 run and no Fortran change.')
+CONVECTION_READING_RULE = (
+    'cases: each column\'s compared quarter, by convection setup (massflux: the testbed as it stood; cm1: CM1\'s '
+    'microphysics and resolved transport in place of the scheme; massflux_shallow_night: the scheme limited to shallow '
+    'convection while the Sun is down, shallow_only) and boundary layer (as in the first test). measures as in the first '
+    'test. lid: the heat and vapour (W/m2, upward) the column carries through its interface nearest 6.7 km (7.1 km) by '
+    'diffusion and dry adjustment (mixing), with cm1_transport the part CM1\'s prescribed transport carries there and '
+    'total their sum; cm1.lid: CM1\'s parts (box_lid) averaged over its levels at 6.45 and 6.99 km over the same '
+    'quarter: resolved, diffusion (the advection\'s implicit diffusion), subgrid (its boundary-layer scheme) and total; '
+    'khv its scheme\'s diffusivity. gap_closed_within: 1 - |x - CM1| / |earth_local - CM1| with the same setup\'s '
+    'earth_local; gap_closed_from_testbed: the same against the testbed\'s earth_local (massflux). '
+    'setup_closes_half_of_testbed_gap: the setup\'s earth_local closes at least half of the testbed\'s gap in depth and '
+    'drop; nonlocal_closes_half_within: lunar_nonlocal closes at least half of its setup\'s earth_local gap in both. '
+    'water_mm_day and heat_w_m2: the budget\'s terms over the quarter, with prescribed the cm1 tendencies\' column '
+    'sums and floor the water the floor on vapour adds; residuals: what each budget leaves.')
+
+
+def producer(extra=()) -> dict:
+    files = ('gcm/pbl_column.py', 'gcm/pbl_scheme.py', 'gcm/massflux.py', 'gcm/pbl_mixing.py', 'crm/box_budget.py',
+             *extra)
     return dict(domain='climate', files={f: hashlib.sha256((HERE.parent / f).read_bytes()).hexdigest()[:16]
                                          for f in files})
 
@@ -410,10 +620,14 @@ def compact(x, digits: int = 4):
 
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__.split('\n\n')[0])
-    p.add_argument('--output', type=Path, default=OUT)
+    p.add_argument('--test', choices=('nonlocal', 'convection'), default='nonlocal',
+                   help='nonlocal: the first test (pbl_column_l15.json); convection: CM1\'s own convection and the '
+                        'shallow night (pbl_column_convection_l15.json)')
+    p.add_argument('--output', type=Path)
     a = p.parse_args(argv)
-    res = analyse()
-    a.output.write_text(json.dumps(compact(res), indent=1) + '\n')
+    res = analyse() if a.test == 'nonlocal' else analyse_convection()
+    out = a.output or (OUT if a.test == 'nonlocal' else CONVECTION_OUT)
+    out.write_text(json.dumps(compact(res), indent=1) + '\n')
     return 0
 
 
