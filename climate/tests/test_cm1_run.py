@@ -988,3 +988,96 @@ def test_the_held_nights_differ_in_their_grid_alone():
     assert all(boxes[0][k] == sea[k] for k in shared)                            # the sea box's build and forcing
     assert boxes[0]['days'] == 2.0 and boxes[0]['output_s'] == 6 * 3600.0 and boxes[0]['restart_s'] == 12 * 3600.0
     assert c.case_length_s(boxes[0], 1.0) == 2.0 * 86400.0
+
+
+def test_the_earth_length_cases_differ_from_their_sources_in_the_length_and_what_they_write_alone():
+    day3, linf = c.CASES['box_near_side_sea_day3'], c.CASES['box_near_side_sea_day3_linf75']
+    own = ('output_s', 'keep_restarts', 'restart_namelist', 'purpose')
+    assert {k: v for k, v in linf.items() if k not in own} == {k: v for k, v in day3.items() if k not in own}
+    assert linf['restart_from'] == dict(case='box_near_side_sea', day=59.0) and linf['days'] == 88.5
+    assert linf['restart_namelist'] == dict(param3=dict(l_inf=75.0), param9=dict(output_thbudget=0, output_qvbudget=0))
+    assert linf['output_s'] == 6 * 3600.0 and linf['restart_s'] == day3['restart_s'] and linf['keep_restarts'] == 2
+    night, night75 = c.CASES['box_near_side_sea_night_6km'], c.CASES['box_near_side_sea_night_6km_linf75']
+    assert {k: v for k, v in night75.items() if k not in ('namelist', 'purpose')} == \
+        {k: v for k, v in night.items() if k not in ('namelist', 'purpose')}
+    assert night75['namelist'] == dict(c.NIGHT_OUTPUT, param3=dict(l_inf=75.0))
+    # no case set up before them takes either new key, so the runner sets them up and runs them as before
+    new = {'box_near_side_sea_day3_linf75', 'box_near_side_sea_night_6km_linf75'}
+    assert not [n for n, v in c.CASES.items() if n not in new and ('restart_namelist' in v or 'keep_restarts' in v)]
+
+
+def test_pruning_keeps_the_starting_restart_the_newest_and_any_incomplete_set(tmp_path):
+    for n in (118, 119, 120, 121, 122):
+        for part in 'isuvwx':
+            (tmp_path / f'cm1rst_t{n:06d}_{part}.dat').write_bytes(b'')
+    for part in 'isuv':                                                   # being written
+        (tmp_path / f'cm1rst_t000123_{part}.dat').write_bytes(b'')
+    assert c.prune_restarts(tmp_path, 2, start=118) == [119, 120]
+    left = sorted({p.name[8:14] for p in tmp_path.glob('cm1rst_t*_s.dat')})
+    assert left == ['000118', '000121', '000122', '000123'] and c.latest_restart(tmp_path) == 122
+    assert len(list(tmp_path.glob('cm1rst_t000121_*.dat'))) == 6 and c.prune_restarts(tmp_path, 2, start=118) == []
+
+
+LENGTH_TEMPLATE = FINE_TEMPLATE + (' &param3\n fcor    = -1.155e-06,\n l_inf   =     453.0,\n /\n'
+                                   ' &param9\n output_radten    = 1,\n output_thbudget  = 1,\n output_qvbudget  = 1,\n /\n')
+
+
+def test_a_run_on_with_earth_s_length_changes_the_source_s_namelist_there_alone(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    monkeypatch.setattr(c, 'apply_rain_limits', lambda case, cfg, g: None)   # the source's limits, written elsewhere
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_rain_law_pbl'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_rain_law_pbl', executable_sha256='linf')))
+    source = tmp_path / 'runs' / 'coarse'
+    coarse_run(source)
+    (source / 'namelist.template').write_text(LENGTH_TEMPLATE)
+    for part in 'isuvwx':
+        (source / f'cm1rst_t000015_{part}.dat').write_text(part)
+    (source / 'progress.json').write_text(json.dumps(dict(segments=[dict(segment=8, model_s=691200.0,
+                                                                          executable='source')])))
+    monkeypatch.setitem(c.CASES, 'linf', dict(c.CASES['box_near_side_sea_day3_linf75'],
+                                              restart_from=dict(case='coarse', day=7.5), days=14.5))
+    case = c.setup('linf')
+    text = (case / 'namelist.template').read_text()
+    value = lambda section, key: c.namelist_value(text, section, key)
+    assert value('param3', 'l_inf') == '75.0' and value('param3', 'fcor') == '-1.155e-06'
+    assert [value('param9', k) for k in ('output_thbudget', 'output_qvbudget', 'output_radten')] == ['0', '0', '1']
+    assert value('param1', 'tapfrq') == '21600.0' and value('param14', 'diagfrq') == '10800.0'   # 3-hourly diagnostics
+    assert value('param1', 'rstfrq') == '43200.0'                       # restarts numbered as the source's
+    changed = [(a, b) for a, b in zip(LENGTH_TEMPLATE.splitlines(), text.splitlines()) if a != b]
+    assert len(changed) == 4 and len(text.splitlines()) == len(LENGTH_TEMPLATE.splitlines())
+    assert all((case / f'cm1rst_t000015_{part}.dat').read_text() == part for part in 'isuvwx')
+    record = json.loads((case / 'case.json').read_text())
+    assert record['configuration']['restart_namelist']['param3'] == dict(l_inf=75.0)
+    assert record['restart_from']['restart'] == 15 and record['build']['executable_sha256'] == 'linf'
+
+
+def test_the_held_night_with_earth_s_length_takes_it_over_the_source_s(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_rain_law_pbl'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_rain_law_pbl', executable_sha256='night')))
+    source = tmp_path / 'runs' / 'coarse'
+    night_source(source)
+    (source / 'namelist.template').write_text(NIGHT_TEMPLATE + ' &param3\n l_inf   =     453.0,\n /\n')
+    for name, base in (('night75', 'box_near_side_sea_night_6km_linf75'), ('night', 'box_near_side_sea_night_6km')):
+        monkeypatch.setitem(c.CASES, name, dict(c.CASES[base], night_from=dict(case='coarse', day=7.5, refine=1)))
+    long_, short = (c.namelist_value((c.setup(n) / 'namelist.template').read_text(), 'param3', 'l_inf')
+                    for n in ('night', 'night75'))
+    assert (long_, short) == ('453.0', '75.0')
+    a, b = ((c.RUNS / n / 'namelist.template').read_text().splitlines() for n in ('night', 'night75'))
+    assert [(x, y) for x, y in zip(a, b) if x != y] == [(' l_inf   =     453.0,', ' l_inf   =     75.0,')]

@@ -1792,6 +1792,22 @@ for _tag, _refine, _columns in (('6km', 1, 32), ('3km', 2, 64), ('2km', 3, 64)):
         purpose=f"the sea box's settled night at {6 // _refine} km spacing on {_columns} x {_columns} columns: "
                 "box_near_side_sea_day3's air at day 84.5, 40 degrees past midnight, averaged over its columns, and "
                 "the forcing of that hour held for two Earth days")
+# The sea box's third lunar day with Earth's boundary-layer length (the author's go-ahead of 27 October 2026). CM1's
+# simple boundary layer (ipbl 2) mixes with K = l^2 sqrt(max(S^2 - N^2/Pr, small)), whose asymptotic length l_inf
+# case_settings stretches by the gravities from Earth's 75 m to 453 m, a scaling no experiment here has tested; at the
+# top of the sea's night boundary layer that scheme carries most of the heat and vapour exchanged (box_lid.py). The case
+# runs box_near_side_sea_day3 again from the same day-59 restart, sunrise to sunrise, on the same build, inputs, forcing
+# and physics with l_inf at 75 m, a namelist value (restart_namelist, applied over the source's namelist). Its domain
+# diagnostics keep the day-3 run's 3-hour cadence, so the two compare output for output; its 3-D output comes every 6
+# hours without the budgets' fields, as the held nights' does; and it keeps only its newest two restarts besides the one
+# it starts from (keep_restarts). The held night at 6 km with the same length is the quick look before it.
+CASES['box_near_side_sea_day3_linf75'] = dict(
+    CASES['box_near_side_sea_day3'], output_s=21600.0, keep_restarts=2,
+    restart_namelist=dict(NIGHT_OUTPUT, param3=dict(l_inf=75.0)),
+    purpose=CASES['box_near_side_sea_day3']['purpose'] + "; again with Earth's boundary-layer length, l_inf 75 m")
+CASES['box_near_side_sea_night_6km_linf75'] = dict(
+    CASES['box_near_side_sea_night_6km'], namelist=dict(NIGHT_OUTPUT, param3=dict(l_inf=75.0)),
+    purpose=CASES['box_near_side_sea_night_6km']['purpose'] + "; with Earth's boundary-layer length, l_inf 75 m")
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -2849,6 +2865,9 @@ def setup_restart(name: str, cfg: dict) -> Path:
     text = (source / 'namelist.template').read_text()
     if abs(cfg['output_s'] - src['configuration']['output_s']) > 0.5:   # a window may write output more often;
         text = set_namelist(text, 'param1', 'tapfrq', cfg['output_s'] * scale)   # CM1 resets its schedule on restart
+    for section, entries in (cfg.get('restart_namelist') or {}).items():    # the case's own changes to the source's
+        for key, value in entries.items():                                   # namelist (no earlier case sets any)
+            text = set_namelist(text, section, key, value)
     electricity = None
     if cfg.get('elec') is not None:
         for section, entries in cm1_elec.namelist_settings(cfg['elec']).items():
@@ -3364,6 +3383,20 @@ def latest_restart(case: Path):
     return max(complete, default=0)
 
 
+def prune_restarts(case: Path, keep: int, start: int = 0) -> list:
+    """Remove the complete restart sets a case has written (numbers above start, the set it started from) beyond its
+    newest keep; returns the numbers removed. Incomplete sets, the starting set and the newest keep stay."""
+    import re
+    found = {int(m.group(1)) for p in case.glob('cm1rst_t*_s.dat') if (m := re.match(r'cm1rst_t(\d+)_s\.dat$', p.name))}
+    complete = sorted(n for n in found if all((case / f'cm1rst_t{n:06d}_{part}.dat').exists() for part in 'isuvwx'))
+    newest = set(complete[-keep:]) if keep > 0 else set()
+    removed = [n for n in complete if n > start and n not in newest]
+    for n in removed:
+        for part in 'isuvwx':
+            (case / f'cm1rst_t{n:06d}_{part}.dat').unlink()
+    return removed
+
+
 def stats(case: Path) -> dict:
     """CM1's statistics file (cm1out_stats.dat) as arrays, one entry per statistics time."""
     import numpy as np
@@ -3446,6 +3479,8 @@ def run(name: str, hours: float, threads: int = 8) -> dict:
                                              threads=threads))
             progress['case'] = record['case']
             _save_progress(case, progress)
+            if cfg.get('keep_restarts'):                                  # a case that keeps only its newest restarts
+                prune_restarts(case, cfg['keep_restarts'], round(progress.get('start_s', 0.0) / restart_s))
     finally:
         (case / 'run.lock').unlink(missing_ok=True)
     return progress

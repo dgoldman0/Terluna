@@ -1,0 +1,704 @@
+{
+ "schema": "terluna.climate.crm-box-length/1",
+ "runs": {
+  "stretched": "box_near_side_sea_day3",
+  "earth": "box_near_side_sea_day3_linf75"
+ },
+ "criteria": {
+  "reference_depth_km": 6.48,
+  "reference_drop_g_kg": 0.35,
+  "robust_depth_km": 1.0,
+  "robust_drop_g_kg": 1.0,
+  "dependent_depth_fall_km": 1.5,
+  "dependent_drop_rise_g_kg": 1.0
+ },
+ "days": {
+  "span_days": [
+   59.0,
+   88.5
+  ],
+  "common_outputs": 236,
+  "snapshots_compared": 118,
+  "l_inf_m": {
+   "stretched": 453.0,
+   "earth": 75.0
+  },
+  "quarters": {
+   "sunrise-noon": {
+    "stretched": {
+     "outputs": 59,
+     "mixed_depth_km": 3.246,
+     "vapour_drop_g_kg": 0.6358,
+     "lid_rise_k": 1.282,
+     "vapour_g_kg": {
+      "0.314 km": 11.18,
+      "1 km": 11.05,
+      "2 km": 11.03,
+      "3 km": 10.79,
+      "4 km": 10.58,
+      "5 km": 10.46,
+      "6.201 km": 10.55,
+      "7 km": 10.48,
+      "8.238 km": 9.777,
+      "10 km": 8.075
+     },
+     "theta_v_k": {
+      "0.314 km": 285.8,
+      "1 km": 285.8,
+      "2 km": 285.9,
+      "3 km": 286.3,
+      "4 km": 286.5,
+      "5 km": 286.7,
+      "6.201 km": 287.0,
+      "7 km": 287.4,
+      "8.238 km": 288.3,
+      "10 km": 289.4
+     },
+     "hpbl_km": 3.686,
+     "highest_cloud_km": 62.64,
+     "rain_mm_day": 0.0008186,
+     "clouds": {
+      "snapshots": 29,
+      "cloudy_share": 0.006802,
+      "top_median_m": 9810.0,
+      "top_p90_m": 13840.0,
+      "above_16km_share": 0.0005725
+     },
+     "lid": {
+      "heights_km": [
+       6.446,
+       6.989
+      ],
+      "khv_m2_s": 13.27,
+      "heat": {
+       "resolved": 0.09778,
+       "diffusion": -0.03825,
+       "subgrid": -1.229,
+       "total": -1.169,
+       "subgrid_share": 1.051
+      },
+      "vapour": {
+       "resolved": 0.1688,
+       "diffusion": 0.2519,
+       "subgrid": 0.8189,
+       "total": 1.24,
+       "subgrid_share": 0.6606
+      }
+     }
+    },
+    "earth": {
+     "outputs": 59,
+     "mixed_depth_km": 3.192,
+     "vapour_drop_g_kg": 0.5146,
+     "lid_rise_k": 1.44,
+     "vapour_g_kg": {
+      "0.314 km": 11.14,
+      "1 km": 10.97,
+      "2 km": 11.03,
+      "3 km": 10.85,
+      "4 km": 10.62,
+      "5 km": 10.49,
+      "6.201 km": 10.63,
+      "7 km": 10.65,
+      "8.238 km": 9.92,
+      "10 km": 7.913
+     },
+     "theta_v_k": {
+      "0.314 km": 285.8,
+      "1 km": 285.8,
+      "2 km": 285.9,
+      "3 km": 286.3,
+      "4 km": 286.5,
+      "5 km": 286.6,
+      "6.201 km": 286.9,
+      "7 km": 287.3,
+      "8.238 km": 288.3,
+      "10 km": 289.5
+     },
+     "hpbl_km": 3.87,
+     "highest_cloud_km": 66.11,
+     "rain_mm_day": 0.001226,
+     "clouds": {
+      "snapshots": 29,
+      "cloudy_share": 0.01829,
+      "top_median_m": 9405.0,
+      "top_p90_m": 9718.0,
+      "above_16km_share": 0.001381
+     },
+     "lid": {
+      "heights_km": [
+       6.446,
+       6.989
+      ],
+      "khv_m2_s": 0.6559,
+      "heat": {
+       "resolved": 0.5656,
+       "diffusion": -0.1032,
+       "subgrid": -0.002212,
+       "total": 0.4602,
+       "subgrid_share": -0.004807
+      },
+      "vapour": {
+       "resolved": -1.356,
+       "diffusion": 0.2088,
+       "subgrid": -0.2144,
+       "total": -1.362,
+       "subgrid_share": 0.1574
+      }
+     }
+    }
+   },
+   "noon-sunset": {
+    "stretched": {
+     "outputs": 59,
+     "mixed_depth_km": 2.643,
+     "vapour_drop_g_kg": 1.078,
+     "lid_rise_k": 0.2184,
+     "vapour_g_kg": {
+      "0.314 km": 11.26,
+      "1 km": 10.88,
+      "2 km": 10.73,
+      "3 km": 10.67,
+      "4 km": 10.46,
+      "5 km": 10.31,
+      "6.201 km": 10.18,
+      "7 km": 10.09,
+      "8.238 km": 9.892,
+      "10 km": 9.189
+     },
+     "theta_v_k": {
+      "0.314 km": 287.3,
+      "1 km": 287.4,
+      "2 km": 287.6,
+      "3 km": 288.0,
+      "4 km": 288.3,
+      "5 km": 288.4,
+      "6.201 km": 288.5,
+      "7 km": 288.6,
+      "8.238 km": 288.8,
+      "10 km": 289.0
+     },
+     "hpbl_km": 2.311,
+     "highest_cloud_km": 108.7,
+     "rain_mm_day": 2.265,
+     "clouds": {
+      "snapshots": 30,
+      "cloudy_share": 0.1025,
+      "top_median_m": 17150.0,
+      "top_p90_m": 31360.0,
+      "above_16km_share": 0.06761
+     },
+     "lid": {
+      "heights_km": [
+       6.446,
+       6.989
+      ],
+      "khv_m2_s": 31.69,
+      "heat": {
+       "resolved": 0.2238,
+       "diffusion": -0.2676,
+       "subgrid": -0.5138,
+       "total": -0.5577,
+       "subgrid_share": 0.9214
+      },
+      "vapour": {
+       "resolved": 32.1,
+       "diffusion": 1.039,
+       "subgrid": 3.296,
+       "total": 36.43,
+       "subgrid_share": 0.09048
+      }
+     }
+    },
+    "earth": {
+     "outputs": 59,
+     "mixed_depth_km": 2.783,
+     "vapour_drop_g_kg": 1.076,
+     "lid_rise_k": 0.2386,
+     "vapour_g_kg": {
+      "0.314 km": 11.29,
+      "1 km": 10.87,
+      "2 km": 10.85,
+      "3 km": 10.8,
+      "4 km": 10.57,
+      "5 km": 10.38,
+      "6.201 km": 10.21,
+      "7 km": 10.1,
+      "8.238 km": 9.861,
+      "10 km": 9.028
+     },
+     "theta_v_k": {
+      "0.314 km": 287.3,
+      "1 km": 287.3,
+      "2 km": 287.5,
+      "3 km": 287.8,
+      "4 km": 288.2,
+      "5 km": 288.3,
+      "6.201 km": 288.5,
+      "7 km": 288.6,
+      "8.238 km": 288.7,
+      "10 km": 288.9
+     },
+     "hpbl_km": 2.599,
+     "highest_cloud_km": 108.4,
+     "rain_mm_day": 2.348,
+     "clouds": {
+      "snapshots": 30,
+      "cloudy_share": 0.09535,
+      "top_median_m": 18710.0,
+      "top_p90_m": 29470.0,
+      "above_16km_share": 0.06491
+     },
+     "lid": {
+      "heights_km": [
+       6.446,
+       6.989
+      ],
+      "khv_m2_s": 1.511,
+      "heat": {
+       "resolved": 1.829,
+       "diffusion": -0.2427,
+       "subgrid": -0.08679,
+       "total": 1.499,
+       "subgrid_share": -0.0579
+      },
+      "vapour": {
+       "resolved": 30.38,
+       "diffusion": 1.278,
+       "subgrid": 0.4338,
+       "total": 32.09,
+       "subgrid_share": 0.01352
+      }
+     }
+    }
+   },
+   "sunset-midnight": {
+    "stretched": {
+     "outputs": 59,
+     "mixed_depth_km": 5.576,
+     "vapour_drop_g_kg": 2.138,
+     "lid_rise_k": 1.254,
+     "vapour_g_kg": {
+      "0.314 km": 12.64,
+      "1 km": 12.43,
+      "2 km": 12.23,
+      "3 km": 12.03,
+      "4 km": 11.7,
+      "5 km": 11.21,
+      "6.201 km": 10.5,
+      "7 km": 9.931,
+      "8.238 km": 8.918,
+      "10 km": 7.69
+     },
+     "theta_v_k": {
+      "0.314 km": 285.8,
+      "1 km": 285.8,
+      "2 km": 285.8,
+      "3 km": 285.9,
+      "4 km": 286.0,
+      "5 km": 286.2,
+      "6.201 km": 286.6,
+      "7 km": 287.2,
+      "8.238 km": 287.9,
+      "10 km": 288.6
+     },
+     "hpbl_km": 4.913,
+     "highest_cloud_km": 88.98,
+     "rain_mm_day": 2.963,
+     "clouds": {
+      "snapshots": 29,
+      "cloudy_share": 0.1005,
+      "top_median_m": 10790.0,
+      "top_p90_m": 20770.0,
+      "above_16km_share": 0.03044
+     },
+     "lid": {
+      "heights_km": [
+       6.446,
+       6.989
+      ],
+      "khv_m2_s": 9.988,
+      "heat": {
+       "resolved": -1.259,
+       "diffusion": -1.026,
+       "subgrid": -7.178,
+       "total": -9.464,
+       "subgrid_share": 0.7585
+      },
+      "vapour": {
+       "resolved": 64.46,
+       "diffusion": 4.604,
+       "subgrid": 18.98,
+       "total": 88.04,
+       "subgrid_share": 0.2155
+      }
+     }
+    },
+    "earth": {
+     "outputs": 59,
+     "mixed_depth_km": 5.41,
+     "vapour_drop_g_kg": 2.332,
+     "lid_rise_k": 1.311,
+     "vapour_g_kg": {
+      "0.314 km": 12.83,
+      "1 km": 12.55,
+      "2 km": 12.34,
+      "3 km": 12.1,
+      "4 km": 11.74,
+      "5 km": 11.23,
+      "6.201 km": 10.5,
+      "7 km": 9.815,
+      "8.238 km": 8.612,
+      "10 km": 7.438
+     },
+     "theta_v_k": {
+      "0.314 km": 285.8,
+      "1 km": 285.8,
+      "2 km": 285.8,
+      "3 km": 285.9,
+      "4 km": 286.0,
+      "5 km": 286.2,
+      "6.201 km": 286.7,
+      "7 km": 287.3,
+      "8.238 km": 288.0,
+      "10 km": 288.6
+     },
+     "hpbl_km": 4.853,
+     "highest_cloud_km": 87.1,
+     "rain_mm_day": 3.002,
+     "clouds": {
+      "snapshots": 29,
+      "cloudy_share": 0.1136,
+      "top_median_m": 8772.0,
+      "top_p90_m": 17830.0,
+      "above_16km_share": 0.01283
+     },
+     "lid": {
+      "heights_km": [
+       6.446,
+       6.989
+      ],
+      "khv_m2_s": 0.5234,
+      "heat": {
+       "resolved": -1.283,
+       "diffusion": -1.048,
+       "subgrid": -0.415,
+       "total": -2.746,
+       "subgrid_share": 0.1511
+      },
+      "vapour": {
+       "resolved": 67.26,
+       "diffusion": 5.882,
+       "subgrid": 1.457,
+       "total": 74.6,
+       "subgrid_share": 0.01953
+      }
+     }
+    }
+   },
+   "midnight-sunrise": {
+    "stretched": {
+     "outputs": 59,
+     "mixed_depth_km": 6.482,
+     "vapour_drop_g_kg": 0.3533,
+     "lid_rise_k": 1.435,
+     "vapour_g_kg": {
+      "0.314 km": 11.44,
+      "1 km": 11.33,
+      "2 km": 11.32,
+      "3 km": 11.32,
+      "4 km": 11.31,
+      "5 km": 11.27,
+      "6.201 km": 11.09,
+      "7 km": 10.81,
+      "8.238 km": 9.94,
+      "10 km": 7.859
+     },
+     "theta_v_k": {
+      "0.314 km": 285.6,
+      "1 km": 285.5,
+      "2 km": 285.5,
+      "3 km": 285.5,
+      "4 km": 285.5,
+      "5 km": 285.6,
+      "6.201 km": 285.9,
+      "7 km": 286.4,
+      "8.238 km": 287.3,
+      "10 km": 288.6
+     },
+     "hpbl_km": 6.074,
+     "highest_cloud_km": 41.7,
+     "rain_mm_day": 0.1564,
+     "clouds": {
+      "snapshots": 30,
+      "cloudy_share": 0.2186,
+      "top_median_m": 7356.0,
+      "top_p90_m": 10780.0,
+      "above_16km_share": 0.007259
+     },
+     "lid": {
+      "heights_km": [
+       6.446,
+       6.989
+      ],
+      "khv_m2_s": 11.3,
+      "heat": {
+       "resolved": -0.02409,
+       "diffusion": -0.5499,
+       "subgrid": -10.09,
+       "total": -10.66,
+       "subgrid_share": 0.9462
+      },
+      "vapour": {
+       "resolved": 7.671,
+       "diffusion": 0.7949,
+       "subgrid": 14.11,
+       "total": 22.58,
+       "subgrid_share": 0.625
+      }
+     }
+    },
+    "earth": {
+     "outputs": 59,
+     "mixed_depth_km": 6.149,
+     "vapour_drop_g_kg": 0.5266,
+     "lid_rise_k": 1.7,
+     "vapour_g_kg": {
+      "0.314 km": 11.82,
+      "1 km": 11.68,
+      "2 km": 11.67,
+      "3 km": 11.67,
+      "4 km": 11.64,
+      "5 km": 11.57,
+      "6.201 km": 11.3,
+      "7 km": 10.93,
+      "8.238 km": 9.462,
+      "10 km": 7.419
+     },
+     "theta_v_k": {
+      "0.314 km": 285.6,
+      "1 km": 285.5,
+      "2 km": 285.5,
+      "3 km": 285.5,
+      "4 km": 285.5,
+      "5 km": 285.6,
+      "6.201 km": 286.1,
+      "7 km": 286.7,
+      "8.238 km": 287.8,
+      "10 km": 288.9
+     },
+     "hpbl_km": 5.775,
+     "highest_cloud_km": 26.03,
+     "rain_mm_day": 0.2777,
+     "clouds": {
+      "snapshots": 30,
+      "cloudy_share": 0.4576,
+      "top_median_m": 8899.0,
+      "top_p90_m": 12510.0,
+      "above_16km_share": 0.08151
+     },
+     "lid": {
+      "heights_km": [
+       6.446,
+       6.989
+      ],
+      "khv_m2_s": 0.8455,
+      "heat": {
+       "resolved": 0.6356,
+       "diffusion": -0.6909,
+       "subgrid": -0.7477,
+       "total": -0.803,
+       "subgrid_share": 0.9311
+      },
+      "vapour": {
+       "resolved": 8.779,
+       "diffusion": 0.8532,
+       "subgrid": 1.201,
+       "total": 10.83,
+       "subgrid_share": 0.1108
+      }
+     }
+    }
+   }
+  },
+  "after_midnight": {
+   "depth_km": 6.149,
+   "drop_g_kg": 0.5266,
+   "stretched_depth_km": 6.482,
+   "stretched_drop_g_kg": 0.3533,
+   "verdict": "robust"
+  }
+ },
+ "held_nights": {
+  "span_hours": [
+   24.0,
+   48.0
+  ],
+  "runs": {
+   "stretched": {
+    "outputs": 48,
+    "mixed_depth_km": 6.482,
+    "vapour_drop_g_kg": 0.2415,
+    "lid_rise_k": 1.347,
+    "vapour_g_kg": {
+     "0.314 km": 11.36,
+     "1 km": 11.26,
+     "2 km": 11.27,
+     "3 km": 11.27,
+     "4 km": 11.27,
+     "5 km": 11.26,
+     "6.201 km": 11.12,
+     "7 km": 10.86,
+     "8.238 km": 10.14,
+     "10 km": 8.026
+    },
+    "theta_v_k": {
+     "0.314 km": 285.5,
+     "1 km": 285.5,
+     "2 km": 285.5,
+     "3 km": 285.5,
+     "4 km": 285.5,
+     "5 km": 285.6,
+     "6.201 km": 285.9,
+     "7 km": 286.4,
+     "8.238 km": 287.2,
+     "10 km": 288.6
+    },
+    "hpbl_km": 6.102,
+    "highest_cloud_km": 51.71,
+    "lid": {
+     "heights_km": [
+      6.446,
+      6.989
+     ],
+     "khv_m2_s": 10.16,
+     "heat": {
+      "resolved": -0.9988,
+      "diffusion": -0.6284,
+      "subgrid": -9.62,
+      "total": -11.25,
+      "subgrid_share": 0.8553
+     },
+     "vapour": {
+      "resolved": 3.008,
+      "diffusion": 0.7514,
+      "subgrid": 11.58,
+      "total": 15.34,
+      "subgrid_share": 0.7549
+     }
+    },
+    "rain_mm_day": 0.07384
+   },
+   "earth": {
+    "outputs": 48,
+    "mixed_depth_km": 6.443,
+    "vapour_drop_g_kg": 0.252,
+    "lid_rise_k": 1.448,
+    "vapour_g_kg": {
+     "0.314 km": 11.41,
+     "1 km": 11.29,
+     "2 km": 11.29,
+     "3 km": 11.3,
+     "4 km": 11.3,
+     "5 km": 11.29,
+     "6.201 km": 11.16,
+     "7 km": 10.9,
+     "8.238 km": 10.11,
+     "10 km": 7.927
+    },
+    "theta_v_k": {
+     "0.314 km": 285.5,
+     "1 km": 285.5,
+     "2 km": 285.5,
+     "3 km": 285.5,
+     "4 km": 285.5,
+     "5 km": 285.5,
+     "6.201 km": 285.9,
+     "7 km": 286.4,
+     "8.238 km": 287.3,
+     "10 km": 288.6
+    },
+    "hpbl_km": 6.097,
+    "highest_cloud_km": 21.11,
+    "lid": {
+     "heights_km": [
+      6.446,
+      6.989
+     ],
+     "khv_m2_s": 0.7751,
+     "heat": {
+      "resolved": -0.7071,
+      "diffusion": -0.7804,
+      "subgrid": -0.7339,
+      "total": -2.221,
+      "subgrid_share": 0.3304
+     },
+     "vapour": {
+      "resolved": 3.637,
+      "diffusion": 0.6914,
+      "subgrid": 0.933,
+      "total": 5.262,
+      "subgrid_share": 0.1773
+     }
+    },
+    "rain_mm_day": 0.1624
+   }
+  }
+ },
+ "records": {
+  "stretched": {
+   "case": "box_near_side_sea_day3",
+   "runner": "0fd2316a921208a1",
+   "executable": "7775d93e39166040",
+   "segments": 30,
+   "wall_hours": 1.314,
+   "threads": [
+    3
+   ],
+   "folder_mb": 5992.0
+  },
+  "earth": {
+   "case": "box_near_side_sea_day3_linf75",
+   "runner": "f3ca175b41d3a536",
+   "executable": "7775d93e39166040",
+   "segments": 30,
+   "wall_hours": 0.852,
+   "threads": [
+    6
+   ],
+   "folder_mb": 1160.0
+  },
+  "night_stretched": {
+   "case": "box_near_side_sea_night_6km",
+   "runner": "a0e3d9887788dbea",
+   "executable": "7775d93e39166040",
+   "segments": 2,
+   "wall_hours": 0.068,
+   "threads": [
+    4
+   ],
+   "folder_mb": 159.2
+  },
+  "night_earth": {
+   "case": "box_near_side_sea_night_6km_linf75",
+   "runner": "f3ca175b41d3a536",
+   "executable": "7775d93e39166040",
+   "segments": 2,
+   "wall_hours": 0.059,
+   "threads": [
+    6
+   ],
+   "folder_mb": 159.2
+  }
+ },
+ "evidence": "Two CM1 runs of the sea box's third lunar day from one restart, one realization each, which differ in the boundary-layer scheme's asymptotic length alone (453 and 75 m); domain diagnostics every 3 hours compared output for output, 3-D outputs every 6 hours, CM1's own flux diagnostics split by part. A sensitivity of CM1 to its own scheme on a 6 km grid, not a test of either length against observation.",
+ "reading_rule": "days.quarters: by quarter of the lunar day (hour angle from noon), each run's means over the domain diagnostics both wrote: mixed_depth_km by pbl_mixing.rise_height from 0.314 km (0.5 K of virtual potential temperature), vapour_drop_g_kg the mixing ratio at 0.314 km less that at 6.201 km, lid_rise_k the virtual potential temperature at 8.238 km less that at 6.201 km (the GCM's full levels at the site), vapour_g_kg and theta_v_k at fixed heights, hpbl_km CM1's own depth, highest_cloud_km the highest level any column holds cloud; rain_mm_day at the ground from CM1's running totals; clouds: means over the 3-D outputs both wrote (6-hourly) of the share of columns holding cloud of 0.01 g/kg below 40 km, the median and 90th percentile of their highest cloudy level (m) and the share of all columns whose cloud reaches above 16 km; lid: box_lid's parts (W/m2, upward) averaged over 6.45 and 6.99 km, with the scheme's share and diffusivity. after_midnight: the verdict under criteria, set before the run. held_nights: the 6 km held nights' second day, both lengths.",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "crm/box_length.py": "360049ea58365d61",
+   "crm/box_lid.py": "d2a56eb1ce0b4d0c",
+   "crm/box_budget.py": "1ec391e81bda9e69"
+  }
+ }
+}

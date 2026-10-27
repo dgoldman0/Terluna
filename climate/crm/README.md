@@ -2135,6 +2135,131 @@ climate/gcm/.venv/bin/python -m climate.crm.box_entrainment         # the clouds
 climate/gcm/.venv/bin/python -m climate.crm.box_upper_air           # why the box runs colder aloft than the GCM
 ```
 
+### The sea box with Earth's boundary-layer length (27 October)
+
+CM1's simple boundary layer (`ipbl` 2) mixes with K = l² √max(S² − N²/Pr, small), its length
+l = (l_inf⁻² + (κz)⁻²)^−½, and `case_settings` stretches the asymptotic length l_inf by the gravities from Earth's 75 m
+to 453 m, as it stretches the Rayleigh layer's time. No experiment here has tested that scaling, and at the top of the
+sea's night boundary layer the scheme carries most of the heat and vapour the box exchanges there
+([the GCM's account](../gcm/README.md#the-single-column-with-cm1s-own-convection-27-october)). On 27 October the author
+approved a run of the sea box's third lunar day with Earth's length, to see whether its deep, evenly moist night layer
+rests on the stretched one ([box_length.py](box_length.py),
+[box_length_near_side_sea.json](../results/crm/box_length_near_side_sea.json)).
+
+**The case** (`box_near_side_sea_day3_linf75`). It runs box_near_side_sea_day3 again from box_near_side_sea's day-59
+restart, sunrise to sunrise over days 59–88.5, on the build `moon_omp_rain_law_pbl` with the day-3 run's 37 wind
+windows, inputs, forcing and physics; every input file is the day-3 run's byte for byte except the namelist, which
+differs in l_inf (75.0 m) and in what it writes. l_inf is a namelist value, so the build is the day-3 run's. The domain
+diagnostics keep the day-3 run's 3-hour cadence, so the two compare output for output; the 3-D output comes every 6
+hours without the budgets' fields, as the held nights' does; and the run keeps only its newest two restarts besides the
+one it starts from. It writes 18 3-D fields where its source wrote 45, so CM1 puts all its output under a second output
+configuration, the files suffixed `.02` and numbered from 1 (cm1.F, `nconfig`); [box_lid.py](box_lid.py) and box_length
+read either.
+
+**The runner.** `cm1_run` gains two keys a case may set: `restart_namelist`, entries set over the source's namelist when
+a case runs on from a restart, and `keep_restarts`, under which the runner removes, after each segment, the restart sets
+the case wrote beyond its newest few, never the one it started from. No earlier case sets either (a test checks it), so
+every case already set up or run sets up and runs as before. The new cases record runner `f3ca175b41d3a536`. The held
+night with the same length (`box_near_side_sea_night_6km_linf75`, `setup_night` as for box_near_side_sea_night_6km)
+differs from its 453 m twin in l_inf alone.
+
+**The smoke test** (`trial_linf75.py` and `trial_linf75_checks.py` in `session-tools/agents/climate-pbl-tests` on the
+research drive). A copy of the set-up case ran six model hours from the restart on six threads. CM1 ended normally, its
+log showing l_inf 75 m, the second output configuration and 18 3-D fields; with the 37 windows in place it wrote
+diagnostics at 59.125 and 59.25 days, the 3-D output at 59.25 and a restart, every field the analyses read present and
+finite, and its running domain rain at the restart equal to the day-3 run's. The copy was removed after the checks.
+
+**The held night first** (`box_near_side_sea_night_6km_linf75`). Two Earth days of the held night at 6 km with Earth's
+length ran in 3.6 minutes on six threads. Over the second day, beside its 453 m twin:
+
+| Held night at 6 km, second day | l_inf 453 m | 75 m |
+|---|---|---|
+| Mixed depth; CM1's hpbl, km | 6.48; 6.10 | 6.44; 6.10 |
+| Vapour drop 0.31–6.2 km, g/kg | 0.24 | 0.25 |
+| θv rise 6.2–8.2 km, K | 1.35 | 1.45 |
+| Rain, mm/day | 0.07 | 0.16 |
+| Heat through 6.45–6.99 km, W/m²: the scheme; all parts | −9.6; −11.2 | −0.7; −2.2 |
+| Vapour through 6.45–6.99 km, W/m²: the scheme; all parts | 11.6; 15.3 | 0.9; 5.3 |
+| The scheme's khv there, m²/s | 10.2 | 0.8 |
+
+At Earth's length the scheme's diffusivity at the lid falls thirteenfold and its exchange there by 92%, while the
+resolved parts with the implicit diffusion barely change (−1.6 and −1.5 W/m² of heat, 3.8 and 4.3 W/m² of vapour). Over
+those two days the layer keeps its depth and its even moisture, and its lid gains 0.1 K. The held night starts from the
+453 m box's own air, so it shows how the lid's exchange answers the length at once and leaves the layer's own evolution
+to the lunar day.
+
+**The rule, set before the run** (`CRITERIA` in box_length.py). After midnight the run with Earth's length is robust if
+its mixed depth lies within 1 km of the stretched run's 6.48 km and its 0.31–6.2 km vapour drop within 1 g/kg of
+0.35 g/kg; it depends on the length if the depth falls by more than 1.5 km or the drop grows by more than 1 g/kg; it is
+ambiguous otherwise.
+
+**The lunar day.** Both runs over days 59–88.5, read output for output: 59 domain diagnostics in each quarter, and
+29–30 3-D outputs at the 6-hourly times both wrote. Each cell gives the stretched length (453 m) first and Earth's
+(75 m) second. The depth, drop and rise are read on the GCM's full levels at the site, 0.314, 6.201 and 8.238 km, as
+the comparison with the GCM read them; CM1's own boundary-layer depth (hpbl) is the mean of its columns'
+bulk-Richardson heights.
+
+| Quarter | Mixed depth, km | Vapour drop, g/kg | θv rise 6.2–8.2 km, K | CM1's hpbl, km | Rain, mm/day |
+|---|---|---|---|---|---|
+| Sunrise–noon | 3.25; 3.19 | 0.64; 0.51 | 1.28; 1.44 | 3.69; 3.87 | 0.00; 0.00 |
+| Noon–sunset | 2.64; 2.78 | 1.08; 1.08 | 0.22; 0.24 | 2.31; 2.60 | 2.27; 2.35 |
+| Sunset–midnight | 5.58; 5.41 | 2.14; 2.33 | 1.25; 1.31 | 4.91; 4.85 | 2.96; 3.00 |
+| Midnight–sunrise | 6.48; 6.15 | 0.35; 0.53 | 1.44; 1.70 | 6.07; 5.78 | 0.16; 0.28 |
+
+The cloud below 40 km (liquid and ice of at least 0.01 g/kg) in the 3-D outputs, and what each run carries through
+6.45–6.99 km (W/m², upward; the scheme's part, the resolved part with the advection's implicit diffusion, and all):
+
+| Quarter | Columns with cloud | Their top: median, 90th percentile, km | Columns with cloud above 16 km | Heat: scheme, resolved, all | Vapour: scheme, resolved, all | khv, m²/s |
+|---|---|---|---|---|---|---|
+| Sunrise–noon | 0.7%; 1.8% | 9.8, 13.8; 9.4, 9.7 | 0.1%; 0.1% | −1.2, 0.1, −1.2; 0.0, 0.5, 0.5 | 0.8, 0.4, 1.2; −0.2, −1.1, −1.4 | 13.3; 0.7 |
+| Noon–sunset | 10.2%; 9.5% | 17.2, 31.4; 18.7, 29.5 | 6.8%; 6.5% | −0.5, 0.0, −0.6; −0.1, 1.6, 1.5 | 3.3, 33.1, 36.4; 0.4, 31.7, 32.1 | 31.7; 1.5 |
+| Sunset–midnight | 10.1%; 11.4% | 10.8, 20.8; 8.8, 17.8 | 3.0%; 1.3% | −7.2, −2.3, −9.5; −0.4, −2.3, −2.7 | 19.0, 69.1, 88.0; 1.5, 73.1, 74.6 | 10.0; 0.5 |
+| Midnight–sunrise | 21.9%; 45.8% | 7.4, 10.8; 8.9, 12.5 | 0.7%; 8.2% | −10.1, −0.6, −10.7; −0.7, −0.1, −0.8 | 14.1, 8.5, 22.6; 1.2, 9.6, 10.8 | 11.3; 0.8 |
+
+**Under the rule the night layer is robust.** After midnight, with Earth's length, the layer stands 6.15 km deep
+against 6.48 and its vapour drops 0.53 g/kg against 0.35, inside both margins.
+
+**What the length does.** At Earth's length the scheme's diffusivity at the lid falls 13–21-fold in every quarter, and
+its exchange there with it: after midnight it carries 0.75 W/m² of heat down and 1.2 W/m² of vapour up, against 10.1
+and 14.1. The resolved motion does not take that exchange over. Through the lid after midnight the run with Earth's
+length moves 0.8 W/m² of heat against 10.7 and 10.8 W/m² of vapour against 22.6. The layer below changes little: its
+lid is 0.26 K stronger, its air 0.2–0.4 g/kg moister up to 6.2 km and 0.5 g/kg drier at 8.2 km. The night's
+cloud changes most: it covers 46% of the columns after midnight against 22%, its median top stands at 8.9 km against
+7.4, 8.2% of the columns reach above 16 km against 0.7%, and it rains 0.28 mm/day against 0.16, a fifth of the GCM's
+1.45 with the new convection. By day the two runs differ little: in the afternoon the layer's depth, its drop and the
+rain lie within 0.14 km, 0.01 g/kg and 0.08 mm/day of each other, and the evening's storms rain alike, 3.00 against
+2.96 mm/day, their tops lower at Earth's length (median 8.8 km against 10.8).
+
+So the sea's deep, evenly moist night layer holds at Earth's length, and the scheme's mixing at the layer's top bears
+mostly on the night's cloud. In CM1 the exchange the scheme carries at the lid can almost vanish while the layer's depth
+moves 0.33 km and its lid 0.26 K. In the single column of
+[the GCM's account](../gcm/README.md#the-single-column-with-cm1s-own-convection-27-october), where CM1's convective
+tendencies are prescribed from the 453 m run and cannot adjust, the absence of the same exchange doubled the lid; the
+column's doubled lid therefore overstates what that exchange does in a model whose convection answers its absence (an
+interpretation).
+
+**Evidence and limits.** The two runs are one realization each, started from one restart, so their differences mix the
+length's effect with two realizations drifting apart; the stretched run's second and third lunar days differ in their
+afternoon rain by 87%, so rain differences of a few tenths of a mm/day lie within that spread. The fluxes are CM1's own
+diagnostics, each output one time step's mean over the box's columns, the scheme's part its `thfs` and `qvfs`. Both
+runs use CM1's scheme on a 6 km grid, so the test measures the box's sensitivity to that scheme's length within CM1; no
+observation stands for either length. The cloud tops come from the 3-D outputs both runs wrote every 6 hours, 118 of
+them, against 236 diagnostics.
+
+**Cost.** The lunar day ran in 51 minutes on six threads, in 30 segments, and its folder holds 1.1 GB with its two
+kept restarts and the starting one; the held night ran in 3.6 minutes and holds 0.15 GB; the smoke test's copy was
+removed after its checks. The day-3 run took 1.3 hours on three threads and holds 5.6 GB with every restart and the
+budgets' 3-D fields.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_night_6km_linf75   # and _day3_linf75
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_near_side_sea_night_6km_linf75 --hours 0.5 --threads 6
+PYTHONPATH=. climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/agents/climate-pbl-tests/trial_linf75.py
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_near_side_sea_day3_linf75 --hours 3 --threads 6   # 51 min
+climate/gcm/.venv/bin/python -m climate.crm.box_length       # both lengths by quarter, and the held nights; seconds
+climate/gcm/.venv/bin/python -m climate.crm.box_lid          # the held nights' lid split by part
+```
+
 ## A box over the highlands
 
 The author's plan for highlands (2026-09-29) left a three-dimensional box over
