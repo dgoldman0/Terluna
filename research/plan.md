@@ -425,12 +425,15 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      diagnostic, the night's deep convection gives way to large-scale condensation at 5–12 km that rains as much, and
      the layer grows shallower, while an entrainment that follows the cloud's environment failed its column test. The
      night's water budget (register, 27 October) finds both models lifting the same vapour into that layer, where CM1's
-     cloud re-evaporates most of what it condenses and PlaSim, which keeps no cloud water, rains it. Open, the author's
-     choice: a cloud-water scheme for PlaSim, tested first as a diagnostic, or settling the climate on the current
-     scheme with the night bias stated. Then surface and radiation feedbacks, a longwave refit on the chosen
-     configuration and a 15-year run. The depth test's 15-year run is held. Three corrections found on 27 October wait:
-     the runner's description of output code 40, the mass-flux scheme's closure on GCM columns, and every year file's
-     first mean of the vapour.
+     cloud re-evaporates most of what it condenses and PlaSim, which keeps no cloud water, rains it. Cloud water for
+     PlaSim, built and tested with the night switch (register, 27 October), failed its stop rule: held on the grid's
+     mean it re-evaporates a fifth of the night layer's condensate, where CM1's cloud re-evaporates three-quarters, and
+     the layer condenses more. Open, the author's choice: settling the climate on the current scheme with the night bias
+     stated; a subgrid (statistical) cloud scheme, so that cloud can evaporate where a cell is not saturated; or a CM1
+     box forced by the fifteen-level GCM, to see whether the quiet night survives that model's own circulation. Then
+     surface and radiation feedbacks, a longwave refit on the chosen configuration and a 15-year run. The depth test's
+     15-year run is held. The climate work's readers take the year files' humidity as interval means (register, 27
+     October); the climatology, the cross-domain extracts and the rings' readers still take it as it stands.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
      12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. A lunar
      free-convection constant over the sea, in place of Earth's, removes a quarter of the GCM's extra evaporation at
