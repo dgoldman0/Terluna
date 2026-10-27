@@ -2772,6 +2772,113 @@ climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check --case A28R_30
 climate/gcm/.venv/bin/python $T/trigger_analysis.py > $T/trigger_analysis.txt   # trigger_l15_test.json
 ```
 
+#### PlaSim's boundary-layer mixing at lunar gravity (27 October)
+
+The section above named PlaSim's vertical diffusion as a candidate cause of the shallow dry convective layer over the
+sea. On 27 October the author agreed that PlaSim's mixing near the ground carries Earth's scales and asked for the
+first step of the check proposed with that result: read how PlaSim mixes its lowest air, then compare what the mixing
+carries with what the CM1 boxes' boundary layers carry. [pbl_mixing.py](pbl_mixing.py) makes the comparison by quarter
+of the lunar day at the two CM1 sites, from the fifteen-level baseline's years 0–1
+(`A28R_301k_cold_sbm_rh07_deep200_l15cap`) and the boxes' settled lunar days, and writes
+[pbl_mixing_l15.json](../results/gcm/pbl_mixing_l15.json). It reads existing output only.
+
+**How PlaSim mixes its lowest air.** Each time step PlaSim's vertical diffusion (`vdiff`, fluxmod.f90) gives heat,
+vapour and momentum the diffusivity K = l² |∂V/∂z| F(Ri). The mixing length is Blackadar's, l = λκz/(λ + κz), with
+λ = 160 m for momentum and 160 √7.5 = 438 m for heat and vapour and the heights z counted at 250 K with the planet's
+gravity; F is Louis's stability function in ECHAM's form with b = c = d = 5, and the shear takes the difference in wind
+speed between levels, at least 1 m/s. The g³ in the coefficient's σ form converts K from heights to σ: ∂σ/∂z =
+−gσ/(RT) enters twice for the diffusion and once more for the shear, so gravity enters as the physics requires. Later
+in the step, after the convection scheme, the dry adjustment (`mkdca`, rainmod.f90) mixes potential temperature and
+vapour evenly through any layers where the dry potential temperature falls with height. Of these settings the two
+mixing lengths and the wind floor were set for Earth. The CM1 boxes' boundary-layer scheme (`ipbl` 2) mixes with
+K = l² √max(S² − N²/Pr, small), its shear taken column by column from the box's resolved winds, and with an asymptotic
+length that [cm1_run.py](../crm/cm1_run.py) stretches by the gravities from 75 m to 453 m.
+
+**What the length does at lunar heights.** PlaSim's diffusivity grows as l² at every stability these columns reach.
+ECHAM's unstable function stops depending on l only where its term 75 l² √(−Ri) ζ exceeds 1, ζ being a geometric
+factor near 1/(5z²); at lunar heights l/z is small, and that needs instability far beyond any of the 3-day means. Near
+the ground κz sets l whatever λ is. With the lengths stretched by the gravities, to 966 m for momentum and 2.65 km for
+heat and vapour, the length for heat at the half levels near 0.6, 1.8, 3.2 and 5.2 km above the sea grows from 141,
+254, 312 and 350 m to 194, 491, 767 and 1,050 m, and the diffusivity on the site's means grows 1.5–3 times at 0.6–1.8
+km, 4–5 times at 3.2 km and 5–9 times at 5.2 km.
+
+**The sea site.** The table reads the mixed layer's depth by one rule in both models, the first height above the GCM's
+lowest full level (0.31 km) where the mean virtual potential temperature has risen 0.5 K, and gives vapour as a mixing
+ratio at the GCM's full levels near 0.3 and 6.2 km. The heat is what each model carries upward through its half levels:
+the GCM's from its own heating by vertical diffusion and dry adjustment, which PlaSim writes as single time steps at the
+end of each 3-day mean and which is binned here by the time of those steps, half a mean (18° of the lunar day) after its
+midpoint; CM1's from its resolved, parameterized and diffusive fluxes. CM1's effective diffusivity is its vapour flux
+over its mean gradient, where its vapour falls by at least 0.05 g/kg per km.
+
+| Sea site | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise |
+|---|---|---|---|---|
+| Mixed layer's depth, km: GCM; CM1 | 2.3; 3.2 | 2.9; 2.6 | 5.8; 5.6 | 4.3; 6.5 |
+| Vapour at 0.3 km, g/kg: GCM; CM1 | 12.16; 11.18 | 12.52; 11.26 | 12.11; 12.64 | 12.57; 11.44 |
+| Vapour at 6.2 km, g/kg: GCM; CM1 | 7.46; 10.54 | 8.47; 10.18 | 9.45; 10.50 | 9.24; 11.09 |
+| Surface sensible; latent heat, W/m²: GCM | 8.3; 108 | 4.2; 135 | 4.9; 102 | 8.5; 98 |
+| The same, CM1 | 7.1; 90 | 2.0; 81 | 9.2; 85 | 8.3; 89 |
+| Heat carried up through 0.6, 3.2, 5.2, 7.2 km, W/m²: GCM | 0.9, 0.1, −0.6, −0.6 | −0.9, 1.5, 0.9, −0.7 | 6.4, 7.8, −0.1, −0.3 | 8.6, 6.8, −0.9, −1.0 |
+| The same, CM1 | 4.8, −1.2, −0.9, −1.7 | 0.5, −2.8, −1.0, −1.2 | 8.9, −6.2, −12.2, −7.3 | 10.9, 4.1, −5.8, −9.3 |
+| Vapour carried up through 5.2 km by CM1, W/m² (resolved part) | 0.1 (0.4) | 28.2 (24.6) | 112.3 (90.0) | 28.2 (25.9) |
+| K at 5.2 km, m²/s: GCM's median on its means; CM1's scheme; CM1's effective | 0.1; 4; n/a | 0.3; 20; 82 | 0.3; 17; 62 | 0.1; 22; 103 |
+
+Near the ground PlaSim carries heat at about CM1's rate, more than half of it by its dry adjustment: after sunset and
+after midnight 6–9 W/m² rise through 0.6 km in the GCM against 9–11 W/m² in CM1. Higher up the two part. After midnight
+CM1's mixed layer reaches 6.5 km and the GCM's 4.3 km, and in the morning 3.2 km against 2.3. At every hour CM1 keeps
+its vapour nearly uniform up to 6.2 km, losing 0.35–2.1 g/kg over that depth, while the GCM's falls 2.7–4.7 g/kg; the
+GCM's lowest level holds 1.0–1.3 g/kg more than CM1's in three quarters and 0.5 g/kg less after sunset, and its air at
+6.2 km holds 1.1–3.1 g/kg less in all four. CM1 carries vapour upward through 5.2 km at 28 W/m² in the afternoon and
+after midnight and at 112 W/m² after sunset, 80–92% of it by resolved motion, and at the top of its mixed layer it
+carries heat down, 6–12 W/m² at 5–7 km after sunset and after midnight, drawing the warmer air above into the layer. Its
+own scheme mixes at 17–22 m²/s at 5.2 km in those quarters. PlaSim's air there has a median Richardson number of 3–8 and
+a median diffusivity of 0.1–0.3 m²/s, so it carries almost no heat down (0.1–1.0 W/m² at 5–7 km), and its dry adjustment
+acts only where the air is dry-unstable. With the lengths stretched, the diffusivity at 5.2 km after midnight would be 5
+m²/s on the means.
+
+**The other two runs.** With the mass-flux scheme, which convects at half the baseline's share, the GCM's mixed layer
+over the sea is shallower at every hour, 1.7–4.0 km, and its lowest level moister, 14.7–16.5 g/kg: above its mixed
+layer the GCM moves vapour mostly by its convection scheme. With the lunar free-convection constant the depths stay
+within a third of a kilometre of the baseline's and the lowest level is 0.2–0.6 g/kg drier.
+
+**The land site.** There the comparison measures the two models' different air more than their mixing. CM1's land box
+is 1.8–4.0 K warmer in virtual potential temperature and 1.2–5.5 g/kg moister through its lowest 6 km than the GCM's
+land cells, which put −5 to +6 W/m² into sensible heat by day against CM1's 27–37 W/m², and 196–229 W/m² into latent
+heat against 146–171. By the common rule the GCM's daytime mixed layer over land, 2.4–3.0 km, is as deep as CM1's,
+1.6–2.8 km.
+
+**What it suggests.** PlaSim's mixing lengths are Earth's. Stretched by the gravities, the scaling CM1's setup assumes
+for its own scheme and one no experiment here has tested, they strengthen PlaSim's diffusion mostly inside its mixed
+layer and leave it at a few m²/s in the stable air above, where the two models differ. CM1's boundary layer carries
+vapour and heat through its whole depth by eddies that rise from the ground and, at the layer's top, mix in the stable
+air above; PlaSim's diffusion is local, and its dry adjustment acts only on dry-unstable air. Transport through the
+whole boundary layer, with entrainment at its top, is therefore a candidate for part of the difference, and the
+comparison does not size that part. PlaSim's convection scheme also carries vapour above the mixed layer, the run writes
+no vapour by process, and the two models differ as well in their convection, circulation, radiation and land surface. In
+the afternoon and evening the mixed layers are as deep in both models while their vapour profiles still differ, so depth
+alone does not settle the moisture. A scheme that mixes the sub-cloud layer more deeply would also have to keep the
+stable layer above 6 km that caps CM1's night clouds, or it could mend the humidity and bring the wrong storms. Two
+families of boundary-layer schemes set such transport from the boundary layer's own depth and convective velocity, so
+their scales follow the Moon's: nonlocal K-profile schemes with a countergradient term and a depth from a bulk
+Richardson number (Holtslag and Boville 1993, as in CCM3 and CAM3), and eddy-diffusivity mass-flux schemes, whose dry
+updrafts become the shallow clouds (Siebesma, Soares and Teixeira 2007). Neither paper has been read here.
+
+**Evidence and limits.** The GCM's profiles, winds and surface fluxes are 3-day means of one two-year run in the site
+cells, and its heating by process is single time steps at the end of those means, ten a lunar day. The heat comparison
+holds PlaSim's diffusion and dry adjustment against CM1's whole transport, its resolved motions included, and leaves out
+PlaSim's convection scheme, whose heating mixes transport with condensation. Recomputed on the 3-day means, the
+diffusion's heat flux disagrees with the run's own in sign and size within the mixed layer, and the mean diffusivity
+exceeds the median severalfold where a minority of the means are unstable, so the diffusivities and Richardson numbers
+on the means place each half level's regime and leave its transport to the run's own heating. The run writes no vapour
+tendency by process: PlaSim computes the diffusion's and the dry adjustment's (its gridpoint diagnostics 14 and 17), and
+the runner leaves them out. CM1's values come from one realization per box on a 6 km grid, whose boundary-layer eddies
+the resolution test found about 30% weaker than at 3 and 2 km.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.pbl_mixing --output climate/results/gcm/pbl_mixing_l15.json   # seconds
+climate/gcm/.venv/bin/python -m climate.gcm.pbl_mixing --run A28R_301k_cold_massflux_l15 \
+    --output /media/projectspace/terluna-research/session-tools/agents/climate-pbl/pbl_mixing_A28R_301k_cold_massflux_l15.json
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked
