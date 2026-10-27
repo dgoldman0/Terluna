@@ -7,18 +7,18 @@
   },
   "inputs": {
    "research/runs/climate_targets/extract.json": "a019e00f6f2ac4e2519fd3632203d1261c6dcc882ae91f4238f5765a608594d4",
-   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "d6b25a2900008380dc5e065329627256a0786eaefb51a8914270e724feb6a496",
+   "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "04303bad9d2e10004b3739d46bbf3d19c7e6ff8bfb80353713ba9840e37858a3",
    "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
    "atmosphere/radiative_convective/results/summary.json": "8fb31329ebcbca52ea9ac1c0af06ed5e357c02267dce8b47250334ae91c39171",
-   "research/studies/light_limitation/results/light_limitation.json": "e8bf2634d39279406c95df246c9acac34225e453fec83e94152df41814a4cc7c",
-   "provisioning/results/power.json": "3f7902b88d33b04b1a55e9e9bfafb24990dfa12828c26d4eb18faa16ab93c667",
+   "research/studies/light_limitation/results/light_limitation.json": "67647d31818d7ee0c0690b1ac1dd4fac3d9978d1dcf2ea4a62c554c0ee7311f0",
+   "provisioning/results/power.json": "4cf2c50b8da4a6db44a0a64a1f8cdaada7f7b429737db2b3d06eae9c2e9dd373",
    "resources/results/first_screen.json": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
    "research/studies/summit_tower/results/summit_tower.json": "0a08c0ae674fd539f56257acad8d1727de612c7a477178f61e228abc906668bb",
    "research/studies/summit_tower/results/summit_tower_form.json": "2454d25efe7a645d42be3598a6f4896cc72c4c5aa0432ad9b468dbc08191f684",
    "climate/results/gcm/site_winds_A28_dim5_moon_summit.json": "45aeeebcf685564b1e3db9a9430f24b99b0264ed61d1c74e8015c78b7949b2b8",
-   "research/studies/lake_oxygen/results/lake_oxygen.json": "65b731b63af131b53a8f654c18d64878a854b83aa47fa502334be35d358c6a3c"
+   "research/studies/lake_oxygen/results/lake_oxygen.json": "fd0409d36d867a3db549144012ff760f145014890651cee4ee0ad0e670e219ab"
   },
   "constants": {
    "MOON_RADIUS": 1737400.0,
@@ -5757,7 +5757,7 @@
   ],
   "oxygen_source": {
    "path": "research/studies/lake_oxygen/results/lake_oxygen.json",
-   "sha256": "65b731b63af131b53a8f654c18d64878a854b83aa47fa502334be35d358c6a3c",
+   "sha256": "fd0409d36d867a3db549144012ff760f145014890651cee4ee0ad0e670e219ab",
    "targets_ground_k": {
     "lock": 295.0230045582492,
     "resort": 300.0,
