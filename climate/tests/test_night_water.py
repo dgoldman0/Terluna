@@ -65,3 +65,16 @@ def test_group_sums_cover_their_bands():
     assert list(out) == ['0.0-4.0 km', '4.0-7.0 km', '7.0-9.0 km']
     assert out['0.0-4.0 km']['vapour_mm_day']['x'] == 0.0 + 1.0 + 2.0 + 3.0
     assert out['7.0-9.0 km']['heat_w_m2']['y'] == 2.0
+
+
+def test_storage_from_single_steps_needs_no_undamping():
+    """Values taken at single steps (the hour angles themselves, no window) give back each quarter's change as they
+    stand."""
+    day_s = 29.53 * 86400.0
+    hours = np.arange(-180.0, 180.0, 9.1)
+    values = 3.0 - 1.5 * np.sin(np.radians(hours)) + 0.4 * np.cos(np.radians(3.0 * hours))
+    got = nw.quarter_storage(hours, values[:, None], 36.0, day_s, undamp=False)[:, 0]
+    exact = lambda x: 3.0 - 1.5 * math.sin(math.radians(x)) + 0.4 * math.cos(math.radians(3.0 * x))
+    for (name, lo, hi), value in zip(nw.QUARTERS, got):
+        assert math.isclose(value, (exact(hi) - exact(lo)) / ((hi - lo) / 360.0 * day_s / 86400.0), rel_tol=1e-9,
+                            abs_tol=1e-12), name

@@ -3632,6 +3632,52 @@ It is judged against the night switch's run without cloud water and against CM1,
 - **Reported beside them.** The circulation's heating of 5.2–11.8 km after midnight, the night's mixed layer and its
   lowest level's vapour, the share of the cloud's water that re-evaporates, and the cloud water worldwide.
 
+**The two years fail the rule.** The run took 450 and 437 s a model year against the night switch's 437 and 453.
+Results are in [cloud_water_night_l15.json](../results/gcm/cloud_water_night_l15.json) and, by layer,
+[night_water_l15.json](../results/gcm/night_water_l15.json) (`sbm_l15_night_off_cloud`).
+- **The rain after midnight** is 2.51 mm/day over the sea against 2.20 without the cloud water; the rule asked for 1.10
+  or less. Its two years give 2.24 and 2.77 against 2.63 and 1.76, so the rise lies within the years' spread.
+- **The cloud layer** at 5.2–11.8 km hands 2.07 mm/day to the precipitation after midnight against 1.55; the rule asked
+  for 0.77. It condenses more than before, 2.31 mm/day into its cloud (2.59 and 2.01 in the two years) against the
+  1.54 the run without cloud water rained at once (1.73 and 1.36), and re-evaporates 0.49 of it from cloud, 21%,
+  where CM1's night cloud re-evaporates 75%. Before midnight it condenses 2.22 mm/day against 1.42 and re-evaporates
+  12%.
+- **The circulation** over that layer cools it by 17 W/m² after midnight against 9, and by 32 against 17 before
+  midnight, while the condensation's latent heat there rises from 45 to 67 W/m² and from 41 to 64.
+- **The day.** The sea's afternoon rains 3.02 mm/day against 2.47 (CM1 2.23), inside the rule's band. The land's
+  afternoon rains 17.4 against 14.9, further from CM1's 8.6, which fails the rule too.
+- **The globe** stays inside the rule. The imbalance at the top is −3.91 against −3.41 W/m², the rain 2.172 against
+  2.191 mm/day, the ground 297.85 against 297.93 K, and cloud cover 0.370 against 0.362.
+- **The cloud's size.** The sea's column holds 0.85 kg/m² of cloud water after midnight, 0.50 of it at 5.2–11.8 km.
+  That is inside the rule's 1.0 and about six and a half times CM1's night condensate, 0.13 kg/m².
+
+**What it shows.** CM1's night cloud recycles its water at the scale of its eddies, condensing in updraughts and
+evaporating where they mix with drier air, while the layer's mean stays just below saturation. A store of cloud water
+on the grid's mean evaporates only where the whole cell falls below saturation. The night's cooling, by radiation and
+by the ascent the condensation drives, rarely allows that, so the water stays, the layer stays saturated, and its
+condensation and latent heat grow with the ascent over it. That is an interpretation of the budgets, which show the
+growth but not its cause. Cloud water without a subgrid spread of humidity, which a statistical cloud scheme carries,
+does not give the sea's night CM1's balance. The switch stays off. The humidity's true mean is available to every new
+run.
+
+**Evidence and limits.** These are two years each, one realization, from the fifteen-level restart; the layer terms
+are the night budget's single steps, whose spread the two years give. The constants are CM1's microphysics, not fitted
+to the GCM, and the fall speed's intercept is Earth's. The water's lack of transport and its absence from the radiation
+are the scheme's choices, so they are untested.
+
+```sh
+S=/media/projectspace/terluna-research/session-tools/night_water
+$S/cw_runs.sh cw_smoke15                   # one month with both options; it applies the patches
+$S/cw_runs.sh cw_month15                   # and cw_mfmonth15, cw_month10, cw_nightmonth15: the months without them
+climate/gcm/.venv/bin/python $S/bit_check.py A28R_301k_cold_sbm_rh07_deep200_l15cap_month_cwsource \
+    A28R_301k_cold_sbm_rh07_deep200_l15cap_month_nightsource …    # every variable and the restarts
+$S/cw_runs.sh cw_night15                   # two years, about 15 minutes on 4 workers
+climate/gcm/.venv/bin/python -m climate.gcm.night_water
+climate/gcm/.venv/bin/python $S/stop_rule.py climate/results/gcm/night_water_l15.json \
+    climate/results/gcm/cloud_water_night_l15.json
+python3 -m pytest climate/tests/test_condensate.py     # with gfortran, about 10 s
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

@@ -11,6 +11,9 @@ condensation forms it. This module follows the water through each layer at the s
   (A28R_301k_cold_sbm_rh07_deep200_l15cap, years 0-1);
 - sbm_l15_night_off, the same with deep convection held off wherever the Sun is down, a diagnostic that writes the
   vapour of every process (A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night, years 0-1);
+- sbm_l15_night_off_cloud, the same with condensate.py's cloud water and the humidity's true mean
+  (A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night_cloud, years 0-1), which writes its cloud's water and
+  processes too;
 - CM1's sea box over its settled third lunar day (box_near_side_sea_day3, days 59.125-88.5), forced by kuo_l10.
 
 In the GCM, at the box's six sea cells. PlaSim writes each process's tendency as a single time step at the end of each
@@ -63,13 +66,15 @@ BOX = 'box_near_side_sea'                    # the case whose gcm_site cells are
 CM1_CASE = 'box_near_side_sea_day3'
 RUNS = (('kuo_l10', 'A28R_301k_cold_moist', (0, 5)),
         ('sbm_l15', 'A28R_301k_cold_sbm_rh07_deep200_l15cap', (0, 1)),
-        ('sbm_l15_night_off', 'A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night', (0, 1)))
+        ('sbm_l15_night_off', 'A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night', (0, 1)),
+        ('sbm_l15_night_off_cloud', 'A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night_cloud', (0, 1)))
 REFERENCE = 'sbm_l15'                        # the run whose layers are the bands
 QUARTERS = (('sunrise-noon', -90.0, 0.0), ('noon-sunset', 0.0, 90.0), ('sunset-midnight', 90.0, 180.0),
             ('midnight-sunrise', -180.0, -90.0))
 HARMONICS = 4
 MEANS = ('ta', 'hus', 'ps', 'czen', 'pr', 'prc', 'evap', 'prw', 'cl')
-SNAP_WATER = ('dq_diab', 'dq_fill', 'dq_dyn', 'dq_dyn_late', 'dq_sfc', 'dq_vdif', 'dq_lsp', 'dq_conv', 'dq_dca')
+SNAP_WATER = ('dq_diab', 'dq_fill', 'dq_dyn', 'dq_dyn_late', 'dq_sfc', 'dq_vdif', 'dq_lsp', 'dq_conv', 'dq_dca',
+              'dcw_cond', 'dq_cwevap', 'dcw_rain')                    # the last three with condensate.py's cloud
 SNAP_HEAT = ('dt_diab', 'dt_nudge', 'dt_sfc', 'dt_vdif', 'dt_lw', 'dt_sw', 'dt_lsp', 'dt_conv', 'dt_dca', 'dt_evap')
 LV_CM1, LS_CM1 = 2.501e6, 2.834e6            # J/kg, CM1's constants.F
 CM1_WATER = {'table': None, 'imposed_ascent': ('qvb_lsw',), 'nudging': ('qvb_nudge',),
@@ -99,12 +104,15 @@ def overlap_matrix(src_edges, dst_edges) -> np.ndarray:
     return np.clip(hi - lo, 0.0, None) / np.diff(s)[:, None]
 
 
-def quarter_storage(centre_deg, values, window_deg: float, day_s: float, harmonics: int = HARMONICS) -> np.ndarray:
+def quarter_storage(centre_deg, values, window_deg: float, day_s: float, harmonics: int = HARMONICS,
+                    undamp: bool = True) -> np.ndarray:
     """The rate of change (per day) of a quantity over each quarter, from means centred at the hour angles centre_deg
-    that cover window_deg each: the series fitted with its mean and harmonics, each undamped for the window, and its
-    change from the quarter's start to its end over the quarter's length."""
+    that cover window_deg each: the series fitted with its mean and harmonics, each undamped for the window (or as
+    they stand, for single steps), and its change from the quarter's start to its end over the quarter's length."""
     from climate.crm import gcm_site as gs
-    coef = gs.undamped(gs.harmonic_coefficients(centre_deg, values, harmonics), window_deg, harmonics)
+    coef = gs.harmonic_coefficients(centre_deg, values, harmonics)
+    if undamp:
+        coef = gs.undamped(coef, window_deg, harmonics)
     out = []
     for _, a, b in QUARTERS:
         change = gs.evaluate(coef, np.array([b]), harmonics)[0] - gs.evaluate(coef, np.array([a]), harmonics)[0]
@@ -141,7 +149,8 @@ def gcm_site_water(run: str, years) -> dict:
     lon_site = record['configuration']['site']['lon_deg']
     c = so.run_constants(run)
     g = c['ga']
-    snaps = {k: [] for k in SNAP_WATER + ('dq_evap',) + SNAP_HEAT + ('lsp_from_heating', 'conv_from_heating')}
+    snaps = {k: [] for k in SNAP_WATER + ('dq_evap',) + SNAP_HEAT + ('lsp_from_heating', 'conv_from_heating',
+                                                                      'cloud_water')}
     means = {k: [] for k in ('water', 'enthalpy', 't', 'q', 'rh', 'cl', 'z_half', 'e', 'p', 'pc', 'prw')}
     hours, hours_snap, present = [], [], set()
     for year in range(years[0], years[1] + 1):
@@ -152,7 +161,7 @@ def gcm_site_water(run: str, years) -> dict:
             jj, ii = np.array([j for j, _ in idx]), np.array([i for _, i in idx])
             w = np.cos(np.radians(lat[jj]))
             w = w / w.sum()
-            names = [k for k in MEANS + SNAP_WATER + SNAP_HEAT + ('dq_evap',) if k in d.variables]
+            names = [k for k in MEANS + SNAP_WATER + SNAP_HEAT + ('dq_evap', 'qcw') if k in d.variables]
             present |= set(names)
             got = yf.fields(d, names)                                   # the humidity's means: year_files
             f = {k: v[..., jj, ii] for k, v in got.items() if k != 'czen'}   # (time, [lev,] cells)
@@ -173,6 +182,8 @@ def gcm_site_water(run: str, years) -> dict:
             if k in f:
                 snaps[k].append(mean(f[k] * cpq * mass))
         snaps['lsp_from_heating'].append(mean(f['dt_lsp'] * cpq * mass / c['ALV']) * DAY)
+        if 'qcw' in f:
+            snaps['cloud_water'].append(mean(f['qcw'] * mass))                # kg/m2 by layer, at each step
         snaps['conv_from_heating'].append(mean(f['dt_conv'] * cpq * mass / c['ALV']) * DAY)
         means['water'].append(mean(f['hus'] * mass))
         means['enthalpy'].append(mean(cpq * f['ta'] * mass))
@@ -202,6 +213,10 @@ def gcm_site_water(run: str, years) -> dict:
     storage_h = quarter_storage(hour, m['enthalpy'], step, day_s) / DAY      # W/m2 by layer
     exact = {k: quarter_average(hour, m[k], step) for k in ('e', 'p', 'pc')}
     storage_col = quarter_storage(hour, m['prw'], step, day_s)
+    if 'cloud_water' in s:                                   # the cloud's storage from its single steps
+        storage_cloud = quarter_storage(hour_snap, s['cloud_water'].sum(axis=1), step, day_s, undamp=False)
+    else:
+        storage_cloud = np.zeros(len(QUARTERS))
     out = dict(run=run, years=list(years), cells=[list(cc) for cc in cells], sigma=sigma.tolist(),
                snapshots=[int((qs == n).sum()) for n in range(len(QUARTERS))],
                means=[int((qm == n).sum()) for n in range(len(QUARTERS))], window_deg=step,
@@ -213,7 +228,9 @@ def gcm_site_water(run: str, years) -> dict:
                    large_scale_condensation_from_heating=-sq['lsp_from_heating'],
                    convective_heating_as_water=sq['conv_from_heating'], fill=sq['dq_fill'])
         for k, label in (('dq_sfc', 'surface'), ('dq_vdif', 'diffusion'), ('dq_lsp', 'large_scale_condensation'),
-                         ('dq_conv', 'convection'), ('dq_dca', 'dry_adjustment'), ('dq_evap', 'rain_evaporation')):
+                         ('dq_conv', 'convection'), ('dq_dca', 'dry_adjustment'), ('dq_evap', 'rain_evaporation'),
+                         ('dcw_cond', 'to_cloud'), ('dq_cwevap', 'cloud_evaporation'),
+                         ('dcw_rain', 'cloud_to_precipitation')):
             if k in sq:
                 vap[label] = sq[k]
         if 'dq_lsp' not in sq:                                                  # all the physics but condensation
@@ -230,11 +247,14 @@ def gcm_site_water(run: str, years) -> dict:
                       physics_exact=float(exact['e'][n] - exact['p'][n]),
                       physics_applied_from_snapshots=float(sq['dq_dyn'].sum()),
                       storage=float(storage_col[n]), storage_from_layers=float(storage_w[n].sum()),
-                      circulation_exact=float(storage_col[n] - (exact['e'][n] - exact['p'][n])))
+                      cloud_storage=float(storage_cloud[n]),
+                      circulation_exact=float(storage_col[n] + storage_cloud[n] - (exact['e'][n] - exact['p'][n])))
         out['quarters'][name] = dict(vapour_mm_day={k: np.asarray(v, float) for k, v in vap.items()},
                                      heat_w_m2={k: np.asarray(v, float) for k, v in heat.items()},
                                      column_mm_day=column,
-                                     state=dict(t_k=mq['t'], q_g_kg=mq['q'] * 1000.0, rh=mq['rh'], cloud=mq['cl']),
+                                     state=dict(t_k=mq['t'], q_g_kg=mq['q'] * 1000.0, rh=mq['rh'], cloud=mq['cl'],
+                                                **({'cloud_water_kg_m2': sq['cloud_water']}
+                                                   if 'cloud_water' in sq else {})),
                                      z_half_m=mq['z_half'])
     return out
 
@@ -406,7 +426,8 @@ READING_RULE = ("bands: the fifteen-level grid's layers at the site, the ground 
 
 
 GROUPS = ((0, 4), (4, 7), (7, 9))            # the bands from the ground: about 0-5.2, 5.2-11.8 and 11.8-23.4 km
-BLOCKS = {'kuo_l10': ((0, 1), (2, 3), (4, 5)), 'sbm_l15': ((0, 0), (1, 1)), 'sbm_l15_night_off': ((0, 0), (1, 1))}
+BLOCKS = {'kuo_l10': ((0, 1), (2, 3), (4, 5)), 'sbm_l15': ((0, 0), (1, 1)), 'sbm_l15_night_off': ((0, 0), (1, 1)),
+          'sbm_l15_night_off_cloud': ((0, 0), (1, 1))}
 
 
 def group_sums(quarter: dict, edges) -> dict:
