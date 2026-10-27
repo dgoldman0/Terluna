@@ -228,16 +228,18 @@ HEATING = {21: ('dt_diab', 'temperature_tendency_summed_over_the_physics'),
            28: ('dt_conv', 'temperature_tendency_due_to_convection'),
            29: ('dt_dca', 'temperature_tendency_due_to_dry_convective_adjustment')}
 # With the same diagnostics PlaSim also writes the water vapour each layer gains, as a water flux (m/s: the specific
-# humidity tendency times the layer's mass over the density of water): code 31 the sum over the physics, code 32 the
-# fix that fills negative humidity (miscmod), and codes 40 and 41 the dynamics' own tendency in the two steps of its
-# spectral time step (spectrald, mkdqtgp): the transport first, then the horizontal diffusion, which sums to nothing
-# over the globe. With them the runner writes omega (wap), which the postprocessor derives from the spectral fields. A
-# column model forced by the GCM takes these as the GCM's own budget, which closes by construction
-# (climate/crm/gcm_site.py).
+# humidity tendency times the layer's mass over the density of water): code 31 the sum over the physics, code 32 the fix
+# that fills negative humidity (miscmod), and codes 40 and 41 the two parts of the spectral step that changes the
+# humidity after the physics (spectrald, mkdqtgp): the physics' moistening as that step applies it, carried to the
+# model's harmonics and back, then the horizontal diffusion, which sums to nothing over the globe. Code 40 keeps the
+# name dq_dyn under which the runs have written it since 21 October, but no code holds the dynamics' own transport: the
+# circulation's moistening is the storage less code 40 (climate/crm/gcm_site.py, gcm/night_water.py). With them the
+# runner writes omega (wap), which the postprocessor derives from the spectral fields. A column model forced by the GCM
+# takes these as the GCM's own budget, which closes by construction (climate/crm/gcm_site.py).
 MOISTENING = {31: ('dq_diab', 'water_vapour_gained_in_the_layer_summed_over_the_physics'),
               32: ('dq_fill', 'water_vapour_gained_in_the_layer_by_the_negative_humidity_fix'),
-              40: ('dq_dyn', 'water_vapour_gained_in_the_layer_by_the_dynamics_transport'),
-              41: ('dq_dyn_late', 'water_vapour_gained_in_the_layer_by_the_dynamics_horizontal_diffusion')}
+              40: ('dq_dyn', 'water_vapour_gained_in_the_layer_by_the_physics_as_the_spectral_step_applies_it'),
+              41: ('dq_dyn_late', 'water_vapour_gained_in_the_layer_by_horizontal_diffusion')}
 # A run with the boundary-layer options or the night switch (a diagnostic) and the moisture diagnostics also writes the
 # vapour each process gives each layer (2026-10-27), from slots PlaSim fills whenever its gridpoint diagnostics are on:
 # the surface's evaporation into the lowest layer (mkevap), vertical diffusion (vdiff), large-scale condensation

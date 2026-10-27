@@ -184,17 +184,19 @@ def cloud_free_columns(run, year, every=1, max_cloud=0.01, cloud_free=True):
     full levels from the top, the ground's temperature, land, and PlaSim's own longwave heating (K/s) where the run
     wrote it."""
     import netCDF4
+    from climate.gcm import year_files as yf
     path = HERE / 'runs' / run / 'model' / f'MOST.{year:05d}.nc'
     with netCDF4.Dataset(path) as d:
         sigma = np.asarray(d['lev'][:], float)
         lat = np.asarray(d['lat'][:], float)
-        cl = np.asarray(d['cl'][:], float).max(axis=1)             # (time, lat, lon)
+        f = yf.fields(d, ('cl', 'ta', 'hus', 'ps', 'ts', 'lsm') + (('dt_lw',) if 'dt_lw' in d.variables else ()))
+        cl = f['cl'].max(axis=1)                                     # (time, lat, lon)
         pick = np.argwhere(cl < max_cloud if cloud_free else np.ones_like(cl, bool))[::every]
-        ta, hus = (np.asarray(d[k][:], float) for k in ('ta', 'hus'))
-        lw = np.asarray(d['dt_lw'][:], float) if 'dt_lw' in d.variables else None
-        ps = np.asarray(d['ps'][:], float) * 100.0
-        ts = np.asarray(d['ts'][:], float)
-        lsm = np.asarray(d['lsm'][0], float)
+        ta, hus = f['ta'], f['hus']                                  # the humidity's means: year_files
+        lw = f.get('dt_lw')
+        ps = f['ps'] * 100.0
+        ts = f['ts']
+        lsm = f['lsm'][0]
     columns = [dict(lat=float(lat[j]), land=float(lsm[j, i]), ps=float(ps[k, j, i]),
                     t=np.append(ta[k, :, j, i], ts[k, j, i]), q=hus[k, :, j, i],
                     plasim_k_s=None if lw is None else lw[k, :, j, i])

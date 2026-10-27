@@ -3382,8 +3382,10 @@ its convective rain at the ground falls to 0.03 mm/day against 1.97, the evening
 condensation gives most of the little rain that falls. With less deep heating every day column drifts colder aloft,
 0.2–4.5 K below CM1's at 41.8–55.8 km against 0.0–2.9 K with the fixed profile. The running column from the GCM's air
 (massflux.scm on fifteen levels at the sea, three lunar days from the rh 0.7 branch's site mean, 9.7 and 11.3 K warmer
-than CM1's at 41.8 and 55.8 km) cools there to +1.3 and −0.5 K with the form against +3.5 and +2.7 K with the fixed
-profile.
+than CM1's at 41.8 and 55.8 km) cools there to +1.7 and −0.3 K with the form against +4.0 and +3.4 K with the fixed
+profile. These are the values regenerated with the humidity's means ([year_files.py](year_files.py)); the start's
+change, under 1% of its vapour and 0.002 K at those heights, moved the third day's air by up to 0.7 K and its
+quarters' rain by up to 1.2 mm/day, so this single column gives the direction of a change, not its size.
 
 So on CM1's mean soundings the form mixes at CM1's night and afternoon rates and caps its plumes at CM1's cloud tops,
 while in the running column, whose lowest level stays moister than CM1's at night (12.4 against 11.4 g/kg) under a
@@ -3436,10 +3438,11 @@ PlaSim rains it, and the GCM's circulation over the layer changes with where its
 0–5), the fifteen-level Betts–Miller baseline (years 0–1) and the same run with deep convection held off at night (years
 0–1), the only one that writes the vapour of every process.
 - **Storage and physics.** Each layer's storage over a quarter comes from the 3-day means, fitted with the day's mean
-  and four harmonics undamped for their windows. Its physics comes from the single time steps written at the end of each
-  mean, about 60 a quarter in two years and 180 in six. The circulation, sideways and vertical transport with the
-  horizontal diffusion, is the storage less the physics as applied.
-- **Code 40.** The runner names it `dq_dyn` and describes it as the dynamics' transport. It is in fact the physics'
+  and four harmonics undamped for their windows, the humidity's means as [year_files.py](year_files.py) reads them
+  (below), and the column's from the precipitable water. Its physics comes from the single time steps written at the end
+  of each mean, about 60 a quarter in two years and 180 in six. The circulation, sideways and vertical transport with
+  the horizontal diffusion, is the storage less the physics as applied.
+- **Code 40.** The runner names it `dq_dyn`, and until now described it as the dynamics' transport. It is the physics'
   moistening as the spectral step applies it: spectrald adds the diabatic tendencies, and mkdqtgp writes them back to
   the grid. Its global means over the held-off run's year 1 match the physics' sum (code 31) within 0.15 mm/day in every
   layer and to 0.001 mm/day over the column. [crm/gcm_site.py](../crm/gcm_site.py) reads it rightly.
@@ -3456,44 +3459,44 @@ PlaSim rains it, and the GCM's circulation over the layer changes with where its
 
 | Column | Evaporation | Rain (convective) | Circulation | Storage |
 |---|---|---|---|---|
-| Betts–Miller, fifteen levels | 3.40 | 2.08 (1.53) | −3.55 | −2.23 |
-| Deep convection held off at night | 3.60 | 2.20 (0.04) | −4.68 | −3.27 |
-| Kuo, ten levels (the box's forcing) | 3.44 | 2.98 (2.19) | −2.87 | −2.41 |
+| Betts–Miller, fifteen levels | 3.40 | 2.08 (1.53) | −4.47 | −3.15 |
+| Deep convection held off at night | 3.60 | 2.20 (0.04) | −5.67 | −4.26 |
+| Kuo, ten levels (the box's forcing) | 3.44 | 2.99 (2.19) | −3.31 | −2.85 |
 | CM1's sea box | 3.08 | 0.14 | −4.90 | −1.90 |
 
 **After midnight, the layer at 5.2–11.8 km**, with each run's range over its years or blocks where its snapshots enter:
 
 | 5.2–11.8 km | Vapour lifted into it, mm/day | Net condensation, mm/day | Radiation, W/m² | Circulation's heating, W/m² |
 |---|---|---|---|---|
-| Betts–Miller | not separable from its convection | 0.16 large-scale (0.08–0.24) | −24 | +35 |
-| Held off | 0.77 (0.67–0.87): diffusion 0.43, shallow scheme 0.34 | 1.54 (1.35–1.73) | −28 | −7 (−11 to −2) |
-| Kuo | not separable from its convection | 0.27 large-scale (0.21–0.33) | −20 | +14 (11–16) |
+| Betts–Miller | not separable from its convection | 0.16 large-scale (0.08–0.24) | −24 | +34 |
+| Held off | 0.77 (0.67–0.87): diffusion 0.43, shallow scheme 0.34 | 1.54 (1.36–1.73) | −28 | −9 (−14 to −3) |
+| Kuo | not separable from its convection | 0.27 large-scale (0.21–0.33) | −20 | +13 (11–15) |
 | CM1 | 0.90 resolved, −0.01 its scheme | 0.21: 1.14 condensed, 0.85 and 0.08 re-evaporated | −22 | +18 |
 
 **The supply is alike.** In the held-off run PlaSim's diffusion and shallow scheme lift 0.77 mm/day into the layer. In
 CM1 the resolved motion lifts 0.90 mm/day, and its boundary-layer scheme nothing. The circulation's net vapour there is
-−0.28 mm/day (−1.01 to +0.44) in the held-off run and −0.49 in CM1.
+−0.91 mm/day (−1.42 to −0.39) in the held-off run and −0.49 in CM1.
 
 **CM1's cloud recycles its water.** It condenses 1.14 mm/day in the layer and re-evaporates 0.85 mm/day from cloud and
 0.08 from falling rain at the same heights, so only 0.21 mm/day leaves the layer as falling water. The domain-mean
 relative humidity stands at 0.97 and 0.92 at 5.2–9.3 km, with cloud on 5–7% of the domain holding 0.02 kg/m² of cloud
 water. Radiation cools the layer by 22 W/m² and the resolved eddies by 5. The prescribed circulation warms it by
 18 W/m², 7 of them from the imposed mean sinking above 7.5 km, and the cloud's net latent heat by 6, so the layer
-cools by only 4 W/m² over the quarter. In the Kuo run itself the circulation warms the same heights by 11–16 W/m².
+cools by only 4 W/m² over the quarter. In the Kuo run itself the circulation warms the same heights by 11–15 W/m².
 
 **The GCM's circulation answers its latent heat.** In the baseline, deep convection releases its heat above 12 km. The
-circulation then warms 5.2–11.8 km by 35 W/m², and large-scale condensation forms only 0.16 mm/day there; the night's
+circulation then warms 5.2–11.8 km by 34 W/m², and large-scale condensation forms only 0.16 mm/day there; the night's
 2.08 mm/day of rain is mostly deep convection rooted in the boundary layer.
 
 In the held-off run the same heights condense 1.54 mm/day, which heats them by 45 W/m². Against it stand 28 W/m² of
-longwave cooling and 7 W/m² of cooling by the circulation, which now lifts the air there, and the layer warms by 6 W/m²
+longwave cooling and 9 W/m² of cooling by the circulation, which now lifts the air there, and the layer warms by 5 W/m²
 over the quarter. Only 0.03 mm/day re-evaporates in the layer: mklsp passes all its condensate to mkrain in the same
 step, and PlaSim holds no cloud water between steps. Its cloud covers 17–19% of the cells at 3–7 km, against CM1's 5–7%
-at 5–9 km. Below 5.2 km every GCM run's circulation cools the air by 23–29 W/m² after midnight, against the box's
+at 5–9 km. Below 5.2 km every GCM run's circulation cools the air by 24–29 W/m² after midnight, against the box's
 14 W/m².
 
-**The box's own column.** Over the lunar day the box's forcing takes away 2.05 mm/day, against 0.78 mm/day for the Kuo
-run's own circulation at the same cells. The gap opens from noon to sunrise, 1.4–2.0 mm/day in each quarter. The box's
+**The box's own column.** Over the lunar day the box's forcing takes away 2.05 mm/day, against 0.79 mm/day for the Kuo
+run's own circulation at the same cells. The gap holds in every quarter, 0.7–1.6 mm/day. The box's
 lowest air holds 11.3–11.5 g/kg after midnight against the GCM runs' 12.0–13.2.
 
 The forcing applies the GCM's mean vertical wind, rising below 7 km and sinking above 7.5 km, to the box's own air. That
@@ -3517,31 +3520,44 @@ PlaSim lacks, and convection that stays shallow at night, with the deep night la
 circulation alone nor the vapour that the diffusion and the shallow scheme lift is the cause. These are interpretations
 of the budgets; whether PlaSim with cloud water of its own would keep CM1's night is untested.
 
-**Two defects found on the way, not yet corrected.**
-- **The runner's description of code 40** (`MOISTENING` in [exoplasim_run.py](exoplasim_run.py)) calls it the dynamics'
-  transport, as above.
-- **The mass-flux scheme's GCM columns** (`gcm_site_columns` in [massflux.py](massflux.py)) take code 40, plus the
-  surface's evaporation, as the boundary layer's non-convective moistening.
-  - **Affected:** the closure computed offline on GCM columns, in `on_gcm_columns` and the agents' GCM-column probes. It
-    used the physics' total, convection included, with the evaporation counted twice.
+**Two defects found on the way, corrected the same day.**
+- **The runner's description of code 40** (`MOISTENING` in [exoplasim_run.py](exoplasim_run.py)) called it the
+  dynamics' transport. It now names the physics' moistening as the spectral step applies it.
+- **The mass-flux scheme's GCM columns** (`gcm_site_columns` in [massflux.py](massflux.py)) took code 40, plus the
+  surface's evaporation, as the boundary layer's non-convective moistening, and lacked the dynamics' heating. They now
+  take the circulation's heating and moistening at each mean's hour from the run's own budget at the site.
+  - **Affected:** the closure computed offline on GCM columns, in `on_gcm_columns` and the agents' GCM-column probes.
+    It had used the physics' total, convection included, with the evaporation counted twice.
   - **Not affected:** the trigger shares, which test parcels alone, and the GCM runs, whose Fortran takes the model's
     own tendencies.
 
-**The year files' first mean.** In every year file of every run checked, the first 3-day mean of `hus` holds about 2% of
-the vapour of the means after it. That covers `A28R_301k_s0897`, `A28R_301k_cold`, `A28R_301k_cold_moist` and the
-fifteen-level runs; `A28_corrected_970_heating` holds 18%. Its temperature, surface pressure, cloud and precipitable
-water look as the next means do. The cause is not yet found. This module leaves those means out.
-- **The box's forcing.** Measured on the Kuo run, the table's moistening moves by 0.004 g/kg/day on average against
-  values of about 0.15. The held profile's lowest level is 0.1 g/kg (0.8%) too dry, and the mean ascent moves by at most
-  2%.
-- **The fifteen-level runs' products.** In `pbl_mixing` and the night-switch product, the sunrise–noon quarter's
-  lowest-level vapour is 0.4 g/kg too low, since both runs' first means of years 0 and 1 fall in it. Their night
-  quarters hold none.
-- **Elsewhere.** A year's mean of the vapour is low by about 0.8%.
+**The humidity in the year files.** The runs' `hus` is not a mean. PlaSim in low-I/O mode adds each field to its
+3-day mean every step. With spectral humidity, though, the field it adds for `hus` is recomputed only at output steps
+(plasim.f90, the gridpoint step's `mod(nstep,nafter)` test), so each record holds the humidity at the end of the
+interval before. That field is not in the restart either, which leaves each year file's first record with about 2% of
+the vapour. The other fields are true means.
+- **The evidence.** The column's vapour from a record matches the average of that record's precipitable-water mean and
+  the one before (7.6 kg/m² rms over cells and records) better than its own (10.4).
+- **The rule for existing runs.** [year_files.py](year_files.py) takes each interval's mean as the average of the record
+  and the next, and leaves out each year file's first and last records. That brings the column's vapour within 5.7 kg/m²
+  of the precipitable water, with no bias (8.2 against 14.2 in the Kuo run). Here it brings the layers' summed storage
+  after midnight to within 0.3 mm/day of the precipitable water's, against 0.5–1.0 with the records taken as means.
+- **The readers that take it.** gcm_site (the CM1 boxes' forcing), pbl_mixing, massflux, sbm_offline, box_upper_air,
+  plasim_longwave's fitting columns and this module. Their products are regenerated, except the longwave fits and
+  checks, which keep the columns they were made on until the next refit.
+- **What moved.** The night quarters barely did: the sea's mixed layer after midnight moves from 4.27 to 4.28 km. The
+  day quarters moved most. In the morning the mixed layer goes from 2.26 to 2.49 km and the lowest level gains
+  0.45 g/kg; in the afternoon the layer goes from 2.86 to 2.52 km and the air at 6.2 km gains 0.44 g/kg.
+- **The box's forcing.** Tested on the Kuo run, the record fix alone moved the forcing table's moistening by
+  0.004 g/kg/day on average, against values of about 0.15. The held profile's lowest level came out 0.1 g/kg (0.8%)
+  drier, and the mean ascent moved by at most 2%.
+- **Not yet changed.** The climatology, the cross-domain studies' extracts and the rings' readers still take `hus` as
+  it stands. Their long means are low by about 0.8% of the vapour, and their profiles by time of day lag by half an
+  interval.
 
 **Evidence and limits.** These are diagnostics of existing runs. The GCM's physics by process are single time steps,
 averaged over the six sea cells, so a layer's value carries their noise. The years and blocks give its size: the
-circulation's vapour at 5.2–11.8 km after midnight differs by up to 1.45 mm/day between the held-off run's two years,
+circulation's vapour at 5.2–11.8 km after midnight differs by up to 1.03 mm/day between the held-off run's two years,
 while its heat terms differ by at most 11 W/m². The GCM's circulation of heat includes the difference between the
 grid-point physics and the physics as applied, which gcm_site projects onto T21. The fifteen-level runs are the first
 two years of a spin-up. CM1 is one realization of its third lunar day on a 6 km grid; over that day its column dries by

@@ -1389,29 +1389,38 @@ def run_box(tag: str, box: dict, grid=None, prm=PARAMETERS, c=PLASIM) -> dict:
 def gcm_site_columns(run: str, years, box: str) -> dict:
     """The GCM's 3-day mean columns in the cells of a CM1 box's site (its case's gcm_site cells), as the scheme takes
     them: temperature, vapour and surface pressure; the surface's sensible and latent heat (W/m2, upward); the
-    tendencies of processes other than convection, the surface fluxes laid into the lowest layer with the radiation's
-    and the dynamics' moistening at the mean's last step (snapshots; the dynamics' heating is not written); omega from
-    PlaSim's continuity on the means' winds (gcm_site.omega); the 10 m wind; the GCM's convective and total rain; the
-    site's hour angle; cos-latitude weights."""
+    tendencies of processes other than convection: the radiation's at the mean's last step (snapshots), the
+    circulation's heating and moistening at the mean's hour from the run's own budget at the site
+    (gcm_site.site_forcing, the storage less the physics as applied, the budget the CM1 boxes take) and the surface
+    fluxes laid into the lowest layer; omega from PlaSim's continuity on the means' winds (gcm_site.omega); the 10 m
+    wind; the GCM's convective and total rain; the site's hour angle; cos-latitude weights. The humidity's means come
+    from year_files, which leaves out each year file's first and last records."""
     import json as _json
     import netCDF4
     from climate.crm import gcm_site as gs
     from climate.crm import ring_analysis as ra
     from climate.crm.cm1_run import planet
     from climate.gcm import sbm_offline as so
+    from climate.gcm import year_files as yf
     record = _json.loads((ra.RUNS / box / 'case.json').read_text())
     cells = [tuple(cc) for cc in record['gcm_site']['cells']]
     lon_site = record['configuration']['site']['lon_deg']
     c = so.run_constants(run)
+    akap = c['gascon'] / c['acpd']
     pl = planet()
+    circ = gs.site_forcing(run, years, record['gcm_site']['site'])['circulation']
+    bins = np.asarray(circ['hour_angle_deg'], float)
+    wrap = np.r_[bins - 360.0, bins, bins + 360.0]
+    table = {k: np.concatenate([np.asarray(circ[k], float)] * 3) for k in ('theta_k_s', 'qv_kg_kg_s')}
+    by_hour = lambda k, h: np.array([np.interp(h, wrap, table[k][:, m]) for m in range(table[k].shape[1])])
     out = {k: [] for k in ('t', 'q', 'ps', 'shf', 'lhf', 'heat', 'moist', 'omega', 'wind', 'prc', 'pr', 'hour', 'w',
                            'year')}
     for year in range(years[0], years[1] + 1):
         with netCDF4.Dataset(HERE / 'runs' / run / 'model' / f'MOST.{year:05d}.nc') as d:
             lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
             sigma = np.asarray(d['lev'][:], float)
-            f = {k: np.asarray(d[k][:], float) for k in ('ta', 'hus', 'ps', 'hfss', 'hfls', 'prc', 'pr', 'dt_lw',
-                                                         'dt_sw', 'dq_dyn', 'ua', 'va', 'uas', 'vas', 'czen')}
+            f = yf.fields(d, ('ta', 'hus', 'ps', 'hfss', 'hfls', 'prc', 'pr', 'dt_lw', 'dt_sw', 'ua', 'va', 'uas',
+                              'vas', 'czen'))
         edges = gs.plasim_edges(sigma)
         sp, wind = gs.Spectral(lat.size, lon.size), gs.Spectral(lat.size, lon.size, gs.TRUNCATION + 1)
         om = gs.omega(f['ua'], f['va'], f['ps'] * 100.0, sigma, pl['radius_m'], sp, wind)
@@ -1419,14 +1428,14 @@ def gcm_site_columns(run: str, years, box: str) -> dict:
         hour = (lon_site - gs.subsolar_longitude(f['czen'], lat, lon) + 180.0) % 360.0 - 180.0
         dsig = np.diff(edges)
         for n in range(f['ta'].shape[0]):
+            heat_circ, moist_circ = by_hour('theta_k_s', hour[n]), by_hour('qv_kg_kg_s', hour[n])
             for j, i in idx:
                 ps = f['ps'][n, j, i] * 100.0
                 mass = ps * dsig / c['ga']
-                heat = f['dt_lw'][n, :, j, i] + f['dt_sw'][n, :, j, i]
-                moist = f['dq_dyn'][n, :, j, i] * 1000.0 / mass             # m/s of water per layer to kg/kg/s
+                exner = (sigma * ps / 1.0e5) ** akap
+                heat = f['dt_lw'][n, :, j, i] + f['dt_sw'][n, :, j, i] + heat_circ * exner
+                moist = moist_circ.copy()
                 shf, lhf = -f['hfss'][n, j, i], -f['hfls'][n, j, i]
-                heat = heat.copy()
-                moist = moist.copy()
                 heat[-1] += shf / (c['acpd'] * mass[-1])
                 moist[-1] += lhf / c['ALV'] / mass[-1]
                 out['t'].append(f['ta'][n, :, j, i])
@@ -1962,8 +1971,10 @@ EVIDENCE = ('Offline single-column calculations, no new CM1 or GCM runs. CM1: on
             'third lunar day and the land box\'s second, their domain means every 3 hours (59 a quarter) and their 3-D '
             'output (cloud samples, cold pools); the scheme meets columns CM1\'s own convection shaped, so its response '
             'at once and CM1\'s realised convection are compared. GCM: 3-day means of five years of the rh 0.7 branch '
-            'in its site cells, built by the simplified Betts-Miller scheme; the boundary layer\'s forcing there lacks '
-            'the dynamics\' heating and takes the radiation and the dynamics\' moistening as single-step snapshots. The '
+            'in its site cells, built by the simplified Betts-Miller scheme, the humidity\'s means as '
+            'year_files.py reads them; the boundary layer\'s forcing there takes the radiation as single-step '
+            'snapshots and the circulation\'s heating and moistening at each mean\'s hour from the run\'s own '
+            'budget at the site. The '
             'single column is driven by CM1\'s radiation and surface fluxes, not its own, with a mixed boundary layer '
             'in place of PlaSim\'s vertical diffusion. The adjustment time\'s factor and the entrainment are measured '
             'on these boxes, so their sea quarters are not independent tests of them. The fifteen levels are '

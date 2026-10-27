@@ -30,9 +30,12 @@ var11 forcing) holds the circulation's heating and moistening with the mean wind
 added back, so that in the GCM's state the two give the GCM's budget.
 
 The means (ta, hus, ua, va, ps, czen, pr, evap, prw) cover a tenth of the lunar day each, 36 degrees of hour angle,
-centred on the site's hour angle from the subsolar longitude of the mean solar height; the snapshots fall at each
-mean's end, 18 degrees later. Each level's series is fitted by least squares with the day's mean and first four
-harmonics, those of the means divided by the damping a 36-degree mean gives them.
+centred on the site's hour angle from the subsolar longitude of the mean solar height; the snapshots fall at each mean's
+end, 18 degrees later. The year files' hus records the humidity at each interval's start, so its means come from
+gcm/year_files.py, each the average of a record and the next, with each year file's first and last records left out
+(from 27 October; the boxes forced before then took each record as its interval's mean). Each level's series is fitted
+by least squares with the day's mean and first four harmonics, those of the means divided by the damping a 36-degree
+mean gives them.
 
 The table stands on CM1's own levels, the mean wind's advection added back on the box's starting air, so that the two
 cancel at the start to the accuracy of the two differences (centred here, CM1's third-order upstream). The GCM holds
@@ -258,6 +261,7 @@ def site_forcing(run, years, site, window_deg=36.0, top_m=TOP_M):
     prescribes by local time, and the budgets behind it. Arrays by level run top first, as PlaSim writes them."""
     import netCDF4
     from climate.crm.cm1_run import gcm_soil, planet, solar_day_s
+    from climate.gcm import year_files as yf
     p = planet()
     gravity, radius = p['gravity_m_s2'], p['radius_m']
     folder = HERE.parent / 'gcm' / 'runs' / run / 'model'
@@ -269,7 +273,7 @@ def site_forcing(run, years, site, window_deg=36.0, top_m=TOP_M):
             if missing:
                 raise ValueError(f'{run} year {year} lacks {missing}: run it with --heating-diagnostics '
                                  '--moisture-diagnostics')
-            f = {k: np.asarray(d[k][:], float) for k in MEANS + SNAPSHOTS + SCHEMES}
+            f = yf.fields(d, MEANS + SNAPSHOTS + SCHEMES)            # the humidity's means: gcm/year_files.py
             lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
             sigma = np.asarray(d['lev'][:], float)
             lsm = np.asarray(d['lsm'][:], float)[0] > 0.5

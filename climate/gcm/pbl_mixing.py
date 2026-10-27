@@ -145,11 +145,13 @@ def gcm_site(run: str, years, box: str) -> dict:
     at the end of each mean, binned by the time of those steps with the surface layer's heating at the same steps), the
     surface's
     sensible and latent heat, the vertical diffusion's coefficients on the means (mixing lengths as they stand and
-    stretched by the gravities) with its heat flux recomputed there as a check, and the mean profiles."""
+    stretched by the gravities) with its heat flux recomputed there as a check, and the mean profiles. The humidity's
+    means come from year_files, which leaves out each year file's first and last records."""
     import netCDF4
     from climate.crm import gcm_site as gs
     from climate.crm import ring_analysis as ra
     from climate.gcm import sbm_offline as so
+    from climate.gcm import year_files as yf
     record = json.loads((ra.RUNS / box / 'case.json').read_text())
     cells = [tuple(cc) for cc in record['gcm_site']['cells']]
     lon_site = record['configuration']['site']['lon_deg']
@@ -163,10 +165,11 @@ def gcm_site(run: str, years, box: str) -> dict:
         with netCDF4.Dataset(HERE / 'runs' / run / 'model' / f'MOST.{year:05d}.nc') as d:
             lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
             sigma = np.asarray(d['lev'][:], float)
-            czen = np.asarray(d['czen'][:], float)
             idx = [(int(np.argmin(abs(lat - a))), int(np.argmin(abs(lon - b)))) for a, b in cells]
-            f = {k: np.stack([np.asarray(d[k][:, ..., j, i], float) for j, i in idx], axis=1)
-                 for k in ('ta', 'hus', 'ua', 'va', 'ps', 'hfss', 'hfls', 'dt_vdif', 'dt_dca', 'dt_sfc')}
+            names = ('ta', 'hus', 'ua', 'va', 'ps', 'hfss', 'hfls', 'dt_vdif', 'dt_dca', 'dt_sfc')
+            got = yf.fields(d, names + ('czen',))
+            czen = got['czen']
+            f = {k: np.stack([got[k][..., j, i] for j, i in idx], axis=1) for k in names}
         edges = gs.plasim_edges(sigma)
         hour = (lon_site - gs.subsolar_longitude(czen, lat, lon) + 180.0) % 360.0 - 180.0
         hour_snap = snapshot_hours(hour)

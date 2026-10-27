@@ -19,13 +19,16 @@ which the runner names dq_dyn, is the physics' moistening as the spectral step a
 tendencies and mkdqtgp writes them back to the grid), and code 41 the horizontal diffusion; code 40's global means by
 layer match the physics' sum (code 31), and code 41 sums to nothing over the globe. The storage of each layer's vapour
 and heat over a quarter comes from the 3-day means, fitted with the day's mean and four harmonics, each divided by the
-damping its window gives it (crm/gcm_site.py), each year file's first mean left out (its hus holds about 2% of the
-vapour of the means after it, in every run checked), and the circulation is the storage less the physics as applied: the
+damping its window gives it (crm/gcm_site.py), the humidity's means from year_files (each record of hus holds the
+humidity at its interval's start, so each interval's mean is the average of the record and the next, and each year
+file's first and last records are left out), and the circulation is the storage less the physics as applied: the
 transport sideways and up or down with the horizontal diffusion, the heat's with the adiabatic warming of sinking air.
-The column's physics over a quarter is exactly its evaporation less its rain, from the means fitted the same way; the
-snapshots' column sum beside it measures their noise. Large-scale condensation is also read from its heating (mklsp
-heats by ALV over the moist specific heat), which the runs without the vapour by process need. The rain's evaporation
-(mkrain) is written apart only in the diagnostic run; elsewhere it stays in the physics' sum.
+The column's physics over a quarter is exactly its evaporation less its rain, and its storage the change of its
+precipitable water, from the means fitted the same way; the snapshots' column sum beside the physics measures their
+noise, and the layers' summed storage beside the precipitable water's checks the humidity's means. Large-scale
+condensation is also read from its heating (mklsp heats by ALV over the moist specific heat), which the runs without the
+vapour by process need. The rain's evaporation (mkrain) is written apart only in the diagnostic run; elsewhere it stays
+in the physics' sum.
 
 In CM1, its domain diagnostics every three hours. Its vapour budget closes, layer by layer, as the prescribed
 circulation (the day-night table, terluna_lsadv.txt, and the imposed mean vertical wind's advection, qvb_lsw; the
@@ -65,7 +68,6 @@ REFERENCE = 'sbm_l15'                        # the run whose layers are the band
 QUARTERS = (('sunrise-noon', -90.0, 0.0), ('noon-sunset', 0.0, 90.0), ('sunset-midnight', 90.0, 180.0),
             ('midnight-sunrise', -180.0, -90.0))
 HARMONICS = 4
-FIRST_GOOD_MEAN = 1     # each year file's first 3-day mean of hus holds about 2% of its neighbours' vapour
 MEANS = ('ta', 'hus', 'ps', 'czen', 'pr', 'prc', 'evap', 'prw', 'cl')
 SNAP_WATER = ('dq_diab', 'dq_fill', 'dq_dyn', 'dq_dyn_late', 'dq_sfc', 'dq_vdif', 'dq_lsp', 'dq_conv', 'dq_dca')
 SNAP_HEAT = ('dt_diab', 'dt_nudge', 'dt_sfc', 'dt_vdif', 'dt_lw', 'dt_sw', 'dt_lsp', 'dt_conv', 'dt_dca', 'dt_evap')
@@ -133,6 +135,7 @@ def gcm_site_water(run: str, years) -> dict:
     from climate.crm.cm1_run import solar_day_s
     from climate.gcm import pbl_mixing as pm
     from climate.gcm import sbm_offline as so
+    from climate.gcm import year_files as yf
     record = json.loads((ra.RUNS / BOX / 'case.json').read_text())
     cells = [tuple(cc) for cc in record['gcm_site']['cells']]
     lon_site = record['configuration']['site']['lon_deg']
@@ -151,8 +154,9 @@ def gcm_site_water(run: str, years) -> dict:
             w = w / w.sum()
             names = [k for k in MEANS + SNAP_WATER + SNAP_HEAT + ('dq_evap',) if k in d.variables]
             present |= set(names)
-            f = {k: np.asarray(d[k][:], float)[..., jj, ii] for k in names if k != 'czen'}   # (time, [lev,] cells)
-            hour = (lon_site - gs.subsolar_longitude(np.asarray(d['czen'][:], float), lat, lon) + 180.0) % 360.0 - 180.0
+            got = yf.fields(d, names)                                   # the humidity's means: year_files
+            f = {k: v[..., jj, ii] for k, v in got.items() if k != 'czen'}   # (time, [lev,] cells)
+            hour = (lon_site - gs.subsolar_longitude(got['czen'], lat, lon) + 180.0) % 360.0 - 180.0
         edges = gs.plasim_edges(sigma)
         dsig = np.diff(edges)
         mean = lambda a: np.tensordot(a, w, axes=(-1, 0))                     # the cells' weighted mean
@@ -170,22 +174,21 @@ def gcm_site_water(run: str, years) -> dict:
                 snaps[k].append(mean(f[k] * cpq * mass))
         snaps['lsp_from_heating'].append(mean(f['dt_lsp'] * cpq * mass / c['ALV']) * DAY)
         snaps['conv_from_heating'].append(mean(f['dt_conv'] * cpq * mass / c['ALV']) * DAY)
-        keep = slice(FIRST_GOOD_MEAN, None)                                    # the year's first mean is left out
-        means['water'].append(mean(f['hus'] * mass)[keep])
-        means['enthalpy'].append(mean(cpq * f['ta'] * mass)[keep])
-        means['t'].append(mean(f['ta'])[keep])
-        means['q'].append(mean(f['hus'])[keep])
+        means['water'].append(mean(f['hus'] * mass))
+        means['enthalpy'].append(mean(cpq * f['ta'] * mass))
+        means['t'].append(mean(f['ta']))
+        means['q'].append(mean(f['hus']))
         p_full = sigma[None, :, None] * ps[:, None, :]
-        means['rh'].append(mean(f['hus'] / saturation(f['ta'], p_full, c))[keep])
-        means['cl'].append(mean(f['cl'])[keep])
+        means['rh'].append(mean(f['hus'] / saturation(f['ta'], p_full, c)))
+        means['cl'].append(mean(f['cl']))
         zh = pm.half_level_heights(np.moveaxis(f['ta'], 1, -1), np.moveaxis(f['hus'], 1, -1), None, edges, g,
                                    c['gascon'], c['rdbrv'])                    # (time, cells, nlev-1), top first
-        means['z_half'].append(mean(np.moveaxis(zh, -1, 1))[keep])
-        means['e'].append(-mean(f['evap'])[keep] * to_mm)
-        means['p'].append(mean(f['pr'])[keep] * to_mm)
-        means['pc'].append(mean(f['prc'])[keep] * to_mm)
-        means['prw'].append(mean(f['prw'])[keep])
-        hours.append(hour[keep])
+        means['z_half'].append(mean(np.moveaxis(zh, -1, 1)))
+        means['e'].append(-mean(f['evap']) * to_mm)
+        means['p'].append(mean(f['pr']) * to_mm)
+        means['pc'].append(mean(f['prc']) * to_mm)
+        means['prw'].append(mean(f['prw']))
+        hours.append(hour)
         hours_snap.append(pm.snapshot_hours(hour))
     hour, hour_snap = np.concatenate(hours), np.concatenate(hours_snap)
     s = {k: np.concatenate(v) for k, v in snaps.items() if v}
@@ -226,8 +229,8 @@ def gcm_site_water(run: str, years) -> dict:
                       convective_rain=float(exact['pc'][n]), large_scale_rain=float(exact['p'][n] - exact['pc'][n]),
                       physics_exact=float(exact['e'][n] - exact['p'][n]),
                       physics_applied_from_snapshots=float(sq['dq_dyn'].sum()),
-                      storage=float(storage_w[n].sum()), storage_from_precipitable_water=float(storage_col[n]),
-                      circulation_exact=float(storage_w[n].sum() - (exact['e'][n] - exact['p'][n])))
+                      storage=float(storage_col[n]), storage_from_layers=float(storage_w[n].sum()),
+                      circulation_exact=float(storage_col[n] - (exact['e'][n] - exact['p'][n])))
         out['quarters'][name] = dict(vapour_mm_day={k: np.asarray(v, float) for k, v in vap.items()},
                                      heat_w_m2={k: np.asarray(v, float) for k, v in heat.items()},
                                      column_mm_day=column,
@@ -388,17 +391,18 @@ READING_RULE = ("bands: the fifteen-level grid's layers at the site, the ground 
                 'diffusion, and for heat the adiabatic warming); the processes as PlaSim writes them where the run '
                 'does (surface, diffusion, large_scale_condensation, convection, dry_adjustment, rain_evaporation), '
                 "with large-scale condensation also from its heating; column_mm_day: the quarter's exact evaporation, "
-                "rain and their difference from the means against the snapshots' column sum. The ten-level run's "
-                'layers are laid on the bands by height, its state on its own layers. CM1: circulation = table + '
-                "imposed_ascent + nudging (the GCM's forcing), resolved (its own convection and eddies), "
-                "boundary_layer (the scheme, the surface's evaporation entering at the ground), microphysics (net), "
-                'rest = storage less them; microphysics_mm_day: the gross processes as vapour (condensation and '
-                'deposition negative, the evaporations and sublimation positive); state: vapour (g/kg), relative '
-                'humidity and cloud fraction as domain and mass means, and the condensate held (kg/m2). Quarters by '
-                'hour angle from noon. ranges: the same summed over the bands 1-4, 5-7 and 8-9 from the ground (about '
-                '0-5.2, 5.2-11.8 and 11.8-23.4 km); spread: those sums and the column for each year of the '
-                'fifteen-level runs and each two-year block of the Kuo run, their differences the measure of the '
-                "snapshots' noise.")
+                "rain and their difference from the means against the snapshots' column sum, its storage from the "
+                "precipitable water against the layers' sum, and the circulation as that storage less the exact "
+                "physics. The ten-level run's layers are laid on the bands by height, its state on its own layers. "
+                "CM1: circulation = table + imposed_ascent + nudging (the GCM's forcing), resolved (its own convection"
+                " and eddies), boundary_layer (the scheme, the surface's evaporation entering at the ground), "
+                'microphysics (net), rest = storage less them; microphysics_mm_day: the gross processes as vapour '
+                '(condensation and deposition negative, the evaporations and sublimation positive); state: vapour '
+                '(g/kg), relative humidity and cloud fraction as domain and mass means, and the condensate held '
+                '(kg/m2). Quarters by hour angle from noon. ranges: the same summed over the bands 1-4, 5-7 and 8-9 '
+                'from the ground (about 0-5.2, 5.2-11.8 and 11.8-23.4 km); spread: those sums and the column for each '
+                'year of the fifteen-level runs and each two-year block of the Kuo run, their differences the measure '
+                "of the snapshots' noise.")
 
 
 GROUPS = ((0, 4), (4, 7), (7, 9))            # the bands from the ground: about 0-5.2, 5.2-11.8 and 11.8-23.4 km

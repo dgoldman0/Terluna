@@ -213,7 +213,9 @@ evening 36%, land afternoon 29%): the thin layer and the similarity give the par
 
 The sea's evening rises from half of CM1's to 85% of it, its afternoon falls to two-thirds, and the land's morning
 reaches a third of CM1's. In the column started from the GCM's air the sea's upper air at 41 and 55 km falls from
-9.7 and 11.3 K above CM1's to 3.1 and 1.3 K in three lunar days.
+9.7 and 11.3 K above CM1's to 3.6 and 2.7 K in three lunar days. That column was regenerated on 27 October with the
+humidity's means ([year_files.py](year_files.py)): its start's vapour changed by under 1%, its third day by up to
+1.4 K at those heights, so as a single realization it gives the direction of a change, not its size.
 
 **How the shortfalls moved:**
 - **The sea's early nights** go deep on CM1's columns as they did on CM1's levels: 42% of outputs, 2.31 mm/day formed
@@ -645,8 +647,13 @@ shallow boundary layer and the test parcel's sub-cloud mixing. Any fifteen-year 
   boxes, so the sea quarters are not independent tests of them.
 - **CM1's surface layer.** Its 50 m air and the profile above it come from CM1's simple boundary-layer scheme at 6 km
   spacing; the similarity's agreement with them tests the parcel against that model's surface layer.
-- **The GCM's columns.** They are 3-day means of a branch built by another scheme. Their boundary-layer forcing lacks
-  the dynamics' heating and takes radiation and the dynamics' moistening from one-step snapshots.
+- **The GCM's columns.** They are 3-day means of a branch built by another scheme. Their boundary-layer forcing takes
+  radiation from one-step snapshots and the circulation's heating and moistening at each mean's hour from the run's
+  own budget at the site (gcm_site.site_forcing). Before 27 October it took output code 40, the physics' moistening as
+  applied, convection included, for the dynamics', with the evaporation counted twice, and lacked the dynamics'
+  heating. The correction left the closure on these columns as it was, since the scheme hardly fires on the GCM's
+  3-day means. The tables of the trigger's tests on GCM columns above were made before it, with each year's first
+  record and the humidity of each interval's start (year_files); they were not rerun.
 - **The single column.** It takes CM1's radiation and surface fluxes as given, so they do not answer its own state, and
   its boundary layer is a mixed layer.
 - **Rain at the ground.** Applied on CM1's 111 levels, `mkrain`'s per-layer share evaporates nearly all the scheme's

@@ -154,10 +154,12 @@ def cm1_columns(case: str, span=SPAN_DAYS) -> dict:
 def gcm_columns(run: str, years, box: str) -> dict:
     """The GCM's 3-day mean columns in each of its cells at a box's site (the cells the box's case records), with
     their weights (cos latitude), the hour angle of the site, the GCM's convective rain at the ground (prc, mm/day)
-    and the rain its scheme formed at the end of the mean (mm/day, from the dt_conv snapshot)."""
+    and the rain its scheme formed at the end of the mean (mm/day, from the dt_conv snapshot). The humidity's means
+    come from year_files, which leaves out each year file's first and last records."""
     import netCDF4
     from climate.crm import gcm_site as gs
     from climate.crm import ring_analysis as ra
+    from climate.gcm import year_files as yf
     record = json.loads((ra.RUNS / box / 'case.json').read_text())
     cells = [tuple(c) for c in record['gcm_site']['cells']]
     lon_site = record['configuration']['site']['lon_deg']
@@ -170,8 +172,8 @@ def gcm_columns(run: str, years, box: str) -> dict:
             edges = gs.plasim_edges(sigma)
             idx = [(int(np.argmin(abs(lat - a))), int(np.argmin(abs(lon - b)))) for a, b in cells]
             w = np.cos(np.radians([lat[j] for j, _ in idx]))
-            f = {k: np.asarray(d[k][:], float) for k in ('ta', 'hus', 'ps', 'prc', 'pr', 'dt_conv')}
-            hour = (lon_site - gs.subsolar_longitude(np.asarray(d['czen'][:], float), lat, lon) + 180.0) % 360.0 - 180.0
+            f = yf.fields(d, ('ta', 'hus', 'ps', 'prc', 'pr', 'dt_conv', 'czen'))     # the humidity's means: year_files
+            hour = (lon_site - gs.subsolar_longitude(f['czen'], lat, lon) + 180.0) % 360.0 - 180.0
         for n in range(f['ta'].shape[0]):
             for wk, (j, i) in zip(w, idx):
                 ps = f['ps'][n, j, i] * 100.0

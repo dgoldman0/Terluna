@@ -115,6 +115,7 @@ def gcm_budget(run: str, years, box: str = START_CASE) -> dict:
     import netCDF4
     from climate.crm import gcm_site as gs
     from climate.gcm import sbm_offline as so
+    from climate.gcm import year_files as yf
     c = so.run_constants(run)
     record = json.loads((ra.RUNS / box / 'case.json').read_text())
     cells = [tuple(x) for x in record['gcm_site']['cells']]
@@ -125,7 +126,7 @@ def gcm_budget(run: str, years, box: str = START_CASE) -> dict:
             lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
             sigma = np.asarray(d['lev'][:], float)
             idx = [(int(np.argmin(abs(lat - a))), int(np.argmin(abs(lon - b)))) for a, b in cells]
-            f = {k: np.asarray(d[k][:], float) for k in TERMS + ('ta', 'hus', 'ps', 'ts')}
+            f = yf.fields(d, TERMS + ('ta', 'hus', 'ps', 'ts'))       # the humidity's means: gcm/year_files.py
         for j, i in idx:
             for k in TERMS + ('ta', 'hus'):
                 acc[k].append(f[k][:, :, j, i])

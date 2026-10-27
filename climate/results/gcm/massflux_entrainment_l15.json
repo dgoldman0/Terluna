@@ -63,7 +63,7 @@
   "domain": "climate",
   "files": {
    "gcm/massflux_entrainment.py": "cb3f4d662912290b",
-   "gcm/massflux.py": "4f5fafb5edeba679",
+   "gcm/massflux.py": "e67f255765a29f16",
    "gcm/pbl_column.py": "395cc161108443bb",
    "gcm/pbl_scheme.py": "aff7bda14c48b1ed",
    "crm/box_entrainment.py": "c969d243b4f2c963"
@@ -2577,62 +2577,62 @@
   "forms": {
    "fixed": {
     "height_m": [
-     40890.0,
-     54870.0
+     40830.0,
+     54840.0
     ],
     "start_minus_cm1_k": [
-     9.749,
-     11.26
+     9.747,
+     11.25
     ],
     "mean_minus_cm1_k_by_lunar_day": [
      [
-      7.706,
-      8.558
+      7.713,
+      8.562
      ],
      [
-      4.542,
-      3.707
+      4.841,
+      4.37
      ],
      [
-      3.476,
-      2.671
+      4.006,
+      3.367
      ]
     ],
     "rain_mm_day_last_day": {
-     "night": 1.115,
-     "morning": 0.04946,
-     "afternoon": 3.806,
-     "evening": 1.05
+     "night": 1.234,
+     "morning": 0.07114,
+     "afternoon": 3.075,
+     "evening": 1.636
     }
    },
    "environment": {
     "height_m": [
-     40810.0,
-     54640.0
+     40860.0,
+     54700.0
     ],
     "start_minus_cm1_k": [
-     9.749,
-     11.26
+     9.747,
+     11.25
     ],
     "mean_minus_cm1_k_by_lunar_day": [
      [
-      7.705,
-      8.558
+      7.713,
+      8.562
      ],
      [
-      4.186,
-      2.804
+      4.247,
+      2.718
      ],
      [
-      1.278,
-      -0.4548
+      1.711,
+      -0.3324
      ]
     ],
     "rain_mm_day_last_day": {
-     "night": 0.1857,
-     "morning": 0.8909,
-     "afternoon": 1.366,
-     "evening": 0.6091
+     "night": 0.9858,
+     "morning": 0.04511,
+     "afternoon": 2.569,
+     "evening": 1.287
     }
    }
   }
