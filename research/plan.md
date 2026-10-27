@@ -415,12 +415,14 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      the ground at about CM1's rate. Above that the two part: after midnight CM1's boundary layer over the sea reaches
      6.5 km against the GCM's 4.3 km, and CM1 keeps its vapour nearly uniform up to its clouds by eddies that cross
      the stable air at the layer's top, which PlaSim's local diffusion and dry adjustment cannot do; how much of the
-     moisture difference that explains is open, since PlaSim's convection scheme also moves vapour there. Under way
-     (register, 27 October): mixing lengths stretched by the gravities as a sensitivity and a nonlocal K-profile
-     boundary-layer scheme with explicit entrainment, tested in a single column against CM1 and then in four two-year
-     runs, with vapour budgets by process and a check that the night clouds' capping layer survives; an
-     eddy-diffusivity mass-flux scheme waits for the author. Then surface and radiation feedbacks, a longwave refit on
-     the chosen configuration and a 15-year run. The depth test's 15-year run is held.
+     moisture difference that explains is open, since PlaSim's convection scheme also moves vapour there. A nonlocal
+     K-profile scheme with explicit entrainment, built and checked (register, 27 October), kept the night clouds'
+     capping layer in a single column but did not deepen the sea's night layer, tripping its stop rule. There CM1's
+     layer is mixed from above, mostly by its own boundary-layer scheme with the gravity-stretched length. Under way:
+     the single column with CM1's convective tendencies in place of the convection scheme, and CM1's sea box rerun
+     with the Earth length, to settle whether the night gap is real. Then, by what they show, a cloud-top-driven or
+     eddy-diffusivity mass-flux scheme (the author's call), surface and radiation feedbacks, a longwave refit on the
+     chosen configuration and a 15-year run. The depth test's 15-year run is held.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
      12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. A lunar
      free-convection constant over the sea, in place of Earth's, removes a quarter of the GCM's extra evaporation at
