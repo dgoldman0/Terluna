@@ -3612,7 +3612,9 @@ gridpoint humidity PlaSim adds every step. Both switches sit in PlaSim's own nam
   - **Cost.** The month took 37 s against 32 s.
 - **The shared source.** rainmod.f90, plasimmod.f90, plasim.f90, restartmod.f90 and outmod.f90 carry the patches from
   this month on. Their new hashes stop any run begun on the older source from resuming; such a run continues as a new
-  one from its restart.
+  one from its restart. The humidity mean's code 233 reaches the output through a variable, so that the other branches'
+  runners, whose tests list the codes PlaSim always writes, still pass against the shared source; the smoke month rerun
+  that way repeats the first bit for bit, in all 73 variables and its restart.
 
 **The stop rule, set before the two-year run.** The run takes the night switch's two years with the cloud water and
 the humidity's mean (`A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night_cloud`), from the fifteen-level restart.

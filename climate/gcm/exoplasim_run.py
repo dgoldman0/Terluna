@@ -204,12 +204,12 @@ OUTPUT = ['ta', 'ua', 'va', 'hus', 'cl',
           'rst', 'rsut', 'rlut', 'ntr', 'nbr', 'rss', 'rls', 'hfss', 'hfls', 'alb', 'czen', 'lsm', 'tauu', 'tauv']
 # The codes PlaSim 3.4.2 writes to its raw output (outmod.f90's writegp calls on unit 40), and the names ExoPlaSim's
 # postprocessor derives from them (pyburn.dataset): a name outside both comes out of the postprocessor as nothing.
-# The diagnostics' own codes (the heating's 21-29 among them) come on top when their switches are on; 233, the
-# humidity's true mean, only with nhusmean 1 (HUS_MEAN_PATCHES).
+# The diagnostics' own codes (the heating's 21-29 among them) come on top when their switches are on, as does 233,
+# the humidity's true mean, which HUS_MEAN_PATCHES writes through a variable only with nhusmean 1.
 PLASIM_CODES = (101, 102, 103, 104, 105, 106, 107, 110, 129, 130, 133, 138, 139, 140, 141, 142, 143, 144, 146, 147, 152,
                 155, 159, 160, 161, 162, 164, 165, 166, 167, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180,
-                181, 182, 183, 184, 201, 202, 203, 204, 205, 207, 208, 209, 210, 211, 218, 221, 229, 230, 232, 233,
-                265, 266, 267, 268, 269, 298, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 410, 411)
+                181, 182, 183, 184, 201, 202, 203, 204, 205, 207, 208, 209, 210, 211, 218, 221, 229, 230, 232, 265,
+                266, 267, 268, 269, 298, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 410, 411)
 DERIVED = ('ua', 'va', 'spd', 'ps', 'psl', 'pr', 'ntr', 'nbr', 'hfns', 'wfn', 'zg', 'hur', 'wap', 'wa', 'stf', 'psi')
 # PlaSim's clear-sky fluxes, written when the diagnostic is on but unknown to ExoPlaSim's postprocessor,
 # which the runner teaches them. Unlike the other fluxes they are snapshots at each output time, not
@@ -1055,9 +1055,10 @@ HUS_MEAN_EDITS = [
     (_HUS_LOWIO,
      _HUS_LOWIO
      + f"        if (nqspec == 1 .and. nhusmean == 1) then ! {HUS_MEAN_MARKER}, code 233\n"
+     "           ihuscode = 233   ! through a variable: PlaSim writes it only with nhusmean 1\n"
      "           do jlev = 1 , NLEV\n"
      "              aadq(:,jlev) = aadq(:,jlev)/real(naccuout)\n"
-     "              call writegp(40,aadq(1,jlev),233,jlev)\n"
+     "              call writegp(40,aadq(1,jlev),ihuscode,jlev)\n"
      "           enddo\n"
      "        endif\n"),
 ]
