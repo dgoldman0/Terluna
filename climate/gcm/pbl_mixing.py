@@ -16,8 +16,9 @@ heating by process, and the diffusivity, Richardson number and mixing length its
 means, with the mixing lengths as they stand and stretched by the gravities. The run writes no vapour tendency by
 process, and the diffusion recomputed on the means misstates the heat the run's own diffusion carries, so the
 diffusivities on the means serve to place each half level's stability regime. In CM1 (each box's domain diagnostics
-over its settled lunar day) it measures the heat and vapour carried up through each height, resolved and
-parameterized, the effective diffusivity for vapour, the parameterized diffusivity, the vertical wind's spread and the
+over its settled lunar day) it measures the heat and vapour carried up through each height, split as CM1
+writes them into the resolved part, the advection's implicit diffusion and the boundary-layer scheme's, the effective
+diffusivity for vapour, the parameterized diffusivity, the vertical wind's spread and the
 boundary layer's depth from CM1's bulk Richardson number. In both it reads the mixed layer's depth by one rule
 (rise_height) and the mean profiles of virtual potential temperature and vapour.
 """
@@ -224,7 +225,8 @@ def gcm_site(run: str, years, box: str) -> dict:
 
 def cm1_box(case_name: str) -> dict:
     """A CM1 box's domain diagnostics over the span its onset record analyses, by quarter of the lunar day: the heat
-    and vapour carried up through each w level (W/m2), resolved and parameterized; the vapour's kinematic flux and
+    and vapour carried up through each w level (W/m2), as the resolved part, the advection's implicit diffusion (which
+    belongs to the resolved advection) and the boundary-layer scheme's subgrid part; the vapour's kinematic flux and
     mean gradient, for its effective diffusivity; the parameterized diffusivity; the vertical wind's spread; the
     surface's fluxes; the boundary layer's depth (hpbl); and the mean profiles of potential temperature and vapour."""
     from climate.crm import box_budget as bb
@@ -253,9 +255,10 @@ def cm1_box(case_name: str) -> dict:
         to_heat, to_vap = rho * co.CP * exn, rho * LV
         hour = local_hour_angle(start, lon, s['mtime'], solar_day_s())
         thv = s['th'] * (1.0 + (co.RV / co.RD - 1.0) * s['qv'])
-        rows = dict(heat_resolved_w_m2=to_heat * wd['thfr'], heat_parameterized_w_m2=to_heat * (wd['thfs'] + wd['thfd']),
-                    vapour_resolved_w_m2=to_vap * wd['qvfr'],
-                    vapour_parameterized_w_m2=to_vap * (wd['qvfs'] + wd['qvfd']),
+        rows = dict(heat_resolved_w_m2=to_heat * wd['thfr'], heat_diffusion_w_m2=to_heat * wd['thfd'],
+                    heat_subgrid_w_m2=to_heat * wd['thfs'],
+                    vapour_resolved_w_m2=to_vap * wd['qvfr'], vapour_diffusion_w_m2=to_vap * wd['qvfd'],
+                    vapour_subgrid_w_m2=to_vap * wd['qvfs'],
                     khv_m2_s=wd['khv'], dqvdz_per_m=wd['dqvdz'], vapour_kinematic=wd['qvfr'] + wd['qvfs'] + wd['qvfd'],
                     sigma_w_m_s=np.sqrt(np.maximum(wd['wpwp_w'], 0.0)),
                     sensible_w_m2=s['hfx'], latent_w_m2=s['qfx'] * LV,
@@ -268,8 +271,8 @@ def cm1_box(case_name: str) -> dict:
     for name, _, _ in QUARTERS:
         a = acc[name]
         mean = {k: np.mean(np.stack(v), axis=0) for k, v in a.items()}
-        mean['heat_w_m2'] = mean['heat_resolved_w_m2'] + mean['heat_parameterized_w_m2']
-        mean['vapour_w_m2'] = mean['vapour_resolved_w_m2'] + mean['vapour_parameterized_w_m2']
+        mean['heat_w_m2'] = mean['heat_resolved_w_m2'] + mean['heat_diffusion_w_m2'] + mean['heat_subgrid_w_m2']
+        mean['vapour_w_m2'] = mean['vapour_resolved_w_m2'] + mean['vapour_diffusion_w_m2'] + mean['vapour_subgrid_w_m2']
         mean['outputs'] = len(a['hpbl_m'])
         out[name] = mean
     l_inf = bb.namelist_value((case / 'namelist.input').read_text(), 'l_inf')
@@ -334,10 +337,12 @@ def compare(gcm: dict, cm1: dict) -> dict:
                      surface_heat_w_m2=round(float(m['heat_w_m2'][0]), 1),
                      surface_vapour_w_m2=round(float(m['vapour_w_m2'][0]), 1),
                      heat_w_m2=r(at(m['heat_w_m2'])), heat_resolved_w_m2=r(at(m['heat_resolved_w_m2'])),
-                     heat_parameterized_w_m2=r(at(m['heat_parameterized_w_m2'])),
+                     heat_diffusion_w_m2=r(at(m['heat_diffusion_w_m2'])),
+                     heat_subgrid_w_m2=r(at(m['heat_subgrid_w_m2'])),
                      heat_share_of_sensible=r(at(m['heat_w_m2']) / m_sens, 3) if abs(m_sens) > 1.0 else None,
                      vapour_w_m2=r(at(m['vapour_w_m2'])), vapour_resolved_w_m2=r(at(m['vapour_resolved_w_m2'])),
-                     vapour_parameterized_w_m2=r(at(m['vapour_parameterized_w_m2'])),
+                     vapour_diffusion_w_m2=r(at(m['vapour_diffusion_w_m2'])),
+                     vapour_subgrid_w_m2=r(at(m['vapour_subgrid_w_m2'])),
                      vapour_share_of_latent=r(at(m['vapour_w_m2']) / m_lat, 3) if abs(m_lat) > 1.0 else None,
                      k_effective_vapour_m2_s=r(k_eff, 0), khv_m2_s=r(at(m['khv_m2_s'])),
                      sigma_w_m_s=r(at(m['sigma_w_m_s']), 2), hpbl_m=round(float(m['hpbl_m']), 0),
@@ -372,8 +377,10 @@ def analyse(run: str = RUN, years=YEARS) -> dict:
                       'heat_vdiff_on_means_w_m2 recomputes the diffusion on the 3-day means as a check, and k_m2_s '
                       '(the mean over the means), k_median_m2_s, k_stretched_m2_s (mixing lengths times stretch), '
                       'ri_median and stability_factor place each half '
-                      'level\'s regime on the means. cm1 values are interpolated to the same heights, resolved and '
-                      'parameterized parts beside the total; k_effective_vapour_m2_s is the vapour flux over the mean '
+                      'level\'s regime on the means. cm1 values are interpolated to the same heights, the resolved '
+                      'part (thfr, qvfr), the advection\'s implicit diffusion (thfd, qvfd) and the boundary-layer '
+                      'scheme\'s subgrid part (thfs, qvfs) beside the total; k_effective_vapour_m2_s is the vapour flux '
+                      'over the mean '
                       'gradient where vapour falls by at least 0.05 g/kg per km. Shares divide by the surface\'s '
                       'sensible or latent heat. mixed_depth_m: the first height above the GCM\'s lowest full level '
                       'where the mean virtual potential temperature has risen 0.5 K above its value there. Profiles '

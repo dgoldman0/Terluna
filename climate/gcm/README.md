@@ -2807,8 +2807,9 @@ lowest full level (0.31 km) where the mean virtual potential temperature has ris
 ratio at the GCM's full levels near 0.3 and 6.2 km. The heat is what each model carries upward through its half levels:
 the GCM's from its own heating by vertical diffusion and dry adjustment, which PlaSim writes as single time steps at the
 end of each 3-day mean and which is binned here by the time of those steps, half a mean (18° of the lunar day) after its
-midpoint; CM1's from its resolved, parameterized and diffusive fluxes. CM1's effective diffusivity is its vapour flux
-over its mean gradient, where its vapour falls by at least 0.05 g/kg per km.
+midpoint; CM1's from the three parts in which it writes each flux: the resolved part, the advection's implicit
+diffusion, which belongs to the resolved advection, and its boundary-layer scheme's subgrid part. CM1's effective
+diffusivity is its vapour flux over its mean gradient, where its vapour falls by at least 0.05 g/kg per km.
 
 | Sea site | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise |
 |---|---|---|---|---|
@@ -2819,7 +2820,7 @@ over its mean gradient, where its vapour falls by at least 0.05 g/kg per km.
 | The same, CM1 | 7.1; 90 | 2.0; 81 | 9.2; 85 | 8.3; 89 |
 | Heat carried up through 0.6, 3.2, 5.2, 7.2 km, W/m²: GCM | 0.9, 0.1, −0.6, −0.6 | −0.9, 1.5, 0.9, −0.7 | 6.4, 7.8, −0.1, −0.3 | 8.6, 6.8, −0.9, −1.0 |
 | The same, CM1 | 4.8, −1.2, −0.9, −1.7 | 0.5, −2.8, −1.0, −1.2 | 8.9, −6.2, −12.2, −7.3 | 10.9, 4.1, −5.8, −9.3 |
-| Vapour carried up through 5.2 km by CM1, W/m² (resolved part) | 0.1 (0.4) | 28.2 (24.6) | 112.3 (90.0) | 28.2 (25.9) |
+| Vapour carried up through 5.2 km by CM1, W/m² (resolved advection) | 0.1 (0.3) | 28.2 (25.4) | 112.3 (93.3) | 28.2 (26.3) |
 | K at 5.2 km, m²/s: GCM's median on its means; CM1's scheme; CM1's effective | 0.1; 4; n/a | 0.3; 20; 82 | 0.3; 17; 62 | 0.1; 22; 103 |
 
 Near the ground PlaSim carries heat at about CM1's rate, more than half of it by its dry adjustment: after sunset and
@@ -2828,12 +2829,12 @@ CM1's mixed layer reaches 6.5 km and the GCM's 4.3 km, and in the morning 3.2 km
 its vapour nearly uniform up to 6.2 km, losing 0.35–2.1 g/kg over that depth, while the GCM's falls 2.7–4.7 g/kg; the
 GCM's lowest level holds 1.0–1.3 g/kg more than CM1's in three quarters and 0.5 g/kg less after sunset, and its air at
 6.2 km holds 1.1–3.1 g/kg less in all four. CM1 carries vapour upward through 5.2 km at 28 W/m² in the afternoon and
-after midnight and at 112 W/m² after sunset, 80–92% of it by resolved motion, and at the top of its mixed layer it
-carries heat down, 6–12 W/m² at 5–7 km after sunset and after midnight, drawing the warmer air above into the layer. Its
-own scheme mixes at 17–22 m²/s at 5.2 km in those quarters. PlaSim's air there has a median Richardson number of 3–8 and
-a median diffusivity of 0.1–0.3 m²/s, so it carries almost no heat down (0.1–1.0 W/m² at 5–7 km), and its dry adjustment
-acts only where the air is dry-unstable. With the lengths stretched, the diffusivity at 5.2 km after midnight would be 5
-m²/s on the means.
+after midnight and at 112 W/m² after sunset, 83–93% of it by resolved advection, the advection's implicit diffusion
+included, and at the top of its mixed layer it carries heat down, 6–12 W/m² at 5–7 km after sunset and after midnight,
+drawing the warmer air above into the layer. Its own scheme mixes at 17–22 m²/s at 5.2 km in those quarters. PlaSim's
+air there has a median Richardson number of 3–8 and a median diffusivity of 0.1–0.3 m²/s, so it carries almost no heat
+down (0.1–1.0 W/m² at 5–7 km), and its dry adjustment acts only where the air is dry-unstable. With the lengths
+stretched, the diffusivity at 5.2 km after midnight would be 5 m²/s on the means.
 
 **The other two runs.** With the mass-flux scheme, which convects at half the baseline's share, the GCM's mixed layer
 over the sea is shallower at every hour, 1.7–4.0 km, and its lowest level moister, 14.7–16.5 g/kg: above its mixed
