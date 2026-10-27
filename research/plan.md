@@ -411,10 +411,16 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      top, an Earth value, has a cap tied to the depth test. The mass-flux scheme, built from CM1's measurements and
      written in Fortran behind its own switch, cools the upper air 2.3–2.6 K toward CM1 over two years but triggers
      too seldom, so convection's share of the rain falls to 42% and large-scale condensation moistens the lowest
-     layer. Next, proposed: PlaSim's boundary-layer mixing at lunar gravity, which keeps Earth's 160 m mixing length
-     and may mix several times too slowly, leaving a stable layer below cloud base that CM1 does not have; then
-     two-year runs with both schemes, a longwave refit on the chosen configuration and a 15-year run. The depth
-     test's 15-year run is held.
+     layer. The boundary-layer check (register, 27 October) finds PlaSim's mixing lengths Earth's and its mixing near
+     the ground at about CM1's rate. Above that the two part: after midnight CM1's boundary layer over the sea reaches
+     6.5 km against the GCM's 4.3 km, and CM1 keeps its vapour nearly uniform up to its clouds by eddies that cross
+     the stable air at the layer's top, which PlaSim's local diffusion and dry adjustment cannot do; how much of the
+     moisture difference that explains is open, since PlaSim's convection scheme also moves vapour there. Under way
+     (register, 27 October): mixing lengths stretched by the gravities as a sensitivity and a nonlocal K-profile
+     boundary-layer scheme with explicit entrainment, tested in a single column against CM1 and then in four two-year
+     runs, with vapour budgets by process and a check that the night clouds' capping layer survives; an
+     eddy-diffusivity mass-flux scheme waits for the author. Then surface and radiation feedbacks, a longwave refit on
+     the chosen configuration and a 15-year run. The depth test's 15-year run is held.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
      12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. A lunar
      free-convection constant over the sea, in place of Earth's, removes a quarter of the GCM's extra evaporation at
