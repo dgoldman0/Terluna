@@ -602,6 +602,24 @@ where CM1's night cloud stops at 7–8 km, and it rains 0.73–1.06 mm/day at th
 the same columns convect deep on 43–57% of the night's steps, as on CM1's own columns (test 1, 42%). Run (iii), the
 mass-flux baseline with the nonlocal boundary layer, was not made, since the boundary layer's stop rule tripped first.
 
+## Entrainment that follows the environment (27 October)
+
+The fixed profile mixes the same whatever air surrounds the cloud, while CM1's sea box mixes its cloudy updraughts four
+to five times as fast at night as in the afternoon. On 27 October the author approved a form that follows the cloud's
+environment, tested first in the boundary layer's single columns under criteria set in advance. The form
+(`entrainment_form` 'environment' in [massflux.py](massflux.py), off by default) keeps ε_bg aloft and replaces the
+profile's part near the base with the IFS's ε_env (1.3 − RH) (q_s/q_s,base)³ at the IFS's constants, ε_env 1.75 × 10⁻³
+m⁻¹ per metre unstretched and shallow clouds twice that. On CM1's own mean soundings it gives 1.18 × 10⁻³ m⁻¹ at night
+and 0.37 × 10⁻³ in the afternoon, against CM1's 1.10–1.34 and 0.22–0.33, and its plumes stop at 7.0 and 25.3 km, beside
+CM1's cloud tops. In the running columns it failed: the sea's night still convected deep on 94% of its steps, from the
+mixed layer's top with a fifth of the fixed profile's mass flux, and the sea's afternoon and evening lost their deep
+convection and most of their rain, 0.99 and 0.69 mm/day against CM1's 2.27 and 2.96, while every day column ran colder
+aloft. So the Fortran routine keeps the fixed profile alone (`PYTHON_ONLY`), and no GCM run was made. The account, with
+the check on CM1's air, the criteria and the sources, is in [the README's
+section](README.md#an-entrainment-that-follows-the-clouds-environment-the-column-test-27-october), and the same day's
+diagnostic run there finds that holding the Betts–Miller scheme's deep convection off at night leaves the GCM's night
+layer shallower still, its night rain then forming by large-scale condensation.
+
 ## Whether to implement it, and what that would take
 
 **The case for it.** The tests answer the approval's condition for the upper air. Mixing at CM1's measured rates holds

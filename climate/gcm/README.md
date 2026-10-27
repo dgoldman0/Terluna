@@ -3020,8 +3020,10 @@ record their settings and write fluxmod's namelist. Checks ([test_pbl_fortran.py
 - with the switch off it prints every digit the unpatched `vdiff` prints;
 - the patched fluxmod.f90 and rainmod.f90 compile with PlaSim's modules on fifteen levels.
 
-No run has set the options, so the shared twilight source carries neither patch and its hashes are unchanged; the
-runner-level checks of runs without the options, the smoke months and the vapour budget's closure in a run remain.
+No run has set the options, so the shared twilight source does not carry the boundary-layer patch. The convection's
+vapour diagnostic (`DIAGNOSTIC_PATCHES`) entered it on 27 October with the night switch of the diagnostic run below,
+where months without either repeat earlier months bit for bit and the run's vapour budget closes; for the boundary-layer
+patch the runner-level checks of runs without the options and the smoke months remain.
 
 **Evidence and limits.** The columns take CM1's radiation and surface fluxes as given, so neither answers the column's
 own state, and by the compared quarter they run 0.1–2.1 K colder and 0.3–2.8 g/kg moister near the ground than CM1, the
@@ -3186,6 +3188,238 @@ unchanged from the extended module, apart from that module's hash.
 climate/gcm/.venv/bin/python -m climate.gcm.pbl_column --test convection   # 36 columns; a minute
 climate/gcm/.venv/bin/python -m climate.crm.box_lid                         # the held nights' lid, a second
 python3 -m pytest climate/tests/test_pbl_column.py climate/tests/test_box_lid.py
+```
+
+#### Deep convection held off at night: a diagnostic run (27 October)
+
+The single column above found the mass-flux scheme's deep convection on every night step holding the sea's night mixed
+layer at 4.9 km against CM1's 6.5, and PlaSim's own local mixing deepening it to 6.5–6.7 km once that convection was
+off. On 27 October the author approved one GCM run to test that in the model itself, as a diagnostic and never a
+configuration: the fifteen-level baseline (`A28R_301k_cold_sbm_rh07_deep200_l15cap`) with the Betts–Miller scheme's deep
+convection held off wherever the Sun is down. The question was whether the night boundary layer then deepens toward
+CM1's and its lowest level dries. It does neither. After midnight the sea site still rains 1.98 mm/day, now as
+large-scale condensation that heats the air at 3–16 km by 42 W/m², and its mixed layer stands at 3.17 km, 1.1 km
+shallower than the baseline's and half of CM1's 6.48 km, with 0.4 g/kg more vapour in its lowest level. Results are in
+[night_switch_diagnostic_l15.json](../results/gcm/night_switch_diagnostic_l15.json).
+
+**The switch** (`--sbm-diagnostic-night`, SBM_NIGHT_PATCHES in [exoplasim_run.py](exoplasim_run.py), off by default).
+Wherever the geometric cosine of the Sun's zenith at a grid point is at most 0, a column the Betts–Miller scheme would
+convect deep takes PlaSim's shallow scheme instead, with the shallow cap, as a column the inhibition limit or the CAPE
+trigger holds back takes it. The cosine is the twilight patch's `gmuz`, which `solang` sets each step before the
+convection runs; `mksbm` reads it through `sbmnight`, a routine added to radmod.f90 and called without a module
+dependency, so rainmod.f90 still compiles on PlaSim's module alone. The runner records the switch in the run's
+configuration as a diagnostic, writes `ndiagnight_bm` into rainmod's namelist, and with the moisture diagnostics writes
+the vapour by process (BUDGET), the convection's slot completed by pbl_fortran's `DIAGNOSTIC_PATCHES`.
+
+**The shared source.** The smoke month put both patches into the twilight copy: rainmod.f90's hash went from 42122b3c…
+to 58d9cf92… and radmod.f90's from 1eb3996c… to ec58dd8f…. Runs without the switch repeat earlier runs bit for bit: the
+fifteen-level Betts–Miller month, the fifteen-level mass-flux month and the ten-level Betts–Miller month, rerun on the
+patched source, match the months run before the patch in their restarts and, where those months keep their output, in
+all 61 output variables (`bit_check_night.json` in `session-tools/agents/climate-entrainment` on the research drive).
+The tests ([test_sbm_night.py](../tests/test_sbm_night.py)), compiled with ExoPlaSim's flags against a stub of PlaSim's
+module:
+- with the switch off, or on where the Sun is up, the patched routine prints every digit the unpatched one prints on 17
+  columns;
+- with the Sun down it prints every digit the unpatched routine prints under a CAPE limit no column meets, so every
+  column takes the held-back branch, and the columns that convect deep by day go to the shallow scheme;
+- the patch applies once over the CAPE trigger's, the depth test's and the cap's patches, the patched rainmod.f90 and
+  radmod.f90 compile with PlaSim's modules on fifteen levels, and `sbmnight` hands on the cosine below the horizon too;
+- the runner records the switch only when it is set, labelled a diagnostic, and refuses it without the Betts–Miller
+  scheme.
+
+**The smoke month** (the run's flags over one model month) keeps every field finite and the humidity nowhere negative,
+its strongest wind 26.2 m/s. Its convective rain is nil in the 3-day means that lie wholly in the night and 2.81 mm/day
+in the others. Its vapour budget closes: the vapour each process gives each layer sums to the physics' total to 6 × 10⁻⁵
+mm/day over the globe and 0.03 mm/day in any column.
+
+**Two years** (`A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night`) from the fifteen-level restart on four
+processes took 437 and 453 s a model year against the baseline's 464 and 448, and wrote 206 MB a year against 182, the
+difference the vapour by process, 0.58 GB in all. Years 0–1 at the two CM1 sites, each cell the baseline; the diagnostic
+run; CM1 (the mixed depth by pbl_mixing's rule, vapour as a mixing ratio at the full levels near 0.3 and 6.2 km, the lid
+the virtual potential temperature's rise from 6.2 to 8.2 km; rain with its convective part in brackets):
+
+| By quarter | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise |
+|---|---|---|---|---|
+| Sea: mixed depth, km | 2.26; 2.60; 3.25 | 2.86; 3.72; 2.64 | 5.80; 4.91; 5.58 | 4.27; 3.17; 6.48 |
+| Sea: vapour at 0.3 km, g/kg | 12.16; 12.34; 11.18 | 12.52; 12.63; 11.26 | 12.11; 12.27; 12.64 | 12.57; 12.96; 11.44 |
+| Sea: vapour at 6.2 km, g/kg | 7.46; 8.44; 10.54 | 8.47; 8.94; 10.18 | 9.45; 9.77; 10.49 | 9.24; 10.67; 11.09 |
+| Sea: vapour drop, g/kg | 4.70; 3.90; 0.64 | 4.05; 3.69; 1.08 | 2.66; 2.50; 2.15 | 3.33; 2.29; 0.35 |
+| Sea: lid, K | 1.12; 1.00; 1.30 | 0.71; 0.80; 0.22 | 1.44; 1.17; 1.25 | 1.62; 1.27; 1.44 |
+| Sea: rain, mm/day | 0.12 (0.06); 0.31 (0.22); 0.00 | 1.45 (1.14); 2.51 (2.13); 2.23 | 2.68 (2.51); 2.08 (0.22); 2.97 | 1.98 (1.42); 1.98 (0.02); 0.14 |
+| Land: rain, mm/day | 0.50 (0.36); 0.96 (0.76); 2.87 | 17.84 (15.69); 15.18 (12.96); 8.59 | 0.41 (0.40); 0.06 (0.04); 1.53 | 0.03 (0.03); 0.00 (0.00); 0.07 |
+
+| Over the run | Baseline | Diagnostic run | CM1 |
+|---|---|---|---|
+| Sea site's air at 41.8; 55.8 km, K | 258.53; 240.12 | 258.44; 239.98 | 251.49; 231.76 |
+| Ground, global, K | 297.81 | 297.92 | |
+| Rain, global, mm/day; convection's share | 2.183; 0.860 | 2.190; 0.799 | |
+| Imbalance at the top, W/m² | −3.70 | −3.41 | |
+| Top two levels: air, K; water, ppmv | 165.8, 191.6; 0.035, 2.33 | 165.7, 191.7; 0.033, 2.36 | |
+
+**What replaces the night's convection.** Over the sea the night still rains at the baseline's rate, 1.98 mm/day after
+midnight, but the convection scheme gives 0.02 of it against 1.42, and large-scale condensation forms the rest where the
+grid's layers now saturate. That condensation heats the air at 3–16 km by 42 W/m² after midnight and by 75 W/m² after
+sunset, against 15 and 5 W/m² in the baseline, most of it at 5–9 km, with cloud covering 0.17–0.19 of the cells at 3–7
+km; the convection's own heating, 34 W/m² after midnight in the baseline and mostly at 16–64 km, falls to nil. With the
+latent heat released at 5–9 km the mixed layer stops lower, 3.17 km after midnight against 4.27 and 4.91 km after sunset
+against 5.80, and the heat carried up through 1.8 and 3.2 km after midnight falls from 5.5 and 6.8 to 3.8 and 4.8 W/m².
+The air at 6.2 km gains 1.4 g/kg after midnight and the lowest level 0.4 g/kg, so the vapour drop shrinks from 3.33 to
+2.29 g/kg (CM1 0.35) while the lowest level moves further from CM1's, 12.96 against 11.44 g/kg; the lid weakens from
+1.62 to 1.27 K against CM1's 1.44.
+
+By day the sea's afternoon convection rains 2.13 mm/day against 1.14, near CM1's 2.23 in all, and the land's afternoon
+15.2 against 17.8 (CM1 8.6). Aloft the sea site's air at 41.8 and 55.8 km cools 0.1 K, and the top two levels change by
+−0.2 and +0.1 K. Over the globe the convection's share of the rain falls from 0.86 to 0.80, the ground warms 0.11 K and
+the imbalance at the top moves from −3.70 to −3.41 W/m².
+
+So holding off the night's deep convection widens the GCM's gap to CM1's night layer. The column's shallow-night control
+deepened its layer to 6.7 km under CM1's large-scale terms, prescribed and unchanged whatever its convection did. In the
+GCM the sea keeps evaporating 3.6 mm/day after midnight, and the vapour the night convection rained out now condenses on
+the grid at 5–9 km (an interpretation of the budgets above). The GCM's shallow night layer therefore does not come from
+its night convection alone: with that convection off, the grid's own condensation holds the layer lower still.
+
+**Evidence and limits.** A diagnostic, in one realization of the first two years of a spin-up from the fifteen-level
+restart; 3-day means in the six sea cells and four land cells, and CM1 one realization per box on a 6 km grid. Year 1
+alone gives the same answers: after midnight the mixed layer is 3.04 km against 4.26, the lowest level 12.78 against
+12.36 g/kg, and the rain 1.80 mm/day (0.00 convective) against 1.74 (1.36). Only the diagnostic run writes the vapour by
+process; the heating by process comes from both runs. The longwave check (`plasim_longwave check` on year 1,
+[longwave_check_night_l15.json](../results/gcm/longwave_check_night_l15.json)) holds the provisional refit within 2.24
+W/m² of correlated-k in its worst layer on the run's columns.
+
+```sh
+E=/media/projectspace/terluna-research/session-tools/agents/climate-entrainment
+$E/run_night_tests.sh night_smoke15        # one model month with the switch; it applies the patch
+$E/run_night_tests.sh night_month15        # and night_mfmonth15, night_month10: the months without it
+climate/gcm/.venv/bin/python $E/bit_check.py A28R_301k_cold_sbm_rh07_deep200_l15cap_month_nightsource \
+    A28R_301k_cold_sbm_rh07_deep200_l15cap_month_mfsource …                  # every variable and the restarts
+$E/run_night_tests.sh night15              # two years, about 15 minutes on 4 workers
+climate/gcm/.venv/bin/python -m climate.gcm.plasim_longwave check \
+    --case A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night:1 \
+    --correction provisional_l15=climate/results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json \
+    --output climate/results/gcm/longwave_check_night_l15.json               # under a minute
+climate/gcm/.venv/bin/python $E/night_analysis.py > $E/night_analysis.txt    # night_switch_diagnostic_l15.json
+python3 -m pytest climate/tests/test_sbm_night.py                             # with gfortran, about 8 s
+```
+
+#### An entrainment that follows the cloud's environment: the column test (27 October)
+
+The mass-flux scheme mixes its updraughts by one fixed profile, 0.8 × 10⁻⁴ m⁻¹ aloft and 2 × 10⁻⁴ m⁻¹ more decaying over
+2 km above the cloud base, shallow clouds twice that, whatever air surrounds them. CM1's sea box mixes its cloudy
+updraughts at 1.1–1.3 × 10⁻³ m⁻¹ at night by h and qt (1.2–1.5 over qt's resampled range) and 0.2–0.3 × 10⁻³ m⁻¹ in the
+afternoon ([the CM1 account](../crm/README.md#boxes-on-the-design-climate-the-near-side-sea-and-0-e)). On 27 October the
+author approved a form in which the scheme's entrainment follows the cloud's environment, tested in the single column
+against criteria set in advance, with a Fortran routine and a two-year run only if the column passed. On CM1's own
+soundings the form gives CM1's night and afternoon rates by qt to within an eighth and most of their contrast, but in
+the running column the sea's night still convects deep and its afternoon and evening lose their rain, so the column
+failed and no Fortran or GCM run was made ([massflux_entrainment.py](massflux_entrainment.py),
+[massflux_entrainment_l15.json](../results/gcm/massflux_entrainment_l15.json)).
+
+**The form** (massflux.py, `entrainment_form` 'environment'; the fixed profile stays the default). Above the cloud base
+the updraught and the test parcels mix ε = ε_bg + ε_env (1.3 − RH) (q_s/q_s,base)³, twice that in shallow clouds, RH
+being the surrounding air's relative humidity and q_s, q_s,base its saturation specific humidity at the level and at the
+cloud base. The second term is the IFS's entrainment (Cy40r1 (6.7)), the form Bechtold and others (2008) introduced to
+make the IFS's convection follow the free troposphere's humidity: drier surroundings mix in faster, and the cube of the
+saturation ratio, which mimics a cloud ensemble whose larger members reach higher, makes the rate fall with height. Its
+constants are the IFS's: ε_env = 1.75 × 10⁻³ m⁻¹ (1.8 × 10⁻³ in Bechtold and others 2014 and de Rooy and others 2013),
+the offset 1.3 and the shallow clouds' factor 2. Four choices are the form's own here, each an interpretation:
+- **ε_env per metre is Earth's.** Where CM1 measures no rate the scheme stretches Earth's per-metre rates by the
+  gravities, which would give 2.9 × 10⁻⁴ m⁻¹ and a night rate of 0.33 × 10⁻³ m⁻¹, a quarter of CM1's. CM1's lunar clouds
+  mix per metre at Earth's rates (its night cloud as BOMEX's 0.8–1.7 × 10⁻³ m⁻¹), so the choice between the two values
+  rests on CM1's measured rates, a calibration against the reference process.
+- **ε_bg stays** the CM1 boxes' 0.8 × 10⁻⁴ m⁻¹ aloft, which the IFS's vanishing saturation ratio leaves out and which
+  holds CM1's diluted upper air.
+- **The cloud mixes where it is heavier than its surroundings.** The IFS mixes only where its updraught is buoyant;
+  CM1's night cloud mixes 1.1–1.3 × 10⁻³ m⁻¹ while 0.05–0.10 K heavier than its level.
+- **The rest of the scheme stays**: the test parcels' sub-cloud mixing (1.12 × 10⁻⁴ m⁻¹), the detrainment ε (1.6 − RH)
+  and the mid-level clouds' deep rate (the IFS doubles theirs).
+
+**On CM1's own air.** Each box's 3-D output over its settled lunar day, sampled as box_entrainment samples it: the form
+on the quarter's mean sounding at the levels where CM1's cloudy updraughts are sampled, its base their lowest sampled
+level, weighted by their mass flux below 16 km as CM1's bulk rate is; deep or shallow by the scheme's 200 hPa rule from
+that base to the columns' median cloud top. The plumes rise from the lowest 0.5 km through the same sounding, dropping
+their condensate (rates per metre, × 10⁻³):
+
+| Quarter | CM1 by qt; by h | The form (kind) | Plume caps: the form as deep; as shallow; the fixed profile as deep, km | CM1's tops: median, 90th percentile, km |
+|---|---|---|---|---|
+| Sea night | 1.34; 1.10 | 1.18 (shallow) | 7.0; none; 8.5 | 7.3, 7.9 |
+| Sea morning | 0.50; 0.32 | 1.61 (shallow) | 26.5; none; 33.3 | 6.7, 7.3 |
+| Sea afternoon | 0.33; 0.22 | 0.37 (deep) | 25.3; none; 36.8 | 22.1, 27.8 |
+| Sea evening | 0.31; 0.24 | 1.00 (shallow); 0.50 as deep | none; none; 7.6 | 7.3, 25.8 |
+| Land morning | 0.20; 0.12 | 0.53 (deep) | 26.9; none; 31.0 | 25.8, 33.8 |
+| Land afternoon | 0.20; 0.13 | 0.44 (deep) | none; none; 33.8 | 25.8, 33.8 |
+
+At the sea the form gives the night 1.18 × 10⁻³ m⁻¹ and the afternoon 0.37 × 10⁻³, a contrast of 3.2 against CM1's 4.1
+by qt and 4.9 by h, and its plumes stop where CM1's clouds do: at 7.0 km at night and 25.3 km in the afternoon, where
+the fixed profile's reach 8.5 and 36.8 km. The contrast comes from the shallow clouds' factor and the saturation ratio,
+which stands at 0.2–0.4 where the afternoon's mass flux runs, 4–8 km above its base; the humidity works the other way,
+the night cloud's surroundings at relative humidity 0.96–0.98 against the afternoon's 0.77–0.89. In the other quarters
+the form mixes 1.6–3.2 times CM1's rates by qt, and its plume never becomes buoyant in the sea's evening or the land's
+afternoon.
+
+**The column test** (pbl_column's testbed on fifteen levels, PlaSim's local mixing at Earth's length, each column
+started a quarter early; criteria `CRITERIA`, set before the run from the brief; the sea night's from the testbed's own
+gaps):
+
+| Column | Criterion | Fixed profile | The form | CM1 | Met |
+|---|---|---|---|---|---|
+| Sea night | Convective tops below 10 km on at least 75% of steps | 0% | 6% | tops 7.3 km | no |
+| | Mixed depth at least 5.68 km | 4.87 | 6.59 | 6.48 | yes |
+| | Vapour drop 0.3–6.2 km at most 1.84 g/kg | 3.34 | 0.84 | 0.34 | yes |
+| | Lid at least 0.69 K | 1.96 | 1.13 | 1.38 | yes |
+| | Rain at the ground at most 0.5 mm/day | 1.06 | 0.18 | 0.16 | yes |
+| Sea afternoon | Rain 1.14–3.41 mm/day | 2.26 | 0.99 | 2.27 | no |
+| Sea evening | Rain at least 1.97 mm/day | 3.26 | 0.69 | 2.96 | no |
+| Land afternoon | Rain 4.36–13.07 mm/day | 9.37 | 7.55 | 8.71 | yes |
+| Both afternoons | Tops above 20 km on half the convecting steps | 99%, 100% | 100%, 100% | | yes |
+| Day columns | Air at 41.8; 55.8 km no further from CM1's than the fixed profile's (0.1 K) | 0.0–1.2; 1.8–2.9 K | 0.2–2.7; 2.9–4.5 K | | no, in all six |
+
+At night the form leaves the scheme convecting deep on 94% of the steps, from a base at 5.2 km, the top of the mixed
+layer, where the fixed profile's clouds start at 1.8 km, and with a fifth of their mass flux (1.7 against 7.8 g m⁻² s⁻¹
+at the base, median), and none of its rain reaches the ground. With the convection's heating lifted above the layer, the
+column's night layer comes near CM1's in depth, lid and rain. By day over the sea the stronger mixing near the base
+keeps the test parcels from deep clouds: the afternoon convects mid-level from bases near 34 km on 95% of its steps and
+its convective rain at the ground falls to 0.03 mm/day against 1.97, the evening's to 0.19 against 2.38, and large-scale
+condensation gives most of the little rain that falls. With less deep heating every day column drifts colder aloft,
+0.2–4.5 K below CM1's at 41.8–55.8 km against 0.0–2.9 K with the fixed profile. The running column from the GCM's air
+(massflux.scm on fifteen levels at the sea, three lunar days from the rh 0.7 branch's site mean, 9.7 and 11.3 K warmer
+than CM1's at 41.8 and 55.8 km) cools there to +1.3 and −0.5 K with the form against +3.5 and +2.7 K with the fixed
+profile.
+
+So on CM1's mean soundings the form mixes at CM1's night and afternoon rates and caps its plumes at CM1's cloud tops,
+while in the running column, whose lowest level stays moister than CM1's at night (12.4 against 11.4 g/kg) under a
+weaker lid and whose surface parcel carries the surface layer's excess, the night's deep convection survives the night's
+faster mixing and the sea's daytime convection does not survive the afternoon's (an interpretation of the steps'
+records). A scratch sensitivity with the IFS's own rule, mixing only where the updraught is buoyant
+(`sensitivity_buoyant_only.py` beside the run scripts), convected deep on 97% of the night's steps and rained 0.99 and
+0.89 mm/day in the sea's afternoon and evening, so the failure does not rest on that choice.
+
+**Sources.** The PDFs and their text are in `session-tools/agents/climate-massflux/literature` and
+`session-tools/agents/climate-entrainment/literature` on the research drive.
+- **IFS Documentation Cy40r1, Part IV, sections 6.3–6.4.** Read: (6.7) the entrainment, (6.8)–(6.9) the detrainment,
+  (6.21) the deep test parcel's 0.4 times the rate.
+- **Bechtold and others (2008), *QJRMS* 134, 1337–1351.** Read as ECMWF Technical Memorandum 556, section 2.1: the
+  turbulent and organised entrainment, ε = c₀F_ε + c₁(q_s − q)/q_s F_ε with F_ε = (q_s/q_s,b)², c₀ and c₁ of order 10⁻⁴
+  m⁻¹.
+- **Bechtold and others (2014), *J. Atmos. Sci.* 71, 734–753.** Read as Technical Memorandum 705, appendix A: 1.8 × 10⁻³
+  m⁻¹, shallow twice deep, "as also supported by CRM data".
+- **De Rooy and others (2013), *QJRMS* 139, 1–19.** Read: sections 2, 4.3–4.5 and 5 (KNMI's copy, sha256 d3b6d4fc…): the
+  IFS's form as (26) with its 200 hPa factor of two; LES rates that fall as clouds deepen; Gregory's (2001) βB/w² (β
+  0.03 deep, 0.06 shallow) and β/z, which gave the ECMWF single column too little sensitivity to humidity; and the
+  finding that detrainment varies more than entrainment and sets the mass flux's shape.
+- **Not read:** Derbyshire and others (2004), *QJRMS* 130, 3055–3079 (Wiley refused the download), taken as de Rooy and
+  others and Bechtold and others (2008) describe it; Gregory (2001), Neggers and others (2002) and Simpson (1971), taken
+  as de Rooy and others give them. A buoyancy-based form such as Gregory's gives CM1's night cloud, heavier than its
+  surroundings, no mixing, and the radius a cloud-size form (0.2/R) needs is not measured here.
+
+**Evidence and limits.** The CM1 check sets mean soundings against bulk rates from one realization of each box, which
+the bulk-plume method gives at about half the directly measured mixing (Romps 2010). The columns take CM1's radiation
+and surface fluxes as given and run 1.8–2.1 K colder and 1.3–2.1 g/kg moister near the ground than CM1 by the sea's
+night with the fixed profile (the first test's account). The running column from the GCM's air has a mixed boundary
+layer in place of PlaSim's diffusion.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.gcm.massflux_entrainment   # the CM1 check, the columns, the GCM's air; a minute
+python3 -m pytest climate/tests/test_massflux_entrainment.py         # under a second
 ```
 
 ### Cloud amount: what published models say

@@ -68,6 +68,14 @@ PARAMETERS = dict(
     shallow_factor=2.0,
     rh_dependence=False,           # Bechtold and others (2008, 2014): eps scaled by (1.3 - RH) / (1.3 - rh_ref)
     rh_ref=0.85,
+    # the entrainment's form (27 October 2026): 'fixed', the profile above; or 'environment', the profile's part near
+    # the base replaced by the IFS's entrainment, which follows the cloud's environment: eps_bg + eps_env (1.3 - RH)
+    # (qs / qs_base)^3, RH the surrounding air's relative humidity and qs, qs_base its saturation specific humidity at
+    # the level and at the cloud base (IFS Cy40r1 (6.7); Bechtold and others 2008, 2014; de Rooy and others 2013,
+    # (26)), times shallow_factor for shallow clouds. eps_bg stays the CM1 boxes' rate aloft, which the IFS's
+    # vanishing (qs / qs_base)^3 leaves out (massflux.md, 27 October)
+    entrainment_form='fixed',
+    eps_env=1.75e-3,               # m-1, the IFS's epsilon_up (Cy40r1 (6.7)); Earth's rate per metre, kept unstretched
     # turbulent detrainment: delta = eps (1.6 - RH), the IFS's form for shallow clouds (Cy40r1 (6.9); Bechtold and
     # others 2014, (A.3)), taken for every type because CM1's deep clouds detrain nearly as fast as they entrain above
     # 12 km (massflux.md); delta_form 'ifs' gives deep clouds the IFS's delta_deep (1.6 - RH) instead (Cy40r1 (6.8),
@@ -259,10 +267,17 @@ def mix(phi: float, env_a: float, env_b: float, eps: float, dz: float) -> float:
     return env_b - grad / eps + (phi - env_a + grad / eps) * decay
 
 
-def entrainment(kind: str, z: float, rh: float, z_base: float, prm=PARAMETERS) -> float:
+def entrainment(kind: str, z: float, rh: float, z_base: float, prm=PARAMETERS, qs: float | None = None,
+                qs_base: float | None = None) -> float:
     """The updraught's fractional entrainment (per metre) at height z, z_base being its cloud base and rh the
     surrounding relative humidity: eps_bg + eps_nb exp(-(z - z_base) / l_nb), scaled by (1.3 - rh) / (1.3 - rh_ref)
-    when rh_dependence is set, and shallow_factor times as fast for shallow clouds."""
+    when rh_dependence is set, and shallow_factor times as fast for shallow clouds. With entrainment_form
+    'environment', eps_bg + eps_env (1.3 - rh) (qs / qs_base)^3 in place of the profile, qs and qs_base the surrounding
+    air's saturation specific humidity at the level and at the cloud base (the IFS's (6.7)), the shallow factor kept."""
+    if prm.get('entrainment_form', 'fixed') == 'environment':
+        scale = (qs / qs_base) ** 3 if qs is not None and qs_base else 1.0
+        eps = prm['eps_bg'] + prm['eps_env'] * (1.3 - min(rh, 1.0)) * scale
+        return eps * prm['shallow_factor'] if kind == 'shallow' else eps
     eps = prm['eps_bg'] + prm['eps_nb'] * math.exp(-max(z - z_base, 0.0) / prm['l_nb'])
     if prm['rh_dependence']:
         eps *= max(1.3 - min(rh, 1.0), 0.3) / (1.3 - prm['rh_ref'])
@@ -307,9 +322,11 @@ def ascend(col: Column, pts: list, state: dict, kind: str, rain=True, entrain_be
     t_a, qv_a, l_a = adjust(s_l, q_t, z0, p0, g, prm, c)
     tv0 = virtual(te0, qe0, c)
     out = [dict(kind=pts[0][0], index=pts[0][1], z=z0, p=p0, t=t_a, qv=qv_a, l=l_a, sl=s_l, qt=q_t, m=m, kin=kin,
-                b=g * (virtual(t_a, qv_a, c) - l_a * t_a - tv0) / tv0, rain=0.0, snow=0.0, eps=0.0, delta=0.0)]
+                b=g * (virtual(t_a, qv_a, c) - l_a * t_a - tv0) / tv0, rain=0.0, snow=0.0, eps=0.0, delta=0.0,
+                qs_env=qsat(te0, p0, c))]
     base = 0 if l_a > 0.0 else None
     z_base = state.get('z_base', z0)
+    qs_base = state.get('qs_base', out[0]['qs_env'])         # the surrounding air's saturation at the cloud base
     top_z = None
     nsub = max(1, int(prm['substeps']))
     fac = 1.0 / (prm['f_turb'] * (1.0 + prm['gamma_vm']))
@@ -325,10 +342,11 @@ def ascend(col: Column, pts: list, state: dict, kind: str, rain=True, entrain_be
             tea, teb = te_a + f0 * (te_b - te_a), te_a + f1 * (te_b - te_a)
             qea, qeb = qe_a + f0 * (qe_b - qe_a), qe_a + f1 * (qe_b - qe_a)
             dz = zb - za
-            rhm = 0.5 * (qea + qeb) / qsat(0.5 * (tea + teb), math.sqrt(pa * pb), c)
+            qsm = qsat(0.5 * (tea + teb), math.sqrt(pa * pb), c)
+            rhm = 0.5 * (qea + qeb) / qsm
             cloudy = base is not None
             if cloudy:
-                eps = entrainment(kind, 0.5 * (za + zb), rhm, z_base, prm)
+                eps = entrainment(kind, 0.5 * (za + zb), rhm, z_base, prm, qsm, qs_base)
                 delta = detrainment(kind, eps, rhm, prm)
             elif entrain_below_base:                  # a test parcel's thermal mixing in the sub-cloud layer
                 eps = prm['sub_factor'] * (prm['eps_bg'] + prm['eps_nb'])
@@ -375,11 +393,12 @@ def ascend(col: Column, pts: list, state: dict, kind: str, rain=True, entrain_be
             mean_m = 0.5 * (m + m_b)
             out.append(dict(kind=kind_b if s == nsub - 1 else 's', index=idx_b, z=zb, p=pb, t=t_b, qv=qv_b, l=l_b,
                             sl=s_l, qt=q_t, m=m_b, kin=max(kin_b, 0.0), b=b_b, rain=mean_m * formed * (1.0 - share),
-                            snow=mean_m * formed * share, eps=eps, delta=delta))
+                            snow=mean_m * formed * share, eps=eps, delta=delta, qs_env=qsat(teb, pb, c)))
             m, kin = m_b, kin_b
             if base is None and l_b > 0.0:
                 base = len(out) - 1
                 z_base = zb
+                qs_base = out[-1]['qs_env']
             if stop:
                 break
         if stop:
@@ -647,7 +666,8 @@ def updraught(col: Column, decision: dict, prm=PARAMETERS) -> dict:
     start = next(j for j, p in enumerate(pts) if p[0] == 'h' and p[1] == tr['base_half'])
     b = tr['points'][jb]
     z_cond = tr['points'][tr['base']]['z']                       # the parcel's condensation level
-    state = dict(sl=b['sl'], qt=b['qt'], kin=b['kin'], m=1.0, z_base=z_cond)
+    state = dict(sl=b['sl'], qt=b['qt'], kin=b['kin'], m=1.0, z_base=z_cond,
+                 qs_base=tr['points'][tr['base']]['qs_env'])
     points, base, top_z = ascend(col, pts[start:], state, kind, rain=True, prm=prm)
     n = col.n
     m, sl, qt = np.zeros(n + 1), np.zeros(n + 1), np.zeros(n + 1)

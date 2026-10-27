@@ -71,6 +71,9 @@ vertical diffusion (fluxmod's vdiff_lamm, 160 m) by the ratio of the gravities, 
 nonlocal boundary layer of pbl_scheme.py in vdiff (pbl_fortran.PBL_PATCHES, fluxmod's nlpbl); a run with either also
 writes the vapour each process gives each layer and the heating of falling precipitation's evaporation (BUDGET), with
 PlaSim's convection slot completed for the Betts-Miller and mass-flux schemes (pbl_fortran.DIAGNOSTIC_PATCHES).
+--sbm-diagnostic-night, a diagnostic and never a configuration, holds the Betts-Miller scheme's deep convection off
+wherever the Sun is down (SBM_NIGHT_PATCHES); a run with it and the moisture diagnostics writes the vapour by process
+too.
 """
 from __future__ import annotations
 import argparse
@@ -235,12 +238,12 @@ MOISTENING = {31: ('dq_diab', 'water_vapour_gained_in_the_layer_summed_over_the_
               32: ('dq_fill', 'water_vapour_gained_in_the_layer_by_the_negative_humidity_fix'),
               40: ('dq_dyn', 'water_vapour_gained_in_the_layer_by_the_dynamics_transport'),
               41: ('dq_dyn_late', 'water_vapour_gained_in_the_layer_by_the_dynamics_horizontal_diffusion')}
-# A run with the boundary-layer options and the moisture diagnostics also writes the vapour each process gives each layer
-# (2026-10-27), from slots PlaSim fills whenever its gridpoint diagnostics are on: the surface's evaporation into the
-# lowest layer (mkevap), vertical diffusion (vdiff), large-scale condensation (mklsp), convection (Kuo's routine, and
-# with pbl_fortran.DIAGNOSTIC_PATCHES the Betts-Miller and mass-flux schemes) and dry adjustment (mkdca), each a water
-# flux as code 31 is, and the evaporation of falling rain and snow (mkrain), whose vapour PlaSim writes as a specific
-# humidity tendency and whose heating is code 30.
+# A run with the boundary-layer options or the night switch (a diagnostic) and the moisture diagnostics also writes the
+# vapour each process gives each layer (2026-10-27), from slots PlaSim fills whenever its gridpoint diagnostics are on:
+# the surface's evaporation into the lowest layer (mkevap), vertical diffusion (vdiff), large-scale condensation
+# (mklsp), convection (Kuo's routine, and with pbl_fortran.DIAGNOSTIC_PATCHES the Betts-Miller and mass-flux schemes)
+# and dry adjustment (mkdca), each a water flux as code 31 is, and the evaporation of falling rain and snow (mkrain),
+# whose vapour PlaSim writes as a specific humidity tendency and whose heating is code 30.
 BUDGET = {30: ('dt_evap', 'temperature_tendency_due_to_evaporation_of_falling_precipitation', 'K s-1'),
           33: ('dq_sfc', 'water_vapour_gained_in_the_lowest_layer_from_the_surface', 'm s-1'),
           34: ('dq_vdif', 'water_vapour_gained_in_the_layer_by_vertical_diffusion', 'm s-1'),
@@ -928,6 +931,55 @@ SBM_CAP_EDITS = [
      f"      if(nprc /= 2 .or. nshcap_bm /= 1) ktop(:)=MAX(ktop(:),kktop(:)) ! {SBM_CAP_MARKER} replaces it\n"),
 ]
 SBM_CAP_PATCHES = [('rainmod.f90', SBM_CAP_MARKER, SBM_CAP_EDITS)]
+# The night switch (27 October), a diagnostic and never a configuration, off by default and applied only for a run that
+# sets it. With ndiagnight_bm 1 the simplified Betts-Miller scheme convects deep nowhere the Sun is down: where the
+# geometric cosine of the Sun's zenith at the grid point is at most 0 (radmod's gmuz, the twilight patch's cosine that
+# solang sets each step before the convection runs, below the horizon too), a column that would convect deep takes
+# PlaSim's shallow scheme as a column held back by the inhibition limit or the CAPE trigger takes it, its top held by
+# the shallow cap where that is set. The scheme reads the cosine through sbmnight, a routine added to radmod.f90 and
+# called without a module dependency, so rainmod.f90 still compiles on PlaSim's module alone. The patch edits the text
+# of the CAPE trigger's, the depth test's and the cap's patches and goes over them; with ndiagnight_bm 0 the routine's
+# arithmetic is as before.
+SBM_NIGHT_MARKER = 'Terluna: the night switch, a diagnostic'
+SBM_NIGHT_GETTER = f"""
+!     ===================
+!     SUBROUTINE SBMNIGHT
+!     ===================
+
+      subroutine sbmnight(pmuz)
+      use radmod
+!
+!     {SBM_NIGHT_MARKER} (rainmod's ndiagnight_bm): the geometric cosine of the Sun's zenith at each grid
+!     point, below the horizon too, as solang set it this step
+!
+      real, intent(out) :: pmuz(NHOR)
+      pmuz(:)=gmuz(:)
+      return
+      end subroutine sbmnight
+"""
+SBM_NIGHT_EDITS = [
+    (f"      integer :: nshcap_bm = 0 ! {SBM_CAP_MARKER}: 1 holds a shallow top within dpdeep_bm of its base\n",
+     f"      integer :: nshcap_bm = 0 ! {SBM_CAP_MARKER}: 1 holds a shallow top within dpdeep_bm of its base\n"
+     f"      integer :: ndiagnight_bm = 0 ! {SBM_NIGHT_MARKER}: 1 holds deep convection off where the Sun is down\n"),
+    (f"      namelist/rainmod_nl/nshcap_bm   ! {SBM_CAP_MARKER}\n",
+     f"      namelist/rainmod_nl/nshcap_bm   ! {SBM_CAP_MARKER}\n"
+     f"      namelist/rainmod_nl/ndiagnight_bm   ! {SBM_NIGHT_MARKER}\n"),
+    ("      call mpbci(nshcap_bm)\n", "      call mpbci(nshcap_bm)\n      call mpbci(ndiagnight_bm)\n"),
+    ("      real :: ztt(NLEV), zcapet   ! Terluna: the CAPE trigger\n",
+     "      real :: ztt(NLEV), zcapet   ! Terluna: the CAPE trigger\n"
+     f"      real :: zmuz(NHOR)   ! {SBM_NIGHT_MARKER}: the geometric cosine of the Sun's zenith\n"),
+    ("      ztau=max(tau_bm,deltsec2)\n",
+     "      ztau=max(tau_bm,deltsec2)\n      zmuz(:)=1.\n      if(ndiagnight_bm == 1) call sbmnight(zmuz)\n"),
+    ("       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm) .or. "
+     "(cape_bm > 0. .and. zcapet < cape_bm)) then\n",
+     f"!      {SBM_NIGHT_MARKER}: no deep convection where the Sun is down, the shallow scheme instead\n"
+     "       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm) .or. "
+     "(cape_bm > 0. .and. zcapet < cape_bm) &\n"
+     "     &    .or. (ndiagnight_bm == 1 .and. zmuz(jhor) <= 0.)) then\n"),
+]
+SBM_NIGHT_RADMOD_EDITS = [("      end subroutine solang\n", "      end subroutine solang\n" + SBM_NIGHT_GETTER)]
+SBM_NIGHT_PATCHES = [('rainmod.f90', SBM_NIGHT_MARKER, SBM_NIGHT_EDITS),
+                     ('radmod.f90', SBM_NIGHT_MARKER, SBM_NIGHT_RADMOD_EDITS)]
 # CO2 and O2 in PlaSim's sunlight (radmod.f90, swr; climate/gcm/plasim_shortwave.py, GAS_BANDS). PlaSim's two bands hold
 # no CO2 or O2, whose strongest lines the Moon's deep column takes high up, so it puts that sunlight where its water
 # is. NGASBANDS 1 adds CO2 and O2 in the near-infrared band and O2 in the visible, each an absorptivity of its own
@@ -1438,7 +1490,7 @@ def use_twilight_package():
 
 def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
                    massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
-                   boundary_layer: bool = False) -> dict:
+                   boundary_layer: bool = False, night: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1446,8 +1498,9 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     Betts-Miller patch) with its surface parcel's starting speed (massflux_fortran.START_PATCHES, over it), and the
     free-convection constant over water (FREE_CONVECTION_PATCHES, after the 10 m wind's), and the nonlocal boundary
     layer with the convection's vapour diagnostic (pbl_fortran.PBL_PATCHES over the free-convection patch and
-    DIAGNOSTIC_PATCHES over the Betts-Miller and mass-flux patches), for a run that sets them, and return each patched
-    file's hash for the run key."""
+    DIAGNOSTIC_PATCHES over the Betts-Miller and mass-flux patches), and the night switch, a diagnostic
+    (SBM_NIGHT_PATCHES, over the CAPE trigger's, the depth test's and the cap's patches, with the convection's vapour
+    diagnostic), for a run that sets them, and return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1458,14 +1511,20 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
         raise RuntimeError("the starting speed's patch goes over the mass-flux scheme's")
     if boundary_layer and not twilight:
         raise RuntimeError('the boundary-layer patch goes into the twilight copy, over the free-convection patch')
+    if night and not twilight:
+        raise RuntimeError("the night switch reads the twilight patch's cosine below the horizon; it goes into the "
+                           'twilight copy')
     hashes = {}
     for name, marker, edits in (PATCHES + (TWILIGHT_PATCHES if twilight else [])
-                                + (SBM_TRIGGER_PATCHES if trigger else []) + (SBM_DEPTH_PATCHES if depth or cap else [])
-                                + (SBM_CAP_PATCHES if cap else [])
-                                + (mff.MASSFLUX_PATCHES if massflux or boundary_layer else [])
+                                + (SBM_TRIGGER_PATCHES if trigger or night else [])
+                                + (SBM_DEPTH_PATCHES if depth or cap or night else [])
+                                + (SBM_CAP_PATCHES if cap or night else [])
+                                + (mff.MASSFLUX_PATCHES if massflux or boundary_layer or night else [])
                                 + (mff.START_PATCHES if massflux_start else [])
                                 + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer else [])
-                                + (pbf.PBL_PATCHES + pbf.DIAGNOSTIC_PATCHES if boundary_layer else [])):
+                                + (pbf.PBL_PATCHES if boundary_layer else [])
+                                + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night else [])
+                                + (SBM_NIGHT_PATCHES if night else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1561,6 +1620,12 @@ SBM_DEFAULTS = dict(tau_s=7200.0, rh=0.7, eps=0.0, cin_j_kg=0.0)   # Frierson's 
 SBM_TRIGGER_SETTINGS = ('cape_j_kg', 'trigger_eps')                   # the CAPE trigger, recorded only when set
 SBM_DEPTH_SETTINGS = ('deep_hpa', 'mixing_steps')                     # SBM_DEPTH_PATCHES' options, likewise
 SBM_CAP_SETTINGS = ('shallow_cap',)                                   # SBM_CAP_PATCHES' option, likewise
+SBM_NIGHT_SETTINGS = ('diagnostic_night',)                            # SBM_NIGHT_PATCHES' diagnostic, likewise
+SBM_NIGHT_RECORD = dict(rule='no deep convection where the geometric cosine of the Sun\'s zenith at the grid point is '
+                             'at most 0; such a column takes PlaSim\'s shallow scheme, its top held by the shallow cap '
+                             'where that is set',
+                        status='a diagnostic, never a configuration (27 October 2026)',
+                        patch='climate/gcm/exoplasim_run.py SBM_NIGHT_PATCHES (rainmod ndiagnight_bm)')
 
 
 def convection_setting(scheme='sbm', **values) -> dict:
@@ -1574,7 +1639,8 @@ def convection_setting(scheme='sbm', **values) -> dict:
     pressure (default 0) must have for the column to convect deep. The options of SBM_DEPTH_PATCHES join it only
     when set: deep_hpa above 0, the depth (hPa) the parcel's cloud must exceed for deep convection, and mixing_steps
     above 1, the steps of the parcel's mixing within each layer, which need eps above 0. The shallow cap of
-    SBM_CAP_PATCHES joins it only when shallow_cap is true, and it needs the depth test."""
+    SBM_CAP_PATCHES joins it only when shallow_cap is true, and it needs the depth test. The night switch of
+    SBM_NIGHT_PATCHES, a diagnostic, joins it as SBM_NIGHT_RECORD only when diagnostic_night is true."""
     if scheme == 'massflux':
         values = dict(values)
         start = values.pop('start', None)
@@ -1589,7 +1655,7 @@ def convection_setting(scheme='sbm', **values) -> dict:
         raise ValueError(f"the convection scheme is 'sbm' or 'massflux' (Kuo's is the default, left out), "
                          f"not {scheme!r}")
     unknown = (set(values) - set(SBM_DEFAULTS) - set(SBM_TRIGGER_SETTINGS) - set(SBM_DEPTH_SETTINGS)
-               - set(SBM_CAP_SETTINGS))
+               - set(SBM_CAP_SETTINGS) - set(SBM_NIGHT_SETTINGS))
     if unknown:
         raise ValueError(f'unknown settings of the simplified Betts-Miller scheme: {sorted(unknown)}')
     s = {k: float(values.get(k, v) if values.get(k) is not None else v) for k, v in SBM_DEFAULTS.items()}
@@ -1619,6 +1685,8 @@ def convection_setting(scheme='sbm', **values) -> dict:
         if 'deep_hpa' not in s:
             raise ValueError("the shallow cap holds a top within the depth test's threshold, which needs the depth test")
         s['shallow_cap'] = True
+    if values.get('diagnostic_night'):
+        s['diagnostic_night'] = dict(SBM_NIGHT_RECORD)
     return dict(scheme='sbm', nprc=2, **s)
 
 
@@ -1641,6 +1709,8 @@ def convection_namelist(c: dict) -> list:
         entries.append(('NSUB_BM', str(int(c['mixing_steps']))))
     if c.get('shallow_cap'):
         entries.append(('NSHCAP_BM', '1'))
+    if c.get('diagnostic_night'):
+        entries.append(('NDIAGNIGHT_BM', '1'))                       # the night switch, a diagnostic
     return entries
 
 
@@ -1663,6 +1733,12 @@ def uses_massflux_start(convection: dict | None) -> bool:
 def uses_cap_patch(convection: dict | None) -> bool:
     """Whether a run's convection settings (as given to configuration) set the shallow cap of SBM_CAP_PATCHES."""
     return bool(convection) and bool(convection.get('shallow_cap'))
+
+
+def uses_night_switch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) set the night switch of SBM_NIGHT_PATCHES, a
+    diagnostic."""
+    return bool(convection) and bool(convection.get('diagnostic_night'))
 
 
 def cold_cloud_factors(path, half=None) -> dict:
@@ -1712,11 +1788,11 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     cold cloud's factors checked against its top layers; free_convection 'lunar' sets the free-convection constant over
     water for the planet's gravity and surface pressure (free_convection_setting, FREE_CONVECTION_EDITS);
     mixing_length 'lunar' stretches vdiff's Blackadar length by the gravities (mixing_length_setting) and
-    boundary_layer 'nonlocal' runs the nonlocal boundary layer (boundary_layer_setting), either with the moisture
-    diagnostics writing the vapour by process (BUDGET). Each is
-    recorded when given, and left out the configuration is the one every earlier run had; the 294.9 K ledger without the
-    clear share records the twilight as the runs of 14 to 19 October did, and the 295 K fit the longwave correction as
-    those of 17 October did."""
+    boundary_layer 'nonlocal' runs the nonlocal boundary layer (boundary_layer_setting); with either of them, or with
+    the Betts-Miller scheme's night switch (a diagnostic, SBM_NIGHT_PATCHES), the moisture diagnostics also write the
+    vapour by process (BUDGET). Each is recorded when given, and left out the configuration is the one every earlier
+    run had; the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October did, and
+    the 295 K fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -1755,7 +1831,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      massflux=uses_massflux(convection),
                                      free_convection=free_convection is not None,
                                      massflux_start=uses_massflux_start(convection),
-                                     boundary_layer=mixing_length is not None or boundary_layer is not None),
+                                     boundary_layer=mixing_length is not None or boundary_layer is not None,
+                                     night=uses_night_switch(convection)),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -1811,7 +1888,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
             raise ValueError('the moisture diagnostics come with the heating diagnostics, which need --heating-diagnostics')
         cfg['moisture_diagnostics'] = True
         cfg['output'] = cfg['output'] + [name for name, _ in MOISTENING.values()] + ['wap']
-        if mixing_length is not None or boundary_layer is not None:
+        if mixing_length is not None or boundary_layer is not None or uses_night_switch(convection):
             cfg['budget_diagnostics'] = sorted(BUDGET)
             cfg['output'] = cfg['output'] + [name for name, _, _ in BUDGET.values()]
     if twilight is not None:
@@ -2462,6 +2539,11 @@ def main(argv=None) -> int:
     parser.add_argument('--sbm-mixing-steps', type=int, metavar='N',
                         help="the parcel's mixing within each layer in N steps of log pressure (1: one a layer; "
                              'needs --sbm-eps; SBM_DEPTH_PATCHES)')
+    parser.add_argument('--sbm-diagnostic-night', action='store_true',
+                        help='a diagnostic, never a configuration: no deep convection in the simplified Betts-Miller '
+                             "scheme wherever the Sun is down (the geometric cosine of its zenith at the grid point at "
+                             "most 0), such columns taking PlaSim's shallow scheme (SBM_NIGHT_PATCHES; with "
+                             '--moisture-diagnostics it writes the vapour by process; part of the run key)')
     parser.add_argument('--sbm-shallow-cap', action='store_true',
                         help="with --sbm-deep-hpa, a shallow cloud's top no higher than that depth above its own base, "
                              "in place of PlaSim's 700 hPa (SBM_CAP_PATCHES; part of the run key)")
@@ -2521,6 +2603,9 @@ def main(argv=None) -> int:
         overrides[key] = type(MODEL[key])(value)
     if args.sbm_shallow_cap and args.convection != 'sbm':
         parser.error('--sbm-shallow-cap belongs to the simplified Betts-Miller scheme (--convection sbm)')
+    if args.sbm_diagnostic_night and args.convection != 'sbm':
+        parser.error('--sbm-diagnostic-night, a diagnostic, belongs to the simplified Betts-Miller scheme '
+                     '(--convection sbm)')
     if args.massflux_start != 'ifs' and args.convection != 'massflux':
         parser.error('--massflux-start belongs to the mass-flux scheme (--convection massflux)')
     sbm_given = [k for k in ('sbm_tau', 'sbm_rh', 'sbm_eps', 'sbm_cin', 'sbm_cape', 'sbm_trigger_eps', 'sbm_deep_hpa',
@@ -2531,7 +2616,8 @@ def main(argv=None) -> int:
     if args.convection == 'sbm':
         convection = dict(tau_s=args.sbm_tau, rh=args.sbm_rh, eps=args.sbm_eps, cin_j_kg=args.sbm_cin,
                           cape_j_kg=args.sbm_cape, trigger_eps=args.sbm_trigger_eps, deep_hpa=args.sbm_deep_hpa,
-                          mixing_steps=args.sbm_mixing_steps, shallow_cap=args.sbm_shallow_cap or None)
+                          mixing_steps=args.sbm_mixing_steps, shallow_cap=args.sbm_shallow_cap or None,
+                          diagnostic_night=args.sbm_diagnostic_night or None)
     elif args.convection == 'massflux':
         convection = dict(scheme='massflux', start=None if args.massflux_start == 'ifs' else args.massflux_start)
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,

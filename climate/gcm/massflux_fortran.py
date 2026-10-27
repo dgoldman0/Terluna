@@ -22,8 +22,9 @@ above, so the downdraught's evaporation, already taken from the handed water, ne
 (massflux.evaporate is its copy). Under nprc 1 and 2 that cap is 1e30, so mkrain's arithmetic is as before.
 
 The parameters (PARAMETER_NAMES) are massflux.PARAMETERS under Fortran names ending in _mf; fortran_values gives
-their values for the source's defaults and a run's namelist. Five options exist only in the Python copy, for its
-offline variants, and must keep their defaults for the Fortran (PYTHON_ONLY).
+their values for the source's defaults and a run's namelist. Six options exist only in the Python copy, for its
+offline variants, and must keep their defaults for the Fortran (PYTHON_ONLY), the entrainment that follows the
+environment (massflux_entrainment.py) among them.
 
 A second patch (START_PATCHES, 26 October) goes over this one for runs that set the surface parcel's starting speed from
 the boundary layer (massflux.surface_start, the runner's --massflux-start): mfstart and its two parameters
@@ -72,7 +73,7 @@ PARAMETER_NAMES = (
 )
 # Options of the Python copy that the Fortran does not carry, at the values the Fortran's arithmetic takes.
 PYTHON_ONLY = dict(rh_dependence=False, delta_form='ratio', source_dp=0.0, excess_scale='source',
-                   stability='free_convection')
+                   stability='free_convection', entrainment_form='fixed')
 
 
 def fortran_values(prm=None) -> dict:

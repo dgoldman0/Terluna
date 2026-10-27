@@ -147,11 +147,13 @@ CONVECTION = ('massflux', 'massflux_shallow_night', 'cm1')
 SHALLOW_ONLY = dict(departure_dp=-1.0, midlevel_top=2.0)
 
 
-def step(t, q, rows, times, now, sigma, half, pf, ph, mass, g, c, land, tag, lamm, nonlocal_, convection='massflux'):
+def step(t, q, rows, times, now, sigma, half, pf, ph, mass, g, c, land, tag, lamm, nonlocal_, convection='massflux',
+         prm=None):
     """One step of the column at time now: returns the new temperature and vapour and the step's record. convection
     'massflux' runs the mass-flux scheme with PlaSim's evaporation of its rain; 'massflux_shallow_night' the same,
     limited to shallow convection while the Sun is down (SHALLOW_ONLY); 'cm1' puts in its place CM1's own tendencies of
-    its microphysics and its resolved transport at that time, interpolated between the box's outputs."""
+    its microphysics and its resolved transport at that time, interpolated between the box's outputs. prm, the
+    scheme's parameters, defaults to massflux.PARAMETERS."""
     akap = c['gascon'] / c['acpd']
     j = int(np.clip(np.searchsorted(times, now, side='right') - 1, 0, len(times) - 2))
     f = (now - times[j]) / (times[j + 1] - times[j])
@@ -192,8 +194,9 @@ def step(t, q, rows, times, now, sigma, half, pf, ph, mass, g, c, land, tag, lam
         bl_t = (t3 - t) / STEP_S + dyn_t
         bl_q = (q2 - q) / STEP_S + dyn_q
         zf3, zh3 = mf.heights(t3, q2, pf, ph, g, c)
-        prm = dict(mf.PARAMETERS, **SHALLOW_ONLY) if shallow_only else mf.PARAMETERS
-        cv = mf.column(t3, q2, pf, ph, g, STEP_S, shf, lhf, bl_t, bl_q, omega, np.hypot(u, v), land, prm=prm, c=c,
+        base = mf.PARAMETERS if prm is None else prm
+        prm_step = dict(base, **SHALLOW_ONLY) if shallow_only else base
+        cv = mf.column(t3, q2, pf, ph, g, STEP_S, shf, lhf, bl_t, bl_q, omega, np.hypot(u, v), land, prm=prm_step, c=c,
                        z_full=zf3, z_half=zh3, melt='plasim')
         ev = mf.evaporate(cv['column'], cv['net_rain'], cv['net_snow'], cv['dtdt'], cv['dqdt'], mf.GAMMA[tag])
         conv_dtdt, conv_dqdt = cv['dtdt'] + ev['dtdt'], cv['dqdt'] + ev['dqdt']
@@ -228,7 +231,8 @@ def step(t, q, rows, times, now, sigma, half, pf, ph, mass, g, c, land, tag, lam
                   floor_water=float(np.sum(mass * (q6 - q6_raw))) / STEP_S)
     rec = dict(hour=hour, quarter=mf.quarter_name(hour), heat_bl=heat_bl, vap_bl=vap_bl, heat_dca=heat_dca,
                vap_dca=vap_dca, dca_passes=passes, conv_type=cv['type'], conv_top_m=cv['z_top'],
-               conv_base_m=cv['z_base'], rain_conv=rain_conv, rain_ls=float(ls_rain.sum()) / STEP_S,
+               conv_base_m=cv['z_base'], conv_mass_flux=cv.get('m_base'), rain_conv=rain_conv,
+               rain_ls=float(ls_rain.sum()) / STEP_S,
                conv_dqdt=conv_dqdt, conv_dtdt=conv_dtdt, vapour_kept=False, shallow_only=shallow_only,
                budget=budget)
     if convection == 'cm1':                  # the heat and vapour CM1's resolved transport carries up through the column
@@ -247,10 +251,12 @@ def rho_half(t, q, pf, ph, c):
 
 
 def run_column(rows, start_quarter: str, compare_quarter: str, site: str, scheme: tuple, half,
-               convection: str = 'massflux') -> dict:
+               convection: str = 'massflux', prm=None, keep_steps: bool = False) -> dict:
     """The column from the box's first output in start_quarter through its last in compare_quarter, under one scheme
-    (name, length 'earth' or 'lunar', nonlocal) and one convection (step's). Returns the compared quarter's means and
-    each quarter's rain and convection."""
+    (name, length 'earth' or 'lunar', nonlocal) and one convection (step's), the mass-flux scheme's parameters prm
+    (massflux.PARAMETERS by default). Returns the compared quarter's means and each quarter's rain and convection, and
+    with keep_steps each step's convection type, top and base (m), cloud-base mass flux (kg/m2/s) and rain at the ground
+    (convective and large-scale, kg/m2/s)."""
     name, length, nonlocal_ = scheme
     first = next(i for i, r in enumerate(rows) if r['quarter'] == start_quarter)
     last = max(i for i, r in enumerate(rows) if r['quarter'] == compare_quarter)
@@ -268,7 +274,7 @@ def run_column(rows, start_quarter: str, compare_quarter: str, site: str, scheme
     now = times[0]
     while now < times[-1] - 1.0:
         t, q, rec = step(t, q, sub, times, now, sigma, sigmah, pf, ph, mass, g, c, land, site, lamm, nonlocal_,
-                         convection)
+                         convection, prm)
         a = acc.setdefault(rec['quarter'], dict(t=[], q=[], rec=[]))
         a['t'].append(t)
         a['q'].append(q)
@@ -319,6 +325,10 @@ def run_column(rows, start_quarter: str, compare_quarter: str, site: str, scheme
         if convection == 'cm1':
             qd.update(heat_transport_w_m2=np.mean([r['heat_transport'] for r in recs], axis=0),
                       vapour_transport_w_m2=np.mean([r['vap_transport'] for r in recs], axis=0))
+        if keep_steps:
+            qd['steps_record'] = [dict(type=r['conv_type'], top_m=r['conv_top_m'], base_m=r['conv_base_m'],
+                                       mass_flux=r['conv_mass_flux'], rain_conv=r['rain_conv'], rain_ls=r['rain_ls'],
+                                       hour=r['hour']) for r in recs]
         out['quarters'][quarter] = qd
     return out
 
