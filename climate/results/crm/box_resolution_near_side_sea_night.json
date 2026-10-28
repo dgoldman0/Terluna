@@ -3065,7 +3065,7 @@
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/box_resolution.py": "33581ae9c4ca8cfe",
+   "crm/box_resolution.py": "6dbf47d86c6d9f98",
    "crm/box_onset.py": "cdc40b790c4367be",
    "crm/box_budget.py": "1ec391e81bda9e69"
   }

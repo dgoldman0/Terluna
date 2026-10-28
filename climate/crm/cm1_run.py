@@ -1831,6 +1831,20 @@ CASES['box_near_side_sea_l15_day4'] = dict(
     CASES['box_near_side_sea_l15'], restart_from=dict(case='box_near_side_sea_l15_day3', day=88.5), days=118.0,
     purpose=CASES['box_near_side_sea_l15']['purpose'] + "; its fourth lunar day, days 88.5-118, from the third day's "
             'day-88.5 restart')
+# The late evening on finer grids (register, 28 October). From 135 to 180 degrees of hour angle the box forced by the
+# fifteen-level GCM rains 0.1-0.2 mm/day under falling inhibition while that GCM rains 2.3-3.6, and PlaSim's scheme
+# applied to the box's air there does not convect either. Three boxes test whether the lull is the 6 km grid's, as the
+# night was tested on 25 October: box_near_side_sea_l15_day4's air at day 107.625 (its output 862, 142 degrees of hour
+# angle), averaged over its columns, with that hour's forcing held for two Earth days (setup_night), on 6, 3 and 2 km.
+EVENING_SOURCE = dict(case='box_near_side_sea_l15_day4', day=107.625)
+for _tag, _refine, _columns in (('6km', 1, 32), ('3km', 2, 64), ('2km', 3, 64)):
+    CASES[f'box_near_side_sea_l15_evening_{_tag}'] = dict(
+        CASES['box_near_side_sea_l15'], night_from=dict(EVENING_SOURCE, refine=_refine), nx=_columns, ny=_columns,
+        days=2.0, output_s=21600.0, diag_s=1800.0, stat_s=900.0, restart_s=43200.0, segment_s=86400.0,
+        namelist=NIGHT_OUTPUT,
+        purpose=f"the late evening of the sea box forced by the fifteen-level GCM at {6 // _refine} km spacing on "
+                f"{_columns} x {_columns} columns: box_near_side_sea_l15_day4's air at day 107.625, 142 degrees of "
+                "hour angle, averaged over its columns, and the forcing of that hour held for two Earth days")
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,

@@ -3718,14 +3718,26 @@ before the run, CM1's quiet nights came with the Kuo forcing: under the fifteen-
 night rains at 71–82% of the GCM's rate, its boundary layer 3.6–4.5 km deep against the GCM's 4.3. The two now part in
 the evening, where the box rains 1.06–1.20 mm/day against the GCM's 2.96 under 18–26 J/kg of inhibition. On the
 box's own air PlaSim's scheme convects deep at a quarter to a third of the afternoon and evening outputs and at
-none after midnight, the opposite of the box's own timing: the scheme answers the vapour above its reference
-whatever the inhibition, which it does not limit (an interpretation).
+none after midnight. Split by 15° of hour angle, those outputs fall where the box's own storms rain, at 60–120°, and
+none in the box's lull from 135° to midnight, where the GCM rains 2.3–3.6 mm/day: through the evening the scheme keeps
+the box's timing on the box's air, and the models part where their air differs. The quarters alone were first read as
+the scheme convecting through the inhibition that holds the box's storms down, which the split corrects.
 
 **What it qualifies.** The night water budget above, the boundary-layer comparison and the cloud water's test set
 PlaSim's nights against the Kuo-forced box. Its 6.5 km night layer belongs to that box's forcing, and the reading that
 the gap came from PlaSim keeping no cloud water to re-evaporate compared PlaSim with that box; CM1's night cloud still
-re-evaporates 83% of its condensate under the new forcing. Their measurements of PlaSim stand. For the Kuo GCM itself the comparison was like
-for like, and its night rain stays unsupported by CM1.
+re-evaporates 83% of its condensate under the new forcing. Their measurements of PlaSim stand. For the Kuo GCM itself
+the comparison was like for like, and its night rain stays unsupported by CM1.
+
+**The late evening (28 October).** The box's lull holds on 3 and 2 km grids as on 6 km, by a rule set before the runs,
+so on the box's own air CM1 does not support the GCM's rain from 135° to midnight
+([the CRM's account](../crm/README.md#the-late-evening-on-finer-grids-and-where-the-models-part-28-october)). In those hours the GCM's
+air is 1.0–1.7 K warmer below 8 km and up to 1 g/kg moister below 4 km, and on its mean column the scheme convects deep
+from 5.4 to 55 km after 20 J/kg of inhibition, where on the box's it stays shallow. Through the lunar day the GCM's
+sea, within 0.3 K of the box's, evaporates 9–50% more under a wind at 10 m 1.5–2.2 times the box's. Two sources of the
+low air's difference stand unmeasured: PlaSim's Earth free-convection constant over the sea, a quarter of its extra
+evaporation on 26 October, together with its stronger wind; and the box's own wind, which its 3-day nudging holds to
+44–67% of the GCM's speed through most of the lunar day.
 
 ```sh
 /media/projectspace/terluna-research/session-tools/option3/runs.sh l15_four_years      # 31 minutes on four cores

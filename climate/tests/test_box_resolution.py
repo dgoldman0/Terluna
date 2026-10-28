@@ -1,4 +1,4 @@
-"""The resolution test's reading of the held-night boxes (box_resolution.py) on made-up outputs: the highest cloud from
+"""The resolution test's reading of the held-hour boxes (box_resolution.py) on made-up outputs: the highest cloud from
 CM1's fractions of columns, the rain from its running total, a day's means, and the control's check and the reading set
 before the runs."""
 import pytest
@@ -33,7 +33,7 @@ def test_the_rain_of_a_span_comes_from_the_running_total():
     assert br.rain_over(rows, 24.0, 60.0) is None
 
 
-def made_up_day(rain, w, p999, deep, hours=(24.0, 48.0)):
+def made_up_day(rain, w, p999, deep, hours=(24.0, 48.0), aloft=0.3):
     """Half-hourly diagnostics and 6-hourly snapshots over two days, the second day's as given."""
     rows, snaps, total = [], [], 0.0
     for k in range(97):
@@ -48,7 +48,7 @@ def made_up_day(rain, w, p999, deep, hours=(24.0, 48.0)):
         h = 6.0 * k
         late = h > 24.0
         snaps.append(dict(hour=h, w_max_m_s=w, w_max_height_m=5000.0, w_p999_below_16km_m_s=p999 if late else 0.5,
-                          w_p999_16_60km_m_s=0.3, cloud_top_max_m=30000.0 if late else None,
+                          w_p999_16_60km_m_s=aloft if late else 0.3, cloud_top_max_m=30000.0 if late else None,
                           cloud_tops_share=dict(below_16km=0.2, from_16_to_40km=0.01, above_40km=deep if late else 0.0),
                           cloud_below_16km_share=0.2, columns=dict(cape_mean_j_kg=1300.0, hpbl_mean_m=6000.0),
                           clouds=dict(top_below_40km_highest_m=9000.0 if late else None, top_below_40km_mean_m=7000.0,
@@ -83,6 +83,22 @@ def test_the_control_check_and_the_reading_follow_the_rules_set_before_the_runs(
         'in between: 3 km stays quiet; 2 km convects'
     assert br.reading(False, {'3 km': (False, True), '2 km': (False, True)}).startswith('the control does not')
 
+
+
+def test_the_evening_rule_leaves_out_cloud_tops_and_counts_strong_updrafts_aloft():
+    """The evening's rules (28 October): the control's check leaves out the share of cloud tops above 40 km, which the
+    source's sunset ice fills, and a grid convects with deep cells when w's 99.9th percentile at 16-60 km averages
+    1.5 m/s, though its strongest updraft stays under 5 m/s."""
+    lull = made_up_day(rain=0.15, w=1.5, p999=1.1, deep=0.3)                 # ice above 40 km, no deep cells
+    check = br.quiet(lull, br.EVENING_CONTROL)
+    assert check['quiet'] and 'deep_top_share' not in check and check['rain_mm_day']['below'] == 0.4
+    assert not br.quiet(lull)['quiet'] and not br.convects(lull, br.EVENING_READING)
+    storms = made_up_day(rain=1.2, w=3.0, p999=2.5, deep=0.0, aloft=2.4)     # strong aloft, slow at their peak
+    assert br.convects(storms, br.EVENING_READING) and not br.convects(storms)
+    assert not br.convects(made_up_day(rain=1.2, w=3.0, p999=2.5, deep=0.0, aloft=1.0), br.EVENING_READING)
+    assert not br.convects(made_up_day(rain=0.8, w=3.0, p999=2.5, deep=0.0, aloft=2.4), br.EVENING_READING)
+    assert br.reading(True, {'3 km': (True, False), '2 km': (True, False)}, 'quiet late evenings') == \
+        'none of the three convect: the quiet late evenings hold up across the grids'
 
 def test_the_refill_counts_the_microphysics_vapour_where_the_air_holds_no_water(tmp_path, monkeypatch):
     """Two levels a day apart: the lower holds vapour, the upper none, and there the microphysics puts back 0.2 mm/day

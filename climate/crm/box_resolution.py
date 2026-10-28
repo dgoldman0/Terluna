@@ -1,11 +1,19 @@
-"""The sea box's quiet night on three grids (the resolution test of 25 October 2026): whether the Near-side Sea box
-stays quiet after midnight because its 6 km columns cannot resolve its 6 km deep boundary layer's eddies.
+"""A sea box's held hour on three grids: whether the Near-side Sea box stays quiet because its 6 km columns cannot
+resolve its boundary layer's eddies. Two tests use it, each read by rules set before its runs (TESTS):
 
-    climate/gcm/.venv/bin/python -m climate.crm.box_resolution    # ../results/crm/box_resolution_near_side_sea_night.json
+- night (25 October 2026): box_near_side_sea_night_6km, _3km and _2km start from box_near_side_sea_day3's air at day
+  84.5, 40 degrees past midnight, when that Kuo-forced box stayed quiet under a 6 km deep boundary layer;
+- evening (28 October 2026): box_near_side_sea_l15_evening_6km, _3km and _2km start from box_near_side_sea_l15_day4's
+  air at day 107.625, 142 degrees of hour angle, in the late evening's lull of the box forced by the fifteen-level GCM,
+  when that GCM rains about 2.8 mm/day at the site.
 
-The three boxes (cm1_run's box_near_side_sea_night_6km, _3km and _2km) start from box_near_side_sea_day3's air at day
-84.5 averaged over its columns and hold that hour's forcing for two Earth days; they differ in their grid alone. For
-each, and for the source box itself over the same two days, this reads:
+    climate/gcm/.venv/bin/python -m climate.crm.box_resolution                  # the night test
+    climate/gcm/.venv/bin/python -m climate.crm.box_resolution --test evening   # the evening test
+                                       # ../results/crm/box_resolution_near_side_sea_night.json, _l15_evening.json
+
+Each test's three boxes start from the source's air at one output averaged over its columns and hold that hour's
+forcing for two Earth days; they differ in their grid alone. For each, and for the source box itself over the same two
+days, this reads:
 
 - every domain diagnostic (half-hourly in the boxes, 3-hourly in the source): the rain, from CM1's running domain total;
   CM1's own CAPE and inhibition, the means of its columns' 0.5 km mixed-layer parcels; the boundary layer's depth, the
@@ -56,6 +64,87 @@ CONTROL = dict(rain_mm_day=0.3, strongest_updraft_m_s=3.0, w_p999_below_16km_m_s
 # A grid convects if over its second day it rains at least a third of the GCM's night rain (0.5 mm/day) with deep
 # cells: its strongest updraft averaging at least 5 m/s or cloud tops above 40 km in at least 5% of its columns.
 READING = dict(rain_mm_day=0.5, strongest_updraft_m_s=5.0, deep_top_share=0.05)
+# The evening test (28 October 2026), set before its runs. Its source over the two days after the held hour rains
+# 0.09-0.11 mm/day, its strongest updraft below 60 km averaging 1.0 m/s and the 99.9th percentile of its w below 16 km
+# at most 0.9 m/s, while its inhibition falls from 10 to 3 J/kg; in the two days before, the sunset's storms rained
+# 0.35-0.76 mm/day with updrafts averaging 1.8-2.3 m/s. The control reproduces the lull if over its second day it
+# rains under 0.4 mm/day (twice the source's at 135-150 degrees, 0.2), its strongest updraft averages under 3 m/s and
+# the 99.9th percentile of its w below 16 km stays under 2 m/s in every snapshot. The source carries the sunset storms'
+# ice above 40 km over much of the domain, which a box started from mean air does not, so no cloud-top share enters.
+EVENING_CONTROL = dict(rain_mm_day=0.4, strongest_updraft_m_s=3.0, w_p999_below_16km_m_s=2.0)
+# A grid convects if over its second day it rains at least a third of the GCM's rain at that hour (2.8 mm/day, its
+# 3-day means at 135-150 degrees) with deep cells: its strongest updraft averaging at least 5 m/s, or the 99.9th
+# percentile of its w at 16-60 km averaging at least 1.5 m/s (the source's storms after midnight: 2.4-2.7 m/s).
+EVENING_READING = dict(rain_mm_day=0.93, strongest_updraft_m_s=5.0, w_p999_16_60km_m_s=1.5)
+
+NIGHT_EVIDENCE = ("Three CM1 boxes, one realization each, started from one domain-mean sounding of the sea box's third"
+                  " lunar day with random perturbations and run two Earth days under that hour's forcing held fixed; "
+                  'they differ in grid spacing (6, 3 and 2 km) and the 2 km box in its width (128 km against 192). The'
+                  ' source box over the same two days, under its forcing by local time, stands beside them. A '
+                  "numerical test of the grid's effect within CM1 at these settings, with its boundary-layer scheme on"
+                  ' at every spacing.')
+NIGHT_READING_RULE = ("Each grid's days are the 24 hours from its start and the next 24; the source's are days "
+                      "84.5-85.5 and 85.5-86.5 of its run. Rain in mm/day from CM1's running domain total. Means over "
+                      "the diagnostics after each day's start to its end (half-hourly in the boxes, 3-hourly in the "
+                      "source): CM1's CAPE and inhibition (J/kg, its columns' 0.5 km mixed parcels), the boundary "
+                      "layer's depth (hpbl, m), the strongest updraft (the domain maximum of w below 16 and below 60 "
+                      'km, m/s; a domain of 4,096 columns samples more than one of 1,024), the highest cloud (m, any '
+                      'column holding 0.001 g/kg of cloud water or ice) and the 0.5 km parcel of the domain-mean '
+                      'sounding (box_onset, undiluted and at eps 8). snapshot: means over the 3-D outputs in the day '
+                      "(6-hourly in the boxes, 3-hourly in the source) of box_onset's measures: the 99.9th percentiles"
+                      ' of w, the highest cloud top and the shares of columns by cloud top (0.01 g/kg); clouds: the '
+                      'mean and highest top of the cloud below 40 km, the share of columns with cloud at 16-40 km and '
+                      "the share whose cloud above 40 km has none at 16-40 km beneath it. quiet: the control's "
+                      'criteria, set before the runs (control_rule), on the second day; convects: rain of at least '
+                      "reading_rule_limits' 0.5 mm/day with the strongest updraft averaging 5 m/s or cloud tops above "
+                      '40 km in 5% of the columns. drift: the domain-mean temperature at fixed heights (K) and the '
+                      "mass-weighted temperature (C) and vapour (g/kg) of the GCM's lowest four layers at the start, "
+                      'after a day and at the end; water: box_budget.water over the second day and both, rest closes '
+                      "the vapour and condensate budget (mm/day), and refill_of_empty_air the vapour CM1's "
+                      'microphysics puts back in levels holding no water, where the prescribed table dries air above '
+                      'about 55 km that has none to give, which the rest holds.')
+EVENING_EVIDENCE = ('Three CM1 boxes, one realization each, started from one domain-mean sounding of the sea box '
+                    "forced by the fifteen-level GCM, in its fourth lunar day's late evening (day 107.625, 142 degrees"
+                    " of hour angle), with random perturbations, and run two Earth days under that hour's forcing held"
+                    ' fixed; they differ in grid spacing (6, 3 and 2 km) and the 2 km box in its width (128 km against'
+                    ' 192). The source box over the same two days, under its forcing by local time, stands beside '
+                    "them. A numerical test of the grid's effect within CM1 at these settings, with its boundary-layer"
+                    " scheme on at every spacing; the GCM's rain at that hour is its 3-day means at the site binned by"
+                    ' hour angle.')
+EVENING_READING_RULE = ("Each grid's days are the 24 hours from its start and the next 24; the source's are days "
+                        "107.625-108.625 and 108.625-109.625 of its run. Rain in mm/day from CM1's running domain "
+                        "total. Means over the diagnostics after each day's start to its end (half-hourly in the "
+                        "boxes, 3-hourly in the source): CM1's CAPE and inhibition (J/kg, its columns' 0.5 km mixed "
+                        "parcels), the boundary layer's depth (hpbl, m), the strongest updraft (the domain maximum of "
+                        'w below 16 and below 60 km, m/s; a domain of 4,096 columns samples more than one of 1,024), '
+                        'the highest cloud (m, any column holding 0.001 g/kg of cloud water or ice) and the 0.5 km '
+                        'parcel of the domain-mean sounding (box_onset, undiluted and at eps 8). snapshot: means over '
+                        "the 3-D outputs in the day (6-hourly in the boxes, 3-hourly in the source) of box_onset's "
+                        'measures: the 99.9th percentiles of w, the highest cloud top and the shares of columns by '
+                        'cloud top (0.01 g/kg); clouds: the mean and highest top of the cloud below 40 km, the share '
+                        'of columns with cloud at 16-40 km and the share whose cloud above 40 km has none at 16-40 km '
+                        "beneath it. quiet: the control's criteria, set before the runs (control_rule), on the second "
+                        "day; convects: rain of at least reading_rule_limits' 0.93 mm/day, a third of the GCM's 2.8 at"
+                        ' that hour, with the strongest updraft averaging 5 m/s or the 99.9th percentile of w at 16-60'
+                        ' km averaging 1.5 m/s. drift: the domain-mean temperature at fixed heights (K) and the '
+                        "mass-weighted temperature (C) and vapour (g/kg) of the GCM's lowest four layers at the start,"
+                        ' after a day and at the end; water: box_budget.water over the second day and both, rest '
+                        "closes the vapour and condensate budget (mm/day), and refill_of_empty_air the vapour CM1's "
+                        'microphysics puts back in levels holding no water, where the prescribed table dries air above'
+                        ' about 55 km that has none to give, which the rest holds.')
+TESTS = {
+    'night': dict(grids=GRIDS, source=SOURCE, control=CONTROL, reading=READING, quiet_spell='quiet sea nights',
+                  gcm_key='gcm_night_rain_mm_day', gcm_rain_mm_day=GCM_NIGHT_RAIN_MM_DAY,
+                  product='box_resolution_near_side_sea_night.json', evidence=NIGHT_EVIDENCE,
+                  reading_rule=NIGHT_READING_RULE),
+    'evening': dict(grids={'6 km': 'box_near_side_sea_l15_evening_6km', '3 km': 'box_near_side_sea_l15_evening_3km',
+                           '2 km': 'box_near_side_sea_l15_evening_2km'},
+                    source=dict(case='box_near_side_sea_l15_day4', first_day=107.625, last_day=109.625),
+                    control=EVENING_CONTROL, reading=EVENING_READING, quiet_spell='quiet late evenings',
+                    gcm_key='gcm_rain_mm_day', gcm_rain_mm_day=2.8,
+                    product='box_resolution_near_side_sea_l15_evening.json', evidence=EVENING_EVIDENCE,
+                    reading_rule=EVENING_READING_RULE),
+}
 
 
 def cloud_top_m(qcfrac, qifrac, zh):
@@ -167,35 +256,39 @@ def day_summary(rows, snaps, a_h: float, b_h: float) -> dict:
     return out
 
 
-def quiet(day: dict) -> dict:
-    """The control's criteria (CONTROL) on one day of a run: each criterion's value, its limit and whether it holds."""
+def quiet(day: dict, control: dict = CONTROL) -> dict:
+    """The control's criteria (a test's control rule) on one day of a run: each criterion's value, its limit and
+    whether it holds."""
     s = day['snapshot']
-    tests = dict(rain_mm_day=(day['rain_mm_day'], CONTROL['rain_mm_day']),
-                 strongest_updraft_m_s=(day['w_max_below_60km_m_s'], CONTROL['strongest_updraft_m_s']),
-                 w_p999_below_16km_m_s=(s['w_p999_below_16km_max_m_s'], CONTROL['w_p999_below_16km_m_s']),
-                 deep_top_share=(s['cloud_tops_share']['above_40km'], CONTROL['deep_top_share']))
+    values = dict(rain_mm_day=day['rain_mm_day'], strongest_updraft_m_s=day['w_max_below_60km_m_s'],
+                  w_p999_below_16km_m_s=s['w_p999_below_16km_max_m_s'],
+                  deep_top_share=s['cloud_tops_share']['above_40km'])
+    tests = {k: (values[k], limit) for k, limit in control.items()}
     out = {k: dict(value=v, below=limit, holds=bool(v < limit)) for k, (v, limit) in tests.items()}
     out['quiet'] = all(v['holds'] for v in out.values())
     return out
 
 
-def convects(day: dict) -> bool:
-    """READING's deep convection on one day of a run: enough rain, with strong updrafts or deep cloud tops."""
-    deep = day['snapshot']['cloud_tops_share']['above_40km'] >= READING['deep_top_share']
-    strong = day['w_max_below_60km_m_s'] >= READING['strongest_updraft_m_s']
-    return bool(day['rain_mm_day'] >= READING['rain_mm_day'] and (strong or deep))
+def convects(day: dict, rule: dict = READING) -> bool:
+    """A test's deep convection on one day of a run: enough rain, with strong updrafts or deep cells (cloud tops above
+    40 km in the night's rule, strong updrafts aloft in the evening's)."""
+    s = day['snapshot']
+    deep = (('deep_top_share' in rule and s['cloud_tops_share']['above_40km'] >= rule['deep_top_share'])
+            or ('w_p999_16_60km_m_s' in rule and s['w_p999_16_60km_m_s'] >= rule['w_p999_16_60km_m_s']))
+    strong = day['w_max_below_60km_m_s'] >= rule['strongest_updraft_m_s']
+    return bool(day['rain_mm_day'] >= rule['rain_mm_day'] and (strong or deep))
 
 
-def reading(control_quiet: bool, finer: dict) -> str:
-    """The test's outcome under the rule stated before the runs, from the control's check and the finer grids' second
+def reading(control_quiet: bool, finer: dict, quiet_spell: str = 'quiet sea nights') -> str:
+    """A test's outcome under the rule stated before the runs, from the control's check and the finer grids' second
     days (grid -> (quiet, convects))."""
     if not control_quiet:
-        return ('the control does not reproduce the source box\'s quiet night, so the method is not valid and the finer '
-                'grids are not read')
+        return (f'the control does not reproduce the source box\'s {quiet_spell}, so the method is not valid and the '
+                'finer grids are not read')
     if all(c for _, c in finer.values()):
-        return 'storms start on the finer grids but not at 6 km: the quiet sea nights come from the grid'
+        return f'storms start on the finer grids but not at 6 km: the {quiet_spell} come from the grid'
     if all(q for q, _ in finer.values()):
-        return 'none of the three convect: the quiet sea nights hold up across the grids'
+        return f'none of the three convect: the {quiet_spell} hold up across the grids'
     return 'in between: ' + '; '.join(f"{g} {'convects' if c else 'stays quiet' if q else 'neither quiet nor convecting'}"
                                       for g, (q, c) in finer.items())
 
@@ -274,61 +367,39 @@ def run_record(name: str) -> dict:
                 folder_mb=round(written / 1e6, 1))
 
 
-def analyse() -> dict:
+def analyse(test: str = 'night') -> dict:
+    t = TESTS[test]
     grids, finer = {}, {}
-    for label, name in GRIDS.items():
+    for label, name in t['grids'].items():
         rows, snaps = diag_rows(name), snapshot_rows(name)
         days = {d: day_summary(rows, snaps, a, b) for d, a, b in DAYS}
-        grids[label] = dict(run=run_record(name), days=days, quiet=quiet(days['second day']),
-                            convects=convects(days['second day']), drift=drift(rows), water=water(name),
+        grids[label] = dict(run=run_record(name), days=days, quiet=quiet(days['second day'], t['control']),
+                            convects=convects(days['second day'], t['reading']), drift=drift(rows), water=water(name),
                             series=series(rows))
-    first_s, last_s = SOURCE['first_day'] * DAY, SOURCE['last_day'] * DAY
-    rows, snaps = diag_rows(SOURCE['case'], first_s, last_s), snapshot_rows(SOURCE['case'], first_s, last_s)
-    source = dict(SOURCE, days={d: day_summary(rows, snaps, a, b) for d, a, b in DAYS}, drift=drift(rows),
-                  water=water(SOURCE['case'], (SOURCE['first_day'], SOURCE['last_day'])), series=series(rows))
-    source['quiet'] = quiet(source['days']['second day'])
+    src = t['source']
+    first_s, last_s = src['first_day'] * DAY, src['last_day'] * DAY
+    rows, snaps = diag_rows(src['case'], first_s, last_s), snapshot_rows(src['case'], first_s, last_s)
+    source = dict(src, days={d: day_summary(rows, snaps, a, b) for d, a, b in DAYS}, drift=drift(rows),
+                  water=water(src['case'], (src['first_day'], src['last_day'])), series=series(rows))
+    source['quiet'] = quiet(source['days']['second day'], t['control'])
     control = grids['6 km']['quiet']['quiet']
     for label in ('3 km', '2 km'):
         finer[label] = (grids[label]['quiet']['quiet'], grids[label]['convects'])
-    return dict(schema=SCHEMA, grids=grids, source=source, control_quiet=control, reading=reading(control, finer),
-                gcm_night_rain_mm_day=GCM_NIGHT_RAIN_MM_DAY, control_rule=CONTROL, reading_rule_limits=READING,
-                evidence=('Three CM1 boxes, one realization each, started from one domain-mean sounding of the sea box\'s '
-                          'third lunar day with random perturbations and run two Earth days under that hour\'s forcing '
-                          'held fixed; they differ in grid spacing (6, 3 and 2 km) and the 2 km box in its width (128 km '
-                          'against 192). The source box over the same two days, under its forcing by local time, '
-                          'stands beside them. A numerical test of the grid\'s effect within CM1 at these settings, '
-                          'with its boundary-layer scheme on at every spacing.'),
-                reading_rule=('Each grid\'s days are the 24 hours from its start and the next 24; the source\'s are days '
-                              '84.5-85.5 and 85.5-86.5 of its run. Rain in mm/day from CM1\'s running domain total. Means '
-                              'over the diagnostics after each day\'s start to its end (half-hourly in the boxes, '
-                              '3-hourly in the source): CM1\'s CAPE and inhibition (J/kg, its columns\' 0.5 km mixed '
-                              'parcels), the boundary layer\'s depth (hpbl, m), the strongest updraft (the domain maximum '
-                              'of w below 16 and below 60 km, m/s; a domain of 4,096 columns samples more than one of '
-                              '1,024), the highest cloud (m, any column holding 0.001 g/kg of cloud water or ice) and '
-                              'the 0.5 km parcel of the domain-mean sounding (box_onset, undiluted and at eps 8). '
-                              'snapshot: means over the 3-D outputs in the day (6-hourly in the boxes, 3-hourly in the '
-                              'source) of box_onset\'s measures: the 99.9th percentiles of w, the highest cloud top and '
-                              'the shares of columns by cloud top (0.01 g/kg); clouds: the mean and highest top of the '
-                              'cloud below 40 km, the share of columns with cloud at 16-40 km and the share whose cloud '
-                              'above 40 km has none at 16-40 km beneath it. quiet: the control\'s criteria, set '
-                              'before the runs (control_rule), on the second day; convects: rain of at least '
-                              'reading_rule_limits\' 0.5 mm/day with the strongest updraft averaging 5 m/s or cloud tops '
-                              'above 40 km in 5% of the columns. drift: the domain-mean temperature at fixed heights (K) '
-                              'and the mass-weighted temperature (C) and vapour (g/kg) of the GCM\'s lowest four layers at '
-                              'the start, after a day and at the end; water: box_budget.water over the second day and '
-                              'both, rest closes the vapour and condensate budget (mm/day), and refill_of_empty_air the '
-                              'vapour CM1\'s microphysics puts back in levels holding no water, where the prescribed '
-                              'table dries air above about 55 km that has none to give, which the rest holds.'))
+    return dict(schema=SCHEMA, grids=grids, source=source, control_quiet=control,
+                reading=reading(control, finer, t['quiet_spell']), **{t['gcm_key']: t['gcm_rain_mm_day']},
+                control_rule=t['control'], reading_rule_limits=t['reading'],
+                evidence=t['evidence'], reading_rule=t['reading_rule'])
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.parse_args(argv)
-    out = analyse()
+    parser.add_argument('--test', choices=sorted(TESTS), default='night', help='which held hour (default: the night)')
+    args = parser.parse_args(argv)
+    out = analyse(args.test)
     out['producer'] = dict(domain='climate', files={f'crm/{p.name}': hashlib.sha256(p.read_bytes()).hexdigest()[:16]
                                                     for p in (Path(__file__), HERE / 'box_onset.py', HERE / 'box_budget.py')})
     RESULTS.mkdir(parents=True, exist_ok=True)
-    path = RESULTS / 'box_resolution_near_side_sea_night.json'
+    path = RESULTS / TESTS[args.test]['product']
     path.write_text(json.dumps(out, indent=1) + '\n')
     fmt = lambda v, f='.2f': '-' if v is None else format(v, f)
     for label, e in [*out['grids'].items(), ('source', out['source'])]:
