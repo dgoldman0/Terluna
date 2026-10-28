@@ -2350,8 +2350,8 @@
  "producer": {
   "domain": "climate",
   "files": {
-   "crm/box_days.py": "8d11def609cbf89a",
-   "crm/box_budget.py": "0542da05ae29b184",
+   "crm/box_days.py": "b28e5f7d8cf219e0",
+   "crm/box_budget.py": "1ec391e81bda9e69",
    "crm/box_analysis.py": "70b5fea9c3e33518"
   }
  }

@@ -2834,7 +2834,9 @@ included, and at the top of its mixed layer it carries heat down, 6–12 W/m² a
 drawing the warmer air above into the layer. Its own scheme mixes at 17–22 m²/s at 5.2 km in those quarters. PlaSim's
 air there has a median Richardson number of 3–8 and a median diffusivity of 0.1–0.3 m²/s, so it carries almost no heat
 down (0.1–1.0 W/m² at 5–7 km), and its dry adjustment acts only where the air is dry-unstable. With the lengths
-stretched, the diffusivity at 5.2 km after midnight would be 5 m²/s on the means.
+stretched, the diffusivity at 5.2 km after midnight would be 5 m²/s on the means. (Qualified later on 27 October: the
+CM1 box here was forced by the Kuo run; forced by the fifteen-level GCM's own circulation, its mixed layer after
+midnight is 3.6–4.5 km deep, [below](#the-fifteen-level-run-over-four-years-and-the-sea-box-it-forces-27-october).)
 
 **The other two runs.** With the mass-flux scheme, which convects at half the baseline's share, the GCM's mixed layer
 over the sea is shallower at every hour, 1.7–4.0 km, and its lowest level moister, 14.7–16.5 g/kg: above its mixed
@@ -3518,7 +3520,10 @@ what that layer does with it.
 The fix therefore belongs in PlaSim's moist physics of that layer: condensate that persists and can re-evaporate, which
 PlaSim lacks, and convection that stays shallow at night, with the deep night layer the two would allow. Neither the
 circulation alone nor the vapour that the diffusion and the shallow scheme lift is the cause. These are interpretations
-of the budgets; whether PlaSim with cloud water of its own would keep CM1's night is untested.
+of the budgets; whether PlaSim with cloud water of its own would keep CM1's night is untested. (Qualified later on 27
+October: the box here was forced by the Kuo run, and forced by the fifteen-level GCM's own circulation CM1's sea night
+rains at 71–82% of the GCM's rate, so the budgets measure PlaSim against a night that came with the Kuo forcing;
+[below](#the-fifteen-level-run-over-four-years-and-the-sea-box-it-forces-27-october).)
 
 **Two defects found on the way, corrected the same day.**
 - **The runner's description of code 40** (`MOISTENING` in [exoplasim_run.py](exoplasim_run.py)) called it the
@@ -3678,6 +3683,54 @@ climate/gcm/.venv/bin/python -m climate.gcm.night_water
 climate/gcm/.venv/bin/python $S/stop_rule.py climate/results/gcm/night_water_l15.json \
     climate/results/gcm/cloud_water_night_l15.json
 python3 -m pytest climate/tests/test_condensate.py     # with gfortran, about 10 s
+```
+
+#### The fifteen-level run over four years, and the sea box it forces (27 October)
+
+The comparisons above set PlaSim's sea nights against the CM1 box forced by the Kuo run, whose circulation differs from
+the fifteen-level runs'. On 27 October the author chose a box forced by the fifteen-level GCM itself, after running
+that GCM two years further to see whether it settles ([the CRM's account](../crm/README.md#the-sea-box-forced-by-the-fifteen-level-gcm-27-october)).
+
+**Four years of the fifteen-level baseline.** The run `A28R_301k_cold_sbm_rh07_deep200_l15cap` was made again from its
+start on the shared source as it now stands (`A28R_301k_cold_sbm_rh07_deep200_l15cap_cwsource`, 31 minutes on four
+cores). Its first two years repeat the original's in all 61 output fields and both restarts.
+
+| Year | Ground, K | Imbalance at the top, W/m² | Rain, mm/day | Sea site's rain after midnight, mm/day |
+|---|---|---|---|---|
+| 0 | 298.10 | −4.12 | 2.19 | 2.31 |
+| 1 | 297.53 | −3.27 | 2.17 | 1.85 |
+| 2 | 297.15 | −2.63 | 2.11 | 2.33 |
+| 3 | 296.87 | −1.90 | 2.07 | 2.62 |
+
+- **It settles,** its cooling slowing from 0.57 to 0.38 and 0.28 K a year. A line through the imbalance against the
+  ground reaches zero at 295.7 K, and an exponential approach fitted to the ground levels off at 296.3 K with an
+  e-folding time of 2.7 years. At the design sunlight that is about 3.5 K below the ten-level Betts–Miller run's
+  299.6 K. The provisional longwave fit cools this configuration by 3.7 W/m² at the top, so its climate waits on its
+  own refit.
+- **The sea's night does not follow the drift.** Years 2 and 3 fall inside 1.4–2.8 mm/day, the first two years' range
+  widened by their difference, the rule set before the run, so the box took all four years. The evening's rain rose
+  each year, from 2.53 to 3.52 mm/day, and the circulation's heating of 5.2–11.8 km after midnight swung between 13
+  and 34 W/m² from year to year, the single steps' noise.
+
+**The box.** Forced by those four years, CM1's sea box rains after midnight 0.50 mm/day over its second lunar day,
+1.62 over its third and 1.88 over its fourth, against 0.14 under the Kuo forcing and the GCM's 2.28. By the rule set
+before the run, CM1's quiet nights came with the Kuo forcing: under the fifteen-level GCM's own circulation the sea's
+night rains at 71–82% of the GCM's rate, its boundary layer 3.6–4.5 km deep against the GCM's 4.3. The two now part in
+the evening, where the box rains 1.06–1.20 mm/day against the GCM's 2.96 under 18–26 J/kg of inhibition. On the
+box's own air PlaSim's scheme convects deep at a quarter to a third of the afternoon and evening outputs and at
+none after midnight, the opposite of the box's own timing: the scheme answers the vapour above its reference
+whatever the inhibition, which it does not limit (an interpretation).
+
+**What it qualifies.** The night water budget above, the boundary-layer comparison and the cloud water's test set
+PlaSim's nights against the Kuo-forced box. Its 6.5 km night layer belongs to that box's forcing, and the reading that
+the gap came from PlaSim keeping no cloud water to re-evaporate compared PlaSim with that box; CM1's night cloud still
+re-evaporates 83% of its condensate under the new forcing. Their measurements of PlaSim stand. For the Kuo GCM itself the comparison was like
+for like, and its night rain stays unsupported by CM1.
+
+```sh
+/media/projectspace/terluna-research/session-tools/option3/runs.sh l15_four_years      # 31 minutes on four cores
+climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/option3/settling.py   # the rule
+climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/option3/forcing_audit.py
 ```
 
 ### Cloud amount: what published models say

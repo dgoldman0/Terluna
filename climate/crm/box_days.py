@@ -8,10 +8,11 @@ which PlaSim evaporates that share at the box's place.
 
 The cases are read in order, each from its own outputs after the last one's end, as a case set up by cm1_run's
 setup_restart carries its source's numbering on. Each lunar day is a span between whole restart times (0-29.5,
-29.5-59.0 and 59.0-88.5 days for boxes started at sunrise): its rain is the domain-mean rate at each 3-hourly output, as
-the box's water budget reckons it, and its quarters follow the site's hour angle. The water budget (box_budget.water)
-and the share evaporated (box_analysis.microphysics_budget) are taken over a span that runs to its case's end; gamma
-comes from rain_evaporation.fit on the pooled GCM shares in ../results/gcm/rain_evaporation.json.
+29.5-59.0, 59.0-88.5 and 88.5-118.0 days for boxes started at sunrise): its rain is the domain-mean rate at each
+3-hourly output, as the box's water budget reckons it, and its quarters follow the site's hour angle. The water
+budget (box_budget.water) and the share evaporated (box_analysis.microphysics_budget) are taken over a span that
+runs to its case's end; gamma comes from rain_evaporation.fit on the pooled GCM shares in
+../results/gcm/rain_evaporation.json.
 """
 from __future__ import annotations
 
@@ -29,7 +30,7 @@ HERE = Path(__file__).resolve().parent
 RESULTS = HERE.parent / 'results' / 'crm'
 SCHEMA = 'terluna.climate.crm-box-days/1'
 DAY = 86400.0
-SPANS = ((0.0, 29.5), (29.5, 59.0), (59.0, 88.5))
+SPANS = ((0.0, 29.5), (29.5, 59.0), (59.0, 88.5), (88.5, 118.0))
 HEIGHTS_M = (40000.0, 60000.0)
 QUARTERS = (('sunrise-noon', -90.0, 0.0), ('noon-sunset', 0.0, 90.0), ('sunset-midnight', 90.0, 180.0),
             ('midnight-sunrise', -180.0, -90.0))

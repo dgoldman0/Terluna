@@ -219,6 +219,27 @@ def test_a_run_on_from_a_restart_carries_the_wind_windows_on_by_whole_lunar_days
     assert c.restart_windows(single, case, 0.0, 100.0) is None
 
 
+def test_a_run_on_from_a_run_on_case_takes_its_windows_from_the_first_case(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'solar_day_s', lambda: 3600.0)               # 36 windows of 100 s a day
+    root, third, fourth = (tmp_path / n for n in ('root', 'third', 'fourth'))
+    for folder in (root, third, fourth):
+        folder.mkdir()
+    for i in range(72):
+        t2 = 1.0e30 if i == 71 else (i + 1) * 100.0
+        (root / f'lsnudge_{i + 1:04d}.dat').write_text(
+            f' *  Header\n  {i * 100.0:22.1f} {t2:22.6e}\n *  Profile\n *  z\n  0.0 300.0 10.0 {i % 36:.1f} 0.0\n')
+    (root / 'case.json').write_text(json.dumps(dict(case='root')))
+    (third / 'case.json').write_text(json.dumps(dict(case='third', restart_from=dict(case='root', day=0.083))))
+    c.restart_windows(root, third, 7150.0, 10650.0)                       # the third day's windows, from phase 35
+    assert c.window_root(third) == root and c.window_root(root) == root
+    c.restart_windows(c.window_root(third), fourth, 10800.0, 14400.0)    # the fourth day from the third's restart
+    first = sorted(fourth.glob('lsnudge_*.dat'))[0].read_text().splitlines()
+    assert first[1].split()[0] == '10800.0' and first[4].split()[3] == '0.0'      # the day's first phase
+    c.restart_windows(third, fourth, 10800.0, 14400.0)                    # the run-on case's own windows
+    shifted = sorted(fourth.glob('lsnudge_*.dat'))[0].read_text().splitlines()
+    assert shifted[4].split()[3] == '35.0'                                # a window out of phase
+
+
 def test_storms_wrap_around_the_ring():
     from climate.crm import ring_analysis as ra
     rain = np.zeros(20)

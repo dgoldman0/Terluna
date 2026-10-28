@@ -1808,6 +1808,29 @@ CASES['box_near_side_sea_day3_linf75'] = dict(
 CASES['box_near_side_sea_night_6km_linf75'] = dict(
     CASES['box_near_side_sea_night_6km'], namelist=dict(NIGHT_OUTPUT, param3=dict(l_inf=75.0)),
     purpose=CASES['box_near_side_sea_night_6km']['purpose'] + "; with Earth's boundary-layer length, l_inf 75 m")
+# The sea box forced by the fifteen-level GCM (register, 27 October): whether CM1's quiet nights survive the
+# circulation of the GCM whose night rain is in question, which differs from the Kuo run's that forced the box. The
+# case is box_near_side_sea with one change, the run whose column forces it: the fifteen-level Betts-Miller baseline
+# rerun on today's shared source, its years 0-1 bit for bit the baseline's, and run on to four years. With it come that
+# run's reference air, sea, mean vertical wind, heating and moistening by local time, wind by local time and the height
+# the air is held from (its convection's top). Two lunar days from sunrise, then the third from the day-59 restart, as
+# the Kuo-forced box ran.
+GCM_L15_RUN, GCM_L15_YEARS = 'A28R_301k_cold_sbm_rh07_deep200_l15cap_cwsource', (0, 3)
+CASES['box_near_side_sea_l15'] = dict(
+    CASES['box_near_side_sea'], gcm=(GCM_L15_RUN, GCM_L15_YEARS),
+    purpose='a 3-D box 192 km square over the Near-side Sea at 5 S, 45 W, forced by the fifteen-level Betts-Miller '
+            "GCM's column there (its years 0-3) through its whole depth: its mean air held only above the top of the "
+            "GCM's convection, its mean vertical wind and its own heating and moistening by local time; otherwise as "
+            'box_near_side_sea, two lunar days from sunrise')
+CASES['box_near_side_sea_l15_day3'] = dict(
+    CASES['box_near_side_sea_l15'], restart_from=dict(case='box_near_side_sea_l15', day=59.0), days=88.5,
+    purpose=CASES['box_near_side_sea_l15']['purpose'] + '; its third lunar day, days 59-88.5, from its day-59 restart')
+# Its fourth lunar day: the third left the box still changing, its night's rain up from 0.50 to 1.62 mm/day after
+# midnight and its middle air cooling by up to 1.4 K over the day, so it runs on from the third day's restart.
+CASES['box_near_side_sea_l15_day4'] = dict(
+    CASES['box_near_side_sea_l15'], restart_from=dict(case='box_near_side_sea_l15_day3', day=88.5), days=118.0,
+    purpose=CASES['box_near_side_sea_l15']['purpose'] + "; its fourth lunar day, days 88.5-118, from the third day's "
+            'day-88.5 restart')
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -2828,6 +2851,18 @@ def restart_windows(source: Path, case: Path, start_s: float, end_s: float, bins
                 source=f"{source.name}'s windows by local time, carried on by whole lunar days (restart_windows)")
 
 
+def window_root(source: Path) -> Path:
+    """The case whose wind-nudging windows a run on from source's restart carries: source itself, or, when source was
+    itself run on from another case's restart, the case the chain began from. A run-on case numbers its windows from
+    its own restart, so restart_windows, which counts phases from the run's start, would take them a few windows out
+    of phase (one window, 0.82 days, for a box's third lunar day run on to a fourth)."""
+    while True:
+        earlier = json.loads((source / 'case.json').read_text()).get('restart_from')
+        if not earlier:
+            return source
+        source = source.parent / earlier['case']
+
+
 def setup_restart(name: str, cfg: dict) -> Path:
     """Set up a case that runs on from another case's restart (cfg['restart_from']: the case and the day), so that a
     window of a run can run again under other settings, or run on: the other case's inputs, restart files and kept
@@ -2859,7 +2894,7 @@ def setup_restart(name: str, cfg: dict) -> Path:
             shutil.copy2(source / item, case / item)
     for f in files + ([ez] if ez.exists() else []):
         shutil.copy2(f, case / f.name)
-    windows = restart_windows(source, case, n * restart_s, case_length_s(cfg, scale))
+    windows = restart_windows(window_root(source), case, n * restart_s, case_length_s(cfg, scale))
     if windows and abs(windows['window_s'] - src['nudging_wind']['window_s']) > 1e-3:
         raise RuntimeError(f"{fr['case']}'s windows are {src['nudging_wind']['window_s']} s long, not {windows['window_s']}")
     text = (source / 'namelist.template').read_text()
