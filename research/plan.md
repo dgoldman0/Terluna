@@ -449,14 +449,20 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      wind settles some 0.7 K warmer at the same sunlight and still rains in the late evening (2.62 mm/day), while after
      midnight it rains 1.15 mm/day against the corrected box's 1.89: on the same surface physics the two models rain
      alike over the day at different hours, the GCM in the evening and CM1 after midnight. The low air's gap lies in
-     the columns' vapour, not in the boundary layer's carrying, and the box's forcing exports about 0.5 mm/day more
-     vapour than the GCM's circulation, a lead to check. Open, the author's choice: PlaSim's configuration taking the
-     gust, with its sunlight rebalanced; checking the box's forcing export, then a box forced by the GCM with the gust;
-     settling the fifteen-level configuration with the evening's difference stated; the land box forced by the same
-     GCM; no Jura box until the models agree. Then surface and radiation feedbacks, a longwave refit on the chosen
-     configuration and a 15-year run. The depth test's 15-year run is held. The climate work's readers take the year
-     files' humidity as interval means (register, 27 October); the climatology, the cross-domain extracts and the
-     rings' readers still take it as it stands.
+     the columns' vapour, not in the boundary layer's carrying. The box's forcing exported 0.45–0.55 mm/day more vapour
+     than the GCM's circulation because the air the GCM's mean wind draws in carried the box's own vapour; boxes forced
+     by the GCM's column now draw in the GCM's air there (register, 28 October). One lunar day so forced halves the
+     column's drying and rains 0.61 mm/day against 1.05, after midnight 0.61 against 1.91, the old form's drawdown
+     having fed that rain (observations: the day misses its wind check by 0.001). The models' rain at the site now
+     turns first on the box's evaporation, a third below the GCM's, then on its remaining cooling. PlaSim's
+     configuration takes the gust with its sunlight rebalanced (register, 28 October), next in one design run once its
+     open choices are settled. The box's present forcing predates the gust and runs about 5 K below the design climate,
+     so boxes from here on are best forced by that run. Open, the author's choice: the design run's fifteen levels, the
+     Betts–Miller scheme with its depth test and the rain-evaporation constant; the boxes it forces, the land box's
+     among them; the evaporation gap; no Jura box until the models agree. Then surface and radiation feedbacks. The
+     depth test's 15-year run is held. The climate work's readers take the year files' humidity as interval means
+     (register, 27 October); the climatology, the cross-domain extracts and the rings' readers still take it as it
+     stands.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
      12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. A lunar
      free-convection constant over the sea, in place of Earth's, removes a quarter of the GCM's extra evaporation at
@@ -469,11 +475,12 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      (recommended).
    - **Reporting the bug to CM1's developers** (the author's call).
 
-   Then one design run with the cold cloud's factors, which the author adopted, the rain evaporation the pair supports
-   and the convection scheme as the author chooses, with its own longwave refit, followed by the settling and exobase
-   checks. The new scheme's climate lands 1.0–1.5 K nearer 301 K at the same sunlight, so it would need less of the
-   2% more sunlight the cold cloud's factors called for. The cover question stays on hold. A CM1 ring that makes its
-   own upper vapour comes later.
+   Then one design run with the cold cloud's factors, which the author adopted, Beljaars's gust (register, 28 October),
+   the rain evaporation the pair supports and the convection scheme as the author chooses, with its own longwave
+   refit, followed by the settling and exobase checks. The fifteen-level configuration with its provisional refit
+   heads for about 296 K at the design sunlight, and the gust settles some 0.7 K warmer, so the run needs about
+   3.5–4.5% more sunlight at 0.73–0.96% of the sunlight a kelvin, where the cold cloud's factors alone called for 2%.
+   The cover question stays on hold. A CM1 ring that makes its own upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
    mixing_forms), now the aquatic programme's turbulence columns first, with a basin-scale model of one crater lake
