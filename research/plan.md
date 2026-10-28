@@ -434,18 +434,24 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      steady. Forced by it, CM1's sea box rains 1.62 and 1.88 mm/day after midnight over its third and fourth lunar
      days, against the GCM's 2.28 and the Kuo-forced box's 0.14, so the night gap came largely with the Kuo forcing,
      and the readings that rested on that box (its 6 km night layer, the night-cloud diagnosis, the cloud water's
-     premise) are qualified. The models now part in the evening, 1.06–1.20 against 2.96 mm/day. On the box's own air
-     PlaSim's scheme convects deep in the afternoon and evening, through the inhibition that holds the box's storms
-     down, and never after midnight. Open, the author's choice: settling the fifteen-level configuration with the
-     evening's difference stated; a physical account of the scheme's evening, its inhibition among it, before any GCM
-     test; the land box forced by the same GCM; no Jura box until the models agree. Then surface and radiation
-     feedbacks, a longwave refit on the chosen configuration and a 15-year run. The depth test's
-     15-year run is held. The climate work's readers take the year files' humidity as interval means (register, 27
-     October); the climatology, the cross-domain extracts and the rings' readers still take it as it stands.
+     premise) are qualified. The models now part in the late evening, from 135° of hour angle to midnight, where the
+     box rains 0.1–0.2 mm/day against the GCM's 2.3–3.6 (register, 28 October). The box's lull holds on 3 and 2 km
+     grids as on 6 km, so on its own air CM1 does not support that rain, which leans to PlaSim's making. On the box's
+     air PlaSim's scheme convects where the box's own storms do; the models part in their low air, the GCM's warmer
+     and moister, its sea evaporating 9–50% more at nearly the box's temperature under a stronger wind. The box's own
+     wind, nudged over 3 days toward targets that change every 0.82 days, runs at about half the GCM's speed through
+     most of the lunar day and may account for part of that. Open, the author's choice: settling the fifteen-level
+     configuration with the evening's difference stated; the low air's account before any GCM test, starting with a
+     box whose wind follows the GCM's; the free-convection constant over the sea; the land box forced by the same GCM;
+     no Jura box until the models agree. Then surface and radiation feedbacks, a longwave refit on the chosen
+     configuration and a 15-year run. The depth test's 15-year run is held. The climate work's readers take the year
+     files' humidity as interval means (register, 27 October); the climatology, the cross-domain extracts and the
+     rings' readers still take it as it stands.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
      12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. A lunar
      free-convection constant over the sea, in place of Earth's, removes a quarter of the GCM's extra evaporation at
-     the sea site (3.82 to 3.62 mm/day against CM1's 2.98).
+     the sea site (3.82 to 3.62 mm/day against CM1's 2.98). The box's wind runs short of the GCM's (register, 28
+     October), so part of that extra may be the box's.
    - **The scheme's adoption and its reference humidity** (the author's call, after the test): 0.7 brings the sea's
      nights nearer CM1's.
    - **A corrected rerun of one reference ring or box**, to size the boundary layer's bias in every earlier CM1 run
