@@ -99,7 +99,7 @@ def test_the_gust_build_takes_beljaars_gust_over_water_and_changes_nothing_else(
     assert c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] == \
         c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] + [c.GUST_PATCH]
     assert all(c.GUST_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
-               if label != 'moon_omp_rain_law_pbl_wind_gust')
+               if label not in ('moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft'))
     for day in ('day3', 'day4'):
         case, wind = c.CASES[f'box_near_side_sea_l15_wind_gust_{day}'], c.CASES[f'box_near_side_sea_l15_wind_{day}']
         assert case['build'] == 'moon_omp_rain_law_pbl_wind_gust'
@@ -107,14 +107,44 @@ def test_the_gust_build_takes_beljaars_gust_over_water_and_changes_nothing_else(
         assert same(case) == same(wind) and case['restart_from']['day'] == wind['restart_from']['day']
     assert c.CASES['box_near_side_sea_l15_wind_gust_day4']['restart_from']['case'] == 'box_near_side_sea_l15_wind_gust_day3'
 
+
+def test_the_aloft_build_pulls_the_wind_from_var8_up_and_new_cases_take_the_corrected_wind():
+    source = ('          tem1 = -lsnudgefac*( (umove+uavg(k))-lsnudge_u(k,lsnudge_count) )/(terluna_tau_uv)\n'
+              '          tem2 = -lsnudgefac*( (vmove+vavg(k))-lsnudge_v(k,lsnudge_count) )/(terluna_tau_uv)\n'
+              '          tem1 = -lsnudgefac*terluna_w*( thavg(k)-lsnudge_th(k,lsnudge_count) )/(lsnudge_tau)\n')
+    out = c.apply_patch(source, *c.WIND_ALOFT_PATCH)
+    lines = out.splitlines()
+    assert lines[1].startswith('          if( zh(1,1,k).lt.var8 ) tem1 = 0.0') and c.WIND_ALOFT_MARKER in lines[1]
+    assert lines[3].startswith('          if( zh(1,1,k).lt.var8 ) tem2 = 0.0')
+    assert [x for i, x in enumerate(lines) if i not in (1, 3)] == source.splitlines()   # the held air untouched
+    assert c.BUILD_PATCHES[c.CORRECTED_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] + [c.WIND_ALOFT_PATCH]
+    assert c.BUILDS[c.CORRECTED_BUILD] == c.BUILDS['moon_omp']
+    assert all(c.WIND_ALOFT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != c.CORRECTED_BUILD)
+    # the corrected wind follows the build: none on the old builds, the time scale on the wind's, both on the new one
+    assert c.corrected_wind('moon_omp_rain_law_pbl', 312.69) == {}
+    assert c.corrected_wind('moon_omp_rain_law_pbl_wind_gust', 312.69) == dict(var10=7200.0)
+    assert c.corrected_wind(c.CORRECTED_BUILD, 312.69) == dict(var10=7200.0, var8=312.7)
+    assert c.corrected_wind(c.CORRECTED_BUILD, 312.69, 0.5) == dict(var10=3600.0, var8=312.7)
+    with pytest.raises(ValueError):
+        c.corrected_wind(c.CORRECTED_BUILD, 0.0)
+    assert c.gcm_lowest_level_m(dict(reference=dict(profile=dict(z_m=[2508.9, 1213.5, 312.69])))) == 312.69
+    assert c.gcm_lowest_level_m(dict(reference=None)) == 0.0 and c.gcm_lowest_level_m({}) == 0.0
+    for day in ('day3', 'day4'):
+        case, base = c.CASES[f'box_near_side_sea_l15_aloft_{day}'], c.CASES[f'box_near_side_sea_l15_{day}']
+        assert case['build'] == c.CORRECTED_BUILD and 'restart_namelist' not in case
+        same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'purpose', 'restart_from')}
+        assert same(case) == same(base) and case['restart_from']['day'] == base['restart_from']['day']
+    assert c.CASES['box_near_side_sea_l15_aloft_day3']['restart_from'] == dict(case='box_near_side_sea_l15', day=59.0)
+    assert c.CASES['box_near_side_sea_l15_aloft_day4']['restart_from']['case'] == 'box_near_side_sea_l15_aloft_day3'
+
 def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     name, marker, edits = c.TWILIGHT_PATCH
     assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)
     assert c.BUILD_PATCHES['moon_omp_twilight'] == [c.TWILIGHT_PATCH] and c.BUILDS['moon_omp_twilight'] == c.BUILDS['moon_omp']
     # the rings', Jura's box, and the boxes on the design climate with the rain law (and the boundary layer's fix, the
-    # wind's own nudging time scale and the gust over water at lunar gravity)
+    # wind's own nudging time scale, the gust over water at lunar gravity and the wind pulled from aloft)
     with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight', 'moon_omp_rain_law', 'moon_omp_rain_law_pbl',
-                 'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust'}
+                 'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft'}
     assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label not in with_hook)
     sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
     added = ''.join(new for _, new, _ in sun[2])
@@ -1124,6 +1154,39 @@ def test_a_run_on_with_earth_s_length_changes_the_source_s_namelist_there_alone(
     record = json.loads((case / 'case.json').read_text())
     assert record['configuration']['restart_namelist']['param3'] == dict(l_inf=75.0)
     assert record['restart_from']['restart'] == 15 and record['build']['executable_sha256'] == 'linf'
+
+
+def test_a_run_on_on_the_corrected_build_takes_the_wind_from_the_source_s_lowest_gcm_level(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    monkeypatch.setattr(c, 'apply_rain_limits', lambda case, cfg, g: None)   # the source's limits, written elsewhere
+    build = tmp_path / 'cm1' / 'build' / c.CORRECTED_BUILD
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label=c.CORRECTED_BUILD, executable_sha256='aloft')))
+    source = tmp_path / 'runs' / 'coarse'
+    coarse_run(source)
+    record = json.loads((source / 'case.json').read_text())
+    (source / 'case.json').write_text(json.dumps(dict(record, reference=dict(profile=dict(z_m=[2508.9, 1213.5, 312.69])))))
+    for part in 'isuvwx':
+        (source / f'cm1rst_t000015_{part}.dat').write_text(part)
+    (source / 'progress.json').write_text(json.dumps(dict(segments=[dict(segment=8, model_s=691200.0,
+                                                                          executable='source')])))
+    monkeypatch.setitem(c.CASES, 'aloft', dict(c.CASES['box_near_side_sea_l15_aloft_day3'],
+                                               restart_from=dict(case='coarse', day=7.5), days=14.5))
+    case = c.setup('aloft')
+    text = (case / 'namelist.template').read_text()
+    assert c.namelist_value(text, 'param8', 'var8') == '312.7' and c.namelist_value(text, 'param8', 'var10') == '7200.0'
+    changed = [(a, b) for a, b in zip(FINE_TEMPLATE.splitlines(), text.splitlines()) if a != b]
+    assert [b.split('=')[0].strip() for a, b in changed] == ['var8', 'var10']   # nothing else in the source's namelist
+    record = json.loads((case / 'case.json').read_text())
+    assert record['corrected_wind'] == dict(var10=7200.0, var8=312.7)
+    assert record['reference']['profile']['z_m'][-1] == 312.69                    # carried on for the fourth day
 
 
 def test_the_held_night_with_earth_s_length_takes_it_over_the_source_s(tmp_path, monkeypatch):

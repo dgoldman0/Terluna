@@ -71,6 +71,10 @@ vertical diffusion (fluxmod's vdiff_lamm, 160 m) by the ratio of the gravities, 
 nonlocal boundary layer of pbl_scheme.py in vdiff (pbl_fortran.PBL_PATCHES, fluxmod's nlpbl); a run with either also
 writes the vapour each process gives each layer and the heating of falling precipitation's evaporation (BUDGET), with
 PlaSim's convection slot completed for the Betts-Miller and mass-flux schemes (pbl_fortran.DIAGNOSTIC_PATCHES).
+--surface-gust beljaars adds Beljaars's gust, the convective velocity of the boundary layer's eddies, to the wind in
+PlaSim's surface transfer over every surface, in place of the free-convection term over water and the least wind of
+1 m/s (surface_gust.py; GUST_PATCHES over the nonlocal scheme's patch, whose depth rule it takes); a run with it and
+the moisture diagnostics writes the vapour by process too.
 --sbm-diagnostic-night, a diagnostic and never a configuration, holds the Betts-Miller scheme's deep convection off
 wherever the Sun is down (SBM_NIGHT_PATCHES); a run with it and the moisture diagnostics writes the vapour by process
 too. --large-scale-condensate cloud holds PlaSim's large-scale condensate as cloud water in its layer above freezing,
@@ -96,6 +100,7 @@ from climate.gcm import levels as lv
 from climate.gcm import massflux_fortran as mff
 from climate.gcm import pbl_fortran as pbf
 from climate.gcm import pbl_scheme as pbs
+from climate.gcm import surface_gust as sgf
 from climate.gcm import condensate as cnd
 
 HERE = Path(__file__).resolve().parent
@@ -1574,7 +1579,7 @@ def use_twilight_package():
 def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
                    massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
                    boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
-                   cloud_water: bool = False) -> dict:
+                   cloud_water: bool = False, gust: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1586,7 +1591,9 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     (SBM_NIGHT_PATCHES, over the CAPE trigger's, the depth test's and the cap's patches, with the convection's vapour
     diagnostic), and the switches in PlaSim's namelist (PLASIM_SWITCH_PATCHES) with the humidity's true mean
     (HUS_MEAN_PATCHES) and the cloud water (condensate.CLOUD_WATER_PATCHES, with the convection's vapour diagnostic),
-    for a run that sets them, and return each patched file's hash for the run key."""
+    and Beljaars's gust in the surface transfer (surface_gust.GUST_PATCHES, over the nonlocal boundary layer's patch,
+    with the convection's vapour diagnostic), for a run that sets them, and return each patched file's hash for the
+    run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1597,6 +1604,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
         raise RuntimeError("the starting speed's patch goes over the mass-flux scheme's")
     if boundary_layer and not twilight:
         raise RuntimeError('the boundary-layer patch goes into the twilight copy, over the free-convection patch')
+    if gust and not twilight:
+        raise RuntimeError("the gust's patch goes into the twilight copy, over the boundary-layer patch")
     if night and not twilight:
         raise RuntimeError("the night switch reads the twilight patch's cosine below the horizon; it goes into the "
                            'twilight copy')
@@ -1608,9 +1617,10 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                                 + (mff.MASSFLUX_PATCHES if massflux or boundary_layer or night or cloud_water
                                    else [])
                                 + (mff.START_PATCHES if massflux_start else [])
-                                + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer else [])
-                                + (pbf.PBL_PATCHES if boundary_layer else [])
-                                + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night or cloud_water else [])
+                                + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer or gust else [])
+                                + (pbf.PBL_PATCHES if boundary_layer or gust else [])
+                                + (sgf.GUST_PATCHES if gust else [])
+                                + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night or cloud_water or gust else [])
                                 + (SBM_NIGHT_PATCHES if night else [])
                                 + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
                                 + (HUS_MEAN_PATCHES if humidity_mean else [])
@@ -1704,6 +1714,27 @@ def boundary_layer_setting(choice: str) -> dict:
                          'others 2004, NCAR/TN-464+STR, section 4.11.2; hb_diff.F90); the entrainment flux of Hong, Noh '
                          'and Dudhia (2006), Mon. Wea. Rev. 134, 2318-2341'),
                 code='climate/gcm/pbl_scheme.py (nonlocal_column), as Fortran in climate/gcm/pbl_fortran.py (pblcol)')
+
+
+SURFACE_GUST_CHOICES = ('none', 'beljaars')
+
+
+def surface_gust_setting(choice: str) -> dict:
+    """Beljaars's gust in PlaSim's surface transfer (surface_gust.py, GUST_PATCHES) as the configuration records it:
+    beta w* joins the lowest level's wind in the bulk formulas over every surface, the wind there at least 0.1 m/s, and
+    over water the free-convection term goes; w* comes from the surface fluxes of the step before and the boundary
+    layer's depth by the nonlocal scheme's rule and constants. 'none' is PlaSim's own transfer, left unrecorded."""
+    if choice not in SURFACE_GUST_CHOICES[1:]:
+        raise ValueError(f"the surface gust is set only for 'beljaars' (PlaSim's own transfer is the default), "
+                         f'not {choice!r}')
+    return dict(form=choice, beta=sgf.GUST_BETA, least_wind_m_s=sgf.GUST_UMIN,
+                replaces=dict(free_convection_over_water=sgf.EXOPLASIM_CFREE, least_wind_m_s=sgf.EXOPLASIM_ZUMIN),
+                depth=dict(rule="the nonlocal scheme's bulk Richardson number with the thermals' excess (pblcol)",
+                           parameters=pbf.fortran_values()),
+                fluxes='the surface fluxes of the step before (dshfl, devap, dust3)',
+                sources=('Beljaars (1995), Q. J. R. Meteorol. Soc. 121, 255-270; CM1 sfclay (vconvc 1, least wind '
+                         '0.1 m/s); Fairall and others (2003), J. Climate 16, 571-591'),
+                code='climate/gcm/surface_gust.py (surface_transfer, gust_column; gustnl and gustcol in Fortran)')
 
 
 SBM_DEFAULTS = dict(tau_s=7200.0, rh=0.7, eps=0.0, cin_j_kg=0.0)   # Frierson's 2 h and 70%; the lunar options off
@@ -1863,7 +1894,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
                   cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
                   free_convection=None, mixing_length=None, boundary_layer=None, large_scale_condensate=None,
-                  humidity_mean=False):
+                  humidity_mean=False, surface_gust=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces the
     air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and twilight
     (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the ledger
@@ -1883,7 +1914,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     switch (a diagnostic, SBM_NIGHT_PATCHES), the moisture diagnostics also write the vapour by process (BUDGET);
     large_scale_condensate 'cloud' holds large-scale condensate as cloud water (condensate.py; with the moisture
     diagnostics its own diagnostics and the vapour by process too), and humidity_mean writes the humidity's true mean
-    (HUS_MEAN_PATCHES). Each is recorded when given, and left out the configuration is the one every earlier run had;
+    (HUS_MEAN_PATCHES), and surface_gust 'beljaars' Beljaars's gust in the surface transfer in place of the
+    free-convection term and the least wind (surface_gust_setting; with the moisture diagnostics the vapour by process
+    too). Each is recorded when given, and left out the configuration is the one every earlier run had;
     the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October did, and the 295 K
     fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
@@ -1920,6 +1953,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if large_scale_condensate not in (None, 'cloud'):
         raise ValueError("large_scale_condensate is 'cloud' or None (PlaSim's own: rain at once)")
     cloud = large_scale_condensate == 'cloud'
+    if surface_gust is not None and free_convection is not None:
+        raise ValueError("the gust drops the free-convection term over water; set one of them")
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'),
                source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
@@ -1929,7 +1964,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      massflux_start=uses_massflux_start(convection),
                                      boundary_layer=mixing_length is not None or boundary_layer is not None,
                                      night=uses_night_switch(convection), humidity_mean=bool(humidity_mean),
-                                     cloud_water=cloud),
+                                     cloud_water=cloud, gust=surface_gust is not None),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -1966,6 +2001,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['mixing_length'] = mixing_length_setting(mixing_length, planet['gravity_m_s2'])
     if boundary_layer is not None:
         cfg['boundary_layer'] = boundary_layer_setting(boundary_layer)
+    if surface_gust is not None:
+        cfg['surface_gust'] = surface_gust_setting(surface_gust)
     if cloud:
         cfg['large_scale_condensate'] = cnd.setting()
     if humidity_mean:
@@ -1992,7 +2029,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
             raise ValueError('the moisture diagnostics come with the heating diagnostics, which need --heating-diagnostics')
         cfg['moisture_diagnostics'] = True
         cfg['output'] = cfg['output'] + [name for name, _ in MOISTENING.values()] + ['wap']
-        if mixing_length is not None or boundary_layer is not None or uses_night_switch(convection) or cloud:
+        if (mixing_length is not None or boundary_layer is not None or uses_night_switch(convection) or cloud
+                or surface_gust is not None):
             cfg['budget_diagnostics'] = sorted(BUDGET)
             cfg['output'] = cfg['output'] + [name for name, _, _ in BUDGET.values()]
         if cloud:
@@ -2292,6 +2330,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         model._edit_namelist('fluxmod_namelist', 'NLPBL', '1')
         for name, value in cfg['boundary_layer']['parameters'].items():
             model._edit_namelist('fluxmod_namelist', name.upper(), repr(float(value)))
+    if 'surface_gust' in cfg:
+        model._edit_namelist('fluxmod_namelist', 'NGUST', '1')
+        model._edit_namelist('fluxmod_namelist', 'GUST_BETA', repr(float(cfg['surface_gust']['beta'])))
+        model._edit_namelist('fluxmod_namelist', 'GUST_UMIN', repr(float(cfg['surface_gust']['least_wind_m_s'])))
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
@@ -2501,14 +2543,15 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         rain_evaporation: float | None = None, moisture: bool = False, convection: dict | None = None,
         levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
         boundary_layer: str | None = None, large_scale_condensate: str | None = None,
-        humidity_mean: bool = False) -> int:
+        humidity_mean: bool = False, surface_gust: str | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
                         ice_weights=ice_weights, cold_cloud=cold_cloud, rain_evaporation=rain_evaporation,
                         moisture=moisture, convection=convection, levels=levels, free_convection=free_convection,
                         mixing_length=mixing_length, boundary_layer=boundary_layer,
-                        large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean)
+                        large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean,
+                        surface_gust=surface_gust)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -2692,6 +2735,10 @@ def main(argv=None) -> int:
     parser.add_argument('--boundary-layer', choices=BOUNDARY_LAYER_CHOICES, default='local',
                         help="PlaSim's local vertical diffusion alone, or the nonlocal boundary layer beneath it "
                              '(pbl_scheme.py; pbl_fortran.PBL_PATCHES; part of the run key)')
+    parser.add_argument('--surface-gust', choices=SURFACE_GUST_CHOICES, default='none',
+                        help="Beljaars's gust, the boundary layer's convective velocity, added to the wind in PlaSim's "
+                             'surface transfer over every surface in place of the free-convection term over water and '
+                             'the least wind of 1 m/s (surface_gust.py; GUST_PATCHES; part of the run key)')
     parser.add_argument('--large-scale-condensate', choices=('rain', 'cloud'), default='rain',
                         help="what PlaSim's large-scale condensation makes of its condensate: rain at once, as "
                              'PlaSim does, or cloud water held in its layer above freezing, evaporated where the air '
@@ -2761,7 +2808,8 @@ def main(argv=None) -> int:
                None if args.free_convection == 'earth' else args.free_convection,
                None if args.mixing_length == 'earth' else args.mixing_length,
                None if args.boundary_layer == 'local' else args.boundary_layer,
-               None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean)
+               None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean,
+               None if args.surface_gust == 'none' else args.surface_gust)
 
 
 if __name__ == '__main__':

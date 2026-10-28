@@ -436,7 +436,8 @@ class RunnerTests(unittest.TestCase):
         self.assertTrue(all(len(line) <= 132 for _, new in er.FREE_CONVECTION_EDITS for line in new.splitlines()))
         source = er.TWILIGHT_PACKAGE / 'exoplasim' / 'plasim' / 'src' / 'fluxmod.f90'
         if source.exists():                                           # each anchor once, before or after the patch
-            text = source.read_text()
+            from climate.tests.test_pbl_fortran import before_later_patches
+            text = before_later_patches(source.read_text())           # as this patch left it, the later ones undone
             patched = er.FREE_CONVECTION_MARKER in text
             for old, new in er.FREE_CONVECTION_EDITS:
                 self.assertEqual(text.count(new if patched else old), 1)

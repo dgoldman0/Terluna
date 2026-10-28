@@ -46,11 +46,26 @@ def with_free_convection(text):
     return apply(text, er.FREE_CONVECTION_EDITS, er.FREE_CONVECTION_MARKER)
 
 
+def undo(text, edits, marker):
+    """The text as it stood before a patch: its edits undone, the last first, where the text carries it."""
+    if marker not in text:
+        return text
+    for old, new in reversed(edits):
+        assert text.count(new) == 1, new[:60]
+        text = text.replace(new, old)
+    return text
+
+
+def before_later_patches(text):
+    """The shared source as the free-convection patch left it: the surface gust's patch, which goes over this one, and
+    this one undone where the source carries them."""
+    from climate.gcm import surface_gust as sg
+    return undo(undo(text, sg.GUST_EDITS, sg.GUST_MARKER), pbf.PBL_EDITS, pbf.PBL_MARKER)
+
+
 def unpatched(text):
     """The shared source as it stood before this patch: the free-convection patch on, this one off."""
-    if pbf.PBL_MARKER in text:
-        pytest.skip('the shared source already carries the patch; the unpatched text is not at hand')
-    return with_free_convection(text)
+    return with_free_convection(before_later_patches(text))
 
 
 def patched(text):

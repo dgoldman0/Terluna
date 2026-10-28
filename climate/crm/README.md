@@ -2704,9 +2704,12 @@ The vapour is a mixing ratio; the GCM's columns are its 3-day means at the six c
 **What it changes.** Every CM1 run over water so far, the rings and boxes among them, took MM5's gust over the sea, and
 every box forced by local time took the 3-day relaxation of its wind; both bear on their evaporation, in opposite
 directions. The box with both corrections is the nearest CM1 stands to the GCM's own forcing with lunar surface physics:
-on it the night's agreement with the GCM holds and the late evening's gap remains. Open, at the author's word: taking
-the two corrections into the boxes and rings that follow; PlaSim's light-wind term (the lunar constant, a Beljaars gust
-or neither); and the vertical carrying of the low air's heat and vapour as the late evening's next question.
+on it the night's agreement with the GCM holds and the late evening's gap remains. The two corrections became the
+defaults for the boxes and rings that follow, the wind's pull starting at the GCM's lowest level (register, 28
+October; [the next section](#the-sea-box-on-the-corrected-build-its-wind-pulled-from-the-gcms-lowest-level-up-28-october));
+PlaSim took Beljaars's gust for a four-year test
+([the GCM's account](../gcm/README.md#beljaarss-gust-in-plasims-surface-transfer-over-four-years-28-october)); and
+the vertical carrying of the low air's heat and vapour is the late evening's next question.
 
 **Evidence and limits.** One realization of each box over two lunar days from the day-59 restart, whose first day
 carries the box's earlier state, forced by four years of a GCM still settling. The boxes hold the sea at 301.02 K, so
@@ -2729,6 +2732,36 @@ climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea_l15_wind_
 climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_l15_wind_gust_day4 88.5 118   # and _wind_day4
 climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_wind_gust_day4 --from-day 88.5
 ```
+
+### The sea box on the corrected build: its wind pulled from the GCM's lowest level up (28 October)
+
+The wind's own time scale and Beljaars's gust over water became the defaults for the boxes and rings that follow
+(register, 28 October), and the wind took one more change first. Below the GCM's lowest level, 313 m over the sea site,
+the boxes' wind targets are that level's wind held to the ground (`gcm_site.wind_windows`), and a ring's targets are
+held the same way. On 3 days the pull hardly reached the box's surface layer. On 2 hours it set the lowest levels
+against their own drag: in the gust box's fourth day the 50 m wind stood at 0.92–0.98 of the 0.3 km wind (domain-mean
+vector winds, by quarter), against 0.90–0.92 in the box as first run, although a stronger wind should leave the air
+near the ground further behind, the air less unstable and the sea rougher.
+
+**The build** (`WIND_ALOFT_PATCH`, the build `moon_omp_rain_law_pbl_wind_gust_aloft`, `CORRECTED_BUILD`). With `var8`
+above 0 it pulls the wind only at levels from `var8` m up and leaves the levels below to the box's own surface layer and
+turbulence; with `var8` at CM1's default of 0 it runs as the gust build. A case on it takes the corrected wind unless its
+namelist sets otherwise (`corrected_wind`): `var10` 2 hours and `var8` the GCM's lowest level from the case's reference
+profile, in a fresh set-up and in a run on from a restart alike. Over the sea site that level stands at 312.7 m, so
+CM1's levels at 50, 150 and 250 m are the box's own.
+
+**The trials**, each read by a rule set before it ran (`rules.txt` part A beside the runs; `trial_aloft.py`). From the
+day-59 restart on three threads:
+- With `var8` 0 the build repeats the gust build bit for bit in all 16 files a three-hour trial writes.
+- With `var8` 312.7 m the 50 m wind falls to 0.92–0.93 of the 0.3 km wind, against 1.00–1.02 with the pull to the
+  ground.
+- The three-hour rule also asked that the wind at 0.3 and 1 km come within 10% of the gust build's. At 0.3 km it fell
+  12% short, so that rule failed as written: the free levels are mixed with the pulled ones, the surface's drag reaches
+  both, and three hours from a 1.4 m/s start are still far from steady. A 24-hour pair, read by a rule set before it
+  ran, narrowed the gap to 8% at 0.3 km and 2% at 1 km and held there from day 59.6, the 50 m wind staying below the
+  full pull's: it passed. Over that first day both builds level off below their targets, the full pull at 0.82–0.84 of
+  its target at 0.3 km and the pull from 313 m at 0.74–0.76, and the evaporation runs 9% lower with the levels below
+  left free.
 
 ## A box over the highlands
 

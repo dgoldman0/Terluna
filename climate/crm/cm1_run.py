@@ -1382,6 +1382,53 @@ GUST_PATCH = ('sfclay.F', GUST_MARKER, [
      '        fluxc = max(hfx(i)/rhox(i)/cp                    &\n', 1)])
 BUILDS['moon_omp_rain_law_pbl_wind_gust'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] = BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] + [GUST_PATCH]
+# The wind pulled from the GCM's lowest level up (register, 28 October). Below the GCM's lowest level, 313 m over the
+# sea site, a box's wind targets are that level's wind held to the ground (gcm_site.wind_windows), and a ring's the
+# same (np.interp keeps the lowest value). On 3 days the pull hardly reached the box's surface layer; on 2 hours it set
+# the lowest levels against their own drag, and the sea box's 50 m wind rose from 0.90-0.92 of its 0.3 km wind to
+# 0.92-0.98, where a stronger wind should leave the air near the ground further behind. With var8 > 0 this build pulls
+# the wind only at levels from var8 m up, leaving those below to the box's own surface layer and turbulence; with var8
+# at CM1's default of 0 it runs as moon_omp_rain_law_pbl_wind_gust.
+WIND_ALOFT_MARKER = 'Terluna: the wind pulled from var8 m up'
+WIND_ALOFT_PATCH = ('solve1.F', WIND_ALOFT_MARKER, [
+    ('          tem1 = -lsnudgefac*( (umove+uavg(k))-lsnudge_u(k,lsnudge_count) )/(terluna_tau_uv)\n',
+     '          tem1 = -lsnudgefac*( (umove+uavg(k))-lsnudge_u(k,lsnudge_count) )/(terluna_tau_uv)\n'
+     f'          if( zh(1,1,k).lt.var8 ) tem1 = 0.0   ! {WIND_ALOFT_MARKER}\n', 1),
+    ('          tem2 = -lsnudgefac*( (vmove+vavg(k))-lsnudge_v(k,lsnudge_count) )/(terluna_tau_uv)\n',
+     '          tem2 = -lsnudgefac*( (vmove+vavg(k))-lsnudge_v(k,lsnudge_count) )/(terluna_tau_uv)\n'
+     '          if( zh(1,1,k).lt.var8 ) tem2 = 0.0   ! Terluna: the levels below var8 m left to the box\n', 1)])
+BUILDS['moon_omp_rain_law_pbl_wind_gust_aloft'] = BUILDS['moon_omp']
+BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust_aloft'] = (BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust']
+                                                          + [WIND_ALOFT_PATCH])
+# The corrected wind and gust are the defaults for the boxes and rings that follow (register, 28 October): a case on
+# CORRECTED_BUILD takes the wind's own time scale and the height its pull starts from (corrected_wind) unless its
+# namelist sets them.
+CORRECTED_BUILD = 'moon_omp_rain_law_pbl_wind_gust_aloft'
+WIND_TAU_S = 7200.0
+
+
+def corrected_wind(build: str, gcm_lowest_m: float, scale: float = 1.0) -> dict:
+    """The &param8 entries of the corrected wind on a build that carries it: var10, the wind's own nudging time scale
+    (WIND_TAU_S, 2 hours), on builds with WIND_TAU_PATCH; var8, the height (m) its pull starts from, the GCM's lowest
+    level, on builds with WIND_ALOFT_PATCH. scale is the case's factor on lengths and times (time_scale)."""
+    patches = BUILD_PATCHES.get(build, [])
+    out = {}
+    if WIND_TAU_PATCH in patches:
+        out['var10'] = round(WIND_TAU_S * scale, 3)
+    if WIND_ALOFT_PATCH in patches:
+        if not gcm_lowest_m > 0.0:
+            raise ValueError(f"the wind's pull starts at the GCM's lowest level, not at {gcm_lowest_m} m")
+        out['var8'] = round(float(gcm_lowest_m), 1)
+    return out
+
+
+def gcm_lowest_level_m(record: dict) -> float:
+    """The GCM's lowest level (m above the ground) in a case's record, from its reference profile (top first), or 0 when
+    the record holds none."""
+    z = ((record.get('reference') or {}).get('profile') or {}).get('z_m') or []
+    return float(z[-1]) if z else 0.0
+
+
 RAIN_LAW_PRODUCT = 'atmosphere/rain/results/rain_fall_law.json'
 RAIN_LAW_SCHEMA = 'terluna.atmosphere.rain-fall-law/1'
 RAIN_LAW_KEYS = ('rain_fall_law', 'rain_selfcoll')
@@ -1886,7 +1933,6 @@ for _tag, _refine, _columns in (('6km', 1, 32), ('3km', 2, 64), ('2km', 3, 64)):
 # 2 hours, a tenth of a window of local time, the time scale on which cloud-resolving runs forced by observations
 # relax their mean wind (Khairoutdinov, Randall and DeMott 2005). Everything else is the day-3 and day-4 runs': the
 # inputs, the forcing, the held air on 3 days, the physics and the output.
-WIND_TAU_S = 7200.0
 CASES['box_near_side_sea_l15_wind_day3'] = dict(
     CASES['box_near_side_sea_l15_day3'], build='moon_omp_rain_law_pbl_wind',
     restart_namelist=dict(param8=dict(var10=WIND_TAU_S)),
@@ -1906,6 +1952,19 @@ for _day in ('day3', 'day4'):
         purpose=CASES[f'box_near_side_sea_l15_wind_{_day}']['purpose'] + ', and the gust over water at lunar gravity')
 CASES['box_near_side_sea_l15_wind_gust_day4']['restart_from'] = dict(case='box_near_side_sea_l15_wind_gust_day3',
                                                                      day=88.5)
+# The sea box on the corrected build (register, 28 October): its third and fourth lunar days again from the day-59
+# restart, as the gust cases run them, with the wind pulled only from the GCM's lowest level up. The build's defaults
+# (corrected_wind) set the wind's 2 hours and the pull's start, the source's lowest GCM level, 312.7 m, so CM1's levels
+# at 50, 150 and 250 m are left to the box.
+CASES['box_near_side_sea_l15_aloft_day3'] = dict(
+    CASES['box_near_side_sea_l15_day3'], build=CORRECTED_BUILD,
+    purpose=CASES['box_near_side_sea_l15_day3']['purpose'] + "; again with its mean wind relaxed toward the GCM's on "
+            "2 hours from the GCM's lowest level up, and the gust over water at lunar gravity")
+CASES['box_near_side_sea_l15_aloft_day4'] = dict(
+    CASES['box_near_side_sea_l15_day4'], build=CORRECTED_BUILD,
+    restart_from=dict(case='box_near_side_sea_l15_aloft_day3', day=88.5),
+    purpose=CASES['box_near_side_sea_l15_day4']['purpose'] + "; again with its mean wind relaxed toward the GCM's on "
+            "2 hours from the GCM's lowest level up, and the gust over water at lunar gravity")
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -2975,6 +3034,9 @@ def setup_restart(name: str, cfg: dict) -> Path:
     text = (source / 'namelist.template').read_text()
     if abs(cfg['output_s'] - src['configuration']['output_s']) > 0.5:   # a window may write output more often;
         text = set_namelist(text, 'param1', 'tapfrq', cfg['output_s'] * scale)   # CM1 resets its schedule on restart
+    wind = corrected_wind(cfg['build'], gcm_lowest_level_m(src) * scale, scale)
+    for key, value in wind.items():                                          # the build's corrected wind, unless
+        text = set_namelist(text, 'param8', key, value)                     # the case's own changes set it
     for section, entries in (cfg.get('restart_namelist') or {}).items():    # the case's own changes to the source's
         for key, value in entries.items():                                   # namelist (no earlier case sets any)
             text = set_namelist(text, section, key, value)
@@ -2999,7 +3061,7 @@ def setup_restart(name: str, cfg: dict) -> Path:
     digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
     windows_written = tuple(f'lsnudge_{k:04d}.dat' for k in range(2, windows['windows'] + 1)) if windows else ()
     record = dict(src, case=name, purpose=cfg['purpose'], inputs_from=None, configuration=dict(cfg),
-                  build=build_record, electricity=electricity, rain_limits=rain,
+                  build=build_record, electricity=electricity, rain_limits=rain, corrected_wind=wind or None,
                   restart_from=dict(case=fr['case'], day=fr['day'], restart=n, model_s=n * restart_s,
                                     made_by=made.get('executable')),
                   **({'nudging_wind': dict(src.get('nudging_wind') or {}, **windows)} if windows else {}),
@@ -3436,6 +3498,8 @@ def setup(name: str) -> Path:
         path.symlink_to(target)
     text = (tree / 'run' / 'config_files' / 'cpm_RadConvEquil' / 'namelist.input').read_text()
     settings = case_settings(cfg, nx, dx, nz, zw[-1], air, gravity)
+    wind = corrected_wind(cfg['build'], float(zg[0]), s)                 # the build's corrected wind (the case's own
+    settings['param8'].update(wind)                                       # namelist, applied below, may change it)
     settings['param12'].update(tsk0=round(ref['sea_surface_k'], 3), tmn0=round(ref['land_ground_k'], 3), xland0=2.0, lu0=16)
     for section, entries in settings.items():
         for key, value in entries.items():
@@ -3472,7 +3536,7 @@ def setup(name: str) -> Path:
                   terrain=terrain if cfg.get('terrain') else None,
                   electricity=electricity,
                   twilight=twilight,
-                  rain_limits=rain, rain_law=rain_law, nudging_wind=nudging_wind,
+                  rain_limits=rain, rain_law=rain_law, nudging_wind=nudging_wind, corrected_wind=wind or None,
                   gcm_site=gcm_site_record(site['forcing']) if box and site.get('forcing') else None,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',

@@ -3820,8 +3820,8 @@ evaporation from 3.42 to 3.21 mm/day and keeps the late evening quiet, while the
 **Evidence and limits.** One four-year run of each, from one restart, both still settling by 0.3–0.5 K a year. The
 transfer factors are computed on 3-day means, which smooth the wind the model works on and so overstate the term; the
 GCM's 10 m wind from its components' means understates its speed. The lunar constant scales the tank law alone; the
-gust's scalings use CM1's domain means. Whether the lunar constant, a Beljaars gust or neither suits PlaSim is the
-author's call.
+gust's scalings use CM1's domain means. PlaSim took Beljaars's gust for a four-year test (register, 28 October;
+[the next section](#beljaarss-gust-in-plasims-surface-transfer-over-four-years-28-october)).
 
 ```sh
 W=/media/projectspace/terluna-research/session-tools/wind_fc
@@ -3831,6 +3831,114 @@ climate/gcm/.venv/bin/python $W/bit_check.py A28R_301k_cold_sbm_rh07_deep200_l15
 climate/gcm/.venv/bin/python $W/fc_compare.py                                   # the globe, the site and the rule
 climate/gcm/.venv/bin/python $W/light_wind.py A28R_301k_cold_sbm_rh07_deep200_l15cap_cwsource:0-3 \
     A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc_cwsource:0-3                  # both models' light-wind factors
+```
+
+#### Beljaars's gust in PlaSim's surface transfer over four years (28 October)
+
+Both models carried a light-wind term calibrated on Earth over water. CM1 now takes Beljaars's gust there, and PlaSim
+takes the same physics in place of its free-convection term (register, 28 October). In light winds under a convective
+boundary layer the layer's large eddies sweep the surface air at about their convective velocity w*, and the surface
+exchange behaves as if under that wind. Beljaars (1995), a co-author of the 1992 interpolation, put that velocity into
+the bulk formulas, its coefficient set from large-eddy simulations and checked against field data, over smooth sea and
+rough land alike. ECMWF's model and the COARE ocean-flux algorithm (Fairall and others 2003) take that form, and CM1's
+surface layer takes it over land. The tank law behind the 1992 constant describes a heated plate under still fluid,
+where a thin layer at the surface limits the exchange and nothing deeper stirs the air; its lunar scaling is right for
+that law, but the law describes another regime. Every world-dependent quantity enters the gust explicitly (gravity, the
+boundary layer's depth and buoyancy flux), so it carries to other worlds once the depth comes from the model, where
+PlaSim's constant has Earth's gravity, air density and molecular properties built into its 0.0016.
+
+**The patch** ([surface_gust.py](surface_gust.py); `GUST_PATCHES`, behind fluxmod's namelist switch `ngust`, over the
+nonlocal scheme's patch with that scheme left off, `nlpbl` 0). With `ngust` 1 the wind in surflx's bulk formulas is
+√(|U|² + (β w*)²), at least 0.1 m/s, with β 1 and the least wind as in CM1's sfclay; w* = (g/θ_v · h · B)^1/3 in unstable
+air and none in stable air. The buoyancy flux B comes from the surface fluxes of the step before, as CM1's surface layer
+takes them, and the depth h from the nonlocal scheme's rule: the bulk Richardson number from the lowest level up, B u*²
+in its shear, zero at h for a parcel carrying the thermals' excess. The Richardson number takes the gusty wind, and over
+water as over land the transfer of heat and vapour takes Louis's unstable factor, the free-convection term dropped. PlaSim's
+least wind, `zumin`, keeps its other use, the least wind shear in the vertical diffusion, so the mixing aloft is
+untouched. The runner's `--surface-gust beljaars` records the gust and writes its namelist, refuses it with
+`--free-convection lunar`, and with the moisture diagnostics writes the vapour by process.
+
+**The checks** ([test_surface_gust.py](../tests/test_surface_gust.py)). PlaSim's surflx with the patch, compiled with
+ExoPlaSim's flags against a stub of its module, gives the Python copy's transfer coefficients for heat and momentum to
+1e-10, on lunar columns on fifteen and forty levels and Earth-like ones on ten. The columns cover the sea unstable, calm,
+windy and stable and with the last step's fluxes downward under unstable air, and the land by a convective day, in a
+calm stable night and in neutral air, each with the gust and with either free-convection constant. With the switch off,
+the patched surflx prints every digit the unpatched one prints. The gust's depth and w* are the nonlocal scheme's to
+1e-12. The patched fluxmod.f90 compiles with PlaSim's modules on fifteen levels.
+
+**The run.** `A28R_301k_cold_sbm_rh07_deep200_l15cap_gust_cwsource` takes the fifteen-level baseline's flags with
+`--surface-gust beljaars` for four years from the same restart, beside the baseline's four and the lunar constant's.
+It ran in 34 minutes on four cores, beside a CM1 box on two threads. Its first year served as the smoke test: every field
+finite, its fluxmod namelist with `NGUST = 1`, its site's transfer coefficient down by a third.
+
+**The rules, set before the run was read** (`rules.txt` part C beside the run). C1, the method: the site's transfer
+coefficient for vapour, C_E = E / (ρ |U| (q_s − q_1)) on each 3-day mean, falls to 0.45–0.75 of the baseline's and below
+the lunar run's. C2, the late evening: rain at 135° to midnight of at most 1.95 mm/day would mean the light-wind term as
+PlaSim had it carries a material part of that rain; within 0.5 of the baseline's 2.93, none the years show. C3, the low
+air: a fall in the site's vapour at 0.3 km by day of at least 1.21 g/kg, half the 2.42 g/kg gap to the gust box, would
+mean the light-wind term accounts for most of that gap; at most 0.60, little of it. C4, the long night over land: the
+night-side land's ground within 0.5 K of the baseline's would mean that dropping the least wind in stable air leaves the
+land nights as they were; 2 K or more, that it matters. C5, the exobase's inputs: the top two levels within 0.5 K and
+10% in vapour of the baseline's would mean the exobase stays as the 14 October check left it, read for the lunar
+constant too, which went without that check.
+
+| Four years, from the same restart | Baseline (Earth constant) | Lunar constant | Beljaars's gust |
+|---|---|---|---|
+| Globe: ground by year, K | 298.10, 297.53, 297.15, 296.87 | 298.17, 297.65, 297.30, 297.02 | 298.28, 297.90, 297.64, 297.42 |
+| Globe: imbalance at the top; rain; cloud cover, four-year means | −2.98 W/m²; 2.137 mm/day; 35.2% | −2.73; 2.087; 35.4% | −2.10; 2.006; 35.3% |
+| Globe: ground where a line through the imbalance reaches zero, K | 295.7 | 295.6 | 296.4 |
+| Globe: the night-side land's ground; the top two levels (σ 0.038, 0.119), K and ppmv | 294.15; 165.43, 190.99 K, 0.032, 2.13 ppmv | 293.96; 165.26, 190.81; 0.031, 2.06 | 293.96; 165.15, 190.80; 0.029, 2.04 |
+| Site: transfer coefficient for vapour, C_E | 0.00150 | 0.00117 | 0.00100 |
+| Sea's surface by quarter from sunrise, K | 300.77, 301.32, 301.16, 300.84 | 301.43, 301.97, 301.82, 301.48 | 302.02, 302.54, 302.37, 302.08 |
+| Evaporation by quarter; daily mean, mm/day | 3.61, 4.54, 3.50, 3.37; 3.75 | 3.34, 4.67, 3.20, 3.12; 3.58 | 3.23, 4.87, 2.88, 2.71; 3.41 |
+| Sensible heat by quarter, W/m² | 8.9, 4.4, 5.2, 9.1 | 10.0, 7.1, 6.9, 10.4 | 10.4, 8.8, 7.2, 9.6 |
+| Air at 0.3 km by quarter, K | 298.83, 300.24, 299.66, 298.72 | 298.90, 300.35, 299.67, 298.69 | 299.05, 300.59, 299.78, 298.85 |
+| Vapour at 0.3 km by quarter, g/kg | 12.36, 12.11, 11.93, 12.29 | 11.99, 11.62, 11.77, 12.08 | 11.87, 11.59, 11.62, 12.02 |
+| Rain by quarter; daily mean, mm/day | 0.15, 1.71, 3.02, 2.18; 1.78 | 0.20, 1.18, 2.40, 1.72; 1.38 | 0.14, 1.46, 2.81, 1.15; 1.40 |
+| Rain at 60–75°, 75–90°, 90–105°, 105–120°, 120–135°, mm/day | 2.47, 4.90, 4.67, 2.73, 1.89 | 1.38, 4.13, 2.28, 1.84, 2.03 | 2.27, 4.20, 4.02, 2.73, 2.20 |
+| Rain at 135–150°, 150–165°, 165–180°, mm/day | 2.82, 2.29, 3.64 | 2.94, 2.86, 2.47 | 2.04, 3.70, 2.20 |
+| Late evening, 135–180°: four years; by year, mm/day | 2.93; 2.74, 2.90, 3.08, 3.00 | 2.76; 2.18, 3.12, 2.13, 3.54 | 2.62; 1.88, 2.62, 3.89, 2.17 |
+
+The site's values are the 3-day means at the six cells the box's forcing comes from, weighted by the cosine of latitude
+and binned by the site's hour angle; the air at 0.3 km is laid on the box's heights, the vapour a mixing ratio. The
+night-side land is every land cell whose 3-day mean has the Sun down; the top levels are global means.
+
+**By the rules.** C1 holds: C_E falls to 0.67 of the baseline's, against the lunar constant's 0.78. C2: the late
+evening rains 2.62 mm/day, within the years' spread of the baseline's 2.93, so the light-wind term carries none of that
+rain the years can show. C3: the low air's vapour by day falls 0.51 g/kg, little of the gap to the box. C4: the
+night-side land's ground moves −0.19 K, as with the lunar constant, which leaves the land alone, so the land nights stay
+as they were. C5 holds for both runs: the top two levels move at most 0.28 K and 8% in vapour with the gust, 0.18 K and
+4% with the lunar constant, so the exobase stays as the 14 October check left it.
+
+**What it shows** (an interpretation of the runs above).
+- **The gust removes most of the Earth boost, and the sea answers by warming.** The transfer falls a third, the sea warms
+  1.2 K at every hour, and the wider contrast keeps the evaporation within 9% of the baseline's: 3.41 mm/day, 6% above
+  the corrected box's 3.21.
+- **The low air's gap lies elsewhere.** With both models on Beljaars's gust, the GCM's air at 0.3 km stays 1.0–2.8 g/kg
+  moister by day than the box's, its evaporation within 6%. The surface exchange explains little of that gap; how each
+  model carries vapour up from its lowest layers is the next question, and the gust run writes the vapour by process
+  for it.
+- **The night's agreement rested on the Earth term.** After midnight the GCM now rains 1.15 mm/day against the box's
+  2.30, at evaporation within 4% of the box's (2.71 against 2.61). With the same surface physics the two models rain
+  alike over the lunar day (1.40 against 1.14 mm/day) at different hours. The GCM rains 1.5–2.4 times the box's from
+  noon to midnight and half of it after midnight, as though its convection spends in the evening what CM1's holds until
+  after midnight.
+- **The globe warms.** Year by year the run is 0.18–0.55 K warmer than the baseline, rains 6% less and stands 0.9 W/m²
+  nearer balance; the line through its imbalance reaches zero at 296.4 K against 295.7. At the design sunlight the gust
+  would settle the Moon some 0.7 K warmer, so adopting it would rebalance the design climate's sunlight.
+
+**Evidence and limits.** One four-year run from one restart, still settling by 0.3–0.4 K a year. C_E comes from 3-day
+means with the year files' interval-start humidity, the same in each run. The gust's depth follows the nonlocal scheme's
+rule, untested here against CM1's depths; β is CM1's 1, where COARE takes 1.25; and the buoyancy flux is the step
+before's. The site is six cells of 3-day means. Whether PlaSim's configuration takes the gust, and with it a rebalanced
+sunlight, is open.
+
+```sh
+W=/media/projectspace/terluna-research/session-tools/gust_aloft
+python3 -m pytest climate/tests/test_surface_gust.py                           # the Fortran against the Python copy
+$W/runs_gust.sh                                                                 # 34 minutes on four cores
+climate/gcm/.venv/bin/python $W/smoke_year0.py                                   # year 0 against the baseline's
+climate/gcm/.venv/bin/python $W/gust_compare.py                                  # the three runs and part C's readings
 ```
 
 ### Cloud amount: what published models say
