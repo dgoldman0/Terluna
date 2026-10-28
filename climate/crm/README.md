@@ -2356,7 +2356,7 @@ same parcel, from the lowest 0.5 km mixed and undiluted, was raised through both
 at each 3-hourly output and the GCM's own 3-day means at the six cells, laid on the box's levels by height. PlaSim's
 Betts–Miller scheme, with the run's settings (reference humidity 0.7, no mixing, no inhibition limit, the 200 hPa depth
 test and the shallow cap), was applied at once to both on the run's fifteen levels. By quarter, the box's third and
-fourth lunar days and the GCM's four years:
+fourth lunar days and the GCM's four years, the GCM's rain here from its 3-day means binned by the site's hour angle:
 
 | | CM1's rain, mm/day | Parcel on CM1's air: CAPE; inhibition, J/kg | The scheme on CM1's air: deep share; rain at once, mm/day | The GCM's rain (convective), mm/day | Parcel on the GCM's columns: CAPE; inhibition, J/kg |
 |---|---|---|---|---|---|
@@ -2376,8 +2376,8 @@ fourth lunar days and the GCM's four years:
 So on the same air the scheme's timing runs opposite to resolved convection's. It answers the vapour above its
 reference whatever the inhibition, its limit on inhibition being off, while CM1's convection answers instability
 released where the inhibition vanishes (an interpretation). The GCM's evening rain, 2.81 mm/day of it convective,
-fits the first. Its night rain comes from its own columns, held near its reference, so the two models' nights agree
-in amount by different routes.
+fits the first. Its night rain comes from its own columns, held near its reference, so the two models' nights come
+close in amount by different routes.
 
 **What this changes.** The sea's night gap that the accounts since 24 October chased came largely with the Kuo run's
 circulation. Under the fifteen-level GCM's own circulation CM1 rains through the night at 71–82% of the GCM's rate, so
