@@ -62,7 +62,7 @@ BOUND = {
                            sha256="9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148"),
     "provisioning_decisions": dict(path="research/decisions.md", schema=None, branch="main",
                                    commit=None,
-                                   sha256="9e46cb06aa53e6fcffe500a16383207cb09922ad9e4238fed6bda8c713475390"),
+                                   sha256="060a9a9ed34af1f97f91c5ce18469342e85835e291f4e73ebd53b1407071fe6b"),
 }
 # Held unbound: provisioning's food-systems study, in the tree since 12 October, reads this product, so binding its
 # per-system phosphorus back would close a loop; the systems below stand alone, on the per-person loss the food study

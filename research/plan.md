@@ -443,11 +443,17 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      evaporates within 2–16% of the GCM with the lunar free-convection constant, its late evening stays quiet
      (0.11 mm/day) and its night rains as the GCM's does (2.30 against 2.28), while its low air stays 1.2–2.8 g/kg
      drier by day, which points to how the two models carry heat and vapour up from the lowest layers. The lunar
-     constant carries none of the GCM's late-evening rain; it warms the sea 0.65 K and trims the site's rain 22%. Open,
-     the author's choice: settling the fifteen-level configuration with the evening's difference stated; the corrected
-     wind and gust for the boxes and rings that follow; PlaSim's light-wind term (the lunar constant, a Beljaars gust
-     or neither); the vertical carrying of the low air before any GCM test; the land box forced by the same GCM; no
-     Jura box until the models agree. Then surface and radiation feedbacks, a longwave refit on the chosen
+     constant carries none of the GCM's late-evening rain; it warms the sea 0.65 K and trims the site's rain 22%. The
+     corrected wind and gust are the defaults for the boxes and rings that follow, the wind pulled only from the GCM's
+     lowest level up (register, 28 October). PlaSim with Beljaars's gust in place of its free-convection term and least
+     wind settles some 0.7 K warmer at the same sunlight and still rains in the late evening (2.62 mm/day), while after
+     midnight it rains 1.15 mm/day against the corrected box's 1.89: on the same surface physics the two models rain
+     alike over the day at different hours, the GCM in the evening and CM1 after midnight. The low air's gap lies in
+     the columns' vapour, not in the boundary layer's carrying, and the box's forcing exports about 0.5 mm/day more
+     vapour than the GCM's circulation, a lead to check. Open, the author's choice: PlaSim's configuration taking the
+     gust, with its sunlight rebalanced; checking the box's forcing export, then a box forced by the GCM with the gust;
+     settling the fifteen-level configuration with the evening's difference stated; the land box forced by the same
+     GCM; no Jura box until the models agree. Then surface and radiation feedbacks, a longwave refit on the chosen
      configuration and a 15-year run. The depth test's 15-year run is held. The climate work's readers take the year
      files' humidity as interval means (register, 27 October); the climatology, the cross-domain extracts and the
      rings' readers still take it as it stands.
