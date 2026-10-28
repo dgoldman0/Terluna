@@ -17,10 +17,12 @@ lowest 100 m.
 
 The water: the column's vapour by CM1's own budget terms (rho times each, level by level, in mm/day), the table's
 prescribed moistening reckoned as for the heat, against the evaporation, the rain and the change of the column's
-vapour and condensate from the span's first output to its last; what is left closes it. CM1 splits its vertical
-advection from its implicit diffusion with the imposed sinking taken out twice (adv.F: the slot for the diffusion
-holds the sinking too), so only their sum with the horizontal advection, the box's own transport, stands; over a
-doubly periodic box it is near nil. The boundary layer's column over the evaporation, and its heating over the
+vapour and condensate from the span's first output to its last; what is left closes it. On the inflow build with
+var7 = 1 (cm1_run.INFLOW_PATCH) the air the mean wind draws in carries the reference's, a tendency outside CM1's
+budget too, reckoned at each output as the written rate times the reference less the domain mean. CM1 splits its
+vertical advection from its implicit diffusion with the imposed sinking taken out twice (adv.F: the slot for the
+diffusion holds the sinking too), so only their sum with the horizontal advection, the box's own transport, stands;
+over a doubly periodic box it is near nil. The boundary layer's column over the evaporation, and its heating over the
 sensible heat, should be one: they stood at 1.32-1.51 in CM1's simple boundary layer before its density was divided
 out (cm1_run.PBL_DENSITY_PATCH). Writes results/crm/box_budget_<case>.json.
 """
@@ -52,6 +54,7 @@ WATER = {                         # CM1's vapour budget terms (domain diagnostic
     'nudging': ('qvb_nudge',),
 }
 CONDENSATE = ('qc', 'qr', 'qi', 'qs', 'qg')  # the condensate's mixing ratios, kg/kg by level
+INFLOW_RATES = 'terluna_inflow_rate.txt'      # cm1_run.INFLOW_RATES: the inflow build's rates by level
 GROUPS = {                        # CM1's potential-temperature budget terms (domain diagnostics) by process
     'radiation': ('ptb_rad',),
     'microphysics': ('ptb_mp',),
@@ -97,6 +100,26 @@ def read_day_night(path: Path, field: str = 'theta'):
     if z.size != nl or th.shape != (nb, nl):
         raise ValueError(f'{path.name}: expected {nb} bins of {nl} levels')
     return z, th
+
+
+def read_inflow(case: Path, text: str):
+    """The mean wind's inflow at the reference's air (cm1_run.INFLOW_PATCH) when the namelist text sets var7 = 1: the
+    rates (1/s) by level as the build wrote them, and the reference's potential temperature (K) and vapour (kg/kg)
+    there from the first nudging window, which CM1 interpolates to its levels linearly; None otherwise."""
+    try:
+        if namelist_value(text, 'var7') <= 0.5:
+            return None
+    except KeyError:
+        return None
+    words = (case / INFLOW_RATES).read_text().split()
+    nk = int(words[0])
+    values = np.array([float(v) for v in words[1:1 + 2 * nk]]).reshape(nk, 2)
+    rows = [line.split() for line in (case / 'lsnudge_0001.dat').read_text().splitlines()[4:]
+            if line.strip() and not line.lstrip().startswith('*')]
+    ref = np.array([[float(v) for v in row[:3]] for row in rows])
+    z = values[:, 0]
+    return dict(z=z, rate=values[:, 1], theta=np.interp(z, ref[:, 0], ref[:, 1]),
+                qv=np.interp(z, ref[:, 0], ref[:, 2]) * 1.0e-3)
 
 
 def day_night_heating(z_table, th_table, zh, mtime, var18, var19):
@@ -172,8 +195,9 @@ def budget(name: str, from_day: float) -> dict:
     if prescribed:
         table = read_day_night(case / 'terluna_lsadv.txt')
         var18, var19 = namelist_value(text, 'var18'), namelist_value(text, 'var19')
+    inflow = read_inflow(case, text)
     layout = ra.grads_layout(case / 'cm1out_diag_s.ctl')[1]
-    times, t_mean, rho, day_night, pbl = [], [], [], [], []
+    times, t_mean, rho, day_night, pbl, inflowing = [], [], [], [], [], []
     terms = {k: [] for k in GROUPS}
     parts = {k: [] for k in MICROPHYSICS}
     surface = {k: [] for k in ('t2_k', 'q2_g_kg', 'sensible_w_m2', 'latent_w_m2', 'net_sunlight_w_m2',
@@ -194,6 +218,8 @@ def budget(name: str, from_day: float) -> dict:
             parts[k].append(d[n] * exner * DAY)
         if prescribed:
             day_night.append(day_night_heating(*table, zh, d['mtime'], var18, var19) * exner * DAY)
+        if inflow is not None:
+            inflowing.append(inflow['rate'] * (inflow['theta'] - d['th']) * exner * DAY)
         surface['t2_k'].append(d['t2'])
         surface['q2_g_kg'].append(d['q2'] * 1000.0)
         surface['sensible_w_m2'].append(d['hfx'])
@@ -209,6 +235,8 @@ def budget(name: str, from_day: float) -> dict:
     prof = {k: np.mean(v, axis=0) for k, v in terms.items()}
     if day_night:
         prof['day_night_prescribed'] = np.mean(day_night, axis=0)
+    if inflowing:
+        prof['inflow'] = np.mean(inflowing, axis=0)
     prof['storage'] = np.polyfit(times, np.array(t_mean), 1)[0]
     prof['rest'] = prof['storage'] - sum(v for k, v in prof.items() if k != 'storage')
     micro = {k: np.mean(v, axis=0) for k, v in parts.items()}
@@ -238,11 +266,13 @@ def water(name: str, from_day: float, to_day: float | None = None) -> dict:
     if prescribed:
         z_table, qv_table = read_day_night(case / 'terluna_lsadv.txt', 'qv')
         var18, var19 = namelist_value(text, 'var18'), namelist_value(text, 'var19')
+    inflow = read_inflow(case, text)
     layout = ra.grads_layout(case / 'cm1out_diag_s.ctl')[1]
     present = {name for name, _ in layout}
     groups = {k: [n for n in names if n in present] for k, names in WATER.items()}
     times, evaporation, rain, held = [], [], [], []
-    columns = {k: [] for k in list(groups) + (['day_night_prescribed'] if prescribed else [])}
+    columns = {k: [] for k in list(groups) + (['day_night_prescribed'] if prescribed else [])
+               + (['inflow'] if inflow is not None else [])}
     bands = {k: [] for k in columns}
     for path in sorted(case.glob('cm1out_diag_*_s.dat')):
         d = read_diag(case, path, layout)
@@ -256,6 +286,8 @@ def water(name: str, from_day: float, to_day: float | None = None) -> dict:
         rates = {k: sum((d[n] for n in names), np.zeros_like(zh)) for k, names in groups.items()}
         if prescribed:
             rates['day_night_prescribed'] = day_night_heating(z_table, qv_table, zh, d['mtime'], var18, var19)
+        if inflow is not None:
+            rates['inflow'] = inflow['rate'] * (inflow['qv'] - d['qv'])
         for k, r in rates.items():
             columns[k].append(float((r * mass).sum()) * DAY)
             bands[k].append([float((r * mass)[(zh >= a * 1000.0) & (zh < b * 1000.0)].sum()) * DAY
@@ -277,8 +309,10 @@ def water(name: str, from_day: float, to_day: float | None = None) -> dict:
 
 
 def difference(a: dict, b: dict) -> dict:
-    """a minus b, layer by layer and at the ground."""
-    sub = lambda x, y: {k: (sub(x[k], y[k]) if isinstance(x[k], dict) else x[k] - y[k]) for k in x}
+    """a minus b, layer by layer and at the ground; a term only a holds (the inflow on its build) counts as nil in b."""
+    nil = lambda x: {k: nil(v) for k, v in x.items()} if isinstance(x, dict) else 0.0
+    sub = lambda x, y: {k: (sub(x[k], y.get(k, nil(x[k]))) if isinstance(x[k], dict) else x[k] - y.get(k, 0.0))
+                        for k in x}
     return dict(layers_w_m2=sub(a['layers_w_m2'], b['layers_w_m2']),
                 microphysics_layers_w_m2=sub(a['microphysics_layers_w_m2'], b['microphysics_layers_w_m2']),
                 surface=sub(a['surface'], b['surface']))
@@ -293,8 +327,9 @@ def analyse(name: str, reference: str | None, from_day: float) -> dict:
         out['reference_water'] = water(reference, from_day)
         out['difference'] = difference(out['budget'], out['reference_budget'])
     out['evidence'] = ('Domain means of CM1\'s own budget terms, written every diagnostic output, and the patch\'s '
-                       'prescribed day-night heating and moistening reckoned from its table; means over the span. One '
-                       'realization of each run.')
+                       'prescribed day-night heating and moistening reckoned from its table, and on the inflow build '
+                       'the inflow of the reference\'s air reckoned from its written rates and each output\'s '
+                       'domain means; means over the span. One realization of each run.')
     out['reading_rule'] = ('Heat: K/day of temperature at constant pressure (pi times the potential-temperature '
                            'tendencies) by height, and W/m2 summed over the GCM\'s lowest four layers and over the '
                            'bands 0-16, 16-60 and 60 km to the top; positive warms. Turbulence holds the boundary layer '

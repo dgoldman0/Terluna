@@ -3933,8 +3933,8 @@ as they were. C5 holds for both runs: the top two levels move at most 0.28 K and
 **Evidence and limits.** One four-year run from one restart, still settling by 0.3–0.4 K a year. C_E comes from 3-day
 means with the year files' interval-start humidity, the same in each run. The gust's depth follows the nonlocal scheme's
 rule, untested here against CM1's depths; β is CM1's 1, where COARE takes 1.25; and the buoyancy flux is the step
-before's. The site is six cells of 3-day means. Whether PlaSim's configuration takes the gust, and with it a rebalanced
-sunlight, is open.
+before's. The site is six cells of 3-day means. PlaSim's configuration takes the gust with its sunlight rebalanced
+(register, 28 October), in the design run that follows.
 
 ```sh
 W=/media/projectspace/terluna-research/session-tools/gust_aloft

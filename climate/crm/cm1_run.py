@@ -1400,10 +1400,63 @@ WIND_ALOFT_PATCH = ('solve1.F', WIND_ALOFT_MARKER, [
 BUILDS['moon_omp_rain_law_pbl_wind_gust_aloft'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust_aloft'] = (BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust']
                                                           + [WIND_ALOFT_PATCH])
-# The corrected wind and gust are the defaults for the boxes and rings that follow (register, 28 October): a case on
-# CORRECTED_BUILD takes the wind's own time scale and the height its pull starts from (corrected_wind) unless its
-# namelist sets them.
-CORRECTED_BUILD = 'moon_omp_rain_law_pbl_wind_gust_aloft'
+# The mean wind's inflow at the reference's air (register, 28 October). CM1's large-scale vertical advection (wsub)
+# is the flux form less the scalar times the mean wind's mass convergence, div, so where the GCM's mean wind converges
+# the air it draws in carries the box's own mean, and a box drier than the GCM below 2.5 km draws in air drier than the
+# GCM's around it: on the fifteen-level GCM's forcing the sea box exported 0.45-0.55 mm/day more vapour than the GCM's
+# circulation from its second lunar day on. With var7 = 1 this build carries the reference's air in where div > 0, the
+# upwind value coupled columns take (Daleu, Woolnough and Plant 2012, J. Atmos. Sci. 69, their eq. 9), while the air
+# leaving carries the box's own: each level's domain-mean potential temperature and vapour are drawn toward the
+# nudging reference, the GCM's mean air, at the rate max(div, 0)/rho0. The term vanishes while the box's air is the
+# reference, as the day-night table's added-back advection does, and the build writes its rates once a segment to
+# INFLOW_RATES for the budget. With var7 at CM1's default of 0 it runs as the aloft build.
+INFLOW_MARKER = "Terluna: the mean wind's inflow carries the reference's air"
+INFLOW_RATES = 'terluna_inflow_rate.txt'
+QV_NUDGE_END = ('              qdiag(i,j,k,qd_nudge) = tem1\n            enddo\n            enddo\n          endif\n'
+                '        enddo\n      endif\n')
+INFLOW_BLOCK = f"""      ! {INFLOW_MARKER} (var7 = 1). CM1's large-scale vertical advection
+      ! (wsub) is the flux form less the scalar times the mean wind's mass convergence div, so the air div draws
+      ! in carries the box's own mean. Here it carries the nudging reference's instead where div > 0, the upwind
+      ! value of coupled columns (Daleu, Woolnough and Plant 2012, eq. 9): the domain-mean theta and vapour of
+      ! each level are drawn toward the reference at the rate max(div,0)/rho0. The rates go to {INFLOW_RATES}.
+      if( var7.gt.0.5 .and. dolsw .and. do_lsnudge_th .and. do_lsnudge_qv .and. imoist.eq.1 )then
+        if( terluna_inflow_out .and. myid.eq.0 )then
+          open(unit=95,file='{INFLOW_RATES}',status='replace',action='write')
+          write(95,*) nk
+        endif
+        do k=1,nk
+          tem = max( 0.0 , (rf0(1,1,k+1)*wprof(k+1)-rf0(1,1,k)*wprof(k))*rdz*mh(1,1,k) )*rr0(1,1,k)
+          if( terluna_inflow_out .and. myid.eq.0 ) write(95,*) zh(1,1,k),tem
+          tem1 = tem*( lsnudge_th(k,lsnudge_count)-thavg(k) )
+          tem2 = tem*( lsnudge_qv(k,lsnudge_count)-qavg(k,nqv) )
+          do j=1,nj
+          do i=1,ni
+            thten1(i,j,k) = thten1(i,j,k) + tem1
+            qten(i,j,k,nqv) = qten(i,j,k,nqv) + tem2
+          enddo
+          enddo
+        enddo
+        if( terluna_inflow_out .and. myid.eq.0 )then
+          close(unit=95)
+          print *,'  Terluna: the mean wind draws in the reference air; rates in {INFLOW_RATES}'
+        endif
+        terluna_inflow_out = .false.
+      endif
+"""
+INFLOW_PATCH = ('solve1.F', INFLOW_MARKER, [
+    ('      integer, save :: terluna_nb = 0, terluna_nl = 0   ! Terluna: large-scale horizontal advection by local time\n',
+     '      integer, save :: terluna_nb = 0, terluna_nl = 0   ! Terluna: large-scale horizontal advection by local time\n'
+     '      logical, save :: terluna_inflow_out = .true.   ! Terluna: the inflow rates, written once a segment\n', 1),
+    (QV_NUDGE_END, QV_NUDGE_END + INFLOW_BLOCK, 1)])
+INFLOW_BUILD = 'moon_omp_rain_law_pbl_wind_gust_aloft_inflow'
+BUILDS[INFLOW_BUILD] = BUILDS['moon_omp']
+BUILD_PATCHES[INFLOW_BUILD] = BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust_aloft'] + [INFLOW_PATCH]
+# The corrected wind and gust are the defaults for the boxes and rings that follow (register, 28 October), and for the
+# boxes forced by the GCM's column at their site the inflow of the GCM's air (register, 28 October, evening): a case on
+# CORRECTED_BUILD takes the wind's own time scale and the height its pull starts from (corrected_wind), and a site box
+# var7 1 (corrected_inflow), unless its namelist sets them. A ring on it keeps var7 0 and runs as the aloft build.
+ALOFT_BUILD = 'moon_omp_rain_law_pbl_wind_gust_aloft'
+CORRECTED_BUILD = INFLOW_BUILD
 WIND_TAU_S = 7200.0
 
 
@@ -1420,6 +1473,17 @@ def corrected_wind(build: str, gcm_lowest_m: float, scale: float = 1.0) -> dict:
             raise ValueError(f"the wind's pull starts at the GCM's lowest level, not at {gcm_lowest_m} m")
         out['var8'] = round(float(gcm_lowest_m), 1)
     return out
+
+
+def corrected_inflow(build: str, cfg: dict | None = None) -> dict:
+    """The &param8 entry of the mean wind's inflow at the reference's air on a build that carries it: var7 1 on
+    builds with INFLOW_PATCH, for a box forced by the GCM's column at its site (kind 'box', day_night 'gcm') when the
+    case's configuration cfg is given; none for a ring or any other case."""
+    if INFLOW_PATCH not in BUILD_PATCHES.get(build, []):
+        return {}
+    if cfg is not None and not (cfg.get('kind') == 'box' and cfg.get('day_night') == 'gcm'):
+        return {}
+    return dict(var7=1.0)
 
 
 def gcm_lowest_level_m(record: dict) -> float:
@@ -1957,14 +2021,22 @@ CASES['box_near_side_sea_l15_wind_gust_day4']['restart_from'] = dict(case='box_n
 # (corrected_wind) set the wind's 2 hours and the pull's start, the source's lowest GCM level, 312.7 m, so CM1's levels
 # at 50, 150 and 250 m are left to the box.
 CASES['box_near_side_sea_l15_aloft_day3'] = dict(
-    CASES['box_near_side_sea_l15_day3'], build=CORRECTED_BUILD,
+    CASES['box_near_side_sea_l15_day3'], build=ALOFT_BUILD,
     purpose=CASES['box_near_side_sea_l15_day3']['purpose'] + "; again with its mean wind relaxed toward the GCM's on "
             "2 hours from the GCM's lowest level up, and the gust over water at lunar gravity")
 CASES['box_near_side_sea_l15_aloft_day4'] = dict(
-    CASES['box_near_side_sea_l15_day4'], build=CORRECTED_BUILD,
+    CASES['box_near_side_sea_l15_day4'], build=ALOFT_BUILD,
     restart_from=dict(case='box_near_side_sea_l15_aloft_day3', day=88.5),
     purpose=CASES['box_near_side_sea_l15_day4']['purpose'] + "; again with its mean wind relaxed toward the GCM's on "
             "2 hours from the GCM's lowest level up, and the gust over water at lunar gravity")
+# The sea box's third lunar day with the mean wind's inflow at the GCM's air (register, 28 October):
+# box_near_side_sea_l15_aloft_day3 on the inflow build from the same day-59 restart, the build's default (corrected_inflow)
+# setting var7 1, so the pair differs in the air the GCM's mean wind draws in and in nothing else. One lunar day on the
+# fifteen-level GCM's forcing sizes how far the box's vapour drifted with the box's own air drawn in.
+CASES['box_near_side_sea_l15_inflow_day3'] = dict(
+    CASES['box_near_side_sea_l15_aloft_day3'], build=INFLOW_BUILD,
+    purpose=CASES['box_near_side_sea_l15_aloft_day3']['purpose'] + "; the air the GCM's mean wind draws in carrying the "
+            "GCM's mean air rather than the box's own")
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -3035,8 +3107,9 @@ def setup_restart(name: str, cfg: dict) -> Path:
     if abs(cfg['output_s'] - src['configuration']['output_s']) > 0.5:   # a window may write output more often;
         text = set_namelist(text, 'param1', 'tapfrq', cfg['output_s'] * scale)   # CM1 resets its schedule on restart
     wind = corrected_wind(cfg['build'], gcm_lowest_level_m(src) * scale, scale)
-    for key, value in wind.items():                                          # the build's corrected wind, unless
-        text = set_namelist(text, 'param8', key, value)                     # the case's own changes set it
+    inflow = corrected_inflow(cfg['build'], cfg)
+    for key, value in dict(wind, **inflow).items():                         # the build's corrected wind and inflow,
+        text = set_namelist(text, 'param8', key, value)                     # unless the case's own changes set them
     for section, entries in (cfg.get('restart_namelist') or {}).items():    # the case's own changes to the source's
         for key, value in entries.items():                                   # namelist (no earlier case sets any)
             text = set_namelist(text, section, key, value)
@@ -3062,6 +3135,7 @@ def setup_restart(name: str, cfg: dict) -> Path:
     windows_written = tuple(f'lsnudge_{k:04d}.dat' for k in range(2, windows['windows'] + 1)) if windows else ()
     record = dict(src, case=name, purpose=cfg['purpose'], inputs_from=None, configuration=dict(cfg),
                   build=build_record, electricity=electricity, rain_limits=rain, corrected_wind=wind or None,
+                  **({'corrected_inflow': inflow} if inflow else {}),
                   restart_from=dict(case=fr['case'], day=fr['day'], restart=n, model_s=n * restart_s,
                                     made_by=made.get('executable')),
                   **({'nudging_wind': dict(src.get('nudging_wind') or {}, **windows)} if windows else {}),
@@ -3498,8 +3572,9 @@ def setup(name: str) -> Path:
         path.symlink_to(target)
     text = (tree / 'run' / 'config_files' / 'cpm_RadConvEquil' / 'namelist.input').read_text()
     settings = case_settings(cfg, nx, dx, nz, zw[-1], air, gravity)
-    wind = corrected_wind(cfg['build'], float(zg[0]), s)                 # the build's corrected wind (the case's own
-    settings['param8'].update(wind)                                       # namelist, applied below, may change it)
+    wind = corrected_wind(cfg['build'], float(zg[0]), s)                 # the build's corrected wind and inflow (the
+    inflow = corrected_inflow(cfg['build'], cfg)                          # case's own namelist, applied below, may
+    settings['param8'].update(dict(wind, **inflow))                       # change them)
     settings['param12'].update(tsk0=round(ref['sea_surface_k'], 3), tmn0=round(ref['land_ground_k'], 3), xland0=2.0, lu0=16)
     for section, entries in settings.items():
         for key, value in entries.items():

@@ -2917,6 +2917,94 @@ PYTHONPATH=. climate/gcm/.venv/bin/python $F/forcing_check.py       # rules F0-F
 PYTHONPATH=. climate/gcm/.venv/bin/python $F/low_air_by_day.py      # the low air against its start by lunar day
 ```
 
+### The sea box with the mean wind's inflow at the GCM's air (28 October, evening)
+
+Boxes forced from here on draw the GCM's air in where its mean wind converges (register, 28 October), and one lunar
+day on the fifteen-level GCM's forcing sizes how far the box's vapour drifted with its own air drawn in.
+
+**The build** (`INFLOW_PATCH`, the build `moon_omp_rain_law_pbl_wind_gust_aloft_inflow`). CM1's large-scale vertical
+advection (`wsub`) is the flux form less the scalar times the mean wind's mass convergence, div, so the air the
+convergence draws in carries the box's own mean. With `var7` = 1 the build carries the reference's air in where div
+is positive and the box's own out where it is negative, the upwind form of coupled columns (Daleu, Woolnough and Plant
+2012, their equation 9). Each level's domain-mean potential temperature and vapour are drawn toward the nudging
+reference, the GCM's mean air and the box's starting sounding, at the rate max(div, 0)/ρ₀ from CM1's own base state.
+The term vanishes while the box's air is the reference, so the table's added-back advection still cancels at the
+start. The rates go to `terluna_inflow_rate.txt`, from which `box_budget` reckons the term at each output, as it does
+the table; with `var7` at 0 the build runs as the aloft build. It is the default build from here on
+(`CORRECTED_BUILD`): a box forced by the GCM's column at its site takes `var7` 1 from `corrected_inflow` unless its
+namelist sets otherwise, and a ring on it keeps `var7` 0 and runs as the aloft build. The aloft days keep the build they
+ran on.
+
+**The trials**, read by rules set before the build finished (`rules.txt` part G beside `trial_inflow.py`), three model
+hours from the day-59 restart on three threads:
+- With `var7` 0 the build repeats the aloft build's trial bit for bit in all 16 files the trial writes.
+- With `var7` 1 the rates CM1 writes match the rates reckoned from the GCM's vertical wind and the box's density to
+  0.983–1.020 at the 48 levels compared, and stand at zero where the flow diverges. The largest, 2.6 × 10⁻⁶ per second
+  at 450 m, renews the air there in about 4½ days; the inflow reaches 2.5 km.
+
+**The day** (`box_near_side_sea_l15_inflow_day3`, from the day-59 restart, its inputs the corrected third day's byte
+for byte but for `var7`; 0.9 hours on four threads), read by the rules of `rules.txt` part H, set before the build
+finished; the products are
+[box_days_box_near_side_sea_l15_inflow_day3.json](../results/crm/box_days_box_near_side_sea_l15_inflow_day3.json) and
+[box_budget_box_near_side_sea_l15_inflow_day3.json](../results/crm/box_budget_box_near_side_sea_l15_inflow_day3.json).
+
+| Third lunar day, by quarter from sunrise | The box's own air drawn in (corrected build) | The GCM's air drawn in |
+|---|---|---|
+| Mean wind at 0.5 km against its target | 0.888, 0.953, 1.034, 0.857 | 0.876, 0.954, 1.033, 0.849 |
+| Evaporation; daily mean, mm/day | 2.82, 2.99, 2.91, 2.26; 2.74 | 2.72, 2.76, 2.62, 2.10; 2.55 |
+| Air at 0.3 km, K | 298.56, 299.70, 298.27, 297.48 | 298.78, 299.70, 298.71, 298.28 |
+| Vapour at 0.3 km, g/kg | 11.52, 10.49, 10.67, 12.42 | 11.61, 11.18, 11.28, 12.52 |
+| Rain; daily mean, mm/day | 0.00, 1.28, 1.02, 1.91; 1.05 | 0.00, 1.00, 0.82, 0.61; 0.61 |
+| Rain in the late evening (135–180°), mm/day | 0.13 | 0.09 |
+| The column's vapour from the day's start to its end, kg/m² | 247.4 to 227.8 | 247.4 to 238.5 |
+| Vapour against the start at 0.2–0.7, 2–5 and 5–10 km, g/kg | −0.75, +0.05, +0.90 | −0.38, +0.34, +1.22 |
+| Heat stored by the column; brought by the inflow, W/m² | −20.4; none | −10.6; +22.5 |
+
+**By the rules.** The vapour budget closes with the inflow reckoned (its rest 0.05 mm/day against the corrected day's
+0.075), and the inflow does what it was built to do: it gives back 0.147 mm/day where CM1's advection at the inflow
+levels takes 0.148, and what remains of the forcing's excess over the GCM's circulation, 0.31 mm/day, is the outflow
+levels' part (0.33). The column's drying falls from 0.67 to 0.30 mm/day, 0.37 less where the rule asked 0.3. The day
+misses its wind check by 0.001: after midnight its wind at 0.5 km averages 0.849 of its target, where the corrected
+day's passed at 0.857. By the rule its measures, the drying's with them, stand as observations.
+
+**What the day shows**, as observations:
+- **The drift halves.** The column ends 10.7 kg/m² moister than on the corrected day, its air at 0.2–0.7 km 0.38 g/kg
+  below the GCM's mean air rather than 0.75, and 0.6–0.7 g/kg moister at 0.3 km from noon to midnight. What drying
+  remains comes from the outflow: the box's air at 2–10 km stands moister than the GCM's (+0.34 and +1.22 g/kg), and the
+  air leaving there carries more vapour out, a term that pulls the column back toward the GCM's.
+- **The rain falls with it.** The day rains 0.61 mm/day against 1.05, after midnight 0.61 against 1.91, and the late
+  evening stays quiet (0.09). The water budget says why: the rain is the evaporation and the forcing less the column's
+  change, and on the corrected day the column's drawdown, 0.67 mm/day, fed it. With the GCM's air drawn in the drawdown
+  is 0.30, the forcing takes 0.15 mm/day less, and the evaporation falls 0.19 under the moister low air.
+- **The evaporation now leads.** Once the column stops drying, the box rains its evaporation, 2.55 mm/day, less the
+  forcing's export, which lies between the GCM's 1.99 and today's 2.29: 0.3–0.6 mm/day, where the GCM rains 1.78 from
+  3.75 mm/day of evaporation (the gust GCM evaporates 3.41). The two models' rain at the site, and its timing, rest
+  first on that gap.
+- **Heat.** The inflow brings 22.5 W/m², 14.5 of it at 16–60 km, where the box's air stands 5.5–8.4 K below the GCM's
+  mean air. The box still cools, by 10.6 W/m² against 20.4, and its condensation gives 12 W/m² less as it rains less.
+
+**What it changes.** Boxes forced by the GCM's column take the inflow from here on. The old form's drawdown fed part of
+the rain the earlier comparisons read on this forcing, the night's 1.9 mm/day after midnight among it; with the GCM's
+air drawn in, the night rains 0.6 mm/day. Where the two models part at the site now turns first on the box's
+evaporation, a third below the GCM's, then on its remaining cooling.
+
+**Evidence and limits.** One realization of one lunar day from one restart, forced by the fifteen-level GCM's four
+years without the gust, read as observations. The inflow draws in the GCM's mean air, not its air hour by hour, at
+rates from CM1's base state. The rain once the column stops drying is arithmetic on this day's terms, not a run to
+equilibrium.
+
+```sh
+I=/media/projectspace/terluna-research/session-tools/inflow
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law_pbl_wind_gust_aloft_inflow --jobs 4
+PYTHONPATH=. climate/gcm/.venv/bin/python $I/trial_inflow.py run          # part G: the two three-hour trials
+PYTHONPATH=. climate/gcm/.venv/bin/python $I/trial_inflow.py check
+$I/run_inflow.sh                                                          # the day on four threads; rerun to resume
+PYTHONPATH=. climate/gcm/.venv/bin/python $I/inflow_read.py               # part H
+climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea_l15_inflow_day3
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_inflow_day3 \
+    --reference box_near_side_sea_l15_aloft_day3 --from-day 59
+```
+
 ## A box over the highlands
 
 The author's plan for highlands (2026-09-29) left a three-dimensional box over

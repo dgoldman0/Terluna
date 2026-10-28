@@ -99,7 +99,8 @@ def test_the_gust_build_takes_beljaars_gust_over_water_and_changes_nothing_else(
     assert c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] == \
         c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] + [c.GUST_PATCH]
     assert all(c.GUST_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
-               if label not in ('moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft'))
+               if label not in ('moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft',
+                                c.INFLOW_BUILD))
     for day in ('day3', 'day4'):
         case, wind = c.CASES[f'box_near_side_sea_l15_wind_gust_{day}'], c.CASES[f'box_near_side_sea_l15_wind_{day}']
         assert case['build'] == 'moon_omp_rain_law_pbl_wind_gust'
@@ -117,9 +118,10 @@ def test_the_aloft_build_pulls_the_wind_from_var8_up_and_new_cases_take_the_corr
     assert lines[1].startswith('          if( zh(1,1,k).lt.var8 ) tem1 = 0.0') and c.WIND_ALOFT_MARKER in lines[1]
     assert lines[3].startswith('          if( zh(1,1,k).lt.var8 ) tem2 = 0.0')
     assert [x for i, x in enumerate(lines) if i not in (1, 3)] == source.splitlines()   # the held air untouched
-    assert c.BUILD_PATCHES[c.CORRECTED_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] + [c.WIND_ALOFT_PATCH]
-    assert c.BUILDS[c.CORRECTED_BUILD] == c.BUILDS['moon_omp']
-    assert all(c.WIND_ALOFT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != c.CORRECTED_BUILD)
+    assert c.BUILD_PATCHES[c.ALOFT_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] + [c.WIND_ALOFT_PATCH]
+    assert c.BUILDS[c.ALOFT_BUILD] == c.BUILDS['moon_omp']
+    assert all(c.WIND_ALOFT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
+               if label not in (c.ALOFT_BUILD, c.INFLOW_BUILD))
     # the corrected wind follows the build: none on the old builds, the time scale on the wind's, both on the new one
     assert c.corrected_wind('moon_omp_rain_law_pbl', 312.69) == {}
     assert c.corrected_wind('moon_omp_rain_law_pbl_wind_gust', 312.69) == dict(var10=7200.0)
@@ -131,11 +133,50 @@ def test_the_aloft_build_pulls_the_wind_from_var8_up_and_new_cases_take_the_corr
     assert c.gcm_lowest_level_m(dict(reference=None)) == 0.0 and c.gcm_lowest_level_m({}) == 0.0
     for day in ('day3', 'day4'):
         case, base = c.CASES[f'box_near_side_sea_l15_aloft_{day}'], c.CASES[f'box_near_side_sea_l15_{day}']
-        assert case['build'] == c.CORRECTED_BUILD and 'restart_namelist' not in case
+        assert case['build'] == c.ALOFT_BUILD and 'restart_namelist' not in case   # the build they ran on
         same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'purpose', 'restart_from')}
         assert same(case) == same(base) and case['restart_from']['day'] == base['restart_from']['day']
     assert c.CASES['box_near_side_sea_l15_aloft_day3']['restart_from'] == dict(case='box_near_side_sea_l15', day=59.0)
     assert c.CASES['box_near_side_sea_l15_aloft_day4']['restart_from']['case'] == 'box_near_side_sea_l15_aloft_day3'
+
+def test_the_inflow_build_draws_the_reference_s_air_in_where_the_mean_wind_converges():
+    source = ('      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n'
+              '      integer, save :: terluna_nb = 0, terluna_nl = 0   ! Terluna: large-scale horizontal advection by '
+              'local time\n'
+              '          tem1 = -lsnudgefac*terluna_w*( qavg(k,nqv)-lsnudge_qv(k,lsnudge_count) )/(lsnudge_tau)\n'
+              + c.QV_NUDGE_END + '      if(timestats.ge.1) time_misc=time_misc+mytime()\n')
+    out = c.apply_patch(source, *c.INFLOW_PATCH)
+    assert c.apply_patch(out, *c.INFLOW_PATCH) == out                          # once only
+    assert out.count(c.INFLOW_MARKER) == 1 and 'logical, save :: terluna_inflow_out = .true.' in out
+    block = out[out.index(c.QV_NUDGE_END) + len(c.QV_NUDGE_END):]
+    assert block.startswith('      ! ' + c.INFLOW_MARKER) and block.endswith(
+        '      if(timestats.ge.1) time_misc=time_misc+mytime()\n')
+    # wsub's own mass convergence, kept where the flow converges, over the base-state density
+    assert ('tem = max( 0.0 , (rf0(1,1,k+1)*wprof(k+1)-rf0(1,1,k)*wprof(k))*rdz*mh(1,1,k) )*rr0(1,1,k)' in block)
+    assert 'tem1 = tem*( lsnudge_th(k,lsnudge_count)-thavg(k) )' in block
+    assert 'tem2 = tem*( lsnudge_qv(k,lsnudge_count)-qavg(k,nqv) )' in block
+    assert 'if( var7.gt.0.5 .and. dolsw .and. do_lsnudge_th .and. do_lsnudge_qv .and. imoist.eq.1 )then' in block
+    assert f"file='{c.INFLOW_RATES}'" in block
+    assert max(len(line) for line in block.splitlines()) <= 132                 # free form's limit
+    # everything else as it was
+    assert out.replace(block, '').replace(
+        '      logical, save :: terluna_inflow_out = .true.   ! Terluna: the inflow rates, written once a segment\n',
+        '') + '      if(timestats.ge.1) time_misc=time_misc+mytime()\n' == source
+    assert c.BUILD_PATCHES[c.INFLOW_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust_aloft'] + [c.INFLOW_PATCH]
+    assert c.BUILDS[c.INFLOW_BUILD] == c.BUILDS['moon_omp']
+    assert all(c.INFLOW_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != c.INFLOW_BUILD)
+    assert c.corrected_inflow(c.INFLOW_BUILD) == dict(var7=1.0)
+    assert c.corrected_inflow(c.ALOFT_BUILD) == {} and c.corrected_inflow('moon_omp') == {}
+    # the default for the boxes forced by the GCM's column at their site; a ring on the build keeps var7 0
+    assert c.CORRECTED_BUILD == c.INFLOW_BUILD
+    assert c.corrected_inflow(c.CORRECTED_BUILD, c.CASES['box_near_side_sea']) == dict(var7=1.0)
+    assert c.corrected_inflow(c.CORRECTED_BUILD, c.CASES['ring_45n_corrected']) == {}
+    assert c.corrected_inflow(c.CORRECTED_BUILD, dict(c.CASES['box_near_side_sea'], day_night=None)) == {}
+    case, base = c.CASES['box_near_side_sea_l15_inflow_day3'], c.CASES['box_near_side_sea_l15_aloft_day3']
+    same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'purpose')}
+    assert case['build'] == c.INFLOW_BUILD and same(case) == same(base)
+    assert case['restart_from'] == dict(case='box_near_side_sea_l15', day=59.0)
+
 
 def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     name, marker, edits = c.TWILIGHT_PATCH
@@ -144,7 +185,8 @@ def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     # the rings', Jura's box, and the boxes on the design climate with the rain law (and the boundary layer's fix, the
     # wind's own nudging time scale, the gust over water at lunar gravity and the wind pulled from aloft)
     with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight', 'moon_omp_rain_law', 'moon_omp_rain_law_pbl',
-                 'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft'}
+                 'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft',
+                 c.INFLOW_BUILD}
     assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label not in with_hook)
     sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
     added = ''.join(new for _, new, _ in sun[2])
@@ -1156,7 +1198,11 @@ def test_a_run_on_with_earth_s_length_changes_the_source_s_namelist_there_alone(
     assert record['restart_from']['restart'] == 15 and record['build']['executable_sha256'] == 'linf'
 
 
-def test_a_run_on_on_the_corrected_build_takes_the_wind_from_the_source_s_lowest_gcm_level(tmp_path, monkeypatch):
+@pytest.mark.parametrize('base, changes', [('box_near_side_sea_l15_aloft_day3', ['var8', 'var10']),
+                                           ('box_near_side_sea_l15_inflow_day3', ['var7', 'var8', 'var10'])])
+def test_a_run_on_on_the_corrected_build_takes_the_wind_from_the_source_s_lowest_gcm_level(tmp_path, monkeypatch, base,
+                                                                                           changes):
+    label = c.CASES[base]['build']                                   # the aloft build, then the inflow build
     monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
     monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
     tree = tmp_path / 'tree'
@@ -1165,10 +1211,10 @@ def test_a_run_on_on_the_corrected_build_takes_the_wind_from_the_source_s_lowest
         (tree / 'run' / name).write_text(name)
     monkeypatch.setattr(c, 'fetch', lambda: tree)
     monkeypatch.setattr(c, 'apply_rain_limits', lambda case, cfg, g: None)   # the source's limits, written elsewhere
-    build = tmp_path / 'cm1' / 'build' / c.CORRECTED_BUILD
+    build = tmp_path / 'cm1' / 'build' / label
     build.mkdir(parents=True)
     (build / 'cm1.exe').write_text('exe')
-    (build / 'build.json').write_text(json.dumps(dict(label=c.CORRECTED_BUILD, executable_sha256='aloft')))
+    (build / 'build.json').write_text(json.dumps(dict(label=label, executable_sha256='aloft')))
     source = tmp_path / 'runs' / 'coarse'
     coarse_run(source)
     record = json.loads((source / 'case.json').read_text())
@@ -1177,15 +1223,17 @@ def test_a_run_on_on_the_corrected_build_takes_the_wind_from_the_source_s_lowest
         (source / f'cm1rst_t000015_{part}.dat').write_text(part)
     (source / 'progress.json').write_text(json.dumps(dict(segments=[dict(segment=8, model_s=691200.0,
                                                                           executable='source')])))
-    monkeypatch.setitem(c.CASES, 'aloft', dict(c.CASES['box_near_side_sea_l15_aloft_day3'],
-                                               restart_from=dict(case='coarse', day=7.5), days=14.5))
+    monkeypatch.setitem(c.CASES, 'aloft', dict(c.CASES[base], restart_from=dict(case='coarse', day=7.5), days=14.5))
     case = c.setup('aloft')
     text = (case / 'namelist.template').read_text()
     assert c.namelist_value(text, 'param8', 'var8') == '312.7' and c.namelist_value(text, 'param8', 'var10') == '7200.0'
     changed = [(a, b) for a, b in zip(FINE_TEMPLATE.splitlines(), text.splitlines()) if a != b]
-    assert [b.split('=')[0].strip() for a, b in changed] == ['var8', 'var10']   # nothing else in the source's namelist
+    assert [b.split('=')[0].strip() for a, b in changed] == changes   # nothing else in the source's namelist
     record = json.loads((case / 'case.json').read_text())
     assert record['corrected_wind'] == dict(var10=7200.0, var8=312.7)
+    # the inflow's switch on its build only
+    assert record.get('corrected_inflow') == (dict(var7=1.0) if 'var7' in changes else None)
+    assert ('var7' in changes) == (c.namelist_value(text, 'param8', 'var7') == '1.0')
     assert record['reference']['profile']['z_m'][-1] == 312.69                    # carried on for the fourth day
 
 
