@@ -35,7 +35,8 @@ def test_the_patch_is_one_edit_set_per_file_each_adding_its_marker():
     assert c.BUILD_PATCHES['moon_omp_rain_law'] == c.RAIN_LIMITS_PATCHES + c.RAIN_LAW_PATCHES + [c.TWILIGHT_PATCH]
     assert c.BUILDS['moon_omp_rain_law'] == c.BUILDS['moon_omp']
     assert all(c.RAIN_LAW_PATCHES[0] not in patches for label, patches in c.BUILD_PATCHES.items()
-               if label not in ('moon_omp_rain_law', 'moon_omp_rain_law_pbl'))
+               if label not in ('moon_omp_rain_law', 'moon_omp_rain_law_pbl', 'moon_omp_rain_law_pbl_wind',
+                                'moon_omp_rain_law_pbl_wind_gust'))
 
 
 def test_the_header_says_what_it_changes_its_default_and_its_source():

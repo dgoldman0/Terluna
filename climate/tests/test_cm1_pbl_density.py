@@ -13,8 +13,9 @@ def test_only_the_new_build_carries_the_patch_and_the_site_boxes_take_it():
     assert c.BUILD_PATCHES['moon_omp_rain_law_pbl'] == c.BUILD_PATCHES['moon_omp_rain_law'] + [c.PBL_DENSITY_PATCH]
     assert c.BUILDS['moon_omp_rain_law_pbl'] == c.BUILDS['moon_omp']
     assert c.PBL_DENSITY_PATCH not in c.PATCHES
+    # the builds of 28 October stand on it: the wind's own time scale and the gust over water
     assert all(c.PBL_DENSITY_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
-               if label != 'moon_omp_rain_law_pbl')
+               if label not in ('moon_omp_rain_law_pbl', 'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust'))
     for name in ('box_near_side_sea', 'box_0e_design'):
         assert c.CASES[name]['build'] == 'moon_omp_rain_law_pbl'
         assert c.CASES[name]['nudge']['held_from'] == 'convection_top'

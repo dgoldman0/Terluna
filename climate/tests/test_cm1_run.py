@@ -65,12 +65,56 @@ def test_the_rain_test_build_takes_earth_fall_speeds_and_keeps_the_host_gravity_
     assert c.BUILD_PATCHES['moon_omp_earth_fall'] == [c.EARTH_FALL_PATCH]
 
 
+
+def test_the_wind_build_relaxes_the_wind_alone_on_var10_and_keeps_lsnudge_tau_without_it():
+    source = ('      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n'
+              '      if( donudge .and. do_lsnudge_u )then\n'
+              '          tem1 = -lsnudgefac*( (umove+uavg(k))-lsnudge_u(k,lsnudge_count) )/(lsnudge_tau)\n'
+              '          tem2 = -lsnudgefac*( (vmove+vavg(k))-lsnudge_v(k,lsnudge_count) )/(lsnudge_tau)\n'
+              '          tem1 = -lsnudgefac*terluna_w*( thavg(k)-lsnudge_th(k,lsnudge_count) )/(lsnudge_tau)\n')
+    out = c.apply_patch(source, *c.WIND_TAU_PATCH)
+    assert out.count('/(terluna_tau_uv)') == 2 and out.count('/(lsnudge_tau)') == 1          # the held air keeps its own
+    assert 'terluna_tau_uv = lsnudge_tau' in out and 'if( var10.gt.0.0 ) terluna_tau_uv = var10' in out
+    assert out.index('terluna_tau_uv = lsnudge_tau') < out.index('if( donudge .and. do_lsnudge_u )then')
+    assert c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] == c.BUILD_PATCHES['moon_omp_rain_law_pbl'] + [c.WIND_TAU_PATCH]
+    assert c.BUILDS['moon_omp_rain_law_pbl_wind'] == c.BUILDS['moon_omp']
+    for day in ('day3', 'day4'):
+        case, base = c.CASES[f'box_near_side_sea_l15_wind_{day}'], c.CASES[f'box_near_side_sea_l15_{day}']
+        assert case['build'] == 'moon_omp_rain_law_pbl_wind' and case['restart_namelist'] == dict(param8=dict(var10=7200.0))
+        same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'restart_namelist', 'purpose', 'restart_from')}
+        assert same(case) == same(base) and case['restart_from']['day'] == base['restart_from']['day']
+
+
+def test_the_gust_build_takes_beljaars_gust_over_water_and_changes_nothing_else():
+    source = ('!      Use Beljaars over land, old MM5 (Wyngaard) formula over water\n'
+              '        if (xland(i).lt.1.5) then\n'
+              '        fluxc = max(hfx(i)/rhox(i)/cp                    &\n'
+              '              + ep1*tskv*qfx(i)/rhox(i),0.)\n'
+              '        VCONV = vconvc*(g/tgdsa(i)*pblh(i)*fluxc)**.33\n'
+              '        else\n        VCONV = SQRT(DTHVM)\n        endif\n')
+    out = c.apply_patch(source, *c.GUST_PATCH)
+    assert 'if (xland(i).lt.1.5 .or. .true.) then' in out and c.GUST_MARKER in out
+    assert out.replace('if (xland(i).lt.1.5 .or. .true.) then   ! ' + c.GUST_MARKER + ", at the build's gravity",
+                       'if (xland(i).lt.1.5) then') == source
+    assert c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] == \
+        c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] + [c.GUST_PATCH]
+    assert all(c.GUST_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
+               if label != 'moon_omp_rain_law_pbl_wind_gust')
+    for day in ('day3', 'day4'):
+        case, wind = c.CASES[f'box_near_side_sea_l15_wind_gust_{day}'], c.CASES[f'box_near_side_sea_l15_wind_{day}']
+        assert case['build'] == 'moon_omp_rain_law_pbl_wind_gust'
+        same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'purpose', 'restart_from')}
+        assert same(case) == same(wind) and case['restart_from']['day'] == wind['restart_from']['day']
+    assert c.CASES['box_near_side_sea_l15_wind_gust_day4']['restart_from']['case'] == 'box_near_side_sea_l15_wind_gust_day3'
+
 def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     name, marker, edits = c.TWILIGHT_PATCH
     assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)
     assert c.BUILD_PATCHES['moon_omp_twilight'] == [c.TWILIGHT_PATCH] and c.BUILDS['moon_omp_twilight'] == c.BUILDS['moon_omp']
-    # the rings', Jura's box, and the boxes on the design climate with the rain law (and the boundary layer's fix)
-    with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight', 'moon_omp_rain_law', 'moon_omp_rain_law_pbl'}
+    # the rings', Jura's box, and the boxes on the design climate with the rain law (and the boundary layer's fix, the
+    # wind's own nudging time scale and the gust over water at lunar gravity)
+    with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight', 'moon_omp_rain_law', 'moon_omp_rain_law_pbl',
+                 'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust'}
     assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label not in with_hook)
     sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
     added = ''.join(new for _, new, _ in sun[2])
@@ -1022,8 +1066,10 @@ def test_the_earth_length_cases_differ_from_their_sources_in_the_length_and_what
     assert {k: v for k, v in night75.items() if k not in ('namelist', 'purpose')} == \
         {k: v for k, v in night.items() if k not in ('namelist', 'purpose')}
     assert night75['namelist'] == dict(c.NIGHT_OUTPUT, param3=dict(l_inf=75.0))
-    # no case set up before them takes either new key, so the runner sets them up and runs them as before
-    new = {'box_near_side_sea_day3_linf75', 'box_near_side_sea_night_6km_linf75'}
+    # no case set up before them takes either new key, so the runner sets them up and runs them as before (the
+    # wind's own time scale of 28 October, and the gust beside it, take restart_namelist after them)
+    new = {'box_near_side_sea_day3_linf75', 'box_near_side_sea_night_6km_linf75', 'box_near_side_sea_l15_wind_day3',
+           'box_near_side_sea_l15_wind_day4', 'box_near_side_sea_l15_wind_gust_day3', 'box_near_side_sea_l15_wind_gust_day4'}
     assert not [n for n, v in c.CASES.items() if n not in new and ('restart_namelist' in v or 'keep_restarts' in v)]
 
 

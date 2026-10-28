@@ -2606,6 +2606,130 @@ climate/gcm/.venv/bin/python $S/low_air.py                                     #
 climate/gcm/.venv/bin/python $S/sea_surface.py                                 # the sea, its fluxes, the box's wind
 ```
 
+### The sea box with its wind following the GCM's, and the gust over water at lunar gravity (28 October)
+
+The late evening's account (above) found two things in the box's own set-up that bear on its evaporation, and so on
+the low air where the two models part. Its mean wind ran at 44–67% of the speed its forcing aims for through most of
+the lunar day. And over water its surface layer adds a gust with no gravity in it. Two boxes test them side by side,
+each the box's third and fourth lunar days again from its day-59 restart, read by rules set before they ran
+(`rules.txt` beside the runs, parts A and D).
+
+**The wind's own time scale** (`WIND_TAU_PATCH`, the build `moon_omp_rain_law_pbl_wind`). CM1 relaxes the domain-mean
+wind and the held air toward their targets on one time scale, `lsnudge_tau`, 3 days in every case, a value the rings
+took for a profile held fixed. The boxes' wind targets change with each window of local time, every 0.82 days, faster
+than a 3-day relaxation follows. With `var10` above 0 the build relaxes the wind alone on `var10` seconds, the held air
+keeping `lsnudge_tau`; with `var10` at CM1's default of 0 it runs as `moon_omp_rain_law_pbl` does. Three-hour trials
+from the day-59 restart (`trial.py` beside the runs) checked it: with `var10` 0 the new build repeats the old one bit
+for bit in all 16 files the trial writes, and with `var10` at 7200 s the box's mean wind at 0.3 km rose from 1.44 to
+2.49 m/s within the three hours, against a target of 3.24, and its evaporation from 2.66 to 3.15 mm/day. The boxes take
+2 hours, a tenth of a window, the time scale on which cloud-resolving runs forced by observations relax their mean wind
+(Khairoutdinov, Randall and DeMott 2005).
+
+**The gust over water** (`GUST_PATCH`, the build `moon_omp_rain_law_pbl_wind_gust`). CM1's surface layer (`sfclay`,
+`sfcmodel` 2) adds a gust to the wind in its bulk formulas: over land Beljaars's (1995) convective velocity of the
+boundary layer's eddies, vconvc (g/T_s · h · B)^1/3 with vconvc 1, at the build's gravity; over water the old MM5
+formula √Δθ_v m/s, with no gravity in it. Over the lunar sea, whose air stands 3–4 K below the sea in virtual
+temperature, that gust was 1.6–2.1 m/s and raised the wind in the bulk formulas 1.6–1.8 times
+([the GCM's account](../gcm/README.md#the-free-convection-constant-over-four-years-and-the-two-models-light-wind-exchange-28-october)).
+The build takes Beljaars's branch over water too; the COARE algorithm's gust over Earth's ocean has the same form
+(Fairall and others 2003). In a three-hour trial the gust fell from 2.0 to 0.61 m/s, the surface layer's wind from 3.18
+to 2.62 m/s and the evaporation from 3.15 to 2.75 mm/day, every field finite.
+
+**The cases** (`box_near_side_sea_l15_wind_day3`, `_wind_day4`, `_wind_gust_day3` and `_wind_gust_day4`). The third
+days' inputs equal box_near_side_sea_l15_day3's byte for byte, the namelist differing in `var10` alone, and the gust
+cases differ from the wind cases in their build alone; each fourth day runs on from its own third day's restart. The
+first case records runner `1c3858b609e083ea`, set up before the gust's cases were added, and the others
+`c2184716516f7265`.
+
+**The rules, set before the runs.**
+- **Method.** Over the fourth lunar day the box's domain-mean wind at 0.3 and 1 km averages at least 0.85 of its
+  target's speed in every quarter; for the gust box, its surface layer's gust also stays at most 1.0 m/s in every
+  quarter. Otherwise the box is not read as a test of the change.
+- **Evaporation (the wind box).** G = (E_wind − E_old)/(E_GCM − E_old), with E the lunar day's mean surface vapour flux,
+  E_old 3.03 mm/day (the fourth day as first run) and E_GCM 3.75. At least 0.5: the box's short wind accounts for most
+  of the gap; at most 0.25: the gap lies mostly in the two models' surface exchange.
+- **The late evening (both).** Rain over the fourth day's 135–180° of at least 0.93 mm/day, a third of the GCM's 2.8:
+  CM1 supports part of the GCM's late-evening rain; at most 0.4: the lull holds.
+- **The night (both).** Rain after midnight over the fourth day of at least 1.0 mm/day: the box still rains at night as
+  the GCM does; at most 0.5: the quiet night returns (the thresholds of 27 October).
+
+**The runs.** The two boxes ran side by side on three threads each, two lunar days in 2.6 hours (`run_wind.sh`). Over
+the fourth lunar day, by quarter from sunrise, beside the box as first run and the GCM at the site over four years
+with Earth's and with the lunar free-convection constant (`wind_read.py` beside the runs;
+[box_days_box_near_side_sea_l15_wind_gust_day3.json](../results/crm/box_days_box_near_side_sea_l15_wind_gust_day3.json)
+and the wind box's, with their onset and budget products):
+
+| Fourth lunar day | Box as first run | Wind following the GCM's | Wind and lunar gust | GCM, Earth constant | GCM, lunar constant |
+|---|---|---|---|---|---|
+| Mean wind at 0.3 km against its target | 0.42, 0.53, 0.66, 0.55 | 0.89, 0.95, 1.03, 0.85 | 0.89, 0.96, 1.03, 0.86 | | |
+| Gust over the sea, m/s | 1.9, 1.7, 2.0, 2.1 | 1.7, 1.5, 1.9, 2.0 | 0.63, 0.48, 0.67, 0.67 | | |
+| Evaporation; daily mean, mm/day | 2.79, 3.30, 3.32, 2.72; 3.03 | 3.41, 4.01, 3.36, 2.89; 3.42 | 3.28, 3.92, 3.04, 2.61; 3.21 | 3.61, 4.54, 3.50, 3.37; 3.75 | 3.34, 4.67, 3.20, 3.12; 3.58 |
+| Air at 0.3 km, K | 298.18, 299.74, 298.02, 297.25 | 298.80, 300.07, 298.39, 297.58 | 298.54, 299.90, 298.12, 297.24 | 298.83, 300.24, 299.66, 298.72 | 298.90, 300.35, 299.67, 298.69 |
+| Vapour at 0.3 km, g/kg | 11.08, 8.90, 10.11, 12.06 | 11.18, 9.18, 10.85, 12.36 | 10.82, 8.81, 10.42, 11.93 | 12.36, 12.11, 11.93, 12.29 | 11.99, 11.62, 11.77, 12.08 |
+| CM1's inhibition, J/kg | 11, 30, 19, 1.0 | 5.7, 24, 8.9, 1.1 | 6.1, 25, 12, 1.5 | | |
+| Rain; daily mean, mm/day | 0.00, 1.01, 1.06, 1.91; 1.00 | 0.23, 1.06, 1.26, 2.32; 1.22 | 0.15, 0.97, 1.16, 2.30; 1.14 | 0.15, 1.71, 3.02, 2.18; 1.78 | 0.20, 1.18, 2.40, 1.72; 1.38 |
+| Rain at 60–75°, 75–90°, 90–105°, 105–120°, 120–135° | 0.83, 1.93, 2.68, 2.45, 0.72 | 0.86, 1.67, 2.96, 2.57, 0.48 | 0.52, 1.48, 2.64, 3.44, 0.46 | 2.47, 4.90, 4.67, 2.73, 1.89 | 1.38, 4.13, 2.28, 1.84, 2.03 |
+| Rain at 135–150°, 150–165°, 165–180°; the late evening | 0.21, 0.09, 0.13; 0.14 | 0.17, 0.09, 1.28; 0.49 | 0.17, 0.09, 0.06; 0.11 | 2.82, 2.29, 3.64; 2.93 | 2.94, 2.86, 2.47; 2.76 |
+
+The vapour is a mixing ratio; the GCM's columns are its 3-day means at the six cells laid on the box's heights.
+
+**By the rules.**
+- **The box with the wind and the lunar gust passes both method checks** (its wind 0.86–1.03 of its target, its gust
+  0.48–0.67 m/s), so it is read. Its late evening rains 0.11 mm/day: the lull holds. Its night rains 2.30 mm/day after
+  midnight: it still rains at night as the GCM does (2.28 with Earth's constant, 1.72 with the lunar one).
+- **The box with the wind alone misses its method check narrowly:** its wind after midnight averages 0.847 of its
+  target's at 0.3 km (0.88 at 1 km), under the 0.85 its rule asked of every quarter, so it is not read as a test of the
+  wind. Its measures stand as observations: an evaporation of 3.42 mm/day, half the gap to the GCM (G 0.54); a late
+  evening of 0.49 mm/day, its storms returning at 165–180°; a night of 2.32. Over its third lunar day, which passed the
+  same check, G was 0.33 and the late evening 0.44 mm/day.
+
+**What the two show** (an interpretation of the runs above).
+- **The wind made part of the evaporation gap, and the gust gave part of it back.** With the GCM's wind the box
+  evaporates 3.42 mm/day against 3.03; with the lunar gust as well, 3.21. The Earth gust had stood in for about half of
+  what the short wind withheld.
+- **The late evening stays quiet with lunar surface physics.** The GCM's wind with the Earth gust brings the box's
+  storms back before midnight; with the lunar gust the lull holds through 180°, as in the box as first run. The GCM's
+  rain over those hours, 2.8–2.9 mm/day with either constant, stays unsupported.
+- **The night holds in every box.** After midnight the three boxes rain 1.9–2.3 mm/day from the same regime: a
+  boundary layer 4.2–4.5 km deep, 1,670–1,830 J/kg of CAPE released through 1–1.5 J/kg of inhibition, a
+  free-convection level at 3.9–4.2 km and the 99.9th percentile of w at 16–60 km at 2.7–3.8 m/s. With the GCM's wind
+  it rains 2.3 mm/day, as the GCM with Earth's constant does.
+- **The low air's difference now lies above the surface.** The corrected box evaporates within 2–16% of the GCM with the
+  lunar constant in every quarter, yet its air at 0.3 km stays 1.2–2.8 g/kg drier by day and 1.5 K cooler in the evening
+  and the night. The difference that feeds the GCM's late-evening rain lies less in the sea's supply than in how each
+  model carries heat and vapour up from its lowest layers, where CM1 mixes them through a boundary layer far deeper than
+  PlaSim's, as
+  [the boundary-layer comparison](../gcm/README.md#plasims-boundary-layer-mixing-at-lunar-gravity-27-october) found.
+
+**What it changes.** Every CM1 run over water so far, the rings and boxes among them, took MM5's gust over the sea, and
+every box forced by local time took the 3-day relaxation of its wind; both bear on their evaporation, in opposite
+directions. The box with both corrections is the nearest CM1 stands to the GCM's own forcing with lunar surface physics:
+on it the night's agreement with the GCM holds and the late evening's gap remains. Open, at the author's word: taking
+the two corrections into the boxes and rings that follow; PlaSim's light-wind term (the lunar constant, a Beljaars gust
+or neither); and the vertical carrying of the low air's heat and vapour as the late evening's next question.
+
+**Evidence and limits.** One realization of each box over two lunar days from the day-59 restart, whose first day
+carries the box's earlier state, forced by four years of a GCM still settling. The boxes hold the sea at 301.02 K, so
+unlike the GCM's mixed layer it cannot warm as its evaporation changes. The gust takes CM1's land setting, vconvc 1,
+where Beljaars suggested 1.2 and COARE takes 1.25, a gust 0.1–0.15 m/s larger. The quarters' measures are means of
+the domain diagnostics every 3 hours; the gust is inferred from the domain means of the surface layer's wind and the
+resolved wind at 50 m. The GCM's columns are 3-day means.
+
+**Cost.** The builds took 4 and 2 minutes; the four trials 18–35 s each. The two boxes ran side by side in 2.6 hours on
+six threads and hold 22.4 GB with every restart; the trials' copies hold 0.2 GB.
+
+```sh
+W=/media/projectspace/terluna-research/session-tools/wind_fc
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law_pbl_wind moon_omp_rain_law_pbl_wind_gust --jobs 4
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_l15_wind_day3   # and _wind_gust_day3
+climate/gcm/.venv/bin/python $W/trial.py run && climate/gcm/.venv/bin/python $W/trial.py check   # bit check and trials
+$W/run_wind.sh wind & $W/run_wind.sh wind_gust &                               # side by side, 2.6 hours
+climate/gcm/.venv/bin/python $W/wind_read.py                                   # the rules' readings, both boxes
+climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea_l15_wind_gust_day3 box_near_side_sea_l15_wind_gust_day4
+climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_l15_wind_gust_day4 88.5 118   # and _wind_day4
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_wind_gust_day4 --from-day 88.5
+```
+
 ## A box over the highlands
 
 The author's plan for highlands (2026-09-29) left a three-dimensional box over

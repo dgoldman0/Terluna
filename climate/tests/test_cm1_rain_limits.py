@@ -40,9 +40,11 @@ def test_the_patch_is_one_edit_set_per_file_each_adding_its_marker():
     assert c.BUILD_PATCHES['moon_omp_rain_limits'] == c.RAIN_LIMITS_PATCHES
     assert c.BUILDS['moon_omp_rain_limits'] == c.BUILDS['moon_omp']
     # No build before it takes it, so their executables and runs stay as they were; the rain-law build stands on it.
+    descendants = ('moon_omp_rain_law', 'moon_omp_rain_law_pbl', 'moon_omp_rain_law_pbl_wind',
+                   'moon_omp_rain_law_pbl_wind_gust')
     assert all(c.RAIN_LIMITS_PATCHES[0] not in patches for label, patches in c.BUILD_PATCHES.items()
-               if label not in ('moon_omp_rain_limits', 'moon_omp_rain_law', 'moon_omp_rain_law_pbl'))
-    for label in ('moon_omp_rain_law', 'moon_omp_rain_law_pbl'):
+               if label not in ('moon_omp_rain_limits', *descendants))
+    for label in descendants:
         assert c.BUILD_PATCHES[label][:len(c.RAIN_LIMITS_PATCHES)] == c.RAIN_LIMITS_PATCHES
     assert not any(p in c.PATCHES for p in c.RAIN_LIMITS_PATCHES)
 

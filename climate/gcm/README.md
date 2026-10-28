@@ -3735,14 +3735,102 @@ so on the box's own air CM1 does not support the GCM's rain from 135° to midnig
 air is 1.0–1.7 K warmer below 8 km and up to 1 g/kg moister below 4 km, and on its mean column the scheme convects deep
 from 5.4 to 55 km after 20 J/kg of inhibition, where on the box's it stays shallow. Through the lunar day the GCM's
 sea, within 0.3 K of the box's, evaporates 9–50% more under a wind at 10 m 1.5–2.2 times the box's. Two sources of the
-low air's difference stand unmeasured: PlaSim's Earth free-convection constant over the sea, a quarter of its extra
-evaporation on 26 October, together with its stronger wind; and the box's own wind, which its 3-day nudging holds to
-44–67% of the GCM's speed through most of the lunar day.
+low air's difference were put to the test next: PlaSim's Earth free-convection constant over the sea, a quarter of its
+extra evaporation on 26 October, which carries none of the late-evening rain (below); and the box's own wind, which its
+3-day nudging holds to 44–67% of the GCM's speed through most of the lunar day (the CRM's account).
 
 ```sh
 /media/projectspace/terluna-research/session-tools/option3/runs.sh l15_four_years      # 31 minutes on four cores
 climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/option3/settling.py   # the rule
 climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/option3/forcing_audit.py
+```
+
+#### The free-convection constant over four years, and the two models' light-wind exchange (28 October)
+
+The late evening's account put the two models' parting in their low air, which the sea's evaporation feeds, and
+PlaSim's free-convection constant over water was one candidate for the GCM's extra evaporation. Its two-year test of
+26 October (above) lowered the sea site's evaporation by 5%. Two questions were taken up: what the lunar constant does
+over the four years the box is forced by, read by a rule set before the run; and how each model treats light winds
+over water.
+
+**The run.** `A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc_cwsource` takes the 26 October run's flags
+(`--free-convection lunar` on the fifteen-level baseline) for four years from the same restart on the shared source as
+it now stands, beside the baseline's four (`_cwsource`). Its years 0–1 repeat the 26 October run bit for bit in all 61
+output fields and both restarts; the configurations differ only in the hashes of modules patched since, their options
+off. It ran in 29 minutes on four cores.
+
+**The rule, set before the run was read.** The sea site's rain over 135° to midnight, the late evening where CM1's box
+stays quiet, over the four years: at most 1.95 mm/day, a third below the baseline's 2.93, would mean the Earth constant
+carries a material part of that rain; within 0.5 mm/day of 2.93, the spread of the years (2.74–3.08 in the baseline,
+2.18–3.12 in the two-year lunar run), would mean it carries none the years can show.
+
+| Four years, from the same restart | Baseline (Earth constant) | Lunar constant |
+|---|---|---|
+| Globe: ground by year, K | 298.10, 297.53, 297.15, 296.87 | 298.17, 297.65, 297.30, 297.02 |
+| Globe: imbalance at the top; rain; cloud cover, four-year means | −2.98 W/m²; 2.137 mm/day; 35.2% | −2.73; 2.087; 35.4% |
+| Sea site by quarter from sunrise: the sea's surface, K | 300.77, 301.32, 301.16, 300.84 | 301.43, 301.97, 301.82, 301.48 |
+| Evaporation by quarter; daily mean, mm/day | 3.61, 4.54, 3.50, 3.37; 3.75 | 3.34, 4.67, 3.20, 3.12; 3.58 |
+| Air at 0.3 km by quarter, K | 298.83, 300.24, 299.66, 298.72 | 298.90, 300.35, 299.67, 298.69 |
+| Vapour at 0.3 km by quarter, g/kg | 12.36, 12.11, 11.93, 12.29 | 11.99, 11.62, 11.77, 12.08 |
+| Rain by quarter; daily mean, mm/day | 0.15, 1.71, 3.02, 2.18; 1.78 | 0.20, 1.18, 2.40, 1.72; 1.38 |
+| Rain at 60–75°, 75–90°, 90–105°, 105–120°, 120–135°, mm/day | 2.47, 4.90, 4.67, 2.73, 1.89 | 1.38, 4.13, 2.28, 1.84, 2.03 |
+| Rain at 135–150°, 150–165°, 165–180°, mm/day | 2.82, 2.29, 3.64 | 2.94, 2.86, 2.47 |
+| Late evening, 135–180°: four years; by year, mm/day | 2.93; 2.74, 2.90, 3.08, 3.00 | 2.76; 2.18, 3.12, 2.13, 3.54 |
+
+The vapour is a mixing ratio. The site's values are the 3-day means at the six cells the box's forcing comes from,
+weighted by the cosine of latitude and binned by the site's hour angle; the air at 0.3 km is laid on the box's heights.
+
+**By the rule the Earth constant carries none of the late-evening rain the years can show:** 2.76 mm/day against 2.93,
+with the lunar run's years ranging from 2.13 to 3.54. What the constant does change, the sea's energy balance shapes.
+The free-convection term's factor on the transfer over the site's unstable water falls from 1.71–2.14 to 1.35–1.53 on
+the 3-day means; the sea warms 0.65 K at every hour, and the air–sea contrast in virtual temperature grows from 2.0–2.9
+to 2.8–3.8 K, so the evaporation falls only 5% and rises in the afternoon. The site's rain falls 22%, most through
+sunset (at 90–105° from 4.67 to 2.28 mm/day, against CM1's 2.68–3.19) and after midnight (from 2.18 to 1.72), while
+the late evening holds. The low air dries by 0.2–0.5 g/kg at the same temperature, and in the late evening it stays
+about 1.3 K warmer and 0.9 g/kg moister than the box's. Year by year the globe runs 0.07–0.15 K warmer and rains 2%
+less, and it stands 0.25 W/m² nearer balance at the top; the two runs settle alike, and a line through the imbalance
+against the ground reaches zero at 295.6 K against 295.7.
+
+**Light winds over water in the two models** (`light_wind.py` beside the runs). In light winds over a warm sea both
+models raise the surface's transfer of heat and vapour beyond what the mean wind carries, each by a formula calibrated
+on Earth:
+- **PlaSim** (`surflx`) multiplies the transfer over unstable water by Miller, Beljaars and Palmer's (1992)
+  interpolation toward the free convection of tank experiments, whose constant 0.0016 m s⁻¹ K^−1/3 carries Earth's
+  gravity. On the baseline's 3-day means at the site it raises the transfer 1.71–2.14 times, where PlaSim's own
+  unstable factor without the term gives 1.10–1.11 and the lunar constant, the tank law scaled by (g/p_s)^1/3, gives
+  1.33–1.53.
+- **CM1** (`sfclay`, `sfcmodel` 2, unpatched in every Terluna build until today) adds a gust to the wind in its bulk
+  formulas: over land Beljaars's (1995) convective velocity of the boundary layer's eddies, (g/T_s · h · B)^1/3 from
+  the build's gravity, the boundary layer's depth h and its buoyancy flux B; over water the old MM5 formula, a gust of
+  √Δθ_v m/s for Δθ_v in K, which has no gravity in it. In the sea box forced by the fifteen-level GCM that gust is
+  1.6–2.1 m/s, against a resolved wind of 1.3–1.7 m/s at 50 m, and raises the wind in the bulk formulas 1.6–1.8 times.
+  Scaled to lunar gravity as a buoyancy velocity it would give 1.14–1.18; Beljaars's gust from the box's own fluxes
+  and depth, at 1.2 w*, gives 1.10–1.17.
+
+At lunar gravity a kelvin of contrast between sea and air carries a sixth of the buoyancy it carries on Earth, so both
+Earth formulas likely overstate the light-wind exchange over the lunar sea, by similar amounts, and neither explains
+the gap between the models. Beljaars (1995) showed that in free convection the wind in the surface transfer is the
+velocity of the boundary layer's large eddies, so that similarity theory needs no one-third law once that velocity
+enters the bulk formula; the COARE ocean-flux algorithm carries the same gust, 1.25 w*, with a boundary layer of 600 m
+over Earth's tropical ocean (Fairall and others 2003). On that physics the lunar boost falls below even the tank law's
+lunar constant (an interpretation). In CM1's box under the GCM's wind, Beljaars's gust over water lowers the
+evaporation from 3.42 to 3.21 mm/day and keeps the late evening quiet, while the night still rains 2.3 mm/day
+([the CRM's account](../crm/README.md#the-sea-box-with-its-wind-following-the-gcms-and-the-gust-over-water-at-lunar-gravity-28-october)).
+
+**Evidence and limits.** One four-year run of each, from one restart, both still settling by 0.3–0.5 K a year. The
+transfer factors are computed on 3-day means, which smooth the wind the model works on and so overstate the term; the
+GCM's 10 m wind from its components' means understates its speed. The lunar constant scales the tank law alone; the
+gust's scalings use CM1's domain means. Whether the lunar constant, a Beljaars gust or neither suits PlaSim is the
+author's call.
+
+```sh
+W=/media/projectspace/terluna-research/session-tools/wind_fc
+$W/runs.sh lunarfc_four_years                                                   # 29 minutes on four cores
+climate/gcm/.venv/bin/python $W/bit_check.py A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc_cwsource \
+    A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc                               # years 0-1, every field and restart
+climate/gcm/.venv/bin/python $W/fc_compare.py                                   # the globe, the site and the rule
+climate/gcm/.venv/bin/python $W/light_wind.py A28R_301k_cold_sbm_rh07_deep200_l15cap_cwsource:0-3 \
+    A28R_301k_cold_sbm_rh07_deep200_l15cap_lunarfc_cwsource:0-3                  # both models' light-wind factors
 ```
 
 ### Cloud amount: what published models say

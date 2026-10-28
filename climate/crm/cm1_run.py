@@ -1346,6 +1346,42 @@ PBL_DENSITY_PATCH = ('turb.F', PBL_DENSITY_MARKER, [
 """, 1)])
 BUILDS['moon_omp_rain_law_pbl'] = BUILDS['moon_omp']
 BUILD_PATCHES['moon_omp_rain_law_pbl'] = RAIN_LIMITS_PATCHES + RAIN_LAW_PATCHES + [TWILIGHT_PATCH, PBL_DENSITY_PATCH]
+# The wind's own nudging time scale (register, 28 October). CM1 relaxes the domain-mean wind and the held air toward
+# their targets on one time scale, lsnudge_tau, 3 days in every case, a value the rings took for a profile held fixed.
+# The boxes' wind targets change with each window of local time, every 0.82 days, faster than a 3-day relaxation
+# follows, and the sea box's mean wind ran at 44-67% of its target's speed. With var10 > 0 this build relaxes the
+# wind alone on var10 seconds while the held air keeps lsnudge_tau; with var10 at CM1's default of 0 the wind keeps
+# lsnudge_tau, as in moon_omp_rain_law_pbl.
+WIND_TAU_MARKER = "Terluna: the wind's own nudging time scale"
+WIND_TAU_PATCH = ('solve1.F', WIND_TAU_MARKER, [
+    ('      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n',
+     '      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n'
+     f'      real :: terluna_tau_uv   ! {WIND_TAU_MARKER}\n', 1),
+    ('      if( donudge .and. do_lsnudge_u )then\n',
+     '      terluna_tau_uv = lsnudge_tau   ! Terluna: var10 s for the wind when var10 > 0\n'
+     '      if( var10.gt.0.0 ) terluna_tau_uv = var10\n'
+     '      if( donudge .and. do_lsnudge_u )then\n', 1),
+    ('          tem1 = -lsnudgefac*( (umove+uavg(k))-lsnudge_u(k,lsnudge_count) )/(lsnudge_tau)\n',
+     '          tem1 = -lsnudgefac*( (umove+uavg(k))-lsnudge_u(k,lsnudge_count) )/(terluna_tau_uv)\n', 1),
+    ('          tem2 = -lsnudgefac*( (vmove+vavg(k))-lsnudge_v(k,lsnudge_count) )/(lsnudge_tau)\n',
+     '          tem2 = -lsnudgefac*( (vmove+vavg(k))-lsnudge_v(k,lsnudge_count) )/(terluna_tau_uv)\n', 1)])
+BUILDS['moon_omp_rain_law_pbl_wind'] = BUILDS['moon_omp']
+BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] = BUILD_PATCHES['moon_omp_rain_law_pbl'] + [WIND_TAU_PATCH]
+# The gust over water at lunar gravity (register, 28 October). In light winds CM1's surface layer (sfclay, sfcmodel 2)
+# adds a gust to the wind in its bulk formulas: over land Beljaars's convective velocity of the boundary layer's
+# eddies, vconvc (g / T_s * h * B)^(1/3) with vconvc 1, which takes the build's gravity, the boundary layer's depth h and
+# its buoyancy flux B; over water the old MM5 formula sqrt(dthv) m/s for dthv in K, which has no gravity in it. The air
+# over the lunar sea stands 3-4 K below the sea in virtual temperature, a sixth of the buoyancy it would carry at
+# Earth's gravity, and that formula gave the sea box a gust of 1.6-2.1 m/s, raising the wind in its bulk formulas
+# 1.6-1.8 times where Beljaars's gust from the box's own fluxes gives 1.1-1.2. This build takes Beljaars's branch over
+# water too (Beljaars 1995; the COARE algorithm's gust over the ocean is the same form, Fairall and others 2003).
+GUST_MARKER = "Terluna: Beljaars's gust over water too"
+GUST_PATCH = ('sfclay.F', GUST_MARKER, [
+    ('        if (xland(i).lt.1.5) then\n        fluxc = max(hfx(i)/rhox(i)/cp                    &\n',
+     f'        if (xland(i).lt.1.5 .or. .true.) then   ! {GUST_MARKER}, at the build\'s gravity\n'
+     '        fluxc = max(hfx(i)/rhox(i)/cp                    &\n', 1)])
+BUILDS['moon_omp_rain_law_pbl_wind_gust'] = BUILDS['moon_omp']
+BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] = BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] + [GUST_PATCH]
 RAIN_LAW_PRODUCT = 'atmosphere/rain/results/rain_fall_law.json'
 RAIN_LAW_SCHEMA = 'terluna.atmosphere.rain-fall-law/1'
 RAIN_LAW_KEYS = ('rain_fall_law', 'rain_selfcoll')
@@ -1845,6 +1881,31 @@ for _tag, _refine, _columns in (('6km', 1, 32), ('3km', 2, 64), ('2km', 3, 64)):
         purpose=f"the late evening of the sea box forced by the fifteen-level GCM at {6 // _refine} km spacing on "
                 f"{_columns} x {_columns} columns: box_near_side_sea_l15_day4's air at day 107.625, 142 degrees of "
                 "hour angle, averaged over its columns, and the forcing of that hour held for two Earth days")
+# The sea box with its wind following the GCM's (register, 28 October). Its third and fourth lunar days again, from
+# box_near_side_sea_l15's day-59 restart, on the build that relaxes the wind alone on var10 seconds, with var10 at
+# 2 hours, a tenth of a window of local time, the time scale on which cloud-resolving runs forced by observations
+# relax their mean wind (Khairoutdinov, Randall and DeMott 2005). Everything else is the day-3 and day-4 runs': the
+# inputs, the forcing, the held air on 3 days, the physics and the output.
+WIND_TAU_S = 7200.0
+CASES['box_near_side_sea_l15_wind_day3'] = dict(
+    CASES['box_near_side_sea_l15_day3'], build='moon_omp_rain_law_pbl_wind',
+    restart_namelist=dict(param8=dict(var10=WIND_TAU_S)),
+    purpose=CASES['box_near_side_sea_l15_day3']['purpose'] + "; again with its mean wind relaxed toward the GCM's "
+            'on 2 hours')
+CASES['box_near_side_sea_l15_wind_day4'] = dict(
+    CASES['box_near_side_sea_l15_day4'], build='moon_omp_rain_law_pbl_wind',
+    restart_from=dict(case='box_near_side_sea_l15_wind_day3', day=88.5),
+    restart_namelist=dict(param8=dict(var10=WIND_TAU_S)),
+    purpose=CASES['box_near_side_sea_l15_day4']['purpose'] + "; again with its mean wind relaxed toward the GCM's "
+            'on 2 hours')
+# The same with the gust over water at lunar gravity as well (register, 28 October): the wind cases on the build that
+# takes Beljaars's gust over water, run beside them, so that the wind's effect and the gust's are each measured.
+for _day in ('day3', 'day4'):
+    CASES[f'box_near_side_sea_l15_wind_gust_{_day}'] = dict(
+        CASES[f'box_near_side_sea_l15_wind_{_day}'], build='moon_omp_rain_law_pbl_wind_gust',
+        purpose=CASES[f'box_near_side_sea_l15_wind_{_day}']['purpose'] + ', and the gust over water at lunar gravity')
+CASES['box_near_side_sea_l15_wind_gust_day4']['restart_from'] = dict(case='box_near_side_sea_l15_wind_gust_day3',
+                                                                     day=88.5)
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
