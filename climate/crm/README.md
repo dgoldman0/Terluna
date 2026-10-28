@@ -2700,6 +2700,9 @@ The vapour is a mixing ratio; the GCM's columns are its 3-day means at the six c
   model carries heat and vapour up from its lowest layers, where CM1 mixes them through a boundary layer far deeper than
   PlaSim's, as
   [the boundary-layer comparison](../gcm/README.md#plasims-boundary-layer-mixing-at-lunar-gravity-27-october) found.
+  The test of that reading the same day did not bear it out: the GCM carries vapour out of its lowest kilometre as CM1
+  does, and the gap lies in how much vapour each column holds
+  ([the next section](#the-sea-box-on-the-corrected-build-its-wind-pulled-from-the-gcms-lowest-level-up-28-october)).
 
 **What it changes.** Every CM1 run over water so far, the rings and boxes among them, took MM5's gust over the sea, and
 every box forced by local time took the 3-day relaxation of its wind; both bear on their evaporation, in opposite
@@ -2709,7 +2712,7 @@ defaults for the boxes and rings that follow, the wind's pull starting at the GC
 October; [the next section](#the-sea-box-on-the-corrected-build-its-wind-pulled-from-the-gcms-lowest-level-up-28-october));
 PlaSim took Beljaars's gust for a four-year test
 ([the GCM's account](../gcm/README.md#beljaarss-gust-in-plasims-surface-transfer-over-four-years-28-october)); and
-the vertical carrying of the low air's heat and vapour is the late evening's next question.
+the vertical carrying of the low air's heat and vapour, tested next, put the gap in the columns' vapour instead.
 
 **Evidence and limits.** One realization of each box over two lunar days from the day-59 restart, whose first day
 carries the box's earlier state, forced by four years of a GCM still settling. The boxes hold the sea at 301.02 K, so
@@ -2762,6 +2765,101 @@ day-59 restart on three threads:
   full pull's: it passed. Over that first day both builds level off below their targets, the full pull at 0.82–0.84 of
   its target at 0.3 km and the pull from 313 m at 0.74–0.76, and the evaporation runs 9% lower with the levels below
   left free.
+
+**The box days** (`box_near_side_sea_l15_aloft_day3` and `_aloft_day4`, from the day-59 restart; their inputs the gust
+box's byte for byte but for `var8`). Day 3 ran on two threads beside the GCM, in 1.6 hours, and day 4 on three, in 1.2
+hours. They were read on the fourth lunar day by the rules of `rules.txt` part B, set before they ran. Those rules
+check the wind at the pulled levels, 0.5 and 1 km, with 0.3 km now in the layer the box shapes itself. The table compares
+the fourth day with the gust box's and with the GCM that takes the same gust over four years
+([the GCM's account](../gcm/README.md#beljaarss-gust-in-plasims-surface-transfer-over-four-years-28-october)); the
+products are
+[box_days_box_near_side_sea_l15_aloft_day3.json](../results/crm/box_days_box_near_side_sea_l15_aloft_day3.json) and
+the fourth day's onset and budget.
+
+| Fourth lunar day, by quarter from sunrise | Wind pulled to the ground, lunar gust | Wind pulled from 313 m, lunar gust | GCM with Beljaars's gust |
+|---|---|---|---|
+| Mean wind at 0.5 km; at 1 km, against its target | 0.89, 0.96, 1.03, 0.87; 0.89, 0.92, 1.02, 0.89 | 0.87, 0.93, 1.03, 0.84; 0.88, 0.91, 1.02, 0.88 | |
+| Mean wind at 0.3 km against its target | 0.89, 0.96, 1.03, 0.86 | 0.85, 0.92, 1.03, 0.81 | |
+| The 50 m wind against the 0.3 km wind | 0.97, 0.94, 0.94, 0.98 | 0.92, 0.90, 0.93, 0.92 | |
+| Gust over the sea, m/s | 0.63, 0.48, 0.67, 0.67 | 0.62, 0.49, 0.68, 0.66 | |
+| Evaporation; daily mean, mm/day | 3.28, 3.92, 3.04, 2.61; 3.21 | 3.13, 3.79, 3.09, 2.43; 3.11 | 3.23, 4.87, 2.88, 2.71; 3.41 |
+| Air at 0.3 km, K | 298.54, 299.90, 298.12, 297.24 | 298.40, 299.84, 298.15, 297.25 | 299.05, 300.59, 299.78, 298.85 |
+| Vapour at 0.3 km, g/kg | 10.82, 8.81, 10.42, 11.93 | 10.68, 8.71, 10.25, 11.88 | 11.87, 11.59, 11.62, 12.02 |
+| Rain; daily mean, mm/day | 0.15, 0.97, 1.16, 2.30; 1.14 | 0.03, 1.17, 1.03, 1.89; 1.03 | 0.14, 1.46, 2.81, 1.15; 1.40 |
+| Rain at 60–75°, 75–90°, 90–105°, 105–120°, 120–135° | 0.52, 1.48, 2.64, 3.44, 0.46 | 0.60, 1.37, 3.07, 2.12, 0.47 | 2.27, 4.20, 4.02, 2.73, 2.20 |
+| Rain at 135–150°, 150–165°, 165–180°; the late evening | 0.17, 0.09, 0.06; 0.11 | 0.30, 0.10, 0.06; 0.15 | 2.04, 3.70, 2.20; 2.62 |
+
+**By the rules.** The fourth day misses its wind check narrowly. After midnight its wind at 0.5 km averages 0.840 of its
+target, under the 0.85 asked of every quarter (1 km holds at 0.876). Its gust (0.49–0.68 m/s) and its near-ground
+profile (the 50 m wind at 0.90–0.93 of the 0.3 km wind) pass. Like the wind box of the morning, it is not read as a
+test, and its measures stand as observations. The late evening rains 0.15 mm/day and the night 1.89 mm/day after
+midnight. The third day, which passed the same checks, rains 0.13 and 1.91. With the pull left off the lowest levels
+the evaporation falls 3% from the gust box's and the night's rain 18%, while the late evening stays quiet. Against the
+GCM on the same surface physics, the box rains 1.03 mm/day over the lunar day against 1.40: half the GCM's from noon
+to midnight (1.10 against 2.13 mm/day), and 0.15 against 2.62 in the late evening. After midnight it rains 1.6 times
+the GCM's 1.15 mm/day, at evaporation within 11%.
+
+**How the two models carry vapour up from the sea** (`rules.txt` part D, set before either run's budgets were read;
+`carry.py`, `carry_direct.py`). This morning's account read the low air's gap as a sign that PlaSim carries heat and
+vapour up from its lowest layers more slowly than CM1. The test set that against the vapour each model's turbulence and
+convection carry up through 0.6 and 1.2 km, as a share of the evaporation, and the fall of vapour from 0.3 to 1.2 km. In
+the box the flux came first from CM1's vapour budget by process. That budget returns the evaporation over the whole
+column within 1.6% in every quarter, as the rule asked, but not over the lowest 1.2 km, where its terms sum to −1.3 mm/day
+against a change of −0.03. A direct measure, the resolved eddy flux ρ⟨w′q′⟩ from the 3-D output every 3 hours plus the
+boundary-layer scheme's flux, stands beside it.
+
+| Fourth day / four years, by quarter | CM1, direct | CM1, from its budget | GCM with the gust |
+|---|---|---|---|
+| Share of the evaporation carried up through 0.6 km | 0.91, 0.76, 0.88, 0.79 | 1.27, 1.19, 1.34, 1.18 | 0.90, 0.94, 0.95, 0.88 |
+| The same through 1.2 km | 0.58, 0.43, 0.66, 0.43 | 0.97, 0.75, 1.16, 0.76 | 0.59, 0.80, 0.74, 0.57 |
+| Vapour's fall from 0.3 to 1.2 km, g/kg | 0.49, 0.56, 0.24, 0.16 | | 0.36, 0.49, 0.18, 0.22 |
+| Vapour at 0.3, 1.2, 2.5, 4 and 6 km by day (sunrise to noon), g/kg | 10.7, 10.2, 9.9, 9.8, 9.2 | | 11.9, 11.5, 10.6, 10.2, 7.5 |
+| The same, noon to sunset | 8.7, 8.2, 8.1, 8.2, 8.4 | | 11.6, 11.1, 9.8, 9.4, 8.7 |
+| Potential temperature at 0.3 and 4 km, sunrise to noon; sunset to midnight, K | 282.9, 283.3; 282.6, 282.7 | | 283.4, 284.7; 284.1, 284.3 |
+
+By the rule the slow-carrying reading holds nowhere: on either measure of CM1's flux the GCM carries a like share
+through the lowest kilometre with a vapour fall no steeper than CM1's (0.74–0.87 of it by day). From noon to sunset
+the falls agree within 13% while the air at 0.3 km differs by 2.9 g/kg, so there the difference lies in the column's
+whole vapour; in the morning and evening the falls sit 26–28% apart, the GCM's the smaller, with gaps of 1.2–1.4 g/kg;
+after midnight the low air agrees within 0.14 g/kg. The profiles say the same: by day the GCM is 1.2–2.9 g/kg moister
+from 0.3 to 1.2 km alike, less so higher, and drier at 6 km in the morning, while CM1's vapour stands nearly uniform up
+to 4 km. The low air's gap is not in how either model carries vapour out of its lowest layers; it lies in how much
+vapour each column holds.
+
+**A lead on the column's vapour.** The box's day-night forcing takes the GCM's circulation by local time, less the
+part the GCM's mean vertical wind carries, which CM1 is to apply itself on the box's own profile. Over the lunar day the
+GCM's circulation exports 1.99 mm/day of vapour from the site's column (held to its exact budget), and the mean wind's
+part the table leaves out comes to about +0.48 mm/day, so the table removes about 2.5. In the box the table removes
+2.45 mm/day (box_budget) and CM1's imposed ascent gives −0.10, not +0.48. The box therefore exports about half a
+millimetre a day more vapour than the GCM it stands for, about a quarter of the GCM's export, which would dry its whole
+column. Why CM1's large-scale vertical advection gives so little back is not yet checked.
+
+**What it changes.** The corrected build stands as the default, its near-ground wind the box's own. On the same surface
+physics the two models rain alike in amount over the lunar day and differently in time: the GCM in the evening, CM1
+after midnight. The low air's gap lies in the column's vapour, with the box's forcing a named suspect, rather than in
+the boundary layer's carrying.
+
+**Evidence and limits.** One realization of each box day from one restart, forced by the baseline GCM's four years,
+whose light-wind term differs from the gust GCM's; the GCM's numbers are its four years at the six cells. CM1's
+direct flux takes resolved snapshots every 3 hours and the boundary-layer scheme's tendency, and neglects density
+fluctuations; why CM1's budget does not close over its lowest kilometre is not traced. The GCM's flux comes from its
+single-step budgets at the end of each 3-day mean, and below 1.2 km its convection condenses little. The heat budget
+of the box does not close over the column (its resolved terms leave several W/m² against a surface flux of a few), so
+the heat flux is not read; the potential temperatures are.
+
+```sh
+W=/media/projectspace/terluna-research/session-tools/gust_aloft
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law_pbl_wind_gust_aloft --jobs 4
+python3 $W/trial_aloft.py run && python3 $W/trial_aloft.py check                # bit check and the three-hour trial
+python3 $W/trial_aloft.py run gust24 aloft24 && python3 $W/trial_aloft.py check24   # the 24-hour pair
+$W/run_aloft.sh                                                                  # day 3 on two threads, day 4 on three
+climate/gcm/.venv/bin/python $W/aloft_read.py                                    # part B
+climate/gcm/.venv/bin/python $W/carry.py && climate/gcm/.venv/bin/python $W/carry_direct.py   # part D
+climate/gcm/.venv/bin/python $W/box_low_budget.py && climate/gcm/.venv/bin/python $W/gcm_low_budget.py
+climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea_l15_aloft_day3 box_near_side_sea_l15_aloft_day4
+climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_l15_aloft_day4 88.5 118
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_aloft_day4 --from-day 88.5
+```
 
 ## A box over the highlands
 

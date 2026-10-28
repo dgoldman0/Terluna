@@ -3912,17 +3912,20 @@ as they were. C5 holds for both runs: the top two levels move at most 0.28 K and
 
 **What it shows** (an interpretation of the runs above).
 - **The gust removes most of the Earth boost, and the sea answers by warming.** The transfer falls a third, the sea warms
-  1.2 K at every hour, and the wider contrast keeps the evaporation within 9% of the baseline's: 3.41 mm/day, 6% above
-  the corrected box's 3.21.
-- **The low air's gap lies elsewhere.** With both models on Beljaars's gust, the GCM's air at 0.3 km stays 1.0–2.8 g/kg
-  moister by day than the box's, its evaporation within 6%. The surface exchange explains little of that gap; how each
-  model carries vapour up from its lowest layers is the next question, and the gust run writes the vapour by process
-  for it.
-- **The night's agreement rested on the Earth term.** After midnight the GCM now rains 1.15 mm/day against the box's
-  2.30, at evaporation within 4% of the box's (2.71 against 2.61). With the same surface physics the two models rain
-  alike over the lunar day (1.40 against 1.14 mm/day) at different hours. The GCM rains 1.5–2.4 times the box's from
-  noon to midnight and half of it after midnight, as though its convection spends in the evening what CM1's holds until
-  after midnight.
+  1.2 K at every hour, and the wider contrast keeps the evaporation within 9% of the baseline's: 3.41 mm/day, 10% above
+  the corrected box's 3.11.
+- **The low air's gap lies elsewhere.** With both models on Beljaars's gust, the GCM's air at 0.3 km stays 1.2–2.9 g/kg
+  moister by day than the corrected box's, its evaporation within 10%, so the surface exchange explains little of that
+  gap. Nor does the boundary layer's carrying: the GCM carries vapour up through its lowest kilometre as CM1 does, with
+  a vapour fall no steeper, and it is as much moister at 1.2 km as at 0.3 km, so the gap lies in how much vapour each
+  column holds. The box's forcing exports about half a millimetre a day more vapour than this GCM's circulation, a
+  lead not yet checked
+  ([the CRM's account](../crm/README.md#the-sea-box-on-the-corrected-build-its-wind-pulled-from-the-gcms-lowest-level-up-28-october)).
+- **The night's agreement rested on the Earth term.** After midnight the GCM now rains 1.15 mm/day against the corrected
+  box's 1.89, at evaporation 11% above the box's (2.71 against 2.43). With the same surface physics the two models rain
+  1.40 and 1.03 mm/day over the lunar day, at different hours. The GCM rains 1.2–2.7 times the box's from noon to
+  midnight, and 0.6 of it after midnight, as though its convection spends in the evening what CM1's holds until after
+  midnight.
 - **The globe warms.** Year by year the run is 0.18–0.55 K warmer than the baseline, rains 6% less and stands 0.9 W/m²
   nearer balance; the line through its imbalance reaches zero at 296.4 K against 295.7. At the design sunlight the gust
   would settle the Moon some 0.7 K warmer, so adopting it would rebalance the design climate's sunlight.
