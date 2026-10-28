@@ -2832,7 +2832,7 @@ GCM's circulation exports 1.99 mm/day of vapour from the site's column (held to 
 part the table leaves out comes to about +0.48 mm/day, so the table removes about 2.5. In the box the table removes
 2.45 mm/day (box_budget) and CM1's imposed ascent gives −0.10, not +0.48. The box therefore exports about half a
 millimetre a day more vapour than the GCM it stands for, about a quarter of the GCM's export, which would dry its whole
-column. Why CM1's large-scale vertical advection gives so little back is not yet checked.
+column. Why CM1's large-scale vertical advection gives so little back is checked in the next section.
 
 **What it changes.** The corrected build stands as the default, its near-ground wind the box's own. On the same surface
 physics the two models rain alike in amount over the lunar day and differently in time: the GCM in the evening, CM1
@@ -2859,6 +2859,62 @@ climate/gcm/.venv/bin/python $W/box_low_budget.py && climate/gcm/.venv/bin/pytho
 climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea_l15_aloft_day3 box_near_side_sea_l15_aloft_day4
 climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_l15_aloft_day4 88.5 118
 climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_aloft_day4 --from-day 88.5
+```
+
+### The box's forcing export checked (28 October, evening)
+
+The lead above asked why CM1's large-scale vertical advection gives back so little. The site forcing builds its table
+from the GCM's circulation by local time and adds back the GCM's mean vertical wind's advection of the box's starting
+air, the GCM's mean air (`gcm_site.to_cm1`); CM1 then applies the same mean wind to its own air. The two cancel while
+the box's air is its starting air. Afterwards their sum is a departure term, the mean wind acting on the box's departure
+from its start. The check was read by rules set before it was computed (`rules.txt` beside `forcing_check.py`):
+
+- **The table** rebuilt from the GCM run's four years matches the box's `terluna_lsadv.txt` to two parts in a million.
+- **The excess.** The box's forcing removes 0.45 mm/day (third day) and 0.55 (fourth) more vapour from the column than
+  the GCM's circulation, which removes 1.99. The departure term reproduces both to 0.01 mm/day, and CM1's own imposed
+  ascent matches the term recomputed from the box's vapour to 0.01.
+- **Where.** The GCM's mean wind over the site rises through the lowest 5 km, fastest near 2.2 km (0.39 cm/s), and sinks
+  slowly from 6 to 14 km: it draws air into the column below about 2.5 km and sends it out between 2.5 and 6 km. In
+  CM1's advective form the air it draws in carries the box's own vapour. On the fourth day the box's air from 0.25 to
+  1 km stands 1.5–1.7 g/kg below its start; in flux form the inflow levels take 0.83 mm/day and the outflow levels,
+  drier too, give back 0.25. The layer below 1.77 km holds 0.62 of it.
+- **When.** Through the first lunar day the term swung with the box's adjustment (+0.16, +0.42, +0.14 and −0.97 mm/day
+  by quarter), and with the term still small the box's air at 0.2–0.7 km fell 0.8 g/kg below its start within the
+  first week. From the second day it took 0.44, 0.47 and 0.57 mm/day, 43 kg/m² over three lunar days, while the
+  column's vapour fell from 259 to 217 kg/m². At the fourth day's evaporation and rain, the column would have gained
+  0.21 mm/day without it, against the 0.36 it lost.
+- **Heat.** The same term warms the box by 12.0 W/m² on the fourth day, 12.3 of it above 23 km, where the box's air has
+  fallen 7–10 K below its start under the GCM's weak mean ascent; there it restores.
+
+**The reading.** The forcing's mean-wind part is what Randall and Cripe (1999, J. Geophys. Res. 104, 24,527) call
+horizontal advective forcing, the horizontal advection prescribed and the vertical reckoned on the model's own sounding;
+its hour-by-hour part is their revealed forcing, the whole advection prescribed. Over the days to weeks of field
+experiments they found the two comparable, preferred revealed forcing for its simplicity, and noted that a forced
+column whose sounding errors carry it away cannot find its way back. Over four lunar days the advective form here
+turned the low-level deficit the box opened in its first week into a steady drying of the whole column, because the
+air the GCM's mean wind draws in is the box's own and drier than the GCM's. Coupled columns under the
+weak-temperature-gradient approximation carry the air entering a column at the upwind value, the neighbouring
+column's or the reference's, and the air leaving at the column's own (Daleu, Woolnough and Plant 2012, J. Atmos. Sci.
+69, 3683, their equation 9). In that form the box's inflow would carry the GCM's air and its drier outflow would export
+less, so the departure would restore the column rather than drain it.
+
+**What it changes.** The afternoon's reading stands where it placed the gap: in the column's vapour, not in the
+boundary layer's carrying. That vapour, though, has drifted with the forcing's form since the first lunar day, and on
+the fourth day the box's low air stands 1.6 g/kg below the GCM's mean air, about the low air's whole gap over the
+lunar day; the comparisons made on this forcing carry that drift. How much of the gap CM1's physics would keep with its
+inflow at the GCM's humidity needs a box run in that form. Boxes forced from here on should take a form that does not
+build on the box's departure: the inflow at the GCM's air, recommended, or the mean wind's part prescribed with the
+rest. The choice is the author's.
+
+**Evidence and limits.** Domain means every 3 hours from one realization of each box day. The departure term takes
+centred differences on the box's levels, as the table's added-back term does; CM1's own term (third-order upstream)
+matches it to 0.01 mm/day. The flux-form split interpolates the density to the w levels. Nothing has been run in
+another form.
+
+```sh
+F=/media/projectspace/terluna-research/session-tools/forcing_check
+PYTHONPATH=. climate/gcm/.venv/bin/python $F/forcing_check.py       # rules F0-F5; forcing_check.json and .txt
+PYTHONPATH=. climate/gcm/.venv/bin/python $F/low_air_by_day.py      # the low air against its start by lunar day
 ```
 
 ## A box over the highlands
