@@ -394,17 +394,18 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    climate's sunlight (domain/climate 5578b55), it gives 299.6 K at a reference humidity of 0.7 and 300.1 K at 0.6,
    against Kuo's 298.4 K. It rains 6–12% more, halves the sea's rain after midnight at 0.7 and sharpens the land's
    afternoon peak. Its climate takes a longwave refit of its own (3.38 W/m² against the rule's 2.5), and the exobase
-   stays. Kuo's forcing does not explain CM1's quiet nights over the sea: after midnight the new GCM's circulation
-   there warms the air above 16 km by 131 W/m² against Kuo's 57 and dries the column by 5.2 against 3.3 mm/day. The
-   sea box's third lunar day has settled at 1.33 mm/day, 67% of the new GCM's rain, with the gap after midnight. The
-   tests of 24 and 25 October (register; domain/climate ac0ee15 to 1d05c3d) explain it. CM1's quiet sea nights hold on
-   3 and 2 km grids and are a shallow regime capped by mixing, under air the sinking warms and dries, while the
-   scheme rains shallow clouds because it tells deep from shallow convection by moisture alone. CM1's upper air runs
-   8–10 K colder than the GCM's, 5–6 K of it from its mixing updrafts and 3–4 K from the GCM's moister lowest level.
-   A depth test for deep convection (cloud thicker than 200 hPa, as in ECMWF's IFS) cuts the sea's night rain by a
-   quarter and changes little else. Mixing the scheme's reference cools the upper air by only 2–2.5 K and warms the
-   ground 1.7–2.4 K with weaker sea convection, and a CAPE threshold was tried and set aside. Open, with
-   recommendations:
+   stays. On 24 October the night's forcing alone, the new GCM's circulation warming the air above 16 km by 131 W/m²
+   against Kuo's 57 and drying the column by 5.2 against 3.3 mm/day after midnight, was read as showing that Kuo's
+   forcing did not explain CM1's quiet nights over the sea; a box forced by the fifteen-level GCM showed on 27 October
+   that it largely did (below). The sea box's third lunar day has settled at 1.33 mm/day, 67% of the new GCM's rain,
+   with the gap after midnight. The tests of 24 and 25 October (register; domain/climate ac0ee15 to 1d05c3d) explain it.
+   CM1's quiet sea nights hold on 3 and 2 km grids and are a shallow regime capped by mixing, under air the sinking
+   warms and dries, while the scheme rains shallow clouds because it tells deep from shallow convection by moisture
+   alone. CM1's upper air runs 8–10 K colder than the GCM's, 5–6 K of it from its mixing updrafts and 3–4 K from the
+   GCM's moister lowest level. A depth test for deep convection (cloud thicker than 200 hPa, as in ECMWF's IFS) cuts the
+   sea's night rain by a quarter and changes little else. Mixing the scheme's reference cools the upper air by only
+   2–2.5 K and warms the ground 1.7–2.4 K with weaker sea convection, and a CAPE threshold was tried and set aside.
+   Open, with recommendations:
    - **Vertical levels and a mass-flux scheme** (register, 26 October). PlaSim now runs 15 levels, new ones near 2.4,
      6, 8 and 13.5 km and a thin bottom layer near 0.3 km, at about 1.55 times the 10-level cost; a provisional
      longwave refit on them leaves 3.0 W/m² but cools the climate (−3.7 W/m² at the top). The shallow scheme's 700 hPa
@@ -428,10 +429,17 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      cloud re-evaporates most of what it condenses and PlaSim, which keeps no cloud water, rains it. Cloud water for
      PlaSim, built and tested with the night switch (register, 27 October), failed its stop rule: held on the grid's
      mean it re-evaporates a fifth of the night layer's condensate, where CM1's cloud re-evaporates three-quarters, and
-     the layer condenses more. Open, the author's choice: settling the climate on the current scheme with the night bias
-     stated; a subgrid (statistical) cloud scheme, so that cloud can evaporate where a cell is not saturated; or a CM1
-     box forced by the fifteen-level GCM, to see whether the quiet night survives that model's own circulation. Then
-     surface and radiation feedbacks, a longwave refit on the chosen configuration and a 15-year run. The depth test's
+     the layer condenses more. The author then chose a CM1 box forced by the fifteen-level GCM (register, 27 October).
+     Run on to four years, that GCM settles toward 295.7–296.3 K with the provisional longwave fit, its sea's night
+     steady. Forced by it, CM1's sea box rains 1.62 and 1.88 mm/day after midnight over its third and fourth lunar
+     days, against the GCM's 2.28 and the Kuo-forced box's 0.14, so the night gap came largely with the Kuo forcing,
+     and the readings that rested on that box (its 6 km night layer, the night-cloud diagnosis, the cloud water's
+     premise) are qualified. The models now part in the evening, 1.06–1.20 against 2.96 mm/day. On the box's own air
+     PlaSim's scheme convects deep in the afternoon and evening, through the inhibition that holds the box's storms
+     down, and never after midnight. Open, the author's choice: settling the fifteen-level configuration with the
+     evening's difference stated; a physical account of the scheme's evening, its inhibition among it, before any GCM
+     test; the land box forced by the same GCM; no Jura box until the models agree. Then surface and radiation
+     feedbacks, a longwave refit on the chosen configuration and a 15-year run. The depth test's
      15-year run is held. The climate work's readers take the year files' humidity as interval means (register, 27
      October); the climatology, the cross-domain extracts and the rings' readers still take it as it stands.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
