@@ -464,17 +464,17 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      test, and its rain's evaporation worked out from the drops' sizes and fall speeds in place of gamma (register,
      29 October). That scheme is built (domain/climate 8e805f6): with CM1's own sizes for new rain, carrying the drops'
      size down the column by their collisions gives the design boxes' evaporation within 1.01–1.12, and one size for
-     all new rain gives 1.17–1.31, outside the test's 1.25 on land. Melted rain as new drops of CM1's own 0.865 mm, with
-     the rest of the new rain joining the drops falling, gives 0.64–0.79, below the test's 0.80 (domain/climate
-     0e2e1e8): joined to the little rain falling into the band where rain forms, the new rain makes too few drops there,
-     and the rain runs larger than CM1's at every level. Counted as CM1 counts its own, lunar snow melts into rain of
-     1.25–3.4 mm on the corrected McSnow runs, about 2.4–3.2 mm at the boxes' snowfall, against CM1's 0.85–0.87 mm from
-     its Earth-capped ice (register, 29 October). Open, the author's choice: a rule that makes drops in proportion to
-     how far each level's new rain outruns the rain falling in, tested on the boxes (proposed), then the lunar melted
-     size; the snow's sublimation, which keeps gamma; PlaSim's transfer set beside similarity theory at its lowest level
-     (proposed); no Jura box until the models agree. Then surface and radiation feedbacks. The depth test's 15-year run
-     is held. The climate work's readers take the year files' humidity as interval means (register, 27 October); the
-     climatology, the cross-domain extracts and the rings' readers still take it as it stands.
+     all new rain gives 1.17–1.31, outside the test's 1.25 on land, while melted rain as new drops of CM1's own 0.865 mm
+     with the rest of the new rain joining the drops falling gives 0.64–0.79, below the test's 0.80 (domain/climate
+     0e2e1e8). Rain formed as rain now makes new drops in the share W/(W + F) of the rain F falling into its layer and
+     joins that rain otherwise: on PlaSim's fifteen levels, where the share is set, the boxes' columns evaporate 1.05,
+     1.01 and 0.96 of CM1's rain, and the rule is adopted with PlaSim's melted rain at 2.95 mm, the size lunar snow
+     melts into at 1 mm/h on the corrected McSnow runs, against CM1's 0.85–0.87 mm from its Earth-capped ice
+     (domain/climate f5f767f; register, 29 October). Open, the author's choice: the snow's sublimation, which keeps
+     gamma; PlaSim's transfer set beside similarity theory at its lowest level (proposed); no Jura box until the models
+     agree. Then surface and radiation feedbacks. The depth test's 15-year run is held. The climate work's readers take
+     the year files' humidity as interval means (register, 27 October); the climatology, the cross-domain extracts and
+     the rings' readers still take it as it stands.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
      12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. A lunar
      free-convection constant over the sea, in place of Earth's, removes a quarter of the GCM's extra evaporation at
