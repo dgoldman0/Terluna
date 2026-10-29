@@ -97,6 +97,18 @@
       "self_collection_m3_kg_s": 5.78,
       "source": "CM1 r22.0 src/morrison.F: rain's exponential spectrum has its slope LAMR held between LAMMINR = 1/2800E-6 and LAMMAXR = 1/20E-6 (lines 492 and 489), so its mean diameter 1/LAMR lies between 20 um and 2.8 mm; the breakup cutoff D_b defaults to 300E-6 when the namelist's brkup_db is essentially 0 (lines 494-498; src/cm1.F line 404 sets brkup_db = 0.0, and the cpm_RadConvEquil namelist Terluna's cases start from sets it to 300.0e-6); rain's self-collection is NRAGG = -5.78*DUM*QR*NR*RHO with DUM = 2 - EXP(2300*(1/LAMR - D_b)) above D_b and 1 below (lines 2269-2275 and 3598-3604; the morrison.F header credits the breakup to Verlinde and Cotton 1993); source SHA256 2e199a4f2cb66f0590b455fe54b762c5ca4bfdfcd49bd7aa5317b757655034f7.",
       "note": "Earth's limits on rain's size in Morrison's scheme. The breakup factor falls through zero at a mean diameter of D_b + ln 2 / 2300 m = 0.60 mm, where self-collection and breakup balance. atmosphere/rain/breakup.py carries them to lunar gravity, and climate/crm/cm1_run.py's rain-limits patch scales them from the namelist."
+    },
+    "cm1_r22_morrison_rain_evaporation": {
+      "ventilation_f1": 0.78,
+      "ventilation_f2": 0.308,
+      "vapour_diffusivity_coefficient_si": 8.794e-5,
+      "vapour_diffusivity_temperature_exponent": 1.81,
+      "viscosity_coefficient_si": 1.496e-6,
+      "viscosity_sutherland_k": 120.0,
+      "water_density_kg_m3": 997.0,
+      "self_collection_floor_kg_kg": 1.0e-8,
+      "source": "CM1 r22.0 src/morrison.F: RHOW = 997. (line 438); the ventilation F1R = 0.78 and F2R = 0.308 (lines 455 and 459); MU = 1.496E-6*T**1.5/(T+120.) (line 1832); DV = 8.794E-5*T**1.81/PRES (line 1873); AB = 1.+DQSDT*XXLV/CPM (line 1890); rain evaporates at PRE = EPSR*(QV-QVS)/AB with EPSR = 2*PI*N0RR*RHO*DV*(F1R/LAMR**2 + F2R*(ARN*RHO/MU)**0.5*SC**(1/3)*CONS9/LAMR**CONS34) (lines 2283-2295 and 3751-3783), its number falling in proportion to its mass (NSUBR = PRE*DT/QR*NR/DT, lines 2479-2481 and 4068-4070); self-collection acts only on rain of at least 1.E-8 kg/kg (lines 2265 and 3594); source SHA256 2e199a4f2cb66f0590b455fe54b762c5ca4bfdfcd49bd7aa5317b757655034f7.",
+      "note": "Morrison's evaporation of rain integrates each drop's ventilated diffusion over the exponential spectrum, with Earth air's fits for the vapour's diffusivity and the air's viscosity. climate/gcm/rain_drops.py takes the same equation into PlaSim's falling rain, its speeds and ventilation integral from atmosphere/rain's lunar fall law."
     }
   },
   "legacy": {

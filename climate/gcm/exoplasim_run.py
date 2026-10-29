@@ -80,7 +80,9 @@ wherever the Sun is down (SBM_NIGHT_PATCHES); a run with it and the moisture dia
 too. --large-scale-condensate cloud holds PlaSim's large-scale condensate as cloud water in its layer above freezing,
 evaporated where the air is unsaturated and turned to rain by autoconversion and accretion (condensate.py), and
 --humidity-mean writes the humidity's true 3-day mean as hus_mean (HUS_MEAN_PATCHES); without them a run is as
-before.
+before. --rain-drops evaporates PlaSim's falling rain from its drops' sizes and fall speeds at lunar gravity in place
+of gamma, with the birth rule it names for the size of new rain (rain_drops.py; RAIN_DROP_PATCHES, rainmod's
+nevapprec 2); snow keeps gamma.
 """
 from __future__ import annotations
 import argparse
@@ -102,6 +104,7 @@ from climate.gcm import pbl_fortran as pbf
 from climate.gcm import pbl_scheme as pbs
 from climate.gcm import surface_gust as sgf
 from climate.gcm import condensate as cnd
+from climate.gcm import rain_drops as rdr
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -1579,7 +1582,7 @@ def use_twilight_package():
 def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
                    massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
                    boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
-                   cloud_water: bool = False, gust: bool = False) -> dict:
+                   cloud_water: bool = False, gust: bool = False, rain_drops: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1592,8 +1595,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     diagnostic), and the switches in PlaSim's namelist (PLASIM_SWITCH_PATCHES) with the humidity's true mean
     (HUS_MEAN_PATCHES) and the cloud water (condensate.CLOUD_WATER_PATCHES, with the convection's vapour diagnostic),
     and Beljaars's gust in the surface transfer (surface_gust.GUST_PATCHES, over the nonlocal boundary layer's patch,
-    with the convection's vapour diagnostic), for a run that sets them, and return each patched file's hash for the
-    run key."""
+    with the convection's vapour diagnostic), and the rain evaporated from its drops (rain_drops.RAIN_DROP_PATCHES),
+    for a run that sets them, and return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1624,7 +1627,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                                 + (SBM_NIGHT_PATCHES if night else [])
                                 + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
                                 + (HUS_MEAN_PATCHES if humidity_mean else [])
-                                + (cnd.CLOUD_WATER_PATCHES if cloud_water else [])):
+                                + (cnd.CLOUD_WATER_PATCHES if cloud_water else [])
+                                + (rdr.RAIN_DROP_PATCHES if rain_drops else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1894,7 +1898,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
                   cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
                   free_convection=None, mixing_length=None, boundary_layer=None, large_scale_condensate=None,
-                  humidity_mean=False, surface_gust=None):
+                  humidity_mean=False, surface_gust=None, rain_drops=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces the
     air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and twilight
     (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the ledger
@@ -1916,9 +1920,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     diagnostics its own diagnostics and the vapour by process too), and humidity_mean writes the humidity's true mean
     (HUS_MEAN_PATCHES), and surface_gust 'beljaars' Beljaars's gust in the surface transfer in place of the
     free-convection term and the least wind (surface_gust_setting; with the moisture diagnostics the vapour by process
-    too). Each is recorded when given, and left out the configuration is the one every earlier run had;
-    the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October did, and the 295 K
-    fit the longwave correction as those of 17 October did."""
+    too), and rain_drops, a birth rule of rain_drops.BIRTH_RULES, the rain's evaporation from its drops' sizes and fall
+    speeds in place of gamma, which the snow keeps (rain_drops.setting). Each is recorded when given, and left out the
+    configuration is the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as
+    the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -1955,6 +1960,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     cloud = large_scale_condensate == 'cloud'
     if surface_gust is not None and free_convection is not None:
         raise ValueError("the gust drops the free-convection term over water; set one of them")
+    if rain_drops is not None and uses_massflux(convection):
+        raise ValueError("the rain's drops leave out the mass-flux scheme's floor on its convective water; run them "
+                         'with PlaSim\'s convection or the Betts-Miller scheme')
+    drops = rdr.setting(rain_drops) if rain_drops is not None else None     # refuses an unknown rule
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'),
                source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
@@ -1964,7 +1973,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      massflux_start=uses_massflux_start(convection),
                                      boundary_layer=mixing_length is not None or boundary_layer is not None,
                                      night=uses_night_switch(convection), humidity_mean=bool(humidity_mean),
-                                     cloud_water=cloud, gust=surface_gust is not None),
+                                     cloud_water=cloud, gust=surface_gust is not None,
+                                     rain_drops=rain_drops is not None),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -2003,6 +2013,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['boundary_layer'] = boundary_layer_setting(boundary_layer)
     if surface_gust is not None:
         cfg['surface_gust'] = surface_gust_setting(surface_gust)
+    if drops is not None:
+        cfg['rain_drops'] = drops
     if cloud:
         cfg['large_scale_condensate'] = cnd.setting()
     if humidity_mean:
@@ -2330,6 +2342,11 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         model._edit_namelist('fluxmod_namelist', 'NLPBL', '1')
         for name, value in cfg['boundary_layer']['parameters'].items():
             model._edit_namelist('fluxmod_namelist', name.upper(), repr(float(value)))
+    if 'rain_drops' in cfg:
+        model._edit_namelist('rainmod_namelist', 'NEVAPPREC', '2')
+        for name, value in cfg['rain_drops']['namelist'].items():
+            text = str(value) if isinstance(value, int) else repr(float(value))
+            model._edit_namelist('rainmod_namelist', name.upper(), text)
     if 'surface_gust' in cfg:
         model._edit_namelist('fluxmod_namelist', 'NGUST', '1')
         model._edit_namelist('fluxmod_namelist', 'GUST_BETA', repr(float(cfg['surface_gust']['beta'])))
@@ -2543,7 +2560,7 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         rain_evaporation: float | None = None, moisture: bool = False, convection: dict | None = None,
         levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
         boundary_layer: str | None = None, large_scale_condensate: str | None = None,
-        humidity_mean: bool = False, surface_gust: str | None = None) -> int:
+        humidity_mean: bool = False, surface_gust: str | None = None, rain_drops: str | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
@@ -2551,7 +2568,7 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
                         moisture=moisture, convection=convection, levels=levels, free_convection=free_convection,
                         mixing_length=mixing_length, boundary_layer=boundary_layer,
                         large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean,
-                        surface_gust=surface_gust)
+                        surface_gust=surface_gust, rain_drops=rain_drops)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -2744,6 +2761,10 @@ def main(argv=None) -> int:
                              'PlaSim does, or cloud water held in its layer above freezing, evaporated where the air '
                              'is unsaturated and turned to rain by autoconversion and accretion (condensate.py; '
                              'CLOUD_WATER_PATCHES; part of the run key)')
+    parser.add_argument('--rain-drops', choices=('none',) + tuple(rdr.BIRTH_RULES), default='none',
+                        help="PlaSim's falling rain evaporated from its drops' sizes and fall speeds at lunar gravity "
+                             'in place of gamma, which the snow keeps, with the named rule for the size of new rain '
+                             '(rain_drops.py; RAIN_DROP_PATCHES; part of the run key)')
     parser.add_argument('--humidity-mean', action='store_true',
                         help="write the humidity's true 3-day mean as hus_mean, code 233, where a year file's hus "
                              "holds the humidity at each interval's start (HUS_MEAN_PATCHES; year_files.py; part of "
@@ -2809,7 +2830,8 @@ def main(argv=None) -> int:
                None if args.mixing_length == 'earth' else args.mixing_length,
                None if args.boundary_layer == 'local' else args.boundary_layer,
                None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean,
-               None if args.surface_gust == 'none' else args.surface_gust)
+               None if args.surface_gust == 'none' else args.surface_gust,
+               None if args.rain_drops == 'none' else args.rain_drops)
 
 
 if __name__ == '__main__':

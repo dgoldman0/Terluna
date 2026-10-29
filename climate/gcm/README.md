@@ -1709,7 +1709,8 @@ forcing through the column, the air held only above the GCM's convection, and th
 
 No single constant fits both places. At one gamma PlaSim evaporates far more of its rain over the sea than on land,
 75.8% against 58.2% at 0.04, while CM1 evaporates about the same at both. The design run's constant waits on that,
-and on PlaSim's convection (below).
+and on PlaSim's convection (below). Since 29 October the design run takes the evaporation from the drops' sizes and
+fall speeds instead ([PlaSim's rain from its drops](#plasims-rain-from-its-drops-29-october)).
 
 The runner's `--rain-evaporation GAMMA` writes the constant into PlaSim's rain namelist, recorded in the run's
 configuration only when given.
@@ -3944,6 +3945,129 @@ python3 -m pytest climate/tests/test_surface_gust.py                           #
 $W/runs_gust.sh                                                                 # 34 minutes on four cores
 climate/gcm/.venv/bin/python $W/smoke_year0.py                                   # year 0 against the baseline's
 climate/gcm/.venv/bin/python $W/gust_compare.py                                  # the three runs and part C's readings
+```
+
+#### PlaSim's rain from its drops (29 October)
+
+PlaSim evaporates its falling rain with one constant tuned on Earth, and no value of it gives CM1's 61% over both the
+Near-side Sea and the land at 0° E ([above](#the-evaporation-of-falling-rain-21-october)). The design run takes the
+evaporation from the drops instead (register, 29 October): their sizes, their fall at lunar gravity and their ventilated
+diffusion, as CM1's Morrison scheme and the lunar rain law treat them. Two tests on the design boxes came first, each
+with its rules set before its numbers were read (`rules.txt` and `rules_fall.txt` in `session-tools/rain_physics` on
+the research drive), and the scheme then went into PlaSim.
+
+**The equation, and the sizes a column needs** (the first rules). Morrison's evaporation integrates each drop's
+ventilated diffusion over the rain's exponential spectrum. A flux F of rain whose spectrum has slope λ loses k F per
+metre of fall, k = 2ρ D_v λ⁴ W (q_s − q) / (ρ_w V_m AB), its fall speeds and ventilation integral from atmosphere/rain's
+lunar fall law, the table CM1's rain law reads. Recomputed from each CM1 cell's own rain, air and size, the equation
+gives the boxes' rain evaporation within 1.1% summed over each lunar day (1.011, 0.992 and 1.008 of CM1's). Its median
+cell agrees within about 1% wherever the rain holds more than 1 mg/m³, which carries 95% of the evaporation, and runs
+about 30% low in thinner rain, where one 40-second step changes the rain between CM1's microphysics and its written
+output; that missed the rules' median criterion while meeting their total. A GCM column sees only the box's mean air and
+mean rain flux. Given CM1's own sizes at each level, such a column evaporates 1.12–1.20 times CM1's rain on the three
+boxes, so rain falling where the air is moister than the mean costs a column little here. With the lunar breakup's
+equilibrium size, 1.67 mm, at every level it evaporates only 0.40–0.65 of CM1's, and one size taken from the sea box,
+1.01 mm, gives 0.97 on the inflow day and 1.54 over land. Neither single size could be adopted.
+
+**Where the rain forms and how it grows.** In all three boxes the freezing level stands at 20–26 km, and the rain forms
+in a band about it: snow and graupel melt into it, and it forms as rain, mostly 20–30 km up, where it sweeps up melting
+ice and cloud water in the warm updraughts. Born with mean diameters of 0.2–0.5 mm, it grows by its collisions over a
+fall of 20 km and more, to the breakup equilibrium near the ground. The layer just below the band holds 39–48% of the
+column's evaporation, while the drops there are still small. Over each box's lunar day, CM1's rain by the GCM's lowest
+four layers (rain-mass-weighted mean diameter 1/λ; evaporation in mm/day):
+
+| | Sea box | Land box at 0° E | Inflow day |
+|---|---|---|---|
+| Formed: melted from snow and graupel; formed as rain, mm/day | 1.02; 1.14 | 4.24; 4.20 | 0.85; 0.87 |
+| 13.74–23.06 km: size; evaporation | 0.81 mm; 0.62 | 1.03 mm; 2.00 | 0.61 mm; 0.53 |
+| 6.53–13.74 km | 1.12 mm; 0.29 | 1.30 mm; 1.12 | 0.98 mm; 0.26 |
+| 1.77–6.53 km | 1.27 mm; 0.26 | 1.54 mm; 0.71 | 1.22 mm; 0.22 |
+| 0–1.77 km | 1.66 mm; 0.10 | 1.66 mm; 0.34 | 1.61 mm; 0.09 |
+| Column evaporation; rain at the ground, mm/day | 1.31; 0.85 | 5.17; 3.26 | 1.11; 0.61 |
+
+**The size carried down the column** (the second rules). The scheme carries the rain's number flux beside its mass flux
+and reads the slope from their ratio. Morrison's self-collection with the lunar breakup acts at the column's mean rain
+content, at the lunar rate of 2.919 m³/kg/s with CM1's Earth cutoff and rate scaled by √(9.81/g) and the surface air's
+density ratio to the power 0.687, as the boxes' rain limits scale them; evaporation takes drops with their water. Given
+CM1's own sizes for the new rain at each level, the column gives CM1's evaporation within 1.01–1.12 on all three boxes
+and its sizes in each layer within 18%. Collisions at the content inside the rain, in place of the mean, move that by
+at most 0.03, so at these boxes' rain-covered shares, 25–78% by level, the rain's area hardly matters. The carrying is
+adopted. With every new drop at one size, 0.465 mm, CM1's own mean where the sea box's rain forms, the column gives 1.31
+on the sea box, 1.29 on land and 1.17 on the inflow day, outside the rules' 1.25 on land: new drops of that size
+entering below the band hold the rain at 1.0–1.1 mm near the ground, where CM1's grows on to 1.6 mm. On PlaSim's fifteen
+layers the same rule gives 1.30, 1.25 and 1.15, within 0.04 of CM1's own levels. The size new rain takes stays open.
+
+| Column evaporation over CM1's | Sea box | Land box | Inflow day |
+|---|---|---|---|
+| CM1's own sizes at each level, mean air (first rules) | 1.16 | 1.20 | 1.12 |
+| The breakup equilibrium at every level | 0.51 | 0.65 | 0.40 |
+| Carried down by collisions, CM1's sizes for new rain | 1.12 | 1.01 | 1.07 |
+| The same, collisions at the in-rain content | 1.10 | 1.00 | 1.06 |
+| Carried down, every new drop at 0.465 mm | 1.31 | 1.29 | 1.17 |
+| The same on PlaSim's fifteen layers | 1.30 | 1.25 | 1.15 |
+
+**The patch** ([rain_drops.py](rain_drops.py); `RAIN_DROP_PATCHES`, behind rainmod's `nevapprec` 2). mkrain carries
+each column's rain and its drops' number down through the layers. New rain enters at each layer's middle: rain melted
+from snow as drops of `rdrop_melt`, rain formed as rain as drops of `rdrop_warm`, or with `nrdrop_join` 1 joining the
+rain already falling, as accretion grows drops without adding them. Evaporation and collisions act through each layer
+in midpoint steps of at most 1 km, which stay within 0.25% of 50 m steps on the boxes' fifteen-layer columns, and no
+layer evaporates more than would saturate it over the step. The snow keeps gamma. Morrison's closures (the ventilation,
+the vapour's diffusivity, the air's viscosity) join the shared constants beside his fall law and limits, and the lunar
+fall law's table is compiled into the patch. The runner's `--rain-drops one_size` or `join` records the rule and
+writes the namelist, and refuses the mass-flux scheme, whose floor on its convective water the scheme leaves out.
+
+**The checks** ([test_rain_drops.py](../tests/test_rain_drops.py)). The constants come from the fall law, the breakup
+product and the shared constants. The Python copy of mkrain keeps each column's water and evaporates rain only where the
+air is unsaturated, and in saturated air its drops grow toward the breakup size and stop there. mkrain with the patch,
+compiled with ExoPlaSim's flags against a stub of its module, gives the copy's tendencies and precipitation to 1e-10
+under both birth rules, also with rain falling hard into air 5–30% humid and new drops of 20 µm or 6.5 mm; with
+`nevapprec` 1 it prints every digit the unpatched mkrain prints. The patch applies once on lines no other patch touches
+and is undone exactly, and the patched rainmod.f90 compiles with PlaSim's modules. The first build's smoke run stopped
+on a floating-point trap: rain that evaporated within half a step reached the rates as no rain at all, and a saturated
+layer scaled the drops by the ratio of two fluxes. Both are bounded now, and the dry columns that trap the first build
+run in the second. On the boxes' columns in PlaSim's form, with PlaSim's own layer depths and saturation and the
+one-size rule, the copy evaporates 1.25 and 1.22 times CM1's rain on the sea and land boxes, beside the offline 1.30
+and 1.25.
+
+**The smoke run** (`smoke_gcm.sh` and `smoke_gcm_gamma.sh` beside the rules). One lunar day from the fifteen-level
+restart with the gust run's flags, once with the one-size rule and once with gamma, each on four cores beside the snow
+reruns on four more: every summary field finite, the rain namelist as written, and 56.5 s against 55.7 s, so the
+scheme costs about 1%. By mkrain's cooling left in the summed tendencies, the rain from its drops evaporates 52% of the
+rain formed, against 20% with gamma; the schemes' heating against the rain at the ground gives 53% for the drops, and
+over a single lunar day it fails for gamma, as it needs many outputs. The rain at the ground falls from 2.00 to 1.62
+mm/day while the rain formed rises from about 2.5 to 3.4, the moister air feeding the convection, and the ground cools
+0.3 K over the day, as the 21 October runs found for a larger gamma. One lunar day from one restart shows the scheme at
+work, not the climate it settles to.
+
+**What stays open.**
+- **The size new rain takes.** CM1's own measure (0.465 mm on the sea box, 0.52 on land, 0.37 on the inflow day) mixes
+  two births: rain melted from snow and graupel, which Morrison makes one drop per melted particle, at mean diameters
+  of 0.85–0.87 mm weighted by the melting (`melt_sizes.py`), and smaller rain formed as rain in the warm updraughts.
+  The melted rain comes from ice CM1 sizes by Earth's limits: snow and graupel capped at 2 mm. The snow work finds lunar
+  flakes of centimetres, melting 1.6–5.2 km below the freezing level into drops of 6–15 mm
+  ([atmosphere/snow](../../atmosphere/snow/README.md)). Its held reruns are running, and its melting products will give
+  the lunar answer; until then both rules are built.
+- **The snow's sublimation** keeps gamma, a constant tuned on Earth; the snow work's sublimation shares, 2–8% of the
+  snow over land and 10–23% over the sea before it melts, are the physics for it.
+- **CM1 as the reference aloft.** Half the boxes' evaporation happens in rain just melted from that Earth-sized ice. The
+  snow work's large lunar drops would evaporate less there, which may bear on CM1's upper air running colder than
+  PlaSim's; that is untested.
+
+**Evidence and limits.** The tests read one lunar day of each of three boxes, a sea box twice and the land box once,
+every three hours, and take CM1's own microphysics as the reference, with its Earth-limited ice. The equation is
+Morrison's with Earth air's fits for the vapour's diffusivity and the air's viscosity; the fall speeds and ventilation
+are the single-drop solver's, which reproduces Earth's measured fall speeds to 0.2 m/s. Collisions follow Morrison's
+self-collection and breakup carried to lunar gravity by the drops' Weber number, which no lunar measurement checks.
+
+```sh
+W=/media/projectspace/terluna-research/session-tools/rain_physics
+python3 $W/cm1_rain.py                    # the equation, the sizes and three closures on the boxes (a few minutes)
+python3 $W/rain_budget.py                 # where the boxes' rain forms and evaporates
+python3 $W/melt_sizes.py                  # the size of the rain CM1's melting snow and graupel make
+python3 $W/rain_fall.py                   # the size carried down the column (a few minutes)
+python3 $W/module_check.py                # rain_drops.mkrain on the boxes' columns in PlaSim's form
+python3 -m pytest climate/tests/test_rain_drops.py                               # the Fortran against the Python copy
+$W/smoke_gcm.sh                                                                   # one lunar day in PlaSim
 ```
 
 ### Cloud amount: what published models say

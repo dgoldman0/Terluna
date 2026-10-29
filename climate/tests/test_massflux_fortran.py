@@ -18,6 +18,7 @@ import pytest
 from climate.gcm import exoplasim_run as er
 from climate.gcm import massflux as mf
 from climate.gcm import massflux_fortran as mff
+from climate.gcm import rain_drops as rd
 
 GCM_FLAGS = ('-O3', '-cpp', '-fcheck=all', '-ffpe-trap=invalid,zero,overflow', '-ffpe-summary=none',
              '-finit-real=zero', '-fdefault-real-8')
@@ -315,9 +316,20 @@ def apply(text, edits, marker):
     return text
 
 
+def without_drops(text):
+    """The shared source as this patch knows it: the rain evaporated from its drops (rain_drops.RAIN_DROP_EDITS),
+    applied after it and calling routines this module's harness leaves out, undone."""
+    if rd.MARKER not in text:
+        return text
+    for old, new in reversed(rd.RAIN_DROP_EDITS):
+        assert text.count(new) == 1, new[:80]
+        text = text.replace(new, old)
+    return text
+
+
 def patched(text, optional=(), first=False):
     """A source with the Betts-Miller patch, and the mass-flux patch before or after the optional patches."""
-    text = apply(text, er.SBM_EDITS, er.SBM_MARKER)
+    text = apply(without_drops(text), er.SBM_EDITS, er.SBM_MARKER)
     if first:
         text = apply(text, mff.MASSFLUX_EDITS, mff.MASSFLUX_MARKER)
     for edits, marker in optional:
@@ -562,7 +574,7 @@ def test_with_nprc_1_or_2_mkrain_is_as_it_was(tmp_path):
         pytest.skip('no ExoPlaSim source at hand')
     nhor = 8
     sigma, half, cols = plasim_columns(nhor, seed=3)
-    before = apply(sources[0].read_text(), er.SBM_EDITS, er.SBM_MARKER)
+    before = apply(without_drops(sources[0].read_text()), er.SBM_EDITS, er.SBM_MARKER)
     old = plasim_harness(tmp_path / 'old', before, nhor, sigma.size, routines=False)
     new = plasim_harness(tmp_path / 'new', patched(sources[0].read_text()), nhor, sigma.size)
     for nprc in (1, 2):
