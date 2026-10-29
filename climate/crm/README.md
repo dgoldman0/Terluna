@@ -3005,6 +3005,62 @@ climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_inf
     --reference box_near_side_sea_l15_aloft_day3 --from-day 59
 ```
 
+### Where the two models' evaporation parts over the sea (28 October, night)
+
+With the GCM's air drawn in, the box's rain at the site turns first on its evaporation, a third below the forcing GCM's
+(2.55 against 3.75 mm/day). The trace asks whether that gap lies in the air each model holds or in how each turns air
+into evaporation, by rules set before it was computed (`rules.txt` beside `evap_trace.py`). PlaSim's own transfer
+(`surface_gust.surface_transfer`, its `surflx` step for step, with its Charnock roughness iterated to its own stress and
+its implicit evaporation step) is applied to the GCM's own 3-day means at the site's sea cells and to the box's
+domain-mean air at the GCM's lowest level, 312.7 m, averaged over the same tenths of the lunar day; CM1's own transfer
+at its 50 m level is read from the box's diagnostics.
+
+| Over the Near-side Sea | PlaSim on the GCM's air | PlaSim on the box's air, Earth's term | PlaSim on the box's air, the gust | CM1's own, at 50 m |
+|---|---|---|---|---|
+| Evaporation, mm/day (inflow day; fourth day) | 3.43 (it wrote 3.75) | 3.28; 3.94 | 1.72; 2.04 | 2.55; 3.11 |
+| Transfer ρCU, 10⁻³ kg/m²/s | 5.44 | 4.91 | 2.63 | 3.85 |
+| Its stability factor | 1.96 | 2.35 | 1.11 | about 1.23 |
+| Wind in the formula, m/s | 3.17 | 2.50 | 2.55 | 2.45 |
+| Humidity difference, g/kg | 7.48 | 8.03 | 8.03 | 7.43 |
+| Roughness, m | 1.0 × 10⁻⁴ | 5.7 × 10⁻⁵ | 5.8 × 10⁻⁵ | 1.1 × 10⁻⁴ |
+
+The columns' last three are the inflow day's; CM1's stability factor is its transfer coefficient, 1.13 × 10⁻³, over
+its neutral value at 50 m from its own roughness lengths.
+
+**By the rules.** PlaSim's transfer reproduces the GCM's own evaporation from its 3-day means to 8.5% (with the gust,
+the gust GCM's to 14%), within the 15% the method check allowed; the means smooth the wind, which accounts for the
+shortfall. The gap lies in the surface transfer: on the inflow day the air's part is 0.15 of the 0.88 mm/day gap
+between PlaSim on the GCM's air and CM1 (17%) and the transfer's 0.73 (83%); on the fourth day the box's drier air
+would draw more under PlaSim's transfer, and the transfer's part exceeds the whole gap.
+
+**What the trace shows.**
+- **Earth's free-convection term carried the forcing GCM's extra evaporation.** On the same air PlaSim's transfer with
+  it evaporates 29% more than CM1's surface layer. Its interpolation over unstable water roughly doubles PlaSim's
+  stability factor, where CM1's similarity raises its coefficient about 1.23 times neutral.
+- **With Beljaars's gust, as the design run will take it, PlaSim's transfer falls a third below CM1's** on the same air.
+  Its stability factor stands at 1.11 at the 313 m level and its roughness at half CM1's, from a smaller u*. The box's
+  wind and vapour change less between 50 and 313 m (about 1.08–1.09 times) than the log profile PlaSim's coefficient
+  assumes from its roughness (about 1.13–1.14), which suggests the level sits near the top of the surface layer or
+  above it, an inference the trace does not test.
+- **CM1's transfer sits between PlaSim's two forms**, and the GCM makes up part of any shortfall with its own air:
+  with the gust its lowest level dries by 1.9 g/kg, so its evaporation falls 9% where its transfer falls 32%.
+
+**What it changes.** The gap the box's rain turns on is a property of PlaSim's surface transfer at its lowest level,
+not of either model's air. The design run takes the gust, which brings the sea's transfer from 29% above CM1's to about
+a third below it on the same air. A next step, proposed: set PlaSim's transfer from its 313 m level beside
+Monin–Obukhov similarity integrated to the same height on the box's and the GCM's states, a column calculation of
+minutes; if they part by more than a tenth, the design configuration would take similarity over water beside the gust.
+
+**Evidence and limits.** The GCM's side rests on 3-day means at six cells over four years, the box's on domain means
+every 3 hours of one lunar day each; PlaSim's formula on a domain-mean wind leaves out the spread of the box's own
+winds, which CM1's column-by-column fluxes keep and the gust is meant to stand for. PlaSim's roughness is iterated on
+the mean state.
+
+```sh
+E=/media/projectspace/terluna-research/session-tools/evaporation
+PYTHONPATH=. climate/gcm/.venv/bin/python $E/evap_trace.py       # rules EV1-EV3; evap_trace.json
+```
+
 ## A box over the highlands
 
 The author's plan for highlands (2026-09-29) left a three-dimensional box over

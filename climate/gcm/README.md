@@ -3934,7 +3934,9 @@ as they were. C5 holds for both runs: the top two levels move at most 0.28 K and
 means with the year files' interval-start humidity, the same in each run. The gust's depth follows the nonlocal scheme's
 rule, untested here against CM1's depths; β is CM1's 1, where COARE takes 1.25; and the buoyancy flux is the step
 before's. The site is six cells of 3-day means. PlaSim's configuration takes the gust with its sunlight rebalanced
-(register, 28 October), in the design run that follows.
+(register, 28 October), in the design run that follows. On the sea box's own air its transfer runs about a third below
+CM1's surface layer, where Earth's free-convection term ran 29% above it
+([the trace](../crm/README.md#where-the-two-models-evaporation-parts-over-the-sea-28-october-night)).
 
 ```sh
 W=/media/projectspace/terluna-research/session-tools/gust_aloft
