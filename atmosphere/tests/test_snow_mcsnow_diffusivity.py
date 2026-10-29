@@ -57,3 +57,16 @@ def test_product_matches_its_producer_and_the_record_table():
     melted = product['cases']['col_q3_f0.01_base']['melting']['corrected']
     depths = sorted(melted[site]['depths_ice_gone_m']['99'] / 1e3 for site in ('land', 'sea'))
     assert f'{depths[0]:.2f}–{depths[1]:.2f} km' in text
+
+
+def test_the_corrected_runs_take_the_corrected_lunar_build_and_keep_the_earth_build():
+    """Within corrected() the lunar build and the runs are this module's, the Earth build stays the old cache's (the
+    correction leaves its sources alone), and the melting record's raw outputs move beside the corrected runs."""
+    old_cache = grow.CACHE
+    old_earth = grow.build_path('earth')
+    with dv.corrected():
+        assert grow.CACHE == dv.CACHE
+        assert grow.build_path('moon').parent == dv.CACHE
+        assert grow.build_path('earth') == old_earth
+    assert grow.CACHE == old_cache and grow.build_path('earth') == old_earth
+    assert dv.MELTING_RAW.parent == dv.CACHE

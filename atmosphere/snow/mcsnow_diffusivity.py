@@ -11,8 +11,12 @@ with their recorded configurations, to compare with the old runs at the same sta
     OPENBLAS_NUM_THREADS=1 python -B -m atmosphere.snow.mcsnow_diffusivity build
     OPENBLAS_NUM_THREADS=1 python -B -m atmosphere.snow.mcsnow_diffusivity run --case col_q3_f0.01_base
     OPENBLAS_NUM_THREADS=1 python -B -m atmosphere.snow.mcsnow_diffusivity compare   # results/mcsnow_diffusivity.json
+    OPENBLAS_NUM_THREADS=1 python -B -m atmosphere.snow.mcsnow_diffusivity assemble  # the two products, corrected
 
-The frozen component's physics is otherwise unchanged; runs go to research/runs/snow_agent_3/dv_fix.
+The frozen component's physics is otherwise unchanged; runs go to research/runs/snow_agent_3/dv_fix. Once every run
+the products quote has been repeated there, `assemble` writes the growth-and-aggregation and melting products from
+the corrected runs, with the growth parity and the parity checks repeated on the corrected build; the old runs and
+the melting record's old raw outputs stay where they were.
 """
 from __future__ import annotations
 
@@ -21,6 +25,7 @@ import contextlib
 import difflib
 import hashlib
 import json
+import shutil
 from pathlib import Path
 
 from atmosphere.snow import mcsnow_growth_aggregation as growagg
@@ -69,13 +74,62 @@ def fixed_sources(world):
 
 @contextlib.contextmanager
 def corrected():
-    """growagg's build and run machinery on the corrected sources, in this module's cache."""
-    saved = growagg.patched_sources, growagg.CACHE
-    growagg.patched_sources, growagg.CACHE = fixed_sources, CACHE
+    """growagg's build and run machinery on the corrected sources, in this module's cache; the Earth build, which
+    the correction leaves alone, stays the old cache's."""
+    saved = growagg.patched_sources, growagg.CACHE, growagg.build_path
+    old_build_path = growagg.build_path
+
+    def build_path(world):
+        if world != 'earth':
+            return old_build_path(world)
+        cache, growagg.CACHE = growagg.CACHE, OLD
+        try:
+            return old_build_path(world)
+        finally:
+            growagg.CACHE = cache
+
+    growagg.patched_sources, growagg.CACHE, growagg.build_path = fixed_sources, CACHE, build_path
     try:
         yield
     finally:
-        growagg.patched_sources, growagg.CACHE = saved
+        growagg.patched_sources, growagg.CACHE, growagg.build_path = saved
+
+
+MELTING_RAW = CACHE / 'melting'
+
+
+@contextlib.contextmanager
+def corrected_melting():
+    """The melting record's raw outputs for the corrected runs, in this module's cache: its Earth check and its
+    ladder, which no lunar McSnow run enters, carried over unchanged."""
+    from atmosphere.snow import melting
+    saved = melting.RAW
+    MELTING_RAW.mkdir(parents=True, exist_ok=True)
+    for name in ('earth.json', 'ladder.json'):
+        if not (MELTING_RAW / name).exists():
+            shutil.copyfile(saved / name, MELTING_RAW / name)
+    melting.RAW = MELTING_RAW
+    try:
+        yield melting
+    finally:
+        melting.RAW = saved
+
+
+def assemble_products():
+    """The growth-and-aggregation and melting products from the corrected runs, the growth parity and the parity checks
+    repeated on the corrected build first."""
+    with corrected():
+        if not (CACHE / 'growth_parity.json').exists():
+            growagg.growth_parity()
+        if not (CACHE / 'parity.json').exists():
+            growagg.parity()
+        growth = growagg.assemble()
+        with corrected_melting() as melting:
+            melting.moon()
+            paths = {name: melting.path_budget(name) for name in melting.PATH_RUNS}
+            (melting.RAW / 'paths.json').write_text(json.dumps(paths) + '\n')
+            melt = melting.assemble()
+    return growth, melt
 
 
 def source_differences():
@@ -216,7 +270,7 @@ def compare():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('diff', 'build', 'run', 'compare'))
+    parser.add_argument('action', choices=('diff', 'build', 'run', 'compare', 'assemble'))
     parser.add_argument('--case')
     args = parser.parse_args()
     CACHE.mkdir(parents=True, exist_ok=True)
@@ -231,6 +285,9 @@ def main():
     elif args.action == 'compare':
         product = compare()
         print(len(product['cases']), 'cases compared')
+    elif args.action == 'assemble':
+        growth, melt = assemble_products()
+        print(len(growth['columns']), 'columns,', len(growth['parcels']), 'path runs; melting written')
 
 
 if __name__ == '__main__':

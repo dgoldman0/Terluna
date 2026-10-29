@@ -8,26 +8,27 @@ ice-bulb temperature reaches 0 °C. Flakes of 2 cm finish melting about 1.6 km b
 The drier tenth of the columns lowers the large flakes' melting by 0.4–0.7 km, and the crystal model's Earth error band
 moves it by −7% to +9%. The large flakes melt to drops of 9–15 mm, which hold together under lunar gravity, where the
 stability screen stands at 16.6 mm, and they bring 81–93% of their water to the sea or the ground; the 1–3 mm drops of
-flakes up to 2 cm evaporate before they reach any ground. No snow reaches the ground: the largest flakes of the
-populations finish melting at least 15 km above the sea, and the highest summit stands 11.6 km up.
+flakes up to 2 cm evaporate before they reach any ground. No snow reaches the ground: every population has 99% of
+its ice melted at least 17 km above the sea, and the highest summit stands 11.6 km up.
 
-For the snow the growth runs deliver, light snow of 0.3 mm/h melts within 2.3–2.4 km and sends 11–13% of its water to
-the surface. Snow whose flakes reach about 10 cm, the heavy and moderate cases, melts within 3.4–3.8 km and sends
-55–60%, and light snow forming near −30 °C sends 47–51%. Sublimation takes 2–8% of the snow over land and 10–23% over
-the Near-side Sea before and while it melts. At 2.83 MJ/kg against 0.33 for melting, it draws about as much heat from
-the air over the sea as the melting does in the heavier snow, and more than twice as much in light snow. Melting
-draws 71–90 W/m² for each mm/h of snowfall in a layer 2–3.5 km deep below the freezing level, and the drops'
-evaporation 230–550 W/m², spread over the rain's whole fall, with half of it within 5–9 km of the surface in the
-heavier snow. Of its water, the snow returns 40–53% to the air on the way down in the larger-flake cases and 87–89%
-in light snow, against the 61% CM1's own storms return of their falling water.
+For the snow the growth runs deliver, light snow of 0.3 mm/h melts within 2.2–2.5 km and sends 6–15% of its water to
+the surface. Snow whose flakes reach 11–13 cm, the heavy, saturated and moderate cases, melts within 3.5–4.2 km and
+sends 56–65%, and light snow forming near −30 °C, whose flakes reach 12–23 cm, melts within 4.1–5.4 km and sends
+49–55%. Sublimation takes 2–8% of the snow over land and 9–23% over the Near-side Sea before and while it melts. At
+2.83 MJ/kg against 0.33 for melting, it draws about as much heat from the air over the sea as the melting does in the
+heavier snow, and more than twice as much in light snow. Melting draws 70–90 W/m² for each mm/h of snowfall in a layer
+1.6–5 km deep below the freezing level, and the drops' evaporation 200–590 W/m², spread over the rain's whole fall,
+with half of it within 5–9 km of the surface in the heavier snow. Of its water, the snow returns 35–51% to the air on
+the way down in the larger-flake cases and 85–94% in light snow, against the 61% CM1's own storms return of their
+falling water.
 
 On Earth, with Earth's gravity and air, the same code begins melting within 3–5% of the depths Matsuo and Sasyo (1981)
 computed and within 0.17 K of the temperatures Heymsfield and co-authors (2021) fitted to observations, and its ordinary
 flakes finish where observed melting layers end. The lunar results are runnable calculations through archived model air;
-no measurement checks them at lunar gravity or at these sizes. The flakes come from McSnow runs whose lunar builds
-diffused vapour at 0.651 of McSnow's own fit, through a patch found on 25 October. Rerun on the corrected build, light
-snow's flakes move by under 5%, while the heavier snow melts 0.2–0.6 km deeper and sends 61–65% of its water to the
-surface against 55–57% ([diffusivity](mcsnow_diffusivity.md)); the tables below hold the earlier flakes.
+no measurement checks them at lunar gravity or at these sizes. The flakes come from McSnow runs on the build whose
+vapour diffusivity takes McSnow's own 1 atm reference, every case repeated on 29 October
+([diffusivity](mcsnow_diffusivity.md)); on the earlier build, which diffused vapour at 0.651 of the fit, the heavier
+snow melted 0.2–0.6 km higher and sent 55–60% of its water to the surface.
 
 ## How a flake is followed
 
@@ -129,8 +130,8 @@ The drops of flakes up to about 2 cm evaporate on the way down: in the sampled c
 1.3–11 km below the freezing level and those of 2 cm flakes 12–24 km below it, so that 2 cm flakes bring a mean 1–3% of
 their water to the surface. Meltwater drops stay below the lunar stability screen, 16.6 mm at the melting level ([rain
 breakup](../rain/README.md#breakup-at-lunar-gravity)), up to flakes of about 24 cm. Earth's screen, 6.6 mm, would break
-the drop of every flake above about 7 cm. The largest flakes of the populations, 30–34 cm, melt to drops of 19–21 mm,
-which break.
+the drop of every flake above about 7 cm. The largest flakes of the populations from −30 °C, of heavy snow and of
+saturation, 29–57 cm, melt to drops of 19–30 mm, which break.
 
 ## The snow of the growth runs: its bands, its water and its heat
 
@@ -139,37 +140,37 @@ their mass flux, melt and evaporate in the composite columns as follows (land; s
 
 | Snow | Half the ice gone | 99% of the ice gone | Sublimated | Evaporated | Reaching the surface |
 |---|---:|---:|---:|---:|---:|
-| Light, 0.3 mm/h | 0.91–0.96; 0.96–1.01 km | 2.33–2.40; 2.32–2.38 km | 7–8%; 21–23% | 80–81%; 66% | 11–13%; 11–13% |
-| Light, a tenth of the crystals | 0.94; 1.00 km | 2.46; 2.43 km | 7%; 21% | 81%; 67% | 12%; 12% |
-| Light, formed near −30 °C | 1.34–1.40; 1.37–1.43 km | 3.57–4.12; 3.47–3.98 km | 3–4%; 12–13% | 45–49%; 38–40% | 48–51%; 47–50% |
-| Moderate, 1 mm/h | 1.51; 1.53 km | 3.84; 3.72 km | 2%; 10% | 38%; 32% | 59%; 58% |
-| Heavy, 3 mm/h, a hundredth of the crystals | 1.48–1.49; 1.50–1.51 km | 3.60–3.75; 3.50–3.64 km | 2%; 10% | 40%; 34% | 57–58%; 56% |
-| Held at saturation, a hundredth of the crystals | 1.47; 1.49 km | 3.52; 3.43 km | 2%; 10% | 41%; 35% | 56%; 55% |
+| Light, 0.3 mm/h | 0.92–0.98; 0.97–1.03 km | 2.29–2.48; 2.28–2.45 km | 7%; 20–22% | 78–83%; 64–67% | 10–15%; 10–15% |
+| Light, a tenth of the crystals | 0.90; 0.95 km | 2.19; 2.18 km | 8%; 23% | 86%; 70% | 6%; 7% |
+| Light, formed near −30 °C | 1.39–1.46; 1.42–1.48 km | 4.25–5.35; 4.10–5.14 km | 3%; 12–13% | 41–46%; 34–38% | 51–55%; 49–54% |
+| Moderate, 1 mm/h | 1.48; 1.50 km | 3.63; 3.53 km | 2%; 10% | 40%; 34% | 57%; 56% |
+| Heavy, 3 mm/h, a hundredth of the crystals | 1.56–1.59; 1.58–1.60 km | 3.96–3.98; 3.83–3.85 km | 2%; 9% | 33–35%; 28–29% | 63–65%; 61–63% |
+| Held at saturation, a hundredth of the crystals | 1.59; 1.60 km | 4.16; 4.02 km | 2%; 9% | 33%; 28% | 65%; 63% |
 
-Ranges give the two superparticle numbers of each converged case; depths are below the freezing level. Sublimation is
+Ranges give the two superparticle numbers of each case run at both; depths are below the freezing level. Sublimation is
 the ice lost to vapour before and while the flakes melt, and evaporation the meltwater lost from melting flakes and
 drops. These bands are where the sky's winter weather lies. Over the sea, with the freezing level 22.3 km up, dry snow
-falls above 21.75 km; wet snow and sleet fill the band below it, down to 19.9 km in light snow and 18.3–18.8 km in the
-heavier cases; rain falls beneath. Over land the same bands stand about 3.6 km higher above the box's ground, which
+falls above 21.75 km; wet snow and sleet fill the band below it, down to 19.9–20.1 km in light snow and 17.2–18.8 km in
+the heavier cases; rain falls beneath. Over land the same bands stand about 3.6 km higher above the box's ground, which
 itself stands 0.5–1.0 km above the sea.
 
 The snow's latent heat, in W/m² for each mm/h of snowfall arriving at the freezing level:
 
 | Snow | Dry layer: sublimation | Melting layer: melting; sublimation; evaporation | Rain: evaporation | All |
 |---|---:|---:|---:|---:|
-| Light, land | 40–45 | 85; 13–15; 0–3 | 551–554 | 690 |
-| Light, sea | 133–147 | 71–73; 30–33; 11–16 | 436–442 | 690 |
-| Light from −30 °C, land | 24–26 | 89; 1–2; 0–2 | 308–333 | 430 |
-| Light from −30 °C, sea | 79–85 | 80–81; 16–17; 6–7 | 251–269 | 430 |
-| Heavy, a hundredth of the crystals, land | 20 | 90; −1; −11 | 283–285 | 380 |
-| Heavy, a hundredth of the crystals, sea | 66 | 82; 13; −3 to −4 | 234–235 | 390 |
+| Light, land | 39–44 | 85–86; 12–15; 0–2 | 536–565 | 670–710 |
+| Light, sea | 130–145 | 71–73; 29–32; 12–14 | 430–448 | 680–710 |
+| Light from −30 °C, land | 26 | 89; 1–2; 6–22 | 262–309 | 400–430 |
+| Light from −30 °C, sea | 83–84 | 80; 14–16; 11–20 | 211–249 | 410–440 |
+| Heavy, a hundredth of the crystals, land | 18–19 | 90; −3 to −2; −11 | 237–248 | 330–340 |
+| Heavy, a hundredth of the crystals, sea | 60–61 | 83; 11–12; −5 to −4 | 196–205 | 350–360 |
 
 The dry layer reaches from the freezing level to where melting begins, the melting layer from there to where 99% of
 the ice has gone, and the rain from there to the surface. Negative values are vapour condensing on melting flakes where
 the air holds more vapour than saturation at the flakes' 0 °C surface. Over the sea the sublimation, at 2.83 MJ/kg,
 takes about as much heat as the melting in heavy snow and more than twice as much in light snow. The water goes back
 to the air at heights set by the drops' size: light snow over the sea releases a quarter of its water as vapour within
-2 km of the freezing level, by sublimation, and half by 7–8 km down; heavy snow releases a quarter by 5 km down, half
+2 km of the freezing level, by sublimation, and half by 7–8 km down; heavy snow releases a quarter within 1 km, half
 by 14 km down and three-quarters by 19 km down, 3 km above the sea.
 
 ## Rain at each ground height
@@ -180,13 +181,13 @@ higher ground):
 
 | Ground height above the sea | 0 | 1 km | 2 km | 3 km | 5 km | 8 km | 11.6 km |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Light, 0.3 mm/h | 13% | 16% | 20% | 23% | 30% | 39% | 48% |
-| Light, formed near −30 °C | 47–50% | 51–54% | 54–58% | 58–61% | 64–67% | 70–73% | 75–77% |
-| Heavy, a hundredth of the crystals | 56% | 60% | 64% | 67% | 73% | 78% | 82% |
+| Light, 0.3 mm/h | 10–15% | 12–18% | 15–22% | 19–25% | 25–32% | 34–41% | 43–49% |
+| Light, formed near −30 °C | 49–54% | 53–57% | 57–60% | 60–63% | 66–68% | 72–73% | 77% |
+| Heavy, a hundredth of the crystals | 61–63% | 65–66% | 68–70% | 71–73% | 76–77% | 81–82% | 84–85% |
 
-Over the land box's column, by height above its own ground, light snow delivers 11–13% there and 36–42% at 11.6 km,
-and heavy snow 57–58% and 82–83%. The geography atlas puts half the land below 1.9 km above the sea and nine-tenths
-below 5.1 km, with the highest summit at 11.6 km, so most ground receives 15–30% of light snow's water and 60–73% of
+Over the land box's column, by height above its own ground, light snow delivers 10–15% there and 36–44% at 11.6 km,
+and heavy snow 63–65% and 85–86%. The geography atlas puts half the land below 1.9 km above the sea and nine-tenths
+below 5.1 km, with the highest summit at 11.6 km, so most ground receives 12–32% of light snow's water and 65–77% of
 heavy snow's.
 
 ## Against the flakes of 20 October and CM1's own snow
@@ -206,7 +207,7 @@ CM1's own snow and graupel, in the same boxes, melt with half their cooling with
 nine-tenths within 3.3–3.9 km: close to the heavier snow's 90% (2.6–2.9 km) and 99% (3.5–4.1 km) here, and deeper than
 light snow's 1.7 km. CM1's rain evaporates with half its cooling within 6.6–8.0 km of the freezing level and nine-tenths
 within 18.6–18.7 km. Its falling water, rain from its clouds and melted snow and graupel, loses 60.4–60.9% on the way
-down ([climate/crm](../../climate/crm/README.md)), where the heavier snow here loses 40–45% and light snow 87–89%. The
+down ([climate/crm](../../climate/crm/README.md)), where the heavier snow here loses 35–44% and light snow 85–94%. The
 difference is the drops' size: CM1's rain falls in exponential spectra whose breakup limit, carried to lunar gravity,
 settles near a mean diameter of 1.7 mm ([rain breakup](../rain/README.md#breakup-at-lunar-gravity)), while the large
 flakes melt to drops of 6–15 mm that keep most of their water through a fall of 20 km.
@@ -222,14 +223,14 @@ sublimation, since growth and sublimation in one column within one interval canc
 
 | Storm paths, crystal concentration | Paths delivering snow | Ice grown that sublimates before 0 °C, at least | Arrives at 0 °C | Leaves as single crystals at the 1 m censor | Aloft at the end |
 |---|---:|---:|---:|---:|---:|
-| Archived humidity, a hundredth | 28–34 | 12–14% | 6–7% | 79–81% | 0.1% |
-| Archived humidity, a tenth | 63–71 | 14–16% | 37–42% | 44–46% | 0.4–0.6% |
-| Archived humidity, reference | 77 | 14% | 82% | 2% | 1.0% |
-| Held at water saturation, a hundredth to reference | 276–300 | none | 47–88% | 6–46% | 6–12% |
+| Archived humidity, a hundredth | 33–44 | 12–13% | 8–10% | 78–80% | 0.03–0.05% |
+| Archived humidity, a tenth | 62–74 | 11–16% | 45–51% | 33–44% | 0.6% |
+| Archived humidity, reference | 67 | 13% | 80% | 6% | 1.2% |
+| Held at water saturation, a hundredth to reference | 270–299 | none | 49–93% | 2–43% | 5–11% |
 
-Ranges give the base runs and those with four times the superparticles. In the archived humidity at least an eighth of
+Ranges give the base runs and those with four times the superparticles. In the archived humidity at least a ninth of
 the ice the storm grows sublimates before it reaches the freezing level, and of the ice that is neither censored nor
-still aloft, 15% sublimates at the reference concentration, 24–30% at a tenth and 65–69% at a hundredth. Where
+still aloft, 14% sublimates at the reference concentration, 20–24% at a tenth and 57–61% at a hundredth. Where
 crystals are few, most of the ice that does not run away into metre-long single crystals sublimates before it can
 reach the freezing level. Each kilogram that sublimates there takes back from the air the 2.83 MJ its growth
 released.
@@ -273,12 +274,15 @@ melt to one drop each; drops fall alone, so collisions between drops, and their 
 work's encounter diagnostic shows would reshape the spectrum ([rain](../rain/README.md)), are left out. A drop above
 its screen breaks into equal drops, a stand-in for a breakup spectrum.
 
-The flake populations at the freezing level are those of the growth-and-aggregation runs of 25 October. Their lunar
-McSnow builds took the freezing level's pressure, 659 hPa, as the reference of McSnow's vapour diffusivity, which is 1
-atm, so they diffused vapour at 0.651 of McSnow's fit; where diffusion limits growth, their crystals grew at 0.68–0.79
-of its rate. Rerun on the corrected build, the flakes of light snow move by under 5% and those of the heavier cases grow
-11–26%, which deepens their melting by 0.2–0.6 km and raises the water reaching the surface by 5–8 points
-([diffusivity](mcsnow_diffusivity.md)); the tables here hold the earlier flakes until the remaining runs are repeated.
+The flake populations at the freezing level are those of the growth-and-aggregation runs on the build whose vapour
+diffusivity takes McSnow's own 1 atm reference, repeated on 29 October. The runs of 24 and 25 October took the freezing
+level's pressure, 659 hPa, as that reference, so they diffused vapour at 0.651 of McSnow's fit; where diffusion limits
+growth, their crystals grew at 0.68–0.79 of its rate ([diffusivity](mcsnow_diffusivity.md)). On the corrected build the
+flakes of light snow from −15 °C at the reference crystal flux move by under 5%, those with a tenth of the crystals
+shrink 15–28%, and those of the heavier cases grow 11–26%, which deepens their melting by 0.2–0.6 km and raises the
+water reaching the surface by 5–9 points. Light snow from −30 °C, whose two superparticle numbers agreed within 4% at
+the median on the old build, now parts by 21% there and nearly twofold at the 90th percentile, and its melting depths
+carry that spread.
 
 Mitra's model carries its laboratory flakes to the lunar sizes. Those flakes were centimetre-sized; lunar flakes of
 10–20 cm fall at Reynolds numbers of several thousand, beyond the range of the ventilation law, and their melting
@@ -302,5 +306,8 @@ OPENBLAS_NUM_THREADS=1 python -B -m atmosphere.snow.melting assemble       # res
 The environment step reads the two boxes' saved fields through `climate/crm/runs` on the project-space drive and keeps
 the snowy columns, with their hashes, in `research/runs/snow_agent_3/environment`; the other steps write their full
 records to `research/runs/snow_agent_3/melting`, from which the compact [product](results/snow_melting.json) is
-assembled. The McSnow populations and storm paths are read from `research/runs/snow_agent_2/growagg`
-([growth and aggregation](mcsnow_growth_aggregation.md)), each run recorded by the hash of its `run.json`.
+assembled. The McSnow populations and storm paths are read from the corrected runs in
+`research/runs/snow_agent_3/dv_fix`, and the lunar steps' records written beside them in `dv_fix/melting`, by
+`python -B -m atmosphere.snow.mcsnow_diffusivity assemble` ([diffusivity](mcsnow_diffusivity.md)), each run recorded
+by the hash of its `run.json`; the earlier build's runs and records stay in `research/runs/snow_agent_2/growagg` and
+`research/runs/snow_agent_3/melting`.

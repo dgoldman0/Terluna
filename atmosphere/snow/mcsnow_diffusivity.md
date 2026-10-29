@@ -39,12 +39,15 @@ reaches the surface against 56–57%; held at saturation, 4.0–4.2 km against 3
 heavier snow sublimation's share falls by 0.8–1.3 points over the sea and 0.3–0.5 over land, and in light snow it moves
 by 0.6 points or less.
 
-These are single base runs. The rest of the lunar McSnow runs carry the old factor until they are rerun on the corrected
-build: the other reference-column cases (3 mm/h at a tenth of the crystals, 1 mm/h, 0.3 mm/h at a tenth, saturation at
-the reference flux), the superparticle refinements of every case (×4, and ×½ for the deep column), the error band's two
-edges at 3 mm/h, the eight other storm-path runs, the parity and reproduction runs, and the lunar columns of 24 October;
-then the products of [growth and aggregation](mcsnow_growth_aggregation.md) and [aggregation](mcsnow_aggregation.md) and
-the melting record's populations are assembled again.
+These are the single base runs compared case by case. On 29 October the rest were repeated on the corrected build:
+the other reference-column cases (3 mm/h at a tenth of the crystals, 1 mm/h, 0.3 mm/h at a tenth, saturation at the
+reference flux), the superparticle refinements (×4 at 3 mm/h with the reference flux and with a hundredth of it and at
+0.3 mm/h, ×½ for the deep column), the error band's two edges at 3 mm/h and the eight other storm-path runs, eighteen
+runs in all, every one returning cleanly, with the growth parity and the parity and reproduction checks after them. The
+products of [growth and aggregation](mcsnow_growth_aggregation.md) and the [melting record](snow_melting.md) now read
+the corrected runs, and their records quote them. The lunar columns of the 24 October aggregation runs, which the
+growth runs superseded, are not repeated; they stand as the old build's record, and the corrected build no longer
+reproduces their lunar parity run, where the Earth build still reproduces its own in all 19 files.
 
 ## The correction
 
@@ -62,15 +65,19 @@ for the storm path its arrivals and the column budget of the [melting record](sn
 Every lunar run built from `mcsnow_aggregation.patched_sources('moon')` carries it: the lunar columns of the aggregation
 runs of 24 October ([aggregation](mcsnow_aggregation.md)) and every lunar column, storm path, parity and reproduction
 run of growth with aggregation on 25 October ([growth and aggregation](mcsnow_growth_aggregation.md)), and through them
-the flakes of the [melting record](snow_melting.md). The single-crystal lunar runs of 23–24 October patch only gravity
-and keep ps at 101,325 Pa, so their diffusivity is the fit's: the lunar column and storm of the improved component
-([lunar column](mcsnow_lunar_growth.md), [lunar storm](mcsnow_weather.md)), the [Earth error band](earth_error_band.md)
-and the [size range](lunar_size_range.md). The Earth builds keep the 1 atm reference.
+the flakes of the [melting record](snow_melting.md); since 29 October those two records read the corrected runs, and
+only the superseded aggregation columns of 24 October carry the factor. The single-crystal lunar runs of 23–24 October
+patch only gravity and keep ps at 101,325 Pa, so their diffusivity is the fit's: the lunar column and storm of the
+improved component ([lunar column](mcsnow_lunar_growth.md), [lunar storm](mcsnow_weather.md)), the [Earth error
+band](earth_error_band.md) and the [size range](lunar_size_range.md). The Earth builds keep the 1 atm reference.
 
 ## Reproduction
 
 `python -B -m atmosphere.snow.mcsnow_diffusivity build` compiles the corrected lunar build and records its source
-differences, `run --case <name>` repeats one recorded run on it, and `compare` reads the old and corrected runs and
-writes [results/mcsnow_diffusivity.json](results/mcsnow_diffusivity.json).
+differences, `run --case <name>` repeats one recorded run on it, `compare` reads the old and corrected runs and
+writes [results/mcsnow_diffusivity.json](results/mcsnow_diffusivity.json), and `assemble` writes the growth-and-
+aggregation and melting products from the corrected runs, repeating the growth parity and the parity checks first
+(the Earth build stays the old cache's). The eighteen runs of 29 October went four at a time through
+`session-tools/snow_reruns/run_reruns.py` on the research drive, about 3.9 hours of one core in all.
 `atmosphere/tests/test_snow_mcsnow_diffusivity.py` checks the source differences, the old factor and this record's table
 against that product.
