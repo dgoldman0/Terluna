@@ -23,18 +23,23 @@ rdrop_step metres:
   9.1 (g/9.81)^(1/4) m/s times dens, lambda held between the lunar cap on the mean diameter, 2.8 mm sqrt(9.81/g), and
   20 um.
 
-New rain enters each layer at its middle. Rain melted from snow there comes as new drops of mean diameter rdrop_melt;
-rain formed as rain there comes as new drops of rdrop_warm, or with nrdrop_join 1 joins the rain already falling through
-the layer, as accretion adds to drops without adding drops. What the layer evaporates is at most what would saturate it
-over the step, as gamma's form is. Snow sublimates with gamma as before; mkrain's phase rule, which makes each layer's
-precipitation all rain or all snow, is unchanged.
+New rain enters each layer at its middle. Rain melted from snow there comes as new drops of mean diameter rdrop_melt.
+Rain formed as rain there, W, comes as new drops of rdrop_warm with nrdrop_join 0; with nrdrop_join 1 it joins the rain
+already falling through the layer, as accretion adds to drops without adding drops; and with nrdrop_join 2, the
+scheme's setting, the share W/(W + F) of it makes new drops and the rest joins, F the rain arriving at the layer's
+middle, so that rain makes its own drops where little falls in, as autoconversion does, and grows the drops falling
+where much does. What the layer evaporates is at most what would saturate it over the step, as gamma's form is. Snow
+sublimates with gamma as before; mkrain's phase rule, which makes each layer's precipitation all rain or all snow, is
+unchanged.
 
-The scheme was tested on CM1's design boxes before it was built (rules and outcomes on the research drive,
-session-tools/rain_physics): carrying the size down a column from the boxes' own mean air with CM1's own sizes for the
-new rain gives CM1's column evaporation within 1.01-1.12 on the sea box, the land box and the inflow day. With every new
-drop at one size, 0.465 mm, the mean of CM1's own size where the sea box's rain forms, it gives 1.17-1.31, outside the
-test's 1.25 on the land box: the size new rain takes is open, and it waits on the snow work for the rain melted from
-lunar snow. CM1 makes that rain from ice it sizes by Earth's limits.
+The scheme was tested on CM1's design boxes before it was built, and its birth rules after (rules and outcomes on the
+research drive, session-tools/rain_physics): carrying the size down a column from the boxes' own mean air with CM1's
+own sizes for the new rain gives CM1's column evaporation within 1.01-1.12 on the sea box, the land box and the inflow
+day. Every new drop at one size, 0.465 mm, gives 1.17-1.31, its rain too small below where it forms, and rain formed as
+rain joining whatever falls gives 0.64-0.79, its rain too large at every level. The share rule on PlaSim's fifteen
+levels, with the melted rain at CM1's own 0.865 mm, gives 0.96-1.05, its sizes within 0.25 mm of CM1's in every layer
+below 35 km. The share depends on how thick the layers are, so a change of PlaSim's levels tests it again. PlaSim's
+melted rain takes the size lunar snow melts into, 2.95 mm, where CM1 makes its own from ice it sizes by Earth's limits.
 
 `mkrain` is the patched mkrain's Python copy with nevapprec 2, columns as rows and levels top first, for the tests.
 RAIN_DROP_PATCHES put the scheme into rainmod.f90 behind nevapprec; with nevapprec 1 the routine is as before.
@@ -67,6 +72,13 @@ TINY_FLUX = 1.0e-30               # kg/m2/s: rain below it is gone
 # The size new rain takes where CM1's sea box forms it: the mean of its rain-mass-weighted 1/lambda over the levels and
 # outputs of days 29.5-59.0 where its rain's growth outran the rain arriving from above, weighted by that growth.
 CM1_SEA_BIRTH_SIZE_M = 0.465e-3
+# The size rain formed as rain takes where it forms afresh there: the same mean where the gain less the melting outran
+# the rain arriving from above, weighted by it.
+CM1_SEA_WARM_SIZE_M = 0.439e-3
+# The rain lunar snow melts into, one drop of each melted particle as Morrison counts CM1's: the corrected McSnow run at
+# 1 mm/h (domain/atmosphere aceddfa; light snow gives 1.25-1.37 mm, heavy 3.34-3.42 mm), nearest the design boxes'
+# snowfall, whose medians by snowfall are 0.72-1.69 mm/h; between 2.95 and 3.38 mm the boxes' evaporation moves <0.2%.
+LUNAR_MELT_SIZE_M = 2.95e-3
 
 
 def products(fall_law: Path = FALL_LAW, breakup: Path = BREAKUP) -> dict:
@@ -84,8 +96,9 @@ PRODUCTS = products()
 BIRTH_RULES = {
     'one_size': dict(nrdrop_join=0, rdrop_melt=CM1_SEA_BIRTH_SIZE_M, rdrop_warm=CM1_SEA_BIRTH_SIZE_M),
     'join': dict(nrdrop_join=1, rdrop_melt=CM1_SEA_BIRTH_SIZE_M, rdrop_warm=CM1_SEA_BIRTH_SIZE_M),
+    'share': dict(nrdrop_join=2, rdrop_melt=LUNAR_MELT_SIZE_M, rdrop_warm=CM1_SEA_WARM_SIZE_M),
 }
-PARAMETERS = dict(BIRTH_RULES['one_size'], rdrop_ksc=PRODUCTS['ksc'], rdrop_rhoexp=PRODUCTS['rhoexp'],
+PARAMETERS = dict(BIRTH_RULES['share'], rdrop_ksc=PRODUCTS['ksc'], rdrop_rhoexp=PRODUCTS['rhoexp'],
                   rdrop_step=1000.0)
 
 
@@ -207,8 +220,11 @@ def rdropevap(jlev, zq, zt, zqsat, zcor, zpra, zmelt, zprc, zprl, zprn, zdqdtl, 
             if half == 2:                                  # the layer's new rain, at its middle
                 if bm > 0.0:
                     n = n + bm * number_per_flux(prm['rdrop_melt'], inv)
-                if bw > 0.0 and not (prm['nrdrop_join'] == 1 and f > 0.0):
-                    n = n + bw * number_per_flux(prm['rdrop_warm'], inv)
+                if bw > 0.0:
+                    if prm['nrdrop_join'] == 2:                # the share bw/(bw + f) as drops, the rest joining
+                        n = n + bw * bw / (bw + f) * number_per_flux(prm['rdrop_warm'], inv)
+                    elif not (prm['nrdrop_join'] == 1 and f > 0.0):
+                        n = n + bw * number_per_flux(prm['rdrop_warm'], inv)
                 f = f + bm + bw
                 if f > 0.0:
                     ratio = n / f
@@ -314,8 +330,10 @@ def declarations(prm: dict = PARAMETERS, p=PRODUCTS) -> str:
     n = p['table'].shape[1]
     values = [repr(float(p['table'][m, i])) for i in range(n) for m in range(3)]
     return (
-        f"      integer :: nrdrop_join = {prm['nrdrop_join']} ! {MARKER} (nevapprec 2): 1 joins rain formed as rain to "
-        "the rain falling\n"
+        f"      integer :: nrdrop_join = {prm['nrdrop_join']} ! {MARKER} (nevapprec 2): the rule for rain formed "
+        "as rain\n"
+        "!     0 makes it new drops, 1 joins it to the rain falling, 2 makes the share W/(W+F) of it new drops and "
+        "joins the rest\n"
         f"      real :: rdrop_melt = {prm['rdrop_melt']!r} ! mean diameter (m) of the drops of rain melted from snow\n"
         f"      real :: rdrop_warm = {prm['rdrop_warm']!r} ! mean diameter (m) of the drops of rain formed as rain\n"
         f"      real :: rdrop_ksc = {prm['rdrop_ksc']!r} ! rain's self-collection at lunar gravity (m3/kg/s)\n"
@@ -493,9 +511,10 @@ ROUTINES = """
 !     Terluna: rain from its drops (nevapprec 2; climate/gcm/rain_drops.py, its rdropevap line for line). Through
 !     layer jlev of every column the rain arriving from above (ppra, its drops pprn) falls half the layer; the layer's
 !     new rain joins it at the middle, pmelt of it melted from snow as drops of rdrop_melt and the rest formed as rain
-!     as drops of rdrop_warm or, with nrdrop_join 1, joining the rain falling; and the whole falls the lower half, in
-!     midpoint steps of at most rdrop_step, losing water and drops (rdroprates). At most what would saturate the layer
-!     over the step evaporates, shared between the convective and the large-scale rain by their fluxes.
+!     as drops of rdrop_warm (nrdrop_join 0), joining the rain falling (1), or the share zbw/(zbw+zf) of it as drops
+!     and the rest joining (2); and the whole falls the lower half, in midpoint steps of at most rdrop_step, losing
+!     water and drops (rdroprates). At most what would saturate the layer over the step evaporates, shared between
+!     the convective and the large-scale rain by their fluxes.
 !
       integer :: jlev
       real :: pq(NHOR),pt(NHOR),pqsat(NHOR),pcor(NHOR),ppra(NHOR),pmelt(NHOR)
@@ -538,7 +557,13 @@ ROUTINES = """
        do jhalf=1,2
         if(jhalf == 2) then
          if(zbm > 0.) zn=zn+zbm*rdropnper(rdrop_melt)
-         if(zbw > 0. .and. .not.(nrdrop_join == 1 .and. zf > 0.)) zn=zn+zbw*rdropnper(rdrop_warm)
+         if(zbw > 0.) then
+          if(nrdrop_join == 2) then
+           zn=zn+zbw*zbw/(zbw+zf)*rdropnper(rdrop_warm)
+          elseif(.not.(nrdrop_join == 1 .and. zf > 0.)) then
+           zn=zn+zbw*rdropnper(rdrop_warm)
+          endif
+         endif
          zf=zf+zbm+zbw
          if(zf > 0.) zrat=zn/zf
         endif

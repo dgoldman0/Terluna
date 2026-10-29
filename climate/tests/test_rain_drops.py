@@ -3,8 +3,9 @@ law, the breakup product and Morrison's closures; the Python copy keeps the colu
 air is unsaturated; in saturated air the drops grow toward the lunar breakup size and stop there; the patch applies once
 to the shared rainmod.f90 on lines no other patch touches and is undone exactly; mkrain with the patch, compiled with
 ExoPlaSim's flags against a stub of PlaSim's module, gives the Python copy's tendencies and precipitation to 1e-10 under
-both birth rules, and with nevapprec 1 prints every digit the unpatched mkrain prints; the patched rainmod.f90 compiles
-with PlaSim's modules; and the runner records the rule and writes its namelist."""
+every birth rule, and with nevapprec 1 prints every digit the unpatched mkrain prints; the share rule makes all the
+drops of rain formed where none arrives and part of them below, between the other two rules; the patched rainmod.f90
+compiles with PlaSim's modules; and the runner records the rule and writes its namelist."""
 import inspect
 import json
 import math
@@ -69,6 +70,8 @@ def test_the_constants_come_from_the_fall_law_the_breakup_and_morrisons_closures
     breakup = json.loads(rd.BREAKUP.read_text())
     assert rd.PARAMETERS['rdrop_ksc'] == law['self_collection']['lunar_rate_m3_kg_s'] == 2.919
     assert rd.PARAMETERS['rdrop_rhoexp'] == breakup['lunar_limits']['namelist']['brkup_rhoexp'] == 0.687
+    assert rd.PARAMETERS['nrdrop_join'] == 2                                         # the share rule, adopted
+    assert (rd.PARAMETERS['rdrop_melt'], rd.PARAMETERS['rdrop_warm']) == (2.95e-3, 0.439e-3)
     assert np.array_equal(rd.PRODUCTS['table'][2], law['table']['ln_ventilation'])
     text = rd.declarations()
     for value in (rd.RHOSU, 0.78, 0.308, 997.0, 8.794e-5, 1.81, 1.496e-6, 120.0, 0.0003, 2300.0, 0.0028, 2e-05, 9.1):
@@ -116,8 +119,30 @@ def test_in_saturated_air_the_drops_grow_toward_the_breakup_size_and_stop_there(
     size = math.exp(-rd.slope_of(math.log(out['number'][0] / flux), inv))
     scol = math.sqrt(9.81 / C['ga']) * (s['dp'][0] / 101325.0) ** rd.PARAMETERS['rdrop_rhoexp']
     equilibrium = (rd.CM1_RAIN_BREAKUP_CUTOFF + math.log(2.0) / rd.CM1_RAIN_BREAKUP_RATE) * scol
-    assert rd.PARAMETERS['rdrop_melt'] < size <= equilibrium * 1.001
+    assert rd.PARAMETERS['rdrop_warm'] < size <= equilibrium * 1.001
     assert size > 0.5 * equilibrium
+
+
+def test_the_share_rule_makes_the_drops_of_rain_formed_afresh_and_part_of_them_below():
+    """Rain formed as rain where none arrives makes all its own drops under the share rule, as under the rule that makes
+    every new drop; formed lower down, where rain already falls, part of it joins that rain, so the ground gets more
+    drops than when all of it joins and fewer than when none does. The air is saturated, so only the births and the
+    collisions set the drops' number."""
+    s = columns(n=1, seed=8)
+    s['dq'] = saturation(s['dt'][:, :-1], s['dp'][:, None] * s['sigma'][None, :]) * 1.01
+    s['dt'][:] = 290.0
+    for key in ('dprcl', 'dprscl', 'dprll', 'dprsll'):
+        s[key][:] = 0.0
+    s['dprcl'][0, 6] = 3e-9
+    sizes = dict(rdrop_melt=rd.CM1_SEA_WARM_SIZE_M, rdrop_warm=rd.CM1_SEA_WARM_SIZE_M)
+
+    def number(case, join):
+        return rd.mkrain(copy(case), C, dict(rd.PARAMETERS, nrdrop_join=join, **sizes))['number'][0]
+
+    assert number(s, 2) == pytest.approx(number(s, 0), rel=1e-12)
+    s['dprcl'][0, 9] = 2e-9                                                         # more rain formed lower down
+    joined, shared, new = (number(s, join) for join in (1, 2, 0))
+    assert joined < shared < new
 
 
 # ------------------------------------------------------------------------------------------------------ Fortran
@@ -217,7 +242,7 @@ def run_fortran(folder, code, s, nevapprec, patched, prm=rd.PARAMETERS):
 
 
 @FORTRAN
-def test_the_fortran_gives_the_python_copys_rain_under_both_birth_rules(tmp_path):
+def test_the_fortran_gives_the_python_copys_rain_under_every_birth_rule(tmp_path):
     path = source('rainmod.f90')
     if path is None:
         pytest.skip('no ExoPlaSim source at hand')
@@ -295,7 +320,7 @@ def test_in_dry_air_heavy_rain_and_extreme_sizes_the_fortran_stays_finite_and_fo
     code = mkrain_code(apply(path.read_text(), rd.RAIN_DROP_EDITS, rd.MARKER), True)
     scale = lambda a: max(np.abs(a).max(), 1e-30)
     for size in (2e-5, rd.CM1_SEA_BIRTH_SIZE_M, 6.5e-3):
-        for join in (0, 1):
+        for join in (0, 1, 2):
             prm = dict(rd.PARAMETERS, rdrop_melt=size, rdrop_warm=size, nrdrop_join=join)
             s = columns(seed=12, ground_freezing=True)
             rng = np.random.default_rng(13)
