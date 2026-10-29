@@ -22,8 +22,10 @@ from climate.tests.test_pbl_fortran import (ALV, EARTH, FORTRAN, GCM_FLAGS, LUNA
 
 
 def without_gust(text):
-    """The shared source as it stood before this patch: its edits undone where it carries them."""
-    return undo(text, sg.GUST_EDITS, sg.GUST_MARKER)
+    """The shared source as it stood before this patch: its edits undone where it carries them, the similarity over
+    water's, which goes over them, first."""
+    from climate.gcm import surface_similarity as ssf
+    return undo(undo(text, ssf.SIMW_EDITS, ssf.SIMW_MARKER), sg.GUST_EDITS, sg.GUST_MARKER)
 
 
 def with_gust(text):

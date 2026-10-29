@@ -74,7 +74,9 @@ PlaSim's convection slot completed for the Betts-Miller and mass-flux schemes (p
 --surface-gust beljaars adds Beljaars's gust, the convective velocity of the boundary layer's eddies, to the wind in
 PlaSim's surface transfer over every surface, in place of the free-convection term over water and the least wind of
 1 m/s (surface_gust.py; GUST_PATCHES over the nonlocal scheme's patch, whose depth rule it takes); a run with it and
-the moisture diagnostics writes the vapour by process too.
+the moisture diagnostics writes the vapour by process too. --surface-gust beljaars_similarity adds to the gust CM1's
+surface-layer similarity over ice-free water, carried to the lowest level's height (surface_similarity.py; SIMW_PATCHES
+over the gust's patch).
 --sbm-diagnostic-night, a diagnostic and never a configuration, holds the Betts-Miller scheme's deep convection off
 wherever the Sun is down (SBM_NIGHT_PATCHES); a run with it and the moisture diagnostics writes the vapour by process
 too. --large-scale-condensate cloud holds PlaSim's large-scale condensate as cloud water in its layer above freezing,
@@ -103,6 +105,7 @@ from climate.gcm import massflux_fortran as mff
 from climate.gcm import pbl_fortran as pbf
 from climate.gcm import pbl_scheme as pbs
 from climate.gcm import surface_gust as sgf
+from climate.gcm import surface_similarity as ssf
 from climate.gcm import condensate as cnd
 from climate.gcm import rain_drops as rdr
 
@@ -1582,7 +1585,8 @@ def use_twilight_package():
 def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
                    massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
                    boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
-                   cloud_water: bool = False, gust: bool = False, rain_drops: bool = False) -> dict:
+                   cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
+                   similarity: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1595,8 +1599,9 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     diagnostic), and the switches in PlaSim's namelist (PLASIM_SWITCH_PATCHES) with the humidity's true mean
     (HUS_MEAN_PATCHES) and the cloud water (condensate.CLOUD_WATER_PATCHES, with the convection's vapour diagnostic),
     and Beljaars's gust in the surface transfer (surface_gust.GUST_PATCHES, over the nonlocal boundary layer's patch,
-    with the convection's vapour diagnostic), and the rain evaporated from its drops (rain_drops.RAIN_DROP_PATCHES),
-    for a run that sets them, and return each patched file's hash for the run key."""
+    with the convection's vapour diagnostic) with CM1's similarity over water (surface_similarity.SIMW_PATCHES, over
+    the gust's patch), and the rain evaporated from its drops (rain_drops.RAIN_DROP_PATCHES), for a run that sets them,
+    and return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1609,6 +1614,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
         raise RuntimeError('the boundary-layer patch goes into the twilight copy, over the free-convection patch')
     if gust and not twilight:
         raise RuntimeError("the gust's patch goes into the twilight copy, over the boundary-layer patch")
+    if similarity and not gust:
+        raise RuntimeError("the similarity over water goes over the gust's patch")
     if night and not twilight:
         raise RuntimeError("the night switch reads the twilight patch's cosine below the horizon; it goes into the "
                            'twilight copy')
@@ -1623,6 +1630,7 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                                 + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer or gust else [])
                                 + (pbf.PBL_PATCHES if boundary_layer or gust else [])
                                 + (sgf.GUST_PATCHES if gust else [])
+                                + (ssf.SIMW_PATCHES if similarity else [])
                                 + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night or cloud_water or gust else [])
                                 + (SBM_NIGHT_PATCHES if night else [])
                                 + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
@@ -1720,18 +1728,33 @@ def boundary_layer_setting(choice: str) -> dict:
                 code='climate/gcm/pbl_scheme.py (nonlocal_column), as Fortran in climate/gcm/pbl_fortran.py (pblcol)')
 
 
-SURFACE_GUST_CHOICES = ('none', 'beljaars')
+SURFACE_GUST_CHOICES = ('none', 'beljaars', 'beljaars_similarity')
 
 
 def surface_gust_setting(choice: str) -> dict:
     """Beljaars's gust in PlaSim's surface transfer (surface_gust.py, GUST_PATCHES) as the configuration records it:
     beta w* joins the lowest level's wind in the bulk formulas over every surface, the wind there at least 0.1 m/s, and
     over water the free-convection term goes; w* comes from the surface fluxes of the step before and the boundary
-    layer's depth by the nonlocal scheme's rule and constants. 'none' is PlaSim's own transfer, left unrecorded."""
+    layer's depth by the nonlocal scheme's rule and constants. 'beljaars_similarity' adds CM1's surface-layer
+    similarity over ice-free water (surface_similarity.py, SIMW_PATCHES). 'none' is PlaSim's own transfer, left
+    unrecorded."""
     if choice not in SURFACE_GUST_CHOICES[1:]:
-        raise ValueError(f"the surface gust is set only for 'beljaars' (PlaSim's own transfer is the default), "
-                         f'not {choice!r}')
-    return dict(form=choice, beta=sgf.GUST_BETA, least_wind_m_s=sgf.GUST_UMIN,
+        raise ValueError(f"the surface gust is set only for {SURFACE_GUST_CHOICES[1:]} (PlaSim's own transfer is the "
+                         f'default), not {choice!r}')
+    similarity = {}
+    if choice == 'beljaars_similarity':
+        similarity = dict(similarity_over_water=dict(
+            over='ice-free water (land share below 1, no ice cover); land and ice keep the transfer above',
+            form="CM1's surface layer (sfclay.F, sfcmodel 2, isftcflx 0) carried to the lowest level's height",
+            constants=dict(karman=ssf.KARMAN, charnock=ssf.CHARNOCK, smooth_flow_m2_s=ssf.SMOOTH,
+                           roughness_cap_m=ssf.Z0_MAX, fairall=[ssf.Z0Q_COEFF, ssf.Z0Q_EXPONENT],
+                           heat_roughness_range_m=[ssf.Z0Q_MIN, ssf.Z0Q_MAX], least_psi_q=ssf.PSI_FLOOR,
+                           least_wind_m_s=ssf.WIND_MIN),
+            state="u*, the temperature scale and the roughness carried between steps as CM1 carries them",
+            start=dict(ssf.START), wind="the gust's, without CM1's subgrid wind",
+            check='session-tools/evaporation/rules_similarity.txt on the research drive (29 October)',
+            code='climate/gcm/surface_similarity.py (similarity_column, surface_transfer; simwcol in Fortran)'))
+    return dict(form=choice, beta=sgf.GUST_BETA, least_wind_m_s=sgf.GUST_UMIN, **similarity,
                 replaces=dict(free_convection_over_water=sgf.EXOPLASIM_CFREE, least_wind_m_s=sgf.EXOPLASIM_ZUMIN),
                 depth=dict(rule="the nonlocal scheme's bulk Richardson number with the thermals' excess (pblcol)",
                            parameters=pbf.fortran_values()),
@@ -1920,7 +1943,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     diagnostics its own diagnostics and the vapour by process too), and humidity_mean writes the humidity's true mean
     (HUS_MEAN_PATCHES), and surface_gust 'beljaars' Beljaars's gust in the surface transfer in place of the
     free-convection term and the least wind (surface_gust_setting; with the moisture diagnostics the vapour by process
-    too), and rain_drops, a birth rule of rain_drops.BIRTH_RULES, the rain's evaporation from its drops' sizes and fall
+    too), 'beljaars_similarity' with CM1's similarity over ice-free water as well, and rain_drops, a birth rule of rain_drops.BIRTH_RULES, the rain's evaporation from its drops' sizes and fall
     speeds in place of gamma, which the snow keeps (rain_drops.setting). Each is recorded when given, and left out the
     configuration is the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as
     the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did."""
@@ -1974,7 +1997,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      boundary_layer=mixing_length is not None or boundary_layer is not None,
                                      night=uses_night_switch(convection), humidity_mean=bool(humidity_mean),
                                      cloud_water=cloud, gust=surface_gust is not None,
-                                     rain_drops=rain_drops is not None),
+                                     rain_drops=rain_drops is not None,
+                                     similarity=surface_gust == 'beljaars_similarity'),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -2351,6 +2375,8 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         model._edit_namelist('fluxmod_namelist', 'NGUST', '1')
         model._edit_namelist('fluxmod_namelist', 'GUST_BETA', repr(float(cfg['surface_gust']['beta'])))
         model._edit_namelist('fluxmod_namelist', 'GUST_UMIN', repr(float(cfg['surface_gust']['least_wind_m_s'])))
+        if 'similarity_over_water' in cfg['surface_gust']:
+            model._edit_namelist('fluxmod_namelist', 'NSIMW', '1')
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
@@ -2755,7 +2781,9 @@ def main(argv=None) -> int:
     parser.add_argument('--surface-gust', choices=SURFACE_GUST_CHOICES, default='none',
                         help="Beljaars's gust, the boundary layer's convective velocity, added to the wind in PlaSim's "
                              'surface transfer over every surface in place of the free-convection term over water and '
-                             'the least wind of 1 m/s (surface_gust.py; GUST_PATCHES; part of the run key)')
+                             'the least wind of 1 m/s (surface_gust.py; GUST_PATCHES; part of the run key); '
+                             "beljaars_similarity adds CM1's surface-layer similarity over ice-free water "
+                             '(surface_similarity.py; SIMW_PATCHES)')
     parser.add_argument('--large-scale-condensate', choices=('rain', 'cloud'), default='rain',
                         help="what PlaSim's large-scale condensation makes of its condensate: rain at once, as "
                              'PlaSim does, or cloud water held in its layer above freezing, evaporated where the air '

@@ -4131,6 +4131,75 @@ $W/smoke_gcm.sh                                                                 
 $W/smoke_gcm_share.sh                                                             # the same with the share rule
 ```
 
+#### Similarity over water in PlaSim (29 October)
+
+The sea's evaporation gap lies in PlaSim's surface transfer at its lowest level, 313 m up ([the
+trace](../crm/README.md#where-the-two-models-evaporation-parts-over-the-sea-28-october-night)). Before the design run,
+PlaSim's transfer was set beside Monin–Obukhov similarity integrated to the same height, with similarity over water to
+go into the design configuration if the two parted by more than a tenth (register, 29 October). The similarity is CM1's
+own surface layer over water, `sfclay.F` of the box's build (sfcmodel 2, isftcflx 0), written out for one column and
+carried to any height: its regimes by the bulk Richardson number, Paulson's functions in unstable air from its tables,
+Charnock's roughness at lunar gravity with the smooth-flow term, Fairall's roughness for heat and vapour, and its
+friction velocity averaged with the step before's. The rules were set before any number was read (`rules_similarity.txt`
+beside `similarity.py` in `session-tools/evaporation` on the research drive).
+
+**The check.** At CM1's own 50 m level, on the box's air and its written wind, the similarity gives CM1's written
+evaporation within 0.3% (2.556 against 2.549 mm/day on the inflow day; 1.006 of it on the fourth), so the formula is
+CM1's. Carried to 313 m with CM1's own wind it evaporates 2.55 mm/day, as at 50 m, so the surface layer's constant flux
+holds to that height on the box's air. On the same air with the gust's wind at 313 m, PlaSim's transfer evaporates 0.72
+of the similarity's on the inflow day (1.83 against 2.53 mm/day) and 0.74 on the fourth, and 0.82 on the gust GCM's own
+3-day means at the site (3.00 against 3.66). Both part by more than a tenth in the same direction, so the design
+configuration takes similarity over water. The difference sits in light wind over warm water. In the six tenths of the
+lunar day with the least wind the similarity carries 1.43–1.70 times PlaSim's transfer: its free-convection functions
+(ψ_h 3.2–3.8) and its roughness for heat and vapour (0.9–1.0 × 10⁻⁴ m) stand against Louis's factor of 1.11–1.14 and
+PlaSim's single Charnock roughness of 2.3–4.4 × 10⁻⁵ m. In the windiest tenth, after noon, the two lie within 3%. At 9
+m/s, on the test columns, the similarity carries less than Louis's factors, its roughness for heat and vapour a tenth of
+the momentum's or less, as COARE's measurements over the ocean have it.
+
+**The patch** ([surface_similarity.py](surface_similarity.py); `SIMW_PATCHES` over the gust's patch, behind fluxmod's
+`nsimw`). With the gust and `nsimw` 1, surflx takes CM1's similarity for every ice-free water column: from the step
+before's friction velocity, temperature scale and roughness, carried between steps as CM1 carries UST, MOL and ZNT, one
+evaluation a step gives the transfer velocities κu*/ψ_q for heat and vapour and u*²/U for momentum. U is the gust's
+wind, at least 0.1 m/s; CM1's subgrid wind for its 6 km grid is left out. The velocities enter as surflx's stability
+factors against its neutral transfer, so the stress, the sensible heat, the evaporation's implicit step and the 10 m
+wind take them unchanged. Land, sea ice and partly frozen sea keep PlaSim's transfer. The runner's `--surface-gust
+beljaars_similarity` applies the patch over the gust's, writes `NSIMW = 1` and records the similarity's constants, its
+state and its check with the gust's setting.
+
+**The checks** ([test_surface_similarity.py](../tests/test_surface_similarity.py)). The tables are Paulson's, and in
+neutral air the similarity is the log law with its roughness from its own u*. Carried from step to step on fixed air it
+settles to a fixed point. Over the lunar sea it carries more than Louis's factors in calm unstable air and less at 9
+m/s, while land and sea ice keep PlaSim's transfer. surflx with the patch, compiled with ExoPlaSim's flags against a
+stub of its module, gives the Python copy's transfer velocities and carried state to 1e-10 on the gust tests' lunar and
+Earth-like columns and a sea-ice twin, from a fresh state and from a settled one. With the switch off it prints every
+digit the gust's surflx prints. The patch applies once over the gust's and the patched fluxmod.f90 compiles with
+PlaSim's modules. The gust's and the boundary layer's tests undo it first where the shared source carries it.
+
+**The smoke run** (`smoke_gcm_similarity.sh` and `smoke_similarity_compare.py` beside the rules). One lunar day from the
+fifteen-level restart, with the share rule's rain and the gust, beside the same day with the gust alone: every field
+finite, the namelist with `NGUST = 1` and `NSIMW = 1`, and 32.3 s against 34.2 s on the same quiet machine. The sea's
+evaporation rises 17% (2.01 to 2.35 mm/day) and its sensible heat from 5.5 to 6.9 W/m², the land's stays (1.75 and 1.73
+mm/day), the globe's rain rises 5% (1.71 to 1.80 mm/day) and the share of the rain formed that evaporates on the way
+down from 0.46 to 0.50. At the site the GCM's evaporation rises from 2.79 to 3.27 mm/day, above the box's 2.55: with the
+two formulas alike on the same air, what remains lies in the air each model holds, which only boxes forced by the design
+run can show. One lunar day from one restart shows the patch at work, not the climate it settles to.
+
+**Evidence and limits.** The check rests on one lunar day of the sea box (and its fourth day as an observation) and on
+four years of the gust GCM's 3-day means at six sea cells. The similarity brings PlaSim's surface layer to CM1's, which
+rests on Earth's surface-layer measurements, Paulson's functions and Charnock's and Fairall's roughness lengths, carried
+to lunar gravity through g in the Richardson number, the Obukhov length and Charnock's relation. At 313 m the lowest
+level may stand near the top of the surface layer, where a constant flux is an assumption the box's air supports at that
+site. In strongly stable air CM1's floor on ψ, −10, transfers more than Louis's factors do. With a change of PlaSim's
+levels the lowest level's height changes and the check would be read again.
+
+```sh
+E=/media/projectspace/terluna-research/session-tools/evaporation
+PYTHONPATH=. <climate venv>/bin/python $E/similarity.py                   # rules SC0-SC3; similarity.json (seconds)
+python3 -m pytest climate/tests/test_surface_similarity.py                # the Fortran against the Python copy
+$E/smoke_gcm_similarity.sh                                                # one lunar day in PlaSim
+PYTHONPATH=. <climate venv>/bin/python $E/smoke_similarity_compare.py
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

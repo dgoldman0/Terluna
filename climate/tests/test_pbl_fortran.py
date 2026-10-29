@@ -57,9 +57,11 @@ def undo(text, edits, marker):
 
 
 def before_later_patches(text):
-    """The shared source as the free-convection patch left it: the surface gust's patch, which goes over this one, and
-    this one undone where the source carries them."""
+    """The shared source as the free-convection patch left it: the similarity over water and the surface gust's patch,
+    which go over this one, and this one undone where the source carries them."""
     from climate.gcm import surface_gust as sg
+    from climate.gcm import surface_similarity as ssf
+    text = undo(text, ssf.SIMW_EDITS, ssf.SIMW_MARKER)
     return undo(undo(text, sg.GUST_EDITS, sg.GUST_MARKER), pbf.PBL_EDITS, pbf.PBL_MARKER)
 
 

@@ -3051,6 +3051,13 @@ a third below it on the same air. A next step, proposed: set PlaSim's transfer f
 Monin–Obukhov similarity integrated to the same height on the box's and the GCM's states, a column calculation of
 minutes; if they part by more than a tenth, the design configuration would take similarity over water beside the gust.
 
+**The similarity, set beside it (29 October).** CM1's own surface layer over water, carried to the GCM's lowest level,
+gives CM1's written evaporation at its own 50 m within 0.3% and the same evaporation at 313 m with CM1's wind. On the
+same air and the gust's wind at 313 m, PlaSim's transfer evaporates 0.72 of the similarity's on the box's inflow day and
+0.82 on the gust GCM's own air, most of the difference in light wind over warm water, so the design configuration takes
+similarity over water beside the gust ([Similarity over water in
+PlaSim](../gcm/README.md#similarity-over-water-in-plasim-29-october)).
+
 **Evidence and limits.** The GCM's side rests on 3-day means at six cells over four years, the box's on domain means
 every 3 hours of one lunar day each; PlaSim's formula on a domain-mean wind leaves out the spread of the box's own
 winds, which CM1's column-by-column fluxes keep and the gust is meant to stand for. PlaSim's roughness is iterated on
