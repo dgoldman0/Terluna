@@ -454,12 +454,15 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      by the GCM's column now draw in the GCM's air there (register, 28 October). One lunar day so forced halves the
      column's drying and rains 0.61 mm/day against 1.05, after midnight 0.61 against 1.91, the old form's drawdown
      having fed that rain (observations: the day misses its wind check by 0.001). The models' rain at the site now
-     turns first on the box's evaporation, a third below the GCM's, then on its remaining cooling. PlaSim's
-     configuration takes the gust with its sunlight rebalanced (register, 28 October), next in one design run once its
-     open choices are settled. The box's present forcing predates the gust and runs about 5 K below the design climate,
-     so boxes from here on are best forced by that run. Open, the author's choice: the design run's fifteen levels, the
-     Betts–Miller scheme with its depth test and the rain-evaporation constant; the boxes it forces, the land box's
-     among them; the evaporation gap; no Jura box until the models agree. Then surface and radiation feedbacks. The
+     turns first on the box's evaporation, a third below the GCM's, then on its remaining cooling. That gap lies in
+     PlaSim's surface transfer at its lowest level, not in either model's air (register, 28 October): on the same air
+     Earth's free-convection term put PlaSim's transfer 29% above CM1's, and the gust puts it about a third below.
+     PlaSim's configuration takes the gust with its sunlight rebalanced (register, 28 October), next in one design run
+     once its open choices are settled. The box's present forcing predates the gust and runs about 5 K below the design
+     climate, so boxes from here on are best forced by that run, the land box at 0° E among them when one is needed
+     (register, 28 October). Open, the author's choice: the design run's fifteen levels, the Betts–Miller scheme with
+     its depth test and the rain-evaporation constant; PlaSim's transfer set beside similarity theory at its lowest
+     level (proposed); no Jura box until the models agree. Then surface and radiation feedbacks. The
      depth test's 15-year run is held. The climate work's readers take the year files' humidity as interval means
      (register, 27 October); the climatology, the cross-domain extracts and the rings' readers still take it as it
      stands.
