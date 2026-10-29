@@ -365,16 +365,15 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    W/m² at the top, about 3.8 K. The sky's winter snow (register, 24 and 25 October; domain/atmosphere): high in the
    snow zone the flakes outgrow any span they can survive, and no breakup law has Earth support, so a load analogy caps
    them at about 5 cm for ordinary flakes and 8–15 cm for the largest. Grown and aggregated together without breakup,
-   they reach the freezing level at a 90th percentile of about 4 cm in light snow forming at −15 °C, 10–13 cm in light
-   snow forming near −30 °C and about 11 cm in heavy snow with few crystals. This supersedes the 20 October sizes, whose
+   they reach the freezing level at a 90th percentile of 4.1–4.9 cm in light snow forming at −15 °C and 12.6–12.7 cm in
+   heavy snow with few crystals, both converged, and 12–23 cm, with a median of 5.3–6.5 cm, in light snow forming near
+   −30 °C. These come from the McSnow build whose vapour diffusivity was corrected on 25 October (6e91689), on which
+   every lunar run was repeated on 29 October (domain/atmosphere aceddfa); they supersede the 20 October sizes, whose
    solvers did not converge. No snow reaches any ground: below a freezing level at 22–26 km the flakes sublimate, then
-   melt within 1.6 km (2 cm flakes) to 3.7–5.2 km (10–20 cm), and fall the last 15–25 km as rain. The large flakes'
-   9–15 mm drops bring 81–93% of their water down, where small flakes' drops evaporate. The 24–25 October lunar runs
-   carried vapour diffusivity at 0.651 of McSnow's formula, now fixed (6e91689); heavier snow then grows 11–26% larger,
-   and the remaining reruns are listed; held on 26 October for the climate work's compute, they run now beside it,
-   since the rain melted from lunar snow sets the size the GCM's new rain takes (register, 29 October). Next, at the
-   author's word: a breakup law, a storm whose vapour responds to its crystals, wet flakes sticking together below
-   the freezing level and the storms' optics.
+   melt within 1.6 km (2 cm flakes) to 3.7–5.2 km (10–20 cm), and fall the last 15–25 km as rain. The large flakes' 9–15
+   mm drops bring 81–93% of their water down, where small flakes' drops evaporate, and the heavier snow of the growth
+   runs sends 56–65% of its water to the surface. Next, at the author's word: a breakup law, a storm whose vapour
+   responds to its crystals, wet flakes sticking together below the freezing level and the storms' optics.
    Methane's chemistry in the middle atmosphere's column is answered without
    building it (register, 21 October): behind the titania stack nothing breaks methane below the base. The GCM's rain
    evaporation is measured (domain/climate 05b1384): PlaSim evaporates 29% of its falling rain, CM1's box with the lunar
@@ -465,13 +464,17 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      test, and its rain's evaporation worked out from the drops' sizes and fall speeds in place of gamma (register,
      29 October). That scheme is built (domain/climate 8e805f6): with CM1's own sizes for new rain, carrying the drops'
      size down the column by their collisions gives the design boxes' evaporation within 1.01–1.12, and one size for
-     all new rain gives 1.17–1.31, outside the test's 1.25 on land. Open, the author's choice: the size new rain
-     takes, which the snow work's melting products will give for the rain melted from lunar snow; the snow's
-     sublimation, which keeps gamma; PlaSim's transfer set beside similarity theory at its lowest level (proposed);
-     no Jura box until the models agree. Then surface and radiation feedbacks. The
-     depth test's 15-year run is held. The climate work's readers take the year files' humidity as interval means
-     (register, 27 October); the climatology, the cross-domain extracts and the rings' readers still take it as it
-     stands.
+     all new rain gives 1.17–1.31, outside the test's 1.25 on land. Melted rain as new drops of CM1's own 0.865 mm, with
+     the rest of the new rain joining the drops falling, gives 0.64–0.79, below the test's 0.80 (domain/climate
+     0e2e1e8): joined to the little rain falling into the band where rain forms, the new rain makes too few drops there,
+     and the rain runs larger than CM1's at every level. Counted as CM1 counts its own, lunar snow melts into rain of
+     1.25–3.4 mm on the corrected McSnow runs, about 2.4–3.2 mm at the boxes' snowfall, against CM1's 0.85–0.87 mm from
+     its Earth-capped ice (register, 29 October). Open, the author's choice: a rule that makes drops in proportion to
+     how far each level's new rain outruns the rain falling in, tested on the boxes (proposed), then the lunar melted
+     size; the snow's sublimation, which keeps gamma; PlaSim's transfer set beside similarity theory at its lowest level
+     (proposed); no Jura box until the models agree. Then surface and radiation feedbacks. The depth test's 15-year run
+     is held. The climate work's readers take the year files' humidity as interval means (register, 27 October); the
+     climatology, the cross-domain extracts and the rings' readers still take it as it stands.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
      12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. A lunar
      free-convection constant over the sea, in place of Earth's, removes a quarter of the GCM's extra evaporation at
