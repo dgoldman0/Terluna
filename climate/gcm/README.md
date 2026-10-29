@@ -4005,6 +4005,18 @@ layers the same rule gives 1.30, 1.25 and 1.15, within 0.04 of CM1's own levels.
 | The same, collisions at the in-rain content | 1.10 | 1.00 | 1.06 |
 | Carried down, every new drop at 0.465 mm | 1.31 | 1.29 | 1.17 |
 | The same on PlaSim's fifteen layers | 1.30 | 1.25 | 1.15 |
+| Carried down, melted rain as drops of 0.865 mm, the rest joining the rain falling | 0.73 | 0.79 | 0.64 |
+| The same on PlaSim's fifteen layers | 0.78 | 0.80 | 0.67 |
+
+**New rain split by where it comes from** (the third rules, `rules_split.txt`). CM1 makes one drop of each melted
+snowflake or graupel particle, at mean diameters of 0.85–0.87 mm weighted by the melting, and smaller rain where rain
+forms as rain, 0.32–0.50 mm where that rain outruns the rain arriving from above. With the melted rain as new drops of
+0.865 mm and the rest joining the rain falling into its level, as accretion grows drops without adding them (the
+patch's `nrdrop_join` 1), the column evaporates 0.73, 0.79 and 0.64 of CM1's rain, below the rules' 0.80 on all three
+boxes, and its rain runs larger than CM1's in every layer, 1.24 mm against 0.81 in the top layer over the sea and 2.09
+against 1.66 near the ground. In the band where the rain forms, the rain formed as rain joins the little rain
+arriving from just above it, so too few drops carry the band's water, where every new drop at one size failed the
+other way below the band. The size new rain takes stays open.
 
 **The patch** ([rain_drops.py](rain_drops.py); `RAIN_DROP_PATCHES`, behind rainmod's `nevapprec` 2). mkrain carries
 each column's rain and its drops' number down through the layers. New rain enters at each layer's middle: rain melted
@@ -4041,14 +4053,19 @@ work, not the climate it settles to.
 
 **What stays open.**
 - **The size new rain takes.** CM1's own measure (0.465 mm on the sea box, 0.52 on land, 0.37 on the inflow day) mixes
-  two births: rain melted from snow and graupel, which Morrison makes one drop per melted particle, at mean diameters
-  of 0.85–0.87 mm weighted by the melting (`melt_sizes.py`), and smaller rain formed as rain in the warm updraughts.
-  The melted rain comes from ice CM1 sizes by Earth's limits: snow and graupel capped at 2 mm. The snow work finds lunar
+  two births: rain melted from snow and graupel, which Morrison makes one drop per melted particle, at mean diameters of
+  0.85–0.87 mm weighted by the melting (`melt_sizes.py`), and smaller rain formed as rain in the warm updraughts. The
+  melted rain comes from ice CM1 sizes by Earth's limits: snow and graupel capped at 2 mm. The snow work finds lunar
   flakes of centimetres, melting 1.6–5.2 km below the freezing level into drops of 6–15 mm
-  ([atmosphere/snow](../../atmosphere/snow/README.md)). Its held reruns are running, and its melting products will give
-  the lunar answer; until then both rules are built.
+  ([atmosphere/snow](../../atmosphere/snow/README.md)). Its eighteen held reruns are done, and counted as Morrison
+  counts CM1's, one drop of each melted flake, the corrected runs' lunar snow melts into rain of mean diameters
+  1.25–1.37 mm in light snow, 1.5–1.75 mm in light snow forming near −30 °C, 2.95 mm in moderate snow and 3.3–3.4 mm in
+  heavy snow (`lunar_melt_sizes.py`); the boxes' snowing columns snow at a median 0.7–1.7 mm/h by their melting
+  (`box_snowfall.py`), between the light and moderate cases. Between every new rain as new drops, which holds the rain
+  too small, and rain formed as rain always joining, which holds it too large, lies a rule where rain forming afresh
+  makes drops and rain falling into established rain grows them; it is untested.
 - **The snow's sublimation** keeps gamma, a constant tuned on Earth; the snow work's sublimation shares, 2–8% of the
-  snow over land and 10–23% over the sea before it melts, are the physics for it.
+  snow over land and 9–23% over the sea before it melts on the corrected runs, are the physics for it.
 - **CM1 as the reference aloft.** Half the boxes' evaporation happens in rain just melted from that Earth-sized ice. The
   snow work's large lunar drops would evaporate less there, which may bear on CM1's upper air running colder than
   PlaSim's; that is untested.
@@ -4064,6 +4081,9 @@ W=/media/projectspace/terluna-research/session-tools/rain_physics
 python3 $W/cm1_rain.py                    # the equation, the sizes and three closures on the boxes (a few minutes)
 python3 $W/rain_budget.py                 # where the boxes' rain forms and evaporates
 python3 $W/melt_sizes.py                  # the size of the rain CM1's melting snow and graupel make
+python3 $W/rain_split.py                  # new rain split by where it comes from (a few minutes)
+python3 $W/box_snowfall.py                # the boxes' snowfall at the freezing level, column by column
+python3 $W/lunar_melt_sizes.py            # the rain lunar snow melts into (from the atmosphere worktree)
 python3 $W/rain_fall.py                   # the size carried down the column (a few minutes)
 python3 $W/module_check.py                # rain_drops.mkrain on the boxes' columns in PlaSim's form
 python3 -m pytest climate/tests/test_rain_drops.py                               # the Fortran against the Python copy
