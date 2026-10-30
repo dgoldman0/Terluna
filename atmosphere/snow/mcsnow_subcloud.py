@@ -7,8 +7,13 @@ also takes the surface's vapour pressure for the column's dry pressure. The snow
 the cloud reaching the freezing level, so their snow never sublimates above it. This module adds one declared change to
 the corrected build (mcsnow_diffusivity.py), off by default: with atmo_nml's ssat_below at -1 or above, the air below h1
 holds that supersaturation over ice, and the column's pressure stays as with its cloud to the ground (the surface vapour
-pressure at water saturation, as with h1 = 0), so the cloud above h1 is the reference columns' own. Off, the build
-gives the corrected build's runs byte for byte (`parity`).
+pressure at water saturation, as with h1 = 0), so the cloud above h1 is the reference columns' own. A second declared
+change, also off by default, caps the aggregates: with sp_nml's flake_cap above zero, an aggregate whose span passes it
+breaks into equal pieces, each a share of its mass and monomers, until each lies within the cap, the superparticle's
+multiplicity carrying the pieces so that the ice it stands for is unchanged. McSnow has no breakup law, and without one
+snow of 1 mm/h from -30 C grows aggregates metres across; the cap stands in with the snow work's survivable span (the
+load analogy of turbulence_survival.md: the largest Earth flakes observed, 4-6 cm, carry the load of lunar flakes of
+8-15 cm). Off, the build gives the corrected build's runs byte for byte (`parity`).
 
 The box cases repeat a reference column (its recorded configuration and seed) with h1 at the cloud base of a design box
 and ssat_below at the mean humidity over ice below it (session-tools/snow_sublimation subcloud_air.py on the research
@@ -48,6 +53,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 CACHE = ROOT / 'research/runs/snow_agent_3/subcloud'
 MARKER = 'Terluna: the air below the cloud base held over ice'
+FIRST_BUILD = 'b5c6f8c1'          # the sub-cloud build before the flake cap, whose parity run keeps its name
 OFF = -999.0
 PARITY_CASE = 'col_sat_f0.01_base'
 MODERATE = 'col_q1_f1_base'
@@ -56,6 +62,8 @@ HEAVY = 'col_q3_f1_base'
 DEEP = 'col_deep_q0.3_f1_base'
 SNAP_S = 1800.0                 # s: the second and third tests' snapshot interval
 SMOKE_S = 6.0 * 3600.0          # s: a smoke run's length
+CAP_M = 0.14                    # m: the flake cap, the lunar span loaded as Earth's largest observed flakes (6 cm)
+CAP_LOW_M = 0.10                # m: its sensitivity, the span loaded as 4 cm Earth flakes
 SEED = 20261025                 # the reference columns' seed
 # Reference columns the snow work did not run, built as it builds its columns: water supply (mm/h), crystal flux over
 # the reference, duration, and the top's temperature (-15 C unless set). Durations follow the snow work's, about 3^0.27
@@ -99,7 +107,22 @@ CASES = {'sub_sea': dict(box='sea', base=MODERATE, raised=True),
          'sub_land_q0.1': dict(box='land', column='q0.1_f1', dt_snap=SNAP_S),
          'sub_sea_dry': dict(box='sea_dry', base=MODERATE, dt_snap=SNAP_S),
          'sdeep_land_dry': dict(box='land_dry', column='deep_q1_f1', dt_snap=SNAP_S),
-         'smid_sea_q1': dict(box='sea', column='mid_q1_f1', dt_snap=SNAP_S)}
+         'smid_sea_q1': dict(box='sea', column='mid_q1_f1', dt_snap=SNAP_S),
+         'sub_sea_q3': dict(box='sea', base=HEAVY, dt_snap=SNAP_S),
+         'sdeep_land_q3': dict(box='land', column='deep_q3_f1', dt_snap=SNAP_S)}
+# The fifth test repeats the references and box runs with the aggregates capped at the survivable span (cap_), the heavy
+# box runs only so, and three references at the cap's lower end (capl_); a smoke case caps at 5 mm so that its pieces
+# form within the smoke's 6 hours.
+CAPPED = ('ref_q0.1_f1', 'ref_q0.3_f1', 'ref_q1_f1', 'ref_q3_f1', 'rdeep_q0.1_f1', 'rdeep_q0.3_f1', 'rdeep_q1_f1',
+          'rdeep_q3_f1', 'sub_sea_c', 'sub_land_c', 'sub_sea_l', 'sub_land_l', 'sdeep_sea_q1', 'sdeep_land_q1',
+          'sdeep_sea_q0.1', 'sdeep_land_q0.1', 'sub_sea_q0.1', 'sub_land_q0.1', 'sub_sea_dry', 'sdeep_land_dry',
+          'smid_sea_q1', 'sub_sea_q3', 'sdeep_land_q3')
+CASES.update({'cap_' + name: dict(CASES[name], cap=CAP_M) for name in CAPPED})
+CASES.update({'capl_' + name: dict(CASES[name], cap=CAP_LOW_M)
+              for name in ('ref_q1_f1', 'rdeep_q0.3_f1', 'rdeep_q1_f1')})
+CASES['cap5mm_ref_q1_f1'] = dict(CASES['ref_q1_f1'], cap=0.005)
+for name in ('sub_sea_q3', 'sdeep_land_q3'):         # heavy snow runs only with the cap
+    CASES.pop(name)
 
 
 def _replace_once(text, old, new):
@@ -124,11 +147,64 @@ ATMO_BELOW = ('    atmo%pv   = 1e-2_wp * rh * psatw\n'
               '#endif\n')
 
 
+CAP_DECLARATION = '    depo_residual,    &  ! [kg] a sublimating particle below this mass is removed; 0 off (Terluna)\n'
+CAP_LISTS = '            box_sub, box_settle, skip_bulk, depo_residual, depo_censor\n'
+CAP_DEFAULT = '  depo_censor    = 0.0_wp\n'
+CAP_USE = '                                & box_sub, box_settle, skip_bulk\n'
+CAP_STEP = '            ! motion of SPs ! TODO ensure that only adding is done after sedi as it breaks the cell order\n'
+CAP_ROUTINE = '''#ifndef WDROPS
+    !
+    ! Terluna: an aggregate whose span passes flake_cap breaks into equal pieces, each a share of its mass and
+    ! monomers, until each lies within the cap; the multiplicity carries the pieces, so the ice is unchanged.
+    !
+    SUBROUTINE cap_flake( sp )
+      TYPE(t_sp), INTENT(inout) :: sp
+      INTEGER(i8) :: f
+      INTEGER     :: n
+      CALL m2d_particle( sp )          ! the span after this step's growth, which deposition leaves unset
+      DO n = 1, 20
+        IF ( sp%d <= flake_cap .OR. sp%mm < 2.0_wp ) EXIT
+        f = MIN( MAX(2_i8, CEILING((sp%d/flake_cap)**2.1_wp, i8)), INT(sp%mm, i8) )
+        sp%xi  = sp%xi * f
+        sp%m_i = sp%m_i / REAL(f, wp)
+        sp%m_r = sp%m_r / REAL(f, wp)
+        sp%v_r = sp%v_r / REAL(f, wp)
+        sp%m_f = sp%m_f / REAL(f, wp)
+        sp%m_w = sp%m_w / REAL(f, wp)
+        sp%V_i = sp%V_i / REAL(f, wp)
+        sp%mm  = sp%mm / REAL(f, wp)
+        CALL m2d_particle( sp )
+      END DO
+    END SUBROUTINE cap_flake
+#endif
+
+'''
+
+
+def cap_sources(text_nml, text_loop):
+    """The flake cap's declared lines in mo_sp_nml.f90 and mo_loop_array.f90."""
+    nml = _replace_once(text_nml, CAP_DECLARATION, CAP_DECLARATION
+                        + '    flake_cap,        &  ! [m] an aggregate passing this span breaks into pieces within it; '
+                          '0 off (Terluna)\n')
+    if nml.count(CAP_LISTS) != 2:
+        raise ValueError('Expected the namelist and public lists once each')
+    nml = nml.replace(CAP_LISTS, CAP_LISTS[:-1] + ', flake_cap\n')
+    nml = _replace_once(nml, CAP_DEFAULT, CAP_DEFAULT + '  flake_cap      = 0.0_wp\n')
+    loop = _replace_once(text_loop, CAP_USE, CAP_USE[:-1] + ', flake_cap\n')
+    loop = _replace_once(loop, CAP_STEP, '#ifndef WDROPS\n'
+                         '            IF ( flake_cap > 0.0_wp ) CALL cap_flake( sp )   ! Terluna: the survivable span\n'
+                         '#endif\n' + CAP_STEP)
+    loop = _replace_once(loop, '    SUBROUTINE tic( t1 )\n', CAP_ROUTINE + '    SUBROUTINE tic( t1 )\n')
+    return nml, loop
+
+
 def subcloud_sources(world):
-    """The corrected build's sources with the declared change: ssat_below in atmo_nml, read by init_atmo_ideal."""
+    """The corrected build's sources with the declared changes: ssat_below in atmo_nml, read by init_atmo_ideal, and
+    flake_cap in sp_nml, applied in the step loop."""
     out = dict(dv.fixed_sources(world))
     if world != 'moon':
         return out
+    out['mo_sp_nml.f90'], out['mo_loop_array.f90'] = cap_sources(out['mo_sp_nml.f90'], out['mo_loop_array.f90'])
     nml = (growagg.SOURCE / 'src/mo_atmo_nml.f90').read_text()
     nml = _replace_once(nml, NML_DECLARATION, NML_DECLARATION
                         + '    ssat_below,   & ! [1] Terluna: supersaturation over ice held below h1; off below -1\n')
@@ -188,11 +264,13 @@ def build():
 
 
 def parity():
-    """The corrected build's col_sat_f0.01_base again on the changed build with ssat_below off: every kept output
-    byte for byte."""
+    """The corrected build's col_sat_f0.01_base again on the changed build with ssat_below and flake_cap off: every
+    kept output byte for byte. The run is named by the build, so each build's parity runs afresh."""
     old = json.loads((dv.CACHE / 'runs' / PARITY_CASE / 'run.json').read_text())
     with subcloud():
-        new = growagg.run('parity_' + PARITY_CASE, 'moon', old['configuration'], seed=old['seed'])
+        exe = growagg.verify_build('moon')['executable_sha256']
+        name = 'parity_' + PARITY_CASE if exe.startswith(FIRST_BUILD) else f'parity_{exe[:12]}_{PARITY_CASE}'
+        new = growagg.run(name, 'moon', old['configuration'], seed=old['seed'])
     same = {name: old['kept_outputs'].get(name) == digest for name, digest in new['kept_outputs'].items()}
     return dict(case=PARITY_CASE, returncode=new['returncode'], identical=all(same.values()) and
                 set(new['kept_outputs']) == set(old['kept_outputs']), files=same, wall_s=new['wall_s'])
@@ -216,6 +294,8 @@ def case_config(case):
             config['sp_nml']['water_supply'] = float(config['sp_nml']['water_supply'] * depth / (depth - box['h1_m']))
     if 'dt_snap' in spec:
         config['sp_nml']['dt_snap'] = float(spec['dt_snap'])
+    if 'cap' in spec:
+        config['sp_nml']['flake_cap'] = float(spec['cap'])
     return config, seed
 
 

@@ -10,11 +10,13 @@ build ([diffusivity](mcsnow_diffusivity.md)), off by default: with `atmo_nml`'s 
 below h1 holds that supersaturation over ice. The cloud above h1 is then the reference columns' own, and the snow that
 leaves it sublimates in air as dry over ice as the boxes'. Against these columns, a closure that takes the share of the
 snow's flux sublimated per metre from three reference columns by depth below the snow's top, matches them by the snow's
-flux at the cloud base and raises the rate as the flakes shrink follows McSnow within 0–9% over both boxes, in snow of
-1 and 0.3 mm/h; without the last two terms it loses a quarter to a third of McSnow's rate in the light snow. Carried
-to the boxes' own range, with references from −30 °C as well, it holds in light snow from −30 °C and at the dry end of
-the boxes' sub-cloud air, overstates the loss where nearly all of a light snow from −15 °C sublimates, and meets
-McSnow's own limit in snow of 1 mm/h from −30 °C, whose flakes grow metres across without a breakup law.
+flux at the cloud base and raises the rate as the flakes shrink follows McSnow within 0–9% over both boxes, in snow of 1
+and 0.3 mm/h; without the last two terms it loses a quarter to a third of McSnow's rate in the light snow. Carried to
+the boxes' own range, with references from −30 °C as well, it holds in light snow from −30 °C and at the dry end of the
+boxes' sub-cloud air, overstates the loss where nearly all of a light snow from −15 °C sublimates, and meets McSnow's
+own limit in snow of 1 mm/h from −30 °C, whose flakes grow metres across without a breakup law. With the aggregates
+capped at 14 cm, the lunar span the snow work's load analogy allows, the closure holds on nine of the eleven runs McSnow
+resolves, the land's 1 mm/h snow from −30 °C included, and misses only in that lightest snow from −15 °C.
 
 ## The change
 
@@ -27,6 +29,19 @@ the reference columns'. Off, the changed build gives the corrected build's `col_
 its snapshots and every kept table (29 October); the Earth build is the old cache's and stays untouched.
 `atmosphere/tests/test_snow_mcsnow_subcloud.py` checks the thirteen lines, the default, the Earth sources and each
 case's configuration against the run it repeats.
+
+A second declared change, added on 30 October and also off by default, caps the aggregates in place of the breakup law
+McSnow lacks. It touches 34 lines of two sources. In `mo_sp_nml.f90` it declares `flake_cap`, adds it to the namelist
+and public lists and sets its default to 0; in `mo_loop_array.f90` it imports it and, when the cap is above zero, calls
+a new routine on each superparticle after the step's growth and before its motion. An aggregate of two monomers or more
+whose span, computed afresh, passes the cap breaks into f = ceiling((D/cap)^2.1) equal pieces, no more than its
+monomers, each a 1/f share of its masses, rime volume and monomers, and the superparticle's multiplicity is multiplied
+by f, so the ice it stands for is unchanged; the geometry is computed again and the step repeated until the pieces lie
+within the cap. The cap is 14 cm, the load analogy's lunar equivalent of the 6 cm flakes observed in a heavy Earth storm
+([survival](turbulence_survival.md)), with 10 cm as a sensitivity. Off, the capped build again gives
+`col_sat_f0.01_base` back byte for byte in its kept tables and in every field of its snapshots but one: the fall speed
+of seeds created in the snapshot's own step, which McSnow has not yet set and whose unset memory the rebuilt layout
+changes. The test checks the cap's lines as well.
 
 ## The boxes' air
 
@@ -161,14 +176,44 @@ from −15 °C, where it sublimates 98–99% against 94%, and the carried flakes
 0.62 against 0.46. The carried flakes were chosen after these runs showed the miss and fit no parameter; the choice
 between the two is open.
 
+## The fifth test
+
+The fifth test (rules set on 30 October at 06:50 for its runs and at 07:11 and 07:36 for the closure, before any capped
+run was read) capped the aggregates at 14 cm and repeated every earlier box run and both families of references on the
+capped build, with two box runs in 3 mm/h snow added and three references capped at 10 cm as a sensitivity. With a 5 mm
+test cap no aggregate passed it in any snapshot; with the cap off the build repeats `col_sat_f0.01_base`, and the three
+runs whose flakes never reach 14 cm repeat their uncapped runs in all 360 snapshots. Where the cap binds hardest, in
+snow of 1 and 3 mm/h from −30 °C and from halfway and in 3 mm/h snow from −15 °C, the flakes gather under it, 89–120 mm
+across at the cloud base (flux-weighted) with a 90th percentile of 129–134 mm, against 0.36–5.3 m without it; at 1 mm/h
+from −15 °C it trims only the tail.
+
+Eleven of the fifteen box runs resolve, among them the land's 1 mm/h runs from −30 °C at its mean and its dry humidity,
+unresolved without the cap. The other four, the sea's 1 mm/h snow from −30 °C and from halfway and both runs at 3 mm/h,
+lose only 19–25% of their flux below the cloud base, too little for D to be fixed within 10% at these lengths. The
+closure holds on nine of the eleven, 0.96–1.17 of McSnow's D, the deep land runs included (0.958 and 1.164), and misses
+on the two light runs from −15 °C by the third test's 1.48 and 1.65, since neither they nor the reference they match
+changes under the cap. In the budgets PlaSim keeps those two misses are as small as the holding runs' errors: 4.7 and
+5.1 points of the base flux sublimated against −1.1 to +5.5, and 2–3 W/m² of latent cooling while the snow falls against
+up to 27 W/m² in the heavier holding runs; the flux they leave at the low layer is a quarter and a sixth of McSnow's.
+Light snow from tops no higher than the −15 °C level carries 4–9% of the sea box's snow flux at its cloud base and
+0.2–2% of the land's. The carried flakes hold on nine of the eleven too and miss over the land's deep sub-cloud layer
+from −15 °C (1.74 and 1.37), as in the fourth test.
+
+The cap's value reaches the closure where the flakes gather under it: with references capped at 10 cm the closure's D in
+the land's 1 mm/h snow from −30 °C rises by 14–15%, and elsewhere by 0.6% or less. The contact-network calculation
+([breakup network](breakup_network.md)) puts the lunar equivalent of Earth's largest observed flakes at 11.7–13.5 cm
+under a bending criterion, within that range, and finds a breaking flake keeping about two thirds of its mass in one
+piece, where the cap splits it evenly. By the test's rules the adoption is the author's call.
+
 ## Reproduction
 
 `OPENBLAS_NUM_THREADS=1 python -B -m atmosphere.snow.mcsnow_subcloud build` compiles the changed lunar build
-(`research/runs/snow_agent_3/subcloud`, executable `b5c6f8c1…`), `parity` repeats `col_sat_f0.01_base` on it with
-`ssat_below` off, and `run --case <name>` runs one case. The rules, scripts and outcomes of the tests are kept on the
-research drive in `session-tools/snow_sublimation`: `rules_subcloud.txt` with `subcloud_test.py` and the added readings
-(`subcloud_narrowness.py`, `subcloud_pooled9.py`, `subcloud_shrink.py`), and `rules_subcloud2.txt` with
-`subcloud_test2.py` and `run_subcloud2.sh`, and `rules_subcloud3.txt` with `subcloud_test3.py`, `run_subcloud3.sh`,
-`box_snow_rates.py`, `reference_convergence.py` and `subcloud3_noise.py`, and `rules_subcloud4.txt` with
-`subcloud_test4.py`. `run --case <name> --smoke` runs a case's first 6 model hours, and `--store DIR` places a new run's
-directory on another disk, linked from the cache.
+(`research/runs/snow_agent_3/subcloud`, executable `96a25f86…` with the cap, `b5c6f8c1…` before it), `parity` repeats
+`col_sat_f0.01_base` on it with both changes off and names the run by the executable, and `run --case <name>` runs one
+case. The rules, scripts and outcomes of the tests are kept on the research drive in `session-tools/snow_sublimation`:
+`rules_subcloud.txt` with `subcloud_test.py` and the added readings (`subcloud_narrowness.py`, `subcloud_pooled9.py`,
+`subcloud_shrink.py`), and `rules_subcloud2.txt` with `subcloud_test2.py` and `run_subcloud2.sh`, and
+`rules_subcloud3.txt` with `subcloud_test3.py`, `run_subcloud3.sh`, `box_snow_rates.py`, `reference_convergence.py` and
+`subcloud3_noise.py`, `rules_subcloud4.txt` with `subcloud_test4.py`, and `rules_subcloud5.txt` with
+`subcloud_test5.py`, `run_subcloud5.sh` and `box_snow_tops.py`. `run --case <name> --smoke` runs a case's first 6 model
+hours, and `--store DIR` places a new run's directory on another disk, linked from the cache.

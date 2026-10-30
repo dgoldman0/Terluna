@@ -45,7 +45,11 @@ the 90th percentile of flake span past 10–14 cm within 1.5 km of the top at 3 
 lower half of the column at 0.3 mm/h. Under the same turbulence a lunar flake carries no more load at its junctions than
 an Earth flake until it is 2.2–2.6 times larger, so Earth's ordinary 2 cm flakes and its 4–6 cm storm aggregates
 correspond to lunar flakes of about 5 cm and 8–15 cm ([survival](turbulence_survival.md)). That analogy assumes that
-breakup limited Earth's largest flakes.
+breakup limited Earth's largest flakes. A first contact-network calculation on 30 October
+([breakup network](breakup_network.md)) finds the bending moment at a flake's most loaded junction growing faster than
+its weight, so that a junction failing in bending, as a narrow ice neck does, puts the lunar equivalent of Earth's
+4–6 cm flakes at 7.8–11.7 cm with the upper crystals in the lower ones' shadow and 9.0–13.5 cm without, against the
+analogy's 9.4–14.1 cm for Mitchell's aggregates; a breaking flake keeps about two thirds of its mass in one piece.
 
 On 25 October the author approved three further steps, and all three are done. No law for whole-flake breakup has Earth
 support ([breakup literature](breakup_literature.md)). The measurements count the fragments chipped from centimetre
@@ -108,7 +112,10 @@ followed:
 
 6. **A breakup law in place of the load analogy.** No law with Earth support exists for whole flakes breaking in
    collisions or under drag and turbulence; the analogy stays as the cap, with its limits stated. Done 25 October
-   ([results](breakup_literature.md)).
+   ([results](breakup_literature.md)). A first contact-network calculation of junction loads followed on 30 October
+   ([results](breakup_network.md)): in idealised aggregates bending decides, the lunar breaking span comes out 1.95–2.25
+   times Earth's where the analogy gives 2.35, and the larger piece of a breaking flake keeps a median 0.64–0.67 of its
+   mass. It rests on geometric drag rules and an Earth calibration, with no measured junction strength.
 7. **Growth and aggregation together**, through the reference column's water supply and along the archived storm
    paths, at the crystal-number cases and the error band's edges. Done 25 October
    ([results](mcsnow_growth_aggregation.md)).
@@ -129,7 +136,9 @@ followed:
    snow of 1 and 0.3 mm/h. Done 29 October ([results](mcsnow_subcloud.md)). Carried to the boxes' own range on
    30 October, references from −30 °C hold in light snow, while snow of 1 mm/h from −30 °C grows metre-scale
    aggregates without a breakup law, and the shrinking term overstates the loss where nearly all of a light snow
-   sublimates.
+   sublimates. With the aggregates capped at 14 cm, the load analogy's span, the closure holds on nine of the eleven
+   resolved box runs, the land's at 1 mm/h from −30 °C included, and misses only in 0.1 mm/h snow from −15 °C, by
+   the same 1.48 and 1.65.
 
 Before the optics, five things remain open: the heavy-snow tail, which no run converges and which the Earth check
 overgrows tenfold at 9 mm/h; the 90th and 99th percentiles of light snow from −30 °C, which halving the superparticles
@@ -232,6 +241,7 @@ The flake product of 20 October and the aggregation baseline were rebuilt with t
 | [mcsnow_subcloud.md](mcsnow_subcloud.md), [mcsnow_subcloud.py](mcsnow_subcloud.py) | McSnow's column with the air below a cloud base held over ice: the declared change, the design boxes' sub-cloud air, the cases, and the two tests of the climate model's snow sublimation against it |
 | [melting_sources.json](melting_sources.json) | The 25 October melting sources: the quantities taken from each and how each was read |
 | [breakup_literature.md](breakup_literature.md), [breakup_sources.json](breakup_sources.json) | The 25 October search for an Earth-supported breakup law: the measurements found, their quantities and access, and the collision energies aloft |
+| [breakup_network.md](breakup_network.md), [breakup_network.py](breakup_network.py), [results/breakup_network.json](results/breakup_network.json) | Junction loads in model aggregates under drag and weight: how the most loaded junction's force and moment grow with span, the lunar breaking span they imply, and the largest remnant |
 | [tmp_relocation.py](tmp_relocation.py), [results/tmp_relocation.json](results/tmp_relocation.json) | Each /tmp path the committed records name, mapped to its hash-checked copy on the project-space drive |
 | [scale_size_results.md](scale_size_results.md), [scale_size_diagnosis.py](scale_size_diagnosis.py), [scale_size_sources.json](scale_size_sources.json) | Gravity/depth attribution, water-per-crystal and aggregation controls, active-source audit and limits of physical interpretation |
 | [scale_lunar_results.md](scale_lunar_results.md), [scale_lunar_methods.md](scale_lunar_methods.md), [scale_lunar_comparison.py](scale_lunar_comparison.py) | Complete SCALE/custom lunar comparison, numerical refinements, sticking and atmospheric-feedback contrasts |
