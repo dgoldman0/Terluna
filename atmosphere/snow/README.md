@@ -122,6 +122,12 @@ followed:
    ([results](mcsnow_diffusivity.md)). The remaining eighteen runs, held on 26 October so the compute could go to the
    climate model's levels and convection scheme, were repeated on 29 October, and the growth-and-aggregation and
    melting products now read the corrected runs.
+11. **Snow below a cloud base, for the climate model**: McSnow's column with the air below a cloud base held over ice,
+   the reference for replacing PlaSim's snow sublimation with the lunar flakes' own. A closure that takes the share of
+   the snow's flux sublimated per metre by depth below the snow's top from three reference columns, matched by the
+   snow's rate at the cloud base and raised as the flakes shrink, follows McSnow within 0–9% over both design boxes in
+   snow of 1 and 0.3 mm/h. Done 29 October ([results](mcsnow_subcloud.md)); the references start at −15 °C, below the
+   boxes' snow tops.
 
 Before the optics, five things remain open: the heavy-snow tail, which no run converges and which the Earth check
 overgrows tenfold at 9 mm/h; the 90th and 99th percentiles of light snow from −30 °C, which halving the superparticles
@@ -221,6 +227,7 @@ The flake product of 20 October and the aggregation baseline were rebuilt with t
 | [snow_zone_depth.md](snow_zone_depth.md), [snow_zone_depth.py](snow_zone_depth.py), [results/snow_zone_depth.json](results/snow_zone_depth.json) | How far above the freezing level the design-climate storm boxes hold their snow, and light snow against the size limit |
 | [snow_melting.md](snow_melting.md), [melting.py](melting.py), [melting_environment.py](melting_environment.py), [results/snow_melting.json](results/snow_melting.json) | How far below the freezing level flakes melt and their drops evaporate in the storm boxes' air; sublimation, melting and evaporation by layer with their latent heat; the Earth check; the storm paths' losses above the freezing level |
 | [mcsnow_diffusivity.md](mcsnow_diffusivity.md), [mcsnow_diffusivity.py](mcsnow_diffusivity.py), [results/mcsnow_diffusivity.json](results/mcsnow_diffusivity.json) | McSnow's vapour diffusivity in the lunar builds: the corrected build, its source differences, and a minimal set of runs repeated on it against the old runs |
+| [mcsnow_subcloud.md](mcsnow_subcloud.md), [mcsnow_subcloud.py](mcsnow_subcloud.py) | McSnow's column with the air below a cloud base held over ice: the declared change, the design boxes' sub-cloud air, the cases, and the two tests of the climate model's snow sublimation against it |
 | [melting_sources.json](melting_sources.json) | The 25 October melting sources: the quantities taken from each and how each was read |
 | [breakup_literature.md](breakup_literature.md), [breakup_sources.json](breakup_sources.json) | The 25 October search for an Earth-supported breakup law: the measurements found, their quantities and access, and the collision energies aloft |
 | [tmp_relocation.py](tmp_relocation.py), [results/tmp_relocation.json](results/tmp_relocation.json) | Each /tmp path the committed records name, mapped to its hash-checked copy on the project-space drive |
