@@ -470,11 +470,14 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      joins that rain otherwise: on PlaSim's fifteen levels, where the share is set, the boxes' columns evaporate 1.05,
      1.01 and 0.96 of CM1's rain, and the rule is adopted with PlaSim's melted rain at 2.95 mm, the size lunar snow
      melts into at 1 mm/h on the corrected McSnow runs, against CM1's 0.85–0.87 mm from its Earth-capped ice
-     (domain/climate f5f767f; register, 29 October). Open, the author's choice: the snow's sublimation, which keeps
-     gamma; PlaSim's transfer set beside similarity theory at its lowest level (proposed); no Jura box until the models
-     agree. Then surface and radiation feedbacks. The depth test's 15-year run is held. The climate work's readers take
-     the year files' humidity as interval means (register, 27 October); the climatology, the cross-domain extracts and
-     the rings' readers still take it as it stands.
+     (domain/climate f5f767f; register, 29 October). PlaSim's transfer from its lowest level, set beside similarity
+     theory integrated to the same height on the same air, evaporates 0.72 of it on the sea box's air and 0.82 on the
+     GCM's own, and the design configuration takes CM1's similarity over ice-free water beside the gust (domain/climate
+     697c76e; register, 29 October). The design run waits for the snow's sublimation, still on gamma: its reference is
+     McSnow's corrected flakes, which need a run in the boxes' own sub-cloud air (proposed). No Jura box until the
+     models agree. Then surface and radiation feedbacks. The depth test's 15-year run is held. The climate work's
+     readers take the year files' humidity as interval means (register, 27 October); the climatology, the cross-domain
+     extracts and the rings' readers still take it as it stands.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
      12.1 g/kg there in its first two years against CM1's 11.8, and weaker convection pushed it to 14.1–14.5. A lunar
      free-convection constant over the sea, in place of Earth's, removes a quarter of the GCM's extra evaporation at
@@ -487,14 +490,14 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      (recommended).
    - **Reporting the bug to CM1's developers** (the author's call).
 
-   Then one design run with the cold cloud's factors, which the author adopted, Beljaars's gust, the fifteen levels,
-   the Betts–Miller scheme at 0.7 with its depth test and the rain evaporated from its drops (register, 28 and 29
-   October), with its own longwave refit, followed by the settling and exobase checks, once the size new rain takes
-   is settled. The fifteen-level configuration with its provisional refit heads for about 296 K at the design
-   sunlight, and the gust settles some 0.7 K warmer, which called for about 3.5–4.5% more sunlight at 0.73–0.96% of
-   the sunlight a kelvin. The drops evaporate about half the rain formed in a first lunar day, against a fifth with
-   gamma, and more evaporation grew the low cloud and cooled the Moon in the gamma runs of 21 October, so a short run
-   on the final configuration finds the sunlight.
+   Then one design run with the cold cloud's factors, which the author adopted, Beljaars's gust with CM1's similarity
+   over water, the fifteen levels, the Betts–Miller scheme at 0.7 with its depth test and the rain evaporated from its
+   drops by the share rule (register, 28 and 29 October), with its own longwave refit, followed by the settling and
+   exobase checks, once the snow's sublimation is settled. The fifteen-level configuration with its provisional refit
+   heads for about 296 K at the design sunlight, and the gust settles some 0.7 K warmer, which called for about 3.5–4.5%
+   more sunlight at 0.73–0.96% of the sunlight a kelvin. The drops evaporate about half the rain formed in a first lunar
+   day, against a fifth with gamma, and more evaporation grew the low cloud and cooled the Moon in the gamma runs of 21
+   October, so a short run on the final configuration finds the sunlight.
    The cover question stays on hold. A CM1 ring that makes its own upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
