@@ -205,6 +205,18 @@ the land's 1 mm/h snow from −30 °C rises by 14–15%, and elsewhere by 0.6% o
 under a bending criterion, within that range, and finds a breaking flake keeping about two thirds of its mass in one
 piece, where the cap splits it evenly. By the test's rules the adoption is the author's call.
 
+## The adopted closure's tables
+
+The closure adopted on 30 October is written out by [subcloud_closure.py](subcloud_closure.py) as
+[its product](results/subcloud_closure.json), which PlaSim's build on domain/climate reads: each capped reference's k, q
+and flux by 0.5 km layer, the two families and the rule between them, the 10 cm references for the cap's sensitivity,
+and test vectors. Taken from the tables, with the matching fluxes read from them in place of the snapshots, the closure
+gives the fifth test's eleven resolved runs within 0.979–1.007 of the test's own values. Two choices the tests did not
+exercise are written into its reading rule. A top above 32.56 km takes family D by depth below that top, held at the
+deepest layer, where the capped flakes have gathered under the cap, as a top below 16.28 km takes family S; and k and q
+keep the design ladder's temperatures at each height. `atmosphere/tests/test_snow_subcloud_closure.py` checks the
+product's binding, the test vectors, the matching, the families' join at their tops and the far tops.
+
 ## Reproduction
 
 `OPENBLAS_NUM_THREADS=1 python -B -m atmosphere.snow.mcsnow_subcloud build` compiles the changed lunar build
