@@ -1,4 +1,5 @@
-"""The adopted sub-cloud closure: its tables reproduce the fifth test, its families join smoothly, its product is bound."""
+"""The adopted sub-cloud closure: its tables reproduce the fifth test, its families join smoothly, its product is bound
+and carries the ladder's lapse."""
 import hashlib
 import json
 import math
@@ -61,3 +62,9 @@ def test_moister_air_sublimates_less_and_saturated_air_none():
     moist = cl.closure(FAMILIES, 4000.0, f, 24000.0, lambda z: 0.02, step=50.0)['D']
     assert dry > moist > 0.0
     assert cl.closure(FAMILIES, 4000.0, f, 24000.0, lambda z: 0.0, step=50.0)['D'] == 0.0
+
+
+def test_the_product_carries_the_ladders_lapse_through_both_families_tops():
+    lapse = PRODUCT['inputs']['column']['lapse_k_per_m']
+    for fam, top_c in (('S', -15.0), ('D', -30.0)):
+        assert PRODUCT['families'][fam]['top_m'] * lapse == pytest.approx(-top_c, abs=0.01)

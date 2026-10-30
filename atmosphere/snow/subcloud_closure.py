@@ -292,7 +292,7 @@ def run():
                               note='The 10 cm references in place of their 14 cm twins; the others unchanged.'),
         tables=tables, runs=runs,
         inputs=dict(layer_m=LAYER, step_m=STEP, shrink_ratio=R_SHRINK, test_cases=cases,
-                    column=dict(gravity=column.gravity, z_freeze_m=column.z_freeze),
+                    column=dict(gravity=column.gravity, z_freeze_m=column.z_freeze, lapse_k_per_m=column.lapse),
                     climate_binding=binding.get('inputs', {}),
                     files_sha256={p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                                   for p in (Path(agg.__file__), Path(sf.__file__))}),

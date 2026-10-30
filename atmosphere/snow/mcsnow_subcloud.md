@@ -214,8 +214,10 @@ and test vectors. Taken from the tables, with the matching fluxes read from them
 gives the fifth test's eleven resolved runs within 0.979–1.007 of the test's own values. Two choices the tests did not
 exercise are written into its reading rule. A top above 32.56 km takes family D by depth below that top, held at the
 deepest layer, where the capped flakes have gathered under the cap, as a top below 16.28 km takes family S; and k and q
-keep the design ladder's temperatures at each height. `atmosphere/tests/test_snow_subcloud_closure.py` checks the
-product's binding, the test vectors, the matching, the families' join at their tops and the far tops.
+keep the design ladder's temperatures at each height. Its inputs carry the ladder's lapse, 0.921 K/km, which puts
+the families' tops at -15 and -30 C, so that a model can place a column colder than 0 C at the ground on the ladder by
+its temperature. `atmosphere/tests/test_snow_subcloud_closure.py` checks the product's binding, the test vectors, the
+matching, the families' join at their tops, the far tops and the lapse.
 
 ## Reproduction
 
