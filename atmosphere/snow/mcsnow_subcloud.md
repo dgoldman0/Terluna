@@ -11,8 +11,10 @@ below h1 holds that supersaturation over ice. The cloud above h1 is then the ref
 leaves it sublimates in air as dry over ice as the boxes'. Against these columns, a closure that takes the share of the
 snow's flux sublimated per metre from three reference columns by depth below the snow's top, matches them by the snow's
 flux at the cloud base and raises the rate as the flakes shrink follows McSnow within 0–9% over both boxes, in snow of
-1 and 0.3 mm/h; without the last two terms it loses a quarter to a third of McSnow's rate in the light snow. The
-references start at −15 °C, and the boxes' snow tops stand higher, which the closure's use in PlaSim has still to meet.
+1 and 0.3 mm/h; without the last two terms it loses a quarter to a third of McSnow's rate in the light snow. Carried
+to the boxes' own range, with references from −30 °C as well, it holds in light snow from −30 °C and at the dry end of
+the boxes' sub-cloud air, overstates the loss where nearly all of a light snow from −15 °C sublimates, and meets
+McSnow's own limit in snow of 1 mm/h from −30 °C, whose flakes grow metres across without a breakup law.
 
 ## The change
 
@@ -47,6 +49,12 @@ share.
 | `sub_sea_c`, `sub_land_c` | `col_q1_f1_base` | sea, land | its own | 30 min |
 | `sub_sea_l`, `sub_land_l` | `col_q0.3_f1_base`, 0.3 mm/h, 132 h | sea, land | its own | 30 min |
 | `ref_q0.3_f1`, `ref_q1_f1`, `ref_q3_f1` | the three references at the reference crystal flux, 132, 96 and 72 h | none | its own | 30 min |
+| `ref_q0.1_f1` | 0.1 mm/h from −15 °C, 180 h, built as the snow work builds its columns | none | its own | 30 min |
+| `rdeep_q0.1_f1`, `rdeep_q0.3_f1`, `rdeep_q1_f1`, `rdeep_q3_f1` | 0.1, 0.3, 1 and 3 mm/h from −30 °C, 228, 168, 120 and 96 h (`rdeep_q0.3_f1` repeats `col_deep_q0.3_f1_base`) | none | its own | 30 min |
+| `sdeep_sea_q1`, `sdeep_land_q1`, `sdeep_sea_q0.1`, `sdeep_land_q0.1` | `rdeep_q1_f1`, `rdeep_q0.1_f1` | sea, land | its own | 30 min |
+| `sub_sea_q0.1`, `sub_land_q0.1` | `ref_q0.1_f1` | sea, land | its own | 30 min |
+| `sub_sea_dry`, `sdeep_land_dry` | `col_q1_f1_base`, `rdeep_q1_f1` | sea, land at the dry end (−0.0967, −0.1091) | its own | 30 min |
+| `smid_sea_q1` | 1 mm/h from −22.5 °C, halfway in height between the two tops, 108 h | sea | its own | 30 min |
 
 The first pair raised the supply on a misreading of McSnow's, which is already per metre, and gave each cloud cell 1.32
 (sea) and 2.03 (land) times its share; it stands as the record of that reading. The snapshot writer works on copies of
@@ -110,14 +118,57 @@ The references start at −15 °C, 16.28 km above the freezing level, and the cl
 The design boxes' snow tops stand a median 29–41 km above the freezing level, at −34 °C over the sea and −50 °C over
 land ([snow zone](snow_zone_depth.md)), beyond the references and beyond McSnow's habit table, which ends at −30 °C.
 Snow that forms higher grows longer and sublimates more slowly: near the freezing level k stands at 2.0 × 10⁻³ per metre
-31 km below the top of the 0.3 mm/h column from −30 °C, against 3.6 × 10⁻³ 16 km below the top of the column from −15
-°C. How PlaSim takes the deeper tops is the build's open choice.
+31 km below the top of the 0.3 mm/h column from −30 °C, against 3.6 × 10⁻³ 16 km below the top of the column from
+−15 °C. How PlaSim takes the deeper tops is the build's open choice.
+
+## The third test
+
+The third test (rules set on 29 October at 22:47, before its runs) carried the closure to the boxes' own range: a second
+family of references from −30 °C, the coldest top McSnow's habit table allows, at 0.1, 0.3, 1 and 3 mm/h; light snow of
+0.1 mm/h from −15 °C; the dry end of the air the boxes' falling ice meets, the flux-weighted tenth percentile of its
+humidity over ice (0.903 sea, 0.891 land); and a top halfway in height between the families, which tests the rule
+between them, ln k, q and the flux line interpolated at the same height by the top's height. The statistic is D to the
+lowest layer that keeps 5% of the base flux, and a case whose D changes between the two halves of its pool by more than
+six of its errors is unresolved. The new runs' directories sit on the research drive; the deep rerun repeats
+`col_deep_q0.3_f1_base` byte for byte at every sixth hour.
+
+Five of the nine box runs resolved. Four did not, and the reason lies in McSnow: from −30 °C, and from halfway, snow of
+1 mm/h falls far enough to grow metre-scale aggregates without a breakup law, flux-weighted 0.7–3.2 m across at the
+cloud base and up to 4.6–7.6 m, with the largest 1% of a layer's superparticles carrying 25–79% of its flux. Such flakes
+lose almost nothing below the cloud base, and a handful of superparticles set the flux's noise, so McSnow's D sits at
+zero within errors of 0.08–0.17. The 3 mm/h column from −15 °C grows the same, 1.6 m across on arrival. The snow work's
+load analogy puts the survivable span at 5 cm for ordinary flakes and 8–15 cm for the largest; the 0.1 mm/h snow from
+−30 °C stays well inside it (18–22 mm at the cloud base), and the 0.3 mm/h snow from −30 °C reaches its upper edge.
+
+On the five resolved runs the closure holds within 10% in light snow from −30 °C (1.055 sea, 1.100 land, where McSnow
+loses 61% and 82% of the flux) and at the dry end (1.077), and overstates the loss by 1.48 and 1.65 in 0.1 mm/h snow
+from −15 °C, where McSnow loses 94%. The flake law applied to each run's own flakes follows McSnow within 4% in all
+five, so the miss lies in the shrinking term: it takes every flake as losing the same share of its mass, while where
+most of the flux sublimates the smallest flakes vanish whole and leave the flux to larger ones. By its rule nothing was
+adopted.
+
+## The fourth test
+
+The fourth test (rules set on 30 October at 02:45, offline on the nine resolved runs of the second and third tests)
+replaced the shrinking term with the matched references' own flakes, carried down from the cloud base by the flake law,
+each losing mass at its own rate and gone when it has none left. It mends the light snow from −15 °C, 1.07 and 1.13 of
+McSnow's D against 1.48 and 1.65, and misses where the snow falls through the land's 8 km below the cloud base at 1 and
+0.3 mm/h, 1.54 and 1.37 where the shrinking closure gave 1.06 and 1.02: the carried flakes stop aggregating at the cloud
+base, while McSnow's keep merging into larger flakes that lose less per metre. Each closure leaves out one of the two
+processes, the shrinking closure the vanishing of the smallest flakes and the carried flakes the aggregation. As shares
+of the cloud base's flux sublimated, the shrinking closure stays within 0.03 of McSnow's except in the lightest snow
+from −15 °C, where it sublimates 98–99% against 94%, and the carried flakes within 0.06 except at 1 mm/h over land,
+0.62 against 0.46. The carried flakes were chosen after these runs showed the miss and fit no parameter; the choice
+between the two is open.
 
 ## Reproduction
 
 `OPENBLAS_NUM_THREADS=1 python -B -m atmosphere.snow.mcsnow_subcloud build` compiles the changed lunar build
 (`research/runs/snow_agent_3/subcloud`, executable `b5c6f8c1…`), `parity` repeats `col_sat_f0.01_base` on it with
-`ssat_below` off, and `run --case <name>` runs one case. The rules, scripts and outcomes of both tests are kept on the
+`ssat_below` off, and `run --case <name>` runs one case. The rules, scripts and outcomes of the tests are kept on the
 research drive in `session-tools/snow_sublimation`: `rules_subcloud.txt` with `subcloud_test.py` and the added readings
 (`subcloud_narrowness.py`, `subcloud_pooled9.py`, `subcloud_shrink.py`), and `rules_subcloud2.txt` with
-`subcloud_test2.py` and `run_subcloud2.sh`.
+`subcloud_test2.py` and `run_subcloud2.sh`, and `rules_subcloud3.txt` with `subcloud_test3.py`, `run_subcloud3.sh`,
+`box_snow_rates.py`, `reference_convergence.py` and `subcloud3_noise.py`, and `rules_subcloud4.txt` with
+`subcloud_test4.py`. `run --case <name> --smoke` runs a case's first 6 model hours, and `--store DIR` places a new run's
+directory on another disk, linked from the cache.

@@ -126,8 +126,10 @@ followed:
    the reference for replacing PlaSim's snow sublimation with the lunar flakes' own. A closure that takes the share of
    the snow's flux sublimated per metre by depth below the snow's top from three reference columns, matched by the
    snow's rate at the cloud base and raised as the flakes shrink, follows McSnow within 0–9% over both design boxes in
-   snow of 1 and 0.3 mm/h. Done 29 October ([results](mcsnow_subcloud.md)); the references start at −15 °C, below the
-   boxes' snow tops.
+   snow of 1 and 0.3 mm/h. Done 29 October ([results](mcsnow_subcloud.md)). Carried to the boxes' own range on
+   30 October, references from −30 °C hold in light snow, while snow of 1 mm/h from −30 °C grows metre-scale
+   aggregates without a breakup law, and the shrinking term overstates the loss where nearly all of a light snow
+   sublimates.
 
 Before the optics, five things remain open: the heavy-snow tail, which no run converges and which the Earth check
 overgrows tenfold at 9 mm/h; the 90th and 99th percentiles of light snow from −30 °C, which halving the superparticles

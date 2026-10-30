@@ -48,14 +48,25 @@ def test_the_change_touches_only_its_declared_lines_and_leaves_earth_alone():
 
 def test_the_cases_repeat_their_reference_columns_with_each_boxs_air():
     records = {}
-    for name in {spec['base'] for spec in sc.CASES.values()}:
+    for name in {spec['base'] for spec in sc.CASES.values() if 'base' in spec} | {sc.DEEP}:
         path = dv.CACHE / 'runs' / name / 'run.json'
         if not path.exists():
             pytest.skip('the corrected reference runs are not at hand')
         records[name] = json.loads(path.read_text())
-    assert {sc.MODERATE, sc.LIGHT, sc.HEAVY} <= set(records)
+    assert {sc.MODERATE, sc.LIGHT, sc.HEAVY, sc.DEEP} <= set(records)
+    # the snow work's own column builder rebuilds its recorded references, so the new columns are of their family
+    for name, options in ((sc.LIGHT, dict(water_mm_h=0.3, flux_factor=1.0, duration_h=132.0)),
+                          (sc.MODERATE, dict(water_mm_h=1.0, flux_factor=1.0, duration_h=96.0)),
+                          (sc.HEAVY, dict(water_mm_h=3.0, flux_factor=1.0, duration_h=72.0)),
+                          (sc.DEEP, dict(water_mm_h=0.3, flux_factor=1.0, duration_h=168.0, top_C=-30.0))):
+        assert grow.column_config(band=grow.band_factors(None), snap_h=6.0, **options) == records[name]['configuration']
+        assert records[name]['seed'] == sc.SEED
     for case, spec in sc.CASES.items():
-        reference = records[spec['base']]
+        if 'column' in spec:
+            reference = dict(seed=sc.SEED, configuration=grow.column_config(band=grow.band_factors(None), snap_h=6.0,
+                                                                            **sc.COLUMNS[spec['column']]))
+        else:
+            reference = records[spec['base']]
         before = reference['configuration']
         config, seed = sc.case_config(case)
         assert seed == reference['seed']
@@ -78,7 +89,11 @@ def test_the_cases_repeat_their_reference_columns_with_each_boxs_air():
         assert rest(config) == rest(before)
         assert {k: v for k, v in config['sp_nml'].items() if k not in ('water_supply', 'dt_snap')} == \
             {k: v for k, v in before['sp_nml'].items() if k not in ('water_supply', 'dt_snap')}
-    # the second test's reruns write snapshots every 30 minutes, the reference columns every 6 hours
-    assert all(sc.CASES[c]['dt_snap'] == sc.SNAP_S for c in ('sub_sea_c', 'sub_land_c', 'sub_sea_l', 'sub_land_l',
-                                                             'ref_q0.3_f1', 'ref_q1_f1', 'ref_q3_f1'))
+    # the second and third tests' runs write snapshots every 30 minutes, the reference columns every 6 hours
+    assert all(spec.get('dt_snap') == sc.SNAP_S for case, spec in sc.CASES.items()
+               if case not in ('sub_sea', 'sub_land', 'sub_sea_b', 'sub_land_b'))
+    # the dry variants keep their box's cloud base and are drier below it
+    for box in ('sea', 'land'):
+        assert sc.BOXES[box + '_dry']['h1_m'] == sc.BOXES[box]['h1_m']
+        assert -1.0 < sc.BOXES[box + '_dry']['ssat_below'] < sc.BOXES[box]['ssat_below'] < 0.0
     assert all(records[n]['configuration']['sp_nml']['dt_snap'] % sc.SNAP_S == 0 for n in records)
