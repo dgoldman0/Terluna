@@ -16,6 +16,8 @@ The [industrial-combustion assessment](industrial_combustion.md) audits the exis
 
 The [distinctive-activities assessment](distinctive_activities.md) compares economic uses and everyday life across the combined lunar environment. Its strongest opportunities involve extensive low-gravity air, water and living landscapes: flight, performance, aquatic spaces, hybrid gardens and physical testing. It quantifies selected flight, water and rotating-venue comparisons, with no new market forecast or addition to world product.
 
+The [early sport, media and finance study](sports_finance.md) develops a smaller beginning: one enclosed community with a resident performance programme, limited visiting cohorts and remote audiences. It tests venue capacity, operating cash, fixed-debt downside and payment/currency choices. Sport leads the early recreation programme; currency adoption, contracts and numerical commercial assumptions remain open.
+
 This study estimates the economic consequences of completing the Open Moon and maintaining it at the selected population. Its comparison is an equally advanced future Earth, with the same access to automation, energy and biological technology. The intended reader knows the project's physical design; the economic definitions and valuation assumptions are introduced here. This is a scenario study, not a forecast of future prices or a demonstrated construction programme.
 
 The [completed comparison](comparison.md) reports Earth, Open Moon and array as three peer
@@ -42,6 +44,7 @@ The accepted C′ distribution places **8 billion people on the Moon, 9 billion 
 | 10 | [Useful services of the 1.2 atm atmosphere](pressure_advantages.md) | Implemented; matched pressure, composition, heat-flow, liquid and clamping comparisons; conditional cost allowances |
 | 11 | [Industrial combustion and material flammability](industrial_combustion.md) | Implemented; audit, primary-source comparison, conservation and purge references; no qualified lunar material or fire-loss premium |
 | 12 | [Distinctive activities and environmental combinations](distinctive_activities.md) | Implemented; ranked applications, Earth/array alternatives, flight/water/venue references; demand and complete facility costs remain open |
+| 13 | [Early sport, media, currency and bonds](sports_finance.md) | Implemented; one-venue cash/capacity screen, funding and liquidity identities, fixed-bond stress; no currency or financing terms adopted |
 
 The [inventory product](results/inventory.json) reads eleven committed products through [inputs.json](inputs.json), checking their full SHA-256 identities and schemas. It retains the source evidence statements and field paths. Quantities are engineering screens; a mass allowance is not a detailed structure and a power requirement is not a price. The baseline is provisioning commit `e89462608af21bd386b23b7eb36cf8373818619b`.
 
@@ -121,5 +124,7 @@ python -m pytest research/studies/world_economy/tests
 ```
 
 The additional activity references reproduce with `python -m research.studies.world_economy.distinctive_activities`; their [report](distinctive_activities.md) documents the matched comparisons and limits.
+
+The early sport and monetary examples reproduce with `python -m research.studies.world_economy.sports_finance`.
 
 The default output goes to ignored `research/runs/`. A changed source hash requires review and explicit rebinding. [sources.json](sources.json) records targeted source reading; [checks.json](checks.json) records actual numerical and repository checks. Neither is empirical validation of the fictional economy.

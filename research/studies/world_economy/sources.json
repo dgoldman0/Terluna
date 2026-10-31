@@ -254,5 +254,9 @@
   "distinctive_activities_catalogue": {
     "path": "distinctive_activities_sources.json",
     "scope": "Primary artificial-gravity, simulator, flight, water-wave, weathering and geological evidence; local ecological/amenity context; exact reading limits and conditional activity proposals."
+  },
+  "sports_finance_catalogue": {
+    "path": "sports_finance_sources.json",
+    "scope": "Primary sports commercial filings, participant-training context, debt coverage, monetary settlement and currency mismatch; proposed early institutions and cash references remain conditional."
   }
 }

@@ -4,6 +4,8 @@
 
 The calculation uses one common real unit U, with future Earth annual GWP of 100,000 U per resident and nine billion Earth residents. It prices a hypothetical visitor and manufacturing portfolio, its new capital and its own loans. The result is **facility cash after a stated shared-community allowance**, not a complete city budget, net exports or an increase added to the previous whole-world GWP.
 
+The [early sport and media account](sports_finance.md) examines a smaller starting point than these population milestones: one venue, a resident performance cohort, limited visitors and remote commercial receipts. Its financing and currency examples form an alternative early portfolio; they must be reconciled with this account before aggregation.
+
 ## What visitors buy before the open world
 
 The early destination consists of inhabited tube-city spaces, enclosed gardens, public gathering places, low-gravity sport and flight within supplied air, heritage communities, and supported surface excursions. [Tube cities](../land_cities/README.md) and the early protective surface dome at [Tranquility Base (D6)](../conservation/README.md) already belong to the project's habitation and conservation direction. The [low-gravity design study](../../../habitation/low_gravity/README.md) supplies the movement and interior-design context. People can visit a functioning community, its architecture and cultural life, and return to see it develop. The mature open-Moon seas, aerial biomes and extensive outdoor gardens are later possibilities and supply no early revenue in this calculation.

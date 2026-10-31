@@ -1,0 +1,101 @@
+{
+  "source_admission": "Primary issuer filings, monetary institutions, official guidance and existing project records. Targeted reading by the research team; external documents remain external. No future lunar law, institution, currency, rate or audience is inferred from present analogies.",
+  "sources": [
+    {
+      "id": "liberty_results_2025",
+      "title": "Liberty Media: Fourth Quarter and Year End 2025 Financial and Operating Results",
+      "url": "https://www.libertymedia.com/news/detail/579/liberty-media-corporation-reports-fourth-quarter-and-year",
+      "reading_scope": "Formula 1 revenue composition and operating-cost discussion read; no valuation of teams, entire sports sector or transfer of margins to lunar operations.",
+      "use": "Media rights and sponsorship can be major separate sports revenue streams; reported shares are a business-model analogy, not a lunar audience forecast.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "liberty_10k_2025",
+      "title": "Liberty Media Corporation 2025 Form 10-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1560385/000110465926020653/lmca-20251231x10k.htm",
+      "reading_scope": "Targeted advance-payment, deferred-revenue and commercial-contract passages read; no complete annual-filing audit.",
+      "use": "Upfront contract cash can precede earned revenue and leaves performance obligations; team and production costs remain.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "faa_participant_training",
+      "title": "14 CFR 460.51: Space flight participant training",
+      "url": "https://www.ecfr.gov/current/title-14/chapter-III/subchapter-C/part-460/subpart-B/section-460.51",
+      "reading_scope": "Current official section on emergency-response training read. Present US commercial-space rule only; no applicability to future lunar institutions asserted.",
+      "use": "Supports travel preparation as a distinct element from habitat competence and sport instruction; no specific lunar syllabus or safe participation criterion.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "world_bank_project_finance",
+      "title": "World Bank PPP Resource Center: Key Issues in Developing Project Financed Transactions",
+      "url": "https://ppp.worldbank.org/financing/issues-in-project-financed-transactions",
+      "reading_scope": "Revenue-certainty and financial-ratio/coverage passages read. No complete project-finance handbook or underwriting standard adopted.",
+      "use": "Coverage uses operating cash before equity distributions and compares with interest plus principal; downside and reserves require separate treatment. Lunar rates, terms and coverage thresholds are assumptions.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "sec_revenue_bonds",
+      "title": "SEC Investor.gov: Municipal Bonds",
+      "url": "https://www.investor.gov/introduction-investing/investing-basics/investment-products/bonds-or-fixed-income-products-0",
+      "reading_scope": "Revenue versus general-obligation descriptions and risk passages read; no US tax exemption, jurisdiction or securities treatment transferred to the Moon.",
+      "use": "Different issuers and repayment sources distinguish project-revenue debt from broad public obligations.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "boe_money_2014",
+      "title": "McLeay, Radia and Thomas: Money creation in the modern economy",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-creation-in-the-modern-economy.pdf",
+      "reading_scope": "Overview and targeted loan-created-deposit, settlement/funding-limit passages on printed pages 14-17 read; no full literature review.",
+      "use": "Loan-created deposits remain distinct from the settlement assets needed for payments and from real resources or net wealth.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "bis_singleness_2023",
+      "title": "Garratt and Shin: Stablecoins versus tokenised deposits: implications for the singleness of money, BIS Bulletin 73",
+      "url": "https://www.bis.org/publications/bulletin-73-stablecoins-versus-tokenised-deposits-implications-singleness-money.pdf",
+      "reading_scope": "Key takeaways and issuer-claim/par-settlement discussion, printed pages 1-2 and targeted page 6 material read. No token architecture adopted.",
+      "use": "Local payment branding, redemption liabilities and settlement assets have distinct roles; a currency label does not supply development revenue.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "bis_fx_2018",
+      "title": "Hardy: Foreign currency borrowing, balance sheet shocks and real outcomes, BIS Working Paper 758",
+      "url": "https://www.bis.org/publications/working-paper-758-foreign-currency-borrowing-balance-sheet-shocks-and-real-outcomes",
+      "reading_scope": "Primary abstract and research summary/findings read; full paper and underlying firm data unexamined.",
+      "use": "Foreign-currency mismatch can affect firms; the signed toy currency calculation is independent arithmetic, not a forecast of lunar exchange rates.",
+      "accessed": "2026-10-31"
+    }
+  ],
+  "local_context": [
+    {
+      "path": "research/studies/world_economy/early_exports.md",
+      "sha256": "8a92b8f249d3a65f88fbca49d853308bbd2687936f67b5a97e401911acbbf206",
+      "use": "Prior first milestone, synthetic facility allowances and coverage boundary; new venue is an alternative smaller account, not additive."
+    },
+    {
+      "path": "research/studies/world_economy/early_exports_inputs.json",
+      "sha256": "c1f745ec3331899623dae011545205838b0112a0041df743f8a1f4b445270940",
+      "use": "Original common real U, visitor assumptions and costs retained as provenance; no adopted currency or small-facility quote."
+    },
+    {
+      "path": "research/studies/world_economy/distinctive_activities.md",
+      "sha256": "d991838cfc6c5a3d9952c1e55c187a560f1e2cab97da4610da5291730f157cef",
+      "use": "Physical activity opportunities; this stage develops the early operating sequence and finance."
+    },
+    {
+      "path": "research/studies/land_cities/README.md",
+      "sha256": "de3a4e5d8f919ad2c6b14ca7c3ff885067f34948249fc4aa0b13124bc36a6346",
+      "use": "Enclosed lava-tube communities, liner/habitat options and future water exposure; cave size does not establish a pressure-qualified venue."
+    },
+    {
+      "path": "research/studies/world_economy/annual_accounts.md",
+      "sha256": "599b97e442aa78cc05fe11c3236840de950856fa870fb34a66c0fb04ed489e35",
+      "use": "Debt payments versus production, ownership and capital renewal."
+    },
+    {
+      "path": "research/studies/world_economy/results/comparison.json",
+      "sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "use": "Original three-world results remain unchanged."
+    }
+  ]
+}

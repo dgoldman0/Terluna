@@ -1,0 +1,691 @@
+{
+  "schema": "terluna.research.sports-finance/1",
+  "evidence": "Conditional annual cash and financing examples for one sports/media venue hosted by an existing enclosed community. No facility quotation, audience forecast, currency adoption, clinical qualification or bond issue is established.",
+  "reading_rule": "U is a common real accounting numeraire. Reference early-exports prices are inherited assumptions extrapolated to a much smaller facility. Operating cash includes compensation; no GDP/GVA is calculated. Rates and equal payments are real/indexed-equivalent scenarios. Reference debt remains fixed across independent operating stress years; reserves start full in each case. Capital costs exclude the host settlement and construction-period interest/ramp losses. Those require separate funding.",
+  "assumptions": {
+    "schema": "terluna.research.sports-finance-inputs/1",
+    "evidence": "Conditional annual cash and financing examples for one sports/media venue hosted by an existing enclosed community. No facility quotation, audience forecast, currency adoption, clinical qualification or bond issue is established.",
+    "reading_rule": "U is a common real accounting numeraire. Reference early-exports prices are inherited assumptions extrapolated to a much smaller facility. Operating cash includes compensation; no GDP/GVA is calculated. Rates and equal payments are real/indexed-equivalent scenarios. Reference debt remains fixed across independent operating stress years; reserves start full in each case. Capital costs exclude the host settlement and construction-period interest/ramp losses. Those require separate funding.",
+    "products": {
+      "research/studies/world_economy/results/early_exports.json": {
+        "schema": "terluna.research.early-exports/1",
+        "sha256": "36097cc25ad5025327c87d9d6a7fd297c2cf08d89a1f82dd470f0749a5814d2c",
+        "use": "scenarios.reference[0]: stay, nightly destination receipts, visitor capital per bed and replacement life; these remain synthetic assumptions"
+      }
+    },
+    "venue": {
+      "guest_beds": 100,
+      "occupancy_ceiling": 0.5,
+      "team_guest_nights": 2000,
+      "route_arrivals_year": 1500,
+      "training_completions_year": 1600,
+      "arena_days_year": 300,
+      "arena_hours_day": 8,
+      "arena_simultaneous_participants": 20,
+      "professional_participant_hours": 12000,
+      "guest_arena_hours": 12,
+      "resident_core_crew": 20,
+      "basis": "Twenty resident performers/production staff lease accommodation and support through the host-service allowance; their accommodation is not charged against guest beds. Visiting teams/production receive 2000 bed-nights inside the occupancy allowance. Guest travel, training and arena capacities are independent ceilings, not qualified operating limits. Arena participant-hours are a preliminary allocation, not a collision-safe schedule. Travel and training ceilings are residual public-guest capacities after professional-team and resident-cohort requirements."
+    },
+    "production_capital_U": 20000000.0,
+    "production_asset_life_years": 10,
+    "working_cash_U": 5000000.0,
+    "rights_receipt_U_per_audience_equivalent": 20.0,
+    "costs": {
+      "visitor_cash_cost_fraction": 0.6,
+      "media_cash_cost_fraction": 0.4,
+      "fixed_operating_fraction_capital": 0.01,
+      "core_programme_U_year": 4000000.0,
+      "host_services_U_year": 2000000.0,
+      "tax_allowance_fraction": 0.2,
+      "basis": "Variable costs include compensation, training and purchased services. Core programme covers recurring performer/production, emergency and programme provision; host services include the resident cohort accommodation and utility lease. Adequacy is unqualified. Replacement equals straight-line economic depreciation. Tax allowance is 20% of positive operating surplus after depreciation, with no interest deduction or loss relief; this is not an adopted tax regime. Insurance, rescue and outage coverage require qualification within the allowances or additional funding."
+    },
+    "cases": {
+      "reference": {
+        "visitor_demand_year": 1000,
+        "rights_receipts_U": 20000000.0,
+        "sponsorship_receipts_U": 5000000.0,
+        "capital_scale": 1
+      },
+      "visitor_interruption": {
+        "visitor_demand_year": 0,
+        "rights_receipts_U": 20000000.0,
+        "sponsorship_receipts_U": 5000000.0,
+        "capital_scale": 1
+      },
+      "media_half": {
+        "visitor_demand_year": 1000,
+        "rights_receipts_U": 10000000.0,
+        "sponsorship_receipts_U": 2500000.0,
+        "capital_scale": 1
+      },
+      "media_lost": {
+        "visitor_demand_year": 1000,
+        "rights_receipts_U": 0,
+        "sponsorship_receipts_U": 0,
+        "capital_scale": 1
+      },
+      "shared_venue_shutdown": {
+        "visitor_demand_year": 0,
+        "rights_receipts_U": 0,
+        "sponsorship_receipts_U": 0,
+        "capital_scale": 1
+      },
+      "audience_growth": {
+        "visitor_demand_year": 3000,
+        "rights_receipts_U": 100000000.0,
+        "sponsorship_receipts_U": 10000000.0,
+        "capital_scale": 1
+      },
+      "capital_double": {
+        "visitor_demand_year": 1000,
+        "rights_receipts_U": 20000000.0,
+        "sponsorship_receipts_U": 5000000.0,
+        "capital_scale": 2
+      }
+    },
+    "bond": {
+      "real_rate": 0.05,
+      "years": 10,
+      "coverage": 1.5,
+      "reserve_years": 0.5,
+      "fee_fraction": 0.02,
+      "investor_demand_U": 60000000.0,
+      "rate_term_cases": [
+        [
+          0.02,
+          10
+        ],
+        [
+          0.05,
+          4
+        ],
+        [
+          0.05,
+          10
+        ],
+        [
+          0.1,
+          10
+        ],
+        [
+          0.05,
+          20
+        ]
+      ],
+      "demand_cases_U": [
+        10000000.0,
+        60000000.0,
+        200000000.0
+      ],
+      "basis": "Illustrative operating/refinancing snapshot, not construction underwriting or investor commitments. Gross principal is capped by cash coverage, investor appetite and funding uses. Reserve earns zero real return, starts full, is pledged only to debt service and must be replenished after use. One-year stress has no modeled insurance payout, recovery or default restructuring. No equity dividend, growth allocation or planetary-development transfer is assumed. Working cash is funded separately and is not drawn in this one-year stress; reported remaining gaps precede any use of that liquidity. Capital-scale stress reports additional upfront capital separately and assumes it is provided outside the fixed reference bond."
+    },
+    "payment_example": {
+      "issued_U": 10000000.0,
+      "redemption_U": 7000000.0,
+      "illiquid_diversion_cases_U": [
+        0.0,
+        6000000.0
+      ],
+      "basis": "Optional one-for-one redeemable local balances denominated in settlement money. Diverted assets retain book value but cannot meet immediate redemptions; no insolvency loss assumed. This is a liquidity example, not a proposed bank or token architecture."
+    },
+    "fx_example": {
+      "export_receipts_U": 20000000.0,
+      "import_costs_U": 15000000.0,
+      "local_receipts_L": 30000000.0,
+      "local_costs_L": 20000000.0,
+      "U_per_L_cases": [
+        1.0,
+        0.7
+      ],
+      "basis": "Separate toy cash account before taxes, renewal or debt service, independent of the venue. Fixed quantities/prices in each denomination. U/L is settlement units per local unit; no exchange-rate or macroeconomic prediction."
+    }
+  },
+  "inherited_screen": {
+    "stay_nights": 14.0,
+    "destination_U_per_night": 1000.0,
+    "visitor_capital_U_per_bed": 1000000.0,
+    "visitor_asset_life_years": 40.0
+  },
+  "producer": {
+    "files": {
+      "research/studies/world_economy/sports_finance.py": "95227f0949189fb256c396d6599799c461afb3dc1cca061dd597a866fe8349ee",
+      "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
+      "research/studies/world_economy/sports_finance_inputs.json": "29f9df98a88c487a0e924e1014028d25b7f27401716edac19169d94e0c651313",
+      "research/studies/world_economy/sports_finance_sources.json": "e67cb225e947e18bc2e040abe066e1c0f7b1639e914d189abccb7d0714d607b3"
+    },
+    "constants": {
+      "JULIAN_YEAR_DAYS": 365.25
+    }
+  },
+  "reference_bond": {
+    "principal_limits_U": {
+      "operating_cash": 36652501.797197245,
+      "investor_demand": 60000000.0,
+      "total_uses": 136575047.7061598
+    },
+    "gross_principal_U": 36652501.797197245,
+    "annual_service_U": 4746666.666666667,
+    "debt_service_reserve_U": 2373333.3333333335,
+    "issuance_cost_U": 733050.0359439449,
+    "net_proceeds_for_capital_and_working_cash_U": 33546118.427919965,
+    "other_funding_required_U": 91453881.57208002,
+    "rate_real": 0.05,
+    "years": 10,
+    "coverage_target": 1.5,
+    "first_year": {
+      "payment": 4746666.666666667,
+      "interest": 1832625.0898598623,
+      "principal_repaid": 2914041.5768068046,
+      "closing_debt": 33738460.22039045
+    },
+    "sources_minus_uses_U": -9.778887033462524e-09
+  },
+  "operating_scenarios": {
+    "reference": {
+      "operation": {
+        "visitor_capacity": {
+          "caps_arrivals_year": {
+            "beds": 1161.607142857143,
+            "travel": 1500,
+            "training": 1600,
+            "arena": 3000.0
+          },
+          "limiting_arrivals_year": 1161.607142857143,
+          "usable_guest_nights": 16262.5,
+          "professional_guest_nights": 2000,
+          "professional_arena_participant_hours": 12000
+        },
+        "realized_visitors_year": 1000,
+        "visitor_nights_year": 14000.0,
+        "onsite_receipts_U": 14000000.0,
+        "rights_receipts_U": 20000000.0,
+        "sponsorship_receipts_U": 5000000.0,
+        "total_receipts_U": 39000000.0,
+        "variable_cash_cost_U": 18400000.0,
+        "fixed_cash_cost_U": 7200000.0,
+        "installed_capital_U": 120000000.0,
+        "replacement_U": 4500000.0,
+        "pre_tax_cash_U": 8900000.0,
+        "tax_allowance_U": 1780000.0,
+        "cash_available_for_debt_service_U": 7120000.0
+      },
+      "additional_upfront_capital_U": 0,
+      "fixed_reference_bond": {
+        "operating_coverage": 1.5,
+        "cash_after_debt_before_reserve_U": 2373333.333333333,
+        "operating_funding_gap_U": 0,
+        "debt_gap_before_reserve_U": 0,
+        "debt_reserve_draw_U": 0,
+        "closing_debt_reserve_U": 2373333.3333333335,
+        "uncovered_debt_payment_U": 0,
+        "funding_gap_after_debt_reserve_before_working_cash_U": 0,
+        "cash_after_service_positive_U": 2373333.333333333
+      }
+    },
+    "visitor_interruption": {
+      "operation": {
+        "visitor_capacity": {
+          "caps_arrivals_year": {
+            "beds": 1161.607142857143,
+            "travel": 1500,
+            "training": 1600,
+            "arena": 3000.0
+          },
+          "limiting_arrivals_year": 1161.607142857143,
+          "usable_guest_nights": 16262.5,
+          "professional_guest_nights": 2000,
+          "professional_arena_participant_hours": 12000
+        },
+        "realized_visitors_year": 0,
+        "visitor_nights_year": 0.0,
+        "onsite_receipts_U": 0.0,
+        "rights_receipts_U": 20000000.0,
+        "sponsorship_receipts_U": 5000000.0,
+        "total_receipts_U": 25000000.0,
+        "variable_cash_cost_U": 10000000.0,
+        "fixed_cash_cost_U": 7200000.0,
+        "installed_capital_U": 120000000.0,
+        "replacement_U": 4500000.0,
+        "pre_tax_cash_U": 3300000.0,
+        "tax_allowance_U": 660000.0,
+        "cash_available_for_debt_service_U": 2640000.0
+      },
+      "additional_upfront_capital_U": 0,
+      "fixed_reference_bond": {
+        "operating_coverage": 0.5561797752808988,
+        "cash_after_debt_before_reserve_U": -2106666.666666667,
+        "operating_funding_gap_U": 0,
+        "debt_gap_before_reserve_U": 2106666.666666667,
+        "debt_reserve_draw_U": 2106666.666666667,
+        "closing_debt_reserve_U": 266666.6666666665,
+        "uncovered_debt_payment_U": 0.0,
+        "funding_gap_after_debt_reserve_before_working_cash_U": 0.0,
+        "cash_after_service_positive_U": 0
+      }
+    },
+    "media_half": {
+      "operation": {
+        "visitor_capacity": {
+          "caps_arrivals_year": {
+            "beds": 1161.607142857143,
+            "travel": 1500,
+            "training": 1600,
+            "arena": 3000.0
+          },
+          "limiting_arrivals_year": 1161.607142857143,
+          "usable_guest_nights": 16262.5,
+          "professional_guest_nights": 2000,
+          "professional_arena_participant_hours": 12000
+        },
+        "realized_visitors_year": 1000,
+        "visitor_nights_year": 14000.0,
+        "onsite_receipts_U": 14000000.0,
+        "rights_receipts_U": 10000000.0,
+        "sponsorship_receipts_U": 2500000.0,
+        "total_receipts_U": 26500000.0,
+        "variable_cash_cost_U": 13400000.0,
+        "fixed_cash_cost_U": 7200000.0,
+        "installed_capital_U": 120000000.0,
+        "replacement_U": 4500000.0,
+        "pre_tax_cash_U": 1400000.0,
+        "tax_allowance_U": 280000.0,
+        "cash_available_for_debt_service_U": 1120000.0
+      },
+      "additional_upfront_capital_U": 0,
+      "fixed_reference_bond": {
+        "operating_coverage": 0.23595505617977527,
+        "cash_after_debt_before_reserve_U": -3626666.666666667,
+        "operating_funding_gap_U": 0,
+        "debt_gap_before_reserve_U": 3626666.666666667,
+        "debt_reserve_draw_U": 2373333.3333333335,
+        "closing_debt_reserve_U": 0.0,
+        "uncovered_debt_payment_U": 1253333.3333333335,
+        "funding_gap_after_debt_reserve_before_working_cash_U": 1253333.3333333335,
+        "cash_after_service_positive_U": 0
+      }
+    },
+    "media_lost": {
+      "operation": {
+        "visitor_capacity": {
+          "caps_arrivals_year": {
+            "beds": 1161.607142857143,
+            "travel": 1500,
+            "training": 1600,
+            "arena": 3000.0
+          },
+          "limiting_arrivals_year": 1161.607142857143,
+          "usable_guest_nights": 16262.5,
+          "professional_guest_nights": 2000,
+          "professional_arena_participant_hours": 12000
+        },
+        "realized_visitors_year": 1000,
+        "visitor_nights_year": 14000.0,
+        "onsite_receipts_U": 14000000.0,
+        "rights_receipts_U": 0,
+        "sponsorship_receipts_U": 0,
+        "total_receipts_U": 14000000.0,
+        "variable_cash_cost_U": 8400000.0,
+        "fixed_cash_cost_U": 7200000.0,
+        "installed_capital_U": 120000000.0,
+        "replacement_U": 4500000.0,
+        "pre_tax_cash_U": -6100000.0,
+        "tax_allowance_U": 0.0,
+        "cash_available_for_debt_service_U": -6100000.0
+      },
+      "additional_upfront_capital_U": 0,
+      "fixed_reference_bond": {
+        "operating_coverage": -1.2851123595505618,
+        "cash_after_debt_before_reserve_U": -10846666.666666668,
+        "operating_funding_gap_U": 6100000.0,
+        "debt_gap_before_reserve_U": 4746666.666666667,
+        "debt_reserve_draw_U": 2373333.3333333335,
+        "closing_debt_reserve_U": 0.0,
+        "uncovered_debt_payment_U": 2373333.3333333335,
+        "funding_gap_after_debt_reserve_before_working_cash_U": 8473333.333333334,
+        "cash_after_service_positive_U": 0
+      }
+    },
+    "shared_venue_shutdown": {
+      "operation": {
+        "visitor_capacity": {
+          "caps_arrivals_year": {
+            "beds": 1161.607142857143,
+            "travel": 1500,
+            "training": 1600,
+            "arena": 3000.0
+          },
+          "limiting_arrivals_year": 1161.607142857143,
+          "usable_guest_nights": 16262.5,
+          "professional_guest_nights": 2000,
+          "professional_arena_participant_hours": 12000
+        },
+        "realized_visitors_year": 0,
+        "visitor_nights_year": 0.0,
+        "onsite_receipts_U": 0.0,
+        "rights_receipts_U": 0,
+        "sponsorship_receipts_U": 0,
+        "total_receipts_U": 0.0,
+        "variable_cash_cost_U": 0.0,
+        "fixed_cash_cost_U": 7200000.0,
+        "installed_capital_U": 120000000.0,
+        "replacement_U": 4500000.0,
+        "pre_tax_cash_U": -11700000.0,
+        "tax_allowance_U": 0.0,
+        "cash_available_for_debt_service_U": -11700000.0
+      },
+      "additional_upfront_capital_U": 0,
+      "fixed_reference_bond": {
+        "operating_coverage": -2.464887640449438,
+        "cash_after_debt_before_reserve_U": -16446666.666666668,
+        "operating_funding_gap_U": 11700000.0,
+        "debt_gap_before_reserve_U": 4746666.666666667,
+        "debt_reserve_draw_U": 2373333.3333333335,
+        "closing_debt_reserve_U": 0.0,
+        "uncovered_debt_payment_U": 2373333.3333333335,
+        "funding_gap_after_debt_reserve_before_working_cash_U": 14073333.333333334,
+        "cash_after_service_positive_U": 0
+      }
+    },
+    "audience_growth": {
+      "operation": {
+        "visitor_capacity": {
+          "caps_arrivals_year": {
+            "beds": 1161.607142857143,
+            "travel": 1500,
+            "training": 1600,
+            "arena": 3000.0
+          },
+          "limiting_arrivals_year": 1161.607142857143,
+          "usable_guest_nights": 16262.5,
+          "professional_guest_nights": 2000,
+          "professional_arena_participant_hours": 12000
+        },
+        "realized_visitors_year": 1161.607142857143,
+        "visitor_nights_year": 16262.5,
+        "onsite_receipts_U": 16262500.0,
+        "rights_receipts_U": 100000000.0,
+        "sponsorship_receipts_U": 10000000.0,
+        "total_receipts_U": 126262500.0,
+        "variable_cash_cost_U": 53757500.0,
+        "fixed_cash_cost_U": 7200000.0,
+        "installed_capital_U": 120000000.0,
+        "replacement_U": 4500000.0,
+        "pre_tax_cash_U": 60805000.0,
+        "tax_allowance_U": 12161000.0,
+        "cash_available_for_debt_service_U": 48644000.0
+      },
+      "additional_upfront_capital_U": 0,
+      "fixed_reference_bond": {
+        "operating_coverage": 10.248033707865169,
+        "cash_after_debt_before_reserve_U": 43897333.333333336,
+        "operating_funding_gap_U": 0,
+        "debt_gap_before_reserve_U": 0,
+        "debt_reserve_draw_U": 0,
+        "closing_debt_reserve_U": 2373333.3333333335,
+        "uncovered_debt_payment_U": 0,
+        "funding_gap_after_debt_reserve_before_working_cash_U": 0,
+        "cash_after_service_positive_U": 43897333.333333336
+      }
+    },
+    "capital_double": {
+      "operation": {
+        "visitor_capacity": {
+          "caps_arrivals_year": {
+            "beds": 1161.607142857143,
+            "travel": 1500,
+            "training": 1600,
+            "arena": 3000.0
+          },
+          "limiting_arrivals_year": 1161.607142857143,
+          "usable_guest_nights": 16262.5,
+          "professional_guest_nights": 2000,
+          "professional_arena_participant_hours": 12000
+        },
+        "realized_visitors_year": 1000,
+        "visitor_nights_year": 14000.0,
+        "onsite_receipts_U": 14000000.0,
+        "rights_receipts_U": 20000000.0,
+        "sponsorship_receipts_U": 5000000.0,
+        "total_receipts_U": 39000000.0,
+        "variable_cash_cost_U": 18400000.0,
+        "fixed_cash_cost_U": 8400000.0,
+        "installed_capital_U": 240000000.0,
+        "replacement_U": 9000000.0,
+        "pre_tax_cash_U": 3200000.0,
+        "tax_allowance_U": 640000.0,
+        "cash_available_for_debt_service_U": 2560000.0
+      },
+      "additional_upfront_capital_U": 120000000.0,
+      "fixed_reference_bond": {
+        "operating_coverage": 0.5393258426966292,
+        "cash_after_debt_before_reserve_U": -2186666.666666667,
+        "operating_funding_gap_U": 0,
+        "debt_gap_before_reserve_U": 2186666.666666667,
+        "debt_reserve_draw_U": 2186666.666666667,
+        "closing_debt_reserve_U": 186666.6666666665,
+        "uncovered_debt_payment_U": 0.0,
+        "funding_gap_after_debt_reserve_before_working_cash_U": 0.0,
+        "cash_after_service_positive_U": 0
+      }
+    }
+  },
+  "break_even": {
+    "combined_media_and_sponsor_receipts_before_debt_U": 10166666.666666668,
+    "combined_media_and_sponsor_receipts_to_pay_reference_debt_U": 20055555.555555556,
+    "rights_audience_equivalents_before_debt": 258333.3333333334,
+    "rights_audience_equivalents_to_pay_debt": 752777.7777777778
+  },
+  "financing_sensitivity": {
+    "0.02_10": {
+      "principal_limits_U": {
+        "operating_cash": 42637336.82962981,
+        "investor_demand": 60000000.0,
+        "total_uses": 135232102.24427694
+      },
+      "gross_principal_U": 42637336.82962981,
+      "annual_service_U": 4746666.666666666,
+      "debt_service_reserve_U": 2373333.333333333,
+      "issuance_cost_U": 852746.7365925962,
+      "net_proceeds_for_capital_and_working_cash_U": 39411256.759703875,
+      "other_funding_required_U": 85588743.24029611,
+      "rate_real": 0.02,
+      "years": 10,
+      "coverage_target": 1.5,
+      "first_year": {
+        "payment": 4746666.666666666,
+        "interest": 852746.7365925962,
+        "principal_repaid": 3893919.9300740696,
+        "closing_debt": 38743416.899555735
+      },
+      "sources_minus_uses_U": -1.0011717677116394e-08
+    },
+    "0.05_4": {
+      "principal_limits_U": {
+        "operating_cash": 16831445.05975734,
+        "investor_demand": 60000000.0,
+        "total_uses": 148987939.75876752
+      },
+      "gross_principal_U": 16831445.05975734,
+      "annual_service_U": 4746666.666666667,
+      "debt_service_reserve_U": 2373333.3333333335,
+      "issuance_cost_U": 336628.90119514684,
+      "net_proceeds_for_capital_and_working_cash_U": 14121482.82522886,
+      "other_funding_required_U": 110878517.17477114,
+      "rate_real": 0.05,
+      "years": 4,
+      "coverage_target": 1.5,
+      "first_year": {
+        "payment": 4746666.666666668,
+        "interest": 841572.2529878671,
+        "principal_repaid": 3905094.4136788007,
+        "closing_debt": 12926350.64607854
+      },
+      "sources_minus_uses_U": 1.6298145055770874e-09
+    },
+    "0.05_10": {
+      "principal_limits_U": {
+        "operating_cash": 36652501.797197245,
+        "investor_demand": 60000000.0,
+        "total_uses": 136575047.7061598
+      },
+      "gross_principal_U": 36652501.797197245,
+      "annual_service_U": 4746666.666666667,
+      "debt_service_reserve_U": 2373333.3333333335,
+      "issuance_cost_U": 733050.0359439449,
+      "net_proceeds_for_capital_and_working_cash_U": 33546118.427919965,
+      "other_funding_required_U": 91453881.57208002,
+      "rate_real": 0.05,
+      "years": 10,
+      "coverage_target": 1.5,
+      "first_year": {
+        "payment": 4746666.666666667,
+        "interest": 1832625.0898598623,
+        "principal_repaid": 2914041.5768068046,
+        "closing_debt": 33738460.22039045
+      },
+      "sources_minus_uses_U": -9.778887033462524e-09
+    },
+    "0.1_10": {
+      "principal_limits_U": {
+        "operating_cash": 29166211.86174489,
+        "investor_demand": 60000000.0,
+        "total_uses": 139101048.50373006
+      },
+      "gross_principal_U": 29166211.86174489,
+      "annual_service_U": 4746666.666666666,
+      "debt_service_reserve_U": 2373333.333333333,
+      "issuance_cost_U": 583324.2372348978,
+      "net_proceeds_for_capital_and_working_cash_U": 26209554.29117666,
+      "other_funding_required_U": 98790445.70882332,
+      "rate_real": 0.1,
+      "years": 10,
+      "coverage_target": 1.5,
+      "first_year": {
+        "payment": 4746666.666666667,
+        "interest": 2916621.1861744896,
+        "principal_repaid": 1830045.4804921774,
+        "closing_debt": 27336166.381252714
+      },
+      "sources_minus_uses_U": -1.1990778148174286e-08
+    },
+    "0.05_20": {
+      "principal_limits_U": {
+        "operating_cash": 59153958.42592313,
+        "investor_demand": 60000000.0,
+        "total_uses": 132995884.62660909
+      },
+      "gross_principal_U": 59153958.42592313,
+      "annual_service_U": 4746666.666666667,
+      "debt_service_reserve_U": 2373333.3333333335,
+      "issuance_cost_U": 1183079.1685184627,
+      "net_proceeds_for_capital_and_working_cash_U": 55597545.924071334,
+      "other_funding_required_U": 69402454.07592866,
+      "rate_real": 0.05,
+      "years": 20,
+      "coverage_target": 1.5,
+      "first_year": {
+        "payment": 4746666.666666667,
+        "interest": 2957697.921296157,
+        "principal_repaid": 1788968.74537051,
+        "closing_debt": 57364989.680552624
+      },
+      "sources_minus_uses_U": 9.313225746154785e-10
+    }
+  },
+  "investor_demand_sensitivity": {
+    "10000000.0": {
+      "principal_limits_U": {
+        "operating_cash": 36652501.797197245,
+        "investor_demand": 10000000.0,
+        "total_uses": 136575047.7061598
+      },
+      "gross_principal_U": 10000000.0,
+      "annual_service_U": 1295045.7496545669,
+      "debt_service_reserve_U": 647522.8748272834,
+      "issuance_cost_U": 200000.0,
+      "net_proceeds_for_capital_and_working_cash_U": 9152477.125172716,
+      "other_funding_required_U": 115847522.87482728,
+      "rate_real": 0.05,
+      "years": 10,
+      "coverage_target": 1.5,
+      "first_year": {
+        "payment": 1295045.7496545669,
+        "interest": 500000.0,
+        "principal_repaid": 795045.7496545669,
+        "closing_debt": 9204954.250345433
+      },
+      "sources_minus_uses_U": -2.7939677238464355e-09
+    },
+    "60000000.0": {
+      "principal_limits_U": {
+        "operating_cash": 36652501.797197245,
+        "investor_demand": 60000000.0,
+        "total_uses": 136575047.7061598
+      },
+      "gross_principal_U": 36652501.797197245,
+      "annual_service_U": 4746666.666666667,
+      "debt_service_reserve_U": 2373333.3333333335,
+      "issuance_cost_U": 733050.0359439449,
+      "net_proceeds_for_capital_and_working_cash_U": 33546118.427919965,
+      "other_funding_required_U": 91453881.57208002,
+      "rate_real": 0.05,
+      "years": 10,
+      "coverage_target": 1.5,
+      "first_year": {
+        "payment": 4746666.666666667,
+        "interest": 1832625.0898598623,
+        "principal_repaid": 2914041.5768068046,
+        "closing_debt": 33738460.22039045
+      },
+      "sources_minus_uses_U": -9.778887033462524e-09
+    },
+    "200000000.0": {
+      "principal_limits_U": {
+        "operating_cash": 36652501.797197245,
+        "investor_demand": 200000000.0,
+        "total_uses": 136575047.7061598
+      },
+      "gross_principal_U": 36652501.797197245,
+      "annual_service_U": 4746666.666666667,
+      "debt_service_reserve_U": 2373333.3333333335,
+      "issuance_cost_U": 733050.0359439449,
+      "net_proceeds_for_capital_and_working_cash_U": 33546118.427919965,
+      "other_funding_required_U": 91453881.57208002,
+      "rate_real": 0.05,
+      "years": 10,
+      "coverage_target": 1.5,
+      "first_year": {
+        "payment": 4746666.666666667,
+        "interest": 1832625.0898598623,
+        "principal_repaid": 2914041.5768068046,
+        "closing_debt": 33738460.22039045
+      },
+      "sources_minus_uses_U": -9.778887033462524e-09
+    }
+  },
+  "payment_balances": {
+    "0.0": {
+      "liquid_assets_U": 3000000.0,
+      "outstanding_claims_U": 3000000.0,
+      "redemption_paid_U": 7000000.0,
+      "unpaid_redemption_U": 0.0,
+      "illiquid_asset_at_book_U": 0.0,
+      "liquid_shortfall_to_all_claims_U": 0.0,
+      "net_assets_at_book_U": 0.0
+    },
+    "6000000.0": {
+      "liquid_assets_U": 0.0,
+      "outstanding_claims_U": 6000000.0,
+      "redemption_paid_U": 4000000.0,
+      "unpaid_redemption_U": 3000000.0,
+      "illiquid_asset_at_book_U": 6000000.0,
+      "liquid_shortfall_to_all_claims_U": 6000000.0,
+      "net_assets_at_book_U": 0.0
+    }
+  },
+  "fx_cash_U": {
+    "1.0": 15000000.0,
+    "0.7": 12000000.0
+  }
+}

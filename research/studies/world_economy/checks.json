@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 12,
-  "scope": "Three-world economic comparison with industrial process accounts and a broader assessment of distinctive environmental activities. Flight, water and rotating-venue calculations support conditional economic and everyday uses; physical fit, empirical qualification, resident welfare and market demand remain separate.",
+  "stage": 13,
+  "scope": "Three-world economic comparison with industrial accounts, distinctive activities and an early single-community sport/media programme. Conditional venue cash, financing, currency and liquidity examples preserve the distinction between operating receipts, production and financial claims.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -55,7 +55,8 @@
     9,
     10,
     11,
-    12
+    12,
+    13
   ],
   "stages3_4": {
     "focused_check": {
@@ -408,5 +409,39 @@
     "review": "Substantive reading of the full activity report, calculation, tables, comparisons and current synthesis. The assessment separates environmental fit from demand, apparatus pressure budgets from human exposure, chosen rotating-venue fidelity from comfort limits, biological proposals from capacity, and measured public services from wider resident welfare. Equal technology and rotating-array alternatives are retained; no independent-agent review was performed.",
     "source_review": "Nine primary agency/publication or author-produced technical records read at the scopes in distinctive_activities_sources.json, plus twelve identified local context files. Targeted primary PDF text was read for artificial gravity, partial-gravity health and water-wave relations; no figure/image or complete-paper review is claimed. The direct Carrer et al. publisher retrieval failed; cave claims explicitly use the obtained NASA account, without claiming full-paper access. No complete scholarly literature review, clinical assessment or empirical validation of the Open Moon.",
     "distinctive_activities_sha256": "290b9d8e7e628660b36073d746c52ff0b7255aa6a773a8ac92f06fb580773138"
+  },
+  "stage13": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "453 passed in 2.51 seconds on the final model/input/source product. The independent focused run passed all 16 new tests in 0.07 seconds before the final narrative provenance rebinding."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "log": "/tmp/terluna-sports-finance-check.log",
+      "result": "3284 Python tests passed, 20 skipped in 407.52 seconds; 191 JavaScript tests passed. Layer, research/provenance and ensemble checks passed: 1193 files with 0 layer violations, and five protection input hashes verified. Ensemble validation covers workspace integrity, not scientific or manuscript clearance."
+    },
+    "review": "Independent sports-business and financial-accounting reviews identified the smaller starting scale, remote audience channel, professional accommodation and residual travel/training capacities. Accounting review led to explicit gaps before working-cash use, separately reported extra upfront capital and finite break-even domains. All three fixes are implemented. Final independent prose reviews checked the full sports sequence and financial/currency discussion. Revisions clarify the territory of locally supplied training, exclusion of fixed programme costs from variable costs, and the distinction between debt-payment break-even and the underwriting coverage target. The complete report and numerical tables were substantively read; script checks are recorded separately.",
+    "independent_numerical_review": "216 financing cases and 864 fixed-debt stresses passed cash/demand caps, reserve controls and funding conservation; maximum funding residual 1.13e-14. Review was of the algebra and conditional inputs, not empirical business viability.",
+    "limitations": [
+      "No costed pressure-qualified venue, visitor/athlete qualification, event schedule, observed audience, sponsor commitment or empirical demand.",
+      "The inherited visitor capital price came from a 100,000-resident milestone and does not establish the cost of the first community. Host-settlement capital, construction interest/ramp losses, actual tax treatment, equity return and peak replacement costs require separate accounts.",
+      "Reference bond service remains fixed across independent stress years; each starts with a full dedicated reserve. Gaps precede working-cash draws and additional support. Capital doubling needs separate upfront funding.",
+      "Real loan terms and the tax allowance are illustrative. U is a numeraire; no lunar currency, financial institution or future legal regime is adopted.",
+      "No GWP/NWP or planetary debt reduction is added to existing results; the venue cash account includes wages and cannot be treated as value added."
+    ],
+    "numerical_controls": [
+      "Guest capacity preserves the total bed-night allowance after team reservations; training and arena constraints can bind independently. Public demand and capacities remain separate.",
+      "Operator cash reconciles visitor and remote receipts with variable/fixed costs, replacement and the tax allowance. Capital doubling leaves receipts fixed and explicitly records 120 million U of additional upfront uses.",
+      "Gross bond principal obeys coverage, demand and funded-use caps; proceeds reconcile capital, working cash, reserve, fees and other funding. An independent payment schedule amortizes the loan and reproduces its present value.",
+      "Operating stresses retain original debt service and conserve cash, dedicated reserve draws, remaining debt gaps and operating deficits. Remaining gaps precede any working-cash use.",
+      "Break-even media receipts reproduce operating cash and debt-payment thresholds; coverage 1.0 is distinguished from the 1.5 issuance target.",
+      "Redeemable claims preserve book equity while an illiquid diversion exposes redemption shortfalls. Currency changes affect net local receipts and can reverse sign for a local-cost exporter.",
+      "The full result reproduces with named constants and upstream product identity; changed identities are rejected. All 16 preceding economy results retain their hashes.",
+      "Six report spot checks matched the final product: base receipts/cash, bond principal/net proceeds/other funding, media break-even, visitor-interruption reserve, half-media gap and audience-growth receipts/cash."
+    ],
+    "documentation_links": "254 local file links across the new report and five current synthesis/prior-study documents checked; all resolve. Fragment targets and external availability are separate from file-existence checks.",
+    "source_review": "Eight primary issuer, official, monetary or research records read at the targeted scopes in sports_finance_sources.json; six local context hashes checked. The Liberty revenue composition and deferred-revenue passages, official participant-training section, coverage and settlement discussions were inspected. No full filing audit, legal review, literature review or empirical lunar validation.",
+    "sports_finance_sha256": "0c24a5320da8d2cacf973da73e02eda3d110861f21b15c71899673b52b8da699"
   }
 }
