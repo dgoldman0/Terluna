@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 11,
-  "scope": "Three-world economic comparison with mature industry, early infrastructure campaigns, slow-settling production, pressure services and industrial combustion/material-flammability assessment. Physical conservation, evidence under other conditions, proposed applications and qualified economic gains remain separate.",
+  "stage": 12,
+  "scope": "Three-world economic comparison with industrial process accounts and a broader assessment of distinctive environmental activities. Flight, water and rotating-venue calculations support conditional economic and everyday uses; physical fit, empirical qualification, resident welfare and market demand remain separate.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -54,7 +54,8 @@
     8,
     9,
     10,
-    11
+    11,
+    12
   ],
   "stages3_4": {
     "focused_check": {
@@ -376,5 +377,36 @@
       "pressure_advantages": "db6b1c5e602ba8f960974c2e61096b5f64ca5c80ef8fbf9b1d5701cdbf52524f"
     },
     "preserved_port_product_sha256": "6298845b9ddf3f83ce270878a97f0b84ab2664032c5fc9fe05e3d3b50b5b1828"
+  },
+  "stage12": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "437 passed in 2.46 seconds, including 16 new activity-reference tests. The new module also passed its initial focused run: 16 passed in 0.06 seconds."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "log": "/tmp/terluna-distinctive-activities-check.log",
+      "result": "3268 Python tests passed, 20 skipped in 407.56 seconds; 191 JavaScript tests passed. Layer, research/provenance and ensemble checks passed: 1191 files with 0 layer violations, and five protection input hashes verified. Ensemble validation covers workspace integrity, not scientific or manuscript clearance."
+    },
+    "limitations": [
+      "The 301 K dry gas comparison does not refresh regional weather, old vehicle concepts, ecology or human comfort.",
+      "Rotating-venue fidelity tolerances are chosen illustrative values, not comfort limits, a cost model or a restriction on alternative array layouts.",
+      "Linear waves, ballistic motion and ideal flight omit real vehicle/participant dynamics, breaking waves and weather. Apparatus pressure budgets are not human diving limits.",
+      "No facility capacity, willingness to pay, market share, therapeutic benefit or dependable engineered living-host capacity is established. Existing GWP/NWP and debt accounts are unchanged."
+    ],
+    "numerical_controls": [
+      "Flight ratios agree with dimensional lift, drag, work per distance and ideal induced-hover calculations; equal-environment and density-only controls distinguish speed/power savings from fixed-speed drag.",
+      "Ballistic return position and mechanical energy close for both gravities. Prescribed takeoff speed is distinct from a prediction of effort or biomechanics.",
+      "Rotating geometry meets all selected fidelity constraints with one active boundary; a smaller radius violates that boundary. Axial-motion and zero-extent controls retain the vector Coriolis distinction. Natural rotation uses the sidereal month.",
+      "Hydrostatic pressure reconstructs both absolute-pressure budgets; equal-ambient control isolates gravity and confirms the higher lunar surface pressure reduces available depth.",
+      "Gravity-wave deep/shallow limits, wavelength closure and gravity scaling pass. No breaking waves or natural wave climate is inferred.",
+      "The complete result reproduces with bound source/product identities and named shared constants. Changed upstream identity is rejected. All 15 preceding economy result products retain their SHA-256 identities.",
+      "Reported rounded flight, water-depth and rotating-venue values were checked against the stored result; all six spot checks passed. All twelve local source-context hashes match."
+    ],
+    "documentation_links": "253 local file links across the new report and four current research/domain synthesis documents checked; all resolve. Fragment identity and external-link availability are separate from this file-existence check.",
+    "review": "Substantive reading of the full activity report, calculation, tables, comparisons and current synthesis. The assessment separates environmental fit from demand, apparatus pressure budgets from human exposure, chosen rotating-venue fidelity from comfort limits, biological proposals from capacity, and measured public services from wider resident welfare. Equal technology and rotating-array alternatives are retained; no independent-agent review was performed.",
+    "source_review": "Nine primary agency/publication or author-produced technical records read at the scopes in distinctive_activities_sources.json, plus twelve identified local context files. Targeted primary PDF text was read for artificial gravity, partial-gravity health and water-wave relations; no figure/image or complete-paper review is claimed. The direct Carrer et al. publisher retrieval failed; cave claims explicitly use the obtained NASA account, without claiming full-paper access. No complete scholarly literature review, clinical assessment or empirical validation of the Open Moon.",
+    "distinctive_activities_sha256": "290b9d8e7e628660b36073d746c52ff0b7255aa6a773a8ac92f06fb580773138"
   }
 }

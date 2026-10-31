@@ -1,0 +1,139 @@
+{
+  "source_admission": "Primary agency records and author-produced technical texts, read at the stated scopes. Physical calculations, proposed activities and conditional commercial demand are distinct. No external papers or datasets are redistributed.",
+  "sources": [
+    {
+      "id": "artificial_gravity",
+      "title": "Bukley, Paloski and Clement: Physics of Artificial Gravity",
+      "url": "https://ntrs.nasa.gov/api/citations/20070001008/downloads/20070001008.pdf",
+      "reading_scope": "Introduction and sections 2.1-2.3 on centrifugal acceleration, radial gradient and directional Coriolis effects read from primary PDF text. No whole-chapter or human-comfort validation; malformed text extraction of the rpm conversion is not used.",
+      "use": "Rotating comparisons use a=omega^2 R and the vector Coriolis relation. Venue tolerances, geometry and all numerical comparisons are this study's illustrative assumptions.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "nasa_argos",
+      "title": "NASA Johnson Space Center: EVA Systems, Active Response Gravity Offload System",
+      "url": "https://www.nasa.gov/reference/jsc-eva-systems/",
+      "reading_scope": "ARGOS description, payload offload mechanism and operational-volume passages read. No performance validation or assumed limit on future simulator scale.",
+      "use": "Earth already offers partial weight offload for people and machinery; supporting one payload does not change gravity throughout its fluids, unrestrained props and surrounding ecosystem.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "nasa_parabolic",
+      "title": "NASA: Parabolic Flight",
+      "url": "https://www.nasa.gov/mission/parabolic-flight/",
+      "reading_scope": "Description of the reduced-gravity phase and partial-gravity trajectory read; no aircraft technical manual or exact lunar-parabola duration adopted.",
+      "use": "Whole experiment volumes can experience reduced gravity on Earth for short intervals; sustained site-scale operation is a different service.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "nasa_dragonfly",
+      "title": "NASA: Dragonfly Spacecraft and Instruments",
+      "url": "https://science.nasa.gov/mission/dragonfly/spacecraft-and-instruments/",
+      "reading_scope": "Flying on Saturn's Moon passage read. No mission timetable, detailed vehicle performance or transfer of Titan's calm weather to the Open Moon.",
+      "use": "Dense air plus low gravity benefits flight elsewhere too; lunar advantages concern the combined breathable, warm, inhabited environment and location.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "mit_gravity_waves",
+      "title": "Rosales: MIT 18.376 Problem Set 2 answers, Spring 2023",
+      "url": "https://math.mit.edu/classes/18.376/ProblemSets/TheAnswers/ProblemSet202302ans.pdf",
+      "reading_scope": "Section 3 governing assumptions and dispersion-relation derivation, Equation 3.9, read from primary teaching text. No wave-making hardware or breaking-wave validation.",
+      "use": "Linear inviscid gravity-wave relation omega^2=g k tanh(k h), used for same-geometry timing comparisons.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "mit_capillarity",
+      "title": "Georgi: The Physics of Waves, Chapter 11, MIT OCW edition",
+      "url": "https://ocw.mit.edu/courses/8-03sc-physics-iii-vibrations-and-waves-fall-2016/ef731c1b91d77a6db003f6c27e300d25_MIT8_03SCF16_Textbook.pdf",
+      "reading_scope": "Equations 11.137-11.140 and gravity/surface-tension crossover explanation read from primary teaching text. No complete textbook review.",
+      "use": "Capillary crossover length scales as sqrt(surface tension/(density*g)); a larger crossover does not imply arbitrarily large free liquid shapes.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "nist_weathering",
+      "title": "Rostampour et al.: Evaluating the environmental factors on microplastic generation: an accelerated weathering study",
+      "url": "https://www.nist.gov/publications/evaluating-environmental-factors-microplastic-generation-accelerated-weathering-study",
+      "reading_scope": "NIST primary publication record and abstract, published 2025-03-05, read. Full paper, experimental spectral distribution and data unexamined.",
+      "use": "PET weathering depends on UV, temperature and humidity together. No lifespan multiplier or transfer of an erythemal UV index to industrial polymers.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "nasa_lunar_cave",
+      "title": "NASA: New Evidence Adds to Findings Hinting at Network of Caves on Moon",
+      "url": "https://science.nasa.gov/solar-system/new-evidence-adds-to-findings-hinting-at-network-of-caves-on-moon/",
+      "reading_scope": "Agency account of the Mini-RF analysis read, including the inferred extension exceeding 200 feet and unknown full extent. Carrer et al. Nature Astronomy direct retrieval failed; no full paper or cave-stability assessment claimed.",
+      "use": "Authentic geological field sites support distinctive activities, but a radar-inferred conduit does not validate city-size stable caverns.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "jones_partial_gravity",
+      "title": "Jones: The Partial Gravity of the Moon and Mars Appears Insufficient to Maintain Human Health, ICES-2021-142",
+      "url": "https://ntrs.nasa.gov/api/citations/20210019591/downloads/ICES-2021-142.pdf",
+      "reading_scope": "Abstract and introduction read. The paper synthesizes indirect evidence; no clinical validation or current exhaustive medical review.",
+      "use": "Lower mechanical support loads do not establish therapeutic benefit or long-term health. Its suggested gravity threshold is not adopted as a measured human limit.",
+      "accessed": "2026-10-31"
+    }
+  ],
+  "local_context": [
+    {
+      "path": "research/studies/sky_fleet/README.md",
+      "sha256": "8dc184bbe4eb8e70dfbe0b58b7e9ec3c59a6764ab4ade3ca74ffb532ccc8c309",
+      "use": "Vehicle concepts, flight mechanics and wind/traffic qualifications; old fleet design screens are not new 301 K vehicle qualification."
+    },
+    {
+      "path": "habitation/low_gravity/README.md",
+      "sha256": "f5ddb3fbec6ddd7919f870cba0f7b8ffedbaddc9edf0b26e107b3a9c4848617d",
+      "use": "Ballistic motion, traction, inertia and unresolved long-term human performance."
+    },
+    {
+      "path": "research/studies/world_economy/amenities.md",
+      "sha256": "2e508aca733598072592e281f079edfb88bc6132e8f4161d50001e2b52bc9f86",
+      "use": "Hybrid-region area, resident welfare, six travel directions and accounting against double counting."
+    },
+    {
+      "path": "provisioning/aerophytes.md",
+      "sha256": "c88e52fb48c5e2c8045624c47644e7da6ecc565d007e0f3647f7151755b1daa0",
+      "use": "Possible agricultural/economic roles and host/habitation capacity; engineered living hosts are conditional."
+    },
+    {
+      "path": "research/studies/uv_biology/README.md",
+      "sha256": "e0767f4ceb6ab453be4f3b128795b1a5b66bb8b9604d0bc7cbd84b68a02dc04f",
+      "use": "Selected UV filtering, retained UVA and distinction between biological action spectra and general material damage."
+    },
+    {
+      "path": "research/studies/living_light/README.md",
+      "sha256": "7a1972f3d9ba5d253d67b44b76e713016c3a28342847a8b15dae6ced17e1e0da",
+      "use": "Living light as conditional biological design; natural contemporary light levels do not establish path illumination."
+    },
+    {
+      "path": "research/studies/daily_life/README.md",
+      "sha256": "36a2ca8ea52d0c72e0c7f25f49c31d072787cf6b222beebe9b204838a4c069c4",
+      "use": "Long day/night and regional experience; inherited climate details are not requalified for 301 K."
+    },
+    {
+      "path": "research/studies/world_economy/mature_industry.md",
+      "sha256": "7656801339fc6484760efd4305e9a8a7f0f5b43dc9e94be2602506838bfab16c",
+      "use": "Qualified product-cycle comparison is needed before claiming industrial advantage."
+    },
+    {
+      "path": "research/studies/world_economy/slow_settling.md",
+      "sha256": "0bd2019b3d66746431882fb7002f94ae4d58c336bb5e5129d708064cbbf79cd6",
+      "use": "Suspension benefits and recovery costs; no general gravity premium."
+    },
+    {
+      "path": "research/studies/world_economy/industrial_combustion.md",
+      "sha256": "475c0f223acd4930784fc23409a9939d8ebcdb18331718d1458b168ec3ff30f4",
+      "use": "Material-specific oxygen/diluent opportunity and limits on fire-loss claims."
+    },
+    {
+      "path": "research/studies/world_economy/results/comparison.json",
+      "sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "use": "Existing gross/net product reference kept unchanged."
+    },
+    {
+      "path": "geography/README.md",
+      "sha256": "4955ab4382bf580f2198e6b385f2b61ebebb4b0f7c71092b5f59c2e1b09647d1",
+      "use": "Managed fresh seas, freshwater shores and slower drainage/settling; no new assumption of water clarity or nutrient sufficiency."
+    }
+  ]
+}

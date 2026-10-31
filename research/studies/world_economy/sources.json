@@ -250,5 +250,9 @@
   "industrial_combustion_catalogue": {
     "path": "industrial_combustion_sources.json",
     "scope": "Industrial material-flammability evidence and audit, composition and gravity effects, combustion/exhaust and purge consequences. Exact source access limits are retained."
+  },
+  "distinctive_activities_catalogue": {
+    "path": "distinctive_activities_sources.json",
+    "scope": "Primary artificial-gravity, simulator, flight, water-wave, weathering and geological evidence; local ecological/amenity context; exact reading limits and conditional activity proposals."
   }
 }

@@ -117,6 +117,12 @@ propagation-resistance opportunity, subject to lunar-gravity and assembly tests.
 separates oxygen supply, burner/exhaust composition and nitrogen-purge duties; potential gains
 in material choice or accepted yield are not assigned a general economic premium.
 
+The [distinctive-activities study](../research/studies/world_economy/distinctive_activities.md)
+assesses flight, performance, aquatic spaces, hybrid gardens, living aerial communities and
+physical testing across the combined environment. Natural partial gravity over extensive
+landscapes is its strongest prospective advantage; Earth simulators and rotating array venues
+remain explicit competitors. Resident welfare, recorded production and export cash are separate.
+
 ## Aerophyte crops, living area and services
 
 The [31 October assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef

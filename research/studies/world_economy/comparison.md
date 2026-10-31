@@ -126,6 +126,8 @@ The [pressure-benefits study](pressure_advantages.md) identifies recurring infra
 
 The [industrial-combustion assessment](industrial_combustion.md) develops the atmosphere's material-specific nitrogen-dilution opportunity. Existing fire calculations do not qualify industrial assemblies at 1.2 atm and lunar gravity. The new oxygen-feed, methane-exhaust and nitrogen-purge balances identify process costs and possible savings without changing the economic totals or assigning a general fire-loss reduction.
 
+The [distinctive-activities assessment](distinctive_activities.md) identifies a broader advantage in large, continuous spaces combining low gravity, breathable air, water and living landscapes. Flight, physical performance, aquatic facilities, aerial gardens and large testing campuses can serve residents and outside customers. Rotating array facilities can reproduce partial gravity, with scale and motion affecting the comparison. These activities develop the existing sector possibilities; they do not add another copy of amenity output or establish export profits.
+
 ## What changes the conclusion
 
 The main sensitivities are different in kind. Source-site technology, nitrogen grade and water inventory determine construction expenditure. Realised sector activity and demand determine gross product. Ordinary capital composition and the prices/lives of engineered assets determine net product. Ownership, debt age, rates and the share financed determine what residents retain.

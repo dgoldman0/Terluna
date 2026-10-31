@@ -1,0 +1,32 @@
+{
+  "schema": "terluna.research.distinctive-activities-inputs/1",
+  "evidence": "Classical scaling and reference geometry, with selected design conditions. No qualified vehicle, human tolerance, habitat design, wave climate, biological capacity or market forecast.",
+  "reading_rule": "SI units; matched dry 301 K binary N2/O2 atmospheres. Compare equal mass, geometry and stated coefficients. Rotating-venue tolerances are chosen for illustration; the Moon comparison assumes a smooth spherical field and gives a maximum Coriolis magnitude. Water pressure is an apparatus constraint, never a human exposure limit. No monetary output is added.",
+  "products": {
+    "research/studies/world_economy/results/pressure_advantages.json": {
+      "schema": "terluna.research.pressure-advantages/1",
+      "sha256": "db6b1c5e602ba8f960974c2e61096b5f64ca5c80ef8fbf9b1d5701cdbf52524f",
+      "use": "environment.reference_Pa, locked_Pa, temperature_K and binary_composition_corrected_density_ratio"
+    }
+  },
+  "vertical_takeoff_speed_m_s": 2.5,
+  "venue": {
+    "height_m": 50.0,
+    "circumferential_arc_width_m": 1000.0,
+    "transverse_speed_m_s": 10.0,
+    "gravity_tolerance_fraction": 0.01,
+    "direction_tolerance_degrees": 2.0,
+    "coriolis_tolerance_fraction": 0.1,
+    "basis": "Illustrative freely multidirectional venue. Axial width does not curve around the spin axis and axial velocity has no Coriolis term. Alternative layouts can relax requirements; no habitat mass or price is inferred."
+  },
+  "water": {
+    "density_kg_m3": 1000.0,
+    "target_absolute_pressure_Pa": 300000.0,
+    "basis": "Chosen constant reference density and arbitrary apparatus absolute-pressure budget, equal on both worlds; not a water-property fit at 301 K or diving limit."
+  },
+  "waves": {
+    "wavelength_m": 10.0,
+    "depth_m": 20.0,
+    "basis": "Infinitesimal gravity waves, still water, equal wavelength and depth. No wind, viscosity, breaking, currents or surface tension; no surf-ride or safety prediction."
+  }
+}
