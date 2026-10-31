@@ -1,0 +1,56 @@
+{
+  "schema": "terluna.research.partial-gravity-inputs/1",
+  "evidence": "Reproducible physical screening with paper-tabulated material inputs and explicitly hypothetical process constraints. No partial-gravity experiment, validated product improvement or economic premium.",
+  "sources": {
+    "sic_epoxy": {
+      "title": "Improved Wear-Resistant Performance of Epoxy Resin Composites Using Ceramic Particles",
+      "doi": "10.3390/polym14020333",
+      "url": "https://www.mdpi.com/2073-4360/14/2/333",
+      "full_text_url": "https://pdfs.semanticscholar.org/7409/1e04de5d8aa1aabc5ea3aa2d15c440766411.pdf",
+      "accessed": "2026-10-31",
+      "access_scope": "Full 17-page primary PDF retrieved; targeted reading of sections 2.1 and 4.1 and Table 4. Table 4 labels its entries theoretical data for a Stokes settling calculation. Source bytes are not locally pinned; this product hashes the explicit numerical transcription.",
+      "source_bytes_sha256": null,
+      "experimental_context": "Kemapoxy 150 JM; medium SiC below 25 micrometres and fine SiC below 90 nm, 3-18 wt%; mixing for 4 minutes at 500 rpm, heating at 90 C for 1 minute, hydraulic pressing for 8 hours, final specimens 2 mm thick. Section 4.1 reports room-temperature settling images, about 45-minute pot life and nearly complete settling by 35 minutes. These conditions do not establish the illustrative 10-mm/100-second bubble-removal process."
+    }
+  },
+  "paper_tabulated_material_inputs": {
+    "source_id": "sic_epoxy",
+    "locator": "Table 4",
+    "evidence": "The paper's theoretical calculation inputs, not new measurements. Fluid and particle densities are tabulated; the viscosity's measurement temperature is not specified. The 25-micrometre quantity is particle diameter, so the model uses a 12.5-micrometre radius.",
+    "values": {
+      "fluid_density_kg_m3": 1170,
+      "particle_density_kg_m3": 3210,
+      "dynamic_viscosity_Pa_s": 0.029,
+      "particle_diameter_m": 2.5e-05
+    }
+  },
+  "illustrative_casting_process": {
+    "evidence": "Hypothetical geometry, bubble population, surface tension, uniformity tolerance and independently fixed liquid-processing interval. The cited paper does not supply this recipe, bubble size, surface tension or 100-second immobilization time.",
+    "values": {
+      "bubble_radius_m": 0.0001,
+      "escape_depth_m": 0.01,
+      "liquid_interval_s": 100,
+      "particle_drift_limit_m": 0.0005,
+      "surface_tension_N_m": 0.03
+    }
+  },
+  "long_interval_sensitivity": {
+    "duration_s": 2700,
+    "evidence": "Hypothetical 45-minute hold at the same constant viscosity. The duration resembles the reported pot life, but viscosity evolves during curing; this is not a simulation of the published cure cycle. Failure of the three tested gravity environments does not mean that every intermediate gravity fails."
+  },
+  "illustrative_spin_cast_geometry": {
+    "focal_length_m": 20,
+    "aperture_radius_m": 5,
+    "evidence": "Hypothetical fixed-focus, fixed-aperture comparison, not a transcription of a particular telescope. The equilibrium relation is omega^2=g/(2f); identical geometry/material gives a rotation-load proxy proportional to omega^2."
+  },
+  "assumptions": [
+    "Dilute, isolated spherical particles and bubbles in a Newtonian quiescent liquid; constant viscosity, radii, densities and surface tension; gas density neglected.",
+    "Bubble surface immobilized for the Stokes calculation. A clean mobile interface can change rise speed; no surfactant, concentration, wall, yield-stress or non-Newtonian correction is fitted.",
+    "All screened bubbles begin at the specified depth at time zero. Arrival at an accessible surface does not establish film rupture or gas escape; late bubble formation can invalidate clearance.",
+    "Particle uniformity is screened only by a displacement tolerance, not a measured concentration or finished-product property.",
+    "The same-mobility Earth controls must be considered. When both motions scale with g times the integral of inverse viscosity, freely changing the liquid interval or viscosity can erase the apparent fixed-cycle advantage.",
+    "The 100-second interval must be independently required by chemistry, filling, thermal history or another process constraint before it can support a location advantage. Optimize terrestrial degassing, pressure, rheology, particle size and curing controls in any comparison.",
+    "Ideal microgravity is represented by exactly zero acceleration. Residual acceleration, surface-driven transport and active bubble-removal systems are omitted.",
+    "The rotating-liquid screen assumes uniform axial gravity, a free surface in equilibrium and negligible capillary/edge effects. A solid export optic would additionally require controlled solidification, finishing and metrology; rotating orbital factories remain competitors."
+  ]
+}

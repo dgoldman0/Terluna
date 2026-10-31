@@ -938,7 +938,7 @@
     },
     {
       "topic": "world_economy",
-      "condition": "conditional_three_world_economy_with_hybrid_amenities_reciprocal_tourism_early_income_and_finite_mining_2026_10_31; reproducible_accounts; no_market_forecast_export_permission_or_financing_plan_adopted",
+      "condition": "conditional_three_world_economy_with_enclosed_community_exports_and_partial_gravity_process_hypotheses_2026_10_31; reproducible_accounts; no_market_forecast_export_permission_or_financing_plan_adopted",
       "material": [
         "studies/world_economy/README.md",
         "studies/world_economy/inputs.json",
@@ -953,7 +953,14 @@
         "studies/world_economy/amenities.md",
         "studies/world_economy/development.md",
         "studies/world_economy/amenities_inputs.json",
-        "studies/world_economy/results/amenities.json"
+        "studies/world_economy/results/amenities.json",
+        "studies/world_economy/early_exports.md",
+        "studies/world_economy/early_exports_inputs.json",
+        "studies/world_economy/results/early_exports.json",
+        "studies/world_economy/manufacturing.md",
+        "studies/world_economy/manufacturing_sources.md",
+        "studies/world_economy/partial_gravity_inputs.json",
+        "studies/world_economy/results/partial_gravity.json"
       ],
       "unresolved": [
         "Source-site energy, ore processing and bulk capture architecture; future unit prices and full construction/settlement timeline, including renewal funding.",
@@ -961,9 +968,11 @@
         "Array workloads, realised demand, export capacity, ownership and long-term institutions; no market-clearing or financing feasibility is established.",
         "Revised301K climate and biological requirements are not yet propagated through every inherited physical input.",
         "Hybrid maintenance and peak visitor capacity; buyer demand and independent source of project cash; asset commissioning and replacement before occupancy.",
-        "Surveyed exportable lunar reserves after future use and protection, nutrient-retention performance/cost, and actual depletion valuation."
+        "Surveyed exportable lunar reserves after future use and protection, nutrient-retention performance/cost, and actual depletion valuation.",
+        "Product-specific curing, gas escape and particle mobility; qualified partial-gravity manufacturing compared with optimized Earth processes and rotating orbital factories.",
+        "Enclosed-community visitor demand and engineering costs, permanent resident funding and a dated commissioning schedule; new facility capital must be reconciled with mature ordinary assets."
       ],
-      "next_session_task": "Resolve commissioning and reserve maps against independently funded customer demand; size hybrid services and transport capacity; replace topdown income/cash fractions and synthetic mining allowances with operating businesses and resource budgets."
+      "next_session_task": "Identify and measure one constrained composite recipe and one spin-cast component; compare quality and delivered cost across gravity and optimized controls. Couple dated tourism destinations and qualified factories to complete resident services, capital and independent customer demand."
     }
   ]
 }

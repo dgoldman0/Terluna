@@ -78,6 +78,13 @@ reciprocal travel among all three worlds. These attribute existing output. The
 and lunar earnings, future-resource reservations for lunar mining, and debt reduction from
 independent surplus. A 5% contribution under the stated phased, 0.1%-real scenario retires
 array debt during construction; the much larger lunar import bill remains demanding.
+
+The [early-community account](../research/studies/world_economy/early_exports.md) sizes
+tourism-led export businesses before the open environment exists. It records customer and
+visitor capacity, new facility finance, replacement and negative operating cases. The
+[manufacturing investigation](../research/studies/world_economy/manufacturing.md) identifies
+conditional advantages of finite gravity while retaining Earth process controls and
+rotating array factories as competitors. These remain hypotheses and conditional accounts.
 No commissioning dates, export reserves or financing institutions are adopted.
 
 ## Aerophyte crops, living area and services

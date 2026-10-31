@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 5,
-  "scope": "Three-world economic comparison extended with hybrid amenities, reciprocal tourism, phased independent income and reserve-constrained early lunar mining; conditional models, not adopted export or finance plans.",
+  "stage": 6,
+  "scope": "Three-world comparison extended with enclosed-community tourism and manufacturing facility accounts, plus idealised partial-gravity manufacturing hypotheses; conditional calculations, not adopted market forecasts or factory designs.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -48,7 +48,8 @@
     2,
     3,
     4,
-    5
+    5,
+    6
   ],
   "stages3_4": {
     "focused_check": {
@@ -97,5 +98,34 @@
       "Full scholarly source review and visual PDF verification were not performed."
     ],
     "amenities_sha256": "ac34679a5eddecaef39e81de13d8ce0efa5a14bd5a22558ce6ccd3129fd8c48c"
+  },
+  "stage6": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "193 passed in 1.48 seconds on the final model and input files."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3024 passed, 20 skipped in 403.07s (0:06:43); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1163 files, 0 violations.",
+      "log": "/tmp/terluna-early-exports-check.log"
+    },
+    "numerical_controls": [
+      "Origin customer budgets, route/bed/life-support capacity and factory orders; destination fares excluded; absent factories remove capital as well as sales.",
+      "Facility GVA/NVA/cash, sponsor equity and loan obligations, renewal after loan retirement, negative funding gaps and allocation closure across 16 milestone cases.",
+      "Casting radius conversion, Stokes acceleration window, zero-gravity failure of buoyant clearance, Reynolds/Bond quantities, identical Earth mobility under adjusted immobilization time or viscosity, long-hold and late-bubble failures.",
+      "Spin-cast fixed-focus geometry and rotation-load ratios; shared constants; model/input identities and complete result reproduction."
+    ],
+    "review": "Substantive reading of both reports and their synthesis; independent economic, physical and editorial reviews. Reviews corrected a provisional diameter/radius arithmetic factor before implementation, distinguished physical constraints from optimized alternatives, and made sponsor permission and unmodelled equity dividends explicit. Source reading scopes remain recorded individually; no full scholarly review is claimed.",
+    "documentation_links": "47 local links in the five reviewed study reports/README resolve; mathematical brackets excluded from the link scan after inspection of a false positive.",
+    "limitations": [
+      "No qualified partial-gravity manufacturing product, empirical lunar process gain, industrial cost advantage or export demand established.",
+      "Casting duration, bubble sizes, geometry and tolerance are illustrative constraints; the cited material table does not establish the assumed 100-second recipe. Optimized terrestrial controls and orbital centrifuges remain competitors.",
+      "Early settlement milestones and facility prices are scenarios. Permanent resident budgets, mandatory equity distributions, calendar commissioning and integration with mature ordinary capital remain unresolved.",
+      "No source-byte pinning for external papers, full scholarly source review, experimental validation or exact-build PDF/figure inspection."
+    ],
+    "early_exports_sha256": "36097cc25ad5025327c87d9d6a7fd297c2cf08d89a1f82dd470f0749a5814d2c",
+    "partial_gravity_sha256": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297",
+    "original_comparison_sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
   }
 }

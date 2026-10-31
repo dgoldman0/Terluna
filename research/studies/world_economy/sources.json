@@ -111,5 +111,124 @@
       "source": "resources/industry.md; provisioning/population.md; habitation/README.md; research/decisions.md; food_systems/distributions/conservation/carbon_cycle/aerophytes studies",
       "reading_scope": "Targeted local design audit of accepted hybrid uses, early services, resource timing, ecological establishment and excluded costs."
     }
+  ],
+  "early_manufacturing_sources": [
+    {
+      "url": "https://link.springer.com/article/10.1007/s12217-021-09878-4",
+      "accessed": "2026-10-31",
+      "reading_scope": "Publisher full-text result and conclusion sections; three-gravity sample properties and authors' interpretation. No major differences is retained despite the lower numerical lunar porosity."
+    },
+    {
+      "url": "https://www.nature.com/articles/s44453-026-00057-6",
+      "accessed": "2026-10-31",
+      "reading_scope": "Publisher methods, results and conclusions; published 9 October 2026. Lunar milling versus Earth controls, no microgravity comparison."
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12489093/",
+      "accessed": "2026-10-31",
+      "reading_scope": "Full article passages through PMC and indexed primary text; hopper flow and cohesion at tested accelerations."
+    },
+    {
+      "url": "https://arxiv.org/abs/2102.09815",
+      "accessed": "2026-10-31",
+      "reading_scope": "Author abstract; engineered powder handling in microgravity, not qualified regolith factory throughput."
+    },
+    {
+      "url": "https://www.politesi.polimi.it/handle/10589/240498",
+      "accessed": "2026-10-31",
+      "reading_scope": "Institutional thesis abstract; Earth casting experiments and separate lunar-gravity simulations. No full thesis review."
+    },
+    {
+      "url": "https://ntrs.nasa.gov/citations/19940017131",
+      "accessed": "2026-10-31",
+      "reading_scope": "NASA report abstract; wetting, void position and near-zero-gravity aluminium solidification. No full report review."
+    },
+    {
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0927775709001253",
+      "accessed": "2026-10-31",
+      "reading_scope": "Publisher abstract and exposed experimental/conclusion passages; metal-foam drainage, not a lunar optimum."
+    },
+    {
+      "url": "https://doi.org/10.1115/1.4066697",
+      "accessed": "2026-10-31",
+      "reading_scope": "Indexed publisher full-text passages; direct publisher retrieval failed. Lens shape tests and unresolved optical performance, with lunar/Mars experiments future work."
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12488487/",
+      "accessed": "2026-10-31",
+      "reading_scope": "Full article passages through PMC/indexed primary text; silver printing and conductivity under tested settings."
+    },
+    {
+      "url": "https://www.mdpi.com/2073-4360/14/2/333",
+      "accessed": "2026-10-31",
+      "reading_scope": "Publisher retrieval returned 429; intended primary PDF obtained from https://pdfs.semanticscholar.org/7409/1e04de5d8aa1aabc5ea3aa2d15c440766411.pdf. Targeted sections 2.1 and 4.1 and Table 4: theoretical material inputs, preparation, pot life and settling. No measured viscosity temperature or 100-second recipe inferred."
+    },
+    {
+      "url": "https://bpb-us-w1.wpmucdn.com/sites.usc.edu/dist/f/80/files/2020/05/J230.pdf",
+      "accessed": "2026-10-31",
+      "reading_scope": "Author manuscript, abstract/introduction/methods, especially pp1–12; volatile formation and viscosity/pressure/cure coupling, including terrestrial remedies. DOI10.1016/j.compositesa.2016.02.024."
+    },
+    {
+      "url": "https://www.mdpi.com/2073-4360/13/17/2876",
+      "accessed": "2026-10-31",
+      "reading_scope": "Indexed publisher methods, discussion and conclusions; stirred-vacuum degassing as a competing Earth process. PMC browser challenge; no complete figure review."
+    },
+    {
+      "url": "https://www.mdpi.com/1996-1944/14/24/7520",
+      "accessed": "2026-10-31",
+      "reading_scope": "Publisher abstract and indexed article account; colloidal-silica sedimentation control as a terrestrial comparator, not validation of the proposed resin."
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6814372/",
+      "accessed": "2026-10-31",
+      "reading_scope": "Indexed primary passages on bubble interface mobility, rise velocity and coalescence. No material-specific correction inferred."
+    },
+    {
+      "url": "https://ntrs.nasa.gov/api/citations/20210023274/downloads/ASGSR%202021.pdf",
+      "accessed": "2026-10-31",
+      "reading_scope": "NASA presentation text on cement MICS partial-gravity samples and porosity; adverse-control background only. No whole-presentation or visual review claimed."
+    }
+  ],
+  "partial_gravity_sources": [
+    {
+      "url": "https://doi.org/10.1111/jace.18680",
+      "accessed": "2026-10-31",
+      "reading_scope": "Author/publisher abstract and indexed primary full-text passages on viscosity methods, bubble experiments/results and Figure 5 caption via https://pmc.ncbi.nlm.nih.gov/articles/PMC9805048/. Direct PMC initially challenged; institutional abstract obtained at https://epub.ub.uni-muenchen.de/110721/. No full PDF or figure inspection."
+    },
+    {
+      "url": "https://www.frontiersin.org/journals/physics/articles/10.3389/fphy.2015.00060/full",
+      "accessed": "2026-10-31",
+      "reading_scope": "Full web text retrieved; targeted abstract, introduction and particle-network/gas-migration discussion read. No complete figure audit."
+    },
+    {
+      "url": "https://astro.arizona.edu/research-areas/design-testing-and-fabrication-large-optics",
+      "accessed": "2026-10-31",
+      "reading_scope": "Complete short institutional page; 8.4-m spin casting and finishing, no factory datasheet."
+    },
+    {
+      "url": "https://arxiv.org/abs/0806.2241",
+      "accessed": "2026-10-31",
+      "reading_scope": "Abstract and metadata, version 1, 13 June 2008; DOI10.1086/588034. Component demonstrations and proposed 20–100-m instruments from abstract; 35-page paper not read."
+    },
+    {
+      "url": "https://www.nasa.gov/science-research/astrophysics/what-is-the-fluidic-telescope/",
+      "accessed": "2026-10-31",
+      "reading_scope": "Institutional programme overview; proposed large liquid optics and experimental status, not full NIAC report or flight data."
+    },
+    {
+      "url": "https://citeseerx.ist.psu.edu/document?doi=e64f1d0986323a4a14527fc409bc07c8574305d1&repid=rep1&type=pdf",
+      "accessed": "2026-10-31",
+      "reading_scope": "Direct PDF retrieval failed. Indexed primary abstract/introduction and distortion-section passages obtained, including 77 samples and 83W same-cycle comparison. Full PDF and figures remain unexamined; claims restricted to obtained passages."
+    },
+    {
+      "url": "https://science.nasa.gov/biological-physical/investigations/gravitation-effects-on-distortion-in-sintering/",
+      "accessed": "2026-10-31",
+      "reading_scope": "Full web text retrieved; targeted Status, Experiment Description and Background sections read. No underlying experimental data records."
+    },
+    {
+      "url": "https://ntrs.nasa.gov/api/citations/20060013420/downloads/20060013420.pdf?attachment=true",
+      "accessed": "2026-10-31",
+      "reading_scope": "Full 15-page primary PDF retrieved as text; targeted abstract/methods, partial-gravity discussion, Table 2 on page 7 and bubble-porosity mechanism read. No figure-image inspection or complete paper review."
+    }
   ]
 }

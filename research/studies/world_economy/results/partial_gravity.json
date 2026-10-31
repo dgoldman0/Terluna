@@ -1,0 +1,253 @@
+{
+  "schema": "terluna.research.partial-gravity/1",
+  "producer": {
+    "study": "world_economy",
+    "files": {
+      "research/studies/world_economy/partial_gravity.py": "70dfa9bff92d1776b7602b3845ba37362d01f3f8ac21b7b6544cd3da81dc1452",
+      "research/studies/world_economy/partial_gravity_inputs.json": "00395c2b02387f77074141af0922bb4c1cebcce477ad06fd2a7b6b42f39c6b5e"
+    },
+    "constants": {
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "STANDARD_GRAVITY": 9.80665
+    }
+  },
+  "evidence": "Reproducible physical screening with paper-tabulated material inputs and explicitly hypothetical process constraints. No partial-gravity experiment, validated product improvement or economic premium.",
+  "sources": {
+    "sic_epoxy": {
+      "title": "Improved Wear-Resistant Performance of Epoxy Resin Composites Using Ceramic Particles",
+      "doi": "10.3390/polym14020333",
+      "url": "https://www.mdpi.com/2073-4360/14/2/333",
+      "full_text_url": "https://pdfs.semanticscholar.org/7409/1e04de5d8aa1aabc5ea3aa2d15c440766411.pdf",
+      "accessed": "2026-10-31",
+      "access_scope": "Full 17-page primary PDF retrieved; targeted reading of sections 2.1 and 4.1 and Table 4. Table 4 labels its entries theoretical data for a Stokes settling calculation. Source bytes are not locally pinned; this product hashes the explicit numerical transcription.",
+      "source_bytes_sha256": null,
+      "experimental_context": "Kemapoxy 150 JM; medium SiC below 25 micrometres and fine SiC below 90 nm, 3-18 wt%; mixing for 4 minutes at 500 rpm, heating at 90 C for 1 minute, hydraulic pressing for 8 hours, final specimens 2 mm thick. Section 4.1 reports room-temperature settling images, about 45-minute pot life and nearly complete settling by 35 minutes. These conditions do not establish the illustrative 10-mm/100-second bubble-removal process."
+    }
+  },
+  "material_input_scope": "The paper's theoretical calculation inputs, not new measurements. Fluid and particle densities are tabulated; the viscosity's measurement temperature is not specified. The 25-micrometre quantity is particle diameter, so the model uses a 12.5-micrometre radius.",
+  "hypothetical_process_scope": "Hypothetical geometry, bubble population, surface tension, uniformity tolerance and independently fixed liquid-processing interval. The cited paper does not supply this recipe, bubble size, surface tension or 100-second immobilization time.",
+  "reading_rule": "SI units. Ideal constant-viscosity Stokes and hydrostatic screens; null times mean no buoyant arrival at zero gravity. A fixed-cycle pass is not a demonstrated advantage over an optimized terrestrial or orbital process. No economic premium is assigned.",
+  "assumptions": [
+    "Dilute, isolated spherical particles and bubbles in a Newtonian quiescent liquid; constant viscosity, radii, densities and surface tension; gas density neglected.",
+    "Bubble surface immobilized for the Stokes calculation. A clean mobile interface can change rise speed; no surfactant, concentration, wall, yield-stress or non-Newtonian correction is fitted.",
+    "All screened bubbles begin at the specified depth at time zero. Arrival at an accessible surface does not establish film rupture or gas escape; late bubble formation can invalidate clearance.",
+    "Particle uniformity is screened only by a displacement tolerance, not a measured concentration or finished-product property.",
+    "The same-mobility Earth controls must be considered. When both motions scale with g times the integral of inverse viscosity, freely changing the liquid interval or viscosity can erase the apparent fixed-cycle advantage.",
+    "The 100-second interval must be independently required by chemistry, filling, thermal history or another process constraint before it can support a location advantage. Optimize terrestrial degassing, pressure, rheology, particle size and curing controls in any comparison.",
+    "Ideal microgravity is represented by exactly zero acceleration. Residual acceleration, surface-driven transport and active bubble-removal systems are omitted.",
+    "The rotating-liquid screen assumes uniform axial gravity, a free surface in equilibrium and negligible capillary/edge effects. A solid export optic would additionally require controlled solidification, finishing and metrology; rotating orbital factories remain competitors."
+  ],
+  "gravity_window": {
+    "minimum_for_bubble_arrival_m_s2": 1.1153846153846152,
+    "maximum_for_particle_uniformity_m_s2": 2.047058823529412,
+    "interval_nonempty": true,
+    "bubble_to_particle_speed_ratio": 36.70588235294118,
+    "minimum_required_displacement_ratio": 20.0
+  },
+  "casting": {
+    "earth": {
+      "gravity_m_s2": 9.80665,
+      "liquid_interval_s": 100.0,
+      "particle_speed_m_s": 2.3953024425287357e-05,
+      "bubble_speed_m_s": 0.0008792168965517242,
+      "particle_displacement_m": 0.0023953024425287356,
+      "bubble_displacement_m": 0.08792168965517241,
+      "bubble_surface_arrival_time_s": 11.37375776013843,
+      "particle_drift_limit_time_s": 20.874190712724648,
+      "latest_bubble_birth_time_s": 88.62624223986157,
+      "particle_reynolds": 2.4159516015160523e-05,
+      "bubble_reynolds": 0.007094370820451844,
+      "bubble_bond_diameter": 0.015298374,
+      "bubble_capillary_number": 0.0008499096666666668,
+      "bubble_reaches_surface_before_immobilization": true,
+      "particle_drift_within_limit": false,
+      "both_constraints_pass": false
+    },
+    "moon": {
+      "gravity_m_s2": 1.6242188765608128,
+      "liquid_interval_s": 100.0,
+      "particle_speed_m_s": 3.9672012789560085e-06,
+      "bubble_speed_m_s": 0.00014561962341579703,
+      "particle_displacement_m": 0.00039672012789560083,
+      "bubble_displacement_m": 0.014561962341579703,
+      "bubble_surface_arrival_time_s": 68.67206332107013,
+      "particle_drift_limit_time_s": 126.03343385984637,
+      "latest_bubble_birth_time_s": 31.327936678929873,
+      "particle_reynolds": 4.001401289981492e-06,
+      "bubble_reynolds": 0.0011749997199757417,
+      "bubble_bond_diameter": 0.002533781447434868,
+      "bubble_capillary_number": 0.00014076563596860381,
+      "bubble_reaches_surface_before_immobilization": true,
+      "particle_drift_within_limit": true,
+      "both_constraints_pass": true
+    },
+    "ideal_microgravity": {
+      "gravity_m_s2": 0.0,
+      "liquid_interval_s": 100.0,
+      "particle_speed_m_s": 0.0,
+      "bubble_speed_m_s": 0.0,
+      "particle_displacement_m": 0.0,
+      "bubble_displacement_m": 0.0,
+      "bubble_surface_arrival_time_s": null,
+      "particle_drift_limit_time_s": null,
+      "latest_bubble_birth_time_s": null,
+      "particle_reynolds": 0.0,
+      "bubble_reynolds": 0.0,
+      "bubble_bond_diameter": 0.0,
+      "bubble_capillary_number": 0.0,
+      "bubble_reaches_surface_before_immobilization": false,
+      "particle_drift_within_limit": true,
+      "both_constraints_pass": false
+    }
+  },
+  "earth_matching_controls": {
+    "same_viscosity_immobilize_after_s": 16.562423218538573,
+    "time_control": {
+      "gravity_m_s2": 9.80665,
+      "liquid_interval_s": 16.562423218538573,
+      "particle_speed_m_s": 2.3953024425287357e-05,
+      "bubble_speed_m_s": 0.0008792168965517242,
+      "particle_displacement_m": 0.0003967201278956009,
+      "bubble_displacement_m": 0.014561962341579703,
+      "bubble_surface_arrival_time_s": 11.37375776013843,
+      "particle_drift_limit_time_s": 20.874190712724648,
+      "latest_bubble_birth_time_s": 5.188665458400143,
+      "particle_reynolds": 2.4159516015160523e-05,
+      "bubble_reynolds": 0.007094370820451844,
+      "bubble_bond_diameter": 0.015298374,
+      "bubble_capillary_number": 0.0008499096666666668,
+      "bubble_reaches_surface_before_immobilization": true,
+      "particle_drift_within_limit": true,
+      "both_constraints_pass": true
+    },
+    "same_duration_dynamic_viscosity_Pa_s": 0.17509515133956882,
+    "viscosity_control": {
+      "gravity_m_s2": 9.80665,
+      "liquid_interval_s": 100.0,
+      "particle_speed_m_s": 3.9672012789560085e-06,
+      "bubble_speed_m_s": 0.00014561962341579703,
+      "particle_displacement_m": 0.00039672012789560083,
+      "bubble_displacement_m": 0.014561962341579703,
+      "bubble_surface_arrival_time_s": 68.67206332107013,
+      "particle_drift_limit_time_s": 126.03343385984637,
+      "latest_bubble_birth_time_s": 31.327936678929873,
+      "particle_reynolds": 6.627290163187966e-07,
+      "bubble_reynolds": 0.00019460842643902545,
+      "bubble_bond_diameter": 0.015298374,
+      "bubble_capillary_number": 0.0008499096666666667,
+      "bubble_reaches_surface_before_immobilization": true,
+      "particle_drift_within_limit": true,
+      "both_constraints_pass": true
+    },
+    "condition": "Both are mathematical controls. Earlier immobilization or a viscosity change must preserve filling, chemistry and final properties; no feasible recipe is established."
+  },
+  "long_interval_sensitivity": {
+    "duration_s": 2700,
+    "gravity_window": {
+      "minimum_for_bubble_arrival_m_s2": 0.04131054131054131,
+      "maximum_for_particle_uniformity_m_s2": 0.0758169934640523,
+      "interval_nonempty": true,
+      "bubble_to_particle_speed_ratio": 36.70588235294118,
+      "minimum_required_displacement_ratio": 20.0
+    },
+    "cases": {
+      "earth": {
+        "gravity_m_s2": 9.80665,
+        "liquid_interval_s": 2700.0,
+        "particle_speed_m_s": 2.3953024425287357e-05,
+        "bubble_speed_m_s": 0.0008792168965517242,
+        "particle_displacement_m": 0.06467316594827587,
+        "bubble_displacement_m": 2.3738856206896553,
+        "bubble_surface_arrival_time_s": 11.37375776013843,
+        "particle_drift_limit_time_s": 20.874190712724648,
+        "latest_bubble_birth_time_s": 2688.6262422398618,
+        "particle_reynolds": 2.4159516015160523e-05,
+        "bubble_reynolds": 0.007094370820451844,
+        "bubble_bond_diameter": 0.015298374,
+        "bubble_capillary_number": 0.0008499096666666668,
+        "bubble_reaches_surface_before_immobilization": true,
+        "particle_drift_within_limit": false,
+        "both_constraints_pass": false
+      },
+      "moon": {
+        "gravity_m_s2": 1.6242188765608128,
+        "liquid_interval_s": 2700.0,
+        "particle_speed_m_s": 3.9672012789560085e-06,
+        "bubble_speed_m_s": 0.00014561962341579703,
+        "particle_displacement_m": 0.010711443453181223,
+        "bubble_displacement_m": 0.393172983222652,
+        "bubble_surface_arrival_time_s": 68.67206332107013,
+        "particle_drift_limit_time_s": 126.03343385984637,
+        "latest_bubble_birth_time_s": 2631.3279366789297,
+        "particle_reynolds": 4.001401289981492e-06,
+        "bubble_reynolds": 0.0011749997199757417,
+        "bubble_bond_diameter": 0.002533781447434868,
+        "bubble_capillary_number": 0.00014076563596860381,
+        "bubble_reaches_surface_before_immobilization": true,
+        "particle_drift_within_limit": false,
+        "both_constraints_pass": false
+      },
+      "ideal_microgravity": {
+        "gravity_m_s2": 0.0,
+        "liquid_interval_s": 2700.0,
+        "particle_speed_m_s": 0.0,
+        "bubble_speed_m_s": 0.0,
+        "particle_displacement_m": 0.0,
+        "bubble_displacement_m": 0.0,
+        "bubble_surface_arrival_time_s": null,
+        "particle_drift_limit_time_s": null,
+        "latest_bubble_birth_time_s": null,
+        "particle_reynolds": 0.0,
+        "bubble_reynolds": 0.0,
+        "bubble_bond_diameter": 0.0,
+        "bubble_capillary_number": 0.0,
+        "bubble_reaches_surface_before_immobilization": false,
+        "particle_drift_within_limit": true,
+        "both_constraints_pass": false
+      }
+    },
+    "evidence": "Hypothetical 45-minute hold at the same constant viscosity. The duration resembles the reported pot life, but viscosity evolves during curing; this is not a simulation of the published cure cycle. Failure of the three tested gravity environments does not mean that every intermediate gravity fails."
+  },
+  "spin_paraboloid": {
+    "geometry": {
+      "focal_length_m": 20,
+      "aperture_radius_m": 5,
+      "evidence": "Hypothetical fixed-focus, fixed-aperture comparison, not a transcription of a particular telescope. The equilibrium relation is omega^2=g/(2f); identical geometry/material gives a rotation-load proxy proportional to omega^2."
+    },
+    "cases": {
+      "earth": {
+        "gravity_m_s2": 9.80665,
+        "hydrostatic_paraboloid_defined": true,
+        "angular_speed_rad_s": 0.49514265621131853,
+        "rotational_speed_rpm": 4.728264076300938,
+        "rim_speed_m_s": 2.4757132810565925,
+        "rim_centripetal_acceleration_m_s2": 1.22583125,
+        "rotation_load_proxy_m2_s2": 6.1291562499999985,
+        "edge_sag_m": 0.3125
+      },
+      "moon": {
+        "gravity_m_s2": 1.6242188765608128,
+        "hydrostatic_paraboloid_defined": true,
+        "angular_speed_rad_s": 0.20150799466527455,
+        "rotational_speed_rpm": 1.9242596054108234,
+        "rim_speed_m_s": 1.0075399733263728,
+        "rim_centripetal_acceleration_m_s2": 0.20302735957010157,
+        "rotation_load_proxy_m2_s2": 1.015136797850508,
+        "edge_sag_m": 0.3125
+      },
+      "ideal_microgravity": {
+        "gravity_m_s2": 0.0,
+        "hydrostatic_paraboloid_defined": false,
+        "angular_speed_rad_s": null,
+        "rotational_speed_rpm": null,
+        "rim_speed_m_s": null,
+        "rim_centripetal_acceleration_m_s2": null,
+        "rotation_load_proxy_m2_s2": null,
+        "edge_sag_m": null
+      }
+    },
+    "moon_over_earth_angular_speed": 0.406969571571863,
+    "moon_over_earth_inertial_load_proxy": 0.16562423218538572,
+    "limitation": "Same geometry/material comparison only; no cured optical quality, complete stress budget or manufacturing-cost benefit established."
+  }
+}

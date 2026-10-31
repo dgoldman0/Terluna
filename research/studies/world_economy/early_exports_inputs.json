@@ -1,0 +1,198 @@
+{
+  "schema": "terluna.research.early-exports-inputs/1",
+  "baseline_commit": "6b818cd",
+  "products": {
+    "research/studies/world_economy/results/comparison.json": {
+      "sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "schema": "terluna.research.world-economy-comparison/1"
+    }
+  },
+  "evidence": "Milestone capacity and demand scenarios for enclosed communities; no commissioning dates, market forecasts or demonstrated lunar-gravity manufacturing premium.",
+  "earth_population": 9000000000.0,
+  "earth_gwp_per_resident_U": 100000,
+  "array_gwp_per_resident_U": 100000,
+  "stay_nights": 14,
+  "bed_places_per_resident": 0.2,
+  "spare_life_support_guest_places_per_bed": 1,
+  "factory_nameplate_finished_kg_per_resident_year": 100,
+  "factory_saleable_yield": 0.9,
+  "factory_utilization": 0.7,
+  "factory_finished_price_U_per_kg": 50,
+  "factory_capital_U_per_resident": 5000,
+  "factory_customer_budget_shares_of_gwp": {
+    "earth": 0.0001,
+    "array": 0.002
+  },
+  "costs": {
+    "variable_intermediate_share": 0.4,
+    "compensation_and_distributed_living_share": 0.2,
+    "fixed_operating_share_of_capital": 0.01,
+    "fixed_operating_intermediate_fraction": 0.5,
+    "retained_growth_share_of_sales": 0.1,
+    "tourism_capital_life_years": 40,
+    "manufacturing_capital_life_years": 20,
+    "financed_fraction": 0.5,
+    "facility_real_rate": 0.005,
+    "facility_repayment_years": 100,
+    "unfunded_shared_community_allowance_U_per_resident_year": 1000,
+    "development_share_of_positive_residual": 0.5
+  },
+  "cases": {
+    "reference": {
+      "bed_scale": 1,
+      "occupancy_override": null,
+      "price_scale": 1,
+      "participation_scale": 1,
+      "route_scale": 1,
+      "capital_price_scale": 1,
+      "variable_operating_share_addition": 0,
+      "factory_utilization_override": null,
+      "factory_price_scale": 1,
+      "manufacturing_enabled": true
+    },
+    "weak_demand_high_cost": {
+      "bed_scale": 1,
+      "occupancy_override": 0.4,
+      "price_scale": 0.75,
+      "participation_scale": 0.5,
+      "route_scale": 0.5,
+      "capital_price_scale": 1.5,
+      "variable_operating_share_addition": 0.15,
+      "factory_utilization_override": 0.4,
+      "factory_price_scale": 0.5,
+      "manufacturing_enabled": true
+    },
+    "visitor_focused_expansion": {
+      "bed_scale": 2.5,
+      "occupancy_override": 0.8,
+      "price_scale": 1.5,
+      "participation_scale": 2,
+      "route_scale": 3,
+      "capital_price_scale": 1,
+      "variable_operating_share_addition": 0,
+      "factory_utilization_override": 0.9,
+      "factory_price_scale": 1.5,
+      "manufacturing_enabled": true
+    },
+    "no_manufacturing_business": {
+      "bed_scale": 1,
+      "occupancy_override": null,
+      "price_scale": 1,
+      "participation_scale": 1,
+      "route_scale": 1,
+      "capital_price_scale": 1,
+      "variable_operating_share_addition": 0,
+      "factory_utilization_override": null,
+      "factory_price_scale": 1,
+      "manufacturing_enabled": false
+    }
+  },
+  "stages": [
+    {
+      "id": "pioneer",
+      "residents": 100000.0,
+      "array_population": 10000000.0,
+      "occupancy_ceiling": 0.5,
+      "nightly_destination_spend_U": 1000,
+      "visitor_capital_U_per_bed": 1000000.0,
+      "access_fare_U": {
+        "earth": 20000,
+        "array": 10000
+      },
+      "route_trip_capacity": {
+        "earth": 200000.0,
+        "array": 100000.0
+      },
+      "annual_origin_participation": {
+        "earth": 0.0001,
+        "array": 0.01
+      },
+      "origin_budget_share_of_gwp": {
+        "earth": 0.0001,
+        "array": 0.005
+      }
+    },
+    {
+      "id": "established",
+      "residents": 1000000.0,
+      "array_population": 100000000.0,
+      "occupancy_ceiling": 0.65,
+      "nightly_destination_spend_U": 750,
+      "visitor_capital_U_per_bed": 750000,
+      "access_fare_U": {
+        "earth": 10000,
+        "array": 6000
+      },
+      "route_trip_capacity": {
+        "earth": 3000000.0,
+        "array": 1000000.0
+      },
+      "annual_origin_participation": {
+        "earth": 0.001,
+        "array": 0.02
+      },
+      "origin_budget_share_of_gwp": {
+        "earth": 0.0005,
+        "array": 0.01
+      }
+    },
+    {
+      "id": "regional",
+      "residents": 10000000.0,
+      "array_population": 1000000000.0,
+      "occupancy_ceiling": 0.7,
+      "nightly_destination_spend_U": 600,
+      "visitor_capital_U_per_bed": 500000,
+      "access_fare_U": {
+        "earth": 5000,
+        "array": 3000
+      },
+      "route_trip_capacity": {
+        "earth": 30000000.0,
+        "array": 20000000.0
+      },
+      "annual_origin_participation": {
+        "earth": 0.01,
+        "array": 0.05
+      },
+      "origin_budget_share_of_gwp": {
+        "earth": 0.002,
+        "array": 0.02
+      }
+    },
+    {
+      "id": "large_enclosed",
+      "residents": 100000000.0,
+      "array_population": 3000000000.0,
+      "occupancy_ceiling": 0.75,
+      "nightly_destination_spend_U": 450,
+      "visitor_capital_U_per_bed": 400000,
+      "access_fare_U": {
+        "earth": 2000,
+        "array": 1500
+      },
+      "route_trip_capacity": {
+        "earth": 300000000.0,
+        "array": 150000000.0
+      },
+      "annual_origin_participation": {
+        "earth": 0.05,
+        "array": 0.1
+      },
+      "origin_budget_share_of_gwp": {
+        "earth": 0.005,
+        "array": 0.03
+      }
+    }
+  ],
+  "boundaries": [
+    "Local community purchases are not external sales. All represented exports must have independent buyers, outside the same joint construction budget.",
+    "Destination receipts exclude access fares; no lunar carrier surplus is assumed. The calculation covers inbound exports only, not a complete bilateral trade/current account.",
+    "Capital includes visitor accommodation, pressure/shielding/utility capacity and allocated attraction/access facilities as a hypothetical price per bed. No engineering bill validates this allowance.",
+    "Factory feed, yield, energy, costs and finished-product mix require design. No raw-mining cash is added separately. No physical gravity productivity premium is assigned.",
+    "Commercial operations include staff compensation and specified fixed costs. Additional shared public-service needs use a separate allowance; permanent resident housing, its funding and all other household activities require their own accounts.",
+    "New facility loans and sponsor/equity capital remain visible. Capital overlaps with the mature ordinary allowance must be reconciled before combining models.",
+    "These are alternative milestone sizes, not an adopted calendar or automatic sequence. Bed supply is independent of human staffing.",
+    "The development allocation assumes sponsor/equity owners permit that use of residual cash. No mandatory equity dividend or complete cost of equity is priced; required distributions would reduce the contribution."
+  ]
+}
