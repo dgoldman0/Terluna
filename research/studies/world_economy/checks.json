@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
   "stage": 7,
-  "scope": "Three-world comparison extended with sealed/vacuum industrial engineering, finite competitive procurement, factory investment recovery and enduring stocks or operating assets; conditional calculations, not adopted factory designs, markets or atmosphere-release schedules.",
+  "scope": "Three-world comparison with progressive vacuum adaptation, finite industrial procurement, factory continuation and enduring stocks or operating assets. Liquidation is a sensitivity, not a pressure-triggered requirement; no market forecast, factory design or financing programme is adopted.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -161,5 +161,39 @@
     "industrial_markets_sha256": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
     "industrial_legacy_sha256": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
     "original_comparison_sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+  },
+  "stage7_continuation": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "295 passed in 1.98 seconds on settled scientific files, including 29 new continuation and pumped-vacuum controls."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3126 passed, 20 skipped in 417.26s (0:06:57); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1175 files checked, 0 violations.",
+      "log": "/tmp/terluna-pressure-continuation-check.log"
+    },
+    "numerical_controls": [
+      "Pumped-chamber gas balance, internal gas floor, impossible target detection and transient solution; equal-pressure zero initial evacuation with positive continuing gas load.",
+      "Independent work/time and load ratios across low-pressure surroundings and Earth comparison; historical-column loading samples retain their conditional inventory meaning.",
+      "Normalized independent continuation cash-flow example counts forgone early salvage and later terminal credits once; retrofit at the decision year and later annual costs are discounted separately.",
+      "Source replay verifies identical operating history through year50, constant63.7Mt/year thereafter and retained ordinary renewal. Separate continuation and initial-investment break-even tests, zero-rate/output and invalid-input controls.",
+      "Full new-product reproduction and bound-source rejection. Prior physics, markets, legacy and mature comparison products remain byte-identical."
+    ],
+    "review": "Substantive reading of revised engineering, economic and synthesis passages; independent engineering review checked the ODE, pressure loads, gas floors and timing. Independent accounting review checked all20 extra-cost cases and the four published examples. Final language confines short vacuum clocks to unassisted operation and retains closure only as a sensitivity.",
+    "documentation_links": "130 local links in study README, comparison, engineering and economic reports, and provisioning README checked; all resolve.",
+    "limitations": [
+      "No actual pumping/enclosure/route quote, certified pressure system or empirically demonstrated cost advantage. Constant molecular conductance and pumping speed are illustrative; real gas species, flow regimes and ultimate pressure require equipment-specific treatment.",
+      "Continuation assumes the original prices, customers,63.7Mt/year throughput and viable routes. Added cost allowances do not solve competitive repricing, retrofit liquidity, loan restructuring or independent development cash.",
+      "The prior inherited atmosphere inventory remains distinct from the301K redesign; linear pressure loading is not a local or evolving atmosphere simulation.",
+      "Source reading scopes are recorded in industrial_sources.json. No full scholarly review, empirical validation or exact-build PDF/figure inspection."
+    ],
+    "industrial_continuation_sha256": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+    "preserved_products_sha256": {
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+    }
   }
 }

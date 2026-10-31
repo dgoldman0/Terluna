@@ -4,7 +4,7 @@ The [amenity and tourism account](amenities.md) and [early development and minin
 
 The [early-community export screen](early_exports.md) sizes tourism-led revenue at four enclosed-settlement milestones, including new facility capital, customer budgets, operating losses and cash available for development. The [partial-gravity manufacturing investigation](manufacturing.md) examines finite-gravity process windows and competing terrestrial and orbital methods; its physical hypotheses receive no assumed commercial premium.
 
-The [industrial-transition assessment](industrial_transition.md) compares sealed and ambient-vacuum construction, competitive delivered costs, finite buyer orders and lasting stocks or operating assets. Its [engineering companion](industrial_engineering.md) shows why useful vacuum ends near the beginning of retained-gas loading, and why pressure containment and low weight are separate requirements. Positive operating cash is kept separate from recovery of the initial investment.
+The [industrial-transition assessment](industrial_transition.md) compares sealed and ambient-vacuum construction, competitive delivered costs, finite buyer orders and lasting stocks or operating assets. Its [engineering companion](industrial_engineering.md) shows why unassisted ambient process vacuum ends near the beginning of retained-gas loading, and why pressure containment and low weight are separate requirements. The [continuation calculation](industrial_continuation.py) treats loss of ambient process vacuum as a potential upgrade trigger, with the earlier liquidation cases retained as sensitivities. Positive operating cash, the decision to continue an existing factory and recovery of its initial investment are separate quantities.
 
 This study estimates the economic consequences of completing the Open Moon and maintaining it at the selected population. Its comparison is an equally advanced future Earth, with the same access to automation, energy and biological technology. The intended reader knows the project's physical design; the economic definitions and valuation assumptions are introduced here. This is a scenario study, not a forecast of future prices or a demonstrated construction programme.
 
@@ -97,6 +97,7 @@ python -m research.studies.world_economy.partial_gravity
 python -m research.studies.world_economy.industrial_physics
 python -m research.studies.world_economy.industrial_markets
 python -m research.studies.world_economy.industrial_legacy
+python -m research.studies.world_economy.industrial_continuation
 python -m pytest research/studies/world_economy/tests
 ```
 

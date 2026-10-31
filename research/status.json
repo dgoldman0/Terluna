@@ -938,7 +938,7 @@
     },
     {
       "topic": "world_economy",
-      "condition": "conditional_three_world_economy_with_industrial_pressure_transition_and_legacy_value_2026_10_31; reproducible_accounts; no_market_forecast_factory_design_or_financing_plan_adopted",
+      "condition": "conditional_three_world_economy_with_progressive_vacuum_adaptation_and_factory_continuation_2026_10_31; reproducible_accounts; no_market_forecast_factory_design_or_financing_plan_adopted",
       "material": [
         "studies/world_economy/README.md",
         "studies/world_economy/inputs.json",
@@ -969,7 +969,10 @@
         "studies/world_economy/industrial_legacy_inputs.json",
         "studies/world_economy/results/industrial_physics.json",
         "studies/world_economy/results/industrial_markets.json",
-        "studies/world_economy/results/industrial_legacy.json"
+        "studies/world_economy/results/industrial_legacy.json",
+        "studies/world_economy/industrial_continuation.py",
+        "studies/world_economy/industrial_continuation_inputs.json",
+        "studies/world_economy/results/industrial_continuation.json"
       ],
       "unresolved": [
         "Source-site energy, ore processing and bulk capture architecture; future unit prices and full construction/settlement timeline, including renewal funding.",
@@ -981,7 +984,8 @@
         "Product-specific curing, gas escape and particle mobility; qualified partial-gravity manufacturing compared with optimized Earth processes and rotating orbital factories.",
         "Enclosed-community visitor demand and engineering costs, permanent resident funding and a dated commissioning schedule; new facility capital must be reconciled with mature ordinary assets.",
         "Retained-gas release sequence, local vapour/dust control and pressure-qualified process windows; no complete vacuum factory or post-atmosphere export architecture.",
-        "Equipment quotations, realistic simultaneous orders and route capacity; terminal recovery versus retained use, equity returns and qualified long-term material/specification survival."
+        "Equipment quotations, realistic simultaneous orders and route capacity; terminal recovery versus retained use, equity returns and qualified long-term material/specification survival.",
+        "Process-specific staged enclosure/pumping costs and retrofit funding, retained customers and export-route adaptation; no mandatory closure follows from loss of ambient process vacuum."
       ],
       "next_session_task": "Cost one modular construction route against optimized Earth and array alternatives, including local-vacuum tooling, feed qualification and delivery. Match its commissioning and gas-release window to independently funded orders; qualify an orbital feed reserve or deployed asset and price its storage, transition and ownership."
     }

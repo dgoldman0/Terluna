@@ -152,14 +152,40 @@
   "economic_sources": [
     {
       "url": "https://www.bea.gov/resources/methodologies/nipa-handbook/pdf/chapter-07.pdf",
-      "reading_scope": "December 2024 chapter, targeted printed pp7-1–7-4 including the three-period inventory example: production timing, withdrawal and holding gains. Full text retrieved; no complete methodology review.",
+      "reading_scope": "December 2024 chapter, targeted printed pp7-1\u20137-4 including the three-period inventory example: production timing, withdrawal and holding gains. Full text retrieved; no complete methodology review.",
       "use": "Original manufacturing output is not counted again when stored goods are sold; new storage, distribution or processing services require their own accounts."
     }
   ],
-  "local_inputs": "Full schemas and SHA256 identities are in the three industrial input files and generated products. The mature comparison and prior empirical/reference products remain unchanged.",
+  "local_inputs": "Full schemas and SHA256 identities are in the industrial input files and generated products. The mature comparison, prior industrial products and historical reference products remain unchanged.",
   "limitations": [
     "No source PDFs or datasets copied into the repository.",
     "Web source bytes are not pinned locally; explicit numerical transcriptions and reading scopes are recorded.",
     "Calculations are limiting physics or labelled illustrations, not a validated process, hardware design, cost forecast or lunar experiment."
+  ],
+  "continuation_sources": [
+    {
+      "url": "https://www.leybold.com/en-uk/knowledge/vacuum-fundamentals/vacuum-generation/how-to-choose-a-pump-size",
+      "reading_scope": "Full substantive web text retrieved; initial evacuation, effective speed, medium/high-vacuum gas evolution and leak limitations read. Formula images not inspected; gas-balance equations independently derived.",
+      "use": "Separate initial gas removal from continuing process/outgassing load; constant speed is an ideal diagnostic.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "url": "https://www.leybold.com/en-be/knowledge/vacuum-fundamentals/fundamental-physics-of-vacuum/how-to-calculate-vacuum-conductance",
+      "reading_scope": "Primary web text retrieved; gas, geometry and pressure-regime dependence read. No numerical nomogram transcribed.",
+      "use": "Constant molecular conductance is not a universal leakage law across atmospheric growth.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "url": "https://www.pfeiffervacuum.com/no/en/knowledge/vacuum-technology/knowledge-book/4-vacuum-generation/",
+      "reading_scope": "Primary substantive text retrieved; pumping speed, throughput and ultimate/base-pressure definitions read, especially sections4.1.2\u20134.1.3.",
+      "use": "Gas throughput is pressure times pumping speed; finite pump ultimate pressure and gas release constrain operation.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "url": "https://www.pfeiffervacuum.com/no/en/knowledge/vacuum-technology/knowledge-book/4-vacuum-generation/4.9-turbomolecular-pumps.html",
+      "reading_scope": "Primary web text retrieved; gas loads, critical backing pressure, base/ultimate pressure and application restrictions read. No pump or price selected.",
+      "use": "Low surroundings may ease backing-pressure requirements subject to pump-specific operating conditions.",
+      "accessed": "2026-10-31"
+    }
   ]
 }

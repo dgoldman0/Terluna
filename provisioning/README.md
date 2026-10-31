@@ -88,10 +88,10 @@ rotating array factories as competitors. These remain hypotheses and conditional
 
 The [industrial-transition study](../research/studies/world_economy/industrial_transition.md)
 compares early sealed and vacuum production with equally advanced Earth and array factories.
-It follows finite orders, capital renewal and shutdown, then tests stocks and operating assets
+It follows finite orders, capital renewal, continued pumped operation and optional shutdown, then tests stocks and operating assets
 that retain value after atmospheric loading. Its [engineering assessment](../research/studies/world_economy/industrial_engineering.md)
 separates pressure loads from weight relief and treats the vacuum interval as a construction
-sequence to preserve deliberately, rather than the whole 500-year build.
+sequence to preserve deliberately, with progressively pumped operation available afterward.
 No commissioning dates, export reserves or financing institutions are adopted.
 
 ## Aerophyte crops, living area and services

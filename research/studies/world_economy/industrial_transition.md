@@ -2,6 +2,8 @@
 
 Early lunar industry could leave an enduring productive inheritance: buildings and utilities on the Moon, equipment already working in orbit, and refined material available for later construction. Its value depends on what customers need, what competing producers charge, and how much of the original investment remains useful when atmospheric conditions change. The calculations here examine those dependencies through explicit industrial, financing and storage scenarios. They establish neither a future market nor a demonstrated lunar manufacturing advantage.
 
+Loss of usable ambient vacuum introduces pumping and enclosure requirements; it does not mandate plant closure. The 50-year liquidation case below is a stress scenario. Continued operation, with explicit allowances for adaptation and later delivery, is a separate investment choice.
+
 The [engineering assessment](industrial_engineering.md) develops the physical opportunities: large-workpiece processing in ambient vacuum, reduced self-weight, local feedstock and foundations, and later production inside buildings at 1–1.2 atm. It also examines Earth process controls and rotating orbital competitors. The economic comparison assigns no automatic cost reduction to lunar gravity. All monetary quantities use the study's common real unit U; billion and trillion refer to powers of ten, while Mt and Gt denote million and billion tonnes.
 
 ## Customers across the Solar System
@@ -32,7 +34,7 @@ The reference plant has 100 Mt/year of raw nameplate throughput. At 70% utilizat
 | Annual net value added before depletion | 121.93 billion U |
 | Annual assigned development cash | 7.993 billion U |
 | Assigned cash attributed to independent buyers | 0.122 billion U/year |
-| Fifty-year unlevered project NPV at 1% real | −588.73 billion U |
+| Fifty-year liquidation-case unlevered NPV at 1% real | −588.73 billion U |
 
 Gross value added subtracts purchased inputs from receipts. Net value added additionally subtracts capital consumption; geological depletion remains unpriced here. Development cash also pays compensation, replacement reserves, debt service and any closure escrow, then assigns half the positive residual. The initial loan amortizes over 100 years at 0.5% real interest; a required equity dividend remains unpriced. These different measures cannot substitute for one another.
 
@@ -47,9 +49,26 @@ The size sensitivities retain the same customers and budgets. Over fifty years, 
 
 The tenfold expansion beyond the reference factory buys little extra sales volume because competitive orders and budgets bind. Its assumed 38.27-trillion-U capital stock still requires operation, replacement funding and loan payments. More capacity therefore reduces value added and creates a large cash deficit. Conversely, the stronger cost advantage lets the supplier charge less while retaining more value added and cash. These comparisons size an explicitly chosen market; larger infrastructure programmes would need separately funded orders before supporting larger factories.
 
-## Positive cash and investment recovery
+## Continued operation and investment recovery
 
-The negative reference NPV is material even though operations generate positive cash. Capital recovery is assessed over a finite operating interval: the plant is replaced at year 40, then closes at year 50 with three-quarters of the replacement plant's book value remaining. The reference recovers only 30% of that remaining value. Annual replacement reserves and loan payments serve different obligations; project NPV instead deducts initial investment and actual replacement expenditures, excluding transfers into reserves and financing flows.
+The continued-operation comparison retains the same factory and economic history through year 50, then continues to year 100 with 63.7 Mt/year of sales. It includes the source model's ordinary renewals at years 40 and 80, finite feed and customer allocations, and terminal recovery at year 100. Year 100 is a comparison horizon with the source model's terminal treatment, not a pressure-predicted shutdown date. Before extra transition costs, factory investment NPV is **+633.55 billion U**, compared with **−588.73 billion U** for liquidation at year 50. Continued output at the original prices remains conditional; this comparison does not establish that atmospheric upgrades and export routes preserve those sales.
+
+The discounted difference between the two source cases already includes the forgone year-50 liquidation proceeds. Its value at year 50 is **2.010 trillion U**. That is the combined year-50 present-value allowance for additional retrofit, operation and delivery costs before continuation becomes worse than closure. Recovering the original factory investment at the stipulated 1% real rate imposes a stricter allowance of **1.042 trillion U** at that date. The distinction matters because continued operation can improve an already-built plant's outcome while leaving its original investment unattractive.
+
+An illustrative sensitivity charges a retrofit at the end of year 50 and additional annual costs at the ends of years 51–100. The annual stream must cover all incremental operating, maintenance, renewal, lost-production and delivery obligations outside the initial retrofit; the retrofit receives no added terminal credit. These are cost allowances, with no relation to an inferred pressure-to-price multiplier.
+
+| Retrofit at year 50, trillion U | Extra annual cost, billion U | Factory investment NPV over 100 years, trillion U | Incremental value over closure, at year 50, trillion U |
+|---:|---:|---:|---:|
+| 0 | 0 | +0.634 | +2.010 |
+| 0.10 | 5 | +0.454 | +1.714 |
+| 0.50 | 10 | +0.091 | +1.118 |
+| 1.00 | 25 | −0.570 | +0.030 |
+
+With no retrofit outlay, additional annual costs can reach **51.29 billion U/year** before continuation loses to closure, or **26.58 billion U/year** before the original investment NPV becomes negative. At the assumed sales volume these correspond to **0.805 and 0.417 U/kg**. An investment assessment must compare actual upgrade costs alongside changes in achievable prices, customer retention, throughput and freight. Neither allowance demonstrates liquidity or supplies a loan contract; the earlier financing and independent-receipts accounts require revision before treating a continuation surplus as spendable development cash.
+
+The [continuation model](industrial_continuation.py) reads the unchanged source products and compares these choices explicitly. Pressure can trigger process upgrades, and scheduled replacement can incorporate them. No global pressure threshold is assigned as a mandatory closure date. The remaining liquidation sensitivities describe the consequences if continued operation or adaptation is uneconomic.
+
+The negative liquidation-case NPV is material even though operations generate positive cash. In that stress scenario, capital recovery is assessed over a finite operating interval: the plant is replaced at year 40, then closes at year 50 with three-quarters of the replacement plant's book value remaining. The reference recovers only 30% of that remaining value. Annual replacement reserves and loan payments serve different obligations; project NPV instead deducts initial investment and actual replacement expenditures, excluding transfers into reserves and financing flows.
 
 | Terminal recovery as a fraction of remaining book value | Fifty-year project NPV, trillion U |
 |---|---:|
@@ -60,9 +79,9 @@ The negative reference NPV is material even though operations generate positive 
 
 The investment breaks even at approximately **63.7% terminal recovery**, with all other reference assumptions fixed. Continued production, relocation or productive reuse could preserve more value than low-price liquidation, but require an actual use and transition budget. The closure cash account treats recovery as monetized proceeds. Retained machinery's continuation value cannot also repay the closing loan without sale, refinancing or another cash source.
 
-Operating duration changes the result as well. Under the 10% lunar cost reduction, the 10-, 50- and 100-year cases produce NPVs of −1.828, −0.589 and +0.634 trillion U. With a 25% reduction, they produce −1.124, +1.162 and +3.185 trillion U. These are conditional operating windows, not predictions that ambient industrial vacuum lasts that long. These factory-level returns exclude the programme-wide costs of delaying atmospheric release, any interim gas storage and the additional years of settlement enclosure. At cost parity, or when the orbital competitor learns sufficiently faster, the model wins no orders. A commissioned plant then incurs losses; those cases provide a reason to withhold investment until customers and competitiveness are established.
+Operating duration changes the result as well. Under the 10% lunar cost reduction, the 10-, 50- and 100-year cases produce NPVs of −1.828, −0.589 and +0.634 trillion U. With a 25% reduction, they produce −1.124, +1.162 and +3.185 trillion U. These are conditional operating durations, with the source cases omitting added atmospheric-transition costs. A 100-year factory life does not require 100 years of ambient process vacuum. These factory-level returns exclude the programme-wide costs of delaying atmospheric release, any interim gas storage and the additional years of settlement enclosure. At cost parity, or when the orbital competitor learns sufficiently faster, the model wins no orders. A commissioned plant then incurs losses; those cases provide a reason to withhold investment until customers and competitiveness are established.
 
-The atmospheric comparison adds hypothetical enclosure and delivery costs. In the 10% advantage case, structural exports to the array rise to 7 U/kg against the competitor's 5.05 and lose their advantage. Sealed specialty components retain a 47.10-U/kg delivered cost against 50.05. Their remaining 2.95-U/kg margin of cost advantage follows the assumed production costs; it establishes a tolerance for transition expenditure, not a demonstrated low-gravity premium or a financed retrofit.
+A separate final-atmosphere cost comparison adds hypothetical enclosure and delivery costs. It supplies a later endpoint sensitivity, not a tariff change at the first loss of ambient process vacuum. In the 10% advantage case, structural exports to the array rise to 7 U/kg against the competitor's 5.05 and lose their advantage. Sealed specialty components retain a 47.10-U/kg delivered cost against 50.05. Their remaining 2.95-U/kg margin of cost advantage follows the assumed production costs; it establishes a tolerance for transition expenditure, not a demonstrated low-gravity premium or a financed retrofit.
 
 ## Programme procurement and independent receipts
 
@@ -94,7 +113,7 @@ The full sensitivity grid tests alternative prices of 1, 1.5 and 2 U/kg, annual 
 
 The film-renewal account gives a physical application. Gross renewal of 2.309–4.638 Gt/year with fresh fractions of 0.1–1% requires approximately **0.117–2.349 Gt initially** to cover fifty years after the assumed attrition. That mass equals **1.84–36.87 years** of the reference plant's 63.7-Mt/year finished output. This is only a mass comparison: the plant is already selling its output, and matching the feed's composition, purity and recovery loop requires separate qualification and capacity.
 
-An orbital reserve must be exported before air arrives if it is to avoid subsequent atmospheric launch. A lunar warehouse can serve local users, but cannot inherit the old airless delivery tariff for later exports. Early positioning, protected storage and financing all consume resources. Unsold terminal stock receives no liquidation credit in the PV comparison; its reported replacement-price reference value remains unrealized.
+An orbital reserve must be exported before its launch route becomes materially more costly if it is to avoid that later transport burden. The relevant threshold depends on the launch design and rising pressure, rather than the first retained air. A lunar warehouse can serve local users, but cannot inherit the old airless delivery tariff for later exports. Early positioning, protected storage and financing all consume resources. Unsold terminal stock receives no liquidation credit in the PV comparison; its reported replacement-price reference value remains unrealized.
 
 Production enters the economic accounts when goods are made, including additions to inventory. Their later sale draws down that inventory, so it does not count the original manufacture again. New transport, distribution or processing can add value, while changes in stored goods' prices are holding gains or losses. [BEA's inventory accounting, chapter 7, pp. 7-1–7-4](https://www.bea.gov/resources/methodologies/nipa-handbook/pdf/chapter-07.pdf). A reserve can thus provide later cash while consuming an asset produced earlier.
 
