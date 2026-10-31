@@ -2,6 +2,8 @@
 
 31 October 2026. This investigation examines candidate process advantages for enclosed lunar factories. It supports the [early-export account](early_exports.md) and supplies reproducible physical calculations for design and economic review. Values below are calculations unless identified as published observations; the candidate factories and their commercial advantages remain unvalidated.
 
+The [dedicated slow-settling study](slow_settling.md) extends the casting example to suspension time, low-agitation processing, fluidized beds and recovery. It distinguishes particle uniformity, off-bottom suspension and other mixing duties, and compares complete-cycle costs with Earth and orbital alternatives.
+
 There are defensible reasons to test partial gravity. A process may need enough gravity to remove gas, bring grains into contact or establish a liquid surface, while excessive gravity produces segregation, distortion or larger rotating loads. Lunar gravity can occupy that compromise. The strongest candidates identified here are filled castings with a constrained cure schedule, large spin-cast optical blanks, and selected liquid-phase-sintered parts. Their physical cases differ; none supports a general multiplier for lunar manufacturing productivity.
 
 | Priority | Candidate product | Specific possible lunar advantage | Decisive unresolved issue |

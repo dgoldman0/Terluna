@@ -4,6 +4,8 @@ The mature Open Moon has credible industrial advantages in large local construct
 
 This study retains the 1.2 atm lock and the 301 K environmental design point. Its purpose is to select durable industrial opportunities for the three-world economy, including markets beyond initial construction. [Inputs](mature_industry_inputs.json) and [results](results/mature_industry.json) separate physical ratios, illustrative cost assumptions and recurring demand. None supplies a new gross-world-product increment. Source retrieval and reading limits are recorded in [the source ledger](mature_industry_sources.json), alongside the earlier [manufacturing evidence](manufacturing_sources.md) and [industrial mechanics sources](industrial_sources.json).
 
+The [slow-settling assessment](slow_settling.md) develops an additional route through long workable suspensions, fragile-product processing and particle reactors. It finds substantial physical scope but smaller whole-factory energy savings, with recovery delays capable of reversing them. Constrained formulations and measured functional yield deserve priority over an assumed general electricity premium.
+
 ## Priorities at atmospheric or controlled-gas pressure
 
 Lunar gravity provides a broad, continuously available body force over a fixed working surface. It reduces self-weight while retaining settling, drainage and ground-based access. Those properties can help a complete production system even where microgravity improves one isolated step. Conversely, slower drainage, weaker natural convection and reduced traction can hinder it. Cleanrooms, dry cells and inert-gas furnaces remain necessary when chemistry requires them; open air is not a clean processing environment.

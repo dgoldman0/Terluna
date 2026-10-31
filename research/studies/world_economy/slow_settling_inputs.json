@@ -1,0 +1,138 @@
+{
+  "schema": "terluna.research.slow-settling-inputs/1",
+  "evidence": "Ideal transport and conditional process/economic screens. The new particle recipes, timing, flow requirements and cost shares are scenarios; laboratory and facility evidence is identified separately in slow_settling_sources.json. No lunar process yield or economic premium is empirically established.",
+  "products": {
+    "research/studies/world_economy/results/partial_gravity.json": {
+      "sha256": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297",
+      "schema": "terluna.research.partial-gravity/1"
+    }
+  },
+  "temperature_K": 301,
+  "maximum_bottom_top_concentration_ratio": 1.2,
+  "particles": [
+    {
+      "id": "fine_mineral_filler",
+      "rho_particle": 2500,
+      "rho_fluid": 1000,
+      "diameter": 1e-05,
+      "viscosity": 0.01,
+      "height_m": 0.1,
+      "drift_limit_m": 0.001,
+      "hold_s": 600,
+      "basis": "Hypothetical dilute 10 micrometre filler in a 10 mPa s Newtonian liquid; no demonstrated formulation."
+    },
+    {
+      "id": "microcarrier_surrogate",
+      "rho_particle": 1040,
+      "rho_fluid": 1000,
+      "diameter": 0.0001,
+      "viscosity": 0.001,
+      "height_m": 0.1,
+      "drift_limit_m": 0.005,
+      "hold_s": 600,
+      "basis": "100 micrometre sphere is assumed. The 40 kg/m3 density difference is comparable to the Ibrahim-Nienow experiment; other dimensions and medium properties are illustrative, not a reconstruction of its Cytodex bed."
+    },
+    {
+      "id": "crystal_surrogate",
+      "rho_particle": 1500,
+      "rho_fluid": 1000,
+      "diameter": 0.0002,
+      "viscosity": 0.001,
+      "height_m": 0.1,
+      "drift_limit_m": 0.005,
+      "hold_s": 600,
+      "basis": "Hypothetical spherical 200 micrometre crystal, with finite-Re drag correction. No crystal shape, growth, reaction or attrition law is fitted."
+    },
+    {
+      "id": "stable_nanocolloid_control",
+      "rho_particle": 2500,
+      "rho_fluid": 1000,
+      "diameter": 2e-08,
+      "viscosity": 0.001,
+      "height_m": 0.01,
+      "drift_limit_m": 0.001,
+      "hold_s": 86400,
+      "basis": "Ideal nonaggregating 20 nm colloid. Brownian motion and gravitational segregation only; surface chemistry and collective interactions omitted."
+    }
+  ],
+  "mixing": {
+    "gravity_exponents": [
+      0.3,
+      0.45,
+      0.5
+    ],
+    "other_speed_floors": [
+      0.25,
+      0.7,
+      1,
+      1.2
+    ],
+    "evidence": "0.45 is the terrestrial Zwietering gravity exponent extrapolated to lunar conditions, not a lunar measurement. 0.3 and 0.5 are chosen sensitivities. Floors are fractions of Earth's just-suspended speed needed for chemistry, uniformity, heat or gas transfer. Constant turbulent power number is assumed."
+  },
+  "fluid_bed": {
+    "rho_particle": 3000,
+    "rho_gas": 1.2,
+    "diameter_m": 0.0001,
+    "viscosity_Pa_s": 1.8e-05,
+    "onset_height_m": 0.5,
+    "onset_voidage": 0.4,
+    "operating_multiple_of_Umf": 2,
+    "terminal_speed_fraction": 0.5,
+    "other_pressure_loss_Pa": 3000,
+    "process_flow_floors_m_s": [
+      0,
+      0.05,
+      0.1
+    ],
+    "evidence": "Room-temperature noncohesive spherical-grain surrogate. Gas density is multiplied by 1.2 for the lunar 1.2 atm comparison at matched composition/temperature. No hot reduction chemistry, actual regolith morphology, gas consumption, expanded-bed voidage, distributor design or rarefied-gas calculation. The 50% terminal-speed ceiling is an illustrative retention margin."
+  },
+  "cycles": [
+    {
+      "id": "long_batch",
+      "process_s": 86400,
+      "other_s": 7200,
+      "earth_settle_s": 900
+    },
+    {
+      "id": "short_batch",
+      "process_s": 3600,
+      "other_s": 1800,
+      "earth_settle_s": 900
+    }
+  ],
+  "costs": {
+    "mixing_electricity_cost_shares": [
+      0.01,
+      0.05,
+      0.2
+    ],
+    "other_speed_floors": [
+      0.25,
+      0.7,
+      1
+    ],
+    "earth_accepted_yield": 0.95,
+    "moon_accepted_yield_sensitivities": [
+      0.95,
+      0.98
+    ],
+    "basis": "One normalized production attempt costs 100 U on an already optimized Earth line. Only its chosen mixing-electricity share changes with the calculated speed scenario. Other costs include operation and capital service. The 98% lunar yield is a hypothetical quality improvement, not predicted biology or materials performance. Array recipes use the same technology; added containment, separation, rotation and delivery costs remain explicit break-even allowances. The same 98% partial-gravity quality assumption is also assigned to the rotating array; freefall yield remains an independent placeholder, not a finding that it is inferior.",
+    "time_occupancy_cost_share": 0.3,
+    "cycle_comparison": "Separate equal-output cycle sensitivity: 30% of a 100 U Earth attempt cost is vessel capital service and fixed overhead; longer passive recovery scales that share inversely with throughput. Mixing-electricity share is disjoint and applies to the same productive interval. Other inputs/energy and yield are fixed. Extra harvest equipment is not free; forced recovery must beat the stated cost allowance."
+  },
+  "assumptions": [
+    "301 K is an environmental comparison point, not the optimum temperature of every culture, cure or reactor. Process temperature and pressure must be chosen independently.",
+    "Liquid properties are held fixed across the sealed/controlled environment and the mature 1.2 atm atmosphere. Ambient pressure does not multiply liquid settling speed by 1.2. Gas density enters the fluid-bed comparison separately.",
+    "The earlier 100-second bubble-clearance and filler-settling window is inherited unchanged; the new study broadens suspension and recovery questions without upgrading that example's evidence state.",
+    "Ideal array freefall has zero gravitational settling but still needs mixing, heat/gas transport, collection and containment. A rotating array can reproduce finite gravity; no lunar monopoly is inferred.",
+    "The freefall cost comparator assumes a feasible forced-flow recipe at its specified mixing floor; unpriced handling/containment is exposed as a threshold, not asserted absent."
+  ],
+  "boundaries": [
+    "Slow settling can lengthen usable residence without improving chemical reaction rates or Stokes separation selectivity. Brownian motion, aggregation, dense slurries, yield stress, irregular particles, wetting, walls and biological responses require product-specific measurements.",
+    "Off-bottom suspension is weaker than uniform concentration. Required effective diffusivity is a transport diagnostic, not a direct motor-power law. Empirical mixing-power extrapolation is reported separately.",
+    "Passive recovery, purge, cleaning and quality inspection belong to the whole cycle. A short production process can lose capacity when settling-based harvest becomes slower.",
+    "Ambient vacuum is not a suspension fluid. Liquids and gas-fluidized reactors normally remain contained during early low-pressure operations; direct exposure changes evaporation, boiling, foaming and chemistry.",
+    "No new market size, revenues, profit, debt reduction, GWP or NWP is inferred. Savings are normalized cost thresholds; awards, output and customers remain unestablished. Original economic products remain unchanged.",
+    "Unbounded drift distances can exceed vessel height; the boundary-arrival flag prevents interpreting those distances as an actual in-vessel trajectory. The concentration calculation is a separate zero-flux equilibrium, not a finite-time deposition simulation."
+  ]
+}

@@ -238,5 +238,9 @@
   "mature_industry_catalogue": {
     "path": "mature_industry_sources.json",
     "scope": "Mature atmospheric and artificial-vacuum industrial candidates, competing Earth/orbital methods and early structural campaigns; individual retrieval and reading limits recorded."
+  },
+  "slow_settling_catalogue": {
+    "path": "slow_settling_sources.json",
+    "scope": "Targeted primary evidence for suspension, microcarriers, crystal attrition, fluidized beds, stable formulations and competing terrestrial/orbital controls; retrieval and reading limits recorded."
   }
 }

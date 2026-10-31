@@ -101,6 +101,11 @@ size finite structural orders, full plant recovery and customer advances. Their 
 advantages, assumed prices and financing flows remain distinct; existing replacement and
 construction orders are counted once.
 
+The [slow-settling study](../research/studies/world_economy/slow_settling.md) examines longer
+workable suspensions, fragile products and fluidized beds. It accounts for other mixing duties
+and the cost of slower recovery; prospective gains in formulation or quality remain separate
+from measured performance and the existing world-product totals.
+
 ## Aerophyte crops, living area and services
 
 The [31 October assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef

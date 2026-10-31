@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 8,
-  "scope": "Three-world comparison with mature partial-gravity industry under the 1.2 atm lock, recurring replacement demand and early finite structural campaigns. Physical scalings, conditional delivered costs, plant recovery and financing timing remain separate; no market forecast, factory design or financing programme is adopted.",
+  "stage": 9,
+  "scope": "Three-world comparison with mature partial-gravity industry, finite early infrastructure campaigns and slow-settling production under the 1.2 atm lock. Physical transport, product-quality hypotheses, complete production and recovery cycles, and conditional costs remain distinct; no market forecast, factory design or financing programme is adopted.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -51,7 +51,8 @@
     5,
     6,
     7,
-    8
+    8,
+    9
   ],
   "stages3_4": {
     "focused_check": {
@@ -237,6 +238,50 @@
       "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
       "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
       "industrial_continuation": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+    }
+  },
+  "stage9": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "373 passed in 2.11 seconds, including 32 new slow-settling controls. After a prose-only input-description correction and product regeneration, all 32 module tests passed again in 0.09 seconds; the complete repository run subsequently passed on those final files."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3204 Python tests passed, 20 skipped in 418.90 seconds; 191 JavaScript tests passed across immersion, column/light-transport and calendar suites. Layer, provenance and ensemble checks passed. Layer 1185 files checked, 0 violations; protection verifier checked five input hashes.",
+      "log": "/tmp/terluna-slow-settling-check.log"
+    },
+    "numerical_controls": [
+      "Stokes limit, finite-Re drag force balance, invalid regimes, neutral buoyancy and ideal freefall; boundary-arrival flags distinguish an unbounded drift diagnostic from travel through a vessel.",
+      "Brownian diffusion, zero-flux concentration balance, distinct squared and cubed particle-size criteria, and a stable colloid control. These are dilute rigid-sphere calculations, not dense slurry or cell-growth simulations.",
+      "Extrapolated just-suspension scaling separated from uniformity and other process duties; independent mixing floors can reduce or remove the power advantage.",
+      "Ergun onset and bed-support pressure balance, process gas demand, fixed loop pressure loss, isolated-particle retention margins and a lunar entrainment failure. No gravity-retained freefall bed is assumed.",
+      "Complete batch timing, passive harvest and equal-output vessel capacity. Mixer electricity and time-dependent capital/overhead shares are disjoint; slow recovery can reverse a favorable mixing cost.",
+      "Eighteen normalized process-cost cases and six cycle-adjusted cases retain Earth optimization, freefall and rotating-array competitors. Equivalent lunar and rotating processes receive the same hypothetical yield gain; added handling, recovery and freight must fit within the stated allowances.",
+      "Input and source identities, full product reproduction, 12 source records and preserved hashes of all eight earlier industrial/comparison products."
+    ],
+    "documentation_links": "256 local Markdown links across eight study/domain/research documents checked; all resolve. TeX math delimiters were excluded after inspecting a false-positive link match.",
+    "review": "Substantive reading of the complete delivered report, equations, numerical tables, source scopes, calculation and current synthesis. The review distinguished bubble/particle speed ratios from an independent process clock, added the cost of recovery capacity, and retained identical hypothetical yield gains for equivalent rotating-array processes. No independent-agent review was performed for this stage.",
+    "source_review": "Twelve primary research, author-abstract, technical-documentation and apparatus records with individual reading/access limits in slow_settling_sources.json. The intended 15-page Jossen author PDF was retrieved after initial access failures; its abstract, selected methods, Table 1, results and conclusions were read. Its SHA-256 is a0a097900de0eb27a04d27c0d7f94713dae8349520ec512d701a91a0aa7974b6. External PDF bytes remain in temporary storage. Other records distinguish full substantive text from indexed abstracts/excerpts; no full scholarly review, supplementary-data audit or figure-image inspection is claimed.",
+    "limitations": [
+      "No empirically demonstrated lunar suspension process, qualified product, factory quotation, buyer demand or new world-product estimate. Quality and accepted-yield gains are hypotheses.",
+      "Terrestrial mixer gravity scaling and constant turbulent power number are extrapolations. Local shear, uniformity, oxygen/heat transfer, aggregation, non-Newtonian rheology, dense solids and biological response remain process-specific.",
+      "Fluid-bed particles, gas properties, retention margin and loop loss are assumptions. Cohesion, expanded-bed dynamics, chemistry, heat and real entrainment are not simulated.",
+      "Cycle costs hold other inputs and yield fixed and assume capacity scales linearly. Forced recovery, equipment service, freight, location and total capital require actual designs; rotating-array service costs are not invented.",
+      "The 1.2 atm lock remains. Early ambient vacuum does not supply a fluid for wet suspensions; volatile liquids and gas beds generally require containment. Original GWP/NWP and prior campaign results are unchanged."
+    ],
+    "products_sha256": {
+      "slow_settling": "cf87897b3c6697a9647876969a0525b5f61b3b89ea66d817bb370eb180099812"
+    },
+    "preserved_products_sha256": {
+      "partial_gravity": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297",
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "industrial_continuation": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+      "mature_industry": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b",
+      "early_campaigns": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6",
       "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
     }
   }

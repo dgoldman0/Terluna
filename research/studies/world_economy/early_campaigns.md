@@ -54,6 +54,8 @@ No 10-year campaign or 10%-saving case in the tested grid has positive investmen
 
 Binding customer advances can change the timing substantially. A 20% advance on the largest campaign's producer contract supplies 12.658 trillion U at commissioning, reducing peak funding from **19.393 to 6.735 trillion U**. Subsequent invoice receipts are lower as the advance is earned. Final cash and unlevered investment NPV remain unchanged: the advance is a delivery liability, not extra production or profit. Its practical terms would need pricing, performance assurance and actual buyer liquidity.
 
+The [slow-settling calculation](slow_settling.md) supplies one check on the assumed production-cost advantage. Even its favorable central mixer-power scaling would need mixing electricity to occupy 27.4% of total reference production cost to provide a 25% saving by itself. Whole-cycle recovery can reduce or reverse that benefit. The campaign assumption therefore still requires a complete qualified route combining actual process, material, capital and delivery advantages.
+
 ## Where the financial benefit persists
 
 Purchases from the joint Moon–array construction programme are useful lunar receipts and can reduce lunar borrowing. They require funding elsewhere in that programme. The default model therefore assigns zero independent-funding share. Earth commercial customers, independently financed array settlements or other Solar System buyers could supply outside income, but the same order must be tied to their budgets before it can support an external-debt claim. Lower delivered construction costs are a separate programme benefit, even when no independent outside income exists.
