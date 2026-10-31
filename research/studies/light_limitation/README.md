@@ -1,5 +1,10 @@
 # Where light limits growth
 
+The [31 October biomass comparison](biomass_comparison.md) uses this historical screen for an
+Earth comparison, reconciles the nutrient-poor waters and distinguishes the pending 301 K
+climate from this calculation's older weather. Its working estimate is about 20 Gt C/year
+(15–25 as a provisional planning range); the original product below remains unchanged.
+
 13 October 2026. The author asked where and when light is the factor that limits growth on the Open Moon, if anywhere:
 it bears on the gas pair, whose warming the dimming answers, and it is worth knowing in general. Light limits growth
 where nothing else does first, so this screen takes each part of the living Moon in turn, reads from the project's

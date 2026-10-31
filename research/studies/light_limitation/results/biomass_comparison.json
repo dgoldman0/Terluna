@@ -1,0 +1,158 @@
+{
+  "schema": "terluna.research.biomass-comparison/1",
+  "evidence": "Scenario reconciliation for a planning comparison. Land retains the older climate; aquatic carbon-use efficiency is a new illustrative assumption. No 301 K vegetation or ecosystem run is represented.",
+  "reading_rule": "Gt C/year means new biomass carbon after producer respiration, over a Julian year. Case endpoints are chosen scenarios, not confidence limits. Surface totals exclude an unresolved net sky contribution. Light effects are sensitivities and are not applied as an updated climate forecast.",
+  "producer": {
+    "files": {
+      "research/studies/light_limitation/biomass_comparison.py": "bce068dd8aa9896e0ff2f6d6185069453e4c4ec8eb5fb8835cd181198647c3c4"
+    },
+    "inputs": {
+      "research/studies/light_limitation/results/light_limitation.json": "f5b61fa5e6d1d5ddd2f81bd3416d19f1bf8f8b88d90142332db371fdb886466b",
+      "research/studies/light_limitation/biomass_comparison_inputs.json": "83bad3aaccc97a284ccdc78ada1876529646c96736216bccb752040e4681be9d",
+      "shared/scenarios/water.json": "876ac34f925302e2b8e73555ece37dfc0560e0551674a4a6a810abd8909b5f6f",
+      "illumination/surface_light/results/surface_light.json": "e2406dbceb34193eaef5bd8a1dd6ea20940be72934301ef618221fdc79ad5572",
+      "biosphere/ecology/lake.py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa",
+      "research/studies/lake_oxygen/sources.json": "fa91f33937bfcee7cbf741cec8e3104975eaecd48594f98d5d71b7719b67ddeb",
+      "research/studies/lake_oxygen/run.py": "f0b657cb7aa67181647817a2c2f02d0fa0f446dc19f093d4ab26c00e17da83ed",
+      "research/studies/resort_301k/README.md": "1426fc6ac1d8b3c54cecd61409df400800732746e41182ba86cc73e07ce080be",
+      "research/decisions.md": "00e29f11a7bb293c7e5c91cdda9b1b1d941fe0126305f673bc309a718cf03430"
+    },
+    "constants": {
+      "MOON_RADIUS": 1737400.0,
+      "EARTH_RADIUS": 6371000.0,
+      "JULIAN_YEAR_DAYS": 365.25
+    }
+  },
+  "area": {
+    "moon_km2": 37932328.09938046,
+    "moon_over_earth": 0.0743677126880723,
+    "common_level_seas_km2": 10621051.86782653,
+    "additional_rainfed_lakes_km2": 3920000.0,
+    "dry_land_from_rounded_bands_km2": 23394000.0
+  },
+  "historical_total_gt_c_year": [
+    16.2,
+    25.5
+  ],
+  "cases": {
+    "low": {
+      "land_gt_c_year": 15.17,
+      "waters": {
+        "area_km2": {
+          "lakes": 3920000.0,
+          "open_sea": 10089999.274435204,
+          "coasts": 531052.5933913266
+        },
+        "oligotrophic_gpp_g_c_m2_year": 18.2625,
+        "oligotrophic_npp_g_c_m2_year": 7.305,
+        "parts_gt_c_year": {
+          "lakes": 0.0286356,
+          "open_sea": 0.07370744469974916,
+          "coasts": 0.15931577801739796
+        },
+        "total_gt_c_year": 0.26165882271714713
+      },
+      "surface_total_gt_c_year": 15.431658822717147,
+      "earth_reference_fraction": 0.14710828239005858
+    },
+    "illustrative_middle": {
+      "land_gt_c_year": 17.605,
+      "waters": {
+        "area_km2": {
+          "lakes": 3920000.0,
+          "open_sea": 9558946.681043878,
+          "coasts": 1062105.1867826532
+        },
+        "oligotrophic_gpp_g_c_m2_year": 73.05,
+        "oligotrophic_npp_g_c_m2_year": 36.525,
+        "parts_gt_c_year": {
+          "lakes": 0.143178,
+          "open_sea": 0.34914052752512764,
+          "coasts": 0.6903683714087245
+        },
+        "total_gt_c_year": 1.1826868989338521
+      },
+      "surface_total_gt_c_year": 18.787686898933853,
+      "earth_reference_fraction": 0.1791009237267288
+    },
+    "high": {
+      "land_gt_c_year": 20.04,
+      "waters": {
+        "area_km2": {
+          "lakes": 3920000.0,
+          "open_sea": 9027894.087652551,
+          "coasts": 1593157.7801739795
+        },
+        "oligotrophic_gpp_g_c_m2_year": 109.575,
+        "oligotrophic_npp_g_c_m2_year": 65.745,
+        "parts_gt_c_year": {
+          "lakes": 0.2577204,
+          "open_sea": 0.593538896792717,
+          "coasts": 1.5931577801739796
+        },
+        "total_gt_c_year": 2.4444170769666966
+      },
+      "surface_total_gt_c_year": 22.484417076966697,
+      "earth_reference_fraction": 0.21434144019987317
+    }
+  },
+  "sky_host_gt_c_year_before_displaced_surface_production": [
+    0.0162,
+    0.826
+  ],
+  "light_only_sensitivity": {
+    "completed_301k": {
+      "sunlight_scales": [
+        0.897
+      ],
+      "fraction_less_than_biomass_weather": [
+        0.0557894736842105
+      ],
+      "fraction_npp_loss_if_only_light_changes": [
+        0.0039052631578947354,
+        0.016457894736842095
+      ]
+    },
+    "provisional_revised_301k": {
+      "sunlight_scales": [
+        0.928395,
+        0.937365
+      ],
+      "fraction_less_than_biomass_weather": [
+        0.013299999999999979,
+        0.022742105263157897
+      ],
+      "fraction_npp_loss_if_only_light_changes": [
+        0.0009309999999999986,
+        0.006708921052631579
+      ]
+    }
+  },
+  "all_land_watered_surface_gt_c_year": [
+    47.06165882271714,
+    56.944417076966694
+  ],
+  "planning": {
+    "gt_c_year": [
+      15,
+      20,
+      25
+    ],
+    "earth_reference_fraction": [
+      0.14299332697807435,
+      0.19065776930409914,
+      0.2383222116301239
+    ],
+    "mean_surface_productivity_over_earth": [
+      1.9227877503486643,
+      2.563717000464886,
+      3.204646250581107
+    ],
+    "dry_biomass_gt_year_at_assumed_carbon_fraction": [
+      33.333333333333336,
+      44.44444444444444,
+      55.55555555555556
+    ],
+    "status": "15-25 Gt C/year around 20 is a rounded judgment for discussion, not a model confidence interval or a guaranteed bound on the pending climate."
+  }
+}

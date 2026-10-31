@@ -20,6 +20,18 @@ The author's standing directions frame it.
 - Imports of carbon and other elements are part of the plan, and the design problem is closing each cycle with
   local return paths.
 
+## Annual biomass production, 31 October 2026
+
+The [comparison with Earth](../../research/studies/light_limitation/biomass_comparison.md)
+puts the sunlight-supported biosphere near 20 Gt C of new biomass a year, with 15–25 as a
+provisional planning range: about one-fifth of Earth's annual net primary production. It
+retains the older land calculation, reconciles the open waters with the nutrient-poor
+direction, and keeps sky production separate until its shading is accounted for. The
+revised 301 K climate still needs its final sunlight and weather; the likely direct light
+correction is small, while rain, respiration and biological adaptation remain consequential.
+This is a conditional capability estimate, with a reproducible comparison calculation,
+not a completed 301 K ecosystem model.
+
 ## The 9 October follow-ups
 
 **The [coupled aerophyte study](../../research/studies/aerophytes/README.md) sets how large aerophytes grow, how
