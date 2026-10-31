@@ -935,6 +935,23 @@
         "Diffuse light through cultivated communities, final301K weather, collection logistics and comparative costs against ground farms, sky-town farms and manufactured materials."
       ],
       "next_session_task": "Test one lesser-body crop and one modular reef product through a complete harvest cycle; qualify shed membrane separately. Develop small-home and community clusters with gardens and habitat, closing payload, local support, gas, trim, human services and nutrient return."
+    },
+    {
+      "topic": "world_economy",
+      "condition": "stage1_inventory_and_finance_framework_2026_10_31; no_economic_forecast_or_financing_plan_adopted",
+      "material": [
+        "studies/world_economy/README.md",
+        "studies/world_economy/inputs.json",
+        "studies/world_economy/results/inventory.json",
+        "studies/world_economy/checks.json"
+      ],
+      "unresolved": [
+        "Future extraction, processing, transport and installation unit costs; incomplete source and protective infrastructure.",
+        "Ordinary and special replacement capital, collective services, ownership and dated debt schedules.",
+        "Same-technology futureEarth sector output, demand, valuation and comparable maintenance costs.",
+        "Revised301K coupled design inputs remain incomplete."
+      ],
+      "next_session_task": "Stage2: price construction by element using explicit future cost scenarios; keep maturity timing and ownership separate from territorial output."
     }
   ]
 }

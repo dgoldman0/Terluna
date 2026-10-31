@@ -1,0 +1,111 @@
+{
+  "schema": "terluna.research.world-economy-inputs/1",
+  "baseline_commit": "e89462608af21bd386b23b7eb36cf8373818619b",
+  "selection": "Accepted C-prime population and committed physical screens, not a simultaneous 301 K redesign.",
+  "products": {
+    "resources/results/first_screen.json": {
+      "schema": "terluna.resources.first-screen/1",
+      "sha256": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
+      "fields": [
+        "inventories.air_kg",
+        "inventories.n2_kg",
+        "inventories.o2_kg",
+        "inventories.water",
+        "delivery.mass_kg",
+        "delivery.build_years",
+        "delivery.flow_kg_s",
+        "film.fresh_feed_kg_s"
+      ]
+    },
+    "resources/results/industry.json": {
+      "schema": "terluna.resources.industry/1",
+      "sha256": "7ac8754b4ec1c3c4f50bd55f4803cad6e5d0a9f1709cc9e7eb0a68af8ce3e79c",
+      "fields": [
+        "people.stock_t_per_person",
+        "people.lifetime_years",
+        "operation.braking_mj_kg",
+        "operation.braking_power.build_pw",
+        "after_build.air.computed_kg_s",
+        "after_build.water.hydrogen_escape_as_water_kg_s"
+      ]
+    },
+    "research/studies/distributions/results/distributions.json": {
+      "schema": "terluna.research.distributions/1",
+      "sha256": "2e3dec8aa99608bfb12a29759f672fa7c953cd06a0cdddd40295c4f3589dd1fa",
+      "fields": [
+        "distributions.C'.people_billion",
+        "distributions.C'.moon.water_lift_gw",
+        "transcribed.array_habitat_gt_per_billion.value"
+      ]
+    },
+    "research/studies/inhabited_volume/results/inhabited_volume.json": {
+      "schema": "terluna.research.inhabited-volume/1",
+      "sha256": "62002e2d2edd27109ac410097826ea96a1d4b4a9799dd64c33b1cfd505ce0a29",
+      "fields": [
+        "assumptions.districts",
+        "assumptions.lift_allocation_shares"
+      ]
+    },
+    "research/studies/ways_of_living/results/ways_of_living.json": {
+      "schema": "terluna.research.ways-of-living/1",
+      "sha256": "9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148",
+      "fields": [
+        "aerial_reference.lifting_species_t_per_resident",
+        "aerial_reference.hydrogen_upkeep"
+      ]
+    },
+    "research/studies/solar_shield_array/results/array_heat.json": {
+      "schema": "terluna.research.array-heat/1",
+      "sha256": "8ade010fcbf805adf71a90c74e4357ad699067f5fbc8f445267fc984e80a1aa1",
+      "fields": [
+        "fleet.optical_mass_Gt",
+        "fleet.film_upkeep_Gt_per_year",
+        "film_plant.power_TW"
+      ]
+    },
+    "provisioning/results/power.json": {
+      "schema": "terluna.provisioning.power/1",
+      "sha256": "bdd1f27720fc017cdea30aba2f36319db519caccc337b03429d3da4cb29aac7f",
+      "fields": [
+        "reserves.ring_fault.delivered_total_tw",
+        "reserves.ring_fault.energy_twh",
+        "reserves.ring_fault.ground.battery_bridge_mt",
+        "ring.electricity_at_the_tiles_tw",
+        "ring.collector_and_aperture_km2_installed",
+        "grid.receiver_km2"
+      ]
+    },
+    "research/studies/food_systems/results/food_blend.json": {
+      "schema": "terluna.research.food-blend/1",
+      "sha256": "e7e57094d5cce132ee2a1aad29463cb13f15768f7289614e68c37182aab258af",
+      "fields": [
+        "blend.8.wild_30_hybrid_20.power_tw",
+        "blend.8.wild_30_hybrid_20.fields_km2",
+        "blend.8.wild_30_hybrid_20.structure_gt",
+        "blend.8.wild_30_hybrid_20.phosphorus_mt_year"
+      ]
+    },
+    "provisioning/results/computing.json": {
+      "schema": "terluna.provisioning.computing/1",
+      "sha256": "48f60b85d0c33abbaa911fb152eb0c7896ac8a6f4577a0935f740bb915aab43b",
+      "fields": [
+        "supply.per_tw"
+      ]
+    },
+    "research/studies/terrain_through_time/results/terrain_through_time.json": {
+      "schema": "terluna.research.terrain-through-time/1",
+      "sha256": "7f7dff7d31b26d6e0fcb771aeabf787a1410eb9da41a2aa2f80ffd3d033e01fc",
+      "fields": [
+        "upkeep.rates"
+      ]
+    },
+    "research/studies/carbon_cycle/results/carbon_cycle.json": {
+      "schema": "terluna.research.carbon-cycle/1",
+      "sha256": "f021c73fb6d4d82e83d6047aec395c53cf6b756bcca6fda2ee14f1f2f2da688b",
+      "fields": [
+        "questions.imports",
+        "questions.managed_return.by_corner"
+      ]
+    }
+  }
+}

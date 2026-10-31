@@ -1,0 +1,38 @@
+{
+  "accessed": "2026-10-31",
+  "sources": [
+    {
+      "id": "bea_gdp",
+      "url": "https://www.bea.gov/index.php/news/gdp-release-additional-information",
+      "reading_scope": "GDP, gross output and intermediate input definitions; targeted definitions page.",
+      "evidence": "Primary official source; supports definitions, not fictional future prices."
+    },
+    {
+      "id": "oecd_sna2025",
+      "url": "https://www.oecd.org/en/publications/measuring-natural-resources-in-the-national-accounts_420c7c2a-en/full-report/measuring-natural-resources_a0accc5d.html",
+      "reading_scope": "Section 2.4, paragraphs 59\u201362 and reproduced SNA Annex 4: depreciation and depletion in net aggregates; not full-book reading.",
+      "evidence": "Primary official source; supports definitions, not fictional future prices."
+    },
+    {
+      "id": "bea_fixed_assets",
+      "url": "https://www.bea.gov/resources/learning-center/definitions-and-introduction-fixed-assets",
+      "reading_scope": "Definitions of investment and economic depreciation; short definitions page.",
+      "evidence": "Primary official source; supports definitions, not fictional future prices."
+    },
+    {
+      "id": "oecd_income_finance",
+      "url": "https://www.oecd.org/en/publications/oecd-benchmark-definition-of-foreign-direct-investment-fifth-edition_7f05c0a3-en/full-report/links-between-fdi-and-other-statistics_e6f184d4.html",
+      "reading_scope": "Paragraphs 652\u2013672: GDP/GNI and financial-account links; not full-book reading.",
+      "evidence": "Primary official source; supports definitions, not fictional future prices."
+    },
+    {
+      "id": "abs_consolidation",
+      "url": "https://www.abs.gov.au/methodologies/government-finance-statistics-annual-methodology/2020-21",
+      "reading_scope": "Consolidation and accounting sections; not entire methodology.",
+      "evidence": "Primary official source; supports definitions, not fictional future prices."
+    }
+  ],
+  "retrieval_limits": [
+    "Combined 2025 SNA PDF retrieval failed on size; IMF chapter returned403; ECB-hosted handbook timed out. Those documents are not claimed as read; successful official OECD account is used explicitly."
+  ]
+}

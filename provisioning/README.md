@@ -56,6 +56,13 @@ The author's decisions frame it:
 - **The network:** a mesh of aerostats drifting near 30 km, fixed posts, fibre and towers, linked to the array
   ([network.md](network.md)).
 
+## Mature world economy
+
+The [world-economy study](../research/studies/world_economy/README.md) compares the completed
+Moon, inhabited array and equally advanced Earth as three interconnected economies. Its first stage
+binds the physical inventory and defines gross product, depreciation, resident income and debt
+service. Construction valuation and annual product scenarios follow in separate stages.
+
 ## Aerophyte crops, living area and services
 
 The [31 October assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef
