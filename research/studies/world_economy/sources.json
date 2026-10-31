@@ -77,5 +77,39 @@
       "url": "https://www.oecd.org/en/publications/oecd-compendium-of-productivity-indicators-2026_734a5e68-en/full-report/productivity-patterns-across-industries_8238f2eb.html",
       "reading_scope": "Chapter findings and Box4.1 on service quality, nonmarket and digital measurement; not fullcompendium."
     }
+  ],
+  "amenity_development_sources": [
+    {
+      "url": "https://unstats.un.org/unsd/publication/Seriesf/SeriesF_80rev1e.pdf",
+      "reading_scope": "Targeted paragraphs2.6–2.8,4.81–4.98 and Annex6,2026-10-31; tourism identity, direct GVA and leakage. No full-document review."
+    },
+    {
+      "url": "https://www.abs.gov.au/methodologies/tourism-satellite-account-methodology/2024-25",
+      "reading_scope": "Visitor/usual-environment definitions, direct/indirect output and relation to core accounts;2026-10-31."
+    },
+    {
+      "url": "https://www.bea.gov/sites/default/files/2019-12/Chapter-9.pdf",
+      "reading_scope": "Government production and cost valuation, definitions pp9-2–9-3;2026-10-31."
+    },
+    {
+      "url": "https://www.bea.gov/help/faq/64",
+      "reading_scope": "Housing services and exclusion of asset capital gains;2026-10-31."
+    },
+    {
+      "url": "https://www.lpi.usra.edu/publications/books/lunar_sourcebook/pdf/Chapter07.pdf",
+      "reading_scope": "Indexed extracted text of Table7.15, printed p346, landing-site soil composition;2026-10-31. Initial direct retrieval timed out; indexed primary text then succeeded. Screenshot retrieval failed; no visual PDF inspection claimed."
+    },
+    {
+      "url": "https://www.nasa.gov/wp-content/uploads/2019/04/carpenter.pdf",
+      "reading_scope": "Extracted slides8 and17 cross-check Apollo11 P2O5/K2O transcription and Table7.15 attribution; not a new lunar assay.2026-10-31."
+    },
+    {
+      "source": "resources/results/sea_phosphorus.json",
+      "reading_scope": "Byte-bound land_loss.soil_p_grade fields; oxide-to-element conversion already in producer. Composition reference, not exportable mineral reserve."
+    },
+    {
+      "source": "resources/industry.md; provisioning/population.md; habitation/README.md; research/decisions.md; food_systems/distributions/conservation/carbon_cycle/aerophytes studies",
+      "reading_scope": "Targeted local design audit of accepted hybrid uses, early services, resource timing, ecological establishment and excluded costs."
+    }
   ]
 }

@@ -1,5 +1,7 @@
 # Earth, Open Moon and array: world products and construction finance
 
+The [amenity and tourism account](amenities.md) and [early development and mining account](development.md) extend the mature comparison with local hybrid-region services, six-direction travel, phased independent income and finite export allowances. Their scenarios preserve the original GWP/NWP totals and distinguish project cash from production.
+
 This study estimates the economic consequences of completing the Open Moon and maintaining it at the selected population. Its comparison is an equally advanced future Earth, with the same access to automation, energy and biological technology. The intended reader knows the project's physical design; the economic definitions and valuation assumptions are introduced here. This is a scenario study, not a forecast of future prices or a demonstrated construction programme.
 
 The [completed comparison](comparison.md) reports Earth, Open Moon and array as three peer
@@ -82,6 +84,7 @@ python -m research.studies.world_economy.inventory
 python -m research.studies.world_economy.inventory --output research/studies/world_economy/results/inventory.json
 python -m research.studies.world_economy.construction
 python -m research.studies.world_economy.compare
+python -m research.studies.world_economy.amenities
 python -m pytest research/studies/world_economy/tests
 ```
 

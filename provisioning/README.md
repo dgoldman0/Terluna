@@ -71,6 +71,15 @@ middle advanced case requires about 97 years of reference Earth output, spread o
 creditor receipts. Existing loans can instead retire before full population. These are
 conditional comparisons; no financing programme or economic forecast is adopted.
 
+The [amenity and tourism extension](../research/studies/world_economy/amenities.md) gives the
+4.68-million-km² hybrid park/garden regions explicit resident and visitor accounts, including
+reciprocal travel among all three worlds. These attribute existing output. The
+[early-finance extension](../research/studies/world_economy/development.md) tests phased array
+and lunar earnings, future-resource reservations for lunar mining, and debt reduction from
+independent surplus. A 5% contribution under the stated phased, 0.1%-real scenario retires
+array debt during construction; the much larger lunar import bill remains demanding.
+No commissioning dates, export reserves or financing institutions are adopted.
+
 ## Aerophyte crops, living area and services
 
 The [31 October assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef

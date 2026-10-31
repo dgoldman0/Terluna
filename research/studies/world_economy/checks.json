@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 4,
-  "scope": "Completed first conditional comparison of Earth, Open Moon and array: physical inventory, construction prices, annual production and renewal, resident income, required trade and construction finance.",
+  "stage": 5,
+  "scope": "Three-world economic comparison extended with hybrid amenities, reciprocal tourism, phased independent income and reserve-constrained early lunar mining; conditional models, not adopted export or finance plans.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -47,7 +47,8 @@
     1,
     2,
     3,
-    4
+    4,
+    5
   ],
   "stages3_4": {
     "focused_check": {
@@ -69,5 +70,32 @@
     "review": "Substantive reading of the delivered comparison, supporting methodology and source scopes; independent reviews of accounting, physical cost boundaries and productivity assumptions. Reported tables and financial/depreciation sensitivities matched stored outputs. Reviews corrected construction-era renewal funding, territorial cost versus asset value, ordinary-capital overlap, household electricity classification and the interpretation of creditor stress claims.",
     "documentation_links": "23 local study links checked against candidate/current repository; all resolved.",
     "comparison_sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+  },
+  "stage5": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "168 passed in1.39seconds on the final model files."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "2999 Python tests passed,20skipped in403.20seconds; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer1155files,0violations.",
+      "log": "/tmp/terluna-economy-followup-check.log"
+    },
+    "numerical_controls": [
+      "All six visitor routes: budgets, capacity, operator territory, direct value added, imported inputs and external-trade closure; zero automatic GWP addition.",
+      "72 development scenarios and idle-stock stress: matched construction grants and debt age, cash conservation, compound debt avoidance and one-time array surplus transfers.",
+      "Finite mining envelopes: reserved stock and demand/capacity caps, phosphorus/feed mass closure, economic depletion distinct from cash reserves, independent versus programme-funded buyers.",
+      "Bound input identity and full output reproduction; original GWP/NWP comparison product remains unchanged."
+    ],
+    "documentation_links": "35 local study links checked; all resolve.",
+    "review": "Substantive reading of both delivered reports and comparison update; independent accounting, hybrid-design and physical-cost reviews. All72 development scenarios plus idle-stock stress conserve mature resources and counterpart receipts; all36 mining cases independently checked for mass, nutrient, reservation, GVA/NWP/cash and debt arithmetic. Reviews resolved the idle-care comparator, domestic transport classification and one table rounding error.",
+    "limitations": [
+      "Activity, saving, visitor demand and capacity are hypothetical; no resource-feasible commissioning plan or market equilibrium.",
+      "Mining pools, protected/future reservations and nutrient loss allowances are synthetic; no surveyed exportable reserves or extraction authorization.",
+      "High phosphorus retention, separation cost and finished-product delivery allowances are unvalidated; other elemental and site constraints remain additional.",
+      "Full scholarly source review and visual PDF verification were not performed."
+    ],
+    "amenities_sha256": "ac34679a5eddecaef39e81de13d8ce0efa5a14bd5a22558ce6ccd3129fd8c48c"
   }
 }

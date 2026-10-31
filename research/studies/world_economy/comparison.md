@@ -100,6 +100,12 @@ These assumed prices do not establish market contracts. In particular, available
 
 The array's power, computing, materials and protective services enter its own production account. Lunar and Earth purchases connect those accounts through trade. A separate ownership example transfers an assumed 10% of array net product to lunar residents as profits, changing resident income without relocating array production. It is an income-allocation example, not an inferred profit rate or asset valuation. No additional export bonus is added on top of array output.
 
+## Amenities, travel and early earnings
+
+The [hybrid-amenity extension](amenities.md) treats the 4.68-million-km² park and garden programme as part of ordinary resident life and explicitly models all six interworld travel directions. In its connected case, lunar interworld tourism accounts for 24.23 trillion U of direct value added and local amenities for 35.25 trillion U, within the existing sector totals. Reciprocal travel and imported inputs limit net export earnings: even the stronger lunar-destination cases leave part of the original financing requirement to other exports. Free-entry public garden services can enter measured production; broader enjoyment remains outside that measure.
+
+The [development extension](development.md) tests independent earnings before full population, including early orbital services and reserve-constrained lunar mining. At 0.1% real, a phased 5% contribution from realised output retires array construction debt by year 206 and reduces lunar debt by 8.5%, or 17.2% if subsequent array surplus funds lunar construction. Later opening and premature asset installation materially worsen the result. These are controlled cash-flow scenarios with assumed customers, commissioning and saving; the original production ratios above are unchanged. Finite mining reserves, nutrient retention and matching buyer expenditure prevent gross mineral sales from becoming an unearned financing bonus.
+
 ## What changes the conclusion
 
 The main sensitivities are different in kind. Source-site technology, nitrogen grade and water inventory determine construction expenditure. Realised sector activity and demand determine gross product. Ordinary capital composition and the prices/lives of engineered assets determine net product. Ownership, debt age, rates and the share financed determine what residents retain.
