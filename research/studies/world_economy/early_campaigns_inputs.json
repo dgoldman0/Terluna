@@ -1,0 +1,62 @@
+{
+  "schema": "terluna.research.early-campaigns-inputs/1",
+  "evidence": "Accelerated, binding-order structural campaigns with explicit raw throughput, ramp, budgets, plant capital and buyer advances. No actual contracts, cost advantage, engineering capacity or commissioning schedule established.",
+  "products": {
+    "research/studies/world_economy/industrial_markets_inputs.json": {
+      "sha256": "6d22ccf4c4f845efc5a342c11d0c299cc5dd349214c6081f966014fcc31bc98d",
+      "schema": "terluna.research.industrial-markets-inputs/1"
+    },
+    "research/studies/world_economy/results/industrial_markets.json": {
+      "sha256": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "schema": "terluna.research.industrial-markets/1"
+    }
+  },
+  "raw_capacities_kg_year": [
+    100000000000.0,
+    300000000000.0,
+    1000000000000.0
+  ],
+  "years": [
+    10,
+    25,
+    50
+  ],
+  "buyer_budgets_U_year": [
+    500000000000.0,
+    1500000000000.0,
+    3500000000000.0
+  ],
+  "cost_cases": [
+    "modest_site_advantage",
+    "strong_site_advantage"
+  ],
+  "customer_advance_fractions": [
+    0,
+    0.2
+  ],
+  "ramp": [
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "reference": {
+    "raw_capacity_kg_year": 1000000000000.0,
+    "years": 25,
+    "buyer_budget_U_year": 3500000000000.0,
+    "cost_case": "strong_site_advantage",
+    "advance": 0.2
+  },
+  "independently_funded_fraction": 0,
+  "boundaries": [
+    "All structural modules are assumed qualified and delivered at the source cost model price. Dense or nested components are delivered; giant fragile systems are assembled at their destination.",
+    "Eligible orders are the existing15Gt structural subset, not15Gt plus an additional programme. Raw nameplate, power and route capacity scale together from the source100Mt/year plant. Refining chemistry, manufacturing design and expansion lead time remain unqualified.",
+    "A binding customer contract and annual budget are assumed. Additional one-time buyer advances require extra buyer funds and create delivery liabilities; they are financing, not sales or GDP at receipt.",
+    "Output is capped by ramp, budget, route, power, local feed and the finite order. The campaign ends when all orders are served or the chosen horizon ends; a horizon is not an atmospheric shutdown rule.",
+    "The manufacturing cost share and capital allowance are inherited scenario calibrations. Initial capital, replacement, fixed costs, decommissioning and terminal recovery are all counted; no operating cash is called profit after capital without that reconciliation.",
+    "All buyer payments are programme funded by default. An alternative external-buyer interpretation requires independently financed, otherwise identical orders; a buyer advance does not change that provenance.",
+    "The cumulative cash and NPV exclude equity/debt funding injections and cash interest. Peak funding must be provided; the1% real discount rate is a required-return scenario, not an offered loan.",
+    "These orders are alternatives to earlier array construction procurement. Recurring mature renewal demand is a different time phase, not additional orders in this campaign.",
+    "A pressure/launch/processing design must preserve the assumed delivered costs throughout the campaign. Early low-pressure advantages do not establish the assumed10% or25% whole-production cost reductions."
+  ]
+}

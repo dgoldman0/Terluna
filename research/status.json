@@ -938,7 +938,7 @@
     },
     {
       "topic": "world_economy",
-      "condition": "conditional_three_world_economy_with_progressive_vacuum_adaptation_and_factory_continuation_2026_10_31; reproducible_accounts; no_market_forecast_factory_design_or_financing_plan_adopted",
+      "condition": "conditional_three_world_economy_with_mature_partial_gravity_industry_and_early_infrastructure_campaigns_2026_10_31; reproducible_accounts; no_market_forecast_factory_design_or_financing_plan_adopted",
       "material": [
         "studies/world_economy/README.md",
         "studies/world_economy/inputs.json",
@@ -972,7 +972,14 @@
         "studies/world_economy/results/industrial_legacy.json",
         "studies/world_economy/industrial_continuation.py",
         "studies/world_economy/industrial_continuation_inputs.json",
-        "studies/world_economy/results/industrial_continuation.json"
+        "studies/world_economy/results/industrial_continuation.json",
+        "studies/world_economy/mature_industry.md",
+        "studies/world_economy/mature_industry_inputs.json",
+        "studies/world_economy/mature_industry_sources.json",
+        "studies/world_economy/results/mature_industry.json",
+        "studies/world_economy/early_campaigns.md",
+        "studies/world_economy/early_campaigns_inputs.json",
+        "studies/world_economy/results/early_campaigns.json"
       ],
       "unresolved": [
         "Source-site energy, ore processing and bulk capture architecture; future unit prices and full construction/settlement timeline, including renewal funding.",
@@ -985,9 +992,11 @@
         "Enclosed-community visitor demand and engineering costs, permanent resident funding and a dated commissioning schedule; new facility capital must be reconciled with mature ordinary assets.",
         "Retained-gas release sequence, local vapour/dust control and pressure-qualified process windows; no complete vacuum factory or post-atmosphere export architecture.",
         "Equipment quotations, realistic simultaneous orders and route capacity; terminal recovery versus retained use, equity returns and qualified long-term material/specification survival.",
-        "Process-specific staged enclosure/pumping costs and retrofit funding, retained customers and export-route adaptation; no mandatory closure follows from loss of ambient process vacuum."
+        "Process-specific staged enclosure/pumping costs and retrofit funding, retained customers and export-route adaptation; no mandatory closure follows from loss of ambient process vacuum.",
+        "Complete product-cycle and delivered-cost qualification under 1.2 atm: hot assemblies, printed cores and sintered composites compared with optimized Earth and rotating array processes.",
+        "Funded campaign orders, ramp and commissioning design, export routes and actual plant capital; customer advances change financing timing and do not establish independent programme income."
       ],
-      "next_session_task": "Cost one modular construction route against optimized Earth and array alternatives, including local-vacuum tooling, feed qualification and delivery. Match its commissioning and gas-release window to independently funded orders; qualify an orbital feed reserve or deployed asset and price its storage, transition and ownership."
+      "next_session_task": "Compare one complete hot-assembly or printed-core production route across Earth, the 1.2 atm Moon and orbital facilities, including cure, qualification, yield and delivery. Tie a modular early yard to funded structural or thermal orders, atmospheric sequencing and a priced post-campaign use; test intermediate-gravity sintering experimentally before assigning a premium."
     }
   ]
 }

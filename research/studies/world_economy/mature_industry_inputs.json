@@ -1,0 +1,131 @@
+{
+  "schema": "terluna.research.mature-industry-inputs/1",
+  "evidence": "Physical ratios and explicit normalized delivered-cost and recurring-demand sensitivities. No product qualification, inferred gravity-to-cost multiplier, industrial revenue forecast or new GWP addition.",
+  "products": {
+    "research/studies/world_economy/results/industrial_physics.json": {
+      "sha256": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "schema": "terluna.research.industrial-physics/1"
+    },
+    "research/studies/world_economy/results/construction.json": {
+      "sha256": "fcbd96fa0428e3b983c407a65d6a622a2c264bb42233bb4d49f2d1174a281f7c",
+      "schema": "terluna.research.world-economy-construction/1"
+    },
+    "research/studies/world_economy/results/comparison.json": {
+      "sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "schema": "terluna.research.world-economy-comparison/1"
+    },
+    "resources/results/industry.json": {
+      "sha256": "7ac8754b4ec1c3c4f50bd55f4803cad6e5d0a9f1709cc9e7eb0a68af8ce3e79c",
+      "schema": "terluna.resources.industry/1"
+    }
+  },
+  "environment": {
+    "comparison_temperature_K": 301,
+    "comparison_gas": "Same composition and temperature on Earth and Moon to isolate gravity and pressure; no temperature change to inherited atmosphere inventories.",
+    "target_vacuum_Pa": 0.1,
+    "chamber_m3": 150,
+    "effective_speed_m3_s": 1,
+    "fixed_process_gas_load_Pa_m3_s": 1,
+    "separate_diagnostic_rule": "Initial pump work/time assume negligible additional gas. The independently chosen fixed process-load example gives the required inlet speed and extra ideal discharge work; it is not asserted to be compatible with the initial1m3/s pump."
+  },
+  "centrifuges": {
+    "radial_work_depths_m": [
+      1,
+      10,
+      100
+    ],
+    "allowed_radial_g_fraction": [
+      0.01,
+      0.05
+    ],
+    "transverse_process_speeds_m_s": [
+      0.01,
+      0.1,
+      1
+    ],
+    "coriolis_tolerance_fraction": 0.01,
+    "rule": "Chosen tolerances and speeds. Radial gravity gradient and maximum transverse Coriolis ratio are diagnostics, not compulsory constraints on every recipe. Axial motion and process orientation can reduce Coriolis effects; shared orbital infrastructure can lower costs."
+  },
+  "cost_screen": {
+    "base_attempt_cost_U": 100,
+    "annual_qualified_output": 1,
+    "accepted_yield": 1,
+    "normalization": "One specified qualified product unit per year is a normalization only. No product mass, actual throughput or factory price is inferred. Costs include levelized capital service and use a common real U.",
+    "recipes": {
+      "ambient_or_controlled_gas": {
+        "gravity_step": 0.3,
+        "pressure_gas": 0,
+        "pressure_shell": 0,
+        "pump_cycle": 0,
+        "other": 0.7
+      },
+      "vacuum_recipe": {
+        "gravity_step": 0.25,
+        "pressure_gas": 0.01,
+        "pressure_shell": 0.03,
+        "pump_cycle": 0.03,
+        "other": 0.68
+      }
+    },
+    "gravity_step_savings": [
+      0,
+      0.1,
+      0.2,
+      0.4
+    ],
+    "earth_step_saving": 0.15,
+    "array_site_U_per_qualified_unit": [
+      0,
+      5,
+      15
+    ],
+    "yield_sensitivity": [
+      0.9,
+      0.95,
+      1
+    ],
+    "reference_step_saving": 0.2,
+    "reference_array_site_U_per_qualified_unit": 5,
+    "delivery_U_per_qualified_unit": {
+      "moon": {
+        "moon": 0.5,
+        "array": 5,
+        "earth": 8
+      },
+      "earth": {
+        "moon": 5,
+        "array": 8,
+        "earth": 0.5
+      },
+      "array": {
+        "moon": 8,
+        "array": 0.5,
+        "earth": 5
+      }
+    },
+    "boundary": "Shares are hypothetical disjoint costs. Gravity-step savings are scenarios. Array reproduces the same partial-gravity recipe and removes only ambient-vacuum pressure/gas/cycle costs; internal process gas, contamination and feed containment remain in other. Annual site service is disjoint and can include rotation and ordinary-pressure accommodation. An alternative free-fall recipe may be still cheaper.",
+    "pressure_component_rule": "Initial-gas evacuation, fixed-geometry ideal buckling and no-added-gas constant-speed cycle factors affect only their named shares. Internal process pumping remains in other. Actual costs need plant design and may follow different functions."
+  },
+  "renewal": {
+    "aerial_eligible_fraction": 0.1,
+    "aerial_award_share": 0.1,
+    "aerial_capacity_kg_year": 100000000000.0,
+    "aerial_budget_U_year": 300000000000.0,
+    "array_structure_life_years": [
+      50,
+      100
+    ],
+    "array_eligible_fraction": 0.1,
+    "array_award_share": 0.1,
+    "array_capacity_kg_year": 100000000000.0,
+    "array_budget_U_year": 300000000000.0,
+    "rule": "Mature stock replacement with no growth. Award share is a customer assumption, not predicted from cost. Carrier40-year life is inherited; array structure50/100-year lives are new sensitivities. Spending already belongs to replacement/CFC and is not added to GDP."
+  },
+  "boundaries": [
+    "Mature lunar pressure remains locked at1.2atm. A1atm comparison changes no design choice and would still require artificial vacuum.",
+    "Gravity is not a manufacturing-cost multiplier. Capillary, stress and convection scalings preserve their fixed material, geometry or mechanism assumptions; some processes become slower or harder.",
+    "The array can choose microgravity, local centrifuges or large rotating facilities. No arbitrary charge for all orbital industry is adopted.",
+    "Local construction/use advantages are distinct from exported material quality. Launch acceleration, destination loads, packing and delivered cost remain product requirements.",
+    "Normalized cost screens do not establish output, margin, earned cash or empirical lunar gains. Renewable demand is not new world output."
+  ]
+}

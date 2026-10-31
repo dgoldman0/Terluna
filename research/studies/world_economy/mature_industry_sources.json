@@ -1,0 +1,350 @@
+{
+  "schema": "terluna.research.mature-industry-sources/1",
+  "accessed": "2026-10-31",
+  "purpose": "Targeted primary-source evidence for mature partial-gravity industry and early durable-infrastructure candidates",
+  "status": "Physical screening and conditional economics; no commercially qualified lunar advantage established over both optimized Earth and orbital factories",
+  "reading_boundary": "Individual records distinguish abstracts, indexed text, retrieved full text and selected figure inspection. Access failures remain recorded. This is not a full scholarly literature review. Temporary external PDFs and rendered pages are not redistributed.",
+  "sources": [
+    {
+      "id": "kauzya_2024_diw_partial_gravity",
+      "citation": "Kauzya, J.-B. et al. (2024), Direct ink writing of viscous inks in variable gravity regimes using parabolic flights, Acta Astronautica 219, 569–579",
+      "doi": "10.1016/j.actaastro.2024.03.037",
+      "url": "https://matterassembly.org/assets/pdf/preprints/2024_direct_ink_writing.pdf",
+      "alternate_author_url": "https://robertmaccurdy.com/docs/2024_Kauzya-Direct%20ink%20writing%20of%20viscous%20inks%20in%20variable%20gravity%20regimes%20using%20parabolic%20flights.pdf",
+      "retrieval": "Author-hosted PDF retrieved; local text extracted; selected pages rendered and visually inspected",
+      "reading_scope": "Abstract; methods sections 2.1–2.5; results 3.2–3.3; conclusion; printed pages 576–577 figures 6–8 visually inspected. Not a complete statistical reanalysis or supplementary-data audit.",
+      "local_pdf": "/tmp/terluna-mature-industry/diw_2024.pdf",
+      "sha256": "df2307aec7de7a01b8c756ab1f466065905e2c00efd03747122214442a02755a",
+      "visual_artifacts": [
+        "/tmp/terluna-mature-industry/diw-08.png",
+        "/tmp/terluna-mature-industry/diw-09.png"
+      ],
+      "supported_claims": [
+        "Short lunar-gravity bridge printing improves unsupported shape retention under the tested recipe",
+        "Wall slumping does not show a corresponding lunar advantage"
+      ],
+      "conditions": {
+        "nominal_lunar_acceleration_m_s2": 1.62,
+        "nominal_martian_acceleration_m_s2": 3.72,
+        "parabola_duration_s_approx": 25,
+        "bridge_observation_s_after_onset": 3,
+        "lunar_bridge_span_demonstrated_mm": 80,
+        "span_133_mm_comparison": "Figure 6 contains Earth and microgravity points; do not assign 133 mm to lunar gravity",
+        "bridge_ink": "Santa Cruz White clay; dried 110 C for 24 h, milled; liquid-to-solid ratio 0.27",
+        "nozzle_inner_diameter_mm": 1.5,
+        "wall_ink": "LHS-1 simulant; 10 g methylcellulose in 300 mL deionized water; liquid/solids 0.3",
+        "wall_layers": 7
+      },
+      "evidence_limits": [
+        "Residual microgravity units conflict internally: section 2.1 approximately 0.05 g; section 3.2 approximately 0.05 m/s2",
+        "Intermediate 1.8 g segments excluded from analysis and intentionally used to remove bridge remnants; subsequent wall prints wiped away",
+        "No full cure, final strength, commercial yield or long-duration lunar production qualification",
+        "No qualification at 1.2 atm and 301 K"
+      ]
+    },
+    {
+      "id": "cordonier_2021_foam",
+      "citation": "Cordonier, G. J. et al. (2021), Direct foam writing in microgravity, npj Microgravity 7, 55",
+      "doi": "10.1038/s41526-021-00185-1",
+      "url": "https://www.nature.com/articles/s41526-021-00185-1",
+      "primary_archive_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8692601/",
+      "retrieval": "Indexed publisher/PMC primary text read; direct publisher request encountered access failure and direct PMC request encountered CAPTCHA",
+      "reading_scope": "Abstract, printing/profile results and relevant preparation/characterization methods returned by primary-source search indexing; no independent image or supplemental-data review",
+      "supported_claims": [
+        "TiO2-loaded foam line shape and spreading differed between parabolic microgravity and Earth gravity",
+        "Post-print characterization used air drying; no further cure in the reported characterization method"
+      ],
+      "evidence_limits": [
+        "Microgravity only, no lunar-gravity test",
+        "Short parabolic interval with subsequent changed gravity",
+        "No qualified commercial product or demonstrated lunar optimum"
+      ]
+    },
+    {
+      "id": "cordonier_2023_titania_function",
+      "citation": "Cordonier, G. J. et al. (2023), Direct Writing of a Titania Foam in Microgravity for Photocatalytic Applications, ACS Applied Materials & Interfaces 15(40), 47745–47753",
+      "doi": "10.1021/acsami.3c09658",
+      "url": "https://doi.org/10.1021/acsami.3c09658",
+      "primary_archive_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10571002/",
+      "retrieval": "Indexed primary ACS/PMC text read; direct PMC request returned CAPTCHA",
+      "reading_scope": "Abstract, conclusion, photocatalytic sample preparation and result discussion; no full figures, supplemental-data audit or gravity-resolved functional performance reconstruction",
+      "supported_claims": [
+        "Gravity effect on printed height changes sign with printing speed",
+        "Volumetric flow generally higher under Earth gravity",
+        "Photocatalysis tests used separately prepared, heat-treated films"
+      ],
+      "evidence_limits": [
+        "No lunar-gravity optimum",
+        "Photocatalysis demonstration does not isolate a benefit from printing under microgravity",
+        "Full optimized process economics not established"
+      ]
+    },
+    {
+      "id": "lee_2019_fresh_competitor",
+      "citation": "Lee, A. et al. (2019), 3D bioprinting of collagen to rebuild components of the human heart, Science 365(6452), 482–487",
+      "doi": "10.1126/science.aav9051",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31371612/",
+      "retrieval": "PubMed primary research abstract retrieved",
+      "reading_scope": "Abstract and bibliographic record only",
+      "supported_claims": [
+        "Earth support-bath printing is a demonstrated comparator for soft collagen structures"
+      ],
+      "evidence_limits": [
+        "Not full-paper review",
+        "Does not establish a transplantable full heart or comparison against lunar manufacturing"
+      ]
+    },
+    {
+      "id": "nasa_2023_bioprinting",
+      "citation": "NASA (2023-12-20), 3D Bioprinting",
+      "url": "https://www.nasa.gov/missions/station/iss-research/3d-bioprinting/",
+      "retrieval": "NASA primary programme account retrieved",
+      "reading_scope": "Substantive BFF discussion, including printed meniscus returned for testing",
+      "supported_claims": [
+        "Orbital microgravity bioprinting is an actual competing production setting"
+      ],
+      "evidence_limits": [
+        "Programme report rather than clinical evidence",
+        "No approved transplant or lunar-gravity production superiority established"
+      ]
+    },
+    {
+      "id": "nasa_drop_facilities",
+      "citation": "NASA Glenn, Reduced Gravity Drop Towers and Test Rigs",
+      "url": "https://www.nasa.gov/glenn/glenn-expertise-space-exploration/physical-sciences-program/reduced-gravity-drop-towers-and-test-rigs/",
+      "retrieval": "NASA facility description retrieved",
+      "reading_scope": "Facility capabilities, drop duration/geometry, operations and rotating D drop vehicle",
+      "supported_claims": [
+        "5.18-second drop capability",
+        "Rotating drop vessel provides short-duration partial gravity"
+      ],
+      "evidence_limits": [
+        "Current facility example, not a future maximum Earth or array capability",
+        "Webpage includes historical development descriptions; no assumption that every listed configuration was operationally available in 2026"
+      ]
+    },
+    {
+      "id": "lemke_2026_gravity_tolerant_bioprinting",
+      "citation": "Lemke, B. et al. (2026), Gravity-Tolerant In-Flight 3D Bioprinting Enabled by Stereolithography for Space Tissue Engineering, Advanced Science 13(17), e20715",
+      "doi": "10.1002/advs.202520715",
+      "url": "https://doi.org/10.1002/advs.202520715",
+      "primary_text_url": "https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202520715?af=R",
+      "pmid": "41566611",
+      "retrieval": "Direct PubMed yielded no substantive text and DOI opening failed; indexed Wiley primary full text supplied abstract, selected results and methods",
+      "reading_scope": "Abstract; results 2.1 and indexed fine-feature/flight-control comparisons; methods 4.1, 4.2 and 4.11; no figure-image or supplementary-document inspection",
+      "supported_claims": [
+        "Closed SLA/DLP hydrogel printing maintained broad fidelity and cell viability during mixed 0–1.8 g parabolic flight conditions",
+        "Detailed results retain some feature-size and flight-condition differences, so not exact invariance"
+      ],
+      "evidence_limits": [
+        "No long-duration lunar-gravity production or clinical qualification",
+        "Gravity-tolerant process is an adverse control for assuming a generic lunar soft-material premium",
+        "Cell viability and construct fabrication do not establish transplant efficacy"
+      ]
+    },
+    {
+      "id": "upadhyaya_1999_gravitational_sintering",
+      "citation": "Upadhyaya, A., Iacocca, R. G. and German, R. M., Gravitational Role in Liquid Phase Sintering, NASA-hosted primary report",
+      "url": "https://ntrs.nasa.gov/api/citations/19990019810/downloads/19990019810.pdf?attachment=true",
+      "retrieval": "NASA PDF full text retrieved through web tool",
+      "reading_scope": "Abstract; experimental procedures on printed pages 1–3; results on pages 3 and 5–6; discussion on pages 6–8. Figures were not visually inspected.",
+      "supported_claims": [
+        "W-Ni-Fe and W-Ni-Cu samples were sintered in evacuated and sealed containers during matched Earth and Shuttle experiments",
+        "Low-solid-fraction specimens distorted in both gravity conditions: gravitational slumping on Earth and spheroidization in microgravity",
+        "Pore and composition distributions retained process-specific defects"
+      ],
+      "conditions": "Millimetre specimens, approximately 8.29 mm diameter and height; 1500 C; holding times 1–600 minutes; 1997 Shuttle experiments",
+      "limits": [
+        "No lunar-gravity experiment or industrial throughput",
+        "No demonstrated optimal intermediate acceleration",
+        "Experiment supports testing gravity together with skeleton, chemistry and process controls"
+      ]
+    },
+    {
+      "id": "nakatani_1994_floating_zone",
+      "citation": "Nakatani, M., Takahashi, M. and Nishida, T. (1994), Floating Zone Method in Microgravity",
+      "doi": "10.19009/jjacg.21.4_430",
+      "url": "https://www.jstage.jst.go.jp/article/jjacg/21/4/21_KJ00000857358/_article/-char/en",
+      "retrieval": "Primary bibliographic record and author abstract retrieved",
+      "reading_scope": "Author abstract only; eight-page Japanese full paper not read",
+      "supported_claims": [
+        "Spacelab-J experiment grew an InSb crystal 20 mm in diameter and 100 mm long",
+        "Author abstract attributes part of the quality improvement to a thin oxide film suppressing Marangoni flow"
+      ],
+      "limits": [
+        "No lunar threshold or optimized commercial comparison",
+        "No vacuum prescription inferred",
+        "Abstract's general claim of arbitrary crystal size was not adopted"
+      ]
+    },
+    {
+      "id": "nasa_2025_levlab",
+      "citation": "NASA Marshall (2025), Materials Levitation Laboratory capability sheet",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/05/g-657270-16-em-materials-levitation.pdf?emrc=e1bc83",
+      "retrieval": "Complete two-page primary facility sheet text retrieved",
+      "reading_scope": "Capabilities, sample dimensions, operating pressures, material and application scope; no separate image review",
+      "supported_claims": [
+        "Earth electrostatic levitation processes 1–3 mm samples in vacuum or neutral gas",
+        "Earth electromagnetic levitation processes 4–10 mm samples in vacuum or neutral gas",
+        "Vacuum capability is described as 10^-8 Torr; neutral-gas capability is described as up to 5 atm for ESL and 2 atm for EML"
+      ],
+      "limits": [
+        "Laboratory characterization capability, not future production economics",
+        "No claim that terrestrial containerless processing is impossible"
+      ]
+    },
+    {
+      "id": "brauer_2024_tempus",
+      "citation": "Bräuer et al. (2024), TEMPUS—A microgravity electromagnetic levitation facility for parabolic flights, Review of Scientific Instruments 95, 053903",
+      "doi": "10.1063/5.0182719",
+      "url": "https://pubs.aip.org/aip/rsi/article/95/5/053903/3293189/TEMPUS-A-microgravity-electromagnetic-levitation",
+      "retrieval": "Indexed primary abstract and background passages retrieved; direct publisher request failed with HTTP 500 redirect",
+      "reading_scope": "Abstract and indexed facility-mechanism description only",
+      "supported_claims": [
+        "Microgravity reduces levitation-field heating, stirring and shape distortion",
+        "Parabolic facility offers approximately 22 seconds of free fall"
+      ],
+      "limits": [
+        "Full experimental methods not reviewed",
+        "No lunar-gravity production or factory-cost evidence"
+      ]
+    },
+    {
+      "id": "volz_inorganic_crystal_growth",
+      "citation": "Volz, M., Topical: Inorganic Crystal Growth in a Reduced Gravity Environment, NASA author white paper",
+      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/121_9cbd8f0889ec2344ae5b5ad5cb01b03d_VolzMartinP.pdf",
+      "retrieval": "Seven-page NASA-hosted white-paper text retrieved",
+      "reading_scope": "Introduction, prior-studies and phase/transport discussions on printed pages 2–4",
+      "supported_claims": [
+        "Single-flight comparisons have causal-inference limits",
+        "Buoyancy reduction can improve material uniformity while Marangoni transport persists",
+        "Detector, laser and imaging materials are possible applications"
+      ],
+      "limits": [
+        "Research synthesis and agenda rather than new lunar experiment",
+        "No market size or lunar industrial advantage established"
+      ]
+    },
+    {
+      "id": "xrmon_2023_solidification",
+      "citation": "XRMON researchers (2023), In-situ X-ray monitoring of solidification and related processes of metal alloys, npj Microgravity",
+      "doi": "10.1038/s41526-023-00321-z",
+      "url": "https://www.nature.com/articles/s41526-023-00321-z",
+      "retrieval": "Indexed primary full metallic-foam section retrieved; direct publisher request failed with HTTP 500 authorization redirect",
+      "reading_scope": "Metallic-foam section and associated indexed figure captions; full paper and figures not independently reviewed",
+      "supported_claims": [
+        "Microgravity modifies drainage, liquid-fraction distribution and film rupture in metallic foams",
+        "Blowing-agent behaviour affects outcomes"
+      ],
+      "limits": [
+        "No lunar optimum or finished industrial cost comparison",
+        "No quantitative product-quality multiplier adopted",
+        "Foam recipes need not be vacuum processes"
+      ]
+    },
+    {
+      "id": "nasa_2024_optical_fibre",
+      "citation": "NASA (2024), Optical Fiber Production",
+      "url": "https://www.nasa.gov/missions/station/iss-research/optical-fiber-production/",
+      "retrieval": "NASA primary programme article retrieved",
+      "reading_scope": "Full substantive article text",
+      "supported_claims": [
+        "February–March 2024 orbital production exceeded 11.9 km with several draws above 700 m",
+        "The report states return analysis was still needed to assess the quality objective at its publication date"
+      ],
+      "limits": [
+        "2024 report status is not described as current 2026 quality status",
+        "Orbital competitor example, not evidence of a lunar optimum"
+      ]
+    },
+    {
+      "id": "zblan_2026_space_fabrication",
+      "citation": "Space-Based Fabrication of ZBLAN Optical Fibers: A Breakthrough in Microgravity Manufacturing (2026), Space: Science & Technology, published 23 July 2026",
+      "doi": "10.34133/space.0572",
+      "url": "https://spj.science.org/doi/10.34133/space.0572",
+      "retrieval": "Indexed primary abstract retrieved; direct publisher request returned HTTP 403",
+      "reading_scope": "Abstract only",
+      "supported_claims": [
+        "The paper reports improved transmission and reduced crystal-related scattering in the orbital product"
+      ],
+      "limits": [
+        "Full methods not reviewed",
+        "No quantitative quality multiplier adopted",
+        "No partial-gravity optimum or lunar commercial claim"
+      ]
+    },
+    {
+      "id": "luria_2025_fluidic_lenses",
+      "citation": "Luria et al. (2025), In-space manufacturing of optical lenses: Fluidic Shaping aboard the International Space Station, author preprint",
+      "doi": "10.48550/arXiv.2510.06474",
+      "url": "https://arxiv.org/abs/2510.06474",
+      "retrieval": "Author abstract and bibliographic record retrieved",
+      "reading_scope": "Abstract only; full PDF not read",
+      "supported_claims": [
+        "Ax-1 experiments produced centimetre-scale cured polymer lenses with smooth surfaces and thermochemical distortions",
+        "A 172 mm water lens demonstrated basic optical function"
+      ],
+      "limits": [
+        "Author preprint and abstract-only review",
+        "No commercial production or perfect lens inferred",
+        "Orbital competitor rather than lunar-specialty evidence"
+      ]
+    },
+    {
+      "id": "hill_1998_spin_cast_mirror",
+      "citation": "Hill, J. M., Angel, J. R. P., Lutz, R. D., Olbert, B. H. and Strittmatter, P. A. (1998), Casting the first 8.4 meter borosilicate honeycomb mirror for the Large Binocular Telescope, Proceedings of SPIE 3352, 172–181",
+      "doi": "10.1117/12.319295",
+      "url": "https://experts.arizona.edu/en/publications/casting-the-first-84-meter-borosilicate-honeycomb-mirror-for-the-/",
+      "retrieval": "Institutional primary publication record and complete author abstract retrieved",
+      "reading_scope": "Author abstract and bibliographic record only; ten-page conference article not read",
+      "supported_claims": [
+        "Terrestrial spin casting already produced an 8.4 m honeycomb borosilicate mirror blank",
+        "Reported casting used a rotating furnace, subsequent annealing, fixture handling and preparation for polishing"
+      ],
+      "limits": [
+        "No lunar production experiment or cost comparison",
+        "Reported historical rate and cost are not adopted as future factory limits"
+      ]
+    },
+    {
+      "id": "nasa_glenn_lift_equation",
+      "citation": "NASA Glenn Research Center, Lift Equation",
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/lift-equation-2/",
+      "retrieval": "Primary page text retrieved 2026-10-31",
+      "reading_scope": "Full substantive lift equation and coefficient discussion; page illustration not independently inspected",
+      "supported_claims": [
+        "Lift depends on density, speed squared, area and experimentally dependent lift coefficient"
+      ],
+      "limits": [
+        "Matched coefficient and temperature/composition assumptions are required for the derived lunar speed ratio; not vehicle certification"
+      ],
+      "additional_reading_record": {
+        "id": "nasa_lift_equation",
+        "citation": "NASA Glenn, Lift Equation",
+        "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/lift-equation/",
+        "retrieval": "NASA technical explanation retrieved",
+        "reading_scope": "Lift equation and flow-condition qualifications",
+        "supported_claims": [
+          "L = CL rho V squared A / 2; lift coefficient depends on flow conditions"
+        ],
+        "evidence_limits": [
+          "Moon ratios are independent calculations, not NASA vehicle predictions",
+          "Constant lift coefficient at changed Reynolds number is an explicit screening assumption"
+        ]
+      }
+    },
+    {
+      "id": "nasa_glenn_propeller_momentum",
+      "citation": "NASA Glenn Research Center, Propeller Thrust",
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/propeller-thrust/",
+      "retrieval": "Primary page text retrieved 2026-10-31",
+      "reading_scope": "Full substantive actuator-disk momentum derivation and limitations; page illustration not independently inspected",
+      "supported_claims": [
+        "Ideal actuator-disk thrust and flow relations support the study-derived induced-hover scaling"
+      ],
+      "limits": [
+        "Ideal momentum theory omits practical blade/profile losses, control and reserves; not a six-percent total vehicle-power claim"
+      ]
+    }
+  ]
+}

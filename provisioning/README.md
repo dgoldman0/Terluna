@@ -94,6 +94,13 @@ separates pressure loads from weight relief and treats the vacuum interval as a 
 sequence to preserve deliberately, with progressively pumped operation available afterward.
 No commissioning dates, export reserves or financing institutions are adopted.
 
+The [mature-industry assessment](../research/studies/world_economy/mature_industry.md) compares
+domestic construction, aerial renewal and selected fabrication under the 1.2 atm lock with
+Earth and orbital alternatives. [Early infrastructure campaigns](../research/studies/world_economy/early_campaigns.md)
+size finite structural orders, full plant recovery and customer advances. Their physical
+advantages, assumed prices and financing flows remain distinct; existing replacement and
+construction orders are counted once.
+
 ## Aerophyte crops, living area and services
 
 The [31 October assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef

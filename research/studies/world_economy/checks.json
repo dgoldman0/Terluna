@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 7,
-  "scope": "Three-world comparison with progressive vacuum adaptation, finite industrial procurement, factory continuation and enduring stocks or operating assets. Liquidation is a sensitivity, not a pressure-triggered requirement; no market forecast, factory design or financing programme is adopted.",
+  "stage": 8,
+  "scope": "Three-world comparison with mature partial-gravity industry under the 1.2 atm lock, recurring replacement demand and early finite structural campaigns. Physical scalings, conditional delivered costs, plant recovery and financing timing remain separate; no market forecast, factory design or financing programme is adopted.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -50,7 +50,8 @@
     4,
     5,
     6,
-    7
+    7,
+    8
   ],
   "stages3_4": {
     "focused_check": {
@@ -193,6 +194,49 @@
       "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
       "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
       "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+    }
+  },
+  "stage8": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "341 passed in 2.36 seconds on settled scientific files; 46 new mature-cost, physical, demand and campaign controls."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3172 passed, 20 skipped in 411.38s (0:06:51); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1177 files checked, 0 violations.",
+      "log": "/tmp/terluna-mature-industry-check.log"
+    },
+    "numerical_controls": [
+      "Matched 301 K gas properties, 1.2/1 atmosphere loads, ideal vacuum work, no-added-gas pumpdown and a separate continuous process-load diagnostic. A 1 Pa m3/s load requires 10 m3/s to approach 0.1 Pa; it is not assigned to the example 1 m3/s pump.",
+      "Independent gravity, self-weight beam, capillarity, Rayleigh, flight, buoyancy and centrifuge checks. Ideal hover excludes profile losses; gravity cancels from buoyant supported mass per volume. Orbital field gradient and transverse Coriolis sensitivities are explicit.",
+      "72 normalized matched delivered-cost cases and 18 yield variants count process, pressure-specific components, accepted yield, capital service and delivery once. Earth optimization and shared orbital partial gravity remain competing options.",
+      "Aerial and array structural replacement demand comes from bound installed stocks, lifetimes, eligible fractions, market shares, budgets and capacity; existing replacement and original GWP are not increased.",
+      "108 early campaign cases cap output by ramp, finite orders, budget, feed, power and routes. Initial plant, actual replacement, residual recovery and decommissioning reconcile with cash; customer advances leave output, unlevered NPV and final surplus unchanged.",
+      "Independent review reproduced published campaign rows, year-23 pre-terminal capital recovery and 24 positive-NPV cases. No tested ten-year or modest-saving campaign has positive NPV.",
+      "Additional read-only valuation of the reference annual capital-inclusive cash: at 2% discount NPV is -1.819945789752 trillion U; cash-flow IRR is 1.2769683787% real. Prices, initial capital and annual flows are held fixed. The 1% valuation reproduces the stored 0.763740266783 trillion U.",
+      "Full source/product reproduction and bound-source rejection passed; five prior industrial and comparison results remain byte-identical."
+    ],
+    "documentation_links": "234 local links across both new reports, comparison, study README, provisioning README and research README checked; all resolve.",
+    "review": "Substantive reading of both reports and updated synthesis, with independent atmospheric, vacuum and accounting reviews. Direct-ink-writing lunar evidence is restricted to the tested 80 mm bridge and short parabolas; the 133 mm result is Earth/microgravity. Numerical cost examples are hypotheses, not manufacturing quotations. Early campaign sales, operating cash, capital-inclusive surplus, asset ownership and independent financing are distinguished.",
+    "source_review": "Nineteen primary source records, including consolidated readings of the NASA lift page. Individual records distinguish abstracts, indexed primary passages, retrieved full text and limitations. Selected pages of the Kauzya 2024 author PDF were rendered and figures 6-8 visually inspected by the atmospheric reviewer. Publisher access failures and the paper residual-microgravity unit discrepancy remain recorded. No full scholarly review or supplementary-data audit.",
+    "limitations": [
+      "No complete lunar qualified product, empirically established delivered-cost advantage, factory or launch design, exportable reserve survey, actual orders or financing contract.",
+      "Early campaigns assume 10% or 25% whole-production cost savings; these are not inferred from gravity or pressure. Nominal 10/25/50-year horizons do not establish ambient-vacuum duration or require atmospheric shutdown.",
+      "The positive reference requires patient capital and chosen terminal values. Cash interest, taxes, required equity distributions and natural-resource depletion are not fully priced; buyer advances are delivery obligations and programme payments do not create independent programme income.",
+      "Inherited 301 K inventory, physical asset masses and source industrial prices have not all been recomputed. Replacement stocks and synthetic feed/route/power allowances remain engineering screens.",
+      "Repository checks establish reproducibility and workspace integrity. No empirical factory validation, complete market-clearing model or manuscript/PDF production review."
+    ],
+    "products_sha256": {
+      "mature_industry": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b",
+      "early_campaigns": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6"
+    },
+    "preserved_products_sha256": {
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "industrial_continuation": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
       "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
     }
   }
