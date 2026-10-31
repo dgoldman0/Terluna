@@ -128,7 +128,7 @@ The [industrial-combustion assessment](industrial_combustion.md) develops the at
 
 The [distinctive-activities assessment](distinctive_activities.md) identifies a broader advantage in large, continuous spaces combining low gravity, breathable air, water and living landscapes. Flight, physical performance, aquatic facilities, aerial gardens and large testing campuses can serve residents and outside customers. Rotating array facilities can reproduce partial gravity, with scale and motion affecting the comparison. These activities develop the existing sector possibilities; they do not add another copy of amenity output or establish export profits.
 
-The [early sport, media and finance study](sports_finance.md) develops a single-community programme before the existing large visitor milestones. Remote rights and sponsorship can scale differently from arrivals, while operating cash, bond proceeds and redeemable balances have separate claims. Its illustrative venue debt replaces no existing financing assumption and adds no world-product or planetary-debt benefit.
+The [early sport, media and project-finance scenario](sports_finance.md) examines one community before the existing large visitor milestones. Remote rights and sponsorship can scale differently from arrivals; the numerical demand and cost assumptions remain unvalidated. Its illustrative venue debt adds no world-product or planetary-debt benefit. The separate [monetary-system study](../monetary_system/README.md) compares currency arrangements, banking, public finance and external payments, preserving the construction and product estimates here.
 
 ## What changes the conclusion
 

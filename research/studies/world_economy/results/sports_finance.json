@@ -1,10 +1,10 @@
 {
-  "schema": "terluna.research.sports-finance/1",
-  "evidence": "Conditional annual cash and financing examples for one sports/media venue hosted by an existing enclosed community. No facility quotation, audience forecast, currency adoption, clinical qualification or bond issue is established.",
+  "schema": "terluna.research.sports-finance/2",
+  "evidence": "Preliminary conditional annual cash and project-finance scenarios for one sports/media venue hosted by an existing enclosed community. No qualified sports programme, facility quotation, customer demand, clinical qualification or bond issue is established. Monetary institutions are analysed in the separate monetary_system study.",
   "reading_rule": "U is a common real accounting numeraire. Reference early-exports prices are inherited assumptions extrapolated to a much smaller facility. Operating cash includes compensation; no GDP/GVA is calculated. Rates and equal payments are real/indexed-equivalent scenarios. Reference debt remains fixed across independent operating stress years; reserves start full in each case. Capital costs exclude the host settlement and construction-period interest/ramp losses. Those require separate funding.",
   "assumptions": {
-    "schema": "terluna.research.sports-finance-inputs/1",
-    "evidence": "Conditional annual cash and financing examples for one sports/media venue hosted by an existing enclosed community. No facility quotation, audience forecast, currency adoption, clinical qualification or bond issue is established.",
+    "schema": "terluna.research.sports-finance-inputs/2",
+    "evidence": "Preliminary conditional annual cash and project-finance scenarios for one sports/media venue hosted by an existing enclosed community. No qualified sports programme, facility quotation, customer demand, clinical qualification or bond issue is established. Monetary institutions are analysed in the separate monetary_system study.",
     "reading_rule": "U is a common real accounting numeraire. Reference early-exports prices are inherited assumptions extrapolated to a much smaller facility. Operating cash includes compensation; no GDP/GVA is calculated. Rates and equal payments are real/indexed-equivalent scenarios. Reference debt remains fixed across independent operating stress years; reserves start full in each case. Capital costs exclude the host settlement and construction-period interest/ramp losses. Those require separate funding.",
     "products": {
       "research/studies/world_economy/results/early_exports.json": {
@@ -119,26 +119,6 @@
         200000000.0
       ],
       "basis": "Illustrative operating/refinancing snapshot, not construction underwriting or investor commitments. Gross principal is capped by cash coverage, investor appetite and funding uses. Reserve earns zero real return, starts full, is pledged only to debt service and must be replenished after use. One-year stress has no modeled insurance payout, recovery or default restructuring. No equity dividend, growth allocation or planetary-development transfer is assumed. Working cash is funded separately and is not drawn in this one-year stress; reported remaining gaps precede any use of that liquidity. Capital-scale stress reports additional upfront capital separately and assumes it is provided outside the fixed reference bond."
-    },
-    "payment_example": {
-      "issued_U": 10000000.0,
-      "redemption_U": 7000000.0,
-      "illiquid_diversion_cases_U": [
-        0.0,
-        6000000.0
-      ],
-      "basis": "Optional one-for-one redeemable local balances denominated in settlement money. Diverted assets retain book value but cannot meet immediate redemptions; no insolvency loss assumed. This is a liquidity example, not a proposed bank or token architecture."
-    },
-    "fx_example": {
-      "export_receipts_U": 20000000.0,
-      "import_costs_U": 15000000.0,
-      "local_receipts_L": 30000000.0,
-      "local_costs_L": 20000000.0,
-      "U_per_L_cases": [
-        1.0,
-        0.7
-      ],
-      "basis": "Separate toy cash account before taxes, renewal or debt service, independent of the venue. Fixed quantities/prices in each denomination. U/L is settlement units per local unit; no exchange-rate or macroeconomic prediction."
     }
   },
   "inherited_screen": {
@@ -149,10 +129,10 @@
   },
   "producer": {
     "files": {
-      "research/studies/world_economy/sports_finance.py": "95227f0949189fb256c396d6599799c461afb3dc1cca061dd597a866fe8349ee",
+      "research/studies/world_economy/sports_finance.py": "6992242f4b1c679b49118f4da6364935ac5ca24149326fe799024647c15ed7db",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
-      "research/studies/world_economy/sports_finance_inputs.json": "29f9df98a88c487a0e924e1014028d25b7f27401716edac19169d94e0c651313",
-      "research/studies/world_economy/sports_finance_sources.json": "e67cb225e947e18bc2e040abe066e1c0f7b1639e914d189abccb7d0714d607b3"
+      "research/studies/world_economy/sports_finance_inputs.json": "7bd95bee4dd4b2cfed382a74cb1b8396d0cfd656b7eec1dd907a1de35c5af782",
+      "research/studies/world_economy/sports_finance_sources.json": "4568a764b9b91ee02e4ac1240bb0b676bc144ddd9ea8a24e428c3939ece05c19"
     },
     "constants": {
       "JULIAN_YEAR_DAYS": 365.25
@@ -663,29 +643,5 @@
       },
       "sources_minus_uses_U": -9.778887033462524e-09
     }
-  },
-  "payment_balances": {
-    "0.0": {
-      "liquid_assets_U": 3000000.0,
-      "outstanding_claims_U": 3000000.0,
-      "redemption_paid_U": 7000000.0,
-      "unpaid_redemption_U": 0.0,
-      "illiquid_asset_at_book_U": 0.0,
-      "liquid_shortfall_to_all_claims_U": 0.0,
-      "net_assets_at_book_U": 0.0
-    },
-    "6000000.0": {
-      "liquid_assets_U": 0.0,
-      "outstanding_claims_U": 6000000.0,
-      "redemption_paid_U": 4000000.0,
-      "unpaid_redemption_U": 3000000.0,
-      "illiquid_asset_at_book_U": 6000000.0,
-      "liquid_shortfall_to_all_claims_U": 6000000.0,
-      "net_assets_at_book_U": 0.0
-    }
-  },
-  "fx_cash_U": {
-    "1.0": 15000000.0,
-    "0.7": 12000000.0
   }
 }

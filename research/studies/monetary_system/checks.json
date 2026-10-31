@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-31",
+  "scope": "Monetary institutions, construction/external accounts and bounded transaction references.",
+  "evidence": "Source-informed conditional analysis and verified arithmetic, not empirical lunar validation or a macroeconomic forecast.",
+  "focused_checks": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest research/studies/monetary_system/tests research/studies/world_economy/tests/test_sports_finance.py -q",
+    "result": "38 passed in 0.09 s: 24 monetary and 14 venue/project-finance tests."
+  },
+  "full_repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+    "result": "PASS; 3306 Python tests passed, 20 skipped in 581.41 s; 191 JavaScript tests passed. Layer check 1195 files, zero violations. Research integrity/provenance and five protection input hashes verified; ensemble setup validator passed.",
+    "log": "/tmp/terluna-monetary-system-check.log",
+    "boundary": "Repository integrity and numerical checks; no empirical lunar validation or manuscript clearance."
+  },
+  "reviews": [
+    "Independent monetary-institution review of three connected reports; source reading scopes recorded separately.",
+    "Independent ledger review identified own-account transfer classification, explicit delivered-equipment imports and individual-bank versus system reserve shortage; all reflected in implementation or explanatory bounds.",
+    "Independent reconciliation of 14 fiscal alternatives over seven transaction sizes found unchanged consolidated public position from secondary purchases, aggregate wealth 365 U and final deposits 120 plus transaction amount.",
+    "Three fixed lunar shocks compared across four currency architectures as prospective mechanism-based inferences; no probability, magnitude or ranking is estimated."
+  ],
+  "preserved_baselines": [
+    {
+      "path": "research/studies/world_economy/results/amenities.json",
+      "sha256": "ac34679a5eddecaef39e81de13d8ce0efa5a14bd5a22558ce6ccd3129fd8c48c"
+    },
+    {
+      "path": "research/studies/world_economy/results/comparison.json",
+      "sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+    },
+    {
+      "path": "research/studies/world_economy/results/construction.json",
+      "sha256": "fcbd96fa0428e3b983c407a65d6a622a2c264bb42233bb4d49f2d1174a281f7c"
+    },
+    {
+      "path": "research/studies/world_economy/results/distinctive_activities.json",
+      "sha256": "290b9d8e7e628660b36073d746c52ff0b7255aa6a773a8ac92f06fb580773138"
+    },
+    {
+      "path": "research/studies/world_economy/results/early_campaigns.json",
+      "sha256": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6"
+    },
+    {
+      "path": "research/studies/world_economy/results/early_exports.json",
+      "sha256": "36097cc25ad5025327c87d9d6a7fd297c2cf08d89a1f82dd470f0749a5814d2c"
+    },
+    {
+      "path": "research/studies/world_economy/results/industrial_combustion.json",
+      "sha256": "8c54e57922c63440a35824faa7c4926b1b77d9f3414c05577d36377680a25b20"
+    },
+    {
+      "path": "research/studies/world_economy/results/industrial_continuation.json",
+      "sha256": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980"
+    },
+    {
+      "path": "research/studies/world_economy/results/industrial_legacy.json",
+      "sha256": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496"
+    },
+    {
+      "path": "research/studies/world_economy/results/industrial_markets.json",
+      "sha256": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231"
+    },
+    {
+      "path": "research/studies/world_economy/results/industrial_physics.json",
+      "sha256": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32"
+    },
+    {
+      "path": "research/studies/world_economy/results/inventory.json",
+      "sha256": "2951ce19248878b5f0f1a548cfc82272cbb86aa0029dd5f1a5a2189e9304e1dc"
+    },
+    {
+      "path": "research/studies/world_economy/results/mature_industry.json",
+      "sha256": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b"
+    },
+    {
+      "path": "research/studies/world_economy/results/partial_gravity.json",
+      "sha256": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297"
+    },
+    {
+      "path": "research/studies/world_economy/results/pressure_advantages.json",
+      "sha256": "db6b1c5e602ba8f960974c2e61096b5f64ca5c80ef8fbf9b1d5701cdbf52524f"
+    },
+    {
+      "path": "research/studies/world_economy/results/slow_settling.json",
+      "sha256": "cf87897b3c6697a9647876969a0525b5f61b3b89ea66d817bb370eb180099812"
+    }
+  ],
+  "limitations": [
+    "No adopted monetary jurisdiction, regime, law, policy rule, guarantee or reserve target.",
+    "No behavioral credit, inflation, exchange-rate, trade or production model; normalized reference balances do not estimate money stocks.",
+    "Bank equity ownership, interest accrual, regulatory calibration, collateral encumbrance and full asset-market pricing are outside the ledger.",
+    "No reduction in construction cost/debt or addition to GWP/NWP inferred.",
+    "Primary sources were read at targeted recorded scopes; two failed full-text retrievals remain explicitly recorded with affected use excluded or revised."
+  ],
+  "document_checks": {
+    "local_links": 254,
+    "scope": "Local Markdown destinations in eight new or revised synthesis/research documents; all resolve.",
+    "substantive_reading": "All three monetary reports and the full sports-concepts report read substantively. Independent institutional/accounting review led to explicit private interbank funding alternatives, correct transfer classifications, delivery/ownership conditions on equipment imports, debt-horizon analysis and a common-shock regime comparison. Sports review clarified judging moments, possession, body-contact conduct and match duration."
+  },
+  "result_sha256": "fd2b20dced8d8572ce6df1585ec096da90461debb456e7d195a2fd6677e5aa8a"
+}

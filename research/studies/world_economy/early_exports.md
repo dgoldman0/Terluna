@@ -4,7 +4,7 @@
 
 The calculation uses one common real unit U, with future Earth annual GWP of 100,000 U per resident and nine billion Earth residents. It prices a hypothetical visitor and manufacturing portfolio, its new capital and its own loans. The result is **facility cash after a stated shared-community allowance**, not a complete city budget, net exports or an increase added to the previous whole-world GWP.
 
-The [early sport and media account](sports_finance.md) examines a smaller starting point than these population milestones: one venue, a resident performance cohort, limited visitors and remote commercial receipts. Its financing and currency examples form an alternative early portfolio; they must be reconciled with this account before aggregation.
+The [early sport and media account](sports_finance.md) examines a smaller starting point than these population milestones: one venue, a resident performance cohort, limited visitors and remote commercial receipts. Its venue cash and project-finance examples form an alternative early portfolio; they must be reconciled with this account before aggregation.
 
 ## What visitors buy before the open world
 

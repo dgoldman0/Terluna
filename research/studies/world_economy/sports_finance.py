@@ -1,4 +1,4 @@
-"""Small enclosed-venue cash, debt capacity and payment-currency examples.
+"""Preliminary enclosed-venue operating cash and project-debt scenarios.
 
 All quantities are conditional. U is a real numeraire, not an adopted currency.
 The cash account includes wages and cannot be interpreted as value added.
@@ -115,29 +115,9 @@ def fixed_bond_stress(cash,bond):
         cash_after_service_positive_U=max(0,cash-service))
 
 
-def redeemable_balances(issued,redemption,illiquid_diversion):
-    """One-for-one settlement claims; no interest, loss or new issuance."""
-    nonnegative(issued,redemption,illiquid_diversion)
-    if redemption>issued or illiquid_diversion>issued:
-        raise ValueError('Redemption/diversion above issued balances')
-    liquid=issued-illiquid_diversion
-    paid=min(redemption,liquid)
-    return dict(liquid_assets_U=liquid-paid,outstanding_claims_U=issued-paid,
-        redemption_paid_U=paid,unpaid_redemption_U=redemption-paid,
-        illiquid_asset_at_book_U=illiquid_diversion,
-        liquid_shortfall_to_all_claims_U=illiquid_diversion,
-        net_assets_at_book_U=(liquid-paid)+illiquid_diversion-(issued-paid))
-
-
-def fx_cash(export_receipts,import_costs,local_receipts,local_costs,U_per_local_unit):
-    nonnegative(export_receipts,import_costs,local_receipts,local_costs,U_per_local_unit)
-    if U_per_local_unit==0:raise ValueError('Positive exchange rate required')
-    return export_receipts-import_costs+U_per_local_unit*(local_receipts-local_costs)
-
-
 def load_inputs(path=INPUT_PATH,root=ROOT):
     spec=json.loads(Path(path).read_text())
-    if spec['schema']!='terluna.research.sports-finance-inputs/1':raise ValueError('Unexpected input schema')
+    if spec['schema']!='terluna.research.sports-finance-inputs/2':raise ValueError('Unexpected input schema')
     bound={}
     for name,identity in spec['products'].items():
         p=Path(root)/name
@@ -168,10 +148,9 @@ def results():
     fixed=base['fixed_cash_cost_U']+base['replacement_U']
     need_media=max(0,(fixed-onsite_contribution)/(1-c['media_cash_cost_fraction']))
     need_debt_media=max(0,(fixed+bond['annual_service_U']/(1-c['tax_allowance_fraction'])-onsite_contribution)/(1-c['media_cash_cost_fraction']))
-    funds=s['payment_example'];fx=s['fx_example']
     files=['research/studies/world_economy/sports_finance.py','research/studies/world_economy/finance.py',
            'research/studies/world_economy/sports_finance_inputs.json','research/studies/world_economy/sports_finance_sources.json']
-    return dict(schema='terluna.research.sports-finance/1',evidence=s['evidence'],reading_rule=s['reading_rule'],
+    return dict(schema='terluna.research.sports-finance/2',evidence=s['evidence'],reading_rule=s['reading_rule'],
         assumptions=s,inherited_screen=old,
         producer=dict(files={p:digest(ROOT/p) for p in files},constants=constants_used(files)),
         reference_bond=bond,operating_scenarios=cases,
@@ -180,9 +159,7 @@ def results():
             rights_audience_equivalents_before_debt=max(0,need_media-base['sponsorship_receipts_U'])/s['rights_receipt_U_per_audience_equivalent'],
             rights_audience_equivalents_to_pay_debt=max(0,need_debt_media-base['sponsorship_receipts_U'])/s['rights_receipt_U_per_audience_equivalent']),
         financing_sensitivity={f'{rate:g}_{years}':issue(rate,years,f['investor_demand_U']) for rate,years in f['rate_term_cases']},
-        investor_demand_sensitivity={str(demand):issue(f['real_rate'],f['years'],demand) for demand in f['demand_cases_U']},
-        payment_balances={str(diversion):redeemable_balances(funds['issued_U'],funds['redemption_U'],diversion) for diversion in funds['illiquid_diversion_cases_U']},
-        fx_cash_U={str(rate):fx_cash(fx['export_receipts_U'],fx['import_costs_U'],fx['local_receipts_L'],fx['local_costs_L'],rate) for rate in fx['U_per_L_cases']})
+        investor_demand_sensitivity={str(demand):issue(f['real_rate'],f['years'],demand) for demand in f['demand_cases_U']})
 
 
 def main():

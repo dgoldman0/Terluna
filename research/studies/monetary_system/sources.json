@@ -1,0 +1,147 @@
+{
+  "schema": "terluna.research.monetary-system-sources/1",
+  "source_admission": "Primary institutional sources at explicitly recorded reading scopes. Lunar institutional arrangements and reference balances are proposals and synthetic examples. No present law, exchange rate, interest rate or monetary calibration is adopted.",
+  "sources": [
+    {
+      "id": "boe_money_2014",
+      "title": "McLeay, Radia and Thomas: Money creation in the modern economy (2014)",
+      "url": "https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-creation-in-the-modern-economy.pdf",
+      "reading_scope": "Printed pages 14–17: loan-created deposits, settlement needs and constraints on lending.",
+      "use": "Commercial-bank credit and settlement mechanics; no fixed money multiplier or lunar behavioural calibration.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "hkma_lers",
+      "title": "HKMA: How Does the LERS Work?",
+      "url": "https://www.hkma.gov.hk/eng/key-functions/money/linked-exchange-rate-system/how-does-the-lers-work/",
+      "reading_scope": "Main substantive description; page revised 22 October 2025.",
+      "use": "Monetary-base backing, conversion commitments and liquidity adjustment; institutional analogy only.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "hkma_base",
+      "title": "HKMA: Components of the Monetary Base",
+      "url": "https://www.hkma.gov.hk/eng/key-functions/money/linked-exchange-rate-system/components-of-the-monetary-base/",
+      "reading_scope": "Complete component list; page revised 23 November 2020.",
+      "use": "Distinguishes the monetary base from all commercial-bank deposits.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "ecb_risk_sharing",
+      "title": "ECB: Risk sharing in the euro area (2022)",
+      "url": "https://www.ecb.europa.eu/press/economic-bulletin/articles/2022/html/ecb.ebart202207_01~f71f0eaa4a.en.html",
+      "reading_scope": "Sections 1–2 on capital, credit and fiscal risk sharing.",
+      "use": "Mechanisms of adjustment within a currency union; historical numerical estimates are not transferred.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "imf_trilemmas",
+      "title": "Obstfeld: Two Trilemmas for Monetary Policy (2017)",
+      "url": "https://www.imf.org/en/news/articles/2017/07/24/sp072417-two-trilemmas-for-monetary-policy",
+      "reading_scope": "Retrieved institutional text on monetary/financial trilemmas and limits of floating-rate insulation.",
+      "use": "Exchange-rate commitment, capital mobility and monetary autonomy; no calibrated macroeconomic model adopted.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "ecb_ela",
+      "title": "ECB: Emergency liquidity assistance",
+      "url": "https://www.ecb.europa.eu/mopo/ela/html/index.en.html",
+      "reading_scope": "Public definition covering solvent institutions facing temporary liquidity problems; linked full ELA agreement not reviewed.",
+      "use": "Liquidity assistance versus solvency resolution; future lunar legal access is not assumed.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "fed_swaps",
+      "title": "Federal Reserve: Central bank liquidity swaps FAQs",
+      "url": "https://www.federalreserve.gov/monetarypolicy/bst_swapfaqs.htm",
+      "reading_scope": "Standing-line authorization, activation discretion, operations and counterparty/local-credit risk allocation; page updated 16 February 2017.",
+      "use": "Conditional temporary foreign-currency liquidity and allocation of repayment risk.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "bis_cb_losses",
+      "title": "BIS Bulletin 68: Why are central banks reporting losses? Does it matter? (2023)",
+      "url": "https://www.bis.org/publications/bulletin-68-why-are-central-banks-reporting-losses-does-it-matter",
+      "reading_scope": "Publication summary and key findings; full nine-page paper not reviewed.",
+      "use": "Negative central-bank equity differs from commercial-bank insolvency; fiscal and credibility consequences remain.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "bis_pfmi",
+      "title": "BIS: Principles for Financial Market Infrastructures",
+      "url": "https://www.bis.org/committees/cpmi/pfmi/overview",
+      "reading_scope": "Online principles 8, 9 and 17 and adjacent continuity/custody provisions.",
+      "use": "Settlement finality, settlement-asset risk and operational recovery are distinct requirements.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "ecb_external_accounts",
+      "title": "ECB: EU Balance of Payments and International Investment Position statistical sources and methods (July 2025)",
+      "url": "https://www.ecb.europa.eu/press/pubbydate/2025/html/ecb.bopiipbook202507.en.html",
+      "reading_scope": "General principles: current/capital/financial accounts, international investment position and reconciliation of positions and flows. Country detail and full manual not reviewed.",
+      "use": "BPM6-based account conventions for this reference ledger, distinguishing transactions, valuation and other-volume changes. No claim that BPM6 is the latest global manual.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "imf_reserves_2011",
+      "title": "IMF Survey: Assessing the Need for Foreign Currency Reserves (7 April 2011)",
+      "url": "https://www.imf.org/en/news/articles/2015/09/28/04/53/sopol040711b",
+      "reading_scope": "Retrieved institutional article: multiple outflow pressures and limits of simple import/debt rules; underlying full policy paper not reviewed.",
+      "use": "Reserve exposures include export loss, foreign funding interruption and resident outflows. No historical coefficient or target is applied to the Moon.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "fed_liabilities",
+      "title": "Federal Reserve: Credit and Liquidity Programs and the Balance Sheet — Federal Reserve liabilities",
+      "url": "https://www.federalreserve.gov/monetarypolicy/bst_frliabilities.htm",
+      "reading_scope": "Deposits of Depository Institutions and Treasury sections read by implementation agent; reserve lending, purchases and Treasury-account flows.",
+      "use": "Reference bank/Treasury/central-bank postings; no lunar mandate or regulation adopted.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "cbo_qe",
+      "title": "CBO: How the Federal Reserve’s Quantitative Easing Affects the Federal Budget (2022)",
+      "url": "https://www.cbo.gov/publication/58457",
+      "reading_scope": "QE and public-liability passages read by implementation agent; not a complete budget-model replication.",
+      "use": "Central-bank asset purchases alter the composition of consolidated public liabilities; no empirical effect transferred to the Moon.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "imf_debt_forgiveness",
+      "title": "IMF: Balance of Payments and International Investment Position Manual, sixth edition, appendix 2",
+      "url": "https://www.elibrary.imf.org/display/book/9781589068124/back-1.xml",
+      "reading_scope": "Search-retrieved paragraphs A2.7–A2.8 on agreed debt forgiveness; full appendix not retrieved or reviewed.",
+      "use": "Debt forgiveness by agreement is a capital transfer; unilateral bank provisioning/write-off while legal debt remains is excluded from the model.",
+      "accessed": "2026-10-31"
+    }
+  ],
+  "local_context": [
+    {
+      "path": "research/studies/world_economy/results/comparison.json",
+      "sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "use": "Unchanged mature product, construction and financing scenarios; U is a real numeraire."
+    },
+    {
+      "path": "research/studies/world_economy/annual_accounts.md",
+      "sha256": "599b97e442aa78cc05fe11c3236840de950856fa870fb34a66c0fb04ed489e35",
+      "use": "Territorial product, resident income, principal cash flows and creditor residence."
+    },
+    {
+      "path": "research/studies/world_economy/inputs.json",
+      "sha256": "725b27f773b1edb802c4803de8f18db6bce41a1b4955c4d01e954e1564e0bd77",
+      "use": "Prior population and physical/economic scenario definitions; no nominal-currency regime."
+    }
+  ],
+  "access_issues": [
+    {
+      "url": "https://www.elibrary.imf.org/view/journals/007/2016/018/article-A001-en.xml",
+      "status": "Full-text request returned HTTP 403 on 2026-10-31; search excerpts do not constitute full reading.",
+      "disposition": "Analysis explicitly uses the obtained 2011 IMF institutional article for the bounded multi-risk reserve argument. No 2016 formula or coefficient is used."
+    },
+    {
+      "url": "https://www.imf.org/external/pubs/ft/issues/issues24/",
+      "status": "Full-dollarization full-text/PDF retrieval failed during source investigation; not treated as read.",
+      "disposition": "Not cited or used as support in this study."
+    }
+  ]
+}

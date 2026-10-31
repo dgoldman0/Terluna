@@ -1,8 +1,8 @@
-# Early lunar sport, media and finance
+# Early lunar sport, media and project finance
 
 31 October 2026. **Sport and entertainment can lead the visitor economy of one enclosed community, well before mass tourism or an open atmosphere.** A resident group of athletes and performers could produce competitions, demonstrations and continuing programmes for a much larger remote audience, while small visiting cohorts buy preparation and participation. This gives an early settlement an export that can grow without a proportional increase in passenger arrivals or imported attractions.
 
-The development priority is sport first within the early community's recreation and visitor programme. Aquaria and larger destination complexes follow when capital, operating experience and demand justify them. Specific sports, prices, contracts and monetary institutions remain proposals. This study develops that sequence and its financing for a reader familiar with the three-world economy; its small cash account is a conditional illustration, not a business forecast. Earlier mining and infrastructure campaigns remain separate opportunities.
+The development priority is sport first within the early community's recreation and visitor programme. Aquaria and larger destination complexes follow when capital, operating experience and demand justify them. Specific sports, prices and contracts remain proposals. This is a preliminary commercial scenario for a reader familiar with the three-world economy. It has no qualified venue design, developed competition rules, participant evidence or demand study; its cash account establishes consequences of assumptions rather than business viability. Monetary institutions belong to the separate [money, banking and interworld finance study](../monetary_system/README.md). Earlier mining and infrastructure campaigns remain separate opportunities.
 
 ## A community can become a venue before it becomes a mass destination
 
@@ -10,7 +10,7 @@ A functioning lava-tube community can provide substantial usable space. The rele
 
 The commercial product could combine three experiences: travel to the Moon, competence in an unusual habitat, and a physical activity available there. Travel preparation, habitat emergency competence and sport instruction have different purposes and providers. Present US commercial-space rules already require participant emergency-response training; [14 CFR 460.51](https://www.ecfr.gov/current/title-14/chapter-III/subchapter-C/part-460/subpart-B/section-460.51) supplies an analogy rather than future lunar law. Training physically supplied on Earth or in the array belongs in those territories' production. A distinct service delivered from the Moon or a licence can create separate lunar receipts; ownership changes income claims without moving the training itself between territories.
 
-Early programmes could use jumping and aerial obstacle courses, controlled flight, acrobatics, races and team games adapted to longer airborne motion. Demonstrations would establish what participants can do; repeatable rules and credible competition would give audiences a reason to return. Athletes, designers and instructors would develop the disciplines together. Calling an activity an extreme sport identifies part of its appeal, while training, operating limits and emergency capability remain parts of the service being sold.
+Early programmes could use jumping and aerial obstacle courses, controlled flight, acrobatics, races and team games adapted to longer airborne motion. Demonstrations would establish what participants can do; repeatable rules and credible competition would give audiences a reason to return. Athletes, designers and instructors would develop the disciplines together. Calling an activity an extreme sport identifies part of its appeal, while training, operating limits and emergency capability remain parts of the service being sold. The separate [sport concepts](sports_concepts.md) develop proposed rules, scoring and arena layouts. Their one-athlete, lane and six-player formats do not validate this cash model’s assumption of twenty simultaneous participants; a costed multi-station operating schedule remains necessary.
 
 A useful sequence follows operating milestones:
 
@@ -74,7 +74,6 @@ Fan interest could attract investors, sponsors and patient capital whose holders
 | Grant or patron contribution | Any stated conditions; it is a transfer rather than the venue's sale of output |
 | Equity capital | An ownership claim and residual risk/return |
 | Bond proceeds | Future interest and principal under the contract |
-| Redeemable payment balances | A redemption liability to the holder |
 
 Advance rights and sponsorship payments have a concrete analogue in [Liberty Media's annual filing](https://www.sec.gov/Archives/edgar/data/1560385/000110465926020653/lmca-20251231x10k.htm), which records customer prepayments as deferred revenue until services are supplied. A founding membership that reserves future visits also uses future capacity. It cannot be sold alongside a second full-price claim on the same place.
 
@@ -99,29 +98,10 @@ The full debt reserve bridges the visitor-interruption case for one year, with r
 
 These results support a staged financing strategy: establish a programme with risk-bearing capital and genuine customer commitments, then test refinancing or expansion debt against demonstrated costs and enforceable receipts. Fans can contribute to demand for that finance; contract quality, operating history and the allocation of losses determine what the debt can promise.
 
-## Currency can develop alongside the business
-
-The settlement can have a recognizably lunar economy while using an established Earth/array settlement currency. Its early exports create outside receipts with which it can pay for imports and financial obligations. A lunar unit of account, a payment interface, bank deposits and an independently floating currency are different institutional choices.
-
-| Monetary option | Possible early role | Main dependency |
-|---|---|---|
-| Established settlement currency | Price packages, receive rights fees, pay suppliers and service debt | Access to payment institutions and agreement on contract denomination |
-| Redeemable lunar payment balances | Convenient local payments and a common community identity | Clear redemption claims, liquid settlement assets and reliable transfers |
-| Bank deposits and lending | Finance payroll, equipment and working capital | Bank capital, credit quality, settlement funding and credible institutions |
-| A separate floating lunar currency | Greater monetary autonomy as the domestic economy develops | Public acceptance, fiscal/monetary institutions, exchange markets and allocation of import/debt currency risk |
-
-The [Bank of England's monetary account](https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-creation-in-the-modern-economy.pdf) explains that lending can create deposits while payments still create funding and settlement requirements. Creating a local claim does not by itself make outside suppliers accept it or increase available materials. The [BIS discussion of redemption and settlement](https://www.bis.org/publications/bulletin-73-stablecoins-versus-tokenised-deposits-implications-singleness-money.pdf) also distinguishes a payment claim from the assets supporting exchange at par; no token architecture is proposed here.
-
-A simple payment example issues ten million U of redeemable balances against ten million U of liquid settlement assets. Redeeming seven million leaves three million of assets and three million of claims. If six million had instead been invested in an illiquid arena asset, only four million would be immediately available: the same redemption request would leave three million unpaid, even if the arena retained its book value. Reserve principal is a liability-backed funding source, not operating income. Payment fees and any net earnings on reserve assets are separate possible income streams.
-
-An independent currency also changes who bears fluctuations. In a separate toy account, foreign receipts minus foreign costs equal five million U, and net local receipts equal ten million local units. At one U per local unit, cash is fifteen million U; at 0.7 U, it becomes twelve million. A business with foreign receipts and net local costs could move in the other direction. The [BIS firm study](https://www.bis.org/publications/working-paper-758-foreign-currency-borrowing-balance-sheet-shocks-and-real-outcomes) supplies evidence that mismatches matter; these lunar examples are arithmetic, not exchange-rate forecasts. Creditor residence and contract currency remain independent: a lunar resident can own foreign-currency debt, and an Earth investor can accept lunar-currency debt.
-
-The practical early monetary design question is therefore how to make interworld receipts, local payments and import obligations work reliably. Whether to establish a separate lunar currency can remain open while the community develops institutions and a wider range of exports.
-
 ## What this adds to the economic picture
 
 An early lunar economy could grow around a recognizable sequence: distinctive physical activity creates a programme; the programme builds an audience and visiting community; contracts support recurring production and selective investment; local firms and financial institutions serve the resulting activity. Sport can help establish a shared identity as well as a revenue source. Its long-term strength would depend on people continuing to care about the competition, performers and place after the first novelty.
 
-This smaller account replaces neither the old visitor milestones nor their financing assumptions. It is an alternative early portfolio that must be reconciled with them before aggregation. The old calculation already includes facility debt, so a new sports bond cannot be added as a second financing benefit. No new GWP, NWP, planetary debt reduction or monetary regime is adopted.
+This smaller account replaces neither the old visitor milestones nor their financing assumptions. It is an alternative early portfolio that must be reconciled with them before aggregation. The old calculation already includes facility debt, so a new sports bond cannot be added as a second financing benefit. No new GWP, NWP or planetary debt reduction is established. This commercial scenario supplies no conclusion about the appropriate monetary regime.
 
 [The runner](sports_finance.py), [inputs](sports_finance_inputs.json), [result](results/sports_finance.json) and [source record](sports_finance_sources.json) retain the conditional assumptions. Run `python -m research.studies.world_economy.sports_finance` for ignored-run output; use `--output research/studies/world_economy/results/sports_finance.json` to reproduce the committed product. [checks.json](checks.json) records numerical, independent accounting and repository checks separately from empirical validation. The next concrete commercial study is a venue and recurring programme with a costed operating schedule, rights ownership, customer commitments and a matching financing term sheet.

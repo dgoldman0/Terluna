@@ -1,6 +1,6 @@
 {
-  "schema": "terluna.research.sports-finance-inputs/1",
-  "evidence": "Conditional annual cash and financing examples for one sports/media venue hosted by an existing enclosed community. No facility quotation, audience forecast, currency adoption, clinical qualification or bond issue is established.",
+  "schema": "terluna.research.sports-finance-inputs/2",
+  "evidence": "Preliminary conditional annual cash and project-finance scenarios for one sports/media venue hosted by an existing enclosed community. No qualified sports programme, facility quotation, customer demand, clinical qualification or bond issue is established. Monetary institutions are analysed in the separate monetary_system study.",
   "reading_rule": "U is a common real accounting numeraire. Reference early-exports prices are inherited assumptions extrapolated to a much smaller facility. Operating cash includes compensation; no GDP/GVA is calculated. Rates and equal payments are real/indexed-equivalent scenarios. Reference debt remains fixed across independent operating stress years; reserves start full in each case. Capital costs exclude the host settlement and construction-period interest/ramp losses. Those require separate funding.",
   "products": {
     "research/studies/world_economy/results/early_exports.json": {
@@ -115,25 +115,5 @@
       200000000.0
     ],
     "basis": "Illustrative operating/refinancing snapshot, not construction underwriting or investor commitments. Gross principal is capped by cash coverage, investor appetite and funding uses. Reserve earns zero real return, starts full, is pledged only to debt service and must be replenished after use. One-year stress has no modeled insurance payout, recovery or default restructuring. No equity dividend, growth allocation or planetary-development transfer is assumed. Working cash is funded separately and is not drawn in this one-year stress; reported remaining gaps precede any use of that liquidity. Capital-scale stress reports additional upfront capital separately and assumes it is provided outside the fixed reference bond."
-  },
-  "payment_example": {
-    "issued_U": 10000000.0,
-    "redemption_U": 7000000.0,
-    "illiquid_diversion_cases_U": [
-      0.0,
-      6000000.0
-    ],
-    "basis": "Optional one-for-one redeemable local balances denominated in settlement money. Diverted assets retain book value but cannot meet immediate redemptions; no insolvency loss assumed. This is a liquidity example, not a proposed bank or token architecture."
-  },
-  "fx_example": {
-    "export_receipts_U": 20000000.0,
-    "import_costs_U": 15000000.0,
-    "local_receipts_L": 30000000.0,
-    "local_costs_L": 20000000.0,
-    "U_per_L_cases": [
-      1.0,
-      0.7
-    ],
-    "basis": "Separate toy cash account before taxes, renewal or debt service, independent of the venue. Fixed quantities/prices in each denomination. U/L is settlement units per local unit; no exchange-rate or macroeconomic prediction."
   }
 }

@@ -1,0 +1,6074 @@
+{
+  "assumptions": {
+    "actors": {
+      "array_counterparty": "Array",
+      "earth_counterparty": "Earth",
+      "moon_bank_a": "Moon",
+      "moon_bank_b": "Moon",
+      "moon_cb": "Moon",
+      "moon_firms": "Moon",
+      "moon_households": "Moon",
+      "moon_treasury": "Moon",
+      "settlement_issuer": "Earth"
+    },
+    "domestic_liquidity": {
+      "agreed_debt_cancellation_L": 15,
+      "counterfactual_additional_liquidity_L": 5,
+      "damaged_produced_capital_U": 15,
+      "eligible_collateral_after_haircut_L": 60,
+      "interbank_payment_L": 20,
+      "new_loan_L": 20
+    },
+    "evidence": "Arbitrary normalized balance sheets and transaction sizes selected to expose monetary mechanisms. No observed or forecast monetary stock, currency regime, market price or credit capacity is asserted.",
+    "fiscal_transactions": {
+      "bond_issue_L": 10,
+      "secondary_purchase_L": 10,
+      "transfer_L": 10
+    },
+    "foreign_liquidity": {
+      "additional_local_liquidity_L": 50,
+      "array_service_receipt_S": 6,
+      "depreciated_U_per_L": 0.7,
+      "eligible_collateral_after_haircut_L": 80,
+      "initial_cb_loan_L": 25,
+      "requested_import_S": 28,
+      "working_capital_loan_L": 30
+    },
+    "opening_boundary": "Earth and array counterparties aggregate external customers, suppliers and investors. The S issuer is assigned to Earth for this example only, with an explicit 225 S claim on the Earth counterparty matching its 225 S liabilities. This is a closed accounting boundary, not a proposed Earth banking system or a forecast of reserve-currency dominance. Bank net worth is unallocated capital; shareholder equity securities, price risk, accrued interest, collateral encumbrance and regulation are outside the ledger.",
+    "opening_claims": [
+      [
+        "moon_cb",
+        "moon_bank_a",
+        "reserve",
+        "L",
+        8
+      ],
+      [
+        "moon_cb",
+        "moon_bank_b",
+        "reserve",
+        "L",
+        12
+      ],
+      [
+        "moon_firms",
+        "moon_bank_a",
+        "loan",
+        "L",
+        72
+      ],
+      [
+        "moon_firms",
+        "moon_bank_b",
+        "loan",
+        "L",
+        48
+      ],
+      [
+        "moon_bank_a",
+        "moon_firms",
+        "deposit",
+        "L",
+        30
+      ],
+      [
+        "moon_bank_b",
+        "moon_firms",
+        "deposit",
+        "L",
+        10
+      ],
+      [
+        "moon_bank_a",
+        "moon_households",
+        "deposit",
+        "L",
+        40
+      ],
+      [
+        "moon_bank_b",
+        "moon_households",
+        "deposit",
+        "L",
+        40
+      ],
+      [
+        "moon_treasury",
+        "moon_cb",
+        "bond",
+        "L",
+        20
+      ],
+      [
+        "settlement_issuer",
+        "moon_cb",
+        "settlement",
+        "S",
+        25
+      ],
+      [
+        "settlement_issuer",
+        "earth_counterparty",
+        "settlement",
+        "S",
+        100
+      ],
+      [
+        "settlement_issuer",
+        "array_counterparty",
+        "settlement",
+        "S",
+        100
+      ],
+      [
+        "earth_counterparty",
+        "settlement_issuer",
+        "loan",
+        "S",
+        225
+      ]
+    ],
+    "opening_real_assets_U": {
+      "earth_counterparty": 225,
+      "moon_firms": 120,
+      "moon_treasury": 20
+    },
+    "policy_boundary": "Collateral limits and solvency checks are illustrative access rules, not calibrated regulatory standards. The additional post-insolvency loan is an explicit accounting counterfactual, not an eligible operation or recommendation. Foreign liquidity examples assume the quoted exchange rate remains available; they do not establish a credible peg or an endogenous floating rate. All scenarios restart from the same opening balance sheets.",
+    "prices_U": {
+      "L": 1.0,
+      "S": 1.0
+    },
+    "real_asset_boundary": "The Earth counterparty holds movable produced equipment physically located on Earth. The import transaction explicitly transfers both its economic ownership and its location to Moon firms at the same fixed U value. It is not a purchase of land, a security or equipment remaining on Earth. Freight and transaction costs are outside the example. Initial lunar real assets are produced capital. The domestic damage event is an assumed destruction of produced capital, classified as an other-volume change, not a payment or recurring depreciation estimate.",
+    "schema": "terluna.research.monetary-system-inputs/1",
+    "units": "Amounts are normalized currency units. L is a hypothetical lunar contract currency; S is a hypothetical externally issued settlement currency. U is only the common valuation numeraire and is not issued money. No conversion to the mature world-economy product is defined."
+  },
+  "boundaries": [
+    "No GWP/NWP baseline or existing economic product is changed.",
+    "Accounting consistency is not evidence of sustainable fiscal or monetary policy.",
+    "No exchange-rate equilibrium, inflation, credit demand, interest-rate response, default probability, regulatory capital rule or liquidity-premium forecast is made.",
+    "Money creation, real resources, liquidity, solvency and financing capacity require separate evidence."
+  ],
+  "domestic_liquidity_and_solvency": {
+    "boundary": "Current transfers isolate settlement. No production is inferred. Assumed capital damage reduces real wealth before debt forgiveness. Agreed debt cancellation is a capital transfer that legally releases the borrower; it is not an impairment provision. Last credit is an expressly ineligible accounting counterfactual.",
+    "initial_payment_blocked": true,
+    "journal": [
+      {
+        "claim_changes": [
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          }
+        ],
+        "event": "Commercial bank loan creates matching deposit",
+        "flow_class": "financial_transaction",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          }
+        ],
+        "event": "Own-currency central-bank lending",
+        "flow_class": "financial_transaction",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": -20.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": -20.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          }
+        ],
+        "event": "Domestic transfer and reserve settlement",
+        "flow_class": "current_transfer",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {
+          "moon_firms": -20.0,
+          "moon_households": 20.0
+        },
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [],
+        "event": "Assumed destruction of produced capital",
+        "flow_class": "other_volume_change",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {
+          "moon_firms": -15.0
+        },
+        "real_asset_changes_U": {
+          "moon_firms": -15.0
+        }
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": -15.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          }
+        ],
+        "event": "Agreed cancellation of borrower debt",
+        "flow_class": "agreed_debt_forgiveness_capital_transfer",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {
+          "moon_bank_a": -15.0,
+          "moon_firms": 15.0
+        },
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": 5.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 5.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          }
+        ],
+        "event": "Own-currency central-bank lending",
+        "flow_class": "financial_transaction",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {}
+      }
+    ],
+    "ordinary_liquidity_request_rejected_after_loss": true,
+    "settlement_shortfall_L": 12.0,
+    "stages": {
+      "after_agreed_debt_cancellation": {
+        "aggregate_net_worth_U": 350.0,
+        "aggregate_real_assets_U": 350.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 225.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 82.0,
+            "financial_assets_U": 77.0,
+            "net_worth_U": -5.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 70.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 32.0,
+            "financial_assets_U": 57.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 125.0,
+            "financial_assets_U": 40.0,
+            "net_worth_U": 20.0,
+            "real_assets_U": 105.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 30.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 60.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 32.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 77.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 32.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": -5.0,
+          "cb_S_settlement_assets": 25.0,
+          "moon_total_S_settlement_assets": 25.0,
+          "resident_L_deposits": 140.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -125.0,
+          "Moon": 25.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 5,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "after_liquidity_and_settlement": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 225.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 82.0,
+            "financial_assets_U": 92.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 70.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 32.0,
+            "financial_assets_U": 57.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 140.0,
+            "financial_assets_U": 40.0,
+            "net_worth_U": 20.0,
+            "real_assets_U": 120.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 30.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 60.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 32.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 92.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 32.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 25.0,
+          "moon_total_S_settlement_assets": 25.0,
+          "resident_L_deposits": 140.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -125.0,
+          "Moon": 25.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 3,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "after_physical_capital_damage": {
+        "aggregate_net_worth_U": 350.0,
+        "aggregate_real_assets_U": 350.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 225.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 82.0,
+            "financial_assets_U": 92.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 70.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 32.0,
+            "financial_assets_U": 57.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 140.0,
+            "financial_assets_U": 40.0,
+            "net_worth_U": 5.0,
+            "real_assets_U": 105.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 30.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 60.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 32.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 92.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 32.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 25.0,
+          "moon_total_S_settlement_assets": 25.0,
+          "resident_L_deposits": 140.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -125.0,
+          "Moon": 25.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 4,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "counterfactual_liquidity_does_not_restore_capital": {
+        "aggregate_net_worth_U": 350.0,
+        "aggregate_real_assets_U": 350.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 225.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 87.0,
+            "financial_assets_U": 82.0,
+            "net_worth_U": -5.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 70.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 37.0,
+            "financial_assets_U": 62.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 125.0,
+            "financial_assets_U": 40.0,
+            "net_worth_U": 20.0,
+            "real_assets_U": 105.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 17.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 30.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 60.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 5.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 32.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 77.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 37.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": -5.0,
+          "cb_S_settlement_assets": 25.0,
+          "moon_total_S_settlement_assets": 25.0,
+          "resident_L_deposits": 140.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -125.0,
+          "Moon": 25.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 6,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "loan_created": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 225.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 90.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 50.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 45.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 140.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 40.0,
+            "real_assets_U": 120.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 80.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 50.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 8.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 92.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 20.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 25.0,
+          "moon_total_S_settlement_assets": 25.0,
+          "resident_L_deposits": 140.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -125.0,
+          "Moon": 25.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 1,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "opening": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 225.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 70.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 50.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 45.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 120.0,
+            "financial_assets_U": 40.0,
+            "net_worth_U": 40.0,
+            "real_assets_U": 120.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 80.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 30.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 8.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 72.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 20.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 25.0,
+          "moon_total_S_settlement_assets": 25.0,
+          "resident_L_deposits": 120.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -125.0,
+          "Moon": 25.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 0,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      }
+    }
+  },
+  "evidence": "Arbitrary normalized balance sheets and transaction sizes selected to expose monetary mechanisms. No observed or forecast monetary stock, currency regime, market price or credit capacity is asserted.",
+  "external_debt_denomination": {
+    "alternatives": {
+      "L": {
+        "NFA_valuation_U": {
+          "Array": 0.0,
+          "Earth": -3.0,
+          "Moon": 3.0
+        },
+        "current_account_U": {
+          "Array": 0.0,
+          "Earth": 0.0,
+          "Moon": 0.0
+        },
+        "debt_value_L_after": 10.0,
+        "debt_value_U_after": 7.0,
+        "denomination": "L",
+        "external_debt_face": 10,
+        "journal": [
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "earth_counterparty",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": -10.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 10.0,
+                "currency": "S",
+                "holder": "moon_treasury",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "event": "External investor purchases newly issued Treasury debt",
+            "flow_class": "financial_transaction",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {},
+            "real_asset_changes_U": {}
+          },
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 10.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": -10.0,
+                "currency": "S",
+                "holder": "moon_treasury",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "event": "Treasury exchanges its S proceeds with lunar CB",
+            "flow_class": "financial_transaction",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {},
+            "real_asset_changes_U": {}
+          },
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": -10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              }
+            ],
+            "event": "Treasury transfer from its funded account",
+            "flow_class": "current_transfer",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {
+              "moon_firms": 10.0,
+              "moon_treasury": -10.0
+            },
+            "real_asset_changes_U": {}
+          },
+          {
+            "event": "Revalue L",
+            "flow_class": "revaluation",
+            "max_balance_sheet_residual_U": 5.329070518200751e-15,
+            "valuation_changes_U": {
+              "array_counterparty": 0.0,
+              "earth_counterparty": -3.0000000000000004,
+              "moon_bank_a": -2.9999999999999964,
+              "moon_bank_b": -3.0000000000000018,
+              "moon_cb": 2.999999999999999,
+              "moon_firms": 21.0,
+              "moon_households": -24.000000000000004,
+              "moon_treasury": 9.000000000000002,
+              "settlement_issuer": 0.0
+            }
+          }
+        ],
+        "stages": {
+          "after_L_depreciation": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 97.0,
+                "net_worth_U": 97.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 56.0,
+                "financial_assets_U": 63.0,
+                "net_worth_U": 7.0000000000000036,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 35.0,
+                "financial_assets_U": 41.99999999999999,
+                "net_worth_U": 6.999999999999998,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 21.0,
+                "financial_assets_U": 49.0,
+                "net_worth_U": 28.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 84.0,
+                "financial_assets_U": 35.0,
+                "net_worth_U": 71.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 56.0,
+                "net_worth_U": 56.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 21.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": -0.9999999999999982,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 18.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "earth_counterparty",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 90.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 35.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 30.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 7.0,
+              "cb_S_settlement_assets": 35.0,
+              "moon_total_S_settlement_assets": 35.0,
+              "resident_L_deposits": 130.0,
+              "treasury_bonds_L": 30.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -128.0,
+              "Moon": 28.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 4,
+            "prices_U": {
+              "L": 0.7,
+              "S": 1.0
+            }
+          },
+          "funded_and_spent": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 80.0,
+                "financial_assets_U": 90.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 55.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 50.0,
+                "net_worth_U": 50.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": -10.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 18.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "earth_counterparty",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 90.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 35.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 30.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 35.0,
+              "moon_total_S_settlement_assets": 35.0,
+              "resident_L_deposits": 130.0,
+              "treasury_bonds_L": 30.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 3,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          },
+          "opening": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 70.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 45.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 40.0,
+                "net_worth_U": 40.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 8.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 20.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 120.0,
+              "treasury_bonds_L": 20.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 0,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          }
+        }
+      },
+      "S": {
+        "NFA_valuation_U": {
+          "Array": 0.0,
+          "Earth": 0.0,
+          "Moon": 0.0
+        },
+        "current_account_U": {
+          "Array": 0.0,
+          "Earth": 0.0,
+          "Moon": 0.0
+        },
+        "debt_value_L_after": 14.285714285714286,
+        "debt_value_U_after": 10.0,
+        "denomination": "S",
+        "external_debt_face": 10,
+        "journal": [
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": -10.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 10.0,
+                "currency": "S",
+                "holder": "moon_treasury",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "event": "External investor purchases newly issued Treasury debt",
+            "flow_class": "financial_transaction",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {},
+            "real_asset_changes_U": {}
+          },
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 10.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": -10.0,
+                "currency": "S",
+                "holder": "moon_treasury",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "event": "Treasury exchanges its S proceeds with lunar CB",
+            "flow_class": "financial_transaction",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {},
+            "real_asset_changes_U": {}
+          },
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": -10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              }
+            ],
+            "event": "Treasury transfer from its funded account",
+            "flow_class": "current_transfer",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {
+              "moon_firms": 10.0,
+              "moon_treasury": -10.0
+            },
+            "real_asset_changes_U": {}
+          },
+          {
+            "event": "Revalue L",
+            "flow_class": "revaluation",
+            "max_balance_sheet_residual_U": 5.329070518200751e-15,
+            "valuation_changes_U": {
+              "array_counterparty": 0.0,
+              "earth_counterparty": 0.0,
+              "moon_bank_a": -2.9999999999999964,
+              "moon_bank_b": -3.0000000000000018,
+              "moon_cb": 2.999999999999999,
+              "moon_firms": 21.0,
+              "moon_households": -24.000000000000004,
+              "moon_treasury": 6.000000000000001,
+              "settlement_issuer": 0.0
+            }
+          }
+        ],
+        "stages": {
+          "after_L_depreciation": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 56.0,
+                "financial_assets_U": 63.0,
+                "net_worth_U": 7.0000000000000036,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 35.0,
+                "financial_assets_U": 41.99999999999999,
+                "net_worth_U": 6.999999999999998,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 21.0,
+                "financial_assets_U": 49.0,
+                "net_worth_U": 28.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 84.0,
+                "financial_assets_U": 35.0,
+                "net_worth_U": 71.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 56.0,
+                "net_worth_U": 56.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 24.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": -3.999999999999999,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 18.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 10.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 90.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 35.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 30.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 7.0,
+              "cb_S_settlement_assets": 35.0,
+              "moon_total_S_settlement_assets": 35.0,
+              "resident_L_deposits": 130.0,
+              "treasury_bonds_L": 20.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 4,
+            "prices_U": {
+              "L": 0.7,
+              "S": 1.0
+            }
+          },
+          "funded_and_spent": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 80.0,
+                "financial_assets_U": 90.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 55.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 50.0,
+                "net_worth_U": 50.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": -10.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 18.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 10.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 90.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 35.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 30.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 35.0,
+              "moon_total_S_settlement_assets": 35.0,
+              "resident_L_deposits": 130.0,
+              "treasury_bonds_L": 20.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 3,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          },
+          "opening": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 70.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 45.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 40.0,
+                "net_worth_U": 40.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 8.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 20.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 120.0,
+              "treasury_bonds_L": 20.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 0,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          }
+        }
+      }
+    },
+    "boundary": "External purchase is assumed, not predicted. Borrowing creates a financial inflow and external liability; it is not export income. Funds retained in the lunar CB remain an external asset. Local fiscal transfers create no current-account entry. Contract face is unchanged by imposed L depreciation. No foreign creditor loss/repricing response, hedging or inflation response is modeled."
+  },
+  "foreign_settlement": {
+    "NFA_transaction_reconciliation_residual_U": {
+      "Array": 0.0,
+      "Earth": 0.0,
+      "Moon": 0.0
+    },
+    "NFA_valuation_U": {
+      "Array": 0.0,
+      "Earth": 0.0,
+      "Moon": 0.0
+    },
+    "boundary": "Earth delivers existing movable produced equipment to the Moon and transfers economic ownership; array consumes a lunar service. Costs, value added, freight limits and prices are not modeled. No foreign debt/interest/current transfers/capital transfers occur in this sequence. External receipt first belongs to the bank, not the CB. Depreciation is imposed after settlement, with fixed U real-asset values and no behavioural feedback; its NFA effect is zero here because cross-border claims are all S-denominated.",
+    "current_account_U": {
+      "Array": -6.0,
+      "Earth": 28.0,
+      "Moon": -22.0
+    },
+    "gap_after_additional_local_credit_S": 3.0,
+    "import_paid_S": 28.0,
+    "initial_foreign_funding_gap_S": 3.0,
+    "journal": [
+      {
+        "claim_changes": [
+          {
+            "amount": 30.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 30.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          }
+        ],
+        "event": "Commercial bank loan creates matching deposit",
+        "flow_class": "financial_transaction",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": 25.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 25.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          }
+        ],
+        "event": "Own-currency central-bank lending",
+        "flow_class": "financial_transaction",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": -25.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "moon_bank_a",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": -25.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "event": "Bank buys existing foreign settlement assets from lunar CB",
+        "flow_class": "financial_transaction",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": -25.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": -25.0,
+            "currency": "S",
+            "holder": "moon_bank_a",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "event": "Import existing asset; settle in S",
+        "flow_class": "goods_trade_existing_produced_equipment",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {
+          "earth_counterparty": -25.0,
+          "moon_firms": 25.0
+        }
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": 50.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 50.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          }
+        ],
+        "event": "Own-currency central-bank lending",
+        "flow_class": "financial_transaction",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": 6.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": -6.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 6.0,
+            "currency": "S",
+            "holder": "moon_bank_a",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "event": "External customer pays lunar service provider",
+        "flow_class": "current_service_trade",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {
+          "array_counterparty": -6.0,
+          "moon_firms": 6.0
+        },
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": 6.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": -6.0,
+            "currency": "S",
+            "holder": "moon_bank_a",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 6.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "event": "Lunar CB buys foreign settlement assets from bank",
+        "flow_class": "financial_transaction",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": -3.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 3.0,
+            "currency": "S",
+            "holder": "moon_bank_a",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": -3.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "event": "Bank buys existing foreign settlement assets from lunar CB",
+        "flow_class": "financial_transaction",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {}
+      },
+      {
+        "claim_changes": [
+          {
+            "amount": -3.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 3.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": -3.0,
+            "currency": "S",
+            "holder": "moon_bank_a",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "event": "Import existing asset; settle in S",
+        "flow_class": "goods_trade_existing_produced_equipment",
+        "max_balance_sheet_residual_U": 0.0,
+        "net_worth_changes_U": {},
+        "real_asset_changes_U": {
+          "earth_counterparty": -3.0,
+          "moon_firms": 3.0
+        }
+      },
+      {
+        "event": "Revalue L",
+        "flow_class": "revaluation",
+        "max_balance_sheet_residual_U": 5.329070518200751e-15,
+        "valuation_changes_U": {
+          "array_counterparty": 0.0,
+          "earth_counterparty": 0.0,
+          "moon_bank_a": -2.9999999999999964,
+          "moon_bank_b": -3.0000000000000018,
+          "moon_cb": -6.599999999999998,
+          "moon_firms": 30.60000000000001,
+          "moon_households": -24.000000000000004,
+          "moon_treasury": 6.000000000000001,
+          "settlement_issuer": 0.0
+        }
+      }
+    ],
+    "remaining_unpaid_import_S": 0.0,
+    "stages": {
+      "additional_L_liquidity": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 125.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 200.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 150.0,
+            "financial_assets_U": 160.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 50.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 70.0,
+            "financial_assets_U": 95.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 150.0,
+            "financial_assets_U": 45.0,
+            "net_worth_U": 40.0,
+            "real_assets_U": 145.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 80.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 75.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 35.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 58.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 102.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 125.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 70.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 0.0,
+          "moon_total_S_settlement_assets": 0.0,
+          "resident_L_deposits": 125.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -100.0,
+          "Moon": 0.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 5,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "available_S_spent_on_import": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 125.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 200.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 100.0,
+            "financial_assets_U": 110.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 50.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 45.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 150.0,
+            "financial_assets_U": 45.0,
+            "net_worth_U": 40.0,
+            "real_assets_U": 145.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 80.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 25.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 35.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 8.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 102.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 125.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 20.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 0.0,
+          "moon_total_S_settlement_assets": 0.0,
+          "resident_L_deposits": 125.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -100.0,
+          "Moon": 0.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 4,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "cb_purchases_external_receipt": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 94.0,
+            "net_worth_U": 94.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 125.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 200.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 156.0,
+            "financial_assets_U": 166.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 50.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 76.0,
+            "financial_assets_U": 101.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 150.0,
+            "financial_assets_U": 51.0,
+            "net_worth_U": 46.0,
+            "real_assets_U": 145.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 80.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 75.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 41.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 64.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 102.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 94.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 125.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 6.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 76.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 6.0,
+          "moon_total_S_settlement_assets": 6.0,
+          "resident_L_deposits": 131.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 94.0,
+          "Earth": -100.0,
+          "Moon": 6.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 7,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "domestic_liquidity_available": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 225.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 125.0,
+            "financial_assets_U": 135.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 50.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 45.0,
+            "financial_assets_U": 70.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 150.0,
+            "financial_assets_U": 70.0,
+            "net_worth_U": 40.0,
+            "real_assets_U": 120.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 80.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 25.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 60.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 33.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 102.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 45.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 25.0,
+          "moon_total_S_settlement_assets": 25.0,
+          "resident_L_deposits": 150.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -125.0,
+          "Moon": 25.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 2,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "exogenous_L_depreciation": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 94.0,
+            "net_worth_U": 94.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 128.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 197.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 107.1,
+            "financial_assets_U": 114.1,
+            "net_worth_U": 7.0000000000000036,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 35.0,
+            "financial_assets_U": 41.99999999999999,
+            "net_worth_U": 6.999999999999998,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 51.099999999999994,
+            "financial_assets_U": 69.5,
+            "net_worth_U": 18.400000000000002,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 104.99999999999999,
+            "financial_assets_U": 33.599999999999994,
+            "net_worth_U": 76.60000000000001,
+            "real_assets_U": 148.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 56.0,
+            "net_worth_U": 56.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 14.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 6.000000000000001,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 75.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 38.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 61.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 102.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 94.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 128.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 3.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 73.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 7.0,
+          "cb_S_settlement_assets": 3.0,
+          "moon_total_S_settlement_assets": 3.0,
+          "resident_L_deposits": 128.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 94.0,
+          "Earth": -97.0,
+          "Moon": 3.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 10,
+        "prices_U": {
+          "L": 0.7,
+          "S": 1.0
+        }
+      },
+      "external_receipt_owned_by_bank": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 94.0,
+            "net_worth_U": 94.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 125.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 200.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 156.0,
+            "financial_assets_U": 166.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 50.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 70.0,
+            "financial_assets_U": 95.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 150.0,
+            "financial_assets_U": 51.0,
+            "net_worth_U": 46.0,
+            "real_assets_U": 145.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 80.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 75.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 41.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 58.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 102.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 94.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 125.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 6.0,
+            "currency": "S",
+            "holder": "moon_bank_a",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 70.0,
+          "bank_a_S_settlement_assets": 6.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 0.0,
+          "moon_total_S_settlement_assets": 6.0,
+          "resident_L_deposits": 131.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 94.0,
+          "Earth": -100.0,
+          "Moon": 6.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 6,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "opening": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 100.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 225.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 70.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 50.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 45.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 120.0,
+            "financial_assets_U": 40.0,
+            "net_worth_U": 40.0,
+            "real_assets_U": 120.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 80.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 30.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 8.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 72.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 100.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 25.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 20.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 25.0,
+          "moon_total_S_settlement_assets": 25.0,
+          "resident_L_deposits": 120.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 100.0,
+          "Earth": -125.0,
+          "Moon": 25.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 0,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      },
+      "remaining_import_settled": {
+        "aggregate_net_worth_U": 365.0,
+        "aggregate_real_assets_U": 365.0,
+        "balance_sheets": {
+          "array_counterparty": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 94.0,
+            "net_worth_U": 94.0,
+            "real_assets_U": 0.0
+          },
+          "earth_counterparty": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 128.0,
+            "net_worth_U": 100.0,
+            "real_assets_U": 197.0
+          },
+          "moon_bank_a": {
+            "debt_liabilities_U": 153.0,
+            "financial_assets_U": 163.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_bank_b": {
+            "debt_liabilities_U": 50.0,
+            "financial_assets_U": 60.0,
+            "net_worth_U": 10.0,
+            "real_assets_U": 0.0
+          },
+          "moon_cb": {
+            "debt_liabilities_U": 73.0,
+            "financial_assets_U": 98.0,
+            "net_worth_U": 25.0,
+            "real_assets_U": 0.0
+          },
+          "moon_firms": {
+            "debt_liabilities_U": 150.0,
+            "financial_assets_U": 48.0,
+            "net_worth_U": 46.0,
+            "real_assets_U": 148.0
+          },
+          "moon_households": {
+            "debt_liabilities_U": 0.0,
+            "financial_assets_U": 80.0,
+            "net_worth_U": 80.0,
+            "real_assets_U": 0.0
+          },
+          "moon_treasury": {
+            "debt_liabilities_U": 20.0,
+            "financial_assets_U": 0.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 20.0
+          },
+          "settlement_issuer": {
+            "debt_liabilities_U": 225.0,
+            "financial_assets_U": 225.0,
+            "net_worth_U": 0.0,
+            "real_assets_U": 0.0
+          }
+        },
+        "claims": [
+          {
+            "amount": 225.0,
+            "currency": "S",
+            "holder": "settlement_issuer",
+            "instrument": "loan",
+            "issuer": "earth_counterparty"
+          },
+          {
+            "amount": 75.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "central_bank_loan",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 38.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_a"
+          },
+          {
+            "amount": 10.0,
+            "currency": "L",
+            "holder": "moon_firms",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 40.0,
+            "currency": "L",
+            "holder": "moon_households",
+            "instrument": "deposit",
+            "issuer": "moon_bank_b"
+          },
+          {
+            "amount": 61.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 12.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "reserve",
+            "issuer": "moon_cb"
+          },
+          {
+            "amount": 102.0,
+            "currency": "L",
+            "holder": "moon_bank_a",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 48.0,
+            "currency": "L",
+            "holder": "moon_bank_b",
+            "instrument": "loan",
+            "issuer": "moon_firms"
+          },
+          {
+            "amount": 20.0,
+            "currency": "L",
+            "holder": "moon_cb",
+            "instrument": "bond",
+            "issuer": "moon_treasury"
+          },
+          {
+            "amount": 94.0,
+            "currency": "S",
+            "holder": "array_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 128.0,
+            "currency": "S",
+            "holder": "earth_counterparty",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          },
+          {
+            "amount": 3.0,
+            "currency": "S",
+            "holder": "moon_cb",
+            "instrument": "settlement",
+            "issuer": "settlement_issuer"
+          }
+        ],
+        "global_financial_residual_U": 0.0,
+        "monetary_totals": {
+          "bank_L_reserves": 73.0,
+          "bank_a_S_settlement_assets": 0.0,
+          "bank_a_capital_U": 10.0,
+          "cb_S_settlement_assets": 3.0,
+          "moon_total_S_settlement_assets": 3.0,
+          "resident_L_deposits": 128.0,
+          "treasury_bonds_L": 20.0
+        },
+        "net_foreign_assets_U": {
+          "Array": 94.0,
+          "Earth": -97.0,
+          "Moon": 3.0
+        },
+        "net_worth_minus_real_assets_U": 0.0,
+        "posting_count": 9,
+        "prices_U": {
+          "L": 1.0,
+          "S": 1.0
+        }
+      }
+    }
+  },
+  "producer": {
+    "inputs_sha256": "098ab9c8d982e5ea3acaa3915b5091828fd1730ec1bdfbfea202092dda1b771b",
+    "model_sha256": "6ab1cc6cd506ffc3112f630bdadeb40f19966f12f9bb9f99febf82ce75165e57",
+    "module": "research.studies.monetary_system.run",
+    "sources_sha256": "f15c4c93fe254dc03cbb29067acfe7abbd58b8cc94541f1155a4775fa9723989"
+  },
+  "reading_rule": "Amounts are normalized currency units. L is a hypothetical lunar contract currency; S is a hypothetical externally issued settlement currency. U is only the common valuation numeraire and is not issued money. No conversion to the mature world-economy product is defined.",
+  "schema": "terluna.research.monetary-system/1",
+  "treasury_and_central_bank": {
+    "alternatives": {
+      "commercial_bank_buyer": {
+        "journal": [
+          {
+            "claim_changes": [
+              {
+                "amount": -10.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              }
+            ],
+            "event": "Treasury bond issue",
+            "flow_class": "financial_transaction",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {},
+            "real_asset_changes_U": {}
+          },
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": -10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              }
+            ],
+            "event": "Treasury transfer from its funded account",
+            "flow_class": "current_transfer",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {
+              "moon_firms": 10.0,
+              "moon_treasury": -10.0
+            },
+            "real_asset_changes_U": {}
+          },
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": -10.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              }
+            ],
+            "event": "Central bank secondary-market bond purchase",
+            "flow_class": "financial_transaction",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {},
+            "real_asset_changes_U": {}
+          }
+        ],
+        "stages": {
+          "bond_issued": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 70.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 45.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 40.0,
+                "net_worth_U": 40.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 10.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 8.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 2.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 10.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 120.0,
+              "treasury_bonds_L": 30.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 1,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          },
+          "central_bank_secondary_purchase": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 80.0,
+                "financial_assets_U": 90.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 55.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 50.0,
+                "net_worth_U": 50.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": -10.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 18.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 30.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 130.0,
+              "treasury_bonds_L": 30.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 3,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          },
+          "opening": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 70.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 45.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 40.0,
+                "net_worth_U": 40.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 8.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 20.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 120.0,
+              "treasury_bonds_L": 20.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 0,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          },
+          "treasury_spent": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 80.0,
+                "financial_assets_U": 90.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 45.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 50.0,
+                "net_worth_U": 50.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": -10.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 18.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 2.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 20.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 130.0,
+              "treasury_bonds_L": 30.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 2,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          }
+        }
+      },
+      "nonbank_buyer": {
+        "journal": [
+          {
+            "claim_changes": [
+              {
+                "amount": -10.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": -10.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              }
+            ],
+            "event": "Treasury bond issue",
+            "flow_class": "financial_transaction",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {},
+            "real_asset_changes_U": {}
+          },
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": -10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              }
+            ],
+            "event": "Treasury transfer from its funded account",
+            "flow_class": "current_transfer",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {
+              "moon_firms": 10.0,
+              "moon_treasury": -10.0
+            },
+            "real_asset_changes_U": {}
+          },
+          {
+            "claim_changes": [
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": -10.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              }
+            ],
+            "event": "Central bank secondary-market bond purchase",
+            "flow_class": "financial_transaction",
+            "max_balance_sheet_residual_U": 0.0,
+            "net_worth_changes_U": {},
+            "real_asset_changes_U": {}
+          }
+        ],
+        "stages": {
+          "bond_issued": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 70.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 40.0,
+                "financial_assets_U": 50.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 45.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 40.0,
+                "net_worth_U": 40.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 10.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 8.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 2.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_treasury",
+                "instrument": "treasury_account",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 10.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 110.0,
+              "treasury_bonds_L": 30.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 1,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          },
+          "central_bank_secondary_purchase": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 80.0,
+                "financial_assets_U": 90.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 55.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 50.0,
+                "net_worth_U": 50.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": -10.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 18.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 30.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 130.0,
+              "treasury_bonds_L": 30.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 3,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          },
+          "opening": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 70.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 50.0,
+                "financial_assets_U": 60.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 45.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 40.0,
+                "net_worth_U": 40.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 8.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 12.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 20.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 120.0,
+              "treasury_bonds_L": 20.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 0,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          },
+          "treasury_spent": {
+            "aggregate_net_worth_U": 365.0,
+            "aggregate_real_assets_U": 365.0,
+            "balance_sheets": {
+              "array_counterparty": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 0.0
+              },
+              "earth_counterparty": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 100.0,
+                "net_worth_U": 100.0,
+                "real_assets_U": 225.0
+              },
+              "moon_bank_a": {
+                "debt_liabilities_U": 80.0,
+                "financial_assets_U": 90.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_bank_b": {
+                "debt_liabilities_U": 40.0,
+                "financial_assets_U": 50.0,
+                "net_worth_U": 10.0,
+                "real_assets_U": 0.0
+              },
+              "moon_cb": {
+                "debt_liabilities_U": 20.0,
+                "financial_assets_U": 45.0,
+                "net_worth_U": 25.0,
+                "real_assets_U": 0.0
+              },
+              "moon_firms": {
+                "debt_liabilities_U": 120.0,
+                "financial_assets_U": 50.0,
+                "net_worth_U": 50.0,
+                "real_assets_U": 120.0
+              },
+              "moon_households": {
+                "debt_liabilities_U": 0.0,
+                "financial_assets_U": 80.0,
+                "net_worth_U": 80.0,
+                "real_assets_U": 0.0
+              },
+              "moon_treasury": {
+                "debt_liabilities_U": 30.0,
+                "financial_assets_U": 0.0,
+                "net_worth_U": -10.0,
+                "real_assets_U": 20.0
+              },
+              "settlement_issuer": {
+                "debt_liabilities_U": 225.0,
+                "financial_assets_U": 225.0,
+                "net_worth_U": 0.0,
+                "real_assets_U": 0.0
+              }
+            },
+            "claims": [
+              {
+                "amount": 225.0,
+                "currency": "S",
+                "holder": "settlement_issuer",
+                "instrument": "loan",
+                "issuer": "earth_counterparty"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 40.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_a"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_firms",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 30.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "deposit",
+                "issuer": "moon_bank_b"
+              },
+              {
+                "amount": 18.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 2.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "reserve",
+                "issuer": "moon_cb"
+              },
+              {
+                "amount": 72.0,
+                "currency": "L",
+                "holder": "moon_bank_a",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 48.0,
+                "currency": "L",
+                "holder": "moon_bank_b",
+                "instrument": "loan",
+                "issuer": "moon_firms"
+              },
+              {
+                "amount": 20.0,
+                "currency": "L",
+                "holder": "moon_cb",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 10.0,
+                "currency": "L",
+                "holder": "moon_households",
+                "instrument": "bond",
+                "issuer": "moon_treasury"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "array_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 100.0,
+                "currency": "S",
+                "holder": "earth_counterparty",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              },
+              {
+                "amount": 25.0,
+                "currency": "S",
+                "holder": "moon_cb",
+                "instrument": "settlement",
+                "issuer": "settlement_issuer"
+              }
+            ],
+            "global_financial_residual_U": 0.0,
+            "monetary_totals": {
+              "bank_L_reserves": 20.0,
+              "bank_a_S_settlement_assets": 0.0,
+              "bank_a_capital_U": 10.0,
+              "cb_S_settlement_assets": 25.0,
+              "moon_total_S_settlement_assets": 25.0,
+              "resident_L_deposits": 120.0,
+              "treasury_bonds_L": 30.0
+            },
+            "net_foreign_assets_U": {
+              "Array": 100.0,
+              "Earth": -125.0,
+              "Moon": 25.0
+            },
+            "net_worth_minus_real_assets_U": 0.0,
+            "posting_count": 2,
+            "prices_U": {
+              "L": 1.0,
+              "S": 1.0
+            }
+          }
+        }
+      }
+    },
+    "boundary": "The unconditional fiscal current transfer is a financial example with no assumed production; it is not an investment grant. A procurement scenario would also require real delivery and cost/value-added accounts. CB secondary purchases transfer the existing bond; they supply no new proceeds to the Treasury. Public consolidation changes the form, not the outstanding amount, of public liabilities to the private sector in the purchase step."
+  }
+}

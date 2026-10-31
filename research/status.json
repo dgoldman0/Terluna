@@ -938,7 +938,7 @@
     },
     {
       "topic": "world_economy",
-      "condition": "conditional_three_world_economy_with_industrial_process_accounts_distinctive_activities_and_early_sport_media_finance_2026_10_31; reproducible_accounts; no_currency_market_forecast_or_financing_terms_adopted",
+      "condition": "conditional_three_world_economy_with_preliminary_sport_media_project_finance_2026_10_31; monetary_institutions_in_separate_monetary_system_study; no_market_forecast_or_financing_terms_adopted",
       "material": [
         "studies/world_economy/README.md",
         "studies/world_economy/inputs.json",
@@ -1001,7 +1001,8 @@
         "studies/world_economy/sports_finance.py",
         "studies/world_economy/sports_finance_inputs.json",
         "studies/world_economy/sports_finance_sources.json",
-        "studies/world_economy/results/sports_finance.json"
+        "studies/world_economy/results/sports_finance.json",
+        "studies/world_economy/sports_concepts.md"
       ],
       "unresolved": [
         "Source-site energy, ore processing and bulk capture architecture; future unit prices and full construction/settlement timeline, including renewal funding.",
@@ -1022,9 +1023,32 @@
         "Complete equipment and economic qualification of pressure benefits: net buoyant payload, matched heat/ventilation duties, liquid-system margins and vacuum-assisted material quality; ambient advantages versus controlled Earth/array facilities.",
         "Assembly-specific ignition, propagation and smoke behaviour at 121.59 kPa, 17.5% oxygen, 301 K and lunar gravity; process flow, hot exposure, dust and deposits require separate qualification. No general fire-loss or material-cost premium is established.",
         "Activity-specific capacity and complete costs for connected flying/garden districts, aquatic environments and large physical testing campuses; rotating-array alternatives, user demand and regional 301 K conditions. Living-host capacity and clinical benefits remain unqualified.",
-        "Costed first-community sport/media programme, trained visitor and professional capacity, rights ownership, repeat demand and contracted receipts; full host funding, equity returns, currency/issuer institutions and matched debt terms remain open."
+        "Costed first-community sport/media programme, trained visitor and professional capacity, rights ownership, repeat demand and contracted receipts; full host funding, equity returns, contract denomination and matched debt terms remain open.",
+        "Proposed sport rules, movement control and arenas require physical trials, operating qualification and audience testing; commercial calculations do not establish sports design or demand."
       ],
-      "next_session_task": "Qualify a slowly immobilizing filled material and one fragile culture or crystal suspension through distribution, functional quality and final recovery. Compare optimized Earth, lunar and freefall/rotating processes. Price a modular structural or thermal yard against funded orders and a post-campaign use; retain the 1.2 atm lock and account for actual process pressure. Compare a heat-limited air circuit and a pressure-difference clamping process with their actual equipment curves before assigning pressure-related cost savings. Compare a bonded panel or cable assembly across matched normoxic atmospheres and gravities; qualify the process before valuing material substitution, conditioning or yield gains. Develop a connected flying/garden district, an aquatic facility and a physical testing campus with equal-service Earth/array comparators, explicit regional conditions, capital and user demand. Prioritize a recurring sport/media programme in one enclosed community, with a costed schedule, rights ownership, visitor preparation, contracted customer receipts and an explicit financing term sheet before choosing a currency regime."
+      "next_session_task": "Qualify a slowly immobilizing filled material and one fragile culture or crystal suspension through distribution, functional quality and final recovery. Compare optimized Earth, lunar and freefall/rotating processes. Price a modular structural or thermal yard against funded orders and a post-campaign use; retain the 1.2 atm lock and account for actual process pressure. Compare a heat-limited air circuit and a pressure-difference clamping process with their actual equipment curves before assigning pressure-related cost savings. Compare a bonded panel or cable assembly across matched normoxic atmospheres and gravities; qualify the process before valuing material substitution, conditioning or yield gains. Develop a connected flying/garden district, an aquatic facility and a physical testing campus with equal-service Earth/array comparators, explicit regional conditions, capital and user demand. Prioritize a recurring sport/media programme in one enclosed community, with a costed schedule, rights ownership, visitor preparation, contracted customer receipts and an explicit financing term sheet. Compare currency institutions independently in monetary_system."
+    },
+    {
+      "topic": "monetary_system",
+      "condition": "conditional_institutional_analysis_and_reproducible_stock_flow_reference_2026_10_31; no_currency_regime_or_monetary_policy_forecast_selected",
+      "material": [
+        "studies/monetary_system/README.md",
+        "studies/monetary_system/institutions.md",
+        "studies/monetary_system/external_accounts.md",
+        "studies/monetary_system/ledger.py",
+        "studies/monetary_system/run.py",
+        "studies/monetary_system/inputs.json",
+        "studies/monetary_system/sources.json",
+        "studies/monetary_system/results/reference.json",
+        "studies/monetary_system/checks.json"
+      ],
+      "unresolved": [
+        "Jurisdictions, fiscal authority, monetary mandate, membership and guarantees are unselected.",
+        "Staged domestic supply, invoicing currencies, imports, debt ownership and maturities are needed to rank regimes quantitatively.",
+        "Inflation, exchange rates, interest rates, credit demand and behavioral production responses are not modeled.",
+        "Targeted institutional source reading does not constitute a complete literature review or empirical lunar validation."
+      ],
+      "next_session_task": "Build dated sector and external accounts with explicit physical capacity, contract currencies, fiscal funding and joint shocks before estimating gains from any monetary regime."
     }
   ]
 }

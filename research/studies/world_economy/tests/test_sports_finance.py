@@ -1,4 +1,4 @@
-"""Capacity, cash conservation, fixed debt and payment-liquidity controls."""
+"""Capacity, cash conservation and fixed project-debt controls."""
 import copy
 import json
 
@@ -156,30 +156,6 @@ def test_media_break_even_reaches_operating_and_debt_cash_targets(product):
         case['sponsorship_receipts_U']=0
         row=m.operating_case(spec,old,case)
         assert row['cash_available_for_debt_service_U']==pytest.approx(target,abs=1e-8)
-
-
-def test_fx_changes_only_local_net_cash_and_can_help_a_local_deficit():
-    assert m.fx_cash(20e6,15e6,30e6,20e6,1)==pytest.approx(15e6)
-    assert m.fx_cash(20e6,15e6,30e6,20e6,.7)==pytest.approx(12e6)
-    assert m.fx_cash(20e6,15e6,20e6,20e6,.7)==pytest.approx(5e6)
-    old=m.fx_cash(20e6,15e6,20e6,30e6,1)
-    depreciated=m.fx_cash(20e6,15e6,20e6,30e6,.7)
-    assert depreciated-old==pytest.approx(3e6)
-
-
-def test_redemption_preserves_book_equity_while_exposing_illiquidity():
-    for diversion in (0,6e6):
-        row=m.redeemable_balances(10e6,7e6,diversion)
-        assert row['redemption_paid_U']+row['outstanding_claims_U']==pytest.approx(10e6)
-        assert row['redemption_paid_U']+row['unpaid_redemption_U']==pytest.approx(7e6)
-        assert row['liquid_assets_U']+row['illiquid_asset_at_book_U']==pytest.approx(row['outstanding_claims_U'])
-        assert row['net_assets_at_book_U']==pytest.approx(0)
-        assert row['outstanding_claims_U']-row['liquid_assets_U']==pytest.approx(diversion)
-    backed=m.redeemable_balances(10e6,7e6,0)
-    diverted=m.redeemable_balances(10e6,7e6,6e6)
-    assert backed['unpaid_redemption_U']==0
-    assert diverted['unpaid_redemption_U']==pytest.approx(3e6)
-    assert diverted['liquid_assets_U']==0
 
 
 def test_negative_operating_cash_cannot_support_new_debt():

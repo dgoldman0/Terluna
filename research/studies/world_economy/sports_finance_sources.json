@@ -1,5 +1,5 @@
 {
-  "source_admission": "Primary issuer filings, monetary institutions, official guidance and existing project records. Targeted reading by the research team; external documents remain external. No future lunar law, institution, currency, rate or audience is inferred from present analogies.",
+  "source_admission": "Primary issuer filings, official guidance and existing project records for a preliminary sports/media business scenario. Targeted reading only; external documents remain external. Monetary sources and analysis belong to the separate monetary_system study.",
   "sources": [
     {
       "id": "liberty_results_2025",
@@ -40,36 +40,12 @@
       "reading_scope": "Revenue versus general-obligation descriptions and risk passages read; no US tax exemption, jurisdiction or securities treatment transferred to the Moon.",
       "use": "Different issuers and repayment sources distinguish project-revenue debt from broad public obligations.",
       "accessed": "2026-10-31"
-    },
-    {
-      "id": "boe_money_2014",
-      "title": "McLeay, Radia and Thomas: Money creation in the modern economy",
-      "url": "https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2014/money-creation-in-the-modern-economy.pdf",
-      "reading_scope": "Overview and targeted loan-created-deposit, settlement/funding-limit passages on printed pages 14-17 read; no full literature review.",
-      "use": "Loan-created deposits remain distinct from the settlement assets needed for payments and from real resources or net wealth.",
-      "accessed": "2026-10-31"
-    },
-    {
-      "id": "bis_singleness_2023",
-      "title": "Garratt and Shin: Stablecoins versus tokenised deposits: implications for the singleness of money, BIS Bulletin 73",
-      "url": "https://www.bis.org/publications/bulletin-73-stablecoins-versus-tokenised-deposits-implications-singleness-money.pdf",
-      "reading_scope": "Key takeaways and issuer-claim/par-settlement discussion, printed pages 1-2 and targeted page 6 material read. No token architecture adopted.",
-      "use": "Local payment branding, redemption liabilities and settlement assets have distinct roles; a currency label does not supply development revenue.",
-      "accessed": "2026-10-31"
-    },
-    {
-      "id": "bis_fx_2018",
-      "title": "Hardy: Foreign currency borrowing, balance sheet shocks and real outcomes, BIS Working Paper 758",
-      "url": "https://www.bis.org/publications/working-paper-758-foreign-currency-borrowing-balance-sheet-shocks-and-real-outcomes",
-      "reading_scope": "Primary abstract and research summary/findings read; full paper and underlying firm data unexamined.",
-      "use": "Foreign-currency mismatch can affect firms; the signed toy currency calculation is independent arithmetic, not a forecast of lunar exchange rates.",
-      "accessed": "2026-10-31"
     }
   ],
   "local_context": [
     {
       "path": "research/studies/world_economy/early_exports.md",
-      "sha256": "8a92b8f249d3a65f88fbca49d853308bbd2687936f67b5a97e401911acbbf206",
+      "sha256": "045f60ba9f6bc868ba793372e9db2b0544d64f1d56e7d2982c4244fa7810c8ac",
       "use": "Prior first milestone, synthetic facility allowances and coverage boundary; new venue is an alternative smaller account, not additive."
     },
     {

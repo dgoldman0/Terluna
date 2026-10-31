@@ -123,11 +123,16 @@ physical testing across the combined environment. Natural partial gravity over e
 landscapes is its strongest prospective advantage; Earth simulators and rotating array venues
 remain explicit competitors. Resident welfare, recorded production and export cash are separate.
 
-The [early sport and finance study](../research/studies/world_economy/sports_finance.md)
-prioritizes a resident performance programme and small trained visitor cohorts within the first
-enclosed communities. Remote media, sponsorship and licensing can reach customers beyond
-visitor capacity. Its cash, bond and monetary examples separate earned receipts from financing
-and leave the choice of lunar currency and institutions open.
+The [early sport and project-finance scenario](../research/studies/world_economy/sports_finance.md)
+examines a resident performance programme and small visitor cohorts within the first enclosed
+communities. Remote media, sponsorship and licensing can reach customers beyond visitor capacity.
+Its commercial assumptions remain preliminary; [sport concepts](../research/studies/world_economy/sports_concepts.md)
+develop proposed rules, arenas and movement mechanics separately.
+
+The [monetary-system study](../research/studies/monetary_system/README.md) treats currency arrangements,
+bank credit, settlement, public finance, external balances and construction funding at economy scale.
+It compares institutional alternatives and reproduces bounded transactions; no currency regime,
+inflation path or monetary reduction in construction debt is established.
 
 ## Aerophyte crops, living area and services
 

@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
   "stage": 13,
-  "scope": "Three-world economic comparison with industrial accounts, distinctive activities and an early single-community sport/media programme. Conditional venue cash, financing, currency and liquidity examples preserve the distinction between operating receipts, production and financial claims.",
+  "scope": "Three-world economic comparison with industrial accounts, distinctive activities and a preliminary sport/media commercial scenario. Monetary institutions and transaction accounts are evaluated in the separate monetary_system study.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -443,5 +443,52 @@
     "documentation_links": "254 local file links across the new report and five current synthesis/prior-study documents checked; all resolve. Fragment targets and external availability are separate from file-existence checks.",
     "source_review": "Eight primary issuer, official, monetary or research records read at the targeted scopes in sports_finance_sources.json; six local context hashes checked. The Liberty revenue composition and deferred-revenue passages, official participant-training section, coverage and settlement discussions were inspected. No full filing audit, legal review, literature review or empirical lunar validation.",
     "sports_finance_sha256": "0c24a5320da8d2cacf973da73e02eda3d110861f21b15c71899673b52b8da699"
+  },
+  "stage13_scope_revision": {
+    "date": "2026-10-31",
+    "prior_commit": "aace2cb",
+    "prior_schema": "terluna.research.sports-finance/1",
+    "current_schema": "terluna.research.sports-finance/2",
+    "change": "Remove redeemable-wallet and toy currency-cash examples from the current sports product. Retain venue cash, project-bond capacity and operating stresses unchanged; separate economy-scale monetary analysis. Existing stage13 record describes its historical scope and checks, not a completed central-banking study.",
+    "verification": "All six retained commercial result groups equal the schema1 product in aace2cb. Fourteen current venue/project-finance tests passed; full repository check passed. Separate monetary checks are in ../monetary_system/checks.json.",
+    "unchanged_numerical_fields": [
+      "inherited_screen",
+      "reference_bond",
+      "operating_scenarios",
+      "break_even",
+      "financing_sensitivity",
+      "investor_demand_sensitivity"
+    ],
+    "current_result_sha256": "f0e4b547dab606728e04f814787c396fe33a43f340a2f4041e1e72b776bdcdf1",
+    "full_repository_check": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "PASS; 3306 Python tests passed, 20 skipped in 581.41 s; 191 JavaScript tests passed. Layer check 1195 files, zero violations. Research integrity/provenance and five protection input hashes verified; ensemble setup validator passed.",
+      "log": "/tmp/terluna-monetary-system-check.log",
+      "boundary": "Repository integrity and numerical checks; no empirical lunar validation or manuscript clearance."
+    }
+  },
+  "stage13_sport_concepts": {
+    "evidence": "Proposed rules, dimensions and programme; no operating or commercial qualification.",
+    "source_identities": [
+      {
+        "path": "research/studies/world_economy/results/distinctive_activities.json",
+        "sha256": "290b9d8e7e628660b36073d746c52ff0b7255aa6a773a8ac92f06fb580773138"
+      },
+      {
+        "path": "habitation/low_gravity/results/low_gravity.json",
+        "sha256": "728d394399e5a793495a9e8999389f179a84854df14154ee45d7f8de8071ef2c"
+      }
+    ],
+    "independent_algebra_recomputation": {
+      "height_m": 1.9240017740817066,
+      "flight_time_s": 3.0784028385307303,
+      "horizontal_range_m": 6.1568056770614605,
+      "total_launch_speed_m_s": 3.2015621187164243,
+      "turn_radius_3_m_s_m": 9.597510220499057,
+      "turn_radius_6_m_s_m": 38.39004088199623
+    },
+    "assumptions": "Uses committed lunar gravity; prescribed vertical velocity 2.5 m/s, added horizontal velocity 2 m/s, no drag, equal launch/landing height. Steady level-turn examples prescribe 30 degrees bank and 3 or 6 m/s; no craft performance is established.",
+    "capacity_limit": "The proposed one-athlete, two-cell and six-player formats do not validate 20 simultaneous commercial participants.",
+    "review": "Complete report substantively read by authoring agent and root. Review clarified judging moments, goal/possession scoring, deliberate and incidental body contact, start possession and timed match duration. Local source links and both recorded product identities checked. No facility qualification or demand forecast."
   }
 }
