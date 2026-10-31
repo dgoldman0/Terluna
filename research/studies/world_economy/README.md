@@ -10,6 +10,8 @@ The [mature-industry assessment](mature_industry.md) retains the 1.2 atm lock an
 
 The [slow-settling study](slow_settling.md) examines suspension time, uniformity, mixing, fragile products, fluidized beds and final recovery. It compares Earth, lunar gravity and freefall/rotating array alternatives, and prices vessel occupancy separately from mixer electricity. The strongest proposed benefits concern constrained formulations and functional yield; energy savings alone do not establish a broad manufacturing premium.
 
+The [pressure-benefits study](pressure_advantages.md) examines useful services supplied by the 1.2 atm lock: buoyant capacity, air heat transport, liquid pressure margin and vacuum-assisted clamping. It separates absolute-pressure process requirements from pressure-difference duties and retains the design oxygen partial pressure. These physical and conditional cost gains do not add to the existing world-product totals.
+
 This study estimates the economic consequences of completing the Open Moon and maintaining it at the selected population. Its comparison is an equally advanced future Earth, with the same access to automation, energy and biological technology. The intended reader knows the project's physical design; the economic definitions and valuation assumptions are introduced here. This is a scenario study, not a forecast of future prices or a demonstrated construction programme.
 
 The [completed comparison](comparison.md) reports Earth, Open Moon and array as three peer
@@ -33,6 +35,7 @@ The accepted C′ distribution places **8 billion people on the Moon, 9 billion 
 | 7 | [Engineering across atmospheric loading](industrial_engineering.md), [competitive industrial accounts and enduring value](industrial_transition.md) | Implemented; physical bounds, conditional procurement and equal-service stock comparisons |
 | 8 | [Mature atmospheric and vacuum industry](mature_industry.md), [early infrastructure campaigns](early_campaigns.md) | Implemented; physical ratios, matched conditional costs, recurring demand and finite-order capital recovery |
 | 9 | [Slow settling and suspension processes](slow_settling.md) | Implemented; dilute transport, mixing/flow limits, whole-cycle recovery and conditional cost headroom |
+| 10 | [Useful services of the 1.2 atm atmosphere](pressure_advantages.md) | Implemented; matched pressure, composition, heat-flow, liquid and clamping comparisons; conditional cost allowances |
 
 The [inventory product](results/inventory.json) reads eleven committed products through [inputs.json](inputs.json), checking their full SHA-256 identities and schemas. It retains the source evidence statements and field paths. Quantities are engineering screens; a mass allowance is not a detailed structure and a power requirement is not a price. The baseline is provisioning commit `e89462608af21bd386b23b7eb36cf8373818619b`.
 
@@ -107,6 +110,7 @@ python -m research.studies.world_economy.industrial_continuation
 python -m research.studies.world_economy.mature_industry
 python -m research.studies.world_economy.early_campaigns
 python -m research.studies.world_economy.slow_settling
+python -m research.studies.world_economy.pressure_advantages
 python -m pytest research/studies/world_economy/tests
 ```
 

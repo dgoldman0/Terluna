@@ -66,6 +66,8 @@ Continuous internal gas load requires separate treatment. At pressure-volume thr
 
 The array can reproduce partial gravity. Acceleration is Ω²R and radial variation is approximately work-depth/R. A 100 m radial work zone with 1% variation needs about 10 km radius at 0.1217 rpm; lunar gravity varies only about 0.0115% over 100 m height. For smaller or differently oriented apparatus, much smaller rotating facilities suffice. Coriolis effects depend on motion; existing rotating infrastructure can share costs. The Moon's broad uniform field is an engineering advantage to price, not a prohibition on orbital competition.
 
+The [pressure-benefits assessment](pressure_advantages.md) balances these burdens with services supplied by the atmosphere. At matched composition and temperature, 1.2 versus 1 atm gives 20% more gross buoyant capacity per volume. Fixed-heat air circuits can need less fan power, liquids gain 20.3 kPa of vapor-pressure margin, and vacuum-assisted clamping can achieve the same force at a higher internal absolute pressure. The design keeps oxygen partial pressure near Earth's, so no general oxygen-supply premium is assigned.
+
 ## Delivered cost and continuing demand
 
 The cost comparison must use an accepted product delivered to the same buyer. Include capital service, inputs, energy, fixtures, contamination control, rejected units, qualification and transport. The [normalized calculation](mature_economics.py) deliberately gives Earth an optimized process and the array the same assumed partial-gravity saving as the Moon, with a separate site-service allowance. Its coordinates are illustrative, not estimated factory prices.

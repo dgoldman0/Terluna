@@ -242,5 +242,9 @@
   "slow_settling_catalogue": {
     "path": "slow_settling_sources.json",
     "scope": "Targeted primary evidence for suspension, microcarriers, crystal attrition, fluidized beds, stable formulations and competing terrestrial/orbital controls; retrieval and reading limits recorded."
+  },
+  "pressure_advantages_catalogue": {
+    "path": "pressure_advantages_sources.json",
+    "scope": "Primary pressure, lift, cooling, water, clamping, compression and gas-composition references. Individual reading and retrieval limits distinguish verified laws from proposed lunar applications."
   }
 }

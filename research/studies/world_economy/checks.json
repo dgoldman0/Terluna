@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 9,
-  "scope": "Three-world comparison with mature partial-gravity industry, finite early infrastructure campaigns and slow-settling production under the 1.2 atm lock. Physical transport, product-quality hypotheses, complete production and recovery cycles, and conditional costs remain distinct; no market forecast, factory design or financing programme is adopted.",
+  "stage": 10,
+  "scope": "Three-world economic comparison with mature industry, early infrastructure campaigns, slow-settling production and useful services of the 1.2 atm atmosphere. Physical pressure/gravity/composition effects, qualified performance, conditional costs and economic output remain separate; no market forecast, factory design or financing programme is adopted.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -52,7 +52,8 @@
     6,
     7,
     8,
-    9
+    9,
+    10
   ],
   "stages3_4": {
     "focused_check": {
@@ -283,6 +284,50 @@
       "mature_industry": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b",
       "early_campaigns": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6",
       "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+    }
+  },
+  "stage10": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "400 passed in 2.38 seconds, including 27 new pressure-benefit controls. After adding two primary source records and the qualified nitrogen-dilution discussion, the evidence-bound product was regenerated and all 27 module tests passed again in 0.20 seconds. Calculation code and numerical inputs were unchanged by that final bibliography update."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3231 Python tests passed, 20 skipped in 387.22 seconds; 191 JavaScript tests passed across immersion, column/light-transport and calendar suites. Layer, provenance and ensemble checks passed; 1187 files checked with 0 layer violations and five protection input hashes verified. The final bibliography/product-metadata update received the additional focused reproduction check described above.",
+      "log": "/tmp/terluna-pressure-benefits-check.log"
+    },
+    "numerical_controls": [
+      "Pressure-only density, buoyant volume/area and fixed-lift speed scaling, with a no-pressure-change control and invalid-domain rejection. Oxygen composition is a separate diagnostic; the design dry oxygen partial pressure matches the rounded Earth reference.",
+      "Heat-carriage and mass-flow conservation, constant mass flux/Reynolds number in matched geometry, fan pressure-work balance, opposite fixed-volume and fixed-heat outcomes, and a fixed pressure-loss floor. Electricity savings apply only to the selected cost share.",
+      "Fixed-force clamping keeps the pressure difference while raising final absolute pressure; pumpdown and reversible work improve in that example. A fixed-absolute-vacuum control retains the previously identified extra pressure burden.",
+      "Water saturation matches the rendered IAPWS triple-point and 373.1243 K reference values; inversion reproduces both specified pressures. Pressure margin and column height retain their distinct units, lunar gravity, and a hot-water boiling threshold.",
+      "Isothermal and ideal isentropic compression remain separate. The reversible saving per mole is independent of specified outlet pressure, while its fractional size declines as the outlet pressure rises; zero-work and invalid-order controls pass.",
+      "The pressure-level height satisfies the spherical isothermal hydrostatic equation. It is not an available-habitat, climate or productivity calculation.",
+      "Bound mature-pressure product and complete new-result reproduction; all nine earlier industrial/comparison products retain their stage-9 hashes."
+    ],
+    "documentation_links": "242 local Markdown links across the new report, study README, mature industry, comparison, provisioning README and research README checked; all resolve.",
+    "review": "Substantive reading of the complete delivered report, calculation, numerical tables and synthesis. Review distinguished absolute-pressure from pressure-difference duties, corrected hydraulic wording to pumps above their source, preserved unrelated JSON text, and made existing aerial-capacity inclusion explicit. No independent-agent review was performed.",
+    "source_review": "Eleven primary technical/author source records retain exact reading and access scopes. The intended IAPWS seven-page saturation PDF was retrieved to temporary storage after sandbox network resolution failed; pages 2, 3 and 7 were rendered and inspected for temperature scale, equation coefficients and numerical table. SHA-256 a10d38d73339b0713c86cfac88f9adcba137202167ccdfa1cd58238c438361d7. The USGS oxygen PDF direct request returned 403; the claim uses its indexed primary passage and no full-chapter review is claimed. NASA flammability guidance was read at the pressure/composition passage; the PMMA paper at its author/agency abstract. No complete scholarly review, full handbook audit or physical equipment validation.",
+    "limitations": [
+      "Matched-gas and fixed-temperature engineering screens isolate pressure. Local humidity, temperature, oxygen fraction, winds and composition require actual profiles. The 301 K isothermal height is not a climate sounding.",
+      "No certified flight, buoyant inhabited capacity, complete cooling plant, pump installation, laminate, gripper or gas compressor. Power coefficients, prescribed geometry, constant pump speed and water density are idealizations.",
+      "No general oxygen-productivity, fire-safety, electrical-voltage or crop-yield premium is assigned. Nitrogen dilution and external insulation are qualitative qualification candidates; existing port-fire requirements remain intact.",
+      "Atmosphere construction and sustaining costs remain in the existing accounts. Previously calculated aerial stocks already use 1.2 atm. No new GWP/NWP, buyer orders, campaign income or economic forecast is added."
+    ],
+    "products_sha256": {
+      "pressure_advantages": "db6b1c5e602ba8f960974c2e61096b5f64ca5c80ef8fbf9b1d5701cdbf52524f"
+    },
+    "preserved_products_sha256": {
+      "partial_gravity": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297",
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "industrial_continuation": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+      "mature_industry": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b",
+      "early_campaigns": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "slow_settling": "cf87897b3c6697a9647876969a0525b5f61b3b89ea66d817bb370eb180099812"
     }
   }
 }

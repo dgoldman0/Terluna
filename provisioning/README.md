@@ -106,6 +106,11 @@ workable suspensions, fragile products and fluidized beds. It accounts for other
 and the cost of slower recovery; prospective gains in formulation or quality remain separate
 from measured performance and the existing world-product totals.
 
+The [pressure-benefits assessment](../research/studies/world_economy/pressure_advantages.md) treats
+the 1.2 atm atmosphere as useful infrastructure for buoyant transport, air cooling, liquid handling
+and vacuum-assisted clamping. Its gains depend on the required service, with oxygen partial pressure
+held near Earth's and existing atmosphere costs retained.
+
 ## Aerophyte crops, living area and services
 
 The [31 October assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef

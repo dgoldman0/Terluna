@@ -938,7 +938,7 @@
     },
     {
       "topic": "world_economy",
-      "condition": "conditional_three_world_economy_with_mature_industry_early_campaigns_and_slow_settling_process_accounts_2026_10_31; reproducible_accounts; no_market_forecast_factory_design_or_financing_plan_adopted",
+      "condition": "conditional_three_world_economy_with_mature_industry_early_campaigns_and_gravity_pressure_process_accounts_2026_10_31; reproducible_accounts; no_market_forecast_factory_design_or_financing_plan_adopted",
       "material": [
         "studies/world_economy/README.md",
         "studies/world_economy/inputs.json",
@@ -983,7 +983,11 @@
         "studies/world_economy/slow_settling.md",
         "studies/world_economy/slow_settling_inputs.json",
         "studies/world_economy/slow_settling_sources.json",
-        "studies/world_economy/results/slow_settling.json"
+        "studies/world_economy/results/slow_settling.json",
+        "studies/world_economy/pressure_advantages.md",
+        "studies/world_economy/pressure_advantages_inputs.json",
+        "studies/world_economy/pressure_advantages_sources.json",
+        "studies/world_economy/results/pressure_advantages.json"
       ],
       "unresolved": [
         "Source-site energy, ore processing and bulk capture architecture; future unit prices and full construction/settlement timeline, including renewal funding.",
@@ -1000,9 +1004,10 @@
         "Complete product-cycle and delivered-cost qualification under 1.2 atm: hot assemblies, printed cores and sintered composites compared with optimized Earth and rotating array processes.",
         "Funded campaign orders, ramp and commissioning design, export routes and actual plant capital; customer advances change financing timing and do not establish independent programme income.",
         "Product-specific suspension and recovery under lunar gravity: dense/aggregating rheology, uniformity, heat and gas transfer, complete-cycle accepted yield and time-dependent material or biological quality.",
-        "Empirical low-gravity mixer scaling, powder cohesion and fluid-bed entrainment; full transport, forced-harvest and fixed-capital costs compared with optimized Earth and freefall/rotating array recipes."
+        "Empirical low-gravity mixer scaling, powder cohesion and fluid-bed entrainment; full transport, forced-harvest and fixed-capital costs compared with optimized Earth and freefall/rotating array recipes.",
+        "Complete equipment and economic qualification of pressure benefits: net buoyant payload, matched heat/ventilation duties, liquid-system margins and vacuum-assisted material quality; ambient advantages versus controlled Earth/array facilities."
       ],
-      "next_session_task": "Qualify a slowly immobilizing filled material and one fragile culture or crystal suspension through distribution, functional quality and final recovery. Compare optimized Earth, lunar and freefall/rotating processes. Price a modular structural or thermal yard against funded orders and a post-campaign use; retain the 1.2 atm lock and account for actual process pressure."
+      "next_session_task": "Qualify a slowly immobilizing filled material and one fragile culture or crystal suspension through distribution, functional quality and final recovery. Compare optimized Earth, lunar and freefall/rotating processes. Price a modular structural or thermal yard against funded orders and a post-campaign use; retain the 1.2 atm lock and account for actual process pressure. Compare a heat-limited air circuit and a pressure-difference clamping process with their actual equipment curves before assigning pressure-related cost savings."
     }
   ]
 }
