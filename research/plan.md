@@ -480,7 +480,9 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      holds on nine of the eleven resolved runs and misses only the light snow from −15 °C, by about five points of its
      flux; it is adopted with that limit stated. PlaSim's build takes it with graupel by CM1's shares by kind, a
      precipitating fraction tested first on the boxes' own columns and the snow's top at its formation-weighted height,
-     and the runs carry diagnostics of the remaining Earth-tuned terms' leverage, without retuning. No Jura box until
+     and the runs carry diagnostics of the remaining Earth-tuned terms' leverage, without retuning.
+     No fixed fraction held on both boxes; a spread of local rates whose typical rate rises with the snowfall, measured from the boxes' snow fields, held them in total (1.15 and 1.20) and missed one land band, where the box-mean air alone overstates the sublimation by 1.55 (1.19 overall), and it is adopted with that limit stated (register, 30 October). The build passed its tests and a smoke day on domain/climate (c6faed7): in one lunar day 52% of the frozen precipitation sublimates above the freezing level against gamma's 29%, and seven unfed shadows carry the snow's Earth-derived choices into the runs.
+     No Jura box until
      the models agree. Then surface and radiation feedbacks. The depth test's 15-year run is held. The climate work's
      readers take the year files' humidity as interval means (register, 27 October); the climatology, the cross-domain
      extracts and the rings' readers still take it as it stands.
@@ -499,12 +501,13 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    Then one design run with the cold cloud's factors, which the author adopted, Beljaars's gust with CM1's similarity
    over water, the fifteen levels, the Betts–Miller scheme at 0.7 with its depth test and the rain evaporated from its
    drops by the share rule (register, 28 and 29 October), and the snow sublimated by the capped flakes' closure
-   (register, 30 October), with its own longwave refit, followed by the settling and exobase checks, once the snow's
-   build has passed its tests and a smoke day. The fifteen-level configuration with its provisional refit
+   (register, 30 October), with its own longwave refit, followed by the settling and exobase checks; the snow's build
+   has passed its tests and a smoke day (domain/climate c6faed7). The fifteen-level configuration with its provisional refit
    heads for about 296 K at the design sunlight, and the gust settles some 0.7 K warmer, which called for about 3.5–4.5%
    more sunlight at 0.73–0.96% of the sunlight a kelvin. The drops evaporate about half the rain formed in a first lunar
    day, against a fifth with gamma, and more evaporation grew the low cloud and cooled the Moon in the gamma runs of 21
-   October, so a short run on the final configuration finds the sunlight.
+   October, so a short run on the final configuration finds the sunlight: six years at 0.929, 3.6% above 0.897, are running on domain/climate, and their yearly means set the design run's sunlight beside the longwave refit on their columns.
+   Once the design run is complete and analysed, every branch is reconciled with main and brought fully into line (register, 30 October).
    The cover question stays on hold. A CM1 ring that makes its own upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
