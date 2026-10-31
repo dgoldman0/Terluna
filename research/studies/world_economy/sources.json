@@ -10,7 +10,7 @@
     {
       "id": "oecd_sna2025",
       "url": "https://www.oecd.org/en/publications/measuring-natural-resources-in-the-national-accounts_420c7c2a-en/full-report/measuring-natural-resources_a0accc5d.html",
-      "reading_scope": "Section 2.4, paragraphs 59\u201362 and reproduced SNA Annex 4: depreciation and depletion in net aggregates; not full-book reading.",
+      "reading_scope": "Section 2.4, paragraphs 59–62 and reproduced SNA Annex 4: depreciation and depletion in net aggregates; not full-book reading.",
       "evidence": "Primary official source; supports definitions, not fictional future prices."
     },
     {
@@ -22,7 +22,7 @@
     {
       "id": "oecd_income_finance",
       "url": "https://www.oecd.org/en/publications/oecd-benchmark-definition-of-foreign-direct-investment-fifth-edition_7f05c0a3-en/full-report/links-between-fdi-and-other-statistics_e6f184d4.html",
-      "reading_scope": "Paragraphs 652\u2013672: GDP/GNI and financial-account links; not full-book reading.",
+      "reading_scope": "Paragraphs 652–672: GDP/GNI and financial-account links; not full-book reading.",
       "evidence": "Primary official source; supports definitions, not fictional future prices."
     },
     {
@@ -34,5 +34,22 @@
   ],
   "retrieval_limits": [
     "Combined 2025 SNA PDF retrieval failed on size; IMF chapter returned403; ECB-hosted handbook timed out. Those documents are not claimed as read; successful official OECD account is used explicitly."
+  ],
+  "construction_sources": [
+    {
+      "url": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&Mask=2",
+      "access": "NIST condensed-phase data read 2026-10-31",
+      "use": "Water enthalpy of formation -285.830 kJ/mol implies about 17.9 MJ reaction enthalpy per kg oxygen released; thermal and electrical work are distinct."
+    },
+    {
+      "url": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C7664417&Mask=1",
+      "access": "NIST gas-phase data read 2026-10-31",
+      "use": "Ammonia enthalpy of formation -45.94 kJ/mol implies about 3.28 MJ reaction enthalpy per kg N2 released; actual salts, organics and separation need additional processing."
+    },
+    {
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/",
+      "access": "NASA derivation read 2026-10-31",
+      "use": "Reaction-propulsion mass and energy must include exhaust, not only 0.5*payload*delta-v squared; no monetary cost is inferred from this source."
+    }
   ]
 }

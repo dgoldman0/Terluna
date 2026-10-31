@@ -9,7 +9,7 @@ The accepted C′ distribution places **8 billion people on the Moon, 9 billion 
 | Stage | Deliverable | State |
 |---|---|---|
 | 1 | Economic boundaries, accounting definitions, physical inventory and tested financing equations | Implemented; verification recorded in checks.json |
-| 2 | Construction cost by element, future unit-cost assumptions and unresolved infrastructure allowances | Pending |
+| 2 | [Construction cost](construction.md) by element, source processing, future unit-cost assumptions and infrastructure allowances | Implemented; conditional cost cases |
 | 3 | Annual replacement, operations, ownership and construction-debt schedules | Pending |
 | 4 | Three-world sector scenarios, trade boundaries, relative gross/net product and resident resources | Pending |
 
@@ -74,6 +74,7 @@ Repayment can begin well before full population. Ten successive 50-year construc
 ```sh
 python -m research.studies.world_economy.inventory
 python -m research.studies.world_economy.inventory --output research/studies/world_economy/results/inventory.json
+python -m research.studies.world_economy.construction
 python -m pytest research/studies/world_economy/tests
 ```
 

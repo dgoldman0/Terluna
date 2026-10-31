@@ -61,7 +61,8 @@ The author's decisions frame it:
 The [world-economy study](../research/studies/world_economy/README.md) compares the completed
 Moon, inhabited array and equally advanced Earth as three interconnected economies. Its first stage
 binds the physical inventory and defines gross product, depreciation, resident income and debt
-service. Construction valuation and annual product scenarios follow in separate stages.
+service. Its construction screen prices source processing, delivery and installed assets under
+three technology cases. Annual product, maintenance and financing scenarios follow.
 
 ## Aerophyte crops, living area and services
 

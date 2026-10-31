@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 1,
-  "scope": "Inventory and accounting/finance foundations; construction valuation and annual economic scenarios pending.",
+  "stage": 2,
+  "scope": "Accounting foundation and conditional construction costs for three peer economies; annual comparison follows.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -27,5 +27,15 @@
   "review": {
     "scope": "Read the inventory, source identities, accounting definitions and financing mathematics; independent accounting review corrected renewable depletion, investment-income wording and tranche capitalization assumptions.",
     "not_established": "Economic forecasts, completed source industry, population capacity or a financing decision."
+  },
+  "stage2": {
+    "focused": "31 study tests passed, including13construction tests; source/product reproduction, joint-feed costs, territorial inclusion and schedule/income scaling.",
+    "full_repository_check": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+      "result": "Passed:2862 Python tests,20skipped; JavaScript, calendar, layer, provenance and ensemble passed. Layer1145files,0violations.",
+      "log": "/tmp/terluna-economy-stage2-check.log"
+    },
+    "review": "Independent physical and economic review checked cost conservation, source-site energy, territorial versus beneficiary accounts, ordinary capital inclusion, and construction-era renewal omissions. Broader ordinary-capital allowances replace treating material mass as complete productive capital.",
+    "limits": "Prices, source industrial technology, ordinary capital and unquantified environmental/magnetic allowances remain scenarios. Initial/end-state expenditure excludes construction-era operating/renewal funding."
   }
 }
