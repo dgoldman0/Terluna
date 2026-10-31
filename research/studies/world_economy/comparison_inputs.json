@@ -1,0 +1,44 @@
+{
+  "schema": "terluna.research.world-economy-comparison-inputs/1",
+  "reference": {
+    "cost_case": "advanced_industrial",
+    "water_case": "illustrative_middle",
+    "production_case": "close_parity",
+    "earth_gdp_per_resident": 100000
+  },
+  "earth_gdp_per_resident_sensitivity": [
+    50000,
+    100000,
+    250000
+  ],
+  "asset_life_scales": [
+    0.5,
+    1,
+    2
+  ],
+  "operating_prices": {
+    "evidence": "Assumed delivered service prices for a nonadditive funding memorandum; not predictions or additional GDP deductions.",
+    "delivered_electricity_U_per_MWh": {
+      "patient_automation": 1,
+      "advanced_industrial": 5,
+      "expensive_energy_dilute_ore": 20
+    },
+    "phosphorus_U_per_kg": {
+      "patient_automation": 2,
+      "advanced_industrial": 10,
+      "expensive_energy_dilute_ore": 50
+    }
+  },
+  "ordinary_portfolio_sensitivities": {
+    "longer_lived_earth": {
+      "earth": 0.1,
+      "moon": 0.2,
+      "array": 0.25
+    },
+    "longer_lived_constructed": {
+      "earth": 0.2,
+      "moon": 0.12,
+      "array": 0.15
+    }
+  }
+}

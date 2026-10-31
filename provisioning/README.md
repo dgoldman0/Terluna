@@ -58,11 +58,18 @@ The author's decisions frame it:
 
 ## Mature world economy
 
-The [world-economy study](../research/studies/world_economy/README.md) compares the completed
-Moon, inhabited array and equally advanced Earth as three interconnected economies. Its first stage
-binds the physical inventory and defines gross product, depreciation, resident income and debt
-service. Its construction screen prices source processing, delivery and installed assets under
-three technology cases. Annual product, maintenance and financing scenarios follow.
+The [world-economy study](../research/studies/world_economy/comparison.md) compares the
+Moon, inhabited array and equally advanced Earth as three interconnected economies. Its
+reference gross-product ratio is Earth:Moon:array **100:93:56**, and its net-product ratio
+is **100:91:53** under the stated ordinary and engineered depreciation assumptions, before
+unpriced local resource depletion. Sector productivity, prices and asset lives remain scenarios.
+
+The construction screen separates source processing, delivery and installed capital. Its
+middle advanced case requires about 97 years of reference Earth output, spread over a
+500-year build before construction-era renewal. A separate patient-debt example gives
+**100:75:48** in resources after replacement and external principal, including Earth's
+creditor receipts. Existing loans can instead retire before full population. These are
+conditional comparisons; no financing programme or economic forecast is adopted.
 
 ## Aerophyte crops, living area and services
 

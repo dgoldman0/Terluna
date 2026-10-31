@@ -938,22 +938,26 @@
     },
     {
       "topic": "world_economy",
-      "condition": "stages1_2_inventory_finance_framework_and_construction_cost_scenarios_2026_10_31; no_forecast_or_design_adopted",
+      "condition": "four_stage_conditional_three_world_economic_comparison_2026_10_31; reproducible_cost_production_depreciation_and_finance_scenarios; no_market_forecast_or_financing_plan_adopted",
       "material": [
         "studies/world_economy/README.md",
         "studies/world_economy/inputs.json",
         "studies/world_economy/results/inventory.json",
         "studies/world_economy/checks.json",
         "studies/world_economy/construction.md",
-        "studies/world_economy/results/construction.json"
+        "studies/world_economy/results/construction.json",
+        "studies/world_economy/comparison.md",
+        "studies/world_economy/productivity.md",
+        "studies/world_economy/annual_accounts.md",
+        "studies/world_economy/results/comparison.json"
       ],
       "unresolved": [
-        "Future extraction, processing, transport and installation unit costs; incomplete source and protective infrastructure.",
-        "Ordinary and special replacement capital, collective services, ownership and dated debt schedules.",
-        "Same-technology futureEarth sector output, demand, valuation and comparable maintenance costs.",
-        "Revised301K coupled design inputs remain incomplete."
+        "Source-site energy, ore processing and bulk capture architecture; future unit prices and full construction/settlement timeline, including renewal funding.",
+        "Territorial ordinary asset portfolios, lifetimes, natural-resource depletion and measured costs of environmental/safety operations.",
+        "Array workloads, realised demand, export capacity, ownership and long-term institutions; no market-clearing or financing feasibility is established.",
+        "Revised301K climate and biological requirements are not yet propagated through every inherited physical input."
       ],
-      "next_session_task": "Stages3–4: annual renewal, three-world output, dated debt and ownership scenarios, with common technology on Earth."
+      "next_session_task": "Replace the largest assumptions with source-industry designs and a construction/settlement cash-flow timeline; develop array workload and trade-demand cases and ordinary asset portfolios for all three worlds."
     }
   ]
 }

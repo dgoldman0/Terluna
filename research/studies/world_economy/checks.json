@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 2,
-  "scope": "Accounting foundation and conditional construction costs for three peer economies; annual comparison follows.",
+  "stage": 4,
+  "scope": "Completed first conditional comparison of Earth, Open Moon and array: physical inventory, construction prices, annual production and renewal, resident income, required trade and construction finance.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -18,7 +18,12 @@
     }
   ],
   "limitations": [
-    "No full scholarly review, engineering validation, market calibration or simultaneous revised301K calculation."
+    "No empirical validation of source industry, bulk capture, settlement capacity, engineered asset lifetimes or future markets.",
+    "Local resource depletion remains unpriced in the reference, with explicit sensitivity allowances.",
+    "Construction-phase renewal/operations require contemporaneous funding or additional liabilities; no settlement/production timeline or market-clearing trade model is solved.",
+    "The301K redesign is not propagated through every inherited requirement.",
+    "Primary sources were read at the targeted scopes recorded in sources.json and supporting reports, not as a full scholarly literature review.",
+    "Ensemble validation establishes workspace integrity, not manuscript or scientific clearance."
   ],
   "earlier_run": {
     "log": "/tmp/terluna-economy-stage1-check.log",
@@ -37,5 +42,32 @@
     },
     "review": "Independent physical and economic review checked cost conservation, source-site energy, territorial versus beneficiary accounts, ordinary capital inclusion, and construction-era renewal omissions. Broader ordinary-capital allowances replace treating material mass as complete productive capital.",
     "limits": "Prices, source industrial technology, ordinary capital and unquantified environmental/magnetic allowances remain scenarios. Initial/end-state expenditure excludes construction-era operating/renewal funding."
+  },
+  "completed_stages": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "stages3_4": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "93 passed in0.42seconds in the actual provisioning worktree; the isolated integration also passed93."
+    },
+    "full_repository_check": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+      "result": "Passed:2924 Python tests passed,20skipped in399.00seconds; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer1147files,0violations.",
+      "log": "/tmp/terluna-economy-final-check.log"
+    },
+    "numerical_controls": [
+      "Reproduction of bound inventory, construction and comparison products; schema and input identity checks.",
+      "Debt conservation, discounted installments, construction capitalization, retired tranches and mature debt age.",
+      "Three-world production/income/principal closure; counterparty receipts and required net exports; negative stress cases retained.",
+      "Independent cost/production axes, water inventory and debt effects, ordinary and incremental depreciation, domestic/external debt shares, mixed final/intermediate operating purchases.",
+      "Agent numerical sweep:486 construction/production/income/finance combinations finite; maximum relative accounting residual5.96e-16."
+    ],
+    "review": "Substantive reading of the delivered comparison, supporting methodology and source scopes; independent reviews of accounting, physical cost boundaries and productivity assumptions. Reported tables and financial/depreciation sensitivities matched stored outputs. Reviews corrected construction-era renewal funding, territorial cost versus asset value, ordinary-capital overlap, household electricity classification and the interpretation of creditor stress claims.",
+    "documentation_links": "23 local study links checked against candidate/current repository; all resolved.",
+    "comparison_sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
   }
 }

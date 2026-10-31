@@ -51,5 +51,31 @@
       "access": "NASA derivation read 2026-10-31",
       "use": "Reaction-propulsion mass and energy must include exhaust, not only 0.5*payload*delta-v squared; no monetary cost is inferred from this source."
     }
+  ],
+  "production_sources": [
+    {
+      "url": "https://wdi.worldbank.org/table/4.2",
+      "reading_scope": "World and high-income rows/headings accessed2026-10-31; modern structure as context, not future weights."
+    },
+    {
+      "url": "https://www.worldbank.org/en/brief/2021/04/30/icp2021-concepts-definitions",
+      "reading_scope": "Concepts/definitions, with ICP methodology and FAQ; no microdata."
+    },
+    {
+      "url": "https://apps.bea.gov/scb/issues/2026/09-september/0926-nea-annual-update.htm",
+      "reading_scope": "Table6 and AppendixB Account1;2025GDP30861.3bn andCFC5055.5bn imply16.38%. US scale check only."
+    },
+    {
+      "url": "https://www.federalreserve.gov/releases/g17/CapNotes.htm",
+      "reading_scope": "Short capacity/utilisation definitions page; physical capacity separated from realised production."
+    },
+    {
+      "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/04/the-impact-of-artificial-intelligence-on-productivity-distribution-and-growth_d54e2842/8d900037-en.pdf",
+      "reading_scope": "Title/abstract and section4.2, printedpages21–22; price/demand mechanisms, not full64-page review or adoption of near-term forecast."
+    },
+    {
+      "url": "https://www.oecd.org/en/publications/oecd-compendium-of-productivity-indicators-2026_734a5e68-en/full-report/productivity-patterns-across-industries_8238f2eb.html",
+      "reading_scope": "Chapter findings and Box4.1 on service quality, nonmarket and digital measurement; not fullcompendium."
+    }
   ]
 }

@@ -2,6 +2,12 @@
 
 This study estimates the economic consequences of completing the Open Moon and maintaining it at the selected population. Its comparison is an equally advanced future Earth, with the same access to automation, energy and biological technology. The intended reader knows the project's physical design; the economic definitions and valuation assumptions are introduced here. This is a scenario study, not a forecast of future prices or a demonstrated construction programme.
 
+The [completed comparison](comparison.md) reports Earth, Open Moon and array as three peer
+economies. Its reference gross-product ratio is **100:93:56**, and its net-product ratio is
+**100:91:53** before unpriced depletion and with the stated depreciation assumptions.
+Construction finance is a separate account; patient loans reduce the reference after-principal
+resource ratio to **100:75:48**. These are conditional scenarios, not adopted forecasts.
+
 The accepted C′ distribution places **8 billion people on the Moon, 9 billion on Earth and 5 billion in the array**. The three are interconnected economies with separate production, capital, income and financing accounts. Equal output per resident would give 0.889 Earth products for the Moon, 0.556 for the array, and 1.444 for Moon plus array. The Moon needs a 12.5% per-resident premium to equal Earth's total. These are population identities, not estimates of productivity.
 
 ## Stages and evidence
@@ -10,8 +16,8 @@ The accepted C′ distribution places **8 billion people on the Moon, 9 billion 
 |---|---|---|
 | 1 | Economic boundaries, accounting definitions, physical inventory and tested financing equations | Implemented; verification recorded in checks.json |
 | 2 | [Construction cost](construction.md) by element, source processing, future unit-cost assumptions and infrastructure allowances | Implemented; conditional cost cases |
-| 3 | Annual replacement, operations, ownership and construction-debt schedules | Pending |
-| 4 | Three-world sector scenarios, trade boundaries, relative gross/net product and resident resources | Pending |
+| 3 | [Annual replacement, operations, ownership and construction-debt schedules](annual_accounts.md) | Implemented; tested accounting and timing scenarios |
+| 4 | [Three-world sector scenarios](productivity.md), required trade, [gross/net product and resident resources](comparison.md) | Implemented; conditional comparison and sensitivity grids |
 
 The [inventory product](results/inventory.json) reads eleven committed products through [inputs.json](inputs.json), checking their full SHA-256 identities and schemas. It retains the source evidence statements and field paths. Quantities are engineering screens; a mass allowance is not a detailed structure and a power requirement is not a price. The baseline is provisioning commit `e89462608af21bd386b23b7eb36cf8373818619b`.
 
@@ -19,15 +25,15 @@ The selected climate target is 301 K. These inherited quantities have **not** al
 
 ## What the accounts measure
 
-For each territory, gross world product (GWP) is the sum of gross value added plus net taxes on products. Gross value added subtracts intermediate goods and services from gross output. Purchased energy, routine producer repairs and materials therefore cannot be subtracted again from GWP as an additional operating burden. The production boundary includes nonmarket services under a consistent valuation convention. [BEA's GDP definitions](https://www.bea.gov/index.php/news/gdp-release-additional-information) establish these distinctions.
+For each territory, gross world product (GWP) is the sum of gross value added plus net taxes on products. Gross value added subtracts intermediate goods and services from gross output. Producer purchases of energy, routine repairs and materials therefore cannot be subtracted again from GWP as an additional operating burden. Household energy purchases remain final consumption. The production boundary includes nonmarket services under a consistent valuation convention. [BEA's GDP definitions](https://www.bea.gov/index.php/news/gdp-release-additional-information) establish these distinctions.
 
-We use the 2025 SNA definition of **net world product (NWP)**: GWP less economic depreciation and natural-resource depletion. Depreciation covers wear, aging, obsolescence and ordinary accidental losses. Depletion concerns nonrenewable resources extracted and renewable resources taken beyond regeneration; it is not the delivered price of replacement material. Imported material purchases and depletion in their source territory must not both be charged as lunar depletion. Classification of a deliberately constructed atmosphere is a study convention still to specify. [OECD's account of the 2025 SNA](https://www.oecd.org/en/publications/measuring-natural-resources-in-the-national-accounts_420c7c2a-en/full-report/measuring-natural-resources_a0accc5d.html), [BEA's depreciation definitions](https://www.bea.gov/resources/learning-center/definitions-and-introduction-fixed-assets).
+We use the 2025 SNA definition of **net world product (NWP)**: GWP less economic depreciation and natural-resource depletion. Depreciation covers wear, aging, obsolescence and ordinary accidental losses. Depletion concerns nonrenewable resources extracted and renewable resources taken beyond regeneration; it is not the delivered price of replacement material. Depletion in a source territory is not deducted again from lunar NWP merely because the Moon imports the material. The annual account provisionally treats the constructed atmosphere as a maintained endowment; its formal asset classification remains open. [OECD's account of the 2025 SNA](https://www.oecd.org/en/publications/measuring-natural-resources-in-the-national-accounts_420c7c2a-en/full-report/measuring-natural-resources_a0accc5d.html), [BEA's depreciation definitions](https://www.bea.gov/resources/learning-center/definitions-and-introduction-fixed-assets).
 
 **Net resident income** adds net income earned from other territories to NWP, including interest and profits. An Earth lender's interest receipt matches the Moon borrower's payment. Principal repayment instead changes financial claims: it affects cash resources without changing GWP or NWP. Equity ownership also creates income claims. Domestic debt cancels in a consolidated world balance, while contracts, distribution and taxation remain consequential. [OECD's production, income and financial-account distinctions](https://www.oecd.org/en/publications/oecd-benchmark-definition-of-foreign-direct-investment-fifth-edition_7f05c0a3-en/full-report/links-between-fdi-and-other-statistics_e6f184d4.html).
 
-An additional **cash-resource account** will show external principal payments and essential services separately. Interpreting net income as spendable resources requires replacement investment to equal depreciation, no unrecorded net investment, and an explicit treatment of depletion reserves, transfers and borrowing. Any discretionary residual will subtract a defined final-service allocation once. A public agency's entire cash budget is not automatically an additional loss of net product: it may include intermediate purchases, replacement and debt service already accounted for elsewhere.
+The **cash-resource account** shows external principal payments and essential services separately. Interpreting net income as spendable resources requires replacement investment to equal depreciation, no unrecorded net investment, and an explicit treatment of depletion reserves, transfers and borrowing. The optional allocation residual subtracts a defined final-service allocation once. A public agency's entire cash budget is not automatically an additional loss of net product: it may include intermediate purchases, replacement and debt service already accounted for elsewhere.
 
-The Moon's territorial account covers its surface and atmosphere. The array is a peer economy, with its own output and costs, including when it supplies lunar users. Ownership and service contracts determine which residents receive income and which territory purchases support services. Costs of a shared shield or power system will be allocated explicitly; assigning a funding obligation does not move the producer's GDP. Earth receives the same technological possibilities and a comparable allowance for maintaining its own infrastructure and environment. Income earned on Earth-owned orbital assets enters Earth's resident-income account; investment expenditure itself is a capital transaction.
+The Moon's territorial account covers its surface and atmosphere. The array is a peer economy, with its own output and costs, including when it supplies lunar users. Ownership and service contracts determine which residents receive income and which territory purchases support services. Costs of a shared shield or power system have explicit territorial and funding assumptions; assigning a funding obligation does not move the producer's GDP. Earth receives the same technological possibilities and a comparable allowance for maintaining its own infrastructure and environment. Income earned on Earth-owned orbital assets enters Earth's resident-income account; investment expenditure itself is a capital transaction.
 
 ## Physical inventory for valuation
 
@@ -57,7 +63,7 @@ Ranges retain their source meaning. They are not joint low/high designs and shou
 | Orbital computing | 6.98–34.36 Mt installed per TW; 0.700–2.558 Mt/year hardware renewal per TW | Workload unselected; capacity does not establish sales or value added |
 | Array habitats | 5,025 Gt for 5 billion residents | Includes 990 t/person shielding and 15 t/person structure; alternative shielding geometry is not additive |
 
-Inputs are linked by field in the JSON product. The inventory still lacks a complete source industry and delivery network, magnetic protection, installation labour and machinery, detailed transmission hardware, sanitation, emergency systems and autonomous maintenance. Future Earth also needs comparable capital and environmental-service accounts. Later valuation will expose these omissions as allowances or open quantities, rather than assigning them zero cost.
+Inputs are linked by field in the JSON product. The inventory still lacks a complete source industry and delivery network, magnetic protection, installation labour and machinery, detailed transmission hardware, sanitation, emergency systems and autonomous maintenance. Future Earth also needs comparable capital and environmental-service accounts. The construction screen exposes these omissions as allowances or open quantities, rather than assigning them zero cost.
 
 ## Construction finance through time
 
@@ -67,7 +73,7 @@ For principal D, rate r and n annual payments, the payment is `D r / (1 − (1+r
 
 Construction interest must also be financed. Equal annual draws over a 500-year build multiply the financed construction cost by **1.297 at 0.1%, 4.443 at 0.5%, 28.755 at 1%, and 1,995.557 at 2%** if every interest payment is deferred. These are arithmetic consequences, not proposed loan terms. The module records contemporaneous interest payments when only part of interest is capitalized.
 
-Repayment can begin well before full population. Ten successive 50-year construction tranches, wholly debt financed with interest capitalized during each tranche, then each repaid over 100 years at 1%, leave about 0.209 construction costs outstanding at year 500. They have already required about 1.739 construction costs in earlier repayments, including interest. Early settlement revenues or transfers must fund those payments. A later full-population date can retire all these loans. The comparison will therefore include both a mature state after legacy repayment and an explicitly dated first-full-population state.
+Repayment can begin well before full population. Ten successive 50-year construction tranches, wholly debt financed with interest capitalized during each tranche, then each repaid over 100 years at 1%, leave about 0.209 construction costs outstanding at year 500. They have already required about 1.739 construction costs in earlier repayments, including interest. Early settlement revenues or transfers must fund those payments. A later full-population date can retire all these loans. The comparison includes both a mature state after legacy repayment and an explicitly dated first-full-population state.
 
 ## Reproduction
 
@@ -75,6 +81,7 @@ Repayment can begin well before full population. Ten successive 50-year construc
 python -m research.studies.world_economy.inventory
 python -m research.studies.world_economy.inventory --output research/studies/world_economy/results/inventory.json
 python -m research.studies.world_economy.construction
+python -m research.studies.world_economy.compare
 python -m pytest research/studies/world_economy/tests
 ```
 
