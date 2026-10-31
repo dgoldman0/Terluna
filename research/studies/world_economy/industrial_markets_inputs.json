@@ -1,0 +1,201 @@
+{
+  "schema": "terluna.research.industrial-markets-inputs/1",
+  "evidence": "Conditional competitive-cost and industrial-capacity scenarios. All process qualification, future costs, orders, power, reserves and capital funding are assumed. No lunar cost advantage is inferred from the physical calculation.",
+  "products": {
+    "research/studies/world_economy/results/construction.json": {
+      "sha256": "fcbd96fa0428e3b983c407a65d6a622a2c264bb42233bb4d49f2d1174a281f7c",
+      "schema": "terluna.research.world-economy-construction/1"
+    },
+    "research/studies/world_economy/results/comparison.json": {
+      "sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "schema": "terluna.research.world-economy-comparison/1"
+    },
+    "resources/results/industry.json": {
+      "sha256": "7ac8754b4ec1c3c4f50bd55f4803cad6e5d0a9f1709cc9e7eb0a68af8ce3e79c",
+      "schema": "terluna.resources.industry/1"
+    }
+  },
+  "numeraire": "Same real U as world_economy; future Earth 100000 U per resident-year, not a forecast of dollar purchasing power.",
+  "families": [
+    {
+      "id": "structures",
+      "name": "Rolled/cast stock and welded structural modules",
+      "mode": "vacuum_or_low_pressure",
+      "mass_share": 0.8,
+      "base_production_cost_U_kg": 5,
+      "cost_basis": "Reference array structure diagnostic 375T U /75Gt, a scenario value rather than a factory quotation.",
+      "yield": 0.9,
+      "factory_energy_MJ_per_feed_kg": 100,
+      "local_feed_fraction": 0.9,
+      "earth_order_kg_year": 1000000000.0
+    },
+    {
+      "id": "glass_ceramics",
+      "name": "Qualified glass/ceramic preforms, protected fibres and panels",
+      "mode": "vacuum_or_low_pressure",
+      "mass_share": 0.15,
+      "base_production_cost_U_kg": 10,
+      "cost_basis": "Chosen intermediate basket price; neither measured material price nor film-production cost.",
+      "yield": 0.95,
+      "factory_energy_MJ_per_feed_kg": 40,
+      "local_feed_fraction": 0.85,
+      "earth_order_kg_year": 2000000000.0
+    },
+    {
+      "id": "sealed_specialty",
+      "name": "Qualified filled components from sealed low-gravity processing",
+      "mode": "sealed_1_to_1_2_atm",
+      "mass_share": 0.05,
+      "base_production_cost_U_kg": 50,
+      "cost_basis": "Prior early-export hypothetical finished-parts price scale, now used only as an equal-technology cost anchor. No qualified lunar product is established.",
+      "yield": 0.95,
+      "factory_energy_MJ_per_feed_kg": 80,
+      "local_feed_fraction": 0.5,
+      "earth_order_kg_year": 2000000000.0
+    }
+  ],
+  "plants": [
+    {
+      "id": "small",
+      "gross_nameplate_kg_year": 10000000000.0,
+      "power_W": 50000000000.0,
+      "outbound_route_kg_year": 7000000000.0
+    },
+    {
+      "id": "industrial",
+      "gross_nameplate_kg_year": 100000000000.0,
+      "power_W": 500000000000.0,
+      "outbound_route_kg_year": 70000000000.0
+    },
+    {
+      "id": "large",
+      "gross_nameplate_kg_year": 1000000000000.0,
+      "power_W": 5000000000000.0,
+      "outbound_route_kg_year": 700000000000.0
+    }
+  ],
+  "utilization": 0.7,
+  "cost_cases": {
+    "parity": {
+      "moon": 1,
+      "earth": 1,
+      "array": 1
+    },
+    "modest_site_advantage": {
+      "moon": 0.9,
+      "earth": 1,
+      "array": 1
+    },
+    "strong_site_advantage": {
+      "moon": 0.75,
+      "earth": 1,
+      "array": 1
+    },
+    "orbital_learning": {
+      "moon": 0.9,
+      "earth": 1,
+      "array": 0.8
+    }
+  },
+  "cost_rule": "Factors apply to a complete production basket including purchased inputs, labour, fixed operation and capital service; they are sensitivity assumptions. 25% savings require a wider site/feed/engineering advantage and cannot be attributed to lunar gravity alone.",
+  "buyers": {
+    "earth": {
+      "population": 9000000000.0,
+      "gwp_per_resident_U": 100000,
+      "procurement_budget_share": 0.0001,
+      "independent_funding_fraction": 1,
+      "stock_rule": "Explicit hypothetical annual orders; no physical stock inferred from population."
+    },
+    "array": {
+      "population": 1000000000.0,
+      "gwp_per_resident_U": 100000,
+      "procurement_budget_share": 0.005,
+      "independent_funding_fraction": 0,
+      "eligible_share_of_final_structure": 0.2,
+      "procurement_years": 200,
+      "stock_rule": "The three product families share this subset of the existing 75Gt structure. Passive shielding excluded. Programme-funded purchases are not new independent joint-project finance."
+    },
+    "colonies": {
+      "population": 300000000.0,
+      "gwp_per_resident_U": 100000,
+      "procurement_budget_share": 0.001,
+      "independent_funding_fraction": 1,
+      "eligible_stock_kg": 4500000000000.0,
+      "procurement_years": 300,
+      "stock_rule": "Hypothetical 10% of45Gt if all3B eventual colonists used15t/person of fabricated structure. No adopted architecture, demand or near-term population is implied."
+    }
+  },
+  "delivery_U_kg": {
+    "earth": {
+      "earth": 0.05,
+      "array": 2,
+      "colonies": 3
+    },
+    "moon": {
+      "earth": 1,
+      "array": 0.25,
+      "colonies": 1
+    },
+    "array": {
+      "earth": 0.5,
+      "array": 0.05,
+      "colonies": 0.5
+    }
+  },
+  "delivery_rule": "Hypothetical all-in delivery tariffs, including equipment, handling, packaging and capture. They are not inferred from ideal mechanical energy; the matched alternative array can use asteroids, free-fall processing or process centrifuges.",
+  "price_share_of_cost_advantage_to_seller": 0.5,
+  "capital": {
+    "economic_real_rate": 0.01,
+    "life_years": 40,
+    "fixed_maintenance_share_of_benchmark_cost": 0.05,
+    "capital_service_share_of_benchmark_cost": 0.25,
+    "variable_intermediate_share_of_benchmark_cost": 0.55,
+    "variable_compensation_share_of_benchmark_cost": 0.15,
+    "fixed_intermediate_fraction": 0.5,
+    "financed_fraction": 0.5,
+    "loan_real_rate": 0.005,
+    "loan_years": 100,
+    "development_share_of_positive_cash": 0.5,
+    "closure_salvage_fraction_of_remaining_book": 0.3,
+    "closure_cost_fraction_of_initial_capital": 0.02
+  },
+  "operating_windows_years": [
+    10,
+    50,
+    100
+  ],
+  "reference": {
+    "plant": "industrial",
+    "cost_case": "modest_site_advantage",
+    "years": 50
+  },
+  "local_feed_allowance_kg": 100000000000000.0,
+  "reserve_rule": "100Gt is a synthetic incremental eligible feed allowance after protected areas and future uses. It is not a surveyed reserve or mining authorization; every kg of local feed consumes it, including rejects. Existing mining allocations must be reconciled before combining studies.",
+  "post_atmosphere": {
+    "delivery_from_moon_U_kg": {
+      "earth": 2,
+      "array": 2,
+      "colonies": 2.5
+    },
+    "added_production_cost_U_kg": {
+      "structures": 0.5,
+      "glass_ceramics": 1,
+      "sealed_specialty": 0.1
+    },
+    "rule": "Cost thresholds only: hypothetical enclosure/cleaning/transport penalties. No completed post-atmosphere launch system or retrofit financing is established."
+  },
+  "boundaries": [
+    "Factories are assumed qualified and already commissioned. No opportunity to build or expand them is adopted; loss cases show why a plant should not be built without orders.",
+    "Output is limited by shared nameplate, utilization, yield, energy, explicit annual buyer budgets and orders, remaining buyer stock allocations and a finite local-feed allowance.",
+    "Equal-technology costs are assumptions. A lower-price lunar offer requires delivered cost below both Earth and array alternatives; identical quality and performance are assumed.",
+    "Capital is inferred from a declared capital-service fraction of benchmark unit cost at normal saleable utilization. This is an economic allowance, not an equipment bill.",
+    "Initial capital is half equity/sponsor and half debt. Replacement cash reserves, debt service and fixed operating costs remain payable when demand is weak. Required equity dividends and full settlement costs remain unpriced.",
+    "Array programme sales create real production but do not independently finance the combined Moon-array project. Independent cash is allocated proportionally to independently funded receipts, not added to earlier income scenarios.",
+    "All output here is sold and delivered during the operating window. Separate stockpile cases use their own purchase budgets and are alternatives to selling the same goods immediately.",
+    "Closure releases unused replacement reserves and assumed salvage, and settles remaining debt. Salvage, debt repayment and asset sales are not current manufacturing GDP.",
+    "The three product families share physical market allocations and plant resources. Existing ordinary capital, early-factory activity, mining and construction procurement cannot be summed with these rows without removing overlaps.",
+    "Route-throughput limits are explicit capacity assumptions, not demonstrated launch/capture designs. The manufacturing electricity requirement excludes delivery-system energy; all-in freight tariffs include its cost.",
+    "Cost competitiveness uses normal saleable utilization; idle capital can make actual project NPV negative even when its offer beats competitors. Assigned operating cash is before a required equity dividend and is not a net gain after initial equity.",
+    "The independent-buyer-priority variant trades some private margin for externally funded receipts; it retains the same finite customer budgets and orders."
+  ]
+}

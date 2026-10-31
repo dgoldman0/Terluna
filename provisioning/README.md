@@ -85,6 +85,13 @@ visitor capacity, new facility finance, replacement and negative operating cases
 [manufacturing investigation](../research/studies/world_economy/manufacturing.md) identifies
 conditional advantages of finite gravity while retaining Earth process controls and
 rotating array factories as competitors. These remain hypotheses and conditional accounts.
+
+The [industrial-transition study](../research/studies/world_economy/industrial_transition.md)
+compares early sealed and vacuum production with equally advanced Earth and array factories.
+It follows finite orders, capital renewal and shutdown, then tests stocks and operating assets
+that retain value after atmospheric loading. Its [engineering assessment](../research/studies/world_economy/industrial_engineering.md)
+separates pressure loads from weight relief and treats the vacuum interval as a construction
+sequence to preserve deliberately, rather than the whole 500-year build.
 No commissioning dates, export reserves or financing institutions are adopted.
 
 ## Aerophyte crops, living area and services

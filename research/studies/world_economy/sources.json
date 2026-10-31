@@ -230,5 +230,9 @@
       "accessed": "2026-10-31",
       "reading_scope": "Full 15-page primary PDF retrieved as text; targeted abstract/methods, partial-gravity discussion, Table 2 on page 7 and bubble-porosity mechanism read. No figure-image inspection or complete paper review."
     }
-  ]
+  ],
+  "industrial_transition_catalogue": {
+    "path": "industrial_sources.json",
+    "scope": "Targeted processing, pressure/structure, atmospheric-transition and inventory-accounting sources; exact reading and retrieval limits retained per source."
+  }
 }

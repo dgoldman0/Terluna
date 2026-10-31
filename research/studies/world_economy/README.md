@@ -4,6 +4,8 @@ The [amenity and tourism account](amenities.md) and [early development and minin
 
 The [early-community export screen](early_exports.md) sizes tourism-led revenue at four enclosed-settlement milestones, including new facility capital, customer budgets, operating losses and cash available for development. The [partial-gravity manufacturing investigation](manufacturing.md) examines finite-gravity process windows and competing terrestrial and orbital methods; its physical hypotheses receive no assumed commercial premium.
 
+The [industrial-transition assessment](industrial_transition.md) compares sealed and ambient-vacuum construction, competitive delivered costs, finite buyer orders and lasting stocks or operating assets. Its [engineering companion](industrial_engineering.md) shows why useful vacuum ends near the beginning of retained-gas loading, and why pressure containment and low weight are separate requirements. Positive operating cash is kept separate from recovery of the initial investment.
+
 This study estimates the economic consequences of completing the Open Moon and maintaining it at the selected population. Its comparison is an equally advanced future Earth, with the same access to automation, energy and biological technology. The intended reader knows the project's physical design; the economic definitions and valuation assumptions are introduced here. This is a scenario study, not a forecast of future prices or a demonstrated construction programme.
 
 The [completed comparison](comparison.md) reports Earth, Open Moon and array as three peer
@@ -24,6 +26,7 @@ The accepted C′ distribution places **8 billion people on the Moon, 9 billion 
 | 4 | [Three-world sector scenarios](productivity.md), required trade, [gross/net product and resident resources](comparison.md) | Implemented; conditional comparison and sensitivity grids |
 | 5 | [Hybrid amenities and reciprocal tourism](amenities.md), [phased finance and finite mining](development.md) | Implemented; conditional activity and reserve scenarios |
 | 6 | [Early enclosed-community exports](early_exports.md) and [partial-gravity manufacturing](manufacturing.md) | Implemented; conditional facility accounts and idealised process calculations |
+| 7 | [Engineering across atmospheric loading](industrial_engineering.md), [competitive industrial accounts and enduring value](industrial_transition.md) | Implemented; physical bounds, conditional procurement and equal-service stock comparisons |
 
 The [inventory product](results/inventory.json) reads eleven committed products through [inputs.json](inputs.json), checking their full SHA-256 identities and schemas. It retains the source evidence statements and field paths. Quantities are engineering screens; a mass allowance is not a detailed structure and a power requirement is not a price. The baseline is provisioning commit `e89462608af21bd386b23b7eb36cf8373818619b`.
 
@@ -91,6 +94,9 @@ python -m research.studies.world_economy.compare
 python -m research.studies.world_economy.amenities
 python -m research.studies.world_economy.early_exports
 python -m research.studies.world_economy.partial_gravity
+python -m research.studies.world_economy.industrial_physics
+python -m research.studies.world_economy.industrial_markets
+python -m research.studies.world_economy.industrial_legacy
 python -m pytest research/studies/world_economy/tests
 ```
 
