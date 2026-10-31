@@ -108,6 +108,7 @@ from climate.gcm import surface_gust as sgf
 from climate.gcm import surface_similarity as ssf
 from climate.gcm import condensate as cnd
 from climate.gcm import rain_drops as rdr
+from climate.gcm import snow_sublimation as sns
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -1921,7 +1922,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
                   cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
                   free_convection=None, mixing_length=None, boundary_layer=None, large_scale_condensate=None,
-                  humidity_mean=False, surface_gust=None, rain_drops=None):
+                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces the
     air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and twilight
     (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the ledger
@@ -1944,7 +1945,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     (HUS_MEAN_PATCHES), and surface_gust 'beljaars' Beljaars's gust in the surface transfer in place of the
     free-convection term and the least wind (surface_gust_setting; with the moisture diagnostics the vapour by process
     too), 'beljaars_similarity' with CM1's similarity over ice-free water as well, and rain_drops, a birth rule of rain_drops.BIRTH_RULES, the rain's evaporation from its drops' sizes and fall
-    speeds in place of gamma, which the snow keeps (rain_drops.setting). Each is recorded when given, and left out the
+    speeds in place of gamma, which the snow keeps (rain_drops.setting), unless snow, a choice of
+    snow_sublimation.CHOICES, sublimates it by its flakes' closure and Morrison's graupel with their diagnostics and
+    shadows (snow_sublimation.setting; with the rain's drops only). Each is recorded when given, and left out the
     configuration is the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as
     the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
@@ -1987,6 +1990,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         raise ValueError("the rain's drops leave out the mass-flux scheme's floor on its convective water; run them "
                          'with PlaSim\'s convection or the Betts-Miller scheme')
     drops = rdr.setting(rain_drops) if rain_drops is not None else None     # refuses an unknown rule
+    if snow is not None and rain_drops is None:
+        raise ValueError("the snow from its flakes runs inside the rain's drops patch (nevapprec 2); set rain_drops")
+    flakes = sns.setting(snow) if snow is not None else None                  # refuses an unknown choice
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'),
                source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
@@ -2039,6 +2045,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['surface_gust'] = surface_gust_setting(surface_gust)
     if drops is not None:
         cfg['rain_drops'] = drops
+    if flakes is not None:
+        cfg['snow'] = flakes
+        cfg['rain_drops'] = dict(drops, snow='sublimates by its flakes and graupel in place of gamma (the snow entry)')
+        cfg['output'] = cfg['output'] + [name for name, _, _ in sns.DIAGNOSTICS.values()]
     if cloud:
         cfg['large_scale_condensate'] = cnd.setting()
     if humidity_mean:
@@ -2371,6 +2381,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         for name, value in cfg['rain_drops']['namelist'].items():
             text = str(value) if isinstance(value, int) else repr(float(value))
             model._edit_namelist('rainmod_namelist', name.upper(), text)
+    if 'snow' in cfg:
+        for name, value in cfg['snow']['namelist'].items():
+            text = str(value) if isinstance(value, int) else repr(float(value))
+            model._edit_namelist('rainmod_namelist', name.upper(), text)
     if 'surface_gust' in cfg:
         model._edit_namelist('fluxmod_namelist', 'NGUST', '1')
         model._edit_namelist('fluxmod_namelist', 'GUST_BETA', repr(float(cfg['surface_gust']['beta'])))
@@ -2410,6 +2424,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     if cfg.get('cloud_water_diagnostics'):                            # four slots beyond PlaSim's 21
         model._edit_namelist('plasim_namelist', 'NDIAGGP3D', str(cnd.EXTRA_SLOTS))
         for code, (name, long_name, units) in cnd.DIAGNOSTICS.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, units]
+            pyburn.slibrary[name] = [code, long_name, units]
+    if 'snow' in cfg:
+        for code, (name, long_name, units) in sns.DIAGNOSTICS.items():
             pyburn.ilibrary[str(code)] = [name, long_name, units]
             pyburn.slibrary[name] = [code, long_name, units]
     if 'humidity_mean' in cfg:
@@ -2586,7 +2604,8 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         rain_evaporation: float | None = None, moisture: bool = False, convection: dict | None = None,
         levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
         boundary_layer: str | None = None, large_scale_condensate: str | None = None,
-        humidity_mean: bool = False, surface_gust: str | None = None, rain_drops: str | None = None) -> int:
+        humidity_mean: bool = False, surface_gust: str | None = None, rain_drops: str | None = None,
+        snow: str | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
@@ -2594,7 +2613,7 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
                         moisture=moisture, convection=convection, levels=levels, free_convection=free_convection,
                         mixing_length=mixing_length, boundary_layer=boundary_layer,
                         large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean,
-                        surface_gust=surface_gust, rain_drops=rain_drops)
+                        surface_gust=surface_gust, rain_drops=rain_drops, snow=snow)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -2793,6 +2812,11 @@ def main(argv=None) -> int:
                         help="PlaSim's falling rain evaporated from its drops' sizes and fall speeds at lunar gravity "
                              'in place of gamma, which the snow keeps, with the named rule for the size of new rain '
                              '(rain_drops.py; RAIN_DROP_PATCHES; part of the run key)')
+    parser.add_argument('--snow', choices=('none',) + tuple(sns.CHOICES), default='none',
+                        help="PlaSim's snow sublimated by its flakes' closure and Morrison's graupel in place of "
+                             'gamma, with the rain from its drops: flakes (its shadows on), flakes_highest_top (the '
+                             "snow top at its highest forming layer) or flakes_no_shadows (snow_sublimation.py; part "
+                             'of the run key)')
     parser.add_argument('--humidity-mean', action='store_true',
                         help="write the humidity's true 3-day mean as hus_mean, code 233, where a year file's hus "
                              "holds the humidity at each interval's start (HUS_MEAN_PATCHES; year_files.py; part of "
@@ -2859,7 +2883,7 @@ def main(argv=None) -> int:
                None if args.boundary_layer == 'local' else args.boundary_layer,
                None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean,
                None if args.surface_gust == 'none' else args.surface_gust,
-               None if args.rain_drops == 'none' else args.rain_drops)
+               None if args.rain_drops == 'none' else args.rain_drops, None if args.snow == 'none' else args.snow)
 
 
 if __name__ == '__main__':

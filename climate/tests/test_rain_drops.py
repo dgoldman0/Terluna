@@ -18,6 +18,7 @@ import pytest
 from climate.gcm import exoplasim_run as er
 from climate.gcm import levels as lv
 from climate.gcm import rain_drops as rd
+from climate.gcm import snow_sublimation as ss
 from climate.tests.test_condensate import FORTRAN, GCM_FLAGS, apply, num, routine, source, undo
 
 C = dict(ga=1.6242188765608128, gascon=288.3767, acpd=288.3767 / 0.286, ADV=0.8546, ALV=2.5008e6, ALS=2.8345e6,
@@ -177,6 +178,9 @@ STUB = """
       real :: dentro3d(NHOR,NLEV,40), denergy(NHOR,40), dener3d(NHOR,NLEV,40)
       integer :: ndiaggp=1, nentropy=0, nentro3d=0, nenergy=0, nener3d=0, nprc=2
       integer :: nevapprec= 1
+      integer, parameter :: NSNOWD = {ndiag}
+      integer :: nsnowout = 0, nsnacc = 0
+      real :: asnow(NHOR,NSNOWD) = 0.
 {declarations}
       end module rainmod
 """
@@ -214,7 +218,7 @@ SETTINGS = ', ' + ', '.join(rd.NAMELIST_NAMES)
 
 
 def mkrain_code(text, patched):
-    end = 'end subroutine rdropevap' if patched else 'end subroutine mkrain'
+    end = 'end subroutine snowsubl' if patched else 'end subroutine mkrain'
     start = text.index('      subroutine mkrain\n')
     return text[start:text.index(f'      {end}\n') + len(f'      {end}\n')]
 
@@ -222,7 +226,8 @@ def mkrain_code(text, patched):
 def run_fortran(folder, code, s, nevapprec, patched, prm=rd.PARAMETERS):
     n, nlev = s['dq'].shape
     folder.mkdir()
-    files = {'stub.f90': STUB.format(nhor=n, nlev=nlev, declarations=rd.declarations(prm) if patched else ''),
+    decl = rd.declarations(prm) + ss.declarations() if patched else ''
+    files = {'stub.f90': STUB.format(nhor=n, nlev=nlev, ndiag=ss.NDIAG, declarations=decl),
              'rain.f90': code, 'harness.f90': HARNESS.replace('{switch}', SETTINGS if patched else '')}
     for name, body in files.items():
         (folder / name).write_text(body)
@@ -286,8 +291,9 @@ def test_the_patched_rainmod_compiles_with_plasims_modules(tmp_path):
     (tmp_path / 'resmod.f90').write_text('      module resmod\n      parameter(NLAT_ATM = 32)\n'
                                          '      parameter(NLEV_ATM = 15)\n      parameter(NPRO_ATM = 1)\n'
                                          '      end module resmod\n')
-    for name in ('plasimmod.f90', 'restartmod.f90'):                      # the shared copies, as patched
-        shutil.copy(src / name, tmp_path / name)
+    shutil.copy(src / 'restartmod.f90', tmp_path / 'restartmod.f90')       # the shared copies, as patched
+    (tmp_path / 'plasimmod.f90').write_text(apply((src / 'plasimmod.f90').read_text(), ss.OUTPUT_MOD_EDITS,
+                                                  ss.OUTPUT_MARKER))           # with the snow's diagnostics
     (tmp_path / 'rainmod.f90').write_text(apply(path.read_text(), rd.RAIN_DROP_EDITS, rd.MARKER))
     for name in ('resmod.f90', 'plasimmod.f90', 'rainmod.f90', 'restartmod.f90'):
         subprocess.run(['gfortran', *GCM_FLAGS, '-c', name], cwd=tmp_path, check=True, capture_output=True)

@@ -29,8 +29,9 @@ already falling through the layer, as accretion adds to drops without adding dro
 scheme's setting, the share W/(W + F) of it makes new drops and the rest joins, F the rain arriving at the layer's
 middle, so that rain makes its own drops where little falls in, as autoconversion does, and grows the drops falling
 where much does. What the layer evaporates is at most what would saturate it over the step, as gamma's form is. Snow
-sublimates with gamma as before; mkrain's phase rule, which makes each layer's precipitation all rain or all snow, is
-unchanged.
+sublimates with gamma as before unless nsnowsub 1 sublimates it by its flakes and graupel (snow_sublimation.py, whose
+routines and diagnostics the patch carries); mkrain's phase rule, which makes each layer's precipitation all rain or all
+snow, is unchanged.
 
 The scheme was tested on CM1's design boxes before it was built, and its birth rules after (rules and outcomes on the
 research drive, session-tools/rain_physics): carrying the size down a column from the boxes' own mean air with CM1's
@@ -52,6 +53,7 @@ from pathlib import Path
 
 import numpy as np
 
+from climate.gcm import snow_sublimation as ss
 from shared.constants import (CM1_GRAVITY, CM1_RAIN_BREAKUP_CUTOFF, CM1_RAIN_BREAKUP_RATE, CM1_RAIN_DENSITY_EXPONENT,
                               CM1_RAIN_DENSITY_REFERENCE_PRESSURE, CM1_RAIN_DENSITY_REFERENCE_TEMPERATURE,
                               CM1_RAIN_FALL_CAP, CM1_RAIN_MEAN_DIAMETER_CAP, CM1_RAIN_MEAN_DIAMETER_FLOOR,
@@ -257,13 +259,16 @@ def rdropevap(jlev, zq, zt, zqsat, zcor, zpra, zmelt, zprc, zprl, zprn, zdqdtl, 
         zdqdtl[j] = zdqdtl[j] + dq
 
 
-def mkrain(s: dict, c: dict, prm: dict = PARAMETERS) -> dict:
+def mkrain(s: dict, c: dict, prm: dict = PARAMETERS, snow: dict | None = None) -> dict:
     """The patched mkrain with nevapprec 2 on columns (rows) and levels (top first): s holds dt and dq (with the ground
     after the levels), dtdt, dqdt, dp, sigma, dsigma and the precipitation formed by level (dprcl, dprscl, dprll,
     dprsll), and its tendencies are added in place; returns the precipitation at the ground (m/s of water) and the
-    drops' number flux there."""
+    drops' number flux there. With snow (snow_sublimation.PARAMETERS, nsnowsub 1) the snow sublimates by the flakes'
+    closure and Morrison's graupel in place of gamma (snow_sublimation.snowsubl), and the step's snow diagnostics come
+    back as well."""
     n, nlev = s['dprcl'].shape
     inv = inverse(c['ga'])
+    st = ss.snowprep(s, c, snow) if snow and snow['nsnowsub'] >= 1 else None
     zprc, zprl, zprsc, zprsl, zprn = (np.zeros(n) for _ in range(5))
     zdtdt, zdqdts, zdqdtl = (np.zeros((n, nlev)) for _ in range(3))
     for jlev in range(nlev):
@@ -298,6 +303,9 @@ def mkrain(s: dict, c: dict, prm: dict = PARAMETERS) -> dict:
         zmelt = np.maximum(zpsa - zprsc - zprsl, 0.0)
         rdropevap(jlev, zq, zt, zqsat, zcor, zpra, zmelt, zprc, zprl, zprn, zdqdtl[:, jlev], zdtdt[:, jlev], s, c,
                   prm, inv)
+        if st is not None:
+            ss.snowsubl(jlev, zq, zt, zqsat, zcor, zprsc, zprsl, zdqdts[:, jlev], zdtdt[:, jlev], s, c, snow, st)
+            continue
         for key in ('l', 'c'):
             zprs = zprsl if key == 'l' else zprsc
             sub = (zq < zqsat) & (zprs > 0.0)
@@ -314,7 +322,8 @@ def mkrain(s: dict, c: dict, prm: dict = PARAMETERS) -> dict:
     s['dtdt'][:, :nlev] += zdtdt
     to_ms = s['dp'] / c['ga'] / 1000.0
     return dict(dprc=(zprc + zprsc) * to_ms, dprl=(zprl + zprsl) * to_ms, dprs=(zprsc + zprsl) * to_ms,
-                number=zprn, rain_evaporation=zdqdtl, snow_sublimation=zdqdts)
+                number=zprn, rain_evaporation=zdqdtl, snow_sublimation=zdqdts,
+                snow=st['diag'] if st is not None else None)
 
 
 # ----------------------------------------------------------------------------------------------- the Fortran patch
@@ -606,7 +615,7 @@ ROUTINES = """
 """
 
 EVAPORATION_BLOCK = f"""!*     {MARKER} (nevapprec 2): the rain's evaporation from its drops' sizes and fall speeds
-!      (rdropevap); the snow sublimates with gamma as below
+!      (rdropevap); the snow sublimates with gamma as below, or with nsnowsub 1 by its flakes and graupel (snowsubl)
 !
        if(nevapprec == 2) then
          zq(:)=dq(:,jlev)+dqdt(:,jlev)*deltsec2
@@ -621,6 +630,9 @@ EVAPORATION_BLOCK = f"""!*     {MARKER} (nevapprec 2): the rain's evaporation fr
          endwhere
          zmelt(:)=MAX(zpsa(:)-zprsc(:)-zprsl(:),0.)
          call rdropevap(jlev,zq,zt,zqsat,zcor,zpra,zmelt,zprc,zprl,zprn,zdqdtl(:,jlev),zdtdt(:,jlev))
+         if(nsnowsub >= 1) then   ! {ss.MARKER}: by its flakes and graupel
+           call snowsubl(jlev,zq,zt,zqsat,zcor,zprsc,zprsl,zdqdts(:,jlev),zdtdt(:,jlev))
+         else
          where((zq(:).lt.zqsat(:)).AND.zprsl(:) > zeps)
            zlcpe(:)=ALS/(acpd*(1.+ADV*dq(:,jlev)))
            zdqdt(:)=AMIN1(gamma*(zqsat(:)-zq(:))*dsigma(jlev)/deltsec2  &
@@ -643,6 +655,7 @@ EVAPORATION_BLOCK = f"""!*     {MARKER} (nevapprec 2): the rain's evaporation fr
            zdtdt(:,jlev)=zdtdt(:,jlev)-zdqdt(:)*zlcpe(:)
            zdqdts(:,jlev)=zdqdts(:,jlev)+zdqdt(:)
          endwhere
+         endif
        endif
 !
 """
@@ -657,28 +670,35 @@ EVAPORATION_LINE = '!*     evaporation/sublimation of rain/snow\n'
 END_LINE = '      end subroutine mkrain\n'
 
 
-def edits(prm: dict = PARAMETERS) -> list:
-    """The edits of rainmod.f90, each (old, new) on a line no other Terluna patch touches."""
+def edits(prm: dict = PARAMETERS, snow: dict = ss.PARAMETERS) -> list:
+    """The edits of rainmod.f90, each (old, new) on a line no other Terluna patch touches: the rain from its drops and,
+    behind nsnowsub, the snow from its flakes (snow_sublimation.py)."""
     return [
-        (NEVAPPREC_LINE, NEVAPPREC_LINE + declarations(prm)),
-        (RESET_LINE, f"      namelist/rainmod_nl/{','.join(NAMELIST_NAMES)}   ! {MARKER}\n" + RESET_LINE),
+        (NEVAPPREC_LINE, NEVAPPREC_LINE + declarations(prm) + ss.declarations(snow)),
+        (RESET_LINE, f"      namelist/rainmod_nl/{','.join(NAMELIST_NAMES)}   ! {MARKER}\n"
+                     f"      namelist/rainmod_nl/{','.join(ss.NAMELIST_NAMES)}   ! {ss.MARKER}\n" + RESET_LINE),
         (BROADCAST_LINE, BROADCAST_LINE + '      call mpbci(nrdrop_join)\n'
-         + ''.join(f'      call mpbcr({name})\n' for name in NAMELIST_NAMES[1:])),
+         + ''.join(f'      call mpbcr({name})\n' for name in NAMELIST_NAMES[1:])
+         + ''.join(f"      call {'mpbci' if name in ss.INTEGER_NAMES else 'mpbcr'}({name})\n"
+                   for name in ss.NAMELIST_NAMES)
+         + "      nsnowout=0\n      if(nevapprec == 2 .and. nsnowsub >= 1) nsnowout=1   ! the snow's diagnostics\n"),
         (DECLARE_LINE, DECLARE_LINE + f'      real :: zpra(NHOR),zpsa(NHOR),zmelt(NHOR),zprn(NHOR) ! {MARKER} '
                                       '(nevapprec 2)\n'),
         (LOOP_LINES, f'      zprn(:)=0.   ! {MARKER}: the drops\' number flux (per m2 per s), none above the top\n'
+                     f'      if(nevapprec == 2 .and. nsnowsub >= 1) call snowprep   ! {ss.MARKER}\n'
                      '      do jlev=1,NLEV\n'
                      '       if(nevapprec == 2) zpra(:)=zprc(:)+zprl(:)   ! the rain arriving from above\n'
                      '       zprc(:)=zprc(:)+dprcl(:,jlev)-dprscl(:,jlev)\n'),
         (SNOW_LINE, SNOW_LINE + '       if(nevapprec == 2) zpsa(:)=zprsc(:)+zprsl(:)   ! the snow before the '
                                 "layer's melting\n"),
         (EVAPORATION_LINE, EVAPORATION_BLOCK + EVAPORATION_LINE),
-        (END_LINE, END_LINE + ROUTINES),
+        (END_LINE, END_LINE + ROUTINES + ss.ROUTINES),
     ]
 
 
 RAIN_DROP_EDITS = edits()
-RAIN_DROP_PATCHES = [('rainmod.f90', MARKER, RAIN_DROP_EDITS)]
+# The snow's diagnostics in pumamod and the output travel with the patch, whose mkrain carries the snow's code
+RAIN_DROP_PATCHES = [('rainmod.f90', MARKER, RAIN_DROP_EDITS)] + ss.OUTPUT_PATCHES
 
 
 def setting(rule: str) -> dict:

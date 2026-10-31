@@ -4101,8 +4101,8 @@ too noisy to read. One lunar day from one restart shows the scheme at work, not 
 - **One melted size for all snow.** Melted rain takes 2.95 mm wherever snow melts; light snow's 1.25–1.75 mm would
   evaporate 1–4% more on the boxes' columns. A size by snowfall would need the rate inside PlaSim's storms, which its
   grid-mean snowfall does not give.
-- **The snow's sublimation** keeps gamma, a constant tuned on Earth; the snow work's sublimation shares, 2–8% of the
-  snow over land and 9–23% over the sea before it melts on the corrected runs, are the physics for it.
+- **The snow's sublimation** kept gamma, a constant tuned on Earth, until the snow from its flakes
+  ([below](#plasims-snow-from-its-flakes-30-october)).
 - **CM1 as the reference aloft.** Half the boxes' evaporation happens in rain just melted from Earth-sized ice. Melted
   at the lunar size, the boxes' rain evaporates 3–8% less, which may bear on CM1's upper air running colder than
   PlaSim's; that is untested.
@@ -4198,6 +4198,127 @@ PYTHONPATH=. <climate venv>/bin/python $E/similarity.py                   # rule
 python3 -m pytest climate/tests/test_surface_similarity.py                # the Fortran against the Python copy
 $E/smoke_gcm_similarity.sh                                                # one lunar day in PlaSim
 PYTHONPATH=. <climate venv>/bin/python $E/smoke_similarity_compare.py
+```
+
+#### PlaSim's snow from its flakes (30 October)
+
+PlaSim sublimated its falling snow with the rain's Earth-tuned gamma, against saturation over water, so it took snow
+from air saturated over ice and gave the snow no size. The design run takes the sublimation from the lunar flakes
+instead (register, 30 October): the closure the snow work tested against McSnow's capped lunar columns
+([its write-up](../../atmosphere/snow/mcsnow_subcloud.md)), read from its product
+`atmosphere/snow/results/subcloud_closure.json` (domain/atmosphere a16eb5b), with graupel split off by CM1's shares and
+sublimated as CM1's own graupel, and a precipitating fraction tested on the design boxes first.
+`climate/gcm/snow_sublimation.py` holds the scheme, its Python copy line for line with the Fortran that
+`rain_drops.py`'s patch carries behind `nsnowsub`, and its shadows.
+
+**The precipitating fraction** (`rules_fraction.txt` and `rules_fraction2.txt`). The closure matches its references by
+the snow's rate where it falls, which a grid point's mean flux understates. On each design box's 236 three-hourly
+outputs the closure run column by column was the reference, and the closure run once on the box-mean air with a fraction
+the candidate. No fixed fraction held on both boxes, the candidates' sublimation over the reference's being 1.71 (sea)
+and 1.43 (land) with none, 1.42 and 1.22 with the other box's snowing share and 0.64 and 0.89 with the condensate cover
+at the cloud base. A spread of local rates did better: lognormal in ln f, flux-weighted, around
+ln f* = max(ln c + β ln F, ln F), F the box-mean flux, its three numbers measured from one box's snow fields and applied
+to the other. It gave 1.15 and 1.20, inside the rules' 0.80–1.25, and one land band (0.03–0.1 mm/h, 14% of its
+sublimation) at 1.64 against 1.56. The column-by-column closure run on the box-mean air already gives 1.19 on both
+boxes and 1.55 in that band: the snow falls through air moister than the box mean, which no fraction carries, and on the
+same air the spread takes the columns' rates to within 1–4%. The pooled numbers (ln c = −2.893, β = 0.627, s = 1.047)
+were adopted with the air's overstatement stated. The effective fraction F/f* is 0.15 at 0.01 mm/h, 0.36 at 0.1 and
+0.85 at 1.
+
+**The scheme.**
+- PlaSim forms its precipitation as rain and freezes it in a cold layer, so what a cold layer forms is its new snow:
+  0.75 of it graupel where convective and 0.4 where large-scale, the rest flakes. Rain arriving from a warm layer above
+  and freezing joins the graupel.
+- A layer forming snow is in cloud and sublimates nothing. Its lower edge is the flakes' cloud base, where the closure
+  starts with the flux leaving it, at five rates across the fraction's spread, in exact steps of at most 1 km.
+- Heights are measured above the column's freezing level, the first crossing of 0 °C going up from the ground. The
+  snow's top is its formation-weighted height.
+- Graupel sublimates by Morrison's EPSG (QVI − QV)/ABI at lunar fall speeds. Its size is CM1's graupel mean diameter
+  at the boxes' cloud bases for its typical local rate, 0.63–1.39 mm (the two boxes' mean), held as it sublimates, as
+  Morrison's number loss holds it.
+- The deficit is over ice, by Murray's form with PlaSim's constant. Flakes and graupel together take at most what would
+  saturate the layer over ice in the step. A warm layer melts everything, as before.
+
+**Choices no test exercised.** A column colder than 0 °C to the ground takes its freezing level below the ground by
+the references' ladder lapse, 0.921 K/km. Rain frozen in a cold layer is graupel. The top is weighted by all the frozen
+precipitation formed. The graupel's sizes are the mean of the two boxes', and melted graupel makes rain at the lunar
+snow's 2.95 mm, as the rain's patch takes all melt. The shadows carry the choices with most leverage.
+
+**Shadows and diagnostics.** With `nsnowshad 1`, the design run's setting, the scheme carries seven shadows from the
+same formation and air, never fed back:
+- no fraction;
+- a fixed fraction, 0.548, the boxes' mean snowing share;
+- the 10 cm references;
+- all the snow as flakes;
+- graupel at the sea box's sizes, and at the land box's;
+- PlaSim's gamma.
+
+Codes 501–523 hold means over each output interval:
+- the snow formed;
+- the adopted snow's sublimation and melting, by kind;
+- each shadow's sublimation and melting;
+- the freezing level's height;
+- the flakes' flux at their cloud bases, and the part of it matched below the lightest reference;
+- the sublimation the layers' saturation held back.
+
+The box-mean air's 1.19 is applied offline only.
+
+**Tests** (`climate/tests/test_snow_sublimation.py`). On a single column, the scheme's closure gives `closure_columns`'
+flux to 1e-12 under every matching and both table sets. A column whose ground is above freezing keeps its water, its
+snow formed equal to its sublimation and melting in every variant. Saturated air and layers forming snow sublimate
+nothing, mkrain with nsnowsub 0 is mkrain with gamma, and the shadows never feed back. Compiled with ExoPlaSim's flags
+against a stub of PlaSim's modules, the patched mkrain gives the Python copy's tendencies, precipitation and diagnostics
+to 1e-10 across:
+- PlaSim's own convention, all precipitation formed as rain, and snow formed as snow;
+- shadows on and off, and either top;
+- cold grounds and warm layers aloft;
+- dry air and heavy snow.
+
+The patched rainmod and plasimmod compile with PlaSim's modules, and outmod compiles in the model's build.
+
+**The smoke day** (`smoke_gcm_snow.sh`, `smoke_compare_snow.py`). The similarity smoke run's flags were run for one
+lunar day from the fifteen-level restart. On the rebuilt source with nsnowsub 0, the model repeats the 29 October run
+in every field. With the snow, 0.65 mm/day of frozen precipitation forms:
+- 52% of it sublimates above the freezing level, flakes 30% and graupel 21%, 11.0 W/m² of latent cooling, against 29%
+  by gamma on the same states;
+- 48% melts;
+- the rain then evaporates 45% of what forms, against 50% with gamma's snow, and 4% less reaches the ground.
+
+The shadows sublimate:
+
+| Shadow | Share of the formed snow sublimated |
+|---|---|
+| No fraction | 51.7% |
+| Fixed fraction | 51.5% |
+| 10 cm references | 51.6% |
+| All the snow as flakes | 52.2% |
+| Top at the highest forming layer (a fed-back sensitivity) | 50.8% |
+| The box-mean air's factor applied | 43.3% |
+
+Graupel at the sea box's and the land box's sizes sublimates 0.99 and 1.01 times the adopted graupel. The fractions
+part locally, by up to 0.15 of a point's sublimated share over three days, and nearly cancel in the global mean. At
+PlaSim's rates the spread's heavier typical rate and its spread offset each other. Only 2% of the flakes' flux is
+matched below the lightest reference, and the layers' saturation held back 0.3% of the sublimation. The snow costs about
+5% of the model's time, and 13% with its shadows, on a shared machine. One lunar day from one restart shows the scheme
+at work, not the climate it settles to.
+
+**Evidence and limits.**
+- **The closure** carries its own limit: in 0.1 mm/h snow from −15 °C it overstated the loss. Its k and q keep the
+  301 K ladder's temperatures at each height.
+- **The fraction and the graupel's shares and sizes** rest on two CM1 boxes, whose graupel is made by Morrison's
+  Earth-calibrated riming.
+- **The graupel's law** is Morrison's: its density and fall speeds are Earth fits carried to lunar gravity.
+- **PlaSim's levels** are 12–18 km thick in the snow zone. Its cloud bases fall on their edges, and each layer gives
+  the snow one humidity.
+
+```sh
+S=/media/projectspace/terluna-research/session-tools/snow_sublimation
+python3 $S/fraction_test.py                  # the fixed fractions on the boxes' columns (a few minutes)
+python3 $S/fraction_test2.py                 # the spread of local rates
+python3 $S/fraction_test2_air.py             # the box-mean air's share of the miss
+python3 -m pytest climate/tests/test_snow_sublimation.py      # the scheme, and its Fortran against the Python copy
+$S/smoke_gcm_snow.sh                         # one lunar day each in PlaSim
+<climate venv>/bin/python $S/smoke_compare_snow.py
 ```
 
 ### Cloud amount: what published models say
