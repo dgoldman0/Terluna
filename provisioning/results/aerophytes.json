@@ -1,0 +1,2002 @@
+{
+  "schema": "terluna.provisioning.aerophyte-products/1",
+  "evidence": "Allocation arithmetic on hypothetical mature aerophytes. Generic new tissue is not a demonstrated edible, saleable or physically supportable crop; no market, farm, nutrient supply or harvest operation is simulated.",
+  "reading_rule": "Carbon flows are kg C per horizontal projected m2 per year; dry allocation is tonnes per projected hectare per year; crop phosphorus is kg P per projected hectare per year. Membrane is m2 per year for one specified2km colony. Inhabited clusters report total projected hectares, tonnes of conditional tenant allowance and annual tonnes C; people are payload equivalents under inherited district budgets, not capacity. Projected area is not leaf area, atmospheric volume or surface terrain. The reference uses inherited GPP2 physiology; light fractions are prescribed sensitivity cases, not angular transport or final301K weather. Allocate only after fixed host costs, tenant sugar and adult replacement. Crop allocation competes with growth, sailing and extra tenants. New crop maintenance, night storage, decay, wet-load gas and harvest-wound repair are uncomputed deductions from this allocation ceiling. Phosphorus is an additional leaflike harvest loop, excluding existing host demand. Do not add crop potential to an already fully allocated biomass total.",
+  "producer": {
+    "files": {
+      "provisioning/aerophytes.py": "31cc50d558d226dac97f38241ef2f74b24f29dbddeabe640a3d72692ae464a12"
+    },
+    "inputs": {
+      "provisioning/aerophytes_inputs.json": "16c03cad0a1b8196387f5ff16037adbd65ff9ce092c78069a25dfe62ad0c5630",
+      "provisioning/aerophytes_sources.json": "8eeb5396f76e3787f0c9335764d62c6513384813f8c3ce24dc4ab9b7b769c4dd",
+      "research/studies/sky_ecology/results/sky_ecology.json": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af",
+      "research/studies/aerophytes/results/aerophytes.json": "3721a734cfc100c2d2070db9f7b56de94b03e227631cb56ac6a7b08801f096ca",
+      "research/studies/inhabited_volume/results/inhabited_volume.json": "62002e2d2edd27109ac410097826ea96a1d4b4a9799dd64c33b1cfd505ce0a29"
+    }
+  },
+  "assumptions": {
+    "representatives_m": {
+      "lesser": 100,
+      "sky_reef": 60,
+      "round_giant": 1000
+    },
+    "light_fractions": [
+      1.0,
+      0.9,
+      0.8
+    ],
+    "annual_adult_hazards": [
+      0.001,
+      0.003,
+      0.005
+    ],
+    "harvest_fractions": [
+      0.25,
+      0.5
+    ],
+    "basis": "GPP2 photolytic reference physiology. Crop fractions are exploratory allocations of residual carbon, not adopted harvest permissions. Light fractions are sensitivities, not sky-density or climate predictions. Existing tissue construction yield is applied to generic additional organic tissue; it does not predict sugar, lipid, protein or saleable material conversion. Extra crop upkeep, wet-load lifting gas, collection and processing costs are uncomputed and must fit within the allocation; it is an accounting allowance before those costs.",
+    "inhabited_clusters": {
+      "domatium_counts": [
+        3,
+        30
+      ],
+      "green_modules_per_domatium": 3,
+      "diameter_m": 60,
+      "green_adult_hazard": 0.003,
+      "domatium_food_to_tenants_c": 0.1,
+      "basis": "Illustrative dedicated living-area clusters at inherited reference light. Sum only domatia steady tenant allowance; green reserve capacity is not sold twice. Pay routine domatia upkeep from mature green surplus. New domatia replacement, payload gas, connection/floor design and residential services are unresolved."
+    }
+  },
+  "leaflike_product_p_g_per_kg_dry": [
+    1.0,
+    3.0
+  ],
+  "inherited_food_phosphorus_return_fraction": 0.99,
+  "cases": [
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.01213093136180733,
+      "unallocated_before_harvest_c_kg_m2_year": 0.9514401039065036,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.2378600259766259,
+      "product_retained_c_kg_m2_year": 0.19251261095230518,
+      "product_construction_respiration_c_kg_m2_year": 0.045347415024320714,
+      "remaining_for_other_uses_c_kg_m2_year": 0.7135800779298777,
+      "allocation_t_dry_per_projected_ha_year": 4.278058021162337,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          4.278058021162337,
+          12.834174063487012
+        ],
+        "returned_upward_kg_p_ha_year": [
+          4.235277440950714,
+          12.705832322852142
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.04278058021162341,
+          0.12834174063487022
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.01213093136180733,
+      "unallocated_before_harvest_c_kg_m2_year": 0.9514401039065036,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.4757200519532518,
+      "product_retained_c_kg_m2_year": 0.38502522190461036,
+      "product_construction_respiration_c_kg_m2_year": 0.09069483004864143,
+      "remaining_for_other_uses_c_kg_m2_year": 0.4757200519532518,
+      "allocation_t_dry_per_projected_ha_year": 8.556116042324675,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          8.556116042324675,
+          25.668348126974024
+        ],
+        "returned_upward_kg_p_ha_year": [
+          8.470554881901428,
+          25.411664645704285
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.08556116042324682,
+          0.25668348126974044
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.03639279408542199,
+      "unallocated_before_harvest_c_kg_m2_year": 0.9271782411828889,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.23179456029572224,
+      "product_retained_c_kg_m2_year": 0.1876035110307105,
+      "product_construction_respiration_c_kg_m2_year": 0.044191049265011745,
+      "remaining_for_other_uses_c_kg_m2_year": 0.6953836808871667,
+      "allocation_t_dry_per_projected_ha_year": 4.168966911793566,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          4.168966911793566,
+          12.506900735380698
+        ],
+        "returned_upward_kg_p_ha_year": [
+          4.12727724267563,
+          12.381831728026892
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.0416896691179357,
+          0.1250690073538071
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.03639279408542199,
+      "unallocated_before_harvest_c_kg_m2_year": 0.9271782411828889,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.46358912059144447,
+      "product_retained_c_kg_m2_year": 0.375207022061421,
+      "product_construction_respiration_c_kg_m2_year": 0.08838209853002349,
+      "remaining_for_other_uses_c_kg_m2_year": 0.46358912059144447,
+      "allocation_t_dry_per_projected_ha_year": 8.337933823587132,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          8.337933823587132,
+          25.013801470761397
+        ],
+        "returned_upward_kg_p_ha_year": [
+          8.25455448535126,
+          24.763663456053784
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.0833793382358714,
+          0.2501380147076142
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.06065465680903665,
+      "unallocated_before_harvest_c_kg_m2_year": 0.9029163784592742,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.22572909461481855,
+      "product_retained_c_kg_m2_year": 0.18269441110911577,
+      "product_construction_respiration_c_kg_m2_year": 0.043034683505702775,
+      "remaining_for_other_uses_c_kg_m2_year": 0.6771872838444557,
+      "allocation_t_dry_per_projected_ha_year": 4.059875802424795,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          4.059875802424795,
+          12.179627407274385
+        ],
+        "returned_upward_kg_p_ha_year": [
+          4.019277044400547,
+          12.05783113320164
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.040598758024247984,
+          0.12179627407274396
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.06065465680903665,
+      "unallocated_before_harvest_c_kg_m2_year": 0.9029163784592742,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.4514581892296371,
+      "product_retained_c_kg_m2_year": 0.36538882221823155,
+      "product_construction_respiration_c_kg_m2_year": 0.08606936701140555,
+      "remaining_for_other_uses_c_kg_m2_year": 0.4514581892296371,
+      "allocation_t_dry_per_projected_ha_year": 8.11975160484959,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          8.11975160484959,
+          24.35925481454877
+        ],
+        "returned_upward_kg_p_ha_year": [
+          8.038554088801094,
+          24.11566226640328
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.08119751604849597,
+          0.24359254814548792
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.01213093136180733,
+      "unallocated_before_harvest_c_kg_m2_year": 0.7514401039065036,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.1878600259766259,
+      "product_retained_c_kg_m2_year": 0.1520449850530246,
+      "product_construction_respiration_c_kg_m2_year": 0.0358150409236013,
+      "remaining_for_other_uses_c_kg_m2_year": 0.5635800779298777,
+      "allocation_t_dry_per_projected_ha_year": 3.378777445622769,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          3.378777445622769,
+          10.136332336868307
+        ],
+        "returned_upward_kg_p_ha_year": [
+          3.344989671166541,
+          10.034969013499623
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.033787774456227715,
+          0.10136332336868316
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.01213093136180733,
+      "unallocated_before_harvest_c_kg_m2_year": 0.7514401039065036,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.3757200519532518,
+      "product_retained_c_kg_m2_year": 0.3040899701060492,
+      "product_construction_respiration_c_kg_m2_year": 0.0716300818472026,
+      "remaining_for_other_uses_c_kg_m2_year": 0.3757200519532518,
+      "allocation_t_dry_per_projected_ha_year": 6.757554891245538,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          6.757554891245538,
+          20.272664673736614
+        ],
+        "returned_upward_kg_p_ha_year": [
+          6.689979342333082,
+          20.069938026999246
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.06757554891245543,
+          0.20272664673736632
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.03639279408542199,
+      "unallocated_before_harvest_c_kg_m2_year": 0.727178241182889,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.18179456029572225,
+      "product_retained_c_kg_m2_year": 0.14713588513142992,
+      "product_construction_respiration_c_kg_m2_year": 0.03465867516429233,
+      "remaining_for_other_uses_c_kg_m2_year": 0.5453836808871667,
+      "allocation_t_dry_per_projected_ha_year": 3.269686336253998,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          3.269686336253998,
+          9.809059008761995
+        ],
+        "returned_upward_kg_p_ha_year": [
+          3.236989472891458,
+          9.710968418674375
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.03269686336254001,
+          0.09809059008762004
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.03639279408542199,
+      "unallocated_before_harvest_c_kg_m2_year": 0.727178241182889,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.3635891205914445,
+      "product_retained_c_kg_m2_year": 0.29427177026285983,
+      "product_construction_respiration_c_kg_m2_year": 0.06931735032858466,
+      "remaining_for_other_uses_c_kg_m2_year": 0.3635891205914445,
+      "allocation_t_dry_per_projected_ha_year": 6.539372672507996,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          6.539372672507996,
+          19.61811801752399
+        ],
+        "returned_upward_kg_p_ha_year": [
+          6.473978945782916,
+          19.42193683734875
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.06539372672508002,
+          0.19618118017524008
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.06065465680903665,
+      "unallocated_before_harvest_c_kg_m2_year": 0.7029163784592742,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.17572909461481856,
+      "product_retained_c_kg_m2_year": 0.1422267852098352,
+      "product_construction_respiration_c_kg_m2_year": 0.03350230940498336,
+      "remaining_for_other_uses_c_kg_m2_year": 0.5271872838444557,
+      "allocation_t_dry_per_projected_ha_year": 3.160595226885227,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          3.160595226885227,
+          9.48178568065568
+        ],
+        "returned_upward_kg_p_ha_year": [
+          3.1289892746163748,
+          9.386967823849123
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.031605952268852294,
+          0.09481785680655688
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.06065465680903665,
+      "unallocated_before_harvest_c_kg_m2_year": 0.7029163784592742,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.3514581892296371,
+      "product_retained_c_kg_m2_year": 0.2844535704196704,
+      "product_construction_respiration_c_kg_m2_year": 0.06700461880996672,
+      "remaining_for_other_uses_c_kg_m2_year": 0.3514581892296371,
+      "allocation_t_dry_per_projected_ha_year": 6.321190453770454,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          6.321190453770454,
+          18.96357136131136
+        ],
+        "returned_upward_kg_p_ha_year": [
+          6.2579785492327495,
+          18.773935647698245
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.06321190453770459,
+          0.18963571361311377
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.01213093136180733,
+      "unallocated_before_harvest_c_kg_m2_year": 0.5514401039065037,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.13786002597662592,
+      "product_retained_c_kg_m2_year": 0.11157735915374402,
+      "product_construction_respiration_c_kg_m2_year": 0.026282666822881898,
+      "remaining_for_other_uses_c_kg_m2_year": 0.4135800779298777,
+      "allocation_t_dry_per_projected_ha_year": 2.4794968700832003,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          2.4794968700832003,
+          7.438490610249601
+        ],
+        "returned_upward_kg_p_ha_year": [
+          2.4547019013823683,
+          7.3641057041471045
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.024794968700832025,
+          0.07438490610249608
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.01213093136180733,
+      "unallocated_before_harvest_c_kg_m2_year": 0.5514401039065037,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.27572005195325183,
+      "product_retained_c_kg_m2_year": 0.22315471830748804,
+      "product_construction_respiration_c_kg_m2_year": 0.052565333645763795,
+      "remaining_for_other_uses_c_kg_m2_year": 0.27572005195325183,
+      "allocation_t_dry_per_projected_ha_year": 4.958993740166401,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          4.958993740166401,
+          14.876981220499202
+        ],
+        "returned_upward_kg_p_ha_year": [
+          4.909403802764737,
+          14.728211408294209
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.04958993740166405,
+          0.14876981220499216
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.03639279408542199,
+      "unallocated_before_harvest_c_kg_m2_year": 0.527178241182889,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.13179456029572226,
+      "product_retained_c_kg_m2_year": 0.10666825923214933,
+      "product_construction_respiration_c_kg_m2_year": 0.02512630106357293,
+      "remaining_for_other_uses_c_kg_m2_year": 0.3953836808871668,
+      "allocation_t_dry_per_projected_ha_year": 2.3704057607144295,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          2.3704057607144295,
+          7.111217282143288
+        ],
+        "returned_upward_kg_p_ha_year": [
+          2.346701703107285,
+          7.040105109321855
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.023704057607144318,
+          0.07111217282143295
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.03639279408542199,
+      "unallocated_before_harvest_c_kg_m2_year": 0.527178241182889,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.2635891205914445,
+      "product_retained_c_kg_m2_year": 0.21333651846429866,
+      "product_construction_respiration_c_kg_m2_year": 0.05025260212714586,
+      "remaining_for_other_uses_c_kg_m2_year": 0.2635891205914445,
+      "allocation_t_dry_per_projected_ha_year": 4.740811521428859,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          4.740811521428859,
+          14.222434564286576
+        ],
+        "returned_upward_kg_p_ha_year": [
+          4.69340340621457,
+          14.08021021864371
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.047408115214288636,
+          0.1422243456428659
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.06065465680903665,
+      "unallocated_before_harvest_c_kg_m2_year": 0.5029163784592743,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.12572909461481857,
+      "product_retained_c_kg_m2_year": 0.10175915931055463,
+      "product_construction_respiration_c_kg_m2_year": 0.023969935304263945,
+      "remaining_for_other_uses_c_kg_m2_year": 0.3771872838444557,
+      "allocation_t_dry_per_projected_ha_year": 2.2613146513456583,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          2.2613146513456583,
+          6.783943954036975
+        ],
+        "returned_upward_kg_p_ha_year": [
+          2.2387015048322016,
+          6.716104514496605
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.022613146513456604,
+          0.0678394395403698
+        ]
+      }
+    },
+    {
+      "class": "lesser",
+      "diameter_m": 100.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.036428964731689,
+      "population_replacement_c_kg_m2_year": 0.06065465680903665,
+      "unallocated_before_harvest_c_kg_m2_year": 0.5029163784592743,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.25145818922963714,
+      "product_retained_c_kg_m2_year": 0.20351831862110925,
+      "product_construction_respiration_c_kg_m2_year": 0.04793987060852789,
+      "remaining_for_other_uses_c_kg_m2_year": 0.25145818922963714,
+      "allocation_t_dry_per_projected_ha_year": 4.522629302691317,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 3.2573409807009712,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856117,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          4.522629302691317,
+          13.56788790807395
+        ],
+        "returned_upward_kg_p_ha_year": [
+          4.477403009664403,
+          13.43220902899321
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.04522629302691321,
+          0.1356788790807396
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.010670397547158574,
+      "unallocated_before_harvest_c_kg_m2_year": 0.8742430337524499,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.21856075843811248,
+      "product_retained_c_kg_m2_year": 0.17689270017473135,
+      "product_construction_respiration_c_kg_m2_year": 0.04166805826338113,
+      "remaining_for_other_uses_c_kg_m2_year": 0.6556822753143374,
+      "allocation_t_dry_per_projected_ha_year": 3.930948892771808,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          3.930948892771808,
+          11.792846678315424
+        ],
+        "returned_upward_kg_p_ha_year": [
+          3.89163940384409,
+          11.67491821153227
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.039309488927718114,
+          0.11792846678315434
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.010670397547158574,
+      "unallocated_before_harvest_c_kg_m2_year": 0.8742430337524499,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.43712151687622497,
+      "product_retained_c_kg_m2_year": 0.3537854003494627,
+      "product_construction_respiration_c_kg_m2_year": 0.08333611652676226,
+      "remaining_for_other_uses_c_kg_m2_year": 0.43712151687622497,
+      "allocation_t_dry_per_projected_ha_year": 7.861897785543616,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          7.861897785543616,
+          23.58569335663085
+        ],
+        "returned_upward_kg_p_ha_year": [
+          7.78327880768818,
+          23.34983642306454
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.07861897785543623,
+          0.23585693356630869
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.03201119264147572,
+      "unallocated_before_harvest_c_kg_m2_year": 0.8529022386581329,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.21322555966453322,
+      "product_retained_c_kg_m2_year": 0.1725746436133812,
+      "product_construction_respiration_c_kg_m2_year": 0.04065091605115201,
+      "remaining_for_other_uses_c_kg_m2_year": 0.6396766789935997,
+      "allocation_t_dry_per_projected_ha_year": 3.8349920802973605,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          3.8349920802973605,
+          11.50497624089208
+        ],
+        "returned_upward_kg_p_ha_year": [
+          3.796642159494387,
+          11.38992647848316
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.03834992080297364,
+          0.11504976240892091
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.03201119264147572,
+      "unallocated_before_harvest_c_kg_m2_year": 0.8529022386581329,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.42645111932906643,
+      "product_retained_c_kg_m2_year": 0.3451492872267624,
+      "product_construction_respiration_c_kg_m2_year": 0.08130183210230402,
+      "remaining_for_other_uses_c_kg_m2_year": 0.42645111932906643,
+      "allocation_t_dry_per_projected_ha_year": 7.669984160594721,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          7.669984160594721,
+          23.00995248178416
+        ],
+        "returned_upward_kg_p_ha_year": [
+          7.593284318988774,
+          22.77985295696632
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.07669984160594728,
+          0.23009952481784182
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.05335198773579287,
+      "unallocated_before_harvest_c_kg_m2_year": 0.8315614435638157,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.20789036089095392,
+      "product_retained_c_kg_m2_year": 0.16825658705203106,
+      "product_construction_respiration_c_kg_m2_year": 0.03963377383892286,
+      "remaining_for_other_uses_c_kg_m2_year": 0.6236710826728618,
+      "allocation_t_dry_per_projected_ha_year": 3.739035267822912,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          3.739035267822912,
+          11.217105803468737
+        ],
+        "returned_upward_kg_p_ha_year": [
+          3.701644915144683,
+          11.104934745434049
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.037390352678229155,
+          0.11217105803468747
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.05335198773579287,
+      "unallocated_before_harvest_c_kg_m2_year": 0.8315614435638157,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.41578072178190784,
+      "product_retained_c_kg_m2_year": 0.3365131741040621,
+      "product_construction_respiration_c_kg_m2_year": 0.07926754767784572,
+      "remaining_for_other_uses_c_kg_m2_year": 0.41578072178190784,
+      "allocation_t_dry_per_projected_ha_year": 7.478070535645824,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          7.478070535645824,
+          22.434211606937474
+        ],
+        "returned_upward_kg_p_ha_year": [
+          7.403289830289366,
+          22.209869490868098
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.07478070535645831,
+          0.22434211606937493
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.010670397547158574,
+      "unallocated_before_harvest_c_kg_m2_year": 0.67424303375245,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.1685607584381125,
+      "product_retained_c_kg_m2_year": 0.13642507427545078,
+      "product_construction_respiration_c_kg_m2_year": 0.032135684162661715,
+      "remaining_for_other_uses_c_kg_m2_year": 0.5056822753143375,
+      "allocation_t_dry_per_projected_ha_year": 3.0316683172322394,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          3.0316683172322394,
+          9.095004951696719
+        ],
+        "returned_upward_kg_p_ha_year": [
+          3.001351634059917,
+          9.004054902179751
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.03031668317232242,
+          0.09095004951696727
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.010670397547158574,
+      "unallocated_before_harvest_c_kg_m2_year": 0.67424303375245,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.337121516876225,
+      "product_retained_c_kg_m2_year": 0.27285014855090156,
+      "product_construction_respiration_c_kg_m2_year": 0.06427136832532343,
+      "remaining_for_other_uses_c_kg_m2_year": 0.337121516876225,
+      "allocation_t_dry_per_projected_ha_year": 6.063336634464479,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          6.063336634464479,
+          18.190009903393438
+        ],
+        "returned_upward_kg_p_ha_year": [
+          6.002703268119834,
+          18.008109804359503
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.06063336634464484,
+          0.18190009903393453
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.03201119264147572,
+      "unallocated_before_harvest_c_kg_m2_year": 0.6529022386581329,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.16322555966453323,
+      "product_retained_c_kg_m2_year": 0.13210701771410063,
+      "product_construction_respiration_c_kg_m2_year": 0.031118541950432593,
+      "remaining_for_other_uses_c_kg_m2_year": 0.4896766789935997,
+      "allocation_t_dry_per_projected_ha_year": 2.935711504757792,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          2.935711504757792,
+          8.807134514273375
+        ],
+        "returned_upward_kg_p_ha_year": [
+          2.906354389710214,
+          8.719063169130642
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.029357115047577945,
+          0.08807134514273383
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.03201119264147572,
+      "unallocated_before_harvest_c_kg_m2_year": 0.6529022386581329,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.32645111932906645,
+      "product_retained_c_kg_m2_year": 0.26421403542820127,
+      "product_construction_respiration_c_kg_m2_year": 0.06223708390086519,
+      "remaining_for_other_uses_c_kg_m2_year": 0.32645111932906645,
+      "allocation_t_dry_per_projected_ha_year": 5.871423009515584,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          5.871423009515584,
+          17.61426902854675
+        ],
+        "returned_upward_kg_p_ha_year": [
+          5.812708779420428,
+          17.438126338261284
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.05871423009515589,
+          0.17614269028546767
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.05335198773579287,
+      "unallocated_before_harvest_c_kg_m2_year": 0.6315614435638157,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.15789036089095393,
+      "product_retained_c_kg_m2_year": 0.12778896115275049,
+      "product_construction_respiration_c_kg_m2_year": 0.030101399738203444,
+      "remaining_for_other_uses_c_kg_m2_year": 0.4736710826728618,
+      "allocation_t_dry_per_projected_ha_year": 2.8397546922833437,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          2.8397546922833437,
+          8.519264076850032
+        ],
+        "returned_upward_kg_p_ha_year": [
+          2.8113571453605104,
+          8.434071436081531
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.02839754692283346,
+          0.08519264076850039
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.05335198773579287,
+      "unallocated_before_harvest_c_kg_m2_year": 0.6315614435638157,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.31578072178190786,
+      "product_retained_c_kg_m2_year": 0.25557792230550097,
+      "product_construction_respiration_c_kg_m2_year": 0.06020279947640689,
+      "remaining_for_other_uses_c_kg_m2_year": 0.31578072178190786,
+      "allocation_t_dry_per_projected_ha_year": 5.679509384566687,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          5.679509384566687,
+          17.038528153700064
+        ],
+        "returned_upward_kg_p_ha_year": [
+          5.622714290721021,
+          16.868142872163062
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.05679509384566692,
+          0.17038528153700078
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.010670397547158574,
+      "unallocated_before_harvest_c_kg_m2_year": 0.47424303375245,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.1185607584381125,
+      "product_retained_c_kg_m2_year": 0.0959574483761702,
+      "product_construction_respiration_c_kg_m2_year": 0.0226033100619423,
+      "remaining_for_other_uses_c_kg_m2_year": 0.3556822753143375,
+      "allocation_t_dry_per_projected_ha_year": 2.1323877416926713,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          2.1323877416926713,
+          6.397163225078014
+        ],
+        "returned_upward_kg_p_ha_year": [
+          2.1110638642757444,
+          6.333191592827234
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.02132387741692673,
+          0.0639716322507802
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.010670397547158574,
+      "unallocated_before_harvest_c_kg_m2_year": 0.47424303375245,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.237121516876225,
+      "product_retained_c_kg_m2_year": 0.1919148967523404,
+      "product_construction_respiration_c_kg_m2_year": 0.0452066201238846,
+      "remaining_for_other_uses_c_kg_m2_year": 0.237121516876225,
+      "allocation_t_dry_per_projected_ha_year": 4.264775483385343,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          4.264775483385343,
+          12.794326450156028
+        ],
+        "returned_upward_kg_p_ha_year": [
+          4.222127728551489,
+          12.666383185654468
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.04264775483385346,
+          0.1279432645015604
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.03201119264147572,
+      "unallocated_before_harvest_c_kg_m2_year": 0.4529022386581329,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.11322555966453322,
+      "product_retained_c_kg_m2_year": 0.09163939181482006,
+      "product_construction_respiration_c_kg_m2_year": 0.021586167849713164,
+      "remaining_for_other_uses_c_kg_m2_year": 0.33967667899359966,
+      "allocation_t_dry_per_projected_ha_year": 2.0364309292182234,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          2.0364309292182234,
+          6.10929278765467
+        ],
+        "returned_upward_kg_p_ha_year": [
+          2.016066619926041,
+          6.048199859778124
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.02036430929218225,
+          0.06109292787654676
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.03201119264147572,
+      "unallocated_before_harvest_c_kg_m2_year": 0.4529022386581329,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.22645111932906645,
+      "product_retained_c_kg_m2_year": 0.18327878362964012,
+      "product_construction_respiration_c_kg_m2_year": 0.04317233569942633,
+      "remaining_for_other_uses_c_kg_m2_year": 0.22645111932906645,
+      "allocation_t_dry_per_projected_ha_year": 4.072861858436447,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          4.072861858436447,
+          12.21858557530934
+        ],
+        "returned_upward_kg_p_ha_year": [
+          4.032133239852082,
+          12.096399719556247
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.0407286185843645,
+          0.12218585575309351
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.05335198773579287,
+      "unallocated_before_harvest_c_kg_m2_year": 0.43156144356381576,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.10789036089095394,
+      "product_retained_c_kg_m2_year": 0.08732133525346993,
+      "product_construction_respiration_c_kg_m2_year": 0.020569025637484015,
+      "remaining_for_other_uses_c_kg_m2_year": 0.3236710826728618,
+      "allocation_t_dry_per_projected_ha_year": 1.940474116743776,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          1.940474116743776,
+          5.8214223502313285
+        ],
+        "returned_upward_kg_p_ha_year": [
+          1.9210693755763382,
+          5.763208126729015
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.01940474116743778,
+          0.05821422350231334
+        ]
+      }
+    },
+    {
+      "class": "sky_reef",
+      "diameter_m": 60.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.1150865687003915,
+      "population_replacement_c_kg_m2_year": 0.05335198773579287,
+      "unallocated_before_harvest_c_kg_m2_year": 0.43156144356381576,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.21578072178190788,
+      "product_retained_c_kg_m2_year": 0.17464267050693985,
+      "product_construction_respiration_c_kg_m2_year": 0.04113805127496803,
+      "remaining_for_other_uses_c_kg_m2_year": 0.21578072178190788,
+      "allocation_t_dry_per_projected_ha_year": 3.880948233487552,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 5.2583389696815885,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          3.880948233487552,
+          11.642844700462657
+        ],
+        "returned_upward_kg_p_ha_year": [
+          3.8421387511526763,
+          11.52641625345803
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.03880948233487556,
+          0.11642844700462668
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.05817637043692374,
+      "unallocated_before_harvest_c_kg_m2_year": 0.38315055767512735,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.09578763941878184,
+      "product_retained_c_kg_m2_year": 0.0775259671554889,
+      "product_construction_respiration_c_kg_m2_year": 0.018261672263292936,
+      "remaining_for_other_uses_c_kg_m2_year": 0.2873629182563455,
+      "allocation_t_dry_per_projected_ha_year": 1.7227992701219754,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          1.7227992701219754,
+          5.168397810365926
+        ],
+        "returned_upward_kg_p_ha_year": [
+          1.7055712774207556,
+          5.116713832262267
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.01722799270121977,
+          0.05168397810365931
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.05817637043692374,
+      "unallocated_before_harvest_c_kg_m2_year": 0.38315055767512735,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.19157527883756367,
+      "product_retained_c_kg_m2_year": 0.1550519343109778,
+      "product_construction_respiration_c_kg_m2_year": 0.03652334452658587,
+      "remaining_for_other_uses_c_kg_m2_year": 0.19157527883756367,
+      "allocation_t_dry_per_projected_ha_year": 3.445598540243951,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          3.445598540243951,
+          10.336795620731852
+        ],
+        "returned_upward_kg_p_ha_year": [
+          3.4111425548415113,
+          10.233427664524534
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.03445598540243954,
+          0.10336795620731862
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.17452911131077123,
+      "unallocated_before_harvest_c_kg_m2_year": 0.2667978168012799,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.06669945420031997,
+      "product_retained_c_kg_m2_year": 0.05398337120529495,
+      "product_construction_respiration_c_kg_m2_year": 0.012716082995025024,
+      "remaining_for_other_uses_c_kg_m2_year": 0.20009836260095992,
+      "allocation_t_dry_per_projected_ha_year": 1.1996304712287766,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          1.1996304712287766,
+          3.5988914136863297
+        ],
+        "returned_upward_kg_p_ha_year": [
+          1.187634166516489,
+          3.5629024995494665
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.011996304712287777,
+          0.03598891413686333
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.17452911131077123,
+      "unallocated_before_harvest_c_kg_m2_year": 0.2667978168012799,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.13339890840063995,
+      "product_retained_c_kg_m2_year": 0.1079667424105899,
+      "product_construction_respiration_c_kg_m2_year": 0.02543216599005005,
+      "remaining_for_other_uses_c_kg_m2_year": 0.13339890840063995,
+      "allocation_t_dry_per_projected_ha_year": 2.3992609424575533,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          2.3992609424575533,
+          7.197782827372659
+        ],
+        "returned_upward_kg_p_ha_year": [
+          2.375268333032978,
+          7.125804999098933
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.023992609424575553,
+          0.07197782827372666
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.2908818521846187,
+      "unallocated_before_harvest_c_kg_m2_year": 0.1504450759274324,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.0376112689818581,
+      "product_retained_c_kg_m2_year": 0.030440775255100982,
+      "product_construction_respiration_c_kg_m2_year": 0.007170493726757116,
+      "remaining_for_other_uses_c_kg_m2_year": 0.1128338069455743,
+      "allocation_t_dry_per_projected_ha_year": 0.6764616723355774,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          0.6764616723355774,
+          2.0293850170067325
+        ],
+        "returned_upward_kg_p_ha_year": [
+          0.6696970556122216,
+          2.009091166836665
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.00676461672335578,
+          0.020293850170067344
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 1.0,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 2.0,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.2908818521846187,
+      "unallocated_before_harvest_c_kg_m2_year": 0.1504450759274324,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.0752225379637162,
+      "product_retained_c_kg_m2_year": 0.060881550510201964,
+      "product_construction_respiration_c_kg_m2_year": 0.014340987453514233,
+      "remaining_for_other_uses_c_kg_m2_year": 0.0752225379637162,
+      "allocation_t_dry_per_projected_ha_year": 1.3529233446711548,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          1.3529233446711548,
+          4.058770034013465
+        ],
+        "returned_upward_kg_p_ha_year": [
+          1.3393941112244432,
+          4.01818233367333
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.01352923344671156,
+          0.04058770034013469
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.05817637043692374,
+      "unallocated_before_harvest_c_kg_m2_year": 0.1831505576751274,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.04578763941878185,
+      "product_retained_c_kg_m2_year": 0.037058341256208334,
+      "product_construction_respiration_c_kg_m2_year": 0.008729298162573514,
+      "remaining_for_other_uses_c_kg_m2_year": 0.13736291825634556,
+      "allocation_t_dry_per_projected_ha_year": 0.8235186945824075,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          0.8235186945824075,
+          2.4705560837472222
+        ],
+        "returned_upward_kg_p_ha_year": [
+          0.8152835076365834,
+          2.44585052290975
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.008235186945824082,
+          0.024705560837472246
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.05817637043692374,
+      "unallocated_before_harvest_c_kg_m2_year": 0.1831505576751274,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.0915752788375637,
+      "product_retained_c_kg_m2_year": 0.07411668251241667,
+      "product_construction_respiration_c_kg_m2_year": 0.017458596325147027,
+      "remaining_for_other_uses_c_kg_m2_year": 0.0915752788375637,
+      "allocation_t_dry_per_projected_ha_year": 1.647037389164815,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          1.647037389164815,
+          4.9411121674944445
+        ],
+        "returned_upward_kg_p_ha_year": [
+          1.6305670152731668,
+          4.8917010458195
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.016470373891648165,
+          0.04941112167494449
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.17452911131077123,
+      "unallocated_before_harvest_c_kg_m2_year": 0.06679781680127991,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.01669945420031998,
+      "product_retained_c_kg_m2_year": 0.013515745306014373,
+      "product_construction_respiration_c_kg_m2_year": 0.0031837088943056056,
+      "remaining_for_other_uses_c_kg_m2_year": 0.050098362600959935,
+      "allocation_t_dry_per_projected_ha_year": 0.3003498956892083,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          0.3003498956892083,
+          0.9010496870676248
+        ],
+        "returned_upward_kg_p_ha_year": [
+          0.2973463967323162,
+          0.8920391901969486
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.0030034989568920854,
+          0.009010496870676257
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.17452911131077123,
+      "unallocated_before_harvest_c_kg_m2_year": 0.06679781680127991,
+      "carbon_budget_nonnegative": true,
+      "product_assimilate_c_kg_m2_year": 0.03339890840063996,
+      "product_retained_c_kg_m2_year": 0.027031490612028745,
+      "product_construction_respiration_c_kg_m2_year": 0.006367417788611211,
+      "remaining_for_other_uses_c_kg_m2_year": 0.03339890840063996,
+      "allocation_t_dry_per_projected_ha_year": 0.6006997913784166,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": {
+        "exported_kg_p_ha_year": [
+          0.6006997913784166,
+          1.8020993741352496
+        ],
+        "returned_upward_kg_p_ha_year": [
+          0.5946927934646324,
+          1.784078380393897
+        ],
+        "unreturned_kg_p_ha_year": [
+          0.006006997913784171,
+          0.018020993741352513
+        ]
+      }
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.2908818521846187,
+      "unallocated_before_harvest_c_kg_m2_year": -0.04955492407256756,
+      "carbon_budget_nonnegative": false,
+      "product_assimilate_c_kg_m2_year": null,
+      "product_retained_c_kg_m2_year": null,
+      "product_construction_respiration_c_kg_m2_year": null,
+      "remaining_for_other_uses_c_kg_m2_year": null,
+      "allocation_t_dry_per_projected_ha_year": null,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": null
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.9,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.8,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.2908818521846187,
+      "unallocated_before_harvest_c_kg_m2_year": -0.04955492407256756,
+      "carbon_budget_nonnegative": false,
+      "product_assimilate_c_kg_m2_year": null,
+      "product_retained_c_kg_m2_year": null,
+      "product_construction_respiration_c_kg_m2_year": null,
+      "remaining_for_other_uses_c_kg_m2_year": null,
+      "allocation_t_dry_per_projected_ha_year": null,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": null
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.05817637043692374,
+      "unallocated_before_harvest_c_kg_m2_year": -0.01684944232487255,
+      "carbon_budget_nonnegative": false,
+      "product_assimilate_c_kg_m2_year": null,
+      "product_retained_c_kg_m2_year": null,
+      "product_construction_respiration_c_kg_m2_year": null,
+      "remaining_for_other_uses_c_kg_m2_year": null,
+      "allocation_t_dry_per_projected_ha_year": null,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": null
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.001,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.05817637043692374,
+      "unallocated_before_harvest_c_kg_m2_year": -0.01684944232487255,
+      "carbon_budget_nonnegative": false,
+      "product_assimilate_c_kg_m2_year": null,
+      "product_retained_c_kg_m2_year": null,
+      "product_construction_respiration_c_kg_m2_year": null,
+      "remaining_for_other_uses_c_kg_m2_year": null,
+      "allocation_t_dry_per_projected_ha_year": null,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": null
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.17452911131077123,
+      "unallocated_before_harvest_c_kg_m2_year": -0.13320218319872004,
+      "carbon_budget_nonnegative": false,
+      "product_assimilate_c_kg_m2_year": null,
+      "product_retained_c_kg_m2_year": null,
+      "product_construction_respiration_c_kg_m2_year": null,
+      "remaining_for_other_uses_c_kg_m2_year": null,
+      "allocation_t_dry_per_projected_ha_year": null,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": null
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.003,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.17452911131077123,
+      "unallocated_before_harvest_c_kg_m2_year": -0.13320218319872004,
+      "carbon_budget_nonnegative": false,
+      "product_assimilate_c_kg_m2_year": null,
+      "product_retained_c_kg_m2_year": null,
+      "product_construction_respiration_c_kg_m2_year": null,
+      "remaining_for_other_uses_c_kg_m2_year": null,
+      "allocation_t_dry_per_projected_ha_year": null,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": null
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.25,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.2908818521846187,
+      "unallocated_before_harvest_c_kg_m2_year": -0.24955492407256752,
+      "carbon_budget_nonnegative": false,
+      "product_assimilate_c_kg_m2_year": null,
+      "product_retained_c_kg_m2_year": null,
+      "product_construction_respiration_c_kg_m2_year": null,
+      "remaining_for_other_uses_c_kg_m2_year": null,
+      "allocation_t_dry_per_projected_ha_year": null,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": null
+    },
+    {
+      "class": "round_giant",
+      "diameter_m": 1000.0,
+      "light_fraction": 0.8,
+      "annual_adult_hazard": 0.005,
+      "harvest_fraction_of_unallocated_carbon": 0.5,
+      "gross_c_kg_m2_year": 1.6,
+      "fixed_host_and_tenant_c_kg_m2_year": 1.558673071887949,
+      "population_replacement_c_kg_m2_year": 0.2908818521846187,
+      "unallocated_before_harvest_c_kg_m2_year": -0.24955492407256752,
+      "carbon_budget_nonnegative": false,
+      "product_assimilate_c_kg_m2_year": null,
+      "product_retained_c_kg_m2_year": null,
+      "product_construction_respiration_c_kg_m2_year": null,
+      "remaining_for_other_uses_c_kg_m2_year": null,
+      "allocation_t_dry_per_projected_ha_year": null,
+      "carbon_closure_residual_kg_m2_year": 0.0,
+      "existing_tenant_sugar_c_kg_m2_year": 0.1,
+      "existing_green_renewal_t_dry_per_projected_ha_year": 5.0,
+      "existing_structure_renewal_t_dry_per_projected_ha_year": 12.650220605813555,
+      "inherited_construction_carbon_retained_fraction": 0.8093525179856116,
+      "inherited_dry_tissue_carbon_fraction": 0.45,
+      "leaflike_product_phosphorus": null
+    }
+  ],
+  "inherited_2km_colony_membrane_m2_year": [
+    38013.2711084365,
+    570199.0666265475
+  ],
+  "inhabited_cluster_comparisons": [
+    {
+      "domatia": 3,
+      "green_modules": 9,
+      "sum_projected_area_ha": 3.7412297443487748,
+      "conditional_domatia_tenant_allowance_t": 102.28702660126783,
+      "green_residual_after_green_replacement_t_c_year": 23.93177418217098,
+      "domatia_routine_support_t_c_year": 5.002239694697497,
+      "share_of_green_residual_for_routine_domatia_support": 0.20902084637018403,
+      "green_residual_after_routine_support_t_c_year": 18.929534487473482,
+      "payload_equivalent_people_by_district_budget": {
+        "light20": 5.114351330063391,
+        "central50": 2.0457405320253566,
+        "heavy100": 1.0228702660126783
+      },
+      "supported_floor_area_m2": null,
+      "qualification": "Mass equivalents, not resident capacity. Projected biological area is not usable floor. District mass already includes generic buildings, floors and services; their actual support design and any excess mass remain open, together with extra gas, domatia replacement, wet load, trim and human use. No green-module payload allowance is counted."
+    },
+    {
+      "domatia": 30,
+      "green_modules": 90,
+      "sum_projected_area_ha": 37.412297443487745,
+      "conditional_domatia_tenant_allowance_t": 1022.8702660126784,
+      "green_residual_after_green_replacement_t_c_year": 239.31774182170977,
+      "domatia_routine_support_t_c_year": 50.022396946974965,
+      "share_of_green_residual_for_routine_domatia_support": 0.20902084637018403,
+      "green_residual_after_routine_support_t_c_year": 189.2953448747348,
+      "payload_equivalent_people_by_district_budget": {
+        "light20": 51.14351330063392,
+        "central50": 20.457405320253567,
+        "heavy100": 10.228702660126784
+      },
+      "supported_floor_area_m2": null,
+      "qualification": "Mass equivalents, not resident capacity. Projected biological area is not usable floor. District mass already includes generic buildings, floors and services; their actual support design and any excess mass remain open, together with extra gas, domatia replacement, wet load, trim and human use. No green-module payload allowance is counted."
+    }
+  ],
+  "unresolved": [
+    "Edibility, useful composition and processing recovery",
+    "New crop respiration, night storage, decay, wet-load gas and harvest-wound repair",
+    "Wet standing crop, buoyancy, trim and harvest schedules",
+    "Water, nitrogen and phosphorus delivery including new crop demand",
+    "Diffuse light through crowded communities and final301K weather",
+    "Independent fixation by attached crops and their effect on the host",
+    "Access, transport, equipment, labor and comparative costs",
+    "Living-area clusters: domatia replacement and establishment, payload gas, connections, floors and human services",
+    "Competing ecological uses and sustainable wild harvest"
+  ]
+}

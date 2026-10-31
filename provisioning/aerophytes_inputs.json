@@ -1,0 +1,57 @@
+{
+  "schema": "terluna.provisioning.aerophyte-product-inputs/1",
+  "date": "2026-10-31",
+  "products": {
+    "sky_ecology": {
+      "path": "research/studies/sky_ecology/results/sky_ecology.json",
+      "schema": "terluna.research.sky-ecology/1",
+      "sha256": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af",
+      "source_commit": "98dfcc6"
+    },
+    "aerophytes": {
+      "path": "research/studies/aerophytes/results/aerophytes.json",
+      "schema": "terluna.research.aerophytes/1",
+      "sha256": "3721a734cfc100c2d2070db9f7b56de94b03e227631cb56ac6a7b08801f096ca",
+      "source_commit": "98dfcc6"
+    },
+    "inhabited_volume": {
+      "path": "research/studies/inhabited_volume/results/inhabited_volume.json",
+      "schema": "terluna.research.inhabited-volume/1",
+      "sha256": "62002e2d2edd27109ac410097826ea96a1d4b4a9799dd64c33b1cfd505ce0a29",
+      "source_commit": "98dfcc6"
+    }
+  },
+  "assumptions": {
+    "representatives_m": {
+      "lesser": 100,
+      "sky_reef": 60,
+      "round_giant": 1000
+    },
+    "light_fractions": [
+      1.0,
+      0.9,
+      0.8
+    ],
+    "annual_adult_hazards": [
+      0.001,
+      0.003,
+      0.005
+    ],
+    "harvest_fractions": [
+      0.25,
+      0.5
+    ],
+    "basis": "GPP2 photolytic reference physiology. Crop fractions are exploratory allocations of residual carbon, not adopted harvest permissions. Light fractions are sensitivities, not sky-density or climate predictions. Existing tissue construction yield is applied to generic additional organic tissue; it does not predict sugar, lipid, protein or saleable material conversion. Extra crop upkeep, wet-load lifting gas, collection and processing costs are uncomputed and must fit within the allocation; it is an accounting allowance before those costs.",
+    "inhabited_clusters": {
+      "domatium_counts": [
+        3,
+        30
+      ],
+      "green_modules_per_domatium": 3,
+      "diameter_m": 60,
+      "green_adult_hazard": 0.003,
+      "domatium_food_to_tenants_c": 0.1,
+      "basis": "Illustrative dedicated living-area clusters at inherited reference light. Sum only domatia steady tenant allowance; green reserve capacity is not sold twice. Pay routine domatia upkeep from mature green surplus. New domatia replacement, payload gas, connection/floor design and residential services are unresolved."
+    }
+  }
+}

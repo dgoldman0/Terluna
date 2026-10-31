@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19",
+  "updated": "2026-10-31",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -916,6 +916,25 @@
         "the photosynthetic calcifiers' 354-hour night at about 30 °C"
       ],
       "next_session_task": "Nothing starts before the author's word; then the plan's order (studies/aquatic_biogeochemistry/plan.md): the seas' chemistry with magnesium kept on resources, the calcifiers and the floors on ecology, the mixing form's check on climate, then the harvests and the coupled study."
+    },
+    {
+      "topic": "aerophyte_provisioning",
+      "condition": "conditional_product_allocation_economic_use_and_living_area_clusters_2026_10_31; no_crop_market_harvest_quota_or_resident_capacity_adopted",
+      "material": [
+        "../provisioning/aerophytes.md",
+        "../provisioning/aerophytes.py",
+        "../provisioning/results/aerophytes.json",
+        "../provisioning/aerophytes_inputs.json",
+        "../provisioning/aerophytes_sources.json",
+        "../provisioning/aerophytes_checks.json"
+      ],
+      "unresolved": [
+        "Product composition, extra crop upkeep and night reserves, wet mass, harvest schedules and host recovery.",
+        "Living-area clusters: domatia establishment and replacement, extra gas, floors and connections, trim and complete residential services.",
+        "Additional crop water, nitrogen and phosphorus delivery; return of harvested nutrients and effects on existing tenants.",
+        "Diffuse light through cultivated communities, final301K weather, collection logistics and comparative costs against ground farms, sky-town farms and manufactured materials."
+      ],
+      "next_session_task": "Test one lesser-body crop and one modular reef product through a complete harvest cycle; qualify shed membrane separately. Develop small-home and community clusters with gardens and habitat, closing payload, local support, gas, trim, human services and nutrient return."
     }
   ]
 }

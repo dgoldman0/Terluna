@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-31",
+  "scope": "Provisioning assessment of possible aerophyte crops, materials and services; no existing aerophyte species or market is asserted.",
+  "local_sources": [
+    {
+      "path": "research/studies/sky_ecology/results/sky_ecology.json",
+      "use": "food_web.production, population replacement, tenant sugar, green and structural renewal, phosphorus design guesses and tenant load/trim. Numerical input pinned in aerophytes_inputs.json.",
+      "sha256": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af"
+    },
+    {
+      "path": "research/studies/aerophytes/results/aerophytes.json",
+      "use": "resources.membrane and inherited coupled traits. Numerical input pinned in aerophytes_inputs.json.",
+      "sha256": "3721a734cfc100c2d2070db9f7b56de94b03e227631cb56ac6a7b08801f096ca"
+    },
+    {
+      "path": "research/studies/aerophytes/resources.md",
+      "use": "Membrane processing limits, earlier wild tissue harvest illustration, gas inventory and transport hazards.",
+      "sha256": "99499424f1f5fe7ccb6f25b27b35b38403e7cb7ddd5a15bca5040e078d4afd86"
+    },
+    {
+      "path": "research/studies/aerophytes/growth.md",
+      "use": "Nursery times, adult establishment and allocation between colony expansion and products.",
+      "sha256": "0bd29d41ccb4e9314f69103341fce8e086dc6dce2e1709a014354a84514ca2fb"
+    },
+    {
+      "path": "research/studies/sky_ecology/food_web.md",
+      "use": "Whole-body juvenile crop inefficiency, sugar commitments and nutrient-limited food webs.",
+      "sha256": "8d22d580dd348b01325f5704efcf2b8b386929d1f997c3c84972614c2af41a9e"
+    },
+    {
+      "path": "research/studies/sky_ecology/tenants.md",
+      "use": "Diffuse light on flanks and undersides, fixed versus sudden payload, and carbon cost of specialised tenant modules.",
+      "sha256": "5260f45213c9e62a5c6bdf4b8c7a9311647777efb486dd88642e2ab357d867fa"
+    },
+    {
+      "path": "biosphere/ecology/taxonomy.md",
+      "use": "G02 lesser aerophytes, G03 giants and sky reefs, G50/G51 attached phototrophs; these are hypothetical lineages and proposed functions.",
+      "sha256": "2a92826c2ccf4e1452f2df4b40ab1765b2f3576f0e1f1b6fffcb5202c2d96f6f"
+    },
+    {
+      "path": "research/studies/food_systems/README.md",
+      "use": "Current food mix and alternative production systems; no change to the accepted diet allocation.",
+      "sha256": "235e14a5ecc34ff9e7cfbfb95dbac1146e24dddb7570e48e1eb760b9a19aa774"
+    },
+    {
+      "path": "research/studies/inhabited_volume/results/inhabited_volume.json",
+      "use": "Whole-district payload20/50/100tonnes per resident, including building, people/contents, wet stocks and local services; used only as mass comparisons, not a floor design or resident capacity.",
+      "sha256": "62002e2d2edd27109ac410097826ea96a1d4b4a9799dd64c33b1cfd505ce0a29"
+    },
+    {
+      "path": "research/studies/inhabited_volume/README.md",
+      "use": "Boundary of the residential payload budget and separation of carrier, district and reserves.",
+      "sha256": "1a89a923783478f2b4da458b43ec43997273b4f076aa469c55a7985b30fc1179"
+    }
+  ],
+  "published_sources": [
+    {
+      "citation": "Silva et al. (2024), Upcycling of cellulosic textile waste with bacterial cellulose via Ioncell technology",
+      "doi": "10.1016/j.ijbiomac.2024.132194",
+      "url": "https://acris.aalto.fi/ws/portalfiles/portal/150975091/CHEM_Silva_et_al_Upcycling_of_cellulosic_2024_Int_J_Biol_Macromol.pdf",
+      "access": "Abstract and concluding sections read from the institutional publisher-PDF copy on2026-10-31; publisher HTML access failed, intended paper obtained at Aalto. No complete scholarly review claimed.",
+      "use": "Primary experimental precedent for processing biological cellulose into fibres and textile products, not evidence of aerophyte material quality, gas permeability or competitive cost."
+    },
+    {
+      "citation": "Yang, Li and Gao (2023), A novel method to produce massive seedlings via symbiotic seed germination in orchids",
+      "doi": "10.3389/fpls.2023.1114105",
+      "url": "https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2023.1114105/full",
+      "access": "Abstract, methods introduction and conclusion read from publisher on2026-10-31.",
+      "use": "Primary experimental precedent for symbiont-supported nursery propagation, with species and humidity dependencies; no lunar crop yield supplied."
+    },
+    {
+      "citation": "Graham et al. (2018), Seabirds enhance coral reef productivity and functioning in the absence of invasive rats",
+      "doi": "10.1038/s41586-018-0202-3",
+      "url": "https://eprints.lancs.ac.uk/id/eprint/128983/1/Graham_et_al._Nature_2018_accepted.pdf",
+      "access": "Abstract and study-design opening read in institutional accepted manuscript on2026-10-31; Nature HTML inaccessible, intended paper obtained at Lancaster.",
+      "use": "Measured ecosystem connection through animal nutrient transport; supports treating roosts and nutrient return as productive services, not a new planetary nutrient source."
+    }
+  ],
+  "new_scenarios": [
+    "Allocate25or50percent of uncommitted carbon after adult replacement to generic tissue, preserving existing tenant sugar and host renewal.",
+    "Reduce inherited gross fixation linearly to90or80percent with fixed upkeep; no angular light calculation.",
+    "Use existing green-tissue phosphorus1–3g/kg dry only for a leaflike crop; sugar and other chemistries require different nutrient accounts.",
+    "No prices, market sizes, edible fraction or processing recovery selected.",
+    "Small-home and community comparisons of3and30domatia with3green modules per domatium; routine support charged to green surplus after green adult replacement. No floor area or residence capacity inferred."
+  ],
+  "ecology_context": {
+    "commit": "e91d4591b0880eed203c73e3b6130a1a7bf1c2e3",
+    "path": "research/studies/aerial_productivity/README.md",
+    "sha256": "011632e0264299f3271977ba44f2e03f97f720bb47fe64d110a479ab7c5d9496",
+    "use": "Richer-sky occupancy and unresolved angular scattering. Context only; its projected cover is not used to scale the provisioning yields. Read the committed blob with git show COMMIT:PATH; no cross-domain model is imported."
+  }
+}

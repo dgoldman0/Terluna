@@ -9,6 +9,11 @@ How the Open Moon turns resources and energy into what people and the array need
 - water, sanitation and the services cities run on;
 - maintenance and repair.
 
+[Resources](../resources/README.md) tracks where materials come from, the available inventories,
+and their losses and return flows. Provisioning uses those constraints to assess the systems
+and activities that supply people. Aerophyte crops, materials and inhabited space therefore
+belong here; the nutrient reservoirs and long-term replenishment supporting them belong in resources.
+
 The word reaches past industry to everything a settled world provides itself with. The domain opened on 9 October
 2026 on the branch `domain/provisioning`. It starts from:
 - what the project already holds ([state.md](state.md));
@@ -50,6 +55,25 @@ The author's decisions frame it:
   near-continual input of a well-educated, involved population.
 - **The network:** a mesh of aerostats drifting near 30 km, fixed posts, fibre and towers, linked to the array
   ([network.md](network.md)).
+
+## Aerophyte crops, living area and services
+
+The [31 October assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef
+modules as candidates for recurring cultivated products. Large colonies and round giants also
+provide living area for other biomass, gardens, homes and small communities, alongside
+material recovery and ecological services.
+
+Allocating 25–50% of carbon left after host upkeep and adult replacement gives about 4–8 tonnes
+of generic dry tissue per projected hectare per year in the lesser and reef reference cases,
+before new crop upkeep, wet-load support and collection costs. Edible yields and profitability
+remain unestablished. Shed membrane, nursery stock and attached specialty crops are candidate uses.
+
+Illustrative clusters of 3 and 30 specialised tenant modules, each supported by 3 green
+modules, offer conditional payloads of about 102 and 1,023 tonnes. Their routine support takes
+about 21% of the green modules' residual carbon. These are housing mass comparisons, with
+floors, attachments, extra gas and full residential services still to design. The
+[calculation](aerophytes.py) records the carbon, additional phosphorus-return requirements and
+cluster comparisons. The food blend and wild harvest allocations remain unchanged.
 
 ## What the project already says
 

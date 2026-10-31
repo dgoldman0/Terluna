@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-31",
+  "scope": "First provisioning assessment of aerophyte crops, materials, living area and services on domain/provisioning. No crop, harvest quota or population allocation selected.",
+  "checks": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider provisioning/tests",
+      "result": "50 passed in10.21seconds, including9new aerophyte accounting tests."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python shared/check_layers.py",
+      "result": "1139files checked,0violations."
+    },
+    {
+      "command": "git diff --check",
+      "result": "Passed."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider provisioning/tests/test_aerophytes.py",
+      "result": "9passed in0.45seconds after the final residential-budget wording and product regeneration."
+    },
+    {
+      "activity": "Compare local source SHA-256 identities and committed ecology-context blob; verify the new research-index material paths.",
+      "result": "All identities matched and paths existed."
+    }
+  ],
+  "review": {
+    "activity": "Substantive reading of the report, independent reproduction of the crop and cluster tables, and separate reviews of agricultural accounting and economic/source claims.",
+    "resolved": [
+      "Crop numbers are allocation ceilings before extra crop physiology, night storage, wet-load gas, harvest damage and processing losses.",
+      "Carbon per projected square metre, dry/P per projected hectare and whole-colony membrane units are distinguished.",
+      "Tenant sugar and green-module payload margins are not counted twice; crop allocations compete with support of inhabited domatia.",
+      "Residential mass comparisons include generic building/floor inventories; detailed structures must fit those allowances or pay for any excess.",
+      "Routine domatia upkeep is distinct from their establishment/replacement and additional gas to access payload margins.",
+      "Ecology context is bound to committed e91d4591b0880eed203c73e3b6130a1a7bf1c2e3; its unresolved angular scattering is not replaced by a new crop-light prediction."
+    ]
+  },
+  "limitations": [
+    "No empirical organism/crop validation, completed dwelling, economic price/demand study, full scholarly source review or coupled301K climate calculation."
+  ],
+  "full_repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+    "result": "Passed: 2831 Python tests passed, 20 skipped; JavaScript, calendar, layer, provenance and ensemble checks passed.",
+    "log": "/tmp/terluna-provisioning-aerophytes-make-check.log",
+    "scope": "Provisioning working tree before committing the aerophyte assessment."
+  },
+  "related_ecology_validation": {
+    "commit": "e91d459",
+    "result": "Separate full repository check passed with 2835 Python tests passed and 20 skipped."
+  }
+}
