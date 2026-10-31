@@ -1,7 +1,7 @@
 {
   "date": "2026-10-31",
-  "stage": 10,
-  "scope": "Three-world economic comparison with mature industry, early infrastructure campaigns, slow-settling production and useful services of the 1.2 atm atmosphere. Physical pressure/gravity/composition effects, qualified performance, conditional costs and economic output remain separate; no market forecast, factory design or financing programme is adopted.",
+  "stage": 11,
+  "scope": "Three-world economic comparison with mature industry, early infrastructure campaigns, slow-settling production, pressure services and industrial combustion/material-flammability assessment. Physical conservation, evidence under other conditions, proposed applications and qualified economic gains remain separate.",
   "checks": [
     {
       "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
@@ -53,7 +53,8 @@
     7,
     8,
     9,
-    10
+    10,
+    11
   ],
   "stages3_4": {
     "focused_check": {
@@ -329,5 +330,51 @@
       "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
       "slow_settling": "cf87897b3c6697a9647876969a0525b5f61b3b89ea66d817bb370eb180099812"
     }
+  },
+  "stage11": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests engineering/tests/test_fire.py research/studies/port_fire/test_run.py",
+      "result": "447 passed in 2.80 seconds, including 21 new composition, stoichiometry, purge and input-identity controls. The new module also passed its initial 21-test run in 0.16 seconds. After correcting the internal bibliography identifier for Link et al., the final evidence-bound product was regenerated and all 21 module tests passed in 0.16 seconds."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "log": "/tmp/terluna-industrial-combustion-check.log",
+      "result": "3252 Python tests passed, 20 skipped in 414.26 seconds; 191 JavaScript tests passed. Layer, provenance and ensemble checks passed: 1189 files checked with 0 layer violations, and five protection input hashes verified. A subsequent bibliography identifier correction changed only source metadata; the final product was regenerated and its 21 focused tests passed again in 0.16 seconds. Calculation code and numerical inputs were unchanged."
+    },
+    "numerical_controls": [
+      "Equal oxygen partial pressure preserves oxygen inventory per gas volume; composition-corrected density and oxygen mass fraction conserve oxygen. A fixed-composition pressure control increases oxygen inventory.",
+      "Complete methane balances conserve carbon, hydrogen, oxygen and nitrogen over two oxygen fractions and three excess-oxygen ratios. Air mass and local volume are distinct duties.",
+      "More wet exhaust moles coexist with slightly less local-pressure volume at the same temperature; the ratio is independent of common temperature within the ideal-gas, all-vapour reference.",
+      "Equal fractional oxygen excess gives different dry exhaust oxygen readings. No reaction kinetics, flame temperature, NOx rate, ignition limit or explosion pressure is computed.",
+      "An independent 50,000-step oxygen-inventory integration matches the analytical well-mixed purge within 1e-4 relative tolerance; zero-change and volume-extensivity controls pass. Equal fraction and equal partial pressure endpoints give distinct gas requirements.",
+      "Invalid physical domains and changed upstream product identity are rejected. The complete new result reproduces; all ten preceding economy/industrial products retain their hashes."
+    ],
+    "documentation_links": "271 local file links across nine study/domain/research documents checked; all resolve. Fragment targets and external-link availability are separate from this file-existence check.",
+    "review": "Substantive reading of the full production assessment, calculation, numerical tables, old fire model/tests, amended port descriptions and current synthesis. The audit separates a heat-release scenario from empirical fire growth, a proposed oxygen screen from material acceptance, thermal smoke-detection surrogates from detector performance, and sprinkler activation from assumed suppression. Editorial review corrected the Link et al. attribution. No independent-agent review was performed.",
+    "source_review": "Eleven primary publication/agency records with individual access limits. Harper 2016 methods/findings/conclusions and Table 2 were read; its PDF page 15 was rendered and inspected. Peatross and Beyler 1997 setup, oxygen/burning-rate discussion and conclusions were read; its Equation 2 on PDF page 9 was rendered and inspected. Their local PDF hashes are recorded in industrial_combustion_sources.json. NASA configuration guidance was read at composition, assembly and selected battery passages. Cashdollar text was obtained through web PDF retrieval, but the local download returned 403; no local bytes/hash or image review is claimed. The Olson 2024 direct publisher page returned 403 and claims remain restricted to its indexed primary abstract/setup excerpt. Other scopes remain explicit; no full scholarly literature review or experimental lunar validation.",
+    "limitations": [
+      "No empirical qualification at 121.59 kPa, 17.5% oxygen, 301 K and lunar gravity. Material geometry, support, assembly, airflow, process temperature, exposure duration and dust/deposit behaviour remain specific to the production line.",
+      "The dry binary gas and complete methane balance omit humidity, trace gases, dissociation, kinetics, soot, radiation and actual furnace temperature. Near-300 K heat capacities are used only for ambient heat carriage.",
+      "Purge endpoints are arbitrary mathematical comparisons, not inerting limits or operating settings. Perfect mixing, constant pressure/temperature, pure nitrogen and absence of leaks/desorption are assumptions; supplied mass is not a full gas-conditioning cost.",
+      "The earlier port implementation and result remain unchanged, with qualifications in its README and the engineering README. The 0.65 heat-release and slower-growth cases, 23.5% oxygen screen and post-activation suppression do not establish general industrial performance.",
+      "No general fire-loss, material-price, yield or manufacturing premium enters the economic totals. Existing atmosphere construction/maintenance and earlier industry/comparison products remain in their established accounts."
+    ],
+    "products_sha256": {
+      "industrial_combustion": "8c54e57922c63440a35824faa7c4926b1b77d9f3414c05577d36377680a25b20"
+    },
+    "preserved_products_sha256": {
+      "partial_gravity": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297",
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "industrial_continuation": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+      "mature_industry": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b",
+      "early_campaigns": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "slow_settling": "cf87897b3c6697a9647876969a0525b5f61b3b89ea66d817bb370eb180099812",
+      "pressure_advantages": "db6b1c5e602ba8f960974c2e61096b5f64ca5c80ef8fbf9b1d5701cdbf52524f"
+    },
+    "preserved_port_product_sha256": "6298845b9ddf3f83ce270878a97f0b84ab2664032c5fc9fe05e3d3b50b5b1828"
   }
 }

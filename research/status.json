@@ -528,7 +528,7 @@
         "comfort in sway at 0.16 g, where a sideways acceleration tilts the apparent vertical six times more than on Earth",
         "the central port's power: about 400 MW for its floors; screened slow rotors over its whole open face give 74% in the modelled winds (132% with the summit speed-up) for 43 Mt more steel, and 140% in main's corrected climate for 65 Mt more (studies/infrastructure_review); louvered panels on the face, level panels on the highland around the base and pumped storage with the Korolev lake are the other parts",
         "the central port's occupancy figures (areas per person, busy-hour shares) are rough planning figures to check against published standards",
-        "fire at 0.16 g: the port has a first-order study (studies/port_fire: Earth correlations carried by Froude scaling, design fires bracketed, a materials test at 23.5% oxygen, compartments with sprinklers, shafts broken every three bands, 33 water pressure zones); open are full-scale fire data at partial gravity (NASA's FM2 is planned as the first fire on the Moon), sprinkler sprays at 0.16 g, crowd flows, wind-driven fire and smoke through a band (CFD of a band section), and the city",
+        "fire at 0.16 g: the port has a first-order study (studies/port_fire: Earth correlations carried by Froude scaling, design fires bracketed, a proposed 23.5% oxygen screening test (not a universal lunar acceptance rule), compartments with assumed sprinkler control, shafts broken every three bands, 33 water pressure zones); open are full-scale fire data at partial gravity (NASA's FM2 is planned as the first fire on the Moon), sprinkler sprays at 0.16 g, crowd flows, wind-driven fire and smoke through a band (CFD of a band section), and the city",
         "the port's architecture is a first proposal (visualization/summit-port): six leg towers with lift cores, a four-storey wing every 200 m wrapped round two opposite legs, berths every 60 m, gate interchanges and a crown terminal; the building fills about 1/2,000 of the space inside the frame, so it reads as a lattice with shelves; the crown's docking arms as drawn are not credible structure; long-haul berths depend on the long-haul class, the author's to choose (studies/sky_fleet compares and draws four classes at the crown on the sized form: 27 berths of 500 m liners on three levels with arms of 772 m, 8 of 750 m on two with arms of 424 m, 4 of 1 km, or one of 1.5 km; it recommends the 750 m liner and adding winged liners on landing pads); only the hexagonal frame is modelled",
         "sky ships and the other flyers (studies/sky_ships, studies/sky_fleet): the classes from canopies, micro gliders and pedalled wings to long-haul liners, freighters and high platforms are sized with their numbers for the metropolis and height bands; open are the author's choice of long-haul class and whether winged liners join it, a wind study of the crown's wake before the berths are fixed (berths in the lee sit in the tower's wake; the Empire State Building's mast failed on its eddies), an automated traffic system for sky boats (at a car-like 10% of trips they are denser than NASA's urban air mobility spacing allows; about 7-8% fit), shared rather than owned sky boats (owned at Tokyo's rate for cars their berths would cover three-fifths of the city), designs of a sky boat, a personal wing and a ferry, hydrogen safety at scale or a helium supply, buoyancy over the lunar day and night, and sheds or open-air yards for kilometre-long ships",
         "the corrected climate (main's A28_dim5_moon; studies/infrastructure_review): winds aloft about twice as strong; with main's corrected inputs the design gust is 32.4 m/s, the port's chosen form takes 98 Mt of steel, the moored ships' design and service winds are 38.6 and 24.4 m/s, and the high platforms near 70 km need about seven times the power to hold station; the summit's model cells rain 9-17 mm a day; the four studies rerun with the corrected inputs at the joint integration",
@@ -938,7 +938,7 @@
     },
     {
       "topic": "world_economy",
-      "condition": "conditional_three_world_economy_with_mature_industry_early_campaigns_and_gravity_pressure_process_accounts_2026_10_31; reproducible_accounts; no_market_forecast_factory_design_or_financing_plan_adopted",
+      "condition": "conditional_three_world_economy_with_mature_industry_and_gravity_pressure_combustion_process_accounts_2026_10_31; reproducible_accounts; no_market_forecast_factory_design_or_financing_plan_adopted",
       "material": [
         "studies/world_economy/README.md",
         "studies/world_economy/inputs.json",
@@ -987,7 +987,11 @@
         "studies/world_economy/pressure_advantages.md",
         "studies/world_economy/pressure_advantages_inputs.json",
         "studies/world_economy/pressure_advantages_sources.json",
-        "studies/world_economy/results/pressure_advantages.json"
+        "studies/world_economy/results/pressure_advantages.json",
+        "studies/world_economy/industrial_combustion.md",
+        "studies/world_economy/industrial_combustion_inputs.json",
+        "studies/world_economy/industrial_combustion_sources.json",
+        "studies/world_economy/results/industrial_combustion.json"
       ],
       "unresolved": [
         "Source-site energy, ore processing and bulk capture architecture; future unit prices and full construction/settlement timeline, including renewal funding.",
@@ -1005,9 +1009,10 @@
         "Funded campaign orders, ramp and commissioning design, export routes and actual plant capital; customer advances change financing timing and do not establish independent programme income.",
         "Product-specific suspension and recovery under lunar gravity: dense/aggregating rheology, uniformity, heat and gas transfer, complete-cycle accepted yield and time-dependent material or biological quality.",
         "Empirical low-gravity mixer scaling, powder cohesion and fluid-bed entrainment; full transport, forced-harvest and fixed-capital costs compared with optimized Earth and freefall/rotating array recipes.",
-        "Complete equipment and economic qualification of pressure benefits: net buoyant payload, matched heat/ventilation duties, liquid-system margins and vacuum-assisted material quality; ambient advantages versus controlled Earth/array facilities."
+        "Complete equipment and economic qualification of pressure benefits: net buoyant payload, matched heat/ventilation duties, liquid-system margins and vacuum-assisted material quality; ambient advantages versus controlled Earth/array facilities.",
+        "Assembly-specific ignition, propagation and smoke behaviour at 121.59 kPa, 17.5% oxygen, 301 K and lunar gravity; process flow, hot exposure, dust and deposits require separate qualification. No general fire-loss or material-cost premium is established."
       ],
-      "next_session_task": "Qualify a slowly immobilizing filled material and one fragile culture or crystal suspension through distribution, functional quality and final recovery. Compare optimized Earth, lunar and freefall/rotating processes. Price a modular structural or thermal yard against funded orders and a post-campaign use; retain the 1.2 atm lock and account for actual process pressure. Compare a heat-limited air circuit and a pressure-difference clamping process with their actual equipment curves before assigning pressure-related cost savings."
+      "next_session_task": "Qualify a slowly immobilizing filled material and one fragile culture or crystal suspension through distribution, functional quality and final recovery. Compare optimized Earth, lunar and freefall/rotating processes. Price a modular structural or thermal yard against funded orders and a post-campaign use; retain the 1.2 atm lock and account for actual process pressure. Compare a heat-limited air circuit and a pressure-difference clamping process with their actual equipment curves before assigning pressure-related cost savings. Compare a bonded panel or cable assembly across matched normoxic atmospheres and gravities; qualify the process before valuing material substitution, conditioning or yield gains."
     }
   ]
 }

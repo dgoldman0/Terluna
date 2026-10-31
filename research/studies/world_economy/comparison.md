@@ -124,6 +124,8 @@ The [slow-settling study](slow_settling.md) broadens the industrial opportunity 
 
 The [pressure-benefits study](pressure_advantages.md) identifies recurring infrastructure gains from the 1.2 atm atmosphere alongside its vacuum penalties. A matched-gas comparison gives 20% more gross buoyant capacity per volume and 30.6% less fan power for a fixed-heat, resistance-dominated air circuit; if that fan electricity is 5% of total cost, the latter saves 1.53% overall before other differences. Liquid systems gain 20.3 kPa of pressure margin. Vacuum-assisted tools can obtain more clamping force or meet the same force with a less demanding vacuum. These are physical and conditional cost screens; existing atmosphere costs and world-product totals remain.
 
+The [industrial-combustion assessment](industrial_combustion.md) develops the atmosphere's material-specific nitrogen-dilution opportunity. Existing fire calculations do not qualify industrial assemblies at 1.2 atm and lunar gravity. The new oxygen-feed, methane-exhaust and nitrogen-purge balances identify process costs and possible savings without changing the economic totals or assigning a general fire-loss reduction.
+
 ## What changes the conclusion
 
 The main sensitivities are different in kind. Source-site technology, nitrogen grade and water inventory determine construction expenditure. Realised sector activity and demand determine gross product. Ordinary capital composition and the prices/lives of engineered assets determine net product. Ownership, debt age, rates and the share financed determine what residents retain.

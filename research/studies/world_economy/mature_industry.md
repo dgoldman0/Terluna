@@ -68,6 +68,8 @@ The array can reproduce partial gravity. Acceleration is Ω²R and radial variat
 
 The [pressure-benefits assessment](pressure_advantages.md) balances these burdens with services supplied by the atmosphere. At matched composition and temperature, 1.2 versus 1 atm gives 20% more gross buoyant capacity per volume. Fixed-heat air circuits can need less fan power, liquids gain 20.3 kPa of vapor-pressure margin, and vacuum-assisted clamping can achieve the same force at a higher internal absolute pressure. The design keeps oxygen partial pressure near Earth's, so no general oxygen-supply premium is assigned.
 
+The [industrial-combustion assessment](industrial_combustion.md) develops the atmosphere's material-specific nitrogen-dilution opportunity. Existing fire calculations do not qualify industrial assemblies at 1.2 atm and lunar gravity. The new oxygen-feed, methane-exhaust and nitrogen-purge balances identify process costs and possible savings without changing the economic totals or assigning a general fire-loss reduction.
+
 ## Delivered cost and continuing demand
 
 The cost comparison must use an accepted product delivered to the same buyer. Include capital service, inputs, energy, fixtures, contamination control, rejected units, qualification and transport. The [normalized calculation](mature_economics.py) deliberately gives Earth an optimized process and the array the same assumed partial-gravity saving as the Moon, with a separate site-service allowance. Its coordinates are illustrative, not estimated factory prices.

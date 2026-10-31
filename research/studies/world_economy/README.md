@@ -12,6 +12,8 @@ The [slow-settling study](slow_settling.md) examines suspension time, uniformity
 
 The [pressure-benefits study](pressure_advantages.md) examines useful services supplied by the 1.2 atm lock: buoyant capacity, air heat transport, liquid pressure margin and vacuum-assisted clamping. It separates absolute-pressure process requirements from pressure-difference duties and retains the design oxygen partial pressure. These physical and conditional cost gains do not add to the existing world-product totals.
 
+The [industrial-combustion assessment](industrial_combustion.md) audits the existing fire work and examines the oxygen–nitrogen atmosphere as a production environment. It identifies selected polymer/composite assemblies and modest nitrogen conditioning as candidates, with explicit burner, exhaust and dust consequences. Stoichiometric and purge calculations establish equipment differences; material qualification and net economic benefits remain open.
+
 This study estimates the economic consequences of completing the Open Moon and maintaining it at the selected population. Its comparison is an equally advanced future Earth, with the same access to automation, energy and biological technology. The intended reader knows the project's physical design; the economic definitions and valuation assumptions are introduced here. This is a scenario study, not a forecast of future prices or a demonstrated construction programme.
 
 The [completed comparison](comparison.md) reports Earth, Open Moon and array as three peer
@@ -36,6 +38,7 @@ The accepted C′ distribution places **8 billion people on the Moon, 9 billion 
 | 8 | [Mature atmospheric and vacuum industry](mature_industry.md), [early infrastructure campaigns](early_campaigns.md) | Implemented; physical ratios, matched conditional costs, recurring demand and finite-order capital recovery |
 | 9 | [Slow settling and suspension processes](slow_settling.md) | Implemented; dilute transport, mixing/flow limits, whole-cycle recovery and conditional cost headroom |
 | 10 | [Useful services of the 1.2 atm atmosphere](pressure_advantages.md) | Implemented; matched pressure, composition, heat-flow, liquid and clamping comparisons; conditional cost allowances |
+| 11 | [Industrial combustion and material flammability](industrial_combustion.md) | Implemented; audit, primary-source comparison, conservation and purge references; no qualified lunar material or fire-loss premium |
 
 The [inventory product](results/inventory.json) reads eleven committed products through [inputs.json](inputs.json), checking their full SHA-256 identities and schemas. It retains the source evidence statements and field paths. Quantities are engineering screens; a mass allowance is not a detailed structure and a power requirement is not a price. The baseline is provisioning commit `e89462608af21bd386b23b7eb36cf8373818619b`.
 

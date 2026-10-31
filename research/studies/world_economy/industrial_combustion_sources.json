@@ -1,0 +1,97 @@
+{
+  "source_admission": "Primary publications and agency guidance, with exact reading/access limits. External PDFs remain in temporary storage; no external dataset or complete paper is redistributed. Literature results, conservation calculations and proposed industrial applications remain distinct.",
+  "sources": [
+    {
+      "id": "nasa_configuration_2024",
+      "title": "JSC 29353D: Flammability Configuration Analysis for Spacecraft Applications",
+      "url": "https://standards.nasa.gov/system/files/tmp/JSC%2029353D%20Flammability%20Configuration%20Analysis%20for%20Spacecraft%20Applications.pdf",
+      "reading_scope": "Revision history; sections 5.1 and 5.2, printed pages 11\u201313; selected assembly and battery passages. PDF text retrieved; no complete handbook or current standard audit.",
+      "use": "Oxygen and diluent partial pressures both matter; limited partial-gravity coverage; components that pass separately can fail in an assembly. No lunar material acceptance inferred.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "harper_2016",
+      "title": "Oxygen Partial Pressure and Oxygen Concentration Flammability: Can They Be Correlated?",
+      "url": "https://ntrs.nasa.gov/api/citations/20160001047/downloads/20160001047.pdf",
+      "reading_scope": "Methods, compiled pressure/composition findings, conclusions and Table 2 read. Table 2 on PDF page 15 rendered and inspected. Proposed reaction-site explanation read but not adopted as established kinetics. No audit of every underlying experiment.",
+      "sha256": "c8ca843cabc135097c9081352a2255498e2cedf7fc9aca53fc2c1faa1eac51bc",
+      "use": "Compiled upward flame propagation/self-extinguishment evidence reaches 119.3 kPa for some materials; composition can dominate near normoxic conditions. Supports a material-specific atmospheric advantage, not 121.59 kPa lunar qualification.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "peatross_beyler_1997",
+      "title": "Ventilation Effects on Compartment Fire Characterization",
+      "url": "https://publications.iafss.org/publications/fss/5/403/view/fss_5-403.pdf",
+      "reading_scope": "Abstract, experimental setup, oxygen profiles, burning-rate discussion and conclusions read. Printed page 411 (PDF page 9) rendered; Equation 2 inspected. Not every figure or test record reviewed.",
+      "sha256": "44807fa484a8edb6e740fa257dfc11e96f524b4ec78907b79a6973926d7bb509",
+      "use": "Audit of the inherited 0.65 burning-rate bracket; original normalized correlation uses oxygen at the flame base and is not a general law for a new pressure/gravity.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "hirsch_2006",
+      "title": "Pressure Effects on Oxygen Concentration Flammability Thresholds of Materials for Aerospace Applications",
+      "url": "https://ntrs.nasa.gov/api/citations/20070005041/downloads/20070005041.pdf",
+      "reading_scope": "Abstract, methods, material list and pressure range read from primary PDF text; no table-image inspection.",
+      "use": "Earlier polymer/elastomer tests at 48.2, 85.3 and 101.3 kPa; pressure dependence and material dependence, without 1.2 atm lunar data.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "olson_2024",
+      "title": "Partial gravity flammability of cast PMMA rods in concurrent axial stagnation flow",
+      "url": "https://doi.org/10.1016/j.firesaf.2024.104267",
+      "primary_page": "https://www.sciencedirect.com/science/article/abs/pii/S0379711224001802",
+      "reading_scope": "Indexed primary publisher abstract, highlights and experimental-setup excerpt read. Direct page retrieval returned 403. Full paper, images and supplements unexamined.",
+      "use": "Cast PMMA tests at 0.04\u20131 g, 13.2\u201315.2% O2 and average 57.6 kPa found maximum flammability near lunar gravity. Different atmosphere and geometry from industrial production.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "link_gravity_2018",
+      "title": "The Effect of Gravity on Flame Spread over PMMA Cylinders",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5760683/",
+      "reading_scope": "Primary full-text methods, results, discussion and conclusion passages read; no supplementary data or figure-image review.",
+      "use": "Low opposed-flow ISS tests distinguish slower spread from lower extinction limits, with nonmonotonic flow effects. Array freefall does not supply a universal safer comparison.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "mcallister_2010",
+      "title": "The combined effect of pressure and oxygen concentration on piloted ignition of a solid combustible",
+      "url": "https://research.fs.usda.gov/download/treesearch/35607.pdf",
+      "reading_scope": "Primary PDF abstract and introduction read. Full experimental methods, figures and numerical fits not reviewed.",
+      "use": "Subatmospheric PMMA piloted ignition shows nonmonotonic pressure response; ignition cannot be inferred from propagation tests or oxygen fraction alone.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "cashdollar_2000",
+      "title": "Overview of dust explosibility characteristics",
+      "url": "https://stacks.cdc.gov/view/cdc/9139",
+      "pdf_url": "https://stacks.cdc.gov/view/cdc/9139/cdc_9139_DS1.pdf",
+      "reading_scope": "Primary agency record and PDF text sections 4.4\u20134.7 on oxygen, temperature, pressure and hybrid mixtures obtained through web retrieval. Local PDF download returned 403; local bytes/hash and figures unverified. Web extraction uses an incorrect display title; the agency catalogue and PDF first page identify Cashdollar correctly. Claims restricted to obtained text.",
+      "use": "Dust-specific oxygen/pressure/size/temperature effects and coal propagation below 17.5%; neither dust control nor explosion severity follows from polymer screening.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "doe_process_heating",
+      "title": "Improving Process Heating System Performance: A Sourcebook for Industry, Second Edition",
+      "url": "https://www.energy.gov/sites/default/files/2014/05/f15/process_heating_sourcebook2.pdf",
+      "reading_scope": "Indexed primary text of Appendix B Tip Sheet 3, printed page 71, read. No full handbook review.",
+      "use": "Nitrogen carries sensible heat into exhaust; oxygen enrichment can improve high-temperature heat delivery, requiring its own cost account.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "epa_process_heaters",
+      "title": "Alternative Control Techniques Document: NOx Emissions from Process Heaters",
+      "url": "https://archive.epa.gov/ttn/ozone/web/pdf/procheat.pdf",
+      "reading_scope": "Primary indexed thermal-NOx mechanism passage on printed page 4-2 read; no complete emissions-model or regulatory review.",
+      "use": "Thermal NOx depends on flame temperature, oxygen, nitrogen and residence time. Added nitrogen is not an automatic emissions reduction.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "netl_oxy_combustion",
+      "title": "Advanced Combustion",
+      "url": "https://netl.doe.gov/carbon-management/combustion",
+      "reading_scope": "Agency web description of nitrogen removal, CO2-rich exhaust and oxygen-separation burdens read.",
+      "use": "CO2 recovery and oxygen supply require full process costs; lower dry CO2 fraction alone does not establish the lunar capture penalty.",
+      "accessed": "2026-10-31"
+    }
+  ]
+}

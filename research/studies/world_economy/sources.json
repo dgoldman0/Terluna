@@ -246,5 +246,9 @@
   "pressure_advantages_catalogue": {
     "path": "pressure_advantages_sources.json",
     "scope": "Primary pressure, lift, cooling, water, clamping, compression and gas-composition references. Individual reading and retrieval limits distinguish verified laws from proposed lunar applications."
+  },
+  "industrial_combustion_catalogue": {
+    "path": "industrial_combustion_sources.json",
+    "scope": "Industrial material-flammability evidence and audit, composition and gravity effects, combustion/exhaust and purge consequences. Exact source access limits are retained."
   }
 }

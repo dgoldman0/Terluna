@@ -111,6 +111,12 @@ the 1.2 atm atmosphere as useful infrastructure for buoyant transport, air cooli
 and vacuum-assisted clamping. Its gains depend on the required service, with oxygen partial pressure
 held near Earth's and existing atmosphere costs retained.
 
+The [industrial-combustion assessment](../research/studies/world_economy/industrial_combustion.md)
+audits the earlier fire work for production use. Extra nitrogen supports a material-specific
+propagation-resistance opportunity, subject to lunar-gravity and assembly tests. The calculation
+separates oxygen supply, burner/exhaust composition and nitrogen-purge duties; potential gains
+in material choice or accepted yield are not assigned a general economic premium.
+
 ## Aerophyte crops, living area and services
 
 The [31 October assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef
