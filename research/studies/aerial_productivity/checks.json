@@ -1,0 +1,43 @@
+{
+  "as_of": "2026-10-31",
+  "scope": "Conditional aerial-productivity calculation and documentation on domain/ecology; the new study is separate from the preceding biomass-comparison commit.",
+  "numerical_checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -p no:cacheprovider research/studies/aerial_productivity research/studies/light_limitation/test_biomass_comparison.py",
+      "result": "13 passed in 0.20 seconds: 10 aerial-productivity tests and 3 surface-comparison tests.",
+      "coverage": "Shared photon conservation, dark-body carbon failure, fixed renewal versus optional allocation, surface production at zero light, optical column mass independent of depth, exact stored-product regeneration, one shared phosphorus fallout credit, and rejection of communities with underfunded bottom layers."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python shared/check_layers.py",
+      "result": "1141 files checked, 0 violations."
+    },
+    {
+      "command": "git diff --check",
+      "result": "Passed."
+    }
+  ],
+  "review": {
+    "activity": "Substantive reading of the calculation and report, including separate reviews of light/carbon accounting and water, phosphorus and microbial interpretation.",
+    "findings_resolved": [
+      "Phosphorus demand uses losses before atmospheric supply, so the shared fallout is credited only once.",
+      "A positive class-mean budget is insufficient for credited community production when a class bottom fails; both checks are required.",
+      "Water throughput retains the source's 1.83 kg C/m2/year assimilation basis; the concentrating trait's energy and combined physiology remain unresolved.",
+      "The microbial growth inputs are prescribed screening parameters, not measured airborne phototroph division rates.",
+      "The report distinguishes inherited diffuse-light canopy production from the new vertical-beam mutual-shading approximation. Existing angular tenant-light evidence is documented; no uncomputed diffuse-light production boost is added."
+    ],
+    "claim_limit": "Numerical and substantive review does not establish empirical organism viability, a likely sky coverage, a maximum carrying capacity, or a coupled climate response. External-source access is recorded in sources.json; complete scholarly source review was not performed. The numerical1–5Gt C/year interval is not resolved for multiple scattering through the aerial community; a likely interval cannot be inferred from the prescribed cover and shadow cases."
+  },
+  "prior_commit_validation": {
+    "commit": "1478c9f",
+    "command": "make check",
+    "result": "Passed before the aerial study: 2825 Python tests passed, 20 skipped; JavaScript, layer, provenance, research and ensemble checks passed.",
+    "log": "/tmp/terluna-ecology-biomass-make-check.log",
+    "scope_limit": "This earlier run validates the preceding biomass-comparison commit; current_full_suite records the new aerial study check."
+  },
+  "current_full_suite": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+    "result": "Passed: 2835 Python tests passed, 20 skipped; JavaScript, calendar, layer, provenance and ensemble checks passed.",
+    "log": "/tmp/terluna-ecology-aerial-make-check.log",
+    "scope": "Aerial-productivity working tree before its commit, with the scattered-light limitation recorded."
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "scope": "Sources and inherited evidence for the 31 October 2026 aerial-productivity screen. Products are hashed by run.py; original datasets and papers are not copied here.",
+  "local_inputs": [
+    {
+      "path": "research/studies/sky_ecology/results/sky_ecology.json",
+      "use": "Carbon allocations per class, geometry, mature replacement, class mixture, phosphorus stocks and pre-supply losses. These are engineered-organism screening scenarios, not observed organisms."
+    },
+    {
+      "path": "research/studies/aerophytes/results/aerophytes.json",
+      "use": "Older vertical atmosphere, water-use traits and gas/structure feasibility. Coupled traits and wet/dry trajectories remain unvalidated."
+    },
+    {
+      "path": "research/studies/aerial_ecology/results/aerial_ecology.json",
+      "use": "Shared Earth-analogue phosphorus fallout and optical/physiological precedent; see its sources.json for the original access record."
+    },
+    {
+      "path": "research/studies/light_limitation/results/biomass_comparison.json",
+      "use": "Surface reference18.7877Gt C/year, separate from all sky production, and provisional light adjustment; see biomass_comparison_inputs.json for climate provenance."
+    }
+  ],
+  "published_sources": [
+    {
+      "citation": "Dillon KP et al. (2020), Cyanobacteria and Algae in Clouds and Rain in the Area of puy de Dome, Central France",
+      "url": "https://journals.asm.org/doi/10.1128/AEM.01850-20",
+      "access": "Publisher abstract read 2026-10-31",
+      "use": "Viable oxygenic phototrophs occur in cloud/rain samples; supports biological precedent, not a demonstrated airborne autotrophic production rate or lunar carrying capacity."
+    },
+    {
+      "citation": "Peguilhan R et al. (2025), Clouds influence the functioning of airborne microorganisms",
+      "url": "https://bg.copernicus.org/articles/22/1257/2025/",
+      "access": "Publisher abstract and indexed results/discussion excerpts read 2026-10-31; no claim of complete source review",
+      "use": "Metabolic activity depends on cloud-water conditions; Eulerian atmospheric depth or cloud presence does not establish a complete productive aerial life cycle."
+    },
+    {
+      "citation": "Mercado LM et al. (2009), Impact of changes in diffuse radiation on the global land carbon sink",
+      "url": "https://doi.org/10.1038/nature07949",
+      "access": "Publisher/repository indexed records inspected; publisher open failed. No numerical inputs taken from this paper for the new screen.",
+      "use": "Context only for the distinction between diffuse redistribution and extra photons; local canopy products supply the numerical response assumptions."
+    }
+  ],
+  "new_scenario_choices": [
+    "Sum projected area at1,2,5,10,20,30,50 and100percent of lunar area; no coverage selected or assigned probability.",
+    "Poisson vertical-beam interception, with mixed or class-stratified positions; no angular or cloud radiative simulation.",
+    "Mature adult hazard0.003/year; low-maintenance photolytic reference bodies, existing50/30/20 class mix.",
+    "Habitat-specific surface elasticities0.65 wet margins,0.6 productive coasts,0.1 oligotrophic waters,0.8 for rainfed light potential. They approximate inherited model response ranges; no new calibration.",
+    "Half of unallocated assimilate converted to tissue is a potential allocation only, requiring nutrients and a destination for mass; excluded from headline incremental production.",
+    "Microbial columns use prescribed0.2 favourable duty and3.6-day doubling; a separate optimistic engineered case uses0.5 duty and1-day doubling. Neither is measured lunar photoautotrophic performance."
+  ],
+  "scattering_context": {
+    "use": "Existing diffuse and underside light evidence, used to interpret the missing whole-sky angular transport. No added numerical production multiplier.",
+    "files": {
+      "illumination/surface_light/README.md": "e1eb4fe2d21d89402dcb25d4810883953ee803aa1ad5eb71ba1a92a86b25ad67",
+      "illumination/surface_light/results/surface_light.json": "e2406dbceb34193eaef5bd8a1dd6ea20940be72934301ef618221fdc79ad5572",
+      "biosphere/canopy/README.md": "6bfeed9751133df757dce314abcda51cceeaa01be25c7bebde5a13c4cb2334f4",
+      "research/studies/sky_ecology/tenants.md": "5260f45213c9e62a5c6bdf4b8c7a9311647777efb486dd88642e2ab357d867fa"
+    },
+    "claims": "Old clear-sky diffuse PAR37/56/80percent at solar elevations90/30/10degrees; canopy baseline explicitly includes diffuse illumination; at10km lone underside19\u201330percent and reef underside11\u201322percent of top horizontal light over ground albedo0.05\u20130.2. These do not establish attenuation or production in a crowded aerial community."
+  }
+}

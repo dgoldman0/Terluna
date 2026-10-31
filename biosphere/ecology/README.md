@@ -32,6 +32,21 @@ correction is small, while rain, respiration and biological adaptation remain co
 This is a conditional capability estimate, with a reproducible comparison calculation,
 not a completed 301 K ecosystem model.
 
+## Production in a richer sky, 31 October 2026
+
+The [aerial-production screen](../../research/studies/aerial_productivity/README.md)
+extends the former illustrative 0.1–2% cover. At 10–20% summed projected organism area,
+a stratified community adds about 1–5 Gt C/year to whole-world production after two
+alternative surface-shading responses. The calculation shares one photon budget among
+heights, checks class-mean and class-bottom carbon balances, and accounts separately for
+host tissue, sugar export and unallocated assimilate. Nutrient return, water delivery and
+combined organism traits remain conditions; coverage and carrying capacity are not established.
+Diffuse light is already included in the inherited ground-canopy model, but the new aerial
+mutual-shading calculation is vertical-beam only. The 1–5 Gt range remains provisional until
+angular transport through a rich aerial community is computed.
+Its phosphorus comparison credits shared fallout only once, and its separate microbial
+screen fixes column biomass by optical depth rather than multiplying by atmospheric volume.
+
 ## The 9 October follow-ups
 
 **The [coupled aerophyte study](../../research/studies/aerophytes/README.md) sets how large aerophytes grow, how

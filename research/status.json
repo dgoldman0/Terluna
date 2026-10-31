@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19",
+  "updated": "2026-10-31",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -916,6 +916,22 @@
         "the photosynthetic calcifiers' 354-hour night at about 30 °C"
       ],
       "next_session_task": "Nothing starts before the author's word; then the plan's order (studies/aquatic_biogeochemistry/plan.md): the seas' chemistry with magnesium kept on resources, the calcifiers and the floors on ecology, the mixing form's check on climate, then the harvests and the coupled study."
+    },
+    {
+      "topic": "aerial_productivity",
+      "condition": "conditional_area_and_stratification_screen_2026_10_31; shared_photons_and_surface_displacement; no_selected_cover_or_established_carrying_capacity",
+      "material": [
+        "studies/aerial_productivity/README.md",
+        "studies/aerial_productivity/results/aerial_productivity.json",
+        "studies/aerial_productivity/checks.json",
+        "studies/light_limitation/biomass_comparison.md"
+      ],
+      "unresolved": [
+        "Population coverage and recruitment along the final 301 K weather, including shadow duration, water collection and trim.",
+        "Upward phosphorus return, nitrogen fixation and trace-element supply, with the traits measured together.",
+        "Angular transport and multiple scattering through the aerial community, including diffuse light on flanks and undersides; biological cloud, albedo and hydrological feedback at rich occupancy; additional tissue allocation and its mass and nutrient costs."
+      ],
+      "next_session_task": "Use final climate fields to test one stratified community along routes, closing light, dry-gap water and upward nutrient return before treating its coverage as capacity."
     }
   ]
 }
