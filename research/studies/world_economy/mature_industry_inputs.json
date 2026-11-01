@@ -7,11 +7,11 @@
       "schema": "terluna.research.industrial-physics/1"
     },
     "research/studies/world_economy/results/construction.json": {
-      "sha256": "91e84c3e7c4ac781f39b9fb21ea08b17e283a7fe7a24fb0eb4589f02e20fd6fe",
+      "sha256": "e8877ce579ba47e8391ff3972fd9beb9d110ebc0604e808471e365eb59551c5a",
       "schema": "terluna.research.world-economy-construction/1"
     },
     "research/studies/world_economy/results/comparison.json": {
-      "sha256": "fde6d90452d53bfea58993c4c74faf66fca7acef9f55fecb62d8d984b96898f8",
+      "sha256": "49817ff22ae26c0a99deca0bb0389b1a0203ae48f4de6fda0e783b2fe3dfe077",
       "schema": "terluna.research.world-economy-comparison/1"
     },
     "resources/results/industry.json": {

@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "2d81cc7c9ab2857e0301dda6d03f04ae0776f2245a0cd4bdf5b7e704351a1a13",
+      "research/studies/world_economy/amenities_inputs.json": "b87c37d9757b2313bd40c48b580b18fc8751dbcc41c183426c7d6c6c7e26b64a",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "fde6d90452d53bfea58993c4c74faf66fca7acef9f55fecb62d8d984b96898f8"
+        "sha256": "49817ff22ae26c0a99deca0bb0389b1a0203ae48f4de6fda0e783b2fe3dfe077"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "91e84c3e7c4ac781f39b9fb21ea08b17e283a7fe7a24fb0eb4589f02e20fd6fe"
+        "sha256": "e8877ce579ba47e8391ff3972fd9beb9d110ebc0604e808471e365eb59551c5a"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "80100d419add636fb894c5e69bf9b88db6eb431d5d163b6802055aa179bec43f"
+        "sha256": "902ee8e5f60a811183daf6cf9e685973daa98ace176810bd1a516d64fbeba481"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "cde0717c196ff647d65af7981826b2e8bad56b9a4eb041371feb0485e6d3535c"
+        "sha256": "d2348a171c27cdf0c80480593f8bb13ac295ae54e9721233a8420d477336867a"
       }
     }
   },

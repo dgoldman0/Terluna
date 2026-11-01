@@ -70,7 +70,7 @@ programme at the central mortality rate; the calculation credits no crop in that
 Lesser bodies and reef modules retain allocation margins. Real shade acclimation, directional
 light and changing tissue investment could change these responses.
 
-The ecology branch's richer-sky estimate (the aerial-productivity study, domain/ecology 9633550) counts the surface's light and rain losses at first order on a vertical-beam column, with the Moon's multiple scattering through the community still to compute, so this provisioning account keeps its crops per area, without a global cover. Existing tenant-light
+The ecology branch's richer-sky estimate ([the aerial-productivity study](../research/studies/aerial_productivity/README.md)) counts the surface's light and rain losses at first order on a vertical-beam column, with the Moon's multiple scattering through the community still to compute, so this provisioning account keeps its crops per area, without a global cover. Existing tenant-light
 calculations do support photosynthesis on flanks and undersides: at 10 km an isolated underside
 receives 19–30% of top horizontal illumination, and a reef underside 11–22%, over the stated
 ground-albedo range. A separate crop model must establish how much production those surfaces
