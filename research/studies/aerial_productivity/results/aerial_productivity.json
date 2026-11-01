@@ -1,21 +1,30 @@
 {
-  "schema": "terluna.research.aerial-productivity/1",
-  "evidence": "Conditional column, carbon and resource arithmetic on inherited engineered-organism products. Mutual shading is vertical-beam only: inherited ground-canopy diffuse light is included, but angular transport through the aerial community is unresolved. Occupancy is prescribed, not predicted; no stable rich sky or new 301 K environment has been established.",
-  "reading_rule": "Annual production in Gt C per Julian year. Accounted sky organic production is renewed/replacement host tissue plus sugar export, not a complete NPP account. Whole-world increment subtracts one of two alternative surface responses. Credited production requires BOTH class-mean and class-bottom light-budget checks; failure returns null. A positive mean-budget-only diagnostic is not credited. These checks do not establish individual viability under intermittent opaque shadows. Water is throughput in Gt/year; P is return needed, not proven supply.",
+  "schema": "terluna.research.aerial-productivity/2",
+  "evidence": "Conditional column, carbon and resource arithmetic on inherited engineered-organism products, with occupancy prescribed. Mutual shading is a vertical-beam column; the inherited ground canopy includes diffuse light. The rain's response to the sunlight the organisms keep from the surface is first-order, from the GCM's gas-dimming branch on the 0.950 design case: absorption aloft probably cuts rain more than the same surface dimming, and reflection moves the planet's energy balance instead, which needs a GCM run. The sky rules scale their products' 1% basis linearly.",
+  "reading_rule": "Annual production in Gt C per Julian year. Accounted sky production is renewed and replacement host tissue plus sugar export. The whole-world increment subtracts one of two surface responses, both with the rain channel; the light-only increment is kept beside it. Credited production requires both the class-mean and the class-bottom light-budget checks; failure returns null. Water is throughput in Gt/year; phosphorus is the return needed. Sky-rule rates are per town or receiver per day.",
   "producer": {
     "files": {
-      "research/studies/aerial_productivity/run.py": "c7e77e71f957298f6bf3e292a7349aad18ca60e45a4bad84794ca9a3a0fbfe56"
+      "research/studies/aerial_productivity/run.py": "98acee103edbc202b8a479a9bfd5be8c92c1e7fceab887c5b9ebf1dcf8ec4438"
     },
     "inputs": {
       "research/studies/sky_ecology/results/sky_ecology.json": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af",
       "research/studies/aerophytes/results/aerophytes.json": "3721a734cfc100c2d2070db9f7b56de94b03e227631cb56ac6a7b08801f096ca",
       "research/studies/light_limitation/results/light_limitation.json": "f5b61fa5e6d1d5ddd2f81bd3416d19f1bf8f8b88d90142332db371fdb886466b",
-      "research/studies/light_limitation/results/biomass_comparison.json": "80928037737d7dc25aaf976c26436e71ac79f986c70314e4a6d8df2dfd2f66d4",
-      "research/studies/light_limitation/biomass_comparison_inputs.json": "83bad3aaccc97a284ccdc78ada1876529646c96736216bccb752040e4681be9d",
+      "research/studies/light_limitation/results/biomass_comparison.json": "74d1ad0d711308f22355fd0eabd662d390f58a146219bf722d0766a6a8e506ed",
+      "research/studies/light_limitation/biomass_comparison_inputs.json": "c667d7ad24f2ca4b941bebbcd3730056fb2b70cb3dbaa5604167d4e079b1d32f",
       "research/studies/aerial_ecology/results/aerial_ecology.json": "deeca7f1bc7e2893da4096b0d0c431ab4703aa625ffaea48a971e090b4abba61",
-      "research/studies/aerial_productivity/parameters.json": "dee4d6aa947718ad78a47a6a3b8cd28c1c2feec042a4b0aa2e67805d4f322a57",
-      "research/studies/aerial_productivity/sources.json": "f91704368ff7cf693dfb4270e774c8fbce01dda0a5e45bab170c7e9032be5452"
+      "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "5c7aac4c5f3dfe3736fd4f128074a6cd3010a2fbe61f966de36c7451aa9dae10",
+      "research/studies/domain_synthesis/results/ledgers.json": "b5018ca12051eb8c40ee5fcd3b5785f8842b6730bc0f4499650c520534402ace",
+      "provisioning/results/power.json": "bdd1f27720fc017cdea30aba2f36319db519caccc337b03429d3da4cb29aac7f",
+      "research/studies/aerial_productivity/parameters.json": "f12ac7cf4e9e591543dcd9524d411a65ca9416e079dea5495f8a2029685f783a"
     },
+    "context": [
+      "research/studies/aerial_productivity/sources.json",
+      "illumination/surface_light/README.md",
+      "biosphere/canopy/README.md",
+      "research/studies/sky_ecology/tenants.md",
+      "research/decisions.md"
+    ],
     "constants": {
       "MOON_RADIUS": 1737400.0,
       "JULIAN_YEAR_DAYS": 365.25
@@ -30,6 +39,18 @@
   },
   "rainfed_light_potential_gt_c_year": 47.345,
   "relative_provisional_sunlight": 0.9819789473684211,
+  "rain_channel": {
+    "source_run": "A28_gases",
+    "dimming_fraction": 0.01694,
+    "rain_per_unit_dimming_land": -0.550057,
+    "rain_fed_growth_change_gt_c": [
+      -0.118418,
+      -0.121835
+    ],
+    "rain_fed_reference_gt_c_year": 14.3,
+    "growth_fraction_per_unit_interception": 0.49589460126650203,
+    "gt_c_per_percent_interception": 0.0709129279811098
+  },
   "class_shares": {
     "sky_reef": 0.5,
     "round_giant": 0.3,
@@ -164,11 +185,38 @@
       "surface_loss": {
         "homogenized_gt_c_year": 0.0,
         "persistent_opaque_gt_c_year": 0.0,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
+      },
+      "surface_loss_light_only": {
+        "homogenized_gt_c_year": 0.0,
+        "persistent_opaque_gt_c_year": 0.0,
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": 0.0,
         "persistent_opaque_gt_c_year": 0.0
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": 0.0,
+        "persistent_opaque_gt_c_year": 0.0
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0,
+          0.0
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.0,
+            0.0
+          ],
+          "ground": [
+            0.0,
+            0.0
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         0.0,
@@ -310,13 +358,40 @@
       "sky_accounted_gt_c_year": 0.25592255413901394,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.09917788925937825,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.09659425604072469,
+        "persistent_opaque_gt_c_year": 0.25679807121128645,
+        "rainfed_loss_gt_c_year": 0.0705595422745322,
+        "rain_share_of_rainfed_growth_lost": 0.004934233725491714
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.026034713766192482,
         "persistent_opaque_gt_c_year": 0.18694060811296914,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.15932829809828924,
+        "persistent_opaque_gt_c_year": -0.0008755170722725136
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 0.22988784037282145,
         "persistent_opaque_gt_c_year": 0.0689819460260448
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0426,
+          1.16
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.2286,
+            7.494
+          ],
+          "ground": [
+            0.3884,
+            13.89
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         5163.334204850158,
@@ -458,13 +533,40 @@
       "sky_accounted_gt_c_year": 0.5118451082780279,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.19537101401021886,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.19232250437009424,
+        "persistent_opaque_gt_c_year": 0.5096576884723565,
+        "rainfed_loss_gt_c_year": 0.14041700537284818,
+        "rain_share_of_rainfed_growth_lost": 0.009819371005094323
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.051905498997246044,
         "persistent_opaque_gt_c_year": 0.3720211260961826,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.31952260390793363,
+        "persistent_opaque_gt_c_year": 0.0021874198056713867
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 0.4599396092807818,
         "persistent_opaque_gt_c_year": 0.13982398218184527
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0852,
+          2.32
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.4572,
+            14.988
+          ],
+          "ground": [
+            0.7768,
+            27.78
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         10326.668409700316,
@@ -606,13 +708,40 @@
       "sky_accounted_gt_c_year": 1.2796127706950697,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.4663373156375586,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.4743911518771784,
+        "persistent_opaque_gt_c_year": 1.2452656036948309,
+        "rainfed_loss_gt_c_year": 0.3458464307978151,
+        "rain_share_of_rainfed_growth_lost": 0.02418506509075626
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.12854472107936335,
         "persistent_opaque_gt_c_year": 0.9162863023613997,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.8052216188178913,
+        "persistent_opaque_gt_c_year": 0.034347167000238876
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 1.1510680496157064,
         "persistent_opaque_gt_c_year": 0.36332646833367
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.213,
+          5.8
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            1.143,
+            37.47
+          ],
+          "ground": [
+            1.9420000000000002,
+            69.45
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         25816.671024250794,
@@ -754,13 +883,40 @@
       "sky_accounted_gt_c_year": 2.5592255413901395,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.8609670360467956,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.9279203409738377,
+        "persistent_opaque_gt_c_year": 2.3984923675203835,
+        "rainfed_loss_gt_c_year": 0.6748257321312465,
+        "rain_share_of_rainfed_growth_lost": 0.047190610638548645
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.25309460884259116,
         "persistent_opaque_gt_c_year": 1.7878847944345213,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 1.6313052004163018,
+        "persistent_opaque_gt_c_year": 0.16073317386975594
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 2.306130932547548,
         "persistent_opaque_gt_c_year": 0.7713407469556182
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.426,
+          11.6
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            2.286,
+            74.94
+          ],
+          "ground": [
+            3.8840000000000003,
+            138.9
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         51633.34204850159,
@@ -902,13 +1058,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 1.7761430199685027,
+        "persistent_opaque_gt_c_year": 4.458053633588328,
+        "rainfed_loss_gt_c_year": 1.2854333052171096,
+        "rain_share_of_rainfed_growth_lost": 0.0898904409242733
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.49070971475139297,
         "persistent_opaque_gt_c_year": 3.405629855576406,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.852,
+          23.2
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            4.572,
+            149.88
+          ],
+          "ground": [
+            7.768000000000001,
+            277.8
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         103266.68409700318,
@@ -1050,13 +1233,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 2.5517397874818752,
+        "persistent_opaque_gt_c_year": 6.231001030217037,
+        "rainfed_loss_gt_c_year": 1.8379338850813234,
+        "rain_share_of_rainfed_growth_lost": 0.12852684511058204
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.713805902400552,
         "persistent_opaque_gt_c_year": 4.869426119740454,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          1.278,
+          34.8
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            6.858,
+            224.82
+          ],
+          "ground": [
+            11.652000000000001,
+            416.70000000000005
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         154900.02614550473,
@@ -1198,13 +1408,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 3.9101949560733704,
+        "persistent_opaque_gt_c_year": 9.08472443695066,
+        "rainfed_loss_gt_c_year": 2.79020629905728,
+        "rain_share_of_rainfed_growth_lost": 0.19511932161239726
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 1.1199886570160906,
         "persistent_opaque_gt_c_year": 7.392378769649103,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          2.13,
+          57.99999999999999
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            11.43,
+            374.7
+          ],
+          "ground": [
+            19.42,
+            694.5
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         258166.7102425079,
@@ -1346,13 +1583,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 6.420527152380041,
+        "persistent_opaque_gt_c_year": 13.525121854056078,
+        "rainfed_loss_gt_c_year": 4.482551966358839,
+        "rain_share_of_rainfed_growth_lost": 0.31346517247264605
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 1.9379751860212016,
         "persistent_opaque_gt_c_year": 11.876083141650039,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          4.26,
+          115.99999999999999
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            22.86,
+            749.4
+          ],
+          "ground": [
+            38.84,
+            1389.0
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         516333.4204850158,
@@ -1496,11 +1760,38 @@
       "surface_loss": {
         "homogenized_gt_c_year": 0.0,
         "persistent_opaque_gt_c_year": 0.0,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
+      },
+      "surface_loss_light_only": {
+        "homogenized_gt_c_year": 0.0,
+        "persistent_opaque_gt_c_year": 0.0,
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": 0.0,
         "persistent_opaque_gt_c_year": 0.0
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": 0.0,
+        "persistent_opaque_gt_c_year": 0.0
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0,
+          0.0
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.0,
+            0.0
+          ],
+          "ground": [
+            0.0,
+            0.0
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         0.0,
@@ -1642,13 +1933,40 @@
       "sky_accounted_gt_c_year": 0.25592255413901394,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.09856712394866685,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.09641707059982568,
+        "persistent_opaque_gt_c_year": 0.25627663662541744,
+        "rainfed_loss_gt_c_year": 0.0704158774711683,
+        "rain_share_of_rainfed_growth_lost": 0.004924187235746036
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.02600119312865739,
         "persistent_opaque_gt_c_year": 0.1865599822636595,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.15950548353918825,
+        "persistent_opaque_gt_c_year": -0.00035408248640350637
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 0.22992136101035654,
         "persistent_opaque_gt_c_year": 0.06936257187535444
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0426,
+          1.16
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.2286,
+            7.494
+          ],
+          "ground": [
+            0.3884,
+            13.89
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         5163.334204850158,
@@ -1790,13 +2108,40 @@
       "sky_accounted_gt_c_year": 0.5118451082780279,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.19294745571498617,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.1916190374099266,
+        "persistent_opaque_gt_c_year": 0.5075997980260647,
+        "rainfed_loss_gt_c_year": 0.13984693366147727,
+        "rain_share_of_rainfed_growth_lost": 0.009779505850452935
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.05177210374844934,
         "persistent_opaque_gt_c_year": 0.3705107768371523,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.3202260708681013,
+        "persistent_opaque_gt_c_year": 0.004245310251963175
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 0.46007300452957856,
         "persistent_opaque_gt_c_year": 0.1413343314408756
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0852,
+          2.32
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.4572,
+            14.988
+          ],
+          "ground": [
+            0.7768,
+            27.78
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         10326.668409700316,
@@ -1938,13 +2283,40 @@
       "sky_accounted_gt_c_year": 1.2796127706950697,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.4515491703733965,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.4700916868991043,
+        "persistent_opaque_gt_c_year": 1.2329088135159478,
+        "rainfed_loss_gt_c_year": 0.3423679490565911,
+        "rain_share_of_rainfed_growth_lost": 0.023941814619342063
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.1277237378425132,
         "persistent_opaque_gt_c_year": 0.9070704051056602,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.8095210837959654,
+        "persistent_opaque_gt_c_year": 0.0467039571791219
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 1.1518890328525566,
         "persistent_opaque_gt_c_year": 0.37254236558940956
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.213,
+          5.8
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            1.143,
+            37.47
+          ],
+          "ground": [
+            1.9420000000000002,
+            69.45
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         25816.671024250794,
@@ -2086,13 +2458,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.9113484842352698,
+        "persistent_opaque_gt_c_year": 2.3522162617589126,
+        "rainfed_loss_gt_c_year": 0.6614548549493745,
+        "rain_share_of_rainfed_growth_lost": 0.04625558426219404
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.24989362928589529,
         "persistent_opaque_gt_c_year": 1.7524599627135682,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.426,
+          11.6
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            2.286,
+            74.94
+          ],
+          "ground": [
+            3.8840000000000003,
+            138.9
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         51633.34204850159,
@@ -2234,13 +2633,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 1.7145514394141186,
+        "persistent_opaque_gt_c_year": 4.295262611878812,
+        "rainfed_loss_gt_c_year": 1.2360103353860317,
+        "rain_share_of_rainfed_growth_lost": 0.08643428918783432
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.4785411040280868,
         "persistent_opaque_gt_c_year": 3.2746885294688326,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.852,
+          23.2
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            4.572,
+            149.88
+          ],
+          "ground": [
+            7.768000000000001,
+            277.8
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         103266.68409700318,
@@ -2382,13 +2808,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 2.422858277788625,
+        "persistent_opaque_gt_c_year": 5.907479024766738,
+        "rainfed_loss_gt_c_year": 1.735082944241645,
+        "rain_share_of_rainfed_growth_lost": 0.12133447162528985
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.6877753335469801,
         "persistent_opaque_gt_c_year": 4.596932608504901,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          1.278,
+          34.8
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            6.858,
+            224.82
+          ],
+          "ground": [
+            11.652000000000001,
+            416.70000000000005
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         154900.02614550473,
@@ -2530,13 +2983,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 3.5996997697533715,
+        "persistent_opaque_gt_c_year": 8.37477164936267,
+        "rainfed_loss_gt_c_year": 2.545143324711255,
+        "rain_share_of_rainfed_growth_lost": 0.1779820506791088
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 1.0545564450421165,
         "persistent_opaque_gt_c_year": 6.743108380791226,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          2.13,
+          57.99999999999999
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            11.43,
+            374.7
+          ],
+          "ground": [
+            19.42,
+            694.5
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         258166.7102425079,
@@ -2678,13 +3158,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 5.536421807208598,
+        "persistent_opaque_gt_c_year": 11.840950980451815,
+        "rainfed_loss_gt_c_year": 3.803695021056578,
+        "rain_share_of_rainfed_growth_lost": 0.26599265881514533
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 1.7327267861520192,
         "persistent_opaque_gt_c_year": 10.077518042081303,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          4.26,
+          115.99999999999999
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            22.86,
+            749.4
+          ],
+          "ground": [
+            38.84,
+            1389.0
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         516333.4204850158,
@@ -2828,11 +3335,38 @@
       "surface_loss": {
         "homogenized_gt_c_year": 0.0,
         "persistent_opaque_gt_c_year": 0.0,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
+      },
+      "surface_loss_light_only": {
+        "homogenized_gt_c_year": 0.0,
+        "persistent_opaque_gt_c_year": 0.0,
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": 0.0,
         "persistent_opaque_gt_c_year": 0.0
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": 0.0,
+        "persistent_opaque_gt_c_year": 0.0
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0,
+          0.0
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.0,
+            0.0
+          ],
+          "ground": [
+            0.0,
+            0.0
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         0.0,
@@ -2974,13 +3508,40 @@
       "sky_accounted_gt_c_year": 0.25592255413901394,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.09917788925937826,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.09659425604072469,
+        "persistent_opaque_gt_c_year": 0.25679807121128645,
+        "rainfed_loss_gt_c_year": 0.0705595422745322,
+        "rain_share_of_rainfed_growth_lost": 0.004934233725491714
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.026034713766192482,
         "persistent_opaque_gt_c_year": 0.18694060811296914,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.15932829809828924,
+        "persistent_opaque_gt_c_year": -0.0008755170722725136
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 0.22988784037282145,
         "persistent_opaque_gt_c_year": 0.0689819460260448
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0426,
+          1.16
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.2286,
+            7.494
+          ],
+          "ground": [
+            0.3884,
+            13.89
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         5163.334204850158,
@@ -3122,13 +3683,40 @@
       "sky_accounted_gt_c_year": 0.5118451082780279,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.19537101401021886,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.19232250437009424,
+        "persistent_opaque_gt_c_year": 0.5096576884723565,
+        "rainfed_loss_gt_c_year": 0.14041700537284818,
+        "rain_share_of_rainfed_growth_lost": 0.009819371005094323
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.051905498997246044,
         "persistent_opaque_gt_c_year": 0.3720211260961826,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.31952260390793363,
+        "persistent_opaque_gt_c_year": 0.0021874198056713867
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 0.4599396092807818,
         "persistent_opaque_gt_c_year": 0.13982398218184527
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0852,
+          2.32
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.4572,
+            14.988
+          ],
+          "ground": [
+            0.7768,
+            27.78
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         10326.668409700316,
@@ -3270,13 +3858,40 @@
       "sky_accounted_gt_c_year": 1.2796127706950697,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.46633731563755865,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.4743911518771784,
+        "persistent_opaque_gt_c_year": 1.2452656036948309,
+        "rainfed_loss_gt_c_year": 0.3458464307978151,
+        "rain_share_of_rainfed_growth_lost": 0.02418506509075626
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.12854472107936335,
         "persistent_opaque_gt_c_year": 0.9162863023613997,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.8052216188178913,
+        "persistent_opaque_gt_c_year": 0.034347167000238876
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 1.1510680496157064,
         "persistent_opaque_gt_c_year": 0.36332646833367
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.213,
+          5.8
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            1.143,
+            37.47
+          ],
+          "ground": [
+            1.9420000000000002,
+            69.45
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         25816.671024250794,
@@ -3418,13 +4033,40 @@
       "sky_accounted_gt_c_year": 2.5592255413901395,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.8609670360467954,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.9279203409738377,
+        "persistent_opaque_gt_c_year": 2.3984923675203835,
+        "rainfed_loss_gt_c_year": 0.6748257321312465,
+        "rain_share_of_rainfed_growth_lost": 0.047190610638548645
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.25309460884259116,
         "persistent_opaque_gt_c_year": 1.7878847944345213,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 1.6313052004163018,
+        "persistent_opaque_gt_c_year": 0.16073317386975594
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 2.306130932547548,
         "persistent_opaque_gt_c_year": 0.7713407469556182
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.426,
+          11.6
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            2.286,
+            74.94
+          ],
+          "ground": [
+            3.8840000000000003,
+            138.9
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         51633.34204850159,
@@ -3566,13 +4208,40 @@
       "sky_accounted_gt_c_year": 5.118451082780279,
       "additional_tissue_allocation_sensitivity_gt_c_year": 1.4489220124625737,
       "surface_loss": {
+        "homogenized_gt_c_year": 1.7761430199685027,
+        "persistent_opaque_gt_c_year": 4.458053633588328,
+        "rainfed_loss_gt_c_year": 1.2854333052171096,
+        "rain_share_of_rainfed_growth_lost": 0.0898904409242733
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.49070971475139297,
         "persistent_opaque_gt_c_year": 3.405629855576406,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 3.3423080628117763,
+        "persistent_opaque_gt_c_year": 0.6603974491919509
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 4.627741368028886,
         "persistent_opaque_gt_c_year": 1.712821227203873
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.852,
+          23.2
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            4.572,
+            149.88
+          ],
+          "ground": [
+            7.768000000000001,
+            277.8
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         103266.68409700318,
@@ -3714,13 +4383,40 @@
       "sky_accounted_gt_c_year": 7.6776766241704175,
       "additional_tissue_allocation_sensitivity_gt_c_year": 1.7898454617491435,
       "surface_loss": {
+        "homogenized_gt_c_year": 2.5517397874818752,
+        "persistent_opaque_gt_c_year": 6.231001030217037,
+        "rainfed_loss_gt_c_year": 1.8379338850813234,
+        "rain_share_of_rainfed_growth_lost": 0.12852684511058204
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.713805902400552,
         "persistent_opaque_gt_c_year": 4.869426119740454,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 5.125936836688542,
+        "persistent_opaque_gt_c_year": 1.4466755939533806
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 6.963870721769865,
         "persistent_opaque_gt_c_year": 2.8082505044299637
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          1.278,
+          34.8
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            6.858,
+            224.82
+          ],
+          "ground": [
+            11.652000000000001,
+            416.70000000000005
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         154900.02614550473,
@@ -3862,13 +4558,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 3.9101949560733704,
+        "persistent_opaque_gt_c_year": 9.08472443695066,
+        "rainfed_loss_gt_c_year": 2.79020629905728,
+        "rain_share_of_rainfed_growth_lost": 0.19511932161239726
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 1.1199886570160906,
         "persistent_opaque_gt_c_year": 7.392378769649103,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          2.13,
+          57.99999999999999
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            11.43,
+            374.7
+          ],
+          "ground": [
+            19.42,
+            694.5
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         258166.7102425079,
@@ -4010,13 +4733,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 6.420527152380041,
+        "persistent_opaque_gt_c_year": 13.525121854056078,
+        "rainfed_loss_gt_c_year": 4.482551966358839,
+        "rain_share_of_rainfed_growth_lost": 0.31346517247264605
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 1.9379751860212016,
         "persistent_opaque_gt_c_year": 11.876083141650039,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          4.26,
+          115.99999999999999
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            22.86,
+            749.4
+          ],
+          "ground": [
+            38.84,
+            1389.0
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         516333.4204850158,
@@ -4160,11 +4910,38 @@
       "surface_loss": {
         "homogenized_gt_c_year": 0.0,
         "persistent_opaque_gt_c_year": 0.0,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
+      },
+      "surface_loss_light_only": {
+        "homogenized_gt_c_year": 0.0,
+        "persistent_opaque_gt_c_year": 0.0,
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": 0.0,
         "persistent_opaque_gt_c_year": 0.0
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": 0.0,
+        "persistent_opaque_gt_c_year": 0.0
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0,
+          0.0
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.0,
+            0.0
+          ],
+          "ground": [
+            0.0,
+            0.0
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         0.0,
@@ -4306,13 +5083,40 @@
       "sky_accounted_gt_c_year": 0.25592255413901394,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.09856712394866685,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.09641707059982568,
+        "persistent_opaque_gt_c_year": 0.25627663662541744,
+        "rainfed_loss_gt_c_year": 0.0704158774711683,
+        "rain_share_of_rainfed_growth_lost": 0.004924187235746036
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.02600119312865739,
         "persistent_opaque_gt_c_year": 0.1865599822636595,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.15950548353918825,
+        "persistent_opaque_gt_c_year": -0.00035408248640350637
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 0.22992136101035654,
         "persistent_opaque_gt_c_year": 0.06936257187535444
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0426,
+          1.16
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.2286,
+            7.494
+          ],
+          "ground": [
+            0.3884,
+            13.89
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         5163.334204850158,
@@ -4454,13 +5258,40 @@
       "sky_accounted_gt_c_year": 0.5118451082780279,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.1929474557149862,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.1916190374099266,
+        "persistent_opaque_gt_c_year": 0.5075997980260647,
+        "rainfed_loss_gt_c_year": 0.13984693366147727,
+        "rain_share_of_rainfed_growth_lost": 0.009779505850452935
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.05177210374844934,
         "persistent_opaque_gt_c_year": 0.3705107768371523,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.3202260708681013,
+        "persistent_opaque_gt_c_year": 0.004245310251963175
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 0.46007300452957856,
         "persistent_opaque_gt_c_year": 0.1413343314408756
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.0852,
+          2.32
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            0.4572,
+            14.988
+          ],
+          "ground": [
+            0.7768,
+            27.78
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         10326.668409700316,
@@ -4602,13 +5433,40 @@
       "sky_accounted_gt_c_year": 1.2796127706950697,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.4515491703733965,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.4700916868991043,
+        "persistent_opaque_gt_c_year": 1.2329088135159478,
+        "rainfed_loss_gt_c_year": 0.3423679490565911,
+        "rain_share_of_rainfed_growth_lost": 0.023941814619342063
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.1277237378425132,
         "persistent_opaque_gt_c_year": 0.9070704051056602,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 0.8095210837959654,
+        "persistent_opaque_gt_c_year": 0.0467039571791219
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 1.1518890328525566,
         "persistent_opaque_gt_c_year": 0.37254236558940956
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.213,
+          5.8
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            1.143,
+            37.47
+          ],
+          "ground": [
+            1.9420000000000002,
+            69.45
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         25816.671024250794,
@@ -4750,13 +5608,40 @@
       "sky_accounted_gt_c_year": 2.5592255413901395,
       "additional_tissue_allocation_sensitivity_gt_c_year": 0.8041231343722524,
       "surface_loss": {
+        "homogenized_gt_c_year": 0.9113484842352698,
+        "persistent_opaque_gt_c_year": 2.3522162617589126,
+        "rainfed_loss_gt_c_year": 0.6614548549493745,
+        "rain_share_of_rainfed_growth_lost": 0.04625558426219404
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.24989362928589529,
         "persistent_opaque_gt_c_year": 1.7524599627135682,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 1.6478770571548695,
+        "persistent_opaque_gt_c_year": 0.20700927963122684
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 2.3093319121042444,
         "persistent_opaque_gt_c_year": 0.8067655786765713
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.426,
+          11.6
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            2.286,
+            74.94
+          ],
+          "ground": [
+            3.8840000000000003,
+            138.9
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         51633.34204850159,
@@ -4898,13 +5783,40 @@
       "sky_accounted_gt_c_year": 5.118451082780279,
       "additional_tissue_allocation_sensitivity_gt_c_year": 1.2388090633023776,
       "surface_loss": {
+        "homogenized_gt_c_year": 1.7145514394141186,
+        "persistent_opaque_gt_c_year": 4.295262611878812,
+        "rainfed_loss_gt_c_year": 1.2360103353860317,
+        "rain_share_of_rainfed_growth_lost": 0.08643428918783432
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.4785411040280868,
         "persistent_opaque_gt_c_year": 3.2746885294688326,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
+        "homogenized_gt_c_year": 3.4038996433661604,
+        "persistent_opaque_gt_c_year": 0.8231884709014672
+      },
+      "additional_world_light_only_gt_c_year": {
         "homogenized_gt_c_year": 4.6399099787521925,
         "persistent_opaque_gt_c_year": 1.8437625533114463
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          0.852,
+          23.2
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            4.572,
+            149.88
+          ],
+          "ground": [
+            7.768000000000001,
+            277.8
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         103266.68409700318,
@@ -5046,13 +5958,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 2.422858277788625,
+        "persistent_opaque_gt_c_year": 5.907479024766738,
+        "rainfed_loss_gt_c_year": 1.735082944241645,
+        "rain_share_of_rainfed_growth_lost": 0.12133447162528985
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 0.6877753335469801,
         "persistent_opaque_gt_c_year": 4.596932608504901,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          1.278,
+          34.8
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            6.858,
+            224.82
+          ],
+          "ground": [
+            11.652000000000001,
+            416.70000000000005
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         154900.02614550473,
@@ -5194,13 +6133,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 3.5996997697533715,
+        "persistent_opaque_gt_c_year": 8.37477164936267,
+        "rainfed_loss_gt_c_year": 2.545143324711255,
+        "rain_share_of_rainfed_growth_lost": 0.1779820506791088
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 1.0545564450421165,
         "persistent_opaque_gt_c_year": 6.743108380791226,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          2.13,
+          57.99999999999999
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            11.43,
+            374.7
+          ],
+          "ground": [
+            19.42,
+            694.5
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         258166.7102425079,
@@ -5342,13 +6308,40 @@
       "sky_accounted_gt_c_year": null,
       "additional_tissue_allocation_sensitivity_gt_c_year": null,
       "surface_loss": {
+        "homogenized_gt_c_year": 5.536421807208598,
+        "persistent_opaque_gt_c_year": 11.840950980451815,
+        "rainfed_loss_gt_c_year": 3.803695021056578,
+        "rain_share_of_rainfed_growth_lost": 0.26599265881514533
+      },
+      "surface_loss_light_only": {
         "homogenized_gt_c_year": 1.7327267861520192,
         "persistent_opaque_gt_c_year": 10.077518042081303,
-        "rainfed_loss_gt_c_year": 0.0
+        "rainfed_loss_gt_c_year": 0.0,
+        "rain_share_of_rainfed_growth_lost": 0.0
       },
       "additional_world_gt_c_year": {
         "homogenized_gt_c_year": null,
         "persistent_opaque_gt_c_year": null
+      },
+      "additional_world_light_only_gt_c_year": {
+        "homogenized_gt_c_year": null,
+        "persistent_opaque_gt_c_year": null
+      },
+      "sky_rules": {
+        "reef_passes_per_town_day": [
+          4.26,
+          115.99999999999999
+        ],
+        "beam_switches_per_receiver_day": {
+          "towns": [
+            22.86,
+            749.4
+          ],
+          "ground": [
+            38.84,
+            1389.0
+          ]
+        }
       },
       "mature_p_resupply_before_fallout_t_year": [
         516333.4204850158,
@@ -5452,7 +6445,7 @@
     }
   ],
   "vertical_habitat": {
-    "source": "older aerophyte environment; new 301 K fields pending",
+    "source": "the aerophyte study's environment on the older design case; the 301 K fields come with the design run",
     "air": [
       {
         "height_km": 0.0,
@@ -5492,10 +6485,12 @@
     }
   },
   "unresolved": [
+    "The rich sky's own effect on the energy balance, clouds and rain, which needs a GCM run",
     "Attainable coverage, demographic equilibrium and shadow duration along routes",
-    "Nitrogen fixation energy and trace-element return; additional nutrients for new tissue allocation",
+    "Angular transport of light through the aerial community",
+    "Nitrogen fixation energy and trace-element return; nutrients for new tissue allocation",
     "Water collection and storage through dry gaps, especially small reef modules",
-    "Dense-biome clouds, albedo, rain and thermal feedback on the final 301 K climate",
+    "Steering reserves and beam switching at the rich sky's encounter rates",
     "Measured combined physiological, gas-retention and structural traits"
   ]
 }

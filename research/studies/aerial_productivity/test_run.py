@@ -1,10 +1,14 @@
-"""Conserve photons and carbon; distinguish failed communities and double counting."""
+"""Conserve photons and carbon; carry the rain channel and the sky rules; distinguish failed communities and double counting."""
 import json
 import math
 
 import pytest
 
 from research.studies.aerial_productivity import run as A
+
+
+def inputs():
+    return dict(zip(("sky", "aero", "old", "surface", "previous", "aerial", "gases", "ledgers", "power", "p"), A.load()))
 
 
 def test_depth_does_not_multiply_the_photon_supply():
@@ -36,7 +40,7 @@ def test_stratified_classes_share_one_photon_stream():
 
 
 def test_dark_bodies_cannot_keep_producing_or_replace_their_dead():
-    sky, *_ = A.load()
+    sky = inputs()["sky"]
     row = next(r for r in sky["food_web"]["production"] if r["all_gates"])
     out = A.body_budget(row, 0, 0.003, 0.5, 0.8)
     assert not out["feasible_at_mean_light"]
@@ -47,7 +51,7 @@ def test_dark_bodies_cannot_keep_producing_or_replace_their_dead():
 
 
 def test_prescribed_renewal_is_not_the_unallocated_surplus():
-    sky, *_ = A.load()
+    sky = inputs()["sky"]
     row = next(r for r in sky["food_web"]["production"] if r["all_gates"])
     a = A.body_budget(row, 1, 0.001, 0, 0.8)
     b = A.body_budget(row, 1, 0.001, 0.5, 0.8)
@@ -60,16 +64,56 @@ def test_prescribed_renewal_is_not_the_unallocated_surplus():
 def test_water_limited_surface_cannot_produce_without_light():
     budgets = dict(rainfed=10, wet_margins=2, coasts=1, oligotrophic_water=1)
     e = dict(rainfed_light_potential=0.8, wet_margins=0.65, coasts=0.6, oligotrophic_water=0.1)
-    zero = A.surface_loss(budgets, 40, A.photon_column(0), e)
+    zero = A.surface_loss(budgets, 40, A.photon_column(0), e, rain_fraction=0.5)
     assert all(v == 0 for v in zero.values())
-    dark = A.surface_loss(budgets, 40, A.photon_column(1000), e)
+    dark = A.surface_loss(budgets, 40, A.photon_column(1000), e, rain_fraction=0.5)
     assert dark["homogenized_gt_c_year"] == pytest.approx(14)
     assert dark["persistent_opaque_gt_c_year"] == pytest.approx(14)
 
 
+def test_rain_channel_reads_the_gcm_dimming_branch():
+    d = inputs()
+    rain = A.rain_channel(d["gases"], d["old"])
+    run = d["gases"]["runs"]["gases"]
+    assert rain["dimming_fraction"] == pytest.approx(run["added_dimming_percent"] / 100)
+    # About 0.12 Gt C a year of rain-fed growth at the 1.69% dimming: some 0.07 Gt C per percent.
+    assert 0.06 < rain["gt_c_per_percent_interception"] < 0.08
+    assert rain["growth_fraction_per_unit_interception"] * rain["rain_fed_reference_gt_c_year"] / 100 \
+        == pytest.approx(rain["gt_c_per_percent_interception"])
+
+
+def test_rain_channel_adds_its_cost_once_to_each_surface_response():
+    budgets = dict(rainfed=10, wet_margins=2, coasts=1, oligotrophic_water=1)
+    e = dict(rainfed_light_potential=0.8, wet_margins=0.65, coasts=0.6, oligotrophic_water=0.1)
+    column = A.photon_column(0.1)
+    f = column["intercepted_fraction"]
+    dry = A.surface_loss(budgets, 40, column, e)
+    wet = A.surface_loss(budgets, 40, column, e, rain_fraction=0.5)
+    # Light binds nowhere on this water-limited land, so the homogenized response adds the whole rain share ...
+    assert wet["homogenized_gt_c_year"] - dry["homogenized_gt_c_year"] == pytest.approx(10 * 0.5 * f)
+    # ... and the persistent response charges the rain only on the ground outside the footprints.
+    assert wet["persistent_opaque_gt_c_year"] - dry["persistent_opaque_gt_c_year"] == pytest.approx((1 - f) * 10 * 0.5 * f)
+    # Where the light already holds the land below its reduced water, the rain adds nothing.
+    shaded = A.surface_loss(budgets, 10.5, A.photon_column(0.5), e, rain_fraction=0.01)
+    unrained = A.surface_loss(budgets, 10.5, A.photon_column(0.5), e)
+    assert shaded["homogenized_gt_c_year"] == pytest.approx(unrained["homogenized_gt_c_year"])
+
+
+def test_sky_rules_scale_their_one_percent_basis():
+    d = inputs()
+    towns = d["ledgers"]["heights"]["sky_towns"]
+    at_one = A.sky_rules(0.01, d["ledgers"], d["power"], 0.5)
+    assert at_one["reef_passes_per_town_day"] == pytest.approx(towns["reef_passes_per_town_day"]["0.01"])
+    at_two = A.sky_rules(0.02, d["ledgers"], d["power"], 0.5)
+    assert at_two["reef_passes_per_town_day"] == pytest.approx(towns["reef_passes_per_town_day"]["0.02"], rel=0.01)
+    beams = d["power"]["reserves"]["reefs"]["beam_columns"]["towns"]["operating"]["by_cover"]
+    assert at_two["beam_switches_per_receiver_day"]["towns"] == pytest.approx(beams["0.02"]["switches_per_receiver_day"], rel=0.01)
+    with pytest.raises(ValueError):
+        A.sky_rules(0.1, d["ledgers"], d["power"], 0.4)
+
+
 def test_microbe_column_mass_is_fixed_by_optics_not_habitat_depth():
-    *_, settings = A.load()
-    m = settings["microbes"]
+    m = inputs()["p"]["microbes"]
     a = A.microbial_screen(100, 0.45, m)
     b = A.microbial_screen(100, 0.45, {**m, "column_depth_m": m["column_depth_m"] * 2})
     for x, y in zip(a, b):
@@ -83,6 +127,8 @@ def test_microbe_column_mass_is_fixed_by_optics_not_habitat_depth():
 def test_recorded_product_regenerates_and_counts_the_sky_once():
     product = A.results()
     assert json.loads(A.OUT.read_text()) == product
+    assert set(product["producer"]["inputs"]) == set(A.INPUTS)
+    assert "research/decisions.md" not in product["producer"]["inputs"]
     for case in product["scenarios"]:
         sky = case["sky_accounted_gt_c_year"]
         for kind, value in case["additional_world_gt_c_year"].items():
@@ -90,21 +136,22 @@ def test_recorded_product_regenerates_and_counts_the_sky_once():
                 assert value is None
             else:
                 assert value == pytest.approx(sky - case["surface_loss"][kind])
+                assert value <= case["additional_world_light_only_gt_c_year"][kind] + 1e-12
     assert any(not r["whole_mixture_feasible_at_mean_light"] for r in product["scenarios"])
     assert any(r["whole_mixture_feasible_at_mean_light"] and not r["all_classes_feasible_at_bottom_plane_mean"]
                for r in product["scenarios"])
 
 
 def test_phosphorus_losses_precede_one_shared_fallout_credit():
-    sky, _, _, _, _, aerial, _ = A.load()
+    d = inputs()
     product = A.results()
     case = next(r for r in product["scenarios"] if r["arrangement"] == "stratified"
                 and r["column"]["habitat_fraction"] == 1 and r["column"]["area_loading"] == 0.1)
-    old_net = [r["need_t_year_at_1pct"] * 10 for r in sky["phosphorus"]["sky_need"]
+    old_net = [r["need_t_year_at_1pct"] * 10 for r in d["sky"]["phosphorus"]["sky_need"]
                if r["state"] == "mature" and r["retention_case"] == "earth_forest"]
     assert all(a > b for a, b in zip(case["mature_p_resupply_before_fallout_t_year"], old_net))
     assert all(c < total / 1000 for c, total in zip(case["ideal_interception_of_shared_p_fallout_t_year"],
-                                                  aerial["baseline"]["p_fallout_analogue_kg_year"]))
+                                                  d["aerial"]["baseline"]["p_fallout_analogue_kg_year"]))
 
 
 def test_failing_bottom_layers_are_not_credited_as_a_whole_community():

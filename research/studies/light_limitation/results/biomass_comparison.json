@@ -1,22 +1,24 @@
 {
-  "schema": "terluna.research.biomass-comparison/1",
-  "evidence": "Scenario reconciliation for a planning comparison. Land retains the older climate; aquatic carbon-use efficiency is a new illustrative assumption. No 301 K vegetation or ecosystem run is represented.",
-  "reading_rule": "Gt C/year means new biomass carbon after producer respiration, over a Julian year. Case endpoints are chosen scenarios, not confidence limits. Surface totals exclude an unresolved net sky contribution. Light effects are sensitivities and are not applied as an updated climate forecast.",
+  "schema": "terluna.research.biomass-comparison/2",
+  "evidence": "Scenario reconciliation for an Earth comparison: the land keeps the older climate's screen, and the waters take nutrient-poor rates with an illustrative carbon-use efficiency. The 301 K design run's temperature and water fields come next.",
+  "reading_rule": "Gt C/year is new biomass carbon after the producers' respiration, over a Julian year. Case endpoints are chosen parameter sets. Surface totals leave out the sky, whose net addition the aerial-productivity study counts. Light effects are sensitivities on the older weather, kept apart from the totals. Per-area values are g C per m2 of each world's own land, water or whole surface.",
   "producer": {
     "files": {
-      "research/studies/light_limitation/biomass_comparison.py": "bce068dd8aa9896e0ff2f6d6185069453e4c4ec8eb5fb8835cd181198647c3c4"
+      "research/studies/light_limitation/biomass_comparison.py": "5bc97252eae30db31b7fd738c14839cb3ac4fbd9fa3630c3bb9439e406175854"
     },
     "inputs": {
       "research/studies/light_limitation/results/light_limitation.json": "f5b61fa5e6d1d5ddd2f81bd3416d19f1bf8f8b88d90142332db371fdb886466b",
-      "research/studies/light_limitation/biomass_comparison_inputs.json": "83bad3aaccc97a284ccdc78ada1876529646c96736216bccb752040e4681be9d",
-      "shared/scenarios/water.json": "876ac34f925302e2b8e73555ece37dfc0560e0551674a4a6a810abd8909b5f6f",
-      "illumination/surface_light/results/surface_light.json": "e2406dbceb34193eaef5bd8a1dd6ea20940be72934301ef618221fdc79ad5572",
-      "biosphere/ecology/lake.py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa",
-      "research/studies/lake_oxygen/sources.json": "fa91f33937bfcee7cbf741cec8e3104975eaecd48594f98d5d71b7719b67ddeb",
-      "research/studies/lake_oxygen/run.py": "f0b657cb7aa67181647817a2c2f02d0fa0f446dc19f093d4ab26c00e17da83ed",
-      "research/studies/resort_301k/README.md": "1426fc6ac1d8b3c54cecd61409df400800732746e41182ba86cc73e07ce080be",
-      "research/decisions.md": "00e29f11a7bb293c7e5c91cdda9b1b1d941fe0126305f673bc309a718cf03430"
+      "research/studies/light_limitation/biomass_comparison_inputs.json": "c667d7ad24f2ca4b941bebbcd3730056fb2b70cb3dbaa5604167d4e079b1d32f",
+      "shared/scenarios/water.json": "876ac34f925302e2b8e73555ece37dfc0560e0551674a4a6a810abd8909b5f6f"
     },
+    "context": [
+      "illumination/surface_light/results/surface_light.json",
+      "biosphere/ecology/lake.py",
+      "research/studies/lake_oxygen/sources.json",
+      "research/studies/lake_oxygen/run.py",
+      "research/studies/resort_301k/README.md",
+      "research/decisions.md"
+    ],
     "constants": {
       "MOON_RADIUS": 1737400.0,
       "EARTH_RADIUS": 6371000.0,
@@ -28,6 +30,7 @@
     "moon_over_earth": 0.0743677126880723,
     "common_level_seas_km2": 10621051.86782653,
     "additional_rainfed_lakes_km2": 3920000.0,
+    "dry_land_km2": 23391276.231553935,
     "dry_land_from_rounded_bands_km2": 23394000.0
   },
   "historical_total_gt_c_year": [
@@ -96,6 +99,45 @@
       "earth_reference_fraction": 0.21434144019987317
     }
   },
+  "per_area": {
+    "earth": {
+      "land_share": 0.29199799244028296,
+      "land_g_c_m2_year": 378.67597690345104,
+      "ocean_g_c_m2_year": 134.29992357365174,
+      "mean_g_c_m2_year": 205.65724054643266
+    },
+    "moon_land_share": 0.6166580698730162,
+    "earth_rates_at_moon_land_share_over_earth": 1.3857833946714142,
+    "cases": {
+      "low": {
+        "land_g_c_m2_year": 648.5323780468315,
+        "water_g_c_m2_year": 17.994490707793453,
+        "mean_g_c_m2_year": 406.820767296094,
+        "mean_over_earth": 1.9781494987250072,
+        "land_over_earth_land": 1.7126314252889199,
+        "water_over_earth_ocean": 0.13398734883065702,
+        "moon_rates_at_earth_land_share_over_earth": 0.9827530867929644
+      },
+      "illustrative_middle": {
+        "land_g_c_m2_year": 752.6310161842102,
+        "water_g_c_m2_year": 81.33434291302271,
+        "mean_g_c_m2_year": 495.29485376460997,
+        "mean_over_earth": 2.408351159670373,
+        "land_over_earth_land": 1.9875330416751114,
+        "water_over_earth_ocean": 0.6056171943271282,
+        "moon_rates_at_earth_land_share_over_earth": 1.3486110340833364
+      },
+      "high": {
+        "land_g_c_m2_year": 856.7296543215889,
+        "water_g_c_m2_year": 168.10455661568773,
+        "mean_g_c_m2_year": 592.750780233126,
+        "mean_over_earth": 2.8822266537185035,
+        "land_over_earth_land": 2.262434658061302,
+        "water_over_earth_ocean": 1.251709994633743,
+        "moon_rates_at_earth_land_share_over_earth": 1.7951310720151954
+      }
+    }
+  },
   "sky_host_gt_c_year_before_displaced_surface_production": [
     0.0162,
     0.826
@@ -132,7 +174,7 @@
     47.06165882271714,
     56.944417076966694
   ],
-  "planning": {
+  "screening_estimate": {
     "gt_c_year": [
       15,
       20,
@@ -153,6 +195,6 @@
       44.44444444444444,
       55.55555555555556
     ],
-    "status": "15-25 Gt C/year around 20 is a rounded judgment for discussion, not a model confidence interval or a guaranteed bound on the pending climate."
+    "status": "15-25 Gt C/year around 20 is a rounded screening estimate bracketing the computed surface cases, for discussion while the 301 K design run is pending."
   }
 }

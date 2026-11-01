@@ -1,40 +1,52 @@
 {
-  "schema": "terluna.research.biomass-comparison-inputs/1",
+  "schema": "terluna.research.biomass-comparison-inputs/2",
   "as_of": "2026-10-31",
-  "evidence": "Scenario reconciliation for a planning comparison. Land retains the older climate; aquatic carbon-use efficiency is a new illustrative assumption. No 301 K vegetation or ecosystem run is represented.",
+  "evidence": "Scenario reconciliation for an Earth comparison: the land keeps the older climate's screen, and the waters take nutrient-poor rates with an illustrative carbon-use efficiency. The 301 K design run's temperature and water fields come next.",
   "cases": {
     "low": {"land_endpoint": 0, "oligotrophic_gpp_g_c_m2_day": 0.05, "aquatic_npp_over_gpp": 0.4, "coast_share": 0.05, "coast_npp_g_c_m2_year": 300},
     "illustrative_middle": {"land_endpoint": 0.5, "oligotrophic_gpp_g_c_m2_day": 0.2, "aquatic_npp_over_gpp": 0.5, "coast_share": 0.1, "coast_npp_g_c_m2_year": 650},
     "high": {"land_endpoint": 1, "oligotrophic_gpp_g_c_m2_day": 0.3, "aquatic_npp_over_gpp": 0.6, "coast_share": 0.15, "coast_npp_g_c_m2_year": 1000}
   },
   "assumptions": {
-    "aquatic_gpp": "Wetzel's oligotrophic bracket as recorded secondarily in lake_oxygen/sources.json; its central 0.2 g C/m2/day is the oxygen study's scenario. Rates are prescribed means over the whole lunar cycle: the oxygen model calibrates production to this mean, rather than predicting whether lunar organisms achieve it. Applied to both open seas and lakes here.",
-    "aquatic_npp_over_gpp": "New illustrative 0.4-0.6 fraction, not a measurement or an output of the oxygen study. Its community respiration cannot identify autotrophic respiration.",
-    "coasts": "Existing light-limitation design guesses, with matched coast and open-sea areas. Their productive communities and nutrient supply remain to be established.",
-    "lake_margins": "All lake area is assigned oligotrophic production; a separately allocated productive aquatic margin is absent. Terrestrial wet margins remain in the land component.",
-    "sky": "Report host production separately. Do not add it to the surface total until displaced ground and water production is resolved.",
-    "dry_mass": "For an illustrative conversion only, dry biomass is assumed 45 percent carbon by mass in both worlds.",
-    "planning_range": "15-25 Gt C/year around 20 is a rounded judgment for discussion, not a model confidence interval or a guaranteed bound on the pending climate."
+    "aquatic_gpp": "Wetzel's oligotrophic bracket as recorded secondarily in research/studies/lake_oxygen/sources.json, with the oxygen study's central 0.2 g C/m2/day. Rates are prescribed means over the whole lunar cycle: the oxygen model calibrates its production to this mean. Applied to the open seas and to every lake.",
+    "aquatic_npp_over_gpp": "An illustrative 0.4-0.6 fraction converting the bracket to new biomass. The oxygen study's community respiration includes consumers and decomposers, so it cannot supply this fraction. The source record calls the bracket primary production; if it is a near-net 14C rate, this factor discounts it twice, by about 0.5 Gt C a year in the middle case.",
+    "coasts": "The light-limitation screen's design guesses, with coast and open-sea areas summing to the seas. Their productive communities and nutrient supply are still to be designed.",
+    "lake_margins": "All lake area takes the oligotrophic rate; a productive aquatic lake margin has no separate area yet. Terrestrial wet margins stay in the land component.",
+    "sky": "Sky host production is reported separately until the surface production it displaces is counted; the aerial-productivity study counts it.",
+    "dry_mass": "For an illustrative conversion, dry biomass is 45% carbon by mass on both worlds.",
+    "screening_estimate": "15-25 Gt C/year around 20 is a rounded screening estimate bracketing the computed surface cases, for discussion while the 301 K design run is pending."
   },
   "earth_reference_gt_c_year": 104.9,
   "earth_comparison_range_gt_c_year": [100, 120],
-  "planning_gt_c_year": [15, 20, 25],
+  "earth_split_gt_c_year": {"land": 56.4, "ocean": 48.5},
+  "earth_areas_km2": {"land": 148940000, "water": 361132000},
+  "screening_estimate_gt_c_year": [15, 20, 25],
   "dry_carbon_mass_fraction": 0.45,
   "sunlight": {
     "biomass_weather_scale": 0.95,
     "completed_301k_scale": 0.897,
     "later_old_lock_scale": 0.97,
     "provisional_increase_over_completed": [0.035, 0.045],
-    "status": "The revised configuration has not reached a new 301 K equilibrium. Scaling total incident sunlight into proportional surface PAR is only a sensitivity, holding clouds, temperature, rain and spectral shape fixed."
+    "status": "A light-only sensitivity: surface PAR scaled with total incident sunlight, with clouds, temperature, rain and spectral shape held fixed. The 301 K design run sets the final sunlight scale."
   },
   "climate_context": [
-    {"branch": "main", "commit": "2f6cca9ef4f7bfbb780c11df2a22825171c0c00a", "path": "research/plan.md", "lines": [499, 508], "claim": "Before the final rain/snow changes, projected equilibrium and gust warming suggested 3.5-4.5 percent more sunlight than 0.897; the final configuration still needs short tuning and long design runs."},
-    {"branch": "domain/climate", "commit_short": "697c76e", "path": "climate/gcm/README.md", "lines": [1500, 1527], "claim": "A28R_301k_s0897 years 5-14: 301.25 K at scale 0.897, +0.02 W/m2 TOA, +0.015 K/year drift. The later October 30 snow result is a smoke test only; uncommitted implementation work was read for status, not consumed as climate data."}
+    {"branch": "main", "commit": "1d5144a", "path": "research/decisions.md", "lines": [514, 515], "claim": "The design years are A28R_301k_s0897's years 5-14 at sunlight 0.897; with each run's own leftover imbalance taken from its drift they read 301.2-301.3 K."},
+    {"branch": "main", "commit": "1d5144a", "path": "research/decisions.md", "lines": [562, 562], "claim": "The design run rebalances the sunlight, about 3.5-4.5% above 0.897 at the plan's 0.73-0.96% of the sunlight a kelvin."},
+    {"branch": "main", "commit": "1d5144a", "path": "research/plan.md", "lines": [505, 510], "claim": "A short run on the final configuration finds the design run's sunlight (six years at 0.929, 3.6% above 0.897); the branches are reconciled with main once the design run is complete and analysed."}
+  ],
+  "context": [
+    "illumination/surface_light/results/surface_light.json",
+    "biosphere/ecology/lake.py",
+    "research/studies/lake_oxygen/sources.json",
+    "research/studies/lake_oxygen/run.py",
+    "research/studies/resort_301k/README.md",
+    "research/decisions.md"
   ],
   "sources": [
-    {"citation": "Field et al. (1998), Primary production of the biosphere: integrating terrestrial and oceanic components", "url": "https://pubmed.ncbi.nlm.nih.gov/9657713/", "use": "104.9 Pg C/year historical global NPP benchmark; one Pg C equals one Gt C", "access": "PubMed abstract read 2026-10-31. Biome table not reread. Oregon State PDF retrieval failed; no numeric inputs depend on retrieving that copy."},
-    {"citation": "Behrenfeld et al. (2001), Biospheric primary production during an ENSO transition", "url": "https://pubmed.ncbi.nlm.nih.gov/11283369/", "use": "Abstract's 111-117 Pg C/year over September 1997-August 2000 supports a rounded 100-120 comparison range with Field 1998; this is not a 2026 measurement or statistical confidence interval", "access": "PubMed abstract and indexed author-repository abstract read 2026-10-31"},
-    {"citation": "Zhang et al. (2025), Contrasting biological production trends over land and ocean", "url": "https://www.nature.com/articles/s41558-025-02375-1", "use": "Recent context: land and ocean NPP vary differently; no total extracted for the arithmetic", "access": "Publisher abstract read 2026-10-31; USDA full-text PDF timed out and was not used for numerical extraction"},
-    {"citation": "Wetzel (2001), Limnology", "url": null, "use": "Oligotrophic GPP 50-300 mg C/m2/day, central 200, inherited through lake_oxygen's source record", "access": "Secondary access as documented in research/studies/lake_oxygen/sources.json; book not read for this comparison"}
+    {"citation": "Field et al. (1998), Primary production of the biosphere: integrating terrestrial and oceanic components", "url": "https://pubmed.ncbi.nlm.nih.gov/9657713/", "use": "104.9 Pg C/year global NPP benchmark, one Pg C being one Gt C; its land and ocean parts, 56.4 and 48.5 Pg C/year, for the per-area comparison", "access": "PubMed abstract read 2026-10-31: the total, with roughly equal contributions from land and oceans. The land and ocean values were read on 2026-10-31 in a secondary summary citing the paper (https://en.wikipedia.org/wiki/Primary_production); the paper's table was not read, and an Oregon State PDF copy could not be retrieved."},
+    {"citation": "Behrenfeld et al. (2001), Biospheric primary production during an ENSO transition", "url": "https://pubmed.ncbi.nlm.nih.gov/11283369/", "use": "The abstract's 111-117 Pg C/year over September 1997-August 2000, which with Field 1998 sets a rounded comparison scale of 100-120", "access": "PubMed abstract and an indexed author-repository abstract read 2026-10-31"},
+    {"citation": "Zhang et al. (2025), Contrasting biological production trends over land and ocean", "url": "https://www.nature.com/articles/s41558-025-02375-1", "use": "Recent context: land and ocean NPP change differently; no total is taken for the arithmetic", "access": "Publisher abstract read 2026-10-31; a USDA full-text PDF timed out"},
+    {"citation": "Earth's land and water areas", "url": "https://en.wikipedia.org/wiki/Earth", "use": "Land 148,940,000 km2 (29.2%) and water 361,132,000 km2 for the per-area comparison", "access": "Infobox values read 2026-10-31"},
+    {"citation": "Wetzel (2001), Limnology", "url": null, "use": "Oligotrophic primary production 50-300 mg C/m2/day, central 200, inherited through lake_oxygen's source record", "access": "Secondary access as documented in research/studies/lake_oxygen/sources.json; the book was not read for this comparison"}
   ]
 }

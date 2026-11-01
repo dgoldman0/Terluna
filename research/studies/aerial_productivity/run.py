@@ -1,7 +1,7 @@
 """Aerial biomass production with one shared photon column and explicit resource demands.
 
 python -m research.studies.aerial_productivity.run
-Reads products only. No climate, ray-tracing or organism simulation is launched.
+Reads committed products only; no climate, ray-tracing or organism simulation is launched.
 """
 from __future__ import annotations
 
@@ -17,15 +17,27 @@ from shared.constants import JULIAN_YEAR_DAYS, MOON_RADIUS
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 OUT = HERE / "results/aerial_productivity.json"
+# Files whose values the calculation reads; each is bound by schema and hash.
 INPUTS = {
     "research/studies/sky_ecology/results/sky_ecology.json": "terluna.research.sky-ecology/1",
     "research/studies/aerophytes/results/aerophytes.json": "terluna.research.aerophytes/1",
     "research/studies/light_limitation/results/light_limitation.json": "terluna.research.light-limitation/1",
-    "research/studies/light_limitation/results/biomass_comparison.json": "terluna.research.biomass-comparison/1",
-    "research/studies/light_limitation/biomass_comparison_inputs.json": "terluna.research.biomass-comparison-inputs/1",
+    "research/studies/light_limitation/results/biomass_comparison.json": "terluna.research.biomass-comparison/2",
+    "research/studies/light_limitation/biomass_comparison_inputs.json": "terluna.research.biomass-comparison-inputs/2",
     "research/studies/aerial_ecology/results/aerial_ecology.json": "terluna.research.aerial-ecology/1",
+    "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "terluna.research.gases-glow-dimming/1",
+    "research/studies/domain_synthesis/results/ledgers.json": "terluna.research.domain-synthesis-ledgers/1",
+    "provisioning/results/power.json": "terluna.provisioning.power/1",
     "research/studies/aerial_productivity/parameters.json": "terluna.research.aerial-productivity-parameters/1",
 }
+# Documents the study cites for interpretation; none of their values enters the arithmetic.
+CONTEXT = (
+    "research/studies/aerial_productivity/sources.json",
+    "illumination/surface_light/README.md",
+    "biosphere/canopy/README.md",
+    "research/studies/sky_ecology/tenants.md",
+    "research/decisions.md",
+)
 
 
 def sha(path):
@@ -99,17 +111,63 @@ def class_light(column, shares, order, arrangement):
     return out
 
 
-def surface_loss(budgets, potential_rainfed, column, elasticities):
-    """Two alternative surface responses; a water limit cannot exceed light potential."""
+def rain_channel(gases, light_limitation):
+    """Rain-fed growth lost per unit of sunlight kept from the surface, from the GCM's gas-dimming branch.
+
+    The branch dims the design case by its added_dimming_percent and records the rain-fed land's growth change at the
+    light-limitation study's low and high ends. Their mean, over the mean rain-fed growth and the dimming fraction,
+    gives the fraction of rain-fed growth lost per unit fraction of surface sunlight.
+    """
+    run = gases["runs"]["gases"]
+    dimming = run["added_dimming_percent"] / 100
+    change = sum(run["rain_fed_growth"]["change_gt_c"]) / 2
+    reference = sum(light_limitation["land"]["totals"]["rain_fed_gt_c"]) / 2
+    if dimming <= 0 or change > 0:
+        raise ValueError("The rain channel needs a positive dimming and a loss of rain-fed growth")
+    return {"source_run": run["run"], "dimming_fraction": dimming,
+            "rain_per_unit_dimming_land": run["rain_per_percent_dimming"]["land"],
+            "rain_fed_growth_change_gt_c": run["rain_fed_growth"]["change_gt_c"],
+            "rain_fed_reference_gt_c_year": reference,
+            "growth_fraction_per_unit_interception": -change / reference / dimming,
+            "gt_c_per_percent_interception": -change / run["added_dimming_percent"]}
+
+
+def surface_loss(budgets, potential_rainfed, column, elasticities, rain_fraction=0.0):
+    """Two alternative surface responses.
+
+    Rain-fed land keeps the lower of its light-limited potential and its water, and its water falls by
+    rain_fraction times the intercepted share of sunlight (zero reproduces the light-only screen). In the
+    homogenized response the light reduction is spread over the organisms' range h and the rain falls everywhere;
+    in the persistent response the ground under the footprints loses everything and the rest loses the rain share.
+    """
     h, t = column["habitat_fraction"], column["local_surface_transmission"]
+    intercepted = column["intercepted_fraction"]
     e = elasticities
-    rain_loss = max(0.0, budgets["rainfed"] - potential_rainfed * t ** e["rainfed_light_potential"])
-    local = (rain_loss + budgets["wet_margins"] * (1 - t ** e["wet_margins"])
+    r = min(1.0, max(0.0, rain_fraction) * intercepted)
+    water = budgets["rainfed"] * (1 - r)
+    light = potential_rainfed * t ** e["rainfed_light_potential"]
+    inside = budgets["rainfed"] - min(light, water)
+    rainfed_loss = h * max(0.0, inside) + (1 - h) * budgets["rainfed"] * r
+    other = (budgets["wet_margins"] * (1 - t ** e["wet_margins"])
              + budgets["coasts"] * (1 - t ** e["coasts"])
              + budgets["oligotrophic_water"] * (1 - t ** e["oligotrophic_water"]))
-    return {"homogenized_gt_c_year": h * local,
-            "persistent_opaque_gt_c_year": column["intercepted_fraction"] * sum(budgets.values()),
-            "rainfed_loss_gt_c_year": h * rain_loss}
+    return {"homogenized_gt_c_year": rainfed_loss + h * other,
+            "persistent_opaque_gt_c_year": intercepted * sum(budgets.values()) + (1 - intercepted) * budgets["rainfed"] * r,
+            "rainfed_loss_gt_c_year": rainfed_loss,
+            "rain_share_of_rainfed_growth_lost": r}
+
+
+def sky_rules(loading, ledgers, power, reef_share):
+    """First-order scaling of the register's sky rules from their products' 1% basis, linear in cover."""
+    towns = ledgers["heights"]["sky_towns"]
+    if not math.isclose(towns["reef_share_of_cover"], reef_share):
+        raise ValueError("The ledger's reef share must match the class mixture")
+    scale = loading / 0.01
+    beams = power["reserves"]["reefs"]["beam_columns"]
+    return {"reef_passes_per_town_day": [v * scale for v in towns["reef_passes_per_town_day"]["0.01"]],
+            "beam_switches_per_receiver_day": {
+                place: [v * scale for v in beams[place]["operating"]["by_cover"]["0.01"]["switches_per_receiver_day"]]
+                for place in ("towns", "ground")}}
 
 
 def microbial_screen(area_m2, carbon_fraction, settings):
@@ -137,7 +195,7 @@ def microbial_screen(area_m2, carbon_fraction, settings):
 
 
 def results():
-    sky, aero, old, surface, previous, aerial, p = load()
+    sky, aero, old, surface, previous, aerial, gases, ledgers, power, p = load()
     area = 4 * math.pi * MOON_RADIUS ** 2
     shares = sky["phosphorus"]["design_guesses"]["class_shares_of_cover"]
     representatives = []
@@ -156,6 +214,7 @@ def results():
     budgets = {"rainfed": base["land_gt_c_year"] - wet, "wet_margins": wet,
                "coasts": water["coasts"], "oligotrophic_water": water["lakes"] + water["open_sea"]}
     potential = sum(old["land"]["totals"]["potential_gt_c"]) / 2 - wet
+    rain = rain_channel(gases, old)
     body_keys = {"sky_reef": "sky_reef_60m", "round_giant": "round_giant_1km", "lesser": "lesser_100m"}
     p_need_g_m2 = []
     for edge in ("low", "high"):
@@ -173,7 +232,9 @@ def results():
         for loading in p["area_loadings"]:
             column = photon_column(loading, habitat)
             doses = class_light(column, shares, p["vertical_order"], arrangement)
-            losses = surface_loss(budgets, potential, column, p["surface_elasticities"])
+            light_only = surface_loss(budgets, potential, column, p["surface_elasticities"])
+            losses = surface_loss(budgets, potential, column, p["surface_elasticities"],
+                                  rain["growth_fraction_per_unit_interception"])
             bodies = [body_budget(r, light_ratio * doses[r["cls"]]["mean"],
                                   p["adult_hazard_per_year"], max(p["extra_assimilate_to_tissue_fractions"]),
                                   p["new_tissue_carbon_yield"]) for r in representatives]
@@ -189,6 +250,7 @@ def results():
             extra = sum(shares[r["cls"]] * r["extra_tissue_c"] for r in bodies) * factor if creditable else None
             water_volume = {name: water_traits[name]["water_kg_m2_year"] * area * loading / 1e12
                             for name in ("reference", "concentrating_cool_leaves", "concentrating_humid_layer")}
+            kinds = ("homogenized_gt_c_year", "persistent_opaque_gt_c_year")
             rows.append({"arrangement": arrangement, "column": column, "class_light_fractions": doses,
                          "projected_area_km2": area * loading / 1e6,
                          "bodies": bodies, "bottom_plane_budgets": bottom,
@@ -199,31 +261,38 @@ def results():
                          "sky_accounted_gt_c_year": production,
                          "additional_tissue_allocation_sensitivity_gt_c_year": extra,
                          "surface_loss": losses,
-                         "additional_world_gt_c_year": {k: production - v if production is not None else None
-                                                         for k, v in losses.items() if k != "rainfed_loss_gt_c_year"},
+                         "surface_loss_light_only": light_only,
+                         "additional_world_gt_c_year": {k: production - losses[k] if production is not None else None
+                                                         for k in kinds},
+                         "additional_world_light_only_gt_c_year": {k: production - light_only[k] if production is not None else None
+                                                                    for k in kinds},
+                         "sky_rules": sky_rules(loading, ledgers, power, shares["sky_reef"]),
                          "mature_p_resupply_before_fallout_t_year": [n * area * loading / 1e6 for n in p_need_g_m2],
                          "ideal_interception_of_shared_p_fallout_t_year": [v * column["intercepted_fraction"] / 1000
                                                                           for v in aerial["baseline"]["p_fallout_analogue_kg_year"]],
                          "water_throughput_gt_year": water_volume})
-    return {"schema": "terluna.research.aerial-productivity/1",
-            "evidence": "Conditional column, carbon and resource arithmetic on inherited engineered-organism products. Mutual shading is vertical-beam only: inherited ground-canopy diffuse light is included, but angular transport through the aerial community is unresolved. Occupancy is prescribed, not predicted; no stable rich sky or new 301 K environment has been established.",
-            "reading_rule": "Annual production in Gt C per Julian year. Accounted sky organic production is renewed/replacement host tissue plus sugar export, not a complete NPP account. Whole-world increment subtracts one of two alternative surface responses. Credited production requires BOTH class-mean and class-bottom light-budget checks; failure returns null. A positive mean-budget-only diagnostic is not credited. These checks do not establish individual viability under intermittent opaque shadows. Water is throughput in Gt/year; P is return needed, not proven supply.",
+    return {"schema": "terluna.research.aerial-productivity/2",
+            "evidence": "Conditional column, carbon and resource arithmetic on inherited engineered-organism products, with occupancy prescribed. Mutual shading is a vertical-beam column; the inherited ground canopy includes diffuse light. The rain's response to the sunlight the organisms keep from the surface is first-order, from the GCM's gas-dimming branch on the 0.950 design case: absorption aloft probably cuts rain more than the same surface dimming, and reflection moves the planet's energy balance instead, which needs a GCM run. The sky rules scale their products' 1% basis linearly.",
+            "reading_rule": "Annual production in Gt C per Julian year. Accounted sky production is renewed and replacement host tissue plus sugar export. The whole-world increment subtracts one of two surface responses, both with the rain channel; the light-only increment is kept beside it. Credited production requires both the class-mean and the class-bottom light-budget checks; failure returns null. Water is throughput in Gt/year; phosphorus is the return needed. Sky-rule rates are per town or receiver per day.",
             "producer": {"files": {str(Path(__file__).relative_to(ROOT)): sha(Path(__file__))},
-                         "inputs": {**{path: sha(ROOT / path) for path in INPUTS},
-                                    "research/studies/aerial_productivity/sources.json": sha(HERE / "sources.json")},
+                         "inputs": {path: sha(ROOT / path) for path in INPUTS},
+                         "context": list(CONTEXT),
                          "constants": {"MOON_RADIUS": MOON_RADIUS, "JULIAN_YEAR_DAYS": JULIAN_YEAR_DAYS}},
             "surface_reference_gt_c_year": sum(budgets.values()), "surface_components_gt_c_year": budgets,
             "rainfed_light_potential_gt_c_year": potential,
             "relative_provisional_sunlight": light_ratio,
+            "rain_channel": rain,
             "class_shares": shares, "scenarios": rows,
             "microbial_optical_scenarios": microbial_screen(area, previous["dry_carbon_mass_fraction"], p["microbes"]),
-            "vertical_habitat": {"source": "older aerophyte environment; new 301 K fields pending",
+            "vertical_habitat": {"source": "the aerophyte study's environment on the older design case; the 301 K fields come with the design run",
                                  "air": [{k: r[k] for k in ("height_km", "temperature_c", "pressure_atm")} for r in aero["environment"]["air"]],
                                  "collecting_shell_area_ratios": {str(z): ((MOON_RADIUS + z * 1000) / MOON_RADIUS) ** 2 for z in (10, 20, 30)}},
-            "unresolved": ["Attainable coverage, demographic equilibrium and shadow duration along routes",
-                           "Nitrogen fixation energy and trace-element return; additional nutrients for new tissue allocation",
+            "unresolved": ["The rich sky's own effect on the energy balance, clouds and rain, which needs a GCM run",
+                           "Attainable coverage, demographic equilibrium and shadow duration along routes",
+                           "Angular transport of light through the aerial community",
+                           "Nitrogen fixation energy and trace-element return; nutrients for new tissue allocation",
                            "Water collection and storage through dry gaps, especially small reef modules",
-                           "Dense-biome clouds, albedo, rain and thermal feedback on the final 301 K climate",
+                           "Steering reserves and beam switching at the rich sky's encounter rates",
                            "Measured combined physiological, gas-retention and structural traits"]}
 
 

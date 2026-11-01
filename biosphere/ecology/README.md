@@ -20,33 +20,6 @@ The author's standing directions frame it.
 - Imports of carbon and other elements are part of the plan, and the design problem is closing each cycle with
   local return paths.
 
-## Annual biomass production, 31 October 2026
-
-The [comparison with Earth](../../research/studies/light_limitation/biomass_comparison.md)
-puts the sunlight-supported biosphere near 20 Gt C of new biomass a year, with 15–25 as a
-provisional planning range: about one-fifth of Earth's annual net primary production. It
-retains the older land calculation, reconciles the open waters with the nutrient-poor
-direction, and keeps sky production separate until its shading is accounted for. The
-revised 301 K climate still needs its final sunlight and weather; the likely direct light
-correction is small, while rain, respiration and biological adaptation remain consequential.
-This is a conditional capability estimate, with a reproducible comparison calculation,
-not a completed 301 K ecosystem model.
-
-## Production in a richer sky, 31 October 2026
-
-The [aerial-production screen](../../research/studies/aerial_productivity/README.md)
-extends the former illustrative 0.1–2% cover. At 10–20% summed projected organism area,
-a stratified community adds about 1–5 Gt C/year to whole-world production after two
-alternative surface-shading responses. The calculation shares one photon budget among
-heights, checks class-mean and class-bottom carbon balances, and accounts separately for
-host tissue, sugar export and unallocated assimilate. Nutrient return, water delivery and
-combined organism traits remain conditions; coverage and carrying capacity are not established.
-Diffuse light is already included in the inherited ground-canopy model, but the new aerial
-mutual-shading calculation is vertical-beam only. The 1–5 Gt range remains provisional until
-angular transport through a rich aerial community is computed.
-Its phosphorus comparison credits shared fallout only once, and its separate microbial
-screen fixes column biomass by optical depth rather than multiplying by atmospheric volume.
-
 ## The 9 October follow-ups
 
 **The [coupled aerophyte study](../../research/studies/aerophytes/README.md) sets how large aerophytes grow, how
@@ -224,6 +197,12 @@ screens.
 - **The climate runs' land hides all of it.** Every run's land is bare placeholder ground at one dryness, with no water
   table and no plants, so no grid shows a green shore. The cover has to come from the plants and the groundwater
   ([questions](questions.md), items 6, 9 and 10).
+
+## Production on the land, in the waters and in the sky, 31 October 2026
+
+The [comparison with Earth](../../research/studies/light_limitation/biomass_comparison.md) puts the sunlight-supported biosphere at about 20 Gt C of new biomass a year, with 15–25 as a screening estimate: about a fifth of Earth's net primary production, and 2.0–2.9 times Earth's mean per square metre. The Moon's 62% land share accounts for 1.4 times of that at Earth's own rates, and its land grows 1.7–2.3 times Earth's land average through the engineered canopy's water use and the deep air's diffuse light, while its nutrient-poor waters grow 0.1–1.3 times Earth's ocean rate. The land keeps the older climate's screen, so the 301 K design run's temperature and water fields come next; its direct light change is small beside rain, respiration and acclimation.
+
+The [aerial-productivity study](../../research/studies/aerial_productivity/README.md) carries the sky ecology's 0.1–2% cover to 10–20% with one photon budget shared by stratified classes, crediting a community only when its class means and class bottoms both pay their fixed programme. At 10–20% the sky adds roughly 0.2–3.3 Gt C a year after the surface's light losses and the rain it loses with its sunlight, taken at first order from the GCM's dimming ratio; absorption aloft probably costs more rain, reflection moves the energy balance instead, and the rich sky's own climate needs a GCM run. At those covers a sky town meets ten to twenty times as many reefs, and a beam receiver switches ten to twenty times as often, as the shared-sky rules met at 1%, and the sky's phosphorus resupply of 0.05–1.25 Tg a year is of the order of people's.
 
 ## What the project already says
 

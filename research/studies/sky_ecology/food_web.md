@@ -45,6 +45,8 @@ provisioning's five billion people aloft live in towns that shade 1.8% of the Mo
 in its ways-of-living product), so a sky as busy as that holds aerophytes on a similar share, and a sparse wild sky a
 tenth of a per cent. Every sky-wide number scales with the cover in proportion.
 
+The [aerial-productivity study](../aerial_productivity/README.md) (31 October 2026) carries the cover to 10–20% and beyond with one photon budget shared by the classes, the surface production the organisms displace, the rain the surface loses with its sunlight, and the shared-sky rules at those rates: roughly 0.2–3.3 Gt C a year of added production at 10–20%.
+
 ## Replacing the dead and reaching full size
 
 **Replacing the dead costs a body the hazard times its whole construction carbon a year, gas included, and at the high
